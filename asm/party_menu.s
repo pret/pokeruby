@@ -7680,7 +7680,7 @@ _08070B40:
 	lsrs r2, r0, 16
 	cmp r2, 0
 	beq _08070B74
-	ldr r1, _08070B6C @ =gUnknown_03005E94
+	ldr r1, _08070B6C @ =gCB2_AfterEvolution
 	ldr r0, _08070B70 @ =sub_80A53F8
 	str r0, [r1]
 	ldr r0, [r7]
@@ -7692,7 +7692,7 @@ _08070B40:
 	bl DestroyTask
 	b _08070C2C
 	.align 2, 0
-_08070B6C: .4byte gUnknown_03005E94
+_08070B6C: .4byte gCB2_AfterEvolution
 _08070B70: .4byte sub_80A53F8
 _08070B74:
 	adds r0, r6, 0
@@ -7826,7 +7826,7 @@ _08070C8C:
 	lsrs r2, r0, 16
 	cmp r2, 0
 	beq _08070CC0
-	ldr r1, _08070CB8 @ =gUnknown_03005E94
+	ldr r1, _08070CB8 @ =gCB2_AfterEvolution
 	ldr r0, _08070CBC @ =sub_80A53F8
 	str r0, [r1]
 	ldr r0, [r7]
@@ -7838,7 +7838,7 @@ _08070C8C:
 	bl DestroyTask
 	b _08070D68
 	.align 2, 0
-_08070CB8: .4byte gUnknown_03005E94
+_08070CB8: .4byte gCB2_AfterEvolution
 _08070CBC: .4byte sub_80A53F8
 _08070CC0:
 	adds r0, r6, 0
@@ -7971,7 +7971,7 @@ DoEvolutionStoneItemEffect: @ 8070DBC
 	adds r1, r6, 0
 	adds r2, r5, 0
 	bl sub_806E8D0
-	ldr r1, _08070E20 @ =gUnknown_03005E94
+	ldr r1, _08070E20 @ =gCB2_AfterEvolution
 	ldr r0, _08070E24 @ =sub_80A53F8
 	str r0, [r1]
 	ldr r0, _08070E28 @ =0x0201c000
@@ -7995,7 +7995,7 @@ DoEvolutionStoneItemEffect: @ 8070DBC
 	.align 2, 0
 _08070E18: .4byte gTasks
 _08070E1C: .4byte TaskDummy
-_08070E20: .4byte gUnknown_03005E94
+_08070E20: .4byte gCB2_AfterEvolution
 _08070E24: .4byte sub_80A53F8
 _08070E28: .4byte 0x0201c000
 _08070E2C: .4byte gUnknown_0202E8F4
