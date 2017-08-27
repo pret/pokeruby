@@ -573,7 +573,7 @@ void EmitGetAttributes(u8 a, u8 b, u8 c)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void dp01_build_cmdbuf_x01_a_b_0(u8 a, u8 b, u8 c)
+void Emitcmd1(u8 a, u8 b, u8 c)
 {
     gBattleBuffersTransferData[0] = 1;
     gBattleBuffersTransferData[1] = b;
@@ -594,7 +594,7 @@ void EmitSetAttributes(u8 a, u8 b, u8 c, u8 d, void *e)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, d + 3);
 }
 
-void unref_sub_800C6A4(u8 a, u8 b, u8 c, u8 *d)
+void Emitcmd3(u8 a, u8 b, u8 c, u8 *d)
 {
     int i;
 
@@ -606,7 +606,7 @@ void unref_sub_800C6A4(u8 a, u8 b, u8 c, u8 *d)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, c + 3);
 }
 
-void dp01_build_cmdbuf_x04_4_4_4(u8 a)
+void EmitLoadPokeSprite(u8 a)
 {
     gBattleBuffersTransferData[0] = 4;
     gBattleBuffersTransferData[1] = 4;
@@ -615,7 +615,7 @@ void dp01_build_cmdbuf_x04_4_4_4(u8 a)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void EmitSwitchInAnim(u8 a, u8 b, u8 c)
+void EmitSendOutPoke(u8 a, u8 b, u8 c)
 {
     gBattleBuffersTransferData[0] = 5;
     gBattleBuffersTransferData[1] = b;
@@ -631,7 +631,7 @@ void EmitReturnPokeToBall(u8 a, u8 b)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 2);
 }
 
-void dp01_build_cmdbuf_x07_7_7_7(u8 a)
+void EmitTrainerThrow(u8 a)
 {
     gBattleBuffersTransferData[0] = 7;
     gBattleBuffersTransferData[1] = 7;
@@ -649,7 +649,7 @@ void EmitTrainerSlide(u8 a)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void dp01_build_cmdbuf_x09_9_9_9(u8 a)
+void EmitTrainerSlideBack(u8 a)
 {
     gBattleBuffersTransferData[0] = 9;
     gBattleBuffersTransferData[1] = 9;
@@ -658,7 +658,7 @@ void dp01_build_cmdbuf_x09_9_9_9(u8 a)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void EmitFaintAnimation(u8 a)
+void Emitcmd10(u8 a)
 {
     gBattleBuffersTransferData[0] = 10;
     gBattleBuffersTransferData[1] = 10;
@@ -667,7 +667,7 @@ void EmitFaintAnimation(u8 a)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void dp01_build_cmdbuf_x0B_B_B_B(u8 a)
+void Emitcmd11(u8 a)
 {
     gBattleBuffersTransferData[0] = 11;
     gBattleBuffersTransferData[1] = 11;
@@ -676,7 +676,7 @@ void dp01_build_cmdbuf_x0B_B_B_B(u8 a)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void dp01_build_cmdbuf_x0C_C_C_C(u8 a)
+void Emitcmd12(u8 a)
 {
     gBattleBuffersTransferData[0] = 12;
     gBattleBuffersTransferData[1] = 12;
@@ -685,14 +685,14 @@ void dp01_build_cmdbuf_x0C_C_C_C(u8 a)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void EmitBallThrowAnim(u8 a, u8 b)
+void EmitBallThrow(u8 a, u8 b)
 {
     gBattleBuffersTransferData[0] = 13;
     gBattleBuffersTransferData[1] = b;
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 2);
 }
 
-void unref_sub_800C828(u8 a, u8 b, u8 *c)
+void EmitPuase(u8 a, u8 b, u8 *c)
 {
     int i;
 
@@ -1021,7 +1021,7 @@ _0800CB54: .4byte gBattleTextBuff1\n\
     .syntax divided\n");
 }
 
-void dp01_build_cmdbuf_x12_a_bb(u8 a, u8 b, u16 c)
+void Emitcmd18(u8 a, u8 b, u16 c)
 {
     gBattleBuffersTransferData[0] = 18;
     gBattleBuffersTransferData[1] = b;
@@ -1030,14 +1030,14 @@ void dp01_build_cmdbuf_x12_a_bb(u8 a, u8 b, u16 c)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void unref_sub_800CB84(u8 a, u8 b)
+void Emitcmd19(u8 a, u8 b)
 {
     gBattleBuffersTransferData[0] = 19;
     gBattleBuffersTransferData[1] = b;
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 2);
 }
 
-void sub_800CBA4(u8 a, u8 b, u8 c, u8 *d)
+void Emitcmd20(u8 a, u8 b, u8 c, u8 *d)
 {
     u32 i;
 
@@ -1050,7 +1050,7 @@ void sub_800CBA4(u8 a, u8 b, u8 c, u8 *d)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 24);
 }
 
-void sub_800CBE0(u8 a, u8 *b)
+void EmitOpenBag(u8 a, u8 *b)
 {
     int i;
 
@@ -1073,7 +1073,7 @@ void EmitChoosePokemon(u8 a, u8 b, u8 c, u8 d, u8 *e)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 8);  //but only 7 bytes were written
 }
 
-void dp01_build_cmdbuf_x17_17_17_17(u8 a)
+void Emitcmd23(u8 a)
 {
     gBattleBuffersTransferData[0] = 23;
     gBattleBuffersTransferData[1] = 23;
@@ -1136,7 +1136,7 @@ void EmitStatusXor(u8 a, u8 b)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 2);
 }
 
-void dp01_build_cmdbuf_x1D_1D_numargs_varargs(u8 a, u16 b, u8 *c)
+void Emitcmd29(u8 a, u16 b, u8 *c)
 {
     int i;
 
@@ -1149,7 +1149,7 @@ void dp01_build_cmdbuf_x1D_1D_numargs_varargs(u8 a, u16 b, u8 *c)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, b + 4);
 }
 
-void unref_sub_800CDD4(u8 a, u32 b, u16 c, u8 *d)
+void EmitDMATransfer(u8 a, u32 b, u16 c, u8 *d)
 {
     int i;
 
@@ -1165,7 +1165,7 @@ void unref_sub_800CDD4(u8 a, u32 b, u16 c, u8 *d)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, c + 7);
 }
 
-void unref_sub_800CE3C(u8 a, u16 b, u8 *c)
+void Emitcmd31(u8 a, u16 b, u8 *c)
 {
     int i;
 
@@ -1177,7 +1177,7 @@ void unref_sub_800CE3C(u8 a, u16 b, u8 *c)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, b + 3);
 }
 
-void unref_sub_800CE84(u8 a, u16 b, u8 *c)
+void Emitcmd32(u8 a, u16 b, u8 *c)
 {
     int i;
 
@@ -1189,7 +1189,7 @@ void unref_sub_800CE84(u8 a, u16 b, u8 *c)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, b + 3);
 }
 
-void dp01_build_cmdbuf_x21_a_bb(u8 a, u8 b, u16 c)
+void Emitcmd33(u8 a, u8 b, u16 c)
 {
     gBattleBuffersTransferData[0] = 33;
     gBattleBuffersTransferData[1] = b;
@@ -1198,7 +1198,7 @@ void dp01_build_cmdbuf_x21_a_bb(u8 a, u8 b, u16 c)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void dp01_build_cmdbuf_x22_a_three_bytes(u8 a, u8 b, u8 *c)
+void Emitcmd34(u8 a, u8 b, u8 *c)
 {
     int i;
 
@@ -1209,7 +1209,7 @@ void dp01_build_cmdbuf_x22_a_three_bytes(u8 a, u8 b, u8 *c)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 5);
 }
 
-void dp01_build_cmdbuf_x23_aa_0(u8 a, u16 b)
+void Emitcmd35(u8 a, u16 b)
 {
     gBattleBuffersTransferData[0] = 35;
     gBattleBuffersTransferData[1] = b;
@@ -1218,7 +1218,7 @@ void dp01_build_cmdbuf_x23_aa_0(u8 a, u16 b)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void dp01_build_cmdbuf_x24_aa_0(u8 a, u16 b)
+void Emitcmd36(u8 a, u16 b)
 {
     gBattleBuffersTransferData[0] = 36;
     gBattleBuffersTransferData[1] = b;
@@ -1227,7 +1227,7 @@ void dp01_build_cmdbuf_x24_aa_0(u8 a, u16 b)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void dp01_build_cmdbuf_x25_25_25_25(u8 a)
+void Emitcmd37(u8 a)
 {
     gBattleBuffersTransferData[0] = 37;
     gBattleBuffersTransferData[1] = 37;
@@ -1236,14 +1236,14 @@ void dp01_build_cmdbuf_x25_25_25_25(u8 a)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void dp01_build_cmdbuf_x26_a(u8 a, u8 b)
+void Emitcmd38(u8 a, u8 b)
 {
     gBattleBuffersTransferData[0] = 38;
     gBattleBuffersTransferData[1] = b;
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 2);
 }
 
-void dp01_build_cmdbuf_x27_27_27_27(u8 a)
+void Emitcmd39(u8 a)
 {
     gBattleBuffersTransferData[0] = 39;
     gBattleBuffersTransferData[1] = 39;
@@ -1252,7 +1252,7 @@ void dp01_build_cmdbuf_x27_27_27_27(u8 a)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void dp01_build_cmdbuf_x28_28_28_28(u8 a)
+void Emitcmd40(u8 a)
 {
     gBattleBuffersTransferData[0] = 40;
     gBattleBuffersTransferData[1] = 40;
@@ -1270,7 +1270,7 @@ void EmitHitAnimation(u8 a)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void dp01_build_cmdbuf_x2A_2A_2A_2A(u8 a)
+void Emitcmd42(u8 a)
 {
     gBattleBuffersTransferData[0] = 42;
     gBattleBuffersTransferData[1] = 42;
@@ -1288,7 +1288,7 @@ void EmitEffectivenessSound(u8 a, u16 b)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void EmitPlaySound(u8 a, u16 b)
+void Emitcmd44(u8 a, u16 b)
 {
     gBattleBuffersTransferData[0] = 44;
     gBattleBuffersTransferData[1] = b;
@@ -1306,14 +1306,14 @@ void EmitFaintingCry(u8 a)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void EmitBattleIntroSlide(u8 a, u8 b)
+void EmitIntroSlide(u8 a, u8 b)
 {
     gBattleBuffersTransferData[0] = 46;
     gBattleBuffersTransferData[1] = b;
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 2);
 }
 
-void dp01_build_cmdbuf_x2F_2F_2F_2F(u8 a)
+void EmitTrainerBallThrow(u8 a)
 {
     gBattleBuffersTransferData[0] = 47;
     gBattleBuffersTransferData[1] = 47;
@@ -1322,7 +1322,7 @@ void dp01_build_cmdbuf_x2F_2F_2F_2F(u8 a)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void dp01_build_cmdbuf_x30_TODO(u8 a, u8 *b, u8 c)
+void Emitcmd48(u8 a, u8 *b, u8 c)
 {
     int i;
 
@@ -1335,7 +1335,7 @@ void dp01_build_cmdbuf_x30_TODO(u8 a, u8 *b, u8 c)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 52);
 }
 
-void dp01_build_cmdbuf_x31_31_31_31(u8 a)
+void Emitcmd49(u8 a)
 {
     gBattleBuffersTransferData[0] = 49;
     gBattleBuffersTransferData[1] = 49;
@@ -1344,7 +1344,7 @@ void dp01_build_cmdbuf_x31_31_31_31(u8 a)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 4);
 }
 
-void dp01_build_cmdbuf_x32_32_32_32(u8 a)
+void Emitcmd50(u8 a)
 {
     gBattleBuffersTransferData[0] = 50;
     gBattleBuffersTransferData[1] = 50;
@@ -1385,7 +1385,7 @@ void EmitResetActionMoveSelection(u8 a, u8 b)
     dp01_prepare_buffer(a, gBattleBuffersTransferData, 2);
 }
 
-void dp01_build_cmdbuf_x37_a(u8 a, u8 b)
+void Emitcmd55(u8 a, u8 b)
 {
     gBattleBuffersTransferData[0] = 55;
     gBattleBuffersTransferData[1] = b;

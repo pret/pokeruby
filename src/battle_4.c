@@ -5634,7 +5634,7 @@ static void atk1A_faint_animation(void)
     if (gBattleExecBuffer == 0)
     {
         gActiveBank = GetBattleBank(BSScriptRead8(gBattlescriptCurrInstr + 1));
-        EmitFaintAnimation(0);
+        Emitcmd10(0);
         MarkBufferBankForExecution(gActiveBank);
         gBattlescriptCurrInstr += 2;
     }
@@ -10125,7 +10125,7 @@ static void atk4E_switchin_anim(void)
         GetNationalPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gActiveBank].species), 2);
     }
     gAbsentBankFlags &= ~(gBitTable[gActiveBank]);
-    EmitSwitchInAnim(0, gBattlePartyID[gActiveBank], BSScriptRead8(gBattlescriptCurrInstr + 2));
+    EmitSendOutPoke(0, gBattlePartyID[gActiveBank], BSScriptRead8(gBattlescriptCurrInstr + 2));
     MarkBufferBankForExecution(gActiveBank);
     gBattlescriptCurrInstr += 3;
 }
@@ -10446,7 +10446,7 @@ _08022BC4:\n\
     bics r0, r1\n\
     str r0, [r2]\n\
     movs r0, 0\n\
-    bl dp01_build_cmdbuf_x2A_2A_2A_2A\n\
+    bl Emitcmd42\n\
     ldrb r0, [r4]\n\
     bl MarkBufferBankForExecution\n\
     b _08022C7E\n\
@@ -10531,7 +10531,7 @@ _08022C7E:\n\
     bics r0, r1\n\
     str r0, [r2]\n\
     movs r0, 0\n\
-    bl dp01_build_cmdbuf_x2A_2A_2A_2A\n\
+    bl Emitcmd42\n\
     ldrb r0, [r4]\n\
     bl MarkBufferBankForExecution\n\
     b _08022D40\n\
@@ -10615,7 +10615,7 @@ _08022D40:\n\
     bics r0, r1\n\
     str r0, [r2]\n\
     movs r0, 0\n\
-    bl dp01_build_cmdbuf_x2A_2A_2A_2A\n\
+    bl Emitcmd42\n\
     ldrb r0, [r4]\n\
     bl MarkBufferBankForExecution\n\
     b _08022DF6\n\
@@ -10702,7 +10702,7 @@ _08022DF6:\n\
     bics r0, r1\n\
     str r0, [r2]\n\
     movs r0, 0\n\
-    bl dp01_build_cmdbuf_x2A_2A_2A_2A\n\
+    bl Emitcmd42\n\
     ldrb r0, [r4]\n\
     bl MarkBufferBankForExecution\n\
     b _08022EB8\n\
@@ -10900,7 +10900,7 @@ _08022F92:\n\
     bics r0, r1\n\
     str r0, [r7]\n\
     movs r0, 0\n\
-    bl dp01_build_cmdbuf_x2A_2A_2A_2A\n\
+    bl Emitcmd42\n\
     ldrb r0, [r6]\n\
     bl MarkBufferBankForExecution\n\
     b _0802303A\n\
@@ -10977,7 +10977,7 @@ _0802303A:\n\
     bics r0, r1\n\
     str r0, [r2]\n\
     movs r0, 0\n\
-    bl dp01_build_cmdbuf_x2A_2A_2A_2A\n\
+    bl Emitcmd42\n\
     ldrb r0, [r5]\n\
     bl MarkBufferBankForExecution\n\
     b _080230EE\n\
@@ -11426,7 +11426,7 @@ static void atk54_effectiveness_sound(void)
 static void atk55_play_sound(void)
 {
     gActiveBank = gBankAttacker;
-    EmitPlaySound(0, BS2ScriptRead16(gBattlescriptCurrInstr + 1));
+    Emitcmd44(0, BS2ScriptRead16(gBattlescriptCurrInstr + 1));
     MarkBufferBankForExecution(gActiveBank);
     gBattlescriptCurrInstr += 3;
 }
@@ -11442,7 +11442,7 @@ static void atk56_fainting_cry(void)
 static void atk57(void)
 {
     gActiveBank = GetBankByPlayerAI(0);
-    dp01_build_cmdbuf_x37_a(0, gBattleOutcome);
+    Emitcmd55(0, gBattleOutcome);
     MarkBufferBankForExecution(gActiveBank);
     gBattlescriptCurrInstr += 1;
 }
@@ -12011,7 +12011,7 @@ static void atk61_8025BA4(void)
             hpStatus[i].status = GetMonData(&party[i], MON_DATA_STATUS);
         }
     }
-    dp01_build_cmdbuf_x30_TODO(0, (u8*)(hpStatus), 1);
+    Emitcmd48(0, (u8*)(hpStatus), 1);
     MarkBufferBankForExecution(gActiveBank);
     gBattlescriptCurrInstr += 2;
 }
@@ -12019,7 +12019,7 @@ static void atk61_8025BA4(void)
 static void atk62_08025C6C(void)
 {
     gActiveBank = GetBattleBank(BSScriptRead8(gBattlescriptCurrInstr + 1));
-    dp01_build_cmdbuf_x31_31_31_31(0);
+    Emitcmd49(0);
     MarkBufferBankForExecution(gActiveBank);
     gBattlescriptCurrInstr += 2;
 }
@@ -17789,13 +17789,13 @@ void atkEF_pokeball_catch_calculation(void)
     gBankTarget = gBankAttacker ^ 1;
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
     {
-        EmitBallThrowAnim(0, 5);
+        EmitBallThrow(0, 5);
         MarkBufferBankForExecution(gActiveBank);
         gBattlescriptCurrInstr = BattleScript_TrainerBallBlock;
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL)
     {
-        EmitBallThrowAnim(0, 4);
+        EmitBallThrow(0, 4);
         MarkBufferBankForExecution(gActiveBank);
         gBattlescriptCurrInstr = BattleScript_WallyBallThrow;
     }
@@ -17873,7 +17873,7 @@ void atkEF_pokeball_catch_calculation(void)
         }
         if (odds > 254) //poke caught
         {
-            EmitBallThrowAnim(0, 4);
+            EmitBallThrow(0, 4);
             MarkBufferBankForExecution(gActiveBank);
             gBattlescriptCurrInstr = BattleScript_SuccessBallThrow;
             SetMonData(&gEnemyParty[gBattlePartyID[gBankTarget]], MON_DATA_POKEBALL, (const void*) &gLastUsedItem);
@@ -17890,7 +17890,7 @@ void atkEF_pokeball_catch_calculation(void)
             for (shakes = 0; shakes < 4 && Random() < odds; shakes++) {}
             if (gLastUsedItem == ITEM_MASTER_BALL)
                 shakes = 4; //why calculate the shakes before that check?
-            EmitBallThrowAnim(0, shakes);
+            EmitBallThrow(0, shakes);
             MarkBufferBankForExecution(gActiveBank);
             if (shakes == 4) //poke caught, copy of the code above
             {
