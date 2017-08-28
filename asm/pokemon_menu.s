@@ -6,305 +6,10 @@
 
 	.text
 
-	thumb_func_start sub_8089A70
-sub_8089A70: @ 8089A70
-	push {lr}
-	ldr r0, _08089A88 @ =gPaletteFade
-	ldrb r1, [r0, 0x8]
-	movs r2, 0x80
-	orrs r1, r2
-	strb r1, [r0, 0x8]
-	movs r0, 0
-	movs r1, 0
-	bl OpenPartyMenu
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08089A88: .4byte gPaletteFade
-	thumb_func_end sub_8089A70
 
-	thumb_func_start sub_8089A8C
-sub_8089A8C: @ 8089A8C
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	ldr r5, _08089AD0 @ =gUnknown_0202FFA9
-	movs r0, 0
-	strb r0, [r5]
-	ldr r0, _08089AD4 @ =gLastFieldPokeMenuOpened
-	ldrb r1, [r0]
-	movs r0, 0x64
-	muls r0, r1
-	ldr r1, _08089AD8 @ =gPlayerParty
-	adds r0, r1
-	movs r1, 0x2D
-	bl GetMonData
-	cmp r0, 0
-	beq _08089AE0
-	ldr r4, _08089ADC @ =gUnknown_0202FFAA
-	adds r0, r4, 0
-	adds r1, r5, 0
-	movs r2, 0
-	bl AppendToList
-	adds r0, r4, 0
-	adds r1, r5, 0
-	movs r2, 0x1
-	bl AppendToList
-	adds r0, r4, 0
-	adds r1, r5, 0
-	movs r2, 0x3
-	bl AppendToList
-	b _08089BC8
-	.align 2, 0
-_08089AD0: .4byte gUnknown_0202FFA9
-_08089AD4: .4byte gLastFieldPokeMenuOpened
-_08089AD8: .4byte gPlayerParty
-_08089ADC: .4byte gUnknown_0202FFAA
-_08089AE0:
-	movs r6, 0
-	ldr r0, _08089B24 @ =gUnknown_0839F554
-	ldrh r0, [r0]
-	mov r8, r0
-_08089AE8:
-	movs r4, 0
-	adds r7, r6, 0x1
-	mov r0, r8
-	cmp r0, 0xFF
-	beq _08089B48
-	ldr r5, _08089B24 @ =gUnknown_0839F554
-_08089AF4:
-	ldr r0, _08089B28 @ =gLastFieldPokeMenuOpened
-	ldrb r1, [r0]
-	movs r0, 0x64
-	muls r0, r1
-	ldr r1, _08089B2C @ =gPlayerParty
-	adds r0, r1
-	adds r1, r6, 0
-	adds r1, 0xD
-	bl GetMonData
-	lsls r1, r4, 1
-	adds r1, r5
-	ldrh r1, [r1]
-	cmp r0, r1
-	bne _08089B38
-	adds r2, r4, 0
-	adds r2, 0xA
-	lsls r2, 24
-	lsrs r2, 24
-	ldr r0, _08089B30 @ =gUnknown_0202FFAA
-	ldr r1, _08089B34 @ =gUnknown_0202FFA9
-	bl AppendToList
-	b _08089B48
-	.align 2, 0
-_08089B24: .4byte gUnknown_0839F554
-_08089B28: .4byte gLastFieldPokeMenuOpened
-_08089B2C: .4byte gPlayerParty
-_08089B30: .4byte gUnknown_0202FFAA
-_08089B34: .4byte gUnknown_0202FFA9
-_08089B38:
-	adds r0, r4, 0x1
-	lsls r0, 16
-	lsrs r4, r0, 16
-	lsls r0, r4, 1
-	adds r0, r5
-	ldrh r0, [r0]
-	cmp r0, 0xFF
-	bne _08089AF4
-_08089B48:
-	lsls r0, r7, 16
-	lsrs r6, r0, 16
-	cmp r6, 0x3
-	bls _08089AE8
-	ldr r4, _08089BA4 @ =gUnknown_0202FFAA
-	ldr r5, _08089BA8 @ =gUnknown_0202FFA9
-	adds r0, r4, 0
-	adds r1, r5, 0
-	movs r2, 0
-	bl AppendToList
-	ldr r6, _08089BAC @ =gPlayerParty + 1 * 0x64
-	adds r0, r6, 0
-	movs r1, 0xB
-	bl GetMonData
-	cmp r0, 0
-	beq _08089B76
-	adds r0, r4, 0
-	adds r1, r5, 0
-	movs r2, 0x1
-	bl AppendToList
-_08089B76:
-	ldr r0, _08089BB0 @ =gLastFieldPokeMenuOpened
-	ldrb r1, [r0]
-	movs r0, 0x64
-	muls r0, r1
-	adds r1, r6, 0
-	subs r1, 0x64
-	adds r0, r1
-	movs r1, 0xC
-	bl GetMonData
-	lsls r0, 16
-	lsrs r0, 16
-	bl ItemIsMail
-	lsls r0, 24
-	cmp r0, 0
-	beq _08089BB4
-	adds r0, r4, 0
-	adds r1, r5, 0
-	movs r2, 0x7
-	bl AppendToList
-	b _08089BBE
-	.align 2, 0
-_08089BA4: .4byte gUnknown_0202FFAA
-_08089BA8: .4byte gUnknown_0202FFA9
-_08089BAC: .4byte gPlayerParty + 1 * 0x64
-_08089BB0: .4byte gLastFieldPokeMenuOpened
-_08089BB4:
-	adds r0, r4, 0
-	adds r1, r5, 0
-	movs r2, 0x2
-	bl AppendToList
-_08089BBE:
-	ldr r0, _08089BD4 @ =gUnknown_0202FFAA
-	ldr r1, _08089BD8 @ =gUnknown_0202FFA9
-	movs r2, 0x3
-	bl AppendToList
-_08089BC8:
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08089BD4: .4byte gUnknown_0202FFAA
-_08089BD8: .4byte gUnknown_0202FFA9
-	thumb_func_end sub_8089A8C
 
-	thumb_func_start sub_8089BDC
-sub_8089BDC: @ 8089BDC
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	sub sp, 0x4
-	adds r5, r0, 0
-	adds r6, r1, 0
-	adds r4, r2, 0
-	mov r8, r3
-	ldr r7, [sp, 0x20]
-	ldr r1, [sp, 0x24]
-	lsls r5, 24
-	lsrs r5, 24
-	lsls r6, 24
-	lsrs r6, 24
-	lsls r4, 24
-	lsrs r4, 24
-	mov r0, r8
-	lsls r0, 24
-	lsrs r0, 24
-	mov r8, r0
-	lsls r1, 24
-	lsrs r1, 24
-	movs r0, 0x5
-	bl sub_806D538
-	adds r4, r5, r4
-	lsls r4, 24
-	lsrs r4, 24
-	mov r0, r8
-	lsls r3, r0, 1
-	adds r3, r6, r3
-	adds r3, 0x1
-	lsls r3, 24
-	lsrs r3, 24
-	adds r0, r5, 0
-	adds r1, r6, 0
-	adds r2, r4, 0
-	bl MenuDrawTextWindow
-	adds r5, 0x1
-	lsls r5, 24
-	lsrs r5, 24
-	adds r6, 0x1
-	lsls r6, 24
-	lsrs r6, 24
-	str r7, [sp]
-	adds r0, r5, 0
-	adds r1, r6, 0
-	mov r2, r8
-	ldr r3, [sp, 0x1C]
-	bl PrintMenuItemsReordered
-	add sp, 0x4
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8089BDC
 
-	thumb_func_start sub_8089C50
-sub_8089C50: @ 8089C50
-	push {r4,r5,lr}
-	sub sp, 0xC
-	ldr r4, [sp, 0x18]
-	ldr r5, [sp, 0x1C]
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, 24
-	lsrs r1, 24
-	lsls r2, 24
-	lsrs r2, 24
-	lsls r3, 24
-	lsrs r3, 24
-	str r4, [sp]
-	str r5, [sp, 0x4]
-	movs r4, 0x1
-	str r4, [sp, 0x8]
-	bl sub_8089BDC
-	add sp, 0xC
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8089C50
-
-	thumb_func_start sub_8089C7C
-sub_8089C7C: @ 8089C7C
-	push {r4-r6,lr}
-	sub sp, 0xC
-	adds r5, r0, 0
-	lsls r5, 24
-	lsrs r5, 24
-	ldr r6, _08089CC8 @ =gUnknown_0202FFA9
-	ldrb r0, [r6]
-	lsls r0, 1
-	movs r4, 0x12
-	subs r4, r0
-	lsls r4, 24
-	lsrs r4, 24
-	ldrb r3, [r6]
-	ldr r0, _08089CCC @ =gPokemonMenuActions
-	str r0, [sp]
-	ldr r0, _08089CD0 @ =gUnknown_0202FFAA
-	str r0, [sp, 0x4]
-	movs r0, 0x3
-	str r0, [sp, 0x8]
-	movs r0, 0x13
-	adds r1, r4, 0
-	movs r2, 0xA
-	bl sub_8089BDC
-	movs r2, 0x1
-	orrs r2, r4
-	ldrb r3, [r6]
-	str r5, [sp]
-	movs r0, 0x9
-	str r0, [sp, 0x4]
-	movs r0, 0
-	movs r1, 0x14
-	bl InitMenu
-	add sp, 0xC
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08089CC8: .4byte gUnknown_0202FFA9
-_08089CCC: .4byte gPokemonMenuActions
-_08089CD0: .4byte gUnknown_0202FFAA
-	thumb_func_end sub_8089C7C
+	
 
 	thumb_func_start sub_8089CD4
 sub_8089CD4: @ 8089CD4
@@ -346,7 +51,7 @@ _08089D04:
 	ldr r1, _08089D50 @ =gStringVar1
 	bl GetMonNickname
 	bl sub_8089A8C
-	ldr r0, _08089D54 @ =gUnknown_0202FFA8
+	ldr r0, _08089D54 @ =sPokeMenuCursorPos
 	strb r5, [r0]
 	movs r0, 0
 	bl sub_8089C7C
@@ -364,7 +69,7 @@ _08089D04:
 _08089D48: .4byte gLastFieldPokeMenuOpened
 _08089D4C: .4byte gPlayerParty
 _08089D50: .4byte gStringVar1
-_08089D54: .4byte gUnknown_0202FFA8
+_08089D54: .4byte sPokeMenuCursorPos
 _08089D58: .4byte gTasks
 _08089D5C: .4byte sub_8089D94
 _08089D60:
@@ -417,13 +122,13 @@ sub_8089D94: @ 8089D94
 	movs r0, 0x1
 	negs r0, r0
 	bl MoveMenuCursor
-	ldr r1, _08089DD0 @ =gUnknown_0202FFA8
+	ldr r1, _08089DD0 @ =sPokeMenuCursorPos
 	strb r0, [r1]
 	b _08089E1A
 	.align 2, 0
 _08089DC8: .4byte gPaletteFade
 _08089DCC: .4byte gMain
-_08089DD0: .4byte gUnknown_0202FFA8
+_08089DD0: .4byte sPokeMenuCursorPos
 _08089DD4:
 	cmp r1, 0x80
 	bne _08089DF0
@@ -431,11 +136,11 @@ _08089DD4:
 	bl PlaySE
 	movs r0, 0x1
 	bl MoveMenuCursor
-	ldr r1, _08089DEC @ =gUnknown_0202FFA8
+	ldr r1, _08089DEC @ =sPokeMenuCursorPos
 	strb r0, [r1]
 	b _08089E1A
 	.align 2, 0
-_08089DEC: .4byte gUnknown_0202FFA8
+_08089DEC: .4byte sPokeMenuCursorPos
 _08089DF0:
 	ldrh r1, [r2, 0x2E]
 	movs r0, 0x1
@@ -444,9 +149,9 @@ _08089DF0:
 	beq _08089E30
 	movs r0, 0x5
 	bl PlaySE
-	ldr r1, _08089E24 @ =gPokemonMenuActions
-	ldr r2, _08089E28 @ =gUnknown_0202FFAA
-	ldr r0, _08089E2C @ =gUnknown_0202FFA8
+	ldr r1, _08089E24 @ =sPokemonMenuActions
+	ldr r2, _08089E28 @ =sPokeMenuOptionsIDs
+	ldr r0, _08089E2C @ =sPokeMenuCursorPos
 	ldrb r0, [r0]
 	adds r0, r2
 	ldrb r0, [r0]
@@ -461,9 +166,9 @@ _08089E1A:
 	bl sub_808B5B4
 	b _08089E44
 	.align 2, 0
-_08089E24: .4byte gPokemonMenuActions
-_08089E28: .4byte gUnknown_0202FFAA
-_08089E2C: .4byte gUnknown_0202FFA8
+_08089E24: .4byte sPokemonMenuActions
+_08089E28: .4byte sPokeMenuOptionsIDs
+_08089E2C: .4byte sPokeMenuCursorPos
 _08089E30:
 	movs r0, 0x2
 	ands r0, r1
@@ -520,7 +225,7 @@ sub_8089E84: @ 8089E84
 	ldr r1, _08089EB4 @ =gStringVar1
 	bl GetMonNickname
 	bl sub_8089A8C
-	ldr r1, _08089EB8 @ =gUnknown_0202FFA8
+	ldr r1, _08089EB8 @ =sPokeMenuCursorPos
 	movs r0, 0
 	strb r0, [r1]
 	movs r0, 0
@@ -531,7 +236,7 @@ sub_8089E84: @ 8089E84
 _08089EAC: .4byte gLastFieldPokeMenuOpened
 _08089EB0: .4byte gPlayerParty
 _08089EB4: .4byte gStringVar1
-_08089EB8: .4byte gUnknown_0202FFA8
+_08089EB8: .4byte sPokeMenuCursorPos
 	thumb_func_end sub_8089E84
 
 	thumb_func_start sub_8089EBC
@@ -746,7 +451,7 @@ sub_808A060: @ 808A060
 	ldrh r0, [r0, 0x2E]
 	cmp r0, 0x40
 	bne _0808A086
-	ldr r4, _0808A0D4 @ =gUnknown_0202FFA8
+	ldr r4, _0808A0D4 @ =sPokeMenuCursorPos
 	ldrb r0, [r4]
 	cmp r0, 0
 	beq _0808A086
@@ -761,7 +466,7 @@ _0808A086:
 	ldrh r0, [r0, 0x2E]
 	cmp r0, 0x80
 	bne _0808A0A4
-	ldr r4, _0808A0D4 @ =gUnknown_0202FFA8
+	ldr r4, _0808A0D4 @ =sPokeMenuCursorPos
 	ldrb r0, [r4]
 	cmp r0, 0x2
 	beq _0808A0A4
@@ -780,8 +485,8 @@ _0808A0A4:
 	movs r0, 0x5
 	bl PlaySE
 	ldr r1, _0808A0D8 @ =gUnknown_0839F578
-	ldr r2, _0808A0DC @ =gPokemonMenuActions
-	ldr r0, _0808A0D4 @ =gUnknown_0202FFA8
+	ldr r2, _0808A0DC @ =sPokemonMenuActions
+	ldr r0, _0808A0D4 @ =sPokeMenuCursorPos
 	ldrb r3, [r0]
 	movs r0, 0
 	bl PartyMenuGetPopupMenuFunc
@@ -791,9 +496,9 @@ _0808A0A4:
 	b _0808A0F6
 	.align 2, 0
 _0808A0D0: .4byte gMain
-_0808A0D4: .4byte gUnknown_0202FFA8
+_0808A0D4: .4byte sPokeMenuCursorPos
 _0808A0D8: .4byte gUnknown_0839F578
-_0808A0DC: .4byte gPokemonMenuActions
+_0808A0DC: .4byte sPokemonMenuActions
 _0808A0E0:
 	movs r0, 0x2
 	ands r0, r1
@@ -819,7 +524,7 @@ sub_808A100: @ 808A100
 	lsls r4, 24
 	lsrs r4, 24
 	ldr r1, _0808A130 @ =gUnknown_0839F578
-	ldr r2, _0808A134 @ =gPokemonMenuActions
+	ldr r2, _0808A134 @ =sPokemonMenuActions
 	movs r0, 0
 	movs r3, 0
 	bl sub_806E750
@@ -838,7 +543,7 @@ sub_808A100: @ 808A100
 	bx r0
 	.align 2, 0
 _0808A130: .4byte gUnknown_0839F578
-_0808A134: .4byte gPokemonMenuActions
+_0808A134: .4byte sPokemonMenuActions
 _0808A138: .4byte gTasks
 _0808A13C: .4byte sub_808A060
 	thumb_func_end sub_808A100
@@ -850,7 +555,7 @@ PokemonMenu_Item: @ 808A140
 	lsls r4, 24
 	lsrs r4, 24
 	bl HandleDestroyMenuCursors
-	ldr r1, _0808A174 @ =gUnknown_0202FFA8
+	ldr r1, _0808A174 @ =sPokeMenuCursorPos
 	movs r0, 0
 	strb r0, [r1]
 	movs r0, 0x13
@@ -869,7 +574,7 @@ PokemonMenu_Item: @ 808A140
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0808A174: .4byte gUnknown_0202FFA8
+_0808A174: .4byte sPokeMenuCursorPos
 _0808A178: .4byte gTasks
 _0808A17C: .4byte sub_808A100
 	thumb_func_end PokemonMenu_Item
@@ -1544,7 +1249,7 @@ PokemonMenu_Mail: @ 808A6E8
 	lsls r4, 24
 	lsrs r4, 24
 	bl HandleDestroyMenuCursors
-	ldr r1, _0808A728 @ =gUnknown_0202FFA8
+	ldr r1, _0808A728 @ =sPokeMenuCursorPos
 	movs r0, 0
 	strb r0, [r1]
 	movs r0, 0x13
@@ -1553,7 +1258,7 @@ PokemonMenu_Mail: @ 808A6E8
 	movs r3, 0x13
 	bl MenuZeroFillWindowRect
 	ldr r1, _0808A72C @ =gUnknown_0839F584
-	ldr r2, _0808A730 @ =gPokemonMenuActions
+	ldr r2, _0808A730 @ =sPokemonMenuActions
 	movs r0, 0
 	movs r3, 0
 	bl sub_806E750
@@ -1568,9 +1273,9 @@ PokemonMenu_Mail: @ 808A6E8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0808A728: .4byte gUnknown_0202FFA8
+_0808A728: .4byte sPokeMenuCursorPos
 _0808A72C: .4byte gUnknown_0839F584
-_0808A730: .4byte gPokemonMenuActions
+_0808A730: .4byte sPokemonMenuActions
 _0808A734: .4byte gTasks
 _0808A738: .4byte sub_808A73C
 	thumb_func_end PokemonMenu_Mail
@@ -1586,7 +1291,7 @@ sub_808A73C: @ 808A73C
 	bne _0808A77A
 	movs r0, 0x5
 	bl PlaySE
-	ldr r4, _0808A768 @ =gUnknown_0202FFA8
+	ldr r4, _0808A768 @ =sPokeMenuCursorPos
 	ldrb r0, [r4]
 	cmp r0, 0
 	bne _0808A770
@@ -1598,7 +1303,7 @@ sub_808A73C: @ 808A73C
 	b _0808A774
 	.align 2, 0
 _0808A764: .4byte gMain
-_0808A768: .4byte gUnknown_0202FFA8
+_0808A768: .4byte sPokeMenuCursorPos
 _0808A76C: .4byte gUnknown_0839F584
 _0808A770:
 	movs r0, 0x1
@@ -1613,7 +1318,7 @@ _0808A77A:
 	bne _0808A7B4
 	movs r0, 0x5
 	bl PlaySE
-	ldr r4, _0808A7A4 @ =gUnknown_0202FFA8
+	ldr r4, _0808A7A4 @ =sPokeMenuCursorPos
 	ldrb r0, [r4]
 	ldr r1, _0808A7A8 @ =gUnknown_0839F584
 	ldrb r2, [r1]
@@ -1627,7 +1332,7 @@ _0808A77A:
 	b _0808A7AE
 	.align 2, 0
 _0808A7A0: .4byte gMain
-_0808A7A4: .4byte gUnknown_0202FFA8
+_0808A7A4: .4byte sPokeMenuCursorPos
 _0808A7A8: .4byte gUnknown_0839F584
 _0808A7AC:
 	movs r0, 0x1
@@ -1644,8 +1349,8 @@ _0808A7B4:
 	movs r0, 0x5
 	bl PlaySE
 	ldr r1, _0808A7E4 @ =gUnknown_0839F584
-	ldr r2, _0808A7E8 @ =gPokemonMenuActions
-	ldr r0, _0808A7EC @ =gUnknown_0202FFA8
+	ldr r2, _0808A7E8 @ =sPokemonMenuActions
+	ldr r0, _0808A7EC @ =sPokeMenuCursorPos
 	ldrb r3, [r0]
 	movs r0, 0
 	bl PartyMenuGetPopupMenuFunc
@@ -1656,8 +1361,8 @@ _0808A7B4:
 	.align 2, 0
 _0808A7E0: .4byte gMain
 _0808A7E4: .4byte gUnknown_0839F584
-_0808A7E8: .4byte gPokemonMenuActions
-_0808A7EC: .4byte gUnknown_0202FFA8
+_0808A7E8: .4byte sPokemonMenuActions
+_0808A7EC: .4byte sPokeMenuCursorPos
 _0808A7F0:
 	movs r0, 0x2
 	ands r0, r1
@@ -1779,7 +1484,7 @@ sub_808A8D4: @ 808A8D4
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r1, _0808A90C @ =gUnknown_0202FFA8
+	ldr r1, _0808A90C @ =sPokeMenuCursorPos
 	movs r0, 0
 	strb r0, [r1]
 	movs r0, 0x13
@@ -1801,7 +1506,7 @@ sub_808A8D4: @ 808A8D4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0808A90C: .4byte gUnknown_0202FFA8
+_0808A90C: .4byte sPokeMenuCursorPos
 _0808A910: .4byte gTasks
 _0808A914: .4byte sub_8089CD4
 	thumb_func_end sub_808A8D4
@@ -1837,7 +1542,7 @@ PokemonMenu_CancelSubmenu: @ 808A938
 	movs r3, 0x13
 	bl MenuZeroFillWindowRect
 	bl sub_806D5A4
-	ldr r0, _0808A978 @ =gUnknown_0202FFA8
+	ldr r0, _0808A978 @ =sPokeMenuCursorPos
 	ldrb r0, [r0]
 	bl sub_8089C7C
 	ldr r1, _0808A97C @ =gTasks
@@ -1851,7 +1556,7 @@ PokemonMenu_CancelSubmenu: @ 808A938
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0808A978: .4byte gUnknown_0202FFA8
+_0808A978: .4byte sPokeMenuCursorPos
 _0808A97C: .4byte gTasks
 _0808A980: .4byte sub_8089D94
 	thumb_func_end PokemonMenu_CancelSubmenu
@@ -1868,8 +1573,8 @@ PokemonMenu_FieldMove: @ 808A984
 	ldr r7, _0808A9D0 @ =gTasks + 0x8
 	adds r4, r6, r7
 	bl HandleDestroyMenuCursors
-	ldr r1, _0808A9D4 @ =gUnknown_0202FFAA
-	ldr r0, _0808A9D8 @ =gUnknown_0202FFA8
+	ldr r1, _0808A9D4 @ =sPokeMenuOptionsIDs
+	ldr r0, _0808A9D8 @ =sPokeMenuCursorPos
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -1895,8 +1600,8 @@ PokemonMenu_FieldMove: @ 808A984
 	b _0808AAB2
 	.align 2, 0
 _0808A9D0: .4byte gTasks + 0x8
-_0808A9D4: .4byte gUnknown_0202FFAA
-_0808A9D8: .4byte gUnknown_0202FFA8
+_0808A9D4: .4byte sPokeMenuOptionsIDs
+_0808A9D8: .4byte sPokeMenuCursorPos
 _0808A9DC:
 	ldrh r1, [r4, 0x16]
 	movs r2, 0x16
@@ -1943,7 +1648,7 @@ _0808AA2C:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0808AA90
-	ldr r1, _0808AA7C @ =gUnknown_0202FFA8
+	ldr r1, _0808AA7C @ =sPokeMenuCursorPos
 	movs r0, 0
 	strb r0, [r1]
 	ldrh r0, [r4, 0x16]
@@ -1969,7 +1674,7 @@ _0808AA2C:
 	b _0808AADA
 	.align 2, 0
 _0808AA78: .4byte gFieldMoveFuncs
-_0808AA7C: .4byte gUnknown_0202FFA8
+_0808AA7C: .4byte sPokeMenuCursorPos
 _0808AA80: .4byte gTasks
 _0808AA84: .4byte sub_808AB34
 _0808AA88:

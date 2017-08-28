@@ -4,7 +4,7 @@
 	.section .rodata
 
 	.align 2
-gPokemonMenuActions:: @ 839F494
+sPokemonMenuActions:: @ 839F494
 	.4byte OtherText_Summary, PokemonMenu_Summary
 	.4byte OtherText_Switch2, PokemonMenu_Switch
 	.4byte OtherText_Item, PokemonMenu_Item
@@ -31,7 +31,7 @@ gPokemonMenuActions:: @ 839F494
 	.4byte gMoveNames + 13 * MOVE_SWEET_SCENT, PokemonMenu_FieldMove
 
 	.align 1
-gUnknown_0839F554:: @ 839F554
+sPokeMenuFieldMoves:: @ 839F554
 	.2byte MOVE_CUT
 	.2byte MOVE_FLASH
 	.2byte MOVE_ROCK_SMASH
