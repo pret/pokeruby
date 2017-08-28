@@ -253,8 +253,8 @@ static const TransitionState sPhase2_Transition_BigPokeball_Funcs[] =
 static const TransitionState sPhase2_Transition_PokeballsTrail_Funcs[] =
 {
     Phase2_Transition_PokeballsTrail_Func1,
-	Phase2_Transition_PokeballsTrail_Func2,
-	Phase2_Transition_PokeballsTrail_Func3
+    Phase2_Transition_PokeballsTrail_Func2,
+    Phase2_Transition_PokeballsTrail_Func3
 };
 
 static const s16 sUnknown_083FD7E4[2] = {-16, 256};
@@ -264,25 +264,25 @@ static const s16 sUnknown_083FD7F2[2] = {8, -8};
 static const TransitionState sPhase2_Transition_Clockwise_BlackFade_Funcs[] =
 {
     Phase2_Transition_Clockwise_BlackFade_Func1,
-	Phase2_Transition_Clockwise_BlackFade_Func2,
-	Phase2_Transition_Clockwise_BlackFade_Func3,
-	Phase2_Transition_Clockwise_BlackFade_Func4,
-	Phase2_Transition_Clockwise_BlackFade_Func5,
-	Phase2_Transition_Clockwise_BlackFade_Func6,
-	Phase2_Transition_Clockwise_BlackFade_Func7
+    Phase2_Transition_Clockwise_BlackFade_Func2,
+    Phase2_Transition_Clockwise_BlackFade_Func3,
+    Phase2_Transition_Clockwise_BlackFade_Func4,
+    Phase2_Transition_Clockwise_BlackFade_Func5,
+    Phase2_Transition_Clockwise_BlackFade_Func6,
+    Phase2_Transition_Clockwise_BlackFade_Func7
 };
 
 static const TransitionState sPhase2_Transition_Ripple_Funcs[] =
 {
     Phase2_Transition_Ripple_Func1,
-	Phase2_Transition_Ripple_Func2
+    Phase2_Transition_Ripple_Func2
 };
 
 static const TransitionState sPhase2_Transition_Wave_Funcs[] =
 {
     Phase2_Transition_Wave_Func1,
-	Phase2_Transition_Wave_Func2,
-	Phase2_Transition_Wave_Func3
+    Phase2_Transition_Wave_Func2,
+    Phase2_Transition_Wave_Func3
 };
 
 static const TransitionState sPhase2_Mugshot_Transition_Funcs[] =
@@ -320,12 +320,12 @@ static const s16 sMugshotsOpponentCoords[MUGSHOTS_NO][2] =
 static const TransitionSpriteCallback sUnknown_083FD880[] =
 {
     sub_811C934,
-	sub_811C938,
-	sub_811C984,
-	sub_811C9B8,
-	sub_811C934,
-	sub_811C9E4,
-	sub_811C934
+    sub_811C938,
+    sub_811C984,
+    sub_811C9B8,
+    sub_811C934,
+    sub_811C9E4,
+    sub_811C934
 };
 
 static const s16 sUnknown_083FD89C[2] = {12, -12};
@@ -334,17 +334,17 @@ static const s16 sUnknown_083FD8A0[2] = {-1, 1};
 static const TransitionState sPhase2_Transition_Slice_Funcs[] =
 {
     Phase2_Transition_Slice_Func1,
-	Phase2_Transition_Slice_Func2,
-	Phase2_Transition_Slice_Func3
+    Phase2_Transition_Slice_Func2,
+    Phase2_Transition_Slice_Func3
 };
 
 static const TransitionState sPhase2_Transition_WhiteFade_Funcs[] =
 {
     Phase2_Transition_WhiteFade_Func1,
-	Phase2_Transition_WhiteFade_Func2,
-	Phase2_Transition_WhiteFade_Func3,
-	Phase2_Transition_WhiteFade_Func4,
-	Phase2_Transition_WhiteFade_Func5
+    Phase2_Transition_WhiteFade_Func2,
+    Phase2_Transition_WhiteFade_Func3,
+    Phase2_Transition_WhiteFade_Func4,
+    Phase2_Transition_WhiteFade_Func5
 };
 
 static const s16 sUnknown_083FD8C4[8] = {0, 20, 15, 40, 10, 25, 35, 5};
@@ -352,17 +352,17 @@ static const s16 sUnknown_083FD8C4[8] = {0, 20, 15, 40, 10, 25, 35, 5};
 static const TransitionState sPhase2_Transition_GridSquares_Funcs[] =
 {
     Phase2_Transition_GridSquares_Func1,
-	Phase2_Transition_GridSquares_Func2,
-	Phase2_Transition_GridSquares_Func3
+    Phase2_Transition_GridSquares_Func2,
+    Phase2_Transition_GridSquares_Func3
 };
 
 static const TransitionState sPhase2_Transition_Shards_Funcs[] =
 {
     Phase2_Transition_Shards_Func1,
-	Phase2_Transition_Shards_Func2,
-	Phase2_Transition_Shards_Func3,
-	Phase2_Transition_Shards_Func4,
-	Phase2_Transition_Shards_Func5
+    Phase2_Transition_Shards_Func2,
+    Phase2_Transition_Shards_Func3,
+    Phase2_Transition_Shards_Func4,
+    Phase2_Transition_Shards_Func5
 };
 
 static const s16 sUnknown_083FD8F4[][5] =
@@ -507,10 +507,10 @@ static const u16 sMugshotPal_May[] = INCBIN_U16("graphics/battle_transitions/may
 static const u16 * const sOpponentMugshotsPals[MUGSHOTS_NO] =
 {
     sMugshotPal_Sydney,
-	sMugshotPal_Phoebe,
-	sMugshotPal_Glacia,
-	sMugshotPal_Drake,
-	sMugshotPal_Steven
+    sMugshotPal_Phoebe,
+    sMugshotPal_Glacia,
+    sMugshotPal_Drake,
+    sMugshotPal_Steven
 };
 
 static const u16 * const sPlayerMugshotsPals[2] =
