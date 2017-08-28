@@ -881,115 +881,115 @@ static int RotatingGate_CanRotate(u8 gateId, int rotationDirection)
 __attribute__((naked)) static int RotatingGate_CanRotate(u8 a, int puzzleType)
 {
     asm(".syntax unified\n\
-	push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	sub sp, 0xC\n\
-	lsls r0, 24\n\
-	lsrs r4, r0, 24\n\
-	cmp r1, 0x1\n\
-	bne _080C7EAC\n\
-	ldr r0, _080C7EA8 @ =sRotatingGate_ArmPositionsAntiClockwiseRotation\n\
-	mov r10, r0\n\
-	b _080C7EB8\n\
-	.align 2, 0\n\
+    push {r4-r7,lr}\n\
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    sub sp, 0xC\n\
+    lsls r0, 24\n\
+    lsrs r4, r0, 24\n\
+    cmp r1, 0x1\n\
+    bne _080C7EAC\n\
+    ldr r0, _080C7EA8 @ =sRotatingGate_ArmPositionsAntiClockwiseRotation\n\
+    mov r10, r0\n\
+    b _080C7EB8\n\
+    .align 2, 0\n\
 _080C7EA8: .4byte sRotatingGate_ArmPositionsAntiClockwiseRotation\n\
 _080C7EAC:\n\
-	cmp r1, 0x2\n\
-	beq _080C7EB4\n\
+    cmp r1, 0x2\n\
+    beq _080C7EB4\n\
 _080C7EB0:\n\
-	movs r0, 0\n\
-	b _080C7F48\n\
+    movs r0, 0\n\
+    b _080C7F48\n\
 _080C7EB4:\n\
-	ldr r1, _080C7F58 @ =sRotatingGate_ArmPositionsClockwiseRotation\n\
-	mov r10, r1\n\
+    ldr r1, _080C7F58 @ =sRotatingGate_ArmPositionsClockwiseRotation\n\
+    mov r10, r1\n\
 _080C7EB8:\n\
-	adds r0, r4, 0\n\
-	bl RotatingGate_GetGateOrientation\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	str r0, [sp]\n\
-	ldr r0, _080C7F5C @ =gRotatingGate_PuzzleConfig\n\
-	ldr r1, [r0]\n\
-	lsls r0, r4, 3\n\
-	adds r0, r1\n\
-	ldrb r2, [r0, 0x4]\n\
-	ldrh r1, [r0]\n\
-	adds r1, 0x7\n\
-	ldrh r0, [r0, 0x2]\n\
-	adds r0, 0x7\n\
-	movs r3, 0\n\
-	lsls r2, 3\n\
-	str r2, [sp, 0x4]\n\
-	lsls r1, 16\n\
-	asrs r1, 16\n\
-	mov r9, r1\n\
-	lsls r0, 16\n\
-	asrs r0, 16\n\
-	mov r8, r0\n\
+    adds r0, r4, 0\n\
+    bl RotatingGate_GetGateOrientation\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    str r0, [sp]\n\
+    ldr r0, _080C7F5C @ =gRotatingGate_PuzzleConfig\n\
+    ldr r1, [r0]\n\
+    lsls r0, r4, 3\n\
+    adds r0, r1\n\
+    ldrb r2, [r0, 0x4]\n\
+    ldrh r1, [r0]\n\
+    adds r1, 0x7\n\
+    ldrh r0, [r0, 0x2]\n\
+    adds r0, 0x7\n\
+    movs r3, 0\n\
+    lsls r2, 3\n\
+    str r2, [sp, 0x4]\n\
+    lsls r1, 16\n\
+    asrs r1, 16\n\
+    mov r9, r1\n\
+    lsls r0, 16\n\
+    asrs r0, 16\n\
+    mov r8, r0\n\
 _080C7EE8:\n\
-	movs r6, 0\n\
-	ldr r2, [sp]\n\
-	adds r7, r2, r3\n\
-	lsls r0, r3, 1\n\
-	adds r5, r7, 0\n\
-	ldr r1, [sp, 0x4]\n\
-	adds r0, r1\n\
-	ldr r2, _080C7F60 @ =sRotatingGate_ArmLayout\n\
-	adds r4, r0, r2\n\
+    movs r6, 0\n\
+    ldr r2, [sp]\n\
+    adds r7, r2, r3\n\
+    lsls r0, r3, 1\n\
+    adds r5, r7, 0\n\
+    ldr r1, [sp, 0x4]\n\
+    adds r0, r1\n\
+    ldr r2, _080C7F60 @ =sRotatingGate_ArmLayout\n\
+    adds r4, r0, r2\n\
 _080C7EFA:\n\
-	adds r0, r5, 0\n\
-	cmp r5, 0\n\
-	bge _080C7F02\n\
-	adds r0, r7, 0x3\n\
+    adds r0, r5, 0\n\
+    cmp r5, 0\n\
+    bge _080C7F02\n\
+    adds r0, r7, 0x3\n\
 _080C7F02:\n\
-	asrs r0, 2\n\
-	lsls r0, 2\n\
-	subs r0, r5, r0\n\
-	lsls r0, 1\n\
-	adds r0, r6\n\
-	lsls r0, 24\n\
-	lsrs r1, r0, 24\n\
-	ldrb r0, [r4]\n\
-	cmp r0, 0\n\
-	beq _080C7F38\n\
-	lsls r1, 2\n\
-	add r1, r10\n\
-	movs r0, 0\n\
-	ldrsb r0, [r1, r0]\n\
-	add r0, r9\n\
-	ldrb r1, [r1, 0x1]\n\
-	lsls r1, 24\n\
-	asrs r1, 24\n\
-	add r1, r8\n\
-	str r3, [sp, 0x8]\n\
-	bl MapGridIsImpassableAt\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	ldr r3, [sp, 0x8]\n\
-	cmp r0, 0x1\n\
-	beq _080C7EB0\n\
+    asrs r0, 2\n\
+    lsls r0, 2\n\
+    subs r0, r5, r0\n\
+    lsls r0, 1\n\
+    adds r0, r6\n\
+    lsls r0, 24\n\
+    lsrs r1, r0, 24\n\
+    ldrb r0, [r4]\n\
+    cmp r0, 0\n\
+    beq _080C7F38\n\
+    lsls r1, 2\n\
+    add r1, r10\n\
+    movs r0, 0\n\
+    ldrsb r0, [r1, r0]\n\
+    add r0, r9\n\
+    ldrb r1, [r1, 0x1]\n\
+    lsls r1, 24\n\
+    asrs r1, 24\n\
+    add r1, r8\n\
+    str r3, [sp, 0x8]\n\
+    bl MapGridIsImpassableAt\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    ldr r3, [sp, 0x8]\n\
+    cmp r0, 0x1\n\
+    beq _080C7EB0\n\
 _080C7F38:\n\
-	adds r4, 0x1\n\
-	adds r6, 0x1\n\
-	cmp r6, 0x1\n\
-	ble _080C7EFA\n\
-	adds r3, 0x1\n\
-	cmp r3, 0x3\n\
-	ble _080C7EE8\n\
-	movs r0, 0x1\n\
+    adds r4, 0x1\n\
+    adds r6, 0x1\n\
+    cmp r6, 0x1\n\
+    ble _080C7EFA\n\
+    adds r3, 0x1\n\
+    cmp r3, 0x3\n\
+    ble _080C7EE8\n\
+    movs r0, 0x1\n\
 _080C7F48:\n\
-	add sp, 0xC\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r1}\n\
-	bx r1\n\
-	.align 2, 0\n\
+    add sp, 0xC\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r1}\n\
+    bx r1\n\
+    .align 2, 0\n\
 _080C7F58: .4byte sRotatingGate_ArmPositionsClockwiseRotation\n\
 _080C7F5C: .4byte gRotatingGate_PuzzleConfig\n\
 _080C7F60: .4byte sRotatingGate_ArmLayout\n\
@@ -1016,45 +1016,45 @@ static int RotatingGate_HasArm(u8 gateId, u8 armInfo)
 __attribute__((naked)) static int RotatingGate_HasArm(u8 a, u8 b)
 {
     asm(".syntax unified\n\
-	push {r4-r6,lr}\n\
-	adds r4, r1, 0\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	adds r6, r0, 0\n\
-	lsls r4, 24\n\
-	lsrs r5, r4, 24\n\
-	lsrs r4, 25\n\
-	movs r0, 0x1\n\
-	ands r5, r0\n\
-	adds r0, r6, 0\n\
-	bl RotatingGate_GetGateOrientation\n\
-	subs r4, r0\n\
-	adds r1, r4, 0x4\n\
-	adds r0, r1, 0\n\
-	cmp r1, 0\n\
-	bge _080C7F8A\n\
-	adds r0, r4, 0x7\n\
+    push {r4-r6,lr}\n\
+    adds r4, r1, 0\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    adds r6, r0, 0\n\
+    lsls r4, 24\n\
+    lsrs r5, r4, 24\n\
+    lsrs r4, 25\n\
+    movs r0, 0x1\n\
+    ands r5, r0\n\
+    adds r0, r6, 0\n\
+    bl RotatingGate_GetGateOrientation\n\
+    subs r4, r0\n\
+    adds r1, r4, 0x4\n\
+    adds r0, r1, 0\n\
+    cmp r1, 0\n\
+    bge _080C7F8A\n\
+    adds r0, r4, 0x7\n\
 _080C7F8A:\n\
-	asrs r0, 2\n\
-	lsls r0, 2\n\
-	subs r0, r1, r0\n\
-	ldr r1, _080C7FB0 @ =gRotatingGate_PuzzleConfig\n\
-	ldr r2, [r1]\n\
-	lsls r1, r6, 3\n\
-	adds r1, r2\n\
-	ldrb r1, [r1, 0x4]\n\
-	ldr r2, _080C7FB4 @ =sRotatingGate_ArmLayout\n\
-	lsls r0, 24\n\
-	asrs r0, 23\n\
-	adds r0, r5\n\
-	lsls r1, 3\n\
-	adds r0, r1\n\
-	adds r0, r2\n\
-	ldrb r0, [r0]\n\
-	pop {r4-r6}\n\
-	pop {r1}\n\
-	bx r1\n\
-	.align 2, 0\n\
+    asrs r0, 2\n\
+    lsls r0, 2\n\
+    subs r0, r1, r0\n\
+    ldr r1, _080C7FB0 @ =gRotatingGate_PuzzleConfig\n\
+    ldr r2, [r1]\n\
+    lsls r1, r6, 3\n\
+    adds r1, r2\n\
+    ldrb r1, [r1, 0x4]\n\
+    ldr r2, _080C7FB4 @ =sRotatingGate_ArmLayout\n\
+    lsls r0, 24\n\
+    asrs r0, 23\n\
+    adds r0, r5\n\
+    lsls r1, 3\n\
+    adds r0, r1\n\
+    adds r0, r2\n\
+    ldrb r0, [r0]\n\
+    pop {r4-r6}\n\
+    pop {r1}\n\
+    bx r1\n\
+    .align 2, 0\n\
 _080C7FB0: .4byte gRotatingGate_PuzzleConfig\n\
 _080C7FB4: .4byte sRotatingGate_ArmLayout\n\
 .syntax divided\n");
@@ -1095,53 +1095,53 @@ static u8 RotatingGate_GetRotationInfo(u8 direction, s16 x, s16 y)
 __attribute__((naked)) static u8 RotatingGate_GetRotationInfo(u8 a, s16 b, s16 c)
 {
     asm(".syntax unified\n\
-    	push {lr}\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	adds r3, r0, 0\n\
-	lsls r1, 16\n\
-	lsrs r1, 16\n\
-	lsls r2, 16\n\
-	lsrs r2, 16\n\
-	cmp r0, 0x2\n\
-	bne _080C8008\n\
-	ldr r3, _080C8004 @ =sRotatingGate_RotationInfoNorth\n\
-	b _080C802A\n\
-	.align 2, 0\n\
+        push {lr}\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    adds r3, r0, 0\n\
+    lsls r1, 16\n\
+    lsrs r1, 16\n\
+    lsls r2, 16\n\
+    lsrs r2, 16\n\
+    cmp r0, 0x2\n\
+    bne _080C8008\n\
+    ldr r3, _080C8004 @ =sRotatingGate_RotationInfoNorth\n\
+    b _080C802A\n\
+    .align 2, 0\n\
 _080C8004: .4byte sRotatingGate_RotationInfoNorth\n\
 _080C8008:\n\
-	cmp r0, 0x1\n\
-	bne _080C8014\n\
-	ldr r3, _080C8010 @ =sRotatingGate_RotationInfoSouth\n\
-	b _080C802A\n\
-	.align 2, 0\n\
+    cmp r0, 0x1\n\
+    bne _080C8014\n\
+    ldr r3, _080C8010 @ =sRotatingGate_RotationInfoSouth\n\
+    b _080C802A\n\
+    .align 2, 0\n\
 _080C8010: .4byte sRotatingGate_RotationInfoSouth\n\
 _080C8014:\n\
-	cmp r0, 0x3\n\
-	bne _080C8020\n\
-	ldr r3, _080C801C @ =sRotatingGate_RotationInfoWest\n\
-	b _080C802A\n\
-	.align 2, 0\n\
+    cmp r0, 0x3\n\
+    bne _080C8020\n\
+    ldr r3, _080C801C @ =sRotatingGate_RotationInfoWest\n\
+    b _080C802A\n\
+    .align 2, 0\n\
 _080C801C: .4byte sRotatingGate_RotationInfoWest\n\
 _080C8020:\n\
-	cmp r3, 0x4\n\
-	beq _080C8028\n\
-	movs r0, 0xFF\n\
-	b _080C8038\n\
+    cmp r3, 0x4\n\
+    beq _080C8028\n\
+    movs r0, 0xFF\n\
+    b _080C8038\n\
 _080C8028:\n\
-	ldr r3, _080C803C @ =sRotatingGate_RotationInfoEast\n\
+    ldr r3, _080C803C @ =sRotatingGate_RotationInfoEast\n\
 _080C802A:\n\
-	lsls r0, r2, 16\n\
-	lsls r1, 16\n\
-	asrs r1, 16\n\
-	asrs r0, 14\n\
-	adds r0, r1\n\
-	adds r0, r3, r0\n\
-	ldrb r0, [r0]\n\
+    lsls r0, r2, 16\n\
+    lsls r1, 16\n\
+    asrs r1, 16\n\
+    asrs r0, 14\n\
+    adds r0, r1\n\
+    adds r0, r3, r0\n\
+    ldrb r0, [r0]\n\
 _080C8038:\n\
-	pop {r1}\n\
-	bx r1\n\
-	.align 2, 0\n\
+    pop {r1}\n\
+    bx r1\n\
+    .align 2, 0\n\
 _080C803C: .4byte sRotatingGate_RotationInfoEast\n\
 .syntax divided\n");
 }
