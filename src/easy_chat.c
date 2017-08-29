@@ -144,7 +144,7 @@ u8 *sub_80EB544(u8 *dst, u16 *words, u16 arg2, u16 arg3)
 
 u16 unref_sub_80EB5E0(u16 arg0)
 {
-    u8 *chars;
+    const u8 *chars;
     u16 i;
     u16 length;
     int group, word;
