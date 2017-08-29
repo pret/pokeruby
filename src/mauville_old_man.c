@@ -2,7 +2,6 @@
 #include "bard_music.h"
 #include "mauville_old_man.h"
 #include "easy_chat.h"
-#include "easy_chat_constants.h"
 #include "event_data.h"
 #include "field_message_box.h"
 #include "m4a.h"
