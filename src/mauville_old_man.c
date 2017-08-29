@@ -527,161 +527,161 @@ __attribute__((naked))
 static void sub_80F7DC0(void)
 {
     asm(".syntax unified\n\
-	push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	sub sp, 0x18\n\
-	ldr r1, _080F7E84 @ =gUnknown_083E53C8\n\
-	mov r0, sp\n\
-	movs r2, 0x18\n\
-	bl memcpy\n\
-	movs r5, 0\n\
-	movs r0, 0x2\n\
-	add r0, sp\n\
-	mov r8, r0\n\
-	ldr r1, _080F7E88 @ =gSaveBlock1 + 0x2D94\n\
-	adds r1, 0x18\n\
-	adds r3, r1, 0\n\
+    push {r4-r7,lr}\n\
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    sub sp, 0x18\n\
+    ldr r1, _080F7E84 @ =gUnknown_083E53C8\n\
+    mov r0, sp\n\
+    movs r2, 0x18\n\
+    bl memcpy\n\
+    movs r5, 0\n\
+    movs r0, 0x2\n\
+    add r0, sp\n\
+    mov r8, r0\n\
+    ldr r1, _080F7E88 @ =gSaveBlock1 + 0x2D94\n\
+    adds r1, 0x18\n\
+    adds r3, r1, 0\n\
 _080F7DE4:\n\
-	adds r0, r3, r5\n\
-	strb r5, [r0]\n\
-	adds r0, r5, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r5, r0, 16\n\
-	cmp r5, 0x7\n\
-	bls _080F7DE4\n\
-	movs r5, 0\n\
-	ldr r2, _080F7E88 @ =gSaveBlock1 + 0x2D94\n\
-	adds r2, 0x4\n\
-	mov r9, r2\n\
-	adds r6, r1, 0\n\
+    adds r0, r3, r5\n\
+    strb r5, [r0]\n\
+    adds r0, r5, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r5, r0, 16\n\
+    cmp r5, 0x7\n\
+    bls _080F7DE4\n\
+    movs r5, 0\n\
+    ldr r2, _080F7E88 @ =gSaveBlock1 + 0x2D94\n\
+    adds r2, 0x4\n\
+    mov r9, r2\n\
+    adds r6, r1, 0\n\
 _080F7DFC:\n\
-	bl Random\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	adds r4, r5, 0x1\n\
-	adds r1, r4, 0\n\
-	bl __modsi3\n\
-	lsls r0, 16\n\
-	lsrs r1, r0, 16\n\
-	adds r2, r6, r5\n\
-	ldrb r7, [r2]\n\
-	adds r1, r6, r1\n\
-	ldrb r0, [r1]\n\
-	strb r0, [r2]\n\
-	strb r7, [r1]\n\
-	lsls r4, 16\n\
-	lsrs r5, r4, 16\n\
-	cmp r5, 0x7\n\
-	bls _080F7DFC\n\
-	movs r3, 0\n\
-	mov r10, r3\n\
-	movs r5, 0\n\
+    bl Random\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+    adds r4, r5, 0x1\n\
+    adds r1, r4, 0\n\
+    bl __modsi3\n\
+    lsls r0, 16\n\
+    lsrs r1, r0, 16\n\
+    adds r2, r6, r5\n\
+    ldrb r7, [r2]\n\
+    adds r1, r6, r1\n\
+    ldrb r0, [r1]\n\
+    strb r0, [r2]\n\
+    strb r7, [r1]\n\
+    lsls r4, 16\n\
+    lsrs r5, r4, 16\n\
+    cmp r5, 0x7\n\
+    bls _080F7DFC\n\
+    movs r3, 0\n\
+    mov r10, r3\n\
+    movs r5, 0\n\
 _080F7E2A:\n\
-	lsls r4, r5, 2\n\
-	mov r1, sp\n\
-	adds r0, r1, r4\n\
-	ldrb r0, [r0]\n\
-	bl sub_80EAE88\n\
-	add r4, r8\n\
-	strh r0, [r4]\n\
-	add r0, r10\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	mov r10, r0\n\
-	adds r0, r5, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r5, r0, 16\n\
-	cmp r5, 0x5\n\
-	bls _080F7E2A\n\
-	movs r0, 0\n\
-	ldr r2, _080F7E88 @ =gSaveBlock1 + 0x2D94\n\
-	strb r0, [r2, 0x2]\n\
-	movs r7, 0\n\
-	movs r5, 0\n\
+    lsls r4, r5, 2\n\
+    mov r1, sp\n\
+    adds r0, r1, r4\n\
+    ldrb r0, [r0]\n\
+    bl sub_80EAE88\n\
+    add r4, r8\n\
+    strh r0, [r4]\n\
+    add r0, r10\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+    mov r10, r0\n\
+    adds r0, r5, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r5, r0, 16\n\
+    cmp r5, 0x5\n\
+    bls _080F7E2A\n\
+    movs r0, 0\n\
+    ldr r2, _080F7E88 @ =gSaveBlock1 + 0x2D94\n\
+    strb r0, [r2, 0x2]\n\
+    movs r7, 0\n\
+    movs r5, 0\n\
 _080F7E56:\n\
-	bl Random\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	movs r1, 0xA\n\
-	bl __umodsi3\n\
-	lsls r0, 16\n\
-	lsrs r1, r0, 16\n\
-	cmp r1, 0x2\n\
-	bhi _080F7E90\n\
-	cmp r7, 0x7\n\
-	bhi _080F7E90\n\
-	lsls r0, r5, 1\n\
-	add r0, r9\n\
-	ldr r1, _080F7E8C @ =0x0000ffff\n\
-	strh r1, [r0]\n\
-	adds r0, r7, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r7, r0, 16\n\
-	adds r4, r5, 0x1\n\
-	b _080F7EE2\n\
-	.align 2, 0\n\
+    bl Random\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+    movs r1, 0xA\n\
+    bl __umodsi3\n\
+    lsls r0, 16\n\
+    lsrs r1, r0, 16\n\
+    cmp r1, 0x2\n\
+    bhi _080F7E90\n\
+    cmp r7, 0x7\n\
+    bhi _080F7E90\n\
+    lsls r0, r5, 1\n\
+    add r0, r9\n\
+    ldr r1, _080F7E8C @ =0x0000ffff\n\
+    strh r1, [r0]\n\
+    adds r0, r7, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r7, r0, 16\n\
+    adds r4, r5, 0x1\n\
+    b _080F7EE2\n\
+    .align 2, 0\n\
 _080F7E84: .4byte gUnknown_083E53C8\n\
 _080F7E88: .4byte gSaveBlock1 + 0x2D94\n\
 _080F7E8C: .4byte 0x0000ffff\n\
 _080F7E90:\n\
-	bl Random\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	mov r1, r10\n\
-	bl __umodsi3\n\
-	lsls r0, 16\n\
-	lsrs r2, r0, 16\n\
-	movs r1, 0\n\
-	adds r4, r5, 0x1\n\
-	lsls r6, r5, 1\n\
-	cmp r5, 0x5\n\
-	bhi _080F7ECC\n\
-	mov r3, r8\n\
-	ldrh r0, [r3]\n\
-	b _080F7EC2\n\
+    bl Random\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+    mov r1, r10\n\
+    bl __umodsi3\n\
+    lsls r0, 16\n\
+    lsrs r2, r0, 16\n\
+    movs r1, 0\n\
+    adds r4, r5, 0x1\n\
+    lsls r6, r5, 1\n\
+    cmp r5, 0x5\n\
+    bhi _080F7ECC\n\
+    mov r3, r8\n\
+    ldrh r0, [r3]\n\
+    b _080F7EC2\n\
 _080F7EB2:\n\
-	adds r0, r1, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r1, r0, 16\n\
-	cmp r5, 0x5\n\
-	bhi _080F7ECC\n\
-	lsls r0, r1, 2\n\
-	adds r0, r3, r0\n\
-	ldrh r0, [r0]\n\
+    adds r0, r1, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r1, r0, 16\n\
+    cmp r5, 0x5\n\
+    bhi _080F7ECC\n\
+    lsls r0, r1, 2\n\
+    adds r0, r3, r0\n\
+    ldrh r0, [r0]\n\
 _080F7EC2:\n\
-	subs r0, r2, r0\n\
-	lsls r0, 16\n\
-	lsrs r2, r0, 16\n\
-	cmp r0, 0\n\
-	bgt _080F7EB2\n\
+    subs r0, r2, r0\n\
+    lsls r0, 16\n\
+    lsrs r2, r0, 16\n\
+    cmp r0, 0\n\
+    bgt _080F7EB2\n\
 _080F7ECC:\n\
-	cmp r1, 0x6\n\
-	bne _080F7ED2\n\
-	movs r1, 0\n\
+    cmp r1, 0x6\n\
+    bne _080F7ED2\n\
+    movs r1, 0\n\
 _080F7ED2:\n\
-	lsls r0, r1, 2\n\
-	add r0, sp\n\
-	ldrh r0, [r0]\n\
-	bl sub_80EB784\n\
-	mov r2, r9\n\
-	adds r1, r2, r6\n\
-	strh r0, [r1]\n\
+    lsls r0, r1, 2\n\
+    add r0, sp\n\
+    ldrh r0, [r0]\n\
+    bl sub_80EB784\n\
+    mov r2, r9\n\
+    adds r1, r2, r6\n\
+    strh r0, [r1]\n\
 _080F7EE2:\n\
-	lsls r0, r4, 16\n\
-	lsrs r5, r0, 16\n\
-	cmp r5, 0x9\n\
-	bls _080F7E56\n\
-	add sp, 0x18\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
+    lsls r0, r4, 16\n\
+    lsrs r5, r0, 16\n\
+    cmp r5, 0x9\n\
+    bls _080F7E56\n\
+    add sp, 0x18\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
     .syntax divided\n");
 }
 #endif
@@ -987,41 +987,41 @@ struct Story
 
 static const struct Story sStorytellerStories[] =
 {
-	{0x32, 1, gTextStoryteller_Story1Title,  gTextStoryteller_Story1Action,  gTextStoryteller_Story1Text},
-	{0x02, 1, gTextStoryteller_Story2Title,  gTextStoryteller_Story2Action,  gTextStoryteller_Story2Text},
-	{0x03, 1, gTextStoryteller_Story3Title,  gTextStoryteller_Story3Action,  gTextStoryteller_Story3Text},
-	{0x04, 1, gTextStoryteller_Story4Title,  gTextStoryteller_Story4Action,  gTextStoryteller_Story4Text},
-	{0x06, 1, gTextStoryteller_Story5Title,  gTextStoryteller_Story5Action,  gTextStoryteller_Story5Text},
-	{0x09, 1, gTextStoryteller_Story6Title,  gTextStoryteller_Story6Action,  gTextStoryteller_Story6Text},
-	{0x0B, 1, gTextStoryteller_Story7Title,  gTextStoryteller_Story7Action,  gTextStoryteller_Story7Text},
-	{0x0C, 1, gTextStoryteller_Story8Title,  gTextStoryteller_Story8Action,  gTextStoryteller_Story8Text},
-	{0x0D, 1, gTextStoryteller_Story9Title,  gTextStoryteller_Story9Action,  gTextStoryteller_Story9Text},
-	{0x0E, 1, gTextStoryteller_Story10Title, gTextStoryteller_Story10Action, gTextStoryteller_Story10Text},
-	{0x0F, 1, gTextStoryteller_Story11Title, gTextStoryteller_Story11Action, gTextStoryteller_Story11Text},
-	{0x10, 1, gTextStoryteller_Story12Title, gTextStoryteller_Story12Action, gTextStoryteller_Story12Text},
-	{0x11, 1, gTextStoryteller_Story13Title, gTextStoryteller_Story13Action, gTextStoryteller_Story13Text},
-	{0x12, 1, gTextStoryteller_Story14Title, gTextStoryteller_Story14Action, gTextStoryteller_Story14Text},
-	{0x13, 1, gTextStoryteller_Story15Title, gTextStoryteller_Story15Action, gTextStoryteller_Story15Text},
-	{0x14, 1, gTextStoryteller_Story16Title, gTextStoryteller_Story16Action, gTextStoryteller_Story16Text},
-	{0x1A, 1, gTextStoryteller_Story17Title, gTextStoryteller_Story17Action, gTextStoryteller_Story17Text},
-	{0x1B, 1, gTextStoryteller_Story18Title, gTextStoryteller_Story18Action, gTextStoryteller_Story18Text},
-	{0x1C, 1, gTextStoryteller_Story19Title, gTextStoryteller_Story19Action, gTextStoryteller_Story19Text},
-	{0x1D, 2, gTextStoryteller_Story20Title, gTextStoryteller_Story20Action, gTextStoryteller_Story20Text},
-	{0x1E, 1, gTextStoryteller_Story21Title, gTextStoryteller_Story21Action, gTextStoryteller_Story21Text},
-	{0x21, 1, gTextStoryteller_Story22Title, gTextStoryteller_Story22Action, gTextStoryteller_Story22Text},
-	{0x24, 1, gTextStoryteller_Story23Title, gTextStoryteller_Story23Action, gTextStoryteller_Story23Text},
-	{0x25, 1, gTextStoryteller_Story24Title, gTextStoryteller_Story24Action, gTextStoryteller_Story24Text},
-	{0x26, 1, gTextStoryteller_Story25Title, gTextStoryteller_Story25Action, gTextStoryteller_Story25Text},
-	{0x27, 1, gTextStoryteller_Story26Title, gTextStoryteller_Story26Action, gTextStoryteller_Story26Text},
-	{0x28, 1, gTextStoryteller_Story27Title, gTextStoryteller_Story27Action, gTextStoryteller_Story27Text},
-	{0x29, 1, gTextStoryteller_Story28Title, gTextStoryteller_Story28Action, gTextStoryteller_Story28Text},
-	{0x2A, 1, gTextStoryteller_Story29Title, gTextStoryteller_Story29Action, gTextStoryteller_Story29Text},
-	{0x2B, 1, gTextStoryteller_Story30Title, gTextStoryteller_Story30Action, gTextStoryteller_Story30Text},
-	{0x2C, 1, gTextStoryteller_Story31Title, gTextStoryteller_Story31Action, gTextStoryteller_Story31Text},
-	{0x2D, 1, gTextStoryteller_Story32Title, gTextStoryteller_Story32Action, gTextStoryteller_Story32Text},
-	{0x2E, 1, gTextStoryteller_Story33Title, gTextStoryteller_Story33Action, gTextStoryteller_Story33Text},
-	{0x2F, 1, gTextStoryteller_Story34Title, gTextStoryteller_Story34Action, gTextStoryteller_Story34Text},
-	{0x30, 1, gTextStoryteller_Story35Title, gTextStoryteller_Story35Action, gTextStoryteller_Story35Text},
+    {0x32, 1, gTextStoryteller_Story1Title,  gTextStoryteller_Story1Action,  gTextStoryteller_Story1Text},
+    {0x02, 1, gTextStoryteller_Story2Title,  gTextStoryteller_Story2Action,  gTextStoryteller_Story2Text},
+    {0x03, 1, gTextStoryteller_Story3Title,  gTextStoryteller_Story3Action,  gTextStoryteller_Story3Text},
+    {0x04, 1, gTextStoryteller_Story4Title,  gTextStoryteller_Story4Action,  gTextStoryteller_Story4Text},
+    {0x06, 1, gTextStoryteller_Story5Title,  gTextStoryteller_Story5Action,  gTextStoryteller_Story5Text},
+    {0x09, 1, gTextStoryteller_Story6Title,  gTextStoryteller_Story6Action,  gTextStoryteller_Story6Text},
+    {0x0B, 1, gTextStoryteller_Story7Title,  gTextStoryteller_Story7Action,  gTextStoryteller_Story7Text},
+    {0x0C, 1, gTextStoryteller_Story8Title,  gTextStoryteller_Story8Action,  gTextStoryteller_Story8Text},
+    {0x0D, 1, gTextStoryteller_Story9Title,  gTextStoryteller_Story9Action,  gTextStoryteller_Story9Text},
+    {0x0E, 1, gTextStoryteller_Story10Title, gTextStoryteller_Story10Action, gTextStoryteller_Story10Text},
+    {0x0F, 1, gTextStoryteller_Story11Title, gTextStoryteller_Story11Action, gTextStoryteller_Story11Text},
+    {0x10, 1, gTextStoryteller_Story12Title, gTextStoryteller_Story12Action, gTextStoryteller_Story12Text},
+    {0x11, 1, gTextStoryteller_Story13Title, gTextStoryteller_Story13Action, gTextStoryteller_Story13Text},
+    {0x12, 1, gTextStoryteller_Story14Title, gTextStoryteller_Story14Action, gTextStoryteller_Story14Text},
+    {0x13, 1, gTextStoryteller_Story15Title, gTextStoryteller_Story15Action, gTextStoryteller_Story15Text},
+    {0x14, 1, gTextStoryteller_Story16Title, gTextStoryteller_Story16Action, gTextStoryteller_Story16Text},
+    {0x1A, 1, gTextStoryteller_Story17Title, gTextStoryteller_Story17Action, gTextStoryteller_Story17Text},
+    {0x1B, 1, gTextStoryteller_Story18Title, gTextStoryteller_Story18Action, gTextStoryteller_Story18Text},
+    {0x1C, 1, gTextStoryteller_Story19Title, gTextStoryteller_Story19Action, gTextStoryteller_Story19Text},
+    {0x1D, 2, gTextStoryteller_Story20Title, gTextStoryteller_Story20Action, gTextStoryteller_Story20Text},
+    {0x1E, 1, gTextStoryteller_Story21Title, gTextStoryteller_Story21Action, gTextStoryteller_Story21Text},
+    {0x21, 1, gTextStoryteller_Story22Title, gTextStoryteller_Story22Action, gTextStoryteller_Story22Text},
+    {0x24, 1, gTextStoryteller_Story23Title, gTextStoryteller_Story23Action, gTextStoryteller_Story23Text},
+    {0x25, 1, gTextStoryteller_Story24Title, gTextStoryteller_Story24Action, gTextStoryteller_Story24Text},
+    {0x26, 1, gTextStoryteller_Story25Title, gTextStoryteller_Story25Action, gTextStoryteller_Story25Text},
+    {0x27, 1, gTextStoryteller_Story26Title, gTextStoryteller_Story26Action, gTextStoryteller_Story26Text},
+    {0x28, 1, gTextStoryteller_Story27Title, gTextStoryteller_Story27Action, gTextStoryteller_Story27Text},
+    {0x29, 1, gTextStoryteller_Story28Title, gTextStoryteller_Story28Action, gTextStoryteller_Story28Text},
+    {0x2A, 1, gTextStoryteller_Story29Title, gTextStoryteller_Story29Action, gTextStoryteller_Story29Text},
+    {0x2B, 1, gTextStoryteller_Story30Title, gTextStoryteller_Story30Action, gTextStoryteller_Story30Text},
+    {0x2C, 1, gTextStoryteller_Story31Title, gTextStoryteller_Story31Action, gTextStoryteller_Story31Text},
+    {0x2D, 1, gTextStoryteller_Story32Title, gTextStoryteller_Story32Action, gTextStoryteller_Story32Text},
+    {0x2E, 1, gTextStoryteller_Story33Title, gTextStoryteller_Story33Action, gTextStoryteller_Story33Text},
+    {0x2F, 1, gTextStoryteller_Story34Title, gTextStoryteller_Story34Action, gTextStoryteller_Story34Text},
+    {0x30, 1, gTextStoryteller_Story35Title, gTextStoryteller_Story35Action, gTextStoryteller_Story35Text},
     {0x31, 1, gTextStoryteller_Story36Title, gTextStoryteller_Story36Action, gTextStoryteller_Story36Text},
 };
 
