@@ -10,18 +10,19 @@ MAUVILLE_MAN_GIDDY       = 4
 MauvilleCity_PokemonCenter_1F_EventScript_1AE744:: @ 81AE744
 	special ScrSpecial_GetCurrentMauvilleMan
 	switch RESULT
-	case MAUVILLE_MAN_BARD,        speak_to_bard
-	case MAUVILLE_MAN_HIPSTER,     speak_to_hipster
-	case MAUVILLE_MAN_TRADER,      speak_to_trader
-	case MAUVILLE_MAN_STORYTELLER, speak_to_storyteller
-	case MAUVILLE_MAN_GIDDY,       speak_to_giddy
+	case MAUVILLE_MAN_BARD,        SpeakToBard
+	case MAUVILLE_MAN_HIPSTER,     SpeakToHipster
+	case MAUVILLE_MAN_TRADER,      SpeakToTrader
+	case MAUVILLE_MAN_STORYTELLER, SpeakToStoryteller
+	case MAUVILLE_MAN_GIDDY,       SpeakToGiddy
 	end
+
 
 @-------------------------------------------------------------------------------
 @ Bard
 @-------------------------------------------------------------------------------
 
-speak_to_bard:
+SpeakToBard:
 	lock
 	faceplayer
 	msgbox gTextBard_HiImTheBard, MSGBOX_YESNO
@@ -30,6 +31,7 @@ speak_to_bard:
 	compare RESULT, NO
 	jumpeq dont_hear_song
 	end
+
 yes_hear_song:
 	setvar 0x8004, 0
 	@ Give the player ear rape
@@ -42,10 +44,12 @@ yes_hear_song:
 	msgbox gTextBard_OhWhatAMovingSong, 4
 	release
 	end
+
 dont_hear_song:
 	msgbox gTextBard_OhYouveLeftMe, 4
 	release
 	end
+
 prompt_write_lyrics:
 	msgbox gTextBard_SoHowDoYouLikeMySong, MSGBOX_YESNO
 	compare RESULT, YES
@@ -53,6 +57,7 @@ prompt_write_lyrics:
 	compare RESULT, NO
 	jumpeq dont_write_lyrics
 	end
+
 write_lyrics:
 	setvar 0x8004, 6
 	call MauvilleCity_PokemonCenter_1F_EventScript_1A00F3
@@ -72,16 +77,18 @@ write_lyrics:
 	msgbox gTextBard_OkayThatsIt, 4
 	release
 	end
+
 dont_write_lyrics:
 	msgbox gTextBard_OhYouveLeftMe2, 4
 	release
 	end
 
+
 @-------------------------------------------------------------------------------
 @ Hipster
 @-------------------------------------------------------------------------------
 
-speak_to_hipster:
+SpeakToHipster:
 	lock
 	faceplayer
 	setflag 2054
@@ -92,6 +99,7 @@ speak_to_hipster:
 	msgbox gTextHipster_TaughtYouAlready, 4
 	release
 	end
+
 hipster_first_time:
 	special ScrSpecial_HipsterTeachWord
 	compare RESULT, TRUE		@ TRUE if player learned a new word
@@ -99,11 +107,13 @@ hipster_first_time:
 	msgbox gTextHipster_YouAlreadyKnowALot, 4
 	release
 	end
+
 teach_new_word:
 	msgbox gTextHipster_HaveYouHeardAbout, 4
 	special ScrSpecial_SetHipsterSpokenFlag
 	release
 	end
+
 
 @-------------------------------------------------------------------------------
 @ Trader
@@ -111,7 +121,7 @@ teach_new_word:
 
 	.include "data/text/trader.inc"
 
-speak_to_trader:
+SpeakToTrader:
 	lock
 	faceplayer
 	msgbox gTextTrader_Introduction, MSGBOX_YESNO
@@ -124,12 +134,15 @@ speak_to_trader:
 	waittext
 	jump do_trader_menu_get
 	end
+
 dont_want_to_trade:
 	msgbox gTextTrader_FeelUnwanted1, 2
 	end
+
 already_traded:
 	msgbox gTextTrader_TradedAlready, 2
 	end
+
 do_trader_menu_get:
 	special ScrSpecial_TraderMenuGetDecoration
 	waitstate
@@ -145,22 +158,27 @@ do_trader_menu_get:
 	jumpeq player_has_no_decorations
 	jump do_trader_menu_give
 	end
+
 cancelled_get_menu:
 	msgbox gTextTrader_DontWantAnything, 2
 	end
+
 rare_item_cant_trade_away:
 	message gTextTrader_ICantTradeThatOneAway
 	waittext
 	jump do_trader_menu_get
 	end
+
 dont_want_item:
 	message gTextTrader_MenuPrompt
 	waittext
 	jump do_trader_menu_get
 	end
+
 player_has_no_decorations:
 	msgbox gTextTrader_YouDontHaveDecorations, 2
 	end
+
 do_trader_menu_give:
 	msgbox gTextTrader_PickDecorationYoullTrade, 4
 	special ScrSpecial_TraderMenuGiveDecoration
@@ -178,16 +196,20 @@ do_trader_menu_give:
 	special ScrSpecial_TraderDoDecorationTrade
 	msgbox gTextTrader_ThenWellTrade, 2
 	end
+
 cancelled_give_menu:
 	msgbox gTextTrader_FeelUnwanted2, 2
 	end
+
 decoration_is_in_use:
 	msgbox gTextTrader_InUseYouCantTradeIt, 4
 	jump do_trader_menu_give
 	end
+
 decorations_full:
 	msgbox gTextTrader_NoRoomForThis, 2
 	end
+
 
 @-------------------------------------------------------------------------------
 @ Storyteller
@@ -195,7 +217,7 @@ decorations_full:
 
 	.include "data/text/storyteller.inc"
 
-speak_to_storyteller:
+SpeakToStoryteller:
 	setvar 0x8008, 0
 	setvar 0x8009, 0
 	setvar 0x800a, 0
@@ -253,21 +275,25 @@ prompt_record_story:
 	closebutton
 	release
 	end
+
 stat_update:
 	msgbox gTextStoryteller_BirthOfANewLegend, 4
 	closebutton
 	release
 	end
+
 dont_hear_story:
 	msgbox gTextStoryteller_OhIFeelStifled, 4
 	closebutton
 	release
 	end
+
 cant_record_story:
 	msgbox gTextStoryteller_WishMorePeopleWould, 4
 	closebutton
 	release
 	end
+
 
 @-------------------------------------------------------------------------------
 @ Giddy
@@ -275,7 +301,7 @@ cant_record_story:
 
 	.include "data/text/giddy.inc"
 
-speak_to_giddy:
+SpeakToGiddy:
 	lock
 	faceplayer
 	msgbox gTextGiddy_Introduction, MSGBOX_YESNO
@@ -284,6 +310,7 @@ speak_to_giddy:
 	compare RESULT, NO
 	jumpeq dont_hear_giddy
 	end
+
 yes_hear_giddy:
 	special ScrSpecial_GiddyShouldTellAnotherTale
 	compare RESULT, TRUE
@@ -291,6 +318,7 @@ yes_hear_giddy:
 	compare RESULT, FALSE
 	jumpeq bye_bye
 	end
+
 tell_another_giddy_tale:
 	special ScrSpecial_GiddyShouldTellAnotherTale
 	compare RESULT, TRUE
@@ -298,10 +326,12 @@ tell_another_giddy_tale:
 	compare RESULT, FALSE
 	jumpeq bye_bye
 	end
+
 also_i_was_thinking:
 	msgbox gTextGiddy_AlsoIWasThinking, 4
 	jump tell_giddy_tale
 	end
+
 tell_giddy_tale:
 	special ScrSpecial_GenerateGiddyLine
 	special ShowFieldMessageStringVar4
@@ -312,10 +342,12 @@ tell_giddy_tale:
 	compare RESULT, 0
 	jumpeq tell_another_giddy_tale
 	end
+
 dont_hear_giddy:
 	msgbox gTextGiddy_YouveDeflatedMe, 4
 	release
 	end
+
 bye_bye:
 	msgbox gTextGiddy_ByeBye, 4
 	release
