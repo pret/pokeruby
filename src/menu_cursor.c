@@ -186,73 +186,67 @@ void sub_814A904(void)
     return;
 }
 
+#if ENGLISH
 #ifdef NONMATCHING
 // Fix pls
-void sub_814A958(u8 a1)
+void sub_814A958(u8 a)
 {
-    struct Subsprite *cursub;
-    u8 v2; // r7@1
-    s16 v3; // r2@1
-    s32 v5; // r0@1
-    s32 v6; // r3@1
-    s32 v7; // r5@3
-    int v8; // r7@9
-    s16 negone;
+    u8 r7;
+    struct Subsprite *r4 = &gMenuCursorSubsprites[0];
+    s16 r2 = -1;
+    s32 _a = a;
+    s16 r5;
+    s16 i;
 
-    cursub = &gMenuCursorSubsprites[0];
-    negone = -1;
-    cursub = (struct Subsprite){0,2};
-    cursub->x = negone;
-    cursub++;
-
-    v2 = 1;
-    v3 = 1;
-    v5 = (a1 - 1) << 0x10;
-    v6 = v5 >> 0x10;
-    if ((v5 >> 0x10) > 7)
+    *r4 = (struct Subsprite){.x = 0, .y = 0, .shape = 2, .size = 0, .tileOffset = 0, .priority = 0};
+    r4->x = r2;
+    r4++;
+    r7 = 1;
+    r2 = 1;
+    r5 = a;
+    i = r5;
+    while ((i -= r2) >= 8)
     {
-        do
+        if (i > 0x1F)
         {
-            if (v6 > 0x1F)
+            *r4 = gUnknown_0842F780;
+            r4->x = r2;
+            r2 += 32;
+            r5 = a;
+        }
+        //_0814A9D4
+        else
+        {
+            r5 = a;
+            if (_a > 0x27 && i > 8)
             {
-                *cursub = gUnknown_0842F780;
-                cursub->x = v3;
-                v3 = ((v3 << 16) + 0x200000) >> 16;
-                v7 = a1 << 16;
+                *r4 = gUnknown_0842F780;
+                r4->x = (r2 - 32) + (i & ~7);
+                r2 += i & 0x18;
             }
+            //_0814AA0A
             else
             {
-                v7 = a1 << 16;
-                if (a1 <= 0x27 || v6 <= 0x8)
-                {
-                    *cursub = gUnknown_0842F788;
-                    cursub->x = v3;
-                    v3 = ((v3 << 16) + 0x80000) >> 16;
-                }
-                else
-                {
-                    *cursub = gUnknown_0842F780;
-                    cursub->x = v3 - 0x20 + (v6 & 0xFFF8);
-                    v3 = (v3 + (v6 & 0x18)) & negone;
-                }
+                *r4 = gUnknown_0842F788;
+                r4->x = r2;
+                r2 += 8;
             }
-
-            cursub++;
-            v2 = v2 + 1;
-            v6 = ((v7 >> 16) - v3) & 0xFFFF;
         }
-        while (v7 - v3 > 7);
+        //_0814AA20
+        r4++;
+        r7++;
+        i = r5;
     }
-    *cursub = gUnknown_0842F790;
-    cursub->x = v6 + v3 - 7;
-    v8 = v2 + 1;
-    if (gUnknown_0203A3D0 != 0x40)
-        SetSubspriteTables(&gSprites[gUnknown_0203A3D0], &gSubspriteTables_842F5C0[v8]);
-    if (gUnknown_0203A3D1 != 0x40)
-        SetSubspriteTables(&gSprites[gUnknown_0203A3D1], &gSubspriteTables_842F5C0[v8]);
-    return;
+    //_0814AA3A
+    *r4 = gUnknown_0842F790;
+    r4->x = r2 - 7 + i;
+    r7++;
+    if (gUnknown_0203A3D0 != 64)
+        SetSubspriteTables(&gSprites[gUnknown_0203A3D0], gSubspriteTables_842F5C0 + r7);
+    if (gUnknown_0203A3D1 != 64)
+        SetSubspriteTables(&gSprites[gUnknown_0203A3D1], gSubspriteTables_842F5C0 + r7);
 }
-#elif ENGLISH
+#else
 __attribute__((naked))
 void sub_814A958(u8 a1)
 {
@@ -434,6 +428,7 @@ _0814AAB4: .4byte gSubspriteTables_842F5C0\n\
 _0814AAB8: .4byte gUnknown_0203A3D1\n\
     .syntax divided\n");
 }
+#endif
 #elif GERMAN
 __attribute__((naked))
 void sub_814A958(u8 a1)
