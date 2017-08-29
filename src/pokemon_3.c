@@ -457,7 +457,7 @@ u16 HoennToNationalOrder(u16 hoennNum)
     return gHoennToNationalOrder[hoennNum - 1];
 }
 
-u32 SpeciesToCryId(u16 species)
+u16 SpeciesToCryId(u16 species)
 {
     if (species <= 250)
         return species;

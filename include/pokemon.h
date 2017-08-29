@@ -576,6 +576,7 @@ u16 NationalPokedexNumToSpecies(u16 nationalNum);
 u16 NationalToHoennOrder(u16);
 u16 SpeciesToNationalPokedexNum(u16);
 u16 HoennToNationalOrder(u16);
+u16 SpeciesToCryId(u16 species);
 void DrawSpindaSpots(u16, u32, u8 *, u8);
 u8 sub_803FBBC(void);
 u8 sub_803FC58(u16);
