@@ -44,7 +44,7 @@ extern u8 gEnemyMonElevation[];
 extern const u8 gTrainerClassNames[][13];
 extern const struct Trainer gTrainers[];
 extern u8 gSpeciesNames[][11];
-extern u8 gMoveNames[][13];
+extern const u8 gMoveNames[][13];
 extern const u8 gAbilityNames[][13];
 extern const u8 gTypeNames[][7];
 extern const struct UnknownStructD2 gUnknown_081F9674;

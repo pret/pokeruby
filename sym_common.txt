@@ -160,14 +160,7 @@ gUnknown_03005560: @ 3005560
 gUnknown_030056A0: @ 30056A0
 	.space 0x640
 
-@ pokemon_menu
-
-gLastFieldPokeMenuOpened: @ 3005CE0
-	.space 0x4
-
-gUnknown_03005CE4: @ 3005CE4
-	.space 0x4
-
+    .include "pokemon_menu.o"
 	.include "pokedex.o"
 
 @ pokemon_summary_screen
