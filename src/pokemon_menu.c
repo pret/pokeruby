@@ -84,9 +84,9 @@ void sub_8089C50(u8 arg0, u8 arg1, u8 arg2, u8 arg3, const struct MenuAction* ar
 
 void sub_8089C7C(u8 arg0)
 {
-    u8 var1 = 18;
-    u8 var2 = (sPokeMenuOptionsNo * 2);
+    u32 r4 = (u8)(18 - (sPokeMenuOptionsNo << 1));
 
-    sub_8089BDC(19, var1 - var2, 10, sPokeMenuOptionsNo, sPokemonMenuActions, sPokeMenuOptionsIDs, 3);
-    InitMenu(0, 20, (var1 - var2) | 1, sPokeMenuOptionsNo, arg0, 9);
+    sub_8089BDC(19, r4, 10, sPokeMenuOptionsNo, sPokemonMenuActions, sPokeMenuOptionsIDs, 3);
+    r4 |= 1;
+    InitMenu(0, 20, r4, sPokeMenuOptionsNo, arg0, 9);
 }
