@@ -365,7 +365,7 @@ EvolutionScene: @ 8111984
 	movs r3, 0x4
 	orrs r0, r3
 	strb r0, [r1]
-	bl sub_8149954
+	bl LoadEvoSparkleSpriteAndPal
 	ldr r0, _08111C74 @ =Task_EvolutionScene
 	movs r1, 0
 	bl CreateTask
@@ -1035,7 +1035,7 @@ TradeEvolutionScene: @ 81120E4
 	movs r2, 0x4
 	orrs r0, r2
 	strb r0, [r1]
-	bl sub_8149954
+	bl LoadEvoSparkleSpriteAndPal
 	ldr r0, _08112264 @ =Task_TradeEvolutionScene
 	movs r1, 0
 	bl CreateTask
@@ -1502,7 +1502,7 @@ _081125FC:
 	bl _08112FD0
 _0811260C:
 	movs r0, 0x11
-	bl sub_8149970
+	bl LaunchTask_PreEvoSparklesSet1
 	ldr r1, _08112628 @ =gBattleCommunication
 	strb r0, [r1, 0x2]
 	ldr r0, _0811262C @ =gTasks
@@ -1537,7 +1537,7 @@ _08112646:
 	ldr r1, _08112668 @ =0x02014800
 	movs r0, 0x1
 	strb r0, [r1, 0x3]
-	bl sub_8149A90
+	bl LaunchTask_PreEvoSparklesSet2
 	strb r0, [r4, 0x2]
 	bl _08112FD0
 	.align 2, 0
@@ -1600,7 +1600,7 @@ _081126CC:
 _081126D8: .4byte 0x02014800
 _081126DC: .4byte gBattleCommunication
 _081126E0:
-	bl sub_8149B44
+	bl LaunchTask_PostEvoSparklesSet1
 	ldr r1, _081126F4 @ =gBattleCommunication
 	strb r0, [r1, 0x2]
 	ldr r0, _081126F8 @ =gTasks
@@ -1629,7 +1629,7 @@ _08112712:
 	lsls r4, 3
 	adds r4, r6
 	ldrh r0, [r4, 0x10]
-	bl sub_8149C20
+	bl LaunchTask_PostEvoSparklesSet2AndFlash
 	strb r0, [r5, 0x2]
 	b _08112992
 	.align 2, 0
@@ -2807,7 +2807,7 @@ _0811315C:
 	adds r0, r2, 0
 	strh r0, [r1]
 	movs r0, 0x11
-	bl sub_8149970
+	bl LaunchTask_PreEvoSparklesSet1
 	ldr r1, _08113184 @ =gBattleCommunication
 	strb r0, [r1, 0x2]
 	ldr r1, _08113188 @ =gTasks
@@ -2842,7 +2842,7 @@ _081131A2:
 	ldr r1, _081131C4 @ =0x02014800
 	movs r0, 0x1
 	strb r0, [r1, 0x3]
-	bl sub_8149A90
+	bl LaunchTask_PreEvoSparklesSet2
 	strb r0, [r4, 0x2]
 	bl _08113B3A
 	.align 2, 0
@@ -2897,7 +2897,7 @@ _08113220:
 _08113224: .4byte 0x02014800
 _08113228: .4byte gBattleCommunication
 _0811322C:
-	bl sub_8149B44
+	bl LaunchTask_PostEvoSparklesSet1
 	ldr r1, _08113240 @ =gBattleCommunication
 	strb r0, [r1, 0x2]
 	ldr r1, _08113244 @ =gTasks
@@ -2926,7 +2926,7 @@ _0811325E:
 	lsls r4, 3
 	adds r4, r6
 	ldrh r0, [r4, 0x10]
-	bl sub_8149D5C
+	bl LaunchTask_PostEvoSparklesSet2AndFlash_Trade
 	strb r0, [r5, 0x2]
 	b _081132E2
 	.align 2, 0

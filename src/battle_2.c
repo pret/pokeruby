@@ -1347,8 +1347,8 @@ void sub_8010384(struct Sprite *sprite)
     u16 species;
     u8 yOffset;
 
-    if (ewram17800[r6].unk2 != 0)
-        species = ewram17800[r6].unk2;
+    if (ewram17800[r6].transformedSpecies != 0)
+        species = ewram17800[r6].transformedSpecies;
     else
         species = sprite->data2;
 
@@ -1866,7 +1866,7 @@ static void BattlePrepIntroSlide(void)
     if (gBattleExecBuffer == 0)
     {
         gActiveBank = GetBankByPlayerAI(0);
-        EmitBattleIntroSlide(0, gBattleTerrain);
+        EmitIntroSlide(0, gBattleTerrain);
         MarkBufferBankForExecution(gActiveBank);
         gBattleMainFunc = sub_8011384;
         gBattleCommunication[0] = 0;
@@ -1910,7 +1910,7 @@ void sub_8011384(void)
 
             if (GetBankIdentity(gActiveBank) == 0)
             {
-                dp01_build_cmdbuf_x07_7_7_7(0);
+                EmitTrainerThrow(0);
                 MarkBufferBankForExecution(gActiveBank);
             }
 
@@ -1918,7 +1918,7 @@ void sub_8011384(void)
             {
                 if (GetBankIdentity(gActiveBank) == 1)
                 {
-                    dp01_build_cmdbuf_x07_7_7_7(0);
+                    EmitTrainerThrow(0);
                     MarkBufferBankForExecution(gActiveBank);
                 }
                 if (GetBankSide(gActiveBank) == 1
@@ -1931,7 +1931,7 @@ void sub_8011384(void)
                  && !(gBattleTypeFlags & (BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_LINK)))
                 {
                     GetNationalPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gActiveBank].species), 2);
-                    dp01_build_cmdbuf_x04_4_4_4(0);
+                    EmitLoadPokeSprite(0);
                     MarkBufferBankForExecution(gActiveBank);
                 }
             }
@@ -1941,7 +1941,7 @@ void sub_8011384(void)
                 if (GetBankIdentity(gActiveBank) == 2
                  || GetBankIdentity(gActiveBank) == 3)
                 {
-                    dp01_build_cmdbuf_x07_7_7_7(0);
+                    EmitTrainerThrow(0);
                     MarkBufferBankForExecution(gActiveBank);
                 }
             }
@@ -1979,7 +1979,7 @@ void bc_801333C(void)
                 }
             }
             gActiveBank = GetBankByPlayerAI(1);
-            dp01_build_cmdbuf_x30_TODO(0, (u8 *)sp0, 0x80);
+            Emitcmd48(0, (u8 *)sp0, 0x80);
             MarkBufferBankForExecution(gActiveBank);
 
             for (i = 0; i < 6; i++)
@@ -1997,7 +1997,7 @@ void bc_801333C(void)
                 }
             }
             gActiveBank = GetBankByPlayerAI(0);
-            dp01_build_cmdbuf_x30_TODO(0, (u8 *)sp0, 0x80);
+            Emitcmd48(0, (u8 *)sp0, 0x80);
             MarkBufferBankForExecution(gActiveBank);
 
             gBattleMainFunc = bc_battle_begin_message;
@@ -2063,13 +2063,13 @@ void sub_8011834(void)
         {
             if (GetBankIdentity(gActiveBank) == 1)
             {
-                dp01_build_cmdbuf_x2F_2F_2F_2F(0);
+                EmitTrainerBallThrow(0);
                 MarkBufferBankForExecution(gActiveBank);
             }
             if ((gBattleTypeFlags & BATTLE_TYPE_MULTI)
              && GetBankIdentity(gActiveBank) == 3)
             {
-                dp01_build_cmdbuf_x2F_2F_2F_2F(0);
+                EmitTrainerBallThrow(0);
                 MarkBufferBankForExecution(gActiveBank);
             }
         }
@@ -2115,13 +2115,13 @@ void sub_80119B4(void)
         {
             if (GetBankIdentity(gActiveBank) == 0)
             {
-                dp01_build_cmdbuf_x2F_2F_2F_2F(0);
+                EmitTrainerBallThrow(0);
                 MarkBufferBankForExecution(gActiveBank);
             }
             if ((gBattleTypeFlags & BATTLE_TYPE_MULTI)
              && GetBankIdentity(gActiveBank) == 2)
             {
-                dp01_build_cmdbuf_x2F_2F_2F_2F(0);
+                EmitTrainerBallThrow(0);
                 MarkBufferBankForExecution(gActiveBank);
             }
         }
@@ -2140,7 +2140,7 @@ void unref_sub_8011A68(void)
         {
             if (GetBankSide(gActiveBank) == 0)
             {
-                EmitSwitchInAnim(0, gBattlePartyID[gActiveBank], 0);
+                EmitSendOutPoke(0, gBattlePartyID[gActiveBank], 0);
                 MarkBufferBankForExecution(gActiveBank);
             }
         }
@@ -2429,7 +2429,7 @@ void sub_8012324(void)
             }
             else
             {
-                dp01_build_cmdbuf_x12_a_bb(0, gActionForBanks[0], gBattleBufferB[0][1] | (gBattleBufferB[0][2] << 8));
+                Emitcmd18(0, gActionForBanks[0], gBattleBufferB[0][1] | (gBattleBufferB[0][2] << 8));
                 MarkBufferBankForExecution(gActiveBank);
                 gBattleCommunication[gActiveBank]++;
             }

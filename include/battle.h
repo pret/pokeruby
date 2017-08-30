@@ -19,6 +19,15 @@
 #define BATTLE_TYPE_LEGENDARY       0x2000
 #define BATTLE_TYPE_REGI            0x4000
 
+#define BATTLE_WON                  0x1
+#define BATTLE_LOST                 0x2
+#define BATTLE_DREW                 0x3
+#define BATTLE_RAN                  0x4
+#define BATTLE_PLAYER_TELEPORTED    0x5
+#define BATTLE_POKE_FLED            0x6
+#define BATTLE_CAUGHT               0x7
+#define BATTLE_OPPONENT_TELEPORTED  0xA
+
 #define AI_ACTION_DONE          0x0001
 #define AI_ACTION_FLEE          0x0002
 #define AI_ACTION_WATCH         0x0004
@@ -327,7 +336,7 @@ struct BattleStruct /* 0x2000000 */
     /*0x1609D*/ u8 unk1609D;
     /*0x1609E*/ u8 unk1609E;
     /*0x1609F*/ u8 unk1609F;
-    /*0x160A0*/ u8 unk160a0;
+    /*0x160A0*/ u8 stringMoveType;
     /*0x160A1*/ u8 animTargetsHit;
     /*0x160A2*/ u8 expGetterBank;
     /*0x160A3*/ u8 unk160A3;
@@ -511,12 +520,12 @@ struct BattleResults
 
 struct Struct2017800
 {
-    u8 unk0_0:1;
+    u8 invisible:1;
     u8 unk0_1:1;
-    u8 unk0_2:1;
+    u8 substituteSprite:1;
     u8 unk0_3:1;
     u8 unk0_4:1;
-    u16 unk2;
+    u16 transformedSpecies;
 };
 
 struct Struct2017810
@@ -680,13 +689,13 @@ extern u8 gBattleTextBuff1[];
 
 //function declarations of buffer emits
 void EmitGetAttributes(u8 buffID, u8 request, u8 c);    //0x0
-void dp01_build_cmdbuf_x01_a_b_0(u8 a, u8 b, u8 c); //0x1
+void Emitcmd1(u8 a, u8 b, u8 c); //0x1
 void EmitSetAttributes(u8 a, u8 request, u8 c, u8 bytes, void *data);  //0x2
-void EmitSwitchInAnim(u8 a, u8 b, u8 c); //0x5
+void EmitSendOutPoke(u8 a, u8 b, u8 c); //0x5
 void EmitReturnPokeToBall(u8 a, u8 b); //0x6
 void EmitTrainerSlide(u8 a); //0x8
-void EmitFaintAnimation(u8 a);  //0xA
-void EmitBallThrowAnim(u8 a, u8 shakes);  //0xD
+void Emitcmd10(u8 a);  //0xA
+void EmitBallThrow(u8 a, u8 shakes);  //0xD
 //void EmitMoveAnimation(u8 a, u16 move, u8 turn, u16 power, s32 dmg, u8 happiness, void *disable_struct); //0xF
 void EmitPrintString(u8 a, u16 stringID);  //0x10
 //void EmitPrintStringPlayerOnly(u8 a, u16 stringID); //0x11
@@ -698,15 +707,15 @@ void EmitStatusAnimation(u8 a, u8 b, u32 c); //0x1B
 void EmitStatusXor(u8 a, u8 b); //0x1C
 void EmitHitAnimation(u8 a); //0x29
 void EmitEffectivenessSound(u8 a, u16 sound); //0x2B
-void EmitPlaySound(u8 a, u16 sound);    //0x2C
+void Emitcmd44(u8 a, u16 sound);    //0x2C
 void EmitFaintingCry(u8 a); //0x2D
-void EmitBattleIntroSlide(u8 a, u8 b); //0x2E
-void dp01_build_cmdbuf_x30_TODO(u8 a, u8 *b, u8 c); //0x30
-void dp01_build_cmdbuf_x31_31_31_31(u8 a);  //0x31
+void EmitIntroSlide(u8 a, u8 b); //0x2E
+void Emitcmd48(u8 a, u8 *b, u8 c); //0x30
+void Emitcmd49(u8 a);  //0x31
 void EmitSpriteInvisibility(u8 a, u8 b); //0x33
 void EmitBattleAnimation(u8 a, u8 b, u16 c); //0x34
 void EmitResetActionMoveSelection(u8 a, u8 b); //0x36
-void dp01_build_cmdbuf_x37_a(u8 a, u8 b); //0x37
+void Emitcmd55(u8 a, u8 b); //0x37
 
 #define REQUEST_ALL_BATTLE      0x0
 #define REQUEST_SPECIES_BATTLE  0x1

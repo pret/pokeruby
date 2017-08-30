@@ -64,7 +64,6 @@ extern u8 gUnknown_0300434C[];
 extern u8 gBattleMonForms[];
 extern u8 gAnimScriptActive;
 extern void (*gAnimScriptCallback)(void);
-extern void (*const gLinkPartnerBufferCommands[])(void);
 
 extern u8 move_anim_start_t3();
 extern u8 sub_8078874();
@@ -87,12 +86,12 @@ extern void oamt_set_x3A_32();
 extern void sub_8078B34(struct Sprite *);
 extern void sub_80105EC(struct Sprite *);
 extern s32 sub_803FC34(u16);
-extern void sub_8031AF4();
+extern void LoadPlayerTrainerBankSprite();
 extern void sub_80313A0(struct Sprite *);
 extern u8 sub_8046400();
 extern void sub_80312F0(struct Sprite *);
 extern u8 CreateInvisibleSpriteWithCallback();
-extern void sub_80318FC();
+extern void BattleLoadPlayerMonSprite();
 extern u8 sub_8077ABC();
 extern u8 sub_8077F68();
 extern u8 sub_8079E90();
@@ -111,6 +110,8 @@ extern void sub_8031F88();
 extern void sub_8141828();
 extern void c2_8011A1C(void);
 
+// this file's functions
+
 void LinkPartnerBufferRunCommand(void);
 void sub_811E0A0(void);
 void LinkPartnerBufferExecCompleted(void);
@@ -122,6 +123,127 @@ void sub_811FF30(void);
 void sub_812071C(u8);
 void sub_81208E0(void);
 
+void LinkPartnerHandleGetAttributes(void);
+void LinkPartnerHandlecmd1(void);
+void LinkPartnerHandleSetAttributes(void);
+void LinkPartnerHandlecmd3(void);
+void LinkPartnerHandleLoadPokeSprite(void);
+void LinkPartnerHandleSendOutPoke(void);
+void LinkPartnerHandleReturnPokeToBall(void);
+void LinkPartnerHandleTrainerThrow(void);
+void LinkPartnerHandleTrainerSlide(void);
+void LinkPartnerHandleTrainerSlideBack(void);
+void LinkPartnerHandlecmd10(void);
+void LinkPartnerHandlecmd11(void);
+void LinkPartnerHandlecmd12(void);
+void LinkPartnerHandleBallThrow(void);
+void LinkPartnerHandlePuase(void);
+void LinkPartnerHandleMoveAnimation(void);
+void LinkPartnerHandlePrintString(void);
+void LinkPartnerHandlePrintStringPlayerOnly(void);
+void LinkPartnerHandlecmd18(void);
+void LinkPartnerHandlecmd19(void);
+void LinkPartnerHandlecmd20(void);
+void LinkPartnerHandleOpenBag(void);
+void LinkPartnerHandlecmd22(void);
+void LinkPartnerHandlecmd23(void);
+void LinkPartnerHandleHealthBarUpdate(void);
+void LinkPartnerHandleExpBarUpdate(void);
+void LinkPartnerHandleStatusIconUpdate(void);
+void LinkPartnerHandleStatusAnimation(void);
+void LinkPartnerHandleStatusXor(void);
+void LinkPartnerHandlecmd29(void);
+void LinkPartnerHandleDMATransfer(void);
+void LinkPartnerHandlecmd31(void);
+void LinkPartnerHandlecmd32(void);
+void LinkPartnerHandlecmd33(void);
+void LinkPartnerHandlecmd34(void);
+void LinkPartnerHandlecmd35(void);
+void LinkPartnerHandlecmd36(void);
+void LinkPartnerHandlecmd37(void);
+void LinkPartnerHandlecmd38(void);
+void LinkPartnerHandlecmd39(void);
+void LinkPartnerHandlecmd40(void);
+void LinkPartnerHandleHitAnimation(void);
+void LinkPartnerHandlecmd42(void);
+void LinkPartnerHandleEffectivenessSound(void);
+void LinkPartnerHandlecmd44(void);
+void LinkPartnerHandleFaintingCry(void);
+void LinkPartnerHandleIntroSlide(void);
+void LinkPartnerHandleTrainerBallThrow(void);
+void LinkPartnerHandlecmd48(void);
+void LinkPartnerHandlecmd49(void);
+void LinkPartnerHandlecmd50(void);
+void LinkPartnerHandleSpriteInvisibility(void);
+void LinkPartnerHandleBattleAnimation(void);
+void LinkPartnerHandleLinkStandbyMsg(void);
+void LinkPartnerHandleResetActionMoveSelection(void);
+void LinkPartnerHandlecmd55(void);
+void LinkPartnerHandlecmd56(void);
+
+// const data
+typedef void (*BattleBufferCmd) (void);
+static const BattleBufferCmd gLinkPartnerBufferCommands[] =
+{
+    LinkPartnerHandleGetAttributes,
+    LinkPartnerHandlecmd1,
+    LinkPartnerHandleSetAttributes,
+    LinkPartnerHandlecmd3,
+    LinkPartnerHandleLoadPokeSprite,
+    LinkPartnerHandleSendOutPoke,
+    LinkPartnerHandleReturnPokeToBall,
+    LinkPartnerHandleTrainerThrow,
+    LinkPartnerHandleTrainerSlide,
+    LinkPartnerHandleTrainerSlideBack,
+    LinkPartnerHandlecmd10,
+    LinkPartnerHandlecmd11,
+    LinkPartnerHandlecmd12,
+    LinkPartnerHandleBallThrow,
+    LinkPartnerHandlePuase,
+    LinkPartnerHandleMoveAnimation,
+    LinkPartnerHandlePrintString,
+    LinkPartnerHandlePrintStringPlayerOnly,
+    LinkPartnerHandlecmd18,
+    LinkPartnerHandlecmd19,
+    LinkPartnerHandlecmd20,
+    LinkPartnerHandleOpenBag,
+    LinkPartnerHandlecmd22,
+    LinkPartnerHandlecmd23,
+    LinkPartnerHandleHealthBarUpdate,
+    LinkPartnerHandleExpBarUpdate,
+    LinkPartnerHandleStatusIconUpdate,
+    LinkPartnerHandleStatusAnimation,
+    LinkPartnerHandleStatusXor,
+    LinkPartnerHandlecmd29,
+    LinkPartnerHandleDMATransfer,
+    LinkPartnerHandlecmd31,
+    LinkPartnerHandlecmd32,
+    LinkPartnerHandlecmd33,
+    LinkPartnerHandlecmd34,
+    LinkPartnerHandlecmd35,
+    LinkPartnerHandlecmd36,
+    LinkPartnerHandlecmd37,
+    LinkPartnerHandlecmd38,
+    LinkPartnerHandlecmd39,
+    LinkPartnerHandlecmd40,
+    LinkPartnerHandleHitAnimation,
+    LinkPartnerHandlecmd42,
+    LinkPartnerHandleEffectivenessSound,
+    LinkPartnerHandlecmd44,
+    LinkPartnerHandleFaintingCry,
+    LinkPartnerHandleIntroSlide,
+    LinkPartnerHandleTrainerBallThrow,
+    LinkPartnerHandlecmd48,
+    LinkPartnerHandlecmd49,
+    LinkPartnerHandlecmd50,
+    LinkPartnerHandleSpriteInvisibility,
+    LinkPartnerHandleBattleAnimation,
+    LinkPartnerHandleLinkStandbyMsg,
+    LinkPartnerHandleResetActionMoveSelection,
+    LinkPartnerHandlecmd55,
+    LinkPartnerHandlecmd56,
+};
+// code starts here
 
 void nullsub_74(void)
 {
@@ -298,7 +420,7 @@ void sub_811E034(void)
 {
     if (gSprites[gHealthboxIDs[gActiveBank]].callback == SpriteCallbackDummy)
     {
-        if (ewram17800[gActiveBank].unk0_2)
+        if (ewram17800[gActiveBank].substituteSprite)
             move_anim_start_t4(gActiveBank, gActiveBank, gActiveBank, 6);
         gBattleBankFunc[gActiveBank] = sub_811E0A0;
     }
@@ -379,7 +501,7 @@ void LinkPartnerBufferExecCompleted(void)
     if (gBattleTypeFlags & 2)
     {
         multiplayerId = GetMultiplayerId();
-        dp01_prepare_buffer_wireless_probably(2, 4, &multiplayerId);
+        PrepareBufferDataTransferLink(2, 4, &multiplayerId);
         gBattleBufferA[gActiveBank][0] = 0x38;
     }
     else
@@ -421,7 +543,7 @@ void LinkPartnerHandleGetAttributes(void)
             r4 >>= 1;
         }
     }
-    dp01_build_cmdbuf_x1D_1D_numargs_varargs(1, r6, unk);
+    Emitcmd29(1, r6, unk);
     LinkPartnerBufferExecCompleted();
 }
 
@@ -731,7 +853,7 @@ u32 dp01_getattr_by_ch1_for_player_pokemon(u8 a, u8 *buffer)
     return size;
 }
 
-void sub_811EC04(void)
+void LinkPartnerHandlecmd1(void)
 {
     LinkPartnerBufferExecCompleted();
 }
@@ -976,7 +1098,7 @@ void sub_811EC68(u8 a)
     sub_80324F8(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
 }
 
-void sub_811F664(void)
+void LinkPartnerHandlecmd3(void)
 {
     u8 *dst;
     u8 i;
@@ -987,9 +1109,9 @@ void sub_811F664(void)
     LinkPartnerBufferExecCompleted();
 }
 
-void sub_811F6D8(void)
+void LinkPartnerHandleLoadPokeSprite(void)
 {
-    sub_80318FC(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
+    BattleLoadPlayerMonSprite(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
     GetMonSpriteTemplate_803C56C(
       GetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_SPECIES),
       GetBankIdentity(gActiveBank));
@@ -1005,11 +1127,11 @@ void sub_811F6D8(void)
     gBattleBankFunc[gActiveBank] = sub_811DDE8;
 }
 
-void sub_811F7F4(void)
+void LinkPartnerHandleSendOutPoke(void)
 {
     sub_8032AA8(gActiveBank, gBattleBufferA[gActiveBank][2]);
     gBattlePartyID[gActiveBank] = gBattleBufferA[gActiveBank][1];
-    sub_80318FC(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
+    BattleLoadPlayerMonSprite(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
     sub_811F864(gActiveBank, gBattleBufferA[gActiveBank][2]);
     gBattleBankFunc[gActiveBank] = sub_811E1BC;
 }
@@ -1038,7 +1160,7 @@ void sub_811F864(u8 a, u8 b)
     gSprites[gUnknown_0300434C[a]].data0 = sub_8046400(0, 0xFF);
 }
 
-void sub_811F9D0(void)
+void LinkPartnerHandleReturnPokeToBall(void)
 {
     if (gBattleBufferA[gActiveBank][1] == 0)
     {
@@ -1059,7 +1181,7 @@ void sub_811FA5C(void)
     switch (ewram17810[gActiveBank].unk4)
     {
     case 0:
-        if (ewram17800[gActiveBank].unk0_2)
+        if (ewram17800[gActiveBank].substituteSprite)
             move_anim_start_t4(gActiveBank, gActiveBank, gActiveBank, 5);
         ewram17810[gActiveBank].unk4 = 1;
         break;
@@ -1074,7 +1196,7 @@ void sub_811FA5C(void)
     }
 }
 
-void sub_811FAE4(void)
+void LinkPartnerHandleTrainerThrow(void)
 {
     s16 xOffset;
     u32 gender;
@@ -1092,7 +1214,7 @@ void sub_811FAE4(void)
         xOffset = 0;
         gender = gLinkPlayers[GetMultiplayerId() ^ 1].gender;
     }
-    sub_8031AF4(gender, gActiveBank);
+    LoadPlayerTrainerBankSprite(gender, gActiveBank);
     GetMonSpriteTemplate_803C5A0(gender, GetBankIdentity(gActiveBank));
     gObjectBankIDs[gActiveBank] = CreateSprite(
       &gUnknown_02024E8C,
@@ -1105,12 +1227,12 @@ void sub_811FAE4(void)
     gBattleBankFunc[gActiveBank] = sub_811DAE4;
 }
 
-void sub_811FC30(void)
+void LinkPartnerHandleTrainerSlide(void)
 {
     LinkPartnerBufferExecCompleted();
 }
 
-void sub_811FC3C(void)
+void LinkPartnerHandleTrainerSlideBack(void)
 {
     oamt_add_pos2_onto_pos1(&gSprites[gObjectBankIDs[gActiveBank]]);
     gSprites[gObjectBankIDs[gActiveBank]].data0 = 35;
@@ -1121,11 +1243,11 @@ void sub_811FC3C(void)
     gBattleBankFunc[gActiveBank] = sub_811DB1C;
 }
 
-void sub_811FCE8(void)
+void LinkPartnerHandlecmd10(void)
 {
     if (ewram17810[gActiveBank].unk4 == 0)
     {
-        if (ewram17800[gActiveBank].unk0_2)
+        if (ewram17800[gActiveBank].substituteSprite)
             move_anim_start_t4(gActiveBank, gActiveBank, gActiveBank, 5);
         ewram17810[gActiveBank].unk4++;
     }
@@ -1141,27 +1263,27 @@ void sub_811FCE8(void)
     }
 }
 
-void sub_811FDCC(void)
+void LinkPartnerHandlecmd11(void)
 {
     LinkPartnerBufferExecCompleted();
 }
 
-void sub_811FDD8(void)
+void LinkPartnerHandlecmd12(void)
 {
     LinkPartnerBufferExecCompleted();
 }
 
-void sub_811FDE4(void)
+void LinkPartnerHandleBallThrow(void)
 {
     LinkPartnerBufferExecCompleted();
 }
 
-void sub_811FDF0(void)
+void LinkPartnerHandlePuase(void)
 {
     LinkPartnerBufferExecCompleted();
 }
 
-void sub_811FDFC(void)
+void LinkPartnerHandleMoveAnimation(void)
 {
     if (!mplay_80342A4(gActiveBank))
     {
@@ -1200,7 +1322,7 @@ void sub_811FF30(void)
     switch (ewram17810[gActiveBank].unk4)
     {
     case 0:
-        if (ewram17800[gActiveBank].unk0_2 && !ewram17800[gActiveBank].unk0_3)
+        if (ewram17800[gActiveBank].substituteSprite && !ewram17800[gActiveBank].unk0_3)
         {
             ewram17800[gActiveBank].unk0_3 = 1;
             move_anim_start_t4(gActiveBank, gActiveBank, gActiveBank, 5);
@@ -1220,7 +1342,7 @@ void sub_811FF30(void)
         if (!gAnimScriptActive)
         {
             sub_80326EC(1);
-            if ((ewram17800[gActiveBank].unk0_2) && r7 <= 1)
+            if ((ewram17800[gActiveBank].substituteSprite) && r7 <= 1)
             {
                 move_anim_start_t4(gActiveBank, gActiveBank, gActiveBank, 6);
                 ewram17800[gActiveBank].unk0_3 = 0;
@@ -1242,7 +1364,7 @@ void sub_811FF30(void)
     }
 }
 
-void sub_8120094(void)
+void LinkPartnerHandlePrintString(void)
 {
     gUnknown_030042A4 = 0;
     gUnknown_030042A0 = 0;
@@ -1251,37 +1373,37 @@ void sub_8120094(void)
     gBattleBankFunc[gActiveBank] = sub_811DFA0;
 }
 
-void sub_81200F8(void)
+void LinkPartnerHandlePrintStringPlayerOnly(void)
 {
     LinkPartnerBufferExecCompleted();
 }
 
-void sub_8120104(void)
+void LinkPartnerHandlecmd18(void)
 {
     LinkPartnerBufferExecCompleted();
 }
 
-void sub_8120110(void)
+void LinkPartnerHandlecmd19(void)
 {
     LinkPartnerBufferExecCompleted();
 }
 
-void sub_812011C(void)
+void LinkPartnerHandlecmd20(void)
 {
     LinkPartnerBufferExecCompleted();
 }
 
-void sub_8120128(void)
+void LinkPartnerHandleOpenBag(void)
 {
     LinkPartnerBufferExecCompleted();
 }
 
-void sub_8120134(void)
+void LinkPartnerHandlecmd22(void)
 {
     LinkPartnerBufferExecCompleted();
 }
 
-void sub_8120140(void)
+void LinkPartnerHandlecmd23(void)
 {
     LinkPartnerBufferExecCompleted();
 }
@@ -1337,70 +1459,70 @@ void LinkPartnerHandleStatusAnimation(void)
     }
 }
 
-void sub_8120324(void)
+void LinkPartnerHandleStatusXor(void)
 {
     LinkPartnerBufferExecCompleted();
 }
 
-void sub_8120330(void)
+void LinkPartnerHandlecmd29(void)
 {
     LinkPartnerBufferExecCompleted();
 }
 
-void sub_812033C(void)
+void LinkPartnerHandleDMATransfer(void)
 {
     LinkPartnerBufferExecCompleted();
 }
 
-void sub_8120348(void)
+void LinkPartnerHandlecmd31(void)
 {
     LinkPartnerBufferExecCompleted();
 }
 
-void sub_8120354(void)
+void LinkPartnerHandlecmd32(void)
 {
     LinkPartnerBufferExecCompleted();
 }
 
-void sub_8120360(void)
+void LinkPartnerHandlecmd33(void)
 {
     LinkPartnerBufferExecCompleted();
 }
 
-void sub_812036C(void)
+void LinkPartnerHandlecmd34(void)
 {
     LinkPartnerBufferExecCompleted();
 }
 
-void sub_8120378(void)
+void LinkPartnerHandlecmd35(void)
 {
     LinkPartnerBufferExecCompleted();
 }
 
-void sub_8120384(void)
+void LinkPartnerHandlecmd36(void)
 {
     LinkPartnerBufferExecCompleted();
 }
 
-void sub_8120390(void)
+void LinkPartnerHandlecmd37(void)
 {
     gUnknown_020238C8.unk0_0 = 0;
     LinkPartnerBufferExecCompleted();
 }
 
-void sub_81203AC(void)
+void LinkPartnerHandlecmd38(void)
 {
     gUnknown_020238C8.unk0_0 = gBattleBufferA[gActiveBank][1];
     LinkPartnerBufferExecCompleted();
 }
 
-void sub_81203E4(void)
+void LinkPartnerHandlecmd39(void)
 {
     gUnknown_020238C8.unk0_7 = 0;
     LinkPartnerBufferExecCompleted();
 }
 
-void sub_81203FC(void)
+void LinkPartnerHandlecmd40(void)
 {
     gUnknown_020238C8.unk0_7 ^= 1;
     LinkPartnerBufferExecCompleted();
@@ -1421,7 +1543,7 @@ void LinkPartnerHandleHitAnimation(void)
     }
 }
 
-void sub_8120494(void)
+void LinkPartnerHandlecmd42(void)
 {
     LinkPartnerBufferExecCompleted();
 }
@@ -1438,7 +1560,7 @@ void LinkPartnerHandleEffectivenessSound(void)
     LinkPartnerBufferExecCompleted();
 }
 
-void sub_81204E4(void)
+void LinkPartnerHandlecmd44(void)
 {
     PlayFanfare(gBattleBufferA[gActiveBank][1] | (gBattleBufferA[gActiveBank][2] << 8));
     LinkPartnerBufferExecCompleted();
@@ -1452,14 +1574,14 @@ void LinkPartnerHandleFaintingCry(void)
     LinkPartnerBufferExecCompleted();
 }
 
-void dp01t_2E_3_battle_intro(void)
+void LinkPartnerHandleIntroSlide(void)
 {
     sub_80E43C0(gBattleBufferA[gActiveBank][1]);
     gUnknown_02024DE8 |= 1;
     LinkPartnerBufferExecCompleted();
 }
 
-void sub_8120588(void)
+void LinkPartnerHandleTrainerBallThrow(void)
 {
     u8 r4;
     u8 taskId;
@@ -1508,7 +1630,7 @@ void sub_812071C(u8 taskId)
         sub_811F864(gActiveBank, 0);
         gActiveBank ^= 2;
         gBattleBufferA[gActiveBank][1] = gBattlePartyID[gActiveBank];
-        sub_80318FC(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
+        BattleLoadPlayerMonSprite(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
         sub_811F864(gActiveBank, 0);
         gActiveBank ^= 2;
     }
@@ -1517,7 +1639,7 @@ void sub_812071C(u8 taskId)
     DestroyTask(taskId);
 }
 
-void dp01t_30_3_80EB11C(void)
+void LinkPartnerHandlecmd48(void)
 {
     if (gBattleBufferA[gActiveBank][1] != 0 && GetBankSide(gActiveBank) == 0)
     {
@@ -1546,19 +1668,19 @@ void sub_81208E0(void)
     }
 }
 
-void sub_8120920(void)
+void LinkPartnerHandlecmd49(void)
 {
     if (ewram17810[gActiveBank].unk0_0)
         gTasks[gUnknown_02024E68[gActiveBank]].func = sub_8044CA0;
     LinkPartnerBufferExecCompleted();
 }
 
-void sub_812096C(void)
+void LinkPartnerHandlecmd50(void)
 {
     LinkPartnerBufferExecCompleted();
 }
 
-void sub_8120978(void)
+void LinkPartnerHandleSpriteInvisibility(void)
 {
     if (sub_8078874(gActiveBank) != 0)
     {
@@ -1568,7 +1690,7 @@ void sub_8120978(void)
     LinkPartnerBufferExecCompleted();
 }
 
-void sub_81209D8(void)
+void LinkPartnerHandleBattleAnimation(void)
 {
     if (mplay_80342A4(gActiveBank) == 0)
     {
@@ -1582,17 +1704,17 @@ void sub_81209D8(void)
     }
 }
 
-void sub_8120A40(void)
+void LinkPartnerHandleLinkStandbyMsg(void)
 {
     LinkPartnerBufferExecCompleted();
 }
 
-void sub_8120A4C(void)
+void LinkPartnerHandleResetActionMoveSelection(void)
 {
     LinkPartnerBufferExecCompleted();
 }
 
-void sub_8120A58(void)
+void LinkPartnerHandlecmd55(void)
 {
     gBattleOutcome = gBattleBufferA[gActiveBank][1];
     FadeOutMapMusic(5);
@@ -1601,6 +1723,6 @@ void sub_8120A58(void)
     gBattleBankFunc[gActiveBank] = sub_811E29C;
 }
 
-void nullsub_75(void)
+void LinkPartnerHandlecmd56(void)
 {
 }
