@@ -59,6 +59,7 @@ extern struct SpriteTemplate gBattleAnimSpriteTemplate_83D6FF8;
 extern struct AffineAnimFrameCmd gUnknown_083D76F4;
 extern struct AffineAnimFrameCmd gUnknown_083D7714;
 extern struct AffineAnimFrameCmd gUnknown_083D77B0;
+extern struct AffineAnimFrameCmd gUnknown_083D79BC;
 extern s16 gUnknown_03000728[];
 extern s8 gUnknown_083D680C[11][3];
 extern u16 gUnknown_083D6984[];
@@ -150,6 +151,13 @@ void sub_80D03A8(struct Sprite* sprite);
 void sub_80D0704(struct Sprite* sprite);
 void sub_80D0E8C(struct Sprite* sprite);
 void sub_80D1098(struct Sprite* sprite);
+void sub_80D13AC(struct Sprite* sprite);
+void sub_80D1424(struct Sprite* sprite);
+void sub_80D144C(struct Sprite* sprite);
+void sub_80D14C4(struct Sprite* sprite);
+void sub_80D1504(struct Sprite* sprite);
+void sub_80D154C(struct Sprite* sprite);
+void sub_80D158C(struct Sprite* sprite);
 
 s16 sub_80CC338(struct Sprite* sprite);
 
@@ -213,6 +221,8 @@ void sub_80D0904(u8 taskId);
 void sub_80D0A8C(u8 taskId);
 void sub_80D0B3C(u8 taskId);
 void sub_80D0D68(u8 taskId);
+void sub_80D15E0(u8 taskId);
+
 
 void sub_80CC358(struct Task* task, u8 taskId);
 void sub_80D0614(struct Task* task, u8 taskId);
@@ -5540,4 +5550,115 @@ void sub_80D1318(struct Sprite* sprite)
     StartSpriteAffineAnim(sprite, 1);
     sprite->callback = sub_80793C4;
     sub_80793C4(sprite);
+}
+
+void sub_80D1368(struct Sprite* sprite)
+{
+    s16 r1;
+    sub_80787B0(sprite, 0);
+    r1 = (GetBankSide(gBattleAnimPlayerMonIndex)) ? -0xA0 : 0xA0;
+    sprite->data0 = 0x380;
+    sprite->data1 = r1;
+    sprite->data7 = gBattleAnimArgs[2];
+    sprite->callback = sub_80D13AC;
+}
+
+void sub_80D13AC(struct Sprite* sprite)
+{
+    s16 add;
+    sprite->pos2.y -= (sprite->data0 >> 8);
+    sprite->pos2.x = sprite->data1 >> 8;
+    sprite->data0 -= 32;
+    add = (GetBankSide(gBattleAnimPlayerMonIndex)) ? -0xA0 : 0xA0;
+    sprite->data1 += add;
+    if (sprite->pos2.y > 0)
+    {
+        sprite->pos1.y += sprite->pos2.y;
+        sprite->pos1.x += sprite->pos2.x;
+        sprite->pos2.y = 0;
+        sprite->pos2.x = 0;
+        sprite->data0 = 0;
+        StartSpriteAffineAnim(sprite, 1);
+        sprite->callback = sub_80D1424;
+    }
+}
+
+void sub_80D1424(struct Sprite* sprite)
+{
+    if (sprite->data0++ > 19)
+    {
+        StartSpriteAffineAnim(sprite, 2);
+        sprite->callback = sub_80D144C;
+    }
+}
+
+void sub_80D144C(struct Sprite* sprite)
+{
+    if (sprite->affineAnimEnded)
+    {
+        StartSpriteAffineAnim(sprite, 1);
+        sprite->data0 = 0;
+        if (sprite->data7 == 0)
+        {
+            sprite->oam.tileNum += 16;
+            sprite->callback = sub_80D14C4;
+        }
+        else
+        {
+            sprite->oam.tileNum += 32;
+            sprite->callback = sub_80D154C;
+        }
+    }
+}
+
+void sub_80D14C4(struct Sprite* sprite)
+{
+    sprite->pos2.y -= 2;
+    if (++sprite->data0 == 9)
+    {
+        sprite->data0 = 16;
+        sprite->data1 = 0;
+        REG_BLDCNT = 0x3F40;
+        REG_BLDALPHA = sprite->data0;
+        sprite->callback = sub_80D1504;
+    }
+}
+
+void sub_80D1504(struct Sprite* sprite)
+{
+    if (sprite->data1++ % 3 == 0)
+    {
+        sprite->data0--;
+        REG_BLDALPHA = sprite->data0 | ((16 - sprite->data0) << 8);
+        if (sprite->data0 == 0)
+            sprite->callback = sub_80D154C;
+    }
+}
+
+void sub_80D154C(struct Sprite* sprite)
+{
+    if ((u16)gBattleAnimArgs[7] == 0xFFFF)
+    {
+        sprite->invisible = 1;
+        if (sprite->data7 == 0)
+            sprite->callback = sub_80D158C;
+        else
+            sprite->callback = move_anim_8072740;
+    }
+}
+
+void sub_80D158C(struct Sprite* sprite)
+{
+    REG_BLDCNT = 0;
+    REG_BLDALPHA = 0;
+    move_anim_8072740(sprite);
+}
+
+void sub_80D15A4(u8 taskId)
+{
+    struct Task* task = &gTasks[taskId];
+    u8 spriteId = obj_id_for_side_relative_to_move(0);
+    task->data[0] = spriteId;
+    sub_80798F4(task, spriteId, &gUnknown_083D79BC);
+    task->func = sub_80D15E0;
 }
