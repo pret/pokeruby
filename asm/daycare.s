@@ -6,43 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_80416A0
-sub_80416A0: @ 80416A0
-	push {r4-r6,lr}
-	mov r6, r8
-	push {r6}
-	adds r5, r0, 0
-	lsls r4, r1, 24
-	lsrs r4, 24
-	lsls r0, r4, 2
-	mov r8, r0
-	add r4, r8
-	lsls r4, 4
-	adds r4, r5, r4
-	adds r0, r4, 0
-	bl GetLevelFromBoxMonExp
-	adds r6, r0, 0
-	lsls r6, 24
-	lsrs r6, 24
-	movs r0, 0x88
-	lsls r0, 1
-	adds r5, r0
-	add r5, r8
-	ldr r1, [r5]
-	adds r0, r4, 0
-	bl Daycare_GetLevelAfterSteps
-	lsls r0, 24
-	lsrs r0, 24
-	subs r0, r6
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r3}
-	mov r8, r3
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80416A0
-
 	thumb_func_start sub_80416E8
 sub_80416E8: @ 80416E8
 	push {r4-r6,lr}

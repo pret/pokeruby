@@ -1,6 +1,7 @@
 #include "global.h"
 #include "daycare.h"
 #include "pokemon.h"
+#include "event_data.h"
 #include "species.h"
 #include "items.h"
 #include "text.h"
@@ -144,36 +145,34 @@ void sub_804151C(struct Pokemon * mon)
     CalculateMonStats(mon);
 }
 
-u16 sub_8041570(struct DayCareData * daycare_data, u8 a2)
+u16 sub_8041570(struct DayCareData * daycare_data, u8 slot)
 {
     u16 species;
     u32 experience;
     struct Pokemon pokemon;
 
-    GetBoxMonNick(&daycare_data->mons[a2], gStringVar1);
-    species = GetBoxMonData(&daycare_data->mons[a2], MON_DATA_SPECIES);
-    sub_803B4B4(&daycare_data->mons[a2], &pokemon);
+    GetBoxMonNick(&daycare_data->mons[slot], gStringVar1);
+    species = GetBoxMonData(&daycare_data->mons[slot], MON_DATA_SPECIES);
+    sub_803B4B4(&daycare_data->mons[slot], &pokemon);
     if (GetMonData(&pokemon, MON_DATA_LEVEL) != MAX_LEVEL)
     {
-        experience = GetMonData(&pokemon, MON_DATA_EXP) + daycare_data->mail.extra.steps[a2];
+        experience = GetMonData(&pokemon, MON_DATA_EXP) + daycare_data->mail.extra.steps[slot];
         SetMonData(&pokemon, MON_DATA_EXP, (u8 *)&experience);
         sub_804151C(&pokemon);
     }
     gPlayerParty[PARTY_SIZE - 1] = pokemon;
-    if (daycare_data->mail.data[a2].mail.itemId)
+    if (daycare_data->mail.data[slot].mail.itemId)
     {
-        GiveMailToMon2(&gPlayerParty[PARTY_SIZE - 1], &daycare_data->mail.data[a2].mail);
-        sub_80417F4(&daycare_data->mail.data[a2].mail);
+        GiveMailToMon2(&gPlayerParty[PARTY_SIZE - 1], &daycare_data->mail.data[slot].mail);
+        sub_80417F4(&daycare_data->mail.data[slot].mail);
     }
     party_compaction();
-    ZeroBoxMonData(&daycare_data->mons[a2]);
-    daycare_data->mail.extra.steps[a2] = 0;
+    ZeroBoxMonData(&daycare_data->mons[slot]);
+    daycare_data->mail.extra.steps[slot] = 0;
     sub_80414C0(daycare_data);
     CalculatePlayerPartyCount();
     return species;
 }
-
-extern u8 gSpecialVar_0x8004;
 
 u16 sub_8041648()
 {
@@ -185,4 +184,14 @@ u8 Daycare_GetLevelAfterSteps(struct BoxPokemon * mon, u32 steps){
     u32 new_exp = GetBoxMonData(mon, MON_DATA_EXP) + steps;
     SetBoxMonData(&temp, MON_DATA_EXP, (u8 *) &new_exp);
     return GetLevelFromBoxMonExp(&temp);
+}
+
+u8 sub_80416A0(struct DayCareData *daycareData, u8 slot)
+{
+    u8 levelBefore;
+    u8 levelAfter;
+
+    levelBefore = GetLevelFromBoxMonExp(&daycareData->mons[slot]);
+    levelAfter = Daycare_GetLevelAfterSteps(&daycareData->mons[slot], daycareData->mail.extra.steps[slot]);
+    return levelAfter - levelBefore;
 }
