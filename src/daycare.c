@@ -104,7 +104,7 @@ void Daycare_SendPokemon_Special()
     Daycare_SendPokemon(gPlayerParty + gLastFieldPokeMenuOpened, &gSaveBlock1.daycareData);
 }
 
-void sub_80417F4(struct MailStruct *);
+void sub_80417F4(struct DayCareMail *);
 
 void sub_80414C0(struct DayCareData * daycare_data)
 {
@@ -115,7 +115,7 @@ void sub_80414C0(struct DayCareData * daycare_data)
         daycare_data->mail.data[0] = daycare_data->mail.data[1];
         daycare_data->mail.extra.steps[0] = daycare_data->mail.extra.steps[1];
         daycare_data->mail.extra.steps[1] = 0;
-        sub_80417F4(&daycare_data->mail.data[1].mail);
+        sub_80417F4(&daycare_data->mail.data[1]);
     }
 }
 
@@ -164,7 +164,7 @@ u16 sub_8041570(struct DayCareData * daycare_data, u8 slot)
     if (daycare_data->mail.data[slot].mail.itemId)
     {
         GiveMailToMon2(&gPlayerParty[PARTY_SIZE - 1], &daycare_data->mail.data[slot].mail);
-        sub_80417F4(&daycare_data->mail.data[slot].mail);
+        sub_80417F4(&daycare_data->mail.data[slot]);
     }
     party_compaction();
     ZeroBoxMonData(&daycare_data->mons[slot]);
@@ -231,4 +231,20 @@ u8 sub_80417B8(void)
     if (GetBoxMonData(&gSaveBlock1.daycareData.mons[gSpecialVar_0x8004], MON_DATA_SPECIES) != 0)
         return sub_80416E8(&gSaveBlock1.daycareData, gSpecialVar_0x8004);
     return 0;
+}
+
+void sub_80417F4(struct DayCareMail *mail)
+{
+    u8 zero;
+    u8 *names;
+    u8 *names2;
+    int i;
+    zero = 0;
+    for (i = 7, names = mail->names + 7; i >= 0; i --)
+        *names-- = zero;
+    names2 = mail->names + 8;
+    zero = 0;
+    names = mail->names + 18;
+    do *names-- = zero; while ((int)names >= (int)names2);
+    ClearMailStruct(&mail->mail);
 }

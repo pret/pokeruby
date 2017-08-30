@@ -6,34 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_80417F4
-sub_80417F4: @ 80417F4
-	push {lr}
-	movs r3, 0
-	movs r2, 0x7
-	adds r1, r0, 0
-	adds r1, 0x2B
-_080417FE:
-	strb r3, [r1]
-	subs r1, 0x1
-	subs r2, 0x1
-	cmp r2, 0
-	bge _080417FE
-	adds r2, r0, 0
-	adds r2, 0x2C
-	movs r3, 0
-	adds r1, r0, 0
-	adds r1, 0x36
-_08041812:
-	strb r3, [r1]
-	subs r1, 0x1
-	cmp r1, r2
-	bge _08041812
-	bl ClearMailStruct
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80417F4
-
 	thumb_func_start unref_sub_8041824
 unref_sub_8041824: @ 8041824
 	push {r4-r6,lr}
