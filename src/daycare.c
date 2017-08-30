@@ -14,6 +14,12 @@
 #include "strings2.h"
 #include "data/pokemon/egg_moves.h"
 #include "party_menu.h"
+#include "field_effect.h"
+
+extern u16 word_2024E82;
+
+static void sub_80417F4(struct DayCareMail *);
+static void sub_80420FC(struct Pokemon *, u16, struct DayCareData *);
 
 const u8 *const gUnknown_08209AC4[] = {
     DaycareText_GetAlongVeryWell,
@@ -23,8 +29,6 @@ const u8 *const gUnknown_08209AC4[] = {
 };
 
 const u8 gUnknown_08209AD4[] = _("タマゴ");
-
-extern u8 gLastFieldPokeMenuOpened;
 
 u8 *GetMonNick(struct Pokemon *mon, u8 *dest)
 {
@@ -54,7 +58,7 @@ u8 Daycare_CountPokemon(struct BoxPokemon *daycare_data)
     return count;
 }
 
-void sub_8041324(struct BoxPokemon * box_pokemon, struct DayCareMailEtc * void_pointer)
+void sub_8041324(struct BoxPokemon * box_pokemon, struct DayCareMailEtc * daycareMailEtc)
 {
     u8 i;
     u8 specCount;
@@ -66,20 +70,20 @@ void sub_8041324(struct BoxPokemon * box_pokemon, struct DayCareMailEtc * void_p
             specCount ++;
             if (GetBoxMonData(&box_pokemon[i], MON_DATA_HELD_ITEM) == ITEM_NONE)
             {
-                void_pointer->extra.rc.unk74[i] = 0;
+                daycareMailEtc->extra.rc.unk74[i] = 0;
             } else
             {
-                void_pointer->extra.rc.unk74[i] = 1;
+                daycareMailEtc->extra.rc.unk74[i] = 1;
             }
         } else
         {
-            void_pointer->extra.rc.unk74[i] = 1;
+            daycareMailEtc->extra.rc.unk74[i] = 1;
         }
     }
-    void_pointer->extra.rc.unk70 = specCount;
+    daycareMailEtc->extra.rc.unk70 = specCount;
 }
 
-s8 Daycare_FindEmptySpot(struct BoxPokemon * daycare_data)
+static s8 Daycare_FindEmptySpot(struct BoxPokemon * daycare_data)
 {
     u8 i;
 
@@ -90,7 +94,8 @@ s8 Daycare_FindEmptySpot(struct BoxPokemon * daycare_data)
     return -1;
 }
 
-void Daycare_SendPokemon(struct Pokemon * mon, struct DayCareData * daycare_data){ // unfinished
+static void Daycare_SendPokemon(struct Pokemon * mon, struct DayCareData * daycare_data)
+{
     s8 empty_slot;
     u8 mail;
     u8 *names;
@@ -118,9 +123,7 @@ void Daycare_SendPokemon_Special()
     Daycare_SendPokemon(gPlayerParty + gLastFieldPokeMenuOpened, &gSaveBlock1.daycareData);
 }
 
-void sub_80417F4(struct DayCareMail *);
-
-void sub_80414C0(struct DayCareData * daycare_data)
+static void sub_80414C0(struct DayCareData * daycare_data)
 {
     if((GetBoxMonData(&daycare_data->mons[1], MON_DATA_SPECIES) != 0) && GetBoxMonData(&daycare_data->mons[0], MON_DATA_SPECIES) == 0)
     {
@@ -133,33 +136,32 @@ void sub_80414C0(struct DayCareData * daycare_data)
     }
 }
 
-u8 TryIncrementMonLevel(struct Pokemon *);
-extern u16 word_2024E82;
-
-void sub_804151C(struct Pokemon * mon)
+static void DayCare_LevelUpMoves(struct Pokemon * mon)
 {
     s32 i;
     u8 r6;
     u16 temp;
 
-    for(i = 0; i < 100; i++){
-        if(TryIncrementMonLevel(mon) == FALSE) goto end;
-
-        r6 = 1;
-        while((temp = sub_803B7C8(mon, r6)) != 0){
-            r6 = 0;
-            if(temp == 0xffff){
-                DeleteFirstMoveAndGiveMoveToMon(mon, word_2024E82);
+    for (i = 0; i < 100; i++)
+    {
+        if (TryIncrementMonLevel(mon))
+        {
+            r6 = 1;
+            while ((temp = sub_803B7C8(mon, r6)) != 0)
+            {
+                r6 = 0;
+                if (temp == 0xffff)
+                    DeleteFirstMoveAndGiveMoveToMon(mon, word_2024E82);
             }
         }
+        else
+            break;
     }
-
-    end:
 
     CalculateMonStats(mon);
 }
 
-u16 sub_8041570(struct DayCareData * daycare_data, u8 slot)
+static u16 sub_8041570(struct DayCareData * daycare_data, u8 slot)
 {
     u16 species;
     u32 experience;
@@ -172,7 +174,7 @@ u16 sub_8041570(struct DayCareData * daycare_data, u8 slot)
     {
         experience = GetMonData(&pokemon, MON_DATA_EXP) + daycare_data->mail.extra.steps[slot];
         SetMonData(&pokemon, MON_DATA_EXP, (u8 *)&experience);
-        sub_804151C(&pokemon);
+        DayCare_LevelUpMoves(&pokemon);
     }
     gPlayerParty[PARTY_SIZE - 1] = pokemon;
     if (daycare_data->mail.data[slot].mail.itemId)
@@ -200,7 +202,7 @@ u8 Daycare_GetLevelAfterSteps(struct BoxPokemon * mon, u32 steps){
     return GetLevelFromBoxMonExp(&temp);
 }
 
-u8 sub_80416A0(struct DayCareData *daycareData, u8 slot)
+static u8 sub_80416A0(struct DayCareData *daycareData, u8 slot)
 {
     u8 levelBefore;
     u8 levelAfter;
@@ -210,7 +212,7 @@ u8 sub_80416A0(struct DayCareData *daycareData, u8 slot)
     return levelAfter - levelBefore;
 }
 
-u8 sub_80416E8(struct DayCareData *dayCareData, u8 slot)
+static u8 sub_80416E8(struct DayCareData *dayCareData, u8 slot)
 {
     u8 levelDelta = sub_80416A0(dayCareData, slot);
     GetBoxMonNick(&dayCareData->mons[slot], gStringVar1);
@@ -218,7 +220,7 @@ u8 sub_80416E8(struct DayCareData *dayCareData, u8 slot)
     return levelDelta;
 }
 
-u16 sub_8041728(struct DayCareData *dayCareData, u8 slot)
+static u16 sub_8041728(struct DayCareData *dayCareData, u8 slot)
 {
     u16 cost;
 
@@ -247,7 +249,7 @@ u8 sub_80417B8(void)
     return 0;
 }
 
-void sub_80417F4(struct DayCareMail *mail)
+static void sub_80417F4(struct DayCareMail *mail)
 {
     u8 zero;
     u8 *names;
@@ -272,7 +274,7 @@ void unref_sub_8041824(struct DayCareData *dayCareData)
         dayCareData->mail.extra.steps[slot] = 0;
         sub_80417F4(&dayCareData->mail.data[slot]);
     }
-    dayCareData->unk_118 = 0;
+    dayCareData->eggPersonalityLo = 0;
     dayCareData->unk_11a = 0;
 }
 
@@ -303,15 +305,15 @@ u16 sub_8041870(u16 species)
     return species;
 }
 
-void sub_80418F0(struct DayCareData *dayCareData)
+static void sub_80418F0(struct DayCareData *dayCareData)
 {
-    dayCareData->unk_118 = (Random() % 0xfffe) + 1;
+    dayCareData->eggPersonalityLo = (Random() % 0xfffe) + 1;
     FlagSet(0x86);
 }
 
-void sub_804191C(struct DayCareData *dayCareData)
+static void sub_804191C(struct DayCareData *dayCareData)
 {
-    dayCareData->unk_118 = Random() | 0x8000;
+    dayCareData->eggPersonalityLo = Random() | 0x8000;
     FlagSet(0x86);
 }
 
@@ -338,7 +340,7 @@ static void sub_8041960(u8 *data, u8 idx)
             data[j++] = temp[i];
 }
 
-void InheritIVs(struct Pokemon *egg, struct DayCareData *dayCareData)
+static void InheritIVs(struct Pokemon *egg, struct DayCareData *dayCareData)
 {
     u8 i;
     u8 selectedIvs[3];
@@ -386,6 +388,9 @@ void InheritIVs(struct Pokemon *egg, struct DayCareData *dayCareData)
     }
 }
 
+#ifdef NONMATCHING
+static
+#endif
 u8 pokemon_get_eggmoves(struct Pokemon *pokemon, u16 *eggMoves)
 {
     u16 eggMoveIdx;
@@ -416,13 +421,13 @@ u8 pokemon_get_eggmoves(struct Pokemon *pokemon, u16 *eggMoves)
     return numMovesFound;
 }
 
+#ifdef NONMATCHING
 extern u16 gUnknown_03000470[50];
 extern u16 gUnknown_030004D8[4];
 extern u16 gUnknown_030004E0[4];
 extern u16 gUnknown_030004E8[10];
 extern u16 gUnknown_03000500[4];
 
-#ifdef NONMATCHING
 void daycare_build_child_moveset(struct Pokemon *egg, struct BoxPokemon *dad, struct BoxPokemon *mom)
 {
     u16 numSharedParentMoves;
@@ -846,3 +851,139 @@ void daycare_build_child_moveset(struct Pokemon *egg, struct BoxPokemon *dad, st
                     "_08041E60: .4byte gUnknown_030004E0");
 }
 #endif
+
+static void RemoveEggFromDayCare(struct DayCareData *dayCareData)
+{
+    dayCareData->eggPersonalityLo = 0;
+    dayCareData->unk_11a = 0;
+}
+
+void sub_8041E7C(void)
+{
+    RemoveEggFromDayCare(&gSaveBlock1.daycareData);
+}
+
+static void incense_effects(u16 *species, struct DayCareData *dayCareData)
+{
+    u16 momItem, dadItem;
+    if (*species == SPECIES_WYNAUT || *species == SPECIES_AZURILL)
+    {
+        momItem = GetBoxMonData(&dayCareData->mons[0], MON_DATA_HELD_ITEM);
+        dadItem = GetBoxMonData(&dayCareData->mons[1], MON_DATA_HELD_ITEM);
+        if (*species == SPECIES_WYNAUT && momItem != ITEM_LAX_INCENSE && dadItem != ITEM_LAX_INCENSE)
+        {
+            *species = SPECIES_WOBBUFFET;
+        }
+        if (*species == SPECIES_AZURILL && momItem != ITEM_SEA_INCENSE && dadItem != ITEM_SEA_INCENSE)
+        {
+            *species = SPECIES_MARILL;
+        }
+    }
+}
+
+static u16 sub_8041EEC(struct DayCareData *dayCareData, u8 *a1) // inherit_species_from_mom
+{
+    u16 i;
+    u16 species[2];
+    u16 eggSpecies;
+    u8 buffer;
+    for (i=0; i<2; i++)
+    {
+        species[i] = GetBoxMonData(&dayCareData->mons[i], MON_DATA_SPECIES);
+        if (species[i] == SPECIES_DITTO)
+        {
+            a1[0] = i ^ 1;
+            a1[1] = i;
+        }
+        else if (GetBoxMonGender(&dayCareData->mons[i]) == MON_FEMALE)
+        {
+            a1[0] = i;
+            a1[1] = i ^ 1;
+        }
+    }
+    eggSpecies = sub_8041870(species[a1[0]]);
+    if (eggSpecies == SPECIES_NIDORAN_F && dayCareData->eggPersonalityLo & 0x8000)
+    {
+        eggSpecies = SPECIES_NIDORAN_M;
+    }
+    if (eggSpecies == SPECIES_ILLUMISE && dayCareData->eggPersonalityLo & 0x8000)
+    {
+        eggSpecies = SPECIES_VOLBEAT;
+    }
+    if (species[a1[1]] == SPECIES_DITTO && GetBoxMonGender(&dayCareData->mons[a1[0]]) != MON_FEMALE)
+    {
+        buffer = a1[1];
+        a1[1] = a1[0];
+        a1[0] = buffer;
+    }
+    return eggSpecies;
+}
+
+static void sub_8041FC4(struct DayCareData *dayCareData) // give_egg
+{
+    struct Pokemon egg;
+    u16 species;
+    u8 parents[2];
+    u8 isEgg;
+    species = sub_8041EEC(dayCareData, parents);
+    incense_effects(&species, dayCareData);
+    sub_80420FC(&egg, species, dayCareData);
+    InheritIVs(&egg, dayCareData);
+    daycare_build_child_moveset(&egg, &dayCareData->mons[parents[1]], &dayCareData->mons[parents[0]]);
+    isEgg = TRUE;
+    SetMonData(&egg, MON_DATA_IS_EGG, &isEgg);
+    gPlayerParty[5] = egg;
+    party_compaction();
+    CalculatePlayerPartyCount();
+    RemoveEggFromDayCare(dayCareData);
+}
+
+
+void sub_8042044(struct Pokemon *mon, u16 species, u8 overwriteMetLocation) // scr_create_egg
+{
+    u8 metLevel;
+    u16 ball;
+    u8 language;
+    u8 metLocation;
+    u8 isEgg;
+    CreateMon(mon, species, 5, 0x20, FALSE, 0, FALSE, 0);
+    metLevel = 0;
+    ball = ITEM_POKE_BALL;
+    language = LANGUAGE_JAPANESE;
+    SetMonData(mon, MON_DATA_POKEBALL, (u8 *)&ball);
+    SetMonData(mon, MON_DATA_NICKNAME, gUnknown_08209AD4);
+    SetMonData(mon, MON_DATA_FRIENDSHIP, &gBaseStats[species].eggCycles);
+    SetMonData(mon, MON_DATA_MET_LEVEL, &metLevel);
+    SetMonData(mon, MON_DATA_LANGUAGE, &language);
+    if (overwriteMetLocation)
+    {
+        metLocation = 0xfd;
+        SetMonData(mon, MON_DATA_MET_LOCATION, &metLocation);
+    }
+    isEgg = TRUE;
+    SetMonData(mon, MON_DATA_IS_EGG, &isEgg);
+}
+
+static void sub_80420FC(struct Pokemon *mon, u16 species, struct DayCareData *dayCareData)
+{
+    u32 personality;
+    u16 ball;
+    u8 metLevel;
+    u8 language;
+    personality = dayCareData->eggPersonalityLo | (Random() << 16);
+    CreateMon(mon, species, 5, 0x20, TRUE, personality, FALSE, 0);
+    metLevel = 0;
+    ball = ITEM_POKE_BALL;
+    language = LANGUAGE_JAPANESE;
+    SetMonData(mon, MON_DATA_POKEBALL, (u8 *)&ball);
+    SetMonData(mon, MON_DATA_NICKNAME, gUnknown_08209AD4);
+    SetMonData(mon, MON_DATA_FRIENDSHIP, &gBaseStats[species].eggCycles);
+    SetMonData(mon, MON_DATA_MET_LEVEL, &metLevel);
+    SetMonData(mon, MON_DATA_LANGUAGE, &language);
+}
+
+void sp0B8_daycare(void)
+{
+    sub_8041FC4(&gSaveBlock1.daycareData);
+}
+
