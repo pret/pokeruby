@@ -16,6 +16,11 @@
 #include "data/pokemon/egg_moves.h"
 #include "party_menu.h"
 #include "field_effect.h"
+#include "main.h"
+#include "menu.h"
+#include "sound.h"
+#include "songs.h"
+#include "script.h"
 
 extern u16 word_2024E82;
 
@@ -1619,4 +1624,43 @@ void DaycareLevelMenuGetLevelText(struct DayCareData *dayCareData, u8 *dest)
         dest = StringCopy(dest + 3, gOtherText_NewLine2);
     }
     *dest = EOS;
+}
+
+void DaycareLevelMenuProcessKeyInput(u8 taskId)
+{
+    if (gMain.newKeys & DPAD_UP)
+    {
+        if (gTasks[taskId].data[0] != 0)
+        {
+            gTasks[taskId].data[0] --;
+            MoveMenuCursor(-1);
+            PlaySE(SE_SELECT);
+        }
+    }
+    else if (gMain.newKeys & DPAD_DOWN)
+    {
+        if (gTasks[taskId].data[0] != 2)
+        {
+            gTasks[taskId].data[0] ++;
+            MoveMenuCursor(+1);
+            PlaySE(SE_SELECT);
+        }
+    }
+    else if (gMain.newKeys & A_BUTTON)
+    {
+        HandleDestroyMenuCursors();
+        PlaySE(SE_SELECT);
+        gLastFieldPokeMenuOpened = gScriptResult = gTasks[taskId].data[0];
+        DestroyTask(taskId);
+        MenuZeroFillWindowRect(15, 6, 29, 13);
+        EnableBothScriptContexts();
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        HandleDestroyMenuCursors();
+        gLastFieldPokeMenuOpened = gScriptResult = 2;
+        DestroyTask(taskId);
+        MenuZeroFillWindowRect(15, 6, 29, 13);
+        EnableBothScriptContexts();
+    }
 }
