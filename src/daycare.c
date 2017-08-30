@@ -336,3 +336,51 @@ void sub_8041960(u8 *data, u8 idx)
         if (temp[i] != 0xff)
             data[j++] = temp[i];
 }
+
+void InheritIVs(struct Pokemon *egg, struct DayCareData *dayCareData)
+{
+    u8 i;
+    u8 selectedIvs[3];
+    u8 allIvs[6];
+    u8 whichParent[3];
+    u8 iv;
+    for (i = 0; i < 6; i ++)
+        allIvs[i] = i;
+    for (i = 0; i < 3; i ++)
+    {
+        selectedIvs[i] = allIvs[Random() % (6 - i)];
+        sub_8041960(allIvs, selectedIvs[i]);
+    }
+    for (i = 0; i < 3; i ++)
+        whichParent[i] = Random() % 2;
+    for (i = 0; i < 3; i ++)
+    {
+        switch (selectedIvs[i])
+        {
+            case 0:
+                iv = GetBoxMonData(&dayCareData->mons[whichParent[i]], MON_DATA_HP_IV);
+                SetMonData(egg, MON_DATA_HP_IV, &iv);
+                break;
+            case 1:
+                iv = GetBoxMonData(&dayCareData->mons[whichParent[i]], MON_DATA_ATK_IV);
+                SetMonData(egg, MON_DATA_ATK_IV, &iv);
+                break;
+            case 2:
+                iv = GetBoxMonData(&dayCareData->mons[whichParent[i]], MON_DATA_DEF_IV);
+                SetMonData(egg, MON_DATA_DEF_IV, &iv);
+                break;
+            case 3:
+                iv = GetBoxMonData(&dayCareData->mons[whichParent[i]], MON_DATA_SPD_IV);
+                SetMonData(egg, MON_DATA_SPD_IV, &iv);
+                break;
+            case 4:
+                iv = GetBoxMonData(&dayCareData->mons[whichParent[i]], MON_DATA_SPATK_IV);
+                SetMonData(egg, MON_DATA_SPATK_IV, &iv);
+                break;
+            case 5:
+                iv = GetBoxMonData(&dayCareData->mons[whichParent[i]], MON_DATA_SPDEF_IV);
+                SetMonData(egg, MON_DATA_SPDEF_IV, &iv);
+                break;
+        }
+    }
+}
