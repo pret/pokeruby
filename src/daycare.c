@@ -11,6 +11,7 @@
 #include "pokemon_storage_system.h"
 #include "rng.h"
 #include "moves.h"
+#include "trade.h"
 #include "strings2.h"
 #include "data/pokemon/egg_moves.h"
 #include "party_menu.h"
@@ -1462,4 +1463,139 @@ void sp0B9_daycare_relationship_comment(void)
     if (relationshipScore == 70)
         whichString = 0;
     StringCopy(gStringVar4, gUnknown_08209AC4[whichString]);
+}
+
+#ifdef NONMATCHING
+bool8 NameHasGenderSymbol(const u8 *name, u8 genderRatio)
+{
+    u8 i;
+    u8 flags[2];
+
+    // This portion is nonmatching
+    flags[1] = 0;
+    flags[0] = 0;
+    for (i = 0; name[i] != EOS; i ++)
+    // End nonmatching portion
+
+    {
+        if (name[i] == CHAR_MALE) flags[0] ++;
+        if (name[i] == CHAR_FEMALE) flags[1] ++;
+    }
+    if (genderRatio == MON_MALE && flags[0] && !flags[1]) return TRUE;
+    if (genderRatio == MON_FEMALE && flags[1] && !flags[0]) return TRUE;
+    return FALSE;
+}
+#else
+__attribute__((naked))
+bool8 NameHasGenderSymbol(const u8 *name, u8 genderRatio)
+{
+    asm_unified("\n"
+                    "\tpush {r4,r5,lr}\n"
+                    "\tsub sp, 0x4\n"
+                    "\tadds r4, r0, 0\n"
+                    "\tlsls r1, 24\n"
+                    "\tlsrs r5, r1, 24\n"
+                    "\tmov r2, sp\n"
+                    "\tmov r1, sp\n"
+                    "\tmovs r0, 0\n"
+                    "\tstrb r0, [r1, 0x1]\n"
+                    "\tstrb r0, [r2]\n"
+                    "\tmovs r3, 0\n"
+                    "\tldrb r0, [r4]\n"
+                    "\tcmp r0, 0xFF\n"
+                    "\tbeq _0804258C\n"
+                    "_08042564:\n"
+                    "\tadds r1, r4, r3\n"
+                    "\tldrb r0, [r1]\n"
+                    "\tcmp r0, 0xB5\n"
+                    "\tbne _08042572\n"
+                    "\tldrb r0, [r2]\n"
+                    "\tadds r0, 0x1\n"
+                    "\tstrb r0, [r2]\n"
+                    "_08042572:\n"
+                    "\tldrb r0, [r1]\n"
+                    "\tcmp r0, 0xB6\n"
+                    "\tbne _0804257E\n"
+                    "\tldrb r0, [r2, 0x1]\n"
+                    "\tadds r0, 0x1\n"
+                    "\tstrb r0, [r2, 0x1]\n"
+                    "_0804257E:\n"
+                    "\tadds r0, r3, 0x1\n"
+                    "\tlsls r0, 24\n"
+                    "\tlsrs r3, r0, 24\n"
+                    "\tadds r0, r4, r3\n"
+                    "\tldrb r0, [r0]\n"
+                    "\tcmp r0, 0xFF\n"
+                    "\tbne _08042564\n"
+                    "_0804258C:\n"
+                    "\tcmp r5, 0\n"
+                    "\tbne _080425A0\n"
+                    "\tmov r0, sp\n"
+                    "\tldrb r0, [r0]\n"
+                    "\tcmp r0, 0\n"
+                    "\tbeq _080425A0\n"
+                    "\tmov r0, sp\n"
+                    "\tldrb r0, [r0, 0x1]\n"
+                    "\tcmp r0, 0\n"
+                    "\tbeq _080425B4\n"
+                    "_080425A0:\n"
+                    "\tcmp r5, 0xFE\n"
+                    "\tbne _080425B8\n"
+                    "\tmov r0, sp\n"
+                    "\tldrb r0, [r0, 0x1]\n"
+                    "\tcmp r0, 0\n"
+                    "\tbeq _080425B8\n"
+                    "\tmov r0, sp\n"
+                    "\tldrb r0, [r0]\n"
+                    "\tcmp r0, 0\n"
+                    "\tbne _080425B8\n"
+                    "_080425B4:\n"
+                    "\tmovs r0, 0x1\n"
+                    "\tb _080425BA\n"
+                    "_080425B8:\n"
+                    "\tmovs r0, 0\n"
+                    "_080425BA:\n"
+                    "\tadd sp, 0x4\n"
+                    "\tpop {r4,r5}\n"
+                    "\tpop {r1}\n"
+                    "\tbx r1");
+}
+#endif
+
+u8 *AppendGenderSymbol(u8 *name, u8 gender)
+{
+    if (gender == MON_MALE)
+    {
+        if (!NameHasGenderSymbol(name, MON_MALE))
+            return StringAppend(name, gOtherText_MaleSymbol3);
+    }
+
+    else if (gender == MON_FEMALE)
+    {
+        if (!NameHasGenderSymbol(name, MON_FEMALE))
+            return StringAppend(name, gOtherText_FemaleSymbol3);
+    }
+    return StringAppend(name, gOtherText_GenderlessSymbol);
+}
+
+u8 *MonAppendGenderSymbol(u8 *name, struct BoxPokemon *boxMon)
+{
+    return AppendGenderSymbol(name, GetBoxMonGender(boxMon));
+}
+
+void DaycareLevelMenuGetText(struct DayCareData *dayCareData, u8 *dest)
+{
+    u8 buffers[2][20];
+    u8 i;
+    *dest = EOS;
+    for (i = 0; i < 2; i ++)
+    {
+        GetBoxMonNick(&dayCareData->mons[i], buffers[i]);
+        MonAppendGenderSymbol(buffers[i], &dayCareData->mons[i]);
+    }
+    StringCopy(dest, buffers[0]);
+    StringAppend(dest, gOtherText_NewLine2);
+    StringAppend(dest, buffers[1]);
+    StringAppend(dest, gOtherText_NewLine2);
+    StringAppend(dest, gOtherText_CancelAndLv);
 }
