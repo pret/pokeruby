@@ -550,7 +550,7 @@ struct DayCareMailEtc
     struct DayCareMail data[2];
     union {
         struct DayCareMailExtra rc;
-        u32 unk70[2];
+        u32 steps[2];
     } extra;
 };
 

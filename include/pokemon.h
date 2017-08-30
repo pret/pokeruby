@@ -93,6 +93,8 @@
 #define MON_DATA_SPATK2            87
 #define MON_DATA_SPDEF2            88
 
+#define MAX_LEVEL 100
+
 #define MON_MALE       0x00
 #define MON_FEMALE     0xFE
 #define MON_GENDERLESS 0xFF
@@ -510,7 +512,7 @@ void sub_803ADE8(struct Pokemon *mon, struct UnknownPokemonStruct *src);
 void sub_803AF78(struct Pokemon *mon, struct UnknownPokemonStruct *dest);
 u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon);
 void CalculateMonStats(struct Pokemon *mon);
-void sub_803B4B4(struct Pokemon *src, struct Pokemon *dest);
+void sub_803B4B4(const struct BoxPokemon *src, struct Pokemon *dest);
 u8 GetLevelFromMonExp(struct Pokemon *mon);
 u8 GetLevelFromBoxMonExp(struct BoxPokemon *boxMon);
 u16 GiveMoveToMon(struct Pokemon *mon, u16 move);
