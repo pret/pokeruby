@@ -1599,3 +1599,24 @@ void DaycareLevelMenuGetText(struct DayCareData *dayCareData, u8 *dest)
     StringAppend(dest, gOtherText_NewLine2);
     StringAppend(dest, gOtherText_CancelAndLv);
 }
+
+void DaycareLevelMenuGetLevelText(struct DayCareData *dayCareData, u8 *dest)
+{
+    u8 i;
+    u8 level;
+    *dest = EOS;
+    for (i = 0; i < 2; i ++)
+    {
+        level = Daycare_GetLevelAfterSteps(&dayCareData->mons[i], dayCareData->mail.extra.egg.steps[i]);
+        dest[0] = 0x34;
+        dest[1] = 0xFC;
+        dest[2] = 0x14;
+        dest[3] = 0x06;
+        dest = ConvertIntToDecimalStringN(dest + 4, level, STR_CONV_MODE_RIGHT_ALIGN, 3);
+        dest[0] = 0xFC;
+        dest[1] = 0x14;
+        dest[2] = 0x00;
+        dest = StringCopy(dest + 3, gOtherText_NewLine2);
+    }
+    *dest = EOS;
+}
