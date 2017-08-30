@@ -67,7 +67,7 @@ u8 MoriDebugMenu_SearchChild(u8 a1, u8 a2, u8 *ptr)
 
 s8 MoriDebugMenu_Egg(void)
 {
-    if ( Daycare_CountPokemon(gSaveBlock1.daycareData) == 2 && daycare_relationship_score_from_savegame() )
+    if ( Daycare_CountPokemon(gSaveBlock1.daycareData.mons) == 2 && daycare_relationship_score_from_savegame() )
         sub_8041940();
     CloseMenu();
 
@@ -76,7 +76,7 @@ s8 MoriDebugMenu_Egg(void)
 
 s8 MoriDebugMenu_MaleEgg(void)
 {
-    if ( Daycare_CountPokemon(gSaveBlock1.daycareData) == 2 && daycare_relationship_score_from_savegame() )
+    if ( Daycare_CountPokemon(gSaveBlock1.daycareData.mons) == 2 && daycare_relationship_score_from_savegame() )
         sub_8041950();
     CloseMenu();
 
@@ -117,7 +117,7 @@ s8 MoriDebugMenu_BreedEgg(void)
             SetMonData(&gPlayerParty[loopCounter], MON_DATA_FRIENDSHIP, &friendship);
         }
     }
-    gSaveBlock1.filler_30B6 = -3;
+    gSaveBlock1.daycareData.extra.unk_2 = -3;
     CloseMenu();
     return 1;
 }

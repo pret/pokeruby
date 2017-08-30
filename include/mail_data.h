@@ -11,6 +11,6 @@ u8 GiveMailToMon2(struct Pokemon *, struct MailStruct *);
 void TakeMailFromMon(struct Pokemon *);
 u8 TakeMailFromMon2(struct Pokemon *);
 bool8 ItemIsMail(u16);
-bool8 ItemIsMail(u16);
+bool8 MonHasMail(struct Pokemon *);
 
 #endif // GUARD_MAIL_DATA_H
