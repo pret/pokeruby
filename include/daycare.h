@@ -2,7 +2,7 @@
 #define GUARD_DAYCARE_H
 
 u8 Daycare_CountPokemon(struct DayCareData *);
-void sub_8041324(struct BoxPokemon *, struct DayCareMailEtc *);
+void sub_8041324(struct BoxPokemon *, struct RecordMixingDayCareMail *);
 void sub_8041790(u16 i);
 u16 sub_8041870(u16);
 void sub_8041940(void);

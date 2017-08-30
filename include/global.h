@@ -551,14 +551,17 @@ struct DayCareMailExtra_EggData {
     u8 unk_11a;
 };
 
+struct RecordMixingDayCareMail
+{
+    struct DayCareMail data[2];
+    u32 unk70;
+    u16 unk74[2];
+};
+
 struct DayCareMailEtc
 {
     struct DayCareMail data[2];
-    union {
-        struct DayCareMailExtra_RecordMixing rc;
-        struct DayCareMailExtra_EggData egg;
-        u8 misc[12];
-    } extra;
+    struct DayCareMailExtra_EggData egg;
 };
 
 struct DayCareData {

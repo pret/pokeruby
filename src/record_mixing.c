@@ -29,7 +29,7 @@ extern u8 ewram[];
 #define unk_2018000 (*(struct PlayerRecords *)(ewram + 0x18000))
 #define unk_2008000 (*(struct PlayerRecords *)(ewram + 0x08000))
 
-extern struct DayCareMailEtc gUnknown_02038738;
+extern struct RecordMixingDayCareMail gUnknown_02038738;
 extern u16 gSpecialVar_0x8005;
 
 u32 gUnknown_03005D2C;
@@ -42,7 +42,7 @@ void *recordMixingTvShows = &gSaveBlock1.tvShows;
 void *gUnknown_083D0274 = &gSaveBlock1.unknown_2ABC;
 void *gUnknown_083D0278 = &gSaveBlock1.oldMan;
 void *recordMixingEasyChatPairs = &gSaveBlock1.easyChatPairs;
-struct DayCareMailEtc *gUnknown_083D0280 = &gUnknown_02038738;
+struct RecordMixingDayCareMail *gUnknown_083D0280 = &gUnknown_02038738;
 void *gUnknown_083D0284 = &gSaveBlock2.filler_A8;
 
 #define BUFFER_CHUNK_SIZE 200
@@ -59,7 +59,7 @@ struct PlayerRecords
     u8 filler1004[0x40];
     u8 filler1044[0x40];
     struct EasyChatPair easyChatPairs[5];
-    struct DayCareMailEtc filler10AC;
+    struct RecordMixingDayCareMail filler10AC;
     u8 filler1124[0xA4];
     u16 filler11C8[0x34];
 };
@@ -77,7 +77,7 @@ void RecordMixing_PrepareExchangePacket(void)
     gUnknown_02038738.data[0] = gSaveBlock1.daycareData.mail.data[0];
     gUnknown_02038738.data[1] = gSaveBlock1.daycareData.mail.data[1];
     sub_8041324(gSaveBlock1.daycareData.mons, &gUnknown_02038738);
-    memcpy(&unk_2018000.filler10AC, gUnknown_083D0280, sizeof(struct DayCareMailEtc));
+    memcpy(&unk_2018000.filler10AC, gUnknown_083D0280, sizeof(struct RecordMixingDayCareMail));
     memcpy(unk_2018000.filler1124, gUnknown_083D0284, sizeof(unk_2018000.filler1124));
 
     if (GetMultiplayerId() == 0)
