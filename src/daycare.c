@@ -261,3 +261,30 @@ void unref_sub_8041824(struct DayCareData *dayCareData)
     dayCareData->unk_118 = 0;
     dayCareData->unk_11a = 0;
 }
+
+u16 sub_8041870(u16 species)
+{
+    int i, j, k;
+    bool8 found;
+    for (i = 0; i < 5; i ++)
+    {
+        found = FALSE;
+        for (j = 1; j < NUM_SPECIES; j ++)
+        {
+            for (k = 0; k < 5; k ++)
+            {
+                if (gEvolutionTable[j].evolutions[k].targetSpecies == species)
+                {
+                    species = j;
+                    found = TRUE;
+                    break;
+                }
+            }
+            if (found)
+                break;
+        }
+        if (j == 412)
+            break;
+    }
+    return species;
+}
