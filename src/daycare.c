@@ -1440,3 +1440,26 @@ u8 daycare_relationship_score(struct DayCareData *dayCareData)
                     "\tbx r1");
 }
 #endif
+
+u8 daycare_relationship_score_from_savegame(void)
+{
+    return daycare_relationship_score(&gSaveBlock1.daycareData);
+}
+
+void sp0B9_daycare_relationship_comment(void)
+{
+    u8 whichString;
+    u8 relationshipScore;
+
+    relationshipScore = daycare_relationship_score_from_savegame();
+    whichString = 0;
+    if (relationshipScore == 0)
+        whichString = 3;
+    if (relationshipScore == 20)
+        whichString = 2;
+    if (relationshipScore == 50)
+        whichString = 1;
+    if (relationshipScore == 70)
+        whichString = 0;
+    StringCopy(gStringVar4, gUnknown_08209AC4[whichString]);
+}

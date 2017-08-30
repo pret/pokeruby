@@ -6,56 +6,6 @@
 
 	.text
 
-	thumb_func_start daycare_relationship_score_from_savegame
-daycare_relationship_score_from_savegame: @ 80424F4
-	push {lr}
-	ldr r0, _08042504 @ =gSaveBlock1 + 0x2F9C
-	bl daycare_relationship_score
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08042504: .4byte gSaveBlock1 + 0x2F9C
-	thumb_func_end daycare_relationship_score_from_savegame
-
-	thumb_func_start sp0B9_daycare_relationship_comment
-sp0B9_daycare_relationship_comment: @ 8042508
-	push {lr}
-	bl daycare_relationship_score_from_savegame
-	lsls r0, 24
-	lsrs r0, 24
-	adds r2, r0, 0
-	movs r1, 0
-	cmp r0, 0
-	bne _0804251C
-	movs r1, 0x3
-_0804251C:
-	cmp r0, 0x14
-	bne _08042522
-	movs r1, 0x2
-_08042522:
-	cmp r0, 0x32
-	bne _08042528
-	movs r1, 0x1
-_08042528:
-	cmp r2, 0x46
-	bne _0804252E
-	movs r1, 0
-_0804252E:
-	ldr r0, _08042540 @ =gStringVar4
-	ldr r2, _08042544 @ =gUnknown_08209AC4
-	lsls r1, 2
-	adds r1, r2
-	ldr r1, [r1]
-	bl StringCopy
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08042540: .4byte gStringVar4
-_08042544: .4byte gUnknown_08209AC4
-	thumb_func_end sp0B9_daycare_relationship_comment
-
 	thumb_func_start NameHasGenderSymbol
 NameHasGenderSymbol: @ 8042548
 	push {r4,r5,lr}
