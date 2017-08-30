@@ -324,7 +324,7 @@ void sub_8041950(void)
     sub_804191C(&gSaveBlock1.daycareData);
 }
 
-void sub_8041960(u8 *data, u8 idx)
+static void sub_8041960(u8 *data, u8 idx)
 {
     int i, j;
     u8 temp[6];
@@ -384,3 +384,115 @@ void InheritIVs(struct Pokemon *egg, struct DayCareData *dayCareData)
         }
     }
 }
+
+#ifdef NONMATCHING
+u8 pokemon_get_eggmoves(struct Pokemon *egg, u16 buffer[10])
+{
+    u16 i, j;
+    u16 nEggMoves = 0;
+    u16 offset = 0;
+    u16 species = GetMonData(egg, MON_DATA_SPECIES);
+    for (i = 0; i < ARRAY_COUNT(gEggMoves) - 1; i ++)
+        if (gEggMoves[i] == species + EGG_MOVES_SPECIES_OFFSET)
+        {
+            offset = i + 1;
+            break;
+        }
+    // Register differences incurred here due to cryptic duplication of gEggMoves pointer
+    for (j = 0; j < 10 && gEggMoves[offset + j] <= EGG_MOVES_SPECIES_OFFSET; j ++)
+    {
+        buffer[j] = gEggMoves[offset + j];
+        nEggMoves ++;
+    }
+    return nEggMoves;
+}
+#else
+__attribute__((naked))
+u8 pokemon_get_eggmoves(struct Pokemon *egg, u16 buffer[10])
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                    "\tmov r7, r8\n"
+                    "\tpush {r7}\n"
+                    "\tmov r8, r1\n"
+                    "\tmovs r6, 0\n"
+                    "\tmovs r4, 0\n"
+                    "\tmovs r1, 0xB\n"
+                    "\tbl GetMonData\n"
+                    "\tlsls r0, 16\n"
+                    "\tlsrs r3, r0, 16\n"
+                    "\tmovs r2, 0\n"
+                    "\tldr r5, _08041B44 @ =gEggMoves\n"
+                    "\tldrh r1, [r5]\n"
+                    "\tldr r7, _08041B48 @ =0x00004e20\n"
+                    "\tadds r0, r3, r7\n"
+                    "\tcmp r1, r0\n"
+                    "\tbne _08041B4C\n"
+                    "\tmovs r4, 0x1\n"
+                    "\tb _08041B6E\n"
+                    "\t.align 2, 0\n"
+                    "_08041B44: .4byte gEggMoves\n"
+                    "_08041B48: .4byte 0x00004e20\n"
+                    "_08041B4C:\n"
+                    "\tadds r0, r2, 0x1\n"
+                    "\tlsls r0, 16\n"
+                    "\tlsrs r2, r0, 16\n"
+                    "\tldr r0, _08041BB8 @ =0x00000471\n"
+                    "\tldr r5, _08041BBC @ =gEggMoves\n"
+                    "\tcmp r2, r0\n"
+                    "\tbhi _08041B6E\n"
+                    "\tlsls r0, r2, 1\n"
+                    "\tadds r0, r5\n"
+                    "\tldrh r1, [r0]\n"
+                    "\tldr r7, _08041BC0 @ =0x00004e20\n"
+                    "\tadds r0, r3, r7\n"
+                    "\tcmp r1, r0\n"
+                    "\tbne _08041B4C\n"
+                    "\tadds r0, r2, 0x1\n"
+                    "\tlsls r0, 16\n"
+                    "\tlsrs r4, r0, 16\n"
+                    "_08041B6E:\n"
+                    "\tmovs r2, 0\n"
+                    "\tlsls r0, r4, 1\n"
+                    "\tadds r0, r5\n"
+                    "\tldrh r0, [r0]\n"
+                    "\tldr r1, _08041BC0 @ =0x00004e20\n"
+                    "\tcmp r0, r1\n"
+                    "\tbhi _08041BAA\n"
+                    "\tadds r7, r5, 0\n"
+                    "\tadds r3, r1, 0\n"
+                    "_08041B80:\n"
+                    "\tlsls r1, r2, 1\n"
+                    "\tadd r1, r8\n"
+                    "\tadds r0, r4, r2\n"
+                    "\tlsls r0, 1\n"
+                    "\tadds r0, r7\n"
+                    "\tldrh r0, [r0]\n"
+                    "\tstrh r0, [r1]\n"
+                    "\tadds r0, r6, 0x1\n"
+                    "\tlsls r0, 16\n"
+                    "\tlsrs r6, r0, 16\n"
+                    "\tadds r0, r2, 0x1\n"
+                    "\tlsls r0, 16\n"
+                    "\tlsrs r2, r0, 16\n"
+                    "\tcmp r2, 0x9\n"
+                    "\tbhi _08041BAA\n"
+                    "\tadds r0, r4, r2\n"
+                    "\tlsls r0, 1\n"
+                    "\tadds r0, r5\n"
+                    "\tldrh r0, [r0]\n"
+                    "\tcmp r0, r3\n"
+                    "\tbls _08041B80\n"
+                    "_08041BAA:\n"
+                    "\tlsls r0, r6, 24\n"
+                    "\tlsrs r0, 24\n"
+                    "\tpop {r3}\n"
+                    "\tmov r8, r3\n"
+                    "\tpop {r4-r7}\n"
+                    "\tpop {r1}\n"
+                    "\tbx r1\n"
+                    "\t.align 2, 0\n"
+                    "_08041BB8: .4byte 0x00000471\n"
+                    "_08041BBC: .4byte gEggMoves\n"
+                    "_08041BC0: .4byte 0x00004e20");
+}
+#endif
