@@ -21,6 +21,7 @@
 #include "sound.h"
 #include "songs.h"
 #include "script.h"
+#include "rom4.h"
 
 extern u16 word_2024E82;
 
@@ -1663,4 +1664,22 @@ void DaycareLevelMenuProcessKeyInput(u8 taskId)
         MenuZeroFillWindowRect(15, 6, 29, 13);
         EnableBothScriptContexts();
     }
+}
+
+void ShowDaycareLevelMenu(void)
+{
+    u8 buffer[100];
+    MenuDrawTextWindow(15, 6, 29, 13);
+    DaycareLevelMenuGetText(&gSaveBlock1.daycareData, buffer);
+    MenuPrint(buffer, 16, 7);
+    DaycareLevelMenuGetLevelText(&gSaveBlock1.daycareData, buffer);
+    MenuPrint_PixelCoords(buffer, 0xce, 0x38, TRUE);
+    InitMenu(0, 16, 7, 3, 0, 13);
+    CreateTask(DaycareLevelMenuProcessKeyInput, 3);
+}
+
+void ChooseSendDaycareMon(void)
+{
+    OpenPartyMenu(6, 0);
+    gMain.savedCallback = c2_exit_to_overworld_2_switch;
 }
