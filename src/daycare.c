@@ -203,3 +203,14 @@ u8 sub_80416E8(struct DayCareData *dayCareData, u8 slot)
     ConvertIntToDecimalStringN(gStringVar2, levelDelta, STR_CONV_MODE_LEFT_ALIGN, 2);
     return levelDelta;
 }
+
+int sub_8041728(struct DayCareData *dayCareData, u8 slot)
+{
+    int cost;
+
+    u8 levelDelta = sub_80416A0(dayCareData, slot);
+    GetBoxMonNick(&dayCareData->mons[slot], gStringVar1);
+    cost = 100 + 100 * levelDelta;
+    ConvertIntToDecimalStringN(gStringVar2, cost, STR_CONV_MODE_LEFT_ALIGN, 5);
+    return cost;
+}

@@ -6,42 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_8041728
-sub_8041728: @ 8041728
-	push {r4-r6,lr}
-	adds r6, r0, 0
-	lsls r4, r1, 24
-	lsrs r4, 24
-	adds r1, r4, 0
-	bl sub_80416A0
-	adds r5, r0, 0
-	lsls r5, 24
-	lsrs r5, 24
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 4
-	adds r6, r0
-	ldr r1, _08041768 @ =gStringVar1
-	adds r0, r6, 0
-	bl GetBoxMonNick
-	movs r0, 0x64
-	adds r4, r5, 0
-	muls r4, r0
-	adds r4, 0x64
-	ldr r0, _0804176C @ =gStringVar2
-	adds r1, r4, 0
-	movs r2, 0
-	movs r3, 0x5
-	bl ConvertIntToDecimalStringN
-	adds r0, r4, 0
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08041768: .4byte gStringVar1
-_0804176C: .4byte gStringVar2
-	thumb_func_end sub_8041728
-
 	thumb_func_start sub_8041770
 sub_8041770: @ 8041770
 	push {lr}
