@@ -10,6 +10,18 @@
 #include "name_string_util.h"
 #include "pokemon_storage_system.h"
 #include "rng.h"
+#include "moves.h"
+#include "strings2.h"
+#include "data/pokemon/egg_moves.h"
+
+const u8 *const gUnknown_08209AC4[] = {
+    DaycareText_GetAlongVeryWell,
+    DaycareText_GetAlong,
+    DaycareText_DontLikeOther,
+    DaycareText_PlayOther
+};
+
+const u8 gUnknown_08209AD4[] = _("タマゴ");
 
 extern u8 gLastFieldPokeMenuOpened;
 
