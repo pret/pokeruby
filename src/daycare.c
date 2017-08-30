@@ -195,3 +195,11 @@ u8 sub_80416A0(struct DayCareData *daycareData, u8 slot)
     levelAfter = Daycare_GetLevelAfterSteps(&daycareData->mons[slot], daycareData->mail.extra.steps[slot]);
     return levelAfter - levelBefore;
 }
+
+u8 sub_80416E8(struct DayCareData *dayCareData, u8 slot)
+{
+    u8 levelDelta = sub_80416A0(dayCareData, slot);
+    GetBoxMonNick(&dayCareData->mons[slot], gStringVar1);
+    ConvertIntToDecimalStringN(gStringVar2, levelDelta, STR_CONV_MODE_LEFT_ALIGN, 2);
+    return levelDelta;
+}
