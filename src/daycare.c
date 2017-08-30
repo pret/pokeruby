@@ -307,3 +307,32 @@ void sub_80418F0(struct DayCareData *dayCareData)
     dayCareData->unk_118 = (Random() % 0xfffe) + 1;
     FlagSet(0x86);
 }
+
+void sub_804191C(struct DayCareData *dayCareData)
+{
+    dayCareData->unk_118 = Random() | 0x8000;
+    FlagSet(0x86);
+}
+
+void sub_8041940(void)
+{
+    sub_80418F0(&gSaveBlock1.daycareData);
+}
+
+void sub_8041950(void)
+{
+    sub_804191C(&gSaveBlock1.daycareData);
+}
+
+void sub_8041960(u8 *data, u8 idx)
+{
+    int i, j;
+    u8 temp[6];
+    data[idx] = 0xff;
+    for (i = 0; i < 6; i ++)
+        temp[i] = data[i];
+    j = 0;
+    for (i = 0; i < 6; i ++)
+        if (temp[i] != 0xff)
+            data[j++] = temp[i];
+}
