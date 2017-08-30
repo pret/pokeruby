@@ -27,7 +27,7 @@ extern u16 word_2024E82;
 
 static void sub_80417F4(struct DayCareMail *);
 static void sub_80420FC(struct Pokemon *, u16, struct DayCareData *);
-u8 daycare_relationship_score(struct DayCareData *);
+static u8 daycare_relationship_score(struct DayCareData *);
 
 const u8 *const gUnknown_08209AC4[] = {
     DaycareText_GetAlongVeryWell,
@@ -996,7 +996,7 @@ void sp0B8_daycare(void)
 }
 
 #ifdef NONMATCHING
-bool8 sub_80421B0(struct DayCareData *dayCareData)
+static bool8 sub_80421B0(struct DayCareData *dayCareData)
 {
     struct BoxPokemon *parent;
     u32 i;
@@ -1036,7 +1036,7 @@ bool8 sub_80421B0(struct DayCareData *dayCareData)
 }
 #else
 __attribute__((naked))
-bool8 sub_80421B0(struct DayCareData *dayCareData)
+static bool8 sub_80421B0(struct DayCareData *dayCareData)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                     "\tsub sp, 0x8\n"
@@ -1164,12 +1164,12 @@ bool8 sub_80422A0(void)
     return sub_80421B0(&gSaveBlock1.daycareData);
 }
 
-bool8 sub_80422B4(struct DayCareData *dayCareData)
+static bool8 sub_80422B4(struct DayCareData *dayCareData)
 {
     return (u32)((-dayCareData->mail.extra.egg.personalityLo) | dayCareData->mail.extra.egg.personalityLo) >> 31;
 }
 
-void sub_80422C4(struct DayCareData *dayCareData)
+static void sub_80422C4(struct DayCareData *dayCareData)
 {
     u8 language;
     if (GetBoxMonData(&dayCareData->mons[0], MON_DATA_SPECIES) != 0)
@@ -1211,6 +1211,9 @@ u8 sp0B6_daycare(void)
     return 0;
 }
 
+#ifdef NONMATCHING
+static
+#endif
 bool8 sub_80423A8(u16 *a, u16 *b)
 {
     int i, j;
@@ -1229,7 +1232,7 @@ bool8 sub_80423A8(u16 *a, u16 *b)
 }
 
 #ifdef NONMATCHING
-u8 daycare_relationship_score(struct DayCareData *dayCareData)
+static u8 daycare_relationship_score(struct DayCareData *dayCareData)
 {
     u16 species[2];
     u32 otIds[2];
@@ -1297,7 +1300,7 @@ u8 daycare_relationship_score(struct DayCareData *dayCareData)
 }
 #else
 __attribute__((naked))
-u8 daycare_relationship_score(struct DayCareData *dayCareData)
+static u8 daycare_relationship_score(struct DayCareData *dayCareData)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                     "\tmov r7, r10\n"
@@ -1568,7 +1571,7 @@ bool8 NameHasGenderSymbol(const u8 *name, u8 genderRatio)
 }
 #endif
 
-u8 *AppendGenderSymbol(u8 *name, u8 gender)
+static u8 *AppendGenderSymbol(u8 *name, u8 gender)
 {
     if (gender == MON_MALE)
     {
@@ -1584,12 +1587,12 @@ u8 *AppendGenderSymbol(u8 *name, u8 gender)
     return StringAppend(name, gOtherText_GenderlessSymbol);
 }
 
-u8 *MonAppendGenderSymbol(u8 *name, struct BoxPokemon *boxMon)
+static u8 *MonAppendGenderSymbol(u8 *name, struct BoxPokemon *boxMon)
 {
     return AppendGenderSymbol(name, GetBoxMonGender(boxMon));
 }
 
-void DaycareLevelMenuGetText(struct DayCareData *dayCareData, u8 *dest)
+static void DaycareLevelMenuGetText(struct DayCareData *dayCareData, u8 *dest)
 {
     u8 buffers[2][20];
     u8 i;
@@ -1606,7 +1609,7 @@ void DaycareLevelMenuGetText(struct DayCareData *dayCareData, u8 *dest)
     StringAppend(dest, gOtherText_CancelAndLv);
 }
 
-void DaycareLevelMenuGetLevelText(struct DayCareData *dayCareData, u8 *dest)
+static void DaycareLevelMenuGetLevelText(struct DayCareData *dayCareData, u8 *dest)
 {
     u8 i;
     u8 level;
@@ -1627,7 +1630,7 @@ void DaycareLevelMenuGetLevelText(struct DayCareData *dayCareData, u8 *dest)
     *dest = EOS;
 }
 
-void DaycareLevelMenuProcessKeyInput(u8 taskId)
+static void DaycareLevelMenuProcessKeyInput(u8 taskId)
 {
     if (gMain.newKeys & DPAD_UP)
     {
