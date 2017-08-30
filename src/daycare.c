@@ -248,3 +248,16 @@ void sub_80417F4(struct DayCareMail *mail)
     do *names-- = zero; while ((int)names >= (int)names2);
     ClearMailStruct(&mail->mail);
 }
+
+void unref_sub_8041824(struct DayCareData *dayCareData)
+{
+    u8 slot;
+    for (slot = 0; slot < ARRAY_COUNT(dayCareData->mons); slot ++)
+    {
+        ZeroBoxMonData(&dayCareData->mons[slot]);
+        dayCareData->mail.extra.steps[slot] = 0;
+        sub_80417F4(&dayCareData->mail.data[slot]);
+    }
+    dayCareData->unk_118 = 0;
+    dayCareData->unk_11a = 0;
+}

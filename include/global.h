@@ -557,7 +557,7 @@ struct DayCareMailEtc
 struct DayCareData {
     struct BoxPokemon mons[2];
     struct DayCareMailEtc mail;
-    u8 unk_118[2];
+    u16 unk_118;
     u8 unk_11a;
     u8 unk_11b;
 };

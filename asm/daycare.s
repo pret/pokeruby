@@ -6,47 +6,6 @@
 
 	.text
 
-	thumb_func_start unref_sub_8041824
-unref_sub_8041824: @ 8041824
-	push {r4-r6,lr}
-	adds r6, r0, 0
-	movs r5, 0
-_0804182A:
-	lsls r4, r5, 2
-	adds r0, r4, r5
-	lsls r0, 4
-	adds r0, r6, r0
-	bl ZeroBoxMonData
-	movs r1, 0x88
-	lsls r1, 1
-	adds r0, r6, r1
-	adds r0, r4
-	movs r4, 0
-	str r4, [r0]
-	lsls r0, r5, 3
-	subs r0, r5
-	lsls r0, 3
-	adds r0, 0xA0
-	adds r0, r6, r0
-	bl sub_80417F4
-	adds r0, r5, 0x1
-	lsls r0, 24
-	lsrs r5, r0, 24
-	cmp r5, 0x1
-	bls _0804182A
-	movs r2, 0x8C
-	lsls r2, 1
-	adds r0, r6, r2
-	movs r1, 0
-	strh r4, [r0]
-	adds r2, 0x2
-	adds r0, r6, r2
-	strb r1, [r0]
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	thumb_func_end unref_sub_8041824
-
 	thumb_func_start sub_8041870
 sub_8041870: @ 8041870
 	push {r4-r7,lr}
