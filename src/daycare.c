@@ -9,6 +9,7 @@
 #include "mail_data.h"
 #include "name_string_util.h"
 #include "pokemon_storage_system.h"
+#include "rng.h"
 
 extern u8 gLastFieldPokeMenuOpened;
 
@@ -287,4 +288,10 @@ u16 sub_8041870(u16 species)
             break;
     }
     return species;
+}
+
+void sub_80418F0(struct DayCareData *dayCareData)
+{
+    dayCareData->unk_118 = (Random() % 0xfffe) + 1;
+    FlagSet(0x86);
 }

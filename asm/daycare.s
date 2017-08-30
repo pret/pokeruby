@@ -6,29 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_80418F0
-sub_80418F0: @ 80418F0
-	push {r4,lr}
-	adds r4, r0, 0
-	bl Random
-	lsls r0, 16
-	lsrs r0, 16
-	ldr r1, _08041918 @ =0x0000fffe
-	bl __umodsi3
-	adds r0, 0x1
-	movs r1, 0x8C
-	lsls r1, 1
-	adds r4, r1
-	strh r0, [r4]
-	movs r0, 0x86
-	bl FlagSet
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08041918: .4byte 0x0000fffe
-	thumb_func_end sub_80418F0
-
 	thumb_func_start sub_804191C
 sub_804191C: @ 804191C
 	push {r4,lr}
