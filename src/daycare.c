@@ -47,13 +47,13 @@ u8 *GetBoxMonNick(struct BoxPokemon *mon, u8 *dest)
     return StringCopy10(dest, nickname);
 }
 
-u8 Daycare_CountPokemon(struct BoxPokemon *daycare_data)
+u8 Daycare_CountPokemon(struct DayCareData *daycare_data)
 {
     u8 i, count;
     count = 0;
 
     for(i = 0;i <= 1;i++)
-        if(GetBoxMonData(daycare_data + i, MON_DATA_SPECIES) != 0)
+        if(GetBoxMonData(&daycare_data->mons[i], MON_DATA_SPECIES) != 0)
             count++;
 
     return count;
@@ -1149,5 +1149,294 @@ bool8 sub_80421B0(struct DayCareData *dayCareData)
                     "\tbx r1\n"
                     "\t.align 2, 0\n"
                     "_0804229C: .4byte gPlayerPartyCount");
+}
+#endif
+
+bool8 sub_80422A0(void)
+{
+    return sub_80421B0(&gSaveBlock1.daycareData);
+}
+
+bool8 sub_80422B4(struct DayCareData *dayCareData)
+{
+    return (u32)((-dayCareData->mail.extra.egg.personalityLo) | dayCareData->mail.extra.egg.personalityLo) >> 31;
+}
+
+void sub_80422C4(struct DayCareData *dayCareData)
+{
+    u8 language;
+    if (GetBoxMonData(&dayCareData->mons[0], MON_DATA_SPECIES) != 0)
+    {
+        GetBoxMonNick(&dayCareData->mons[0], gStringVar1);
+        language = GetBoxMonData(&dayCareData->mons[0], MON_DATA_LANGUAGE);
+        GetBoxMonData(&dayCareData->mons[0], MON_DATA_OT_NAME, gStringVar3);
+        ConvertInternationalString(gStringVar3, language);
+    }
+    if (GetBoxMonData(&dayCareData->mons[1], MON_DATA_SPECIES) != 0)
+    {
+        GetBoxMonNick(&dayCareData->mons[1], gStringVar2);
+    }
+}
+
+u16 sub_8042328(void)
+{
+    GetBoxMonNick(&gPlayerParty[gLastFieldPokeMenuOpened].box, gStringVar1);
+    return GetBoxMonData(&gPlayerParty[gLastFieldPokeMenuOpened].box, MON_DATA_SPECIES);
+}
+
+void sp0B5_daycare(void)
+{
+    sub_80422C4(&gSaveBlock1.daycareData);
+}
+
+u8 sp0B6_daycare(void)
+{
+    u8 monCount;
+    if (sub_80422B4(&gSaveBlock1.daycareData))
+    {
+        return 1;
+    }
+    monCount = Daycare_CountPokemon(&gSaveBlock1.daycareData);
+    if (monCount != 0)
+    {
+        return monCount + 1;
+    }
+    return 0;
+}
+
+bool8 sub_80423A8(u16 *a, u16 *b)
+{
+    int i, j;
+    u16 *v0, *v1, v2;
+    for (i=0, v0=a; i<2; v0++, i++)
+    {
+        for (j=0, v2=*v0, v1=b; j<2; v1++, j++)
+        {
+            if (v2 == *v1)
+            {
+                return TRUE;
+            }
+        }
+    }
+    return FALSE;
+}
+
+#ifdef NONMATCHING
+u8 daycare_relationship_score(struct DayCareData *dayCareData)
+{
+    u16 species[2];
+    u32 otIds[2];
+    u32 genders[2];
+    u16 eggGroups[2][2];
+    int i;
+    u16 *spc;
+    u32 *ids;
+    u32 *gnd;
+    u16 *egg1;
+    u16 *egg2;
+    struct BoxPokemon *parent;
+    for (i=0, parent=&dayCareData->mons[0], spc=species, ids=otIds, gnd=genders, egg1=&eggGroups[0][0], egg2=&eggGroups[0][1]; i<2; spc++, egg1+=2, egg2+=2, parent++, i++)
+    {
+        *spc = GetBoxMonData(parent, MON_DATA_SPECIES);
+        *ids++ = GetBoxMonData(parent, MON_DATA_OT_ID);
+        *gnd++ = GetGenderFromSpeciesAndPersonality(*spc, GetBoxMonData(parent, MON_DATA_PERSONALITY));
+        *egg1 = gBaseStats[*spc].eggGroup1;
+        *egg2 = gBaseStats[*spc].eggGroup2;
+    }
+    if (eggGroups[0][0] == 0xf)
+    {
+        return 0;
+    }
+    if (eggGroups[1][0] == 0xf)
+    {
+        return 0;
+    }
+    if (eggGroups[0][0] == 0xd && eggGroups[1][0] == 0xd)
+    {
+        return 0;
+    }
+    else if (eggGroups[0][0] == 0xd || eggGroups[1][0] == 0xd)
+    {
+        if (otIds[0] == otIds[1])
+        {
+            return 20;
+        }
+        return 50;
+    }
+    if (genders[0] == genders[1] || genders[0] == MON_GENDERLESS || genders[1] == MON_GENDERLESS)
+    {
+        return 0;
+    }
+    if (!sub_80423A8(eggGroups[0], eggGroups[1]))
+    {
+        return 0;
+    }
+    if (species[0] == species[1])
+    {
+        if (otIds[0] == otIds[1])
+        {
+            return 50;
+        }
+        return 70;
+    }
+    else
+    {
+        if (otIds[0] != otIds[1])
+        {
+            return 50;
+        }
+        return 20;
+    }
+}
+#else
+__attribute__((naked))
+u8 daycare_relationship_score(struct DayCareData *dayCareData)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                    "\tmov r7, r10\n"
+                    "\tmov r6, r9\n"
+                    "\tmov r5, r8\n"
+                    "\tpush {r5-r7}\n"
+                    "\tsub sp, 0x2C\n"
+                    "\tmovs r1, 0\n"
+                    "\tmov r8, r1\n"
+                    "\tmov r2, sp\n"
+                    "\tadds r2, 0x8\n"
+                    "\tstr r2, [sp, 0x1C]\n"
+                    "\tadd r1, sp, 0xC\n"
+                    "\tmov r10, r1\n"
+                    "\tadds r2, 0xC\n"
+                    "\tstr r2, [sp, 0x20]\n"
+                    "\tmov r1, sp\n"
+                    "\tadds r1, 0x2\n"
+                    "\tldr r2, _08042488 @ =gBaseStats\n"
+                    "\tmov r9, r2\n"
+                    "\tldr r5, [sp, 0x1C]\n"
+                    "\tadds r7, r1, 0\n"
+                    "\tmov r6, sp\n"
+                    "\tldr r1, [sp, 0x20]\n"
+                    "\tstr r1, [sp, 0x24]\n"
+                    "\tmov r2, r10\n"
+                    "\tstr r2, [sp, 0x28]\n"
+                    "\tadds r4, r0, 0\n"
+                    "_0804240E:\n"
+                    "\tadds r0, r4, 0\n"
+                    "\tmovs r1, 0xB\n"
+                    "\tbl GetBoxMonData\n"
+                    "\tstrh r0, [r5]\n"
+                    "\tadds r0, r4, 0\n"
+                    "\tmovs r1, 0x1\n"
+                    "\tbl GetBoxMonData\n"
+                    "\tldr r1, [sp, 0x28]\n"
+                    "\tstm r1!, {r0}\n"
+                    "\tstr r1, [sp, 0x28]\n"
+                    "\tadds r0, r4, 0\n"
+                    "\tmovs r1, 0\n"
+                    "\tbl GetBoxMonData\n"
+                    "\tadds r1, r0, 0\n"
+                    "\tldrh r0, [r5]\n"
+                    "\tbl GetGenderFromSpeciesAndPersonality\n"
+                    "\tlsls r0, 24\n"
+                    "\tlsrs r0, 24\n"
+                    "\tldr r2, [sp, 0x24]\n"
+                    "\tstm r2!, {r0}\n"
+                    "\tstr r2, [sp, 0x24]\n"
+                    "\tldrh r1, [r5]\n"
+                    "\tlsls r0, r1, 3\n"
+                    "\tsubs r0, r1\n"
+                    "\tlsls r0, 2\n"
+                    "\tadd r0, r9\n"
+                    "\tldrb r0, [r0, 0x14]\n"
+                    "\tstrh r0, [r6]\n"
+                    "\tldrh r1, [r5]\n"
+                    "\tlsls r0, r1, 3\n"
+                    "\tsubs r0, r1\n"
+                    "\tlsls r0, 2\n"
+                    "\tadd r0, r9\n"
+                    "\tldrb r0, [r0, 0x15]\n"
+                    "\tstrh r0, [r7]\n"
+                    "\tadds r5, 0x2\n"
+                    "\tadds r7, 0x4\n"
+                    "\tadds r6, 0x4\n"
+                    "\tadds r4, 0x50\n"
+                    "\tmovs r0, 0x1\n"
+                    "\tadd r8, r0\n"
+                    "\tmov r1, r8\n"
+                    "\tcmp r1, 0x1\n"
+                    "\tbls _0804240E\n"
+                    "\tmov r0, sp\n"
+                    "\tldrh r1, [r0]\n"
+                    "\tcmp r1, 0xF\n"
+                    "\tbeq _08042484\n"
+                    "\tldrh r0, [r0, 0x4]\n"
+                    "\tcmp r0, 0xF\n"
+                    "\tbeq _08042484\n"
+                    "\tcmp r1, 0xD\n"
+                    "\tbne _0804248C\n"
+                    "\tcmp r0, 0xD\n"
+                    "\tbne _08042490\n"
+                    "_08042484:\n"
+                    "\tmovs r0, 0\n"
+                    "\tb _080424E4\n"
+                    "\t.align 2, 0\n"
+                    "_08042488: .4byte gBaseStats\n"
+                    "_0804248C:\n"
+                    "\tcmp r0, 0xD\n"
+                    "\tbne _0804249C\n"
+                    "_08042490:\n"
+                    "\tldr r1, [sp, 0xC]\n"
+                    "\tmov r2, r10\n"
+                    "\tldr r0, [r2, 0x4]\n"
+                    "\tcmp r1, r0\n"
+                    "\tbeq _080424DE\n"
+                    "\tb _080424E2\n"
+                    "_0804249C:\n"
+                    "\tldr r0, [sp, 0x14]\n"
+                    "\tldr r2, [sp, 0x20]\n"
+                    "\tldr r1, [r2, 0x4]\n"
+                    "\tcmp r0, r1\n"
+                    "\tbeq _08042484\n"
+                    "\tcmp r0, 0xFF\n"
+                    "\tbeq _08042484\n"
+                    "\tcmp r1, 0xFF\n"
+                    "\tbeq _08042484\n"
+                    "\tadd r1, sp, 0x4\n"
+                    "\tmov r0, sp\n"
+                    "\tbl sub_80423A8\n"
+                    "\tlsls r0, 24\n"
+                    "\tcmp r0, 0\n"
+                    "\tbeq _08042484\n"
+                    "\tldr r0, [sp, 0x1C]\n"
+                    "\tldrh r1, [r0, 0x2]\n"
+                    "\tldrh r0, [r0]\n"
+                    "\tcmp r0, r1\n"
+                    "\tbne _080424D4\n"
+                    "\tldr r1, [sp, 0xC]\n"
+                    "\tmov r2, r10\n"
+                    "\tldr r0, [r2, 0x4]\n"
+                    "\tcmp r1, r0\n"
+                    "\tbeq _080424E2\n"
+                    "\tmovs r0, 0x46\n"
+                    "\tb _080424E4\n"
+                    "_080424D4:\n"
+                    "\tldr r1, [sp, 0xC]\n"
+                    "\tmov r2, r10\n"
+                    "\tldr r0, [r2, 0x4]\n"
+                    "\tcmp r1, r0\n"
+                    "\tbne _080424E2\n"
+                    "_080424DE:\n"
+                    "\tmovs r0, 0x14\n"
+                    "\tb _080424E4\n"
+                    "_080424E2:\n"
+                    "\tmovs r0, 0x32\n"
+                    "_080424E4:\n"
+                    "\tadd sp, 0x2C\n"
+                    "\tpop {r3-r5}\n"
+                    "\tmov r8, r3\n"
+                    "\tmov r9, r4\n"
+                    "\tmov r10, r5\n"
+                    "\tpop {r4-r7}\n"
+                    "\tpop {r1}\n"
+                    "\tbx r1");
 }
 #endif
