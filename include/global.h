@@ -540,26 +540,30 @@ struct DayCareMail
     /*0x24*/ u8 names[19];
 };
 
-struct DayCareMailExtra {
+struct DayCareMailExtra_RecordMixing {
     u32 unk70;
     u16 unk74[2];
+};
+
+struct DayCareMailExtra_EggData {
+    u32 steps[2];
+    u16 personalityLo;
+    u8 unk_11a;
 };
 
 struct DayCareMailEtc
 {
     struct DayCareMail data[2];
     union {
-        struct DayCareMailExtra rc;
-        u32 steps[2];
+        struct DayCareMailExtra_RecordMixing rc;
+        struct DayCareMailExtra_EggData egg;
+        u8 misc[12];
     } extra;
 };
 
 struct DayCareData {
     struct BoxPokemon mons[2];
     struct DayCareMailEtc mail;
-    u16 eggPersonalityLo;
-    u8 unk_11a;
-    u8 unk_11b;
 };
 
 struct LinkBattleRecord

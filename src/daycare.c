@@ -20,6 +20,7 @@ extern u16 word_2024E82;
 
 static void sub_80417F4(struct DayCareMail *);
 static void sub_80420FC(struct Pokemon *, u16, struct DayCareData *);
+u8 daycare_relationship_score(struct DayCareData *);
 
 const u8 *const gUnknown_08209AC4[] = {
     DaycareText_GetAlongVeryWell,
@@ -112,7 +113,7 @@ static void Daycare_SendPokemon(struct Pokemon * mon, struct DayCareData * dayca
     }
     daycare_data->mons[empty_slot] = mon->box;
     BoxMonRestorePP(&daycare_data->mons[empty_slot]);
-    daycare_data->mail.extra.steps[empty_slot] = 0;
+    daycare_data->mail.extra.egg.steps[empty_slot] = 0;
     ZeroMonData(mon);
     party_compaction();
     CalculatePlayerPartyCount();
@@ -130,8 +131,8 @@ static void sub_80414C0(struct DayCareData * daycare_data)
         daycare_data->mons[0] = daycare_data->mons[1];
         ZeroBoxMonData(&daycare_data->mons[1]);
         daycare_data->mail.data[0] = daycare_data->mail.data[1];
-        daycare_data->mail.extra.steps[0] = daycare_data->mail.extra.steps[1];
-        daycare_data->mail.extra.steps[1] = 0;
+        daycare_data->mail.extra.egg.steps[0] = daycare_data->mail.extra.egg.steps[1];
+        daycare_data->mail.extra.egg.steps[1] = 0;
         sub_80417F4(&daycare_data->mail.data[1]);
     }
 }
@@ -172,7 +173,7 @@ static u16 sub_8041570(struct DayCareData * daycare_data, u8 slot)
     sub_803B4B4(&daycare_data->mons[slot], &pokemon);
     if (GetMonData(&pokemon, MON_DATA_LEVEL) != MAX_LEVEL)
     {
-        experience = GetMonData(&pokemon, MON_DATA_EXP) + daycare_data->mail.extra.steps[slot];
+        experience = GetMonData(&pokemon, MON_DATA_EXP) + daycare_data->mail.extra.egg.steps[slot];
         SetMonData(&pokemon, MON_DATA_EXP, (u8 *)&experience);
         DayCare_LevelUpMoves(&pokemon);
     }
@@ -184,7 +185,7 @@ static u16 sub_8041570(struct DayCareData * daycare_data, u8 slot)
     }
     party_compaction();
     ZeroBoxMonData(&daycare_data->mons[slot]);
-    daycare_data->mail.extra.steps[slot] = 0;
+    daycare_data->mail.extra.egg.steps[slot] = 0;
     sub_80414C0(daycare_data);
     CalculatePlayerPartyCount();
     return species;
@@ -208,7 +209,7 @@ static u8 sub_80416A0(struct DayCareData *daycareData, u8 slot)
     u8 levelAfter;
 
     levelBefore = GetLevelFromBoxMonExp(&daycareData->mons[slot]);
-    levelAfter = Daycare_GetLevelAfterSteps(&daycareData->mons[slot], daycareData->mail.extra.steps[slot]);
+    levelAfter = Daycare_GetLevelAfterSteps(&daycareData->mons[slot], daycareData->mail.extra.egg.steps[slot]);
     return levelAfter - levelBefore;
 }
 
@@ -238,8 +239,8 @@ void sub_8041770(void)
 
 void sub_8041790(u16 i)
 {
-    gSaveBlock1.daycareData.mail.extra.steps[0] += i;
-    gSaveBlock1.daycareData.mail.extra.steps[1] += i;
+    gSaveBlock1.daycareData.mail.extra.egg.steps[0] += i;
+    gSaveBlock1.daycareData.mail.extra.egg.steps[1] += i;
 }
 
 u8 sub_80417B8(void)
@@ -271,11 +272,11 @@ void unref_sub_8041824(struct DayCareData *dayCareData)
     for (slot = 0; slot < ARRAY_COUNT(dayCareData->mons); slot ++)
     {
         ZeroBoxMonData(&dayCareData->mons[slot]);
-        dayCareData->mail.extra.steps[slot] = 0;
+        dayCareData->mail.extra.egg.steps[slot] = 0;
         sub_80417F4(&dayCareData->mail.data[slot]);
     }
-    dayCareData->eggPersonalityLo = 0;
-    dayCareData->unk_11a = 0;
+    dayCareData->mail.extra.egg.personalityLo = 0;
+    dayCareData->mail.extra.egg.unk_11a = 0;
 }
 
 u16 sub_8041870(u16 species)
@@ -307,13 +308,13 @@ u16 sub_8041870(u16 species)
 
 static void sub_80418F0(struct DayCareData *dayCareData)
 {
-    dayCareData->eggPersonalityLo = (Random() % 0xfffe) + 1;
+    dayCareData->mail.extra.egg.personalityLo = (Random() % 0xfffe) + 1;
     FlagSet(0x86);
 }
 
 static void sub_804191C(struct DayCareData *dayCareData)
 {
-    dayCareData->eggPersonalityLo = Random() | 0x8000;
+    dayCareData->mail.extra.egg.personalityLo = Random() | 0x8000;
     FlagSet(0x86);
 }
 
@@ -854,8 +855,8 @@ void daycare_build_child_moveset(struct Pokemon *egg, struct BoxPokemon *dad, st
 
 static void RemoveEggFromDayCare(struct DayCareData *dayCareData)
 {
-    dayCareData->eggPersonalityLo = 0;
-    dayCareData->unk_11a = 0;
+    dayCareData->mail.extra.egg.personalityLo = 0;
+    dayCareData->mail.extra.egg.unk_11a = 0;
 }
 
 void sub_8041E7C(void)
@@ -902,11 +903,11 @@ static u16 sub_8041EEC(struct DayCareData *dayCareData, u8 *a1) // inherit_speci
         }
     }
     eggSpecies = sub_8041870(species[a1[0]]);
-    if (eggSpecies == SPECIES_NIDORAN_F && dayCareData->eggPersonalityLo & 0x8000)
+    if (eggSpecies == SPECIES_NIDORAN_F && dayCareData->mail.extra.egg.personalityLo & 0x8000)
     {
         eggSpecies = SPECIES_NIDORAN_M;
     }
-    if (eggSpecies == SPECIES_ILLUMISE && dayCareData->eggPersonalityLo & 0x8000)
+    if (eggSpecies == SPECIES_ILLUMISE && dayCareData->mail.extra.egg.personalityLo & 0x8000)
     {
         eggSpecies = SPECIES_VOLBEAT;
     }
@@ -970,7 +971,7 @@ static void sub_80420FC(struct Pokemon *mon, u16 species, struct DayCareData *da
     u16 ball;
     u8 metLevel;
     u8 language;
-    personality = dayCareData->eggPersonalityLo | (Random() << 16);
+    personality = dayCareData->mail.extra.egg.personalityLo | (Random() << 16);
     CreateMon(mon, species, 5, 0x20, TRUE, personality, FALSE, 0);
     metLevel = 0;
     ball = ITEM_POKE_BALL;
@@ -987,3 +988,166 @@ void sp0B8_daycare(void)
     sub_8041FC4(&gSaveBlock1.daycareData);
 }
 
+#ifdef NONMATCHING
+bool8 sub_80421B0(struct DayCareData *dayCareData)
+{
+    struct BoxPokemon *parent;
+    u32 i;
+    int v0;
+    int steps;
+    v0 = 0;
+    for (i=0, parent=&dayCareData->mons[0]; i<2; parent++, i++)
+    {
+        if (GetBoxMonData(parent, MON_DATA_SANITY_BIT2, v0))
+        {
+            dayCareData->mail.extra.egg.steps[i]++;
+            v0++;
+        }
+    }
+    if (dayCareData->mail.extra.egg.personalityLo == 0 && v0 == 2 && dayCareData->mail.extra.misc[4] == 0xff && daycare_relationship_score(dayCareData) > (u32)((u32)(Random() * 100) / 0xffff))
+    {
+        sub_8041940();
+    }
+    if ((++dayCareData->mail.extra.egg.unk_11a) == 0xff)
+    {
+        for (i=0; i<gPlayerPartyCount; i++)
+        {
+            if (GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+            {
+                steps = GetMonData(&gPlayerParty[i], MON_DATA_FRIENDSHIP);
+                if (steps == 0)
+                {
+                    gSpecialVar_0x8004 = i;
+                    return TRUE;
+                }
+                steps--;
+                SetMonData(&gPlayerParty[i], MON_DATA_FRIENDSHIP, (u8 *)&steps);
+            }
+        }
+    }
+    return FALSE;
+}
+#else
+__attribute__((naked))
+bool8 sub_80421B0(struct DayCareData *dayCareData)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                    "\tsub sp, 0x8\n"
+                    "\tadds r7, r0, 0\n"
+                    "\tmovs r2, 0\n"
+                    "\tmovs r6, 0\n"
+                    "\tadds r5, r7, 0\n"
+                    "_080421BC:\n"
+                    "\tlsls r4, r6, 2\n"
+                    "\tadds r0, r5, 0\n"
+                    "\tmovs r1, 0x5\n"
+                    "\tstr r2, [sp, 0x4]\n"
+                    "\tbl GetBoxMonData\n"
+                    "\tldr r2, [sp, 0x4]\n"
+                    "\tcmp r0, 0\n"
+                    "\tbeq _080421DE\n"
+                    "\tmovs r0, 0x88\n"
+                    "\tlsls r0, 1\n"
+                    "\tadds r1, r7, r0\n"
+                    "\tadds r1, r4\n"
+                    "\tldr r0, [r1]\n"
+                    "\tadds r0, 0x1\n"
+                    "\tstr r0, [r1]\n"
+                    "\tadds r2, 0x1\n"
+                    "_080421DE:\n"
+                    "\tadds r5, 0x50\n"
+                    "\tadds r6, 0x1\n"
+                    "\tcmp r6, 0x1\n"
+                    "\tbls _080421BC\n"
+                    "\tmovs r1, 0x8C\n"
+                    "\tlsls r1, 1\n"
+                    "\tadds r0, r7, r1\n"
+                    "\tldrh r0, [r0]\n"
+                    "\tcmp r0, 0\n"
+                    "\tbne _08042226\n"
+                    "\tcmp r2, 0x2\n"
+                    "\tbne _08042226\n"
+                    "\tsubs r1, 0x4\n"
+                    "\tadds r0, r7, r1\n"
+                    "\tldrb r0, [r0]\n"
+                    "\tcmp r0, 0xFF\n"
+                    "\tbne _08042226\n"
+                    "\tadds r0, r7, 0\n"
+                    "\tbl daycare_relationship_score\n"
+                    "\tadds r4, r0, 0\n"
+                    "\tlsls r4, 24\n"
+                    "\tlsrs r4, 24\n"
+                    "\tbl Random\n"
+                    "\tlsls r0, 16\n"
+                    "\tlsrs r0, 16\n"
+                    "\tmovs r1, 0x64\n"
+                    "\tmuls r0, r1\n"
+                    "\tldr r1, _08042240 @ =0x0000ffff\n"
+                    "\tbl __udivsi3\n"
+                    "\tcmp r4, r0\n"
+                    "\tbls _08042226\n"
+                    "\tbl sub_8041940\n"
+                    "_08042226:\n"
+                    "\tmovs r0, 0x8D\n"
+                    "\tlsls r0, 1\n"
+                    "\tadds r1, r7, r0\n"
+                    "\tldrb r0, [r1]\n"
+                    "\tadds r0, 0x1\n"
+                    "\tstrb r0, [r1]\n"
+                    "\tlsls r0, 24\n"
+                    "\tlsrs r0, 24\n"
+                    "\tcmp r0, 0xFF\n"
+                    "\tbne _08042290\n"
+                    "\tmovs r6, 0\n"
+                    "\tb _08042288\n"
+                    "\t.align 2, 0\n"
+                    "_08042240: .4byte 0x0000ffff\n"
+                    "_08042244:\n"
+                    "\tmovs r0, 0x64\n"
+                    "\tadds r1, r6, 0\n"
+                    "\tmuls r1, r0\n"
+                    "\tldr r0, _08042270 @ =gPlayerParty\n"
+                    "\tadds r4, r1, r0\n"
+                    "\tadds r0, r4, 0\n"
+                    "\tmovs r1, 0x2D\n"
+                    "\tbl GetMonData\n"
+                    "\tcmp r0, 0\n"
+                    "\tbeq _08042286\n"
+                    "\tadds r0, r4, 0\n"
+                    "\tmovs r1, 0x20\n"
+                    "\tbl GetMonData\n"
+                    "\tstr r0, [sp]\n"
+                    "\tcmp r0, 0\n"
+                    "\tbne _08042278\n"
+                    "\tldr r0, _08042274 @ =gSpecialVar_0x8004\n"
+                    "\tstrh r6, [r0]\n"
+                    "\tmovs r0, 0x1\n"
+                    "\tb _08042292\n"
+                    "\t.align 2, 0\n"
+                    "_08042270: .4byte gPlayerParty\n"
+                    "_08042274: .4byte gSpecialVar_0x8004\n"
+                    "_08042278:\n"
+                    "\tsubs r0, 0x1\n"
+                    "\tstr r0, [sp]\n"
+                    "\tadds r0, r4, 0\n"
+                    "\tmovs r1, 0x20\n"
+                    "\tmov r2, sp\n"
+                    "\tbl SetMonData\n"
+                    "_08042286:\n"
+                    "\tadds r6, 0x1\n"
+                    "_08042288:\n"
+                    "\tldr r0, _0804229C @ =gPlayerPartyCount\n"
+                    "\tldrb r0, [r0]\n"
+                    "\tcmp r6, r0\n"
+                    "\tbcc _08042244\n"
+                    "_08042290:\n"
+                    "\tmovs r0, 0\n"
+                    "_08042292:\n"
+                    "\tadd sp, 0x8\n"
+                    "\tpop {r4-r7}\n"
+                    "\tpop {r1}\n"
+                    "\tbx r1\n"
+                    "\t.align 2, 0\n"
+                    "_0804229C: .4byte gPlayerPartyCount");
+}
+#endif
