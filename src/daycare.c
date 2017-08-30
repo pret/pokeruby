@@ -13,6 +13,7 @@
 #include "moves.h"
 #include "strings2.h"
 #include "data/pokemon/egg_moves.h"
+#include "party_menu.h"
 
 const u8 *const gUnknown_08209AC4[] = {
     DaycareText_GetAlongVeryWell,
@@ -496,3 +497,93 @@ u8 pokemon_get_eggmoves(struct Pokemon *egg, u16 buffer[10])
                     "_08041BC0: .4byte 0x00004e20");
 }
 #endif
+
+extern u16 gUnknown_03000470[50];
+extern u16 gUnknown_030004D8[4];
+extern u16 gUnknown_030004E0[4];
+extern u16 gUnknown_030004E8[10];
+extern u16 gUnknown_03000500[4];
+
+void daycare_build_child_moveset(struct Pokemon *egg, struct BoxPokemon *dad, struct BoxPokemon *mom)
+{
+    u16 numSharedParentMoves;
+    u8 numLevelUpMoves;
+    u8 numEggMoves;
+    u16 i, j;
+
+    numSharedParentMoves = 0;
+    for (i = 0; i < 4; i ++)
+    {
+        gUnknown_03000500[i] = 0;
+        gUnknown_030004D8[i] = 0;
+        gUnknown_030004E0[i] = 0;
+    }
+    for (i = 0; i < 10; i ++)
+        gUnknown_030004E8[i] = 0;
+    for (i = 0; i < 50; i ++)
+        gUnknown_03000470[i] = 0;
+
+    numLevelUpMoves = GetLevelUpMovesBySpecies(GetMonData(egg, MON_DATA_SPECIES), gUnknown_03000470);
+    for (i = 0; i < 4; i ++)
+    {
+        gUnknown_030004D8[i] = GetBoxMonData(dad, MON_DATA_MOVE1 + i);
+        gUnknown_03000500[i] = GetBoxMonData(mom, MON_DATA_MOVE1 + i);
+    }
+    numEggMoves = pokemon_get_eggmoves(egg, gUnknown_030004E8);
+
+    for (i = 0; i < 4; i ++)
+    {
+        if (gUnknown_030004D8[i] != MOVE_NONE)
+        {
+            for (j = 0; j < numEggMoves; j ++)
+            {
+                if (gUnknown_030004D8[i] == gUnknown_030004E8[j])
+                {
+                    if (GiveMoveToMon(egg, gUnknown_030004D8[i]) == 0xffff)
+                        DeleteFirstMoveAndGiveMoveToMon(egg, gUnknown_030004D8[i]);
+                    break;
+                }
+            }
+        }
+        else
+            break;
+    }
+    for (i = 0; i < 4; i ++)
+    {
+        if (gUnknown_030004D8[i] != MOVE_NONE)
+        {
+            for (j = 0; j < 50 + 8; j ++)
+            {
+                if (gUnknown_030004D8[i] == ItemIdToBattleMoveId(ITEM_TM01 + j) && CanMonLearnTMHM(egg, j))
+                {
+                    if (GiveMoveToMon(egg, gUnknown_030004D8[i]) == 0xffff)
+                        DeleteFirstMoveAndGiveMoveToMon(egg, gUnknown_030004D8[i]);
+                }
+            }
+        }
+    }
+    for (i = 0; i < 4; i ++)
+    {
+        if (gUnknown_030004D8[i] == MOVE_NONE)
+            break;
+        for (j = 0; j < 4; j ++)
+        {
+            if (gUnknown_030004D8[i] == gUnknown_03000500[j] && gUnknown_030004D8[i] != MOVE_NONE)
+                gUnknown_030004E0[numSharedParentMoves++] = gUnknown_030004D8[i];
+        }
+    }
+    for (i = 0; i < 4; i ++)
+    {
+        if (gUnknown_030004E0[i] == MOVE_NONE)
+            break;
+        for (j = 0; j < numLevelUpMoves; j ++)
+        {
+            if (gUnknown_03000470[j] != MOVE_NONE && gUnknown_030004E0[i] == gUnknown_03000470[j])
+            {
+                if (GiveMoveToMon(egg, gUnknown_030004E0[i]) == 0xffff)
+                    DeleteFirstMoveAndGiveMoveToMon(egg, gUnknown_030004E0[i]);
+                break;
+            }
+        }
+    }
+}
