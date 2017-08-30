@@ -6,23 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_8041770
-sub_8041770: @ 8041770
-	push {lr}
-	ldr r0, _08041784 @ =gSaveBlock1 + 0x2F9C
-	ldr r1, _08041788 @ =gSpecialVar_0x8004
-	ldrb r1, [r1]
-	bl sub_8041728
-	ldr r1, _0804178C @ =gSpecialVar_0x8005
-	strh r0, [r1]
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08041784: .4byte gSaveBlock1 + 0x2F9C
-_08041788: .4byte gSpecialVar_0x8004
-_0804178C: .4byte gSpecialVar_0x8005
-	thumb_func_end sub_8041770
-
 	thumb_func_start sub_8041790
 sub_8041790: @ 8041790
 	lsls r0, 16
