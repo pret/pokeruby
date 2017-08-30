@@ -2,7 +2,6 @@
 #include "link.h"
 #include "battle.h"
 #include "berry.h"
-#include "berry_blender.h"
 #include "hall_of_fame.h"
 #include "item_use.h"
 #include "main.h"
@@ -41,6 +40,8 @@ extern u8 unk_2004000[];
 extern u16 gBattleTypeFlags;
 
 extern u16 word_3004858;
+
+extern void Blender_SetBankBerryData(u8 bank, u16 itemID);
 
 static void InitLinkTestBG(u8, u8, u8, u8);
 void InitLinkTestBG_Unused(u8, u8, u8, u8);
@@ -556,7 +557,7 @@ static void ProcessRecvCmds(u8 unusedParam)
             sub_8007E24();
             break;
         case 0xAAAB:
-            sub_80516C4(i, gRecvCmds[1][i]);
+            Blender_SetBankBerryData(i, gRecvCmds[1][i]);
             break;
         case 0xCCCC:
 #if defined(ENGLISH)

@@ -3161,7 +3161,7 @@ static u8 PickWildMonNature(void)
             }
             for (i = 0; i < 25; i++)
             {
-                if (sub_810CAE4(natures[i], safariPokeblock) > 0)
+                if (PokeblockGetGain(natures[i], safariPokeblock) > 0)
                     return natures[i];
             }
         }

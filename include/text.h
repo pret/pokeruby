@@ -97,35 +97,35 @@ struct WindowConfig
 
 struct Window
 {
-    u8 textMode;
-    u8 fontNum;
-    u8 language;
-    u8 foregroundColor;
-    u8 backgroundColor;
-    u8 shadowColor;
-    u8 paletteNum;
-    u8 tilemapLeft;
-    u8 tilemapTop;
-    u8 width;
-    u8 height;
-    u8 win_field_B;
-    u8 win_field_C;
-    u8 delayCounter;
-    u8 spacing;
-    u8 win_field_F;
-    u8 cursorX;
-    u8 cursorY;
-    u8 left;
-    u16 top;
-    u16 state;
-    u16 downArrowCounter;
-    u16 tileDataStartOffset;
-    u16 tileDataOffset;
-    u16 textIndex;
-    const u8 *text;
-    u8 *tileData;
-    u16 *tilemap;
-    struct WindowConfig *config;
+ /*0x00*/ u8 textMode;
+ /*0x01*/ u8 fontNum;
+ /*0x02*/ u8 language;
+ /*0x03*/ u8 foregroundColor;
+ /*0x04*/ u8 backgroundColor;
+ /*0x05*/ u8 shadowColor;
+ /*0x06*/ u8 paletteNum;
+ /*0x07*/ u8 tilemapLeft;
+ /*0x08*/ u8 tilemapTop;
+ /*0x09*/ u8 width;
+ /*0x0A*/ u8 height;
+ /*0x0B*/ u8 win_field_B;
+ /*0x0C*/ u8 win_field_C;
+ /*0x0D*/ u8 delayCounter;
+ /*0x0E*/ u8 spacing;
+ /*0x0F*/ u8 win_field_F;
+ /*0x10*/ u8 cursorX;
+ /*0x11*/ u8 cursorY;
+ /*0x12*/ u8 left;
+ /*0x14*/ u16 top; // padded to 0x14
+ /*0x16*/ u16 state;
+ /*0x18*/ u16 downArrowCounter;
+ /*0x1A*/ u16 tileDataStartOffset;
+ /*0x1C*/ u16 tileDataOffset;
+ /*0x1E*/ u16 textIndex;
+ /*0x20*/ const u8 *text;
+ /*0x24*/ u8 *tileData;
+ /*0x28*/ u16 *tilemap;
+ /*0x2C*/ struct WindowConfig *config;
 };
 
 extern vu16 *const gBGControlRegs[];

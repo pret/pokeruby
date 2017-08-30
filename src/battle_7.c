@@ -31,7 +31,6 @@ struct Struct2019348
 
 extern u8 gBattleBufferA[][0x200];
 extern u8 gActiveBank;
-extern u32 gBattleExecBuffer;
 extern u8 gNoOfAllBanks;
 extern u16 gBattlePartyID[];
 extern u8 gBanksBySide[];
@@ -63,7 +62,6 @@ extern const u8 gSubstituteDollGfx[];
 extern const u8 gSubstituteDollPal[];
 extern const struct CompressedSpriteSheet gUnknown_081FAF24;
 extern const struct SpriteTemplate gSpriteTemplate_81FAF34;
-extern void (*const gOpponentBufferCommands[])(void);
 extern const struct CompressedSpriteSheet gUnknown_0820A47C;
 extern const struct CompressedSpriteSheet gUnknown_0820A484;
 extern const struct CompressedSpriteSheet gUnknown_0820A48C[];
@@ -96,9 +94,6 @@ void sub_80324E0(u8 a);
 void sub_80327CC(void);
 void sub_8032978(struct Sprite *);
 void sub_80328A4(struct Sprite *);
-void OpponentBufferRunCommand(void);
-void sub_80332D0(void);
-void OpponentBufferExecCompleted(void);
 
 void sub_80312F0(struct Sprite *sprite)
 {
@@ -182,9 +177,9 @@ bool8 move_anim_start_t3(u8 a, u8 b, u8 c, u8 d, u16 e)
         gBattleMonForms[a] = e & 0x7F;
         return TRUE;
     }
-    if (ewram17800[a].unk0_2 && sub_803163C(d) == 0)
+    if (ewram17800[a].substituteSprite && sub_803163C(d) == 0)
         return TRUE;
-    if (ewram17800[a].unk0_2 && d == 2 && gSprites[gObjectBankIDs[a]].invisible)
+    if (ewram17800[a].substituteSprite && d == 2 && gSprites[gObjectBankIDs[a]].invisible)
     {
         refresh_graphics_maybe(a, 1, gObjectBankIDs[a]);
         sub_80324E0(a);
@@ -273,7 +268,7 @@ bool8 mplay_80342A4(u8 a)
     return TRUE;
 }
 
-void sub_8031794(struct Pokemon *pkmn, u8 b)
+void BattleLoadOpponentMonSprite(struct Pokemon *pkmn, u8 b)
 {
     u32 personalityValue;
     u16 species;
@@ -284,14 +279,14 @@ void sub_8031794(struct Pokemon *pkmn, u8 b)
     const u8 *lzPaletteData;
 
     personalityValue = GetMonData(pkmn, MON_DATA_PERSONALITY);
-    if (ewram17800[b].unk2 == 0)
+    if (ewram17800[b].transformedSpecies == 0)
     {
         species = GetMonData(pkmn, MON_DATA_SPECIES);
         r7 = personalityValue;
     }
     else
     {
-        species = ewram17800[b].unk2;
+        species = ewram17800[b].transformedSpecies;
         r7 = gPID_perBank[b];
     }
     otId = GetMonData(pkmn, MON_DATA_OT_ID);
@@ -305,7 +300,7 @@ void sub_8031794(struct Pokemon *pkmn, u8 b)
       species,
       r7);
     paletteOffset = 0x100 + b * 16;
-    if (ewram17800[b].unk2 == 0)
+    if (ewram17800[b].transformedSpecies == 0)
         lzPaletteData = pokemon_get_pal(pkmn);
     else
         lzPaletteData = species_and_otid_get_pal(species, otId, personalityValue);
@@ -318,14 +313,14 @@ void sub_8031794(struct Pokemon *pkmn, u8 b)
         sub_800D238(lzPaletteData, ewram + 0x16400);
         LoadPalette(ewram + 0x16400 + gBattleMonForms[b] * 32, paletteOffset, 0x20);
     }
-    if (ewram17800[b].unk2 != 0)
+    if (ewram17800[b].transformedSpecies != 0)
     {
         BlendPalette(paletteOffset, 16, 6, 0x7FFF);
         CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, 32);
     }
 }
 
-void sub_80318FC(struct Pokemon *pkmn, u8 b)
+void BattleLoadPlayerMonSprite(struct Pokemon *pkmn, u8 b)
 {
     u32 personalityValue;
     u16 species;
@@ -336,14 +331,14 @@ void sub_80318FC(struct Pokemon *pkmn, u8 b)
     const u8 *lzPaletteData;
 
     personalityValue = GetMonData(pkmn, MON_DATA_PERSONALITY);
-    if (ewram17800[b].unk2 == 0)
+    if (ewram17800[b].transformedSpecies == 0)
     {
         species = GetMonData(pkmn, MON_DATA_SPECIES);
         r7 = personalityValue;
     }
     else
     {
-        species = ewram17800[b].unk2;
+        species = ewram17800[b].transformedSpecies;
         r7 = gPID_perBank[b];
     }
     otId = GetMonData(pkmn, MON_DATA_OT_ID);
@@ -357,7 +352,7 @@ void sub_80318FC(struct Pokemon *pkmn, u8 b)
       species,
       r7);
     paletteOffset = 0x100 + b * 16;
-    if (ewram17800[b].unk2 == 0)
+    if (ewram17800[b].transformedSpecies == 0)
         lzPaletteData = pokemon_get_pal(pkmn);
     else
         lzPaletteData = species_and_otid_get_pal(species, otId, personalityValue);
@@ -370,7 +365,7 @@ void sub_80318FC(struct Pokemon *pkmn, u8 b)
         sub_800D238(lzPaletteData, ewram + 0x16400);
         LoadPalette(ewram + 0x16400 + gBattleMonForms[b] * 32, paletteOffset, 0x20);
     }
-    if (ewram17800[b].unk2 != 0)
+    if (ewram17800[b].transformedSpecies != 0)
     {
         BlendPalette(paletteOffset, 16, 6, 0x7FFF);
         CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, 32);
@@ -405,7 +400,7 @@ void sub_8031A6C(u16 a, u8 b)
     LoadCompressedObjectPalette(&gTrainerFrontPicPaletteTable[a]);
 }
 
-void sub_8031AF4(u16 a, u8 b)
+void LoadPlayerTrainerBankSprite(u16 a, u8 b)
 {
     u8 status;
 
@@ -607,12 +602,12 @@ void sub_8031F24(void)
     s32 i;
 
     for (i = 0; i < gNoOfAllBanks; i++)
-        ewram17800[i].unk0_0 = gSprites[gObjectBankIDs[i]].invisible;
+        ewram17800[i].invisible = gSprites[gObjectBankIDs[i]].invisible;
 }
 
 void sub_8031F88(u8 a)
 {
-    ewram17800[a].unk0_0 = gSprites[gObjectBankIDs[a]].invisible;
+    ewram17800[a].invisible = gSprites[gObjectBankIDs[a]].invisible;
 }
 
 void sub_8031FC4(u8 a, u8 b, bool8 c)
@@ -630,7 +625,7 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
         paletteOffset = 0x100 + a * 16;
         LoadPalette(ewram + 0x16400 + ewram17840.unk0 * 32, paletteOffset, 32);
         gBattleMonForms[a] = ewram17840.unk0;
-        if (ewram17800[a].unk2 != 0)
+        if (ewram17800[a].transformedSpecies != 0)
         {
             BlendPalette(paletteOffset, 16, 6, 0x7FFF);
             CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, 32);
@@ -709,7 +704,7 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
         CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, 32);
         if (!IsContest())
         {
-            ewram17800[a].unk2 = species;
+            ewram17800[a].transformedSpecies = species;
             gBattleMonForms[a] = gBattleMonForms[b];
         }
         gSprites[gObjectBankIDs[a]].pos1.y = sub_8077F68(a);
@@ -717,7 +712,7 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
     }
 }
 
-void sub_8032350(u8 a, u8 b)
+void BattleLoadSubstituteSprite(u8 a, u8 b)
 {
     u8 r4;
     u16 foo;
@@ -750,16 +745,16 @@ void sub_8032350(u8 a, u8 b)
         if (!IsContest())
         {
             if (GetBankSide(a) != 0)
-                sub_8031794(&gEnemyParty[gBattlePartyID[a]], a);
+                BattleLoadOpponentMonSprite(&gEnemyParty[gBattlePartyID[a]], a);
             else
-                sub_80318FC(&gPlayerParty[gBattlePartyID[a]], a);
+                BattleLoadPlayerMonSprite(&gPlayerParty[gBattlePartyID[a]], a);
         }
     }
 }
 
 void refresh_graphics_maybe(u8 a, u8 b, u8 spriteId)
 {
-    sub_8032350(a, b);
+    BattleLoadSubstituteSprite(a, b);
     StartSpriteAnim(&gSprites[spriteId], gBattleMonForms[a]);
     if (b == 0)
         gSprites[spriteId].pos1.y = sub_8077F7C(a);
@@ -770,12 +765,12 @@ void refresh_graphics_maybe(u8 a, u8 b, u8 spriteId)
 void sub_80324BC(u8 a, u16 b)
 {
     if (b == 0xA4)
-        ewram17800[a].unk0_2 = 1;
+        ewram17800[a].substituteSprite = 1;
 }
 
 void sub_80324E0(u8 a)
 {
-    ewram17800[a].unk0_2 = 0;
+    ewram17800[a].substituteSprite = 0;
 }
 
 void sub_80324F8(struct Pokemon *pkmn, u8 b)
@@ -896,9 +891,9 @@ void sub_80328A4(struct Sprite *sprite)
     }
     if (gAnimScriptActive || r7->invisible)
         invisible = TRUE;
-    else if (ewram17800[r4].unk2 != 0 && gEnemyMonElevation[ewram17800[r4].unk2] == 0)
+    else if (ewram17800[r4].transformedSpecies != 0 && gEnemyMonElevation[ewram17800[r4].transformedSpecies] == 0)
         invisible = TRUE;
-    if (ewram17800[r4].unk0_2)
+    if (ewram17800[r4].substituteSprite)
         invisible = TRUE;
     sprite->pos1.x = r7->pos1.x;
     sprite->pos2.x = r7->pos2.x;
@@ -914,8 +909,8 @@ void sub_8032984(u8 a, u16 b)
 {
     if (GetBankSide(a) != 0)
     {
-        if (ewram17800[a].unk2 != 0)
-            b = ewram17800[a].unk2;
+        if (ewram17800[a].transformedSpecies != 0)
+            b = ewram17800[a].transformedSpecies;
         if (gEnemyMonElevation[b] != 0)
             gSprites[ewram17810[a].unk7].callback = sub_80328A4;
         else
@@ -953,283 +948,8 @@ void sub_8032A38(void)
 
 void sub_8032AA8(u8 a, u8 b)
 {
-    ewram17800[a].unk2 = 0;
+    ewram17800[a].transformedSpecies = 0;
     gBattleMonForms[a] = 0;
     if (b == 0)
         sub_80324E0(a);
-}
-
-void nullsub_45(void)
-{
-}
-
-void SetBankFuncToOpponentBufferRunCommand(void)
-{
-    gBattleBankFunc[gActiveBank] = OpponentBufferRunCommand;
-}
-
-void OpponentBufferRunCommand(void)
-{
-    if (gBattleExecBuffer & gBitTable[gActiveBank])
-    {
-        if (gBattleBufferA[gActiveBank][0] <= 0x38)
-            gOpponentBufferCommands[gBattleBufferA[gActiveBank][0]]();
-        else
-            OpponentBufferExecCompleted();
-    }
-}
-
-void sub_8032B4C(void)
-{
-    if (gSprites[gObjectBankIDs[gActiveBank]].callback == SpriteCallbackDummy)
-        OpponentBufferExecCompleted();
-}
-
-// Duplicate of sub_8032B4C
-void sub_8032B84(void)
-{
-    if (gSprites[gObjectBankIDs[gActiveBank]].callback == SpriteCallbackDummy)
-        OpponentBufferExecCompleted();
-}
-
-void sub_8032BBC(void)
-{
-    if (gSprites[gObjectBankIDs[gActiveBank]].callback == SpriteCallbackDummy)
-    {
-        sub_8031B74(gSprites[gObjectBankIDs[gActiveBank]].oam.affineParam);
-        gSprites[gObjectBankIDs[gActiveBank]].oam.tileNum = gSprites[gObjectBankIDs[gActiveBank]].data5;
-        FreeSpriteOamMatrix(&gSprites[gObjectBankIDs[gActiveBank]]);
-        DestroySprite(&gSprites[gObjectBankIDs[gActiveBank]]);
-        OpponentBufferExecCompleted();
-    }
-}
-
-void sub_8032C4C(void)
-{
-    if ((--ewram17810[gActiveBank].unk9) == 0xFF)
-    {
-        ewram17810[gActiveBank].unk9 = 0;
-        OpponentBufferExecCompleted();
-    }
-}
-
-void sub_8032C88(void)
-{
-    bool8 r6 = FALSE;
-
-    if (!IsDoubleBattle() || (IsDoubleBattle() && (gBattleTypeFlags & BATTLE_TYPE_MULTI)))
-    {
-        if (gSprites[gHealthboxIDs[gActiveBank]].callback == SpriteCallbackDummy)
-            r6 = TRUE;
-    }
-    else
-    {
-        if (gSprites[gHealthboxIDs[gActiveBank]].callback == SpriteCallbackDummy
-         && gSprites[gHealthboxIDs[gActiveBank ^ 2]].callback == SpriteCallbackDummy)
-            r6 = TRUE;
-    }
-    if (IsCryPlayingOrClearCrySongs())
-        r6 = FALSE;
-
-    if (r6 && ewram17810[gActiveBank].unk1_0 && ewram17810[gActiveBank ^ 2].unk1_0)
-    {
-        ewram17810[gActiveBank].unk0_7 = 0;
-        ewram17810[gActiveBank].unk1_0 = 0;
-        ewram17810[gActiveBank ^ 2].unk0_7 = 0;
-        ewram17810[gActiveBank ^ 2].unk1_0 = 0;
-        FreeSpriteTilesByTag(0x27F9);
-        FreeSpritePaletteByTag(0x27F9);
-        if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
-            m4aMPlayContinue(&gMPlay_BGM);
-        else
-            m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 256);
-        ewram17810[gActiveBank].unk9 = 3;
-        gBattleBankFunc[gActiveBank] = sub_8032C4C;
-    }
-}
-
-void sub_8032E2C(void)
-{
-    if (!ewram17810[gActiveBank].unk0_3 && !ewram17810[gActiveBank].unk0_7)
-        sub_8141828(gActiveBank, &gEnemyParty[gBattlePartyID[gActiveBank]]);
-    if (!ewram17810[gActiveBank ^ 2].unk0_3 && !ewram17810[gActiveBank ^ 2].unk0_7)
-        sub_8141828(gActiveBank ^ 2, &gEnemyParty[gBattlePartyID[gActiveBank ^ 2]]);
-    if (!ewram17810[gActiveBank].unk0_3 && !ewram17810[gActiveBank ^ 2].unk0_3)
-    {
-        if (IsDoubleBattle() && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
-        {
-            DestroySprite(&gSprites[gUnknown_0300434C[gActiveBank ^ 2]]);
-            sub_8045A5C(
-              gHealthboxIDs[gActiveBank ^ 2],
-              &gEnemyParty[gBattlePartyID[gActiveBank ^ 2]],
-              0);
-            sub_804777C(gActiveBank ^ 2);
-            sub_8043DFC(gHealthboxIDs[gActiveBank ^ 2]);
-            sub_8032984(
-              gActiveBank ^ 2,
-              GetMonData(&gEnemyParty[gBattlePartyID[gActiveBank ^ 2]], MON_DATA_SPECIES));
-        }
-        DestroySprite(&gSprites[gUnknown_0300434C[gActiveBank]]);
-        sub_8045A5C(
-          gHealthboxIDs[gActiveBank],
-          &gEnemyParty[gBattlePartyID[gActiveBank]],
-          0);
-        sub_804777C(gActiveBank);
-        sub_8043DFC(gHealthboxIDs[gActiveBank]);
-        sub_8032984(
-          gActiveBank,
-          GetMonData(&gEnemyParty[gBattlePartyID[gActiveBank]], MON_DATA_SPECIES));
-
-        ewram17840.unk9_0 = 0;
-        gBattleBankFunc[gActiveBank] = sub_8032C88;
-    }
-}
-
-void sub_8033018(void)
-{
-    if (gSprites[gObjectBankIDs[gActiveBank]].animEnded == TRUE
-     && gSprites[gObjectBankIDs[gActiveBank]].pos2.x == 0)
-    {
-        if (!ewram17810[gActiveBank].unk0_7)
-        {
-            sub_8141828(gActiveBank, &gEnemyParty[gBattlePartyID[gActiveBank]]);
-            return;
-        }
-        if (ewram17810[gActiveBank].unk1_0)
-        {
-            ewram17810[gActiveBank].unk0_7 = 0;
-            ewram17810[gActiveBank].unk1_0 = 0;
-            FreeSpriteTilesByTag(0x27F9);
-            FreeSpritePaletteByTag(0x27F9);
-            OpponentBufferExecCompleted();
-            return;
-        }
-    }
-}
-
-void sub_80330C8(void)
-{
-    s16 r4 = sub_8045C78(gActiveBank, gHealthboxIDs[gActiveBank], 0, 0);
-
-    sub_8043DFC(gHealthboxIDs[gActiveBank]);
-    if (r4 != -1)
-        sub_80440EC(gHealthboxIDs[gActiveBank], r4, 0);
-    else
-        OpponentBufferExecCompleted();
-}
-
-void sub_803311C(void)
-{
-    if (!gSprites[gObjectBankIDs[gActiveBank]].inUse)
-    {
-        sub_8043DB0(gHealthboxIDs[gActiveBank]);
-        OpponentBufferExecCompleted();
-    }
-}
-
-void sub_8033160(void)
-{
-    if (!ewram17810[gActiveBank].unk0_6)
-    {
-        FreeSpriteOamMatrix(&gSprites[gObjectBankIDs[gActiveBank]]);
-        DestroySprite(&gSprites[gObjectBankIDs[gActiveBank]]);
-        sub_8032A08(gActiveBank);
-        sub_8043DB0(gHealthboxIDs[gActiveBank]);
-        OpponentBufferExecCompleted();
-    }
-}
-
-void sub_80331D0(void)
-{
-    if (gUnknown_03004210.state == 0)
-        OpponentBufferExecCompleted();
-}
-
-void bx_blink_t7(void)
-{
-    u8 spriteId = gObjectBankIDs[gActiveBank];
-
-    if (gSprites[spriteId].data1 == 32)
-    {
-        gSprites[spriteId].data1 = 0;
-        gSprites[spriteId].invisible = FALSE;
-        gDoingBattleAnim = 0;
-        OpponentBufferExecCompleted();
-    }
-    else
-    {
-        if (((u16)gSprites[spriteId].data1 % 4) == 0)
-            gSprites[spriteId].invisible ^= 1;
-        gSprites[spriteId].data1++;
-    }
-}
-
-void sub_8033264(void)
-{
-    if (gSprites[gHealthboxIDs[gActiveBank]].callback == SpriteCallbackDummy)
-    {
-        if (ewram17800[gActiveBank].unk0_2)
-            move_anim_start_t4(gActiveBank, gActiveBank, gActiveBank, 6);
-        gBattleBankFunc[gActiveBank] = sub_80332D0;
-    }
-}
-
-void sub_80332D0(void)
-{
-    if (!ewram17810[gActiveBank].unk0_6)
-    {
-        CreateTask(c3_0802FDF4, 10);
-        OpponentBufferExecCompleted();
-    }
-}
-
-void sub_8033308(void)
-{
-    if (ewram17810[gActiveBank].unk1_0)
-    {
-        ewram17810[gActiveBank].unk0_7 = 0;
-        ewram17810[gActiveBank].unk1_0 = 0;
-        FreeSpriteTilesByTag(0x27F9);
-        FreeSpritePaletteByTag(0x27F9);
-        StartSpriteAnim(&gSprites[gObjectBankIDs[gActiveBank]], 0);
-        sub_8045A5C(
-          gHealthboxIDs[gActiveBank],
-          &gEnemyParty[gBattlePartyID[gActiveBank]],
-          0);
-        sub_804777C(gActiveBank);
-        sub_8043DFC(gHealthboxIDs[gActiveBank]);
-        sub_8031F88(gActiveBank);
-        gBattleBankFunc[gActiveBank] = sub_8033264;
-    }
-}
-
-void sub_80333D4(void)
-{
-    if (!ewram17810[gActiveBank].unk0_3 && !ewram17810[gActiveBank].unk0_7)
-        sub_8141828(gActiveBank, &gEnemyParty[gBattlePartyID[gActiveBank]]);
-    if (gSprites[gUnknown_0300434C[gActiveBank]].callback == SpriteCallbackDummy
-     && !ewram17810[gActiveBank].unk0_3)
-    {
-        DestroySprite(&gSprites[gUnknown_0300434C[gActiveBank]]);
-        sub_8032984(gActiveBank, GetMonData(&gEnemyParty[gBattlePartyID[gActiveBank]], MON_DATA_SPECIES));
-        gBattleBankFunc[gActiveBank] = sub_8033308;
-    }
-}
-
-void sub_8033494(void)
-{
-    if (!ewram17810[gActiveBank].unk0_4)
-        OpponentBufferExecCompleted();
-}
-
-void sub_80334C0(void)
-{
-    if (!ewram17810[gActiveBank].unk0_5)
-        OpponentBufferExecCompleted();
-}
-
-void OpponentBufferExecCompleted(void)
-{
-    gBattleBankFunc[gActiveBank] = OpponentBufferRunCommand;
-    gBattleExecBuffer &= ~gBitTable[gActiveBank];
 }

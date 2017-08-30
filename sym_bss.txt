@@ -28,32 +28,7 @@ gUnknown_03000500: @ 3000500
 gUnknown_03000508: @ 3000508
 	.space 0x8
 
-@ berry_blender
-
-gUnknown_03000510: @ 3000510
-	.space 0x10
-
-gUnknown_03000520: @ 3000520
-	.space 0xC
-
-gUnknown_0300052C: @ 300052C
-	.space 0x2
-
-gUnknown_0300052E: @ 300052E
-	.space 0x2
-
-gUnknown_03000530: @ 3000530
-	.space 0x18
-
-gUnknown_03000548: @ 3000548
-	.space 0x14
-
-gUnknown_0300055C: @ 300055C
-	.space 0x4
-
-gUnknown_03000560: @ 3000560
-	.space 0x1C
-
+	.include "src/berry_blender.o"
 	.include "src/play_time.o"
 	.include "src/rom4.o"
 
@@ -78,12 +53,7 @@ gUnknown_030006DC: @ 30006DC
 
 	.include "src/field_effect.o"
 	.include "src/item_menu.o"
-
-@ shop
-
-gUnknown_03000708: @ 3000708
-	.space 0x10
-
+	.include "src/shop.o"
 	.include "src/record_mixing.o"
 	.include "src/tv.o"
 
@@ -123,13 +93,7 @@ gUnknown_03000748: @ 3000748
 	.space 0x4
 
 	.include "src/field_specials.o"
-
-@ learn_move
-
-	.align 2
-gUnknown_030007B0: @ 30007B0
-	.space 0x4
-
+    .include "src/learn_move.o"
 	.include "src/player_pc.o"
 	.include "asm/m4a_1.o"
 	.include "src/agb_flash.o"

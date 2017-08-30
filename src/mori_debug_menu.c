@@ -134,7 +134,7 @@ s8 MoriDebugMenu_PokeblockCase(void)
     s32 loopCounter;
 
     for (loopCounter = 0; loopCounter <= 39; loopCounter++)
-        sub_810CA6C(loopCounter);
+        PokeblockClearIfExists(loopCounter);
 
     CloseMenu();
     return 1;
