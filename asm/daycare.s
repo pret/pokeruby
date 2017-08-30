@@ -6,59 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_8041790
-sub_8041790: @ 8041790
-	lsls r0, 16
-	lsrs r0, 16
-	ldr r2, _080417AC @ =gSaveBlock1
-	ldr r1, _080417B0 @ =0x000030ac
-	adds r3, r2, r1
-	ldr r1, [r3]
-	adds r1, r0
-	str r1, [r3]
-	ldr r1, _080417B4 @ =0x000030b0
-	adds r2, r1
-	ldr r1, [r2]
-	adds r1, r0
-	str r1, [r2]
-	bx lr
-	.align 2, 0
-_080417AC: .4byte gSaveBlock1
-_080417B0: .4byte 0x000030ac
-_080417B4: .4byte 0x000030b0
-	thumb_func_end sub_8041790
-
-	thumb_func_start sub_80417B8
-sub_80417B8: @ 80417B8
-	push {r4,r5,lr}
-	ldr r5, _080417D8 @ =gSpecialVar_0x8004
-	ldrh r1, [r5]
-	lsls r0, r1, 2
-	adds r0, r1
-	lsls r0, 4
-	ldr r4, _080417DC @ =gSaveBlock1 + 0x2F9C
-	adds r0, r4
-	movs r1, 0xB
-	bl GetBoxMonData
-	cmp r0, 0
-	bne _080417E0
-	movs r0, 0
-	b _080417EC
-	.align 2, 0
-_080417D8: .4byte gSpecialVar_0x8004
-_080417DC: .4byte gSaveBlock1 + 0x2F9C
-_080417E0:
-	ldrb r1, [r5]
-	adds r0, r4, 0
-	bl sub_80416E8
-	lsls r0, 24
-	lsrs r0, 24
-_080417EC:
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80417B8
-
 	thumb_func_start sub_80417F4
 sub_80417F4: @ 80417F4
 	push {lr}

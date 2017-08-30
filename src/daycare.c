@@ -219,3 +219,16 @@ void sub_8041770(void)
 {
     gSpecialVar_0x8005 = sub_8041728(&gSaveBlock1.daycareData, gSpecialVar_0x8004);
 }
+
+void sub_8041790(u16 i)
+{
+    gSaveBlock1.daycareData.mail.extra.steps[0] += i;
+    gSaveBlock1.daycareData.mail.extra.steps[1] += i;
+}
+
+u8 sub_80417B8(void)
+{
+    if (GetBoxMonData(&gSaveBlock1.daycareData.mons[gSpecialVar_0x8004], MON_DATA_SPECIES) != 0)
+        return sub_80416E8(&gSaveBlock1.daycareData, gSpecialVar_0x8004);
+    return 0;
+}
