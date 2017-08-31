@@ -10,17 +10,6 @@
 	.set sub_804A96C_alt, sub_804A96C
 .endif
 
-	thumb_func_start sub_8047CD8
-sub_8047CD8: @ 8047CD8
-	push {lr}
-	ldr r0, _08047CE4 @ =sub_8047EC0
-	bl SetMainCallback2
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08047CE4: .4byte sub_8047EC0
-	thumb_func_end sub_8047CD8
-
 	thumb_func_start sub_8047CE8
 sub_8047CE8: @ 8047CE8
 	push {r4-r6,lr}

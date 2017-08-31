@@ -2,6 +2,11 @@
 #include "name_string_util.h"
 #include "string_util.h"
 #include "text.h"
+#include "main.h"
+#include "species.h"
+#include "items.h"
+#include "moves.h"
+#include "easy_chat.h"
 
 struct InGameTrade {
     /*0x00*/ u8 name[11];
@@ -34,9 +39,104 @@ struct UnkStructD {
     /*0x12*/ u16 var12[1];
 };
 
-extern const struct InGameTrade gIngameTrades[];
-extern const u16 gIngameTradeMail[][10];
+void sub_8047EC0(void);
 
+const struct InGameTrade gIngameTrades[] = {
+    {
+        _("MAKIT"),
+        SPECIES_MAKUHITA,
+        5, 5, 4, 4, 4, 4,
+        TRUE, 49562,
+        5, 5, 5, 5, 30,
+        0x9C40,
+        ITEM_X_ATTACK, -1,
+        _("ELYSSA"),
+        MALE, 10, SPECIES_SLAKOTH
+    }, {
+        _("SKITIT"),
+        SPECIES_SKITTY,
+        5, 4, 4, 5, 4, 4,
+        FALSE, 2259,
+        5, 5, 30, 5, 5,
+        0x498A2E17,
+        ITEM_GLITTER_MAIL, 0,
+        _("DARRELL"),
+        FEMALE, 10, SPECIES_PIKACHU
+    }, {
+        _("COROSO"),
+        SPECIES_CORSOLA,
+        4, 4, 5, 4, 4, 5,
+        TRUE, 50183,
+        5, 30, 5, 5, 5,
+        0x4C970B7F,
+        ITEM_TROPIC_MAIL, 1,
+        _("LANE"),
+        FEMALE, 10, SPECIES_BELLOSSOM
+    }
+};
+
+const u16 gIngameTradeMail[][10] = {
+    {
+        EC_POKEMON(PIKACHU),
+        EC_WORD_THANK_YOU,
+        EC_WORD_EXCL,
+        EC_WORD_MY,
+        EC_POKEMON(SKITTY),
+        EC_WORD_EATS,
+        EC_WORD_A_LOT,
+        EC_WORD_NOW,
+        EC_WORD_EXCL,
+        0
+    }, {
+        EC_WORD_I,
+        EC_WORD_WANT,
+        EC_WORD_TO,
+        EC_WORD_SEE,
+        EC_WORD_A,
+        EC_MOVE2(PETAL_DANCE),
+        EC_WORD_IT_S,
+        EC_WORD_SO,
+        EC_WORD_PRETTY,
+        0
+    }
+};
+
+const s8 gTradeBallVerticalVelocityTable[] = {
+     0,  0,  1,  0,
+     1,  0,  1,  1,
+     1,  1,  2,  2,
+     2,  2,  3,  3,
+     3,  3,  4,  4,
+     4,  4, -4, -4,
+    -4, -3, -3, -3,
+    -3, -2, -2, -2,
+    -2, -1, -1, -1,
+    -1,  0, -1,  0,
+    -1,  0,  0,  0,
+     0,  0,  1,  0,
+     1,  0,  1,  1,
+     1,  1,  2,  2,
+     2,  2,  3,  3,
+     3,  3,  4,  4,
+     4,  4, -4, -3,
+    -3, -2, -2, -1,
+    -1, -1,  0, -1,
+     0,  0,  0,  0,
+     0,  0,  1,  0,
+     1,  1,  1,  2,
+     2,  3,  3,  4,
+    -4, -3, -2, -1,
+    -1, -1,  0,  0,
+     0,  0,  1,  0,
+     1,  1,  2,  3
+};
+
+void sub_8047CD8(void)
+{
+    SetMainCallback2(sub_8047EC0);
+}
+
+asm(".section .text.sub_804A96C");
 
 void sub_804A96C(struct UnkStructD *arg0, u8 left, u8 top, u16 *tilemap, u8 width, u8 height, u16 sp8) {
     int y, x;
