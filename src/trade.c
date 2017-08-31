@@ -10,6 +10,15 @@
 #include "link.h"
 #include "strings2.h"
 #include "graphics.h"
+#include "palette.h"
+#include "task.h"
+#include "menu.h"
+#include "text_window.h"
+#include "pokemon_icon.h"
+#include "cable_club.h"
+#include "party_menu.h"
+#include "songs.h"
+#include "sound.h"
 
 struct InGameTrade {
     /*0x00*/ u8 name[11];
@@ -42,8 +51,45 @@ struct UnkStructD {
     /*0x12*/ u16 var12[1];
 };
 
+struct UnkStructE {
+    /*0x00*/ u8 filler_00[8];
+    /*0x08*/ void *vramAddr;
+    /*0x0c*/ u8 filler_0c[4];
+    /*0x10*/ u8 unk_10;
+};
+
+struct TradeEwramSubstruct {
+    /*0x0000*/ u8 unk_0000;
+    /*0x0001*/ u8 unk_0001;
+    /*0x0004*/ struct Window window;
+    /*0x0034*/ u8 playerPartyIcons[6];
+    /*0x003a*/ u8 friendPartyIcons[6];
+    /*0x0040*/ u8 unk_0040;
+    /*0x0041*/ u8 unk_0041;
+    /*0x0042*/ u8 playerPartyCount;
+    /*0x0043*/ u8 friendPartyCount;
+    /*0x0044*/ u8 filler_0044[0x31];
+    /*0x0075*/ u8 unk_0075;
+    /*0x0076*/ u8 filler_0076[4];
+    /*0x007a*/ u8 unk_007a;
+    /*0x007b*/ u8 unk_007b;
+    /*0x007c*/ u8 unk_007c;
+    /*0x007d*/ u8 filler_007d[3];
+    /*0x0080*/ u8 unk_0080;
+    /*0x0081*/ u8 unk_0081;
+    /*0x0082*/ u8 filler_0082[4];
+    /*0x0086*/ u8 unk_0086;
+    /*0x0087*/ u8 unk_0087;
+    /*0x0088*/ u8 filler_0088[0x2c];
+    /*0x00b4*/ u8 unk_00b4;
+    /*0x00b5*/ u8 filler_00b4[0x13];
+    /*0x00c8*/ struct UnkStructE unk_00c8;
+    /*0x00dc*/ u8 filler_00dc[0x5f24];
+};
+
 struct TradeEwramStruct {
-    /*0x00000*/ u8 filler_00000[0xd000];
+    /*0x00000*/ u8 filler_00000[0x7000];
+    /*0x07000*/ struct TradeEwramSubstruct unk_07000;
     /*0x0d000*/ u8 tileBuffers[13][256];
 };
 
@@ -51,8 +97,26 @@ void sub_8047EC0(void);
 void sub_804AFB8(const struct WindowConfig *, u8 *, const u8 *, u8);
 void sub_804ACD8(const u8 *, u8 *, u8);
 void nullsub_5(u8, u8);
+void sub_804AA88(void);
+void sub_804A964(struct UnkStructE *, void *);
+void sub_80489F4(void);
+void sub_804AA0C(u8);
+bool8 sub_8048D44(void);
+void sub_804AF84(void);
+void sub_809D62C(struct Sprite *);
+bool8 sub_804ABF8(void);
+void sub_804ACF4(u8);
+void sub_804A41C(u8);
+void sub_8048C70(void);
+void sub_8048B0C(u8);
+void sub_804AE3C(u8);
+void sub_804AF10(void);
+void sub_80494D8(void);
+void sub_8048AB4(void);
 
 extern u8 *gUnknown_020296CC[13];
+extern struct TradeEwramSubstruct *gUnknown_03004824;
+extern u8 gUnknown_03000508;
 
 extern u8 ewram[];
 #define ewram_2010000 (*(struct TradeEwramStruct *)(ewram + 0x10000))
@@ -681,6 +745,186 @@ __attribute__((naked)) void sub_8047E44(void)
                     "_08047EBC: .4byte gSpriteTemplate_820C0EC");
 }
 #endif
+
+void sub_8047EC0(void)
+{
+    int i;
+
+    switch (gMain.state)
+    {
+        case  0:
+            gUnknown_03004824 = &ewram_2010000.unk_07000;
+            sub_804AA88();
+            ResetSpriteData();
+            FreeAllSpritePalettes();
+            ResetTasks();
+            sub_804A964(&gUnknown_03004824->unk_00c8, (void *)BG_SCREEN_ADDR(5));
+            SetVBlankCallback(sub_80489F4);
+            InitMenuWindow(&gWindowConfig_81E6CE4);
+            SetUpWindowConfig(&gWindowConfig_81E6F84);
+            InitWindowFromConfig(&gUnknown_03004824->window, &gWindowConfig_81E6F84);
+            gUnknown_03004824->unk_007a = SetTextWindowBaseTileNum(20);
+            LoadTextWindowGraphics(&gUnknown_03004824->window);
+            MenuZeroFillScreen();
+            sub_809D51C();
+            gUnknown_03004824->unk_0075 = 0;
+            gUnknown_03004824->unk_007b = 0;
+            gUnknown_03004824->unk_007c = 0;
+            gUnknown_03004824->unk_0080 = 0;
+            gUnknown_03004824->unk_0081 = 0;
+            gUnknown_03004824->unk_0086 = 0;
+            gUnknown_03004824->unk_0087 = 0;
+            gUnknown_03004824->unk_00b4 = 0;
+            gUnknown_03000508 = 0;
+            gMain.state ++;
+            sub_804AA0C(0);
+            CpuFill16(0, ewram_2010000.tileBuffers, sizeof(ewram_2010000.tileBuffers));
+            for (i = 0; i < 13; i ++)
+                gUnknown_020296CC[i] = ewram_2010000.tileBuffers[i];
+            break;
+        case  1:
+            gLinkType = 0x1122;
+            OpenLink();
+            for (i = 0; i < PARTY_SIZE; i ++)
+                CreateMon(&gEnemyParty[i], 0, 0, 0x20, FALSE, 0, FALSE, 0);
+            gMain.state ++;
+            gUnknown_03004824->unk_00b4 = 0;
+            CreateTask(sub_8083C50, 1);
+            break;
+        case  2:
+            gUnknown_03004824->unk_00b4 ++;
+            if (gUnknown_03004824->unk_00b4 > 11)
+            {
+                gUnknown_03004824->unk_00b4 = 0;
+                gMain.state ++;
+            }
+            break;
+        case  3:
+            if (GetLinkPlayerCount_2() >= sub_800820C())
+            {
+                if (IsLinkMaster())
+                {
+                    if (++gUnknown_03004824->unk_00b4 > 30)
+                    {
+                        sub_8007F4C();
+                        gMain.state ++;
+                    }
+                }
+                else
+                    gMain.state ++;
+            }
+            break;
+        case  4:
+            if (gReceivedRemoteLinkPlayers == 1 && IsLinkPlayerDataExchangeComplete() == TRUE)
+            {
+                CalculatePlayerPartyCount();
+                gMain.state ++;
+            }
+            break;
+        case  5:
+            if (sub_8048D44())
+            {
+                sub_804AF84();
+                gMain.state ++;
+            }
+            break;
+        case  6:
+            CalculateEnemyPartyCount();
+            FillWindowRect_DefaultPalette(&gUnknown_03004824->window, 0, 0, 0, 29, 19);
+            REG_DISPCNT = 0;
+            gUnknown_03004824->playerPartyCount = gPlayerPartyCount;
+            gUnknown_03004824->friendPartyCount = gEnemyPartyCount;
+            for (i = 0; i < gUnknown_03004824->playerPartyCount; i ++)
+                gUnknown_03004824->playerPartyIcons[i] = CreateMonIcon(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2), sub_809D62C, gTradeMonSpriteCoords[i][0] * 8 + 14, gTradeMonSpriteCoords[i][1] * 8 - 12, TRUE, GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY));
+            for (i = 0; i < gUnknown_03004824->friendPartyCount; i ++)
+                gUnknown_03004824->friendPartyIcons[i] = CreateMonIcon(GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2, NULL), sub_809D62C, gTradeMonSpriteCoords[6 + i][0] * 8 + 14, gTradeMonSpriteCoords[6 + i][1] * 8 - 12, TRUE, GetMonData(&gEnemyParty[i], MON_DATA_PERSONALITY));
+            nullsub_5(2, 0);
+            gMain.state ++;
+            break;
+        case  7:
+            LoadHeldItemIconGraphics();
+            CreateHeldItemIcons(&gUnknown_03004824->playerPartyCount, gUnknown_03004824->playerPartyIcons, 0);
+            gMain.state ++;
+            break;
+        case  8:
+            CreateHeldItemIcons(&gUnknown_03004824->playerPartyCount, gUnknown_03004824->playerPartyIcons, 1);
+            gMain.state ++;
+            break;
+        case  9:
+            sub_8047CE8();
+            gMain.state ++;
+            gUnknown_03004824->unk_00b4 = 0;
+            break;
+        case 10:
+            nullsub_5(4, 0);
+            if (sub_804ABF8())
+                gMain.state ++;
+            break;
+        case 11:
+            sub_8047D58();
+            gMain.state ++;
+            break;
+        case 12:
+            sub_8047E44();
+            gUnknown_03004824->unk_0040 = CreateSprite(&gSpriteTemplate_820C134, gTradeMonSpriteCoords[0][0] * 8 + 32, gTradeMonSpriteCoords[0][1] * 8, 2);
+            gUnknown_03004824->unk_0041 = 0;
+            gMain.state ++;
+            nullsub_5(6, 0);
+            break;
+        case 13:
+            sub_804ACF4(0);
+            sub_804A41C(0);
+            gUnknown_03004824->unk_0000 = 0;
+            gUnknown_03004824->unk_0001 = 0;
+            sub_8048C70();
+            gMain.state ++;
+            nullsub_5(7, 0);
+            PlayBGM(BGM_P_SCHOOL);
+            break;
+        case 14:
+            sub_804ACF4(1);
+            sub_804A41C(1);
+            gMain.state ++;
+            // fallthrough
+        case 15:
+            sub_8048B0C(0);
+            gMain.state ++;
+            break;
+        case 16:
+            sub_8048B0C(1);
+            gMain.state ++;
+            break;
+        case 17:
+            BeginNormalPaletteFade(-1, 0, 16, 0, 0);
+            gMain.state ++;
+            break;
+        case 18:
+            REG_DISPCNT = DISPCNT_OBJ_1D_MAP | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON;
+            gMain.state ++;
+            break;
+        case 19:
+            sub_804AE3C(0);
+            gMain.state ++;
+            break;
+        case 20:
+            sub_804AE3C(1);
+            sub_804AF10();
+            gMain.state ++;
+            break;
+        case 21:
+            if (!gPaletteFade.active)
+            {
+                gMain.callback1 = sub_80494D8;
+                SetMainCallback2(sub_8048AB4);
+                gUnknown_03000508 = 0;
+            }
+            break;
+    }
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+}
 
 asm(".section .text.sub_804A96C");
 

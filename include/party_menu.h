@@ -87,6 +87,7 @@ void LoadHeldItemIconGraphics(void);
 void LoadHeldItemIconGraphics(void);
 void CreateHeldItemIcons_806DC34(); // undefined args
 void CreateHeldItemIcons_806DC34();
+void CreateHeldItemIcons(u8 *, u8 *, u8);
 u8 GetMonIconSpriteId_maybe();
 void SetHeldItemIconVisibility();
 void TryPrintPartyMenuMonNickname();
