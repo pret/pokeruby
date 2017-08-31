@@ -7,6 +7,8 @@
 #include "items.h"
 #include "moves.h"
 #include "easy_chat.h"
+#include "link.h"
+#include "strings2.h"
 
 struct InGameTrade {
     /*0x00*/ u8 name[11];
@@ -39,29 +41,52 @@ struct UnkStructD {
     /*0x12*/ u16 var12[1];
 };
 
-void sub_8047EC0(void);
+struct UnkStructE {
+    u8 *unk00;
+    u8 fil04[8];
+    u8 *unk0C;
+    u8 fil10[8];
+    u8 *unk18;
+    u8 fil1C[4];
+    void *unk20;
+};
 
+void sub_8047EC0(void);
+void sub_804AFB8(const struct WindowConfig *, u8 *, const u8 *, u8);
+void sub_804ACD8(const u8 *, u8 *, u8);
+void nullsub_5(u8, u8);
+
+extern struct UnkStructE gUnknown_020296CC;
+
+const u8 *const gUnknown_0820C14C[] = {
+    TradeText_Cancel,
+    TradeText_ChoosePoke,
+    TradeText_Summary1,
+    TradeText_Trade1,
+    TradeText_CancelTradePrompt,
+    TradeText_PressBToExit
+};
+
+asm(".section .rodata.igt");
 const struct InGameTrade gIngameTrades[] = {
     {
-        _("MAKIT"),
-        SPECIES_MAKUHITA,
+        _("MAKIT"), SPECIES_MAKUHITA,
         5, 5, 4, 4, 4, 4,
         TRUE, 49562,
         5, 5, 5, 5, 30,
         0x9C40,
         ITEM_X_ATTACK, -1,
-        _("ELYSSA"),
-        MALE, 10, SPECIES_SLAKOTH
+        _("ELYSSA"), MALE, 10,
+        SPECIES_SLAKOTH
     }, {
-        _("SKITIT"),
-        SPECIES_SKITTY,
+        _("SKITIT"), SPECIES_SKITTY,
         5, 4, 4, 5, 4, 4,
         FALSE, 2259,
         5, 5, 30, 5, 5,
         0x498A2E17,
         ITEM_GLITTER_MAIL, 0,
-        _("DARRELL"),
-        FEMALE, 10, SPECIES_PIKACHU
+        _("DARRELL"), FEMALE, 10,
+        SPECIES_PIKACHU
     }, {
         _("COROSO"),
         SPECIES_CORSOLA,
@@ -70,8 +95,8 @@ const struct InGameTrade gIngameTrades[] = {
         5, 30, 5, 5, 5,
         0x4C970B7F,
         ITEM_TROPIC_MAIL, 1,
-        _("LANE"),
-        FEMALE, 10, SPECIES_BELLOSSOM
+        _("LANE"), FEMALE, 10,
+        SPECIES_BELLOSSOM
     }
 };
 
@@ -134,6 +159,17 @@ const s8 gTradeBallVerticalVelocityTable[] = {
 void sub_8047CD8(void)
 {
     SetMainCallback2(sub_8047EC0);
+}
+
+void sub_8047CE8(void)
+{
+    u8 mpId;
+    sub_804AFB8(&gWindowConfig_81E725C, gUnknown_020296CC.unk00, gSaveBlock2.playerName, 0xC);
+    mpId = GetMultiplayerId();
+    sub_804AFB8(&gWindowConfig_81E725C, gUnknown_020296CC.unk0C, gLinkPlayers[mpId ^ 1].name, 0xC);
+    sub_804AFB8(&gWindowConfig_81E725C, gUnknown_020296CC.unk18, gUnknown_0820C14C[0], 0x8);
+    sub_804ACD8(gUnknown_0820C14C[1], gUnknown_020296CC.unk20, 0x14);
+    nullsub_5(3, 0);
 }
 
 asm(".section .text.sub_804A96C");

@@ -135,14 +135,7 @@ gUnknown_0820C12C:: @ 820C12C
 gSpriteTemplate_820C134:: @ 820C134
 	spr_template 300, 2345, gOamData_820C104, gSpriteAnimTable_820C11C, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
-	.align 2
-gUnknown_0820C14C:: @ 820C14C
-	.4byte TradeText_Cancel
-	.4byte TradeText_ChoosePoke
-	.4byte TradeText_Summary1
-	.4byte TradeText_Trade1
-	.4byte TradeText_CancelTradePrompt
-	.4byte TradeText_PressBToExit
+	.section .rodata.820C164
 
 @ This is used to determine the next mon to select when the D-Pad is
 @ pressed in a given direction.

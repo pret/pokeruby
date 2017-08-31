@@ -348,6 +348,8 @@ SECTIONS {
         src/pokeball.o(.rodata);
         data/trade.o(.rodata);
         src/trade.o(.rodata);
+        data/trade.o(.rodata.820C164);
+        src/trade.o(.rodata.igt);
         src/berry_blender.o(.rodata);
         src/new_game.o(.rodata);
         data/rom4.o(.rodata);

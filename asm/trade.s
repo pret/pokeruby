@@ -10,55 +10,6 @@
 	.set sub_804A96C_alt, sub_804A96C
 .endif
 
-	thumb_func_start sub_8047CE8
-sub_8047CE8: @ 8047CE8
-	push {r4-r6,lr}
-	ldr r6, _08047D44 @ =gWindowConfig_81E725C
-	ldr r5, _08047D48 @ =gUnknown_020296CC
-	ldr r1, [r5]
-	ldr r2, _08047D4C @ =gSaveBlock2
-	adds r0, r6, 0
-	movs r3, 0xC
-	bl sub_804AFB8
-	bl GetMultiplayerId
-	lsls r0, 24
-	ldr r1, [r5, 0xC]
-	movs r3, 0x80
-	lsls r3, 17
-	eors r3, r0
-	lsrs r3, 24
-	lsls r2, r3, 3
-	subs r2, r3
-	lsls r2, 2
-	ldr r0, _08047D50 @ =gLinkPlayers + 0x8
-	adds r2, r0
-	adds r0, r6, 0
-	movs r3, 0xC
-	bl sub_804AFB8
-	ldr r1, [r5, 0x18]
-	ldr r4, _08047D54 @ =gUnknown_0820C14C
-	ldr r2, [r4]
-	adds r0, r6, 0
-	movs r3, 0x8
-	bl sub_804AFB8
-	ldr r0, [r4, 0x4]
-	ldr r1, [r5, 0x20]
-	movs r2, 0x14
-	bl sub_804ACD8
-	movs r0, 0x3
-	movs r1, 0
-	bl nullsub_5
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08047D44: .4byte gWindowConfig_81E725C
-_08047D48: .4byte gUnknown_020296CC
-_08047D4C: .4byte gSaveBlock2
-_08047D50: .4byte gLinkPlayers + 0x8
-_08047D54: .4byte gUnknown_0820C14C
-	thumb_func_end sub_8047CE8
-
 	thumb_func_start sub_8047D58
 sub_8047D58: @ 8047D58
 	push {r4-r7,lr}
