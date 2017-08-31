@@ -222,7 +222,8 @@ void sub_80D0A8C(u8 taskId);
 void sub_80D0B3C(u8 taskId);
 void sub_80D0D68(u8 taskId);
 void sub_80D15E0(u8 taskId);
-
+void sub_80D16A0(u8 taskId);
+void sub_80D1808(u8 taskId);
 
 void sub_80CC358(struct Task* task, u8 taskId);
 void sub_80D0614(struct Task* task, u8 taskId);
@@ -5661,4 +5662,255 @@ void sub_80D15A4(u8 taskId)
     task->data[0] = spriteId;
     sub_80798F4(task, spriteId, &gUnknown_083D79BC);
     task->func = sub_80D15E0;
+}
+
+void sub_80D15E0(u8 taskId)
+{
+    struct Task* task = &gTasks[taskId];
+    if (sub_807992C(task) == 0)
+    {
+        gSprites[task->data[0]].pos2.y = 0;
+        gSprites[task->data[0]].invisible = 1;
+        DestroyAnimVisualTask(taskId);
+    }
+}
+
+void sub_80D1638(u8 taskId)
+{
+    struct Task* task = &gTasks[taskId];
+    task->data[0] = 0;
+    task->data[1] = 0;
+    task->data[2] = 0;
+    task->data[3] = 0;
+    task->data[12] = 3;
+    if (GetBankSide(gBattleAnimEnemyMonIndex) == 0)
+    {
+        task->data[13] = 0xFFFF;
+        task->data[14] = 8;
+    }
+    else
+    {
+        task->data[13] = 1;
+        task->data[14] = -8;
+    }
+    task->data[15] = obj_id_for_side_relative_to_move(1);
+    task->func = sub_80D16A0;
+}
+
+#ifdef NONMATCHING
+void sub_80D16A0(u8 taskId)
+{
+    struct Task* task = &gTasks[taskId];
+    switch (task->data[0])
+    {
+        case 0:
+            gSprites[task->data[15]].pos2.x += task->data[14];
+            task->data[1] = 0;
+            task->data[2] = 0;
+            task->data[3] = 0;
+            task->data[0]++;
+            break;
+        case 1:
+            if (++task->data[1] > 1)
+            {
+                task->data[1] = 0;
+                if (1 & ++task->data[2])
+                    gSprites[task->data[15]].pos2.x += 6;
+                else
+                    gSprites[task->data[15]].pos2.x -= 6;
+                if (++task->data[3] > 4)
+                {
+                    if (task->data[2] & 1)
+                        gSprites[task->data[15]].pos2.x -= 6;
+                    task->data[0]++;
+                }
+            }
+            break;
+        case 2:
+            if (--task->data[12] != 0)
+                task->data[0] = 0;
+            else
+                task->data[0]++;
+            break;
+        case 3:
+            gSprites[task->data[15]].pos2.x += task->data[13];
+            if (gSprites[task->data[15]].pos2.x == 0)
+                DestroyAnimVisualTask(taskId);
+            break;
+    }
+}
+#else
+__attribute__((naked))
+void sub_80D16A0(u8 taskId)
+{
+    asm(".syntax unified\n\
+    	push {r4,r5,lr}\n\
+	lsls r0, 24\n\
+	lsrs r5, r0, 24\n\
+	lsls r0, r5, 2\n\
+	adds r0, r5\n\
+	lsls r0, 3\n\
+	ldr r1, _080D16C4 @ =gTasks\n\
+	adds r3, r0, r1\n\
+	movs r0, 0x8\n\
+	ldrsh r4, [r3, r0]\n\
+	cmp r4, 0x1\n\
+	beq _080D16F4\n\
+	cmp r4, 0x1\n\
+	bgt _080D16C8\n\
+	cmp r4, 0\n\
+	beq _080D16D2\n\
+	b _080D17BA\n\
+	.align 2, 0\n\
+_080D16C4: .4byte gTasks\n\
+_080D16C8:\n\
+	cmp r4, 0x2\n\
+	beq _080D1770\n\
+	cmp r4, 0x3\n\
+	beq _080D178A\n\
+	b _080D17BA\n\
+_080D16D2:\n\
+	ldr r2, _080D16F0 @ =gSprites\n\
+	movs r0, 0x26\n\
+	ldrsh r1, [r3, r0]\n\
+	lsls r0, r1, 4\n\
+	adds r0, r1\n\
+	lsls r0, 2\n\
+	adds r0, r2\n\
+	ldrh r1, [r3, 0x24]\n\
+	ldrh r2, [r0, 0x24]\n\
+	adds r1, r2\n\
+	strh r1, [r0, 0x24]\n\
+	strh r4, [r3, 0xA]\n\
+	strh r4, [r3, 0xC]\n\
+	strh r4, [r3, 0xE]\n\
+	b _080D1782\n\
+	.align 2, 0\n\
+_080D16F0: .4byte gSprites\n\
+_080D16F4:\n\
+	ldrh r0, [r3, 0xA]\n\
+	adds r0, 0x1\n\
+	strh r0, [r3, 0xA]\n\
+	lsls r0, 16\n\
+	asrs r0, 16\n\
+	cmp r0, 0x1\n\
+	ble _080D17BA\n\
+	movs r0, 0\n\
+	strh r0, [r3, 0xA]\n\
+	ldrh r0, [r3, 0xC]\n\
+	adds r0, 0x1\n\
+	strh r0, [r3, 0xC]\n\
+	ands r0, r4\n\
+	lsls r0, 16\n\
+	cmp r0, 0\n\
+	beq _080D172C\n\
+	ldr r2, _080D1728 @ =gSprites\n\
+	movs r4, 0x26\n\
+	ldrsh r1, [r3, r4]\n\
+	lsls r0, r1, 4\n\
+	adds r0, r1\n\
+	lsls r0, 2\n\
+	adds r0, r2\n\
+	ldrh r1, [r0, 0x24]\n\
+	adds r1, 0x6\n\
+	b _080D173E\n\
+	.align 2, 0\n\
+_080D1728: .4byte gSprites\n\
+_080D172C:\n\
+	ldr r2, _080D176C @ =gSprites\n\
+	movs r0, 0x26\n\
+	ldrsh r1, [r3, r0]\n\
+	lsls r0, r1, 4\n\
+	adds r0, r1\n\
+	lsls r0, 2\n\
+	adds r0, r2\n\
+	ldrh r1, [r0, 0x24]\n\
+	subs r1, 0x6\n\
+_080D173E:\n\
+	strh r1, [r0, 0x24]\n\
+	ldrh r0, [r3, 0xE]\n\
+	adds r0, 0x1\n\
+	strh r0, [r3, 0xE]\n\
+	lsls r0, 16\n\
+	asrs r0, 16\n\
+	cmp r0, 0x4\n\
+	ble _080D17BA\n\
+	ldrh r1, [r3, 0xC]\n\
+	movs r0, 0x1\n\
+	ands r0, r1\n\
+	cmp r0, 0\n\
+	beq _080D1782\n\
+	movs r1, 0x26\n\
+	ldrsh r0, [r3, r1]\n\
+	lsls r1, r0, 4\n\
+	adds r1, r0\n\
+	lsls r1, 2\n\
+	adds r1, r2\n\
+	ldrh r0, [r1, 0x24]\n\
+	subs r0, 0x6\n\
+	strh r0, [r1, 0x24]\n\
+	b _080D1782\n\
+	.align 2, 0\n\
+_080D176C: .4byte gSprites\n\
+_080D1770:\n\
+	ldrh r0, [r3, 0x20]\n\
+	subs r0, 0x1\n\
+	strh r0, [r3, 0x20]\n\
+	lsls r0, 16\n\
+	cmp r0, 0\n\
+	beq _080D1782\n\
+	movs r0, 0\n\
+	strh r0, [r3, 0x8]\n\
+	b _080D17BA\n\
+_080D1782:\n\
+	ldrh r0, [r3, 0x8]\n\
+	adds r0, 0x1\n\
+	strh r0, [r3, 0x8]\n\
+	b _080D17BA\n\
+_080D178A:\n\
+	ldr r2, _080D17C0 @ =gSprites\n\
+	movs r4, 0x26\n\
+	ldrsh r1, [r3, r4]\n\
+	lsls r0, r1, 4\n\
+	adds r0, r1\n\
+	lsls r0, 2\n\
+	adds r0, r2\n\
+	ldrh r1, [r3, 0x22]\n\
+	ldrh r4, [r0, 0x24]\n\
+	adds r1, r4\n\
+	strh r1, [r0, 0x24]\n\
+	movs r0, 0x26\n\
+	ldrsh r1, [r3, r0]\n\
+	lsls r0, r1, 4\n\
+	adds r0, r1\n\
+	lsls r0, 2\n\
+	adds r0, r2\n\
+	movs r1, 0x24\n\
+	ldrsh r0, [r0, r1]\n\
+	cmp r0, 0\n\
+	bne _080D17BA\n\
+	adds r0, r5, 0\n\
+	bl DestroyAnimVisualTask\n\
+_080D17BA:\n\
+	pop {r4,r5}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.align 2, 0\n\
+_080D17C0: .4byte gSprites\n\
+	.syntax divided\n");
+}
+#endif
+
+void sub_80D17C4(u8 taskId)
+{
+    struct Task* task = &gTasks[taskId];
+    task->data[0] = 0;
+    task->data[1] = 0;
+    task->data[2] = 0;
+    task->data[3] = 0;
+    task->data[4] = 1;
+    task->data[13] = 14;
+    task->data[14] = 2;
+    task->data[15] = obj_id_for_side_relative_to_move(0);
+    task->func = sub_80D1808;
 }
