@@ -478,9 +478,29 @@ void sub_8047D58(void)
     }
     nullsub_5(5, 0);
 }
+
+void sub_8047E44(void)
+{
+    struct SpriteTemplate spriteTemplate;
+    int i;
+    s16 x;
+
+    for (i = 0, x = 0xd6; i < 2; x += 32, i ++)
+    {
+        spriteTemplate = gSpriteTemplate_820C0EC;
+        spriteTemplate.tileTag += i + 6;
+        CreateSprite(&spriteTemplate, x, 0x98, 1);
+    }
+
+    for (i = 0, x = 0x18; i < 5; x += 32, i ++)
+    {
+        spriteTemplate = gSpriteTemplate_820C0EC;
+        spriteTemplate.tileTag += i + 8;
+        CreateSprite(&spriteTemplate, x, 0x96, 1);
+    }
+}
 #else
-__attribute__((naked))
-void sub_8047D58(void)
+__attribute__((naked)) void sub_8047D58(void)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                     "\tmov r7, r8\n"
@@ -594,6 +614,71 @@ void sub_8047D58(void)
                     "_08047E38: .4byte gSpriteTemplate_820C0EC\n"
                     "_08047E3C: .4byte gLinkPlayers + 0x8\n"
                     "_08047E40: .4byte gTradeUnknownSpriteCoords + 0x3");
+}
+
+__attribute__((naked)) void sub_8047E44(void)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                    "\tsub sp, 0x18\n"
+                    "\tmovs r4, 0\n"
+                    "\tmov r5, sp\n"
+                    "\tmovs r6, 0xD6\n"
+                    "\tlsls r6, 16\n"
+                    "_08047E50:\n"
+                    "\tmov r1, sp\n"
+                    "\tldr r0, _08047EBC @ =gSpriteTemplate_820C0EC\n"
+                    "\tldm r0!, {r2,r3,r7}\n"
+                    "\tstm r1!, {r2,r3,r7}\n"
+                    "\tldm r0!, {r2,r3,r7}\n"
+                    "\tstm r1!, {r2,r3,r7}\n"
+                    "\tadds r0, r4, 0x6\n"
+                    "\tldrh r1, [r5]\n"
+                    "\tadds r0, r1\n"
+                    "\tstrh r0, [r5]\n"
+                    "\tasrs r1, r6, 16\n"
+                    "\tmov r0, sp\n"
+                    "\tmovs r2, 0x98\n"
+                    "\tmovs r3, 0x1\n"
+                    "\tbl CreateSprite\n"
+                    "\tmovs r2, 0x80\n"
+                    "\tlsls r2, 14\n"
+                    "\tadds r6, r2\n"
+                    "\tadds r4, 0x1\n"
+                    "\tcmp r4, 0x1\n"
+                    "\tble _08047E50\n"
+                    "\tmovs r4, 0\n"
+                    "\tmov r5, sp\n"
+                    "\tmovs r6, 0xC0\n"
+                    "\tlsls r6, 13\n"
+                    "_08047E84:\n"
+                    "\tmov r1, sp\n"
+                    "\tldr r0, _08047EBC @ =gSpriteTemplate_820C0EC\n"
+                    "\tldm r0!, {r2,r3,r7}\n"
+                    "\tstm r1!, {r2,r3,r7}\n"
+                    "\tldm r0!, {r2,r3,r7}\n"
+                    "\tstm r1!, {r2,r3,r7}\n"
+                    "\tadds r0, r4, 0\n"
+                    "\tadds r0, 0x8\n"
+                    "\tldrh r3, [r5]\n"
+                    "\tadds r0, r3\n"
+                    "\tstrh r0, [r5]\n"
+                    "\tasrs r1, r6, 16\n"
+                    "\tmov r0, sp\n"
+                    "\tmovs r2, 0x96\n"
+                    "\tmovs r3, 0x1\n"
+                    "\tbl CreateSprite\n"
+                    "\tmovs r7, 0x80\n"
+                    "\tlsls r7, 14\n"
+                    "\tadds r6, r7\n"
+                    "\tadds r4, 0x1\n"
+                    "\tcmp r4, 0x4\n"
+                    "\tble _08047E84\n"
+                    "\tadd sp, 0x18\n"
+                    "\tpop {r4-r7}\n"
+                    "\tpop {r0}\n"
+                    "\tbx r0\n"
+                    "\t.align 2, 0\n"
+                    "_08047EBC: .4byte gSpriteTemplate_820C0EC");
 }
 #endif
 
