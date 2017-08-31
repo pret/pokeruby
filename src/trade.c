@@ -84,12 +84,20 @@ struct TradeEwramSubstruct {
     /*0x00b4*/ u8 unk_00b4;
     /*0x00b5*/ u8 filler_00b4[0x13];
     /*0x00c8*/ struct UnkStructE unk_00c8;
-    /*0x00dc*/ u8 filler_00dc[0x5f24];
+    /*0x00dc*/ u8 filler_00dc[0xf24];
+};
+
+struct UnkStructF {
+    u8 filler_0000[9];
+    u8 unk_0009;
+    u8 filler_000a[0xff6];
 };
 
 struct TradeEwramStruct {
     /*0x00000*/ u8 filler_00000[0x7000];
     /*0x07000*/ struct TradeEwramSubstruct unk_07000;
+    /*0x08000*/ struct UnkStructF unk_08000;
+    /*0x09000*/ u8 filler_09000[0x4000];
     /*0x0d000*/ u8 tileBuffers[13][256];
 };
 
@@ -733,6 +741,148 @@ void sub_8047EC0(void)
             if (!gPaletteFade.active)
             {
                 gMain.callback1 = sub_80494D8;
+                SetMainCallback2(sub_8048AB4);
+                gUnknown_03000508 = 0;
+            }
+            break;
+    }
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+}
+
+void sub_80484F4(void)
+{
+    int i;
+    struct UnkStructF *unkStructF;
+
+    switch (gMain.state)
+    {
+        case  0:
+            gUnknown_03004824 = &ewram_2010000.unk_07000;
+            ResetSpriteData();
+            FreeAllSpritePalettes();
+            ResetTasks();
+            sub_804A964(&gUnknown_03004824->unk_00c8, (void *)BG_SCREEN_ADDR(5));
+            SetVBlankCallback(sub_80489F4);
+            InitMenuWindow(&gWindowConfig_81E6CE4);
+            SetUpWindowConfig(&gWindowConfig_81E6F84);
+            InitWindowFromConfig(&gUnknown_03004824->window, &gWindowConfig_81E6F84);
+            gUnknown_03004824->unk_007a = SetTextWindowBaseTileNum(20);
+            LoadTextWindowGraphics(&gUnknown_03004824->window);
+            MenuZeroFillScreen();
+            sub_809D51C();
+            gUnknown_03004824->unk_0075 = 0;
+            gUnknown_03004824->unk_007b = 0;
+            gUnknown_03004824->unk_007c = 0;
+            gUnknown_03004824->unk_0080 = 0;
+            gUnknown_03004824->unk_0081 = 0;
+            gUnknown_03004824->unk_0086 = 0;
+            gUnknown_03004824->unk_0087 = 0;
+            gUnknown_03004824->unk_00b4 = 0;
+            gUnknown_03000508 = 0;
+            gMain.state ++;
+            for (i = 0; i < 13; i ++)
+                gUnknown_020296CC[i] = ewram_2010000.tileBuffers[i];
+            break;
+        case  1:
+            gMain.state ++;
+            gUnknown_03004824->unk_00b4 = 0;
+            break;
+        case  2:
+            gMain.state ++;
+            break;
+        case  3:
+            gMain.state ++;
+            break;
+        case  4:
+            CalculatePlayerPartyCount();
+            gMain.state ++;
+            break;
+        case  5:
+            gMain.state ++;
+            break;
+        case  6:
+            CalculateEnemyPartyCount();
+            REG_DISPCNT = 0;
+            gUnknown_03004824->playerPartyCount = gPlayerPartyCount;
+            gUnknown_03004824->friendPartyCount = gEnemyPartyCount;
+            sub_804A41C(0);
+            sub_804A41C(1);
+            for (i = 0; i < gUnknown_03004824->playerPartyCount; i ++)
+                gUnknown_03004824->playerPartyIcons[i] = CreateMonIcon(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL), sub_809D62C, gTradeMonSpriteCoords[i][0] * 8 + 14, gTradeMonSpriteCoords[i][1] * 8 - 12, TRUE, GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY));
+            for (i = 0; i < gUnknown_03004824->friendPartyCount; i ++)
+                gUnknown_03004824->friendPartyIcons[i] = CreateMonIcon(GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2, NULL), sub_809D62C, gTradeMonSpriteCoords[6 + i][0] * 8 + 14, gTradeMonSpriteCoords[6 + i][1] * 8 - 12, TRUE, GetMonData(&gEnemyParty[i], MON_DATA_PERSONALITY));
+            nullsub_5(2, 0);
+            gMain.state ++;
+            break;
+        case  7:
+            LoadHeldItemIconGraphics();
+            CreateHeldItemIcons(&gUnknown_03004824->playerPartyCount, gUnknown_03004824->playerPartyIcons, 0);
+            gMain.state ++;
+            break;
+        case  8:
+            CreateHeldItemIcons(&gUnknown_03004824->playerPartyCount, gUnknown_03004824->playerPartyIcons, 1);
+            gMain.state ++;
+            break;
+        case  9:
+            sub_8047CE8();
+            gMain.state ++;
+            gUnknown_03004824->unk_00b4 = 0;
+            break;
+        case 10:
+            nullsub_5(4, 0);
+            if (sub_804ABF8())
+            {
+                gMain.state ++;
+            }
+            break;
+        case 11:
+            sub_8047D58();
+            gMain.state ++;
+            break;
+        case 12:
+            sub_8047E44();
+            unkStructF = &ewram_2010000.unk_08000;
+            if (gUnknown_03004824->unk_0041 < 6)
+                gUnknown_03004824->unk_0041 = unkStructF->unk_0009;
+            else
+                gUnknown_03004824->unk_0041 = unkStructF->unk_0009 + 6;
+            gUnknown_03004824->unk_0040 = CreateSprite(&gSpriteTemplate_820C134, gTradeMonSpriteCoords[gUnknown_03004824->unk_0041][0] * 8 + 32, gTradeMonSpriteCoords[gUnknown_03004824->unk_0041][1] * 8, 2);
+            gMain.state = 15;
+            nullsub_5(6, 0);
+            break;
+        case 15:
+            sub_8048B0C(0);
+            gMain.state ++;
+            break;
+        case 16:
+            sub_8048B0C(1);
+            gUnknown_03004824->unk_0000 = 0;
+            gUnknown_03004824->unk_0001 = 0;
+            sub_8048C70();
+            nullsub_5(7, 0);
+            gMain.state ++;
+            break;
+        case 17:
+            BeginNormalPaletteFade(-1, 0, 16, 0, 0);
+            gMain.state ++;
+            break;
+        case 18:
+            REG_DISPCNT = DISPCNT_OBJ_1D_MAP | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON;
+            gMain.state ++;
+            break;
+        case 19:
+            gMain.state ++;
+            break;
+        case 20:
+            sub_804AF10();
+            gMain.state ++;
+            break;
+        case 21:
+            if (!gPaletteFade.active)
+            {
                 SetMainCallback2(sub_8048AB4);
                 gUnknown_03000508 = 0;
             }
