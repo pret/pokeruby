@@ -80,7 +80,9 @@ struct TradeEwramSubstruct {
     /*0x0082*/ u8 filler_0082[4];
     /*0x0086*/ u8 unk_0086;
     /*0x0087*/ u8 unk_0087;
-    /*0x0088*/ u8 filler_0088[0x2c];
+    /*0x0088*/ u8 filler_0088[2];
+    /*0x008a*/ u8 unk_008a;
+    /*0x008b*/ u8 filler_008b[0x29];
     /*0x00b4*/ u8 unk_00b4;
     /*0x00b5*/ u8 filler_00b4[0x13];
     /*0x00c8*/ struct UnkStructE unk_00c8;
@@ -121,7 +123,13 @@ void sub_804AE3C(u8);
 void sub_804AF10(void);
 void sub_80494D8(void);
 void sub_8048AB4(void);
+void sub_804A940(struct UnkStructE *);
+void sub_804B41C(void);
+void sub_8049DE0(void);
+void sub_804AB30(void);
+void sub_8049ED4(u8);
 
+extern u8 gUnknown_020297D8[2];
 extern u8 *gUnknown_020296CC[13];
 extern struct TradeEwramSubstruct *gUnknown_03004824;
 extern u8 gUnknown_03000508;
@@ -888,6 +896,57 @@ void sub_80484F4(void)
             }
             break;
     }
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+}
+
+void sub_80489F4(void)
+{
+    sub_804A940(&gUnknown_03004824->unk_00c8);
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    TransferPlttBuffer();
+}
+
+void sub_8048A14(void)
+{
+    if (++gUnknown_03004824->unk_00b4 >= 16)
+    {
+        BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+        gUnknown_03004824->unk_007b = 10;
+    }
+}
+
+void sub_8048A50(void)
+{
+    if (!gPaletteFade.active)
+    {
+        gUnknown_020297D8[0] = gUnknown_03004824->unk_0041;
+        gUnknown_020297D8[1] = gUnknown_03004824->unk_008a;
+        sub_800832C();
+        gUnknown_03004824->unk_007b = 13;
+    }
+}
+
+void sub_8048A90(void)
+{
+    if (!gReceivedRemoteLinkPlayers)
+    {
+        gMain.callback1 = NULL;
+        SetMainCallback2(sub_804B41C);
+    }
+}
+
+void sub_8048AB4(void)
+{
+    sub_8049DE0();
+    sub_804AB30();
+    sub_8049ED4(0);
+    sub_8049ED4(1);
+    REG_BG2HOFS = gUnknown_03004824->unk_0000++;
+    REG_BG3HOFS = gUnknown_03004824->unk_0001--;
     RunTasks();
     AnimateSprites();
     BuildOamBuffer();
