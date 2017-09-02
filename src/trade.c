@@ -89,7 +89,10 @@ struct TradeEwramSubstruct {
     /*0x0087*/ u8 unk_0087;
     /*0x0088*/ u8 filler_0088[2];
     /*0x008a*/ u8 unk_008a;
-    /*0x008b*/ u8 filler_008b[0x29];
+    /*0x008b*/ u8 unk_008b;
+    /*0x008c*/ u16 unk_008c;
+    /*0x008e*/ u16 unk_008e;
+    /*0x0090*/ u8 filler_0090[0x24];
     /*0x00b4*/ u8 unk_00b4;
     /*0x00b5*/ u8 unk_00b5[7];
     /*0x00bc*/ u8 filler_00bc[12];
@@ -141,6 +144,7 @@ void sub_804A938(struct UnkStructE *);
 u8 sub_804A9F4(void);
 u8 sub_804AA00(void);
 void sub_8049E9C(u8);
+void sub_804AADC(u8, u8);
 
 #ifdef ENGLISH
 #define sub_804A96C_alt sub_804A96C
@@ -1518,6 +1522,72 @@ void sub_80491E4(u8 unused, u8 a1)
     if (a1 & 2)
     {
         ResetBlockReceivedFlag(1);
+    }
+}
+
+void sub_80492D8(void)
+{
+    if (gUnknown_03004824->unk_0084 && gUnknown_03004824->unk_0085)
+    {
+        if (gUnknown_03004824->unk_0084 == 1 && gUnknown_03004824->unk_0085 == 1)
+        {
+            gUnknown_03004824->unk_007b = 6;
+            gUnknown_03004824->unk_008c = 0xdddd;
+            gUnknown_03004824->unk_008e = gUnknown_03004824->unk_0041;
+            sub_804AADC(5, 0);
+            gUnknown_03004824->unk_0084 = gUnknown_03004824->unk_0085 = 0;
+        }
+        else if (gUnknown_03004824->unk_0084 == 1 && gUnknown_03004824->unk_0085 == 2)
+        {
+            sub_804AA0C(1);
+            gUnknown_03004824->unk_008c = 0xeecc;
+            gUnknown_03004824->unk_008e = 0;
+            sub_804AADC(5, 0);
+            gUnknown_03004824->unk_0086 = gUnknown_03004824->unk_0087 = 0;
+            gUnknown_03004824->unk_0084 = gUnknown_03004824->unk_0085 = 0;
+            gUnknown_03004824->unk_007b = 8;
+        }
+        else if (gUnknown_03004824->unk_0084 == 2 && gUnknown_03004824->unk_0085 == 1)
+        {
+            sub_804AA0C(5);
+            gUnknown_03004824->unk_008c = 0xddee;
+            gUnknown_03004824->unk_008e = 0;
+            sub_804AADC(5, 0);
+            gUnknown_03004824->unk_0086 = gUnknown_03004824->unk_0087 = 0;
+            gUnknown_03004824->unk_0084 = gUnknown_03004824->unk_0085 = 0;
+            gUnknown_03004824->unk_007b = 8;
+        }
+        else if (gUnknown_03004824->unk_0084 == 2 && gUnknown_03004824->unk_0085 == 2)
+        {
+            gUnknown_03004824->unk_008c = 0xeebb;
+            gUnknown_03004824->unk_008e = 0;
+            sub_804AADC(5, 0);
+            BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+            gUnknown_03004824->unk_0084 = gUnknown_03004824->unk_0085 = 0;
+            gUnknown_03004824->unk_007b = 11;
+        }
+    }
+    if (gUnknown_03004824->unk_0086 && gUnknown_03004824->unk_0087)
+    {
+        if (gUnknown_03004824->unk_0086 == 1 && gUnknown_03004824->unk_0087 == 1)
+        {
+            gUnknown_03004824->unk_008c = 0xccdd;
+            gUnknown_03004824->unk_008e = 0;
+            sub_804AADC(5, 0);
+            gUnknown_03004824->unk_0086 = 0;
+            gUnknown_03004824->unk_0087 = 0;
+            gUnknown_03004824->unk_007b = 9;
+        }
+        if (gUnknown_03004824->unk_0086 == 2 || gUnknown_03004824->unk_0087 == 2)
+        {
+            sub_804AA0C(1);
+            gUnknown_03004824->unk_008c = 0xddee;
+            gUnknown_03004824->unk_008e = 0;
+            sub_804AADC(5, 0);
+            gUnknown_03004824->unk_0086 = 0;
+            gUnknown_03004824->unk_0087 = 0;
+            gUnknown_03004824->unk_007b = 8;
+        }
     }
 }
 
