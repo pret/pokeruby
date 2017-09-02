@@ -20,6 +20,7 @@
 #include "songs.h"
 #include "sound.h"
 #include "data2.h"
+#include "pokemon_summary_screen.h"
 #include "trade.h"
 
 #ifdef ENGLISH
@@ -842,7 +843,7 @@ static void sub_8047EC0(void)
     UpdatePaletteFade();
 }
 
-/*static*/ void sub_80484F4(void)
+void sub_80484F4(void)
 {
     int i;
     struct UnkStructF *unkStructF;
@@ -1763,6 +1764,21 @@ static void sub_8049620(void)
     {
         PlaySE(SE_SELECT);
         sub_8049804();
+    }
+}
+
+/*static*/ void sub_804997C(void)
+{
+    if (!gPaletteFade.active)
+    {
+        if (gUnknown_03004824->tradeMenuCursorPosition < PARTY_SIZE)
+        {
+            ShowPokemonSummaryScreen(gPlayerParty, gUnknown_03004824->tradeMenuCursorPosition, gUnknown_03004824->playerPartyCount - 1, sub_80484F4, 4);
+        }
+        else
+        {
+            ShowPokemonSummaryScreen(gEnemyParty, gUnknown_03004824->tradeMenuCursorPosition - 6, gUnknown_03004824->friendPartyCount - 1, sub_80484F4, 4);
+        }
     }
 }
 

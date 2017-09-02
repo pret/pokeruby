@@ -10,64 +10,6 @@
 	.set sub_804A96C_alt, sub_804A96C
 .endif
 
-	thumb_func_start sub_804997C
-sub_804997C: @ 804997C
-	push {r4,lr}
-	sub sp, 0x4
-	ldr r0, _080499B4 @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _080499E0
-	ldr r0, _080499B8 @ =gUnknown_03004824
-	ldr r2, [r0]
-	adds r3, r2, 0
-	adds r3, 0x41
-	ldrb r1, [r3]
-	cmp r1, 0x5
-	bhi _080499C4
-	ldr r0, _080499BC @ =gPlayerParty
-	ldrb r1, [r3]
-	adds r2, 0x42
-	ldrb r2, [r2]
-	subs r2, 0x1
-	lsls r2, 24
-	lsrs r2, 24
-	ldr r3, _080499C0 @ =sub_80484F4
-	movs r4, 0x4
-	str r4, [sp]
-	bl ShowPokemonSummaryScreen
-	b _080499E0
-	.align 2, 0
-_080499B4: .4byte gPaletteFade
-_080499B8: .4byte gUnknown_03004824
-_080499BC: .4byte gPlayerParty
-_080499C0: .4byte sub_80484F4
-_080499C4:
-	ldr r0, _080499E8 @ =gEnemyParty
-	subs r1, 0x6
-	lsls r1, 24
-	lsrs r1, 24
-	adds r2, 0x43
-	ldrb r2, [r2]
-	subs r2, 0x1
-	lsls r2, 24
-	lsrs r2, 24
-	ldr r3, _080499EC @ =sub_80484F4
-	movs r4, 0x4
-	str r4, [sp]
-	bl ShowPokemonSummaryScreen
-_080499E0:
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080499E8: .4byte gEnemyParty
-_080499EC: .4byte sub_80484F4
-	thumb_func_end sub_804997C
-
 	thumb_func_start sub_80499F0
 sub_80499F0: @ 80499F0
 	push {r4,r5,lr}
