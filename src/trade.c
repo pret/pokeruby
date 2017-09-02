@@ -140,6 +140,7 @@ void sub_804A6DC(u8);
 void sub_804A938(struct UnkStructE *);
 u8 sub_804A9F4(void);
 u8 sub_804AA00(void);
+void sub_8049E9C(u8);
 
 #ifdef ENGLISH
 #define sub_804A96C_alt sub_804A96C
@@ -1478,6 +1479,44 @@ void sub_80490BC(u8 a0, u8 a1)
                 gUnknown_03004824->unk_0087 = 2;
                 break;
         }
+        ResetBlockReceivedFlag(1);
+    }
+}
+
+void sub_80491E4(u8 unused, u8 a1)
+{
+    if (a1 & 1)
+    {
+        switch (gBlockRecvBuffer[0][0])
+        {
+            case 0xeebb:
+                BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+                sub_804AA0C(4);
+                gUnknown_03004824->unk_007b = 11;
+                break;
+            case 0xeecc:
+                sub_804AA0C(5);
+                gUnknown_03004824->unk_007b = 8;
+                break;
+            case 0xdddd:
+                gUnknown_03004824->unk_008a = ((u8 *)gBlockRecvBuffer[0])[1 * sizeof(u16)] + 6;
+                sub_8049E9C(gUnknown_03004824->unk_0041);
+                sub_8049E9C(gUnknown_03004824->unk_008a);
+                gUnknown_03004824->unk_007b = 7;
+                break;
+            case 0xccdd:
+                BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+                gUnknown_03004824->unk_007b = 10;
+                break;
+            case 0xddee:
+                sub_804AA0C(1);
+                gUnknown_03004824->unk_007b = 8;
+                break;
+        }
+        ResetBlockReceivedFlag(0);
+    }
+    if (a1 & 2)
+    {
         ResetBlockReceivedFlag(1);
     }
 }
