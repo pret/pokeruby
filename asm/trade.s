@@ -10,53 +10,6 @@
 	.set sub_804A96C_alt, sub_804A96C
 .endif
 
-	thumb_func_start sub_8049620
-sub_8049620: @ 8049620
-	push {r4,lr}
-	movs r0, 0
-	bl sub_804AA0C
-	ldr r4, _08049668 @ =gUnknown_03004824
-	ldr r0, [r4]
-	adds r0, 0x7B
-	movs r1, 0x5
-	strb r1, [r0]
-	bl GetMultiplayerId
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _08049670
-	ldr r2, [r4]
-	adds r1, r2, 0
-	adds r1, 0x8C
-	ldr r0, _0804966C @ =0x0000aabb
-	strh r0, [r1]
-	adds r0, r2, 0
-	adds r0, 0x41
-	ldrb r1, [r0]
-	adds r0, 0x4D
-	strh r1, [r0]
-	bl bitmask_all_link_players_but_self
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r1, [r4]
-	adds r1, 0x8C
-	movs r2, 0x14
-	bl SendBlock
-	b _08049678
-	.align 2, 0
-_08049668: .4byte gUnknown_03004824
-_0804966C: .4byte 0x0000aabb
-_08049670:
-	ldr r0, [r4]
-	adds r0, 0x84
-	movs r1, 0x1
-	strb r1, [r0]
-_08049678:
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8049620
-
 	thumb_func_start sub_8049680
 sub_8049680: @ 8049680
 	push {r4,lr}

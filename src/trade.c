@@ -94,9 +94,7 @@ struct TradeEwramSubstruct {
     /*0x0088*/ u8 filler_0088[2];
     /*0x008a*/ u8 unk_008a;
     /*0x008b*/ u8 unk_008b;
-    /*0x008c*/ u16 unk_008c;
-    /*0x008e*/ u16 unk_008e;
-    /*0x0090*/ u8 filler_0090[0x24];
+    /*0x008c*/ u16 linkData[20];
     /*0x00b4*/ u8 unk_00b4;
     /*0x00b5*/ u8 unk_00b5[7];
     /*0x00bc*/ u8 filler_00bc[12];
@@ -1530,16 +1528,16 @@ static void sub_80492D8(void)
         if (gUnknown_03004824->unk_0084 == 1 && gUnknown_03004824->unk_0085 == 1)
         {
             gUnknown_03004824->unk_007b = 6;
-            gUnknown_03004824->unk_008c = 0xdddd;
-            gUnknown_03004824->unk_008e = gUnknown_03004824->unk_0041;
+            gUnknown_03004824->linkData[0] = 0xdddd;
+            gUnknown_03004824->linkData[1] = gUnknown_03004824->unk_0041;
             sub_804AADC(5, 0);
             gUnknown_03004824->unk_0084 = gUnknown_03004824->unk_0085 = 0;
         }
         else if (gUnknown_03004824->unk_0084 == 1 && gUnknown_03004824->unk_0085 == 2)
         {
             sub_804AA0C(1);
-            gUnknown_03004824->unk_008c = 0xeecc;
-            gUnknown_03004824->unk_008e = 0;
+            gUnknown_03004824->linkData[0] = 0xeecc;
+            gUnknown_03004824->linkData[1] = 0;
             sub_804AADC(5, 0);
             gUnknown_03004824->unk_0086 = gUnknown_03004824->unk_0087 = 0;
             gUnknown_03004824->unk_0084 = gUnknown_03004824->unk_0085 = 0;
@@ -1548,8 +1546,8 @@ static void sub_80492D8(void)
         else if (gUnknown_03004824->unk_0084 == 2 && gUnknown_03004824->unk_0085 == 1)
         {
             sub_804AA0C(5);
-            gUnknown_03004824->unk_008c = 0xddee;
-            gUnknown_03004824->unk_008e = 0;
+            gUnknown_03004824->linkData[0] = 0xddee;
+            gUnknown_03004824->linkData[1] = 0;
             sub_804AADC(5, 0);
             gUnknown_03004824->unk_0086 = gUnknown_03004824->unk_0087 = 0;
             gUnknown_03004824->unk_0084 = gUnknown_03004824->unk_0085 = 0;
@@ -1557,8 +1555,8 @@ static void sub_80492D8(void)
         }
         else if (gUnknown_03004824->unk_0084 == 2 && gUnknown_03004824->unk_0085 == 2)
         {
-            gUnknown_03004824->unk_008c = 0xeebb;
-            gUnknown_03004824->unk_008e = 0;
+            gUnknown_03004824->linkData[0] = 0xeebb;
+            gUnknown_03004824->linkData[1] = 0;
             sub_804AADC(5, 0);
             BeginNormalPaletteFade(-1, 0, 0, 16, 0);
             gUnknown_03004824->unk_0084 = gUnknown_03004824->unk_0085 = 0;
@@ -1569,8 +1567,8 @@ static void sub_80492D8(void)
     {
         if (gUnknown_03004824->unk_0086 == 1 && gUnknown_03004824->unk_0087 == 1)
         {
-            gUnknown_03004824->unk_008c = 0xccdd;
-            gUnknown_03004824->unk_008e = 0;
+            gUnknown_03004824->linkData[0] = 0xccdd;
+            gUnknown_03004824->linkData[1] = 0;
             sub_804AADC(5, 0);
             gUnknown_03004824->unk_0086 = 0;
             gUnknown_03004824->unk_0087 = 0;
@@ -1579,8 +1577,8 @@ static void sub_80492D8(void)
         if (gUnknown_03004824->unk_0086 == 2 || gUnknown_03004824->unk_0087 == 2)
         {
             sub_804AA0C(1);
-            gUnknown_03004824->unk_008c = 0xddee;
-            gUnknown_03004824->unk_008e = 0;
+            gUnknown_03004824->linkData[0] = 0xddee;
+            gUnknown_03004824->linkData[1] = 0;
             sub_804AADC(5, 0);
             gUnknown_03004824->unk_0086 = 0;
             gUnknown_03004824->unk_0087 = 0;
@@ -1640,6 +1638,22 @@ static u8 sub_8049514(u8 a0, u8 a1)
         PlaySE(SE_SELECT);
     }
     *a0 = v0;
+}
+
+/*static*/ void sub_8049620(void)
+{
+    sub_804AA0C(0);
+    gUnknown_03004824->unk_007b = 5;
+    if (GetMultiplayerId() == 1)
+    {
+        gUnknown_03004824->linkData[0] = 0xaabb;
+        gUnknown_03004824->linkData[1] = gUnknown_03004824->unk_0041;
+        SendBlock(bitmask_all_link_players_but_self(), gUnknown_03004824->linkData, 20);
+    }
+    else
+    {
+        gUnknown_03004824->unk_0084 = 1;
+    }
 }
 
 asm(".section .text.sub_804A96C");
