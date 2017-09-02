@@ -75,9 +75,8 @@ struct TradeEwramSubstruct {
     /*0x0041*/ u8 unk_0041;
     /*0x0042*/ u8 playerPartyCount;
     /*0x0043*/ u8 friendPartyCount;
-    /*0x0044*/ u8 tradeIconsActive[12];
-    /*0x0050*/ u8 unk_0050;
-    /*0x0051*/ u8 filler_0044[0x24];
+    /*0x0044*/ u8 tradeMenuOptionsActive[13];
+    /*0x0051*/ u8 filler_0051[0x24];
     /*0x0075*/ u8 unk_0075;
     /*0x0076*/ u8 filler_0076[4];
     /*0x007a*/ u8 unk_007a;
@@ -312,70 +311,70 @@ const u8 *const gUnknown_0820C14C[] = {
 
 const u8 gTradeNextSelectedMonTable[][4][6] = {
     {
-        {4, 2, 12, 12, 0, 0},
-        {2, 4, 12, 12, 0, 0},
-        {7, 6, 1, 0, 0, 0},
-        {1, 6, 7, 0, 0, 0}
+        { 4,  2, 12, 12,  0,  0},
+        { 2,  4, 12, 12,  0,  0},
+        { 7,  6,  1,  0,  0,  0},
+        { 1,  6,  7,  0,  0,  0}
     }, {
-        {5, 3, 12, 12, 0, 0},
-        {3, 5, 12, 12, 0, 0},
-        {0, 7, 6, 1, 0, 0},
-        {6, 7, 0, 1, 0, 0}
+        { 5,  3, 12, 12,  0,  0},
+        { 3,  5, 12, 12,  0,  0},
+        { 0,  7,  6,  1,  0,  0},
+        { 6,  7,  0,  1,  0,  0}
     }, {
-        {0, 0, 0, 0, 0, 0},
-        {4, 0, 0, 0, 0, 0},
-        {9, 8, 7, 6, 0, 0},
-        {3, 1, 0, 0, 0, 0}
+        { 0,  0,  0,  0,  0,  0},
+        { 4,  0,  0,  0,  0,  0},
+        { 9,  8,  7,  6,  0,  0},
+        { 3,  1,  0,  0,  0,  0}
     }, {
-        {1, 1, 1, 1, 0, 0},
-        {5, 1, 1, 1, 0, 0},
-        {2, 9, 8, 7, 0, 0},
-        {8, 9, 6, 6, 0, 0}
+        { 1,  1,  1,  1,  0,  0},
+        { 5,  1,  1,  1,  0,  0},
+        { 2,  9,  8,  7,  0,  0},
+        { 8,  9,  6,  6,  0,  0}
     }, {
-        {2, 2, 2, 2, 0, 0},
-        {0, 0, 0, 0, 0, 0},
-        {11, 10, 9, 8, 7, 6},
-        {5, 3, 1, 0, 0, 0}
+        { 2,  2,  2,  2,  0,  0},
+        { 0,  0,  0,  0,  0,  0},
+        {11, 10,  9,  8,  7,  6},
+        { 5,  3,  1,  0,  0,  0}
     }, {
-        {3, 3, 3, 3, 0, 0},
-        {1, 1, 1, 1, 0, 0},
-        {4, 4, 4, 4, 0, 0},
-        {10, 8, 6, 0, 0, 0}
+        { 3,  3,  3,  3,  0,  0},
+        { 1,  1,  1,  1,  0,  0},
+        { 4,  4,  4,  4,  0,  0},
+        {10,  8,  6,  0,  0,  0}
     }, {
-        {10, 8, 12, 0, 0, 0},
-        {8, 10, 12, 0, 0, 0},
-        {1, 0, 0, 0, 0, 0},
-        {7, 0, 1, 0, 0, 0}
+        {10,  8, 12,  0,  0,  0},
+        { 8, 10, 12,  0,  0,  0},
+        { 1,  0,  0,  0,  0,  0},
+        { 7,  0,  1,  0,  0,  0}
     }, {
-        {12, 0, 0, 0, 0, 0},
-        {9, 12, 0, 0, 0, 0},
-        {6, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0}
+        {12,  0,  0,  0,  0,  0},
+        { 9, 12,  0,  0,  0,  0},
+        { 6,  0,  0,  0,  0,  0},
+        { 0,  0,  0,  0,  0,  0}
     }, {
-        {6, 0, 0, 0, 0, 0},
-        {10, 6, 0, 0, 0, 0},
-        {3, 2, 1, 0, 0, 0},
-        {9, 7, 0, 0, 0, 0}
+        { 6,  0,  0,  0,  0,  0},
+        {10,  6,  0,  0,  0,  0},
+        { 3,  2,  1,  0,  0,  0},
+        { 9,  7,  0,  0,  0,  0}
     }, {
-        {7, 0, 0, 0, 0, 0},
-        {11, 12, 0, 0, 0, 0},
-        {8, 0, 0, 0, 0, 0},
-        {2, 1, 0, 0, 0, 0}
+        { 7,  0,  0,  0,  0,  0},
+        {11, 12,  0,  0,  0,  0},
+        { 8,  0,  0,  0,  0,  0},
+        { 2,  1,  0,  0,  0,  0}
     }, {
-        {8, 0, 0, 0, 0, 0},
-        {6, 0, 0, 0, 0, 0},
-        {5, 4, 3, 2, 1, 0},
-        {11, 9, 7, 0, 0, 0}
+        { 8,  0,  0,  0,  0,  0},
+        { 6,  0,  0,  0,  0,  0},
+        { 5,  4,  3,  2,  1,  0},
+        {11,  9,  7,  0,  0,  0}
     }, {
-        {9, 0, 0, 0, 0, 0},
-        {12, 0, 0, 0, 0, 0},
-        {10, 0, 0, 0, 0, 0},
-        {4, 2, 0, 0, 0, 0}
+        { 9,  0,  0,  0,  0,  0},
+        {12,  0,  0,  0,  0,  0},
+        {10,  0,  0,  0,  0,  0},
+        { 4,  2,  0,  0,  0,  0}
     }, {
-        {11, 9, 7, 6, 0, 0},
-        {7, 6, 0, 0, 0, 0},
-        {12, 0, 0, 0, 0, 0},
-        {12, 0, 0, 0, 0, 0}
+        {11,  9,  7,  6,  0,  0},
+        { 7,  6,  0,  0,  0,  0},
+        {12,  0,  0,  0,  0,  0},
+        {12,  0,  0,  0,  0,  0}
     }
 };
 
@@ -1272,23 +1271,23 @@ static void sub_8048C70(void)
         if (i < gUnknown_03004824->playerPartyCount)
         {
             gSprites[gUnknown_03004824->playerPartyIcons[i]].invisible = FALSE;
-            gUnknown_03004824->tradeIconsActive[i] = TRUE;
+            gUnknown_03004824->tradeMenuOptionsActive[i] = TRUE;
         }
         else
         {
-            gUnknown_03004824->tradeIconsActive[i] = FALSE;
+            gUnknown_03004824->tradeMenuOptionsActive[i] = FALSE;
         }
         if (i < gUnknown_03004824->friendPartyCount)
         {
             gSprites[gUnknown_03004824->friendPartyIcons[i]].invisible = FALSE;
-            gUnknown_03004824->tradeIconsActive[i + 6] = TRUE;
+            gUnknown_03004824->tradeMenuOptionsActive[i + 6] = TRUE;
         }
         else
         {
-            gUnknown_03004824->tradeIconsActive[i + 6] = FALSE;
+            gUnknown_03004824->tradeMenuOptionsActive[i + 6] = FALSE;
         }
     }
-    gUnknown_03004824->unk_0050 = TRUE;
+    gUnknown_03004824->tradeMenuOptionsActive[12] = TRUE;
 }
 
 static void nullsub_5(u8 a0, u8 a1) {}
@@ -1606,19 +1605,41 @@ static void sub_80494D8(void)
         sub_80492D8();
 }
 
-u8 sub_8049514(u8 a0, u8 a1)
+static u8 sub_8049514(u8 a0, u8 a1)
 {
     int i;
     u8 retval = 0;
     for (i = 0; i < PARTY_SIZE; i ++)
     {
-        if (gUnknown_03004824->tradeIconsActive[gTradeNextSelectedMonTable[a0][a1][i]] == TRUE)
+        if (gUnknown_03004824->tradeMenuOptionsActive[gTradeNextSelectedMonTable[a0][a1][i]] == TRUE)
         {
             retval = gTradeNextSelectedMonTable[a0][a1][i];
             break;
         }
     }
     return retval;
+}
+
+/*static*/ void sub_8049560(u8 *a0, u8 a1)
+{
+    u8 v0 = sub_8049514(*a0, a1);
+    if (v0 == 12) // CANCEL
+    {
+        StartSpriteAnim(&gSprites[gUnknown_03004824->unk_0040], 1);
+        gSprites[gUnknown_03004824->unk_0040].pos1.x = 0xe0;
+        gSprites[gUnknown_03004824->unk_0040].pos1.y = 0xa0;
+    }
+    else
+    {
+        StartSpriteAnim(&gSprites[gUnknown_03004824->unk_0040], 0);
+        gSprites[gUnknown_03004824->unk_0040].pos1.x = gTradeMonSpriteCoords[v0][0] * 8 + 32;
+        gSprites[gUnknown_03004824->unk_0040].pos1.y = gTradeMonSpriteCoords[v0][1] * 8;
+    }
+    if (*a0 != v0)
+    {
+        PlaySE(SE_SELECT);
+    }
+    *a0 = v0;
 }
 
 asm(".section .text.sub_804A96C");
