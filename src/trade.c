@@ -140,7 +140,7 @@ static void sub_80494D8(void);
 static void sub_8048AB4(void);
 /*static*/ void sub_804A940(struct UnkStructE *);
 /*static*/ void sub_804B41C(void);
-/*static*/ void sub_8049DE0(void);
+static void sub_8049DE0(void);
 /*static*/ void sub_804AB30(void);
 /*static*/ void sub_8049ED4(u8);
 /*static*/ void sub_804A6DC(u8);
@@ -1662,7 +1662,7 @@ static void sub_8049620(void)
     }
 }
 
-/*static*/ void sub_8049680(void)
+static void sub_8049680(void)
 {
     int i;
     if (gMain.newAndRepeatedKeys & DPAD_UP)
@@ -1714,7 +1714,7 @@ static void sub_8049620(void)
     }
 }
 
-/*static*/ void sub_8049804(void)
+static void sub_8049804(void)
 {
     HandleDestroyMenuCursors();
     sub_804A80C();
@@ -1723,7 +1723,7 @@ static void sub_8049620(void)
     sub_804ACD8(gUnknown_0820C14C[1], (u8 *)(BG_CHAR_ADDR(4) + 32 * gUnknown_03004824->unk_007e), 20);
 }
 
-/*static*/ void sub_8049860(void)
+static void sub_8049860(void)
 {
     if (gMain.newAndRepeatedKeys & DPAD_UP)
     {
@@ -1761,7 +1761,7 @@ static void sub_8049620(void)
     }
 }
 
-/*static*/ void sub_8049954(void)
+static void sub_8049954(void)
 {
     if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
     {
@@ -1770,7 +1770,7 @@ static void sub_8049620(void)
     }
 }
 
-/*static*/ void sub_804997C(void)
+static void sub_804997C(void)
 {
     if (!gPaletteFade.active)
     {
@@ -1824,7 +1824,7 @@ static void sub_8049A20(void)
     }
 }
 
-/*static*/ void sub_8049AC0(void)
+static void sub_8049AC0(void)
 {
     if (gMain.newAndRepeatedKeys & DPAD_UP)
     {
@@ -1867,7 +1867,7 @@ static void sub_8049A20(void)
     }
 }
 
-/*static*/ void sub_8049BC0(void)
+static void sub_8049BC0(void)
 {
     if (gMain.newAndRepeatedKeys & DPAD_UP)
     {
@@ -1903,7 +1903,7 @@ static void sub_8049A20(void)
     }
 }
 
-/*static*/ void sub_8049C8C(void)
+static void sub_8049C8C(void)
 {
     if (GetMultiplayerId() == 0)
     {
@@ -1913,7 +1913,7 @@ static void sub_8049A20(void)
     gUnknown_03004824->unk_007b = 7;
 }
 
-/*static*/ void sub_8049CC4(void)
+static void sub_8049CC4(void)
 {
     if (gUnknown_03004824->unk_0080 == 5 && gUnknown_03004824->unk_0081 == 5)
     {
@@ -1922,7 +1922,7 @@ static void sub_8049A20(void)
     }
 }
 
-/*static*/ void DisplayMessageAndContinueTask(void)
+static void DisplayMessageAndContinueTask(void)
 {
     gUnknown_03004824->unk_00b4++;
     if (gUnknown_03004824->unk_00b4 > 120)
@@ -1934,7 +1934,7 @@ static void sub_8049A20(void)
     }
 }
 
-/*static*/ void sub_8049D44(void)
+static void sub_8049D44(void)
 {
     if (gMain.newKeys & A_BUTTON)
     {
@@ -1946,7 +1946,7 @@ static void sub_8049A20(void)
     }
 }
 
-/*static*/ void sub_8049D9C(void)
+static void sub_8049D9C(void)
 {
     if (!gPaletteFade.active)
     {
@@ -1955,11 +1955,63 @@ static void sub_8049A20(void)
     }
 }
 
-/*static*/ void sub_8049DC4(void)
+static void sub_8049DC4(void)
 {
     if (gReceivedRemoteLinkPlayers == 0)
     {
         SetMainCallback2(sub_805465C);
+    }
+}
+
+static void sub_8049DE0(void)
+{
+    switch (gUnknown_03004824->unk_007b)
+    {
+        case  0:
+            sub_8049680();
+            break;
+        case  1:
+            sub_8049860();
+            break;
+        case  2:
+            sub_804997C();
+            break;
+        case  3:
+            sub_8049AC0();
+            break;
+        case  4:
+            sub_8049BC0();
+            break;
+        case  6:
+            sub_8049C8C();
+            break;
+        case  7:
+            sub_8049CC4();
+            break;
+        case  8:
+            sub_8049D44();
+            break;
+        case  9:
+            sub_8048A14();
+            break;
+        case 10:
+            sub_8048A50();
+            break;
+        case 11:
+            sub_8049D9C();
+            break;
+        case 12:
+            sub_8049DC4();
+            break;
+        case 13:
+            sub_8048A90();
+            break;
+        case 14:
+            DisplayMessageAndContinueTask();
+            break;
+        case 15:
+            sub_8049954();
+            break;
     }
 }
 
