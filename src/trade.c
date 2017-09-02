@@ -1444,11 +1444,11 @@ void sub_8049088(void)
     sub_804ACD8(string, (u8 *)BG_CHAR_ADDR(4) + gUnknown_03004824->unk_007e * 32, 20);
 }
 
-void sub_80490BC(u8 a0, u8 a1)
+static void sub_80490BC(u8 mpId, u8 a1)
 {
     if (a1 & 1)
     {
-        switch (gBlockRecvBuffer[a0][0])
+        switch (gBlockRecvBuffer[mpId][0])
         {
             case 0xeeaa:
                 gUnknown_03004824->unk_0084 = 2;
@@ -1487,9 +1487,9 @@ void sub_80490BC(u8 a0, u8 a1)
     }
 }
 
-void sub_80491E4(u8 unused, u8 a1)
+static void sub_80491E4(u8 mpId, u8 status)
 {
-    if (a1 & 1)
+    if (status & 1)
     {
         switch (gBlockRecvBuffer[0][0])
         {
@@ -1519,13 +1519,13 @@ void sub_80491E4(u8 unused, u8 a1)
         }
         ResetBlockReceivedFlag(0);
     }
-    if (a1 & 2)
+    if (status & 2)
     {
         ResetBlockReceivedFlag(1);
     }
 }
 
-void sub_80492D8(void)
+static void sub_80492D8(void)
 {
     if (gUnknown_03004824->unk_0084 && gUnknown_03004824->unk_0085)
     {
@@ -1589,6 +1589,22 @@ void sub_80492D8(void)
             gUnknown_03004824->unk_007b = 8;
         }
     }
+}
+
+void sub_80494D8(void)
+{
+    u8 mpId = GetMultiplayerId();
+    u8 status = GetBlockReceivedStatus();
+    if (status)
+    {
+        if (mpId == 0)
+            sub_80490BC(mpId, status);
+        else
+            sub_80491E4(mpId, status);
+        ResetBlockReceivedFlags();
+    }
+    if (mpId == 0)
+        sub_80492D8();
 }
 
 asm(".section .text.sub_804A96C");

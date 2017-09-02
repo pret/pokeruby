@@ -10,37 +10,6 @@
 	.set sub_804A96C_alt, sub_804A96C
 .endif
 
-	thumb_func_start sub_80494D8
-sub_80494D8: @ 80494D8
-	push {r4,lr}
-	bl GetMultiplayerId
-	lsls r0, 24
-	lsrs r4, r0, 24
-	bl GetBlockReceivedStatus
-	lsls r0, 24
-	lsrs r1, r0, 24
-	cmp r1, 0
-	beq _08049504
-	cmp r4, 0
-	bne _080494FA
-	movs r0, 0
-	bl sub_80490BC
-	b _08049500
-_080494FA:
-	adds r0, r4, 0
-	bl sub_80491E4
-_08049500:
-	bl ResetBlockReceivedFlags
-_08049504:
-	cmp r4, 0
-	bne _0804950C
-	bl sub_80492D8
-_0804950C:
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80494D8
-
 	thumb_func_start sub_8049514
 sub_8049514: @ 8049514
 	push {r4-r6,lr}
