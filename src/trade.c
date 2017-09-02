@@ -146,6 +146,7 @@ static void sub_8048AB4(void);
 /*static*/ u8 sub_804AA00(void);
 /*static*/ void sub_8049E9C(u8);
 /*static*/ void sub_804AADC(u8, u8);
+/*static*/ void sub_804A80C(void);
 
 extern u8 gUnknown_020297D8[2];
 extern u8 *gUnknown_020296CC[13];
@@ -1706,6 +1707,15 @@ static void TradeMenuMoveCursor(u8 *tradeMenuCursorPosition, u8 direction)
         }
         SendBlock(bitmask_all_link_players_but_self(), gUnknown_03004824->linkData, 20);
     }
+}
+
+/*static*/ void sub_8049804(void)
+{
+    HandleDestroyMenuCursors();
+    sub_804A80C();
+    gUnknown_03004824->unk_007b = 0;
+    gSprites[gUnknown_03004824->unk_0040].invisible = FALSE;
+    sub_804ACD8(gUnknown_0820C14C[1], (u8 *)(BG_CHAR_ADDR(4) + 32 * gUnknown_03004824->unk_007e), 20);
 }
 
 asm(".section .text.sub_804A96C");

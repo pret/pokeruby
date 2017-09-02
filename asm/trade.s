@@ -10,49 +10,6 @@
 	.set sub_804A96C_alt, sub_804A96C
 .endif
 
-	thumb_func_start sub_8049804
-sub_8049804: @ 8049804
-	push {lr}
-	bl HandleDestroyMenuCursors
-	bl sub_804A80C
-	ldr r3, _08049850 @ =gUnknown_03004824
-	ldr r0, [r3]
-	adds r0, 0x7B
-	movs r1, 0
-	strb r1, [r0]
-	ldr r2, _08049854 @ =gSprites
-	ldr r0, [r3]
-	adds r0, 0x40
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	adds r0, 0x3E
-	ldrb r2, [r0]
-	movs r1, 0x5
-	negs r1, r1
-	ands r1, r2
-	strb r1, [r0]
-	ldr r0, _08049858 @ =gUnknown_0820C14C
-	ldr r0, [r0, 0x4]
-	ldr r1, [r3]
-	adds r1, 0x7E
-	ldrh r1, [r1]
-	lsls r1, 5
-	ldr r2, _0804985C @ =0x06010000
-	adds r1, r2
-	movs r2, 0x14
-	bl sub_804ACD8
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08049850: .4byte gUnknown_03004824
-_08049854: .4byte gSprites
-_08049858: .4byte gUnknown_0820C14C
-_0804985C: .4byte 0x06010000
-	thumb_func_end sub_8049804
-
 	thumb_func_start sub_8049860
 sub_8049860: @ 8049860
 	push {r4,lr}
