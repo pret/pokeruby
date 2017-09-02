@@ -150,6 +150,7 @@ static void sub_8048AB4(void);
 /*static*/ void sub_804AADC(u8, u8);
 /*static*/ void sub_804A80C(void);
 static u8 sub_80499F0(const u8 *, u8, u8);
+/*static*/ void sub_804A840(u8);
 
 extern u8 gUnknown_020297D8[2];
 extern u8 *gUnknown_020296CC[13];
@@ -1929,6 +1930,27 @@ static void sub_8049A20(void)
         InitYesNoMenu(24, 14, 4);
         gUnknown_03004824->unk_00b4 = 0;
         gUnknown_03004824->unk_007b = 3;
+    }
+}
+
+/*static*/ void sub_8049D44(void)
+{
+    if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        sub_804A840(0);
+        sub_804A840(1);
+        gUnknown_03004824->unk_007b = 0;
+        gSprites[gUnknown_03004824->tradeMenuCursorSpriteIdx].invisible = FALSE;
+    }
+}
+
+/*static*/ void sub_8049D9C(void)
+{
+    if (!gPaletteFade.active)
+    {
+        sub_800832C();
+        gUnknown_03004824->unk_007b = 12;
     }
 }
 
