@@ -1757,6 +1757,15 @@ static void sub_8049620(void)
     }
 }
 
+/*static*/ void sub_8049954(void)
+{
+    if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        sub_8049804();
+    }
+}
+
 asm(".section .text.sub_804A96C");
 
 /*static*/ void sub_804A96C(struct UnkStructD *arg0, u8 left, u8 top, u16 *tilemap, u8 width, u8 height, u16 sp8) {

@@ -10,30 +10,6 @@
 	.set sub_804A96C_alt, sub_804A96C
 .endif
 
-	thumb_func_start sub_8049954
-sub_8049954: @ 8049954
-	push {lr}
-	ldr r0, _08049978 @ =gMain
-	ldrh r1, [r0, 0x2E]
-	movs r0, 0x1
-	ands r0, r1
-	cmp r0, 0
-	bne _0804996A
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	beq _08049974
-_0804996A:
-	movs r0, 0x5
-	bl PlaySE
-	bl sub_8049804
-_08049974:
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08049978: .4byte gMain
-	thumb_func_end sub_8049954
-
 	thumb_func_start sub_804997C
 sub_804997C: @ 804997C
 	push {r4,lr}
