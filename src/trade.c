@@ -149,7 +149,7 @@ static void sub_8048AB4(void);
 /*static*/ void sub_8049E9C(u8);
 /*static*/ void sub_804AADC(u8, u8);
 /*static*/ void sub_804A80C(void);
-/*static*/ u8 sub_80499F0(const u8 *, u8, u8);
+static u8 sub_80499F0(const u8 *, u8, u8);
 
 extern u8 gUnknown_020297D8[2];
 extern u8 *gUnknown_020296CC[13];
@@ -1652,7 +1652,7 @@ static void sub_8049620(void)
     {
         gUnknown_03004824->linkData[0] = 0xaabb;
         gUnknown_03004824->linkData[1] = gUnknown_03004824->tradeMenuCursorPosition;
-        SendBlock(bitmask_all_link_players_but_self(), gUnknown_03004824->linkData, 20);
+        SendBlock(bitmask_all_link_players_but_self(), gUnknown_03004824->linkData, ARRAY_COUNT(gUnknown_03004824->linkData));
     }
     else
     {
@@ -1708,7 +1708,7 @@ static void sub_8049620(void)
         {
             gUnknown_03004824->linkData[i] = i;
         }
-        SendBlock(bitmask_all_link_players_but_self(), gUnknown_03004824->linkData, 20);
+        SendBlock(bitmask_all_link_players_but_self(), gUnknown_03004824->linkData, ARRAY_COUNT(gUnknown_03004824->linkData));
     }
 }
 
@@ -1783,7 +1783,7 @@ static void sub_8049620(void)
     }
 }
 
-/*static*/ u8 sub_80499F0(const u8 *src, u8 partyCount, u8 tradeMenuCursorPosition)
+static u8 sub_80499F0(const u8 *src, u8 partyCount, u8 tradeMenuCursorPosition)
 {
     u8 retval = 0;
     int i;
@@ -1795,6 +1795,31 @@ static void sub_8049620(void)
         }
     }
     return retval;
+}
+
+/*static*/ void sub_8049A20(void)
+{
+    u8 unk_0051[12];
+    int i;
+    for (i = 0; i < gUnknown_03004824->playerPartyCount; i ++)
+    {
+        unk_0051[i] = gUnknown_03004824->unk_0051[i];
+    }
+    if (sub_80499F0(unk_0051, gUnknown_03004824->playerPartyCount, gUnknown_03004824->tradeMenuCursorPosition) == 0)
+    {
+        sub_804AADC(3, 2);
+        gUnknown_03004824->linkData[0] = 0xbbcc;
+        sub_804AADC(0xb4, 0);
+    }
+    else
+    {
+        sub_804AADC(3, 1);
+        gUnknown_03004824->linkData[0] = 0xbbbb;
+        if (sub_8007ECC())
+        {
+            SendBlock(bitmask_all_link_players_but_self(), gUnknown_03004824->linkData, ARRAY_COUNT(gUnknown_03004824->linkData));
+        }
+    }
 }
 
 asm(".section .text.sub_804A96C");
