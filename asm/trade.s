@@ -10,35 +10,6 @@
 	.set sub_804A96C_alt, sub_804A96C
 .endif
 
-	thumb_func_start sub_8049C8C
-sub_8049C8C: @ 8049C8C
-	push {r4,lr}
-	bl GetMultiplayerId
-	lsls r0, 24
-	cmp r0, 0
-	bne _08049CAE
-	ldr r4, _08049CC0 @ =gUnknown_03004824
-	ldr r0, [r4]
-	adds r0, 0x41
-	ldrb r0, [r0]
-	bl sub_8049E9C
-	ldr r0, [r4]
-	adds r0, 0x8A
-	ldrb r0, [r0]
-	bl sub_8049E9C
-_08049CAE:
-	ldr r0, _08049CC0 @ =gUnknown_03004824
-	ldr r0, [r0]
-	adds r0, 0x7B
-	movs r1, 0x7
-	strb r1, [r0]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08049CC0: .4byte gUnknown_03004824
-	thumb_func_end sub_8049C8C
-
 	thumb_func_start sub_8049CC4
 sub_8049CC4: @ 8049CC4
 	push {r4,lr}

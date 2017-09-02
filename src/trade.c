@@ -1901,6 +1901,16 @@ static void sub_8049A20(void)
     }
 }
 
+void sub_8049C8C(void)
+{
+    if (GetMultiplayerId() == 0)
+    {
+        sub_8049E9C(gUnknown_03004824->tradeMenuCursorPosition);
+        sub_8049E9C(gUnknown_03004824->unk_008a);
+    }
+    gUnknown_03004824->unk_007b = 7;
+}
+
 asm(".section .text.sub_804A96C");
 
 /*static*/ void sub_804A96C(struct UnkStructD *arg0, u8 left, u8 top, u16 *tilemap, u8 width, u8 height, u16 sp8) {
