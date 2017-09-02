@@ -82,7 +82,9 @@ struct TradeEwramSubstruct {
     /*0x007e*/ u16 unk_007e;
     /*0x0080*/ u8 unk_0080;
     /*0x0081*/ u8 unk_0081;
-    /*0x0082*/ u8 filler_0082[4];
+    /*0x0082*/ u8 filler_0082[2];
+    /*0x0084*/ u8 unk_0084;
+    /*0x0085*/ u8 unk_0085;
     /*0x0086*/ u8 unk_0086;
     /*0x0087*/ u8 unk_0087;
     /*0x0088*/ u8 filler_0088[2];
@@ -138,6 +140,10 @@ void sub_804A6DC(u8);
 void sub_804A938(struct UnkStructE *);
 u8 sub_804A9F4(void);
 u8 sub_804AA00(void);
+
+#ifdef ENGLISH
+#define sub_804A96C_alt sub_804A96C
+#endif
 
 extern u8 gUnknown_020297D8[2];
 extern u8 *gUnknown_020296CC[13];
@@ -1431,6 +1437,49 @@ void sub_8049088(void)
     u8 string[28];
     StringCopy(string, gTradeText_TradeOkayPrompt);
     sub_804ACD8(string, (u8 *)BG_CHAR_ADDR(4) + gUnknown_03004824->unk_007e * 32, 20);
+}
+
+void sub_80490BC(u8 a0, u8 a1)
+{
+    if (a1 & 1)
+    {
+        switch (gBlockRecvBuffer[a0][0])
+        {
+            case 0xeeaa:
+                gUnknown_03004824->unk_0084 = 2;
+                break;
+            case 0xaabb:
+                gUnknown_03004824->unk_0084 = 1;
+                break;
+            case 0xbbbb:
+                gUnknown_03004824->unk_0086 = 1;
+                break;
+            case 0xbbcc:
+                gUnknown_03004824->unk_0086 = 2;
+                break;
+        }
+        ResetBlockReceivedFlag(0);
+    }
+    if (a1 & 2)
+    {
+        switch (gBlockRecvBuffer[1][0])
+        {
+            case 0xeeaa:
+                gUnknown_03004824->unk_0085 = 2;
+                break;
+            case 0xaabb:
+                gUnknown_03004824->unk_008a = gBlockRecvBuffer[1][1] + 6;
+                gUnknown_03004824->unk_0085 = 1;
+                break;
+            case 0xbbbb:
+                gUnknown_03004824->unk_0087 = 1;
+                break;
+            case 0xbbcc:
+                gUnknown_03004824->unk_0087 = 2;
+                break;
+        }
+        ResetBlockReceivedFlag(1);
+    }
 }
 
 asm(".section .text.sub_804A96C");
