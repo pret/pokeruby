@@ -23,6 +23,7 @@
 #include "pokemon_summary_screen.h"
 #include "rom4.h"
 #include "trade.h"
+#include "rom_8077ABC.h"
 
 #ifdef ENGLISH
 #define sub_804A96C_alt sub_804A96C
@@ -53,13 +54,6 @@ struct UnkStructC {
 };
 
 struct UnkStructD {
-    /*0x00*/ u8 pad00[0x10];
-    /*0x10*/ u8 var10;
-    /*0x11*/ u8 pad11[1];
-    /*0x12*/ u16 var12[1];
-};
-
-struct UnkStructE {
     /*0x00*/ u8 filler_00[8];
     /*0x08*/ void *vramAddr;
     /*0x0c*/ u8 filler_0c[4];
@@ -71,12 +65,10 @@ struct TradeEwramSubstruct {
     /*0x0000*/ u8 unk_0000;
     /*0x0001*/ u8 unk_0001;
     /*0x0004*/ struct Window window;
-    /*0x0034*/ u8 playerPartyIcons[6];
-    /*0x003a*/ u8 friendPartyIcons[6];
+    /*0x0034*/ u8 partyIcons[2][6];
     /*0x0040*/ u8 tradeMenuCursorSpriteIdx;
     /*0x0041*/ u8 tradeMenuCursorPosition;
-    /*0x0042*/ u8 playerPartyCount;
-    /*0x0043*/ u8 friendPartyCount;
+    /*0x0042*/ u8 partyCounts[2];
     /*0x0044*/ u8 tradeMenuOptionsActive[13];
     /*0x0051*/ u8 unk_0051[6];
     /*0x0056*/ u8 filler_0057[30];
@@ -100,7 +92,7 @@ struct TradeEwramSubstruct {
     /*0x00b4*/ u8 unk_00b4;
     /*0x00b5*/ u8 unk_00b5[7];
     /*0x00bc*/ u8 filler_00bc[12];
-    /*0x00c8*/ struct UnkStructE unk_00c8;
+    /*0x00c8*/ struct UnkStructD unk_00c8;
     /*0x08dc*/ u8 filler_04dc[0x724];
 };
 
@@ -123,7 +115,7 @@ static void sub_8047EC0(void);
 /*static*/ void sub_804ACD8(const u8 *, u8 *, u8);
 static void nullsub_5(u8, u8);
 /*static*/ void sub_804AA88(void);
-/*static*/ void sub_804A964(struct UnkStructE *, void *);
+/*static*/ void sub_804A964(struct UnkStructD *, void *);
 static void sub_80489F4(void);
 /*static*/ void sub_804AA0C(u8);
 static bool8 sub_8048D44(void);
@@ -137,13 +129,13 @@ static void sub_8048B0C(u8);
 /*static*/ void sub_804AF10(void);
 static void sub_80494D8(void);
 static void sub_8048AB4(void);
-/*static*/ void sub_804A940(struct UnkStructE *);
+/*static*/ void sub_804A940(struct UnkStructD *);
 /*static*/ void sub_804B41C(void);
 static void sub_8049DE0(void);
 /*static*/ void sub_804AB30(void);
 /*static*/ void sub_8049ED4(u8);
 /*static*/ void sub_804A6DC(u8);
-/*static*/ void sub_804A938(struct UnkStructE *);
+/*static*/ void sub_804A938(struct UnkStructD *);
 /*static*/ u8 sub_804A9F4(void);
 /*static*/ u8 sub_804AA00(void);
 static void sub_8049E9C(u8);
@@ -151,6 +143,7 @@ static void sub_8049E9C(u8);
 /*static*/ void sub_804A80C(void);
 static u8 sub_80499F0(const u8 *, u8, u8);
 /*static*/ void sub_804A840(u8);
+/*static*/ u8 sub_804A2B4(u8 *, u8, u8);
 
 extern u8 gUnknown_020297D8[2];
 extern u8 *gUnknown_020296CC[13];
@@ -751,22 +744,22 @@ static void sub_8047EC0(void)
             CalculateEnemyPartyCount();
             FillWindowRect_DefaultPalette(&gUnknown_03004824->window, 0, 0, 0, 29, 19);
             REG_DISPCNT = 0;
-            gUnknown_03004824->playerPartyCount = gPlayerPartyCount;
-            gUnknown_03004824->friendPartyCount = gEnemyPartyCount;
-            for (i = 0; i < gUnknown_03004824->playerPartyCount; i ++)
-                gUnknown_03004824->playerPartyIcons[i] = CreateMonIcon(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2), sub_809D62C, gTradeMonSpriteCoords[i][0] * 8 + 14, gTradeMonSpriteCoords[i][1] * 8 - 12, TRUE, GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY));
-            for (i = 0; i < gUnknown_03004824->friendPartyCount; i ++)
-                gUnknown_03004824->friendPartyIcons[i] = CreateMonIcon(GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2, NULL), sub_809D62C, gTradeMonSpriteCoords[6 + i][0] * 8 + 14, gTradeMonSpriteCoords[6 + i][1] * 8 - 12, TRUE, GetMonData(&gEnemyParty[i], MON_DATA_PERSONALITY));
+            gUnknown_03004824->partyCounts[0] = gPlayerPartyCount;
+            gUnknown_03004824->partyCounts[1] = gEnemyPartyCount;
+            for (i = 0; i < gUnknown_03004824->partyCounts[0]; i ++)
+                gUnknown_03004824->partyIcons[0][i] = CreateMonIcon(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2), sub_809D62C, gTradeMonSpriteCoords[i][0] * 8 + 14, gTradeMonSpriteCoords[i][1] * 8 - 12, TRUE, GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY));
+            for (i = 0; i < gUnknown_03004824->partyCounts[1]; i ++)
+                gUnknown_03004824->partyIcons[1][i] = CreateMonIcon(GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2, NULL), sub_809D62C, gTradeMonSpriteCoords[6 + i][0] * 8 + 14, gTradeMonSpriteCoords[6 + i][1] * 8 - 12, TRUE, GetMonData(&gEnemyParty[i], MON_DATA_PERSONALITY));
             nullsub_5(2, 0);
             gMain.state ++;
             break;
         case  7:
             LoadHeldItemIconGraphics();
-            CreateHeldItemIcons(&gUnknown_03004824->playerPartyCount, gUnknown_03004824->playerPartyIcons, 0);
+            CreateHeldItemIcons(&gUnknown_03004824->partyCounts[0], gUnknown_03004824->partyIcons[0], 0);
             gMain.state ++;
             break;
         case  8:
-            CreateHeldItemIcons(&gUnknown_03004824->playerPartyCount, gUnknown_03004824->playerPartyIcons, 1);
+            CreateHeldItemIcons(&gUnknown_03004824->partyCounts[0], gUnknown_03004824->partyIcons[0], 1);
             gMain.state ++;
             break;
         case  9:
@@ -899,24 +892,24 @@ void sub_80484F4(void)
         case  6:
             CalculateEnemyPartyCount();
             REG_DISPCNT = 0;
-            gUnknown_03004824->playerPartyCount = gPlayerPartyCount;
-            gUnknown_03004824->friendPartyCount = gEnemyPartyCount;
+            gUnknown_03004824->partyCounts[0] = gPlayerPartyCount;
+            gUnknown_03004824->partyCounts[1] = gEnemyPartyCount;
             sub_804A41C(0);
             sub_804A41C(1);
-            for (i = 0; i < gUnknown_03004824->playerPartyCount; i ++)
-                gUnknown_03004824->playerPartyIcons[i] = CreateMonIcon(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL), sub_809D62C, gTradeMonSpriteCoords[i][0] * 8 + 14, gTradeMonSpriteCoords[i][1] * 8 - 12, TRUE, GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY));
-            for (i = 0; i < gUnknown_03004824->friendPartyCount; i ++)
-                gUnknown_03004824->friendPartyIcons[i] = CreateMonIcon(GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2, NULL), sub_809D62C, gTradeMonSpriteCoords[6 + i][0] * 8 + 14, gTradeMonSpriteCoords[6 + i][1] * 8 - 12, TRUE, GetMonData(&gEnemyParty[i], MON_DATA_PERSONALITY));
+            for (i = 0; i < gUnknown_03004824->partyCounts[0]; i ++)
+                gUnknown_03004824->partyIcons[0][i] = CreateMonIcon(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL), sub_809D62C, gTradeMonSpriteCoords[i][0] * 8 + 14, gTradeMonSpriteCoords[i][1] * 8 - 12, TRUE, GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY));
+            for (i = 0; i < gUnknown_03004824->partyCounts[1]; i ++)
+                gUnknown_03004824->partyIcons[1][i] = CreateMonIcon(GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2, NULL), sub_809D62C, gTradeMonSpriteCoords[6 + i][0] * 8 + 14, gTradeMonSpriteCoords[6 + i][1] * 8 - 12, TRUE, GetMonData(&gEnemyParty[i], MON_DATA_PERSONALITY));
             nullsub_5(2, 0);
             gMain.state ++;
             break;
         case  7:
             LoadHeldItemIconGraphics();
-            CreateHeldItemIcons(&gUnknown_03004824->playerPartyCount, gUnknown_03004824->playerPartyIcons, 0);
+            CreateHeldItemIcons(&gUnknown_03004824->partyCounts[0], gUnknown_03004824->partyIcons[0], 0);
             gMain.state ++;
             break;
         case  8:
-            CreateHeldItemIcons(&gUnknown_03004824->playerPartyCount, gUnknown_03004824->playerPartyIcons, 1);
+            CreateHeldItemIcons(&gUnknown_03004824->partyCounts[0], gUnknown_03004824->partyIcons[0], 1);
             gMain.state ++;
             break;
         case  9:
@@ -1271,18 +1264,18 @@ static void sub_8048C70(void)
     int i;
     for (i = 0; i < PARTY_SIZE; i ++)
     {
-        if (i < gUnknown_03004824->playerPartyCount)
+        if (i < gUnknown_03004824->partyCounts[0])
         {
-            gSprites[gUnknown_03004824->playerPartyIcons[i]].invisible = FALSE;
+            gSprites[gUnknown_03004824->partyIcons[0][i]].invisible = FALSE;
             gUnknown_03004824->tradeMenuOptionsActive[i] = TRUE;
         }
         else
         {
             gUnknown_03004824->tradeMenuOptionsActive[i] = FALSE;
         }
-        if (i < gUnknown_03004824->friendPartyCount)
+        if (i < gUnknown_03004824->partyCounts[1])
         {
-            gSprites[gUnknown_03004824->friendPartyIcons[i]].invisible = FALSE;
+            gSprites[gUnknown_03004824->partyIcons[1][i]].invisible = FALSE;
             gUnknown_03004824->tradeMenuOptionsActive[i + 6] = TRUE;
         }
         else
@@ -1742,7 +1735,7 @@ static void sub_8049860(void)
             BeginNormalPaletteFade(-1, 0, 0, 16, 0);
             gUnknown_03004824->unk_007b = 2;
         }
-        else if (sub_80499F0(gUnknown_03004824->unk_0051, gUnknown_03004824->playerPartyCount, gUnknown_03004824->tradeMenuCursorPosition) == 0)
+        else if (sub_80499F0(gUnknown_03004824->unk_0051, gUnknown_03004824->partyCounts[0], gUnknown_03004824->tradeMenuCursorPosition) == 0)
         {
             sub_804AADC(3, 2);
             gUnknown_03004824->unk_007b = 8;
@@ -1775,11 +1768,11 @@ static void sub_804997C(void)
     {
         if (gUnknown_03004824->tradeMenuCursorPosition < PARTY_SIZE)
         {
-            ShowPokemonSummaryScreen(gPlayerParty, gUnknown_03004824->tradeMenuCursorPosition, gUnknown_03004824->playerPartyCount - 1, sub_80484F4, 4);
+            ShowPokemonSummaryScreen(gPlayerParty, gUnknown_03004824->tradeMenuCursorPosition, gUnknown_03004824->partyCounts[0] - 1, sub_80484F4, 4);
         }
         else
         {
-            ShowPokemonSummaryScreen(gEnemyParty, gUnknown_03004824->tradeMenuCursorPosition - 6, gUnknown_03004824->friendPartyCount - 1, sub_80484F4, 4);
+            ShowPokemonSummaryScreen(gEnemyParty, gUnknown_03004824->tradeMenuCursorPosition - 6, gUnknown_03004824->partyCounts[1] - 1, sub_80484F4, 4);
         }
     }
 }
@@ -1802,11 +1795,11 @@ static void sub_8049A20(void)
 {
     u8 unk_0051[12];
     int i;
-    for (i = 0; i < gUnknown_03004824->playerPartyCount; i ++)
+    for (i = 0; i < gUnknown_03004824->partyCounts[0]; i ++)
     {
         unk_0051[i] = gUnknown_03004824->unk_0051[i];
     }
-    if (sub_80499F0(unk_0051, gUnknown_03004824->playerPartyCount, gUnknown_03004824->tradeMenuCursorPosition) == 0)
+    if (sub_80499F0(unk_0051, gUnknown_03004824->partyCounts[0], gUnknown_03004824->tradeMenuCursorPosition) == 0)
     {
         sub_804AADC(3, 2);
         gUnknown_03004824->linkData[0] = 0xbbcc;
@@ -2024,9 +2017,90 @@ static void sub_8049E9C(u8 a0)
     }
 }
 
+//static void sub_8049ED4(u8 a0)
+//{
+//    struct Pokemon pokemon;
+//    u8 i;
+//    u8 temp0 = gUnknown_03004824->unk_0082[a0];
+//    u8 sp_plus_6c = temp0 < PARTY_SIZE ? 1 : 0;
+//    u8 r8 = temp0 % 6;
+//    u8 stringLength;
+//    u8 string[12];
+//    
+//    switch (gUnknown_03004824->unk_0080[a0])
+//    {
+//        case 1:
+//            for (i = 0; i < gUnknown_03004824->partyCounts[a0]; i ++)
+//            {
+//                gSprites[gUnknown_03004824->partyIcons[sp_plus_6c][i]].invisible = TRUE;
+//            }
+//            gSprites[gUnknown_03004824->partyIcons[sp_plus_6c][r8]].invisible = FALSE;
+//            gSprites[gUnknown_03004824->partyIcons[sp_plus_6c][r8]].data0 = 20;
+//            gSprites[gUnknown_03004824->partyIcons[sp_plus_6c][r8]].data2 = (gTradeMonSpriteCoords[sp_plus_6c][0] + gTradeMonSpriteCoords[sp_plus_6c][1]) / 2 * 8 + 14;
+//            gSprites[gUnknown_03004824->partyIcons[sp_plus_6c][r8]].data4 = gTradeMonSpriteCoords[sp_plus_6c][1] * 8 - 12;
+//            oamt_set_x3A_32(&gSprites[gUnknown_03004824->partyIcons[sp_plus_6c][r8]], sub_809D62C);
+//            gUnknown_03004824->unk_0080[a0] ++;
+//            sub_8078A34(&gSprites[gUnknown_03004824->partyIcons[sp_plus_6c][r8]]);
+//            HandleDestroyMenuCursors();
+//            FillWindowRect_DefaultPalette(&gUnknown_03004824->window, 0, gUnknown_0820C330[sp_plus_6c][1], 0, gUnknown_0820C330[sp_plus_6c][1], 19);
+//            sub_804A96C_alt(&gUnknown_03004824->unk_00c8, 15 * sp_plus_6c, 0, gTradePartyBoxTilemap, 15, 17, 0);
+//            if (sp_plus_6c == 0)
+//            {
+//                sub_804A80C();
+//            }
+//            break;
+//        case 2:
+//            if (gSprites[gUnknown_03004824->partyIcons[sp_plus_6c][r8]].callback == sub_809D62C)
+//            {
+//                gUnknown_03004824->unk_0080[a0] = 3;
+//            }
+//            break;
+//        case 3:
+//            sub_804A96C_alt(&gUnknown_03004824->unk_00c8, 15 * sp_plus_6c, 0, gTradePartyBoxTilemap, 15, 11, 0);
+//            gSprites[gUnknown_03004824->partyIcons[sp_plus_6c][r8]].pos1.x = (gTradeMonSpriteCoords[sp_plus_6c][0] + gTradeMonSpriteCoords[sp_plus_6c][1]) / 2 * 8 + 14;
+//            gSprites[gUnknown_03004824->partyIcons[sp_plus_6c][r8]].pos1.y = gTradeMonSpriteCoords[sp_plus_6c][1] * 8 - 12;
+//            gSprites[gUnknown_03004824->partyIcons[sp_plus_6c][r8]].pos2.x = 0;
+//            gSprites[gUnknown_03004824->partyIcons[sp_plus_6c][r8]].pos2.y = 0;
+//            stringLength = sub_804A2B4(&pokemon, sp_plus_6c, r8);
+//            string[0] = 0xFC;
+//            string[1] = 0x06;
+//            string[2] = 0x04;
+//            string[3] = 0xFC;
+//            string[4] = 0x11;
+//            string[5] = (64 - stringLength + (stringLength > 64 ? 1 : 0)) / 2;
+//            sub_8003460(&gUnknown_03004824->window, string, sp_plus_6c * 192 + gUnknown_03004824->unk_007a, gUnknown_0820C334[sp_plus_6c][0], gUnknown_0820C334[sp_plus_6c][1]);
+//            sub_804A33C()
+//            break;
+//        case 4:
+//            break;
+//    }
+//}
+
+asm(".section .text.sub_804A2B4");
+
+u8 sub_804A2B4(u8 *a0, u8 whichParty, u8 whichPokemon)
+{
+    u8 string[11];
+    if (whichParty == 0)
+    {
+        GetMonData(&gPlayerParty[whichPokemon], MON_DATA_NICKNAME, string);
+        StringCopy10(a0, string);
+        GetMonGender(&gPlayerParty[whichPokemon]);
+        GetMonData(&gPlayerParty[whichPokemon], MON_DATA_LEVEL);
+    }
+    else
+    {
+        GetMonData(&gEnemyParty[whichPokemon], MON_DATA_NICKNAME, string);
+        StringCopy10(a0, string);
+        GetMonGender(&gEnemyParty[whichPokemon]);
+        GetMonData(&gEnemyParty[whichPokemon], MON_DATA_LEVEL);
+    }
+    return GetStringWidthGivenWindowConfig(&gWindowConfig_81E7294, a0);
+}
+
 asm(".section .text.sub_804A96C");
 
-/*static*/ void sub_804A96C(struct UnkStructD *arg0, u8 left, u8 top, u16 *tilemap, u8 width, u8 height, u16 sp8) {
+/*static*/ void sub_804A96C(struct UnkStructD *arg0, u8 left, u8 top, const u16 *tilemap, u8 width, u8 height, u16 sp8) {
     int y, x;
 
     for (y = 0; y < height; y++)
@@ -2034,20 +2108,20 @@ asm(".section .text.sub_804A96C");
 
         for (x = 0; x < width; x++)
         {
-            arg0->var12[(top * 32 + left) + y * 32 + x] = tilemap[width * y + x] | sp8;
+            arg0->unk_12[(top * 32 + left) + y * 32 + x] = tilemap[width * y + x] | sp8;
         }
     }
 
 #if ENGLISH
-    arg0->var10 = 1;
+    arg0->unk_10 = 1;
 #endif
 }
 
 #if GERMAN
-void sub_804A96C_alt(struct UnkStructD *arg0, u8 left, u8 top, u16 *tilemap, u8 width, u8 height, u16 sp8) {
+void sub_804A96C_alt(struct UnkStructD *arg0, u8 left, u8 top, const u16 *tilemap, u8 width, u8 height, u16 sp8) {
     sub_804A96C(arg0, left, top, tilemap, width, height, sp8);
 
-    arg0->var10 = 1;
+    arg0->unk_10 = 1;
 }
 #endif
 

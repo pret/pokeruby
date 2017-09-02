@@ -125,7 +125,7 @@ struct Window
  /*0x20*/ const u8 *text;
  /*0x24*/ u8 *tileData;
  /*0x28*/ u16 *tilemap;
- /*0x2C*/ struct WindowConfig *config;
+ /*0x2C*/ const struct WindowConfig *config;
 };
 
 extern vu16 *const gBGControlRegs[];
@@ -246,7 +246,7 @@ u8 sub_8004DB0(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 l
 u8 sub_8004E24(struct Window *win);
 void sub_8004E28(struct Window *win, u8 *foreground, u8 *background, u8 *shadow);
 void sub_8004E3C(struct WindowConfig *winConfig, u8 *tileData, const u8 *text);
-u8 GetStringWidthGivenWindowConfig(struct WindowConfig *winConfig, const u8 *s);
+u8 GetStringWidthGivenWindowConfig(const struct WindowConfig *winConfig, const u8 *s);
 void ConvertInternationalString(u8 *s, u8 language);
 void StripExtCtrlCodes(u8 *str);
 s32 StringCompareWithoutExtCtrlCodes(const u8 *str1, const u8 *str2);

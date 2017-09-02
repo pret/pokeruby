@@ -493,68 +493,7 @@ _0804A2AC: .4byte gUnknown_0820C3D1
 _0804A2B0: .4byte gUnknown_03004824
 	thumb_func_end sub_8049ED4
 
-	thumb_func_start sub_804A2B4
-sub_804A2B4: @ 804A2B4
-	push {r4,r5,lr}
-	sub sp, 0xC
-	adds r5, r0, 0
-	lsls r1, 24
-	lsls r2, 24
-	lsrs r2, 24
-	cmp r1, 0
-	bne _0804A2F4
-	movs r0, 0x64
-	adds r4, r2, 0
-	muls r4, r0
-	ldr r0, _0804A2F0 @ =gPlayerParty
-	adds r4, r0
-	adds r0, r4, 0
-	movs r1, 0x2
-	mov r2, sp
-	bl GetMonData
-	adds r0, r5, 0
-	mov r1, sp
-	bl StringCopy10
-	adds r0, r4, 0
-	bl GetMonGender
-	adds r0, r4, 0
-	movs r1, 0x38
-	bl GetMonData
-	b _0804A31E
-	.align 2, 0
-_0804A2F0: .4byte gPlayerParty
-_0804A2F4:
-	movs r0, 0x64
-	adds r4, r2, 0
-	muls r4, r0
-	ldr r0, _0804A334 @ =gEnemyParty
-	adds r4, r0
-	adds r0, r4, 0
-	movs r1, 0x2
-	mov r2, sp
-	bl GetMonData
-	adds r0, r5, 0
-	mov r1, sp
-	bl StringCopy10
-	adds r0, r4, 0
-	bl GetMonGender
-	adds r0, r4, 0
-	movs r1, 0x38
-	bl GetMonData
-_0804A31E:
-	ldr r0, _0804A338 @ =gWindowConfig_81E7294
-	adds r1, r5, 0
-	bl GetStringWidthGivenWindowConfig
-	lsls r0, 24
-	lsrs r0, 24
-	add sp, 0xC
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0804A334: .4byte gEnemyParty
-_0804A338: .4byte gWindowConfig_81E7294
-	thumb_func_end sub_804A2B4
+    .section .text.sub_804A33C
 
 	thumb_func_start sub_804A33C
 sub_804A33C: @ 804A33C

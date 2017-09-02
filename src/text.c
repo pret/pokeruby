@@ -1943,7 +1943,7 @@ void InitWindowFromConfig(struct Window *win, const struct WindowConfig *winConf
 
 void InitWindow(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u8 top)
 {
-    struct WindowConfig *winConfig = win->config;
+    const struct WindowConfig *winConfig = win->config;
     win->textMode = winConfig->textMode;
     win->fontNum = winConfig->fontNum;
     win->language = GAME_LANGUAGE;
@@ -3653,7 +3653,7 @@ void sub_8004E3C(struct WindowConfig *winConfig, u8 *tileData, const u8 *text)
     sub_8002F44(&sTempWindow);
 }
 
-u8 GetStringWidthGivenWindowConfig(struct WindowConfig *winConfig, const u8 *s)
+u8 GetStringWidthGivenWindowConfig(const struct WindowConfig *winConfig, const u8 *s)
 {
     sTempWindow.config = winConfig;
     InitWindow(&sTempWindow, s, 0, 0, 0);

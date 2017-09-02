@@ -55,5 +55,6 @@ void sub_807A784(u8 taskId);
 void sub_807A850(struct Task *task, u8 taskId);
 void sub_807A8D4(struct Sprite *sprite);
 void sub_807A960(struct Sprite *sprite);
+void sub_8078A34(struct Sprite *sprite);
 
 #endif // GUARD_ROM_8077ABC_H
