@@ -19,6 +19,7 @@
 #include "party_menu.h"
 #include "songs.h"
 #include "sound.h"
+#include "data2.h"
 
 struct InGameTrade {
     /*0x00*/ u8 name[11];
@@ -87,7 +88,8 @@ struct TradeEwramSubstruct {
     /*0x008a*/ u8 unk_008a;
     /*0x008b*/ u8 filler_008b[0x29];
     /*0x00b4*/ u8 unk_00b4;
-    /*0x00b5*/ u8 filler_00b5[0x13];
+    /*0x00b5*/ u8 unk_00b5[7];
+    /*0x00bc*/ u8 filler_00bc[12];
     /*0x00c8*/ struct UnkStructE unk_00c8;
     /*0x08dc*/ u8 filler_04dc[0x724];
 };
@@ -133,11 +135,14 @@ void sub_804AB30(void);
 void sub_8049ED4(u8);
 void sub_804A6DC(u8);
 void sub_804A938(struct UnkStructE *);
+u8 sub_804A9F4(void);
+u8 sub_804AA00(void);
 
 extern u8 gUnknown_020297D8[2];
 extern u8 *gUnknown_020296CC[13];
 extern struct TradeEwramSubstruct *gUnknown_03004824;
 extern u8 gUnknown_03000508;
+extern struct MailStruct gUnknown_02029700[16];
 
 extern u8 ewram[];
 #define ewram_2010000 (*(struct TradeEwramStruct *)(ewram + 0x10000))
@@ -430,8 +435,68 @@ const u8 gTradeUnknownSpriteCoords[][2][2] = {
     }
 };
 
+const u8 *const gUnknown_0820C2F0[] = {
+    TradeText_LinkStandby,
+    TradeText_TradeCancelled,
+    TradeText_OnlyPoke,
+    TradeText_NonTradablePoke,
+    TradeText_WaitingForFriend,
+    TradeText_WantToTrade
+};
+
+const u8 gTradeMessageWindowRects[][4] = {
+    {8, 7, 22, 12},
+    {8, 7, 22, 12},
+    {6, 7, 24, 12},
+    {6, 7, 24, 12},
+    {8, 7, 22, 12},
+    {7, 7, 23, 12}
+};
+
+const struct MenuAction gUnknown_0820C320[] = {
+    {TradeText_Summary2, sub_804A9F4},
+    {TradeText_Trade2, sub_804AA00}
+};
+
+const u8 gUnknown_0820C330[][2] = {
+    { 0, 14},
+    {15, 29}
+};
+
+const u8 gUnknown_0820C334[][2] = {
+    { 3,  5},
+    { 3,  7},
+    {18,  5},
+    {18,  7}
+};
+
+const u8 gOtherText_Terminator[] = _("");
+const u8 gOtherText_MaleSymbol3[] = _("♂");
+const u8 gOtherText_FemaleSymbol3[] = _("♀");
+const u8 gOtherText_GenderlessSymbol[] = _("$");
+
+u8 *const unref_data_820C344 = gTileBuffer;
+const u8 unref_strings_820C348[][13] = {
+    _("かいめの そうしん"),
+    _("かいめの じゅしん"),
+    _("ポケモンアイコンセット"),
+    _("OBJテキストセット"),
+    _("セルセット"),
+    _("OBJテキストADD"),
+    _("システムメッセージADD"),
+    _("はいけいセット"),
+};
+
+const u8 gUnknown_0820C3B0[] = _("ヌケニン");
+const u8 unref_string_0820C3B5[] = _("こうかんせいりつ     ");
+const u8 unref_string_0820C3C3[] = _("だめだたらしいよ     ");
+const u8 gUnknown_0820C3D1[][2] = {
+    { 4,  3},
+    {19,  3}
+};
 
 asm(".section .rodata.igt");
+
 const struct InGameTrade gIngameTrades[] = {
     {
         _("MAKIT"), SPECIES_MAKUHITA,
@@ -519,6 +584,8 @@ const s8 gTradeBallVerticalVelocityTable[] = {
     0,  0,  1,  0,
     1,  1,  2,  3
 };
+
+// .text
 
 void sub_8047CD8(void)
 {
@@ -1215,10 +1282,147 @@ void sub_8048C70(void)
 
 void nullsub_5(u8 a0, u8 a1) {}
 
-void sub_8048D24(u8 *dest, const u8 *src, u32 size)
+static void sub_8048D24(u8 *dest, const u8 *src, u32 size)
 {
     int i;
     for (i = 0; i < size; i ++) dest[i] = src[i];
+}
+
+bool8 sub_8048D44(void)
+{
+    u8 mpId = GetMultiplayerId();
+    int i;
+    u16 species;
+    u8 nickname[11];
+    struct Pokemon *pokemon;
+
+    SetLinkDebugValues(gUnknown_03004824->unk_0075 / 100, gUnknown_03004824->unk_0075 % 100);
+    switch (gUnknown_03004824->unk_0075)
+    {
+        case  0:
+            sub_8048D24(gBlockSendBuffer, (const u8 *)&gPlayerParty[0], 2 * sizeof(struct Pokemon));
+            gUnknown_03004824->unk_0075 ++;
+            break;
+        case  1:
+            if (sub_8007ECC())
+            {
+                if (GetBlockReceivedStatus() == 0)
+                {
+                    gUnknown_03004824->unk_0075 ++;
+                }
+                else
+                {
+                    ResetBlockReceivedFlags();
+                    gUnknown_03004824->unk_0075 ++;
+                }
+            }
+            break;
+        case  2:
+            if (mpId == 0)
+            {
+                sub_8007E9C(1);
+            }
+            gUnknown_03004824->unk_0075 ++;
+            break;
+        case  3:
+            if (GetBlockReceivedStatus() == 3)
+            {
+                sub_8048D24((u8 *)&gEnemyParty[0], (const u8 *)gBlockRecvBuffer[mpId ^ 1], 2 * sizeof(struct Pokemon));
+                ResetBlockReceivedFlags();
+                gUnknown_03004824->unk_0075 ++;
+            }
+            break;
+        case  4:
+            sub_8048D24(gBlockSendBuffer, (const u8 *)&gPlayerParty[2], 2 * sizeof(struct Pokemon));
+            gUnknown_03004824->unk_0075 ++;
+            break;
+        case  5:
+            if (mpId == 0)
+            {
+                sub_8007E9C(1);
+            }
+            gUnknown_03004824->unk_0075 ++;
+            break;
+        case  6:
+            if (GetBlockReceivedStatus() == 3)
+            {
+                sub_8048D24((u8 *)&gEnemyParty[2], (const u8 *)gBlockRecvBuffer[mpId ^ 1], 2 * sizeof(struct Pokemon));
+                ResetBlockReceivedFlags();
+                gUnknown_03004824->unk_0075 ++;
+            }
+            break;
+        case  7:
+            sub_8048D24(gBlockSendBuffer, (const u8 *)&gPlayerParty[4], 2 * sizeof(struct Pokemon));
+            gUnknown_03004824->unk_0075 ++;
+            break;
+        case  8:
+            if (mpId == 0)
+            {
+                sub_8007E9C(1);
+            }
+            gUnknown_03004824->unk_0075 ++;
+            break;
+        case  9:
+            if (GetBlockReceivedStatus() == 3)
+            {
+                sub_8048D24((u8 *)&gEnemyParty[4], (const u8 *)gBlockRecvBuffer[mpId ^ 1], 2 * sizeof(struct Pokemon));
+                ResetBlockReceivedFlags();
+                gUnknown_03004824->unk_0075 ++;
+            }
+            break;
+        case 10:
+            sub_8048D24(gBlockSendBuffer, (const u8 *)&gSaveBlock1.mail[0], 6 * sizeof(struct MailStruct) + 4);
+            gUnknown_03004824->unk_0075 ++;
+            break;
+        case 11:
+            if (mpId == 0)
+            {
+                sub_8007E9C(3);
+            }
+            gUnknown_03004824->unk_0075 ++;
+            break;
+        case 12:
+            if (GetBlockReceivedStatus() == 3)
+            {
+                sub_8048D24((u8 *)&gUnknown_02029700[0], (const u8 *)gBlockRecvBuffer[mpId ^ 1], 6 * sizeof(struct MailStruct));
+                ResetBlockReceivedFlags();
+                gUnknown_03004824->unk_0075 ++;
+            }
+            break;
+        case 13:
+            sub_8048D24(gBlockSendBuffer, (const u8 *)gSaveBlock1.giftRibbons, 11);
+            gUnknown_03004824->unk_0075 ++;
+            break;
+        case 14:
+            if (mpId == 0)
+            {
+                sub_8007E9C(4);
+            }
+            gUnknown_03004824->unk_0075 ++;
+            break;
+        case 15:
+            if (GetBlockReceivedStatus() == 3)
+            {
+                sub_8048D24((u8 *)gUnknown_03004824->unk_00b5, (const u8 *)gBlockRecvBuffer[mpId ^ 1], 11);
+                ResetBlockReceivedFlags();
+                gUnknown_03004824->unk_0075 ++;
+            }
+            break;
+        case 16:
+            pokemon = gEnemyParty;
+            for (i = 0; i < PARTY_SIZE; i ++)
+            {
+                if ((species = GetMonData(pokemon, MON_DATA_SPECIES)) != SPECIES_NONE && species == SPECIES_SHEDINJA && GetMonData(pokemon, MON_DATA_LANGUAGE) != LANGUAGE_JAPANESE)
+                {
+                    GetMonData(pokemon, MON_DATA_NICKNAME, nickname);
+                    if (!StringCompareWithoutExtCtrlCodes(nickname, gUnknown_0820C3B0))
+                        SetMonData(pokemon, MON_DATA_NICKNAME, gSpeciesNames[SPECIES_SHEDINJA]);
+                }
+                pokemon ++;
+            }
+            return TRUE;
+    }
+    return FALSE;
 }
 
 asm(".section .text.sub_804A96C");

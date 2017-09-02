@@ -202,6 +202,7 @@ extern u8 gStringVar1[];
 extern u8 gStringVar2[];
 extern u8 gStringVar3[];
 extern u8 gStringVar4[];
+extern u8 gTileBuffer[];
 
 void LoadFontDefaultPalette(const struct WindowConfig *winConfig);
 void SetUpWindowConfig(const struct WindowConfig *winConfig);
