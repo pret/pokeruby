@@ -71,7 +71,8 @@ struct TradeEwramSubstruct {
     /*0x0042*/ u8 partyCounts[2];
     /*0x0044*/ u8 tradeMenuOptionsActive[13];
     /*0x0051*/ u8 unk_0051[6];
-    /*0x0056*/ u8 filler_0057[30];
+    /*0x0057*/ u8 filler_0057[6];
+    /*0x005d*/ u8 unk_005d[4][6];
     /*0x0075*/ u8 unk_0075;
     /*0x0076*/ u8 filler_0076[4];
     /*0x007a*/ u8 unk_007a;
@@ -2017,6 +2018,7 @@ static void sub_8049E9C(u8 a0)
     }
 }
 
+// TODO: Figure out what the f**k is going on here
 //static void sub_8049ED4(u8 a0)
 //{
 //    struct Pokemon pokemon;
@@ -2024,8 +2026,8 @@ static void sub_8049E9C(u8 a0)
 //    u8 temp0 = gUnknown_03004824->unk_0082[a0];
 //    u8 sp_plus_6c = temp0 < PARTY_SIZE ? 1 : 0;
 //    u8 r8 = temp0 % 6;
-//    u8 stringLength;
-//    u8 string[12];
+//    s8 stringLength;
+//    u8 string[10];
 //    
 //    switch (gUnknown_03004824->unk_0080[a0])
 //    {
@@ -2096,6 +2098,36 @@ u8 sub_804A2B4(u8 *a0, u8 whichParty, u8 whichPokemon)
         GetMonData(&gEnemyParty[whichPokemon], MON_DATA_LEVEL);
     }
     return GetStringWidthGivenWindowConfig(&gWindowConfig_81E7294, a0);
+}
+
+void sub_804A33C(u8 *a0, u8 whichParty, u8 whichPokemon)
+{
+    u16 i;
+    u16 moves[4];
+    if (gUnknown_03004824->unk_005d[whichParty][whichPokemon] == 0)
+    {
+        for (i = 0; i < 4; i ++)
+        {
+            if (whichParty == 0)
+                moves[i] = GetMonData(&gPlayerParty[whichPokemon], MON_DATA_MOVE1 + i, NULL);
+            else
+                moves[i] = GetMonData(&gEnemyParty[whichPokemon], MON_DATA_MOVE1 + i, NULL);
+        }
+        StringCopy(a0, gOtherText_Terminator);
+        for (i = 0; i < 4; i ++)
+        {
+            if (moves[i] != 0)
+            {
+                StringAppend(a0, gMoveNames[moves[i]]);
+            }
+            StringAppend(a0, gOtherText_ControlAndMiscText);
+        }
+    }
+    else
+    {
+        StringCopy(a0, gOtherText_Terminator);
+        StringAppend(a0, gOtherText_FourQuestions);
+    }
 }
 
 asm(".section .text.sub_804A96C");
