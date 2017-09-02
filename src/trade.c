@@ -21,6 +21,7 @@
 #include "sound.h"
 #include "data2.h"
 #include "pokemon_summary_screen.h"
+#include "rom4.h"
 #include "trade.h"
 
 #ifdef ENGLISH
@@ -1951,6 +1952,14 @@ static void sub_8049A20(void)
     {
         sub_800832C();
         gUnknown_03004824->unk_007b = 12;
+    }
+}
+
+/*static*/ void sub_8049DC4(void)
+{
+    if (gReceivedRemoteLinkPlayers == 0)
+    {
+        SetMainCallback2(sub_805465C);
     }
 }
 

@@ -10,23 +10,6 @@
 	.set sub_804A96C_alt, sub_804A96C
 .endif
 
-	thumb_func_start sub_8049DC4
-sub_8049DC4: @ 8049DC4
-	push {lr}
-	ldr r0, _08049DD8 @ =gReceivedRemoteLinkPlayers
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _08049DD4
-	ldr r0, _08049DDC @ =sub_805465C
-	bl SetMainCallback2
-_08049DD4:
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08049DD8: .4byte gReceivedRemoteLinkPlayers
-_08049DDC: .4byte sub_805465C
-	thumb_func_end sub_8049DC4
-
 	thumb_func_start sub_8049DE0
 sub_8049DE0: @ 8049DE0
 	push {lr}
