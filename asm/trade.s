@@ -10,30 +10,6 @@
 	.set sub_804A96C_alt, sub_804A96C
 .endif
 
-	thumb_func_start sub_8049CC4
-sub_8049CC4: @ 8049CC4
-	push {r4,lr}
-	ldr r4, _08049CE8 @ =gUnknown_03004824
-	ldr r0, [r4]
-	adds r0, 0x80
-	ldrh r1, [r0]
-	ldr r0, _08049CEC @ =0x00000505
-	cmp r1, r0
-	bne _08049CE0
-	bl sub_8049088
-	ldr r0, [r4]
-	adds r0, 0x7B
-	movs r1, 0xE
-	strb r1, [r0]
-_08049CE0:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08049CE8: .4byte gUnknown_03004824
-_08049CEC: .4byte 0x00000505
-	thumb_func_end sub_8049CC4
-
 	thumb_func_start DisplayMessageAndContinueTask
 DisplayMessageAndContinueTask: @ 8049CF0
 	push {r4,lr}

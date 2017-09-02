@@ -1437,7 +1437,7 @@ static bool8 sub_8048D44(void)
     return FALSE;
 }
 
-/*static*/ void sub_8049088(void)
+static void sub_8049088(void)
 {
     u8 string[28];
     StringCopy(string, gTradeText_TradeOkayPrompt);
@@ -1901,7 +1901,7 @@ static void sub_8049A20(void)
     }
 }
 
-void sub_8049C8C(void)
+/*static*/ void sub_8049C8C(void)
 {
     if (GetMultiplayerId() == 0)
     {
@@ -1909,6 +1909,15 @@ void sub_8049C8C(void)
         sub_8049E9C(gUnknown_03004824->unk_008a);
     }
     gUnknown_03004824->unk_007b = 7;
+}
+
+/*static*/ void sub_8049CC4(void)
+{
+    if (gUnknown_03004824->unk_0080 == 5 && gUnknown_03004824->unk_0081 == 5)
+    {
+        sub_8049088();
+        gUnknown_03004824->unk_007b = 14;
+    }
 }
 
 asm(".section .text.sub_804A96C");
