@@ -10,32 +10,6 @@
 	.set sub_804A96C_alt, sub_804A96C
 .endif
 
-	thumb_func_start sub_8049088
-sub_8049088: @ 8049088
-	push {lr}
-	sub sp, 0x1C
-	ldr r1, _080490B0 @ =gTradeText_TradeOkayPrompt
-	mov r0, sp
-	bl StringCopy
-	ldr r0, _080490B4 @ =gUnknown_03004824
-	ldr r0, [r0]
-	adds r0, 0x7E
-	ldrh r1, [r0]
-	lsls r1, 5
-	ldr r0, _080490B8 @ =0x06010000
-	adds r1, r0
-	mov r0, sp
-	movs r2, 0x14
-	bl sub_804ACD8
-	add sp, 0x1C
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080490B0: .4byte gTradeText_TradeOkayPrompt
-_080490B4: .4byte gUnknown_03004824
-_080490B8: .4byte 0x06010000
-	thumb_func_end sub_8049088
-
 	thumb_func_start sub_80490BC
 sub_80490BC: @ 80490BC
 	push {r4,lr}
