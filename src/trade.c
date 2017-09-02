@@ -69,7 +69,9 @@ struct TradeEwramSubstruct {
     /*0x0041*/ u8 unk_0041;
     /*0x0042*/ u8 playerPartyCount;
     /*0x0043*/ u8 friendPartyCount;
-    /*0x0044*/ u8 filler_0044[0x31];
+    /*0x0044*/ u8 tradeIconsActive[12];
+    /*0x0050*/ u8 unk_0050;
+    /*0x0051*/ u8 filler_0044[0x24];
     /*0x0075*/ u8 unk_0075;
     /*0x0076*/ u8 filler_0076[4];
     /*0x007a*/ u8 unk_007a;
@@ -1183,6 +1185,33 @@ void sub_8048B0C(u8 a0)
                         "_08048C6C: .4byte REG_BG0HOFS");
 }
 #endif
+
+void sub_8048C70(void)
+{
+    int i;
+    for (i = 0; i < PARTY_SIZE; i ++)
+    {
+        if (i < gUnknown_03004824->playerPartyCount)
+        {
+            gSprites[gUnknown_03004824->playerPartyIcons[i]].invisible = FALSE;
+            gUnknown_03004824->tradeIconsActive[i] = TRUE;
+        }
+        else
+        {
+            gUnknown_03004824->tradeIconsActive[i] = FALSE;
+        }
+        if (i < gUnknown_03004824->friendPartyCount)
+        {
+            gSprites[gUnknown_03004824->friendPartyIcons[i]].invisible = FALSE;
+            gUnknown_03004824->tradeIconsActive[i + 6] = TRUE;
+        }
+        else
+        {
+            gUnknown_03004824->tradeIconsActive[i + 6] = FALSE;
+        }
+    }
+    gUnknown_03004824->unk_0050 = TRUE;
+}
 
 asm(".section .text.sub_804A96C");
 
