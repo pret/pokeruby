@@ -76,7 +76,7 @@ struct TradeEwramSubstruct {
     /*0x0042*/ u8 playerPartyCount;
     /*0x0043*/ u8 friendPartyCount;
     /*0x0044*/ u8 tradeMenuOptionsActive[13];
-    /*0x0051*/ u8 filler_0051[0x24];
+    /*0x0051*/ u8 unk_0051[0x24];
     /*0x0075*/ u8 unk_0075;
     /*0x0076*/ u8 filler_0076[4];
     /*0x007a*/ u8 unk_007a;
@@ -147,6 +147,7 @@ static void sub_8048AB4(void);
 /*static*/ void sub_8049E9C(u8);
 /*static*/ void sub_804AADC(u8, u8);
 /*static*/ void sub_804A80C(void);
+/*static*/ bool8 sub_80499F0(const u8 *, u8, u8);
 
 extern u8 gUnknown_020297D8[2];
 extern u8 *gUnknown_020296CC[13];
@@ -1641,7 +1642,7 @@ static void TradeMenuMoveCursor(u8 *tradeMenuCursorPosition, u8 direction)
     *tradeMenuCursorPosition = newPosition;
 }
 
-/*static*/ void sub_8049620(void)
+static void sub_8049620(void)
 {
     sub_804AA0C(0);
     gUnknown_03004824->unk_007b = 5;
@@ -1716,6 +1717,44 @@ static void TradeMenuMoveCursor(u8 *tradeMenuCursorPosition, u8 direction)
     gUnknown_03004824->unk_007b = 0;
     gSprites[gUnknown_03004824->unk_0040].invisible = FALSE;
     sub_804ACD8(gUnknown_0820C14C[1], (u8 *)(BG_CHAR_ADDR(4) + 32 * gUnknown_03004824->unk_007e), 20);
+}
+
+/*static*/ void sub_8049860(void)
+{
+    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    {
+        PlaySE(SE_SELECT);
+        gUnknown_03004824->unk_007c = MoveMenuCursor(-1);
+    }
+    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    {
+        PlaySE(SE_SELECT);
+        gUnknown_03004824->unk_007c = MoveMenuCursor(+1);
+    }
+    if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        if (GetMenuCursorPos() == 0)
+        {
+            BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+            gUnknown_03004824->unk_007b = 2;
+        }
+        else if (!sub_80499F0(gUnknown_03004824->unk_0051, gUnknown_03004824->playerPartyCount, gUnknown_03004824->tradeMenuCursorPosition))
+        {
+            sub_804AADC(3, 2);
+            gUnknown_03004824->unk_007b = 8;
+        }
+        else
+        {
+            sub_8049620();
+            gSprites[gUnknown_03004824->unk_0040].invisible = TRUE;
+        }
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        sub_8049804();
+    }
 }
 
 asm(".section .text.sub_804A96C");
