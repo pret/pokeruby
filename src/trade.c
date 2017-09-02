@@ -56,6 +56,7 @@ struct UnkStructE {
     /*0x08*/ void *vramAddr;
     /*0x0c*/ u8 filler_0c[4];
     /*0x10*/ u8 unk_10;
+    /*0x12*/ u16 unk_12[0x400];
 };
 
 struct TradeEwramSubstruct {
@@ -84,9 +85,9 @@ struct TradeEwramSubstruct {
     /*0x008a*/ u8 unk_008a;
     /*0x008b*/ u8 filler_008b[0x29];
     /*0x00b4*/ u8 unk_00b4;
-    /*0x00b5*/ u8 filler_00b4[0x13];
+    /*0x00b5*/ u8 filler_00b5[0x13];
     /*0x00c8*/ struct UnkStructE unk_00c8;
-    /*0x00dc*/ u8 filler_00dc[0xf24];
+    /*0x08dc*/ u8 filler_04dc[0x724];
 };
 
 struct UnkStructF {
@@ -128,6 +129,8 @@ void sub_804B41C(void);
 void sub_8049DE0(void);
 void sub_804AB30(void);
 void sub_8049ED4(u8);
+void sub_804A6DC(u8);
+void sub_804A938(struct UnkStructE *);
 
 extern u8 gUnknown_020297D8[2];
 extern u8 *gUnknown_020296CC[13];
@@ -952,6 +955,234 @@ void sub_8048AB4(void)
     BuildOamBuffer();
     UpdatePaletteFade();
 }
+
+#ifdef NONMATCHING
+// Only minor register permutations
+#pragma push_macro("BLOCKSIZE")
+#define BLOCKSIZE 0x800
+void sub_8048B0C(u8 a0)
+{
+    int i;
+    u16 *dest;
+    const u16 *src;
+    u32 size;
+    switch (a0)
+    {
+        case 0:
+            for (i = 0; i < 48; i ++)
+            {
+                gPlttBufferUnfaded[i] = *(gUnknown_08EA02C8 + i);
+                gPlttBufferFaded[i] = *(gUnknown_08EA02C8 + i);
+            }
+            src = gUnknown_08EA0348;
+            dest = (u16 *)BG_VRAM;
+            size = 0x1280;
+            while (1)
+            {
+                DmaCopy16(3, src, dest, BLOCKSIZE * sizeof(u16));
+                src += BLOCKSIZE;
+                dest += BLOCKSIZE;
+                size -= BLOCKSIZE * sizeof(u16);
+                if (size <= BLOCKSIZE * sizeof(u16))
+                {
+                    DmaCopy16(3, src, dest, size);
+                    break;
+                }
+            }
+            for (i = 0; i < 0x400; i ++)
+                gUnknown_03004824->unk_00c8.unk_12[i] = gUnknown_08EA15C8[i];
+            dest = (u16 *)BG_SCREEN_ADDR(6);
+            DmaCopy16(3, gTradeStripesBG2Tilemap, dest, 0x800);
+            break;
+        case 1:
+            src = gTradeStripesBG3Tilemap;
+            dest = (u16 *)BG_SCREEN_ADDR(7);
+            DmaCopy16(3, src, dest, 0x800);
+            sub_804A6DC(0);
+            sub_804A6DC(1);
+            sub_804A938(&gUnknown_03004824->unk_00c8);
+            REG_BG0CNT &= ~0x03; // BGCNT_PRIORITY(0)
+            REG_BG1CNT = BGCNT_PRIORITY(1) | BGCNT_SCREENBASE(5);
+            REG_BG2CNT = BGCNT_PRIORITY(2) | BGCNT_SCREENBASE(6);
+            REG_BG3CNT = BGCNT_PRIORITY(3) | BGCNT_SCREENBASE(7);
+            REG_BG0HOFS = 0;
+            REG_BG1HOFS = 0;
+            REG_BG2HOFS = 0;
+            REG_BG3HOFS = 0;
+            REG_BG0VOFS = 0;
+            REG_BG1VOFS = 0;
+            REG_BG2VOFS = 0;
+            REG_BG3VOFS = 0;
+            break;
+    }
+}
+#pragma pop_macro("BLOCKSIZE")
+#else
+asm(".include \"constants/gba_constants.inc\"");
+__attribute__((naked))
+void sub_8048B0C(u8 a0)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                        "\tlsls r0, 24\n"
+                        "\tlsrs r0, 24\n"
+                        "\tcmp r0, 0\n"
+                        "\tbeq _08048B1C\n"
+                        "\tcmp r0, 0x1\n"
+                        "\tbeq _08048BD0\n"
+                        "\tb _08048C3A\n"
+                        "_08048B1C:\n"
+                        "\tldr r5, _08048BA0 @ =gUnknown_08EA0348\n"
+                        "\tldr r0, _08048BA4 @ =gTradeStripesBG2Tilemap\n"
+                        "\tmov r12, r0\n"
+                        "\tldr r1, _08048BA8 @ =gUnknown_08EA02C8\n"
+                        "\tldr r4, _08048BAC @ =gPlttBufferFaded\n"
+                        "\tldr r3, _08048BB0 @ =gPlttBufferUnfaded\n"
+                        "\tmovs r2, 0x2F\n"
+                        "_08048B2A:\n"
+                        "\tldrh r0, [r1]\n"
+                        "\tstrh r0, [r3]\n"
+                        "\tldrh r0, [r1]\n"
+                        "\tstrh r0, [r4]\n"
+                        "\tadds r1, 0x2\n"
+                        "\tadds r4, 0x2\n"
+                        "\tadds r3, 0x2\n"
+                        "\tsubs r2, 0x1\n"
+                        "\tcmp r2, 0\n"
+                        "\tbge _08048B2A\n"
+                        "\tadds r3, r5, 0\n"
+                        "\tmovs r4, 0xC0\n"
+                        "\tlsls r4, 19\n"
+                        "\tmovs r5, 0x94\n"
+                        "\tlsls r5, 5\n"
+                        "\tldr r1, _08048BB4 @ =0x040000d4\n"
+                        "\tldr r6, _08048BB8 @ =0x80000800\n"
+                        "\tmovs r2, 0x80\n"
+                        "\tlsls r2, 5\n"
+                        "\tmovs r7, 0x80\n"
+                        "\tlsls r7, 24\n"
+                        "_08048B54:\n"
+                        "\tstr r3, [r1]\n"
+                        "\tstr r4, [r1, 0x4]\n"
+                        "\tstr r6, [r1, 0x8]\n"
+                        "\tldr r0, [r1, 0x8]\n"
+                        "\tadds r3, r2\n"
+                        "\tadds r4, r2\n"
+                        "\tsubs r5, r2\n"
+                        "\tcmp r5, r2\n"
+                        "\tbhi _08048B54\n"
+                        "\tstr r3, [r1]\n"
+                        "\tstr r4, [r1, 0x4]\n"
+                        "\tlsrs r0, r5, 1\n"
+                        "\torrs r0, r7\n"
+                        "\tstr r0, [r1, 0x8]\n"
+                        "\tldr r0, [r1, 0x8]\n"
+                        "\tmovs r2, 0\n"
+                        "\tldr r5, _08048BBC @ =0x000003ff\n"
+                        "\tldr r4, _08048BC0 @ =gUnknown_03004824\n"
+                        "\tldr r3, _08048BC4 @ =gUnknown_08EA15C8\n"
+                        "_08048B7A:\n"
+                        "\tldr r0, [r4]\n"
+                        "\tlsls r1, r2, 1\n"
+                        "\tadds r0, 0xDA\n"
+                        "\tadds r0, r1\n"
+                        "\tldrh r1, [r3]\n"
+                        "\tstrh r1, [r0]\n"
+                        "\tadds r3, 0x2\n"
+                        "\tadds r2, 0x1\n"
+                        "\tcmp r2, r5\n"
+                        "\tble _08048B7A\n"
+                        "\tldr r1, _08048BC8 @ =0x06003000\n"
+                        "\tldr r0, _08048BB4 @ =0x040000d4\n"
+                        "\tmov r2, r12\n"
+                        "\tstr r2, [r0]\n"
+                        "\tstr r1, [r0, 0x4]\n"
+                        "\tldr r1, _08048BCC @ =0x80000400\n"
+                        "\tstr r1, [r0, 0x8]\n"
+                        "\tldr r0, [r0, 0x8]\n"
+                        "\tb _08048C3A\n"
+                        "\t.align 2, 0\n"
+                        "_08048BA0: .4byte gUnknown_08EA0348\n"
+                        "_08048BA4: .4byte gTradeStripesBG2Tilemap\n"
+                        "_08048BA8: .4byte gUnknown_08EA02C8\n"
+                        "_08048BAC: .4byte gPlttBufferFaded\n"
+                        "_08048BB0: .4byte gPlttBufferUnfaded\n"
+                        "_08048BB4: .4byte 0x040000d4\n"
+                        "_08048BB8: .4byte 0x80000800\n"
+                        "_08048BBC: .4byte 0x000003ff\n"
+                        "_08048BC0: .4byte gUnknown_03004824\n"
+                        "_08048BC4: .4byte gUnknown_08EA15C8\n"
+                        "_08048BC8: .4byte 0x06003000\n"
+                        "_08048BCC: .4byte 0x80000400\n"
+                        "_08048BD0:\n"
+                        "\tldr r1, _08048C40 @ =gTradeStripesBG3Tilemap\n"
+                        "\tldr r2, _08048C44 @ =0x06003800\n"
+                        "\tldr r0, _08048C48 @ =0x040000d4\n"
+                        "\tstr r1, [r0]\n"
+                        "\tstr r2, [r0, 0x4]\n"
+                        "\tldr r1, _08048C4C @ =0x80000400\n"
+                        "\tstr r1, [r0, 0x8]\n"
+                        "\tldr r0, [r0, 0x8]\n"
+                        "\tmovs r0, 0\n"
+                        "\tbl sub_804A6DC\n"
+                        "\tmovs r0, 0x1\n"
+                        "\tbl sub_804A6DC\n"
+                        "\tldr r0, _08048C50 @ =gUnknown_03004824\n"
+                        "\tldr r0, [r0]\n"
+                        "\tadds r0, 0xC8\n"
+                        "\tbl sub_804A938\n"
+                        "\tldr r2, _08048C54 @ =REG_BG0CNT\n"
+                        "\tldrh r1, [r2]\n"
+                        "\tldr r0, _08048C58 @ =0x0000fffc\n"
+                        "\tands r0, r1\n"
+                        "\tstrh r0, [r2]\n"
+                        "\tldr r1, _08048C5C @ =REG_BG1CNT\n"
+                        "\tldr r2, _08048C60 @ =0x00000501\n"
+                        "\tadds r0, r2, 0\n"
+                        "\tstrh r0, [r1]\n"
+                        "\tadds r1, 0x2\n"
+                        "\tldr r2, _08048C64 @ =0x00000602\n"
+                        "\tadds r0, r2, 0\n"
+                        "\tstrh r0, [r1]\n"
+                        "\tadds r1, 0x2\n"
+                        "\tldr r2, _08048C68 @ =0x00000703\n"
+                        "\tadds r0, r2, 0\n"
+                        "\tstrh r0, [r1]\n"
+                        "\tldr r0, _08048C6C @ =REG_BG0HOFS\n"
+                        "\tmovs r1, 0\n"
+                        "\tstrh r1, [r0]\n"
+                        "\tadds r0, 0x4\n"
+                        "\tstrh r1, [r0]\n"
+                        "\tadds r0, 0x4\n"
+                        "\tstrh r1, [r0]\n"
+                        "\tadds r0, 0x4\n"
+                        "\tstrh r1, [r0]\n"
+                        "\tsubs r0, 0xA\n"
+                        "\tstrh r1, [r0]\n"
+                        "\tadds r0, 0x4\n"
+                        "\tstrh r1, [r0]\n"
+                        "\tadds r0, 0x4\n"
+                        "\tstrh r1, [r0]\n"
+                        "\tadds r0, 0x4\n"
+                        "\tstrh r1, [r0]\n"
+                        "_08048C3A:\n"
+                        "\tpop {r4-r7}\n"
+                        "\tpop {r0}\n"
+                        "\tbx r0\n"
+                        "\t.align 2, 0\n"
+                        "_08048C40: .4byte gTradeStripesBG3Tilemap\n"
+                        "_08048C44: .4byte 0x06003800\n"
+                        "_08048C48: .4byte 0x040000d4\n"
+                        "_08048C4C: .4byte 0x80000400\n"
+                        "_08048C50: .4byte gUnknown_03004824\n"
+                        "_08048C54: .4byte REG_BG0CNT\n"
+                        "_08048C58: .4byte 0x0000fffc\n"
+                        "_08048C5C: .4byte REG_BG1CNT\n"
+                        "_08048C60: .4byte 0x00000501\n"
+                        "_08048C64: .4byte 0x00000602\n"
+                        "_08048C68: .4byte 0x00000703\n"
+                        "_08048C6C: .4byte REG_BG0HOFS");
+}
+#endif
 
 asm(".section .text.sub_804A96C");
 
