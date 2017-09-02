@@ -72,7 +72,7 @@ struct TradeEwramSubstruct {
     /*0x0034*/ u8 playerPartyIcons[6];
     /*0x003a*/ u8 friendPartyIcons[6];
     /*0x0040*/ u8 unk_0040;
-    /*0x0041*/ u8 unk_0041;
+    /*0x0041*/ u8 tradeMenuCursorPosition;
     /*0x0042*/ u8 playerPartyCount;
     /*0x0043*/ u8 friendPartyCount;
     /*0x0044*/ u8 tradeMenuOptionsActive[13];
@@ -781,7 +781,7 @@ static void sub_8047EC0(void)
         case 12:
             sub_8047E44();
             gUnknown_03004824->unk_0040 = CreateSprite(&gSpriteTemplate_820C134, gTradeMonSpriteCoords[0][0] * 8 + 32, gTradeMonSpriteCoords[0][1] * 8, 2);
-            gUnknown_03004824->unk_0041 = 0;
+            gUnknown_03004824->tradeMenuCursorPosition = 0;
             gMain.state ++;
             nullsub_5(6, 0);
             break;
@@ -933,11 +933,11 @@ static void sub_8047EC0(void)
         case 12:
             sub_8047E44();
             unkStructF = &ewram_2010000.unk_08000;
-            if (gUnknown_03004824->unk_0041 < 6)
-                gUnknown_03004824->unk_0041 = unkStructF->unk_0009;
+            if (gUnknown_03004824->tradeMenuCursorPosition < 6)
+                gUnknown_03004824->tradeMenuCursorPosition = unkStructF->unk_0009;
             else
-                gUnknown_03004824->unk_0041 = unkStructF->unk_0009 + 6;
-            gUnknown_03004824->unk_0040 = CreateSprite(&gSpriteTemplate_820C134, gTradeMonSpriteCoords[gUnknown_03004824->unk_0041][0] * 8 + 32, gTradeMonSpriteCoords[gUnknown_03004824->unk_0041][1] * 8, 2);
+                gUnknown_03004824->tradeMenuCursorPosition = unkStructF->unk_0009 + 6;
+            gUnknown_03004824->unk_0040 = CreateSprite(&gSpriteTemplate_820C134, gTradeMonSpriteCoords[gUnknown_03004824->tradeMenuCursorPosition][0] * 8 + 32, gTradeMonSpriteCoords[gUnknown_03004824->tradeMenuCursorPosition][1] * 8, 2);
             gMain.state = 15;
             nullsub_5(6, 0);
             break;
@@ -1003,7 +1003,7 @@ static void sub_80489F4(void)
 {
     if (!gPaletteFade.active)
     {
-        gUnknown_020297D8[0] = gUnknown_03004824->unk_0041;
+        gUnknown_020297D8[0] = gUnknown_03004824->tradeMenuCursorPosition;
         gUnknown_020297D8[1] = gUnknown_03004824->unk_008a;
         sub_800832C();
         gUnknown_03004824->unk_007b = 13;
@@ -1500,7 +1500,7 @@ static void sub_80491E4(u8 mpId, u8 status)
                 break;
             case 0xdddd:
                 gUnknown_03004824->unk_008a = ((u8 *)gBlockRecvBuffer[0])[1 * sizeof(u16)] + 6;
-                sub_8049E9C(gUnknown_03004824->unk_0041);
+                sub_8049E9C(gUnknown_03004824->tradeMenuCursorPosition);
                 sub_8049E9C(gUnknown_03004824->unk_008a);
                 gUnknown_03004824->unk_007b = 7;
                 break;
@@ -1529,7 +1529,7 @@ static void sub_80492D8(void)
         {
             gUnknown_03004824->unk_007b = 6;
             gUnknown_03004824->linkData[0] = 0xdddd;
-            gUnknown_03004824->linkData[1] = gUnknown_03004824->unk_0041;
+            gUnknown_03004824->linkData[1] = gUnknown_03004824->tradeMenuCursorPosition;
             sub_804AADC(5, 0);
             gUnknown_03004824->unk_0084 = gUnknown_03004824->unk_0085 = 0;
         }
@@ -1603,25 +1603,25 @@ static void sub_80494D8(void)
         sub_80492D8();
 }
 
-static u8 sub_8049514(u8 a0, u8 a1)
+static u8 sub_8049514(u8 oldPosition, u8 direction)
 {
     int i;
-    u8 retval = 0;
+    u8 newPosition = 0;
     for (i = 0; i < PARTY_SIZE; i ++)
     {
-        if (gUnknown_03004824->tradeMenuOptionsActive[gTradeNextSelectedMonTable[a0][a1][i]] == TRUE)
+        if (gUnknown_03004824->tradeMenuOptionsActive[gTradeNextSelectedMonTable[oldPosition][direction][i]] == TRUE)
         {
-            retval = gTradeNextSelectedMonTable[a0][a1][i];
+            newPosition = gTradeNextSelectedMonTable[oldPosition][direction][i];
             break;
         }
     }
-    return retval;
+    return newPosition;
 }
 
-/*static*/ void sub_8049560(u8 *a0, u8 a1)
+static void TradeMenuMoveCursor(u8 *tradeMenuCursorPosition, u8 direction)
 {
-    u8 v0 = sub_8049514(*a0, a1);
-    if (v0 == 12) // CANCEL
+    u8 newPosition = sub_8049514(*tradeMenuCursorPosition, direction);
+    if (newPosition == 12) // CANCEL
     {
         StartSpriteAnim(&gSprites[gUnknown_03004824->unk_0040], 1);
         gSprites[gUnknown_03004824->unk_0040].pos1.x = 0xe0;
@@ -1630,14 +1630,14 @@ static u8 sub_8049514(u8 a0, u8 a1)
     else
     {
         StartSpriteAnim(&gSprites[gUnknown_03004824->unk_0040], 0);
-        gSprites[gUnknown_03004824->unk_0040].pos1.x = gTradeMonSpriteCoords[v0][0] * 8 + 32;
-        gSprites[gUnknown_03004824->unk_0040].pos1.y = gTradeMonSpriteCoords[v0][1] * 8;
+        gSprites[gUnknown_03004824->unk_0040].pos1.x = gTradeMonSpriteCoords[newPosition][0] * 8 + 32;
+        gSprites[gUnknown_03004824->unk_0040].pos1.y = gTradeMonSpriteCoords[newPosition][1] * 8;
     }
-    if (*a0 != v0)
+    if (*tradeMenuCursorPosition != newPosition)
     {
         PlaySE(SE_SELECT);
     }
-    *a0 = v0;
+    *tradeMenuCursorPosition = newPosition;
 }
 
 /*static*/ void sub_8049620(void)
@@ -1647,12 +1647,64 @@ static u8 sub_8049514(u8 a0, u8 a1)
     if (GetMultiplayerId() == 1)
     {
         gUnknown_03004824->linkData[0] = 0xaabb;
-        gUnknown_03004824->linkData[1] = gUnknown_03004824->unk_0041;
+        gUnknown_03004824->linkData[1] = gUnknown_03004824->tradeMenuCursorPosition;
         SendBlock(bitmask_all_link_players_but_self(), gUnknown_03004824->linkData, 20);
     }
     else
     {
         gUnknown_03004824->unk_0084 = 1;
+    }
+}
+
+/*static*/ void sub_8049680(void)
+{
+    int i;
+    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    {
+        TradeMenuMoveCursor(&gUnknown_03004824->tradeMenuCursorPosition, 0);
+    }
+    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    {
+        TradeMenuMoveCursor(&gUnknown_03004824->tradeMenuCursorPosition, 1);
+    }
+    else if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+    {
+        TradeMenuMoveCursor(&gUnknown_03004824->tradeMenuCursorPosition, 2);
+    }
+    else if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+    {
+        TradeMenuMoveCursor(&gUnknown_03004824->tradeMenuCursorPosition, 3);
+    }
+    if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        if (gUnknown_03004824->tradeMenuCursorPosition < PARTY_SIZE)
+        {
+            DrawTextWindow(&gUnknown_03004824->window, 18, 14, 28, 19);
+            PrintMenuItems(19, 15, 2, gUnknown_0820C320);
+            InitMenu(0, 19, 15, 2, 0, 9);
+            gUnknown_03004824->unk_007b = 1;
+        }
+        else if (gUnknown_03004824->tradeMenuCursorPosition < 2 * PARTY_SIZE)
+        {
+            BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+            gUnknown_03004824->unk_007b = 2;
+        }
+        else if (gUnknown_03004824->tradeMenuCursorPosition == 2 * PARTY_SIZE)
+        {
+            DrawTextWindow(&gUnknown_03004824->window, 24, 14, 29, 19);
+            InitYesNoMenu(24, 14, 4);
+            gUnknown_03004824->unk_007b = 4;
+            sub_804ACD8(gUnknown_0820C14C[4], (u8 *)(BG_CHAR_ADDR(4) + 32 * gUnknown_03004824->unk_007e), 20);
+        }
+    }
+    if (gMain.newKeys & R_BUTTON)
+    {
+        for (i = 0; i < 10; i ++)
+        {
+            gUnknown_03004824->linkData[i] = i;
+        }
+        SendBlock(bitmask_all_link_players_but_self(), gUnknown_03004824->linkData, 20);
     }
 }
 
