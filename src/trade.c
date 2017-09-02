@@ -72,7 +72,7 @@ struct TradeEwramSubstruct {
     /*0x0004*/ struct Window window;
     /*0x0034*/ u8 playerPartyIcons[6];
     /*0x003a*/ u8 friendPartyIcons[6];
-    /*0x0040*/ u8 unk_0040;
+    /*0x0040*/ u8 tradeMenuCursorSpriteIdx;
     /*0x0041*/ u8 tradeMenuCursorPosition;
     /*0x0042*/ u8 playerPartyCount;
     /*0x0043*/ u8 friendPartyCount;
@@ -784,7 +784,7 @@ static void sub_8047EC0(void)
             break;
         case 12:
             sub_8047E44();
-            gUnknown_03004824->unk_0040 = CreateSprite(&gSpriteTemplate_820C134, gTradeMonSpriteCoords[0][0] * 8 + 32, gTradeMonSpriteCoords[0][1] * 8, 2);
+            gUnknown_03004824->tradeMenuCursorSpriteIdx = CreateSprite(&gSpriteTemplate_820C134, gTradeMonSpriteCoords[0][0] * 8 + 32, gTradeMonSpriteCoords[0][1] * 8, 2);
             gUnknown_03004824->tradeMenuCursorPosition = 0;
             gMain.state ++;
             nullsub_5(6, 0);
@@ -941,7 +941,7 @@ void sub_80484F4(void)
                 gUnknown_03004824->tradeMenuCursorPosition = unkStructF->unk_0009;
             else
                 gUnknown_03004824->tradeMenuCursorPosition = unkStructF->unk_0009 + 6;
-            gUnknown_03004824->unk_0040 = CreateSprite(&gSpriteTemplate_820C134, gTradeMonSpriteCoords[gUnknown_03004824->tradeMenuCursorPosition][0] * 8 + 32, gTradeMonSpriteCoords[gUnknown_03004824->tradeMenuCursorPosition][1] * 8, 2);
+            gUnknown_03004824->tradeMenuCursorSpriteIdx = CreateSprite(&gSpriteTemplate_820C134, gTradeMonSpriteCoords[gUnknown_03004824->tradeMenuCursorPosition][0] * 8 + 32, gTradeMonSpriteCoords[gUnknown_03004824->tradeMenuCursorPosition][1] * 8, 2);
             gMain.state = 15;
             nullsub_5(6, 0);
             break;
@@ -1627,15 +1627,15 @@ static void TradeMenuMoveCursor(u8 *tradeMenuCursorPosition, u8 direction)
     u8 newPosition = sub_8049514(*tradeMenuCursorPosition, direction);
     if (newPosition == 12) // CANCEL
     {
-        StartSpriteAnim(&gSprites[gUnknown_03004824->unk_0040], 1);
-        gSprites[gUnknown_03004824->unk_0040].pos1.x = 0xe0;
-        gSprites[gUnknown_03004824->unk_0040].pos1.y = 0xa0;
+        StartSpriteAnim(&gSprites[gUnknown_03004824->tradeMenuCursorSpriteIdx], 1);
+        gSprites[gUnknown_03004824->tradeMenuCursorSpriteIdx].pos1.x = 0xe0;
+        gSprites[gUnknown_03004824->tradeMenuCursorSpriteIdx].pos1.y = 0xa0;
     }
     else
     {
-        StartSpriteAnim(&gSprites[gUnknown_03004824->unk_0040], 0);
-        gSprites[gUnknown_03004824->unk_0040].pos1.x = gTradeMonSpriteCoords[newPosition][0] * 8 + 32;
-        gSprites[gUnknown_03004824->unk_0040].pos1.y = gTradeMonSpriteCoords[newPosition][1] * 8;
+        StartSpriteAnim(&gSprites[gUnknown_03004824->tradeMenuCursorSpriteIdx], 0);
+        gSprites[gUnknown_03004824->tradeMenuCursorSpriteIdx].pos1.x = gTradeMonSpriteCoords[newPosition][0] * 8 + 32;
+        gSprites[gUnknown_03004824->tradeMenuCursorSpriteIdx].pos1.y = gTradeMonSpriteCoords[newPosition][1] * 8;
     }
     if (*tradeMenuCursorPosition != newPosition)
     {
@@ -1717,7 +1717,7 @@ static void sub_8049620(void)
     HandleDestroyMenuCursors();
     sub_804A80C();
     gUnknown_03004824->unk_007b = 0;
-    gSprites[gUnknown_03004824->unk_0040].invisible = FALSE;
+    gSprites[gUnknown_03004824->tradeMenuCursorSpriteIdx].invisible = FALSE;
     sub_804ACD8(gUnknown_0820C14C[1], (u8 *)(BG_CHAR_ADDR(4) + 32 * gUnknown_03004824->unk_007e), 20);
 }
 
@@ -1749,7 +1749,7 @@ static void sub_8049620(void)
         else
         {
             sub_8049620();
-            gSprites[gUnknown_03004824->unk_0040].invisible = TRUE;
+            gSprites[gUnknown_03004824->tradeMenuCursorSpriteIdx].invisible = TRUE;
         }
     }
     else if (gMain.newKeys & B_BUTTON)
@@ -1857,11 +1857,47 @@ static void sub_8049A20(void)
         sub_804AADC(3, 1);
         if (GetMenuCursorPos() == 0)
         {
-            gUnknown_03004824->unk_007c = MoveMenuCursor(1);
+            gUnknown_03004824->unk_007c = MoveMenuCursor(+1);
         }
         gUnknown_03004824->linkData[0] = 0xbbcc;
         SendBlock(bitmask_all_link_players_but_self(), gUnknown_03004824->linkData, ARRAY_COUNT(gUnknown_03004824->linkData));
         gUnknown_03004824->unk_007b = 100;
+    }
+}
+
+/*static*/ void sub_8049BC0(void)
+{
+    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    {
+        PlaySE(SE_SELECT);
+        gUnknown_03004824->unk_007c = MoveMenuCursor(-1);
+    }
+    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    {
+        PlaySE(SE_SELECT);
+        gUnknown_03004824->unk_007c = MoveMenuCursor(+1);
+    }
+    if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        if (GetMenuCursorPos() == 0)
+        {
+            sub_804AA0C(4);
+            gUnknown_03004824->linkData[0] = 0xeeaa;
+            gUnknown_03004824->linkData[1] = 0;
+            sub_804AADC(5, 0);
+            gSprites[gUnknown_03004824->tradeMenuCursorSpriteIdx].invisible = TRUE;
+            gUnknown_03004824->unk_007b = 100;
+        }
+        else
+        {
+            sub_8049804();
+        }
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        sub_8049804();
     }
 }
 
