@@ -10,37 +10,6 @@
 	.set sub_804A96C_alt, sub_804A96C
 .endif
 
-	thumb_func_start sub_80499F0
-sub_80499F0: @ 80499F0
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	lsls r1, 24
-	lsrs r4, r1, 24
-	lsls r2, 24
-	lsrs r2, 24
-	movs r1, 0
-	movs r3, 0
-	cmp r1, r4
-	bge _08049A18
-_08049A04:
-	cmp r2, r3
-	beq _08049A12
-	adds r0, r5, r3
-	ldrb r0, [r0]
-	adds r0, r1, r0
-	lsls r0, 24
-	lsrs r1, r0, 24
-_08049A12:
-	adds r3, 0x1
-	cmp r3, r4
-	blt _08049A04
-_08049A18:
-	adds r0, r1, 0
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80499F0
-
 	thumb_func_start sub_8049A20
 sub_8049A20: @ 8049A20
 	push {r4,r5,lr}

@@ -77,7 +77,8 @@ struct TradeEwramSubstruct {
     /*0x0042*/ u8 playerPartyCount;
     /*0x0043*/ u8 friendPartyCount;
     /*0x0044*/ u8 tradeMenuOptionsActive[13];
-    /*0x0051*/ u8 unk_0051[0x24];
+    /*0x0051*/ u8 unk_0051[6];
+    /*0x0056*/ u8 filler_0057[30];
     /*0x0075*/ u8 unk_0075;
     /*0x0076*/ u8 filler_0076[4];
     /*0x007a*/ u8 unk_007a;
@@ -148,7 +149,7 @@ static void sub_8048AB4(void);
 /*static*/ void sub_8049E9C(u8);
 /*static*/ void sub_804AADC(u8, u8);
 /*static*/ void sub_804A80C(void);
-/*static*/ bool8 sub_80499F0(const u8 *, u8, u8);
+/*static*/ u8 sub_80499F0(const u8 *, u8, u8);
 
 extern u8 gUnknown_020297D8[2];
 extern u8 *gUnknown_020296CC[13];
@@ -1740,7 +1741,7 @@ static void sub_8049620(void)
             BeginNormalPaletteFade(-1, 0, 0, 16, 0);
             gUnknown_03004824->unk_007b = 2;
         }
-        else if (!sub_80499F0(gUnknown_03004824->unk_0051, gUnknown_03004824->playerPartyCount, gUnknown_03004824->tradeMenuCursorPosition))
+        else if (sub_80499F0(gUnknown_03004824->unk_0051, gUnknown_03004824->playerPartyCount, gUnknown_03004824->tradeMenuCursorPosition) == 0)
         {
             sub_804AADC(3, 2);
             gUnknown_03004824->unk_007b = 8;
@@ -1780,6 +1781,20 @@ static void sub_8049620(void)
             ShowPokemonSummaryScreen(gEnemyParty, gUnknown_03004824->tradeMenuCursorPosition - 6, gUnknown_03004824->friendPartyCount - 1, sub_80484F4, 4);
         }
     }
+}
+
+/*static*/ u8 sub_80499F0(const u8 *src, u8 partyCount, u8 tradeMenuCursorPosition)
+{
+    u8 retval = 0;
+    int i;
+    for (i = 0; i < partyCount; i ++)
+    {
+        if (tradeMenuCursorPosition != i)
+        {
+            retval += src[i];
+        }
+    }
+    return retval;
 }
 
 asm(".section .text.sub_804A96C");
