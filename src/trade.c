@@ -1797,7 +1797,7 @@ static u8 sub_80499F0(const u8 *src, u8 partyCount, u8 tradeMenuCursorPosition)
     return retval;
 }
 
-/*static*/ void sub_8049A20(void)
+static void sub_8049A20(void)
 {
     u8 unk_0051[12];
     int i;
@@ -1819,6 +1819,49 @@ static u8 sub_80499F0(const u8 *src, u8 partyCount, u8 tradeMenuCursorPosition)
         {
             SendBlock(bitmask_all_link_players_but_self(), gUnknown_03004824->linkData, ARRAY_COUNT(gUnknown_03004824->linkData));
         }
+    }
+}
+
+/*static*/ void sub_8049AC0(void)
+{
+    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    {
+        PlaySE(SE_SELECT);
+        gUnknown_03004824->unk_007c = MoveMenuCursor(-1);
+    }
+    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    {
+        PlaySE(SE_SELECT);
+        gUnknown_03004824->unk_007c = MoveMenuCursor(+1);
+    }
+    if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        if (GetMenuCursorPos() == 0)
+        {
+            sub_8049A20();
+        }
+        else
+        {
+            sub_804AADC(3, 1);
+            if (sub_8007ECC())
+            {
+                gUnknown_03004824->linkData[0] = 0xbbcc;
+                SendBlock(bitmask_all_link_players_but_self(), gUnknown_03004824->linkData, ARRAY_COUNT(gUnknown_03004824->linkData));
+            }
+        }
+        gUnknown_03004824->unk_007b = 100;
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        sub_804AADC(3, 1);
+        if (GetMenuCursorPos() == 0)
+        {
+            gUnknown_03004824->unk_007c = MoveMenuCursor(1);
+        }
+        gUnknown_03004824->linkData[0] = 0xbbcc;
+        SendBlock(bitmask_all_link_players_but_self(), gUnknown_03004824->linkData, ARRAY_COUNT(gUnknown_03004824->linkData));
+        gUnknown_03004824->unk_007b = 100;
     }
 }
 
