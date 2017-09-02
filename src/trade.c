@@ -1606,6 +1606,21 @@ static void sub_80494D8(void)
         sub_80492D8();
 }
 
+u8 sub_8049514(u8 a0, u8 a1)
+{
+    int i;
+    u8 retval = 0;
+    for (i = 0; i < PARTY_SIZE; i ++)
+    {
+        if (gUnknown_03004824->tradeIconsActive[gTradeNextSelectedMonTable[a0][a1][i]] == TRUE)
+        {
+            retval = gTradeNextSelectedMonTable[a0][a1][i];
+            break;
+        }
+    }
+    return retval;
+}
+
 asm(".section .text.sub_804A96C");
 
 /*static*/ void sub_804A96C(struct UnkStructD *arg0, u8 left, u8 top, u16 *tilemap, u8 width, u8 height, u16 sp8) {

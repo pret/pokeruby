@@ -10,50 +10,6 @@
 	.set sub_804A96C_alt, sub_804A96C
 .endif
 
-	thumb_func_start sub_8049514
-sub_8049514: @ 8049514
-	push {r4-r6,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, 24
-	lsrs r1, 24
-	movs r6, 0
-	movs r5, 0
-	ldr r2, _08049548 @ =gUnknown_03004824
-	ldr r3, [r2]
-	ldr r4, _0804954C @ =gTradeNextSelectedMonTable
-	lsls r2, r1, 1
-	adds r2, r1
-	lsls r2, 1
-	lsls r1, r0, 1
-	adds r1, r0
-	lsls r1, 3
-	adds r3, 0x44
-	adds r2, r1
-	adds r2, r4
-_0804953A:
-	ldrb r1, [r2]
-	adds r0, r3, r1
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	bne _08049550
-	adds r6, r1, 0
-	b _08049558
-	.align 2, 0
-_08049548: .4byte gUnknown_03004824
-_0804954C: .4byte gTradeNextSelectedMonTable
-_08049550:
-	adds r2, 0x1
-	adds r5, 0x1
-	cmp r5, 0x5
-	ble _0804953A
-_08049558:
-	adds r0, r6, 0
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8049514
-
 	thumb_func_start sub_8049560
 sub_8049560: @ 8049560
 	push {r4-r7,lr}
