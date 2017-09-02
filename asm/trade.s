@@ -10,50 +10,6 @@
 	.set sub_804A96C_alt, sub_804A96C
 .endif
 
-	thumb_func_start DisplayMessageAndContinueTask
-DisplayMessageAndContinueTask: @ 8049CF0
-	push {r4,lr}
-	sub sp, 0x4
-	ldr r4, _08049D40 @ =gUnknown_03004824
-	ldr r1, [r4]
-	adds r1, 0xB4
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	ldr r1, [r4]
-	adds r0, r1, 0
-	adds r0, 0xB4
-	ldrb r0, [r0]
-	cmp r0, 0x78
-	bls _08049D36
-	adds r0, r1, 0x4
-	movs r1, 0x13
-	str r1, [sp]
-	movs r1, 0x18
-	movs r2, 0xE
-	movs r3, 0x1D
-	bl DrawTextWindow
-	movs r0, 0x18
-	movs r1, 0xE
-	movs r2, 0x4
-	bl InitYesNoMenu
-	ldr r0, [r4]
-	adds r0, 0xB4
-	movs r1, 0
-	strb r1, [r0]
-	ldr r0, [r4]
-	adds r0, 0x7B
-	movs r1, 0x3
-	strb r1, [r0]
-_08049D36:
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08049D40: .4byte gUnknown_03004824
-	thumb_func_end DisplayMessageAndContinueTask
-
 	thumb_func_start sub_8049D44
 sub_8049D44: @ 8049D44
 	push {lr}

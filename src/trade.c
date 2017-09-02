@@ -1920,6 +1920,18 @@ static void sub_8049A20(void)
     }
 }
 
+/*static*/ void DisplayMessageAndContinueTask(void)
+{
+    gUnknown_03004824->unk_00b4++;
+    if (gUnknown_03004824->unk_00b4 > 120)
+    {
+        DrawTextWindow(&gUnknown_03004824->window, 24, 14, 29, 19);
+        InitYesNoMenu(24, 14, 4);
+        gUnknown_03004824->unk_00b4 = 0;
+        gUnknown_03004824->unk_007b = 3;
+    }
+}
+
 asm(".section .text.sub_804A96C");
 
 /*static*/ void sub_804A96C(struct UnkStructD *arg0, u8 left, u8 top, u16 *tilemap, u8 width, u8 height, u16 sp8) {
