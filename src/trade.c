@@ -20,6 +20,11 @@
 #include "songs.h"
 #include "sound.h"
 #include "data2.h"
+#include "trade.h"
+
+#ifdef ENGLISH
+#define sub_804A96C_alt sub_804A96C
+#endif
 
 struct InGameTrade {
     /*0x00*/ u8 name[11];
@@ -114,41 +119,36 @@ struct TradeEwramStruct {
     /*0x0d000*/ u8 tileBuffers[13][256];
 };
 
-void sub_8047EC0(void);
-void sub_804AFB8(const struct WindowConfig *, u8 *, const u8 *, u8);
-void sub_804ACD8(const u8 *, u8 *, u8);
-void nullsub_5(u8, u8);
-void sub_804AA88(void);
-void sub_804A964(struct UnkStructE *, void *);
-void sub_80489F4(void);
-void sub_804AA0C(u8);
-bool8 sub_8048D44(void);
-void sub_804AF84(void);
-void sub_809D62C(struct Sprite *);
-bool8 sub_804ABF8(void);
-void sub_804ACF4(u8);
-void sub_804A41C(u8);
-void sub_8048C70(void);
-void sub_8048B0C(u8);
-void sub_804AE3C(u8);
-void sub_804AF10(void);
-void sub_80494D8(void);
-void sub_8048AB4(void);
-void sub_804A940(struct UnkStructE *);
-void sub_804B41C(void);
-void sub_8049DE0(void);
-void sub_804AB30(void);
-void sub_8049ED4(u8);
-void sub_804A6DC(u8);
-void sub_804A938(struct UnkStructE *);
-u8 sub_804A9F4(void);
-u8 sub_804AA00(void);
-void sub_8049E9C(u8);
-void sub_804AADC(u8, u8);
-
-#ifdef ENGLISH
-#define sub_804A96C_alt sub_804A96C
-#endif
+static void sub_8047EC0(void);
+/*static*/ void sub_804AFB8(const struct WindowConfig *, u8 *, const u8 *, u8);
+/*static*/ void sub_804ACD8(const u8 *, u8 *, u8);
+static void nullsub_5(u8, u8);
+/*static*/ void sub_804AA88(void);
+/*static*/ void sub_804A964(struct UnkStructE *, void *);
+static void sub_80489F4(void);
+/*static*/ void sub_804AA0C(u8);
+static bool8 sub_8048D44(void);
+/*static*/ void sub_804AF84(void);
+/*static*/ bool8 sub_804ABF8(void);
+/*static*/ void sub_804ACF4(u8);
+/*static*/ void sub_804A41C(u8);
+static void sub_8048C70(void);
+static void sub_8048B0C(u8);
+/*static*/ void sub_804AE3C(u8);
+/*static*/ void sub_804AF10(void);
+static void sub_80494D8(void);
+static void sub_8048AB4(void);
+/*static*/ void sub_804A940(struct UnkStructE *);
+/*static*/ void sub_804B41C(void);
+/*static*/ void sub_8049DE0(void);
+/*static*/ void sub_804AB30(void);
+/*static*/ void sub_8049ED4(u8);
+/*static*/ void sub_804A6DC(u8);
+/*static*/ void sub_804A938(struct UnkStructE *);
+/*static*/ u8 sub_804A9F4(void);
+/*static*/ u8 sub_804AA00(void);
+/*static*/ void sub_8049E9C(u8);
+/*static*/ void sub_804AADC(u8, u8);
 
 extern u8 gUnknown_020297D8[2];
 extern u8 *gUnknown_020296CC[13];
@@ -156,7 +156,6 @@ extern struct TradeEwramSubstruct *gUnknown_03004824;
 extern u8 gUnknown_03000508;
 extern struct MailStruct gUnknown_02029700[16];
 
-extern u8 ewram[];
 #define ewram_2010000 (*(struct TradeEwramStruct *)(ewram + 0x10000))
 
 
@@ -604,7 +603,7 @@ void sub_8047CD8(void)
     SetMainCallback2(sub_8047EC0);
 }
 
-void sub_8047CE8(void)
+static void sub_8047CE8(void)
 {
     u8 mpId;
     sub_804AFB8(&gWindowConfig_81E725C, gUnknown_020296CC[0], gSaveBlock2.playerName, 0xC);
@@ -615,7 +614,7 @@ void sub_8047CE8(void)
     nullsub_5(3, 0);
 }
 
-void sub_8047D58(void)
+static void sub_8047D58(void)
 {
     struct SpriteTemplate spriteTemplate;
     int i;
@@ -644,7 +643,7 @@ void sub_8047D58(void)
     nullsub_5(5, 0);
 }
 
-void sub_8047E44(void)
+static void sub_8047E44(void)
 {
     struct SpriteTemplate spriteTemplate;
     int i;
@@ -664,7 +663,7 @@ void sub_8047E44(void)
     }
 }
 
-void sub_8047EC0(void)
+static void sub_8047EC0(void)
 {
     int i;
 
@@ -844,7 +843,7 @@ void sub_8047EC0(void)
     UpdatePaletteFade();
 }
 
-void sub_80484F4(void)
+/*static*/ void sub_80484F4(void)
 {
     int i;
     struct UnkStructF *unkStructF;
@@ -986,7 +985,7 @@ void sub_80484F4(void)
     UpdatePaletteFade();
 }
 
-void sub_80489F4(void)
+static void sub_80489F4(void)
 {
     sub_804A940(&gUnknown_03004824->unk_00c8);
     LoadOam();
@@ -994,7 +993,7 @@ void sub_80489F4(void)
     TransferPlttBuffer();
 }
 
-void sub_8048A14(void)
+/*static*/ void sub_8048A14(void)
 {
     if (++gUnknown_03004824->unk_00b4 >= 16)
     {
@@ -1003,7 +1002,7 @@ void sub_8048A14(void)
     }
 }
 
-void sub_8048A50(void)
+/*static*/ void sub_8048A50(void)
 {
     if (!gPaletteFade.active)
     {
@@ -1014,7 +1013,7 @@ void sub_8048A50(void)
     }
 }
 
-void sub_8048A90(void)
+/*static*/ void sub_8048A90(void)
 {
     if (!gReceivedRemoteLinkPlayers)
     {
@@ -1023,7 +1022,7 @@ void sub_8048A90(void)
     }
 }
 
-void sub_8048AB4(void)
+static void sub_8048AB4(void)
 {
     sub_8049DE0();
     sub_804AB30();
@@ -1041,7 +1040,7 @@ void sub_8048AB4(void)
 // Only minor register permutations
 #pragma push_macro("BLOCKSIZE")
 #define BLOCKSIZE 0x800
-void sub_8048B0C(u8 a0)
+static void sub_8048B0C(u8 a0)
 {
     int i;
     u16 *dest;
@@ -1101,7 +1100,7 @@ void sub_8048B0C(u8 a0)
 #else
 asm(".include \"constants/gba_constants.inc\"");
 __attribute__((naked))
-void sub_8048B0C(u8 a0)
+static void sub_8048B0C(u8 a0)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                         "\tlsls r0, 24\n"
@@ -1265,7 +1264,7 @@ void sub_8048B0C(u8 a0)
 }
 #endif
 
-void sub_8048C70(void)
+static void sub_8048C70(void)
 {
     int i;
     for (i = 0; i < PARTY_SIZE; i ++)
@@ -1292,7 +1291,7 @@ void sub_8048C70(void)
     gUnknown_03004824->unk_0050 = TRUE;
 }
 
-void nullsub_5(u8 a0, u8 a1) {}
+static void nullsub_5(u8 a0, u8 a1) {}
 
 static void sub_8048D24(u8 *dest, const u8 *src, u32 size)
 {
@@ -1300,7 +1299,7 @@ static void sub_8048D24(u8 *dest, const u8 *src, u32 size)
     for (i = 0; i < size; i ++) dest[i] = src[i];
 }
 
-bool8 sub_8048D44(void)
+static bool8 sub_8048D44(void)
 {
     u8 mpId = GetMultiplayerId();
     int i;
@@ -1437,7 +1436,7 @@ bool8 sub_8048D44(void)
     return FALSE;
 }
 
-void sub_8049088(void)
+/*static*/ void sub_8049088(void)
 {
     u8 string[28];
     StringCopy(string, gTradeText_TradeOkayPrompt);
@@ -1591,11 +1590,11 @@ static void sub_80492D8(void)
     }
 }
 
-void sub_80494D8(void)
+static void sub_80494D8(void)
 {
     u8 mpId = GetMultiplayerId();
-    u8 status = GetBlockReceivedStatus();
-    if (status)
+    u8 status;
+    if ((status = GetBlockReceivedStatus()))
     {
         if (mpId == 0)
             sub_80490BC(mpId, status);
@@ -1609,7 +1608,7 @@ void sub_80494D8(void)
 
 asm(".section .text.sub_804A96C");
 
-void sub_804A96C(struct UnkStructD *arg0, u8 left, u8 top, u16 *tilemap, u8 width, u8 height, u16 sp8) {
+/*static*/ void sub_804A96C(struct UnkStructD *arg0, u8 left, u8 top, u16 *tilemap, u8 width, u8 height, u16 sp8) {
     int y, x;
 
     for (y = 0; y < height; y++)
@@ -1636,7 +1635,7 @@ void sub_804A96C_alt(struct UnkStructD *arg0, u8 left, u8 top, u16 *tilemap, u8 
 
 asm(".section .text.sub_804DAD4");
 
-void sub_804DAD4(struct UnkStructC *arg0, struct InGameTrade *trade) {
+/*static*/ void sub_804DAD4(struct UnkStructC *arg0, struct InGameTrade *trade) {
     s32 i;
 
     for (i = 0; i < 9; i++)
