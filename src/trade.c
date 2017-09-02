@@ -87,9 +87,8 @@ struct TradeEwramSubstruct {
     /*0x007c*/ u8 unk_007c;
     /*0x007d*/ u8 unk_007d;
     /*0x007e*/ u16 unk_007e;
-    /*0x0080*/ u8 unk_0080;
-    /*0x0081*/ u8 unk_0081;
-    /*0x0082*/ u8 filler_0082[2];
+    /*0x0080*/ u8 unk_0080[2];
+    /*0x0082*/ u8 unk_0082[2];
     /*0x0084*/ u8 unk_0084;
     /*0x0085*/ u8 unk_0085;
     /*0x0086*/ u8 unk_0086;
@@ -147,7 +146,7 @@ static void sub_8049DE0(void);
 /*static*/ void sub_804A938(struct UnkStructE *);
 /*static*/ u8 sub_804A9F4(void);
 /*static*/ u8 sub_804AA00(void);
-/*static*/ void sub_8049E9C(u8);
+static void sub_8049E9C(u8);
 /*static*/ void sub_804AADC(u8, u8);
 /*static*/ void sub_804A80C(void);
 static u8 sub_80499F0(const u8 *, u8, u8);
@@ -690,8 +689,8 @@ static void sub_8047EC0(void)
             gUnknown_03004824->unk_0075 = 0;
             gUnknown_03004824->unk_007b = 0;
             gUnknown_03004824->unk_007c = 0;
-            gUnknown_03004824->unk_0080 = 0;
-            gUnknown_03004824->unk_0081 = 0;
+            gUnknown_03004824->unk_0080[0] = 0;
+            gUnknown_03004824->unk_0080[1] = 0;
             gUnknown_03004824->unk_0086 = 0;
             gUnknown_03004824->unk_0087 = 0;
             gUnknown_03004824->unk_00b4 = 0;
@@ -870,8 +869,8 @@ void sub_80484F4(void)
             gUnknown_03004824->unk_0075 = 0;
             gUnknown_03004824->unk_007b = 0;
             gUnknown_03004824->unk_007c = 0;
-            gUnknown_03004824->unk_0080 = 0;
-            gUnknown_03004824->unk_0081 = 0;
+            gUnknown_03004824->unk_0080[0] = 0;
+            gUnknown_03004824->unk_0080[1] = 0;
             gUnknown_03004824->unk_0086 = 0;
             gUnknown_03004824->unk_0087 = 0;
             gUnknown_03004824->unk_00b4 = 0;
@@ -1915,7 +1914,7 @@ static void sub_8049C8C(void)
 
 static void sub_8049CC4(void)
 {
-    if (gUnknown_03004824->unk_0080 == 5 && gUnknown_03004824->unk_0081 == 5)
+    if (gUnknown_03004824->unk_0080[0] == 5 && gUnknown_03004824->unk_0080[1] == 5)
     {
         sub_8049088();
         gUnknown_03004824->unk_007b = 14;
@@ -2012,6 +2011,16 @@ static void sub_8049DE0(void)
         case 15:
             sub_8049954();
             break;
+    }
+}
+
+static void sub_8049E9C(u8 a0)
+{
+    u8 v0 = a0 / 6;
+    if (gUnknown_03004824->unk_0080[v0] == 0)
+    {
+        gUnknown_03004824->unk_0080[v0] = 1;
+        gUnknown_03004824->unk_0082[v0] = a0;
     }
 }
 
