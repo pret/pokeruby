@@ -10,33 +10,6 @@
 	.set sub_804A96C_alt, sub_804A96C
 .endif
 
-	thumb_func_start nullsub_5
-nullsub_5: @ 8048D20
-	bx lr
-	thumb_func_end nullsub_5
-
-	thumb_func_start sub_8048D24
-sub_8048D24: @ 8048D24
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	adds r4, r1, 0
-	movs r3, 0
-	cmp r3, r2
-	bcs _08048D3E
-_08048D30:
-	adds r0, r5, r3
-	adds r1, r4, r3
-	ldrb r1, [r1]
-	strb r1, [r0]
-	adds r3, 0x1
-	cmp r3, r2
-	bcc _08048D30
-_08048D3E:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8048D24
-
 	thumb_func_start sub_8048D44
 sub_8048D44: @ 8048D44
 	push {r4-r7,lr}

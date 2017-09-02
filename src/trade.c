@@ -1213,6 +1213,14 @@ void sub_8048C70(void)
     gUnknown_03004824->unk_0050 = TRUE;
 }
 
+void nullsub_5(u8 a0, u8 a1) {}
+
+void sub_8048D24(u8 *dest, const u8 *src, u32 size)
+{
+    int i;
+    for (i = 0; i < size; i ++) dest[i] = src[i];
+}
+
 asm(".section .text.sub_804A96C");
 
 void sub_804A96C(struct UnkStructD *arg0, u8 left, u8 top, u16 *tilemap, u8 width, u8 height, u16 sp8) {
