@@ -5395,56 +5395,6 @@ _0804DAD0: .4byte gEnemyParty
 
 .section .text.sub_804DB2C
 
-	thumb_func_start sub_804DC18
-sub_804DC18: @ 804DC18
-	push {r4,lr}
-	bl sub_804B2B0
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	bl sub_804D63C
-	cmp r4, 0
-	bne _0804DC64
-	ldr r4, _0804DC7C @ =gUnknown_03004828
-	ldr r2, [r4]
-	adds r0, r2, 0
-	adds r0, 0x9C
-	ldrh r1, [r0]
-	ldr r0, _0804DC80 @ =0x00000101
-	cmp r1, r0
-	bne _0804DC64
-	adds r1, r2, 0
-	adds r1, 0x9E
-	ldr r0, _0804DC84 @ =0x0000dcba
-	strh r0, [r1]
-	bl bitmask_all_link_players_but_self
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r1, [r4]
-	adds r1, 0x9E
-	movs r2, 0x14
-	bl SendBlock
-	ldr r0, [r4]
-	adds r0, 0x9C
-	movs r1, 0x2
-	strb r1, [r0]
-	ldr r0, [r4]
-	adds r0, 0x9D
-	strb r1, [r0]
-_0804DC64:
-	bl RunTasks
-	bl AnimateSprites
-	bl BuildOamBuffer
-	bl UpdatePaletteFade
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0804DC7C: .4byte gUnknown_03004828
-_0804DC80: .4byte 0x00000101
-_0804DC84: .4byte 0x0000dcba
-	thumb_func_end sub_804DC18
-
 	thumb_func_start sub_804DC88
 sub_804DC88: @ 804DC88
 	push {r4,r5,lr}

@@ -32,7 +32,7 @@
 asm(".set sub_804A96C_alt, sub_804A96C");
 #endif
 
-#define Trade_SendData() SendBlock(bitmask_all_link_players_but_self(), gUnknown_03004824->linkData, ARRAY_COUNT(gUnknown_03004824->linkData))
+#define Trade_SendData(ptr) SendBlock(bitmask_all_link_players_but_self(), ptr->linkData, 20)
 
 struct InGameTrade {
     /*0x00*/ u8 name[11];
@@ -116,9 +116,10 @@ struct UnkStructF {
 };
 
 struct TradeEwramSubstruct2 {
-    /*0x0000*/ u8 filler_0000[0x9e];
-    /*0x009e*/ u16 unk_009e;
-    /*0x00a0*/ u8 unk_00a0[0x18];
+    /*0x0000*/ u8 filler_0000[0x9c];
+    /*0x009c*/ u8 unk_009c;
+    /*0x009d*/ u8 unk_009d;
+    /*0x009e*/ u16 linkData[13];
     /*0x00b8*/ u8 unk_00b8;
     /*0x00b9*/ u8 unk_00b9;
     /*0x00ba*/ u8 filler_00ba[3];
@@ -184,6 +185,7 @@ void sub_804A51C(u8, u8, u8, u8, u8, u8);
 /*static*/ void sub_804DC18(void);
 /*static*/ void sub_804BB78(void);
 /*static*/ void sub_804D63C(void);
+/*static*/ bool8 sub_804B2B0(void);
 
 extern u8 gUnknown_020297D8[2];
 extern u8 *gUnknown_020296CC[13];
@@ -1693,7 +1695,7 @@ static void sub_8049620(void)
     {
         gUnknown_03004824->linkData[0] = 0xaabb;
         gUnknown_03004824->linkData[1] = gUnknown_03004824->tradeMenuCursorPosition;
-        Trade_SendData();
+        Trade_SendData(gUnknown_03004824);
     }
     else
     {
@@ -1749,7 +1751,7 @@ static void sub_8049680(void)
         {
             gUnknown_03004824->linkData[i] = i;
         }
-        Trade_SendData();
+        Trade_SendData(gUnknown_03004824);
     }
 }
 
@@ -1858,7 +1860,7 @@ static void sub_8049A20(void)
         gUnknown_03004824->linkData[0] = 0xbbbb;
         if (sub_8007ECC())
         {
-            Trade_SendData();
+            Trade_SendData(gUnknown_03004824);
         }
     }
 }
@@ -1888,7 +1890,7 @@ static void sub_8049AC0(void)
             if (sub_8007ECC())
             {
                 gUnknown_03004824->linkData[0] = 0xbbcc;
-                Trade_SendData();
+                Trade_SendData(gUnknown_03004824);
             }
         }
         gUnknown_03004824->unk_007b = 100;
@@ -1901,7 +1903,7 @@ static void sub_8049AC0(void)
             gUnknown_03004824->unk_007c = MoveMenuCursor(+1);
         }
         gUnknown_03004824->linkData[0] = 0xbbcc;
-        Trade_SendData();
+        Trade_SendData(gUnknown_03004824);
         gUnknown_03004824->unk_007b = 100;
     }
 }
@@ -3094,7 +3096,7 @@ static void sub_804AB30(void)
             switch (gUnknown_03004824->unk_08dc[i].unk_04)
             {
                 case 0:
-                    Trade_SendData();
+                    Trade_SendData(gUnknown_03004824);
                     break;
                 case 1:
                     sub_804AA0C(0);
@@ -3195,12 +3197,29 @@ void sub_804DB84(void)
         DestroySprite(&gSprites[gUnknown_03004828->unk_00b8]);
         FreeSpriteOamMatrix(&gSprites[gUnknown_03004828->unk_00b9]);
         sub_804BA94(gUnknown_020297D8[0], gUnknown_020297D8[1] % 6);
-        gUnknown_03004828->unk_009e = 0xabcd;
+        gUnknown_03004828->linkData[0] = 0xabcd;
         gUnknown_03004828->unk_00bd = 1;
         SetMainCallback2(sub_804DC18);
     }
     sub_804BB78();
     sub_804D63C();
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+}
+
+void sub_804DC18(void)
+{
+    u8 flag = sub_804B2B0();
+    sub_804D63C();
+    if (!flag && gUnknown_03004828->unk_009c == 1 && gUnknown_03004828->unk_009d == 1)
+    {
+        gUnknown_03004828->linkData[0] = 0xdcba;
+        Trade_SendData(gUnknown_03004828);
+        gUnknown_03004828->unk_009c = 2;
+        gUnknown_03004828->unk_009d = 2;
+    }
     RunTasks();
     AnimateSprites();
     BuildOamBuffer();
