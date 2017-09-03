@@ -2411,6 +2411,19 @@ void sub_804A6DC(u8 whichParty)
 }
 #endif
 
+void sub_804A740(u8 whichParty)
+{
+    int i;
+    for (i = 0; i < gUnknown_03004824->partyCounts[whichParty]; i ++)
+    {
+        gSprites[gUnknown_03004824->partyIcons[whichParty][i]].invisible = FALSE;
+        gSprites[gUnknown_03004824->partyIcons[whichParty][i]].pos1.x = gTradeMonSpriteCoords[6 * whichParty + i][0] * 8 + 14;
+        gSprites[gUnknown_03004824->partyIcons[whichParty][i]].pos1.y = gTradeMonSpriteCoords[6 * whichParty + i][1] * 8 - 12;
+        gSprites[gUnknown_03004824->partyIcons[whichParty][i]].pos2.x = 0;
+        gSprites[gUnknown_03004824->partyIcons[whichParty][i]].pos2.y = 0;
+    }
+}
+
 asm(".section .text.sub_804A96C");
 
 /*static*/ void sub_804A96C(struct UnkStructD *arg0, u8 left, u8 top, const u16 *tilemap, u8 width, u8 height, u16 sp8) {
