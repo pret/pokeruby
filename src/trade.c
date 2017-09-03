@@ -25,6 +25,9 @@
 #include "rom_8077ABC.h"
 #include "daycare.h"
 #include "event_data.h"
+#include "strings.h"
+#include "load_save.h"
+#include "save.h"
 #include "trade.h"
 
 #ifdef ENGLISH
@@ -116,7 +119,10 @@ struct UnkStructF {
 };
 
 struct TradeEwramSubstruct2 {
-    /*0x0000*/ u8 filler_0000[0x9c];
+    /*0x0000*/ u8 filler_0000;
+    /*0x0004*/ struct Window window;
+    /*0x0034*/ u8 unk_0034;
+    /*0x0035*/ u8 filler_0035[0x67];
     /*0x009c*/ u8 unk_009c;
     /*0x009d*/ u8 unk_009d;
     /*0x009e*/ u16 linkData[13];
@@ -124,6 +130,7 @@ struct TradeEwramSubstruct2 {
     /*0x00b9*/ u8 unk_00b9;
     /*0x00ba*/ u8 filler_00ba[3];
     /*0x00bd*/ u8 unk_00bd;
+    /*0x00c0*/ u32 unk_00c0;
 };
 
 struct TradeEwramStruct {
@@ -186,6 +193,7 @@ void sub_804A51C(u8, u8, u8, u8, u8, u8);
 /*static*/ void sub_804BB78(void);
 /*static*/ void sub_804D63C(void);
 /*static*/ bool8 sub_804B2B0(void);
+/*static*/ void sub_804E144(void);
 
 extern u8 gUnknown_020297D8[2];
 extern u8 *gUnknown_020296CC[13];
@@ -3221,6 +3229,137 @@ void sub_804DC18(void)
         gUnknown_03004828->unk_009d = 2;
     }
     RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+}
+
+void sub_804DC88(void)
+{
+    switch (gMain.state)
+    {
+        case 0:
+            gUnknown_03004828 = &ewram_2010000.unk_0f000;
+            gMain.state ++;
+            ZeroFillWindowRect(&gUnknown_03004828->window, 0, 0, 29, 19);
+            StringExpandPlaceholders(gStringVar4, gOtherText_LinkStandby2);
+            sub_8003460(&gUnknown_03004828->window, gStringVar4, gUnknown_03004828->unk_0034, 2, 15);
+            break;
+        case 1:
+            sub_80084A4();
+            gMain.state = 100;
+            gUnknown_03004828->unk_00c0 = 0;
+            break;
+        case 100:
+            if (++ gUnknown_03004828->unk_00c0 > 180)
+            {
+                gMain.state = 101;
+                gUnknown_03004828->unk_00c0 = 0;
+            }
+            if (sub_8007ECC())
+            {
+                gMain.state = 2;
+            }
+            break;
+        case 101:
+            if (sub_8007ECC())
+            {
+                gMain.state = 2;
+            }
+            break;
+        case 2:
+            gMain.state = 50;
+            ZeroFillWindowRect(&gUnknown_03004828->window, 0, 0, 29, 19);
+            sub_8003460(&gUnknown_03004828->window, gSystemText_Saving, gUnknown_03004828->unk_0034, 2, 15);
+            break;
+        case 50:
+            SetSecretBase2Field_9_AndHideBG();
+            IncrementGameStat(GAME_STAT_POKEMON_TRADES);
+            sub_8125D80();
+            gMain.state ++;
+            gUnknown_03004828->unk_00c0 = 0;
+            break;
+        case 51:
+            if (++ gUnknown_03004828->unk_00c0 == 5)
+            {
+                gMain.state ++;
+            }
+            break;
+        case 52:
+            if (sub_8125DA8())
+            {
+                ClearSecretBase2Field_9_2();
+                gMain.state = 4;
+            }
+            else
+            {
+                gUnknown_03004828->unk_00c0 = 0;
+                gMain.state = 51;
+            }
+            break;
+        case 4:
+            sub_8125DDC();
+            gMain.state = 40;
+            gUnknown_03004828->unk_00c0 = 0;
+            break;
+        case 40:
+            if (++ gUnknown_03004828->unk_00c0 > 50)
+            {
+                gUnknown_03004828->unk_00c0 = 0;
+                gMain.state = 41;
+            }
+            break;
+        case 41:
+            sub_80084A4();
+            gMain.state = 42;
+            break;
+        case 42:
+            if (sub_8007ECC())
+            {
+                sub_8125E04();
+                gSoftResetDisabled = FALSE;
+                gMain.state = 5;
+            }
+            break;
+        case 5:
+            if (++ gUnknown_03004828->unk_00c0 > 60)
+            {
+                gMain.state ++;
+                sub_80084A4();
+            }
+            break;
+        case 6:
+            if (sub_8007ECC())
+            {
+                BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+                gMain.state ++;
+            }
+            break;
+        case 7:
+            if (!gPaletteFade.active)
+            {
+                FadeOutBGM(3);
+                gMain.state ++;
+            }
+            break;
+        case 8:
+            if (IsBGMStopped() == TRUE)
+            {
+                sub_800832C();
+                gMain.state ++;
+            }
+            break;
+        case 9:
+            if (!gReceivedRemoteLinkPlayers)
+            {
+                SetMainCallback2(sub_804E144);
+            }
+            break;
+    }
+    if (!HasLinkErrorOccurred())
+    {
+        RunTasks();
+    }
     AnimateSprites();
     BuildOamBuffer();
     UpdatePaletteFade();
