@@ -31,6 +31,7 @@
 #include "script.h"
 #include "field_fadetransition.h"
 #include "decompress.h"
+#include "mail_data.h"
 #include "trade.h"
 
 #ifdef ENGLISH
@@ -199,6 +200,7 @@ void sub_804A51C(u8, u8, u8, u8, u8, u8);
 static void sub_804E144(void);
 static void sub_804E1A0(u8);
 /*static*/ void sub_804B790(void);
+static void sub_804DAD4(struct MailStruct *, const struct InGameTrade *);
 
 extern u8 gUnknown_020297D8[2];
 extern u8 *gUnknown_020296CC[13];
@@ -3169,26 +3171,76 @@ static bool8 sub_804ABF8(void)
 
 asm(".section .text.sub_804DAD4");
 
-/*static*/ void sub_804DAD4(struct UnkStructC *arg0, struct InGameTrade *trade) {
+void sub_804D948(u8 whichPlayerMon, u8 whichInGameTrade)
+{
+    const struct InGameTrade *inGameTrade = &gIngameTrades[whichInGameTrade];
+    u8 level = GetMonData(&gPlayerParty[whichPlayerMon], MON_DATA_LEVEL);
+
+    struct MailStruct mail;
+    u8 metLocation = 0xFE;
+    u8 isMail;
+    u8 *item;
+    struct Pokemon *pokemon = &gEnemyParty[0];
+
+    CreateMon(pokemon, inGameTrade->species, level, 32, TRUE, inGameTrade->personality, TRUE, inGameTrade->otId);
+
+    SetMonData(pokemon, MON_DATA_HP_IV, &inGameTrade->ivs[0]);
+    SetMonData(pokemon, MON_DATA_ATK_IV, &inGameTrade->ivs[1]);
+    SetMonData(pokemon, MON_DATA_DEF_IV, &inGameTrade->ivs[2]);
+    SetMonData(pokemon, MON_DATA_SPD_IV, &inGameTrade->ivs[3]);
+    SetMonData(pokemon, MON_DATA_SPATK_IV, &inGameTrade->ivs[4]);
+    SetMonData(pokemon, MON_DATA_SPDEF_IV, &inGameTrade->ivs[5]);
+    SetMonData(pokemon, MON_DATA_NICKNAME, inGameTrade->name);
+    SetMonData(pokemon, MON_DATA_OT_NAME, inGameTrade->otName);
+    SetMonData(pokemon, MON_DATA_OT_GENDER, &inGameTrade->otGender);
+    SetMonData(pokemon, MON_DATA_ALT_ABILITY, &inGameTrade->secondAbility);
+    SetMonData(pokemon, MON_DATA_BEAUTY, &inGameTrade->stats[1]);
+    SetMonData(pokemon, MON_DATA_CUTE, &inGameTrade->stats[2]);
+    SetMonData(pokemon, MON_DATA_COOL, &inGameTrade->stats[0]);
+    SetMonData(pokemon, MON_DATA_SMART, &inGameTrade->stats[3]);
+    SetMonData(pokemon, MON_DATA_TOUGH, &inGameTrade->stats[4]);
+    SetMonData(pokemon, MON_DATA_SHEEN, &inGameTrade->sheen);
+    SetMonData(pokemon, MON_DATA_MET_LOCATION, &metLocation);
+
+    isMail = FALSE;
+    if (inGameTrade->heldItem != ITEM_NONE)
+    {
+        if (ItemIsMail(inGameTrade->heldItem))
+        {
+            sub_804DAD4(&mail, inGameTrade);
+            gUnknown_02029700[0] = mail;
+            SetMonData(pokemon, MON_DATA_MAIL, &isMail);
+            SetMonData(pokemon, MON_DATA_HELD_ITEM, (u8 *)&inGameTrade->heldItem);
+        }
+        else
+        {
+            item = (u8 *)&inGameTrade->heldItem;
+            SetMonData(pokemon, MON_DATA_HELD_ITEM, item);
+        }
+    }
+    CalculateMonStats(&gEnemyParty[0]);
+}
+
+static void sub_804DAD4(struct MailStruct *mail, const struct InGameTrade *trade) {
     s32 i;
 
     for (i = 0; i < 9; i++)
     {
-        arg0->words[i] = gIngameTradeMail[trade->mailNum][i];
+        mail->words[i] = gIngameTradeMail[trade->mailNum][i];
     }
 
-    StringCopy(arg0->string, trade->otName);
+    StringCopy(mail->playerName, trade->otName);
 
 #if GERMAN
-    PadNameString(arg0->string, CHAR_SPACE);
+    PadNameString(mail->string, CHAR_SPACE);
 #endif
 
-    arg0->otId[0] = trade->otId >> 24;
-    arg0->otId[1] = trade->otId >> 16;
-    arg0->otId[2] = trade->otId >> 8;
-    arg0->otId[3] = trade->otId;
-    arg0->species = trade->species;
-    arg0->heldItem = trade->heldItem;
+    mail->trainerId[0] = trade->otId >> 24;
+    mail->trainerId[1] = trade->otId >> 16;
+    mail->trainerId[2] = trade->otId >> 8;
+    mail->trainerId[3] = trade->otId;
+    mail->species = trade->species;
+    mail->itemId = trade->heldItem;
 }
 
 u16 sub_804DB2C(void)
