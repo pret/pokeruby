@@ -5395,38 +5395,6 @@ _0804DAD0: .4byte gEnemyParty
 
 .section .text.sub_804DB2C
 
-	thumb_func_start sub_804DB2C
-sub_804DB2C: @ 804DB2C
-	push {r4-r6,lr}
-	ldr r6, _0804DB58 @ =gSpecialVar_0x8005
-	ldrh r0, [r6]
-	movs r5, 0x64
-	muls r0, r5
-	ldr r4, _0804DB5C @ =gPlayerParty
-	adds r0, r4
-	movs r1, 0x2D
-	bl GetMonData
-	cmp r0, 0
-	bne _0804DB60
-	ldrh r0, [r6]
-	muls r0, r5
-	adds r0, r4
-	movs r1, 0xB
-	bl GetMonData
-	lsls r0, 16
-	lsrs r0, 16
-	b _0804DB62
-	.align 2, 0
-_0804DB58: .4byte gSpecialVar_0x8005
-_0804DB5C: .4byte gPlayerParty
-_0804DB60:
-	movs r0, 0
-_0804DB62:
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_804DB2C
-
 	thumb_func_start sub_804DB68
 sub_804DB68: @ 804DB68
 	push {lr}

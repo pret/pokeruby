@@ -24,6 +24,7 @@
 #include "rom4.h"
 #include "rom_8077ABC.h"
 #include "daycare.h"
+#include "event_data.h"
 #include "trade.h"
 
 #ifdef ENGLISH
@@ -3154,4 +3155,11 @@ asm(".section .text.sub_804DAD4");
     arg0->otId[3] = trade->otId;
     arg0->species = trade->species;
     arg0->heldItem = trade->heldItem;
+}
+
+u16 sub_804DB2C(void)
+{
+    if (GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_IS_EGG))
+        return SPECIES_NONE;
+    return GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_SPECIES);
 }
