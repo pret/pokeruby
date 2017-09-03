@@ -3172,6 +3172,27 @@ static bool8 sub_804ABF8(void)
 
 asm(".section .text.sub_804DAD4");
 
+void sub_804D6BC(struct Sprite *sprite)
+{
+    sprite->pos1.y += sprite->data0 / 10;
+    sprite->data5 += sprite->data1;
+    sprite->pos1.x = sprite->data5 / 10;
+    if (sprite->pos1.y > 0x4c)
+    {
+        sprite->pos1.y = 0x4c;
+        sprite->data0 = -(sprite->data0 * sprite->data2) / 100;
+        sprite->data3 ++;
+    }
+    if (sprite->pos1.x == 0x78)
+        sprite->data1 = 0;
+    sprite->data0 += sprite->data4;
+    if (sprite->data3 == 4)
+    {
+        sprite->data7 = 1;
+        sprite->callback = SpriteCallbackDummy;
+    }
+}
+
 void sub_804D738(struct Sprite *sprite)
 {
     sprite->pos2.y += gTradeBallVerticalVelocityTable[sprite->data0];
