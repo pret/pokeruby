@@ -5395,57 +5395,6 @@ _0804DAD0: .4byte gEnemyParty
 
 .section .text.sub_804DB2C
 
-	thumb_func_start sub_804E174
-sub_804E174: @ 804E174
-	push {lr}
-	sub sp, 0x4
-	bl ScriptContext2_Enable
-	ldr r0, _0804E19C @ =sub_804E1A0
-	movs r1, 0xA
-	bl CreateTask
-	movs r0, 0x1
-	negs r0, r0
-	movs r1, 0
-	str r1, [sp]
-	movs r2, 0
-	movs r3, 0x10
-	bl BeginNormalPaletteFade
-	add sp, 0x4
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0804E19C: .4byte sub_804E1A0
-	thumb_func_end sub_804E174
-
-	thumb_func_start sub_804E1A0
-sub_804E1A0: @ 804E1A0
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	ldr r0, _0804E1CC @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _0804E1C4
-	ldr r0, _0804E1D0 @ =sub_804B790
-	bl SetMainCallback2
-	ldr r1, _0804E1D4 @ =gFieldCallback
-	ldr r0, _0804E1D8 @ =sub_8080990
-	str r0, [r1]
-	adds r0, r4, 0
-	bl DestroyTask
-_0804E1C4:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0804E1CC: .4byte gPaletteFade
-_0804E1D0: .4byte sub_804B790
-_0804E1D4: .4byte gFieldCallback
-_0804E1D8: .4byte sub_8080990
-	thumb_func_end sub_804E1A0
-
 	thumb_func_start sub_804E1DC
 sub_804E1DC: @ 804E1DC
 	push {r4,r5,lr}

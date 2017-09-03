@@ -28,6 +28,8 @@
 #include "strings.h"
 #include "load_save.h"
 #include "save.h"
+#include "script.h"
+#include "field_fadetransition.h"
 #include "trade.h"
 
 #ifdef ENGLISH
@@ -35,7 +37,7 @@
 asm(".set sub_804A96C_alt, sub_804A96C");
 #endif
 
-#define Trade_SendData(ptr) SendBlock(bitmask_all_link_players_but_self(), ptr->linkData, 20)
+#define Trade_SendData(ptr) (SendBlock(bitmask_all_link_players_but_self(), ptr->linkData, 20))
 
 struct InGameTrade {
     /*0x00*/ u8 name[11];
@@ -194,6 +196,8 @@ void sub_804A51C(u8, u8, u8, u8, u8, u8);
 /*static*/ void sub_804D63C(void);
 /*static*/ bool8 sub_804B2B0(void);
 static void sub_804E144(void);
+static void sub_804E1A0(u8);
+/*static*/ void sub_804B790(void);
 
 extern u8 gUnknown_020297D8[2];
 extern u8 *gUnknown_020296CC[13];
@@ -3373,4 +3377,21 @@ static void sub_804E144(void)
     AnimateSprites();
     BuildOamBuffer();
     UpdatePaletteFade();
+}
+
+void sub_804E174(void)
+{
+    ScriptContext2_Enable();
+    CreateTask(sub_804E1A0, 10);
+    BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+}
+
+static void sub_804E1A0(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        SetMainCallback2(sub_804B790);
+        gFieldCallback = sub_8080990;
+        DestroyTask(taskId);
+    }
 }
