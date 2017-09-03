@@ -2619,6 +2619,11 @@ static bool8 sub_804ABF8(void)
     }
 }
 
+/*static*/ void sub_804ACD8(const u8 *src, u8 *dest, u8 a2)
+{
+    sub_804AFB8(&gWindowConfig_81E725C, dest, src, a2);
+}
+
 asm(".section .text.sub_804DAD4");
 
 /*static*/ void sub_804DAD4(struct UnkStructC *arg0, struct InGameTrade *trade) {

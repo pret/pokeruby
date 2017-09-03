@@ -495,22 +495,6 @@ _0804A2B0: .4byte gUnknown_03004824
 
     .section .text.sub_804A9F4
 
-	thumb_func_start sub_804ACD8
-sub_804ACD8: @ 804ACD8
-	push {r4,lr}
-	adds r4, r0, 0
-	lsls r3, r2, 24
-	lsrs r3, 24
-	ldr r0, _0804ACF0 @ =gWindowConfig_81E725C
-	adds r2, r4, 0
-	bl sub_804AFB8
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0804ACF0: .4byte gWindowConfig_81E725C
-	thumb_func_end sub_804ACD8
-
 	thumb_func_start sub_804ACF4
 sub_804ACF4: @ 804ACF4
 	push {r4-r7,lr}
