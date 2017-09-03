@@ -148,7 +148,7 @@ static void sub_804A938(struct UnkStructD *);
 static void sub_804A9F4(u8);
 static void sub_804AA00(u8);
 static void sub_8049E9C(u8);
-/*static*/ void sub_804AADC(u8, u8);
+static void sub_804AADC(u16, u8);
 /*static*/ void sub_804A80C(void);
 static u8 sub_80499F0(const u8 *, u8, u8);
 static void sub_804A840(u8);
@@ -2531,6 +2531,21 @@ static void sub_804AA88(void)
         gUnknown_03004824->unk_08dc[i].unk_00 = 0;
         gUnknown_03004824->unk_08dc[i].unk_02 = 0;
         gUnknown_03004824->unk_08dc[i].unk_04 |= 0xff;
+    }
+}
+
+static void sub_804AADC(u16 a0, u8 a1)
+{
+    int i;
+    for (i = 0; i < 4; i ++)
+    {
+        if (gUnknown_03004824->unk_08dc[i].unk_00 == 0)
+        {
+            gUnknown_03004824->unk_08dc[i].unk_02 = a0;
+            gUnknown_03004824->unk_08dc[i].unk_04 = a1;
+            gUnknown_03004824->unk_08dc[i].unk_00 = 1;
+            break;
+        }
     }
 }
 

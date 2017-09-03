@@ -495,53 +495,6 @@ _0804A2B0: .4byte gUnknown_03004824
 
     .section .text.sub_804A9F4
 
-	thumb_func_start sub_804AADC
-sub_804AADC: @ 804AADC
-	push {r4-r7,lr}
-	lsls r0, 16
-	lsrs r5, r0, 16
-	lsls r1, 24
-	lsrs r6, r1, 24
-	movs r3, 0
-	ldr r4, _0804AB18 @ =gUnknown_03004824
-	mov r12, r4
-	ldr r7, _0804AB1C @ =0x000008dc
-_0804AAEE:
-	mov r1, r12
-	ldr r0, [r1]
-	lsls r1, r3, 3
-	adds r2, r0, r1
-	adds r0, r2, r7
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _0804AB24
-	ldr r3, _0804AB20 @ =0x000008de
-	adds r0, r2, r3
-	strh r5, [r0]
-	adds r3, 0x2
-	adds r0, r2, r3
-	strb r6, [r0]
-	ldr r0, [r4]
-	adds r0, r1
-	ldr r1, _0804AB1C @ =0x000008dc
-	adds r0, r1
-	movs r1, 0x1
-	strb r1, [r0]
-	b _0804AB2A
-	.align 2, 0
-_0804AB18: .4byte gUnknown_03004824
-_0804AB1C: .4byte 0x000008dc
-_0804AB20: .4byte 0x000008de
-_0804AB24:
-	adds r3, 0x1
-	cmp r3, 0x3
-	ble _0804AAEE
-_0804AB2A:
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_804AADC
-
 	thumb_func_start sub_804AB30
 sub_804AB30: @ 804AB30
 	push {r4,r5,lr}
