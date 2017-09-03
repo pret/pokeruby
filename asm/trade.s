@@ -495,50 +495,6 @@ _0804A2B0: .4byte gUnknown_03004824
 
     .section .text.sub_804A9F4
 
-	thumb_func_start sub_804AA88
-sub_804AA88: @ 804AA88
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	movs r3, 0
-	ldr r5, _0804AAD0 @ =gUnknown_03004824
-	ldr r0, _0804AAD4 @ =0x000008dc
-	mov r8, r0
-	movs r4, 0
-	ldr r2, _0804AAD8 @ =0x000008de
-	mov r12, r2
-	movs r7, 0x8E
-	lsls r7, 4
-	movs r6, 0xFF
-_0804AAA2:
-	ldr r0, [r5]
-	lsls r2, r3, 3
-	adds r0, r2
-	add r0, r8
-	strb r4, [r0]
-	ldr r1, [r5]
-	adds r1, r2
-	mov r2, r12
-	adds r0, r1, r2
-	strh r4, [r0]
-	adds r1, r7
-	ldrb r0, [r1]
-	orrs r0, r6
-	strb r0, [r1]
-	adds r3, 0x1
-	cmp r3, 0x3
-	ble _0804AAA2
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0804AAD0: .4byte gUnknown_03004824
-_0804AAD4: .4byte 0x000008dc
-_0804AAD8: .4byte 0x000008de
-	thumb_func_end sub_804AA88
-
 	thumb_func_start sub_804AADC
 sub_804AADC: @ 804AADC
 	push {r4-r7,lr}

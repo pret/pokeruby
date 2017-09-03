@@ -62,6 +62,12 @@ struct UnkStructD {
     /*0x12*/ u16 unk_12[0x400];
 };
 
+struct UnkStructE {
+    /*0x00*/ u8 unk_00;
+    /*0x02*/ u16 unk_02;
+    /*0x04*/ u8 unk_04;
+};
+
 struct TradeEwramSubstruct {
     /*0x0000*/ u8 unk_0000;
     /*0x0001*/ u8 unk_0001;
@@ -95,7 +101,8 @@ struct TradeEwramSubstruct {
     /*0x00b5*/ u8 unk_00b5[7];
     /*0x00bc*/ u8 filler_00bc[12];
     /*0x00c8*/ struct UnkStructD unk_00c8;
-    /*0x08dc*/ u8 filler_04dc[0x724];
+    /*0x08dc*/ struct UnkStructE unk_08dc[4];
+    /*0x08fc*/ u8 filler_08fc[0x704];
 };
 
 struct UnkStructF {
@@ -116,7 +123,7 @@ static void sub_8047EC0(void);
 /*static*/ void sub_804AFB8(const struct WindowConfig *, u8 *, const u8 *, u8);
 /*static*/ void sub_804ACD8(const u8 *, u8 *, u8);
 static void nullsub_5(u8, u8);
-/*static*/ void sub_804AA88(void);
+static void sub_804AA88(void);
 static void sub_804A964(struct UnkStructD *, void *);
 static void sub_80489F4(void);
 /*static*/ void sub_804AA0C(u8);
@@ -2514,6 +2521,17 @@ static void sub_804AA00(u8 unused)
 {
     DrawTextWindow(&gUnknown_03004824->window, gTradeMessageWindowRects[a0][0], gTradeMessageWindowRects[a0][1], gTradeMessageWindowRects[a0][2], gTradeMessageWindowRects[a0][3]);
     sub_8003460(&gUnknown_03004824->window, gUnknown_0820C2F0[a0], 0x180 + gUnknown_03004824->unk_007a, gTradeMessageWindowRects[a0][0] + 1, gTradeMessageWindowRects[a0][1] + 1);
+}
+
+static void sub_804AA88(void)
+{
+    int i;
+    for (i = 0; i < 4; i ++)
+    {
+        gUnknown_03004824->unk_08dc[i].unk_00 = 0;
+        gUnknown_03004824->unk_08dc[i].unk_02 = 0;
+        gUnknown_03004824->unk_08dc[i].unk_04 |= 0xff;
+    }
 }
 
 asm(".section .text.sub_804DAD4");
