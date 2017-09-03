@@ -81,7 +81,6 @@ SECTIONS {
         src/trade.o(.text);
         asm/trade.o(.text);
         src/trade.o(.text.sub_804DAD4);
-        asm/trade.o(.text.sub_804DB2C);
         src/berry_blender.o(.text);
         src/play_time.o(.text);
         src/new_game.o(.text);

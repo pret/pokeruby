@@ -30,6 +30,7 @@
 #include "save.h"
 #include "script.h"
 #include "field_fadetransition.h"
+#include "decompress.h"
 #include "trade.h"
 
 #ifdef ENGLISH
@@ -3406,4 +3407,17 @@ static void sub_804E1A0(u8 taskId)
     }
     if (numRibbons != 0)
         FlagSet(SYS_RIBBON_GET);
+}
+
+void sub_804E22C(void)
+{
+    const u16 *src;
+    u16 *dest;
+    LZDecompressVram(gUnknown_08D00000, (u8 *)VRAM);
+    CpuCopy16(gUnknown_08D00524, ewram, 0x1000);
+    src = (const u16 *)ewram;
+    dest = (u16 *)(BG_SCREEN_ADDR(5));
+    DmaCopy16(3, src, dest, 0x500)
+    LoadCompressedPalette(gUnknown_08D004E0, 0, 32);
+    REG_BG1CNT = BGCNT_PRIORITY(2) | BGCNT_SCREENBASE(5);
 }

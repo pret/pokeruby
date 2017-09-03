@@ -5393,49 +5393,4 @@ _0804DAC0:
 _0804DAD0: .4byte gEnemyParty
 	thumb_func_end sub_804D948
 
-.section .text.sub_804DB2C
-
-	thumb_func_start sub_804E22C
-sub_804E22C: @ 804E22C
-	push {r4,lr}
-	ldr r0, _0804E26C @ =gUnknown_08D00000
-	movs r1, 0xC0
-	lsls r1, 19
-	bl LZDecompressVram
-	ldr r0, _0804E270 @ =gUnknown_08D00524
-	ldr r4, _0804E274 @ =0x02000000
-	movs r2, 0x80
-	lsls r2, 4
-	adds r1, r4, 0
-	bl CpuSet
-	ldr r1, _0804E278 @ =0x06002800
-	ldr r0, _0804E27C @ =0x040000d4
-	str r4, [r0]
-	str r1, [r0, 0x4]
-	ldr r1, _0804E280 @ =0x80000280
-	str r1, [r0, 0x8]
-	ldr r0, [r0, 0x8]
-	ldr r0, _0804E284 @ =gUnknown_08D004E0
-	movs r1, 0
-	movs r2, 0x20
-	bl LoadCompressedPalette
-	ldr r1, _0804E288 @ =REG_BG1CNT
-	ldr r2, _0804E28C @ =0x00000502
-	adds r0, r2, 0
-	strh r0, [r1]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0804E26C: .4byte gUnknown_08D00000
-_0804E270: .4byte gUnknown_08D00524
-_0804E274: .4byte 0x02000000
-_0804E278: .4byte 0x06002800
-_0804E27C: .4byte 0x040000d4
-_0804E280: .4byte 0x80000280
-_0804E284: .4byte gUnknown_08D004E0
-_0804E288: .4byte REG_BG1CNT
-_0804E28C: .4byte 0x00000502
-	thumb_func_end sub_804E22C
-
 	.align 2, 0 @ Don't pad with nop.
