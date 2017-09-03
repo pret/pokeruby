@@ -196,12 +196,12 @@ static void sub_804D7AC(struct Sprite *);
 /*static*/ bool8 sub_804C29C(void);
 /*static*/ void sub_804DC18(void);
 /*static*/ void sub_804BB78(void);
-/*static*/ void sub_804D63C(void);
 /*static*/ bool8 sub_804B2B0(void);
 static void sub_804E144(void);
 static void sub_804E1A0(u8);
 /*static*/ void sub_804B790(void);
 static void sub_804DAD4(struct MailStruct *, const struct InGameTrade *);
+void sub_804D588(void);
 
 extern u8 gUnknown_020297D8[2];
 extern u8 *gUnknown_020296CC[13];
@@ -3171,6 +3171,33 @@ static bool8 sub_804ABF8(void)
 }
 
 asm(".section .text.sub_804DAD4");
+
+static void sub_804D63C(void)
+{
+    u8 blockReceivedStatus;
+    sub_804B2B0();
+    blockReceivedStatus = GetBlockReceivedStatus();
+    if (blockReceivedStatus & 0x01)
+    {
+        if (gBlockRecvBuffer[0][0] == 0xdcba)
+        {
+            SetMainCallback2(sub_804D588);
+        }
+        if (gBlockRecvBuffer[0][0] == 0xabcd)
+        {
+            gUnknown_03004828->unk_009c = 1;
+        }
+        ResetBlockReceivedFlag(0);
+    }
+    if (blockReceivedStatus & 0x02)
+    {
+        if (gBlockRecvBuffer[1][0] == 0xabcd)
+        {
+            gUnknown_03004828->unk_009d = 1;
+        }
+        ResetBlockReceivedFlag(1);
+    }
+}
 
 void sub_804D6BC(struct Sprite *sprite)
 {
