@@ -102,8 +102,8 @@ struct TradeEwramSubstruct {
     /*0x008b*/ u8 unk_008b;
     /*0x008c*/ u16 linkData[20];
     /*0x00b4*/ u8 unk_00b4;
-    /*0x00b5*/ u8 unk_00b5[7];
-    /*0x00bc*/ u8 filler_00bc[12];
+    /*0x00b5*/ u8 unk_00b5[11];
+    /*0x00c0*/ u8 filler_00c0[8];
     /*0x00c8*/ struct UnkStructD unk_00c8;
     /*0x08dc*/ struct UnkStructE unk_08dc[4];
     /*0x08fc*/ u8 filler_08fc[0x704];
@@ -115,12 +115,24 @@ struct UnkStructF {
     u8 filler_000a[0xff6];
 };
 
+struct TradeEwramSubstruct2 {
+    /*0x0000*/ u8 filler_0000[0x9e];
+    /*0x009e*/ u16 unk_009e;
+    /*0x00a0*/ u8 unk_00a0[0x18];
+    /*0x00b8*/ u8 unk_00b8;
+    /*0x00b9*/ u8 unk_00b9;
+    /*0x00ba*/ u8 filler_00ba[3];
+    /*0x00bd*/ u8 unk_00bd;
+};
+
 struct TradeEwramStruct {
     /*0x00000*/ u8 filler_00000[0x7000];
     /*0x07000*/ struct TradeEwramSubstruct unk_07000;
     /*0x08000*/ struct UnkStructF unk_08000;
     /*0x09000*/ u8 filler_09000[0x4000];
     /*0x0d000*/ u8 tileBuffers[13][256];
+    /*0x0dd00*/ u8 filler_0dd00[0x1300];
+    /*0x0f000*/ struct TradeEwramSubstruct2 unk_0f000;
 };
 
 static void sub_8047EC0(void);
@@ -166,10 +178,17 @@ void sub_804A33C(u8 *, u8, u8);
 static
 #endif
 void sub_804A51C(u8, u8, u8, u8, u8, u8);
+/*static*/ void sub_804D948(u8, u8);
+/*static*/ void sub_804BA94(u8, u8);
+/*static*/ bool8 sub_804C29C(void);
+/*static*/ void sub_804DC18(void);
+/*static*/ void sub_804BB78(void);
+/*static*/ void sub_804D63C(void);
 
 extern u8 gUnknown_020297D8[2];
 extern u8 *gUnknown_020296CC[13];
 extern struct TradeEwramSubstruct *gUnknown_03004824;
+extern struct TradeEwramSubstruct2 *gUnknown_03004828;
 extern u8 gUnknown_03000508;
 extern struct MailStruct gUnknown_02029700[16];
 
@@ -3162,4 +3181,28 @@ u16 sub_804DB2C(void)
     if (GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_IS_EGG))
         return SPECIES_NONE;
     return GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_SPECIES);
+}
+
+void sub_804DB68(void)
+{
+    sub_804D948(gSpecialVar_0x8005, gSpecialVar_0x8004);
+}
+
+void sub_804DB84(void)
+{
+    if (sub_804C29C() == TRUE)
+    {
+        DestroySprite(&gSprites[gUnknown_03004828->unk_00b8]);
+        FreeSpriteOamMatrix(&gSprites[gUnknown_03004828->unk_00b9]);
+        sub_804BA94(gUnknown_020297D8[0], gUnknown_020297D8[1] % 6);
+        gUnknown_03004828->unk_009e = 0xabcd;
+        gUnknown_03004828->unk_00bd = 1;
+        SetMainCallback2(sub_804DC18);
+    }
+    sub_804BB78();
+    sub_804D63C();
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
 }
