@@ -28,6 +28,7 @@
 
 #ifdef ENGLISH
 #define sub_804A96C_alt sub_804A96C
+asm(".set sub_804A96C_alt, sub_804A96C");
 #endif
 
 #define Trade_SendData() SendBlock(bitmask_all_link_players_but_self(), gUnknown_03004824->linkData, ARRAY_COUNT(gUnknown_03004824->linkData))
@@ -144,7 +145,7 @@ static void sub_804A940(struct UnkStructD *);
 /*static*/ void sub_804B41C(void);
 static void sub_8049DE0(void);
 static void sub_804AB30(void);
-/*static*/ void sub_8049ED4(u8);
+static void sub_8049ED4(u8);
 static void sub_804A6DC(u8);
 static void sub_804A938(struct UnkStructD *);
 static void sub_804A9F4(u8);
@@ -156,6 +157,14 @@ static u8 sub_80499F0(const u8 *, u8, u8);
 static void sub_804A840(u8);
 /*static*/ u8 sub_804A2B4(u8 *, u8, u8);
 /*static*/ void sub_804A96C_alt(struct UnkStructD *, u8, u8, const u16 *, u8, u8, u16);
+#ifdef NONMATCHING
+static
+#endif
+void sub_804A33C(u8 *, u8, u8);
+#ifdef NONMATCHING
+static
+#endif
+void sub_804A51C(u8, u8, u8, u8, u8, u8);
 
 extern u8 gUnknown_020297D8[2];
 extern u8 *gUnknown_020296CC[13];
@@ -2036,66 +2045,559 @@ static void sub_8049E9C(u8 a0)
 }
 
 // TODO: Figure out what the f**k is going on here
-//static void sub_8049ED4(u8 a0)
-//{
-//    struct Pokemon pokemon;
-//    u8 i;
-//    u8 temp0 = gUnknown_03004824->unk_0082[a0];
-//    u8 sp_plus_6c = temp0 < PARTY_SIZE ? 1 : 0;
-//    u8 r8 = temp0 % 6;
-//    s8 stringLength;
-//    u8 string[50];
-//
-//    switch (gUnknown_03004824->unk_0080[a0])
-//    {
-//        case 1:
-//            for (i = 0; i < gUnknown_03004824->partyCounts[a0]; i ++)
-//            {
-//                gSprites[gUnknown_03004824->partyIcons[sp_plus_6c][i]].invisible = TRUE;
-//            }
-//            gSprites[gUnknown_03004824->partyIcons[sp_plus_6c][r8]].invisible = FALSE;
-//            gSprites[gUnknown_03004824->partyIcons[sp_plus_6c][r8]].data0 = 20;
-//            gSprites[gUnknown_03004824->partyIcons[sp_plus_6c][r8]].data2 = (gTradeMonSpriteCoords[sp_plus_6c][0] + gTradeMonSpriteCoords[sp_plus_6c][1]) / 2 * 8 + 14;
-//            gSprites[gUnknown_03004824->partyIcons[sp_plus_6c][r8]].data4 = gTradeMonSpriteCoords[sp_plus_6c][1] * 8 - 12;
-//            oamt_set_x3A_32(&gSprites[gUnknown_03004824->partyIcons[sp_plus_6c][r8]], sub_809D62C);
-//            gUnknown_03004824->unk_0080[a0] ++;
-//            sub_8078A34(&gSprites[gUnknown_03004824->partyIcons[sp_plus_6c][r8]]);
-//            HandleDestroyMenuCursors();
-//            FillWindowRect_DefaultPalette(&gUnknown_03004824->window, 0, gUnknown_0820C330[sp_plus_6c][1], 0, gUnknown_0820C330[sp_plus_6c][1], 19);
-//            sub_804A96C_alt(&gUnknown_03004824->unk_00c8, 15 * sp_plus_6c, 0, gTradePartyBoxTilemap, 15, 17, 0);
-//            if (sp_plus_6c == 0)
-//            {
-//                sub_804A80C();
-//            }
-//            break;
-//        case 2:
-//            if (gSprites[gUnknown_03004824->partyIcons[sp_plus_6c][r8]].callback == sub_809D62C)
-//            {
-//                gUnknown_03004824->unk_0080[a0] = 3;
-//            }
-//            break;
-//        case 3:
-//            sub_804A96C_alt(&gUnknown_03004824->unk_00c8, 15 * sp_plus_6c, 0, gTradePartyBoxTilemap, 15, 11, 0);
-//            gSprites[gUnknown_03004824->partyIcons[sp_plus_6c][r8]].pos1.x = (gTradeMonSpriteCoords[sp_plus_6c][0] + gTradeMonSpriteCoords[sp_plus_6c][1]) / 2 * 8 + 14;
-//            gSprites[gUnknown_03004824->partyIcons[sp_plus_6c][r8]].pos1.y = gTradeMonSpriteCoords[sp_plus_6c][1] * 8 - 12;
-//            gSprites[gUnknown_03004824->partyIcons[sp_plus_6c][r8]].pos2.x = 0;
-//            gSprites[gUnknown_03004824->partyIcons[sp_plus_6c][r8]].pos2.y = 0;
-//            stringLength = sub_804A2B4(&string[6], sp_plus_6c, r8);
-//            string[0] = 0xFC;
-//            string[1] = 0x06;
-//            string[2] = 0x04;
-//            string[3] = 0xFC;
-//            string[4] = 0x11;
-//            string[5] = (64 - stringLength) / 2;
-//            sub_8003460(&gUnknown_03004824->window, string, sp_plus_6c * 192 + gUnknown_03004824->unk_007a, gUnknown_0820C334[sp_plus_6c][0], gUnknown_0820C334[sp_plus_6c][1]);
-//            sub_804A33C()
-//            break;
-//        case 4:
-//            break;
-//    }
-//}
+#ifdef NONMATCHING
+static void sub_8049ED4(u8 a0)
+{
+    u8 i;
+    s8 stringLength;
+    u8 whichParty = 1;
+    u8 whichPokemon;
+    u8 string1[40];
+    u8 string2[56];
+    u8 temp0 = gUnknown_03004824->unk_0082[a0];
+    if (temp0 < PARTY_SIZE)
+        whichParty = 0;
+    whichPokemon = temp0 % PARTY_SIZE;
 
-asm(".section .text.sub_804A2B4");
+    switch (gUnknown_03004824->unk_0080[a0])
+    {
+        case 1:
+            for (i = 0; i < gUnknown_03004824->partyCounts[a0]; i ++)
+            {
+                gSprites[gUnknown_03004824->partyIcons[whichParty][i]].invisible = TRUE;
+            }
+            gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]].invisible = FALSE;
+            gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]].data0 = 20;
+            gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]].data2 = (gTradeMonSpriteCoords[6 * whichParty + whichPokemon][0] + gTradeMonSpriteCoords[6 * whichParty + whichPokemon + 1][0]) / 2 * 8 + 14;
+            gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]].data4 = gTradeMonSpriteCoords[6 * whichParty + whichPokemon][1] * 8 - 12;
+            oamt_set_x3A_32(&gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]], sub_809D62C);
+            gUnknown_03004824->unk_0080[a0] ++;
+            sub_8078A34(&gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]]);
+            HandleDestroyMenuCursors();
+            FillWindowRect_DefaultPalette(&gUnknown_03004824->window, 0, gUnknown_0820C330[whichParty][0], 0, gUnknown_0820C330[whichParty][1], 19);
+            sub_804A96C_alt(&gUnknown_03004824->unk_00c8, 15 * a0, 0, gTradePartyBoxTilemap, 15, 17, 0);
+            if (whichParty == 0)
+            {
+                sub_804A80C();
+            }
+            break;
+        case 2:
+            if (gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]].callback == sub_809D62C)
+            {
+                gUnknown_03004824->unk_0080[a0] = 3;
+            }
+            break;
+        case 3:
+            sub_804A96C_alt(&gUnknown_03004824->unk_00c8, 15 * whichParty, 0, gTradePartyBoxTilemap, 15, 17, 0);
+            gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]].pos1.x = (gTradeMonSpriteCoords[6 * whichParty + whichPokemon ][0] + gTradeMonSpriteCoords[6 * whichParty + whichPokemon + 1][0]) / 2 * 8 + 14;
+            gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]].pos1.y = gTradeMonSpriteCoords[6 * whichParty + whichPokemon ][1] * 8 - 12;
+            gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]].pos2.x = 0;
+            gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]].pos2.y = 0;
+            stringLength = sub_804A2B4(string1 + 6, whichParty, whichPokemon);
+            string1[0] = 0xFC;
+            string1[1] = 0x06;
+            string1[2] = 0x04;
+            string1[3] = 0xFC;
+            string1[4] = 0x11;
+            string1[5] = (64 - stringLength) / 2;
+            sub_8003460(&gUnknown_03004824->window, string1, gUnknown_03004824->unk_007a + whichParty * 6 * 32, gUnknown_0820C334[whichParty][0], gUnknown_0820C334[whichParty][1]);
+            sub_804A33C(string2, whichParty, whichPokemon);
+            sub_8003460(&gUnknown_03004824->window, gOtherText_Terminator2, gUnknown_03004824->unk_007a + whichParty * 6 * 32 + 32, gUnknown_0820C334[whichParty + 1][0], gUnknown_0820C334[whichParty + 1][1] + 1);
+            sub_8003460(&gUnknown_03004824->window, string2, gUnknown_03004824->unk_007a + whichParty * 6 * 32 + 38, gUnknown_0820C334[whichParty + 1][0], gUnknown_0820C334[whichParty + 1][1] + 1);
+            gUnknown_03004824->unk_0080[a0] ++;
+            break;
+        case 4:
+            sub_804ACD8(gUnknown_0820C14C[5], (u8 *)(BG_CHAR_ADDR(4) + 32 * gUnknown_03004824->unk_007e), 20);
+            sub_804A51C(a0, whichPokemon, gUnknown_0820C3D1[a0][0] + 4, gUnknown_0820C3D1[a0][1] + 1, gUnknown_0820C3D1[a0][0], gUnknown_0820C3D1[a0][1]);
+            gUnknown_03004824->unk_0080[a0] ++;
+            break;
+    }
+}
+#else
+__attribute__((naked))
+static void sub_8049ED4(u8 a0)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                    "\tmov r7, r10\n"
+                    "\tmov r6, r9\n"
+                    "\tmov r5, r8\n"
+                    "\tpush {r5-r7}\n"
+                    "\tsub sp, 0x74\n"
+                    "\tlsls r0, 24\n"
+                    "\tlsrs r0, 24\n"
+                    "\tmov r10, r0\n"
+                    "\tldr r0, _08049F24 @ =gUnknown_03004824\n"
+                    "\tldr r5, [r0]\n"
+                    "\tadds r0, r5, 0\n"
+                    "\tadds r0, 0x82\n"
+                    "\tadd r0, r10\n"
+                    "\tldrb r0, [r0]\n"
+                    "\tmovs r1, 0x1\n"
+                    "\tstr r1, [sp, 0x6C]\n"
+                    "\tcmp r0, 0x5\n"
+                    "\tbhi _08049EFE\n"
+                    "\tmovs r2, 0\n"
+                    "\tstr r2, [sp, 0x6C]\n"
+                    "_08049EFE:\n"
+                    "\tmovs r1, 0x6\n"
+                    "\tbl __umodsi3\n"
+                    "\tlsls r0, 24\n"
+                    "\tlsrs r0, 24\n"
+                    "\tmov r8, r0\n"
+                    "\tadds r0, r5, 0\n"
+                    "\tadds r0, 0x80\n"
+                    "\tmov r1, r10\n"
+                    "\tadds r3, r0, r1\n"
+                    "\tldrb r0, [r3]\n"
+                    "\tcmp r0, 0x2\n"
+                    "\tbne _08049F1A\n"
+                    "\tb _0804A0AC\n"
+                    "_08049F1A:\n"
+                    "\tcmp r0, 0x2\n"
+                    "\tbgt _08049F28\n"
+                    "\tcmp r0, 0x1\n"
+                    "\tbeq _08049F36\n"
+                    "\tb _0804A294\n"
+                    "\t.align 2, 0\n"
+                    "_08049F24: .4byte gUnknown_03004824\n"
+                    "_08049F28:\n"
+                    "\tcmp r0, 0x3\n"
+                    "\tbne _08049F2E\n"
+                    "\tb _0804A0E4\n"
+                    "_08049F2E:\n"
+                    "\tcmp r0, 0x4\n"
+                    "\tbne _08049F34\n"
+                    "\tb _0804A244\n"
+                    "_08049F34:\n"
+                    "\tb _0804A294\n"
+                    "_08049F36:\n"
+                    "\tmovs r4, 0\n"
+                    "\tadds r0, r5, 0\n"
+                    "\tadds r0, 0x42\n"
+                    "\tadd r0, r10\n"
+                    "\tldr r7, _0804A094 @ =gSprites\n"
+                    "\tldr r2, [sp, 0x6C]\n"
+                    "\tlsls r2, 1\n"
+                    "\tmov r9, r2\n"
+                    "\tldr r3, _0804A098 @ =gTradeMonSpriteCoords\n"
+                    "\tmov r12, r3\n"
+                    "\tmov r5, r10\n"
+                    "\tlsls r5, 4\n"
+                    "\tstr r5, [sp, 0x70]\n"
+                    "\tldrb r0, [r0]\n"
+                    "\tcmp r4, r0\n"
+                    "\tbcs _08049F8E\n"
+                    "\tadds r6, r7, 0\n"
+                    "\tldr r2, _0804A09C @ =gUnknown_03004824\n"
+                    "\tldr r0, [sp, 0x6C]\n"
+                    "\tadd r0, r9\n"
+                    "\tlsls r3, r0, 1\n"
+                    "\tmovs r5, 0x4\n"
+                    "_08049F62:\n"
+                    "\tldr r0, [r2]\n"
+                    "\tadds r1, r4, r3\n"
+                    "\tadds r0, 0x34\n"
+                    "\tadds r0, r1\n"
+                    "\tldrb r1, [r0]\n"
+                    "\tlsls r0, r1, 4\n"
+                    "\tadds r0, r1\n"
+                    "\tlsls r0, 2\n"
+                    "\tadds r0, r6\n"
+                    "\tadds r0, 0x3E\n"
+                    "\tldrb r1, [r0]\n"
+                    "\torrs r1, r5\n"
+                    "\tstrb r1, [r0]\n"
+                    "\tadds r0, r4, 0x1\n"
+                    "\tlsls r0, 24\n"
+                    "\tlsrs r4, r0, 24\n"
+                    "\tldr r0, [r2]\n"
+                    "\tadds r0, 0x42\n"
+                    "\tadd r0, r10\n"
+                    "\tldrb r0, [r0]\n"
+                    "\tcmp r4, r0\n"
+                    "\tbcc _08049F62\n"
+                    "_08049F8E:\n"
+                    "\tldr r1, _0804A09C @ =gUnknown_03004824\n"
+                    "\tldr r0, [r1]\n"
+                    "\tldr r5, [sp, 0x6C]\n"
+                    "\tadd r5, r9\n"
+                    "\tlsls r3, r5, 1\n"
+                    "\tmov r2, r8\n"
+                    "\tadds r6, r2, r3\n"
+                    "\tadds r0, 0x34\n"
+                    "\tadds r0, r6\n"
+                    "\tldrb r1, [r0]\n"
+                    "\tlsls r0, r1, 4\n"
+                    "\tadds r0, r1\n"
+                    "\tlsls r0, 2\n"
+                    "\tadds r0, r7\n"
+                    "\tadds r0, 0x3E\n"
+                    "\tldrb r2, [r0]\n"
+                    "\tmovs r1, 0x5\n"
+                    "\tnegs r1, r1\n"
+                    "\tands r1, r2\n"
+                    "\tstrb r1, [r0]\n"
+                    "\tldr r0, _0804A09C @ =gUnknown_03004824\n"
+                    "\tldr r4, [r0]\n"
+                    "\tadds r4, 0x34\n"
+                    "\tadds r4, r6\n"
+                    "\tldrb r1, [r4]\n"
+                    "\tlsls r0, r1, 4\n"
+                    "\tadds r0, r1\n"
+                    "\tlsls r0, 2\n"
+                    "\tadds r0, r7\n"
+                    "\tmovs r1, 0x14\n"
+                    "\tstrh r1, [r0, 0x2E]\n"
+                    "\tldrb r0, [r4]\n"
+                    "\tlsls r2, r0, 4\n"
+                    "\tadds r2, r0\n"
+                    "\tlsls r2, 2\n"
+                    "\tadds r2, r7\n"
+                    "\tlsls r5, 2\n"
+                    "\tmov r1, r12\n"
+                    "\tadds r0, r5, r1\n"
+                    "\tldrb r0, [r0]\n"
+                    "\tadds r3, 0x1\n"
+                    "\tlsls r3, 1\n"
+                    "\tadd r3, r12\n"
+                    "\tldrb r1, [r3]\n"
+                    "\tadds r0, r1\n"
+                    "\tasrs r0, 1\n"
+                    "\tlsls r0, 3\n"
+                    "\tadds r0, 0xE\n"
+                    "\tstrh r0, [r2, 0x32]\n"
+                    "\tldrb r0, [r4]\n"
+                    "\tlsls r1, r0, 4\n"
+                    "\tadds r1, r0\n"
+                    "\tlsls r1, 2\n"
+                    "\tadds r1, r7\n"
+                    "\tmov r0, r12\n"
+                    "\tadds r0, 0x1\n"
+                    "\tadds r5, r0\n"
+                    "\tldrb r0, [r5]\n"
+                    "\tlsls r0, 3\n"
+                    "\tsubs r0, 0xC\n"
+                    "\tstrh r0, [r1, 0x36]\n"
+                    "\tldrb r1, [r4]\n"
+                    "\tlsls r0, r1, 4\n"
+                    "\tadds r0, r1\n"
+                    "\tlsls r0, 2\n"
+                    "\tadds r0, r7\n"
+                    "\tldr r1, _0804A0A0 @ =sub_809D62C\n"
+                    "\tbl oamt_set_x3A_32\n"
+                    "\tldr r2, _0804A09C @ =gUnknown_03004824\n"
+                    "\tldr r1, [r2]\n"
+                    "\tadds r1, 0x80\n"
+                    "\tadd r1, r10\n"
+                    "\tldrb r0, [r1]\n"
+                    "\tadds r0, 0x1\n"
+                    "\tstrb r0, [r1]\n"
+                    "\tldr r0, [r2]\n"
+                    "\tadds r0, 0x34\n"
+                    "\tadds r0, r6\n"
+                    "\tldrb r1, [r0]\n"
+                    "\tlsls r0, r1, 4\n"
+                    "\tadds r0, r1\n"
+                    "\tlsls r0, 2\n"
+                    "\tadds r0, r7\n"
+                    "\tbl sub_8078A34\n"
+                    "\tbl HandleDestroyMenuCursors\n"
+                    "\tldr r3, _0804A09C @ =gUnknown_03004824\n"
+                    "\tldr r0, [r3]\n"
+                    "\tadds r0, 0x4\n"
+                    "\tldr r1, _0804A0A4 @ =gUnknown_0820C330\n"
+                    "\tmov r5, r9\n"
+                    "\tadds r2, r5, r1\n"
+                    "\tldrb r2, [r2]\n"
+                    "\tadds r1, 0x1\n"
+                    "\tadd r1, r9\n"
+                    "\tldrb r1, [r1]\n"
+                    "\tstr r1, [sp]\n"
+                    "\tmovs r1, 0x13\n"
+                    "\tstr r1, [sp, 0x4]\n"
+                    "\tmovs r1, 0\n"
+                    "\tmovs r3, 0\n"
+                    "\tbl FillWindowRect_DefaultPalette\n"
+                    "\tldr r1, _0804A09C @ =gUnknown_03004824\n"
+                    "\tldr r0, [r1]\n"
+                    "\tadds r0, 0xC8\n"
+                    "\tldr r2, [sp, 0x70]\n"
+                    "\tmov r3, r10\n"
+                    "\tsubs r1, r2, r3\n"
+                    "\tlsls r1, 24\n"
+                    "\tlsrs r1, 24\n"
+                    "\tldr r3, _0804A0A8 @ =gTradePartyBoxTilemap\n"
+                    "\tmovs r2, 0xF\n"
+                    "\tstr r2, [sp]\n"
+                    "\tmovs r2, 0x11\n"
+                    "\tstr r2, [sp, 0x4]\n"
+                    "\tmovs r5, 0\n"
+                    "\tstr r5, [sp, 0x8]\n"
+                    "\tmovs r2, 0\n"
+                    "\tbl sub_804A96C_alt\n"
+                    "\tldr r0, [sp, 0x6C]\n"
+                    "\tcmp r0, 0\n"
+                    "\tbeq _0804A08C\n"
+                    "\tb _0804A294\n"
+                    "_0804A08C:\n"
+                    "\tbl sub_804A80C\n"
+                    "\tb _0804A294\n"
+                    "\t.align 2, 0\n"
+                    "_0804A094: .4byte gSprites\n"
+                    "_0804A098: .4byte gTradeMonSpriteCoords\n"
+                    "_0804A09C: .4byte gUnknown_03004824\n"
+                    "_0804A0A0: .4byte sub_809D62C\n"
+                    "_0804A0A4: .4byte gUnknown_0820C330\n"
+                    "_0804A0A8: .4byte gTradePartyBoxTilemap\n"
+                    "_0804A0AC:\n"
+                    "\tldr r2, _0804A0DC @ =gSprites\n"
+                    "\tldr r1, [sp, 0x6C]\n"
+                    "\tlsls r0, r1, 1\n"
+                    "\tadds r0, r1\n"
+                    "\tlsls r0, 1\n"
+                    "\tadd r0, r8\n"
+                    "\tadds r1, r5, 0\n"
+                    "\tadds r1, 0x34\n"
+                    "\tadds r1, r0\n"
+                    "\tldrb r1, [r1]\n"
+                    "\tlsls r0, r1, 4\n"
+                    "\tadds r0, r1\n"
+                    "\tlsls r0, 2\n"
+                    "\tadds r2, 0x1C\n"
+                    "\tadds r0, r2\n"
+                    "\tldr r1, [r0]\n"
+                    "\tldr r0, _0804A0E0 @ =sub_809D62C\n"
+                    "\tcmp r1, r0\n"
+                    "\tbeq _0804A0D4\n"
+                    "\tb _0804A294\n"
+                    "_0804A0D4:\n"
+                    "\tmovs r0, 0x3\n"
+                    "\tstrb r0, [r3]\n"
+                    "\tb _0804A294\n"
+                    "\t.align 2, 0\n"
+                    "_0804A0DC: .4byte gSprites\n"
+                    "_0804A0E0: .4byte sub_809D62C\n"
+                    "_0804A0E4:\n"
+                    "\tadds r0, r5, 0\n"
+                    "\tadds r0, 0xC8\n"
+                    "\tldr r2, [sp, 0x6C]\n"
+                    "\tlsls r1, r2, 4\n"
+                    "\tsubs r1, r2\n"
+                    "\tlsls r1, 24\n"
+                    "\tlsrs r1, 24\n"
+                    "\tldr r3, _0804A228 @ =gTradeMovesBoxTilemap\n"
+                    "\tmovs r2, 0xF\n"
+                    "\tstr r2, [sp]\n"
+                    "\tmovs r7, 0x11\n"
+                    "\tstr r7, [sp, 0x4]\n"
+                    "\tmovs r5, 0\n"
+                    "\tstr r5, [sp, 0x8]\n"
+                    "\tmovs r2, 0\n"
+                    "\tbl sub_804A96C_alt\n"
+                    "\tldr r0, _0804A22C @ =gUnknown_03004824\n"
+                    "\tldr r3, [r0]\n"
+                    "\tldr r1, [sp, 0x6C]\n"
+                    "\tlsls r6, r1, 1\n"
+                    "\tadds r1, r6\n"
+                    "\tmov r9, r1\n"
+                    "\tlsls r1, 1\n"
+                    "\tmov r2, r8\n"
+                    "\tadds r0, r2, r1\n"
+                    "\tadds r3, 0x34\n"
+                    "\tadds r3, r0\n"
+                    "\tldrb r0, [r3]\n"
+                    "\tlsls r2, r0, 4\n"
+                    "\tadds r2, r0\n"
+                    "\tlsls r2, 2\n"
+                    "\tldr r5, _0804A230 @ =gSprites\n"
+                    "\tadds r2, r5\n"
+                    "\tldr r4, _0804A234 @ =gTradeMonSpriteCoords\n"
+                    "\tmov r0, r9\n"
+                    "\tlsls r5, r0, 2\n"
+                    "\tadds r0, r5, r4\n"
+                    "\tldrb r0, [r0]\n"
+                    "\tadds r1, 0x1\n"
+                    "\tlsls r1, 1\n"
+                    "\tadds r1, r4\n"
+                    "\tldrb r1, [r1]\n"
+                    "\tadds r0, r1\n"
+                    "\tasrs r0, 1\n"
+                    "\tlsls r0, 3\n"
+                    "\tadds r0, 0xE\n"
+                    "\tstrh r0, [r2, 0x20]\n"
+                    "\tldrb r0, [r3]\n"
+                    "\tlsls r1, r0, 4\n"
+                    "\tadds r1, r0\n"
+                    "\tlsls r1, 2\n"
+                    "\tldr r2, _0804A230 @ =gSprites\n"
+                    "\tadds r1, r2\n"
+                    "\tadds r4, 0x1\n"
+                    "\tadds r5, r4\n"
+                    "\tldrb r0, [r5]\n"
+                    "\tlsls r0, 3\n"
+                    "\tsubs r0, 0xC\n"
+                    "\tstrh r0, [r1, 0x22]\n"
+                    "\tldrb r1, [r3]\n"
+                    "\tlsls r0, r1, 4\n"
+                    "\tadds r0, r1\n"
+                    "\tlsls r0, 2\n"
+                    "\tadds r0, r2\n"
+                    "\tmovs r5, 0\n"
+                    "\tstrh r5, [r0, 0x24]\n"
+                    "\tldrb r1, [r3]\n"
+                    "\tlsls r0, r1, 4\n"
+                    "\tadds r0, r1\n"
+                    "\tlsls r0, 2\n"
+                    "\tadds r0, r2\n"
+                    "\tstrh r5, [r0, 0x26]\n"
+                    "\tmov r0, sp\n"
+                    "\tadds r0, 0x12\n"
+                    "\tldr r1, [sp, 0x6C]\n"
+                    "\tmov r2, r8\n"
+                    "\tbl sub_804A2B4\n"
+                    "\tadd r1, sp, 0xC\n"
+                    "\tmovs r3, 0xFC\n"
+                    "\tstrb r3, [r1]\n"
+                    "\tadds r2, r1, 0\n"
+                    "\tmovs r1, 0x6\n"
+                    "\tstrb r1, [r2, 0x1]\n"
+                    "\tmovs r1, 0x4\n"
+                    "\tstrb r1, [r2, 0x2]\n"
+                    "\tadds r1, r2, 0\n"
+                    "\tstrb r3, [r1, 0x3]\n"
+                    "\tstrb r7, [r1, 0x4]\n"
+                    "\tlsls r0, 24\n"
+                    "\tasrs r0, 24\n"
+                    "\tmovs r1, 0x40\n"
+                    "\tsubs r1, r0\n"
+                    "\tlsrs r0, r1, 31\n"
+                    "\tadds r1, r0\n"
+                    "\tasrs r1, 1\n"
+                    "\tstrb r1, [r2, 0x5]\n"
+                    "\tldr r0, _0804A22C @ =gUnknown_03004824\n"
+                    "\tldr r1, [r0]\n"
+                    "\tadds r0, r1, 0x4\n"
+                    "\tadds r1, 0x7A\n"
+                    "\tldrb r2, [r1]\n"
+                    "\tmov r1, r9\n"
+                    "\tlsls r1, 6\n"
+                    "\tmov r9, r1\n"
+                    "\tadd r2, r9\n"
+                    "\tldr r4, _0804A238 @ =gUnknown_0820C334\n"
+                    "\tldr r3, [sp, 0x6C]\n"
+                    "\tlsls r1, r3, 2\n"
+                    "\tadds r3, r1, r4\n"
+                    "\tldrb r3, [r3]\n"
+                    "\tldr r5, _0804A23C @ =gUnknown_0820C334 + 0x1\n"
+                    "\tadds r1, r5\n"
+                    "\tldrb r1, [r1]\n"
+                    "\tstr r1, [sp]\n"
+                    "\tadd r1, sp, 0xC\n"
+                    "\tbl sub_8003460\n"
+                    "\tadd r7, sp, 0x34\n"
+                    "\tadds r0, r7, 0\n"
+                    "\tldr r1, [sp, 0x6C]\n"
+                    "\tmov r2, r8\n"
+                    "\tbl sub_804A33C\n"
+                    "\tldr r0, _0804A22C @ =gUnknown_03004824\n"
+                    "\tldr r2, [r0]\n"
+                    "\tadds r0, r2, 0x4\n"
+                    "\tldr r1, _0804A240 @ =gOtherText_Terminator2\n"
+                    "\tadds r2, 0x7A\n"
+                    "\tldrb r2, [r2]\n"
+                    "\tadd r2, r9\n"
+                    "\tadds r2, 0x20\n"
+                    "\tadds r6, 0x1\n"
+                    "\tlsls r6, 1\n"
+                    "\tadds r4, r6, r4\n"
+                    "\tldrb r5, [r4]\n"
+                    "\tldr r3, _0804A23C @ =gUnknown_0820C334 + 0x1\n"
+                    "\tadds r6, r3\n"
+                    "\tldrb r4, [r6]\n"
+                    "\tadds r4, 0x1\n"
+                    "\tlsls r4, 24\n"
+                    "\tlsrs r4, 24\n"
+                    "\tstr r4, [sp]\n"
+                    "\tadds r3, r5, 0\n"
+                    "\tbl sub_8003460\n"
+                    "\tldr r0, _0804A22C @ =gUnknown_03004824\n"
+                    "\tldr r1, [r0]\n"
+                    "\tadds r0, r1, 0x4\n"
+                    "\tadds r1, 0x7A\n"
+                    "\tldrb r2, [r1]\n"
+                    "\tadd r2, r9\n"
+                    "\tadds r2, 0x26\n"
+                    "\tstr r4, [sp]\n"
+                    "\tadds r1, r7, 0\n"
+                    "\tadds r3, r5, 0\n"
+                    "\tbl sub_8003460\n"
+                    "\tldr r2, _0804A22C @ =gUnknown_03004824\n"
+                    "\tldr r1, [r2]\n"
+                    "\tb _0804A28A\n"
+                    "\t.align 2, 0\n"
+                    "_0804A228: .4byte gTradeMovesBoxTilemap\n"
+                    "_0804A22C: .4byte gUnknown_03004824\n"
+                    "_0804A230: .4byte gSprites\n"
+                    "_0804A234: .4byte gTradeMonSpriteCoords\n"
+                    "_0804A238: .4byte gUnknown_0820C334\n"
+                    "_0804A23C: .4byte gUnknown_0820C334 + 0x1\n"
+                    "_0804A240: .4byte gOtherText_Terminator2\n"
+                    "_0804A244:\n"
+                    "\tldr r0, _0804A2A4 @ =gUnknown_0820C14C\n"
+                    "\tldr r0, [r0, 0x14]\n"
+                    "\tadds r1, r5, 0\n"
+                    "\tadds r1, 0x7E\n"
+                    "\tldrh r1, [r1]\n"
+                    "\tlsls r1, 5\n"
+                    "\tldr r3, _0804A2A8 @ =0x06010000\n"
+                    "\tadds r1, r3\n"
+                    "\tmovs r2, 0x14\n"
+                    "\tbl sub_804ACD8\n"
+                    "\tldr r0, _0804A2AC @ =gUnknown_0820C3D1\n"
+                    "\tmov r5, r10\n"
+                    "\tlsls r1, r5, 1\n"
+                    "\tadds r4, r1, r0\n"
+                    "\tldrb r2, [r4]\n"
+                    "\tadds r2, 0x4\n"
+                    "\tlsls r2, 24\n"
+                    "\tlsrs r2, 24\n"
+                    "\tadds r0, 0x1\n"
+                    "\tadds r1, r0\n"
+                    "\tldrb r3, [r1]\n"
+                    "\tadds r3, 0x1\n"
+                    "\tlsls r3, 24\n"
+                    "\tlsrs r3, 24\n"
+                    "\tldrb r0, [r4]\n"
+                    "\tstr r0, [sp]\n"
+                    "\tldrb r0, [r1]\n"
+                    "\tstr r0, [sp, 0x4]\n"
+                    "\tmov r0, r10\n"
+                    "\tmov r1, r8\n"
+                    "\tbl sub_804A51C\n"
+                    "\tldr r0, _0804A2B0 @ =gUnknown_03004824\n"
+                    "\tldr r1, [r0]\n"
+                    "_0804A28A:\n"
+                    "\tadds r1, 0x80\n"
+                    "\tadd r1, r10\n"
+                    "\tldrb r0, [r1]\n"
+                    "\tadds r0, 0x1\n"
+                    "\tstrb r0, [r1]\n"
+                    "_0804A294:\n"
+                    "\tadd sp, 0x74\n"
+                    "\tpop {r3-r5}\n"
+                    "\tmov r8, r3\n"
+                    "\tmov r9, r4\n"
+                    "\tmov r10, r5\n"
+                    "\tpop {r4-r7}\n"
+                    "\tpop {r0}\n"
+                    "\tbx r0\n"
+                    "\t.align 2, 0\n"
+                    "_0804A2A4: .4byte gUnknown_0820C14C\n"
+                    "_0804A2A8: .4byte 0x06010000\n"
+                    "_0804A2AC: .4byte gUnknown_0820C3D1\n"
+                    "_0804A2B0: .4byte gUnknown_03004824");
+}
+#endif
 
 u8 sub_804A2B4(u8 *a0, u8 whichParty, u8 whichPokemon)
 {
@@ -2117,6 +2619,9 @@ u8 sub_804A2B4(u8 *a0, u8 whichParty, u8 whichPokemon)
     return GetStringWidthGivenWindowConfig(&gWindowConfig_81E7294, a0);
 }
 
+#ifdef NONMATCHING
+static
+#endif
 void sub_804A33C(u8 *a0, u8 whichParty, u8 whichPokemon)
 {
     u16 i;
@@ -2303,6 +2808,9 @@ static void sub_804A41C(u8 whichParty)
 }
 #endif
 
+#ifdef NONMATCHING
+static
+#endif
 void sub_804A51C(u8 a0, u8 a1, u8 a2, u8 a3, u8 a4, u8 a5)
 {
     u8 nickname[24];
