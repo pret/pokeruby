@@ -3171,6 +3171,31 @@ static bool8 sub_804ABF8(void)
 
 asm(".section .text.sub_804DAD4");
 
+void sub_804D80C(struct Sprite *sprite)
+{
+    if (sprite->data2 == 0)
+    {
+        if ((sprite->pos1.y += 4) > sprite->data3)
+        {
+            sprite->data2 ++;
+            sprite->data0 = 0x16;
+            PlaySE(SE_KON);
+        }
+    }
+    else
+    {
+        if (sprite->data0 == 0x42)
+            PlaySE(SE_KON2);
+        if (sprite->data0 == 0x5c)
+            PlaySE(SE_KON3);
+        if (sprite->data0 == 0x6b)
+            PlaySE(SE_KON4);
+        sprite->pos2.y += gTradeBallVerticalVelocityTable[sprite->data0];
+        if (++sprite->data0 == 0x6c)
+            sprite->callback = SpriteCallbackDummy;
+    }
+}
+
 u16 sub_804D89C(void)
 {
     const struct InGameTrade *inGameTrade = &gIngameTrades[gSpecialVar_0x8004];
