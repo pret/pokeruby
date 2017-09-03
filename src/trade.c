@@ -30,6 +30,8 @@
 #define sub_804A96C_alt sub_804A96C
 #endif
 
+#define Trade_SendData() SendBlock(bitmask_all_link_players_but_self(), gUnknown_03004824->linkData, ARRAY_COUNT(gUnknown_03004824->linkData))
+
 struct InGameTrade {
     /*0x00*/ u8 name[11];
     /*0x0C*/ u16 species;
@@ -141,7 +143,7 @@ static void sub_8048AB4(void);
 static void sub_804A940(struct UnkStructD *);
 /*static*/ void sub_804B41C(void);
 static void sub_8049DE0(void);
-/*static*/ void sub_804AB30(void);
+static void sub_804AB30(void);
 /*static*/ void sub_8049ED4(u8);
 static void sub_804A6DC(u8);
 static void sub_804A938(struct UnkStructD *);
@@ -1662,7 +1664,7 @@ static void sub_8049620(void)
     {
         gUnknown_03004824->linkData[0] = 0xaabb;
         gUnknown_03004824->linkData[1] = gUnknown_03004824->tradeMenuCursorPosition;
-        SendBlock(bitmask_all_link_players_but_self(), gUnknown_03004824->linkData, ARRAY_COUNT(gUnknown_03004824->linkData));
+        Trade_SendData();
     }
     else
     {
@@ -1718,7 +1720,7 @@ static void sub_8049680(void)
         {
             gUnknown_03004824->linkData[i] = i;
         }
-        SendBlock(bitmask_all_link_players_but_self(), gUnknown_03004824->linkData, ARRAY_COUNT(gUnknown_03004824->linkData));
+        Trade_SendData();
     }
 }
 
@@ -1827,7 +1829,7 @@ static void sub_8049A20(void)
         gUnknown_03004824->linkData[0] = 0xbbbb;
         if (sub_8007ECC())
         {
-            SendBlock(bitmask_all_link_players_but_self(), gUnknown_03004824->linkData, ARRAY_COUNT(gUnknown_03004824->linkData));
+            Trade_SendData();
         }
     }
 }
@@ -1857,7 +1859,7 @@ static void sub_8049AC0(void)
             if (sub_8007ECC())
             {
                 gUnknown_03004824->linkData[0] = 0xbbcc;
-                SendBlock(bitmask_all_link_players_but_self(), gUnknown_03004824->linkData, ARRAY_COUNT(gUnknown_03004824->linkData));
+                Trade_SendData();
             }
         }
         gUnknown_03004824->unk_007b = 100;
@@ -1870,7 +1872,7 @@ static void sub_8049AC0(void)
             gUnknown_03004824->unk_007c = MoveMenuCursor(+1);
         }
         gUnknown_03004824->linkData[0] = 0xbbcc;
-        SendBlock(bitmask_all_link_players_but_self(), gUnknown_03004824->linkData, ARRAY_COUNT(gUnknown_03004824->linkData));
+        Trade_SendData();
         gUnknown_03004824->unk_007b = 100;
     }
 }
@@ -2043,7 +2045,7 @@ static void sub_8049E9C(u8 a0)
 //    u8 r8 = temp0 % 6;
 //    s8 stringLength;
 //    u8 string[50];
-//    
+//
 //    switch (gUnknown_03004824->unk_0080[a0])
 //    {
 //        case 1:
@@ -2545,6 +2547,44 @@ static void sub_804AADC(u16 a0, u8 a1)
             gUnknown_03004824->unk_08dc[i].unk_04 = a1;
             gUnknown_03004824->unk_08dc[i].unk_00 = 1;
             break;
+        }
+    }
+}
+
+static void sub_804AB30(void)
+{
+    int i;
+    for (i = 0; i < 4; i ++)
+    {
+        if (gUnknown_03004824->unk_08dc[i].unk_00)
+        {
+            if (gUnknown_03004824->unk_08dc[i].unk_02 != 0)
+            {
+                gUnknown_03004824->unk_08dc[i].unk_02 --;
+                continue;
+            }
+            switch (gUnknown_03004824->unk_08dc[i].unk_04)
+            {
+                case 0:
+                    Trade_SendData();
+                    break;
+                case 1:
+                    sub_804AA0C(0);
+                    break;
+                case 2:
+                    sub_804AA0C(2);
+                    break;
+                case 3:
+                    sub_804AA0C(3);
+                    break;
+                case 4:
+                    sub_804AA0C(3);
+                    break;
+                case 5:
+                    sub_804AA0C(3);
+                    break;
+            }
+            gUnknown_03004824->unk_08dc[i].unk_00 = 0;
         }
     }
 }
