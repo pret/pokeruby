@@ -131,7 +131,7 @@ static void sub_80489F4(void);
 /*static*/ void sub_804AA0C(u8);
 static bool8 sub_8048D44(void);
 /*static*/ void sub_804AF84(void);
-/*static*/ bool8 sub_804ABF8(void);
+static bool8 sub_804ABF8(void);
 /*static*/ void sub_804ACF4(u8);
 static void sub_804A41C(u8);
 static void sub_8048C70(void);
@@ -2586,6 +2586,36 @@ static void sub_804AB30(void)
             }
             gUnknown_03004824->unk_08dc[i].unk_00 = 0;
         }
+    }
+}
+
+static bool8 sub_804ABF8(void)
+{
+    switch (gUnknown_03004824->unk_00b4)
+    {
+        case  8:
+            gUnknown_03004824->unk_007e = LoadSpriteSheet(&gUnknown_0820C07C[gUnknown_03004824->unk_00b4]);
+            gUnknown_03004824->unk_00b4 ++;
+            return FALSE;
+        case 13:
+            LoadSpritePalette(&gSpritePalette_TradeScreenText);
+            gUnknown_03004824->unk_00b4 ++;
+            return FALSE;
+        case 14:
+            LoadSpritePalette(&gUnknown_0820C12C);
+            gUnknown_03004824->unk_00b4 ++;
+            return FALSE;
+        case 15:
+            LoadSpriteSheet(&gUnknown_0820C124);
+            gUnknown_03004824->unk_00b4 ++;
+            // fallthrough
+        case 16:
+            gUnknown_03004824->unk_00b4 = 0;
+            return TRUE;
+        default:
+            LoadSpriteSheet(&gUnknown_0820C07C[gUnknown_03004824->unk_00b4]);
+            gUnknown_03004824->unk_00b4 ++;
+            return FALSE;
     }
 }
 
