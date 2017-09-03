@@ -3395,3 +3395,15 @@ static void sub_804E1A0(u8 taskId)
         DestroyTask(taskId);
     }
 }
+
+/*static*/ void sub_804E1DC(void)
+{
+    u8 i;
+    u8 numRibbons = 0;
+    for (i = 0; i < 12; i ++)
+    {
+        numRibbons += GetMonData(&gEnemyParty[gUnknown_020297D8[1] % 6], MON_DATA_CHAMPION_RIBBON + i);
+    }
+    if (numRibbons != 0)
+        FlagSet(SYS_RIBBON_GET);
+}

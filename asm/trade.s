@@ -5395,47 +5395,6 @@ _0804DAD0: .4byte gEnemyParty
 
 .section .text.sub_804DB2C
 
-	thumb_func_start sub_804E1DC
-sub_804E1DC: @ 804E1DC
-	push {r4,r5,lr}
-	movs r5, 0
-	movs r4, 0
-_0804E1E2:
-	ldr r0, _0804E220 @ =gUnknown_020297D8
-	ldrb r0, [r0, 0x1]
-	movs r1, 0x6
-	bl __umodsi3
-	lsls r0, 24
-	lsrs r0, 24
-	movs r1, 0x64
-	muls r0, r1
-	ldr r1, _0804E224 @ =gEnemyParty
-	adds r0, r1
-	adds r1, r4, 0
-	adds r1, 0x43
-	bl GetMonData
-	adds r0, r5, r0
-	lsls r0, 24
-	lsrs r5, r0, 24
-	adds r0, r4, 0x1
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0xB
-	bls _0804E1E2
-	cmp r5, 0
-	beq _0804E21A
-	ldr r0, _0804E228 @ =0x0000083b
-	bl FlagSet
-_0804E21A:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0804E220: .4byte gUnknown_020297D8
-_0804E224: .4byte gEnemyParty
-_0804E228: .4byte 0x0000083b
-	thumb_func_end sub_804E1DC
-
 	thumb_func_start sub_804E22C
 sub_804E22C: @ 804E22C
 	push {r4,lr}
