@@ -495,59 +495,6 @@ _0804A2B0: .4byte gUnknown_03004824
 
     .section .text.sub_804A33C
 
-	thumb_func_start sub_804A6DC
-sub_804A6DC: @ 804A6DC
-	push {r4-r7,lr}
-	sub sp, 0x8
-	lsls r0, 24
-	lsrs r6, r0, 24
-	movs r7, 0
-	ldr r0, _0804A734 @ =gUnknown_03004824
-	ldr r0, [r0]
-	adds r0, 0x42
-	adds r0, r6
-	ldrb r0, [r0]
-	cmp r7, r0
-	bge _0804A72C
-	lsls r0, r6, 1
-	adds r0, r6
-	ldr r1, _0804A738 @ =gTradeLevelDisplayCoords
-	lsls r0, 2
-	adds r5, r0, r1
-	ldr r1, _0804A73C @ =gTradeMonBoxCoords
-	adds r4, r0, r1
-_0804A702:
-	lsls r1, r7, 24
-	lsrs r1, 24
-	ldrb r2, [r5]
-	ldrb r3, [r5, 0x1]
-	ldrb r0, [r4]
-	str r0, [sp]
-	ldrb r0, [r4, 0x1]
-	str r0, [sp, 0x4]
-	adds r0, r6, 0
-	bl sub_804A51C
-	adds r5, 0x2
-	adds r4, 0x2
-	adds r7, 0x1
-	ldr r0, _0804A734 @ =gUnknown_03004824
-	ldr r0, [r0]
-	adds r0, 0x42
-	adds r0, r6
-	ldrb r0, [r0]
-	cmp r7, r0
-	blt _0804A702
-_0804A72C:
-	add sp, 0x8
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0804A734: .4byte gUnknown_03004824
-_0804A738: .4byte gTradeLevelDisplayCoords
-_0804A73C: .4byte gTradeMonBoxCoords
-	thumb_func_end sub_804A6DC
-
 	thumb_func_start sub_804A740
 sub_804A740: @ 804A740
 	push {r4-r7,lr}

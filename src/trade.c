@@ -397,40 +397,46 @@ const u8 gTradeMonSpriteCoords[][2] = {
     {23, 18} // CANCEL
 };
 
-const u8 gTradeLevelDisplayCoords[][2] = {
-    // Your party
-    { 5,  4},
-    {12,  4},
-    { 5,  9},
-    {12,  9},
-    { 5, 14},
-    {12, 14},
-
-    // Friend's party
-    {20,  4},
-    {27,  4},
-    {20,  9},
-    {27,  9},
-    {20, 14},
-    {27, 14}
+const u8 gTradeLevelDisplayCoords[2][6][2] = {
+    {
+        // Your party
+        {5, 4},
+        {12, 4},
+        {5, 9},
+        {12, 9},
+        {5, 14},
+        {12, 14},
+    },
+    {
+        // Friend's party
+        {20, 4},
+        {27, 4},
+        {20, 9},
+        {27, 9},
+        {20, 14},
+        {27, 14}
+    }
 };
 
-const u8 gTradeMonBoxCoords[][2] = {
-    // Your party
-    { 1,  3},
-    { 8,  3},
-    { 1,  8},
-    { 8,  8},
-    { 1, 13},
-    { 8, 13},
-
-    // Friend's party
-    {16,  3},
-    {23,  3},
-    {16,  8},
-    {23,  8},
-    {16, 13},
-    {23, 13}
+const u8 gTradeMonBoxCoords[2][6][2] = {
+    {
+        // Your party
+        {1, 3},
+        {8, 3},
+        {1, 8},
+        {8, 8},
+        {1, 13},
+        {8, 13},
+    },
+    {
+        // Friend's party
+        {16, 3},
+        {23, 3},
+        {16, 8},
+        {23, 8},
+        {16, 13},
+        {23, 13}
+    }
 };
 
 const u8 gTradeUnknownSpriteCoords[][2][2] = {
@@ -2339,6 +2345,71 @@ void sub_804A51C(u8 a0, u8 a1, u8 a2, u8 a3, u8 a4, u8 a5)
     gUnknown_03004824->unk_00c8.unk_10 = 1;
 #endif
 }
+
+#ifdef NONMATCHING
+void sub_804A6DC(u8 whichParty)
+{
+    int i;
+    for (i = 0; i < gUnknown_03004824->partyCounts[whichParty]; i ++)
+    {
+        sub_804A51C(whichParty, i, gTradeLevelDisplayCoords[whichParty][i][0], gTradeLevelDisplayCoords[whichParty][i][1], gTradeMonBoxCoords[whichParty][i][0], gTradeMonBoxCoords[whichParty][i][1]);
+    }
+}
+#else
+__attribute__((naked))
+void sub_804A6DC(u8 whichParty)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                    "\tsub sp, 0x8\n"
+                    "\tlsls r0, 24\n"
+                    "\tlsrs r6, r0, 24\n"
+                    "\tmovs r7, 0\n"
+                    "\tldr r0, _0804A734 @ =gUnknown_03004824\n"
+                    "\tldr r0, [r0]\n"
+                    "\tadds r0, 0x42\n"
+                    "\tadds r0, r6\n"
+                    "\tldrb r0, [r0]\n"
+                    "\tcmp r7, r0\n"
+                    "\tbge _0804A72C\n"
+                    "\tlsls r0, r6, 1\n"
+                    "\tadds r0, r6\n"
+                    "\tldr r1, _0804A738 @ =gTradeLevelDisplayCoords\n"
+                    "\tlsls r0, 2\n"
+                    "\tadds r5, r0, r1\n"
+                    "\tldr r1, _0804A73C @ =gTradeMonBoxCoords\n"
+                    "\tadds r4, r0, r1\n"
+                    "_0804A702:\n"
+                    "\tlsls r1, r7, 24\n"
+                    "\tlsrs r1, 24\n"
+                    "\tldrb r2, [r5]\n"
+                    "\tldrb r3, [r5, 0x1]\n"
+                    "\tldrb r0, [r4]\n"
+                    "\tstr r0, [sp]\n"
+                    "\tldrb r0, [r4, 0x1]\n"
+                    "\tstr r0, [sp, 0x4]\n"
+                    "\tadds r0, r6, 0\n"
+                    "\tbl sub_804A51C\n"
+                    "\tadds r5, 0x2\n"
+                    "\tadds r4, 0x2\n"
+                    "\tadds r7, 0x1\n"
+                    "\tldr r0, _0804A734 @ =gUnknown_03004824\n"
+                    "\tldr r0, [r0]\n"
+                    "\tadds r0, 0x42\n"
+                    "\tadds r0, r6\n"
+                    "\tldrb r0, [r0]\n"
+                    "\tcmp r7, r0\n"
+                    "\tblt _0804A702\n"
+                    "_0804A72C:\n"
+                    "\tadd sp, 0x8\n"
+                    "\tpop {r4-r7}\n"
+                    "\tpop {r0}\n"
+                    "\tbx r0\n"
+                    "\t.align 2, 0\n"
+                    "_0804A734: .4byte gUnknown_03004824\n"
+                    "_0804A738: .4byte gTradeLevelDisplayCoords\n"
+                    "_0804A73C: .4byte gTradeMonBoxCoords");
+}
+#endif
 
 asm(".section .text.sub_804A96C");
 
