@@ -32,6 +32,7 @@
 #include "field_fadetransition.h"
 #include "decompress.h"
 #include "mail_data.h"
+#include "evolution_scene.h"
 #include "trade.h"
 
 #ifdef ENGLISH
@@ -202,6 +203,7 @@ static void sub_804E1A0(u8);
 /*static*/ void sub_804B790(void);
 static void sub_804DAD4(struct MailStruct *, const struct InGameTrade *);
 void sub_804D588(void);
+static void sub_804DC88(void);
 
 extern u8 gUnknown_020297D8[2];
 extern u8 *gUnknown_020296CC[13];
@@ -3172,6 +3174,32 @@ static bool8 sub_804ABF8(void)
 
 asm(".section .text.sub_804DAD4");
 
+void sub_804D588(void)
+{
+    u16 evoTarget;
+    switch (gMain.state)
+    {
+        case 0:
+            gMain.state = 4;
+            gSoftResetDisabled = TRUE;
+            break;
+        case 4:
+            gUnknown_03005E94 = sub_804DC88;
+            evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gUnknown_020297D8[0]], TRUE, ITEM_NONE);
+            if (evoTarget != SPECIES_NONE)
+                TradeEvolutionScene(&gPlayerParty[gUnknown_020297D8[0]], evoTarget, gUnknown_03004828->unk_00b9, gUnknown_020297D8[0]);
+            else
+                SetMainCallback2(sub_804DC88);
+            gUnknown_020297D8[0] = 255;
+            break;
+    }
+    if (!HasLinkErrorOccurred())
+        RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+}
+
 static void sub_804D63C(void)
 {
     u8 blockReceivedStatus;
@@ -3411,7 +3439,7 @@ void sub_804DC18(void)
     UpdatePaletteFade();
 }
 
-void sub_804DC88(void)
+static void sub_804DC88(void)
 {
     switch (gMain.state)
     {
