@@ -190,7 +190,7 @@ void sub_804A33C(u8 *, u8, u8);
 static
 #endif
 void sub_804A51C(u8, u8, u8, u8, u8, u8);
-/*static*/ void sub_804D948(u8, u8);
+
 /*static*/ void sub_804BA94(u8, u8);
 /*static*/ bool8 sub_804C29C(void);
 /*static*/ void sub_804DC18(void);
@@ -3171,7 +3171,16 @@ static bool8 sub_804ABF8(void)
 
 asm(".section .text.sub_804DAD4");
 
-void sub_804D948(u8 whichPlayerMon, u8 whichInGameTrade)
+/*static*/ void sub_804D8E4(void)
+{
+    u8 nickname[32];
+    const struct InGameTrade *inGameTrade = &gIngameTrades[gSpecialVar_0x8004];
+    GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_NICKNAME, nickname);
+    StringCopy10(gStringVar1, nickname);
+    StringCopy(gStringVar2, gSpeciesNames[inGameTrade->species]);
+}
+
+static void sub_804D948(u8 whichPlayerMon, u8 whichInGameTrade)
 {
     const struct InGameTrade *inGameTrade = &gIngameTrades[whichInGameTrade];
     u8 level = GetMonData(&gPlayerParty[whichPlayerMon], MON_DATA_LEVEL);

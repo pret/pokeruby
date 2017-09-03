@@ -5175,48 +5175,4 @@ _0804D8DC: .4byte gSpeciesNames
 _0804D8E0: .4byte gStringVar2
 	thumb_func_end sub_804D89C
 
-	thumb_func_start sub_804D8E4
-sub_804D8E4: @ 804D8E4
-	push {r4,lr}
-	sub sp, 0x20
-	ldr r0, _0804D92C @ =gSpecialVar_0x8004
-	ldrh r0, [r0]
-	lsls r4, r0, 4
-	subs r4, r0
-	lsls r4, 2
-	ldr r0, _0804D930 @ =gIngameTrades
-	adds r4, r0
-	ldr r0, _0804D934 @ =gSpecialVar_0x8005
-	ldrh r1, [r0]
-	movs r0, 0x64
-	muls r0, r1
-	ldr r1, _0804D938 @ =gPlayerParty
-	adds r0, r1
-	movs r1, 0x2
-	mov r2, sp
-	bl GetMonData
-	ldr r0, _0804D93C @ =gStringVar1
-	mov r1, sp
-	bl StringCopy10
-	ldr r0, _0804D940 @ =gStringVar2
-	ldrh r2, [r4, 0xC]
-	movs r1, 0xB
-	muls r1, r2
-	ldr r2, _0804D944 @ =gSpeciesNames
-	adds r1, r2
-	bl StringCopy
-	add sp, 0x20
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0804D92C: .4byte gSpecialVar_0x8004
-_0804D930: .4byte gIngameTrades
-_0804D934: .4byte gSpecialVar_0x8005
-_0804D938: .4byte gPlayerParty
-_0804D93C: .4byte gStringVar1
-_0804D940: .4byte gStringVar2
-_0804D944: .4byte gSpeciesNames
-	thumb_func_end sub_804D8E4
-
 	.align 2, 0 @ Don't pad with nop.
