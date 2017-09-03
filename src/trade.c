@@ -117,34 +117,34 @@ static void sub_8047EC0(void);
 /*static*/ void sub_804ACD8(const u8 *, u8 *, u8);
 static void nullsub_5(u8, u8);
 /*static*/ void sub_804AA88(void);
-/*static*/ void sub_804A964(struct UnkStructD *, void *);
+static void sub_804A964(struct UnkStructD *, void *);
 static void sub_80489F4(void);
 /*static*/ void sub_804AA0C(u8);
 static bool8 sub_8048D44(void);
 /*static*/ void sub_804AF84(void);
 /*static*/ bool8 sub_804ABF8(void);
 /*static*/ void sub_804ACF4(u8);
-/*static*/ void sub_804A41C(u8);
+static void sub_804A41C(u8);
 static void sub_8048C70(void);
 static void sub_8048B0C(u8);
 /*static*/ void sub_804AE3C(u8);
 /*static*/ void sub_804AF10(void);
 static void sub_80494D8(void);
 static void sub_8048AB4(void);
-/*static*/ void sub_804A940(struct UnkStructD *);
+static void sub_804A940(struct UnkStructD *);
 /*static*/ void sub_804B41C(void);
 static void sub_8049DE0(void);
 /*static*/ void sub_804AB30(void);
 /*static*/ void sub_8049ED4(u8);
-/*static*/ void sub_804A6DC(u8);
-/*static*/ void sub_804A938(struct UnkStructD *);
-/*static*/ u8 sub_804A9F4(void);
-/*static*/ u8 sub_804AA00(void);
+static void sub_804A6DC(u8);
+static void sub_804A938(struct UnkStructD *);
+static void sub_804A9F4(u8);
+static void sub_804AA00(u8);
 static void sub_8049E9C(u8);
 /*static*/ void sub_804AADC(u8, u8);
 /*static*/ void sub_804A80C(void);
 static u8 sub_80499F0(const u8 *, u8, u8);
-/*static*/ void sub_804A840(u8);
+static void sub_804A840(u8);
 /*static*/ u8 sub_804A2B4(u8 *, u8, u8);
 /*static*/ void sub_804A96C_alt(struct UnkStructD *, u8, u8, const u16 *, u8, u8, u16);
 
@@ -468,7 +468,7 @@ const u8 gTradeMessageWindowRects[][4] = {
     {7, 7, 23, 12}
 };
 
-const struct MenuAction gUnknown_0820C320[] = {
+const struct MenuAction2 gUnknown_0820C320[] = {
     {TradeText_Summary2, sub_804A9F4},
     {TradeText_Trade2, sub_804AA00}
 };
@@ -1688,7 +1688,7 @@ static void sub_8049680(void)
         if (gUnknown_03004824->tradeMenuCursorPosition < PARTY_SIZE)
         {
             DrawTextWindow(&gUnknown_03004824->window, 18, 14, 28, 19);
-            PrintMenuItems(19, 15, 2, gUnknown_0820C320);
+            PrintMenuItems(19, 15, 2, (const struct MenuAction *)gUnknown_0820C320);
             InitMenu(0, 19, 15, 2, 0, 9);
             gUnknown_03004824->unk_007b = 1;
         }
@@ -2139,7 +2139,7 @@ void sub_804A33C(u8 *a0, u8 whichParty, u8 whichPokemon)
 }
 
 #ifdef NONMATCHING
-void sub_804A41C(u8 whichParty)
+static void sub_804A41C(u8 whichParty)
 {
     u8 i;
     u8 nickname[22];
@@ -2165,7 +2165,7 @@ void sub_804A41C(u8 whichParty)
 }
 #else
 __attribute__((naked))
-void sub_804A41C(u8 whichParty)
+static void sub_804A41C(u8 whichParty)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                     "\tmov r7, r10\n"
@@ -2347,7 +2347,7 @@ void sub_804A51C(u8 a0, u8 a1, u8 a2, u8 a3, u8 a4, u8 a5)
 }
 
 #ifdef NONMATCHING
-void sub_804A6DC(u8 whichParty)
+static void sub_804A6DC(u8 whichParty)
 {
     int i;
     for (i = 0; i < gUnknown_03004824->partyCounts[whichParty]; i ++)
@@ -2357,7 +2357,7 @@ void sub_804A6DC(u8 whichParty)
 }
 #else
 __attribute__((naked))
-void sub_804A6DC(u8 whichParty)
+static void sub_804A6DC(u8 whichParty)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                     "\tsub sp, 0x8\n"
@@ -2430,7 +2430,7 @@ void sub_804A80C(void)
     sub_804A41C(1);
 }
 
-void sub_804A840(u8 whichParty)
+static void sub_804A840(u8 whichParty)
 {
     if (whichParty == 0)
     {
@@ -2455,7 +2455,7 @@ void sub_804A840(u8 whichParty)
     gUnknown_03004824->unk_0080[whichParty] = 0;
 }
 
-void sub_804A938(struct UnkStructD *unkStructD)
+static void sub_804A938(struct UnkStructD *unkStructD)
 {
     unkStructD->unk_10 = 1;
 }
@@ -2469,7 +2469,7 @@ void sub_804A940(struct UnkStructD *unkStructD)
     }
 }
 
-void sub_804A964(struct UnkStructD *unkStructD, void *dest)
+static void sub_804A964(struct UnkStructD *unkStructD, void *dest)
 {
     unkStructD->unk_10 = 0;
     unkStructD->vramAddr = dest;
@@ -2499,6 +2499,22 @@ void sub_804A96C_alt(struct UnkStructD *arg0, u8 left, u8 top, const u16 *tilema
     arg0->unk_10 = 1;
 }
 #endif
+
+static void sub_804A9F4(u8 unused)
+{
+    MenuZeroFillScreen();
+}
+
+static void sub_804AA00(u8 unused)
+{
+    MenuZeroFillScreen();
+}
+
+/*static*/ void sub_804AA0C(u8 a0)
+{
+    DrawTextWindow(&gUnknown_03004824->window, gTradeMessageWindowRects[a0][0], gTradeMessageWindowRects[a0][1], gTradeMessageWindowRects[a0][2], gTradeMessageWindowRects[a0][3]);
+    sub_8003460(&gUnknown_03004824->window, gUnknown_0820C2F0[a0], 0x180 + gUnknown_03004824->unk_007a, gTradeMessageWindowRects[a0][0] + 1, gTradeMessageWindowRects[a0][1] + 1);
+}
 
 asm(".section .text.sub_804DAD4");
 
