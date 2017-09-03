@@ -5141,38 +5141,4 @@ _0804D894: .4byte gTradeBallVerticalVelocityTable
 _0804D898: .4byte SpriteCallbackDummy
 	thumb_func_end sub_804D80C
 
-	thumb_func_start sub_804D89C
-sub_804D89C: @ 804D89C
-	push {r4-r6,lr}
-	ldr r0, _0804D8D0 @ =gSpecialVar_0x8004
-	ldrh r0, [r0]
-	lsls r4, r0, 4
-	subs r4, r0
-	lsls r4, 2
-	ldr r0, _0804D8D4 @ =gIngameTrades
-	adds r4, r0
-	ldr r0, _0804D8D8 @ =gStringVar1
-	ldrh r1, [r4, 0x38]
-	movs r6, 0xB
-	muls r1, r6
-	ldr r5, _0804D8DC @ =gSpeciesNames
-	adds r1, r5
-	bl StringCopy
-	ldr r0, _0804D8E0 @ =gStringVar2
-	ldrh r1, [r4, 0xC]
-	muls r1, r6
-	adds r1, r5
-	bl StringCopy
-	ldrh r0, [r4, 0x38]
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0804D8D0: .4byte gSpecialVar_0x8004
-_0804D8D4: .4byte gIngameTrades
-_0804D8D8: .4byte gStringVar1
-_0804D8DC: .4byte gSpeciesNames
-_0804D8E0: .4byte gStringVar2
-	thumb_func_end sub_804D89C
-
 	.align 2, 0 @ Don't pad with nop.

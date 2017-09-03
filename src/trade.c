@@ -3171,6 +3171,14 @@ static bool8 sub_804ABF8(void)
 
 asm(".section .text.sub_804DAD4");
 
+u16 sub_804D89C(void)
+{
+    const struct InGameTrade *inGameTrade = &gIngameTrades[gSpecialVar_0x8004];
+    StringCopy(gStringVar1, gSpeciesNames[inGameTrade->playerSpecies]);
+    StringCopy(gStringVar2, gSpeciesNames[inGameTrade->species]);
+    return inGameTrade->playerSpecies;
+}
+
 /*static*/ void sub_804D8E4(void)
 {
     u8 nickname[32];
