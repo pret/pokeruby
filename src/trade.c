@@ -22,8 +22,9 @@
 #include "data2.h"
 #include "pokemon_summary_screen.h"
 #include "rom4.h"
-#include "trade.h"
 #include "rom_8077ABC.h"
+#include "daycare.h"
+#include "trade.h"
 
 #ifdef ENGLISH
 #define sub_804A96C_alt sub_804A96C
@@ -145,6 +146,7 @@ static void sub_8049E9C(u8);
 static u8 sub_80499F0(const u8 *, u8, u8);
 /*static*/ void sub_804A840(u8);
 /*static*/ u8 sub_804A2B4(u8 *, u8, u8);
+/*static*/ void sub_804A96C_alt(struct UnkStructD *, u8, u8, const u16 *, u8, u8, u16);
 
 extern u8 gUnknown_020297D8[2];
 extern u8 *gUnknown_020296CC[13];
@@ -2027,7 +2029,7 @@ static void sub_8049E9C(u8 a0)
 //    u8 sp_plus_6c = temp0 < PARTY_SIZE ? 1 : 0;
 //    u8 r8 = temp0 % 6;
 //    s8 stringLength;
-//    u8 string[10];
+//    u8 string[50];
 //    
 //    switch (gUnknown_03004824->unk_0080[a0])
 //    {
@@ -2063,13 +2065,13 @@ static void sub_8049E9C(u8 a0)
 //            gSprites[gUnknown_03004824->partyIcons[sp_plus_6c][r8]].pos1.y = gTradeMonSpriteCoords[sp_plus_6c][1] * 8 - 12;
 //            gSprites[gUnknown_03004824->partyIcons[sp_plus_6c][r8]].pos2.x = 0;
 //            gSprites[gUnknown_03004824->partyIcons[sp_plus_6c][r8]].pos2.y = 0;
-//            stringLength = sub_804A2B4(&pokemon, sp_plus_6c, r8);
+//            stringLength = sub_804A2B4(&string[6], sp_plus_6c, r8);
 //            string[0] = 0xFC;
 //            string[1] = 0x06;
 //            string[2] = 0x04;
 //            string[3] = 0xFC;
 //            string[4] = 0x11;
-//            string[5] = (64 - stringLength + (stringLength > 64 ? 1 : 0)) / 2;
+//            string[5] = (64 - stringLength) / 2;
 //            sub_8003460(&gUnknown_03004824->window, string, sp_plus_6c * 192 + gUnknown_03004824->unk_007a, gUnknown_0820C334[sp_plus_6c][0], gUnknown_0820C334[sp_plus_6c][1]);
 //            sub_804A33C()
 //            break;
@@ -2128,6 +2130,214 @@ void sub_804A33C(u8 *a0, u8 whichParty, u8 whichPokemon)
         StringCopy(a0, gOtherText_Terminator);
         StringAppend(a0, gOtherText_FourQuestions);
     }
+}
+
+#ifdef NONMATCHING
+void sub_804A41C(u8 whichParty)
+{
+    u8 i;
+    u8 nickname[22];
+    u8 string[40];
+    struct Pokemon *pokemon;
+
+    string[0] = 0xFC;
+    string[1] = 0x06;
+    string[2] = 0x04;
+    string[3] = 0xFC;
+    string[4] = 0x11;
+    string[5] = 0x00;
+
+    for (i = 0; i < gUnknown_03004824->partyCounts[whichParty]; i ++)
+    {
+        pokemon = whichParty == 0 ? &gPlayerParty[i] : &gEnemyParty[i];
+        GetMonData(pokemon, MON_DATA_NICKNAME, nickname);
+        StringCopy10(string + 6, nickname);
+        GetMonGender(pokemon);
+        string[5] = (50 - GetStringWidthGivenWindowConfig(&gWindowConfig_81E7294, string + 6)) / 2;
+        sub_8003460(&gUnknown_03004824->window, string, gUnknown_03004824->unk_007a + 22 * 6 * whichParty + 22 * i, gTradeMonSpriteCoords[i + 6 * whichParty][0], gTradeMonSpriteCoords[i + 6 * whichParty][1]);
+    }
+}
+#else
+__attribute__((naked))
+void sub_804A41C(u8 whichParty)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                    "\tmov r7, r10\n"
+                    "\tmov r6, r9\n"
+                    "\tmov r5, r8\n"
+                    "\tpush {r5-r7}\n"
+                    "\tsub sp, 0x44\n"
+                    "\tlsls r0, 24\n"
+                    "\tlsrs r5, r0, 24\n"
+                    "\tadd r3, sp, 0x1C\n"
+                    "\tmovs r2, 0\n"
+                    "\tmovs r1, 0xFC\n"
+                    "\tstrb r1, [r3]\n"
+                    "\tmovs r0, 0x6\n"
+                    "\tstrb r0, [r3, 0x1]\n"
+                    "\tmovs r0, 0x4\n"
+                    "\tstrb r0, [r3, 0x2]\n"
+                    "\tstrb r1, [r3, 0x3]\n"
+                    "\tmovs r0, 0x11\n"
+                    "\tstrb r0, [r3, 0x4]\n"
+                    "\tstrb r2, [r3, 0x5]\n"
+                    "\tmovs r6, 0\n"
+                    "\tldr r1, _0804A470 @ =gUnknown_03004824\n"
+                    "\tldr r0, [r1]\n"
+                    "\tadds r0, 0x42\n"
+                    "\tadds r0, r5\n"
+                    "\tldrb r0, [r0]\n"
+                    "\tcmp r6, r0\n"
+                    "\tbcs _0804A504\n"
+                    "\tmov r8, r3\n"
+                    "\tadds r7, r1, 0\n"
+                    "\tldr r0, _0804A474 @ =gTradeMonSpriteCoords\n"
+                    "\tmov r9, r0\n"
+                    "\tmovs r4, 0x1\n"
+                    "\tadd r4, r9\n"
+                    "\tmov r10, r4\n"
+                    "_0804A462:\n"
+                    "\tcmp r5, 0\n"
+                    "\tbne _0804A47C\n"
+                    "\tmovs r0, 0x64\n"
+                    "\tadds r4, r6, 0\n"
+                    "\tmuls r4, r0\n"
+                    "\tldr r0, _0804A478 @ =gPlayerParty\n"
+                    "\tb _0804A484\n"
+                    "\t.align 2, 0\n"
+                    "_0804A470: .4byte gUnknown_03004824\n"
+                    "_0804A474: .4byte gTradeMonSpriteCoords\n"
+                    "_0804A478: .4byte gPlayerParty\n"
+                    "_0804A47C:\n"
+                    "\tmovs r0, 0x64\n"
+                    "\tadds r4, r6, 0\n"
+                    "\tmuls r4, r0\n"
+                    "\tldr r0, _0804A514 @ =gEnemyParty\n"
+                    "_0804A484:\n"
+                    "\tadds r4, r0\n"
+                    "\tadds r0, r4, 0\n"
+                    "\tmovs r1, 0x2\n"
+                    "\tadd r2, sp, 0x4\n"
+                    "\tbl GetMonData\n"
+                    "\tmov r0, sp\n"
+                    "\tadds r0, 0x22\n"
+                    "\tadd r1, sp, 0x4\n"
+                    "\tbl StringCopy10\n"
+                    "\tadds r0, r4, 0\n"
+                    "\tbl GetMonGender\n"
+                    "\tmov r1, sp\n"
+                    "\tadds r1, 0x22\n"
+                    "\tldr r0, _0804A518 @ =gWindowConfig_81E7294\n"
+                    "\tbl GetStringWidthGivenWindowConfig\n"
+                    "\tlsls r0, 24\n"
+                    "\tlsrs r0, 24\n"
+                    "\tmovs r1, 0x32\n"
+                    "\tsubs r1, r0\n"
+                    "\tlsrs r0, r1, 31\n"
+                    "\tadds r1, r0\n"
+                    "\tasrs r1, 1\n"
+                    "\tmov r0, r8\n"
+                    "\tstrb r1, [r0, 0x5]\n"
+                    "\tldr r1, [r7]\n"
+                    "\tadds r0, r1, 0x4\n"
+                    "\tadds r1, 0x7A\n"
+                    "\tlsls r2, r5, 5\n"
+                    "\tadds r2, r5\n"
+                    "\tlsls r2, 2\n"
+                    "\tldrb r1, [r1]\n"
+                    "\tadds r2, r1\n"
+                    "\tmovs r1, 0x16\n"
+                    "\tmuls r1, r6\n"
+                    "\tadds r2, r1\n"
+                    "\tlsls r2, 16\n"
+                    "\tlsrs r2, 16\n"
+                    "\tlsls r1, r5, 1\n"
+                    "\tadds r1, r5\n"
+                    "\tlsls r1, 1\n"
+                    "\tadds r1, r6, r1\n"
+                    "\tlsls r1, 1\n"
+                    "\tmov r4, r9\n"
+                    "\tadds r3, r1, r4\n"
+                    "\tldrb r3, [r3]\n"
+                    "\tadd r1, r10\n"
+                    "\tldrb r1, [r1]\n"
+                    "\tstr r1, [sp]\n"
+                    "\tmov r1, r8\n"
+                    "\tbl sub_8003460\n"
+                    "\tadds r0, r6, 0x1\n"
+                    "\tlsls r0, 24\n"
+                    "\tlsrs r6, r0, 24\n"
+                    "\tldr r0, [r7]\n"
+                    "\tadds r0, 0x42\n"
+                    "\tadds r0, r5\n"
+                    "\tldrb r0, [r0]\n"
+                    "\tcmp r6, r0\n"
+                    "\tbcc _0804A462\n"
+                    "_0804A504:\n"
+                    "\tadd sp, 0x44\n"
+                    "\tpop {r3-r5}\n"
+                    "\tmov r8, r3\n"
+                    "\tmov r9, r4\n"
+                    "\tmov r10, r5\n"
+                    "\tpop {r4-r7}\n"
+                    "\tpop {r0}\n"
+                    "\tbx r0\n"
+                    "\t.align 2, 0\n"
+                    "_0804A514: .4byte gEnemyParty\n"
+                    "_0804A518: .4byte gWindowConfig_81E7294");
+}
+#endif
+
+void sub_804A51C(u8 a0, u8 a1, u8 a2, u8 a3, u8 a4, u8 a5)
+{
+    u8 nickname[24];
+    u8 level;
+    u8 gender;
+    u8 lv_div_10;
+    sub_804A96C(&gUnknown_03004824->unk_00c8, a4, a5, gTradeMonBoxTilemap, 6, 3, 0);
+    if (a0 == 0)
+    {
+        level = GetMonData(&gPlayerParty[a1], MON_DATA_LEVEL, NULL);
+        gender = GetMonGender(&gPlayerParty[a1]);
+        GetMonData(&gPlayerParty[a1], MON_DATA_NICKNAME, nickname);
+    }
+    else
+    {
+        level = GetMonData(&gEnemyParty[a1], MON_DATA_LEVEL, NULL);
+        gender = GetMonGender(&gEnemyParty[a1]);
+        GetMonData(&gEnemyParty[a1], MON_DATA_NICKNAME, nickname);
+    }
+    if (gUnknown_03004824->unk_005d[a0][a1] == 0)
+    {
+        lv_div_10 = level / 10;
+        if (lv_div_10 != 0)
+        {
+            gUnknown_03004824->unk_00c8.unk_12[a2 + 32 * a3] = lv_div_10 + 0x60;
+        }
+        gUnknown_03004824->unk_00c8.unk_12[a2 + 32 * a3 + 1] = (u8)(level % 10) + 0x70;
+        if (gender == MON_MALE)
+        {
+            if (!NameHasGenderSymbol(nickname, MON_MALE))
+            {
+                gUnknown_03004824->unk_00c8.unk_12[a2 + 32 * a3 - 31] += 1;
+            }
+        }
+        else if (gender == MON_FEMALE)
+        {
+            if (!NameHasGenderSymbol(nickname, MON_FEMALE))
+            {
+                gUnknown_03004824->unk_00c8.unk_12[a2 + 32 * a3 - 31] += 2;
+            }
+        }
+    }
+    else
+    {
+        gUnknown_03004824->unk_00c8.unk_12[a2 + 32 * a3 - 32] = gUnknown_03004824->unk_00c8.unk_12[a2 + 32 * a3 - 33];
+        gUnknown_03004824->unk_00c8.unk_12[a2 + 32 * a3 - 31] = gUnknown_03004824->unk_00c8.unk_12[a2 + 32 * a3 - 36] | 0x400;
+    }
+#ifdef GERMAN
+    gUnknown_03004824->unk_00c8.unk_10 = 1;
+#endif
 }
 
 asm(".section .text.sub_804A96C");

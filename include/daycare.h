@@ -10,5 +10,6 @@ void sub_8041950(void);
 void sub_8042044(struct Pokemon *mon, u16, u8);
 u8 sub_80422A0(void);
 u8 daycare_relationship_score_from_savegame(void);
+bool8 NameHasGenderSymbol(const u8 *, u8);
 
 #endif // GUARD_DAYCARE_H

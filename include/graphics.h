@@ -2569,4 +2569,5 @@ extern const u16 gUnknown_08EA0328[];
 extern const u16 gUnknown_08EA02C8[];
 extern const u16 gUnknown_08EA0348[];
 extern const u16 gUnknown_08EA15C8[];
+extern const u16 gTradeMonBoxTilemap[];
 #endif  // GUARD_GRAPHICS_H
