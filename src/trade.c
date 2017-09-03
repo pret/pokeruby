@@ -191,7 +191,7 @@ void sub_804A33C(u8 *, u8, u8);
 static
 #endif
 void sub_804A51C(u8, u8, u8, u8, u8, u8);
-
+static void sub_804D7AC(struct Sprite *);
 /*static*/ void sub_804BA94(u8, u8);
 /*static*/ bool8 sub_804C29C(void);
 /*static*/ void sub_804DC18(void);
@@ -3171,6 +3171,20 @@ static bool8 sub_804ABF8(void)
 }
 
 asm(".section .text.sub_804DAD4");
+
+void sub_804D738(struct Sprite *sprite)
+{
+    sprite->pos2.y += gTradeBallVerticalVelocityTable[sprite->data0];
+    if (sprite->data0 == 22)
+        PlaySE(SE_KON);
+    if (++ sprite->data0 == 44)
+    {
+        PlaySE(SE_W025);
+        sprite->callback = sub_804D7AC;
+        sprite->data0 = 0;
+        BeginNormalPaletteFade(1 << (16 + sprite->oam.paletteNum), -1, 0, 16, -1);
+    }
+}
 
 void sub_804D7AC(struct Sprite *sprite)
 {
