@@ -193,7 +193,7 @@ void sub_804A51C(u8, u8, u8, u8, u8, u8);
 /*static*/ void sub_804BB78(void);
 /*static*/ void sub_804D63C(void);
 /*static*/ bool8 sub_804B2B0(void);
-/*static*/ void sub_804E144(void);
+static void sub_804E144(void);
 
 extern u8 gUnknown_020297D8[2];
 extern u8 *gUnknown_020296CC[13];
@@ -3360,6 +3360,16 @@ void sub_804DC88(void)
     {
         RunTasks();
     }
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+}
+
+static void sub_804E144(void)
+{
+    if (!gPaletteFade.active)
+        SetMainCallback2((sub_8047CD8));
+    RunTasks();
     AnimateSprites();
     BuildOamBuffer();
     UpdatePaletteFade();

@@ -5395,29 +5395,6 @@ _0804DAD0: .4byte gEnemyParty
 
 .section .text.sub_804DB2C
 
-	thumb_func_start sub_804E144
-sub_804E144: @ 804E144
-	push {lr}
-	ldr r0, _0804E16C @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _0804E158
-	ldr r0, _0804E170 @ =sub_8047CD8
-	bl SetMainCallback2
-_0804E158:
-	bl RunTasks
-	bl AnimateSprites
-	bl BuildOamBuffer
-	bl UpdatePaletteFade
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0804E16C: .4byte gPaletteFade
-_0804E170: .4byte sub_8047CD8
-	thumb_func_end sub_804E144
-
 	thumb_func_start sub_804E174
 sub_804E174: @ 804E174
 	push {lr}
