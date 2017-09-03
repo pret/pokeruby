@@ -2455,7 +2455,25 @@ void sub_804A840(u8 whichParty)
     gUnknown_03004824->unk_0080[whichParty] = 0;
 }
 
-asm(".section .text.sub_804A96C");
+void sub_804A938(struct UnkStructD *unkStructD)
+{
+    unkStructD->unk_10 = 1;
+}
+
+void sub_804A940(struct UnkStructD *unkStructD)
+{
+    if (unkStructD->unk_10)
+    {
+        CpuCopy16(unkStructD->unk_12, unkStructD->vramAddr, sizeof(unkStructD->unk_12));
+        unkStructD->unk_10 = 0;
+    }
+}
+
+void sub_804A964(struct UnkStructD *unkStructD, void *dest)
+{
+    unkStructD->unk_10 = 0;
+    unkStructD->vramAddr = dest;
+}
 
 /*static*/ void sub_804A96C(struct UnkStructD *arg0, u8 left, u8 top, const u16 *tilemap, u8 width, u8 height, u16 sp8) {
     int y, x;

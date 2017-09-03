@@ -493,45 +493,7 @@ _0804A2AC: .4byte gUnknown_0820C3D1
 _0804A2B0: .4byte gUnknown_03004824
 	thumb_func_end sub_8049ED4
 
-    .section .text.sub_804A33C
-
-	thumb_func_start sub_804A938
-sub_804A938: @ 804A938
-	movs r1, 0x1
-	strb r1, [r0, 0x10]
-	bx lr
-	thumb_func_end sub_804A938
-
-	thumb_func_start sub_804A940
-sub_804A940: @ 804A940
-	push {r4,lr}
-	adds r4, r0, 0
-	ldrb r0, [r4, 0x10]
-	cmp r0, 0
-	beq _0804A95C
-	adds r0, r4, 0
-	adds r0, 0x12
-	ldr r1, [r4, 0x8]
-	movs r2, 0x80
-	lsls r2, 3
-	bl CpuSet
-	movs r0, 0
-	strb r0, [r4, 0x10]
-_0804A95C:
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_804A940
-
-	thumb_func_start sub_804A964
-sub_804A964: @ 804A964
-	movs r2, 0
-	strb r2, [r0, 0x10]
-	str r1, [r0, 0x8]
-	bx lr
-	thumb_func_end sub_804A964
-
-.section .text.sub_804A9F4
+    .section .text.sub_804A9F4
 
 	thumb_func_start sub_804A9F4
 sub_804A9F4: @ 804A9F4

@@ -81,8 +81,6 @@ SECTIONS {
         src/trade.o(.text);
         asm/trade.o(.text);
         src/trade.o(.text.sub_804A2B4);
-        asm/trade.o(.text.sub_804A33C);
-        src/trade.o(.text.sub_804A96C);
         asm/trade.o(.text.sub_804A9F4);
         src/trade.o(.text.sub_804DAD4);
         asm/trade.o(.text.sub_804DB2C);
