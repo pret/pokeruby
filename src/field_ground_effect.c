@@ -32,97 +32,6 @@ void GroundEffect_HotSprings(struct MapObject *mapObj, struct Sprite *sprite);
 void GroundEffect_Seaweed(struct MapObject *mapObj, struct Sprite *sprite);
 u8 GetReflectionTypeByMetatileBehavior(u32 behavior);
 
-static const u32 sReflectionFlags[] = { 0x00000020, 0x00000010 };
-
-typedef bool8 (*MetatileFunc)(u8);
-
-static const MetatileFunc metatileFuncs[] = {
-    MetatileBehavior_IsTallGrass,
-    MetatileBehavior_IsLongGrass,
-    MetatileBehavior_IsPuddle,
-    MetatileBehavior_IsSurfableWaterOrUnderwater,
-    MetatileBehavior_IsShallowFlowingWater,
-    MetatileBehavior_IsATile,
-};
-
-static const u32 jumpLandingFlags[] = {
-    0x00001000, // Landing in tall grass
-    0x00002000, // Landing in long grass
-    0x00004000, // Landing on puddle
-    0x00008000, // Landing on surfable water or underwater
-    0x00004000, // Landing on shallow flowing water
-    0x00010000, // Landing on any other type of ground
-};
-
-static bool8 (*const gUnknown_08376040[])(u8) = {
-    MetatileBehavior_IsJumpSouth,
-    MetatileBehavior_IsJumpNorth,
-    MetatileBehavior_IsJumpWest,
-    MetatileBehavior_IsJumpEast,
-};
-
-static const u8 gUnknown_08376050[] = {
-    0x73, 0x73, 0x53, 0x73, 0x53, 0x73, 0x53, 0x73, 0x53, 0x73, 0x53, 0x73, 0x53, 0x00, 0x00, 0x73
-};
-
-// Each byte corresponds to a sprite priority for a field object.
-// This is directly the inverse of gFieldObjectPriorities_08376070.
-static const u8 gFieldObjectPriorities_08376060[] = {
-    2, 2, 2, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 0, 0, 2
-};
-
-// Each byte corresponds to a sprite priority for a field object.
-// This is the inverse of gFieldObjectPriorities_08376060.
-// 1 = Above player sprite
-// 2 = Below player sprite
-static const u8 gFieldObjectPriorities_08376070[] = {
-    1, 1, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 0, 0, 1,
-};
-
-static void (*const gUnknown_08376080[])(struct MapObject *mapObj, struct Sprite *sprite, u8 a) = {
-    nullsub, DoTracksGroundEffect_Footprints, DoTracksGroundEffect_BikeTireTracks,
-};
-
-// First byte is a Field Effect script id. (gFieldEffectScriptPointers)
-// Last three bytes are unknown.
-static const u8 gSandFootprints_FieldEffectData[] = { 0xD, 0x0, 0x18, 0x0 };
-
-//  Specifies which bike track shape to show next.
-//  For example, when the bike turns from up to right, it will show
-//  a track that curves to the right.
-//  Each 4-byte row corresponds to the initial direction of the bike, and
-//  each byte in that row is for the next direction of the bike in the order
-//  of down, up, left, right.
-static const u8 gBikeTireTracks_Transitions[4][4] = {
-    1, 2, 7, 8,
-    1, 2, 6, 5,
-    5, 8, 3, 4,
-    6, 7, 3, 4,
-};
-
-static void (*const gUnknown_083760A0[])(struct MapObject *mapObj, struct Sprite *sprite) = {
-    GroundEffect_SpawnOnTallGrass,
-    sub_8063E94,
-    sub_8063EE0,
-    sub_8063F2C,
-    GroundEffect_WaterReflection,
-    GroundEffect_IceReflection,
-    GroundEffect_FlowingWater,
-    sub_8063FA0,
-    sub_8063FCC,
-    GroundEffect_Ripple,
-    GroundEffect_StepOnPuddle,
-    GroundEffect_SandPile,
-    GroundEffect_JumpOnTallGrass,
-    GroundEffect_JumpOnLongGrass,
-    GroundEffect_JumpOnShallowWater,
-    GroundEffect_JumpOnWater,
-    GroundEffect_JumpLandingDust,
-    GroundEffect_ShortGrass,
-    GroundEffect_HotSprings,
-    GroundEffect_Seaweed
-};
-
 static void GetAllGroundEffectFlags_OnSpawn(struct MapObject *mapObj, u32 *flags)
 {
     FieldObjectUpdateMetatileBehaviors(mapObj);
@@ -170,19 +79,8 @@ void FieldObjectUpdateMetatileBehaviors(struct MapObject *mapObj)
 
 void GetGroundEffectFlags_Reflection(struct MapObject *mapObj, u32 *flags)
 {
-    u32 reflectionFlags[2];
-    u32 a;
-    u32 b;
-    u8 type;
-
-    // Declaring sReflectionFlags inside the function is a neater match than
-    // this.
-    b = sReflectionFlags[1];
-    a = sReflectionFlags[0];
-    reflectionFlags[0] = a;
-    reflectionFlags[1] = b;
-
-    type = FieldObjectCheckForReflectiveSurface(mapObj);
+    u32 reflectionFlags[2] = { 0x00000020, 0x00000010 };
+    u8 type = FieldObjectCheckForReflectiveSurface(mapObj);
 
     if (type)
     {
@@ -333,6 +231,25 @@ void GetGroundEffectFlags_Seaweed(struct MapObject *mapObj, u32 *flags)
 
 void GetGroundEffectFlags_JumpLanding(struct MapObject *mapObj, u32 *flags)
 {
+    typedef bool8 (*MetatileFunc)(u8);
+
+    static const MetatileFunc metatileFuncs[] = {
+        MetatileBehavior_IsTallGrass,
+        MetatileBehavior_IsLongGrass,
+        MetatileBehavior_IsPuddle,
+        MetatileBehavior_IsSurfableWaterOrUnderwater,
+        MetatileBehavior_IsShallowFlowingWater,
+        MetatileBehavior_IsATile,
+    };
+
+    static const u32 jumpLandingFlags[] = {
+        0x00001000, // Landing in tall grass
+        0x00002000, // Landing in long grass
+        0x00004000, // Landing on puddle
+        0x00008000, // Landing on surfable water or underwater
+        0x00004000, // Landing on shallow flowing water
+        0x00010000, // Landing on any other type of ground
+    };
 
     if (mapObj->mapobj_bit_5 && !mapObj->mapobj_bit_25)
     {
@@ -397,6 +314,13 @@ u8 GetReflectionTypeByMetatileBehavior(u32 behavior)
 
 u8 GetLedgeJumpDirection(s16 x, s16 y, u8 z)
 {
+    static bool8 (*const unknown_08376040[])(u8) = {
+        MetatileBehavior_IsJumpSouth,
+        MetatileBehavior_IsJumpNorth,
+        MetatileBehavior_IsJumpWest,
+        MetatileBehavior_IsJumpEast,
+    };
+
     u8 b;
     u8 index = z;
 
@@ -408,7 +332,7 @@ u8 GetLedgeJumpDirection(s16 x, s16 y, u8 z)
     index--;
     b = MapGridGetMetatileBehaviorAt(x, y);
 
-    if (gUnknown_08376040[index](b) == 1)
+    if (unknown_08376040[index](b) == 1)
         return index + 1;
 
     return 0;
@@ -449,6 +373,24 @@ bool8 IsZCoordMismatchAt(u8 z, s16 x, s16 y)
     return FALSE;
 }
 
+static const u8 sUnknown_08376050[] = {
+    0x73, 0x73, 0x53, 0x73, 0x53, 0x73, 0x53, 0x73, 0x53, 0x73, 0x53, 0x73, 0x53, 0x00, 0x00, 0x73
+};
+
+// Each byte corresponds to a sprite priority for a field object.
+// This is directly the inverse of gFieldObjectPriorities_08376070.
+static const u8 sFieldObjectPriorities_08376060[] = {
+    2, 2, 2, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 0, 0, 2
+};
+
+// Each byte corresponds to a sprite priority for a field object.
+// This is the inverse of gFieldObjectPriorities_08376060.
+// 1 = Above player sprite
+// 2 = Below player sprite
+static const u8 sFieldObjectPriorities_08376070[] = {
+    1, 1, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 0, 0, 1,
+};
+
 void FieldObjectUpdateZCoordAndPriority(struct MapObject *mapObj, struct Sprite *sprite)
 {
     if (mapObj->mapobj_bit_26)
@@ -456,19 +398,19 @@ void FieldObjectUpdateZCoordAndPriority(struct MapObject *mapObj, struct Sprite 
 
     FieldObjectUpdateZCoord(mapObj);
 
-    sprite->subspriteTableNum = gFieldObjectPriorities_08376070[mapObj->elevation];
-    sprite->oam.priority = gFieldObjectPriorities_08376060[mapObj->elevation];
+    sprite->subspriteTableNum = sFieldObjectPriorities_08376070[mapObj->elevation];
+    sprite->oam.priority = sFieldObjectPriorities_08376060[mapObj->elevation];
 }
 
 void InitObjectPriorityByZCoord(struct Sprite *sprite, u8 z)
 {
-    sprite->subspriteTableNum = gFieldObjectPriorities_08376070[z];
-    sprite->oam.priority = gFieldObjectPriorities_08376060[z];
+    sprite->subspriteTableNum = sFieldObjectPriorities_08376070[z];
+    sprite->oam.priority = sFieldObjectPriorities_08376060[z];
 }
 
 u8 ZCoordToPriority(u8 z)
 {
-    return gFieldObjectPriorities_08376060[z];
+    return sFieldObjectPriorities_08376060[z];
 }
 
 void FieldObjectUpdateZCoord(struct MapObject *mapObj)
@@ -492,7 +434,7 @@ void SetObjectSubpriorityByZCoord(u8 a, struct Sprite *sprite, u8 b)
     u32 tmpb = *(u16 *)&gSpriteCoordOffsetY;
     s32 tmp2 = (tmpa - tmp) + tmpb;
     u16 tmp3 = (0x10 - ((((u32)tmp2 + 8) & 0xFF) >> 4)) * 2;
-    sprite->subpriority = tmp3 + gUnknown_08376050[a] + b;
+    sprite->subpriority = tmp3 + sUnknown_08376050[a] + b;
 }
 
 void FieldObjectUpdateSubpriority(struct MapObject *mapObj, struct Sprite *sprite)
@@ -605,6 +547,10 @@ void GroundEffect_FlowingWater(struct MapObject *mapObj, struct Sprite *sprite)
     oe_exec_and_other_stuff(FLDEFF_FEET_IN_FLOWING_WATER, mapObj);
 }
 
+static void (*const gUnknown_08376080[])(struct MapObject *mapObj, struct Sprite *sprite, u8 a) = {
+    nullsub, DoTracksGroundEffect_Footprints, DoTracksGroundEffect_BikeTireTracks,
+};
+
 void sub_8063FA0(struct MapObject *mapObj, struct Sprite *sprite)
 {
     const struct MapObjectGraphicsInfo *info = GetFieldObjectGraphicsInfo(mapObj->graphicsId);
@@ -623,19 +569,33 @@ static void nullsub(struct MapObject *mapObj, struct Sprite *sprite, u8 a)
 
 static void DoTracksGroundEffect_Footprints(struct MapObject *mapObj, struct Sprite *sprite, u8 a)
 {
-    u16 buf[2];
-    memcpy(&buf, gSandFootprints_FieldEffectData, sizeof(gSandFootprints_FieldEffectData));
+    // First half-word is a Field Effect script id. (gFieldEffectScriptPointers)
+    u16 sandFootprints_FieldEffectData[2] = { 0xD, 0x18 };
+
     gUnknown_0202FF84[0] = mapObj->coords3.x;
     gUnknown_0202FF84[1] = mapObj->coords3.y;
     gUnknown_0202FF84[2] = 149;
     gUnknown_0202FF84[3] = 2;
     gUnknown_0202FF84[4] = mapObj->mapobj_unk_18;
-    FieldEffectStart(buf[a]);
+    FieldEffectStart(sandFootprints_FieldEffectData[a]);
 }
 
 static void DoTracksGroundEffect_BikeTireTracks(
     struct MapObject *mapObj, struct Sprite *sprite, u8 a)
 {
+    //  Specifies which bike track shape to show next.
+    //  For example, when the bike turns from up to right, it will show
+    //  a track that curves to the right.
+    //  Each 4-byte row corresponds to the initial direction of the bike, and
+    //  each byte in that row is for the next direction of the bike in the order
+    //  of down, up, left, right.
+    static const u8 bikeTireTracks_Transitions[4][4] = {
+        1, 2, 7, 8,
+        1, 2, 6, 5,
+        5, 8, 3, 4,
+        6, 7, 3, 4,
+    };
+
     if (mapObj->coords2.x != mapObj->coords3.x || mapObj->coords2.y != mapObj->coords3.y)
     {
         gUnknown_0202FF84[0] = mapObj->coords3.x;
@@ -643,7 +603,7 @@ static void DoTracksGroundEffect_BikeTireTracks(
         gUnknown_0202FF84[2] = 149;
         gUnknown_0202FF84[3] = 2;
         gUnknown_0202FF84[4] =
-            gBikeTireTracks_Transitions[mapObj->mapobj_unk_20][mapObj->mapobj_unk_18 - 5];
+            bikeTireTracks_Transitions[mapObj->mapobj_unk_20][mapObj->mapobj_unk_18 - 5];
         FieldEffectStart(FLDEFF_BIKE_TIRE_TRACKS);
     }
 }
@@ -732,6 +692,29 @@ void GroundEffect_Seaweed(struct MapObject *mapObj, struct Sprite *sprite)
     gUnknown_0202FF84[1] = mapObj->coords2.y;
     FieldEffectStart(FLDEFF_BUBBLES);
 }
+
+static void (*const gUnknown_083760A0[])(struct MapObject *mapObj, struct Sprite *sprite) = {
+    GroundEffect_SpawnOnTallGrass,
+    sub_8063E94,
+    sub_8063EE0,
+    sub_8063F2C,
+    GroundEffect_WaterReflection,
+    GroundEffect_IceReflection,
+    GroundEffect_FlowingWater,
+    sub_8063FA0,
+    sub_8063FCC,
+    GroundEffect_Ripple,
+    GroundEffect_StepOnPuddle,
+    GroundEffect_SandPile,
+    GroundEffect_JumpOnTallGrass,
+    GroundEffect_JumpOnLongGrass,
+    GroundEffect_JumpOnShallowWater,
+    GroundEffect_JumpOnWater,
+    GroundEffect_JumpLandingDust,
+    GroundEffect_ShortGrass,
+    GroundEffect_HotSprings,
+    GroundEffect_Seaweed
+};
 
 void sub_8064218(struct MapObject *mapObj, struct Sprite *sprite, u32 flags)
 {
