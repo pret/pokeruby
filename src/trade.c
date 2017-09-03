@@ -2430,6 +2430,31 @@ void sub_804A80C(void)
     sub_804A41C(1);
 }
 
+void sub_804A840(u8 whichParty)
+{
+    if (whichParty == 0)
+    {
+        FillWindowRect_DefaultPalette(&gUnknown_03004824->window, 0, gUnknown_0820C330[0][0], 0, gUnknown_0820C330[0][1], 19);
+        sub_804A96C_alt(&gUnknown_03004824->unk_00c8, 0, 0, gTradePartyBoxTilemap, 15, 17, 0);
+        sub_804A6DC(0);
+        sub_804A41C(0);
+        sub_804A740(0);
+        sub_804A938(&gUnknown_03004824->unk_00c8);
+    }
+    else
+    {
+        HandleDestroyMenuCursors();
+        FillWindowRect_DefaultPalette(&gUnknown_03004824->window, 0, gUnknown_0820C330[1][0], 0, gUnknown_0820C330[1][1], 19);
+        sub_804A96C_alt(&gUnknown_03004824->unk_00c8, 15, 0, gTradePartyBoxTilemap, 15, 17, 0);
+        sub_804A6DC(1);
+        sub_804A41C(1);
+        sub_804A740(1);
+        sub_804A938(&gUnknown_03004824->unk_00c8);
+    }
+    sub_804ACD8(gUnknown_0820C14C[1], (u8 *)(BG_CHAR_ADDR(4) + 32 * gUnknown_03004824->unk_007e), 20);
+    gUnknown_03004824->unk_0080[whichParty] = 0;
+}
+
 asm(".section .text.sub_804A96C");
 
 /*static*/ void sub_804A96C(struct UnkStructD *arg0, u8 left, u8 top, const u16 *tilemap, u8 width, u8 height, u16 sp8) {
