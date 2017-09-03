@@ -495,32 +495,6 @@ _0804A2B0: .4byte gUnknown_03004824
 
     .section .text.sub_804A33C
 
-	thumb_func_start sub_804A80C
-sub_804A80C: @ 804A80C
-	push {lr}
-	sub sp, 0x8
-	ldr r0, _0804A838 @ =gUnknown_03004824
-	ldr r0, [r0]
-	adds r0, 0x4
-	ldr r1, _0804A83C @ =gUnknown_0820C330
-	ldrb r2, [r1, 0x2]
-	ldrb r1, [r1, 0x3]
-	str r1, [sp]
-	movs r1, 0x13
-	str r1, [sp, 0x4]
-	movs r1, 0
-	movs r3, 0
-	bl FillWindowRect_DefaultPalette
-	movs r0, 0x1
-	bl sub_804A41C
-	add sp, 0x8
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0804A838: .4byte gUnknown_03004824
-_0804A83C: .4byte gUnknown_0820C330
-	thumb_func_end sub_804A80C
-
 	thumb_func_start sub_804A840
 sub_804A840: @ 804A840
 	push {r4,r5,lr}

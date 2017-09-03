@@ -2424,6 +2424,12 @@ void sub_804A740(u8 whichParty)
     }
 }
 
+void sub_804A80C(void)
+{
+    FillWindowRect_DefaultPalette(&gUnknown_03004824->window, 0, gUnknown_0820C330[1][0], 0, gUnknown_0820C330[1][1], 19);
+    sub_804A41C(1);
+}
+
 asm(".section .text.sub_804A96C");
 
 /*static*/ void sub_804A96C(struct UnkStructD *arg0, u8 left, u8 top, const u16 *tilemap, u8 width, u8 height, u16 sp8) {
