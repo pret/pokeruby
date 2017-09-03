@@ -135,6 +135,7 @@ struct TradeEwramSubstruct2 {
     /*0x00ba*/ u8 filler_00ba[3];
     /*0x00bd*/ u8 unk_00bd;
     /*0x00c0*/ u32 unk_00c0;
+    /*0x00c4*/ u16 unk_00c4;
 };
 
 struct TradeEwramStruct {
@@ -3170,6 +3171,21 @@ static bool8 sub_804ABF8(void)
 }
 
 asm(".section .text.sub_804DAD4");
+
+void sub_804D7AC(struct Sprite *sprite)
+{
+    if (sprite->data1 == 20)
+        StartSpriteAffineAnim(sprite, 1);
+    if (++ sprite->data1 > 20)
+    {
+        sprite->pos2.y -= gTradeBallVerticalVelocityTable[sprite->data0];
+        if (++ sprite->data0 == 23)
+        {
+            DestroySprite(sprite);
+            gUnknown_03004828->unk_00c4 = 14;
+        }
+    }
+}
 
 void sub_804D80C(struct Sprite *sprite)
 {
