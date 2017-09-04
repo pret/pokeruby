@@ -128,7 +128,7 @@ struct TradeEwramSubstruct2 {
     /*0x0000*/ u8 filler_0000;
     /*0x0004*/ struct Window window;
     /*0x0034*/ u8 unk_0034;
-    /*0x0035*/ u8 filler_0035[0x67];
+    /*0x0038*/ struct Pokemon pokemon;
     /*0x009c*/ u8 unk_009c;
     /*0x009d*/ u8 unk_009d;
     /*0x009e*/ u16 linkData[13];
@@ -245,6 +245,8 @@ void sub_804D80C(struct Sprite *);
 void sub_804E1DC(void);
 void sub_804BBCC(void);
 void sub_804D8E4(void);
+void sub_804BA18(u8);
+void sub_804BA64(void);
 
 extern u8 gUnknown_020297D8[2];
 extern u8 *gUnknown_020296CC[13];
@@ -3501,6 +3503,35 @@ static bool8 sub_804ABF8(void)
 }
 
 asm(".section .text.sub_804DAD4");
+
+void sub_804BA94(u8 a0, u8 a1)
+{
+    u8 friendship;
+    struct Pokemon *playerPokemon = &gPlayerParty[a0];
+    u16 playerMail = GetMonData(playerPokemon, MON_DATA_MAIL);
+
+    struct Pokemon *friendPokemon = &gEnemyParty[a1];
+    u16 friendMail = GetMonData(friendPokemon, MON_DATA_MAIL);
+
+    if (playerMail != 0xff)
+        ClearMailStruct(&gSaveBlock1.mail[playerMail]);
+
+    // This is where the actual trade happens!!
+    gUnknown_03004828->pokemon = *playerPokemon;
+    *playerPokemon = *friendPokemon;
+    *friendPokemon = gUnknown_03004828->pokemon;
+
+    friendship = 70;
+    if (!GetMonData(playerPokemon, MON_DATA_IS_EGG))
+        SetMonData(playerPokemon, MON_DATA_FRIENDSHIP, &friendship);
+
+    if (friendMail != 0xff)
+        GiveMailToMon2(playerPokemon, &gUnknown_02029700[friendMail]);
+
+    sub_804BA18(a0);
+    if (gReceivedRemoteLinkPlayers)
+        sub_804BA64();
+}
 
 void sub_804BB78(void)
 {
