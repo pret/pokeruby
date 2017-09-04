@@ -3497,6 +3497,16 @@ static bool8 sub_804ABF8(void)
 
 asm(".section .text.sub_804DAD4");
 
+void sub_804C164(void)
+{
+    LoadSpriteSheet(&gUnknown_082159A4);
+    LoadSpriteSheet(&gUnknown_082159F4);
+    LoadSpriteSheet(&gUnknown_08215A28);
+    LoadSpriteSheet(&gUnknown_08215A78);
+    LoadSpritePalette(&gUnknown_082159AC);
+    LoadSpritePalette(&gUnknown_082159B4);
+}
+
 void sub_804C1A8(void)
 {
     u8 mpId;

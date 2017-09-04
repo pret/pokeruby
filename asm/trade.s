@@ -2490,30 +2490,4 @@ _0804C15A:
 _0804C160: .4byte gUnknown_03004828
 	thumb_func_end sub_804C0F8
 
-	thumb_func_start sub_804C164
-sub_804C164: @ 804C164
-	push {lr}
-	ldr r0, _0804C190 @ =gUnknown_082159A4
-	bl LoadSpriteSheet
-	ldr r0, _0804C194 @ =gUnknown_082159F4
-	bl LoadSpriteSheet
-	ldr r0, _0804C198 @ =gUnknown_08215A28
-	bl LoadSpriteSheet
-	ldr r0, _0804C19C @ =gUnknown_08215A78
-	bl LoadSpriteSheet
-	ldr r0, _0804C1A0 @ =gUnknown_082159AC
-	bl LoadSpritePalette
-	ldr r0, _0804C1A4 @ =gUnknown_082159B4
-	bl LoadSpritePalette
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0804C190: .4byte gUnknown_082159A4
-_0804C194: .4byte gUnknown_082159F4
-_0804C198: .4byte gUnknown_08215A28
-_0804C19C: .4byte gUnknown_08215A78
-_0804C1A0: .4byte gUnknown_082159AC
-_0804C1A4: .4byte gUnknown_082159B4
-	thumb_func_end sub_804C164
-
 	.align 2, 0 @ Don't pad with nop.
