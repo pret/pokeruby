@@ -3502,6 +3502,32 @@ static bool8 sub_804ABF8(void)
 
 asm(".section .text.sub_804DAD4");
 
+void sub_804BB78(void)
+{
+    switch (gUnknown_03004828->unk_00bd)
+    {
+        case 1:
+            if (sub_8007ECC())
+            {
+                Trade_SendData(gUnknown_03004828);
+                gUnknown_03004828->unk_00bd ++;
+            }
+            // fallthrough
+        case 2:
+            gUnknown_03004828->unk_00bd = 0;
+            break;
+    }
+}
+
+void sub_804BBCC(void)
+{
+    sub_804C29C();
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+}
+
 void sub_804BBE8(u8 a0)
 {
     int i;
