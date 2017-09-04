@@ -146,13 +146,16 @@ struct TradeEwramSubstruct2 {
     /*0x00c6*/ u8 filler_00c6[0x3c];
     /*0x0102*/ u8 unk_0102;
     /*0x0103*/ u8 unk_0103;
-    /*0x0104*/ u8 filler_0104[0x0c];
+    /*0x0104*/ u8 filler_0104[0x08];
+    /*0x010c*/ u16 unk_010c;
+    /*0x010e*/ s16 unk_010e;
     /*0x0110*/ s16 unk_0110;
-    /*0x0112*/ u8 filler_0112[4];
+    /*0x0112*/ u16 unk_0112;
+    /*0x0114*/ u16 unk_0114;
     /*0x0116*/ s16 unk_0116;
     /*0x0118*/ u16 unk_0118;
     /*0x011a*/ u16 unk_011a;
-    /*0x011c*/ u8 filler_011c[2];
+    /*0x011c*/ u16 unk_011c;
     /*0x011e*/ u8 isLinkTrade;
     /*0x0120*/ u16 unk_0120;
     /*0x0122*/ u16 unk_0122;
@@ -3496,6 +3499,26 @@ static bool8 sub_804ABF8(void)
 }
 
 asm(".section .text.sub_804DAD4");
+
+void sub_804C0F8(u8 a0)
+{
+    if (a0 == 0)
+    {
+        if (gUnknown_03004828->unk_0110 < 0x10a)
+        {
+            gUnknown_03004828->unk_010e ++;
+            gUnknown_03004828->unk_011c += 64;
+        }
+    }
+    else
+    {
+        if (gUnknown_03004828->unk_010e > -0x40)
+        {
+            gUnknown_03004828->unk_010e --;
+            gUnknown_03004828->unk_011c += 64;
+        }
+    }
+}
 
 void sub_804C164(void)
 {
