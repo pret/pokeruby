@@ -153,7 +153,7 @@ struct TradeEwramSubstruct2 {
     /*0x0118*/ u16 unk_0118;
     /*0x011a*/ u16 unk_011a;
     /*0x011c*/ u8 filler_011c[2];
-    /*0x011e*/ u8 unk_011e;
+    /*0x011e*/ u8 isLinkTrade;
     /*0x0120*/ u16 unk_0120;
     /*0x0122*/ u16 unk_0122;
     /*0x0124*/ u16 unk_0124;
@@ -3497,6 +3497,30 @@ static bool8 sub_804ABF8(void)
 
 asm(".section .text.sub_804DAD4");
 
+void sub_804C1A8(void)
+{
+    u8 mpId;
+    u8 string[20];
+    const struct InGameTrade *ingameTrade;
+    if (gUnknown_03004828->isLinkTrade)
+    {
+        mpId = GetMultiplayerId();
+        StringCopy(gStringVar1, gLinkPlayers[mpId ^ 1].name);
+        GetMonData(&gEnemyParty[gUnknown_020297D8[1] % 6], MON_DATA_NICKNAME, string);
+        StringCopy10(gStringVar3, string);
+        GetMonData(&gPlayerParty[gUnknown_020297D8[0]], MON_DATA_NICKNAME, string);
+        StringCopy10(gStringVar2, string);
+    }
+    else
+    {
+        ingameTrade = &gIngameTrades[gSpecialVar_0x8004];
+        StringCopy(gStringVar1, ingameTrade->otName);
+        StringCopy10(gStringVar3, ingameTrade->name);
+        GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_NICKNAME, string);
+        StringCopy10(gStringVar2, string);
+    }
+}
+
 bool8 sub_804C29C(void)
 {
     u16 evoTarget;
@@ -3914,7 +3938,7 @@ bool8 sub_804C29C(void)
             gUnknown_03004828->unk_00c4 ++;
             break;
         case 71:
-            if (gUnknown_03004828->unk_011e)
+            if (gUnknown_03004828->isLinkTrade)
             {
                 return TRUE;
             }
