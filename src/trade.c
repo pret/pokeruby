@@ -34,6 +34,7 @@
 #include "mail_data.h"
 #include "evolution_scene.h"
 #include "pokeball.h"
+#include "pokedex.h"
 #include "trade.h"
 
 #ifdef ENGLISH
@@ -245,8 +246,6 @@ void sub_804D80C(struct Sprite *);
 void sub_804E1DC(void);
 void sub_804BBCC(void);
 void sub_804D8E4(void);
-void sub_804BA18(u8);
-void sub_804BA64(void);
 
 extern u8 gUnknown_020297D8[2];
 extern u8 *gUnknown_020296CC[13];
@@ -3503,6 +3502,24 @@ static bool8 sub_804ABF8(void)
 }
 
 asm(".section .text.sub_804DAD4");
+
+static void sub_804BA18(u8 partyIdx)
+{
+    struct Pokemon *pokemon = &gPlayerParty[partyIdx];
+    if (!GetMonData(pokemon, MON_DATA_IS_EGG))
+    {
+        u16 species = SpeciesToNationalPokedexNum(GetMonData(pokemon, MON_DATA_SPECIES, NULL));
+        GetNationalPokedexFlag(species, 2);
+        GetNationalPokedexFlag(species, 3);
+    }
+}
+
+static void sub_804BA64(void)
+{
+    u8 mpId = GetMultiplayerId();
+    if (gLinkPlayers[mpId ^ 1].lp_field_2 == 0x8000)
+        EnableNationalPokedex();
+}
 
 void sub_804BA94(u8 a0, u8 a1)
 {
