@@ -149,7 +149,8 @@ struct TradeEwramSubstruct2 {
     /*0x0103*/ u8 unk_0103;
     /*0x0104*/ u16 unk_0104;
     /*0x0106*/ u16 unk_0106;
-    /*0x0108*/ u8 filler_0108[0x04];
+    /*0x0108*/ u16 unk_0108;
+    /*0x010a*/ u16 unk_010a;
     /*0x010c*/ u16 unk_010c;
     /*0x010e*/ s16 unk_010e;
     /*0x0110*/ s16 unk_0110;
@@ -246,6 +247,8 @@ void sub_804D80C(struct Sprite *);
 void sub_804E1DC(void);
 void sub_804BBCC(void);
 void sub_804D8E4(void);
+void sub_804C164(void);
+void sub_804C1A8(void);
 
 extern u8 gUnknown_020297D8[2];
 extern u8 *gUnknown_020296CC[13];
@@ -3502,6 +3505,96 @@ static bool8 sub_804ABF8(void)
 }
 
 asm(".section .text.sub_804DAD4");
+
+void sub_804B210(void);
+
+void sub_804B228(void);
+
+void sub_804B2D0(u8, u8);
+
+void sub_804B790(void)
+{
+    u8 otName[11];
+    switch (gMain.state)
+    {
+        case 0:
+            gUnknown_020297D8[0] = gSpecialVar_0x8005;
+            gUnknown_020297D8[1] = 6;
+            StringCopy(gLinkPlayers[0].name, gSaveBlock2.playerName);
+            GetMonData(&gEnemyParty[0], MON_DATA_OT_NAME, otName);
+            StringCopy(gLinkPlayers[1].name, otName);
+            REG_DISPCNT = 0;
+            ResetTasks();
+            gUnknown_03004828 = &ewram_2010000.unk_0f000;
+            ResetSpriteData();
+            FreeAllSpritePalettes();
+            SetVBlankCallback(sub_804B210);
+            sub_804B228();
+            SetUpWindowConfig(&gWindowConfig_81E717C);
+            InitWindowFromConfig(&gUnknown_03004828->window, &gWindowConfig_81E717C);
+            gUnknown_03004828->unk_0034 = SetTextWindowBaseTileNum(2);
+            LoadTextWindowGraphics(&gUnknown_03004828->window);
+            MenuZeroFillScreen();
+            gLinkType = 0x1144;
+            gUnknown_03004828->isLinkTrade = FALSE;
+            gUnknown_03004828->linkData[12] = 0;
+            gUnknown_03004828->unk_00c4 = 0;
+            gUnknown_03004828->unk_0104 = 0x40;
+            gUnknown_03004828->unk_0106 = 0x40;
+            gUnknown_03004828->unk_0108 = 0;
+            gUnknown_03004828->unk_010a = 0;
+            gUnknown_03004828->unk_010c = 0x78;
+            gUnknown_03004828->unk_010e = 0x50;
+            gUnknown_03004828->unk_0118 = 0x100;
+            gUnknown_03004828->unk_011c = 0;
+            gUnknown_03004828->unk_00c0 = 0;
+            gMain.state = 5;
+            break;
+        case 5:
+            sub_804B2D0(0, 0);
+            gMain.state ++;
+            break;
+        case 6:
+            sub_804B2D0(0, 1);
+            gMain.state ++;
+            break;
+        case 7:
+            sub_804B2D0(1, 0);
+            gMain.state ++;
+            break;
+        case 8:
+            sub_804B2D0(1, 1);
+            gMain.state ++;
+            break;
+        case 9:
+            sub_804C164();
+            LoadSpriteSheet(&gUnknown_0821594C);
+            LoadSpritePalette(&gUnknown_08215954);
+            REG_BG1CNT = BGCNT_PRIORITY(2) | BGCNT_SCREENBASE(5);
+            gMain.state ++;
+            break;
+        case 10:
+            gMain.state ++;
+            // fallthrough
+        case 11:
+            sub_804BBE8(5);
+            sub_804BBE8(0);
+            sub_804C1A8();
+            BeginNormalPaletteFade(-1, 0, 16, 0, 0);
+            gMain.state ++;
+            break;
+        case 12:
+            if (!gPaletteFade.active)
+            {
+                SetMainCallback2(sub_804BBCC);
+            }
+            break;
+    }
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+}
 
 static void sub_804BA18(u8 partyIdx)
 {
