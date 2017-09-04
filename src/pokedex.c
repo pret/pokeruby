@@ -150,7 +150,6 @@ extern const u8 gUnknown_08E96738[];
 extern const u8 gUnknown_08E96888[];
 extern const u8 gUnknown_08E96994[];
 extern const u8 gUnknown_08E9C6DC[];
-extern const u8 gUnknown_08D00524[];
 extern const u8 gUnknown_08E96BD4[];
 extern const u8 gUnknown_08E96ACC[];
 extern const u8 gUnknown_08E96B58[];
