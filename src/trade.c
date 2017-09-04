@@ -128,11 +128,12 @@ struct UnkStructF {
 struct TradeEwramSubstruct2 {
     /*0x0000*/ u8 filler_0000;
     /*0x0004*/ struct Window window;
-    /*0x0034*/ u8 unk_0034;
+    /*0x0034*/ u8 textWindowBaseTileNum;
     /*0x0038*/ struct Pokemon pokemon;
     /*0x009c*/ u8 unk_009c;
     /*0x009d*/ u8 unk_009d;
-    /*0x009e*/ u16 linkData[13];
+    /*0x009e*/ u16 linkData[12];
+    /*0x00b6*/ u16 unk_00b6;
     // Sprite indices
     /*0x00b8*/ u8 unk_00b8;
     /*0x00b9*/ u8 unk_00b9;
@@ -249,6 +250,7 @@ void sub_804BBCC(void);
 void sub_804D8E4(void);
 void sub_804C164(void);
 void sub_804C1A8(void);
+void sub_804DB84(void);
 
 extern u8 gUnknown_020297D8[2];
 extern u8 *gUnknown_020296CC[13];
@@ -3510,9 +3512,511 @@ void sub_804B210(void);
 
 void sub_804B228(void);
 
+void sub_804B24C(void);
+
 void sub_804B2D0(u8, u8);
 
+#ifdef NONMATCHING
+void sub_804B41C(void)
+// Link trade init
+{
+    switch (gMain.state)
+    {
+        case 0:
+            REG_DISPCNT = 0;
+            ResetTasks();
+            CloseLink();
+            gUnknown_03004828 = &ewram_2010000.unk_0f000;
+            ResetSpriteData();
+            FreeAllSpritePalettes();
+            SetVBlankCallback(sub_804B210);
+            sub_804B228();
+            SetUpWindowConfig(&gWindowConfig_81E6F84);
+            InitWindowFromConfig(&gUnknown_03004828->window, &gWindowConfig_81E6F84);
+            gUnknown_03004828->textWindowBaseTileNum = SetTextWindowBaseTileNum(2);
+            LoadTextWindowGraphics(&gUnknown_03004828->window);
+            MenuZeroFillScreen();
+            gLinkType = 0x1144;
+            gMain.state ++;
+            LZDecompressVram(gUnknown_08D00000, (void *)VRAM);
+            CpuCopy16(gUnknown_08D00524, ewram, 0x1000);
+            DmaCopy16Defvars(3, ewram, (void *)BG_SCREEN_ADDR(5), 0x500);
+            LoadCompressedPalette(gUnknown_08D004E0, 0, 32);
+            gUnknown_03004828->unk_00b6 = 0;
+            gUnknown_03004828->unk_00c4 = 0;
+            gUnknown_03004828->isLinkTrade = TRUE;
+            gUnknown_03004828->unk_0104 = 0x40;
+            gUnknown_03004828->unk_0106 = 0x40;
+            gUnknown_03004828->unk_0108 = 0;
+            gUnknown_03004828->unk_010a = 0;
+            gUnknown_03004828->unk_010c = 0x78;
+            gUnknown_03004828->unk_010e = 0x50;
+            gUnknown_03004828->unk_0118 = 0x100;
+            gUnknown_03004828->unk_011c = 0;
+            break;
+        case 1:
+            OpenLink();
+            gMain.state ++;
+            gUnknown_03004828->unk_00c0 = 0;
+            break;
+        case 2:
+            if (++ gUnknown_03004828->unk_00c0 > 60)
+            {
+                gUnknown_03004828->unk_00c0 = 0;
+                gMain.state ++;
+            }
+            break;
+        case 3:
+            if (IsLinkMaster())
+            {
+                if (GetLinkPlayerCount_2() >= sub_800820C() && ++ gUnknown_03004828->unk_00c0 > 30)
+                {
+                    sub_8007F4C();
+                    gMain.state ++;
+                }
+            }
+            else
+            {
+                gMain.state ++;
+            }
+            break;
+        case 4:
+            sub_804B24C();
+            if (gReceivedRemoteLinkPlayers == TRUE && IsLinkPlayerDataExchangeComplete() == TRUE) gMain.state ++;
+            break;
+        case 5:
+            gUnknown_03004828->unk_009c = 0;
+            gUnknown_03004828->unk_009d = 0;
+            gUnknown_03004828->unk_00bd = 0;
+            sub_804B2D0(0, 0);
+            gMain.state ++;
+            break;
+        case 6:
+            sub_804B2D0(0, 1);
+            gMain.state ++;
+            break;
+        case 7:
+            sub_804B2D0(1, 0);
+            gMain.state ++;
+            break;
+        case 8:
+            sub_804B2D0(1, 1);
+            gMain.state ++;
+            break;
+        case 9:
+            sub_804C164();
+            LoadSpriteSheet(&gUnknown_0821594C);
+            LoadSpritePalette(&gUnknown_08215954);
+            REG_BG1CNT = BGCNT_PRIORITY(2) | BGCNT_SCREENBASE(5);
+            gMain.state ++;
+            break;
+        case 10:
+            gMain.state ++;
+            // fallthrough
+        case 11:
+            sub_804BBE8(5);
+            sub_804BBE8(0);
+            sub_804C1A8();
+            BeginNormalPaletteFade(-1, 0, 16, 0, 0);
+            gMain.state ++;
+            break;
+        case 12:
+            if (!gPaletteFade.active)
+            {
+                SetMainCallback2(sub_804DB84);
+            }
+            break;
+    }
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+}
+#else
+__attribute__((naked)) void sub_804B41C(void)
+{
+    asm_unified("\tpush {r4-r6,lr}\n"
+                    "\tsub sp, 0x4\n"
+                    "\tldr r1, _0804B43C @ =gMain\n"
+                    "\tldr r2, _0804B440 @ =0x0000043c\n"
+                    "\tadds r0, r1, r2\n"
+                    "\tldrb r0, [r0]\n"
+                    "\tadds r2, r1, 0\n"
+                    "\tcmp r0, 0xC\n"
+                    "\tbls _0804B430\n"
+                    "\tb _0804B76E_break\n"
+                    "_0804B430:\n"
+                    "\tlsls r0, 2\n"
+                    "\tldr r1, _0804B444 @ =_0804B448\n"
+                    "\tadds r0, r1\n"
+                    "\tldr r0, [r0]\n"
+                    "\tmov pc, r0\n"
+                    "\t.align 2, 0\n"
+                    "_0804B43C: .4byte gMain\n"
+                    "_0804B440: .4byte 0x0000043c\n"
+                    "_0804B444: .4byte _0804B448\n"
+                    "\t.align 2, 0\n"
+                    "_0804B448:\n"
+                    "\t.4byte _0804B47C_case00\n"
+                    "\t.4byte _0804B5AC_case01\n"
+                    "\t.4byte _0804B5D4_case02\n"
+                    "\t.4byte _0804B5FC_case03\n"
+                    "\t.4byte _0804B648_case04\n"
+                    "\t.4byte _0804B678_case05\n"
+                    "\t.4byte _0804B6A8_case06\n"
+                    "\t.4byte _0804B6B2_case07\n"
+                    "\t.4byte _0804B6CC_case08\n"
+                    "\t.4byte _0804B6E4_case09\n"
+                    "\t.4byte _0804B71C_case10\n"
+                    "\t.4byte _0804B726_case11\n"
+                    "\t.4byte _0804B75C_case12\n"
+                    "_0804B47C_case00:\n"
+                    "\tmovs r1, 0x80\n"
+                    "\tlsls r1, 19\n"
+                    "\tmovs r0, 0\n"
+                    "\tstrh r0, [r1]\n"
+                    "\tbl ResetTasks\n"
+                    "\tbl CloseLink\n"
+                    "\tldr r6, _0804B570 @ =gUnknown_03004828\n"
+                    "\tldr r5, _0804B574 @ =0x0201f000\n"
+                    "\tstr r5, [r6]\n"
+                    "\tbl ResetSpriteData\n"
+                    "\tbl FreeAllSpritePalettes\n"
+                    "\tldr r0, _0804B578 @ =sub_804B210\n"
+                    "\tbl SetVBlankCallback\n"
+                    "\tbl sub_804B228\n"
+                    "\tldr r4, _0804B57C @ =gWindowConfig_81E6F84\n"
+                    "\tadds r0, r4, 0\n"
+                    "\tbl SetUpWindowConfig\n"
+                    "\tldr r0, [r6]\n"
+                    "\tadds r0, 0x4\n"
+                    "\tadds r1, r4, 0\n"
+                    "\tbl InitWindowFromConfig\n"
+                    "\tmovs r0, 0x2\n"
+                    "\tbl SetTextWindowBaseTileNum\n"
+                    "\tldr r1, [r6]\n"
+                    "\tadds r1, 0x34\n"
+                    "\tstrb r0, [r1]\n"
+                    "\tldr r0, [r6]\n"
+                    "\tadds r0, 0x4\n"
+                    "\tbl LoadTextWindowGraphics\n"
+                    "\tbl MenuZeroFillScreen\n"
+                    "\tldr r1, _0804B580 @ =gLinkType\n"
+                    "\tldr r4, _0804B584 @ =0x00001144\n"
+                    "\tadds r0, r4, 0\n"
+                    "\tstrh r0, [r1]\n"
+                    "\tldr r1, _0804B588 @ =gMain\n"
+                    "\tldr r0, _0804B58C @ =0x0000043c\n"
+                    "\tadds r1, r0\n"
+                    "\tldrb r0, [r1]\n"
+                    "\tadds r0, 0x1\n"
+                    "\tstrb r0, [r1]\n"
+                    "\tldr r0, _0804B590 @ =gUnknown_08D00000\n"
+                    "\tmovs r1, 0xC0\n"
+                    "\tlsls r1, 19\n"
+                    "\tbl LZDecompressVram\n"
+                    "\tldr r0, _0804B594 @ =gUnknown_08D00524\n"
+                    "\tldr r1, _0804B598 @ =0xfffe1000\n"
+                    "\tadds r5, r1\n"
+                    "\tmovs r2, 0x80\n"
+                    "\tlsls r2, 4\n"
+                    "\tadds r1, r5, 0\n"
+                    "\tbl CpuSet\n"
+                    "\tldr r1, _0804B59C @ =0x06002800\n"
+                    "\tldr r0, _0804B5A0 @ =0x040000d4\n"
+                    "\tstr r5, [r0]\n"
+                    "\tstr r1, [r0, 0x4]\n"
+                    "\tldr r1, _0804B5A4 @ =0x80000280\n"
+                    "\tstr r1, [r0, 0x8]\n"
+                    "\tldr r0, [r0, 0x8]\n"
+                    "\tldr r0, _0804B5A8 @ =gUnknown_08D004E0\n"
+                    "\tmovs r1, 0\n"
+                    "\tmovs r2, 0x20\n"
+                    "\tbl LoadCompressedPalette\n"
+                    "\tldr r1, [r6]\n"
+                    "\tadds r0, r1, 0\n"
+                    "\tadds r0, 0xB6\n"
+                    "\tmovs r2, 0\n"
+                    "\tstrh r2, [r0]\n"
+                    "\tadds r0, 0xE\n"
+                    "\tstrh r2, [r0]\n"
+                    "\tmovs r4, 0x8F\n"
+                    "\tlsls r4, 1\n"
+                    "\tadds r1, r4\n"
+                    "\tmovs r0, 0x1\n"
+                    "\tstrb r0, [r1]\n"
+                    "\tldr r3, [r6]\n"
+                    "\tmovs r1, 0x82\n"
+                    "\tlsls r1, 1\n"
+                    "\tadds r0, r3, r1\n"
+                    "\tmovs r1, 0x40\n"
+                    "\tstrh r1, [r0]\n"
+                    "\tsubs r4, 0x18\n"
+                    "\tadds r0, r3, r4\n"
+                    "\tstrh r1, [r0]\n"
+                    "\tadds r1, 0xC8\n"
+                    "\tadds r0, r3, r1\n"
+                    "\tstrh r2, [r0]\n"
+                    "\tadds r4, 0x4\n"
+                    "\tadds r0, r3, r4\n"
+                    "\tstrh r2, [r0]\n"
+                    "\tmovs r0, 0x86\n"
+                    "\tlsls r0, 1\n"
+                    "\tadds r1, r3, r0\n"
+                    "\tmovs r0, 0x78\n"
+                    "\tstrh r0, [r1]\n"
+                    "\tadds r4, 0x4\n"
+                    "\tadds r1, r3, r4\n"
+                    "\tmovs r0, 0x50\n"
+                    "\tstrh r0, [r1]\n"
+                    "\tadds r0, 0xC8\n"
+                    "\tadds r1, r3, r0\n"
+                    "\tsubs r0, 0x18\n"
+                    "\tstrh r0, [r1]\n"
+                    "\tmovs r1, 0x8E\n"
+                    "\tlsls r1, 1\n"
+                    "\tadds r0, r3, r1\n"
+                    "\tstrh r2, [r0]\n"
+                    "\tb _0804B76E_break\n"
+                    "\t.align 2, 0\n"
+                    "_0804B570: .4byte gUnknown_03004828\n"
+                    "_0804B574: .4byte 0x0201f000\n"
+                    "_0804B578: .4byte sub_804B210\n"
+                    "_0804B57C: .4byte gWindowConfig_81E6F84\n"
+                    "_0804B580: .4byte gLinkType\n"
+                    "_0804B584: .4byte 0x00001144\n"
+                    "_0804B588: .4byte gMain\n"
+                    "_0804B58C: .4byte 0x0000043c\n"
+                    "_0804B590: .4byte gUnknown_08D00000\n"
+                    "_0804B594: .4byte gUnknown_08D00524\n"
+                    "_0804B598: .4byte 0xfffe1000\n"
+                    "_0804B59C: .4byte 0x06002800\n"
+                    "_0804B5A0: .4byte 0x040000d4\n"
+                    "_0804B5A4: .4byte 0x80000280\n"
+                    "_0804B5A8: .4byte gUnknown_08D004E0\n"
+                    "_0804B5AC_case01:\n"
+                    "\tbl OpenLink\n"
+                    "\tldr r1, _0804B5C8 @ =gMain\n"
+                    "\tldr r2, _0804B5CC @ =0x0000043c\n"
+                    "\tadds r1, r2\n"
+                    "\tldrb r0, [r1]\n"
+                    "\tadds r0, 0x1\n"
+                    "\tmovs r2, 0\n"
+                    "\tstrb r0, [r1]\n"
+                    "\tldr r0, _0804B5D0 @ =gUnknown_03004828\n"
+                    "\tldr r0, [r0]\n"
+                    "\tadds r0, 0xC0\n"
+                    "\tstr r2, [r0]\n"
+                    "\tb _0804B76E_break\n"
+                    "\t.align 2, 0\n"
+                    "_0804B5C8: .4byte gMain\n"
+                    "_0804B5CC: .4byte 0x0000043c\n"
+                    "_0804B5D0: .4byte gUnknown_03004828\n"
+                    "_0804B5D4_case02:\n"
+                    "\tldr r0, _0804B5F4 @ =gUnknown_03004828\n"
+                    "\tldr r0, [r0]\n"
+                    "\tadds r1, r0, 0\n"
+                    "\tadds r1, 0xC0\n"
+                    "\tldr r0, [r1]\n"
+                    "\tadds r0, 0x1\n"
+                    "\tstr r0, [r1]\n"
+                    "\tcmp r0, 0x3C\n"
+                    "\tbhi _0804B5E8\n"
+                    "\tb _0804B76E_break\n"
+                    "_0804B5E8:\n"
+                    "\tmovs r0, 0\n"
+                    "\tstr r0, [r1]\n"
+                    "\tldr r4, _0804B5F8 @ =0x0000043c\n"
+                    "\tadds r1, r2, r4\n"
+                    "\tb _0804B74C\n"
+                    "\t.align 2, 0\n"
+                    "_0804B5F4: .4byte gUnknown_03004828\n"
+                    "_0804B5F8: .4byte 0x0000043c\n"
+                    "_0804B5FC_case03:\n"
+                    "\tbl IsLinkMaster\n"
+                    "\tlsls r0, 24\n"
+                    "\tcmp r0, 0\n"
+                    "\tbne _0804B608\n"
+                    "\tb _0804B746\n"
+                    "_0804B608:\n"
+                    "\tbl GetLinkPlayerCount_2\n"
+                    "\tadds r4, r0, 0\n"
+                    "\tbl sub_800820C\n"
+                    "\tlsls r4, 24\n"
+                    "\tlsls r0, 24\n"
+                    "\tcmp r4, r0\n"
+                    "\tbcs _0804B61C\n"
+                    "\tb _0804B76E_break\n"
+                    "_0804B61C:\n"
+                    "\tldr r0, _0804B63C @ =gUnknown_03004828\n"
+                    "\tldr r1, [r0]\n"
+                    "\tadds r1, 0xC0\n"
+                    "\tldr r0, [r1]\n"
+                    "\tadds r0, 0x1\n"
+                    "\tstr r0, [r1]\n"
+                    "\tcmp r0, 0x1E\n"
+                    "\tbhi _0804B62E\n"
+                    "\tb _0804B76E_break\n"
+                    "_0804B62E:\n"
+                    "\tbl sub_8007F4C\n"
+                    "\tldr r1, _0804B640 @ =gMain\n"
+                    "\tldr r0, _0804B644 @ =0x0000043c\n"
+                    "\tadds r1, r0\n"
+                    "\tb _0804B74C\n"
+                    "\t.align 2, 0\n"
+                    "_0804B63C: .4byte gUnknown_03004828\n"
+                    "_0804B640: .4byte gMain\n"
+                    "_0804B644: .4byte 0x0000043c\n"
+                    "_0804B648_case04:\n"
+                    "\tbl sub_804B24C\n"
+                    "\tldr r0, _0804B66C @ =gReceivedRemoteLinkPlayers\n"
+                    "\tldrb r0, [r0]\n"
+                    "\tcmp r0, 0x1\n"
+                    "\tbeq _0804B656\n"
+                    "\tb _0804B76E_break\n"
+                    "_0804B656:\n"
+                    "\tbl IsLinkPlayerDataExchangeComplete\n"
+                    "\tlsls r0, 24\n"
+                    "\tlsrs r0, 24\n"
+                    "\tcmp r0, 0x1\n"
+                    "\tbeq _0804B664\n"
+                    "\tb _0804B76E_break\n"
+                    "_0804B664:\n"
+                    "\tldr r1, _0804B670 @ =gMain\n"
+                    "\tldr r4, _0804B674 @ =0x0000043c\n"
+                    "\tadds r1, r4\n"
+                    "\tb _0804B74C\n"
+                    "\t.align 2, 0\n"
+                    "_0804B66C: .4byte gReceivedRemoteLinkPlayers\n"
+                    "_0804B670: .4byte gMain\n"
+                    "_0804B674: .4byte 0x0000043c\n"
+                    "_0804B678_case05:\n"
+                    "\tldr r2, _0804B69C @ =gUnknown_03004828\n"
+                    "\tldr r0, [r2]\n"
+                    "\tadds r0, 0x9C\n"
+                    "\tmovs r1, 0\n"
+                    "\tstrb r1, [r0]\n"
+                    "\tldr r0, [r2]\n"
+                    "\tadds r0, 0x9D\n"
+                    "\tstrb r1, [r0]\n"
+                    "\tldr r0, [r2]\n"
+                    "\tadds r0, 0xBD\n"
+                    "\tstrb r1, [r0]\n"
+                    "\tmovs r0, 0\n"
+                    "\tbl sub_804B2D0\n"
+                    "\tldr r1, _0804B6A0 @ =gMain\n"
+                    "\tldr r0, _0804B6A4 @ =0x0000043c\n"
+                    "\tadds r1, r0\n"
+                    "\tb _0804B74C\n"
+                    "\t.align 2, 0\n"
+                    "_0804B69C: .4byte gUnknown_03004828\n"
+                    "_0804B6A0: .4byte gMain\n"
+                    "_0804B6A4: .4byte 0x0000043c\n"
+                    "_0804B6A8_case06:\n"
+                    "\tmovs r0, 0\n"
+                    "\tmovs r1, 0x1\n"
+                    "\tbl sub_804B2D0\n"
+                    "\tb _0804B746\n"
+                    "_0804B6B2_case07:\n"
+                    "\tmovs r0, 0x1\n"
+                    "\tmovs r1, 0\n"
+                    "\tbl sub_804B2D0\n"
+                    "\tldr r1, _0804B6C4 @ =gMain\n"
+                    "\tldr r4, _0804B6C8 @ =0x0000043c\n"
+                    "\tadds r1, r4\n"
+                    "\tb _0804B74C\n"
+                    "\t.align 2, 0\n"
+                    "_0804B6C4: .4byte gMain\n"
+                    "_0804B6C8: .4byte 0x0000043c\n"
+                    "_0804B6CC_case08:\n"
+                    "\tmovs r0, 0x1\n"
+                    "\tmovs r1, 0x1\n"
+                    "\tbl sub_804B2D0\n"
+                    "\tldr r1, _0804B6DC @ =gMain\n"
+                    "\tldr r0, _0804B6E0 @ =0x0000043c\n"
+                    "\tadds r1, r0\n"
+                    "\tb _0804B74C\n"
+                    "\t.align 2, 0\n"
+                    "_0804B6DC: .4byte gMain\n"
+                    "_0804B6E0: .4byte 0x0000043c\n"
+                    "_0804B6E4_case09:\n"
+                    "\tbl sub_804C164\n"
+                    "\tldr r0, _0804B704 @ =gUnknown_0821594C\n"
+                    "\tbl LoadSpriteSheet\n"
+                    "\tldr r0, _0804B708 @ =gUnknown_08215954\n"
+                    "\tbl LoadSpritePalette\n"
+                    "\tldr r1, _0804B70C @ =REG_BG1CNT\n"
+                    "\tldr r2, _0804B710 @ =0x00000502\n"
+                    "\tadds r0, r2, 0\n"
+                    "\tstrh r0, [r1]\n"
+                    "\tldr r1, _0804B714 @ =gMain\n"
+                    "\tldr r4, _0804B718 @ =0x0000043c\n"
+                    "\tadds r1, r4\n"
+                    "\tb _0804B74C\n"
+                    "\t.align 2, 0\n"
+                    "_0804B704: .4byte gUnknown_0821594C\n"
+                    "_0804B708: .4byte gUnknown_08215954\n"
+                    "_0804B70C: .4byte REG_BG1CNT\n"
+                    "_0804B710: .4byte 0x00000502\n"
+                    "_0804B714: .4byte gMain\n"
+                    "_0804B718: .4byte 0x0000043c\n"
+                    "_0804B71C_case10:\n"
+                    "\tldr r0, _0804B754 @ =0x0000043c\n"
+                    "\tadds r1, r2, r0\n"
+                    "\tldrb r0, [r1]\n"
+                    "\tadds r0, 0x1\n"
+                    "\tstrb r0, [r1]\n"
+                    "_0804B726_case11:\n"
+                    "\tmovs r0, 0x5\n"
+                    "\tbl sub_804BBE8\n"
+                    "\tmovs r0, 0\n"
+                    "\tbl sub_804BBE8\n"
+                    "\tbl sub_804C1A8\n"
+                    "\tmovs r0, 0x1\n"
+                    "\tnegs r0, r0\n"
+                    "\tmovs r1, 0\n"
+                    "\tstr r1, [sp]\n"
+                    "\tmovs r2, 0x10\n"
+                    "\tmovs r3, 0\n"
+                    "\tbl BeginNormalPaletteFade\n"
+                    "_0804B746:\n"
+                    "\tldr r1, _0804B758 @ =gMain\n"
+                    "\tldr r2, _0804B754 @ =0x0000043c\n"
+                    "\tadds r1, r2\n"
+                    "_0804B74C:\n"
+                    "\tldrb r0, [r1]\n"
+                    "\tadds r0, 0x1\n"
+                    "\tstrb r0, [r1]\n"
+                    "\tb _0804B76E_break\n"
+                    "\t.align 2, 0\n"
+                    "_0804B754: .4byte 0x0000043c\n"
+                    "_0804B758: .4byte gMain\n"
+                    "_0804B75C_case12:\n"
+                    "\tldr r0, _0804B788 @ =gPaletteFade\n"
+                    "\tldrb r1, [r0, 0x7]\n"
+                    "\tmovs r0, 0x80\n"
+                    "\tands r0, r1\n"
+                    "\tcmp r0, 0\n"
+                    "\tbne _0804B76E_break\n"
+                    "\tldr r0, _0804B78C @ =sub_804DB84\n"
+                    "\tbl SetMainCallback2\n"
+                    "_0804B76E_break:\n"
+                    "\tbl RunTasks\n"
+                    "\tbl AnimateSprites\n"
+                    "\tbl BuildOamBuffer\n"
+                    "\tbl UpdatePaletteFade\n"
+                    "\tadd sp, 0x4\n"
+                    "\tpop {r4-r6}\n"
+                    "\tpop {r0}\n"
+                    "\tbx r0\n"
+                    "\t.align 2, 0\n"
+                    "_0804B788: .4byte gPaletteFade\n"
+                    "_0804B78C: .4byte sub_804DB84");
+}
+#endif
+
 void sub_804B790(void)
+// In-game trade init
 {
     u8 otName[11];
     switch (gMain.state)
@@ -3532,12 +4036,12 @@ void sub_804B790(void)
             sub_804B228();
             SetUpWindowConfig(&gWindowConfig_81E717C);
             InitWindowFromConfig(&gUnknown_03004828->window, &gWindowConfig_81E717C);
-            gUnknown_03004828->unk_0034 = SetTextWindowBaseTileNum(2);
+            gUnknown_03004828->textWindowBaseTileNum = SetTextWindowBaseTileNum(2);
             LoadTextWindowGraphics(&gUnknown_03004828->window);
             MenuZeroFillScreen();
             gLinkType = 0x1144;
             gUnknown_03004828->isLinkTrade = FALSE;
-            gUnknown_03004828->linkData[12] = 0;
+            gUnknown_03004828->unk_00b6 = 0;
             gUnknown_03004828->unk_00c4 = 0;
             gUnknown_03004828->unk_0104 = 0x40;
             gUnknown_03004828->unk_0106 = 0x40;
@@ -3842,7 +4346,7 @@ bool8 sub_804C29C(void)
 
         case 10:
             StringExpandPlaceholders(gStringVar4, gTradeText_WillBeSent);
-            sub_8003460(&gUnknown_03004828->window, gStringVar4, gUnknown_03004828->unk_0034, 2, 15);
+            sub_8003460(&gUnknown_03004828->window, gStringVar4, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
             gUnknown_03004828->unk_00c4 = 11;
             gUnknown_03004828->unk_00c0 = 0;
             break;
@@ -3853,7 +4357,7 @@ bool8 sub_804C29C(void)
                 gUnknown_03004828->unk_00c4 ++;
                 ZeroFillWindowRect(&gUnknown_03004828->window, 0, 0, 29, 19);
                 StringExpandPlaceholders(gStringVar4, gTradeText_ByeBye);
-                sub_8003460(&gUnknown_03004828->window, gStringVar4, gUnknown_03004828->unk_0034, 2, 15);
+                sub_8003460(&gUnknown_03004828->window, gStringVar4, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
             }
             break;
         case 12:
@@ -4200,7 +4704,7 @@ bool8 sub_804C29C(void)
             REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_BG2_ON | DISPCNT_OBJ_ON;
             ZeroFillWindowRect(&gUnknown_03004828->window, 0, 0, 29, 19);
             StringExpandPlaceholders(gStringVar4, gTradeText_SentOverPoke);
-            sub_8003460(&gUnknown_03004828->window, gStringVar4, gUnknown_03004828->unk_0034, 2, 15);
+            sub_8003460(&gUnknown_03004828->window, gStringVar4, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
             gUnknown_03004828->unk_00c4 ++;
             gUnknown_03004828->unk_00c0 = 0;
             break;
@@ -4214,7 +4718,7 @@ bool8 sub_804C29C(void)
                 gUnknown_03004828->unk_00c4 ++;
                 ZeroFillWindowRect(&gUnknown_03004828->window, 0, 0, 29, 19);
                 StringExpandPlaceholders(gStringVar4, gTradeText_TakeGoodCare);
-                sub_8003460(&gUnknown_03004828->window, gStringVar4, gUnknown_03004828->unk_0034, 2, 15);
+                sub_8003460(&gUnknown_03004828->window, gStringVar4, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
                 gUnknown_03004828->unk_00c0 = 0;
             }
             break;
@@ -4536,7 +5040,7 @@ static void sub_804DC88(void)
             gMain.state ++;
             ZeroFillWindowRect(&gUnknown_03004828->window, 0, 0, 29, 19);
             StringExpandPlaceholders(gStringVar4, gOtherText_LinkStandby2);
-            sub_8003460(&gUnknown_03004828->window, gStringVar4, gUnknown_03004828->unk_0034, 2, 15);
+            sub_8003460(&gUnknown_03004828->window, gStringVar4, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
             break;
         case 1:
             sub_80084A4();
@@ -4563,7 +5067,7 @@ static void sub_804DC88(void)
         case 2:
             gMain.state = 50;
             ZeroFillWindowRect(&gUnknown_03004828->window, 0, 0, 29, 19);
-            sub_8003460(&gUnknown_03004828->window, gSystemText_Saving, gUnknown_03004828->unk_0034, 2, 15);
+            sub_8003460(&gUnknown_03004828->window, gSystemText_Saving, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
             break;
         case 50:
             SetSecretBase2Field_9_AndHideBG();
