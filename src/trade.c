@@ -37,6 +37,7 @@
 #include "pokedex.h"
 #include "field_effect.h"
 #include "util.h"
+#include "battle_interface.h"
 #include "trade.h"
 
 #ifdef ENGLISH
@@ -3511,6 +3512,32 @@ static bool8 sub_804ABF8(void)
 }
 
 asm(".section .text.sub_804DAD4");
+
+void sub_804AE3C(u8 who)
+{
+    u16 i;
+    u16 curHp;
+    u16 maxHp;
+    switch (who)
+    {
+        case 0:
+            for (i = 0; i < gUnknown_03004824->partyCounts[0]; i ++)
+            {
+                curHp = GetMonData(&gPlayerParty[i], MON_DATA_HP);
+                maxHp = GetMonData(&gPlayerParty[i], MON_DATA_MAX_HP);
+                gUnknown_03004824->unk_0069[0][i] = GetHPBarLevel(curHp, maxHp);
+            }
+            break;
+        case 1:
+            for (i = 0; i < gUnknown_03004824->partyCounts[1]; i ++)
+            {
+                curHp = GetMonData(&gEnemyParty[i], MON_DATA_HP);
+                maxHp = GetMonData(&gEnemyParty[i], MON_DATA_MAX_HP);
+                gUnknown_03004824->unk_0069[1][i] = GetHPBarLevel(curHp, maxHp);
+            }
+            break;
+    }
+}
 
 void sub_804AF10(void)
 {
