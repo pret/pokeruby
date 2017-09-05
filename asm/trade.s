@@ -655,49 +655,4 @@ _0804B1B4: .4byte gUnknown_03004828
 _0804B1B8: .4byte REG_BG2PA
 	thumb_func_end sub_804B128
 
-	thumb_func_start sub_804B1BC
-sub_804B1BC: @ 804B1BC
-	push {lr}
-	ldr r1, _0804B1FC @ =REG_BG1VOFS
-	ldr r0, _0804B200 @ =gUnknown_03004828
-	ldr r2, [r0]
-	movs r3, 0x88
-	lsls r3, 1
-	adds r0, r2, r3
-	ldrh r0, [r0]
-	strh r0, [r1]
-	subs r1, 0x2
-	adds r3, 0x2
-	adds r0, r2, r3
-	ldrh r0, [r0]
-	strh r0, [r1]
-	movs r0, 0x80
-	lsls r0, 19
-	ldrh r0, [r0]
-	movs r1, 0x7
-	ands r0, r1
-	cmp r0, 0
-	bne _0804B208
-	ldr r1, _0804B204 @ =REG_BG2VOFS
-	adds r3, 0x2
-	adds r0, r2, r3
-	ldrh r0, [r0]
-	strh r0, [r1]
-	subs r1, 0x2
-	adds r3, 0x2
-	adds r0, r2, r3
-	ldrh r0, [r0]
-	strh r0, [r1]
-	b _0804B20C
-	.align 2, 0
-_0804B1FC: .4byte REG_BG1VOFS
-_0804B200: .4byte gUnknown_03004828
-_0804B204: .4byte REG_BG2VOFS
-_0804B208:
-	bl sub_804B128
-_0804B20C:
-	pop {r0}
-	bx r0
-	thumb_func_end sub_804B1BC
-
 	.align 2, 0 @ Don't pad with nop.
