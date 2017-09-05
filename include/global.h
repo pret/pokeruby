@@ -651,8 +651,8 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x30B7*/ u8 filler_30B7[1];
     /*0x30B8*/ struct LinkBattleRecord linkBattleRecords[5];
     /*0x3108*/ u8 filler_3108[8];
-    /*0x3110*/ u8 giftRibbons[7];
-    /*0x3117*/ u8 filler_311B[0x2D];
+    /*0x3110*/ u8 giftRibbons[11];
+    /*0x3117*/ u8 filler_311B[0x29];
     /*0x3144*/ struct Roamer roamer;
     /*0x3160*/ struct EnigmaBerry enigmaBerry;
     /*0x3690*/ struct RamScript ramScript;

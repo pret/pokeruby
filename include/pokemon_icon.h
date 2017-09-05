@@ -10,5 +10,6 @@ void sub_809D51C(void);
 void sub_809D580(u16);
 void sub_809D608(u16);
 void UpdateMonIconFrame(struct Sprite *sprite);
+void sub_809D824(struct Sprite *, u8);
 
 #endif // GUARD_POKEMON_ICON_H

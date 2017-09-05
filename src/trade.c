@@ -95,7 +95,8 @@ struct TradeEwramSubstruct {
     /*0x0044*/ u8 tradeMenuOptionsActive[13];
     /*0x0051*/ u8 unk_0051[6];
     /*0x0057*/ u8 filler_0057[6];
-    /*0x005d*/ u8 unk_005d[4][6];
+    /*0x005d*/ u8 unk_005d[2][6];
+    /*0x005d*/ u8 unk_0069[2][6];
     /*0x0075*/ u8 unk_0075;
     /*0x0076*/ u8 filler_0076[4];
     /*0x007a*/ u8 unk_007a;
@@ -3510,6 +3511,26 @@ static bool8 sub_804ABF8(void)
 }
 
 asm(".section .text.sub_804DAD4");
+
+void sub_804AF10(void)
+{
+    int i, j;
+    for (i = 0; i < 2; i ++)
+    {
+        for (j = 0; j < gUnknown_03004824->partyCounts[i]; j ++)
+        {
+            sub_809D824(&gSprites[gUnknown_03004824->partyIcons[i][j]], 4 - gUnknown_03004824->unk_0069[i][j]);
+        }
+    }
+}
+
+void sub_804AF84(void)
+{
+    int i;
+    for (i = 0; i < 11; i ++)
+        if (gSaveBlock1.giftRibbons[i] == 0 && gUnknown_03004824->unk_00b5[i] != 0)
+            gSaveBlock1.giftRibbons[i] = gUnknown_03004824->unk_00b5[i];
+}
 
 void sub_804AFB8(const struct WindowConfig *windowConfig, u8 *dest, const u8 *src, u8 size)
 {
