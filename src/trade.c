@@ -35,6 +35,7 @@
 #include "evolution_scene.h"
 #include "pokeball.h"
 #include "pokedex.h"
+#include "field_effect.h"
 #include "trade.h"
 
 #ifdef ENGLISH
@@ -135,8 +136,7 @@ struct TradeEwramSubstruct2 {
     /*0x009e*/ u16 linkData[12];
     /*0x00b6*/ u16 unk_00b6;
     // Sprite indices
-    /*0x00b8*/ u8 unk_00b8;
-    /*0x00b9*/ u8 unk_00b9;
+    /*0x00b8*/ u8 unk_00b8[2];
     /*0x00ba*/ u8 unk_00ba;
     /*0x00bb*/ u8 unk_00bb;
     /*0x00bc*/ u8 unk_00bc;
@@ -162,8 +162,7 @@ struct TradeEwramSubstruct2 {
     /*0x011a*/ u16 unk_011a;
     /*0x011c*/ u16 unk_011c;
     /*0x011e*/ u8 isLinkTrade;
-    /*0x0120*/ u16 unk_0120;
-    /*0x0122*/ u16 unk_0122;
+    /*0x0120*/ u16 unk_0120[2];
     /*0x0124*/ u16 unk_0124;
 };
 
@@ -3514,7 +3513,42 @@ void sub_804B228(void);
 
 void sub_804B24C(void);
 
-void sub_804B2D0(u8, u8);
+void sub_804B2D0(u8 whichParty, u8 a1)
+{
+    u8 v0;
+    struct Pokemon *pokemon;
+    u16 species;
+    u32 personality;
+
+    v0 = 0;
+    pokemon = NULL;
+    if (whichParty == 0)
+    {
+        pokemon = &gPlayerParty[gUnknown_020297D8[0]];
+        v0 = 1;
+    }
+    if (whichParty == 1)
+    {
+        pokemon = &gEnemyParty[gUnknown_020297D8[1] % 6];
+        v0 = 3;
+    }
+    switch (a1)
+    {
+        case 0:
+            species = GetMonData(pokemon, MON_DATA_SPECIES2);
+            personality = GetMonData(pokemon, MON_DATA_PERSONALITY);
+            HandleLoadSpecialPokePic(&gMonFrontPicTable[species], gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset, (u32)ewram, gUnknown_081FAF4C[whichParty * 2 + 1], species, personality);
+            LoadCompressedObjectPalette(sub_8040990(pokemon));
+            gUnknown_03004828->unk_0120[whichParty] = species;
+            break;
+        case 1:
+            GetMonSpriteTemplate_803C56C(sub_8040990(pokemon)->tag, v0);
+            gUnknown_03004828->unk_00b8[whichParty] = CreateSprite(&gUnknown_02024E8C, 0x78, 0x3c, 0x6);
+            gSprites[gUnknown_03004828->unk_00b8[whichParty]].invisible = TRUE;
+            gSprites[gUnknown_03004828->unk_00b8[whichParty]].callback = SpriteCallbackDummy;
+            break;
+    }
+}
 
 #ifdef NONMATCHING
 void sub_804B41C(void)
@@ -4323,9 +4357,9 @@ bool8 sub_804C29C(void)
     switch (gUnknown_03004828->unk_00c4)
     {
         case 0:
-            gSprites[gUnknown_03004828->unk_00b8].invisible = FALSE;
-            gSprites[gUnknown_03004828->unk_00b8].pos2.x = -0xb4;
-            gSprites[gUnknown_03004828->unk_00b8].pos2.y = gMonFrontPicCoords[gUnknown_03004828->unk_0120].y_offset;
+            gSprites[gUnknown_03004828->unk_00b8[0]].invisible = FALSE;
+            gSprites[gUnknown_03004828->unk_00b8[0]].pos2.x = -0xb4;
+            gSprites[gUnknown_03004828->unk_00b8[0]].pos2.y = gMonFrontPicCoords[gUnknown_03004828->unk_0120[0]].y_offset;
             gUnknown_03004828->unk_00c4 ++;
             gUnknown_03004828->unk_0124 = GetCurrentMapMusic();
             PlayBGM(BGM_SHINKA);
@@ -4333,12 +4367,12 @@ bool8 sub_804C29C(void)
         case 1:
             if (gUnknown_03004828->unk_0116 > 0)
             {
-                gSprites[gUnknown_03004828->unk_00b8].pos2.x += 3;
+                gSprites[gUnknown_03004828->unk_00b8[0]].pos2.x += 3;
                 gUnknown_03004828->unk_0116 -= 3;
             }
             else
             {
-                gSprites[gUnknown_03004828->unk_00b8].pos2.x = 0;
+                gSprites[gUnknown_03004828->unk_00b8[0]].pos2.x = 0;
                 gUnknown_03004828->unk_0116 = 0;
                 gUnknown_03004828->unk_00c4 = 10;
             }
@@ -4353,7 +4387,7 @@ bool8 sub_804C29C(void)
         case 11:
             if (++gUnknown_03004828->unk_00c0 == 80)
             {
-                gUnknown_03004828->unk_0102 = sub_8047580(gUnknown_03004828->unk_00b8, gSprites[gUnknown_03004828->unk_00b8].oam.paletteNum, 0x78, 0x20, 0x2, 0x1, 0x14, 0xfffff);
+                gUnknown_03004828->unk_0102 = sub_8047580(gUnknown_03004828->unk_00b8[0], gSprites[gUnknown_03004828->unk_00b8[0]].oam.paletteNum, 0x78, 0x20, 0x2, 0x1, 0x14, 0xfffff);
                 gUnknown_03004828->unk_00c4 ++;
                 ZeroFillWindowRect(&gUnknown_03004828->window, 0, 0, 29, 19);
                 StringExpandPlaceholders(gStringVar4, gTradeText_ByeBye);
@@ -4510,40 +4544,40 @@ bool8 sub_804C29C(void)
             gUnknown_03004828->unk_00c4 ++;
             break;
         case 37:
-            if (!sub_8040A3C(gUnknown_03004828->unk_0120))
+            if (!sub_8040A3C(gUnknown_03004828->unk_0120[0]))
             {
-                gSprites[gUnknown_03004828->unk_00b8].affineAnims = gSpriteAffineAnimTable_8215AC0;
-                gSprites[gUnknown_03004828->unk_00b8].oam.affineMode = 3;
-                CalcCenterToCornerVec(&gSprites[gUnknown_03004828->unk_00b8], 0, 3, 3);
-                StartSpriteAffineAnim(&gSprites[gUnknown_03004828->unk_00b8], 0);
+                gSprites[gUnknown_03004828->unk_00b8[0]].affineAnims = gSpriteAffineAnimTable_8215AC0;
+                gSprites[gUnknown_03004828->unk_00b8[0]].oam.affineMode = 3;
+                CalcCenterToCornerVec(&gSprites[gUnknown_03004828->unk_00b8[0]], 0, 3, 3);
+                StartSpriteAffineAnim(&gSprites[gUnknown_03004828->unk_00b8[0]], 0);
             }
             else
             {
-                StartSpriteAffineAnim(&gSprites[gUnknown_03004828->unk_00b8], 0);
+                StartSpriteAffineAnim(&gSprites[gUnknown_03004828->unk_00b8[0]], 0);
             }
-            StartSpriteAffineAnim(&gSprites[gUnknown_03004828->unk_00b9], 0);
-            gSprites[gUnknown_03004828->unk_00b8].pos1.x = 0x3c;
-            gSprites[gUnknown_03004828->unk_00b9].pos1.x = 0xb4;
-            gSprites[gUnknown_03004828->unk_00b8].pos1.y = 0xc0;
-            gSprites[gUnknown_03004828->unk_00b9].pos1.y = -0x20;
-            gSprites[gUnknown_03004828->unk_00b8].invisible = FALSE;
-            gSprites[gUnknown_03004828->unk_00b9].invisible = FALSE;
+            StartSpriteAffineAnim(&gSprites[gUnknown_03004828->unk_00b8[1]], 0);
+            gSprites[gUnknown_03004828->unk_00b8[0]].pos1.x = 0x3c;
+            gSprites[gUnknown_03004828->unk_00b8[1]].pos1.x = 0xb4;
+            gSprites[gUnknown_03004828->unk_00b8[0]].pos1.y = 0xc0;
+            gSprites[gUnknown_03004828->unk_00b8[1]].pos1.y = -0x20;
+            gSprites[gUnknown_03004828->unk_00b8[0]].invisible = FALSE;
+            gSprites[gUnknown_03004828->unk_00b8[1]].invisible = FALSE;
             gUnknown_03004828->unk_00c4 ++;
             break;
         case 38:
-            gSprites[gUnknown_03004828->unk_00b8].pos2.y -= 3;
-            gSprites[gUnknown_03004828->unk_00b9].pos2.y += 3;
-            if (-0xa0 > gSprites[gUnknown_03004828->unk_00b8].pos2.y && gSprites[gUnknown_03004828->unk_00b8].pos2.y >= -0xa3)
+            gSprites[gUnknown_03004828->unk_00b8[0]].pos2.y -= 3;
+            gSprites[gUnknown_03004828->unk_00b8[1]].pos2.y += 3;
+            if (-0xa0 > gSprites[gUnknown_03004828->unk_00b8[0]].pos2.y && gSprites[gUnknown_03004828->unk_00b8[0]].pos2.y >= -0xa3)
             {
                 PlaySE(SE_TK_WARPIN);
             }
-            if (gSprites[gUnknown_03004828->unk_00b8].pos2.y < -0xde)
+            if (gSprites[gUnknown_03004828->unk_00b8[0]].pos2.y < -0xde)
             {
                 gSprites[gUnknown_03004828->unk_00ba].data1 = 0;
                 gSprites[gUnknown_03004828->unk_00bb].data1 = 0;
                 gUnknown_03004828->unk_00c4 ++;
-                gSprites[gUnknown_03004828->unk_00b8].invisible = TRUE;
-                gSprites[gUnknown_03004828->unk_00b9].invisible = TRUE;
+                gSprites[gUnknown_03004828->unk_00b8[0]].invisible = TRUE;
+                gSprites[gUnknown_03004828->unk_00b8[1]].invisible = TRUE;
                 BlendPalettes(1,  0, 0xffff);
             }
             break;
@@ -4691,11 +4725,11 @@ bool8 sub_804C29C(void)
             }
             break;
         case 66:
-            gSprites[gUnknown_03004828->unk_00b9].pos1.x = 0x78;
-            gSprites[gUnknown_03004828->unk_00b9].pos1.y = gMonFrontPicCoords[gUnknown_03004828->unk_0122].y_offset + 60;
-            gSprites[gUnknown_03004828->unk_00b9].pos2.x = 0;
-            gSprites[gUnknown_03004828->unk_00b9].pos2.y = 0;
-            CreatePokeballSprite(gUnknown_03004828->unk_00b9, gSprites[gUnknown_03004828->unk_00b9].oam.paletteNum, 0x78, 0x54, 2, 1, 0x14, 0xfffff);
+            gSprites[gUnknown_03004828->unk_00b8[1]].pos1.x = 0x78;
+            gSprites[gUnknown_03004828->unk_00b8[1]].pos1.y = gMonFrontPicCoords[gUnknown_03004828->unk_0120[1]].y_offset + 60;
+            gSprites[gUnknown_03004828->unk_00b8[1]].pos2.x = 0;
+            gSprites[gUnknown_03004828->unk_00b8[1]].pos2.y = 0;
+            CreatePokeballSprite(gUnknown_03004828->unk_00b8[1], gSprites[gUnknown_03004828->unk_00b8[1]].oam.paletteNum, 0x78, 0x54, 2, 1, 0x14, 0xfffff);
             FreeSpriteOamMatrix(&gSprites[gUnknown_03004828->unk_0103]);
             DestroySprite(&gSprites[gUnknown_03004828->unk_0103]);
             gUnknown_03004828->unk_00c4 ++;
@@ -4747,7 +4781,7 @@ bool8 sub_804C29C(void)
             gUnknown_03005E94 = sub_804BBCC;
             evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gUnknown_020297D8[0]], TRUE, ITEM_NONE);
             if (evoTarget != SPECIES_NONE)
-                TradeEvolutionScene(&gPlayerParty[gUnknown_020297D8[0]], evoTarget, gUnknown_03004828->unk_00b9, gUnknown_020297D8[0]);
+                TradeEvolutionScene(&gPlayerParty[gUnknown_020297D8[0]], evoTarget, gUnknown_03004828->unk_00b8[1], gUnknown_020297D8[0]);
             gUnknown_03004828->unk_00c4 ++;
             break;
         case 73:
@@ -4779,7 +4813,7 @@ void sub_804D588(void)
             gUnknown_03005E94 = sub_804DC88;
             evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gUnknown_020297D8[0]], TRUE, ITEM_NONE);
             if (evoTarget != SPECIES_NONE)
-                TradeEvolutionScene(&gPlayerParty[gUnknown_020297D8[0]], evoTarget, gUnknown_03004828->unk_00b9, gUnknown_020297D8[0]);
+                TradeEvolutionScene(&gPlayerParty[gUnknown_020297D8[0]], evoTarget, gUnknown_03004828->unk_00b8[1], gUnknown_020297D8[0]);
             else
                 SetMainCallback2(sub_804DC88);
             gUnknown_020297D8[0] = 255;
@@ -4999,8 +5033,8 @@ void sub_804DB84(void)
 {
     if (sub_804C29C() == TRUE)
     {
-        DestroySprite(&gSprites[gUnknown_03004828->unk_00b8]);
-        FreeSpriteOamMatrix(&gSprites[gUnknown_03004828->unk_00b9]);
+        DestroySprite(&gSprites[gUnknown_03004828->unk_00b8[0]]);
+        FreeSpriteOamMatrix(&gSprites[gUnknown_03004828->unk_00b8[1]]);
         sub_804BA94(gUnknown_020297D8[0], gUnknown_020297D8[1] % 6);
         gUnknown_03004828->linkData[0] = 0xabcd;
         gUnknown_03004828->unk_00bd = 1;
