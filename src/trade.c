@@ -224,7 +224,7 @@ static void sub_804D7AC(struct Sprite *);
 /*static*/ bool8 sub_804C29C(void);
 /*static*/ void sub_804DC18(void);
 /*static*/ void sub_804BB78(void);
-/*static*/ bool8 sub_804B2B0(void);
+static u8 sub_804B2B0(void);
 static void sub_804E144(void);
 static void sub_804E1A0(u8);
 /*static*/ void sub_804B790(void);
@@ -3513,6 +3513,13 @@ void sub_804B228(void);
 
 void sub_804B24C(void);
 
+static u8 sub_804B2B0(void)
+{
+    if (gReceivedRemoteLinkPlayers)
+        return GetMultiplayerId();
+    return 0;
+}
+
 void sub_804B2D0(u8 whichParty, u8 a1)
 {
     u8 v0;
@@ -5050,9 +5057,9 @@ void sub_804DB84(void)
 
 void sub_804DC18(void)
 {
-    u8 flag = sub_804B2B0();
+    u8 mpId = sub_804B2B0();
     sub_804D63C();
-    if (!flag && gUnknown_03004828->unk_009c == 1 && gUnknown_03004828->unk_009d == 1)
+    if (mpId == 0 && gUnknown_03004828->unk_009c == 1 && gUnknown_03004828->unk_009d == 1)
     {
         gUnknown_03004828->linkData[0] = 0xdcba;
         Trade_SendData(gUnknown_03004828);

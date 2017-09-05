@@ -788,24 +788,4 @@ _0804B29C:
 	bx r0
 	thumb_func_end sub_804B24C
 
-	thumb_func_start sub_804B2B0
-sub_804B2B0: @ 804B2B0
-	push {lr}
-	ldr r0, _0804B2C0 @ =gReceivedRemoteLinkPlayers
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _0804B2C4
-	movs r0, 0
-	b _0804B2CC
-	.align 2, 0
-_0804B2C0: .4byte gReceivedRemoteLinkPlayers
-_0804B2C4:
-	bl GetMultiplayerId
-	lsls r0, 24
-	lsrs r0, 24
-_0804B2CC:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_804B2B0
-
 	.align 2, 0 @ Don't pad with nop.
