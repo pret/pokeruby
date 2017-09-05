@@ -79,8 +79,6 @@ SECTIONS {
         src/pokeball.o(.text);
         src/load_save.o(.text);
         src/trade.o(.text);
-        asm/trade.o(.text);
-        src/trade.o(.text.sub_804DAD4);
         src/berry_blender.o(.text);
         src/play_time.o(.text);
         src/new_game.o(.text);

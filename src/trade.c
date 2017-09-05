@@ -94,8 +94,7 @@ struct TradeEwramSubstruct {
     /*0x0041*/ u8 tradeMenuCursorPosition;
     /*0x0042*/ u8 partyCounts[2];
     /*0x0044*/ u8 tradeMenuOptionsActive[13];
-    /*0x0051*/ u8 unk_0051[6];
-    /*0x0057*/ u8 filler_0057[6];
+    /*0x0051*/ u8 unk_0051[2][6];
     /*0x005d*/ u8 unk_005d[2][6];
     /*0x005d*/ u8 unk_0069[2][6];
     /*0x0075*/ u8 unk_0075;
@@ -2141,7 +2140,7 @@ static void sub_8049860(void)
             BeginNormalPaletteFade(-1, 0, 0, 16, 0);
             gUnknown_03004824->unk_007b = 2;
         }
-        else if (sub_80499F0(gUnknown_03004824->unk_0051, gUnknown_03004824->partyCounts[0], gUnknown_03004824->tradeMenuCursorPosition) == 0)
+        else if (sub_80499F0(gUnknown_03004824->unk_0051[0], gUnknown_03004824->partyCounts[0], gUnknown_03004824->tradeMenuCursorPosition) == 0)
         {
             sub_804AADC(3, 2);
             gUnknown_03004824->unk_007b = 8;
@@ -2203,7 +2202,7 @@ static void sub_8049A20(void)
     int i;
     for (i = 0; i < gUnknown_03004824->partyCounts[0]; i ++)
     {
-        unk_0051[i] = gUnknown_03004824->unk_0051[i];
+        unk_0051[i] = gUnknown_03004824->unk_0051[0][i];
     }
     if (sub_80499F0(unk_0051, gUnknown_03004824->partyCounts[0], gUnknown_03004824->tradeMenuCursorPosition) == 0)
     {
@@ -3511,7 +3510,232 @@ static bool8 sub_804ABF8(void)
     sub_804AFB8(&gWindowConfig_81E725C, dest, src, a2);
 }
 
-asm(".section .text.sub_804DAD4");
+#ifdef NONMATCHING
+void sub_804ACF4(u8 who)
+{
+    struct Pokemon *pokemon;
+    int i;
+    switch (who)
+    {
+        case 0:
+            for (i = 0; i < gUnknown_03004824->partyCounts[0]; i ++)
+            {
+                pokemon = &gPlayerParty[i];
+                if (GetMonData(pokemon, MON_DATA_IS_EGG) == TRUE)
+                {
+                    gUnknown_03004824->unk_0051[0][i] = 0;
+                    gUnknown_03004824->unk_005d[0][i] = 1;
+                }
+                else if (GetMonData(pokemon, MON_DATA_HP) == 0)
+                {
+                    gUnknown_03004824->unk_0051[0][i] = 0;
+                    gUnknown_03004824->unk_005d[0][i] = 0;
+                }
+                else
+                {
+                    gUnknown_03004824->unk_0051[0][i] = 1;
+                    gUnknown_03004824->unk_005d[0][i] = 0;
+                }
+            }
+            break;
+        case 1:
+            for (i = 0; i < gUnknown_03004824->partyCounts[1]; i ++)
+            {
+                pokemon = &gEnemyParty[i];
+                if (GetMonData(pokemon, MON_DATA_IS_EGG) == TRUE)
+                {
+                    gUnknown_03004824->unk_0051[1][i] = 0;
+                    gUnknown_03004824->unk_005d[1][i] = 1;
+                }
+                else if (GetMonData(pokemon, MON_DATA_HP) == 0)
+                {
+                    gUnknown_03004824->unk_0051[1][i] = 0;
+                    gUnknown_03004824->unk_005d[1][i] = 0;
+                }
+                else
+                {
+                    gUnknown_03004824->unk_0051[1][i] = 1;
+                    gUnknown_03004824->unk_005d[1][i] = 0;
+                }
+            }
+            break;
+    }
+}
+#else
+__attribute__((naked)) void sub_804ACF4(u8 who)
+{
+    asm_unified("sub_804ACF4: @ 804ACF4\n"
+                    "\tpush {r4-r7,lr}\n"
+                    "\tmov r7, r9\n"
+                    "\tmov r6, r8\n"
+                    "\tpush {r6,r7}\n"
+                    "\tlsls r0, 24\n"
+                    "\tlsrs r0, 24\n"
+                    "\tmov r8, r0\n"
+                    "\tcmp r0, 0\n"
+                    "\tbeq _0804AD0C\n"
+                    "\tcmp r0, 0x1\n"
+                    "\tbeq _0804ADA0\n"
+                    "\tb _0804AE2C\n"
+                    "_0804AD0C:\n"
+                    "\tmovs r7, 0\n"
+                    "\tldr r1, _0804AD4C @ =gUnknown_03004824\n"
+                    "\tldr r0, [r1]\n"
+                    "\tadds r0, 0x42\n"
+                    "\tldrb r0, [r0]\n"
+                    "\tcmp r7, r0\n"
+                    "\tblt _0804AD1C\n"
+                    "\tb _0804AE2C\n"
+                    "_0804AD1C:\n"
+                    "\tadds r6, r1, 0\n"
+                    "\tmovs r5, 0\n"
+                    "\tmov r9, r5\n"
+                    "_0804AD22:\n"
+                    "\tmovs r0, 0x64\n"
+                    "\tadds r1, r7, 0\n"
+                    "\tmuls r1, r0\n"
+                    "\tldr r0, _0804AD50 @ =gPlayerParty\n"
+                    "\tadds r4, r1, r0\n"
+                    "\tadds r0, r4, 0\n"
+                    "\tmovs r1, 0x2D\n"
+                    "\tbl GetMonData\n"
+                    "\tadds r1, r0, 0\n"
+                    "\tcmp r1, 0x1\n"
+                    "\tbne _0804AD54\n"
+                    "\tldr r0, [r6]\n"
+                    "\tadds r0, 0x51\n"
+                    "\tadds r0, r5\n"
+                    "\tmov r2, r9\n"
+                    "\tstrb r2, [r0]\n"
+                    "\tldr r0, [r6]\n"
+                    "\tadds r0, 0x5D\n"
+                    "\tadds r0, r5\n"
+                    "\tb _0804AD84\n"
+                    "\t.align 2, 0\n"
+                    "_0804AD4C: .4byte gUnknown_03004824\n"
+                    "_0804AD50: .4byte gPlayerParty\n"
+                    "_0804AD54:\n"
+                    "\tadds r0, r4, 0\n"
+                    "\tmovs r1, 0x39\n"
+                    "\tbl GetMonData\n"
+                    "\tadds r1, r0, 0\n"
+                    "\tcmp r1, 0\n"
+                    "\tbne _0804AD72\n"
+                    "\tldr r0, [r6]\n"
+                    "\tadds r0, 0x51\n"
+                    "\tadds r0, r5\n"
+                    "\tstrb r1, [r0]\n"
+                    "\tldr r0, [r6]\n"
+                    "\tadds r0, 0x5D\n"
+                    "\tadds r0, r5\n"
+                    "\tb _0804AD84\n"
+                    "_0804AD72:\n"
+                    "\tldr r0, [r6]\n"
+                    "\tadds r0, 0x51\n"
+                    "\tadds r0, r5\n"
+                    "\tmovs r1, 0x1\n"
+                    "\tstrb r1, [r0]\n"
+                    "\tldr r0, [r6]\n"
+                    "\tadds r0, 0x5D\n"
+                    "\tadds r0, r5\n"
+                    "\tmov r1, r9\n"
+                    "_0804AD84:\n"
+                    "\tstrb r1, [r0]\n"
+                    "\tldr r0, _0804AD9C @ =gUnknown_03004824\n"
+                    "\tadds r5, 0x1\n"
+                    "\tadds r7, 0x1\n"
+                    "\tldr r0, [r0]\n"
+                    "\tadds r0, 0x42\n"
+                    "\tadd r0, r8\n"
+                    "\tldrb r0, [r0]\n"
+                    "\tcmp r7, r0\n"
+                    "\tblt _0804AD22\n"
+                    "\tb _0804AE2C\n"
+                    "\t.align 2, 0\n"
+                    "_0804AD9C: .4byte gUnknown_03004824\n"
+                    "_0804ADA0:\n"
+                    "\tmovs r7, 0\n"
+                    "\tldr r1, _0804ADE0 @ =gUnknown_03004824\n"
+                    "\tldr r0, [r1]\n"
+                    "\tadds r0, 0x43\n"
+                    "\tldrb r0, [r0]\n"
+                    "\tcmp r7, r0\n"
+                    "\tbge _0804AE2C\n"
+                    "\tadds r6, r1, 0\n"
+                    "\tmovs r5, 0x6\n"
+                    "\tmovs r2, 0\n"
+                    "\tmov r9, r2\n"
+                    "_0804ADB6:\n"
+                    "\tmovs r0, 0x64\n"
+                    "\tadds r1, r7, 0\n"
+                    "\tmuls r1, r0\n"
+                    "\tldr r0, _0804ADE4 @ =gEnemyParty\n"
+                    "\tadds r4, r1, r0\n"
+                    "\tadds r0, r4, 0\n"
+                    "\tmovs r1, 0x2D\n"
+                    "\tbl GetMonData\n"
+                    "\tadds r1, r0, 0\n"
+                    "\tcmp r1, 0x1\n"
+                    "\tbne _0804ADE8\n"
+                    "\tldr r0, [r6]\n"
+                    "\tadds r0, 0x51\n"
+                    "\tadds r0, r5\n"
+                    "\tmov r2, r9\n"
+                    "\tstrb r2, [r0]\n"
+                    "\tldr r0, [r6]\n"
+                    "\tadds r0, 0x5D\n"
+                    "\tadds r0, r5\n"
+                    "\tb _0804AE18\n"
+                    "\t.align 2, 0\n"
+                    "_0804ADE0: .4byte gUnknown_03004824\n"
+                    "_0804ADE4: .4byte gEnemyParty\n"
+                    "_0804ADE8:\n"
+                    "\tadds r0, r4, 0\n"
+                    "\tmovs r1, 0x39\n"
+                    "\tbl GetMonData\n"
+                    "\tadds r1, r0, 0\n"
+                    "\tcmp r1, 0\n"
+                    "\tbne _0804AE06\n"
+                    "\tldr r0, [r6]\n"
+                    "\tadds r0, 0x51\n"
+                    "\tadds r0, r5\n"
+                    "\tstrb r1, [r0]\n"
+                    "\tldr r0, [r6]\n"
+                    "\tadds r0, 0x5D\n"
+                    "\tadds r0, r5\n"
+                    "\tb _0804AE18\n"
+                    "_0804AE06:\n"
+                    "\tldr r0, [r6]\n"
+                    "\tadds r0, 0x51\n"
+                    "\tadds r0, r5\n"
+                    "\tmovs r1, 0x1\n"
+                    "\tstrb r1, [r0]\n"
+                    "\tldr r0, [r6]\n"
+                    "\tadds r0, 0x5D\n"
+                    "\tadds r0, r5\n"
+                    "\tmov r1, r9\n"
+                    "_0804AE18:\n"
+                    "\tstrb r1, [r0]\n"
+                    "\tldr r0, _0804AE38 @ =gUnknown_03004824\n"
+                    "\tadds r5, 0x1\n"
+                    "\tadds r7, 0x1\n"
+                    "\tldr r0, [r0]\n"
+                    "\tadds r0, 0x42\n"
+                    "\tadd r0, r8\n"
+                    "\tldrb r0, [r0]\n"
+                    "\tcmp r7, r0\n"
+                    "\tblt _0804ADB6\n"
+                    "_0804AE2C:\n"
+                    "\tpop {r3,r4}\n"
+                    "\tmov r8, r3\n"
+                    "\tmov r9, r4\n"
+                    "\tpop {r4-r7}\n"
+                    "\tpop {r0}\n"
+                    "\tbx r0\n"
+                    "\t.align 2, 0\n"
+                    "_0804AE38: .4byte gUnknown_03004824");
+}
+#endif
 
 void sub_804AE3C(u8 who)
 {
