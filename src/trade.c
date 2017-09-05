@@ -1241,7 +1241,7 @@ static void sub_8047EC0(void)
     UpdatePaletteFade();
 }
 
-void sub_80484F4(void)
+static void sub_80484F4(void)
 {
     int i;
     struct UnkStructF *unkStructF;
@@ -3307,7 +3307,7 @@ static void sub_804A6DC(u8 whichParty)
 }
 #endif
 
-void sub_804A740(u8 whichParty)
+static void sub_804A740(u8 whichParty)
 {
     int i;
     for (i = 0; i < gUnknown_03004824->partyCounts[whichParty]; i ++)
@@ -3356,7 +3356,7 @@ static void sub_804A938(struct UnkStructD *unkStructD)
     unkStructD->unk_10 = 1;
 }
 
-void sub_804A940(struct UnkStructD *unkStructD)
+static void sub_804A940(struct UnkStructD *unkStructD)
 {
     if (unkStructD->unk_10)
     {
@@ -3856,7 +3856,7 @@ static void sub_804B128(void)
 }
 
 #ifdef NONMATCHING
-void sub_804B1BC(void)
+static void sub_804B1BC(void)
 {
     REG_BG1VOFS = gUnknown_03004828->bg1vofs;
     REG_BG1HOFS = gUnknown_03004828->bg1hofs;
@@ -3871,7 +3871,7 @@ void sub_804B1BC(void)
     }
 }
 #else
-__attribute__((naked)) void sub_804B1BC(void)
+__attribute__((naked)) static void sub_804B1BC(void)
 {
     asm_unified("\tpush {lr}\n"
                     "\tldr r1, _0804B1FC @ =REG_BG1VOFS\n"
@@ -3917,7 +3917,7 @@ __attribute__((naked)) void sub_804B1BC(void)
 }
 #endif
 
-void sub_804B210(void)
+static void sub_804B210(void)
 {
     sub_804B1BC();
     LoadOam();
@@ -3925,13 +3925,16 @@ void sub_804B210(void)
     TransferPlttBuffer();
 }
 
-void sub_804B228(void)
+static void sub_804B228(void)
 {
     gUnknown_03004828->unk_00b4 = 0;
     gUnknown_03004828->unk_00b2 = 0;
     gUnknown_03004828->unk_00b3 = 0;
 }
 
+#ifdef NONMATCHING
+static
+#endif
 void sub_804B24C(void)
 {
     if (gUnknown_03004828->unk_00b2 == gUnknown_03004828->unk_00b3)
@@ -3958,7 +3961,7 @@ static u8 sub_804B2B0(void)
     return 0;
 }
 
-void sub_804B2D0(u8 whichParty, u8 a1)
+static void sub_804B2D0(u8 whichParty, u8 a1)
 {
     u8 v0;
     struct Pokemon *pokemon;
@@ -5333,7 +5336,7 @@ static void sub_804D738(struct Sprite *sprite)
     }
 }
 
-void sub_804D7AC(struct Sprite *sprite)
+static void sub_804D7AC(struct Sprite *sprite)
 {
     if (sprite->data1 == 20)
         StartSpriteAffineAnim(sprite, 1);
