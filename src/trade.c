@@ -36,6 +36,7 @@
 #include "pokeball.h"
 #include "pokedex.h"
 #include "field_effect.h"
+#include "util.h"
 #include "trade.h"
 
 #ifdef ENGLISH
@@ -3509,6 +3510,18 @@ static bool8 sub_804ABF8(void)
 }
 
 asm(".section .text.sub_804DAD4");
+
+void sub_804B128(void)
+{
+    struct BgAffineDstData dest;
+    DoBgAffineSet(&dest, gUnknown_03004828->unk_0104 << 8, gUnknown_03004828->unk_0106 << 8, gUnknown_03004828->unk_010c, gUnknown_03004828->unk_010e, gUnknown_03004828->unk_0118, gUnknown_03004828->unk_0118, gUnknown_03004828->unk_011c);
+    REG_BG2PA = dest.pa;
+    REG_BG2PB = dest.pb;
+    REG_BG2PC = dest.pc;
+    REG_BG2PD = dest.pd;
+    REG_BG2X = dest.dx;
+    REG_BG2Y = dest.dy;
+}
 
 #ifdef NONMATCHING
 void sub_804B1BC(void)
