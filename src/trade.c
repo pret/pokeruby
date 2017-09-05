@@ -3511,6 +3511,50 @@ static bool8 sub_804ABF8(void)
 
 asm(".section .text.sub_804DAD4");
 
+void sub_804B058(struct Sprite *sprite)
+{
+    if (++ sprite->data0 == 10)
+    {
+        PlaySE(SE_BOWA);
+        sprite->data0 = 0;
+    }
+}
+
+void sub_804B07C(struct Sprite *sprite)
+{
+    if (sprite->data1 == 0)
+    {
+        if (++ sprite->data0 == 12)
+            sprite->data0 = 0;
+        LoadPalette(&gTradeGlow2PaletteAnimTable[sprite->data0], 16 * (sprite->oam.paletteNum + 16) + 4, 2);
+    }
+}
+
+void sub_804B0BC(struct Sprite *sprite)
+{
+    sprite->data0 ++;
+    sprite->pos2.y ++;
+    if (sprite->data0 == 10)
+        DestroySprite(sprite);
+}
+
+void sub_804B0E0(struct Sprite *sprite)
+{
+    sprite->data0 ++;
+    sprite->pos2.y --;
+    if (sprite->data0 == 10)
+        DestroySprite(sprite);
+}
+
+void sub_804B104(struct Sprite *sprite)
+{
+    if (++ sprite->data0 == 15)
+    {
+        PlaySE(SE_W107);
+        sprite->data0 = 0;
+    }
+}
+
 void sub_804B128(void)
 {
     struct BgAffineDstData dest;
