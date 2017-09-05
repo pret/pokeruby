@@ -219,6 +219,7 @@ static
 #endif
 u8 sub_804A2B4(u8 *, u8, u8);
 static void sub_804A96C_alt(struct UnkStructD *, u8, u8, const u16 *, u8, u8, u16);
+static void sub_804A96C(struct UnkStructD *, u8, u8, const u16 *, u8, u8, u16);
 #ifdef NONMATCHING
 static
 #endif
@@ -5450,7 +5451,7 @@ static void sub_804DAD4(struct MailStruct *mail, const struct InGameTrade *trade
     StringCopy(mail->playerName, trade->otName);
 
 #if GERMAN
-    PadNameString(mail->string, CHAR_SPACE);
+    PadNameString(mail->playerName, CHAR_SPACE);
 #endif
 
     mail->trainerId[0] = trade->otId >> 24;
