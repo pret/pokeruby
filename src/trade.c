@@ -3511,6 +3511,22 @@ static bool8 sub_804ABF8(void)
 
 asm(".section .text.sub_804DAD4");
 
+void sub_804AFB8(const struct WindowConfig *windowConfig, u8 *dest, const u8 *src, u8 size)
+{
+    u8 i;
+    u8 *tileBuffer;
+    size = (size + 3) / 4;
+    tileBuffer = gTileBuffer;
+    CpuFill16(0, tileBuffer, size * 0x80);
+    CpuFill16(0, tileBuffer + windowConfig->width * 0x20, size * 0x80);
+    sub_8004E3C(windowConfig, tileBuffer, src);
+    for (i = 0; i < size; i ++)
+    {
+        CpuCopy16(&tileBuffer[32 * (i * 4)], &dest[32 * (i * 8)], 0x80);
+        CpuCopy16(&tileBuffer[32 * (i * 4 + windowConfig->width)], &dest[32 * (i * 8 + 4)], 0x80);
+    }
+}
+
 void sub_804B058(struct Sprite *sprite)
 {
     if (++ sprite->data0 == 10)

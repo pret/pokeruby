@@ -2342,7 +2342,7 @@ u8 sub_8003490(struct Window *win, u8 c, u16 tileDataStartOffset, u8 left, u8 to
 
 void sub_80034D4(u8 *tileData, const u8 *text)
 {
-    sub_8004E3C((struct WindowConfig *)&gWindowConfig_81E6C74, tileData, text);
+    sub_8004E3C(&gWindowConfig_81E6C74, tileData, text);
 }
 
 u8 sub_80034EC(u8 *str)
@@ -3645,7 +3645,7 @@ void sub_8004E28(struct Window *win, u8 *foreground, u8 *background, u8 *shadow)
     *shadow = win->shadowColor;
 }
 
-void sub_8004E3C(struct WindowConfig *winConfig, u8 *tileData, const u8 *text)
+void sub_8004E3C(const struct WindowConfig *winConfig, u8 *tileData, const u8 *text)
 {
     sTempWindow.config = winConfig;
     InitWindow(&sTempWindow, text, 0, 0, 0);

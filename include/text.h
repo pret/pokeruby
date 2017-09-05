@@ -245,7 +245,7 @@ u8 sub_8004D38(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 l
 u8 sub_8004DB0(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u8 top, u16 a6);
 u8 sub_8004E24(struct Window *win);
 void sub_8004E28(struct Window *win, u8 *foreground, u8 *background, u8 *shadow);
-void sub_8004E3C(struct WindowConfig *winConfig, u8 *tileData, const u8 *text);
+void sub_8004E3C(const struct WindowConfig *winConfig, u8 *tileData, const u8 *text);
 u8 GetStringWidthGivenWindowConfig(const struct WindowConfig *winConfig, const u8 *s);
 void ConvertInternationalString(u8 *s, u8 language);
 void StripExtCtrlCodes(u8 *str);
