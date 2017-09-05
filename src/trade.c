@@ -182,26 +182,26 @@ struct TradeEwramStruct {
 };
 
 static void sub_8047EC0(void);
-/*static*/ void sub_804AFB8(const struct WindowConfig *, u8 *, const u8 *, u8);
-/*static*/ void sub_804ACD8(const u8 *, u8 *, u8);
+static void sub_804AFB8(const struct WindowConfig *, u8 *, const u8 *, u8);
+static void sub_804ACD8(const u8 *, u8 *, u8);
 static void nullsub_5(u8, u8);
 static void sub_804AA88(void);
 static void sub_804A964(struct UnkStructD *, void *);
 static void sub_80489F4(void);
-/*static*/ void sub_804AA0C(u8);
+static void sub_804AA0C(u8);
 static bool8 sub_8048D44(void);
-/*static*/ void sub_804AF84(void);
+static void sub_804AF84(void);
 static bool8 sub_804ABF8(void);
-/*static*/ void sub_804ACF4(u8);
+static void sub_804ACF4(u8);
 static void sub_804A41C(u8);
 static void sub_8048C70(void);
 static void sub_8048B0C(u8);
-/*static*/ void sub_804AE3C(u8);
-/*static*/ void sub_804AF10(void);
+static void sub_804AE3C(u8);
+static void sub_804AF10(void);
 static void sub_80494D8(void);
 static void sub_8048AB4(void);
 static void sub_804A940(struct UnkStructD *);
-/*static*/ void sub_804B41C(void);
+static void sub_804B41C(void);
 static void sub_8049DE0(void);
 static void sub_804AB30(void);
 static void sub_8049ED4(u8);
@@ -211,11 +211,14 @@ static void sub_804A9F4(u8);
 static void sub_804AA00(u8);
 static void sub_8049E9C(u8);
 static void sub_804AADC(u16, u8);
-/*static*/ void sub_804A80C(void);
+static void sub_804A80C(void);
 static u8 sub_80499F0(const u8 *, u8, u8);
 static void sub_804A840(u8);
-/*static*/ u8 sub_804A2B4(u8 *, u8, u8);
-/*static*/ void sub_804A96C_alt(struct UnkStructD *, u8, u8, const u16 *, u8, u8, u16);
+#ifdef NONMATCHING
+static
+#endif
+u8 sub_804A2B4(u8 *, u8, u8);
+static void sub_804A96C_alt(struct UnkStructD *, u8, u8, const u16 *, u8, u8, u16);
 #ifdef NONMATCHING
 static
 #endif
@@ -225,35 +228,29 @@ static
 #endif
 void sub_804A51C(u8, u8, u8, u8, u8, u8);
 static void sub_804D7AC(struct Sprite *);
-/*static*/ void sub_804BA94(u8, u8);
-/*static*/ bool8 sub_804C29C(void);
-/*static*/ void sub_804DC18(void);
-/*static*/ void sub_804BB78(void);
+static bool8 sub_804C29C(void);
+static void sub_804DC18(void);
 static u8 sub_804B2B0(void);
 static void sub_804E144(void);
 static void sub_804E1A0(u8);
-/*static*/ void sub_804B790(void);
 static void sub_804DAD4(struct MailStruct *, const struct InGameTrade *);
-void sub_804D588(void);
 static void sub_804DC88(void);
-u8 sub_8047580(u8, u8, u8, u8, u8, u8, u8, u32);
-void sub_804D6BC(struct Sprite *);
-void sub_804D738(struct Sprite *);
-void sub_804BBE8(u8);
-void sub_804B128(void);
-void sub_804B058(struct Sprite *);
-void sub_804B07C(struct Sprite *);
-void sub_804B0BC(struct Sprite *);
-void sub_804B104(struct Sprite *);
-void sub_804C0F8(u8);
-bool8 sub_8040A3C(u16);
-void sub_804B0E0(struct Sprite *);
-void sub_804D80C(struct Sprite *);
-void sub_804E1DC(void);
-void sub_804BBCC(void);
-void sub_804D8E4(void);
-void sub_804C164(void);
-void sub_804C1A8(void);
+static void sub_804D6BC(struct Sprite *);
+static void sub_804D738(struct Sprite *);
+static void sub_804BBE8(u8);
+static void sub_804B058(struct Sprite *);
+static void sub_804B07C(struct Sprite *);
+static void sub_804B0BC(struct Sprite *);
+static void sub_804B104(struct Sprite *);
+static void sub_804D80C(struct Sprite *);
+static void sub_804E1DC(void);
+static void sub_804BBCC(void);
+static void sub_804D8E4(void);
+static void sub_804C164(void);
+static void sub_804C1A8(void);
+#ifdef NONMATCHING
+static
+#endif
 void sub_804DB84(void);
 
 extern u8 gUnknown_020297D8[2];
@@ -2977,6 +2974,9 @@ static void sub_8049ED4(u8 a0)
 }
 #endif
 
+#ifdef NONMATCHING
+static
+#endif
 u8 sub_804A2B4(u8 *a0, u8 whichParty, u8 whichPokemon)
 {
     u8 string[11];
@@ -3319,7 +3319,7 @@ void sub_804A740(u8 whichParty)
     }
 }
 
-void sub_804A80C(void)
+static void sub_804A80C(void)
 {
     FillWindowRect_DefaultPalette(&gUnknown_03004824->window, 0, gUnknown_0820C330[1][0], 0, gUnknown_0820C330[1][1], 19);
     sub_804A41C(1);
@@ -3370,7 +3370,7 @@ static void sub_804A964(struct UnkStructD *unkStructD, void *dest)
     unkStructD->vramAddr = dest;
 }
 
-/*static*/ void sub_804A96C(struct UnkStructD *arg0, u8 left, u8 top, const u16 *tilemap, u8 width, u8 height, u16 sp8) {
+static void sub_804A96C(struct UnkStructD *arg0, u8 left, u8 top, const u16 *tilemap, u8 width, u8 height, u16 sp8) {
     int y, x;
 
     for (y = 0; y < height; y++)
@@ -3388,7 +3388,7 @@ static void sub_804A964(struct UnkStructD *unkStructD, void *dest)
 }
 
 #if GERMAN
-void sub_804A96C_alt(struct UnkStructD *arg0, u8 left, u8 top, const u16 *tilemap, u8 width, u8 height, u16 sp8) {
+static void sub_804A96C_alt(struct UnkStructD *arg0, u8 left, u8 top, const u16 *tilemap, u8 width, u8 height, u16 sp8) {
     sub_804A96C(arg0, left, top, tilemap, width, height, sp8);
 
     arg0->unk_10 = 1;
@@ -3405,7 +3405,7 @@ static void sub_804AA00(u8 unused)
     MenuZeroFillScreen();
 }
 
-/*static*/ void sub_804AA0C(u8 a0)
+static void sub_804AA0C(u8 a0)
 {
     DrawTextWindow(&gUnknown_03004824->window, gTradeMessageWindowRects[a0][0], gTradeMessageWindowRects[a0][1], gTradeMessageWindowRects[a0][2], gTradeMessageWindowRects[a0][3]);
     sub_8003460(&gUnknown_03004824->window, gUnknown_0820C2F0[a0], 0x180 + gUnknown_03004824->unk_007a, gTradeMessageWindowRects[a0][0] + 1, gTradeMessageWindowRects[a0][1] + 1);
@@ -3505,13 +3505,13 @@ static bool8 sub_804ABF8(void)
     }
 }
 
-/*static*/ void sub_804ACD8(const u8 *src, u8 *dest, u8 a2)
+static void sub_804ACD8(const u8 *src, u8 *dest, u8 a2)
 {
     sub_804AFB8(&gWindowConfig_81E725C, dest, src, a2);
 }
 
 #ifdef NONMATCHING
-void sub_804ACF4(u8 who)
+static void sub_804ACF4(u8 who)
 {
     struct Pokemon *pokemon;
     int i;
@@ -3562,10 +3562,9 @@ void sub_804ACF4(u8 who)
     }
 }
 #else
-__attribute__((naked)) void sub_804ACF4(u8 who)
+static __attribute__((naked)) void sub_804ACF4(u8 who)
 {
-    asm_unified("sub_804ACF4: @ 804ACF4\n"
-                    "\tpush {r4-r7,lr}\n"
+    asm_unified("\tpush {r4-r7,lr}\n"
                     "\tmov r7, r9\n"
                     "\tmov r6, r8\n"
                     "\tpush {r6,r7}\n"
@@ -3737,7 +3736,7 @@ __attribute__((naked)) void sub_804ACF4(u8 who)
 }
 #endif
 
-void sub_804AE3C(u8 who)
+static void sub_804AE3C(u8 who)
 {
     u16 i;
     u16 curHp;
@@ -3763,7 +3762,7 @@ void sub_804AE3C(u8 who)
     }
 }
 
-void sub_804AF10(void)
+static void sub_804AF10(void)
 {
     int i, j;
     for (i = 0; i < 2; i ++)
@@ -3775,7 +3774,7 @@ void sub_804AF10(void)
     }
 }
 
-void sub_804AF84(void)
+static void sub_804AF84(void)
 {
     int i;
     for (i = 0; i < 11; i ++)
@@ -3783,7 +3782,7 @@ void sub_804AF84(void)
             gSaveBlock1.giftRibbons[i] = gUnknown_03004824->unk_00b5[i];
 }
 
-void sub_804AFB8(const struct WindowConfig *windowConfig, u8 *dest, const u8 *src, u8 size)
+static void sub_804AFB8(const struct WindowConfig *windowConfig, u8 *dest, const u8 *src, u8 size)
 {
     u8 i;
     u8 *tileBuffer;
@@ -3799,7 +3798,7 @@ void sub_804AFB8(const struct WindowConfig *windowConfig, u8 *dest, const u8 *sr
     }
 }
 
-void sub_804B058(struct Sprite *sprite)
+static void sub_804B058(struct Sprite *sprite)
 {
     if (++ sprite->data0 == 10)
     {
@@ -3808,7 +3807,7 @@ void sub_804B058(struct Sprite *sprite)
     }
 }
 
-void sub_804B07C(struct Sprite *sprite)
+static void sub_804B07C(struct Sprite *sprite)
 {
     if (sprite->data1 == 0)
     {
@@ -3818,7 +3817,7 @@ void sub_804B07C(struct Sprite *sprite)
     }
 }
 
-void sub_804B0BC(struct Sprite *sprite)
+static void sub_804B0BC(struct Sprite *sprite)
 {
     sprite->data0 ++;
     sprite->pos2.y ++;
@@ -3826,7 +3825,7 @@ void sub_804B0BC(struct Sprite *sprite)
         DestroySprite(sprite);
 }
 
-void sub_804B0E0(struct Sprite *sprite)
+static void sub_804B0E0(struct Sprite *sprite)
 {
     sprite->data0 ++;
     sprite->pos2.y --;
@@ -3834,7 +3833,7 @@ void sub_804B0E0(struct Sprite *sprite)
         DestroySprite(sprite);
 }
 
-void sub_804B104(struct Sprite *sprite)
+static void sub_804B104(struct Sprite *sprite)
 {
     if (++ sprite->data0 == 15)
     {
@@ -3843,7 +3842,7 @@ void sub_804B104(struct Sprite *sprite)
     }
 }
 
-void sub_804B128(void)
+static void sub_804B128(void)
 {
     struct BgAffineDstData dest;
     DoBgAffineSet(&dest, gUnknown_03004828->unk_0104 << 8, gUnknown_03004828->unk_0106 << 8, gUnknown_03004828->unk_010c, gUnknown_03004828->unk_010e, gUnknown_03004828->unk_0118, gUnknown_03004828->unk_0118, gUnknown_03004828->unk_011c);
@@ -3996,7 +3995,7 @@ void sub_804B2D0(u8 whichParty, u8 a1)
 }
 
 #ifdef NONMATCHING
-void sub_804B41C(void)
+static void sub_804B41C(void)
 // Link trade init
 {
     switch (gMain.state)
@@ -4112,7 +4111,7 @@ void sub_804B41C(void)
     UpdatePaletteFade();
 }
 #else
-__attribute__((naked)) void sub_804B41C(void)
+static __attribute__((naked)) void sub_804B41C(void)
 {
     asm_unified("\tpush {r4-r6,lr}\n"
                     "\tsub sp, 0x4\n"
@@ -4494,7 +4493,7 @@ __attribute__((naked)) void sub_804B41C(void)
 }
 #endif
 
-void sub_804B790(void)
+static void sub_804B790(void)
 // In-game trade init
 {
     u8 otName[11];
@@ -4597,7 +4596,7 @@ static void sub_804BA64(void)
         EnableNationalPokedex();
 }
 
-void sub_804BA94(u8 a0, u8 a1)
+static void sub_804BA94(u8 a0, u8 a1)
 {
     u8 friendship;
     struct Pokemon *playerPokemon = &gPlayerParty[a0];
@@ -4626,7 +4625,7 @@ void sub_804BA94(u8 a0, u8 a1)
         sub_804BA64();
 }
 
-void sub_804BB78(void)
+static void sub_804BB78(void)
 {
     switch (gUnknown_03004828->unk_00bd)
     {
@@ -4643,7 +4642,7 @@ void sub_804BB78(void)
     }
 }
 
-void sub_804BBCC(void)
+static void sub_804BBCC(void)
 {
     sub_804C29C();
     RunTasks();
@@ -4652,7 +4651,7 @@ void sub_804BBCC(void)
     UpdatePaletteFade();
 }
 
-void sub_804BBE8(u8 a0)
+static void sub_804BBE8(u8 a0)
 {
     int i;
     u16 *buffer;
@@ -4741,7 +4740,7 @@ void sub_804BBE8(u8 a0)
     }
 }
 
-void sub_804C0F8(u8 a0)
+static void sub_804C0F8(u8 a0)
 {
     if (a0 == 0)
     {
@@ -4761,7 +4760,7 @@ void sub_804C0F8(u8 a0)
     }
 }
 
-void sub_804C164(void)
+static void sub_804C164(void)
 {
     LoadSpriteSheet(&gUnknown_082159A4);
     LoadSpriteSheet(&gUnknown_082159F4);
@@ -4771,7 +4770,7 @@ void sub_804C164(void)
     LoadSpritePalette(&gUnknown_082159B4);
 }
 
-void sub_804C1A8(void)
+static void sub_804C1A8(void)
 {
     u8 mpId;
     u8 string[20];
@@ -4795,7 +4794,7 @@ void sub_804C1A8(void)
     }
 }
 
-bool8 sub_804C29C(void)
+static bool8 sub_804C29C(void)
 {
     u16 evoTarget;
 
@@ -5245,7 +5244,7 @@ bool8 sub_804C29C(void)
     return FALSE;
 }
 
-void sub_804D588(void)
+static void sub_804D588(void)
 {
     u16 evoTarget;
     switch (gMain.state)
@@ -5298,7 +5297,7 @@ static void sub_804D63C(void)
     }
 }
 
-void sub_804D6BC(struct Sprite *sprite)
+static void sub_804D6BC(struct Sprite *sprite)
 {
     sprite->pos1.y += sprite->data0 / 10;
     sprite->data5 += sprite->data1;
@@ -5319,7 +5318,7 @@ void sub_804D6BC(struct Sprite *sprite)
     }
 }
 
-void sub_804D738(struct Sprite *sprite)
+static void sub_804D738(struct Sprite *sprite)
 {
     sprite->pos2.y += gTradeBallVerticalVelocityTable[sprite->data0];
     if (sprite->data0 == 22)
@@ -5348,7 +5347,7 @@ void sub_804D7AC(struct Sprite *sprite)
     }
 }
 
-void sub_804D80C(struct Sprite *sprite)
+static void sub_804D80C(struct Sprite *sprite)
 {
     if (sprite->data2 == 0)
     {
@@ -5381,7 +5380,7 @@ u16 sub_804D89C(void)
     return inGameTrade->playerSpecies;
 }
 
-/*static*/ void sub_804D8E4(void)
+static void sub_804D8E4(void)
 {
     u8 nickname[32];
     const struct InGameTrade *inGameTrade = &gIngameTrades[gSpecialVar_0x8004];
@@ -5474,6 +5473,9 @@ void sub_804DB68(void)
     sub_804D948(gSpecialVar_0x8005, gSpecialVar_0x8004);
 }
 
+#ifdef NONMATCHING
+static
+#endif
 void sub_804DB84(void)
 {
     if (sub_804C29C() == TRUE)
@@ -5493,7 +5495,7 @@ void sub_804DB84(void)
     UpdatePaletteFade();
 }
 
-void sub_804DC18(void)
+static void sub_804DC18(void)
 {
     u8 mpId = sub_804B2B0();
     sub_804D63C();
@@ -5668,7 +5670,7 @@ static void sub_804E1A0(u8 taskId)
     }
 }
 
-/*static*/ void sub_804E1DC(void)
+static void sub_804E1DC(void)
 {
     u8 i;
     u8 numRibbons = 0;
