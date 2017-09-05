@@ -133,7 +133,10 @@ struct TradeEwramSubstruct2 {
     /*0x0038*/ struct Pokemon pokemon;
     /*0x009c*/ u8 unk_009c;
     /*0x009d*/ u8 unk_009d;
-    /*0x009e*/ u16 linkData[12];
+    /*0x009e*/ u16 linkData[10];
+    /*0x00b2*/ u8 unk_00b2;
+    /*0x00b3*/ u8 unk_00b3;
+    /*0x00b4*/ u16 unk_00b4;
     /*0x00b6*/ u16 unk_00b6;
     // Sprite indices
     /*0x00b8*/ u8 unk_00b8[2];
@@ -3511,7 +3514,24 @@ void sub_804B210(void);
 
 void sub_804B228(void);
 
-void sub_804B24C(void);
+void sub_804B24C(void)
+{
+    if (gUnknown_03004828->unk_00b2 == gUnknown_03004828->unk_00b3)
+    {
+        gUnknown_03004828->unk_00b4 ++;
+    }
+    else
+    {
+        gUnknown_03004828->unk_00b4 = 0;
+    }
+    if (gUnknown_03004828->unk_00b4 > 0xb4)
+    {
+        gUnknown_03004828->unk_00b4 = 0;
+        gUnknown_03004828->unk_00b3 = 0;
+        gUnknown_03004828->unk_00b2 = 0;
+    }
+    gUnknown_03004828->unk_00b3 = gUnknown_03004828->unk_00b2;
+}
 
 static u8 sub_804B2B0(void)
 {
