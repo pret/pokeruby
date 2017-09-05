@@ -700,37 +700,4 @@ _0804B20C:
 	bx r0
 	thumb_func_end sub_804B1BC
 
-	thumb_func_start sub_804B210
-sub_804B210: @ 804B210
-	push {lr}
-	bl sub_804B1BC
-	bl LoadOam
-	bl ProcessSpriteCopyRequests
-	bl TransferPlttBuffer
-	pop {r0}
-	bx r0
-	thumb_func_end sub_804B210
-
-	thumb_func_start sub_804B228
-sub_804B228: @ 804B228
-	push {r4,lr}
-	ldr r4, _0804B248 @ =gUnknown_03004828
-	ldr r1, [r4]
-	adds r2, r1, 0
-	adds r2, 0xB4
-	movs r3, 0
-	movs r0, 0
-	strh r0, [r2]
-	adds r1, 0xB2
-	strb r3, [r1]
-	ldr r0, [r4]
-	adds r0, 0xB3
-	strb r3, [r0]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0804B248: .4byte gUnknown_03004828
-	thumb_func_end sub_804B228
-
 	.align 2, 0 @ Don't pad with nop.

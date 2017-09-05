@@ -3510,9 +3510,22 @@ static bool8 sub_804ABF8(void)
 
 asm(".section .text.sub_804DAD4");
 
-void sub_804B210(void);
+void sub_804B1BC(void);
 
-void sub_804B228(void);
+void sub_804B210(void)
+{
+    sub_804B1BC();
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    TransferPlttBuffer();
+}
+
+void sub_804B228(void)
+{
+    gUnknown_03004828->unk_00b4 = 0;
+    gUnknown_03004828->unk_00b2 = 0;
+    gUnknown_03004828->unk_00b3 = 0;
+}
 
 void sub_804B24C(void)
 {
