@@ -47,7 +47,7 @@ static void sub_8082F68(u8 taskId);
 static void sub_8082FEC(u8 taskId);
 static void sub_808303C(u8 taskId);
 static void sub_80830E4(u8 taskId);
-/*static*/ void sub_8083188(u8 taskId); /* When `sub_80830E4` matches, make this function static. */
+static void sub_8083188(u8 taskId);
 static void sub_8083288(u8 taskId);
 static void sub_8083314(u8 taskId);
 static void sub_80833C4(u8 taskId);
@@ -290,8 +290,6 @@ static void sub_808303C(u8 taskId)
 #endif
 }
 
-#ifdef NONMATCHING
-// Matches, except for a strange register allocation (redundant r6 in the original).
 static void sub_80830E4(u8 taskId)
 {
     if (sub_8082E28(taskId) != 1 &&
@@ -299,8 +297,12 @@ static void sub_80830E4(u8 taskId)
         sub_8082DF4(taskId) != 1 &&
         GetFieldMessageBoxMode() == 0)
     {
-        if (sub_800820C() != GetLinkPlayerCount_2() ||
-            (gMain.heldKeys & B_BUTTON))
+        if (sub_800820C() != GetLinkPlayerCount_2())
+        {
+            ShowFieldAutoScrollMessage(gUnknown_081A4932);
+            gTasks[taskId].func = sub_8082FEC;
+        }
+        else if (gMain.heldKeys & B_BUTTON)
         {
             ShowFieldAutoScrollMessage(gUnknown_081A4932);
             gTasks[taskId].func = sub_8082FEC;
@@ -313,87 +315,8 @@ static void sub_80830E4(u8 taskId)
         }
     }
 }
-#else
-__attribute__((naked))
-static void sub_80830E4(u8 taskId) {
-    asm(".syntax unified\n\
-    push {r4-r6,lr}\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    adds r6, r5, 0\n\
-    adds r0, r5, 0\n\
-    bl sub_8082E28\n\
-    cmp r0, 0x1\n\
-    beq _08083178\n\
-    adds r0, r5, 0\n\
-    bl sub_8082EB8\n\
-    cmp r0, 0x1\n\
-    beq _08083178\n\
-    adds r0, r5, 0\n\
-    bl sub_8082DF4\n\
-    cmp r0, 0x1\n\
-    beq _08083178\n\
-    bl GetFieldMessageBoxMode\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    bne _08083178\n\
-    bl sub_800820C\n\
-    adds r4, r0, 0\n\
-    bl GetLinkPlayerCount_2\n\
-    lsls r4, 24\n\
-    lsls r0, 24\n\
-    cmp r4, r0\n\
-    bne _08083132\n\
-    ldr r0, _08083148 @ =gMain\n\
-    ldrh r1, [r0, 0x2C]\n\
-    movs r0, 0x2\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _08083158\n\
-_08083132:\n\
-    ldr r0, _0808314C @ =gUnknown_081A4932\n\
-    bl ShowFieldAutoScrollMessage\n\
-    ldr r1, _08083150 @ =gTasks\n\
-    lsls r0, r5, 2\n\
-    adds r0, r5\n\
-    lsls r0, 3\n\
-    adds r0, r1\n\
-    ldr r1, _08083154 @ =sub_8082FEC\n\
-    str r1, [r0]\n\
-    b _08083178\n\
-    .align 2, 0\n\
-_08083148: .4byte gMain\n\
-_0808314C: .4byte gUnknown_081A4932\n\
-_08083150: .4byte gTasks\n\
-_08083154: .4byte sub_8082FEC\n\
-_08083158:\n\
-    movs r0, 0x1\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _08083178\n\
-    movs r0, 0x5\n\
-    bl PlaySE\n\
-    bl sub_8007F4C\n\
-    ldr r0, _08083180 @ =gTasks\n\
-    lsls r1, r6, 2\n\
-    adds r1, r6\n\
-    lsls r1, 3\n\
-    adds r1, r0\n\
-    ldr r0, _08083184 @ =sub_8083188\n\
-    str r0, [r1]\n\
-_08083178:\n\
-    pop {r4-r6}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_08083180: .4byte gTasks\n\
-_08083184: .4byte sub_8083188\n\
-    .syntax divided\n");
-}
-#endif
 
-/* When the previous function matches, make this function static. */
-/*static*/ void sub_8083188(u8 taskId)
+static void sub_8083188(u8 taskId)
 {
     u8 local1, local2;
     u16 *result;
