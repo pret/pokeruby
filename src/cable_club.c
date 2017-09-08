@@ -603,13 +603,11 @@ void sub_808350C(void)
     sub_8082CD4(2, 4);
 }
 
-#ifdef NONMATCHING
-/* Matches except for register allocation. */
 static void sub_808353C(u8 taskId)
 {
     int playerCount;
     int i;
-    
+
     switch (gTasks[taskId].data[0])
     {
     case 0:
@@ -622,16 +620,14 @@ static void sub_808353C(u8 taskId)
                 {
                     gScriptResult = 7;
                     sub_8008480();
-                    gTasks[taskId].data[0] = i;
+                    gTasks[taskId].data[0] = 1;
                     return;
                 }
             }
         }
-        
         EnableBothScriptContexts();
         DestroyTask(taskId);
         break;
-        
     case 1:
         if (gReceivedRemoteLinkPlayers == FALSE)
         {
@@ -641,88 +637,6 @@ static void sub_808353C(u8 taskId)
         break;
     }
 }
-#else
-__attribute__((naked))
-void sub_808353C(u8 taskId) {
-    asm(".syntax unified\n\
-sub_808353C: @ 808353C                                  \n\
-    push {r4,r5,lr}                                     \n\
-    lsls r0, 24                                         \n\
-    lsrs r5, r0, 24                                     \n\
-    ldr r1, _0808355C @ =gTasks                         \n\
-    lsls r0, r5, 2                                      \n\
-    adds r0, r5                                         \n\
-    lsls r0, 3                                          \n\
-    adds r0, r1                                         \n\
-    movs r1, 0x8                                        \n\
-    ldrsh r0, [r0, r1]                                  \n\
-    cmp r0, 0                                           \n\
-    beq _08083560                                       \n\
-    cmp r0, 0x1                                         \n\
-    beq _080835BC                                       \n\
-    b _080835CE                                         \n\
-    .align 2, 0                                         \n\
-_0808355C: .4byte gTasks                                \n\
-_08083560:                                              \n\
-    ldr r0, _08083594 @ =gScriptResult                  \n\
-    ldrh r0, [r0]                                       \n\
-    cmp r0, 0x1                                         \n\
-    bne _08083586                                       \n\
-    bl GetLinkPlayerCount                               \n\
-    lsls r0, 24                                         \n\
-    lsrs r0, 24                                         \n\
-    movs r1, 0                                          \n\
-    cmp r1, r0                                          \n\
-    bge _08083586                                       \n\
-    ldr r2, _08083598 @ =gLinkPlayers                   \n\
-_08083578:                                              \n\
-    ldrh r4, [r2, 0x1A]                                 \n\
-    cmp r4, 0x1                                         \n\
-    beq _0808359C                                       \n\
-    adds r2, 0x1C                                       \n\
-    adds r1, 0x1                                        \n\
-    cmp r1, r0                                          \n\
-    blt _08083578                                       \n\
-_08083586:                                              \n\
-    bl EnableBothScriptContexts                         \n\
-    adds r0, r5, 0                                      \n\
-    bl DestroyTask                                      \n\
-    b _080835CE                                         \n\
-    .align 2, 0                                         \n\
-_08083594: .4byte gScriptResult                         \n\
-_08083598: .4byte gLinkPlayers                          \n\
-_0808359C:                                              \n\
-    ldr r1, _080835B4 @ =gScriptResult                  \n\
-    movs r0, 0x7                                        \n\
-    strh r0, [r1]                                       \n\
-    bl sub_8008480                                      \n\
-    ldr r1, _080835B8 @ =gTasks                         \n\
-    lsls r0, r5, 2                                      \n\
-    adds r0, r5                                         \n\
-    lsls r0, 3                                          \n\
-    adds r0, r1                                         \n\
-    strh r4, [r0, 0x8]                                  \n\
-    b _080835CE                                         \n\
-    .align 2, 0                                         \n\
-_080835B4: .4byte gScriptResult                         \n\
-_080835B8: .4byte gTasks                                \n\
-_080835BC:                                              \n\
-    ldr r0, _080835D4 @ =gReceivedRemoteLinkPlayers     \n\
-    ldrb r0, [r0]                                       \n\
-    cmp r0, 0                                           \n\
-    bne _080835CE                                       \n\
-    bl EnableBothScriptContexts                         \n\
-    adds r0, r5, 0                                      \n\
-    bl DestroyTask                                      \n\
-_080835CE:                                              \n\
-    pop {r4,r5}                                         \n\
-    pop {r0}                                            \n\
-    bx r0                                               \n\
-    .align 2, 0                                         \n\
-_080835D4: .4byte gReceivedRemoteLinkPlayers            \n\
-    .syntax divided");
-}
-#endif
 
 void sub_80835D8(void)
 {
