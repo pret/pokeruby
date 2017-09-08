@@ -53,7 +53,7 @@ static void sub_8083314(u8 taskId);
 static void sub_80833C4(u8 taskId);
 static void sub_80833EC(u8 taskId);
 static void sub_8083418(u8 taskId);
-static u8 sub_8083444(u8 taskId);
+static bool8 sub_8083444(u8 taskId);
 static void sub_808353C(u8 taskId);
 static void sub_8083710(u8 taskId);
 static void sub_8083760(u8 taskId);
@@ -80,7 +80,7 @@ static void sub_8082CD4(u8 arg0, u8 arg1)
 {
     if (FindTaskIdByFunc(sub_8082F20) == 0xFF)
     {
-        u8 taskId = CreateTask(sub_8082F20, 0x50);
+        u8 taskId = CreateTask(sub_8082F20, 80);
         
         gTasks[taskId].data[1] = arg0;
         gTasks[taskId].data[2] = arg1;
@@ -89,28 +89,28 @@ static void sub_8082CD4(u8 arg0, u8 arg1)
 
 static void sub_8082D18(u32 value)
 {
-    ConvertIntToDecimalStringN(gStringVar1, value, 0, 1);
-    MenuDrawTextWindow(0x12, 0xA, 0x1C, 0xD);
-    sub_8072BD8(gOtherText_PLink, 0x13, 0xB, 0x48);
+    ConvertIntToDecimalStringN(gStringVar1, value, STR_CONV_MODE_LEFT_ALIGN, 1);
+    MenuDrawTextWindow(18, 10, 28, 13);
+    sub_8072BD8(gOtherText_PLink, 19, 11, 72);
 }
 
 static void sub_8082D4C()
 {
-    MenuZeroFillWindowRect(0x12, 0xA, 0x1C, 0xD);
+    MenuZeroFillWindowRect(18, 10, 28, 13);
 }
 
 static void sub_8082D60(u8 taskId, u8 arg1)
 {
-    s16 *ptr = &gTasks[taskId].data[3];
+    s16 *data = &gTasks[taskId].data[3];
 
-    if (arg1 != *ptr)
+    if (arg1 != *data)
     {
         if (arg1 <= 1)
             sub_8082D4C();
         else
             sub_8082D18(arg1);
         
-        *ptr = arg1;
+        *data = arg1;
     }
 }
 
@@ -124,69 +124,73 @@ static u16 sub_8082D9C(u8 minPlayers, u8 maxPlayers)
         playerCount = GetLinkPlayerCount_2();
         if (minPlayers <= playerCount && playerCount <= maxPlayers)
             return 1;
-        ConvertIntToDecimalStringN(gStringVar1, playerCount, 0, 1);
+        
+        ConvertIntToDecimalStringN(gStringVar1, playerCount, STR_CONV_MODE_LEFT_ALIGN, 1);
         return 4;
+        
     case EXCHANGE_TIMED_OUT:
         return 0;
+        
     case EXCHANGE_IN_PROGRESS:
         return 3;
+        
     default:
         return 0;
     }
 }
 
-static u32 sub_8082DF4(u8 taskId)
+static bool32 sub_8082DF4(u8 taskId)
 {
     if (HasLinkErrorOccurred() == TRUE)
     {
         gTasks[taskId].func = sub_8083418;
-        return 1;
+        return TRUE;
     }
-    return 0;
+    
+    return FALSE;
 }
 
-static u32 sub_8082E28(u8 taskId)
+static bool32 sub_8082E28(u8 taskId)
 {
     if ((gMain.newKeys & B_BUTTON) &&
-        IsLinkConnectionEstablished() == 0)
+        IsLinkConnectionEstablished() == FALSE)
     {
         gTasks[taskId].func = sub_80833EC;
-        return 1;
+        return TRUE;
     }
     
-    return 0;
+    return FALSE;
 }
 
-static u32 sub_8082E6C(u8 taskId)
+static bool32 sub_8082E6C(u8 taskId)
 {
-    if (IsLinkConnectionEstablished() != 0)
-        SetSuppressLinkErrorMessage(1);
+    if (IsLinkConnectionEstablished())
+        SetSuppressLinkErrorMessage(TRUE);
     
-    if ((gMain.newKeys & B_BUTTON) != 0)
+    if (gMain.newKeys & B_BUTTON)
     {
         gTasks[taskId].func = sub_80833EC;
-        return 1;
+        return TRUE;
     }
     
-    return 0;
+    return FALSE;
 }
 
-static u32 sub_8082EB8(u8 taskId)
+static bool32 sub_8082EB8(u8 taskId)
 {
     if (GetSioMultiSI() == 1)
     {
         gTasks[taskId].func = sub_8083418;
-        return 1;
+        return TRUE;
     }
     
-    return 0;
+    return FALSE;
 }
 
 void unref_sub_8082EEC(u8 taskId)
 {
-    gTasks[taskId].data[0] += 1;
-    
-    if (gTasks[taskId].data[0] == 0xA)
+    gTasks[taskId].data[0]++;
+    if (gTasks[taskId].data[0] == 10)
     {
         sub_8007E9C(2);
         DestroyTask(taskId);
@@ -213,11 +217,11 @@ static void sub_8082F68(u8 taskId)
 {
     u32 playerCount = GetLinkPlayerCount_2();
     
-    if (sub_8082E28(taskId) != 1 &&
-        sub_8082E6C(taskId) != 1 &&
+    if (sub_8082E28(taskId) != TRUE &&
+        sub_8082E6C(taskId) != TRUE &&
         playerCount > 1)
     {
-        SetSuppressLinkErrorMessage(1);
+        SetSuppressLinkErrorMessage(TRUE);
         gTasks[taskId].data[3] = 0;
         
         if (IsLinkMaster() == TRUE)
@@ -237,11 +241,11 @@ static void sub_8082F68(u8 taskId)
 
 static void sub_8082FEC(u8 taskId)
 {
-    if (sub_8082E28(taskId) != 1 &&
-        sub_8082EB8(taskId) != 1 &&
-        sub_8082DF4(taskId) != 1)
+    if (sub_8082E28(taskId) != TRUE &&
+        sub_8082EB8(taskId) != TRUE &&
+        sub_8082DF4(taskId) != TRUE)
     {
-        if (GetFieldMessageBoxMode() == 0)
+        if (GetFieldMessageBoxMode() == FIELD_MESSAGE_BOX_HIDDEN)
         {
             gTasks[taskId].data[3] = 0;
             gTasks[taskId].func = sub_808303C;
@@ -258,9 +262,9 @@ static void sub_808303C(u8 taskId)
 
     linkPlayerCount = GetLinkPlayerCount_2();
 
-    if (sub_8082E28(taskId) == 1 ||
-        sub_8082EB8(taskId) == 1 ||
-        sub_8082DF4(taskId) == 1)
+    if (sub_8082E28(taskId) == TRUE ||
+        sub_8082EB8(taskId) == TRUE ||
+        sub_8082DF4(taskId) == TRUE)
         return;
 
     sub_8082D60(taskId, linkPlayerCount);
@@ -274,17 +278,17 @@ static void sub_808303C(u8 taskId)
 
     sub_80081C8(linkPlayerCount);
     sub_8082D4C();
-    ConvertIntToDecimalStringN(gStringVar1, linkPlayerCount, STR_CONV_MODE_LEFT_ALIGN, 1); // r5
-    ShowFieldAutoScrollMessage((u8 *) gUnknown_081A4975);
+    ConvertIntToDecimalStringN(gStringVar1, linkPlayerCount, STR_CONV_MODE_LEFT_ALIGN, 1);
+    ShowFieldAutoScrollMessage((u8 *)gUnknown_081A4975);
     gTasks[taskId].func = sub_80830E4;
 #elif GERMAN
-    if ((gLinkType == 0x2255 && (u32) linkPlayerCount > 1) ||
+    if ((gLinkType == 0x2255 && (u32)linkPlayerCount > 1) ||
         (gLinkType != 0x2255 && taskData[1] <= linkPlayerCount))
     {
         sub_80081C8(linkPlayerCount);
         sub_8082D4C();
-        ConvertIntToDecimalStringN(gStringVar1, linkPlayerCount, STR_CONV_MODE_LEFT_ALIGN, 1); // r5
-        ShowFieldAutoScrollMessage((u8 *) gUnknown_081A4975);
+        ConvertIntToDecimalStringN(gStringVar1, linkPlayerCount, STR_CONV_MODE_LEFT_ALIGN, 1);
+        ShowFieldAutoScrollMessage((u8 *)gUnknown_081A4975);
         gTasks[taskId].func = sub_80830E4;
     }
 #endif
@@ -292,10 +296,10 @@ static void sub_808303C(u8 taskId)
 
 static void sub_80830E4(u8 taskId)
 {
-    if (sub_8082E28(taskId) != 1 &&
-        sub_8082EB8(taskId) != 1 &&
-        sub_8082DF4(taskId) != 1 &&
-        GetFieldMessageBoxMode() == 0)
+    if (sub_8082E28(taskId) != TRUE &&
+        sub_8082EB8(taskId) != TRUE &&
+        sub_8082DF4(taskId) != TRUE &&
+        GetFieldMessageBoxMode() == FIELD_MESSAGE_BOX_HIDDEN)
     {
         if (sub_800820C() != GetLinkPlayerCount_2())
         {
@@ -324,8 +328,8 @@ static void sub_8083188(u8 taskId)
     local1 = gTasks[taskId].data[1];
     local2 = gTasks[taskId].data[2];
 
-    if (sub_8082DF4(taskId) == 1 ||
-        sub_8083444(taskId) == 1)
+    if (sub_8082DF4(taskId) == TRUE ||
+        sub_8083444(taskId) == TRUE)
         return;
 
     if (GetLinkPlayerCount_2() != sub_800820C())
@@ -348,16 +352,15 @@ void sub_80831F8(u8 taskId)
     local1 = gTasks[taskId].data[1];
     local2 = gTasks[taskId].data[2];
 
-    if (sub_8082E28(taskId) == 1 ||
-        sub_8082DF4(taskId) == 1)
+    if (sub_8082E28(taskId) == TRUE ||
+        sub_8082DF4(taskId) == TRUE)
         return;
 
     result = &gScriptResult;
     *result = sub_8082D9C(local1, local2);
     if (*result == 0)
         return;
-
-
+    
     if (*result == 3)
     {
         sub_800832C();
@@ -369,14 +372,14 @@ void sub_80831F8(u8 taskId)
         gFieldLinkPlayerCount = GetLinkPlayerCount_2();
         gUnknown_03004860 = GetMultiplayerId();
         sub_80081C8(gFieldLinkPlayerCount);
-        sub_8093390((struct TrainerCard *) gBlockSendBuffer);
+        sub_8093390((struct TrainerCard *)gBlockSendBuffer);
         gTasks[taskId].func = sub_8083314;
     }
 }
 
 static void sub_8083288(u8 taskId)
 {
-    if (sub_8082DF4(taskId) == 1)
+    if (sub_8082DF4(taskId) == TRUE)
         return;
 
     if (gScriptResult == 3)
@@ -390,7 +393,7 @@ static void sub_8083288(u8 taskId)
         gFieldLinkPlayerCount = GetLinkPlayerCount_2();
         gUnknown_03004860 = GetMultiplayerId();
         sub_80081C8(gFieldLinkPlayerCount);
-        sub_8093390((struct TrainerCard *) gBlockSendBuffer);
+        sub_8093390((struct TrainerCard *)gBlockSendBuffer);
         gTasks[taskId].func = sub_8083314;
         sub_8007E9C(2);
     }
@@ -401,7 +404,7 @@ static void sub_8083314(u8 taskId)
     u8 index;
     struct TrainerCard *trainerCards;
 
-    if (sub_8082DF4(taskId) == 1)
+    if (sub_8082DF4(taskId) == TRUE)
         return;
 
     if (GetBlockReceivedStatus() != sub_8008198())
@@ -472,16 +475,16 @@ static void sub_8083418(u8 taskId)
     DestroyTask(taskId);
 }
 
-static u8 sub_8083444(u8 taskId)
+static bool8 sub_8083444(u8 taskId)
 {
     gTasks[taskId].data[4]++;
     if (gTasks[taskId].data[4] > 600)
     {
         gTasks[taskId].func = sub_8083418;
-        return 1;
+        return TRUE;
     }
     
-    return 0;
+    return FALSE;
 }
 
 void sub_808347C(u8 arg0)
@@ -548,9 +551,11 @@ static void sub_808353C(u8 taskId)
                 }
             }
         }
+        
         EnableBothScriptContexts();
         DestroyTask(taskId);
         break;
+        
     case 1:
         if (gReceivedRemoteLinkPlayers == FALSE)
         {
@@ -596,15 +601,19 @@ u8 sub_8083664(void)
     case 0:
         gLinkType = 0x2233;
         break;
+        
     case 1:
         gLinkType = 0x2244;
         break;
+        
     case 4:
         gLinkType = 0x2255;
         break;
+        
     case 2:
         gLinkType = 0x1111;
         break;
+        
     case 3:
         gLinkType = 0x3322;
         break;
@@ -677,23 +686,31 @@ static void sub_808382C(u8 taskId)
         ClearLinkCallback_2();
         task->data[0]++;
         break;
+        
     case 1:
         if (!gPaletteFade.active)
             task->data[0]++;
+        
         break;
+        
     case 2:
         task->data[1]++;
         if (task->data[1] > 20)
             task->data[0]++;
+        
         break;
+        
     case 3:
         sub_800832C();
         task->data[0]++;
         break;
+        
     case 4:
         if (!gReceivedRemoteLinkPlayers)
             task->data[0]++;
+        
         break;
+        
     case 5:
         if (gLinkPlayers[0].trainerId & 1)
             current_map_music_set__default_for_battle(BGM_BATTLE32);
@@ -705,9 +722,11 @@ static void sub_808382C(u8 taskId)
         case 1:
             gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_LINK;
             break;
+            
         case 2:
             gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_LINK | BATTLE_TYPE_DOUBLE;
             break;
+            
         case 5:
             ReducePlayerPartyToThree();
             gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_LINK | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_MULTI;
@@ -779,11 +798,13 @@ static void sub_80839DC(u8 taskId)
         {
         case 0:
             break;
+            
         case 1:
             HideFieldMessageBox();
             task->data[0] = 0;
             SwitchTaskToFollowupFunc(taskId);
             break;
+            
         case 2:
             task->data[0] = 3;
             break;
@@ -819,10 +840,13 @@ static void sub_8083AAC(u8 taskId)
         ClearLinkCallback_2();
         task->data[0]++;
         break;
+        
     case 1:
         if (!gPaletteFade.active)
             task->data[0]++;
+        
         break;
+        
     case 2:
         gUnknown_020297D8.field0 = 0;
         gUnknown_020297D8.field1 = 0;
@@ -830,12 +854,14 @@ static void sub_8083AAC(u8 taskId)
         sub_800832C();
         task->data[0]++;
         break;
+        
     case 3:
         if (!gReceivedRemoteLinkPlayers)
         {
             SetMainCallback2(sub_8047CD8);
             DestroyTask(taskId);
         }
+        
         break;
     }
 }
@@ -880,7 +906,7 @@ void sub_8083BDC(void)
     sub_8093130(gSpecialVar_0x8006, c2_exit_to_overworld_1_continue_scripts_restart_music);
 }
 
-s32 sub_8083BF4(u8 linkPlayerIndex)
+bool32 sub_8083BF4(u8 linkPlayerIndex)
 {
     u32 trainerCardColorIndex;
     
@@ -889,10 +915,10 @@ s32 sub_8083BF4(u8 linkPlayerIndex)
     
     trainerCardColorIndex = sub_80934C4(linkPlayerIndex);
     if (trainerCardColorIndex == 0)
-        return 0;
+        return FALSE;
     
     StringCopy(gStringVar2, gTrainerCardColorNames[trainerCardColorIndex - 1]);
-    return 1;
+    return TRUE;
 }
 
 void sub_8083C50(u8 taskId)

@@ -18,7 +18,7 @@ void sub_8083B5C(void);
 void sub_8083B80(void);
 void sub_8083B90(void);
 void sub_8083BDC(void);
-s32 sub_8083BF4(u8 linkPlayerIndex);
+bool32 sub_8083BF4(u8 linkPlayerIndex);
 void sub_8083C50(u8 taskId);
 
 #endif // GUARD_CABLE_CLUB_H
