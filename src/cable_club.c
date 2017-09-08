@@ -60,21 +60,21 @@ static void sub_8083760(u8 taskId);
 static void sub_80837B4(u8 taskId);
 static void sub_80837EC(u8 taskId);
 static void sub_808382C(u8 taskId);
-static void sub_8083958();
+static void sub_8083958(void);
 static void sub_80839DC(u8 taskId);
 static void sub_8083AAC(u8 taskId);
 static void sub_8083B44(u8 taskId);
-static void sub_8083B6C();
+static void sub_8083B6C(void);
 static void sub_8083CA4(u8 taskId);
 
 extern void sub_80831F8(u8 taskId);
-extern void call_map_music_set_to_zero();
-extern void sub_810FEFC();
-extern void sub_8047CD8();
-extern void sub_805559C();
-extern void sub_8055574();
-extern s32 sub_80554F8();
-extern void sub_805465C();
+extern void call_map_music_set_to_zero(void);
+extern void sub_810FEFC(void);
+extern void sub_8047CD8(void);
+extern void sub_805559C(void);
+extern void sub_8055574(void);
+extern s32 sub_80554F8(void);
+extern void sub_805465C(void);
 
 static void sub_8082CD4(u8 arg0, u8 arg1)
 {
@@ -588,14 +588,14 @@ void sub_808347C(u8 arg0)
     sub_8082CD4(r3, r2);
 }
 
-void sub_80834E4()
+void sub_80834E4(void)
 {
     gLinkType = 0x1133;
     gBattleTypeFlags = 0;
     sub_8082CD4(2, 2);
 }
 
-void sub_808350C()
+void sub_808350C(void)
 {
     gScriptResult = 0;
     gLinkType = 0x3311;
@@ -724,7 +724,7 @@ _080835D4: .4byte gReceivedRemoteLinkPlayers            \n\
 }
 #endif
 
-void sub_80835D8()
+void sub_80835D8(void)
 {
     int taskId = FindTaskIdByFunc(sub_808353C);
     
@@ -735,21 +735,21 @@ void sub_80835D8()
     }
 }
 
-void sub_8083614()
+void sub_8083614(void)
 {
     gLinkType = 0x4411;
     gBattleTypeFlags = 0;
     sub_8082CD4(2, 4);
 }
 
-void sub_808363C()
+void sub_808363C(void)
 {
     gLinkType = 0x6601;
     gBattleTypeFlags = 0;
     sub_8082CD4(4, 4);
 }
 
-u8 sub_8083664()
+u8 sub_8083664(void)
 {
     if (FuncIsActiveTask(sub_8083710) != FALSE)
         return 0xFF;
@@ -823,7 +823,7 @@ static void sub_80837EC(u8 taskId)
     }
 }
 
-void sub_8083820()
+void sub_8083820(void)
 {
     InitSaveDialog();
 }
@@ -884,7 +884,7 @@ static void sub_808382C(u8 taskId)
     }
 }
 
-static void sub_8083958()
+static void sub_8083958(void)
 {
     call_map_music_set_to_zero();
     LoadPlayerParty();
@@ -898,7 +898,7 @@ static void sub_8083958()
     SetMainCallback2(sub_8071B28);
 }
 
-void sub_80839A4()
+void sub_80839A4(void)
 {
     u16 var = gSpecialVar_0x8004;
     u16 varMinusOne = var - 1;
@@ -912,7 +912,7 @@ void sub_80839A4()
     copy_saved_warp2_bank_and_enter_x_to_warp1(0x7F);
 }
 
-void sub_80839D0()
+void sub_80839D0(void)
 {
     sub_805559C();
 }
@@ -1009,36 +1009,36 @@ static void sub_8083B44(u8 taskId)
     DestroyTask(taskId);
 }
 
-void sub_8083B5C()
+void sub_8083B5C(void)
 {
     sub_8083A84(sub_8083B44);
 }
 
-static void sub_8083B6C()
+static void sub_8083B6C(void)
 {
     CreateTask(sub_8083AAC, 80);
 }
 
-void sub_8083B80()
+void sub_8083B80(void)
 {
     sub_8083B6C();
     ScriptContext1_Stop();
 }
 
-void sub_8083B90()
+void sub_8083B90(void)
 {
     gLinkType = 0x2211;
     sub_8083A84(sub_808382C);
 }
 
-void unref_sub_8083BB0()
+void unref_sub_8083BB0(void)
 {
     u8 taskId = CreateTask(sub_80839DC, 80);
     SetTaskFuncWithFollowupFunc(taskId, sub_80839DC, Task_RecordMixing_Main);
     ScriptContext1_Stop();
 }
 
-void sub_8083BDC()
+void sub_8083BDC(void)
 {
     sub_8093130(gSpecialVar_0x8006, c2_exit_to_overworld_1_continue_scripts_restart_music);
 }
