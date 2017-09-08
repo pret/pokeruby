@@ -81,7 +81,7 @@ static void sub_8082CD4(u8 arg0, u8 arg1)
     if (FindTaskIdByFunc(sub_8082F20) == 0xFF)
     {
         u8 taskId = CreateTask(sub_8082F20, 80);
-        
+
         gTasks[taskId].data[1] = arg0;
         gTasks[taskId].data[2] = arg1;
     }
@@ -109,12 +109,11 @@ static void sub_8082D60(u8 taskId, u8 arg1)
             sub_8082D4C();
         else
             sub_8082D18(arg1);
-        
         *data = arg1;
     }
 }
 
-static u16 sub_8082D9C(u8 minPlayers, u8 maxPlayers)
+static u32 sub_8082D9C(u8 minPlayers, u8 maxPlayers)
 {
     int playerCount;
 
@@ -124,16 +123,12 @@ static u16 sub_8082D9C(u8 minPlayers, u8 maxPlayers)
         playerCount = GetLinkPlayerCount_2();
         if (minPlayers <= playerCount && playerCount <= maxPlayers)
             return 1;
-        
         ConvertIntToDecimalStringN(gStringVar1, playerCount, STR_CONV_MODE_LEFT_ALIGN, 1);
         return 4;
-        
     case EXCHANGE_TIMED_OUT:
         return 0;
-        
     case EXCHANGE_IN_PROGRESS:
         return 3;
-        
     default:
         return 0;
     }
@@ -146,19 +141,17 @@ static bool32 sub_8082DF4(u8 taskId)
         gTasks[taskId].func = sub_8083418;
         return TRUE;
     }
-    
     return FALSE;
 }
 
 static bool32 sub_8082E28(u8 taskId)
 {
-    if ((gMain.newKeys & B_BUTTON) &&
-        IsLinkConnectionEstablished() == FALSE)
+    if ((gMain.newKeys & B_BUTTON)
+     && IsLinkConnectionEstablished() == FALSE)
     {
         gTasks[taskId].func = sub_80833EC;
         return TRUE;
     }
-    
     return FALSE;
 }
 
@@ -166,13 +159,12 @@ static bool32 sub_8082E6C(u8 taskId)
 {
     if (IsLinkConnectionEstablished())
         SetSuppressLinkErrorMessage(TRUE);
-    
+
     if (gMain.newKeys & B_BUTTON)
     {
         gTasks[taskId].func = sub_80833EC;
         return TRUE;
     }
-    
     return FALSE;
 }
 
@@ -183,7 +175,6 @@ static bool32 sub_8082EB8(u8 taskId)
         gTasks[taskId].func = sub_8083418;
         return TRUE;
     }
-    
     return FALSE;
 }
 
@@ -199,72 +190,68 @@ void unref_sub_8082EEC(u8 taskId)
 
 static void sub_8082F20(u8 taskId)
 {
-    s16 *data = &gTasks[taskId].data[0];
-    
-    if (*data == 0)
+    s16 *data = gTasks[taskId].data;
+
+    if (data[0] == 0)
     {
         OpenLinkTimed();
         sub_80082EC();
         ResetLinkPlayers();
     }
-    else if (*data > 9)
+    else if (data[0] > 9)
+    {
         gTasks[taskId].func = sub_8082F68;
-    
-    *data += 1;
+    }
+    data[0]++;
 }
 
 static void sub_8082F68(u8 taskId)
 {
     u32 playerCount = GetLinkPlayerCount_2();
-    
-    if (sub_8082E28(taskId) != TRUE &&
-        sub_8082E6C(taskId) != TRUE &&
-        playerCount > 1)
+
+    if (sub_8082E28(taskId) == TRUE
+     || sub_8082E6C(taskId) == TRUE
+     || playerCount < 2)
+        return;
+
+    SetSuppressLinkErrorMessage(TRUE);
+    gTasks[taskId].data[3] = 0;
+    if (IsLinkMaster() == TRUE)
     {
-        SetSuppressLinkErrorMessage(TRUE);
-        gTasks[taskId].data[3] = 0;
-        
-        if (IsLinkMaster() == TRUE)
-        {
-            PlaySE(SE_PIN);
-            ShowFieldAutoScrollMessage(gUnknown_081A4932);
-            gTasks[taskId].func = sub_8082FEC;
-        }
-        else
-        {
-            PlaySE(SE_BOO);
-            ShowFieldAutoScrollMessage(gUnknown_081A49B6);
-            gTasks[taskId].func = sub_80831F8;
-        }
+        PlaySE(SE_PIN);
+        ShowFieldAutoScrollMessage(gUnknown_081A4932);
+        gTasks[taskId].func = sub_8082FEC;
+    }
+    else
+    {
+        PlaySE(SE_BOO);
+        ShowFieldAutoScrollMessage(gUnknown_081A49B6);
+        gTasks[taskId].func = sub_80831F8;
     }
 }
 
 static void sub_8082FEC(u8 taskId)
 {
-    if (sub_8082E28(taskId) != TRUE &&
-        sub_8082EB8(taskId) != TRUE &&
-        sub_8082DF4(taskId) != TRUE)
+    if (sub_8082E28(taskId) == TRUE
+     || sub_8082EB8(taskId) == TRUE
+     || sub_8082DF4(taskId) == TRUE)
+        return;
+
+    if (GetFieldMessageBoxMode() == FIELD_MESSAGE_BOX_HIDDEN)
     {
-        if (GetFieldMessageBoxMode() == FIELD_MESSAGE_BOX_HIDDEN)
-        {
-            gTasks[taskId].data[3] = 0;
-            gTasks[taskId].func = sub_808303C;
-        }
+        gTasks[taskId].data[3] = 0;
+        gTasks[taskId].func = sub_808303C;
     }
 }
 
 static void sub_808303C(u8 taskId)
 {
-    s32 linkPlayerCount;
-    s16 *taskData;
+    s16 *taskData = gTasks[taskId].data;
+    s32 linkPlayerCount = GetLinkPlayerCount_2();
 
-    taskData = gTasks[taskId].data;
-
-    linkPlayerCount = GetLinkPlayerCount_2();
-
-    if (sub_8082E28(taskId) == TRUE ||
-        sub_8082EB8(taskId) == TRUE ||
-        sub_8082DF4(taskId) == TRUE)
+    if (sub_8082E28(taskId) == TRUE
+     || sub_8082EB8(taskId) == TRUE
+     || sub_8082DF4(taskId) == TRUE)
         return;
 
     sub_8082D60(taskId, linkPlayerCount);
@@ -282,8 +269,8 @@ static void sub_808303C(u8 taskId)
     ShowFieldAutoScrollMessage((u8 *)gUnknown_081A4975);
     gTasks[taskId].func = sub_80830E4;
 #elif GERMAN
-    if ((gLinkType == 0x2255 && (u32)linkPlayerCount > 1) ||
-        (gLinkType != 0x2255 && taskData[1] <= linkPlayerCount))
+    if ((gLinkType == 0x2255 && (u32)linkPlayerCount > 1)
+     || (gLinkType != 0x2255 && taskData[1] <= linkPlayerCount))
     {
         sub_80081C8(linkPlayerCount);
         sub_8082D4C();
@@ -296,10 +283,12 @@ static void sub_808303C(u8 taskId)
 
 static void sub_80830E4(u8 taskId)
 {
-    if (sub_8082E28(taskId) != TRUE &&
-        sub_8082EB8(taskId) != TRUE &&
-        sub_8082DF4(taskId) != TRUE &&
-        GetFieldMessageBoxMode() == FIELD_MESSAGE_BOX_HIDDEN)
+    if (sub_8082E28(taskId) == TRUE
+     || sub_8082EB8(taskId) == TRUE
+     || sub_8082DF4(taskId) == TRUE)
+        return;
+
+    if (GetFieldMessageBoxMode() == FIELD_MESSAGE_BOX_HIDDEN)
     {
         if (sub_800820C() != GetLinkPlayerCount_2())
         {
@@ -322,46 +311,40 @@ static void sub_80830E4(u8 taskId)
 
 static void sub_8083188(u8 taskId)
 {
-    u8 local1, local2;
-    u16 *result;
+    u8 local1 = gTasks[taskId].data[1];
+    u8 local2 = gTasks[taskId].data[2];
 
-    local1 = gTasks[taskId].data[1];
-    local2 = gTasks[taskId].data[2];
-
-    if (sub_8082DF4(taskId) == TRUE ||
-        sub_8083444(taskId) == TRUE)
+    if (sub_8082DF4(taskId) == TRUE
+     || sub_8083444(taskId) == TRUE)
         return;
 
     if (GetLinkPlayerCount_2() != sub_800820C())
     {
         gTasks[taskId].func = sub_8083418;
-        return;
     }
-
-    result = &gScriptResult;
-    *result = sub_8082D9C(local1, local2);
-    if (*result)
-        gTasks[taskId].func = sub_8083288;
+    else
+    {
+        gScriptResult = sub_8082D9C(local1, local2);
+        if (gScriptResult != 0)
+            gTasks[taskId].func = sub_8083288;
+    }
 }
 
 void sub_80831F8(u8 taskId)
 {
     u8 local1, local2;
-    u16 *result;
 
     local1 = gTasks[taskId].data[1];
     local2 = gTasks[taskId].data[2];
 
-    if (sub_8082E28(taskId) == TRUE ||
-        sub_8082DF4(taskId) == TRUE)
+    if (sub_8082E28(taskId) == TRUE
+     || sub_8082DF4(taskId) == TRUE)
         return;
 
-    result = &gScriptResult;
-    *result = sub_8082D9C(local1, local2);
-    if (*result == 0)
+    gScriptResult = sub_8082D9C(local1, local2);
+    if (gScriptResult == 0)
         return;
-    
-    if (*result == 3)
+    if (gScriptResult == 3)
     {
         sub_800832C();
         HideFieldMessageBox();
@@ -483,7 +466,7 @@ static bool8 sub_8083444(u8 taskId)
         gTasks[taskId].func = sub_8083418;
         return TRUE;
     }
-    
+
     return FALSE;
 }
 
@@ -491,26 +474,24 @@ void sub_808347C(u8 arg0)
 {
     u32 r3 = 2;
     u32 r2 = 2;
-    
+
     switch (gSpecialVar_0x8004)
     {
     case 1:
         r3 = 2;
         gLinkType = 0x2233;
         break;
-    
     case 2:
         r3 = 2;
         gLinkType = 0x2244;
         break;
-    
     case 5:
         r3 = 4;
         r2 = 4;
         gLinkType = 0x2255;
         break;
     }
-    
+
     sub_8082CD4(r3, r2);
 }
 
@@ -551,11 +532,9 @@ static void sub_808353C(u8 taskId)
                 }
             }
         }
-        
         EnableBothScriptContexts();
         DestroyTask(taskId);
         break;
-        
     case 1:
         if (gReceivedRemoteLinkPlayers == FALSE)
         {
@@ -569,7 +548,7 @@ static void sub_808353C(u8 taskId)
 void sub_80835D8(void)
 {
     int taskId = FindTaskIdByFunc(sub_808353C);
-    
+
     if (taskId == 0xFF)
     {
         taskId = CreateTask(sub_808353C, 80);
@@ -595,47 +574,44 @@ u8 sub_8083664(void)
 {
     if (FuncIsActiveTask(sub_8083710) != FALSE)
         return 0xFF;
-    
-    switch (gSpecialVar_0x8004 - 1)
+
+    switch (gSpecialVar_0x8004)
     {
-    case 0:
+    case 1:
         gLinkType = 0x2233;
         break;
-        
-    case 1:
+    case 2:
         gLinkType = 0x2244;
         break;
-        
-    case 4:
+    case 5:
         gLinkType = 0x2255;
         break;
-        
-    case 2:
+    case 3:
         gLinkType = 0x1111;
         break;
-        
-    case 3:
+    case 4:
         gLinkType = 0x3322;
         break;
     }
-    
+
     return CreateTask(sub_8083710, 80);
 }
 
 static void sub_8083710(u8 taskId)
 {
-    s16 *data = &gTasks[taskId].data[0];
-    
-    if (*data == 0)
+    s16 *data = gTasks[taskId].data;
+
+    if (data[0] == 0)
     {
         OpenLink();
         ResetLinkPlayers();
         CreateTask(sub_8083C50, 80);
     }
-    else if (*data >= 10)
+    else if (data[0] >= 10)
+    {
         gTasks[taskId].func = sub_8083760;
-    
-    *data += 1;
+    }
+    data[0]++;
 }
 
 static void sub_8083760(u8 taskId)
@@ -660,8 +636,8 @@ static void sub_80837B4(u8 taskId)
 
 static void sub_80837EC(u8 taskId)
 {
-    if (gReceivedRemoteLinkPlayers == TRUE &&
-        IsLinkPlayerDataExchangeComplete() == TRUE)
+    if (gReceivedRemoteLinkPlayers == TRUE
+     && IsLinkPlayerDataExchangeComplete() == TRUE)
     {
         sub_800826C();
         sub_8007B14();
@@ -677,7 +653,7 @@ void sub_8083820(void)
 static void sub_808382C(u8 taskId)
 {
     struct Task* task = &gTasks[taskId];
-    
+
     switch (task->data[0])
     {
     case 0:
@@ -686,53 +662,43 @@ static void sub_808382C(u8 taskId)
         ClearLinkCallback_2();
         task->data[0]++;
         break;
-        
     case 1:
         if (!gPaletteFade.active)
             task->data[0]++;
-        
         break;
-        
     case 2:
         task->data[1]++;
         if (task->data[1] > 20)
             task->data[0]++;
-        
         break;
-        
     case 3:
         sub_800832C();
         task->data[0]++;
         break;
-        
     case 4:
         if (!gReceivedRemoteLinkPlayers)
             task->data[0]++;
-        
         break;
-        
     case 5:
         if (gLinkPlayers[0].trainerId & 1)
             current_map_music_set__default_for_battle(BGM_BATTLE32);
         else
             current_map_music_set__default_for_battle(BGM_BATTLE20);
-        
+
         switch (gSpecialVar_0x8004)
         {
         case 1:
             gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_LINK;
             break;
-            
         case 2:
             gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_LINK | BATTLE_TYPE_DOUBLE;
             break;
-            
         case 5:
             ReducePlayerPartyToThree();
             gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_LINK | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_MULTI;
             break;
         }
-        
+
         SetMainCallback2(sub_800E7C4);
         gMain.savedCallback = sub_8083958;
         DestroyTask(taskId);
@@ -746,25 +712,21 @@ static void sub_8083958(void)
     LoadPlayerParty();
     SavePlayerBag();
     sub_810FEFC();
-    
+
     if (gSpecialVar_0x8004 != 5)
         UpdateLinkBattleRecords(gUnknown_03004860 ^ 1);
-    
+
     gMain.savedCallback = sub_805465C;
     SetMainCallback2(sub_8071B28);
 }
 
 void sub_80839A4(void)
 {
-    u16 var = gSpecialVar_0x8004;
-    u16 varMinusOne = var - 1;
-    
-    if (varMinusOne < 2 || var == 5)
+    if (gSpecialVar_0x8004 == 1 || gSpecialVar_0x8004 == 2 || gSpecialVar_0x8004 == 5)
     {
         LoadPlayerParty();
         SavePlayerBag();
     }
-    
     copy_saved_warp2_bank_and_enter_x_to_warp1(0x7F);
 }
 
@@ -776,14 +738,13 @@ void sub_80839D0(void)
 static void sub_80839DC(u8 taskId)
 {
     struct Task* task = &gTasks[taskId];
-    
+
     switch (task->data[0])
     {
     case 0:
         ShowFieldMessage(gUnknown_081A490C);
         task->data[0] = 1;
         break;
-    
     case 1:
         if (IsFieldMessageBoxHidden())
         {
@@ -792,25 +753,21 @@ static void sub_80839DC(u8 taskId)
             task->data[0] = 2;
         }
         break;
-        
     case 2:
         switch (sub_80554F8())
         {
         case 0:
             break;
-            
         case 1:
             HideFieldMessageBox();
             task->data[0] = 0;
             SwitchTaskToFollowupFunc(taskId);
             break;
-            
         case 2:
             task->data[0] = 3;
             break;
         }
         break;
-        
     case 3:
         sub_8055588();
         HideFieldMessageBox();
@@ -831,7 +788,7 @@ void sub_8083A84(TaskFunc followupFunc)
 static void sub_8083AAC(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    
+
     switch (task->data[0])
     {
     case 0:
@@ -840,13 +797,10 @@ static void sub_8083AAC(u8 taskId)
         ClearLinkCallback_2();
         task->data[0]++;
         break;
-        
     case 1:
         if (!gPaletteFade.active)
             task->data[0]++;
-        
         break;
-        
     case 2:
         gUnknown_020297D8.field0 = 0;
         gUnknown_020297D8.field1 = 0;
@@ -854,14 +808,12 @@ static void sub_8083AAC(u8 taskId)
         sub_800832C();
         task->data[0]++;
         break;
-        
     case 3:
         if (!gReceivedRemoteLinkPlayers)
         {
             SetMainCallback2(sub_8047CD8);
             DestroyTask(taskId);
         }
-        
         break;
     }
 }
@@ -909,14 +861,14 @@ void sub_8083BDC(void)
 bool32 sub_8083BF4(u8 linkPlayerIndex)
 {
     u32 trainerCardColorIndex;
-    
+
     gSpecialVar_0x8006 = linkPlayerIndex;
     StringCopy(gStringVar1, gLinkPlayers[linkPlayerIndex].name);
-    
+
     trainerCardColorIndex = sub_80934C4(linkPlayerIndex);
     if (trainerCardColorIndex == 0)
         return FALSE;
-    
+
     StringCopy(gStringVar2, gTrainerCardColorNames[trainerCardColorIndex - 1]);
     return TRUE;
 }
@@ -924,7 +876,7 @@ bool32 sub_8083BF4(u8 linkPlayerIndex)
 void sub_8083C50(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    
+
     task->data[0]++;
     if (task->data[0] > 300)
     {
@@ -932,7 +884,7 @@ void sub_8083C50(u8 taskId)
         SetMainCallback2(CB2_LinkError);
         DestroyTask(taskId);
     }
-    
+
     if (gReceivedRemoteLinkPlayers)
         DestroyTask(taskId);
 }
