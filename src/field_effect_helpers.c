@@ -282,3 +282,33 @@ void oamc_shadow(struct Sprite *sprite)
         }
     }
 }
+
+bool8 FldEff_TallGrass(void)
+{
+    s16 x;
+    s16 y;
+    u8 spriteId;
+    struct Sprite *sprite;
+
+    x = gUnknown_0202FF84[0];
+    y = gUnknown_0202FF84[1];
+    sub_8060470(&x, &y, 8, 8);
+    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[4], x, y, 0);
+    if (spriteId != MAX_SPRITES)
+    {
+        sprite = &gSprites[spriteId];
+        sprite->coordOffsetEnabled = TRUE;
+        sprite->oam.priority = gUnknown_0202FF84[3];
+        sprite->data0 = gUnknown_0202FF84[2];
+        sprite->data1 = gUnknown_0202FF84[0];
+        sprite->data2 = gUnknown_0202FF84[1];
+        sprite->data3 = gUnknown_0202FF84[4];
+        sprite->data4 = gUnknown_0202FF84[5];
+        sprite->data5 = gUnknown_0202FF84[6];
+        if (gUnknown_0202FF84[7])
+        {
+            SeekSpriteAnim(sprite, 4);
+        }
+    }
+    return FALSE;
+}
