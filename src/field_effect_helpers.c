@@ -6,9 +6,10 @@
 // Includes
 #include "global.h"
 #include "sprite.h"
+#include "metatile_behavior.h"
 #include "field_map_obj.h"
 #include "field_weather.h"
-#include "metatile_behavior.h"
+#include "field_effect.h"
 #include "field_effect_helpers.h"
 
 // Static type declarations
@@ -236,4 +237,24 @@ void sub_8126BC4(u8 spriteId, u8 animNum, s16 x, s16 y)
         sprite->data1 = y;
         StartSpriteAnim(sprite, animNum - 1);
     }
+}
+
+bool8 FldEff_Shadow(void)
+{
+    u8 mapObjectId;
+    const struct MapObjectGraphicsInfo *graphicsInfo;
+    u8 spriteId;
+
+    mapObjectId = GetFieldObjectIdByLocalIdAndMap(gUnknown_0202FF84[0], gUnknown_0202FF84[1], gUnknown_0202FF84[2]);
+    graphicsInfo = GetFieldObjectGraphicsInfo(gMapObjects[mapObjectId].graphicsId);
+    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[gUnknown_08401E32[graphicsInfo->shadowSize]], 0, 0, 0x94);
+    if (spriteId != MAX_SPRITES)
+    {
+        gSprites[spriteId].coordOffsetEnabled = TRUE;
+        gSprites[spriteId].data0 = gUnknown_0202FF84[0];
+        gSprites[spriteId].data1 = gUnknown_0202FF84[1];
+        gSprites[spriteId].data2 = gUnknown_0202FF84[2];
+        gSprites[spriteId].data3 = (graphicsInfo->height >> 1) - gUnknown_08401E36[graphicsInfo->shadowSize];
+    }
+    return FALSE;
 }
