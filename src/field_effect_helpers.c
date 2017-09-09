@@ -6,8 +6,11 @@
 // Includes
 #include "global.h"
 #include "sprite.h"
+#include "fieldmap.h"
 #include "metatile_behavior.h"
 #include "field_map_obj.h"
+#include "field_camera.h"
+#include "field_map_obj_helpers.h"
 #include "field_weather.h"
 #include "field_effect.h"
 #include "field_effect_helpers.h"
@@ -26,6 +29,7 @@ static void npc_pal_op_B(struct MapObject *, u8);
 /*static*/ void sub_8127DA0(struct Sprite *);
 /*static*/ void sub_8127DD0(struct Sprite *);
 /*static*/ void sub_8127E30(struct Sprite *);
+/*static*/ void sub_812882C(struct Sprite *, u8, u8);
 
 // .rodata
 
@@ -311,4 +315,46 @@ bool8 FldEff_TallGrass(void)
         }
     }
     return FALSE;
+}
+
+void unc_grass_normal(struct Sprite *sprite)
+{
+    u8 mapNum;
+    u8 mapGroup;
+    u8 metatileBehavior;
+    u8 localId;
+    u8 mapObjectId;
+    struct MapObject *mapObject;
+    
+    mapNum = sprite->data5 >> 8;
+    mapGroup = sprite->data5;
+    if (gUnknown_0202E844.field_0 && (gSaveBlock1.location.mapNum != mapNum || gSaveBlock1.location.mapGroup != mapGroup))
+    {
+        sprite->data1 -= gUnknown_0202E844.x;
+        sprite->data2 -= gUnknown_0202E844.y;
+        sprite->data5 = ((u8)gSaveBlock1.location.mapNum << 8) | (u8)gSaveBlock1.location.mapGroup;
+    }
+    localId = sprite->data3 >> 8;
+    mapNum = sprite->data3;
+    mapGroup = sprite->data4;
+    metatileBehavior = MapGridGetMetatileBehaviorAt(sprite->data1, sprite->data2);
+    if (TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjectId) || !MetatileBehavior_IsTallGrass(metatileBehavior) || (sprite->data7 && sprite->animEnded))
+    {
+        FieldEffectStop(sprite, 4);
+    }
+    else
+    {
+        mapObject = &gMapObjects[mapObjectId];
+        if ((mapObject->coords2.x != sprite->data1 || mapObject->coords2.y != sprite->data2) && (mapObject->coords3.x != sprite->data1 || mapObject->coords3.y != sprite->data2))
+        {
+            sprite->data7 = TRUE;
+        }
+        metatileBehavior = 0;
+        if (sprite->animCmdIndex == 0)
+        {
+            metatileBehavior = 4;
+        }
+        sub_806487C(sprite, 0);
+        sub_812882C(sprite, sprite->data0, metatileBehavior);
+    }
 }
