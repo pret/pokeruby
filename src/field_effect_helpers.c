@@ -258,3 +258,27 @@ bool8 FldEff_Shadow(void)
     }
     return FALSE;
 }
+
+void oamc_shadow(struct Sprite *sprite)
+{
+    u8 mapObjectId;
+    struct MapObject *mapObject;
+    struct Sprite *linkedSprite;
+
+    if (TryGetFieldObjectIdByLocalIdAndMap(sprite->data0, sprite->data1, sprite->data2, &mapObjectId))
+    {
+        FieldEffectStop(sprite, 3);
+    }
+    else
+    {
+        mapObject = &gMapObjects[mapObjectId];
+        linkedSprite = &gSprites[mapObject->spriteId];
+        sprite->oam.priority = linkedSprite->oam.priority;
+        sprite->pos1.x = linkedSprite->pos1.x;
+        sprite->pos1.y = linkedSprite->pos1.y + sprite->data3;
+        if (!mapObject->active || !mapObject->mapobj_bit_22 || MetatileBehavior_IsPokeGrass(mapObject->mapobj_unk_1E) || MetatileBehavior_IsSurfableWaterOrUnderwater(mapObject->mapobj_unk_1E) || MetatileBehavior_IsSurfableWaterOrUnderwater(mapObject->mapobj_unk_1F) || MetatileBehavior_IsReflective(mapObject->mapobj_unk_1E) || MetatileBehavior_IsReflective(mapObject->mapobj_unk_1F))
+        {
+            FieldEffectStop(sprite, 3);
+        }
+    }
+}
