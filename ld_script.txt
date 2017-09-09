@@ -59,7 +59,6 @@ SECTIONS {
         src/battle_7.o(.text);
         src/battle_controller_opponent.o(.text);
         asm/battle_9.o(.text);
-        asm/battle_controller_linkopponent1.o(.text);
         src/battle_controller_linkopponent2.o(.text);
         src/pokemon_1.o(.text);
         src/calculate_base_damage.o(.text);
