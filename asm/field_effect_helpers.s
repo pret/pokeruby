@@ -6,31 +6,6 @@
 
 	.text
 
-	thumb_func_start npc_pal_op_A
-npc_pal_op_A: @ 81269B0
-	push {r4,lr}
-	lsls r1, 24
-	lsrs r4, r1, 24
-	ldrb r0, [r0, 0x5]
-	bl GetFieldObjectGraphicsInfo
-	adds r2, r0, 0
-	ldrh r1, [r2, 0x4]
-	ldr r0, _081269DC @ =0x000011ff
-	cmp r1, r0
-	beq _081269D4
-	adds r0, r1, 0
-	adds r1, r4, 0
-	bl pal_patch_for_npc
-	adds r0, r4, 0
-	bl sub_807D78C
-_081269D4:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_081269DC: .4byte 0x000011ff
-	thumb_func_end npc_pal_op_A
-
 	thumb_func_start sub_81269E0
 sub_81269E0: @ 81269E0
 	push {r4-r7,lr}
