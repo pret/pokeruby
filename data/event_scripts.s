@@ -1,7 +1,19 @@
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
-	.include "constants/constants.inc"
 	.include "constants/variables.inc"
+	.include "constants/item_data_constants.inc"
+	.include "constants/map_constants.inc"	@ TODO: convert names to uppercase like they are in C
+	.include "constants/songs.inc"
+	.include "constants/version.inc"
+	.include "constants/game_stat.inc"
+
+#include "asm.h"
+#include "decoration.h"
+#include "items.h"
+#include "map_object_constants.h"
+#include "moves.h"
+#include "opponent_constants.h"
+#include "species.h"
 
 	.section script_data, "aw", %progbits
 
