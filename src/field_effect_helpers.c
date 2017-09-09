@@ -202,7 +202,7 @@ u8 sub_8126B54(void)
     u8 spriteId;
     struct Sprite *sprite;
 
-    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[8], 0, 0, 0x52);
+    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[8] /*gFieldEffectSpriteTemplate_Arrow*/, 0, 0, 0x52);
     if (spriteId != MAX_SPRITES)
     {
         sprite = &gSprites[spriteId];
@@ -211,4 +211,29 @@ u8 sub_8126B54(void)
         sprite->invisible = TRUE;
     }
     return spriteId;
+}
+
+void objid_set_invisible(u8 spriteId)
+{
+    gSprites[spriteId].invisible = TRUE;
+}
+
+void sub_8126BC4(u8 spriteId, u8 animNum, s16 x, s16 y)
+{
+    s16 x2;
+    s16 y2;
+    struct Sprite *sprite;
+
+    sprite = &gSprites[spriteId];
+    if (sprite->invisible || sprite->data0 != x || sprite->data1 != y)
+    {
+        sub_80603CC(x, y, &x2, &y2);
+        sprite = &gSprites[spriteId];
+        sprite->pos1.x = x2 + 8;
+        sprite->pos1.y = y2 + 8;
+        sprite->invisible = FALSE;
+        sprite->data0 = x;
+        sprite->data1 = y;
+        StartSpriteAnim(sprite, animNum - 1);
+    }
 }
