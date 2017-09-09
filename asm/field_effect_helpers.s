@@ -232,7 +232,7 @@ unc_grass_tall: @ 8127128
 	lsrs r7, r0, 8
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r3, _081271D0 @ =gUnknown_0202E844
+	ldr r3, _081271D0 @ =gCamera
 	ldrb r1, [r3]
 	movs r0, 0x1
 	ands r0, r1
@@ -307,7 +307,7 @@ _081271C6:
 	bl FieldEffectStop
 	b _0812720E
 	.align 2, 0
-_081271D0: .4byte gUnknown_0202E844
+_081271D0: .4byte gCamera
 _081271D4: .4byte gSaveBlock1
 _081271D8:
 	mov r0, sp

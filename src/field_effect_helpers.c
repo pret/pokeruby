@@ -328,10 +328,10 @@ void unc_grass_normal(struct Sprite *sprite)
     
     mapNum = sprite->data5 >> 8;
     mapGroup = sprite->data5;
-    if (gUnknown_0202E844.field_0 && (gSaveBlock1.location.mapNum != mapNum || gSaveBlock1.location.mapGroup != mapGroup))
+    if (gCamera.field_0 && (gSaveBlock1.location.mapNum != mapNum || gSaveBlock1.location.mapGroup != mapGroup))
     {
-        sprite->data1 -= gUnknown_0202E844.x;
-        sprite->data2 -= gUnknown_0202E844.y;
+        sprite->data1 -= gCamera.x;
+        sprite->data2 -= gCamera.y;
         sprite->data5 = ((u8)gSaveBlock1.location.mapNum << 8) | (u8)gSaveBlock1.location.mapGroup;
     }
     localId = sprite->data3 >> 8;

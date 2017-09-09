@@ -3,7 +3,7 @@
 
 #include "sprite.h"
 
-const u8 gUnknown_0830FD14[16];
+extern const u8 gUnknown_0830FD14[];
 
 #define fieldmap_object_cb(setup, callback, table) \
 static u8 callback(struct MapObject *, struct Sprite *);\
