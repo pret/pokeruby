@@ -6,64 +6,6 @@
 
 	.text
 
-	thumb_func_start FldEff_BikeTireTracks
-FldEff_BikeTireTracks: @ 8127510
-	push {r4,r5,lr}
-	ldr r4, _08127578 @ =gFieldEffectSpawnParams
-	adds r1, r4, 0x4
-	adds r0, r4, 0
-	movs r2, 0x8
-	movs r3, 0x8
-	bl sub_8060470
-	ldr r0, _0812757C @ =gFieldEffectObjectTemplatePointers
-	ldr r0, [r0, 0x6C]
-	movs r2, 0
-	ldrsh r1, [r4, r2]
-	movs r3, 0x4
-	ldrsh r2, [r4, r3]
-	ldrb r3, [r4, 0x8]
-	bl CreateSpriteAtEnd
-	lsls r0, 24
-	lsrs r1, r0, 24
-	adds r5, r1, 0
-	cmp r1, 0x40
-	beq _08127570
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	ldr r1, _08127580 @ =gSprites
-	adds r0, r1
-	adds r3, r0, 0
-	adds r3, 0x3E
-	ldrb r1, [r3]
-	movs r2, 0x2
-	orrs r1, r2
-	strb r1, [r3]
-	movs r1, 0x3
-	ldrb r2, [r4, 0xC]
-	ands r2, r1
-	lsls r2, 2
-	ldrb r3, [r0, 0x5]
-	movs r1, 0xD
-	negs r1, r1
-	ands r1, r3
-	orrs r1, r2
-	strb r1, [r0, 0x5]
-	movs r1, 0x23
-	strh r1, [r0, 0x3C]
-	ldrb r1, [r4, 0x10]
-	bl StartSpriteAnim
-_08127570:
-	adds r0, r5, 0
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08127578: .4byte gFieldEffectSpawnParams
-_0812757C: .4byte gFieldEffectObjectTemplatePointers
-_08127580: .4byte gSprites
-	thumb_func_end FldEff_BikeTireTracks
-
 	thumb_func_start sub_8127584
 sub_8127584: @ 8127584
 	push {lr}
