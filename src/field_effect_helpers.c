@@ -244,7 +244,7 @@ void sub_8126BC4(u8 spriteId, u8 animNum, s16 x, s16 y)
     }
 }
 
-bool8 FldEff_Shadow(void)
+u8 FldEff_Shadow(void)
 {
     u8 mapObjectId;
     const struct MapObjectGraphicsInfo *graphicsInfo;
@@ -261,7 +261,7 @@ bool8 FldEff_Shadow(void)
         gSprites[spriteId].data2 = gFieldEffectSpawnParams[2];
         gSprites[spriteId].data3 = (graphicsInfo->height >> 1) - gUnknown_08401E36[graphicsInfo->shadowSize];
     }
-    return FALSE;
+    return 0;
 }
 
 void oamc_shadow(struct Sprite *sprite)
@@ -288,7 +288,7 @@ void oamc_shadow(struct Sprite *sprite)
     }
 }
 
-bool8 FldEff_TallGrass(void)
+u8 FldEff_TallGrass(void)
 {
     s16 x;
     s16 y;
@@ -315,7 +315,7 @@ bool8 FldEff_TallGrass(void)
             SeekSpriteAnim(sprite, 4);
         }
     }
-    return FALSE;
+    return 0;
 }
 
 void unc_grass_normal(struct Sprite *sprite)
@@ -360,7 +360,7 @@ void unc_grass_normal(struct Sprite *sprite)
     }
 }
 
-bool8 FldEff_JumpTallGrass(void)
+u8 FldEff_JumpTallGrass(void)
 {
     u8 spriteId;
     struct Sprite *sprite;
@@ -375,7 +375,7 @@ bool8 FldEff_JumpTallGrass(void)
         sprite->data0 = gFieldEffectSpawnParams[2];
         sprite->data1 = 12;
     }
-    return FALSE;
+    return 0;
 }
 
 u8 sub_8126FF0(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s16 y)
@@ -397,7 +397,7 @@ u8 sub_8126FF0(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s16 y)
     return MAX_SPRITES;
 }
 
-bool8 FldEff_LongGrass(void)
+u8 FldEff_LongGrass(void)
 {
     s16 x;
     s16 y;
@@ -424,7 +424,7 @@ bool8 FldEff_LongGrass(void)
             SeekSpriteAnim(sprite, 6);
         }
     }
-    return FALSE;
+    return 0;
 }
 
 void unc_grass_tall(struct Sprite *sprite)
@@ -464,7 +464,7 @@ void unc_grass_tall(struct Sprite *sprite)
     }
 }
 
-bool8 FldEff_JumpLongGrass(void)
+u8 FldEff_JumpLongGrass(void)
 {
     u8 spriteId;
     struct Sprite *sprite;
@@ -479,10 +479,10 @@ bool8 FldEff_JumpLongGrass(void)
         sprite->data0 = gFieldEffectSpawnParams[2];
         sprite->data1 = 18;
     }
-    return FALSE;
+    return 0;
 }
 
-bool8 FldEff_ShortGrass(void)
+u8 FldEff_ShortGrass(void)
 {
     u8 mapObjectId;
     struct MapObject *mapObject;
@@ -503,7 +503,7 @@ bool8 FldEff_ShortGrass(void)
         sprite->data3 = gSprites[mapObject->spriteId].pos1.x;
         sprite->data4 = gSprites[mapObject->spriteId].pos1.y;
     }
-    return FALSE;
+    return 0;
 }
 
 void sub_8127334(struct Sprite *sprite)
@@ -542,7 +542,7 @@ void sub_8127334(struct Sprite *sprite)
     }
 }
 
-bool8 FldEff_SandFootprints(void)
+u8 FldEff_SandFootprints(void)
 {
     u8 spriteId;
     struct Sprite *sprite;
@@ -557,5 +557,23 @@ bool8 FldEff_SandFootprints(void)
         sprite->data7 = 13;
         StartSpriteAnim(sprite, gFieldEffectSpawnParams[4]);
     }
-    return FALSE;
+    return 0;
+}
+
+u8 FldEff_DeepSandFootprints(void)
+{
+    u8 spriteId;
+    struct Sprite *sprite;
+
+    sub_8060470((s16 *)&gFieldEffectSpawnParams[0], (s16 *)&gFieldEffectSpawnParams[1], 8, 8);
+    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[23], gFieldEffectSpawnParams[0], gFieldEffectSpawnParams[1], gFieldEffectSpawnParams[2]);
+    if (spriteId != MAX_SPRITES)
+    {
+        sprite = &gSprites[spriteId];
+        sprite->coordOffsetEnabled = TRUE;
+        sprite->oam.priority = gFieldEffectSpawnParams[3];
+        sprite->data7 = 24;
+        StartSpriteAnim(sprite, gFieldEffectSpawnParams[4]);
+    }
+    return spriteId;
 }
