@@ -463,3 +463,21 @@ void unc_grass_tall(struct Sprite *sprite)
         sub_812882C(sprite, sprite->data0, 0);
     }
 }
+
+bool8 FldEff_JumpLongGrass(void)
+{
+    u8 spriteId;
+    struct Sprite *sprite;
+
+    sub_8060470((s16 *)&gFieldEffectSpawnParams[0], (s16 *)&gFieldEffectSpawnParams[1], 8, 8);
+    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[16], gFieldEffectSpawnParams[0], gFieldEffectSpawnParams[1], 0);
+    if (spriteId != MAX_SPRITES)
+    {
+        sprite = &gSprites[spriteId];
+        sprite->coordOffsetEnabled = TRUE;
+        sprite->oam.priority = gFieldEffectSpawnParams[3];
+        sprite->data0 = gFieldEffectSpawnParams[2];
+        sprite->data1 = 18;
+    }
+    return FALSE;
+}
