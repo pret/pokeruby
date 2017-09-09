@@ -196,3 +196,19 @@ static void sub_81269E0(struct Sprite *sprite)
         }
     }
 }
+
+u8 sub_8126B54(void)
+{
+    u8 spriteId;
+    struct Sprite *sprite;
+
+    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[8], 0, 0, 0x52);
+    if (spriteId != MAX_SPRITES)
+    {
+        sprite = &gSprites[spriteId];
+        sprite->oam.priority = 1;
+        sprite->coordOffsetEnabled = TRUE;
+        sprite->invisible = TRUE;
+    }
+    return spriteId;
+}

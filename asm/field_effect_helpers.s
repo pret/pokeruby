@@ -6,48 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_8126B54
-sub_8126B54: @ 8126B54
-	push {r4,lr}
-	ldr r0, _08126B9C @ =gFieldEffectObjectTemplatePointers
-	ldr r0, [r0, 0x20]
-	movs r1, 0
-	movs r2, 0
-	movs r3, 0x52
-	bl CreateSpriteAtEnd
-	lsls r0, 24
-	lsrs r0, 24
-	adds r4, r0, 0
-	cmp r0, 0x40
-	beq _08126B92
-	lsls r1, r0, 4
-	adds r1, r0
-	lsls r1, 2
-	ldr r0, _08126BA0 @ =gSprites
-	adds r1, r0
-	ldrb r2, [r1, 0x5]
-	movs r0, 0xD
-	negs r0, r0
-	ands r0, r2
-	movs r3, 0x4
-	orrs r0, r3
-	strb r0, [r1, 0x5]
-	adds r1, 0x3E
-	ldrb r0, [r1]
-	movs r2, 0x2
-	orrs r0, r2
-	orrs r0, r3
-	strb r0, [r1]
-_08126B92:
-	adds r0, r4, 0
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08126B9C: .4byte gFieldEffectObjectTemplatePointers
-_08126BA0: .4byte gSprites
-	thumb_func_end sub_8126B54
-
 	thumb_func_start objid_set_invisible
 objid_set_invisible: @ 8126BA4
 	lsls r0, 24
