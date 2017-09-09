@@ -1,7 +1,8 @@
 #ifndef GUARD_EASYCHAT_H
 #define GUARD_EASYCHAT_H
 
-enum {
+enum
+{
     EC_GROUP_POKEMON,
     EC_GROUP_TRAINER,
     EC_GROUP_STATUS,
@@ -1061,6 +1062,9 @@ enum {
 #define EC_MOVE(move) ((EC_GROUP_MOVE_1 << 9) | MOVE_##move)
 #define EC_MOVE2(move) ((EC_GROUP_MOVE_2 << 9) | MOVE_##move)
 
+#define EC_GROUP(word) ((word) >> 9)
+#define EC_INDEX(word) ((word) & 0x1FF)
+
 extern u8 gUnknown_020388AC;
 
 u16 sub_80EB72C(u16 group);
@@ -1069,7 +1073,7 @@ void InitEasyChatPhrases(void);
 u8 sub_80EAD7C(u8 group);
 u16 sub_80EAE88(u8);
 u8 sub_80EB37C(u16);
-u8* sub_80EB3FC(u8 *, u16);
+u8* EasyChat_GetWordText(u8 *, u16);
 u8 *ConvertEasyChatWordsToString(u8 *dst, u16 *words, u16, u16);
 u16 sub_80EB784(u16 group);
 u8 sub_80EB868(u8);

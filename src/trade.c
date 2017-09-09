@@ -128,49 +128,6 @@ struct UnkStructF {
     u8 filler_000a[0xff6];
 };
 
-struct TradeEwramSubstruct2 {
-    /*0x0000*/ u8 filler_0000;
-    /*0x0004*/ struct Window window;
-    /*0x0034*/ u8 textWindowBaseTileNum;
-    /*0x0038*/ struct Pokemon pokemon;
-    /*0x009c*/ u8 unk_009c;
-    /*0x009d*/ u8 unk_009d;
-    /*0x009e*/ u16 linkData[10];
-    /*0x00b2*/ u8 unk_00b2;
-    /*0x00b3*/ u8 unk_00b3;
-    /*0x00b4*/ u16 unk_00b4;
-    /*0x00b6*/ u16 unk_00b6;
-    // Sprite indices
-    /*0x00b8*/ u8 pokePicSpriteIdxs[2];
-    /*0x00ba*/ u8 unk_00ba;
-    /*0x00bb*/ u8 unk_00bb;
-    /*0x00bc*/ u8 unk_00bc;
-    /*0x00bd*/ u8 unk_00bd;
-    // Timer
-    /*0x00c0*/ u32 unk_00c0;
-    // Scene index
-    /*0x00c4*/ u16 unk_00c4;
-    /*0x00c6*/ u8 filler_00c6[0x3c];
-    /*0x0102*/ u8 unk_0102;
-    /*0x0103*/ u8 unk_0103;
-    /*0x0104*/ u16 unk_0104;
-    /*0x0106*/ u16 unk_0106;
-    /*0x0108*/ u16 unk_0108;
-    /*0x010a*/ u16 unk_010a;
-    /*0x010c*/ u16 unk_010c;
-    /*0x010e*/ s16 unk_010e;
-    /*0x0110*/ s16 bg1vofs;
-    /*0x0112*/ s16 bg1hofs;
-    /*0x0114*/ s16 bg2vofs;
-    /*0x0116*/ s16 bg2hofs;
-    /*0x0118*/ u16 unk_0118;
-    /*0x011a*/ u16 unk_011a;
-    /*0x011c*/ u16 unk_011c;
-    /*0x011e*/ u8 isLinkTrade;
-    /*0x0120*/ u16 tradeSpecies[2];
-    /*0x0124*/ u16 unk_0124;
-};
-
 struct TradeEwramStruct {
     /*0x00000*/ u8 filler_00000[0x7000];
     /*0x07000*/ struct TradeEwramSubstruct unk_07000;
@@ -257,7 +214,6 @@ void sub_804DB84(void);
 extern u8 gUnknown_020297D8[2];
 extern u8 *gUnknown_020296CC[13];
 extern struct TradeEwramSubstruct *gUnknown_03004824;
-extern struct TradeEwramSubstruct2 *gUnknown_03004828;
 extern u8 gUnknown_03000508;
 extern struct MailStruct gUnknown_02029700[16];
 
@@ -5226,7 +5182,7 @@ static bool8 sub_804C29C(void)
             break;
         case 72: // Only if in-game trade
             sub_804BA94(gSpecialVar_0x8005, 0);
-            gUnknown_03005E94 = sub_804BBCC;
+            gCB2_AfterEvolution = sub_804BBCC;
             evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gUnknown_020297D8[0]], TRUE, ITEM_NONE);
             if (evoTarget != SPECIES_NONE)
                 TradeEvolutionScene(&gPlayerParty[gUnknown_020297D8[0]], evoTarget, gUnknown_03004828->pokePicSpriteIdxs[1], gUnknown_020297D8[0]);
@@ -5258,7 +5214,7 @@ static void sub_804D588(void)
             gSoftResetDisabled = TRUE;
             break;
         case 4:
-            gUnknown_03005E94 = sub_804DC88;
+            gCB2_AfterEvolution = sub_804DC88;
             evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gUnknown_020297D8[0]], TRUE, ITEM_NONE);
             if (evoTarget != SPECIES_NONE)
                 TradeEvolutionScene(&gPlayerParty[gUnknown_020297D8[0]], evoTarget, gUnknown_03004828->pokePicSpriteIdxs[1], gUnknown_020297D8[0]);

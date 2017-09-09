@@ -4771,16 +4771,7 @@ BattleTower_Lobby_EventScript_1AE30F:: @ 81AE30F
 
 	.include "data/scripts/gabby_and_ty.inc"
 
-	.include "data/scripts/bard.inc"
-	.include "data/scripts/hipster.inc"
-	.include "data/text/trader.inc"
-	.include "data/scripts/trader.inc"
-	.include "data/text/storyteller.inc"
-	.include "data/scripts/storyteller.inc"
-	.include "data/text/giddy.inc"
-	.include "data/scripts/giddy.inc"
-	.include "data/text/bard.inc"
-	.include "data/text/hipster.inc"
+	.include "data/scripts/mauville_man.inc"
 
 	.include "data/field_move_scripts.inc"
 	.include "data/item_ball_scripts.inc"

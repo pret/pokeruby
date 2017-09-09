@@ -1,12 +1,10 @@
-//
-// Created by Scott Norton on 9/3/17.
-//
+#ifndef GUARD_EVOLUTION_SCENE_H
+#define GUARD_EVOLUTION_SCENE_H
 
-#ifndef POKERUBY_EVOLUTION_SCENE_H
-#define POKERUBY_EVOLUTION_SCENE_H
+void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, u8 partyID);
+void BeginEvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, u8 partyID);
+void TradeEvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, u8 preEvoSpriteID, u8 partyID);
 
-extern MainCallback gUnknown_03005E94;
+extern void (*gCB2_AfterEvolution)(void);
 
-void TradeEvolutionScene(struct Pokemon *, u16, u8, u8);
-
-#endif //POKERUBY_EVOLUTION_SCENE_H
+#endif // GUARD_EVOLUTION_SCENE_H
