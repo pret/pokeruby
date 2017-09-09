@@ -541,3 +541,21 @@ void sub_8127334(struct Sprite *sprite)
         sub_806487C(sprite, linkedSprite->invisible);
     }
 }
+
+bool8 FldEff_SandFootprints(void)
+{
+    u8 spriteId;
+    struct Sprite *sprite;
+
+    sub_8060470((s16 *)&gFieldEffectSpawnParams[0], (s16 *)&gFieldEffectSpawnParams[1], 8, 8);
+    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[11], gFieldEffectSpawnParams[0], gFieldEffectSpawnParams[1], gFieldEffectSpawnParams[2]);
+    if (spriteId != MAX_SPRITES)
+    {
+        sprite = &gSprites[spriteId];
+        sprite->coordOffsetEnabled = TRUE;
+        sprite->oam.priority = gFieldEffectSpawnParams[3];
+        sprite->data7 = 13;
+        StartSpriteAnim(sprite, gFieldEffectSpawnParams[4]);
+    }
+    return FALSE;
+}
