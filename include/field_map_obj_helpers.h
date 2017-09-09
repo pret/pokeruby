@@ -18,4 +18,6 @@ void DoShadowFieldEffect(struct MapObject *mapObject);
 u8 sub_8064704(struct Sprite *);
 u8 sub_806478C(struct Sprite *);
 void obj_anim_image_set_and_seek(struct Sprite *sprite, u8 a2, u8 a3);
+void DoRippleFieldEffect(struct MapObject *mapObj, struct Sprite *sprite);
+
 #endif
