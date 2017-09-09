@@ -1198,9 +1198,9 @@ bool8 ScrCmd_waitbutton(struct ScriptContext *ctx)
 
 bool8 ScrCmd_yesnobox(struct ScriptContext *ctx)
 {
-    u8 v1 = ScriptReadByte(ctx);
-    u8 v2 = ScriptReadByte(ctx);
-    if (ScriptMenu_YesNo(v1, v2) == 1)
+    u8 left = ScriptReadByte(ctx);
+    u8 top = ScriptReadByte(ctx);
+    if (ScriptMenu_YesNo(left, top) == TRUE)
     {
         ScriptContext1_Stop();
         return TRUE;
@@ -1248,22 +1248,22 @@ bool8 ScrCmd_multichoicedef(struct ScriptContext *ctx)
 
 bool8 ScrCmd_showbox(struct ScriptContext *ctx)
 {
-    u8 v1 = ScriptReadByte(ctx);
-    u8 v2 = ScriptReadByte(ctx);
-    u8 v3 = ScriptReadByte(ctx);
-    u8 v4 = ScriptReadByte(ctx);
-    MenuDrawTextWindow(v1, v2, v3, v4);
+    u8 left = ScriptReadByte(ctx);
+    u8 top = ScriptReadByte(ctx);
+    u8 right = ScriptReadByte(ctx);
+    u8 bottom = ScriptReadByte(ctx);
+    MenuDrawTextWindow(left, top, right, bottom);
     return FALSE;
 }
 
 bool8 ScrCmd_multichoicerow(struct ScriptContext *ctx)
 {
-    u8 v1 = ScriptReadByte(ctx);
-    u8 v2 = ScriptReadByte(ctx);
-    u8 v3 = ScriptReadByte(ctx);
-    u8 v4 = ScriptReadByte(ctx);
-    u8 v5 = ScriptReadByte(ctx);
-    if (sub_80B5578(v1, v2, v3, v5, v4) == TRUE)
+    u8 left = ScriptReadByte(ctx);
+    u8 top = ScriptReadByte(ctx);
+    u8 multichoiceId = ScriptReadByte(ctx);
+    u8 numColumns = ScriptReadByte(ctx);
+    u8 ignoreBPress = ScriptReadByte(ctx);
+    if (ScriptMenu_MultichoiceGrid(left, top, multichoiceId, ignoreBPress, numColumns) == TRUE)
     {
         ScriptContext1_Stop();
         return TRUE;
@@ -1276,21 +1276,22 @@ bool8 ScrCmd_multichoicerow(struct ScriptContext *ctx)
 
 bool8 ScrCmd_hidebox(struct ScriptContext *ctx)
 {
-    u8 v1 = ScriptReadByte(ctx);
-    u8 v2 = ScriptReadByte(ctx);
-    u8 v3 = ScriptReadByte(ctx);
-    u8 v4 = ScriptReadByte(ctx);
-    MenuZeroFillWindowRect(v1, v2, v3, v4);
+    u8 left = ScriptReadByte(ctx);
+    u8 top = ScriptReadByte(ctx);
+    u8 right = ScriptReadByte(ctx);
+    u8 bottom = ScriptReadByte(ctx);
+    MenuZeroFillWindowRect(left, top, right, bottom);
     return FALSE;
 }
 
+// unused
 bool8 ScrCmd_clearbox(struct ScriptContext *ctx)
 {
-    u8 v1 = ScriptReadByte(ctx);
-    u8 v2 = ScriptReadByte(ctx);
-    u8 v3 = ScriptReadByte(ctx);
-    u8 v4 = ScriptReadByte(ctx);
-    if (Multichoice(v1, v2, v3, v4) == 1)
+    u8 left = ScriptReadByte(ctx);
+    u8 top = ScriptReadByte(ctx);
+    u8 multichoiceId = ScriptReadByte(ctx);
+    u8 ignoreBPress = ScriptReadByte(ctx);
+    if (Multichoice(left, top, multichoiceId, ignoreBPress) == TRUE)
     {
         ScriptContext1_Stop();
         return TRUE;
@@ -1303,16 +1304,16 @@ bool8 ScrCmd_clearbox(struct ScriptContext *ctx)
 
 bool8 ScrCmd_showpokepic(struct ScriptContext *ctx)
 {
-    u16 v1 = VarGet(ScriptReadHalfword(ctx));
-    u8 v2 = ScriptReadByte(ctx);
-    u8 v3 = ScriptReadByte(ctx);
-    sub_80B58C4(v1, v2, v3);
+    u16 species = VarGet(ScriptReadHalfword(ctx));
+    u8 x = ScriptReadByte(ctx);
+    u8 y = ScriptReadByte(ctx);
+    ScriptMenu_ShowPokemonPic(species, x, y);
     return FALSE;
 }
 
 bool8 ScrCmd_hidepokepic(struct ScriptContext *ctx)
 {
-    void *func = picbox_close();
+    void *func = ScriptMenu_GetPicboxWaitFunc();
     if (!func)
         return FALSE;
 

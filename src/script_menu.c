@@ -1,4 +1,5 @@
 #include "global.h"
+#include "script.h"
 #include "script_menu.h"
 #include "event_data.h"
 #include "field_effect.h"
@@ -581,9 +582,18 @@ extern u8 gPCText_WhichPCShouldBeAccessed[];
 
 extern u16 gScriptResult;
 
+static void Task_HandleMultichoiceInput(u8);
+static void Task_HandleYesNoInput(u8);
+static void Task_HandleMultichoiceGridInput(u8);
+static u16 GetStringWidthInTilesForScriptMenu(const u8 *str);
+static void DrawMultichoiceMenu(u8, u8, u8, const struct MenuAction *list, u8, u8);
+static void StartScriptMenuTask(u8, u8, u8, u8, u8, u8);
+static void sub_80B53B4(u8, u8, u8, const struct MenuAction *list, u8);
+static bool8 IsPicboxClosed(void);
+
 bool8 ScriptMenu_Multichoice(u8 left, u8 top, u8 multichoiceId, u8 ignoreBPress)
 {
-    if (FuncIsActiveTask(Task_HandleMenuInput) == TRUE)
+    if (FuncIsActiveTask(Task_HandleMultichoiceInput) == TRUE)
     {
         return FALSE;
     }
@@ -597,7 +607,7 @@ bool8 ScriptMenu_Multichoice(u8 left, u8 top, u8 multichoiceId, u8 ignoreBPress)
 
 bool8 ScriptMenu_MultichoiceWithDefault(u8 left, u8 top, u8 multichoiceId, u8 ignoreBPress, u8 defaultChoice)
 {
-    if (FuncIsActiveTask(Task_HandleMenuInput) == TRUE)
+    if (FuncIsActiveTask(Task_HandleMultichoiceInput) == TRUE)
     {
         return FALSE;
     }
@@ -609,13 +619,13 @@ bool8 ScriptMenu_MultichoiceWithDefault(u8 left, u8 top, u8 multichoiceId, u8 ig
     }
 }
 
-u16 GetStringWidthInTilesForScriptMenu(const u8 *str)
+static u16 GetStringWidthInTilesForScriptMenu(const u8 *str)
 {
     // each tile on screen is 8x8, so it needs the number of tiles and not pixels, hence the division by 8.
     return (GetStringWidthGivenWindowConfig((struct WindowConfig *)&gWindowConfig_81E6CE4, str) + 7) / 8;
 }
 
-void DrawMultichoiceMenu(u8 left, u8 top, u8 count, const struct MenuAction *list, u8 ignoreBPress, u8 cursorPos)
+static void DrawMultichoiceMenu(u8 left, u8 top, u8 count, const struct MenuAction *list, u8 ignoreBPress, u8 cursorPos)
 {
     u16 width = GetStringWidthInTilesForScriptMenu(list[0].text);
     u16 newWidth;
@@ -654,9 +664,9 @@ void DrawMultichoiceMenu(u8 left, u8 top, u8 count, const struct MenuAction *lis
 #define tIgnoreBPress data[4]
 #define tDoWrap       data[5]
 
-void StartScriptMenuTask(u8 left, u8 top, u8 right, u8 bottom, u8 ignoreBPress, u8 count)
+static void StartScriptMenuTask(u8 left, u8 top, u8 right, u8 bottom, u8 ignoreBPress, u8 count)
 {
-    u8 taskId = CreateTask(Task_HandleMenuInput, 80);
+    u8 taskId = CreateTask(Task_HandleMultichoiceInput, 80);
 
     gTasks[taskId].tLeft = left;
     gTasks[taskId].tTop = top;
@@ -670,7 +680,7 @@ void StartScriptMenuTask(u8 left, u8 top, u8 right, u8 bottom, u8 ignoreBPress, 
         gTasks[taskId].tDoWrap = FALSE;
 }
 
-void Task_HandleMenuInput(u8 taskId)
+static void Task_HandleMultichoiceInput(u8 taskId)
 {
     s8 selection;
 
@@ -702,21 +712,21 @@ void Task_HandleMenuInput(u8 taskId)
     }
 }
 
-bool8 Multichoice(u8 var1, u8 var2, u8 multichoiceId, u8 ignoreBPress)
+bool8 Multichoice(u8 left, u8 top, u8 multichoiceId, u8 ignoreBPress)
 {
-    if (FuncIsActiveTask(Task_HandleMenuInput) == TRUE)
+    if (FuncIsActiveTask(Task_HandleMultichoiceInput) == TRUE)
     {
         return FALSE;
     }
     else
     {
         gScriptResult = 0xFF;
-        sub_80B53B4(var1, var2, gMultichoiceLists[multichoiceId].count, gMultichoiceLists[multichoiceId].list, ignoreBPress);
+        sub_80B53B4(left, top, gMultichoiceLists[multichoiceId].count, gMultichoiceLists[multichoiceId].list, ignoreBPress);
         return TRUE;
     }
 }
 
-void sub_80B53B4(u8 left, u8 top, u8 count, const struct MenuAction *list, u8 ignoreBPress)
+static void sub_80B53B4(u8 left, u8 top, u8 count, const struct MenuAction *list, u8 ignoreBPress)
 {
     u16 width = GetStringWidthInTilesForScriptMenu(list[0].text);
     u16 newWidth;
@@ -740,21 +750,21 @@ void sub_80B53B4(u8 left, u8 top, u8 count, const struct MenuAction *list, u8 ig
     StartScriptMenuTask(left, top, right, bottom, ignoreBPress, count);
 }
 
-bool8 ScriptMenu_YesNo(u8 var1, u8 var2)
+bool8 ScriptMenu_YesNo(u8 left, u8 top)
 {
     u8 taskId;
 
-    if (FuncIsActiveTask(task_yes_no_maybe) == TRUE)
+    if (FuncIsActiveTask(Task_HandleYesNoInput) == TRUE)
     {
         return FALSE;
     }
     else
     {
         gScriptResult = 0xFF;
-        DisplayYesNoMenu(var1, var2, 1);
-        taskId = CreateTask(task_yes_no_maybe, 0x50);
-        gTasks[taskId].data[0] = var1;
-        gTasks[taskId].tTop = var2;
+        DisplayYesNoMenu(left, top, 1);
+        taskId = CreateTask(Task_HandleYesNoInput, 0x50);
+        gTasks[taskId].tLeft = left;
+        gTasks[taskId].tTop = top;
         return TRUE;
     }
 }
@@ -768,7 +778,7 @@ bool8 IsScriptActive(void)
         return TRUE;
 }
 
-void task_yes_no_maybe(u8 taskId)
+static void Task_HandleYesNoInput(u8 taskId)
 {
     u8 left, top;
 
@@ -800,11 +810,11 @@ void task_yes_no_maybe(u8 taskId)
     EnableBothScriptContexts();
 }
 
-bool8 sub_80B5578(u8 left, u8 top, u8 multichoiceId, u8 ignoreBPress, u8 columnCount)
+bool8 ScriptMenu_MultichoiceGrid(u8 left, u8 top, u8 multichoiceId, u8 ignoreBPress, u8 columnCount)
 {
     u8 bottom = 0;
 
-    if (FuncIsActiveTask(sub_80B5684) == TRUE)
+    if (FuncIsActiveTask(Task_HandleMultichoiceGridInput) == TRUE)
     {
         return FALSE;
     }
@@ -817,7 +827,7 @@ bool8 sub_80B5578(u8 left, u8 top, u8 multichoiceId, u8 ignoreBPress, u8 columnC
 
         sub_807274C(left, top, gMultichoiceLists[multichoiceId].count, 0, gMultichoiceLists[multichoiceId].list, columnCount, 0);
 
-        taskId = CreateTask(sub_80B5684, 80);
+        taskId = CreateTask(Task_HandleMultichoiceGridInput, 80);
 
         if (!((gMultichoiceLists[multichoiceId].count >> 1) < columnCount || (gMultichoiceLists[multichoiceId].count & 1))
          || columnCount == 1 || gMultichoiceLists[multichoiceId].count == columnCount)
@@ -839,7 +849,7 @@ bool8 sub_80B5578(u8 left, u8 top, u8 multichoiceId, u8 ignoreBPress, u8 columnC
     }
 }
 
-void sub_80B5684(u8 taskId)
+static void Task_HandleMultichoiceGridInput(u8 taskId)
 {
     s8 selection = sub_80727CC();
 
@@ -870,22 +880,22 @@ void sub_80B5684(u8 taskId)
 #undef tIgnoreBPress
 #undef tDoWrap
 
-bool8 TryCreatePCMenu(void)
+bool8 ScriptMenu_TryCreatePCMenu(void)
 {
-    if (FuncIsActiveTask(Task_HandleMenuInput) == TRUE)
+    if (FuncIsActiveTask(Task_HandleMultichoiceInput) == TRUE)
     {
         return FALSE;
     }
     else
     {
         gScriptResult = 0xFF;
-        CreatePCMenu();
+        ScriptMenu_CreatePCMenu();
         return TRUE;
     }
 }
 
 #if ENGLISH
-void CreatePCMenu(void)
+void ScriptMenu_CreatePCMenu(void)
 {
     u16 playersPCWidth = GetStringWidthInTilesForScriptMenu(gPCText_PlayersPC);
     u8 width;
@@ -921,7 +931,7 @@ void CreatePCMenu(void)
 }
 #elif GERMAN
 __attribute__((naked))
-void CreatePCMenu(void) {
+void ScriptMenu_CreatePCMenu(void) {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\
     sub sp, 0x18\n\
@@ -1084,72 +1094,85 @@ _080B588C: .4byte gPCText_PlayersPC\n\
 }
 #endif
 
-void sub_80B5838(void)
+void ScriptMenu_DisplayPCStartupPrompt(void)
 {
     MenuDisplayMessageBox();
     MenuPrint(gPCText_WhichPCShouldBeAccessed, 2, 15);
 }
 
-void task_picbox(u8 taskId)
+#define tState       data[0]
+#define tMonSpecies  data[1]
+#define tMonSpriteId data[2]
+#define tWindowX     data[3]
+#define tWindowY     data[4]
+
+static void Task_PokemonPicWindow(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
-    switch (task->data[0])
+    switch (task->tState)
     {
     case 0:
-        task->data[0]++;
+        task->tState++;
         break;
     case 1:
         break;
     case 2:
-        FreeResourcesAndDestroySprite(&gSprites[task->data[2]]);
-        task->data[0]++;
+        FreeResourcesAndDestroySprite(&gSprites[task->tMonSpriteId]);
+        task->tState++;
         break;
     case 3:
-        MenuZeroFillWindowRect(task->data[3], task->data[4], task->data[3] + 9, task->data[4] + 10);
+        MenuZeroFillWindowRect(task->tWindowX, task->tWindowY, task->tWindowX + 9, task->tWindowY + 10);
         DestroyTask(taskId);
         break;
     }
 }
 
-bool8 sub_80B58C4(u16 var1, u8 var2, u8 var3)
+bool8 ScriptMenu_ShowPokemonPic(u16 species, u8 x, u8 y)
 {
     u8 taskId;
-    u8 var;
+    u8 spriteId;
 
-    if (FindTaskIdByFunc(task_picbox) != 0xFF)
+    if (FindTaskIdByFunc(Task_PokemonPicWindow) != 0xFF)
+    {
         return FALSE;
+    }
     else
     {
-        MenuDrawTextWindow(var2, var3, var2 + 9, var3 + 10);
-        taskId = CreateTask(task_picbox, 0x50);
-        gTasks[taskId].data[0] = 0;
-        gTasks[taskId].data[1] = var1;
-        var = CreateMonSprite_PicBox(var1, var2 * 8 + 40, var3 * 8 + 40, 0);
-        gTasks[taskId].data[2] = var;
-        gTasks[taskId].data[3] = var2;
-        gTasks[taskId].data[4] = var3;
-        gSprites[var].callback = SpriteCallbackDummy;
-        gSprites[var].oam.priority = 0;
+        MenuDrawTextWindow(x, y, x + 9, y + 10);
+        taskId = CreateTask(Task_PokemonPicWindow, 0x50);
+        gTasks[taskId].tState = 0;
+        gTasks[taskId].tMonSpecies = species;
+        spriteId = CreateMonSprite_PicBox(species, x * 8 + 40, y * 8 + 40, 0);
+        gTasks[taskId].tMonSpriteId = spriteId;
+        gTasks[taskId].tWindowX = x;
+        gTasks[taskId].tWindowY = y;
+        gSprites[spriteId].callback = SpriteCallbackDummy;
+        gSprites[spriteId].oam.priority = 0;
         return TRUE;
     }
-}
+}  
 
-void *picbox_close(void)
+NativeScriptFunc ScriptMenu_GetPicboxWaitFunc(void)
 {
-    u8 taskId = FindTaskIdByFunc(task_picbox);
+    u8 taskId = FindTaskIdByFunc(Task_PokemonPicWindow);
 
     if (taskId == 0xFF)
         return NULL;
-
-    gTasks[taskId].data[0]++;
-    return (void *)sub_80B59AC;
+    gTasks[taskId].tState++;
+    return IsPicboxClosed;
 }
 
-bool8 sub_80B59AC(void)
+static bool8 IsPicboxClosed(void)
 {
-    if (FindTaskIdByFunc(task_picbox) == 0xFF)
+    if (FindTaskIdByFunc(Task_PokemonPicWindow) == 0xFF)
         return TRUE;
     else
         return FALSE;
 }
+
+#undef tState      
+#undef tMonSpecies 
+#undef tMonSpriteId
+#undef tWindowX    
+#undef tWindowY  

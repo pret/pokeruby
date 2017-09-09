@@ -154,9 +154,9 @@ void MenuPrint(const u8 *str, u8 left, u8 top)
     sub_8003460(gMenuWindowPtr, str, gMenuTextTileOffset, left, top);
 }
 
-void MenuZeroFillWindowRect(u8 a1, u8 a2, u8 a3, u8 a4)
+void MenuZeroFillWindowRect(u8 left, u8 top, u8 right, u8 bottom)
 {
-    ZeroFillWindowRect(gMenuWindowPtr, a1, a2, a3, a4);
+    ZeroFillWindowRect(gMenuWindowPtr, left, top, right, bottom);
 }
 
 void MenuFillWindowRectWithBlankTile(u8 left, u8 top, u8 right, u8 bottom)
