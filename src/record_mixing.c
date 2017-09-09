@@ -10,7 +10,7 @@
 #include "items.h"
 #include "load_save.h"
 #include "link.h"
-#include "mauville_old_man.h"
+#include "mauville_man.h"
 #include "menu.h"
 #include "mystery_event_script.h"
 #include "rng.h"
@@ -40,7 +40,7 @@ static u8 gUnknown_0300071C[4];
 void *recordMixingSecretBases = &gSaveBlock1.secretBases;
 void *recordMixingTvShows = &gSaveBlock1.tvShows;
 void *gUnknown_083D0274 = &gSaveBlock1.unknown_2ABC;
-void *gUnknown_083D0278 = &gSaveBlock1.oldMan;
+void *gUnknown_083D0278 = &gSaveBlock1.mauvilleMan;
 void *recordMixingEasyChatPairs = &gSaveBlock1.easyChatPairs;
 struct RecordMixing_UnknownStruct *gUnknown_083D0280 = &gUnknown_02038738;
 void *gUnknown_083D0284 = &gSaveBlock2.filler_A8;

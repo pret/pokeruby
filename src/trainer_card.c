@@ -509,7 +509,7 @@ static void sub_8093688(void)
     ewram0.var_5 = 0;
     ewram0.var_6 = 0;
     for (i = 0; i < 4; i++)
-        sub_80EB3FC(ewram0.var_20[i], ewram0.var_64.var_28[i]);
+        EasyChat_GetWordText(ewram0.var_20[i], ewram0.var_64.var_28[i]);
     sub_80936D4();
 }
 

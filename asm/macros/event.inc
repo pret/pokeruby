@@ -1493,6 +1493,12 @@
 	callstd \type
 	.endm
 
+	@ Message box types
+	MSGBOX_YESNO = 5
+
+	YES = 1
+	NO  = 0
+
 	.macro giveitem item, amount=1, function=0
 	setorcopyvar 0x8000, \item
 	setorcopyvar 0x8001, \amount
