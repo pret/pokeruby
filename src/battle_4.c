@@ -144,7 +144,7 @@ void sub_802BBD4(u8 r0, u8 r1, u8 r2, u8 r3, u8 sp0);
 void nullsub_6(void);
 void ReshowBattleScreenAfterMenu(void);
 void sub_800F808(void);
-void sub_80B79B8(u32* moneySaveblock, u32 to_give);
+void AddMoney(u32* moneySaveblock, u32 to_give);
 void sub_80156DC(void); //set sentpokes value
 bool8 sub_8014AB8(u8 bank); //can run from battle
 u8 CountAliveMons(u8 caseID);
@@ -11717,7 +11717,7 @@ static void atk5D_getmoneyreward(void)
             money_to_give = 1 * gTrainerMoney[i * 4 + 1] * money_to_give;
     }
 
-    sub_80B79B8(&gSaveBlock1.money, money_to_give);
+    AddMoney(&gSaveBlock1.money, money_to_give);
     gBattleTextBuff1[0] = 0xFD;
     gBattleTextBuff1[1] = 1;
     gBattleTextBuff1[2] = 4;
@@ -11889,7 +11889,7 @@ _0802413C:\n\
 _08024140:\n\
     mov r0, r8\n\
     adds r1, r4, 0\n\
-    bl sub_80B79B8\n\
+    bl AddMoney\n\
     ldr r1, _0802418C @ =gBattleTextBuff1\n\
     movs r0, 0xFD\n\
     strb r0, [r1]\n\
@@ -14186,7 +14186,7 @@ static void atk91_givepaydaymoney(void)
 {
     if (!(gBattleTypeFlags & BATTLE_TYPE_LINK) && gPaydayMoney)
     {
-        sub_80B79B8(&gSaveBlock1.money, gPaydayMoney * BATTLE_STRUCT->moneyMultiplier);
+        AddMoney(&gSaveBlock1.money, gPaydayMoney * BATTLE_STRUCT->moneyMultiplier);
         gBattleTextBuff1[0] = 0xFD;
         gBattleTextBuff1[1] = 1;
         gBattleTextBuff1[2] = 2;

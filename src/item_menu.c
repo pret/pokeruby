@@ -3115,7 +3115,7 @@ static void sub_80A6760(u8 taskId)
 static void BuyMenuPrintItemQuantityAndPrice(u8 taskId)
 {
     sub_80A36B8(gBGTilemapBuffers[1], 0, 0, 31, 31);
-    RemoveMoneyLabelObject(0, 0);
+    CloseMoneyWindow(0, 0);
     MenuZeroFillWindowRect(0, 4, 13, 13);
     MenuZeroFillWindowRect(0, 14, 29, 19);
     gTasks[taskId].func = sub_80A6760;
@@ -3123,20 +3123,20 @@ static void BuyMenuPrintItemQuantityAndPrice(u8 taskId)
 
 static void BuyMenuDisplayMessage(u16 itemId, u16 quantity)
 {
-    sub_80B7A94(ItemId_GetPrice(itemId) / 2 * quantity, 6, 6, 11);
+    PrintMoneyAmount(ItemId_GetPrice(itemId) / 2 * quantity, 6, 6, 11);
     ConvertIntToDecimalStringN(gStringVar1, ItemId_GetPrice(itemId) / 2 * quantity, STR_CONV_MODE_LEFT_ALIGN, 6);
 }
 
 static void sub_80A683C(void)
 {
-    sub_80B7C14(gSaveBlock1.money, 0, 0);
+    OpenMoneyWindow(gSaveBlock1.money, 0, 0);
     sub_80A4008(gBGTilemapBuffers[1], 1, 1, 12, 2);
 }
 
 static void sub_80A6870(u16 itemId, u8 quantity)
 {
-    sub_80B79B8(&gSaveBlock1.money, ItemId_GetPrice(itemId) / 2 * quantity);
-    sub_80B7BEC(gSaveBlock1.money, 0, 0);
+    AddMoney(&gSaveBlock1.money, ItemId_GetPrice(itemId) / 2 * quantity);
+    UpdateMoneyWindow(gSaveBlock1.money, 0, 0);
 }
 
 static void sub_80A68A4(void)

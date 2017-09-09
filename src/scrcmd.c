@@ -1500,7 +1500,7 @@ bool8 ScrCmd_givemoney(struct ScriptContext *ctx)
     u32 amount = ScriptReadWord(ctx);
     u8 ignore = ScriptReadByte(ctx);
     if (!ignore)
-        sub_80B79B8(&gSaveBlock1.money, amount);
+        AddMoney(&gSaveBlock1.money, amount);
     return FALSE;
 }
 
@@ -1509,7 +1509,7 @@ bool8 ScrCmd_paymoney(struct ScriptContext *ctx)
     u32 amount = ScriptReadWord(ctx);
     u8 ignore = ScriptReadByte(ctx);
     if (!ignore)
-        sub_80B79E0(&gSaveBlock1.money, amount);
+        RemoveMoney(&gSaveBlock1.money, amount);
     return FALSE;
 }
 
@@ -1524,19 +1524,19 @@ bool8 ScrCmd_checkmoney(struct ScriptContext *ctx)
 
 bool8 ScrCmd_showmoney(struct ScriptContext *ctx)
 {
-    u8 v2 = ScriptReadByte(ctx);
-    u8 v3 = ScriptReadByte(ctx);
+    u8 x = ScriptReadByte(ctx);
+    u8 y = ScriptReadByte(ctx);
     u8 ignore = ScriptReadByte(ctx);
     if (!ignore)
-        sub_80B7C14(gSaveBlock1.money, v2, v3);
+        OpenMoneyWindow(gSaveBlock1.money, x, y);
     return FALSE;
 }
 
 bool8 ScrCmd_hidemoney(struct ScriptContext *ctx)
 {
-    u8 v2 = ScriptReadByte(ctx);
-    u8 v3 = ScriptReadByte(ctx);
-    RemoveMoneyLabelObject(v2, v3);
+    u8 x = ScriptReadByte(ctx);
+    u8 y = ScriptReadByte(ctx);
+    CloseMoneyWindow(x, y);
     return FALSE;
 }
 
@@ -1546,7 +1546,7 @@ bool8 ScrCmd_updatemoney(struct ScriptContext *ctx)
     u8 v3 = ScriptReadByte(ctx);
     u8 ignore = ScriptReadByte(ctx);
     if (!ignore)
-        sub_80B7BEC(gSaveBlock1.money, v2, v3);
+        UpdateMoneyWindow(gSaveBlock1.money, v2, v3);
     return FALSE;
 }
 
@@ -1582,7 +1582,7 @@ bool8 ScrCmd_trainerbattle(struct ScriptContext *ctx)
 
 bool8 ScrCmd_reptrainerbattle(struct ScriptContext *ctx)
 {
-    sub_80825E4();
+    BattleSetup_StartTrainerBattle();
     return TRUE;
 }
 

@@ -294,7 +294,7 @@ void BuyMenuDrawGraphics(void)
     gMartInfo.cursor = zero;
     gMartInfo.choicesAbove = zero2;
     MenuZeroFillWindowRect(0, 0, 0x20, 0x20);
-    sub_80B7C14(gSaveBlock1.money, 0, 0);
+    OpenMoneyWindow(gSaveBlock1.money, 0, 0);
     sub_80B3764(0, 7);
     sub_80B37EC();
     sub_80B3270();
@@ -530,7 +530,7 @@ void sub_80B37F8(u8 taskId)
     u16 itemId = gMartInfo.itemList[itemListIndex];
     u32 price = (ItemId_GetPrice(itemId) >> GetPriceReduction(1));
 
-    sub_80B7A94(gTasks[taskId].data[1] * price, 6, 6, 11);
+    PrintMoneyAmount(gTasks[taskId].data[1] * price, 6, 6, 11);
     gStringVar1[0] = EXT_CTRL_CODE_BEGIN;
     gStringVar1[1] = 0x14;
     gStringVar1[2] = 0x6;
@@ -559,7 +559,7 @@ void sub_80B389C(u16 itemId, u8 var2, bool32 hasControlCode)
     if (hasControlCode != FALSE)
         stringPtr = &gStringVar1[3];
 
-    sub_80B79F8(stringPtr, (ItemId_GetPrice(itemId) >> GetPriceReduction(1)), 0x4);
+    GetMoneyAmountText(stringPtr, (ItemId_GetPrice(itemId) >> GetPriceReduction(1)), 0x4);
     MenuPrint_PixelCoords(&gStringVar1[0], 0xCA, var2 << 3, 1);
 }
 
@@ -588,7 +588,7 @@ void sub_80B3930(u16 itemId, u8 var2, bool32 hasControlCode)
     }
     else
     {
-        sub_80B79F8(stringPtr, gDecorations[itemId].price, 0x4);
+        GetMoneyAmountText(stringPtr, gDecorations[itemId].price, 0x4);
         MenuPrint_PixelCoords(&gStringVar1[0], 0xCA, var2 << 3, 0x1);
     }
 }
@@ -648,9 +648,9 @@ void sub_80B3AEC(u8 taskId)
 void sub_80B3B80(u8 taskId)
 {
     IncrementGameStat(0x26);
-    sub_80B79E0(&gSaveBlock1.money, gMartTotalCost);
+    RemoveMoney(&gSaveBlock1.money, gMartTotalCost);
     PlaySE(SE_REGI);
-    sub_80B7BEC(gSaveBlock1.money, 0, 0);
+    UpdateMoneyWindow(gSaveBlock1.money, 0, 0);
     gTasks[taskId].func = sub_80B3AEC;
 }
 
@@ -1165,7 +1165,7 @@ void Task_ExitBuyMenu(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        RemoveMoneyLabelObject(0, 0);
+        CloseMoneyWindow(0, 0);
         BuyMenuFreeMemory();
         SetMainCallback2(c2_exit_to_overworld_2_switch);
         DestroyTask(taskId);

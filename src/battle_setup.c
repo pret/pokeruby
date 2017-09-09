@@ -1037,7 +1037,7 @@ void trainer_flag_clear(u16 flag)
     FlagReset(TRAINER_FLAG_START + flag);
 }
 
-void sub_80825E4(void)
+void BattleSetup_StartTrainerBattle(void)
 {
     gBattleTypeFlags = BATTLE_TYPE_TRAINER;
     gMain.savedCallback = sub_808260C;

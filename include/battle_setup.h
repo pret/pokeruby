@@ -98,7 +98,7 @@ bool32 GetTrainerFlagFromScriptPointer(u8 *data);
 u8 trainer_flag_check(u16);
 void trainer_flag_set(u16);
 void trainer_flag_clear(u16);
-void sub_80825E4(void);
+void BattleSetup_StartTrainerBattle(void);
 void sub_808260C(void);
 void do_choose_name_or_words_screen(void);
 //void sub_80826B0(void);
