@@ -272,7 +272,7 @@ void oamc_shadow(struct Sprite *sprite)
 
     if (TryGetFieldObjectIdByLocalIdAndMap(sprite->data0, sprite->data1, sprite->data2, &mapObjectId))
     {
-        FieldEffectStop(sprite, 3);
+        FieldEffectStop(sprite, FLDEFF_SHADOW);
     }
     else
     {
@@ -283,7 +283,7 @@ void oamc_shadow(struct Sprite *sprite)
         sprite->pos1.y = linkedSprite->pos1.y + sprite->data3;
         if (!mapObject->active || !mapObject->mapobj_bit_22 || MetatileBehavior_IsPokeGrass(mapObject->mapobj_unk_1E) || MetatileBehavior_IsSurfableWaterOrUnderwater(mapObject->mapobj_unk_1E) || MetatileBehavior_IsSurfableWaterOrUnderwater(mapObject->mapobj_unk_1F) || MetatileBehavior_IsReflective(mapObject->mapobj_unk_1E) || MetatileBehavior_IsReflective(mapObject->mapobj_unk_1F))
         {
-            FieldEffectStop(sprite, 3);
+            FieldEffectStop(sprite, FLDEFF_SHADOW);
         }
     }
 }
@@ -341,7 +341,7 @@ void unc_grass_normal(struct Sprite *sprite)
     metatileBehavior = MapGridGetMetatileBehaviorAt(sprite->data1, sprite->data2);
     if (TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjectId) || !MetatileBehavior_IsTallGrass(metatileBehavior) || (sprite->data7 && sprite->animEnded))
     {
-        FieldEffectStop(sprite, 4);
+        FieldEffectStop(sprite, FLDEFF_TALL_GRASS);
     }
     else
     {
@@ -425,4 +425,41 @@ bool8 FldEff_LongGrass(void)
         }
     }
     return FALSE;
+}
+
+void unc_grass_tall(struct Sprite *sprite)
+{
+    u8 mapNum;
+    u8 mapGroup;
+    u8 metatileBehavior;
+    u8 localId;
+    u8 mapObjectId;
+    struct MapObject *mapObject;
+
+    mapNum = sprite->data5 >> 8;
+    mapGroup = sprite->data5;
+    if (gCamera.field_0 && (gSaveBlock1.location.mapNum != mapNum || gSaveBlock1.location.mapGroup != mapGroup))
+    {
+        sprite->data1 -= gCamera.x;
+        sprite->data2 -= gCamera.y;
+        sprite->data5 = ((u8)gSaveBlock1.location.mapNum << 8) | (u8)gSaveBlock1.location.mapGroup;
+    }
+    localId = sprite->data3 >> 8;
+    mapNum = sprite->data3;
+    mapGroup = sprite->data4;
+    metatileBehavior = MapGridGetMetatileBehaviorAt(sprite->data1, sprite->data2);
+    if (TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjectId) || !MetatileBehavior_IsLongGrass(metatileBehavior) || (sprite->data7 && sprite->animEnded))
+    {
+        FieldEffectStop(sprite, FLDEFF_LONG_GRASS);
+    }
+    else
+    {
+        mapObject = &gMapObjects[mapObjectId];
+        if ((mapObject->coords2.x != sprite->data1 || mapObject->coords2.y != sprite->data2) && (mapObject->coords3.x != sprite->data1 || mapObject->coords3.y != sprite->data2))
+        {
+            sprite->data7 = TRUE;
+        }
+        sub_806487C(sprite, 0);
+        sub_812882C(sprite, sprite->data0, 0);
+    }
 }
