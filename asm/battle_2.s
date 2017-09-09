@@ -3144,7 +3144,7 @@ _08013D4C:
 	ldr r1, _08013D6C @ =gBattleMainFunc
 	ldr r0, _08013D70 @ =sub_8013DA8
 	str r0, [r1]
-	ldr r1, _08013D74 @ =gUnknown_03005E94
+	ldr r1, _08013D74 @ =gCB2_AfterEvolution
 	ldr r0, _08013D78 @ =sub_800F808
 	str r0, [r1]
 	b _08013D96
@@ -3152,7 +3152,7 @@ _08013D4C:
 _08013D68: .4byte gNoOfAllBanks
 _08013D6C: .4byte gBattleMainFunc
 _08013D70: .4byte sub_8013DA8
-_08013D74: .4byte gUnknown_03005E94
+_08013D74: .4byte gCB2_AfterEvolution
 _08013D78: .4byte sub_800F808
 _08013D7C:
 	ldr r0, _08013D9C @ =gBattleExecBuffer

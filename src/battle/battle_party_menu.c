@@ -35,23 +35,16 @@ extern void PartyMenuDrawHPBars(void);
 extern u8 sub_806B58C(u8);
 extern u8 GetItemEffectType();
 extern void sub_806E750(u8, const struct PartyPopupMenu *, const struct PartyMenuItem *, int);
-extern u16 sub_806BD80();
-extern u8 sub_806CA38();
 extern void sub_806D5A4(void);
 extern void sub_802E414(void);
 extern void sub_80A6DCC(void);
 extern void sub_806AF4C();
-extern u8 sub_80F9344(void);
-extern u8 sub_806B124(void);
-extern void sub_806C994();
-extern void sub_806BF74();
 extern void sub_806AEDC(void);
 extern TaskFunc PartyMenuGetPopupMenuFunc(u8, const struct PartyPopupMenu *, const struct PartyMenuItem *, u8);
 extern void sub_806E7D0(u8, const struct PartyPopupMenu *);
 extern u8 *sub_8040D08();
 extern void sub_8040B8C(void);
 extern void sub_806E6F0();
-extern void sub_806D538();
 extern void nullsub_14();
 extern void OpenPartyMenu();
 extern u8 sub_803FBBC(void);
@@ -586,7 +579,7 @@ static void Task_809538C(void)
 {
     do
     {
-        if (sub_806B124() == 1)
+        if (sub_806B124() == TRUE)
         {
             sub_806C994(EWRAM_1B000.unk260, gUnknown_020384F0);
             sub_806BF74(EWRAM_1B000.unk260, 0);

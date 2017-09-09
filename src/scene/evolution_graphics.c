@@ -1,4 +1,5 @@
 #include "global.h"
+#include "evolution_graphics.h"
 #include "sprite.h"
 #include "trig.h"
 #include "rng.h"
@@ -376,10 +377,10 @@ static void EvoTask_DestroyPostSet1Task(u8 taskID)
     DestroyTask(taskID);
 }
 
-u8 LaunchTask_PostEvoSparklesSet2AndFlash(u16 arg0)
+u8 LaunchTask_PostEvoSparklesSet2AndFlash(u16 species)
 {
     u8 taskID = CreateTask(EvoTask_BeginPostSparklesSet2_AndFlash, 0);
-    gTasks[taskID].data[2] = arg0;
+    gTasks[taskID].data[2] = species;
     return taskID;
 }
 
@@ -424,10 +425,10 @@ static void EvoTask_DestroyPostSet2AndFlashTask(u8 taskID)
         DestroyTask(taskID);
 }
 
-u8 LaunchTask_PostEvoSparklesSet2AndFlash_Trade(u16 arg0)
+u8 LaunchTask_PostEvoSparklesSet2AndFlash_Trade(u16 species)
 {
     u8 taskID = CreateTask(EvoTask_BeginPostSparklesSet2_AndFlash_Trade, 0);
-    gTasks[taskID].data[2] = arg0;
+    gTasks[taskID].data[2] = species;
     return taskID;
 }
 

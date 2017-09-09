@@ -388,7 +388,7 @@ bool8 GabbyAndTyGetLastQuote(void)
     if (gSaveBlock1.gabbyAndTyData.quote == 0xffff)
         return FALSE;
 
-    sub_80EB3FC(gStringVar1, gSaveBlock1.gabbyAndTyData.quote);
+    EasyChat_GetWordText(gStringVar1, gSaveBlock1.gabbyAndTyData.quote);
     gSaveBlock1.gabbyAndTyData.quote |= 0xffff;
     return TRUE;
 }
@@ -1624,7 +1624,7 @@ void sub_80BF79C(TVShow *arg0)
             break;
         i++;
     }
-    sub_80EB3FC(gStringVar3, arg0->recentHappenings.var04[i]);
+    EasyChat_GetWordText(gStringVar3, arg0->recentHappenings.var04[i]);
 }
 
 u8 sub_80BF7E8(struct TVShowNameRaterShow *arg0)
@@ -2575,20 +2575,20 @@ void DoTVShowBravoTrainerPokemonProfile(void)
         break;
     case 3:
         TVShowConvertInternationalString(gStringVar1, bravoTrainer->playerName, bravoTrainer->language);
-        sub_80EB3FC(gStringVar2, bravoTrainer->var04[0]);
+        EasyChat_GetWordText(gStringVar2, bravoTrainer->var04[0]);
         sub_80BF088(2, bravoTrainer->contestResult + 1);
         gUnknown_020387E8 = 5;
         break;
     case 4:
         TVShowConvertInternationalString(gStringVar1, bravoTrainer->playerName, bravoTrainer->language);
-        sub_80EB3FC(gStringVar2, bravoTrainer->var04[0]);
+        EasyChat_GetWordText(gStringVar2, bravoTrainer->var04[0]);
         sub_80BF088(2, bravoTrainer->contestResult + 1);
         gUnknown_020387E8 = 5;
         break;
     case 5:
         TVShowConvertInternationalString(gStringVar1, bravoTrainer->playerName, bravoTrainer->language);
         CopyContestCategoryToStringVar(1, bravoTrainer->contestCategory);
-        sub_80EB3FC(gStringVar3, bravoTrainer->var04[1]);
+        EasyChat_GetWordText(gStringVar3, bravoTrainer->var04[1]);
         if (bravoTrainer->var14)
             gUnknown_020387E8 = 6;
         else
@@ -2597,7 +2597,7 @@ void DoTVShowBravoTrainerPokemonProfile(void)
     case 6:
         StringCopy(gStringVar1, gSpeciesNames[bravoTrainer->species]);
         StringCopy(gStringVar2, gMoveNames[bravoTrainer->var14]);
-        sub_80EB3FC(gStringVar3, bravoTrainer->var04[1]);
+        EasyChat_GetWordText(gStringVar3, bravoTrainer->var04[1]);
         gUnknown_020387E8 = 7;
         break;
     case 7:
@@ -2680,7 +2680,7 @@ void DoTVShowBravoTrainerBattleTowerProfile(void)
         gUnknown_020387E8 = 11;
         break;
     case 11:
-        sub_80EB3FC(gStringVar1, bravoTrainerTower->var18[0]);
+        EasyChat_GetWordText(gStringVar1, bravoTrainerTower->var18[0]);
         if (bravoTrainerTower->var1b == 0)
             gUnknown_020387E8 = 12;
         else
@@ -2688,7 +2688,7 @@ void DoTVShowBravoTrainerBattleTowerProfile(void)
         break;
     case 12:
     case 13:
-        sub_80EB3FC(gStringVar1, bravoTrainerTower->var18[0]);
+        EasyChat_GetWordText(gStringVar1, bravoTrainerTower->var18[0]);
         TVShowConvertInternationalString(gStringVar2, bravoTrainerTower->trainerName, bravoTrainerTower->language);
         TVShowConvertInternationalString(gStringVar3, bravoTrainerTower->pokemonName, bravoTrainerTower->language);
         gUnknown_020387E8 = 14;
@@ -3106,12 +3106,12 @@ void DoTVShowPokemonFanClubOpinions(void)
     case 3:
         TVShowConvertInternationalString(gStringVar1, fanclubOpinions->playerName, fanclubOpinions->language);
         StringCopy(gStringVar2, gSpeciesNames[fanclubOpinions->var02]);
-        sub_80EB3FC(gStringVar3, fanclubOpinions->var1C[0]);
+        EasyChat_GetWordText(gStringVar3, fanclubOpinions->var1C[0]);
         gUnknown_020387E8 = 4;
         break;
     case 4:
         TVShowConvertInternationalString(gStringVar1, fanclubOpinions->playerName, fanclubOpinions->language);
-        sub_80EB3FC(gStringVar3, fanclubOpinions->var1C[1]);
+        EasyChat_GetWordText(gStringVar3, fanclubOpinions->var1C[1]);
         TVShowDone();
         break;
     }
@@ -3176,7 +3176,7 @@ void DoTVShowInSearchOfTrainers(void)
         gUnknown_020387E8 = 8;
         break;
     case 8:
-        sub_80EB3FC(gStringVar1, gSaveBlock1.gabbyAndTyData.quote);
+        EasyChat_GetWordText(gStringVar1, gSaveBlock1.gabbyAndTyData.quote);
         StringCopy(gStringVar2, gSpeciesNames[gSaveBlock1.gabbyAndTyData.mon1]);
         StringCopy(gStringVar3, gSpeciesNames[gSaveBlock1.gabbyAndTyData.mon2]);
         gScriptResult = 1;

@@ -287,7 +287,7 @@ gPID_perBank: @ 2024E70
 gBattleMovePower: @ 2024E80
 	.space 0x2
 
-word_2024E82: @ 2024E82
+gMoveToLearn: @ 2024E82
 	.space 0x2
 
 gBattleMonForms: @ 2024E84
@@ -374,17 +374,7 @@ gUnknown_0202FF58: @ 202FF58
 gUnknown_0202FFA4: @ 202FFA4
 	.space 0x4
 
-@ pokemon_menu
-
-gUnknown_0202FFA8: @ 202FFA8
-	.space 0x1
-
-gUnknown_0202FFA9: @ 202FFA9
-	.space 0x1
-
-gUnknown_0202FFAA: @ 202FFAA
-	.space 0xA
-
+	.include "src/pokemon/pokemon_menu.o"
 	.include "src/pokemon/pokedex.o"
 	.include "src/engine/trainer_card.o"
 	.include "src/pokemon/pokemon_storage_system.o"
@@ -554,13 +544,7 @@ gUnknown_020388B4: @ 20388B4
 	.space 0x4
 
 	.include "src/pokemon/mon_markings.o"
-
-@ mauville_old_man
-
-	.align 2
-gUnknown_020388BC: @ 20388BC
-	.space 0x4
-
+	.include "src/field/mauville_man.o"
 	.include "src/field/menu_helpers.o"
 	.include "src/field/region_map.o"
 	.include "src/field/decoration.o"

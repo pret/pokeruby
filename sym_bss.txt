@@ -79,11 +79,7 @@ gUnknown_03000740: @ 3000740
 gUnknown_03000744: @ 3000744
 	.space 0x4
 
-@ mauville_old_man
-
-gUnknown_03000748: @ 3000748
-	.space 0x4
-
+	.include "src/field/mauville_man.o"
 	.include "src/field/menu_helpers.o"
 	.include "src/scene/contest_painting.o"
 	.include "src/field/pokeblock.o"

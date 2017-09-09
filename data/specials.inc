@@ -104,28 +104,28 @@ gSpecials::
 	def_special DoWateringBerryTreeAnim
 	def_special sub_80E60D8
 	def_special sub_80EB7C4
-	def_special sub_80F7B14
-	def_special sub_80F7B2C
-	def_special sub_80F7B40
-	def_special sub_80F7C70
-	def_special sub_80F7C84
-	def_special sub_80F7C90
-	def_special sub_80F7C54
+	def_special ScrSpecial_GetCurrentMauvilleMan
+	def_special ScrSpecial_HasBardSongBeenChanged
+	def_special ScrSpecial_SaveBardSongLyrics
+	def_special ScrSpecial_GetHipsterSpokenFlag
+	def_special ScrSpecial_SetHipsterSpokenFlag
+	def_special ScrSpecial_HipsterTeachWord
+	def_special ScrSpecial_PlayBardSong
 	def_special sub_80F83D0
-	def_special sub_80F7CF4
-	def_special sub_80F7CC8
-	def_special sub_80F889C
-	def_special sub_80F8888
-	def_special sub_80F8874
-	def_special sub_80F88AC
-	def_special sub_80F88FC
-	def_special sub_80F88E0
-	def_special sub_8109E34
-	def_special sub_8109C44
-	def_special sub_8109C58
-	def_special sub_8109C90
-	def_special sub_8109CF0
-	def_special sub_8109DE0
+	def_special ScrSpecial_GenerateGiddyLine
+	def_special ScrSpecial_GiddyShouldTellAnotherTale
+	def_special ScrSpecial_StorytellerGetFreeStorySlot
+	def_special ScrSpecial_StorytellerDisplayStory
+	def_special ScrSpecial_StorytellerStoryListMenu
+	def_special ScrSpecial_StorytellerUpdateStat
+	def_special ScrSpecial_StorytellerInitializeRandomStat
+	def_special ScrSpecial_HasStorytellerAlreadyRecorded
+	def_special ScrSpecial_TraderMenuGetDecoration
+	def_special ScrSpecial_GetTraderTradedFlag
+	def_special ScrSpecial_DoesPlayerHaveNoDecorations
+	def_special ScrSpecial_IsDecorationFull
+	def_special ScrSpecial_TraderMenuGiveDecoration
+	def_special ScrSpecial_TraderDoDecorationTrade
 	def_special GetShroomishSizeRecordInfo
 	def_special CompareShroomishSize
 	def_special GetBarboachSizeRecordInfo
