@@ -169,7 +169,6 @@ void DoRareCandyItemEffect(u8, u16, TaskFunc);
 void Task_RareCandy1(u8);
 void Task_RareCandy2(u8);
 void sub_8070848(u8 taskId);
-void sub_809D62C(struct Sprite *);
 void sub_806CA60(u8 taskId);
 void sub_806CD5C(u8 taskId);
 void DoTakeMail(u8 taskId, TaskFunc func);

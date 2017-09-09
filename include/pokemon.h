@@ -601,5 +601,6 @@ s8 sub_8040A54(struct Pokemon *, u8);
 u16 GetMonEVCount(struct Pokemon *);
 u16 GetEvolutionTargetSpecies(struct Pokemon *, u8, u16);
 const struct CompressedSpritePalette *sub_8040990(struct Pokemon *);
+bool8 sub_8040A3C(u16);
 
 #endif // GUARD_POKEMON_H
