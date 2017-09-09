@@ -505,3 +505,39 @@ bool8 FldEff_ShortGrass(void)
     }
     return FALSE;
 }
+
+void sub_8127334(struct Sprite *sprite)
+{
+    u8 mapObjectId;
+    s16 x;
+    s16 y;
+    const struct MapObjectGraphicsInfo *graphicsInfo;
+    struct Sprite *linkedSprite;
+
+    if (TryGetFieldObjectIdByLocalIdAndMap(sprite->data0, sprite->data1, sprite->data2, &mapObjectId) || !gMapObjects[mapObjectId].mapobj_bit_18)
+    {
+        FieldEffectStop(sprite, FLDEFF_SHORT_GRASS);
+    }
+    else
+    {
+        graphicsInfo = GetFieldObjectGraphicsInfo(gMapObjects[mapObjectId].graphicsId);
+        linkedSprite = &gSprites[gMapObjects[mapObjectId].spriteId];
+        y = linkedSprite->pos1.y;
+        x = linkedSprite->pos1.x;
+        if (x != sprite->data3 || y != sprite->data4)
+        {
+            sprite->data3 = x;
+            sprite->data4 = y;
+            if (sprite->animEnded)
+            {
+                StartSpriteAnim(sprite, 0);
+            }
+        }
+        sprite->pos1.x = x;
+        sprite->pos1.y = y;
+        sprite->pos2.y = (graphicsInfo->height >> 1) - 8;
+        sprite->subpriority = linkedSprite->subpriority - 1;
+        sprite->oam.priority = linkedSprite->oam.priority;
+        sub_806487C(sprite, linkedSprite->invisible);
+    }
+}
