@@ -7,6 +7,7 @@
 #include "global.h"
 #include "sprite.h"
 #include "field_map_obj.h"
+#include "metatile_behavior.h"
 #include "field_effect_helpers.h"
 
 // Static type declarations
@@ -15,9 +16,62 @@
 
 // Static ROM declarations
 /*static*/ void sub_81269E0(struct Sprite *);
-/*static*/ void npc_pal_op(struct MapObject *mapObject, struct Sprite *sprite);
+static void npc_pal_op(struct MapObject *mapObject, struct Sprite *sprite);
+/*static*/ void npc_pal_op_A(struct MapObject *, u8);
+/*static*/ void npc_pal_op_B(struct MapObject *, u8);
+/*static*/ void sub_81275A0(struct Sprite *);
+/*static*/ void sub_81275C4(struct Sprite *);
+/*static*/ void sub_8127DA0(struct Sprite *);
+/*static*/ void sub_8127DD0(struct Sprite *);
+/*static*/ void sub_8127E30(struct Sprite *);
 
 // .rodata
+
+const u8 UnusedEggString_8401E28[] = _("タマゴ");
+
+const u16 gUnknown_08401E2C[] = {
+    0x0c,
+    0x1c,
+    0x2c
+};
+
+const u8 gUnknown_08401E32[] = {
+    0,
+    1,
+    2,
+    3
+};
+
+const u16 gUnknown_08401E36[] = {
+     4,
+     4,
+     4,
+    16
+};
+
+void (*const gUnknown_08401E40[])(struct Sprite *) = {
+    sub_81275A0,
+    sub_81275C4
+};
+
+void (*const gUnknown_08401E48[])(struct Sprite *) = {
+    sub_8127DA0,
+    sub_8127DD0,
+    sub_8127E30
+};
+
+const u8 gUnknown_08401E54[] = {
+    0,
+    0,
+    1,
+    2,
+    3
+};
+
+const u16 gUnknown_08401E5A[] = {
+    3,
+    7
+};
 
 // .text
 
@@ -42,5 +96,28 @@ void SetUpReflection(struct MapObject *mapObject, struct Sprite *sprite, bool8 f
     if (!flag)
     {
         newSprite->oam.affineMode = 1;
+    }
+}
+
+s16 sub_81268D0(struct MapObject *mapObject)
+{
+    return GetFieldObjectGraphicsInfo(mapObject->graphicsId)->height - 2;
+}
+
+static void npc_pal_op(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 whichElement;
+    u16 unk_8041e2c[3];
+
+    memcpy(unk_8041e2c, gUnknown_08401E2C, sizeof gUnknown_08401E2C);
+    sprite->data2 = 0;
+    if (!GetFieldObjectGraphicsInfo(mapObject->graphicsId)->disableReflectionPaletteLoad && ((whichElement = sub_8057450(mapObject->mapobj_unk_1F)) || (whichElement = sub_8057450(mapObject->mapobj_unk_1E))))
+    {
+        sprite->data2 = unk_8041e2c[whichElement - 1];
+        npc_pal_op_A(mapObject, sprite->oam.paletteNum);
+    }
+    else
+    {
+        npc_pal_op_B(mapObject, sprite->oam.paletteNum);
     }
 }

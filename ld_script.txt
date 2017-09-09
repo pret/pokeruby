@@ -450,7 +450,7 @@ SECTIONS {
         src/choose_party.o(.rodata);
         data/cable_car.o(.rodata);
         src/save.o(.rodata);
-        data/field_effect_helpers.o(.rodata);
+        src/field_effect_helpers.o(.rodata);
         data/contest_ai.o(.rodata);
         src/battle_controller_safari.o(.rodata);
         data/battle_anim_812C144.o(.rodata);
