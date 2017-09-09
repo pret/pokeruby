@@ -109,8 +109,8 @@ bool8 ScrCmd_end(struct ScriptContext *ctx)
 
 bool8 ScrCmd_jumpasm(struct ScriptContext *ctx)
 {
-    u32 addr = ScriptReadWord(ctx);
-    SetupNativeScript(ctx, (void *)addr);
+    bool8 (*addr)(void) = (bool8 (*)(void))ScriptReadWord(ctx);
+    SetupNativeScript(ctx, addr);
     return TRUE;
 }
 
@@ -1313,10 +1313,10 @@ bool8 ScrCmd_showpokepic(struct ScriptContext *ctx)
 
 bool8 ScrCmd_hidepokepic(struct ScriptContext *ctx)
 {
-    void *func = ScriptMenu_GetPicboxWaitFunc();
-    if (!func)
-        return FALSE;
+    bool8 (*func)(void) = ScriptMenu_GetPicboxWaitFunc();
 
+    if (func == NULL)
+        return FALSE;
     SetupNativeScript(ctx, func);
     return TRUE;
 }

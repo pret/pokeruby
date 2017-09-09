@@ -14,6 +14,6 @@ bool8 ScriptMenu_TryCreatePCMenu(void);
 void ScriptMenu_CreatePCMenu(void);
 void ScriptMenu_DisplayPCStartupPrompt(void);
 bool8 ScriptMenu_ShowPokemonPic(u16 var1, u8 var2, u8 var3);
-NativeScriptFunc ScriptMenu_GetPicboxWaitFunc(void);
+bool8 (*ScriptMenu_GetPicboxWaitFunc(void))(void);
 
 #endif

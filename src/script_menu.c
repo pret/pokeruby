@@ -1153,7 +1153,7 @@ bool8 ScriptMenu_ShowPokemonPic(u16 species, u8 x, u8 y)
     }
 }  
 
-NativeScriptFunc ScriptMenu_GetPicboxWaitFunc(void)
+bool8 (*ScriptMenu_GetPicboxWaitFunc(void))(void)
 {
     u8 taskId = FindTaskIdByFunc(Task_PokemonPicWindow);
 

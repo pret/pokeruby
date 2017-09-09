@@ -3,7 +3,6 @@
 
 struct ScriptContext;
 
-typedef bool8 (*NativeScriptFunc)(void);
 typedef bool8 (*ScrCmdFunc)(struct ScriptContext *);
 typedef u8 Script[];
 
@@ -12,7 +11,7 @@ struct ScriptContext
     u8 stackDepth;
     u8 mode;
     u8 comparisonResult;
-    NativeScriptFunc nativePtr;
+    bool8 (*nativePtr)(void);
     const u8 *scriptPtr;
     const u8 *stack[20];
     ScrCmdFunc *cmdTable;
@@ -24,7 +23,7 @@ struct ScriptContext
 
 void InitScriptContext(struct ScriptContext *ctx, void *cmdTable, void *cmdTableEnd);
 u8 SetupBytecodeScript(struct ScriptContext *ctx, const u8 *ptr);
-void SetupNativeScript(struct ScriptContext *ctx, NativeScriptFunc ptr);
+void SetupNativeScript(struct ScriptContext *ctx, bool8 (*ptr)(void));
 void StopScript(struct ScriptContext *ctx);
 u8 RunScriptCommand(struct ScriptContext *ctx);
 u8 ScriptPush(struct ScriptContext *ctx, const u8 *ptr);

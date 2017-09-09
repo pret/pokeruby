@@ -40,7 +40,7 @@ u8 SetupBytecodeScript(struct ScriptContext *ctx, const u8 *ptr)
     return 1;
 }
 
-void SetupNativeScript(struct ScriptContext *ctx, NativeScriptFunc ptr)
+void SetupNativeScript(struct ScriptContext *ctx, bool8 (*ptr)(void))
 {
     ctx->mode = 2;
     ctx->nativePtr = ptr;
