@@ -209,7 +209,7 @@ void sub_80414C0(struct BoxPokemon * daycare_data)
 }
 
 u8 TryIncrementMonLevel(struct Pokemon *);
-extern u16 word_2024E82;
+extern u16 gMoveToLearn;
 
 void sub_804151C(struct Pokemon * mon)
 {
@@ -221,10 +221,10 @@ void sub_804151C(struct Pokemon * mon)
         if(TryIncrementMonLevel(mon) == FALSE) goto end;
 
         r6 = 1;
-        while((temp = sub_803B7C8(mon, r6)) != 0){
+        while((temp = MonTryLearningNewMove(mon, r6)) != 0){
             r6 = 0;
             if(temp == 0xffff){
-                DeleteFirstMoveAndGiveMoveToMon(mon, word_2024E82);
+                DeleteFirstMoveAndGiveMoveToMon(mon, gMoveToLearn);
             }
         }
     }

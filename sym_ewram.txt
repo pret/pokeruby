@@ -287,7 +287,7 @@ gPID_perBank: @ 2024E70
 gBattleMovePower: @ 2024E80
 	.space 0x2
 
-word_2024E82: @ 2024E82
+gMoveToLearn: @ 2024E82
 	.space 0x2
 
 gBattleMonForms: @ 2024E84

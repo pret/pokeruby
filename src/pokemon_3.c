@@ -1197,7 +1197,7 @@ const struct CompressedSpritePalette *sub_80409C8(u16 species, u32 otId , u32 pe
         return &gMonPaletteTable[species];
 }
 
-bool8 IsHMMove2(u16 move)
+bool32 IsHMMove2(u16 move)
 {
     int i = 0;
     while (gHMMoves[i] != 0xFFFF)

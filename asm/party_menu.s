@@ -7645,7 +7645,7 @@ _08070AF4:
 	ldr r7, _08070B28 @ =0x0201c000
 	ldr r0, [r7]
 	movs r1, 0x1
-	bl sub_803B7C8
+	bl MonTryLearningNewMove
 	lsls r0, 16
 	lsrs r4, r0, 16
 	ldr r1, _08070B2C @ =0xfffff282
@@ -7680,7 +7680,7 @@ _08070B40:
 	lsrs r2, r0, 16
 	cmp r2, 0
 	beq _08070B74
-	ldr r1, _08070B6C @ =gUnknown_03005E94
+	ldr r1, _08070B6C @ =gCB2_AfterEvolution
 	ldr r0, _08070B70 @ =sub_80A53F8
 	str r0, [r1]
 	ldr r0, [r7]
@@ -7692,7 +7692,7 @@ _08070B40:
 	bl DestroyTask
 	b _08070C2C
 	.align 2, 0
-_08070B6C: .4byte gUnknown_03005E94
+_08070B6C: .4byte gCB2_AfterEvolution
 _08070B70: .4byte sub_80A53F8
 _08070B74:
 	adds r0, r6, 0
@@ -7703,7 +7703,7 @@ _08070B7C:
 	ldr r1, _08070BBC @ =gStringVar1
 	bl GetMonNickname
 	ldr r0, _08070BC0 @ =gStringVar2
-	ldr r5, _08070BC4 @ =word_2024E82
+	ldr r5, _08070BC4 @ =gMoveToLearn
 	ldrh r2, [r5]
 	movs r1, 0xD
 	muls r1, r2
@@ -7729,7 +7729,7 @@ _08070B7C:
 	.align 2, 0
 _08070BBC: .4byte gStringVar1
 _08070BC0: .4byte gStringVar2
-_08070BC4: .4byte word_2024E82
+_08070BC4: .4byte gMoveToLearn
 _08070BC8: .4byte gMoveNames
 _08070BCC: .4byte gStringVar4
 _08070BD0: .4byte gOtherText_WantsToLearn
@@ -7796,7 +7796,7 @@ sub_8070C54: @ 8070C54
 	ldr r7, _08070C78 @ =0x0201c000
 	ldr r0, [r7]
 	movs r1, 0
-	bl sub_803B7C8
+	bl MonTryLearningNewMove
 	lsls r0, 16
 	lsrs r4, r0, 16
 	ldr r0, _08070C7C @ =0x0000fffe
@@ -7826,7 +7826,7 @@ _08070C8C:
 	lsrs r2, r0, 16
 	cmp r2, 0
 	beq _08070CC0
-	ldr r1, _08070CB8 @ =gUnknown_03005E94
+	ldr r1, _08070CB8 @ =gCB2_AfterEvolution
 	ldr r0, _08070CBC @ =sub_80A53F8
 	str r0, [r1]
 	ldr r0, [r7]
@@ -7838,7 +7838,7 @@ _08070C8C:
 	bl DestroyTask
 	b _08070D68
 	.align 2, 0
-_08070CB8: .4byte gUnknown_03005E94
+_08070CB8: .4byte gCB2_AfterEvolution
 _08070CBC: .4byte sub_80A53F8
 _08070CC0:
 	adds r0, r6, 0
@@ -7849,7 +7849,7 @@ _08070CC8:
 	ldr r1, _08070D08 @ =gStringVar1
 	bl GetMonNickname
 	ldr r0, _08070D0C @ =gStringVar2
-	ldr r5, _08070D10 @ =word_2024E82
+	ldr r5, _08070D10 @ =gMoveToLearn
 	ldrh r2, [r5]
 	movs r1, 0xD
 	muls r1, r2
@@ -7875,7 +7875,7 @@ _08070CC8:
 	.align 2, 0
 _08070D08: .4byte gStringVar1
 _08070D0C: .4byte gStringVar2
-_08070D10: .4byte word_2024E82
+_08070D10: .4byte gMoveToLearn
 _08070D14: .4byte gMoveNames
 _08070D18: .4byte gStringVar4
 _08070D1C: .4byte gOtherText_WantsToLearn
@@ -7971,7 +7971,7 @@ DoEvolutionStoneItemEffect: @ 8070DBC
 	adds r1, r6, 0
 	adds r2, r5, 0
 	bl sub_806E8D0
-	ldr r1, _08070E20 @ =gUnknown_03005E94
+	ldr r1, _08070E20 @ =gCB2_AfterEvolution
 	ldr r0, _08070E24 @ =sub_80A53F8
 	str r0, [r1]
 	ldr r0, _08070E28 @ =0x0201c000
@@ -7995,7 +7995,7 @@ DoEvolutionStoneItemEffect: @ 8070DBC
 	.align 2, 0
 _08070E18: .4byte gTasks
 _08070E1C: .4byte TaskDummy
-_08070E20: .4byte gUnknown_03005E94
+_08070E20: .4byte gCB2_AfterEvolution
 _08070E24: .4byte sub_80A53F8
 _08070E28: .4byte 0x0201c000
 _08070E2C: .4byte gUnknown_0202E8F4

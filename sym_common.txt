@@ -237,12 +237,7 @@ gUnknown_03005E0C: @ 3005E0C
 	.space 0x4
 
 	.include "contest_painting.o"
-
-@ evolution_scene
-
-	.align 2
-gUnknown_03005E94: @ 3005E94
-	.space 0x4
+    .include "evolution_scene.o"
 
 @ pokedex_cry_screen
 
