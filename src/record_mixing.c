@@ -10,7 +10,7 @@
 #include "items.h"
 #include "load_save.h"
 #include "link.h"
-#include "mauville_old_man.h"
+#include "mauville_man.h"
 #include "menu.h"
 #include "mystery_event_script.h"
 #include "rng.h"

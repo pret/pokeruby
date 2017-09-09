@@ -3,7 +3,7 @@
 #include "decoration_inventory.h"
 #include "event_data.h"
 #include "main.h"
-#include "mauville_old_man.h"
+#include "mauville_man.h"
 #include "menu.h"
 #include "menu_helpers.h"
 #include "script.h"

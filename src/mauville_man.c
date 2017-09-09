@@ -1,6 +1,6 @@
 #include "global.h"
 #include "bard_music.h"
-#include "mauville_old_man.h"
+#include "mauville_man.h"
 #include "easy_chat.h"
 #include "event_data.h"
 #include "field_message_box.h"
@@ -1230,7 +1230,7 @@ static void PrintStoryList(void)
     MenuPrint(gPCText_Cancel, 1, 2 + i * 2);
 }
 
-extern u8 gUnknown_03000748;
+static u8 gUnknown_03000748;
 
 static void Task_StoryListMenu(u8 taskId)
 {

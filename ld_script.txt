@@ -189,7 +189,7 @@ SECTIONS {
         src/pokenav.o(.text);
         asm/pokenav.o(.text_80F708C);
         src/mon_markings.o(.text);
-        src/mauville_old_man.o(.text);
+        src/mauville_man.o(.text);
         src/mail.o(.text);
         src/menu_helpers.o(.text);
         src/script_pokemon_util_80F99CC.o(.text);
@@ -420,7 +420,7 @@ SECTIONS {
         data/easy_chat.o(.rodata);
         data/pokenav.o(.rodata);
         data/mon_markings.o(.rodata);
-        src/mauville_old_man.o(.rodata);
+        src/mauville_man.o(.rodata);
         data/mail.o(.rodata);
         src/menu_helpers.o(.rodata);
         src/heal_location.o(.rodata);

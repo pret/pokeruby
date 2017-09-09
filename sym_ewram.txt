@@ -589,7 +589,7 @@ gUnknown_020388B4: @ 20388B4
 	.space 0x4
 
 	.include "src/mon_markings.o"
-	.include "src/mauville_old_man.o"
+	.include "src/mauville_man.o"
 	.include "src/menu_helpers.o"
 	.include "src/region_map.o"
 	.include "src/decoration.o"
