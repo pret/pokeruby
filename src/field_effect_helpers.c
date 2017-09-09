@@ -7,6 +7,7 @@
 #include "global.h"
 #include "sprite.h"
 #include "field_map_obj.h"
+#include "field_weather.h"
 #include "metatile_behavior.h"
 #include "field_effect_helpers.h"
 
@@ -18,7 +19,7 @@
 /*static*/ void sub_81269E0(struct Sprite *);
 static void npc_pal_op(struct MapObject *mapObject, struct Sprite *sprite);
 /*static*/ void npc_pal_op_A(struct MapObject *, u8);
-/*static*/ void npc_pal_op_B(struct MapObject *, u8);
+static void npc_pal_op_B(struct MapObject *, u8);
 /*static*/ void sub_81275A0(struct Sprite *);
 /*static*/ void sub_81275C4(struct Sprite *);
 /*static*/ void sub_8127DA0(struct Sprite *);
@@ -119,5 +120,28 @@ static void npc_pal_op(struct MapObject *mapObject, struct Sprite *sprite)
     else
     {
         npc_pal_op_B(mapObject, sprite->oam.paletteNum);
+    }
+}
+
+static void npc_pal_op_B(struct MapObject *mapObject, u8 paletteNum)
+{
+    const struct MapObjectGraphicsInfo *graphicsInfo;
+
+    graphicsInfo = GetFieldObjectGraphicsInfo(mapObject->graphicsId);
+    if (graphicsInfo->paletteTag2 != 0x11ff)
+    {
+        if (graphicsInfo->paletteSlot == 0)
+        {
+            npc_load_two_palettes__no_record(graphicsInfo->paletteTag1, paletteNum);
+        }
+        else if (graphicsInfo->paletteSlot == 10)
+        {
+            npc_load_two_palettes__and_record(graphicsInfo->paletteTag1, paletteNum);
+        }
+        else
+        {
+            pal_patch_for_npc(npc_paltag_by_palslot(paletteNum), paletteNum);
+        }
+        sub_807D78C(paletteNum);
     }
 }

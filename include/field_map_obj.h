@@ -430,5 +430,6 @@ u8 SpawnSpecialFieldObjectParametrized(u8, u8, u8, s16, s16, u8);
 void CameraObjectSetFollowedObjectId(u8);
 u8 sub_805ADDC(u8);
 u8 obj_unfreeze(struct Sprite *, s16, s16, u8);
+u16 npc_paltag_by_palslot(u8);
 
 #endif // GUARD_FIELD_MAP_OBJ_H

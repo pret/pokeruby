@@ -6,52 +6,6 @@
 
 	.text
 
-	thumb_func_start npc_pal_op_B
-npc_pal_op_B: @ 8126954
-	push {r4,lr}
-	lsls r1, 24
-	lsrs r4, r1, 24
-	ldrb r0, [r0, 0x5]
-	bl GetFieldObjectGraphicsInfo
-	adds r2, r0, 0
-	ldrh r1, [r2, 0x4]
-	ldr r0, _08126980 @ =0x000011ff
-	cmp r1, r0
-	beq _081269A8
-	ldrb r0, [r2, 0xC]
-	movs r1, 0xF
-	ands r1, r0
-	cmp r1, 0
-	bne _08126984
-	ldrh r0, [r2, 0x2]
-	adds r1, r4, 0
-	bl npc_load_two_palettes__no_record
-	b _081269A2
-	.align 2, 0
-_08126980: .4byte 0x000011ff
-_08126984:
-	cmp r1, 0xA
-	bne _08126992
-	ldrh r0, [r2, 0x2]
-	adds r1, r4, 0
-	bl npc_load_two_palettes__and_record
-	b _081269A2
-_08126992:
-	adds r0, r4, 0
-	bl npc_paltag_by_palslot
-	lsls r0, 16
-	lsrs r0, 16
-	adds r1, r4, 0
-	bl pal_patch_for_npc
-_081269A2:
-	adds r0, r4, 0
-	bl sub_807D78C
-_081269A8:
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end npc_pal_op_B
-
 	thumb_func_start npc_pal_op_A
 npc_pal_op_A: @ 81269B0
 	push {r4,lr}
