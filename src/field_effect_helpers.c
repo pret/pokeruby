@@ -249,15 +249,15 @@ bool8 FldEff_Shadow(void)
     const struct MapObjectGraphicsInfo *graphicsInfo;
     u8 spriteId;
 
-    mapObjectId = GetFieldObjectIdByLocalIdAndMap(gUnknown_0202FF84[0], gUnknown_0202FF84[1], gUnknown_0202FF84[2]);
+    mapObjectId = GetFieldObjectIdByLocalIdAndMap(gFieldEffectSpawnParams[0], gFieldEffectSpawnParams[1], gFieldEffectSpawnParams[2]);
     graphicsInfo = GetFieldObjectGraphicsInfo(gMapObjects[mapObjectId].graphicsId);
     spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[gUnknown_08401E32[graphicsInfo->shadowSize]], 0, 0, 0x94);
     if (spriteId != MAX_SPRITES)
     {
         gSprites[spriteId].coordOffsetEnabled = TRUE;
-        gSprites[spriteId].data0 = gUnknown_0202FF84[0];
-        gSprites[spriteId].data1 = gUnknown_0202FF84[1];
-        gSprites[spriteId].data2 = gUnknown_0202FF84[2];
+        gSprites[spriteId].data0 = gFieldEffectSpawnParams[0];
+        gSprites[spriteId].data1 = gFieldEffectSpawnParams[1];
+        gSprites[spriteId].data2 = gFieldEffectSpawnParams[2];
         gSprites[spriteId].data3 = (graphicsInfo->height >> 1) - gUnknown_08401E36[graphicsInfo->shadowSize];
     }
     return FALSE;
@@ -294,22 +294,22 @@ bool8 FldEff_TallGrass(void)
     u8 spriteId;
     struct Sprite *sprite;
 
-    x = gUnknown_0202FF84[0];
-    y = gUnknown_0202FF84[1];
+    x = gFieldEffectSpawnParams[0];
+    y = gFieldEffectSpawnParams[1];
     sub_8060470(&x, &y, 8, 8);
     spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[4], x, y, 0);
     if (spriteId != MAX_SPRITES)
     {
         sprite = &gSprites[spriteId];
         sprite->coordOffsetEnabled = TRUE;
-        sprite->oam.priority = gUnknown_0202FF84[3];
-        sprite->data0 = gUnknown_0202FF84[2];
-        sprite->data1 = gUnknown_0202FF84[0];
-        sprite->data2 = gUnknown_0202FF84[1];
-        sprite->data3 = gUnknown_0202FF84[4];
-        sprite->data4 = gUnknown_0202FF84[5];
-        sprite->data5 = gUnknown_0202FF84[6];
-        if (gUnknown_0202FF84[7])
+        sprite->oam.priority = gFieldEffectSpawnParams[3];
+        sprite->data0 = gFieldEffectSpawnParams[2];
+        sprite->data1 = gFieldEffectSpawnParams[0];
+        sprite->data2 = gFieldEffectSpawnParams[1];
+        sprite->data3 = gFieldEffectSpawnParams[4];
+        sprite->data4 = gFieldEffectSpawnParams[5];
+        sprite->data5 = gFieldEffectSpawnParams[6];
+        if (gFieldEffectSpawnParams[7])
         {
             SeekSpriteAnim(sprite, 4);
         }
@@ -357,4 +357,22 @@ void unc_grass_normal(struct Sprite *sprite)
         sub_806487C(sprite, 0);
         sub_812882C(sprite, sprite->data0, metatileBehavior);
     }
+}
+
+bool8 FldEff_JumpTallGrass(void)
+{
+    u8 spriteId;
+    struct Sprite *sprite;
+
+    sub_8060470((s16 *)&gFieldEffectSpawnParams[0], (s16 *)&gFieldEffectSpawnParams[1], 8, 12);
+    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[10], gFieldEffectSpawnParams[0], gFieldEffectSpawnParams[1], 0);
+    if (spriteId != MAX_SPRITES)
+    {
+        sprite = &gSprites[spriteId];
+        sprite->coordOffsetEnabled = TRUE;
+        sprite->oam.priority = gFieldEffectSpawnParams[3];
+        sprite->data0 = gFieldEffectSpawnParams[2];
+        sprite->data1 = 12;
+    }
+    return FALSE;
 }

@@ -994,10 +994,10 @@ static bool8 Phase2_Transition_PokeballsTrail_Func2(struct Task* task)
     rand = Random() & 1;
     for (i = 0; i <= 4; i++, rand ^= 1)
     {
-        gUnknown_0202FF84[0] = arr0[rand];      // x
-        gUnknown_0202FF84[1] = (i * 32) + 16;   // y
-        gUnknown_0202FF84[2] = rand;
-        gUnknown_0202FF84[3] = arr1[i];
+        gFieldEffectSpawnParams[0] = arr0[rand];      // x
+        gFieldEffectSpawnParams[1] = (i * 32) + 16;   // y
+        gFieldEffectSpawnParams[2] = rand;
+        gFieldEffectSpawnParams[3] = arr1[i];
         FieldEffectStart(FLDEFF_POKEBALL);
     }
 
@@ -1017,14 +1017,14 @@ static bool8 Phase2_Transition_PokeballsTrail_Func3(struct Task* task)
 
 bool8 FldEff_Pokeball(void)
 {
-    u8 spriteID = CreateSpriteAtEnd(&sSpriteTemplate_83FD98C, gUnknown_0202FF84[0], gUnknown_0202FF84[1], 0);
+    u8 spriteID = CreateSpriteAtEnd(&sSpriteTemplate_83FD98C, gFieldEffectSpawnParams[0], gFieldEffectSpawnParams[1], 0);
     gSprites[spriteID].oam.priority = 0;
     gSprites[spriteID].oam.affineMode = 1;
-    gSprites[spriteID].data0 = gUnknown_0202FF84[2];
-    gSprites[spriteID].data1 = gUnknown_0202FF84[3];
+    gSprites[spriteID].data0 = gFieldEffectSpawnParams[2];
+    gSprites[spriteID].data1 = gFieldEffectSpawnParams[3];
     gSprites[spriteID].data2 = -1;
     InitSpriteAffineAnim(&gSprites[spriteID]);
-    StartSpriteAffineAnim(&gSprites[spriteID], gUnknown_0202FF84[2]);
+    StartSpriteAffineAnim(&gSprites[spriteID], gFieldEffectSpawnParams[2]);
     return FALSE;
 }
 

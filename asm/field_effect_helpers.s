@@ -6,63 +6,6 @@
 
 	.text
 
-	thumb_func_start FldEff_JumpTallGrass
-FldEff_JumpTallGrass: @ 8126F80
-	push {r4,lr}
-	ldr r4, _08126FE4 @ =gUnknown_0202FF84
-	adds r1, r4, 0x4
-	adds r0, r4, 0
-	movs r2, 0x8
-	movs r3, 0xC
-	bl sub_8060470
-	ldr r0, _08126FE8 @ =gFieldEffectObjectTemplatePointers
-	ldr r0, [r0, 0x28]
-	movs r2, 0
-	ldrsh r1, [r4, r2]
-	movs r3, 0x4
-	ldrsh r2, [r4, r3]
-	movs r3, 0
-	bl CreateSpriteAtEnd
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x40
-	beq _08126FDC
-	lsls r2, r0, 4
-	adds r2, r0
-	lsls r2, 2
-	ldr r0, _08126FEC @ =gSprites
-	adds r2, r0
-	adds r3, r2, 0
-	adds r3, 0x3E
-	ldrb r0, [r3]
-	movs r1, 0x2
-	orrs r0, r1
-	strb r0, [r3]
-	movs r0, 0x3
-	ldrb r1, [r4, 0xC]
-	ands r1, r0
-	lsls r1, 2
-	ldrb r3, [r2, 0x5]
-	movs r0, 0xD
-	negs r0, r0
-	ands r0, r3
-	orrs r0, r1
-	strb r0, [r2, 0x5]
-	ldr r0, [r4, 0x8]
-	strh r0, [r2, 0x2E]
-	movs r0, 0xC
-	strh r0, [r2, 0x30]
-_08126FDC:
-	movs r0, 0
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08126FE4: .4byte gUnknown_0202FF84
-_08126FE8: .4byte gFieldEffectObjectTemplatePointers
-_08126FEC: .4byte gSprites
-	thumb_func_end FldEff_JumpTallGrass
-
 	thumb_func_start sub_8126FF0
 sub_8126FF0: @ 8126FF0
 	push {r4-r7,lr}
@@ -143,7 +86,7 @@ _08127074:
 FldEff_LongGrass: @ 8127080
 	push {r4,r5,lr}
 	sub sp, 0x4
-	ldr r5, _0812711C @ =gUnknown_0202FF84
+	ldr r5, _0812711C @ =gFieldEffectSpawnParams
 	ldrh r1, [r5]
 	mov r0, sp
 	strh r1, [r0]
@@ -216,7 +159,7 @@ _08127110:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0812711C: .4byte gUnknown_0202FF84
+_0812711C: .4byte gFieldEffectSpawnParams
 _08127120: .4byte gFieldEffectObjectTemplatePointers
 _08127124: .4byte gSprites
 	thumb_func_end FldEff_LongGrass
@@ -350,7 +293,7 @@ _0812721C: .4byte gMapObjects
 	thumb_func_start FldEff_JumpLongGrass
 FldEff_JumpLongGrass: @ 8127220
 	push {r4,lr}
-	ldr r4, _08127284 @ =gUnknown_0202FF84
+	ldr r4, _08127284 @ =gFieldEffectSpawnParams
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -399,7 +342,7 @@ _0812727C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08127284: .4byte gUnknown_0202FF84
+_08127284: .4byte gFieldEffectSpawnParams
 _08127288: .4byte gFieldEffectObjectTemplatePointers
 _0812728C: .4byte gSprites
 	thumb_func_end FldEff_JumpLongGrass
@@ -407,7 +350,7 @@ _0812728C: .4byte gSprites
 	thumb_func_start FldEff_ShortGrass
 FldEff_ShortGrass: @ 8127290
 	push {r4-r6,lr}
-	ldr r6, _08127324 @ =gUnknown_0202FF84
+	ldr r6, _08127324 @ =gFieldEffectSpawnParams
 	ldrb r0, [r6]
 	ldrb r1, [r6, 0x4]
 	ldrb r2, [r6, 0x8]
@@ -480,7 +423,7 @@ _0812731C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08127324: .4byte gUnknown_0202FF84
+_08127324: .4byte gFieldEffectSpawnParams
 _08127328: .4byte gMapObjects
 _0812732C: .4byte gFieldEffectObjectTemplatePointers
 _08127330: .4byte gSprites
@@ -614,7 +557,7 @@ _08127424: .4byte gSprites
 	thumb_func_start FldEff_SandFootprints
 FldEff_SandFootprints: @ 8127428
 	push {r4,lr}
-	ldr r4, _08127490 @ =gUnknown_0202FF84
+	ldr r4, _08127490 @ =gFieldEffectSpawnParams
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -663,7 +606,7 @@ _08127486:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08127490: .4byte gUnknown_0202FF84
+_08127490: .4byte gFieldEffectSpawnParams
 _08127494: .4byte gFieldEffectObjectTemplatePointers
 _08127498: .4byte gSprites
 	thumb_func_end FldEff_SandFootprints
@@ -671,7 +614,7 @@ _08127498: .4byte gSprites
 	thumb_func_start FldEff_DeepSandFootprints
 FldEff_DeepSandFootprints: @ 812749C
 	push {r4,r5,lr}
-	ldr r4, _08127504 @ =gUnknown_0202FF84
+	ldr r4, _08127504 @ =gFieldEffectSpawnParams
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -721,7 +664,7 @@ _081274FC:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08127504: .4byte gUnknown_0202FF84
+_08127504: .4byte gFieldEffectSpawnParams
 _08127508: .4byte gFieldEffectObjectTemplatePointers
 _0812750C: .4byte gSprites
 	thumb_func_end FldEff_DeepSandFootprints
@@ -729,7 +672,7 @@ _0812750C: .4byte gSprites
 	thumb_func_start FldEff_BikeTireTracks
 FldEff_BikeTireTracks: @ 8127510
 	push {r4,r5,lr}
-	ldr r4, _08127578 @ =gUnknown_0202FF84
+	ldr r4, _08127578 @ =gFieldEffectSpawnParams
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -779,7 +722,7 @@ _08127570:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08127578: .4byte gUnknown_0202FF84
+_08127578: .4byte gFieldEffectSpawnParams
 _0812757C: .4byte gFieldEffectObjectTemplatePointers
 _08127580: .4byte gSprites
 	thumb_func_end FldEff_BikeTireTracks
@@ -864,7 +807,7 @@ _08127608:
 	thumb_func_start FldEff_Splash
 FldEff_Splash: @ 8127610
 	push {r4-r6,lr}
-	ldr r6, _081276A4 @ =gUnknown_0202FF84
+	ldr r6, _081276A4 @ =gFieldEffectSpawnParams
 	ldrb r0, [r6]
 	ldrb r1, [r6, 0x4]
 	ldrb r2, [r6, 0x8]
@@ -934,7 +877,7 @@ _0812769A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_081276A4: .4byte gUnknown_0202FF84
+_081276A4: .4byte gFieldEffectSpawnParams
 _081276A8: .4byte gMapObjects
 _081276AC: .4byte gFieldEffectObjectTemplatePointers
 _081276B0: .4byte gSprites
@@ -1015,7 +958,7 @@ _0812773C: .4byte gMapObjects
 	thumb_func_start FldEff_JumpSmallSplash
 FldEff_JumpSmallSplash: @ 8127740
 	push {r4,lr}
-	ldr r4, _081277A4 @ =gUnknown_0202FF84
+	ldr r4, _081277A4 @ =gFieldEffectSpawnParams
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -1064,7 +1007,7 @@ _0812779C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_081277A4: .4byte gUnknown_0202FF84
+_081277A4: .4byte gFieldEffectSpawnParams
 _081277A8: .4byte gFieldEffectObjectTemplatePointers
 _081277AC: .4byte gSprites
 	thumb_func_end FldEff_JumpSmallSplash
@@ -1072,7 +1015,7 @@ _081277AC: .4byte gSprites
 	thumb_func_start FldEff_JumpBigSplash
 FldEff_JumpBigSplash: @ 81277B0
 	push {r4,lr}
-	ldr r4, _08127814 @ =gUnknown_0202FF84
+	ldr r4, _08127814 @ =gFieldEffectSpawnParams
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -1121,7 +1064,7 @@ _0812780C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08127814: .4byte gUnknown_0202FF84
+_08127814: .4byte gFieldEffectSpawnParams
 _08127818: .4byte gFieldEffectObjectTemplatePointers
 _0812781C: .4byte gSprites
 	thumb_func_end FldEff_JumpBigSplash
@@ -1129,7 +1072,7 @@ _0812781C: .4byte gSprites
 	thumb_func_start FldEff_FeetInFlowingWater
 FldEff_FeetInFlowingWater: @ 8127820
 	push {r4-r7,lr}
-	ldr r7, _081278C0 @ =gUnknown_0202FF84
+	ldr r7, _081278C0 @ =gFieldEffectSpawnParams
 	ldrb r0, [r7]
 	ldrb r1, [r7, 0x4]
 	ldrb r2, [r7, 0x8]
@@ -1205,7 +1148,7 @@ _081278B6:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_081278C0: .4byte gUnknown_0202FF84
+_081278C0: .4byte gFieldEffectSpawnParams
 _081278C4: .4byte gMapObjects
 _081278C8: .4byte gFieldEffectObjectTemplatePointers
 _081278CC: .4byte gSprites
@@ -1300,7 +1243,7 @@ FldEff_Ripple: @ 8127978
 	push {r4,lr}
 	ldr r0, _081279CC @ =gFieldEffectObjectTemplatePointers
 	ldr r0, [r0, 0x14]
-	ldr r4, _081279D0 @ =gUnknown_0202FF84
+	ldr r4, _081279D0 @ =gFieldEffectSpawnParams
 	movs r2, 0
 	ldrsh r1, [r4, r2]
 	movs r3, 0x4
@@ -1341,14 +1284,14 @@ _081279C4:
 	bx r1
 	.align 2, 0
 _081279CC: .4byte gFieldEffectObjectTemplatePointers
-_081279D0: .4byte gUnknown_0202FF84
+_081279D0: .4byte gFieldEffectSpawnParams
 _081279D4: .4byte gSprites
 	thumb_func_end FldEff_Ripple
 
 	thumb_func_start FldEff_HotSpringsWater
 FldEff_HotSpringsWater: @ 81279D8
 	push {r4-r6,lr}
-	ldr r6, _08127A6C @ =gUnknown_0202FF84
+	ldr r6, _08127A6C @ =gFieldEffectSpawnParams
 	ldrb r0, [r6]
 	ldrb r1, [r6, 0x4]
 	ldrb r2, [r6, 0x8]
@@ -1421,7 +1364,7 @@ _08127A64:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08127A6C: .4byte gUnknown_0202FF84
+_08127A6C: .4byte gFieldEffectSpawnParams
 _08127A70: .4byte gMapObjects
 _08127A74: .4byte gFieldEffectObjectTemplatePointers
 _08127A78: .4byte gSprites
@@ -1509,7 +1452,7 @@ _08127B10: .4byte gSprites
 	thumb_func_start FldEff_Unknown19
 FldEff_Unknown19: @ 8127B14
 	push {r4,lr}
-	ldr r4, _08127B74 @ =gUnknown_0202FF84
+	ldr r4, _08127B74 @ =gFieldEffectSpawnParams
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -1556,7 +1499,7 @@ _08127B6C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08127B74: .4byte gUnknown_0202FF84
+_08127B74: .4byte gFieldEffectSpawnParams
 _08127B78: .4byte gFieldEffectObjectTemplatePointers
 _08127B7C: .4byte gSprites
 	thumb_func_end FldEff_Unknown19
@@ -1564,7 +1507,7 @@ _08127B7C: .4byte gSprites
 	thumb_func_start FldEff_Unknown20
 FldEff_Unknown20: @ 8127B80
 	push {r4,lr}
-	ldr r4, _08127BE0 @ =gUnknown_0202FF84
+	ldr r4, _08127BE0 @ =gFieldEffectSpawnParams
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -1611,7 +1554,7 @@ _08127BD8:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08127BE0: .4byte gUnknown_0202FF84
+_08127BE0: .4byte gFieldEffectSpawnParams
 _08127BE4: .4byte gFieldEffectObjectTemplatePointers
 _08127BE8: .4byte gSprites
 	thumb_func_end FldEff_Unknown20
@@ -1619,7 +1562,7 @@ _08127BE8: .4byte gSprites
 	thumb_func_start FldEff_Unknown21
 FldEff_Unknown21: @ 8127BEC
 	push {r4,lr}
-	ldr r4, _08127C4C @ =gUnknown_0202FF84
+	ldr r4, _08127C4C @ =gFieldEffectSpawnParams
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -1666,7 +1609,7 @@ _08127C44:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08127C4C: .4byte gUnknown_0202FF84
+_08127C4C: .4byte gFieldEffectSpawnParams
 _08127C50: .4byte gFieldEffectObjectTemplatePointers
 _08127C54: .4byte gSprites
 	thumb_func_end FldEff_Unknown21
@@ -1674,7 +1617,7 @@ _08127C54: .4byte gSprites
 	thumb_func_start FldEff_Unknown22
 FldEff_Unknown22: @ 8127C58
 	push {r4,lr}
-	ldr r4, _08127CB8 @ =gUnknown_0202FF84
+	ldr r4, _08127CB8 @ =gFieldEffectSpawnParams
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -1721,7 +1664,7 @@ _08127CB0:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08127CB8: .4byte gUnknown_0202FF84
+_08127CB8: .4byte gFieldEffectSpawnParams
 _08127CBC: .4byte gFieldEffectObjectTemplatePointers
 _08127CC0: .4byte gSprites
 	thumb_func_end FldEff_Unknown22
@@ -1731,7 +1674,7 @@ ash: @ 8127CC4
 	push {r4,lr}
 	lsls r2, 16
 	lsrs r2, 16
-	ldr r4, _08127CF4 @ =gUnknown_0202FF84
+	ldr r4, _08127CF4 @ =gFieldEffectSpawnParams
 	lsls r0, 16
 	asrs r0, 16
 	str r0, [r4]
@@ -1752,14 +1695,14 @@ ash: @ 8127CC4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08127CF4: .4byte gUnknown_0202FF84
+_08127CF4: .4byte gFieldEffectSpawnParams
 	thumb_func_end ash
 
 	thumb_func_start FldEff_Ash
 FldEff_Ash: @ 8127CF8
 	push {r4,r5,lr}
 	sub sp, 0x4
-	ldr r5, _08127D78 @ =gUnknown_0202FF84
+	ldr r5, _08127D78 @ =gFieldEffectSpawnParams
 	ldrh r1, [r5]
 	mov r0, sp
 	strh r1, [r0]
@@ -1821,7 +1764,7 @@ _08127D6E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08127D78: .4byte gUnknown_0202FF84
+_08127D78: .4byte gFieldEffectSpawnParams
 _08127D7C: .4byte gFieldEffectObjectTemplatePointers
 _08127D80: .4byte gSprites
 	thumb_func_end FldEff_Ash
@@ -1944,7 +1887,7 @@ _08127E50:
 	thumb_func_start FldEff_SurfBlob
 FldEff_SurfBlob: @ 8127E58
 	push {r4,r5,lr}
-	ldr r4, _08127EC0 @ =gUnknown_0202FF84
+	ldr r4, _08127EC0 @ =gFieldEffectSpawnParams
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -1994,7 +1937,7 @@ _08127EB2:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08127EC0: .4byte gUnknown_0202FF84
+_08127EC0: .4byte gFieldEffectSpawnParams
 _08127EC4: .4byte gFieldEffectObjectTemplatePointers
 _08127EC8: .4byte gSprites
 _08127ECC: .4byte 0x0000ffff
@@ -2412,7 +2355,7 @@ _081281B0: .4byte gSprites
 	thumb_func_start FldEff_Dust
 FldEff_Dust: @ 81281B4
 	push {r4,lr}
-	ldr r4, _08128218 @ =gUnknown_0202FF84
+	ldr r4, _08128218 @ =gFieldEffectSpawnParams
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -2461,7 +2404,7 @@ _08128210:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08128218: .4byte gUnknown_0202FF84
+_08128218: .4byte gFieldEffectSpawnParams
 _0812821C: .4byte gFieldEffectObjectTemplatePointers
 _08128220: .4byte gSprites
 	thumb_func_end FldEff_Dust
@@ -2469,7 +2412,7 @@ _08128220: .4byte gSprites
 	thumb_func_start FldEff_SandPile
 FldEff_SandPile: @ 8128224
 	push {r4-r7,lr}
-	ldr r7, _081282D0 @ =gUnknown_0202FF84
+	ldr r7, _081282D0 @ =gFieldEffectSpawnParams
 	ldrb r0, [r7]
 	ldrb r1, [r7, 0x4]
 	ldrb r2, [r7, 0x8]
@@ -2552,7 +2495,7 @@ _081282C8:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_081282D0: .4byte gUnknown_0202FF84
+_081282D0: .4byte gFieldEffectSpawnParams
 _081282D4: .4byte gMapObjects
 _081282D8: .4byte gFieldEffectObjectTemplatePointers
 _081282DC: .4byte gSprites
@@ -2666,7 +2609,7 @@ _081283A8: .4byte gMapObjects
 	thumb_func_start FldEff_Bubbles
 FldEff_Bubbles: @ 81283AC
 	push {r4,lr}
-	ldr r4, _08128404 @ =gUnknown_0202FF84
+	ldr r4, _08128404 @ =gFieldEffectSpawnParams
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -2709,7 +2652,7 @@ _081283FC:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08128404: .4byte gUnknown_0202FF84
+_08128404: .4byte gFieldEffectSpawnParams
 _08128408: .4byte gFieldEffectObjectTemplatePointers
 _0812840C: .4byte gSprites
 	thumb_func_end FldEff_Bubbles
@@ -2751,7 +2694,7 @@ _0812844C: .4byte 0x00001004
 	thumb_func_start FldEff_BerryTreeGrowthSparkle
 FldEff_BerryTreeGrowthSparkle: @ 8128450
 	push {r4,lr}
-	ldr r4, _081284B8 @ =gUnknown_0202FF84
+	ldr r4, _081284B8 @ =gFieldEffectSpawnParams
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -2802,7 +2745,7 @@ _081284B0:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_081284B8: .4byte gUnknown_0202FF84
+_081284B8: .4byte gFieldEffectSpawnParams
 _081284BC: .4byte gFieldEffectObjectTemplatePointers
 _081284C0: .4byte gSprites
 	thumb_func_end FldEff_BerryTreeGrowthSparkle
@@ -2853,7 +2796,7 @@ ShowDisguiseFieldEffect: @ 81284F4
 	lsrs r6, r1, 24
 	lsls r2, 24
 	lsrs r7, r2, 24
-	ldr r5, _08128528 @ =gUnknown_0202FF84
+	ldr r5, _08128528 @ =gFieldEffectSpawnParams
 	ldrb r0, [r5]
 	ldrb r1, [r5, 0x4]
 	ldrb r2, [r5, 0x8]
@@ -2867,7 +2810,7 @@ ShowDisguiseFieldEffect: @ 81284F4
 	movs r0, 0x40
 	b _08128598
 	.align 2, 0
-_08128528: .4byte gUnknown_0202FF84
+_08128528: .4byte gFieldEffectSpawnParams
 _0812852C:
 	ldr r1, _081285A4 @ =gFieldEffectObjectTemplatePointers
 	lsls r0, r6, 2
@@ -3121,7 +3064,7 @@ _081286FC:
 	thumb_func_start FldEff_Sparkle
 FldEff_Sparkle: @ 8128700
 	push {r4,lr}
-	ldr r4, _08128768 @ =gUnknown_0202FF84
+	ldr r4, _08128768 @ =gFieldEffectSpawnParams
 	ldr r0, [r4]
 	adds r0, 0x7
 	str r0, [r4]
@@ -3172,7 +3115,7 @@ _08128760:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08128768: .4byte gUnknown_0202FF84
+_08128768: .4byte gFieldEffectSpawnParams
 _0812876C: .4byte gFieldEffectObjectTemplatePointers
 _08128770: .4byte gSprites
 	thumb_func_end FldEff_Sparkle

@@ -201,7 +201,7 @@ s8 sub_8084398(u8 taskId, struct Task *task, struct MapObject *trainerObj)
 {
     u8 direction;
 
-    FieldObjectGetLocalIdAndMap(trainerObj, (u8 *)&gUnknown_0202FF84[0], (u8 *)&gUnknown_0202FF84[1], (u8 *)&gUnknown_0202FF84[2]);
+    FieldObjectGetLocalIdAndMap(trainerObj, (u8 *)&gFieldEffectSpawnParams[0], (u8 *)&gFieldEffectSpawnParams[1], (u8 *)&gFieldEffectSpawnParams[2]);
     FieldEffectStart(0);
 
     direction = GetFaceDirectionAnimId(trainerObj->mapobj_unk_18);
@@ -311,10 +311,10 @@ s8 sub_80845FC(u8 taskId, struct Task *task, struct MapObject *trainerObj)
 {
     if (FieldObjectCheckIfSpecialAnimFinishedOrInactive(trainerObj))
     {
-        gUnknown_0202FF84[0] = trainerObj->coords2.x;
-        gUnknown_0202FF84[1] = trainerObj->coords2.y;
-        gUnknown_0202FF84[2] = gSprites[trainerObj->spriteId].subpriority - 1;
-        gUnknown_0202FF84[3] = 2;
+        gFieldEffectSpawnParams[0] = trainerObj->coords2.x;
+        gFieldEffectSpawnParams[1] = trainerObj->coords2.y;
+        gFieldEffectSpawnParams[2] = gSprites[trainerObj->spriteId].subpriority - 1;
+        gFieldEffectSpawnParams[3] = 2;
         task->data[4] = FieldEffectStart(49);
         task->data[0]++;
     }
@@ -421,9 +421,9 @@ void sub_8084894(struct Sprite *sprite, u16 a2, u8 a3)
     sprite->oam.priority = 1;
     sprite->coordOffsetEnabled = 1;
 
-    sprite->data0 = gUnknown_0202FF84[0];
-    sprite->data1 = gUnknown_0202FF84[1];
-    sprite->data2 = gUnknown_0202FF84[2];
+    sprite->data0 = gFieldEffectSpawnParams[0];
+    sprite->data1 = gFieldEffectSpawnParams[1];
+    sprite->data2 = gFieldEffectSpawnParams[2];
     sprite->data3 = -5;
     sprite->data7 = a2;
 

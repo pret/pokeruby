@@ -294,7 +294,7 @@ void sub_8064990(u8 a1, u8 dir)
 
 u32 oe_exec_and_other_stuff(u8 fieldEffectId, struct MapObject *mapObject)
 {
-    FieldObjectGetLocalIdAndMap(mapObject, (u8 *)&gUnknown_0202FF84[0], (u8 *)&gUnknown_0202FF84[1], (u8 *)&gUnknown_0202FF84[2]);
+    FieldObjectGetLocalIdAndMap(mapObject, (u8 *)&gFieldEffectSpawnParams[0], (u8 *)&gFieldEffectSpawnParams[1], (u8 *)&gFieldEffectSpawnParams[2]);
     return FieldEffectStart(fieldEffectId);
 }
 
@@ -310,9 +310,9 @@ void DoShadowFieldEffect(struct MapObject *mapObject)
 void DoRippleFieldEffect(struct MapObject *mapObject, struct Sprite *sprite)
 {
     const struct MapObjectGraphicsInfo *gfxInfo = GetFieldObjectGraphicsInfo(mapObject->graphicsId);
-    gUnknown_0202FF84[0] = sprite->pos1.x;
-    gUnknown_0202FF84[1] = sprite->pos1.y + (gfxInfo->height >> 1) - 2;
-    gUnknown_0202FF84[2] = 151;
-    gUnknown_0202FF84[3] = 3;
+    gFieldEffectSpawnParams[0] = sprite->pos1.x;
+    gFieldEffectSpawnParams[1] = sprite->pos1.y + (gfxInfo->height >> 1) - 2;
+    gFieldEffectSpawnParams[2] = 151;
+    gFieldEffectSpawnParams[3] = 3;
     FieldEffectStart(5);
 }
