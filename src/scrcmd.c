@@ -1200,7 +1200,7 @@ bool8 ScrCmd_yesnobox(struct ScriptContext *ctx)
 {
     u8 v1 = ScriptReadByte(ctx);
     u8 v2 = ScriptReadByte(ctx);
-    if (yes_no_box(v1, v2) == 1)
+    if (ScriptMenu_YesNo(v1, v2) == 1)
     {
         ScriptContext1_Stop();
         return TRUE;
@@ -1213,11 +1213,11 @@ bool8 ScrCmd_yesnobox(struct ScriptContext *ctx)
 
 bool8 ScrCmd_multichoice(struct ScriptContext *ctx)
 {
-    u8 v1 = ScriptReadByte(ctx);
-    u8 v2 = ScriptReadByte(ctx);
-    u8 v3 = ScriptReadByte(ctx);
-    u8 v4 = ScriptReadByte(ctx);
-    if (sub_80B5054(v1, v2, v3, v4) == 1)
+    u8 left = ScriptReadByte(ctx);
+    u8 top = ScriptReadByte(ctx);
+    u8 multichoiceId = ScriptReadByte(ctx);
+    u8 ignoreBPress = ScriptReadByte(ctx);
+    if (ScriptMenu_Multichoice(left, top, multichoiceId, ignoreBPress) == TRUE)
     {
         ScriptContext1_Stop();
         return TRUE;
@@ -1230,12 +1230,12 @@ bool8 ScrCmd_multichoice(struct ScriptContext *ctx)
 
 bool8 ScrCmd_multichoicedef(struct ScriptContext *ctx)
 {
-    u8 v1 = ScriptReadByte(ctx);
-    u8 v2 = ScriptReadByte(ctx);
-    u8 v3 = ScriptReadByte(ctx);
-    u8 v4 = ScriptReadByte(ctx);
-    u8 v5 = ScriptReadByte(ctx);
-    if (sub_80B50B0(v1, v2, v3, v5, v4) == 1)
+    u8 left = ScriptReadByte(ctx);
+    u8 top = ScriptReadByte(ctx);
+    u8 multichoiceId = ScriptReadByte(ctx);
+    u8 defaultChoice = ScriptReadByte(ctx);
+    u8 ignoreBPress = ScriptReadByte(ctx);
+    if (ScriptMenu_MultichoiceWithDefault(left, top, multichoiceId, ignoreBPress, defaultChoice) == TRUE)
     {
         ScriptContext1_Stop();
         return TRUE;
@@ -1263,7 +1263,7 @@ bool8 ScrCmd_multichoicerow(struct ScriptContext *ctx)
     u8 v3 = ScriptReadByte(ctx);
     u8 v4 = ScriptReadByte(ctx);
     u8 v5 = ScriptReadByte(ctx);
-    if (sub_80B5578(v1, v2, v3, v5, v4) == 1)
+    if (sub_80B5578(v1, v2, v3, v5, v4) == TRUE)
     {
         ScriptContext1_Stop();
         return TRUE;

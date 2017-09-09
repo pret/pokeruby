@@ -1,23 +1,19 @@
 #ifndef GUARD_SCRIPTMENU_H
 #define GUARD_SCRIPTMENU_H
 
-struct MultichoiceListStruct
-{
-    struct MenuAction *list;
-    u8 count;
-};
+struct MenuAction;
 
 extern const u8 *const gUnknown_083CE048[];
 
-bool8 sub_80B5054(u8 left, u8 top, u8 var3, u8 var4);
-bool8 sub_80B50B0(u8 left, u8 top, u8 var3, u8 var4, u8 var5);
+bool8 ScriptMenu_Multichoice(u8 left, u8 top, u8 var3, u8 var4);
+bool8 ScriptMenu_MultichoiceWithDefault(u8 left, u8 top, u8 var3, u8 var4, u8 var5);
 u16 GetStringWidthInTilesForScriptMenu(const u8 *str);
-void DrawMultichoiceMenu(u8, u8, u8, struct MenuAction *list, u8, u8);
-void sub_80B5230(u8, u8, u8, u8, u8, u8);
-void sub_80B52B4(u8);
+void DrawMultichoiceMenu(u8, u8, u8, const struct MenuAction *list, u8, u8);
+void StartScriptMenuTask(u8, u8, u8, u8, u8, u8);
+void Task_HandleMenuInput(u8);
 bool8 Multichoice(u8 var1, u8 var2, u8 var3, u8 var4);
-void sub_80B53B4(u8, u8, u8, struct MenuAction *list, u8);
-bool8 yes_no_box(u8 var1, u8 var2);
+void sub_80B53B4(u8, u8, u8, const struct MenuAction *list, u8);
+bool8 ScriptMenu_YesNo(u8 var1, u8 var2);
 bool8 IsScriptActive(void); // unused
 void task_yes_no_maybe(u8);
 bool8 sub_80B5578(u8 left, u8 top, u8 multichoiceId, u8 a4, u8 columnCount);
