@@ -376,3 +376,22 @@ bool8 FldEff_JumpTallGrass(void)
     }
     return FALSE;
 }
+
+u8 sub_8126FF0(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s16 y)
+{
+    struct Sprite *sprite;
+    u8 i;
+
+    for (i = 0; i < MAX_SPRITES; i ++)
+    {
+        if (gSprites[i].inUse)
+        {
+            sprite = &gSprites[i];
+            if (sprite->callback == unc_grass_normal && (x == sprite->data1 && y == sprite->data2) && (localId == (u8)(sprite->data3 >> 8) && mapNum == (sprite->data3 & 0xFF) && mapGroup == sprite->data4))
+            {
+                return i;
+            }
+        }
+    }
+    return MAX_SPRITES;
+}
