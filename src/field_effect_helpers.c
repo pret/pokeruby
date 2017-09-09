@@ -16,7 +16,7 @@
 // Static RAM declarations
 
 // Static ROM declarations
-/*static*/ void sub_81269E0(struct Sprite *);
+static void sub_81269E0(struct Sprite *);
 static void npc_pal_op(struct MapObject *mapObject, struct Sprite *sprite);
 static void npc_pal_op_A(struct MapObject *, u8);
 static void npc_pal_op_B(struct MapObject *, u8);
@@ -155,5 +155,44 @@ static void npc_pal_op_A(struct MapObject *mapObject, u8 paletteNum)
     {
         pal_patch_for_npc(graphicsInfo->paletteTag2, paletteNum);
         sub_807D78C(paletteNum);
+    }
+}
+
+static void sub_81269E0(struct Sprite *sprite)
+{
+    struct MapObject *mapObject;
+    struct Sprite *oldSprite;
+
+    mapObject = &gMapObjects[sprite->data0];
+    oldSprite = &gSprites[mapObject->spriteId];
+    if (!mapObject->active || !mapObject->mapobj_bit_17 || mapObject->localId != sprite->data1)
+    {
+        sprite->inUse = FALSE;
+    }
+    else
+    {
+        sprite->oam.paletteNum = gUnknown_0830FD14[oldSprite->oam.paletteNum];
+        sprite->oam.shape = oldSprite->oam.shape;
+        sprite->oam.size = oldSprite->oam.size;
+        sprite->oam.matrixNum = oldSprite->oam.matrixNum | 0x10;
+        sprite->oam.tileNum = oldSprite->oam.tileNum;
+        sprite->subspriteTables = oldSprite->subspriteTables;
+        sprite->subspriteTableNum = oldSprite->subspriteTableNum;
+        sprite->invisible = oldSprite->invisible;
+        sprite->pos1.x = oldSprite->pos1.x;
+        sprite->pos1.y = oldSprite->pos1.y + sub_81268D0(mapObject) + sprite->data2;
+        sprite->centerToCornerVecX = oldSprite->centerToCornerVecX;
+        sprite->centerToCornerVecY = oldSprite->centerToCornerVecY;
+        sprite->pos2.x = oldSprite->pos2.x;
+        sprite->pos2.y = -oldSprite->pos2.y;
+        sprite->coordOffsetEnabled = oldSprite->coordOffsetEnabled;
+        if (sprite->data7 == FALSE)
+        {
+            sprite->oam.matrixNum = 0;
+            if (oldSprite->oam.matrixNum & 0x8)
+            {
+                sprite->oam.matrixNum = 1;
+            }
+        }
     }
 }
