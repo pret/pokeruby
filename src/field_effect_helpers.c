@@ -13,6 +13,7 @@
 #include "field_map_obj_helpers.h"
 #include "field_weather.h"
 #include "field_effect.h"
+#include "field_ground_effect.h"
 #include "field_effect_helpers.h"
 
 // Static type declarations
@@ -394,4 +395,34 @@ u8 sub_8126FF0(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s16 y)
         }
     }
     return MAX_SPRITES;
+}
+
+bool8 FldEff_LongGrass(void)
+{
+    s16 x;
+    s16 y;
+    u8 spriteId;
+    struct Sprite *sprite;
+
+    x = gFieldEffectSpawnParams[0];
+    y = gFieldEffectSpawnParams[1];
+    sub_8060470(&x, &y, 8, 8);
+    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[15], x, y, 0);
+    if (spriteId != MAX_SPRITES)
+    {
+        sprite = &gSprites[spriteId];
+        sprite->coordOffsetEnabled = TRUE;
+        sprite->oam.priority = ZCoordToPriority(gFieldEffectSpawnParams[2]);
+        sprite->data0 = gFieldEffectSpawnParams[2];
+        sprite->data1 = gFieldEffectSpawnParams[0];
+        sprite->data2 = gFieldEffectSpawnParams[1];
+        sprite->data3 = gFieldEffectSpawnParams[4];
+        sprite->data4 = gFieldEffectSpawnParams[5];
+        sprite->data5 = gFieldEffectSpawnParams[6];
+        if (gFieldEffectSpawnParams[7])
+        {
+            SeekSpriteAnim(sprite, 6);
+        }
+    }
+    return FALSE;
 }
