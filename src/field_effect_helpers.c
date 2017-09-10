@@ -37,7 +37,7 @@ static void sub_81278D8(struct Sprite *);
 static void sub_8127FD4(struct MapObject *, struct Sprite *);
 static void sub_812800C(struct MapObject *, struct Sprite *);
 static void sub_81280A0(struct MapObject *, struct Sprite *, struct Sprite *);
-/*static*/ void sub_8128174(struct Sprite *);
+static void sub_8128174(struct Sprite *);
 
 // .rodata
 
@@ -1191,4 +1191,19 @@ u8 sub_8128124(u8 oldSpriteId)
     sprite->data0 = oldSpriteId;
     sprite->data1 = 1;
     return spriteId;
+}
+
+static void sub_8128174(struct Sprite *sprite)
+{
+    struct Sprite *oldSprite;
+
+    oldSprite = &gSprites[sprite->data0];
+    if (((sprite->data2++) & 0x03) == 0)
+    {
+        oldSprite->pos2.y += sprite->data1;
+    }
+    if ((sprite->data2 & 0x0F) == 0)
+    {
+        sprite->data1 = -sprite->data1;
+    }
 }
