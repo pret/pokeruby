@@ -2986,24 +2986,21 @@ void UpdateFieldObjectCoordsForCameraUpdate(void)
     s16 deltaX;
     s16 deltaY;
 
-#ifndef NONMATCHING
-    asm(""::"r"(i));  //makes the compiler store i in r3
-#endif
-
     if (gCamera.field_0)
     {
-        for (i = 0, deltaX = gCamera.x, deltaY = gCamera.y; i < 16; i++)
+        deltaX = gCamera.x;
+        deltaY = gCamera.y;
+        for (i = 0; i < 16; i++)
         {
-            struct MapObject *mapObject = &gMapObjects[i];
 
-            if (mapObject->active)
+            if (gMapObjects[i].active)
             {
-                mapObject->coords1.x -= deltaX;
-                mapObject->coords1.y -= deltaY;
-                mapObject->coords2.x -= deltaX;
-                mapObject->coords2.y -= deltaY;
-                mapObject->coords3.x -= deltaX;
-                mapObject->coords3.y -= deltaY;
+                gMapObjects[i].coords1.x -= deltaX;
+                gMapObjects[i].coords1.y -= deltaY;
+                gMapObjects[i].coords2.x -= deltaX;
+                gMapObjects[i].coords2.y -= deltaY;
+                gMapObjects[i].coords3.x -= deltaX;
+                gMapObjects[i].coords3.y -= deltaY;
             }
         }
     }
