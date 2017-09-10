@@ -1207,3 +1207,21 @@ static void sub_8128174(struct Sprite *sprite)
         sprite->data1 = -sprite->data1;
     }
 }
+
+u8 FldEff_Dust(void)
+{
+    u8 spriteId;
+    struct Sprite *sprite;
+
+    sub_8060470((s16 *)&gFieldEffectSpawnParams[0], (s16 *)&gFieldEffectSpawnParams[1], 8, 12);
+    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[9], gFieldEffectSpawnParams[0], gFieldEffectSpawnParams[1], 0);
+    if (spriteId != MAX_SPRITES)
+    {
+        sprite = &gSprites[spriteId];
+        sprite->coordOffsetEnabled = TRUE;
+        sprite->oam.priority = gFieldEffectSpawnParams[3];
+        sprite->data0 = gFieldEffectSpawnParams[2];
+        sprite->data1 = 10;
+    }
+    return 0;
+}

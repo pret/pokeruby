@@ -6,63 +6,6 @@
 
 	.text
 
-	thumb_func_start FldEff_Dust
-FldEff_Dust: @ 81281B4
-	push {r4,lr}
-	ldr r4, _08128218 @ =gFieldEffectSpawnParams
-	adds r1, r4, 0x4
-	adds r0, r4, 0
-	movs r2, 0x8
-	movs r3, 0xC
-	bl sub_8060470
-	ldr r0, _0812821C @ =gFieldEffectObjectTemplatePointers
-	ldr r0, [r0, 0x24]
-	movs r2, 0
-	ldrsh r1, [r4, r2]
-	movs r3, 0x4
-	ldrsh r2, [r4, r3]
-	movs r3, 0
-	bl CreateSpriteAtEnd
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x40
-	beq _08128210
-	lsls r2, r0, 4
-	adds r2, r0
-	lsls r2, 2
-	ldr r0, _08128220 @ =gSprites
-	adds r2, r0
-	adds r3, r2, 0
-	adds r3, 0x3E
-	ldrb r0, [r3]
-	movs r1, 0x2
-	orrs r0, r1
-	strb r0, [r3]
-	movs r0, 0x3
-	ldrb r1, [r4, 0xC]
-	ands r1, r0
-	lsls r1, 2
-	ldrb r3, [r2, 0x5]
-	movs r0, 0xD
-	negs r0, r0
-	ands r0, r3
-	orrs r0, r1
-	strb r0, [r2, 0x5]
-	ldr r0, [r4, 0x8]
-	strh r0, [r2, 0x2E]
-	movs r0, 0xA
-	strh r0, [r2, 0x30]
-_08128210:
-	movs r0, 0
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08128218: .4byte gFieldEffectSpawnParams
-_0812821C: .4byte gFieldEffectObjectTemplatePointers
-_08128220: .4byte gSprites
-	thumb_func_end FldEff_Dust
-
 	thumb_func_start FldEff_SandPile
 FldEff_SandPile: @ 8128224
 	push {r4-r7,lr}
