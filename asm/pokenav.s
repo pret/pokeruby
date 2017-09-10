@@ -22370,7 +22370,7 @@ _080F6C3A:
 	adds r6, r0, r1
 	ldrh r7, [r6]
 	adds r0, r7, 0
-	bl trainer_flag_check
+	bl HasTrainerAlreadyBeenFought
 	lsls r0, 24
 	cmp r0, 0
 	beq _080F6CA0
@@ -22431,7 +22431,7 @@ _080F6CB4:
 	adds r5, r0, r1
 	ldrh r4, [r5]
 	adds r0, r4, 0
-	bl trainer_flag_check
+	bl HasTrainerAlreadyBeenFought
 	lsls r0, 24
 	cmp r0, 0
 	beq _080F6D0E

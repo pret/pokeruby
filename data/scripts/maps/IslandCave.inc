@@ -84,7 +84,7 @@ IslandCave_EventScript_15EF9D:: @ 815EF9D
 	setwildbattle SPECIES_REGICE, 40, ITEM_NONE
 	setflag 936
 	setflag 2145
-	special StartBattle_Regi
+	special ScrSpecial_StartRegiBattle
 	waitstate
 	clearflag 2145
 	release

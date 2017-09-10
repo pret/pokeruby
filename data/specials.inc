@@ -59,14 +59,14 @@ gSpecials::
 	def_special PlayerHasBerries
 	def_special IsEnigmaBerryValid
 	def_special ScrSpecial_GetTrainerBattleMode
-	def_special sub_80826D8
-	def_special sub_8082718
-	def_special sub_8082564
-	def_special sub_80847C8
+	def_special ScrSpecial_ShowTrainerIntroSpeech
+	def_special ScrSpecial_ShowTrainerNonBattlingSpeech
+	def_special ScrSpecial_HasTrainerBeenFought
+	def_special ScrSpecial_EndTrainerApproach
 	def_special PlayTrainerEncounterMusic
 	def_special sub_8082C68
-	def_special sub_8082C9C
-	def_special sub_80826B0
+	def_special ScrSpecial_GetTrainerEyeRematchFlag
+	def_special ScrSpecial_StartTrainerEyeRematch
 	def_special ShowPokemonStorageSystem
 	def_special CheckForAlivePartyMons
 	def_special TurnOffTVScreen
@@ -164,7 +164,7 @@ gSpecials::
 	def_special StartWallClock
 	def_special sub_810D6B8
 	def_special ScrSpecial_ChooseStarter
-	def_special StartBattle_WallyTutorial
+	def_special ScrSpecial_StartWallyTutorialBattle
 	def_special sub_80BF9F8
 	def_special sub_80F9A0C
 	def_special sub_810CA00
@@ -318,9 +318,9 @@ gSpecials::
 	def_special IsPokerusInParty
 	def_special sub_8069D78
 	def_special sub_810F758
-	def_special StartBattle_GroudonKyogre
-	def_special StartBattle_Rayquaza
-	def_special StartBattle_Regi
+	def_special ScrSpecial_StartGroudonKyogreBattle
+	def_special ScrSpecial_StartRayquazaBattle
+	def_special ScrSpecial_StartRegiBattle
 	def_special sub_8082524
 	def_special DoSealedChamberShakingEffect2
 	def_special sub_810F828
@@ -330,7 +330,7 @@ gSpecials::
 	def_special ShowContestEntryMonPic
 	def_special sub_80C5164
 	def_special sub_8134AB4
-	def_special StartBattle_SouthernIsland
+	def_special ScrSpecial_StartSouthernIslandBattle
 	def_special SetRoute119Weather
 	def_special SetRoute123Weather
 	def_special ScriptGetMultiplayerId

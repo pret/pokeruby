@@ -5364,53 +5364,36 @@ u8 sub_805FF20(struct MapObject *mapObject, u8 direction)
 }
 
 bool8 IsCoordOutsideFieldObjectMovementRect(struct MapObject2 *mapObject, s16 x, s16 y);
-bool8 CheckForCollisionBetweenFieldObjects(struct MapObject *mapObject, s16 x, s16 y);
+static bool8 DoesObjectCollideWithObjectAt(struct MapObject *mapObject, s16 x, s16 y);
 bool8 IsMetatileDirectionallyImpassable(struct MapObject *mapObject, s16 x, s16 y, u8 direction);
 
 u8 npc_block_way(struct MapObject *mapObject, s16 x, s16 y, u8 direction)
 {
     if (IsCoordOutsideFieldObjectMovementRect((struct MapObject2 *)mapObject, x, y))
-    {
         return 1;
-    }
-    if (MapGridIsImpassableAt(x, y) || GetMapBorderIdAt(x, y) == -1 || IsMetatileDirectionallyImpassable(mapObject, x, y, direction))
-    {
+    else if (MapGridIsImpassableAt(x, y) || GetMapBorderIdAt(x, y) == -1 || IsMetatileDirectionallyImpassable(mapObject, x, y, direction))
         return 2;
-    } else if (mapObject->mapobj_bit_15 && !CanCameraMoveInDirection(direction))
-    {
+    else if (mapObject->mapobj_bit_15 && !CanCameraMoveInDirection(direction))
         return 2;
-    }
-    if (IsZCoordMismatchAt(mapObject->mapobj_unk_0B_0, x, y))
-    {
+    else if (IsZCoordMismatchAt(mapObject->mapobj_unk_0B_0, x, y))
         return 3;
-    }
-    if (CheckForCollisionBetweenFieldObjects(mapObject, x, y))
-    {
+    else if (DoesObjectCollideWithObjectAt(mapObject, x, y))
         return 4;
-    }
     return 0;
 }
 
 u8 sub_8060024(struct MapObject *mapObject, s16 x, s16 y, u8 direction)
 {
-    u8 flags;
-    flags = 0;
+    u8 flags = 0;
+
     if (IsCoordOutsideFieldObjectMovementRect((struct MapObject2 *)mapObject, x, y))
-    {
         flags |= 1;
-    }
     if (MapGridIsImpassableAt(x, y) || GetMapBorderIdAt(x, y) == -1 || IsMetatileDirectionallyImpassable(mapObject, x, y, direction) || (mapObject->mapobj_bit_15 && !CanCameraMoveInDirection(direction)))
-    {
         flags |= 2;
-    }
     if (IsZCoordMismatchAt(mapObject->mapobj_unk_0B_0, x, y))
-    {
         flags |= 4;
-    }
-    if (CheckForCollisionBetweenFieldObjects(mapObject, x, y))
-    {
+    if (DoesObjectCollideWithObjectAt(mapObject, x, y))
         flags |= 8;
-    }
     return flags;
 }
 
@@ -5418,25 +5401,22 @@ bool8 IsCoordOutsideFieldObjectMovementRect(struct MapObject2 *mapObject, s16 x,
 {
     s16 minv;
     s16 maxv;
+
     if (mapObject->mapobj_unk_19 != 0)
     {
         minv = mapObject->coords1.x - (mapObject->mapobj_unk_19);
         maxv = mapObject->coords1.x + (mapObject->mapobj_unk_19);
         if (minv > x || maxv < x)
-        {
-            return 1;
-        }
+            return TRUE;
     }
     if (mapObject->mapobj_unk_19b != 0)
     {
         minv = mapObject->coords1.y - (mapObject->mapobj_unk_19b);
         maxv = mapObject->coords1.y + (mapObject->mapobj_unk_19b);
         if (minv > y || maxv < y)
-        {
-            return 1;
-        }
+            return TRUE;
     }
-    return 0;
+    return FALSE;
 }
 
 bool8 IsMetatileDirectionallyImpassable(struct MapObject *mapObject, s16 x, s16 y, u8 direction)
@@ -5448,23 +5428,19 @@ bool8 IsMetatileDirectionallyImpassable(struct MapObject *mapObject, s16 x, s16 
     return 0;
 }
 
-bool8 CheckForCollisionBetweenFieldObjects(struct MapObject *mapObject, s16 x, s16 y)
+static bool8 DoesObjectCollideWithObjectAt(struct MapObject *mapObject, s16 x, s16 y)
 {
-    struct MapObject *mapObject2;
     u8 i;
-    for (i=0; i<16; i++)
+
+    for (i = 0; i < 16; i++)
     {
-        mapObject2 = &gMapObjects[i];
+        struct MapObject *mapObject2 = &gMapObjects[i];
+
         if (mapObject2->active && mapObject2 != mapObject)
         {
-            if ((mapObject2->coords2.x != x || mapObject2->coords2.y != y) && (mapObject2->coords3.x != x || mapObject2->coords3.y != y))
-            {
-                continue;
-            }
-            if (AreZCoordsCompatible(mapObject->mapobj_unk_0B_0, mapObject2->mapobj_unk_0B_0))
-            {
-                return 1;
-            }
+            if (((mapObject2->coords2.x == x && mapObject2->coords2.y == y) || (mapObject2->coords3.x == x && mapObject2->coords3.y == y))
+             && AreZCoordsCompatible(mapObject->mapobj_unk_0B_0, mapObject2->mapobj_unk_0B_0))
+                return TRUE;
         }
     }
     return 0;

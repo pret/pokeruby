@@ -1578,7 +1578,7 @@ bool8 ScrCmd_updatecoins(struct ScriptContext *ctx)
 
 bool8 ScrCmd_trainerbattle(struct ScriptContext *ctx)
 {
-    ctx->scriptPtr = TrainerBattleConfigure(ctx->scriptPtr);
+    ctx->scriptPtr = BattleSetup_ConfigureTrainerBattle(ctx->scriptPtr);
     return FALSE;
 }
 
@@ -1603,7 +1603,7 @@ bool8 ScrCmd_endtrainerbattle2(struct ScriptContext *ctx)
 bool8 ScrCmd_checktrainerflag(struct ScriptContext *ctx)
 {
     u16 index = VarGet(ScriptReadHalfword(ctx));
-    ctx->comparisonResult = trainer_flag_check(index);
+    ctx->comparisonResult = HasTrainerAlreadyBeenFought(index);
     return FALSE;
 }
 
@@ -1632,7 +1632,7 @@ bool8 ScrCmd_setwildbattle(struct ScriptContext *ctx)
 
 bool8 ScrCmd_dowildbattle(struct ScriptContext *ctx)
 {
-    StartBattle_ScriptedWild();
+    BattleSetup_StartScriptedWildBattle();
     ScriptContext1_Stop();
     return TRUE;
 }

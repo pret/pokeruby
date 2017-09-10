@@ -181,7 +181,7 @@ extern u8 gHealthboxIDs[];
 extern struct UnknownStruct6 gUnknown_03004DE0;
 //extern u16 gUnknown_03004DE0[][0xA0];  // possibly?
 extern u16 gBattleTypeFlags;
-extern s8 gBattleTerrain;  // I'm not sure if this is supposed to be s8 or u8. Regardless, it must have the same type as the return value of GetBattleTerrain.
+extern s8 gBattleTerrain;  // I'm not sure if this is supposed to be s8 or u8. Regardless, it must have the same type as the return value of BattleSetup_GetTerrain.
 extern u8 gReservedSpritePaletteCount;
 extern u16 gTrainerBattleOpponent;
 extern struct BattleEnigmaBerry gEnigmaBerries[];
@@ -250,7 +250,7 @@ void InitBattle(void)
     gUnknown_03004280 = 0;
     gUnknown_030041B0 = 0;
     gUnknown_030041B8 = 0;
-    gBattleTerrain = GetBattleTerrain();
+    gBattleTerrain = BattleSetup_GetTerrain();
     InitWindowFromConfig(&gUnknown_03004210, &gWindowConfig_81E6C58);
     InitWindowFromConfig(&gUnknown_030041D0, &gWindowConfig_81E71D0);
     InitWindowFromConfig(&gUnknown_03004250, &gWindowConfig_81E71EC);

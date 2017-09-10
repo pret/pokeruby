@@ -62,7 +62,7 @@ CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 	pause 40
 	waitpokecry
 	setflag 2145
-	special StartBattle_GroudonKyogre
+	special ScrSpecial_StartGroudonKyogreBattle
 	waitstate
 	clearflag 2145
 	specialval RESULT, sub_810E300
