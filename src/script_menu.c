@@ -880,7 +880,7 @@ static void Task_HandleMultichoiceGridInput(u8 taskId)
 #undef tIgnoreBPress
 #undef tDoWrap
 
-bool8 ScriptMenu_TryCreatePCMenu(void)
+bool8 ScrSpecial_CreatePCMenu(void)
 {
     if (FuncIsActiveTask(Task_HandleMultichoiceInput) == TRUE)
     {

@@ -30,7 +30,7 @@ static void ReshowPCMenuAfterHallOfFamePC(void)
     ScriptContext2_Enable();
     sub_8053E90();
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
-    ScriptMenu_TryCreatePCMenu();
+    ScrSpecial_CreatePCMenu();
     ScriptMenu_DisplayPCStartupPrompt();
     CreateTask(Task_WaitForPaletteFade, 10);
 }

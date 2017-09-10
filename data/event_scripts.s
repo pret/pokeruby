@@ -1688,7 +1688,7 @@ gUnknown_081A0009:: @ 81A0009
 EventScript_1A0023:
 	message gPCText_WhichPCShouldBeAccessed
 	waittext
-	special ScriptMenu_TryCreatePCMenu
+	special ScrSpecial_CreatePCMenu
 	waitstate
 	jump EventScript_1A0033
 	end
