@@ -1470,3 +1470,16 @@ void sub_8128774(struct Sprite *sprite)
         FieldEffectStop(sprite, FLDEFF_SPARKLE);
     }
 }
+
+void sub_81287C4(struct Sprite *sprite)
+{
+    if (sprite->animEnded)
+    {
+        FieldEffectStop(sprite, sprite->data1);
+    }
+    else
+    {
+        sub_806487C(sprite, FALSE);
+        SetObjectSubpriorityByZCoord(sprite->data0, sprite, 0);
+    }
+}
