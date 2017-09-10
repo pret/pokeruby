@@ -1,9 +1,3 @@
-//
-// Created by scott on 9/9/2017.
-//
-
-
-// Includes
 #include "global.h"
 #include "sprite.h"
 #include "fieldmap.h"
@@ -18,11 +12,6 @@
 #include "field_ground_effect.h"
 #include "field_effect_helpers.h"
 
-// Static type declarations
-
-// Static RAM declarations
-
-// Static ROM declarations
 static void sub_81269E0(struct Sprite *);
 static void npc_pal_op(struct MapObject *mapObject, struct Sprite *sprite);
 static void npc_pal_op_A(struct MapObject *, u8);
@@ -39,8 +28,6 @@ static void sub_812800C(struct MapObject *, struct Sprite *);
 static void sub_81280A0(struct MapObject *, struct Sprite *, struct Sprite *);
 static void sub_8128174(struct Sprite *);
 static u32 ShowDisguiseFieldEffect(u8, u8, u8);
-
-// .rodata
 
 const u8 UnusedEggString_8401E28[] = _("タマゴ");
 
@@ -88,8 +75,6 @@ const u16 gUnknown_08401E5A[] = {
     7
 };
 
-// .text
-
 void SetUpReflection(struct MapObject *mapObject, struct Sprite *sprite, bool8 flag)
 {
     struct Sprite *newSprite;
@@ -114,7 +99,7 @@ void SetUpReflection(struct MapObject *mapObject, struct Sprite *sprite, bool8 f
     }
 }
 
-s16 sub_81268D0(struct MapObject *mapObject)
+static s16 sub_81268D0(struct MapObject *mapObject)
 {
     return GetFieldObjectGraphicsInfo(mapObject->graphicsId)->height - 2;
 }
@@ -1003,7 +988,7 @@ void sub_8127F28(u8 spriteId, u8 value, s16 data1)
     gSprites[spriteId].data1 = data1;
 }
 
-/*static*/ u8 sub_8127F5C(struct Sprite *sprite)
+static u8 sub_8127F5C(struct Sprite *sprite)
 {
     return sprite->data0 & 0xF;
 }
@@ -1013,7 +998,7 @@ static u8 sub_8127F64(struct Sprite *sprite)
     return (sprite->data0 & 0xF0) >> 4;
 }
 
-/*static*/ u8 sub_8127F70(struct Sprite *sprite)
+static u8 sub_8127F70(struct Sprite *sprite)
 {
     return (sprite->data0 & 0xF00) >> 8;
 }
