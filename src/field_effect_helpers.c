@@ -1450,3 +1450,23 @@ u32 FldEff_Sparkle(void)
     }
     return 0;
 }
+
+void sub_8128774(struct Sprite *sprite)
+{
+    if (sprite->data0 == 0)
+    {
+        if (sprite->animEnded)
+        {
+            sprite->invisible = TRUE;
+            sprite->data0 ++;
+        }
+        if (sprite->data0 == 0)
+        {
+            return;
+        }
+    }
+    if (++ sprite->data1 >= 35)
+    {
+        FieldEffectStop(sprite, FLDEFF_SPARKLE);
+    }
+}
