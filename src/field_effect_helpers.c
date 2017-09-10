@@ -666,3 +666,21 @@ void sub_81276B4(struct Sprite *sprite)
         sub_806487C(sprite, FALSE);
     }
 }
+
+u8 FldEff_JumpSmallSplash(void)
+{
+    u8 spriteId;
+    struct Sprite *sprite;
+
+    sub_8060470((s16 *)&gFieldEffectSpawnParams[0], (s16 *)&gFieldEffectSpawnParams[1], 8, 12);
+    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[14], gFieldEffectSpawnParams[0], gFieldEffectSpawnParams[1], 0);
+    if (spriteId != MAX_SPRITES)
+    {
+        sprite = &gSprites[spriteId];
+        sprite->coordOffsetEnabled = TRUE;
+        sprite->oam.priority = gFieldEffectSpawnParams[3];
+        sprite->data0 = gFieldEffectSpawnParams[2];
+        sprite->data1 = FLDEFF_JUMP_SMALL_SPLASH;
+    }
+    return 0;
+}

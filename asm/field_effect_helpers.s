@@ -6,63 +6,6 @@
 
 	.text
 
-	thumb_func_start FldEff_JumpSmallSplash
-FldEff_JumpSmallSplash: @ 8127740
-	push {r4,lr}
-	ldr r4, _081277A4 @ =gFieldEffectSpawnParams
-	adds r1, r4, 0x4
-	adds r0, r4, 0
-	movs r2, 0x8
-	movs r3, 0xC
-	bl sub_8060470
-	ldr r0, _081277A8 @ =gFieldEffectObjectTemplatePointers
-	ldr r0, [r0, 0x38]
-	movs r2, 0
-	ldrsh r1, [r4, r2]
-	movs r3, 0x4
-	ldrsh r2, [r4, r3]
-	movs r3, 0
-	bl CreateSpriteAtEnd
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x40
-	beq _0812779C
-	lsls r2, r0, 4
-	adds r2, r0
-	lsls r2, 2
-	ldr r0, _081277AC @ =gSprites
-	adds r2, r0
-	adds r3, r2, 0
-	adds r3, 0x3E
-	ldrb r0, [r3]
-	movs r1, 0x2
-	orrs r0, r1
-	strb r0, [r3]
-	movs r0, 0x3
-	ldrb r1, [r4, 0xC]
-	ands r1, r0
-	lsls r1, 2
-	ldrb r3, [r2, 0x5]
-	movs r0, 0xD
-	negs r0, r0
-	ands r0, r3
-	orrs r0, r1
-	strb r0, [r2, 0x5]
-	ldr r0, [r4, 0x8]
-	strh r0, [r2, 0x2E]
-	movs r0, 0x10
-	strh r0, [r2, 0x30]
-_0812779C:
-	movs r0, 0
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_081277A4: .4byte gFieldEffectSpawnParams
-_081277A8: .4byte gFieldEffectObjectTemplatePointers
-_081277AC: .4byte gSprites
-	thumb_func_end FldEff_JumpSmallSplash
-
 	thumb_func_start FldEff_JumpBigSplash
 FldEff_JumpBigSplash: @ 81277B0
 	push {r4,lr}
