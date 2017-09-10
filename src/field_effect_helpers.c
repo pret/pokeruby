@@ -29,9 +29,9 @@ static void npc_pal_op_A(struct MapObject *, u8);
 static void npc_pal_op_B(struct MapObject *, u8);
 static void sub_81275A0(struct Sprite *);
 static void sub_81275C4(struct Sprite *);
-/*static*/ void sub_8127DA0(struct Sprite *);
-/*static*/ void sub_8127DD0(struct Sprite *);
-/*static*/ void sub_8127E30(struct Sprite *);
+static void sub_8127DA0(struct Sprite *);
+static void sub_8127DD0(struct Sprite *);
+static void sub_8127E30(struct Sprite *);
 /*static*/ void sub_812882C(struct Sprite *, u8, u8);
 static void sub_81278D8(struct Sprite *);
 
@@ -925,4 +925,38 @@ u8 FldEff_Ash(void)
         sprite->data4 = gFieldEffectSpawnParams[5];
     }
     return 0;
+}
+
+void sub_8127D84(struct Sprite *sprite)
+{
+    gUnknown_08401E48[sprite->data0](sprite);
+}
+
+static void sub_8127DA0(struct Sprite *sprite)
+{
+    sprite->invisible = TRUE;
+    sprite->animPaused = TRUE;
+    if (--sprite->data4 == 0)
+    {
+        sprite->data0 = 1;
+    }
+}
+
+static void sub_8127DD0(struct Sprite *sprite)
+{
+    sprite->invisible = FALSE;
+    sprite->animPaused = FALSE;
+    MapGridSetMetatileIdAt(sprite->data1, sprite->data2, sprite->data3);
+    CurrentMapDrawMetatileAt(sprite->data1, sprite->data2);
+    gMapObjects[gPlayerAvatar.mapObjectId].mapobj_bit_2 = TRUE;
+    sprite->data0 = 2;
+}
+
+static void sub_8127E30(struct Sprite *sprite)
+{
+    sub_806487C(sprite, FALSE);
+    if (sprite->animEnded)
+    {
+        FieldEffectStop(sprite, FLDEFF_ASH);
+    }
 }
