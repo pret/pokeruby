@@ -802,3 +802,24 @@ u8 FldEff_HotSpringsWater(void)
     }
     return 0;
 }
+
+void sub_8127A7C(struct Sprite *sprite)
+{
+    u8 mapObjectId;
+    const struct MapObjectGraphicsInfo *graphicsInfo;
+    struct Sprite *linkedSprite;
+
+    if (TryGetFieldObjectIdByLocalIdAndMap(sprite->data0, sprite->data1, sprite->data2, &mapObjectId) || !gMapObjects[mapObjectId].mapobj_bit_21)
+    {
+        FieldEffectStop(sprite, FLDEFF_HOT_SPRINGS_WATER);
+    }
+    else
+    {
+        graphicsInfo = GetFieldObjectGraphicsInfo(gMapObjects[mapObjectId].graphicsId);
+        linkedSprite = &gSprites[gMapObjects[mapObjectId].spriteId];
+        sprite->pos1.x = linkedSprite->pos1.x;
+        sprite->pos1.y = (graphicsInfo->height >> 1) + linkedSprite->pos1.y - 8;
+        sprite->subpriority = linkedSprite->subpriority - 1;
+        sub_806487C(sprite, FALSE);
+    }
+}
