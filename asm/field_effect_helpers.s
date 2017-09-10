@@ -6,56 +6,6 @@
 
 	.text
 
-	thumb_func_start FldEff_Ripple
-FldEff_Ripple: @ 8127978
-	push {r4,lr}
-	ldr r0, _081279CC @ =gFieldEffectObjectTemplatePointers
-	ldr r0, [r0, 0x14]
-	ldr r4, _081279D0 @ =gFieldEffectSpawnParams
-	movs r2, 0
-	ldrsh r1, [r4, r2]
-	movs r3, 0x4
-	ldrsh r2, [r4, r3]
-	ldrb r3, [r4, 0x8]
-	bl CreateSpriteAtEnd
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x40
-	beq _081279C4
-	lsls r2, r0, 4
-	adds r2, r0
-	lsls r2, 2
-	ldr r0, _081279D4 @ =gSprites
-	adds r2, r0
-	adds r3, r2, 0
-	adds r3, 0x3E
-	ldrb r0, [r3]
-	movs r1, 0x2
-	orrs r0, r1
-	strb r0, [r3]
-	movs r0, 0x3
-	ldrb r1, [r4, 0xC]
-	ands r1, r0
-	lsls r1, 2
-	ldrb r3, [r2, 0x5]
-	movs r0, 0xD
-	negs r0, r0
-	ands r0, r3
-	orrs r0, r1
-	strb r0, [r2, 0x5]
-	movs r0, 0x5
-	strh r0, [r2, 0x2E]
-_081279C4:
-	movs r0, 0
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_081279CC: .4byte gFieldEffectObjectTemplatePointers
-_081279D0: .4byte gFieldEffectSpawnParams
-_081279D4: .4byte gSprites
-	thumb_func_end FldEff_Ripple
-
 	thumb_func_start FldEff_HotSpringsWater
 FldEff_HotSpringsWater: @ 81279D8
 	push {r4-r6,lr}

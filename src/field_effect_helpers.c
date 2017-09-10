@@ -762,3 +762,19 @@ static void sub_81278D8(struct Sprite *sprite)
         }
     }
 }
+
+u8 FldEff_Ripple(void)
+{
+    u8 spriteId;
+    struct Sprite *sprite;
+
+    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[5], gFieldEffectSpawnParams[0], gFieldEffectSpawnParams[1], gFieldEffectSpawnParams[2]);
+    if (spriteId != MAX_SPRITES)
+    {
+        sprite = &gSprites[spriteId];
+        sprite->coordOffsetEnabled = TRUE;
+        sprite->oam.priority = gFieldEffectSpawnParams[3];
+        sprite->data0 = FLDEFF_RIPPLE;
+    }
+    return 0;
+}
