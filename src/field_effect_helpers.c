@@ -36,7 +36,8 @@ static void sub_8127E30(struct Sprite *);
 static void sub_81278D8(struct Sprite *);
 static void sub_8127FD4(struct MapObject *, struct Sprite *);
 static void sub_812800C(struct MapObject *, struct Sprite *);
-/*static*/ void sub_81280A0(struct MapObject *, struct Sprite *, struct Sprite *);
+static void sub_81280A0(struct MapObject *, struct Sprite *, struct Sprite *);
+/*static*/ void sub_8128174(struct Sprite *);
 
 // .rodata
 
@@ -1145,7 +1146,7 @@ __attribute__((naked)) static void sub_812800C(struct MapObject *mapObject, stru
 }
 #endif
 
-void sub_81280A0(struct MapObject *mapObject, struct Sprite *linkedSprite, struct Sprite *sprite)
+static void sub_81280A0(struct MapObject *mapObject, struct Sprite *linkedSprite, struct Sprite *sprite)
 {
     u16 unk_8401E5A[ARRAY_COUNT(gUnknown_08401E5A)];
     u8 v0;
@@ -1176,4 +1177,18 @@ void sub_81280A0(struct MapObject *mapObject, struct Sprite *linkedSprite, struc
             sprite->pos1.y = linkedSprite->pos1.y + 8;
         }
     }
+}
+
+u8 sub_8128124(u8 oldSpriteId)
+{
+    u8 spriteId;
+    struct Sprite *sprite;
+
+    spriteId = CreateSpriteAtEnd(&gDummySpriteTemplate, 0, 0, -1);
+    sprite = &gSprites[spriteId];
+    sprite->callback = sub_8128174;
+    sprite->invisible = TRUE;
+    sprite->data0 = oldSpriteId;
+    sprite->data1 = 1;
+    return spriteId;
 }

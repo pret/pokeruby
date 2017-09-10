@@ -6,46 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_8128124
-sub_8128124: @ 8128124
-	push {r4,lr}
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	ldr r0, _08128168 @ =gDummySpriteTemplate
-	movs r1, 0
-	movs r2, 0
-	movs r3, 0xFF
-	bl CreateSpriteAtEnd
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r2, r0, 4
-	adds r2, r0
-	lsls r2, 2
-	ldr r1, _0812816C @ =gSprites
-	adds r2, r1
-	ldr r1, _08128170 @ =sub_8128174
-	str r1, [r2, 0x1C]
-	movs r1, 0x3E
-	adds r1, r2
-	mov r12, r1
-	ldrb r1, [r1]
-	movs r3, 0x4
-	orrs r1, r3
-	mov r3, r12
-	strb r1, [r3]
-	strh r4, [r2, 0x2E]
-	movs r1, 0x1
-	strh r1, [r2, 0x30]
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08128168: .4byte gDummySpriteTemplate
-_0812816C: .4byte gSprites
-_08128170: .4byte sub_8128174
-	thumb_func_end sub_8128124
-
 	thumb_func_start sub_8128174
 sub_8128174: @ 8128174
 	push {lr}
