@@ -960,3 +960,24 @@ static void sub_8127E30(struct Sprite *sprite)
         FieldEffectStop(sprite, FLDEFF_ASH);
     }
 }
+
+u8 FldEff_SurfBlob(void)
+{
+    u8 spriteId;
+    struct Sprite *sprite;
+
+    sub_8060470((s16 *)&gFieldEffectSpawnParams[0], (s16 *)&gFieldEffectSpawnParams[1], 8, 8);
+    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[7], gFieldEffectSpawnParams[0], gFieldEffectSpawnParams[1], 0x96);
+    if (spriteId !=MAX_SPRITES)
+    {
+        sprite = &gSprites[spriteId];
+        sprite->coordOffsetEnabled = TRUE;
+        sprite->oam.paletteNum = 0;
+        sprite->data2 = gFieldEffectSpawnParams[2];
+        sprite->data3 = -1;
+        sprite->data6 = -1;
+        sprite->data7 = -1;
+    }
+    FieldEffectActiveListRemove(FLDEFF_SURF_BLOB);
+    return spriteId;
+}
