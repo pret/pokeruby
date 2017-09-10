@@ -33,6 +33,7 @@ static void sub_81275C4(struct Sprite *);
 /*static*/ void sub_8127DD0(struct Sprite *);
 /*static*/ void sub_8127E30(struct Sprite *);
 /*static*/ void sub_812882C(struct Sprite *, u8, u8);
+/*static*/ void sub_81278D8(struct Sprite *);
 
 // .rodata
 
@@ -699,6 +700,35 @@ u8 FldEff_JumpBigSplash(void)
         sprite->oam.priority = gFieldEffectSpawnParams[3];
         sprite->data0 = gFieldEffectSpawnParams[2];
         sprite->data1 = FLDEFF_JUMP_BIG_SPLASH;
+    }
+    return 0;
+}
+
+u8 FldEff_FeetInFlowingWater(void)
+{
+    u8 mapObjectId;
+    struct MapObject *mapObject;
+    u8 spriteId;
+    struct Sprite *sprite;
+    const struct MapObjectGraphicsInfo *graphicsInfo;
+
+    mapObjectId = GetFieldObjectIdByLocalIdAndMap(gFieldEffectSpawnParams[0], gFieldEffectSpawnParams[1], gFieldEffectSpawnParams[2]);
+    mapObject = &gMapObjects[mapObjectId];
+    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[13], 0, 0, 0);
+    if (spriteId != MAX_SPRITES)
+    {
+        graphicsInfo = GetFieldObjectGraphicsInfo(mapObject->graphicsId);
+        sprite = &gSprites[spriteId];
+        sprite->callback = sub_81278D8;
+        sprite->coordOffsetEnabled = TRUE;
+        sprite->oam.priority = gSprites[mapObject->spriteId].oam.priority;
+        sprite->data0 = gFieldEffectSpawnParams[0];
+        sprite->data1 = gFieldEffectSpawnParams[1];
+        sprite->data2 = gFieldEffectSpawnParams[2];
+        sprite->data3 = -1;
+        sprite->data4 = -1;
+        sprite->pos2.y = (graphicsInfo->height >> 1) - 4;
+        StartSpriteAnim(sprite, 1);
     }
     return 0;
 }
