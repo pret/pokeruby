@@ -786,7 +786,7 @@ static void sub_808ABA8(u8 taskID)
 {
     if (sub_807D770() == TRUE)
     {
-        gUnknown_0202FF84[0] = GetMonData(&gPlayerParty[gLastFieldPokeMenuOpened], MON_DATA_SPECIES);
+        gFieldEffectArguments[0] = GetMonData(&gPlayerParty[gLastFieldPokeMenuOpened], MON_DATA_SPECIES);
         gUnknown_03005CE4();
         DestroyTask(taskID);
     }
@@ -803,7 +803,7 @@ static void sub_808ABF4(u8 taskID)
 
 static void sub_808AC2C(void)
 {
-    gUnknown_0202FF84[0] = gLastFieldPokeMenuOpened;
+    gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
     FieldEffectStart(FLDEFF_USE_SURF);
 }
 
@@ -821,7 +821,7 @@ static bool8 SetUpFieldMove_Surf(void)
 
 static void sub_808AC8C(void)
 {
-    gUnknown_0202FF84[0] = gLastFieldPokeMenuOpened;
+    gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
     FieldEffectStart(FLDEFF_USE_FLY);
 }
 
@@ -872,14 +872,14 @@ u16 unref_sub_808AD88(void)
 
 static void sub_808ADAC(void)
 {
-    gUnknown_0202FF84[0] = gLastFieldPokeMenuOpened;
+    gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
     FieldEffectStart(FLDEFF_USE_DIVE);
 }
 
 static bool8 SetUpFieldMove_Dive(void)
 {
-    gUnknown_0202FF84[1] = sub_8068F18();
-    if (gUnknown_0202FF84[1])
+    gFieldEffectArguments[1] = sub_8068F18();
+    if (gFieldEffectArguments[1])
     {
         gFieldCallback = sub_808AB90;
         gUnknown_03005CE4 = sub_808ADAC;
@@ -891,7 +891,7 @@ static bool8 SetUpFieldMove_Dive(void)
 
 static void sub_808AE08(void)
 {
-    gUnknown_0202FF84[0] = gLastFieldPokeMenuOpened;
+    gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
     FieldEffectStart(FLDEFF_USE_WATERFALL);
 }
 

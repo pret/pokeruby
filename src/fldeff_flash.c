@@ -62,7 +62,7 @@ bool8 SetUpFieldMove_Flash(void)
 void sub_810CBFC(void)
 {
     u8 taskId = oei_task_add();
-    gUnknown_0202FF84[0] = gLastFieldPokeMenuOpened;
+    gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
     gTasks[taskId].data[8] = (uintptr_t)sub_810CC34 >> 16;
     gTasks[taskId].data[9] = (uintptr_t)sub_810CC34;
 }

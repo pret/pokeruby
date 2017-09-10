@@ -1046,7 +1046,7 @@ void c1_overworld(void)
         c1_overworld_normal(gMain.newKeys, gMain.heldKeys);
 }
 
-void c2_overworld_basic(void)
+void OverworldBasic(void)
 {
     ScriptContext2_RunScript();
     RunTasks();
@@ -1058,9 +1058,9 @@ void c2_overworld_basic(void)
     sub_8072EDC();
 }
 
-void sub_8054398(void)
+void CB2_OverworldBasic(void)
 {
-    c2_overworld_basic();
+    OverworldBasic();
 }
 
 void c2_overworld(void)
@@ -1068,7 +1068,7 @@ void c2_overworld(void)
     int fading = (gPaletteFade.active != 0);
     if (fading)
         SetVBlankCallback(NULL);
-    c2_overworld_basic();
+    OverworldBasic();
     if (fading)
         SetFieldVBlankCallback();
 }

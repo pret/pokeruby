@@ -119,8 +119,8 @@ u8 sav1_map_get_name();
 bool32 is_c1_link_related_active(void);
 // c1_overworld_normal
 // c1_overworld
-// c2_overworld_basic
-void sub_8054398(void);
+// OverworldBasic
+void CB2_OverworldBasic(void);
 void c2_overworld(void);
 // set_callback1
 // sub_80543DC

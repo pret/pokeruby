@@ -42,13 +42,13 @@ bool8 SetUpFieldMove_Strength(void)
 
 static void sub_811AA18(void)
 {
-    gUnknown_0202FF84[0] = gLastFieldPokeMenuOpened;
+    gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
     ScriptContext1_SetupScript(UseStrengthScript);
 }
 
 static void sub_811AA38(void)
 {
-    gUnknown_0202FF84[0] = gLastFieldPokeMenuOpened;
+    gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
     FieldEffectStart(40);
 }
 
@@ -58,7 +58,7 @@ bool8 FldEff_UseStrength(void)
 
     gTasks[taskId].data[8] = (u32)sub_811AA9C >> 16;
     gTasks[taskId].data[9] = (u32)sub_811AA9C;
-    GetMonNickname(&gPlayerParty[gUnknown_0202FF84[0]], gStringVar1);
+    GetMonNickname(&gPlayerParty[gFieldEffectArguments[0]], gStringVar1);
     return FALSE;
 }
 

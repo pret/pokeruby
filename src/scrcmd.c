@@ -50,11 +50,11 @@ typedef void (*NativeFunc)(void);
 extern u32 gUnknown_0202E8AC;
 
 static EWRAM_DATA u32 gUnknown_0202E8B0 = 0;
-static EWRAM_DATA u16 gUnknown_0202E8B4 = 0;
-static EWRAM_DATA u16 gUnknown_0202E8B6 = 0;
-static EWRAM_DATA u16 gUnknown_0202E8B8 = 0;
-static EWRAM_DATA u16 gUnknown_0202E8BA = 0;
-static EWRAM_DATA u16 gUnknown_0202E8BC = 0;
+static EWRAM_DATA u16 sPauseCounter = 0;
+static EWRAM_DATA u16 sMovingNpcId = 0;
+static EWRAM_DATA u16 sMovingNpcMapBank = 0;
+static EWRAM_DATA u16 sMovingNpcMapId = 0;
+static EWRAM_DATA u16 sFieldEffectScriptId = 0;
 
 extern u16 gSpecialVar_0x8000;
 extern u16 gSpecialVar_0x8001;
@@ -598,9 +598,9 @@ bool8 ScrCmd_fadescreendelay(struct ScriptContext *ctx)
 
 bool8 s28_pause_asm()
 {
-    gUnknown_0202E8B4--;
+    sPauseCounter--;
 
-    if (gUnknown_0202E8B4 == 0)
+    if (sPauseCounter == 0)
         return TRUE;
     else
         return FALSE;
@@ -608,7 +608,7 @@ bool8 s28_pause_asm()
 
 bool8 ScrCmd_pause(struct ScriptContext *ctx)
 {
-    gUnknown_0202E8B4 = ScriptReadHalfword(ctx);
+    sPauseCounter = ScriptReadHalfword(ctx);
     SetupNativeScript(ctx, s28_pause_asm);
     return TRUE;
 }
@@ -900,7 +900,7 @@ bool8 ScrCmd_move(struct ScriptContext *ctx)
     u16 v1 = VarGet(ScriptReadHalfword(ctx));
     void *v2 = (void *)ScriptReadWord(ctx);
     exec_movement(v1, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, v2);
-    gUnknown_0202E8B6 = v1;
+    sMovingNpcId = v1;
     return FALSE;
 }
 
@@ -911,22 +911,22 @@ bool8 ScrCmd_movecoords(struct ScriptContext *ctx)
     u8 v3 = ScriptReadByte(ctx);
     u8 v4 = ScriptReadByte(ctx);
     exec_movement(v1, v4, v3, v2);
-    gUnknown_0202E8B6 = v1;
+    sMovingNpcId = v1;
     return FALSE;
 }
 
 bool8 s51a_0806B288(void)
 {
-    return sub_80A212C(gUnknown_0202E8B6, gUnknown_0202E8BA, gUnknown_0202E8B8);
+    return sub_80A212C(sMovingNpcId, sMovingNpcMapId, sMovingNpcMapBank);
 }
 
 bool8 ScrCmd_waitmove(struct ScriptContext *ctx)
 {
     u16 v1 = VarGet(ScriptReadHalfword(ctx));
     if (v1)
-        gUnknown_0202E8B6 = v1;
-    gUnknown_0202E8B8 = gSaveBlock1.location.mapGroup;
-    gUnknown_0202E8BA = gSaveBlock1.location.mapNum;
+        sMovingNpcId = v1;
+    sMovingNpcMapBank = gSaveBlock1.location.mapGroup;
+    sMovingNpcMapId = gSaveBlock1.location.mapNum;
     SetupNativeScript(ctx, s51a_0806B288);
     return TRUE;
 }
@@ -934,16 +934,15 @@ bool8 ScrCmd_waitmove(struct ScriptContext *ctx)
 bool8 ScrCmd_waitmovexy(struct ScriptContext *ctx)
 {
     u16 v1 = VarGet(ScriptReadHalfword(ctx));
-    u8 v2;
-    u8 v3;
+    u8 mapBank;
+    u8 mapId;
 
-    if (v1)
-        gUnknown_0202E8B6 = v1;
-
-    v2 = ScriptReadByte(ctx);
-    v3 = ScriptReadByte(ctx);
-    gUnknown_0202E8B8 = v2;
-    gUnknown_0202E8BA = v3;
+    if (v1 != 0)
+        sMovingNpcId = v1;
+    mapBank = ScriptReadByte(ctx);
+    mapId = ScriptReadByte(ctx);
+    sMovingNpcMapBank = mapBank;
+    sMovingNpcMapId = mapId;
     SetupNativeScript(ctx, s51a_0806B288);
     return TRUE;
 }
@@ -1448,29 +1447,29 @@ bool8 ScrCmd_vbuffer(struct ScriptContext *ctx)
 
 bool8 ScrCmd_givepokemon(struct ScriptContext *ctx)
 {
-    u16 v3 = VarGet(ScriptReadHalfword(ctx));
-    u8 v5 = ScriptReadByte(ctx);
-    u16 v7 = VarGet(ScriptReadHalfword(ctx));
-    u32 v8 = ScriptReadWord(ctx);
-    u32 v9 = ScriptReadWord(ctx);
-    u8 v10 = ScriptReadByte(ctx);
-    gScriptResult = ScriptGiveMon(v3, v5, v7, v8, v9, v10);
+    u16 species = VarGet(ScriptReadHalfword(ctx));
+    u8 level = ScriptReadByte(ctx);
+    u16 item = VarGet(ScriptReadHalfword(ctx));
+    u32 unkParam1 = ScriptReadWord(ctx);
+    u32 unkParam2 = ScriptReadWord(ctx);
+    u8 unkParam3 = ScriptReadByte(ctx);
+    gScriptResult = ScriptGiveMon(species, level, item, unkParam1, unkParam2, unkParam3);
     return FALSE;
 }
 
 bool8 ScrCmd_giveegg(struct ScriptContext *ctx)
 {
-    u16 value = VarGet(ScriptReadHalfword(ctx));
-    gScriptResult = ScriptGiveEgg(value);
+    u16 species = VarGet(ScriptReadHalfword(ctx));
+    gScriptResult = ScriptGiveEgg(species);
     return FALSE;
 }
 
 bool8 ScrCmd_setpokemove(struct ScriptContext *ctx)
 {
-    u8 v2 = ScriptReadByte(ctx);
-    u8 v3 = ScriptReadByte(ctx);
-    u16 v4 = ScriptReadHalfword(ctx);
-    ScriptSetMonMoveSlot(v2, v4, v3);
+    u8 partyIndex = ScriptReadByte(ctx);
+    u8 slot = ScriptReadByte(ctx);
+    u16 move = ScriptReadHalfword(ctx);
+    ScriptSetMonMoveSlot(partyIndex, move, slot);
     return FALSE;
 }
 
@@ -1588,13 +1587,13 @@ bool8 ScrCmd_reptrainerbattle(struct ScriptContext *ctx)
 
 bool8 ScrCmd_endtrainerbattle(struct ScriptContext *ctx)
 {
-    ctx->scriptPtr = sub_80826E8();
+    ctx->scriptPtr = BattleSetup_GetScriptAddrAfterBattle();
     return FALSE;
 }
 
 bool8 ScrCmd_endtrainerbattle2(struct ScriptContext *ctx)
 {
-    ctx->scriptPtr = sub_8082700();
+    ctx->scriptPtr = BattleSetup_GetTrainerPostBattleScript();
     return FALSE;
 }
 
@@ -1621,10 +1620,10 @@ bool8 ScrCmd_settrainerflag(struct ScriptContext *ctx)
 
 bool8 ScrCmd_setwildbattle(struct ScriptContext *ctx)
 {
-    u16 v2 = ScriptReadHalfword(ctx);
-    u8 v4 = ScriptReadByte(ctx);
-    u16 v5 = ScriptReadHalfword(ctx);
-    ScriptWildBattle(v2, v4, v5);
+    u16 species = ScriptReadHalfword(ctx);
+    u8 level = ScriptReadByte(ctx);
+    u16 item = ScriptReadHalfword(ctx);
+    ScriptWildBattle(species, level, item);
     return FALSE;
 }
 
@@ -1669,13 +1668,13 @@ bool8 ScrCmd_pokecasino(struct ScriptContext *ctx)
 
 bool8 ScrCmd_event_8a(struct ScriptContext *ctx)
 {
-    u8 v2 = ScriptReadByte(ctx);
-    u8 v3 = ScriptReadByte(ctx);
-    u8 v4 = ScriptReadByte(ctx);
-    if (!v3)
-        PlantBerryTree(v2, 0, v4, FALSE);
+    u8 treeId = ScriptReadByte(ctx);
+    u8 berry = ScriptReadByte(ctx);
+    u8 growthStage = ScriptReadByte(ctx);
+    if (berry == 0)
+        PlantBerryTree(treeId, 0, growthStage, FALSE);
     else
-        PlantBerryTree(v2, v3, v4, FALSE);
+        PlantBerryTree(treeId, berry, growthStage, FALSE);
     return FALSE;
 }
 
@@ -1717,21 +1716,21 @@ bool8 ScrCmd_contestlinktransfer(struct ScriptContext *ctx)
 bool8 ScrCmd_doanimation(struct ScriptContext *ctx)
 {
     u16 effectId = VarGet(ScriptReadHalfword(ctx));
-    gUnknown_0202E8BC = effectId;
-    FieldEffectStart(gUnknown_0202E8BC);
+    sFieldEffectScriptId = effectId;
+    FieldEffectStart(sFieldEffectScriptId);
     return FALSE;
 }
 
 bool8 ScrCmd_setanimation(struct ScriptContext *ctx)
 {
-    u8 v2 = ScriptReadByte(ctx);
-    gUnknown_0202FF84[v2] = (s16)VarGet(ScriptReadHalfword(ctx));
+    u8 argNum = ScriptReadByte(ctx);
+    gFieldEffectArguments[argNum] = (s16)VarGet(ScriptReadHalfword(ctx));
     return FALSE;
 }
 
 static bool8 sub_8067B48()
 {
-    if (!FieldEffectActiveListContains(gUnknown_0202E8BC))
+    if (!FieldEffectActiveListContains(sFieldEffectScriptId))
         return TRUE;
     else
         return FALSE;
@@ -1739,7 +1738,7 @@ static bool8 sub_8067B48()
 
 bool8 ScrCmd_checkanimation(struct ScriptContext *ctx)
 {
-    gUnknown_0202E8BC = VarGet(ScriptReadHalfword(ctx));
+    sFieldEffectScriptId = VarGet(ScriptReadHalfword(ctx));
     SetupNativeScript(ctx, sub_8067B48);
     return TRUE;
 }
@@ -1759,9 +1758,9 @@ bool8 ScrCmd_checkgender(struct ScriptContext *ctx)
 
 bool8 ScrCmd_pokecry(struct ScriptContext *ctx)
 {
-    u16 v3 = VarGet(ScriptReadHalfword(ctx));
-    u16 v5 = VarGet(ScriptReadHalfword(ctx));
-    PlayCry5(v3, v5);
+    u16 species = VarGet(ScriptReadHalfword(ctx));
+    u16 mode = VarGet(ScriptReadHalfword(ctx));
+    PlayCry5(species, mode);
     return FALSE;
 }
 
@@ -1773,16 +1772,16 @@ bool8 ScrCmd_waitpokecry(struct ScriptContext *ctx)
 
 bool8 ScrCmd_setmaptile(struct ScriptContext *ctx)
 {
-    u16 v3 = VarGet(ScriptReadHalfword(ctx));
-    u16 v5 = VarGet(ScriptReadHalfword(ctx));
-    u16 v7 = VarGet(ScriptReadHalfword(ctx));
+    u16 x = VarGet(ScriptReadHalfword(ctx));
+    u16 y = VarGet(ScriptReadHalfword(ctx));
+    u16 tileId = VarGet(ScriptReadHalfword(ctx));
     u16 v8 = VarGet(ScriptReadHalfword(ctx));
-    v3 += 7;
-    v5 += 7;
+    x += 7;
+    y += 7;
     if (!v8)
-        MapGridSetMetatileIdAt(v3, v5, v7);
+        MapGridSetMetatileIdAt(x, y, tileId);
     else
-        MapGridSetMetatileIdAt(v3, v5, v7 | 0xC00);
+        MapGridSetMetatileIdAt(x, y, tileId | 0xC00);
     return FALSE;
 }
 
@@ -1792,7 +1791,7 @@ bool8 ScrCmd_setdooropened(struct ScriptContext *ctx)
     u16 y = VarGet(ScriptReadHalfword(ctx));
     x += 7;
     y += 7;
-    PlaySE(sub_8058790(x, y));
+    PlaySE(GetDoorSoundEffect(x, y));
     FieldAnimateDoorOpen(x, y);
     return FALSE;
 }

@@ -547,7 +547,7 @@ void sub_808115C(u8 taskId)
     case 0:
         FreezeMapObjects();
         PlayerGetDestCoords(x, y);
-        PlaySE(sub_8058790(*x, *y - 1));
+        PlaySE(GetDoorSoundEffect(*x, *y - 1));
         task->data[1] = FieldAnimateDoorOpen(*x, *y - 1);
         task->data[0] = 1;
         break;

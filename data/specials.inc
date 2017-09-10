@@ -163,7 +163,7 @@ gSpecials::
 	def_special sub_8053E90
 	def_special StartWallClock
 	def_special sub_810D6B8
-	def_special ChooseStarter
+	def_special ScrSpecial_ChooseStarter
 	def_special StartBattle_WallyTutorial
 	def_special sub_80BF9F8
 	def_special sub_80F9A0C

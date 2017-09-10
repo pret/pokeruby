@@ -2166,7 +2166,7 @@ _081355D6:
 	bl GetBattleTowerBattleTransition
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_811AABC
+	bl BattleTransition_StartOnField
 	b _08135648
 	.align 2, 0
 _081355F4: .4byte gPlayerParty
@@ -2203,7 +2203,7 @@ _08135606:
 	bl GetBattleTowerBattleTransition
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_811AABC
+	bl BattleTransition_StartOnField
 _08135648:
 	add sp, 0x4
 	pop {r4,r5}

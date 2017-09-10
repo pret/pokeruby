@@ -105,7 +105,7 @@ bool8 ShouldDoBrailleFlyEffect(void)
 
 void DoBrailleFlyEffect(void)
 {
-    gUnknown_0202FF84[0] = gLastFieldPokeMenuOpened;
+    gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
     FieldEffectStart(0x3C);
 }
 

@@ -224,7 +224,7 @@ Route101_EventScript_14EA7F:: @ 814EA7F
 	movesprite 255, 6, 13
 	move 255, Route101_Movement_1A083F
 	waitmove 0
-	special ChooseStarter
+	special ScrSpecial_ChooseStarter
 	waitstate
 	move 2, Route101_Movement_14EAD7
 	waitmove 0

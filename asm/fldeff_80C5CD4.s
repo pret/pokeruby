@@ -741,7 +741,7 @@ _080C627C: .4byte gMapHeader
 	thumb_func_start sub_80C6280
 sub_80C6280: @ 80C6280
 	push {lr}
-	ldr r1, _080C6294 @ =gUnknown_0202FF84
+	ldr r1, _080C6294 @ =gFieldEffectArguments
 	ldr r0, [r1, 0x4]
 	cmp r0, 0x2
 	beq _080C62AA
@@ -751,7 +751,7 @@ sub_80C6280: @ 80C6280
 	beq _080C62A2
 	b _080C62BE
 	.align 2, 0
-_080C6294: .4byte gUnknown_0202FF84
+_080C6294: .4byte gFieldEffectArguments
 _080C6298:
 	cmp r0, 0x3
 	beq _080C62AE
@@ -880,7 +880,7 @@ _080C6398: .4byte sub_80C660C
 	thumb_func_start sub_80C639C
 sub_80C639C: @ 80C639C
 	push {lr}
-	ldr r1, _080C63B0 @ =gUnknown_0202FF84
+	ldr r1, _080C63B0 @ =gFieldEffectArguments
 	ldr r0, _080C63B4 @ =gLastFieldPokeMenuOpened
 	ldrb r0, [r0]
 	str r0, [r1]
@@ -889,7 +889,7 @@ sub_80C639C: @ 80C639C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C63B0: .4byte gUnknown_0202FF84
+_080C63B0: .4byte gFieldEffectArguments
 _080C63B4: .4byte gLastFieldPokeMenuOpened
 _080C63B8: .4byte gUnknown_081A2CE6
 	thumb_func_end sub_80C639C
@@ -943,7 +943,7 @@ FldEff_SecretPowerCave: @ 80C63FC
 	ldrh r1, [r2, 0x2]
 	lsls r1, 23
 	lsrs r1, 23
-	ldr r4, _080C6448 @ =gUnknown_0202FF84
+	ldr r4, _080C6448 @ =gFieldEffectArguments
 	ldr r3, [r4, 0x14]
 	adds r1, r3
 	lsls r1, 16
@@ -963,7 +963,7 @@ FldEff_SecretPowerCave: @ 80C63FC
 _080C643C: .4byte gSpriteTemplate_83D2614
 _080C6440: .4byte gSprites
 _080C6444: .4byte gPlayerAvatar
-_080C6448: .4byte gUnknown_0202FF84
+_080C6448: .4byte gFieldEffectArguments
 	thumb_func_end FldEff_SecretPowerCave
 
 	thumb_func_start sub_80C644C
@@ -1025,7 +1025,7 @@ sub_80C6498: @ 80C6498
 	thumb_func_start sub_80C64A8
 sub_80C64A8: @ 80C64A8
 	push {lr}
-	ldr r1, _080C64BC @ =gUnknown_0202FF84
+	ldr r1, _080C64BC @ =gFieldEffectArguments
 	ldr r0, _080C64C0 @ =gLastFieldPokeMenuOpened
 	ldrb r0, [r0]
 	str r0, [r1]
@@ -1034,7 +1034,7 @@ sub_80C64A8: @ 80C64A8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C64BC: .4byte gUnknown_0202FF84
+_080C64BC: .4byte gFieldEffectArguments
 _080C64C0: .4byte gLastFieldPokeMenuOpened
 _080C64C4: .4byte gUnknown_081A2D3E
 	thumb_func_end sub_80C64A8
@@ -1088,13 +1088,13 @@ FldEff_SecretPowerTree: @ 80C6508
 	ands r2, r0
 	cmp r2, 0x96
 	bne _080C652A
-	ldr r1, _080C6588 @ =gUnknown_0202FF84
+	ldr r1, _080C6588 @ =gFieldEffectArguments
 	movs r0, 0
 	str r0, [r1, 0x1C]
 _080C652A:
 	cmp r2, 0x9C
 	bne _080C6534
-	ldr r1, _080C6588 @ =gUnknown_0202FF84
+	ldr r1, _080C6588 @ =gFieldEffectArguments
 	movs r0, 0x2
 	str r0, [r1, 0x1C]
 _080C6534:
@@ -1110,7 +1110,7 @@ _080C6534:
 	ldrh r1, [r2, 0x2]
 	lsls r1, 23
 	lsrs r1, 23
-	ldr r4, _080C6588 @ =gUnknown_0202FF84
+	ldr r4, _080C6588 @ =gFieldEffectArguments
 	ldr r3, [r4, 0x14]
 	adds r1, r3
 	lsls r1, 16
@@ -1137,7 +1137,7 @@ _080C6576:
 	.align 2, 0
 _080C6580: .4byte gUnknown_0203923C
 _080C6584: .4byte 0x00000fff
-_080C6588: .4byte gUnknown_0202FF84
+_080C6588: .4byte gFieldEffectArguments
 _080C658C: .4byte gSpriteTemplate_83D262C
 _080C6590: .4byte gSprites
 _080C6594: .4byte gPlayerAvatar
@@ -1149,7 +1149,7 @@ sub_80C6598: @ 80C6598
 	adds r4, r0, 0
 	movs r0, 0x9B
 	bl PlaySE
-	ldr r0, _080C65BC @ =gUnknown_0202FF84
+	ldr r0, _080C65BC @ =gFieldEffectArguments
 	ldr r1, [r0, 0x1C]
 	adds r2, r4, 0
 	adds r2, 0x2A
@@ -1162,7 +1162,7 @@ sub_80C6598: @ 80C6598
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C65BC: .4byte gUnknown_0202FF84
+_080C65BC: .4byte gFieldEffectArguments
 _080C65C0: .4byte sub_80C65C4
 	thumb_func_end sub_80C6598
 
@@ -1177,7 +1177,7 @@ sub_80C65C4: @ 80C65C4
 	asrs r0, 16
 	cmp r0, 0x27
 	ble _080C65EE
-	ldr r0, _080C65F4 @ =gUnknown_0202FF84
+	ldr r0, _080C65F4 @ =gFieldEffectArguments
 	ldr r0, [r0, 0x1C]
 	cmp r0, 0
 	beq _080C65E2
@@ -1195,7 +1195,7 @@ _080C65EE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C65F4: .4byte gUnknown_0202FF84
+_080C65F4: .4byte gFieldEffectArguments
 _080C65F8: .4byte sub_80C65FC
 	thumb_func_end sub_80C65C4
 
@@ -1212,7 +1212,7 @@ sub_80C65FC: @ 80C65FC
 	thumb_func_start sub_80C660C
 sub_80C660C: @ 80C660C
 	push {lr}
-	ldr r1, _080C6620 @ =gUnknown_0202FF84
+	ldr r1, _080C6620 @ =gFieldEffectArguments
 	ldr r0, _080C6624 @ =gLastFieldPokeMenuOpened
 	ldrb r0, [r0]
 	str r0, [r1]
@@ -1221,7 +1221,7 @@ sub_80C660C: @ 80C660C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C6620: .4byte gUnknown_0202FF84
+_080C6620: .4byte gFieldEffectArguments
 _080C6624: .4byte gLastFieldPokeMenuOpened
 _080C6628: .4byte gUnknown_081A2D96
 	thumb_func_end sub_80C660C
@@ -1275,7 +1275,7 @@ FldEff_SecretPowerShrub: @ 80C666C
 	ldrh r1, [r2, 0x2]
 	lsls r1, 23
 	lsrs r1, 23
-	ldr r4, _080C66B8 @ =gUnknown_0202FF84
+	ldr r4, _080C66B8 @ =gFieldEffectArguments
 	ldr r3, [r4, 0x14]
 	adds r1, r3
 	lsls r1, 16
@@ -1295,7 +1295,7 @@ FldEff_SecretPowerShrub: @ 80C666C
 _080C66AC: .4byte gSpriteTemplate_83D2644
 _080C66B0: .4byte gSprites
 _080C66B4: .4byte gPlayerAvatar
-_080C66B8: .4byte gUnknown_0202FF84
+_080C66B8: .4byte gFieldEffectArguments
 	thumb_func_end FldEff_SecretPowerShrub
 
 	thumb_func_start sub_80C66BC
@@ -2103,7 +2103,7 @@ FldEff_SandPillar: @ 80C6D3C
 	mov r0, sp
 	adds r1, r4, 0
 	bl GetXYCoordsOneStepInFrontOfPlayer
-	ldr r1, _080C6D78 @ =gUnknown_0202FF84
+	ldr r1, _080C6D78 @ =gFieldEffectArguments
 	mov r0, sp
 	movs r2, 0
 	ldrsh r0, [r0, r2]
@@ -2122,7 +2122,7 @@ FldEff_SandPillar: @ 80C6D3C
 	beq _080C6D86
 	b _080C6E4C
 	.align 2, 0
-_080C6D78: .4byte gUnknown_0202FF84
+_080C6D78: .4byte gFieldEffectArguments
 _080C6D7C:
 	cmp r0, 0x3
 	beq _080C6DEC
@@ -2240,7 +2240,7 @@ SpriteCB_SandPillar_0: @ 80C6E64
 	adds r5, r0, 0
 	movs r0, 0x83
 	bl PlaySE
-	ldr r4, _080C6E90 @ =gUnknown_0202FF84
+	ldr r4, _080C6E90 @ =gFieldEffectArguments
 	ldr r0, [r4, 0x14]
 	ldr r1, [r4, 0x18]
 	subs r1, 0x1
@@ -2255,7 +2255,7 @@ SpriteCB_SandPillar_0: @ 80C6E64
 	bl MapGridSetMetatileIdAt
 	b _080C6EAA
 	.align 2, 0
-_080C6E90: .4byte gUnknown_0202FF84
+_080C6E90: .4byte gFieldEffectArguments
 _080C6E94: .4byte 0x00000286
 _080C6E98: .4byte 0x00000e02
 _080C6E9C:
@@ -2266,7 +2266,7 @@ _080C6E9C:
 	lsls r2, 2
 	bl MapGridSetMetatileIdAt
 _080C6EAA:
-	ldr r4, _080C6ED8 @ =gUnknown_0202FF84
+	ldr r4, _080C6ED8 @ =gFieldEffectArguments
 	ldr r0, [r4, 0x14]
 	ldr r1, [r4, 0x18]
 	ldr r2, _080C6EDC @ =0x0000020a
@@ -2286,7 +2286,7 @@ _080C6EAA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C6ED8: .4byte gUnknown_0202FF84
+_080C6ED8: .4byte gFieldEffectArguments
 _080C6EDC: .4byte 0x0000020a
 _080C6EE0: .4byte SpriteCB_SandPillar_1
 	thumb_func_end SpriteCB_SandPillar_0
@@ -2304,7 +2304,7 @@ SpriteCB_SandPillar_1: @ 80C6EE4
 	strh r0, [r5, 0x2E]
 	b _080C6F14
 _080C6EF8:
-	ldr r4, _080C6F1C @ =gUnknown_0202FF84
+	ldr r4, _080C6F1C @ =gFieldEffectArguments
 	ldr r0, [r4, 0x14]
 	ldr r1, [r4, 0x18]
 	ldr r2, _080C6F20 @ =0x00000e8c
@@ -2321,7 +2321,7 @@ _080C6F14:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C6F1C: .4byte gUnknown_0202FF84
+_080C6F1C: .4byte gFieldEffectArguments
 _080C6F20: .4byte 0x00000e8c
 _080C6F24: .4byte SpriteCB_SandPillar_2
 	thumb_func_end SpriteCB_SandPillar_1

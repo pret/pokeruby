@@ -40,12 +40,6 @@ struct TrainerPartyMember3
     u16 moves[4];
 };
 
-struct TrainerBattleSpec
-{
-    void *ptr;
-    u8 ptrType;
-};
-
 struct TrainerEyeTrainer
 {
    u16 trainerNums[5];
@@ -75,7 +69,7 @@ s8 GetBattleTerrain(void);
 u8 GetWildBattleTransition(void);
 u8 GetTrainerBattleTransition(void);
 u8 GetBattleTowerBattleTransition(void);
-//void ChooseStarter(void);
+//void ScrSpecial_ChooseStarter(void);
 void CB2_GiveStarter(void);
 void CB2_StartFirstBattle(void);
 void HandleFirstBattleEnd(void);
@@ -103,8 +97,8 @@ void sub_808260C(void);
 void do_choose_name_or_words_screen(void);
 //void sub_80826B0(void);
 //void sub_80826D8(void);
-u8 *sub_80826E8(void);
-u8 *sub_8082700(void);
+u8 *BattleSetup_GetScriptAddrAfterBattle(void);
+u8 *BattleSetup_GetTrainerPostBattleScript(void);
 //void sub_8082718(void);
 //void PlayTrainerEncounterMusic(void);
 //u8 *SanitizeString(u8 *str);
