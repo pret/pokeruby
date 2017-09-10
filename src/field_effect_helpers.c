@@ -650,3 +650,19 @@ u8 FldEff_Splash(void)
     }
     return 0;
 }
+
+void sub_81276B4(struct Sprite *sprite)
+{
+    u8 mapObjectId;
+
+    if (sprite->animEnded || TryGetFieldObjectIdByLocalIdAndMap(sprite->data0, sprite->data1, sprite->data2, &mapObjectId))
+    {
+        FieldEffectStop(sprite, FLDEFF_SPLASH);
+    }
+    else
+    {
+        sprite->pos1.x = gSprites[gMapObjects[mapObjectId].spriteId].pos1.x;
+        sprite->pos1.y = gSprites[gMapObjects[mapObjectId].spriteId].pos1.y;
+        sub_806487C(sprite, FALSE);
+    }
+}
