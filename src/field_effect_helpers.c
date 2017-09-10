@@ -1299,3 +1299,15 @@ u8 FldEff_Bubbles(void)
     }
     return 0;
 }
+
+void sub_8128410(struct Sprite *sprite)
+{
+    sprite->data0 += 0x80;
+    sprite->data0 &= 0x100;
+    sprite->pos1.y -= sprite->data0 >> 8;
+    sub_806487C(sprite, FALSE);
+    if (sprite->invisible || sprite->animEnded)
+    {
+        FieldEffectStop(sprite, FLDEFF_BUBBLES);
+    }
+}

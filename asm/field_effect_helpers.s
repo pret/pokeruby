@@ -6,40 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_8128410
-sub_8128410: @ 8128410
-	push {r4,lr}
-	adds r4, r0, 0
-	ldrh r0, [r4, 0x2E]
-	adds r0, 0x80
-	movs r1, 0x80
-	lsls r1, 1
-	ands r0, r1
-	strh r0, [r4, 0x2E]
-	lsls r0, 16
-	asrs r0, 24
-	ldrh r1, [r4, 0x22]
-	subs r1, r0
-	strh r1, [r4, 0x22]
-	adds r0, r4, 0
-	movs r1, 0
-	bl sub_806487C
-	ldrh r1, [r4, 0x3E]
-	ldr r0, _0812844C @ =0x00001004
-	ands r0, r1
-	cmp r0, 0
-	beq _08128444
-	adds r0, r4, 0
-	movs r1, 0x35
-	bl FieldEffectStop
-_08128444:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0812844C: .4byte 0x00001004
-	thumb_func_end sub_8128410
-
 	thumb_func_start FldEff_BerryTreeGrowthSparkle
 FldEff_BerryTreeGrowthSparkle: @ 8128450
 	push {r4,lr}
