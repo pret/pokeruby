@@ -1372,4 +1372,36 @@ static u32 ShowDisguiseFieldEffect(u8 fldEff, u8 templateIdx, u8 paletteNum)
     return spriteId;
 }
 
+void sub_81285AC(struct Sprite *sprite)
+{
+    u8 mapObjectId;
+    const struct MapObjectGraphicsInfo *graphicsInfo;
+    struct Sprite *linkedSprite;
 
+    if (TryGetFieldObjectIdByLocalIdAndMap(sprite->data2, sprite->data3, sprite->data4, &mapObjectId))
+    {
+        FieldEffectStop(sprite, sprite->data1);
+    }
+    // else {
+    graphicsInfo = GetFieldObjectGraphicsInfo(gMapObjects[mapObjectId].graphicsId);
+    linkedSprite = &gSprites[gMapObjects[mapObjectId].spriteId];
+    sprite->invisible = linkedSprite->invisible;
+    sprite->pos1.x = linkedSprite->pos1.x;
+    sprite->pos1.y = (graphicsInfo->height >> 1) + linkedSprite->pos1.y - 16;
+    sprite->subpriority = linkedSprite->subpriority - 1;
+    if (sprite->data0 == 1)
+    {
+        sprite->data0 ++;
+        StartSpriteAnim(sprite, 1);
+    }
+    if (sprite->data0 == 2 && sprite->animEnded)
+    {
+        sprite->data7 = 1;
+    }
+    if (sprite->data0 == 3)
+    {
+        FieldEffectStop(sprite, sprite->data1);
+    }
+    // }
+
+}
