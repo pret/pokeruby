@@ -25,8 +25,8 @@ static void sub_81269E0(struct Sprite *);
 static void npc_pal_op(struct MapObject *mapObject, struct Sprite *sprite);
 static void npc_pal_op_A(struct MapObject *, u8);
 static void npc_pal_op_B(struct MapObject *, u8);
-/*static*/ void sub_81275A0(struct Sprite *);
-/*static*/ void sub_81275C4(struct Sprite *);
+static void sub_81275A0(struct Sprite *);
+static void sub_81275C4(struct Sprite *);
 /*static*/ void sub_8127DA0(struct Sprite *);
 /*static*/ void sub_8127DD0(struct Sprite *);
 /*static*/ void sub_8127E30(struct Sprite *);
@@ -554,7 +554,7 @@ u8 FldEff_SandFootprints(void)
         sprite = &gSprites[spriteId];
         sprite->coordOffsetEnabled = TRUE;
         sprite->oam.priority = gFieldEffectSpawnParams[3];
-        sprite->data7 = 13;
+        sprite->data7 = FLDEFF_SAND_FOOTPRINTS;
         StartSpriteAnim(sprite, gFieldEffectSpawnParams[4]);
     }
     return 0;
@@ -572,7 +572,7 @@ u8 FldEff_DeepSandFootprints(void)
         sprite = &gSprites[spriteId];
         sprite->coordOffsetEnabled = TRUE;
         sprite->oam.priority = gFieldEffectSpawnParams[3];
-        sprite->data7 = 24;
+        sprite->data7 = FLDEFF_DEEP_SAND_FOOTPRINTS;
         StartSpriteAnim(sprite, gFieldEffectSpawnParams[4]);
     }
     return spriteId;
@@ -590,8 +590,33 @@ u8 FldEff_BikeTireTracks(void)
         sprite = &gSprites[spriteId];
         sprite->coordOffsetEnabled = TRUE;
         sprite->oam.priority = gFieldEffectSpawnParams[3];
-        sprite->data7 = 35;
+        sprite->data7 = FLDEFF_BIKE_TIRE_TRACKS;
         StartSpriteAnim(sprite, gFieldEffectSpawnParams[4]);
     }
     return spriteId;
+}
+
+void sub_8127584(struct Sprite *sprite)
+{
+    gUnknown_08401E40[sprite->data0](sprite);
+}
+
+static void sub_81275A0(struct Sprite *sprite)
+{
+    if (++sprite->data1 > 40)
+    {
+        sprite->data0 = 1;
+    }
+    sub_806487C(sprite, FALSE);
+}
+
+static void sub_81275C4(struct Sprite *sprite)
+{
+    sprite->invisible ^= 1;
+    sprite->data1 ++;
+    sub_806487C(sprite, sprite->invisible);
+    if (sprite->data1 > 56)
+    {
+        FieldEffectStop(sprite, sprite->data7);
+    }
 }
