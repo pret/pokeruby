@@ -6,31 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_8128800
-sub_8128800: @ 8128800
-	push {lr}
-	adds r2, r0, 0
-	adds r0, 0x3F
-	ldrb r1, [r0]
-	movs r0, 0x10
-	ands r0, r1
-	cmp r0, 0
-	beq _0812881E
-	ldrh r1, [r2, 0x2E]
-	lsls r1, 24
-	lsrs r1, 24
-	adds r0, r2, 0
-	bl FieldEffectStop
-	b _08128826
-_0812881E:
-	adds r0, r2, 0
-	movs r1, 0
-	bl sub_806487C
-_08128826:
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8128800
-
 	thumb_func_start sub_812882C
 sub_812882C: @ 812882C
 	push {r4-r7,lr}

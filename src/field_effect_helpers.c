@@ -1483,3 +1483,15 @@ void sub_81287C4(struct Sprite *sprite)
         SetObjectSubpriorityByZCoord(sprite->data0, sprite, 0);
     }
 }
+
+void sub_8128800(struct Sprite *sprite)
+{
+    if (sprite->animEnded)
+    {
+        FieldEffectStop(sprite, sprite->data0);
+    }
+    else
+    {
+        sub_806487C(sprite, FALSE);
+    }
+}
