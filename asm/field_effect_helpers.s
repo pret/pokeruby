@@ -6,65 +6,6 @@
 
 	.text
 
-	thumb_func_start FldEff_Sparkle
-FldEff_Sparkle: @ 8128700
-	push {r4,lr}
-	ldr r4, _08128768 @ =gFieldEffectSpawnParams
-	ldr r0, [r4]
-	adds r0, 0x7
-	str r0, [r4]
-	ldr r0, [r4, 0x4]
-	adds r0, 0x7
-	str r0, [r4, 0x4]
-	adds r1, r4, 0x4
-	adds r0, r4, 0
-	movs r2, 0x8
-	movs r3, 0x8
-	bl sub_8060470
-	ldr r0, _0812876C @ =gFieldEffectObjectTemplatePointers
-	adds r0, 0x8C
-	ldr r0, [r0]
-	movs r2, 0
-	ldrsh r1, [r4, r2]
-	movs r3, 0x4
-	ldrsh r2, [r4, r3]
-	movs r3, 0x52
-	bl CreateSpriteAtEnd
-	lsls r0, 24
-	lsrs r2, r0, 24
-	cmp r2, 0x40
-	beq _08128760
-	ldr r0, _08128770 @ =gSprites
-	lsls r1, r2, 4
-	adds r1, r2
-	lsls r1, 2
-	adds r1, r0
-	movs r0, 0x3
-	ldrb r2, [r4, 0x8]
-	ands r2, r0
-	lsls r2, 2
-	ldrb r3, [r1, 0x5]
-	movs r0, 0xD
-	negs r0, r0
-	ands r0, r3
-	orrs r0, r2
-	strb r0, [r1, 0x5]
-	adds r1, 0x3E
-	ldrb r0, [r1]
-	movs r2, 0x2
-	orrs r0, r2
-	strb r0, [r1]
-_08128760:
-	movs r0, 0
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08128768: .4byte gFieldEffectSpawnParams
-_0812876C: .4byte gFieldEffectObjectTemplatePointers
-_08128770: .4byte gSprites
-	thumb_func_end FldEff_Sparkle
-
 	thumb_func_start sub_8128774
 sub_8128774: @ 8128774
 	push {lr}

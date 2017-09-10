@@ -1434,3 +1434,19 @@ bool8 sub_81286C4(struct MapObject *mapObject)
     }
     return FALSE;
 }
+
+u32 FldEff_Sparkle(void)
+{
+    u8 spriteId;
+
+    gFieldEffectSpawnParams[0] += 7;
+    gFieldEffectSpawnParams[1] += 7;
+    sub_8060470((s16 *)&gFieldEffectSpawnParams[0], (s16 *)&gFieldEffectSpawnParams[1], 8, 8);
+    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[35], gFieldEffectSpawnParams[0], gFieldEffectSpawnParams[1], 0x52);
+    if (spriteId != MAX_SPRITES)
+    {
+        gSprites[spriteId].oam.priority = gFieldEffectSpawnParams[2];
+        gSprites[spriteId].coordOffsetEnabled = TRUE;
+    }
+    return 0;
+}
