@@ -33,7 +33,7 @@ static void sub_81275C4(struct Sprite *);
 /*static*/ void sub_8127DD0(struct Sprite *);
 /*static*/ void sub_8127E30(struct Sprite *);
 /*static*/ void sub_812882C(struct Sprite *, u8, u8);
-/*static*/ void sub_81278D8(struct Sprite *);
+static void sub_81278D8(struct Sprite *);
 
 // .rodata
 
@@ -731,4 +731,34 @@ u8 FldEff_FeetInFlowingWater(void)
         StartSpriteAnim(sprite, 1);
     }
     return 0;
+}
+
+static void sub_81278D8(struct Sprite *sprite)
+{
+    u8 mapObjectId;
+    struct Sprite *linkedSprite;
+    struct MapObject *mapObject;
+
+    if (TryGetFieldObjectIdByLocalIdAndMap(sprite->data0, sprite->data1, sprite->data2, &mapObjectId) || !gMapObjects[mapObjectId].mapobj_bit_19)
+    {
+        FieldEffectStop(sprite, FLDEFF_FEET_IN_FLOWING_WATER);
+    }
+    else
+    {
+        mapObject = &gMapObjects[mapObjectId];
+        linkedSprite = &gSprites[mapObject->spriteId];
+        sprite->pos1.x = linkedSprite->pos1.x;
+        sprite->pos1.y = linkedSprite->pos1.y;
+        sprite->subpriority = linkedSprite->subpriority;
+        sub_806487C(sprite, FALSE);
+        if (mapObject->coords2.x != sprite->data3 || mapObject->coords2.y != sprite->data4)
+        {
+            sprite->data3 = mapObject->coords2.x;
+            sprite->data4 = mapObject->coords2.y;
+            if (!sprite->invisible)
+            {
+                PlaySE(SE_MIZU);
+            }
+        }
+    }
 }
