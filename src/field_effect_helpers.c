@@ -684,3 +684,21 @@ u8 FldEff_JumpSmallSplash(void)
     }
     return 0;
 }
+
+u8 FldEff_JumpBigSplash(void)
+{
+    u8 spriteId;
+    struct Sprite *sprite;
+
+    sub_8060470((s16 *)&gFieldEffectSpawnParams[0], (s16 *)&gFieldEffectSpawnParams[1], 8, 8);
+    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[12], gFieldEffectSpawnParams[0], gFieldEffectSpawnParams[1], 0);
+    if (spriteId != MAX_SPRITES)
+    {
+        sprite = &gSprites[spriteId];
+        sprite->coordOffsetEnabled = TRUE;
+        sprite->oam.priority = gFieldEffectSpawnParams[3];
+        sprite->data0 = gFieldEffectSpawnParams[2];
+        sprite->data1 = FLDEFF_JUMP_BIG_SPLASH;
+    }
+    return 0;
+}
