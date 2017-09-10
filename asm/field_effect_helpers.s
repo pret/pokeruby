@@ -6,33 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_8127F5C
-sub_8127F5C: @ 8127F5C
-	ldrh r1, [r0, 0x2E]
-	movs r0, 0xF
-	ands r0, r1
-	bx lr
-	thumb_func_end sub_8127F5C
-
-	thumb_func_start sub_8127F64
-sub_8127F64: @ 8127F64
-	ldrh r1, [r0, 0x2E]
-	movs r0, 0xF0
-	ands r0, r1
-	lsrs r0, 4
-	bx lr
-	thumb_func_end sub_8127F64
-
-	thumb_func_start sub_8127F70
-sub_8127F70: @ 8127F70
-	ldrh r1, [r0, 0x2E]
-	movs r0, 0xF0
-	lsls r0, 4
-	ands r0, r1
-	lsrs r0, 8
-	bx lr
-	thumb_func_end sub_8127F70
-
 	thumb_func_start sub_8127F7C
 sub_8127F7C: @ 8127F7C
 	push {r4-r6,lr}

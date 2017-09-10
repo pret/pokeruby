@@ -997,3 +997,18 @@ void sub_8127F28(u8 spriteId, u8 value, s16 data1)
     gSprites[spriteId].data0 = (gSprites[spriteId].data0 & ~0xF00) | ((value & 0xF) << 8);
     gSprites[spriteId].data1 = data1;
 }
+
+u8 sub_8127F5C(struct Sprite *sprite)
+{
+    return sprite->data0 & 0xF;
+}
+
+u8 sub_8127F64(struct Sprite *sprite)
+{
+    return (sprite->data0 & 0xF0) >> 4;
+}
+
+u8 sub_8127F70(struct Sprite *sprite)
+{
+    return (sprite->data0 & 0xF00) >> 8;
+}
