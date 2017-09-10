@@ -1311,3 +1311,21 @@ void sub_8128410(struct Sprite *sprite)
         FieldEffectStop(sprite, FLDEFF_BUBBLES);
     }
 }
+
+u8 FldEff_BerryTreeGrowthSparkle(void)
+{
+    u8 spriteId;
+    struct Sprite *sprite;
+
+    sub_8060470((s16 *)&gFieldEffectSpawnParams[0], (s16 *)&gFieldEffectSpawnParams[1], 8, 4);
+    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[22], gFieldEffectSpawnParams[0], gFieldEffectSpawnParams[1], gFieldEffectSpawnParams[2]);
+    if (spriteId != MAX_SPRITES)
+    {
+        sprite = &gSprites[spriteId];
+        sprite->coordOffsetEnabled = TRUE;
+        sprite->oam.priority = gFieldEffectSpawnParams[3];
+        sprite->oam.paletteNum = 5;
+        sprite->data0 = FLDEFF_BERRY_TREE_GROWTH_SPARKLE;
+    }
+    return 0;
+}

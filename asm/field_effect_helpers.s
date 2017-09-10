@@ -6,65 +6,6 @@
 
 	.text
 
-	thumb_func_start FldEff_BerryTreeGrowthSparkle
-FldEff_BerryTreeGrowthSparkle: @ 8128450
-	push {r4,lr}
-	ldr r4, _081284B8 @ =gFieldEffectSpawnParams
-	adds r1, r4, 0x4
-	adds r0, r4, 0
-	movs r2, 0x8
-	movs r3, 0x4
-	bl sub_8060470
-	ldr r0, _081284BC @ =gFieldEffectObjectTemplatePointers
-	ldr r0, [r0, 0x58]
-	movs r2, 0
-	ldrsh r1, [r4, r2]
-	movs r3, 0x4
-	ldrsh r2, [r4, r3]
-	ldrb r3, [r4, 0x8]
-	bl CreateSpriteAtEnd
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x40
-	beq _081284B0
-	lsls r2, r0, 4
-	adds r2, r0
-	lsls r2, 2
-	ldr r0, _081284C0 @ =gSprites
-	adds r2, r0
-	adds r3, r2, 0
-	adds r3, 0x3E
-	ldrb r0, [r3]
-	movs r1, 0x2
-	orrs r0, r1
-	strb r0, [r3]
-	movs r0, 0x3
-	ldrb r1, [r4, 0xC]
-	ands r1, r0
-	lsls r1, 2
-	ldrb r3, [r2, 0x5]
-	movs r0, 0xD
-	negs r0, r0
-	ands r0, r3
-	orrs r0, r1
-	movs r1, 0xF
-	ands r0, r1
-	movs r1, 0x50
-	orrs r0, r1
-	strb r0, [r2, 0x5]
-	movs r0, 0x17
-	strh r0, [r2, 0x2E]
-_081284B0:
-	movs r0, 0
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_081284B8: .4byte gFieldEffectSpawnParams
-_081284BC: .4byte gFieldEffectObjectTemplatePointers
-_081284C0: .4byte gSprites
-	thumb_func_end FldEff_BerryTreeGrowthSparkle
-
 	thumb_func_start FldEff_TreeDisguise
 FldEff_TreeDisguise: @ 81284C4
 	push {lr}
