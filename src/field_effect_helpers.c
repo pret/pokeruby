@@ -891,3 +891,14 @@ u8 FldEff_Unknown22(void)
     }
     return 0;
 }
+
+void ash(s16 x, s16 y, u16 c, s16 d)
+{
+    gFieldEffectSpawnParams[0] = x;
+    gFieldEffectSpawnParams[1] = y;
+    gFieldEffectSpawnParams[2] = 0x52;
+    gFieldEffectSpawnParams[3] = 1;
+    gFieldEffectSpawnParams[4] = c;
+    gFieldEffectSpawnParams[5] = d;
+    FieldEffectStart(FLDEFF_ASH);
+}

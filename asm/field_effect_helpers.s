@@ -6,35 +6,6 @@
 
 	.text
 
-	thumb_func_start ash
-ash: @ 8127CC4
-	push {r4,lr}
-	lsls r2, 16
-	lsrs r2, 16
-	ldr r4, _08127CF4 @ =gFieldEffectSpawnParams
-	lsls r0, 16
-	asrs r0, 16
-	str r0, [r4]
-	lsls r1, 16
-	asrs r1, 16
-	str r1, [r4, 0x4]
-	movs r0, 0x52
-	str r0, [r4, 0x8]
-	movs r0, 0x1
-	str r0, [r4, 0xC]
-	str r2, [r4, 0x10]
-	lsls r3, 16
-	asrs r3, 16
-	str r3, [r4, 0x14]
-	movs r0, 0x7
-	bl FieldEffectStart
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08127CF4: .4byte gFieldEffectSpawnParams
-	thumb_func_end ash
-
 	thumb_func_start FldEff_Ash
 FldEff_Ash: @ 8127CF8
 	push {r4,r5,lr}
