@@ -6,57 +6,6 @@
 
 	.text
 
-	thumb_func_start FldEff_Bubbles
-FldEff_Bubbles: @ 81283AC
-	push {r4,lr}
-	ldr r4, _08128404 @ =gFieldEffectSpawnParams
-	adds r1, r4, 0x4
-	adds r0, r4, 0
-	movs r2, 0x8
-	movs r3, 0
-	bl sub_8060470
-	ldr r0, _08128408 @ =gFieldEffectObjectTemplatePointers
-	adds r0, 0x88
-	ldr r0, [r0]
-	movs r2, 0
-	ldrsh r1, [r4, r2]
-	movs r3, 0x4
-	ldrsh r2, [r4, r3]
-	movs r3, 0x52
-	bl CreateSpriteAtEnd
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x40
-	beq _081283FC
-	lsls r1, r0, 4
-	adds r1, r0
-	lsls r1, 2
-	ldr r0, _0812840C @ =gSprites
-	adds r1, r0
-	adds r3, r1, 0
-	adds r3, 0x3E
-	ldrb r0, [r3]
-	movs r2, 0x2
-	orrs r0, r2
-	strb r0, [r3]
-	ldrb r2, [r1, 0x5]
-	movs r0, 0xD
-	negs r0, r0
-	ands r0, r2
-	movs r2, 0x4
-	orrs r0, r2
-	strb r0, [r1, 0x5]
-_081283FC:
-	movs r0, 0
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08128404: .4byte gFieldEffectSpawnParams
-_08128408: .4byte gFieldEffectObjectTemplatePointers
-_0812840C: .4byte gSprites
-	thumb_func_end FldEff_Bubbles
-
 	thumb_func_start sub_8128410
 sub_8128410: @ 8128410
 	push {r4,lr}

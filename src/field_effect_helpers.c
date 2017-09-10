@@ -1283,3 +1283,19 @@ void sub_81282E0(struct Sprite *sprite)
         sub_806487C(sprite, FALSE);
     }
 }
+
+u8 FldEff_Bubbles(void)
+{
+    u8 spriteId;
+    struct Sprite *sprite;
+
+    sub_8060470((s16 *)&gFieldEffectSpawnParams[0], (s16 *)&gFieldEffectSpawnParams[1], 8, 0);
+    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[34], gFieldEffectSpawnParams[0], gFieldEffectSpawnParams[1], 0x52);
+    if (spriteId != MAX_SPRITES)
+    {
+        sprite = &gSprites[spriteId];
+        sprite->coordOffsetEnabled = TRUE;
+        sprite->oam.priority = 1;
+    }
+    return 0;
+}
