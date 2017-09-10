@@ -984,10 +984,16 @@ u8 FldEff_SurfBlob(void)
 
 void sub_8127ED0(u8 spriteId, u8 value)
 {
-    gSprites[spriteId].data0 = (gSprites[spriteId].data0 & ~0x0F) | (value & 0x0F);
+    gSprites[spriteId].data0 = (gSprites[spriteId].data0 & ~0xF) | (value & 0xF);
 }
 
 void sub_8127EFC(u8 spriteId, u8 value)
 {
     gSprites[spriteId].data0 = (gSprites[spriteId].data0 & ~0xF0) | ((value & 0xF) << 4);
+}
+
+void sub_8127F28(u8 spriteId, u8 value, s16 data1)
+{
+    gSprites[spriteId].data0 = (gSprites[spriteId].data0 & ~0xF00) | ((value & 0xF) << 8);
+    gSprites[spriteId].data1 = data1;
 }

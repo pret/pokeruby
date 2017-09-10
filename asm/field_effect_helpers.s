@@ -6,35 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_8127F28
-sub_8127F28: @ 8127F28
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, 24
-	ldr r4, _08127F54 @ =gSprites
-	lsls r3, r0, 4
-	adds r3, r0
-	lsls r3, 2
-	adds r3, r4
-	ldrh r0, [r3, 0x2E]
-	ldr r4, _08127F58 @ =0xfffff0ff
-	ands r4, r0
-	movs r0, 0xF0
-	lsls r0, 20
-	ands r0, r1
-	lsrs r0, 16
-	orrs r4, r0
-	strh r4, [r3, 0x2E]
-	strh r2, [r3, 0x30]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08127F54: .4byte gSprites
-_08127F58: .4byte 0xfffff0ff
-	thumb_func_end sub_8127F28
-
 	thumb_func_start sub_8127F5C
 sub_8127F5C: @ 8127F5C
 	ldrh r1, [r0, 0x2E]
