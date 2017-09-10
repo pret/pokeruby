@@ -932,7 +932,7 @@ SecretBase_RedCave1_EventScript_19F806:: @ 819F806
 gUnknown_0819F80B:: @ 819F80B
 	lock
 	special PlayTrainerEncounterMusic
-	special sub_80847C8
+	special ScrSpecial_EndTrainerApproach
 	waitstate
 	jump EventScript_19F8F2
 
@@ -941,7 +941,7 @@ gUnknown_0819F818:: @ 819F818
 	faceplayer
 	move LAST_TALKED, Movement_19F8F0
 	waitmove 0
-	specialval RESULT, sub_8082564
+	specialval RESULT, ScrSpecial_HasTrainerBeenFought
 	compare RESULT, 0
 	jumpif 5, EventScript_19F83F
 	special PlayTrainerEncounterMusic
@@ -955,7 +955,7 @@ gUnknown_0819F840:: @ 819F840
 	lock
 	faceplayer
 	call EventScript_19F8E5
-	specialval RESULT, sub_8082564
+	specialval RESULT, ScrSpecial_HasTrainerBeenFought
 	compare RESULT, 0
 	jumpif 5, EventScript_19F877
 	special CheckForAlivePartyMons
@@ -966,7 +966,7 @@ gUnknown_0819F840:: @ 819F840
 	jump EventScript_19F8F2
 
 EventScript_19F870:
-	special sub_8082718
+	special ScrSpecial_ShowTrainerNonBattlingSpeech
 	waittext
 	waitbutton
 	release
@@ -984,15 +984,15 @@ gUnknown_0819F878:: @ 819F878
 
 gUnknown_0819F887:: @ 819F887
 	call EventScript_19F8E5
-	specialval RESULT, sub_8082C9C
+	specialval RESULT, ScrSpecial_GetTrainerEyeRematchFlag
 	compare RESULT, 0
 	jumpeq EventScript_19F8AD
 	special PlayTrainerEncounterMusic
 	special sub_8082524
-	special sub_80826D8
+	special ScrSpecial_ShowTrainerIntroSpeech
 	waittext
 	waitbutton
-	special sub_80826B0
+	special ScrSpecial_StartTrainerEyeRematch
 	waitstate
 	releaseall
 	end
@@ -1001,7 +1001,7 @@ EventScript_19F8AD:
 	endtrainerbattle
 
 gUnknown_0819F8AE:: @ 819F8AE
-	specialval RESULT, sub_8082C9C
+	specialval RESULT, ScrSpecial_GetTrainerEyeRematchFlag
 	compare RESULT, 0
 	jumpeq EventScript_19F8DD
 	special CheckForAlivePartyMons
@@ -1009,10 +1009,10 @@ gUnknown_0819F8AE:: @ 819F8AE
 	jumpif 5, EventScript_19F8DE
 	special PlayTrainerEncounterMusic
 	special sub_8082524
-	special sub_80826D8
+	special ScrSpecial_ShowTrainerIntroSpeech
 	waittext
 	waitbutton
-	special sub_80826B0
+	special ScrSpecial_StartTrainerEyeRematch
 	waitstate
 	releaseall
 	end
@@ -1021,7 +1021,7 @@ EventScript_19F8DD:
 	endtrainerbattle
 
 EventScript_19F8DE:
-	special sub_8082718
+	special ScrSpecial_ShowTrainerNonBattlingSpeech
 	waittext
 	waitbutton
 	release
@@ -1037,7 +1037,7 @@ Movement_19F8F0::
 	step_end
 
 EventScript_19F8F2:
-	special sub_80826D8
+	special ScrSpecial_ShowTrainerIntroSpeech
 	waittext
 	waitbutton
 	reptrainerbattle
