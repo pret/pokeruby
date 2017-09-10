@@ -981,3 +981,13 @@ u8 FldEff_SurfBlob(void)
     FieldEffectActiveListRemove(FLDEFF_SURF_BLOB);
     return spriteId;
 }
+
+void sub_8127ED0(u8 spriteId, u8 value)
+{
+    gSprites[spriteId].data0 = (gSprites[spriteId].data0 & ~0x0F) | (value & 0x0F);
+}
+
+void sub_8127EFC(u8 spriteId, u8 value)
+{
+    gSprites[spriteId].data0 = (gSprites[spriteId].data0 & ~0xF0) | ((value & 0xF) << 4);
+}
