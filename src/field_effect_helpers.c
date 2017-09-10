@@ -1253,3 +1253,33 @@ u8 FldEff_SandPile(void)
     }
     return 0;
 }
+
+void sub_81282E0(struct Sprite *sprite)
+{
+    u8 mapObjectId;
+    s16 x;
+    s16 y;
+
+    if (TryGetFieldObjectIdByLocalIdAndMap(sprite->data0, sprite->data1, sprite->data2, &mapObjectId) || !gMapObjects[mapObjectId].mapobj_bit_20)
+    {
+        FieldEffectStop(sprite, FLDEFF_SAND_PILE);
+    }
+    else
+    {
+        y = gSprites[gMapObjects[mapObjectId].spriteId].pos1.y;
+        x = gSprites[gMapObjects[mapObjectId].spriteId].pos1.x;
+        if (x != sprite->data3 || y != sprite->data4)
+        {
+            sprite->data3 = x;
+            sprite->data4 = y;
+            if (sprite->animEnded)
+            {
+                StartSpriteAnim(sprite, 0);
+            }
+        }
+        sprite->pos1.x = x;
+        sprite->pos1.y = y;
+        sprite->subpriority = gSprites[gMapObjects[mapObjectId].spriteId].subpriority;
+        sub_806487C(sprite, FALSE);
+    }
+}
