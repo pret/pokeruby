@@ -6,67 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_812869C
-sub_812869C: @ 812869C
-	push {lr}
-	adds r1, r0, 0
-	adds r0, 0x21
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	bne _081286BA
-	ldr r2, _081286C0 @ =gSprites
-	ldrb r1, [r1, 0x1A]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrh r1, [r0, 0x2E]
-	adds r1, 0x1
-	strh r1, [r0, 0x2E]
-_081286BA:
-	pop {r0}
-	bx r0
-	.align 2, 0
-_081286C0: .4byte gSprites
-	thumb_func_end sub_812869C
-
-	thumb_func_start sub_81286C4
-sub_81286C4: @ 81286C4
-	push {lr}
-	adds r2, r0, 0
-	adds r2, 0x21
-	ldrb r1, [r2]
-	cmp r1, 0x2
-	beq _081286FA
-	cmp r1, 0
-	beq _081286FA
-	ldrb r1, [r0, 0x1A]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	ldr r1, _081286EC @ =gSprites
-	adds r1, r0, r1
-	movs r3, 0x3C
-	ldrsh r0, [r1, r3]
-	cmp r0, 0
-	bne _081286F0
-	movs r0, 0
-	b _081286FC
-	.align 2, 0
-_081286EC: .4byte gSprites
-_081286F0:
-	movs r0, 0x2
-	strb r0, [r2]
-	ldrh r0, [r1, 0x2E]
-	adds r0, 0x1
-	strh r0, [r1, 0x2E]
-_081286FA:
-	movs r0, 0x1
-_081286FC:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81286C4
-
 	thumb_func_start FldEff_Sparkle
 FldEff_Sparkle: @ 8128700
 	push {r4,lr}

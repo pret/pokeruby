@@ -1403,5 +1403,34 @@ void sub_81285AC(struct Sprite *sprite)
         FieldEffectStop(sprite, sprite->data1);
     }
     // }
+}
 
+void sub_812869C(struct MapObject *mapObject)
+{
+    if (mapObject->mapobj_unk_21 == 1)
+    {
+        gSprites[mapObject->mapobj_unk_1A].data0 ++;
+    }
+}
+
+bool8 sub_81286C4(struct MapObject *mapObject)
+{
+    struct Sprite *sprite;
+
+    if (mapObject->mapobj_unk_21 == 2)
+    {
+        return TRUE;
+    }
+    if (mapObject->mapobj_unk_21 == 0)
+    {
+        return TRUE;
+    }
+    sprite = &gSprites[mapObject->mapobj_unk_1A];
+    if (sprite->data7)
+    {
+        mapObject->mapobj_unk_21 = 2;
+        sprite->data0 ++;
+        return TRUE;
+    }
+    return FALSE;
 }
