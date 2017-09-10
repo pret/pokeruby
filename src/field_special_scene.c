@@ -273,7 +273,7 @@ void Task_HandlePorthole(u8 taskId)
     case IDLE_CHECK: // idle and move.
         if (gMain.newKeys & A_BUTTON)
             data[1] = 1;
-        if (!sub_80A212C(0xFF, location->mapNum, location->mapGroup))
+        if (!ScriptMovement_IsObjectMovementFinished(0xFF, location->mapNum, location->mapGroup))
             return;
         if (CountSSTidalStep(1) == TRUE)
         {
@@ -294,12 +294,12 @@ void Task_HandlePorthole(u8 taskId)
         // run this once.
         if (*var == 2) // which direction?
         {
-            exec_movement(0xFF, location->mapNum, location->mapGroup, gUnknown_083D295F);
+            ScriptMovement_StartObjectMovementScript(0xFF, location->mapNum, location->mapGroup, gUnknown_083D295F);
             data[0] = IDLE_CHECK; // run case 1.
         }
         else
         {
-            exec_movement(0xFF, location->mapNum, location->mapGroup, gUnknown_083D2961);
+            ScriptMovement_StartObjectMovementScript(0xFF, location->mapNum, location->mapGroup, gUnknown_083D2961);
             data[0] = IDLE_CHECK; // run case 1.
         }
         break;

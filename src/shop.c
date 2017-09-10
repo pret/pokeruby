@@ -60,7 +60,7 @@ EWRAM_DATA u8 gUnknown_02038730 = 0;
 EWRAM_DATA u8 gUnknown_02038731 = 0;
 
 // rodata
-static const struct MenuAction2 gUnknown_083CC6D0[] =
+static const struct MenuAction2 sBuySellQuitMenuActions[] =
 {
     { MartText_Buy, sub_80B2EFC },
     { MartText_Sell, sub_80B2F30 },
@@ -88,13 +88,13 @@ u8 CreateShopMenu(u8 martType)
     {
         gMartInfo.numChoices = 2;
         MenuDrawTextWindow(0, 0, 10, 7);
-        PrintMenuItemsReordered(1, 1, 3, (struct MenuAction *)gUnknown_083CC6D0, (u8 *)gUnknown_083CC6E8);
+        PrintMenuItemsReordered(1, 1, 3, sBuySellQuitMenuActions, gUnknown_083CC6E8);
     }
     else
     {
         gMartInfo.numChoices = 1;
         MenuDrawTextWindow(0, 0, 10, 5);
-        PrintMenuItemsReordered(1, 1, 2, (struct MenuAction *)gUnknown_083CC6D0, (u8 *)gUnknown_083CC6EB);
+        PrintMenuItemsReordered(1, 1, 2, sBuySellQuitMenuActions, gUnknown_083CC6EB);
     }
     InitMenu(0, 1, 1, gMartInfo.numChoices + 1, 0, 9); // add 1 for cancel
 
@@ -145,11 +145,11 @@ void sub_80B2E38(u8 var)
         PlaySE(SE_SELECT);
         if (gMartInfo.martType == MART_TYPE_0)
         {
-            gUnknown_083CC6D0[gUnknown_083CC6E8[gMartInfo.cursor]].func(local);
+            sBuySellQuitMenuActions[gUnknown_083CC6E8[gMartInfo.cursor]].func(local);
         }
         else
         {
-            gUnknown_083CC6D0[gUnknown_083CC6EB[gMartInfo.cursor]].func(local);
+            sBuySellQuitMenuActions[gUnknown_083CC6EB[gMartInfo.cursor]].func(local);
         }
     }
     else if (gMain.newKeys & B_BUTTON)

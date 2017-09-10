@@ -8303,12 +8303,12 @@ void sub_80634A0(struct MapObject *mapObject, struct Sprite *sprite)
 }
 
 void sub_80634E8(struct MapObject *, struct Sprite *);
-void npc_update_obj_anim_flag(struct MapObject *, struct Sprite *);
+static void UpdateMapObjSpriteVisibility(struct MapObject *, struct Sprite *);
 
 void sub_80634D0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_80634E8(mapObject, sprite);
-    npc_update_obj_anim_flag(mapObject, sprite);
+    UpdateMapObjSpriteVisibility(mapObject, sprite);
 }
 
 #ifdef NONMATCHING
@@ -8464,7 +8464,7 @@ _080635C0:\n\
 }
 #endif
 
-void npc_update_obj_anim_flag(struct MapObject *mapObject, struct Sprite *sprite)
+void UpdateMapObjSpriteVisibility(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sprite->invisible = 0;
     if (mapObject->mapobj_bit_13 || mapObject->mapobj_bit_14)

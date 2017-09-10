@@ -40,6 +40,7 @@
 #include "secret_base.h"
 #include "songs.h"
 #include "sound.h"
+#include "species.h"
 #include "start_menu.h"
 #include "task.h"
 #include "tileset_anim.h"
@@ -65,8 +66,8 @@ EWRAM_DATA struct WarpData gUnknown_020297F8 = {0};
 EWRAM_DATA struct WarpData gUnknown_02029800 = {0};
 EWRAM_DATA struct WarpData gUnknown_02029808 = {0};
 EWRAM_DATA struct UnkPlayerStruct gUnknown_02029810 = {0};
-EWRAM_DATA u16 gUnknown_02029814 = 0;
-EWRAM_DATA bool8 gUnknown_02029816 = FALSE;
+EWRAM_DATA static u16 sAmbientCrySpecies = 0;
+EWRAM_DATA static bool8 sIsAmbientCryWaterMon = FALSE;
 EWRAM_DATA struct LinkPlayerMapObject gLinkPlayerMapObjects[4] = {0};
 
 static u8 gUnknown_03000580[4];
@@ -132,6 +133,7 @@ void flag_var_implications_of_teleport_(void)
     FlagReset(SYS_USE_FLASH);
 }
 
+// not new_game
 void new_game(void)
 {
     player_avatar_init_params_reset();
@@ -166,7 +168,7 @@ void sub_8053050(void)
 void sub_805308C(void)
 {
     FlagReset(SYS_SAFARI_MODE);
-    sub_8054164();
+    ChooseAmbientCrySpecies();
     ResetCyclingRoadChallengeData();
     UpdateLocationHistoryForRoamer();
     RoamerMoveToOtherLocationSet();
@@ -301,31 +303,27 @@ bool32 warp_data_is_not_neg_1(struct WarpData *warp)
     return TRUE;
 }
 
-struct MapHeader * const get_mapheader_by_bank_and_number(u16 mapGroup, u16 mapNum)
+struct MapHeader *const get_mapheader_by_bank_and_number(u16 mapGroup, u16 mapNum)
 {
     return gMapGroups[mapGroup][mapNum];
 }
 
-struct MapHeader * const warp1_get_mapheader(void)
+struct MapHeader *const warp1_get_mapheader(void)
 {
     return get_mapheader_by_bank_and_number(gUnknown_020297F8.mapGroup, gUnknown_020297F8.mapNum);
 }
 
 void set_current_map_header_from_sav1_save_old_name(void)
 {
-    struct MapHeader *dest = &gMapHeader;
-    struct MapHeader *src = get_mapheader_by_bank_and_number(gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum);
-    *dest = *src;
-    gSaveBlock1.mapDataId = dest->mapDataId;
-    dest->mapData = get_mapdata_header();
+    gMapHeader = *get_mapheader_by_bank_and_number(gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum);
+    gSaveBlock1.mapDataId = gMapHeader.mapDataId;
+    gMapHeader.mapData = get_mapdata_header();
 }
 
 void sub_805338C(void)
 {
-    struct MapHeader *dest = &gMapHeader;
-    struct MapHeader *src = get_mapheader_by_bank_and_number(gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum);
-    *dest = *src;
-    dest->mapData = get_mapdata_header();
+    gMapHeader = *get_mapheader_by_bank_and_number(gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum);
+    gMapHeader.mapData = get_mapdata_header();
 }
 
 void sub_80533CC(void)
@@ -523,7 +521,7 @@ void sub_80538F0(u8 mapGroup, u8 mapNum)
     sub_8082BD0(mapGroup, mapNum);
     DoTimeBasedEvents();
     sub_80806E4();
-    sub_8054164();
+    ChooseAmbientCrySpecies();
     sub_8053C98();
     sav1_reset_battle_music_maybe();
     mapheader_run_script_with_tag_x3();
@@ -559,7 +557,7 @@ void sub_8053994(u32 a1)
     if (a1 != 1)
         DoTimeBasedEvents();
     sub_80806E4();
-    sub_8054164();
+    ChooseAmbientCrySpecies();
     if (v2)
         FlagReset(SYS_USE_FLASH);
     sub_8053C98();
@@ -854,11 +852,11 @@ void sub_8053F84(void)
         FadeOutAndPlayNewMapMusic(sav1_map_get_music(), 8);
 }
 
-void sub_8053FB0(u16 music)
+void ChangeMapMusic(u16 newMusic)
 {
     u16 currentMusic = GetCurrentMapMusic();
-    if (currentMusic != music && currentMusic != LEGENDARY_MUSIC)
-        FadeOutAndPlayNewMapMusic(music, 8);
+    if (currentMusic != newMusic && currentMusic != LEGENDARY_MUSIC)
+        FadeOutAndPlayNewMapMusic(newMusic, 8);
 }
 
 u8 is_warp1_light_level_8_or_9(void)
@@ -890,43 +888,43 @@ void sub_8054044(void)
     FadeOutMapMusic(4);
 }
 
-void sub_8054050(void)
+static void PlayAmbientCry(void)
 {
     s16 x, y;
-    PlayerGetDestCoords((u16 *)&x, (u16 *)&y);
-    if (gUnknown_02029816 != TRUE
+    PlayerGetDestCoords(&x, &y);
+    if (sIsAmbientCryWaterMon != TRUE
      || MetatileBehavior_IsSurfableWaterOrUnderwater(MapGridGetMetatileBehaviorAt(x, y)))
     {
         s8 pan = (Random() % 88) + 212;
         s8 volume = (Random() % 30) + 50;
-        PlayCry2(gUnknown_02029814, pan, volume, 1);
+        PlayCry2(sAmbientCrySpecies, pan, volume, 1);
     }
 }
 
-void sub_80540D0(s16 *a1, u16 *a2)
+void UpdateAmbientCry(s16 *state, u16 *delayCounter)
 {
-    switch (*a1)
+    switch (*state)
     {
     case 0:
-        if (!gUnknown_02029814)
-            *a1 = 4;
+        if (sAmbientCrySpecies == SPECIES_NONE)
+            *state = 4;
         else
-            *a1 = 1;
+            *state = 1;
         break;
     case 1:
-        *a2 = (Random() % 2400) + 1200;
-        *a1 = 3;
+        *delayCounter = (Random() % 2400) + 1200;
+        *state = 3;
         break;
     case 2:
-        *a2 = (Random() % 1200) + 1200;
-        *a1 = 3;
+        *delayCounter = (Random() % 1200) + 1200;
+        *state = 3;
         break;
     case 3:
-        (*a2)--;
-        if (*a2 == 0)
+        (*delayCounter)--;
+        if (*delayCounter == 0)
         {
-            sub_8054050();
-            *a1 = 2;
+            PlayAmbientCry();
+            *state = 2;
         }
         break;
     case 4:
@@ -934,16 +932,16 @@ void sub_80540D0(s16 *a1, u16 *a2)
     }
 }
 
-void sub_8054164(void)
+void ChooseAmbientCrySpecies(void)
 {
     if ((gSaveBlock1.location.mapGroup == 0 && gSaveBlock1.location.mapNum == 45) && !IsMirageIslandPresent())
     {
-        gUnknown_02029816 = TRUE;
-        gUnknown_02029814 = GetMirageIslandMon();
+        sIsAmbientCryWaterMon = TRUE;
+        sAmbientCrySpecies = GetMirageIslandMon();
     }
     else
     {
-        gUnknown_02029814 = GetLocalWildMon(&gUnknown_02029816);
+        sAmbientCrySpecies = GetLocalWildMon(&sIsAmbientCryWaterMon);
     }
 }
 

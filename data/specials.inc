@@ -58,7 +58,7 @@ gSpecials::
 	def_special FieldObjectInteractionWaterBerryTree
 	def_special PlayerHasBerries
 	def_special IsEnigmaBerryValid
-	def_special sub_8082558
+	def_special ScrSpecial_GetTrainerBattleMode
 	def_special sub_80826D8
 	def_special sub_8082718
 	def_special sub_8082564

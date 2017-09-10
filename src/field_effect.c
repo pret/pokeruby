@@ -2881,7 +2881,7 @@ u8 FldEff_UseSurf(void)
     taskId = CreateTask(sub_8088954, 0xff);
     gTasks[taskId].data[15] = gFieldEffectArguments[0];
     sav1_reset_battle_music_maybe();
-    sub_8053FB0(0x016d);
+    ChangeMapMusic(0x016d);
     return FALSE;
 }
 

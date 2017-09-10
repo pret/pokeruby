@@ -17,18 +17,18 @@ static void UnfreezeObjects(u8);
 static void Task_80A244C(u8);
 static void sub_80A2490(u8, u8, u8, u8 *);
 
-bool8 exec_movement(u8 a, u8 b, u8 c, u8 *d)
+bool8 ScriptMovement_StartObjectMovementScript(u8 localId, u8 mapNum, u8 mapGroup, u8 *movementScript)
 {
     u8 mapObjId;
 
-    if (TryGetFieldObjectIdByLocalIdAndMap(a, b, c, &mapObjId))
+    if (TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjId))
         return TRUE;
     if (!FuncIsActiveTask(Task_80A244C))
         sub_80A2198(50);
-    return sub_80A21F4(sub_80A21E0(), mapObjId, d);
+    return sub_80A21F4(sub_80A21E0(), mapObjId, movementScript);
 }
 
-bool8 sub_80A212C(u8 localId, u8 mapNum, u8 mapBank)
+bool8 ScriptMovement_IsObjectMovementFinished(u8 localId, u8 mapNum, u8 mapBank)
 {
     u8 mapObjId;
     u8 r4;
@@ -70,27 +70,31 @@ static u8 sub_80A21E0(void)
     return FindTaskIdByFunc(Task_80A244C);
 }
 
-static bool8 sub_80A21F4(u8 taskId, u8 b, u8 *c)
+static bool8 sub_80A21F4(u8 taskId, u8 mapObjId, u8 *movementScript)
 {
     u8 r4;
 
-    r4 = sub_80A2260(taskId, b);
+    r4 = sub_80A2260(taskId, mapObjId);
     if (r4 != 16)
     {
         if (sub_80A2370(taskId, r4) == 0)
+        {
             return TRUE;
+        }
         else
         {
-            sub_80A23C8(taskId, r4, b, c);
+            sub_80A23C8(taskId, r4, mapObjId, movementScript);
             return FALSE;
         }
     }
     r4 = sub_80A2260(taskId, 0xFF);
     if (r4 == 16)
+    {
         return TRUE;
+    }
     else
     {
-        sub_80A23C8(taskId, r4, b, c);
+        sub_80A23C8(taskId, r4, mapObjId, movementScript);
         return FALSE;
     }
 }
@@ -156,9 +160,9 @@ static bool8 sub_80A2370(u8 taskId, u8 b)
         return FALSE;
 }
 
-static void npc_obj_offscreen_culling_and_flag_update(u8 a, u8 *b)
+static void npc_obj_offscreen_culling_and_flag_update(u8 a, u8 *movementScript)
 {
-    gUnknown_020384F8[a] = b;
+    gUnknown_020384F8[a] = movementScript;
 }
 
 static u8 *sub_80A23B8(u8 a)
@@ -166,11 +170,11 @@ static u8 *sub_80A23B8(u8 a)
     return gUnknown_020384F8[a];
 }
 
-static void sub_80A23C8(u8 taskId, u8 b, u8 c, u8 *d)
+static void sub_80A23C8(u8 taskId, u8 b, u8 mapObjId, u8 *movementScript)
 {
     sub_80A2318(taskId, b);
-    npc_obj_offscreen_culling_and_flag_update(b, d);
-    sub_80A22D0(taskId, b, c);
+    npc_obj_offscreen_culling_and_flag_update(b, movementScript);
+    sub_80A22D0(taskId, b, mapObjId);
 }
 
 static void UnfreezeObjects(u8 taskId)

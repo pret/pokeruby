@@ -944,7 +944,7 @@ void GetOnOffBike(u8 var)
     {
         SetPlayerAvatarTransitionFlags(var);
         sav1_set_battle_music_maybe(BGM_CYCLING);
-        sub_8053FB0(BGM_CYCLING);
+        ChangeMapMusic(BGM_CYCLING);
     }
 }
 

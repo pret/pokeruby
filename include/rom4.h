@@ -97,14 +97,14 @@ void sav1_set_battle_music_maybe(u16);
 void sav1_reset_battle_music_maybe(void);
 void sub_8053F0C(void);
 void sub_8053F84(void);
-void sub_8053FB0(u16);
+void ChangeMapMusic(u16);
 // is_warp1_light_level_8_or_9
 void sub_8053FF8(void);
 bool8 sub_8054034(void);
 void sub_8054044(void);
-// sub_8054050
-void sub_80540D0(s16 *, u16 *);
-void sub_8054164(void);
+// PlayAmbientCry
+void UpdateAmbientCry(s16 *, u16 *);
+void ChooseAmbientCrySpecies(void);
 u8 get_map_light_level_by_bank_and_number(s8 mapGroup, s8 mapNum);
 // get_map_light_level_from_warp
 u8 sav1_map_get_light_level(void);

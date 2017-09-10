@@ -106,7 +106,7 @@ static const u8 *const gPCText_OptionDescList[] =
     gMenuText_GoBackToPrev
 };
 
-static const struct MenuAction2 gPCText_PlayerPCOptionsText[] =
+static const struct MenuAction2 sPlayerPCMenuActions[] =
 {
     { SecretBaseText_ItemStorage, PlayerPC_ItemStorage },
     { gPCText_Mailbox, PlayerPC_Mailbox },
@@ -226,7 +226,7 @@ void PlayerPC(void)
 static void InitPlayerPCMenu(u8 taskId)
 {
     MenuDrawTextWindow(0, 0, 10, gPcItemMenuOptionsNum * 2 + 1);
-    PrintMenuItemsReordered(1, 1, gPcItemMenuOptionsNum, (struct MenuAction *)gPCText_PlayerPCOptionsText, gPcItemMenuOptionOrder);
+    PrintMenuItemsReordered(1, 1, gPcItemMenuOptionsNum, sPlayerPCMenuActions, gPcItemMenuOptionOrder);
     InitMenu(0, 1, 1, gPcItemMenuOptionsNum, 0, 9);
     TASK.FUNC = PlayerPCProcessMenuInput;
 }
@@ -247,13 +247,13 @@ static void PlayerPCProcessMenuInput(u8 taskId)
     {
         HandleDestroyMenuCursors();
         PlaySE(SE_SELECT);
-        gPCText_PlayerPCOptionsText[gPcItemMenuOptionOrder[GetMenuCursorPos()]].func(taskId);
+        sPlayerPCMenuActions[gPcItemMenuOptionOrder[GetMenuCursorPos()]].func(taskId);
     }
     else if (gMain.newKeys & B_BUTTON)
     {
         HandleDestroyMenuCursors();
         PlaySE(SE_SELECT);
-        gPCText_PlayerPCOptionsText[gPcItemMenuOptionsNum[gPcItemMenuOptionOrder - 1]].func(taskId); // run EXIT.
+        sPlayerPCMenuActions[gPcItemMenuOptionsNum[gPcItemMenuOptionOrder - 1]].func(taskId); // run EXIT.
     }
 }
 

@@ -815,7 +815,7 @@ bool8 ScrCmd_playsfx(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 s30_music_check_asm()
+static bool8 WaitForSoundEffectFinish()
 {
     if (!IsSEPlaying())
         return TRUE;
@@ -825,7 +825,7 @@ bool8 s30_music_check_asm()
 
 bool8 ScrCmd_checksound(struct ScriptContext *ctx)
 {
-    SetupNativeScript(ctx, s30_music_check_asm);
+    SetupNativeScript(ctx, WaitForSoundEffectFinish);
     return TRUE;
 }
 
@@ -835,14 +835,14 @@ bool8 ScrCmd_fanfare(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 s32_fanfare_wait_asm()
+static bool8 WaitForFanfareFinish()
 {
     return IsFanfareTaskInactive();
 }
 
 bool8 ScrCmd_waitfanfare(struct ScriptContext *ctx)
 {
-    SetupNativeScript(ctx, s32_fanfare_wait_asm);
+    SetupNativeScript(ctx, WaitForFanfareFinish);
     return TRUE;
 }
 
@@ -870,15 +870,15 @@ bool8 ScrCmd_fadedefault(struct ScriptContext *ctx)
 
 bool8 ScrCmd_fademusic(struct ScriptContext *ctx)
 {
-    sub_8053FB0(ScriptReadHalfword(ctx));
+    ChangeMapMusic(ScriptReadHalfword(ctx));
     return FALSE;
 }
 
 bool8 ScrCmd_fadeout(struct ScriptContext *ctx)
 {
-    u8 val = ScriptReadByte(ctx);
-    if (val)
-        FadeOutBGMTemporarily(4 * val);
+    u8 speed = ScriptReadByte(ctx);
+    if (speed != 0)
+        FadeOutBGMTemporarily(4 * speed);
     else
         FadeOutBGMTemporarily(4);
     SetupNativeScript(ctx, IsBGMPausedOrStopped);
@@ -887,9 +887,9 @@ bool8 ScrCmd_fadeout(struct ScriptContext *ctx)
 
 bool8 ScrCmd_fadein(struct ScriptContext *ctx)
 {
-    u8 val = ScriptReadByte(ctx);
-    if (val)
-        FadeInBGM(4 * val);
+    u8 speed = ScriptReadByte(ctx);
+    if (speed != 0)
+        FadeInBGM(4 * speed);
     else
         FadeInBGM(4);
     return FALSE;
@@ -897,53 +897,56 @@ bool8 ScrCmd_fadein(struct ScriptContext *ctx)
 
 bool8 ScrCmd_move(struct ScriptContext *ctx)
 {
-    u16 v1 = VarGet(ScriptReadHalfword(ctx));
-    void *v2 = (void *)ScriptReadWord(ctx);
-    exec_movement(v1, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, v2);
-    sMovingNpcId = v1;
+    u16 localId = VarGet(ScriptReadHalfword(ctx));
+    void *movementScript = (void *)ScriptReadWord(ctx);
+
+    ScriptMovement_StartObjectMovementScript(localId, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, movementScript);
+    sMovingNpcId = localId;
     return FALSE;
 }
 
 bool8 ScrCmd_movecoords(struct ScriptContext *ctx)
 {
-    u16 v1 = VarGet(ScriptReadHalfword(ctx));
-    void *v2 = (void *)ScriptReadWord(ctx);
-    u8 v3 = ScriptReadByte(ctx);
-    u8 v4 = ScriptReadByte(ctx);
-    exec_movement(v1, v4, v3, v2);
-    sMovingNpcId = v1;
+    u16 localId = VarGet(ScriptReadHalfword(ctx));
+    void *movementScript = (void *)ScriptReadWord(ctx);
+    u8 mapGroup = ScriptReadByte(ctx);
+    u8 mapNum = ScriptReadByte(ctx);
+
+    ScriptMovement_StartObjectMovementScript(localId, mapNum, mapGroup, movementScript);
+    sMovingNpcId = localId;
     return FALSE;
 }
 
-bool8 s51a_0806B288(void)
+static bool8 WaitForMovementFinish(void)
 {
-    return sub_80A212C(sMovingNpcId, sMovingNpcMapId, sMovingNpcMapBank);
+    return ScriptMovement_IsObjectMovementFinished(sMovingNpcId, sMovingNpcMapId, sMovingNpcMapBank);
 }
 
 bool8 ScrCmd_waitmove(struct ScriptContext *ctx)
 {
-    u16 v1 = VarGet(ScriptReadHalfword(ctx));
-    if (v1)
-        sMovingNpcId = v1;
+    u16 localId = VarGet(ScriptReadHalfword(ctx));
+
+    if (localId != 0)
+        sMovingNpcId = localId;
     sMovingNpcMapBank = gSaveBlock1.location.mapGroup;
     sMovingNpcMapId = gSaveBlock1.location.mapNum;
-    SetupNativeScript(ctx, s51a_0806B288);
+    SetupNativeScript(ctx, WaitForMovementFinish);
     return TRUE;
 }
 
 bool8 ScrCmd_waitmovexy(struct ScriptContext *ctx)
 {
-    u16 v1 = VarGet(ScriptReadHalfword(ctx));
+    u16 localId = VarGet(ScriptReadHalfword(ctx));
     u8 mapBank;
     u8 mapId;
 
-    if (v1 != 0)
-        sMovingNpcId = v1;
+    if (localId != 0)
+        sMovingNpcId = localId;
     mapBank = ScriptReadByte(ctx);
     mapId = ScriptReadByte(ctx);
     sMovingNpcMapBank = mapBank;
     sMovingNpcMapId = mapId;
-    SetupNativeScript(ctx, s51a_0806B288);
+    SetupNativeScript(ctx, WaitForMovementFinish);
     return TRUE;
 }
 
@@ -1053,9 +1056,9 @@ bool8 ScrCmd_faceplayer(struct ScriptContext *ctx)
 
 bool8 ScrCmd_spriteface(struct ScriptContext *ctx)
 {
-    u16 v1 = VarGet(ScriptReadHalfword(ctx));
-    u8 v2 = ScriptReadByte(ctx);
-    FieldObjectTurnByLocalIdAndMap(v1, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, v2);
+    u16 localId = VarGet(ScriptReadHalfword(ctx));
+    u8 direction = ScriptReadByte(ctx);
+    FieldObjectTurnByLocalIdAndMap(localId, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, direction);
     return FALSE;
 }
 
@@ -1111,7 +1114,7 @@ bool8 ScrCmd_lock(struct ScriptContext *ctx)
     {
         if (gMapObjects[gSelectedMapObject].active)
         {
-            sub_8064DD8();
+            LockSelectedMapObject();
             SetupNativeScript(ctx, sub_8064DB4);
         }
         else

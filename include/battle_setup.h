@@ -85,7 +85,7 @@ u8 *TrainerBattleConfigure(const u8 *data);
 void TrainerWantsBattle(u8, u8 *);
 bool32 GetTrainerFlagFromScriptPointer(u8 *data);
 //void sub_8082524(void);
-//u8 sub_8082558(void);
+//u8 ScrSpecial_GetTrainerBattleMode(void);
 //u8 sub_8082564(void);
 //void sub_808257C(void);
 //void unref_sub_8082590(void); // unused

@@ -1040,7 +1040,7 @@ EventScript_19F8F2:
 	waittext
 	waitbutton
 	reptrainerbattle
-	specialval RESULT, sub_8082558
+	specialval RESULT, ScrSpecial_GetTrainerBattleMode
 	compare RESULT, 0
 	jumpeq EventScript_19F934
 	compare RESULT, 2
