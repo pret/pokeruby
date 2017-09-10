@@ -8,6 +8,8 @@
 #include "sprite.h"
 #include "fieldmap.h"
 #include "metatile_behavior.h"
+#include "songs.h"
+#include "sound.h"
 #include "field_map_obj.h"
 #include "field_camera.h"
 #include "field_map_obj_helpers.h"
@@ -619,4 +621,32 @@ static void sub_81275C4(struct Sprite *sprite)
     {
         FieldEffectStop(sprite, sprite->data7);
     }
+}
+
+u8 FldEff_Splash(void)
+{
+    u8 mapObjectId;
+    struct MapObject *mapObject;
+    u8 spriteId;
+    struct Sprite *sprite;
+    const struct MapObjectGraphicsInfo *graphicsInfo;
+    struct Sprite *linkedSprite;
+
+    mapObjectId = GetFieldObjectIdByLocalIdAndMap(gFieldEffectSpawnParams[0], gFieldEffectSpawnParams[1], gFieldEffectSpawnParams[2]);
+    mapObject = &gMapObjects[mapObjectId];
+    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[13], 0, 0, 0);
+    if (spriteId != MAX_SPRITES)
+    {
+        graphicsInfo = GetFieldObjectGraphicsInfo(mapObject->graphicsId);
+        sprite = &gSprites[spriteId];
+        sprite->coordOffsetEnabled = TRUE;
+        linkedSprite = &gSprites[mapObject->spriteId];
+        sprite->oam.priority = linkedSprite->oam.priority;
+        sprite->data0 = gFieldEffectSpawnParams[0];
+        sprite->data1 = gFieldEffectSpawnParams[1];
+        sprite->data2 = gFieldEffectSpawnParams[2];
+        sprite->pos2.y = (graphicsInfo->height >> 1) - 4;
+        PlaySE(SE_MIZU);
+    }
+    return 0;
 }
