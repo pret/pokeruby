@@ -35,7 +35,7 @@ static void sub_8127E30(struct Sprite *);
 /*static*/ void sub_812882C(struct Sprite *, u8, u8);
 static void sub_81278D8(struct Sprite *);
 static void sub_8127FD4(struct MapObject *, struct Sprite *);
-/*static*/ void sub_812800C(struct MapObject *, struct Sprite *);
+static void sub_812800C(struct MapObject *, struct Sprite *);
 /*static*/ void sub_81280A0(struct MapObject *, struct Sprite *, struct Sprite *);
 
 // .rodata
@@ -1039,3 +1039,108 @@ static void sub_8127FD4(struct MapObject *mapObject, struct Sprite *sprite)
         StartSpriteAnimIfDifferent(sprite, unk_8041E54[mapObject->placeholder18]);
     }
 }
+
+#ifdef NONMATCHING
+static void sub_812800C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    s16 x;
+    s16 y;
+    u8 i;
+
+    x = mapObject->coords2.x;
+    y = mapObject->coords2.y;
+    if (sprite->pos2.y == 0 && (x != sprite->data6 || y != sprite->data7))
+    {
+        sprite->data5 = sprite->pos2.y;
+        for (sprite->data6 = x, sprite->data7 = y, i = DIR_SOUTH; i <= DIR_EAST; i ++, x = sprite->data6, y = sprite->data7)
+        {
+            MoveCoords(i, &x, &y);
+            if (MapGridGetZCoordAt(x, y) == 3)
+            {
+                sprite->data5 ++;
+                break;
+            }
+        }
+    }
+}
+#else
+__attribute__((naked)) static void sub_812800C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                    "\tmov r7, r8\n"
+                    "\tpush {r7}\n"
+                    "\tsub sp, 0x4\n"
+                    "\tadds r4, r1, 0\n"
+                    "\tldrh r2, [r0, 0x10]\n"
+                    "\tmov r1, sp\n"
+                    "\tstrh r2, [r1]\n"
+                    "\tldrh r1, [r0, 0x12]\n"
+                    "\tmov r0, sp\n"
+                    "\tadds r0, 0x2\n"
+                    "\tstrh r1, [r0]\n"
+                    "\tmovs r2, 0x26\n"
+                    "\tldrsh r3, [r4, r2]\n"
+                    "\tmov r8, r0\n"
+                    "\tcmp r3, 0\n"
+                    "\tbne _08128094\n"
+                    "\tmov r0, sp\n"
+                    "\tmovs r5, 0\n"
+                    "\tldrsh r2, [r0, r5]\n"
+                    "\tmovs r5, 0x3A\n"
+                    "\tldrsh r0, [r4, r5]\n"
+                    "\tcmp r2, r0\n"
+                    "\tbne _08128048\n"
+                    "\tlsls r0, r1, 16\n"
+                    "\tasrs r0, 16\n"
+                    "\tmovs r5, 0x3C\n"
+                    "\tldrsh r1, [r4, r5]\n"
+                    "\tcmp r0, r1\n"
+                    "\tbeq _08128094\n"
+                    "_08128048:\n"
+                    "\tstrh r3, [r4, 0x38]\n"
+                    "\tstrh r2, [r4, 0x3A]\n"
+                    "\tmov r1, r8\n"
+                    "\tmovs r2, 0\n"
+                    "\tldrsh r0, [r1, r2]\n"
+                    "\tstrh r0, [r4, 0x3C]\n"
+                    "\tmovs r5, 0x1\n"
+                    "\tmov r7, r8\n"
+                    "\tmov r6, sp\n"
+                    "_0812805A:\n"
+                    "\tadds r0, r5, 0\n"
+                    "\tmov r1, sp\n"
+                    "\tadds r2, r7, 0\n"
+                    "\tbl MoveCoords\n"
+                    "\tmovs r1, 0\n"
+                    "\tldrsh r0, [r6, r1]\n"
+                    "\tmovs r2, 0\n"
+                    "\tldrsh r1, [r7, r2]\n"
+                    "\tbl MapGridGetZCoordAt\n"
+                    "\tlsls r0, 24\n"
+                    "\tlsrs r0, 24\n"
+                    "\tcmp r0, 0x3\n"
+                    "\tbne _08128080\n"
+                    "\tldrh r0, [r4, 0x38]\n"
+                    "\tadds r0, 0x1\n"
+                    "\tstrh r0, [r4, 0x38]\n"
+                    "\tb _08128094\n"
+                    "_08128080:\n"
+                    "\tadds r0, r5, 0x1\n"
+                    "\tlsls r0, 24\n"
+                    "\tlsrs r5, r0, 24\n"
+                    "\tldrh r0, [r4, 0x3A]\n"
+                    "\tstrh r0, [r6]\n"
+                    "\tldrh r0, [r4, 0x3C]\n"
+                    "\tmov r1, r8\n"
+                    "\tstrh r0, [r1]\n"
+                    "\tcmp r5, 0x4\n"
+                    "\tbls _0812805A\n"
+                    "_08128094:\n"
+                    "\tadd sp, 0x4\n"
+                    "\tpop {r3}\n"
+                    "\tmov r8, r3\n"
+                    "\tpop {r4-r7}\n"
+                    "\tpop {r0}\n"
+                    "\tbx r0");
+}
+#endif
