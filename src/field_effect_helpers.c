@@ -32,7 +32,7 @@ static void sub_81275C4(struct Sprite *);
 static void sub_8127DA0(struct Sprite *);
 static void sub_8127DD0(struct Sprite *);
 static void sub_8127E30(struct Sprite *);
-/*static*/ void sub_812882C(struct Sprite *, u8, u8);
+static void sub_812882C(struct Sprite *, u8, u8);
 static void sub_81278D8(struct Sprite *);
 static void sub_8127FD4(struct MapObject *, struct Sprite *);
 static void sub_812800C(struct MapObject *, struct Sprite *);
@@ -1495,3 +1495,153 @@ void sub_8128800(struct Sprite *sprite)
         sub_806487C(sprite, FALSE);
     }
 }
+
+#ifdef NONMATCHING
+static void sub_812882C(struct Sprite *sprite /*r6*/, u8 z, u8 offset)
+{
+    u8 i;
+    s16 xlo;
+    s16 xhi;
+    s16 lx;
+    s16 lyhi;
+    s16 ly;
+    s16 ylo;
+    s16 yhi;
+    struct MapObject *mapObject; // r4
+    const struct MapObjectGraphicsInfo *graphicsInfo; // destroyed
+    struct Sprite *linkedSprite; // r5
+
+    SetObjectSubpriorityByZCoord(z, sprite, offset);
+    for (i = 0; i < 16; i ++)
+    {
+        mapObject = &gMapObjects[i];
+        if (mapObject->active)
+        {
+            graphicsInfo = GetFieldObjectGraphicsInfo(mapObject->graphicsId);
+            linkedSprite = &gSprites[mapObject->spriteId];
+            xhi = sprite->pos1.x + sprite->centerToCornerVecX;
+            xlo = sprite->pos1.x - sprite->centerToCornerVecX;
+            lx = linkedSprite->pos1.x;
+            if (xhi < lx && xlo > lx)
+            {
+                lyhi = linkedSprite->pos1.y + linkedSprite->centerToCornerVecY;
+                ly = linkedSprite->pos1.y;
+                ylo = sprite->pos1.y - sprite->centerToCornerVecY;
+                yhi = ylo + linkedSprite->centerToCornerVecY;
+                if ((lyhi < yhi || lyhi < ylo) && ly > yhi)
+                {
+                    if (sprite->subpriority <= linkedSprite->subpriority)
+                    {
+                        sprite->subpriority = linkedSprite->subpriority + 2;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+}
+#else
+__attribute__((naked)) static void sub_812882C(struct Sprite *sprite /*r6*/, u8 z, u8 offset)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                    "\tadds r6, r0, 0\n"
+                    "\tadds r0, r1, 0\n"
+                    "\tlsls r0, 24\n"
+                    "\tlsrs r0, 24\n"
+                    "\tlsls r2, 24\n"
+                    "\tlsrs r2, 24\n"
+                    "\tadds r1, r6, 0\n"
+                    "\tbl SetObjectSubpriorityByZCoord\n"
+                    "\tmovs r7, 0\n"
+                    "_08128842:\n"
+                    "\tlsls r0, r7, 3\n"
+                    "\tadds r0, r7\n"
+                    "\tlsls r0, 2\n"
+                    "\tldr r1, _081288DC @ =gMapObjects\n"
+                    "\tadds r4, r0, r1\n"
+                    "\tldrb r0, [r4]\n"
+                    "\tlsls r0, 31\n"
+                    "\tcmp r0, 0\n"
+                    "\tbeq _081288E4\n"
+                    "\tldrb r0, [r4, 0x5]\n"
+                    "\tbl GetFieldObjectGraphicsInfo\n"
+                    "\tldrb r1, [r4, 0x4]\n"
+                    "\tlsls r0, r1, 4\n"
+                    "\tadds r0, r1\n"
+                    "\tlsls r0, 2\n"
+                    "\tldr r1, _081288E0 @ =gSprites\n"
+                    "\tadds r5, r0, r1\n"
+                    "\tadds r0, r6, 0\n"
+                    "\tadds r0, 0x28\n"
+                    "\tmovs r2, 0\n"
+                    "\tldrsb r2, [r0, r2]\n"
+                    "\tldrh r0, [r6, 0x20]\n"
+                    "\tadds r1, r0, r2\n"
+                    "\tsubs r0, r2\n"
+                    "\tlsls r0, 16\n"
+                    "\tlsrs r4, r0, 16\n"
+                    "\tlsls r1, 16\n"
+                    "\tasrs r1, 16\n"
+                    "\tmovs r0, 0x20\n"
+                    "\tldrsh r2, [r5, r0]\n"
+                    "\tcmp r1, r2\n"
+                    "\tbge _081288E4\n"
+                    "\tlsls r0, r4, 16\n"
+                    "\tasrs r0, 16\n"
+                    "\tcmp r0, r2\n"
+                    "\tble _081288E4\n"
+                    "\tadds r0, r5, 0\n"
+                    "\tadds r0, 0x29\n"
+                    "\tmovs r3, 0\n"
+                    "\tldrsb r3, [r0, r3]\n"
+                    "\tldrh r2, [r5, 0x22]\n"
+                    "\tadds r2, r3\n"
+                    "\tldrh r4, [r5, 0x22]\n"
+                    "\tadds r0, r6, 0\n"
+                    "\tadds r0, 0x29\n"
+                    "\tmovs r1, 0\n"
+                    "\tldrsb r1, [r0, r1]\n"
+                    "\tldrh r0, [r6, 0x22]\n"
+                    "\tsubs r0, r1\n"
+                    "\tlsls r0, 16\n"
+                    "\tasrs r0, 16\n"
+                    "\tadds r3, r0, r3\n"
+                    "\tlsls r2, 16\n"
+                    "\tasrs r2, 16\n"
+                    "\tlsls r3, 16\n"
+                    "\tasrs r3, 16\n"
+                    "\tcmp r2, r3\n"
+                    "\tblt _081288BC\n"
+                    "\tcmp r2, r0\n"
+                    "\tbge _081288E4\n"
+                    "_081288BC:\n"
+                    "\tlsls r0, r4, 16\n"
+                    "\tasrs r0, 16\n"
+                    "\tcmp r0, r3\n"
+                    "\tble _081288E4\n"
+                    "\tadds r2, r6, 0\n"
+                    "\tadds r2, 0x43\n"
+                    "\tadds r0, r5, 0\n"
+                    "\tadds r0, 0x43\n"
+                    "\tldrb r1, [r0]\n"
+                    "\tldrb r0, [r2]\n"
+                    "\tcmp r0, r1\n"
+                    "\tbhi _081288E4\n"
+                    "\tadds r0, r1, 0x2\n"
+                    "\tstrb r0, [r2]\n"
+                    "\tb _081288EE\n"
+                    "\t.align 2, 0\n"
+                    "_081288DC: .4byte gMapObjects\n"
+                    "_081288E0: .4byte gSprites\n"
+                    "_081288E4:\n"
+                    "\tadds r0, r7, 0x1\n"
+                    "\tlsls r0, 24\n"
+                    "\tlsrs r7, r0, 24\n"
+                    "\tcmp r7, 0xF\n"
+                    "\tbls _08128842\n"
+                    "_081288EE:\n"
+                    "\tpop {r4-r7}\n"
+                    "\tpop {r0}\n"
+                    "\tbx r0");
+}
+#endif
