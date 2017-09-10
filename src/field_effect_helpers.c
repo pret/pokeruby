@@ -34,6 +34,9 @@ static void sub_8127DD0(struct Sprite *);
 static void sub_8127E30(struct Sprite *);
 /*static*/ void sub_812882C(struct Sprite *, u8, u8);
 static void sub_81278D8(struct Sprite *);
+/*static*/ void sub_8127FD4(struct MapObject *, struct Sprite *);
+/*static*/ void sub_812800C(struct MapObject *, struct Sprite *);
+/*static*/ void sub_81280A0(struct MapObject *, struct Sprite *, struct Sprite *);
 
 // .rodata
 
@@ -998,17 +1001,30 @@ void sub_8127F28(u8 spriteId, u8 value, s16 data1)
     gSprites[spriteId].data1 = data1;
 }
 
-u8 sub_8127F5C(struct Sprite *sprite)
+/*static*/ u8 sub_8127F5C(struct Sprite *sprite)
 {
     return sprite->data0 & 0xF;
 }
 
-u8 sub_8127F64(struct Sprite *sprite)
+/*static*/ u8 sub_8127F64(struct Sprite *sprite)
 {
     return (sprite->data0 & 0xF0) >> 4;
 }
 
-u8 sub_8127F70(struct Sprite *sprite)
+/*static*/ u8 sub_8127F70(struct Sprite *sprite)
 {
     return (sprite->data0 & 0xF00) >> 8;
+}
+
+void sub_8127F7C(struct Sprite *sprite)
+{
+    struct MapObject *mapObject;
+    struct Sprite *linkedSprite;
+
+    mapObject = &gMapObjects[sprite->data2];
+    linkedSprite = &gSprites[mapObject->spriteId];
+    sub_8127FD4(mapObject, sprite);
+    sub_812800C(mapObject, sprite);
+    sub_81280A0(mapObject, linkedSprite, sprite);
+    sprite->oam.priority = linkedSprite->oam.priority;
 }

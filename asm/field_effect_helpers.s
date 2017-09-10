@@ -6,50 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_8127F7C
-sub_8127F7C: @ 8127F7C
-	push {r4-r6,lr}
-	adds r6, r0, 0
-	movs r1, 0x32
-	ldrsh r0, [r6, r1]
-	lsls r4, r0, 3
-	adds r4, r0
-	lsls r4, 2
-	ldr r0, _08127FCC @ =gMapObjects
-	adds r4, r0
-	ldrb r0, [r4, 0x4]
-	lsls r5, r0, 4
-	adds r5, r0
-	lsls r5, 2
-	ldr r0, _08127FD0 @ =gSprites
-	adds r5, r0
-	adds r0, r4, 0
-	adds r1, r6, 0
-	bl sub_8127FD4
-	adds r0, r4, 0
-	adds r1, r6, 0
-	bl sub_812800C
-	adds r0, r4, 0
-	adds r1, r5, 0
-	adds r2, r6, 0
-	bl sub_81280A0
-	ldrb r0, [r5, 0x5]
-	movs r1, 0xC
-	ands r1, r0
-	ldrb r2, [r6, 0x5]
-	movs r0, 0xD
-	negs r0, r0
-	ands r0, r2
-	orrs r0, r1
-	strb r0, [r6, 0x5]
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08127FCC: .4byte gMapObjects
-_08127FD0: .4byte gSprites
-	thumb_func_end sub_8127F7C
-
 	thumb_func_start sub_8127FD4
 sub_8127FD4: @ 8127FD4
 	push {r4,r5,lr}
