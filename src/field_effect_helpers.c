@@ -902,3 +902,27 @@ void ash(s16 x, s16 y, u16 c, s16 d)
     gFieldEffectSpawnParams[5] = d;
     FieldEffectStart(FLDEFF_ASH);
 }
+
+u8 FldEff_Ash(void)
+{
+    s16 x;
+    s16 y;
+    u8 spriteId;
+    struct Sprite *sprite;
+
+    x = gFieldEffectSpawnParams[0];
+    y = gFieldEffectSpawnParams[1];
+    sub_8060470(&x, &y, 8, 8);
+    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[6], x, y, gFieldEffectSpawnParams[2]);
+    if (spriteId != MAX_SPRITES)
+    {
+        sprite = &gSprites[spriteId];
+        sprite->coordOffsetEnabled = TRUE;
+        sprite->oam.priority = gFieldEffectSpawnParams[3];
+        sprite->data1 = gFieldEffectSpawnParams[0];
+        sprite->data2 = gFieldEffectSpawnParams[1];
+        sprite->data3 = gFieldEffectSpawnParams[4];
+        sprite->data4 = gFieldEffectSpawnParams[5];
+    }
+    return 0;
+}
