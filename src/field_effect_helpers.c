@@ -332,7 +332,7 @@ void unc_grass_normal(struct Sprite *sprite)
     u8 localId;
     u8 mapObjectId;
     struct MapObject *mapObject;
-    
+
     mapNum = sprite->data5 >> 8;
     mapGroup = sprite->data5;
     if (gCamera.field_0 && (gSaveBlock1.location.mapNum != mapNum || gSaveBlock1.location.mapGroup != mapGroup))
@@ -1144,3 +1144,36 @@ __attribute__((naked)) static void sub_812800C(struct MapObject *mapObject, stru
                     "\tbx r0");
 }
 #endif
+
+void sub_81280A0(struct MapObject *mapObject, struct Sprite *linkedSprite, struct Sprite *sprite)
+{
+    u16 unk_8401E5A[ARRAY_COUNT(gUnknown_08401E5A)];
+    u8 v0;
+
+    memcpy(unk_8401E5A, gUnknown_08401E5A, sizeof gUnknown_08401E5A);
+    v0 = sub_8127F5C(sprite);
+    if (v0 != 0)
+    {
+        if (((u16)(++ sprite->data4) & unk_8401E5A[sprite->data5]) == 0)
+        {
+            sprite->pos2.y += sprite->data3;
+        }
+        if ((sprite->data4 & 0x0F) == 0)
+        {
+            sprite->data3 = -sprite->data3;
+        }
+        if (v0 != 2)
+        {
+            if (sub_8127F70(sprite) == 0)
+            {
+                linkedSprite->pos2.y = sprite->pos2.y;
+            }
+            else
+            {
+                linkedSprite->pos2.y = sprite->data1 + sprite->pos2.y;
+            }
+            sprite->pos1.x = linkedSprite->pos1.x;
+            sprite->pos1.y = linkedSprite->pos1.y + 8;
+        }
+    }
+}
