@@ -34,7 +34,7 @@ static void sub_8127DD0(struct Sprite *);
 static void sub_8127E30(struct Sprite *);
 /*static*/ void sub_812882C(struct Sprite *, u8, u8);
 static void sub_81278D8(struct Sprite *);
-/*static*/ void sub_8127FD4(struct MapObject *, struct Sprite *);
+static void sub_8127FD4(struct MapObject *, struct Sprite *);
 /*static*/ void sub_812800C(struct MapObject *, struct Sprite *);
 /*static*/ void sub_81280A0(struct MapObject *, struct Sprite *, struct Sprite *);
 
@@ -120,7 +120,7 @@ s16 sub_81268D0(struct MapObject *mapObject)
 static void npc_pal_op(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 whichElement;
-    u16 unk_8041e2c[3];
+    u16 unk_8041e2c[ARRAY_COUNT(gUnknown_08401E2C)];
 
     memcpy(unk_8041e2c, gUnknown_08401E2C, sizeof gUnknown_08401E2C);
     sprite->data2 = 0;
@@ -1006,7 +1006,7 @@ void sub_8127F28(u8 spriteId, u8 value, s16 data1)
     return sprite->data0 & 0xF;
 }
 
-/*static*/ u8 sub_8127F64(struct Sprite *sprite)
+static u8 sub_8127F64(struct Sprite *sprite)
 {
     return (sprite->data0 & 0xF0) >> 4;
 }
@@ -1027,4 +1027,15 @@ void sub_8127F7C(struct Sprite *sprite)
     sub_812800C(mapObject, sprite);
     sub_81280A0(mapObject, linkedSprite, sprite);
     sprite->oam.priority = linkedSprite->oam.priority;
+}
+
+static void sub_8127FD4(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 unk_8041E54[ARRAY_COUNT(gUnknown_08401E54)];
+
+    memcpy(unk_8041E54, gUnknown_08401E54, sizeof gUnknown_08401E54);
+    if (sub_8127F64(sprite) == 0)
+    {
+        StartSpriteAnimIfDifferent(sprite, unk_8041E54[mapObject->placeholder18]);
+    }
 }

@@ -6,36 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_8127FD4
-sub_8127FD4: @ 8127FD4
-	push {r4,r5,lr}
-	sub sp, 0x8
-	adds r5, r0, 0
-	adds r4, r1, 0
-	ldr r1, _08128008 @ =gUnknown_08401E54
-	mov r0, sp
-	movs r2, 0x5
-	bl memcpy
-	adds r0, r4, 0
-	bl sub_8127F64
-	lsls r0, 24
-	cmp r0, 0
-	bne _08128000
-	ldrb r0, [r5, 0x18]
-	lsrs r0, 4
-	add r0, sp
-	ldrb r1, [r0]
-	adds r0, r4, 0
-	bl StartSpriteAnimIfDifferent
-_08128000:
-	add sp, 0x8
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08128008: .4byte gUnknown_08401E54
-	thumb_func_end sub_8127FD4
-
 	thumb_func_start sub_812800C
 sub_812800C: @ 812800C
 	push {r4-r7,lr}
