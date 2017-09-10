@@ -38,6 +38,7 @@ static void sub_8127FD4(struct MapObject *, struct Sprite *);
 static void sub_812800C(struct MapObject *, struct Sprite *);
 static void sub_81280A0(struct MapObject *, struct Sprite *, struct Sprite *);
 static void sub_8128174(struct Sprite *);
+static u32 ShowDisguiseFieldEffect(u8, u8, u8);
 
 // .rodata
 
@@ -251,7 +252,7 @@ void sub_8126BC4(u8 spriteId, u8 animNum, s16 x, s16 y)
     }
 }
 
-u8 FldEff_Shadow(void)
+u32 FldEff_Shadow(void)
 {
     u8 mapObjectId;
     const struct MapObjectGraphicsInfo *graphicsInfo;
@@ -295,7 +296,7 @@ void oamc_shadow(struct Sprite *sprite)
     }
 }
 
-u8 FldEff_TallGrass(void)
+u32 FldEff_TallGrass(void)
 {
     s16 x;
     s16 y;
@@ -367,7 +368,7 @@ void unc_grass_normal(struct Sprite *sprite)
     }
 }
 
-u8 FldEff_JumpTallGrass(void)
+u32 FldEff_JumpTallGrass(void)
 {
     u8 spriteId;
     struct Sprite *sprite;
@@ -404,7 +405,7 @@ u8 sub_8126FF0(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s16 y)
     return MAX_SPRITES;
 }
 
-u8 FldEff_LongGrass(void)
+u32 FldEff_LongGrass(void)
 {
     s16 x;
     s16 y;
@@ -471,7 +472,7 @@ void unc_grass_tall(struct Sprite *sprite)
     }
 }
 
-u8 FldEff_JumpLongGrass(void)
+u32 FldEff_JumpLongGrass(void)
 {
     u8 spriteId;
     struct Sprite *sprite;
@@ -489,7 +490,7 @@ u8 FldEff_JumpLongGrass(void)
     return 0;
 }
 
-u8 FldEff_ShortGrass(void)
+u32 FldEff_ShortGrass(void)
 {
     u8 mapObjectId;
     struct MapObject *mapObject;
@@ -549,7 +550,7 @@ void sub_8127334(struct Sprite *sprite)
     }
 }
 
-u8 FldEff_SandFootprints(void)
+u32 FldEff_SandFootprints(void)
 {
     u8 spriteId;
     struct Sprite *sprite;
@@ -567,7 +568,7 @@ u8 FldEff_SandFootprints(void)
     return 0;
 }
 
-u8 FldEff_DeepSandFootprints(void)
+u32 FldEff_DeepSandFootprints(void)
 {
     u8 spriteId;
     struct Sprite *sprite;
@@ -585,7 +586,7 @@ u8 FldEff_DeepSandFootprints(void)
     return spriteId;
 }
 
-u8 FldEff_BikeTireTracks(void)
+u32 FldEff_BikeTireTracks(void)
 {
     u8 spriteId;
     struct Sprite *sprite;
@@ -628,7 +629,7 @@ static void sub_81275C4(struct Sprite *sprite)
     }
 }
 
-u8 FldEff_Splash(void)
+u32 FldEff_Splash(void)
 {
     u8 mapObjectId;
     struct MapObject *mapObject;
@@ -672,7 +673,7 @@ void sub_81276B4(struct Sprite *sprite)
     }
 }
 
-u8 FldEff_JumpSmallSplash(void)
+u32 FldEff_JumpSmallSplash(void)
 {
     u8 spriteId;
     struct Sprite *sprite;
@@ -690,7 +691,7 @@ u8 FldEff_JumpSmallSplash(void)
     return 0;
 }
 
-u8 FldEff_JumpBigSplash(void)
+u32 FldEff_JumpBigSplash(void)
 {
     u8 spriteId;
     struct Sprite *sprite;
@@ -708,7 +709,7 @@ u8 FldEff_JumpBigSplash(void)
     return 0;
 }
 
-u8 FldEff_FeetInFlowingWater(void)
+u32 FldEff_FeetInFlowingWater(void)
 {
     u8 mapObjectId;
     struct MapObject *mapObject;
@@ -767,7 +768,7 @@ static void sub_81278D8(struct Sprite *sprite)
     }
 }
 
-u8 FldEff_Ripple(void)
+u32 FldEff_Ripple(void)
 {
     u8 spriteId;
     struct Sprite *sprite;
@@ -783,7 +784,7 @@ u8 FldEff_Ripple(void)
     return 0;
 }
 
-u8 FldEff_HotSpringsWater(void)
+u32 FldEff_HotSpringsWater(void)
 {
     u8 mapObjectId;
     struct MapObject *mapObject;
@@ -828,7 +829,7 @@ void sub_8127A7C(struct Sprite *sprite)
     }
 }
 
-u8 FldEff_Unknown19(void)
+u32 FldEff_Unknown19(void)
 {
     u8 spriteId;
     struct Sprite *sprite;
@@ -845,7 +846,7 @@ u8 FldEff_Unknown19(void)
     return 0;
 }
 
-u8 FldEff_Unknown20(void)
+u32 FldEff_Unknown20(void)
 {
     u8 spriteId;
     struct Sprite *sprite;
@@ -862,7 +863,7 @@ u8 FldEff_Unknown20(void)
     return 0;
 }
 
-u8 FldEff_Unknown21(void)
+u32 FldEff_Unknown21(void)
 {
     u8 spriteId;
     struct Sprite *sprite;
@@ -879,7 +880,7 @@ u8 FldEff_Unknown21(void)
     return 0;
 }
 
-u8 FldEff_Unknown22(void)
+u32 FldEff_Unknown22(void)
 {
     u8 spriteId;
     struct Sprite *sprite;
@@ -907,7 +908,7 @@ void ash(s16 x, s16 y, u16 c, s16 d)
     FieldEffectStart(FLDEFF_ASH);
 }
 
-u8 FldEff_Ash(void)
+u32 FldEff_Ash(void)
 {
     s16 x;
     s16 y;
@@ -965,7 +966,7 @@ static void sub_8127E30(struct Sprite *sprite)
     }
 }
 
-u8 FldEff_SurfBlob(void)
+u32 FldEff_SurfBlob(void)
 {
     u8 spriteId;
     struct Sprite *sprite;
@@ -1208,7 +1209,7 @@ static void sub_8128174(struct Sprite *sprite)
     }
 }
 
-u8 FldEff_Dust(void)
+u32 FldEff_Dust(void)
 {
     u8 spriteId;
     struct Sprite *sprite;
@@ -1226,7 +1227,7 @@ u8 FldEff_Dust(void)
     return 0;
 }
 
-u8 FldEff_SandPile(void)
+u32 FldEff_SandPile(void)
 {
     u8 mapObjectId;
     struct MapObject *mapObject;
@@ -1284,7 +1285,7 @@ void sub_81282E0(struct Sprite *sprite)
     }
 }
 
-u8 FldEff_Bubbles(void)
+u32 FldEff_Bubbles(void)
 {
     u8 spriteId;
     struct Sprite *sprite;
@@ -1312,7 +1313,7 @@ void sub_8128410(struct Sprite *sprite)
     }
 }
 
-u8 FldEff_BerryTreeGrowthSparkle(void)
+u32 FldEff_BerryTreeGrowthSparkle(void)
 {
     u8 spriteId;
     struct Sprite *sprite;
@@ -1329,3 +1330,46 @@ u8 FldEff_BerryTreeGrowthSparkle(void)
     }
     return 0;
 }
+
+u32 FldEff_TreeDisguise(void)
+{
+    return ShowDisguiseFieldEffect(FLDEFF_TREE_DISGUISE, 0x18, 0x04);
+}
+
+
+u32 FldEff_MountainDisguise(void)
+{
+    return ShowDisguiseFieldEffect(FLDEFF_MOUNTAIN_DISGUISE, 0x19, 0x03);
+}
+
+
+u32 FldEff_SandDisguise(void)
+{
+    return ShowDisguiseFieldEffect(FLDEFF_SAND_DISGUISE, 0x1C, 0x02);
+}
+
+static u32 ShowDisguiseFieldEffect(u8 fldEff, u8 templateIdx, u8 paletteNum)
+{
+    u8 spriteId;
+    struct Sprite *sprite;
+
+    if (TryGetFieldObjectIdByLocalIdAndMap(gFieldEffectSpawnParams[0], gFieldEffectSpawnParams[1], gFieldEffectSpawnParams[2], &spriteId))
+    {
+        FieldEffectActiveListRemove(fldEff);
+        return MAX_SPRITES;
+    }
+    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[templateIdx], 0, 0, 0);
+    if (spriteId != MAX_SPRITES)
+    {
+        sprite = &gSprites[spriteId];
+        sprite->coordOffsetEnabled ++;
+        sprite->oam.paletteNum = paletteNum;
+        sprite->data1 = fldEff;
+        sprite->data2 = gFieldEffectSpawnParams[0];
+        sprite->data3 = gFieldEffectSpawnParams[1];
+        sprite->data4 = gFieldEffectSpawnParams[2];
+    }
+    return spriteId;
+}
+
+
