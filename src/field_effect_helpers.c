@@ -778,3 +778,27 @@ u8 FldEff_Ripple(void)
     }
     return 0;
 }
+
+u8 FldEff_HotSpringsWater(void)
+{
+    u8 mapObjectId;
+    struct MapObject *mapObject;
+    u8 spriteId;
+    struct Sprite *sprite;
+
+    mapObjectId = GetFieldObjectIdByLocalIdAndMap(gFieldEffectSpawnParams[0], gFieldEffectSpawnParams[1], gFieldEffectSpawnParams[2]);
+    mapObject = &gMapObjects[mapObjectId];
+    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[31], 0, 0, 0);
+    if (spriteId != MAX_SPRITES)
+    {
+        sprite = &gSprites[spriteId];
+        sprite->coordOffsetEnabled = TRUE;
+        sprite->oam.priority = gSprites[mapObject->spriteId].oam.priority;
+        sprite->data0 = gFieldEffectSpawnParams[0];
+        sprite->data1 = gFieldEffectSpawnParams[1];
+        sprite->data2 = gFieldEffectSpawnParams[2];
+        sprite->data3 = gSprites[mapObject->spriteId].pos1.x;
+        sprite->data4 = gSprites[mapObject->spriteId].pos1.y;
+    }
+    return 0;
+}
