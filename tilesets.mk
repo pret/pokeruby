@@ -39,6 +39,9 @@ $(TILESETDIR)/primary/building/tiles.4bpp: $(TILESETDIR)/primary/building/tiles.
 $(TILESETDIR)/secondary/shop/tiles.4bpp: $(TILESETDIR)/secondary/shop/tiles.png
 	$(GFX) $< $@ -num_tiles 502
 
+$(TILESETDIR)/secondary/shop/tiles-de.4bpp: $(TILESETDIR)/secondary/shop/tiles-de.png
+	$(GFX) $< $@ -num_tiles 503
+
 $(TILESETDIR)/secondary/pokemon_center/tiles.4bpp: $(TILESETDIR)/secondary/pokemon_center/tiles.png
 	$(GFX) $< $@ -num_tiles 478
 
