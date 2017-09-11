@@ -3933,7 +3933,11 @@ gBerryBlenderArrowPalette:: @ 8E920F8
 
 	.align 2
 gTilesetTiles_General:: @ 8E92118
+.ifdef ENGLISH
 	.incbin "maps/tilesets/primary/general/tiles.4bpp.lz"
+.else
+	.incbin "maps/tilesets/primary/general/tiles-de.4bpp.lz"
+.endif
 
 	.align 2
 gTilesetPalettes_General:: @ 8E94310
@@ -4677,26 +4681,11 @@ RouletteSpritePalette_16::
 
 	.align 2
 gTilesetPalettes_Shop::
-	.incbin "maps/tilesets/secondary/shop/palettes/00.gbapal"
-	.incbin "maps/tilesets/secondary/shop/palettes/01.gbapal"
-	.incbin "maps/tilesets/secondary/shop/palettes/02.gbapal"
-	.incbin "maps/tilesets/secondary/shop/palettes/03.gbapal"
-	.incbin "maps/tilesets/secondary/shop/palettes/04.gbapal"
-	.incbin "maps/tilesets/secondary/shop/palettes/05.gbapal"
-	.incbin "maps/tilesets/secondary/shop/palettes/06.gbapal"
-	.incbin "maps/tilesets/secondary/shop/palettes/07.gbapal"
-	.incbin "maps/tilesets/secondary/shop/palettes/08.gbapal"
-	.incbin "maps/tilesets/secondary/shop/palettes/09.gbapal"
-	.incbin "maps/tilesets/secondary/shop/palettes/10.gbapal"
-	.incbin "maps/tilesets/secondary/shop/palettes/11.gbapal"
-	.incbin "maps/tilesets/secondary/shop/palettes/12.gbapal"
-	.incbin "maps/tilesets/secondary/shop/palettes/13.gbapal"
-	.incbin "maps/tilesets/secondary/shop/palettes/14.gbapal"
-	.incbin "maps/tilesets/secondary/shop/palettes/15.gbapal"
+	.incbin "maps/tilesets/secondary/shop/tiles.gbapal"
 
 	.align 2
 gTilesetTiles_Shop::
-	.incbin "maps/tilesets/secondary/shop/tiles.4bpp.lz"
+	.incbin "maps/tilesets/secondary/shop/tiles-de.4bpp.lz"
 
 	.align 2
 gUnknown_083FAF1C::

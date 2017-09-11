@@ -43,7 +43,11 @@ const u8 gMetatileAttributes_Sootopolis[] = INCBIN_U8("maps/tilesets/secondary/s
 const u8 gMetatiles_Building[] = INCBIN_U8("maps/tilesets/primary/building/metatiles.bin");
 const u8 gMetatileAttributes_Building[] = INCBIN_U8("maps/tilesets/primary/building/metatile_attributes.bin");
 
+#ifdef ENGLISH
 const u8 gMetatiles_Shop[] = INCBIN_U8("maps/tilesets/secondary/shop/metatiles.bin");
+#else
+const u8 gMetatiles_Shop[] = INCBIN_U8("maps/tilesets/secondary/shop/metatiles-de.bin");
+#endif
 const u8 gMetatileAttributes_Shop[] = INCBIN_U8("maps/tilesets/secondary/shop/metatile_attributes.bin");
 
 const u8 gMetatiles_PokemonCenter[] = INCBIN_U8("maps/tilesets/secondary/pokemon_center/metatiles.bin");

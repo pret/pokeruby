@@ -45,6 +45,7 @@ const u8 gTilesetTiles_Building[] = INCBIN_U8("maps/tilesets/primary/building/ti
 const u16 gTilesetPalettes_Building[] = INCBIN_U16("maps/tilesets/primary/building/tiles.gbapal");
 
 #ifdef GERMAN
+// These are in graphics.s for some reason
 extern const u8 gTilesetTiles_Shop[];
 extern const u16 gTilesetPalettes_Shop[];
 #else
