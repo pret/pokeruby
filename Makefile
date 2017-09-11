@@ -40,11 +40,12 @@ VERSIONS := ruby sapphire ruby_rev1 sapphire_rev1 ruby_rev2 sapphire_rev2 ruby_d
 $(VERSIONS) $(VERSIONS:%=compare_%)
 
 
-$(shell mkdir -p build/ $(VERSIONS:%=build/%/{,src,asm,data}))
+$(shell mkdir -p build/ $(VERSIONS:%=build/%/{,src,asm,data,maps}))
 
 C_SRCS := $(wildcard src/*.c)
 ASM_SRCS := $(wildcard asm/*.s)
 DATA_ASM_SRCS := $(wildcard data/*.s)
+MAP_ASM_SRCS := $(wildcard maps/*.s)
 
 SONG_SRCS := $(wildcard sound/songs/*.s)
 SONG_OBJS := $(SONG_SRCS:%.s=%.o)
@@ -111,14 +112,16 @@ define VERSION_RULES
 $1_C_OBJS := $$(C_SRCS:%.c=build/$1/%.o)
 $1_ASM_OBJS := $$(ASM_SRCS:%.s=build/$1/%.o)
 $1_DATA_ASM_OBJS := $$(DATA_ASM_SRCS:%.s=build/$1/%.o)
+$1_MAP_ASM_SRCS := $$(MAP_ASM_SRCS:%.s=build/$1/%.o)
 
 ifeq ($$(NODEP),)
 build/$1/src/%.o: c_dep = $$(shell $$(SCANINC) src/$$(*F).c)
 build/$1/asm/%.o: asm_dep = $$(shell $$(SCANINC) asm/$$(*F).s)
 build/$1/data/%.o: asm_dep = $$(shell $$(SCANINC) data/$$(*F).s)
+build/$1/maps/%.o: asm_dep = $$(shell $$(SCANINC) maps/$$(*F).s)
 endif
 
-$1_OBJS := $$($1_C_OBJS) $$($1_ASM_OBJS) $$($1_DATA_ASM_OBJS) $$(SONG_OBJS)
+$1_OBJS := $$($1_C_OBJS) $$($1_ASM_OBJS) $$($1_DATA_ASM_OBJS) $$($1_MAP_ASM_SRCS) $$(SONG_OBJS)
 $1_OBJS_REL := $$($1_OBJS:build/$1/%=%)
 $1_OBJS_REL := $$($1_OBJS_REL:sound/%=../../sound/%)
 
@@ -141,6 +144,12 @@ $$($1_DATA_ASM_OBJS): VERSION := $2
 $$($1_DATA_ASM_OBJS): REVISION := $3
 $$($1_DATA_ASM_OBJS): LANGUAGE := $4
 build/$1/data/%.o: data/%.s $$$$(asm_dep)
+	$$(PREPROC) $$< charmap.txt | $$(AS) $$(ASFLAGS) --defsym $$(VERSION)=1 --defsym REVISION=$$(REVISION) --defsym $$(LANGUAGE)=1 -o $$@
+
+$$($1_MAP_OBJS): VERSION := $2
+$$($1_MAP_OBJS): REVISION := $3
+$$($1_MAP_OBJS): LANGUAGE := $4
+build/$1/maps/%.o: maps/%.s $$$$(asm_dep)
 	$$(PREPROC) $$< charmap.txt | $$(AS) $$(ASFLAGS) --defsym $$(VERSION)=1 --defsym REVISION=$$(REVISION) --defsym $$(LANGUAGE)=1 -o $$@
 
 build/$1/sym_bss.ld: LANGUAGE := $4

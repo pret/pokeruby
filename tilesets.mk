@@ -1,4 +1,4 @@
-TILESETDIR := data/tilesets
+TILESETDIR := maps/tilesets
 
 $(TILESETDIR)/secondary/petalburg/tiles.4bpp: $(TILESETDIR)/secondary/petalburg/tiles.png
 	$(GFX) $< $@ -num_tiles 159
