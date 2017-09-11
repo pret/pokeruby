@@ -44,7 +44,10 @@ const u16 gTilesetPalettes_Sootopolis[] = INCBIN_U16("maps/tilesets/secondary/so
 const u8 gTilesetTiles_Building[] = INCBIN_U8("maps/tilesets/primary/building/tiles.4bpp.lz");
 const u16 gTilesetPalettes_Building[] = INCBIN_U16("maps/tilesets/primary/building/tiles.gbapal");
 
-#ifndef GERMAN
+#ifdef GERMAN
+extern const u8 gTilesetTiles_Shop[];
+extern const u16 gTilesetPalettes_Shop[];
+#else
 const u8 gTilesetTiles_Shop[] = INCBIN_U8("maps/tilesets/secondary/shop/tiles.4bpp.lz");
 const u16 gTilesetPalettes_Shop[] = INCBIN_U16("maps/tilesets/secondary/shop/tiles.gbapal");
 #endif
