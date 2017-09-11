@@ -1,5 +1,5 @@
 VerdanturfTown_ContestHall:: @ 8305D94
-	.4byte VerdanturfTown_ContestHall_MapAttributes
+	.4byte ContestHall_MapAttributes
 	.4byte VerdanturfTown_ContestHall_MapEvents
 	.4byte VerdanturfTown_ContestHall_MapScripts
 	.4byte 0x0

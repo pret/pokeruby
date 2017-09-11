@@ -1,5 +1,5 @@
 Route110_SeasideCyclingRoadNorthEntrance:: @ 8307E9C
-	.4byte Route110_SeasideCyclingRoadNorthEntrance_MapAttributes
+	.4byte CyclingRoadEntrance_MapAttributes
 	.4byte Route110_SeasideCyclingRoadNorthEntrance_MapEvents
 	.4byte Route110_SeasideCyclingRoadNorthEntrance_MapScripts
 	.4byte 0x0

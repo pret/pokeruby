@@ -1,5 +1,5 @@
 Route112_CableCarStation:: @ 8306C90
-	.4byte Route112_CableCarStation_MapAttributes
+	.4byte CableCarStation_MapAttributes
 	.4byte Route112_CableCarStation_MapEvents
 	.4byte Route112_CableCarStation_MapScripts
 	.4byte 0x0

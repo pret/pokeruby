@@ -1,5 +1,5 @@
 LavaridgeTown_House:: @ 8305C44
-	.4byte LavaridgeTown_House_MapAttributes
+	.4byte DewfordTown_House1_MapAttributes
 	.4byte LavaridgeTown_House_MapEvents
 	.4byte LavaridgeTown_House_MapScripts
 	.4byte 0x0

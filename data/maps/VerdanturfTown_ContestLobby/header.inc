@@ -1,5 +1,5 @@
 VerdanturfTown_ContestLobby:: @ 8305D78
-	.4byte VerdanturfTown_ContestLobby_MapAttributes
+	.4byte ContestLobby_MapAttributes
 	.4byte VerdanturfTown_ContestLobby_MapEvents
 	.4byte VerdanturfTown_ContestLobby_MapScripts
 	.4byte 0x0

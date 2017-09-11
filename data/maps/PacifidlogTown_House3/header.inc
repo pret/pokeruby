@@ -1,5 +1,5 @@
 PacifidlogTown_House3:: @ 8305EC8
-	.4byte PacifidlogTown_House3_MapAttributes
+	.4byte PacifidlogTown_House1_MapAttributes
 	.4byte PacifidlogTown_House3_MapEvents
 	.4byte PacifidlogTown_House3_MapScripts
 	.4byte 0x0
