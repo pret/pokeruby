@@ -18,7 +18,7 @@
 #include "opponent_constants.h"
 #include "palette.h"
 #include "rng.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "safari_zone.h"
 #include "script.h"
 #include "script_pokemon_80C4.h"

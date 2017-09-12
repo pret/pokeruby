@@ -1,5 +1,5 @@
 #include "global.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "battle_setup.h"
 #include "berry.h"
 #include "cable_club.h"

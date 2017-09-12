@@ -4,7 +4,7 @@
 #include "load_save.h"
 #include "main.h"
 #include "pokemon.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "script_pokemon_80C4.h"
 
 extern u8 gUnknown_02039324;

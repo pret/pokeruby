@@ -4,7 +4,7 @@
 #include "menu.h"
 #include "palette.h"
 #include "pokedex.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "sprite.h"
 #include "string_util.h"
 #include "strings2.h"

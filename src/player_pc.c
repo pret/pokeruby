@@ -18,7 +18,7 @@
 #include "songs.h"
 #include "name_string_util.h"
 #include "mail.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "player_pc.h"
 
 extern void DisplayItemMessageOnField(u8, const u8*, TaskFunc, u16);

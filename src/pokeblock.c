@@ -3,7 +3,7 @@
 //
 
 #include "global.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "sprite.h"
 #include "script.h"
 #include "strings.h"

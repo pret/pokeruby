@@ -14,7 +14,7 @@
 #include "metatile_behavior.h"
 #include "palette.h"
 #include "pokemon.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "script.h"
 #include "string_util.h"
 #include "strings.h"

@@ -4,7 +4,7 @@
 #include "main.h"
 #include "pokemon.h"
 #include "rng.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "species.h"
 #include "sprite.h"
 #include "string_util.h"

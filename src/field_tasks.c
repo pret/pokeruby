@@ -10,7 +10,7 @@
 #include "item.h"
 #include "items.h"
 #include "event_data.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "clock.h"
 #include "script.h"
 #include "field_special_scene.h"

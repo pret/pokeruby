@@ -26,7 +26,7 @@
 #include "pokeblock.h"
 #include "pokemon_item_effect.h"
 #include "pokemon_menu.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "rom_8094928.h"
 #include "script.h"
 #include "songs.h"

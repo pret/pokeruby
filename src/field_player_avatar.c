@@ -14,7 +14,7 @@
 #include "metatile_behavior.h"
 #include "party_menu.h"
 #include "rng.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "rotating_gate.h"
 #include "script.h"
 #include "songs.h"

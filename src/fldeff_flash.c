@@ -4,7 +4,7 @@
 #include "main.h"
 #include "palette.h"
 #include "pokemon_menu.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "rom6.h"
 #include "script.h"
 #include "songs.h"

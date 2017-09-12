@@ -9,7 +9,7 @@
 #include "palette.h"
 #include "pokemon_menu.h"
 #include "region_map.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "secret_base.h"
 #include "songs.h"
 #include "sprite.h"

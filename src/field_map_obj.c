@@ -11,7 +11,7 @@
 #include "fieldmap.h"
 #include "palette.h"
 #include "rng.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "sprite.h"
 #include "metatile_behavior.h"
 #include "map_constants.h"

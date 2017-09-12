@@ -2,7 +2,7 @@
 #include "hall_of_fame.h"
 #include "main.h"
 #include "palette.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "script.h"
 #include "script_menu.h"
 #include "task.h"

@@ -11,7 +11,7 @@
 #include "main.h"
 #include "pokemon.h"
 #include "rng.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "rom_8077ABC.h"
 #include "rom_8094928.h"
 #include "rtc.h"

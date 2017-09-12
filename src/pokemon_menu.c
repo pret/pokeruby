@@ -8,7 +8,7 @@
 #include "songs.h"
 #include "sound.h"
 #include "main.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "menu_helpers.h"
 #include "pokemon_summary_screen.h"
 #include "moves.h"

@@ -15,7 +15,7 @@
 #include "pokedex.h"
 #include "pokemon_menu.h"
 #include "pokenav.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "safari_zone.h"
 #include "save.h"
 #include "save_menu_util.h"

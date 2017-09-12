@@ -1,7 +1,7 @@
 #include "global.h"
 #include "battle_transition.h"
 #include "main.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "task.h"
 #include "palette.h"
 #include "trig.h"

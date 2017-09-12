@@ -7,7 +7,7 @@
 #include "map_constants.h"
 #include "menu.h"
 #include "menu_helpers.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "songs.h"
 #include "sound.h"
 #include "sprite.h"

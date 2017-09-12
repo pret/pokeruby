@@ -6,7 +6,7 @@
 #include "flags.h"
 #include "global.fieldmap.h"
 #include "metatile_behavior.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "songs.h"
 #include "sound.h"
 

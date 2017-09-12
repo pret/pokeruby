@@ -10,7 +10,7 @@
 #include "option_menu.h"
 #include "palette.h"
 #include "pokeball.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "rtc.h"
 #include "save_menu_util.h"
 #include "songs.h"

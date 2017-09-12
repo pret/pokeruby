@@ -11,7 +11,7 @@
 #include "menu.h"
 #include "palette.h"
 #include "record_mixing.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "script.h"
 #include "script_pokemon_80C4.h"
 #include "songs.h"

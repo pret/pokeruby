@@ -13,7 +13,7 @@
 #include "flags.h"
 #include "item_menu.h"
 #include "metatile_behavior.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "safari_zone.h"
 #include "script.h"
 #include "secret_base.h"

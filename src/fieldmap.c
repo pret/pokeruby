@@ -1,7 +1,7 @@
 #include "global.h"
 #include "fieldmap.h"
 #include "palette.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "script.h"
 #include "secret_base.h"
 #include "tv.h"

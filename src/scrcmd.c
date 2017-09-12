@@ -31,7 +31,7 @@
 #include "party_menu.h"
 #include "pokemon.h"
 #include "rng.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "rtc.h"
 #include "script.h"
 #include "script_menu.h"

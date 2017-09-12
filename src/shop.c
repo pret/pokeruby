@@ -23,7 +23,7 @@
 #include "decoration.h"
 #include "items.h"
 #include "songs.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "decoration_inventory.h"
 #include "field_camera.h"
 

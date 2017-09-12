@@ -9,7 +9,7 @@
 #include "menu.h"
 #include "palette.h"
 #include "text.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "task.h"
 #include "sound.h"
 #include "songs.h"

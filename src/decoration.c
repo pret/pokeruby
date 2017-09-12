@@ -1,7 +1,7 @@
 #include "global.h"
 #include "main.h"
 #include "map_object_constants.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "sound.h"
 #include "songs.h"
 #include "string_util.h"

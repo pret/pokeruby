@@ -19,7 +19,7 @@
 #include "species.h"
 #include "sound.h"
 #include "songs.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "battle_message.h"
 #include "pokemon_summary_screen.h"
 #include "menu_cursor.h"

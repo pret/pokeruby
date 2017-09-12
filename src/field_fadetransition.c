@@ -15,7 +15,7 @@
 #include "map_obj_lock.h"
 #include "metatile_behavior.h"
 #include "palette.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "script.h"
 #include "songs.h"
 #include "sound.h"

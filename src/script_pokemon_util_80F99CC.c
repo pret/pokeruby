@@ -9,7 +9,7 @@
 #include "party_menu.h"
 #include "pokemon.h"
 #include "pokemon_summary_screen.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "script.h"
 #include "script_pokemon_80F9.h"
 #include "sound.h"

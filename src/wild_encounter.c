@@ -10,7 +10,7 @@
 #include "pokeblock.h"
 #include "rng.h"
 #include "roamer.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "safari_zone.h"
 #include "script.h"
 #include "species.h"
