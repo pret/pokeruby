@@ -62,24 +62,6 @@ struct UnkTVStruct
     u32 tv_field_4;
 };
 
-EWRAM_DATA struct WarpData gUnknown_020297F0 = {0};
-EWRAM_DATA struct WarpData gUnknown_020297F8 = {0};
-EWRAM_DATA struct WarpData gUnknown_02029800 = {0};
-EWRAM_DATA struct WarpData gUnknown_02029808 = {0};
-EWRAM_DATA struct UnkPlayerStruct gUnknown_02029810 = {0};
-EWRAM_DATA static u16 sAmbientCrySpecies = 0;
-EWRAM_DATA static bool8 sIsAmbientCryWaterMon = FALSE;
-EWRAM_DATA struct LinkPlayerMapObject gLinkPlayerMapObjects[4] = {0};
-
-static u8 gUnknown_03000580[4];
-static u16 (*gUnknown_03000584)(u32);
-static u8 gUnknown_03000588;
-
-u16 word_3004858;
-void (*gFieldCallback)(void);
-u8 gUnknown_03004860;
-u8 gFieldLinkPlayerCount;
-
 extern u16 gUnknown_03004898;
 extern u16 gUnknown_0300489C;
 
@@ -104,15 +86,109 @@ extern u8 TradeRoom_PromptToCancelLink[];
 extern u8 TradeRoom_TerminateLink[];
 extern u8 gUnknown_081A4508[];
 
-extern u8 (*gUnknown_082166A0[])(struct LinkPlayerMapObject *, struct MapObject *, u8);
-extern u8 (*gUnknown_082166AC[])(struct LinkPlayerMapObject *, struct MapObject *, u8);
-extern void (*gUnknown_082166D8[])(struct LinkPlayerMapObject *, struct MapObject *);
-
 extern struct MapData * const gMapAttributes[];
 extern struct MapHeader * const * const gMapGroups[];
-extern const struct WarpData gDummyWarpData;
 extern s32 gMaxFlashLevel;
-extern u32 gUnknown_08216694[];
+
+EWRAM_DATA struct WarpData gUnknown_020297F0 = {0};
+EWRAM_DATA struct WarpData gUnknown_020297F8 = {0};
+EWRAM_DATA struct WarpData gUnknown_02029800 = {0};
+EWRAM_DATA struct WarpData gUnknown_02029808 = {0};
+EWRAM_DATA struct UnkPlayerStruct gUnknown_02029810 = {0};
+EWRAM_DATA static u16 sAmbientCrySpecies = 0;
+EWRAM_DATA static bool8 sIsAmbientCryWaterMon = FALSE;
+EWRAM_DATA struct LinkPlayerMapObject gLinkPlayerMapObjects[4] = {0};
+
+static u8 gUnknown_03000580[4];
+static u16 (*gUnknown_03000584)(u32);
+static u8 gUnknown_03000588;
+
+u16 word_3004858;
+void (*gFieldCallback)(void);
+u8 gUnknown_03004860;
+u8 gFieldLinkPlayerCount;
+
+static const struct WarpData sDummyWarpData =
+{
+    .mapGroup = -1,
+    .mapNum = -1,
+    .warpId = -1,
+    .x = -1,
+    .y = -1,
+};
+
+static const u8 sUnusedData[] =
+{
+    0xB0, 0x04, 0x00, 0x00,
+    0x10, 0x0E, 0x00, 0x00,
+    0xB0, 0x04, 0x00, 0x00,
+    0x60, 0x09, 0x00, 0x00,
+    0x32, 0x00, 0x00, 0x00,
+    0x50, 0x00, 0x00, 0x00,
+    0xD4, 0xFF, 0xFF, 0xFF,
+    0x2C, 0x00, 0x00, 0x00,
+};
+
+const struct UCoords32 gUnknown_0821664C[] =
+{
+    { 0,  0},
+    { 0,  1},
+    { 0, -1},
+    {-1,  0},
+    { 1,  0},
+    {-1,  1},
+    { 1,  1},
+    {-1, -1},
+    { 1, -1},
+};
+
+const struct UnknownTaskStruct gUnknown_08216694 =
+{
+    (void *)REG_ADDR_WIN0H,
+    ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_DEST_RELOAD) << 16) | 1,
+    1,
+    0,
+};
+
+static u8 sub_8055C68(struct LinkPlayerMapObject *, struct MapObject *, u8);
+static u8 sub_8055C88(struct LinkPlayerMapObject *, struct MapObject *, u8);
+static u8 sub_8055C8C(struct LinkPlayerMapObject *, struct MapObject *, u8);
+
+static u8 (*const gUnknown_082166A0[])(struct LinkPlayerMapObject *, struct MapObject *, u8) =
+{
+    sub_8055C68,
+    sub_8055C88,
+    sub_8055C8C,
+};
+
+static u8 sub_8055CAC(struct LinkPlayerMapObject *, struct MapObject *, u8);
+static u8 sub_8055CB0(struct LinkPlayerMapObject *, struct MapObject *, u8);
+static u8 sub_8055D18(struct LinkPlayerMapObject *, struct MapObject *, u8);
+
+static u8 (*const gUnknown_082166AC[])(struct LinkPlayerMapObject *, struct MapObject *, u8) =
+{
+    sub_8055CAC,
+    sub_8055CB0,
+    sub_8055CB0,
+    sub_8055CB0,
+    sub_8055CB0,
+    sub_8055CAC,
+    sub_8055CAC,
+    sub_8055D18,
+    sub_8055D18,
+    sub_8055D18,
+    sub_8055D18,
+};
+
+static void sub_8055D30(struct LinkPlayerMapObject *, struct MapObject *);
+static void sub_8055D38(struct LinkPlayerMapObject *, struct MapObject *);
+
+static void (*const gUnknown_082166D8[])(struct LinkPlayerMapObject *, struct MapObject *) =
+{
+    sub_8055D30,
+    sub_8055D38,
+};
+
 
 static void DoWhiteOut(void)
 {
@@ -274,8 +350,8 @@ static void warp_shift(void)
 {
     gUnknown_020297F0 = gSaveBlock1.location;
     gSaveBlock1.location = gUnknown_020297F8;
-    gUnknown_02029800 = gDummyWarpData;
-    gUnknown_02029808 = gDummyWarpData;
+    gUnknown_02029800 = sDummyWarpData;
+    gUnknown_02029808 = sDummyWarpData;
 }
 
 static void warp_set(struct WarpData *warp, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
@@ -1335,7 +1411,7 @@ void sub_8054814(void)
     if (val)
     {
         sub_80815E0(val);
-        sub_80895F8(gUnknown_08216694[0], gUnknown_08216694[1], gUnknown_08216694[2]);
+        sub_80895F8(gUnknown_08216694);
     }
 }
 
@@ -2448,27 +2524,27 @@ void sub_8055BFC(u8 linkPlayerId, u8 a2)
     }
 }
 
-u8 sub_8055C68(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj, u8 a3)
+static u8 sub_8055C68(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj, u8 a3)
 {
     return gUnknown_082166AC[a3](linkPlayerMapObj, mapObj, a3);
 }
 
-u8 sub_8055C88(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj, u8 a3)
+static u8 sub_8055C88(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj, u8 a3)
 {
     return 1;
 }
 
-u8 sub_8055C8C(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj, u8 a3)
+static u8 sub_8055C8C(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj, u8 a3)
 {
     return gUnknown_082166AC[a3](linkPlayerMapObj, mapObj, a3);
 }
 
-u8 sub_8055CAC(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj, u8 a3)
+static u8 sub_8055CAC(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj, u8 a3)
 {
     return 0;
 }
 
-u8 sub_8055CB0(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj, u8 a3)
+static u8 sub_8055CB0(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj, u8 a3)
 {
     s16 x, y;
 
@@ -2488,18 +2564,18 @@ u8 sub_8055CB0(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *m
     }
 }
 
-u8 sub_8055D18(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj, u8 a3)
+static u8 sub_8055D18(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj, u8 a3)
 {
     mapObj->mapobj_unk_19 = npc_something3(a3, mapObj->mapobj_unk_19);
     return 0;
 }
 
-void sub_8055D30(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj)
+static void sub_8055D30(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj)
 {
     linkPlayerMapObj->mode = 0;
 }
 
-void sub_8055D38(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj)
+static void sub_8055D38(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj)
 {
     mapObj->mapobj_unk_21--;
     linkPlayerMapObj->mode = 1;

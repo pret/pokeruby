@@ -341,7 +341,7 @@ SECTIONS {
         data/trade.o(.rodata);
         src/berry_blender.o(.rodata);
         src/new_game.o(.rodata);
-        data/rom4.o(.rodata);
+        src/overworld.o(.rodata);
         data/tilesets.o(.rodata);
         data/maps.o(.rodata);
         src/fieldmap.o(.rodata);

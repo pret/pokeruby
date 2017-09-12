@@ -22,7 +22,7 @@ struct UCoords32
     u32 x, y;
 };
 
-extern struct UCoords32 gUnknown_0821664C[];
+extern const struct UCoords32 gUnknown_0821664C[];
 extern void (*gFieldCallback)(void);
 
 // sub_8052F5C
