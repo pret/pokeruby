@@ -212,7 +212,7 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
     gUnknown_030041B8 = 0;
 
     InitWindowFromConfig(&gUnknown_03004210, &gWindowConfig_81E6C58);
-    gBattleTerrain = 9;
+    gBattleTerrain = BATTLE_TERRAIN_PLAIN;
 
     sub_800D6D4();
     sub_800DAB8();
@@ -320,7 +320,7 @@ static void CB2_EvolutionSceneLoadGraphics(void)
     gUnknown_030041B8 = 0;
 
     InitWindowFromConfig(&gUnknown_03004210, &gWindowConfig_81E6C58);
-    gBattleTerrain = 9;
+    gBattleTerrain = BATTLE_TERRAIN_PLAIN;
 
     sub_800D6D4();
     sub_800DAB8();

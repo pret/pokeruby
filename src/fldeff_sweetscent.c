@@ -23,7 +23,7 @@ extern u8 SweetScentNothingHereScript[];
 
 bool8 SetUpFieldMove_SweetScent(void)
 {
-    gFieldCallback = sub_808AB90;
+    gFieldCallback = FieldCallback_Teleport;
     gUnknown_03005CE4 = sub_812BFD4;
     return TRUE;
 }

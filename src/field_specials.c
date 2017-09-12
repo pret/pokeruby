@@ -2005,7 +2005,7 @@ bool8 sub_810F828(void)
 
 void SetRoute119Weather(void)
 {
-    if (is_light_level_1_2_3_5_or_6(get_map_light_from_warp0()) != TRUE)
+    if (is_map_type_1_2_3_5_or_6(get_map_type_from_warp0()) != TRUE)
     {
         SetSav1Weather(0x14);
     }
@@ -2013,7 +2013,7 @@ void SetRoute119Weather(void)
 
 void SetRoute123Weather(void)
 {
-    if (is_light_level_1_2_3_5_or_6(get_map_light_from_warp0()) != TRUE)
+    if (is_map_type_1_2_3_5_or_6(get_map_type_from_warp0()) != TRUE)
     {
         SetSav1Weather(0x15);
     }

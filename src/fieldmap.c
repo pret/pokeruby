@@ -31,7 +31,7 @@ static const struct ConnectionFlags sDummyConnectionFlags = {0};
 
 struct MapHeader *mapconnection_get_mapheader(struct MapConnection *connection)
 {
-    return get_mapheader_by_bank_and_number(connection->mapGroup, connection->mapNum);
+    return Overworld_GetMapHeaderByGroupAndId(connection->mapGroup, connection->mapNum);
 }
 
 void not_trainer_hill_battle_pyramid(void)

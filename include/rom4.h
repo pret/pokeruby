@@ -27,7 +27,7 @@ extern void (*gFieldCallback)(void);
 
 // sub_8052F5C
 void flag_var_implications_of_teleport_(void);
-void new_game(void);
+void Overworld_ResetStateAfterTeleport(void);
 void sub_8053014(void);
 void sub_8053050(void);
 // sub_805308C
@@ -36,18 +36,18 @@ void IncrementGameStat(u8 index);
 u32 GetGameStat(u8 index);
 void SetGameStat(u8, u32);
 // sub_8053154
-// sub_8053198
-void update_saveblock1_field_object_coords(u8, s16, s16);
-void update_saveblock1_field_object_movement_behavior(u8, u8);
+// LoadSaveblockMapObjScripts
+void Overworld_SaveMapObjCoords(u8, s16, s16);
+void Overworld_SaveMapObjMovementType(u8, u8);
 // mapdata_load_assets_to_gpu_and_full_redraw
 // get_mapdata_header
 // warp_shift
 // warp_set
 // warp_data_is_not_neg_1
-struct MapHeader * const get_mapheader_by_bank_and_number(u16 mapGroup, u16 mapNum);
+struct MapHeader * const Overworld_GetMapHeaderByGroupAndId(u16 mapGroup, u16 mapNum);
 struct MapHeader * const warp1_get_mapheader(void);
 // set_current_map_header_from_sav1_save_old_name
-// sub_805338C
+// LoadSaveblockMapHeader
 // sub_80533CC
 void warp_in(void);
 void warp1_set(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
@@ -81,14 +81,14 @@ void walkrun_find_lowest_active_bit_in_bitfield(void);
 u8 sub_8053B00(struct UnkPlayerStruct *playerStruct, u16 a2, u8 a3);
 u8 sub_8053B60(struct UnkPlayerStruct *playerStruct, u8, u16, u8);
 u16 cur_mapdata_block_role_at_screen_center_acc_to_sav1(void);
-bool32 IsBikingAllowedByMap(void);
-void sub_8053C98(void);
-void sub_8053CE4(s32 a1);
-u8 sav1_get_flash_used_on_map(void);
+bool32 Overworld_IsBikeAllowedOnCurrentMap(void);
+void SetDefaultFlashLevel(void);
+void Overworld_SetFlashLevel(s32 a1);
+u8 Overworld_GetFlashLevel(void);
 void sub_8053D14(u16);
 // sub_8053D30
 // sub_8053D6C
-// sub_8053D9C
+// GetLocationMusic
 // sav1_map_get_music
 // warp1_target_get_music
 // call_map_music_set_to_zero
@@ -97,21 +97,21 @@ void sav1_set_battle_music_maybe(u16);
 void sav1_reset_battle_music_maybe(void);
 void sub_8053F0C(void);
 void sub_8053F84(void);
-void ChangeMapMusic(u16);
-// is_warp1_light_level_8_or_9
+void Overworld_ChangeMusicTo(u16);
+// GetMapMusicFadeoutSpeed
 void sub_8053FF8(void);
 bool8 sub_8054034(void);
 void sub_8054044(void);
 // PlayAmbientCry
 void UpdateAmbientCry(s16 *, u16 *);
 void ChooseAmbientCrySpecies(void);
-u8 get_map_light_level_by_bank_and_number(s8 mapGroup, s8 mapNum);
-// get_map_light_level_from_warp
-u8 sav1_map_get_light_level(void);
-u8 get_map_light_from_warp0(void);
-bool8 is_light_level_1_2_3_5_or_6(u8 a1);
-bool8 is_light_level_1_2_3_or_6(u8 a1);
-u8 is_light_level_8_or_9(u8);
+u8 GetMapTypeByGroupAndId(s8 mapGroup, s8 mapNum);
+// GetMapTypeByWarpData
+u8 Overworld_GetMapTypeOfSaveblockLocation(void);
+u8 get_map_type_from_warp0(void);
+bool8 is_map_type_1_2_3_5_or_6(u8 a1);
+bool8 Overworld_MapTypeAllowsTeleportAndFly(u8 a1);
+u8 Overworld_MapTypeIsIndoors(u8);
 // unref_sub_8054260
 u8 sav1_map_get_name();
 // sav1_map_get_battletype

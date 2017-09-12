@@ -21,7 +21,7 @@ extern u16 gUnknown_03004DE0[][0x3C0];
 
 const static u16 gUnknown_0839ACDC[] = { 0xC8, 0x48, 0x38, 0x28, 0x18, 0x0 };
 
-const s32 gUnknown_0839ACE8 = 4;
+const s32 gMaxFlashLevel = 4;
 
 const static u32 gUnknown_0839ACEC[3] =
 {
@@ -137,11 +137,11 @@ static u8 sub_8081534(s32 a1, s32 a2, s32 a3, s32 a4, s32 a5, u8 a6)
 
 void sub_8081594(u8 a1)
 {
-    u8 index = sav1_get_flash_used_on_map();
+    u8 flashLevel = Overworld_GetFlashLevel();
     u8 value = 0;
     if (!a1)
         value = 1;
-    sub_8081534(120, 80, gUnknown_0839ACDC[index], gUnknown_0839ACDC[a1], value, 1);
+    sub_8081534(120, 80, gUnknown_0839ACDC[flashLevel], gUnknown_0839ACDC[a1], value, 1);
     sub_8081510();
     ScriptContext2_Enable();
 }

@@ -185,7 +185,7 @@ void ItemUseOutOfBattle_Bike(u8 taskId)
     }
     else
     {
-        if (IsBikingAllowedByMap() == TRUE && IsBikingDisallowedByPlayer() == FALSE)
+        if (Overworld_IsBikeAllowedOnCurrentMap() == TRUE && IsBikingDisallowedByPlayer() == FALSE)
         {
             gUnknown_03005D00 = (void *)ItemUseOnFieldCB_Bike;
             SetUpItemUseOnFieldCallback(taskId);

@@ -22402,7 +22402,7 @@ _080F6C3A:
 	strb r1, [r0]
 	ldrh r0, [r6, 0xA]
 	ldrh r1, [r6, 0xC]
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	ldrh r1, [r5]
 	lsls r1, 3
 	adds r4, r1

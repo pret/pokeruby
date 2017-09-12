@@ -5,6 +5,7 @@
 #include "event_data.h"
 #include "field_player_avatar.h"
 #include "fieldmap.h"
+#include "map_constants.h"
 #include "metatile_behavior.h"
 #include "pokeblock.h"
 #include "rng.h"
@@ -2952,7 +2953,8 @@ static bool8 CheckFeebas(void)
     u8 route119section = 0;
     u16 waterTileNum;
 
-    if (gSaveBlock1.location.mapGroup == 0 && gSaveBlock1.location.mapNum == 0x22)
+    if (gSaveBlock1.location.mapGroup == MAP_GROUP_ROUTE119
+     && gSaveBlock1.location.mapNum == MAP_ID_ROUTE119)
     {
         GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
         x -= 7;
@@ -3497,7 +3499,7 @@ u16 GetLocalWildMon(bool8 *isWaterMon)
     }
 }
 
-u16 GetMirageIslandMon(void)
+u16 GetLocalWaterMon(void)
 {
     u16 headerNum = GetCurrentMapWildMonHeader();
 

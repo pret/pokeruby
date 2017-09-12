@@ -120,7 +120,7 @@ bool8 SetUpFieldMove_RockSmash(void)
 {
     if (npc_before_player_of_type(0x56) == TRUE)
     {
-        gFieldCallback = sub_808AB90;
+        gFieldCallback = FieldCallback_Teleport;
         gUnknown_03005CE4 = sub_810B53C;
         return TRUE;
     }
@@ -157,7 +157,7 @@ int SetUpFieldMove_Dig(void)
 {
     if (sub_80CA1C8() == TRUE)
     {
-        gFieldCallback = sub_808AB90;
+        gFieldCallback = FieldCallback_Teleport;
         gUnknown_03005CE4 = sub_810B5D8;
         return TRUE;
     }

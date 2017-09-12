@@ -154,7 +154,7 @@ u8 GetMoveTarget(u16 move, u8 targetbyte); //get target of move
 void sub_80153D0(u8 atk); //pressure perish song pp decrement
 u8 CastformDataTypeChange(u8 bank);
 void b_push_move_exec(u8* bs_ptr);
-u8 sav1_map_get_light_level(void);
+u8 Overworld_GetMapTypeOfSaveblockLocation(void);
 u8 CalculatePlayerPartyCount(void);
 u16 Sqrt(u32 num);
 u8 sub_809070C(u16 nationalNum, u32 TiD, u32 PiD); //task prepare poke dex display
@@ -17570,28 +17570,28 @@ static void atkE4_getsecretpowereffect(void)
 {
     switch (gBattleTerrain)
     {
-    case 0:
+    case BATTLE_TERRAIN_GRASS:
         gBattleCommunication[MOVE_EFFECT_BYTE] = 2;
         break;
-    case 1:
+    case BATTLE_TERRAIN_LONG_GRASS:
         gBattleCommunication[MOVE_EFFECT_BYTE] = 1;
         break;
-    case 2:
+    case BATTLE_TERRAIN_SAND:
         gBattleCommunication[MOVE_EFFECT_BYTE] = 27;
         break;
-    case 3:
+    case BATTLE_TERRAIN_UNDERWATER:
         gBattleCommunication[MOVE_EFFECT_BYTE] = 23;
         break;
-    case 4:
+    case BATTLE_TERRAIN_WATER:
         gBattleCommunication[MOVE_EFFECT_BYTE] = 22;
         break;
-    case 5:
+    case BATTLE_TERRAIN_POND:
         gBattleCommunication[MOVE_EFFECT_BYTE] = 24;
         break;
-    case 6:
+    case BATTLE_TERRAIN_MOUNTAIN:
         gBattleCommunication[MOVE_EFFECT_BYTE] = 7;
         break;
-    case 7:
+    case BATTLE_TERRAIN_CAVE:
         gBattleCommunication[MOVE_EFFECT_BYTE] = 8;
         break;
     default:
@@ -17818,7 +17818,7 @@ void atkEF_pokeball_catch_calculation(void)
                     ball_multiplier = 10;
                 break;
             case ITEM_DIVE_BALL:
-                if (sav1_map_get_light_level() == 5)
+                if (Overworld_GetMapTypeOfSaveblockLocation() == 5)
                     ball_multiplier = 35;
                 else
                     ball_multiplier = 10;

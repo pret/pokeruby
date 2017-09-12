@@ -698,7 +698,7 @@ static void sub_8068C30(struct MapHeader *unused, s8 b, struct MapPosition *posi
 
         warp1_set_2(warpEvent->unk7, warpEvent->mapNum, warpEvent->mapGroup);
         sub_80535C4(position->x, position->y);
-        mapHeader = get_mapheader_by_bank_and_number(warpEvent->unk7, warpEvent->mapNum);
+        mapHeader = Overworld_GetMapHeaderByGroupAndId(warpEvent->unk7, warpEvent->mapNum);
         if (mapHeader->events->warps[warpEvent->mapGroup].mapNum == 0x7F)
             saved_warp2_set(mapHeader->events->warps[b].mapGroup, gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum, b);
     }

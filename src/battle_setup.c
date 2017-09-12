@@ -642,11 +642,11 @@ s8 BattleSetup_GetTerrain(void)
     tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
 
     if (MetatileBehavior_IsTallGrass(tileBehavior))
-        return 0;
+        return BATTLE_TERRAIN_GRASS;
     if (MetatileBehavior_IsLongGrass(tileBehavior))
-        return 1;
+        return BATTLE_TERRAIN_LONG_GRASS;
     if (MetatileBehavior_IsSandOrDeepSand(tileBehavior))
-        return 2;
+        return BATTLE_TERRAIN_SAND;
     switch (gMapHeader.mapType)
     {
     case MAP_TYPE_TOWN:
@@ -655,38 +655,38 @@ s8 BattleSetup_GetTerrain(void)
         break;
     case MAP_TYPE_UNDERGROUND:
         if (sub_80574C4(tileBehavior))
-            return 8;
+            return BATTLE_TERRAIN_BUILDING;
         if (MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior))
-            return 5;
-        return 7;
+            return BATTLE_TERRAIN_POND;
+        return BATTLE_TERRAIN_CAVE;
     case MAP_TYPE_INDOOR:
     case MAP_TYPE_SECRET_BASE:
-        return 8;
+        return BATTLE_TERRAIN_BUILDING;
     case MAP_TYPE_UNDERWATER:
-        return 3;
+        return BATTLE_TERRAIN_UNDERWATER;
     case MAP_TYPE_6:
         if (MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior))
-            return 4;
-        return 9;
+            return BATTLE_TERRAIN_WATER;
+        return BATTLE_TERRAIN_PLAIN;
     }
     if (sub_8057568(tileBehavior))
-        return 4;
+        return BATTLE_TERRAIN_WATER;
     if (MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior))
-        return 5;
+        return BATTLE_TERRAIN_POND;
     if (sub_80574D8(tileBehavior))
-        return 6;
+        return BATTLE_TERRAIN_MOUNTAIN;
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
     {
         if (sub_8057450(tileBehavior))
-            return 5;
+            return BATTLE_TERRAIN_POND;
         if (MetatileBehavior_IsBridge(tileBehavior) == TRUE)
-            return 4;
+            return BATTLE_TERRAIN_WATER;
     }
-    if (gSaveBlock1.location.mapGroup == 0 && gSaveBlock1.location.mapNum == 28)
-        return 2;
+    if (gSaveBlock1.location.mapGroup == MAP_GROUP_ROUTE113 && gSaveBlock1.location.mapNum == MAP_ID_ROUTE113)
+        return BATTLE_TERRAIN_SAND;
     if (GetSav1Weather() == 8)
-        return 2;
-    return 9;
+        return BATTLE_TERRAIN_SAND;
+    return BATTLE_TERRAIN_PLAIN;
 }
 
 static s8 GetBattleTransitionTypeByMap(void)
@@ -696,7 +696,7 @@ static s8 GetBattleTransitionTypeByMap(void)
 
     PlayerGetDestCoords(&x, &y);
     tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
-    if (sav1_get_flash_used_on_map())
+    if (Overworld_GetFlashLevel())
         return 2;
     if (!MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior))
     {

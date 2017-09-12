@@ -25,7 +25,7 @@ bool8 SetUpFieldMove_Strength(void)
     if (ShouldDoBrailleStrengthEffect())
     {
         gScriptResult = gLastFieldPokeMenuOpened;
-        gFieldCallback = sub_808AB90;
+        gFieldCallback = FieldCallback_Teleport;
         gUnknown_03005CE4 = sub_811AA38;
     }
     else
@@ -33,7 +33,7 @@ bool8 SetUpFieldMove_Strength(void)
         if (npc_before_player_of_type(87) != TRUE)
             return 0;
         gScriptResult = gLastFieldPokeMenuOpened;
-        gFieldCallback = sub_808AB90;
+        gFieldCallback = FieldCallback_Teleport;
         gUnknown_03005CE4 = sub_811AA18;
     }
 

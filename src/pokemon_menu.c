@@ -779,7 +779,7 @@ static void sub_808AB34(u8 taskID)
 
 #undef tFieldMoveId
 
-void sub_808AB90(void)
+void FieldCallback_Teleport(void)
 {
     pal_fill_black();
     CreateTask(sub_808ABA8, 8);
@@ -814,7 +814,7 @@ static bool8 SetUpFieldMove_Surf(void)
 {
     if (PartyHasMonWithSurf() == TRUE && IsPlayerFacingSurfableFishableWater() == TRUE)
     {
-        gFieldCallback = sub_808AB90;
+        gFieldCallback = FieldCallback_Teleport;
         gUnknown_03005CE4 = sub_808AC2C;
         return TRUE;
     }
@@ -832,13 +832,13 @@ static bool8 SetUpFieldMove_Fly(void)
 {
     if (ShouldDoBrailleFlyEffect())
     {
-        gFieldCallback = sub_808AB90;
+        gFieldCallback = FieldCallback_Teleport;
         gUnknown_03005CE4 = DoBrailleFlyEffect;
         return TRUE;
     }
-    if (is_light_level_1_2_3_or_6(gMapHeader.mapType) == 1)
+    if (Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) == TRUE)
     {
-        gFieldCallback = sub_808AB90;
+        gFieldCallback = FieldCallback_Teleport;
         gUnknown_03005CE4 = sub_808AC8C;
         return TRUE;
     }
@@ -884,7 +884,7 @@ static bool8 SetUpFieldMove_Dive(void)
     gFieldEffectArguments[1] = sub_8068F18();
     if (gFieldEffectArguments[1])
     {
-        gFieldCallback = sub_808AB90;
+        gFieldCallback = FieldCallback_Teleport;
         gUnknown_03005CE4 = sub_808ADAC;
         return TRUE;
     }
@@ -905,7 +905,7 @@ static bool8 SetUpFieldMove_Waterfall(void)
     if (MetatileBehavior_IsWaterfall(MapGridGetMetatileBehaviorAt(x, y)) == TRUE
         && IsPlayerSurfingNorth() == TRUE)
     {
-        gFieldCallback = sub_808AB90;
+        gFieldCallback = FieldCallback_Teleport;
         gUnknown_03005CE4 = sub_808AE08;
         return TRUE;
     }

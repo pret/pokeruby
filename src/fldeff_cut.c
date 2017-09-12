@@ -38,7 +38,7 @@ bool8 SetUpFieldMove_Cut(void)
 
     if(npc_before_player_of_type(0x52) == TRUE) // is in front of tree?
     {
-        gFieldCallback = sub_808AB90;
+        gFieldCallback = FieldCallback_Teleport;
         gUnknown_03005CE4 = sub_80A2634;
         return TRUE;
     }
@@ -57,7 +57,7 @@ bool8 SetUpFieldMove_Cut(void)
                     if(MetatileBehavior_IsPokeGrass(tileBehavior) == TRUE
                     || MetatileBehavior_IsAshGrass(tileBehavior) == TRUE)
                     {
-                        gFieldCallback = sub_808AB90;
+                        gFieldCallback = FieldCallback_Teleport;
                         gUnknown_03005CE4 = sub_80A25E8;
                         return TRUE;
                     }

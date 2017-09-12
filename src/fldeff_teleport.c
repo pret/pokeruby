@@ -13,9 +13,9 @@ extern void (*gUnknown_03005CE4)(void);
 
 bool8 SetUpFieldMove_Teleport(void)
 {
-    if (is_light_level_1_2_3_or_6(gMapHeader.mapType) == TRUE)
+    if (Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) == TRUE)
     {
-        gFieldCallback = sub_808AB90;
+        gFieldCallback = FieldCallback_Teleport;
         gUnknown_03005CE4 = hm_teleport_run_dp02scr;
         return TRUE;
     }
@@ -25,7 +25,7 @@ bool8 SetUpFieldMove_Teleport(void)
 
 void hm_teleport_run_dp02scr(void)
 {
-    new_game();
+    Overworld_ResetStateAfterTeleport();
     FieldEffectStart(63);
     gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
 }

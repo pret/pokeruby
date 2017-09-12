@@ -567,8 +567,8 @@ bool8 ScrCmd_lighten(struct ScriptContext *ctx)
 
 bool8 ScrCmd_darken(struct ScriptContext *ctx)
 {
-    u16 value = VarGet(ScriptReadHalfword(ctx));
-    sub_8053CE4(value);
+    u16 flashLevel = VarGet(ScriptReadHalfword(ctx));
+    Overworld_SetFlashLevel(flashLevel);
     return FALSE;
 }
 
@@ -870,7 +870,7 @@ bool8 ScrCmd_fadedefault(struct ScriptContext *ctx)
 
 bool8 ScrCmd_fademusic(struct ScriptContext *ctx)
 {
-    ChangeMapMusic(ScriptReadHalfword(ctx));
+    Overworld_ChangeMusicTo(ScriptReadHalfword(ctx));
     return FALSE;
 }
 
@@ -996,7 +996,7 @@ bool8 ScrCmd_movespriteperm(struct ScriptContext *ctx)
     u16 v1 = VarGet(ScriptReadHalfword(ctx));
     u16 v2 = VarGet(ScriptReadHalfword(ctx));
     u32 v3 = VarGet(ScriptReadHalfword(ctx));
-    update_saveblock1_field_object_coords(v1, v2, v3);
+    Overworld_SaveMapObjCoords(v1, v2, v3);
     return FALSE;
 }
 
@@ -1066,7 +1066,7 @@ bool8 ScrCmd_spritebehave(struct ScriptContext *ctx)
 {
     u16 v1 = VarGet(ScriptReadHalfword(ctx));
     u8 v2 = ScriptReadByte(ctx);
-    update_saveblock1_field_object_movement_behavior(v1, v2);
+    Overworld_SaveMapObjMovementType(v1, v2);
     return FALSE;
 }
 

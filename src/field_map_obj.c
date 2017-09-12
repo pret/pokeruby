@@ -3244,7 +3244,7 @@ struct MapObjectTemplate *GetFieldObjectTemplateByLocalIdAndMap(u8 localId, u8 m
         return FindFieldObjectTemplateInArrayByLocalId(localId, gSaveBlock1.mapObjectTemplates, gMapHeader.events->mapObjectCount);
     else
     {
-        struct MapHeader *mapHeader = get_mapheader_by_bank_and_number(mapGroup, mapNum);
+        struct MapHeader *mapHeader = Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum);
 
         return FindFieldObjectTemplateInArrayByLocalId(localId, mapHeader->events->mapObjects, mapHeader->events->mapObjectCount);
     }

@@ -51,7 +51,7 @@ bool8 SetUpFieldMove_Flash(void)
 {
     if (gMapHeader.cave == TRUE && !FlagGet(SYS_USE_FLASH))
     {
-        gFieldCallback = sub_808AB90;
+        gFieldCallback = FieldCallback_Teleport;
         gUnknown_03005CE4 = sub_810CBFC;
         return TRUE;
     }
@@ -123,8 +123,8 @@ void sub_810CC80(void)
 bool8 sub_810CD5C(void)
 {
     u8 i;
-    u8 v0 = get_map_light_from_warp0();
-    u8 v1 = sav1_map_get_light_level();
+    u8 v0 = get_map_type_from_warp0();
+    u8 v1 = Overworld_GetMapTypeOfSaveblockLocation();
 
     for (i = 0; gUnknown_083F7FC4[i].unk0; i++)
     {
