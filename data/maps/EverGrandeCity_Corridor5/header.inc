@@ -1,5 +1,5 @@
 EverGrandeCity_Corridor5:: @ 8306B94
-	.4byte EverGrandeCity_Corridor5_MapAttributes
+	.4byte EverGrandeCity_Corridor1_MapAttributes
 	.4byte EverGrandeCity_Corridor5_MapEvents
 	.4byte EverGrandeCity_Corridor5_MapScripts
 	.4byte 0x0

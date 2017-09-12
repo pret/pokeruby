@@ -40,7 +40,7 @@ VERSIONS := ruby sapphire ruby_rev1 sapphire_rev1 ruby_rev2 sapphire_rev2 ruby_d
 $(VERSIONS) $(VERSIONS:%=compare_%)
 
 
-$(shell mkdir -p build/ $(VERSIONS:%=build/%/{,src,asm,data}))
+$(shell mkdir -p build/ $(VERSIONS:%=build/%/{,src,asm,data,maps}))
 
 C_SRCS := $(wildcard src/*.c)
 ASM_SRCS := $(wildcard asm/*.s)
@@ -116,6 +116,8 @@ ifeq ($$(NODEP),)
 build/$1/src/%.o: c_dep = $$(shell $$(SCANINC) src/$$(*F).c)
 build/$1/asm/%.o: asm_dep = $$(shell $$(SCANINC) asm/$$(*F).s)
 build/$1/data/%.o: asm_dep = $$(shell $$(SCANINC) data/$$(*F).s)
+# HACK! These should be .h files, but scaninc doesn't work on them
+build/$1/src/tilesets.o: c_dep = $$(shell $$(SCANINC) maps/tilesets/graphics.c)
 endif
 
 $1_OBJS := $$($1_C_OBJS) $$($1_ASM_OBJS) $$($1_DATA_ASM_OBJS) $$(SONG_OBJS)
@@ -125,7 +127,7 @@ $1_OBJS_REL := $$($1_OBJS_REL:sound/%=../../sound/%)
 $$($1_C_OBJS): VERSION := $2
 $$($1_C_OBJS): REVISION := $3
 $$($1_C_OBJS): LANGUAGE := $4
-build/$1/%.o : %.c $$$$(c_dep)
+build/$1/src/%.o : src/%.c $$$$(c_dep)
 	@$$(CPP) $$(CPPFLAGS) -D $$(VERSION) -D REVISION=$$(REVISION) -D $$(LANGUAGE) $$< -o build/$1/$$*.i
 	@$$(PREPROC) build/$1/$$*.i charmap.txt | $$(CC1) $$(CFLAGS) -o build/$1/$$*.s
 	@printf ".text\n\t.align\t2, 0\n" >> build/$1/$$*.s

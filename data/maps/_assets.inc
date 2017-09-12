@@ -951,8 +951,6 @@ DewfordTown_House1_MapBlockdata:: @ 82CE374
 
 	.align 2
 DewfordTown_House1_MapAttributes:: @ 82CE414
-LavaridgeTown_House_MapAttributes:: @ 82CE414
-Route111_OldLadysRestStop_MapAttributes:: @ 82CE414
 	.4byte 0xa
 	.4byte 0x8
 	.4byte DewfordTown_House1_MapBorder
@@ -1073,9 +1071,7 @@ FallarborTown_ContestLobby_MapBlockdata:: @ 82CF0B8
 	.incbin "data/maps/FallarborTown_ContestLobby/map.bin"
 
 	.align 2
-FallarborTown_ContestLobby_MapAttributes:: @ 82CF18C
-SlateportCity_ContestLobby_MapAttributes:: @ 82CF18C
-VerdanturfTown_ContestLobby_MapAttributes:: @ 82CF18C
+ContestLobby_MapAttributes:: @ 82CF18C
 	.4byte 0xf
 	.4byte 0x7
 	.4byte FallarborTown_ContestLobby_MapBorder
@@ -1083,20 +1079,18 @@ VerdanturfTown_ContestLobby_MapAttributes:: @ 82CF18C
 	.4byte gTileset_Building
 	.4byte gTileset_Contest
 
-FallarborTown_ContestHall_MapBorder:: @ 82CF1A4
+ContestHall_MapBorder:: @ 82CF1A4
 	.incbin "data/maps/FallarborTown_ContestHall/border.bin"
 
-FallarborTown_ContestHall_MapBlockdata:: @ 82CF1AC
+ContestHall_MapBlockdata:: @ 82CF1AC
 	.incbin "data/maps/FallarborTown_ContestHall/map.bin"
 
 	.align 2
-FallarborTown_ContestHall_MapAttributes:: @ 82CF4A0
-SlateportCity_ContestHall_MapAttributes:: @ 82CF4A0
-VerdanturfTown_ContestHall_MapAttributes:: @ 82CF4A0
+ContestHall_MapAttributes:: @ 82CF4A0
 	.4byte 0x15
 	.4byte 0x12
-	.4byte FallarborTown_ContestHall_MapBorder
-	.4byte FallarborTown_ContestHall_MapBlockdata
+	.4byte ContestHall_MapBorder
+	.4byte ContestHall_MapBlockdata
 	.4byte gTileset_Building
 	.4byte gTileset_Contest
 
@@ -1153,8 +1147,6 @@ PacifidlogTown_House1_MapBlockdata:: @ 82CF6B4
 
 	.align 2
 PacifidlogTown_House1_MapAttributes:: @ 82CF768
-PacifidlogTown_House3_MapAttributes:: @ 82CF768
-PacifidlogTown_House5_MapAttributes:: @ 82CF768
 	.4byte 0xa
 	.4byte 0x9
 	.4byte PacifidlogTown_House1_MapBorder
@@ -1170,7 +1162,6 @@ PacifidlogTown_House2_MapBlockdata:: @ 82CF788
 
 	.align 2
 PacifidlogTown_House2_MapAttributes:: @ 82CF83C
-PacifidlogTown_House4_MapAttributes:: @ 82CF83C
 	.4byte 0xa
 	.4byte 0x9
 	.4byte PacifidlogTown_House2_MapBorder
@@ -1200,9 +1191,7 @@ PetalburgCity_House2_MapBlockdata:: @ 82D005C
 	.incbin "data/maps/PetalburgCity_House2/map.bin"
 
 	.align 2
-MossdeepCity_House4_MapAttributes:: @ 82D00FC
 PetalburgCity_House2_MapAttributes:: @ 82D00FC
-SlateportCity_House1_MapAttributes:: @ 82D00FC
 	.4byte 0xa
 	.4byte 0x8
 	.4byte PetalburgCity_House2_MapBorder
@@ -1315,19 +1304,18 @@ SlateportCity_OceanicMuseum_2F_MapAttributes:: @ 82D0A60
 	.4byte gTileset_Building
 	.4byte gTileset_OceanicMuseum
 
-SlateportCity_Harbor_MapBorder:: @ 82D0A78
+Harbor_MapBorder:: @ 82D0A78
 	.incbin "data/maps/SlateportCity_Harbor/border.bin"
 
-SlateportCity_Harbor_MapBlockdata:: @ 82D0A80
+Harbor_MapBlockdata:: @ 82D0A80
 	.incbin "data/maps/SlateportCity_Harbor/map.bin"
 
 	.align 2
-LilycoveCity_Harbor_MapAttributes:: @ 82D0D50
-SlateportCity_Harbor_MapAttributes:: @ 82D0D50
+Harbor_MapAttributes:: @ 82D0D50
 	.4byte 0x18
 	.4byte 0xf
-	.4byte SlateportCity_Harbor_MapBorder
-	.4byte SlateportCity_Harbor_MapBlockdata
+	.4byte Harbor_MapBorder
+	.4byte Harbor_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Facility
 
@@ -1444,7 +1432,6 @@ RustboroCity_House2_MapBlockdata:: @ 82D180C
 
 	.align 2
 RustboroCity_House2_MapAttributes:: @ 82D18E4
-RustboroCity_House3_MapAttributes:: @ 82D18E4
 	.4byte 0xc
 	.4byte 0x9
 	.4byte RustboroCity_House2_MapBorder
@@ -1490,8 +1477,6 @@ FortreeCity_House1_MapBlockdata:: @ 82D1ADC
 
 	.align 2
 FortreeCity_House1_MapAttributes:: @ 82D1B3C
-FortreeCity_House3_MapAttributes:: @ 82D1B3C
-FortreeCity_House5_MapAttributes:: @ 82D1B3C
 	.4byte 0x8
 	.4byte 0x6
 	.4byte FortreeCity_House1_MapBorder
@@ -1522,7 +1507,6 @@ FortreeCity_House2_MapBlockdata:: @ 82D1F64
 
 	.align 2
 FortreeCity_House2_MapAttributes:: @ 82D1FC4
-FortreeCity_House4_MapAttributes:: @ 82D1FC4
 	.4byte 0x8
 	.4byte 0x6
 	.4byte FortreeCity_House2_MapBorder
@@ -1763,9 +1747,6 @@ EverGrandeCity_Corridor1_MapBlockdata:: @ 82D4A64
 
 	.align 2
 EverGrandeCity_Corridor1_MapAttributes:: @ 82D4B84
-EverGrandeCity_Corridor2_MapAttributes:: @ 82D4B84
-EverGrandeCity_Corridor3_MapAttributes:: @ 82D4B84
-EverGrandeCity_Corridor5_MapAttributes:: @ 82D4B84
 	.4byte 0xb
 	.4byte 0xd
 	.4byte EverGrandeCity_Corridor1_MapBorder
@@ -1781,7 +1762,6 @@ Route104_PrettyPetalFlowerShop_MapBlockdata:: @ 82D4BA4
 
 	.align 2
 Route104_PrettyPetalFlowerShop_MapAttributes:: @ 82D4CB4
-Route104_PrototypePrettyPetalFlowerShop_MapAttributes:: @ 82D4CB4
 	.4byte 0xf
 	.4byte 0x9
 	.4byte Route104_PrettyPetalFlowerShop_MapBorder
@@ -1789,19 +1769,18 @@ Route104_PrototypePrettyPetalFlowerShop_MapAttributes:: @ 82D4CB4
 	.4byte gTileset_Building
 	.4byte gTileset_PrettyPetalFlowerShop
 
-Route112_CableCarStation_MapBorder:: @ 82D4CCC
+CableCarStation_MapBorder:: @ 82D4CCC
 	.incbin "data/maps/Route112_CableCarStation/border.bin"
 
-Route112_CableCarStation_MapBlockdata:: @ 82D4CD4
+CableCarStation_MapBlockdata:: @ 82D4CD4
 	.incbin "data/maps/Route112_CableCarStation/map.bin"
 
 	.align 2
-MtChimney_CableCarStation_MapAttributes:: @ 82D4E0C
-Route112_CableCarStation_MapAttributes:: @ 82D4E0C
+CableCarStation_MapAttributes:: @ 82D4E0C
 	.4byte 0xd
 	.4byte 0xc
-	.4byte Route112_CableCarStation_MapBorder
-	.4byte Route112_CableCarStation_MapBlockdata
+	.4byte CableCarStation_MapBorder
+	.4byte CableCarStation_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Facility
 
@@ -3860,19 +3839,18 @@ FortreeCity_DecorationShop_MapAttributes:: @ 82EFB4C
 	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
 
-Route110_SeasideCyclingRoadSouthEntrance_MapBorder:: @ 82EFB64
+CyclingRoadEntrance_MapBorder:: @ 82EFB64
 	.incbin "data/maps/Route110_SeasideCyclingRoadSouthEntrance/border.bin"
 
-Route110_SeasideCyclingRoadSouthEntrance_MapBlockdata:: @ 82EFB6C
+CyclingRoadEntrance_MapBlockdata:: @ 82EFB6C
 	.incbin "data/maps/Route110_SeasideCyclingRoadSouthEntrance/map.bin"
 
 	.align 2
-Route110_SeasideCyclingRoadNorthEntrance_MapAttributes:: @ 82EFC20
-Route110_SeasideCyclingRoadSouthEntrance_MapAttributes:: @ 82EFC20
+CyclingRoadEntrance_MapAttributes:: @ 82EFC20
 	.4byte 0xf
 	.4byte 0x6
-	.4byte Route110_SeasideCyclingRoadSouthEntrance_MapBorder
-	.4byte Route110_SeasideCyclingRoadSouthEntrance_MapBlockdata
+	.4byte CyclingRoadEntrance_MapBorder
+	.4byte CyclingRoadEntrance_MapBlockdata
 	.4byte gTileset_Building
 	.4byte gTileset_Shop
 
@@ -4634,8 +4612,6 @@ SootopolisCity_House1_MapBlockdata:: @ 82FEC50
 
 	.align 2
 SootopolisCity_House1_MapAttributes:: @ 82FECC0
-SootopolisCity_House4_MapAttributes:: @ 82FECC0
-SootopolisCity_House7_MapAttributes:: @ 82FECC0
 	.4byte 0x8
 	.4byte 0x7
 	.4byte SootopolisCity_House1_MapBorder
@@ -4651,7 +4627,6 @@ SootopolisCity_House2_MapBlockdata:: @ 82FECE0
 
 	.align 2
 SootopolisCity_House2_MapAttributes:: @ 82FED50
-SootopolisCity_House5_MapAttributes:: @ 82FED50
 	.4byte 0x8
 	.4byte 0x7
 	.4byte SootopolisCity_House2_MapBorder
@@ -4667,7 +4642,6 @@ SootopolisCity_House3_MapBlockdata:: @ 82FED70
 
 	.align 2
 SootopolisCity_House3_MapAttributes:: @ 82FEDE0
-SootopolisCity_House6_MapAttributes:: @ 82FEDE0
 	.4byte 0x8
 	.4byte 0x7
 	.4byte SootopolisCity_House3_MapBorder

@@ -46,10 +46,10 @@ struct Tileset
 {
     /*0x00*/ bool8 isCompressed;
     /*0x01*/ bool8 isSecondary;
-    /*0x04*/ void *tiles;
-    /*0x08*/ void *palettes;
-    /*0x0c*/ void *metatiles;
-    /*0x10*/ void *metatileAttributes;
+    /*0x04*/ const void *tiles;
+    /*0x08*/ const void *palettes;
+    /*0x0c*/ const void *metatiles;
+    /*0x10*/ const void *metatileAttributes;
     /*0x14*/ TilesetCB callback;
 };
 

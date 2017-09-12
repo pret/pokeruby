@@ -36,7 +36,7 @@ static s32 MapPosToBgTilemapOffset(struct UnknownStruct *a, s32 x, s32 y);
 
 static void DrawWholeMapViewInternal(int x, int y, struct MapData *mapData);
 static void DrawMetatileAt(struct MapData *mapData, u16, int, int);
-static void DrawMetatile(s32 a, u16 *b, u16 c);
+static void DrawMetatile(s32 a, const u16 *b, u16 c);
 static void CameraPanningCB_PanAhead(void);
 
 static void move_tilemap_camera_to_upper_left_corner_(struct UnknownStruct *a)
@@ -229,7 +229,7 @@ void DrawDoorMetatileAt(int x, int y, u16 *arr)
 static void DrawMetatileAt(struct MapData *mapData, u16 b, int c, int d)
 {
     u16 metatileId = MapGridGetMetatileIdAt(c, d);
-    u16 *metatiles;
+    const u16 *metatiles;
 
     if (metatileId > 1024)
         metatileId = 0;
@@ -243,7 +243,7 @@ static void DrawMetatileAt(struct MapData *mapData, u16 b, int c, int d)
     DrawMetatile(MapGridGetMetatileLayerTypeAt(c, d), metatiles + metatileId * 8, b);
 }
 
-static void DrawMetatile(s32 a, u16 *b, u16 c)
+static void DrawMetatile(s32 a, const u16 *b, u16 c)
 {
     switch (a)
     {

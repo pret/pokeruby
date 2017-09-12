@@ -71,15 +71,15 @@ gMapAttributes:: @ 8304F18
 	.4byte LavaridgeTown_Gym_1F_MapAttributes
 	.4byte LavaridgeTown_Gym_B1F_MapAttributes
 	.4byte LavaridgeTown_PokemonCenter_1F_MapAttributes
-	.4byte FallarborTown_ContestLobby_MapAttributes
-	.4byte FallarborTown_ContestHall_MapAttributes
+	.4byte ContestLobby_MapAttributes
+	.4byte ContestHall_MapAttributes
 	.4byte LilycoveCity_House2_MapAttributes
 	.4byte UnknownMapAttributes_082CF564
 	.4byte VerdanturfTown_WandasHouse_MapAttributes
 	.4byte PacifidlogTown_House1_MapAttributes
 	.4byte PacifidlogTown_House2_MapAttributes
 	.4byte PetalburgCity_Gym_MapAttributes
-	.4byte MossdeepCity_House4_MapAttributes
+	.4byte PetalburgCity_House2_MapAttributes
 	.4byte SlateportCity_SternsShipyard_1F_MapAttributes
 	.4byte SlateportCity_SternsShipyard_2F_MapAttributes
 	.4byte UnknownMapAttributes_082D05D8
@@ -87,7 +87,7 @@ gMapAttributes:: @ 8304F18
 	.4byte SlateportCity_PokemonFanClub_MapAttributes
 	.4byte SlateportCity_OceanicMuseum_1F_MapAttributes
 	.4byte SlateportCity_OceanicMuseum_2F_MapAttributes
-	.4byte LilycoveCity_Harbor_MapAttributes
+	.4byte Harbor_MapAttributes
 	.4byte MauvilleCity_Gym_MapAttributes
 	.4byte MauvilleCity_BikeShop_MapAttributes
 	.4byte MauvilleCity_GameCorner_MapAttributes
@@ -118,7 +118,7 @@ gMapAttributes:: @ 8304F18
 	.4byte EverGrandeCity_ChampionsRoom_MapAttributes
 	.4byte EverGrandeCity_Corridor1_MapAttributes
 	.4byte Route104_PrettyPetalFlowerShop_MapAttributes
-	.4byte Route112_CableCarStation_MapAttributes
+	.4byte CableCarStation_MapAttributes
 	.4byte Route114_FossilManiacsHouse_MapAttributes
 	.4byte Route114_FossilManiacsTunnel_MapAttributes
 	.4byte Route114_LanettesHouse_MapAttributes
@@ -256,7 +256,7 @@ gMapAttributes:: @ 8304F18
 	.4byte Route110_TrickHousePuzzle7_MapAttributes
 	.4byte Route110_TrickHousePuzzle8_MapAttributes
 	.4byte FortreeCity_DecorationShop_MapAttributes
-	.4byte Route110_SeasideCyclingRoadNorthEntrance_MapAttributes
+	.4byte CyclingRoadEntrance_MapAttributes
 	.4byte LilycoveCity_DepartmentStore_1F_MapAttributes
 	.4byte LilycoveCity_DepartmentStore_2F_MapAttributes
 	.4byte LilycoveCity_DepartmentStore_3F_MapAttributes

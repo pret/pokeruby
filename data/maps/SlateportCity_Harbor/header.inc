@@ -1,5 +1,5 @@
 SlateportCity_Harbor:: @ 83060C0
-	.4byte SlateportCity_Harbor_MapAttributes
+	.4byte Harbor_MapAttributes
 	.4byte SlateportCity_Harbor_MapEvents
 	.4byte SlateportCity_Harbor_MapScripts
 	.4byte 0x0

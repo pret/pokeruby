@@ -1,5 +1,5 @@
 Route111_OldLadysRestStop:: @ 8306C74
-	.4byte Route111_OldLadysRestStop_MapAttributes
+	.4byte DewfordTown_House1_MapAttributes
 	.4byte Route111_OldLadysRestStop_MapEvents
 	.4byte Route111_OldLadysRestStop_MapScripts
 	.4byte 0x0

@@ -1,5 +1,5 @@
 SootopolisCity_House4:: @ 8306A0C
-	.4byte SootopolisCity_House4_MapAttributes
+	.4byte SootopolisCity_House1_MapAttributes
 	.4byte SootopolisCity_House4_MapEvents
 	.4byte SootopolisCity_House4_MapScripts
 	.4byte 0x0
