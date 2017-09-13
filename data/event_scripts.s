@@ -1449,7 +1449,7 @@ do_heal_party:: @ 819FD7C
 	checkanimation 25
 	move 0x800b, OldaleTown_PokemonCenter_1F_Movement_1A0845
 	waitmove 0
-	special HealPlayerParty
+	special ScrSpecial_HealPlayerParty
 	checkflag 273
 	jumpif 0, OldaleTown_PokemonCenter_1F_EventScript_19FDCE
 	jump OldaleTown_PokemonCenter_1F_EventScript_19FDB0
@@ -2106,7 +2106,7 @@ SSTidalRooms_EventScript_1A02CA:: @ 81A02CA
 	fadescreen 1
 	fanfare 368
 	waitfanfare
-	special HealPlayerParty
+	special ScrSpecial_HealPlayerParty
 	fadescreen 0
 	return
 
@@ -4288,7 +4288,7 @@ SecretBase_RedCave1_EventScript_1A350A:: @ 81A350A
 	setvar 0x8005, 0
 	special sub_813556C
 	waitstate
-	special HealPlayerParty
+	special ScrSpecial_HealPlayerParty
 	release
 	end
 
@@ -4769,7 +4769,7 @@ gUnknown_081B694A:: @ 81B694A
 
 	.include "data/scripts/players_house.inc"
 
-Event_RunningShoesManual:: @ 81B6E5A
+S_RunningShoesManual:: @ 81B6E5A
 	msgbox UnknownString_81728E3, 3
 	end
 
@@ -4778,7 +4778,7 @@ Event_RunningShoesManual:: @ 81B6E5A
 
 	.include "data/text/trainers.inc"
 
-Event_RepelWoreOff:: @ 81C33E6
+S_RepelWoreOff:: @ 81C33E6
 	msgbox Text_RepelWoreOff, 3
 	end
 
@@ -4858,7 +4858,7 @@ GraniteCave_B1F_MapScript2_1C6BB5:: @ 81C6BB5
 MtPyre_2F_MapScript2_1C6BB5:: @ 81C6BB5
 SkyPillar_2F_MapScript2_1C6BB5:: @ 81C6BB5
 SkyPillar_4F_MapScript2_1C6BB5:: @ 81C6BB5
-	map_script_2 0x4022, 0, GraniteCave_B1F_EventScript_1C6BC5
+	map_script_2 0x4022, 0, S_FallDownHole
 	.2byte 0
 
 GraniteCave_B1F_MapScript1_1C6BBF:: @ 81C6BBF
@@ -4868,7 +4868,7 @@ SkyPillar_4F_MapScript1_1C6BBF:: @ 81C6BBF
 	copyvar 0x4022, 0x1
 	end
 
-GraniteCave_B1F_EventScript_1C6BC5:: @ 81C6BC5
+S_FallDownHole:: @ 81C6BC5
 	lockall
 	pause 20
 	move 255, GraniteCave_B1F_Movement_1C6BF7

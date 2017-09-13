@@ -17,7 +17,7 @@ extern u16 gScriptLastTalked;
 extern void (*gFieldCallback)(void);
 extern u8 gLastFieldPokeMenuOpened;
 extern void (*gUnknown_03005CE4)(void);
-extern u8 UseRockSmashScript[];
+extern u8 S_UseRockSmash[];
 
 EWRAM_DATA struct MapPosition gUnknown_0203923C = {0};
 
@@ -64,9 +64,9 @@ static void task08_080C9820(u8 taskId)
     if (!FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(&gMapObjects[mapObjId])
      || FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[mapObjId]))
     {
-        if (gMapHeader.mapType == 5)
+        if (gMapHeader.mapType == MAP_TYPE_UNDERWATER)
         {
-            FieldEffectStart(0x3B);
+            FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
             gTasks[taskId].func = sub_810B428;
         }
         else
@@ -82,7 +82,7 @@ static void sub_810B3DC(u8 taskId)
 {
     if (FieldObjectCheckIfSpecialAnimFinishedOrInactive(&gMapObjects[gPlayerAvatar.mapObjectId]) == TRUE)
     {
-        FieldEffectStart(0x3B);
+        FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
         gTasks[taskId].func = sub_810B428;
     }
 }
@@ -133,7 +133,7 @@ bool8 SetUpFieldMove_RockSmash(void)
 static void sub_810B53C(void)
 {
     gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
-    ScriptContext1_SetupScript(UseRockSmashScript);
+    ScriptContext1_SetupScript(S_UseRockSmash);
 }
 
 int FldEff_RockSmash(void)
@@ -149,13 +149,13 @@ int FldEff_RockSmash(void)
 static void sub_810B58C(void)
 {
     PlaySE(SE_W088);
-    FieldEffectActiveListRemove(0x25);
+    FieldEffectActiveListRemove(FLDEFF_USE_ROCK_SMASH);
     EnableBothScriptContexts();
 }
 
 int SetUpFieldMove_Dig(void)
 {
-    if (sub_80CA1C8() == TRUE)
+    if (CanUseEscapeRopeOnCurrMap() == TRUE)
     {
         gFieldCallback = FieldCallback_Teleport;
         gUnknown_03005CE4 = sub_810B5D8;
@@ -170,7 +170,7 @@ int SetUpFieldMove_Dig(void)
 static void sub_810B5D8(void)
 {
     sub_8053014();
-    FieldEffectStart(0x26);
+    FieldEffectStart(FLDEFF_USE_DIG);
     gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
 }
 
@@ -189,7 +189,7 @@ static void sub_810B634(void)
 {
     u8 taskId;
 
-    FieldEffectActiveListRemove(0x26);
+    FieldEffectActiveListRemove(FLDEFF_USE_DIG);
     if (ShouldDoBrailleDigEffect())
     {
         DoBrailleDigEffect();

@@ -3899,7 +3899,7 @@ u8 do_berry_tree_growth_sparkle_1(struct MapObject *mapObject, struct Sprite *sp
             gFieldEffectArguments[1] = mapObject->coords2.y;
             gFieldEffectArguments[2] = sprite->subpriority - 1;
             gFieldEffectArguments[3] = sprite->oam.priority;
-            FieldEffectStart(0x17);
+            FieldEffectStart(FLDEFF_BERRY_TREE_GROWTH_SPARKLE);
             sprite->animNum = 0;
         }
         return 0;
@@ -3938,7 +3938,7 @@ u8 do_berry_tree_growth_sparkle_2(struct MapObject *mapObject, struct Sprite *sp
     gFieldEffectArguments[1] = mapObject->coords2.y;
     gFieldEffectArguments[2] = sprite->subpriority - 1;
     gFieldEffectArguments[3] = sprite->oam.priority;
-    FieldEffectStart(0x17);
+    FieldEffectStart(FLDEFF_BERRY_TREE_GROWTH_SPARKLE);
     return 1;
 }
 
@@ -5087,7 +5087,7 @@ void FieldObjectCB_TreeDisguise(struct Sprite *sprite)
     if (mapObject->mapobj_unk_21 == 0 || (mapObject->mapobj_unk_21 == 1 && sprite->data7 == 0))
     {
         FieldObjectGetLocalIdAndMap(mapObject, (u8 *)&gFieldEffectArguments[0], (u8 *)&gFieldEffectArguments[1], (u8 *)&gFieldEffectArguments[2]);
-        mapObject->mapobj_unk_1A = FieldEffectStart(0x1c);
+        mapObject->mapobj_unk_1A = FieldEffectStart(FLDEFF_TREE_DISGUISE);
         mapObject->mapobj_unk_21 = 1;
         sprite->data7 ++;
     }
@@ -5107,7 +5107,7 @@ void FieldObjectCB_MountainDisguise(struct Sprite *sprite)
     if (mapObject->mapobj_unk_21 == 0 || (mapObject->mapobj_unk_21 == 1 && sprite->data7 == 0))
     {
         FieldObjectGetLocalIdAndMap(mapObject, (u8 *)&gFieldEffectArguments[0], (u8 *)&gFieldEffectArguments[1], (u8 *)&gFieldEffectArguments[2]);
-        mapObject->mapobj_unk_1A = FieldEffectStart(0x1d);
+        mapObject->mapobj_unk_1A = FieldEffectStart(FLDEFF_MOUNTAIN_DISGUISE);
         mapObject->mapobj_unk_21 = 1;
         sprite->data7 ++;
     }
@@ -7467,7 +7467,7 @@ bool8 sub_8062644(struct MapObject *mapObject, struct Sprite *sprite)
 bool8 do_exclamation_mark_bubble_1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     FieldObjectGetLocalIdAndMap(mapObject, (u8 *)&gFieldEffectArguments[0], (u8 *)&gFieldEffectArguments[1], (u8 *)&gFieldEffectArguments[2]);
-    FieldEffectStart(0x0);
+    FieldEffectStart(FLDEFF_EXCLAMATION_MARK_ICON_1);
     sprite->data2 = 1;
     return TRUE;
 }
@@ -7475,7 +7475,7 @@ bool8 do_exclamation_mark_bubble_1(struct MapObject *mapObject, struct Sprite *s
 bool8 do_exclamation_mark_bubble_2(struct MapObject *mapObject, struct Sprite *sprite)
 {
     FieldObjectGetLocalIdAndMap(mapObject, (u8 *)&gFieldEffectArguments[0], (u8 *)&gFieldEffectArguments[1], (u8 *)&gFieldEffectArguments[2]);
-    FieldEffectStart(0x21);
+    FieldEffectStart(FLDEFF_EXCLAMATION_MARK_ICON_2);
     sprite->data2 = 1;
     return TRUE;
 }
@@ -7483,7 +7483,7 @@ bool8 do_exclamation_mark_bubble_2(struct MapObject *mapObject, struct Sprite *s
 bool8 do_heart_bubble(struct MapObject *mapObject, struct Sprite *sprite)
 {
     FieldObjectGetLocalIdAndMap(mapObject, (u8 *)&gFieldEffectArguments[0], (u8 *)&gFieldEffectArguments[1], (u8 *)&gFieldEffectArguments[2]);
-    FieldEffectStart(0x2e);
+    FieldEffectStart(FLDEFF_HEART_ICON);
     sprite->data2 = 1;
     return TRUE;
 }

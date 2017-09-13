@@ -1069,7 +1069,7 @@ void trainer_flag_set(u16 flag)
 
 void trainer_flag_clear(u16 flag)
 {
-    FlagReset(TRAINER_FLAG_START + flag);
+    FlagClear(TRAINER_FLAG_START + flag);
 }
 
 void BattleSetup_StartTrainerBattle(void)

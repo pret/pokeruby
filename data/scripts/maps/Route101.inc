@@ -229,7 +229,7 @@ Route101_EventScript_14EA7F:: @ 814EA7F
 	move 2, Route101_Movement_14EAD7
 	waitmove 0
 	msgbox Route101_Text_16D191, 4
-	special HealPlayerParty
+	special ScrSpecial_HealPlayerParty
 	setflag 720
 	clearflag 721
 	setflag 700

@@ -87,7 +87,7 @@ void UpdateShoalTideFlag(void)
         if (tide[gLocalTime.hours])
             FlagSet(SYS_SHOAL_TIDE);
         else
-            FlagReset(SYS_SHOAL_TIDE);
+            FlagClear(SYS_SHOAL_TIDE);
     }
 }
 

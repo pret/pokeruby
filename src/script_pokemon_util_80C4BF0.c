@@ -511,7 +511,7 @@ void ScriptRandom(void)
     *scriptPtr = random % *scriptPtr;
 }
 
-void HealPlayerParty(void)
+void ScrSpecial_HealPlayerParty(void)
 {
     u8 i, j;
     u8 ppBonuses;
@@ -620,18 +620,18 @@ bool8 GetNameOfEnigmaBerryInPlayerParty(void)
     return hasItem;
 }
 
-void ScriptWildBattle(u16 species, u8 level, u16 item)
+void CreateScriptedWildMon(u16 species, u8 level, u16 item)
 {
-    u8 data[2];
+    u8 heldItem[2];
 
     ZeroEnemyPartyMons();
     CreateMon(&gEnemyParty[0], species, level, 0x20, 0, 0, 0, 0);
 
     if(item)
     {
-        data[0] = item;
-        data[1] = item >> 8;
-        SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, data);
+        heldItem[0] = item;
+        heldItem[1] = item >> 8;
+        SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, heldItem);
     }
 }
 

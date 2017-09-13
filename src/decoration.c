@@ -2322,7 +2322,7 @@ void sub_80FF474(void)
     {
         if (FlagGet(i + 0xae) == 1)
         {
-            FlagReset(i + 0xae);
+            FlagClear(i + 0xae);
             for (j=0; j<gMapHeader.events->mapObjectCount; j++)
             {
                 if (gMapHeader.events->mapObjects[j].flagId == i + 0xae)

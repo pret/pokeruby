@@ -1,4 +1,4 @@
-CuttableTreeScript:: @ 81B0DCC
+S_CuttableTree:: @ 81B0DCC
 	lockall
 	checkflag 2055
 	jumpif 0, CannotUseCut
@@ -18,7 +18,7 @@ CuttableTreeScript:: @ 81B0DCC
 	jump DoTreeCutMovement
 	end
 
-UseCutScript:: @ 81B0E16
+S_UseCut:: @ 81B0E16
 	lockall
 	doanimation 2
 	waitstate
@@ -56,7 +56,7 @@ UsedCutRockSmashText: @ 81B0E82
 CannotUseCutText: @ 81B0E8E
 	.string "This tree looks like it can be CUT down.$"
 
-BreakableRockScript:: @ 81B0EB7
+S_BreakableRock:: @ 81B0EB7
 	lockall
 	checkflag 2057
 	jumpif 0, CannotUseRockSmash
@@ -76,7 +76,7 @@ BreakableRockScript:: @ 81B0EB7
 	jump DoRockSmashMovement
 	end
 
-UseRockSmashScript:: @ 81B0F01
+S_UseRockSmash:: @ 81B0F01
 	lockall
 	doanimation 37
 	waitstate
@@ -123,7 +123,7 @@ CannotUseRockSmashText: @ 81B0F90
 	.string "It’s a rugged rock, but a POKéMON\n"
 	.string "may be able to smash it.$"
 
-PushableBoulderScript:: @ 81B0FCB
+S_PushableBoulder:: @ 81B0FCB
 	lockall
 	checkflag 2058
 	jumpif 0, CannotUseStrength
@@ -142,7 +142,7 @@ PushableBoulderScript:: @ 81B0FCB
 	jump UsedStrength
 	end
 
-UseStrengthScript:: @ 81B100E
+S_UseStrength:: @ 81B100E
 	lockall
 	doanimation 40
 	waitstate
@@ -188,7 +188,7 @@ AlreadyUsedStrengthText: @ 81B1127
 	.string "STRENGTH made it possible to move\n"
 	.string "boulders around.$"
 
-UseWaterfallScript:: @ 81B115A
+S_UseWaterfall:: @ 81B115A
 	lockall
 	checkattack MOVE_WATERFALL
 	compare RESULT, 6
@@ -202,7 +202,7 @@ UseWaterfallScript:: @ 81B115A
 	doanimation 43
 	jump Waterfall_Done
 
-CannotUseWaterfallScript:: @ 81B1194
+S_CannotUseWaterfall:: @ 81B1194
 	lockall
 Waterfall_NoMonKnows: @ 81B1195
 	msgbox CannotUseWaterfallText, 4
@@ -244,7 +244,7 @@ Dive_Done: @ 81B1267
 	releaseall
 	end
 
-UnderwaterUseDiveScript:: @ 81B1269
+S_UseDiveUnderwater:: @ 81B1269
 	lockall
 	checkattack MOVE_DIVE
 	compare RESULT, 6

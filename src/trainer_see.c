@@ -258,7 +258,7 @@ static bool8 sub_8084398(u8 taskId, struct Task *task, struct MapObject *trainer
     u8 direction;
 
     FieldObjectGetLocalIdAndMap(trainerObj, (u8 *)&gFieldEffectArguments[0], (u8 *)&gFieldEffectArguments[1], (u8 *)&gFieldEffectArguments[2]);
-    FieldEffectStart(0);
+    FieldEffectStart(FLDEFF_EXCLAMATION_MARK_ICON_1);
     direction = GetFaceDirectionAnimId(trainerObj->mapobj_unk_18);
     FieldObjectSetSpecialAnim(trainerObj, direction);
     task->data[0]++;
@@ -353,7 +353,7 @@ static bool8 sub_80845AC(u8 taskId, struct Task *task, struct MapObject *trainer
 static bool8 sub_80845C8(u8 taskId, struct Task *task, struct MapObject *trainerObj)
 {
     if (!FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(trainerObj)
-        || FieldObjectClearAnimIfSpecialAnimFinished(trainerObj))
+     || FieldObjectClearAnimIfSpecialAnimFinished(trainerObj))
     {
         FieldObjectSetSpecialAnim(trainerObj, 0x3E);
         task->data[0]++;
@@ -369,7 +369,7 @@ static bool8 sub_80845FC(u8 taskId, struct Task *task, struct MapObject *trainer
         gFieldEffectArguments[1] = trainerObj->coords2.y;
         gFieldEffectArguments[2] = gSprites[trainerObj->spriteId].subpriority - 1;
         gFieldEffectArguments[3] = 2;
-        task->data[4] = FieldEffectStart(49);
+        task->data[4] = FieldEffectStart(FLDEFF_POP_OUT_OF_ASH);
         task->data[0]++;
     }
     return FALSE;

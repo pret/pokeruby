@@ -194,7 +194,7 @@ static void DoWhiteOut(void)
 {
     ScriptContext2_RunNewScript(S_WhiteOut);
     gSaveBlock1.money /= 2;
-    HealPlayerParty();
+    ScrSpecial_HealPlayerParty();
     sub_8053050();
     sub_8053570();
     warp_in();
@@ -203,47 +203,47 @@ static void DoWhiteOut(void)
 void flag_var_implications_of_teleport_(void)
 {
     player_avatar_init_params_reset();
-    FlagReset(SYS_CYCLING_ROAD);
-    FlagReset(SYS_CRUISE_MODE);
-    FlagReset(SYS_SAFARI_MODE);
-    FlagReset(SYS_USE_STRENGTH);
-    FlagReset(SYS_USE_FLASH);
+    FlagClear(SYS_CYCLING_ROAD);
+    FlagClear(SYS_CRUISE_MODE);
+    FlagClear(SYS_SAFARI_MODE);
+    FlagClear(SYS_USE_STRENGTH);
+    FlagClear(SYS_USE_FLASH);
 }
 
 void Overworld_ResetStateAfterTeleport(void)
 {
     player_avatar_init_params_reset();
-    FlagReset(SYS_CYCLING_ROAD);
-    FlagReset(SYS_CRUISE_MODE);
-    FlagReset(SYS_SAFARI_MODE);
-    FlagReset(SYS_USE_STRENGTH);
-    FlagReset(SYS_USE_FLASH);
+    FlagClear(SYS_CYCLING_ROAD);
+    FlagClear(SYS_CRUISE_MODE);
+    FlagClear(SYS_SAFARI_MODE);
+    FlagClear(SYS_USE_STRENGTH);
+    FlagClear(SYS_USE_FLASH);
     ScriptContext2_RunNewScript(gUnknown_0819FC9F);
 }
 
 void sub_8053014(void)
 {
     player_avatar_init_params_reset();
-    FlagReset(SYS_CYCLING_ROAD);
-    FlagReset(SYS_CRUISE_MODE);
-    FlagReset(SYS_SAFARI_MODE);
-    FlagReset(SYS_USE_STRENGTH);
-    FlagReset(SYS_USE_FLASH);
+    FlagClear(SYS_CYCLING_ROAD);
+    FlagClear(SYS_CRUISE_MODE);
+    FlagClear(SYS_SAFARI_MODE);
+    FlagClear(SYS_USE_STRENGTH);
+    FlagClear(SYS_USE_FLASH);
 }
 
 void sub_8053050(void)
 {
     player_avatar_init_params_reset();
-    FlagReset(SYS_CYCLING_ROAD);
-    FlagReset(SYS_CRUISE_MODE);
-    FlagReset(SYS_SAFARI_MODE);
-    FlagReset(SYS_USE_STRENGTH);
-    FlagReset(SYS_USE_FLASH);
+    FlagClear(SYS_CYCLING_ROAD);
+    FlagClear(SYS_CRUISE_MODE);
+    FlagClear(SYS_SAFARI_MODE);
+    FlagClear(SYS_USE_STRENGTH);
+    FlagClear(SYS_USE_FLASH);
 }
 
 void sub_805308C(void)
 {
-    FlagReset(SYS_SAFARI_MODE);
+    FlagClear(SYS_SAFARI_MODE);
     ChooseAmbientCrySpecies();
     ResetCyclingRoadChallengeData();
     UpdateLocationHistoryForRoamer();
@@ -635,7 +635,7 @@ void sub_8053994(u32 a1)
     sub_80806E4();
     ChooseAmbientCrySpecies();
     if (v2)
-        FlagReset(SYS_USE_FLASH);
+        FlagClear(SYS_USE_FLASH);
     SetDefaultFlashLevel();
     sav1_reset_battle_music_maybe();
     mapheader_run_script_with_tag_x3();

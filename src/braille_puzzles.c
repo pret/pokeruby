@@ -6,6 +6,7 @@
 #include "fieldmap.h"
 #include "flags.h"
 #include "main.h"
+#include "map_constants.h"
 #include "map_obj_lock.h"
 #include "menu.h"
 #include "rom6.h"
@@ -19,11 +20,13 @@
 extern u8 gPlayerPartyCount;
 extern u8 gLastFieldPokeMenuOpened;
 
-extern u8 gIslandCave_EventScript_OpenRegiiceChamber[]; // regiice event script
+extern u8 S_OpenRegiceChamber[]; // regiice event script
 
 bool8 ShouldDoBrailleDigEffect(void)
 {
-    if (!FlagGet(SYS_BRAILLE_DIG) && (gSaveBlock1.location.mapGroup == 0x18 && gSaveBlock1.location.mapNum == 0x47))
+    if (!FlagGet(SYS_BRAILLE_DIG)
+     && (gSaveBlock1.location.mapGroup == MAP_GROUP_SEALED_CHAMBER_OUTER_ROOM
+     && gSaveBlock1.location.mapNum == MAP_ID_SEALED_CHAMBER_OUTER_ROOM))
     {
         if (gSaveBlock1.pos.x == 10 && gSaveBlock1.pos.y == 3)
             return TRUE;
@@ -52,10 +55,11 @@ void DoBrailleDigEffect(void)
 
 bool8 CheckRelicanthWailord(void)
 {
+    // First comes Relicanth.
     if (GetMonData(&gPlayerParty, MON_DATA_SPECIES2, 0) == SPECIES_RELICANTH)
     {
         CalculatePlayerPartyCount();
-
+        // Last comes Wailord
         if (GetMonData(&gPlayerParty[gPlayerPartyCount - 1], MON_DATA_SPECIES2, 0) == SPECIES_WAILORD)
             return TRUE;
     }
@@ -64,7 +68,7 @@ bool8 CheckRelicanthWailord(void)
 
 bool8 ShouldDoBrailleStrengthEffect(void)
 {
-    if (!FlagGet(SYS_BRAILLE_STRENGTH) && (gSaveBlock1.location.mapGroup == 0x18 && gSaveBlock1.location.mapNum == 0x6))
+    if (!FlagGet(SYS_BRAILLE_STRENGTH) && (gSaveBlock1.location.mapGroup == MAP_GROUP_DESERT_RUINS && gSaveBlock1.location.mapNum == MAP_ID_DESERT_RUINS))
     {
         if (gSaveBlock1.pos.x == 10 && gSaveBlock1.pos.y == 23)
             return TRUE;
@@ -94,7 +98,7 @@ void DoBrailleStrengthEffect(void)
 
 bool8 ShouldDoBrailleFlyEffect(void)
 {
-    if (!FlagGet(SYS_BRAILLE_FLY) && (gSaveBlock1.location.mapGroup == 0x18 && gSaveBlock1.location.mapNum == 0x44))
+    if (!FlagGet(SYS_BRAILLE_FLY) && (gSaveBlock1.location.mapGroup == MAP_GROUP_ANCIENT_TOMB && gSaveBlock1.location.mapNum == MAP_ID_ANCIENT_TOMB))
     {
         if (gSaveBlock1.pos.x == 8 && gSaveBlock1.pos.y == 25)
             return TRUE;
@@ -106,7 +110,7 @@ bool8 ShouldDoBrailleFlyEffect(void)
 void DoBrailleFlyEffect(void)
 {
     gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
-    FieldEffectStart(0x3C);
+    FieldEffectStart(FLDEFF_USE_FLY_ANCIENT_TOMB);
 }
 
 bool8 FldEff_UseFlyAncientTomb(void)
@@ -120,7 +124,7 @@ bool8 FldEff_UseFlyAncientTomb(void)
 
 void UseFlyAncientTomb_Callback(void)
 {
-    FieldEffectActiveListRemove(0x3C);
+    FieldEffectActiveListRemove(FLDEFF_USE_FLY_ANCIENT_TOMB);
     UseFlyAncientTomb_Finish();
 }
 
@@ -158,7 +162,7 @@ void Task_BrailleWait(u8 taskId)
         if (BrailleWait_CheckButtonPress() != FALSE)
         {
             MenuZeroFillScreen();
-            PlaySE(5);
+            PlaySE(SE_SELECT);
             data[0] = 2;
         }
         else
@@ -191,7 +195,7 @@ void Task_BrailleWait(u8 taskId)
         break;
     case 4:
         sub_8064E2C();
-        ScriptContext1_SetupScript(gIslandCave_EventScript_OpenRegiiceChamber);
+        ScriptContext1_SetupScript(S_OpenRegiceChamber);
         DestroyTask(taskId);
         break;
     }
@@ -199,14 +203,14 @@ void Task_BrailleWait(u8 taskId)
 
 bool32 BrailleWait_CheckButtonPress(void)
 {
-    u16 var = 0xFF;
+    u16 keyMask = A_BUTTON | B_BUTTON | START_BUTTON | SELECT_BUTTON | DPAD_ANY;
 
-    if (gSaveBlock2.optionsButtonMode == 1)
-        var |= 0x300;
-    if (gSaveBlock2.optionsButtonMode == 2)
-        var |= 0x200;
+    if (gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
+        keyMask |= L_BUTTON | R_BUTTON;
+    if (gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
+        keyMask |= L_BUTTON;
 
-    if ((var & gMain.newKeys) != FALSE)
+    if (gMain.newKeys & keyMask)
         return TRUE;
     else
         return FALSE;

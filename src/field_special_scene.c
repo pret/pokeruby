@@ -304,8 +304,8 @@ void Task_HandlePorthole(u8 taskId)
         }
         break;
     case EXIT_PORTHOLE: // exit porthole.
-        FlagReset(0x4001);
-        FlagReset(0x4000);
+        FlagClear(0x4001);
+        FlagClear(0x4000);
         copy_saved_warp2_bank_and_enter_x_to_warp1(0);
         sp13E_warp_to_last_warp();
         DestroyTask(taskId);

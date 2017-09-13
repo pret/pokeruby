@@ -2902,7 +2902,7 @@ const struct WildPokemonInfo Underwater2_WaterMonsInfo = {4, Underwater2_WaterMo
 extern u16 gRoute119WaterTileData[];
 extern u16 gScriptResult;
 extern struct WildPokemon gWildFeebasRoute119Data;
-extern u8 Event_RepelWoreOff[];
+extern u8 S_RepelWoreOff[];
 
 EWRAM_DATA static u8 sWildEncountersDisabled = 0;
 EWRAM_DATA static u32 sFeebasRngValue = 0;
@@ -2912,7 +2912,7 @@ EWRAM_DATA static u32 sFeebasRngValue = 0;
 static u16 FeebasRandom(void);
 static void FeebasSeedRng(u16 seed);
 
-static bool8 RepelCheck(u8 level);
+static bool8 IsWildLevelAllowedByRepel(u8 level);
 static void ApplyFluteEncounterRateMod(u32 *encRate);
 static void ApplyCleanseTagEncounterRateMod(u32 *encRate);
 
@@ -3195,7 +3195,7 @@ static bool8 GenerateWildMon(struct WildPokemonInfo *wildMonInfo, u8 area, bool8
         break;
     }
     level = ChooseWildMonLevel(&wildMonInfo->wildPokemon[wildMonIndex]);
-    if (checkRepel == TRUE && RepelCheck(level) == FALSE)
+    if (checkRepel == TRUE && IsWildLevelAllowedByRepel(level) == FALSE)
         return FALSE;
     else
     {
@@ -3217,7 +3217,7 @@ static bool8 SetUpMassOutbreakEncounter(bool8 checkRepel)
 {
     u16 i;
 
-    if (checkRepel == TRUE && RepelCheck(gSaveBlock1.outbreakPokemonLevel) == 0)
+    if (checkRepel == TRUE && IsWildLevelAllowedByRepel(gSaveBlock1.outbreakPokemonLevel) == FALSE)
         return FALSE;
     else
     {
@@ -3304,7 +3304,7 @@ bool8 StandardWildEncounter(u16 a, u16 b)
                         if (TryStartRoamerEncounter() == TRUE)
                         {
                             roamer = &gSaveBlock1.roamer;
-                            if (RepelCheck(roamer->level))
+                            if (IsWildLevelAllowedByRepel(roamer->level))
                             {
                                 BattleSetup_StartRoamerBattle();
                                 return 1;
@@ -3338,7 +3338,7 @@ bool8 StandardWildEncounter(u16 a, u16 b)
                         if (TryStartRoamerEncounter() == TRUE)
                         {
                             roamer = &gSaveBlock1.roamer;
-                            if (RepelCheck(roamer->level))
+                            if (IsWildLevelAllowedByRepel(roamer->level))
                             {
                                 BattleSetup_StartRoamerBattle();
                                 return 1;
@@ -3409,7 +3409,7 @@ bool8 SweetScentWildEncounter(void)
                 return TRUE;
             }
             if (DoMassOutbreakEncounterTest() == TRUE)
-                SetUpMassOutbreakEncounter(0);
+                SetUpMassOutbreakEncounter(FALSE);
             else
                 GenerateWildMon(wildPokemonInfo, 0, FALSE);
             BattleSetup_StartWildBattle();
@@ -3523,20 +3523,21 @@ bool8 UpdateRepelCounter(void)
         VarSet(VAR_REPEL_STEP_COUNT, steps);
         if (steps == 0)
         {
-            ScriptContext1_SetupScript(Event_RepelWoreOff);
+            ScriptContext1_SetupScript(S_RepelWoreOff);
             return TRUE;
         }
     }
     return FALSE;
 }
 
-//Returns FALSE if Repel prevents wild Pokemon at the specified level from appearing
-static bool8 RepelCheck(u8 level)
+static bool8 IsWildLevelAllowedByRepel(u8 wildLevel)
 {
     u8 i;
 
     if (!VarGet(VAR_REPEL_STEP_COUNT))
+    {
         return TRUE;
+    }
     else
     {
         for (i = 0; i < 6; i++)
@@ -3544,7 +3545,9 @@ static bool8 RepelCheck(u8 level)
             // UB: Too few arguments for function 'GetMonData'
             if (GetMonData(&gPlayerParty[i], MON_DATA_HP) && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
             {
-                if (level < (u8)GetMonData(&gPlayerParty[i], MON_DATA_LEVEL))
+                u8 ourLevel = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
+
+                if (wildLevel < ourLevel)
                     return FALSE;
                 else
                     return TRUE;

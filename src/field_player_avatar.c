@@ -669,7 +669,7 @@ void PlayerAvatarTransition_Surfing(struct MapObject *a)
     gFieldEffectArguments[0] = a->coords2.x;
     gFieldEffectArguments[1] = a->coords2.y;
     gFieldEffectArguments[2] = gPlayerAvatar.mapObjectId;
-    unk = FieldEffectStart(8);
+    unk = FieldEffectStart(FLDEFF_SURF_BLOB);
     a->mapobj_unk_1A = unk;
     sub_8127ED0(unk, 1);
 }
@@ -1230,7 +1230,7 @@ u8 sub_8059EA4(struct Task *task, struct MapObject *b, struct MapObject *c)
         gFieldEffectArguments[1] = c->coords2.y;
         gFieldEffectArguments[2] = c->elevation;
         gFieldEffectArguments[3] = gSprites[c->spriteId].oam.priority;
-        FieldEffectStart(10);
+        FieldEffectStart(FLDEFF_DUST);
         PlaySE(SE_W070);
         task->data[0]++;
     }

@@ -61,44 +61,44 @@ static void RecordCyclingRoadResults(u32, u8);
 
 static struct ElevatorMenu gUnknown_03000760[20];
 
-void sub_810D6A4(void) {
-    SetMainCallback2(sub_8145D88);
+void ScrSpecial_ShowDiploma(void)
+{
+    SetMainCallback2(CB2_ShowDiploma);
     ScriptContext2_Enable();
 }
 
-void sub_810D6B8(void) {
+void ScrSpecial_ViewWallClock(void)
+{
     gMain.savedCallback = c2_exit_to_overworld_2_switch;
     SetMainCallback2(CB2_ViewWallClock);
     ScriptContext2_Enable();
 }
 
-void ResetCyclingRoadChallengeData(void) {
+void ResetCyclingRoadChallengeData(void)
+{
     gUnknown_02039250 = 0;
     gUnknown_02039251 = 0;
     gUnknown_02039254 = 0;
 }
 
-void BeginCyclingRoadChallenge(void) {
+void ScrSpecial_BeginCyclingRoadChallenge(void)
+{
     gUnknown_02039250 = 1;
     gUnknown_02039251 = 0;
     gUnknown_02039254 = gMain.vblankCounter1;
 }
 
-u16 GetPlayerAvatarBike(void) {
+u16 GetPlayerAvatarBike(void)
+{
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_ACRO_BIKE))
-    {
         return 1;
-    }
-
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE))
-    {
         return 2;
-    }
-
     return 0;
 }
 
-void DetermineCyclingRoadResults(u32 arg0, u8 arg1) {
+static void DetermineCyclingRoadResults(u32 arg0, u8 arg1)
+{
     u8 result;
 
     if (arg1 <= 99)
@@ -225,7 +225,7 @@ void SetSSTidalFlag(void)
 
 void ResetSSTidalFlag(void)
 {
-    FlagReset(SYS_CRUISE_MODE);
+    FlagClear(SYS_CRUISE_MODE);
 }
 
 bool32 CountSSTidalStep(u16 delta)
@@ -1453,7 +1453,7 @@ void ResetTrickHouseEndRoomFlag(void)
     u16 *specVar = &gSpecialVar_0x8004;
     u16 flag = 0x259;
     *specVar = flag;
-    FlagReset(flag);
+    FlagClear(flag);
 }
 
 bool8 CheckLeadMonCool(void)
@@ -1868,7 +1868,7 @@ void GivLeadMonEffortRibbon(void)
     SetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_EFFORT_RIBBON, &ribbonSet);
 }
 
-bool8 GetLeadMonEVCount(void)
+bool8 ScrSpecial_AreLeadMonEVsMaxedOut(void)
 {
     if (GetMonEVCount(&gPlayerParty[GetLeadMonIndex()]) >= 510)
     {
@@ -1919,7 +1919,7 @@ bool8 IsStarterInParty(void)
     u8 i;
     u16 starter = GetStarterPokemon(VarGet(VAR_FIRST_POKE));
     u8 partyCount = CalculatePlayerPartyCount();
-    for (i=0; i<partyCount; i++)
+    for (i = 0; i < partyCount; i++)
     {
         if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) == starter)
         {
@@ -2140,10 +2140,10 @@ void sub_810FAA0(void)
         sub_810FF48();
         sub_810FD80();
         gSaveBlock1.vars[0x42] = gSaveBlock2.playTimeHours;
-        FlagReset(0x315);
-        FlagReset(0x316);
-        FlagReset(0x317);
-        FlagReset(0x318);
+        FlagClear(0x315);
+        FlagClear(0x316);
+        FlagClear(0x317);
+        FlagClear(0x318);
         VarSet(VAR_0x4095, 1);
     }
 }

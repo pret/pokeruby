@@ -314,5 +314,5 @@ void DoRippleFieldEffect(struct MapObject *mapObject, struct Sprite *sprite)
     gFieldEffectArguments[1] = sprite->pos1.y + (gfxInfo->height >> 1) - 2;
     gFieldEffectArguments[2] = 151;
     gFieldEffectArguments[3] = 3;
-    FieldEffectStart(5);
+    FieldEffectStart(FLDEFF_RIPPLE);
 }

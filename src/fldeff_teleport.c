@@ -26,7 +26,7 @@ bool8 SetUpFieldMove_Teleport(void)
 void hm_teleport_run_dp02scr(void)
 {
     Overworld_ResetStateAfterTeleport();
-    FieldEffectStart(63);
+    FieldEffectStart(FLDEFF_USE_TELEPORT);
     gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
 }
 
@@ -41,6 +41,6 @@ bool8 FldEff_UseTeleport(void)
 
 void sub_814A404(void)
 {
-    FieldEffectActiveListRemove(63);
+    FieldEffectActiveListRemove(FLDEFF_USE_TELEPORT);
     sub_8087BA8();
 }

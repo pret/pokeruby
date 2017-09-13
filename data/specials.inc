@@ -7,7 +7,7 @@
 .set __special__, 0
 	.align 2
 gSpecials::
-	def_special HealPlayerParty
+	def_special ScrSpecial_HealPlayerParty
 	def_special SetCableClubWarp
 	def_special DoCableClubWarp
 	def_special sub_80810DC
@@ -162,7 +162,7 @@ gSpecials::
 	def_special sub_8123218
 	def_special sub_8053E90
 	def_special StartWallClock
-	def_special sub_810D6B8
+	def_special ScrSpecial_ViewWallClock
 	def_special ScrSpecial_ChooseStarter
 	def_special ScrSpecial_StartWallyTutorialBattle
 	def_special sub_80BF9F8
@@ -229,11 +229,11 @@ gSpecials::
 	def_special sub_80F9A4C
 	def_special sub_80F9EEC
 	def_special sub_80FA0DC
-	def_special sub_80F9F84
-	def_special sub_80F9F3C
+	def_special ScrSpecial_GetPokemonNicknameAndMoveName
+	def_special ScrSpecial_CountPokemonMoves
 	def_special sub_8132670
 	def_special GetRecordedCyclingRoadResults
-	def_special BeginCyclingRoadChallenge
+	def_special ScrSpecial_BeginCyclingRoadChallenge
 	def_special GetPlayerAvatarBike
 	def_special FinishCyclingRoadChallenge
 	def_special UpdateCyclingRoadState
@@ -271,7 +271,7 @@ gSpecials::
 	def_special SetTrickHouseEndRoomFlag
 	def_special ScrSpecial_CreatePCMenu
 	def_special AccessHallOfFamePC
-	def_special sub_810D6A4
+	def_special ScrSpecial_ShowDiploma
 	def_special CheckLeadMonCool
 	def_special CheckLeadMonBeauty
 	def_special CheckLeadMonCute
@@ -301,7 +301,7 @@ gSpecials::
 	def_special sub_810F4FC
 	def_special LeadMonHasEffortRibbon
 	def_special GivLeadMonEffortRibbon
-	def_special GetLeadMonEVCount
+	def_special ScrSpecial_AreLeadMonEVsMaxedOut
 	def_special sub_8064EAC
 	def_special sub_8064ED4
 	def_special InitRoamer

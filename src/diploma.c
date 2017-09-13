@@ -35,7 +35,7 @@ static void VBlankCB(void)
     TransferPlttBuffer();
 }
 
-void sub_8145D88(void)
+void CB2_ShowDiploma(void)
 {
     u32 savedIme;
 

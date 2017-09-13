@@ -542,7 +542,7 @@ bool8 ScrCmd_setflag(struct ScriptContext *ctx)
 
 bool8 ScrCmd_clearflag(struct ScriptContext *ctx)
 {
-    FlagReset(ScriptReadHalfword(ctx));
+    FlagClear(ScriptReadHalfword(ctx));
     return FALSE;
 }
 
@@ -1626,7 +1626,7 @@ bool8 ScrCmd_setwildbattle(struct ScriptContext *ctx)
     u16 species = ScriptReadHalfword(ctx);
     u8 level = ScriptReadByte(ctx);
     u16 item = ScriptReadHalfword(ctx);
-    ScriptWildBattle(species, level, item);
+    CreateScriptedWildMon(species, level, item);
     return FALSE;
 }
 

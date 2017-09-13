@@ -215,7 +215,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A3EF2:: @ 81A3EF2
 	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A42F5
 
 OldaleTown_PokemonCenter_2F_EventScript_1A3F5E:: @ 81A3F5E
-	special HealPlayerParty
+	special ScrSpecial_HealPlayerParty
 	special SavePlayerParty
 	special LoadPlayerBag
 	copyvar 0x4087, 0x8004

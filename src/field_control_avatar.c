@@ -57,7 +57,7 @@ extern u8 gUnknown_081A4363[];
 extern u8 gUnknown_081C346A[];
 extern u8 gUnknown_081616E1[];
 extern u8 Event_WorldMap[];
-extern u8 Event_RunningShoesManual[];
+extern u8 S_RunningShoesManual[];
 extern u8 PictureBookShelfScript[];
 extern u8 BookshelfScript[];
 extern u8 PokemonCenterBookshelfScript[];
@@ -70,13 +70,13 @@ extern u8 gUnknown_0815F43A[];
 extern u8 gUnknown_0815F523[];
 extern u8 gUnknown_0815F528[];
 extern u8 UseSurfScript[];
-extern u8 UseWaterfallScript[];
-extern u8 CannotUseWaterfallScript[];
+extern u8 S_UseWaterfall[];
+extern u8 S_CannotUseWaterfall[];
 extern u8 UseDiveScript[];
-extern u8 UnderwaterUseDiveScript[];
-extern u8 GraniteCave_B1F_EventScript_1C6BC5[];
+extern u8 S_UseDiveUnderwater[];
+extern u8 S_FallDownHole[];
 extern u8 gUnknown_081A14B8[];
-extern u8 Event_EggHatch[];
+extern u8 S_EggHatch[];
 extern u8 gUnknown_0815FD0D[];
 extern u8 gUnknown_081C6BDE[];
 
@@ -391,7 +391,7 @@ static u8 *sub_8068500(struct MapPosition *position, u8 b, u8 c)
     if (MetatileBehavior_IsRegionMap(b) == TRUE)
         return Event_WorldMap;
     if (sub_805791C(b) == TRUE)
-        return Event_RunningShoesManual;
+        return S_RunningShoesManual;
     if (MetatileBehavior_IsPictureBookShelf(b) == TRUE)
         return PictureBookShelfScript;
     if (MetatileBehavior_IsBookShelf(b) == TRUE)
@@ -428,9 +428,9 @@ static u8 *TryGetFieldMoveScript(struct MapPosition *unused1, u8 b, u8 unused2)
     if (MetatileBehavior_IsWaterfall(b) == TRUE)
     {
         if (FlagGet(BADGE08_GET) == TRUE && IsPlayerSurfingNorth() == TRUE)
-            return UseWaterfallScript;
+            return S_UseWaterfall;
         else
-            return CannotUseWaterfallScript;
+            return S_CannotUseWaterfall;
     }
     return NULL;
 }
@@ -447,9 +447,9 @@ static bool32 sub_8068770(void)
 
 static bool32 sub_80687A4(void)
 {
-    if (FlagGet(BADGE07_GET) && gMapHeader.mapType == 5 && sub_8068F18() == 1)
+    if (FlagGet(BADGE07_GET) && gMapHeader.mapType == MAP_TYPE_UNDERWATER && sub_8068F18() == 1)
     {
-        ScriptContext1_SetupScript(UnderwaterUseDiveScript);
+        ScriptContext1_SetupScript(S_UseDiveUnderwater);
         return TRUE;
     }
     return FALSE;
@@ -485,7 +485,7 @@ bool8 sub_8068870(u16 a)
 {
     if (MetatileBehavior_IsCrackedFloorHole(a))
     {
-        ScriptContext1_SetupScript(GraniteCave_B1F_EventScript_1C6BC5);
+        ScriptContext1_SetupScript(S_FallDownHole);
         return TRUE;
     }
     return FALSE;
@@ -503,7 +503,7 @@ bool8 sub_8068894(void)
     if (sub_80422A0())
     {
         IncrementGameStat(13);
-        ScriptContext1_SetupScript(Event_EggHatch);
+        ScriptContext1_SetupScript(S_EggHatch);
         return TRUE;
     }
     if (SafariZoneTakeStep() == TRUE)
@@ -549,14 +549,14 @@ static bool8 overworld_poison_step(void)
 {
     u16 *ptr;
 
-    if (gMapHeader.mapType != 9)
+    if (gMapHeader.mapType != MAP_TYPE_SECRET_BASE)
     {
         ptr = GetVarPointer(VAR_POISON_STEP_COUNTER);
         (*ptr)++;
         (*ptr) %= 4;
         if (*ptr == 0)
         {
-            switch (overworld_poison())
+            switch (DoPoisonFieldEffect())
             {
             case 0:
                 return FALSE;
@@ -730,7 +730,7 @@ static bool8 map_warp_consider_2_to_inside(struct MapPosition *position, u16 b, 
     return FALSE;
 }
 
-static s8 map_warp_check(struct MapHeader *mapHeader, u16 b, u16 c, u8 d)
+static s8 map_warp_check(struct MapHeader *mapHeader, u16 x, u16 y, u8 warpId)
 {
     s32 i;
     struct WarpEvent *warpEvent = mapHeader->events->warps;
@@ -738,9 +738,9 @@ static s8 map_warp_check(struct MapHeader *mapHeader, u16 b, u16 c, u8 d)
 
     for (i = 0; i < warpCount; i++, warpEvent++)
     {
-        if ((u16)warpEvent->x == b && (u16)warpEvent->y == c)
+        if ((u16)warpEvent->x == x && (u16)warpEvent->y == y)
         {
-            if ((u8)warpEvent->warpId == d || (u8)warpEvent->warpId == 0)
+            if ((u8)warpEvent->warpId == warpId || (u8)warpEvent->warpId == 0)
                 return i;
         }
     }
@@ -767,7 +767,7 @@ static u8 *trigger_activate(struct CoordEvent *coordEvent)
     return NULL;
 }
 
-static u8 *mapheader_trigger_activate_at(struct MapHeader *mapHeader, u16 b, u16 c, u8 d)
+static u8 *mapheader_trigger_activate_at(struct MapHeader *mapHeader, u16 x, u16 y, u8 d)
 {
     s32 i;
     struct CoordEvent *coordEvents = mapHeader->events->coordEvents;
@@ -776,7 +776,7 @@ static u8 *mapheader_trigger_activate_at(struct MapHeader *mapHeader, u16 b, u16
 
     for (i = 0; i < coordEventCount; i++)
     {
-        if ((u16)coordEvents[i].x == b && (u16)coordEvents[i].y == c)
+        if ((u16)coordEvents[i].x == x && (u16)coordEvents[i].y == y)
         {
             if (coordEvents[i].unk4 == d || coordEvents[i].unk4 == 0)
             {
@@ -813,7 +813,7 @@ static struct BgEvent *FindInvisibleMapObjectByPosition(struct MapHeader *mapHea
 
 int dive_warp(struct MapPosition *position, u16 b)
 {
-    if (gMapHeader.mapType == 5 && sub_805750C(b) == 0)
+    if (gMapHeader.mapType == MAP_TYPE_UNDERWATER && sub_805750C(b) == 0)
     {
         if (sub_80538B0(position->x - 7, position->y - 7))
         {
@@ -843,7 +843,7 @@ u8 sub_8068F18(void)
 
     PlayerGetDestCoords(&x, &y);
     r5 = MapGridGetMetatileBehaviorAt(x, y);
-    if (gMapHeader.mapType == 5 && sub_805750C(r5) == 0)
+    if (gMapHeader.mapType == MAP_TYPE_UNDERWATER && sub_805750C(r5) == 0)
     {
         if (sub_80538B0(x - 7, y - 7) == TRUE)
             return 1;

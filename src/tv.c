@@ -235,7 +235,7 @@ void UpdateTVScreensOnMap(int width, int height)
         }
         else if (FlagGet(SYS_TV_START) && (sub_80BD8B8() != 0xff || sub_80BECA0() != 0xff || IsTVShowInSearchOfTrainersAiring()))
         {
-            FlagReset(SYS_TV_WATCH);
+            FlagClear(SYS_TV_WATCH);
             SetTVMetatilesOnMap(width, height, 0x3);
         }
         break;
