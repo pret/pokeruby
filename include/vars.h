@@ -45,6 +45,7 @@
 #define VAR_0x4095                 0x4095
 #define VAR_0x4097                 0x4097
 #define VAR_0x409a                 0x409a
+#define VAR_WEATHER_INSTITUTE_CLEARED 0x040B3
 #define VAR_PORTHOLE               0x40B4
 
 #define VAR_0x40BC                 0x40BC

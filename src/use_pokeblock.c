@@ -5,7 +5,7 @@
 
 #include "global.h"
 #include "main.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "string_util.h"
 #include "strings.h"
 #include "sprite.h"

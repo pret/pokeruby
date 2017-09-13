@@ -14,16 +14,16 @@ enum
 // map types
 enum
 {
-    MAP_TYPE_0,
-    MAP_TYPE_TOWN,
-    MAP_TYPE_CITY,
-    MAP_TYPE_ROUTE,
-    MAP_TYPE_UNDERGROUND,
-    MAP_TYPE_UNDERWATER,
-    MAP_TYPE_6,
-    MAP_TYPE_7,
-    MAP_TYPE_INDOOR,
-    MAP_TYPE_SECRET_BASE
+    MAP_TYPE_0,             // 0
+    MAP_TYPE_TOWN,          // 1
+    MAP_TYPE_CITY,          // 2
+    MAP_TYPE_ROUTE,         // 3
+    MAP_TYPE_UNDERGROUND,   // 4
+    MAP_TYPE_UNDERWATER,    // 5
+    MAP_TYPE_6,             // 6
+    MAP_TYPE_7,             // 7
+    MAP_TYPE_INDOOR,        // 8
+    MAP_TYPE_SECRET_BASE    // 9
 };
 
 // map battle scenes

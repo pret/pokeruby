@@ -7,7 +7,7 @@ bool8 sub_8064CFC(void);
 void ScriptFreezeMapObjects(void);
 void sub_8064D38(u8 taskId);
 bool8 sub_8064DB4(void);
-void sub_8064DD8(void);
+void LockSelectedMapObject(void);
 void sub_8064E2C(void);
 void unref_sub_8064E5C(void);
 void sub_8064EAC(void);

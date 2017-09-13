@@ -191,7 +191,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A3EBC:: @ 81A3EBC
 	case 127, OldaleTown_PokemonCenter_2F_EventScript_1A4319
 
 OldaleTown_PokemonCenter_2F_EventScript_1A3EF2:: @ 81A3EF2
-	call OldaleTown_PokemonCenter_2F_EventScript_19F806
+	call S_DoSaveDialog
 	compare RESULT, 0
 	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A4319
 	call OldaleTown_PokemonCenter_2F_EventScript_1A3FEF
@@ -215,7 +215,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A3EF2:: @ 81A3EF2
 	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A42F5
 
 OldaleTown_PokemonCenter_2F_EventScript_1A3F5E:: @ 81A3F5E
-	special HealPlayerParty
+	special ScrSpecial_HealPlayerParty
 	special SavePlayerParty
 	special LoadPlayerBag
 	copyvar 0x4087, 0x8004
@@ -361,7 +361,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A40FA:: @ 81A40FA
 	call OldaleTown_PokemonCenter_2F_EventScript_1A41BB
 	compare RESULT, 0
 	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A4319
-	call OldaleTown_PokemonCenter_2F_EventScript_19F806
+	call S_DoSaveDialog
 	compare RESULT, 0
 	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A4319
 	message OldaleTown_PokemonCenter_2F_Text_1A490C
@@ -455,7 +455,7 @@ VerdanturfTown_PokemonCenter_2F_EventScript_1A41FB:: @ 81A41FB
 	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A4229
 
 OldaleTown_PokemonCenter_2F_EventScript_1A4229:: @ 81A4229
-	call OldaleTown_PokemonCenter_2F_EventScript_19F806
+	call S_DoSaveDialog
 	compare RESULT, 0
 	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A4319
 	message OldaleTown_PokemonCenter_2F_Text_1A490C

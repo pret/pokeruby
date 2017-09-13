@@ -30,7 +30,7 @@ gUnknown_03000508: @ 3000508
 
 	.include "src/berry_blender.o"
 	.include "src/play_time.o"
-	.include "src/rom4.o"
+	.include "src/overworld.o"
 
 	@ unused variable?
 	.align 2

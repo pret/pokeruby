@@ -31,7 +31,7 @@ IslandCave_MapScript1_15EF15:: @ 815EF15
 	setflag 2133
 	end
 
-gIslandCave_EventScript_OpenRegiiceChamber:: @ 815EF19
+S_OpenRegiceChamber:: @ 815EF19
 	setmaptile 7, 19, 554, 1
 	setmaptile 8, 19, 555, 1
 	setmaptile 9, 19, 556, 1
@@ -84,7 +84,7 @@ IslandCave_EventScript_15EF9D:: @ 815EF9D
 	setwildbattle SPECIES_REGICE, 40, ITEM_NONE
 	setflag 936
 	setflag 2145
-	special StartBattle_Regi
+	special ScrSpecial_StartRegiBattle
 	waitstate
 	clearflag 2145
 	release

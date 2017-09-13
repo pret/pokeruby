@@ -310,7 +310,7 @@ gUnknown_020297D8: @ 20297D8
 
 	.include "src/berry_blender.o"
 	.include "src/new_game.o"
-	.include "src/rom4.o"
+	.include "src/overworld.o"
 	.include "src/fieldmap.o"
 	.include "src/field_camera.o"
 	.include "src/field_player_avatar.o"

@@ -15,7 +15,7 @@
 #include "pokedex.h"
 #include "pokemon_menu.h"
 #include "pokenav.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "safari_zone.h"
 #include "save.h"
 #include "save_menu_util.h"
@@ -505,7 +505,7 @@ static u8 RunSaveDialogCallback(void)
     return saveDialogCallback();
 }
 
-void InitSaveDialog(void)
+void ScrSpecial_DoSaveDialog(void)
 {
     sub_807160C();
     CreateTask(Task_SaveDialog, 0x50);
@@ -515,7 +515,7 @@ static void DisplaySaveMessageWithCallback(const u8 *ptr, u8 (*func)(void))
 {
     StringExpandPlaceholders(gStringVar4, ptr);
     MenuDisplayMessageBox();
-    sub_8072044(gStringVar4);
+    MenuPrintMessageDefaultCoords(gStringVar4);
     savingComplete = TRUE;
     saveDialogCallback = func;
 }

@@ -36,10 +36,10 @@ void ClearTempFieldEventData(void)
 {
     memset(gSaveBlock1.flags, 0, TEMP_FLAGS_SIZE);
     memset(gSaveBlock1.vars, 0, TEMP_VARS_SIZE);
-    FlagReset(SYS_ENC_UP_ITEM);
-    FlagReset(SYS_ENC_DOWN_ITEM);
-    FlagReset(SYS_USE_STRENGTH);
-    FlagReset(SYS_CTRL_OBJ_DELETE);
+    FlagClear(SYS_ENC_UP_ITEM);
+    FlagClear(SYS_ENC_DOWN_ITEM);
+    FlagClear(SYS_USE_STRENGTH);
+    FlagClear(SYS_CTRL_OBJ_DELETE);
 }
 
 // probably had different flag splits at one point.
@@ -53,7 +53,7 @@ void DisableNationalPokedex(void)
     u16 *nationalDexVar = GetVarPointer(VAR_NATIONAL_DEX);
     gSaveBlock2.pokedex.nationalMagic = 0;
     *nationalDexVar = 0;
-    FlagReset(SYS_NATIONAL_DEX);
+    FlagClear(SYS_NATIONAL_DEX);
 }
 
 void EnableNationalPokedex(void)
@@ -77,7 +77,7 @@ bool32 IsNationalPokedexEnabled(void)
 
 void DisableMysteryGift(void)
 {
-    FlagReset(SYS_EXDATA_ENABLE);
+    FlagClear(SYS_EXDATA_ENABLE);
 }
 
 void EnableMysteryGift(void)
@@ -93,7 +93,7 @@ bool32 IsMysteryGiftEnabled(void)
 void DisableResetRTC(void)
 {
     VarSet(VAR_RESET_RTC_ENABLE, 0);
-    FlagReset(SYS_RESET_RTC_ENABLE);
+    FlagClear(SYS_RESET_RTC_ENABLE);
 }
 
 void EnableResetRTC(void)
@@ -162,7 +162,7 @@ u8 FlagSet(u16 id)
     return 0;
 }
 
-u8 FlagReset(u16 id)
+u8 FlagClear(u16 id)
 {
     u8 *ptr = GetFlagPointer(id);
     if (ptr)

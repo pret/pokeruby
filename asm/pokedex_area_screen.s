@@ -518,7 +518,7 @@ _08110A44:
 	bl GetRoamerLocation
 	ldrb r0, [r4, 0x10]
 	ldrb r1, [r4, 0x11]
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	ldrb r0, [r0, 0x14]
 	strh r0, [r4, 0x12]
 	movs r3, 0x88
@@ -566,7 +566,7 @@ SetAreaHasMon: @ 8110A98
 	adds r0, r5
 	strb r1, [r0, 0x11]
 	adds r0, r2, 0
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	ldrb r0, [r0, 0x14]
 	bl sub_80FBA04
 	ldrh r1, [r4]
@@ -599,7 +599,7 @@ SetSpecialMapHasMon: @ 8110AE4
 	cmp r0, 0x1F
 	bhi _08110B96
 	adds r0, r2, 0
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	adds r6, r0, 0
 	ldrb r0, [r6, 0x14]
 	cmp r0, 0x57
