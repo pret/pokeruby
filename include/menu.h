@@ -43,7 +43,7 @@ u16 unref_sub_8071F98(u8, u8);
 void unref_sub_8071FBC(u16, u8, u8, u8, u8);
 void MenuDisplayMessageBox(void);
 void MenuPrintMessage(const u8 *, u8, u8);
-void sub_8072044(const u8 *);
+void MenuPrintMessageDefaultCoords(const u8 *);
 void MenuSetText(const u8 *);
 u8 MenuUpdateWindowText(void);
 u8 unref_sub_8072098(void);

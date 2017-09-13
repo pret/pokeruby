@@ -1618,7 +1618,7 @@ static void DisplaySentToPCMessage(void)
     StringExpandPlaceholders(gStringVar4, gOtherText_SentToPC);
     BasicInitMenuWindow(&gWindowConfig_81E6E88);
     MenuDisplayMessageBox();
-    sub_8072044(gStringVar4);
+    MenuPrintMessageDefaultCoords(gStringVar4);
 }
 
 static void sub_80B753C(void)

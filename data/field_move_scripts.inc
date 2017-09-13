@@ -90,7 +90,7 @@ DoRockSmashMovement: @ 81B0F0C
 	specialval RESULT, sub_810F5BC
 	compare RESULT, 1
 	jumpeq DoRockSmashMovement_Done
-	special RockSmashWildEncounter
+	special ScrSpecial_RockSmashWildEncounter
 	compare RESULT, 0
 	jumpeq DoRockSmashMovement_Done
 	waitstate

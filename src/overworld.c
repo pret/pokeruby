@@ -455,6 +455,7 @@ void copy_saved_warp2_bank_and_enter_x_to_warp1(u8 unused)
 void sub_8053538(u8 a1)
 {
     const struct HealLocation *warp = GetHealLocation(a1);
+
     if (warp)
         warp1_set(warp->group, warp->map, -1, warp->x, warp->y);
 }

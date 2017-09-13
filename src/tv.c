@@ -942,7 +942,6 @@ void sub_80BE97C(bool8 flag)
 
 void sub_80BE9D4(void)
 {
-    //TVShow *show;
     gUnknown_03005D38.var0 = sub_80BF74C(gSaveBlock1.tvShows);
     if (gUnknown_03005D38.var0 != -1 && sub_80BF1B4(TVSHOW_FISHING_ADVICE) != 1)
     {

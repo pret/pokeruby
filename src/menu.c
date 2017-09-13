@@ -205,7 +205,7 @@ void MenuPrintMessage(const u8 *str, u8 left, u8 top)
     sub_8002EB0(gMenuWindowPtr, str, gMenuTextTileOffset, left, top);
 }
 
-void sub_8072044(const u8 *str)
+void MenuPrintMessageDefaultCoords(const u8 *str)
 {
     sub_8002EB0(gMenuWindowPtr, str, gMenuTextTileOffset, 2, 15);
 }

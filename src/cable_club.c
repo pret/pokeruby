@@ -647,7 +647,7 @@ static void sub_80837EC(u8 taskId)
 
 void sub_8083820(void)
 {
-    InitSaveDialog();
+    ScrSpecial_DoSaveDialog();
 }
 
 static void sub_808382C(u8 taskId)

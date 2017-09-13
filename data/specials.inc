@@ -100,7 +100,7 @@ gSpecials::
 	def_special sub_80C5044
 	def_special GiveMonArtistRibbon
 	def_special sub_808363C
-	def_special InitSaveDialog
+	def_special ScrSpecial_DoSaveDialog
 	def_special DoWateringBerryTreeAnim
 	def_special sub_80E60D8
 	def_special sub_80EB7C4
@@ -178,7 +178,7 @@ gSpecials::
 	def_special sub_810FF48
 	def_special sub_810FAA0
 	def_special sub_810FF60
-	def_special RockSmashWildEncounter
+	def_special ScrSpecial_RockSmashWildEncounter
 	def_special GabbyAndTyGetBattleNum
 	def_special sub_80BDC14
 	def_special GabbyAndTyBeforeInterview

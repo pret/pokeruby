@@ -270,7 +270,7 @@ void sub_80BBAF0(void)
 
 bool8 sub_80BBB24(void)
 {
-    if (gMapHeader.mapType == 9 && VarGet(VAR_0x4097) == 0)
+    if (gMapHeader.mapType == MAP_TYPE_SECRET_BASE && VarGet(VAR_0x4097) == 0)
         return FALSE;
     return TRUE;
 }

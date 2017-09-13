@@ -3363,7 +3363,7 @@ bool8 StandardWildEncounter(u16 a, u16 b)
     return 0;
 }
 
-void RockSmashWildEncounter(void)
+void ScrSpecial_RockSmashWildEncounter(void)
 {
     u16 headerNum = GetCurrentMapWildMonHeader();
 
@@ -3433,7 +3433,7 @@ bool8 SweetScentWildEncounter(void)
     return FALSE;
 }
 
-bool8 GetFishingWildMonListHeader(void)
+bool8 DoesCurrentMapHaveFishingMons(void)
 {
     u16 headerNum = GetCurrentMapWildMonHeader();
 

@@ -239,7 +239,8 @@ void InitBattle(void)
         gUnknown_03004DE0.unk0[i] = 0xFF10;
         gUnknown_03004DE0.unk780[i] = 0xFF10;
     }
-    sub_80895F8(gUnknown_081F9674.unk0, gUnknown_081F9674.unk4, gUnknown_081F9674.unk8);
+    //sub_80895F8(gUnknown_081F9674.unk0, gUnknown_081F9674.unk4, gUnknown_081F9674.unk8);
+    sub_80895F8(gUnknown_081F9674);
     SetUpWindowConfig(&gWindowConfig_81E6C58);
     ResetPaletteFade();
     gUnknown_030042A4 = 0;

@@ -23,9 +23,9 @@ const static u16 gUnknown_0839ACDC[] = { 0xC8, 0x48, 0x38, 0x28, 0x18, 0x0 };
 
 const s32 gMaxFlashLevel = 4;
 
-const static u32 gUnknown_0839ACEC[3] =
+const static struct UnknownTaskStruct gUnknown_0839ACEC =
 {
-    REG_ADDR_WIN0H,
+    (void *)REG_ADDR_WIN0H,
     ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_DEST_RELOAD) << 16) | 1,
     1
 };
@@ -220,7 +220,8 @@ static void sub_80816A8(u8 taskId)
         REG_WINOUT = 30;
         sub_8081398(&gUnknown_03004DE0[0][0], data[2], data[3], 1);
         CpuFastSet(&gUnknown_03004DE0[0], &gUnknown_03004DE0[1], 480);
-        sub_80895F8(gUnknown_0839ACEC[0], gUnknown_0839ACEC[1], gUnknown_0839ACEC[2]);
+        //sub_80895F8(gUnknown_0839ACEC[0], gUnknown_0839ACEC[1], gUnknown_0839ACEC[2]);
+        sub_80895F8(gUnknown_0839ACEC);
         data[0] = 1;
         break;
     case 1:

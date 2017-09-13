@@ -919,13 +919,13 @@ Std_5:
 @ 819F805
 	return
 
-BattleTower_Lobby_EventScript_19F806:: @ 819F806
-FallarborTown_ContestLobby_EventScript_19F806:: @ 819F806
-LilycoveCity_ContestLobby_EventScript_19F806:: @ 819F806
-MossdeepCity_GameCorner_1F_EventScript_19F806:: @ 819F806
-OldaleTown_PokemonCenter_2F_EventScript_19F806:: @ 819F806
-SecretBase_RedCave1_EventScript_19F806:: @ 819F806
-	special InitSaveDialog
+S_DoSaveDialog:: @ 819F806
+S_DoSaveDialog:: @ 819F806
+S_DoSaveDialog:: @ 819F806
+S_DoSaveDialog:: @ 819F806
+S_DoSaveDialog:: @ 819F806
+S_DoSaveDialog:: @ 819F806
+	special ScrSpecial_DoSaveDialog
 	waitstate
 	return
 
@@ -1438,7 +1438,7 @@ SootopolisCity_PokemonCenter_1F_EventScript_19FD5B:: @ 819FD5B
 VerdanturfTown_PokemonCenter_1F_EventScript_19FD5B:: @ 819FD5B
 	lock
 	faceplayer
-	msgbox OldaleTown_PokemonCenter_1F_Text_1A0A7D, 5
+	msgbox gText_NurseJoy_Welcome, 5
 	compare RESULT, 1
 	jumpeq OldaleTown_PokemonCenter_1F_EventScript_19FD7C
 	compare RESULT, 0
@@ -1447,7 +1447,7 @@ VerdanturfTown_PokemonCenter_1F_EventScript_19FD5B:: @ 819FD5B
 
 OldaleTown_PokemonCenter_1F_EventScript_19FD7C:: @ 819FD7C
 	inccounter GAME_STAT_USED_POKECENTER
-	message OldaleTown_PokemonCenter_1F_Text_1A1245
+	message gText_NurseJoy_OkayIllTakeYourPokemon
 	waittext
 	move 0x800b, OldaleTown_PokemonCenter_1F_Movement_1A083F
 	waitmove 0
@@ -1462,16 +1462,16 @@ OldaleTown_PokemonCenter_1F_EventScript_19FD7C:: @ 819FD7C
 	end
 
 OldaleTown_PokemonCenter_1F_EventScript_19FDB0:: @ 819FDB0
-	message OldaleTown_PokemonCenter_1F_Text_1A0B14
+	message gText_NurseJoy_ThankYouForWaiting
 	waittext
 	move 0x800b, OldaleTown_PokemonCenter_1F_Movement_19FDF4
 	waitmove 0
-	message OldaleTown_PokemonCenter_1F_Text_1A0AFA
+	message gText_NurseJoy_WeHopeToSeeYouAgain
 	waittext
 	return
 
 OldaleTown_PokemonCenter_1F_EventScript_19FDC7:: @ 819FDC7
-	message OldaleTown_PokemonCenter_1F_Text_1A0AFA
+	message gText_NurseJoy_WeHopeToSeeYouAgain
 	waittext
 	return
 
@@ -1484,7 +1484,7 @@ OldaleTown_PokemonCenter_1F_EventScript_19FDCE:: @ 819FDCE
 	end
 
 OldaleTown_PokemonCenter_1F_EventScript_19FDEA:: @ 819FDEA
-	message OldaleTown_PokemonCenter_1F_Text_1A1275
+	message gText_NurseJoy_Pokerus
 	waittext
 	setflag 273
 	return
@@ -2986,16 +2986,16 @@ UnknownString_81A0A54: @ 81A0A54
 UnknownString_81A0A66: @ 81A0A66
 	.string "Verbindung zu LANETTES PC hergestellt.$"
 
-OldaleTown_PokemonCenter_1F_Text_1A0A7D:: @ 81A0A7D
+gText_NurseJoy_Welcome:: @ 81A0A7D
 	.string "Willkommen im POKéMON-CENTER!\p"
 	.string "Wir heilen deine POKéMON und\n"
 	.string "machen sie wieder fit.\p"
 	.string "O.K. Wir benötigen deine POKéMON.$"
 
-OldaleTown_PokemonCenter_1F_Text_1A0AFA:: @ 81A0AFA
+gText_NurseJoy_WeHopeToSeeYouAgain:: @ 81A0AFA
 	.string "Komm jederzeit wieder vorbei!$"
 
-OldaleTown_PokemonCenter_1F_Text_1A0B14:: @ 81A0B14
+gText_NurseJoy_ThankYouForWaiting:: @ 81A0B14
 	.string "Danke!\p"
 	.string "Deine POKéMON sind wieder topfit!$"
 
@@ -3214,11 +3214,11 @@ SlateportCity_Text_1A116E:: @ 81A116E
 	.string "nehmen und dir unter der Hand tolle\l"
 	.string "Sachen verkaufen.$"
 
-OldaleTown_PokemonCenter_1F_Text_1A1245:: @ 81A1245
+gText_NurseJoy_OkayIllTakeYourPokemon:: @ 81A1245
 	.string "Okay, ich nehme deine POKéMON für einen\n"
 	.string "Moment in meine Obhut.$"
 
-OldaleTown_PokemonCenter_1F_Text_1A1275:: @ 81A1275
+gText_NurseJoy_Pokerus:: @ 81A1275
 	.string "Dein POKéMON scheint von dem\n"
 	.string "POKéRUS befallen zu sein.\p"
 	.string "Über den POKéRUS ist bisher wenig be-\n"
@@ -3965,7 +3965,7 @@ SecretBase_RedCave1_EventScript_1A3032:: @ 81A3032
 	jumpeq SecretBase_RedCave1_EventScript_1A308F
 	setvar RESULT, 1
 	special sub_80BCE4C
-	call SecretBase_RedCave1_EventScript_19F806
+	call S_DoSaveDialog
 	compare RESULT, 0
 	jumpeq SecretBase_RedCave1_EventScript_1A308F
 	hidebox 0, 0, 15, 10
@@ -4000,7 +4000,7 @@ SecretBase_RedCave1_EventScript_1A30AE:: @ 81A30AE
 	jumpeq SecretBase_RedCave1_EventScript_1A310B
 	setvar RESULT, 1
 	special sub_80BCE4C
-	call SecretBase_RedCave1_EventScript_19F806
+	call S_DoSaveDialog
 	compare RESULT, 0
 	jumpeq SecretBase_RedCave1_EventScript_1A310B
 	hidebox 0, 0, 15, 10
@@ -4035,7 +4035,7 @@ SecretBase_RedCave1_EventScript_1A312A:: @ 81A312A
 	jumpeq SecretBase_RedCave1_EventScript_1A3187
 	setvar RESULT, 1
 	special sub_80BCE4C
-	call SecretBase_RedCave1_EventScript_19F806
+	call S_DoSaveDialog
 	compare RESULT, 0
 	jumpeq SecretBase_RedCave1_EventScript_1A3187
 	hidebox 0, 0, 15, 10
@@ -4070,7 +4070,7 @@ SecretBase_RedCave1_EventScript_1A31A6:: @ 81A31A6
 	jumpeq SecretBase_RedCave1_EventScript_1A3203
 	setvar RESULT, 1
 	special sub_80BCE4C
-	call SecretBase_RedCave1_EventScript_19F806
+	call S_DoSaveDialog
 	compare RESULT, 0
 	jumpeq SecretBase_RedCave1_EventScript_1A3203
 	hidebox 0, 0, 15, 10
@@ -4105,7 +4105,7 @@ SecretBase_RedCave1_EventScript_1A3222:: @ 81A3222
 	jumpeq SecretBase_RedCave1_EventScript_1A327F
 	setvar RESULT, 1
 	special sub_80BCE4C
-	call SecretBase_RedCave1_EventScript_19F806
+	call S_DoSaveDialog
 	compare RESULT, 0
 	jumpeq SecretBase_RedCave1_EventScript_1A327F
 	hidebox 0, 0, 15, 10
@@ -4140,7 +4140,7 @@ SecretBase_RedCave1_EventScript_1A329E:: @ 81A329E
 	jumpeq SecretBase_RedCave1_EventScript_1A32FB
 	setvar RESULT, 1
 	special sub_80BCE4C
-	call SecretBase_RedCave1_EventScript_19F806
+	call S_DoSaveDialog
 	compare RESULT, 0
 	jumpeq SecretBase_RedCave1_EventScript_1A32FB
 	hidebox 0, 0, 15, 10
@@ -4175,7 +4175,7 @@ SecretBase_RedCave1_EventScript_1A331A:: @ 81A331A
 	jumpeq SecretBase_RedCave1_EventScript_1A3377
 	setvar RESULT, 1
 	special sub_80BCE4C
-	call SecretBase_RedCave1_EventScript_19F806
+	call S_DoSaveDialog
 	compare RESULT, 0
 	jumpeq SecretBase_RedCave1_EventScript_1A3377
 	hidebox 0, 0, 15, 10
@@ -4210,7 +4210,7 @@ SecretBase_RedCave1_EventScript_1A3396:: @ 81A3396
 	jumpeq SecretBase_RedCave1_EventScript_1A33F3
 	setvar RESULT, 1
 	special sub_80BCE4C
-	call SecretBase_RedCave1_EventScript_19F806
+	call S_DoSaveDialog
 	compare RESULT, 0
 	jumpeq SecretBase_RedCave1_EventScript_1A33F3
 	hidebox 0, 0, 15, 10
@@ -4245,7 +4245,7 @@ SecretBase_RedCave1_EventScript_1A3412:: @ 81A3412
 	jumpeq SecretBase_RedCave1_EventScript_1A346F
 	setvar RESULT, 1
 	special sub_80BCE4C
-	call SecretBase_RedCave1_EventScript_19F806
+	call S_DoSaveDialog
 	compare RESULT, 0
 	jumpeq SecretBase_RedCave1_EventScript_1A346F
 	hidebox 0, 0, 15, 10
@@ -4280,7 +4280,7 @@ SecretBase_RedCave1_EventScript_1A348E:: @ 81A348E
 	jumpeq SecretBase_RedCave1_EventScript_1A34EB
 	setvar RESULT, 1
 	special sub_80BCE4C
-	call SecretBase_RedCave1_EventScript_19F806
+	call S_DoSaveDialog
 	compare RESULT, 0
 	jumpeq SecretBase_RedCave1_EventScript_1A34EB
 	hidebox 0, 0, 15, 10
