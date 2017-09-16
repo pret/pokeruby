@@ -400,10 +400,12 @@ u8 GetGoSpeed0AnimId(u32);
 u8 sub_8060744(u32);
 u8 d2s_08064034(u32);
 u8 sub_806079C(u32);
+u8 sub_80607C8(u32);
 u8 sub_80607F4(u32);
 u8 GetJumpLedgeAnimId(u32);
 u8 sub_806084C(u32);
 u8 sub_8060878(u32);
+u8 sub_80608A4(u32);
 u8 sub_80608D0(u32);
 u8 GetStepInPlaceDelay32AnimId(u32);
 u8 GetStepInPlaceDelay16AnimId(u32);
@@ -425,5 +427,6 @@ void sub_80634D0(struct MapObject *, struct Sprite *);
 u8 SpawnSpecialFieldObjectParametrized(u8, u8, u8, s16, s16, u8);
 void CameraObjectSetFollowedObjectId(u8);
 u8 sub_805ADDC(u8);
+void sub_8060320(u32, s16 *, s16 *, s16, s16);
 
 #endif // GUARD_FIELD_MAP_OBJ_H
