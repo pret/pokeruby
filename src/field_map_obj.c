@@ -5839,65 +5839,24 @@ u8 GetOppositeDirection(u8 direction)
     return directions[direction - 1];
 }
 
-int zffu_offset_calc(u8 a0, u8 a1)
+u32 zffu_offset_calc(u8 a0, u8 a1)
 {
     return gUnknown_08375757[a0 - 1][a1 - 1];
 }
 
-#ifdef NONMATCHING
-u32 state_to_direction(u8 a0, u8 a1, u32 a2)
+u32 state_to_direction(u8 a0, u32 a1, u32 a2)
 {
-    int zffuOffset;
-    asm_comment("For some reason, r2 is being backed up to r3 and restored ahead of the zffu call.");
-    if (a1 == 0 || (u8)a2 == 0 || a1 > 4 || (u8)a2 > 4)
+    u32 zffuOffset;
+    u8 a1_2 = a1;
+    u8 a2_2 = a2;
+    // For some reason, r2 is being backed up to r3 and restored ahead of the zffu call.
+    if (a1_2 == 0 || a2_2 == 0 || a1_2 > DIR_EAST || a2_2 > DIR_EAST)
     {
         return 0;
     }
-    zffuOffset = zffu_offset_calc(a1, a2);
+    zffuOffset = zffu_offset_calc(a1_2, a2);
     return gUnknown_08375767[a0 - 1][zffuOffset - 1];
 }
-#else
-__attribute__((naked))
-u32 state_to_direction(u8 a0, u8 a1, u32 a2)
-{
-    asm(".syntax unified\n\
-    push {r4,lr}\n\
-    lsls r0, 24\n\
-    lsrs r4, r0, 24\n\
-    lsls r1, 24\n\
-    lsrs r1, 24\n\
-    adds r0, r1, 0\n\
-    lsls r2, 24\n\
-    lsrs r2, 24\n\
-    cmp r1, 0\n\
-    beq _08060BFC\n\
-    cmp r2, 0\n\
-    beq _08060BFC\n\
-    cmp r1, 0x4\n\
-    bhi _08060BFC\n\
-    cmp r2, 0x4\n\
-    bls _08060C00\n\
-_08060BFC:\n\
-    movs r0, 0\n\
-    b _08060C12\n\
-_08060C00:\n\
-    adds r1, r2, 0\n\
-    bl zffu_offset_calc\n\
-    ldr r2, _08060C18 @ =gUnknown_08375767\n\
-    lsls r1, r4, 2\n\
-    subs r1, 0x5\n\
-    adds r0, r1\n\
-    adds r0, r2\n\
-    ldrb r0, [r0]\n\
-_08060C12:\n\
-    pop {r4}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .align 2, 0\n\
-_08060C18: .4byte gUnknown_08375767\n\
-.syntax divided\n");
-}
-#endif
 
 void FieldObjectExecSpecialAnim(struct MapObject *mapObject, struct Sprite *sprite)
 {

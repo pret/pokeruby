@@ -316,7 +316,7 @@ u8 get_go_fast_image_anim_num(u8);
 u8 get_go_faster_image_anim_num(u8);
 u8 sub_805FD78(u8);
 
-u32 state_to_direction(u8, u8, u32);
+u32 state_to_direction(u8, u32, u32);
 
 void sub_805AA98();
 void sub_805AAB0(void);
