@@ -81,6 +81,7 @@ extern const u8 *const gUnknown_08376D04[NUM_STATS];
 extern const struct UnknownStruct5 gUnknown_08376BB4[][6];
 
 static void sub_806E884(u8 taskId);
+void PartyMenuTryDrawHPBar(u8, struct Pokemon *);
 
 /*
 void sub_806AEDC(void)
@@ -1301,7 +1302,7 @@ void DoRareCandyItemEffect(u8 taskId, u16 b, TaskFunc c)
 
         gUnknown_0202E8F4 = 1;
         PlayFanfareByFanfareNum(0);
-        sub_8070A20(ewram1C000.unk5, ewram1C000.pokemon);
+        RedrawPokemonInfoInMenu(ewram1C000.unk5, ewram1C000.pokemon);
         RemoveBagItem(b, 1);
         GetMonNickname(ewram1C000.pokemon, gStringVar1);
         level = GetMonData(ewram1C000.pokemon, MON_DATA_LEVEL);
@@ -1518,4 +1519,33 @@ void PrintNewStatsInLevelUpWindow(u8 taskId)
         ConvertIntToDecimalStringN(gStringVar1 + 3, ewram1B000.statGrowths[newStatIndex], 1, 3);
         MenuPrint_PixelCoords(gStringVar1, (x + 6) * 8 + 6, y * 8, 0);
     }
+}
+
+void RedrawPokemonInfoInMenu(u8 a, struct Pokemon *pokemon)
+{
+    u8 statusAndPkrs;
+    bool8 isDoubleBattle;
+    u16 currentHP;
+    u16 maxHP;
+    u8 icon;
+
+    statusAndPkrs = GetMonStatusAndPokerus(pokemon);
+    if (statusAndPkrs == 0 || statusAndPkrs == 6)
+    {
+        PartyMenuUpdateLevelOrStatus(pokemon, a);
+    }
+
+    isDoubleBattle = IsDoubleBattle();
+
+    currentHP = GetMonData(pokemon, MON_DATA_HP);
+    maxHP = GetMonData(pokemon, MON_DATA_MAX_HP);
+
+    PartyMenuDoPrintHP(a, isDoubleBattle, currentHP, maxHP);
+    PartyMenuTryDrawHPBar(a, pokemon);
+
+    icon = GetMonIconSpriteId_maybe(ewram1C000.unk4, a);
+    SetMonIconAnim(icon, pokemon);
+
+    task_pc_turn_off(&gUnknown_083769A8[IsDoubleBattle() * 12 + a * 2], 7);
+    ewram1B000.unk261 = 2;
 }
