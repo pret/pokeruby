@@ -1669,3 +1669,25 @@ static void sub_8070D90(u8 taskId)
     gTasks[ewram1C000.unk4].func = ewram1C000.unk10;
     DestroyTask(taskId);
 }
+
+void DoEvolutionStoneItemEffect(u8 taskId, u16 evolutionStoneItem, TaskFunc c)
+{
+    PlaySE(SE_SELECT);
+
+    gTasks[taskId].func = TaskDummy;
+    sub_806E8D0(taskId, evolutionStoneItem, c);
+
+    gCB2_AfterEvolution = sub_80A53F8;
+
+    if (ExecuteTableBasedItemEffect__(ewram1C000.unk5, evolutionStoneItem, 0))
+    {
+        gUnknown_0202E8F4 = 0;
+        sub_806E834(gOtherText_WontHaveAnyEffect, 1);
+
+        CreateTask(sub_806FB0C, 5);
+    }
+    else
+    {
+        RemoveBagItem(evolutionStoneItem, 1);
+    }
+}

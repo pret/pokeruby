@@ -7448,68 +7448,6 @@ PartyMenuGetPopupMenuFunc: @ 806E81C
 
     .section .text_8070968
 
-	thumb_func_start DoEvolutionStoneItemEffect
-DoEvolutionStoneItemEffect: @ 8070DBC
-	push {r4-r6,lr}
-	adds r4, r0, 0
-	adds r5, r2, 0
-	lsls r4, 24
-	lsrs r4, 24
-	lsls r1, 16
-	lsrs r6, r1, 16
-	movs r0, 0x5
-	bl PlaySE
-	ldr r1, _08070E18 @ =gTasks
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 3
-	adds r0, r1
-	ldr r1, _08070E1C @ =TaskDummy
-	str r1, [r0]
-	adds r0, r4, 0
-	adds r1, r6, 0
-	adds r2, r5, 0
-	bl sub_806E8D0
-	ldr r1, _08070E20 @ =gCB2_AfterEvolution
-	ldr r0, _08070E24 @ =sub_80A53F8
-	str r0, [r1]
-	ldr r0, _08070E28 @ =0x0201c000
-	ldrb r0, [r0, 0x5]
-	adds r1, r6, 0
-	movs r2, 0
-	bl ExecuteTableBasedItemEffect__
-	lsls r0, 24
-	cmp r0, 0
-	beq _08070E38
-	ldr r1, _08070E2C @ =gUnknown_0202E8F4
-	movs r0, 0
-	strb r0, [r1]
-	ldr r0, _08070E30 @ =gOtherText_WontHaveAnyEffect
-	movs r1, 0x1
-	bl sub_806E834
-	ldr r0, _08070E34 @ =sub_806FB0C
-	movs r1, 0x5
-	bl CreateTask
-	b _08070E40
-	.align 2, 0
-_08070E18: .4byte gTasks
-_08070E1C: .4byte TaskDummy
-_08070E20: .4byte gCB2_AfterEvolution
-_08070E24: .4byte sub_80A53F8
-_08070E28: .4byte 0x0201c000
-_08070E2C: .4byte gUnknown_0202E8F4
-_08070E30: .4byte gOtherText_WontHaveAnyEffect
-_08070E34: .4byte sub_806FB0C
-_08070E38:
-	adds r0, r6, 0
-	movs r1, 0x1
-	bl RemoveBagItem
-_08070E40:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	thumb_func_end DoEvolutionStoneItemEffect
-
 	thumb_func_start GetItemEffectType
 GetItemEffectType: @ 8070E48
 	push {r4,r5,lr}

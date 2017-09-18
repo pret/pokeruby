@@ -168,6 +168,7 @@ void PrintNewStatsInLevelUpWindow(u8 taskId);
 void RedrawPokemonInfoInMenu(u8, struct Pokemon *);
 void Task_RareCandy3(u8);
 void TeachMonMoveInPartyMenu(u8);
+void DoEvolutionStoneItemEffect(u8 taskId, u16 evolutionStoneItem, TaskFunc c);
 void sub_806CA60(u8 taskId);
 void sub_806CD5C(u8 taskId);
 void DoTakeMail(u8 taskId, TaskFunc func);
