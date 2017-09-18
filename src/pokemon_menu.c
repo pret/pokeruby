@@ -57,7 +57,6 @@ void sub_80E62A0(u8 arg0, struct MailStruct* arg1, void* arg2, u8 arg3);
 void sub_808A520(void);
 void sub_80A61D0(void);
 void CB2_InitFlyRegionMap(void);
-u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem);
 bool8 SetUpFieldMove_Cut(void);
 bool8 SetUpFieldMove_Flash(void);
 bool8 SetUpFieldMove_RockSmash(void);

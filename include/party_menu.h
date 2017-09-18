@@ -123,7 +123,7 @@ void sub_806E750(u8, const struct PartyPopupMenu *, const struct PartyMenuItem *
 void sub_806E7D0(u8, const struct PartyPopupMenu *);
 TaskFunc PartyMenuGetPopupMenuFunc(u8, const struct PartyPopupMenu *, const struct PartyMenuItem *, u8);
 void Task_RareCandy3(u8);
-void sub_8070C54();
+void sub_8070C54(u8);
 void DoEvolutionStoneItemEffect(u8, u16, TaskFunc);
 u8 GetItemEffectType();
 u8 sub_806E834(const u8 *message, u8 arg1);

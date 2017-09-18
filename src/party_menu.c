@@ -5,8 +5,10 @@
 #include "battle_party_menu.h"
 #include "data2.h"
 #include "event_data.h"
+#include "evolution_scene.h"
 #include "item.h"
 #include "item_use.h"
+#include "item_menu.h"
 #include "mail_data.h"
 #include "main.h"
 #include "menu.h"
@@ -69,6 +71,7 @@ extern u8 gUnknown_0202E8FA;
 extern u8 gLastFieldPokeMenuOpened;
 extern u8 gPlayerPartyCount;
 extern s32 gBattleMoveDamage;
+extern u16 gMoveToLearn;
 
 //extern const u16 gUnknown_083769A8[][6];
 //extern const u8 gUnknown_083769A8[][12];
@@ -81,6 +84,7 @@ extern const u8 *const gUnknown_08376D04[NUM_STATS];
 extern const struct UnknownStruct5 gUnknown_08376BB4[][6];
 
 static void sub_806E884(u8 taskId);
+void sub_8070D90(u8 taskId);
 void PartyMenuTryDrawHPBar(u8, struct Pokemon *);
 
 /*
@@ -1548,4 +1552,64 @@ void RedrawPokemonInfoInMenu(u8 a, struct Pokemon *pokemon)
 
     task_pc_turn_off(&gUnknown_083769A8[IsDoubleBattle() * 12 + a * 2], 7);
     ewram1B000.unk261 = 2;
+}
+
+void Task_RareCandy3(u8 taskId)
+{
+    if (WaitFanfare(0))
+    {
+        if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON))
+        {
+            u16 learnedMove;
+            u16 evolutionSpecies;
+
+            MenuZeroFillWindowRect(WINDOW_LEFT + 8, 0, WINDOW_RIGHT + 3, 7);
+
+            learnedMove = MonTryLearningNewMove(ewram1C000.pokemon, 1);
+            ewram1B000.unk282 = 1;
+
+            switch (learnedMove)
+            {
+                case 0:
+                    // No move is learned.
+                    evolutionSpecies = GetEvolutionTargetSpecies(ewram1C000.pokemon, 0, 0);
+                    if (evolutionSpecies != 0)
+                    {
+                        gCB2_AfterEvolution = sub_80A53F8;
+                        BeginEvolutionScene(ewram1C000.pokemon, evolutionSpecies, TRUE, ewram1C000.unk5);
+                        DestroyTask(taskId);
+                    }
+                    else
+                    {
+                        sub_8070D90(taskId);
+                    }
+                    break;
+                case 0xFFFF:
+                    // Mon already knows 4 moves.
+                    GetMonNickname(ewram1C000.pokemon, gStringVar1);
+                    StringCopy(gStringVar2, gMoveNames[gMoveToLearn]);
+
+                    StringExpandPlaceholders(gStringVar4, gOtherText_WantsToLearn);
+                    sub_806E834(gStringVar4, 1);
+
+                    ewram1C000.unk8 = gMoveToLearn;
+                    gTasks[taskId].func = sub_806F358;
+                    break;
+                case 0xFFFE:
+                    // Move was already known by the mon.
+                    gTasks[taskId].func = sub_8070C54;
+                    break;
+                default:
+                    // Mon automatically learned a move because it knew less than four moves.
+                    GetMonNickname(ewram1C000.pokemon, gStringVar1);
+                    StringCopy(gStringVar2, gMoveNames[learnedMove]);
+
+                    StringExpandPlaceholders(gStringVar4, gOtherText_LearnedMove);
+                    sub_806E834(gStringVar4, 1);
+
+                    gTasks[taskId].func = Task_TeamMonTMMove3;
+                    break;
+            }
+        }
+    }
 }
