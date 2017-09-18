@@ -598,7 +598,7 @@ void Task_TeamMonTMMove4(u8 taskId)
             SetHeldItemIconVisibility(ewram1C000.unk4, ewram1C000.unk5);
             if (ewram1B000.unk282 == 1)
             {
-                sub_8070C54(taskId);
+                TeachMonMoveInPartyMenu(taskId);
             }
             else
             {
@@ -616,7 +616,7 @@ void sub_806F2FC(u8 taskId)
         SetHeldItemIconVisibility(ewram1C000.unk4, ewram1C000.unk5);
         if (ewram1B000.unk282 == 1)
         {
-            sub_8070C54(taskId);
+            TeachMonMoveInPartyMenu(taskId);
         }
         else
         {
@@ -1565,7 +1565,7 @@ void Task_RareCandy3(u8 taskId)
 
             MenuZeroFillWindowRect(WINDOW_LEFT + 8, 0, WINDOW_RIGHT + 3, 7);
 
-            learnedMove = MonTryLearningNewMove(ewram1C000.pokemon, 1);
+            learnedMove = MonTryLearningNewMove(ewram1C000.pokemon, TRUE);
             ewram1B000.unk282 = 1;
 
             switch (learnedMove)
@@ -1597,7 +1597,7 @@ void Task_RareCandy3(u8 taskId)
                     break;
                 case 0xFFFE:
                     // Move was already known by the mon.
-                    gTasks[taskId].func = sub_8070C54;
+                    gTasks[taskId].func = TeachMonMoveInPartyMenu;
                     break;
                 default:
                     // Mon automatically learned a move because it knew less than four moves.
@@ -1611,5 +1611,55 @@ void Task_RareCandy3(u8 taskId)
                     break;
             }
         }
+    }
+}
+
+void TeachMonMoveInPartyMenu(u8 taskId)
+{
+    u16 learnedMove;
+    u16 evolutionSpecies;
+
+    learnedMove = MonTryLearningNewMove(ewram1C000.pokemon, FALSE);
+    switch (learnedMove)
+    {
+        case 0:
+            // No move is learned.
+            evolutionSpecies = GetEvolutionTargetSpecies(ewram1C000.pokemon, 0, 0);
+            if (evolutionSpecies != 0)
+            {
+                gCB2_AfterEvolution = sub_80A53F8;
+                BeginEvolutionScene(ewram1C000.pokemon, evolutionSpecies, TRUE, ewram1C000.unk5);
+                DestroyTask(taskId);
+            }
+            else
+            {
+                sub_8070D90(taskId);
+            }
+            break;
+        case 0xFFFF:
+            // Mon already knows 4 moves.
+            GetMonNickname(ewram1C000.pokemon, gStringVar1);
+            StringCopy(gStringVar2, gMoveNames[gMoveToLearn]);
+
+            StringExpandPlaceholders(gStringVar4, gOtherText_WantsToLearn);
+            sub_806E834(gStringVar4, 1);
+
+            ewram1C000.unk8 = gMoveToLearn;
+            gTasks[taskId].func = sub_806F358;
+            break;
+        case 0xFFFE:
+            // Move was already known by the mon. Go on the the next move to be learned.
+            TeachMonMoveInPartyMenu(taskId);
+            break;
+        default:
+            // Mon automatically learned a move because it knew less than four moves.
+            GetMonNickname(ewram1C000.pokemon, gStringVar1);
+            StringCopy(gStringVar2, gMoveNames[learnedMove]);
+
+            StringExpandPlaceholders(gStringVar4, gOtherText_LearnedMove);
+            sub_806E834(gStringVar4, 1);
+
+            gTasks[taskId].func = Task_TeamMonTMMove3;
+            break;
     }
 }
