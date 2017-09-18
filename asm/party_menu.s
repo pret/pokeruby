@@ -7448,29 +7448,6 @@ PartyMenuGetPopupMenuFunc: @ 806E81C
 
     .section .text_8070968
 
-	thumb_func_start sub_8070D90
-sub_8070D90: @ 8070D90
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r4, _08070DB4 @ =gTasks
-	ldr r3, _08070DB8 @ =0x0201c000
-	ldrb r2, [r3, 0x4]
-	lsls r1, r2, 2
-	adds r1, r2
-	lsls r1, 3
-	adds r1, r4
-	ldr r2, [r3, 0x10]
-	str r2, [r1]
-	bl DestroyTask
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08070DB4: .4byte gTasks
-_08070DB8: .4byte 0x0201c000
-	thumb_func_end sub_8070D90
-
 	thumb_func_start DoEvolutionStoneItemEffect
 DoEvolutionStoneItemEffect: @ 8070DBC
 	push {r4-r6,lr}

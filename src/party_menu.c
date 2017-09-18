@@ -84,7 +84,7 @@ extern const u8 *const gUnknown_08376D04[NUM_STATS];
 extern const struct UnknownStruct5 gUnknown_08376BB4[][6];
 
 static void sub_806E884(u8 taskId);
-void sub_8070D90(u8 taskId);
+static void sub_8070D90(u8 taskId);
 void PartyMenuTryDrawHPBar(u8, struct Pokemon *);
 
 /*
@@ -1662,4 +1662,10 @@ void TeachMonMoveInPartyMenu(u8 taskId)
             gTasks[taskId].func = Task_TeamMonTMMove3;
             break;
     }
+}
+
+static void sub_8070D90(u8 taskId)
+{
+    gTasks[ewram1C000.unk4].func = ewram1C000.unk10;
+    DestroyTask(taskId);
 }
