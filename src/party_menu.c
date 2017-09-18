@@ -74,10 +74,10 @@ extern s32 gBattleMoveDamage;
 //extern const u8 gUnknown_083769A8[][12];
 extern void *const gUnknown_08376858[][6];
 extern const u8 gUnknown_083769A8[];
-extern const u8 gUnknown_08376D1C[DATA_COUNT];
+extern const u8 gUnknown_08376D1C[NUM_STATS];
 extern const u16 gUnknown_08376504[];
 extern void (*const gUnknown_08376B54[])(u8);
-extern const u8 *const gUnknown_08376D04[DATA_COUNT];
+extern const u8 *const gUnknown_08376D04[NUM_STATS];
 extern const struct UnknownStruct5 gUnknown_08376BB4[][6];
 
 static void sub_806E884(u8 taskId);
@@ -1282,7 +1282,7 @@ void DoRareCandyItemEffect(u8 taskId, u16 b, TaskFunc c)
     if (GetMonData(ewram1C000.pokemon, MON_DATA_LEVEL) != 100)
     {
         for (i = 0; i < 6; i++)
-            ewram1B000.unk264[i] = GetMonData(ewram1C000.pokemon, gUnknown_08376D1C[i]);
+            ewram1B000.statGrowths[i] = GetMonData(ewram1C000.pokemon, gUnknown_08376D1C[i]);
         r0 = ExecuteTableBasedItemEffect__(ewram1C000.unk5, b, 0);
     }
     else
@@ -1319,7 +1319,7 @@ void Task_RareCandy1(u8 taskId)
         if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON))
         {
             PlaySE(SE_SELECT);
-            sub_8070848(taskId);
+            PrintStatGrowthsInLevelUpWindow(taskId);
             gTasks[taskId].func = Task_RareCandy2;
         }
     }
@@ -1330,19 +1330,19 @@ void Task_RareCandy2(u8 taskId)
     if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON))
     {
         PlaySE(SE_SELECT);
-        sub_8070968(taskId);
+        PrintNewStatsInLevelUpWindow(taskId);
         gTasks[taskId].func = Task_RareCandy3;
     }
 }
 
 #if ENGLISH
-void sub_8070848(u8 taskId)
+void PrintStatGrowthsInLevelUpWindow(u8 taskId)
 {
     u8 i;
 
     MenuDrawTextWindow(11, 0, 29, 7);
 
-    for (i = 0; i < DATA_COUNT; i++)
+    for (i = 0; i < NUM_STATS; i++)
     {
         u8 x;
         u8 y;
@@ -1350,8 +1350,8 @@ void sub_8070848(u8 taskId)
 
         stat = GetMonData(ewram1C000.pokemon, gUnknown_08376D1C[i]);
 
-        ewram1B000.unk264[i + DATA_COUNT] = stat;
-        ewram1B000.unk264[i] = stat - ewram1B000.unk264[i];
+        ewram1B000.statGrowths[i + NUM_STATS] = stat;
+        ewram1B000.statGrowths[i] = stat - ewram1B000.statGrowths[i];
 
         x = (i / 3) * 9 + 11;
         y = ((i % 3) << 1) + 1;
@@ -1367,14 +1367,14 @@ void sub_8070848(u8 taskId)
         gStringVar1[1] = 0x14;
         gStringVar1[2] = 0x06;
 
-        ConvertIntToDecimalStringN(gStringVar1 + 3, ewram1B000.unk264[i], 1, 2);
+        ConvertIntToDecimalStringN(gStringVar1 + 3, ewram1B000.statGrowths[i], 1, 2);
 
         MenuPrint_PixelCoords(gStringVar1, (x + 6) * 8 + 12, y * 8, 0);
     }
 }
 #elif GERMAN
 __attribute__((naked))
-void sub_8070848(u8 taskId) {
+void PrintStatGrowthsInLevelUpWindow(u8 taskId) {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\
     mov r7, r10\n\
@@ -1492,3 +1492,30 @@ _08070940: .4byte gOtherText_TallPlusAndRightArrow\n\
     .syntax divided\n");
 }
 #endif
+
+void PrintNewStatsInLevelUpWindow(u8 taskId)
+{
+    u8 i;
+
+    for (i = 0; i < NUM_STATS; i++)
+    {
+        u8 x;
+        u8 y;
+        u32 stat;
+        u32 newStatIndex;
+
+        stat = GetMonData(ewram1C000.pokemon, gUnknown_08376D1C[i]);
+        newStatIndex = i + 6;
+        ewram1B000.statGrowths[newStatIndex] = stat;
+
+        x = ((i / 3) * 9) + 11;
+        y = ((i % 3) << 1) + 1;
+
+        gStringVar1[0] = EXT_CTRL_CODE_BEGIN;
+        gStringVar1[1] = 0x14;
+        gStringVar1[2] = 0x06;
+
+        ConvertIntToDecimalStringN(gStringVar1 + 3, ewram1B000.statGrowths[newStatIndex], 1, 3);
+        MenuPrint_PixelCoords(gStringVar1, (x + 6) * 8 + 6, y * 8, 0);
+    }
+}

@@ -18,7 +18,6 @@ struct PartyPopupMenu
 
 // TODO: Unify these two structs
 
-#define DATA_COUNT (6)
 struct Unk201B000
 {
     //u8 filler0[0x260];
@@ -30,7 +29,8 @@ struct Unk201B000
     u8 unk261;
     u8 unk262;
     u8 unk263;
-    s16 unk264[DATA_COUNT * 2];  // This may be a union
+    // Stat growth upon level-up. First 6 bytes = old stats, Second 6 bytes = new stats.
+    s16 statGrowths[NUM_STATS * 2];
     u8 filler27C[2];
     s16 unk27E;
     s16 unk280;
@@ -122,7 +122,6 @@ void sub_806E6F0();
 void sub_806E750(u8, const struct PartyPopupMenu *, const struct PartyMenuItem *, int);
 void sub_806E7D0(u8, const struct PartyPopupMenu *);
 TaskFunc PartyMenuGetPopupMenuFunc(u8, const struct PartyPopupMenu *, const struct PartyMenuItem *, u8);
-void sub_8070968();
 void sub_8070A20();
 void Task_RareCandy3(u8);
 void sub_8070C54();
@@ -167,7 +166,8 @@ void DoPPUpItemEffect(u8, u16, TaskFunc);
 void DoRareCandyItemEffect(u8, u16, TaskFunc);
 void Task_RareCandy1(u8);
 void Task_RareCandy2(u8);
-void sub_8070848(u8 taskId);
+void PrintStatGrowthsInLevelUpWindow(u8 taskId);
+void PrintNewStatsInLevelUpWindow(u8 taskId);
 void sub_806CA60(u8 taskId);
 void sub_806CD5C(u8 taskId);
 void DoTakeMail(u8 taskId, TaskFunc func);
