@@ -7301,31 +7301,4 @@ sub_806E6F0: @ 806E6F0
 	bx r0
 	thumb_func_end sub_806E6F0
 
-	thumb_func_start sub_806E720
-sub_806E720: @ 806E720
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r0, 21
-	adds r0, r3
-	ldrb r4, [r0]
-	lsls r4, 25
-	movs r3, 0x80
-	lsls r3, 18
-	adds r4, r3
-	lsrs r4, 24
-	ldrb r0, [r0, 0x1]
-	adds r0, 0x1
-	lsls r0, 24
-	lsrs r0, 24
-	movs r3, 0x1E
-	subs r3, r0
-	strb r3, [r1]
-	movs r0, 0x14
-	subs r0, r4
-	strb r0, [r2]
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_806E720
-
 	.align 2, 0 @ Don't pad with nop.

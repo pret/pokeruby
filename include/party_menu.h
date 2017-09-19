@@ -114,6 +114,7 @@ void PartyMenuTryPrintMonsHP(void);
 void nullsub_13(void);
 void PartyMenuDrawHPBars(void);
 void sub_806E6F0();
+void SetPartyPopupMenuOffsets(u8 menuIndex, u8 *left, u8 *top, const struct PartyPopupMenu *menu);
 void ShowPartyPopupMenu(u8 menuIndex, const struct PartyPopupMenu *menu, const struct MenuAction2 *menuActions, u8 cursorPos);
 void ClosePartyPopupMenu(u8 index, const struct PartyPopupMenu *menu);
 TaskFunc PartyMenuGetPopupMenuFunc(u8 menuIndex, const struct PartyPopupMenu *menus, const struct MenuAction2 *menuActions, u8 itemIndex);
@@ -171,6 +172,5 @@ void PartyMenuTryGiveMonMail(u8 taskId, TaskFunc func);
 void sub_806D668(u8 partyID);
 void TaughtMove(u8 taskId);
 void StopTryingToTeachMove_806F588(u8 taskId);
-void sub_806E720(u8, u8 *, u8 *, const struct PartyPopupMenu *);
 
 #endif // GUARD_PARTY_MENU_H

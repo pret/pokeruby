@@ -111,12 +111,22 @@ void sub_806AEDC(void)
 #define WINDOW_RIGHT (29)
 #endif
 
+
+void SetPartyPopupMenuOffsets(u8 menuIndex, u8 *left, u8 *top, const struct PartyPopupMenu *menu)
+{
+    u8 bottomOffset = (2 * menu[menuIndex].numChoices) + 2;
+    u8 rightOffset = menu[menuIndex].width + 1;
+
+    *left = 30 - rightOffset;
+    *top = 20 - bottomOffset;
+}
+
 void ShowPartyPopupMenu(u8 menuIndex, const struct PartyPopupMenu *menu, const struct MenuAction2 *menuActions, u8 cursorPos)
 {
     u8 left;
     u8 top;
 
-    sub_806E720(menuIndex, &left, &top, menu);
+    SetPartyPopupMenuOffsets(menuIndex, &left, &top, menu);
     sub_8089C50(left, top, menu[menuIndex].width, menu[menuIndex].numChoices, menuActions, menu[menuIndex].items);
 
     InitMenu(0, left + 1, top + 1, menu[menuIndex].numChoices, cursorPos, menu[menuIndex].width - 1);
@@ -127,7 +137,7 @@ void ClosePartyPopupMenu(u8 index, const struct PartyPopupMenu *menu)
     u8 left;
     u8 top;
 
-    sub_806E720(index, &left, &top, menu);
+    SetPartyPopupMenuOffsets(index, &left, &top, menu);
 
     MenuZeroFillWindowRect(left, top, left + menu[index].width, menu[index].numChoices * 2 + top + 1);
     HandleDestroyMenuCursors();
