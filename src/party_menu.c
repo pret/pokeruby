@@ -112,6 +112,16 @@ void sub_806AEDC(void)
 #endif
 
 
+void PartyMenuDrawHPBars(void)
+{
+    u8 i;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        PartyMenuTryDrawHPBar(i, &gPlayerParty[i]);
+    }
+}
+
 void SwapPokemon(struct Pokemon *a, struct Pokemon *b)
 {
     struct Pokemon temp = *a;
@@ -2049,7 +2059,7 @@ _08070F8A:\n\
     .syntax divided\n");
 }
 
-void unref_sub_8070F90()
+void unref_sub_8070F90(void)
 {
     FlagSet(SYS_POKEDEX_GET);
     FlagSet(SYS_POKEMON_GET);

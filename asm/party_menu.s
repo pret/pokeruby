@@ -7253,28 +7253,4 @@ _0806E6C0:
 	bx r0
 	thumb_func_end PartyMenuTryDrawHPBar
 
-	thumb_func_start PartyMenuDrawHPBars
-PartyMenuDrawHPBars: @ 806E6C8
-	push {r4-r6,lr}
-	movs r4, 0
-	movs r6, 0x64
-	ldr r5, _0806E6EC @ =gPlayerParty
-_0806E6D0:
-	adds r1, r4, 0
-	muls r1, r6
-	adds r1, r5
-	adds r0, r4, 0
-	bl PartyMenuTryDrawHPBar
-	adds r0, r4, 0x1
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0x5
-	bls _0806E6D0
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0806E6EC: .4byte gPlayerParty
-	thumb_func_end PartyMenuDrawHPBars
-
 	.align 2, 0 @ Don't pad with nop.

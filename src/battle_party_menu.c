@@ -31,7 +31,6 @@ extern void PartyMenuPrintMonsLevelOrStatus(void);
 extern void PrintPartyMenuMonNicknames(void);
 extern void PartyMenuTryPrintMonsHP(void);
 extern void nullsub_13(void);
-extern void PartyMenuDrawHPBars(void);
 extern u8 sub_806B58C(u8);
 extern void sub_806D5A4(void);
 extern void sub_802E414(void);
