@@ -113,7 +113,7 @@ void PartyMenuDoPrintHP(u8, int, u16, u16);
 void PartyMenuTryPrintMonsHP(void);
 void nullsub_13(void);
 void PartyMenuDrawHPBars(void);
-void sub_806E6F0();
+void SwapPokemon(struct Pokemon *a, struct Pokemon *b);
 void SetPartyPopupMenuOffsets(u8 menuIndex, u8 *left, u8 *top, const struct PartyPopupMenu *menu);
 void ShowPartyPopupMenu(u8 menuIndex, const struct PartyPopupMenu *menu, const struct MenuAction2 *menuActions, u8 cursorPos);
 void ClosePartyPopupMenu(u8 index, const struct PartyPopupMenu *menu);

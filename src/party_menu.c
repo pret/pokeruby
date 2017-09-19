@@ -112,6 +112,13 @@ void sub_806AEDC(void)
 #endif
 
 
+void SwapPokemon(struct Pokemon *a, struct Pokemon *b)
+{
+    struct Pokemon temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
 void SetPartyPopupMenuOffsets(u8 menuIndex, u8 *left, u8 *top, const struct PartyPopupMenu *menu)
 {
     u8 bottomOffset = (2 * menu[menuIndex].numChoices) + 2;

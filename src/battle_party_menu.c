@@ -40,7 +40,6 @@ extern void sub_806AF4C();
 extern void sub_806AEDC(void);
 extern u8 *sub_8040D08();
 extern void sub_8040B8C(void);
-extern void sub_806E6F0();
 extern void nullsub_14();
 extern void OpenPartyMenu();
 extern u8 sub_803FBBC(void);
@@ -338,7 +337,7 @@ void unref_sub_8094DB0(void)
         {
             r4 = sub_8094C20(0);
             sub_8094C98(0, i);
-            sub_806E6F0(&gPlayerParty[r4], &gPlayerParty[n]);
+            SwapPokemon(&gPlayerParty[r4], &gPlayerParty[n]);
             break;
         }
     }
@@ -732,7 +731,7 @@ static void Task_BattlePartyMenuShift(u8 taskId)
     gUnknown_0202E8F4 = 1;
     r4 = pokemon_order_func(gBattlePartyID[gBankInMenu]);
     sub_8094C98(r4, partySelection);
-    sub_806E6F0(&gPlayerParty[r4], &gPlayerParty[partySelection]);
+    SwapPokemon(&gPlayerParty[r4], &gPlayerParty[partySelection]);
     gTasks[taskId].func = Task_809527C;
 }
 

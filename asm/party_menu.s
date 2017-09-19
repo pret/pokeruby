@@ -4662,7 +4662,7 @@ sub_806D198: @ 806D198
 	ldrb r1, [r4, 0x6]
 	muls r1, r6
 	adds r1, r5
-	bl sub_806E6F0
+	bl SwapPokemon
 	ldrb r0, [r4, 0x5]
 	adds r1, r0, 0
 	muls r1, r6
@@ -7276,29 +7276,5 @@ _0806E6D0:
 	.align 2, 0
 _0806E6EC: .4byte gPlayerParty
 	thumb_func_end PartyMenuDrawHPBars
-
-	thumb_func_start sub_806E6F0
-sub_806E6F0: @ 806E6F0
-	push {r4,r5,lr}
-	sub sp, 0x64
-	adds r4, r0, 0
-	adds r5, r1, 0
-	mov r0, sp
-	adds r1, r4, 0
-	movs r2, 0x64
-	bl memcpy
-	adds r0, r4, 0
-	adds r1, r5, 0
-	movs r2, 0x64
-	bl memcpy
-	adds r0, r5, 0
-	mov r1, sp
-	movs r2, 0x64
-	bl memcpy
-	add sp, 0x64
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_806E6F0
 
 	.align 2, 0 @ Don't pad with nop.
