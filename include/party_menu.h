@@ -112,6 +112,8 @@ void PartyMenuPrintMonsLevelOrStatus(void);
 void PartyMenuDoPrintHP(u8, int, u16, u16);
 void PartyMenuTryPrintMonsHP(void);
 void nullsub_13(void);
+void PartyMenuDrawHPBar(u8 monIndex, u8 b, struct Pokemon *pokemon);
+void PartyMenuTryDrawHPBar(u8 monIndex, struct Pokemon *pokemon);
 void PartyMenuDrawHPBars(void);
 void SwapPokemon(struct Pokemon *a, struct Pokemon *b);
 void SetPartyPopupMenuOffsets(u8 menuIndex, u8 *left, u8 *top, const struct PartyPopupMenu *menu);

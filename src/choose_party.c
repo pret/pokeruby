@@ -72,7 +72,6 @@ extern void PartyMenuPutStatusTilemap(u8, int, u8);
 extern void PartyMenuPrintLevel();
 extern void PartyMenuPutNicknameTilemap();
 extern void PrintPartyMenuMonNickname();
-extern void PartyMenuDrawHPBar();
 extern bool8 sub_80F9344(void);
 extern void sub_806D4AC();
 extern void sub_806D3B4();

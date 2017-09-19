@@ -33,7 +33,6 @@
 #include "main.h"
 #include "battle_interface.h"
 #include "species.h"
-#include "party_menu.h"
 
 struct Unk201C000
 {
@@ -85,7 +84,6 @@ extern const struct UnknownStruct5 gUnknown_08376BB4[][6];
 
 static void sub_806E884(u8 taskId);
 static void sub_8070D90(u8 taskId);
-void PartyMenuTryDrawHPBar(u8, struct Pokemon *);
 
 /*
 void sub_806AEDC(void)
@@ -111,6 +109,22 @@ void sub_806AEDC(void)
 #define WINDOW_RIGHT (29)
 #endif
 
+
+void PartyMenuTryDrawHPBar(u8 monIndex, struct Pokemon *pokemon)
+{
+    if (GetMonData(pokemon, MON_DATA_SPECIES) && !GetMonData(pokemon, MON_DATA_IS_EGG))
+    {
+        u8 isDoubleBattle = IsLinkDoubleBattle();
+        if (isDoubleBattle == TRUE)
+        {
+            PartyMenuDrawHPBar(monIndex, 2, pokemon);
+        }
+        else
+        {
+            PartyMenuDrawHPBar(monIndex, IsDoubleBattle(), pokemon);
+        }
+    }
+}
 
 void PartyMenuDrawHPBars(void)
 {
@@ -1580,7 +1594,7 @@ void PrintNewStatsInLevelUpWindow(u8 taskId)
     }
 }
 
-void RedrawPokemonInfoInMenu(u8 a, struct Pokemon *pokemon)
+void RedrawPokemonInfoInMenu(u8 monIndex, struct Pokemon *pokemon)
 {
     u8 statusAndPkrs;
     bool8 isDoubleBattle;
@@ -1591,7 +1605,7 @@ void RedrawPokemonInfoInMenu(u8 a, struct Pokemon *pokemon)
     statusAndPkrs = GetMonStatusAndPokerus(pokemon);
     if (statusAndPkrs == 0 || statusAndPkrs == 6)
     {
-        PartyMenuUpdateLevelOrStatus(pokemon, a);
+        PartyMenuUpdateLevelOrStatus(pokemon, monIndex);
     }
 
     isDoubleBattle = IsDoubleBattle();
@@ -1599,13 +1613,13 @@ void RedrawPokemonInfoInMenu(u8 a, struct Pokemon *pokemon)
     currentHP = GetMonData(pokemon, MON_DATA_HP);
     maxHP = GetMonData(pokemon, MON_DATA_MAX_HP);
 
-    PartyMenuDoPrintHP(a, isDoubleBattle, currentHP, maxHP);
-    PartyMenuTryDrawHPBar(a, pokemon);
+    PartyMenuDoPrintHP(monIndex, isDoubleBattle, currentHP, maxHP);
+    PartyMenuTryDrawHPBar(monIndex, pokemon);
 
-    icon = GetMonIconSpriteId_maybe(ewram1C000.unk4, a);
+    icon = GetMonIconSpriteId_maybe(ewram1C000.unk4, monIndex);
     SetMonIconAnim(icon, pokemon);
 
-    task_pc_turn_off(&gUnknown_083769A8[IsDoubleBattle() * 12 + a * 2], 7);
+    task_pc_turn_off(&gUnknown_083769A8[IsDoubleBattle() * 12 + monIndex * 2], 7);
     ewram1B000.unk261 = 2;
 }
 

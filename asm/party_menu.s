@@ -7212,45 +7212,4 @@ PartyMenuDrawHPBar: @ 806E630
 	bx r0
 	thumb_func_end PartyMenuDrawHPBar
 
-	thumb_func_start PartyMenuTryDrawHPBar
-PartyMenuTryDrawHPBar: @ 806E674
-	push {r4-r6,lr}
-	adds r4, r1, 0
-	lsls r0, 24
-	lsrs r5, r0, 24
-	adds r6, r5, 0
-	adds r0, r4, 0
-	movs r1, 0xB
-	bl GetMonData
-	cmp r0, 0
-	beq _0806E6C0
-	adds r0, r4, 0
-	movs r1, 0x2D
-	bl GetMonData
-	cmp r0, 0
-	bne _0806E6C0
-	bl IsLinkDoubleBattle
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _0806E6AE
-	adds r0, r5, 0
-	movs r1, 0x2
-	adds r2, r4, 0
-	bl PartyMenuDrawHPBar
-	b _0806E6C0
-_0806E6AE:
-	bl IsDoubleBattle
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	adds r0, r6, 0
-	adds r2, r4, 0
-	bl PartyMenuDrawHPBar
-_0806E6C0:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	thumb_func_end PartyMenuTryDrawHPBar
-
 	.align 2, 0 @ Don't pad with nop.
