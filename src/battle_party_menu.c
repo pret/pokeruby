@@ -33,15 +33,11 @@ extern void PartyMenuTryPrintMonsHP(void);
 extern void nullsub_13(void);
 extern void PartyMenuDrawHPBars(void);
 extern u8 sub_806B58C(u8);
-extern u8 GetItemEffectType();
-extern void sub_806E750(u8, const struct PartyPopupMenu *, const struct PartyMenuItem *, int);
 extern void sub_806D5A4(void);
 extern void sub_802E414(void);
 extern void sub_80A6DCC(void);
 extern void sub_806AF4C();
 extern void sub_806AEDC(void);
-extern TaskFunc PartyMenuGetPopupMenuFunc(u8, const struct PartyPopupMenu *, const struct PartyMenuItem *, u8);
-extern void sub_806E7D0(u8, const struct PartyPopupMenu *);
 extern u8 *sub_8040D08();
 extern void sub_8040B8C(void);
 extern void sub_806E6F0();
@@ -79,7 +75,7 @@ static void Task_BattlePartyMenuSummary(u8 taskId);
 static void Task_BattlePartyMenuShift(u8 taskId);
 static void Task_BattlePartyMenuCancel(u8 taskId);
 
-static const struct PartyMenuItem sBattlePartyMenuActions[] =
+static const struct MenuAction2 sBattlePartyMenuActions[] =
 {
     {OtherText_Summary,             Task_BattlePartyMenuSummary},
     {gOtherText_CancelNoTerminator, Task_BattlePartyMenuCancel},
@@ -475,7 +471,8 @@ static void sub_8095050(u8 a, u8 b)
         gTasks[EWRAM_1B000.unk260].data[4] = 2;
         gTasks[EWRAM_1B000.unk260].data[5] = 2;
     }
-    sub_806E750(gTasks[a].data[4], sBattlePartyPopupMenus, sBattlePartyMenuActions, 0);
+
+    ShowPartyPopupMenu(gTasks[a].data[4], sBattlePartyPopupMenus, sBattlePartyMenuActions, 0);
 }
 
 void SetUpBattlePokemonMenu(u8 a)
@@ -660,7 +657,7 @@ static void Task_BattlePartyMenuShift(u8 taskId)
     u8 i;
     u8 r4;
 
-    sub_806E7D0(gTasks[taskId].data[4], sBattlePartyPopupMenus);
+    ClosePartyPopupMenu(gTasks[taskId].data[4], sBattlePartyPopupMenus);
     partySelection = sub_806CA38(taskId);
     if (IsLinkDoubleBattle() == TRUE && (partySelection == 1 || partySelection == 4 || partySelection == 5))
     {
@@ -742,7 +739,7 @@ static void Task_BattlePartyMenuShift(u8 taskId)
 static void Task_BattlePartyMenuCancel(u8 taskId)
 {
     HandleDestroyMenuCursors();
-    sub_806E7D0(gTasks[taskId].data[4], sBattlePartyPopupMenus);
+    ClosePartyPopupMenu(gTasks[taskId].data[4], sBattlePartyPopupMenus);
     gTasks[taskId].data[4] = gTasks[taskId].data[5];
     sub_806D538(0, 0);
     SwitchTaskToFollowupFunc(taskId);

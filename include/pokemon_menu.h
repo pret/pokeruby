@@ -1,6 +1,8 @@
 #ifndef GUARD_POKEMON_MENU_H
 #define GUARD_POKEMON_MENU_H
 
+#include "menu.h"
+
 #define POKEMENU_FIRST_FIELD_MOVE_ID 10
 
 enum
@@ -36,6 +38,7 @@ extern void (*gUnknown_03005CE4)(void);
 
 void sub_808B5B4(u32 taskID);
 void sub_8089A70(void);
+void sub_8089C50(u8 arg0, u8 arg1, u8 arg2, u8 noOfOptions, const struct MenuAction2 *menuActions, const u8 *order);
 void sub_808A004(u8 taskID);
 void FieldCallback_Teleport(void);
 void sub_808AD58(void);

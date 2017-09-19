@@ -1,19 +1,14 @@
 #ifndef GUARD_PARTY_MENU_H
 #define GUARD_PARTY_MENU_H
 
+#include "menu.h"
 #include "task.h"
-
-struct PartyMenuItem
-{
-    const u8 *text;
-    TaskFunc func;
-};
 
 struct PartyPopupMenu
 {
-    u8 unk0;
-    u8 unk1;
-    const u8 *unk4;
+    /*0x0*/u8 numChoices; // number of menu choices
+    /*0x1*/u8 width; // menu width (number of characters it can fit horizontally)
+    /*0x4*/const u8 *items;  // menu item ids (ids for a MenuAction2 array)
 };
 
 // TODO: Unify these two structs
@@ -119,11 +114,9 @@ void PartyMenuTryPrintMonsHP(void);
 void nullsub_13(void);
 void PartyMenuDrawHPBars(void);
 void sub_806E6F0();
-void sub_806E750(u8, const struct PartyPopupMenu *, const struct PartyMenuItem *, int);
-void sub_806E7D0(u8, const struct PartyPopupMenu *);
-TaskFunc PartyMenuGetPopupMenuFunc(u8, const struct PartyPopupMenu *, const struct PartyMenuItem *, u8);
-void DoEvolutionStoneItemEffect(u8, u16, TaskFunc);
-u8 GetItemEffectType();
+void ShowPartyPopupMenu(u8 menuIndex, const struct PartyPopupMenu *menu, const struct MenuAction2 *menuActions, u8 cursorPos);
+void ClosePartyPopupMenu(u8 index, const struct PartyPopupMenu *menu);
+TaskFunc PartyMenuGetPopupMenuFunc(u8 menuIndex, const struct PartyPopupMenu *menus, const struct MenuAction2 *menuActions, u8 itemIndex);
 u8 sub_806E834(const u8 *message, u8 arg1);
 void sub_806E8D0(u8 taskId, u16 b, TaskFunc c);
 void party_menu_link_mon_held_item_object(u8);
@@ -169,6 +162,7 @@ void RedrawPokemonInfoInMenu(u8, struct Pokemon *);
 void Task_RareCandy3(u8);
 void TeachMonMoveInPartyMenu(u8);
 void DoEvolutionStoneItemEffect(u8 taskId, u16 evolutionStoneItem, TaskFunc c);
+u8 GetItemEffectType(u16 item);
 void sub_806CA60(u8 taskId);
 void sub_806CD5C(u8 taskId);
 void DoTakeMail(u8 taskId, TaskFunc func);
@@ -177,5 +171,6 @@ void PartyMenuTryGiveMonMail(u8 taskId, TaskFunc func);
 void sub_806D668(u8 partyID);
 void TaughtMove(u8 taskId);
 void StopTryingToTeachMove_806F588(u8 taskId);
+void sub_806E720(u8, u8 *, u8 *, const struct PartyPopupMenu *);
 
 #endif // GUARD_PARTY_MENU_H

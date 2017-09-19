@@ -389,18 +389,18 @@ static void sub_808A060(u8 taskID)
     if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
-        PartyMenuGetPopupMenuFunc(0, &sUnknown_0839F578, (void *)sPokemonMenuActions, sPokeMenuCursorPos)(taskID);
+        PartyMenuGetPopupMenuFunc(0, &sUnknown_0839F578, sPokemonMenuActions, sPokeMenuCursorPos)(taskID);
     }
     else if (gMain.newKeys & B_BUTTON)
     {
-        sub_806E7D0(0, &sUnknown_0839F578);
+        ClosePartyPopupMenu(0, &sUnknown_0839F578);
         PokemonMenu_CancelSubmenu(taskID);
     }
 }
 
 static void sub_808A100(u8 taskID)
 {
-    sub_806E750(0, &sUnknown_0839F578, (void*)(sPokemonMenuActions), 0);
+    ShowPartyPopupMenu(0, &sUnknown_0839F578, (void*)(sPokemonMenuActions), 0);
     sub_806D538(0xD, 2);
     gTasks[taskID].func = sub_808A060;
 }
@@ -619,7 +619,7 @@ static void PokemonMenu_Mail(u8 taskID)
     HandleDestroyMenuCursors();
     sPokeMenuCursorPos = 0;
     MenuZeroFillWindowRect(19, 0, 29, 19);
-    sub_806E750(0, &sUnknown_0839F584, (void*) sPokemonMenuActions, 0);
+    ShowPartyPopupMenu(0, &sUnknown_0839F584, (void*) sPokemonMenuActions, 0);
     gTasks[taskID].func = sub_808A73C;
 }
 
@@ -629,26 +629,26 @@ static void sub_808A73C(u8 taskID)
     {
         PlaySE(SE_SELECT);
         if (sPokeMenuCursorPos == 0)
-            sPokeMenuCursorPos = MoveMenuCursor(sUnknown_0839F584.unk0 - 1);
+            sPokeMenuCursorPos = MoveMenuCursor(sUnknown_0839F584.numChoices - 1);
         else
             sPokeMenuCursorPos = MoveMenuCursor(-1);
     }
     if (gMain.newAndRepeatedKeys == DPAD_DOWN)
     {
         PlaySE(SE_SELECT);
-        if (sPokeMenuCursorPos == sUnknown_0839F584.unk0 - 1)
-            sPokeMenuCursorPos = MoveMenuCursor(1 - sUnknown_0839F584.unk0);
+        if (sPokeMenuCursorPos == sUnknown_0839F584.numChoices - 1)
+            sPokeMenuCursorPos = MoveMenuCursor(1 - sUnknown_0839F584.numChoices);
         else
             sPokeMenuCursorPos = MoveMenuCursor(1);
     }
     if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
-        PartyMenuGetPopupMenuFunc(0, &sUnknown_0839F584, (void*) sPokemonMenuActions, sPokeMenuCursorPos)(taskID);
+        PartyMenuGetPopupMenuFunc(0, &sUnknown_0839F584, sPokemonMenuActions, sPokeMenuCursorPos)(taskID);
     }
     else if (gMain.newKeys & B_BUTTON)
     {
-        sub_806E7D0(0, &sUnknown_0839F584);
+        ClosePartyPopupMenu(0, &sUnknown_0839F584);
         PokemonMenu_Cancel(taskID);
     }
 }

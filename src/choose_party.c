@@ -53,7 +53,6 @@ extern void sub_806BC3C(u8, u8);
 extern u8 sub_806B58C(u8);
 extern u16 sub_806BE38();
 extern u8 sub_806CA38();
-extern TaskFunc PartyMenuGetPopupMenuFunc(u8, const struct PartyPopupMenu *, const struct PartyMenuItem *, u8);
 extern u8 sub_806B124();
 extern void sub_806C994();
 extern void sub_806C658();
@@ -82,7 +81,6 @@ extern void PartyMenuDoDrawHPBar(u8, u8, u16, u16);
 extern void PartyMenuDoPutNicknameTilemap(u16, u8, u8, u8, const u8 *);
 extern void box_print(u8, int, const u8 *);
 extern void sub_806BCE8(void);
-extern void sub_806E750(u8, const struct PartyPopupMenu *, const struct PartyMenuItem *, int);
 
 static void ClearPartySelection(void);
 static bool8 IsMonAllowedInBattleTower(struct Pokemon *);
@@ -273,7 +271,7 @@ static void BattleTowerEntryMenuCallback_Enter(u8);
 static void BattleTowerEntryMenuCallback_NoEntry(u8);
 static void BattleTowerEntryMenuCallback_Exit(u8);
 
-static const struct PartyMenuItem sBattleTowerEntryMenuItems[] =
+static const struct MenuAction2 sBattleTowerEntryMenuItems[] =
 {
     {OtherText_Summary, BattleTowerEntryMenuCallback_Summary},
     {OtherText_Enter2, BattleTowerEntryMenuCallback_Enter},
@@ -313,18 +311,18 @@ static void sub_81221F8(u8 taskId)
         if (IsPartyMemberAlreadySelected(gLastFieldPokeMenuOpened + 1) == TRUE)
         {
             gTasks[taskId].data[4] = 1;
-            sub_806E750(1, sBattleTowerEntryMenu, sBattleTowerEntryMenuItems, 0);
+            ShowPartyPopupMenu(1, sBattleTowerEntryMenu, sBattleTowerEntryMenuItems, 0);
         }
         else
         {
             gTasks[taskId].data[4] = 0;
-            sub_806E750(0, sBattleTowerEntryMenu, sBattleTowerEntryMenuItems, 0);
+            ShowPartyPopupMenu(0, sBattleTowerEntryMenu, sBattleTowerEntryMenuItems, 0);
         }
     }
     else
     {
         gTasks[taskId].data[4] = 2;
-        sub_806E750(2, sBattleTowerEntryMenu, sBattleTowerEntryMenuItems, 0);
+        ShowPartyPopupMenu(2, sBattleTowerEntryMenu, sBattleTowerEntryMenuItems, 0);
     }
 }
 
@@ -795,7 +793,7 @@ static void DaycareStorageMenuCallback_Store(u8);
 static void DaycareStorageMenuCallback_Summary(u8);
 static void DaycareStorageMenuCallback_Exit(u8);
 
-static const struct PartyMenuItem sDaycareStorageMenuItems[] =
+static const struct MenuAction2 sDaycareStorageMenuItems[] =
 {
     {OtherText_Store, DaycareStorageMenuCallback_Store},
     {OtherText_Summary, DaycareStorageMenuCallback_Summary},
@@ -816,12 +814,12 @@ static void sub_8122D94(u8 taskId)
     if (!GetMonData(&gPlayerParty[gLastFieldPokeMenuOpened], MON_DATA_IS_EGG))
     {
         gTasks[taskId].data[4] = 0;
-        sub_806E750(0, sDaycareStorageMenus, sDaycareStorageMenuItems, 0);
+        ShowPartyPopupMenu(0, sDaycareStorageMenus, sDaycareStorageMenuItems, 0);
     }
     else
     {
         gTasks[taskId].data[4] = 1;
-        sub_806E750(1, sDaycareStorageMenus, sDaycareStorageMenuItems, 0);
+        ShowPartyPopupMenu(1, sDaycareStorageMenus, sDaycareStorageMenuItems, 0);
     }
 }
 

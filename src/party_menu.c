@@ -9,6 +9,7 @@
 #include "item.h"
 #include "item_use.h"
 #include "item_menu.h"
+#include "items.h"
 #include "mail_data.h"
 #include "main.h"
 #include "menu.h"
@@ -30,7 +31,6 @@
 #include "palette.h"
 #include "event_data.h"
 #include "main.h"
-#include "item.h"
 #include "battle_interface.h"
 #include "species.h"
 #include "party_menu.h"
@@ -110,6 +110,34 @@ void sub_806AEDC(void)
 #define WINDOW_LEFT (0)
 #define WINDOW_RIGHT (29)
 #endif
+
+void ShowPartyPopupMenu(u8 menuIndex, const struct PartyPopupMenu *menu, const struct MenuAction2 *menuActions, u8 cursorPos)
+{
+    u8 left;
+    u8 top;
+
+    sub_806E720(menuIndex, &left, &top, menu);
+    sub_8089C50(left, top, menu[menuIndex].width, menu[menuIndex].numChoices, menuActions, menu[menuIndex].items);
+
+    InitMenu(0, left + 1, top + 1, menu[menuIndex].numChoices, cursorPos, menu[menuIndex].width - 1);
+}
+
+void ClosePartyPopupMenu(u8 index, const struct PartyPopupMenu *menu)
+{
+    u8 left;
+    u8 top;
+
+    sub_806E720(index, &left, &top, menu);
+
+    MenuZeroFillWindowRect(left, top, left + menu[index].width, menu[index].numChoices * 2 + top + 1);
+    HandleDestroyMenuCursors();
+}
+
+TaskFunc PartyMenuGetPopupMenuFunc(u8 menuIndex, const struct PartyPopupMenu *menus, const struct MenuAction2 *menuActions, u8 itemIndex)
+{
+    u8 action = menus[menuIndex].items[itemIndex];
+    return menuActions[action].func;
+}
 
 u8 sub_806E834(const u8 *message, u8 arg1)
 {
@@ -881,10 +909,10 @@ bool8 IsHPRecoveryItem(u16 item)
 {
     const u8 *itemEffect;
 
-    if (item == 0xAF)
+    if (item == ITEM_ENIGMA_BERRY)
         itemEffect = gSaveBlock1.enigmaBerry.itemEffect;
     else
-        itemEffect = gItemEffectTable[item - 13];
+        itemEffect = gItemEffectTable[item - ITEM_POTION];
 
     if (itemEffect[4] & 4)
         return TRUE;
@@ -1199,10 +1227,10 @@ void DoPPRecoveryItemEffect(u8 taskId, u16 b, TaskFunc c)
     const u8 *itemEffect;
     u8 taskId2;
 
-    if (b == 0xAF)
+    if (b == ITEM_ENIGMA_BERRY)
         itemEffect = gSaveBlock1.enigmaBerry.itemEffect;
     else
-        itemEffect = gItemEffectTable[b - 13];
+        itemEffect = gItemEffectTable[b - ITEM_POTION];
     gTasks[taskId].func = TaskDummy;
     taskId2 = CreateTask(TaskDummy, 5);
     sub_806E8D0(taskId, b, c);
@@ -1690,4 +1718,323 @@ void DoEvolutionStoneItemEffect(u8 taskId, u16 evolutionStoneItem, TaskFunc c)
     {
         RemoveBagItem(evolutionStoneItem, 1);
     }
+}
+
+// u8 GetItemEffectType(u16 item)
+// {
+//     const u8 *itemEffect;
+//     register u8 itemEffect0 asm("r1");
+//     u8 mask;
+
+//     // Read the item's effect properties.
+//     if (item == ITEM_ENIGMA_BERRY)
+//     {
+//         itemEffect = gSaveBlock1.enigmaBerry.itemEffect;
+//     }
+//     else
+//     {
+//         itemEffect = gItemEffectTable[item - ITEM_POTION];
+//     }
+
+//     itemEffect0 = itemEffect[0];
+//     mask = 0x3F;
+
+//     if ((itemEffect0 & mask) || itemEffect[1] || itemEffect[2] || (itemEffect[3] & 0x80))
+//     {
+//         return 0;
+//     }
+//     else if (itemEffect0 & 0x40)
+//     {
+//         return 10;
+//     }
+//     else if (itemEffect[3] & 0x40)
+//     {
+//         return 1;
+//     }
+//     else if ((itemEffect[3] & mask) || (itemEffect0 >> 7))
+//     {
+//         if ((itemEffect[3] & mask) == 0x20)
+//         {
+//             return 4;
+//         }
+//         else if ((itemEffect[3] & mask) == 0x10)
+//         {
+//             return 3;
+//         }
+//         else if ((itemEffect[3] & mask) == 0x8)
+//         {
+//             return 5;
+//         }
+//         else if ((itemEffect[3] & mask) == 0x4)
+//         {
+//             return 6;
+//         }
+//         else if ((itemEffect[3] & mask) == 0x2)
+//         {
+//             return 7;
+//         }
+//         else if ((itemEffect[3] & mask) == 0x1)
+//         {
+//             return 8;
+//         }
+//         else if ((itemEffect0 >> 7) != 0 && (itemEffect[3] & mask) == 0)
+//         {
+//             return 9;
+//         }
+//         else
+//         {
+//             return 11;
+//         }
+//     }
+//     else if (itemEffect[4] & 0x44)
+//     {
+//         return 2;
+//     }
+//     else if (itemEffect[4] & 0x2)
+//     {
+//         return 12;
+//     }
+//     else if (itemEffect[4] & 0x1)
+//     {
+//         return 13;
+//     }
+//     else if (itemEffect[5] & 0x8)
+//     {
+//         return 14;
+//     }
+//     else if (itemEffect[5] & 0x4)
+//     {
+//         return 15;
+//     }
+//     else if (itemEffect[5] & 0x2)
+//     {
+//         return 16;
+//     }
+//     else if (itemEffect[5] & 0x1)
+//     {
+//         return 17;
+//     }
+//     else if (itemEffect[4] & 0x80)
+//     {
+//         return 18;
+//     }
+//     else if (itemEffect[4] & 0x20)
+//     {
+//         return 19;
+//     }
+//     else if (itemEffect[5] & 0x10)
+//     {
+//         return 20;
+//     }
+//     else if (itemEffect[4] & 0x18)
+//     {
+//         return 21;
+//     }
+//     else
+//     {
+//         return 22;
+//     }
+// }
+__attribute__((naked))
+u8 GetItemEffectType(u16 item)
+{
+    asm(".syntax unified\n\
+    push {r4,r5,lr}\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+    cmp r0, 0xAF\n\
+    bne _08070E5C\n\
+    ldr r4, _08070E58 @ =gSaveBlock1 + 0x3676\n\
+    b _08070E66\n\
+    .align 2, 0\n\
+_08070E58: .4byte gSaveBlock1 + 0x3676\n\
+_08070E5C:\n\
+    ldr r1, _08070E8C @ =gItemEffectTable\n\
+    subs r0, 0xD\n\
+    lsls r0, 2\n\
+    adds r0, r1\n\
+    ldr r4, [r0]\n\
+_08070E66:\n\
+    ldrb r1, [r4]\n\
+    movs r5, 0x3F\n\
+    adds r0, r5, 0\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    bne _08070E88\n\
+    ldrb r0, [r4, 0x1]\n\
+    cmp r0, 0\n\
+    bne _08070E88\n\
+    ldrb r0, [r4, 0x2]\n\
+    cmp r0, 0\n\
+    bne _08070E88\n\
+    ldrb r3, [r4, 0x3]\n\
+    movs r0, 0x80\n\
+    ands r0, r3\n\
+    cmp r0, 0\n\
+    beq _08070E90\n\
+_08070E88:\n\
+    movs r0, 0\n\
+    b _08070F8A\n\
+    .align 2, 0\n\
+_08070E8C: .4byte gItemEffectTable\n\
+_08070E90:\n\
+    movs r2, 0x40\n\
+    adds r0, r2, 0\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _08070E9E\n\
+    movs r0, 0xA\n\
+    b _08070F8A\n\
+_08070E9E:\n\
+    adds r0, r2, 0\n\
+    ands r0, r3\n\
+    cmp r0, 0\n\
+    beq _08070EAA\n\
+    movs r0, 0x1\n\
+    b _08070F8A\n\
+_08070EAA:\n\
+    adds r2, r5, 0\n\
+    ands r2, r3\n\
+    cmp r2, 0\n\
+    bne _08070EB8\n\
+    lsrs r0, r1, 7\n\
+    cmp r0, 0\n\
+    beq _08070EFA\n\
+_08070EB8:\n\
+    cmp r2, 0x20\n\
+    bne _08070EC0\n\
+    movs r0, 0x4\n\
+    b _08070F8A\n\
+_08070EC0:\n\
+    cmp r2, 0x10\n\
+    bne _08070EC8\n\
+    movs r0, 0x3\n\
+    b _08070F8A\n\
+_08070EC8:\n\
+    cmp r2, 0x8\n\
+    bne _08070ED0\n\
+    movs r0, 0x5\n\
+    b _08070F8A\n\
+_08070ED0:\n\
+    cmp r2, 0x4\n\
+    bne _08070ED8\n\
+    movs r0, 0x6\n\
+    b _08070F8A\n\
+_08070ED8:\n\
+    cmp r2, 0x2\n\
+    bne _08070EE0\n\
+    movs r0, 0x7\n\
+    b _08070F8A\n\
+_08070EE0:\n\
+    cmp r2, 0x1\n\
+    bne _08070EE8\n\
+    movs r0, 0x8\n\
+    b _08070F8A\n\
+_08070EE8:\n\
+    lsrs r0, r1, 7\n\
+    cmp r0, 0\n\
+    beq _08070EF6\n\
+    cmp r2, 0\n\
+    bne _08070EF6\n\
+    movs r0, 0x9\n\
+    b _08070F8A\n\
+_08070EF6:\n\
+    movs r0, 0xB\n\
+    b _08070F8A\n\
+_08070EFA:\n\
+    ldrb r1, [r4, 0x4]\n\
+    movs r0, 0x44\n\
+    ands r0, r1\n\
+    adds r2, r1, 0\n\
+    cmp r0, 0\n\
+    beq _08070F0A\n\
+    movs r0, 0x2\n\
+    b _08070F8A\n\
+_08070F0A:\n\
+    movs r5, 0x2\n\
+    adds r0, r5, 0\n\
+    ands r0, r2\n\
+    cmp r0, 0\n\
+    beq _08070F18\n\
+    movs r0, 0xC\n\
+    b _08070F8A\n\
+_08070F18:\n\
+    movs r3, 0x1\n\
+    adds r0, r3, 0\n\
+    ands r0, r2\n\
+    cmp r0, 0\n\
+    beq _08070F26\n\
+    movs r0, 0xD\n\
+    b _08070F8A\n\
+_08070F26:\n\
+    ldrb r1, [r4, 0x5]\n\
+    movs r0, 0x8\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _08070F34\n\
+    movs r0, 0xE\n\
+    b _08070F8A\n\
+_08070F34:\n\
+    movs r0, 0x4\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _08070F40\n\
+    movs r0, 0xF\n\
+    b _08070F8A\n\
+_08070F40:\n\
+    adds r0, r5, 0\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _08070F4C\n\
+    movs r0, 0x10\n\
+    b _08070F8A\n\
+_08070F4C:\n\
+    adds r0, r3, 0\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _08070F58\n\
+    movs r0, 0x11\n\
+    b _08070F8A\n\
+_08070F58:\n\
+    movs r0, 0x80\n\
+    ands r0, r2\n\
+    cmp r0, 0\n\
+    beq _08070F64\n\
+    movs r0, 0x12\n\
+    b _08070F8A\n\
+_08070F64:\n\
+    movs r0, 0x20\n\
+    ands r0, r2\n\
+    cmp r0, 0\n\
+    beq _08070F70\n\
+    movs r0, 0x13\n\
+    b _08070F8A\n\
+_08070F70:\n\
+    movs r0, 0x10\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _08070F7C\n\
+    movs r0, 0x14\n\
+    b _08070F8A\n\
+_08070F7C:\n\
+    movs r0, 0x18\n\
+    ands r0, r2\n\
+    cmp r0, 0\n\
+    bne _08070F88\n\
+    movs r0, 0x16\n\
+    b _08070F8A\n\
+_08070F88:\n\
+    movs r0, 0x15\n\
+_08070F8A:\n\
+    pop {r4,r5}\n\
+    pop {r1}\n\
+    bx r1\n\
+    .syntax divided\n");
+}
+
+void unref_sub_8070F90()
+{
+    FlagSet(SYS_POKEDEX_GET);
+    FlagSet(SYS_POKEMON_GET);
+    FlagSet(SYS_POKENAV_GET);
 }

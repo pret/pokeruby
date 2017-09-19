@@ -109,7 +109,6 @@ SECTIONS {
         src/reset_rtc_screen.o(.text);
         asm/party_menu.o(.text);
         src/party_menu.o(.text);
-        asm/party_menu.o(.text_8070968);
         src/start_menu.o(.text);
         src/menu.o(.text);
         src/tileset_anim.o(.text);
