@@ -4,11 +4,15 @@
 #include "sprite.h"
 #include "task.h"
 
+#define MACRO1(a) ((((a) >> 1) & 0xF) | (((a) >> 2) & 0xF0) | (((a) >> 3) & 0xF00))
+
 struct Weather
 {
     u8 filler_000[0x200];
     u8 unknown_200[2][32];
-    u8 filler_240[0x480];
+    u8 filler_240[0x460-0x240];
+    u8 unk460[2][32];
+    u8 filler4A0[0x6C0-0x4A0];
     s8 unknown_6C0;
     s8 unknown_6C1;
     u8 unknown_6C2;
@@ -184,26 +188,18 @@ void sub_807CB10(void)
     for (v0 = 0; v0 <= 1; v0++)
     {
         if (v0 == 0)
-        {
             v1 = &gUnknown_0202F9E8;
-        }
         else
-        {
             v1 = &gUnknown_0202F9E8 + 19;
-        }
+
         for (v2 = 0; (u16)v2 <= 0x1f; v2++)
         {
             v4 = v2 << 8;
             if (v0 == 0)
-            {
                 v5 = (v2 << 8) / 16;
-            }
             else
-            {
                 v5 = 0;
-            }
-            v6 = 0;
-            for (; v6 <= 2; v6++)
+            for (v6 = 0; v6 <= 2; v6++)
             {
                 v4 = (v4 - v5);
                 v1[v6][v2] = v4 >> 8;
@@ -260,13 +256,9 @@ void sub_807CC24(void)
         {
             gWeather.unknown_6C3 = 0;
             if (gWeather.unknown_6C0 < gWeather.unknown_6C1)
-            {
                 gWeather.unknown_6C0++;
-            }
             else
-            {
                 gWeather.unknown_6C0--;
-            }
             sub_807CEBC(0, 0x20, gWeather.unknown_6C0);
         }
     }
@@ -275,9 +267,7 @@ void sub_807CC24(void)
 void sub_807CCAC(void)
 {
     if (++gWeather.unknown_6CB > 1)
-    {
         gWeather.unknown_6CA = 0;
-    }
     switch (gWeather.unknown_6D0)
     {
     case 3:
@@ -322,9 +312,7 @@ void sub_807CCAC(void)
 u8 sub_807CDC4(void)
 {
     if (gWeather.unknown_6C7 == 0x10)
-    {
         return 0;
-    }
     if (++gWeather.unknown_6C7 >= 0x10)
     {
         sub_807CEBC(0, 0x20, 3);
@@ -338,9 +326,7 @@ u8 sub_807CDC4(void)
 u8 sub_807CE24(void)
 {
     if (gWeather.unknown_6C7 == 0x10)
-    {
         return 0;
-    }
     if (++gWeather.unknown_6C7 >= 0x10)
     {
         sub_807CEBC(0, 0x20, -6);
@@ -354,9 +340,7 @@ u8 sub_807CE24(void)
 u8 sub_807CE7C(void)
 {
     if (gWeather.unknown_6C7 == 0x10)
-    {
         return 0;
-    }
     ++gWeather.unknown_6C7;
     sub_807D424(0x10 - gWeather.unknown_6C7, gWeather.unknown_6C4);
     return 1;
@@ -364,4 +348,128 @@ u8 sub_807CE7C(void)
 
 void nullsub_39(void)
 {
+}
+
+struct RGBColor
+{
+    u16 r:5;
+    u16 g:5;
+    u16 b:5;
+};
+
+extern u8 ewram[];
+
+struct Struct2000000
+{
+    u16 data[0][0x1000];  // unknown length
+};
+
+#define ewram0 (*(struct Struct2000000 *)ewram)
+
+void sub_807CEBC(u8 a, u8 b, s8 c)
+{
+    u16 r4;
+    u16 r5;
+    u8 *r6;
+    u16 r7;
+
+    if (c > 0)
+    {
+        c = c - 1;
+        r5 = a * 16;
+        b += a;
+        r4 = a;
+        while (r4 < b)
+        {
+            if (gUnknown_030006DC[r4] == 0)
+            {
+                CpuFastCopy(gPlttBufferUnfaded + r5, gPlttBufferFaded + r5, 16 * sizeof(u16));
+                r5 += 16;
+            }
+            else
+            {
+                u8 r, g, b;
+
+                if (gUnknown_030006DC[r4] == 2 || r4 - 16 == gUnknown_0202F7E8.unknown_6D5)
+                    r6 = gUnknown_0202F7E8.unk460[c];
+                else
+                    r6 = gUnknown_0202F7E8.unknown_200[c];
+                if (r4 == 16 || r4 > 0x1B)
+                {
+                    for (r7 = 0; r7 < 16; r7++)
+                    {
+                        if (gPlttBufferUnfaded[r5] == 0x2D9F)
+                        {
+                            r5++;
+                        }
+                        else
+                        {
+                            struct RGBColor r1 = *(struct RGBColor *)&gPlttBufferUnfaded[r5];
+                            r = r6[r1.r];
+                            g = r6[r1.g];
+                            b = r6[r1.b];
+
+                            gPlttBufferFaded[r5++] = (b << 10) | (g << 5) | r;
+                        }
+                    }
+                }
+                else
+                {
+                    for (r7 = 0; r7 < 16; r7++)
+                    {
+                        struct RGBColor r1 = *(struct RGBColor *)&gPlttBufferUnfaded[r5];
+                        r = r6[r1.r];
+                        g = r6[r1.g];
+                        b = r6[r1.b];
+
+                        gPlttBufferFaded[r5++] = (b << 10) | (g << 5) | r;
+                    }
+                }
+            }
+            r4++;
+        }
+    }
+    else
+    {
+        if (c < 0)
+        {
+            c = -c - 1;
+            r5 = a * 16;
+            b += a;
+            r4 = a;
+            while (r4 < b)
+            {
+                if (gUnknown_030006DC[r4] == 0)
+                {
+                    CpuFastCopy(gPlttBufferUnfaded + r5, gPlttBufferFaded + r5, 16 * sizeof(u16));
+                    r5 += 16;
+                }
+                else
+                {
+                    if (r4 == 16 || r4 > 0x1B)
+                    {
+                        for (r7 = 0; r7 < 16; r7++)
+                        {
+                            if (gPlttBufferUnfaded[r5] != 0x2D9F)
+                                gPlttBufferFaded[r5] = ewram0.data[c][MACRO1(gPlttBufferUnfaded[r5])];
+                            r5++;
+                        }
+                    }
+                    else
+                    {
+                        for (r7 = 0; r7 < 16; r7++)
+                        {
+                            gPlttBufferFaded[r5] = ewram0.data[c][MACRO1(gPlttBufferUnfaded[r5])];
+                            r5++;
+                        }
+                    }
+                }
+                r4++;
+            }
+        }
+        else
+        {
+            CpuFastCopy(gPlttBufferUnfaded + a * 16, gPlttBufferFaded + a * 16, b * 16 * sizeof(u16));
+        }
+    }
 }
