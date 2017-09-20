@@ -1,4 +1,5 @@
 #include "global.h"
+#include "blend_palette.h"
 #include "field_weather.h"
 #include "palette.h"
 #include "sprite.h"
@@ -61,8 +62,9 @@ extern u8 (*gUnknown_08396FC8[][4])(void);
 extern u8 (*gUnknown_083970B8[])(void);
 extern u8 *gUnknown_030006DC;
 extern u8 gUnknown_083970C8;
-extern u8 (*gUnknown_0202FC48)[32];
-extern u8 gUnknown_0202F9E8[32];
+//extern u8 (*gUnknown_0202FC48)[32];
+extern u8 gUnknown_0202FC48[][32];
+extern u8 gUnknown_0202F9E8[][32];
 
 
 void sub_807C828(void)
@@ -188,9 +190,10 @@ void sub_807CB10(void)
     for (v0 = 0; v0 <= 1; v0++)
     {
         if (v0 == 0)
-            v1 = &gUnknown_0202F9E8;
+            v1 = (void *)&gUnknown_0202F9E8;
         else
-            v1 = &gUnknown_0202F9E8 + 19;
+            //v1 = (void *)(&gUnknown_0202F9E8 + 19);
+            v1 = &gUnknown_0202F9E8[19];
 
         for (v2 = 0; (u16)v2 <= 0x1f; v2++)
         {
@@ -369,22 +372,22 @@ struct Struct2000000
 void sub_807CEBC(u8 a, u8 b, s8 c)
 {
     u16 r4;
-    u16 r5;
+    u16 palOffset;
     u8 *r6;
-    u16 r7;
+    u16 i;
 
     if (c > 0)
     {
         c = c - 1;
-        r5 = a * 16;
+        palOffset = a * 16;
         b += a;
         r4 = a;
         while (r4 < b)
         {
             if (gUnknown_030006DC[r4] == 0)
             {
-                CpuFastCopy(gPlttBufferUnfaded + r5, gPlttBufferFaded + r5, 16 * sizeof(u16));
-                r5 += 16;
+                CpuFastCopy(gPlttBufferUnfaded + palOffset, gPlttBufferFaded + palOffset, 16 * sizeof(u16));
+                palOffset += 16;
             }
             else
             {
@@ -396,33 +399,69 @@ void sub_807CEBC(u8 a, u8 b, s8 c)
                     r6 = gUnknown_0202F7E8.unknown_200[c];
                 if (r4 == 16 || r4 > 0x1B)
                 {
-                    for (r7 = 0; r7 < 16; r7++)
+                    for (i = 0; i < 16; i++)
                     {
-                        if (gPlttBufferUnfaded[r5] == 0x2D9F)
+                        if (gPlttBufferUnfaded[palOffset] == 0x2D9F)
                         {
-                            r5++;
+                            palOffset++;
                         }
                         else
                         {
-                            struct RGBColor r1 = *(struct RGBColor *)&gPlttBufferUnfaded[r5];
-                            r = r6[r1.r];
-                            g = r6[r1.g];
-                            b = r6[r1.b];
+                            struct RGBColor color = *(struct RGBColor *)&gPlttBufferUnfaded[palOffset];
 
-                            gPlttBufferFaded[r5++] = (b << 10) | (g << 5) | r;
+                            r = r6[color.r];
+                            g = r6[color.g];
+                            b = r6[color.b];
+                            gPlttBufferFaded[palOffset++] = (b << 10) | (g << 5) | r;
                         }
                     }
                 }
                 else
                 {
-                    for (r7 = 0; r7 < 16; r7++)
+                    for (i = 0; i < 16; i++)
                     {
-                        struct RGBColor r1 = *(struct RGBColor *)&gPlttBufferUnfaded[r5];
-                        r = r6[r1.r];
-                        g = r6[r1.g];
-                        b = r6[r1.b];
+                        struct RGBColor color = *(struct RGBColor *)&gPlttBufferUnfaded[palOffset];
 
-                        gPlttBufferFaded[r5++] = (b << 10) | (g << 5) | r;
+                        r = r6[color.r];
+                        g = r6[color.g];
+                        b = r6[color.b];
+                        gPlttBufferFaded[palOffset++] = (b << 10) | (g << 5) | r;
+                    }
+                }
+            }
+            r4++;
+        }
+    }
+    else if (c < 0)
+    {
+        c = -c - 1;
+        palOffset = a * 16;
+        b += a;
+        r4 = a;
+        while (r4 < b)
+        {
+            if (gUnknown_030006DC[r4] == 0)
+            {
+                CpuFastCopy(gPlttBufferUnfaded + palOffset, gPlttBufferFaded + palOffset, 16 * sizeof(u16));
+                palOffset += 16;
+            }
+            else
+            {
+                if (r4 == 16 || r4 > 0x1B)
+                {
+                    for (i = 0; i < 16; i++)
+                    {
+                        if (gPlttBufferUnfaded[palOffset] != 0x2D9F)
+                            gPlttBufferFaded[palOffset] = ewram0.data[c][MACRO1(gPlttBufferUnfaded[palOffset])];
+                        palOffset++;
+                    }
+                }
+                else
+                {
+                    for (i = 0; i < 16; i++)
+                    {
+                        gPlttBufferFaded[palOffset] = ewram0.data[c][MACRO1(gPlttBufferUnfaded[palOffset])];
+                        palOffset++;
                     }
                 }
             }
@@ -431,45 +470,53 @@ void sub_807CEBC(u8 a, u8 b, s8 c)
     }
     else
     {
-        if (c < 0)
+        CpuFastCopy(gPlttBufferUnfaded + a * 16, gPlttBufferFaded + a * 16, b * 16 * sizeof(u16));
+    }
+}
+
+void sub_807D1BC(u8 a1, u8 a2, s8 c, u8 d, u16 e)
+{
+    u16 palOffset;
+    u16 r4;
+    u16 i;
+    struct RGBColor color = *(struct RGBColor *)&e;
+    u8 r_ = color.r;
+    u8 g_ = color.g;
+    u8 b_ = color.b;
+
+    palOffset = a1 * 16;
+    a2 += a1;
+    c = c - 1;
+    r4 = a1;
+    while (r4 < a2)
+    {
+        if (gUnknown_030006DC[r4] == 0)
         {
-            c = -c - 1;
-            r5 = a * 16;
-            b += a;
-            r4 = a;
-            while (r4 < b)
-            {
-                if (gUnknown_030006DC[r4] == 0)
-                {
-                    CpuFastCopy(gPlttBufferUnfaded + r5, gPlttBufferFaded + r5, 16 * sizeof(u16));
-                    r5 += 16;
-                }
-                else
-                {
-                    if (r4 == 16 || r4 > 0x1B)
-                    {
-                        for (r7 = 0; r7 < 16; r7++)
-                        {
-                            if (gPlttBufferUnfaded[r5] != 0x2D9F)
-                                gPlttBufferFaded[r5] = ewram0.data[c][MACRO1(gPlttBufferUnfaded[r5])];
-                            r5++;
-                        }
-                    }
-                    else
-                    {
-                        for (r7 = 0; r7 < 16; r7++)
-                        {
-                            gPlttBufferFaded[r5] = ewram0.data[c][MACRO1(gPlttBufferUnfaded[r5])];
-                            r5++;
-                        }
-                    }
-                }
-                r4++;
-            }
+            BlendPalette(palOffset, 16, d, e);
+            palOffset += 16;
         }
         else
         {
-            CpuFastCopy(gPlttBufferUnfaded + a * 16, gPlttBufferFaded + a * 16, b * 16 * sizeof(u16));
+            u8 *r5;
+
+            if (gUnknown_030006DC[r4] == 1)
+                r5 = gUnknown_0202F9E8[c];
+            else
+                r5 = gUnknown_0202FC48[c];
+
+            for (i = 0; i < 16; i++)
+            {
+                struct RGBColor color = *(struct RGBColor *)&gPlttBufferUnfaded[palOffset];
+                u8 r = r5[color.r];
+                u8 g = r5[color.g];
+                u8 b = r5[color.b];
+
+                r += ((r_ - r) * d) >> 4;
+                g += ((g_ - g) * d) >> 4;
+                b += ((b_ - b) * d) >> 4;
+                gPlttBufferFaded[palOffset++] = (b << 10) | (g << 5) | r;
+            }
         }
+        r4++;
     }
 }

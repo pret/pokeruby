@@ -20,7 +20,8 @@ void nullsub_39(void);
 
 // ASM
 void sub_807CEBC(u8, u8, s8);
-void sub_807D1BC(u8, u8, u8, u8, u16);
+//void sub_807D1BC(u8, u8, u8, u8, u16);
+void sub_807D1BC(u8 a, u8 a2, s8 c, u8 d, u16 e);
 void sub_807D304(int, u8, u16);
 void sub_807D424(u8, u16);
 // ...
