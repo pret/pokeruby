@@ -1,16 +1,33 @@
 #include "global.h"
 #include "blend_palette.h"
+#include "field_map_obj.h"
 #include "field_weather.h"
 #include "palette.h"
+#include "script.h"
+#include "songs.h"
+#include "sound.h"
 #include "sprite.h"
 #include "task.h"
 #include "trig.h"
 
 #define MACRO1(a) ((((a) >> 1) & 0xF) | (((a) >> 2) & 0xF0) | (((a) >> 3) & 0xF00))
 
+struct RGBColor
+{
+    u16 r:5;
+    u16 g:5;
+    u16 b:5;
+};
+
+struct Struct2000000
+{
+    u16 data[0][0x1000];  // unknown length
+};
+
 struct Weather
 {
-    u8 filler_000[0x200];
+    u8 filler_000[0x1F4];
+    struct Sprite *unknown_1F4[3];
     u8 unknown_200[2][32];
     u8 filler_240[0x460-0x240];
     u8 unk460[2][32];
@@ -28,19 +45,21 @@ struct Weather
     u8 unknown_6C9;
     u8 unknown_6CA;
     u8 unknown_6CB;
-    u8 filler_6CC[2];
+    u16 unknown_6CC;
     u16 unknown_6CE;
     u8 unknown_6D0;
     u8 unknown_6D1;
-    u8 filler_6D2[1];
+    u8 unknown_6D2;
     u8 unknown_6D3;
     u8 unknown_6D4;
     u8 unknown_6D5;
-    u8 filler_6D6[2];
+    u16 unknown_6D6;
     u8 unknown_6D8;
-    u8 filler_6D9[1];
+    u8 unknown_6D9;
     u8 unknown_6DA;
-    u8 filler_6DB[3];
+    u8 unknown_6DB;
+    u8 unknown_6DC;
+    u8 unknown_6DD;
     u8 unknown_6DE;
     u8 filler_6DF[5];
     u8 unknown_6E4;
@@ -75,17 +94,43 @@ struct Weather
     u8 unknown_74E;
 };
 
+extern u8 ewram[];
+
+#define ewram0 (*(struct Struct2000000 *)ewram)
+
 #define gWeather gUnknown_0202F7E8
 extern struct Weather gUnknown_0202F7E8;
+extern u8 gUnknown_0202FF38[];
 extern u16 gUnknown_0202FF58;
 extern u8 *gUnknown_083970E8;
 extern u8 (*gUnknown_08396FC8[][4])(void);
 extern u8 (*gUnknown_083970B8[])(void);
-extern u8 *gUnknown_030006DC;
-extern u8 gUnknown_083970C8;
+extern const u8 *gUnknown_030006DC;
+extern const u8 gUnknown_083970C8[];
+extern struct Weather *const gUnknown_08396FC4;
+extern const struct SpriteSheet gUnknown_0839A9D4;
+extern const struct SpriteTemplate gSpriteTemplate_839A9F0;
+extern const u16 gUnknown_08397108[];
+//extern const s16 gUnknown_0839A9C8[][2];
+extern const struct Coords16 gUnknown_0839A9C8[];
 
-extern const u8 *const gUnknown_08396FA8[];
+const u8 DroughtPaletteData_0[] = INCBIN_U8("graphics/weather/drought0.bin.lz");
+const u8 DroughtPaletteData_1[] = INCBIN_U8("graphics/weather/drought1.bin.lz");
+const u8 DroughtPaletteData_2[] = INCBIN_U8("graphics/weather/drought2.bin.lz");
+const u8 DroughtPaletteData_3[] = INCBIN_U8("graphics/weather/drought3.bin.lz");
+const u8 DroughtPaletteData_4[] = INCBIN_U8("graphics/weather/drought4.bin.lz");
+const u8 DroughtPaletteData_5[] = INCBIN_U8("graphics/weather/drought5.bin.lz");
 
+const u8 *const gUnknown_08396FA8[] =
+{
+    DroughtPaletteData_0,
+    DroughtPaletteData_1,
+    DroughtPaletteData_2,
+    DroughtPaletteData_3,
+    DroughtPaletteData_4,
+    DroughtPaletteData_5,
+    ewram,
+};
 
 void sub_807C828(void)
 {
@@ -113,7 +158,7 @@ void sub_807C828(void)
         gWeather.unknown_6C6 = 3;
         gWeather.unknown_6C8 = 0;
         gWeather.unknown_6D3 = 1;
-        gWeather.unknown_6C9 = CreateTask(&sub_807C9E4, 80);
+        gWeather.unknown_6C9 = CreateTask(sub_807C9E4, 80);
     }
 }
 
@@ -147,12 +192,12 @@ void sub_807C9B4(u8 effect)
     gWeather.unknown_6C8 = 1;
 }
 
-void sub_807C9E4(u8 task)
+void sub_807C9E4(u8 taskId)
 {
     if (gWeather.unknown_6C8)
     {
         gUnknown_08396FC8[gWeather.unknown_6D0][2]();
-        gTasks[task].func = &sub_807CA34;
+        gTasks[taskId].func = sub_807CA34;
     }
 }
 
@@ -206,7 +251,7 @@ void sub_807CB10(void)
     u16 v11;
     s16 dunno;
 
-    gUnknown_030006DC = &gUnknown_083970C8;
+    gUnknown_030006DC = gUnknown_083970C8;
     for (v0 = 0; v0 <= 1; v0++)
     {
         if (v0 == 0)
@@ -371,22 +416,6 @@ u8 sub_807CE7C(void)
 void nullsub_39(void)
 {
 }
-
-struct RGBColor
-{
-    u16 r:5;
-    u16 g:5;
-    u16 b:5;
-};
-
-extern u8 ewram[];
-
-struct Struct2000000
-{
-    u16 data[0][0x1000];  // unknown length
-};
-
-#define ewram0 (*(struct Struct2000000 *)ewram)
 
 void sub_807CEBC(u8 a, u8 b, s8 c)
 {
@@ -958,3 +987,482 @@ bool8 sub_807DBE8(void)
         return TRUE;
     return FALSE;
 }
+
+void unref_sub_807DCB4(u8 a)
+{
+    switch (a)
+    {
+    case 1:
+        SetWeather(1);
+        break;
+    case 2:
+        SetWeather(2);
+        break;
+    case 3:
+        SetWeather(3);
+        break;
+    case 4:
+        SetWeather(4);
+        break;
+    case 5:
+        SetWeather(5);
+        break;
+    case 6:
+        SetWeather(6);
+        break;
+    case 7:
+        SetWeather(9);
+        break;
+    case 8:
+        SetWeather(7);
+        break;
+    case 9:
+        SetWeather(8);
+        break;
+    case 10:
+        SetWeather(11);
+        break;
+    }
+}
+
+u8 weather_get_current(void)
+{
+    return gWeather.unknown_6D0;
+}
+
+void sub_807DD5C(u16 sndEff)
+{
+    if (gUnknown_0202F7E8.unknown_6C6 != 2)
+    {
+        switch (sndEff)
+        {
+        case SE_T_KOAME:
+            gUnknown_0202F7E8.unknown_6DD = 0;
+            break;
+        case SE_T_OOAME:
+            gUnknown_0202F7E8.unknown_6DD = 1;
+            break;
+        case SE_T_AME:
+            gUnknown_0202F7E8.unknown_6DD = 2;
+            break;
+        default:
+            return;
+        }
+        PlaySE(sndEff);
+    }
+}
+
+void PlayRainSoundEffect(void)
+{
+    if (IsSpecialSEPlaying())
+    {
+        switch (gUnknown_0202F7E8.unknown_6DD)
+        {
+        case 0:
+            PlaySE(0x56);
+            break;
+        case 1:
+            PlaySE(0x54);
+            break;
+        case 2:
+        default:
+            PlaySE(0x52);
+            break;
+        }
+    }
+}
+
+u8 sub_807DDFC(void)
+{
+    return gUnknown_0202F7E8.unknown_6D3;
+}
+
+void sub_807DE10(void)
+{
+    gUnknown_0202F7E8.unknown_6C6 = 2;
+}
+
+void unref_sub_807DE24(void)
+{
+    gUnknown_0202F7E8.unknown_6C6 = 3;
+}
+
+void sub_807DE38(u8 a)
+{
+    CpuCopy16(gUnknown_083970C8, gUnknown_0202FF38, 32);
+    gUnknown_0202FF38[a] = 0;
+    gUnknown_030006DC = gUnknown_0202FF38;
+}
+
+void sub_807DE68(void)
+{
+    gUnknown_030006DC = gUnknown_083970C8;
+}
+
+void sub_807DE78(void)
+{
+    gUnknown_08396FC4->unknown_6C1 = 0;
+    gUnknown_08396FC4->unknown_6C2 = 20;
+    gUnknown_08396FC4->unknown_6D2 = 0;
+    gUnknown_08396FC4->unknown_6CC = 0;
+    if (gUnknown_08396FC4->unknown_6DE == 0)
+        sub_807DB64(0, 16);
+}
+
+void sub_807DEF4(void);
+
+void sub_807DEC4(void)
+{
+    sub_807DE78();
+    while (gUnknown_08396FC4->unknown_6D2 == 0)
+        sub_807DEF4();
+}
+
+void sub_807DFD4(void);
+
+void sub_807DEF4(void)
+{
+    switch (gUnknown_08396FC4->unknown_6CC)
+    {
+    case 0:
+        sub_807DFD4();
+        gUnknown_08396FC4->unknown_6CC++;
+        break;
+    case 1:
+        sub_807DBA4(12, 8, 1);
+        gUnknown_08396FC4->unknown_6CC++;
+        break;
+    case 2:
+        if (sub_807DBE8())
+        {
+            gUnknown_08396FC4->unknown_6D2 = 1;
+            gUnknown_08396FC4->unknown_6CC++;
+        }
+        break;
+    }
+}
+
+void sub_807E0A0(void);
+
+bool8 sub_807DF54(void)
+{
+    switch (gUnknown_08396FC4->unknown_6CE)
+    {
+    case 0:
+        sub_807DBA4(0, 16, 1);
+        gUnknown_08396FC4->unknown_6CE++;
+        return TRUE;
+    case 1:
+        if (sub_807DBE8())
+        {
+            sub_807E0A0();
+            gUnknown_08396FC4->unknown_6CE++;
+        }
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void sub_807DF9C(void)
+{
+    gUnknown_08396FC4->unknown_6C1 = 0;
+    gUnknown_08396FC4->unknown_6C2 = 20;
+}
+
+void sub_807DFC0(void)
+{
+    sub_807DF9C();
+}
+
+void nullsub_55(void)
+{
+}
+
+int sub_807DFD0(void)
+{
+    return 0;
+}
+
+void sub_807DFD4(void)
+{
+    u16 i;
+
+    if (gUnknown_08396FC4->unknown_6DE == 1)
+        return;
+    LoadSpriteSheet(&gUnknown_0839A9D4);
+    sub_807D8C0(gUnknown_08397108);
+    for (i = 0; i < 3; i++)
+    {
+        u8 spriteId = CreateSprite(&gSpriteTemplate_839A9F0, 0, 0, 0xFF);
+
+        if (spriteId != 64)
+        {
+            struct Sprite *sprite;
+
+            gUnknown_08396FC4->unknown_1F4[i] = &gSprites[spriteId];
+            sprite = gUnknown_08396FC4->unknown_1F4[i];
+            sub_80603CC(gUnknown_0839A9C8[i].x + 7, gUnknown_0839A9C8[i].y + 7, &sprite->pos1.x, &sprite->pos1.y);
+            sprite->coordOffsetEnabled = TRUE;
+        }
+        else
+        {
+            gUnknown_08396FC4->unknown_1F4[i] = NULL;
+        }
+    }
+    gUnknown_08396FC4->unknown_6DE = 1;
+}
+
+void sub_807E0A0(void)
+{
+    u16 i;
+
+    if (gUnknown_08396FC4->unknown_6DE == 0)
+        return;
+    for (i = 0; i < 3; i++)
+    {
+        if (gUnknown_08396FC4->unknown_1F4[i] != NULL)
+            DestroySprite(gUnknown_08396FC4->unknown_1F4[i]);
+    }
+    FreeSpriteTilesByTag(0x1200);
+    gUnknown_08396FC4->unknown_6DE = 0;
+}
+
+void sub_807E0F4(struct Sprite *sprite)
+{
+    sprite->data0 = (sprite->data0 + 1) & 1;
+    if (sprite->data0 != 0)
+        sprite->pos1.x--;
+}
+
+void sub_807E110(void)
+{
+    gUnknown_08396FC4->unknown_6CC = 0;
+    gUnknown_08396FC4->unknown_6D2 = 0;
+    gUnknown_08396FC4->unknown_6C1 = 0;
+    gUnknown_08396FC4->unknown_6C2 = 0;
+}
+
+void sub_807E174(void);
+
+void sub_807E144(void)
+{
+    sub_807E110();
+    while (gUnknown_08396FC4->unknown_6D2 == 0)
+        sub_807E174();
+}
+
+void sub_807E174(void)
+{
+    switch (gUnknown_08396FC4->unknown_6CC)
+    {
+    case 0:
+        if (gUnknown_08396FC4->unknown_6C6 != 0)
+            gUnknown_08396FC4->unknown_6CC++;
+        break;
+    case 1:
+        sub_807D9A8();
+        gUnknown_08396FC4->unknown_6CC++;
+        break;
+    case 2:
+        if (sub_807D9C8() == FALSE)
+            gUnknown_08396FC4->unknown_6CC++;
+        break;
+    case 3:
+        sub_807DA14();
+        gUnknown_08396FC4->unknown_6CC++;
+        break;
+    case 4:
+        sub_807DA4C();
+        if (gUnknown_08396FC4->unknown_73C == 6)
+        {
+            gUnknown_08396FC4->unknown_6D2 = 1;
+            gUnknown_08396FC4->unknown_6CC++;
+        }
+        break;
+    default:
+        sub_807DA4C();
+        break;
+    }
+}
+
+int sub_807E258(void)
+{
+    return 0;
+}
+
+void task50_0807B6D4(u8);
+
+void sub_807E25C(void)
+{
+    CreateTask(task50_0807B6D4, 0x50);
+}
+
+#define tState      data[0]
+#define tBlendY     data[1]
+#define tBlendDelay data[2]
+#define tWinRange   data[3]
+
+void task50_0807B6D4(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+
+    switch (task->tState)
+    {
+    case 0:
+        task->tBlendY = 0;
+        task->tBlendDelay = 0;
+        task->tWinRange = REG_WININ;
+        REG_WININ = WIN_RANGE(63, 63);
+        REG_BLDCNT = 0x9E;
+        REG_BLDY = 0;
+        task->tState++;
+        // fall through
+    case 1:
+        task->tBlendY += 3;
+        if (task->tBlendY > 16)
+            task->tBlendY = 16;
+        REG_BLDY = task->tBlendY;
+        if (task->tBlendY >= 16)
+            task->tState++;
+        break;
+    case 2:
+        task->tBlendDelay++;
+        if (task->tBlendDelay > 9)
+        {
+            task->tBlendDelay = 0;
+            task->tBlendY--;
+            if (task->tBlendY <= 0)
+            {
+                task->tBlendY = 0;
+                task->tState++;
+            }
+            REG_BLDY = task->tBlendY;
+        }
+        break;
+    case 3:
+        REG_BLDCNT = 0;
+        REG_BLDY = 0;
+        REG_WININ = task->tWinRange;
+        task->tState++;
+        break;
+    case 4:
+        EnableBothScriptContexts();
+        DestroyTask(taskId);
+        break;
+    }
+}
+
+#undef tState
+#undef tBlendY
+#undef tBlendDelay
+#undef tWinRange
+
+void sub_807E364(void)
+{
+    gUnknown_08396FC4->unknown_6CC = 0;
+    gUnknown_08396FC4->unknown_6D2 = 0;
+    gUnknown_08396FC4->unknown_6D6 = 0;
+    gUnknown_08396FC4->unknown_6DB = 8;
+    gUnknown_08396FC4->unknown_6DC = 0;
+    gUnknown_08396FC4->unknown_6D9 = 10;
+    gUnknown_08396FC4->unknown_6C1 = 3;
+    gUnknown_08396FC4->unknown_6C2 = 20;
+    sub_807DD5C(SE_T_KOAME);
+}
+
+void sub_807E400(void);
+
+void sub_807E3D0(void)
+{
+    sub_807E364();
+    while (gUnknown_08396FC4->unknown_6D2 == 0)
+        sub_807E400();
+}
+
+void sub_807E7A4(void);
+u8 sub_807E7B4(void);
+u8 sub_807E8E8(void);
+
+void sub_807E400(void)
+{
+    switch (gUnknown_08396FC4->unknown_6CC)
+    {
+    case 0:
+        sub_807E7A4();
+        gUnknown_08396FC4->unknown_6CC++;
+        break;
+    case 1:
+        if (sub_807E7B4() == 0)
+            gUnknown_08396FC4->unknown_6CC++;
+        break;
+    case 2:
+        if (sub_807E8E8() == 0)
+        {
+            gUnknown_08396FC4->unknown_6D2 = 1;
+            gUnknown_08396FC4->unknown_6CC++;
+        }
+        break;
+    }
+}
+
+void sub_807E974(void);
+
+bool8 sub_807E460(void)
+{
+    switch (gUnknown_08396FC4->unknown_6CE)
+    {
+    case 0:
+        if (gUnknown_08396FC4->unknown_6D1 == 3
+         || gUnknown_08396FC4->unknown_6D1 == 5
+         || gUnknown_08396FC4->unknown_6D1 == 13)
+        {
+            gUnknown_08396FC4->unknown_6CE = 0xFF;
+            return FALSE;
+        }
+        else
+        {
+            gUnknown_08396FC4->unknown_6D9 = 0;
+            gUnknown_08396FC4->unknown_6CE++;
+        }
+        // fall through
+    case 1:
+        if (sub_807E8E8() == 0)
+        {
+            sub_807E974();
+            gUnknown_08396FC4->unknown_6CE++;
+            return FALSE;
+        }
+        return TRUE;
+    }
+    return FALSE;
+}
+
+extern const struct Coords16 gUnknown_0839AAC4[];
+extern const struct Coords16 gUnknown_0839AABC[];
+
+/*
+void sub_807E4EC(struct Sprite *sprite)
+{
+    u32 randVal;
+    u16 r6;
+    s16 r4;
+    s16 r0;
+
+    if (sprite->data1 == 0)
+        sprite->data1 = 361;
+    randVal = sprite->data1 * 1103515245 + 12345;
+    sprite->data1 = ((randVal & 0x7FFF0000) >> 16) % 600;
+    r6 = gUnknown_0839AAC4[gUnknown_08396FC4->unknown_6DC].x;
+    r4 = sprite->data1 % 31;
+    sprite->data2 = r4 * 8;
+    r0 = sprite->data1 / 31;
+    sprite->data2 = r4 * 128;
+    sprite->data3 = r0 * 128;
+    sprite->data2 = r4 * 128 - gUnknown_0839AABC[gUnknown_08396FC4->unknown_6DC].x * r6;
+    sprite->data3 = r0 * 128 - gUnknown_0839AABC[gUnknown_08396FC4->unknown_6DC].y * r6;
+    StartSpriteAnim(sprite, 0);
+    sprite->data4 = 0;
+    sprite->invisible = FALSE;
+    sprite->data0 = r6;
+}
+*/

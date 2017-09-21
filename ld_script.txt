@@ -371,6 +371,7 @@ SECTIONS {
         src/task.o(.rodata);
         src/battle_anim_807B69C.o(.rodata);
         src/title_screen.o(.rodata);
+        src/field_weather.o(.rodata);
         data/field_weather.o(.rodata);
         src/field_screen_effect.o(.rodata);
         src/battle_setup.o(.rodata);
