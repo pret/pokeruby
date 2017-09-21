@@ -460,18 +460,18 @@ void GroundEffect_SpawnOnTallGrass(struct MapObject *mapObj, struct Sprite *spri
 {
     u8 *ptr;
 
-    gFieldEffectSpawnParams[0] = mapObj->coords2.x;
-    gFieldEffectSpawnParams[1] = mapObj->coords2.y;
-    gFieldEffectSpawnParams[2] = mapObj->elevation;
-    gFieldEffectSpawnParams[3] = 2;
-    gFieldEffectSpawnParams[4] = (mapObj->localId << 8) | mapObj->mapNum;
-    gFieldEffectSpawnParams[5] = mapObj->mapGroup;
+    gFieldEffectArguments[0] = mapObj->coords2.x;
+    gFieldEffectArguments[1] = mapObj->coords2.y;
+    gFieldEffectArguments[2] = mapObj->elevation;
+    gFieldEffectArguments[3] = 2;
+    gFieldEffectArguments[4] = (mapObj->localId << 8) | mapObj->mapNum;
+    gFieldEffectArguments[5] = mapObj->mapGroup;
 
     ptr = (u8 *)&gSaveBlock1;
-    gFieldEffectSpawnParams[6] = ((u8)gSaveBlock1.location.mapNum << 8)
+    gFieldEffectArguments[6] = ((u8)gSaveBlock1.location.mapNum << 8)
                          | (u8)gSaveBlock1.location.mapGroup;
 
-    gFieldEffectSpawnParams[7] = 1;
+    gFieldEffectArguments[7] = 1;
     FieldEffectStart(4);
 }
 
@@ -479,18 +479,18 @@ void sub_8063E94(struct MapObject *mapObj, struct Sprite *sprite)
 {
     u8 *ptr;
 
-    gFieldEffectSpawnParams[0] = mapObj->coords2.x;
-    gFieldEffectSpawnParams[1] = mapObj->coords2.y;
-    gFieldEffectSpawnParams[2] = mapObj->elevation;
-    gFieldEffectSpawnParams[3] = 2;
-    gFieldEffectSpawnParams[4] = (mapObj->localId << 8) | mapObj->mapNum;
-    gFieldEffectSpawnParams[5] = mapObj->mapGroup;
+    gFieldEffectArguments[0] = mapObj->coords2.x;
+    gFieldEffectArguments[1] = mapObj->coords2.y;
+    gFieldEffectArguments[2] = mapObj->elevation;
+    gFieldEffectArguments[3] = 2;
+    gFieldEffectArguments[4] = (mapObj->localId << 8) | mapObj->mapNum;
+    gFieldEffectArguments[5] = mapObj->mapGroup;
 
     ptr = (u8 *)&gSaveBlock1;
-    gFieldEffectSpawnParams[6] = ((u8)gSaveBlock1.location.mapNum << 8)
+    gFieldEffectArguments[6] = ((u8)gSaveBlock1.location.mapNum << 8)
                          | (u8)gSaveBlock1.location.mapGroup;
 
-    gFieldEffectSpawnParams[7] = 0;
+    gFieldEffectArguments[7] = 0;
     FieldEffectStart(4);
 }
 
@@ -498,18 +498,18 @@ void sub_8063EE0(struct MapObject *mapObj, struct Sprite *sprite)
 {
     u8 *ptr;
 
-    gFieldEffectSpawnParams[0] = mapObj->coords2.x;
-    gFieldEffectSpawnParams[1] = mapObj->coords2.y;
-    gFieldEffectSpawnParams[2] = mapObj->elevation;
-    gFieldEffectSpawnParams[3] = 2;
-    gFieldEffectSpawnParams[4] = (mapObj->localId << 8) | mapObj->mapNum;
-    gFieldEffectSpawnParams[5] = mapObj->mapGroup;
+    gFieldEffectArguments[0] = mapObj->coords2.x;
+    gFieldEffectArguments[1] = mapObj->coords2.y;
+    gFieldEffectArguments[2] = mapObj->elevation;
+    gFieldEffectArguments[3] = 2;
+    gFieldEffectArguments[4] = (mapObj->localId << 8) | mapObj->mapNum;
+    gFieldEffectArguments[5] = mapObj->mapGroup;
 
     ptr = (u8 *)&gSaveBlock1;
-    gFieldEffectSpawnParams[6] = ((u8)gSaveBlock1.location.mapNum << 8)
+    gFieldEffectArguments[6] = ((u8)gSaveBlock1.location.mapNum << 8)
                          | (u8)gSaveBlock1.location.mapGroup;
 
-    gFieldEffectSpawnParams[7] = 1;
+    gFieldEffectArguments[7] = 1;
     FieldEffectStart(17);
 }
 
@@ -517,18 +517,18 @@ void sub_8063F2C(struct MapObject *mapObj, struct Sprite *sprite)
 {
     u8 *ptr;
 
-    gFieldEffectSpawnParams[0] = mapObj->coords2.x;
-    gFieldEffectSpawnParams[1] = mapObj->coords2.y;
-    gFieldEffectSpawnParams[2] = mapObj->elevation;
-    gFieldEffectSpawnParams[3] = 2;
-    gFieldEffectSpawnParams[4] = (mapObj->localId << 8) | mapObj->mapNum;
-    gFieldEffectSpawnParams[5] = mapObj->mapGroup;
+    gFieldEffectArguments[0] = mapObj->coords2.x;
+    gFieldEffectArguments[1] = mapObj->coords2.y;
+    gFieldEffectArguments[2] = mapObj->elevation;
+    gFieldEffectArguments[3] = 2;
+    gFieldEffectArguments[4] = (mapObj->localId << 8) | mapObj->mapNum;
+    gFieldEffectArguments[5] = mapObj->mapGroup;
 
     ptr = (u8 *)&gSaveBlock1;
-    gFieldEffectSpawnParams[6] = ((u8)gSaveBlock1.location.mapNum << 8)
+    gFieldEffectArguments[6] = ((u8)gSaveBlock1.location.mapNum << 8)
                          | (u8)gSaveBlock1.location.mapGroup;
 
-    gFieldEffectSpawnParams[7] = 0;
+    gFieldEffectArguments[7] = 0;
     FieldEffectStart(17);
 }
 
@@ -572,11 +572,11 @@ static void DoTracksGroundEffect_Footprints(struct MapObject *mapObj, struct Spr
     // First half-word is a Field Effect script id. (gFieldEffectScriptPointers)
     u16 sandFootprints_FieldEffectData[2] = { 0xD, 0x18 };
 
-    gFieldEffectSpawnParams[0] = mapObj->coords3.x;
-    gFieldEffectSpawnParams[1] = mapObj->coords3.y;
-    gFieldEffectSpawnParams[2] = 149;
-    gFieldEffectSpawnParams[3] = 2;
-    gFieldEffectSpawnParams[4] = mapObj->mapobj_unk_18;
+    gFieldEffectArguments[0] = mapObj->coords3.x;
+    gFieldEffectArguments[1] = mapObj->coords3.y;
+    gFieldEffectArguments[2] = 149;
+    gFieldEffectArguments[3] = 2;
+    gFieldEffectArguments[4] = mapObj->mapobj_unk_18;
     FieldEffectStart(sandFootprints_FieldEffectData[a]);
 }
 
@@ -598,11 +598,11 @@ static void DoTracksGroundEffect_BikeTireTracks(
 
     if (mapObj->coords2.x != mapObj->coords3.x || mapObj->coords2.y != mapObj->coords3.y)
     {
-        gFieldEffectSpawnParams[0] = mapObj->coords3.x;
-        gFieldEffectSpawnParams[1] = mapObj->coords3.y;
-        gFieldEffectSpawnParams[2] = 149;
-        gFieldEffectSpawnParams[3] = 2;
-        gFieldEffectSpawnParams[4] =
+        gFieldEffectArguments[0] = mapObj->coords3.x;
+        gFieldEffectArguments[1] = mapObj->coords3.y;
+        gFieldEffectArguments[2] = 149;
+        gFieldEffectArguments[3] = 2;
+        gFieldEffectArguments[4] =
             bikeTireTracks_Transitions[mapObj->mapobj_unk_20][mapObj->mapobj_unk_18 - 5];
         FieldEffectStart(FLDEFF_BIKE_TIRE_TRACKS);
     }
@@ -627,10 +627,10 @@ void GroundEffect_JumpOnTallGrass(struct MapObject *mapObj, struct Sprite *sprit
 {
     u8 spriteId;
 
-    gFieldEffectSpawnParams[0] = mapObj->coords2.x;
-    gFieldEffectSpawnParams[1] = mapObj->coords2.y;
-    gFieldEffectSpawnParams[2] = mapObj->elevation;
-    gFieldEffectSpawnParams[3] = 2;
+    gFieldEffectArguments[0] = mapObj->coords2.x;
+    gFieldEffectArguments[1] = mapObj->coords2.y;
+    gFieldEffectArguments[2] = mapObj->elevation;
+    gFieldEffectArguments[3] = 2;
     FieldEffectStart(FLDEFF_JUMP_TALL_GRASS);
 
     spriteId = sub_8126FF0(
@@ -642,37 +642,37 @@ void GroundEffect_JumpOnTallGrass(struct MapObject *mapObj, struct Sprite *sprit
 
 void GroundEffect_JumpOnLongGrass(struct MapObject *mapObj, struct Sprite *sprite)
 {
-    gFieldEffectSpawnParams[0] = mapObj->coords2.x;
-    gFieldEffectSpawnParams[1] = mapObj->coords2.y;
-    gFieldEffectSpawnParams[2] = mapObj->elevation;
-    gFieldEffectSpawnParams[3] = 2;
+    gFieldEffectArguments[0] = mapObj->coords2.x;
+    gFieldEffectArguments[1] = mapObj->coords2.y;
+    gFieldEffectArguments[2] = mapObj->elevation;
+    gFieldEffectArguments[3] = 2;
     FieldEffectStart(FLDEFF_JUMP_LONG_GRASS);
 }
 
 void GroundEffect_JumpOnShallowWater(struct MapObject *mapObj, struct Sprite *sprite)
 {
-    gFieldEffectSpawnParams[0] = mapObj->coords2.x;
-    gFieldEffectSpawnParams[1] = mapObj->coords2.y;
-    gFieldEffectSpawnParams[2] = mapObj->elevation;
-    gFieldEffectSpawnParams[3] = sprite->oam.priority;
+    gFieldEffectArguments[0] = mapObj->coords2.x;
+    gFieldEffectArguments[1] = mapObj->coords2.y;
+    gFieldEffectArguments[2] = mapObj->elevation;
+    gFieldEffectArguments[3] = sprite->oam.priority;
     FieldEffectStart(FLDEFF_JUMP_SMALL_SPLASH);
 }
 
 void GroundEffect_JumpOnWater(struct MapObject *mapObj, struct Sprite *sprite)
 {
-    gFieldEffectSpawnParams[0] = mapObj->coords2.x;
-    gFieldEffectSpawnParams[1] = mapObj->coords2.y;
-    gFieldEffectSpawnParams[2] = mapObj->elevation;
-    gFieldEffectSpawnParams[3] = sprite->oam.priority;
+    gFieldEffectArguments[0] = mapObj->coords2.x;
+    gFieldEffectArguments[1] = mapObj->coords2.y;
+    gFieldEffectArguments[2] = mapObj->elevation;
+    gFieldEffectArguments[3] = sprite->oam.priority;
     FieldEffectStart(FLDEFF_JUMP_BIG_SPLASH);
 }
 
 void GroundEffect_JumpLandingDust(struct MapObject *mapObj, struct Sprite *sprite)
 {
-    gFieldEffectSpawnParams[0] = mapObj->coords2.x;
-    gFieldEffectSpawnParams[1] = mapObj->coords2.y;
-    gFieldEffectSpawnParams[2] = mapObj->elevation;
-    gFieldEffectSpawnParams[3] = sprite->oam.priority;
+    gFieldEffectArguments[0] = mapObj->coords2.x;
+    gFieldEffectArguments[1] = mapObj->coords2.y;
+    gFieldEffectArguments[2] = mapObj->elevation;
+    gFieldEffectArguments[3] = sprite->oam.priority;
     FieldEffectStart(FLDEFF_DUST);
 }
 
@@ -688,8 +688,8 @@ void GroundEffect_HotSprings(struct MapObject *mapObj, struct Sprite *sprite)
 
 void GroundEffect_Seaweed(struct MapObject *mapObj, struct Sprite *sprite)
 {
-    gFieldEffectSpawnParams[0] = mapObj->coords2.x;
-    gFieldEffectSpawnParams[1] = mapObj->coords2.y;
+    gFieldEffectArguments[0] = mapObj->coords2.x;
+    gFieldEffectArguments[1] = mapObj->coords2.y;
     FieldEffectStart(FLDEFF_BUBBLES);
 }
 

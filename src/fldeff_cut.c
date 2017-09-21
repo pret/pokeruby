@@ -71,7 +71,7 @@ bool8 SetUpFieldMove_Cut(void)
 void sub_80A25E8(void)
 {
     FieldEffectStart(1);
-    gFieldEffectSpawnParams[0] = gLastFieldPokeMenuOpened;
+    gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
 }
 
 bool8 FldEff_UseCutOnGrass(void)
@@ -86,7 +86,7 @@ bool8 FldEff_UseCutOnGrass(void)
 
 void sub_80A2634(void)
 {
-    gFieldEffectSpawnParams[0] = gLastFieldPokeMenuOpened;
+    gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
     ScriptContext1_SetupScript(&UseCutScript);
 }
 

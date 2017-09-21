@@ -666,9 +666,9 @@ void PlayerAvatarTransition_Surfing(struct MapObject *a)
     sub_805B980(a, GetPlayerAvatarGraphicsIdByStateId(3));
     FieldObjectTurn(a, a->placeholder18);
     SetPlayerAvatarStateMask(8);
-    gFieldEffectSpawnParams[0] = a->coords2.x;
-    gFieldEffectSpawnParams[1] = a->coords2.y;
-    gFieldEffectSpawnParams[2] = gPlayerAvatar.mapObjectId;
+    gFieldEffectArguments[0] = a->coords2.x;
+    gFieldEffectArguments[1] = a->coords2.y;
+    gFieldEffectArguments[2] = gPlayerAvatar.mapObjectId;
     unk = FieldEffectStart(8);
     a->mapobj_unk_1A = unk;
     sub_8127ED0(unk, 1);
@@ -1226,10 +1226,10 @@ u8 sub_8059EA4(struct Task *task, struct MapObject *b, struct MapObject *c)
         FieldObjectClearAnimIfSpecialAnimFinished(c);
         FieldObjectSetSpecialAnim(b, GetStepInPlaceDelay16AnimId(task->data[2]));
         FieldObjectSetSpecialAnim(c, GetSimpleGoAnimId(task->data[2]));
-        gFieldEffectSpawnParams[0] = c->coords2.x;
-        gFieldEffectSpawnParams[1] = c->coords2.y;
-        gFieldEffectSpawnParams[2] = c->elevation;
-        gFieldEffectSpawnParams[3] = gSprites[c->spriteId].oam.priority;
+        gFieldEffectArguments[0] = c->coords2.x;
+        gFieldEffectArguments[1] = c->coords2.y;
+        gFieldEffectArguments[2] = c->elevation;
+        gFieldEffectArguments[3] = gSprites[c->spriteId].oam.priority;
         FieldEffectStart(10);
         PlaySE(SE_W070);
         task->data[0]++;

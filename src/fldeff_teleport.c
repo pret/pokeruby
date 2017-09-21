@@ -27,7 +27,7 @@ void hm_teleport_run_dp02scr(void)
 {
     new_game();
     FieldEffectStart(63);
-    gFieldEffectSpawnParams[0] = gLastFieldPokeMenuOpened;
+    gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
 }
 
 bool8 FldEff_UseTeleport(void)

@@ -1724,7 +1724,7 @@ bool8 ScrCmd_doanimation(struct ScriptContext *ctx)
 bool8 ScrCmd_setanimation(struct ScriptContext *ctx)
 {
     u8 v2 = ScriptReadByte(ctx);
-    gFieldEffectSpawnParams[v2] = (s16)VarGet(ScriptReadHalfword(ctx));
+    gFieldEffectArguments[v2] = (s16)VarGet(ScriptReadHalfword(ctx));
     return FALSE;
 }
 

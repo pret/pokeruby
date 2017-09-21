@@ -31,7 +31,7 @@ bool8 SetUpFieldMove_SweetScent(void)
 static void sub_812BFD4(void)
 {
     FieldEffectStart(51);
-    gFieldEffectSpawnParams[0] = gLastFieldPokeMenuOpened;
+    gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
 }
 
 bool8 FldEff_SweetScent()

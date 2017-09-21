@@ -28,7 +28,7 @@
 
 #define subsprite_table(ptr) {.subsprites = ptr, .subspriteCount = (sizeof ptr) / (sizeof(struct Subsprite))}
 
-EWRAM_DATA u32 gFieldEffectSpawnParams[8] = {0};
+EWRAM_DATA u32 gFieldEffectArguments[8] = {0};
 
 const u32 gSpriteImage_839DC14[] = INCBIN_U32("graphics/birch_speech/birch.4bpp");
 const u16 gBirchPalette[16] = INCBIN_U16("graphics/birch_speech/birch.gbapal");
@@ -1203,10 +1203,10 @@ void task00_8084310(u8 taskId)
         {
             return;
         }
-        gFieldEffectSpawnParams[0] = gLastFieldPokeMenuOpened;
-        if ((int)gFieldEffectSpawnParams[0] > 5)
+        gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
+        if ((int)gFieldEffectArguments[0] > 5)
         {
-            gFieldEffectSpawnParams[0] = 0;
+            gFieldEffectArguments[0] = 0;
         }
         FieldEffectStart(FLDEFF_USE_FLY);
         task->data[0]++;
@@ -1665,7 +1665,7 @@ bool8 FldEff_UseWaterfall(void)
 {
     u8 taskId;
     taskId = CreateTask(sub_8086F64, 0xff);
-    gTasks[taskId].data[1] = gFieldEffectSpawnParams[0];
+    gTasks[taskId].data[1] = gFieldEffectArguments[0];
     sub_8086F64(taskId);
     return FALSE;
 }
@@ -1689,7 +1689,7 @@ bool8 waterfall_1_do_anim_probably(struct Task *task, struct MapObject *mapObjec
     if (!FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(mapObject))
     {
         FieldObjectClearAnimIfSpecialAnimFinished(mapObject);
-        gFieldEffectSpawnParams[0] = task->data[1];
+        gFieldEffectArguments[0] = task->data[1];
         FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
         task->data[0]++;
     }
@@ -1738,8 +1738,8 @@ bool8 FldEff_UseDive(void)
 {
     u8 taskId;
     taskId = CreateTask(Task_Dive, 0xff);
-    gTasks[taskId].data[15] = gFieldEffectSpawnParams[0];
-    gTasks[taskId].data[14] = gFieldEffectSpawnParams[1];
+    gTasks[taskId].data[15] = gFieldEffectArguments[0];
+    gTasks[taskId].data[14] = gFieldEffectArguments[1];
     Task_Dive(taskId);
     return FALSE;
 }
@@ -1759,7 +1759,7 @@ bool8 sub_8087124(struct Task *task)
 bool8 dive_2_unknown(struct Task *task)
 {
     ScriptContext2_Enable();
-    gFieldEffectSpawnParams[0] = task->data[15];
+    gFieldEffectArguments[0] = task->data[15];
     FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
     task->data[0]++;
     return FALSE;
@@ -1820,10 +1820,10 @@ bool8 sub_8087298(struct Task *task, struct MapObject *mapObject, struct Sprite 
 {
     sprite->pos2.y = 0;
     task->data[3] = 1;
-    gFieldEffectSpawnParams[0] = mapObject->coords2.x;
-    gFieldEffectSpawnParams[1] = mapObject->coords2.y;
-    gFieldEffectSpawnParams[2] = sprite->subpriority - 1;
-    gFieldEffectSpawnParams[3] = sprite->oam.priority;
+    gFieldEffectArguments[0] = mapObject->coords2.x;
+    gFieldEffectArguments[1] = mapObject->coords2.y;
+    gFieldEffectArguments[2] = sprite->subpriority - 1;
+    gFieldEffectArguments[3] = sprite->oam.priority;
     FieldEffectStart(FLDEFF_LAVARIDGE_GYM_WARP);
     PlaySE(SE_W153);
     task->data[0]++;
@@ -1924,10 +1924,10 @@ bool8 sub_80874FC(struct Task *task, struct MapObject *mapObject, struct Sprite 
 {
     if (sub_807D770())
     {
-        gFieldEffectSpawnParams[0] = mapObject->coords2.x;
-        gFieldEffectSpawnParams[1] = mapObject->coords2.y;
-        gFieldEffectSpawnParams[2] = sprite->subpriority - 1;
-        gFieldEffectSpawnParams[3] = sprite->oam.priority;
+        gFieldEffectArguments[0] = mapObject->coords2.x;
+        gFieldEffectArguments[1] = mapObject->coords2.y;
+        gFieldEffectArguments[2] = sprite->subpriority - 1;
+        gFieldEffectArguments[3] = sprite->oam.priority;
         task->data[1] = FieldEffectStart(FLDEFF_POP_OUT_OF_ASH);
         task->data[0]++;
     }
@@ -1966,9 +1966,9 @@ extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[36]
 u8 FldEff_LavaridgeGymWarp(void)
 {
     u8 spriteId;
-    sub_8060470((s16 *)&gFieldEffectSpawnParams[0], (s16 *)&gFieldEffectSpawnParams[1], 8, 8);
-    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[33], gFieldEffectSpawnParams[0], gFieldEffectSpawnParams[1], gFieldEffectSpawnParams[2]);
-    gSprites[spriteId].oam.priority = gFieldEffectSpawnParams[3];
+    sub_8060470((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 8);
+    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[33], gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
+    gSprites[spriteId].oam.priority = gFieldEffectArguments[3];
     gSprites[spriteId].coordOffsetEnabled = 1;
     return spriteId;
 }
@@ -2009,10 +2009,10 @@ bool8 sub_80876F8(struct Task *task, struct MapObject *mapObject, struct Sprite 
     {
         if (task->data[1] > 3)
         {
-            gFieldEffectSpawnParams[0] = mapObject->coords2.x;
-            gFieldEffectSpawnParams[1] = mapObject->coords2.y;
-            gFieldEffectSpawnParams[2] = sprite->subpriority - 1;
-            gFieldEffectSpawnParams[3] = sprite->oam.priority;
+            gFieldEffectArguments[0] = mapObject->coords2.x;
+            gFieldEffectArguments[1] = mapObject->coords2.y;
+            gFieldEffectArguments[2] = sprite->subpriority - 1;
+            gFieldEffectArguments[3] = sprite->oam.priority;
             task->data[1] = FieldEffectStart(FLDEFF_POP_OUT_OF_ASH);
             task->data[0]++;
         } else
@@ -2064,9 +2064,9 @@ bool8 sub_80877D4(struct Task *task, struct MapObject *mapObject, struct Sprite 
 u8 FldEff_PopOutOfAsh(void)
 {
     u8 spriteId;
-    sub_8060470((s16 *)&gFieldEffectSpawnParams[0], (s16 *)&gFieldEffectSpawnParams[1], 8, 8);
-    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[32], gFieldEffectSpawnParams[0], gFieldEffectSpawnParams[1], gFieldEffectSpawnParams[2]);
-    gSprites[spriteId].oam.priority = gFieldEffectSpawnParams[3];
+    sub_8060470((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 8);
+    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[32], gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
+    gSprites[spriteId].oam.priority = gFieldEffectArguments[3];
     gSprites[spriteId].coordOffsetEnabled = 1;
     return spriteId;
 }
@@ -2392,19 +2392,19 @@ bool8 FldEff_FieldMoveShowMon(void)
     {
         taskId = CreateTask(sub_808847C, 0xff);
     }
-    gTasks[taskId].data[15] = sub_8088830(gFieldEffectSpawnParams[0], gFieldEffectSpawnParams[1], gFieldEffectSpawnParams[2]);
+    gTasks[taskId].data[15] = sub_8088830(gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
     return FALSE;
 }
 
 bool8 FldEff_FieldMoveShowMonInit(void)
 {
     struct Pokemon *pokemon;
-    u32 flag = gFieldEffectSpawnParams[0] & 0x80000000;
-    pokemon = &gPlayerParty[(u8)gFieldEffectSpawnParams[0]];
-    gFieldEffectSpawnParams[0] = GetMonData(pokemon, MON_DATA_SPECIES);
-    gFieldEffectSpawnParams[1] = GetMonData(pokemon, MON_DATA_OT_ID);
-    gFieldEffectSpawnParams[2] = GetMonData(pokemon, MON_DATA_PERSONALITY);
-    gFieldEffectSpawnParams[0] |= flag;
+    u32 flag = gFieldEffectArguments[0] & 0x80000000;
+    pokemon = &gPlayerParty[(u8)gFieldEffectArguments[0]];
+    gFieldEffectArguments[0] = GetMonData(pokemon, MON_DATA_SPECIES);
+    gFieldEffectArguments[1] = GetMonData(pokemon, MON_DATA_OT_ID);
+    gFieldEffectArguments[2] = GetMonData(pokemon, MON_DATA_PERSONALITY);
+    gFieldEffectArguments[0] |= flag;
     FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON);
     FieldEffectActiveListRemove(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
     return FALSE;
@@ -2879,7 +2879,7 @@ u8 FldEff_UseSurf(void)
 {
     u8 taskId;
     taskId = CreateTask(sub_8088954, 0xff);
-    gTasks[taskId].data[15] = gFieldEffectSpawnParams[0];
+    gTasks[taskId].data[15] = gFieldEffectArguments[0];
     sav1_reset_battle_music_maybe();
     sub_8053FB0(0x016d);
     return FALSE;
@@ -2919,7 +2919,7 @@ void sub_8088A30(struct Task *task)
     mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
     if (FieldObjectCheckIfSpecialAnimFinishedOrInactive(mapObject))
     {
-        gFieldEffectSpawnParams[0] = task->data[15] | 0x80000000;
+        gFieldEffectArguments[0] = task->data[15] | 0x80000000;
         FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
         task->data[0]++;
     }
@@ -2934,9 +2934,9 @@ void sub_8088A78(struct Task *task)
         sub_805B980(mapObject, GetPlayerAvatarGraphicsIdByStateId(3));
         FieldObjectClearAnimIfSpecialAnimFinished(mapObject);
         FieldObjectSetSpecialAnim(mapObject, sub_80608D0(mapObject->placeholder18));
-        gFieldEffectSpawnParams[0] = task->data[1];
-        gFieldEffectSpawnParams[1] = task->data[2];
-        gFieldEffectSpawnParams[2] = gPlayerAvatar.mapObjectId;
+        gFieldEffectArguments[0] = task->data[1];
+        gFieldEffectArguments[1] = task->data[2];
+        gFieldEffectArguments[2] = gPlayerAvatar.mapObjectId;
         mapObject->mapobj_unk_1A = FieldEffectStart(FLDEFF_SURF_BLOB);
         task->data[0]++;
     }
@@ -2970,7 +2970,7 @@ u8 FldEff_NPCFlyOut(void)
     sprite->oam.paletteNum = 0;
     sprite->oam.priority = 1;
     sprite->callback = sub_8088BC4;
-    sprite->data1 = gFieldEffectSpawnParams[0];
+    sprite->data1 = gFieldEffectArguments[0];
     PlaySE(SE_W019);
     return spriteId;
 }
@@ -3009,7 +3009,7 @@ u8 FldEff_UseFly(void)
 {
     u8 taskId;
     taskId = CreateTask(sub_8088C70, 0xfe);
-    gTasks[taskId].data[1] = gFieldEffectSpawnParams[0];
+    gTasks[taskId].data[1] = gFieldEffectArguments[0];
     return 0;
 }
 
@@ -3040,7 +3040,7 @@ void sub_8088CF8(struct Task *task)
     if (FieldObjectClearAnimIfSpecialAnimFinished(mapObject))
     {
         task->data[0]++;
-        gFieldEffectSpawnParams[0] = task->data[1];
+        gFieldEffectArguments[0] = task->data[1];
         FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
     }
 }

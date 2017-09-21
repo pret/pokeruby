@@ -253,6 +253,6 @@ void MultiplyInvertedPaletteRGBComponents(u16, u8, u8, u8);
 void sub_80878A8(void);
 void sub_8087BA8(void);
 
-extern u32 gFieldEffectSpawnParams[8];
+extern u32 gFieldEffectArguments[8];
 
 #endif // GUARD_FIELD_EFFECT_H

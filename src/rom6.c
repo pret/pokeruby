@@ -91,17 +91,17 @@ static void sub_810B428(u8 taskId)
 {
     if (!FieldEffectActiveListContains(6))
     {
-        gFieldEffectSpawnParams[1] = player_get_direction_lower_nybble();
-        if (gFieldEffectSpawnParams[1] == 1)
-            gFieldEffectSpawnParams[2] = 0;
-        if (gFieldEffectSpawnParams[1] == 2)
-            gFieldEffectSpawnParams[2] = 1;
-        if (gFieldEffectSpawnParams[1] == 3)
-            gFieldEffectSpawnParams[2] = 2;
-        if (gFieldEffectSpawnParams[1] == 4)
-            gFieldEffectSpawnParams[2] = 3;
+        gFieldEffectArguments[1] = player_get_direction_lower_nybble();
+        if (gFieldEffectArguments[1] == 1)
+            gFieldEffectArguments[2] = 0;
+        if (gFieldEffectArguments[1] == 2)
+            gFieldEffectArguments[2] = 1;
+        if (gFieldEffectArguments[1] == 3)
+            gFieldEffectArguments[2] = 2;
+        if (gFieldEffectArguments[1] == 4)
+            gFieldEffectArguments[2] = 3;
         sub_805B980(&gMapObjects[gPlayerAvatar.mapObjectId], GetPlayerAvatarGraphicsIdByCurrentState());
-        StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], gFieldEffectSpawnParams[2]);
+        StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], gFieldEffectArguments[2]);
         FieldEffectActiveListRemove(6);
         gTasks[taskId].func = sub_810B4CC;
     }
@@ -132,7 +132,7 @@ bool8 SetUpFieldMove_RockSmash(void)
 
 static void sub_810B53C(void)
 {
-    gFieldEffectSpawnParams[0] = gLastFieldPokeMenuOpened;
+    gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
     ScriptContext1_SetupScript(UseRockSmashScript);
 }
 
@@ -171,7 +171,7 @@ static void sub_810B5D8(void)
 {
     sub_8053014();
     FieldEffectStart(0x26);
-    gFieldEffectSpawnParams[0] = gLastFieldPokeMenuOpened;
+    gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
 }
 
 int FldEff_UseDig(void)
