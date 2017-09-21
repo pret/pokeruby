@@ -97,7 +97,7 @@ static int sub_8045F58(s32, s32, int, int *, u8, u16);
 static u8 GetScaledExpFraction(int, int, int, u8);
 static void sub_8045D58(u8, u8);
 static u8 sub_804602C(int, int, int, int *, u8 *, u8);
-static void sub_8046128(struct BattleInterfaceStruct1 *a, int *b, void *c);
+static void sub_8046128(struct BattleInterfaceStruct1 *a, int *b, u16 *c);
 
 static int do_nothing(s16 unused1, s16 unused2, int unused3)
 {
@@ -2972,7 +2972,7 @@ static u8 sub_804602C(int a, int b, int c, int *d, u8 *e, u8 f)
     return r3;
 }
 
-s16 sub_80460C8(struct BattleInterfaceStruct1 *a, int *b, void *c, int d)
+s16 sub_80460C8(struct BattleInterfaceStruct1 *a, int *b, u16 *c, int d)
 {
     u16 r7;
     s16 r1;
@@ -2987,7 +2987,7 @@ s16 sub_80460C8(struct BattleInterfaceStruct1 *a, int *b, void *c, int d)
     return r7;
 }
 
-static void sub_8046128(struct BattleInterfaceStruct1 *a, int *b, void *c)
+static void sub_8046128(struct BattleInterfaceStruct1 *a, int *b, u16 *c)
 {
     u8 sp8[6];
     u16 sp10[6];

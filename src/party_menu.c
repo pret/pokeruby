@@ -74,13 +74,15 @@ extern u16 gMoveToLearn;
 
 //extern const u16 gUnknown_083769A8[][6];
 //extern const u8 gUnknown_083769A8[][12];
-extern void *const gUnknown_08376858[][6];
+extern u16 *const gUnknown_08376858[][6];
 extern const u8 gUnknown_083769A8[];
 extern const u8 gUnknown_08376D1C[NUM_STATS];
 extern const u16 gUnknown_08376504[];
 extern void (*const gUnknown_08376B54[])(u8);
 extern const u8 *const gUnknown_08376D04[NUM_STATS];
 extern const struct UnknownStruct5 gUnknown_08376BB4[][6];
+extern u8 gUnknown_02039460[];
+extern u8 gTileBuffer[];
 
 static void sub_806E884(u8 taskId);
 static void sub_8070D90(u8 taskId);
@@ -109,6 +111,107 @@ void sub_806AEDC(void)
 #define WINDOW_RIGHT (29)
 #endif
 
+
+void PartyMenuDoPrintHP(u8 monIndex, u8 b, u16 currentHP, u16 maxHP)
+{
+    u32 *var;
+    register u8 *stringVar1 asm("r2") = gStringVar1;
+    register u8 *textPtr asm("r2") = sub_8072C14(stringVar1, currentHP, 15, 1);
+    textPtr[0] = CHAR_SLASH;
+
+    sub_8072C14(++textPtr, maxHP, 35, 1);
+    var = 0;
+
+    CpuFastSet(&var, gUnknown_02039460, 0x1000040);
+    sub_8004E3C((struct WindowConfig *)&gWindowConfig_81E6CAC, gUnknown_02039460 - 0x100, gStringVar1);
+    CpuFastSet(gUnknown_02039460, (void *)(OBJ_VRAM1 + 0x300 + (monIndex * 0x400)), 64);
+}
+
+void PartyMenuPrintHP(u8 monIndex, u8 b, struct Pokemon *pokemon)
+{
+    u16 currentHP;
+    u16 maxHP;
+
+    currentHP = GetMonData(pokemon, MON_DATA_HP);
+    maxHP = GetMonData(pokemon, MON_DATA_MAX_HP);
+
+    PartyMenuDoPrintHP(monIndex, b, currentHP, maxHP);
+}
+
+void PartyMenuTryPrintHP(u8 monIndex, struct Pokemon *pokemon)
+{
+    if (GetMonData(pokemon, MON_DATA_SPECIES) && !GetMonData(pokemon, MON_DATA_IS_EGG))
+    {
+        u8 isDoubleBattle = IsLinkDoubleBattle();
+        if (isDoubleBattle == TRUE)
+        {
+            PartyMenuPrintHP(monIndex, 2, pokemon);
+        }
+        else
+        {
+            PartyMenuPrintHP(monIndex, IsDoubleBattle(), pokemon);
+        }
+    }
+}
+
+void PartyMenuTryPrintMonsHP(void)
+{
+    u8 i;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        PartyMenuTryPrintHP(i, &gPlayerParty[i]);
+    }
+}
+
+void unref_sub_806E564(void) { }
+void unref_sub_806E568(void) { }
+void nullsub_12(void) { }
+void nullsub_13(void) { }
+
+void PartyMenuDoDrawHPBar(u8 monIndex, u8 b, u16 currentHP, u16 maxHP)
+{
+    u8 hpBarLevel;
+    u16 *vramPtr;
+    int var = -32768;
+    struct BattleInterfaceStruct1 battleInterface;
+    battleInterface.unk0 = maxHP;
+    battleInterface.unk4 = currentHP;
+    battleInterface.unk8 = 0;
+
+    hpBarLevel = GetHPBarLevel(currentHP, maxHP);
+    if (hpBarLevel > 2)
+    {
+        battleInterface.unkC_0 = 4;
+    }
+    if (hpBarLevel == 2)
+    {
+        battleInterface.unkC_0 = 5;
+    }
+    if (hpBarLevel < 2)
+    {
+        battleInterface.unkC_0 = 6;
+    }
+
+    battleInterface.unk10 = 0x100;
+
+    vramPtr = gUnknown_08376858[b][monIndex];
+    sub_80460C8(&battleInterface, &var, vramPtr, 0);
+
+    vramPtr -= 2;
+
+    vramPtr[0] = 0x3109;
+    vramPtr[1] = 0x310A;
+    vramPtr[8] = 0x310B;
+}
+
+void PartyMenuDrawHPBar(u8 monIndex, u8 b, struct Pokemon *pokemon)
+{
+    u16 currentHP = GetMonData(pokemon, MON_DATA_HP);
+    u16 maxHP = GetMonData(pokemon, MON_DATA_MAX_HP);
+
+    PartyMenuDoDrawHPBar(monIndex, b, currentHP, maxHP);
+}
 
 void PartyMenuTryDrawHPBar(u8 monIndex, struct Pokemon *pokemon)
 {

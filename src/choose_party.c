@@ -76,7 +76,6 @@ extern bool8 sub_80F9344(void);
 extern void sub_806D4AC();
 extern void sub_806D3B4();
 extern void PartyMenuDoPrintLevel(u8, u8, u8);
-extern void PartyMenuDoDrawHPBar(u8, u8, u16, u16);
 extern void PartyMenuDoPutNicknameTilemap(u16, u8, u8, u8, const u8 *);
 extern void box_print(u8, int, const u8 *);
 extern void sub_806BCE8(void);
