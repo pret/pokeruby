@@ -9,7 +9,7 @@
 #include "menu.h"
 #include "palette.h"
 #include "text.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "task.h"
 #include "sound.h"
 #include "songs.h"
@@ -2385,7 +2385,7 @@ void sub_8088890(struct Sprite *);
 bool8 FldEff_FieldMoveShowMon(void)
 {
     u8 taskId;
-    if (is_light_level_1_2_3_5_or_6(sav1_map_get_light_level()) == TRUE)
+    if (is_map_type_1_2_3_5_or_6(Overworld_GetMapTypeOfSaveblockLocation()) == TRUE)
     {
         taskId = CreateTask(sub_8088120, 0xff);
     } else
@@ -2881,7 +2881,7 @@ u8 FldEff_UseSurf(void)
     taskId = CreateTask(sub_8088954, 0xff);
     gTasks[taskId].data[15] = gFieldEffectArguments[0];
     sav1_reset_battle_music_maybe();
-    sub_8053FB0(0x016d);
+    Overworld_ChangeMusicTo(0x016d);
     return FALSE;
 }
 

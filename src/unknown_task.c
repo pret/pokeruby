@@ -2,11 +2,12 @@
 #include "data2.h"
 #include "task.h"
 #include "trig.h"
+#include "unknown_task.h"
 
 struct UnknownStruct1
 {
     void *src[2];
-    void *dest;
+    volatile void *dest;
     u32 unkC;
     void (*unk10)(void);
     u8 srcBank;
@@ -15,14 +16,6 @@ struct UnknownStruct1
     u8 unk17;
     u8 taskId;
     u8 filler19[0x7];
-};
-
-struct UnknownStruct2
-{
-    void *dest;
-    u32 control;
-    u8 unk8;
-    u8 unk9;
 };
 
 static void sub_80896F4(void);
@@ -68,7 +61,7 @@ void dp12_8087EA4(void)
     gUnknown_03004DC0.taskId = 0xFF;
 }
 
-void sub_80895F8(struct UnknownStruct2 unk)
+void sub_80895F8(struct UnknownTaskStruct unk)
 {
     if (unk.control == (((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_DEST_RELOAD) << 16) | 1))
     {
@@ -214,7 +207,7 @@ u8 sub_8089944(u8 a1, u8 a2, u8 a3, u8 a4, u8 a5, u8 a6, u8 a7)
 {
     int i;
     int offset;
-    struct UnknownStruct2 unk;
+    struct UnknownTaskStruct unk;
     u8 taskId;
 
     dp12_8087EA4();

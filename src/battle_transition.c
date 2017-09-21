@@ -1,7 +1,7 @@
 #include "global.h"
 #include "battle_transition.h"
 #include "main.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "task.h"
 #include "palette.h"
 #include "trig.h"
@@ -530,13 +530,13 @@ static const u16 sMugshotsTilemap[] = INCBIN_U16("graphics/battle_transitions/el
 
 // actual code starts here
 
-void sub_811AABC(u8 transitionID)
+void BattleTransition_StartOnField(u8 transitionID)
 {
-    gMain.callback2 = sub_8054398;
+    gMain.callback2 = CB2_OverworldBasic;
     LaunchBattleTransitionTask(transitionID);
 }
 
-void sub_811AAD8(u8 transitionID)
+void BattleTransition_Start(u8 transitionID)
 {
     LaunchBattleTransitionTask(transitionID);
 }

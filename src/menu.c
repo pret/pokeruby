@@ -154,9 +154,9 @@ void MenuPrint(const u8 *str, u8 left, u8 top)
     sub_8003460(gMenuWindowPtr, str, gMenuTextTileOffset, left, top);
 }
 
-void MenuZeroFillWindowRect(u8 a1, u8 a2, u8 a3, u8 a4)
+void MenuZeroFillWindowRect(u8 left, u8 top, u8 right, u8 bottom)
 {
-    ZeroFillWindowRect(gMenuWindowPtr, a1, a2, a3, a4);
+    ZeroFillWindowRect(gMenuWindowPtr, left, top, right, bottom);
 }
 
 void MenuFillWindowRectWithBlankTile(u8 left, u8 top, u8 right, u8 bottom)
@@ -205,7 +205,7 @@ void MenuPrintMessage(const u8 *str, u8 left, u8 top)
     sub_8002EB0(gMenuWindowPtr, str, gMenuTextTileOffset, left, top);
 }
 
-void sub_8072044(const u8 *str)
+void MenuPrintMessageDefaultCoords(const u8 *str)
 {
     sub_8002EB0(gMenuWindowPtr, str, gMenuTextTileOffset, 2, 15);
 }
@@ -571,7 +571,7 @@ void PrintMenuItems(u8 left, u8 top, u8 menuItemCount, const struct MenuAction m
         MenuPrint(menuItems[i].text, left, top + 2 * i);
 }
 
-void PrintMenuItemsReordered(u8 left, u8 top, u8 menuItemCount, const struct MenuAction menuItems[], const u8 *order)
+void PrintMenuItemsReordered(u8 left, u8 top, u8 menuItemCount, const struct MenuAction2 menuItems[], const u8 *order)
 {
     u8 i;
 

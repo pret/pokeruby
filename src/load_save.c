@@ -3,7 +3,7 @@
 #include "load_save.h"
 #include "main.h"
 #include "pokemon.h"
-#include "rom4.h"
+#include "overworld.h"
 
 extern u8 gPlayerPartyCount;
 

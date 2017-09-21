@@ -15,7 +15,7 @@
 #include "species.h"
 #include "pokedex.h"
 #include "naming_screen.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "map_constants.h"
 #include "strings.h"
 #include "battle.h"
@@ -31,7 +31,7 @@
 #include "pokedex.h"
 #include "region_map.h"
 #include "rng.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "rtc.h"
 #include "script_menu.h"
 #include "species.h"
@@ -235,7 +235,7 @@ void UpdateTVScreensOnMap(int width, int height)
         }
         else if (FlagGet(SYS_TV_START) && (sub_80BD8B8() != 0xff || sub_80BECA0() != 0xff || IsTVShowInSearchOfTrainersAiring()))
         {
-            FlagReset(SYS_TV_WATCH);
+            FlagClear(SYS_TV_WATCH);
             SetTVMetatilesOnMap(width, height, 0x3);
         }
         break;
@@ -942,7 +942,6 @@ void sub_80BE97C(bool8 flag)
 
 void sub_80BE9D4(void)
 {
-    //TVShow *show;
     gUnknown_03005D38.var0 = sub_80BF74C(gSaveBlock1.tvShows);
     if (gUnknown_03005D38.var0 != -1 && sub_80BF1B4(TVSHOW_FISHING_ADVICE) != 1)
     {

@@ -14,9 +14,9 @@ Route110_MapObjects:: @ 8381D58
 	object_event 13, MAP_OBJ_GFX_LASS, 0, 33, 0, 15, 0, 3, 9, 0, 0, 1, 0, 1, 0, Route110_EventScript_14FAA5, 0, 0, 0
 	object_event 14, MAP_OBJ_GFX_MANIAC, 0, 23, 0, 40, 0, 3, 20, 0, 0, 1, 0, 3, 0, Route110_EventScript_14FABC, 0, 0, 0
 	object_event 15, MAP_OBJ_GFX_FISHERMAN, 0, 10, 0, 19, 0, 3, 8, 0, 0, 1, 0, 1, 0, Route110_EventScript_14FAFA, 0, 0, 0
-	object_event 16, MAP_OBJ_GFX_BERRY_TREE, 0, 5, 0, 11, 0, 3, 12, 0, 0, 0, 0, 16, 0, BerryTreeScript, 0, 0, 0
-	object_event 17, MAP_OBJ_GFX_BERRY_TREE, 0, 6, 0, 11, 0, 3, 12, 0, 0, 0, 0, 17, 0, BerryTreeScript, 0, 0, 0
-	object_event 18, MAP_OBJ_GFX_BERRY_TREE, 0, 7, 0, 11, 0, 3, 12, 0, 0, 0, 0, 18, 0, BerryTreeScript, 0, 0, 0
+	object_event 16, MAP_OBJ_GFX_BERRY_TREE, 0, 5, 0, 11, 0, 3, 12, 0, 0, 0, 0, 16, 0, S_BerryTree, 0, 0, 0
+	object_event 17, MAP_OBJ_GFX_BERRY_TREE, 0, 6, 0, 11, 0, 3, 12, 0, 0, 0, 0, 17, 0, S_BerryTree, 0, 0, 0
+	object_event 18, MAP_OBJ_GFX_BERRY_TREE, 0, 7, 0, 11, 0, 3, 12, 0, 0, 0, 0, 18, 0, S_BerryTree, 0, 0, 0
 	object_event 19, MAP_OBJ_GFX_ITEM_BALL, 0, 30, 0, 69, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route110_EventScript_1B14BB, 1007, 0, 0
 	object_event 20, MAP_OBJ_GFX_ITEM_BALL, 0, 26, 0, 47, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route110_EventScript_1B14AE, 1006, 0, 0
 	object_event 21, MAP_OBJ_GFX_CYCLING_TRIATHLETE_M, 0, 27, 0, 92, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route110_EventScript_14FA53, 0, 0, 0

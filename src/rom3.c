@@ -1081,10 +1081,10 @@ void EmitFaintingCry(u8 a)
     PrepareBufferDataTransfer(a, gBattleBuffersTransferData, 4);
 }
 
-void EmitIntroSlide(u8 a, u8 b)
+void EmitIntroSlide(u8 a, u8 battleTerrain)
 {
     gBattleBuffersTransferData[0] = 46;
-    gBattleBuffersTransferData[1] = b;
+    gBattleBuffersTransferData[1] = battleTerrain;
     PrepareBufferDataTransfer(a, gBattleBuffersTransferData, 2);
 }
 

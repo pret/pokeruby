@@ -8,7 +8,7 @@
 #include "fieldmap.h"
 #include "main.h"
 #include "palette.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "script.h"
 #include "script_movement.h"
 #include "songs.h"
@@ -273,7 +273,7 @@ void Task_HandlePorthole(u8 taskId)
     case IDLE_CHECK: // idle and move.
         if (gMain.newKeys & A_BUTTON)
             data[1] = 1;
-        if (!sub_80A212C(0xFF, location->mapNum, location->mapGroup))
+        if (!ScriptMovement_IsObjectMovementFinished(0xFF, location->mapNum, location->mapGroup))
             return;
         if (CountSSTidalStep(1) == TRUE)
         {
@@ -294,18 +294,18 @@ void Task_HandlePorthole(u8 taskId)
         // run this once.
         if (*var == 2) // which direction?
         {
-            exec_movement(0xFF, location->mapNum, location->mapGroup, gUnknown_083D295F);
+            ScriptMovement_StartObjectMovementScript(0xFF, location->mapNum, location->mapGroup, gUnknown_083D295F);
             data[0] = IDLE_CHECK; // run case 1.
         }
         else
         {
-            exec_movement(0xFF, location->mapNum, location->mapGroup, gUnknown_083D2961);
+            ScriptMovement_StartObjectMovementScript(0xFF, location->mapNum, location->mapGroup, gUnknown_083D2961);
             data[0] = IDLE_CHECK; // run case 1.
         }
         break;
     case EXIT_PORTHOLE: // exit porthole.
-        FlagReset(0x4001);
-        FlagReset(0x4000);
+        FlagClear(0x4001);
+        FlagClear(0x4000);
         copy_saved_warp2_bank_and_enter_x_to_warp1(0);
         sp13E_warp_to_last_warp();
         DestroyTask(taskId);

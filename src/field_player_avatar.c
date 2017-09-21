@@ -14,7 +14,7 @@
 #include "metatile_behavior.h"
 #include "party_menu.h"
 #include "rng.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "rotating_gate.h"
 #include "script.h"
 #include "songs.h"
@@ -669,7 +669,7 @@ void PlayerAvatarTransition_Surfing(struct MapObject *a)
     gFieldEffectArguments[0] = a->coords2.x;
     gFieldEffectArguments[1] = a->coords2.y;
     gFieldEffectArguments[2] = gPlayerAvatar.mapObjectId;
-    unk = FieldEffectStart(8);
+    unk = FieldEffectStart(FLDEFF_SURF_BLOB);
     a->mapobj_unk_1A = unk;
     sub_8127ED0(unk, 1);
 }
@@ -1230,7 +1230,7 @@ u8 sub_8059EA4(struct Task *task, struct MapObject *b, struct MapObject *c)
         gFieldEffectArguments[1] = c->coords2.y;
         gFieldEffectArguments[2] = c->elevation;
         gFieldEffectArguments[3] = gSprites[c->spriteId].oam.priority;
-        FieldEffectStart(10);
+        FieldEffectStart(FLDEFF_DUST);
         PlaySE(SE_W070);
         task->data[0]++;
     }
@@ -1406,7 +1406,7 @@ static void sub_805A2D0(u8 taskId)
 
 /* Fishing */
 
-static u8 (*const gUnknown_0830FCB4[])(struct Task *) =
+static u8 (*const sFishingStateFuncs[])(struct Task *) =
 {
     Fishing1,
     Fishing2,
@@ -1429,17 +1429,33 @@ static u8 (*const gUnknown_0830FCB4[])(struct Task *) =
 static void Task_Fishing(u8 taskId);
 static void sub_805A954(void);
 
-void StartFishing(u8 a)
+#define tStep              data[0]
+#define tFrameCounter      data[1]
+#define tNumDots           data[2]
+#define tDotsRequired      data[3]
+#define tRoundsPlayed      data[12]
+#define tMinRoundsRequired data[13]
+#define tPlayerGfxId       data[14]
+#define tFishingRod        data[15]
+
+#define FISHING_START_ROUND 3
+#define FISHING_GOT_BITE 6
+#define FISHING_ON_HOOK 9
+#define FISHING_NO_BITE 11
+#define FISHING_GOT_AWAY 12
+#define FISHING_SHOW_RESULT 13
+
+void StartFishing(u8 rod)
 {
     u8 taskId = CreateTask(Task_Fishing, 0xFF);
 
-    gTasks[taskId].data[15] = a;
+    gTasks[taskId].tFishingRod = rod;
     Task_Fishing(taskId);
 }
 
 static void Task_Fishing(u8 taskId)
 {
-    while (gUnknown_0830FCB4[gTasks[taskId].data[0]](&gTasks[taskId]))
+    while (sFishingStateFuncs[gTasks[taskId].tStep](&gTasks[taskId]))
         ;
 }
 
@@ -1447,7 +1463,7 @@ u8 Fishing1(struct Task *task)
 {
     ScriptContext2_Enable();
     gPlayerAvatar.unk6 = 1;
-    task->data[0]++;
+    task->tStep++;
     return 0;
 }
 
@@ -1457,23 +1473,25 @@ u8 Fishing2(struct Task *task)
     const s16 arr1[] = {1, 1, 1};
     const s16 arr2[] = {1, 3, 6};
 
-    task->data[12] = 0;
-    task->data[13] = arr1[task->data[15]] + (Random() % arr2[task->data[15]]);
-    task->data[14] = gMapObjects[gPlayerAvatar.mapObjectId].graphicsId;
+    task->tRoundsPlayed = 0;
+    task->tMinRoundsRequired = arr1[task->tFishingRod] + (Random() % arr2[task->tFishingRod]);
+    task->tPlayerGfxId = gMapObjects[gPlayerAvatar.mapObjectId].graphicsId;
     playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
     FieldObjectClearAnimIfSpecialAnimActive(playerMapObj);
     playerMapObj->mapobj_bit_11 = 1;
     sub_8059C3C(playerMapObj->mapobj_unk_18);
-    task->data[0]++;
+    task->tStep++;
     return 0;
 }
 
 u8 Fishing3(struct Task *task)
 {
     sub_805A954();
-    task->data[1]++;
-    if (task->data[1] > 0x3B)
-        task->data[0]++;
+    
+    // Wait one second before starting dot game
+    task->tFrameCounter++;
+    if (task->tFrameCounter >= 60)
+        task->tStep++;
     return 0;
 }
 
@@ -1482,87 +1500,92 @@ u8 Fishing4(struct Task *task)
     u32 randVal;
 
     MenuDisplayMessageBox();
-    task->data[0]++;
-    task->data[1] = 0;
-    task->data[2] = 0;
+    task->tStep++;
+    task->tFrameCounter = 0;
+    task->tNumDots = 0;
     randVal = Random();
     randVal %= 10;
-    task->data[3] = randVal + 1;
-    if (task->data[12] == 0)
-        task->data[3] = randVal + 4;
-    if (task->data[3] > 9)
-        task->data[3] = 10;
+    task->tDotsRequired = randVal + 1;
+    if (task->tRoundsPlayed == 0)
+        task->tDotsRequired = randVal + 4;
+    if (task->tDotsRequired >= 10)
+        task->tDotsRequired = 10;
     return 1;
 }
 
+// Play a round of the dot game
 u8 Fishing5(struct Task *task)
 {
     const u8 dot[] = _("·");
 
     sub_805A954();
-    task->data[1]++;
+    task->tFrameCounter++;
     if (gMain.newKeys & A_BUTTON)
     {
-        task->data[0] = 11;
-        if (task->data[12] != 0)
-            task->data[0] = 12;
+        task->tStep = FISHING_NO_BITE;
+        if (task->tRoundsPlayed != 0)
+            task->tStep = FISHING_GOT_AWAY;
         return 1;
     }
     else
     {
-        if (task->data[1] > 0x13)
+        if (task->tFrameCounter >= 20)
         {
-            task->data[1] = 0;
-            if (task->data[2] >= task->data[3])
+            task->tFrameCounter = 0;
+            if (task->tNumDots >= task->tDotsRequired)
             {
-                task->data[0]++;
-                if (task->data[12] != 0)
-                    task->data[0]++;
-                task->data[12]++;
+                task->tStep++;
+                if (task->tRoundsPlayed != 0)
+                    task->tStep++;
+                task->tRoundsPlayed++;
             }
             else
             {
-                MenuPrint(dot, task->data[2] + 4, 15);
-                task->data[2]++;
+                MenuPrint(dot, task->tNumDots + 4, 15);
+                task->tNumDots++;
             }
         }
         return 0;
     }
 }
 
+// Determine if fish bites
 u8 Fishing6(struct Task *task)
 {
     sub_805A954();
-    task->data[0]++;
-    if (!GetFishingWildMonListHeader() || (Random() & 1))
-        task->data[0] = 11;
+    task->tStep++;
+    if (!DoesCurrentMapHaveFishingMons() || (Random() & 1))
+        task->tStep = FISHING_NO_BITE;
     else
         StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], sub_805FE08(player_get_direction_lower_nybble()));
     return 1;
 }
 
+// Oh! A Bite!
 u8 Fishing7(struct Task *task)
 {
     sub_805A954();
     MenuPrint(gOtherText_OhABite, 4, 17);
-    task->data[0]++;
-    task->data[1] = 0;
+    task->tStep++;
+    task->tFrameCounter = 0;
     return 0;
 }
 
+// We have a bite. Now, wait for the player to press A, or the timer to expire.
 u8 Fishing8(struct Task *task)
 {
-    const s16 arr[3] = {36, 33, 30};
+    const s16 reelTimeouts[3] = {36, 33, 30};
 
     sub_805A954();
-    task->data[1]++;
-    if (task->data[1] >= arr[task->data[15]])
-        task->data[0] = 12;
+    task->tFrameCounter++;
+    if (task->tFrameCounter >= reelTimeouts[task->tFishingRod])
+        task->tStep = FISHING_GOT_AWAY;
     else if (gMain.newKeys & A_BUTTON)
-        task->data[0]++;
+        task->tStep++;
     return 0;
 }
 
+// Determine if we're going to play the dot game again
 u8 Fishing9(struct Task *task)
 {
     const s16 arr[][2] =
@@ -1573,17 +1596,18 @@ u8 Fishing9(struct Task *task)
     };
 
     sub_805A954();
-    task->data[0]++;
-    if (task->data[12] < task->data[13])
+    task->tStep++;
+    if (task->tRoundsPlayed < task->tMinRoundsRequired)
     {
-        task->data[0] = 3;
+        task->tStep = FISHING_START_ROUND;
     }
-    else if (task->data[12] < 2)
+    else if (task->tRoundsPlayed < 2)
     {
-        s16 randVal = Random() % 100;
+        // probability of having to play another round
+        s16 probability = Random() % 100;
 
-        if (arr[task->data[15]][task->data[12]] > randVal)
-            task->data[0] = 3;
+        if (arr[task->tFishingRod][task->tRoundsPlayed] > probability)
+            task->tStep = FISHING_START_ROUND;
     }
     return 0;
 }
@@ -1591,72 +1615,73 @@ u8 Fishing9(struct Task *task)
 u8 Fishing10(struct Task *task)
 {
     sub_805A954();
-    sub_8072044(gOtherText_PokeOnHook);
+    MenuPrintMessageDefaultCoords(gOtherText_PokeOnHook);
     MenuDisplayMessageBox();
-    task->data[0]++;
-    task->data[1] = 0;
+    task->tStep++;
+    task->tFrameCounter = 0;
     return 0;
 }
 
 u8 Fishing11(struct Task *task)
 {
-    if (task->data[1] == 0)
-    {
+    if (task->tFrameCounter == 0)
         sub_805A954();
-        if (task->data[1] == 0)
-        {
-            if (MenuUpdateWindowText())
-            {
-                struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
 
-                sub_805B980(playerMapObj, task->data[14]);
-                FieldObjectTurn(playerMapObj, playerMapObj->placeholder18);
-                if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
-                    sub_8127F28(gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_1A, 0, 0);
-                gSprites[gPlayerAvatar.spriteId].pos2.x = 0;
-                gSprites[gPlayerAvatar.spriteId].pos2.y = 0;
-                MenuZeroFillScreen();
-                task->data[1]++;
-                return 0;
-            }
-            else
-            {
-                if (task->data[1] == 0)
-                    return 0;
-            }
+    if (task->tFrameCounter == 0)
+    {
+        if (MenuUpdateWindowText())
+        {
+            struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
+
+            sub_805B980(playerMapObj, task->tPlayerGfxId);
+            FieldObjectTurn(playerMapObj, playerMapObj->placeholder18);
+            if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
+                sub_8127F28(gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_1A, 0, 0);
+            gSprites[gPlayerAvatar.spriteId].pos2.x = 0;
+            gSprites[gPlayerAvatar.spriteId].pos2.y = 0;
+            MenuZeroFillScreen();
+            task->tFrameCounter++;
+            return 0;
         }
     }
-    gPlayerAvatar.unk6 = 0;
-    ScriptContext2_Disable();
-    FishingWildEncounter(task->data[15]);
-    sub_80BE97C(1);
-    DestroyTask(FindTaskIdByFunc(Task_Fishing));
+
+    if (task->tFrameCounter != 0)
+    {
+        gPlayerAvatar.unk6 = 0;
+        ScriptContext2_Disable();
+        FishingWildEncounter(task->tFishingRod);
+        sub_80BE97C(1);
+        DestroyTask(FindTaskIdByFunc(Task_Fishing));
+    }
     return 0;
 }
 
+// Not even a nibble
 u8 Fishing12(struct Task *task)
 {
     sub_805A954();
     StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], sub_805FDF8(player_get_direction_lower_nybble()));
-    sub_8072044(gOtherText_NotEvenANibble);
-    task->data[0] = 13;
+    MenuPrintMessageDefaultCoords(gOtherText_NotEvenANibble);
+    task->tStep = FISHING_SHOW_RESULT;
     return 1;
 }
 
+// It got away
 u8 Fishing13(struct Task *task)
 {
     sub_805A954();
     StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], sub_805FDF8(player_get_direction_lower_nybble()));
-    sub_8072044(gOtherText_ItGotAway);
-    task->data[0]++;
+    MenuPrintMessageDefaultCoords(gOtherText_ItGotAway);
+    task->tStep++;
     return 1;
 }
 
+// Display the message
 u8 Fishing14(struct Task *task)
 {
     sub_805A954();
     MenuDisplayMessageBox();
-    task->data[0]++;
+    task->tStep++;
     return 0;
 }
 
@@ -1667,13 +1692,13 @@ u8 Fishing15(struct Task *task)
     {
         struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
 
-        sub_805B980(playerMapObj, task->data[14]);
+        sub_805B980(playerMapObj, task->tPlayerGfxId);
         FieldObjectTurn(playerMapObj, playerMapObj->placeholder18);
         if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
             sub_8127F28(gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_1A, 0, 0);
         gSprites[gPlayerAvatar.spriteId].pos2.x = 0;
         gSprites[gPlayerAvatar.spriteId].pos2.y = 0;
-        task->data[0]++;
+        task->tStep++;
     }
     return 0;
 }
@@ -1691,6 +1716,10 @@ u8 Fishing16(struct Task *task)
     }
     return 0;
 }
+
+#undef tStep
+#undef tFrameCounter
+#undef tFishingRod
 
 static void sub_805A954(void)
 {

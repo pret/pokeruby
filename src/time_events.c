@@ -4,7 +4,7 @@
 #include "field_weather.h"
 #include "pokemon.h"
 #include "rng.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "rtc.h"
 #include "script.h"
 #include "task.h"
@@ -81,13 +81,13 @@ void UpdateShoalTideFlag(void)
         1,
     };
 
-    if (is_light_level_1_2_3_5_or_6(get_map_light_from_warp0()))
+    if (is_map_type_1_2_3_5_or_6(get_map_type_from_warp0()))
     {
         RtcCalcLocalTime();
         if (tide[gLocalTime.hours])
             FlagSet(SYS_SHOAL_TIDE);
         else
-            FlagReset(SYS_SHOAL_TIDE);
+            FlagClear(SYS_SHOAL_TIDE);
     }
 }
 

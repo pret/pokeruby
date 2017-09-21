@@ -118,7 +118,7 @@ gUnknown_03004828: @ 3004828
 	.space 0x8
 
 	.include "berry_blender.o"
-	.include "rom4.o"
+	.include "overworld.o"
 	.include "fieldmap.o"
 	.include "field_camera.o"
 	.include "field_map_obj.o"

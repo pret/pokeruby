@@ -1,4 +1,4 @@
-BerryTreeScript:: @ 81A14DD
+S_BerryTree:: @ 81A14DD
 	special FieldObjectInteractionGetBerryTreeData
 	switch 0x8004
 	case 255, Route102_EventScript_1A1533

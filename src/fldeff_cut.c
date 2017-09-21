@@ -8,7 +8,7 @@
 #include "metatile_behavior.h"
 #include "metatile_behaviors.h"
 #include "pokemon_menu.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "rom6.h"
 #include "script.h"
 #include "songs.h"
@@ -28,7 +28,7 @@ extern struct MapPosition gUnknown_0203923C;
 
 extern u8 gLastFieldPokeMenuOpened;
 
-extern u8 UseCutScript;
+extern u8 S_UseCut[];
 
 bool8 SetUpFieldMove_Cut(void)
 {
@@ -38,7 +38,7 @@ bool8 SetUpFieldMove_Cut(void)
 
     if(npc_before_player_of_type(0x52) == TRUE) // is in front of tree?
     {
-        gFieldCallback = sub_808AB90;
+        gFieldCallback = FieldCallback_Teleport;
         gUnknown_03005CE4 = sub_80A2634;
         return TRUE;
     }
@@ -57,7 +57,7 @@ bool8 SetUpFieldMove_Cut(void)
                     if(MetatileBehavior_IsPokeGrass(tileBehavior) == TRUE
                     || MetatileBehavior_IsAshGrass(tileBehavior) == TRUE)
                     {
-                        gFieldCallback = sub_808AB90;
+                        gFieldCallback = FieldCallback_Teleport;
                         gUnknown_03005CE4 = sub_80A25E8;
                         return TRUE;
                     }
@@ -70,7 +70,7 @@ bool8 SetUpFieldMove_Cut(void)
 
 void sub_80A25E8(void)
 {
-    FieldEffectStart(1);
+    FieldEffectStart(FLDEFF_USE_CUT_ON_GRASS);
     gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
 }
 
@@ -87,7 +87,7 @@ bool8 FldEff_UseCutOnGrass(void)
 void sub_80A2634(void)
 {
     gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
-    ScriptContext1_SetupScript(&UseCutScript);
+    ScriptContext1_SetupScript(S_UseCut);
 }
 
 bool8 FldEff_UseCutOnTree(void)
@@ -102,8 +102,8 @@ bool8 FldEff_UseCutOnTree(void)
 
 void sub_80A2684(void)
 {
-    FieldEffectActiveListRemove(1);
-    FieldEffectStart(0x3A);
+    FieldEffectActiveListRemove(FLDEFF_USE_CUT_ON_GRASS);
+    FieldEffectStart(FLDEFF_CUT_GRASS);
 }
 
 bool8 FldEff_CutGrass(void)
@@ -272,19 +272,16 @@ void sub_80A2AB8(void)
 {
     u8 i;
 
-    for(i = 1; i < 8; i++)
-    {
+    for (i = 1; i < 8; i++)
         DestroySprite(&gSprites[gCutGrassSpriteArray[i]]);
-    }
-
-    FieldEffectStop(&gSprites[gCutGrassSpriteArray[0]], 0x3A);
+    FieldEffectStop(&gSprites[gCutGrassSpriteArray[0]], FLDEFF_CUT_GRASS);
     sub_8064E2C();
     ScriptContext2_Disable();
 }
 
 void sub_80A2B00(void)
 {
-    PlaySE(0x80);
-    FieldEffectActiveListRemove(2);
+    PlaySE(SE_W015);
+    FieldEffectActiveListRemove(FLDEFF_USE_CUT_ON_TREE);
     EnableBothScriptContexts();
 }

@@ -173,6 +173,20 @@
 #define WEATHER_SUN_ANY ((WEATHER_SUN_TEMPORARY | WEATHER_SUN_PERMANENT))
 #define WEATHER_HAIL                (1 << 7)
 
+enum
+{
+    BATTLE_TERRAIN_GRASS,
+    BATTLE_TERRAIN_LONG_GRASS,
+    BATTLE_TERRAIN_SAND,
+    BATTLE_TERRAIN_UNDERWATER,
+    BATTLE_TERRAIN_WATER,
+    BATTLE_TERRAIN_POND,
+    BATTLE_TERRAIN_MOUNTAIN,
+    BATTLE_TERRAIN_CAVE,
+    BATTLE_TERRAIN_BUILDING,
+    BATTLE_TERRAIN_PLAIN,
+};
+
 // needed to match the hack that is get_item, thanks cam, someone else clean this up later.
 extern u8 unk_2000000[];
 

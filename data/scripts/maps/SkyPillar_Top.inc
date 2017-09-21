@@ -21,7 +21,7 @@ SkyPillar_Top_EventScript_15F316:: @ 815F316
 	waitpokecry
 	setflag 773
 	setflag 2145
-	special StartBattle_Rayquaza
+	special ScrSpecial_StartRayquazaBattle
 	waitstate
 	clearflag 2145
 	release

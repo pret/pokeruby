@@ -11,7 +11,7 @@
 #include "fieldmap.h"
 #include "palette.h"
 #include "rng.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "sprite.h"
 #include "metatile_behavior.h"
 #include "map_constants.h"
@@ -3241,7 +3241,7 @@ struct MapObjectTemplate *GetFieldObjectTemplateByLocalIdAndMap(u8 localId, u8 m
         return FindFieldObjectTemplateInArrayByLocalId(localId, gSaveBlock1.mapObjectTemplates, gMapHeader.events->mapObjectCount);
     else
     {
-        struct MapHeader *mapHeader = get_mapheader_by_bank_and_number(mapGroup, mapNum);
+        struct MapHeader *mapHeader = Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum);
 
         return FindFieldObjectTemplateInArrayByLocalId(localId, mapHeader->events->mapObjects, mapHeader->events->mapObjectCount);
     }
@@ -3896,7 +3896,7 @@ u8 do_berry_tree_growth_sparkle_1(struct MapObject *mapObject, struct Sprite *sp
             gFieldEffectArguments[1] = mapObject->coords2.y;
             gFieldEffectArguments[2] = sprite->subpriority - 1;
             gFieldEffectArguments[3] = sprite->oam.priority;
-            FieldEffectStart(0x17);
+            FieldEffectStart(FLDEFF_BERRY_TREE_GROWTH_SPARKLE);
             sprite->animNum = 0;
         }
         return 0;
@@ -3935,7 +3935,7 @@ u8 do_berry_tree_growth_sparkle_2(struct MapObject *mapObject, struct Sprite *sp
     gFieldEffectArguments[1] = mapObject->coords2.y;
     gFieldEffectArguments[2] = sprite->subpriority - 1;
     gFieldEffectArguments[3] = sprite->oam.priority;
-    FieldEffectStart(0x17);
+    FieldEffectStart(FLDEFF_BERRY_TREE_GROWTH_SPARKLE);
     return 1;
 }
 
@@ -5084,7 +5084,7 @@ void FieldObjectCB_TreeDisguise(struct Sprite *sprite)
     if (mapObject->mapobj_unk_21 == 0 || (mapObject->mapobj_unk_21 == 1 && sprite->data7 == 0))
     {
         FieldObjectGetLocalIdAndMap(mapObject, (u8 *)&gFieldEffectArguments[0], (u8 *)&gFieldEffectArguments[1], (u8 *)&gFieldEffectArguments[2]);
-        mapObject->mapobj_unk_1A = FieldEffectStart(0x1c);
+        mapObject->mapobj_unk_1A = FieldEffectStart(FLDEFF_TREE_DISGUISE);
         mapObject->mapobj_unk_21 = 1;
         sprite->data7 ++;
     }
@@ -5104,7 +5104,7 @@ void FieldObjectCB_MountainDisguise(struct Sprite *sprite)
     if (mapObject->mapobj_unk_21 == 0 || (mapObject->mapobj_unk_21 == 1 && sprite->data7 == 0))
     {
         FieldObjectGetLocalIdAndMap(mapObject, (u8 *)&gFieldEffectArguments[0], (u8 *)&gFieldEffectArguments[1], (u8 *)&gFieldEffectArguments[2]);
-        mapObject->mapobj_unk_1A = FieldEffectStart(0x1d);
+        mapObject->mapobj_unk_1A = FieldEffectStart(FLDEFF_MOUNTAIN_DISGUISE);
         mapObject->mapobj_unk_21 = 1;
         sprite->data7 ++;
     }
@@ -5361,53 +5361,36 @@ u8 sub_805FF20(struct MapObject *mapObject, u8 direction)
 }
 
 bool8 IsCoordOutsideFieldObjectMovementRect(struct MapObject2 *mapObject, s16 x, s16 y);
-bool8 CheckForCollisionBetweenFieldObjects(struct MapObject *mapObject, s16 x, s16 y);
+static bool8 DoesObjectCollideWithObjectAt(struct MapObject *mapObject, s16 x, s16 y);
 bool8 IsMetatileDirectionallyImpassable(struct MapObject *mapObject, s16 x, s16 y, u8 direction);
 
 u8 npc_block_way(struct MapObject *mapObject, s16 x, s16 y, u8 direction)
 {
     if (IsCoordOutsideFieldObjectMovementRect((struct MapObject2 *)mapObject, x, y))
-    {
         return 1;
-    }
-    if (MapGridIsImpassableAt(x, y) || GetMapBorderIdAt(x, y) == -1 || IsMetatileDirectionallyImpassable(mapObject, x, y, direction))
-    {
+    else if (MapGridIsImpassableAt(x, y) || GetMapBorderIdAt(x, y) == -1 || IsMetatileDirectionallyImpassable(mapObject, x, y, direction))
         return 2;
-    } else if (mapObject->mapobj_bit_15 && !CanCameraMoveInDirection(direction))
-    {
+    else if (mapObject->mapobj_bit_15 && !CanCameraMoveInDirection(direction))
         return 2;
-    }
-    if (IsZCoordMismatchAt(mapObject->mapobj_unk_0B_0, x, y))
-    {
+    else if (IsZCoordMismatchAt(mapObject->mapobj_unk_0B_0, x, y))
         return 3;
-    }
-    if (CheckForCollisionBetweenFieldObjects(mapObject, x, y))
-    {
+    else if (DoesObjectCollideWithObjectAt(mapObject, x, y))
         return 4;
-    }
     return 0;
 }
 
 u8 sub_8060024(struct MapObject *mapObject, s16 x, s16 y, u8 direction)
 {
-    u8 flags;
-    flags = 0;
+    u8 flags = 0;
+
     if (IsCoordOutsideFieldObjectMovementRect((struct MapObject2 *)mapObject, x, y))
-    {
         flags |= 1;
-    }
     if (MapGridIsImpassableAt(x, y) || GetMapBorderIdAt(x, y) == -1 || IsMetatileDirectionallyImpassable(mapObject, x, y, direction) || (mapObject->mapobj_bit_15 && !CanCameraMoveInDirection(direction)))
-    {
         flags |= 2;
-    }
     if (IsZCoordMismatchAt(mapObject->mapobj_unk_0B_0, x, y))
-    {
         flags |= 4;
-    }
-    if (CheckForCollisionBetweenFieldObjects(mapObject, x, y))
-    {
+    if (DoesObjectCollideWithObjectAt(mapObject, x, y))
         flags |= 8;
-    }
     return flags;
 }
 
@@ -5415,25 +5398,22 @@ bool8 IsCoordOutsideFieldObjectMovementRect(struct MapObject2 *mapObject, s16 x,
 {
     s16 minv;
     s16 maxv;
+
     if (mapObject->mapobj_unk_19 != 0)
     {
         minv = mapObject->coords1.x - (mapObject->mapobj_unk_19);
         maxv = mapObject->coords1.x + (mapObject->mapobj_unk_19);
         if (minv > x || maxv < x)
-        {
-            return 1;
-        }
+            return TRUE;
     }
     if (mapObject->mapobj_unk_19b != 0)
     {
         minv = mapObject->coords1.y - (mapObject->mapobj_unk_19b);
         maxv = mapObject->coords1.y + (mapObject->mapobj_unk_19b);
         if (minv > y || maxv < y)
-        {
-            return 1;
-        }
+            return TRUE;
     }
-    return 0;
+    return FALSE;
 }
 
 bool8 IsMetatileDirectionallyImpassable(struct MapObject *mapObject, s16 x, s16 y, u8 direction)
@@ -5445,23 +5425,19 @@ bool8 IsMetatileDirectionallyImpassable(struct MapObject *mapObject, s16 x, s16 
     return 0;
 }
 
-bool8 CheckForCollisionBetweenFieldObjects(struct MapObject *mapObject, s16 x, s16 y)
+static bool8 DoesObjectCollideWithObjectAt(struct MapObject *mapObject, s16 x, s16 y)
 {
-    struct MapObject *mapObject2;
     u8 i;
-    for (i=0; i<16; i++)
+
+    for (i = 0; i < 16; i++)
     {
-        mapObject2 = &gMapObjects[i];
+        struct MapObject *mapObject2 = &gMapObjects[i];
+
         if (mapObject2->active && mapObject2 != mapObject)
         {
-            if ((mapObject2->coords2.x != x || mapObject2->coords2.y != y) && (mapObject2->coords3.x != x || mapObject2->coords3.y != y))
-            {
-                continue;
-            }
-            if (AreZCoordsCompatible(mapObject->mapobj_unk_0B_0, mapObject2->mapobj_unk_0B_0))
-            {
-                return 1;
-            }
+            if (((mapObject2->coords2.x == x && mapObject2->coords2.y == y) || (mapObject2->coords3.x == x && mapObject2->coords3.y == y))
+             && AreZCoordsCompatible(mapObject->mapobj_unk_0B_0, mapObject2->mapobj_unk_0B_0))
+                return TRUE;
         }
     }
     return 0;
@@ -7488,7 +7464,7 @@ bool8 sub_8062644(struct MapObject *mapObject, struct Sprite *sprite)
 bool8 do_exclamation_mark_bubble_1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     FieldObjectGetLocalIdAndMap(mapObject, (u8 *)&gFieldEffectArguments[0], (u8 *)&gFieldEffectArguments[1], (u8 *)&gFieldEffectArguments[2]);
-    FieldEffectStart(0x0);
+    FieldEffectStart(FLDEFF_EXCLAMATION_MARK_ICON_1);
     sprite->data2 = 1;
     return TRUE;
 }
@@ -7496,7 +7472,7 @@ bool8 do_exclamation_mark_bubble_1(struct MapObject *mapObject, struct Sprite *s
 bool8 do_exclamation_mark_bubble_2(struct MapObject *mapObject, struct Sprite *sprite)
 {
     FieldObjectGetLocalIdAndMap(mapObject, (u8 *)&gFieldEffectArguments[0], (u8 *)&gFieldEffectArguments[1], (u8 *)&gFieldEffectArguments[2]);
-    FieldEffectStart(0x21);
+    FieldEffectStart(FLDEFF_EXCLAMATION_MARK_ICON_2);
     sprite->data2 = 1;
     return TRUE;
 }
@@ -7504,7 +7480,7 @@ bool8 do_exclamation_mark_bubble_2(struct MapObject *mapObject, struct Sprite *s
 bool8 do_heart_bubble(struct MapObject *mapObject, struct Sprite *sprite)
 {
     FieldObjectGetLocalIdAndMap(mapObject, (u8 *)&gFieldEffectArguments[0], (u8 *)&gFieldEffectArguments[1], (u8 *)&gFieldEffectArguments[2]);
-    FieldEffectStart(0x2e);
+    FieldEffectStart(FLDEFF_HEART_ICON);
     sprite->data2 = 1;
     return TRUE;
 }
@@ -8300,12 +8276,12 @@ void sub_80634A0(struct MapObject *mapObject, struct Sprite *sprite)
 }
 
 void sub_80634E8(struct MapObject *, struct Sprite *);
-void npc_update_obj_anim_flag(struct MapObject *, struct Sprite *);
+static void UpdateMapObjSpriteVisibility(struct MapObject *, struct Sprite *);
 
 void sub_80634D0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_80634E8(mapObject, sprite);
-    npc_update_obj_anim_flag(mapObject, sprite);
+    UpdateMapObjSpriteVisibility(mapObject, sprite);
 }
 
 #ifdef NONMATCHING
@@ -8461,7 +8437,7 @@ _080635C0:\n\
 }
 #endif
 
-void npc_update_obj_anim_flag(struct MapObject *mapObject, struct Sprite *sprite)
+void UpdateMapObjSpriteVisibility(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sprite->invisible = 0;
     if (mapObject->mapobj_bit_13 || mapObject->mapobj_bit_14)

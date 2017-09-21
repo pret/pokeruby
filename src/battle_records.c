@@ -3,7 +3,7 @@
 #include "game_stat.h"
 #include "link.h"
 #include "menu.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "string_util.h"
 #include "strings2.h"
 #include "trainer_card.h"

@@ -3,6 +3,7 @@
 #include "field_camera.h"
 #include "fieldmap.h"
 #include "metatile_behavior.h"
+#include "songs.h"
 #include "task.h"
 
 extern struct DoorAnimFrame gDoorOpenAnimFrames[];
@@ -212,10 +213,10 @@ bool8 FieldIsDoorAnimationRunning(void)
     return FuncIsActiveTask(Task_AnimateDoor);
 }
 
-u32 sub_8058790(u32 x, u32 y)
+u32 GetDoorSoundEffect(u32 x, u32 y)
 {
     if (cur_mapdata_get_door_x2_at(gDoorAnimGraphicsTable, x, y) == 0)
-        return 8;
+        return SE_DOOR;
     else
-        return 18;
+        return SE_JIDO_DOA;
 }

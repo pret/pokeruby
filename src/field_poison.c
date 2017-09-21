@@ -108,7 +108,7 @@ void ExecuteWhiteOut(void)
     ScriptContext1_Stop();
 }
 
-s32 overworld_poison(void)
+s32 DoPoisonFieldEffect(void)
 {
     struct Pokemon *pkmn = &gPlayerParty[0];
     u32 numPoisoned = 0;

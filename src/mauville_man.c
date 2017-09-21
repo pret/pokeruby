@@ -6,7 +6,7 @@
 #include "field_message_box.h"
 #include "m4a.h"
 #include "menu.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "rng.h"
 #include "script.h"
 #include "songs.h"

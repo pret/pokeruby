@@ -7,7 +7,7 @@
 #include "field_weather.h"
 #include "lottery_corner.h"
 #include "main.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "rtc.h"
 #include "time_events.h"
 #include "tv.h"
