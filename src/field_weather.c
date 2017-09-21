@@ -4,6 +4,7 @@
 #include "palette.h"
 #include "sprite.h"
 #include "task.h"
+#include "trig.h"
 
 #define MACRO1(a) ((((a) >> 1) & 0xF) | (((a) >> 2) & 0xF0) | (((a) >> 3) & 0xF00))
 
@@ -13,7 +14,9 @@ struct Weather
     u8 unknown_200[2][32];
     u8 filler_240[0x460-0x240];
     u8 unk460[2][32];
-    u8 filler4A0[0x6C0-0x4A0];
+    u8 filler4A0[0x6B6-0x4A0];
+    s8 unknown_6B6;
+    u8 filler_6B7[0xC0-0xB7];
     s8 unknown_6C0;
     s8 unknown_6C1;
     u8 unknown_6C2;
@@ -41,7 +44,8 @@ struct Weather
     u8 unknown_6DE;
     u8 filler_6DF[5];
     u8 unknown_6E4;
-    u8 filler_6E5[0x15];
+    u8 filler_6E5[0xF];
+    u8 unknown_6F4[6];
     u8 unknown_6FA;
     u8 unknown_6FB;
     u8 filler_6FC[4];
@@ -53,18 +57,34 @@ struct Weather
     u8 unknown_724;
     u8 filler_725[9];
     u8 unknown_72E;
+    u8 filler_72F;
+    u16 unknown_730;
+    u16 unknown_732;
+    u16 unknown_734;
+    u16 unknown_736;
+    u8 unknown_738;
+    u8 unknown_739;
+    u8 unknown_73A;
+    u8 filler_73B[0x3C-0x3B];
+    s16 unknown_73C;
+    s16 unknown_73E;
+    s16 unknown_740;
+    s16 unknown_742;
+    u8 filler_744[0xD-4];
+    s8 unknown_74D;
+    u8 unknown_74E;
 };
 
 #define gWeather gUnknown_0202F7E8
-extern struct Weather gWeather;
+extern struct Weather gUnknown_0202F7E8;
+extern u16 gUnknown_0202FF58;
 extern u8 *gUnknown_083970E8;
 extern u8 (*gUnknown_08396FC8[][4])(void);
 extern u8 (*gUnknown_083970B8[])(void);
 extern u8 *gUnknown_030006DC;
 extern u8 gUnknown_083970C8;
-//extern u8 (*gUnknown_0202FC48)[32];
-extern u8 gUnknown_0202FC48[][32];
-extern u8 gUnknown_0202F9E8[][32];
+
+extern const u8 *const gUnknown_08396FA8[];
 
 
 void sub_807C828(void)
@@ -176,7 +196,7 @@ u32 sub_807CB0C(void)
 void sub_807CB10(void)
 {
     u16 v0;
-    u8(*v1)[32];
+    u8 (*v1)[32];
     u16 v2;
     u16 v4;
     u16 v5;
@@ -190,9 +210,9 @@ void sub_807CB10(void)
     for (v0 = 0; v0 <= 1; v0++)
     {
         if (v0 == 0)
-            v1 = (void *)&gUnknown_0202F9E8;
+            v1 = gWeather.unknown_200;
         else
-            v1 = &gUnknown_0202F9E8[19];
+            v1 = gWeather.unk460;
 
         for (v2 = 0; (u16)v2 <= 0x1f; v2++)
         {
@@ -392,10 +412,10 @@ void sub_807CEBC(u8 a, u8 b, s8 c)
             {
                 u8 r, g, b;
 
-                if (gUnknown_030006DC[r4] == 2 || r4 - 16 == gUnknown_0202F7E8.unknown_6D5)
-                    r6 = gUnknown_0202F7E8.unk460[c];
+                if (gUnknown_030006DC[r4] == 2 || r4 - 16 == gWeather.unknown_6D5)
+                    r6 = gWeather.unk460[c];
                 else
-                    r6 = gUnknown_0202F7E8.unknown_200[c];
+                    r6 = gWeather.unknown_200[c];
                 if (r4 == 16 || r4 > 0x1B)
                 {
                     for (i = 0; i < 16; i++)
@@ -499,9 +519,9 @@ void sub_807D1BC(u8 a1, u8 a2, s8 c, u8 d, u16 e)
             u8 *r5;
 
             if (gUnknown_030006DC[r4] == 1)
-                r5 = gUnknown_0202F9E8[c];
+                r5 = gWeather.unknown_200[c];
             else
-                r5 = gUnknown_0202F9E8[c + 19];
+                r5 = gWeather.unk460[c];
 
             for (i = 0; i < 16; i++)
             {
@@ -572,4 +592,369 @@ void sub_807D304(s8 a, u8 arg2, u16 c)
             }
         }
     }
+}
+
+bool8 sub_807D574(u8);
+
+void sub_807D424(u8 a, u16 b)
+{
+    struct RGBColor color;
+    u8 r_;
+    u8 g_;
+    u8 b_;
+    u16 r4;
+
+    BlendPalette(0, 0x100, a, b);
+    color = *(struct RGBColor *)&b;
+    r_ = color.r;
+    g_ = color.g;
+    b_ = color.b;
+
+    r4 = 16;
+    while (r4 < 32)
+    {
+        if (sub_807D574(r4))
+        {
+            u16 r12 = (r4 + 1) * 16;
+            u16 r6 = r4 * 16;
+
+            while (r6 < r12)
+            {
+                struct RGBColor color = *(struct RGBColor *)&gPlttBufferUnfaded[r6];
+                u8 r = color.r;
+                u8 g = color.g;
+                u8 b = color.b;
+
+                r += ((28 - r) * 3) >> 2;
+                g += ((31 - g) * 3) >> 2;
+                b += ((28 - b) * 3) >> 2;
+
+                r += ((r_ - r) * a) >> 4;
+                g += ((g_ - g) * a) >> 4;
+                b += ((b_ - b) * a) >> 4;
+
+                gPlttBufferFaded[r6] = (b << 10) | (g << 5) | r;
+                r6++;
+            }
+        }
+        else
+        {
+            BlendPalette(r4 * 16, 16, a, b);
+        }
+        r4++;
+    }
+}
+
+void sub_807D540(u8 a)
+{
+    if (gWeather.unknown_6FA < 6)
+    {
+        gWeather.unknown_6F4[gWeather.unknown_6FA] = a;
+        gWeather.unknown_6FA++;
+    }
+}
+
+bool8 sub_807D574(u8 a)
+{
+    u16 i;
+
+    for (i = 0; i < gWeather.unknown_6FA; i++)
+    {
+        if (gWeather.unknown_6F4[i] == a)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+void sub_807D5BC(s8 a)
+{
+    if (gWeather.unknown_6C6 == 3)
+    {
+        sub_807CEBC(0, 32, a);
+        gWeather.unknown_6C0 = a;
+    }
+}
+
+void sub_807D5F0(u8 a, u8 b, u8 c)
+{
+    if (gWeather.unknown_6C6 == 3)
+    {
+        gWeather.unknown_6C6 = 0;
+        gWeather.unknown_6C0 = a;
+        gWeather.unknown_6C1 = b;
+        gWeather.unknown_6C3 = 0;
+        gWeather.unknown_6C2 = c;
+        sub_807D5BC(a);
+    }
+}
+
+void fade_screen(u8 a, u8 b)
+{
+    u32 r4;
+    u32 r1;
+    u32 r2;
+
+    switch (a)
+    {
+    case 0:
+        r4 = 0;
+        r1 = 0;
+        break;
+    case 2:
+        r4 = 0xFFFF;
+        r1 = 0;
+        break;
+    case 1:
+        r4 = 0;
+        r1 = 1;
+        break;
+    case 3:
+        r4 = 0xFFFF;
+        r1 = 1;
+        break;
+    default:
+        return;
+    }
+
+    switch (gWeather.unknown_6D0)
+    {
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 11:
+    case 12:
+    case 13:
+        r2 = 1;
+        break;
+    default:
+        r2 = 0;
+        break;
+    }
+
+    if (r1 != 0)
+    {
+        if (r2 != 0)
+            CpuFastCopy(gPlttBufferFaded, gPlttBufferUnfaded, 0x400);
+        BeginNormalPaletteFade(0xFFFFFFFF, b, 0, 16, r4);
+        gWeather.unknown_6C6 = 2;
+    }
+    else
+    {
+        gWeather.unknown_6C4 = r4;
+        if (r2 != 0)
+            gWeather.unknown_6C7 = 0;
+        else
+            BeginNormalPaletteFade(0xFFFFFFFF, b, 16, 0, r4);
+        gWeather.unknown_6C6 = 1;
+        gWeather.unknown_6CA = 1;
+        gWeather.unknown_6CB = 0;
+        sub_807DB64(gWeather.unknown_730, gWeather.unknown_732);
+        gWeather.unknown_6C8 = 1;
+    }
+}
+
+bool8 sub_807D770(void)
+{
+    return gWeather.unknown_6C6 ^ 1 ? TRUE : FALSE;
+}
+
+void sub_807D78C(u8 a)
+{
+    u16 r4 = 16 + a;
+    u16 i;
+
+    switch (gWeather.unknown_6C6)
+    {
+    case 1:
+        if (gWeather.unknown_6CA != 0)
+        {
+            if (gWeather.unknown_6D0 == 6)
+                sub_807D540(r4);
+            r4 *= 16;
+            for (i = 0; i < 16; i++)
+                gPlttBufferFaded[r4 + i] = gWeather.unknown_6C4;
+        }
+        break;
+    case 2:
+        r4 *= 16;
+        CpuFastCopy(gPlttBufferFaded + r4, gPlttBufferUnfaded + r4, 32);
+        BlendPalette(r4, 16, gPaletteFade.y, gPaletteFade.blendColor);
+        break;
+    default:
+        if (gWeather.unknown_6D0 != 6)
+        {
+            sub_807CEBC(r4, 1, gWeather.unknown_6C0);
+        }
+        else
+        {
+            r4 *= 16;
+            BlendPalette(r4, 16, 12, 0x73FC);
+        }
+        break;
+    }
+}
+
+void sub_807D874(u8 a)
+{
+    sub_807CEBC(a, 1, gWeather.unknown_6C0);
+}
+
+u8 unref_sub_807D894(void)
+{
+    if (gWeather.unknown_6C6 == 1)
+        return gWeather.unknown_6CA;
+    else
+        return 0;
+}
+
+void sub_807D8C0(const u16 *palette)
+{
+    LoadPalette(palette, 0x100 + gWeather.unknown_6D4 * 16, 32);
+    sub_807D78C(gWeather.unknown_6D4);
+}
+
+void sub_807D8F0(u8 *a, u8 *b)
+{
+    u8 r4 = *a;
+    u16 i;
+
+    if (r4 < 7)
+    {
+        r4--;
+        LZ77UnCompWram(gUnknown_08396FA8[r4], ewram0.data[r4]);
+        if (r4 == 0)
+        {
+            ewram0.data[r4][0] = 0x421;
+            for (i = 1; i < 0x1000; i++)
+                ewram0.data[r4][i] += ewram0.data[r4][i - 1];
+        }
+        else
+        {
+            for (i = 0; i < 0x1000; i++)
+                ewram0.data[r4][i] += ewram0.data[r4 - 1][i];
+        }
+        (*a)++;
+        if (*a == 7)
+        {
+            *a = 32;
+            *b = 32;
+        }
+    }
+}
+
+void sub_807D9A8(void)
+{
+    gWeather.unknown_74D = 1;
+    gWeather.unknown_74E = 1;
+}
+
+bool8 sub_807D9C8(void)
+{
+    if (gWeather.unknown_74D < 32)
+    {
+        sub_807D8F0(&gWeather.unknown_74D, &gWeather.unknown_74E);
+        if (gWeather.unknown_74D < 32)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+void sub_807DA04(s8 a)
+{
+    sub_807D5BC(-a - 1);
+}
+
+void sub_807DA14(void)
+{
+    gWeather.unknown_73C = 0;
+    gWeather.unknown_740 = 0;
+    gWeather.unknown_742 = 0;
+    gWeather.unknown_73E = 0;
+    gUnknown_0202FF58 = 5;
+}
+
+void sub_807DA4C(void)
+{
+    switch (gWeather.unknown_742)
+    {
+    case 0:
+        if (++gWeather.unknown_740 > gUnknown_0202FF58)
+        {
+            gWeather.unknown_740 = 0;
+            sub_807DA04(gWeather.unknown_73C++);
+            if (gWeather.unknown_73C > 5)
+            {
+                gWeather.unknown_73E = gWeather.unknown_73C;
+                gWeather.unknown_742 = 1;
+                gWeather.unknown_740 = 0x3C;
+            }
+        }
+        break;
+    case 1:
+        gWeather.unknown_740 = (gWeather.unknown_740 + 3) & 0x7F;
+        gWeather.unknown_73C = ((gSineTable[gWeather.unknown_740] - 1) >> 6) + 2;
+        if (gWeather.unknown_73C != gWeather.unknown_73E)
+            sub_807DA04(gWeather.unknown_73C);
+        gWeather.unknown_73E = gWeather.unknown_73C;
+        break;
+    case 2:
+        if (++gWeather.unknown_740 > gUnknown_0202FF58)
+        {
+            gWeather.unknown_740 = 0;
+            sub_807DA04(--gWeather.unknown_73C);
+            if (gWeather.unknown_73C == 3)
+                gWeather.unknown_742 = 0;
+        }
+        break;
+    }
+}
+
+void sub_807DB64(u8 a, u8 b)
+{
+    gWeather.unknown_730 = a;
+    gWeather.unknown_732 = b;
+    gWeather.unknown_734 = a;
+    gWeather.unknown_736 = b;
+    REG_BLDALPHA = (b << 8) | a;
+}
+
+void sub_807DBA4(u8 a, u8 b, int c)
+{
+    gWeather.unknown_734 = a;
+    gWeather.unknown_736 = b;
+    gWeather.unknown_73A = c;
+    gWeather.unknown_739 = 0;
+    gWeather.unknown_738 = 0;
+}
+
+bool8 sub_807DBE8(void)
+{
+    if (gWeather.unknown_730 == gWeather.unknown_734
+     && gWeather.unknown_732 == gWeather.unknown_736)
+        return TRUE;
+    if (++gWeather.unknown_739 > gWeather.unknown_73A)
+    {
+        gWeather.unknown_739 = 0;
+        gWeather.unknown_738++;
+        if (gWeather.unknown_738 & 1)
+        {
+            if (gWeather.unknown_730 < gWeather.unknown_734)
+                gWeather.unknown_730++;
+            else if (gWeather.unknown_730 > gWeather.unknown_734)
+                gWeather.unknown_730--;
+        }
+        else
+        {
+            if (gWeather.unknown_732 < gWeather.unknown_736)
+                gWeather.unknown_732++;
+            else if (gWeather.unknown_732 > gWeather.unknown_736)
+                gWeather.unknown_732--;
+        }
+    }
+    REG_BLDALPHA = (gWeather.unknown_732 << 8) | gWeather.unknown_730;
+    if (gWeather.unknown_730 == gWeather.unknown_734
+     && gWeather.unknown_732 == gWeather.unknown_736)
+        return TRUE;
+    return FALSE;
 }
