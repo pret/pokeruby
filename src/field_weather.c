@@ -192,7 +192,6 @@ void sub_807CB10(void)
         if (v0 == 0)
             v1 = (void *)&gUnknown_0202F9E8;
         else
-            //v1 = (void *)(&gUnknown_0202F9E8 + 19);
             v1 = &gUnknown_0202F9E8[19];
 
         for (v2 = 0; (u16)v2 <= 0x1f; v2++)
@@ -502,7 +501,7 @@ void sub_807D1BC(u8 a1, u8 a2, s8 c, u8 d, u16 e)
             if (gUnknown_030006DC[r4] == 1)
                 r5 = gUnknown_0202F9E8[c];
             else
-                r5 = gUnknown_0202FC48[c];
+                r5 = gUnknown_0202F9E8[c + 19];
 
             for (i = 0; i < 16; i++)
             {
@@ -518,5 +517,59 @@ void sub_807D1BC(u8 a1, u8 a2, s8 c, u8 d, u16 e)
             }
         }
         r4++;
+    }
+}
+
+void sub_807D304(s8 a, u8 arg2, u16 c)
+{
+    struct RGBColor color;
+    u8 r_;
+    u8 g_;
+    u8 b_;
+    u16 r4;
+    u16 r5;
+    u16 r12;
+
+    a = -a - 1;
+    color = *(struct RGBColor *)&c;
+    r_ = color.r;
+    g_ = color.g;
+    b_ = color.b;
+    r5 = 0;
+    for (r4 = 0; r4 < 32; r4++)
+    {
+        if (gUnknown_030006DC[r4] == 0)
+        {
+            BlendPalette(r5, 16, arg2, c);
+            r5 += 16;
+        }
+        else
+        {
+            for (r12 = 0; r12 < 16; r12++)
+            {
+                u32 offset;
+                struct RGBColor color1;
+                struct RGBColor color2;
+                u8 r1, g1, b1;
+                u8 r2, g2, b2;
+
+                color1 = *(struct RGBColor *)&gPlttBufferUnfaded[r5];
+                r1 = color1.r;
+                g1 = color1.g;
+                b1 = color1.b;
+
+                offset = ((b1 & 0x1E) << 7) | ((g1 & 0x1E) << 3) | ((r1 & 0x1E) >> 1);
+                color2 = *(struct RGBColor *)&ewram0.data[a][offset];
+                r2 = color2.r;
+                g2 = color2.g;
+                b2 = color2.b;
+
+                r2 += ((r_ - r2) * arg2) >> 4;
+                g2 += ((g_ - g2) * arg2) >> 4;
+                b2 += ((b_ - b2) * arg2) >> 4;
+
+                gPlttBufferFaded[r5++] = (b2 << 10) | (g2 << 5) | r2;
+            }
+        }
     }
 }
