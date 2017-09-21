@@ -1438,31 +1438,38 @@ bool8 sub_807E460(void)
 }
 
 extern const struct Coords16 gUnknown_0839AAC4[];
-extern const struct Coords16 gUnknown_0839AABC[];
+//extern const struct Coords16 gUnknown_0839AABC[];
+extern const s16 gUnknown_0839AABC[][2];
 
-/*
 void sub_807E4EC(struct Sprite *sprite)
 {
     u32 randVal;
     u16 r6;
-    s16 r4;
-    s16 r0;
+    s32 r4;
+    s32 r0;
 
     if (sprite->data1 == 0)
         sprite->data1 = 361;
     randVal = sprite->data1 * 1103515245 + 12345;
     sprite->data1 = ((randVal & 0x7FFF0000) >> 16) % 600;
     r6 = gUnknown_0839AAC4[gUnknown_08396FC4->unknown_6DC].x;
-    r4 = sprite->data1 % 31;
-    sprite->data2 = r4 * 8;
-    r0 = sprite->data1 / 31;
-    sprite->data2 = r4 * 128;
-    sprite->data3 = r0 * 128;
-    sprite->data2 = r4 * 128 - gUnknown_0839AABC[gUnknown_08396FC4->unknown_6DC].x * r6;
-    sprite->data3 = r0 * 128 - gUnknown_0839AABC[gUnknown_08396FC4->unknown_6DC].y * r6;
+
+    r4 = sprite->data1 % 30;
+    sprite->data2 = r4 * 8;  // useless assignment
+
+    r0 = sprite->data1 / 30;
+    sprite->data3 = r0 * 8;  // useless assignment
+
+    sprite->data2 = r4;
+    sprite->data2 <<= 7;
+
+    sprite->data3 = r0;
+    sprite->data3 <<= 7;
+
+    sprite->data2 -= gUnknown_0839AABC[gUnknown_08396FC4->unknown_6DC][0] * r6;
+    sprite->data3 -= gUnknown_0839AABC[gUnknown_08396FC4->unknown_6DC][1] * r6;
     StartSpriteAnim(sprite, 0);
     sprite->data4 = 0;
-    sprite->invisible = FALSE;
+    sprite->coordOffsetEnabled = FALSE;
     sprite->data0 = r6;
 }
-*/
