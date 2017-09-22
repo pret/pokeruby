@@ -3,6 +3,7 @@
 #include "field_map_obj.h"
 #include "field_weather.h"
 #include "palette.h"
+#include "rng.h"
 #include "script.h"
 #include "songs.h"
 #include "sound.h"
@@ -64,10 +65,16 @@ struct Weather
     u8 unknown_6DE;
     u8 filler_6DF[1];
     u16 unknown_6E0;
-    u8 filler_6E2[2];
+    u16 unknown_6E2;
     u8 unknown_6E4;
     u8 unknown_6E5;
-    u8 filler_6E6[0xE];
+    u16 unknown_6E6;
+    u16 unknown_6E8;
+    u8 unknown_6EA;
+    u8 unknown_6EB;
+    u8 unknown_6EC;
+    u8 unknown_6ED;
+    u8 filler_6EE[0xF4-0xEE];
     u8 unknown_6F4[6];
     u8 unknown_6FA;
     u8 unknown_6FB;
@@ -111,7 +118,11 @@ extern u8 (*gUnknown_08396FC8[][4])(void);
 extern u8 (*gUnknown_083970B8[])(void);
 extern const u8 *gUnknown_030006DC;
 extern const u8 gUnknown_083970C8[];
+
+// This is a pointer to gWeather. All code sub_807DE78 and below uses this pointer,
+// while everything above accesses gWeather directly.
 extern struct Weather *const gUnknown_08396FC4;
+
 extern const struct SpriteSheet gUnknown_0839A9D4;
 extern const struct SpriteTemplate gSpriteTemplate_839A9F0;
 extern const u16 gUnknown_08397108[];
@@ -119,6 +130,7 @@ extern const u16 gUnknown_08397108[];
 extern const struct Coords16 gUnknown_0839A9C8[];
 extern const struct SpriteSheet gUnknown_0839AACC;
 extern const struct SpriteTemplate gSpriteTemplate_839AAA4;
+extern const struct SpriteTemplate gSpriteTemplate_839AB04;
 
 const u8 DroughtPaletteData_0[] = INCBIN_U8("graphics/weather/drought0.bin.lz");
 const u8 DroughtPaletteData_1[] = INCBIN_U8("graphics/weather/drought1.bin.lz");
@@ -1402,7 +1414,7 @@ void sub_807E400(void)
             gUnknown_08396FC4->unknown_6CC++;
         break;
     case 2:
-        if (sub_807E8E8() == 0)
+        if (sub_807E8E8() == FALSE)
         {
             gUnknown_08396FC4->unknown_6D2 = 1;
             gUnknown_08396FC4->unknown_6CC++;
@@ -1432,7 +1444,7 @@ bool8 sub_807E460(void)
         }
         // fall through
     case 1:
-        if (sub_807E8E8() == 0)
+        if (sub_807E8E8() == FALSE)
         {
             sub_807E974();
             gUnknown_08396FC4->unknown_6CE++;
@@ -1671,9 +1683,344 @@ u8 snowflakes_progress(void);
 
 void snowflakes_progress2(void)
 {
-    if (gUnknown_08396FC4->unknown_6CC == 0 && snowflakes_progress() == 0)
+    if (gUnknown_08396FC4->unknown_6CC == 0 && snowflakes_progress() == FALSE)
     {
         gUnknown_08396FC4->unknown_6D2 = 1;
         gUnknown_08396FC4->unknown_6CC++;
+    }
+}
+
+bool8 sub_807EAC0(void)
+{
+    switch (gUnknown_08396FC4->unknown_6CE)
+    {
+    case 0:
+        gUnknown_08396FC4->unknown_6E5 = 0;
+        gUnknown_08396FC4->unknown_6E0 = 0;
+        gUnknown_08396FC4->unknown_6CE++;
+        // fall through
+    case 1:
+        if (snowflakes_progress() == FALSE)
+        {
+            gUnknown_08396FC4->unknown_6CE++;
+            return FALSE;
+        }
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 snowflake_add(void);
+bool8 snowflake_remove(void);
+
+bool8 snowflakes_progress(void)
+{
+    if (gUnknown_08396FC4->unknown_6E4 == gUnknown_08396FC4->unknown_6E5)
+        return FALSE;
+
+    gUnknown_08396FC4->unknown_6E0++;
+    if (gUnknown_08396FC4->unknown_6E0 > 36)
+    {
+        gUnknown_08396FC4->unknown_6E0 = 0;
+        if (gUnknown_08396FC4->unknown_6E4 < gUnknown_08396FC4->unknown_6E5)
+            snowflake_add();
+        else
+            snowflake_remove();
+    }
+    return (gUnknown_08396FC4->unknown_6E4 != gUnknown_08396FC4->unknown_6E5);
+}
+
+void sub_807EC40(struct Sprite *);
+
+bool8 snowflake_add(void)
+{
+    u8 spriteId = CreateSpriteAtEnd(&gSpriteTemplate_839AB04, 0, 0, 78);
+
+    if (spriteId == 64)
+        return FALSE;
+    gSprites[spriteId].data4 = gUnknown_08396FC4->unknown_6E4;
+    sub_807EC40(&gSprites[spriteId]);
+    gSprites[spriteId].coordOffsetEnabled = TRUE;
+    gUnknown_08396FC4->unknown_60[gUnknown_08396FC4->unknown_6E4++] = &gSprites[spriteId];
+    return TRUE;
+}
+
+bool8 snowflake_remove(void)
+{
+    if (gUnknown_08396FC4->unknown_6E4 != 0)
+    {
+        DestroySprite(gUnknown_08396FC4->unknown_60[--gUnknown_08396FC4->unknown_6E4]);
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void sub_807EC40(struct Sprite *sprite)
+{
+    u16 r4 = ((sprite->data4 * 5) & 7) * 30 + (Random() % 30);
+    u16 r6;
+
+    sprite->pos1.y = -3 - (gSpriteCoordOffsetY + sprite->centerToCornerVecY);
+    sprite->pos1.x = r4 - (gSpriteCoordOffsetX + sprite->centerToCornerVecX);
+    sprite->data0 = sprite->pos1.y * 128;
+    sprite->pos2.x = 0;
+    r6 = Random();
+    sprite->data1 = (r6 & 3) * 5 + 64;
+    sprite->data7 = (r6 & 3) * 5 + 64;
+    StartSpriteAnim(sprite, (r6 & 1) ? 0 : 1);
+    sprite->data3 = 0;
+    sprite->data2 = ((r6 & 3) == 0) ? 2 : 1;
+    sprite->data6 = (r6 & 0x1F) + 210;
+    sprite->data5 = 0;
+}
+
+void sub_807ECEC(struct Sprite *sprite)
+{
+    if (gUnknown_08396FC4->unknown_6E2 > 18)
+    {
+        sprite->invisible = FALSE;
+        sprite->callback = sub_807ED48;
+        sprite->pos1.y = 0xFA - (gSpriteCoordOffsetY + sprite->centerToCornerVecY);
+        sprite->data0 = sprite->pos1.y * 128;
+        gUnknown_08396FC4->unknown_6E2 = 0;
+    }
+}
+
+void sub_807ED48(struct Sprite *sprite)
+{
+    s16 r3;
+    s16 r2;
+
+    sprite->data0 += sprite->data1;
+    sprite->pos1.y = sprite->data0 >> 7;
+    sprite->data3 = (sprite->data3 + sprite->data2) & 0xFF;
+    sprite->pos2.x = gSineTable[sprite->data3] / 64;
+
+    r3 = (sprite->pos1.x + sprite->centerToCornerVecX + gSpriteCoordOffsetX) & 0x1FF;
+    if (r3 & 0x100)
+        r3 = -0x100 | r3;  // hmm... what is this?
+    if (r3 < -3)
+        sprite->pos1.x = 242 - (gSpriteCoordOffsetX + sprite->centerToCornerVecX);
+    else if (r3 > 242)
+        sprite->pos1.x = -3 - (gSpriteCoordOffsetX + sprite->centerToCornerVecX);
+
+    r2 = (sprite->pos1.y + sprite->centerToCornerVecY + gSpriteCoordOffsetY) & 0xFF;
+    if (r2 > 163 && r2 < 171)
+    {
+        sprite->pos1.y = 250 - (gSpriteCoordOffsetY + sprite->centerToCornerVecY);
+        sprite->data0 = sprite->pos1.y * 128;
+        sprite->data5 = 0;
+        sprite->data6 = 220;
+    }
+    else if (r2 > 242 && r2 < 250)
+    {
+        sprite->pos1.y = 163;
+        sprite->data0 = sprite->pos1.y * 128;
+        sprite->data5 = 0;
+        sprite->data6 = 220;
+        sprite->invisible = TRUE;
+        sprite->callback = sub_807ECEC;
+    }
+
+    sprite->data5++;
+    if (sprite->data5 == sprite->data6)
+    {
+        sub_807EC40(sprite);
+        sprite->pos1.y = 250;
+        sprite->invisible = TRUE;
+        sprite->callback = sub_807ECEC;
+    }
+}
+
+void sub_807EE80(void)
+{
+    gUnknown_08396FC4->unknown_6CC = 0;
+    gUnknown_08396FC4->unknown_6D2 = 0;
+    gUnknown_08396FC4->unknown_6D6 = 0;
+    gUnknown_08396FC4->unknown_6DB = 4;
+    gUnknown_08396FC4->unknown_6DC = 0;
+    gUnknown_08396FC4->unknown_6D9 = 16;
+    gUnknown_08396FC4->unknown_6C1 = 3;
+    gUnknown_08396FC4->unknown_6C2 = 20;
+    gUnknown_08396FC4->unknown_6D2 = 0;  // duplicate assignment
+    gUnknown_08396FC4->unknown_6ED = 0;
+    sub_807DD5C(0x51);
+}
+
+void sub_807EFC0(void);
+
+void sub_807EEF4(void)
+{
+    sub_807EE80();
+    while (gUnknown_08396FC4->unknown_6D2 == 0)
+        sub_807EFC0();
+}
+
+void sub_807EF24(void)
+{
+    gUnknown_08396FC4->unknown_6CC = 0;
+    gUnknown_08396FC4->unknown_6D2 = 0;
+    gUnknown_08396FC4->unknown_6D6 = 0;
+    gUnknown_08396FC4->unknown_6DB = 4;
+    gUnknown_08396FC4->unknown_6DC = 1;
+    gUnknown_08396FC4->unknown_6D9 = 24;
+    gUnknown_08396FC4->unknown_6C1 = 3;
+    gUnknown_08396FC4->unknown_6C2 = 20;
+    gUnknown_08396FC4->unknown_6D2 = 0;  // duplicate assignment
+    sub_807DD5C(0x53);
+}
+
+void sub_807EF90(void)
+{
+    sub_807EF24();
+    while (gUnknown_08396FC4->unknown_6D2 == 0)
+        sub_807EFC0();
+}
+
+void sub_807F434(void);
+void sub_807F3F8(u16);
+
+void sub_807EFC0(void)
+{
+    sub_807F434();
+    switch (gUnknown_08396FC4->unknown_6CC)
+    {
+    case 0:
+        sub_807E7A4();
+        gUnknown_08396FC4->unknown_6CC++;
+        break;
+    case 1:
+        if (sub_807E7B4())
+            break;
+        gUnknown_08396FC4->unknown_6CC++;
+        break;
+    case 2:
+        if (sub_807E8E8())
+            break;
+        gUnknown_08396FC4->unknown_6D2 = 1;
+        gUnknown_08396FC4->unknown_6CC++;
+        break;
+    case 3:
+        if (gUnknown_08396FC4->unknown_6C6 == 0)
+            break;
+        gUnknown_08396FC4->unknown_6CC = 6;
+        break;
+    case 4:
+        gUnknown_08396FC4->unknown_6EA = 1;
+        gUnknown_08396FC4->unknown_6E6 = (Random() % 360) + 360;
+        gUnknown_08396FC4->unknown_6CC++;
+        // fall through
+    case 5:
+        if (--gUnknown_08396FC4->unknown_6E6 != 0)
+            break;
+        gUnknown_08396FC4->unknown_6CC++;
+        break;
+    case 6:
+        gUnknown_08396FC4->unknown_6EA = 1;
+        gUnknown_08396FC4->unknown_6EB = Random() % 2;
+        gUnknown_08396FC4->unknown_6CC++;
+        break;
+    case 7:
+        gUnknown_08396FC4->unknown_6EC = (Random() & 1) + 1;
+        gUnknown_08396FC4->unknown_6CC++;
+        // fall through
+    case 8:
+        sub_807D5BC(19);
+        if (gUnknown_08396FC4->unknown_6EB == 0 && gUnknown_08396FC4->unknown_6EC == 1)
+            sub_807F3F8(20);
+        gUnknown_08396FC4->unknown_6E6 = (Random() % 3) + 6;
+        gUnknown_08396FC4->unknown_6CC++;
+        break;
+    case 9:
+        if (--gUnknown_08396FC4->unknown_6E6 != 0)
+            break;
+        sub_807D5BC(3);
+        gUnknown_08396FC4->unknown_6EA = 1;
+        if (--gUnknown_08396FC4->unknown_6EC != 0)
+        {
+            gUnknown_08396FC4->unknown_6E6 = (Random() % 16) + 60;
+            gUnknown_08396FC4->unknown_6CC = 10;
+        }
+        else if (gUnknown_08396FC4->unknown_6EB == 0)
+        {
+            gUnknown_08396FC4->unknown_6CC = 4;
+        }
+        else
+        {
+            gUnknown_08396FC4->unknown_6CC = 11;
+        }
+        break;
+    case 10:
+        if (--gUnknown_08396FC4->unknown_6E6 != 0)
+            break;
+        gUnknown_08396FC4->unknown_6CC = 8;
+        break;
+    case 11:
+        gUnknown_08396FC4->unknown_6E6 = (Random() % 16) + 60;
+        gUnknown_08396FC4->unknown_6CC++;
+        break;
+    case 12:
+        if (--gUnknown_08396FC4->unknown_6E6 != 0)
+            break;
+        sub_807F3F8(100);
+        sub_807D5BC(19);
+        // Why use "% 16" everywhere else and "& 0xF" here. So dumb.
+        gUnknown_08396FC4->unknown_6E6 = (Random() & 0xF) + 30;
+        gUnknown_08396FC4->unknown_6CC++;
+        break;
+    case 13:
+        if (--gUnknown_08396FC4->unknown_6E6 != 0)
+            break;
+        sub_807D5F0(19, 3, 5);
+        gUnknown_08396FC4->unknown_6CC++;
+        break;
+    case 14:
+        if (gUnknown_08396FC4->unknown_6C6 != 3)
+            break;
+        gUnknown_08396FC4->unknown_6EA = 1;
+        gUnknown_08396FC4->unknown_6CC = 4;
+        break;
+    }
+}
+
+bool8 sub_807F34C(void)
+{
+    switch (gUnknown_08396FC4->unknown_6CE)
+    {
+    case 0:
+        gUnknown_08396FC4->unknown_6EA = 0;
+        gUnknown_08396FC4->unknown_6CE++;
+        // fall through
+    case 1:
+        sub_807EFC0();
+        if (gUnknown_08396FC4->unknown_6EA != 0)
+        {
+            if (gUnknown_08396FC4->unknown_6D1 == 3
+             || gUnknown_08396FC4->unknown_6D1 == 5
+             || gUnknown_08396FC4->unknown_6D1 == 13)
+                return FALSE;
+            gUnknown_08396FC4->unknown_6D9 = 0;
+            gUnknown_08396FC4->unknown_6CE++;
+        }
+        break;
+    case 2:
+        if (sub_807E8E8())
+            break;
+        sub_807E974();
+        gUnknown_08396FC4->unknown_6ED = 0;
+        gUnknown_08396FC4->unknown_6CE++;
+        return FALSE;
+    default:
+        return FALSE;
+    }
+    return TRUE;
+}
+
+void sub_807F3F8(u16 a)
+{
+    if (gUnknown_08396FC4->unknown_6ED == 0)
+    {
+        gUnknown_08396FC4->unknown_6E8 = Random() % a;
+        gUnknown_08396FC4->unknown_6ED = 1;
     }
 }
