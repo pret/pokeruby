@@ -26,7 +26,8 @@ struct Struct2000000
 
 struct Weather
 {
-    u8 filler_000[0x1F4];
+    struct Sprite *unknown_0[24];
+    struct Sprite *unknown_60[0x65];  // snowflakes?
     struct Sprite *unknown_1F4[3];
     u8 unknown_200[2][32];
     u8 filler_240[0x460-0x240];
@@ -61,9 +62,12 @@ struct Weather
     u8 unknown_6DC;
     u8 unknown_6DD;
     u8 unknown_6DE;
-    u8 filler_6DF[5];
+    u8 filler_6DF[1];
+    u16 unknown_6E0;
+    u8 filler_6E2[2];
     u8 unknown_6E4;
-    u8 filler_6E5[0xF];
+    u8 unknown_6E5;
+    u8 filler_6E6[0xE];
     u8 unknown_6F4[6];
     u8 unknown_6FA;
     u8 unknown_6FB;
@@ -113,6 +117,8 @@ extern const struct SpriteTemplate gSpriteTemplate_839A9F0;
 extern const u16 gUnknown_08397108[];
 //extern const s16 gUnknown_0839A9C8[][2];
 extern const struct Coords16 gUnknown_0839A9C8[];
+extern const struct SpriteSheet gUnknown_0839AACC;
+extern const struct SpriteTemplate gSpriteTemplate_839AAA4;
 
 const u8 DroughtPaletteData_0[] = INCBIN_U8("graphics/weather/drought0.bin.lz");
 const u8 DroughtPaletteData_1[] = INCBIN_U8("graphics/weather/drought1.bin.lz");
@@ -1437,7 +1443,8 @@ bool8 sub_807E460(void)
     return FALSE;
 }
 
-extern const struct Coords16 gUnknown_0839AAC4[];
+//extern const struct Coords16 gUnknown_0839AAC4[];
+extern const u16 gUnknown_0839AAC4[][2];
 //extern const struct Coords16 gUnknown_0839AABC[];
 extern const s16 gUnknown_0839AABC[][2];
 
@@ -1452,7 +1459,8 @@ void sub_807E4EC(struct Sprite *sprite)
         sprite->data1 = 361;
     randVal = sprite->data1 * 1103515245 + 12345;
     sprite->data1 = ((randVal & 0x7FFF0000) >> 16) % 600;
-    r6 = gUnknown_0839AAC4[gUnknown_08396FC4->unknown_6DC].x;
+
+    r6 = gUnknown_0839AAC4[gUnknown_08396FC4->unknown_6DC][0];
 
     r4 = sprite->data1 % 30;
     sprite->data2 = r4 * 8;  // useless assignment
@@ -1468,8 +1476,204 @@ void sub_807E4EC(struct Sprite *sprite)
 
     sprite->data2 -= gUnknown_0839AABC[gUnknown_08396FC4->unknown_6DC][0] * r6;
     sprite->data3 -= gUnknown_0839AABC[gUnknown_08396FC4->unknown_6DC][1] * r6;
+
     StartSpriteAnim(sprite, 0);
     sprite->data4 = 0;
     sprite->coordOffsetEnabled = FALSE;
     sprite->data0 = r6;
+}
+
+void sub_807E5C0(struct Sprite *sprite)
+{
+    if (sprite->data4 == 0)
+    {
+        sprite->data2 += gUnknown_0839AABC[gUnknown_08396FC4->unknown_6DC][0];
+        sprite->data3 += gUnknown_0839AABC[gUnknown_08396FC4->unknown_6DC][1];
+        sprite->pos1.x = sprite->data2 >> 4;
+        sprite->pos1.y = sprite->data3 >> 4;
+
+        if (sprite->data5 != 0
+         && (sprite->pos1.x >= -8 && sprite->pos1.x <= 248)
+         && sprite->pos1.y >= -16 && sprite->pos1.y <= 176)
+            sprite->invisible = FALSE;
+        else
+            sprite->invisible = TRUE;
+
+        sprite->data0--;
+        if (sprite->data0 == 0)
+        {
+            StartSpriteAnim(sprite, gUnknown_08396FC4->unknown_6DC + 1);
+            sprite->data4 = 1;
+            sprite->pos1.x -= gSpriteCoordOffsetX;
+            sprite->pos1.y -= gSpriteCoordOffsetY;
+            sprite->coordOffsetEnabled = TRUE;
+        }
+    }
+    else if (sprite->animEnded)
+    {
+        sprite->invisible = TRUE;
+        sub_807E4EC(sprite);
+    }
+}
+
+void sub_807E6C4(struct Sprite *sprite)
+{
+    if (sprite->data0 == 0)
+    {
+        sub_807E4EC(sprite);
+        sprite->callback = sub_807E5C0;
+    }
+    else
+    {
+        sprite->data0--;
+    }
+}
+
+void sub_807E6F0(struct Sprite *sprite, u16 b)
+{
+    u16 r8 = gUnknown_0839AAC4[gUnknown_08396FC4->unknown_6DC][0];
+    u16 r6 = b / (gUnknown_0839AAC4[gUnknown_08396FC4->unknown_6DC][1] + r8);
+    u16 r4 = b % (gUnknown_0839AAC4[gUnknown_08396FC4->unknown_6DC][1] + r8);
+
+    while (--r6 != 0xFFFF)
+        sub_807E4EC(sprite);
+    if (r4 < r8)
+    {
+        while (--r4 != 0xFFFF)
+            sub_807E5C0(sprite);
+        sprite->data6 = 0;
+    }
+    else
+    {
+        sprite->data0 = r4 - r8;
+        sprite->invisible = TRUE;
+        sprite->data6 = 1;
+    }
+}
+
+void sub_807E7A4(void)
+{
+    LoadSpriteSheet(&gUnknown_0839AACC);
+}
+
+extern const struct Coords16 gUnknown_0839AA08[];
+
+bool8 sub_807E7B4(void)
+{
+    u8 r7;
+    u8 spriteId;
+
+    if (gUnknown_08396FC4->unknown_6DA == 24)
+        return FALSE;
+
+    r7 = gUnknown_08396FC4->unknown_6DA;
+    spriteId = CreateSpriteAtEnd(&gSpriteTemplate_839AAA4,
+      gUnknown_0839AA08[r7].x, gUnknown_0839AA08[r7].y, 78);
+    if (spriteId != 64)
+    {
+        gSprites[spriteId].data5 = 0;
+        gSprites[spriteId].data1 = r7 * 145;
+        while (gSprites[spriteId].data1 >= 600)
+            gSprites[spriteId].data1 -= 600;
+        sub_807E4EC(&gSprites[spriteId]);
+        sub_807E6F0(&gSprites[spriteId], r7 * 9);
+        gSprites[spriteId].invisible = TRUE;
+        gUnknown_08396FC4->unknown_0[r7] = &gSprites[spriteId];
+    }
+    else
+    {
+        gUnknown_08396FC4->unknown_0[r7] = NULL;
+    }
+
+    if (++gUnknown_08396FC4->unknown_6DA == 24)
+    {
+        u16 i;
+
+        for (i = 0; i < 24; i++)
+        {
+            if (gUnknown_08396FC4->unknown_0[i] != NULL)
+            {
+                if (gUnknown_08396FC4->unknown_0[i]->data6 == 0)
+                    gUnknown_08396FC4->unknown_0[i]->callback = sub_807E5C0;
+                else
+                    gUnknown_08396FC4->unknown_0[i]->callback = sub_807E6C4;
+            }
+        }
+        return FALSE;
+    }
+    return TRUE;
+}
+
+bool8 sub_807E8E8(void)
+{
+    if (gUnknown_08396FC4->unknown_6D8 == gUnknown_08396FC4->unknown_6D9)
+        return FALSE;
+
+    if (++gUnknown_08396FC4->unknown_6D6 > gUnknown_08396FC4->unknown_6DB)
+    {
+        gUnknown_08396FC4->unknown_6D6 = 0;
+        if (gUnknown_08396FC4->unknown_6D8 < gUnknown_08396FC4->unknown_6D9)
+        {
+            gUnknown_08396FC4->unknown_0[gUnknown_08396FC4->unknown_6D8++]->data5 = 1;
+        }
+        else
+        {
+            gUnknown_08396FC4->unknown_6D8--;
+            gUnknown_08396FC4->unknown_0[gUnknown_08396FC4->unknown_6D8]->data5 = 0;
+            gUnknown_08396FC4->unknown_0[gUnknown_08396FC4->unknown_6D8]->invisible = TRUE;
+        }
+    }
+    return TRUE;
+}
+
+void sub_807E974(void)
+{
+    u16 i;
+
+    for (i = 0; i < gUnknown_08396FC4->unknown_6DA; i++)
+    {
+        if (gUnknown_08396FC4->unknown_0[i] != NULL)
+            DestroySprite(gUnknown_08396FC4->unknown_0[i]);
+    }
+    gUnknown_08396FC4->unknown_6DA = 0;
+    FreeSpriteTilesByTag(0x1206);
+}
+
+void sub_807E9C8(void)
+{
+    gUnknown_08396FC4->unknown_6CC = 0;
+    gUnknown_08396FC4->unknown_6D2 = 0;
+    gUnknown_08396FC4->unknown_6C1 = 3;
+    gUnknown_08396FC4->unknown_6C2 = 20;
+    gUnknown_08396FC4->unknown_6E5 = 16;
+    gUnknown_08396FC4->unknown_6E0 = 0;
+}
+
+void snowflakes_progress2(void);
+void sub_807ED48(struct Sprite *);
+
+void sub_807EA18(void)
+{
+    sub_807E9C8();
+    while (gUnknown_08396FC4->unknown_6D2 == 0)
+    {
+        u16 i;
+
+        snowflakes_progress2();
+        for (i = 0; i < gUnknown_08396FC4->unknown_6E4; i++)
+        {
+            sub_807ED48(gUnknown_08396FC4->unknown_60[i]);
+        }
+    }
+}
+
+u8 snowflakes_progress(void);
+
+void snowflakes_progress2(void)
+{
+    if (gUnknown_08396FC4->unknown_6CC == 0 && snowflakes_progress() == 0)
+    {
+        gUnknown_08396FC4->unknown_6D2 = 1;
+        gUnknown_08396FC4->unknown_6CC++;
+    }
 }
