@@ -60,6 +60,12 @@ struct UnknownStruct5
     u16 *unk4;
 };
 
+struct GenderIconCoords
+{
+    u8 x;
+    u8 y;
+};
+
 #define ewram1C000 (*(struct Unk201C000 *)(ewram + 0x1C000))
 #define ewram1F000 (*(struct Unk201F000 *)(ewram + 0x1F000))
 
@@ -72,6 +78,7 @@ extern u8 gPlayerPartyCount;
 extern s32 gBattleMoveDamage;
 extern u16 gMoveToLearn;
 
+extern struct GenderIconCoords const gUnknown_08376738[12][6];
 //extern const u16 gUnknown_083769A8[][6];
 //extern const u8 gUnknown_083769A8[][12];
 extern u16 *const gUnknown_08376858[][6];
@@ -83,6 +90,8 @@ extern const u8 *const gUnknown_08376D04[NUM_STATS];
 extern const struct UnknownStruct5 gUnknown_08376BB4[][6];
 extern u8 gUnknown_02039460[];
 extern u8 gTileBuffer[];
+
+extern void PartyMenuWriteTilemap(u8, u8 b, u8 c);
 
 static void sub_806E884(u8 taskId);
 static void sub_8070D90(u8 taskId);
@@ -111,6 +120,36 @@ void sub_806AEDC(void)
 #define WINDOW_RIGHT (29)
 #endif
 
+
+void PartyMenuDoPrintGenderIcon(u16 species, u8 gender, u8 c, u8 monIndex, u8 *nickname)
+{
+    if (!ShouldHideGenderIcon(species, nickname))
+    {
+        u8 x = gUnknown_08376738[c][monIndex].x + 3;
+        u8 y = gUnknown_08376738[c][monIndex].y + 1;
+
+        switch (gender)
+        {
+            case MON_MALE:
+                PartyMenuWriteTilemap(0x42, x, y);
+                break;
+            case MON_FEMALE:
+                PartyMenuWriteTilemap(0x44, x, y);
+                break;
+        }
+    }
+}
+
+void PartyMenuPrintGenderIcon(u8 monIndex, u8 b, struct Pokemon *pokemon)
+{
+    u16 species2;
+    u8 gender;
+
+    GetMonNickname(pokemon, gStringVar1);
+    species2 = GetMonData(pokemon, MON_DATA_SPECIES2);
+    gender = GetMonGender(pokemon);
+    PartyMenuDoPrintGenderIcon(species2, gender, b, monIndex, gStringVar1);
+}
 
 void PartyMenuDoPrintHP(u8 monIndex, u8 b, u16 currentHP, u16 maxHP)
 {

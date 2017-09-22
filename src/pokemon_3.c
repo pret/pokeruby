@@ -1337,7 +1337,7 @@ u8 *sub_8040D08(void)
     return gLinkPlayers[sub_803FC34(gLinkPlayers[id].lp_field_18 ^ 2)].name;
 }
 
-bool32 sub_8040D3C(u16 species, u8 *name, u8 language)
+bool32 ShouldHideGenderIconForLanguage(u16 species, u8 *name, u8 language)
 {
     bool32 retVal = FALSE;
     if (species == SPECIES_NIDORAN_M || species == SPECIES_NIDORAN_F)
@@ -1362,12 +1362,12 @@ bool32 sub_8040D3C(u16 species, u8 *name, u8 language)
     return retVal;
 }
 
-bool32 sub_8040D8C(u16 species, u8 *name)
+bool32 ShouldHideGenderIcon(u16 species, u8 *name)
 {
     u8 language = GAME_LANGUAGE;
     if (name[0] == 0xFC && name[1] == 21)
         language = LANGUAGE_JAPANESE;
-    return sub_8040D3C(species, name, language);
+    return ShouldHideGenderIconForLanguage(species, name, language);
 }
 
 bool32 unref_sub_8040DAC(struct Pokemon *mon)
@@ -1376,5 +1376,5 @@ bool32 unref_sub_8040DAC(struct Pokemon *mon)
     u16 species = GetMonData(mon, MON_DATA_SPECIES, 0);
     u8 language = GetMonData(mon, MON_DATA_LANGUAGE, 0);
     GetMonData(mon, MON_DATA_NICKNAME, name);
-    return sub_8040D3C(species, name, language);
+    return ShouldHideGenderIconForLanguage(species, name, language);
 }

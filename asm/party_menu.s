@@ -6769,7 +6769,7 @@ _0806E324:
 	adds r0, r7, 0
 	adds r1, r6, 0
 	adds r2, r5, 0
-	bl PartyMenuPutNicknameTilemap
+	bl PartyMenuPrintGenderIcon
 _0806E32E:
 	pop {r4-r7}
 	pop {r0}
@@ -6799,106 +6799,5 @@ _0806E33C:
 	.align 2, 0
 _0806E358: .4byte gPlayerParty
 	thumb_func_end PartyMenuPrintMonsLevelOrStatus
-
-	thumb_func_start PartyMenuDoPutNicknameTilemap
-PartyMenuDoPutNicknameTilemap: @ 806E35C
-	push {r4-r7,lr}
-	ldr r4, [sp, 0x14]
-	lsls r0, 16
-	lsrs r0, 16
-	lsls r1, 24
-	lsrs r7, r1, 24
-	lsls r2, 24
-	lsrs r5, r2, 24
-	lsls r3, 24
-	lsrs r6, r3, 24
-	adds r1, r4, 0
-	bl sub_8040D8C
-	cmp r0, 0
-	bne _0806E3BA
-	ldr r2, _0806E3A4 @ =gUnknown_08376738
-	lsls r1, r6, 2
-	lsls r0, r5, 1
-	adds r0, r5
-	lsls r0, 3
-	adds r1, r0
-	adds r1, r2
-	ldrb r0, [r1]
-	adds r0, 0x3
-	lsls r0, 24
-	lsrs r3, r0, 24
-	ldrb r0, [r1, 0x1]
-	adds r0, 0x1
-	lsls r0, 24
-	lsrs r2, r0, 24
-	cmp r7, 0
-	beq _0806E3A8
-	cmp r7, 0xFE
-	beq _0806E3B2
-	b _0806E3BA
-	.align 2, 0
-_0806E3A4: .4byte gUnknown_08376738
-_0806E3A8:
-	movs r0, 0x42
-	adds r1, r3, 0
-	bl PartyMenuWriteTilemap
-	b _0806E3BA
-_0806E3B2:
-	movs r0, 0x44
-	adds r1, r3, 0
-	bl PartyMenuWriteTilemap
-_0806E3BA:
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end PartyMenuDoPutNicknameTilemap
-
-	thumb_func_start PartyMenuPutNicknameTilemap
-PartyMenuPutNicknameTilemap: @ 806E3C0
-	push {r4-r6,lr}
-	mov r6, r9
-	mov r5, r8
-	push {r5,r6}
-	sub sp, 0x4
-	mov r8, r0
-	adds r6, r1, 0
-	adds r5, r2, 0
-	lsls r0, 24
-	lsrs r0, 24
-	mov r8, r0
-	lsls r6, 24
-	lsrs r6, 24
-	ldr r0, _0806E41C @ =gStringVar1
-	mov r9, r0
-	adds r0, r5, 0
-	mov r1, r9
-	bl GetMonNickname
-	adds r0, r5, 0
-	movs r1, 0x41
-	bl GetMonData
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	adds r0, r5, 0
-	bl GetMonGender
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	mov r0, r9
-	str r0, [sp]
-	adds r0, r4, 0
-	adds r2, r6, 0
-	mov r3, r8
-	bl PartyMenuDoPutNicknameTilemap
-	add sp, 0x4
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0806E41C: .4byte gStringVar1
-	thumb_func_end PartyMenuPutNicknameTilemap
 
 	.align 2, 0 @ Don't pad with nop.

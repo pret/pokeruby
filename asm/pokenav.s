@@ -21564,7 +21564,7 @@ _080F65EA:
 	lsrs r4, r0, 24
 	mov r0, r9
 	mov r1, r10
-	bl sub_8040D8C
+	bl ShouldHideGenderIcon
 	cmp r0, 0
 	beq _080F65FC
 	movs r4, 0xFF

@@ -2388,7 +2388,7 @@ static void sub_80451A0(u8 a, struct Pokemon *pkmn)
     gender = GetMonGender(pkmn);
     species = GetMonData(pkmn, MON_DATA_SPECIES);
     language = GetMonData(pkmn, MON_DATA_LANGUAGE);
-    if (sub_8040D3C(species, nickname, language))
+    if (ShouldHideGenderIconForLanguage(species, nickname, language))
         gender = 100;
     switch (gender)
     {

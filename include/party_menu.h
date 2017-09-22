@@ -109,6 +109,8 @@ void PartyMenuClearLevelStatusTilemap();
 void PartyMenuPrintMonLevelOrStatus();
 void PartyMenuPrintMonsLevelOrStatus(void);
 void PartyMenuPrintMonsLevelOrStatus(void);
+void PartyMenuDoPrintGenderIcon(u16 species, u8 gender, u8 c, u8 monIndex, u8 *nickname);
+void PartyMenuPrintGenderIcon(u8 monIndex, u8 b, struct Pokemon *pokemon);
 void PartyMenuDoPrintHP(u8 monIndex, u8 b, u16 currentHP, u16 maxHP);
 void PartyMenuTryPrintMonsHP(void);
 void nullsub_13(void);

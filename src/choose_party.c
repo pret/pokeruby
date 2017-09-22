@@ -70,13 +70,11 @@ extern u8 GetMonStatusAndPokerus();
 extern void PartyMenuPrintHP();
 extern void PartyMenuPutStatusTilemap(u8, int, u8);
 extern void PartyMenuPrintLevel();
-extern void PartyMenuPutNicknameTilemap();
 extern void PrintPartyMenuMonNickname();
 extern bool8 sub_80F9344(void);
 extern void sub_806D4AC();
 extern void sub_806D3B4();
 extern void PartyMenuDoPrintLevel(u8, u8, u8);
-extern void PartyMenuDoPutNicknameTilemap(u16, u8, u8, u8, const u8 *);
 extern void box_print(u8, int, const u8 *);
 extern void sub_806BCE8(void);
 
@@ -647,7 +645,7 @@ static void sub_81229B8(void)
                 PartyMenuPutStatusTilemap(i, 3, status - 1);
             else
                 PartyMenuPrintLevel(i, 3, &gPlayerParty[i]);
-            PartyMenuPutNicknameTilemap(i, 3, &gPlayerParty[i]);
+            PartyMenuPrintGenderIcon(i, 3, &gPlayerParty[i]);
             PrintPartyMenuMonNickname(i, 3, &gPlayerParty[i]);
             PartyMenuDrawHPBar(i, 3, &gPlayerParty[i]);
         }
@@ -697,7 +695,7 @@ static void sub_8122B10(u8 taskId)
                 PartyMenuPutStatusTilemap(i + 3, 3, r2 - 1);
             else
                 PartyMenuDoPrintLevel(i + 3, 3, gUnknown_02023A00[i].level);
-            PartyMenuDoPutNicknameTilemap(gUnknown_02023A00[i].species, gUnknown_02023A00[i].gender, 3, i + 3, gUnknown_02023A00[i].nickname);
+            PartyMenuDoPrintGenderIcon(gUnknown_02023A00[i].species, gUnknown_02023A00[i].gender, 3, i + 3, gUnknown_02023A00[i].nickname);
             StringCopy(gStringVar1, gUnknown_02023A00[i].nickname);
             StringGetEnd10(gStringVar1);
             SanitizeNameString(gStringVar1);
