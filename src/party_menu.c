@@ -120,6 +120,58 @@ void sub_806AEDC(void)
 #define WINDOW_RIGHT (29)
 #endif
 
+extern void PartyMenuPutStatusTilemap(u8 monIndex, u8 b, u8 status);
+extern void PartyMenuDoPrintLevel(u8 monIndex, u8 b, u8 level);
+
+
+void PartyMenuPrintLevel(u8 monIndex, u8 b, struct Pokemon *pokemon)
+{
+    u16 level = GetMonData(pokemon, MON_DATA_LEVEL);
+    PartyMenuDoPrintLevel(monIndex, b, level);
+}
+
+void PartyMenuPrintMonLevelOrStatus(u8 monIndex, struct Pokemon *pokemon)
+{
+    if (GetMonData(pokemon, MON_DATA_SPECIES) && !GetMonData(pokemon, MON_DATA_IS_EGG))
+    {
+        u8 statusAndPkrs;
+        u8 isLinkDoubleBattle;
+        u8 b;
+
+        statusAndPkrs = GetMonStatusAndPokerus(pokemon);
+
+        isLinkDoubleBattle = IsLinkDoubleBattle();
+        if (isLinkDoubleBattle == TRUE)
+        {
+            b = 2;
+        }
+        else
+        {
+            b = IsDoubleBattle();
+        }
+
+        if (statusAndPkrs != 0 && statusAndPkrs != 6)
+        {
+            PartyMenuPutStatusTilemap(monIndex, b, statusAndPkrs - 1);
+        }
+        else
+        {
+            PartyMenuPrintLevel(monIndex, b, pokemon);
+        }
+
+        PartyMenuPrintGenderIcon(monIndex, b, pokemon);
+    }
+}
+
+void PartyMenuPrintMonsLevelOrStatus()
+{
+    u8 i;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        PartyMenuPrintMonLevelOrStatus(i, &gPlayerParty[i]);
+    }
+}
 
 void PartyMenuDoPrintGenderIcon(u16 species, u8 gender, u8 c, u8 monIndex, u8 *nickname)
 {
@@ -181,8 +233,8 @@ void PartyMenuTryPrintHP(u8 monIndex, struct Pokemon *pokemon)
 {
     if (GetMonData(pokemon, MON_DATA_SPECIES) && !GetMonData(pokemon, MON_DATA_IS_EGG))
     {
-        u8 isDoubleBattle = IsLinkDoubleBattle();
-        if (isDoubleBattle == TRUE)
+        u8 isLinkDoubleBattle = IsLinkDoubleBattle();
+        if (isLinkDoubleBattle == TRUE)
         {
             PartyMenuPrintHP(monIndex, 2, pokemon);
         }
