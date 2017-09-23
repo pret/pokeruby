@@ -91,8 +91,6 @@ extern const struct UnknownStruct5 gUnknown_08376BB4[][6];
 extern u8 gUnknown_02039460[];
 extern u8 gTileBuffer[];
 
-extern void PartyMenuWriteTilemap(u8, u8 b, u8 c);
-
 static void sub_806E884(u8 taskId);
 static void sub_8070D90(u8 taskId);
 
@@ -120,9 +118,84 @@ void sub_806AEDC(void)
 #define WINDOW_RIGHT (29)
 #endif
 
-extern void PartyMenuPutStatusTilemap(u8 monIndex, u8 b, u8 status);
-extern void PartyMenuDoPrintLevel(u8 monIndex, u8 b, u8 level);
 
+
+u8 *GetMonNickname(struct Pokemon *pokemon, u8 *stringBuffer)
+{
+    GetMonData(pokemon, MON_DATA_NICKNAME, stringBuffer);
+    return StringGetEnd10(stringBuffer);
+}
+
+void PartyMenuPutStatusTilemap(u8 monIndex, u8 b, u8 status)
+{
+    u8 i;
+    u8 x = gUnknown_08376738[b][monIndex].x - 1;
+    u8 y = gUnknown_08376738[b][monIndex].y + 1;
+    u16 *vramPtr = (u16*)(VRAM + 0xF000) + (x + y * 32);
+    u8 var1 = status * 4;
+
+    for (i = 0; i < 4; i++)
+    {
+        vramPtr[i] = (0x18C + var1 + i) | -0x5000;
+    }
+}
+
+static void PartyMenuClearLevelStatusTilemap(u8 monIndex)
+{
+    u8 isLinkDoubleBattle;
+    u8 b;
+    u8 x;
+    u8 y;
+    u16 *vramPtr;
+    u8 i;
+
+    isLinkDoubleBattle = IsLinkDoubleBattle();
+    if (isLinkDoubleBattle == TRUE)
+    {
+        b = 2;
+    }
+    else
+    {
+        b = IsDoubleBattle();
+    }
+
+    x = gUnknown_08376738[b][monIndex].x - 1;
+    y = gUnknown_08376738[b][monIndex].y + 1;
+
+    vramPtr = (u16*)(VRAM + 0xF000) + (x + y * 32);
+    for (i = 0; i < 4; i++)
+    {
+        vramPtr[i] = 0;
+    }
+}
+
+static void PartyMenuWriteTilemap(u8 a, u8 x, u8 y)
+{
+    u16 *vramPtr = (u16*)(VRAM + 0xF000) + (x + y * 32);
+    *vramPtr = a + 0x10C;
+}
+
+void PartyMenuDoPrintLevel(u8 monIndex, u8 b, u8 level)
+{
+    u8 *stringVar;
+    u32 var1;
+    u8 x = gUnknown_08376738[b][monIndex].x;
+    u8 y = gUnknown_08376738[b][monIndex].y;
+
+    PartyMenuWriteTilemap(0x40, x - 1, y + 1);
+
+    stringVar = gStringVar1;
+    stringVar[0] = 0xFC;
+    stringVar[1] = 0x12;
+    stringVar[2] = 0x8;
+
+    ConvertIntToDecimalString(&stringVar[3], level);
+
+    var1 = 0;
+    CpuFastSet(&var1, gUnknown_02039460, 0x1000020);
+    sub_8004E3C((struct WindowConfig *)&gWindowConfig_81E6CAC, gUnknown_02039460 - 0x100 /*gTileBuffer*/, gStringVar1);
+    CpuFastSet(gUnknown_02039460, (void *)(OBJ_VRAM1 + 0x200 + (monIndex * 0x400)), 32);
+}
 
 void PartyMenuPrintLevel(u8 monIndex, u8 b, struct Pokemon *pokemon)
 {
@@ -214,7 +287,7 @@ void PartyMenuDoPrintHP(u8 monIndex, u8 b, u16 currentHP, u16 maxHP)
     var = 0;
 
     CpuFastSet(&var, gUnknown_02039460, 0x1000040);
-    sub_8004E3C((struct WindowConfig *)&gWindowConfig_81E6CAC, gUnknown_02039460 - 0x100, gStringVar1);
+    sub_8004E3C((struct WindowConfig *)&gWindowConfig_81E6CAC, gUnknown_02039460 - 0x100 /*gTileBuffer*/, gStringVar1);
     CpuFastSet(gUnknown_02039460, (void *)(OBJ_VRAM1 + 0x300 + (monIndex * 0x400)), 64);
 }
 

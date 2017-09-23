@@ -68,12 +68,10 @@ extern void CreatePartyMenuMonIcon();
 extern void CreateHeldItemIcon_806DCD4(int, u8, int);
 extern u8 GetMonStatusAndPokerus();
 extern void PartyMenuPrintHP();
-extern void PartyMenuPutStatusTilemap(u8, int, u8);
 extern void PrintPartyMenuMonNickname();
 extern bool8 sub_80F9344(void);
 extern void sub_806D4AC();
 extern void sub_806D3B4();
-extern void PartyMenuDoPrintLevel(u8, u8, u8);
 extern void box_print(u8, int, const u8 *);
 extern void sub_806BCE8(void);
 
