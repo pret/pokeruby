@@ -74,7 +74,9 @@ struct Weather
     u8 unknown_6EB;
     u8 unknown_6EC;
     u8 unknown_6ED;
-    u8 filler_6EE[0xF4-0xEE];
+    u16 unknown_6EE;
+    u16 unknown_6F0;
+    u16 unknown_6F2;
     u8 unknown_6F4[6];
     u8 unknown_6FA;
     u8 unknown_6FB;
@@ -2022,5 +2024,122 @@ void sub_807F3F8(u16 a)
     {
         gUnknown_08396FC4->unknown_6E8 = Random() % a;
         gUnknown_08396FC4->unknown_6ED = 1;
+    }
+}
+
+void sub_807F434(void)
+{
+    if (gUnknown_08396FC4->unknown_6ED == 1)
+    {
+        if (gUnknown_08396FC4->unknown_6E8 == 0)
+        {
+            if (IsSEPlaying())
+                return;
+            if (Random() & 1)
+                PlaySE(0x57);
+            else
+                PlaySE(0x58);
+            gUnknown_08396FC4->unknown_6ED = 0;
+        }
+        else
+        {
+            gUnknown_08396FC4->unknown_6E8--;
+        }
+    }
+}
+
+void sub_807F49C(void)
+{
+    gUnknown_08396FC4->unknown_6CC = 0;
+    gUnknown_08396FC4->unknown_6D2 = 0;
+    gUnknown_08396FC4->unknown_6C1 = 0;
+    gUnknown_08396FC4->unknown_6C2 = 20;
+    if (gUnknown_08396FC4->unknown_6FB == 0)
+    {
+        gUnknown_08396FC4->unknown_6F0 = 0;
+        gUnknown_08396FC4->unknown_6F2 = 0;
+        gUnknown_08396FC4->unknown_6EE = 0;
+        sub_807DB64(0, 16);
+    }
+}
+
+void sub_807F52C(void);
+
+void sub_807F4FC(void)
+{
+    sub_807F49C();
+    while (gUnknown_08396FC4->unknown_6D2 == 0)
+        sub_807F52C();
+}
+
+void sub_807F6E8(void);
+
+void sub_807F52C(void)
+{
+    gUnknown_08396FC4->unknown_6EE = (gSpriteCoordOffsetX - gUnknown_08396FC4->unknown_6F2) & 0xFF;
+    if (++gUnknown_08396FC4->unknown_6F0 > 3)
+    {
+        gUnknown_08396FC4->unknown_6F0 = 0;
+        gUnknown_08396FC4->unknown_6F2++;
+    }
+    switch (gUnknown_08396FC4->unknown_6CC)
+    {
+    case 0:
+        sub_807F6E8();
+        if (gUnknown_08396FC4->unknown_6D0 == 6)
+            sub_807DBA4(12, 8, 3);
+        else
+            sub_807DBA4(4, 16, 0);
+        gUnknown_08396FC4->unknown_6CC++;
+        break;
+    case 1:
+        if (sub_807DBE8())
+        {
+            gUnknown_08396FC4->unknown_6D2 = 1;
+            gUnknown_08396FC4->unknown_6CC++;
+        }
+        break;
+    }
+}
+
+void sub_807F7A4(void);
+
+bool8 sub_807F5EC(void)
+{
+    gUnknown_08396FC4->unknown_6EE = (gSpriteCoordOffsetX - gUnknown_08396FC4->unknown_6F2) & 0xFF;
+    if (++gUnknown_08396FC4->unknown_6F0 > 3)
+    {
+        gUnknown_08396FC4->unknown_6F0 = 0;
+        gUnknown_08396FC4->unknown_6F2++;
+    }
+    switch (gUnknown_08396FC4->unknown_6CE)
+    {
+    case 0:
+        sub_807DBA4(0, 16, 3);
+        gUnknown_08396FC4->unknown_6CE++;
+        break;
+    case 1:
+        if (!sub_807DBE8())
+            break;
+        gUnknown_08396FC4->unknown_6CE++;
+        break;
+    case 2:
+        sub_807F7A4();
+        gUnknown_08396FC4->unknown_6CE++;
+        break;
+    default:
+        return FALSE;
+    }
+    return TRUE;
+}
+
+void sub_807F688(struct Sprite *sprite)
+{
+    sprite->pos2.y = (u8)gSpriteCoordOffsetY;
+    sprite->pos1.x = gUnknown_08396FC4->unknown_6EE + 32 + sprite->data0 * 64;
+    if (sprite->pos1.x > 0x10F)
+    {
+        sprite->pos1.x = 480 + gUnknown_08396FC4->unknown_6EE - (4 - sprite->data0) * 64;
+        sprite->pos1.x &= 0x1FF;
     }
 }
