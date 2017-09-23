@@ -97,10 +97,8 @@ void SetMonIconAnim();
 void TryCreatePartyMenuMonIcon(u8, u8, struct Pokemon *);
 void LoadHeldItemIconGraphics(void);
 void PartyMenuTryGiveMonHeldItem(u8 taskId, u16 newItem, TaskFunc c);
-void CreateHeldItemIcons_806DC34(); // undefined args
-void CreateHeldItemIcons_806DC34();
-u8 GetMonIconSpriteId_maybe();
-void SetHeldItemIconVisibility();
+void CreateHeldItemIcons_806DC34(u8 taskId);
+void SetHeldItemIconVisibility(u8 a, u8 monIndex);
 void PartyMenuDoPrintMonNickname(u8 monIndex, int b, const u8 *nameBuffer);
 void PrintPartyMenuMonNickname(u8 monIndex, u8 b, struct Pokemon *pokemon);
 void PrintPartyMenuMonNicknames(void);

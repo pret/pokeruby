@@ -85,11 +85,14 @@ extern u16 *const gUnknown_08376858[][6];
 extern const u8 gUnknown_083769A8[];
 extern const u8 gUnknown_08376D1C[NUM_STATS];
 extern const u16 gUnknown_08376504[];
+extern const struct SpriteSheet gUnknown_083765DC;
+extern const struct SpritePalette gUnknown_083765E4;
 extern void (*const gUnknown_08376B54[])(u8);
 extern const u8 *const gUnknown_08376D04[NUM_STATS];
 extern const struct UnknownStruct5 gUnknown_08376BB4[][6];
 extern u8 gUnknown_02039460[];
 extern u8 gTileBuffer[];
+extern const struct SpriteTemplate gSpriteTemplate_837660C[];
 
 static void sub_806E884(u8 taskId);
 static void sub_8070D90(u8 taskId);
@@ -118,6 +121,413 @@ void sub_806AEDC(void)
 #define WINDOW_RIGHT (29)
 #endif
 
+extern u8 GetMonIconSpriteId_maybe(u8 taskId, u8 monIndex);
+
+
+void LoadHeldItemIconGraphics(void)
+{
+    LoadSpriteSheet(&gUnknown_083765DC);
+    LoadSpritePalette(&gUnknown_083765E4);
+}
+
+void SpriteCB_HeldItemIcon(struct Sprite *sprite)
+{
+
+    u8 data7 = sprite->data7;
+    if (gSprites[data7].invisible)
+    {
+        sprite->invisible = 1;
+    }
+    else
+    {
+        sprite->invisible = 0;
+        sprite->pos1.x = gSprites[data7].pos1.x + gSprites[data7].pos2.x;
+        sprite->pos1.y = gSprites[data7].pos1.y + gSprites[data7].pos2.y;
+    }
+}
+
+void CreateHeldItemIcon(u8 a, u8 b)
+{
+    u8 subPriority;
+    u8 spriteId;
+
+    subPriority = gSprites[a].subpriority;
+    spriteId = CreateSprite(gSpriteTemplate_837660C, 0xFA, 0xAA, subPriority - 1);
+
+    gSprites[spriteId].pos2.x = 4;
+    gSprites[spriteId].pos2.y = 10;
+    gSprites[spriteId].callback = SpriteCB_HeldItemIcon;
+    gSprites[spriteId].data7 = a;
+
+    StartSpriteAnim(&gSprites[spriteId], b);
+    gSprites[spriteId].callback(&gSprites[spriteId]);
+}
+
+void CreateHeldItemIcons(u8 *a, u8 *b, u8 c)
+{
+    u16 i;
+    u16 heldItem;
+
+    switch(c)
+    {
+    case 0:
+        i = 0;
+        while (i < a[0])
+        {
+            heldItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
+            if (heldItem)
+            {
+                CreateHeldItemIcon(b[i], ItemIsMail(heldItem));
+            }
+
+            i++;
+        }
+        break;
+    case 1:
+        i = 0;
+        while (i < a[1])
+        {
+            heldItem = GetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM);
+            if (heldItem)
+            {
+                CreateHeldItemIcon(b[i + 6], ItemIsMail(heldItem));
+            }
+
+            i++;
+        }
+        break;
+    }
+}
+
+void CreateHeldItemIcons_806DC34(u8 taskId)
+{
+    u8 i;
+    u8 monIconSpriteId;
+    u8 heldItemSpriteId;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES))
+        {
+            monIconSpriteId = GetMonIconSpriteId_maybe(taskId, i);
+            heldItemSpriteId = CreateSprite(gSpriteTemplate_837660C, 0xFA, 0xAA, 4);
+
+            gSprites[heldItemSpriteId].pos2.x = 4;
+            gSprites[heldItemSpriteId].pos2.y = 10;
+            gSprites[heldItemSpriteId].data7 = monIconSpriteId;
+            gSprites[monIconSpriteId].data7 = heldItemSpriteId;
+
+            SetHeldItemIconVisibility(taskId, i);
+            gSprites[heldItemSpriteId].callback(&gSprites[heldItemSpriteId]);
+        }
+    }
+}
+
+#ifdef NONMATCHING
+void CreateHeldItemIcon_806DCD4(int taskId, u8 monIndex, int item)
+{
+    u8 monIconSpriteId;
+    u8 heldItemSpriteId;
+
+    monIconSpriteId = GetMonIconSpriteId_maybe(taskId, monIndex);
+    heldItemSpriteId = CreateSprite(gSpriteTemplate_837660C, 0xFA, 0xAA, 4);
+
+    gSprites[heldItemSpriteId].pos2.x = 4;
+    gSprites[heldItemSpriteId].pos2.y = 10;
+    gSprites[heldItemSpriteId].data7 = monIconSpriteId;
+    gSprites[monIconSpriteId].data7 = heldItemSpriteId;
+
+    if (!item)
+    {
+        gSprites[heldItemSpriteId].invisible = 1;
+    }
+    else
+    {
+        if (ItemIsMail(item))
+        {
+            StartSpriteAnim(&gSprites[heldItemSpriteId], 1);
+        }
+        else
+        {
+            StartSpriteAnim(&gSprites[heldItemSpriteId], 0);
+        }
+
+        gSprites[heldItemSpriteId].invisible = 0;
+    }
+
+    gSprites[heldItemSpriteId].callback(&gSprites[heldItemSpriteId]);
+}
+#else
+__attribute__((naked))
+void CreateHeldItemIcon_806DCD4(u8 a, u8 monIndex)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    lsls r1, 24\n\
+    lsrs r1, 24\n\
+    lsls r2, 16\n\
+    lsrs r7, r2, 16\n\
+    bl GetMonIconSpriteId_maybe\n\
+    adds r4, r0, 0\n\
+    lsls r4, 24\n\
+    lsrs r4, 24\n\
+    ldr r0, _0806DD2C @ =gSpriteTemplate_837660C\n\
+    movs r1, 0xFA\n\
+    movs r2, 0xAA\n\
+    movs r3, 0x4\n\
+    bl CreateSprite\n\
+    lsls r0, 24\n\
+    lsrs r6, r0, 24\n\
+    ldr r1, _0806DD30 @ =gSprites\n\
+    lsls r0, r6, 4\n\
+    adds r0, r6\n\
+    lsls r0, 2\n\
+    adds r5, r0, r1\n\
+    movs r0, 0x4\n\
+    strh r0, [r5, 0x24]\n\
+    movs r0, 0xA\n\
+    strh r0, [r5, 0x26]\n\
+    strh r4, [r5, 0x3C]\n\
+    lsls r0, r4, 4\n\
+    adds r0, r4\n\
+    lsls r0, 2\n\
+    adds r0, r1\n\
+    strh r6, [r0, 0x3C]\n\
+    cmp r7, 0\n\
+    bne _0806DD34\n\
+    adds r0, r5, 0\n\
+    adds r0, 0x3E\n\
+    ldrb r1, [r0]\n\
+    movs r2, 0x4\n\
+    orrs r1, r2\n\
+    strb r1, [r0]\n\
+    b _0806DD5C\n\
+    .align 2, 0\n\
+_0806DD2C: .4byte gSpriteTemplate_837660C\n\
+_0806DD30: .4byte gSprites\n\
+_0806DD34:\n\
+    adds r0, r7, 0\n\
+    bl ItemIsMail\n\
+    lsls r0, 24\n\
+    cmp r0, 0\n\
+    beq _0806DD46\n\
+    adds r0, r5, 0\n\
+    movs r1, 0x1\n\
+    b _0806DD4A\n\
+_0806DD46:\n\
+    adds r0, r5, 0\n\
+    movs r1, 0\n\
+_0806DD4A:\n\
+    bl StartSpriteAnim\n\
+    adds r2, r5, 0\n\
+    adds r2, 0x3E\n\
+    ldrb r1, [r2]\n\
+    movs r0, 0x5\n\
+    negs r0, r0\n\
+    ands r0, r1\n\
+    strb r0, [r2]\n\
+_0806DD5C:\n\
+    ldr r2, _0806DD78 @ =gSprites\n\
+    lsls r0, r6, 4\n\
+    adds r0, r6\n\
+    lsls r0, 2\n\
+    adds r1, r2, 0\n\
+    adds r1, 0x1C\n\
+    adds r1, r0, r1\n\
+    adds r0, r2\n\
+    ldr r1, [r1]\n\
+    bl _call_via_r1\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
+_0806DD78: .4byte gSprites\n\
+    .syntax divided\n");
+}
+#endif // NONMATCHING
+
+void SpriteCB_UpdateHeldItemIconPosition(struct Sprite *sprite)
+{
+    u8 spriteId = sprite->data7;
+
+    sprite->pos1.x = gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x;
+    sprite->pos1.y = gSprites[spriteId].pos1.y;
+}
+
+u8 GetMonIconSpriteId_maybe(u8 taskId, u8 monIndex)
+{
+    switch(monIndex)
+    {
+        case 1:
+            return gTasks[taskId].data[0]; 
+            break;
+        case 2:
+            return gTasks[taskId].data[1] >> 8;
+            break;
+        case 3:
+            return gTasks[taskId].data[1];
+            break;
+        case 4:
+            return gTasks[taskId].data[2] >> 8;
+            break;
+        case 5:
+            return gTasks[taskId].data[2];
+            break;
+        case 0:
+        default:
+            return gTasks[taskId].data[0] >> 8;
+            break;
+    }
+}
+
+void SetMonIconSpriteId_maybe(u8 taskId, u8 monIndex, u8 c)
+{
+    switch(monIndex)
+    {
+        case 0:
+            gTasks[taskId].data[0] = (u8)gTasks[taskId].data[0] | (c << 8);
+            break;
+        case 1:
+            gTasks[taskId].data[0] = (gTasks[taskId].data[0] & -0x100) | c;
+            break;
+        case 2:
+            gTasks[taskId].data[1] = (u8)gTasks[taskId].data[1] | (c << 8);
+            break;
+        case 3:
+            gTasks[taskId].data[1] = (gTasks[taskId].data[1] & -0x100) | c;
+            break;
+        case 4:
+            gTasks[taskId].data[2] = (u8)gTasks[taskId].data[2] | (c << 8);
+            break;
+        case 5:
+            gTasks[taskId].data[2] = (gTasks[taskId].data[2] & -0x100) | c;
+            break;
+    }
+}
+
+u16 GetHeldItemIconSpriteIdByMon_maybe(u8 taskId, u8 monIndex)
+{
+    u8 spriteId = GetMonIconSpriteId_maybe(taskId, monIndex);
+    u8 retVal = gSprites[spriteId].data7;
+    return retVal;
+}
+
+#ifdef NONMATCHING
+void SetHeldItemIconVisibility(u8 taskId, u8 monIndex)
+{
+    u8 spriteId;
+    u16 heldItem;
+
+    spriteId = GetHeldItemIconSpriteIdByMon_maybe(taskId, monIndex);
+    if (!GetMonData(&gPlayerParty[monIndex], MON_DATA_HELD_ITEM))
+    {
+        gSprites[spriteId].invisible = 1;
+    }
+    else
+    {
+        struct Sprite *sprite;
+
+        heldItem = GetMonData(&gPlayerParty[monIndex], MON_DATA_HELD_ITEM);
+        sprite = &gSprites[spriteId];
+        if (ItemIsMail(heldItem))
+        {
+            StartSpriteAnim(sprite, 1);
+        }
+        else
+        {
+            StartSpriteAnim(sprite, 0);
+        }
+
+        sprite->invisible = 0;
+    }
+}
+#else
+__attribute__((naked))
+void SetHeldItemIconVisibility(u8 a, u8 monIndex)
+{
+    asm(".syntax unified\n\
+    push {r4-r6,lr}\n\
+    adds r4, r1, 0\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    lsls r4, 24\n\
+    lsrs r4, 24\n\
+    adds r1, r4, 0\n\
+    bl GetHeldItemIconSpriteIdByMon_maybe\n\
+    lsls r0, 24\n\
+    lsrs r5, r0, 24\n\
+    adds r6, r5, 0\n\
+    movs r0, 0x64\n\
+    adds r1, r4, 0\n\
+    muls r1, r0\n\
+    ldr r0, _0806DFA4 @ =gPlayerParty\n\
+    adds r4, r1, r0\n\
+    adds r0, r4, 0\n\
+    movs r1, 0xC\n\
+    bl GetMonData\n\
+    cmp r0, 0\n\
+    bne _0806DFAC\n\
+    ldr r1, _0806DFA8 @ =gSprites\n\
+    lsls r0, r5, 4\n\
+    adds r0, r5\n\
+    lsls r0, 2\n\
+    adds r0, r1\n\
+    adds r0, 0x3E\n\
+    ldrb r1, [r0]\n\
+    movs r2, 0x4\n\
+    orrs r1, r2\n\
+    strb r1, [r0]\n\
+    b _0806DFF6\n\
+    .align 2, 0\n\
+_0806DFA4: .4byte gPlayerParty\n\
+_0806DFA8: .4byte gSprites\n\
+_0806DFAC:\n\
+    adds r0, r4, 0\n\
+    movs r1, 0xC\n\
+    bl GetMonData\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+    bl ItemIsMail\n\
+    lsls r0, 24\n\
+    cmp r0, 0\n\
+    beq _0806DFD8\n\
+    lsls r4, r5, 4\n\
+    adds r4, r5\n\
+    lsls r4, 2\n\
+    ldr r0, _0806DFD4 @ =gSprites\n\
+    adds r4, r0\n\
+    adds r0, r4, 0\n\
+    movs r1, 0x1\n\
+    b _0806DFE6\n\
+    .align 2, 0\n\
+_0806DFD4: .4byte gSprites\n\
+_0806DFD8:\n\
+    lsls r4, r6, 4\n\
+    adds r4, r6\n\
+    lsls r4, 2\n\
+    ldr r0, _0806DFFC @ =gSprites\n\
+    adds r4, r0\n\
+    adds r0, r4, 0\n\
+    movs r1, 0\n\
+_0806DFE6:\n\
+    bl StartSpriteAnim\n\
+    adds r4, 0x3E\n\
+    ldrb r1, [r4]\n\
+    movs r0, 0x5\n\
+    negs r0, r0\n\
+    ands r0, r1\n\
+    strb r0, [r4]\n\
+_0806DFF6:\n\
+    pop {r4-r6}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
+_0806DFFC: .4byte gSprites\n\
+    .syntax divided\n");
+}
+#endif // NONMATCHING
 
 void PartyMenuDoPrintMonNickname(u8 monIndex, int b, const u8 *nameBuffer)
 {

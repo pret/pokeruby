@@ -102,7 +102,7 @@ gSpriteAnimTable_8376604:: @ 8376604
 
 	.align 2
 gSpriteTemplate_837660C:: @ 837660C
-	spr_template 55120, 55120, gOamData_83765EC, gSpriteAnimTable_8376604, NULL, gDummySpriteAffineAnimTable, SpriteCB_HeldItemIcon_806DD7C
+	spr_template 55120, 55120, gOamData_83765EC, gSpriteAnimTable_8376604, NULL, gDummySpriteAffineAnimTable, SpriteCB_UpdateHeldItemIconPosition
 
 	.align 2
 gUnknown_08376624:: @ 8376624

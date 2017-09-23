@@ -44,8 +44,6 @@ EWRAM_DATA u8 gSelectedOrderFromParty[3] = {0};
 
 extern void OpenPartyMenu();
 extern void TryCreatePartyMenuMonIcon(u8, u8, struct Pokemon *);
-extern void LoadHeldItemIconGraphics(void);
-extern void CreateHeldItemIcons_806DC34();
 extern u8 sub_806BD58(u8, u8);
 extern void PartyMenuPrintMonsLevelOrStatus(void);
 extern void sub_806BC3C(u8, u8);
