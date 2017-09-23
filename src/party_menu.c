@@ -119,6 +119,46 @@ void sub_806AEDC(void)
 #endif
 
 
+void PartyMenuDoPrintMonNickname(u8 monIndex, int b, const u8 *nameBuffer)
+{
+    u32 var1 = 0;
+    CpuFastSet(&var1, gTileBuffer, 0x1000100);
+    sub_8004E3C((struct WindowConfig *)&gWindowConfig_81E6CAC, gTileBuffer, nameBuffer);
+    CpuFastSet(gTileBuffer, (void *)(OBJ_VRAM1 + (monIndex * 0x400)), 128);
+}
+
+void PrintPartyMenuMonNickname(u8 monIndex, u8 b, struct Pokemon *pokemon)
+{
+    u8 nameBuffer[12];
+    GetMonNickname(pokemon, nameBuffer);
+    PartyMenuDoPrintMonNickname(monIndex, b, nameBuffer);
+}
+
+void TryPrintPartyMenuMonNickname(u8 monIndex, struct Pokemon *pokemon)
+{
+    if (GetMonData(pokemon, MON_DATA_SPECIES))
+    {
+        u8 isLinkDoubleBattle = IsLinkDoubleBattle();
+        if (isLinkDoubleBattle == TRUE)
+        {
+            PrintPartyMenuMonNickname(monIndex, 2, pokemon);
+        }
+        else
+        {
+            PrintPartyMenuMonNickname(monIndex, IsDoubleBattle(), pokemon);
+        }
+    }
+}
+
+void PrintPartyMenuMonNicknames(void)
+{
+    u8 i;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        TryPrintPartyMenuMonNickname(i, &gPlayerParty[i]);
+    }
+}
 
 u8 *GetMonNickname(struct Pokemon *pokemon, u8 *stringBuffer)
 {

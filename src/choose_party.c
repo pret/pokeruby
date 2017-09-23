@@ -48,7 +48,6 @@ extern void LoadHeldItemIconGraphics(void);
 extern void CreateHeldItemIcons_806DC34();
 extern u8 sub_806BD58(u8, u8);
 extern void PartyMenuPrintMonsLevelOrStatus(void);
-extern void PrintPartyMenuMonNicknames(void);
 extern void sub_806BC3C(u8, u8);
 extern u8 sub_806B58C(u8);
 extern u16 sub_806BE38();
@@ -68,11 +67,9 @@ extern void CreatePartyMenuMonIcon();
 extern void CreateHeldItemIcon_806DCD4(int, u8, int);
 extern u8 GetMonStatusAndPokerus();
 extern void PartyMenuPrintHP();
-extern void PrintPartyMenuMonNickname();
 extern bool8 sub_80F9344(void);
 extern void sub_806D4AC();
 extern void sub_806D3B4();
-extern void box_print(u8, int, const u8 *);
 extern void sub_806BCE8(void);
 
 static void ClearPartySelection(void);
@@ -696,7 +693,7 @@ static void sub_8122B10(u8 taskId)
             StringCopy(gStringVar1, gUnknown_02023A00[i].nickname);
             StringGetEnd10(gStringVar1);
             SanitizeNameString(gStringVar1);
-            box_print(i + 3, 3, gStringVar1);
+            PartyMenuDoPrintMonNickname(i + 3, 3, gStringVar1);
             PartyMenuDoDrawHPBar(i + 3, 3, gUnknown_02023A00[i].hp, gUnknown_02023A00[i].maxhp);
         }
     }

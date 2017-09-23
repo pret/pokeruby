@@ -101,8 +101,8 @@ void CreateHeldItemIcons_806DC34(); // undefined args
 void CreateHeldItemIcons_806DC34();
 u8 GetMonIconSpriteId_maybe();
 void SetHeldItemIconVisibility();
-void TryPrintPartyMenuMonNickname();
-void PrintPartyMenuMonNicknames(void);
+void PartyMenuDoPrintMonNickname(u8 monIndex, int b, const u8 *nameBuffer);
+void PrintPartyMenuMonNickname(u8 monIndex, u8 b, struct Pokemon *pokemon);
 void PrintPartyMenuMonNicknames(void);
 u8 *GetMonNickname(struct Pokemon *pokemon, u8 *stringBuffer);
 void PartyMenuPutStatusTilemap(u8 monIndex, u8 b, u8 status);

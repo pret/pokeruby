@@ -28,7 +28,6 @@ extern void LoadHeldItemIconGraphics(void);
 extern void CreateHeldItemIcons_806DC34();
 extern u8 sub_806BD58(u8, u8);
 extern void PartyMenuPrintMonsLevelOrStatus(void);
-extern void PrintPartyMenuMonNicknames(void);
 extern void nullsub_13(void);
 extern u8 sub_806B58C(u8);
 extern void sub_806D5A4(void);
