@@ -4,7 +4,7 @@ SkyPillar_Top_MapScripts:: @ 815F302
 
 SkyPillar_Top_MapScript1_15F308:: @ 815F308
 	checkflag 2145
-	callif 1, SkyPillar_Top_EventScript_15F312
+	call_if 1, SkyPillar_Top_EventScript_15F312
 	end
 
 SkyPillar_Top_EventScript_15F312:: @ 815F312

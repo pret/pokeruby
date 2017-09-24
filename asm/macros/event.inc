@@ -31,21 +31,21 @@
 	.endm
 
 	@ If the result of the last comparison matches condition (see Comparison operators), jumps to destination and continues script execution from there.
-	.macro jumpif condition, destination
+	.macro goto_if condition, destination
 	.byte 0x06
 	.byte \condition
 	.4byte \destination
 	.endm
 
 	@ If the result of the last comparison matches condition (see Comparison operators), calls destination.
-	.macro callif condition, destination
+	.macro call_if condition, destination
 	.byte 0x07
 	.byte \condition
 	.4byte \destination
 	.endm
 
 	@ Jumps to the standard function at index function.
-	.macro jumpstd function
+	.macro gotostd function
 	.byte 0x08
 	.byte \function
 	.endm
@@ -57,7 +57,7 @@
 	.endm
 
 	@ If the result of the last comparison matches condition (see Comparison operators), jumps to the standard function at index function.
-	.macro jumpstdif condition, function
+	.macro gotostd_if condition, function
 	.byte 0x0a
 	.byte \condition
 	.byte \function
@@ -1475,8 +1475,8 @@
 
 @ Supplementary
 
-	.macro jumpeq dest
-	jumpif 1, \dest
+	.macro goto_if_eq dest
+	goto_if 1, \dest
 	.endm
 
 	.macro switch var
@@ -1485,7 +1485,7 @@
 
 	.macro case condition, dest
 	compare 0x8000, \condition
-	jumpeq \dest
+	goto_if_eq \dest
 	.endm
 
 	.macro msgbox text, type=4

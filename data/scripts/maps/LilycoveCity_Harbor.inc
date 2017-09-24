@@ -11,13 +11,13 @@ LilycoveCity_Harbor_EventScript_1598A2:: @ 81598A2
 	faceplayer
 	checkitem ITEM_EON_TICKET, 1
 	compare RESULT, 1
-	jumpeq LilycoveCity_Harbor_EventScript_1599EE
+	goto_if_eq LilycoveCity_Harbor_EventScript_1599EE
 	goto LilycoveCity_Harbor_EventScript_1598BA
 	end
 
 LilycoveCity_Harbor_EventScript_1598BA:: @ 81598BA
 	checkflag 2052
-	jumpeq LilycoveCity_Harbor_EventScript_1598CD
+	goto_if_eq LilycoveCity_Harbor_EventScript_1598CD
 	msgbox LilycoveCity_Harbor_Text_18B306, 4
 	release
 	end
@@ -26,7 +26,7 @@ LilycoveCity_Harbor_EventScript_1598CD:: @ 81598CD
 	msgbox LilycoveCity_Harbor_Text_18B36F, 4
 	checkitem ITEM_SS_TICKET, 1
 	compare RESULT, 0
-	jumpeq LilycoveCity_Harbor_EventScript_159929
+	goto_if_eq LilycoveCity_Harbor_EventScript_159929
 	message LilycoveCity_Harbor_Text_18B406
 	waittext
 	goto LilycoveCity_Harbor_EventScript_1598F1
@@ -49,7 +49,7 @@ LilycoveCity_Harbor_EventScript_159929:: @ 8159929
 LilycoveCity_Harbor_EventScript_159933:: @ 8159933
 	msgbox LilycoveCity_Harbor_Text_18B47D, 5
 	compare RESULT, 0
-	jumpeq LilycoveCity_Harbor_EventScript_15997E
+	goto_if_eq LilycoveCity_Harbor_EventScript_15997E
 	setvar 0x40b4, 5
 	call LilycoveCity_Harbor_EventScript_15998A
 	warp SSTidalCorridor, 255, 1, 10
@@ -60,7 +60,7 @@ LilycoveCity_Harbor_EventScript_159933:: @ 8159933
 LilycoveCity_Harbor_EventScript_15995B:: @ 815995B
 	msgbox LilycoveCity_Harbor_Text_18B499, 5
 	compare RESULT, 0
-	jumpeq LilycoveCity_Harbor_EventScript_15997E
+	goto_if_eq LilycoveCity_Harbor_EventScript_15997E
 	call LilycoveCity_Harbor_EventScript_15998A
 	warp BattleTower_Outside, 255, 19, 23
 	waitstate
@@ -81,9 +81,9 @@ LilycoveCity_Harbor_EventScript_15998A:: @ 815998A
 	pause 30
 	spriteinvisible LAST_TALKED, 13, 10
 	compare FACING, 2
-	callif 1, LilycoveCity_Harbor_EventScript_1599D9
+	call_if 1, LilycoveCity_Harbor_EventScript_1599D9
 	compare FACING, 4
-	callif 1, LilycoveCity_Harbor_EventScript_1599CE
+	call_if 1, LilycoveCity_Harbor_EventScript_1599CE
 	pause 30
 	spriteinvisible 255, 0, 0
 	setvar 0x8004, 2
@@ -107,11 +107,11 @@ LilycoveCity_Harbor_EventScript_1599E4:: @ 81599E4
 
 LilycoveCity_Harbor_EventScript_1599EE:: @ 81599EE
 	checkflag 2052
-	jumpif 0, LilycoveCity_Harbor_EventScript_1598BA
+	goto_if 0, LilycoveCity_Harbor_EventScript_1598BA
 	checkflag 206
-	jumpeq LilycoveCity_Harbor_EventScript_1598BA
+	goto_if_eq LilycoveCity_Harbor_EventScript_1598BA
 	checkflag 2131
-	jumpif 0, LilycoveCity_Harbor_EventScript_1598BA
+	goto_if 0, LilycoveCity_Harbor_EventScript_1598BA
 	msgbox LilycoveCity_Harbor_Text_1C50F2, 4
 	closebutton
 	move LAST_TALKED, LilycoveCity_Harbor_Movement_1A0841
@@ -130,9 +130,9 @@ LilycoveCity_Harbor_EventScript_1599EE:: @ 81599EE
 	pause 30
 	disappear 4
 	compare FACING, 2
-	callif 1, LilycoveCity_Harbor_EventScript_1599D9
+	call_if 1, LilycoveCity_Harbor_EventScript_1599D9
 	compare FACING, 4
-	callif 1, LilycoveCity_Harbor_EventScript_1599CE
+	call_if 1, LilycoveCity_Harbor_EventScript_1599CE
 	pause 30
 	spriteinvisible 255, 0, 0
 	special ScrSpecial_HealPlayerParty
@@ -160,7 +160,7 @@ LilycoveCity_Harbor_EventScript_159A8D:: @ 8159A8D
 	lock
 	faceplayer
 	checkflag 2052
-	jumpeq LilycoveCity_Harbor_EventScript_159AA2
+	goto_if_eq LilycoveCity_Harbor_EventScript_159AA2
 	msgbox LilycoveCity_Harbor_Text_18B504, 4
 	release
 	end

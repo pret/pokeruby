@@ -40,24 +40,24 @@ VerdanturfTown_ContestLobby_EventScript_1B7681:: @ 81B7681
 	lockall
 	msgbox FallarborTown_ContestLobby_Text_1B6E63, 5
 	compare RESULT, 1
-	jumpeq FallarborTown_ContestLobby_EventScript_1B76A1
+	goto_if_eq FallarborTown_ContestLobby_EventScript_1B76A1
 	compare RESULT, 0
-	jumpeq FallarborTown_ContestLobby_EventScript_1B76E5
+	goto_if_eq FallarborTown_ContestLobby_EventScript_1B76E5
 	end
 
 FallarborTown_ContestLobby_EventScript_1B76A1:: @ 81B76A1
 	checkitem ITEM_POKEBLOCK_CASE, 1
 	compare RESULT, 0
-	jumpeq FallarborTown_ContestLobby_EventScript_1B7780
+	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7780
 	specialval RESULT, PlayerHasBerries
 	compare RESULT, 0
-	jumpeq FallarborTown_ContestLobby_EventScript_1B770E
+	goto_if_eq FallarborTown_ContestLobby_EventScript_1B770E
 	msgbox FallarborTown_ContestLobby_Text_1B6E9D, 4
 	specialval RESULT, sub_810CA00
 	compare RESULT, 65535
-	jumpif 5, FallarborTown_ContestLobby_EventScript_1B76EF
+	goto_if 5, FallarborTown_ContestLobby_EventScript_1B76EF
 	compare RESULT, 65535
-	jumpeq FallarborTown_ContestLobby_EventScript_1B7776
+	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7776
 	end
 
 FallarborTown_ContestLobby_EventScript_1B76E5:: @ 81B76E5
@@ -68,16 +68,16 @@ FallarborTown_ContestLobby_EventScript_1B76E5:: @ 81B76E5
 FallarborTown_ContestLobby_EventScript_1B76EF:: @ 81B76EF
 	msgbox FallarborTown_ContestLobby_Text_1B6ED0, 5
 	compare RESULT, 1
-	jumpeq FallarborTown_ContestLobby_EventScript_1B7734
+	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7734
 	compare RESULT, 0
-	jumpeq FallarborTown_ContestLobby_EventScript_1B7726
+	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7726
 	end
 
 FallarborTown_ContestLobby_EventScript_1B770E:: @ 81B770E
 	msgbox FallarborTown_ContestLobby_Text_1B6FF0, 4
 	checkdailyflags
 	checkflag 2241
-	jumpeq FallarborTown_ContestLobby_EventScript_1B774F
+	goto_if_eq FallarborTown_ContestLobby_EventScript_1B774F
 	goto FallarborTown_ContestLobby_EventScript_1B7759
 	end
 
@@ -150,9 +150,9 @@ VerdanturfTown_ContestLobby_EventScript_1B77B6:: @ 81B77B6
 	msgbox FallarborTown_ContestLobby_Text_1B742F, 4
 	specialval RESULT, PlayerHasBerries
 	compare RESULT, 1
-	jumpeq FallarborTown_ContestLobby_EventScript_1B77DC
+	goto_if_eq FallarborTown_ContestLobby_EventScript_1B77DC
 	compare RESULT, 0
-	jumpeq FallarborTown_ContestLobby_EventScript_1B77E6
+	goto_if_eq FallarborTown_ContestLobby_EventScript_1B77E6
 	end
 
 FallarborTown_ContestLobby_EventScript_1B77DC:: @ 81B77DC
@@ -163,7 +163,7 @@ FallarborTown_ContestLobby_EventScript_1B77DC:: @ 81B77DC
 FallarborTown_ContestLobby_EventScript_1B77E6:: @ 81B77E6
 	checkdailyflags
 	checkflag 2241
-	jumpeq FallarborTown_ContestLobby_EventScript_1B77F6
+	goto_if_eq FallarborTown_ContestLobby_EventScript_1B77F6
 	goto FallarborTown_ContestLobby_EventScript_1B7800
 	end
 
@@ -210,23 +210,23 @@ VerdanturfTown_ContestLobby_EventScript_1B783B:: @ 81B783B
 	lockall
 	specialval RESULT, PlayerHasBerries
 	compare RESULT, 0
-	jumpeq FallarborTown_ContestLobby_EventScript_1B7897
+	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7897
 	checkitem ITEM_POKEBLOCK_CASE, 1
 	compare RESULT, 0
-	jumpeq FallarborTown_ContestLobby_EventScript_1B7942
+	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7942
 	specialval RESULT, sub_810CA00
 	compare RESULT, 65535
-	jumpif 5, FallarborTown_ContestLobby_EventScript_1B7878
+	goto_if 5, FallarborTown_ContestLobby_EventScript_1B7878
 	compare RESULT, 65535
-	jumpeq FallarborTown_ContestLobby_EventScript_1B7938
+	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7938
 	end
 
 FallarborTown_ContestLobby_EventScript_1B7878:: @ 81B7878
 	msgbox FallarborTown_ContestLobby_Text_1B727C, 5
 	compare RESULT, 1
-	jumpeq FallarborTown_ContestLobby_EventScript_1B78A1
+	goto_if_eq FallarborTown_ContestLobby_EventScript_1B78A1
 	compare RESULT, 0
-	jumpeq FallarborTown_ContestLobby_EventScript_1B7936
+	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7936
 	end
 
 FallarborTown_ContestLobby_EventScript_1B7897:: @ 81B7897
@@ -237,21 +237,21 @@ FallarborTown_ContestLobby_EventScript_1B7897:: @ 81B7897
 FallarborTown_ContestLobby_EventScript_1B78A1:: @ 81B78A1
 	call S_DoSaveDialog
 	compare RESULT, 0
-	jumpeq FallarborTown_ContestLobby_EventScript_1B7936
+	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7936
 	message FallarborTown_ContestLobby_Text_1B7304
 	waittext
 	special sub_8083614
 	waitstate
 	compare RESULT, 1
-	jumpeq FallarborTown_ContestLobby_EventScript_1B7980
+	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7980
 	compare RESULT, 2
-	jumpeq FallarborTown_ContestLobby_EventScript_1B794C
+	goto_if_eq FallarborTown_ContestLobby_EventScript_1B794C
 	compare RESULT, 3
-	jumpeq FallarborTown_ContestLobby_EventScript_1B7959
+	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7959
 	compare RESULT, 5
-	jumpeq FallarborTown_ContestLobby_EventScript_1B7966
+	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7966
 	compare RESULT, 6
-	jumpeq FallarborTown_ContestLobby_EventScript_1B7973
+	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7973
 	end
 
 FallarborTown_ContestLobby_EventScript_1B78F3:: @ 81B78F3

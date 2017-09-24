@@ -5,12 +5,12 @@ LilycoveCity_CoveLilyMotel_2F_EventScript_1583A1:: @ 81583A1
 	lock
 	faceplayer
 	checkflag 2
-	callif 0, LilycoveCity_CoveLilyMotel_2F_EventScript_1583C7
+	call_if 0, LilycoveCity_CoveLilyMotel_2F_EventScript_1583C7
 	checkflag 2
-	callif 1, LilycoveCity_CoveLilyMotel_2F_EventScript_1583DD
+	call_if 1, LilycoveCity_CoveLilyMotel_2F_EventScript_1583DD
 	specialval RESULT, sub_8090FC0
 	compare RESULT, 1
-	jumpeq LilycoveCity_CoveLilyMotel_2F_EventScript_1583D0
+	goto_if_eq LilycoveCity_CoveLilyMotel_2F_EventScript_1583D0
 	release
 	end
 

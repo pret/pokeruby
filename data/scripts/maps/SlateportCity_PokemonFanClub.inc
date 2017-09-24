@@ -24,19 +24,19 @@ SlateportCity_PokemonFanClub_EventScript_155795:: @ 8155795
 SlateportCity_PokemonFanClub_EventScript_1557A8:: @ 81557A8
 	setvar 0x4002, 0
 	checkflag 204
-	callif 1, SlateportCity_PokemonFanClub_EventScript_155893
+	call_if 1, SlateportCity_PokemonFanClub_EventScript_155893
 	checkflag 203
-	callif 1, SlateportCity_PokemonFanClub_EventScript_155893
+	call_if 1, SlateportCity_PokemonFanClub_EventScript_155893
 	checkflag 202
-	callif 1, SlateportCity_PokemonFanClub_EventScript_155893
+	call_if 1, SlateportCity_PokemonFanClub_EventScript_155893
 	checkflag 201
-	callif 1, SlateportCity_PokemonFanClub_EventScript_155893
+	call_if 1, SlateportCity_PokemonFanClub_EventScript_155893
 	checkflag 200
-	callif 1, SlateportCity_PokemonFanClub_EventScript_155893
+	call_if 1, SlateportCity_PokemonFanClub_EventScript_155893
 	compare 0x4002, 5
-	callif 1, SlateportCity_PokemonFanClub_EventScript_15588D
+	call_if 1, SlateportCity_PokemonFanClub_EventScript_15588D
 	compare 0x40b7, 2
-	jumpeq SlateportCity_PokemonFanClub_EventScript_1557FE
+	goto_if_eq SlateportCity_PokemonFanClub_EventScript_1557FE
 	msgbox SlateportCity_PokemonFanClub_Text_17DA14, 4
 	goto SlateportCity_PokemonFanClub_EventScript_155808
 	end
@@ -50,15 +50,15 @@ SlateportCity_PokemonFanClub_EventScript_155808:: @ 8155808
 	msgbox SlateportCity_PokemonFanClub_Text_17DA49, 4
 	setvar 0x4001, 0
 	checkflag 204
-	callif 0, SlateportCity_PokemonFanClub_EventScript_1559FE
+	call_if 0, SlateportCity_PokemonFanClub_EventScript_1559FE
 	checkflag 203
-	callif 0, SlateportCity_PokemonFanClub_EventScript_1559E7
+	call_if 0, SlateportCity_PokemonFanClub_EventScript_1559E7
 	checkflag 202
-	callif 0, SlateportCity_PokemonFanClub_EventScript_1559D0
+	call_if 0, SlateportCity_PokemonFanClub_EventScript_1559D0
 	checkflag 201
-	callif 0, SlateportCity_PokemonFanClub_EventScript_1559B9
+	call_if 0, SlateportCity_PokemonFanClub_EventScript_1559B9
 	checkflag 200
-	callif 0, SlateportCity_PokemonFanClub_EventScript_1559A2
+	call_if 0, SlateportCity_PokemonFanClub_EventScript_1559A2
 	bufferfirstpoke 0
 	switch 0x4001
 	case 0, SlateportCity_PokemonFanClub_EventScript_155899
@@ -86,7 +86,7 @@ SlateportCity_PokemonFanClub_EventScript_155899:: @ 8155899
 SlateportCity_PokemonFanClub_EventScript_1558A3:: @ 81558A3
 	checkitemspace ITEM_RED_SCARF, 1
 	compare RESULT, 0
-	jumpeq SlateportCity_PokemonFanClub_EventScript_155998
+	goto_if_eq SlateportCity_PokemonFanClub_EventScript_155998
 	msgbox SlateportCity_PokemonFanClub_Text_17DB89, 4
 	setflag 200
 	giveitem ITEM_RED_SCARF
@@ -97,7 +97,7 @@ SlateportCity_PokemonFanClub_EventScript_1558A3:: @ 81558A3
 SlateportCity_PokemonFanClub_EventScript_1558D4:: @ 81558D4
 	checkitemspace ITEM_BLUE_SCARF, 1
 	compare RESULT, 0
-	jumpeq SlateportCity_PokemonFanClub_EventScript_155998
+	goto_if_eq SlateportCity_PokemonFanClub_EventScript_155998
 	msgbox SlateportCity_PokemonFanClub_Text_17DB89, 4
 	setflag 201
 	giveitem ITEM_BLUE_SCARF
@@ -108,7 +108,7 @@ SlateportCity_PokemonFanClub_EventScript_1558D4:: @ 81558D4
 SlateportCity_PokemonFanClub_EventScript_155905:: @ 8155905
 	checkitemspace ITEM_PINK_SCARF, 1
 	compare RESULT, 0
-	jumpeq SlateportCity_PokemonFanClub_EventScript_155998
+	goto_if_eq SlateportCity_PokemonFanClub_EventScript_155998
 	msgbox SlateportCity_PokemonFanClub_Text_17DB89, 4
 	setflag 202
 	giveitem ITEM_PINK_SCARF
@@ -119,7 +119,7 @@ SlateportCity_PokemonFanClub_EventScript_155905:: @ 8155905
 SlateportCity_PokemonFanClub_EventScript_155936:: @ 8155936
 	checkitemspace ITEM_GREEN_SCARF, 1
 	compare RESULT, 0
-	jumpeq SlateportCity_PokemonFanClub_EventScript_155998
+	goto_if_eq SlateportCity_PokemonFanClub_EventScript_155998
 	msgbox SlateportCity_PokemonFanClub_Text_17DB89, 4
 	setflag 203
 	giveitem ITEM_GREEN_SCARF
@@ -130,7 +130,7 @@ SlateportCity_PokemonFanClub_EventScript_155936:: @ 8155936
 SlateportCity_PokemonFanClub_EventScript_155967:: @ 8155967
 	checkitemspace ITEM_YELLOW_SCARF, 1
 	compare RESULT, 0
-	jumpeq SlateportCity_PokemonFanClub_EventScript_155998
+	goto_if_eq SlateportCity_PokemonFanClub_EventScript_155998
 	msgbox SlateportCity_PokemonFanClub_Text_17DB89, 4
 	setflag 204
 	giveitem ITEM_YELLOW_SCARF
@@ -146,7 +146,7 @@ SlateportCity_PokemonFanClub_EventScript_155998:: @ 8155998
 SlateportCity_PokemonFanClub_EventScript_1559A2:: @ 81559A2
 	specialval RESULT, CheckLeadMonCool
 	compare RESULT, 1
-	callif 1, SlateportCity_PokemonFanClub_EventScript_1559B3
+	call_if 1, SlateportCity_PokemonFanClub_EventScript_1559B3
 	return
 
 SlateportCity_PokemonFanClub_EventScript_1559B3:: @ 81559B3
@@ -156,7 +156,7 @@ SlateportCity_PokemonFanClub_EventScript_1559B3:: @ 81559B3
 SlateportCity_PokemonFanClub_EventScript_1559B9:: @ 81559B9
 	specialval RESULT, CheckLeadMonBeauty
 	compare RESULT, 1
-	callif 1, SlateportCity_PokemonFanClub_EventScript_1559CA
+	call_if 1, SlateportCity_PokemonFanClub_EventScript_1559CA
 	return
 
 SlateportCity_PokemonFanClub_EventScript_1559CA:: @ 81559CA
@@ -166,7 +166,7 @@ SlateportCity_PokemonFanClub_EventScript_1559CA:: @ 81559CA
 SlateportCity_PokemonFanClub_EventScript_1559D0:: @ 81559D0
 	specialval RESULT, CheckLeadMonCute
 	compare RESULT, 1
-	callif 1, SlateportCity_PokemonFanClub_EventScript_1559E1
+	call_if 1, SlateportCity_PokemonFanClub_EventScript_1559E1
 	return
 
 SlateportCity_PokemonFanClub_EventScript_1559E1:: @ 81559E1
@@ -176,7 +176,7 @@ SlateportCity_PokemonFanClub_EventScript_1559E1:: @ 81559E1
 SlateportCity_PokemonFanClub_EventScript_1559E7:: @ 81559E7
 	specialval RESULT, CheckLeadMonSmart
 	compare RESULT, 1
-	callif 1, SlateportCity_PokemonFanClub_EventScript_1559F8
+	call_if 1, SlateportCity_PokemonFanClub_EventScript_1559F8
 	return
 
 SlateportCity_PokemonFanClub_EventScript_1559F8:: @ 81559F8
@@ -186,7 +186,7 @@ SlateportCity_PokemonFanClub_EventScript_1559F8:: @ 81559F8
 SlateportCity_PokemonFanClub_EventScript_1559FE:: @ 81559FE
 	specialval RESULT, CheckLeadMonTough
 	compare RESULT, 1
-	callif 1, SlateportCity_PokemonFanClub_EventScript_155A0F
+	call_if 1, SlateportCity_PokemonFanClub_EventScript_155A0F
 	return
 
 SlateportCity_PokemonFanClub_EventScript_155A0F:: @ 8155A0F
@@ -197,11 +197,11 @@ SlateportCity_PokemonFanClub_EventScript_155A15:: @ 8155A15
 	lock
 	faceplayer
 	checkflag 278
-	jumpeq SlateportCity_PokemonFanClub_EventScript_155A75
+	goto_if_eq SlateportCity_PokemonFanClub_EventScript_155A75
 	msgbox SlateportCity_PokemonFanClub_Text_17DE6B, 4
 	specialval RESULT, GetLeadMonFriendshipScore
 	compare RESULT, 4
-	jumpif 4, SlateportCity_PokemonFanClub_EventScript_155A3A
+	goto_if 4, SlateportCity_PokemonFanClub_EventScript_155A3A
 	release
 	end
 
@@ -214,7 +214,7 @@ SlateportCity_PokemonFanClub_EventScript_155A3A:: @ 8155A3A
 	msgbox SlateportCity_PokemonFanClub_Text_17DF57, 4
 	giveitem ITEM_SOOTHE_BELL
 	compare RESULT, 0
-	jumpeq SlateportCity_PokemonFanClub_EventScript_1A029B
+	goto_if_eq SlateportCity_PokemonFanClub_EventScript_1A029B
 	setflag 278
 	release
 	end

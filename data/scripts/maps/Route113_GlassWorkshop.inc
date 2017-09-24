@@ -5,7 +5,7 @@ Route113_GlassWorkshop_MapScripts:: @ 816354A
 Route113_GlassWorkshop_MapScript1_163550:: @ 8163550
 	setflag 2116
 	compare 0x40be, 1
-	callif 1, Route113_GlassWorkshop_EventScript_16355F
+	call_if 1, Route113_GlassWorkshop_EventScript_16355F
 	end
 
 Route113_GlassWorkshop_EventScript_16355F:: @ 816355F
@@ -16,11 +16,11 @@ Route113_GlassWorkshop_EventScript_163565:: @ 8163565
 	lock
 	faceplayer
 	compare 0x40be, 10
-	jumpif 4, Route113_GlassWorkshop_EventScript_1638D2
+	goto_if 4, Route113_GlassWorkshop_EventScript_1638D2
 	compare 0x40be, 2
-	jumpeq Route113_GlassWorkshop_EventScript_1635B5
+	goto_if_eq Route113_GlassWorkshop_EventScript_1635B5
 	compare 0x40be, 1
-	jumpeq Route113_GlassWorkshop_EventScript_1635AB
+	goto_if_eq Route113_GlassWorkshop_EventScript_1635AB
 	msgbox Route113_GlassWorkshop_Text_19E4E6, 4
 	giveitem ITEM_SOOT_SACK
 	setvar 0x40be, 1
@@ -36,10 +36,10 @@ Route113_GlassWorkshop_EventScript_1635AB:: @ 81635AB
 Route113_GlassWorkshop_EventScript_1635B5:: @ 81635B5
 	checkitem ITEM_SOOT_SACK, 1
 	compare RESULT, 0
-	jumpeq Route113_GlassWorkshop_EventScript_1635E4
+	goto_if_eq Route113_GlassWorkshop_EventScript_1635E4
 	msgbox Route113_GlassWorkshop_Text_19E65B, 4
 	compare 0x4048, 250
-	jumpif 0, Route113_GlassWorkshop_EventScript_163818
+	goto_if 0, Route113_GlassWorkshop_EventScript_163818
 	message Route113_GlassWorkshop_Text_19E757
 	waittext
 	goto Route113_GlassWorkshop_EventScript_1635EE
@@ -71,10 +71,10 @@ Route113_GlassWorkshop_EventScript_163660:: @ 8163660
 	bufferitem 0, 0x8008
 	setvar 0x800a, 250
 	compare 0x4048, 250
-	jumpif 0, Route113_GlassWorkshop_EventScript_163830
+	goto_if 0, Route113_GlassWorkshop_EventScript_163830
 	msgbox Route113_GlassWorkshop_Text_19E7CD, 5
 	compare RESULT, 0
-	jumpeq Route113_GlassWorkshop_EventScript_163845
+	goto_if_eq Route113_GlassWorkshop_EventScript_163845
 	setvar 0x40be, 10
 	subvar 0x4048, 250
 	goto Route113_GlassWorkshop_EventScript_163851
@@ -85,10 +85,10 @@ Route113_GlassWorkshop_EventScript_16369C:: @ 816369C
 	bufferitem 0, 0x8008
 	setvar 0x800a, 500
 	compare 0x4048, 500
-	jumpif 0, Route113_GlassWorkshop_EventScript_163830
+	goto_if 0, Route113_GlassWorkshop_EventScript_163830
 	msgbox Route113_GlassWorkshop_Text_19E7CD, 5
 	compare RESULT, 0
-	jumpeq Route113_GlassWorkshop_EventScript_163845
+	goto_if_eq Route113_GlassWorkshop_EventScript_163845
 	setvar 0x40be, 11
 	subvar 0x4048, 500
 	goto Route113_GlassWorkshop_EventScript_163851
@@ -99,10 +99,10 @@ Route113_GlassWorkshop_EventScript_1636D8:: @ 81636D8
 	bufferitem 0, 0x8008
 	setvar 0x800a, 500
 	compare 0x4048, 500
-	jumpif 0, Route113_GlassWorkshop_EventScript_163830
+	goto_if 0, Route113_GlassWorkshop_EventScript_163830
 	msgbox Route113_GlassWorkshop_Text_19E7CD, 5
 	compare RESULT, 0
-	jumpeq Route113_GlassWorkshop_EventScript_163845
+	goto_if_eq Route113_GlassWorkshop_EventScript_163845
 	setvar 0x40be, 12
 	subvar 0x4048, 500
 	goto Route113_GlassWorkshop_EventScript_163851
@@ -113,10 +113,10 @@ Route113_GlassWorkshop_EventScript_163714:: @ 8163714
 	bufferitem 0, 0x8008
 	setvar 0x800a, 1000
 	compare 0x4048, 1000
-	jumpif 0, Route113_GlassWorkshop_EventScript_163830
+	goto_if 0, Route113_GlassWorkshop_EventScript_163830
 	msgbox Route113_GlassWorkshop_Text_19E7CD, 5
 	compare RESULT, 0
-	jumpeq Route113_GlassWorkshop_EventScript_163845
+	goto_if_eq Route113_GlassWorkshop_EventScript_163845
 	setvar 0x40be, 13
 	subvar 0x4048, 1000
 	goto Route113_GlassWorkshop_EventScript_163851
@@ -127,10 +127,10 @@ Route113_GlassWorkshop_EventScript_163750:: @ 8163750
 	bufferitem 0, 0x8008
 	setvar 0x800a, 1000
 	compare 0x4048, 1000
-	jumpif 0, Route113_GlassWorkshop_EventScript_163830
+	goto_if 0, Route113_GlassWorkshop_EventScript_163830
 	msgbox Route113_GlassWorkshop_Text_19E7CD, 5
 	compare RESULT, 0
-	jumpeq Route113_GlassWorkshop_EventScript_163845
+	goto_if_eq Route113_GlassWorkshop_EventScript_163845
 	setvar 0x40be, 14
 	subvar 0x4048, 1000
 	goto Route113_GlassWorkshop_EventScript_163851
@@ -142,10 +142,10 @@ Route113_GlassWorkshop_EventScript_16378C:: @ 816378C
 	bufferdecor 0, 0x8008
 	setvar 0x800a, 6000
 	compare 0x4048, 6000
-	jumpif 0, Route113_GlassWorkshop_EventScript_163830
+	goto_if 0, Route113_GlassWorkshop_EventScript_163830
 	msgbox Route113_GlassWorkshop_Text_19E7CD, 5
 	compare RESULT, 0
-	jumpeq Route113_GlassWorkshop_EventScript_163845
+	goto_if_eq Route113_GlassWorkshop_EventScript_163845
 	setvar 0x40be, 15
 	subvar 0x4048, 6000
 	goto Route113_GlassWorkshop_EventScript_163851
@@ -157,10 +157,10 @@ Route113_GlassWorkshop_EventScript_1637CD:: @ 81637CD
 	bufferdecor 0, 0x8008
 	setvar 0x800a, 8000
 	compare 0x4048, 8000
-	jumpif 0, Route113_GlassWorkshop_EventScript_163830
+	goto_if 0, Route113_GlassWorkshop_EventScript_163830
 	msgbox Route113_GlassWorkshop_Text_19E7CD, 5
 	compare RESULT, 0
-	jumpeq Route113_GlassWorkshop_EventScript_163845
+	goto_if_eq Route113_GlassWorkshop_EventScript_163845
 	setvar 0x40be, 16
 	subvar 0x4048, 8000
 	goto Route113_GlassWorkshop_EventScript_163851
@@ -202,9 +202,9 @@ Route113_GlassWorkshop_EventScript_163851:: @ 8163851
 	fadescreen 0
 	msgbox Route113_GlassWorkshop_Text_19E9D7, 4
 	compare 0x8009, 0
-	callif 1, Route113_GlassWorkshop_EventScript_163889
+	call_if 1, Route113_GlassWorkshop_EventScript_163889
 	compare 0x8009, 1
-	callif 1, Route113_GlassWorkshop_EventScript_1638A1
+	call_if 1, Route113_GlassWorkshop_EventScript_1638A1
 	setvar 0x40be, 2
 	release
 	end
@@ -212,13 +212,13 @@ Route113_GlassWorkshop_EventScript_163851:: @ 8163851
 Route113_GlassWorkshop_EventScript_163889:: @ 8163889
 	giveitem 0x8008
 	compare RESULT, 0
-	jumpeq Route113_GlassWorkshop_EventScript_1638B4
+	goto_if_eq Route113_GlassWorkshop_EventScript_1638B4
 	return
 
 Route113_GlassWorkshop_EventScript_1638A1:: @ 81638A1
 	givedecoration 0x8008
 	compare RESULT, 0
-	jumpeq Route113_GlassWorkshop_EventScript_1638C3
+	goto_if_eq Route113_GlassWorkshop_EventScript_1638C3
 	return
 
 Route113_GlassWorkshop_EventScript_1638B4:: @ 81638B4
@@ -296,9 +296,9 @@ Route113_GlassWorkshop_EventScript_16399D:: @ 816399D
 Route113_GlassWorkshop_EventScript_1639B1:: @ 81639B1
 	msgbox Route113_GlassWorkshop_Text_19E9D7, 4
 	compare 0x8009, 0
-	callif 1, Route113_GlassWorkshop_EventScript_163889
+	call_if 1, Route113_GlassWorkshop_EventScript_163889
 	compare 0x8009, 1
-	callif 1, Route113_GlassWorkshop_EventScript_1638A1
+	call_if 1, Route113_GlassWorkshop_EventScript_1638A1
 	setvar 0x40be, 2
 	release
 	end

@@ -12,7 +12,7 @@ Route110_SeasideCyclingRoadSouthEntrance_EventScript_16348B:: @ 816348B
 	lockall
 	specialval RESULT, GetPlayerAvatarBike
 	compare RESULT, 0
-	jumpeq Route110_SeasideCyclingRoadSouthEntrance_EventScript_1634A6
+	goto_if_eq Route110_SeasideCyclingRoadSouthEntrance_EventScript_1634A6
 	setflag 2091
 	setvar 0x4001, 1
 	releaseall

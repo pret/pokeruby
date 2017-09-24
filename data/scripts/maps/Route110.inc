@@ -13,7 +13,7 @@ Route110_MapScript1_14F914:: @ 814F914
 	call Route110_EventScript_1A014E
 	call Route110_EventScript_1A0172
 	compare 0x40a9, 1
-	callif 1, Route110_EventScript_14F92F
+	call_if 1, Route110_EventScript_14F92F
 	end
 
 Route110_EventScript_14F92F:: @ 814F92F
@@ -133,7 +133,7 @@ Route110_EventScript_14FA2E:: @ 814FA2E
 	lockall
 	specialval RESULT, GetRecordedCyclingRoadResults
 	compare RESULT, 0
-	jumpeq Route110_EventScript_14FA49
+	goto_if_eq Route110_EventScript_14FA49
 	msgbox Route110_Text_16F53A, 4
 	releaseall
 	end
@@ -148,9 +148,9 @@ Route110_EventScript_14FA53:: @ 814FA53
 	faceplayer
 	specialval RESULT, GetPlayerAvatarBike
 	compare RESULT, 1
-	jumpeq Route110_EventScript_14FA84
+	goto_if_eq Route110_EventScript_14FA84
 	compare 0x40a9, 0
-	jumpeq Route110_EventScript_14FA7A
+	goto_if_eq Route110_EventScript_14FA7A
 	msgbox Route110_Text_16F26A, 4
 	release
 	end
@@ -179,7 +179,7 @@ Route110_EventScript_14FABC:: @ 814FABC
 	trainerbattle 0, OPPONENT_EDWIN_1, 0, Route110_Text_1BA7D2, Route110_Text_1BA803
 	specialval RESULT, sub_8082C68
 	compare RESULT, 1
-	jumpeq Route110_EventScript_14FAE3
+	goto_if_eq Route110_EventScript_14FAE3
 	msgbox Route110_Text_1BA829, 6
 	end
 
@@ -207,7 +207,7 @@ Route110_EventScript_14FB3F:: @ 814FB3F
 	trainerbattle 0, OPPONENT_BENJAMIN_1, 0, Route110_Text_1BA352, Route110_Text_1BA379
 	specialval RESULT, sub_8082C68
 	compare RESULT, 1
-	jumpeq Route110_EventScript_14FB66
+	goto_if_eq Route110_EventScript_14FB66
 	msgbox Route110_Text_1BA3A5, 6
 	end
 
@@ -225,7 +225,7 @@ Route110_EventScript_14FB94:: @ 814FB94
 	trainerbattle 0, OPPONENT_ABIGAIL_1, 0, Route110_Text_1BA4A0, Route110_Text_1BA50F
 	specialval RESULT, sub_8082C68
 	compare RESULT, 1
-	jumpeq Route110_EventScript_14FBBB
+	goto_if_eq Route110_EventScript_14FBBB
 	msgbox Route110_Text_1BA52E, 6
 	end
 
@@ -238,7 +238,7 @@ Route110_EventScript_14FBD2:: @ 814FBD2
 	trainerbattle 0, OPPONENT_ISABEL_1, 0, Route110_Text_1BA990, Route110_Text_1BA9D0
 	specialval RESULT, sub_8082C68
 	compare RESULT, 1
-	jumpeq Route110_EventScript_14FBF9
+	goto_if_eq Route110_EventScript_14FBF9
 	msgbox Route110_Text_1BA9E9, 6
 	end
 
@@ -327,9 +327,9 @@ Route110_EventScript_14FD34:: @ 814FD34
 	lockall
 	checkgender
 	compare RESULT, 0
-	callif 1, Route110_EventScript_14FDA7
+	call_if 1, Route110_EventScript_14FDA7
 	compare RESULT, 1
-	callif 1, Route110_EventScript_14FDAC
+	call_if 1, Route110_EventScript_14FDAC
 	move 28, Route110_Movement_1A0845
 	waitmove 0
 	move 28, Route110_Movement_1A0833
@@ -338,16 +338,16 @@ Route110_EventScript_14FD34:: @ 814FD34
 	waitmove 0
 	pause 30
 	compare 0x8008, 1
-	callif 1, Route110_EventScript_14FF14
+	call_if 1, Route110_EventScript_14FF14
 	compare 0x8008, 2
-	callif 1, Route110_EventScript_14FF1F
+	call_if 1, Route110_EventScript_14FF1F
 	compare 0x8008, 3
-	callif 1, Route110_EventScript_14FF2A
+	call_if 1, Route110_EventScript_14FF2A
 	checkgender
 	compare RESULT, 0
-	jumpeq Route110_EventScript_14FDB1
+	goto_if_eq Route110_EventScript_14FDB1
 	compare RESULT, 1
-	jumpeq Route110_EventScript_14FE2B
+	goto_if_eq Route110_EventScript_14FE2B
 	releaseall
 	end
 
@@ -426,22 +426,22 @@ Route110_EventScript_14FEA5:: @ 814FEA5
 Route110_EventScript_14FEB2:: @ 814FEB2
 	closebutton
 	compare 0x8008, 1
-	callif 1, Route110_EventScript_14FF56
+	call_if 1, Route110_EventScript_14FF56
 	compare 0x8008, 2
-	callif 1, Route110_EventScript_14FF5E
+	call_if 1, Route110_EventScript_14FF5E
 	compare 0x8008, 3
-	callif 1, Route110_EventScript_14FF66
+	call_if 1, Route110_EventScript_14FF66
 	spritebehave 28, 10
 	spritebehave 29, 10
 	disappear 28
 	reappear 29
 	pause 45
 	compare 0x8008, 1
-	callif 1, Route110_EventScript_14FF35
+	call_if 1, Route110_EventScript_14FF35
 	compare 0x8008, 2
-	callif 1, Route110_EventScript_14FF40
+	call_if 1, Route110_EventScript_14FF40
 	compare 0x8008, 3
-	callif 1, Route110_EventScript_14FF4B
+	call_if 1, Route110_EventScript_14FF4B
 	disappear 29
 	setvar 0x4069, 1
 	playmusicbattle 0

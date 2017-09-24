@@ -27,7 +27,7 @@ OldaleTown_PokemonCenter_1F_EventScript_152F37:: @ 8152F37
 	lock
 	faceplayer
 	checkflag 2049
-	jumpeq OldaleTown_PokemonCenter_1F_EventScript_152F4C
+	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_152F4C
 	msgbox OldaleTown_PokemonCenter_1F_Text_1749C0, 4
 	release
 	end

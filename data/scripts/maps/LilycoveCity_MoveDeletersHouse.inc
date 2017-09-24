@@ -17,19 +17,19 @@ LilycoveCity_MoveDeletersHouse_EventScript_159ADE:: @ 8159ADE
 	special sub_80F9A0C
 	waitstate
 	compare 0x8004, 255
-	jumpeq LilycoveCity_MoveDeletersHouse_EventScript_159B7B
+	goto_if_eq LilycoveCity_MoveDeletersHouse_EventScript_159B7B
 	special sub_80FA148
 	compare RESULT, 1
-	jumpeq LilycoveCity_MoveDeletersHouse_EventScript_159B71
+	goto_if_eq LilycoveCity_MoveDeletersHouse_EventScript_159B71
 	special ScrSpecial_CountPokemonMoves
 	compare RESULT, 1
-	jumpeq LilycoveCity_MoveDeletersHouse_EventScript_159B64
+	goto_if_eq LilycoveCity_MoveDeletersHouse_EventScript_159B64
 	msgbox LilycoveCity_MoveDeletersHouse_Text_18B6B0, 4
 	fadescreen 1
 	special sub_80F9EEC
 	fadescreen 0
 	compare 0x8005, 4
-	jumpeq LilycoveCity_MoveDeletersHouse_EventScript_159ADE
+	goto_if_eq LilycoveCity_MoveDeletersHouse_EventScript_159ADE
 	special ScrSpecial_GetPokemonNicknameAndMoveName
 	msgbox LilycoveCity_MoveDeletersHouse_Text_18B6F2, 5
 	switch RESULT

@@ -78,15 +78,15 @@ RustboroCity_PokemonSchool_EventScript_157ACE:: @ 8157ACE
 	lock
 	faceplayer
 	checkflag 275
-	jumpeq RustboroCity_PokemonSchool_EventScript_157B34
+	goto_if_eq RustboroCity_PokemonSchool_EventScript_157B34
 	compare FACING, 4
-	callif 1, RustboroCity_PokemonSchool_EventScript_157B1E
+	call_if 1, RustboroCity_PokemonSchool_EventScript_157B1E
 	compare FACING, 3
-	callif 1, RustboroCity_PokemonSchool_EventScript_157B29
+	call_if 1, RustboroCity_PokemonSchool_EventScript_157B29
 	msgbox RustboroCity_PokemonSchool_Text_1846A2, 4
 	giveitem ITEM_QUICK_CLAW
 	compare RESULT, 0
-	jumpeq RustboroCity_PokemonSchool_EventScript_1A029B
+	goto_if_eq RustboroCity_PokemonSchool_EventScript_1A029B
 	closebutton
 	move LAST_TALKED, RustboroCity_PokemonSchool_Movement_1A0845
 	waitmove 0

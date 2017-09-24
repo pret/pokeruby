@@ -203,13 +203,13 @@ Route111_EventScript_1AE5A2:: @ 81AE5A2
 	special GabbyAndTyBeforeInterview
 	special GabbyAndTySetScriptVarsToFieldObjectLocalIds
 	compare FACING, 2
-	callif 1, Route111_EventScript_1AE5E0
+	call_if 1, Route111_EventScript_1AE5E0
 	compare FACING, 1
-	callif 1, Route111_EventScript_1AE5EB
+	call_if 1, Route111_EventScript_1AE5EB
 	compare FACING, 4
-	callif 1, Route111_EventScript_1AE5FD
+	call_if 1, Route111_EventScript_1AE5FD
 	checkflag 1
-	jumpeq Route111_EventScript_1AE73A
+	goto_if_eq Route111_EventScript_1AE73A
 	msgbox Route111_Text_1AC015, 5
 	goto Route111_EventScript_1AE6F3
 	end
@@ -237,16 +237,16 @@ Route120_EventScript_1AE60F:: @ 81AE60F
 	special GabbyAndTyBeforeInterview
 	special GabbyAndTySetScriptVarsToFieldObjectLocalIds
 	compare FACING, 2
-	callif 1, Route111_EventScript_1AE5E0
+	call_if 1, Route111_EventScript_1AE5E0
 	compare FACING, 1
-	callif 1, Route111_EventScript_1AE5EB
+	call_if 1, Route111_EventScript_1AE5EB
 	compare FACING, 4
-	callif 1, Route111_EventScript_1AE5FD
+	call_if 1, Route111_EventScript_1AE5FD
 	checkflag 1
-	jumpeq Route111_EventScript_1AE73A
+	goto_if_eq Route111_EventScript_1AE73A
 	specialval RESULT, GabbyAndTyGetLastQuote
 	compare RESULT, 0
-	jumpeq Route111_EventScript_1AE69F
+	goto_if_eq Route111_EventScript_1AE69F
 	msgbox Route111_Text_1AC10A, 4
 	specialval RESULT, sub_80BDD18
 	switch RESULT
@@ -301,14 +301,14 @@ Route111_EventScript_1AE6E5:: @ 81AE6E5
 
 Route111_EventScript_1AE6F3:: @ 81AE6F3
 	compare RESULT, 0
-	jumpeq Route111_EventScript_1AE72D
+	goto_if_eq Route111_EventScript_1AE72D
 	msgbox Route111_Text_1AC40F, 4
 	setvar 0x8004, 10
 	call Route111_EventScript_1A00F3
 	lock
 	faceplayer
 	compare RESULT, 0
-	jumpeq Route111_EventScript_1AE72D
+	goto_if_eq Route111_EventScript_1AE72D
 	msgbox Route111_Text_1AC487, 4
 	special sub_80BDC14
 	setflag 1

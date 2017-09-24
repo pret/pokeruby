@@ -4,5 +4,5 @@ CaveOfOrigin_1F_MapScripts:: @ 815DD6C
 
 CaveOfOrigin_1F_MapScript1_15DD72:: @ 815DD72
 	checkflag 113
-	callif 1, CaveOfOrigin_1F_EventScript_1A04E3
+	call_if 1, CaveOfOrigin_1F_EventScript_1A04E3
 	end

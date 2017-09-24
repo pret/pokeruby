@@ -4,13 +4,13 @@ SlateportCity_SternsShipyard_1F_MapScripts:: @ 8155335
 SlateportCity_SternsShipyard_1F_EventScript_155336:: @ 8155336
 	lockall
 	checkflag 2052
-	jumpeq SlateportCity_SternsShipyard_1F_EventScript_155388
+	goto_if_eq SlateportCity_SternsShipyard_1F_EventScript_155388
 	checkflag 2061
-	jumpeq SlateportCity_SternsShipyard_1F_EventScript_15539C
+	goto_if_eq SlateportCity_SternsShipyard_1F_EventScript_15539C
 	checkflag 149
-	jumpeq SlateportCity_SternsShipyard_1F_EventScript_1553CF
+	goto_if_eq SlateportCity_SternsShipyard_1F_EventScript_1553CF
 	checkflag 148
-	jumpeq SlateportCity_SternsShipyard_1F_EventScript_1553B0
+	goto_if_eq SlateportCity_SternsShipyard_1F_EventScript_1553B0
 	msgbox SlateportCity_SternsShipyard_1F_Text_17C14B, 4
 	move 1, SlateportCity_SternsShipyard_1F_Movement_1A0839
 	waitmove 0

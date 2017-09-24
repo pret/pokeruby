@@ -25,9 +25,9 @@ EverGrandeCity_PhoebesRoom_EventScript_15B602:: @ 815B602
 
 EverGrandeCity_PhoebesRoom_MapScript1_15B60F:: @ 815B60F
 	checkflag 1246
-	callif 1, EverGrandeCity_PhoebesRoom_EventScript_15B624
+	call_if 1, EverGrandeCity_PhoebesRoom_EventScript_15B624
 	compare 0x409c, 2
-	callif 1, EverGrandeCity_PhoebesRoom_EventScript_15B62A
+	call_if 1, EverGrandeCity_PhoebesRoom_EventScript_15B62A
 	end
 
 EverGrandeCity_PhoebesRoom_EventScript_15B624:: @ 815B624
@@ -42,7 +42,7 @@ EverGrandeCity_PhoebesRoom_EventScript_15B630:: @ 815B630
 	lock
 	faceplayer
 	checkflag 1246
-	jumpeq EverGrandeCity_PhoebesRoom_EventScript_15B657
+	goto_if_eq EverGrandeCity_PhoebesRoom_EventScript_15B657
 	playmusic 450, 0
 	msgbox EverGrandeCity_PhoebesRoom_Text_1908F5, 4
 	trainerbattle 3, OPPONENT_PHOEBE, 0, EverGrandeCity_PhoebesRoom_Text_190A0C

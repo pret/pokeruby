@@ -18,7 +18,7 @@ Route110_TrickHousePuzzle6_EventScript_1630E6:: @ 81630E6
 Route110_TrickHousePuzzle6_EventScript_1630EA:: @ 81630EA
 	lockall
 	compare 0x40b0, 0
-	jumpeq Route110_TrickHousePuzzle6_EventScript_1630FC
+	goto_if_eq Route110_TrickHousePuzzle6_EventScript_1630FC
 	goto Route110_TrickHousePuzzle6_EventScript_161892
 	end
 

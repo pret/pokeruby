@@ -7,9 +7,9 @@ RustboroCity_Mart_EventScript_157BD4:: @ 8157BD4
 	message RustboroCity_Mart_Text_1A0BE4
 	waittext
 	checkflag 287
-	jumpif 0, RustboroCity_Mart_EventScript_157BEF
+	goto_if 0, RustboroCity_Mart_EventScript_157BEF
 	checkflag 287
-	jumpeq RustboroCity_Mart_EventScript_157C18
+	goto_if_eq RustboroCity_Mart_EventScript_157C18
 	end
 
 RustboroCity_Mart_EventScript_157BEF:: @ 8157BEF

@@ -31,9 +31,9 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152CBE:: @ 8152CBE
 	waitfanfare
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_173EF8, 5
 	compare RESULT, 1
-	jumpeq LittlerootTown_ProfessorBirchsLab_EventScript_152CEA
+	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152CEA
 	compare RESULT, 0
-	jumpeq LittlerootTown_ProfessorBirchsLab_EventScript_152CFA
+	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152CFA
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152CEA:: @ 8152CEA
@@ -45,9 +45,9 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152CEA:: @ 8152CEA
 LittlerootTown_ProfessorBirchsLab_EventScript_152CFA:: @ 8152CFA
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_173F3D, 5
 	compare RESULT, 1
-	jumpeq LittlerootTown_ProfessorBirchsLab_EventScript_152D19
+	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152D19
 	compare RESULT, 0
-	jumpeq LittlerootTown_ProfessorBirchsLab_EventScript_152D2B
+	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152D2B
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152D19:: @ 8152D19
@@ -60,9 +60,9 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152D19:: @ 8152D19
 LittlerootTown_ProfessorBirchsLab_EventScript_152D2B:: @ 8152D2B
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_174075, 5
 	compare RESULT, 1
-	jumpeq LittlerootTown_ProfessorBirchsLab_EventScript_152D19
+	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152D19
 	compare RESULT, 0
-	jumpeq LittlerootTown_ProfessorBirchsLab_EventScript_152D2B
+	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152D2B
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152D4A:: @ 8152D4A
@@ -86,9 +86,9 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152D63:: @ 8152D63
 	lock
 	faceplayer
 	compare 0x4084, 3
-	jumpif 4, LittlerootTown_ProfessorBirchsLab_EventScript_152D90
+	goto_if 4, LittlerootTown_ProfessorBirchsLab_EventScript_152D90
 	checkflag 88
-	jumpeq LittlerootTown_ProfessorBirchsLab_EventScript_152D86
+	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152D86
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_173B29, 4
 	setflag 88
 	release
@@ -108,9 +108,9 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152D9A:: @ 8152D9A
 	lock
 	faceplayer
 	checkflag 896
-	jumpif 0, LittlerootTown_ProfessorBirchsLab_EventScript_1A037F
+	goto_if 0, LittlerootTown_ProfessorBirchsLab_EventScript_1A037F
 	compare 0x4084, 5
-	jumpeq LittlerootTown_ProfessorBirchsLab_EventScript_152E7B
+	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152E7B
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1740B4, 4
 	release
 	end
@@ -125,9 +125,9 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152DBA:: @ 8152DBA
 	waitmove 0
 	checkgender
 	compare RESULT, 0
-	callif 1, LittlerootTown_ProfessorBirchsLab_EventScript_152E13
+	call_if 1, LittlerootTown_ProfessorBirchsLab_EventScript_152E13
 	compare RESULT, 1
-	callif 1, LittlerootTown_ProfessorBirchsLab_EventScript_152E40
+	call_if 1, LittlerootTown_ProfessorBirchsLab_EventScript_152E40
 	setvar 0x4084, 5
 	setflag 116
 	setvar 0x4051, 1
@@ -140,7 +140,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152E13:: @ 8152E13
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1743D4, 4
 	giveitem ITEM_POKE_BALL, 5
 	compare RESULT, 0
-	callif 1, LittlerootTown_ProfessorBirchsLab_EventScript_152E85
+	call_if 1, LittlerootTown_ProfessorBirchsLab_EventScript_152E85
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_17443D, 4
 	setvar RESULT, 0
 	return
@@ -149,7 +149,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152E40:: @ 8152E40
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_17453C, 4
 	giveitem ITEM_POKE_BALL, 5
 	compare RESULT, 0
-	callif 1, LittlerootTown_ProfessorBirchsLab_EventScript_152E8E
+	call_if 1, LittlerootTown_ProfessorBirchsLab_EventScript_152E8E
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_17458C, 4
 	setvar RESULT, 1
 	return
@@ -189,9 +189,9 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152EA3:: @ 8152EA3
 	faceplayer
 	checkgender
 	compare RESULT, 0
-	callif 1, LittlerootTown_ProfessorBirchsLab_EventScript_152EBE
+	call_if 1, LittlerootTown_ProfessorBirchsLab_EventScript_152EBE
 	compare RESULT, 1
-	callif 1, LittlerootTown_ProfessorBirchsLab_EventScript_152EC7
+	call_if 1, LittlerootTown_ProfessorBirchsLab_EventScript_152EC7
 	release
 	end
 

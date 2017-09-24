@@ -8,7 +8,7 @@ MossdeepCity_House1_EventScript_15A82F:: @ 815A82F
 	msgbox MossdeepCity_House1_Text_18D465, 4
 	specialval RESULT, GetPokeblockNameByMonNature
 	compare RESULT, 0
-	jumpeq MossdeepCity_House1_EventScript_15A855
+	goto_if_eq MossdeepCity_House1_EventScript_15A855
 	msgbox MossdeepCity_House1_Text_18D475, 4
 	release
 	end

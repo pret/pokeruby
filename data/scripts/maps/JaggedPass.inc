@@ -9,7 +9,7 @@ JaggedPass_MapScript1_15D271:: @ 815D271
 
 JaggedPass_MapScript1_15D274:: @ 815D274
 	compare 0x40bd, 1
-	callif 1, JaggedPass_EventScript_15D280
+	call_if 1, JaggedPass_EventScript_15D280
 	end
 
 JaggedPass_EventScript_15D280:: @ 815D280
@@ -26,7 +26,7 @@ JaggedPass_EventScript_15D29C:: @ 815D29C
 	trainerbattle 0, OPPONENT_DIANA_1, 0, JaggedPass_Text_195E9E, JaggedPass_Text_195EDF
 	specialval RESULT, sub_8082C68
 	compare RESULT, 1
-	jumpeq JaggedPass_EventScript_15D2C3
+	goto_if_eq JaggedPass_EventScript_15D2C3
 	msgbox JaggedPass_Text_195F04, 6
 	end
 
@@ -39,7 +39,7 @@ JaggedPass_EventScript_15D2DA:: @ 815D2DA
 	trainerbattle 0, OPPONENT_ETHAN_1, 0, JaggedPass_Text_195FF2, JaggedPass_Text_196032
 	specialval RESULT, sub_8082C68
 	compare RESULT, 1
-	jumpeq JaggedPass_EventScript_15D301
+	goto_if_eq JaggedPass_EventScript_15D301
 	msgbox JaggedPass_Text_196077, 6
 	end
 

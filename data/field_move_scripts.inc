@@ -1,16 +1,16 @@
 S_CuttableTree:: @ 81B0DCC
 	lockall
 	checkflag 2055
-	jumpif 0, CannotUseCut
+	goto_if 0, CannotUseCut
 	checkattack MOVE_CUT
 	compare RESULT, 6
-	jumpeq CannotUseCut
+	goto_if_eq CannotUseCut
 	setanimation 0, RESULT
 	bufferpartypoke 0, RESULT
 	bufferattack 1, MOVE_CUT
 	msgbox UseCutPromptText, 5
 	compare RESULT, 0
-	jumpeq Cut_ChoseNo
+	goto_if_eq Cut_ChoseNo
 	msgbox UsedCutRockSmashText, 4
 	closebutton
 	doanimation 2
@@ -59,16 +59,16 @@ CannotUseCutText: @ 81B0E8E
 S_BreakableRock:: @ 81B0EB7
 	lockall
 	checkflag 2057
-	jumpif 0, CannotUseRockSmash
+	goto_if 0, CannotUseRockSmash
 	checkattack MOVE_ROCK_SMASH
 	compare RESULT, 6
-	jumpeq CannotUseRockSmash
+	goto_if_eq CannotUseRockSmash
 	setanimation 0, RESULT
 	bufferpartypoke 0, RESULT
 	bufferattack 1, MOVE_ROCK_SMASH
 	msgbox UseRockSmashPromptText, 5
 	compare RESULT, 0
-	jumpeq RockSmash_ChoseNo
+	goto_if_eq RockSmash_ChoseNo
 	msgbox UsedCutRockSmashText, 4
 	closebutton
 	doanimation 37
@@ -89,10 +89,10 @@ DoRockSmashMovement: @ 81B0F0C
 	disappear LAST_TALKED
 	specialval RESULT, sub_810F5BC
 	compare RESULT, 1
-	jumpeq DoRockSmashMovement_Done
+	goto_if_eq DoRockSmashMovement_Done
 	special ScrSpecial_RockSmashWildEncounter
 	compare RESULT, 0
-	jumpeq DoRockSmashMovement_Done
+	goto_if_eq DoRockSmashMovement_Done
 	waitstate
 	releaseall
 	end
@@ -126,16 +126,16 @@ CannotUseRockSmashText: @ 81B0F90
 S_PushableBoulder:: @ 81B0FCB
 	lockall
 	checkflag 2058
-	jumpif 0, CannotUseStrength
+	goto_if 0, CannotUseStrength
 	checkflag 2089
-	jumpeq AlreadyUsedStrength
+	goto_if_eq AlreadyUsedStrength
 	checkattack 70
 	compare RESULT, 6
-	jumpeq CannotUseStrength
+	goto_if_eq CannotUseStrength
 	setanimation 0, RESULT
 	msgbox UseStrengthPromptText, 5
 	compare RESULT, 0
-	jumpeq Strength_ChoseNo
+	goto_if_eq Strength_ChoseNo
 	closebutton
 	doanimation 40
 	waitstate
@@ -192,12 +192,12 @@ S_UseWaterfall:: @ 81B115A
 	lockall
 	checkattack MOVE_WATERFALL
 	compare RESULT, 6
-	jumpeq Waterfall_NoMonKnows
+	goto_if_eq Waterfall_NoMonKnows
 	bufferpartypoke 0, RESULT
 	setanimation 0, RESULT
 	msgbox UseWaterfallPromptText, 5
 	compare RESULT, 0
-	jumpeq Waterfall_Done
+	goto_if_eq Waterfall_Done
 	msgbox UsedWaterfallText, 4
 	doanimation 43
 	goto Waterfall_Done
@@ -225,13 +225,13 @@ UseDiveScript:: @ 81B1220
 	lockall
 	checkattack MOVE_DIVE
 	compare RESULT, 6
-	jumpeq CannotUseDive
+	goto_if_eq CannotUseDive
 	bufferpartypoke 0, RESULT
 	setanimation 0, RESULT
 	setanimation 1, 1
 	msgbox UseDivePromptText, 5
 	compare RESULT, 0
-	jumpeq Dive_Done
+	goto_if_eq Dive_Done
 	msgbox UsedDiveText, 4
 	doanimation 44
 	goto Dive_Done
@@ -248,13 +248,13 @@ S_UseDiveUnderwater:: @ 81B1269
 	lockall
 	checkattack MOVE_DIVE
 	compare RESULT, 6
-	jumpeq UnderwaterCannotUseDive
+	goto_if_eq UnderwaterCannotUseDive
 	bufferpartypoke 0, RESULT
 	setanimation 0, RESULT
 	setanimation 1, 1
 	msgbox UnderwaterUseDivePromptText, 5
 	compare RESULT, 0
-	jumpeq UnderwaterDive_Done
+	goto_if_eq UnderwaterDive_Done
 	msgbox UsedDiveText, 4
 	doanimation 44
 	goto UnderwaterDive_Done

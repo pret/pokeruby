@@ -6,7 +6,7 @@ IslandCave_MapScripts:: @ 815EEB6
 
 IslandCave_MapScript1_15EEC6:: @ 815EEC6
 	checkflag 2145
-	callif 1, IslandCave_EventScript_15EED0
+	call_if 1, IslandCave_EventScript_15EED0
 	end
 
 IslandCave_EventScript_15EED0:: @ 815EED0
@@ -15,7 +15,7 @@ IslandCave_EventScript_15EED0:: @ 815EED0
 
 IslandCave_MapScript1_15EED4:: @ 815EED4
 	checkflag 2129
-	callif 0, IslandCave_EventScript_15EEDE
+	call_if 0, IslandCave_EventScript_15EEDE
 	end
 
 IslandCave_EventScript_15EEDE:: @ 815EEDE
@@ -46,7 +46,7 @@ S_OpenRegiceChamber:: @ 815EF19
 IslandCave_EventScript_15EF59:: @ 815EF59
 	lockall
 	checkflag 2129
-	jumpeq IslandCave_EventScript_15EF72
+	goto_if_eq IslandCave_EventScript_15EF72
 	braillemsg IslandCave_Braille_1C54FC
 	special DoBrailleWait
 	waitstate
@@ -62,7 +62,7 @@ IslandCave_EventScript_15EF7C:: @ 815EF7C
 	lockall
 	braillemsg IslandCave_Braille_1C54FC
 	checkflag 2129
-	jumpeq IslandCave_EventScript_15EF95
+	goto_if_eq IslandCave_EventScript_15EF95
 	special DoBrailleWait
 	waitstate
 	goto IslandCave_EventScript_15EF95

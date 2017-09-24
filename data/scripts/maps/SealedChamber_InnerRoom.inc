@@ -7,10 +7,10 @@ SealedChamber_InnerRoom_EventScript_15F1E8:: @ 815F1E8
 	waitbutton
 	hidebox 0, 0, 29, 19
 	checkflag 228
-	jumpeq SealedChamber_InnerRoom_EventScript_15F247
+	goto_if_eq SealedChamber_InnerRoom_EventScript_15F247
 	specialval RESULT, CheckRelicanthWailord
 	compare RESULT, 0
-	jumpeq SealedChamber_InnerRoom_EventScript_15F247
+	goto_if_eq SealedChamber_InnerRoom_EventScript_15F247
 	fadeout 0
 	playsfx 49
 	special DoSealedChamberShakingEffect1

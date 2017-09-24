@@ -5,21 +5,21 @@ Route104_Prototype_EventScript_160C4B:: @ 8160C4B
 	lock
 	faceplayer
 	checktrainerflag OPPONENT_BRIANNA_1
-	jumpif 0, Route104_Prototype_EventScript_160C99
+	goto_if 0, Route104_Prototype_EventScript_160C99
 	checktrainerflag OPPONENT_CINDY_2
-	jumpif 0, Route104_Prototype_EventScript_160C99
+	goto_if 0, Route104_Prototype_EventScript_160C99
 	checktrainerflag OPPONENT_AMY_AND_LIV_3
-	jumpif 0, Route104_Prototype_EventScript_160C99
+	goto_if 0, Route104_Prototype_EventScript_160C99
 	checktrainerflag OPPONENT_GINA_AND_MIA_2
-	jumpif 0, Route104_Prototype_EventScript_160C99
+	goto_if 0, Route104_Prototype_EventScript_160C99
 	checktrainerflag OPPONENT_LUCAS_2
-	jumpif 0, Route104_Prototype_EventScript_160C99
+	goto_if 0, Route104_Prototype_EventScript_160C99
 	checktrainerflag OPPONENT_MIKE_1
-	jumpif 0, Route104_Prototype_EventScript_160C99
+	goto_if 0, Route104_Prototype_EventScript_160C99
 	setflag 215
 	msgbox Route104_Prototype_Text_19B267, 4
 	checkflag 216
-	jumpeq Route104_Prototype_EventScript_160CFB
+	goto_if_eq Route104_Prototype_EventScript_160CFB
 	release
 	end
 
@@ -32,21 +32,21 @@ Route104_Prototype_EventScript_160CA3:: @ 8160CA3
 	lock
 	faceplayer
 	checktrainerflag OPPONENT_BRIANNA_1
-	jumpif 0, Route104_Prototype_EventScript_160CF1
+	goto_if 0, Route104_Prototype_EventScript_160CF1
 	checktrainerflag OPPONENT_CINDY_2
-	jumpif 0, Route104_Prototype_EventScript_160CF1
+	goto_if 0, Route104_Prototype_EventScript_160CF1
 	checktrainerflag OPPONENT_AMY_AND_LIV_3
-	jumpif 0, Route104_Prototype_EventScript_160CF1
+	goto_if 0, Route104_Prototype_EventScript_160CF1
 	checktrainerflag OPPONENT_GINA_AND_MIA_2
-	jumpif 0, Route104_Prototype_EventScript_160CF1
+	goto_if 0, Route104_Prototype_EventScript_160CF1
 	checktrainerflag OPPONENT_LUCAS_2
-	jumpif 0, Route104_Prototype_EventScript_160CF1
+	goto_if 0, Route104_Prototype_EventScript_160CF1
 	checktrainerflag OPPONENT_MIKE_1
-	jumpif 0, Route104_Prototype_EventScript_160CF1
+	goto_if 0, Route104_Prototype_EventScript_160CF1
 	setflag 216
 	msgbox Route104_Prototype_Text_19B2E9, 4
 	checkflag 215
-	jumpeq Route104_Prototype_EventScript_160CFB
+	goto_if_eq Route104_Prototype_EventScript_160CFB
 	release
 	end
 

@@ -5,7 +5,7 @@ MtChimney_CableCarStation_MapScripts:: @ 815C0FA
 
 MtChimney_CableCarStation_MapScript1_15C105:: @ 815C105
 	compare 0x40a3, 1
-	callif 1, MtChimney_CableCarStation_EventScript_15C111
+	call_if 1, MtChimney_CableCarStation_EventScript_15C111
 	end
 
 MtChimney_CableCarStation_EventScript_15C111:: @ 815C111
@@ -33,9 +33,9 @@ MtChimney_CableCarStation_EventScript_15C14B:: @ 815C14B
 	faceplayer
 	msgbox MtChimney_CableCarStation_Text_19256A, 5
 	compare RESULT, 1
-	jumpeq MtChimney_CableCarStation_EventScript_15C16C
+	goto_if_eq MtChimney_CableCarStation_EventScript_15C16C
 	compare RESULT, 0
-	jumpeq MtChimney_CableCarStation_EventScript_15C19B
+	goto_if_eq MtChimney_CableCarStation_EventScript_15C19B
 	end
 
 MtChimney_CableCarStation_EventScript_15C16C:: @ 815C16C

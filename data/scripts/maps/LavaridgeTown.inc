@@ -6,11 +6,11 @@ LavaridgeTown_MapScripts:: @ 814E4A3
 LavaridgeTown_MapScript1_14E4AE:: @ 814E4AE
 	setflag 2066
 	checkflag 139
-	callif 1, LavaridgeTown_EventScript_14E4DF
+	call_if 1, LavaridgeTown_EventScript_14E4DF
 	call LavaridgeTown_EventScript_1A014E
 	call LavaridgeTown_EventScript_1A0172
 	compare 0x4053, 2
-	callif 1, LavaridgeTown_EventScript_14E4D0
+	call_if 1, LavaridgeTown_EventScript_14E4D0
 	end
 
 LavaridgeTown_EventScript_14E4D0:: @ 814E4D0
@@ -45,16 +45,16 @@ LavaridgeTown_EventScript_14E4ED:: @ 814E4ED
 	waitmove 0
 	checkgender
 	compare RESULT, 0
-	callif 1, LavaridgeTown_EventScript_14E56B
+	call_if 1, LavaridgeTown_EventScript_14E56B
 	compare RESULT, 1
-	callif 1, LavaridgeTown_EventScript_14E570
+	call_if 1, LavaridgeTown_EventScript_14E570
 	compare 0x8008, 1
-	callif 1, LavaridgeTown_EventScript_14E68F
+	call_if 1, LavaridgeTown_EventScript_14E68F
 	checkgender
 	compare RESULT, 0
-	jumpeq LavaridgeTown_EventScript_14E5AB
+	goto_if_eq LavaridgeTown_EventScript_14E5AB
 	compare RESULT, 1
-	jumpeq LavaridgeTown_EventScript_14E5D0
+	goto_if_eq LavaridgeTown_EventScript_14E5D0
 	end
 
 LavaridgeTown_EventScript_14E56B:: @ 814E56B
@@ -71,14 +71,14 @@ LavaridgeTown_EventScript_14E575:: @ 814E575
 	setvar 0x8008, 0
 	checkgender
 	compare RESULT, 0
-	callif 1, LavaridgeTown_EventScript_14E56B
+	call_if 1, LavaridgeTown_EventScript_14E56B
 	compare RESULT, 1
-	callif 1, LavaridgeTown_EventScript_14E570
+	call_if 1, LavaridgeTown_EventScript_14E570
 	checkgender
 	compare RESULT, 0
-	jumpeq LavaridgeTown_EventScript_14E5AB
+	goto_if_eq LavaridgeTown_EventScript_14E5AB
 	compare RESULT, 1
-	jumpeq LavaridgeTown_EventScript_14E5D0
+	goto_if_eq LavaridgeTown_EventScript_14E5D0
 	end
 
 LavaridgeTown_EventScript_14E5AB:: @ 814E5AB
@@ -100,22 +100,22 @@ LavaridgeTown_EventScript_14E5D0:: @ 814E5D0
 LavaridgeTown_EventScript_14E5F5:: @ 814E5F5
 	closebutton
 	compare 0x8008, 1
-	callif 1, LavaridgeTown_EventScript_14E646
+	call_if 1, LavaridgeTown_EventScript_14E646
 	compare 0x8008, 0
-	callif 1, LavaridgeTown_EventScript_14E64E
+	call_if 1, LavaridgeTown_EventScript_14E64E
 	disappear 8
 	reappear 7
 	pause 30
 	compare 0x8008, 1
-	callif 1, LavaridgeTown_EventScript_14E69A
+	call_if 1, LavaridgeTown_EventScript_14E69A
 	compare 0x8008, 0
-	callif 1, LavaridgeTown_EventScript_14E6A5
+	call_if 1, LavaridgeTown_EventScript_14E6A5
 	disappear 7
 	setvar 0x4053, 2
 	playmusicbattle 0
 	fadedefault
 	compare 0x8008, 0
-	jumpeq LavaridgeTown_EventScript_14E644
+	goto_if_eq LavaridgeTown_EventScript_14E644
 	releaseall
 	end
 
@@ -129,13 +129,13 @@ LavaridgeTown_EventScript_14E646:: @ 814E646
 
 LavaridgeTown_EventScript_14E64E:: @ 814E64E
 	compare FACING, 2
-	callif 1, LavaridgeTown_EventScript_14E67B
+	call_if 1, LavaridgeTown_EventScript_14E67B
 	compare FACING, 1
-	callif 1, LavaridgeTown_EventScript_14E680
+	call_if 1, LavaridgeTown_EventScript_14E680
 	compare FACING, 3
-	callif 1, LavaridgeTown_EventScript_14E685
+	call_if 1, LavaridgeTown_EventScript_14E685
 	compare FACING, 4
-	callif 1, LavaridgeTown_EventScript_14E68A
+	call_if 1, LavaridgeTown_EventScript_14E68A
 	return
 
 LavaridgeTown_EventScript_14E67B:: @ 814E67B
@@ -166,13 +166,13 @@ LavaridgeTown_EventScript_14E69A:: @ 814E69A
 
 LavaridgeTown_EventScript_14E6A5:: @ 814E6A5
 	compare FACING, 2
-	callif 1, LavaridgeTown_EventScript_14E6D2
+	call_if 1, LavaridgeTown_EventScript_14E6D2
 	compare FACING, 1
-	callif 1, LavaridgeTown_EventScript_14E6D2
+	call_if 1, LavaridgeTown_EventScript_14E6D2
 	compare FACING, 3
-	callif 1, LavaridgeTown_EventScript_14E6DD
+	call_if 1, LavaridgeTown_EventScript_14E6DD
 	compare FACING, 4
-	callif 1, LavaridgeTown_EventScript_14E6D2
+	call_if 1, LavaridgeTown_EventScript_14E6D2
 	return
 
 LavaridgeTown_EventScript_14E6D2:: @ 814E6D2
@@ -238,7 +238,7 @@ LavaridgeTown_Movement_14E70E:: @ 814E70E
 LavaridgeTown_EventScript_14E710:: @ 814E710
 	specialval RESULT, player_get_direction_lower_nybble
 	compare RESULT, 1
-	jumpeq LavaridgeTown_EventScript_14E721
+	goto_if_eq LavaridgeTown_EventScript_14E721
 	end
 
 LavaridgeTown_EventScript_14E721:: @ 814E721
@@ -273,13 +273,13 @@ LavaridgeTown_EventScript_14E75A:: @ 814E75A
 	lock
 	faceplayer
 	checkflag 266
-	jumpeq LavaridgeTown_EventScript_14E79E
+	goto_if_eq LavaridgeTown_EventScript_14E79E
 	msgbox LavaridgeTown_Text_16C174, 5
 	compare RESULT, 0
-	jumpeq LavaridgeTown_EventScript_14E7B2
+	goto_if_eq LavaridgeTown_EventScript_14E7B2
 	countpokemon
 	compare RESULT, 6
-	jumpeq LavaridgeTown_EventScript_14E7A8
+	goto_if_eq LavaridgeTown_EventScript_14E7A8
 	msgbox LavaridgeTown_Text_16C2B6, 4
 	setflag 266
 	fanfare 370

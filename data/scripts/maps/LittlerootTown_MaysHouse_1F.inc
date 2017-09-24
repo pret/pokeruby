@@ -6,9 +6,9 @@ LittlerootTown_MaysHouse_1F_MapScripts:: @ 8152879
 
 LittlerootTown_MaysHouse_1F_MapScript1_152889:: @ 8152889
 	compare 0x4092, 6
-	callif 0, LittlerootTown_MaysHouse_1F_EventScript_15289E
+	call_if 0, LittlerootTown_MaysHouse_1F_EventScript_15289E
 	checkflag 274
-	callif 1, LittlerootTown_MaysHouse_1F_EventScript_1528B1
+	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1528B1
 	end
 
 LittlerootTown_MaysHouse_1F_EventScript_15289E:: @ 815289E
@@ -19,7 +19,7 @@ LittlerootTown_MaysHouse_1F_EventScript_15289E:: @ 815289E
 LittlerootTown_MaysHouse_1F_EventScript_1528B1:: @ 81528B1
 	checkgender
 	compare RESULT, 1
-	jumpeq LittlerootTown_MaysHouse_1F_EventScript_1528BE
+	goto_if_eq LittlerootTown_MaysHouse_1F_EventScript_1528BE
 	return
 
 LittlerootTown_MaysHouse_1F_EventScript_1528BE:: @ 81528BE
@@ -28,11 +28,11 @@ LittlerootTown_MaysHouse_1F_EventScript_1528BE:: @ 81528BE
 
 LittlerootTown_MaysHouse_1F_MapScript1_1528C8:: @ 81528C8
 	compare 0x4092, 3
-	callif 1, LittlerootTown_MaysHouse_1F_EventScript_152902
+	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_152902
 	compare 0x4092, 5
-	callif 1, LittlerootTown_MaysHouse_1F_EventScript_1528EA
+	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1528EA
 	compare 0x4092, 6
-	callif 1, LittlerootTown_MaysHouse_1F_EventScript_1528F6
+	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1528F6
 	end
 
 LittlerootTown_MaysHouse_1F_EventScript_1528EA:: @ 81528EA
@@ -118,9 +118,9 @@ LittlerootTown_MaysHouse_1F_Movement_1529C0:: @ 81529C0
 	lockall
 	checkgender
 	compare RESULT, 0
-	callif 1, LittlerootTown_MaysHouse_1F_EventScript_1529E1
+	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1529E1
 	compare RESULT, 1
-	callif 1, LittlerootTown_MaysHouse_1F_EventScript_1529E2
+	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1529E2
 	releaseall
 	end
 
@@ -136,11 +136,11 @@ LittlerootTown_MaysHouse_1F_EventScript_1529EB:: @ 81529EB
 	lock
 	faceplayer
 	checkflag 130
-	jumpeq LittlerootTown_BrendansHouse_1F_EventScript_152A21
+	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_152A21
 	checkflag 301
-	jumpeq LittlerootTown_BrendansHouse_1F_EventScript_152A17
+	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_152A17
 	compare 0x408d, 3
-	jumpeq LittlerootTown_BrendansHouse_1F_EventScript_152A2B
+	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_152A2B
 	special GetRivalSonDaughterString
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1731C6, 4
 	release

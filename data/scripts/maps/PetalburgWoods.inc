@@ -92,7 +92,7 @@ PetalburgWoods_EventScript_15CDFA:: @ 815CDFA
 	msgbox PetalburgWoods_Text_19507E, 4
 	giveitem ITEM_GREAT_BALL
 	compare RESULT, 0
-	jumpeq PetalburgWoods_EventScript_15CE3F
+	goto_if_eq PetalburgWoods_EventScript_15CE3F
 	goto PetalburgWoods_EventScript_15CE4D
 	end
 
@@ -242,11 +242,11 @@ PetalburgWoods_EventScript_15CEDC:: @ 815CEDC
 	lock
 	faceplayer
 	checkflag 297
-	jumpeq PetalburgWoods_EventScript_15CF0B
+	goto_if_eq PetalburgWoods_EventScript_15CF0B
 	msgbox PetalburgWoods_Text_19549E, 4
 	giveitem ITEM_MIRACLE_SEED
 	compare RESULT, 0
-	jumpeq PetalburgWoods_EventScript_1A029B
+	goto_if_eq PetalburgWoods_EventScript_1A029B
 	setflag 297
 	release
 	end
@@ -273,7 +273,7 @@ PetalburgWoods_EventScript_15CF3E:: @ 815CF3E
 	trainerbattle 0, OPPONENT_JAMES_1, 0, PetalburgWoods_Text_19526A, PetalburgWoods_Text_1952AE
 	specialval RESULT, sub_8082C68
 	compare RESULT, 1
-	jumpeq PetalburgWoods_EventScript_15CF65
+	goto_if_eq PetalburgWoods_EventScript_15CF65
 	msgbox PetalburgWoods_Text_1952CC, 6
 	end
 

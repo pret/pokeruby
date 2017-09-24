@@ -11,7 +11,7 @@ RusturfTunnel_MapScript2_15C750:: @ 815C750
 RusturfTunnel_MapScript1_15C762:: @ 815C762
 	call RusturfTunnel_EventScript_1A0196
 	compare 0x409a, 2
-	callif 1, RusturfTunnel_EventScript_15C773
+	call_if 1, RusturfTunnel_EventScript_15C773
 	end
 
 RusturfTunnel_EventScript_15C773:: @ 815C773
@@ -33,7 +33,7 @@ RusturfTunnel_EventScript_15C799:: @ 815C799
 	lock
 	faceplayer
 	checkflag 1
-	jumpeq RusturfTunnel_EventScript_15C7BC
+	goto_if_eq RusturfTunnel_EventScript_15C7BC
 	setflag 1
 	msgbox RusturfTunnel_Text_1944C5, 4
 	closebutton
@@ -53,35 +53,35 @@ RusturfTunnel_EventScript_15C7BC:: @ 815C7BC
 RusturfTunnel_EventScript_15C7D1:: @ 815C7D1
 	lockall
 	compare 0x4001, 1
-	callif 1, RusturfTunnel_EventScript_15C8CA
+	call_if 1, RusturfTunnel_EventScript_15C8CA
 	compare 0x4001, 2
-	callif 1, RusturfTunnel_EventScript_15C8DF
+	call_if 1, RusturfTunnel_EventScript_15C8DF
 	compare 0x4001, 3
-	callif 1, RusturfTunnel_EventScript_15C8EA
+	call_if 1, RusturfTunnel_EventScript_15C8EA
 	call RusturfTunnel_EventScript_15C92D
 	msgbox RusturfTunnel_Text_19461D, 4
 	compare 0x4001, 2
-	callif 1, RusturfTunnel_EventScript_15C8EB
+	call_if 1, RusturfTunnel_EventScript_15C8EB
 	compare 0x4001, 3
-	callif 1, RusturfTunnel_EventScript_15C8EB
+	call_if 1, RusturfTunnel_EventScript_15C8EB
 	giveitem ITEM_HM04
 	setflag 106
 	msgbox RusturfTunnel_Text_194693, 4
 	closebutton
 	compare 0x4001, 1
-	callif 1, RusturfTunnel_EventScript_15C880
+	call_if 1, RusturfTunnel_EventScript_15C880
 	compare 0x4001, 2
-	callif 1, RusturfTunnel_EventScript_15C892
+	call_if 1, RusturfTunnel_EventScript_15C892
 	compare 0x4001, 3
-	callif 1, RusturfTunnel_EventScript_15C8AE
+	call_if 1, RusturfTunnel_EventScript_15C8AE
 	msgbox RusturfTunnel_Text_194706, 4
 	closebutton
 	compare 0x4001, 1
-	callif 1, RusturfTunnel_EventScript_15C8F7
+	call_if 1, RusturfTunnel_EventScript_15C8F7
 	compare 0x4001, 2
-	callif 1, RusturfTunnel_EventScript_15C909
+	call_if 1, RusturfTunnel_EventScript_15C909
 	compare 0x4001, 3
-	callif 1, RusturfTunnel_EventScript_15C91B
+	call_if 1, RusturfTunnel_EventScript_15C91B
 	call RusturfTunnel_EventScript_1A0442
 	releaseall
 	end

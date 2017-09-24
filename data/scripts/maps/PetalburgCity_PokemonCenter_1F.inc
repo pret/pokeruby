@@ -29,17 +29,17 @@ PetalburgCity_PokemonCenter_1F_EventScript_155233:: @ 8155233
 	msgbox PetalburgCity_PokemonCenter_1F_Text_17BDC5, 4
 	specialval RESULT, IsStarterInParty
 	compare RESULT, 1
-	jumpeq PetalburgCity_PokemonCenter_1F_EventScript_15524F
+	goto_if_eq PetalburgCity_PokemonCenter_1F_EventScript_15524F
 	release
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_15524F:: @ 815524F
 	compare 0x4023, 0
-	callif 1, PetalburgCity_PokemonCenter_1F_EventScript_155272
+	call_if 1, PetalburgCity_PokemonCenter_1F_EventScript_155272
 	compare 0x4023, 1
-	callif 1, PetalburgCity_PokemonCenter_1F_EventScript_15527B
+	call_if 1, PetalburgCity_PokemonCenter_1F_EventScript_15527B
 	compare 0x4023, 2
-	callif 1, PetalburgCity_PokemonCenter_1F_EventScript_155284
+	call_if 1, PetalburgCity_PokemonCenter_1F_EventScript_155284
 	release
 	end
 

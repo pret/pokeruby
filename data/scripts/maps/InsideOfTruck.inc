@@ -18,9 +18,9 @@ InsideOfTruck_EventScript_15FC29:: @ 815FC29
 	setflag 0x4000
 	checkgender
 	compare RESULT, 0
-	jumpeq InsideOfTruck_EventScript_15FC45
+	goto_if_eq InsideOfTruck_EventScript_15FC45
 	compare RESULT, 1
-	jumpeq InsideOfTruck_EventScript_15FC68
+	goto_if_eq InsideOfTruck_EventScript_15FC68
 	end
 
 InsideOfTruck_EventScript_15FC45:: @ 815FC45

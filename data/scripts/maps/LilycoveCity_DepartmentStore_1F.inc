@@ -10,12 +10,12 @@ LilycoveCity_DepartmentStore_1F_EventScript_159D5E:: @ 8159D5E
 	faceplayer
 	checkdailyflags
 	compare 0x4045, 0
-	jumpif 5, LilycoveCity_DepartmentStore_1F_EventScript_159EB1
+	goto_if 5, LilycoveCity_DepartmentStore_1F_EventScript_159EB1
 	checkflag 2250
-	jumpeq LilycoveCity_DepartmentStore_1F_EventScript_159E4C
+	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E4C
 	msgbox LilycoveCity_DepartmentStore_1F_Text_1C4B5E, 5
 	compare RESULT, 0
-	jumpeq LilycoveCity_DepartmentStore_1F_EventScript_159E56
+	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E56
 	setflag 2250
 	message LilycoveCity_DepartmentStore_1F_Text_1C4CC6
 	waittext
@@ -34,24 +34,24 @@ LilycoveCity_DepartmentStore_1F_EventScript_159D5E:: @ 8159D5E
 	move 2, LilycoveCity_DepartmentStore_1F_Movement_1A0839
 	waitmove 0
 	compare 0x8004, 0
-	jumpeq LilycoveCity_DepartmentStore_1F_EventScript_159E60
+	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E60
 	inccounter GAME_STAT_WON_POKEMON_LOTTERY
 	compare 0x8006, 0
-	callif 1, LilycoveCity_DepartmentStore_1F_EventScript_159E3A
+	call_if 1, LilycoveCity_DepartmentStore_1F_EventScript_159E3A
 	compare 0x8006, 1
-	callif 1, LilycoveCity_DepartmentStore_1F_EventScript_159E43
+	call_if 1, LilycoveCity_DepartmentStore_1F_EventScript_159E43
 	bufferitem 0, 0x8005
 	compare 0x8004, 1
-	callif 1, LilycoveCity_DepartmentStore_1F_EventScript_159E78
+	call_if 1, LilycoveCity_DepartmentStore_1F_EventScript_159E78
 	compare 0x8004, 2
-	callif 1, LilycoveCity_DepartmentStore_1F_EventScript_159E81
+	call_if 1, LilycoveCity_DepartmentStore_1F_EventScript_159E81
 	compare 0x8004, 3
-	callif 1, LilycoveCity_DepartmentStore_1F_EventScript_159E8A
+	call_if 1, LilycoveCity_DepartmentStore_1F_EventScript_159E8A
 	compare 0x8004, 4
-	callif 1, LilycoveCity_DepartmentStore_1F_EventScript_159E93
+	call_if 1, LilycoveCity_DepartmentStore_1F_EventScript_159E93
 	giveitem 0x8005
 	compare RESULT, 0
-	jumpeq LilycoveCity_DepartmentStore_1F_EventScript_159E9C
+	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E9C
 	goto LilycoveCity_DepartmentStore_1F_EventScript_159E6E
 	end
 
@@ -113,7 +113,7 @@ LilycoveCity_DepartmentStore_1F_EventScript_159EB1:: @ 8159EB1
 	msgbox LilycoveCity_DepartmentStore_1F_Text_1C4FCC, 4
 	giveitem 0x4045
 	compare RESULT, 0
-	jumpeq LilycoveCity_DepartmentStore_1F_EventScript_159EA7
+	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159EA7
 	setvar 0x4045, 0
 	release
 	end

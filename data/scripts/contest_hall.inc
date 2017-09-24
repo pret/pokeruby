@@ -6,16 +6,16 @@ VerdanturfTown_ContestLobby_EventScript_1A4E92:: @ 81A4E92
 	faceplayer
 	checkitem ITEM_CONTEST_PASS, 1
 	compare RESULT, 0
-	callif 1, FallarborTown_ContestLobby_EventScript_1A4EDD
+	call_if 1, FallarborTown_ContestLobby_EventScript_1A4EDD
 	compare 0x408a, 0
-	jumpif 5, FallarborTown_ContestLobby_EventScript_1A4F4E
+	goto_if 5, FallarborTown_ContestLobby_EventScript_1A4F4E
 	checkflag 1
-	jumpeq FallarborTown_ContestLobby_EventScript_1A4F8F
+	goto_if_eq FallarborTown_ContestLobby_EventScript_1A4F8F
 	bufferstd 0, 0x800b
 	msgbox FallarborTown_ContestLobby_Text_1A5DFC, 4
 	checkitem ITEM_CONTEST_PASS, 1
 	compare RESULT, 0
-	jumpeq FallarborTown_ContestLobby_EventScript_1A4EE1
+	goto_if_eq FallarborTown_ContestLobby_EventScript_1A4EE1
 	setflag 1
 	goto FallarborTown_ContestLobby_EventScript_1A4F8F
 	end
@@ -26,7 +26,7 @@ FallarborTown_ContestLobby_EventScript_1A4EDD:: @ 81A4EDD
 
 FallarborTown_ContestLobby_EventScript_1A4EE1:: @ 81A4EE1
 	compare CONTEST_RANK, 0
-	jumpeq FallarborTown_ContestLobby_EventScript_1A4EF6
+	goto_if_eq FallarborTown_ContestLobby_EventScript_1A4EF6
 	msgbox FallarborTown_ContestLobby_Text_1A6340, 4
 	releaseall
 	end
@@ -34,14 +34,14 @@ FallarborTown_ContestLobby_EventScript_1A4EE1:: @ 81A4EE1
 FallarborTown_ContestLobby_EventScript_1A4EF6:: @ 81A4EF6
 	msgbox FallarborTown_ContestLobby_Text_1A64F4, 5
 	compare RESULT, 1
-	jumpeq FallarborTown_ContestLobby_EventScript_1A4F13
+	goto_if_eq FallarborTown_ContestLobby_EventScript_1A4F13
 	msgbox FallarborTown_ContestLobby_Text_1A65EA, 4
 	releaseall
 	end
 
 FallarborTown_ContestLobby_EventScript_1A4F13:: @ 81A4F13
 	checkflag 150
-	jumpeq FallarborTown_ContestLobby_EventScript_1A4F44
+	goto_if_eq FallarborTown_ContestLobby_EventScript_1A4F44
 	msgbox FallarborTown_ContestLobby_Text_1A6583, 4
 	giveitem ITEM_CONTEST_PASS
 	setflag 150
@@ -64,7 +64,7 @@ FallarborTown_ContestLobby_EventScript_1A4F4E:: @ 81A4F4E
 FallarborTown_ContestLobby_EventScript_1A4F67:: @ 81A4F67
 	giveitem ITEM_LUXURY_BALL
 	compare RESULT, 0
-	jumpeq FallarborTown_ContestLobby_EventScript_1A4F86
+	goto_if_eq FallarborTown_ContestLobby_EventScript_1A4F86
 	setvar 0x408a, 0
 	closebutton
 	release
@@ -121,18 +121,18 @@ FallarborTown_ContestLobby_EventScript_1A5048:: @ 81A5048
 	msgbox FallarborTown_ContestLobby_Text_1A6319, 4
 	choosecontestpkmn
 	compare 0x8004, 255
-	jumpeq FallarborTown_ContestLobby_EventScript_1A5097
+	goto_if_eq FallarborTown_ContestLobby_EventScript_1A5097
 	special sub_80C43F4
 	compare RESULT, 0
-	jumpeq FallarborTown_ContestLobby_EventScript_1A50C8
+	goto_if_eq FallarborTown_ContestLobby_EventScript_1A50C8
 	compare RESULT, 1
-	jumpeq FallarborTown_ContestLobby_EventScript_1A50D7
+	goto_if_eq FallarborTown_ContestLobby_EventScript_1A50D7
 	compare RESULT, 2
-	jumpeq FallarborTown_ContestLobby_EventScript_1A50FB
+	goto_if_eq FallarborTown_ContestLobby_EventScript_1A50FB
 	compare RESULT, 3
-	jumpeq FallarborTown_ContestLobby_EventScript_1A511F
+	goto_if_eq FallarborTown_ContestLobby_EventScript_1A511F
 	compare RESULT, 4
-	jumpeq FallarborTown_ContestLobby_EventScript_1A512E
+	goto_if_eq FallarborTown_ContestLobby_EventScript_1A512E
 	end
 
 FallarborTown_ContestLobby_EventScript_1A5097:: @ 81A5097
@@ -271,7 +271,7 @@ LinkContestRoom1_EventScript_1A5245:: @ 81A5245
 
 LinkContestRoom1_EventScript_1A525F:: @ 81A525F
 	compare 0x4088, 5
-	jumpeq LinkContestRoom1_EventScript_1A5273
+	goto_if_eq LinkContestRoom1_EventScript_1A5273
 	msgbox LinkContestRoom1_Text_1A68F0, 3
 	return
 
@@ -288,20 +288,20 @@ LinkContestRoom1_EventScript_1A527A:: @ 81A527A
 	call LinkContestRoom1_EventScript_1A5880
 	addvar 0x8006, 1
 	compare 0x8006, 4
-	jumpif 5, LinkContestRoom1_EventScript_1A527A
+	goto_if 5, LinkContestRoom1_EventScript_1A527A
 	call LinkContestRoom1_EventScript_1A5377
 	setvar 0x4001, 6
 	return
 
 LinkContestRoom1_EventScript_1A52AE:: @ 81A52AE
 	compare 0x8006, 0
-	jumpeq LinkContestRoom1_EventScript_1A52DB
+	goto_if_eq LinkContestRoom1_EventScript_1A52DB
 	compare 0x8006, 1
-	jumpeq LinkContestRoom1_EventScript_1A52ED
+	goto_if_eq LinkContestRoom1_EventScript_1A52ED
 	compare 0x8006, 2
-	jumpeq LinkContestRoom1_EventScript_1A52FF
+	goto_if_eq LinkContestRoom1_EventScript_1A52FF
 	compare 0x8006, 3
-	jumpeq LinkContestRoom1_EventScript_1A5311
+	goto_if_eq LinkContestRoom1_EventScript_1A5311
 	return
 
 LinkContestRoom1_EventScript_1A52DB:: @ 81A52DB
@@ -358,7 +358,7 @@ LinkContestRoom1_EventScript_1A5323:: @ 81A5323
 
 LinkContestRoom1_EventScript_1A535E:: @ 81A535E
 	compare 0x4088, 5
-	jumpeq LinkContestRoom1_EventScript_1A5370
+	goto_if_eq LinkContestRoom1_EventScript_1A5370
 	message LinkContestRoom1_Text_1A6A04
 	waittext
 	return
@@ -386,7 +386,7 @@ LinkContestRoom1_EventScript_1A5377:: @ 81A5377
 
 LinkContestRoom1_EventScript_1A53B3:: @ 81A53B3
 	compare 0x4088, 5
-	jumpeq LinkContestRoom1_EventScript_1A53C7
+	goto_if_eq LinkContestRoom1_EventScript_1A53C7
 	msgbox LinkContestRoom1_Text_1A6A1F, 4
 	return
 
@@ -397,7 +397,7 @@ LinkContestRoom1_EventScript_1A53C7:: @ 81A53C7
 
 LinkContestRoom1_EventScript_1A53CE:: @ 81A53CE
 	compare 0x4088, 5
-	jumpeq LinkContestRoom1_EventScript_1A53DF
+	goto_if_eq LinkContestRoom1_EventScript_1A53DF
 	message LinkContestRoom1_Text_1A6AE1
 	return
 
@@ -432,15 +432,15 @@ LinkContestRoom1_EventScript_1A53E5:: @ 81A53E5
 LinkContestRoom1_EventScript_1A5455:: @ 81A5455
 	special sub_80C47A0
 	compare 0x4088, 1
-	callif 1, LinkContestRoom1_EventScript_1A555A
+	call_if 1, LinkContestRoom1_EventScript_1A555A
 	compare 0x4088, 2
-	callif 1, LinkContestRoom1_EventScript_1A55B8
+	call_if 1, LinkContestRoom1_EventScript_1A55B8
 	compare 0x4088, 3
-	callif 1, LinkContestRoom1_EventScript_1A5616
+	call_if 1, LinkContestRoom1_EventScript_1A5616
 	compare 0x4088, 4
-	callif 1, LinkContestRoom1_EventScript_1A5674
+	call_if 1, LinkContestRoom1_EventScript_1A5674
 	compare 0x4088, 5
-	callif 1, LinkContestRoom1_EventScript_1A56D2
+	call_if 1, LinkContestRoom1_EventScript_1A56D2
 	setvar 0x4001, 9
 	setvar 0x4002, 9
 	setvar 0x4003, 9
@@ -450,7 +450,7 @@ LinkContestRoom1_EventScript_1A5455:: @ 81A5455
 	setvar 0x4007, 9
 	setvar 0x4008, 9
 	compare 0x4000, 0
-	callif 2, LinkContestRoom1_EventScript_1A54EB
+	call_if 2, LinkContestRoom1_EventScript_1A54EB
 	setvar 0x4001, 0
 	setvar 0x4002, 0
 	setvar 0x4003, 0
@@ -465,123 +465,123 @@ LinkContestRoom1_EventScript_1A54EB:: @ 81A54EB
 	setvar RESULT, 8
 	special ScriptRandom
 	compare RESULT, 0
-	callif 1, LinkContestRoom1_EventScript_1A5760
+	call_if 1, LinkContestRoom1_EventScript_1A5760
 	compare RESULT, 1
-	callif 1, LinkContestRoom1_EventScript_1A5784
+	call_if 1, LinkContestRoom1_EventScript_1A5784
 	compare RESULT, 2
-	callif 1, LinkContestRoom1_EventScript_1A57A8
+	call_if 1, LinkContestRoom1_EventScript_1A57A8
 	compare RESULT, 3
-	callif 1, LinkContestRoom1_EventScript_1A57CC
+	call_if 1, LinkContestRoom1_EventScript_1A57CC
 	compare RESULT, 4
-	callif 1, LinkContestRoom1_EventScript_1A57F0
+	call_if 1, LinkContestRoom1_EventScript_1A57F0
 	compare RESULT, 5
-	callif 1, LinkContestRoom1_EventScript_1A5814
+	call_if 1, LinkContestRoom1_EventScript_1A5814
 	compare RESULT, 6
-	callif 1, LinkContestRoom1_EventScript_1A5838
+	call_if 1, LinkContestRoom1_EventScript_1A5838
 	compare RESULT, 7
-	callif 1, LinkContestRoom1_EventScript_1A585C
+	call_if 1, LinkContestRoom1_EventScript_1A585C
 	compare 0x4000, 0
-	jumpif 2, LinkContestRoom1_EventScript_1A54EB
+	goto_if 2, LinkContestRoom1_EventScript_1A54EB
 	waitmove 0
 	return
 
 LinkContestRoom1_EventScript_1A555A:: @ 81A555A
 	compare 0x8004, 80
-	jumpif 2, LinkContestRoom1_EventScript_1A575A
+	goto_if 2, LinkContestRoom1_EventScript_1A575A
 	compare 0x8004, 70
-	jumpif 2, LinkContestRoom1_EventScript_1A5754
+	goto_if 2, LinkContestRoom1_EventScript_1A5754
 	compare 0x8004, 60
-	jumpif 2, LinkContestRoom1_EventScript_1A574E
+	goto_if 2, LinkContestRoom1_EventScript_1A574E
 	compare 0x8004, 50
-	jumpif 2, LinkContestRoom1_EventScript_1A5748
+	goto_if 2, LinkContestRoom1_EventScript_1A5748
 	compare 0x8004, 40
-	jumpif 2, LinkContestRoom1_EventScript_1A5742
+	goto_if 2, LinkContestRoom1_EventScript_1A5742
 	compare 0x8004, 30
-	jumpif 2, LinkContestRoom1_EventScript_1A573C
+	goto_if 2, LinkContestRoom1_EventScript_1A573C
 	compare 0x8004, 20
-	jumpif 2, LinkContestRoom1_EventScript_1A5736
+	goto_if 2, LinkContestRoom1_EventScript_1A5736
 	compare 0x8004, 10
-	jumpif 2, LinkContestRoom1_EventScript_1A5730
+	goto_if 2, LinkContestRoom1_EventScript_1A5730
 	setvar 0x4000, 0
 	return
 
 LinkContestRoom1_EventScript_1A55B8:: @ 81A55B8
 	compare 0x8004, 230
-	jumpif 2, LinkContestRoom1_EventScript_1A575A
+	goto_if 2, LinkContestRoom1_EventScript_1A575A
 	compare 0x8004, 210
-	jumpif 2, LinkContestRoom1_EventScript_1A5754
+	goto_if 2, LinkContestRoom1_EventScript_1A5754
 	compare 0x8004, 190
-	jumpif 2, LinkContestRoom1_EventScript_1A574E
+	goto_if 2, LinkContestRoom1_EventScript_1A574E
 	compare 0x8004, 170
-	jumpif 2, LinkContestRoom1_EventScript_1A5748
+	goto_if 2, LinkContestRoom1_EventScript_1A5748
 	compare 0x8004, 150
-	jumpif 2, LinkContestRoom1_EventScript_1A5742
+	goto_if 2, LinkContestRoom1_EventScript_1A5742
 	compare 0x8004, 130
-	jumpif 2, LinkContestRoom1_EventScript_1A573C
+	goto_if 2, LinkContestRoom1_EventScript_1A573C
 	compare 0x8004, 110
-	jumpif 2, LinkContestRoom1_EventScript_1A5736
+	goto_if 2, LinkContestRoom1_EventScript_1A5736
 	compare 0x8004, 90
-	jumpif 2, LinkContestRoom1_EventScript_1A5730
+	goto_if 2, LinkContestRoom1_EventScript_1A5730
 	setvar 0x4000, 0
 	return
 
 LinkContestRoom1_EventScript_1A5616:: @ 81A5616
 	compare 0x8004, 380
-	jumpif 2, LinkContestRoom1_EventScript_1A575A
+	goto_if 2, LinkContestRoom1_EventScript_1A575A
 	compare 0x8004, 350
-	jumpif 2, LinkContestRoom1_EventScript_1A5754
+	goto_if 2, LinkContestRoom1_EventScript_1A5754
 	compare 0x8004, 320
-	jumpif 2, LinkContestRoom1_EventScript_1A574E
+	goto_if 2, LinkContestRoom1_EventScript_1A574E
 	compare 0x8004, 290
-	jumpif 2, LinkContestRoom1_EventScript_1A5748
+	goto_if 2, LinkContestRoom1_EventScript_1A5748
 	compare 0x8004, 260
-	jumpif 2, LinkContestRoom1_EventScript_1A5742
+	goto_if 2, LinkContestRoom1_EventScript_1A5742
 	compare 0x8004, 230
-	jumpif 2, LinkContestRoom1_EventScript_1A573C
+	goto_if 2, LinkContestRoom1_EventScript_1A573C
 	compare 0x8004, 200
-	jumpif 2, LinkContestRoom1_EventScript_1A5736
+	goto_if 2, LinkContestRoom1_EventScript_1A5736
 	compare 0x8004, 170
-	jumpif 2, LinkContestRoom1_EventScript_1A5730
+	goto_if 2, LinkContestRoom1_EventScript_1A5730
 	setvar 0x4000, 0
 	return
 
 LinkContestRoom1_EventScript_1A5674:: @ 81A5674
 	compare 0x8004, 600
-	jumpif 2, LinkContestRoom1_EventScript_1A575A
+	goto_if 2, LinkContestRoom1_EventScript_1A575A
 	compare 0x8004, 560
-	jumpif 2, LinkContestRoom1_EventScript_1A5754
+	goto_if 2, LinkContestRoom1_EventScript_1A5754
 	compare 0x8004, 520
-	jumpif 2, LinkContestRoom1_EventScript_1A574E
+	goto_if 2, LinkContestRoom1_EventScript_1A574E
 	compare 0x8004, 480
-	jumpif 2, LinkContestRoom1_EventScript_1A5748
+	goto_if 2, LinkContestRoom1_EventScript_1A5748
 	compare 0x8004, 440
-	jumpif 2, LinkContestRoom1_EventScript_1A5742
+	goto_if 2, LinkContestRoom1_EventScript_1A5742
 	compare 0x8004, 400
-	jumpif 2, LinkContestRoom1_EventScript_1A573C
+	goto_if 2, LinkContestRoom1_EventScript_1A573C
 	compare 0x8004, 360
-	jumpif 2, LinkContestRoom1_EventScript_1A5736
+	goto_if 2, LinkContestRoom1_EventScript_1A5736
 	compare 0x8004, 320
-	jumpif 2, LinkContestRoom1_EventScript_1A5730
+	goto_if 2, LinkContestRoom1_EventScript_1A5730
 	setvar 0x4000, 0
 	return
 
 LinkContestRoom1_EventScript_1A56D2:: @ 81A56D2
 	compare 0x8004, 600
-	jumpif 2, LinkContestRoom1_EventScript_1A575A
+	goto_if 2, LinkContestRoom1_EventScript_1A575A
 	compare 0x8004, 550
-	jumpif 2, LinkContestRoom1_EventScript_1A5754
+	goto_if 2, LinkContestRoom1_EventScript_1A5754
 	compare 0x8004, 500
-	jumpif 2, LinkContestRoom1_EventScript_1A574E
+	goto_if 2, LinkContestRoom1_EventScript_1A574E
 	compare 0x8004, 450
-	jumpif 2, LinkContestRoom1_EventScript_1A5748
+	goto_if 2, LinkContestRoom1_EventScript_1A5748
 	compare 0x8004, 400
-	jumpif 2, LinkContestRoom1_EventScript_1A5742
+	goto_if 2, LinkContestRoom1_EventScript_1A5742
 	compare 0x8004, 300
-	jumpif 2, LinkContestRoom1_EventScript_1A573C
+	goto_if 2, LinkContestRoom1_EventScript_1A573C
 	compare 0x8004, 200
-	jumpif 2, LinkContestRoom1_EventScript_1A5736
+	goto_if 2, LinkContestRoom1_EventScript_1A5736
 	compare 0x8004, 100
-	jumpif 2, LinkContestRoom1_EventScript_1A5730
+	goto_if 2, LinkContestRoom1_EventScript_1A5730
 	setvar 0x4000, 0
 	return
 
@@ -619,7 +619,7 @@ LinkContestRoom1_EventScript_1A575A:: @ 81A575A
 
 LinkContestRoom1_EventScript_1A5760:: @ 81A5760
 	compare 0x4001, 1
-	jumpeq LinkContestRoom1_EventScript_1A5783
+	goto_if_eq LinkContestRoom1_EventScript_1A5783
 	move 6, LinkContestRoom1_Movement_1A5D8D
 	playsfx 21
 	pause 14
@@ -632,7 +632,7 @@ LinkContestRoom1_EventScript_1A5783:: @ 81A5783
 
 LinkContestRoom1_EventScript_1A5784:: @ 81A5784
 	compare 0x4002, 1
-	jumpeq LinkContestRoom1_EventScript_1A57A7
+	goto_if_eq LinkContestRoom1_EventScript_1A57A7
 	move 12, LinkContestRoom1_Movement_1A5D8D
 	playsfx 21
 	pause 14
@@ -645,7 +645,7 @@ LinkContestRoom1_EventScript_1A57A7:: @ 81A57A7
 
 LinkContestRoom1_EventScript_1A57A8:: @ 81A57A8
 	compare 0x4003, 1
-	jumpeq LinkContestRoom1_EventScript_1A57CB
+	goto_if_eq LinkContestRoom1_EventScript_1A57CB
 	move 7, LinkContestRoom1_Movement_1A5D8D
 	playsfx 21
 	pause 14
@@ -658,7 +658,7 @@ LinkContestRoom1_EventScript_1A57CB:: @ 81A57CB
 
 LinkContestRoom1_EventScript_1A57CC:: @ 81A57CC
 	compare 0x4004, 1
-	jumpeq LinkContestRoom1_EventScript_1A57EF
+	goto_if_eq LinkContestRoom1_EventScript_1A57EF
 	move 8, LinkContestRoom1_Movement_1A5D8D
 	playsfx 21
 	pause 14
@@ -671,7 +671,7 @@ LinkContestRoom1_EventScript_1A57EF:: @ 81A57EF
 
 LinkContestRoom1_EventScript_1A57F0:: @ 81A57F0
 	compare 0x4005, 1
-	jumpeq LinkContestRoom1_EventScript_1A5813
+	goto_if_eq LinkContestRoom1_EventScript_1A5813
 	move 9, LinkContestRoom1_Movement_1A5D8D
 	playsfx 21
 	pause 14
@@ -684,7 +684,7 @@ LinkContestRoom1_EventScript_1A5813:: @ 81A5813
 
 LinkContestRoom1_EventScript_1A5814:: @ 81A5814
 	compare 0x4006, 1
-	jumpeq LinkContestRoom1_EventScript_1A5837
+	goto_if_eq LinkContestRoom1_EventScript_1A5837
 	move 10, LinkContestRoom1_Movement_1A5D8D
 	playsfx 21
 	pause 14
@@ -697,7 +697,7 @@ LinkContestRoom1_EventScript_1A5837:: @ 81A5837
 
 LinkContestRoom1_EventScript_1A5838:: @ 81A5838
 	compare 0x4007, 1
-	jumpeq LinkContestRoom1_EventScript_1A585B
+	goto_if_eq LinkContestRoom1_EventScript_1A585B
 	move 11, LinkContestRoom1_Movement_1A5D8D
 	playsfx 21
 	pause 14
@@ -710,7 +710,7 @@ LinkContestRoom1_EventScript_1A585B:: @ 81A585B
 
 LinkContestRoom1_EventScript_1A585C:: @ 81A585C
 	compare 0x4008, 1
-	jumpeq LinkContestRoom1_EventScript_1A587F
+	goto_if_eq LinkContestRoom1_EventScript_1A587F
 	move 15, LinkContestRoom1_Movement_1A5D8D
 	playsfx 21
 	pause 14
@@ -783,7 +783,7 @@ LinkContestRoom1_EventScript_1A58EE:: @ 81A58EE
 
 LinkContestRoom1_EventScript_1A5930:: @ 81A5930
 	compare 0x4088, 5
-	jumpeq LinkContestRoom1_EventScript_1A5944
+	goto_if_eq LinkContestRoom1_EventScript_1A5944
 	msgbox LinkContestRoom1_Text_1A6AF5, 3
 	return
 
@@ -810,7 +810,7 @@ LinkContestRoom1_EventScript_1A594A:: @ 81A594A
 
 LinkContestRoom1_EventScript_1A5984:: @ 81A5984
 	compare 0x4088, 5
-	jumpeq LinkContestRoom1_EventScript_1A5998
+	goto_if_eq LinkContestRoom1_EventScript_1A5998
 	msgbox LinkContestRoom1_Text_1A6C06, 4
 	return
 
@@ -822,7 +822,7 @@ LinkContestRoom1_EventScript_1A5998:: @ 81A5998
 
 LinkContestRoom1_EventScript_1A59A2:: @ 81A59A2
 	compare 0x4088, 5
-	jumpeq LinkContestRoom1_EventScript_1A59B6
+	goto_if_eq LinkContestRoom1_EventScript_1A59B6
 	msgbox LinkContestRoom1_Text_1A6C21, 4
 	return
 
@@ -834,7 +834,7 @@ LinkContestRoom1_EventScript_1A59B6:: @ 81A59B6
 
 LinkContestRoom1_EventScript_1A59C0:: @ 81A59C0
 	compare 0x4088, 5
-	jumpeq LinkContestRoom1_EventScript_1A59D4
+	goto_if_eq LinkContestRoom1_EventScript_1A59D4
 	msgbox LinkContestRoom1_Text_1A6C9D, 4
 	return
 
@@ -846,7 +846,7 @@ LinkContestRoom1_EventScript_1A59D4:: @ 81A59D4
 
 LinkContestRoom1_EventScript_1A59DE:: @ 81A59DE
 	compare 0x4088, 5
-	jumpeq LinkContestRoom1_EventScript_1A59F2
+	goto_if_eq LinkContestRoom1_EventScript_1A59F2
 	msgbox LinkContestRoom1_Text_1A6D16, 4
 	return
 
@@ -896,7 +896,7 @@ LinkContestRoom1_EventScript_1A5A49:: @ 81A5A49
 
 LinkContestRoom1_EventScript_1A5A75:: @ 81A5A75
 	compare 0x4088, 5
-	jumpeq LinkContestRoom1_EventScript_1A5A89
+	goto_if_eq LinkContestRoom1_EventScript_1A5A89
 	msgbox LinkContestRoom1_Text_1A6D3C, 4
 	return
 
@@ -909,7 +909,7 @@ LinkContestRoom1_EventScript_1A5A90:: @ 81A5A90
 	addvar 0x4001, 1
 	lockall
 	compare 0x4088, 1
-	callif 2, LinkContestRoom1_EventScript_1A5AE4
+	call_if 2, LinkContestRoom1_EventScript_1A5AE4
 	move 9, LinkContestRoom1_Movement_1A5DB7
 	move 12, LinkContestRoom1_Movement_1A5DBB
 	move 7, LinkContestRoom1_Movement_1A5DB7
@@ -919,7 +919,7 @@ LinkContestRoom1_EventScript_1A5A90:: @ 81A5A90
 	move 6, LinkContestRoom1_Movement_1A5DB3
 	move 8, LinkContestRoom1_Movement_1A5DAF
 	compare 0x4001, 4
-	jumpif 5, LinkContestRoom1_EventScript_1A5A90
+	goto_if 5, LinkContestRoom1_EventScript_1A5A90
 	pause 30
 	return
 
@@ -994,10 +994,10 @@ LinkContestRoom1_EventScript_1A5AE4:: @ 81A5AE4
 
 LinkContestRoom1_EventScript_1A5BAB:: @ 81A5BAB
 	compare 0x4088, 5
-	jumpeq LinkContestRoom1_EventScript_1A5C4C
+	goto_if_eq LinkContestRoom1_EventScript_1A5C4C
 	call LinkContestRoom1_EventScript_1A5C12
 	checkflag 2
-	jumpeq LinkContestRoom1_EventScript_1A5BF6
+	goto_if_eq LinkContestRoom1_EventScript_1A5BF6
 	msgbox LinkContestRoom1_Text_1A6DC5, 3
 	waittext
 	call LinkContestRoom1_EventScript_1A5C7F
@@ -1008,7 +1008,7 @@ LinkContestRoom1_EventScript_1A5BAB:: @ 81A5BAB
 	pause 30
 	special sub_80C4CF8
 	compare 0x8004, 1
-	jumpeq LinkContestRoom1_EventScript_1A5C46
+	goto_if_eq LinkContestRoom1_EventScript_1A5C46
 	return
 
 LinkContestRoom1_EventScript_1A5BF6:: @ 81A5BF6
@@ -1017,24 +1017,24 @@ LinkContestRoom1_EventScript_1A5BF6:: @ 81A5BF6
 	pause 90
 	special sub_80C4CF8
 	compare 0x8004, 1
-	jumpeq LinkContestRoom1_EventScript_1A5C46
+	goto_if_eq LinkContestRoom1_EventScript_1A5C46
 	return
 
 LinkContestRoom1_EventScript_1A5C12:: @ 81A5C12
 	specialval RESULT, sub_80C4440
 	compare RESULT, 1
-	jumpeq LinkContestRoom1_EventScript_1A5C23
+	goto_if_eq LinkContestRoom1_EventScript_1A5C23
 	return
 
 LinkContestRoom1_EventScript_1A5C23:: @ 81A5C23
 	special sub_80C47C0
 	compare 0x8005, 3
-	jumpeq LinkContestRoom1_EventScript_1A5C32
+	goto_if_eq LinkContestRoom1_EventScript_1A5C32
 	return
 
 LinkContestRoom1_EventScript_1A5C32:: @ 81A5C32
 	compare CONTEST_RANK, 3
-	jumpeq LinkContestRoom1_EventScript_1A5C41
+	goto_if_eq LinkContestRoom1_EventScript_1A5C41
 	setflag 2
 	return
 
@@ -1054,7 +1054,7 @@ LinkContestRoom1_EventScript_1A5C4C:: @ 81A5C4C
 	call LinkContestRoom1_EventScript_1A5C6A
 	special sub_80C4CF8
 	compare 0x8004, 1
-	jumpeq LinkContestRoom1_EventScript_1A5C64
+	goto_if_eq LinkContestRoom1_EventScript_1A5C64
 	closebutton
 	return
 
@@ -1066,7 +1066,7 @@ LinkContestRoom1_EventScript_1A5C6A:: @ 81A5C6A
 	special sub_80C496C
 	special sub_80C47C0
 	comparevars 0x8004, 0x8005
-	jumpeq LinkContestRoom1_EventScript_1A5C7C
+	goto_if_eq LinkContestRoom1_EventScript_1A5C7C
 	return
 
 LinkContestRoom1_EventScript_1A5C7C:: @ 81A5C7C
@@ -1112,19 +1112,19 @@ LinkContestRoom1_EventScript_1A5CD8:: @ 81A5CD8
 LinkContestRoom1_EventScript_1A5CE5:: @ 81A5CE5
 	special sub_80C47C0
 	compare 0x8005, 3
-	jumpeq LinkContestRoom1_EventScript_1A5CFC
+	goto_if_eq LinkContestRoom1_EventScript_1A5CFC
 	msgbox LinkContestRoom1_Text_1A6DF1, 3
 	return
 
 LinkContestRoom1_EventScript_1A5CFC:: @ 81A5CFC
 	compare 0x4088, 2
-	callif 1, LinkContestRoom1_EventScript_1A5C42
+	call_if 1, LinkContestRoom1_EventScript_1A5C42
 	inccounter GAME_STAT_WON_CONTEST
 	specialval RESULT, sub_80C4440
 	compare RESULT, 0
-	jumpeq LinkContestRoom1_EventScript_1A5D5B
+	goto_if_eq LinkContestRoom1_EventScript_1A5D5B
 	compare CONTEST_RANK, 3
-	jumpeq LinkContestRoom1_EventScript_1A5D3B
+	goto_if_eq LinkContestRoom1_EventScript_1A5D3B
 	msgbox LinkContestRoom1_Text_1A6DF1, 3
 	return
 
@@ -1136,7 +1136,7 @@ LinkContestRoom1_EventScript_1A5D2D:: @ 81A5D2D
 LinkContestRoom1_EventScript_1A5D3B:: @ 81A5D3B
 	giveitem ITEM_LUXURY_BALL
 	compare RESULT, 0
-	jumpeq LinkContestRoom1_EventScript_1A5D2D
+	goto_if_eq LinkContestRoom1_EventScript_1A5D2D
 	msgbox LinkContestRoom1_Text_1A6DF1, 3
 	return
 

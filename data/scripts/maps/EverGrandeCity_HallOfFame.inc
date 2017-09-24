@@ -45,9 +45,9 @@ EverGrandeCity_HallOfFame_EventScript_15BBA8:: @ 815BBA8
 	call EverGrandeCity_HallOfFame_EventScript_19FC13
 	checkgender
 	compare RESULT, 0
-	jumpeq EverGrandeCity_HallOfFame_EventScript_15BC41
+	goto_if_eq EverGrandeCity_HallOfFame_EventScript_15BC41
 	compare RESULT, 1
-	jumpeq EverGrandeCity_HallOfFame_EventScript_15BC4D
+	goto_if_eq EverGrandeCity_HallOfFame_EventScript_15BC4D
 	end
 
 EverGrandeCity_HallOfFame_EventScript_15BC41:: @ 815BC41

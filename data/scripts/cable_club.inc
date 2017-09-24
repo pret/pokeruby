@@ -40,15 +40,15 @@ SlateportCity_PokemonCenter_2F_MapScript1_1A3D32:: @ 81A3D32
 SootopolisCity_PokemonCenter_2F_MapScript1_1A3D32:: @ 81A3D32
 VerdanturfTown_PokemonCenter_2F_MapScript1_1A3D32:: @ 81A3D32
 	compare 0x4087, 1
-	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A3D6A
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A3D6A
 	compare 0x4087, 2
-	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A3D6A
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A3D6A
 	compare 0x4087, 5
-	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A3D6A
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A3D6A
 	compare 0x4087, 3
-	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A3D74
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A3D74
 	compare 0x4087, 4
-	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A3D7E
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A3D7E
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_1A3D6A:: @ 81A3D6A
@@ -91,7 +91,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A3DB2:: @ 81A3DB2
 	move 255, OldaleTown_PokemonCenter_2F_Movement_1A4358
 	waitmove 0
 	compare 0x8007, 0
-	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A3DD9
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A3DD9
 	move 0x8007, OldaleTown_PokemonCenter_2F_Movement_1A4354
 	waitmove 0
 
@@ -102,7 +102,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A3DDA:: @ 81A3DDA
 	special CloseLink
 	setvar 0x4087, 0
 	compare 0x8007, 0
-	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A3E0C
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A3E0C
 	move 0x8007, OldaleTown_PokemonCenter_2F_Movement_1A4356
 	waitmove 0
 	move 255, OldaleTown_PokemonCenter_2F_Movement_1A4358
@@ -129,7 +129,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A3E30:: @ 81A3E30
 	special CloseLink
 	setvar 0x4087, 0
 	compare 0x8007, 0
-	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A3E0C
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A3E0C
 	move 255, OldaleTown_PokemonCenter_2F_Movement_1A4361
 	waitmove 0
 	move 0x8007, OldaleTown_PokemonCenter_2F_Movement_1A4356
@@ -175,7 +175,7 @@ SlateportCity_PokemonCenter_2F_EventScript_1A3EA6:: @ 81A3EA6
 SootopolisCity_PokemonCenter_2F_EventScript_1A3EA6:: @ 81A3EA6
 VerdanturfTown_PokemonCenter_2F_EventScript_1A3EA6:: @ 81A3EA6
 	checkflag 2049
-	jumpif 0, OldaleTown_PokemonCenter_2F_EventScript_1A4342
+	goto_if 0, OldaleTown_PokemonCenter_2F_EventScript_1A4342
 	copyvar 0x8007, LAST_TALKED
 	lock
 	faceplayer
@@ -193,26 +193,26 @@ OldaleTown_PokemonCenter_2F_EventScript_1A3EBC:: @ 81A3EBC
 OldaleTown_PokemonCenter_2F_EventScript_1A3EF2:: @ 81A3EF2
 	call S_DoSaveDialog
 	compare RESULT, 0
-	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A4319
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A4319
 	call OldaleTown_PokemonCenter_2F_EventScript_1A3FEF
 	compare 0x8004, 0
-	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A4319
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A4319
 	message OldaleTown_PokemonCenter_2F_Text_1A490C
 	waittext
 	special sub_808347C
 	waitstate
 	compare RESULT, 1
-	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A3F5E
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A3F5E
 	compare RESULT, 2
-	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A4301
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A4301
 	compare RESULT, 3
-	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A430D
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A430D
 	compare RESULT, 4
-	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A4068
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A4068
 	compare RESULT, 5
-	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A4319
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A4319
 	compare RESULT, 6
-	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A42F5
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A42F5
 
 OldaleTown_PokemonCenter_2F_EventScript_1A3F5E:: @ 81A3F5E
 	special ScrSpecial_HealPlayerParty
@@ -238,7 +238,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A3F5E:: @ 81A3F5E
 	doorchange
 	release
 	compare 0x8004, 5
-	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A3FCD
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A3FCD
 	special SetCableClubWarp
 	warp SingleBattleColosseum, 255, 6, 8
 	special DoCableClubWarp
@@ -282,7 +282,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A403C:: @ 81A403C
 OldaleTown_PokemonCenter_2F_EventScript_1A4042:: @ 81A4042
 	special CheckForAlivePartyMons
 	compare RESULT, 0
-	jumpif 5, OldaleTown_PokemonCenter_2F_EventScript_1A4056
+	goto_if 5, OldaleTown_PokemonCenter_2F_EventScript_1A4056
 	setvar 0x8004, 2
 	return
 
@@ -347,39 +347,39 @@ SlateportCity_PokemonCenter_2F_EventScript_1A40CC:: @ 81A40CC
 SootopolisCity_PokemonCenter_2F_EventScript_1A40CC:: @ 81A40CC
 VerdanturfTown_PokemonCenter_2F_EventScript_1A40CC:: @ 81A40CC
 	checkflag 2049
-	jumpif 0, OldaleTown_PokemonCenter_2F_EventScript_1A4339
+	goto_if 0, OldaleTown_PokemonCenter_2F_EventScript_1A4339
 	copyvar 0x8007, LAST_TALKED
 	lock
 	faceplayer
 	msgbox OldaleTown_PokemonCenter_2F_Text_1A457E, 5
 	compare RESULT, 0
-	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A4319
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A4319
 	compare RESULT, 1
-	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A40FA
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A40FA
 
 OldaleTown_PokemonCenter_2F_EventScript_1A40FA:: @ 81A40FA
 	call OldaleTown_PokemonCenter_2F_EventScript_1A41BB
 	compare RESULT, 0
-	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A4319
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A4319
 	call S_DoSaveDialog
 	compare RESULT, 0
-	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A4319
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A4319
 	message OldaleTown_PokemonCenter_2F_Text_1A490C
 	waittext
 	special sub_80834E4
 	waitstate
 	compare RESULT, 1
-	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A4166
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A4166
 	compare RESULT, 2
-	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A4301
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A4301
 	compare RESULT, 3
-	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A430D
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A430D
 	compare RESULT, 4
-	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A432D
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A432D
 	compare RESULT, 5
-	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A4319
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A4319
 	compare RESULT, 6
-	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A42F5
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A42F5
 
 OldaleTown_PokemonCenter_2F_EventScript_1A4166:: @ 81A4166
 	setvar 0x8004, 3
@@ -407,10 +407,10 @@ OldaleTown_PokemonCenter_2F_EventScript_1A4166:: @ 81A4166
 OldaleTown_PokemonCenter_2F_EventScript_1A41BB:: @ 81A41BB
 	specialval RESULT, CalculatePlayerPartyCount
 	compare RESULT, 2
-	jumpif 0, OldaleTown_PokemonCenter_2F_EventScript_1A41E1
+	goto_if 0, OldaleTown_PokemonCenter_2F_EventScript_1A41E1
 	specialval RESULT, GetNameOfEnigmaBerryInPlayerParty
 	compare RESULT, 1
-	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A41EE
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A41EE
 	setvar RESULT, 1
 	return
 
@@ -444,20 +444,20 @@ SlateportCity_PokemonCenter_2F_EventScript_1A41FB:: @ 81A41FB
 SootopolisCity_PokemonCenter_2F_EventScript_1A41FB:: @ 81A41FB
 VerdanturfTown_PokemonCenter_2F_EventScript_1A41FB:: @ 81A41FB
 	checkflag 2072
-	jumpif 0, OldaleTown_PokemonCenter_2F_EventScript_1A434B
+	goto_if 0, OldaleTown_PokemonCenter_2F_EventScript_1A434B
 	copyvar 0x8007, LAST_TALKED
 	lock
 	faceplayer
 	msgbox OldaleTown_PokemonCenter_2F_Text_1A45FE, 5
 	compare RESULT, 0
-	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A4319
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A4319
 	compare RESULT, 1
-	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A4229
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A4229
 
 OldaleTown_PokemonCenter_2F_EventScript_1A4229:: @ 81A4229
 	call S_DoSaveDialog
 	compare RESULT, 0
-	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A4319
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A4319
 	message OldaleTown_PokemonCenter_2F_Text_1A490C
 	waittext
 	special sub_808350C
@@ -465,19 +465,19 @@ OldaleTown_PokemonCenter_2F_EventScript_1A4229:: @ 81A4229
 	special sub_80835D8
 	waitstate
 	compare RESULT, 1
-	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A4294
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A4294
 	compare RESULT, 2
-	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A4301
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A4301
 	compare RESULT, 3
-	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A430D
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A430D
 	compare RESULT, 4
-	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A432D
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A432D
 	compare RESULT, 5
-	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A4319
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A4319
 	compare RESULT, 6
-	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A42F5
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A42F5
 	compare RESULT, 7
-	jumpeq OldaleTown_PokemonCenter_2F_EventScript_1A42E9
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A42E9
 
 OldaleTown_PokemonCenter_2F_EventScript_1A4294:: @ 81A4294
 	setvar 0x8004, 4
@@ -620,7 +620,7 @@ DoubleBattleColosseum_EventScript_1A4383:: @ 81A4383
 	special sub_80C5568
 	waitstate
 	compare RESULT, 0
-	jumpeq DoubleBattleColosseum_EventScript_1A43EF
+	goto_if_eq DoubleBattleColosseum_EventScript_1A43EF
 	setvar 0x8005, 0
 	special sub_8083B90
 	waitstate
@@ -631,7 +631,7 @@ DoubleBattleColosseum_EventScript_1A439E:: @ 81A439E
 	special sub_80C5568
 	waitstate
 	compare RESULT, 0
-	jumpeq DoubleBattleColosseum_EventScript_1A43EF
+	goto_if_eq DoubleBattleColosseum_EventScript_1A43EF
 	setvar 0x8005, 1
 	special sub_8083B90
 	waitstate
@@ -642,7 +642,7 @@ DoubleBattleColosseum_EventScript_1A43B9:: @ 81A43B9
 	special sub_80C5568
 	waitstate
 	compare RESULT, 0
-	jumpeq DoubleBattleColosseum_EventScript_1A43EF
+	goto_if_eq DoubleBattleColosseum_EventScript_1A43EF
 	setvar 0x8005, 2
 	special sub_8083B90
 	waitstate
@@ -653,7 +653,7 @@ DoubleBattleColosseum_EventScript_1A43D4:: @ 81A43D4
 	special sub_80C5568
 	waitstate
 	compare RESULT, 0
-	jumpeq DoubleBattleColosseum_EventScript_1A43EF
+	goto_if_eq DoubleBattleColosseum_EventScript_1A43EF
 	setvar 0x8005, 3
 	special sub_8083B90
 	waitstate
@@ -691,7 +691,7 @@ RecordCorner_EventScript_1A4418:: @ 81A4418
 	special sub_80B929C
 	waitstate
 	compare 0x4001, 0
-	jumpif 5, RecordCorner_EventScript_1A446C
+	goto_if 5, RecordCorner_EventScript_1A446C
 	end
 
 RecordCorner_EventScript_1A442D:: @ 81A442D
@@ -699,7 +699,7 @@ RecordCorner_EventScript_1A442D:: @ 81A442D
 	special sub_80B929C
 	waitstate
 	compare 0x4001, 0
-	jumpif 5, RecordCorner_EventScript_1A446C
+	goto_if 5, RecordCorner_EventScript_1A446C
 	end
 
 RecordCorner_EventScript_1A4442:: @ 81A4442
@@ -707,7 +707,7 @@ RecordCorner_EventScript_1A4442:: @ 81A4442
 	special sub_80B929C
 	waitstate
 	compare 0x4001, 0
-	jumpif 5, RecordCorner_EventScript_1A446C
+	goto_if 5, RecordCorner_EventScript_1A446C
 	end
 
 RecordCorner_EventScript_1A4457:: @ 81A4457
@@ -715,7 +715,7 @@ RecordCorner_EventScript_1A4457:: @ 81A4457
 	special sub_80B929C
 	waitstate
 	compare 0x4001, 0
-	jumpif 5, RecordCorner_EventScript_1A446C
+	goto_if 5, RecordCorner_EventScript_1A446C
 	end
 
 RecordCorner_EventScript_1A446C:: @ 81A446C
@@ -771,7 +771,7 @@ TradeCenter_EventScript_1A44AD:: @ 81A44AD
 
 RecordCorner_EventScript_1A44BC:: @ 81A44BC
 	compare 0x4000, 0
-	jumpif 5, RecordCorner_EventScript_1A44D6
+	goto_if 5, RecordCorner_EventScript_1A44D6
 	special sub_8064EAC
 	message RecordCorner_Text_1A4DD7
 	waittext
@@ -792,7 +792,7 @@ RecordCorner_EventScript_1A44D6:: @ 81A44D6
 TradeRoom_PromptToCancelLink:: @ 81A44E5
 	msgbox TradeRoom_WillLinkBeTerminated, 5
 	compare RESULT, 1
-	jumpeq TradeRoom_TerminateLink
+	goto_if_eq TradeRoom_TerminateLink
 	hidebox 0, 0, 29, 19
 	end
 

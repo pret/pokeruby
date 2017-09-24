@@ -4,7 +4,7 @@ Route116_MapScripts:: @ 8150A31
 
 Route116_MapScript1_150A37:: @ 8150A37
 	checkflag 143
-	callif 1, Route116_EventScript_150A41
+	call_if 1, Route116_EventScript_150A41
 	end
 
 Route116_EventScript_150A41:: @ 8150A41
@@ -15,9 +15,9 @@ Route116_EventScript_150A49:: @ 8150A49
 	lock
 	faceplayer
 	checkflag 143
-	jumpeq Route116_EventScript_150A67
+	goto_if_eq Route116_EventScript_150A67
 	checkflag 142
-	jumpeq Route116_EventScript_150A71
+	goto_if_eq Route116_EventScript_150A71
 	msgbox Route116_Text_1703CF, 4
 	release
 	end
@@ -36,7 +36,7 @@ Route116_EventScript_150A7B:: @ 8150A7B
 	lock
 	faceplayer
 	checkflag 287
-	jumpeq Route116_EventScript_150B04
+	goto_if_eq Route116_EventScript_150B04
 	msgbox Route116_Text_1705AE, 4
 	goto Route116_EventScript_150A94
 	end
@@ -45,17 +45,17 @@ Route116_EventScript_150A94:: @ 8150A94
 	setflag 287
 	giveitem ITEM_REPEAT_BALL
 	compare RESULT, 0
-	jumpeq Route116_EventScript_150B12
+	goto_if_eq Route116_EventScript_150B12
 	msgbox Route116_Text_1707B8, 4
 	closebutton
 	compare FACING, 2
-	callif 1, Route116_EventScript_150AEE
+	call_if 1, Route116_EventScript_150AEE
 	compare FACING, 1
-	callif 1, Route116_EventScript_150AEE
+	call_if 1, Route116_EventScript_150AEE
 	compare FACING, 3
-	callif 1, Route116_EventScript_150AEE
+	call_if 1, Route116_EventScript_150AEE
 	compare FACING, 4
-	callif 1, Route116_EventScript_150AF9
+	call_if 1, Route116_EventScript_150AF9
 	disappear LAST_TALKED
 	clearflag 949
 	setflag 256
@@ -149,10 +149,10 @@ Route116_EventScript_150B8F:: @ 8150B8F
 	faceplayer
 	checkitem ITEM_BLACK_GLASSES, 1
 	compare RESULT, 1
-	jumpeq Route116_EventScript_150BCA
+	goto_if_eq Route116_EventScript_150BCA
 	specialval RESULT, sub_810F828
 	compare RESULT, 1
-	jumpeq Route116_EventScript_150BBB
+	goto_if_eq Route116_EventScript_150BBB
 	msgbox Route116_Text_1708EE, 4
 	release
 	end
@@ -168,7 +168,7 @@ Route116_EventScript_150BCA:: @ 8150BCA
 	msgbox Route116_Text_170921, 4
 	specialval RESULT, sub_810F828
 	compare RESULT, 1
-	jumpeq Route116_EventScript_150BF4
+	goto_if_eq Route116_EventScript_150BF4
 	msgbox Route116_Text_170A03, 4
 	release
 	end
@@ -182,13 +182,13 @@ Route116_EventScript_150BF4:: @ 8150BF4
 Route116_EventScript_150C03:: @ 8150C03
 	pause 20
 	compare FACING, 2
-	callif 1, Route116_EventScript_150C37
+	call_if 1, Route116_EventScript_150C37
 	compare FACING, 1
-	callif 1, Route116_EventScript_150C37
+	call_if 1, Route116_EventScript_150C37
 	compare FACING, 3
-	callif 1, Route116_EventScript_150C37
+	call_if 1, Route116_EventScript_150C37
 	compare FACING, 4
-	callif 1, Route116_EventScript_150C42
+	call_if 1, Route116_EventScript_150C42
 	disappear LAST_TALKED
 	release
 	end
@@ -242,7 +242,7 @@ Route116_EventScript_150C90:: @ 8150C90
 	trainerbattle 0, OPPONENT_JERRY_1, 0, Route116_Text_1BD1C0, Route116_Text_1BD21A
 	specialval RESULT, sub_8082C68
 	compare RESULT, 1
-	jumpeq Route116_EventScript_150CB7
+	goto_if_eq Route116_EventScript_150CB7
 	msgbox Route116_Text_1BD248, 6
 	end
 
@@ -265,7 +265,7 @@ Route116_EventScript_150CFC:: @ 8150CFC
 	trainerbattle 0, OPPONENT_KAREN_1, 0, Route116_Text_1BD377, Route116_Text_1BD3AC
 	specialval RESULT, sub_8082C68
 	compare RESULT, 1
-	jumpeq Route116_EventScript_150D23
+	goto_if_eq Route116_EventScript_150D23
 	msgbox Route116_Text_1BD3C3, 6
 	end
 

@@ -5,11 +5,11 @@ MauvilleCity_House2_EventScript_1572C0:: @ 81572C0
 	lock
 	faceplayer
 	checkflag 258
-	jumpeq MauvilleCity_House2_EventScript_15733D
+	goto_if_eq MauvilleCity_House2_EventScript_15733D
 	msgbox MauvilleCity_House2_Text_18244E, 4
 	checkitem ITEM_HARBOR_MAIL, 1
 	compare RESULT, 1
-	jumpeq MauvilleCity_House2_EventScript_1572E5
+	goto_if_eq MauvilleCity_House2_EventScript_1572E5
 	release
 	end
 
@@ -21,9 +21,9 @@ MauvilleCity_House2_EventScript_1572E5:: @ 81572E5
 	waitmove 0
 	msgbox MauvilleCity_House2_Text_1824D8, 5
 	compare RESULT, 1
-	jumpeq MauvilleCity_House2_EventScript_15731B
+	goto_if_eq MauvilleCity_House2_EventScript_15731B
 	compare RESULT, 0
-	jumpeq MauvilleCity_House2_EventScript_157347
+	goto_if_eq MauvilleCity_House2_EventScript_157347
 	end
 
 MauvilleCity_House2_EventScript_15731B:: @ 815731B

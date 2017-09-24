@@ -5,9 +5,9 @@ LilycoveCity_DepartmentStoreRooftop_MapScripts:: @ 815A13F
 LilycoveCity_DepartmentStoreRooftop_MapScript1_15A145:: @ 815A145
 	event_96 3
 	compare RESULT, 1
-	callif 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A15F
+	call_if 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A15F
 	compare RESULT, 0
-	callif 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A163
+	call_if 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A163
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A15F:: @ 815A15F
@@ -53,7 +53,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A1A0:: @ 815A1A0
 	faceplayer
 	event_96 3
 	compare RESULT, 1
-	callif 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A1BA
+	call_if 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A1BA
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_18C61F, 4
 	release
 	end
@@ -128,22 +128,22 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A260:: @ 815A260
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A267:: @ 815A267
 	compare 0x4001, 0
-	callif 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A23D
+	call_if 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A23D
 	compare 0x4001, 1
-	callif 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A244
+	call_if 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A244
 	compare 0x4001, 2
-	callif 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A24B
+	call_if 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A24B
 	compare RESULT, 0
-	jumpeq LilycoveCity_DepartmentStoreRooftop_EventScript_15A37A
+	goto_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_15A37A
 	checkitemspace 0x4000, 1
 	compare RESULT, 0
-	jumpeq LilycoveCity_DepartmentStoreRooftop_EventScript_15A388
+	goto_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_15A388
 	compare 0x4001, 0
-	callif 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A252
+	call_if 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A252
 	compare 0x4001, 1
-	callif 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A259
+	call_if 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A259
 	compare 0x4001, 2
-	callif 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A260
+	call_if 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A260
 	updatemoney 0, 0
 	nop
 	bufferitem 0, 0x4000
@@ -155,10 +155,10 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A267:: @ 815A267
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_1A0C8C, 4
 	random 64
 	compare RESULT, 0
-	jumpif 5, LilycoveCity_DepartmentStoreRooftop_EventScript_15A36E
+	goto_if 5, LilycoveCity_DepartmentStoreRooftop_EventScript_15A36E
 	checkitemspace 0x4000, 1
 	compare RESULT, 0
-	jumpeq LilycoveCity_DepartmentStoreRooftop_EventScript_15A388
+	goto_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_15A388
 	playsfx 106
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_18C780, 4
 	additem 0x4000, 1
@@ -167,10 +167,10 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A267:: @ 815A267
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_1A0C8C, 4
 	random 64
 	compare RESULT, 0
-	jumpif 5, LilycoveCity_DepartmentStoreRooftop_EventScript_15A36E
+	goto_if 5, LilycoveCity_DepartmentStoreRooftop_EventScript_15A36E
 	checkitemspace 0x4000, 1
 	compare RESULT, 0
-	jumpeq LilycoveCity_DepartmentStoreRooftop_EventScript_15A388
+	goto_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_15A388
 	playsfx 106
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_18C780, 4
 	additem 0x4000, 1

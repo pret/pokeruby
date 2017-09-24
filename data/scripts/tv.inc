@@ -4,30 +4,30 @@ Event_TV:: @ 81A6E72
 	special sub_80C2014
 	specialval RESULT, CheckForBigMovieOrEmergencyNewsOnTV
 	compare RESULT, 2
-	jumpeq EventScript_1A6F01
+	goto_if_eq EventScript_1A6F01
 	compare RESULT, 1
-	jumpeq EventScript_1A6F0B
+	goto_if_eq EventScript_1A6F0B
 	checkflag 2098
-	jumpif 0, EventScript_1A6EF1
+	goto_if 0, EventScript_1A6EF1
 	checkflag 2097
-	jumpeq EventScript_1A6EF1
+	goto_if_eq EventScript_1A6EF1
 	specialval RESULT, IsTVShowInSearchOfTrainersAiring
 	compare RESULT, 1
-	jumpeq EventScript_1A6F66
+	goto_if_eq EventScript_1A6F66
 	goto EventScript_1A6F50
 	end
 
 EventScript_1A6EBB:
 	specialval 0x8004, special_0x44
 	compare 0x8004, 255
-	jumpeq EventScript_1A6F3F
+	goto_if_eq EventScript_1A6F3F
 	specialval RESULT, special_0x4a
 	compare RESULT, 255
-	jumpeq EventScript_1A6F3F
+	goto_if_eq EventScript_1A6F3F
 	copyvar 0x8004, RESULT
 	specialval RESULT, sub_80BDA0C
 	compare RESULT, 0
-	jumpif 5, EventScript_1A6F21
+	goto_if 5, EventScript_1A6F21
 	end
 
 EventScript_1A6EF1:
@@ -60,7 +60,7 @@ EventScript_1A6F21:
 	waittext
 	waitbutton
 	compare RESULT, 1
-	jumpif 5, EventScript_1A6F21
+	goto_if 5, EventScript_1A6F21
 	goto EventScript_1A6F37
 	end
 
@@ -79,7 +79,7 @@ EventScript_1A6F3F:
 EventScript_1A6F50:
 	special sub_80BECE8
 	compare RESULT, 0
-	jumpeq EventScript_1A6EBB
+	goto_if_eq EventScript_1A6EBB
 	waittext
 	waitbutton
 	goto EventScript_1A6F37
@@ -90,6 +90,6 @@ EventScript_1A6F66:
 	waittext
 	waitbutton
 	compare RESULT, 0
-	jumpeq EventScript_1A6F66
+	goto_if_eq EventScript_1A6F66
 	goto EventScript_1A6F37
 	end

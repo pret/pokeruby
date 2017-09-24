@@ -6,7 +6,7 @@ MossdeepCity_StevensHouse_MapScripts:: @ 815A9C5
 
 MossdeepCity_StevensHouse_MapScript1_15A9D5:: @ 815A9D5
 	checkflag 2052
-	callif 0, MossdeepCity_StevensHouse_EventScript_15A9DF
+	call_if 0, MossdeepCity_StevensHouse_EventScript_15A9DF
 	end
 
 MossdeepCity_StevensHouse_EventScript_15A9DF:: @ 815A9DF
@@ -15,7 +15,7 @@ MossdeepCity_StevensHouse_EventScript_15A9DF:: @ 815A9DF
 
 MossdeepCity_StevensHouse_MapScript1_15A9E9:: @ 815A9E9
 	compare 0x40c6, 1
-	callif 1, MossdeepCity_StevensHouse_EventScript_15A9F5
+	call_if 1, MossdeepCity_StevensHouse_EventScript_15A9F5
 	end
 
 MossdeepCity_StevensHouse_EventScript_15A9F5:: @ 815A9F5
@@ -73,10 +73,10 @@ MossdeepCity_StevensHouse_EventScript_15AA7C:: @ 815AA7C
 	lockall
 	msgbox MossdeepCity_StevensHouse_Text_18DD12, 5
 	compare RESULT, 0
-	jumpeq MossdeepCity_StevensHouse_EventScript_15AAE6
+	goto_if_eq MossdeepCity_StevensHouse_EventScript_15AAE6
 	countpokemon
 	compare RESULT, 6
-	jumpeq MossdeepCity_StevensHouse_EventScript_15AADC
+	goto_if_eq MossdeepCity_StevensHouse_EventScript_15AADC
 	copyvar 0x8004, RESULT
 	disappear 2
 	fanfare 370
@@ -87,7 +87,7 @@ MossdeepCity_StevensHouse_EventScript_15AA7C:: @ 815AA7C
 	bufferpoke 1, SPECIES_BELDUM
 	msgbox MossdeepCity_StevensHouse_Text_1A1102, 5
 	compare RESULT, 1
-	callif 1, MossdeepCity_StevensHouse_EventScript_1A0678
+	call_if 1, MossdeepCity_StevensHouse_EventScript_1A0678
 	setflag 968
 	setflag 298
 	releaseall
@@ -114,7 +114,7 @@ MossdeepCity_StevensHouse_EventScript_15AAF9:: @ 815AAF9
 MossdeepCity_StevensHouse_EventScript_15AB02:: @ 815AB02
 	lockall
 	checkflag 302
-	jumpeq MossdeepCity_StevensHouse_EventScript_15AB16
+	goto_if_eq MossdeepCity_StevensHouse_EventScript_15AB16
 	msgbox MossdeepCity_StevensHouse_Text_18DF1A, 4
 	releaseall
 	end

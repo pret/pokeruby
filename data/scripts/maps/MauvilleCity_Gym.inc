@@ -4,7 +4,7 @@ MauvilleCity_Gym_MapScripts:: @ 8156450
 
 MauvilleCity_Gym_MapScript1_156456:: @ 8156456
 	checkflag 1208
-	jumpeq MauvilleCity_Gym_EventScript_1565A7
+	goto_if_eq MauvilleCity_Gym_EventScript_1565A7
 	switch 0x4093
 	case 0, MauvilleCity_Gym_EventScript_156491
 	case 1, MauvilleCity_Gym_EventScript_15657D
@@ -14,7 +14,7 @@ MauvilleCity_Gym_MapScript1_156456:: @ 8156456
 
 MauvilleCity_Gym_EventScript_156491:: @ 8156491
 	checkflag 99
-	jumpeq MauvilleCity_Gym_EventScript_15649B
+	goto_if_eq MauvilleCity_Gym_EventScript_15649B
 	end
 
 MauvilleCity_Gym_EventScript_15649B:: @ 815649B
@@ -70,9 +70,9 @@ MauvilleCity_Gym_EventScript_1565A7:: @ 81565A7
 MauvilleCity_Gym_EventScript_1565AB:: @ 81565AB
 	trainerbattle 1, OPPONENT_WATTSON, 0, MauvilleCity_Gym_Text_180C32, MauvilleCity_Gym_Text_180D64, MauvilleCity_Gym_EventScript_1565DB
 	checkflag 167
-	jumpif 0, MauvilleCity_Gym_EventScript_15661D
+	goto_if 0, MauvilleCity_Gym_EventScript_15661D
 	compare 0x40ba, 2
-	jumpeq MauvilleCity_Gym_EventScript_156641
+	goto_if_eq MauvilleCity_Gym_EventScript_156641
 	msgbox MauvilleCity_Gym_Text_180EDB, 4
 	release
 	end
@@ -86,7 +86,7 @@ MauvilleCity_Gym_EventScript_1565DB:: @ 81565DB
 	setflag 2057
 	addvar 0x4085, 1
 	compare 0x4085, 6
-	callif 1, MauvilleCity_Gym_EventScript_1A00FB
+	call_if 1, MauvilleCity_Gym_EventScript_1A00FB
 	setvar 0x8008, 3
 	call MauvilleCity_Gym_EventScript_1A01C0
 	special MauvilleGymSpecial3
@@ -98,7 +98,7 @@ MauvilleCity_Gym_EventScript_1565DB:: @ 81565DB
 MauvilleCity_Gym_EventScript_15661D:: @ 815661D
 	giveitem ITEM_TM34
 	compare RESULT, 0
-	jumpeq MauvilleCity_Gym_EventScript_1A029B
+	goto_if_eq MauvilleCity_Gym_EventScript_1A029B
 	msgbox MauvilleCity_Gym_Text_180E76, 4
 	setflag 167
 	release
@@ -112,9 +112,9 @@ MauvilleCity_Gym_EventScript_156641:: @ 8156641
 MauvilleCity_Gym_EventScript_15664B:: @ 815664B
 	lockall
 	checkflag 1208
-	jumpeq MauvilleCity_Gym_EventScript_1566DA
+	goto_if_eq MauvilleCity_Gym_EventScript_1566DA
 	compare 0x4093, 1
-	jumpeq MauvilleCity_Gym_EventScript_1566DA
+	goto_if_eq MauvilleCity_Gym_EventScript_1566DA
 	setvar 0x4093, 1
 	setvar 0x8004, 0
 	goto MauvilleCity_Gym_EventScript_1566BA
@@ -123,9 +123,9 @@ MauvilleCity_Gym_EventScript_15664B:: @ 815664B
 MauvilleCity_Gym_EventScript_156670:: @ 8156670
 	lockall
 	checkflag 1208
-	jumpeq MauvilleCity_Gym_EventScript_1566DA
+	goto_if_eq MauvilleCity_Gym_EventScript_1566DA
 	compare 0x4093, 2
-	jumpeq MauvilleCity_Gym_EventScript_1566DA
+	goto_if_eq MauvilleCity_Gym_EventScript_1566DA
 	setvar 0x4093, 2
 	setvar 0x8004, 1
 	goto MauvilleCity_Gym_EventScript_1566BA
@@ -134,9 +134,9 @@ MauvilleCity_Gym_EventScript_156670:: @ 8156670
 MauvilleCity_Gym_EventScript_156695:: @ 8156695
 	lockall
 	checkflag 1208
-	jumpeq MauvilleCity_Gym_EventScript_1566DA
+	goto_if_eq MauvilleCity_Gym_EventScript_1566DA
 	compare 0x4093, 3
-	jumpeq MauvilleCity_Gym_EventScript_1566DA
+	goto_if_eq MauvilleCity_Gym_EventScript_1566DA
 	setvar 0x4093, 3
 	setvar 0x8004, 2
 	goto MauvilleCity_Gym_EventScript_1566BA
@@ -148,9 +148,9 @@ MauvilleCity_Gym_EventScript_1566BA:: @ 81566BA
 	special DrawWholeMapView
 	playsfx 44
 	checkflag 99
-	jumpeq MauvilleCity_Gym_EventScript_1566E1
+	goto_if_eq MauvilleCity_Gym_EventScript_1566E1
 	checkflag 99
-	jumpif 0, MauvilleCity_Gym_EventScript_1566DC
+	goto_if 0, MauvilleCity_Gym_EventScript_1566DC
 	releaseall
 	end
 
@@ -192,7 +192,7 @@ MauvilleCity_Gym_EventScript_156742:: @ 8156742
 	lock
 	faceplayer
 	checkflag 1208
-	jumpeq MauvilleCity_Gym_EventScript_156757
+	goto_if_eq MauvilleCity_Gym_EventScript_156757
 	msgbox MauvilleCity_Gym_Text_180815, 4
 	release
 	end
@@ -205,14 +205,14 @@ MauvilleCity_Gym_EventScript_156757:: @ 8156757
 MauvilleCity_Gym_EventScript_156761:: @ 8156761
 	lockall
 	checkflag 2057
-	jumpeq MauvilleCity_Gym_EventScript_156781
+	goto_if_eq MauvilleCity_Gym_EventScript_156781
 	goto MauvilleCity_Gym_EventScript_15678B
 	end
 
 MauvilleCity_Gym_EventScript_156771:: @ 8156771
 	lockall
 	checkflag 2057
-	jumpeq MauvilleCity_Gym_EventScript_156781
+	goto_if_eq MauvilleCity_Gym_EventScript_156781
 	goto MauvilleCity_Gym_EventScript_15678B
 	end
 

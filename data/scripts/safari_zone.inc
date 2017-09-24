@@ -15,7 +15,7 @@ gUnknown_081C342D:: @ 81C342D
 	lockall
 	msgbox UnknownString_81C34B2, 5
 	compare RESULT, 1
-	jumpeq EventScript_1C3443
+	goto_if_eq EventScript_1C3443
 	releaseall
 	end
 
@@ -44,10 +44,10 @@ gUnknown_081C346A:: @ 81C346A
 	lockall
 	special SafariZoneGetPokeblockNameInFeeder
 	compare RESULT, -1
-	jumpif 5, EventScript_1C34A9
+	goto_if 5, EventScript_1C34A9
 	msgbox UnknownString_81C354E, 5
 	compare RESULT, 1
-	jumpeq EventScript_1C348E
+	goto_if_eq EventScript_1C348E
 	releaseall
 	end
 
@@ -56,7 +56,7 @@ EventScript_1C348E:
 	special sub_810BAF4
 	waitstate
 	compare RESULT, -1
-	jumpif 5, EventScript_1C34A0
+	goto_if 5, EventScript_1C34A0
 	end
 
 EventScript_1C34A0:

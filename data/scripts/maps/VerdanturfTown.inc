@@ -12,7 +12,7 @@ VerdanturfTown_EventScript_14E866:: @ 814E866
 	lock
 	faceplayer
 	checkflag 199
-	jumpeq VerdanturfTown_EventScript_14E885
+	goto_if_eq VerdanturfTown_EventScript_14E885
 	msgbox VerdanturfTown_Text_16CAEB, 4
 	move 2, VerdanturfTown_Movement_1A083D
 	waitmove 0
@@ -38,7 +38,7 @@ VerdanturfTown_EventScript_14E8AB:: @ 814E8AB
 	lock
 	faceplayer
 	checkflag 199
-	jumpeq VerdanturfTown_EventScript_14E8C0
+	goto_if_eq VerdanturfTown_EventScript_14E8C0
 	msgbox VerdanturfTown_Text_16CD4D, 4
 	release
 	end

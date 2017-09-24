@@ -5,9 +5,9 @@ Route119_WeatherInstitute_2F_MapScripts:: @ 8163CC2
 Route119_WeatherInstitute_2F_MapScript1_163CC8:: @ 8163CC8
 	call Route119_WeatherInstitute_2F_EventScript_1A0196
 	compare 0x40b3, 0
-	callif 1, Route119_WeatherInstitute_2F_EventScript_163CE4
+	call_if 1, Route119_WeatherInstitute_2F_EventScript_163CE4
 	compare 0x40b3, 1
-	callif 1, Route119_WeatherInstitute_2F_EventScript_163CF0
+	call_if 1, Route119_WeatherInstitute_2F_EventScript_163CF0
 	end
 
 Route119_WeatherInstitute_2F_EventScript_163CE4:: @ 8163CE4
@@ -57,7 +57,7 @@ Route119_WeatherInstitute_2F_EventScript_163D7A:: @ 8163D7A
 	msgbox Route119_WeatherInstitute_2F_Text_19F1CF, 4
 	countpokemon
 	compare RESULT, 6
-	jumpeq Route119_WeatherInstitute_2F_EventScript_163DB4
+	goto_if_eq Route119_WeatherInstitute_2F_EventScript_163DB4
 	fanfare 370
 	message Route119_WeatherInstitute_2F_Text_19F267
 	waitfanfare
@@ -88,6 +88,6 @@ Route119_WeatherInstitute_2F_EventScript_163DCC:: @ 8163DCC
 	lock
 	faceplayer
 	checkflag 151
-	jumpeq Route119_WeatherInstitute_2F_EventScript_163DBE
+	goto_if_eq Route119_WeatherInstitute_2F_EventScript_163DBE
 	goto Route119_WeatherInstitute_2F_EventScript_163D7A
 	end

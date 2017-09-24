@@ -18,7 +18,7 @@ FortreeCity_Gym_EventScript_157EEC:: @ 8157EEC
 FortreeCity_Gym_EventScript_157EF0:: @ 8157EF0
 	trainerbattle 1, OPPONENT_WINONA, 0, FortreeCity_Gym_Text_185CCB, FortreeCity_Gym_Text_185DBA, FortreeCity_Gym_EventScript_157F15
 	checkflag 170
-	jumpif 0, FortreeCity_Gym_EventScript_157F3E
+	goto_if 0, FortreeCity_Gym_EventScript_157F3E
 	msgbox FortreeCity_Gym_Text_185F98, 4
 	release
 	end
@@ -38,7 +38,7 @@ FortreeCity_Gym_EventScript_157F15:: @ 8157F15
 FortreeCity_Gym_EventScript_157F3E:: @ 8157F3E
 	giveitem ITEM_TM40
 	compare RESULT, 0
-	jumpeq FortreeCity_Gym_EventScript_1A029B
+	goto_if_eq FortreeCity_Gym_EventScript_1A029B
 	msgbox FortreeCity_Gym_Text_185F4A, 4
 	setflag 170
 	release
@@ -68,7 +68,7 @@ FortreeCity_Gym_EventScript_157FBE:: @ 8157FBE
 	lock
 	faceplayer
 	checkflag 1225
-	jumpeq FortreeCity_Gym_EventScript_157FD3
+	goto_if_eq FortreeCity_Gym_EventScript_157FD3
 	msgbox FortreeCity_Gym_Text_18589C, 4
 	release
 	end
@@ -81,14 +81,14 @@ FortreeCity_Gym_EventScript_157FD3:: @ 8157FD3
 FortreeCity_Gym_EventScript_157FDD:: @ 8157FDD
 	lockall
 	checkflag 2060
-	jumpeq FortreeCity_Gym_EventScript_157FFD
+	goto_if_eq FortreeCity_Gym_EventScript_157FFD
 	goto FortreeCity_Gym_EventScript_158007
 	end
 
 FortreeCity_Gym_EventScript_157FED:: @ 8157FED
 	lockall
 	checkflag 2060
-	jumpeq FortreeCity_Gym_EventScript_157FFD
+	goto_if_eq FortreeCity_Gym_EventScript_157FFD
 	goto FortreeCity_Gym_EventScript_158007
 	end
 

@@ -62,9 +62,9 @@ LilycoveCity_PokemonTrainerFanClub_Movement_15940C:: @ 815940C
 
 LilycoveCity_PokemonTrainerFanClub_MapScript1_159412:: @ 8159412
 	compare 0x4095, 1
-	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_159515
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_159515
 	compare 0x4095, 2
-	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_159429
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_159429
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_159429:: @ 8159429
@@ -72,35 +72,35 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_159429:: @ 8159429
 	setvar 0x8004, 8
 	specialval RESULT, sub_810FD60
 	compare RESULT, 0
-	callif 1, LilycoveCity_PokemonTrainerFanClub_EventScript_1594D5
+	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_1594D5
 	setvar 0x8004, 9
 	specialval RESULT, sub_810FD60
 	compare RESULT, 0
-	callif 1, LilycoveCity_PokemonTrainerFanClub_EventScript_1594DD
+	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_1594DD
 	setvar 0x8004, 10
 	specialval RESULT, sub_810FD60
 	compare RESULT, 0
-	callif 1, LilycoveCity_PokemonTrainerFanClub_EventScript_1594E5
+	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_1594E5
 	setvar 0x8004, 11
 	specialval RESULT, sub_810FD60
 	compare RESULT, 0
-	callif 1, LilycoveCity_PokemonTrainerFanClub_EventScript_1594ED
+	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_1594ED
 	setvar 0x8004, 12
 	specialval RESULT, sub_810FD60
 	compare RESULT, 0
-	callif 1, LilycoveCity_PokemonTrainerFanClub_EventScript_1594F5
+	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_1594F5
 	setvar 0x8004, 13
 	specialval RESULT, sub_810FD60
 	compare RESULT, 0
-	callif 1, LilycoveCity_PokemonTrainerFanClub_EventScript_1594FD
+	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_1594FD
 	setvar 0x8004, 14
 	specialval RESULT, sub_810FD60
 	compare RESULT, 0
-	callif 1, LilycoveCity_PokemonTrainerFanClub_EventScript_159505
+	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_159505
 	setvar 0x8004, 15
 	specialval RESULT, sub_810FD60
 	compare RESULT, 0
-	callif 1, LilycoveCity_PokemonTrainerFanClub_EventScript_15950D
+	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_15950D
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_1594D5:: @ 81594D5
@@ -149,13 +149,13 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_15952F:: @ 815952F
 	setvar 0x8004, 13
 	special sub_810FDAC
 	compare 0x4095, 0
-	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_15959C
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_15959C
 	specialval RESULT, sub_810FD60
 	compare RESULT, 1
-	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_15956E
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_15956E
 	specialval RESULT, sub_810FCB0
 	compare RESULT, 7
-	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_159592
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_159592
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_18A400, 4
 	release
 	end
@@ -163,7 +163,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_15952F:: @ 815952F
 LilycoveCity_PokemonTrainerFanClub_EventScript_15956E:: @ 815956E
 	specialval RESULT, sub_810FCB0
 	compare RESULT, 1
-	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_159588
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_159588
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_18A36A, 4
 	release
 	end
@@ -189,13 +189,13 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_1595A6:: @ 81595A6
 	setvar 0x8004, 8
 	special sub_810FDAC
 	compare 0x4095, 0
-	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_159613
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_159613
 	specialval RESULT, sub_810FD60
 	compare RESULT, 1
-	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_1595E5
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_1595E5
 	specialval RESULT, sub_810FCB0
 	compare RESULT, 7
-	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_159609
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_159609
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_18A629, 4
 	release
 	end
@@ -203,7 +203,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_1595A6:: @ 81595A6
 LilycoveCity_PokemonTrainerFanClub_EventScript_1595E5:: @ 81595E5
 	specialval RESULT, sub_810FCB0
 	compare RESULT, 1
-	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_1595FF
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_1595FF
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_18A584, 4
 	release
 	end
@@ -229,13 +229,13 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_15961D:: @ 815961D
 	setvar 0x8004, 9
 	special sub_810FDAC
 	compare 0x4095, 0
-	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_15968A
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_15968A
 	specialval RESULT, sub_810FD60
 	compare RESULT, 1
-	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_15965C
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_15965C
 	specialval RESULT, sub_810FCB0
 	compare RESULT, 7
-	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_159680
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_159680
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_18A814, 4
 	release
 	end
@@ -243,7 +243,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_15961D:: @ 815961D
 LilycoveCity_PokemonTrainerFanClub_EventScript_15965C:: @ 815965C
 	specialval RESULT, sub_810FCB0
 	compare RESULT, 1
-	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_159676
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_159676
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_18A71E, 4
 	release
 	end
@@ -269,13 +269,13 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_159694:: @ 8159694
 	setvar 0x8004, 10
 	special sub_810FDAC
 	compare 0x4095, 0
-	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_159701
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_159701
 	specialval RESULT, sub_810FD60
 	compare RESULT, 1
-	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_1596D3
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_1596D3
 	specialval RESULT, sub_810FCB0
 	compare RESULT, 7
-	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_1596F7
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_1596F7
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_18AB0A, 4
 	release
 	end
@@ -283,7 +283,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_159694:: @ 8159694
 LilycoveCity_PokemonTrainerFanClub_EventScript_1596D3:: @ 81596D3
 	specialval RESULT, sub_810FCB0
 	compare RESULT, 1
-	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_1596ED
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_1596ED
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_18AA39, 4
 	release
 	end
@@ -310,10 +310,10 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_15970B:: @ 815970B
 	special sub_810FDAC
 	specialval RESULT, sub_810FD60
 	compare RESULT, 1
-	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_15973F
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_15973F
 	specialval RESULT, sub_810FCB0
 	compare RESULT, 7
-	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_159763
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_159763
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_18ACC7, 4
 	release
 	end
@@ -321,7 +321,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_15970B:: @ 815970B
 LilycoveCity_PokemonTrainerFanClub_EventScript_15973F:: @ 815973F
 	specialval RESULT, sub_810FCB0
 	compare RESULT, 1
-	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_159759
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_159759
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_18AC15, 4
 	release
 	end
@@ -343,10 +343,10 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_15976D:: @ 815976D
 	special sub_810FDAC
 	specialval RESULT, sub_810FD60
 	compare RESULT, 1
-	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_1597A1
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_1597A1
 	specialval RESULT, sub_810FCB0
 	compare RESULT, 7
-	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_1597C5
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_1597C5
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_18AE63, 4
 	release
 	end
@@ -354,7 +354,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_15976D:: @ 815976D
 LilycoveCity_PokemonTrainerFanClub_EventScript_1597A1:: @ 81597A1
 	specialval RESULT, sub_810FCB0
 	compare RESULT, 1
-	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_1597BB
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_1597BB
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_18AD6D, 4
 	release
 	end
@@ -376,10 +376,10 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_1597CF:: @ 81597CF
 	special sub_810FDAC
 	specialval RESULT, sub_810FD60
 	compare RESULT, 1
-	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_159803
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_159803
 	specialval RESULT, sub_810FCB0
 	compare RESULT, 7
-	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_159827
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_159827
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_18B030, 4
 	release
 	end
@@ -387,7 +387,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_1597CF:: @ 81597CF
 LilycoveCity_PokemonTrainerFanClub_EventScript_159803:: @ 8159803
 	specialval RESULT, sub_810FCB0
 	compare RESULT, 1
-	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_15981D
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_15981D
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_18AF62, 4
 	release
 	end
@@ -409,10 +409,10 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_159831:: @ 8159831
 	special sub_810FDAC
 	specialval RESULT, sub_810FD60
 	compare RESULT, 1
-	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_159865
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_159865
 	specialval RESULT, sub_810FCB0
 	compare RESULT, 7
-	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_159889
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_159889
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_18B1FD, 4
 	release
 	end
@@ -420,7 +420,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_159831:: @ 8159831
 LilycoveCity_PokemonTrainerFanClub_EventScript_159865:: @ 8159865
 	specialval RESULT, sub_810FCB0
 	compare RESULT, 1
-	jumpeq LilycoveCity_PokemonTrainerFanClub_EventScript_15987F
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_15987F
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_18B16E, 4
 	release
 	end

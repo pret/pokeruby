@@ -6,7 +6,7 @@ FallarborTown_House2_EventScript_153C91:: @ 8153C91
 	move 1, FallarborTown_House2_Movement_1A0839
 	waitmove 0
 	checkflag 1
-	jumpeq FallarborTown_House2_EventScript_153CB6
+	goto_if_eq FallarborTown_House2_EventScript_153CB6
 	msgbox FallarborTown_House2_Text_177AF4, 4
 	setflag 1
 	goto FallarborTown_House2_EventScript_153CB6
@@ -15,7 +15,7 @@ FallarborTown_House2_EventScript_153C91:: @ 8153C91
 FallarborTown_House2_EventScript_153CB6:: @ 8153CB6
 	checkitem ITEM_HEART_SCALE, 1
 	compare RESULT, 0
-	jumpeq FallarborTown_House2_EventScript_153D60
+	goto_if_eq FallarborTown_House2_EventScript_153D60
 	msgbox FallarborTown_House2_Text_177BDB, 5
 	switch RESULT
 	case 0, FallarborTown_House2_EventScript_153D60
@@ -27,12 +27,12 @@ FallarborTown_House2_EventScript_153CE4:: @ 8153CE4
 	special sub_80F9A4C
 	waitstate
 	compare 0x8004, 255
-	jumpeq FallarborTown_House2_EventScript_153D60
+	goto_if_eq FallarborTown_House2_EventScript_153D60
 	special sub_80FA148
 	compare RESULT, 1
-	jumpeq FallarborTown_House2_EventScript_153D52
+	goto_if_eq FallarborTown_House2_EventScript_153D52
 	compare 0x8005, 0
-	jumpeq FallarborTown_House2_EventScript_153D44
+	goto_if_eq FallarborTown_House2_EventScript_153D44
 	goto FallarborTown_House2_EventScript_153D1A
 	end
 
@@ -41,7 +41,7 @@ FallarborTown_House2_EventScript_153D1A:: @ 8153D1A
 	special sub_8132670
 	waitstate
 	compare 0x8004, 0
-	jumpeq FallarborTown_House2_EventScript_153CE4
+	goto_if_eq FallarborTown_House2_EventScript_153CE4
 	msgbox FallarborTown_House2_Text_177CC3, 4
 	removeitem ITEM_HEART_SCALE, 1
 	goto FallarborTown_House2_EventScript_153D60

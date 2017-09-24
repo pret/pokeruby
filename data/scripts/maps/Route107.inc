@@ -10,7 +10,7 @@ Route107_EventScript_14F3D3:: @ 814F3D3
 	trainerbattle 0, OPPONENT_TONY_1, 0, Route107_Text_1B933A, Route107_Text_1B9365
 	specialval RESULT, sub_8082C68
 	compare RESULT, 1
-	jumpeq Route107_EventScript_14F3FA
+	goto_if_eq Route107_EventScript_14F3FA
 	msgbox Route107_Text_1B938E, 6
 	end
 
