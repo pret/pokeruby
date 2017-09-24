@@ -67,19 +67,19 @@ LilycoveCity_LilycoveMuseum_2F_MapScript2_158670:: @ 8158670
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_15867A:: @ 815867A
 	lockall
-	move 1, LilycoveCity_LilycoveMuseum_2F_Movement_1A0839
-	move 255, LilycoveCity_LilycoveMuseum_2F_Movement_1586D3
-	waitmove 0
+	applymovement 1, LilycoveCity_LilycoveMuseum_2F_Movement_1A0839
+	applymovement 255, LilycoveCity_LilycoveMuseum_2F_Movement_1586D3
+	waitmovement 0
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_187C42, 3
-	move 1, LilycoveCity_LilycoveMuseum_2F_Movement_1586D5
-	waitmove 0
-	move 255, LilycoveCity_LilycoveMuseum_2F_Movement_1586D5
-	waitmove 0
+	applymovement 1, LilycoveCity_LilycoveMuseum_2F_Movement_1586D5
+	waitmovement 0
+	applymovement 255, LilycoveCity_LilycoveMuseum_2F_Movement_1586D5
+	waitmovement 0
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_187C64, 3
-	move 1, LilycoveCity_LilycoveMuseum_2F_Movement_1A0839
-	waitmove 0
-	move 255, LilycoveCity_LilycoveMuseum_2F_Movement_1586D3
-	waitmove 0
+	applymovement 1, LilycoveCity_LilycoveMuseum_2F_Movement_1A0839
+	waitmovement 0
+	applymovement 255, LilycoveCity_LilycoveMuseum_2F_Movement_1586D3
+	waitmovement 0
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_187E1D, 3
 	copyvar 0x4094, 0x1
 	releaseall
@@ -113,16 +113,16 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_15872C:: @ 815872C
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_158735:: @ 8158735
-	move 1, LilycoveCity_LilycoveMuseum_2F_Movement_1A0839
-	waitmove 0
+	applymovement 1, LilycoveCity_LilycoveMuseum_2F_Movement_1A0839
+	waitmovement 0
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_18802F, 4
-	move 1, LilycoveCity_LilycoveMuseum_2F_Movement_1586D5
+	applymovement 1, LilycoveCity_LilycoveMuseum_2F_Movement_1586D5
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_188041, 4
 	goto LilycoveCity_LilycoveMuseum_2F_EventScript_15875C
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_15875C:: @ 815875C
-	move 1, LilycoveCity_LilycoveMuseum_2F_Movement_1A0839
+	applymovement 1, LilycoveCity_LilycoveMuseum_2F_Movement_1A0839
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_188120, 4
 	givedecoration 44
 	compare_var_to_imm RESULT, 0

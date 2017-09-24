@@ -60,8 +60,8 @@ MossdeepCity_EventScript_14D011:: @ 814D011
 	lock
 	faceplayer
 	msgbox MossdeepCity_Text_16944E, 4
-	move LAST_TALKED, MossdeepCity_Movement_1A083D
-	waitmove 0
+	applymovement LAST_TALKED, MossdeepCity_Movement_1A083D
+	waitmovement 0
 	release
 	end
 

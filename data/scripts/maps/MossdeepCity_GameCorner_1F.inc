@@ -42,13 +42,13 @@ MossdeepCity_GameCorner_1F_MapScript2_15ACBB:: @ 815ACBB
 
 MossdeepCity_GameCorner_1F_EventScript_15ACD5:: @ 815ACD5
 	lockall
-	move 255, MossdeepCity_GameCorner_1F_Movement_15AD3D
-	waitmove 0
-	move 1, MossdeepCity_GameCorner_1F_Movement_15AD3F
-	waitmove 0
+	applymovement 255, MossdeepCity_GameCorner_1F_Movement_15AD3D
+	waitmovement 0
+	applymovement 1, MossdeepCity_GameCorner_1F_Movement_15AD3F
+	waitmovement 0
 	moveoffscreen 1
-	move 255, MossdeepCity_GameCorner_1F_Movement_1A0841
-	waitmove 0
+	applymovement 255, MossdeepCity_GameCorner_1F_Movement_1A0841
+	waitmovement 0
 	compare_var_to_imm 0x40c0, 1
 	call_if 1, MossdeepCity_GameCorner_1F_EventScript_15AD22
 	compare_var_to_imm 0x40c0, 2
@@ -136,21 +136,21 @@ MossdeepCity_GameCorner_1F_EventScript_15ADF5:: @ 815ADF5
 	return
 
 MossdeepCity_GameCorner_1F_EventScript_15AE04:: @ 815AE04
-	move LAST_TALKED, MossdeepCity_GameCorner_1F_Movement_15AE46
-	move 255, MossdeepCity_GameCorner_1F_Movement_15AE3A
-	waitmove 0
+	applymovement LAST_TALKED, MossdeepCity_GameCorner_1F_Movement_15AE46
+	applymovement 255, MossdeepCity_GameCorner_1F_Movement_15AE3A
+	waitmovement 0
 	return
 
 MossdeepCity_GameCorner_1F_EventScript_15AE16:: @ 815AE16
-	move LAST_TALKED, MossdeepCity_GameCorner_1F_Movement_15AE49
-	move 255, MossdeepCity_GameCorner_1F_Movement_15AE3E
-	waitmove 0
+	applymovement LAST_TALKED, MossdeepCity_GameCorner_1F_Movement_15AE49
+	applymovement 255, MossdeepCity_GameCorner_1F_Movement_15AE3E
+	waitmovement 0
 	return
 
 MossdeepCity_GameCorner_1F_EventScript_15AE28:: @ 815AE28
-	move LAST_TALKED, MossdeepCity_GameCorner_1F_Movement_15AE46
-	move 255, MossdeepCity_GameCorner_1F_Movement_15AE42
-	waitmove 0
+	applymovement LAST_TALKED, MossdeepCity_GameCorner_1F_Movement_15AE46
+	applymovement 255, MossdeepCity_GameCorner_1F_Movement_15AE42
+	waitmovement 0
 	return
 
 MossdeepCity_GameCorner_1F_Movement_15AE3A:: @ 815AE3A

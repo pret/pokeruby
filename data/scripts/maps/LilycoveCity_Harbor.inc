@@ -76,8 +76,8 @@ LilycoveCity_Harbor_EventScript_15997E:: @ 815997E
 LilycoveCity_Harbor_EventScript_15998A:: @ 815998A
 	msgbox LilycoveCity_Harbor_Text_18B4B3, 4
 	closebutton
-	move LAST_TALKED, LilycoveCity_Harbor_Movement_1A0841
-	waitmove 0
+	applymovement LAST_TALKED, LilycoveCity_Harbor_Movement_1A0841
+	waitmovement 0
 	delay 30
 	spriteinvisible LAST_TALKED, 13, 10
 	compare_var_to_imm FACING, 2
@@ -91,13 +91,13 @@ LilycoveCity_Harbor_EventScript_15998A:: @ 815998A
 	return
 
 LilycoveCity_Harbor_EventScript_1599CE:: @ 81599CE
-	move 255, LilycoveCity_Harbor_Movement_159A86
-	waitmove 0
+	applymovement 255, LilycoveCity_Harbor_Movement_159A86
+	waitmovement 0
 	return
 
 LilycoveCity_Harbor_EventScript_1599D9:: @ 81599D9
-	move 255, LilycoveCity_Harbor_Movement_159A89
-	waitmove 0
+	applymovement 255, LilycoveCity_Harbor_Movement_159A89
+	waitmovement 0
 	return
 
 LilycoveCity_Harbor_EventScript_1599E4:: @ 81599E4
@@ -114,19 +114,19 @@ LilycoveCity_Harbor_EventScript_1599EE:: @ 81599EE
 	goto_if 0, LilycoveCity_Harbor_EventScript_1598BA
 	msgbox LilycoveCity_Harbor_Text_1C50F2, 4
 	closebutton
-	move LAST_TALKED, LilycoveCity_Harbor_Movement_1A0841
-	waitmove 0
+	applymovement LAST_TALKED, LilycoveCity_Harbor_Movement_1A0841
+	waitmovement 0
 	delay 30
 	spriteinvisible LAST_TALKED, 13, 10
 	delay 60
 	reappear 4
 	delay 30
-	move 4, LilycoveCity_Harbor_Movement_1A0839
-	waitmove 0
+	applymovement 4, LilycoveCity_Harbor_Movement_1A0839
+	waitmovement 0
 	msgbox LilycoveCity_Harbor_Text_1C5120, 4
 	closebutton
-	move 4, LilycoveCity_Harbor_Movement_1A0841
-	waitmove 0
+	applymovement 4, LilycoveCity_Harbor_Movement_1A0841
+	waitmovement 0
 	delay 30
 	disappear 4
 	compare_var_to_imm FACING, 2

@@ -8,8 +8,8 @@ Route121_SafariZoneEntrance_MapScript2_15C329:: @ 815C329
 
 Route121_SafariZoneEntrance_EventScript_15C333:: @ 815C333
 	lockall
-	move 255, Route121_SafariZoneEntrance_Movement_15C348
-	waitmove 0
+	applymovement 255, Route121_SafariZoneEntrance_Movement_15C348
+	waitmovement 0
 	special ExitSafariMode
 	setvar 0x40a4, 0
 	releaseall
@@ -47,8 +47,8 @@ Route121_SafariZoneEntrance_EventScript_15C379:: @ 815C379
 
 Route121_SafariZoneEntrance_EventScript_15C383:: @ 815C383
 	lockall
-	move 255, Route121_SafariZoneEntrance_Movement_1A0841
-	waitmove 0
+	applymovement 255, Route121_SafariZoneEntrance_Movement_1A0841
+	waitmovement 0
 	showmoney 0, 0
 	nop
 	msgbox Route121_SafariZoneEntrance_Text_1C3832, 5
@@ -78,8 +78,8 @@ Route121_SafariZoneEntrance_EventScript_15C3B3:: @ 815C3B3
 	msgbox Route121_SafariZoneEntrance_Text_1C392D, 4
 	closebutton
 	hidemoney 0, 0
-	move 255, Route121_SafariZoneEntrance_Movement_15C47E
-	waitmove 0
+	applymovement 255, Route121_SafariZoneEntrance_Movement_15C47E
+	waitmovement 0
 	special EnterSafariMode
 	setvar 0x40a4, 2
 	warp SafariZone_Southeast, 255, 32, 33
@@ -113,8 +113,8 @@ Route121_SafariZoneEntrance_EventScript_15C45E:: @ 815C45E
 Route121_SafariZoneEntrance_EventScript_15C46C:: @ 815C46C
 	closebutton
 	hidemoney 0, 0
-	move 255, Route121_SafariZoneEntrance_Movement_15C47C
-	waitmove 0
+	applymovement 255, Route121_SafariZoneEntrance_Movement_15C47C
+	waitmovement 0
 	releaseall
 	end
 

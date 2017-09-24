@@ -71,16 +71,16 @@ MauvilleCity_EventScript_14C0C4:: @ 814C0C4
 	goto_if_eq MauvilleCity_EventScript_14C0E4
 	msgbox MauvilleCity_Text_165B76, 4
 	closebutton
-	move 7, MauvilleCity_Movement_1A083D
-	waitmove 0
+	applymovement 7, MauvilleCity_Movement_1A083D
+	waitmovement 0
 	release
 	end
 
 MauvilleCity_EventScript_14C0E4:: @ 814C0E4
 	msgbox MauvilleCity_Text_165E45, 4
 	closebutton
-	move 7, MauvilleCity_Movement_1A083D
-	waitmove 0
+	applymovement 7, MauvilleCity_Movement_1A083D
+	waitmovement 0
 	release
 	end
 
@@ -88,18 +88,18 @@ MauvilleCity_EventScript_14C0F9:: @ 814C0F9
 	lockall
 	checkflag 284
 	goto_if_eq MauvilleCity_EventScript_14C292
-	move 6, MauvilleCity_Movement_1A0843
-	waitmove 0
+	applymovement 6, MauvilleCity_Movement_1A0843
+	waitmovement 0
 	msgbox MauvilleCity_Text_165BE3, 4
 	msgbox MauvilleCity_Text_165C57, 4
 	msgbox MauvilleCity_Text_165D01, 4
-	move 6, MauvilleCity_Movement_1A0839
-	waitmove 0
+	applymovement 6, MauvilleCity_Movement_1A0839
+	waitmovement 0
 	playse 21
-	move 6, MauvilleCity_Movement_1A0833
-	waitmove 0
-	move 6, MauvilleCity_Movement_1A0835
-	waitmove 0
+	applymovement 6, MauvilleCity_Movement_1A0833
+	waitmovement 0
+	applymovement 6, MauvilleCity_Movement_1A0835
+	waitmovement 0
 	msgbox MauvilleCity_Text_165D50, 5
 	goto MauvilleCity_EventScript_14C154
 	end
@@ -116,40 +116,40 @@ MauvilleCity_EventScript_14C154:: @ 814C154
 	end
 
 MauvilleCity_EventScript_14C187:: @ 814C187
-	move 6, MauvilleCity_Movement_14C2AA
-	move 7, MauvilleCity_Movement_14C2CC
-	waitmove 0
-	move 6, MauvilleCity_Movement_1A0843
-	waitmove 0
+	applymovement 6, MauvilleCity_Movement_14C2AA
+	applymovement 7, MauvilleCity_Movement_14C2CC
+	waitmovement 0
+	applymovement 6, MauvilleCity_Movement_1A0843
+	waitmovement 0
 	delay 30
-	move 7, MauvilleCity_Movement_14C2D8
-	waitmove 0
-	move 255, MauvilleCity_Movement_1A0845
-	waitmove 0
+	applymovement 7, MauvilleCity_Movement_14C2D8
+	waitmovement 0
+	applymovement 255, MauvilleCity_Movement_1A0845
+	waitmovement 0
 	msgbox MauvilleCity_Text_1660FA, 4
 	closebutton
-	move 6, MauvilleCity_Movement_14C2B6
-	move 7, MauvilleCity_Movement_14C2DF
-	waitmove 0
+	applymovement 6, MauvilleCity_Movement_14C2B6
+	applymovement 7, MauvilleCity_Movement_14C2DF
+	waitmovement 0
 	goto MauvilleCity_EventScript_14C22B
 	end
 
 MauvilleCity_EventScript_14C1D9:: @ 814C1D9
-	move 6, MauvilleCity_Movement_14C2B0
-	move 7, MauvilleCity_Movement_14C2D2
-	waitmove 0
-	move 6, MauvilleCity_Movement_1A0843
-	waitmove 0
+	applymovement 6, MauvilleCity_Movement_14C2B0
+	applymovement 7, MauvilleCity_Movement_14C2D2
+	waitmovement 0
+	applymovement 6, MauvilleCity_Movement_1A0843
+	waitmovement 0
 	delay 30
-	move 7, MauvilleCity_Movement_14C2DC
-	waitmove 0
-	move 255, MauvilleCity_Movement_1A0845
-	waitmove 0
+	applymovement 7, MauvilleCity_Movement_14C2DC
+	waitmovement 0
+	applymovement 255, MauvilleCity_Movement_1A0845
+	waitmovement 0
 	msgbox MauvilleCity_Text_1660FA, 4
 	closebutton
-	move 6, MauvilleCity_Movement_14C2C1
-	move 7, MauvilleCity_Movement_14C2E8
-	waitmove 0
+	applymovement 6, MauvilleCity_Movement_14C2C1
+	applymovement 7, MauvilleCity_Movement_14C2E8
+	waitmovement 0
 	goto MauvilleCity_EventScript_14C22B
 	end
 
@@ -165,14 +165,14 @@ MauvilleCity_EventScript_14C22B:: @ 814C22B
 MauvilleCity_EventScript_14C23C:: @ 814C23C
 	msgbox MauvilleCity_Text_165F0D, 4
 	trainerbattle 3, OPPONENT_WALLY_2, 0, MauvilleCity_Text_165F38
-	move 6, MauvilleCity_Movement_1A0843
-	waitmove 0
+	applymovement 6, MauvilleCity_Movement_1A0843
+	waitmovement 0
 	msgbox MauvilleCity_Text_165F85, 4
-	move 6, MauvilleCity_Movement_1A0839
-	waitmove 0
+	applymovement 6, MauvilleCity_Movement_1A0839
+	waitmovement 0
 	msgbox MauvilleCity_Text_165FB3, 4
-	move 6, MauvilleCity_Movement_1A0843
-	waitmove 0
+	applymovement 6, MauvilleCity_Movement_1A0843
+	waitmovement 0
 	msgbox MauvilleCity_Text_166050, 4
 	return
 
@@ -183,8 +183,8 @@ MauvilleCity_EventScript_14C285:: @ 814C285
 	end
 
 MauvilleCity_EventScript_14C292:: @ 814C292
-	move 6, MauvilleCity_Movement_1A0839
-	waitmove 0
+	applymovement 6, MauvilleCity_Movement_1A0839
+	waitmovement 0
 	msgbox MauvilleCity_Text_165EE2, 5
 	goto MauvilleCity_EventScript_14C154
 	end

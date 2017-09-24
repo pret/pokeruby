@@ -17,26 +17,26 @@ EverGrandeCity_HallOfFame_MapScript2_15BB9E:: @ 815BB9E
 
 EverGrandeCity_HallOfFame_EventScript_15BBA8:: @ 815BBA8
 	lockall
-	move 1, EverGrandeCity_HallOfFame_Movement_15BC59
-	move 255, EverGrandeCity_HallOfFame_Movement_15BC59
-	waitmove 0
-	move 1, EverGrandeCity_HallOfFame_Movement_1A0843
-	move 255, EverGrandeCity_HallOfFame_Movement_1A083F
-	waitmove 0
+	applymovement 1, EverGrandeCity_HallOfFame_Movement_15BC59
+	applymovement 255, EverGrandeCity_HallOfFame_Movement_15BC59
+	waitmovement 0
+	applymovement 1, EverGrandeCity_HallOfFame_Movement_1A0843
+	applymovement 255, EverGrandeCity_HallOfFame_Movement_1A083F
+	waitmovement 0
 	msgbox EverGrandeCity_HallOfFame_Text_191841, 4
 	closebutton
-	move 1, EverGrandeCity_HallOfFame_Movement_15BC60
-	move 255, EverGrandeCity_HallOfFame_Movement_15BC60
-	waitmove 0
+	applymovement 1, EverGrandeCity_HallOfFame_Movement_15BC60
+	applymovement 255, EverGrandeCity_HallOfFame_Movement_15BC60
+	waitmovement 0
 	delay 20
-	move 1, EverGrandeCity_HallOfFame_Movement_1A0843
-	move 255, EverGrandeCity_HallOfFame_Movement_1A083F
-	waitmove 0
+	applymovement 1, EverGrandeCity_HallOfFame_Movement_1A0843
+	applymovement 255, EverGrandeCity_HallOfFame_Movement_1A083F
+	waitmovement 0
 	msgbox EverGrandeCity_HallOfFame_Text_1918D7, 4
 	closebutton
-	move 1, EverGrandeCity_HallOfFame_Movement_1A0841
-	move 255, EverGrandeCity_HallOfFame_Movement_1A0841
-	waitmove 0
+	applymovement 1, EverGrandeCity_HallOfFame_Movement_1A0841
+	applymovement 255, EverGrandeCity_HallOfFame_Movement_1A0841
+	waitmovement 0
 	delay 20
 	doanimation 62
 	checkanimation 62

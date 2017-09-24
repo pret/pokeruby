@@ -23,8 +23,8 @@ NewMauville_Entrance_MapScript1_15E4D8:: @ 815E4D8
 
 NewMauville_Entrance_EventScript_15E4DC:: @ 815E4DC
 	lockall
-	move 255, NewMauville_Entrance_Movement_1A0841
-	waitmove 0
+	applymovement 255, NewMauville_Entrance_Movement_1A0841
+	waitmovement 0
 	msgbox NewMauville_Entrance_Text_1982C0, 4
 	checkitem ITEM_BASEMENT_KEY, 1
 	compare_var_to_imm RESULT, 0

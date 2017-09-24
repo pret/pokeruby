@@ -14,15 +14,15 @@ VerdanturfTown_EventScript_14E866:: @ 814E866
 	checkflag 199
 	goto_if_eq VerdanturfTown_EventScript_14E885
 	msgbox VerdanturfTown_Text_16CAEB, 4
-	move 2, VerdanturfTown_Movement_1A083D
-	waitmove 0
+	applymovement 2, VerdanturfTown_Movement_1A083D
+	waitmovement 0
 	release
 	end
 
 VerdanturfTown_EventScript_14E885:: @ 814E885
 	msgbox VerdanturfTown_Text_16CBCE, 4
-	move 2, VerdanturfTown_Movement_1A083D
-	waitmove 0
+	applymovement 2, VerdanturfTown_Movement_1A083D
+	waitmovement 0
 	release
 	end
 

@@ -22,11 +22,11 @@ EverGrandeCity_ChampionsRoom_MapScript2_15B7D4:: @ 815B7D4
 
 EverGrandeCity_ChampionsRoom_EventScript_15B7DE:: @ 815B7DE
 	lockall
-	move 255, EverGrandeCity_ChampionsRoom_Movement_1A084E
-	waitmove 0
+	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_1A084E
+	waitmovement 0
 	delay 40
-	move 255, EverGrandeCity_ChampionsRoom_Movement_15B802
-	waitmove 0
+	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_15B802
+	waitmovement 0
 	setvar 0x4001, 1
 	goto EverGrandeCity_ChampionsRoom_EventScript_15B805
 	releaseall
@@ -78,10 +78,10 @@ EverGrandeCity_ChampionsRoom_EventScript_15B886:: @ 815B886
 	msgbox EverGrandeCity_ChampionsRoom_Text_191225, 4
 	delay 40
 	playse 21
-	move 2, EverGrandeCity_ChampionsRoom_Movement_1A0833
-	waitmove 0
-	move 2, EverGrandeCity_ChampionsRoom_Movement_1A0835
-	waitmove 0
+	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_1A0833
+	waitmovement 0
+	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_1A0835
+	waitmovement 0
 	call EverGrandeCity_ChampionsRoom_EventScript_15B9D2
 	msgbox EverGrandeCity_ChampionsRoom_Text_191268, 4
 	goto EverGrandeCity_ChampionsRoom_EventScript_15B8F0
@@ -91,10 +91,10 @@ EverGrandeCity_ChampionsRoom_EventScript_15B8BB:: @ 815B8BB
 	msgbox EverGrandeCity_ChampionsRoom_Text_1912B3, 4
 	delay 40
 	playse 21
-	move 2, EverGrandeCity_ChampionsRoom_Movement_1A0833
-	waitmove 0
-	move 2, EverGrandeCity_ChampionsRoom_Movement_1A0835
-	waitmove 0
+	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_1A0833
+	waitmovement 0
+	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_1A0835
+	waitmovement 0
 	call EverGrandeCity_ChampionsRoom_EventScript_15B9D2
 	msgbox EverGrandeCity_ChampionsRoom_Text_191305, 4
 	goto EverGrandeCity_ChampionsRoom_EventScript_15B8F0
@@ -103,29 +103,29 @@ EverGrandeCity_ChampionsRoom_EventScript_15B8BB:: @ 815B8BB
 EverGrandeCity_ChampionsRoom_EventScript_15B8F0:: @ 815B8F0
 	closebutton
 	reappear 3
-	move 3, EverGrandeCity_ChampionsRoom_Movement_15BA03
-	waitmove 0
-	move 255, EverGrandeCity_ChampionsRoom_Movement_1A0843
-	waitmove 0
+	applymovement 3, EverGrandeCity_ChampionsRoom_Movement_15BA03
+	waitmovement 0
+	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_1A0843
+	waitmovement 0
 	msgbox EverGrandeCity_ChampionsRoom_Text_19134D, 4
 	call EverGrandeCity_ChampionsRoom_EventScript_1A03B0
 	msgbox EverGrandeCity_ChampionsRoom_Text_1914C6, 4
-	move 1, EverGrandeCity_ChampionsRoom_Movement_1A0841
-	waitmove 0
+	applymovement 1, EverGrandeCity_ChampionsRoom_Movement_1A0841
+	waitmovement 0
 	delay 20
-	move 1, EverGrandeCity_ChampionsRoom_Movement_1A0845
-	waitmove 0
+	applymovement 1, EverGrandeCity_ChampionsRoom_Movement_1A0845
+	waitmovement 0
 	msgbox EverGrandeCity_ChampionsRoom_Text_191512, 4
 	closebutton
 	delay 30
-	move 1, EverGrandeCity_ChampionsRoom_Movement_15B9FB
-	move 255, EverGrandeCity_ChampionsRoom_Movement_15B9DD
-	move 3, EverGrandeCity_ChampionsRoom_Movement_1A0841
-	move 2, EverGrandeCity_ChampionsRoom_Movement_15B9F8
-	waitmove 0
+	applymovement 1, EverGrandeCity_ChampionsRoom_Movement_15B9FB
+	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_15B9DD
+	applymovement 3, EverGrandeCity_ChampionsRoom_Movement_1A0841
+	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_15B9F8
+	waitmovement 0
 	delay 20
-	move 255, EverGrandeCity_ChampionsRoom_Movement_1A0845
-	waitmove 0
+	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_1A0845
+	waitmovement 0
 	msgbox EverGrandeCity_ChampionsRoom_Text_191546, 4
 	checkgender
 	compare_var_to_imm RESULT, 0
@@ -133,9 +133,9 @@ EverGrandeCity_ChampionsRoom_EventScript_15B8F0:: @ 815B8F0
 	compare_var_to_imm RESULT, 1
 	call_if 1, EverGrandeCity_ChampionsRoom_EventScript_15B9B4
 	closebutton
-	move 1, EverGrandeCity_ChampionsRoom_Movement_15B9FF
-	move 255, EverGrandeCity_ChampionsRoom_Movement_15B9E0
-	waitmove 0
+	applymovement 1, EverGrandeCity_ChampionsRoom_Movement_15B9FF
+	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_15B9E0
+	waitmovement 0
 	setflag 781
 	warp EverGrandeCity_HallOfFame, 255, 7, 16
 	waitstate
@@ -151,15 +151,15 @@ EverGrandeCity_ChampionsRoom_EventScript_15B9B4:: @ 815B9B4
 	return
 
 EverGrandeCity_ChampionsRoom_EventScript_15B9BD:: @ 815B9BD
-	move 2, EverGrandeCity_ChampionsRoom_Movement_15B9E6
-	waitmove 0
-	move 255, EverGrandeCity_ChampionsRoom_Movement_1A083F
-	waitmove 0
+	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_15B9E6
+	waitmovement 0
+	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_1A083F
+	waitmovement 0
 	return
 
 EverGrandeCity_ChampionsRoom_EventScript_15B9D2:: @ 815B9D2
-	move 2, EverGrandeCity_ChampionsRoom_Movement_15B9EF
-	waitmove 0
+	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_15B9EF
+	waitmovement 0
 	return
 
 EverGrandeCity_ChampionsRoom_Movement_15B9DD:: @ 815B9DD

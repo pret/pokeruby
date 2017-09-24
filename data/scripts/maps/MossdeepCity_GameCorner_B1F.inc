@@ -13,8 +13,8 @@ MossdeepCity_GameCorner_B1F_MapScript2_15AE64:: @ 815AE64
 
 MossdeepCity_GameCorner_B1F_EventScript_15AE6E:: @ 815AE6E
 	lockall
-	move 255, MossdeepCity_GameCorner_B1F_Movement_15AEF9
-	waitmove 0
+	applymovement 255, MossdeepCity_GameCorner_B1F_Movement_15AEF9
+	waitmovement 0
 	special sub_81360C0
 	msgbox 0x20234cc, 4
 	closebutton
@@ -30,8 +30,8 @@ MossdeepCity_GameCorner_B1F_EventScript_15AE6E:: @ 815AE6E
 	call_if 1, MossdeepCity_GameCorner_B1F_EventScript_15AEEE
 	closebutton
 	special ScrSpecial_HealPlayerParty
-	move 255, MossdeepCity_GameCorner_B1F_Movement_15AEFF
-	waitmove 0
+	applymovement 255, MossdeepCity_GameCorner_B1F_Movement_15AEFF
+	waitmovement 0
 	special LoadPlayerParty
 	setvar 0x4001, 1
 	warp MossdeepCity_GameCorner_1F, 255, 3, 1

@@ -32,17 +32,17 @@ LavaridgeTown_EventScript_14E4ED:: @ 814E4ED
 	setdooropened 12, 15
 	doorchange
 	reappear 8
-	move 8, LavaridgeTown_Movement_14E70E
-	waitmove 0
+	applymovement 8, LavaridgeTown_Movement_14E70E
+	waitmovement 0
 	setdoorclosed 12, 15
 	doorchange
-	move 8, LavaridgeTown_Movement_1A083F
-	waitmove 0
-	move 255, LavaridgeTown_Movement_1A0843
-	move 8, LavaridgeTown_Movement_1A0833
-	waitmove 0
-	move 8, LavaridgeTown_Movement_1A0835
-	waitmove 0
+	applymovement 8, LavaridgeTown_Movement_1A083F
+	waitmovement 0
+	applymovement 255, LavaridgeTown_Movement_1A0843
+	applymovement 8, LavaridgeTown_Movement_1A0833
+	waitmovement 0
+	applymovement 8, LavaridgeTown_Movement_1A0835
+	waitmovement 0
 	checkgender
 	compare_var_to_imm RESULT, 0
 	call_if 1, LavaridgeTown_EventScript_14E56B
@@ -155,13 +155,13 @@ LavaridgeTown_EventScript_14E68A:: @ 814E68A
 	return
 
 LavaridgeTown_EventScript_14E68F:: @ 814E68F
-	move 8, LavaridgeTown_Movement_14E6E8
-	waitmove 0
+	applymovement 8, LavaridgeTown_Movement_14E6E8
+	waitmovement 0
 	return
 
 LavaridgeTown_EventScript_14E69A:: @ 814E69A
-	move 7, LavaridgeTown_Movement_14E6EF
-	waitmove 0
+	applymovement 7, LavaridgeTown_Movement_14E6EF
+	waitmovement 0
 	return
 
 LavaridgeTown_EventScript_14E6A5:: @ 814E6A5
@@ -176,13 +176,13 @@ LavaridgeTown_EventScript_14E6A5:: @ 814E6A5
 	return
 
 LavaridgeTown_EventScript_14E6D2:: @ 814E6D2
-	move 7, LavaridgeTown_Movement_14E6FA
-	waitmove 0
+	applymovement 7, LavaridgeTown_Movement_14E6FA
+	waitmovement 0
 	return
 
 LavaridgeTown_EventScript_14E6DD:: @ 814E6DD
-	move 7, LavaridgeTown_Movement_14E703
-	waitmove 0
+	applymovement 7, LavaridgeTown_Movement_14E703
+	waitmovement 0
 	return
 
 LavaridgeTown_Movement_14E6E8:: @ 814E6E8

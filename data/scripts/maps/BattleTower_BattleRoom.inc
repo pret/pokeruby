@@ -8,14 +8,14 @@ BattleTower_BattleRoom_MapScript2_1608E1:: @ 81608E1
 
 BattleTower_BattleRoom_EventScript_1608EB:: @ 81608EB
 	setvar 0x4000, 1
-	move 255, BattleTower_BattleRoom_Movement_160AB7
-	waitmove 0
+	applymovement 255, BattleTower_BattleRoom_Movement_160AB7
+	waitmovement 0
 
 BattleTower_BattleRoom_EventScript_1608FA:: @ 81608FA
 	special sub_81347F8
 	reappear 1
-	move 1, BattleTower_BattleRoom_Movement_160AC0
-	waitmove 0
+	applymovement 1, BattleTower_BattleRoom_Movement_160AC0
+	waitmovement 0
 	special sub_8135474
 	msgbox 0x20234cc, 4
 	waittext
@@ -43,13 +43,13 @@ BattleTower_BattleRoom_EventScript_160961:: @ 8160961
 	special sub_8135668
 	switch RESULT
 	case 8, BattleTower_BattleRoom_EventScript_160A56
-	move 1, BattleTower_BattleRoom_Movement_160AC6
-	waitmove 0
+	applymovement 1, BattleTower_BattleRoom_Movement_160AC6
+	waitmovement 0
 	disappear 1
-	move 2, BattleTower_BattleRoom_Movement_160ACB
-	waitmove 0
-	move 255, BattleTower_BattleRoom_Movement_160ABC
-	waitmove 0
+	applymovement 2, BattleTower_BattleRoom_Movement_160ACB
+	waitmovement 0
+	applymovement 255, BattleTower_BattleRoom_Movement_160ABC
+	waitmovement 0
 	msgbox BattleTower_BattleRoom_Text_19ACDC, 4
 	special LoadPlayerParty
 	special SavePlayerParty
@@ -81,10 +81,10 @@ BattleTower_BattleRoom_EventScript_160A0E:: @ 8160A0E
 
 BattleTower_BattleRoom_EventScript_160A3C:: @ 8160A3C
 	closebutton
-	move 255, BattleTower_BattleRoom_Movement_160ABE
-	waitmove 0
-	move 2, BattleTower_BattleRoom_Movement_160AD0
-	waitmove 0
+	applymovement 255, BattleTower_BattleRoom_Movement_160ABE
+	waitmovement 0
+	applymovement 2, BattleTower_BattleRoom_Movement_160AD0
+	waitmovement 0
 	goto BattleTower_BattleRoom_EventScript_1608FA
 
 BattleTower_BattleRoom_EventScript_160A56:: @ 8160A56

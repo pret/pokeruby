@@ -23,16 +23,16 @@ LilycoveCity_DepartmentStore_1F_EventScript_159D5E:: @ 8159D5E
 	copyvar 0x8008, RESULT
 	special sub_810F9AC
 	msgbox LilycoveCity_DepartmentStore_1F_Text_1C4CF6, 4
-	move 2, LilycoveCity_DepartmentStore_1F_Movement_1A0843
-	waitmove 0
+	applymovement 2, LilycoveCity_DepartmentStore_1F_Movement_1A0843
+	waitmovement 0
 	playse 4
 	special DoLotteryCornerComputerEffect
 	special PickLotteryCornerTicket
 	delay 220
 	special EndLotteryCornerComputerEffect
 	delay 10
-	move 2, LilycoveCity_DepartmentStore_1F_Movement_1A0839
-	waitmove 0
+	applymovement 2, LilycoveCity_DepartmentStore_1F_Movement_1A0839
+	waitmovement 0
 	compare_var_to_imm 0x8004, 0
 	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E60
 	inccounter GAME_STAT_WON_POKEMON_LOTTERY

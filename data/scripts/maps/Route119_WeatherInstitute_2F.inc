@@ -47,8 +47,8 @@ Route119_WeatherInstitute_2F_EventScript_163D45:: @ 8163D45
 	disappear 2
 	disappear 3
 	fadescreen 0
-	move 5, Route119_WeatherInstitute_2F_Movement_163DC8
-	waitmove 0
+	applymovement 5, Route119_WeatherInstitute_2F_Movement_163DC8
+	waitmovement 0
 	moveoffscreen 5
 	goto Route119_WeatherInstitute_2F_EventScript_163D7A
 	end

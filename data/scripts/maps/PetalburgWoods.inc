@@ -9,74 +9,74 @@ PetalburgWoods_MapScript1_15CCA2:: @ 815CCA2
 PetalburgWoods_EventScript_15CCA8:: @ 815CCA8
 	lockall
 	call PetalburgWoods_EventScript_15CDE6
-	move 4, PetalburgWoods_Movement_15CE89
-	waitmove 0
+	applymovement 4, PetalburgWoods_Movement_15CE89
+	waitmovement 0
 	msgbox PetalburgWoods_Text_194D92, 4
 	closebutton
 	playbgm BGM_EVIL_TEAM, 0
-	move 3, PetalburgWoods_Movement_15CEC3
-	waitmove 0
+	applymovement 3, PetalburgWoods_Movement_15CEC3
+	waitmovement 0
 	msgbox PetalburgWoods_Text_194DED, 4
 	closebutton
-	move 3, PetalburgWoods_Movement_15CEB0
-	waitmove 0
-	move 4, PetalburgWoods_Movement_1A0841
-	waitmove 0
+	applymovement 3, PetalburgWoods_Movement_15CEB0
+	waitmovement 0
+	applymovement 4, PetalburgWoods_Movement_1A0841
+	waitmovement 0
 	msgbox PetalburgWoods_Text_194E6B, 4
 	closebutton
-	move 4, PetalburgWoods_Movement_15CE9E
-	waitmove 0
+	applymovement 4, PetalburgWoods_Movement_15CE9E
+	waitmovement 0
 	msgbox PetalburgWoods_Text_194E9A, 4
-	move 3, PetalburgWoods_Movement_15CEC8
-	waitmove 0
+	applymovement 3, PetalburgWoods_Movement_15CEC8
+	waitmovement 0
 	msgbox PetalburgWoods_Text_194EE8, 4
 	trainerbattle 3, OPPONENT_PETALBURG_WOODS_GRUNT, 0, PetalburgWoods_Text_194F83
-	move 3, PetalburgWoods_Movement_15CEB3
-	waitmove 0
+	applymovement 3, PetalburgWoods_Movement_15CEB3
+	waitmovement 0
 	call PetalburgWoods_EventScript_15CDFA
-	move 4, PetalburgWoods_Movement_15CE80
-	waitmove 0
+	applymovement 4, PetalburgWoods_Movement_15CE80
+	waitmovement 0
 	goto PetalburgWoods_EventScript_15CE69
 	end
 
 PetalburgWoods_EventScript_15CD42:: @ 815CD42
 	lockall
 	call PetalburgWoods_EventScript_15CDE6
-	move 4, PetalburgWoods_Movement_15CE8E
-	waitmove 0
-	move 255, PetalburgWoods_Movement_1A083F
-	waitmove 0
+	applymovement 4, PetalburgWoods_Movement_15CE8E
+	waitmovement 0
+	applymovement 255, PetalburgWoods_Movement_1A083F
+	waitmovement 0
 	msgbox PetalburgWoods_Text_194D92, 4
 	closebutton
 	playbgm BGM_EVIL_TEAM, 0
-	move 3, PetalburgWoods_Movement_15CEC3
-	waitmove 0
+	applymovement 3, PetalburgWoods_Movement_15CEC3
+	waitmovement 0
 	msgbox PetalburgWoods_Text_194DED, 4
 	closebutton
-	move 3, PetalburgWoods_Movement_15CEBF
-	waitmove 0
-	move 4, PetalburgWoods_Movement_1A0841
-	waitmove 0
+	applymovement 3, PetalburgWoods_Movement_15CEBF
+	waitmovement 0
+	applymovement 4, PetalburgWoods_Movement_1A0841
+	waitmovement 0
 	msgbox PetalburgWoods_Text_194E6B, 4
 	closebutton
-	move 4, PetalburgWoods_Movement_15CEA4
-	waitmove 0
+	applymovement 4, PetalburgWoods_Movement_15CEA4
+	waitmovement 0
 	msgbox PetalburgWoods_Text_194E9A, 4
-	move 255, PetalburgWoods_Movement_1A0841
-	waitmove 0
+	applymovement 255, PetalburgWoods_Movement_1A0841
+	waitmovement 0
 	msgbox PetalburgWoods_Text_194EE8, 4
 	trainerbattle 3, OPPONENT_PETALBURG_WOODS_GRUNT, 0, PetalburgWoods_Text_194F83
-	move 3, PetalburgWoods_Movement_15CEB3
-	waitmove 0
+	applymovement 3, PetalburgWoods_Movement_15CEB3
+	waitmovement 0
 	call PetalburgWoods_EventScript_15CDFA
-	move 4, PetalburgWoods_Movement_15CE95
-	waitmove 0
+	applymovement 4, PetalburgWoods_Movement_15CE95
+	waitmovement 0
 	goto PetalburgWoods_EventScript_15CE69
 	end
 
 PetalburgWoods_EventScript_15CDE6:: @ 815CDE6
-	move 4, PetalburgWoods_Movement_15CE73
-	waitmove 0
+	applymovement 4, PetalburgWoods_Movement_15CE73
+	waitmovement 0
 	msgbox PetalburgWoods_Text_194D71, 4
 	closebutton
 	return
@@ -84,11 +84,11 @@ PetalburgWoods_EventScript_15CDE6:: @ 815CDE6
 PetalburgWoods_EventScript_15CDFA:: @ 815CDFA
 	msgbox PetalburgWoods_Text_194FA4, 4
 	closebutton
-	move 3, PetalburgWoods_Movement_15CEB7
-	waitmove 0
+	applymovement 3, PetalburgWoods_Movement_15CEB7
+	waitmovement 0
 	disappear 3
-	move 255, PetalburgWoods_Movement_1A0845
-	waitmove 0
+	applymovement 255, PetalburgWoods_Movement_1A0845
+	waitmovement 0
 	msgbox PetalburgWoods_Text_19507E, 4
 	giveitem ITEM_GREAT_BALL
 	compare_var_to_imm RESULT, 0
@@ -103,8 +103,8 @@ PetalburgWoods_EventScript_15CE3F:: @ 815CE3F
 
 PetalburgWoods_EventScript_15CE4D:: @ 815CE4D
 	msgbox PetalburgWoods_Text_19510A, 4
-	move 4, PetalburgWoods_Movement_15CEA8
-	waitmove 0
+	applymovement 4, PetalburgWoods_Movement_15CEA8
+	waitmovement 0
 	msgbox PetalburgWoods_Text_195153, 4
 	closebutton
 	return

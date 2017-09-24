@@ -67,8 +67,8 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152D2B:: @ 8152D2B
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152D4A:: @ 8152D4A
 	lockall
-	move 255, LittlerootTown_ProfessorBirchsLab_Movement_152D5B
-	waitmove 0
+	applymovement 255, LittlerootTown_ProfessorBirchsLab_Movement_152D5B
+	waitmovement 0
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_152DBA
 	end
 
@@ -119,10 +119,10 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152DBA:: @ 8152DBA
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_17411F, 4
 	call LittlerootTown_ProfessorBirchsLab_EventScript_152E6D
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_174248, 4
-	move 3, LittlerootTown_ProfessorBirchsLab_Movement_152E97
-	waitmove 0
-	move 255, LittlerootTown_ProfessorBirchsLab_Movement_1A0843
-	waitmove 0
+	applymovement 3, LittlerootTown_ProfessorBirchsLab_Movement_152E97
+	waitmovement 0
+	applymovement 255, LittlerootTown_ProfessorBirchsLab_Movement_1A0843
+	waitmovement 0
 	checkgender
 	compare_var_to_imm RESULT, 0
 	call_if 1, LittlerootTown_ProfessorBirchsLab_EventScript_152E13

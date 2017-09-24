@@ -204,8 +204,8 @@ Route117_PokemonDayCare_EventScript_1B24C4:: @ 81B24C4
 	end
 
 Route117_PokemonDayCare_EventScript_1B24DE:: @ 81B24DE
-	move 1, Route117_PokemonDayCare_Movement_1B2543
-	waitmove 0
+	applymovement 1, Route117_PokemonDayCare_Movement_1B2543
+	waitmovement 0
 	specialvar RESULT, sub_8041648
 	special sub_80B7D0C
 	playse 95

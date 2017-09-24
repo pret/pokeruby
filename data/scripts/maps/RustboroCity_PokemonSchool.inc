@@ -88,27 +88,27 @@ RustboroCity_PokemonSchool_EventScript_157ACE:: @ 8157ACE
 	compare_var_to_imm RESULT, 0
 	goto_if_eq RustboroCity_PokemonSchool_EventScript_1A029B
 	closebutton
-	move LAST_TALKED, RustboroCity_PokemonSchool_Movement_1A0845
-	waitmove 0
+	applymovement LAST_TALKED, RustboroCity_PokemonSchool_Movement_1A0845
+	waitmovement 0
 	setflag 275
 	release
 	end
 
 RustboroCity_PokemonSchool_EventScript_157B1E:: @ 8157B1E
-	move LAST_TALKED, RustboroCity_PokemonSchool_Movement_157B60
-	waitmove 0
+	applymovement LAST_TALKED, RustboroCity_PokemonSchool_Movement_157B60
+	waitmovement 0
 	return
 
 RustboroCity_PokemonSchool_EventScript_157B29:: @ 8157B29
-	move LAST_TALKED, RustboroCity_PokemonSchool_Movement_157B49
-	waitmove 0
+	applymovement LAST_TALKED, RustboroCity_PokemonSchool_Movement_157B49
+	waitmovement 0
 	return
 
 RustboroCity_PokemonSchool_EventScript_157B34:: @ 8157B34
 	msgbox RustboroCity_PokemonSchool_Text_184737, 4
 	closebutton
-	move LAST_TALKED, RustboroCity_PokemonSchool_Movement_1A0845
-	waitmove 0
+	applymovement LAST_TALKED, RustboroCity_PokemonSchool_Movement_1A0845
+	waitmovement 0
 	release
 	end
 

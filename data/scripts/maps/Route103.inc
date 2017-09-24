@@ -19,12 +19,12 @@ Route103_EventScript_14EB92:: @ 814EB92
 Route103_EventScript_14EBAB:: @ 814EBAB
 	msgbox Route103_Text_16D57A, 4
 	playbgm 415, 1
-	move 2, Route103_Movement_1A0839
-	waitmove 0
-	move 2, Route103_Movement_1A0833
-	waitmove 0
-	move 2, Route103_Movement_1A0835
-	waitmove 0
+	applymovement 2, Route103_Movement_1A0839
+	waitmovement 0
+	applymovement 2, Route103_Movement_1A0833
+	waitmovement 0
+	applymovement 2, Route103_Movement_1A0835
+	waitmovement 0
 	msgbox Route103_Text_16D5B6, 4
 	switch 0x4023
 	case 0, Route103_EventScript_14EC5D
@@ -35,12 +35,12 @@ Route103_EventScript_14EBAB:: @ 814EBAB
 Route103_EventScript_14EC04:: @ 814EC04
 	msgbox Route103_Text_16D762, 4
 	playbgm 421, 1
-	move 2, Route103_Movement_1A0839
-	waitmove 0
-	move 2, Route103_Movement_1A0833
-	waitmove 0
-	move 2, Route103_Movement_1A0835
-	waitmove 0
+	applymovement 2, Route103_Movement_1A0839
+	waitmovement 0
+	applymovement 2, Route103_Movement_1A0833
+	waitmovement 0
+	applymovement 2, Route103_Movement_1A0835
+	waitmovement 0
 	msgbox Route103_Text_16D7A9, 4
 	switch 0x4023
 	case 0, Route103_EventScript_14EC8D
@@ -98,20 +98,20 @@ Route103_EventScript_14ECD9:: @ 814ECD9
 	end
 
 Route103_EventScript_14ED0C:: @ 814ED0C
-	move 2, Route103_Movement_14ED67
-	waitmove 0
+	applymovement 2, Route103_Movement_14ED67
+	waitmovement 0
 	playse 10
-	move 2, Route103_Movement_14ED6B
-	waitmove 0
+	applymovement 2, Route103_Movement_14ED6B
+	waitmovement 0
 	goto Route103_EventScript_14ED46
 	end
 
 Route103_EventScript_14ED29:: @ 814ED29
-	move 2, Route103_Movement_14ED71
-	waitmove 0
+	applymovement 2, Route103_Movement_14ED71
+	waitmovement 0
 	playse 10
-	move 2, Route103_Movement_14ED74
-	waitmove 0
+	applymovement 2, Route103_Movement_14ED74
+	waitmovement 0
 	goto Route103_EventScript_14ED46
 	end
 

@@ -20,9 +20,9 @@ Route112_CableCarStation_MapScript2_15C05E:: @ 815C05E
 
 Route112_CableCarStation_EventScript_15C068:: @ 815C068
 	lockall
-	move 255, Route112_CableCarStation_Movement_15C0F5
-	move 1, Route112_CableCarStation_Movement_15C0EB
-	waitmove 0
+	applymovement 255, Route112_CableCarStation_Movement_15C0F5
+	applymovement 1, Route112_CableCarStation_Movement_15C0EB
+	waitmovement 0
 	setvar 0x40a3, 0
 	movespriteperm 1, 6, 7
 	spritebehave 1, 8
@@ -42,9 +42,9 @@ Route112_CableCarStation_EventScript_15C08C:: @ 815C08C
 Route112_CableCarStation_EventScript_15C0AD:: @ 815C0AD
 	msgbox Route112_CableCarStation_Text_1925A9, 4
 	closebutton
-	move 1, Route112_CableCarStation_Movement_15C0E6
-	move 255, Route112_CableCarStation_Movement_15C0F0
-	waitmove 0
+	applymovement 1, Route112_CableCarStation_Movement_15C0E6
+	applymovement 255, Route112_CableCarStation_Movement_15C0F0
+	waitmovement 0
 	setvar 0x8004, 0
 	setvar 0x40a3, 1
 	inccounter GAME_STAT_RODE_CABLE_CAR

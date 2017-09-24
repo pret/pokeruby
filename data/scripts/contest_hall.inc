@@ -188,10 +188,10 @@ FallarborTown_ContestLobby_EventScript_1A513D:: @ 81A513D
 LinkContestRoom1_EventScript_1A514D:: @ 81A514D
 	setvar 0x8006, 0
 	lockall
-	move 14, LinkContestRoom1_Movement_1A5DBF
-	waitmove 0
-	move 1, LinkContestRoom1_Movement_1A5D85
-	waitmove 0
+	applymovement 14, LinkContestRoom1_Movement_1A5DBF
+	waitmovement 0
+	applymovement 1, LinkContestRoom1_Movement_1A5D85
+	waitmovement 0
 	releaseall
 	call LinkContestRoom1_EventScript_1A51A0
 	call LinkContestRoom1_EventScript_1A51EA
@@ -264,8 +264,8 @@ LinkContestRoom1_EventScript_1A5245:: @ 81A5245
 	bufferstd 2, 0x8009
 	call LinkContestRoom1_EventScript_1A525F
 	lockall
-	move 1, LinkContestRoom1_Movement_1A5D87
-	waitmove 0
+	applymovement 1, LinkContestRoom1_Movement_1A5D87
+	waitmovement 0
 	releaseall
 	return
 
@@ -306,32 +306,32 @@ LinkContestRoom1_EventScript_1A52AE:: @ 81A52AE
 
 LinkContestRoom1_EventScript_1A52DB:: @ 81A52DB
 	lockall
-	move 3, LinkContestRoom1_Movement_1A5DCE
-	waitmove 0
+	applymovement 3, LinkContestRoom1_Movement_1A5DCE
+	waitmovement 0
 	releaseall
 	setvar 0x800b, 3
 	return
 
 LinkContestRoom1_EventScript_1A52ED:: @ 81A52ED
 	lockall
-	move 4, LinkContestRoom1_Movement_1A5DDA
-	waitmove 0
+	applymovement 4, LinkContestRoom1_Movement_1A5DDA
+	waitmovement 0
 	releaseall
 	setvar 0x800b, 4
 	return
 
 LinkContestRoom1_EventScript_1A52FF:: @ 81A52FF
 	lockall
-	move 5, LinkContestRoom1_Movement_1A5DE2
-	waitmove 0
+	applymovement 5, LinkContestRoom1_Movement_1A5DE2
+	waitmovement 0
 	releaseall
 	setvar 0x800b, 5
 	return
 
 LinkContestRoom1_EventScript_1A5311:: @ 81A5311
 	lockall
-	move 14, LinkContestRoom1_Movement_1A5DEA
-	waitmove 0
+	applymovement 14, LinkContestRoom1_Movement_1A5DEA
+	waitmovement 0
 	releaseall
 	setvar 0x800b, 14
 	return
@@ -341,14 +341,14 @@ LinkContestRoom1_EventScript_1A5323:: @ 81A5323
 	addvar 0x8006, 1
 	buffernum 1, 0x8006
 	lockall
-	move 0x800b, LinkContestRoom1_Movement_1A5D9C
-	waitmove 0
+	applymovement 0x800b, LinkContestRoom1_Movement_1A5D9C
+	waitmovement 0
 	releaseall
 	reappear 13
 	playse 10
 	lockall
-	move 0x800b, LinkContestRoom1_Movement_1A5D9C
-	waitmove 0
+	applymovement 0x800b, LinkContestRoom1_Movement_1A5D9C
+	waitmovement 0
 	releaseall
 	addvar 0x8006, -1
 	playse 15
@@ -374,14 +374,14 @@ LinkContestRoom1_EventScript_1A5377:: @ 81A5377
 	playse 223
 	waittext
 	call LinkContestRoom1_EventScript_1A5A90
-	move 1, LinkContestRoom1_Movement_1A5D9F
-	waitmove 0
-	move 2, LinkContestRoom1_Movement_1A5DA1
-	waitmove 0
+	applymovement 1, LinkContestRoom1_Movement_1A5D9F
+	waitmovement 0
+	applymovement 2, LinkContestRoom1_Movement_1A5DA1
+	waitmovement 0
 	delay 20
-	move 1, LinkContestRoom1_Movement_1A5D8F
-	move 2, LinkContestRoom1_Movement_1A5D8F
-	waitmove 0
+	applymovement 1, LinkContestRoom1_Movement_1A5D8F
+	applymovement 2, LinkContestRoom1_Movement_1A5D8F
+	waitmovement 0
 	return
 
 LinkContestRoom1_EventScript_1A53B3:: @ 81A53B3
@@ -406,26 +406,26 @@ LinkContestRoom1_EventScript_1A53DF:: @ 81A53DF
 	return
 
 LinkContestRoom1_EventScript_1A53E5:: @ 81A53E5
-	move 1, LinkContestRoom1_Movement_1A5DAF
-	waitmove 0
+	applymovement 1, LinkContestRoom1_Movement_1A5DAF
+	waitmovement 0
 	playse 223
 	call LinkContestRoom1_EventScript_1A5AE4
-	move 9, LinkContestRoom1_Movement_1A5DB7
-	move 12, LinkContestRoom1_Movement_1A5DBB
-	move 7, LinkContestRoom1_Movement_1A5DB7
-	waitmove 0
-	move 1, LinkContestRoom1_Movement_1A5DB7
-	waitmove 0
-	move 10, LinkContestRoom1_Movement_1A5DAF
-	move 11, LinkContestRoom1_Movement_1A5DBB
-	move 6, LinkContestRoom1_Movement_1A5DB3
-	move 8, LinkContestRoom1_Movement_1A5DAF
-	waitmove 0
-	move 1, LinkContestRoom1_Movement_1A5DC1
-	waitmove 0
-	move 1, LinkContestRoom1_Movement_1A5DCA
-	move 2, LinkContestRoom1_Movement_1A5DC5
-	waitmove 0
+	applymovement 9, LinkContestRoom1_Movement_1A5DB7
+	applymovement 12, LinkContestRoom1_Movement_1A5DBB
+	applymovement 7, LinkContestRoom1_Movement_1A5DB7
+	waitmovement 0
+	applymovement 1, LinkContestRoom1_Movement_1A5DB7
+	waitmovement 0
+	applymovement 10, LinkContestRoom1_Movement_1A5DAF
+	applymovement 11, LinkContestRoom1_Movement_1A5DBB
+	applymovement 6, LinkContestRoom1_Movement_1A5DB3
+	applymovement 8, LinkContestRoom1_Movement_1A5DAF
+	waitmovement 0
+	applymovement 1, LinkContestRoom1_Movement_1A5DC1
+	waitmovement 0
+	applymovement 1, LinkContestRoom1_Movement_1A5DCA
+	applymovement 2, LinkContestRoom1_Movement_1A5DC5
+	waitmovement 0
 	releaseall
 	return
 
@@ -482,7 +482,7 @@ LinkContestRoom1_EventScript_1A54EB:: @ 81A54EB
 	call_if 1, LinkContestRoom1_EventScript_1A585C
 	compare_var_to_imm 0x4000, 0
 	goto_if 2, LinkContestRoom1_EventScript_1A54EB
-	waitmove 0
+	waitmovement 0
 	return
 
 LinkContestRoom1_EventScript_1A555A:: @ 81A555A
@@ -620,7 +620,7 @@ LinkContestRoom1_EventScript_1A575A:: @ 81A575A
 LinkContestRoom1_EventScript_1A5760:: @ 81A5760
 	compare_var_to_imm 0x4001, 1
 	goto_if_eq LinkContestRoom1_EventScript_1A5783
-	move 6, LinkContestRoom1_Movement_1A5D8D
+	applymovement 6, LinkContestRoom1_Movement_1A5D8D
 	playse 21
 	delay 14
 	setvar 0x4001, 1
@@ -633,7 +633,7 @@ LinkContestRoom1_EventScript_1A5783:: @ 81A5783
 LinkContestRoom1_EventScript_1A5784:: @ 81A5784
 	compare_var_to_imm 0x4002, 1
 	goto_if_eq LinkContestRoom1_EventScript_1A57A7
-	move 12, LinkContestRoom1_Movement_1A5D8D
+	applymovement 12, LinkContestRoom1_Movement_1A5D8D
 	playse 21
 	delay 14
 	setvar 0x4002, 1
@@ -646,7 +646,7 @@ LinkContestRoom1_EventScript_1A57A7:: @ 81A57A7
 LinkContestRoom1_EventScript_1A57A8:: @ 81A57A8
 	compare_var_to_imm 0x4003, 1
 	goto_if_eq LinkContestRoom1_EventScript_1A57CB
-	move 7, LinkContestRoom1_Movement_1A5D8D
+	applymovement 7, LinkContestRoom1_Movement_1A5D8D
 	playse 21
 	delay 14
 	setvar 0x4003, 1
@@ -659,7 +659,7 @@ LinkContestRoom1_EventScript_1A57CB:: @ 81A57CB
 LinkContestRoom1_EventScript_1A57CC:: @ 81A57CC
 	compare_var_to_imm 0x4004, 1
 	goto_if_eq LinkContestRoom1_EventScript_1A57EF
-	move 8, LinkContestRoom1_Movement_1A5D8D
+	applymovement 8, LinkContestRoom1_Movement_1A5D8D
 	playse 21
 	delay 14
 	setvar 0x4004, 1
@@ -672,7 +672,7 @@ LinkContestRoom1_EventScript_1A57EF:: @ 81A57EF
 LinkContestRoom1_EventScript_1A57F0:: @ 81A57F0
 	compare_var_to_imm 0x4005, 1
 	goto_if_eq LinkContestRoom1_EventScript_1A5813
-	move 9, LinkContestRoom1_Movement_1A5D8D
+	applymovement 9, LinkContestRoom1_Movement_1A5D8D
 	playse 21
 	delay 14
 	setvar 0x4005, 1
@@ -685,7 +685,7 @@ LinkContestRoom1_EventScript_1A5813:: @ 81A5813
 LinkContestRoom1_EventScript_1A5814:: @ 81A5814
 	compare_var_to_imm 0x4006, 1
 	goto_if_eq LinkContestRoom1_EventScript_1A5837
-	move 10, LinkContestRoom1_Movement_1A5D8D
+	applymovement 10, LinkContestRoom1_Movement_1A5D8D
 	playse 21
 	delay 14
 	setvar 0x4006, 1
@@ -698,7 +698,7 @@ LinkContestRoom1_EventScript_1A5837:: @ 81A5837
 LinkContestRoom1_EventScript_1A5838:: @ 81A5838
 	compare_var_to_imm 0x4007, 1
 	goto_if_eq LinkContestRoom1_EventScript_1A585B
-	move 11, LinkContestRoom1_Movement_1A5D8D
+	applymovement 11, LinkContestRoom1_Movement_1A5D8D
 	playse 21
 	delay 14
 	setvar 0x4007, 1
@@ -711,7 +711,7 @@ LinkContestRoom1_EventScript_1A585B:: @ 81A585B
 LinkContestRoom1_EventScript_1A585C:: @ 81A585C
 	compare_var_to_imm 0x4008, 1
 	goto_if_eq LinkContestRoom1_EventScript_1A587F
-	move 15, LinkContestRoom1_Movement_1A5D8D
+	applymovement 15, LinkContestRoom1_Movement_1A5D8D
 	playse 21
 	delay 14
 	setvar 0x4008, 1
@@ -735,49 +735,49 @@ LinkContestRoom1_EventScript_1A5880:: @ 81A5880
 
 LinkContestRoom1_EventScript_1A58BA:: @ 81A58BA
 	lockall
-	move 0x800b, LinkContestRoom1_Movement_1A5DD4
-	waitmove 0
+	applymovement 0x800b, LinkContestRoom1_Movement_1A5DD4
+	waitmovement 0
 	releaseall
 	return
 
 LinkContestRoom1_EventScript_1A58C7:: @ 81A58C7
 	lockall
-	move 0x800b, LinkContestRoom1_Movement_1A5DDE
-	waitmove 0
+	applymovement 0x800b, LinkContestRoom1_Movement_1A5DDE
+	waitmovement 0
 	releaseall
 	return
 
 LinkContestRoom1_EventScript_1A58D4:: @ 81A58D4
 	lockall
-	move 0x800b, LinkContestRoom1_Movement_1A5DE6
-	waitmove 0
+	applymovement 0x800b, LinkContestRoom1_Movement_1A5DE6
+	waitmovement 0
 	releaseall
 	return
 
 LinkContestRoom1_EventScript_1A58E1:: @ 81A58E1
 	lockall
-	move 0x800b, LinkContestRoom1_Movement_1A5DF0
-	waitmove 0
+	applymovement 0x800b, LinkContestRoom1_Movement_1A5DF0
+	waitmovement 0
 	releaseall
 	return
 
 LinkContestRoom1_EventScript_1A58EE:: @ 81A58EE
 	lockall
-	move 1, LinkContestRoom1_Movement_1A5DA3
-	waitmove 0
+	applymovement 1, LinkContestRoom1_Movement_1A5DA3
+	waitmovement 0
 	call LinkContestRoom1_EventScript_1A5930
 	waittext
-	move 1, LinkContestRoom1_Movement_1A5D91
-	move 2, LinkContestRoom1_Movement_1A5D95
-	waitmove 0
+	applymovement 1, LinkContestRoom1_Movement_1A5D91
+	applymovement 2, LinkContestRoom1_Movement_1A5D95
+	waitmovement 0
 	releaseall
 	setvar 0x4009, 1
 	startcontest
 	setvar 0x4009, 0
 	lockall
-	move 1, LinkContestRoom1_Movement_1A5D95
-	move 2, LinkContestRoom1_Movement_1A5D91
-	waitmove 0
+	applymovement 1, LinkContestRoom1_Movement_1A5D95
+	applymovement 2, LinkContestRoom1_Movement_1A5D91
+	waitmovement 0
 	releaseall
 	return
 
@@ -794,12 +794,12 @@ LinkContestRoom1_EventScript_1A5944:: @ 81A5944
 LinkContestRoom1_EventScript_1A594A:: @ 81A594A
 	call LinkContestRoom1_EventScript_1A5984
 	call LinkContestRoom1_EventScript_1A59A2
-	move 1, LinkContestRoom1_Movement_1A5D8B
-	waitmove 0
+	applymovement 1, LinkContestRoom1_Movement_1A5D8B
+	waitmovement 0
 	call LinkContestRoom1_EventScript_1A59C0
 	call LinkContestRoom1_EventScript_1A59DE
-	move 1, LinkContestRoom1_Movement_1A5D8F
-	waitmove 0
+	applymovement 1, LinkContestRoom1_Movement_1A5D8F
+	waitmovement 0
 	closebutton
 	releaseall
 	setvar 0x4009, 1
@@ -888,8 +888,8 @@ LinkContestRoom1_EventScript_1A5A49:: @ 81A5A49
 	buffernum 1, 0x8005
 	addvar 0x8005, -1
 	call LinkContestRoom1_EventScript_1A5A75
-	move 0x4003, LinkContestRoom1_Movement_1A5D99
-	waitmove 0
+	applymovement 0x4003, LinkContestRoom1_Movement_1A5D99
+	waitmovement 0
 	playse 223
 	setvar 0x4001, 0
 	return
@@ -910,14 +910,14 @@ LinkContestRoom1_EventScript_1A5A90:: @ 81A5A90
 	lockall
 	compare_var_to_imm 0x4088, 1
 	call_if 2, LinkContestRoom1_EventScript_1A5AE4
-	move 9, LinkContestRoom1_Movement_1A5DB7
-	move 12, LinkContestRoom1_Movement_1A5DBB
-	move 7, LinkContestRoom1_Movement_1A5DB7
+	applymovement 9, LinkContestRoom1_Movement_1A5DB7
+	applymovement 12, LinkContestRoom1_Movement_1A5DBB
+	applymovement 7, LinkContestRoom1_Movement_1A5DB7
 	delay 30
-	move 10, LinkContestRoom1_Movement_1A5DAF
-	move 11, LinkContestRoom1_Movement_1A5DBB
-	move 6, LinkContestRoom1_Movement_1A5DB3
-	move 8, LinkContestRoom1_Movement_1A5DAF
+	applymovement 10, LinkContestRoom1_Movement_1A5DAF
+	applymovement 11, LinkContestRoom1_Movement_1A5DBB
+	applymovement 6, LinkContestRoom1_Movement_1A5DB3
+	applymovement 8, LinkContestRoom1_Movement_1A5DAF
 	compare_var_to_imm 0x4001, 4
 	goto_if 5, LinkContestRoom1_EventScript_1A5A90
 	delay 30
@@ -1083,29 +1083,29 @@ LinkContestRoom1_EventScript_1A5C7F:: @ 81A5C7F
 
 LinkContestRoom1_EventScript_1A5CB1:: @ 81A5CB1
 	lockall
-	move 0x4003, LinkContestRoom1_Movement_1A5DF6
-	waitmove 0
+	applymovement 0x4003, LinkContestRoom1_Movement_1A5DF6
+	waitmovement 0
 	releaseall
 	return
 
 LinkContestRoom1_EventScript_1A5CBE:: @ 81A5CBE
 	lockall
-	move 0x4003, LinkContestRoom1_Movement_1A5DFA
-	waitmove 0
+	applymovement 0x4003, LinkContestRoom1_Movement_1A5DFA
+	waitmovement 0
 	releaseall
 	return
 
 LinkContestRoom1_EventScript_1A5CCB:: @ 81A5CCB
 	lockall
-	move 0x4003, LinkContestRoom1_Movement_1A5DA5
-	waitmove 0
+	applymovement 0x4003, LinkContestRoom1_Movement_1A5DA5
+	waitmovement 0
 	releaseall
 	return
 
 LinkContestRoom1_EventScript_1A5CD8:: @ 81A5CD8
 	lockall
-	move 0x4003, LinkContestRoom1_Movement_1A5DA9
-	waitmove 0
+	applymovement 0x4003, LinkContestRoom1_Movement_1A5DA9
+	waitmovement 0
 	releaseall
 	return
 

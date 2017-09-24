@@ -53,8 +53,8 @@ DewfordTown_Hall_EventScript_15330A:: @ 815330A
 	call DewfordTown_Hall_EventScript_1A0102
 	msgbox DewfordTown_Hall_Text_17570D, 4
 	closebutton
-	move 4, DewfordTown_Hall_Movement_1A0841
-	waitmove 0
+	applymovement 4, DewfordTown_Hall_Movement_1A0841
+	waitmovement 0
 	release
 	end
 
@@ -64,8 +64,8 @@ DewfordTown_Hall_EventScript_153326:: @ 8153326
 	call DewfordTown_Hall_EventScript_1A0102
 	msgbox DewfordTown_Hall_Text_17574C, 4
 	closebutton
-	move 5, DewfordTown_Hall_Movement_1A0841
-	waitmove 0
+	applymovement 5, DewfordTown_Hall_Movement_1A0841
+	waitmovement 0
 	release
 	end
 
@@ -189,8 +189,8 @@ DewfordTown_Hall_EventScript_1534FC:: @ 81534FC
 	return
 
 DewfordTown_Hall_EventScript_1534FD:: @ 81534FD
-	move 8, DewfordTown_Hall_Movement_153599
-	waitmove 0
+	applymovement 8, DewfordTown_Hall_Movement_153599
+	waitmovement 0
 	compare_var_to_imm 0x8008, 0
 	goto_if_eq DewfordTown_Hall_EventScript_15351E
 	compare_var_to_imm 0x8008, 1
@@ -200,16 +200,16 @@ DewfordTown_Hall_EventScript_1534FD:: @ 81534FD
 DewfordTown_Hall_EventScript_15351E:: @ 815351E
 	compare_var_to_imm FACING, 4
 	goto_if_eq DewfordTown_Hall_EventScript_1534FC
-	move 255, DewfordTown_Hall_Movement_1A0843
-	waitmove 0
+	applymovement 255, DewfordTown_Hall_Movement_1A0843
+	waitmovement 0
 	return
 
 DewfordTown_Hall_EventScript_153534:: @ 8153534
 	return
 
 DewfordTown_Hall_EventScript_153535:: @ 8153535
-	move 7, DewfordTown_Hall_Movement_15359B
-	waitmove 0
+	applymovement 7, DewfordTown_Hall_Movement_15359B
+	waitmovement 0
 	compare_var_to_imm 0x8008, 0
 	goto_if_eq DewfordTown_Hall_EventScript_153556
 	compare_var_to_imm 0x8008, 1
@@ -224,20 +224,20 @@ DewfordTown_Hall_EventScript_153556:: @ 8153556
 	return
 
 DewfordTown_Hall_EventScript_15356D:: @ 815356D
-	move 255, DewfordTown_Hall_Movement_1A0841
-	waitmove 0
+	applymovement 255, DewfordTown_Hall_Movement_1A0841
+	waitmovement 0
 	return
 
 DewfordTown_Hall_EventScript_153578:: @ 8153578
-	move 255, DewfordTown_Hall_Movement_1A0845
-	waitmove 0
+	applymovement 255, DewfordTown_Hall_Movement_1A0845
+	waitmovement 0
 	return
 
 DewfordTown_Hall_EventScript_153583:: @ 8153583
 	compare_var_to_imm FACING, 3
 	goto_if_eq DewfordTown_Hall_EventScript_1534FC
-	move 255, DewfordTown_Hall_Movement_1A083F
-	waitmove 0
+	applymovement 255, DewfordTown_Hall_Movement_1A083F
+	waitmovement 0
 	return
 
 DewfordTown_Hall_Movement_153599:: @ 8153599

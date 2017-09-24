@@ -63,13 +63,13 @@ Route116_EventScript_150A94:: @ 8150A94
 	end
 
 Route116_EventScript_150AEE:: @ 8150AEE
-	move LAST_TALKED, Route116_Movement_150B1C
-	waitmove 0
+	applymovement LAST_TALKED, Route116_Movement_150B1C
+	waitmovement 0
 	return
 
 Route116_EventScript_150AF9:: @ 8150AF9
-	move LAST_TALKED, Route116_Movement_150B25
-	waitmove 0
+	applymovement LAST_TALKED, Route116_Movement_150B25
+	waitmovement 0
 	return
 
 Route116_EventScript_150B04:: @ 8150B04
@@ -136,9 +136,9 @@ Route116_EventScript_150B5D:: @ 8150B5D
 
 Route116_EventScript_150B6E:: @ 8150B6E
 	lockall
-	move 11, Route116_Movement_1A0843
-	move 255, Route116_Movement_1A083F
-	waitmove 0
+	applymovement 11, Route116_Movement_1A0843
+	applymovement 255, Route116_Movement_1A083F
+	waitmovement 0
 	msgbox Route116_Text_17032A, 4
 	setvar 0x406f, 2
 	releaseall
@@ -194,13 +194,13 @@ Route116_EventScript_150C03:: @ 8150C03
 	end
 
 Route116_EventScript_150C37:: @ 8150C37
-	move LAST_TALKED, Route116_Movement_150C4D
-	waitmove 0
+	applymovement LAST_TALKED, Route116_Movement_150C4D
+	waitmovement 0
 	return
 
 Route116_EventScript_150C42:: @ 8150C42
-	move LAST_TALKED, Route116_Movement_150C57
-	waitmove 0
+	applymovement LAST_TALKED, Route116_Movement_150C57
+	waitmovement 0
 	return
 
 Route116_Movement_150C4D:: @ 8150C4D

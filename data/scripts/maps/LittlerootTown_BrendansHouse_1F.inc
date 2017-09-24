@@ -62,9 +62,9 @@ LittlerootTown_BrendansHouse_1F_EventScript_1526FA:: @ 81526FA
 	lockall
 	msgbox LittlerootTown_BrendansHouse_1F_Text_172574, 4
 	closebutton
-	move 255, LittlerootTown_BrendansHouse_1F_Movement_152720
-	move 1, LittlerootTown_BrendansHouse_1F_Movement_152720
-	waitmove 0
+	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_152720
+	applymovement 1, LittlerootTown_BrendansHouse_1F_Movement_152720
+	waitmovement 0
 	warp LittlerootTown_BrendansHouse_2F, 255, 7, 1
 	waitstate
 	releaseall
@@ -91,13 +91,13 @@ LittlerootTown_BrendansHouse_1F_EventScript_152733:: @ 8152733
 LittlerootTown_BrendansHouse_1F_EventScript_152744:: @ 8152744
 	lockall
 	playse 21
-	move 4, LittlerootTown_BrendansHouse_1F_Movement_1A0833
-	waitmove 0
-	move 4, LittlerootTown_BrendansHouse_1F_Movement_1A0835
-	waitmove 0
-	move 255, LittlerootTown_BrendansHouse_1F_Movement_1A083F
-	move 4, LittlerootTown_BrendansHouse_1F_Movement_152782
-	waitmove 0
+	applymovement 4, LittlerootTown_BrendansHouse_1F_Movement_1A0833
+	waitmovement 0
+	applymovement 4, LittlerootTown_BrendansHouse_1F_Movement_1A0835
+	waitmovement 0
+	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_1A083F
+	applymovement 4, LittlerootTown_BrendansHouse_1F_Movement_152782
+	waitmovement 0
 	special GetRivalSonDaughterString
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1730C2, 4
 	setflag 87
@@ -118,7 +118,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_152789:: @ 8152789
 	lockall
 	setvar 0x8004, 1
 	setvar 0x8005, 0
-	move 0x8004, LittlerootTown_BrendansHouse_1F_Movement_1A083F
-	waitmove 0
+	applymovement 0x8004, LittlerootTown_BrendansHouse_1F_Movement_1A083F
+	waitmovement 0
 	goto LittlerootTown_BrendansHouse_1F_EventScript_1B69B7
 	end

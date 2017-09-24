@@ -26,8 +26,8 @@ S_UseCut:: @ 81B0E16
 	end
 
 DoTreeCutMovement: @ 81B0E21
-	move LAST_TALKED, TreeCutMovement @ tree cut animation
-	waitmove 0
+	applymovement LAST_TALKED, TreeCutMovement @ tree cut animation
+	waitmovement 0
 	disappear LAST_TALKED @ tree disappears
 	releaseall
 	end
@@ -87,8 +87,8 @@ S_UseRockSmash:: @ 81B0F01
 	end
 
 DoRockSmashMovement: @ 81B0F0C
-	move LAST_TALKED, RockSmashMovement
-	waitmove 0
+	applymovement LAST_TALKED, RockSmashMovement
+	waitmovement 0
 	disappear LAST_TALKED
 	specialvar RESULT, sub_810F5BC
 	compare_var_to_imm RESULT, 1

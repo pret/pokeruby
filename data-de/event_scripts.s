@@ -939,8 +939,8 @@ gUnknown_0819F80B:: @ 819F80B
 gUnknown_0819F818:: @ 819F818
 	lock
 	faceplayer
-	move LAST_TALKED, Movement_19F8F0
-	waitmove 0
+	applymovement LAST_TALKED, Movement_19F8F0
+	waitmovement 0
 	specialvar RESULT, ScrSpecial_HasTrainerBeenFought
 	compare_var_to_imm RESULT, 0
 	goto_if 5, EventScript_19F83F
@@ -976,8 +976,8 @@ EventScript_19F877:
 	endtrainerbattle
 
 gUnknown_0819F878:: @ 819F878
-	move LAST_TALKED, Movement_19F8F0
-	waitmove 0
+	applymovement LAST_TALKED, Movement_19F8F0
+	waitmovement 0
 	special PlayTrainerEncounterMusic
 	reptrainerbattle
 	endtrainerbattle
@@ -1028,8 +1028,8 @@ EventScript_19F8DE:
 	end
 
 EventScript_19F8E5:
-	move LAST_TALKED, Movement_19F8F0
-	waitmove 0
+	applymovement LAST_TALKED, Movement_19F8F0
+	waitmovement 0
 	return
 
 Movement_19F8F0::
@@ -1449,12 +1449,12 @@ OldaleTown_PokemonCenter_1F_EventScript_19FD7C:: @ 819FD7C
 	inccounter GAME_STAT_USED_POKECENTER
 	message gText_NurseJoy_OkayIllTakeYourPokemon
 	waittext
-	move 0x800b, OldaleTown_PokemonCenter_1F_Movement_1A083F
-	waitmove 0
+	applymovement 0x800b, OldaleTown_PokemonCenter_1F_Movement_1A083F
+	waitmovement 0
 	doanimation 25
 	checkanimation 25
-	move 0x800b, OldaleTown_PokemonCenter_1F_Movement_1A0845
-	waitmove 0
+	applymovement 0x800b, OldaleTown_PokemonCenter_1F_Movement_1A0845
+	waitmovement 0
 	special ScrSpecial_HealPlayerParty
 	checkflag 273
 	goto_if 0, OldaleTown_PokemonCenter_1F_EventScript_19FDCE
@@ -1464,8 +1464,8 @@ OldaleTown_PokemonCenter_1F_EventScript_19FD7C:: @ 819FD7C
 OldaleTown_PokemonCenter_1F_EventScript_19FDB0:: @ 819FDB0
 	message gText_NurseJoy_ThankYouForWaiting
 	waittext
-	move 0x800b, OldaleTown_PokemonCenter_1F_Movement_19FDF4
-	waitmove 0
+	applymovement 0x800b, OldaleTown_PokemonCenter_1F_Movement_19FDF4
+	waitmovement 0
 	message gText_NurseJoy_WeHopeToSeeYouAgain
 	waittext
 	return
@@ -2233,8 +2233,8 @@ BattleTower_Outside_EventScript_1A040E:: @ 81A040E
 LilycoveCity_Harbor_EventScript_1A040E:: @ 81A040E
 SlateportCity_Harbor_EventScript_1A040E:: @ 81A040E
 	delay 60
-	move 0x8004, SlateportCity_Harbor_Movement_1A041C
-	waitmove 0
+	applymovement 0x8004, SlateportCity_Harbor_Movement_1A041C
+	waitmovement 0
 	return
 
 SlateportCity_Harbor_Movement_1A041C:: @ 81A041C
@@ -2270,12 +2270,12 @@ RusturfTunnel_EventScript_1A0442:: @ 81A0442
 
 EventScript_1A0457: @ unreferenced?
 	delay 30
-	move 255, SlateportCity_OceanicMuseum_2F_Movement_1A0841
-	waitmove 0
+	applymovement 255, SlateportCity_OceanicMuseum_2F_Movement_1A0841
+	waitmovement 0
 	spritevisible 255, 0, 0
 	delay 30
-	move 255, Movement_1A047A
-	waitmove 0
+	applymovement 255, Movement_1A047A
+	waitmovement 0
 	delay 30
 	return
 
@@ -2446,10 +2446,10 @@ Route119_EventScript_1A05AE:: @ 81A05AE
 Route119_EventScript_1A05C3:: @ 81A05C3
 	msgbox Route119_Text_171BF6, 4
 	closebutton
-	move LAST_TALKED, Route119_Movement_1A0839
-	waitmove 0
-	move LAST_TALKED, Route119_Movement_1A0662
-	waitmove 0
+	applymovement LAST_TALKED, Route119_Movement_1A0839
+	waitmovement 0
+	applymovement LAST_TALKED, Route119_Movement_1A0662
+	waitmovement 0
 	waitse
 	pokecry SPECIES_KECLEON, 2
 	delay 40
@@ -2554,8 +2554,8 @@ EverGrandeCity_DrakesRoom_EventScript_1A0693:: @ 81A0693
 EverGrandeCity_GlaciasRoom_EventScript_1A0693:: @ 81A0693
 EverGrandeCity_PhoebesRoom_EventScript_1A0693:: @ 81A0693
 EverGrandeCity_SidneysRoom_EventScript_1A0693:: @ 81A0693
-	move 255, EverGrandeCity_SidneysRoom_Movement_1A0853
-	waitmove 0
+	applymovement 255, EverGrandeCity_SidneysRoom_Movement_1A0853
+	waitmovement 0
 	playse 8
 	setmaptile 6, 1, 836, 0
 	setmaptile 6, 2, 837, 0
@@ -2576,8 +2576,8 @@ EverGrandeCity_DrakesRoom_EventScript_1A0710:: @ 81A0710
 EverGrandeCity_GlaciasRoom_EventScript_1A0710:: @ 81A0710
 EverGrandeCity_PhoebesRoom_EventScript_1A0710:: @ 81A0710
 EverGrandeCity_SidneysRoom_EventScript_1A0710:: @ 81A0710
-	move 255, EverGrandeCity_SidneysRoom_Movement_1A0847
-	waitmove 0
+	applymovement 255, EverGrandeCity_SidneysRoom_Movement_1A0847
+	waitmovement 0
 	playse 52
 	setmaptile 5, 12, 518, 1
 	setmaptile 6, 12, 518, 1
@@ -3745,8 +3745,8 @@ EventScript_1A2DB8:
 	end
 
 SecretBase_RedCave1_EventScript_1A2DDE:: @ 81A2DDE
-	move 255, SecretBase_RedCave1_Movement_1A2E11
-	waitmove 0
+	applymovement 255, SecretBase_RedCave1_Movement_1A2E11
+	waitmovement 0
 	setvar 0x4097, 1
 	msgbox SecretBase_RedCave1_Text_198F89, 5
 	compare_var_to_imm RESULT, 1
@@ -4903,8 +4903,8 @@ SkyPillar_4F_MapScript1_1C6BBF:: @ 81C6BBF
 S_FallDownHole:: @ 81C6BC5
 	lockall
 	delay 20
-	move 255, GraniteCave_B1F_Movement_1C6BF7
-	waitmove 0
+	applymovement 255, GraniteCave_B1F_Movement_1C6BF7
+	waitmovement 0
 	playse 43
 	delay 60
 	warphole UNDEFINED
@@ -4914,8 +4914,8 @@ S_FallDownHole:: @ 81C6BC5
 gUnknown_081C6BDE:: @ 81C6BDE
 	lockall
 	delay 20
-	move 255, GraniteCave_B1F_Movement_1C6BF7
-	waitmove 0
+	applymovement 255, GraniteCave_B1F_Movement_1C6BF7
+	waitmovement 0
 	playse 43
 	delay 60
 	special sp13F_fall_to_last_warp

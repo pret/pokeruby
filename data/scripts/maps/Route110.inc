@@ -33,8 +33,8 @@ Route110_EventScript_14F946:: @ 814F946
 	lock
 	faceplayer
 	msgbox Route110_Text_16E6C0, 4
-	move LAST_TALKED, Route110_Movement_1A083D
-	waitmove 0
+	applymovement LAST_TALKED, Route110_Movement_1A083D
+	waitmovement 0
 	release
 	end
 
@@ -42,8 +42,8 @@ Route110_EventScript_14F95C:: @ 814F95C
 	lock
 	faceplayer
 	msgbox Route110_Text_16E6F2, 4
-	move LAST_TALKED, Route110_Movement_1A083D
-	waitmove 0
+	applymovement LAST_TALKED, Route110_Movement_1A083D
+	waitmovement 0
 	release
 	end
 
@@ -51,8 +51,8 @@ Route110_EventScript_14F972:: @ 814F972
 	lock
 	faceplayer
 	msgbox Route110_Text_16E729, 4
-	move LAST_TALKED, Route110_Movement_1A083D
-	waitmove 0
+	applymovement LAST_TALKED, Route110_Movement_1A083D
+	waitmovement 0
 	release
 	end
 
@@ -60,8 +60,8 @@ Route110_EventScript_14F988:: @ 814F988
 	lock
 	faceplayer
 	msgbox Route110_Text_16E76A, 4
-	move LAST_TALKED, Route110_Movement_1A083D
-	waitmove 0
+	applymovement LAST_TALKED, Route110_Movement_1A083D
+	waitmovement 0
 	release
 	end
 
@@ -254,8 +254,8 @@ Route110_EventScript_14FC10:: @ 814FC10
 
 Route110_EventScript_14FC27:: @ 814FC27
 	lockall
-	move 21, Route110_Movement_1A0843
-	waitmove 0
+	applymovement 21, Route110_Movement_1A0843
+	waitmovement 0
 	call Route110_EventScript_14FC39
 	releaseall
 	end
@@ -330,12 +330,12 @@ Route110_EventScript_14FD34:: @ 814FD34
 	call_if 1, Route110_EventScript_14FDA7
 	compare_var_to_imm RESULT, 1
 	call_if 1, Route110_EventScript_14FDAC
-	move 28, Route110_Movement_1A0845
-	waitmove 0
-	move 28, Route110_Movement_1A0833
-	waitmove 0
-	move 28, Route110_Movement_1A0835
-	waitmove 0
+	applymovement 28, Route110_Movement_1A0845
+	waitmovement 0
+	applymovement 28, Route110_Movement_1A0833
+	waitmovement 0
+	applymovement 28, Route110_Movement_1A0835
+	waitmovement 0
 	delay 30
 	compare_var_to_imm 0x8008, 1
 	call_if 1, Route110_EventScript_14FF14
@@ -450,33 +450,33 @@ Route110_EventScript_14FEB2:: @ 814FEB2
 	end
 
 Route110_EventScript_14FF14:: @ 814FF14
-	move 28, Route110_Movement_14FF6E
-	waitmove 0
+	applymovement 28, Route110_Movement_14FF6E
+	waitmovement 0
 	return
 
 Route110_EventScript_14FF1F:: @ 814FF1F
-	move 28, Route110_Movement_14FF72
-	waitmove 0
+	applymovement 28, Route110_Movement_14FF72
+	waitmovement 0
 	return
 
 Route110_EventScript_14FF2A:: @ 814FF2A
-	move 28, Route110_Movement_14FF74
-	waitmove 0
+	applymovement 28, Route110_Movement_14FF74
+	waitmovement 0
 	return
 
 Route110_EventScript_14FF35:: @ 814FF35
-	move 29, Route110_Movement_14FF78
-	waitmove 0
+	applymovement 29, Route110_Movement_14FF78
+	waitmovement 0
 	return
 
 Route110_EventScript_14FF40:: @ 814FF40
-	move 29, Route110_Movement_14FF80
-	waitmove 0
+	applymovement 29, Route110_Movement_14FF80
+	waitmovement 0
 	return
 
 Route110_EventScript_14FF4B:: @ 814FF4B
-	move 29, Route110_Movement_14FF89
-	waitmove 0
+	applymovement 29, Route110_Movement_14FF89
+	waitmovement 0
 	return
 
 Route110_EventScript_14FF56:: @ 814FF56

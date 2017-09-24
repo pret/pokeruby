@@ -88,12 +88,12 @@ VerdanturfTown_PokemonCenter_2F_MapScript2_1A3D88:: @ 81A3D88
 OldaleTown_PokemonCenter_2F_EventScript_1A3DB2:: @ 81A3DB2
 	special CloseLink
 	setvar 0x4087, 0
-	move 255, OldaleTown_PokemonCenter_2F_Movement_1A4358
-	waitmove 0
+	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_1A4358
+	waitmovement 0
 	compare_var_to_imm 0x8007, 0
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A3DD9
-	move 0x8007, OldaleTown_PokemonCenter_2F_Movement_1A4354
-	waitmove 0
+	applymovement 0x8007, OldaleTown_PokemonCenter_2F_Movement_1A4354
+	waitmovement 0
 
 OldaleTown_PokemonCenter_2F_EventScript_1A3DD9:: @ 81A3DD9
 	return
@@ -103,17 +103,17 @@ OldaleTown_PokemonCenter_2F_EventScript_1A3DDA:: @ 81A3DDA
 	setvar 0x4087, 0
 	compare_var_to_imm 0x8007, 0
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A3E0C
-	move 0x8007, OldaleTown_PokemonCenter_2F_Movement_1A4356
-	waitmove 0
-	move 255, OldaleTown_PokemonCenter_2F_Movement_1A4358
-	waitmove 0
-	move 0x8007, OldaleTown_PokemonCenter_2F_Movement_1A4354
-	waitmove 0
+	applymovement 0x8007, OldaleTown_PokemonCenter_2F_Movement_1A4356
+	waitmovement 0
+	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_1A4358
+	waitmovement 0
+	applymovement 0x8007, OldaleTown_PokemonCenter_2F_Movement_1A4354
+	waitmovement 0
 	return
 
 OldaleTown_PokemonCenter_2F_EventScript_1A3E0C:: @ 81A3E0C
-	move 255, OldaleTown_PokemonCenter_2F_Movement_1A4358
-	waitmove 0
+	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_1A4358
+	waitmovement 0
 	return
 
 OldaleTown_PokemonCenter_2F_EventScript_1A3E17:: @ 81A3E17
@@ -130,19 +130,19 @@ OldaleTown_PokemonCenter_2F_EventScript_1A3E30:: @ 81A3E30
 	setvar 0x4087, 0
 	compare_var_to_imm 0x8007, 0
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A3E0C
-	move 255, OldaleTown_PokemonCenter_2F_Movement_1A4361
-	waitmove 0
-	move 0x8007, OldaleTown_PokemonCenter_2F_Movement_1A4356
-	waitmove 0
+	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_1A4361
+	waitmovement 0
+	applymovement 0x8007, OldaleTown_PokemonCenter_2F_Movement_1A4356
+	waitmovement 0
 	message OldaleTown_PokemonCenter_2F_Text_1A4E50
 	waittext
 	playse 21
 	message OldaleTown_PokemonCenter_2F_Text_1A4E79
 	waittext
-	move 255, OldaleTown_PokemonCenter_2F_Movement_1A4358
-	waitmove 0
-	move 0x8007, OldaleTown_PokemonCenter_2F_Movement_1A4354
-	waitmove 0
+	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_1A4358
+	waitmovement 0
+	applymovement 0x8007, OldaleTown_PokemonCenter_2F_Movement_1A4354
+	waitmovement 0
 	return
 
 OldaleTown_PokemonCenter_2F_EventScript_1A3E7B:: @ 81A3E7B
@@ -224,15 +224,15 @@ OldaleTown_PokemonCenter_2F_EventScript_1A3F5E:: @ 81A3F5E
 	setmaptile 5, 3, 514, 0
 	special DrawWholeMapView
 	delay 60
-	move LAST_TALKED, OldaleTown_PokemonCenter_2F_Movement_1A4356
-	waitmove 0
+	applymovement LAST_TALKED, OldaleTown_PokemonCenter_2F_Movement_1A4356
+	waitmovement 0
 	closebutton
-	move 255, OldaleTown_PokemonCenter_2F_Movement_1A435B
-	waitmove 0
+	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_1A435B
+	waitmovement 0
 	setdooropened 5, 1
 	doorchange
-	move 255, OldaleTown_PokemonCenter_2F_Movement_1A435F
-	waitmove 0
+	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_1A435F
+	waitmovement 0
 	spriteinvisible 255, 0, 0
 	setdoorclosed 5, 1
 	doorchange
@@ -389,15 +389,15 @@ OldaleTown_PokemonCenter_2F_EventScript_1A4166:: @ 81A4166
 	setmaptile 8, 3, 514, 0
 	special DrawWholeMapView
 	delay 60
-	move LAST_TALKED, OldaleTown_PokemonCenter_2F_Movement_1A4356
-	waitmove 0
+	applymovement LAST_TALKED, OldaleTown_PokemonCenter_2F_Movement_1A4356
+	waitmovement 0
 	closebutton
-	move 255, OldaleTown_PokemonCenter_2F_Movement_1A435B
-	waitmove 0
+	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_1A435B
+	waitmovement 0
 	setdooropened 8, 1
 	doorchange
-	move 255, OldaleTown_PokemonCenter_2F_Movement_1A435F
-	waitmove 0
+	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_1A435F
+	waitmovement 0
 	spriteinvisible 255, 0, 0
 	setdoorclosed 8, 1
 	doorchange
@@ -487,15 +487,15 @@ OldaleTown_PokemonCenter_2F_EventScript_1A4294:: @ 81A4294
 	setmaptile 11, 3, 514, 0
 	special DrawWholeMapView
 	delay 60
-	move LAST_TALKED, OldaleTown_PokemonCenter_2F_Movement_1A4356
-	waitmove 0
+	applymovement LAST_TALKED, OldaleTown_PokemonCenter_2F_Movement_1A4356
+	waitmovement 0
 	closebutton
-	move 255, OldaleTown_PokemonCenter_2F_Movement_1A435B
-	waitmove 0
+	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_1A435B
+	waitmovement 0
 	setdooropened 11, 1
 	doorchange
-	move 255, OldaleTown_PokemonCenter_2F_Movement_1A435F
-	waitmove 0
+	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_1A435F
+	waitmovement 0
 	spriteinvisible 255, 0, 0
 	setdoorclosed 11, 1
 	doorchange

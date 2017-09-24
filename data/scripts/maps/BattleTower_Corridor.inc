@@ -23,15 +23,15 @@ BattleTower_Corridor_EventScript_16088B:: @ 816088B
 	setvar 0x4000, 1
 	compare_var_to_imm 0x8006, 1
 	goto_if_eq BattleTower_Corridor_EventScript_1608B1
-	move 1, BattleTower_Corridor_Movement_1608D5
-	move 255, BattleTower_Corridor_Movement_1608D4
-	waitmove 0
+	applymovement 1, BattleTower_Corridor_Movement_1608D5
+	applymovement 255, BattleTower_Corridor_Movement_1608D4
+	waitmovement 0
 	goto BattleTower_Corridor_EventScript_1608C2
 
 BattleTower_Corridor_EventScript_1608B1:: @ 81608B1
-	move 1, BattleTower_Corridor_Movement_1608D2
-	move 255, BattleTower_Corridor_Movement_1608D1
-	waitmove 0
+	applymovement 1, BattleTower_Corridor_Movement_1608D2
+	applymovement 255, BattleTower_Corridor_Movement_1608D1
+	waitmovement 0
 
 BattleTower_Corridor_EventScript_1608C2:: @ 81608C2
 	setvar 0x4000, 0

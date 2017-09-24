@@ -17,22 +17,22 @@ FortreeCity_House4_EventScript_158188:: @ 8158188
 	closebutton
 	setflag 222
 	clearflag 934
-	move 3, FortreeCity_House4_Movement_158218
-	waitmove 0
+	applymovement 3, FortreeCity_House4_Movement_158218
+	waitmovement 0
 	disappear 3
 	releaseall
 	end
 
 FortreeCity_House4_EventScript_1581C2:: @ 81581C2
-	move LAST_TALKED, FortreeCity_House4_Movement_1A0839
-	waitmove 0
+	applymovement LAST_TALKED, FortreeCity_House4_Movement_1A0839
+	waitmovement 0
 	msgbox FortreeCity_House4_Text_18684E, 4
 	releaseall
 	end
 
 FortreeCity_House4_EventScript_1581D6:: @ 81581D6
-	move LAST_TALKED, FortreeCity_House4_Movement_1A0839
-	waitmove 0
+	applymovement LAST_TALKED, FortreeCity_House4_Movement_1A0839
+	waitmovement 0
 	msgbox FortreeCity_House4_Text_186881, 4
 	giveitem ITEM_MENTAL_HERB
 	compare_var_to_imm RESULT, 0
@@ -42,8 +42,8 @@ FortreeCity_House4_EventScript_1581D6:: @ 81581D6
 	end
 
 FortreeCity_House4_EventScript_158204:: @ 8158204
-	move LAST_TALKED, FortreeCity_House4_Movement_1A0839
-	waitmove 0
+	applymovement LAST_TALKED, FortreeCity_House4_Movement_1A0839
+	waitmovement 0
 	msgbox FortreeCity_House4_Text_186924, 4
 	releaseall
 	end

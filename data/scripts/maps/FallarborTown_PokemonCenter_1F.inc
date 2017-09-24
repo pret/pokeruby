@@ -34,14 +34,14 @@ FallarborTown_PokemonCenter_1F_EventScript_153B22:: @ 8153B22
 	end
 
 FallarborTown_PokemonCenter_1F_EventScript_153B49:: @ 8153B49
-	move 4, FallarborTown_PokemonCenter_1F_Movement_153B74
-	waitmove 0
+	applymovement 4, FallarborTown_PokemonCenter_1F_Movement_153B74
+	waitmovement 0
 	goto FallarborTown_PokemonCenter_1F_EventScript_153B69
 	end
 
 FallarborTown_PokemonCenter_1F_EventScript_153B59:: @ 8153B59
-	move 4, FallarborTown_PokemonCenter_1F_Movement_153B81
-	waitmove 0
+	applymovement 4, FallarborTown_PokemonCenter_1F_Movement_153B81
+	waitmovement 0
 	goto FallarborTown_PokemonCenter_1F_EventScript_153B69
 	end
 

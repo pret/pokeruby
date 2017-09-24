@@ -54,7 +54,7 @@ Route111_WinstrateFamilysHouse_EventScript_15BFB6:: @ 815BFB6
 
 Route111_WinstrateFamilysHouse_EventScript_15BFC4:: @ 815BFC4
 	closebutton
-	move 0x8008, Route111_WinstrateFamilysHouse_Movement_1A083D
-	waitmove 0
+	applymovement 0x8008, Route111_WinstrateFamilysHouse_Movement_1A083D
+	waitmovement 0
 	release
 	end

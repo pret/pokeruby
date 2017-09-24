@@ -9,21 +9,21 @@ LilycoveCity_PokemonTrainerFanClub_MapScript2_159395:: @ 8159395
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_15939F:: @ 815939F
 	lockall
-	move 1, LilycoveCity_PokemonTrainerFanClub_Movement_1A0845
-	waitmove 0
+	applymovement 1, LilycoveCity_PokemonTrainerFanClub_Movement_1A0845
+	waitmovement 0
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_18A1D6, 4
-	move 4, LilycoveCity_PokemonTrainerFanClub_Movement_159402
-	move 2, LilycoveCity_PokemonTrainerFanClub_Movement_1593FA
-	waitmove 0
-	move 255, LilycoveCity_PokemonTrainerFanClub_Movement_1A0843
-	waitmove 0
+	applymovement 4, LilycoveCity_PokemonTrainerFanClub_Movement_159402
+	applymovement 2, LilycoveCity_PokemonTrainerFanClub_Movement_1593FA
+	waitmovement 0
+	applymovement 255, LilycoveCity_PokemonTrainerFanClub_Movement_1A0843
+	waitmovement 0
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_18A1E8, 4
-	move 4, LilycoveCity_PokemonTrainerFanClub_Movement_159409
-	waitmove 0
-	move 255, LilycoveCity_PokemonTrainerFanClub_Movement_1A083F
-	waitmove 0
-	move 4, LilycoveCity_PokemonTrainerFanClub_Movement_15940C
-	waitmove 0
+	applymovement 4, LilycoveCity_PokemonTrainerFanClub_Movement_159409
+	waitmovement 0
+	applymovement 255, LilycoveCity_PokemonTrainerFanClub_Movement_1A083F
+	waitmovement 0
+	applymovement 4, LilycoveCity_PokemonTrainerFanClub_Movement_15940C
+	waitmovement 0
 	setvar 0x4095, 2
 	releaseall
 	end

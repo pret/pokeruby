@@ -81,10 +81,10 @@ RustboroCity_DevonCorp_2F_EventScript_157564:: @ 8157564
 RustboroCity_DevonCorp_2F_EventScript_1575A6:: @ 81575A6
 	closebutton
 	playse 21
-	move 5, RustboroCity_DevonCorp_2F_Movement_1A0833
-	waitmove 0
-	move 5, RustboroCity_DevonCorp_2F_Movement_1A0835
-	waitmove 0
+	applymovement 5, RustboroCity_DevonCorp_2F_Movement_1A0833
+	waitmovement 0
+	applymovement 5, RustboroCity_DevonCorp_2F_Movement_1A0835
+	waitmovement 0
 	msgbox RustboroCity_DevonCorp_2F_Text_182F35, 5
 	compare_var_to_imm RESULT, 0
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_157636
@@ -99,10 +99,10 @@ RustboroCity_DevonCorp_2F_EventScript_1575A6:: @ 81575A6
 RustboroCity_DevonCorp_2F_EventScript_1575EE:: @ 81575EE
 	closebutton
 	playse 21
-	move 5, RustboroCity_DevonCorp_2F_Movement_1A0833
-	waitmove 0
-	move 5, RustboroCity_DevonCorp_2F_Movement_1A0835
-	waitmove 0
+	applymovement 5, RustboroCity_DevonCorp_2F_Movement_1A0833
+	waitmovement 0
+	applymovement 5, RustboroCity_DevonCorp_2F_Movement_1A0835
+	waitmovement 0
 	msgbox RustboroCity_DevonCorp_2F_Text_182F35, 5
 	compare_var_to_imm RESULT, 0
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_157636

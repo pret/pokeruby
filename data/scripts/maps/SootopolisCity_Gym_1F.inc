@@ -73,8 +73,8 @@ SootopolisCity_Gym_1F_EventScript_15AFD0:: @ 815AFD0
 SootopolisCity_Gym_1F_EventScript_15AFE4:: @ 815AFE4
 	lockall
 	delay 20
-	move 255, SootopolisCity_Gym_1F_Movement_15AFFD
-	waitmove 0
+	applymovement 255, SootopolisCity_Gym_1F_Movement_15AFFD
+	waitmovement 0
 	playse 43
 	delay 60
 	warphole SootopolisCity_Gym_B1F

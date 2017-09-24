@@ -51,35 +51,35 @@ Route118_EventScript_150FA5:: @ 8150FA5
 Route118_EventScript_150FAE:: @ 8150FAE
 	lockall
 	setvar 0x8008, 0
-	move 255, Route118_Movement_1A0841
-	waitmove 0
-	move 19, Route118_Movement_151069
-	waitmove 0
+	applymovement 255, Route118_Movement_1A0841
+	waitmovement 0
+	applymovement 19, Route118_Movement_151069
+	waitmovement 0
 	goto Route118_EventScript_151004
 	end
 
 Route118_EventScript_150FCE:: @ 8150FCE
 	lockall
 	setvar 0x8008, 1
-	move 255, Route118_Movement_1A0841
-	waitmove 0
+	applymovement 255, Route118_Movement_1A0841
+	waitmovement 0
 	goto Route118_EventScript_151004
 	end
 
 Route118_EventScript_150FE4:: @ 8150FE4
 	lockall
 	setvar 0x8008, 2
-	move 255, Route118_Movement_1A0841
-	waitmove 0
-	move 19, Route118_Movement_15106B
-	waitmove 0
+	applymovement 255, Route118_Movement_1A0841
+	waitmovement 0
+	applymovement 19, Route118_Movement_15106B
+	waitmovement 0
 	goto Route118_EventScript_151004
 	end
 
 Route118_EventScript_151004:: @ 8151004
 	playse 10
-	move 19, Route118_Movement_15106D
-	waitmove 0
+	applymovement 19, Route118_Movement_15106D
+	waitmovement 0
 	delay 30
 	msgbox Route118_Text_170D66, 4
 	closebutton
@@ -95,18 +95,18 @@ Route118_EventScript_151004:: @ 8151004
 	end
 
 Route118_EventScript_151048:: @ 8151048
-	move 19, Route118_Movement_151071
-	waitmove 0
+	applymovement 19, Route118_Movement_151071
+	waitmovement 0
 	return
 
 Route118_EventScript_151053:: @ 8151053
-	move 19, Route118_Movement_15107C
-	waitmove 0
+	applymovement 19, Route118_Movement_15107C
+	waitmovement 0
 	return
 
 Route118_EventScript_15105E:: @ 815105E
-	move 19, Route118_Movement_151086
-	waitmove 0
+	applymovement 19, Route118_Movement_151086
+	waitmovement 0
 	return
 
 Route118_Movement_151069:: @ 8151069

@@ -61,8 +61,8 @@ Route119_EventScript_1511DB:: @ 81511DB
 	call_if 1, Route119_EventScript_1513A6
 	compare_var_to_imm 0x4001, 2
 	call_if 1, Route119_EventScript_1513B1
-	move 255, Route119_Movement_1A0845
-	waitmove 0
+	applymovement 255, Route119_Movement_1A0845
+	waitmovement 0
 	delay 30
 	compare_var_to_imm 0x4001, 1
 	call_if 1, Route119_EventScript_1513D2
@@ -173,23 +173,23 @@ Route119_EventScript_151362:: @ 8151362
 	end
 
 Route119_EventScript_1513A6:: @ 81513A6
-	move 25, Route119_Movement_1513F0
-	waitmove 0
+	applymovement 25, Route119_Movement_1513F0
+	waitmovement 0
 	return
 
 Route119_EventScript_1513B1:: @ 81513B1
-	move 25, Route119_Movement_1513FA
-	waitmove 0
+	applymovement 25, Route119_Movement_1513FA
+	waitmovement 0
 	return
 
 Route119_EventScript_1513BC:: @ 81513BC
-	move 25, Route119_Movement_151405
-	waitmove 0
+	applymovement 25, Route119_Movement_151405
+	waitmovement 0
 	return
 
 Route119_EventScript_1513C7:: @ 81513C7
-	move 25, Route119_Movement_15140F
-	waitmove 0
+	applymovement 25, Route119_Movement_15140F
+	waitmovement 0
 	return
 
 Route119_EventScript_1513D2:: @ 81513D2
@@ -355,8 +355,8 @@ Route119_EventScript_1515C5:: @ 81515C5
 	faceplayer
 	msgbox Route119_Text_171520, 4
 	closebutton
-	move LAST_TALKED, Route119_Movement_1A083D
-	waitmove 0
+	applymovement LAST_TALKED, Route119_Movement_1A083D
+	waitmovement 0
 	release
 	end
 
@@ -365,8 +365,8 @@ Route119_EventScript_1515DC:: @ 81515DC
 	faceplayer
 	msgbox Route119_Text_17157C, 4
 	closebutton
-	move LAST_TALKED, Route119_Movement_1A083D
-	waitmove 0
+	applymovement LAST_TALKED, Route119_Movement_1A083D
+	waitmovement 0
 	release
 	end
 

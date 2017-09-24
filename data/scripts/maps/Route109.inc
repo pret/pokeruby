@@ -5,8 +5,8 @@ Route109_EventScript_14F4D3:: @ 814F4D3
 	call Route109_EventScript_1A010C
 	spritelevelup 2, 0, 24, 0
 	spritelevelup 255, 0, 24, 0
-	move 2, Route109_Movement_14F67B
-	waitmove 0
+	applymovement 2, Route109_Movement_14F67B
+	waitmovement 0
 	disappear 2
 	switch FACING
 	case 1, Route109_EventScript_14F518
@@ -15,40 +15,40 @@ Route109_EventScript_14F4D3:: @ 814F4D3
 	end
 
 Route109_EventScript_14F518:: @ 814F518
-	move 255, Route109_Movement_14F66D
-	waitmove 0
+	applymovement 255, Route109_Movement_14F66D
+	waitmovement 0
 	goto Route109_EventScript_14F548
 	end
 
 Route109_EventScript_14F528:: @ 814F528
-	move 255, Route109_Movement_14F675
-	waitmove 0
+	applymovement 255, Route109_Movement_14F675
+	waitmovement 0
 	goto Route109_EventScript_14F548
 	end
 
 Route109_EventScript_14F538:: @ 814F538
-	move 255, Route109_Movement_14F678
-	waitmove 0
+	applymovement 255, Route109_Movement_14F678
+	waitmovement 0
 	goto Route109_EventScript_14F548
 	end
 
 Route109_EventScript_14F548:: @ 814F548
 	spriteinvisible 255, 0, 24
 	call Route109_EventScript_1A02E7
-	move 1, Route109_Movement_14F5BF
-	move 255, Route109_Movement_14F5BF
-	waitmove 0
+	applymovement 1, Route109_Movement_14F5BF
+	applymovement 255, Route109_Movement_14F5BF
+	waitmovement 0
 	call Route109_EventScript_1A02EF
 	spritevisible 255, 0, 11
-	move 255, Route109_Movement_14F670
-	waitmove 0
+	applymovement 255, Route109_Movement_14F670
+	waitmovement 0
 	reappear 4
 	clearflag 743
 	movespriteperm 2, 12, 8
 	reappear 2
 	spritelevelup 2, 0, 11, 0
-	move 2, Route109_Movement_14F67D
-	waitmove 0
+	applymovement 2, Route109_Movement_14F67D
+	waitmovement 0
 	clearflag 740
 	setflag 744
 	spriteinvisible 1, 0, 24
@@ -319,8 +319,8 @@ Route109_EventScript_14F70E:: @ 814F70E
 	faceplayer
 	msgbox Route109_Text_16E405, 4
 	closebutton
-	move LAST_TALKED, Route109_Movement_1A083D
-	waitmove 0
+	applymovement LAST_TALKED, Route109_Movement_1A083D
+	waitmovement 0
 	release
 	end
 
@@ -335,16 +335,16 @@ Route109_EventScript_14F725:: @ 814F725
 	compare_var_to_imm RESULT, 0
 	goto_if_eq Route109_EventScript_1A029B
 	closebutton
-	move LAST_TALKED, Route109_Movement_1A083D
-	waitmove 0
+	applymovement LAST_TALKED, Route109_Movement_1A083D
+	waitmovement 0
 	setflag 280
 	release
 	end
 
 Route109_EventScript_14F762:: @ 814F762
 	msgbox Route109_Text_16E446, 4
-	move LAST_TALKED, Route109_Movement_1A083D
-	waitmove 0
+	applymovement LAST_TALKED, Route109_Movement_1A083D
+	waitmovement 0
 	release
 	end
 

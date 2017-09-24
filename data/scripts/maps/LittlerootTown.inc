@@ -100,28 +100,28 @@ LittlerootTown_EventScript_14D60D:: @ 814D60D
 LittlerootTown_EventScript_14D62B:: @ 814D62B
 	delay 15
 	playse 10
-	move 255, LittlerootTown_Movement_14D6C0
-	waitmove 0
+	applymovement 255, LittlerootTown_Movement_14D6C0
+	waitmovement 0
 	setdooropened 0x8004, 0x8005
 	doorchange
 	reappear 4
-	move 4, LittlerootTown_Movement_14D6AC
-	waitmove 0
+	applymovement 4, LittlerootTown_Movement_14D6AC
+	waitmovement 0
 	setdoorclosed 0x8004, 0x8005
 	doorchange
 	delay 10
-	move 4, LittlerootTown_Movement_14D6AE
-	waitmove 0
+	applymovement 4, LittlerootTown_Movement_14D6AE
+	waitmovement 0
 	msgbox LittlerootTown_Text_16A7C9, 4
 	closebutton
-	move 4, LittlerootTown_Movement_14D6B1
-	move 255, LittlerootTown_Movement_14D6B8
-	waitmove 0
+	applymovement 4, LittlerootTown_Movement_14D6B1
+	applymovement 255, LittlerootTown_Movement_14D6B8
+	waitmovement 0
 	setdooropened 0x8004, 0x8005
 	doorchange
-	move 4, LittlerootTown_Movement_14D6B5
-	move 255, LittlerootTown_Movement_14D6BD
-	waitmove 0
+	applymovement 4, LittlerootTown_Movement_14D6B5
+	applymovement 255, LittlerootTown_Movement_14D6BD
+	waitmovement 0
 	setflag 752
 	setvar 0x4092, 3
 	spriteinvisible 255, 0, 0
@@ -200,8 +200,8 @@ LittlerootTown_EventScript_14D6DF:: @ 814D6DF
 LittlerootTown_EventScript_14D708:: @ 814D708
 	msgbox LittlerootTown_Text_16AD82, 4
 	closebutton
-	move 1, LittlerootTown_Movement_1A083D
-	waitmove 0
+	applymovement 1, LittlerootTown_Movement_1A083D
+	waitmovement 0
 	setvar 0x4050, 2
 	release
 	end
@@ -219,20 +219,20 @@ LittlerootTown_EventScript_14D72F:: @ 814D72F
 
 LittlerootTown_EventScript_14D739:: @ 814D739
 	lockall
-	move 1, LittlerootTown_Movement_14D779
-	waitmove 0
+	applymovement 1, LittlerootTown_Movement_14D779
+	waitmovement 0
 	call LittlerootTown_EventScript_14D755
-	move 1, LittlerootTown_Movement_14D789
-	waitmove 0
+	applymovement 1, LittlerootTown_Movement_14D789
+	waitmovement 0
 	releaseall
 	end
 
 LittlerootTown_EventScript_14D755:: @ 814D755
 	msgbox LittlerootTown_Text_16ACEB, 4
 	closebutton
-	move 1, LittlerootTown_Movement_14D787
-	move 255, LittlerootTown_Movement_14D793
-	waitmove 0
+	applymovement 1, LittlerootTown_Movement_14D787
+	applymovement 255, LittlerootTown_Movement_14D793
+	waitmovement 0
 	msgbox LittlerootTown_Text_16AD3C, 4
 	closebutton
 	return
@@ -277,11 +277,11 @@ LittlerootTown_Movement_14D793:: @ 814D793
 
 LittlerootTown_EventScript_14D797:: @ 814D797
 	lockall
-	move 1, LittlerootTown_Movement_14D7B3
-	waitmove 0
+	applymovement 1, LittlerootTown_Movement_14D7B3
+	waitmovement 0
 	call LittlerootTown_EventScript_14D755
-	move 1, LittlerootTown_Movement_14D7C0
-	waitmove 0
+	applymovement 1, LittlerootTown_Movement_14D7C0
+	waitmovement 0
 	releaseall
 	end
 
@@ -311,14 +311,14 @@ LittlerootTown_Movement_14D7C0:: @ 814D7C0
 
 LittlerootTown_EventScript_14D7C7:: @ 814D7C7
 	lockall
-	move 1, LittlerootTown_Movement_1A0843
-	waitmove 0
-	move 255, LittlerootTown_Movement_1A083F
-	waitmove 0
+	applymovement 1, LittlerootTown_Movement_1A0843
+	waitmovement 0
+	applymovement 255, LittlerootTown_Movement_1A083F
+	waitmovement 0
 	msgbox LittlerootTown_Text_16AD82, 4
 	closebutton
-	move 1, LittlerootTown_Movement_1A083D
-	waitmove 0
+	applymovement 1, LittlerootTown_Movement_1A083D
+	waitmovement 0
 	setvar 0x4050, 2
 	releaseall
 	end
@@ -443,13 +443,13 @@ LittlerootTown_EventScript_14D931:: @ 814D931
 	return
 
 LittlerootTown_EventScript_14D93C:: @ 814D93C
-	move 4, LittlerootTown_Movement_1A0843
-	waitmove 0
+	applymovement 4, LittlerootTown_Movement_1A0843
+	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14D947:: @ 814D947
-	move 4, LittlerootTown_Movement_1A083F
-	waitmove 0
+	applymovement 4, LittlerootTown_Movement_1A083F
+	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14D952:: @ 814D952
@@ -483,73 +483,73 @@ LittlerootTown_EventScript_14D995:: @ 814D995
 	return
 
 LittlerootTown_EventScript_14D9D8:: @ 814D9D8
-	move 255, LittlerootTown_Movement_1A0845
-	waitmove 0
-	move 4, LittlerootTown_Movement_14DC76
-	waitmove 0
+	applymovement 255, LittlerootTown_Movement_1A0845
+	waitmovement 0
+	applymovement 4, LittlerootTown_Movement_14DC76
+	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14D9ED:: @ 814D9ED
-	move 255, LittlerootTown_Movement_1A0845
-	waitmove 0
-	move 4, LittlerootTown_Movement_14DC7D
-	waitmove 0
+	applymovement 255, LittlerootTown_Movement_1A0845
+	waitmovement 0
+	applymovement 4, LittlerootTown_Movement_14DC7D
+	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14DA02:: @ 814DA02
-	move 255, LittlerootTown_Movement_1A083F
-	waitmove 0
-	move 4, LittlerootTown_Movement_14DC84
-	waitmove 0
+	applymovement 255, LittlerootTown_Movement_1A083F
+	waitmovement 0
+	applymovement 4, LittlerootTown_Movement_14DC84
+	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14DA17:: @ 814DA17
-	move 255, LittlerootTown_Movement_1A083F
-	waitmove 0
-	move 4, LittlerootTown_Movement_14DC89
-	waitmove 0
+	applymovement 255, LittlerootTown_Movement_1A083F
+	waitmovement 0
+	applymovement 4, LittlerootTown_Movement_14DC89
+	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14DA2C:: @ 814DA2C
-	move 255, LittlerootTown_Movement_1A083F
-	waitmove 0
-	move 4, LittlerootTown_Movement_14DC8F
-	waitmove 0
+	applymovement 255, LittlerootTown_Movement_1A083F
+	waitmovement 0
+	applymovement 4, LittlerootTown_Movement_14DC8F
+	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14DA41:: @ 814DA41
-	move 255, LittlerootTown_Movement_1A083F
-	waitmove 0
-	move 4, LittlerootTown_Movement_14DC92
-	waitmove 0
+	applymovement 255, LittlerootTown_Movement_1A083F
+	waitmovement 0
+	applymovement 4, LittlerootTown_Movement_14DC92
+	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14DA56:: @ 814DA56
-	move 255, LittlerootTown_Movement_1A0843
-	waitmove 0
-	move 4, LittlerootTown_Movement_14DC96
-	waitmove 0
+	applymovement 255, LittlerootTown_Movement_1A0843
+	waitmovement 0
+	applymovement 4, LittlerootTown_Movement_14DC96
+	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14DA6B:: @ 814DA6B
-	move 255, LittlerootTown_Movement_1A0843
-	waitmove 0
-	move 4, LittlerootTown_Movement_14DC9A
-	waitmove 0
+	applymovement 255, LittlerootTown_Movement_1A0843
+	waitmovement 0
+	applymovement 4, LittlerootTown_Movement_14DC9A
+	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14DA80:: @ 814DA80
-	move 255, LittlerootTown_Movement_1A0843
-	waitmove 0
-	move 4, LittlerootTown_Movement_14DC9D
-	waitmove 0
+	applymovement 255, LittlerootTown_Movement_1A0843
+	waitmovement 0
+	applymovement 4, LittlerootTown_Movement_14DC9D
+	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14DA95:: @ 814DA95
-	move 255, LittlerootTown_Movement_1A0843
-	waitmove 0
-	move 4, LittlerootTown_Movement_14DCA3
-	waitmove 0
+	applymovement 255, LittlerootTown_Movement_1A0843
+	waitmovement 0
+	applymovement 4, LittlerootTown_Movement_14DCA3
+	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14DAAA:: @ 814DAAA
@@ -583,106 +583,106 @@ LittlerootTown_EventScript_14DAED:: @ 814DAED
 	return
 
 LittlerootTown_EventScript_14DB30:: @ 814DB30
-	move 4, LittlerootTown_Movement_14DCA8
-	waitmove 0
+	applymovement 4, LittlerootTown_Movement_14DCA8
+	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14DB3B:: @ 814DB3B
-	move 4, LittlerootTown_Movement_14DCAE
-	waitmove 0
+	applymovement 4, LittlerootTown_Movement_14DCAE
+	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14DB46:: @ 814DB46
-	move 4, LittlerootTown_Movement_14DCB4
-	waitmove 0
+	applymovement 4, LittlerootTown_Movement_14DCB4
+	waitmovement 0
 	setdooropened 0x8009, 0x800a
 	doorchange
-	move 4, LittlerootTown_Movement_14DCE0
-	waitmove 0
+	applymovement 4, LittlerootTown_Movement_14DCE0
+	waitmovement 0
 	spriteinvisible 4, 0, 9
 	setdoorclosed 0x8009, 0x800a
 	doorchange
 	return
 
 LittlerootTown_EventScript_14DB6C:: @ 814DB6C
-	move 4, LittlerootTown_Movement_14DCBA
-	waitmove 0
+	applymovement 4, LittlerootTown_Movement_14DCBA
+	waitmovement 0
 	setdooropened 0x8009, 0x800a
 	doorchange
-	move 4, LittlerootTown_Movement_14DCE0
-	waitmove 0
+	applymovement 4, LittlerootTown_Movement_14DCE0
+	waitmovement 0
 	spriteinvisible 4, 0, 9
 	setdoorclosed 0x8009, 0x800a
 	doorchange
 	return
 
 LittlerootTown_EventScript_14DB92:: @ 814DB92
-	move 4, LittlerootTown_Movement_14DCC1
-	waitmove 0
+	applymovement 4, LittlerootTown_Movement_14DCC1
+	waitmovement 0
 	setdooropened 0x8009, 0x800a
 	doorchange
-	move 4, LittlerootTown_Movement_14DCE0
-	waitmove 0
+	applymovement 4, LittlerootTown_Movement_14DCE0
+	waitmovement 0
 	spriteinvisible 4, 0, 9
 	setdoorclosed 0x8009, 0x800a
 	doorchange
 	return
 
 LittlerootTown_EventScript_14DBB8:: @ 814DBB8
-	move 4, LittlerootTown_Movement_14DCC5
-	waitmove 0
+	applymovement 4, LittlerootTown_Movement_14DCC5
+	waitmovement 0
 	setdooropened 0x8009, 0x800a
 	doorchange
-	move 4, LittlerootTown_Movement_14DCE0
-	waitmove 0
+	applymovement 4, LittlerootTown_Movement_14DCE0
+	waitmovement 0
 	spriteinvisible 4, 0, 9
 	setdoorclosed 0x8009, 0x800a
 	doorchange
 	return
 
 LittlerootTown_EventScript_14DBDE:: @ 814DBDE
-	move 4, LittlerootTown_Movement_14DCCA
-	waitmove 0
+	applymovement 4, LittlerootTown_Movement_14DCCA
+	waitmovement 0
 	setdooropened 0x8009, 0x800a
 	doorchange
-	move 4, LittlerootTown_Movement_14DCE0
-	waitmove 0
+	applymovement 4, LittlerootTown_Movement_14DCE0
+	waitmovement 0
 	spriteinvisible 4, 0, 9
 	setdoorclosed 0x8009, 0x800a
 	doorchange
 	return
 
 LittlerootTown_EventScript_14DC04:: @ 814DC04
-	move 4, LittlerootTown_Movement_14DCCF
-	waitmove 0
+	applymovement 4, LittlerootTown_Movement_14DCCF
+	waitmovement 0
 	setdooropened 0x8009, 0x800a
 	doorchange
-	move 4, LittlerootTown_Movement_14DCE0
-	waitmove 0
+	applymovement 4, LittlerootTown_Movement_14DCE0
+	waitmovement 0
 	spriteinvisible 4, 0, 9
 	setdoorclosed 0x8009, 0x800a
 	doorchange
 	return
 
 LittlerootTown_EventScript_14DC2A:: @ 814DC2A
-	move 4, LittlerootTown_Movement_14DCD3
-	waitmove 0
+	applymovement 4, LittlerootTown_Movement_14DCD3
+	waitmovement 0
 	setdooropened 0x8009, 0x800a
 	doorchange
-	move 4, LittlerootTown_Movement_14DCE0
-	waitmove 0
+	applymovement 4, LittlerootTown_Movement_14DCE0
+	waitmovement 0
 	spriteinvisible 4, 0, 9
 	setdoorclosed 0x8009, 0x800a
 	doorchange
 	return
 
 LittlerootTown_EventScript_14DC50:: @ 814DC50
-	move 4, LittlerootTown_Movement_14DCDA
-	waitmove 0
+	applymovement 4, LittlerootTown_Movement_14DCDA
+	waitmovement 0
 	setdooropened 0x8009, 0x800a
 	doorchange
-	move 4, LittlerootTown_Movement_14DCE0
-	waitmove 0
+	applymovement 4, LittlerootTown_Movement_14DCE0
+	waitmovement 0
 	spriteinvisible 4, 0, 9
 	setdoorclosed 0x8009, 0x800a
 	doorchange
@@ -847,12 +847,12 @@ LittlerootTown_EventScript_14DCE2:: @ 814DCE2
 	compare_var_to_imm RESULT, 1
 	call_if 1, LittlerootTown_EventScript_14D931
 	call LittlerootTown_EventScript_14DD38
-	move 4, LittlerootTown_Movement_1A0841
-	waitmove 0
+	applymovement 4, LittlerootTown_Movement_1A0841
+	waitmovement 0
 	setdooropened 0x8009, 0x800a
 	doorchange
-	move 4, LittlerootTown_Movement_14DCE0
-	waitmove 0
+	applymovement 4, LittlerootTown_Movement_14DCE0
+	waitmovement 0
 	spriteinvisible 4, 0, 9
 	setdoorclosed 0x8009, 0x800a
 	doorchange

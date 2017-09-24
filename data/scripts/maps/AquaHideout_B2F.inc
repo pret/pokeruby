@@ -11,14 +11,14 @@ MagmaHideout_B2F_EventScript_15D8BD:: @ 815D8BD
 	lockall
 	setvar 0x8008, 1
 	playse 21
-	move 0x8008, AquaHideout_B2F_Movement_1A0833
-	waitmove 0
+	applymovement 0x8008, AquaHideout_B2F_Movement_1A0833
+	waitmovement 0
 	.ifdef SAPPHIRE
-	move 0x8008, AquaHideout_B2F_Movement_1A0839
+	applymovement 0x8008, AquaHideout_B2F_Movement_1A0839
 	.else
-	move 0x8008, AquaHideout_B2F_Movement_1A0841
+	applymovement 0x8008, AquaHideout_B2F_Movement_1A0841
 	.endif
-	waitmove 0
+	waitmovement 0
 	setvar 0x4001, 1
 	releaseall
 	end
@@ -38,31 +38,31 @@ AquaHideout_B2F_EventScript_15D8FD:: @ 815D8FD
 	setvar 0x8009, 3
 	.endif
 	.ifdef SAPPHIRE
-	move 0x8008, Movement_1A083F
+	applymovement 0x8008, Movement_1A083F
 	.else
-	move 0x8008, AquaHideout_B2F_Movement_1A0843
+	applymovement 0x8008, AquaHideout_B2F_Movement_1A0843
 	.endif
-	waitmove 0
+	waitmovement 0
 	delay 20
-	move 0x8008, AquaHideout_B2F_Movement_1A0839
-	waitmove 0
+	applymovement 0x8008, AquaHideout_B2F_Movement_1A0839
+	waitmovement 0
 	msgbox AquaHideout_B2F_Text_197162, 4
 	closebutton
 	.ifdef SAPPHIRE
-	move 0x8008, Movement_1A083F
+	applymovement 0x8008, Movement_1A083F
 	.else
-	move 0x8008, AquaHideout_B2F_Movement_1A0843
+	applymovement 0x8008, AquaHideout_B2F_Movement_1A0843
 	.endif
 	.ifdef SAPPHIRE
-	move 0x8009, AquaHideout_B2F_Movement_15D958
+	applymovement 0x8009, AquaHideout_B2F_Movement_15D958
 	.else
-	move 0x8009, AquaHideout_B2F_Movement_15D95D
+	applymovement 0x8009, AquaHideout_B2F_Movement_15D95D
 	.endif
-	waitmove 0
+	waitmovement 0
 	disappear 0x8009
 	delay 20
-	move 0x8008, AquaHideout_B2F_Movement_1A0839
-	waitmove 0
+	applymovement 0x8008, AquaHideout_B2F_Movement_1A0839
+	waitmovement 0
 	msgbox AquaHideout_B2F_Text_1971AE, 4
 	setflag 112
 	setflag 852

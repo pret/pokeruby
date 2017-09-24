@@ -1,35 +1,35 @@
 FallarborTown_ContestLobby_EventScript_1B7604:: @ 81B7604
 	setvar 0x8008, 4
 	setvar 0x8009, 1
-	move 0x8008, FallarborTown_ContestLobby_Movement_1B7821
-	waitmove 0
+	applymovement 0x8008, FallarborTown_ContestLobby_Movement_1B7821
+	waitmovement 0
 	goto FallarborTown_ContestLobby_EventScript_1B7681
 	end
 
 SlateportCity_ContestLobby_EventScript_1B761E:: @ 81B761E
 	setvar 0x8008, 2
 	setvar 0x8009, 2
-	move 6, SlateportCity_ContestLobby_Movement_1A083D
-	move 0x8008, SlateportCity_ContestLobby_Movement_1B7821
-	waitmove 0
+	applymovement 6, SlateportCity_ContestLobby_Movement_1A083D
+	applymovement 0x8008, SlateportCity_ContestLobby_Movement_1B7821
+	waitmovement 0
 	goto SlateportCity_ContestLobby_EventScript_1B7681
 	end
 
 VerdanturfTown_ContestLobby_EventScript_1B763F:: @ 81B763F
 	setvar 0x8008, 2
 	setvar 0x8009, 1
-	move 0x8008, VerdanturfTown_ContestLobby_Movement_1B7821
-	waitmove 0
+	applymovement 0x8008, VerdanturfTown_ContestLobby_Movement_1B7821
+	waitmovement 0
 	goto VerdanturfTown_ContestLobby_EventScript_1B7681
 	end
 
 LilycoveCity_ContestLobby_EventScript_1B7659:: @ 81B7659
 	setvar 0x8008, 3
 	setvar 0x8009, 3
-	move 9, LilycoveCity_ContestLobby_Movement_1A083D
-	move 10, LilycoveCity_ContestLobby_Movement_1A083D
-	move 0x8008, LilycoveCity_ContestLobby_Movement_1B7821
-	waitmove 0
+	applymovement 9, LilycoveCity_ContestLobby_Movement_1A083D
+	applymovement 10, LilycoveCity_ContestLobby_Movement_1A083D
+	applymovement 0x8008, LilycoveCity_ContestLobby_Movement_1B7821
+	waitmovement 0
 	goto LilycoveCity_ContestLobby_EventScript_1B7681
 	end
 

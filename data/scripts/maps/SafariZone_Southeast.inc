@@ -10,10 +10,10 @@ SafariZone_Southeast_MapScript2_160041:: @ 8160041
 SafariZone_Southeast_EventScript_16004B:: @ 816004B
 	lockall
 	setvar 0x4001, 0
-	move 255, SafariZone_Southeast_Movement_160087
-	waitmove 0
-	move 1, SafariZone_Southeast_Movement_160089
-	waitmove 0
+	applymovement 255, SafariZone_Southeast_Movement_160087
+	waitmovement 0
+	applymovement 1, SafariZone_Southeast_Movement_160089
+	waitmovement 0
 	movespriteperm 1, 32, 34
 	setvar 0x40a4, 0
 	releaseall
@@ -76,18 +76,18 @@ SafariZone_Southeast_EventScript_1600E0:: @ 81600E0
 	end
 
 SafariZone_Southeast_EventScript_160105:: @ 8160105
-	move 1, SafariZone_Southeast_Movement_160150
-	waitmove 0
-	move 255, SafariZone_Southeast_Movement_16014B
-	waitmove 0
+	applymovement 1, SafariZone_Southeast_Movement_160150
+	waitmovement 0
+	applymovement 255, SafariZone_Southeast_Movement_16014B
+	waitmovement 0
 	goto SafariZone_Southeast_EventScript_160139
 	end
 
 SafariZone_Southeast_EventScript_16011F:: @ 816011F
-	move 1, SafariZone_Southeast_Movement_160153
-	waitmove 0
-	move 255, SafariZone_Southeast_Movement_16014D
-	waitmove 0
+	applymovement 1, SafariZone_Southeast_Movement_160153
+	waitmovement 0
+	applymovement 255, SafariZone_Southeast_Movement_16014D
+	waitmovement 0
 	goto SafariZone_Southeast_EventScript_160139
 	end
 

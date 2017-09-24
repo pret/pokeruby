@@ -161,8 +161,8 @@ Route110_TrickHouseEnd_EventScript_161BAF:: @ 8161BAF
 	delay 30
 	msgbox Route110_TrickHouseEnd_Text_19C602, 4
 	closebutton
-	move 1, Route110_TrickHouseEnd_Movement_1A0839
-	waitmove 0
+	applymovement 1, Route110_TrickHouseEnd_Movement_1A0839
+	waitmovement 0
 	delay 30
 	msgbox Route110_TrickHouseEnd_Text_19C691, 4
 	setvar 0x40c1, 0
@@ -180,11 +180,11 @@ Route110_TrickHouseEnd_EventScript_161BAF:: @ 8161BAF
 	end
 
 Route110_TrickHouseEnd_EventScript_161C2E:: @ 8161C2E
-	move 1, Route110_TrickHouseEnd_Movement_161315
-	waitmove 0
+	applymovement 1, Route110_TrickHouseEnd_Movement_161315
+	waitmovement 0
 	playse 178
-	move 1, Route110_TrickHouseEnd_Movement_16131E
-	waitmove 0
+	applymovement 1, Route110_TrickHouseEnd_Movement_16131E
+	waitmovement 0
 	disappear 1
 	addvar 0x4044, 1
 	return
@@ -202,41 +202,41 @@ Route110_TrickHouseEnd_EventScript_161C61:: @ 8161C61
 	return
 
 Route110_TrickHouseEnd_EventScript_161C74:: @ 8161C74
-	move 1, Route110_TrickHouseEnd_Movement_1A0845
-	waitmove 0
+	applymovement 1, Route110_TrickHouseEnd_Movement_1A0845
+	waitmovement 0
 	return
 
 Route110_TrickHouseEnd_EventScript_161C7F:: @ 8161C7F
-	move 1, Route110_TrickHouseEnd_Movement_1A0841
-	waitmove 0
+	applymovement 1, Route110_TrickHouseEnd_Movement_1A0841
+	waitmovement 0
 	return
 
 Route110_TrickHouseEnd_EventScript_161C8A:: @ 8161C8A
-	move 1, Route110_TrickHouseEnd_Movement_1A083F
-	waitmove 0
+	applymovement 1, Route110_TrickHouseEnd_Movement_1A083F
+	waitmovement 0
 	return
 
 Route110_TrickHouseEnd_EventScript_161C95:: @ 8161C95
-	move 1, Route110_TrickHouseEnd_Movement_1A0843
-	waitmove 0
+	applymovement 1, Route110_TrickHouseEnd_Movement_1A0843
+	waitmovement 0
 	return
 
 Route110_TrickHouseEnd_EventScript_161CA0:: @ 8161CA0
 	lockall
 	spriteface 1, 3
 	playse 21
-	move 1, Route110_TrickHouseEnd_Movement_1A0833
-	waitmove 0
+	applymovement 1, Route110_TrickHouseEnd_Movement_1A0833
+	waitmovement 0
 	delay 20
-	move 1, Route110_TrickHouseEnd_Movement_161CEA
-	waitmove 0
+	applymovement 1, Route110_TrickHouseEnd_Movement_161CEA
+	waitmovement 0
 	playse 178
-	move 255, Route110_TrickHouseEnd_Movement_1A0845
-	waitmove 0
+	applymovement 255, Route110_TrickHouseEnd_Movement_1A0845
+	waitmovement 0
 	msgbox Route110_TrickHouseEnd_Text_19CA8B, 4
 	closebutton
-	move 255, Route110_TrickHouseEnd_Movement_161CE8
-	waitmove 0
+	applymovement 255, Route110_TrickHouseEnd_Movement_161CE8
+	waitmovement 0
 	delay 4
 	spriteface 1, 4
 	releaseall

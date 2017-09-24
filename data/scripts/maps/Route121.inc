@@ -22,10 +22,10 @@ Route121_EventScript_151B25:: @ 8151B25
 	lockall
 	msgbox Route121_Text_171C8F, 4
 	closebutton
-	move 12, Route121_Movement_151B57
-	move 13, Route121_Movement_151B60
-	move 14, Route121_Movement_151B69
-	waitmove 0
+	applymovement 12, Route121_Movement_151B57
+	applymovement 13, Route121_Movement_151B60
+	applymovement 14, Route121_Movement_151B69
+	waitmovement 0
 	disappear 12
 	disappear 13
 	disappear 14

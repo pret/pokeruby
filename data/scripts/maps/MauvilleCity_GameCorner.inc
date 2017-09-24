@@ -500,8 +500,8 @@ MauvilleCity_GameCorner_EventScript_1570F8:: @ 81570F8
 
 MauvilleCity_GameCorner_EventScript_157108:: @ 8157108
 	closebutton
-	move LAST_TALKED, MauvilleCity_GameCorner_Movement_1A083D
-	waitmove 0
+	applymovement LAST_TALKED, MauvilleCity_GameCorner_Movement_1A083D
+	waitmovement 0
 	release
 	end
 

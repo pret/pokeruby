@@ -30,23 +30,23 @@ RustboroCity_DevonCorp_3F_EventScript_157752:: @ 8157752
 	lockall
 	msgbox RustboroCity_DevonCorp_3F_Text_18374C, 4
 	closebutton
-	move 2, RustboroCity_DevonCorp_3F_Movement_157815
-	waitmove 0
+	applymovement 2, RustboroCity_DevonCorp_3F_Movement_157815
+	waitmovement 0
 	delay 80
-	move 2, RustboroCity_DevonCorp_3F_Movement_15781E
-	waitmove 0
+	applymovement 2, RustboroCity_DevonCorp_3F_Movement_15781E
+	waitmovement 0
 	msgbox RustboroCity_DevonCorp_3F_Text_183903, 4
 	closebutton
 	playbgm 420, 0
-	move 2, RustboroCity_DevonCorp_3F_Movement_157803
-	move 255, RustboroCity_DevonCorp_3F_Movement_157827
-	waitmove 0
+	applymovement 2, RustboroCity_DevonCorp_3F_Movement_157803
+	applymovement 255, RustboroCity_DevonCorp_3F_Movement_157827
+	waitmovement 0
 	msgbox RustboroCity_DevonCorp_3F_Text_18394A, 4
 	closebutton
 	fadedefaultbgm
-	move 2, RustboroCity_DevonCorp_3F_Movement_157812
-	move 255, RustboroCity_DevonCorp_3F_Movement_157835
-	waitmove 0
+	applymovement 2, RustboroCity_DevonCorp_3F_Movement_157812
+	applymovement 255, RustboroCity_DevonCorp_3F_Movement_157835
+	waitmovement 0
 	msgbox RustboroCity_DevonCorp_3F_Text_18320B, 4
 	giveitem ITEM_LETTER
 	msgbox RustboroCity_DevonCorp_3F_Text_18337E, 4
@@ -152,8 +152,8 @@ RustboroCity_DevonCorp_3F_EventScript_15783B:: @ 815783B
 	goto_if_eq RustboroCity_DevonCorp_3F_EventScript_157864
 	msgbox RustboroCity_DevonCorp_3F_Text_18351E, 4
 	closebutton
-	move LAST_TALKED, RustboroCity_DevonCorp_3F_Movement_1A083D
-	waitmove 0
+	applymovement LAST_TALKED, RustboroCity_DevonCorp_3F_Movement_1A083D
+	waitmovement 0
 	release
 	end
 
@@ -165,16 +165,16 @@ RustboroCity_DevonCorp_3F_EventScript_157864:: @ 8157864
 	setflag 272
 	msgbox RustboroCity_DevonCorp_3F_Text_1835B3, 4
 	closebutton
-	move LAST_TALKED, RustboroCity_DevonCorp_3F_Movement_1A083D
-	waitmove 0
+	applymovement LAST_TALKED, RustboroCity_DevonCorp_3F_Movement_1A083D
+	waitmovement 0
 	release
 	end
 
 RustboroCity_DevonCorp_3F_EventScript_15789B:: @ 815789B
 	msgbox RustboroCity_DevonCorp_3F_Text_18368D, 4
 	closebutton
-	move LAST_TALKED, RustboroCity_DevonCorp_3F_Movement_1A083D
-	waitmove 0
+	applymovement LAST_TALKED, RustboroCity_DevonCorp_3F_Movement_1A083D
+	waitmovement 0
 	release
 	end
 

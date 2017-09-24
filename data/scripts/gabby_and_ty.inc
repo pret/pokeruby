@@ -215,20 +215,20 @@ Route111_EventScript_1AE5A2:: @ 81AE5A2
 	end
 
 Route111_EventScript_1AE5E0:: @ 81AE5E0
-	move 0x8004, Route111_Movement_1AE699
-	waitmove 0
+	applymovement 0x8004, Route111_Movement_1AE699
+	waitmovement 0
 	return
 
 Route111_EventScript_1AE5EB:: @ 81AE5EB
-	move 0x8004, Route111_Movement_1AE69B
-	move 0x8005, Route111_Movement_1A0841
-	waitmove 0
+	applymovement 0x8004, Route111_Movement_1AE69B
+	applymovement 0x8005, Route111_Movement_1A0841
+	waitmovement 0
 	return
 
 Route111_EventScript_1AE5FD:: @ 81AE5FD
-	move 0x8004, Route111_Movement_1AE69D
-	move 0x8005, Route111_Movement_1A083F
-	waitmove 0
+	applymovement 0x8004, Route111_Movement_1AE69D
+	applymovement 0x8005, Route111_Movement_1A083F
+	waitmovement 0
 	return
 
 Route111_EventScript_1AE60F:: @ 81AE60F

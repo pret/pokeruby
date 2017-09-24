@@ -207,10 +207,10 @@ SlateportCity_PokemonFanClub_EventScript_155A15:: @ 8155A15
 
 SlateportCity_PokemonFanClub_EventScript_155A3A:: @ 8155A3A
 	playse 21
-	move LAST_TALKED, SlateportCity_PokemonFanClub_Movement_1A0833
-	waitmove 0
-	move LAST_TALKED, SlateportCity_PokemonFanClub_Movement_1A0835
-	waitmove 0
+	applymovement LAST_TALKED, SlateportCity_PokemonFanClub_Movement_1A0833
+	waitmovement 0
+	applymovement LAST_TALKED, SlateportCity_PokemonFanClub_Movement_1A0835
+	waitmovement 0
 	msgbox SlateportCity_PokemonFanClub_Text_17DF57, 4
 	giveitem ITEM_SOOTHE_BELL
 	compare_var_to_imm RESULT, 0

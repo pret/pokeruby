@@ -64,8 +64,8 @@ BattleTower_Outside_EventScript_160226:: @ 8160226
 
 BattleTower_Outside_EventScript_160232:: @ 8160232
 	closebutton
-	move LAST_TALKED, BattleTower_Outside_Movement_1A0845
-	waitmove 0
+	applymovement LAST_TALKED, BattleTower_Outside_Movement_1A0845
+	waitmovement 0
 	delay 30
 	spriteinvisible 5, 26, 4
 	setvar 0x8004, 4

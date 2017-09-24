@@ -12,8 +12,8 @@ MossdeepCity_SpaceCenter_1F_EventScript_15AB8B:: @ 815AB8B
 	compare_var_to_imm RESULT, 1
 	call_if 4, MossdeepCity_SpaceCenter_1F_EventScript_15ABC3
 	closebutton
-	move LAST_TALKED, MossdeepCity_SpaceCenter_1F_Movement_1A083D
-	waitmove 0
+	applymovement LAST_TALKED, MossdeepCity_SpaceCenter_1F_Movement_1A083D
+	waitmovement 0
 	release
 	end
 
@@ -57,7 +57,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_15AC1F:: @ 815AC1F
 	faceplayer
 	msgbox MossdeepCity_SpaceCenter_1F_Text_18E427, 4
 	closebutton
-	move LAST_TALKED, MossdeepCity_SpaceCenter_1F_Movement_1A083D
-	waitmove 0
+	applymovement LAST_TALKED, MossdeepCity_SpaceCenter_1F_Movement_1A083D
+	waitmovement 0
 	release
 	end

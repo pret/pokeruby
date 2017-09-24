@@ -43,22 +43,22 @@ SlateportCity_Harbor_EventScript_155FB3:: @ 8155FB3
 SlateportCity_Harbor_EventScript_155FBF:: @ 8155FBF
 	lockall
 	setvar 0x8008, 3
-	move 255, SlateportCity_Harbor_Movement_1560C2
-	waitmove 0
+	applymovement 255, SlateportCity_Harbor_Movement_1560C2
+	waitmovement 0
 	goto SlateportCity_Harbor_EventScript_155FD5
 	end
 
 SlateportCity_Harbor_EventScript_155FD5:: @ 8155FD5
-	move 7, SlateportCity_Harbor_Movement_1A0845
-	waitmove 0
-	move 255, SlateportCity_Harbor_Movement_1A0841
-	waitmove 0
+	applymovement 7, SlateportCity_Harbor_Movement_1A0845
+	waitmovement 0
+	applymovement 255, SlateportCity_Harbor_Movement_1A0841
+	waitmovement 0
 	msgbox SlateportCity_Harbor_Text_17FD7D, 4
 	closebutton
-	move 6, SlateportCity_Harbor_Movement_15609B
-	move 7, SlateportCity_Harbor_Movement_15609B
-	move 8, SlateportCity_Harbor_Movement_1560A5
-	waitmove 0
+	applymovement 6, SlateportCity_Harbor_Movement_15609B
+	applymovement 7, SlateportCity_Harbor_Movement_15609B
+	applymovement 8, SlateportCity_Harbor_Movement_1560A5
+	waitmovement 0
 	disappear 6
 	disappear 7
 	disappear 8
@@ -81,24 +81,24 @@ SlateportCity_Harbor_EventScript_155FD5:: @ 8155FD5
 	end
 
 SlateportCity_Harbor_EventScript_15605C:: @ 815605C
-	move 4, SlateportCity_Harbor_Movement_1560B3
-	waitmove 0
-	move 255, SlateportCity_Harbor_Movement_1A0845
-	waitmove 0
+	applymovement 4, SlateportCity_Harbor_Movement_1560B3
+	waitmovement 0
+	applymovement 255, SlateportCity_Harbor_Movement_1A0845
+	waitmovement 0
 	return
 
 SlateportCity_Harbor_EventScript_156071:: @ 8156071
-	move 4, SlateportCity_Harbor_Movement_1560B9
-	waitmove 0
-	move 255, SlateportCity_Harbor_Movement_1A0843
-	waitmove 0
+	applymovement 4, SlateportCity_Harbor_Movement_1560B9
+	waitmovement 0
+	applymovement 255, SlateportCity_Harbor_Movement_1A0843
+	waitmovement 0
 	return
 
 SlateportCity_Harbor_EventScript_156086:: @ 8156086
-	move 4, SlateportCity_Harbor_Movement_1560BE
-	waitmove 0
-	move 255, SlateportCity_Harbor_Movement_1A0843
-	waitmove 0
+	applymovement 4, SlateportCity_Harbor_Movement_1560BE
+	waitmovement 0
+	applymovement 255, SlateportCity_Harbor_Movement_1A0843
+	waitmovement 0
 	return
 
 SlateportCity_Harbor_Movement_15609B:: @ 815609B
@@ -219,8 +219,8 @@ SlateportCity_Harbor_EventScript_15618A:: @ 815618A
 SlateportCity_Harbor_EventScript_156196:: @ 8156196
 	msgbox SlateportCity_Harbor_Text_17FBB6, 4
 	closebutton
-	move LAST_TALKED, SlateportCity_Harbor_Movement_1A0841
-	waitmove 0
+	applymovement LAST_TALKED, SlateportCity_Harbor_Movement_1A0841
+	waitmovement 0
 	delay 30
 	spriteinvisible LAST_TALKED, 9, 8
 	compare_var_to_imm FACING, 2
@@ -239,13 +239,13 @@ SlateportCity_Harbor_EventScript_1561DA:: @ 81561DA
 	end
 
 SlateportCity_Harbor_EventScript_1561E4:: @ 81561E4
-	move 255, SlateportCity_Harbor_Movement_1561FA
-	waitmove 0
+	applymovement 255, SlateportCity_Harbor_Movement_1561FA
+	waitmovement 0
 	return
 
 SlateportCity_Harbor_EventScript_1561EF:: @ 81561EF
-	move 255, SlateportCity_Harbor_Movement_1561FD
-	waitmove 0
+	applymovement 255, SlateportCity_Harbor_Movement_1561FD
+	waitmovement 0
 	return
 
 SlateportCity_Harbor_Movement_1561FA:: @ 81561FA
@@ -278,8 +278,8 @@ SlateportCity_Harbor_EventScript_156211:: @ 8156211
 	goto_if_eq SlateportCity_Harbor_EventScript_15624E
 	msgbox SlateportCity_Harbor_Text_17FD1C, 4
 	closebutton
-	move LAST_TALKED, SlateportCity_Harbor_Movement_1A083D
-	waitmove 0
+	applymovement LAST_TALKED, SlateportCity_Harbor_Movement_1A083D
+	waitmovement 0
 	release
 	end
 

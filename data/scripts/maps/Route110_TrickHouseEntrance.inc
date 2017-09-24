@@ -218,11 +218,11 @@ Route110_TrickHouseEntrance_EventScript_1611D7:: @ 81611D7
 	msgbox Route110_TrickHouseEntrance_Text_19BD82, 4
 	closebutton
 	delay 20
-	move 1, Route110_TrickHouseEntrance_Movement_161315
-	waitmove 0
+	applymovement 1, Route110_TrickHouseEntrance_Movement_161315
+	waitmovement 0
 	playse 178
-	move 1, Route110_TrickHouseEntrance_Movement_16131E
-	waitmove 0
+	applymovement 1, Route110_TrickHouseEntrance_Movement_16131E
+	waitmovement 0
 	disappear 1
 	setvar 0x40a7, 1
 	setvar 0x40a6, 0
@@ -244,10 +244,10 @@ Route110_TrickHouseEntrance_EventScript_16121A:: @ 816121A
 
 Route110_TrickHouseEntrance_EventScript_16124D:: @ 816124D
 	playse 21
-	move 255, Route110_TrickHouseEntrance_Movement_1A0833
-	waitmove 0
-	move 255, Route110_TrickHouseEntrance_Movement_1A0835
-	waitmove 0
+	applymovement 255, Route110_TrickHouseEntrance_Movement_1A0833
+	waitmovement 0
+	applymovement 255, Route110_TrickHouseEntrance_Movement_1A0835
+	waitmovement 0
 	compare_var_to_imm 0x4044, 0
 	call_if 1, Route110_TrickHouseEntrance_EventScript_1612CD
 	compare_var_to_imm 0x4044, 1
@@ -334,22 +334,22 @@ Route110_TrickHouseEntrance_EventScript_161327:: @ 8161327
 Route110_TrickHouseEntrance_EventScript_161330:: @ 8161330
 	msgbox Route110_TrickHouseEntrance_Text_19BF19, 4
 	closebutton
-	move 1, Route110_TrickHouseEntrance_Movement_1A0839
-	waitmove 0
+	applymovement 1, Route110_TrickHouseEntrance_Movement_1A0839
+	waitmovement 0
 	playse 21
-	move 1, Route110_TrickHouseEntrance_Movement_1A0833
-	waitmove 0
-	move 1, Route110_TrickHouseEntrance_Movement_1A0835
-	waitmove 0
+	applymovement 1, Route110_TrickHouseEntrance_Movement_1A0833
+	waitmovement 0
+	applymovement 1, Route110_TrickHouseEntrance_Movement_1A0835
+	waitmovement 0
 	msgbox Route110_TrickHouseEntrance_Text_19BFAB, 4
-	move 1, Route110_TrickHouseEntrance_Movement_1A0841
-	waitmove 0
+	applymovement 1, Route110_TrickHouseEntrance_Movement_1A0841
+	waitmovement 0
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_16136E:: @ 816136E
-	move 1, Route110_TrickHouseEntrance_Movement_1A0839
-	waitmove 0
+	applymovement 1, Route110_TrickHouseEntrance_Movement_1A0839
+	waitmovement 0
 	msgbox Route110_TrickHouseEntrance_Text_19C07E, 4
 	compare_var_to_imm 0x4044, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_1613CE
@@ -440,14 +440,14 @@ Route110_TrickHouseEntrance_EventScript_1614D6:: @ 81614D6
 Route110_TrickHouseEntrance_EventScript_161502:: @ 8161502
 	setvar 0x40c1, 0
 	setvar 0x40a7, 3
-	move 1, Route110_TrickHouseEntrance_Movement_1A0841
-	waitmove 0
+	applymovement 1, Route110_TrickHouseEntrance_Movement_1A0841
+	waitmovement 0
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_161518:: @ 8161518
-	move 1, Route110_TrickHouseEntrance_Movement_1A0839
-	waitmove 0
+	applymovement 1, Route110_TrickHouseEntrance_Movement_1A0839
+	waitmovement 0
 	msgbox Route110_TrickHouseEntrance_Text_19C128, 4
 	.ifdef SAPPHIRE
 	givedecoration 32
@@ -465,13 +465,13 @@ Route110_TrickHouseEntrance_EventScript_161518:: @ 8161518
 Route110_TrickHouseEntrance_EventScript_161551:: @ 8161551
 	msgbox Route110_TrickHouseEntrance_Text_19C17E, 4
 	closebutton
-	move 1, Route110_TrickHouseEntrance_Movement_16309F
-	waitmove 0
-	move 1, Route110_TrickHouseEntrance_Movement_161315
-	waitmove 0
+	applymovement 1, Route110_TrickHouseEntrance_Movement_16309F
+	waitmovement 0
+	applymovement 1, Route110_TrickHouseEntrance_Movement_161315
+	waitmovement 0
 	playse 178
-	move 1, Route110_TrickHouseEntrance_Movement_16131E
-	waitmove 0
+	applymovement 1, Route110_TrickHouseEntrance_Movement_16131E
+	waitmovement 0
 	disappear 1
 	setvar 0x40c1, 0
 	setvar 0x40a7, 5
@@ -504,10 +504,10 @@ Route110_TrickHouseEntrance_EventScript_1615DD:: @ 81615DD
 	setmaptile 5, 1, 537, 0
 	special DrawWholeMapView
 	delay 20
-	move 255, Route110_TrickHouseEntrance_Movement_1A0856
-	waitmove 0
-	move 255, Route110_TrickHouseEntrance_Movement_16165E
-	waitmove 0
+	applymovement 255, Route110_TrickHouseEntrance_Movement_1A0856
+	waitmovement 0
+	applymovement 255, Route110_TrickHouseEntrance_Movement_16165E
+	waitmovement 0
 	switch 0x4044
 	case 0, Route110_TrickHouseEntrance_EventScript_161660
 	case 1, Route110_TrickHouseEntrance_EventScript_16166B

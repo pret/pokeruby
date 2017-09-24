@@ -126,28 +126,28 @@ Route104_EventScript_14EFCC:: @ 814EFCC
 Route104_EventScript_14EFD5:: @ 814EFD5
 	spritelevelup 8, 0, 19, 0
 	spritelevelup 255, 0, 19, 0
-	move 8, Route104_Movement_14F16C
-	waitmove 0
+	applymovement 8, Route104_Movement_14F16C
+	waitmovement 0
 	disappear 8
-	move 255, Route104_Movement_14F162
-	waitmove 0
+	applymovement 255, Route104_Movement_14F162
+	waitmovement 0
 	spriteinvisible 255, 0, 19
 	call Route104_EventScript_1A02E7
-	move 7, Route104_Movement_14F09F
-	move 255, Route104_Movement_14F09F
-	waitmove 0
-	move 255, Route104_Movement_14F166
-	waitmove 0
+	applymovement 7, Route104_Movement_14F09F
+	applymovement 255, Route104_Movement_14F09F
+	waitmovement 0
+	applymovement 255, Route104_Movement_14F166
+	waitmovement 0
 	call Route104_EventScript_1A02EF
 	spritevisible 255, 0, 11
-	move 255, Route104_Movement_14F168
-	waitmove 0
+	applymovement 255, Route104_Movement_14F168
+	waitmovement 0
 	movespriteperm 2, 12, 8
 	reappear 2
 	spritelevelup 2, 0, 11, 0
 	clearflag 740
-	move 2, Route104_Movement_14F16F
-	waitmove 0
+	applymovement 2, Route104_Movement_14F16F
+	waitmovement 0
 	reappear 4
 	clearflag 743
 	call Route104_EventScript_1A02EF

@@ -20,28 +20,28 @@ VerdanturfTown_ContestLobby_EventScript_153D76:: @ 8153D76
 
 VerdanturfTown_ContestLobby_EventScript_153DA1:: @ 8153DA1
 	lockall
-	move 1, VerdanturfTown_ContestLobby_Movement_153E25
-	waitmove 0
+	applymovement 1, VerdanturfTown_ContestLobby_Movement_153E25
+	waitmovement 0
 	playse 71
 	setmaptile 4, 2, 545, 1
 	setmaptile 4, 3, 609, 1
 	special DrawWholeMapView
-	move 1, VerdanturfTown_ContestLobby_Movement_153E28
-	waitmove 0
+	applymovement 1, VerdanturfTown_ContestLobby_Movement_153E28
+	waitmovement 0
 	playse 71
 	setmaptile 4, 2, 721, 1
 	setmaptile 4, 3, 729, 1
 	special DrawWholeMapView
 	delay 20
-	move 1, VerdanturfTown_ContestLobby_Movement_153E35
-	waitmove 0
-	move 255, VerdanturfTown_ContestLobby_Movement_153E23
-	waitmove 0
+	applymovement 1, VerdanturfTown_ContestLobby_Movement_153E35
+	waitmovement 0
+	applymovement 255, VerdanturfTown_ContestLobby_Movement_153E23
+	waitmovement 0
 	msgbox VerdanturfTown_ContestLobby_Text_1A6832, 4
 	closebutton
-	move 1, VerdanturfTown_ContestLobby_Movement_153E2C
-	move 255, VerdanturfTown_ContestLobby_Movement_153E19
-	waitmove 0
+	applymovement 1, VerdanturfTown_ContestLobby_Movement_153E2C
+	applymovement 255, VerdanturfTown_ContestLobby_Movement_153E19
+	waitmovement 0
 	releaseall
 	return
 

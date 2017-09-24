@@ -3,8 +3,8 @@ LilycoveCity_MoveDeletersHouse_MapScripts:: @ 8159AAD
 
 LilycoveCity_MoveDeletersHouse_EventScript_159AAE:: @ 8159AAE
 	lockall
-	move 1, LilycoveCity_MoveDeletersHouse_Movement_1A0839
-	waitmove 0
+	applymovement 1, LilycoveCity_MoveDeletersHouse_Movement_1A0839
+	waitmovement 0
 	msgbox LilycoveCity_MoveDeletersHouse_Text_18B622, 5
 	switch RESULT
 	case 1, LilycoveCity_MoveDeletersHouse_EventScript_159ADE

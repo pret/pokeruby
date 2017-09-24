@@ -20,35 +20,35 @@ Route128_EventScript_15213F:: @ 815213F
 	special sub_807E25C
 	waitstate
 	.endif
-	move 4, Route128_Movement_152271
-	waitmove 0
+	applymovement 4, Route128_Movement_152271
+	waitmovement 0
 	msgbox Route128_Text_171EE0, 4
-	move 4, Route128_Movement_152279
-	waitmove 0
+	applymovement 4, Route128_Movement_152279
+	waitmovement 0
 	msgbox Route128_Text_171F35, 4
 	closebutton
-	move 5, Route128_Movement_152293
-	waitmove 0
-	move 4, Route128_Movement_1A0841
-	waitmove 0
+	applymovement 5, Route128_Movement_152293
+	waitmovement 0
+	applymovement 4, Route128_Movement_1A0841
+	waitmovement 0
 	msgbox Route128_Text_171F4B, 4
 	closebutton
-	move 5, Route128_Movement_1522A1
-	waitmove 0
-	move 255, Route128_Movement_1A0841
-	waitmove 0
+	applymovement 5, Route128_Movement_1522A1
+	waitmovement 0
+	applymovement 255, Route128_Movement_1A0841
+	waitmovement 0
 	msgbox Route128_Text_172008, 4
 	closebutton
-	move 4, Route128_Movement_15227E
-	move 255, Route128_Movement_1A083F
-	move 5, Route128_Movement_152290
-	waitmove 0
+	applymovement 4, Route128_Movement_15227E
+	applymovement 255, Route128_Movement_1A083F
+	applymovement 5, Route128_Movement_152290
+	waitmovement 0
 	msgbox Route128_Text_17210B, 4
 	closebutton
 	delay 40
-	move 5, Route128_Movement_152296
-	move 4, Route128_Movement_152283
-	waitmove 0
+	applymovement 5, Route128_Movement_152296
+	applymovement 4, Route128_Movement_152283
+	waitmovement 0
 	disappear 5
 	disappear 4
 	delay 100
@@ -56,26 +56,26 @@ Route128_EventScript_15213F:: @ 815213F
 	doanimation 30
 	checkanimation 30
 	reappear 3
-	move 3, Route128_Movement_15226F
-	waitmove 0
-	move 255, Route128_Movement_1A0843
-	waitmove 0
+	applymovement 3, Route128_Movement_15226F
+	waitmovement 0
+	applymovement 255, Route128_Movement_1A0843
+	waitmovement 0
 	msgbox Route128_Text_172181, 4
 	closebutton
-	move 3, Route128_Movement_15226D
-	move 255, Route128_Movement_1A0841
-	waitmove 0
+	applymovement 3, Route128_Movement_15226D
+	applymovement 255, Route128_Movement_1A0841
+	waitmovement 0
 	.ifdef SAPPHIRE
 	msgbox Route128_Text_1721A2, 4
 	.else
 	msgbox Route128_Text_1722A1, 4
 	.endif
-	move 3, Route128_Movement_1A0845
-	waitmove 0
+	applymovement 3, Route128_Movement_1A0845
+	waitmovement 0
 	msgbox Route128_Text_1723BE, 4
 	closebutton
-	move 3, Route128_Movement_1A0845
-	waitmove 0
+	applymovement 3, Route128_Movement_1A0845
+	waitmovement 0
 	delay 50
 	setanimation 0, 1
 	doanimation 30

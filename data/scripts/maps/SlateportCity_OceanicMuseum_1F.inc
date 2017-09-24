@@ -18,15 +18,15 @@ SlateportCity_OceanicMuseum_1F_EventScript_155ADB:: @ 8155ADB
 
 SlateportCity_OceanicMuseum_1F_EventScript_155AE4:: @ 8155AE4
 	lockall
-	move 255, SlateportCity_OceanicMuseum_1F_Movement_1A083F
-	waitmove 0
+	applymovement 255, SlateportCity_OceanicMuseum_1F_Movement_1A083F
+	waitmovement 0
 	goto SlateportCity_OceanicMuseum_1F_EventScript_155B06
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_155AF5:: @ 8155AF5
 	lockall
-	move 255, SlateportCity_OceanicMuseum_1F_Movement_1A0843
-	waitmove 0
+	applymovement 255, SlateportCity_OceanicMuseum_1F_Movement_1A0843
+	waitmovement 0
 	goto SlateportCity_OceanicMuseum_1F_EventScript_155B06
 	end
 
@@ -38,8 +38,8 @@ SlateportCity_OceanicMuseum_1F_EventScript_155B06:: @ 8155B06
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_155B2D
 	closebutton
 	hidemoney 0, 0
-	move 255, SlateportCity_OceanicMuseum_1F_Movement_155B8D
-	waitmove 0
+	applymovement 255, SlateportCity_OceanicMuseum_1F_Movement_155B8D
+	waitmovement 0
 	releaseall
 	end
 
@@ -62,8 +62,8 @@ SlateportCity_OceanicMuseum_1F_EventScript_155B5A:: @ 8155B5A
 	msgbox SlateportCity_OceanicMuseum_1F_Text_17E1F5, 4
 	closebutton
 	hidemoney 0, 0
-	move 255, SlateportCity_OceanicMuseum_1F_Movement_155B8D
-	waitmove 0
+	applymovement 255, SlateportCity_OceanicMuseum_1F_Movement_155B8D
+	waitmovement 0
 	releaseall
 	end
 
@@ -159,10 +159,10 @@ SlateportCity_OceanicMuseum_1F_EventScript_155C3A:: @ 8155C3A
 	faceplayer
 	delay 8
 	playse 21
-	move 13, SlateportCity_OceanicMuseum_1F_Movement_1A0833
-	waitmove 0
-	move 13, SlateportCity_OceanicMuseum_1F_Movement_1A0835
-	waitmove 0
+	applymovement 13, SlateportCity_OceanicMuseum_1F_Movement_1A0833
+	waitmovement 0
+	applymovement 13, SlateportCity_OceanicMuseum_1F_Movement_1A0835
+	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_1F_Text_17E582, 4
 	giveitem ITEM_TM46
 	compare_var_to_imm RESULT, 0
@@ -177,8 +177,8 @@ SlateportCity_OceanicMuseum_1F_EventScript_155C3A:: @ 8155C3A
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_155C98:: @ 8155C98
-	move 13, SlateportCity_OceanicMuseum_1F_Movement_155CD3
-	waitmove 0
+	applymovement 13, SlateportCity_OceanicMuseum_1F_Movement_155CD3
+	waitmovement 0
 	setflag 965
 	playse 9
 	disappear 13
@@ -186,8 +186,8 @@ SlateportCity_OceanicMuseum_1F_EventScript_155C98:: @ 8155C98
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_155CAD:: @ 8155CAD
-	move 13, SlateportCity_OceanicMuseum_1F_Movement_155CCC
-	waitmove 0
+	applymovement 13, SlateportCity_OceanicMuseum_1F_Movement_155CCC
+	waitmovement 0
 	setflag 965
 	playse 9
 	disappear 13

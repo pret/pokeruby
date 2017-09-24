@@ -21,10 +21,10 @@ LilycoveCity_ContestLobby_EventScript_158889:: @ 8158889
 LilycoveCity_ContestLobby_EventScript_158898:: @ 8158898
 	lockall
 	reappear 4
-	move 4, LilycoveCity_ContestLobby_Movement_158A3B
-	waitmove 4
-	move 255, LilycoveCity_ContestLobby_Movement_158A4C
-	waitmove 0
+	applymovement 4, LilycoveCity_ContestLobby_Movement_158A3B
+	waitmovement 4
+	applymovement 255, LilycoveCity_ContestLobby_Movement_158A4C
+	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_18890F, 4
 	lockall
 	fadescreen 1
@@ -46,8 +46,8 @@ LilycoveCity_ContestLobby_EventScript_1588DE:: @ 81588DE
 	specialvar RESULT, GiveMonArtistRibbon
 	compare_var_to_imm RESULT, 1
 	call_if 1, LilycoveCity_ContestLobby_EventScript_158948
-	move 4, LilycoveCity_ContestLobby_Movement_158A43
-	waitmove 0
+	applymovement 4, LilycoveCity_ContestLobby_Movement_158A43
+	waitmovement 0
 	disappear 4
 	call LilycoveCity_ContestLobby_EventScript_158994
 	call LilycoveCity_ContestLobby_EventScript_1589EA
@@ -60,8 +60,8 @@ LilycoveCity_ContestLobby_EventScript_158918:: @ 8158918
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_1588DE
 	msgbox LilycoveCity_ContestLobby_Text_188CBD, 4
 	closebutton
-	move 4, LilycoveCity_ContestLobby_Movement_158A43
-	waitmove 0
+	applymovement 4, LilycoveCity_ContestLobby_Movement_158A43
+	waitmovement 0
 	setvar 0x4099, 0
 	disappear 4
 	releaseall
@@ -70,13 +70,13 @@ LilycoveCity_ContestLobby_EventScript_158918:: @ 8158918
 LilycoveCity_ContestLobby_EventScript_158948:: @ 8158948
 	inccounter GAME_STAT_RECEIVED_RIBBONS
 	special sub_80C4858
-	move 4, LilycoveCity_ContestLobby_Movement_158A4E
-	waitmove 0
+	applymovement 4, LilycoveCity_ContestLobby_Movement_158A4E
+	waitmovement 0
 	playse 21
-	move 4, LilycoveCity_ContestLobby_Movement_1A0833
-	waitmove 0
-	move 4, LilycoveCity_ContestLobby_Movement_158A52
-	waitmove 0
+	applymovement 4, LilycoveCity_ContestLobby_Movement_1A0833
+	waitmovement 0
+	applymovement 4, LilycoveCity_ContestLobby_Movement_158A52
+	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_188BB5, 4
 	playfanfare 370
 	msgbox LilycoveCity_ContestLobby_Text_188C03, 4
@@ -196,10 +196,10 @@ LilycoveCity_ContestLobby_EventScript_158A5B:: @ 8158A5B
 LilycoveCity_ContestLobby_EventScript_158A6A:: @ 8158A6A
 	lockall
 	reappear 11
-	move 11, LilycoveCity_ContestLobby_Movement_158B64
-	waitmove 11
-	move 255, LilycoveCity_ContestLobby_Movement_158B76
-	waitmove 0
+	applymovement 11, LilycoveCity_ContestLobby_Movement_158B64
+	waitmovement 11
+	applymovement 255, LilycoveCity_ContestLobby_Movement_158B76
+	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_18890F, 4
 	lockall
 	fadescreen 1
@@ -219,8 +219,8 @@ LilycoveCity_ContestLobby_EventScript_158AAE:: @ 8158AAE
 	specialvar RESULT, GiveMonArtistRibbon
 	compare_var_to_imm RESULT, 1
 	call_if 1, LilycoveCity_ContestLobby_EventScript_158B18
-	move 11, LilycoveCity_ContestLobby_Movement_158B6D
-	waitmove 0
+	applymovement 11, LilycoveCity_ContestLobby_Movement_158B6D
+	waitmovement 0
 	disappear 11
 	call LilycoveCity_ContestLobby_EventScript_158994
 	call LilycoveCity_ContestLobby_EventScript_1589EA
@@ -233,8 +233,8 @@ LilycoveCity_ContestLobby_EventScript_158AE8:: @ 8158AE8
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158AAE
 	msgbox LilycoveCity_ContestLobby_Text_188CBD, 4
 	closebutton
-	move 11, LilycoveCity_ContestLobby_Movement_158B6D
-	waitmove 0
+	applymovement 11, LilycoveCity_ContestLobby_Movement_158B6D
+	waitmovement 0
 	setvar 0x4099, 0
 	disappear 11
 	releaseall
@@ -243,13 +243,13 @@ LilycoveCity_ContestLobby_EventScript_158AE8:: @ 8158AE8
 LilycoveCity_ContestLobby_EventScript_158B18:: @ 8158B18
 	inccounter GAME_STAT_RECEIVED_RIBBONS
 	special sub_80C4858
-	move 11, LilycoveCity_ContestLobby_Movement_158B78
-	waitmove 0
+	applymovement 11, LilycoveCity_ContestLobby_Movement_158B78
+	waitmovement 0
 	playse 21
-	move 11, LilycoveCity_ContestLobby_Movement_1A0833
-	waitmove 0
-	move 11, LilycoveCity_ContestLobby_Movement_158B7C
-	waitmove 0
+	applymovement 11, LilycoveCity_ContestLobby_Movement_1A0833
+	waitmovement 0
+	applymovement 11, LilycoveCity_ContestLobby_Movement_158B7C
+	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_188BB5, 4
 	playfanfare 370
 	msgbox LilycoveCity_ContestLobby_Text_188C03, 4
@@ -494,30 +494,30 @@ LilycoveCity_ContestLobby_EventScript_158E0B:: @ 8158E0B
 	waittext
 	delay 20
 	closebutton
-	move 2, LilycoveCity_ContestLobby_Movement_158E9C
-	waitmove 0
+	applymovement 2, LilycoveCity_ContestLobby_Movement_158E9C
+	waitmovement 0
 	playse 71
 	setmaptile 9, 2, 545, 1
 	setmaptile 9, 3, 609, 1
 	special DrawWholeMapView
-	move 2, LilycoveCity_ContestLobby_Movement_158EA0
-	waitmove 0
+	applymovement 2, LilycoveCity_ContestLobby_Movement_158EA0
+	waitmovement 0
 	playse 71
 	setmaptile 9, 2, 721, 1
 	setmaptile 9, 3, 729, 1
 	special DrawWholeMapView
 	delay 20
-	move 2, LilycoveCity_ContestLobby_Movement_158EAE
-	waitmove 0
-	move 255, LilycoveCity_ContestLobby_Movement_158E99
-	waitmove 0
+	applymovement 2, LilycoveCity_ContestLobby_Movement_158EAE
+	waitmovement 0
+	applymovement 255, LilycoveCity_ContestLobby_Movement_158E99
+	waitmovement 0
 	message2 LilycoveCity_ContestLobby_Text_1A6832
 	waittext
 	delay 20
 	closebutton
-	move 2, LilycoveCity_ContestLobby_Movement_158EA4
-	move 255, LilycoveCity_ContestLobby_Movement_158E8E
-	waitmove 0
+	applymovement 2, LilycoveCity_ContestLobby_Movement_158EA4
+	applymovement 255, LilycoveCity_ContestLobby_Movement_158E8E
+	waitmovement 0
 	releaseall
 	return
 
@@ -633,28 +633,28 @@ LilycoveCity_ContestLobby_EventScript_158F79:: @ 8158F79
 
 LilycoveCity_ContestLobby_EventScript_158F86:: @ 8158F86
 	lockall
-	move 1, LilycoveCity_ContestLobby_Movement_15900B
-	waitmove 0
+	applymovement 1, LilycoveCity_ContestLobby_Movement_15900B
+	waitmovement 0
 	playse 71
 	setmaptile 4, 2, 545, 1
 	setmaptile 4, 3, 609, 1
 	special DrawWholeMapView
-	move 1, LilycoveCity_ContestLobby_Movement_15900F
-	waitmove 0
+	applymovement 1, LilycoveCity_ContestLobby_Movement_15900F
+	waitmovement 0
 	playse 71
 	setmaptile 4, 2, 721, 1
 	setmaptile 4, 3, 729, 1
 	special DrawWholeMapView
 	delay 20
-	move 1, LilycoveCity_ContestLobby_Movement_15901C
-	waitmove 0
-	move 255, LilycoveCity_ContestLobby_Movement_159008
-	waitmove 0
+	applymovement 1, LilycoveCity_ContestLobby_Movement_15901C
+	waitmovement 0
+	applymovement 255, LilycoveCity_ContestLobby_Movement_159008
+	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_1A6832, 4
 	closebutton
-	move 1, LilycoveCity_ContestLobby_Movement_159013
-	move 255, LilycoveCity_ContestLobby_Movement_158FFE
-	waitmove 0
+	applymovement 1, LilycoveCity_ContestLobby_Movement_159013
+	applymovement 255, LilycoveCity_ContestLobby_Movement_158FFE
+	waitmovement 0
 	releaseall
 	return
 

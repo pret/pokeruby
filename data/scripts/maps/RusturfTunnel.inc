@@ -24,8 +24,8 @@ RusturfTunnel_EventScript_15C782:: @ 815C782
 	faceplayer
 	msgbox RusturfTunnel_Text_194766, 4
 	closebutton
-	move LAST_TALKED, RusturfTunnel_Movement_1A083D
-	waitmove 0
+	applymovement LAST_TALKED, RusturfTunnel_Movement_1A083D
+	waitmovement 0
 	release
 	end
 
@@ -37,16 +37,16 @@ RusturfTunnel_EventScript_15C799:: @ 815C799
 	setflag 1
 	msgbox RusturfTunnel_Text_1944C5, 4
 	closebutton
-	move LAST_TALKED, RusturfTunnel_Movement_1A083D
-	waitmove 0
+	applymovement LAST_TALKED, RusturfTunnel_Movement_1A083D
+	waitmovement 0
 	release
 	end
 
 RusturfTunnel_EventScript_15C7BC:: @ 815C7BC
 	msgbox RusturfTunnel_Text_1945B2, 4
 	closebutton
-	move LAST_TALKED, RusturfTunnel_Movement_1A083D
-	waitmove 0
+	applymovement LAST_TALKED, RusturfTunnel_Movement_1A083D
+	waitmovement 0
 	release
 	end
 
@@ -87,37 +87,37 @@ RusturfTunnel_EventScript_15C7D1:: @ 815C7D1
 	end
 
 RusturfTunnel_EventScript_15C880:: @ 815C880
-	move 255, RusturfTunnel_Movement_15C96A
-	move 1, RusturfTunnel_Movement_15C98F
-	waitmove 0
+	applymovement 255, RusturfTunnel_Movement_15C96A
+	applymovement 1, RusturfTunnel_Movement_15C98F
+	waitmovement 0
 	return
 
 RusturfTunnel_EventScript_15C892:: @ 815C892
-	move 255, RusturfTunnel_Movement_15C96D
-	move 1, RusturfTunnel_Movement_15C994
-	waitmove 0
-	move 10, RusturfTunnel_Movement_1A0845
-	waitmove 0
+	applymovement 255, RusturfTunnel_Movement_15C96D
+	applymovement 1, RusturfTunnel_Movement_15C994
+	waitmovement 0
+	applymovement 10, RusturfTunnel_Movement_1A0845
+	waitmovement 0
 	return
 
 RusturfTunnel_EventScript_15C8AE:: @ 815C8AE
-	move 255, RusturfTunnel_Movement_15C96D
-	move 1, RusturfTunnel_Movement_15C994
-	waitmove 0
-	move 10, RusturfTunnel_Movement_1A0845
-	waitmove 0
+	applymovement 255, RusturfTunnel_Movement_15C96D
+	applymovement 1, RusturfTunnel_Movement_15C994
+	waitmovement 0
+	applymovement 10, RusturfTunnel_Movement_1A0845
+	waitmovement 0
 	return
 
 RusturfTunnel_EventScript_15C8CA:: @ 815C8CA
-	move 1, RusturfTunnel_Movement_1A0841
-	waitmove 0
-	move 255, RusturfTunnel_Movement_1A0845
-	waitmove 0
+	applymovement 1, RusturfTunnel_Movement_1A0841
+	waitmovement 0
+	applymovement 255, RusturfTunnel_Movement_1A0845
+	waitmovement 0
 	return
 
 RusturfTunnel_EventScript_15C8DF:: @ 815C8DF
-	move 1, RusturfTunnel_Movement_15C970
-	waitmove 0
+	applymovement 1, RusturfTunnel_Movement_15C970
+	waitmovement 0
 	return
 
 RusturfTunnel_EventScript_15C8EA:: @ 815C8EA
@@ -125,34 +125,34 @@ RusturfTunnel_EventScript_15C8EA:: @ 815C8EA
 
 RusturfTunnel_EventScript_15C8EB:: @ 815C8EB
 	closebutton
-	move 1, RusturfTunnel_Movement_15C98D
-	waitmove 0
+	applymovement 1, RusturfTunnel_Movement_15C98D
+	waitmovement 0
 	return
 
 RusturfTunnel_EventScript_15C8F7:: @ 815C8F7
-	move 10, RusturfTunnel_Movement_15C945
-	move 1, RusturfTunnel_Movement_15C973
-	waitmove 0
+	applymovement 10, RusturfTunnel_Movement_15C945
+	applymovement 1, RusturfTunnel_Movement_15C973
+	waitmovement 0
 	return
 
 RusturfTunnel_EventScript_15C909:: @ 815C909
-	move 10, RusturfTunnel_Movement_15C951
-	move 1, RusturfTunnel_Movement_15C980
-	waitmove 0
+	applymovement 10, RusturfTunnel_Movement_15C951
+	applymovement 1, RusturfTunnel_Movement_15C980
+	waitmovement 0
 	return
 
 RusturfTunnel_EventScript_15C91B:: @ 815C91B
-	move 10, RusturfTunnel_Movement_15C951
-	move 1, RusturfTunnel_Movement_15C980
-	waitmove 0
+	applymovement 10, RusturfTunnel_Movement_15C951
+	applymovement 1, RusturfTunnel_Movement_15C980
+	waitmovement 0
 	return
 
 RusturfTunnel_EventScript_15C92D:: @ 815C92D
 	playse 21
-	move 1, RusturfTunnel_Movement_1A0833
-	waitmove 0
-	move 1, RusturfTunnel_Movement_1A0835
-	waitmove 0
+	applymovement 1, RusturfTunnel_Movement_1A0833
+	waitmovement 0
+	applymovement 1, RusturfTunnel_Movement_1A0835
+	waitmovement 0
 	return
 
 RusturfTunnel_Movement_15C945:: @ 815C945
@@ -281,9 +281,9 @@ RusturfTunnel_EventScript_15C9AB:: @ 815C9AB
 	lockall
 	msgbox RusturfTunnel_Text_194159, 4
 	closebutton
-	move 6, RusturfTunnel_Movement_15C9D3
-	move 7, RusturfTunnel_Movement_15C9D3
-	waitmove 0
+	applymovement 6, RusturfTunnel_Movement_15C9D3
+	applymovement 7, RusturfTunnel_Movement_15C9D3
+	waitmovement 0
 	moveoffscreen 6
 	moveoffscreen 7
 	setvar 0x409a, 3
@@ -315,20 +315,20 @@ RusturfTunnel_EventScript_15C9EA:: @ 815C9EA
 	msgbox RusturfTunnel_Text_194274, 4
 	giveitem ITEM_DEVON_GOODS
 	closebutton
-	move 255, RusturfTunnel_Movement_15CA99
-	move 6, RusturfTunnel_Movement_15CAA2
-	waitmove 0
+	applymovement 255, RusturfTunnel_Movement_15CA99
+	applymovement 6, RusturfTunnel_Movement_15CAA2
+	waitmovement 0
 	disappear 6
 	delay 50
 	reappear 5
-	move 5, RusturfTunnel_Movement_15CAAC
-	waitmove 0
-	move 255, RusturfTunnel_Movement_15CA9F
-	move 5, RusturfTunnel_Movement_15CAC0
-	waitmove 0
+	applymovement 5, RusturfTunnel_Movement_15CAAC
+	waitmovement 0
+	applymovement 255, RusturfTunnel_Movement_15CA9F
+	applymovement 5, RusturfTunnel_Movement_15CAC0
+	waitmovement 0
 	msgbox RusturfTunnel_Text_19432A, 4
-	move 5, RusturfTunnel_Movement_1A0839
-	waitmove 0
+	applymovement 5, RusturfTunnel_Movement_1A0839
+	waitmovement 0
 	message RusturfTunnel_Text_19434F
 	waittext
 	waitse
@@ -336,9 +336,9 @@ RusturfTunnel_EventScript_15C9EA:: @ 815C9EA
 	waitbutton
 	waitpokecry
 	closebutton
-	move 5, RusturfTunnel_Movement_15CAB4
-	move 7, RusturfTunnel_Movement_15CAC3
-	waitmove 0
+	applymovement 5, RusturfTunnel_Movement_15CAB4
+	applymovement 7, RusturfTunnel_Movement_15CAC3
+	waitmovement 0
 	disappear 5
 	disappear 7
 	clearflag 142

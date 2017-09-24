@@ -49,12 +49,12 @@ LittlerootTown_MaysHouse_2F_EventScript_152A9D:: @ 8152A9D
 LittlerootTown_BrendansHouse_2F_EventScript_152AD4:: @ 8152AD4
 	msgbox LittlerootTown_BrendansHouse_2F_Text_17337E, 4
 	playbgm 415, 1
-	move LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_1A0839
-	waitmove 0
-	move LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_1A0833
-	waitmove 0
-	move LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_1A0835
-	waitmove 0
+	applymovement LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_1A0839
+	waitmovement 0
+	applymovement LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_1A0833
+	waitmovement 0
+	applymovement LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_1A0835
+	waitmovement 0
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1733AF, 4
 	closebutton
 	compare_var_to_imm FACING, 4
@@ -66,29 +66,29 @@ LittlerootTown_BrendansHouse_2F_EventScript_152AD4:: @ 8152AD4
 	return
 
 LittlerootTown_BrendansHouse_2F_EventScript_152B29:: @ 8152B29
-	move LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_152C11
-	waitmove 0
+	applymovement LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_152C11
+	waitmovement 0
 	return
 
 LittlerootTown_BrendansHouse_2F_EventScript_152B34:: @ 8152B34
-	move LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_152C1C
-	waitmove 0
+	applymovement LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_152C1C
+	waitmovement 0
 	return
 
 LittlerootTown_BrendansHouse_2F_EventScript_152B3F:: @ 8152B3F
-	move LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_152C1C
-	waitmove 0
+	applymovement LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_152C1C
+	waitmovement 0
 	return
 
 LittlerootTown_BrendansHouse_2F_EventScript_152B4A:: @ 8152B4A
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1735C9, 4
 	playbgm 421, 1
-	move LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_1A0839
-	waitmove 0
-	move LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_1A0833
-	waitmove 0
-	move LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_1A0835
-	waitmove 0
+	applymovement LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_1A0839
+	waitmovement 0
+	applymovement LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_1A0833
+	waitmovement 0
+	applymovement LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_1A0835
+	waitmovement 0
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1735FC, 4
 	closebutton
 	compare_var_to_imm FACING, 4
@@ -100,18 +100,18 @@ LittlerootTown_BrendansHouse_2F_EventScript_152B4A:: @ 8152B4A
 	return
 
 LittlerootTown_BrendansHouse_2F_EventScript_152B9F:: @ 8152B9F
-	move LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_152C30
-	waitmove 0
+	applymovement LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_152C30
+	waitmovement 0
 	return
 
 LittlerootTown_BrendansHouse_2F_EventScript_152BAA:: @ 8152BAA
-	move LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_152C25
-	waitmove 0
+	applymovement LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_152C25
+	waitmovement 0
 	return
 
 LittlerootTown_BrendansHouse_2F_EventScript_152BB5:: @ 8152BB5
-	move LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_1A0839
-	waitmove 0
+	applymovement LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_1A0839
+	waitmovement 0
 	checkgender
 	compare_var_to_imm RESULT, 0
 	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_152BDB

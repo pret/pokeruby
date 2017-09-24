@@ -28,13 +28,13 @@ MossdeepCity_House2_EventScript_15A87B:: @ 815A87B
 	end
 
 MossdeepCity_House2_EventScript_15A8AE:: @ 815A8AE
-	move 3, MossdeepCity_House2_Movement_15A8C4
-	waitmove 0
+	applymovement 3, MossdeepCity_House2_Movement_15A8C4
+	waitmovement 0
 	return
 
 MossdeepCity_House2_EventScript_15A8B9:: @ 815A8B9
-	move 3, MossdeepCity_House2_Movement_15A8CB
-	waitmove 0
+	applymovement 3, MossdeepCity_House2_Movement_15A8CB
+	waitmovement 0
 	return
 
 MossdeepCity_House2_Movement_15A8C4:: @ 815A8C4

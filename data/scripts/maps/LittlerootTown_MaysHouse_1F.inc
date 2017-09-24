@@ -62,9 +62,9 @@ LittlerootTown_MaysHouse_1F_EventScript_152938:: @ 8152938
 	lockall
 	msgbox LittlerootTown_MaysHouse_1F_Text_172574, 4
 	closebutton
-	move 255, LittlerootTown_MaysHouse_1F_Movement_15295E
-	move 1, LittlerootTown_MaysHouse_1F_Movement_15295E
-	waitmove 0
+	applymovement 255, LittlerootTown_MaysHouse_1F_Movement_15295E
+	applymovement 1, LittlerootTown_MaysHouse_1F_Movement_15295E
+	waitmovement 0
 	warp LittlerootTown_MaysHouse_2F, 255, 1, 1
 	waitstate
 	releaseall
@@ -91,13 +91,13 @@ LittlerootTown_MaysHouse_1F_EventScript_152971:: @ 8152971
 LittlerootTown_MaysHouse_1F_EventScript_152982:: @ 8152982
 	lockall
 	playse 21
-	move 4, LittlerootTown_MaysHouse_1F_Movement_1A0833
-	waitmove 0
-	move 4, LittlerootTown_MaysHouse_1F_Movement_1A0835
-	waitmove 0
-	move 255, LittlerootTown_MaysHouse_1F_Movement_1A0843
-	move 4, LittlerootTown_MaysHouse_1F_Movement_1529C0
-	waitmove 0
+	applymovement 4, LittlerootTown_MaysHouse_1F_Movement_1A0833
+	waitmovement 0
+	applymovement 4, LittlerootTown_MaysHouse_1F_Movement_1A0835
+	waitmovement 0
+	applymovement 255, LittlerootTown_MaysHouse_1F_Movement_1A0843
+	applymovement 4, LittlerootTown_MaysHouse_1F_Movement_1529C0
+	waitmovement 0
 	special GetRivalSonDaughterString
 	msgbox LittlerootTown_MaysHouse_1F_Text_1730C2, 4
 	setflag 87
@@ -165,7 +165,7 @@ LittlerootTown_MaysHouse_1F_EventScript_152A35:: @ 8152A35
 	lockall
 	setvar 0x8004, 1
 	setvar 0x8005, 1
-	move 0x8004, LittlerootTown_MaysHouse_1F_Movement_1A0843
-	waitmove 0
+	applymovement 0x8004, LittlerootTown_MaysHouse_1F_Movement_1A0843
+	waitmovement 0
 	goto LittlerootTown_MaysHouse_1F_EventScript_1B69B7
 	end

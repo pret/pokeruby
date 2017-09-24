@@ -19,9 +19,9 @@ MtChimney_CableCarStation_MapScript2_15C11D:: @ 815C11D
 
 MtChimney_CableCarStation_EventScript_15C127:: @ 815C127
 	lockall
-	move 255, MtChimney_CableCarStation_Movement_15C1B4
-	move 1, MtChimney_CableCarStation_Movement_15C1AA
-	waitmove 0
+	applymovement 255, MtChimney_CableCarStation_Movement_15C1B4
+	applymovement 1, MtChimney_CableCarStation_Movement_15C1AA
+	waitmovement 0
 	setvar 0x40a3, 0
 	movespriteperm 1, 6, 7
 	spritebehave 1, 8
@@ -41,9 +41,9 @@ MtChimney_CableCarStation_EventScript_15C14B:: @ 815C14B
 MtChimney_CableCarStation_EventScript_15C16C:: @ 815C16C
 	msgbox MtChimney_CableCarStation_Text_1925A9, 4
 	closebutton
-	move 1, MtChimney_CableCarStation_Movement_15C1A5
-	move 255, MtChimney_CableCarStation_Movement_15C1AF
-	waitmove 0
+	applymovement 1, MtChimney_CableCarStation_Movement_15C1A5
+	applymovement 255, MtChimney_CableCarStation_Movement_15C1AF
+	waitmovement 0
 	setvar 0x8004, 1
 	setvar 0x40a3, 2
 	inccounter GAME_STAT_RODE_CABLE_CAR

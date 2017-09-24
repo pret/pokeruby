@@ -81,15 +81,15 @@ PetalburgCity_Gym_EventScript_15456C:: @ 815456C
 	msgbox PetalburgCity_Gym_Text_17A196, 4
 	msgbox PetalburgCity_Gym_Text_17A1B0, 4
 	closebutton
-	move 255, PetalburgCity_Gym_Movement_1A0845
-	move 10, PetalburgCity_Gym_Movement_1545B4
-	waitmove 0
+	applymovement 255, PetalburgCity_Gym_Movement_1A0845
+	applymovement 10, PetalburgCity_Gym_Movement_1545B4
+	waitmovement 0
 	playse 9
 	disappear 10
 	setflag 726
 	delay 30
-	move 255, PetalburgCity_Gym_Movement_1A0841
-	waitmove 0
+	applymovement 255, PetalburgCity_Gym_Movement_1A0841
+	waitmovement 0
 	msgbox PetalburgCity_Gym_Text_17A2A4, 4
 	setvar 0x4085, 2
 	releaseall
@@ -218,102 +218,102 @@ PetalburgCity_Gym_EventScript_154669:: @ 8154669
 	end
 
 PetalburgCity_Gym_EventScript_1547EE:: @ 81547EE
-	move 1, PetalburgCity_Gym_Movement_1A0845
-	move 10, PetalburgCity_Gym_Movement_154B27
-	waitmove 0
+	applymovement 1, PetalburgCity_Gym_Movement_1A0845
+	applymovement 10, PetalburgCity_Gym_Movement_154B27
+	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_154800:: @ 8154800
-	move 10, PetalburgCity_Gym_Movement_154B1D
-	waitmove 0
-	move 1, PetalburgCity_Gym_Movement_1A0843
-	move 255, PetalburgCity_Gym_Movement_1A0843
-	waitmove 0
+	applymovement 10, PetalburgCity_Gym_Movement_154B1D
+	waitmovement 0
+	applymovement 1, PetalburgCity_Gym_Movement_1A0843
+	applymovement 255, PetalburgCity_Gym_Movement_1A0843
+	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_15481C:: @ 815481C
-	move 1, PetalburgCity_Gym_Movement_1A0845
-	move 255, PetalburgCity_Gym_Movement_1A0845
-	move 10, PetalburgCity_Gym_Movement_154B27
-	waitmove 0
+	applymovement 1, PetalburgCity_Gym_Movement_1A0845
+	applymovement 255, PetalburgCity_Gym_Movement_1A0845
+	applymovement 10, PetalburgCity_Gym_Movement_154B27
+	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_154835:: @ 8154835
-	move 1, PetalburgCity_Gym_Movement_1A0845
-	move 10, PetalburgCity_Gym_Movement_154B3E
-	move 255, PetalburgCity_Gym_Movement_154B4D
-	waitmove 0
+	applymovement 1, PetalburgCity_Gym_Movement_1A0845
+	applymovement 10, PetalburgCity_Gym_Movement_154B3E
+	applymovement 255, PetalburgCity_Gym_Movement_154B4D
+	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_15484E:: @ 815484E
-	move 10, PetalburgCity_Gym_Movement_154B2E
-	move 255, PetalburgCity_Gym_Movement_154B45
-	waitmove 0
+	applymovement 10, PetalburgCity_Gym_Movement_154B2E
+	applymovement 255, PetalburgCity_Gym_Movement_154B45
+	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_154860:: @ 8154860
-	move 10, PetalburgCity_Gym_Movement_154B3E
-	move 255, PetalburgCity_Gym_Movement_154B57
-	waitmove 0
+	applymovement 10, PetalburgCity_Gym_Movement_154B3E
+	applymovement 255, PetalburgCity_Gym_Movement_154B57
+	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_154872:: @ 8154872
-	move 10, PetalburgCity_Gym_Movement_154B36
-	move 255, PetalburgCity_Gym_Movement_154B5F
-	waitmove 0
+	applymovement 10, PetalburgCity_Gym_Movement_154B36
+	applymovement 255, PetalburgCity_Gym_Movement_154B5F
+	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_154884:: @ 8154884
-	move 1, PetalburgCity_Gym_Movement_1A0841
-	waitmove 0
+	applymovement 1, PetalburgCity_Gym_Movement_1A0841
+	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_15488F:: @ 815488F
-	move 1, PetalburgCity_Gym_Movement_1A0845
-	move 255, PetalburgCity_Gym_Movement_1A0841
-	waitmove 0
+	applymovement 1, PetalburgCity_Gym_Movement_1A0845
+	applymovement 255, PetalburgCity_Gym_Movement_1A0841
+	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_1548A1:: @ 81548A1
-	move 1, PetalburgCity_Gym_Movement_1A0843
-	move 255, PetalburgCity_Gym_Movement_1A083F
-	waitmove 0
+	applymovement 1, PetalburgCity_Gym_Movement_1A0843
+	applymovement 255, PetalburgCity_Gym_Movement_1A083F
+	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_1548B3:: @ 81548B3
-	move 1, PetalburgCity_Gym_Movement_1A083F
-	move 255, PetalburgCity_Gym_Movement_1A0843
-	waitmove 0
+	applymovement 1, PetalburgCity_Gym_Movement_1A083F
+	applymovement 255, PetalburgCity_Gym_Movement_1A0843
+	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_1548C5:: @ 81548C5
-	move 1, PetalburgCity_Gym_Movement_1A0845
-	waitmove 0
+	applymovement 1, PetalburgCity_Gym_Movement_1A0845
+	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_1548D0:: @ 81548D0
-	move 1, PetalburgCity_Gym_Movement_1A0843
-	waitmove 0
+	applymovement 1, PetalburgCity_Gym_Movement_1A0843
+	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_1548DB:: @ 81548DB
-	move 1, PetalburgCity_Gym_Movement_1A0845
-	waitmove 0
+	applymovement 1, PetalburgCity_Gym_Movement_1A0845
+	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_1548E6:: @ 81548E6
-	move 1, PetalburgCity_Gym_Movement_1A0845
-	waitmove 0
+	applymovement 1, PetalburgCity_Gym_Movement_1A0845
+	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_1548F1:: @ 81548F1
-	move 10, PetalburgCity_Gym_Movement_1A0839
-	waitmove 0
+	applymovement 10, PetalburgCity_Gym_Movement_1A0839
+	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_1548FC:: @ 81548FC
-	move 10, PetalburgCity_Gym_Movement_1A0845
-	waitmove 0
+	applymovement 10, PetalburgCity_Gym_Movement_1A0845
+	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_154907:: @ 8154907
@@ -340,8 +340,8 @@ PetalburgCity_Gym_EventScript_15492F:: @ 815492F
 	return
 
 PetalburgCity_Gym_EventScript_154930:: @ 8154930
-	move 1, PetalburgCity_Gym_Movement_1A0845
-	waitmove 0
+	applymovement 1, PetalburgCity_Gym_Movement_1A0845
+	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_15493B:: @ 815493B
@@ -441,43 +441,43 @@ PetalburgCity_Gym_EventScript_154A2C:: @ 8154A2C
 	end
 
 PetalburgCity_Gym_EventScript_154ABC:: @ 8154ABC
-	move 1, PetalburgCity_Gym_Movement_1A0841
-	waitmove 0
+	applymovement 1, PetalburgCity_Gym_Movement_1A0841
+	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_154AC7:: @ 8154AC7
-	move 1, PetalburgCity_Gym_Movement_1A0845
-	waitmove 0
+	applymovement 1, PetalburgCity_Gym_Movement_1A0845
+	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_154AD2:: @ 8154AD2
-	move 1, PetalburgCity_Gym_Movement_1A083F
-	waitmove 0
+	applymovement 1, PetalburgCity_Gym_Movement_1A083F
+	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_154ADD:: @ 8154ADD
-	move 1, PetalburgCity_Gym_Movement_1A0843
-	waitmove 0
+	applymovement 1, PetalburgCity_Gym_Movement_1A0843
+	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_154AE8:: @ 8154AE8
-	move 1, PetalburgCity_Gym_Movement_1A0845
-	waitmove 0
+	applymovement 1, PetalburgCity_Gym_Movement_1A0845
+	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_154AF3:: @ 8154AF3
-	move 1, PetalburgCity_Gym_Movement_1A0841
-	waitmove 0
+	applymovement 1, PetalburgCity_Gym_Movement_1A0841
+	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_154AFE:: @ 8154AFE
-	move 1, PetalburgCity_Gym_Movement_1A0843
-	waitmove 0
+	applymovement 1, PetalburgCity_Gym_Movement_1A0843
+	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_154B09:: @ 8154B09
-	move 1, PetalburgCity_Gym_Movement_1A083F
-	waitmove 0
+	applymovement 1, PetalburgCity_Gym_Movement_1A083F
+	waitmovement 0
 	return
 
 @ 8154B14

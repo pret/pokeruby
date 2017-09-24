@@ -25,8 +25,8 @@ CaveOfOrigin_B4F_MapScript1_15DDC5:: @ 815DDC5
 
 CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 	lockall
-	move 255, CaveOfOrigin_B4F_Movement_1A0841
-	waitmove 0
+	applymovement 255, CaveOfOrigin_B4F_Movement_1A0841
+	waitmovement 0
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B4F03, 4
 	.else
@@ -53,8 +53,8 @@ CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 	waitstate
 	special sub_80818FC
 	waitstate
-	move 1, CaveOfOrigin_B4F_Movement_15DE7D
-	waitmove 0
+	applymovement 1, CaveOfOrigin_B4F_Movement_15DE7D
+	waitmovement 0
 	delay 60
 	setwildbattle SPECIES_GROUDON_OR_KYOGRE, 45, ITEM_NONE
 	waitse

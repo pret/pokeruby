@@ -28,13 +28,13 @@ GraniteCave_StevensRoom_EventScript_15CBFA:: @ 815CBFA
 	end
 
 GraniteCave_StevensRoom_EventScript_15CC6D:: @ 815CC6D
-	move 1, GraniteCave_StevensRoom_Movement_15CC8C
-	waitmove 0
+	applymovement 1, GraniteCave_StevensRoom_Movement_15CC8C
+	waitmovement 0
 	return
 
 GraniteCave_StevensRoom_EventScript_15CC78:: @ 815CC78
-	move 1, GraniteCave_StevensRoom_Movement_15CC93
-	waitmove 0
+	applymovement 1, GraniteCave_StevensRoom_Movement_15CC93
+	waitmovement 0
 	return
 
 GraniteCave_StevensRoom_EventScript_15CC83:: @ 815CC83

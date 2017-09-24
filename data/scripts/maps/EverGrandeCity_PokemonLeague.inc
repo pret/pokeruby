@@ -60,9 +60,9 @@ EverGrandeCity_PokemonLeague_EventScript_15BAD2:: @ 815BAD2
 	checkflag 2060
 	goto_if 0, EverGrandeCity_PokemonLeague_EventScript_15BB4A
 	closebutton
-	move 3, EverGrandeCity_PokemonLeague_Movement_15BB7E
-	move 4, EverGrandeCity_PokemonLeague_Movement_15BB81
-	waitmove 0
+	applymovement 3, EverGrandeCity_PokemonLeague_Movement_15BB7E
+	applymovement 4, EverGrandeCity_PokemonLeague_Movement_15BB81
+	waitmovement 0
 	delay 10
 	playfanfare 369
 	message EverGrandeCity_PokemonLeague_Text_191804
@@ -76,13 +76,13 @@ EverGrandeCity_PokemonLeague_EventScript_15BAD2:: @ 815BAD2
 	end
 
 EverGrandeCity_PokemonLeague_EventScript_15BB34:: @ 815BB34
-	move 255, EverGrandeCity_PokemonLeague_Movement_15BB76
-	waitmove 0
+	applymovement 255, EverGrandeCity_PokemonLeague_Movement_15BB76
+	waitmovement 0
 	return
 
 EverGrandeCity_PokemonLeague_EventScript_15BB3F:: @ 815BB3F
-	move 255, EverGrandeCity_PokemonLeague_Movement_15BB7A
-	waitmove 0
+	applymovement 255, EverGrandeCity_PokemonLeague_Movement_15BB7A
+	waitmovement 0
 	return
 
 EverGrandeCity_PokemonLeague_EventScript_15BB4A:: @ 815BB4A
@@ -92,12 +92,12 @@ EverGrandeCity_PokemonLeague_EventScript_15BB4A:: @ 815BB4A
 	end
 
 EverGrandeCity_PokemonLeague_EventScript_15BB57:: @ 815BB57
-	move LAST_TALKED, EverGrandeCity_PokemonLeague_Movement_1A0839
-	waitmove 0
+	applymovement LAST_TALKED, EverGrandeCity_PokemonLeague_Movement_1A0839
+	waitmovement 0
 	msgbox EverGrandeCity_PokemonLeague_Text_191804, 4
 	closebutton
-	move LAST_TALKED, EverGrandeCity_PokemonLeague_Movement_1A083D
-	waitmove 0
+	applymovement LAST_TALKED, EverGrandeCity_PokemonLeague_Movement_1A083D
+	waitmovement 0
 	releaseall
 	end
 

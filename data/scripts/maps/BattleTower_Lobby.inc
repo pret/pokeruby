@@ -293,14 +293,14 @@ BattleTower_Lobby_EventScript_160662:: @ 8160662
 	end
 
 BattleTower_Lobby_EventScript_160664:: @ 8160664
-	move 1, BattleTower_Lobby_Movement_160693
-	move 255, BattleTower_Lobby_Movement_160693
-	waitmove 0
+	applymovement 1, BattleTower_Lobby_Movement_160693
+	applymovement 255, BattleTower_Lobby_Movement_160693
+	waitmovement 0
 	setdooropened 6, 1
 	doorchange
-	move 1, BattleTower_Lobby_Movement_160697
-	move 255, BattleTower_Lobby_Movement_16069A
-	waitmove 0
+	applymovement 1, BattleTower_Lobby_Movement_160697
+	applymovement 255, BattleTower_Lobby_Movement_16069A
+	waitmovement 0
 	setdoorclosed 6, 1
 	doorchange
 	return

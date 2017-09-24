@@ -214,11 +214,11 @@ LilycoveCity_EventScript_14CCE5:: @ 814CCE5
 	checkflag 218
 	goto_if_eq LilycoveCity_EventScript_14CD18
 	msgbox LilycoveCity_Text_16864A, 4
-	move LAST_TALKED, LilycoveCity_Movement_1A0839
-	waitmove 0
+	applymovement LAST_TALKED, LilycoveCity_Movement_1A0839
+	waitmovement 0
 	msgbox LilycoveCity_Text_168675, 4
-	move LAST_TALKED, LilycoveCity_Movement_1A083D
-	waitmove 0
+	applymovement LAST_TALKED, LilycoveCity_Movement_1A083D
+	waitmovement 0
 	setflag 218
 	releaseall
 	end
@@ -412,8 +412,8 @@ LilycoveCity_EventScript_14CF62:: @ 814CF62
 
 LilycoveCity_EventScript_14CF6B:: @ 814CF6B
 	closebutton
-	move LAST_TALKED, LilycoveCity_Movement_1A0845
-	waitmove 0
+	applymovement LAST_TALKED, LilycoveCity_Movement_1A0845
+	waitmovement 0
 	delay 50
 	setanimation 0, 1
 	doanimation 30

@@ -308,8 +308,8 @@ SlateportCity_EventScript_14BD3A:: @ 814BD3A
 	faceplayer
 	msgbox SlateportCity_Text_164C64, 4
 	closebutton
-	move 5, SlateportCity_Movement_1A083D
-	waitmove 0
+	applymovement 5, SlateportCity_Movement_1A083D
+	waitmovement 0
 	release
 	end
 
@@ -318,8 +318,8 @@ SlateportCity_EventScript_14BD51:: @ 814BD51
 	faceplayer
 	msgbox SlateportCity_Text_164C9F, 4
 	closebutton
-	move 19, SlateportCity_Movement_1A083D
-	waitmove 0
+	applymovement 19, SlateportCity_Movement_1A083D
+	waitmovement 0
 	release
 	end
 
@@ -328,8 +328,8 @@ SlateportCity_EventScript_14BD68:: @ 814BD68
 	faceplayer
 	msgbox SlateportCity_Text_164CE8, 4
 	closebutton
-	move 20, SlateportCity_Movement_1A083D
-	waitmove 0
+	applymovement 20, SlateportCity_Movement_1A083D
+	waitmovement 0
 	release
 	end
 
@@ -338,8 +338,8 @@ SlateportCity_EventScript_14BD7F:: @ 814BD7F
 	faceplayer
 	msgbox SlateportCity_Text_164D2B, 4
 	closebutton
-	move 27, SlateportCity_Movement_1A083D
-	waitmove 0
+	applymovement 27, SlateportCity_Movement_1A083D
+	waitmovement 0
 	release
 	end
 
@@ -348,8 +348,8 @@ SlateportCity_EventScript_14BD96:: @ 814BD96
 	faceplayer
 	msgbox SlateportCity_Text_164D92, 4
 	closebutton
-	move 28, SlateportCity_Movement_1A083D
-	waitmove 0
+	applymovement 28, SlateportCity_Movement_1A083D
+	waitmovement 0
 	release
 	end
 
@@ -358,8 +358,8 @@ SlateportCity_EventScript_14BDAD:: @ 814BDAD
 	faceplayer
 	msgbox SlateportCity_Text_164DD5, 4
 	closebutton
-	move 29, SlateportCity_Movement_1A083D
-	waitmove 0
+	applymovement 29, SlateportCity_Movement_1A083D
+	waitmovement 0
 	release
 	end
 
@@ -368,8 +368,8 @@ SlateportCity_EventScript_14BDC4:: @ 814BDC4
 	faceplayer
 	msgbox SlateportCity_Text_164DF4, 4
 	closebutton
-	move 30, SlateportCity_Movement_1A083D
-	waitmove 0
+	applymovement 30, SlateportCity_Movement_1A083D
+	waitmovement 0
 	release
 	end
 
@@ -378,8 +378,8 @@ SlateportCity_EventScript_14BDDB:: @ 814BDDB
 	faceplayer
 	msgbox SlateportCity_Text_164E46, 4
 	closebutton
-	move 31, SlateportCity_Movement_1A083D
-	waitmove 0
+	applymovement 31, SlateportCity_Movement_1A083D
+	waitmovement 0
 	release
 	end
 
@@ -491,47 +491,47 @@ SlateportCity_EventScript_14BEBC:: @ 814BEBC
 	msgbox SlateportCity_Text_165498, 4
 	msgbox SlateportCity_Text_1654E0, 4
 	closebutton
-	move 10, SlateportCity_Movement_1A0843
-	waitmove 0
+	applymovement 10, SlateportCity_Movement_1A0843
+	waitmovement 0
 	delay 10
-	move 9, SlateportCity_Movement_1A0845
-	waitmove 0
+	applymovement 9, SlateportCity_Movement_1A0845
+	waitmovement 0
 	delay 25
-	move 11, SlateportCity_Movement_14C000
-	move 255, SlateportCity_Movement_14C00E
-	move 10, SlateportCity_Movement_14BFDD
-	move 9, SlateportCity_Movement_14BFEA
-	waitmove 0
+	applymovement 11, SlateportCity_Movement_14C000
+	applymovement 255, SlateportCity_Movement_14C00E
+	applymovement 10, SlateportCity_Movement_14BFDD
+	applymovement 9, SlateportCity_Movement_14BFEA
+	waitmovement 0
 	disappear 10
 	disappear 9
 	msgbox SlateportCity_Text_16558D, 4
-	move 11, SlateportCity_Movement_1A0841
-	waitmove 0
+	applymovement 11, SlateportCity_Movement_1A0841
+	waitmovement 0
 	msgbox SlateportCity_Text_1655E7, 4
 	playbgm BGM_EVIL_TEAM, 0
 	msgbox SlateportCity_Text_1656BC, 4
-	move 6, SlateportCity_Movement_1A083F
-	move 1, SlateportCity_Movement_1A083F
-	move 7, SlateportCity_Movement_14BFCD
-	move 3, SlateportCity_Movement_1A0831
-	move 2, SlateportCity_Movement_14BFD5
-	waitmove 0
-	move 11, SlateportCity_Movement_1A0845
-	waitmove 0
+	applymovement 6, SlateportCity_Movement_1A083F
+	applymovement 1, SlateportCity_Movement_1A083F
+	applymovement 7, SlateportCity_Movement_14BFCD
+	applymovement 3, SlateportCity_Movement_1A0831
+	applymovement 2, SlateportCity_Movement_14BFD5
+	waitmovement 0
+	applymovement 11, SlateportCity_Movement_1A0845
+	waitmovement 0
 	msgbox SlateportCity_Text_16578F, 4
 	playse 21
-	move 11, SlateportCity_Movement_1A0833
-	waitmove 0
-	move 11, SlateportCity_Movement_1A0835
-	waitmove 0
+	applymovement 11, SlateportCity_Movement_1A0833
+	waitmovement 0
+	applymovement 11, SlateportCity_Movement_1A0835
+	waitmovement 0
 	msgbox SlateportCity_Text_1657FA, 4
-	move 11, SlateportCity_Movement_1A0839
-	waitmove 0
+	applymovement 11, SlateportCity_Movement_1A0839
+	waitmovement 0
 	msgbox SlateportCity_Text_16583A, 4
 	closebutton
-	move 11, SlateportCity_Movement_14BFFB
-	move 255, SlateportCity_Movement_14C008
-	waitmove 0
+	applymovement 11, SlateportCity_Movement_14BFFB
+	applymovement 255, SlateportCity_Movement_14C008
+	waitmovement 0
 	disappear 11
 	clearflag 841
 	clearflag 848

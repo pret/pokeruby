@@ -212,15 +212,15 @@ Route120_EventScript_15189D:: @ 815189D
 	call_if 1, Route120_EventScript_15197F
 	compare_var_to_imm FACING, 3
 	call_if 1, Route120_EventScript_15198A
-	move 31, Route120_Movement_1A083F
-	waitmove 0
+	applymovement 31, Route120_Movement_1A083F
+	waitmovement 0
 	delay 20
 	msgbox Route120_Text_1719D4, 4
 	closebutton
-	move 30, Route120_Movement_1A0843
-	waitmove 0
-	move 30, Route120_Movement_1A0662
-	waitmove 0
+	applymovement 30, Route120_Movement_1A0843
+	waitmovement 0
+	applymovement 30, Route120_Movement_1A0662
+	waitmovement 0
 	waitse
 	pokecry SPECIES_KECLEON, 2
 	delay 40
@@ -234,16 +234,16 @@ Route120_EventScript_15189D:: @ 815189D
 	end
 
 Route120_EventScript_151908:: @ 8151908
-	move 31, Route120_Movement_1A0845
-	move 255, Route120_Movement_1A0841
-	waitmove 0
+	applymovement 31, Route120_Movement_1A0845
+	applymovement 255, Route120_Movement_1A0841
+	waitmovement 0
 	msgbox Route120_Text_171A40, 4
 	giveitem ITEM_DEVON_SCOPE
 	setflag 285
 	msgbox Route120_Text_171B0E, 4
 	closebutton
-	move 31, Route120_Movement_1A0845
-	waitmove 0
+	applymovement 31, Route120_Movement_1A0845
+	waitmovement 0
 	delay 50
 	setanimation 0, 1
 	doanimation 30
@@ -259,13 +259,13 @@ Route120_EventScript_151908:: @ 8151908
 	end
 
 Route120_EventScript_15197F:: @ 815197F
-	move 255, Route120_Movement_1A083F
-	waitmove 0
+	applymovement 255, Route120_Movement_1A083F
+	waitmovement 0
 	return
 
 Route120_EventScript_15198A:: @ 815198A
-	move 255, Route120_Movement_151995
-	waitmove 0
+	applymovement 255, Route120_Movement_151995
+	waitmovement 0
 	return
 
 Route120_Movement_151995:: @ 8151995

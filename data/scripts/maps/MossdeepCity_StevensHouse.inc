@@ -29,15 +29,15 @@ MossdeepCity_StevensHouse_MapScript2_15AA01:: @ 815AA01
 
 MossdeepCity_StevensHouse_EventScript_15AA0B:: @ 815AA0B
 	lockall
-	move 1, MossdeepCity_StevensHouse_Movement_1A083F
-	waitmove 0
+	applymovement 1, MossdeepCity_StevensHouse_Movement_1A083F
+	waitmovement 0
 	playse 21
-	move 1, MossdeepCity_StevensHouse_Movement_1A0833
-	waitmove 0
-	move 1, MossdeepCity_StevensHouse_Movement_1A0835
-	waitmove 0
-	move 1, MossdeepCity_StevensHouse_Movement_15AA6E
-	waitmove 0
+	applymovement 1, MossdeepCity_StevensHouse_Movement_1A0833
+	waitmovement 0
+	applymovement 1, MossdeepCity_StevensHouse_Movement_1A0835
+	waitmovement 0
+	applymovement 1, MossdeepCity_StevensHouse_Movement_15AA6E
+	waitmovement 0
 	msgbox MossdeepCity_StevensHouse_Text_18DA77, 4
 	giveitem ITEM_HM08
 	setflag 123
@@ -45,8 +45,8 @@ MossdeepCity_StevensHouse_EventScript_15AA0B:: @ 815AA0B
 	msgbox MossdeepCity_StevensHouse_Text_18DB22, 4
 	closebutton
 	delay 20
-	move 1, MossdeepCity_StevensHouse_Movement_15AA76
-	waitmove 0
+	applymovement 1, MossdeepCity_StevensHouse_Movement_15AA76
+	waitmovement 0
 	setvar 0x40c6, 1
 	releaseall
 	end

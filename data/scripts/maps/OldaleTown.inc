@@ -53,23 +53,23 @@ OldaleTown_EventScript_14DDBC:: @ 814DDBC
 	end
 
 OldaleTown_EventScript_14DE07:: @ 814DE07
-	move 2, OldaleTown_Movement_14DE97
-	move 255, OldaleTown_Movement_14DEC1
-	waitmove 0
+	applymovement 2, OldaleTown_Movement_14DE97
+	applymovement 255, OldaleTown_Movement_14DEC1
+	waitmovement 0
 	goto OldaleTown_EventScript_14DE4C
 	end
 
 OldaleTown_EventScript_14DE1E:: @ 814DE1E
-	move 2, OldaleTown_Movement_14DEA2
-	move 255, OldaleTown_Movement_14DECB
-	waitmove 0
+	applymovement 2, OldaleTown_Movement_14DEA2
+	applymovement 255, OldaleTown_Movement_14DECB
+	waitmovement 0
 	goto OldaleTown_EventScript_14DE4C
 	end
 
 OldaleTown_EventScript_14DE35:: @ 814DE35
-	move 255, OldaleTown_Movement_14DEB9
-	move 2, OldaleTown_Movement_14DE8E
-	waitmove 0
+	applymovement 255, OldaleTown_Movement_14DEB9
+	applymovement 2, OldaleTown_Movement_14DE8E
+	waitmovement 0
 	goto OldaleTown_EventScript_14DE4C
 	end
 
@@ -199,20 +199,20 @@ OldaleTown_EventScript_14DEDF:: @ 814DEDF
 	goto_if_eq OldaleTown_EventScript_14DF26
 	msgbox OldaleTown_Text_16B0CC, 4
 	closebutton
-	move 3, OldaleTown_Movement_1A083D
-	waitmove 0
+	applymovement 3, OldaleTown_Movement_1A083D
+	waitmovement 0
 	release
 	end
 
 OldaleTown_EventScript_14DEFF:: @ 814DEFF
 	lockall
-	move 255, OldaleTown_Movement_14DFEC
-	move 3, OldaleTown_Movement_14DFEF
-	waitmove 0
+	applymovement 255, OldaleTown_Movement_14DFEC
+	applymovement 3, OldaleTown_Movement_14DFEF
+	waitmovement 0
 	msgbox OldaleTown_Text_16B045, 4
 	closebutton
-	move 3, OldaleTown_Movement_14DFF5
-	waitmove 0
+	applymovement 3, OldaleTown_Movement_14DFF5
+	waitmovement 0
 	releaseall
 	end
 
@@ -223,35 +223,35 @@ OldaleTown_EventScript_14DF26:: @ 814DF26
 
 OldaleTown_EventScript_14DF30:: @ 814DF30
 	lockall
-	move 4, OldaleTown_Movement_1A0839
-	waitmove 0
+	applymovement 4, OldaleTown_Movement_1A0839
+	waitmovement 0
 	goto OldaleTown_EventScript_14DF92
 	end
 
 OldaleTown_EventScript_14DF41:: @ 814DF41
 	lockall
-	move 4, OldaleTown_Movement_14DFDE
-	waitmove 0
-	move 255, OldaleTown_Movement_1A0843
-	waitmove 0
+	applymovement 4, OldaleTown_Movement_14DFDE
+	waitmovement 0
+	applymovement 255, OldaleTown_Movement_1A0843
+	waitmovement 0
 	goto OldaleTown_EventScript_14DF92
 	end
 
 OldaleTown_EventScript_14DF5C:: @ 814DF5C
 	lockall
-	move 4, OldaleTown_Movement_14DFE1
-	waitmove 0
-	move 255, OldaleTown_Movement_1A0843
-	waitmove 0
+	applymovement 4, OldaleTown_Movement_14DFE1
+	waitmovement 0
+	applymovement 255, OldaleTown_Movement_1A0843
+	waitmovement 0
 	goto OldaleTown_EventScript_14DF92
 	end
 
 OldaleTown_EventScript_14DF77:: @ 814DF77
 	lockall
-	move 4, OldaleTown_Movement_14DFE3
-	waitmove 0
-	move 255, OldaleTown_Movement_1A0843
-	waitmove 0
+	applymovement 4, OldaleTown_Movement_14DFE3
+	waitmovement 0
+	applymovement 255, OldaleTown_Movement_1A0843
+	waitmovement 0
 	goto OldaleTown_EventScript_14DF92
 	end
 
@@ -275,8 +275,8 @@ OldaleTown_EventScript_14DFB8:: @ 814DFB8
 
 OldaleTown_EventScript_14DFC6:: @ 814DFC6
 	closebutton
-	move 4, OldaleTown_Movement_14DFE5
-	waitmove 0
+	applymovement 4, OldaleTown_Movement_14DFE5
+	waitmovement 0
 	disappear 4
 	setvar 0x40c7, 2
 	setflag 979

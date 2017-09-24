@@ -213,35 +213,35 @@ ClosedSootopolisGymDoorScript:: @ 814D2FF
 
 SootopolisCity_EventScript_14D308:: @ 814D308
 	lockall
-	move 10, SootopolisCity_Movement_1A083F
-	move 255, SootopolisCity_Movement_1A0843
-	waitmove 0
+	applymovement 10, SootopolisCity_Movement_1A083F
+	applymovement 255, SootopolisCity_Movement_1A0843
+	waitmovement 0
 	playse 21
-	move 10, SootopolisCity_Movement_1A0833
-	waitmove 0
-	move 10, SootopolisCity_Movement_1A0835
-	waitmove 0
-	move 10, SootopolisCity_Movement_14D413
-	waitmove 0
+	applymovement 10, SootopolisCity_Movement_1A0833
+	waitmovement 0
+	applymovement 10, SootopolisCity_Movement_1A0835
+	waitmovement 0
+	applymovement 10, SootopolisCity_Movement_14D413
+	waitmovement 0
 	.ifdef SAPPHIRE
 	msgbox SootopolisCity_Text_169988, 4
 	.else
 	msgbox SootopolisCity_Text_169E0F, 4
 	.endif
 	closebutton
-	move 10, SootopolisCity_Movement_14D417
-	move 255, SootopolisCity_Movement_14D440
-	waitmove 10
+	applymovement 10, SootopolisCity_Movement_14D417
+	applymovement 255, SootopolisCity_Movement_14D440
+	waitmovement 10
 	.ifdef SAPPHIRE
 	msgbox SootopolisCity_Text_1699FD, 4
 	.else
 	msgbox SootopolisCity_Text_169E82, 4
 	.endif
 	playse 21
-	move 5, SootopolisCity_Movement_1A0833
-	waitmove 0
-	move 5, SootopolisCity_Movement_1A0835
-	waitmove 0
+	applymovement 5, SootopolisCity_Movement_1A0833
+	waitmovement 0
+	applymovement 5, SootopolisCity_Movement_1A0835
+	waitmovement 0
 	.ifdef SAPPHIRE
 	msgbox SootopolisCity_Text_169AB7, 4
 	.else
@@ -249,16 +249,16 @@ SootopolisCity_EventScript_14D308:: @ 814D308
 	.endif
 	closebutton
 	delay 30
-	move 5, SootopolisCity_Movement_14D46A
-	move 10, SootopolisCity_Movement_14D41D
-	move 255, SootopolisCity_Movement_14D445
-	waitmove 0
-	move 5, SootopolisCity_Movement_1A0843
-	move 255, SootopolisCity_Movement_1A0843
-	waitmove 0
+	applymovement 5, SootopolisCity_Movement_14D46A
+	applymovement 10, SootopolisCity_Movement_14D41D
+	applymovement 255, SootopolisCity_Movement_14D445
+	waitmovement 0
+	applymovement 5, SootopolisCity_Movement_1A0843
+	applymovement 255, SootopolisCity_Movement_1A0843
+	waitmovement 0
 	delay 30
-	move 10, SootopolisCity_Movement_1A0845
-	waitmove 0
+	applymovement 10, SootopolisCity_Movement_1A0845
+	waitmovement 0
 	.ifdef SAPPHIRE
 	msgbox SootopolisCity_Text_169AE7, 4
 	.else
@@ -266,19 +266,19 @@ SootopolisCity_EventScript_14D308:: @ 814D308
 	.endif
 	closebutton
 	delay 30
-	move 5, SootopolisCity_Movement_14D47C
-	move 255, SootopolisCity_Movement_14D457
-	move 10, SootopolisCity_Movement_14D42D
-	waitmove 0
-	move 5, SootopolisCity_Movement_1A083F
-	waitmove 0
+	applymovement 5, SootopolisCity_Movement_14D47C
+	applymovement 255, SootopolisCity_Movement_14D457
+	applymovement 10, SootopolisCity_Movement_14D42D
+	waitmovement 0
+	applymovement 5, SootopolisCity_Movement_1A083F
+	waitmovement 0
 	.ifdef SAPPHIRE
 	msgbox SootopolisCity_Text_169BC7, 4
 	.else
 	msgbox SootopolisCity_Text_16A06C, 4
 	.endif
-	move 255, SootopolisCity_Movement_1A083F
-	waitmove 0
+	applymovement 255, SootopolisCity_Movement_1A083F
+	waitmovement 0
 	.ifdef SAPPHIRE
 	msgbox SootopolisCity_Text_169C99, 4
 	.else
@@ -458,8 +458,8 @@ SootopolisCity_EventScript_14D498:: @ 814D498
 SootopolisCity_EventScript_14D4AD:: @ 814D4AD
 	msgbox SootopolisCity_Text_16A33E, 4
 	closebutton
-	move LAST_TALKED, SootopolisCity_Movement_1A0845
-	waitmove 0
+	applymovement LAST_TALKED, SootopolisCity_Movement_1A0845
+	waitmovement 0
 	delay 50
 	setanimation 0, 1
 	doanimation 30

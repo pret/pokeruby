@@ -27,13 +27,13 @@ Route111_EventScript_1A3877:: @ 81A3877
 	end
 
 Route111_EventScript_1A38C3:: @ 81A38C3
-	move LAST_TALKED, Route111_Movement_1A38E3
-	waitmove 0
+	applymovement LAST_TALKED, Route111_Movement_1A38E3
+	waitmovement 0
 	return
 
 Route111_EventScript_1A38CE:: @ 81A38CE
-	move LAST_TALKED, Route111_Movement_1A38EF
-	waitmove 0
+	applymovement LAST_TALKED, Route111_Movement_1A38EF
+	waitmovement 0
 	return
 
 Route111_EventScript_1A38D9:: @ 81A38D9

@@ -101,8 +101,8 @@ RustboroCity_EventScript_14C449:: @ 814C449
 	lock
 	faceplayer
 	msgbox RustboroCity_Text_166D59, 4
-	move 7, RustboroCity_Movement_1A083D
-	waitmove 0
+	applymovement 7, RustboroCity_Movement_1A083D
+	waitmovement 0
 	release
 	end
 
@@ -110,8 +110,8 @@ RustboroCity_EventScript_14C45F:: @ 814C45F
 	lock
 	faceplayer
 	msgbox RustboroCity_Text_166DB0, 4
-	move 8, RustboroCity_Movement_1A083D
-	waitmove 0
+	applymovement 8, RustboroCity_Movement_1A083D
+	waitmovement 0
 	release
 	end
 
@@ -167,15 +167,15 @@ RustboroCity_EventScript_14C4F4:: @ 814C4F4
 	closebutton
 	reappear 10
 	reappear 9
-	move 10, RustboroCity_Movement_14C5C2
-	waitmove 0
+	applymovement 10, RustboroCity_Movement_14C5C2
+	waitmovement 0
 	disappear 10
-	move 9, RustboroCity_Movement_14C5D3
-	waitmove 0
+	applymovement 9, RustboroCity_Movement_14C5D3
+	waitmovement 0
 	msgbox RustboroCity_Text_166E7E, 4
 	closebutton
-	move 9, RustboroCity_Movement_14C5DB
-	waitmove 0
+	applymovement 9, RustboroCity_Movement_14C5DB
+	waitmovement 0
 	disappear 9
 	movespriteperm 9, 30, 10
 	clearflag 732
@@ -200,30 +200,30 @@ RustboroCity_EventScript_14C4F4:: @ 814C4F4
 	return
 
 @ 814C56F
-	move 9, RustboroCity_Movement_14C5E3
-	waitmove 0
+	applymovement 9, RustboroCity_Movement_14C5E3
+	waitmovement 0
 	return
 
 @ 814C57A
-	move 9, RustboroCity_Movement_14C5E7
-	waitmove 0
+	applymovement 9, RustboroCity_Movement_14C5E7
+	waitmovement 0
 	return
 
 @ 814C585
-	move 9, RustboroCity_Movement_14C5EC
-	waitmove 0
+	applymovement 9, RustboroCity_Movement_14C5EC
+	waitmovement 0
 	return
 
 @ 814C590
-	move 9, RustboroCity_Movement_14C5F1
-	waitmove 0
+	applymovement 9, RustboroCity_Movement_14C5F1
+	waitmovement 0
 	return
 
 @ 814C59B
-	move 9, RustboroCity_Movement_14C5F7
-	waitmove 0
-	move 255, RustboroCity_Movement_1A0841
-	waitmove 0
+	applymovement 9, RustboroCity_Movement_14C5F7
+	waitmovement 0
+	applymovement 255, RustboroCity_Movement_1A0841
+	waitmovement 0
 	return
 
 @ 814C5B0
@@ -379,53 +379,53 @@ RustboroCity_EventScript_14C650:: @ 814C650
 	end
 
 RustboroCity_EventScript_14C691:: @ 814C691
-	move 9, RustboroCity_Movement_1A0841
-	waitmove 0
+	applymovement 9, RustboroCity_Movement_1A0841
+	waitmovement 0
 	playse 21
-	move 9, RustboroCity_Movement_1A0833
-	waitmove 0
-	move 9, RustboroCity_Movement_1A0835
-	waitmove 0
-	move 255, RustboroCity_Movement_1A0845
-	waitmove 0
+	applymovement 9, RustboroCity_Movement_1A0833
+	waitmovement 0
+	applymovement 9, RustboroCity_Movement_1A0835
+	waitmovement 0
+	applymovement 255, RustboroCity_Movement_1A0845
+	waitmovement 0
 	return
 
 RustboroCity_EventScript_14C6BD:: @ 814C6BD
-	move 9, RustboroCity_Movement_1A083F
-	waitmove 0
+	applymovement 9, RustboroCity_Movement_1A083F
+	waitmovement 0
 	playse 21
-	move 9, RustboroCity_Movement_1A0833
-	waitmove 0
-	move 9, RustboroCity_Movement_1A0835
-	waitmove 0
-	move 255, RustboroCity_Movement_1A0843
-	waitmove 0
+	applymovement 9, RustboroCity_Movement_1A0833
+	waitmovement 0
+	applymovement 9, RustboroCity_Movement_1A0835
+	waitmovement 0
+	applymovement 255, RustboroCity_Movement_1A0843
+	waitmovement 0
 	return
 
 RustboroCity_EventScript_14C6E9:: @ 814C6E9
-	move 9, RustboroCity_Movement_1A0845
-	waitmove 0
+	applymovement 9, RustboroCity_Movement_1A0845
+	waitmovement 0
 	playse 21
-	move 9, RustboroCity_Movement_1A0833
-	waitmove 0
-	move 9, RustboroCity_Movement_1A0835
-	waitmove 0
-	move 255, RustboroCity_Movement_1A0841
-	waitmove 0
+	applymovement 9, RustboroCity_Movement_1A0833
+	waitmovement 0
+	applymovement 9, RustboroCity_Movement_1A0835
+	waitmovement 0
+	applymovement 255, RustboroCity_Movement_1A0841
+	waitmovement 0
 	return
 
 RustboroCity_EventScript_14C715:: @ 814C715
-	move 9, RustboroCity_Movement_1A0845
-	waitmove 0
+	applymovement 9, RustboroCity_Movement_1A0845
+	waitmovement 0
 	playse 21
-	move 9, RustboroCity_Movement_1A0833
-	waitmove 0
-	move 9, RustboroCity_Movement_1A0835
-	waitmove 0
-	move 9, RustboroCity_Movement_14C74B
-	waitmove 0
-	move 255, RustboroCity_Movement_1A0841
-	waitmove 0
+	applymovement 9, RustboroCity_Movement_1A0833
+	waitmovement 0
+	applymovement 9, RustboroCity_Movement_1A0835
+	waitmovement 0
+	applymovement 9, RustboroCity_Movement_14C74B
+	waitmovement 0
+	applymovement 255, RustboroCity_Movement_1A0841
+	waitmovement 0
 	return
 
 RustboroCity_Movement_14C74B:: @ 814C74B
@@ -487,63 +487,63 @@ RustboroCity_EventScript_14C7F5:: @ 814C7F5
 	return
 
 RustboroCity_EventScript_14C7FE:: @ 814C7FE
-	move 9, RustboroCity_Movement_1A0841
-	waitmove 0
+	applymovement 9, RustboroCity_Movement_1A0841
+	waitmovement 0
 	playse 21
-	move 9, RustboroCity_Movement_1A0833
-	waitmove 0
-	move 9, RustboroCity_Movement_1A0835
-	waitmove 0
-	move 255, RustboroCity_Movement_1A0845
-	waitmove 0
+	applymovement 9, RustboroCity_Movement_1A0833
+	waitmovement 0
+	applymovement 9, RustboroCity_Movement_1A0835
+	waitmovement 0
+	applymovement 255, RustboroCity_Movement_1A0845
+	waitmovement 0
 	return
 
 RustboroCity_EventScript_14C82A:: @ 814C82A
-	move 9, RustboroCity_Movement_1A0843
-	waitmove 0
+	applymovement 9, RustboroCity_Movement_1A0843
+	waitmovement 0
 	playse 21
-	move 9, RustboroCity_Movement_1A0833
-	waitmove 0
-	move 9, RustboroCity_Movement_1A0835
-	waitmove 0
-	move 255, RustboroCity_Movement_1A083F
-	waitmove 0
+	applymovement 9, RustboroCity_Movement_1A0833
+	waitmovement 0
+	applymovement 9, RustboroCity_Movement_1A0835
+	waitmovement 0
+	applymovement 255, RustboroCity_Movement_1A083F
+	waitmovement 0
 	return
 
 RustboroCity_EventScript_14C856:: @ 814C856
-	move 9, RustboroCity_Movement_1A0845
-	waitmove 0
+	applymovement 9, RustboroCity_Movement_1A0845
+	waitmovement 0
 	playse 21
-	move 9, RustboroCity_Movement_1A0833
-	waitmove 0
-	move 9, RustboroCity_Movement_1A0835
-	waitmove 0
-	move 255, RustboroCity_Movement_1A0841
-	waitmove 0
+	applymovement 9, RustboroCity_Movement_1A0833
+	waitmovement 0
+	applymovement 9, RustboroCity_Movement_1A0835
+	waitmovement 0
+	applymovement 255, RustboroCity_Movement_1A0841
+	waitmovement 0
 	return
 
 RustboroCity_EventScript_14C882:: @ 814C882
-	move 9, RustboroCity_Movement_1A0845
-	waitmove 0
+	applymovement 9, RustboroCity_Movement_1A0845
+	waitmovement 0
 	playse 21
-	move 9, RustboroCity_Movement_1A0833
-	waitmove 0
-	move 9, RustboroCity_Movement_1A0835
-	waitmove 0
-	move 9, RustboroCity_Movement_14C74B
-	waitmove 0
-	move 255, RustboroCity_Movement_1A0841
-	waitmove 0
+	applymovement 9, RustboroCity_Movement_1A0833
+	waitmovement 0
+	applymovement 9, RustboroCity_Movement_1A0835
+	waitmovement 0
+	applymovement 9, RustboroCity_Movement_14C74B
+	waitmovement 0
+	applymovement 255, RustboroCity_Movement_1A0841
+	waitmovement 0
 	return
 
 RustboroCity_EventScript_14C8B8:: @ 814C8B8
-	move 9, RustboroCity_Movement_1A083F
-	waitmove 0
+	applymovement 9, RustboroCity_Movement_1A083F
+	waitmovement 0
 	playse 21
-	move 9, RustboroCity_Movement_1A0833
-	waitmove 0
-	move 9, RustboroCity_Movement_1A0835
-	waitmove 0
+	applymovement 9, RustboroCity_Movement_1A0833
+	waitmovement 0
+	applymovement 9, RustboroCity_Movement_1A0835
+	waitmovement 0
 	return
 
 RustboroCity_EventScript_14C8DA:: @ 814C8DA

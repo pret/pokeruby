@@ -73,14 +73,14 @@ FortreeCity_EventScript_14C9CF:: @ 814C9CF
 FortreeCity_EventScript_14C9E4:: @ 814C9E4
 	msgbox FortreeCity_Text_1678CB, 4
 	closebutton
-	move LAST_TALKED, FortreeCity_Movement_1A0662
-	waitmove 0
+	applymovement LAST_TALKED, FortreeCity_Movement_1A0662
+	waitmovement 0
 	waitse
 	pokecry SPECIES_KECLEON, 2
 	delay 40
 	waitpokecry
-	move LAST_TALKED, FortreeCity_Movement_14CA13
-	waitmove 0
+	applymovement LAST_TALKED, FortreeCity_Movement_14CA13
+	waitmovement 0
 	disappear LAST_TALKED
 	setflag 295
 	release

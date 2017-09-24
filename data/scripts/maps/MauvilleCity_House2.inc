@@ -15,10 +15,10 @@ MauvilleCity_House2_EventScript_1572C0:: @ 81572C0
 
 MauvilleCity_House2_EventScript_1572E5:: @ 81572E5
 	playse 21
-	move LAST_TALKED, MauvilleCity_House2_Movement_1A0833
-	waitmove 0
-	move LAST_TALKED, MauvilleCity_House2_Movement_1A0835
-	waitmove 0
+	applymovement LAST_TALKED, MauvilleCity_House2_Movement_1A0833
+	waitmovement 0
+	applymovement LAST_TALKED, MauvilleCity_House2_Movement_1A0835
+	waitmovement 0
 	msgbox MauvilleCity_House2_Text_1824D8, 5
 	compare_var_to_imm RESULT, 1
 	goto_if_eq MauvilleCity_House2_EventScript_15731B

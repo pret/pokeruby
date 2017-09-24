@@ -518,34 +518,32 @@
 	.endm
 
 	@ Applies the movement data at movements to the specified (index) Person event. Also closes any standard message boxes that are still open.
-	.macro move index, movements
-	.byte 0x4f
-	.2byte \index
-	.4byte \movements
-	.endm
-
-	@ Apparent clone of applymovement. Oddly, it doesn't seem to work at all if applied to any Person other than the player (0xFF), and the X and Y arguments don't seem to do anything.
 	@ This command in fact uses variables to access the Person event ID. So, for example, if you setvar 0x8000 to 0x3, and then use applymovementpos 0x8000 @move1, Person event 3 will have the movements at @move1 applied to them. Thank you Shiny Quagsire for bringing this to my attention.
-	.macro movecoords variable, movements, x, y
-	.byte 0x50
-	.2byte \variable
-	.4byte \movements
-	.byte \x
-	.byte \y
+	.macro applymovement index, movements, mapGroup, mapNum
+	.ifb \mapGroup
+	 .byte 0x4f
+	 .2byte \index
+	 .4byte \movements
+	.else
+	 .byte 0x50
+	 .2byte \index
+	 .4byte \movements
+	 .byte \mapGroup
+	 .byte \mapNum
+	.endif
 	.endm
 
 	@ Blocks script execution until the movements being applied to the specified (index) Person event finish. If the specified Person event is 0x0000, then the command will block script execution until all Person events affected by applymovement finish their movements. If the specified Person event is not currently being manipulated with applymovement, then this command does nothing.
-	.macro waitmove index
-	.byte 0x51
-	.2byte \index
-	.endm
-
-	@ Apparent clone of waitmovement. Oddly, it doesn't seem to work at all if applied to any Person other than the player (0xFF), and the X and Y arguments don't seem to do anything.
-	.macro waitmovexy index, X, Y
-	.byte 0x52
-	.2byte \index
-	.byte \X
-	.byte \Y
+	.macro waitmovement index, mapBank, mapNum
+	.ifb \mapBank
+	 .byte 0x51
+	 .2byte \index
+	.else
+	 .byte 0x52
+	 .2byte \index
+	 .byte \mapBank
+	 .byte \mapNum
+	.endif
 	.endm
 
 	@ Attempts to hide the specified (local_ID, a local ID) Person event on the current map, by setting its visibility flag if it has a valid one. If the Person does not have a valid visibility flag, this command does nothing.

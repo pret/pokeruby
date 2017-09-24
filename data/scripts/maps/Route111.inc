@@ -60,8 +60,8 @@ Route111_EventScript_150023:: @ 8150023
 	setflag 964
 	disappear 34
 	delay 30
-	move 35, Route111_Movement_1500AF
-	waitmove 0
+	applymovement 35, Route111_Movement_1500AF
+	waitmovement 0
 	disappear 35
 	releaseall
 	end
@@ -82,8 +82,8 @@ Route111_EventScript_150069:: @ 8150069
 	setflag 963
 	disappear 35
 	delay 30
-	move 34, Route111_Movement_1500AF
-	waitmove 0
+	applymovement 34, Route111_Movement_1500AF
+	waitmovement 0
 	disappear 34
 	releaseall
 	end
@@ -185,23 +185,23 @@ Route111_EventScript_150151:: @ 8150151
 	end
 
 Route111_EventScript_150188:: @ 8150188
-	move 255, Route111_Movement_1501B4
-	waitmove 0
+	applymovement 255, Route111_Movement_1501B4
+	waitmovement 0
 	return
 
 Route111_EventScript_150193:: @ 8150193
-	move 255, Route111_Movement_1501B6
-	waitmove 0
+	applymovement 255, Route111_Movement_1501B6
+	waitmovement 0
 	return
 
 Route111_EventScript_15019E:: @ 815019E
-	move 255, Route111_Movement_1501B8
-	waitmove 0
+	applymovement 255, Route111_Movement_1501B8
+	waitmovement 0
 	return
 
 Route111_EventScript_1501A9:: @ 81501A9
-	move 255, Route111_Movement_1501BA
-	waitmove 0
+	applymovement 255, Route111_Movement_1501BA
+	waitmovement 0
 	return
 
 Route111_Movement_1501B4:: @ 81501B4
@@ -247,67 +247,67 @@ Route111_EventScript_1501D1:: @ 81501D1
 Route111_EventScript_1501F3:: @ 81501F3
 	msgbox Route111_Text_16F7B3, 4
 	trainerbattle 3, OPPONENT_VICTOR, 0, Route111_Text_16F7D2
-	move 1, Route111_Movement_1A0841
-	waitmove 0
+	applymovement 1, Route111_Movement_1A0841
+	waitmovement 0
 	call Route111_EventScript_150348
 	msgbox Route111_Text_16F7FF, 4
 	closebutton
-	move 1, Route111_Movement_150356
-	waitmove 0
+	applymovement 1, Route111_Movement_150356
+	waitmovement 0
 	disappear 1
 	call Route111_EventScript_15034F
-	move 255, Route111_Movement_15035B
-	waitmove 0
+	applymovement 255, Route111_Movement_15035B
+	waitmovement 0
 	call Route111_EventScript_150348
 	reappear 2
-	move 2, Route111_Movement_150359
-	waitmove 0
+	applymovement 2, Route111_Movement_150359
+	waitmovement 0
 	call Route111_EventScript_15034F
 	msgbox Route111_Text_16F82D, 4
 	trainerbattle 3, OPPONENT_VICTORIA, 0, Route111_Text_16F8A6
-	move 2, Route111_Movement_1A0841
-	waitmove 0
+	applymovement 2, Route111_Movement_1A0841
+	waitmovement 0
 	call Route111_EventScript_150348
 	msgbox Route111_Text_16F8D5, 4
 	closebutton
-	move 2, Route111_Movement_150356
-	waitmove 0
+	applymovement 2, Route111_Movement_150356
+	waitmovement 0
 	disappear 2
 	call Route111_EventScript_15034F
-	move 255, Route111_Movement_15035B
-	waitmove 0
+	applymovement 255, Route111_Movement_15035B
+	waitmovement 0
 	call Route111_EventScript_150348
 	reappear 3
-	move 3, Route111_Movement_150359
-	waitmove 0
+	applymovement 3, Route111_Movement_150359
+	waitmovement 0
 	call Route111_EventScript_15034F
 	msgbox Route111_Text_16F90E, 4
 	trainerbattle 3, OPPONENT_VIVI, 0, Route111_Text_16F956
-	move 3, Route111_Movement_1A0841
-	waitmove 0
+	applymovement 3, Route111_Movement_1A0841
+	waitmovement 0
 	call Route111_EventScript_150348
 	msgbox Route111_Text_16F96C, 4
 	closebutton
-	move 3, Route111_Movement_150356
-	waitmove 0
+	applymovement 3, Route111_Movement_150356
+	waitmovement 0
 	disappear 3
 	call Route111_EventScript_15034F
-	move 255, Route111_Movement_15035B
-	waitmove 0
+	applymovement 255, Route111_Movement_15035B
+	waitmovement 0
 	call Route111_EventScript_150348
 	reappear 4
-	move 4, Route111_Movement_150359
-	waitmove 0
+	applymovement 4, Route111_Movement_150359
+	waitmovement 0
 	call Route111_EventScript_15034F
 	msgbox Route111_Text_16F991, 4
 	trainerbattle 3, OPPONENT_VICKY, 0, Route111_Text_16F9EC
 	msgbox Route111_Text_16FA22, 4
 	closebutton
-	move 4, Route111_Movement_1A0841
-	waitmove 0
+	applymovement 4, Route111_Movement_1A0841
+	waitmovement 0
 	call Route111_EventScript_150348
-	move 4, Route111_Movement_150356
-	waitmove 0
+	applymovement 4, Route111_Movement_150356
+	waitmovement 0
 	disappear 4
 	call Route111_EventScript_15034F
 	release

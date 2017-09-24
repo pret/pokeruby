@@ -18,10 +18,10 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	setvar 0x8005, 3
 	setvar 0x8006, 4
 	setvar 0x8007, 5
-	move 255, SeafloorCavern_Room9_Movement_1A0841
-	waitmove 0
-	move 255, SeafloorCavern_Room9_Movement_15DD68
-	waitmove 0
+	applymovement 255, SeafloorCavern_Room9_Movement_1A0841
+	waitmovement 0
+	applymovement 255, SeafloorCavern_Room9_Movement_15DD68
+	waitmovement 0
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B41B8, 4
 	.else
@@ -29,24 +29,24 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	.endif
 	closebutton
 	reappear 0x8004
-	move 255, SeafloorCavern_Room9_Movement_1A083F
-	waitmove 0
-	move 0x8004, SeafloorCavern_Room9_Movement_15DD36
-	waitmove 0
+	applymovement 255, SeafloorCavern_Room9_Movement_1A083F
+	waitmovement 0
+	applymovement 0x8004, SeafloorCavern_Room9_Movement_15DD36
+	waitmovement 0
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B41D5, 4
 	.else
 	msgbox SeafloorCavern_Room9_Text_1B486C, 4
 	.endif
-	move 0x8004, SeafloorCavern_Room9_Movement_1A0841
-	waitmove 0
+	applymovement 0x8004, SeafloorCavern_Room9_Movement_1A0841
+	waitmovement 0
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B4201, 4
 	.else
 	msgbox SeafloorCavern_Room9_Text_1B4897, 4
 	.endif
-	move 0x8004, SeafloorCavern_Room9_Movement_1A0839
-	waitmove 0
+	applymovement 0x8004, SeafloorCavern_Room9_Movement_1A0839
+	waitmovement 0
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B4289, 4
 	.else
@@ -92,24 +92,24 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	playfanfare 388
 	playse 107
 	special sub_80818A4
-	move 0x8004, SeafloorCavern_Room9_Movement_1A0841
-	move 255, SeafloorCavern_Room9_Movement_1A0841
-	waitmove 0
+	applymovement 0x8004, SeafloorCavern_Room9_Movement_1A0841
+	applymovement 255, SeafloorCavern_Room9_Movement_1A0841
+	waitmovement 0
 	delay 150
 	disappear 7
 	reappear 1
 	waitstate
 	delay 60
-	move 1, SeafloorCavern_Room9_Movement_15DD4C
-	waitmove 0
+	applymovement 1, SeafloorCavern_Room9_Movement_15DD4C
+	waitmovement 0
 	special sub_80818FC
 	waitstate
 	setvar 0x8004, 1
 	setvar 0x8005, 1
 	special sub_810F758
 	waitstate
-	move 1, SeafloorCavern_Room9_Movement_15DD57
-	waitmove 0
+	applymovement 1, SeafloorCavern_Room9_Movement_15DD57
+	waitmovement 0
 	disappear 1
 	delay 4
 	setvar 0x8004, 2
@@ -127,16 +127,16 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	msgbox SeafloorCavern_Room9_Text_1B4A89, 4
 	.endif
 	playse 2
-	move 255, SeafloorCavern_Room9_Movement_1A083F
-	waitmove 0
+	applymovement 255, SeafloorCavern_Room9_Movement_1A083F
+	waitmovement 0
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B4443, 4
 	.else
 	msgbox SeafloorCavern_Room9_Text_1B4ADB, 4
 	.endif
 	closebutton
-	move 0x8004, SeafloorCavern_Room9_Movement_15DD41
-	waitmove 0
+	applymovement 0x8004, SeafloorCavern_Room9_Movement_15DD41
+	waitmovement 0
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B447A, 4
 	.else
@@ -145,8 +145,8 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	closebutton
 	playse 3
 	delay 20
-	move 0x8004, SeafloorCavern_Room9_Movement_1A0845
-	waitmove 0
+	applymovement 0x8004, SeafloorCavern_Room9_Movement_1A0845
+	waitmovement 0
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B45C6, 4
 	.else
@@ -156,22 +156,22 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	reappear 0x8005
 	reappear 0x8006
 	reappear 0x8007
-	move 0x8007, SeafloorCavern_Room9_Movement_15DD63
-	move 0x8006, SeafloorCavern_Room9_Movement_15DD63
-	move 0x8005, SeafloorCavern_Room9_Movement_15DD5A
-	waitmove 0
-	move 0x8004, SeafloorCavern_Room9_Movement_1A083F
-	waitmove 0
+	applymovement 0x8007, SeafloorCavern_Room9_Movement_15DD63
+	applymovement 0x8006, SeafloorCavern_Room9_Movement_15DD63
+	applymovement 0x8005, SeafloorCavern_Room9_Movement_15DD5A
+	waitmovement 0
+	applymovement 0x8004, SeafloorCavern_Room9_Movement_1A083F
+	waitmovement 0
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B464D, 4
 	.else
 	msgbox SeafloorCavern_Room9_Text_1B4D02, 4
 	.endif
 	playse 21
-	move 0x8004, SeafloorCavern_Room9_Movement_1A0833
-	waitmove 0
-	move 0x8004, SeafloorCavern_Room9_Movement_1A0835
-	waitmove 0
+	applymovement 0x8004, SeafloorCavern_Room9_Movement_1A0833
+	waitmovement 0
+	applymovement 0x8004, SeafloorCavern_Room9_Movement_1A0835
+	waitmovement 0
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B4723, 4
 	.else
@@ -183,9 +183,9 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	msgbox SeafloorCavern_Room9_Text_1B4E37, 4
 	.endif
 	closebutton
-	move 0x8005, SeafloorCavern_Room9_Movement_15DD60
-	move 0x8004, SeafloorCavern_Room9_Movement_15DD46
-	waitmove 0
+	applymovement 0x8005, SeafloorCavern_Room9_Movement_15DD60
+	applymovement 0x8004, SeafloorCavern_Room9_Movement_15DD46
+	waitmovement 0
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B4818, 4
 	.else

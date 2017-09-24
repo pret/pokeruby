@@ -50,8 +50,8 @@ SouthernIsland_Interior_EventScript_160BA7:: @ 8160BA7
 	goto_if 0, SouthernIsland_Interior_EventScript_160C08
 	setflag 206
 	special SpawnCameraDummy
-	move 127, SouthernIsland_Interior_Movement_160C12
-	waitmove 0
+	applymovement 127, SouthernIsland_Interior_Movement_160C12
+	waitmovement 0
 	delay 50
 	waitse
 	pokecry SPECIES_LATIAS_OR_LATIOS, 0
@@ -59,9 +59,9 @@ SouthernIsland_Interior_EventScript_160BA7:: @ 8160BA7
 	waitpokecry
 	reappear 2
 	delay 30
-	move 127, SouthernIsland_Interior_Movement_160C16
-	move 2, SouthernIsland_Interior_Movement_160C22
-	waitmove 0
+	applymovement 127, SouthernIsland_Interior_Movement_160C16
+	applymovement 2, SouthernIsland_Interior_Movement_160C22
+	waitmovement 0
 	delay 50
 	special RemoveCameraDummy
 	setwildbattle SPECIES_LATIAS_OR_LATIOS, 50, ITEM_SOUL_DEW
