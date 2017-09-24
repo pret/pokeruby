@@ -105,9 +105,9 @@ MauvilleCity_EventScript_14C0F9:: @ 814C0F9
 	end
 
 MauvilleCity_EventScript_14C154:: @ 814C154
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	call_if 1, MauvilleCity_EventScript_14C23C
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq MauvilleCity_EventScript_14C285
 	closebutton
 	switch FACING
@@ -286,7 +286,7 @@ MauvilleCity_EventScript_14C2F2:: @ 814C2F2
 	faceplayer
 	checkflag 209
 	goto_if_eq MauvilleCity_EventScript_14C368
-	compare 0x40ba, 2
+	compare_var_to_imm 0x40ba, 2
 	goto_if_eq MauvilleCity_EventScript_14C33C
 	checkflag 208
 	goto_if_eq MauvilleCity_EventScript_14C332
@@ -305,7 +305,7 @@ MauvilleCity_EventScript_14C332:: @ 814C332
 MauvilleCity_EventScript_14C33C:: @ 814C33C
 	msgbox MauvilleCity_Text_1663EB, 4
 	giveitem ITEM_TM24
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq MauvilleCity_EventScript_1A029B
 	setflag 209
 	msgbox MauvilleCity_Text_166488, 4

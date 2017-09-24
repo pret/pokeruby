@@ -11,9 +11,9 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_158425:: @ 8158425
 	message LilycoveCity_LilycoveMuseum_1F_Text_1873B9
 	waittext
 	multichoice 20, 8, 16, 1
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq LilycoveCity_LilycoveMuseum_1F_EventScript_158458
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	goto_if_eq LilycoveCity_LilycoveMuseum_1F_EventScript_15844F
 	end
 
@@ -23,9 +23,9 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_15844F:: @ 815844F
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_158458:: @ 8158458
 	msgbox LilycoveCity_LilycoveMuseum_1F_Text_187495, 5
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq LilycoveCity_LilycoveMuseum_1F_EventScript_158477
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	goto_if_eq LilycoveCity_LilycoveMuseum_1F_EventScript_158481
 	end
 

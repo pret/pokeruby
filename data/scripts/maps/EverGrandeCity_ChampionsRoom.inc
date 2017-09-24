@@ -53,16 +53,16 @@ EverGrandeCity_ChampionsRoom_EventScript_15B821:: @ 815B821
 	closebutton
 	playsfx 8
 	checkgender
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	call_if 1, EverGrandeCity_ChampionsRoom_EventScript_15B87C
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	call_if 1, EverGrandeCity_ChampionsRoom_EventScript_15B881
 	reappear 2
 	call EverGrandeCity_ChampionsRoom_EventScript_15B9BD
 	checkgender
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq EverGrandeCity_ChampionsRoom_EventScript_15B886
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	goto_if_eq EverGrandeCity_ChampionsRoom_EventScript_15B8BB
 	end
 
@@ -128,9 +128,9 @@ EverGrandeCity_ChampionsRoom_EventScript_15B8F0:: @ 815B8F0
 	waitmove 0
 	msgbox EverGrandeCity_ChampionsRoom_Text_191546, 4
 	checkgender
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	call_if 1, EverGrandeCity_ChampionsRoom_EventScript_15B9AB
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	call_if 1, EverGrandeCity_ChampionsRoom_EventScript_15B9B4
 	closebutton
 	move 1, EverGrandeCity_ChampionsRoom_Movement_15B9FF

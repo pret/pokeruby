@@ -9,7 +9,7 @@ SlateportCity_House2_EventScript_156399:: @ 8156399
 	lock
 	faceplayer
 	checkitem ITEM_CONTEST_PASS, 1
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	goto_if_eq SlateportCity_House2_EventScript_1563B5
 	msgbox SlateportCity_House2_Text_180567, 4
 	release

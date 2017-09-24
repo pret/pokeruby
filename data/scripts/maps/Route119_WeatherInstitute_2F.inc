@@ -4,9 +4,9 @@ Route119_WeatherInstitute_2F_MapScripts:: @ 8163CC2
 
 Route119_WeatherInstitute_2F_MapScript1_163CC8:: @ 8163CC8
 	call Route119_WeatherInstitute_2F_EventScript_1A0196
-	compare 0x40b3, 0
+	compare_var_to_imm 0x40b3, 0
 	call_if 1, Route119_WeatherInstitute_2F_EventScript_163CE4
-	compare 0x40b3, 1
+	compare_var_to_imm 0x40b3, 1
 	call_if 1, Route119_WeatherInstitute_2F_EventScript_163CF0
 	end
 
@@ -56,7 +56,7 @@ Route119_WeatherInstitute_2F_EventScript_163D45:: @ 8163D45
 Route119_WeatherInstitute_2F_EventScript_163D7A:: @ 8163D7A
 	msgbox Route119_WeatherInstitute_2F_Text_19F1CF, 4
 	countpokemon
-	compare RESULT, 6
+	compare_var_to_imm RESULT, 6
 	goto_if_eq Route119_WeatherInstitute_2F_EventScript_163DB4
 	fanfare 370
 	message Route119_WeatherInstitute_2F_Text_19F267

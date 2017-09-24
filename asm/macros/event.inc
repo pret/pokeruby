@@ -64,51 +64,51 @@
 	.endm
 
 	@ If the result of the last comparison matches condition (see Comparison operators), calls the standard function at index function.
-	.macro callstdif condition, function
+	.macro callstd_if condition, function
 	.byte 0x0b
 	.byte \condition
 	.byte \function
 	.endm
 
 	@ Executes a script stored in a default RAM location.
-	.macro jumpram
+	.macro gotoram
 	.byte 0x0c
 	.endm
 
 	@ Terminates script execution and "resets the script RAM".
-	.macro die
+	.macro killscript
 	.byte 0x0d
 	.endm
 
-	@ Pads the specified value to a dword, and then writes that dword to a predefined address (0x0203AAA8).
-	.macro setbyte value
+	@ Sets mystery event status
+	.macro setmestatus value
 	.byte 0x0e
 	.byte \value
 	.endm
 
-	@ Sets the specified script bank to value.
-	.macro loadptr destination, value
+	@ Sets the specified script bank to immediate value.
+	.macro loadword destination, value
 	.byte 0x0f
 	.byte \destination
 	.4byte \value
 	.endm
 
-	@ Sets the specified script bank to value.
-	.macro setbufferbyte destination, value
+	@ Sets the specified script bank to immediate value.
+	.macro loadbyte destination, value
 	.byte 0x10
 	.byte \destination
 	.byte \value
 	.endm
 
 	@ Sets the byte at offset to value.
-	.macro writebytetooffset value, offset
+	.macro writebytetoaddr value, offset
 	.byte 0x11
 	.byte \value
 	.4byte \offset
 	.endm
 
 	@ Copies the byte value at source into the specified script bank.
-	.macro loadbytefrompointer destination, source
+	.macro loadbytefromaddr destination, source
 	.byte 0x12
 	.byte \destination
 	.4byte \source
@@ -122,7 +122,7 @@
 	.endm
 
 	@ Copies the contents of bank source into bank destination.
-	.macro copybuffers destination, source
+	.macro copylocal destination, source
 	.byte 0x14
 	.byte \destination
 	.byte \source
@@ -171,56 +171,56 @@
 	.endm
 
 	@ Compares the values of script banks a and b, after forcing the values to bytes.
-	.macro comparebuffers byte1, byte2
+	.macro compare_local_to_local byte1, byte2
 	.byte 0x1b
 	.byte \byte1
 	.byte \byte2
 	.endm
 
 	@ Compares the least-significant byte of the value of script bank a to a fixed byte value (b).
-	.macro comparebuffertobyte a, b
+	.macro compare_local_to_imm a, b
 	.byte 0x1c
 	.byte \a
 	.byte \b
 	.endm
 
 	@ Compares the least-significant byte of the value of script bank a to the byte located at offset b.
-	.macro comparebuffertoptrbyte a, b
+	.macro compare_local_to_addr a, b
 	.byte 0x1d
 	.byte \a
 	.4byte \b
 	.endm
 
 	@ Compares the byte located at offset a to the least-significant byte of the value of script bank b.
-	.macro compareptrbytetobuffer a, b
+	.macro compare_addr_to_local a, b
 	.byte 0x1e
 	.4byte \a
 	.byte \b
 	.endm
 
 	@ Compares the byte located at offset a to a fixed byte value (b).
-	.macro compareptrbytetobyte a, b
+	.macro compare_addr_to_imm a, b
 	.byte 0x1f
 	.4byte \a
 	.byte \b
 	.endm
 
 	@ Compares the byte located at offset a to the byte located at offset b.
-	.macro compareptrbytes a, b
+	.macro compare_addr_to_addr a, b
 	.byte 0x20
 	.4byte \a
 	.4byte \b
 	.endm
 
 	@ Compares the value of `var` to a fixed word value (b).
-	.macro compare var, value
+	.macro compare_var_to_imm var, value
 	.byte 0x21
 	.2byte \var
 	.2byte \value
 	.endm
 
 	@ Compares the value of `var` to the value of `var2`.
-	.macro comparevars var1, var2
+	.macro compare_var_to_var var1, var2
 	.byte 0x22
 	.2byte \var1
 	.2byte \var2
@@ -1484,12 +1484,12 @@
 	.endm
 
 	.macro case condition, dest
-	compare 0x8000, \condition
+	compare_var_to_imm 0x8000, \condition
 	goto_if_eq \dest
 	.endm
 
 	.macro msgbox text, type=4
-	loadptr 0, \text
+	loadword 0, \text
 	callstd \type
 	.endm
 

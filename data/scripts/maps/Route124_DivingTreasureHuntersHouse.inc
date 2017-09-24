@@ -23,7 +23,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_163E20:: @ 8163E20
 
 Route124_DivingTreasureHuntersHouse_EventScript_163E2E:: @ 8163E2E
 	call Route124_DivingTreasureHuntersHouse_EventScript_163E44
-	compare 0x4001, 0
+	compare_var_to_imm 0x4001, 0
 	goto_if_eq Route124_DivingTreasureHuntersHouse_EventScript_164329
 	goto Route124_DivingTreasureHuntersHouse_EventScript_163EA2
 	end
@@ -31,16 +31,16 @@ Route124_DivingTreasureHuntersHouse_EventScript_163E2E:: @ 8163E2E
 Route124_DivingTreasureHuntersHouse_EventScript_163E44:: @ 8163E44
 	setvar 0x4001, 0
 	checkitem ITEM_RED_SHARD, 1
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	call_if 1, Route124_DivingTreasureHuntersHouse_EventScript_163E8A
 	checkitem ITEM_YELLOW_SHARD, 1
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	call_if 1, Route124_DivingTreasureHuntersHouse_EventScript_163E90
 	checkitem ITEM_BLUE_SHARD, 1
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	call_if 1, Route124_DivingTreasureHuntersHouse_EventScript_163E96
 	checkitem ITEM_GREEN_SHARD, 1
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	call_if 1, Route124_DivingTreasureHuntersHouse_EventScript_163E9C
 	return
 
@@ -247,13 +247,13 @@ Route124_DivingTreasureHuntersHouse_EventScript_164292:: @ 8164292
 	bufferitem 0, 0x8008
 	bufferitem 1, 0x8009
 	msgbox Route124_DivingTreasureHuntersHouse_Text_19F5E0, 5
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq Route124_DivingTreasureHuntersHouse_EventScript_16431F
 	checkitemspace 0x8009, 1
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	goto_if_eq Route124_DivingTreasureHuntersHouse_EventScript_1642D3
 	checkitem 0x8008, 2
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq Route124_DivingTreasureHuntersHouse_EventScript_1642D3
 	goto Route124_DivingTreasureHuntersHouse_EventScript_164315
 	end
@@ -263,10 +263,10 @@ Route124_DivingTreasureHuntersHouse_EventScript_1642D3:: @ 81642D3
 	giveitem 0x8009
 	msgbox Route124_DivingTreasureHuntersHouse_Text_19F606, 4
 	call Route124_DivingTreasureHuntersHouse_EventScript_163E44
-	compare 0x4001, 0
+	compare_var_to_imm 0x4001, 0
 	goto_if_eq Route124_DivingTreasureHuntersHouse_EventScript_164333
 	msgbox Route124_DivingTreasureHuntersHouse_Text_19F629, 5
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	goto_if_eq Route124_DivingTreasureHuntersHouse_EventScript_163EB0
 	goto Route124_DivingTreasureHuntersHouse_EventScript_16431F
 	end

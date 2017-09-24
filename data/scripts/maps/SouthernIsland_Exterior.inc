@@ -10,7 +10,7 @@ SouthernIsland_Exterior_EventScript_160AE0:: @ 8160AE0
 	lock
 	faceplayer
 	msgbox SouthernIsland_Exterior_Text_1C5215, 5
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq SouthernIsland_Exterior_EventScript_160B25
 	msgbox SouthernIsland_Exterior_Text_1C5281, 4
 	closebutton

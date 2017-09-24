@@ -22,11 +22,11 @@ MossdeepCity_GameCorner_B1F_EventScript_15AE6E:: @ 815AE6E
 	setvar 0x8005, 0
 	special sub_813556C
 	waitstate
-	compare RESULT, 3
+	compare_var_to_imm RESULT, 3
 	call_if 1, MossdeepCity_GameCorner_B1F_EventScript_15AED5
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	call_if 1, MossdeepCity_GameCorner_B1F_EventScript_15AEE3
-	compare RESULT, 2
+	compare_var_to_imm RESULT, 2
 	call_if 1, MossdeepCity_GameCorner_B1F_EventScript_15AEEE
 	closebutton
 	special ScrSpecial_HealPlayerParty

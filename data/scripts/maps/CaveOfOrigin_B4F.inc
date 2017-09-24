@@ -66,7 +66,7 @@ CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 	waitstate
 	clearflag 2145
 	specialval RESULT, sub_810E300
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	call_if 1, CaveOfOrigin_B4F_EventScript_15DE73
 	setflag 816
 	setflag 855

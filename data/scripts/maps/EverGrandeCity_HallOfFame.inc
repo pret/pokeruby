@@ -44,9 +44,9 @@ EverGrandeCity_HallOfFame_EventScript_15BBA8:: @ 815BBA8
 	setvar 0x4001, 1
 	call EverGrandeCity_HallOfFame_EventScript_19FC13
 	checkgender
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq EverGrandeCity_HallOfFame_EventScript_15BC41
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	goto_if_eq EverGrandeCity_HallOfFame_EventScript_15BC4D
 	end
 

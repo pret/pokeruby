@@ -14,10 +14,10 @@ PacifidlogTown_House2_EventScript_154168:: @ 8154168
 	call_if 0, PacifidlogTown_House2_EventScript_1541D7
 	setflag 300
 	specialval RESULT, GetLeadMonFriendshipScore
-	compare RESULT, 4
+	compare_var_to_imm RESULT, 4
 	goto_if 4, PacifidlogTown_House2_EventScript_1541EC
 	specialval RESULT, GetLeadMonFriendshipScore
-	compare RESULT, 2
+	compare_var_to_imm RESULT, 2
 	goto_if 4, PacifidlogTown_House2_EventScript_15421B
 	goto PacifidlogTown_House2_EventScript_154225
 	end
@@ -26,7 +26,7 @@ PacifidlogTown_House2_EventScript_1541B4:: @ 81541B4
 	checkflag 299
 	goto_if 0, PacifidlogTown_House2_EventScript_1A14DC
 	specialval RESULT, sub_810F908
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	call_if 1, PacifidlogTown_House2_EventScript_1541E8
 	return
 
@@ -46,7 +46,7 @@ PacifidlogTown_House2_EventScript_1541E8:: @ 81541E8
 PacifidlogTown_House2_EventScript_1541EC:: @ 81541EC
 	msgbox PacifidlogTown_House2_Text_179169, 4
 	giveitem ITEM_TM27
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq PacifidlogTown_House2_EventScript_1A029B
 	setflag 299
 	special sub_810F950
@@ -62,7 +62,7 @@ PacifidlogTown_House2_EventScript_15421B:: @ 815421B
 PacifidlogTown_House2_EventScript_154225:: @ 8154225
 	msgbox PacifidlogTown_House2_Text_17922D, 4
 	giveitem ITEM_TM21
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq PacifidlogTown_House2_EventScript_1A029B
 	setflag 299
 	special sub_810F950

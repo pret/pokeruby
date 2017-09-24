@@ -3,7 +3,7 @@ Route110_TrickHousePuzzle8_MapScripts:: @ 816341B
 
 Route110_TrickHousePuzzle8_EventScript_16341C:: @ 816341C
 	lockall
-	compare 0x40b2, 0
+	compare_var_to_imm 0x40b2, 0
 	goto_if_eq Route110_TrickHousePuzzle8_EventScript_16342E
 	goto Route110_TrickHousePuzzle8_EventScript_161892
 	end

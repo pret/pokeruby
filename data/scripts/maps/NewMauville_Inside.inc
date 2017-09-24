@@ -5,9 +5,9 @@ NewMauville_Inside_MapScripts:: @ 815E55F
 	.byte 0
 
 NewMauville_Inside_MapScript1_15E56F:: @ 815E56F
-	compare 0x4001, 1
+	compare_var_to_imm 0x4001, 1
 	call_if 1, NewMauville_Inside_EventScript_15E5DA
-	compare 0x4002, 1
+	compare_var_to_imm 0x4002, 1
 	call_if 1, NewMauville_Inside_EventScript_15E728
 	checkflag 2145
 	call_if 1, NewMauville_Inside_EventScript_15E58F
@@ -23,7 +23,7 @@ NewMauville_Inside_MapScript1_15E593:: @ 815E593
 	end
 
 NewMauville_Inside_MapScript1_15E59E:: @ 815E59E
-	compare 0x40ba, 2
+	compare_var_to_imm 0x40ba, 2
 	call_if 1, NewMauville_Inside_EventScript_15E88B
 	end
 
@@ -150,7 +150,7 @@ NewMauville_Inside_EventScript_15E88B:: @ 815E88B
 
 NewMauville_Inside_EventScript_15E8E0:: @ 815E8E0
 	lockall
-	compare 0x40ba, 2
+	compare_var_to_imm 0x40ba, 2
 	goto_if_eq NewMauville_Inside_EventScript_15E8F6
 	msgbox NewMauville_Inside_Text_198315, 4
 	releaseall

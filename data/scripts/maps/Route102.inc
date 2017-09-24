@@ -20,7 +20,7 @@ Route102_EventScript_14EAF5:: @ 814EAF5
 Route102_EventScript_14EAFE:: @ 814EAFE
 	trainerbattle 0, OPPONENT_CALVIN_1, 0, Route102_Text_1B79C3, Route102_Text_1B7A2C
 	specialval RESULT, sub_8082C68
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	goto_if_eq Route102_EventScript_14EB25
 	msgbox Route102_Text_1B7A60, 6
 	end

@@ -63,7 +63,7 @@ AbandonedShip_HiddenFloorCorridors_EventScript_15EBF3:: @ 815EBF3
 	checkflag 240
 	goto_if_eq AbandonedShip_HiddenFloorCorridors_EventScript_15ECF7
 	checkitem ITEM_ROOM_1_KEY, 1
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq AbandonedShip_HiddenFloorCorridors_EventScript_15ECCF
 	msgbox AbandonedShip_HiddenFloorCorridors_Text_198E90, 4
 	playsfx 21
@@ -79,7 +79,7 @@ AbandonedShip_HiddenFloorCorridors_EventScript_15EC2A:: @ 815EC2A
 	checkflag 241
 	goto_if_eq AbandonedShip_HiddenFloorCorridors_EventScript_15ECF7
 	checkitem ITEM_ROOM_2_KEY, 1
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq AbandonedShip_HiddenFloorCorridors_EventScript_15ECD9
 	msgbox AbandonedShip_HiddenFloorCorridors_Text_198E90, 4
 	playsfx 21
@@ -95,7 +95,7 @@ AbandonedShip_HiddenFloorCorridors_EventScript_15EC61:: @ 815EC61
 	checkflag 242
 	goto_if_eq AbandonedShip_HiddenFloorCorridors_EventScript_15ECF7
 	checkitem ITEM_ROOM_4_KEY, 1
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq AbandonedShip_HiddenFloorCorridors_EventScript_15ECE3
 	msgbox AbandonedShip_HiddenFloorCorridors_Text_198E90, 4
 	playsfx 21
@@ -111,7 +111,7 @@ AbandonedShip_HiddenFloorCorridors_EventScript_15EC98:: @ 815EC98
 	checkflag 243
 	goto_if_eq AbandonedShip_HiddenFloorCorridors_EventScript_15ECF7
 	checkitem ITEM_ROOM_6_KEY, 1
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq AbandonedShip_HiddenFloorCorridors_EventScript_15ECED
 	msgbox AbandonedShip_HiddenFloorCorridors_Text_198E90, 4
 	playsfx 21

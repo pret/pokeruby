@@ -16,7 +16,7 @@ SlateportCity_ContestHall_EventScript_15555E:: @ 815555E
 	goto_if_eq SlateportCity_ContestHall_EventScript_155595
 	msgbox SlateportCity_ContestHall_Text_17CCE2, 4
 	giveitem ITEM_TM41
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq SlateportCity_ContestHall_EventScript_1A029B
 	setflag 265
 	msgbox SlateportCity_ContestHall_Text_17CE28, 4

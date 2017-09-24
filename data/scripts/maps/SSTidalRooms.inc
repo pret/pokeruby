@@ -8,7 +8,7 @@ SSTidalRooms_EventScript_15FF06:: @ 815FF06
 	goto_if_eq SSTidalRooms_EventScript_15FF3D
 	msgbox SSTidalRooms_Text_199B65, 4
 	giveitem ITEM_TM49
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq SSTidalRooms_EventScript_1A029B
 	setflag 260
 	msgbox SSTidalRooms_Text_199C1A, 4

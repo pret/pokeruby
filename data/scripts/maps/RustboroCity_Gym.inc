@@ -20,14 +20,14 @@ RustboroCity_Gym_EventScript_1578FE:: @ 81578FE
 	addvar 0x4085, 1
 	setvar 0x8008, 1
 	call RustboroCity_Gym_EventScript_1A01C0
-	compare 0x4085, 6
+	compare_var_to_imm 0x4085, 6
 	call_if 1, RustboroCity_Gym_EventScript_1A00FB
 	goto RustboroCity_Gym_EventScript_15793C
 	end
 
 RustboroCity_Gym_EventScript_15793C:: @ 815793C
 	giveitem ITEM_TM39
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq RustboroCity_Gym_EventScript_1A029B
 	setflag 165
 	msgbox RustboroCity_Gym_Text_184170, 4

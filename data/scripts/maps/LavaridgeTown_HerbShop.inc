@@ -32,7 +32,7 @@ LavaridgeTown_HerbShop_EventScript_153655:: @ 8153655
 	goto_if_eq LavaridgeTown_HerbShop_EventScript_153684
 	msgbox LavaridgeTown_HerbShop_Text_1761A2, 4
 	giveitem ITEM_CHARCOAL
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq LavaridgeTown_HerbShop_EventScript_1A029B
 	setflag 254
 	release

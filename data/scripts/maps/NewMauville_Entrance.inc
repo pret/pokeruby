@@ -4,7 +4,7 @@ NewMauville_Entrance_MapScripts:: @ 815E48A
 	.byte 0
 
 NewMauville_Entrance_MapScript1_15E495:: @ 815E495
-	compare 0x40ba, 0
+	compare_var_to_imm 0x40ba, 0
 	call_if 1, NewMauville_Entrance_EventScript_15E4A1
 	end
 
@@ -27,10 +27,10 @@ NewMauville_Entrance_EventScript_15E4DC:: @ 815E4DC
 	waitmove 0
 	msgbox NewMauville_Entrance_Text_1982C0, 4
 	checkitem ITEM_BASEMENT_KEY, 1
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq NewMauville_Entrance_EventScript_15E55D
 	msgbox NewMauville_Entrance_Text_1982D4, 5
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq NewMauville_Entrance_EventScript_15E55D
 	msgbox NewMauville_Entrance_Text_1982EA, 4
 	setmaptile 3, 0, 707, 0

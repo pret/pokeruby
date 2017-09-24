@@ -9,9 +9,9 @@ Route119_MapScript1_151172:: @ 8151172
 	end
 
 Route119_EventScript_15117C:: @ 815117C
-	compare 0x8004, 6
+	compare_var_to_imm 0x8004, 6
 	call_if 1, Route119_EventScript_151193
-	compare 0x8004, 7
+	compare_var_to_imm 0x8004, 7
 	call_if 1, Route119_EventScript_151197
 	return
 
@@ -27,7 +27,7 @@ Route119_MapScript1_15119B:: @ 815119B
 	call Route119_EventScript_1A014E
 	call Route119_EventScript_1A0172
 	call Route119_EventScript_1A0196
-	compare 0x40b3, 1
+	compare_var_to_imm 0x40b3, 1
 	call_if 1, Route119_EventScript_1511B9
 	special SetRoute119Weather
 	end
@@ -52,29 +52,29 @@ Route119_EventScript_1511DB:: @ 81511DB
 	lockall
 	reappear 25
 	checkgender
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	call_if 1, Route119_EventScript_151254
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	call_if 1, Route119_EventScript_151259
 	pause 65
-	compare 0x4001, 1
+	compare_var_to_imm 0x4001, 1
 	call_if 1, Route119_EventScript_1513A6
-	compare 0x4001, 2
+	compare_var_to_imm 0x4001, 2
 	call_if 1, Route119_EventScript_1513B1
 	move 255, Route119_Movement_1A0845
 	waitmove 0
 	pause 30
-	compare 0x4001, 1
+	compare_var_to_imm 0x4001, 1
 	call_if 1, Route119_EventScript_1513D2
-	compare 0x4001, 2
+	compare_var_to_imm 0x4001, 2
 	call_if 1, Route119_EventScript_1513E1
 	disappear 25
 	reappear 16
 	pause 30
 	checkgender
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq Route119_EventScript_15125E
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	goto_if_eq Route119_EventScript_1512D8
 	releaseall
 	end
@@ -154,16 +154,16 @@ Route119_EventScript_151352:: @ 8151352
 
 Route119_EventScript_151362:: @ 8151362
 	closebutton
-	compare 0x4001, 1
+	compare_var_to_imm 0x4001, 1
 	call_if 1, Route119_EventScript_1513D2
-	compare 0x4001, 2
+	compare_var_to_imm 0x4001, 2
 	call_if 1, Route119_EventScript_1513E1
 	disappear 16
 	reappear 25
 	pause 30
-	compare 0x4001, 1
+	compare_var_to_imm 0x4001, 1
 	call_if 1, Route119_EventScript_1513BC
-	compare 0x4001, 2
+	compare_var_to_imm 0x4001, 2
 	call_if 1, Route119_EventScript_1513C7
 	disappear 25
 	setvar 0x4072, 1
@@ -297,7 +297,7 @@ Route119_EventScript_1514A8:: @ 81514A8
 Route119_EventScript_1514BF:: @ 81514BF
 	trainerbattle 0, OPPONENT_JACKSON_1, 0, Route119_Text_1BE8BB, Route119_Text_1BE90E
 	specialval RESULT, sub_8082C68
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	goto_if_eq Route119_EventScript_1514E6
 	msgbox Route119_Text_1BE937, 6
 	end
@@ -310,7 +310,7 @@ Route119_EventScript_1514E6:: @ 81514E6
 Route119_EventScript_1514FD:: @ 81514FD
 	trainerbattle 0, OPPONENT_CATHERINE_1, 0, Route119_Text_1BEA3A, Route119_Text_1BEA88
 	specialval RESULT, sub_8082C68
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	goto_if_eq Route119_EventScript_151524
 	msgbox Route119_Text_1BEAB3, 6
 	end

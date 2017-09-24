@@ -39,7 +39,7 @@ Route112_EventScript_150549:: @ 8150549
 Route112_EventScript_150560:: @ 8150560
 	trainerbattle 0, OPPONENT_TRENT_1, 0, Route112_Text_1BB6A0, Route112_Text_1BB707
 	specialval RESULT, sub_8082C68
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	goto_if_eq Route112_EventScript_150587
 	msgbox Route112_Text_1BB721, 6
 	end

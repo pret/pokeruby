@@ -4,13 +4,13 @@ Route110_TrickHousePuzzle2_MapScripts:: @ 8161D76
 	.byte 0
 
 Route110_TrickHousePuzzle2_MapScript1_161D81:: @ 8161D81
-	compare 0x4001, 1
+	compare_var_to_imm 0x4001, 1
 	call_if 1, Route110_TrickHousePuzzle2_EventScript_161E2C
-	compare 0x4002, 1
+	compare_var_to_imm 0x4002, 1
 	call_if 1, Route110_TrickHousePuzzle2_EventScript_161E3F
-	compare 0x4003, 1
+	compare_var_to_imm 0x4003, 1
 	call_if 1, Route110_TrickHousePuzzle2_EventScript_161E52
-	compare 0x4004, 1
+	compare_var_to_imm 0x4004, 1
 	call_if 1, Route110_TrickHousePuzzle2_EventScript_161E65
 	end
 
@@ -23,7 +23,7 @@ Route110_TrickHousePuzzle2_MapScript1_161DAE:: @ 8161DAE
 
 Route110_TrickHousePuzzle2_EventScript_161DC3:: @ 8161DC3
 	lockall
-	compare 0x40ac, 0
+	compare_var_to_imm 0x40ac, 0
 	goto_if_eq Route110_TrickHousePuzzle2_EventScript_161DD5
 	goto Route110_TrickHousePuzzle2_EventScript_161892
 	end

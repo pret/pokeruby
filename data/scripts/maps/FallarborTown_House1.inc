@@ -11,7 +11,7 @@ FallarborTown_House1_EventScript_153BB5:: @ 8153BB5
 	checkflag 229
 	goto_if_eq FallarborTown_House1_EventScript_153C54
 	checkitem ITEM_METEORITE, 1
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	goto_if_eq FallarborTown_House1_EventScript_153BDA
 	msgbox FallarborTown_House1_Text_177755, 4
 	release
@@ -22,11 +22,11 @@ FallarborTown_House1_EventScript_153BDA:: @ 8153BDA
 	call_if 0, FallarborTown_House1_EventScript_153C2D
 	checkflag 2
 	call_if 1, FallarborTown_House1_EventScript_153C3E
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq FallarborTown_House1_EventScript_153C47
 	msgbox FallarborTown_House1_Text_1778C4, 4
 	giveitem ITEM_TM27
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq FallarborTown_House1_EventScript_1A029B
 	setvar 0x8004, 280
 	call FallarborTown_House1_EventScript_1A067F

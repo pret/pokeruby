@@ -41,9 +41,9 @@ SSTidalRooms_EventScript_15FCF9:: @ 815FCF9
 	return
 
 gUnknown_0815FD0D:: @ 815FD0D
-	compare 0x40B4, 2
+	compare_var_to_imm 0x40B4, 2
 	goto_if_eq SSTidalCorridor_EventScript_15FD24
-	compare 0x40B4, 7
+	compare_var_to_imm 0x40B4, 7
 	goto_if_eq SSTidalCorridor_EventScript_15FD3A
 	end
 
@@ -113,9 +113,9 @@ SSTidalCorridor_EventScript_15FDCD:: @ 815FDCD
 SSTidalCorridor_EventScript_15FDD6:: @ 815FDD6
 	lock
 	faceplayer
-	compare 0x40b4, 4
+	compare_var_to_imm 0x40b4, 4
 	goto_if_eq SSTidalCorridor_EventScript_15FDF8
-	compare 0x40b4, 8
+	compare_var_to_imm 0x40b4, 8
 	goto_if_eq SSTidalCorridor_EventScript_15FE17
 	msgbox SSTidalCorridor_Text_19913B, 4
 	release
@@ -147,9 +147,9 @@ SSTidalCorridor_EventScript_15FE36:: @ 815FE36
 
 SSTidalCorridor_EventScript_15FE3A:: @ 815FE3A
 	lockall
-	compare 0x40b4, 2
+	compare_var_to_imm 0x40b4, 2
 	goto_if_eq SSTidalCorridor_EventScript_15FE5B
-	compare 0x40b4, 7
+	compare_var_to_imm 0x40b4, 7
 	goto_if_eq SSTidalCorridor_EventScript_15FE5B
 	msgbox SSTidalCorridor_Text_199268, 4
 	releaseall

@@ -5,19 +5,19 @@ LittlerootTown_MapScripts:: @ 814D509
 
 LittlerootTown_MapScript1_14D514:: @ 814D514
 	setflag 2063
-	compare 0x4092, 2
+	compare_var_to_imm 0x4092, 2
 	call_if 1, LittlerootTown_EventScript_14D57B
 	checkflag 82
 	call_if 0, LittlerootTown_EventScript_14D583
-	compare 0x4050, 3
+	compare_var_to_imm 0x4050, 3
 	call_if 1, LittlerootTown_EventScript_14D5A6
-	compare 0x4082, 4
+	compare_var_to_imm 0x4082, 4
 	call_if 1, LittlerootTown_EventScript_14D570
-	compare 0x408c, 4
+	compare_var_to_imm 0x408c, 4
 	call_if 1, LittlerootTown_EventScript_14D570
-	compare 0x40c7, 1
+	compare_var_to_imm 0x40c7, 1
 	call_if 1, LittlerootTown_EventScript_14D567
-	compare 0x408d, 3
+	compare_var_to_imm 0x408d, 3
 	call_if 1, LittlerootTown_EventScript_14D563
 	end
 
@@ -40,7 +40,7 @@ LittlerootTown_EventScript_14D57B:: @ 814D57B
 	return
 
 LittlerootTown_EventScript_14D583:: @ 814D583
-	compare 0x4050, 0
+	compare_var_to_imm 0x4050, 0
 	goto_if_eq LittlerootTown_EventScript_14D59A
 	movespriteperm 1, 10, 1
 	spritebehave 1, 7
@@ -55,9 +55,9 @@ LittlerootTown_EventScript_14D5A6:: @ 814D5A6
 	clearflag 752
 	spritebehave 4, 8
 	checkgender
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	call_if 1, LittlerootTown_EventScript_14D5C5
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	call_if 1, LittlerootTown_EventScript_14D5CD
 	return
 
@@ -191,7 +191,7 @@ LittlerootTown_EventScript_14D6DF:: @ 814D6DF
 	goto_if_eq LittlerootTown_EventScript_14D72F
 	checkflag 82
 	goto_if_eq LittlerootTown_EventScript_14D722
-	compare 0x4050, 0
+	compare_var_to_imm 0x4050, 0
 	goto_if 5, LittlerootTown_EventScript_14D708
 	msgbox LittlerootTown_Text_16ACEB, 4
 	release
@@ -334,9 +334,9 @@ LittlerootTown_EventScript_14D7FF:: @ 814D7FF
 LittlerootTown_EventScript_14D808:: @ 814D808
 	lockall
 	checkgender
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	call_if 1, LittlerootTown_EventScript_14D822
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	call_if 1, LittlerootTown_EventScript_14D82B
 	releaseall
 	end
@@ -352,9 +352,9 @@ LittlerootTown_EventScript_14D82B:: @ 814D82B
 LittlerootTown_EventScript_14D834:: @ 814D834
 	lockall
 	checkgender
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	call_if 1, LittlerootTown_EventScript_14D84E
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	call_if 1, LittlerootTown_EventScript_14D857
 	releaseall
 	end
@@ -407,27 +407,27 @@ LittlerootTown_EventScript_14D8AA:: @ 814D8AA
 
 LittlerootTown_EventScript_14D8B6:: @ 814D8B6
 	checkgender
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	call_if 1, LittlerootTown_EventScript_14D93C
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	call_if 1, LittlerootTown_EventScript_14D947
 	checkgender
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	call_if 1, LittlerootTown_EventScript_14D926
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	call_if 1, LittlerootTown_EventScript_14D931
 	msgbox LittlerootTown_Text_16A8EE, 4
 	closebutton
 	checkgender
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	call_if 1, LittlerootTown_EventScript_14D952
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	call_if 1, LittlerootTown_EventScript_14D995
 	call LittlerootTown_EventScript_14DD38
 	checkgender
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	call_if 1, LittlerootTown_EventScript_14DAAA
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	call_if 1, LittlerootTown_EventScript_14DAED
 	goto LittlerootTown_EventScript_14DD2B
 	end
@@ -453,32 +453,32 @@ LittlerootTown_EventScript_14D947:: @ 814D947
 	return
 
 LittlerootTown_EventScript_14D952:: @ 814D952
-	compare 0x8008, 0
+	compare_var_to_imm 0x8008, 0
 	call_if 1, LittlerootTown_EventScript_14D9D8
-	compare 0x8008, 1
+	compare_var_to_imm 0x8008, 1
 	call_if 1, LittlerootTown_EventScript_14D9ED
-	compare 0x8008, 2
+	compare_var_to_imm 0x8008, 2
 	call_if 1, LittlerootTown_EventScript_14DA02
-	compare 0x8008, 3
+	compare_var_to_imm 0x8008, 3
 	call_if 1, LittlerootTown_EventScript_14DA17
-	compare 0x8008, 4
+	compare_var_to_imm 0x8008, 4
 	call_if 1, LittlerootTown_EventScript_14DA2C
-	compare 0x8008, 5
+	compare_var_to_imm 0x8008, 5
 	call_if 1, LittlerootTown_EventScript_14DA41
 	return
 
 LittlerootTown_EventScript_14D995:: @ 814D995
-	compare 0x8008, 0
+	compare_var_to_imm 0x8008, 0
 	call_if 1, LittlerootTown_EventScript_14D9D8
-	compare 0x8008, 1
+	compare_var_to_imm 0x8008, 1
 	call_if 1, LittlerootTown_EventScript_14D9ED
-	compare 0x8008, 2
+	compare_var_to_imm 0x8008, 2
 	call_if 1, LittlerootTown_EventScript_14DA56
-	compare 0x8008, 3
+	compare_var_to_imm 0x8008, 3
 	call_if 1, LittlerootTown_EventScript_14DA6B
-	compare 0x8008, 4
+	compare_var_to_imm 0x8008, 4
 	call_if 1, LittlerootTown_EventScript_14DA80
-	compare 0x8008, 5
+	compare_var_to_imm 0x8008, 5
 	call_if 1, LittlerootTown_EventScript_14DA95
 	return
 
@@ -553,32 +553,32 @@ LittlerootTown_EventScript_14DA95:: @ 814DA95
 	return
 
 LittlerootTown_EventScript_14DAAA:: @ 814DAAA
-	compare 0x8008, 0
+	compare_var_to_imm 0x8008, 0
 	call_if 1, LittlerootTown_EventScript_14DB30
-	compare 0x8008, 1
+	compare_var_to_imm 0x8008, 1
 	call_if 1, LittlerootTown_EventScript_14DB3B
-	compare 0x8008, 2
+	compare_var_to_imm 0x8008, 2
 	call_if 1, LittlerootTown_EventScript_14DB46
-	compare 0x8008, 3
+	compare_var_to_imm 0x8008, 3
 	call_if 1, LittlerootTown_EventScript_14DB6C
-	compare 0x8008, 4
+	compare_var_to_imm 0x8008, 4
 	call_if 1, LittlerootTown_EventScript_14DB92
-	compare 0x8008, 5
+	compare_var_to_imm 0x8008, 5
 	call_if 1, LittlerootTown_EventScript_14DBB8
 	return
 
 LittlerootTown_EventScript_14DAED:: @ 814DAED
-	compare 0x8008, 0
+	compare_var_to_imm 0x8008, 0
 	call_if 1, LittlerootTown_EventScript_14DB30
-	compare 0x8008, 1
+	compare_var_to_imm 0x8008, 1
 	call_if 1, LittlerootTown_EventScript_14DB3B
-	compare 0x8008, 2
+	compare_var_to_imm 0x8008, 2
 	call_if 1, LittlerootTown_EventScript_14DBDE
-	compare 0x8008, 3
+	compare_var_to_imm 0x8008, 3
 	call_if 1, LittlerootTown_EventScript_14DC04
-	compare 0x8008, 4
+	compare_var_to_imm 0x8008, 4
 	call_if 1, LittlerootTown_EventScript_14DC2A
-	compare 0x8008, 5
+	compare_var_to_imm 0x8008, 5
 	call_if 1, LittlerootTown_EventScript_14DC50
 	return
 
@@ -842,9 +842,9 @@ LittlerootTown_EventScript_14DCE2:: @ 814DCE2
 	lock
 	faceplayer
 	checkgender
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	call_if 1, LittlerootTown_EventScript_14D926
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	call_if 1, LittlerootTown_EventScript_14D931
 	call LittlerootTown_EventScript_14DD38
 	move 4, LittlerootTown_Movement_1A0841

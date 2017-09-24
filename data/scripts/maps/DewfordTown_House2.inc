@@ -8,7 +8,7 @@ DewfordTown_House2_EventScript_1535DC:: @ 81535DC
 	goto_if_eq DewfordTown_House2_EventScript_153615
 	msgbox DewfordTown_House2_Text_175EFE, 4
 	giveitem ITEM_SILK_SCARF
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq DewfordTown_House2_EventScript_15360B
 	setflag 289
 	release

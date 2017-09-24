@@ -10,11 +10,11 @@ AbandonedShip_HiddenFloorRooms_EventScript_15ED11:: @ 815ED11
 	setvar 0x4001, 1
 	getplayerxy 0x4002, 0x4003
 	setvar 0x4004, 1
-	compare 0x4002, 21
+	compare_var_to_imm 0x4002, 21
 	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_15ED89
-	compare 0x4002, 36
+	compare_var_to_imm 0x4002, 36
 	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_15ED8F
-	compare 0x4003, 2
+	compare_var_to_imm 0x4003, 2
 	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_15ED95
 	switch 0x4004
 	case 1, AbandonedShip_HiddenFloorRooms_EventScript_15ED9B
@@ -44,7 +44,7 @@ AbandonedShip_HiddenFloorRooms_EventScript_15ED9B:: @ 815ED9B
 	setanimation 2, 0
 	doanimation 54
 	specialval RESULT, sub_810F4D4
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_15EE8B
 	checkanimation 54
 	pause 10
@@ -55,10 +55,10 @@ AbandonedShip_HiddenFloorRooms_EventScript_15EDC4:: @ 815EDC4
 
 AbandonedShip_HiddenFloorRooms_EventScript_15EDC5:: @ 815EDC5
 	specialval RESULT, sub_810F488
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	goto_if_eq AbandonedShip_HiddenFloorRooms_EventScript_15EDEA
 	pause 20
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_15EE6B
 	checkanimation 54
 	pause 10
@@ -78,7 +78,7 @@ AbandonedShip_HiddenFloorRooms_EventScript_15EDEB:: @ 815EDEB
 	setanimation 2, 0
 	doanimation 54
 	specialval RESULT, sub_810F4FC
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_15EE9B
 	checkanimation 54
 	pause 10
@@ -99,7 +99,7 @@ AbandonedShip_HiddenFloorRooms_EventScript_15EE23:: @ 815EE23
 	setanimation 2, 0
 	doanimation 54
 	specialval RESULT, sub_810F4B0
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_15EE7B
 	checkanimation 54
 	pause 10

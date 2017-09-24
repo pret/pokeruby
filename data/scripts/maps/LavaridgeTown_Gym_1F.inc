@@ -84,7 +84,7 @@ LavaridgeTown_Gym_1F_EventScript_153766:: @ 8153766
 	setflag 1213
 	setflag 2058
 	addvar 0x4085, 1
-	compare 0x4085, 6
+	compare_var_to_imm 0x4085, 6
 	call_if 1, LavaridgeTown_Gym_1F_EventScript_1A00FB
 	setvar 0x8008, 4
 	call LavaridgeTown_Gym_1F_EventScript_1A01C0
@@ -95,7 +95,7 @@ LavaridgeTown_Gym_1F_EventScript_153766:: @ 8153766
 
 LavaridgeTown_Gym_1F_EventScript_1537A7:: @ 81537A7
 	giveitem ITEM_TM50
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq LavaridgeTown_Gym_1F_EventScript_1A029B
 	msgbox LavaridgeTown_Gym_1F_Text_176B8F, 4
 	setflag 168

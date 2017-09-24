@@ -125,7 +125,7 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_15875C:: @ 815875C
 	move 1, LilycoveCity_LilycoveMuseum_2F_Movement_1A0839
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_188120, 4
 	givedecoration 44
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq LilycoveCity_LilycoveMuseum_2F_EventScript_158783
 	setflag 236
 	closebutton

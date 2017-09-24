@@ -387,6 +387,7 @@ u8 compare_012(u16 a1, u16 a2)
     return 2;
 }
 
+// comparelocaltolocal
 bool8 ScrCmd_comparebuffers(struct ScriptContext *ctx)
 {
     u8 value1 = ctx->data[ScriptReadByte(ctx)];
@@ -396,6 +397,7 @@ bool8 ScrCmd_comparebuffers(struct ScriptContext *ctx)
     return FALSE;
 }
 
+// comparelocaltoimm
 bool8 ScrCmd_comparebuffertobyte(struct ScriptContext *ctx)
 {
     u8 value1 = ctx->data[ScriptReadByte(ctx)];

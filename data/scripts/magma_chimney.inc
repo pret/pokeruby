@@ -67,9 +67,9 @@ MtChimney_EventScript_1B2CCB:: @ 81B2CCB
 	fadescreen 0
 	movespriteperm 1, 10, 12
 	reappear 1
-	compare FACING, 4
+	compare_var_to_imm FACING, 4
 	call_if 1, MtChimney_EventScript_1B2D7D
-	compare FACING, 2
+	compare_var_to_imm FACING, 2
 	call_if 1, MtChimney_EventScript_1B2D88
 	move 255, MtChimney_Movement_1A083F
 	waitmove 0
@@ -79,9 +79,9 @@ MtChimney_EventScript_1B2CCB:: @ 81B2CCB
 	msgbox MtChimney_Text_1B3FFE, 4
 	.endif
 	closebutton
-	compare FACING, 4
+	compare_var_to_imm FACING, 4
 	call_if 1, MtChimney_EventScript_1B2D93
-	compare FACING, 2
+	compare_var_to_imm FACING, 2
 	call_if 1, MtChimney_EventScript_1B2D9E
 	disappear 1
 	setflag 927

@@ -114,10 +114,8 @@ u16 *GetVarPointer(u16 id)
 {
     if (id < 0x4000)
         return NULL;
-
-    if ((s16)id >= 0)
+    if (id < 0x8000)
         return &gSaveBlock1.vars[id - 0x4000];
-
     return gSpecialVars[id - 0x8000];
 }
 

@@ -43,7 +43,7 @@ DewfordTown_EventScript_14E06B:: @ 814E06B
 
 DewfordTown_EventScript_14E076:: @ 814E076
 	msgbox DewfordTown_Text_16B3BC, 5
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	goto_if_eq DewfordTown_EventScript_14E093
 	msgbox DewfordTown_Text_16B471, 4
 	release
@@ -77,9 +77,9 @@ DewfordTown_EventScript_14E0C6:: @ 814E0C6
 	checkflag 257
 	goto_if_eq DewfordTown_EventScript_14E11B
 	msgbox DewfordTown_Text_16B665, 5
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	goto_if_eq DewfordTown_EventScript_14E0F0
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq DewfordTown_EventScript_14E111
 	end
 
@@ -100,9 +100,9 @@ DewfordTown_EventScript_14E11B:: @ 814E11B
 	message DewfordTown_Text_16B84E
 	waittext
 	multichoice 20, 8, 50, 1
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq DewfordTown_EventScript_14E13D
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	goto_if_eq DewfordTown_EventScript_14E147
 	end
 
@@ -599,9 +599,9 @@ DewfordTown_EventScript_14E413:: @ 814E413
 	faceplayer
 	call DewfordTown_EventScript_1A0102
 	msgbox DewfordTown_Text_16B9CE, 5
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	goto_if_eq DewfordTown_EventScript_14E439
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq DewfordTown_EventScript_14E443
 	end
 
@@ -616,15 +616,15 @@ DewfordTown_EventScript_14E443:: @ 814E443
 	call DewfordTown_EventScript_1A00F3
 	lock
 	faceplayer
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	goto_if_eq DewfordTown_EventScript_14E46E
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq DewfordTown_EventScript_14E485
 	end
 
 DewfordTown_EventScript_14E46E:: @ 814E46E
 	inccounter GAME_STAT_STARTED_TRENDS
-	compare 0x8004, 0
+	compare_var_to_imm 0x8004, 0
 	goto_if_eq DewfordTown_EventScript_14E48F
 	msgbox DewfordTown_Text_16BB44, 4
 	release

@@ -5,7 +5,7 @@ LittlerootTown_BrendansHouse_1F_MapScripts:: @ 815263B
 	.byte 0
 
 LittlerootTown_BrendansHouse_1F_MapScript1_15264B:: @ 815264B
-	compare 0x4092, 6
+	compare_var_to_imm 0x4092, 6
 	call_if 0, LittlerootTown_BrendansHouse_1F_EventScript_152660
 	checkflag 274
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_152673
@@ -18,7 +18,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_152660:: @ 8152660
 
 LittlerootTown_BrendansHouse_1F_EventScript_152673:: @ 8152673
 	checkgender
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_152680
 	return
 
@@ -27,11 +27,11 @@ LittlerootTown_BrendansHouse_1F_EventScript_152680:: @ 8152680
 	return
 
 LittlerootTown_BrendansHouse_1F_MapScript1_15268A:: @ 815268A
-	compare 0x4092, 3
+	compare_var_to_imm 0x4092, 3
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1526C4
-	compare 0x4092, 5
+	compare_var_to_imm 0x4092, 5
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1526AC
-	compare 0x4092, 6
+	compare_var_to_imm 0x4092, 6
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1526B8
 	end
 

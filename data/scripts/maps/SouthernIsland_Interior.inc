@@ -23,9 +23,9 @@ SouthernIsland_Interior_MapScript1_160B6C:: @ 8160B6C
 
 SouthernIsland_Interior_EventScript_160B77:: @ 8160B77
 	checkgender
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq SouthernIsland_Interior_EventScript_160B8F
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	goto_if_eq SouthernIsland_Interior_EventScript_160B95
 	end
 

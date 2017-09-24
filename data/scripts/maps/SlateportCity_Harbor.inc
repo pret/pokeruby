@@ -5,7 +5,7 @@ SlateportCity_Harbor_MapScripts:: @ 8155F5D
 SlateportCity_Harbor_MapScript1_155F63:: @ 8155F63
 	warp6 SlateportCity, 255, 28, 13
 	setvar 0x4001, 0
-	compare 0x40a0, 1
+	compare_var_to_imm 0x40a0, 1
 	call_if 1, SlateportCity_Harbor_EventScript_155F89
 	checkflag 2052
 	call_if 1, SlateportCity_Harbor_EventScript_155F85
@@ -63,13 +63,13 @@ SlateportCity_Harbor_EventScript_155FD5:: @ 8155FD5
 	disappear 7
 	disappear 8
 	setvar 0x40a0, 2
-	compare 0x8008, 0
+	compare_var_to_imm 0x8008, 0
 	call_if 1, SlateportCity_Harbor_EventScript_15605C
-	compare 0x8008, 1
+	compare_var_to_imm 0x8008, 1
 	call_if 1, SlateportCity_Harbor_EventScript_156071
-	compare 0x8008, 2
+	compare_var_to_imm 0x8008, 2
 	call_if 1, SlateportCity_Harbor_EventScript_156086
-	compare 0x8008, 3
+	compare_var_to_imm 0x8008, 3
 	call_if 1, SlateportCity_Harbor_EventScript_156086
 	msgbox SlateportCity_Harbor_Text_17FE60, 4
 	closebutton
@@ -168,7 +168,7 @@ SlateportCity_Harbor_EventScript_1560C4:: @ 81560C4
 SlateportCity_Harbor_EventScript_1560D9:: @ 81560D9
 	msgbox SlateportCity_Harbor_Text_17FA73, 4
 	checkitem ITEM_SS_TICKET, 1
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq SlateportCity_Harbor_EventScript_156135
 	message SlateportCity_Harbor_Text_17FB0A
 	waittext
@@ -191,7 +191,7 @@ SlateportCity_Harbor_EventScript_156135:: @ 8156135
 
 SlateportCity_Harbor_EventScript_15613F:: @ 815613F
 	msgbox SlateportCity_Harbor_Text_17FB81, 5
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq SlateportCity_Harbor_EventScript_15618A
 	setvar 0x40b4, 1
 	call SlateportCity_Harbor_EventScript_156196
@@ -202,7 +202,7 @@ SlateportCity_Harbor_EventScript_15613F:: @ 815613F
 
 SlateportCity_Harbor_EventScript_156167:: @ 8156167
 	msgbox SlateportCity_Harbor_Text_17FB9C, 5
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq SlateportCity_Harbor_EventScript_15618A
 	call SlateportCity_Harbor_EventScript_156196
 	warp BattleTower_Outside, 255, 19, 23
@@ -223,9 +223,9 @@ SlateportCity_Harbor_EventScript_156196:: @ 8156196
 	waitmove 0
 	pause 30
 	spriteinvisible LAST_TALKED, 9, 8
-	compare FACING, 2
+	compare_var_to_imm FACING, 2
 	call_if 1, SlateportCity_Harbor_EventScript_1561EF
-	compare FACING, 4
+	compare_var_to_imm FACING, 4
 	call_if 1, SlateportCity_Harbor_EventScript_1561E4
 	pause 30
 	spriteinvisible 255, 0, 0
@@ -274,7 +274,7 @@ SlateportCity_Harbor_EventScript_156211:: @ 8156211
 	goto_if_eq SlateportCity_Harbor_EventScript_156265
 	checkflag 112
 	goto_if_eq SlateportCity_Harbor_EventScript_156258
-	compare 0x40a0, 2
+	compare_var_to_imm 0x40a0, 2
 	goto_if_eq SlateportCity_Harbor_EventScript_15624E
 	msgbox SlateportCity_Harbor_Text_17FD1C, 4
 	closebutton
@@ -300,10 +300,10 @@ SlateportCity_Harbor_EventScript_156265:: @ 8156265
 	end
 
 SlateportCity_Harbor_EventScript_15626F:: @ 815626F
-	compare 0x4001, 1
+	compare_var_to_imm 0x4001, 1
 	goto_if_eq SlateportCity_Harbor_EventScript_156380
 	checkitem ITEM_SCANNER, 1
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	goto_if_eq SlateportCity_Harbor_EventScript_1562A7
 	checkflag 2052
 	goto_if_eq SlateportCity_Harbor_EventScript_15629D
@@ -333,10 +333,10 @@ SlateportCity_Harbor_EventScript_1562B3:: @ 81562B3
 
 SlateportCity_Harbor_EventScript_1562EA:: @ 81562EA
 	msgbox SlateportCity_Harbor_Text_1803DD, 5
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq SlateportCity_Harbor_EventScript_156374
 	giveitem ITEM_DEEP_SEA_TOOTH
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq SlateportCity_Harbor_EventScript_1A029B
 	removeitem ITEM_SCANNER, 1
 	msgbox SlateportCity_Harbor_Text_18046B, 4
@@ -346,10 +346,10 @@ SlateportCity_Harbor_EventScript_1562EA:: @ 81562EA
 
 SlateportCity_Harbor_EventScript_15632A:: @ 815632A
 	msgbox SlateportCity_Harbor_Text_180412, 5
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq SlateportCity_Harbor_EventScript_156374
 	giveitem ITEM_DEEP_SEA_SCALE
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq SlateportCity_Harbor_EventScript_1A029B
 	removeitem ITEM_SCANNER, 1
 	msgbox SlateportCity_Harbor_Text_18046B, 4

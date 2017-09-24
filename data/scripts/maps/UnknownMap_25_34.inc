@@ -13,15 +13,15 @@ LinkContestRoom1_MapScript1_15F595:: @ 815F595
 
 LinkContestRoom1_EventScript_15F5A5:: @ 815F5A5
 	special ScriptGetMultiplayerId
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	call_if 1, LinkContestRoom1_EventScript_15F5E0
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	call_if 1, LinkContestRoom1_EventScript_15F5E4
-	compare RESULT, 2
+	compare_var_to_imm RESULT, 2
 	call_if 1, LinkContestRoom1_EventScript_15F5E8
-	compare RESULT, 3
+	compare_var_to_imm RESULT, 3
 	call_if 1, LinkContestRoom1_EventScript_15F5EC
-	compare RESULT, 4
+	compare_var_to_imm RESULT, 4
 	call_if 1, LinkContestRoom1_EventScript_15F5F0
 	return
 
@@ -46,7 +46,7 @@ LinkContestRoom1_EventScript_15F5F0:: @ 815F5F0
 	return
 
 LinkContestRoom1_MapScript1_15F5F4:: @ 815F5F4
-	compare 0x4009, 1
+	compare_var_to_imm 0x4009, 1
 	call_if 1, LinkContestRoom1_EventScript_15F600
 	end
 
@@ -75,7 +75,7 @@ LinkContestRoom1_EventScript_15F625:: @ 815F625
 LinkContestRoom1_EventScript_15F630:: @ 815F630
 	call LinkContestRoom1_EventScript_15F6E6
 	call LinkContestRoom1_EventScript_15F646
-	compare 0x4000, 8
+	compare_var_to_imm 0x4000, 8
 	goto_if 0, LinkContestRoom1_EventScript_15F630
 	return
 
@@ -414,9 +414,9 @@ LilycoveCity_ContestLobby_EventScript_15FBDB:: @ 815FBDB
 SlateportCity_ContestLobby_EventScript_15FBDB:: @ 815FBDB
 VerdanturfTown_ContestLobby_EventScript_15FBDB:: @ 815FBDB
 	checkgender
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq FallarborTown_ContestLobby_EventScript_15FBF3
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	goto_if_eq FallarborTown_ContestLobby_EventScript_15FBF9
 	return
 

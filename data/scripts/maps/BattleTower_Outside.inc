@@ -13,7 +13,7 @@ BattleTower_Outside_EventScript_160168:: @ 8160168
 	faceplayer
 	msgbox BattleTower_Outside_Text_199D06, 4
 	checkitem ITEM_SS_TICKET, 1
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq BattleTower_Outside_EventScript_1601C6
 	message BattleTower_Outside_Text_199D9D
 	waittext
@@ -36,7 +36,7 @@ BattleTower_Outside_EventScript_1601C6:: @ 81601C6
 
 BattleTower_Outside_EventScript_1601D0:: @ 81601D0
 	msgbox BattleTower_Outside_Text_199DF2, 5
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq BattleTower_Outside_EventScript_160226
 	msgbox BattleTower_Outside_Text_199E4B, 4
 	call BattleTower_Outside_EventScript_160232
@@ -47,7 +47,7 @@ BattleTower_Outside_EventScript_1601D0:: @ 81601D0
 
 BattleTower_Outside_EventScript_1601FB:: @ 81601FB
 	msgbox BattleTower_Outside_Text_199E0E, 5
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq BattleTower_Outside_EventScript_160226
 	msgbox BattleTower_Outside_Text_199E4B, 4
 	call BattleTower_Outside_EventScript_160232

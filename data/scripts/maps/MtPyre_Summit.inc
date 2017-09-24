@@ -30,11 +30,11 @@ MtPyre_Summit_EventScript_15D4E1:: @ 815D4E1
 	move 2, MtPyre_Summit_Movement_1A0845
 	waitmove 0
 	pause 50
-	compare 0x8008, 0
+	compare_var_to_imm 0x8008, 0
 	call_if 1, MtPyre_Summit_EventScript_15D593
-	compare 0x8008, 1
+	compare_var_to_imm 0x8008, 1
 	call_if 1, MtPyre_Summit_EventScript_15D59E
-	compare 0x8008, 2
+	compare_var_to_imm 0x8008, 2
 	call_if 1, MtPyre_Summit_EventScript_15D59F
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B52B0, 4
@@ -52,11 +52,11 @@ MtPyre_Summit_EventScript_15D4E1:: @ 815D4E1
 	fadescreen 0
 	pause 20
 	call MtPyre_Summit_EventScript_15D57A
-	compare 0x8008, 0
+	compare_var_to_imm 0x8008, 0
 	call_if 1, MtPyre_Summit_EventScript_15D5AA
-	compare 0x8008, 1
+	compare_var_to_imm 0x8008, 1
 	call_if 1, MtPyre_Summit_EventScript_15D5BF
-	compare 0x8008, 2
+	compare_var_to_imm 0x8008, 2
 	call_if 1, MtPyre_Summit_EventScript_15D5CA
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B53AB, 4
@@ -143,9 +143,9 @@ MtPyre_Summit_EventScript_15D5EF:: @ 815D5EF
 	.else
 	msgbox MtPyre_Summit_Text_1B64B3, 5
 	.endif
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	call_if 1, MtPyre_Summit_EventScript_15D611
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	call_if 1, MtPyre_Summit_EventScript_15D61A
 	release
 	end
@@ -189,9 +189,9 @@ MtPyre_Summit_EventScript_15D64A:: @ 815D64A
 	.else
 	msgbox MtPyre_Summit_Text_1B6283, 5
 	.endif
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	goto_if_eq MtPyre_Summit_EventScript_15D669
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq MtPyre_Summit_EventScript_15D69B
 	end
 
@@ -220,9 +220,9 @@ MtPyre_Summit_EventScript_15D69B:: @ 815D69B
 	.else
 	msgbox MtPyre_Summit_Text_1B62E7, 5
 	.endif
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	goto_if_eq MtPyre_Summit_EventScript_15D669
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq MtPyre_Summit_EventScript_15D69B
 	end
 
@@ -268,11 +268,11 @@ MtPyre_Summit_EventScript_15D6F2:: @ 815D6F2
 	move 2, MtPyre_Summit_Movement_1A0845
 	waitmove 0
 	pause 50
-	compare 0x8008, 0
+	compare_var_to_imm 0x8008, 0
 	call_if 1, MtPyre_Summit_EventScript_15D75E
-	compare 0x8008, 1
+	compare_var_to_imm 0x8008, 1
 	call_if 1, MtPyre_Summit_EventScript_15D769
-	compare 0x8008, 2
+	compare_var_to_imm 0x8008, 2
 	call_if 1, MtPyre_Summit_EventScript_15D774
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B5BFC, 4
@@ -280,11 +280,11 @@ MtPyre_Summit_EventScript_15D6F2:: @ 815D6F2
 	msgbox MtPyre_Summit_Text_1B6848, 4
 	.endif
 	closebutton
-	compare 0x8008, 0
+	compare_var_to_imm 0x8008, 0
 	call_if 1, MtPyre_Summit_EventScript_15D77F
-	compare 0x8008, 1
+	compare_var_to_imm 0x8008, 1
 	call_if 1, MtPyre_Summit_EventScript_15D78A
-	compare 0x8008, 2
+	compare_var_to_imm 0x8008, 2
 	call_if 1, MtPyre_Summit_EventScript_15D795
 	disappear 2
 	setvar 0x40b9, 3

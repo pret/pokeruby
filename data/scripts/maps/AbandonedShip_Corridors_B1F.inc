@@ -31,7 +31,7 @@ AbandonedShip_Corridors_B1F_EventScript_15E9D3:: @ 815E9D3
 	checkflag 239
 	goto_if_eq AbandonedShip_Corridors_B1F_EventScript_15EA14
 	checkitem ITEM_STORAGE_KEY, 1
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq AbandonedShip_Corridors_B1F_EventScript_15EA0A
 	msgbox AbandonedShip_Corridors_B1F_Text_198692, 4
 	playsfx 21

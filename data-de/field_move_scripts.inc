@@ -3,13 +3,13 @@ S_CuttableTree:: @ 81B0DCC
 	checkflag 2055
 	goto_if 0, CannotUseCut
 	checkattack MOVE_CUT
-	compare RESULT, 6
+	compare_var_to_imm RESULT, 6
 	goto_if_eq CannotUseCut
 	setanimation 0, RESULT
 	bufferpartypoke 0, RESULT
 	bufferattack 1, MOVE_CUT
 	msgbox UseCutPromptText, 5
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq Cut_ChoseNo
 	msgbox UsedCutRockSmashText, 4
 	closebutton
@@ -64,13 +64,13 @@ S_BreakableRock:: @ 81B0EB7
 	checkflag 2057
 	goto_if 0, CannotUseRockSmash
 	checkattack MOVE_ROCK_SMASH
-	compare RESULT, 6
+	compare_var_to_imm RESULT, 6
 	goto_if_eq CannotUseRockSmash
 	setanimation 0, RESULT
 	bufferpartypoke 0, RESULT
 	bufferattack 1, MOVE_ROCK_SMASH
 	msgbox UseRockSmashPromptText, 5
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq RockSmash_ChoseNo
 	msgbox UsedCutRockSmashText, 4
 	closebutton
@@ -91,10 +91,10 @@ DoRockSmashMovement: @ 81B0F0C
 	waitmove 0
 	disappear LAST_TALKED
 	specialval RESULT, sub_810F5BC
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	goto_if_eq DoRockSmashMovement_Done
 	special ScrSpecial_RockSmashWildEncounter
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq DoRockSmashMovement_Done
 	waitstate
 	releaseall
@@ -133,11 +133,11 @@ S_PushableBoulder:: @ 81B0FCB
 	checkflag 2089
 	goto_if_eq AlreadyUsedStrength
 	checkattack 70
-	compare RESULT, 6
+	compare_var_to_imm RESULT, 6
 	goto_if_eq CannotUseStrength
 	setanimation 0, RESULT
 	msgbox UseStrengthPromptText, 5
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq Strength_ChoseNo
 	closebutton
 	doanimation 40
@@ -194,12 +194,12 @@ AlreadyUsedStrengthText: @ 81B1127
 S_UseWaterfall:: @ 81B115A
 	lockall
 	checkattack MOVE_WATERFALL
-	compare RESULT, 6
+	compare_var_to_imm RESULT, 6
 	goto_if_eq Waterfall_NoMonKnows
 	bufferpartypoke 0, RESULT
 	setanimation 0, RESULT
 	msgbox UseWaterfallPromptText, 5
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq Waterfall_Done
 	msgbox UsedWaterfallText, 4
 	doanimation 43
@@ -227,13 +227,13 @@ UsedWaterfallText: @ 81B120D
 UseDiveScript:: @ 81B1220
 	lockall
 	checkattack MOVE_DIVE
-	compare RESULT, 6
+	compare_var_to_imm RESULT, 6
 	goto_if_eq CannotUseDive
 	bufferpartypoke 0, RESULT
 	setanimation 0, RESULT
 	setanimation 1, 1
 	msgbox UseDivePromptText, 5
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq Dive_Done
 	msgbox UsedDiveText, 4
 	doanimation 44
@@ -250,13 +250,13 @@ Dive_Done: @ 81B1267
 S_UseDiveUnderwater:: @ 81B1269
 	lockall
 	checkattack MOVE_DIVE
-	compare RESULT, 6
+	compare_var_to_imm RESULT, 6
 	goto_if_eq UnderwaterCannotUseDive
 	bufferpartypoke 0, RESULT
 	setanimation 0, RESULT
 	setanimation 1, 1
 	msgbox UnderwaterUseDivePromptText, 5
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq UnderwaterDive_Done
 	msgbox UsedDiveText, 4
 	doanimation 44

@@ -10,9 +10,9 @@ Route111_OldLadysRestStop_EventScript_15BFDB:: @ 815BFDB
 	lock
 	faceplayer
 	msgbox Route111_OldLadysRestStop_Text_1923AF, 5
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	goto_if_eq Route111_OldLadysRestStop_EventScript_15BFFC
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq Route111_OldLadysRestStop_EventScript_15C029
 	end
 
@@ -21,9 +21,9 @@ Route111_OldLadysRestStop_EventScript_15BFFC:: @ 815BFFC
 	closebutton
 	call Route111_OldLadysRestStop_EventScript_1A02CA
 	msgbox Route111_OldLadysRestStop_Text_19244D, 5
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	goto_if_eq Route111_OldLadysRestStop_EventScript_15BFFC
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq Route111_OldLadysRestStop_EventScript_15C029
 	end
 

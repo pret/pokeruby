@@ -6,7 +6,7 @@ DewfordTown_Hall_EventScript_153293:: @ 8153293
 	faceplayer
 	call DewfordTown_Hall_EventScript_1A0102
 	special sub_80FA5E4
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	goto_if_eq DewfordTown_Hall_EventScript_1532B2
 	msgbox DewfordTown_Hall_Text_1754C9, 4
 	release
@@ -31,9 +31,9 @@ DewfordTown_Hall_EventScript_1532CD:: @ 81532CD
 	call DewfordTown_Hall_EventScript_1A0102
 	special sub_80EB83C
 	msgbox DewfordTown_Hall_Text_1755F9, 5
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	goto_if_eq DewfordTown_Hall_EventScript_1532F6
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq DewfordTown_Hall_EventScript_153300
 	end
 
@@ -191,14 +191,14 @@ DewfordTown_Hall_EventScript_1534FC:: @ 81534FC
 DewfordTown_Hall_EventScript_1534FD:: @ 81534FD
 	move 8, DewfordTown_Hall_Movement_153599
 	waitmove 0
-	compare 0x8008, 0
+	compare_var_to_imm 0x8008, 0
 	goto_if_eq DewfordTown_Hall_EventScript_15351E
-	compare 0x8008, 1
+	compare_var_to_imm 0x8008, 1
 	goto_if_eq DewfordTown_Hall_EventScript_153534
 	end
 
 DewfordTown_Hall_EventScript_15351E:: @ 815351E
-	compare FACING, 4
+	compare_var_to_imm FACING, 4
 	goto_if_eq DewfordTown_Hall_EventScript_1534FC
 	move 255, DewfordTown_Hall_Movement_1A0843
 	waitmove 0
@@ -210,16 +210,16 @@ DewfordTown_Hall_EventScript_153534:: @ 8153534
 DewfordTown_Hall_EventScript_153535:: @ 8153535
 	move 7, DewfordTown_Hall_Movement_15359B
 	waitmove 0
-	compare 0x8008, 0
+	compare_var_to_imm 0x8008, 0
 	goto_if_eq DewfordTown_Hall_EventScript_153556
-	compare 0x8008, 1
+	compare_var_to_imm 0x8008, 1
 	goto_if_eq DewfordTown_Hall_EventScript_153583
 	end
 
 DewfordTown_Hall_EventScript_153556:: @ 8153556
-	compare FACING, 2
+	compare_var_to_imm FACING, 2
 	call_if 1, DewfordTown_Hall_EventScript_15356D
-	compare FACING, 1
+	compare_var_to_imm FACING, 1
 	call_if 1, DewfordTown_Hall_EventScript_153578
 	return
 
@@ -234,7 +234,7 @@ DewfordTown_Hall_EventScript_153578:: @ 8153578
 	return
 
 DewfordTown_Hall_EventScript_153583:: @ 8153583
-	compare FACING, 3
+	compare_var_to_imm FACING, 3
 	goto_if_eq DewfordTown_Hall_EventScript_1534FC
 	move 255, DewfordTown_Hall_Movement_1A083F
 	waitmove 0
@@ -256,7 +256,7 @@ DewfordTown_Hall_EventScript_15359D:: @ 815359D
 	goto_if_eq DewfordTown_Hall_EventScript_1535D1
 	msgbox DewfordTown_Hall_Text_175E13, 4
 	giveitem ITEM_TM36
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq DewfordTown_Hall_EventScript_1A029B
 	setflag 230
 	release

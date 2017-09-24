@@ -71,7 +71,7 @@ MauvilleCity_Gym_EventScript_1565AB:: @ 81565AB
 	trainerbattle 1, OPPONENT_WATTSON, 0, MauvilleCity_Gym_Text_180C32, MauvilleCity_Gym_Text_180D64, MauvilleCity_Gym_EventScript_1565DB
 	checkflag 167
 	goto_if 0, MauvilleCity_Gym_EventScript_15661D
-	compare 0x40ba, 2
+	compare_var_to_imm 0x40ba, 2
 	goto_if_eq MauvilleCity_Gym_EventScript_156641
 	msgbox MauvilleCity_Gym_Text_180EDB, 4
 	release
@@ -85,7 +85,7 @@ MauvilleCity_Gym_EventScript_1565DB:: @ 81565DB
 	setflag 1208
 	setflag 2057
 	addvar 0x4085, 1
-	compare 0x4085, 6
+	compare_var_to_imm 0x4085, 6
 	call_if 1, MauvilleCity_Gym_EventScript_1A00FB
 	setvar 0x8008, 3
 	call MauvilleCity_Gym_EventScript_1A01C0
@@ -97,7 +97,7 @@ MauvilleCity_Gym_EventScript_1565DB:: @ 81565DB
 
 MauvilleCity_Gym_EventScript_15661D:: @ 815661D
 	giveitem ITEM_TM34
-	compare RESULT, 0
+	compare_var_to_imm RESULT, 0
 	goto_if_eq MauvilleCity_Gym_EventScript_1A029B
 	msgbox MauvilleCity_Gym_Text_180E76, 4
 	setflag 167
@@ -113,7 +113,7 @@ MauvilleCity_Gym_EventScript_15664B:: @ 815664B
 	lockall
 	checkflag 1208
 	goto_if_eq MauvilleCity_Gym_EventScript_1566DA
-	compare 0x4093, 1
+	compare_var_to_imm 0x4093, 1
 	goto_if_eq MauvilleCity_Gym_EventScript_1566DA
 	setvar 0x4093, 1
 	setvar 0x8004, 0
@@ -124,7 +124,7 @@ MauvilleCity_Gym_EventScript_156670:: @ 8156670
 	lockall
 	checkflag 1208
 	goto_if_eq MauvilleCity_Gym_EventScript_1566DA
-	compare 0x4093, 2
+	compare_var_to_imm 0x4093, 2
 	goto_if_eq MauvilleCity_Gym_EventScript_1566DA
 	setvar 0x4093, 2
 	setvar 0x8004, 1
@@ -135,7 +135,7 @@ MauvilleCity_Gym_EventScript_156695:: @ 8156695
 	lockall
 	checkflag 1208
 	goto_if_eq MauvilleCity_Gym_EventScript_1566DA
-	compare 0x4093, 3
+	compare_var_to_imm 0x4093, 3
 	goto_if_eq MauvilleCity_Gym_EventScript_1566DA
 	setvar 0x4093, 3
 	setvar 0x8004, 2

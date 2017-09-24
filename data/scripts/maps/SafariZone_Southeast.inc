@@ -20,7 +20,7 @@ SafariZone_Southeast_EventScript_16004B:: @ 816004B
 	end
 
 SafariZone_Southeast_MapScript1_160073:: @ 8160073
-	compare 0x40a4, 2
+	compare_var_to_imm 0x40a4, 2
 	call_if 1, SafariZone_Southeast_EventScript_16007F
 	end
 
@@ -52,10 +52,10 @@ SafariZone_Southeast_EventScript_16009E:: @ 816009E
 SafariZone_Southeast_EventScript_1600A7:: @ 81600A7
 	lock
 	faceplayer
-	compare 0x4001, 0
+	compare_var_to_imm 0x4001, 0
 	goto_if_eq SafariZone_Southeast_EventScript_1600D1
 	msgbox SafariZone_Southeast_Text_1C3A56, 5
-	compare RESULT, 1
+	compare_var_to_imm RESULT, 1
 	goto_if_eq SafariZone_Southeast_EventScript_1600E0
 	msgbox SafariZone_Southeast_Text_1C3A9C, 4
 	release
