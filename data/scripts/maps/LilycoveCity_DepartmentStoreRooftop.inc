@@ -72,8 +72,8 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A1CD:: @ 815A1CD
 	message LilycoveCity_DepartmentStoreRooftop_Text_18C72B
 	waittext
 	showmoney 0, 0
-	snop
-	jump LilycoveCity_DepartmentStoreRooftop_EventScript_15A1DE
+	nop
+	goto LilycoveCity_DepartmentStoreRooftop_EventScript_15A1DE
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A1DE:: @ 815A1DE
@@ -84,22 +84,22 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A1DE:: @ 815A1DE
 	case 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A227
 	case 2, LilycoveCity_DepartmentStoreRooftop_EventScript_15A232
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_18C7C3, 4
-	jump LilycoveCity_DepartmentStoreRooftop_EventScript_15A396
+	goto LilycoveCity_DepartmentStoreRooftop_EventScript_15A396
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A21C:: @ 815A21C
 	setvar 0x4000, 26
-	jump LilycoveCity_DepartmentStoreRooftop_EventScript_15A267
+	goto LilycoveCity_DepartmentStoreRooftop_EventScript_15A267
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A227:: @ 815A227
 	setvar 0x4000, 27
-	jump LilycoveCity_DepartmentStoreRooftop_EventScript_15A267
+	goto LilycoveCity_DepartmentStoreRooftop_EventScript_15A267
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A232:: @ 815A232
 	setvar 0x4000, 28
-	jump LilycoveCity_DepartmentStoreRooftop_EventScript_15A267
+	goto LilycoveCity_DepartmentStoreRooftop_EventScript_15A267
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A23D:: @ 815A23D
@@ -145,7 +145,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A267:: @ 815A267
 	compare 0x4001, 2
 	callif 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A260
 	updatemoney 0, 0
-	snop
+	nop
 	bufferitem 0, 0x4000
 	playsfx 106
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_18C75F, 4
@@ -177,23 +177,23 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A267:: @ 815A267
 	bufferitem 1, 0x4000
 	bufferstd 2, 14
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_1A0C8C, 4
-	jump LilycoveCity_DepartmentStoreRooftop_EventScript_15A36E
+	goto LilycoveCity_DepartmentStoreRooftop_EventScript_15A36E
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A36E:: @ 815A36E
 	message LilycoveCity_DepartmentStoreRooftop_Text_18C72B
 	waittext
-	jump LilycoveCity_DepartmentStoreRooftop_EventScript_15A1DE
+	goto LilycoveCity_DepartmentStoreRooftop_EventScript_15A1DE
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A37A:: @ 815A37A
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_18C7AF, 4
-	jump LilycoveCity_DepartmentStoreRooftop_EventScript_15A396
+	goto LilycoveCity_DepartmentStoreRooftop_EventScript_15A396
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A388:: @ 815A388
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_1A0C79, 4
-	jump LilycoveCity_DepartmentStoreRooftop_EventScript_15A396
+	goto LilycoveCity_DepartmentStoreRooftop_EventScript_15A396
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A396:: @ 815A396

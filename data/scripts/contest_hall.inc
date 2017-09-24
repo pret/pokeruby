@@ -17,7 +17,7 @@ VerdanturfTown_ContestLobby_EventScript_1A4E92:: @ 81A4E92
 	compare RESULT, 0
 	jumpeq FallarborTown_ContestLobby_EventScript_1A4EE1
 	setflag 1
-	jump FallarborTown_ContestLobby_EventScript_1A4F8F
+	goto FallarborTown_ContestLobby_EventScript_1A4F8F
 	end
 
 FallarborTown_ContestLobby_EventScript_1A4EDD:: @ 81A4EDD
@@ -47,7 +47,7 @@ FallarborTown_ContestLobby_EventScript_1A4F13:: @ 81A4F13
 	setflag 150
 	setflag 1
 	msgbox FallarborTown_ContestLobby_Text_1A5E98, 4
-	jump FallarborTown_ContestLobby_EventScript_1A4F8F
+	goto FallarborTown_ContestLobby_EventScript_1A4F8F
 	end
 
 FallarborTown_ContestLobby_EventScript_1A4F44:: @ 81A4F44
@@ -99,17 +99,17 @@ FallarborTown_ContestLobby_EventScript_1A4FCC:: @ 81A4FCC
 
 FallarborTown_ContestLobby_EventScript_1A5014:: @ 81A5014
 	msgbox FallarborTown_ContestLobby_Text_1A5E98, 4
-	jump FallarborTown_ContestLobby_EventScript_1A4FCC
+	goto FallarborTown_ContestLobby_EventScript_1A4FCC
 	end
 
 FallarborTown_ContestLobby_EventScript_1A5022:: @ 81A5022
 	msgbox FallarborTown_ContestLobby_Text_1A609B, 4
-	jump FallarborTown_ContestLobby_EventScript_1A4FCC
+	goto FallarborTown_ContestLobby_EventScript_1A4FCC
 	end
 
 FallarborTown_ContestLobby_EventScript_1A5030:: @ 81A5030
 	msgbox FallarborTown_ContestLobby_Text_1A613F, 4
-	jump FallarborTown_ContestLobby_EventScript_1A4FCC
+	goto FallarborTown_ContestLobby_EventScript_1A4FCC
 	end
 
 FallarborTown_ContestLobby_EventScript_1A503E:: @ 81A503E
@@ -143,12 +143,12 @@ FallarborTown_ContestLobby_EventScript_1A5097:: @ 81A5097
 	case 5, FallarborTown_ContestLobby_EventScript_1A503E
 	case 127, FallarborTown_ContestLobby_EventScript_1A503E
 	copyvar CONTEST_CATEGORY, RESULT
-	jump FallarborTown_ContestLobby_EventScript_1A5048
+	goto FallarborTown_ContestLobby_EventScript_1A5048
 	end
 
 FallarborTown_ContestLobby_EventScript_1A50C8:: @ 81A50C8
 	msgbox FallarborTown_ContestLobby_Text_1A664A, 4
-	jump FallarborTown_ContestLobby_EventScript_1A5048
+	goto FallarborTown_ContestLobby_EventScript_1A5048
 	release
 	end
 
@@ -168,13 +168,13 @@ FallarborTown_ContestLobby_EventScript_1A50FB:: @ 81A50FB
 
 FallarborTown_ContestLobby_EventScript_1A511F:: @ 81A511F
 	msgbox FallarborTown_ContestLobby_Text_1A669F, 4
-	jump FallarborTown_ContestLobby_EventScript_1A5048
+	goto FallarborTown_ContestLobby_EventScript_1A5048
 	release
 	end
 
 FallarborTown_ContestLobby_EventScript_1A512E:: @ 81A512E
 	msgbox FallarborTown_ContestLobby_Text_1A66DC, 4
-	jump FallarborTown_ContestLobby_EventScript_1A5048
+	goto FallarborTown_ContestLobby_EventScript_1A5048
 	release
 	end
 

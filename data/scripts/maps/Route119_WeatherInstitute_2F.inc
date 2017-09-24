@@ -50,7 +50,7 @@ Route119_WeatherInstitute_2F_EventScript_163D45:: @ 8163D45
 	move 5, Route119_WeatherInstitute_2F_Movement_163DC8
 	waitmove 0
 	moveoffscreen 5
-	jump Route119_WeatherInstitute_2F_EventScript_163D7A
+	goto Route119_WeatherInstitute_2F_EventScript_163D7A
 	end
 
 Route119_WeatherInstitute_2F_EventScript_163D7A:: @ 8163D7A
@@ -89,5 +89,5 @@ Route119_WeatherInstitute_2F_EventScript_163DCC:: @ 8163DCC
 	faceplayer
 	checkflag 151
 	jumpeq Route119_WeatherInstitute_2F_EventScript_163DBE
-	jump Route119_WeatherInstitute_2F_EventScript_163D7A
+	goto Route119_WeatherInstitute_2F_EventScript_163D7A
 	end

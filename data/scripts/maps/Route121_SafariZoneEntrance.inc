@@ -50,12 +50,12 @@ Route121_SafariZoneEntrance_EventScript_15C383:: @ 815C383
 	move 255, Route121_SafariZoneEntrance_Movement_1A0841
 	waitmove 0
 	showmoney 0, 0
-	snop
+	nop
 	msgbox Route121_SafariZoneEntrance_Text_1C3832, 5
 	compare RESULT, 1
 	jumpeq Route121_SafariZoneEntrance_EventScript_15C3B3
 	msgbox Route121_SafariZoneEntrance_Text_1C3895, 4
-	jump Route121_SafariZoneEntrance_EventScript_15C46C
+	goto Route121_SafariZoneEntrance_EventScript_15C46C
 	end
 
 Route121_SafariZoneEntrance_EventScript_15C3B3:: @ 815C3B3
@@ -69,7 +69,7 @@ Route121_SafariZoneEntrance_EventScript_15C3B3:: @ 815C3B3
 	msgbox Route121_SafariZoneEntrance_Text_1C38D9, 4
 	paymoney 0x1f4, 0
 	updatemoney 0, 0
-	snop
+	nop
 	msgbox Route121_SafariZoneEntrance_Text_1C38F4, 4
 	fanfare 370
 	message Route121_SafariZoneEntrance_Text_1C3910
@@ -94,7 +94,7 @@ Route121_SafariZoneEntrance_EventScript_15C425:: @ 815C425
 	compare RESULT, 1
 	jumpeq Route121_SafariZoneEntrance_EventScript_15C44F
 	msgbox Route121_SafariZoneEntrance_Text_1C39A3, 4
-	jump Route121_SafariZoneEntrance_EventScript_15C46C
+	goto Route121_SafariZoneEntrance_EventScript_15C46C
 	end
 
 Route121_SafariZoneEntrance_EventScript_15C44F:: @ 815C44F
@@ -102,12 +102,12 @@ Route121_SafariZoneEntrance_EventScript_15C44F:: @ 815C44F
 
 Route121_SafariZoneEntrance_EventScript_15C450:: @ 815C450
 	msgbox Route121_SafariZoneEntrance_Text_1C39C3, 4
-	jump Route121_SafariZoneEntrance_EventScript_15C46C
+	goto Route121_SafariZoneEntrance_EventScript_15C46C
 	end
 
 Route121_SafariZoneEntrance_EventScript_15C45E:: @ 815C45E
 	msgbox Route121_SafariZoneEntrance_Text_1C38B5, 4
-	jump Route121_SafariZoneEntrance_EventScript_15C46C
+	goto Route121_SafariZoneEntrance_EventScript_15C46C
 	end
 
 Route121_SafariZoneEntrance_EventScript_15C46C:: @ 815C46C

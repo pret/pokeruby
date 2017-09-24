@@ -157,25 +157,25 @@ PetalburgCity_EventScript_14B82D:: @ 814B82D
 PetalburgCity_EventScript_14B836:: @ 814B836
 	lockall
 	setvar 0x8008, 0
-	jump PetalburgCity_EventScript_14B866
+	goto PetalburgCity_EventScript_14B866
 	end
 
 PetalburgCity_EventScript_14B842:: @ 814B842
 	lockall
 	setvar 0x8008, 1
-	jump PetalburgCity_EventScript_14B866
+	goto PetalburgCity_EventScript_14B866
 	end
 
 PetalburgCity_EventScript_14B84E:: @ 814B84E
 	lockall
 	setvar 0x8008, 2
-	jump PetalburgCity_EventScript_14B866
+	goto PetalburgCity_EventScript_14B866
 	end
 
 PetalburgCity_EventScript_14B85A:: @ 814B85A
 	lockall
 	setvar 0x8008, 3
-	jump PetalburgCity_EventScript_14B866
+	goto PetalburgCity_EventScript_14B866
 	end
 
 PetalburgCity_EventScript_14B866:: @ 814B866

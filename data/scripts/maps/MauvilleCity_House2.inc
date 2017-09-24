@@ -31,7 +31,7 @@ MauvilleCity_House2_EventScript_15731B:: @ 815731B
 	removeitem ITEM_HARBOR_MAIL, 1
 	giveitem ITEM_COIN_CASE
 	setflag 258
-	jump MauvilleCity_House2_EventScript_15733D
+	goto MauvilleCity_House2_EventScript_15733D
 	end
 
 MauvilleCity_House2_EventScript_15733D:: @ 815733D

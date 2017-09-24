@@ -260,7 +260,7 @@ BattleTower_Lobby_EventScript_160587:: @ 8160587
 
 BattleTower_Lobby_EventScript_160600:: @ 8160600
 	msgbox BattleTower_Lobby_Text_19A0D1, 4
-	jump BattleTower_Lobby_EventScript_1604BE
+	goto BattleTower_Lobby_EventScript_1604BE
 
 BattleTower_Lobby_EventScript_16060D:: @ 816060D
 	switch RESULT
@@ -269,16 +269,16 @@ BattleTower_Lobby_EventScript_16060D:: @ 816060D
 
 BattleTower_Lobby_EventScript_160628:: @ 8160628
 	msgbox BattleTower_Lobby_Text_19A249, 4
-	jump BattleTower_Lobby_EventScript_160662
+	goto BattleTower_Lobby_EventScript_160662
 
 BattleTower_Lobby_EventScript_160635:: @ 8160635
 	msgbox BattleTower_Lobby_Text_19A32D, 4
-	jump BattleTower_Lobby_EventScript_160662
+	goto BattleTower_Lobby_EventScript_160662
 
 BattleTower_Lobby_EventScript_160642:: @ 8160642
 	setvar 0x8004, 12
 	special sub_8135668
-	jump BattleTower_Lobby_EventScript_160652
+	goto BattleTower_Lobby_EventScript_160652
 
 BattleTower_Lobby_EventScript_16064F:: @ 816064F
 	special LoadPlayerParty

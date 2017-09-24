@@ -11,16 +11,16 @@ MauvilleCity_GameCorner_EventScript_156A34:: @ 8156A34
 	message MauvilleCity_GameCorner_Text_181CB4
 	waittext
 	showmoney 0, 0
-	snop
+	nop
 	showcoins 0, 5
-	jump MauvilleCity_GameCorner_EventScript_156A60
+	goto MauvilleCity_GameCorner_EventScript_156A60
 
 MauvilleCity_GameCorner_EventScript_156A60:: @ 8156A60
 	multichoicedef 15, 0, 49, 0, 0
 	switch RESULT
 	case 0, MauvilleCity_GameCorner_EventScript_156AAE
 	case 1, MauvilleCity_GameCorner_EventScript_156AF0
-	jump MauvilleCity_GameCorner_EventScript_156B4C
+	goto MauvilleCity_GameCorner_EventScript_156B4C
 	end
 
 @ 8156A87
@@ -28,7 +28,7 @@ MauvilleCity_GameCorner_EventScript_156A60:: @ 8156A60
 	switch RESULT
 	case 0, MauvilleCity_GameCorner_EventScript_156AAE
 	case 1, MauvilleCity_GameCorner_EventScript_156AF0
-	jump MauvilleCity_GameCorner_EventScript_156B4C
+	goto MauvilleCity_GameCorner_EventScript_156B4C
 	end
 
 MauvilleCity_GameCorner_EventScript_156AAE:: @ 8156AAE
@@ -41,7 +41,7 @@ MauvilleCity_GameCorner_EventScript_156AAE:: @ 8156AAE
 	givecoins 50
 	paymoney 0x3e8, 0
 	updatemoney 0, 0
-	snop
+	nop
 	updatecoins 0, 5
 	playsfx 95
 	msgbox MauvilleCity_GameCorner_Text_181CFE, 4
@@ -60,7 +60,7 @@ MauvilleCity_GameCorner_EventScript_156AF0:: @ 8156AF0
 	givecoins 500
 	paymoney 0x2710, 0
 	updatemoney 0, 0
-	snop
+	nop
 	updatecoins 0, 5
 	playsfx 95
 	msgbox MauvilleCity_GameCorner_Text_181CFE, 4
@@ -110,12 +110,12 @@ MauvilleCity_GameCorner_EventScript_156B88:: @ 8156B88
 	waittext
 	showcoins 0, 0
 	setvar 0x4001, 0
-	jump MauvilleCity_GameCorner_EventScript_156BA6
+	goto MauvilleCity_GameCorner_EventScript_156BA6
 
 MauvilleCity_GameCorner_EventScript_156B9B:: @ 8156B9B
 	message MauvilleCity_GameCorner_Text_181E17
 	waittext
-	jump MauvilleCity_GameCorner_EventScript_156BA6
+	goto MauvilleCity_GameCorner_EventScript_156BA6
 
 MauvilleCity_GameCorner_EventScript_156BA6:: @ 8156BA6
 	multichoice 12, 0, 48, 0
@@ -124,23 +124,23 @@ MauvilleCity_GameCorner_EventScript_156BA6:: @ 8156BA6
 	case 1, MauvilleCity_GameCorner_EventScript_156BF0
 	case 2, MauvilleCity_GameCorner_EventScript_156BFE
 	case 3, MauvilleCity_GameCorner_EventScript_156D0D
-	jump MauvilleCity_GameCorner_EventScript_156D0D
+	goto MauvilleCity_GameCorner_EventScript_156D0D
 	end
 
 MauvilleCity_GameCorner_EventScript_156BE2:: @ 8156BE2
 	setvar 0x4001, 1
 	bufferdecor 0, 88
-	jump MauvilleCity_GameCorner_EventScript_156C0C
+	goto MauvilleCity_GameCorner_EventScript_156C0C
 
 MauvilleCity_GameCorner_EventScript_156BF0:: @ 8156BF0
 	setvar 0x4001, 2
 	bufferdecor 0, 89
-	jump MauvilleCity_GameCorner_EventScript_156C0C
+	goto MauvilleCity_GameCorner_EventScript_156C0C
 
 MauvilleCity_GameCorner_EventScript_156BFE:: @ 8156BFE
 	setvar 0x4001, 3
 	bufferdecor 0, 90
-	jump MauvilleCity_GameCorner_EventScript_156C0C
+	goto MauvilleCity_GameCorner_EventScript_156C0C
 
 MauvilleCity_GameCorner_EventScript_156C0C:: @ 8156C0C
 	msgbox MauvilleCity_GameCorner_Text_181E33, 5
@@ -165,7 +165,7 @@ MauvilleCity_GameCorner_EventScript_156C46:: @ 8156C46
 	updatecoins 0, 0
 	playsfx 95
 	msgbox MauvilleCity_GameCorner_Text_181E49, 4
-	jump MauvilleCity_GameCorner_EventScript_156B9B
+	goto MauvilleCity_GameCorner_EventScript_156B9B
 	end
 
 MauvilleCity_GameCorner_EventScript_156C80:: @ 8156C80
@@ -181,7 +181,7 @@ MauvilleCity_GameCorner_EventScript_156C80:: @ 8156C80
 	updatecoins 0, 0
 	playsfx 95
 	msgbox MauvilleCity_GameCorner_Text_181E49, 4
-	jump MauvilleCity_GameCorner_EventScript_156B9B
+	goto MauvilleCity_GameCorner_EventScript_156B9B
 	end
 
 MauvilleCity_GameCorner_EventScript_156CBA:: @ 8156CBA
@@ -197,17 +197,17 @@ MauvilleCity_GameCorner_EventScript_156CBA:: @ 8156CBA
 	updatecoins 0, 0
 	playsfx 95
 	msgbox MauvilleCity_GameCorner_Text_181E49, 4
-	jump MauvilleCity_GameCorner_EventScript_156B9B
+	goto MauvilleCity_GameCorner_EventScript_156B9B
 	end
 
 MauvilleCity_GameCorner_EventScript_156CF4:: @ 8156CF4
 	msgbox MauvilleCity_GameCorner_Text_181E76, 4
-	jump MauvilleCity_GameCorner_EventScript_156B9B
+	goto MauvilleCity_GameCorner_EventScript_156B9B
 	end
 
 MauvilleCity_GameCorner_EventScript_156D02:: @ 8156D02
 	call MauvilleCity_GameCorner_EventScript_1A02B8
-	jump MauvilleCity_GameCorner_EventScript_156B9B
+	goto MauvilleCity_GameCorner_EventScript_156B9B
 	end
 
 MauvilleCity_GameCorner_EventScript_156D0D:: @ 8156D0D
@@ -231,12 +231,12 @@ MauvilleCity_GameCorner_EventScript_156D36:: @ 8156D36
 	waittext
 	showcoins 0, 0
 	setvar 0x4001, 0
-	jump MauvilleCity_GameCorner_EventScript_156D54
+	goto MauvilleCity_GameCorner_EventScript_156D54
 
 MauvilleCity_GameCorner_EventScript_156D49:: @ 8156D49
 	message MauvilleCity_GameCorner_Text_181E17
 	waittext
-	jump MauvilleCity_GameCorner_EventScript_156D54
+	goto MauvilleCity_GameCorner_EventScript_156D54
 
 MauvilleCity_GameCorner_EventScript_156D54:: @ 8156D54
 	multichoice 12, 0, 55, 0
@@ -247,33 +247,33 @@ MauvilleCity_GameCorner_EventScript_156D54:: @ 8156D54
 	case 3, MauvilleCity_GameCorner_EventScript_156DD0
 	case 4, MauvilleCity_GameCorner_EventScript_156DDE
 	case 5, MauvilleCity_GameCorner_EventScript_156F77
-	jump MauvilleCity_GameCorner_EventScript_156F77
+	goto MauvilleCity_GameCorner_EventScript_156F77
 	end
 
 MauvilleCity_GameCorner_EventScript_156DA6:: @ 8156DA6
 	setvar 0x4001, 1
 	bufferitem 0, ITEM_TM32
-	jump MauvilleCity_GameCorner_EventScript_156DEC
+	goto MauvilleCity_GameCorner_EventScript_156DEC
 
 MauvilleCity_GameCorner_EventScript_156DB4:: @ 8156DB4
 	setvar 0x4001, 2
 	bufferitem 0, ITEM_TM29
-	jump MauvilleCity_GameCorner_EventScript_156DEC
+	goto MauvilleCity_GameCorner_EventScript_156DEC
 
 MauvilleCity_GameCorner_EventScript_156DC2:: @ 8156DC2
 	setvar 0x4001, 3
 	bufferitem 0, ITEM_TM35
-	jump MauvilleCity_GameCorner_EventScript_156DEC
+	goto MauvilleCity_GameCorner_EventScript_156DEC
 
 MauvilleCity_GameCorner_EventScript_156DD0:: @ 8156DD0
 	setvar 0x4001, 4
 	bufferitem 0, ITEM_TM24
-	jump MauvilleCity_GameCorner_EventScript_156DEC
+	goto MauvilleCity_GameCorner_EventScript_156DEC
 
 MauvilleCity_GameCorner_EventScript_156DDE:: @ 8156DDE
 	setvar 0x4001, 5
 	bufferitem 0, ITEM_TM13
-	jump MauvilleCity_GameCorner_EventScript_156DEC
+	goto MauvilleCity_GameCorner_EventScript_156DEC
 
 MauvilleCity_GameCorner_EventScript_156DEC:: @ 8156DEC
 	msgbox MauvilleCity_GameCorner_Text_181E33, 5
@@ -299,7 +299,7 @@ MauvilleCity_GameCorner_EventScript_156E3C:: @ 8156E3C
 	updatecoins 0, 0
 	playsfx 95
 	msgbox MauvilleCity_GameCorner_Text_181F08, 4
-	jump MauvilleCity_GameCorner_EventScript_156D49
+	goto MauvilleCity_GameCorner_EventScript_156D49
 	end
 
 MauvilleCity_GameCorner_EventScript_156E76:: @ 8156E76
@@ -314,7 +314,7 @@ MauvilleCity_GameCorner_EventScript_156E76:: @ 8156E76
 	updatecoins 0, 0
 	playsfx 95
 	msgbox MauvilleCity_GameCorner_Text_181F08, 4
-	jump MauvilleCity_GameCorner_EventScript_156D49
+	goto MauvilleCity_GameCorner_EventScript_156D49
 	end
 
 MauvilleCity_GameCorner_EventScript_156EB0:: @ 8156EB0
@@ -329,7 +329,7 @@ MauvilleCity_GameCorner_EventScript_156EB0:: @ 8156EB0
 	updatecoins 0, 0
 	playsfx 95
 	msgbox MauvilleCity_GameCorner_Text_181F08, 4
-	jump MauvilleCity_GameCorner_EventScript_156D49
+	goto MauvilleCity_GameCorner_EventScript_156D49
 	end
 
 MauvilleCity_GameCorner_EventScript_156EEA:: @ 8156EEA
@@ -344,7 +344,7 @@ MauvilleCity_GameCorner_EventScript_156EEA:: @ 8156EEA
 	updatecoins 0, 0
 	playsfx 95
 	msgbox MauvilleCity_GameCorner_Text_181F08, 4
-	jump MauvilleCity_GameCorner_EventScript_156D49
+	goto MauvilleCity_GameCorner_EventScript_156D49
 	end
 
 MauvilleCity_GameCorner_EventScript_156F24:: @ 8156F24
@@ -359,17 +359,17 @@ MauvilleCity_GameCorner_EventScript_156F24:: @ 8156F24
 	updatecoins 0, 0
 	playsfx 95
 	msgbox MauvilleCity_GameCorner_Text_181F08, 4
-	jump MauvilleCity_GameCorner_EventScript_156D49
+	goto MauvilleCity_GameCorner_EventScript_156D49
 	end
 
 MauvilleCity_GameCorner_EventScript_156F5E:: @ 8156F5E
 	msgbox MauvilleCity_GameCorner_Text_181E76, 4
-	jump MauvilleCity_GameCorner_EventScript_156D49
+	goto MauvilleCity_GameCorner_EventScript_156D49
 	end
 
 MauvilleCity_GameCorner_EventScript_156F6C:: @ 8156F6C
 	call MauvilleCity_GameCorner_EventScript_1A02A5
-	jump MauvilleCity_GameCorner_EventScript_156D49
+	goto MauvilleCity_GameCorner_EventScript_156D49
 	end
 
 MauvilleCity_GameCorner_EventScript_156F77:: @ 8156F77
@@ -408,7 +408,7 @@ MauvilleCity_GameCorner_EventScript_156FDB:: @ 8156FDB
 	msgbox MauvilleCity_GameCorner_Text_181F89, 4
 	givedecoration 88
 	setflag 226
-	jump MauvilleCity_GameCorner_EventScript_157072
+	goto MauvilleCity_GameCorner_EventScript_157072
 	end
 
 MauvilleCity_GameCorner_EventScript_157005:: @ 8157005
@@ -419,7 +419,7 @@ MauvilleCity_GameCorner_EventScript_157005:: @ 8157005
 	msgbox MauvilleCity_GameCorner_Text_181F89, 4
 	givedecoration 89
 	setflag 226
-	jump MauvilleCity_GameCorner_EventScript_157072
+	goto MauvilleCity_GameCorner_EventScript_157072
 	end
 
 MauvilleCity_GameCorner_EventScript_15702F:: @ 815702F
@@ -430,7 +430,7 @@ MauvilleCity_GameCorner_EventScript_15702F:: @ 815702F
 	msgbox MauvilleCity_GameCorner_Text_181F89, 4
 	givedecoration 90
 	setflag 226
-	jump MauvilleCity_GameCorner_EventScript_157072
+	goto MauvilleCity_GameCorner_EventScript_157072
 	end
 
 MauvilleCity_GameCorner_EventScript_157059:: @ 8157059
@@ -456,7 +456,7 @@ MauvilleCity_GameCorner_EventScript_15707C:: @ 815707C
 	compare RESULT, 1
 	jumpeq MauvilleCity_GameCorner_EventScript_15709C
 	msgbox MauvilleCity_GameCorner_Text_18201E, 4
-	jump MauvilleCity_GameCorner_EventScript_157108
+	goto MauvilleCity_GameCorner_EventScript_157108
 	end
 
 MauvilleCity_GameCorner_EventScript_15709C:: @ 815709C
@@ -469,33 +469,33 @@ MauvilleCity_GameCorner_EventScript_15709C:: @ 815709C
 	givecoins 20
 	msgbox MauvilleCity_GameCorner_Text_18208E, 4
 	playsfx 95
-	jump MauvilleCity_GameCorner_EventScript_1570CA
+	goto MauvilleCity_GameCorner_EventScript_1570CA
 	end
 
 MauvilleCity_GameCorner_EventScript_1570CA:: @ 81570CA
 	msgbox MauvilleCity_GameCorner_Text_1820DD, 4
-	jump MauvilleCity_GameCorner_EventScript_157108
+	goto MauvilleCity_GameCorner_EventScript_157108
 	end
 
 MauvilleCity_GameCorner_EventScript_1570D8:: @ 81570D8
 	lock
 	faceplayer
 	msgbox MauvilleCity_GameCorner_Text_182120, 4
-	jump MauvilleCity_GameCorner_EventScript_157108
+	goto MauvilleCity_GameCorner_EventScript_157108
 	end
 
 MauvilleCity_GameCorner_EventScript_1570E8:: @ 81570E8
 	lock
 	faceplayer
 	msgbox MauvilleCity_GameCorner_Text_18217C, 4
-	jump MauvilleCity_GameCorner_EventScript_157108
+	goto MauvilleCity_GameCorner_EventScript_157108
 	end
 
 MauvilleCity_GameCorner_EventScript_1570F8:: @ 81570F8
 	lock
 	faceplayer
 	msgbox MauvilleCity_GameCorner_Text_182241, 4
-	jump MauvilleCity_GameCorner_EventScript_157108
+	goto MauvilleCity_GameCorner_EventScript_157108
 	end
 
 MauvilleCity_GameCorner_EventScript_157108:: @ 8157108
@@ -509,14 +509,14 @@ MauvilleCity_GameCorner_EventScript_157115:: @ 8157115
 	lock
 	faceplayer
 	msgbox MauvilleCity_GameCorner_Text_182272, 4
-	jump MauvilleCity_GameCorner_EventScript_157108
+	goto MauvilleCity_GameCorner_EventScript_157108
 	end
 
 MauvilleCity_GameCorner_EventScript_157125:: @ 8157125
 	lock
 	faceplayer
 	msgbox MauvilleCity_GameCorner_Text_1822F4, 4
-	jump MauvilleCity_GameCorner_EventScript_157108
+	goto MauvilleCity_GameCorner_EventScript_157108
 	end
 
 MauvilleCity_GameCorner_EventScript_157135:: @ 8157135

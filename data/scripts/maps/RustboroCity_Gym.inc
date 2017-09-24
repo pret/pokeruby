@@ -22,7 +22,7 @@ RustboroCity_Gym_EventScript_1578FE:: @ 81578FE
 	call RustboroCity_Gym_EventScript_1A01C0
 	compare 0x4085, 6
 	callif 1, RustboroCity_Gym_EventScript_1A00FB
-	jump RustboroCity_Gym_EventScript_15793C
+	goto RustboroCity_Gym_EventScript_15793C
 	end
 
 RustboroCity_Gym_EventScript_15793C:: @ 815793C
@@ -62,14 +62,14 @@ RustboroCity_Gym_EventScript_1579AD:: @ 81579AD
 	lockall
 	checkflag 2055
 	jumpeq RustboroCity_Gym_EventScript_1579CD
-	jump RustboroCity_Gym_EventScript_1579D7
+	goto RustboroCity_Gym_EventScript_1579D7
 	end
 
 RustboroCity_Gym_EventScript_1579BD:: @ 81579BD
 	lockall
 	checkflag 2055
 	jumpeq RustboroCity_Gym_EventScript_1579CD
-	jump RustboroCity_Gym_EventScript_1579D7
+	goto RustboroCity_Gym_EventScript_1579D7
 	end
 
 RustboroCity_Gym_EventScript_1579CD:: @ 81579CD

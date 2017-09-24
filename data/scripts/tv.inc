@@ -14,7 +14,7 @@ Event_TV:: @ 81A6E72
 	specialval RESULT, IsTVShowInSearchOfTrainersAiring
 	compare RESULT, 1
 	jumpeq EventScript_1A6F66
-	jump EventScript_1A6F50
+	goto EventScript_1A6F50
 	end
 
 EventScript_1A6EBB:
@@ -61,7 +61,7 @@ EventScript_1A6F21:
 	waitbutton
 	compare RESULT, 1
 	jumpif 5, EventScript_1A6F21
-	jump EventScript_1A6F37
+	goto EventScript_1A6F37
 	end
 
 EventScript_1A6F37:
@@ -73,7 +73,7 @@ EventScript_1A6F37:
 EventScript_1A6F3F:
 	special GetMomOrDadStringForTVMessage
 	msgbox UnknownString_81A0E68, 4
-	jump EventScript_1A6F37
+	goto EventScript_1A6F37
 	end
 
 EventScript_1A6F50:
@@ -82,7 +82,7 @@ EventScript_1A6F50:
 	jumpeq EventScript_1A6EBB
 	waittext
 	waitbutton
-	jump EventScript_1A6F37
+	goto EventScript_1A6F37
 	end
 
 EventScript_1A6F66:
@@ -91,5 +91,5 @@ EventScript_1A6F66:
 	waitbutton
 	compare RESULT, 0
 	jumpeq EventScript_1A6F66
-	jump EventScript_1A6F37
+	goto EventScript_1A6F37
 	end

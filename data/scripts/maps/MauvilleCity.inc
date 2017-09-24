@@ -101,7 +101,7 @@ MauvilleCity_EventScript_14C0F9:: @ 814C0F9
 	move 6, MauvilleCity_Movement_1A0835
 	waitmove 0
 	msgbox MauvilleCity_Text_165D50, 5
-	jump MauvilleCity_EventScript_14C154
+	goto MauvilleCity_EventScript_14C154
 	end
 
 MauvilleCity_EventScript_14C154:: @ 814C154
@@ -131,7 +131,7 @@ MauvilleCity_EventScript_14C187:: @ 814C187
 	move 6, MauvilleCity_Movement_14C2B6
 	move 7, MauvilleCity_Movement_14C2DF
 	waitmove 0
-	jump MauvilleCity_EventScript_14C22B
+	goto MauvilleCity_EventScript_14C22B
 	end
 
 MauvilleCity_EventScript_14C1D9:: @ 814C1D9
@@ -150,7 +150,7 @@ MauvilleCity_EventScript_14C1D9:: @ 814C1D9
 	move 6, MauvilleCity_Movement_14C2C1
 	move 7, MauvilleCity_Movement_14C2E8
 	waitmove 0
-	jump MauvilleCity_EventScript_14C22B
+	goto MauvilleCity_EventScript_14C22B
 	end
 
 MauvilleCity_EventScript_14C22B:: @ 814C22B
@@ -186,7 +186,7 @@ MauvilleCity_EventScript_14C292:: @ 814C292
 	move 6, MauvilleCity_Movement_1A0839
 	waitmove 0
 	msgbox MauvilleCity_Text_165EE2, 5
-	jump MauvilleCity_EventScript_14C154
+	goto MauvilleCity_EventScript_14C154
 	end
 
 MauvilleCity_Movement_14C2AA:: @ 814C2AA

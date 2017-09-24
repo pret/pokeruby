@@ -6,7 +6,7 @@ ShoalCave_LowTideEntranceRoom_MapScript1_15E05D:: @ 815E05D
 	special UpdateShoalTideFlag
 	checkflag 2106
 	jumpeq ShoalCave_LowTideEntranceRoom_EventScript_15E06E
-	jump ShoalCave_LowTideEntranceRoom_EventScript_15E072
+	goto ShoalCave_LowTideEntranceRoom_EventScript_15E072
 
 ShoalCave_LowTideEntranceRoom_EventScript_15E06E:: @ 815E06E
 	setmapfooter 169

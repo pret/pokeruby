@@ -20,19 +20,19 @@ SlateportCity_OceanicMuseum_1F_EventScript_155AE4:: @ 8155AE4
 	lockall
 	move 255, SlateportCity_OceanicMuseum_1F_Movement_1A083F
 	waitmove 0
-	jump SlateportCity_OceanicMuseum_1F_EventScript_155B06
+	goto SlateportCity_OceanicMuseum_1F_EventScript_155B06
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_155AF5:: @ 8155AF5
 	lockall
 	move 255, SlateportCity_OceanicMuseum_1F_Movement_1A0843
 	waitmove 0
-	jump SlateportCity_OceanicMuseum_1F_EventScript_155B06
+	goto SlateportCity_OceanicMuseum_1F_EventScript_155B06
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_155B06:: @ 8155B06
 	showmoney 0, 0
-	snop
+	nop
 	msgbox SlateportCity_OceanicMuseum_1F_Text_17E18D, 5
 	compare RESULT, 1
 	jumpeq SlateportCity_OceanicMuseum_1F_EventScript_155B2D
@@ -49,7 +49,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_155B2D:: @ 8155B2D
 	jumpeq SlateportCity_OceanicMuseum_1F_EventScript_155B5A
 	paymoney 0x32, 0
 	updatemoney 0, 0
-	snop
+	nop
 	msgbox SlateportCity_OceanicMuseum_1F_Text_17E1DE, 4
 	setvar 0x40aa, 1
 	hidemoney 0, 0

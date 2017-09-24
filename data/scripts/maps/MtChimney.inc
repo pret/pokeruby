@@ -16,7 +16,7 @@ MtChimney_EventScript_15CF95:: @ 815CF95
 	lock
 	faceplayer
 	showmoney 0, 0
-	snop
+	nop
 	msgbox MtChimney_Text_195760, 5
 	compare RESULT, 0
 	jumpeq MtChimney_EventScript_15D00B
@@ -43,7 +43,7 @@ MtChimney_EventScript_15CFF3:: @ 815CFF3
 MtChimney_EventScript_15D000:: @ 815D000
 	paymoney 0xc8, 0
 	updatemoney 0, 0
-	snop
+	nop
 	return
 
 MtChimney_EventScript_15D00B:: @ 815D00B

@@ -26,7 +26,7 @@ BattleTower_Corridor_EventScript_16088B:: @ 816088B
 	move 1, BattleTower_Corridor_Movement_1608D5
 	move 255, BattleTower_Corridor_Movement_1608D4
 	waitmove 0
-	jump BattleTower_Corridor_EventScript_1608C2
+	goto BattleTower_Corridor_EventScript_1608C2
 
 BattleTower_Corridor_EventScript_1608B1:: @ 81608B1
 	move 1, BattleTower_Corridor_Movement_1608D2

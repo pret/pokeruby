@@ -46,7 +46,7 @@ EverGrandeCity_GlaciasRoom_EventScript_15B6CA:: @ 815B6CA
 	playmusic 450, 0
 	msgbox EverGrandeCity_GlaciasRoom_Text_190AF9, 4
 	trainerbattle 3, OPPONENT_GLACIA, 0, EverGrandeCity_GlaciasRoom_Text_190C01
-	jump EverGrandeCity_GlaciasRoom_EventScript_15B6FB
+	goto EverGrandeCity_GlaciasRoom_EventScript_15B6FB
 	end
 
 EverGrandeCity_GlaciasRoom_EventScript_15B6F1:: @ 815B6F1

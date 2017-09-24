@@ -132,7 +132,7 @@ SpeakToTrader:
 	jumpeq already_traded
 	message gTextTrader_MenuPrompt
 	waittext
-	jump do_trader_menu_get
+	goto do_trader_menu_get
 	end
 
 dont_want_to_trade:
@@ -156,7 +156,7 @@ do_trader_menu_get:
 	special ScrSpecial_DoesPlayerHaveNoDecorations
 	compare RESULT, TRUE
 	jumpeq player_has_no_decorations
-	jump do_trader_menu_give
+	goto do_trader_menu_give
 	end
 
 cancelled_get_menu:
@@ -166,13 +166,13 @@ cancelled_get_menu:
 rare_item_cant_trade_away:
 	message gTextTrader_ICantTradeThatOneAway
 	waittext
-	jump do_trader_menu_get
+	goto do_trader_menu_get
 	end
 
 dont_want_item:
 	message gTextTrader_MenuPrompt
 	waittext
-	jump do_trader_menu_get
+	goto do_trader_menu_get
 	end
 
 player_has_no_decorations:
@@ -203,7 +203,7 @@ cancelled_give_menu:
 
 decoration_is_in_use:
 	msgbox gTextTrader_InUseYouCantTradeIt, 4
-	jump do_trader_menu_give
+	goto do_trader_menu_give
 	end
 
 decorations_full:
@@ -244,11 +244,11 @@ choose_story:
 	specialval RESULT, ScrSpecial_StorytellerUpdateStat
 	compare RESULT, FALSE
 	jumpeq no_stat_update
-	jump stat_update
+	goto stat_update
 cancel_story_menu:
 	compare 0x8008, 0
 	jumpeq dont_hear_story
-	jump yes_hear_story
+	goto yes_hear_story
 no_stat_update:
 	msgbox gTextStoryteller_CouldThereBeOtherTrainers, 4
 	msgbox gTextStoryteller_HearAnotherLegendaryTale, MSGBOX_YESNO
@@ -261,7 +261,7 @@ yes_hear_story:
 	specialval RESULT, ScrSpecial_StorytellerGetFreeStorySlot
 	compare RESULT, 4
 	jumpeq cant_record_story		@ story list is full
-	jump prompt_record_story
+	goto prompt_record_story
 no_stories_recorded:
 	msgbox gTextStoryteller_ButIKnowOfNoLegendaryTrainers, 4
 prompt_record_story:
@@ -329,7 +329,7 @@ tell_another_giddy_tale:
 
 also_i_was_thinking:
 	msgbox gTextGiddy_AlsoIWasThinking, 4
-	jump tell_giddy_tale
+	goto tell_giddy_tale
 	end
 
 tell_giddy_tale:

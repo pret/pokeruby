@@ -28,7 +28,7 @@ EverGrandeCity_ChampionsRoom_EventScript_15B7DE:: @ 815B7DE
 	move 255, EverGrandeCity_ChampionsRoom_Movement_15B802
 	waitmove 0
 	setvar 0x4001, 1
-	jump EverGrandeCity_ChampionsRoom_EventScript_15B805
+	goto EverGrandeCity_ChampionsRoom_EventScript_15B805
 	releaseall
 	end
 
@@ -41,7 +41,7 @@ EverGrandeCity_ChampionsRoom_EventScript_15B805:: @ 815B805
 	playmusic 454, 0
 	msgbox EverGrandeCity_ChampionsRoom_Text_190F9C, 4
 	trainerbattle 3, OPPONENT_STEVEN, 0, EverGrandeCity_ChampionsRoom_Text_1910A0
-	jump EverGrandeCity_ChampionsRoom_EventScript_15B821
+	goto EverGrandeCity_ChampionsRoom_EventScript_15B821
 	end
 
 EverGrandeCity_ChampionsRoom_EventScript_15B821:: @ 815B821
@@ -84,7 +84,7 @@ EverGrandeCity_ChampionsRoom_EventScript_15B886:: @ 815B886
 	waitmove 0
 	call EverGrandeCity_ChampionsRoom_EventScript_15B9D2
 	msgbox EverGrandeCity_ChampionsRoom_Text_191268, 4
-	jump EverGrandeCity_ChampionsRoom_EventScript_15B8F0
+	goto EverGrandeCity_ChampionsRoom_EventScript_15B8F0
 	end
 
 EverGrandeCity_ChampionsRoom_EventScript_15B8BB:: @ 815B8BB
@@ -97,7 +97,7 @@ EverGrandeCity_ChampionsRoom_EventScript_15B8BB:: @ 815B8BB
 	waitmove 0
 	call EverGrandeCity_ChampionsRoom_EventScript_15B9D2
 	msgbox EverGrandeCity_ChampionsRoom_Text_191305, 4
-	jump EverGrandeCity_ChampionsRoom_EventScript_15B8F0
+	goto EverGrandeCity_ChampionsRoom_EventScript_15B8F0
 	end
 
 EverGrandeCity_ChampionsRoom_EventScript_15B8F0:: @ 815B8F0

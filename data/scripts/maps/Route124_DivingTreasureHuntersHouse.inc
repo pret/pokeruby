@@ -13,19 +13,19 @@ Route124_DivingTreasureHuntersHouse_EventScript_163E04:: @ 8163E04
 	jumpeq Route124_DivingTreasureHuntersHouse_EventScript_163E20
 	msgbox Route124_DivingTreasureHuntersHouse_Text_19F416, 4
 	setflag 217
-	jump Route124_DivingTreasureHuntersHouse_EventScript_163E2E
+	goto Route124_DivingTreasureHuntersHouse_EventScript_163E2E
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_163E20:: @ 8163E20
 	msgbox Route124_DivingTreasureHuntersHouse_Text_19F48F, 4
-	jump Route124_DivingTreasureHuntersHouse_EventScript_163E2E
+	goto Route124_DivingTreasureHuntersHouse_EventScript_163E2E
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_163E2E:: @ 8163E2E
 	call Route124_DivingTreasureHuntersHouse_EventScript_163E44
 	compare 0x4001, 0
 	jumpeq Route124_DivingTreasureHuntersHouse_EventScript_164329
-	jump Route124_DivingTreasureHuntersHouse_EventScript_163EA2
+	goto Route124_DivingTreasureHuntersHouse_EventScript_163EA2
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_163E44:: @ 8163E44
@@ -62,7 +62,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_163E9C:: @ 8163E9C
 
 Route124_DivingTreasureHuntersHouse_EventScript_163EA2:: @ 8163EA2
 	msgbox Route124_DivingTreasureHuntersHouse_Text_19F544, 4
-	jump Route124_DivingTreasureHuntersHouse_EventScript_163EB0
+	goto Route124_DivingTreasureHuntersHouse_EventScript_163EB0
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_163EB0:: @ 8163EB0
@@ -91,7 +91,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_163F61:: @ 8163F61
 	switch RESULT
 	case 0, Route124_DivingTreasureHuntersHouse_EventScript_164256
 	case 1, Route124_DivingTreasureHuntersHouse_EventScript_16431F
-	jump Route124_DivingTreasureHuntersHouse_EventScript_16431F
+	goto Route124_DivingTreasureHuntersHouse_EventScript_16431F
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_163F87:: @ 8163F87
@@ -99,7 +99,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_163F87:: @ 8163F87
 	switch RESULT
 	case 0, Route124_DivingTreasureHuntersHouse_EventScript_164265
 	case 1, Route124_DivingTreasureHuntersHouse_EventScript_16431F
-	jump Route124_DivingTreasureHuntersHouse_EventScript_16431F
+	goto Route124_DivingTreasureHuntersHouse_EventScript_16431F
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_163FAD:: @ 8163FAD
@@ -108,7 +108,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_163FAD:: @ 8163FAD
 	case 0, Route124_DivingTreasureHuntersHouse_EventScript_164256
 	case 1, Route124_DivingTreasureHuntersHouse_EventScript_164265
 	case 2, Route124_DivingTreasureHuntersHouse_EventScript_16431F
-	jump Route124_DivingTreasureHuntersHouse_EventScript_16431F
+	goto Route124_DivingTreasureHuntersHouse_EventScript_16431F
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_163FDE:: @ 8163FDE
@@ -116,7 +116,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_163FDE:: @ 8163FDE
 	switch RESULT
 	case 0, Route124_DivingTreasureHuntersHouse_EventScript_164274
 	case 1, Route124_DivingTreasureHuntersHouse_EventScript_16431F
-	jump Route124_DivingTreasureHuntersHouse_EventScript_16431F
+	goto Route124_DivingTreasureHuntersHouse_EventScript_16431F
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_164004:: @ 8164004
@@ -125,7 +125,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_164004:: @ 8164004
 	case 0, Route124_DivingTreasureHuntersHouse_EventScript_164256
 	case 1, Route124_DivingTreasureHuntersHouse_EventScript_164274
 	case 2, Route124_DivingTreasureHuntersHouse_EventScript_16431F
-	jump Route124_DivingTreasureHuntersHouse_EventScript_16431F
+	goto Route124_DivingTreasureHuntersHouse_EventScript_16431F
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_164035:: @ 8164035
@@ -134,7 +134,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_164035:: @ 8164035
 	case 0, Route124_DivingTreasureHuntersHouse_EventScript_164265
 	case 1, Route124_DivingTreasureHuntersHouse_EventScript_164274
 	case 2, Route124_DivingTreasureHuntersHouse_EventScript_16431F
-	jump Route124_DivingTreasureHuntersHouse_EventScript_16431F
+	goto Route124_DivingTreasureHuntersHouse_EventScript_16431F
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_164066:: @ 8164066
@@ -144,7 +144,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_164066:: @ 8164066
 	case 1, Route124_DivingTreasureHuntersHouse_EventScript_164265
 	case 2, Route124_DivingTreasureHuntersHouse_EventScript_164274
 	case 3, Route124_DivingTreasureHuntersHouse_EventScript_16431F
-	jump Route124_DivingTreasureHuntersHouse_EventScript_16431F
+	goto Route124_DivingTreasureHuntersHouse_EventScript_16431F
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_1640A2:: @ 81640A2
@@ -152,7 +152,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_1640A2:: @ 81640A2
 	switch RESULT
 	case 0, Route124_DivingTreasureHuntersHouse_EventScript_164283
 	case 1, Route124_DivingTreasureHuntersHouse_EventScript_16431F
-	jump Route124_DivingTreasureHuntersHouse_EventScript_16431F
+	goto Route124_DivingTreasureHuntersHouse_EventScript_16431F
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_1640C8:: @ 81640C8
@@ -161,7 +161,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_1640C8:: @ 81640C8
 	case 0, Route124_DivingTreasureHuntersHouse_EventScript_164256
 	case 1, Route124_DivingTreasureHuntersHouse_EventScript_164283
 	case 2, Route124_DivingTreasureHuntersHouse_EventScript_16431F
-	jump Route124_DivingTreasureHuntersHouse_EventScript_16431F
+	goto Route124_DivingTreasureHuntersHouse_EventScript_16431F
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_1640F9:: @ 81640F9
@@ -170,7 +170,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_1640F9:: @ 81640F9
 	case 0, Route124_DivingTreasureHuntersHouse_EventScript_164265
 	case 1, Route124_DivingTreasureHuntersHouse_EventScript_164283
 	case 2, Route124_DivingTreasureHuntersHouse_EventScript_16431F
-	jump Route124_DivingTreasureHuntersHouse_EventScript_16431F
+	goto Route124_DivingTreasureHuntersHouse_EventScript_16431F
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_16412A:: @ 816412A
@@ -180,7 +180,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_16412A:: @ 816412A
 	case 1, Route124_DivingTreasureHuntersHouse_EventScript_164265
 	case 2, Route124_DivingTreasureHuntersHouse_EventScript_164283
 	case 3, Route124_DivingTreasureHuntersHouse_EventScript_16431F
-	jump Route124_DivingTreasureHuntersHouse_EventScript_16431F
+	goto Route124_DivingTreasureHuntersHouse_EventScript_16431F
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_164166:: @ 8164166
@@ -189,7 +189,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_164166:: @ 8164166
 	case 0, Route124_DivingTreasureHuntersHouse_EventScript_164274
 	case 1, Route124_DivingTreasureHuntersHouse_EventScript_164283
 	case 2, Route124_DivingTreasureHuntersHouse_EventScript_16431F
-	jump Route124_DivingTreasureHuntersHouse_EventScript_16431F
+	goto Route124_DivingTreasureHuntersHouse_EventScript_16431F
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_164197:: @ 8164197
@@ -199,7 +199,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_164197:: @ 8164197
 	case 1, Route124_DivingTreasureHuntersHouse_EventScript_164274
 	case 2, Route124_DivingTreasureHuntersHouse_EventScript_164283
 	case 3, Route124_DivingTreasureHuntersHouse_EventScript_16431F
-	jump Route124_DivingTreasureHuntersHouse_EventScript_16431F
+	goto Route124_DivingTreasureHuntersHouse_EventScript_16431F
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_1641D3:: @ 81641D3
@@ -209,7 +209,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_1641D3:: @ 81641D3
 	case 1, Route124_DivingTreasureHuntersHouse_EventScript_164274
 	case 2, Route124_DivingTreasureHuntersHouse_EventScript_164283
 	case 3, Route124_DivingTreasureHuntersHouse_EventScript_16431F
-	jump Route124_DivingTreasureHuntersHouse_EventScript_16431F
+	goto Route124_DivingTreasureHuntersHouse_EventScript_16431F
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_16420F:: @ 816420F
@@ -220,28 +220,28 @@ Route124_DivingTreasureHuntersHouse_EventScript_16420F:: @ 816420F
 	case 2, Route124_DivingTreasureHuntersHouse_EventScript_164274
 	case 3, Route124_DivingTreasureHuntersHouse_EventScript_164283
 	case 4, Route124_DivingTreasureHuntersHouse_EventScript_16431F
-	jump Route124_DivingTreasureHuntersHouse_EventScript_16431F
+	goto Route124_DivingTreasureHuntersHouse_EventScript_16431F
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_164256:: @ 8164256
 	setvar 0x8008, 48
 	setvar 0x8009, 95
-	jump Route124_DivingTreasureHuntersHouse_EventScript_164292
+	goto Route124_DivingTreasureHuntersHouse_EventScript_164292
 
 Route124_DivingTreasureHuntersHouse_EventScript_164265:: @ 8164265
 	setvar 0x8008, 50
 	setvar 0x8009, 96
-	jump Route124_DivingTreasureHuntersHouse_EventScript_164292
+	goto Route124_DivingTreasureHuntersHouse_EventScript_164292
 
 Route124_DivingTreasureHuntersHouse_EventScript_164274:: @ 8164274
 	setvar 0x8008, 49
 	setvar 0x8009, 97
-	jump Route124_DivingTreasureHuntersHouse_EventScript_164292
+	goto Route124_DivingTreasureHuntersHouse_EventScript_164292
 
 Route124_DivingTreasureHuntersHouse_EventScript_164283:: @ 8164283
 	setvar 0x8008, 51
 	setvar 0x8009, 98
-	jump Route124_DivingTreasureHuntersHouse_EventScript_164292
+	goto Route124_DivingTreasureHuntersHouse_EventScript_164292
 
 Route124_DivingTreasureHuntersHouse_EventScript_164292:: @ 8164292
 	bufferitem 0, 0x8008
@@ -255,7 +255,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_164292:: @ 8164292
 	checkitem 0x8008, 2
 	compare RESULT, 0
 	jumpeq Route124_DivingTreasureHuntersHouse_EventScript_1642D3
-	jump Route124_DivingTreasureHuntersHouse_EventScript_164315
+	goto Route124_DivingTreasureHuntersHouse_EventScript_164315
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_1642D3:: @ 81642D3
@@ -268,7 +268,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_1642D3:: @ 81642D3
 	msgbox Route124_DivingTreasureHuntersHouse_Text_19F629, 5
 	compare RESULT, 1
 	jumpeq Route124_DivingTreasureHuntersHouse_EventScript_163EB0
-	jump Route124_DivingTreasureHuntersHouse_EventScript_16431F
+	goto Route124_DivingTreasureHuntersHouse_EventScript_16431F
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_164315:: @ 8164315

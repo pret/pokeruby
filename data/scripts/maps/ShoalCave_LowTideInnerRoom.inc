@@ -6,7 +6,7 @@ ShoalCave_LowTideInnerRoom_MapScripts:: @ 815E192
 ShoalCave_LowTideInnerRoom_MapScript1_15E19D:: @ 815E19D
 	checkflag 2106
 	jumpeq ShoalCave_LowTideInnerRoom_EventScript_15E1AB
-	jump ShoalCave_LowTideInnerRoom_EventScript_15E1AF
+	goto ShoalCave_LowTideInnerRoom_EventScript_15E1AF
 
 ShoalCave_LowTideInnerRoom_EventScript_15E1AB:: @ 815E1AB
 	setmapfooter 170
@@ -26,7 +26,7 @@ ShoalCave_LowTideInnerRoom_EventScript_15E1B9:: @ 815E1B9
 	checkflag 2106
 	jumpeq ShoalCave_LowTideInnerRoom_EventScript_15E1DA
 	setmaptile 31, 8, 856, 1
-	jump ShoalCave_LowTideInnerRoom_EventScript_15E1DA
+	goto ShoalCave_LowTideInnerRoom_EventScript_15E1DA
 	end
 
 ShoalCave_LowTideInnerRoom_EventScript_15E1DA:: @ 815E1DA
@@ -35,28 +35,28 @@ ShoalCave_LowTideInnerRoom_EventScript_15E1DA:: @ 815E1DA
 	checkflag 2106
 	jumpeq ShoalCave_LowTideInnerRoom_EventScript_15E1FB
 	setmaptile 14, 26, 856, 1
-	jump ShoalCave_LowTideInnerRoom_EventScript_15E1FB
+	goto ShoalCave_LowTideInnerRoom_EventScript_15E1FB
 	end
 
 ShoalCave_LowTideInnerRoom_EventScript_15E1FB:: @ 815E1FB
 	checkflag 956
 	jumpeq ShoalCave_LowTideInnerRoom_EventScript_15E213
 	setmaptile 41, 20, 857, 1
-	jump ShoalCave_LowTideInnerRoom_EventScript_15E213
+	goto ShoalCave_LowTideInnerRoom_EventScript_15E213
 	end
 
 ShoalCave_LowTideInnerRoom_EventScript_15E213:: @ 815E213
 	checkflag 957
 	jumpeq ShoalCave_LowTideInnerRoom_EventScript_15E22B
 	setmaptile 41, 10, 857, 1
-	jump ShoalCave_LowTideInnerRoom_EventScript_15E22B
+	goto ShoalCave_LowTideInnerRoom_EventScript_15E22B
 	end
 
 ShoalCave_LowTideInnerRoom_EventScript_15E22B:: @ 815E22B
 	checkflag 958
 	jumpeq ShoalCave_LowTideInnerRoom_EventScript_15E243
 	setmaptile 6, 9, 857, 1
-	jump ShoalCave_LowTideInnerRoom_EventScript_15E243
+	goto ShoalCave_LowTideInnerRoom_EventScript_15E243
 	end
 
 ShoalCave_LowTideInnerRoom_EventScript_15E243:: @ 815E243

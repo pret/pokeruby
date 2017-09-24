@@ -20,7 +20,7 @@ PetalburgCity_WallysHouse_EventScript_1543C4:: @ 81543C4
 PetalburgCity_WallysHouse_EventScript_1543F7:: @ 81543F7
 	checkflag 122
 	jumpeq PetalburgCity_WallysHouse_EventScript_154431
-	jump PetalburgCity_WallysHouse_EventScript_154406
+	goto PetalburgCity_WallysHouse_EventScript_154406
 	end
 
 PetalburgCity_WallysHouse_EventScript_154406:: @ 8154406

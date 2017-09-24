@@ -17,19 +17,19 @@ Route109_EventScript_14F4D3:: @ 814F4D3
 Route109_EventScript_14F518:: @ 814F518
 	move 255, Route109_Movement_14F66D
 	waitmove 0
-	jump Route109_EventScript_14F548
+	goto Route109_EventScript_14F548
 	end
 
 Route109_EventScript_14F528:: @ 814F528
 	move 255, Route109_Movement_14F675
 	waitmove 0
-	jump Route109_EventScript_14F548
+	goto Route109_EventScript_14F548
 	end
 
 Route109_EventScript_14F538:: @ 814F538
 	move 255, Route109_Movement_14F678
 	waitmove 0
-	jump Route109_EventScript_14F548
+	goto Route109_EventScript_14F548
 	end
 
 Route109_EventScript_14F548:: @ 814F548
@@ -273,7 +273,7 @@ Route109_EventScript_14F680:: @ 814F680
 	faceplayer
 	checkflag 149
 	jumpif 0, Route109_EventScript_14F691
-	jump Route109_EventScript_14F6AF
+	goto Route109_EventScript_14F6AF
 	end
 
 Route109_EventScript_14F691:: @ 814F691
@@ -281,7 +281,7 @@ Route109_EventScript_14F691:: @ 814F691
 	msgbox Route109_Text_16E0F9, 5
 	compare RESULT, 0
 	jumpeq Route109_EventScript_14F6F1
-	jump Route109_EventScript_14F6E2
+	goto Route109_EventScript_14F6E2
 	end
 
 Route109_EventScript_14F6AF:: @ 814F6AF
@@ -297,7 +297,7 @@ Route109_EventScript_14F6AF:: @ 814F6AF
 Route109_EventScript_14F6E2:: @ 814F6E2
 	msgbox Route109_Text_16E159, 4
 	closebutton
-	jump Route109_EventScript_14F4D3
+	goto Route109_EventScript_14F4D3
 	end
 
 Route109_EventScript_14F6F1:: @ 814F6F1

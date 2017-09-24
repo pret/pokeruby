@@ -393,7 +393,7 @@ gUnknown_0815F36C:: @ 815F36C
 	waittext
 	waitbutton
 	playsfx 5
-	jump EventScript_15F384
+	goto EventScript_15F384
 	end
 
 EventScript_15F384:
@@ -401,12 +401,12 @@ EventScript_15F384:
 	waittext
 	checkflag 268
 	jumpeq EventScript_15F3A0
-	jump EventScript_15F3E2
+	goto EventScript_15F3E2
 	end
 
 gUnknown_0815F399:: @ 815F399
 	lockall
-	jump EventScript_15F384
+	goto EventScript_15F384
 	end
 
 EventScript_15F3A0:
@@ -454,7 +454,7 @@ gUnknown_0815F43A:: @ 815F43A
 	waittext
 	waitbutton
 	playsfx 5
-	jump EventScript_15F452
+	goto EventScript_15F452
 	end
 
 EventScript_15F452:
@@ -471,7 +471,7 @@ EventScript_15F452:
 
 gUnknown_0815F49A:: @ 815F49A
 	lockall
-	jump EventScript_15F452
+	goto EventScript_15F452
 	end
 
 EventScript_15F4A1:
@@ -510,7 +510,7 @@ EventScript_15F503:
 EventScript_15F511:
 	message UnknownString_81A3AA2
 	waittext
-	jump EventScript_15F452
+	goto EventScript_15F452
 	end
 
 EventScript_15F51D:
@@ -928,7 +928,7 @@ gUnknown_0819F80B:: @ 819F80B
 	special PlayTrainerEncounterMusic
 	special ScrSpecial_EndTrainerApproach
 	waitstate
-	jump EventScript_19F8F2
+	goto EventScript_19F8F2
 
 gUnknown_0819F818:: @ 819F818
 	lock
@@ -940,7 +940,7 @@ gUnknown_0819F818:: @ 819F818
 	jumpif 5, EventScript_19F83F
 	special PlayTrainerEncounterMusic
 	special sub_8082524
-	jump EventScript_19F8F2
+	goto EventScript_19F8F2
 
 EventScript_19F83F:
 	endtrainerbattle
@@ -957,7 +957,7 @@ gUnknown_0819F840:: @ 819F840
 	jumpif 5, EventScript_19F870
 	special PlayTrainerEncounterMusic
 	special sub_8082524
-	jump EventScript_19F8F2
+	goto EventScript_19F8F2
 
 EventScript_19F870:
 	special ScrSpecial_ShowTrainerNonBattlingSpeech
@@ -1322,7 +1322,7 @@ EverGrandeCity_HallOfFame_EventScript_19FC70:: @ 819FC70
 S_WhiteOut:: @ 819FC74
 	call EverGrandeCity_HallOfFame_EventScript_19FD09
 	call EventScript_19FC84
-	jump gUnknown_0819FC9F
+	goto gUnknown_0819FC9F
 	end
 
 EventScript_19FC84:
@@ -1452,7 +1452,7 @@ do_heal_party:: @ 819FD7C
 	special ScrSpecial_HealPlayerParty
 	checkflag 273
 	jumpif 0, OldaleTown_PokemonCenter_1F_EventScript_19FDCE
-	jump OldaleTown_PokemonCenter_1F_EventScript_19FDB0
+	goto OldaleTown_PokemonCenter_1F_EventScript_19FDB0
 	end
 
 OldaleTown_PokemonCenter_1F_EventScript_19FDB0:: @ 819FDB0
@@ -1658,7 +1658,7 @@ UnusedMixRecordsScript: @ 819FFD5
 	jumpeq UnusedMixRecordsScript_Yes
 	compare RESULT, 0
 	jumpeq UnusedMixRecordsScript_Done
-	jump UnusedMixRecordsScript_Done
+	goto UnusedMixRecordsScript_Done
 UnusedMixRecordsScript_Yes: @ 819FFFA
 	special sub_80B929C
 	waitstate
@@ -1677,7 +1677,7 @@ gUnknown_081A0009:: @ 81A0009
 	special DoPCTurnOnEffect
 	playsfx 4
 	msgbox UnknownString_81A09EC, 4
-	jump EventScript_1A0023
+	goto EventScript_1A0023
 	end
 
 EventScript_1A0023:
@@ -1685,7 +1685,7 @@ EventScript_1A0023:
 	waittext
 	special ScrSpecial_CreatePCMenu
 	waitstate
-	jump EventScript_1A0033
+	goto EventScript_1A0033
 	end
 
 EventScript_1A0033:
@@ -1702,7 +1702,7 @@ EventScript_1A0070:
 	msgbox UnknownString_81A0A54, 4
 	special PlayerPC
 	waitstate
-	jump EventScript_1A0023
+	goto EventScript_1A0023
 	end
 
 EventScript_1A0085:
@@ -1714,7 +1714,7 @@ EventScript_1A0085:
 	msgbox UnknownString_81A0A35, 4
 	special ShowPokemonStorageSystem
 	waitstate
-	jump EventScript_1A0023
+	goto EventScript_1A0023
 	end
 
 EventScript_1A00AC:
@@ -1738,7 +1738,7 @@ EventScript_1A00CB:
 	playsfx 2
 	special AccessHallOfFamePC
 	waitstate
-	jump EventScript_1A0033
+	goto EventScript_1A0033
 	end
 
 FallarborTown_EventScript_1A00E1:: @ 81A00E1
@@ -2303,20 +2303,20 @@ CaveOfOrigin_B2F_EventScript_1A04AF:: @ 81A04AF
 CaveOfOrigin_B3F_EventScript_1A04AF:: @ 81A04AF
 	lockall
 	setvar 0x4001, 1
-	jump CaveOfOrigin_1F_EventScript_1A04D3
+	goto CaveOfOrigin_1F_EventScript_1A04D3
 	end
 
 CaveOfOrigin_B2F_EventScript_1A04BB:: @ 81A04BB
 CaveOfOrigin_B3F_EventScript_1A04BB:: @ 81A04BB
 	lockall
 	setvar 0x4002, 1
-	jump CaveOfOrigin_B2F_EventScript_1A04D3
+	goto CaveOfOrigin_B2F_EventScript_1A04D3
 	end
 
 @ 81A04C7
 	lockall
 	setvar 0x4003, 1
-	jump CaveOfOrigin_B2F_EventScript_1A04D3
+	goto CaveOfOrigin_B2F_EventScript_1A04D3
 	end
 
 CaveOfOrigin_1F_EventScript_1A04D3:: @ 81A04D3
@@ -2376,49 +2376,49 @@ Route120_EventScript_1A0539:: @ 81A0539
 	lock
 	faceplayer
 	setvar 0x8004, 1
-	jump Route120_EventScript_1A0594
+	goto Route120_EventScript_1A0594
 	end
 
 Route120_EventScript_1A0546:: @ 81A0546
 	lock
 	faceplayer
 	setvar 0x8004, 2
-	jump Route120_EventScript_1A0594
+	goto Route120_EventScript_1A0594
 	end
 
 Route120_EventScript_1A0553:: @ 81A0553
 	lock
 	faceplayer
 	setvar 0x8004, 3
-	jump Route120_EventScript_1A0594
+	goto Route120_EventScript_1A0594
 	end
 
 Route120_EventScript_1A0560:: @ 81A0560
 	lock
 	faceplayer
 	setvar 0x8004, 4
-	jump Route120_EventScript_1A0594
+	goto Route120_EventScript_1A0594
 	end
 
 Route120_EventScript_1A056D:: @ 81A056D
 	lock
 	faceplayer
 	setvar 0x8004, 5
-	jump Route120_EventScript_1A0594
+	goto Route120_EventScript_1A0594
 	end
 
 Route119_EventScript_1A057A:: @ 81A057A
 	lock
 	faceplayer
 	setvar 0x8004, 6
-	jump Route119_EventScript_1A0594
+	goto Route119_EventScript_1A0594
 	end
 
 Route119_EventScript_1A0587:: @ 81A0587
 	lock
 	faceplayer
 	setvar 0x8004, 7
-	jump Route119_EventScript_1A0594
+	goto Route119_EventScript_1A0594
 	end
 
 Route119_EventScript_1A0594:: @ 81A0594
@@ -3628,14 +3628,14 @@ EventScript_1A2CB0:
 	closebutton
 	doanimation 11
 	waitstate
-	jump EventScript_1A2CFA
+	goto EventScript_1A2CFA
 	end
 
 gUnknown_081A2CE6:: @ 81A2CE6
 	lockall
 	doanimation 11
 	waitstate
-	jump EventScript_1A2CFA
+	goto EventScript_1A2CFA
 	end
 
 EventScript_1A2CF1:
@@ -3644,7 +3644,7 @@ EventScript_1A2CF1:
 
 EventScript_1A2CFA:
 	msgbox UnknownString_8198F6E, 4
-	jump EventScript_1A2DB8
+	goto EventScript_1A2DB8
 	end
 
 EventScript_1A2D08:
@@ -3659,14 +3659,14 @@ EventScript_1A2D08:
 	closebutton
 	doanimation 26
 	waitstate
-	jump EventScript_1A2D52
+	goto EventScript_1A2D52
 	end
 
 gUnknown_081A2D3E:: @ 81A2D3E
 	lockall
 	doanimation 26
 	waitstate
-	jump EventScript_1A2D52
+	goto EventScript_1A2D52
 	end
 
 EventScript_1A2D49:
@@ -3675,7 +3675,7 @@ EventScript_1A2D49:
 
 EventScript_1A2D52:
 	msgbox UnknownString_81A19C4, 4
-	jump EventScript_1A2DB8
+	goto EventScript_1A2DB8
 	end
 
 EventScript_1A2D60:
@@ -3690,14 +3690,14 @@ EventScript_1A2D60:
 	closebutton
 	doanimation 27
 	waitstate
-	jump EventScript_1A2DAA
+	goto EventScript_1A2DAA
 	end
 
 gUnknown_081A2D96:: @ 81A2D96
 	lockall
 	doanimation 27
 	waitstate
-	jump EventScript_1A2DAA
+	goto EventScript_1A2DAA
 	end
 
 EventScript_1A2DA1:
@@ -3706,7 +3706,7 @@ EventScript_1A2DA1:
 
 EventScript_1A2DAA:
 	msgbox UnknownString_81A1AA9, 4
-	jump EventScript_1A2DB8
+	goto EventScript_1A2DB8
 	end
 
 EventScript_1A2DB8:
@@ -3858,7 +3858,7 @@ SecretBase_RedCave1_EventScript_1A2F68:: @ 81A2F68
 
 gUnknown_081A2F7B:: @ 81A2F7B
 	setvar 0x8005, 0
-	jump EventScript_1A2F86
+	goto EventScript_1A2F86
 	end
 
 EventScript_1A2F86:
@@ -3867,7 +3867,7 @@ EventScript_1A2F86:
 
 gUnknown_081A2F8A:: @ 81A2F8A
 	setvar 0x8004, 0
-	jump EventScript_1A2F95
+	goto EventScript_1A2F95
 	end
 
 EventScript_1A2F95:
@@ -3879,7 +3879,7 @@ EventScript_1A2F95:
 	jumpeq EventScript_1A2F95
 	disappear 0x8006
 	setflag 0x8005
-	jump EventScript_1A2F95
+	goto EventScript_1A2F95
 	end
 
 EventScript_1A2FBF:
@@ -3949,7 +3949,7 @@ SecretBase_RedCave1_EventScript_1A3032:: @ 81A3032
 	jumpeq SecretBase_RedCave1_EventScript_1A308F
 	hidebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A1B83, 4
-	jump SecretBase_RedCave1_EventScript_1A350A
+	goto SecretBase_RedCave1_EventScript_1A350A
 	end
 
 SecretBase_RedCave1_EventScript_1A3086:: @ 81A3086
@@ -3984,7 +3984,7 @@ SecretBase_RedCave1_EventScript_1A30AE:: @ 81A30AE
 	jumpeq SecretBase_RedCave1_EventScript_1A310B
 	hidebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A1F04, 4
-	jump SecretBase_RedCave1_EventScript_1A350A
+	goto SecretBase_RedCave1_EventScript_1A350A
 	end
 
 SecretBase_RedCave1_EventScript_1A3102:: @ 81A3102
@@ -4019,7 +4019,7 @@ SecretBase_RedCave1_EventScript_1A312A:: @ 81A312A
 	jumpeq SecretBase_RedCave1_EventScript_1A3187
 	hidebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A2220, 4
-	jump SecretBase_RedCave1_EventScript_1A350A
+	goto SecretBase_RedCave1_EventScript_1A350A
 	end
 
 SecretBase_RedCave1_EventScript_1A317E:: @ 81A317E
@@ -4054,7 +4054,7 @@ SecretBase_RedCave1_EventScript_1A31A6:: @ 81A31A6
 	jumpeq SecretBase_RedCave1_EventScript_1A3203
 	hidebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A256F, 4
-	jump SecretBase_RedCave1_EventScript_1A350A
+	goto SecretBase_RedCave1_EventScript_1A350A
 	end
 
 SecretBase_RedCave1_EventScript_1A31FA:: @ 81A31FA
@@ -4089,7 +4089,7 @@ SecretBase_RedCave1_EventScript_1A3222:: @ 81A3222
 	jumpeq SecretBase_RedCave1_EventScript_1A327F
 	hidebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A28D7, 4
-	jump SecretBase_RedCave1_EventScript_1A350A
+	goto SecretBase_RedCave1_EventScript_1A350A
 	end
 
 SecretBase_RedCave1_EventScript_1A3276:: @ 81A3276
@@ -4124,7 +4124,7 @@ SecretBase_RedCave1_EventScript_1A329E:: @ 81A329E
 	jumpeq SecretBase_RedCave1_EventScript_1A32FB
 	hidebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A1D48, 4
-	jump SecretBase_RedCave1_EventScript_1A350A
+	goto SecretBase_RedCave1_EventScript_1A350A
 	end
 
 SecretBase_RedCave1_EventScript_1A32F2:: @ 81A32F2
@@ -4159,7 +4159,7 @@ SecretBase_RedCave1_EventScript_1A331A:: @ 81A331A
 	jumpeq SecretBase_RedCave1_EventScript_1A3377
 	hidebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A2095, 4
-	jump SecretBase_RedCave1_EventScript_1A350A
+	goto SecretBase_RedCave1_EventScript_1A350A
 	end
 
 SecretBase_RedCave1_EventScript_1A336E:: @ 81A336E
@@ -4194,7 +4194,7 @@ SecretBase_RedCave1_EventScript_1A3396:: @ 81A3396
 	jumpeq SecretBase_RedCave1_EventScript_1A33F3
 	hidebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A2405, 4
-	jump SecretBase_RedCave1_EventScript_1A350A
+	goto SecretBase_RedCave1_EventScript_1A350A
 	end
 
 SecretBase_RedCave1_EventScript_1A33EA:: @ 81A33EA
@@ -4229,7 +4229,7 @@ SecretBase_RedCave1_EventScript_1A3412:: @ 81A3412
 	jumpeq SecretBase_RedCave1_EventScript_1A346F
 	hidebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A2710, 4
-	jump SecretBase_RedCave1_EventScript_1A350A
+	goto SecretBase_RedCave1_EventScript_1A350A
 	end
 
 SecretBase_RedCave1_EventScript_1A3466:: @ 81A3466
@@ -4264,7 +4264,7 @@ SecretBase_RedCave1_EventScript_1A348E:: @ 81A348E
 	jumpeq SecretBase_RedCave1_EventScript_1A34EB
 	hidebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A2AE2, 4
-	jump SecretBase_RedCave1_EventScript_1A350A
+	goto SecretBase_RedCave1_EventScript_1A350A
 	end
 
 SecretBase_RedCave1_EventScript_1A34E2:: @ 81A34E2
@@ -4413,7 +4413,7 @@ SlateportCity_PokemonFanClub_EventScript_1ADEB9:: @ 81ADEB9
 SlateportCity_PokemonFanClub_EventScript_1ADEC3:: @ 81ADEC3
 	msgbox SlateportCity_PokemonFanClub_Text_1A8818, 4
 	setvar 0x8005, 1
-	jump SlateportCity_PokemonFanClub_EventScript_1ADE46
+	goto SlateportCity_PokemonFanClub_EventScript_1ADE46
 	end
 
 SlateportCity_PokemonFanClub_EventScript_1ADED6:: @ 81ADED6
@@ -4469,7 +4469,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_1ADF79:: @ 81ADF79
 SlateportCity_OceanicMuseum_1F_EventScript_1ADF83:: @ 81ADF83
 	msgbox SlateportCity_OceanicMuseum_1F_Text_1A949A, 4
 	setvar 0x8005, 2
-	jump SlateportCity_OceanicMuseum_1F_EventScript_1ADE46
+	goto SlateportCity_OceanicMuseum_1F_EventScript_1ADE46
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_1ADF96:: @ 81ADF96
@@ -4507,17 +4507,17 @@ SlateportCity_PokemonFanClub_EventScript_1ADFE9:: @ 81ADFE9
 
 SlateportCity_PokemonFanClub_EventScript_1AE020:: @ 81AE020
 	msgbox SlateportCity_PokemonFanClub_Text_1A8414, 4
-	jump SlateportCity_PokemonFanClub_EventScript_1AE04A
+	goto SlateportCity_PokemonFanClub_EventScript_1AE04A
 	end
 
 SlateportCity_PokemonFanClub_EventScript_1AE02E:: @ 81AE02E
 	msgbox SlateportCity_PokemonFanClub_Text_1A8470, 4
-	jump SlateportCity_PokemonFanClub_EventScript_1AE04A
+	goto SlateportCity_PokemonFanClub_EventScript_1AE04A
 	end
 
 SlateportCity_PokemonFanClub_EventScript_1AE03C:: @ 81AE03C
 	msgbox SlateportCity_PokemonFanClub_Text_1A84D5, 4
-	jump SlateportCity_PokemonFanClub_EventScript_1AE04A
+	goto SlateportCity_PokemonFanClub_EventScript_1AE04A
 	end
 
 SlateportCity_PokemonFanClub_EventScript_1AE04A:: @ 81AE04A
@@ -4539,7 +4539,7 @@ SlateportCity_PokemonFanClub_EventScript_1AE04A:: @ 81AE04A
 	msgbox SlateportCity_PokemonFanClub_Text_1A85A6, 4
 	copyvar 0x8007, 0x800a
 	setvar 0x8005, 3
-	jump SlateportCity_PokemonFanClub_EventScript_1ADE46
+	goto SlateportCity_PokemonFanClub_EventScript_1ADE46
 	end
 
 SlateportCity_PokemonFanClub_EventScript_1AE0A2:: @ 81AE0A2
@@ -4606,7 +4606,7 @@ FallarborTown_ContestLobby_EventScript_1AE137:: @ 81AE137
 	msgbox FallarborTown_ContestLobby_Text_1A7153, 4
 	setflag 2
 	setvar 0x8005, 6
-	jump FallarborTown_ContestLobby_EventScript_1ADE46
+	goto FallarborTown_ContestLobby_EventScript_1ADE46
 	end
 
 FallarborTown_ContestLobby_EventScript_1AE17E:: @ 81AE17E
@@ -4710,7 +4710,7 @@ BattleTower_Lobby_EventScript_1AE2B3:: @ 81AE2B3
 	setflag 2
 	copyvar 0x8004, 0x8008
 	setvar 0x8005, 7
-	jump BattleTower_Lobby_EventScript_1ADE46
+	goto BattleTower_Lobby_EventScript_1ADE46
 	end
 
 BattleTower_Lobby_EventScript_1AE2D9:: @ 81AE2D9
@@ -4797,7 +4797,7 @@ MauvilleCity_GameCorner_EventScript_1C407E:: @ 81C407E
 	compare RESULT, 0
 	jumpeq MauvilleCity_GameCorner_EventScript_1C40DA
 	addvar 0x8004, 128
-	jump MauvilleCity_GameCorner_EventScript_1C40DA
+	goto MauvilleCity_GameCorner_EventScript_1C40DA
 	end
 
 MauvilleCity_GameCorner_EventScript_1C40AC:: @ 81C40AC
@@ -4809,7 +4809,7 @@ MauvilleCity_GameCorner_EventScript_1C40AC:: @ 81C40AC
 	compare RESULT, 0
 	jumpeq MauvilleCity_GameCorner_EventScript_1C40DA
 	addvar 0x8004, 128
-	jump MauvilleCity_GameCorner_EventScript_1C40DA
+	goto MauvilleCity_GameCorner_EventScript_1C40DA
 	end
 
 MauvilleCity_GameCorner_EventScript_1C40DA:: @ 81C40DA

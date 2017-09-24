@@ -48,13 +48,13 @@ LittlerootTown_MaysHouse_1F_EventScript_1B69B7:: @ 81B69B7
 LittlerootTown_BrendansHouse_2F_EventScript_1B69D3:: @ 81B69D3
 	lockall
 	setvar 0x8004, 0
-	jump LittlerootTown_BrendansHouse_2F_EventScript_1B69EB
+	goto LittlerootTown_BrendansHouse_2F_EventScript_1B69EB
 	end
 
 LittlerootTown_MaysHouse_2F_EventScript_1B69DF:: @ 81B69DF
 	lockall
 	setvar 0x8004, 1
-	jump LittlerootTown_MaysHouse_2F_EventScript_1B69EB
+	goto LittlerootTown_MaysHouse_2F_EventScript_1B69EB
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_1B69EB:: @ 81B69EB
@@ -176,7 +176,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1B6ABF:: @ 81B6ABF
 	setvar 0x4001, 1
 	move 0x8005, LittlerootTown_BrendansHouse_1F_Movement_1B6BE1
 	waitmove 0
-	jump LittlerootTown_BrendansHouse_1F_EventScript_1B6AB8
+	goto LittlerootTown_BrendansHouse_1F_EventScript_1B6AB8
 	end
 
 LittlerootTown_MaysHouse_1F_EventScript_1B6B2E:: @ 81B6B2E
@@ -201,7 +201,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6B2E:: @ 81B6B2E
 	setvar 0x4001, 1
 	move 0x8005, LittlerootTown_MaysHouse_1F_Movement_1B6BE5
 	waitmove 0
-	jump LittlerootTown_MaysHouse_1F_EventScript_1B6AB8
+	goto LittlerootTown_MaysHouse_1F_EventScript_1B6AB8
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_1B6B9D:: @ 81B6B9D
@@ -287,7 +287,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1B6C3D:: @ 81B6C3D
 
 LittlerootTown_BrendansHouse_1F_EventScript_1B6C72:: @ 81B6C72
 	msgbox LittlerootTown_BrendansHouse_1F_Text_172717, 4
-	jump LittlerootTown_BrendansHouse_1F_EventScript_1B6C8A
+	goto LittlerootTown_BrendansHouse_1F_EventScript_1B6C8A
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_1B6C80:: @ 81B6C80

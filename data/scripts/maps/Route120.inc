@@ -102,7 +102,7 @@ Route120_EventScript_151719:: @ 8151719
 	jumpif 3, Route120_EventScript_151735
 	compare 0x4000, 19
 	jumpif 3, Route120_EventScript_151715
-	jump Route120_EventScript_151735
+	goto Route120_EventScript_151735
 	end
 
 Route120_EventScript_151735:: @ 8151735
@@ -136,27 +136,27 @@ Route120_EventScript_151739:: @ 8151739
 
 Route120_EventScript_1517DC:: @ 81517DC
 	setvar 0x8004, 143
-	jump Route120_EventScript_151813
+	goto Route120_EventScript_151813
 	end
 
 Route120_EventScript_1517E7:: @ 81517E7
 	setvar 0x8004, 144
-	jump Route120_EventScript_151813
+	goto Route120_EventScript_151813
 	end
 
 Route120_EventScript_1517F2:: @ 81517F2
 	setvar 0x8004, 145
-	jump Route120_EventScript_151813
+	goto Route120_EventScript_151813
 	end
 
 Route120_EventScript_1517FD:: @ 81517FD
 	setvar 0x8004, 146
-	jump Route120_EventScript_151813
+	goto Route120_EventScript_151813
 	end
 
 Route120_EventScript_151808:: @ 8151808
 	setvar 0x8004, 147
-	jump Route120_EventScript_151813
+	goto Route120_EventScript_151813
 	end
 
 Route120_EventScript_151813:: @ 8151813
@@ -189,7 +189,7 @@ Route120_EventScript_151853:: @ 8151853
 	msgbox Route120_Text_171827, 5
 	compare RESULT, 0
 	jumpeq Route120_EventScript_151877
-	jump Route120_EventScript_15189D
+	goto Route120_EventScript_15189D
 	end
 
 Route120_EventScript_151877:: @ 8151877
@@ -202,7 +202,7 @@ Route120_EventScript_151884:: @ 8151884
 	msgbox Route120_Text_17196F, 5
 	compare RESULT, 0
 	jumpeq Route120_EventScript_151877
-	jump Route120_EventScript_15189D
+	goto Route120_EventScript_15189D
 	end
 
 Route120_EventScript_15189D:: @ 815189D
@@ -230,7 +230,7 @@ Route120_EventScript_15189D:: @ 815189D
 	setflag 2145
 	dowildbattle
 	clearflag 2145
-	jump Route120_EventScript_151908
+	goto Route120_EventScript_151908
 	end
 
 Route120_EventScript_151908:: @ 8151908

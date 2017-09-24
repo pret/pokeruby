@@ -26,7 +26,7 @@ LilycoveCity_DepartmentStoreElevator_EventScript_15A402:: @ 815A402
 	jumpeq LilycoveCity_DepartmentStoreElevator_EventScript_15A4B1
 	call LilycoveCity_DepartmentStoreElevator_EventScript_15A4B8
 	setvar 0x4043, 0
-	jump LilycoveCity_DepartmentStoreElevator_EventScript_15A4B1
+	goto LilycoveCity_DepartmentStoreElevator_EventScript_15A4B1
 	end
 
 LilycoveCity_DepartmentStoreElevator_EventScript_15A425:: @ 815A425
@@ -35,7 +35,7 @@ LilycoveCity_DepartmentStoreElevator_EventScript_15A425:: @ 815A425
 	jumpeq LilycoveCity_DepartmentStoreElevator_EventScript_15A4B1
 	call LilycoveCity_DepartmentStoreElevator_EventScript_15A4B8
 	setvar 0x4043, 1
-	jump LilycoveCity_DepartmentStoreElevator_EventScript_15A4B1
+	goto LilycoveCity_DepartmentStoreElevator_EventScript_15A4B1
 	end
 
 LilycoveCity_DepartmentStoreElevator_EventScript_15A448:: @ 815A448
@@ -44,7 +44,7 @@ LilycoveCity_DepartmentStoreElevator_EventScript_15A448:: @ 815A448
 	jumpeq LilycoveCity_DepartmentStoreElevator_EventScript_15A4B1
 	call LilycoveCity_DepartmentStoreElevator_EventScript_15A4B8
 	setvar 0x4043, 2
-	jump LilycoveCity_DepartmentStoreElevator_EventScript_15A4B1
+	goto LilycoveCity_DepartmentStoreElevator_EventScript_15A4B1
 	end
 
 LilycoveCity_DepartmentStoreElevator_EventScript_15A46B:: @ 815A46B
@@ -53,7 +53,7 @@ LilycoveCity_DepartmentStoreElevator_EventScript_15A46B:: @ 815A46B
 	jumpeq LilycoveCity_DepartmentStoreElevator_EventScript_15A4B1
 	call LilycoveCity_DepartmentStoreElevator_EventScript_15A4B8
 	setvar 0x4043, 3
-	jump LilycoveCity_DepartmentStoreElevator_EventScript_15A4B1
+	goto LilycoveCity_DepartmentStoreElevator_EventScript_15A4B1
 	end
 
 LilycoveCity_DepartmentStoreElevator_EventScript_15A48E:: @ 815A48E
@@ -62,7 +62,7 @@ LilycoveCity_DepartmentStoreElevator_EventScript_15A48E:: @ 815A48E
 	jumpeq LilycoveCity_DepartmentStoreElevator_EventScript_15A4B1
 	call LilycoveCity_DepartmentStoreElevator_EventScript_15A4B8
 	setvar 0x4043, 4
-	jump LilycoveCity_DepartmentStoreElevator_EventScript_15A4B1
+	goto LilycoveCity_DepartmentStoreElevator_EventScript_15A4B1
 	end
 
 LilycoveCity_DepartmentStoreElevator_EventScript_15A4B1:: @ 815A4B1

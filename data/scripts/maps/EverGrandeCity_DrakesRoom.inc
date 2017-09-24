@@ -46,7 +46,7 @@ EverGrandeCity_DrakesRoom_EventScript_15B764:: @ 815B764
 	playmusic 450, 0
 	msgbox EverGrandeCity_DrakesRoom_Text_190CEB, 4
 	trainerbattle 3, OPPONENT_DRAKE, 0, EverGrandeCity_DrakesRoom_Text_190E42
-	jump EverGrandeCity_DrakesRoom_EventScript_15B795
+	goto EverGrandeCity_DrakesRoom_EventScript_15B795
 	end
 
 EverGrandeCity_DrakesRoom_EventScript_15B78B:: @ 815B78B

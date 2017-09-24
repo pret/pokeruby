@@ -122,13 +122,13 @@ DewfordTown_Hall_EventScript_1533E8:: @ 81533E8
 DewfordTown_Hall_EventScript_1533F2:: @ 81533F2
 	lockall
 	setvar 0x8008, 0
-	jump DewfordTown_Hall_EventScript_15340A
+	goto DewfordTown_Hall_EventScript_15340A
 	end
 
 DewfordTown_Hall_EventScript_1533FE:: @ 81533FE
 	lockall
 	setvar 0x8008, 1
-	jump DewfordTown_Hall_EventScript_15340A
+	goto DewfordTown_Hall_EventScript_15340A
 	end
 
 DewfordTown_Hall_EventScript_15340A:: @ 815340A

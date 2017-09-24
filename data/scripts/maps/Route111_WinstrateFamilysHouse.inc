@@ -6,7 +6,7 @@ Route111_WinstrateFamilysHouse_EventScript_15BF25:: @ 815BF25
 	faceplayer
 	setvar 0x8008, 2
 	msgbox Route111_WinstrateFamilysHouse_Text_191FCE, 4
-	jump Route111_WinstrateFamilysHouse_EventScript_15BFC4
+	goto Route111_WinstrateFamilysHouse_EventScript_15BFC4
 	end
 
 Route111_WinstrateFamilysHouse_EventScript_15BF3A:: @ 815BF3A
@@ -20,12 +20,12 @@ Route111_WinstrateFamilysHouse_EventScript_15BF3A:: @ 815BF3A
 	compare RESULT, 0
 	jumpeq Route111_WinstrateFamilysHouse_EventScript_1A029B
 	setflag 277
-	jump Route111_WinstrateFamilysHouse_EventScript_15BFC4
+	goto Route111_WinstrateFamilysHouse_EventScript_15BFC4
 	end
 
 Route111_WinstrateFamilysHouse_EventScript_15BF72:: @ 815BF72
 	msgbox Route111_WinstrateFamilysHouse_Text_19214D, 4
-	jump Route111_WinstrateFamilysHouse_EventScript_15BFC4
+	goto Route111_WinstrateFamilysHouse_EventScript_15BFC4
 	end
 
 Route111_WinstrateFamilysHouse_EventScript_15BF80:: @ 815BF80
@@ -33,7 +33,7 @@ Route111_WinstrateFamilysHouse_EventScript_15BF80:: @ 815BF80
 	faceplayer
 	setvar 0x8008, 1
 	msgbox Route111_WinstrateFamilysHouse_Text_192190, 4
-	jump Route111_WinstrateFamilysHouse_EventScript_15BFC4
+	goto Route111_WinstrateFamilysHouse_EventScript_15BFC4
 	end
 
 Route111_WinstrateFamilysHouse_EventScript_15BF95:: @ 815BF95
@@ -44,12 +44,12 @@ Route111_WinstrateFamilysHouse_EventScript_15BF95:: @ 815BF95
 	jumpeq Route111_WinstrateFamilysHouse_EventScript_15BFB6
 	msgbox Route111_WinstrateFamilysHouse_Text_192219, 4
 	setflag 4
-	jump Route111_WinstrateFamilysHouse_EventScript_15BFC4
+	goto Route111_WinstrateFamilysHouse_EventScript_15BFC4
 	end
 
 Route111_WinstrateFamilysHouse_EventScript_15BFB6:: @ 815BFB6
 	msgbox Route111_WinstrateFamilysHouse_Text_192334, 4
-	jump Route111_WinstrateFamilysHouse_EventScript_15BFC4
+	goto Route111_WinstrateFamilysHouse_EventScript_15BFC4
 	end
 
 Route111_WinstrateFamilysHouse_EventScript_15BFC4:: @ 815BFC4

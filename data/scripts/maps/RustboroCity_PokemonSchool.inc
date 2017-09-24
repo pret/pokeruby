@@ -4,7 +4,7 @@ RustboroCity_PokemonSchool_MapScripts:: @ 81579E1
 RustboroCity_PokemonSchool_EventScript_1579E2:: @ 81579E2
 	lockall
 	msgbox RustboroCity_PokemonSchool_Text_184321, 4
-	jump RustboroCity_PokemonSchool_EventScript_1579F1
+	goto RustboroCity_PokemonSchool_EventScript_1579F1
 	end
 
 RustboroCity_PokemonSchool_EventScript_1579F1:: @ 81579F1
@@ -23,27 +23,27 @@ RustboroCity_PokemonSchool_EventScript_1579F1:: @ 81579F1
 
 RustboroCity_PokemonSchool_EventScript_157A50:: @ 8157A50
 	msgbox RustboroCity_PokemonSchool_Text_184389, 4
-	jump RustboroCity_PokemonSchool_EventScript_1579F1
+	goto RustboroCity_PokemonSchool_EventScript_1579F1
 	end
 
 RustboroCity_PokemonSchool_EventScript_157A5E:: @ 8157A5E
 	msgbox RustboroCity_PokemonSchool_Text_184447, 4
-	jump RustboroCity_PokemonSchool_EventScript_1579F1
+	goto RustboroCity_PokemonSchool_EventScript_1579F1
 	end
 
 RustboroCity_PokemonSchool_EventScript_157A6C:: @ 8157A6C
 	msgbox RustboroCity_PokemonSchool_Text_1844EC, 4
-	jump RustboroCity_PokemonSchool_EventScript_1579F1
+	goto RustboroCity_PokemonSchool_EventScript_1579F1
 	end
 
 RustboroCity_PokemonSchool_EventScript_157A7A:: @ 8157A7A
 	msgbox RustboroCity_PokemonSchool_Text_1845A5, 4
-	jump RustboroCity_PokemonSchool_EventScript_1579F1
+	goto RustboroCity_PokemonSchool_EventScript_1579F1
 	end
 
 RustboroCity_PokemonSchool_EventScript_157A88:: @ 8157A88
 	msgbox RustboroCity_PokemonSchool_Text_184627, 4
-	jump RustboroCity_PokemonSchool_EventScript_1579F1
+	goto RustboroCity_PokemonSchool_EventScript_1579F1
 	end
 
 RustboroCity_PokemonSchool_EventScript_157A96:: @ 8157A96

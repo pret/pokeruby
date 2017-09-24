@@ -141,25 +141,25 @@ Route111_EventScript_150100:: @ 8150100
 @ 815010A
 	lockall
 	setvar 0x8004, 0
-	jump Route111_EventScript_15013A
+	goto Route111_EventScript_15013A
 	end
 
 Route111_EventScript_150116:: @ 8150116
 	lockall
 	setvar 0x8004, 1
-	jump Route111_EventScript_15013A
+	goto Route111_EventScript_15013A
 	end
 
 Route111_EventScript_150122:: @ 8150122
 	lockall
 	setvar 0x8004, 2
-	jump Route111_EventScript_15013A
+	goto Route111_EventScript_15013A
 	end
 
 @ 815012E
 	lockall
 	setvar 0x8004, 3
-	jump Route111_EventScript_15013A
+	goto Route111_EventScript_15013A
 	end
 
 Route111_EventScript_15013A:: @ 815013A

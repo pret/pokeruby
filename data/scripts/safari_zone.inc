@@ -20,7 +20,7 @@ gUnknown_081C342D:: @ 81C342D
 	end
 
 EventScript_1C3443:
-	jump EventScript_1C341B
+	goto EventScript_1C341B
 
 gUnknown_081C3448:: @ 81C3448
 	lockall
@@ -29,7 +29,7 @@ gUnknown_081C3448:: @ 81C3448
 	waittext
 	waitbutton
 	releaseall
-	jump EventScript_1C341B
+	goto EventScript_1C341B
 
 gUnknown_081C3459:: @ 81C3459
 	lockall
@@ -38,7 +38,7 @@ gUnknown_081C3459:: @ 81C3459
 	waittext
 	waitbutton
 	releaseall
-	jump EventScript_1C341B
+	goto EventScript_1C341B
 
 gUnknown_081C346A:: @ 81C346A
 	lockall

@@ -52,7 +52,7 @@ LilycoveCity_DepartmentStore_1F_EventScript_159D5E:: @ 8159D5E
 	giveitem 0x8005
 	compare RESULT, 0
 	jumpeq LilycoveCity_DepartmentStore_1F_EventScript_159E9C
-	jump LilycoveCity_DepartmentStore_1F_EventScript_159E6E
+	goto LilycoveCity_DepartmentStore_1F_EventScript_159E6E
 	end
 
 LilycoveCity_DepartmentStore_1F_EventScript_159E3A:: @ 8159E3A
@@ -75,7 +75,7 @@ LilycoveCity_DepartmentStore_1F_EventScript_159E56:: @ 8159E56
 
 LilycoveCity_DepartmentStore_1F_EventScript_159E60:: @ 8159E60
 	msgbox LilycoveCity_DepartmentStore_1F_Text_1C4E27, 4
-	jump LilycoveCity_DepartmentStore_1F_EventScript_159E6E
+	goto LilycoveCity_DepartmentStore_1F_EventScript_159E6E
 	end
 
 LilycoveCity_DepartmentStore_1F_EventScript_159E6E:: @ 8159E6E
@@ -101,7 +101,7 @@ LilycoveCity_DepartmentStore_1F_EventScript_159E93:: @ 8159E93
 
 LilycoveCity_DepartmentStore_1F_EventScript_159E9C:: @ 8159E9C
 	copyvar 0x4045, 0x8005
-	jump LilycoveCity_DepartmentStore_1F_EventScript_159EA7
+	goto LilycoveCity_DepartmentStore_1F_EventScript_159EA7
 	end
 
 LilycoveCity_DepartmentStore_1F_EventScript_159EA7:: @ 8159EA7

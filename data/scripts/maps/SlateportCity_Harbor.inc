@@ -25,19 +25,19 @@ SlateportCity_Harbor_EventScript_155F89:: @ 8155F89
 SlateportCity_Harbor_EventScript_155F9B:: @ 8155F9B
 	lockall
 	setvar 0x8008, 0
-	jump SlateportCity_Harbor_EventScript_155FD5
+	goto SlateportCity_Harbor_EventScript_155FD5
 	end
 
 SlateportCity_Harbor_EventScript_155FA7:: @ 8155FA7
 	lockall
 	setvar 0x8008, 1
-	jump SlateportCity_Harbor_EventScript_155FD5
+	goto SlateportCity_Harbor_EventScript_155FD5
 	end
 
 SlateportCity_Harbor_EventScript_155FB3:: @ 8155FB3
 	lockall
 	setvar 0x8008, 2
-	jump SlateportCity_Harbor_EventScript_155FD5
+	goto SlateportCity_Harbor_EventScript_155FD5
 	end
 
 SlateportCity_Harbor_EventScript_155FBF:: @ 8155FBF
@@ -45,7 +45,7 @@ SlateportCity_Harbor_EventScript_155FBF:: @ 8155FBF
 	setvar 0x8008, 3
 	move 255, SlateportCity_Harbor_Movement_1560C2
 	waitmove 0
-	jump SlateportCity_Harbor_EventScript_155FD5
+	goto SlateportCity_Harbor_EventScript_155FD5
 	end
 
 SlateportCity_Harbor_EventScript_155FD5:: @ 8155FD5
@@ -172,7 +172,7 @@ SlateportCity_Harbor_EventScript_1560D9:: @ 81560D9
 	jumpeq SlateportCity_Harbor_EventScript_156135
 	message SlateportCity_Harbor_Text_17FB0A
 	waittext
-	jump SlateportCity_Harbor_EventScript_1560FD
+	goto SlateportCity_Harbor_EventScript_1560FD
 	end
 
 SlateportCity_Harbor_EventScript_1560FD:: @ 81560FD
@@ -213,7 +213,7 @@ SlateportCity_Harbor_EventScript_156167:: @ 8156167
 SlateportCity_Harbor_EventScript_15618A:: @ 815618A
 	message SlateportCity_Harbor_Text_17FBE5
 	waittext
-	jump SlateportCity_Harbor_EventScript_1560FD
+	goto SlateportCity_Harbor_EventScript_1560FD
 	end
 
 SlateportCity_Harbor_EventScript_156196:: @ 8156196
@@ -319,7 +319,7 @@ SlateportCity_Harbor_EventScript_15629D:: @ 815629D
 SlateportCity_Harbor_EventScript_1562A7:: @ 81562A7
 	message SlateportCity_Harbor_Text_18028B
 	waittext
-	jump SlateportCity_Harbor_EventScript_1562B3
+	goto SlateportCity_Harbor_EventScript_1562B3
 	end
 
 SlateportCity_Harbor_EventScript_1562B3:: @ 81562B3
@@ -341,7 +341,7 @@ SlateportCity_Harbor_EventScript_1562EA:: @ 81562EA
 	removeitem ITEM_SCANNER, 1
 	msgbox SlateportCity_Harbor_Text_18046B, 4
 	setflag 294
-	jump SlateportCity_Harbor_EventScript_156380
+	goto SlateportCity_Harbor_EventScript_156380
 	end
 
 SlateportCity_Harbor_EventScript_15632A:: @ 815632A
@@ -354,7 +354,7 @@ SlateportCity_Harbor_EventScript_15632A:: @ 815632A
 	removeitem ITEM_SCANNER, 1
 	msgbox SlateportCity_Harbor_Text_18046B, 4
 	setflag 294
-	jump SlateportCity_Harbor_EventScript_156380
+	goto SlateportCity_Harbor_EventScript_156380
 	end
 
 SlateportCity_Harbor_EventScript_15636A:: @ 815636A
@@ -365,7 +365,7 @@ SlateportCity_Harbor_EventScript_15636A:: @ 815636A
 SlateportCity_Harbor_EventScript_156374:: @ 8156374
 	message SlateportCity_Harbor_Text_180447
 	waittext
-	jump SlateportCity_Harbor_EventScript_1562B3
+	goto SlateportCity_Harbor_EventScript_1562B3
 	end
 
 SlateportCity_Harbor_EventScript_156380:: @ 8156380

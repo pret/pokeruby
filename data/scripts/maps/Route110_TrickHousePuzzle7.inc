@@ -102,12 +102,12 @@ Route110_TrickHousePuzzle7_EventScript_16328B:: @ 816328B
 	lockall
 	compare 0x40b1, 0
 	jumpeq Route110_TrickHousePuzzle7_EventScript_16329D
-	jump Route110_TrickHousePuzzle7_EventScript_161892
+	goto Route110_TrickHousePuzzle7_EventScript_161892
 	end
 
 Route110_TrickHousePuzzle7_EventScript_16329D:: @ 816329D
 	setvar 0x40b1, 1
-	jump Route110_TrickHousePuzzle7_EventScript_16189C
+	goto Route110_TrickHousePuzzle7_EventScript_16189C
 	end
 
 Route110_TrickHousePuzzle7_EventScript_1632A8:: @ 81632A8

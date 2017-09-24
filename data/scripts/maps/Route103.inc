@@ -50,42 +50,42 @@ Route103_EventScript_14EC04:: @ 814EC04
 
 Route103_EventScript_14EC5D:: @ 814EC5D
 	trainerbattle 3, OPPONENT_MAY_4, 0, Route103_Text_16D65B
-	jump Route103_EventScript_14ECBD
+	goto Route103_EventScript_14ECBD
 	end
 
 Route103_EventScript_14EC6D:: @ 814EC6D
 	trainerbattle 3, OPPONENT_MAY_7, 0, Route103_Text_16D65B
-	jump Route103_EventScript_14ECBD
+	goto Route103_EventScript_14ECBD
 	end
 
 Route103_EventScript_14EC7D:: @ 814EC7D
 	trainerbattle 3, OPPONENT_MAY_1, 0, Route103_Text_16D65B
-	jump Route103_EventScript_14ECBD
+	goto Route103_EventScript_14ECBD
 	end
 
 Route103_EventScript_14EC8D:: @ 814EC8D
 	trainerbattle 3, OPPONENT_BRENDAN_4, 0, Route103_Text_16D836
-	jump Route103_EventScript_14ECCB
+	goto Route103_EventScript_14ECCB
 	end
 
 Route103_EventScript_14EC9D:: @ 814EC9D
 	trainerbattle 3, OPPONENT_BRENDAN_7, 0, Route103_Text_16D836
-	jump Route103_EventScript_14ECCB
+	goto Route103_EventScript_14ECCB
 	end
 
 Route103_EventScript_14ECAD:: @ 814ECAD
 	trainerbattle 3, OPPONENT_BRENDAN_1, 0, Route103_Text_16D836
-	jump Route103_EventScript_14ECCB
+	goto Route103_EventScript_14ECCB
 	end
 
 Route103_EventScript_14ECBD:: @ 814ECBD
 	msgbox Route103_Text_16D688, 4
-	jump Route103_EventScript_14ECD9
+	goto Route103_EventScript_14ECD9
 	end
 
 Route103_EventScript_14ECCB:: @ 814ECCB
 	msgbox Route103_Text_16D856, 4
-	jump Route103_EventScript_14ECD9
+	goto Route103_EventScript_14ECD9
 	end
 
 Route103_EventScript_14ECD9:: @ 814ECD9
@@ -103,7 +103,7 @@ Route103_EventScript_14ED0C:: @ 814ED0C
 	playsfx 10
 	move 2, Route103_Movement_14ED6B
 	waitmove 0
-	jump Route103_EventScript_14ED46
+	goto Route103_EventScript_14ED46
 	end
 
 Route103_EventScript_14ED29:: @ 814ED29
@@ -112,7 +112,7 @@ Route103_EventScript_14ED29:: @ 814ED29
 	playsfx 10
 	move 2, Route103_Movement_14ED74
 	waitmove 0
-	jump Route103_EventScript_14ED46
+	goto Route103_EventScript_14ED46
 	end
 
 Route103_EventScript_14ED46:: @ 814ED46

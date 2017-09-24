@@ -24,14 +24,14 @@ DewfordTown_EventScript_14E002:: @ 814E002
 DewfordTown_EventScript_14E04B:: @ 814E04B
 	msgbox DewfordTown_Text_16B57D, 4
 	closebutton
-	jump DewfordTown_EventScript_14E151
+	goto DewfordTown_EventScript_14E151
 	release
 	end
 
 DewfordTown_EventScript_14E05B:: @ 814E05B
 	msgbox DewfordTown_Text_16B5D2, 4
 	closebutton
-	jump DewfordTown_EventScript_14E1D8
+	goto DewfordTown_EventScript_14E1D8
 	release
 	end
 
@@ -52,7 +52,7 @@ DewfordTown_EventScript_14E076:: @ 814E076
 DewfordTown_EventScript_14E093:: @ 814E093
 	msgbox DewfordTown_Text_16B417, 4
 	closebutton
-	jump DewfordTown_EventScript_14E151
+	goto DewfordTown_EventScript_14E151
 	end
 
 DewfordTown_EventScript_14E0A2:: @ 814E0A2

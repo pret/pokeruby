@@ -9,19 +9,19 @@ MtPyre_Summit_MapScript1_15D4B7:: @ 815D4B7
 MtPyre_Summit_EventScript_15D4BD:: @ 815D4BD
 	lockall
 	setvar 0x8008, 0
-	jump MtPyre_Summit_EventScript_15D4E1
+	goto MtPyre_Summit_EventScript_15D4E1
 	end
 
 MtPyre_Summit_EventScript_15D4C9:: @ 815D4C9
 	lockall
 	setvar 0x8008, 1
-	jump MtPyre_Summit_EventScript_15D4E1
+	goto MtPyre_Summit_EventScript_15D4E1
 	end
 
 MtPyre_Summit_EventScript_15D4D5:: @ 815D4D5
 	lockall
 	setvar 0x8008, 2
-	jump MtPyre_Summit_EventScript_15D4E1
+	goto MtPyre_Summit_EventScript_15D4E1
 	end
 
 MtPyre_Summit_EventScript_15D4E1:: @ 815D4E1
@@ -247,19 +247,19 @@ MtPyre_Summit_EventScript_15D6C4:: @ 815D6C4
 MtPyre_Summit_EventScript_15D6CE:: @ 815D6CE
 	lockall
 	setvar 0x8008, 0
-	jump MtPyre_Summit_EventScript_15D6F2
+	goto MtPyre_Summit_EventScript_15D6F2
 	end
 
 MtPyre_Summit_EventScript_15D6DA:: @ 815D6DA
 	lockall
 	setvar 0x8008, 1
-	jump MtPyre_Summit_EventScript_15D6F2
+	goto MtPyre_Summit_EventScript_15D6F2
 	end
 
 MtPyre_Summit_EventScript_15D6E6:: @ 815D6E6
 	lockall
 	setvar 0x8008, 2
-	jump MtPyre_Summit_EventScript_15D6F2
+	goto MtPyre_Summit_EventScript_15D6F2
 	end
 
 MtPyre_Summit_EventScript_15D6F2:: @ 815D6F2

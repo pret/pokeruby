@@ -9,7 +9,7 @@ Route104_MapScript2_14EE97:: @ 814EE97
 
 Route104_EventScript_14EEA1:: @ 814EEA1
 	lockall
-	jump Route104_EventScript_14EFD5
+	goto Route104_EventScript_14EFD5
 	end
 
 Route104_MapScript1_14EEA8:: @ 814EEA8

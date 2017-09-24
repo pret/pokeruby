@@ -78,14 +78,14 @@ LittlerootTown_BrendansHouse_1F_EventScript_152722:: @ 8152722
 	lockall
 	setvar 0x8004, 1
 	setvar 0x8005, 0
-	jump LittlerootTown_BrendansHouse_1F_EventScript_1B6956
+	goto LittlerootTown_BrendansHouse_1F_EventScript_1B6956
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_152733:: @ 8152733
 	lockall
 	setvar 0x8004, 0
 	setvar 0x8005, 1
-	jump LittlerootTown_BrendansHouse_1F_EventScript_1B6ABF
+	goto LittlerootTown_BrendansHouse_1F_EventScript_1B6ABF
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_152744:: @ 8152744
@@ -120,5 +120,5 @@ LittlerootTown_BrendansHouse_1F_EventScript_152789:: @ 8152789
 	setvar 0x8005, 0
 	move 0x8004, LittlerootTown_BrendansHouse_1F_Movement_1A083F
 	waitmove 0
-	jump LittlerootTown_BrendansHouse_1F_EventScript_1B69B7
+	goto LittlerootTown_BrendansHouse_1F_EventScript_1B69B7
 	end

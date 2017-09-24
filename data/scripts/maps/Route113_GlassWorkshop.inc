@@ -42,7 +42,7 @@ Route113_GlassWorkshop_EventScript_1635B5:: @ 81635B5
 	jumpif 0, Route113_GlassWorkshop_EventScript_163818
 	message Route113_GlassWorkshop_Text_19E757
 	waittext
-	jump Route113_GlassWorkshop_EventScript_1635EE
+	goto Route113_GlassWorkshop_EventScript_1635EE
 	end
 
 Route113_GlassWorkshop_EventScript_1635E4:: @ 81635E4
@@ -77,7 +77,7 @@ Route113_GlassWorkshop_EventScript_163660:: @ 8163660
 	jumpeq Route113_GlassWorkshop_EventScript_163845
 	setvar 0x40be, 10
 	subvar 0x4048, 250
-	jump Route113_GlassWorkshop_EventScript_163851
+	goto Route113_GlassWorkshop_EventScript_163851
 	end
 
 Route113_GlassWorkshop_EventScript_16369C:: @ 816369C
@@ -91,7 +91,7 @@ Route113_GlassWorkshop_EventScript_16369C:: @ 816369C
 	jumpeq Route113_GlassWorkshop_EventScript_163845
 	setvar 0x40be, 11
 	subvar 0x4048, 500
-	jump Route113_GlassWorkshop_EventScript_163851
+	goto Route113_GlassWorkshop_EventScript_163851
 	end
 
 Route113_GlassWorkshop_EventScript_1636D8:: @ 81636D8
@@ -105,7 +105,7 @@ Route113_GlassWorkshop_EventScript_1636D8:: @ 81636D8
 	jumpeq Route113_GlassWorkshop_EventScript_163845
 	setvar 0x40be, 12
 	subvar 0x4048, 500
-	jump Route113_GlassWorkshop_EventScript_163851
+	goto Route113_GlassWorkshop_EventScript_163851
 	end
 
 Route113_GlassWorkshop_EventScript_163714:: @ 8163714
@@ -119,7 +119,7 @@ Route113_GlassWorkshop_EventScript_163714:: @ 8163714
 	jumpeq Route113_GlassWorkshop_EventScript_163845
 	setvar 0x40be, 13
 	subvar 0x4048, 1000
-	jump Route113_GlassWorkshop_EventScript_163851
+	goto Route113_GlassWorkshop_EventScript_163851
 	end
 
 Route113_GlassWorkshop_EventScript_163750:: @ 8163750
@@ -133,7 +133,7 @@ Route113_GlassWorkshop_EventScript_163750:: @ 8163750
 	jumpeq Route113_GlassWorkshop_EventScript_163845
 	setvar 0x40be, 14
 	subvar 0x4048, 1000
-	jump Route113_GlassWorkshop_EventScript_163851
+	goto Route113_GlassWorkshop_EventScript_163851
 	end
 
 Route113_GlassWorkshop_EventScript_16378C:: @ 816378C
@@ -148,7 +148,7 @@ Route113_GlassWorkshop_EventScript_16378C:: @ 816378C
 	jumpeq Route113_GlassWorkshop_EventScript_163845
 	setvar 0x40be, 15
 	subvar 0x4048, 6000
-	jump Route113_GlassWorkshop_EventScript_163851
+	goto Route113_GlassWorkshop_EventScript_163851
 	end
 
 Route113_GlassWorkshop_EventScript_1637CD:: @ 81637CD
@@ -163,7 +163,7 @@ Route113_GlassWorkshop_EventScript_1637CD:: @ 81637CD
 	jumpeq Route113_GlassWorkshop_EventScript_163845
 	setvar 0x40be, 16
 	subvar 0x4048, 8000
-	jump Route113_GlassWorkshop_EventScript_163851
+	goto Route113_GlassWorkshop_EventScript_163851
 	end
 
 Route113_GlassWorkshop_EventScript_16380E:: @ 816380E
@@ -184,13 +184,13 @@ Route113_GlassWorkshop_EventScript_163830:: @ 8163830
 	buffernum 1, 32778
 	message Route113_GlassWorkshop_Text_19E890
 	waittext
-	jump Route113_GlassWorkshop_EventScript_1635EE
+	goto Route113_GlassWorkshop_EventScript_1635EE
 	end
 
 Route113_GlassWorkshop_EventScript_163845:: @ 8163845
 	message Route113_GlassWorkshop_Text_19E802
 	waittext
-	jump Route113_GlassWorkshop_EventScript_1635EE
+	goto Route113_GlassWorkshop_EventScript_1635EE
 	end
 
 Route113_GlassWorkshop_EventScript_163851:: @ 8163851
@@ -248,49 +248,49 @@ Route113_GlassWorkshop_EventScript_163925:: @ 8163925
 	setvar 0x8009, 0
 	setvar 0x8008, 39
 	bufferitem 0, 0x8008
-	jump Route113_GlassWorkshop_EventScript_1639B1
+	goto Route113_GlassWorkshop_EventScript_1639B1
 	end
 
 Route113_GlassWorkshop_EventScript_163939:: @ 8163939
 	setvar 0x8009, 0
 	setvar 0x8008, 40
 	bufferitem 0, 0x8008
-	jump Route113_GlassWorkshop_EventScript_1639B1
+	goto Route113_GlassWorkshop_EventScript_1639B1
 	end
 
 Route113_GlassWorkshop_EventScript_16394D:: @ 816394D
 	setvar 0x8009, 0
 	setvar 0x8008, 41
 	bufferitem 0, 0x8008
-	jump Route113_GlassWorkshop_EventScript_1639B1
+	goto Route113_GlassWorkshop_EventScript_1639B1
 	end
 
 Route113_GlassWorkshop_EventScript_163961:: @ 8163961
 	setvar 0x8009, 0
 	setvar 0x8008, 43
 	bufferitem 0, 0x8008
-	jump Route113_GlassWorkshop_EventScript_1639B1
+	goto Route113_GlassWorkshop_EventScript_1639B1
 	end
 
 Route113_GlassWorkshop_EventScript_163975:: @ 8163975
 	setvar 0x8009, 0
 	setvar 0x8008, 42
 	bufferitem 0, 0x8008
-	jump Route113_GlassWorkshop_EventScript_1639B1
+	goto Route113_GlassWorkshop_EventScript_1639B1
 	end
 
 Route113_GlassWorkshop_EventScript_163989:: @ 8163989
 	setvar 0x8009, 1
 	setvar 0x8008, 13
 	bufferdecor 0, 13
-	jump Route113_GlassWorkshop_EventScript_1639B1
+	goto Route113_GlassWorkshop_EventScript_1639B1
 	end
 
 Route113_GlassWorkshop_EventScript_16399D:: @ 816399D
 	setvar 0x8009, 1
 	setvar 0x8008, 6
 	bufferdecor 0, 6
-	jump Route113_GlassWorkshop_EventScript_1639B1
+	goto Route113_GlassWorkshop_EventScript_1639B1
 	end
 
 Route113_GlassWorkshop_EventScript_1639B1:: @ 81639B1

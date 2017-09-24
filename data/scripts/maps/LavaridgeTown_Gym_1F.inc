@@ -90,7 +90,7 @@ LavaridgeTown_Gym_1F_EventScript_153766:: @ 8153766
 	call LavaridgeTown_Gym_1F_EventScript_1A01C0
 	setflag 806
 	setvar 0x4053, 1
-	jump LavaridgeTown_Gym_1F_EventScript_1537A7
+	goto LavaridgeTown_Gym_1F_EventScript_1537A7
 	end
 
 LavaridgeTown_Gym_1F_EventScript_1537A7:: @ 81537A7
@@ -150,14 +150,14 @@ LavaridgeTown_Gym_1F_EventScript_153878:: @ 8153878
 	lockall
 	checkflag 2058
 	jumpeq LavaridgeTown_Gym_1F_EventScript_153898
-	jump LavaridgeTown_Gym_1F_EventScript_1538A2
+	goto LavaridgeTown_Gym_1F_EventScript_1538A2
 	end
 
 LavaridgeTown_Gym_1F_EventScript_153888:: @ 8153888
 	lockall
 	checkflag 2058
 	jumpeq LavaridgeTown_Gym_1F_EventScript_153898
-	jump LavaridgeTown_Gym_1F_EventScript_1538A2
+	goto LavaridgeTown_Gym_1F_EventScript_1538A2
 	end
 
 LavaridgeTown_Gym_1F_EventScript_153898:: @ 8153898

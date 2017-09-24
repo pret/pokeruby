@@ -123,22 +123,22 @@ PetalburgCity_Gym_EventScript_1545B9:: @ 81545B9
 
 PetalburgCity_Gym_EventScript_15463D:: @ 815463D
 	setvar 0x8008, 0
-	jump PetalburgCity_Gym_EventScript_154669
+	goto PetalburgCity_Gym_EventScript_154669
 	end
 
 PetalburgCity_Gym_EventScript_154648:: @ 8154648
 	setvar 0x8008, 1
-	jump PetalburgCity_Gym_EventScript_154669
+	goto PetalburgCity_Gym_EventScript_154669
 	end
 
 PetalburgCity_Gym_EventScript_154653:: @ 8154653
 	setvar 0x8008, 2
-	jump PetalburgCity_Gym_EventScript_154669
+	goto PetalburgCity_Gym_EventScript_154669
 	end
 
 PetalburgCity_Gym_EventScript_15465E:: @ 815465E
 	setvar 0x8008, 3
-	jump PetalburgCity_Gym_EventScript_154669
+	goto PetalburgCity_Gym_EventScript_154669
 	end
 
 PetalburgCity_Gym_EventScript_154669:: @ 8154669
@@ -408,7 +408,7 @@ PetalburgCity_Gym_EventScript_1549D6:: @ 81549D6
 	clearflag 940
 	call PetalburgCity_Gym_EventScript_1544ED
 	special DrawWholeMapView
-	jump PetalburgCity_Gym_EventScript_154A2C
+	goto PetalburgCity_Gym_EventScript_154A2C
 	end
 
 PetalburgCity_Gym_EventScript_154A2C:: @ 8154A2C
@@ -1036,14 +1036,14 @@ PetalburgCity_Gym_EventScript_1551AA:: @ 81551AA
 	lockall
 	checkflag 2059
 	jumpeq PetalburgCity_Gym_EventScript_1551CA
-	jump PetalburgCity_Gym_EventScript_1551D4
+	goto PetalburgCity_Gym_EventScript_1551D4
 	end
 
 PetalburgCity_Gym_EventScript_1551BA:: @ 81551BA
 	lockall
 	checkflag 2059
 	jumpeq PetalburgCity_Gym_EventScript_1551CA
-	jump PetalburgCity_Gym_EventScript_1551D4
+	goto PetalburgCity_Gym_EventScript_1551D4
 	end
 
 PetalburgCity_Gym_EventScript_1551CA:: @ 81551CA

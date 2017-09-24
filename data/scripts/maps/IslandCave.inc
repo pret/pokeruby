@@ -50,7 +50,7 @@ IslandCave_EventScript_15EF59:: @ 815EF59
 	braillemsg IslandCave_Braille_1C54FC
 	special DoBrailleWait
 	waitstate
-	jump IslandCave_EventScript_15EF95
+	goto IslandCave_EventScript_15EF95
 	end
 
 IslandCave_EventScript_15EF72:: @ 815EF72
@@ -65,7 +65,7 @@ IslandCave_EventScript_15EF7C:: @ 815EF7C
 	jumpeq IslandCave_EventScript_15EF95
 	special DoBrailleWait
 	waitstate
-	jump IslandCave_EventScript_15EF95
+	goto IslandCave_EventScript_15EF95
 	end
 
 IslandCave_EventScript_15EF95:: @ 815EF95

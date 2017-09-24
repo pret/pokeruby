@@ -127,7 +127,7 @@ RustboroCity_EventScript_14C481:: @ 814C481
 	movespriteperm 9, 14, 21
 	spritebehave 9, 10
 	setvar 0x8004, 0
-	jump RustboroCity_EventScript_14C4F4
+	goto RustboroCity_EventScript_14C4F4
 	end
 
 RustboroCity_EventScript_14C498:: @ 814C498
@@ -135,7 +135,7 @@ RustboroCity_EventScript_14C498:: @ 814C498
 	movespriteperm 9, 14, 21
 	spritebehave 9, 10
 	setvar 0x8004, 1
-	jump RustboroCity_EventScript_14C4F4
+	goto RustboroCity_EventScript_14C4F4
 	end
 
 RustboroCity_EventScript_14C4AF:: @ 814C4AF
@@ -143,7 +143,7 @@ RustboroCity_EventScript_14C4AF:: @ 814C4AF
 	movespriteperm 9, 14, 21
 	spritebehave 9, 10
 	setvar 0x8004, 2
-	jump RustboroCity_EventScript_14C4F4
+	goto RustboroCity_EventScript_14C4F4
 	end
 
 RustboroCity_EventScript_14C4C6:: @ 814C4C6
@@ -151,7 +151,7 @@ RustboroCity_EventScript_14C4C6:: @ 814C4C6
 	movespriteperm 9, 14, 21
 	spritebehave 9, 10
 	setvar 0x8004, 3
-	jump RustboroCity_EventScript_14C4F4
+	goto RustboroCity_EventScript_14C4F4
 	end
 
 RustboroCity_EventScript_14C4DD:: @ 814C4DD
@@ -159,7 +159,7 @@ RustboroCity_EventScript_14C4DD:: @ 814C4DD
 	movespriteperm 9, 14, 21
 	spritebehave 9, 10
 	setvar 0x8004, 4
-	jump RustboroCity_EventScript_14C4F4
+	goto RustboroCity_EventScript_14C4F4
 	end
 
 RustboroCity_EventScript_14C4F4:: @ 814C4F4
@@ -335,31 +335,31 @@ RustboroCity_EventScript_14C5FF:: @ 814C5FF
 RustboroCity_EventScript_14C614:: @ 814C614
 	checksound
 	setvar 0x4001, 4
-	jump RustboroCity_EventScript_14C77D
+	goto RustboroCity_EventScript_14C77D
 	end
 
 RustboroCity_EventScript_14C620:: @ 814C620
 	lockall
 	setvar 0x4001, 0
-	jump RustboroCity_EventScript_14C650
+	goto RustboroCity_EventScript_14C650
 	end
 
 RustboroCity_EventScript_14C62C:: @ 814C62C
 	lockall
 	setvar 0x4001, 1
-	jump RustboroCity_EventScript_14C650
+	goto RustboroCity_EventScript_14C650
 	end
 
 RustboroCity_EventScript_14C638:: @ 814C638
 	lockall
 	setvar 0x4001, 2
-	jump RustboroCity_EventScript_14C650
+	goto RustboroCity_EventScript_14C650
 	end
 
 RustboroCity_EventScript_14C644:: @ 814C644
 	lockall
 	setvar 0x4001, 3
-	jump RustboroCity_EventScript_14C650
+	goto RustboroCity_EventScript_14C650
 	end
 
 RustboroCity_EventScript_14C650:: @ 814C650
@@ -435,25 +435,25 @@ RustboroCity_Movement_14C74B:: @ 814C74B
 RustboroCity_EventScript_14C74D:: @ 814C74D
 	lockall
 	setvar 0x4001, 0
-	jump RustboroCity_EventScript_14C77D
+	goto RustboroCity_EventScript_14C77D
 	end
 
 RustboroCity_EventScript_14C759:: @ 814C759
 	lockall
 	setvar 0x4001, 1
-	jump RustboroCity_EventScript_14C77D
+	goto RustboroCity_EventScript_14C77D
 	end
 
 RustboroCity_EventScript_14C765:: @ 814C765
 	lockall
 	setvar 0x4001, 2
-	jump RustboroCity_EventScript_14C77D
+	goto RustboroCity_EventScript_14C77D
 	end
 
 RustboroCity_EventScript_14C771:: @ 814C771
 	lockall
 	setvar 0x4001, 3
-	jump RustboroCity_EventScript_14C77D
+	goto RustboroCity_EventScript_14C77D
 	end
 
 RustboroCity_EventScript_14C77D:: @ 814C77D

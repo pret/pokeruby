@@ -248,50 +248,50 @@ Route110_TrickHousePuzzle3_EventScript_1622C8:: @ 81622C8
 Route110_TrickHousePuzzle3_EventScript_1625AB:: @ 81625AB
 	lockall
 	setvar 0x4008, 1
-	jump Route110_TrickHousePuzzle3_EventScript_1625FF
+	goto Route110_TrickHousePuzzle3_EventScript_1625FF
 	end
 
 Route110_TrickHousePuzzle3_EventScript_1625B7:: @ 81625B7
 	lockall
 	setvar 0x4008, 2
-	jump Route110_TrickHousePuzzle3_EventScript_1625FF
+	goto Route110_TrickHousePuzzle3_EventScript_1625FF
 	end
 
 Route110_TrickHousePuzzle3_EventScript_1625C3:: @ 81625C3
 	lockall
 	setvar 0x4008, 3
-	jump Route110_TrickHousePuzzle3_EventScript_1625FF
+	goto Route110_TrickHousePuzzle3_EventScript_1625FF
 	end
 
 Route110_TrickHousePuzzle3_EventScript_1625CF:: @ 81625CF
 	lockall
 	setvar 0x4008, 4
-	jump Route110_TrickHousePuzzle3_EventScript_1625FF
+	goto Route110_TrickHousePuzzle3_EventScript_1625FF
 	end
 
 Route110_TrickHousePuzzle3_EventScript_1625DB:: @ 81625DB
 	lockall
 	setvar 0x4008, 5
-	jump Route110_TrickHousePuzzle3_EventScript_1625FF
+	goto Route110_TrickHousePuzzle3_EventScript_1625FF
 	end
 
 Route110_TrickHousePuzzle3_EventScript_1625E7:: @ 81625E7
 	lockall
 	setvar 0x4008, 6
-	jump Route110_TrickHousePuzzle3_EventScript_1625FF
+	goto Route110_TrickHousePuzzle3_EventScript_1625FF
 	end
 
 Route110_TrickHousePuzzle3_EventScript_1625F3:: @ 81625F3
 	lockall
 	setvar 0x4008, 7
-	jump Route110_TrickHousePuzzle3_EventScript_1625FF
+	goto Route110_TrickHousePuzzle3_EventScript_1625FF
 	end
 
 Route110_TrickHousePuzzle3_EventScript_1625FF:: @ 81625FF
 	call Route110_TrickHousePuzzle3_EventScript_162612
 	playsfx 21
 	call Route110_TrickHousePuzzle3_EventScript_161F12
-	jump Route110_TrickHousePuzzle3_EventScript_1626AD
+	goto Route110_TrickHousePuzzle3_EventScript_1626AD
 	end
 
 Route110_TrickHousePuzzle3_EventScript_162612:: @ 8162612
@@ -372,12 +372,12 @@ Route110_TrickHousePuzzle3_EventScript_1626EB:: @ 81626EB
 	lockall
 	compare 0x40ad, 0
 	jumpeq Route110_TrickHousePuzzle3_EventScript_1626FD
-	jump Route110_TrickHousePuzzle3_EventScript_161892
+	goto Route110_TrickHousePuzzle3_EventScript_161892
 	end
 
 Route110_TrickHousePuzzle3_EventScript_1626FD:: @ 81626FD
 	setvar 0x40ad, 1
-	jump Route110_TrickHousePuzzle3_EventScript_16189C
+	goto Route110_TrickHousePuzzle3_EventScript_16189C
 	end
 
 Route110_TrickHousePuzzle3_EventScript_162708:: @ 8162708

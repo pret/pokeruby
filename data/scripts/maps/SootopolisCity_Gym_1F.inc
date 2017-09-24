@@ -104,7 +104,7 @@ SootopolisCity_Gym_1F_EventScript_15B02D:: @ 815B02D
 	setflag 2062
 	setvar 0x8008, 8
 	call SootopolisCity_Gym_1F_EventScript_1A01C0
-	jump SootopolisCity_Gym_1F_EventScript_15B056
+	goto SootopolisCity_Gym_1F_EventScript_15B056
 	end
 
 SootopolisCity_Gym_1F_EventScript_15B056:: @ 815B056
@@ -139,14 +139,14 @@ SootopolisCity_Gym_1F_EventScript_15B0A3:: @ 815B0A3
 	lockall
 	checkflag 2062
 	jumpeq SootopolisCity_Gym_1F_EventScript_15B0C3
-	jump SootopolisCity_Gym_1F_EventScript_15B0CD
+	goto SootopolisCity_Gym_1F_EventScript_15B0CD
 	end
 
 SootopolisCity_Gym_1F_EventScript_15B0B3:: @ 815B0B3
 	lockall
 	checkflag 2062
 	jumpeq SootopolisCity_Gym_1F_EventScript_15B0C3
-	jump SootopolisCity_Gym_1F_EventScript_15B0CD
+	goto SootopolisCity_Gym_1F_EventScript_15B0CD
 	end
 
 SootopolisCity_Gym_1F_EventScript_15B0C3:: @ 815B0C3

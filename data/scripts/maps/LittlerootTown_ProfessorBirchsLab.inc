@@ -39,7 +39,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152CBE:: @ 8152CBE
 LittlerootTown_ProfessorBirchsLab_EventScript_152CEA:: @ 8152CEA
 	setvar 0x8004, 0
 	call LittlerootTown_ProfessorBirchsLab_EventScript_1A0678
-	jump LittlerootTown_ProfessorBirchsLab_EventScript_152CFA
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_152CFA
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152CFA:: @ 8152CFA
@@ -69,7 +69,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152D4A:: @ 8152D4A
 	lockall
 	move 255, LittlerootTown_ProfessorBirchsLab_Movement_152D5B
 	waitmove 0
-	jump LittlerootTown_ProfessorBirchsLab_EventScript_152DBA
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_152DBA
 	end
 
 LittlerootTown_ProfessorBirchsLab_Movement_152D5B:: @ 8152D5B

@@ -18,7 +18,7 @@ SlateportCity_PokemonFanClub_EventScript_15576B:: @ 815576B
 SlateportCity_PokemonFanClub_EventScript_155795:: @ 8155795
 	setvar 0x40b7, 1
 	msgbox SlateportCity_PokemonFanClub_Text_17D773, 4
-	jump SlateportCity_PokemonFanClub_EventScript_155808
+	goto SlateportCity_PokemonFanClub_EventScript_155808
 	end
 
 SlateportCity_PokemonFanClub_EventScript_1557A8:: @ 81557A8
@@ -38,7 +38,7 @@ SlateportCity_PokemonFanClub_EventScript_1557A8:: @ 81557A8
 	compare 0x40b7, 2
 	jumpeq SlateportCity_PokemonFanClub_EventScript_1557FE
 	msgbox SlateportCity_PokemonFanClub_Text_17DA14, 4
-	jump SlateportCity_PokemonFanClub_EventScript_155808
+	goto SlateportCity_PokemonFanClub_EventScript_155808
 	end
 
 SlateportCity_PokemonFanClub_EventScript_1557FE:: @ 81557FE

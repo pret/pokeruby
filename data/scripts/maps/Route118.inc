@@ -55,7 +55,7 @@ Route118_EventScript_150FAE:: @ 8150FAE
 	waitmove 0
 	move 19, Route118_Movement_151069
 	waitmove 0
-	jump Route118_EventScript_151004
+	goto Route118_EventScript_151004
 	end
 
 Route118_EventScript_150FCE:: @ 8150FCE
@@ -63,7 +63,7 @@ Route118_EventScript_150FCE:: @ 8150FCE
 	setvar 0x8008, 1
 	move 255, Route118_Movement_1A0841
 	waitmove 0
-	jump Route118_EventScript_151004
+	goto Route118_EventScript_151004
 	end
 
 Route118_EventScript_150FE4:: @ 8150FE4
@@ -73,7 +73,7 @@ Route118_EventScript_150FE4:: @ 8150FE4
 	waitmove 0
 	move 19, Route118_Movement_15106B
 	waitmove 0
-	jump Route118_EventScript_151004
+	goto Route118_EventScript_151004
 	end
 
 Route118_EventScript_151004:: @ 8151004

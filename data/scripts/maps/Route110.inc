@@ -279,27 +279,27 @@ Route110_EventScript_14FC39:: @ 814FC39
 
 Route110_EventScript_14FCC3:: @ 814FCC3
 	msgbox Route110_Text_16EF9F, 4
-	jump Route110_EventScript_14FD09
+	goto Route110_EventScript_14FD09
 	end
 
 Route110_EventScript_14FCD1:: @ 814FCD1
 	msgbox Route110_Text_16F012, 4
-	jump Route110_EventScript_14FD09
+	goto Route110_EventScript_14FD09
 	end
 
 Route110_EventScript_14FCDF:: @ 814FCDF
 	msgbox Route110_Text_16F069, 4
-	jump Route110_EventScript_14FD09
+	goto Route110_EventScript_14FD09
 	end
 
 Route110_EventScript_14FCED:: @ 814FCED
 	msgbox Route110_Text_16F0D0, 4
-	jump Route110_EventScript_14FD09
+	goto Route110_EventScript_14FD09
 	end
 
 Route110_EventScript_14FCFB:: @ 814FCFB
 	msgbox Route110_Text_16F139, 4
-	jump Route110_EventScript_14FD09
+	goto Route110_EventScript_14FD09
 	end
 
 Route110_EventScript_14FD09:: @ 814FD09
@@ -310,17 +310,17 @@ Route110_EventScript_14FD09:: @ 814FD09
 
 Route110_EventScript_14FD13:: @ 814FD13
 	setvar 0x8008, 1
-	jump Route110_EventScript_14FD34
+	goto Route110_EventScript_14FD34
 	end
 
 Route110_EventScript_14FD1E:: @ 814FD1E
 	setvar 0x8008, 2
-	jump Route110_EventScript_14FD34
+	goto Route110_EventScript_14FD34
 	end
 
 Route110_EventScript_14FD29:: @ 814FD29
 	setvar 0x8008, 3
-	jump Route110_EventScript_14FD34
+	goto Route110_EventScript_14FD34
 	end
 
 Route110_EventScript_14FD34:: @ 814FD34
@@ -369,24 +369,24 @@ Route110_EventScript_14FDB1:: @ 814FDB1
 
 Route110_EventScript_14FDE0:: @ 814FDE0
 	trainerbattle 3, OPPONENT_MAY_5, 0, Route110_Text_16E826
-	jump Route110_EventScript_14FE10
+	goto Route110_EventScript_14FE10
 	end
 
 Route110_EventScript_14FDF0:: @ 814FDF0
 	trainerbattle 3, OPPONENT_MAY_8, 0, Route110_Text_16E826
-	jump Route110_EventScript_14FE10
+	goto Route110_EventScript_14FE10
 	end
 
 Route110_EventScript_14FE00:: @ 814FE00
 	trainerbattle 3, OPPONENT_MAY_2, 0, Route110_Text_16E826
-	jump Route110_EventScript_14FE10
+	goto Route110_EventScript_14FE10
 	end
 
 Route110_EventScript_14FE10:: @ 814FE10
 	msgbox Route110_Text_16E84C, 4
 	call Route110_EventScript_14FEA5
 	msgbox Route110_Text_16E8B3, 4
-	jump Route110_EventScript_14FEB2
+	goto Route110_EventScript_14FEB2
 	end
 
 Route110_EventScript_14FE2B:: @ 814FE2B
@@ -399,24 +399,24 @@ Route110_EventScript_14FE2B:: @ 814FE2B
 
 Route110_EventScript_14FE5A:: @ 814FE5A
 	trainerbattle 3, OPPONENT_BRENDAN_5, 0, Route110_Text_16EA0F
-	jump Route110_EventScript_14FE8A
+	goto Route110_EventScript_14FE8A
 	end
 
 Route110_EventScript_14FE6A:: @ 814FE6A
 	trainerbattle 3, OPPONENT_BRENDAN_8, 0, Route110_Text_16EA0F
-	jump Route110_EventScript_14FE8A
+	goto Route110_EventScript_14FE8A
 	end
 
 Route110_EventScript_14FE7A:: @ 814FE7A
 	trainerbattle 3, OPPONENT_BRENDAN_2, 0, Route110_Text_16EA0F
-	jump Route110_EventScript_14FE8A
+	goto Route110_EventScript_14FE8A
 	end
 
 Route110_EventScript_14FE8A:: @ 814FE8A
 	msgbox Route110_Text_16EA2A, 4
 	call Route110_EventScript_14FEA5
 	msgbox Route110_Text_16EA7B, 4
-	jump Route110_EventScript_14FEB2
+	goto Route110_EventScript_14FEB2
 	end
 
 Route110_EventScript_14FEA5:: @ 814FEA5

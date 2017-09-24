@@ -22,7 +22,7 @@ LilycoveCity_CoveLilyMotel_2F_EventScript_1583D0:: @ 81583D0
 	setflag 2
 	fanfare 370
 	waitfanfare
-	jump LilycoveCity_CoveLilyMotel_2F_EventScript_1583DD
+	goto LilycoveCity_CoveLilyMotel_2F_EventScript_1583DD
 	end
 
 LilycoveCity_CoveLilyMotel_2F_EventScript_1583DD:: @ 81583DD

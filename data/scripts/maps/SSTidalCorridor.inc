@@ -193,7 +193,7 @@ SSTidalCorridor_EventScript_15FE84:: @ 815FE84
 	checktrainerflag OPPONENT_ANETTE
 	jumpif 0, SSTidalCorridor_EventScript_15FED5
 	setflag 247
-	jump SSTidalCorridor_EventScript_15FE7A
+	goto SSTidalCorridor_EventScript_15FE7A
 	return
 
 SSTidalCorridor_EventScript_15FED5:: @ 815FED5

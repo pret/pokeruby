@@ -6,25 +6,25 @@ LilycoveCity_LilycoveMuseum_2F_MapScripts:: @ 81585AC
 LilycoveCity_LilycoveMuseum_2F_MapScript1_1585B7:: @ 81585B7
 	checkflag 160
 	jumpeq LilycoveCity_LilycoveMuseum_2F_EventScript_1585FD
-	jump LilycoveCity_LilycoveMuseum_2F_EventScript_1585C6
+	goto LilycoveCity_LilycoveMuseum_2F_EventScript_1585C6
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_1585C6:: @ 81585C6
 	checkflag 161
 	jumpeq LilycoveCity_LilycoveMuseum_2F_EventScript_158615
-	jump LilycoveCity_LilycoveMuseum_2F_EventScript_1585D5
+	goto LilycoveCity_LilycoveMuseum_2F_EventScript_1585D5
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_1585D5:: @ 81585D5
 	checkflag 162
 	jumpeq LilycoveCity_LilycoveMuseum_2F_EventScript_15862D
-	jump LilycoveCity_LilycoveMuseum_2F_EventScript_1585E4
+	goto LilycoveCity_LilycoveMuseum_2F_EventScript_1585E4
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_1585E4:: @ 81585E4
 	checkflag 163
 	jumpeq LilycoveCity_LilycoveMuseum_2F_EventScript_158645
-	jump LilycoveCity_LilycoveMuseum_2F_EventScript_1585F3
+	goto LilycoveCity_LilycoveMuseum_2F_EventScript_1585F3
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_1585F3:: @ 81585F3
@@ -35,25 +35,25 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_1585F3:: @ 81585F3
 LilycoveCity_LilycoveMuseum_2F_EventScript_1585FD:: @ 81585FD
 	setmaptile 10, 6, 606, 1
 	setmaptile 11, 6, 607, 1
-	jump LilycoveCity_LilycoveMuseum_2F_EventScript_1585C6
+	goto LilycoveCity_LilycoveMuseum_2F_EventScript_1585C6
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_158615:: @ 8158615
 	setmaptile 18, 6, 604, 1
 	setmaptile 19, 6, 605, 1
-	jump LilycoveCity_LilycoveMuseum_2F_EventScript_1585D5
+	goto LilycoveCity_LilycoveMuseum_2F_EventScript_1585D5
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_15862D:: @ 815862D
 	setmaptile 14, 10, 608, 1
 	setmaptile 15, 10, 609, 1
-	jump LilycoveCity_LilycoveMuseum_2F_EventScript_1585E4
+	goto LilycoveCity_LilycoveMuseum_2F_EventScript_1585E4
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_158645:: @ 8158645
 	setmaptile 6, 10, 602, 1
 	setmaptile 7, 10, 603, 1
-	jump LilycoveCity_LilycoveMuseum_2F_EventScript_1585F3
+	goto LilycoveCity_LilycoveMuseum_2F_EventScript_1585F3
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_15865D:: @ 815865D
@@ -118,7 +118,7 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_158735:: @ 8158735
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_18802F, 4
 	move 1, LilycoveCity_LilycoveMuseum_2F_Movement_1586D5
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_188041, 4
-	jump LilycoveCity_LilycoveMuseum_2F_EventScript_15875C
+	goto LilycoveCity_LilycoveMuseum_2F_EventScript_15875C
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_15875C:: @ 815875C

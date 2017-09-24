@@ -48,19 +48,19 @@ MauvilleCity_Gym_EventScript_15649B:: @ 815649B
 MauvilleCity_Gym_EventScript_15657D:: @ 815657D
 	setvar 0x8004, 0
 	special MauvilleGymSpecial1
-	jump MauvilleCity_Gym_EventScript_156491
+	goto MauvilleCity_Gym_EventScript_156491
 	end
 
 MauvilleCity_Gym_EventScript_15658B:: @ 815658B
 	setvar 0x8004, 1
 	special MauvilleGymSpecial1
-	jump MauvilleCity_Gym_EventScript_156491
+	goto MauvilleCity_Gym_EventScript_156491
 	end
 
 MauvilleCity_Gym_EventScript_156599:: @ 8156599
 	setvar 0x8004, 2
 	special MauvilleGymSpecial1
-	jump MauvilleCity_Gym_EventScript_156491
+	goto MauvilleCity_Gym_EventScript_156491
 	end
 
 MauvilleCity_Gym_EventScript_1565A7:: @ 81565A7
@@ -92,7 +92,7 @@ MauvilleCity_Gym_EventScript_1565DB:: @ 81565DB
 	special MauvilleGymSpecial3
 	special DrawWholeMapView
 	playsfx 44
-	jump MauvilleCity_Gym_EventScript_15661D
+	goto MauvilleCity_Gym_EventScript_15661D
 	end
 
 MauvilleCity_Gym_EventScript_15661D:: @ 815661D
@@ -117,7 +117,7 @@ MauvilleCity_Gym_EventScript_15664B:: @ 815664B
 	jumpeq MauvilleCity_Gym_EventScript_1566DA
 	setvar 0x4093, 1
 	setvar 0x8004, 0
-	jump MauvilleCity_Gym_EventScript_1566BA
+	goto MauvilleCity_Gym_EventScript_1566BA
 	end
 
 MauvilleCity_Gym_EventScript_156670:: @ 8156670
@@ -128,7 +128,7 @@ MauvilleCity_Gym_EventScript_156670:: @ 8156670
 	jumpeq MauvilleCity_Gym_EventScript_1566DA
 	setvar 0x4093, 2
 	setvar 0x8004, 1
-	jump MauvilleCity_Gym_EventScript_1566BA
+	goto MauvilleCity_Gym_EventScript_1566BA
 	end
 
 MauvilleCity_Gym_EventScript_156695:: @ 8156695
@@ -139,7 +139,7 @@ MauvilleCity_Gym_EventScript_156695:: @ 8156695
 	jumpeq MauvilleCity_Gym_EventScript_1566DA
 	setvar 0x4093, 3
 	setvar 0x8004, 2
-	jump MauvilleCity_Gym_EventScript_1566BA
+	goto MauvilleCity_Gym_EventScript_1566BA
 	end
 
 MauvilleCity_Gym_EventScript_1566BA:: @ 81566BA
@@ -206,14 +206,14 @@ MauvilleCity_Gym_EventScript_156761:: @ 8156761
 	lockall
 	checkflag 2057
 	jumpeq MauvilleCity_Gym_EventScript_156781
-	jump MauvilleCity_Gym_EventScript_15678B
+	goto MauvilleCity_Gym_EventScript_15678B
 	end
 
 MauvilleCity_Gym_EventScript_156771:: @ 8156771
 	lockall
 	checkflag 2057
 	jumpeq MauvilleCity_Gym_EventScript_156781
-	jump MauvilleCity_Gym_EventScript_15678B
+	goto MauvilleCity_Gym_EventScript_15678B
 	end
 
 MauvilleCity_Gym_EventScript_156781:: @ 8156781

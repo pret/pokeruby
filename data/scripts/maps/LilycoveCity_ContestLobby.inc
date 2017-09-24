@@ -312,13 +312,13 @@ LilycoveCity_ContestLobby_EventScript_158B85:: @ 8158B85
 	message LilycoveCity_ContestLobby_Text_18848C
 	waittext
 	setflag 2
-	jump LilycoveCity_ContestLobby_EventScript_158BF0
+	goto LilycoveCity_ContestLobby_EventScript_158BF0
 	end
 
 LilycoveCity_ContestLobby_EventScript_158BAE:: @ 8158BAE
 	message LilycoveCity_ContestLobby_Text_188584
 	waittext
-	jump LilycoveCity_ContestLobby_EventScript_158BF0
+	goto LilycoveCity_ContestLobby_EventScript_158BF0
 	end
 
 LilycoveCity_ContestLobby_EventScript_158BBA:: @ 8158BBA
@@ -348,7 +348,7 @@ LilycoveCity_ContestLobby_EventScript_158BF0:: @ 8158BF0
 
 LilycoveCity_ContestLobby_EventScript_158C27:: @ 8158C27
 	msgbox LilycoveCity_ContestLobby_Text_1885A7, 4
-	jump LilycoveCity_ContestLobby_EventScript_158B85
+	goto LilycoveCity_ContestLobby_EventScript_158B85
 	end
 
 LilycoveCity_ContestLobby_EventScript_158C35:: @ 8158C35
@@ -378,17 +378,17 @@ LilycoveCity_ContestLobby_EventScript_158C42:: @ 8158C42
 
 LilycoveCity_ContestLobby_EventScript_158C96:: @ 8158C96
 	msgbox LilycoveCity_ContestLobby_Text_1A664A, 4
-	jump LilycoveCity_ContestLobby_EventScript_158C42
+	goto LilycoveCity_ContestLobby_EventScript_158C42
 	end
 
 LilycoveCity_ContestLobby_EventScript_158CA4:: @ 8158CA4
 	msgbox LilycoveCity_ContestLobby_Text_1A669F, 4
-	jump LilycoveCity_ContestLobby_EventScript_158C42
+	goto LilycoveCity_ContestLobby_EventScript_158C42
 	end
 
 LilycoveCity_ContestLobby_EventScript_158CB2:: @ 8158CB2
 	msgbox LilycoveCity_ContestLobby_Text_1A66DC, 4
-	jump LilycoveCity_ContestLobby_EventScript_158C42
+	goto LilycoveCity_ContestLobby_EventScript_158C42
 	end
 
 LilycoveCity_ContestLobby_EventScript_158CC0:: @ 8158CC0
@@ -411,7 +411,7 @@ LilycoveCity_ContestLobby_EventScript_158CEA:: @ 8158CEA
 	case 5, LilycoveCity_ContestLobby_EventScript_158C35
 	case 127, LilycoveCity_ContestLobby_EventScript_158C35
 	copyvar CONTEST_CATEGORY, RESULT
-	jump LilycoveCity_ContestLobby_EventScript_158C42
+	goto LilycoveCity_ContestLobby_EventScript_158C42
 	end
 
 LilycoveCity_ContestLobby_EventScript_158D24:: @ 8158D24
@@ -437,7 +437,7 @@ LilycoveCity_ContestLobby_EventScript_158D24:: @ 8158D24
 
 LilycoveCity_ContestLobby_EventScript_158D82:: @ 8158D82
 	msgbox LilycoveCity_ContestLobby_Text_188750, 4
-	jump LilycoveCity_ContestLobby_EventScript_158CEA
+	goto LilycoveCity_ContestLobby_EventScript_158CEA
 	end
 
 LilycoveCity_ContestLobby_EventScript_158D90:: @ 8158D90
@@ -466,7 +466,7 @@ LilycoveCity_ContestLobby_EventScript_158DB2:: @ 8158DB2
 
 LilycoveCity_ContestLobby_EventScript_158DC3:: @ 8158DC3
 	msgbox LilycoveCity_ContestLobby_Text_18873A, 4
-	jump LilycoveCity_ContestLobby_EventScript_158CEA
+	goto LilycoveCity_ContestLobby_EventScript_158CEA
 	end
 
 LilycoveCity_ContestLobby_EventScript_158DD1:: @ 8158DD1
@@ -476,7 +476,7 @@ LilycoveCity_ContestLobby_EventScript_158DD1:: @ 8158DD1
 	message2 LilycoveCity_ContestLobby_Text_188845
 	waittext
 	addvar 0x8004, 65535
-	jump LilycoveCity_ContestLobby_EventScript_158DEE
+	goto LilycoveCity_ContestLobby_EventScript_158DEE
 	end
 
 LilycoveCity_ContestLobby_EventScript_158DEE:: @ 8158DEE

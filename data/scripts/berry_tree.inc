@@ -57,21 +57,21 @@ Route102_EventScript_1A1595:: @ 81A1595
 	message Route102_Text_1A172C
 	waittext
 	waitbutton
-	jump Route102_EventScript_1A165F
+	goto Route102_EventScript_1A165F
 
 Route102_EventScript_1A15A2:: @ 81A15A2
 	lockall
 	message Route102_Text_1A174B
 	waittext
 	waitbutton
-	jump Route102_EventScript_1A165F
+	goto Route102_EventScript_1A165F
 
 Route102_EventScript_1A15AF:: @ 81A15AF
 	lockall
 	message Route102_Text_1A175C
 	waittext
 	waitbutton
-	jump Route102_EventScript_1A165F
+	goto Route102_EventScript_1A165F
 
 Route102_EventScript_1A15BC:: @ 81A15BC
 	call Route102_EventScript_1A15CE
@@ -79,7 +79,7 @@ Route102_EventScript_1A15BC:: @ 81A15BC
 	message Route102_Text_1A177D
 	waittext
 	waitbutton
-	jump Route102_EventScript_1A165F
+	goto Route102_EventScript_1A165F
 
 Route102_EventScript_1A15CE:: @ 81A15CE
 	compare 0x8005, 0

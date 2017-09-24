@@ -17,7 +17,7 @@ DewfordTown_Gym_EventScript_153071:: @ 8153071
 	jumpeq DewfordTown_Gym_EventScript_1530B6
 	compare 0x8000, 2
 	jumpeq DewfordTown_Gym_EventScript_1530B2
-	jump DewfordTown_Gym_EventScript_1530AE
+	goto DewfordTown_Gym_EventScript_1530AE
 
 DewfordTown_Gym_EventScript_1530AA:: @ 81530AA
 	darken 0
@@ -41,7 +41,7 @@ DewfordTown_Gym_EventScript_1530BA:: @ 81530BA
 
 DewfordTown_Gym_EventScript_1530BE:: @ 81530BE
 	call DewfordTown_Gym_EventScript_153122
-	snop1
+	nop1
 	comparevars 0x8000, 0x8001
 	jumpeq DewfordTown_Gym_EventScript_1530F5
 	copyvar 0x8001, 0x8000
@@ -119,7 +119,7 @@ DewfordTown_Gym_EventScript_153177:: @ 8153177
 	callif 1, DewfordTown_Gym_EventScript_1A00FB
 	setvar 0x8008, 2
 	call DewfordTown_Gym_EventScript_1A01C0
-	jump DewfordTown_Gym_EventScript_1531B5
+	goto DewfordTown_Gym_EventScript_1531B5
 	end
 
 DewfordTown_Gym_EventScript_1531B5:: @ 81531B5
@@ -179,14 +179,14 @@ DewfordTown_Gym_EventScript_15325E:: @ 815325E
 	lockall
 	checkflag 2056
 	jumpeq DewfordTown_Gym_EventScript_15327E
-	jump DewfordTown_Gym_EventScript_153288
+	goto DewfordTown_Gym_EventScript_153288
 	end
 
 DewfordTown_Gym_EventScript_15326E:: @ 815326E
 	lockall
 	checkflag 2056
 	jumpeq DewfordTown_Gym_EventScript_15327E
-	jump DewfordTown_Gym_EventScript_153288
+	goto DewfordTown_Gym_EventScript_153288
 	end
 
 DewfordTown_Gym_EventScript_15327E:: @ 815327E

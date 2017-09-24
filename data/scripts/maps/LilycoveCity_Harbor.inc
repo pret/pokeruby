@@ -12,7 +12,7 @@ LilycoveCity_Harbor_EventScript_1598A2:: @ 81598A2
 	checkitem ITEM_EON_TICKET, 1
 	compare RESULT, 1
 	jumpeq LilycoveCity_Harbor_EventScript_1599EE
-	jump LilycoveCity_Harbor_EventScript_1598BA
+	goto LilycoveCity_Harbor_EventScript_1598BA
 	end
 
 LilycoveCity_Harbor_EventScript_1598BA:: @ 81598BA
@@ -29,7 +29,7 @@ LilycoveCity_Harbor_EventScript_1598CD:: @ 81598CD
 	jumpeq LilycoveCity_Harbor_EventScript_159929
 	message LilycoveCity_Harbor_Text_18B406
 	waittext
-	jump LilycoveCity_Harbor_EventScript_1598F1
+	goto LilycoveCity_Harbor_EventScript_1598F1
 	end
 
 LilycoveCity_Harbor_EventScript_1598F1:: @ 81598F1
@@ -70,7 +70,7 @@ LilycoveCity_Harbor_EventScript_15995B:: @ 815995B
 LilycoveCity_Harbor_EventScript_15997E:: @ 815997E
 	message LilycoveCity_Harbor_Text_18B4E2
 	waittext
-	jump LilycoveCity_Harbor_EventScript_1598F1
+	goto LilycoveCity_Harbor_EventScript_1598F1
 	end
 
 LilycoveCity_Harbor_EventScript_15998A:: @ 815998A

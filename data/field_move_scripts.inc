@@ -15,14 +15,14 @@ S_CuttableTree:: @ 81B0DCC
 	closebutton
 	doanimation 2
 	waitstate
-	jump DoTreeCutMovement
+	goto DoTreeCutMovement
 	end
 
 S_UseCut:: @ 81B0E16
 	lockall
 	doanimation 2
 	waitstate
-	jump DoTreeCutMovement
+	goto DoTreeCutMovement
 	end
 
 DoTreeCutMovement: @ 81B0E21
@@ -73,14 +73,14 @@ S_BreakableRock:: @ 81B0EB7
 	closebutton
 	doanimation 37
 	waitstate
-	jump DoRockSmashMovement
+	goto DoRockSmashMovement
 	end
 
 S_UseRockSmash:: @ 81B0F01
 	lockall
 	doanimation 37
 	waitstate
-	jump DoRockSmashMovement
+	goto DoRockSmashMovement
 	end
 
 DoRockSmashMovement: @ 81B0F0C
@@ -139,14 +139,14 @@ S_PushableBoulder:: @ 81B0FCB
 	closebutton
 	doanimation 40
 	waitstate
-	jump UsedStrength
+	goto UsedStrength
 	end
 
 S_UseStrength:: @ 81B100E
 	lockall
 	doanimation 40
 	waitstate
-	jump UsedStrength
+	goto UsedStrength
 	end
 
 UsedStrength: @ 81B1019
@@ -200,7 +200,7 @@ S_UseWaterfall:: @ 81B115A
 	jumpeq Waterfall_Done
 	msgbox UsedWaterfallText, 4
 	doanimation 43
-	jump Waterfall_Done
+	goto Waterfall_Done
 
 S_CannotUseWaterfall:: @ 81B1194
 	lockall
@@ -234,7 +234,7 @@ UseDiveScript:: @ 81B1220
 	jumpeq Dive_Done
 	msgbox UsedDiveText, 4
 	doanimation 44
-	jump Dive_Done
+	goto Dive_Done
 	lockall
 
 CannotUseDive: @ 81B125F
@@ -257,12 +257,12 @@ S_UseDiveUnderwater:: @ 81B1269
 	jumpeq UnderwaterDive_Done
 	msgbox UsedDiveText, 4
 	doanimation 44
-	jump UnderwaterDive_Done
+	goto UnderwaterDive_Done
 
 UnderwaterCannotUseDive: @ 81B12A7
 	lockall
 	msgbox UnderwaterCannotUseDiveText, 4
-	jump UnderwaterDive_Done
+	goto UnderwaterDive_Done
 
 @ not used
 SurfacingBlocked: @ 81B12B5

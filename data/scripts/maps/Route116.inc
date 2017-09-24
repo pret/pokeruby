@@ -38,7 +38,7 @@ Route116_EventScript_150A7B:: @ 8150A7B
 	checkflag 287
 	jumpeq Route116_EventScript_150B04
 	msgbox Route116_Text_1705AE, 4
-	jump Route116_EventScript_150A94
+	goto Route116_EventScript_150A94
 	end
 
 Route116_EventScript_150A94:: @ 8150A94
@@ -74,7 +74,7 @@ Route116_EventScript_150AF9:: @ 8150AF9
 
 Route116_EventScript_150B04:: @ 8150B04
 	msgbox Route116_Text_170865, 4
-	jump Route116_EventScript_150A94
+	goto Route116_EventScript_150A94
 	end
 
 Route116_EventScript_150B12:: @ 8150B12
@@ -160,7 +160,7 @@ Route116_EventScript_150B8F:: @ 8150B8F
 Route116_EventScript_150BBB:: @ 8150BBB
 	msgbox Route116_Text_1709B7, 4
 	closebutton
-	jump Route116_EventScript_150C03
+	goto Route116_EventScript_150C03
 	end
 
 Route116_EventScript_150BCA:: @ 8150BCA
@@ -176,7 +176,7 @@ Route116_EventScript_150BCA:: @ 8150BCA
 Route116_EventScript_150BF4:: @ 8150BF4
 	msgbox Route116_Text_17094D, 4
 	closebutton
-	jump Route116_EventScript_150C03
+	goto Route116_EventScript_150C03
 	end
 
 Route116_EventScript_150C03:: @ 8150C03

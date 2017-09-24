@@ -40,12 +40,12 @@ Route119_EventScript_1511B9:: @ 81511B9
 
 Route119_EventScript_1511C5:: @ 81511C5
 	setvar 0x4001, 1
-	jump Route119_EventScript_1511DB
+	goto Route119_EventScript_1511DB
 	end
 
 Route119_EventScript_1511D0:: @ 81511D0
 	setvar 0x4001, 2
-	jump Route119_EventScript_1511DB
+	goto Route119_EventScript_1511DB
 	end
 
 Route119_EventScript_1511DB:: @ 81511DB
@@ -97,24 +97,24 @@ Route119_EventScript_15125E:: @ 815125E
 
 Route119_EventScript_15128D:: @ 815128D
 	trainerbattle 3, OPPONENT_MAY_6, 0, Route119_Text_171156
-	jump Route119_EventScript_1512BD
+	goto Route119_EventScript_1512BD
 	end
 
 Route119_EventScript_15129D:: @ 815129D
 	trainerbattle 3, OPPONENT_MAY_9, 0, Route119_Text_171156
-	jump Route119_EventScript_1512BD
+	goto Route119_EventScript_1512BD
 	end
 
 Route119_EventScript_1512AD:: @ 81512AD
 	trainerbattle 3, OPPONENT_MAY_3, 0, Route119_Text_171156
-	jump Route119_EventScript_1512BD
+	goto Route119_EventScript_1512BD
 	end
 
 Route119_EventScript_1512BD:: @ 81512BD
 	msgbox Route119_Text_1711B1, 4
 	call Route119_EventScript_151352
 	msgbox Route119_Text_171214, 4
-	jump Route119_EventScript_151362
+	goto Route119_EventScript_151362
 	end
 
 Route119_EventScript_1512D8:: @ 81512D8
@@ -127,24 +127,24 @@ Route119_EventScript_1512D8:: @ 81512D8
 
 Route119_EventScript_151307:: @ 8151307
 	trainerbattle 3, OPPONENT_BRENDAN_6, 0, Route119_Text_1713E2
-	jump Route119_EventScript_151337
+	goto Route119_EventScript_151337
 	end
 
 Route119_EventScript_151317:: @ 8151317
 	trainerbattle 3, OPPONENT_BRENDAN_9, 0, Route119_Text_1713E2
-	jump Route119_EventScript_151337
+	goto Route119_EventScript_151337
 	end
 
 Route119_EventScript_151327:: @ 8151327
 	trainerbattle 3, OPPONENT_BRENDAN_3, 0, Route119_Text_1713E2
-	jump Route119_EventScript_151337
+	goto Route119_EventScript_151337
 	end
 
 Route119_EventScript_151337:: @ 8151337
 	msgbox Route119_Text_17140B, 4
 	call Route119_EventScript_151352
 	msgbox Route119_Text_171475, 4
-	jump Route119_EventScript_151362
+	goto Route119_EventScript_151362
 	end
 
 Route119_EventScript_151352:: @ 8151352

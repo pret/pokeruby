@@ -318,32 +318,32 @@ LilycoveCity_EventScript_14CE35:: @ 814CE35
 
 LilycoveCity_EventScript_14CE46:: @ 814CE46
 	trainerbattle 3, OPPONENT_MAY_11, 0, LilycoveCity_Text_167BD5
-	jump LilycoveCity_EventScript_14CEA6
+	goto LilycoveCity_EventScript_14CEA6
 	end
 
 LilycoveCity_EventScript_14CE56:: @ 814CE56
 	trainerbattle 3, OPPONENT_MAY_12, 0, LilycoveCity_Text_167BD5
-	jump LilycoveCity_EventScript_14CEA6
+	goto LilycoveCity_EventScript_14CEA6
 	end
 
 LilycoveCity_EventScript_14CE66:: @ 814CE66
 	trainerbattle 3, OPPONENT_MAY_10, 0, LilycoveCity_Text_167BD5
-	jump LilycoveCity_EventScript_14CEA6
+	goto LilycoveCity_EventScript_14CEA6
 	end
 
 LilycoveCity_EventScript_14CE76:: @ 814CE76
 	trainerbattle 3, OPPONENT_BRENDAN_11, 0, LilycoveCity_Text_1680E4
-	jump LilycoveCity_EventScript_14CF12
+	goto LilycoveCity_EventScript_14CF12
 	end
 
 LilycoveCity_EventScript_14CE86:: @ 814CE86
 	trainerbattle 3, OPPONENT_BRENDAN_12, 0, LilycoveCity_Text_1680E4
-	jump LilycoveCity_EventScript_14CF12
+	goto LilycoveCity_EventScript_14CF12
 	end
 
 LilycoveCity_EventScript_14CE96:: @ 814CE96
 	trainerbattle 3, OPPONENT_BRENDAN_10, 0, LilycoveCity_Text_1680E4
-	jump LilycoveCity_EventScript_14CF12
+	goto LilycoveCity_EventScript_14CF12
 	end
 
 LilycoveCity_EventScript_14CEA6:: @ 814CEA6
@@ -357,7 +357,7 @@ LilycoveCity_EventScript_14CEA6:: @ 814CEA6
 	callif 1, LilycoveCity_EventScript_14CEF7
 	clearflag 722
 	clearflag 849
-	jump LilycoveCity_EventScript_14CF6B
+	goto LilycoveCity_EventScript_14CF6B
 	end
 
 LilycoveCity_EventScript_14CEDE:: @ 814CEDE
@@ -393,7 +393,7 @@ LilycoveCity_EventScript_14CF12:: @ 814CF12
 	compare RESULT, 1
 	callif 1, LilycoveCity_EventScript_14CF50
 	clearflag 760
-	jump LilycoveCity_EventScript_14CF6B
+	goto LilycoveCity_EventScript_14CF6B
 	end
 
 LilycoveCity_EventScript_14CF47:: @ 814CF47

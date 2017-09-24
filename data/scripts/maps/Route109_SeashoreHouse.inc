@@ -41,7 +41,7 @@ Route109_SeashoreHouse_EventScript_160E2C:: @ 8160E2C
 
 Route109_SeashoreHouse_EventScript_160E36:: @ 8160E36
 	showmoney 0, 0
-	snop
+	nop
 	msgbox Route109_SeashoreHouse_Text_19B702, 5
 	compare RESULT, 1
 	jumpeq Route109_SeashoreHouse_EventScript_160E5A
@@ -60,7 +60,7 @@ Route109_SeashoreHouse_EventScript_160E5A:: @ 8160E5A
 	msgbox Route109_SeashoreHouse_Text_19B74C, 4
 	paymoney 0x12c, 0
 	updatemoney 0, 0
-	snop
+	nop
 	giveitem ITEM_SODA_POP
 	hidemoney 0, 0
 	release

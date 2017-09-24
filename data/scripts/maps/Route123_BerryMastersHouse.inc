@@ -81,7 +81,7 @@ Route123_BerryMastersHouse_EventScript_163AF0:: @ 8163AF0
 	giveitem RESULT
 	compare RESULT, 0
 	jumpeq Route123_BerryMastersHouse_EventScript_1A029B
-	jump Route123_BerryMastersHouse_EventScript_163C1D
+	goto Route123_BerryMastersHouse_EventScript_163C1D
 	release
 	end
 
@@ -93,7 +93,7 @@ Route123_BerryMastersHouse_EventScript_163B1E:: @ 8163B1E
 	compare RESULT, 0
 	jumpeq Route123_BerryMastersHouse_EventScript_1A029B
 	setflag 248
-	jump Route123_BerryMastersHouse_EventScript_163C1D
+	goto Route123_BerryMastersHouse_EventScript_163C1D
 	end
 
 Route123_BerryMastersHouse_EventScript_163B4F:: @ 8163B4F
@@ -104,7 +104,7 @@ Route123_BerryMastersHouse_EventScript_163B4F:: @ 8163B4F
 	compare RESULT, 0
 	jumpeq Route123_BerryMastersHouse_EventScript_1A029B
 	setflag 249
-	jump Route123_BerryMastersHouse_EventScript_163C1D
+	goto Route123_BerryMastersHouse_EventScript_163C1D
 	end
 
 Route123_BerryMastersHouse_EventScript_163B80:: @ 8163B80
@@ -115,7 +115,7 @@ Route123_BerryMastersHouse_EventScript_163B80:: @ 8163B80
 	compare RESULT, 0
 	jumpeq Route123_BerryMastersHouse_EventScript_1A029B
 	setflag 250
-	jump Route123_BerryMastersHouse_EventScript_163C1D
+	goto Route123_BerryMastersHouse_EventScript_163C1D
 	end
 
 Route123_BerryMastersHouse_EventScript_163BB1:: @ 8163BB1
@@ -126,7 +126,7 @@ Route123_BerryMastersHouse_EventScript_163BB1:: @ 8163BB1
 	compare RESULT, 0
 	jumpeq Route123_BerryMastersHouse_EventScript_1A029B
 	setflag 251
-	jump Route123_BerryMastersHouse_EventScript_163C1D
+	goto Route123_BerryMastersHouse_EventScript_163C1D
 	end
 
 Route123_BerryMastersHouse_EventScript_163BE2:: @ 8163BE2
@@ -137,7 +137,7 @@ Route123_BerryMastersHouse_EventScript_163BE2:: @ 8163BE2
 	compare RESULT, 0
 	jumpeq Route123_BerryMastersHouse_EventScript_1A029B
 	setflag 252
-	jump Route123_BerryMastersHouse_EventScript_163C1D
+	goto Route123_BerryMastersHouse_EventScript_163C1D
 	end
 
 Route123_BerryMastersHouse_EventScript_163C13:: @ 8163C13

@@ -40,7 +40,7 @@ SouthernIsland_Interior_EventScript_160B95:: @ 8160B95
 SouthernIsland_Interior_EventScript_160B9B:: @ 8160B9B
 	lockall
 	setvar 0x8008, 12
-	jump SouthernIsland_Interior_EventScript_160BA7
+	goto SouthernIsland_Interior_EventScript_160BA7
 	end
 
 SouthernIsland_Interior_EventScript_160BA7:: @ 8160BA7

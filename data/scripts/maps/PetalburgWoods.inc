@@ -36,7 +36,7 @@ PetalburgWoods_EventScript_15CCA8:: @ 815CCA8
 	call PetalburgWoods_EventScript_15CDFA
 	move 4, PetalburgWoods_Movement_15CE80
 	waitmove 0
-	jump PetalburgWoods_EventScript_15CE69
+	goto PetalburgWoods_EventScript_15CE69
 	end
 
 PetalburgWoods_EventScript_15CD42:: @ 815CD42
@@ -71,7 +71,7 @@ PetalburgWoods_EventScript_15CD42:: @ 815CD42
 	call PetalburgWoods_EventScript_15CDFA
 	move 4, PetalburgWoods_Movement_15CE95
 	waitmove 0
-	jump PetalburgWoods_EventScript_15CE69
+	goto PetalburgWoods_EventScript_15CE69
 	end
 
 PetalburgWoods_EventScript_15CDE6:: @ 815CDE6
@@ -93,12 +93,12 @@ PetalburgWoods_EventScript_15CDFA:: @ 815CDFA
 	giveitem ITEM_GREAT_BALL
 	compare RESULT, 0
 	jumpeq PetalburgWoods_EventScript_15CE3F
-	jump PetalburgWoods_EventScript_15CE4D
+	goto PetalburgWoods_EventScript_15CE4D
 	end
 
 PetalburgWoods_EventScript_15CE3F:: @ 815CE3F
 	msgbox PetalburgWoods_Text_195182, 4
-	jump PetalburgWoods_EventScript_15CE4D
+	goto PetalburgWoods_EventScript_15CE4D
 	end
 
 PetalburgWoods_EventScript_15CE4D:: @ 815CE4D

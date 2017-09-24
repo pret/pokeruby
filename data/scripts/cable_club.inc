@@ -258,7 +258,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A3FDD:: @ 81A3FDD
 	waitbutton
 	message OldaleTown_PokemonCenter_2F_Text_1A4826
 	waittext
-	jump OldaleTown_PokemonCenter_2F_EventScript_1A3EBC
+	goto OldaleTown_PokemonCenter_2F_EventScript_1A3EBC
 
 OldaleTown_PokemonCenter_2F_EventScript_1A3FEF:: @ 81A3FEF
 	message OldaleTown_PokemonCenter_2F_Text_1A4840
@@ -290,7 +290,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A4056:: @ 81A4056
 	message OldaleTown_PokemonCenter_2F_Text_1A486A
 	waittext
 	waitbutton
-	jump OldaleTown_PokemonCenter_2F_EventScript_1A3FEF
+	goto OldaleTown_PokemonCenter_2F_EventScript_1A3FEF
 
 OldaleTown_PokemonCenter_2F_EventScript_1A4062:: @ 81A4062
 	setvar 0x8004, 1
@@ -301,28 +301,28 @@ OldaleTown_PokemonCenter_2F_EventScript_1A4068:: @ 81A4068
 	case 1, OldaleTown_PokemonCenter_2F_EventScript_1A40B1
 	case 2, OldaleTown_PokemonCenter_2F_EventScript_1A40A2
 	case 5, OldaleTown_PokemonCenter_2F_EventScript_1A4093
-	jump OldaleTown_PokemonCenter_2F_EventScript_1A432D
+	goto OldaleTown_PokemonCenter_2F_EventScript_1A432D
 
 OldaleTown_PokemonCenter_2F_EventScript_1A4093:: @ 81A4093
 	special CloseLink
 	message OldaleTown_PokemonCenter_2F_Text_1A4C03
 	waittext
 	waitbutton
-	jump OldaleTown_PokemonCenter_2F_EventScript_1A40C0
+	goto OldaleTown_PokemonCenter_2F_EventScript_1A40C0
 
 OldaleTown_PokemonCenter_2F_EventScript_1A40A2:: @ 81A40A2
 	special CloseLink
 	message OldaleTown_PokemonCenter_2F_Text_1A4BCC
 	waittext
 	waitbutton
-	jump OldaleTown_PokemonCenter_2F_EventScript_1A40C0
+	goto OldaleTown_PokemonCenter_2F_EventScript_1A40C0
 
 OldaleTown_PokemonCenter_2F_EventScript_1A40B1:: @ 81A40B1
 	special CloseLink
 	message OldaleTown_PokemonCenter_2F_Text_1A4B95
 	waittext
 	waitbutton
-	jump OldaleTown_PokemonCenter_2F_EventScript_1A40C0
+	goto OldaleTown_PokemonCenter_2F_EventScript_1A40C0
 
 OldaleTown_PokemonCenter_2F_EventScript_1A40C0:: @ 81A40C0
 	special CloseLink
@@ -402,7 +402,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A4166:: @ 81A4166
 	setdoorclosed 8, 1
 	doorchange
 	release
-	jump OldaleTown_PokemonCenter_2F_EventScript_1A4325
+	goto OldaleTown_PokemonCenter_2F_EventScript_1A4325
 
 OldaleTown_PokemonCenter_2F_EventScript_1A41BB:: @ 81A41BB
 	specialval RESULT, CalculatePlayerPartyCount
@@ -500,7 +500,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A4294:: @ 81A4294
 	setdoorclosed 11, 1
 	doorchange
 	release
-	jump OldaleTown_PokemonCenter_2F_EventScript_1A4325
+	goto OldaleTown_PokemonCenter_2F_EventScript_1A4325
 
 OldaleTown_PokemonCenter_2F_EventScript_1A42E9:: @ 81A42E9
 	special CloseLink

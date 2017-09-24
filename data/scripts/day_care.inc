@@ -130,7 +130,7 @@ Route117_PokemonDayCare_EventScript_1B23DA:: @ 81B23DA
 	msgbox Route117_PokemonDayCare_Text_1B29AD, 5
 	compare RESULT, 1
 	jumpeq Route117_PokemonDayCare_EventScript_1B236C
-	jump Route117_PokemonDayCare_EventScript_1B23D0
+	goto Route117_PokemonDayCare_EventScript_1B23D0
 	end
 
 Route117_PokemonDayCare_EventScript_1B23F3:: @ 81B23F3
@@ -168,7 +168,7 @@ Route117_PokemonDayCare_EventScript_1B242B:: @ 81B242B
 	msgbox Route117_PokemonDayCare_Text_1B2BF6, 5
 	compare RESULT, 1
 	jumpeq Route117_PokemonDayCare_EventScript_1B2469
-	jump Route117_PokemonDayCare_EventScript_1B23D0
+	goto Route117_PokemonDayCare_EventScript_1B23D0
 	end
 
 Route117_PokemonDayCare_EventScript_1B2469:: @ 81B2469
@@ -184,7 +184,7 @@ Route117_PokemonDayCare_EventScript_1B2469:: @ 81B2469
 	copyvar 0x8004, RESULT
 	compare RESULT, 2
 	jumpeq Route117_PokemonDayCare_EventScript_1B23D0
-	jump Route117_PokemonDayCare_EventScript_1B24A8
+	goto Route117_PokemonDayCare_EventScript_1B24A8
 	end
 
 Route117_PokemonDayCare_EventScript_1B24A8:: @ 81B24A8
@@ -192,7 +192,7 @@ Route117_PokemonDayCare_EventScript_1B24A8:: @ 81B24A8
 	msgbox Route117_PokemonDayCare_Text_1B2B49, 5
 	compare RESULT, 1
 	jumpeq Route117_PokemonDayCare_EventScript_1B24C4
-	jump Route117_PokemonDayCare_EventScript_1B23D0
+	goto Route117_PokemonDayCare_EventScript_1B23D0
 	end
 
 Route117_PokemonDayCare_EventScript_1B24C4:: @ 81B24C4
@@ -217,14 +217,14 @@ Route117_PokemonDayCare_EventScript_1B24DE:: @ 81B24DE
 	specialval RESULT, sp0B6_daycare
 	compare RESULT, 2
 	jumpeq Route117_PokemonDayCare_EventScript_1B2520
-	jump Route117_PokemonDayCare_EventScript_1B23D0
+	goto Route117_PokemonDayCare_EventScript_1B23D0
 	end
 
 Route117_PokemonDayCare_EventScript_1B2520:: @ 81B2520
 	msgbox Route117_PokemonDayCare_Text_1B2A4F, 5
 	compare RESULT, 1
 	jumpeq Route117_PokemonDayCare_EventScript_1B2469
-	jump Route117_PokemonDayCare_EventScript_1B23D0
+	goto Route117_PokemonDayCare_EventScript_1B23D0
 	end
 
 Route117_PokemonDayCare_EventScript_1B2539:: @ 81B2539

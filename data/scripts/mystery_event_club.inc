@@ -4,7 +4,7 @@ PetalburgCity_PokemonCenter_1F_EventScript_1B1B14:: @ 81B1B14
 	checkflag 2053
 	jumpeq PetalburgCity_PokemonCenter_1F_EventScript_1B1BDB
 	msgbox PetalburgCity_PokemonCenter_1F_Text_1B1C97, 4
-	jump PetalburgCity_PokemonCenter_1F_EventScript_1B1B2D
+	goto PetalburgCity_PokemonCenter_1F_EventScript_1B1B2D
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_1B1B2D:: @ 81B1B2D
@@ -19,7 +19,7 @@ PetalburgCity_PokemonCenter_1F_EventScript_1B1B2D:: @ 81B1B2D
 
 PetalburgCity_PokemonCenter_1F_EventScript_1B1B6C:: @ 81B1B6C
 	msgbox PetalburgCity_PokemonCenter_1F_Text_1B1D3A, 4
-	jump PetalburgCity_PokemonCenter_1F_EventScript_1B1B2D
+	goto PetalburgCity_PokemonCenter_1F_EventScript_1B1B2D
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_1B1B7A:: @ 81B1B7A
@@ -58,7 +58,7 @@ PetalburgCity_PokemonCenter_1F_EventScript_1B1BD1:: @ 81B1BD1
 
 PetalburgCity_PokemonCenter_1F_EventScript_1B1BDB:: @ 81B1BDB
 	msgbox PetalburgCity_PokemonCenter_1F_Text_1B202F, 4
-	jump PetalburgCity_PokemonCenter_1F_EventScript_1B1BE9
+	goto PetalburgCity_PokemonCenter_1F_EventScript_1B1BE9
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_1B1BE9:: @ 81B1BE9
@@ -73,7 +73,7 @@ PetalburgCity_PokemonCenter_1F_EventScript_1B1BE9:: @ 81B1BE9
 
 PetalburgCity_PokemonCenter_1F_EventScript_1B1C28:: @ 81B1C28
 	msgbox PetalburgCity_PokemonCenter_1F_Text_1B1D3A, 4
-	jump PetalburgCity_PokemonCenter_1F_EventScript_1B1BE9
+	goto PetalburgCity_PokemonCenter_1F_EventScript_1B1BE9
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_1B1C36:: @ 81B1C36

@@ -371,38 +371,38 @@ LittlerootTown_EventScript_14D860:: @ 814D860
 	lockall
 	setvar 0x8008, 0
 	movesprite 4, 10, 9
-	jump LittlerootTown_EventScript_14D8B6
+	goto LittlerootTown_EventScript_14D8B6
 	end
 
 LittlerootTown_EventScript_14D873:: @ 814D873
 	lockall
 	setvar 0x8008, 1
 	movesprite 4, 11, 9
-	jump LittlerootTown_EventScript_14D8B6
+	goto LittlerootTown_EventScript_14D8B6
 	end
 
 LittlerootTown_EventScript_14D886:: @ 814D886
 	lockall
 	setvar 0x8008, 2
-	jump LittlerootTown_EventScript_14D8B6
+	goto LittlerootTown_EventScript_14D8B6
 	end
 
 LittlerootTown_EventScript_14D892:: @ 814D892
 	lockall
 	setvar 0x8008, 3
-	jump LittlerootTown_EventScript_14D8B6
+	goto LittlerootTown_EventScript_14D8B6
 	end
 
 LittlerootTown_EventScript_14D89E:: @ 814D89E
 	lockall
 	setvar 0x8008, 4
-	jump LittlerootTown_EventScript_14D8B6
+	goto LittlerootTown_EventScript_14D8B6
 	end
 
 LittlerootTown_EventScript_14D8AA:: @ 814D8AA
 	lockall
 	setvar 0x8008, 5
-	jump LittlerootTown_EventScript_14D8B6
+	goto LittlerootTown_EventScript_14D8B6
 	end
 
 LittlerootTown_EventScript_14D8B6:: @ 814D8B6
@@ -429,7 +429,7 @@ LittlerootTown_EventScript_14D8B6:: @ 814D8B6
 	callif 1, LittlerootTown_EventScript_14DAAA
 	compare RESULT, 1
 	callif 1, LittlerootTown_EventScript_14DAED
-	jump LittlerootTown_EventScript_14DD2B
+	goto LittlerootTown_EventScript_14DD2B
 	end
 
 LittlerootTown_EventScript_14D926:: @ 814D926
@@ -856,7 +856,7 @@ LittlerootTown_EventScript_14DCE2:: @ 814DCE2
 	spriteinvisible 4, 0, 9
 	setdoorclosed 0x8009, 0x800a
 	doorchange
-	jump LittlerootTown_EventScript_14DD2B
+	goto LittlerootTown_EventScript_14DD2B
 	end
 
 LittlerootTown_EventScript_14DD2B:: @ 814DD2B

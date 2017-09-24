@@ -8,7 +8,7 @@ Underwater_SealedChamber_MapScript1_15F086:: @ 815F086
 	jumpif 5, Underwater_SealedChamber_EventScript_15F0A6
 	compare 0x8005, 44
 	jumpif 5, Underwater_SealedChamber_EventScript_15F0A6
-	jump Underwater_SealedChamber_EventScript_15F0AF
+	goto Underwater_SealedChamber_EventScript_15F0AF
 
 Underwater_SealedChamber_EventScript_15F0A6:: @ 815F0A6
 	warp4 Route134, 255, 60, 31

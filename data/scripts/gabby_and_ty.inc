@@ -211,7 +211,7 @@ Route111_EventScript_1AE5A2:: @ 81AE5A2
 	checkflag 1
 	jumpeq Route111_EventScript_1AE73A
 	msgbox Route111_Text_1AC015, 5
-	jump Route111_EventScript_1AE6F3
+	goto Route111_EventScript_1AE6F3
 	end
 
 Route111_EventScript_1AE5E0:: @ 81AE5E0
@@ -271,32 +271,32 @@ Route111_Movement_1AE69D:: @ 81AE69D
 
 Route111_EventScript_1AE69F:: @ 81AE69F
 	msgbox Route111_Text_1AC60B, 5
-	jump Route111_EventScript_1AE6F3
+	goto Route111_EventScript_1AE6F3
 	end
 
 Route111_EventScript_1AE6AD:: @ 81AE6AD
 	msgbox Route111_Text_1AC3CF, 5
-	jump Route111_EventScript_1AE6F3
+	goto Route111_EventScript_1AE6F3
 	end
 
 Route111_EventScript_1AE6BB:: @ 81AE6BB
 	msgbox Route111_Text_1AC18D, 5
-	jump Route111_EventScript_1AE6F3
+	goto Route111_EventScript_1AE6F3
 	end
 
 Route111_EventScript_1AE6C9:: @ 81AE6C9
 	msgbox Route111_Text_1AC219, 5
-	jump Route111_EventScript_1AE6F3
+	goto Route111_EventScript_1AE6F3
 	end
 
 Route111_EventScript_1AE6D7:: @ 81AE6D7
 	msgbox Route111_Text_1AC2D6, 5
-	jump Route111_EventScript_1AE6F3
+	goto Route111_EventScript_1AE6F3
 	end
 
 Route111_EventScript_1AE6E5:: @ 81AE6E5
 	msgbox Route111_Text_1AC355, 5
-	jump Route111_EventScript_1AE6F3
+	goto Route111_EventScript_1AE6F3
 	end
 
 Route111_EventScript_1AE6F3:: @ 81AE6F3

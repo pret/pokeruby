@@ -86,7 +86,7 @@ LavaridgeTown_EventScript_14E5AB:: @ 814E5AB
 	giveitem ITEM_GO_GOGGLES
 	setflag 221
 	msgbox LavaridgeTown_Text_16BE7D, 4
-	jump LavaridgeTown_EventScript_14E5F5
+	goto LavaridgeTown_EventScript_14E5F5
 	end
 
 LavaridgeTown_EventScript_14E5D0:: @ 814E5D0
@@ -94,7 +94,7 @@ LavaridgeTown_EventScript_14E5D0:: @ 814E5D0
 	giveitem ITEM_GO_GOGGLES
 	setflag 221
 	msgbox LavaridgeTown_Text_16C020, 4
-	jump LavaridgeTown_EventScript_14E5F5
+	goto LavaridgeTown_EventScript_14E5F5
 	end
 
 LavaridgeTown_EventScript_14E5F5:: @ 814E5F5

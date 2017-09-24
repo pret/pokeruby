@@ -1,10 +1,10 @@
 	@ Does nothing.
-	.macro snop
+	.macro nop
 	.byte 0x00
 	.endm
 
 	@ Does nothing.
-	.macro snop1
+	.macro nop1
 	.byte 0x01
 	.endm
 
@@ -25,7 +25,7 @@
 	.endm
 
 	@ Jumps to destination and continues script execution from there.
-	.macro jump destination
+	.macro goto destination
 	.byte 0x05
 	.4byte \destination
 	.endm

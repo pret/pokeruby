@@ -16,7 +16,7 @@ VictoryRoad_1F_EventScript_15DE97:: @ 815DE97
 	reappear 4
 	move 4, VictoryRoad_1F_Movement_15DF07
 	waitmove 0
-	jump VictoryRoad_1F_EventScript_15DED3
+	goto VictoryRoad_1F_EventScript_15DED3
 	end
 
 VictoryRoad_1F_EventScript_15DEAB:: @ 815DEAB
@@ -24,7 +24,7 @@ VictoryRoad_1F_EventScript_15DEAB:: @ 815DEAB
 	reappear 4
 	move 4, VictoryRoad_1F_Movement_15DF13
 	waitmove 0
-	jump VictoryRoad_1F_EventScript_15DED3
+	goto VictoryRoad_1F_EventScript_15DED3
 	end
 
 VictoryRoad_1F_EventScript_15DEBF:: @ 815DEBF
@@ -32,7 +32,7 @@ VictoryRoad_1F_EventScript_15DEBF:: @ 815DEBF
 	reappear 4
 	move 4, VictoryRoad_1F_Movement_15DF1E
 	waitmove 0
-	jump VictoryRoad_1F_EventScript_15DED3
+	goto VictoryRoad_1F_EventScript_15DED3
 	end
 
 VictoryRoad_1F_EventScript_15DED3:: @ 815DED3

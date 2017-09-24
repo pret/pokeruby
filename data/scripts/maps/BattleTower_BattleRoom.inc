@@ -85,7 +85,7 @@ BattleTower_BattleRoom_EventScript_160A3C:: @ 8160A3C
 	waitmove 0
 	move 2, BattleTower_BattleRoom_Movement_160AD0
 	waitmove 0
-	jump BattleTower_BattleRoom_EventScript_1608FA
+	goto BattleTower_BattleRoom_EventScript_1608FA
 
 BattleTower_BattleRoom_EventScript_160A56:: @ 8160A56
 	special LoadPlayerParty

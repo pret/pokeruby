@@ -17,7 +17,7 @@ BattleTower_Outside_EventScript_160168:: @ 8160168
 	jumpeq BattleTower_Outside_EventScript_1601C6
 	message BattleTower_Outside_Text_199D9D
 	waittext
-	jump BattleTower_Outside_EventScript_16018E
+	goto BattleTower_Outside_EventScript_16018E
 	end
 
 BattleTower_Outside_EventScript_16018E:: @ 816018E
@@ -59,7 +59,7 @@ BattleTower_Outside_EventScript_1601FB:: @ 81601FB
 BattleTower_Outside_EventScript_160226:: @ 8160226
 	message BattleTower_Outside_Text_199E7A
 	waittext
-	jump BattleTower_Outside_EventScript_16018E
+	goto BattleTower_Outside_EventScript_16018E
 	end
 
 BattleTower_Outside_EventScript_160232:: @ 8160232

@@ -80,7 +80,7 @@ SafariZone_Southeast_EventScript_160105:: @ 8160105
 	waitmove 0
 	move 255, SafariZone_Southeast_Movement_16014B
 	waitmove 0
-	jump SafariZone_Southeast_EventScript_160139
+	goto SafariZone_Southeast_EventScript_160139
 	end
 
 SafariZone_Southeast_EventScript_16011F:: @ 816011F
@@ -88,7 +88,7 @@ SafariZone_Southeast_EventScript_16011F:: @ 816011F
 	waitmove 0
 	move 255, SafariZone_Southeast_Movement_16014D
 	waitmove 0
-	jump SafariZone_Southeast_EventScript_160139
+	goto SafariZone_Southeast_EventScript_160139
 	end
 
 SafariZone_Southeast_EventScript_160139:: @ 8160139

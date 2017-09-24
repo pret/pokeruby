@@ -3,7 +3,7 @@ FallarborTown_ContestLobby_EventScript_1B7604:: @ 81B7604
 	setvar 0x8009, 1
 	move 0x8008, FallarborTown_ContestLobby_Movement_1B7821
 	waitmove 0
-	jump FallarborTown_ContestLobby_EventScript_1B7681
+	goto FallarborTown_ContestLobby_EventScript_1B7681
 	end
 
 SlateportCity_ContestLobby_EventScript_1B761E:: @ 81B761E
@@ -12,7 +12,7 @@ SlateportCity_ContestLobby_EventScript_1B761E:: @ 81B761E
 	move 6, SlateportCity_ContestLobby_Movement_1A083D
 	move 0x8008, SlateportCity_ContestLobby_Movement_1B7821
 	waitmove 0
-	jump SlateportCity_ContestLobby_EventScript_1B7681
+	goto SlateportCity_ContestLobby_EventScript_1B7681
 	end
 
 VerdanturfTown_ContestLobby_EventScript_1B763F:: @ 81B763F
@@ -20,7 +20,7 @@ VerdanturfTown_ContestLobby_EventScript_1B763F:: @ 81B763F
 	setvar 0x8009, 1
 	move 0x8008, VerdanturfTown_ContestLobby_Movement_1B7821
 	waitmove 0
-	jump VerdanturfTown_ContestLobby_EventScript_1B7681
+	goto VerdanturfTown_ContestLobby_EventScript_1B7681
 	end
 
 LilycoveCity_ContestLobby_EventScript_1B7659:: @ 81B7659
@@ -30,7 +30,7 @@ LilycoveCity_ContestLobby_EventScript_1B7659:: @ 81B7659
 	move 10, LilycoveCity_ContestLobby_Movement_1A083D
 	move 0x8008, LilycoveCity_ContestLobby_Movement_1B7821
 	waitmove 0
-	jump LilycoveCity_ContestLobby_EventScript_1B7681
+	goto LilycoveCity_ContestLobby_EventScript_1B7681
 	end
 
 FallarborTown_ContestLobby_EventScript_1B7681:: @ 81B7681
@@ -78,17 +78,17 @@ FallarborTown_ContestLobby_EventScript_1B770E:: @ 81B770E
 	checkdailyflags
 	checkflag 2241
 	jumpeq FallarborTown_ContestLobby_EventScript_1B774F
-	jump FallarborTown_ContestLobby_EventScript_1B7759
+	goto FallarborTown_ContestLobby_EventScript_1B7759
 	end
 
 FallarborTown_ContestLobby_EventScript_1B7726:: @ 81B7726
 	msgbox FallarborTown_ContestLobby_Text_1B6F1F, 4
-	jump FallarborTown_ContestLobby_EventScript_1B7734
+	goto FallarborTown_ContestLobby_EventScript_1B7734
 	end
 
 FallarborTown_ContestLobby_EventScript_1B7734:: @ 81B7734
 	msgbox FallarborTown_ContestLobby_Text_1B6EF1, 4
-	jump FallarborTown_ContestLobby_EventScript_1B7742
+	goto FallarborTown_ContestLobby_EventScript_1B7742
 	end
 
 FallarborTown_ContestLobby_EventScript_1B7742:: @ 81B7742
@@ -108,7 +108,7 @@ FallarborTown_ContestLobby_EventScript_1B7759:: @ 81B7759
 	msgbox FallarborTown_ContestLobby_Text_1B704A, 4
 	giveitem ITEM_PECHA_BERRY
 	setflag 2241
-	jump FallarborTown_ContestLobby_EventScript_1B76EF
+	goto FallarborTown_ContestLobby_EventScript_1B76EF
 	end
 
 FallarborTown_ContestLobby_EventScript_1B7776:: @ 81B7776
@@ -123,22 +123,22 @@ FallarborTown_ContestLobby_EventScript_1B7780:: @ 81B7780
 
 FallarborTown_ContestLobby_EventScript_1B778A:: @ 81B778A
 	setvar 0x8008, 4
-	jump FallarborTown_ContestLobby_EventScript_1B77B6
+	goto FallarborTown_ContestLobby_EventScript_1B77B6
 	end
 
 SlateportCity_ContestLobby_EventScript_1B7795:: @ 81B7795
 	setvar 0x8008, 2
-	jump SlateportCity_ContestLobby_EventScript_1B77B6
+	goto SlateportCity_ContestLobby_EventScript_1B77B6
 	end
 
 VerdanturfTown_ContestLobby_EventScript_1B77A0:: @ 81B77A0
 	setvar 0x8008, 2
-	jump VerdanturfTown_ContestLobby_EventScript_1B77B6
+	goto VerdanturfTown_ContestLobby_EventScript_1B77B6
 	end
 
 LilycoveCity_ContestLobby_EventScript_1B77AB:: @ 81B77AB
 	setvar 0x8008, 3
-	jump LilycoveCity_ContestLobby_EventScript_1B77B6
+	goto LilycoveCity_ContestLobby_EventScript_1B77B6
 	end
 
 FallarborTown_ContestLobby_EventScript_1B77B6:: @ 81B77B6
@@ -164,7 +164,7 @@ FallarborTown_ContestLobby_EventScript_1B77E6:: @ 81B77E6
 	checkdailyflags
 	checkflag 2241
 	jumpeq FallarborTown_ContestLobby_EventScript_1B77F6
-	jump FallarborTown_ContestLobby_EventScript_1B7800
+	goto FallarborTown_ContestLobby_EventScript_1B7800
 	end
 
 FallarborTown_ContestLobby_EventScript_1B77F6:: @ 81B77F6
@@ -188,19 +188,19 @@ VerdanturfTown_ContestLobby_Movement_1B7821:: @ 81B7821
 	step_end
 
 FallarborTown_ContestLobby_EventScript_1B7823:: @ 81B7823
-	jump FallarborTown_ContestLobby_EventScript_1B783B
+	goto FallarborTown_ContestLobby_EventScript_1B783B
 	end
 
 SlateportCity_ContestLobby_EventScript_1B7829:: @ 81B7829
-	jump SlateportCity_ContestLobby_EventScript_1B783B
+	goto SlateportCity_ContestLobby_EventScript_1B783B
 	end
 
 VerdanturfTown_ContestLobby_EventScript_1B782F:: @ 81B782F
-	jump VerdanturfTown_ContestLobby_EventScript_1B783B
+	goto VerdanturfTown_ContestLobby_EventScript_1B783B
 	end
 
 LilycoveCity_ContestLobby_EventScript_1B7835:: @ 81B7835
-	jump LilycoveCity_ContestLobby_EventScript_1B783B
+	goto LilycoveCity_ContestLobby_EventScript_1B783B
 	end
 
 FallarborTown_ContestLobby_EventScript_1B783B:: @ 81B783B
@@ -256,17 +256,17 @@ FallarborTown_ContestLobby_EventScript_1B78A1:: @ 81B78A1
 
 FallarborTown_ContestLobby_EventScript_1B78F3:: @ 81B78F3
 	msgbox FallarborTown_ContestLobby_Text_1B733B, 4
-	jump FallarborTown_ContestLobby_EventScript_1B791D
+	goto FallarborTown_ContestLobby_EventScript_1B791D
 	end
 
 FallarborTown_ContestLobby_EventScript_1B7901:: @ 81B7901
 	msgbox FallarborTown_ContestLobby_Text_1B7347, 4
-	jump FallarborTown_ContestLobby_EventScript_1B791D
+	goto FallarborTown_ContestLobby_EventScript_1B791D
 	end
 
 FallarborTown_ContestLobby_EventScript_1B790F:: @ 81B790F
 	msgbox FallarborTown_ContestLobby_Text_1B735A, 4
-	jump FallarborTown_ContestLobby_EventScript_1B791D
+	goto FallarborTown_ContestLobby_EventScript_1B791D
 	end
 
 FallarborTown_ContestLobby_EventScript_1B791D:: @ 81B791D
@@ -325,7 +325,7 @@ FallarborTown_ContestLobby_EventScript_1B7980:: @ 81B7980
 	copyvar 0x8008, RESULT
 	copyvar 0x8004, 0x8008
 	special SpawnBerryBlenderLinkPlayerSprites
-	jump FallarborTown_ContestLobby_EventScript_1B799A
+	goto FallarborTown_ContestLobby_EventScript_1B799A
 	end
 
 FallarborTown_ContestLobby_EventScript_1B799A:: @ 81B799A

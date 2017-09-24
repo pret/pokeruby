@@ -56,21 +56,21 @@ OldaleTown_EventScript_14DE07:: @ 814DE07
 	move 2, OldaleTown_Movement_14DE97
 	move 255, OldaleTown_Movement_14DEC1
 	waitmove 0
-	jump OldaleTown_EventScript_14DE4C
+	goto OldaleTown_EventScript_14DE4C
 	end
 
 OldaleTown_EventScript_14DE1E:: @ 814DE1E
 	move 2, OldaleTown_Movement_14DEA2
 	move 255, OldaleTown_Movement_14DECB
 	waitmove 0
-	jump OldaleTown_EventScript_14DE4C
+	goto OldaleTown_EventScript_14DE4C
 	end
 
 OldaleTown_EventScript_14DE35:: @ 814DE35
 	move 255, OldaleTown_Movement_14DEB9
 	move 2, OldaleTown_Movement_14DE8E
 	waitmove 0
-	jump OldaleTown_EventScript_14DE4C
+	goto OldaleTown_EventScript_14DE4C
 	end
 
 OldaleTown_EventScript_14DE4C:: @ 814DE4C
@@ -225,7 +225,7 @@ OldaleTown_EventScript_14DF30:: @ 814DF30
 	lockall
 	move 4, OldaleTown_Movement_1A0839
 	waitmove 0
-	jump OldaleTown_EventScript_14DF92
+	goto OldaleTown_EventScript_14DF92
 	end
 
 OldaleTown_EventScript_14DF41:: @ 814DF41
@@ -234,7 +234,7 @@ OldaleTown_EventScript_14DF41:: @ 814DF41
 	waitmove 0
 	move 255, OldaleTown_Movement_1A0843
 	waitmove 0
-	jump OldaleTown_EventScript_14DF92
+	goto OldaleTown_EventScript_14DF92
 	end
 
 OldaleTown_EventScript_14DF5C:: @ 814DF5C
@@ -243,7 +243,7 @@ OldaleTown_EventScript_14DF5C:: @ 814DF5C
 	waitmove 0
 	move 255, OldaleTown_Movement_1A0843
 	waitmove 0
-	jump OldaleTown_EventScript_14DF92
+	goto OldaleTown_EventScript_14DF92
 	end
 
 OldaleTown_EventScript_14DF77:: @ 814DF77
@@ -252,7 +252,7 @@ OldaleTown_EventScript_14DF77:: @ 814DF77
 	waitmove 0
 	move 255, OldaleTown_Movement_1A0843
 	waitmove 0
-	jump OldaleTown_EventScript_14DF92
+	goto OldaleTown_EventScript_14DF92
 	end
 
 OldaleTown_EventScript_14DF92:: @ 814DF92
@@ -265,12 +265,12 @@ OldaleTown_EventScript_14DF92:: @ 814DF92
 
 OldaleTown_EventScript_14DFAA:: @ 814DFAA
 	msgbox OldaleTown_Text_16B196, 4
-	jump OldaleTown_EventScript_14DFC6
+	goto OldaleTown_EventScript_14DFC6
 	end
 
 OldaleTown_EventScript_14DFB8:: @ 814DFB8
 	msgbox OldaleTown_Text_16B1BE, 4
-	jump OldaleTown_EventScript_14DFC6
+	goto OldaleTown_EventScript_14DFC6
 	end
 
 OldaleTown_EventScript_14DFC6:: @ 814DFC6
