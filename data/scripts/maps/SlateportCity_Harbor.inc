@@ -16,7 +16,7 @@ SlateportCity_Harbor_EventScript_155F85:: @ 8155F85
 	return
 
 SlateportCity_Harbor_EventScript_155F89:: @ 8155F89
-	playmusicbattle BGM_EVIL_TEAM
+	savebgm BGM_EVIL_TEAM
 	movespriteperm 4, 12, 13
 	spritebehave 4, 9
 	setflag 905
@@ -221,13 +221,13 @@ SlateportCity_Harbor_EventScript_156196:: @ 8156196
 	closebutton
 	move LAST_TALKED, SlateportCity_Harbor_Movement_1A0841
 	waitmove 0
-	pause 30
+	delay 30
 	spriteinvisible LAST_TALKED, 9, 8
 	compare_var_to_imm FACING, 2
 	call_if 1, SlateportCity_Harbor_EventScript_1561EF
 	compare_var_to_imm FACING, 4
 	call_if 1, SlateportCity_Harbor_EventScript_1561E4
-	pause 30
+	delay 30
 	spriteinvisible 255, 0, 0
 	setvar 0x8004, 5
 	call SlateportCity_Harbor_EventScript_1A040E

@@ -2,7 +2,7 @@ Route117_EventScript_1B222D:: @ 81B222D
 	lock
 	faceplayer
 	special sp0B5_daycare
-	specialval RESULT, sp0B6_daycare
+	specialvar RESULT, sp0B6_daycare
 	compare_var_to_imm RESULT, 1
 	goto_if_eq Route117_EventScript_1B2262
 	compare_var_to_imm RESULT, 2
@@ -27,7 +27,7 @@ Route117_EventScript_1B2262:: @ 81B2262
 	end
 
 Route117_EventScript_1B2298:: @ 81B2298
-	specialval RESULT, CalculatePlayerPartyCount
+	specialvar RESULT, CalculatePlayerPartyCount
 	compare_var_to_imm RESULT, 6
 	goto_if 5, Route117_EventScript_1B22B2
 	msgbox Route117_Text_1B2766, 4
@@ -36,7 +36,7 @@ Route117_EventScript_1B2298:: @ 81B2298
 
 Route117_EventScript_1B22B2:: @ 81B22B2
 	message Route117_Text_1B27A2
-	fanfare 367
+	playfanfare 367
 	waitfanfare
 	waittext
 	waitbutton
@@ -47,7 +47,7 @@ Route117_EventScript_1B22B2:: @ 81B22B2
 	end
 
 Route117_EventScript_1B22CD:: @ 81B22CD
-	specialval RESULT, sub_8042B4C
+	specialvar RESULT, sub_8042B4C
 	compare_var_to_imm RESULT, 1
 	call_if 1, Route117_EventScript_1B22DE
 	return
@@ -81,7 +81,7 @@ Route117_EventScript_1B22FE:: @ 81B22FE
 Route117_PokemonDayCare_EventScript_1B2327:: @ 81B2327
 	lock
 	faceplayer
-	specialval RESULT, sp0B6_daycare
+	specialvar RESULT, sp0B6_daycare
 	compare_var_to_imm RESULT, 1
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B2407
 	compare_var_to_imm RESULT, 2
@@ -96,7 +96,7 @@ Route117_PokemonDayCare_EventScript_1B2327:: @ 81B2327
 	end
 
 Route117_PokemonDayCare_EventScript_1B236C:: @ 81B236C
-	specialval RESULT, sub_8095B6C
+	specialvar RESULT, sub_8095B6C
 	compare_var_to_imm RESULT, 1
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B23F3
 	msgbox Route117_PokemonDayCare_Text_1B2947, 4
@@ -105,17 +105,17 @@ Route117_PokemonDayCare_EventScript_1B236C:: @ 81B236C
 	waitstate
 	compare_var_to_imm 0x8004, 255
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B23D0
-	specialval RESULT, sub_8095C10
+	specialvar RESULT, sub_8095C10
 	compare_var_to_imm RESULT, 0
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B23FD
-	specialval 0x8005, sub_8042328
-	checksound
+	specialvar 0x8005, sub_8042328
+	waitse
 	pokecry 0x8005, 0
 	msgbox Route117_PokemonDayCare_Text_1B296E, 4
 	waitpokecry
 	special Daycare_SendPokemon_Special
 	inccounter GAME_STAT_USED_DAYCARE
-	specialval RESULT, sp0B6_daycare
+	specialvar RESULT, sp0B6_daycare
 	compare_var_to_imm RESULT, 2
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B23DA
 	release
@@ -153,7 +153,7 @@ Route117_PokemonDayCare_EventScript_1B2411:: @ 81B2411
 	return
 
 Route117_PokemonDayCare_EventScript_1B241A:: @ 81B241A
-	specialval RESULT, sub_80417B8
+	specialvar RESULT, sub_80417B8
 	compare_var_to_imm RESULT, 0
 	call_if 5, Route117_PokemonDayCare_EventScript_1B2411
 	return
@@ -172,10 +172,10 @@ Route117_PokemonDayCare_EventScript_1B242B:: @ 81B242B
 	end
 
 Route117_PokemonDayCare_EventScript_1B2469:: @ 81B2469
-	specialval RESULT, CalculatePlayerPartyCount
+	specialvar RESULT, CalculatePlayerPartyCount
 	compare_var_to_imm RESULT, 6
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B2539
-	specialval RESULT, sp0B6_daycare
+	specialvar RESULT, sp0B6_daycare
 	setvar 0x8004, 0
 	compare_var_to_imm RESULT, 2
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B24A8
@@ -196,7 +196,7 @@ Route117_PokemonDayCare_EventScript_1B24A8:: @ 81B24A8
 	end
 
 Route117_PokemonDayCare_EventScript_1B24C4:: @ 81B24C4
-	specialval RESULT, sub_80B7CE8
+	specialvar RESULT, sub_80B7CE8
 	compare_var_to_imm RESULT, 1
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B24DE
 	msgbox Route117_PokemonDayCare_Text_1B2A30, 4
@@ -206,15 +206,15 @@ Route117_PokemonDayCare_EventScript_1B24C4:: @ 81B24C4
 Route117_PokemonDayCare_EventScript_1B24DE:: @ 81B24DE
 	move 1, Route117_PokemonDayCare_Movement_1B2543
 	waitmove 0
-	specialval RESULT, sub_8041648
+	specialvar RESULT, sub_8041648
 	special sub_80B7D0C
-	playsfx 95
+	playse 95
 	msgbox Route117_PokemonDayCare_Text_1B2B75, 4
-	checksound
+	waitse
 	pokecry RESULT, 0
 	msgbox Route117_PokemonDayCare_Text_1B2B93, 4
 	waitpokecry
-	specialval RESULT, sp0B6_daycare
+	specialvar RESULT, sp0B6_daycare
 	compare_var_to_imm RESULT, 2
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B2520
 	goto Route117_PokemonDayCare_EventScript_1B23D0
@@ -276,7 +276,7 @@ Route117_PokemonDayCare_EventScript_1B2558:: @ 81B2558
 	compare_var_to_imm RESULT, 2
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B23D0
 	copyvar 0x8004, RESULT
-	specialval RESULT, sub_8041648
+	specialvar RESULT, sub_8041648
 	msgbox Route117_PokemonDayCare_Text_1B2B75, 4
 	msgbox Route117_PokemonDayCare_Text_1B2A76, 4
 	release

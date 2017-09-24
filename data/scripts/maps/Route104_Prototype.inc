@@ -57,9 +57,9 @@ Route104_Prototype_EventScript_160CF1:: @ 8160CF1
 
 Route104_Prototype_EventScript_160CFB:: @ 8160CFB
 	closebutton
-	pause 60
+	delay 60
 	fadescreen 1
-	pause 60
+	delay 60
 	special DoSoftReset
 	waitstate
 	release

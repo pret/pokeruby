@@ -49,11 +49,11 @@ FallarborTown_ContestLobby_EventScript_1B76A1:: @ 81B76A1
 	checkitem ITEM_POKEBLOCK_CASE, 1
 	compare_var_to_imm RESULT, 0
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7780
-	specialval RESULT, PlayerHasBerries
+	specialvar RESULT, PlayerHasBerries
 	compare_var_to_imm RESULT, 0
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B770E
 	msgbox FallarborTown_ContestLobby_Text_1B6E9D, 4
-	specialval RESULT, sub_810CA00
+	specialvar RESULT, sub_810CA00
 	compare_var_to_imm RESULT, 65535
 	goto_if 5, FallarborTown_ContestLobby_EventScript_1B76EF
 	compare_var_to_imm RESULT, 65535
@@ -75,7 +75,7 @@ FallarborTown_ContestLobby_EventScript_1B76EF:: @ 81B76EF
 
 FallarborTown_ContestLobby_EventScript_1B770E:: @ 81B770E
 	msgbox FallarborTown_ContestLobby_Text_1B6FF0, 4
-	checkdailyflags
+	dodailyevents
 	checkflag 2241
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B774F
 	goto FallarborTown_ContestLobby_EventScript_1B7759
@@ -148,7 +148,7 @@ VerdanturfTown_ContestLobby_EventScript_1B77B6:: @ 81B77B6
 	lock
 	faceplayer
 	msgbox FallarborTown_ContestLobby_Text_1B742F, 4
-	specialval RESULT, PlayerHasBerries
+	specialvar RESULT, PlayerHasBerries
 	compare_var_to_imm RESULT, 1
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B77DC
 	compare_var_to_imm RESULT, 0
@@ -161,7 +161,7 @@ FallarborTown_ContestLobby_EventScript_1B77DC:: @ 81B77DC
 	end
 
 FallarborTown_ContestLobby_EventScript_1B77E6:: @ 81B77E6
-	checkdailyflags
+	dodailyevents
 	checkflag 2241
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B77F6
 	goto FallarborTown_ContestLobby_EventScript_1B7800
@@ -208,13 +208,13 @@ LilycoveCity_ContestLobby_EventScript_1B783B:: @ 81B783B
 SlateportCity_ContestLobby_EventScript_1B783B:: @ 81B783B
 VerdanturfTown_ContestLobby_EventScript_1B783B:: @ 81B783B
 	lockall
-	specialval RESULT, PlayerHasBerries
+	specialvar RESULT, PlayerHasBerries
 	compare_var_to_imm RESULT, 0
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7897
 	checkitem ITEM_POKEBLOCK_CASE, 1
 	compare_var_to_imm RESULT, 0
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7942
-	specialval RESULT, sub_810CA00
+	specialvar RESULT, sub_810CA00
 	compare_var_to_imm RESULT, 65535
 	goto_if 5, FallarborTown_ContestLobby_EventScript_1B7878
 	compare_var_to_imm RESULT, 65535
@@ -321,7 +321,7 @@ FallarborTown_ContestLobby_EventScript_1B7973:: @ 81B7973
 
 FallarborTown_ContestLobby_EventScript_1B7980:: @ 81B7980
 	fadescreen 1
-	specialval RESULT, GetLinkPartnerNames
+	specialvar RESULT, GetLinkPartnerNames
 	copyvar 0x8008, RESULT
 	copyvar 0x8004, 0x8008
 	special SpawnBerryBlenderLinkPlayerSprites

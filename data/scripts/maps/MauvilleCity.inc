@@ -95,7 +95,7 @@ MauvilleCity_EventScript_14C0F9:: @ 814C0F9
 	msgbox MauvilleCity_Text_165D01, 4
 	move 6, MauvilleCity_Movement_1A0839
 	waitmove 0
-	playsfx 21
+	playse 21
 	move 6, MauvilleCity_Movement_1A0833
 	waitmove 0
 	move 6, MauvilleCity_Movement_1A0835
@@ -121,7 +121,7 @@ MauvilleCity_EventScript_14C187:: @ 814C187
 	waitmove 0
 	move 6, MauvilleCity_Movement_1A0843
 	waitmove 0
-	pause 30
+	delay 30
 	move 7, MauvilleCity_Movement_14C2D8
 	waitmove 0
 	move 255, MauvilleCity_Movement_1A0845
@@ -140,7 +140,7 @@ MauvilleCity_EventScript_14C1D9:: @ 814C1D9
 	waitmove 0
 	move 6, MauvilleCity_Movement_1A0843
 	waitmove 0
-	pause 30
+	delay 30
 	move 7, MauvilleCity_Movement_14C2DC
 	waitmove 0
 	move 255, MauvilleCity_Movement_1A0845

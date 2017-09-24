@@ -219,7 +219,7 @@ LilycoveCity_ContestHall_EventScript_1592C0:: @ 81592C0
 	lockall
 	move 29, LilycoveCity_ContestHall_Movement_1A0839
 	waitmove 0
-	pause 25
+	delay 25
 	move 29, LilycoveCity_ContestHall_Movement_1A083D
 	waitmove 0
 	msgbox LilycoveCity_ContestHall_Text_189DA2, 3

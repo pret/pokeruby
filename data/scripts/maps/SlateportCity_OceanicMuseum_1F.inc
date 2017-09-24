@@ -157,8 +157,8 @@ SlateportCity_OceanicMuseum_1F_EventScript_155C31:: @ 8155C31
 SlateportCity_OceanicMuseum_1F_EventScript_155C3A:: @ 8155C3A
 	lock
 	faceplayer
-	pause 8
-	playsfx 21
+	delay 8
+	playse 21
 	move 13, SlateportCity_OceanicMuseum_1F_Movement_1A0833
 	waitmove 0
 	move 13, SlateportCity_OceanicMuseum_1F_Movement_1A0835
@@ -180,7 +180,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_155C98:: @ 8155C98
 	move 13, SlateportCity_OceanicMuseum_1F_Movement_155CD3
 	waitmove 0
 	setflag 965
-	playsfx 9
+	playse 9
 	disappear 13
 	release
 	end
@@ -189,7 +189,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_155CAD:: @ 8155CAD
 	move 13, SlateportCity_OceanicMuseum_1F_Movement_155CCC
 	waitmove 0
 	setflag 965
-	playsfx 9
+	playse 9
 	disappear 13
 	release
 	end

@@ -136,7 +136,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A3E30:: @ 81A3E30
 	waitmove 0
 	message OldaleTown_PokemonCenter_2F_Text_1A4E50
 	waittext
-	playsfx 21
+	playse 21
 	message OldaleTown_PokemonCenter_2F_Text_1A4E79
 	waittext
 	move 255, OldaleTown_PokemonCenter_2F_Movement_1A4358
@@ -223,7 +223,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A3F5E:: @ 81A3F5E
 	waittext
 	setmaptile 5, 3, 514, 0
 	special DrawWholeMapView
-	pause 60
+	delay 60
 	move LAST_TALKED, OldaleTown_PokemonCenter_2F_Movement_1A4356
 	waitmove 0
 	closebutton
@@ -388,7 +388,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A4166:: @ 81A4166
 	waittext
 	setmaptile 8, 3, 514, 0
 	special DrawWholeMapView
-	pause 60
+	delay 60
 	move LAST_TALKED, OldaleTown_PokemonCenter_2F_Movement_1A4356
 	waitmove 0
 	closebutton
@@ -405,10 +405,10 @@ OldaleTown_PokemonCenter_2F_EventScript_1A4166:: @ 81A4166
 	goto OldaleTown_PokemonCenter_2F_EventScript_1A4325
 
 OldaleTown_PokemonCenter_2F_EventScript_1A41BB:: @ 81A41BB
-	specialval RESULT, CalculatePlayerPartyCount
+	specialvar RESULT, CalculatePlayerPartyCount
 	compare_var_to_imm RESULT, 2
 	goto_if 0, OldaleTown_PokemonCenter_2F_EventScript_1A41E1
-	specialval RESULT, GetNameOfEnigmaBerryInPlayerParty
+	specialvar RESULT, GetNameOfEnigmaBerryInPlayerParty
 	compare_var_to_imm RESULT, 1
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A41EE
 	setvar RESULT, 1
@@ -486,7 +486,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A4294:: @ 81A4294
 	waittext
 	setmaptile 11, 3, 514, 0
 	special DrawWholeMapView
-	pause 60
+	delay 60
 	move LAST_TALKED, OldaleTown_PokemonCenter_2F_Movement_1A4356
 	waitmove 0
 	closebutton

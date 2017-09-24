@@ -17,7 +17,7 @@ Route110_MapScript1_14F914:: @ 814F914
 	end
 
 Route110_EventScript_14F92F:: @ 814F92F
-	playmusicbattle 403 @ Bicycle music
+	savebgm 403 @ Bicycle music
 	return
 
 Route110_MapScript2_14F933:: @ 814F933
@@ -131,7 +131,7 @@ Route110_EventScript_14FA25:: @ 814FA25
 
 Route110_EventScript_14FA2E:: @ 814FA2E
 	lockall
-	specialval RESULT, GetRecordedCyclingRoadResults
+	specialvar RESULT, GetRecordedCyclingRoadResults
 	compare_var_to_imm RESULT, 0
 	goto_if_eq Route110_EventScript_14FA49
 	msgbox Route110_Text_16F53A, 4
@@ -146,7 +146,7 @@ Route110_EventScript_14FA49:: @ 814FA49
 Route110_EventScript_14FA53:: @ 814FA53
 	lock
 	faceplayer
-	specialval RESULT, GetPlayerAvatarBike
+	specialvar RESULT, GetPlayerAvatarBike
 	compare_var_to_imm RESULT, 1
 	goto_if_eq Route110_EventScript_14FA84
 	compare_var_to_imm 0x40a9, 0
@@ -177,7 +177,7 @@ Route110_EventScript_14FAA5:: @ 814FAA5
 
 Route110_EventScript_14FABC:: @ 814FABC
 	trainerbattle 0, OPPONENT_EDWIN_1, 0, Route110_Text_1BA7D2, Route110_Text_1BA803
-	specialval RESULT, sub_8082C68
+	specialvar RESULT, sub_8082C68
 	compare_var_to_imm RESULT, 1
 	goto_if_eq Route110_EventScript_14FAE3
 	msgbox Route110_Text_1BA829, 6
@@ -205,7 +205,7 @@ Route110_EventScript_14FB28:: @ 814FB28
 
 Route110_EventScript_14FB3F:: @ 814FB3F
 	trainerbattle 0, OPPONENT_BENJAMIN_1, 0, Route110_Text_1BA352, Route110_Text_1BA379
-	specialval RESULT, sub_8082C68
+	specialvar RESULT, sub_8082C68
 	compare_var_to_imm RESULT, 1
 	goto_if_eq Route110_EventScript_14FB66
 	msgbox Route110_Text_1BA3A5, 6
@@ -223,7 +223,7 @@ Route110_EventScript_14FB7D:: @ 814FB7D
 
 Route110_EventScript_14FB94:: @ 814FB94
 	trainerbattle 0, OPPONENT_ABIGAIL_1, 0, Route110_Text_1BA4A0, Route110_Text_1BA50F
-	specialval RESULT, sub_8082C68
+	specialvar RESULT, sub_8082C68
 	compare_var_to_imm RESULT, 1
 	goto_if_eq Route110_EventScript_14FBBB
 	msgbox Route110_Text_1BA52E, 6
@@ -236,7 +236,7 @@ Route110_EventScript_14FBBB:: @ 814FBBB
 
 Route110_EventScript_14FBD2:: @ 814FBD2
 	trainerbattle 0, OPPONENT_ISABEL_1, 0, Route110_Text_1BA990, Route110_Text_1BA9D0
-	specialval RESULT, sub_8082C68
+	specialvar RESULT, sub_8082C68
 	compare_var_to_imm RESULT, 1
 	goto_if_eq Route110_EventScript_14FBF9
 	msgbox Route110_Text_1BA9E9, 6
@@ -304,8 +304,8 @@ Route110_EventScript_14FCFB:: @ 814FCFB
 
 Route110_EventScript_14FD09:: @ 814FD09
 	setvar 0x40a9, 3
-	playmusicbattle 0
-	fadedefault
+	savebgm 0
+	fadedefaultbgm
 	return
 
 Route110_EventScript_14FD13:: @ 814FD13
@@ -336,7 +336,7 @@ Route110_EventScript_14FD34:: @ 814FD34
 	waitmove 0
 	move 28, Route110_Movement_1A0835
 	waitmove 0
-	pause 30
+	delay 30
 	compare_var_to_imm 0x8008, 1
 	call_if 1, Route110_EventScript_14FF14
 	compare_var_to_imm 0x8008, 2
@@ -352,11 +352,11 @@ Route110_EventScript_14FD34:: @ 814FD34
 	end
 
 Route110_EventScript_14FDA7:: @ 814FDA7
-	playmusic 415, 1
+	playbgm 415, 1
 	return
 
 Route110_EventScript_14FDAC:: @ 814FDAC
-	playmusic 421, 1
+	playbgm 421, 1
 	return
 
 Route110_EventScript_14FDB1:: @ 814FDB1
@@ -435,7 +435,7 @@ Route110_EventScript_14FEB2:: @ 814FEB2
 	spritebehave 29, 10
 	disappear 28
 	reappear 29
-	pause 45
+	delay 45
 	compare_var_to_imm 0x8008, 1
 	call_if 1, Route110_EventScript_14FF35
 	compare_var_to_imm 0x8008, 2
@@ -444,8 +444,8 @@ Route110_EventScript_14FEB2:: @ 814FEB2
 	call_if 1, Route110_EventScript_14FF4B
 	disappear 29
 	setvar 0x4069, 1
-	playmusicbattle 0
-	fadedefault
+	savebgm 0
+	fadedefaultbgm
 	releaseall
 	end
 

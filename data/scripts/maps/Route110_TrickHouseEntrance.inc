@@ -212,15 +212,15 @@ Route110_TrickHouseEntrance_MapScript2_1611CD:: @ 81611CD
 
 Route110_TrickHouseEntrance_EventScript_1611D7:: @ 81611D7
 	lockall
-	pause 20
+	delay 20
 	compare_var_to_imm 0x4044, 0
 	call_if 1, Route110_TrickHouseEntrance_EventScript_161327
 	msgbox Route110_TrickHouseEntrance_Text_19BD82, 4
 	closebutton
-	pause 20
+	delay 20
 	move 1, Route110_TrickHouseEntrance_Movement_161315
 	waitmove 0
-	playsfx 178
+	playse 178
 	move 1, Route110_TrickHouseEntrance_Movement_16131E
 	waitmove 0
 	disappear 1
@@ -243,7 +243,7 @@ Route110_TrickHouseEntrance_EventScript_16121A:: @ 816121A
 	end
 
 Route110_TrickHouseEntrance_EventScript_16124D:: @ 816124D
-	playsfx 21
+	playse 21
 	move 255, Route110_TrickHouseEntrance_Movement_1A0833
 	waitmove 0
 	move 255, Route110_TrickHouseEntrance_Movement_1A0835
@@ -336,7 +336,7 @@ Route110_TrickHouseEntrance_EventScript_161330:: @ 8161330
 	closebutton
 	move 1, Route110_TrickHouseEntrance_Movement_1A0839
 	waitmove 0
-	playsfx 21
+	playse 21
 	move 1, Route110_TrickHouseEntrance_Movement_1A0833
 	waitmove 0
 	move 1, Route110_TrickHouseEntrance_Movement_1A0835
@@ -469,7 +469,7 @@ Route110_TrickHouseEntrance_EventScript_161551:: @ 8161551
 	waitmove 0
 	move 1, Route110_TrickHouseEntrance_Movement_161315
 	waitmove 0
-	playsfx 178
+	playse 178
 	move 1, Route110_TrickHouseEntrance_Movement_16131E
 	waitmove 0
 	disappear 1
@@ -503,7 +503,7 @@ Route110_TrickHouseEntrance_EventScript_1615C7:: @ 81615C7
 Route110_TrickHouseEntrance_EventScript_1615DD:: @ 81615DD
 	setmaptile 5, 1, 537, 0
 	special DrawWholeMapView
-	pause 20
+	delay 20
 	move 255, Route110_TrickHouseEntrance_Movement_1A0856
 	waitmove 0
 	move 255, Route110_TrickHouseEntrance_Movement_16165E
@@ -605,7 +605,7 @@ Route110_TrickHouseEntrance_EventScript_161740:: @ 8161740
 	compare_var_to_imm 0x40AB, 0
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_161888
 	msgbox UnknownString_819CAD1, 4
-	playsfx SE_PIN
+	playse SE_PIN
 	setvar 0x40AB, 2
 	setmaptile 13, 1, 523, 0
 	special DrawWholeMapView
@@ -616,7 +616,7 @@ Route110_TrickHouseEntrance_EventScript_161769:: @ 8161769
 	compare_var_to_imm 0x40AC, 0
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_161888
 	msgbox UnknownString_819CCCB, 4
-	playsfx SE_PIN
+	playse SE_PIN
 	setvar 0x40AC, 2
 	setmaptile 13, 1, 523, 0
 	special DrawWholeMapView
@@ -627,7 +627,7 @@ Route110_TrickHouseEntrance_EventScript_161792:: @ 8161792
 	compare_var_to_imm 0x40AD, 0
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_161888
 	msgbox UnknownString_819CEF9, 4
-	playsfx SE_PIN
+	playse SE_PIN
 	setvar 0x40AD, 2
 	setmaptile 13, 1, 523, 0
 	special DrawWholeMapView
@@ -638,7 +638,7 @@ Route110_TrickHouseEntrance_EventScript_1617BB:: @ 81617BB
 	compare_var_to_imm 0x40AE, 0
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_161888
 	msgbox UnknownString_819D164, 4
-	playsfx SE_PIN
+	playse SE_PIN
 	setvar 0x40AE, 2
 	setmaptile 13, 1, 523, 0
 	special DrawWholeMapView
@@ -649,7 +649,7 @@ Route110_TrickHouseEntrance_EventScript_1617E4:: @ 81617E4
 	compare_var_to_imm 0x40AF, 0
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_161888
 	msgbox UnknownString_819D3A5, 4
-	playsfx SE_PIN
+	playse SE_PIN
 	setvar 0x40AF, 2
 	setmaptile 13, 1, 523, 0
 	special DrawWholeMapView
@@ -660,7 +660,7 @@ Route110_TrickHouseEntrance_EventScript_16180D:: @ 816180D
 	compare_var_to_imm 0x40B0, 0
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_161888
 	msgbox UnknownString_819DC0A, 4
-	playsfx SE_PIN
+	playse SE_PIN
 	setvar 0x40B0, 2
 	setmaptile 13, 1, 523, 0
 	special DrawWholeMapView
@@ -671,7 +671,7 @@ Route110_TrickHouseEntrance_EventScript_161836:: @ 8161836
 	compare_var_to_imm 0x40B1, 0
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_161888
 	msgbox UnknownString_819DE8D, 4
-	playsfx SE_PIN
+	playse SE_PIN
 	setvar 0x40B1, 2
 	setmaptile 13, 1, 523, 0
 	special DrawWholeMapView
@@ -682,7 +682,7 @@ Route110_TrickHouseEntrance_EventScript_16185F:: @ 816185F
 	compare_var_to_imm 0x40B2, 0
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_161888
 	msgbox UnknownString_819E0FF, 4
-	playsfx SE_PIN
+	playse SE_PIN
 	setvar 0x40B2, 2
 	setmaptile 13, 1, 523, 0
 	special DrawWholeMapView
@@ -714,7 +714,7 @@ Route110_TrickHousePuzzle5_EventScript_16189C:: @ 816189C
 Route110_TrickHousePuzzle6_EventScript_16189C:: @ 816189C
 Route110_TrickHousePuzzle7_EventScript_16189C:: @ 816189C
 Route110_TrickHousePuzzle8_EventScript_16189C:: @ 816189C
-	fanfare 370
+	playfanfare 370
 	message Route110_TrickHousePuzzle1_Text_19C1B8
 	waitfanfare
 	waittext
@@ -762,5 +762,5 @@ Route110_TrickHouseEntrance_EventScript_161920:: @ 8161920
 	setanimation 2, 32774
 	doanimation 54
 	checkanimation 54
-	pause 10
+	delay 10
 	return

@@ -40,7 +40,7 @@ Route119_WeatherInstitute_2F_EventScript_163D45:: @ 8163D45
 	closebutton
 	setvar 0x40b3, 1
 	clearflag 893
-	fadedefault
+	fadedefaultbgm
 	fadescreen 1
 	setflag 890
 	disappear 1
@@ -58,7 +58,7 @@ Route119_WeatherInstitute_2F_EventScript_163D7A:: @ 8163D7A
 	countpokemon
 	compare_var_to_imm RESULT, 6
 	goto_if_eq Route119_WeatherInstitute_2F_EventScript_163DB4
-	fanfare 370
+	playfanfare 370
 	message Route119_WeatherInstitute_2F_Text_19F267
 	waitfanfare
 	waittext

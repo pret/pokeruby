@@ -22,17 +22,17 @@ SlateportCity_ContestLobby_EventScript_155448:: @ 8155448
 	lockall
 	move 1, SlateportCity_ContestLobby_Movement_1554CC
 	waitmove 0
-	playsfx 71
+	playse 71
 	setmaptile 4, 2, 545, 1
 	setmaptile 4, 3, 609, 1
 	special DrawWholeMapView
 	move 1, SlateportCity_ContestLobby_Movement_1554CF
 	waitmove 0
-	playsfx 71
+	playse 71
 	setmaptile 4, 2, 721, 1
 	setmaptile 4, 3, 729, 1
 	special DrawWholeMapView
-	pause 20
+	delay 20
 	move 1, SlateportCity_ContestLobby_Movement_1554DC
 	waitmove 0
 	move 255, SlateportCity_ContestLobby_Movement_1554CA

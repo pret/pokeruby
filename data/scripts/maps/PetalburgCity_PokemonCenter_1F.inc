@@ -27,7 +27,7 @@ PetalburgCity_PokemonCenter_1F_EventScript_155233:: @ 8155233
 	lock
 	faceplayer
 	msgbox PetalburgCity_PokemonCenter_1F_Text_17BDC5, 4
-	specialval RESULT, IsStarterInParty
+	specialvar RESULT, IsStarterInParty
 	compare_var_to_imm RESULT, 1
 	goto_if_eq PetalburgCity_PokemonCenter_1F_EventScript_15524F
 	release

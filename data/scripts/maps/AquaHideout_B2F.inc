@@ -10,7 +10,7 @@ AquaHideout_B2F_EventScript_15D8BD:: @ 815D8BD
 MagmaHideout_B2F_EventScript_15D8BD:: @ 815D8BD
 	lockall
 	setvar 0x8008, 1
-	playsfx 21
+	playse 21
 	move 0x8008, AquaHideout_B2F_Movement_1A0833
 	waitmove 0
 	.ifdef SAPPHIRE
@@ -43,7 +43,7 @@ AquaHideout_B2F_EventScript_15D8FD:: @ 815D8FD
 	move 0x8008, AquaHideout_B2F_Movement_1A0843
 	.endif
 	waitmove 0
-	pause 20
+	delay 20
 	move 0x8008, AquaHideout_B2F_Movement_1A0839
 	waitmove 0
 	msgbox AquaHideout_B2F_Text_197162, 4
@@ -60,7 +60,7 @@ AquaHideout_B2F_EventScript_15D8FD:: @ 815D8FD
 	.endif
 	waitmove 0
 	disappear 0x8009
-	pause 20
+	delay 20
 	move 0x8008, AquaHideout_B2F_Movement_1A0839
 	waitmove 0
 	msgbox AquaHideout_B2F_Text_1971AE, 4

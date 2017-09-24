@@ -16,7 +16,7 @@ SouthernIsland_Exterior_EventScript_160AE0:: @ 8160AE0
 	closebutton
 	move LAST_TALKED, SouthernIsland_Exterior_Movement_1A0845
 	waitmove 0
-	pause 30
+	delay 30
 	spriteinvisible 1, 26, 9
 	setvar 0x8004, 2
 	call SouthernIsland_Exterior_EventScript_1A047C

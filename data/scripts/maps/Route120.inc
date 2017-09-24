@@ -112,7 +112,7 @@ Route120_EventScript_151735:: @ 8151735
 Route120_EventScript_151739:: @ 8151739
 	lock
 	faceplayer
-	checkdailyflags
+	dodailyevents
 	checkflag 2254
 	goto_if_eq Route120_EventScript_151837
 	msgbox Route120_Text_1C58F1, 5
@@ -120,7 +120,7 @@ Route120_EventScript_151739:: @ 8151739
 	call_if 1, Route120_EventScript_151841
 	compare_var_to_imm RESULT, 0
 	call_if 1, Route120_EventScript_15184A
-	specialval RESULT, GetPlayerTrainerIdOnesDigit
+	specialvar RESULT, GetPlayerTrainerIdOnesDigit
 	switch RESULT
 	case 0, Route120_EventScript_1517DC
 	case 5, Route120_EventScript_1517DC
@@ -214,16 +214,16 @@ Route120_EventScript_15189D:: @ 815189D
 	call_if 1, Route120_EventScript_15198A
 	move 31, Route120_Movement_1A083F
 	waitmove 0
-	pause 20
+	delay 20
 	msgbox Route120_Text_1719D4, 4
 	closebutton
 	move 30, Route120_Movement_1A0843
 	waitmove 0
 	move 30, Route120_Movement_1A0662
 	waitmove 0
-	checksound
+	waitse
 	pokecry SPECIES_KECLEON, 2
-	pause 40
+	delay 40
 	waitpokecry
 	setwildbattle SPECIES_KECLEON, 30, ITEM_NONE
 	setvar 0x8004, 0
@@ -244,10 +244,10 @@ Route120_EventScript_151908:: @ 8151908
 	closebutton
 	move 31, Route120_Movement_1A0845
 	waitmove 0
-	pause 50
+	delay 50
 	setanimation 0, 1
 	doanimation 30
-	pause 15
+	delay 15
 	disappear 31
 	checkanimation 30
 	setmaptile 13, 15, 663, 0
@@ -292,7 +292,7 @@ Route120_EventScript_1519B3:: @ 81519B3
 
 Route120_EventScript_1519CA:: @ 81519CA
 	trainerbattle 0, OPPONENT_ROBERT_1, 0, Route120_Text_1BF07E, Route120_Text_1BF0A5
-	specialval RESULT, sub_8082C68
+	specialvar RESULT, sub_8082C68
 	compare_var_to_imm RESULT, 1
 	goto_if_eq Route120_EventScript_1519F1
 	msgbox Route120_Text_1BF0C3, 6
@@ -315,7 +315,7 @@ Route120_EventScript_151A1F:: @ 8151A1F
 
 Route120_EventScript_151A36:: @ 8151A36
 	trainerbattle 0, OPPONENT_BRANDON_1, 0, Route120_Text_1BF32B, Route120_Text_1BF36B
-	specialval RESULT, sub_8082C68
+	specialvar RESULT, sub_8082C68
 	compare_var_to_imm RESULT, 1
 	goto_if_eq Route120_EventScript_151A5D
 	msgbox Route120_Text_1BF38D, 6

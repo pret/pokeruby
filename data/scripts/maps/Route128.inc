@@ -15,7 +15,7 @@ Route128_MapScript2_152135:: @ 8152135
 
 Route128_EventScript_15213F:: @ 815213F
 	lockall
-	pause 20
+	delay 20
 	.ifndef SAPPHIRE
 	special sub_807E25C
 	waitstate
@@ -45,13 +45,13 @@ Route128_EventScript_15213F:: @ 815213F
 	waitmove 0
 	msgbox Route128_Text_17210B, 4
 	closebutton
-	pause 40
+	delay 40
 	move 5, Route128_Movement_152296
 	move 4, Route128_Movement_152283
 	waitmove 0
 	disappear 5
 	disappear 4
-	pause 100
+	delay 100
 	setanimation 0, 1
 	doanimation 30
 	checkanimation 30
@@ -76,10 +76,10 @@ Route128_EventScript_15213F:: @ 815213F
 	closebutton
 	move 3, Route128_Movement_1A0845
 	waitmove 0
-	pause 50
+	delay 50
 	setanimation 0, 1
 	doanimation 30
-	pause 15
+	delay 15
 	disappear 3
 	checkanimation 30
 	setvar 0x407b, 2
@@ -182,7 +182,7 @@ Route128_Movement_1522A1:: @ 81522A1
 
 Route128_EventScript_1522A4:: @ 81522A4
 	trainerbattle 0, OPPONENT_ISAIAH_1, 0, Route128_Text_1C1C67, Route128_Text_1C1C95
-	specialval RESULT, sub_8082C68
+	specialvar RESULT, sub_8082C68
 	compare_var_to_imm RESULT, 1
 	goto_if_eq Route128_EventScript_1522CB
 	msgbox Route128_Text_1C1CC3, 6
@@ -195,7 +195,7 @@ Route128_EventScript_1522CB:: @ 81522CB
 
 Route128_EventScript_1522E2:: @ 81522E2
 	trainerbattle 0, OPPONENT_KATELYN_1, 0, Route128_Text_1C1DB0, Route128_Text_1C1E25
-	specialval RESULT, sub_8082C68
+	specialvar RESULT, sub_8082C68
 	compare_var_to_imm RESULT, 1
 	goto_if_eq Route128_EventScript_152309
 	msgbox Route128_Text_1C1E4A, 6

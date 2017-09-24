@@ -14,7 +14,7 @@ BattleTower_Elevator_EventScript_1607E4:: @ 81607E4
 	waitmove 0
 	special sub_810EBEC
 	waitstate
-	pause 64
+	delay 64
 	move 1, BattleTower_Elevator_Movement_16083D
 	move 255, BattleTower_Elevator_Movement_160841
 	waitmove 0

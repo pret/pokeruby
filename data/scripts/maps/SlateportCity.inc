@@ -66,14 +66,14 @@ SlateportCity_EventScript_14BAE0:: @ 814BAE0
 	faceplayer
 	bufferfirstpoke 0
 	msgbox SlateportCity_Text_164682, 4
-	specialval RESULT, LeadMonHasEffortRibbon
+	specialvar RESULT, LeadMonHasEffortRibbon
 	compare_var_to_imm RESULT, 1
 	call_if 1, SlateportCity_EventScript_14BB35
-	specialval RESULT, ScrSpecial_AreLeadMonEVsMaxedOut
+	specialvar RESULT, ScrSpecial_AreLeadMonEVsMaxedOut
 	compare_var_to_imm RESULT, 0
 	call_if 1, SlateportCity_EventScript_14BB2B
 	msgbox SlateportCity_Text_164691, 4
-	fanfare 370
+	playfanfare 370
 	message SlateportCity_Text_1646DD
 	waitfanfare
 	waittext
@@ -493,10 +493,10 @@ SlateportCity_EventScript_14BEBC:: @ 814BEBC
 	closebutton
 	move 10, SlateportCity_Movement_1A0843
 	waitmove 0
-	pause 10
+	delay 10
 	move 9, SlateportCity_Movement_1A0845
 	waitmove 0
-	pause 25
+	delay 25
 	move 11, SlateportCity_Movement_14C000
 	move 255, SlateportCity_Movement_14C00E
 	move 10, SlateportCity_Movement_14BFDD
@@ -508,7 +508,7 @@ SlateportCity_EventScript_14BEBC:: @ 814BEBC
 	move 11, SlateportCity_Movement_1A0841
 	waitmove 0
 	msgbox SlateportCity_Text_1655E7, 4
-	playmusic BGM_EVIL_TEAM, 0
+	playbgm BGM_EVIL_TEAM, 0
 	msgbox SlateportCity_Text_1656BC, 4
 	move 6, SlateportCity_Movement_1A083F
 	move 1, SlateportCity_Movement_1A083F
@@ -519,7 +519,7 @@ SlateportCity_EventScript_14BEBC:: @ 814BEBC
 	move 11, SlateportCity_Movement_1A0845
 	waitmove 0
 	msgbox SlateportCity_Text_16578F, 4
-	playsfx 21
+	playse 21
 	move 11, SlateportCity_Movement_1A0833
 	waitmove 0
 	move 11, SlateportCity_Movement_1A0835

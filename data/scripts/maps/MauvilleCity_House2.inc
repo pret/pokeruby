@@ -14,7 +14,7 @@ MauvilleCity_House2_EventScript_1572C0:: @ 81572C0
 	end
 
 MauvilleCity_House2_EventScript_1572E5:: @ 81572E5
-	playsfx 21
+	playse 21
 	move LAST_TALKED, MauvilleCity_House2_Movement_1A0833
 	waitmove 0
 	move LAST_TALKED, MauvilleCity_House2_Movement_1A0835

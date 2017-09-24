@@ -26,23 +26,23 @@ LinkContestRoom1_EventScript_15F5A5:: @ 815F5A5
 	return
 
 LinkContestRoom1_EventScript_15F5E0:: @ 815F5E0
-	playmusicbattle 393
+	savebgm 393
 	return
 
 LinkContestRoom1_EventScript_15F5E4:: @ 815F5E4
-	playmusicbattle 394
+	savebgm 394
 	return
 
 LinkContestRoom1_EventScript_15F5E8:: @ 815F5E8
-	playmusicbattle 395
+	savebgm 395
 	return
 
 LinkContestRoom1_EventScript_15F5EC:: @ 815F5EC
-	playmusicbattle 396
+	savebgm 396
 	return
 
 LinkContestRoom1_EventScript_15F5F0:: @ 815F5F0
-	playmusicbattle 440
+	savebgm 440
 	return
 
 LinkContestRoom1_MapScript1_15F5F4:: @ 815F5F4

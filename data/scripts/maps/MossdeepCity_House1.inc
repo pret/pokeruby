@@ -6,7 +6,7 @@ MossdeepCity_House1_EventScript_15A82F:: @ 815A82F
 	faceplayer
 	bufferfirstpoke 0
 	msgbox MossdeepCity_House1_Text_18D465, 4
-	specialval RESULT, GetPokeblockNameByMonNature
+	specialvar RESULT, GetPokeblockNameByMonNature
 	compare_var_to_imm RESULT, 0
 	goto_if_eq MossdeepCity_House1_EventScript_15A855
 	msgbox MossdeepCity_House1_Text_18D475, 4

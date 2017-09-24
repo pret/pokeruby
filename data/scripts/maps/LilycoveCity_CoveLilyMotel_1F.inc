@@ -41,7 +41,7 @@ LilycoveCity_CoveLilyMotel_1F_EventScript_158326:: @ 8158326
 
 LilycoveCity_CoveLilyMotel_1F_EventScript_15834D:: @ 815834D
 	lockall
-	playsfx 21
+	playse 21
 	move 1, LilycoveCity_CoveLilyMotel_1F_Movement_1A0833
 	waitmove 0
 	move 1, LilycoveCity_CoveLilyMotel_1F_Movement_1A0835

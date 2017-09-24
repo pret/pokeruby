@@ -8,7 +8,7 @@ Route119_House_EventScript_163DDE:: @ 8163DDE
 Route119_House_EventScript_163DE7:: @ 8163DE7
 	lock
 	faceplayer
-	checksound
+	waitse
 	pokecry SPECIES_WINGULL, 0
 	msgbox Route119_House_Text_19F406, 4
 	waitpokecry

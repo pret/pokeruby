@@ -8,7 +8,7 @@ LilycoveCity_DepartmentStore_1F_EventScript_159D55:: @ 8159D55
 LilycoveCity_DepartmentStore_1F_EventScript_159D5E:: @ 8159D5E
 	lock
 	faceplayer
-	checkdailyflags
+	dodailyevents
 	compare_var_to_imm 0x4045, 0
 	goto_if 5, LilycoveCity_DepartmentStore_1F_EventScript_159EB1
 	checkflag 2250
@@ -25,12 +25,12 @@ LilycoveCity_DepartmentStore_1F_EventScript_159D5E:: @ 8159D5E
 	msgbox LilycoveCity_DepartmentStore_1F_Text_1C4CF6, 4
 	move 2, LilycoveCity_DepartmentStore_1F_Movement_1A0843
 	waitmove 0
-	playsfx 4
+	playse 4
 	special DoLotteryCornerComputerEffect
 	special PickLotteryCornerTicket
-	pause 220
+	delay 220
 	special EndLotteryCornerComputerEffect
-	pause 10
+	delay 10
 	move 2, LilycoveCity_DepartmentStore_1F_Movement_1A0839
 	waitmove 0
 	compare_var_to_imm 0x8004, 0
@@ -133,7 +133,7 @@ LilycoveCity_DepartmentStore_1F_EventScript_159EE9:: @ 8159EE9
 LilycoveCity_DepartmentStore_1F_EventScript_159EF2:: @ 8159EF2
 	lock
 	faceplayer
-	checksound
+	waitse
 	pokecry SPECIES_AZUMARILL, 0
 	msgbox LilycoveCity_DepartmentStore_1F_Text_18C0C3, 4
 	waitpokecry

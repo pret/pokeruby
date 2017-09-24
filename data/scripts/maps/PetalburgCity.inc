@@ -16,7 +16,7 @@ PetalburgCity_EventScript_14B731:: @ 814B731
 	return
 
 PetalburgCity_EventScript_14B739:: @ 814B739
-	playmusicbattle 420
+	savebgm 420
 	return
 
 PetalburgCity_MapScript2_14B73D:: @ 814B73D
@@ -41,7 +41,7 @@ PetalburgCity_EventScript_14B747:: @ 814B747
 	closebutton
 	clearflag 0x4000
 	setvar 0x4057, 3
-	fadedefault
+	fadedefaultbgm
 	clearflag 0x4001
 	special LoadPlayerParty
 	setvar 0x4085, 1
@@ -181,8 +181,8 @@ PetalburgCity_EventScript_14B85A:: @ 814B85A
 PetalburgCity_EventScript_14B866:: @ 814B866
 	move 9, PetalburgCity_Movement_1A0839
 	waitmove 0
-	playmusic 420, 0
-	playsfx 21
+	playbgm 420, 0
+	playse 21
 	move 9, PetalburgCity_Movement_1A0833
 	waitmove 0
 	move 9, PetalburgCity_Movement_1A0835
@@ -213,7 +213,7 @@ PetalburgCity_EventScript_14B866:: @ 814B866
 	closebutton
 	move 9, PetalburgCity_Movement_14B9F4
 	waitmove 0
-	fadedefault
+	fadedefaultbgm
 	releaseall
 	end
 

@@ -94,7 +94,7 @@ SafariZone_Southeast_EventScript_16011F:: @ 816011F
 SafariZone_Southeast_EventScript_160139:: @ 8160139
 	setvar 0x40a4, 1
 	special ExitSafariMode
-	warpwalk Route121_SafariZoneEntrance, 255, 2, 5
+	warpdoor Route121_SafariZoneEntrance, 255, 2, 5
 	waitstate
 	end
 

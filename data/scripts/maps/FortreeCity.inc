@@ -75,9 +75,9 @@ FortreeCity_EventScript_14C9E4:: @ 814C9E4
 	closebutton
 	move LAST_TALKED, FortreeCity_Movement_1A0662
 	waitmove 0
-	checksound
+	waitse
 	pokecry SPECIES_KECLEON, 2
-	pause 40
+	delay 40
 	waitpokecry
 	move LAST_TALKED, FortreeCity_Movement_14CA13
 	waitmove 0

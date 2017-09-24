@@ -46,7 +46,7 @@ FallarborTown_PokemonCenter_1F_EventScript_153B59:: @ 8153B59
 	end
 
 FallarborTown_PokemonCenter_1F_EventScript_153B69:: @ 8153B69
-	playsfx 18
+	playse 18
 	disappear 4
 	clearflag 870
 	release

@@ -19,7 +19,7 @@ ShoalCave_LowTideEntranceRoom_EventScript_15E072:: @ 815E072
 ShoalCave_LowTideEntranceRoom_EventScript_15E076:: @ 815E076
 	lock
 	faceplayer
-	checkdailyflags
+	dodailyevents
 	checkflag 2143
 	call_if 1, ShoalCave_LowTideEntranceRoom_EventScript_15E176
 	checkitem ITEM_SHOAL_SALT, 4

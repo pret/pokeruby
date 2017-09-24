@@ -38,37 +38,37 @@ AbandonedShip_HiddenFloorRooms_EventScript_15ED95:: @ 815ED95
 	return
 
 AbandonedShip_HiddenFloorRooms_EventScript_15ED9B:: @ 815ED9B
-	pause 20
+	delay 20
 	setanimation 0, 10
 	setanimation 1, 10
 	setanimation 2, 0
 	doanimation 54
-	specialval RESULT, sub_810F4D4
+	specialvar RESULT, sub_810F4D4
 	compare_var_to_imm RESULT, 0
 	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_15EE8B
 	checkanimation 54
-	pause 10
+	delay 10
 	end
 
 AbandonedShip_HiddenFloorRooms_EventScript_15EDC4:: @ 815EDC4
 	end
 
 AbandonedShip_HiddenFloorRooms_EventScript_15EDC5:: @ 815EDC5
-	specialval RESULT, sub_810F488
+	specialvar RESULT, sub_810F488
 	compare_var_to_imm RESULT, 1
 	goto_if_eq AbandonedShip_HiddenFloorRooms_EventScript_15EDEA
-	pause 20
+	delay 20
 	compare_var_to_imm RESULT, 0
 	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_15EE6B
 	checkanimation 54
-	pause 10
+	delay 10
 	end
 
 AbandonedShip_HiddenFloorRooms_EventScript_15EDEA:: @ 815EDEA
 	end
 
 AbandonedShip_HiddenFloorRooms_EventScript_15EDEB:: @ 815EDEB
-	pause 20
+	delay 20
 	setanimation 0, 8
 	setanimation 1, 5
 	setanimation 2, 0
@@ -77,15 +77,15 @@ AbandonedShip_HiddenFloorRooms_EventScript_15EDEB:: @ 815EDEB
 	setanimation 1, 3
 	setanimation 2, 0
 	doanimation 54
-	specialval RESULT, sub_810F4FC
+	specialvar RESULT, sub_810F4FC
 	compare_var_to_imm RESULT, 0
 	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_15EE9B
 	checkanimation 54
-	pause 10
+	delay 10
 	end
 
 AbandonedShip_HiddenFloorRooms_EventScript_15EE23:: @ 815EE23
-	pause 20
+	delay 20
 	setanimation 0, 16
 	setanimation 1, 3
 	setanimation 2, 0
@@ -98,11 +98,11 @@ AbandonedShip_HiddenFloorRooms_EventScript_15EE23:: @ 815EE23
 	setanimation 1, 6
 	setanimation 2, 0
 	doanimation 54
-	specialval RESULT, sub_810F4B0
+	specialvar RESULT, sub_810F4B0
 	compare_var_to_imm RESULT, 0
 	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_15EE7B
 	checkanimation 54
-	pause 10
+	delay 10
 	end
 
 AbandonedShip_HiddenFloorRooms_EventScript_15EE6A:: @ 815EE6A

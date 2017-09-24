@@ -27,7 +27,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152CBE:: @ 8152CBE
 	bufferfirstpoke 0
 	message LittlerootTown_ProfessorBirchsLab_Text_173D94
 	waittext
-	fanfare 370
+	playfanfare 370
 	waitfanfare
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_173EF8, 5
 	compare_var_to_imm RESULT, 1
@@ -155,7 +155,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152E40:: @ 8152E40
 	return
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152E6D:: @ 8152E6D
-	fanfare 370
+	playfanfare 370
 	message LittlerootTown_ProfessorBirchsLab_Text_17422F
 	waitfanfare
 	waittext

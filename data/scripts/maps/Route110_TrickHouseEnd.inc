@@ -158,12 +158,12 @@ Route110_TrickHouseEnd_EventScript_161BAF:: @ 8161BAF
 	call_if 1, Route110_TrickHouseEnd_EventScript_161C8A
 	compare_var_to_imm FACING, 4
 	call_if 1, Route110_TrickHouseEnd_EventScript_161C95
-	pause 30
+	delay 30
 	msgbox Route110_TrickHouseEnd_Text_19C602, 4
 	closebutton
 	move 1, Route110_TrickHouseEnd_Movement_1A0839
 	waitmove 0
-	pause 30
+	delay 30
 	msgbox Route110_TrickHouseEnd_Text_19C691, 4
 	setvar 0x40c1, 0
 	.ifdef SAPPHIRE
@@ -182,7 +182,7 @@ Route110_TrickHouseEnd_EventScript_161BAF:: @ 8161BAF
 Route110_TrickHouseEnd_EventScript_161C2E:: @ 8161C2E
 	move 1, Route110_TrickHouseEnd_Movement_161315
 	waitmove 0
-	playsfx 178
+	playse 178
 	move 1, Route110_TrickHouseEnd_Movement_16131E
 	waitmove 0
 	disappear 1
@@ -224,20 +224,20 @@ Route110_TrickHouseEnd_EventScript_161C95:: @ 8161C95
 Route110_TrickHouseEnd_EventScript_161CA0:: @ 8161CA0
 	lockall
 	spriteface 1, 3
-	playsfx 21
+	playse 21
 	move 1, Route110_TrickHouseEnd_Movement_1A0833
 	waitmove 0
-	pause 20
+	delay 20
 	move 1, Route110_TrickHouseEnd_Movement_161CEA
 	waitmove 0
-	playsfx 178
+	playse 178
 	move 255, Route110_TrickHouseEnd_Movement_1A0845
 	waitmove 0
 	msgbox Route110_TrickHouseEnd_Text_19CA8B, 4
 	closebutton
 	move 255, Route110_TrickHouseEnd_Movement_161CE8
 	waitmove 0
-	pause 4
+	delay 4
 	spriteface 1, 4
 	releaseall
 	end

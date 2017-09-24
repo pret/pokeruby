@@ -226,16 +226,16 @@
 	.2byte \var2
 	.endm
 
-	@ Calls the ASM routine stored at code. Script execution is blocked until the ASM returns (bx lr, mov pc, lr, etc.). Remember to add 1 to the offset when calling THUMB code.
-	.macro callasm code
+	@ Calls the native C function stored at `func`.
+	.macro callnative func
 	.byte 0x23
-	.4byte \code
+	.4byte \func
 	.endm
 
-	@ Replaces a pointer in the script engine RAM with asm_pointer.
-	.macro jumpasm asm_pointer
+	@ Replaces the script with the function stored at `func`. Execution returns to the bytecode script when func returns TRUE.
+	.macro gotonative func
 	.byte 0x24
-	.4byte \asm_pointer
+	.4byte \func
 	.endm
 
 	@ Calls a special function; that is, a piece of ASM code designed for use by scripts and listed in a table of pointers.
@@ -245,7 +245,7 @@
 	.endm
 
 	@ Calls a special function. That function's output (if any) will be written to the variable you specify.
-	.macro specialval output, function
+	.macro specialvar output, function
 	.byte 0x26
 	.2byte \output
 	.2byte SPECIAL_\function
@@ -257,7 +257,7 @@
 	.endm
 
 	@ Blocks script execution for time (frames? milliseconds?).
-	.macro pause time
+	.macro delay time
 	.byte 0x28
 	.2byte \time
 	.endm
@@ -281,33 +281,35 @@
 	.endm
 
 	@ In FireRed, this command is a nop.
-	.macro compareflags
+	.macro initclock hour minute
 	.byte 0x2c
+	.byte \hour
+	.byte \minute
 	.endm
 
 	@ In FireRed, this command is a nop.
-	.macro checkdailyflags
+	.macro dodailyevents
 	.byte 0x2d
 	.endm
 
 	@ Resets the values of variables 0x8000, 0x8001, and 0x8002. Related to RTC in RSE?
-	.macro resetvars
+	.macro gettime
 	.byte 0x2e
 	.endm
 
 	@ Plays the specified (sound_number) sound. Only one sound may play at a time, with newer ones interrupting older ones.
-	.macro playsfx sound_number
+	.macro playse sound_number
 	.byte 0x2f
 	.2byte \sound_number
 	.endm
 
 	@ Blocks script execution until the currently-playing sound (triggered by sound) finishes playing.
-	.macro checksound
+	.macro waitse
 	.byte 0x30
 	.endm
 
 	@ Plays the specified (fanfare_number) fanfare.
-	.macro fanfare fanfare_number
+	.macro playfanfare fanfare_number
 	.byte 0x31
 	.2byte \fanfare_number
 	.endm
@@ -318,37 +320,37 @@
 	.endm
 
 	@ Plays the specified (song_number) song. The byte is apparently supposed to be 0x00.
-	.macro playmusic song_number, unknown
+	.macro playbgm song_number, unknown
 	.byte 0x33
 	.2byte \song_number
 	.byte \unknown
 	.endm
 
 	@ Plays the specified (song_number) song.
-	.macro playmusicbattle song_number
+	.macro savebgm song_number
 	.byte 0x34
 	.2byte \song_number
 	.endm
 
 	@ Crossfades the currently-playing song into the map's default song.
-	.macro fadedefault
+	.macro fadedefaultbgm
 	.byte 0x35
 	.endm
 
 	@ Crossfades the currently-playng song into the specified (song_number) song.
-	.macro fademusic song_number
+	.macro fadenewbgm song_number
 	.byte 0x36
 	.2byte \song_number
 	.endm
 
 	@ Fades out the currently-playing song.
-	.macro fadeout speed
+	.macro fadeoutbgm speed
 	.byte 0x37
 	.byte \speed
 	.endm
 
 	@ Fades the currently-playing song back in.
-	.macro fadein speed
+	.macro fadeinbgm speed
 	.byte 0x38
 	.byte \speed
 	.endm
@@ -363,7 +365,7 @@
 	.endm
 
 	@ Clone of warp that does not play a sound effect.
-	.macro warpmuted map, warp, X, Y
+	.macro warpsilent map, warp, X, Y
 	.byte 0x3a
 	map \map
 	.byte \warp
@@ -372,7 +374,7 @@
 	.endm
 
 	@ Clone of warp that uses "a walking effect".
-	.macro warpwalk map, warp, X, Y
+	.macro warpdoor map, warp, X, Y
 	.byte 0x3b
 	map \map
 	.byte \warp
@@ -396,7 +398,7 @@
 	.endm
 
 	@ Clone of warp. Used by an (unused?) Safari Zone script to return the player to the gatehouse and end the Safari Game.
-	.macro warp3 map, warp, X, Y
+	.macro setwarp map, warp, X, Y
 	.byte 0x3e
 	map \map
 	.byte \warp
@@ -405,7 +407,7 @@
 	.endm
 
 	@ Sets a default warp place. If a warp tries to send the player to Warp 127 on Map 127.127, they will instead be sent here. Useful when a map has warps that need to go to script-controlled locations (i.e. elevators).
-	.macro warpplace map, warp, X, Y
+	.macro setdynamicwarp map, warp, X, Y
 	.byte 0x3f
 	map \map
 	.byte \warp
@@ -414,7 +416,7 @@
 	.endm
 
 	@ Clone of warp3, except that this writes data to different offsets...
-	.macro warp4 map, warp, X, Y
+	.macro setdivewarp map, warp, X, Y
 	.byte 0x40
 	map \map
 	.byte \warp
@@ -423,7 +425,7 @@
 	.endm
 
 	@ Clone of warp3, except that this writes data to different offsets...
-	.macro warp5 map, warp, X, Y
+	.macro setholewarp map, warp, X, Y
 	.byte 0x41
 	map \map
 	.byte \warp
@@ -504,7 +506,7 @@
 	.endm
 
 	@ In FireRed, this command is a nop. (The argument is read, but not used for anything.)
-	.macro testdecor a
+	.macro hasdecor a
 	.byte 0x4d
 	.2byte \a
 	.endm

@@ -13,7 +13,7 @@ PetalburgWoods_EventScript_15CCA8:: @ 815CCA8
 	waitmove 0
 	msgbox PetalburgWoods_Text_194D92, 4
 	closebutton
-	playmusic BGM_EVIL_TEAM, 0
+	playbgm BGM_EVIL_TEAM, 0
 	move 3, PetalburgWoods_Movement_15CEC3
 	waitmove 0
 	msgbox PetalburgWoods_Text_194DED, 4
@@ -48,7 +48,7 @@ PetalburgWoods_EventScript_15CD42:: @ 815CD42
 	waitmove 0
 	msgbox PetalburgWoods_Text_194D92, 4
 	closebutton
-	playmusic BGM_EVIL_TEAM, 0
+	playbgm BGM_EVIL_TEAM, 0
 	move 3, PetalburgWoods_Movement_15CEC3
 	waitmove 0
 	msgbox PetalburgWoods_Text_194DED, 4
@@ -271,7 +271,7 @@ PetalburgWoods_EventScript_15CF27:: @ 815CF27
 
 PetalburgWoods_EventScript_15CF3E:: @ 815CF3E
 	trainerbattle 0, OPPONENT_JAMES_1, 0, PetalburgWoods_Text_19526A, PetalburgWoods_Text_1952AE
-	specialval RESULT, sub_8082C68
+	specialvar RESULT, sub_8082C68
 	compare_var_to_imm RESULT, 1
 	goto_if_eq PetalburgWoods_EventScript_15CF65
 	msgbox PetalburgWoods_Text_1952CC, 6

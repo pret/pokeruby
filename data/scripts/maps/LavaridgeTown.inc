@@ -58,11 +58,11 @@ LavaridgeTown_EventScript_14E4ED:: @ 814E4ED
 	end
 
 LavaridgeTown_EventScript_14E56B:: @ 814E56B
-	playmusic 415, 1
+	playbgm 415, 1
 	return
 
 LavaridgeTown_EventScript_14E570:: @ 814E570
-	playmusic 421, 1
+	playbgm 421, 1
 	return
 
 LavaridgeTown_EventScript_14E575:: @ 814E575
@@ -105,15 +105,15 @@ LavaridgeTown_EventScript_14E5F5:: @ 814E5F5
 	call_if 1, LavaridgeTown_EventScript_14E64E
 	disappear 8
 	reappear 7
-	pause 30
+	delay 30
 	compare_var_to_imm 0x8008, 1
 	call_if 1, LavaridgeTown_EventScript_14E69A
 	compare_var_to_imm 0x8008, 0
 	call_if 1, LavaridgeTown_EventScript_14E6A5
 	disappear 7
 	setvar 0x4053, 2
-	playmusicbattle 0
-	fadedefault
+	savebgm 0
+	fadedefaultbgm
 	compare_var_to_imm 0x8008, 0
 	goto_if_eq LavaridgeTown_EventScript_14E644
 	releaseall
@@ -236,7 +236,7 @@ LavaridgeTown_Movement_14E70E:: @ 814E70E
 	step_end
 
 LavaridgeTown_EventScript_14E710:: @ 814E710
-	specialval RESULT, player_get_direction_lower_nybble
+	specialvar RESULT, player_get_direction_lower_nybble
 	compare_var_to_imm RESULT, 1
 	goto_if_eq LavaridgeTown_EventScript_14E721
 	end
@@ -282,7 +282,7 @@ LavaridgeTown_EventScript_14E75A:: @ 814E75A
 	goto_if_eq LavaridgeTown_EventScript_14E7A8
 	msgbox LavaridgeTown_Text_16C2B6, 4
 	setflag 266
-	fanfare 370
+	playfanfare 370
 	message LavaridgeTown_Text_16C2EA
 	waitfanfare
 	waittext

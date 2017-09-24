@@ -48,35 +48,35 @@ SootopolisCity_Gym_1F_MapScript2_15AF86:: @ 815AF86
 
 SootopolisCity_Gym_1F_EventScript_15AFA8:: @ 815AFA8
 	addvar 0x4022, 1
-	pause 40
-	playsfx 40
+	delay 40
+	playse 40
 	call SootopolisCity_Gym_1F_EventScript_15AF2E
 	special DrawWholeMapView
 	end
 
 SootopolisCity_Gym_1F_EventScript_15AFBC:: @ 815AFBC
 	addvar 0x4022, 1
-	pause 40
-	playsfx 40
+	delay 40
+	playse 40
 	call SootopolisCity_Gym_1F_EventScript_15AF2E
 	special DrawWholeMapView
 	end
 
 SootopolisCity_Gym_1F_EventScript_15AFD0:: @ 815AFD0
 	addvar 0x4022, 1
-	pause 40
-	playsfx 40
+	delay 40
+	playse 40
 	call SootopolisCity_Gym_1F_EventScript_15AF2E
 	special DrawWholeMapView
 	end
 
 SootopolisCity_Gym_1F_EventScript_15AFE4:: @ 815AFE4
 	lockall
-	pause 20
+	delay 20
 	move 255, SootopolisCity_Gym_1F_Movement_15AFFD
 	waitmove 0
-	playsfx 43
-	pause 60
+	playse 43
+	delay 60
 	warphole SootopolisCity_Gym_B1F
 	waitstate
 	end

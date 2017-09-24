@@ -34,7 +34,7 @@ MossdeepCity_House4_EventScript_15AB6D:: @ 815AB6D
 MossdeepCity_House4_EventScript_15AB77:: @ 815AB77
 	lock
 	faceplayer
-	checksound
+	waitse
 	pokecry SPECIES_SKITTY, 0
 	msgbox MossdeepCity_House4_Text_18E1E1, 4
 	waitpokecry

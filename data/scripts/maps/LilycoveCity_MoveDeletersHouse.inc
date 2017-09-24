@@ -40,7 +40,7 @@ LilycoveCity_MoveDeletersHouse_EventScript_159ADE:: @ 8159ADE
 
 LilycoveCity_MoveDeletersHouse_EventScript_159B53:: @ 8159B53
 	special sub_80FA0DC
-	fanfare 378
+	playfanfare 378
 	waitfanfare
 	msgbox LilycoveCity_MoveDeletersHouse_Text_18B71E, 4
 	releaseall

@@ -4,7 +4,7 @@ PacifidlogTown_House2_MapScripts:: @ 8154167
 PacifidlogTown_House2_EventScript_154168:: @ 8154168
 	lock
 	faceplayer
-	checkdailyflags
+	dodailyevents
 	call PacifidlogTown_House2_EventScript_1541B4
 	checkflag 299
 	goto_if_eq PacifidlogTown_House2_EventScript_154254
@@ -13,10 +13,10 @@ PacifidlogTown_House2_EventScript_154168:: @ 8154168
 	checkflag 300
 	call_if 0, PacifidlogTown_House2_EventScript_1541D7
 	setflag 300
-	specialval RESULT, GetLeadMonFriendshipScore
+	specialvar RESULT, GetLeadMonFriendshipScore
 	compare_var_to_imm RESULT, 4
 	goto_if 4, PacifidlogTown_House2_EventScript_1541EC
-	specialval RESULT, GetLeadMonFriendshipScore
+	specialvar RESULT, GetLeadMonFriendshipScore
 	compare_var_to_imm RESULT, 2
 	goto_if 4, PacifidlogTown_House2_EventScript_15421B
 	goto PacifidlogTown_House2_EventScript_154225
@@ -25,7 +25,7 @@ PacifidlogTown_House2_EventScript_154168:: @ 8154168
 PacifidlogTown_House2_EventScript_1541B4:: @ 81541B4
 	checkflag 299
 	goto_if 0, PacifidlogTown_House2_EventScript_1A14DC
-	specialval RESULT, sub_810F908
+	specialvar RESULT, sub_810F908
 	compare_var_to_imm RESULT, 0
 	call_if 1, PacifidlogTown_House2_EventScript_1541E8
 	return
@@ -71,7 +71,7 @@ PacifidlogTown_House2_EventScript_154225:: @ 8154225
 	end
 
 PacifidlogTown_House2_EventScript_154254:: @ 8154254
-	specialval RESULT, sub_810F908
+	specialvar RESULT, sub_810F908
 	buffernum 0, RESULT
 	msgbox PacifidlogTown_House2_Text_1792F2, 4
 	release
@@ -80,7 +80,7 @@ PacifidlogTown_House2_EventScript_154254:: @ 8154254
 PacifidlogTown_House2_EventScript_154267:: @ 8154267
 	lock
 	faceplayer
-	checksound
+	waitse
 	pokecry SPECIES_AZURILL, 0
 	msgbox PacifidlogTown_House2_Text_17938B, 4
 	waitpokecry
@@ -91,7 +91,7 @@ PacifidlogTown_House2_EventScript_154267:: @ 8154267
 PacifidlogTown_House2_EventScript_154282:: @ 8154282
 	lock
 	faceplayer
-	checksound
+	waitse
 	pokecry SPECIES_AZURILL, 2
 	msgbox PacifidlogTown_House2_Text_1793CC, 4
 	waitpokecry

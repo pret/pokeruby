@@ -160,7 +160,7 @@ Route110_TrickHousePuzzle5_EventScript_162933:: @ 8162933
 Route110_TrickHousePuzzle5_EventScript_16293F:: @ 816293F
 	setvar 0x4001, 1
 	setvar 0x4008, 1
-	playsfx 21
+	playse 21
 	move 1, Route110_TrickHousePuzzle5_Movement_1A0833
 	waitmove 0
 	move 1, Route110_TrickHousePuzzle5_Movement_1A0835
@@ -182,7 +182,7 @@ Route110_TrickHousePuzzle5_EventScript_16293F:: @ 816293F
 Route110_TrickHousePuzzle5_EventScript_1629B3:: @ 81629B3
 	setvar 0x4002, 1
 	setvar 0x4008, 2
-	playsfx 21
+	playse 21
 	move 2, Route110_TrickHousePuzzle5_Movement_1A0833
 	waitmove 0
 	move 2, Route110_TrickHousePuzzle5_Movement_1A0835
@@ -204,7 +204,7 @@ Route110_TrickHousePuzzle5_EventScript_1629B3:: @ 81629B3
 Route110_TrickHousePuzzle5_EventScript_162A27:: @ 8162A27
 	setvar 0x4003, 1
 	setvar 0x4008, 3
-	playsfx 21
+	playse 21
 	move 3, Route110_TrickHousePuzzle5_Movement_1A0833
 	waitmove 0
 	move 3, Route110_TrickHousePuzzle5_Movement_1A0835
@@ -226,7 +226,7 @@ Route110_TrickHousePuzzle5_EventScript_162A27:: @ 8162A27
 Route110_TrickHousePuzzle5_EventScript_162A9B:: @ 8162A9B
 	setvar 0x4004, 1
 	setvar 0x4008, 4
-	playsfx 21
+	playse 21
 	move 4, Route110_TrickHousePuzzle5_Movement_1A0833
 	waitmove 0
 	move 4, Route110_TrickHousePuzzle5_Movement_1A0835
@@ -248,7 +248,7 @@ Route110_TrickHousePuzzle5_EventScript_162A9B:: @ 8162A9B
 Route110_TrickHousePuzzle5_EventScript_162B0F:: @ 8162B0F
 	setvar 0x4005, 1
 	setvar 0x4008, 5
-	playsfx 21
+	playse 21
 	move 5, Route110_TrickHousePuzzle5_Movement_1A0833
 	waitmove 0
 	move 5, Route110_TrickHousePuzzle5_Movement_1A0835
@@ -388,8 +388,8 @@ Route110_TrickHousePuzzle5_EventScript_162D6D:: @ 8162D6D
 	end
 
 Route110_TrickHousePuzzle5_EventScript_162D90:: @ 8162D90
-	checksound
-	playsfx 32
+	waitse
+	playse 32
 	msgbox Route110_TrickHousePuzzle5_Text_19D5CF, 4
 	move 1, Route110_TrickHousePuzzle5_Movement_16309F
 	move 2, Route110_TrickHousePuzzle5_Movement_16309F
@@ -407,8 +407,8 @@ Route110_TrickHousePuzzle5_EventScript_162D90:: @ 8162D90
 	end
 
 Route110_TrickHousePuzzle5_EventScript_162DDF:: @ 8162DDF
-	checksound
-	playsfx 31
+	waitse
+	playse 31
 	goto Route110_TrickHousePuzzle5_EventScript_162DE9
 	end
 

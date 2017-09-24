@@ -10,7 +10,7 @@ MeteorFalls_1F_1R_EventScript_15C49C:: @ 815C49C
 	lockall
 	move 255, MeteorFalls_1F_1R_Movement_1A0845
 	waitmove 0
-	pause 30
+	delay 30
 	move 5, MeteorFalls_1F_1R_Movement_1A0845
 	waitmove 0
 	msgbox MeteorFalls_1F_1R_Text_193237, 4
@@ -18,7 +18,7 @@ MeteorFalls_1F_1R_EventScript_15C49C:: @ 815C49C
 	move 5, MeteorFalls_1F_1R_Movement_1A0841
 	move 6, MeteorFalls_1F_1R_Movement_1A0841
 	waitmove 0
-	playsfx 21
+	playse 21
 	move 5, MeteorFalls_1F_1R_Movement_1A0833
 	waitmove 0
 	move 5, MeteorFalls_1F_1R_Movement_1A0835

@@ -98,7 +98,7 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_1586D8:: @ 81586D8
 	lockall
 	checkflag 236
 	goto_if_eq LilycoveCity_LilycoveMuseum_2F_EventScript_158793
-	specialval 0x8004, sub_80C4D50
+	specialvar 0x8004, sub_80C4D50
 	switch 0x8004
 	case 1, LilycoveCity_LilycoveMuseum_2F_EventScript_15872C
 	case 2, LilycoveCity_LilycoveMuseum_2F_EventScript_15872C

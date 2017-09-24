@@ -39,7 +39,7 @@ S_OpenRegiceChamber:: @ 815EF19
 	setmaptile 8, 20, 563, 0
 	setmaptile 9, 20, 564, 1
 	special DrawWholeMapView
-	playsfx SE_BAN
+	playse SE_BAN
 	setflag 2129
 	end
 
@@ -77,9 +77,9 @@ IslandCave_EventScript_15EF95:: @ 815EF95
 IslandCave_EventScript_15EF9D:: @ 815EF9D
 	lock
 	faceplayer
-	checksound
+	waitse
 	pokecry SPECIES_REGICE, 2
-	pause 40
+	delay 40
 	waitpokecry
 	setwildbattle SPECIES_REGICE, 40, ITEM_NONE
 	setflag 936

@@ -89,7 +89,7 @@ Route104_PrettyPetalFlowerShop_EventScript_15BEB9:: @ 815BEB9
 Route104_PrettyPetalFlowerShop_EventScript_15BEDA:: @ 815BEDA
 	lock
 	faceplayer
-	checkdailyflags
+	dodailyevents
 	checkflag 2256
 	goto_if_eq Route104_PrettyPetalFlowerShop_EventScript_15BF1A
 	msgbox Route104_PrettyPetalFlowerShop_Text_1C62DA, 4

@@ -22,17 +22,17 @@ VerdanturfTown_ContestLobby_EventScript_153DA1:: @ 8153DA1
 	lockall
 	move 1, VerdanturfTown_ContestLobby_Movement_153E25
 	waitmove 0
-	playsfx 71
+	playse 71
 	setmaptile 4, 2, 545, 1
 	setmaptile 4, 3, 609, 1
 	special DrawWholeMapView
 	move 1, VerdanturfTown_ContestLobby_Movement_153E28
 	waitmove 0
-	playsfx 71
+	playse 71
 	setmaptile 4, 2, 721, 1
 	setmaptile 4, 3, 729, 1
 	special DrawWholeMapView
-	pause 20
+	delay 20
 	move 1, VerdanturfTown_ContestLobby_Movement_153E35
 	waitmove 0
 	move 255, VerdanturfTown_ContestLobby_Movement_153E23

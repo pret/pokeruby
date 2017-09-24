@@ -8,29 +8,29 @@ SealedChamber_InnerRoom_EventScript_15F1E8:: @ 815F1E8
 	hidebox 0, 0, 29, 19
 	checkflag 228
 	goto_if_eq SealedChamber_InnerRoom_EventScript_15F247
-	specialval RESULT, CheckRelicanthWailord
+	specialvar RESULT, CheckRelicanthWailord
 	compare_var_to_imm RESULT, 0
 	goto_if_eq SealedChamber_InnerRoom_EventScript_15F247
-	fadeout 0
-	playsfx 49
+	fadeoutbgm 0
+	playse 49
 	special DoSealedChamberShakingEffect1
 	waitstate
-	pause 40
+	delay 40
 	special DoSealedChamberShakingEffect2
 	waitstate
-	playsfx 8
-	pause 40
+	playse 8
+	delay 40
 	special DoSealedChamberShakingEffect2
 	waitstate
-	playsfx 8
-	pause 40
+	playse 8
+	delay 40
 	special DoSealedChamberShakingEffect2
 	waitstate
-	playsfx 8
-	pause 40
+	playse 8
+	delay 40
 	msgbox SealedChamber_InnerRoom_Text_1A138B, 4
 	closebutton
-	fadein 0
+	fadeinbgm 0
 	setflag 228
 	releaseall
 	end

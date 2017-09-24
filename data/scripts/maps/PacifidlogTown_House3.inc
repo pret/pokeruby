@@ -8,7 +8,7 @@ PacifidlogTown_House3_EventScript_15429E:: @ 815429E
 	goto_if_eq PacifidlogTown_House3_EventScript_154338
 	setvar 0x8008, 2
 	copyvar 0x8004, 0x8008
-	specialval RESULT, sub_804D89C
+	specialvar RESULT, sub_804D89C
 	copyvar 0x8009, RESULT
 	msgbox PacifidlogTown_House3_Text_17940E, 5
 	compare_var_to_imm RESULT, 0
@@ -19,7 +19,7 @@ PacifidlogTown_House3_EventScript_15429E:: @ 815429E
 	compare_var_to_imm 0x8004, 255
 	goto_if_eq PacifidlogTown_House3_EventScript_154320
 	copyvar 0x8005, 0x800a
-	specialval RESULT, sub_804DB2C
+	specialvar RESULT, sub_804DB2C
 	copyvar 0x800b, RESULT
 	compare_var_to_var RESULT, 0x8009
 	goto_if 5, PacifidlogTown_House3_EventScript_15432A

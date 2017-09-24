@@ -28,7 +28,7 @@ EverGrandeCity_HallOfFame_EventScript_15BBA8:: @ 815BBA8
 	move 1, EverGrandeCity_HallOfFame_Movement_15BC60
 	move 255, EverGrandeCity_HallOfFame_Movement_15BC60
 	waitmove 0
-	pause 20
+	delay 20
 	move 1, EverGrandeCity_HallOfFame_Movement_1A0843
 	move 255, EverGrandeCity_HallOfFame_Movement_1A083F
 	waitmove 0
@@ -37,10 +37,10 @@ EverGrandeCity_HallOfFame_EventScript_15BBA8:: @ 815BBA8
 	move 1, EverGrandeCity_HallOfFame_Movement_1A0841
 	move 255, EverGrandeCity_HallOfFame_Movement_1A0841
 	waitmove 0
-	pause 20
+	delay 20
 	doanimation 62
 	checkanimation 62
-	pause 40
+	delay 40
 	setvar 0x4001, 1
 	call EverGrandeCity_HallOfFame_EventScript_19FC13
 	checkgender

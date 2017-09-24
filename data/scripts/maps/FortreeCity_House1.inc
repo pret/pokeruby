@@ -8,7 +8,7 @@ FortreeCity_House1_EventScript_157E13:: @ 8157E13
 	goto_if_eq FortreeCity_House1_EventScript_157EAD
 	setvar 0x8008, 1
 	copyvar 0x8004, 0x8008
-	specialval RESULT, sub_804D89C
+	specialvar RESULT, sub_804D89C
 	copyvar 0x8009, RESULT
 	msgbox FortreeCity_House1_Text_18568C, 5
 	compare_var_to_imm RESULT, 0
@@ -19,7 +19,7 @@ FortreeCity_House1_EventScript_157E13:: @ 8157E13
 	compare_var_to_imm 0x8004, 255
 	goto_if_eq FortreeCity_House1_EventScript_157E95
 	copyvar 0x8005, 0x800a
-	specialval RESULT, sub_804DB2C
+	specialvar RESULT, sub_804DB2C
 	copyvar 0x800b, RESULT
 	compare_var_to_var RESULT, 0x8009
 	goto_if 5, FortreeCity_House1_EventScript_157E9F
@@ -57,7 +57,7 @@ FortreeCity_House1_EventScript_157EB7:: @ 8157EB7
 FortreeCity_House1_EventScript_157EC0:: @ 8157EC0
 	lock
 	faceplayer
-	checksound
+	waitse
 	pokecry SPECIES_ZIGZAGOON, 0
 	msgbox FortreeCity_House1_Text_185888, 4
 	waitpokecry

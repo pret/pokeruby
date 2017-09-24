@@ -12,7 +12,7 @@ FortreeCity_House5_EventScript_15823B:: @ 815823B
 FortreeCity_House5_EventScript_158244:: @ 8158244
 	lock
 	faceplayer
-	checksound
+	waitse
 	pokecry SPECIES_ZIGZAGOON, 0
 	msgbox FortreeCity_House5_Text_186A4F, 4
 	waitpokecry

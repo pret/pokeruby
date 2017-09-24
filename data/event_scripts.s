@@ -386,13 +386,13 @@ gStdScripts_End::
 
 gUnknown_0815F36C:: @ 815F36C
 	lockall
-	playsfx 2
+	playse 2
 	message UnknownString_81A3A72
 	doanimation 61
 	waitstate
 	waittext
 	waitbutton
-	playsfx 5
+	playse 5
 	goto EventScript_15F384
 	end
 
@@ -448,12 +448,12 @@ EventScript_15F436:
 gUnknown_0815F43A:: @ 815F43A
 	lockall
 	message UnknownString_81A3A72
-	playsfx 2
+	playse 2
 	doanimation 61
 	waitstate
 	waittext
 	waitbutton
-	playsfx 5
+	playse 5
 	goto EventScript_15F452
 	end
 
@@ -935,7 +935,7 @@ gUnknown_0819F818:: @ 819F818
 	faceplayer
 	move LAST_TALKED, Movement_19F8F0
 	waitmove 0
-	specialval RESULT, ScrSpecial_HasTrainerBeenFought
+	specialvar RESULT, ScrSpecial_HasTrainerBeenFought
 	compare_var_to_imm RESULT, 0
 	goto_if 5, EventScript_19F83F
 	special PlayTrainerEncounterMusic
@@ -949,7 +949,7 @@ gUnknown_0819F840:: @ 819F840
 	lock
 	faceplayer
 	call EventScript_19F8E5
-	specialval RESULT, ScrSpecial_HasTrainerBeenFought
+	specialvar RESULT, ScrSpecial_HasTrainerBeenFought
 	compare_var_to_imm RESULT, 0
 	goto_if 5, EventScript_19F877
 	special CheckForAlivePartyMons
@@ -978,7 +978,7 @@ gUnknown_0819F878:: @ 819F878
 
 gUnknown_0819F887:: @ 819F887
 	call EventScript_19F8E5
-	specialval RESULT, ScrSpecial_GetTrainerEyeRematchFlag
+	specialvar RESULT, ScrSpecial_GetTrainerEyeRematchFlag
 	compare_var_to_imm RESULT, 0
 	goto_if_eq EventScript_19F8AD
 	special PlayTrainerEncounterMusic
@@ -995,7 +995,7 @@ EventScript_19F8AD:
 	endtrainerbattle
 
 gUnknown_0819F8AE:: @ 819F8AE
-	specialval RESULT, ScrSpecial_GetTrainerEyeRematchFlag
+	specialvar RESULT, ScrSpecial_GetTrainerEyeRematchFlag
 	compare_var_to_imm RESULT, 0
 	goto_if_eq EventScript_19F8DD
 	special CheckForAlivePartyMons
@@ -1035,7 +1035,7 @@ EventScript_19F8F2:
 	waittext
 	waitbutton
 	reptrainerbattle
-	specialval RESULT, ScrSpecial_GetTrainerBattleMode
+	specialvar RESULT, ScrSpecial_GetTrainerBattleMode
 	compare_var_to_imm RESULT, 0
 	goto_if_eq EventScript_19F934
 	compare_var_to_imm RESULT, 2
@@ -1470,7 +1470,7 @@ dont_heal_party:: @ 819FDC7
 	return
 
 OldaleTown_PokemonCenter_1F_EventScript_19FDCE:: @ 819FDCE
-	specialval RESULT, IsPokerusInParty
+	specialvar RESULT, IsPokerusInParty
 	compare_var_to_imm RESULT, 1
 	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_19FDEA
 	compare_var_to_imm RESULT, 0
@@ -1556,11 +1556,11 @@ Std_ObtainItem_Fail: @ 819FECC
 	return
 
 PlayGetItemFanfare:
-	fanfare 0x172
+	playfanfare 0x172
 	return
 
 PlayGetTMHMFanfare:
-	fanfare 0x174
+	playfanfare 0x174
 	return
 
 Std_ObtainDecoration: @ 819FEDA
@@ -1578,7 +1578,7 @@ Std_ObtainDecoration_: @ 819FEE8
 	return
 
 Std_ObtainDecoration_Success: @ 819FF03
-	fanfare 0x172
+	playfanfare 0x172
 	message Message_ObtainedDecoration
 	waitfanfare
 	waittext
@@ -1593,7 +1593,7 @@ Std_ObtainDecoration_Fail: @ 819FF1B
 Std_FindItem: @ 819FF21
 	lock
 	faceplayer
-	checksound
+	waitse
 	additem 0x8000, 0x8001
 	copyvar 0x8007, RESULT
 	bufferitem 1, 0x8000
@@ -1622,7 +1622,7 @@ Std_FindItem_Fail: @ 819FF65
 
 HiddenItemScript:: @ 819FF7B
 	lockall
-	checksound
+	waitse
 	additem 0x8005, 1
 	copyvar 0x8007, RESULT
 	bufferitem 0x1, 0x8005
@@ -1675,7 +1675,7 @@ gUnknown_081A0009:: @ 81A0009
 	lockall
 	setvar 0x8004, 0
 	special DoPCTurnOnEffect
-	playsfx 4
+	playse 4
 	msgbox UnknownString_81A09EC, 4
 	goto EventScript_1A0023
 	end
@@ -1698,7 +1698,7 @@ EventScript_1A0033:
 	end
 
 EventScript_1A0070:
-	playsfx 2
+	playse 2
 	msgbox UnknownString_81A0A54, 4
 	special PlayerPC
 	waitstate
@@ -1706,7 +1706,7 @@ EventScript_1A0070:
 	end
 
 EventScript_1A0085:
-	playsfx 2
+	playse 2
 	checkflag 2123
 	call_if 0, EventScript_1A00AC
 	checkflag 2123
@@ -1727,7 +1727,7 @@ EventScript_1A00B5:
 
 EventScript_1A00BE:
 	setvar 0x8004, 0
-	playsfx 3
+	playse 3
 	special DoPCTurnOffEffect
 	releaseall
 	end
@@ -1735,7 +1735,7 @@ EventScript_1A00BE:
 EventScript_1A00CB:
 	checkflag 2052
 	goto_if 0, EventScript_1A00BE
-	playsfx 2
+	playse 2
 	special AccessHallOfFamePC
 	waitstate
 	goto EventScript_1A0033
@@ -1797,7 +1797,7 @@ RustboroCity_Gym_EventScript_1A00FB:: @ 81A00FB
 
 DewfordTown_EventScript_1A0102:: @ 81A0102
 DewfordTown_Hall_EventScript_1A0102:: @ 81A0102
-	checkdailyflags
+	dodailyevents
 	setvar 0x8004, 0
 	special sub_80FA5BC
 	return
@@ -2095,7 +2095,7 @@ MossdeepCity_Gym_EventScript_1A02C5:: @ 81A02C5
 PetalburgCity_Gym_EventScript_1A02C5:: @ 81A02C5
 RustboroCity_Gym_EventScript_1A02C5:: @ 81A02C5
 SootopolisCity_Gym_1F_EventScript_1A02C5:: @ 81A02C5
-	fanfare 369
+	playfanfare 369
 	waitfanfare
 	return
 
@@ -2104,7 +2104,7 @@ Route111_OldLadysRestStop_EventScript_1A02CA:: @ 81A02CA
 Route119_WeatherInstitute_1F_EventScript_1A02CA:: @ 81A02CA
 SSTidalRooms_EventScript_1A02CA:: @ 81A02CA
 	fadescreen 1
-	fanfare 368
+	playfanfare 368
 	waitfanfare
 	special ScrSpecial_HealPlayerParty
 	fadescreen 0
@@ -2123,14 +2123,14 @@ DewfordTown_EventScript_1A02E7:: @ 81A02E7
 Route104_EventScript_1A02E7:: @ 81A02E7
 Route109_EventScript_1A02E7:: @ 81A02E7
 	setflag 0x4001
-	playmusic 431, 0
+	playbgm 431, 0
 	return
 
 DewfordTown_EventScript_1A02EF:: @ 81A02EF
 Route104_EventScript_1A02EF:: @ 81A02EF
 Route109_EventScript_1A02EF:: @ 81A02EF
 	clearflag 0x4001
-	fadedefault
+	fadedefaultbgm
 	return
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1A02F4:: @ 81A02F4
@@ -2204,7 +2204,7 @@ Route101_EventScript_1A03A5:: @ 81A03A5
 EverGrandeCity_ChampionsRoom_EventScript_1A03B0:: @ 81A03B0
 Route101_EventScript_1A03B0:: @ 81A03B0
 	setvar 0x8004, 0
-	specialval RESULT, ScriptGetPokedexInfo
+	specialvar RESULT, ScriptGetPokedexInfo
 	copyvar 0x8008, 0x8005
 	copyvar 0x8009, 0x8006
 	copyvar 0x800a, RESULT
@@ -2215,7 +2215,7 @@ Route101_EventScript_1A03B0:: @ 81A03B0
 	compare_var_to_imm 0x800a, 0
 	goto_if_eq Route101_EventScript_1A14DC
 	setvar 0x8004, 1
-	specialval RESULT, ScriptGetPokedexInfo
+	specialvar RESULT, ScriptGetPokedexInfo
 	copyvar 0x8008, 0x8005
 	copyvar 0x8009, 0x8006
 	buffernum 0, 0x8008
@@ -2226,7 +2226,7 @@ Route101_EventScript_1A03B0:: @ 81A03B0
 BattleTower_Outside_EventScript_1A040E:: @ 81A040E
 LilycoveCity_Harbor_EventScript_1A040E:: @ 81A040E
 SlateportCity_Harbor_EventScript_1A040E:: @ 81A040E
-	pause 60
+	delay 60
 	move 0x8004, SlateportCity_Harbor_Movement_1A041C
 	waitmove 0
 	return
@@ -2263,14 +2263,14 @@ RusturfTunnel_EventScript_1A0442:: @ 81A0442
 	return
 
 EventScript_1A0457: @ unreferenced?
-	pause 30
+	delay 30
 	move 255, SlateportCity_OceanicMuseum_2F_Movement_1A0841
 	waitmove 0
 	spritevisible 255, 0, 0
-	pause 30
+	delay 30
 	move 255, Movement_1A047A
 	waitmove 0
-	pause 30
+	delay 30
 	return
 
 Movement_1A047A:
@@ -2283,14 +2283,14 @@ SouthernIsland_Exterior_EventScript_1A047C:: @ 81A047C
 	call_if 1, BattleTower_Outside_EventScript_160B2F
 	compare_var_to_imm FACING, 3
 	call_if 1, BattleTower_Outside_EventScript_160B3A
-	pause 30
+	delay 30
 	spriteinvisible 255, 0, 0
 	call BattleTower_Outside_EventScript_1A040E
 	return
 
 CaveOfOrigin_B4F_EventScript_1A04A0:: @ 81A04A0
 	lockall
-	checksound
+	waitse
 	pokecry SPECIES_GROUDON_OR_KYOGRE, 2
 	waitpokecry
 	setvar 0x4005, 1
@@ -2345,9 +2345,9 @@ MagmaHideout_B1F_EventScript_1A04FD:: @ 81A04FD
 	lock
 	faceplayer
 	setwildbattle SPECIES_ELECTRODE, 30, ITEM_NONE
-	checksound
+	waitse
 	pokecry SPECIES_ELECTRODE, 2
-	pause 40
+	delay 40
 	waitpokecry
 	setflag 977
 	setflag 2145
@@ -2361,9 +2361,9 @@ MagmaHideout_B1F_EventScript_1A051B:: @ 81A051B
 	lock
 	faceplayer
 	setwildbattle SPECIES_ELECTRODE, 30, ITEM_NONE
-	checksound
+	waitse
 	pokecry SPECIES_ELECTRODE, 2
-	pause 40
+	delay 40
 	waitpokecry
 	setflag 978
 	setflag 2145
@@ -2444,9 +2444,9 @@ Route119_EventScript_1A05C3:: @ 81A05C3
 	waitmove 0
 	move LAST_TALKED, Route119_Movement_1A0662
 	waitmove 0
-	checksound
+	waitse
 	pokecry SPECIES_KECLEON, 2
-	pause 40
+	delay 40
 	waitpokecry
 	setwildbattle SPECIES_KECLEON, 30, ITEM_NONE
 	compare_var_to_imm 0x8004, 1
@@ -2537,7 +2537,7 @@ GraniteCave_StevensRoom_EventScript_1A067F:: @ 81A067F
 MtPyre_Summit_EventScript_1A067F:: @ 81A067F
 SlateportCity_OceanicMuseum_2F_EventScript_1A067F:: @ 81A067F
 	bufferitem 0, 0x8004
-	fanfare 372
+	playfanfare 372
 	message FallarborTown_House1_Text_1A1498
 	waittext
 	waitfanfare
@@ -2550,7 +2550,7 @@ EverGrandeCity_PhoebesRoom_EventScript_1A0693:: @ 81A0693
 EverGrandeCity_SidneysRoom_EventScript_1A0693:: @ 81A0693
 	move 255, EverGrandeCity_SidneysRoom_Movement_1A0853
 	waitmove 0
-	playsfx 8
+	playse 8
 	setmaptile 6, 1, 836, 0
 	setmaptile 6, 2, 837, 0
 	setmaptile 0, 2, 734, 1
@@ -2572,7 +2572,7 @@ EverGrandeCity_PhoebesRoom_EventScript_1A0710:: @ 81A0710
 EverGrandeCity_SidneysRoom_EventScript_1A0710:: @ 81A0710
 	move 255, EverGrandeCity_SidneysRoom_Movement_1A0847
 	waitmove 0
-	playsfx 52
+	playse 52
 	setmaptile 5, 12, 518, 1
 	setmaptile 6, 12, 518, 1
 	setmaptile 7, 12, 518, 1
@@ -3711,7 +3711,7 @@ EventScript_1A2DAA:
 
 EventScript_1A2DB8:
 	closebutton
-	playsfx 9
+	playse 9
 	setvar 0x4097, 0
 	setflag 173
 	special sub_80BB8CC
@@ -3731,7 +3731,7 @@ SecretBase_RedCave1_EventScript_1A2DDE:: @ 81A2DDE
 	compare_var_to_imm RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A2E08
 	closebutton
-	playsfx 9
+	playse 9
 	special sub_80BC440
 	end
 
@@ -3750,7 +3750,7 @@ SecretBase_RedCave1_Movement_1A2E11:: @ 81A2E11
 gUnknown_081A2E14:: @ 81A2E14
 	lockall
 	setvar 0x4097, 1
-	playsfx 9
+	playse 9
 	special sub_80BC114
 	compare_var_to_imm RESULT, 0
 	goto_if_eq EventScript_1A2E38
@@ -4480,7 +4480,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_1ADF96:: @ 81ADF96
 SlateportCity_PokemonFanClub_EventScript_1ADFA0:: @ 81ADFA0
 	lock
 	faceplayer
-	specialval RESULT, sub_80BF544
+	specialvar RESULT, sub_80BF544
 	compare_var_to_imm RESULT, 0
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_1ADE4D
 	setvar 0x8005, 3
@@ -4870,22 +4870,22 @@ SkyPillar_4F_MapScript1_1C6BBF:: @ 81C6BBF
 
 S_FallDownHole:: @ 81C6BC5
 	lockall
-	pause 20
+	delay 20
 	move 255, GraniteCave_B1F_Movement_1C6BF7
 	waitmove 0
-	playsfx 43
-	pause 60
+	playse 43
+	delay 60
 	warphole UNDEFINED
 	waitstate
 	end
 
 gUnknown_081C6BDE:: @ 81C6BDE
 	lockall
-	pause 20
+	delay 20
 	move 255, GraniteCave_B1F_Movement_1C6BF7
 	waitmove 0
-	playsfx 43
-	pause 60
+	playse 43
+	delay 60
 	special sp13F_fall_to_last_warp
 	waitstate
 	end

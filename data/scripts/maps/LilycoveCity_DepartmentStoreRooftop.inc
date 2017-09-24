@@ -147,7 +147,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A267:: @ 815A267
 	updatemoney 0, 0
 	nop
 	bufferitem 0, 0x4000
-	playsfx 106
+	playse 106
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_18C75F, 4
 	additem 0x4000, 1
 	bufferitem 1, 0x4000
@@ -159,7 +159,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A267:: @ 815A267
 	checkitemspace 0x4000, 1
 	compare_var_to_imm RESULT, 0
 	goto_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_15A388
-	playsfx 106
+	playse 106
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_18C780, 4
 	additem 0x4000, 1
 	bufferitem 1, 0x4000
@@ -171,7 +171,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A267:: @ 815A267
 	checkitemspace 0x4000, 1
 	compare_var_to_imm RESULT, 0
 	goto_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_15A388
-	playsfx 106
+	playse 106
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_18C780, 4
 	additem 0x4000, 1
 	bufferitem 1, 0x4000

@@ -12,7 +12,7 @@ MossdeepCity_House2_EventScript_15A872:: @ 815A872
 MossdeepCity_House2_EventScript_15A87B:: @ 815A87B
 	lock
 	faceplayer
-	checksound
+	waitse
 	pokecry SPECIES_WINGULL, 0
 	msgbox MossdeepCity_House2_Text_18D61E, 4
 	waitpokecry

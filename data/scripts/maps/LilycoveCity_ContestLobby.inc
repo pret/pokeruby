@@ -43,7 +43,7 @@ LilycoveCity_ContestLobby_EventScript_1588DE:: @ 81588DE
 	closebutton
 	special sub_80C4CEC
 	setvar 0x4099, 0
-	specialval RESULT, GiveMonArtistRibbon
+	specialvar RESULT, GiveMonArtistRibbon
 	compare_var_to_imm RESULT, 1
 	call_if 1, LilycoveCity_ContestLobby_EventScript_158948
 	move 4, LilycoveCity_ContestLobby_Movement_158A43
@@ -72,13 +72,13 @@ LilycoveCity_ContestLobby_EventScript_158948:: @ 8158948
 	special sub_80C4858
 	move 4, LilycoveCity_ContestLobby_Movement_158A4E
 	waitmove 0
-	playsfx 21
+	playse 21
 	move 4, LilycoveCity_ContestLobby_Movement_1A0833
 	waitmove 0
 	move 4, LilycoveCity_ContestLobby_Movement_158A52
 	waitmove 0
 	msgbox LilycoveCity_ContestLobby_Text_188BB5, 4
-	fanfare 370
+	playfanfare 370
 	msgbox LilycoveCity_ContestLobby_Text_188C03, 4
 	waitfanfare
 	msgbox LilycoveCity_ContestLobby_Text_188C19, 4
@@ -87,7 +87,7 @@ LilycoveCity_ContestLobby_EventScript_158948:: @ 8158948
 	return
 
 LilycoveCity_ContestLobby_EventScript_158994:: @ 8158994
-	specialval 0x8004, sub_80C4D50
+	specialvar 0x8004, sub_80C4D50
 	switch 0x8004
 	case 1, LilycoveCity_ContestLobby_EventScript_1589D6
 	case 2, LilycoveCity_ContestLobby_EventScript_1589DA
@@ -216,7 +216,7 @@ LilycoveCity_ContestLobby_EventScript_158AAE:: @ 8158AAE
 	closebutton
 	special sub_80C4CEC
 	setvar 0x4099, 0
-	specialval RESULT, GiveMonArtistRibbon
+	specialvar RESULT, GiveMonArtistRibbon
 	compare_var_to_imm RESULT, 1
 	call_if 1, LilycoveCity_ContestLobby_EventScript_158B18
 	move 11, LilycoveCity_ContestLobby_Movement_158B6D
@@ -245,13 +245,13 @@ LilycoveCity_ContestLobby_EventScript_158B18:: @ 8158B18
 	special sub_80C4858
 	move 11, LilycoveCity_ContestLobby_Movement_158B78
 	waitmove 0
-	playsfx 21
+	playse 21
 	move 11, LilycoveCity_ContestLobby_Movement_1A0833
 	waitmove 0
 	move 11, LilycoveCity_ContestLobby_Movement_158B7C
 	waitmove 0
 	msgbox LilycoveCity_ContestLobby_Text_188BB5, 4
-	fanfare 370
+	playfanfare 370
 	msgbox LilycoveCity_ContestLobby_Text_188C03, 4
 	waitfanfare
 	msgbox LilycoveCity_ContestLobby_Text_188C19, 4
@@ -492,28 +492,28 @@ LilycoveCity_ContestLobby_EventScript_158E0B:: @ 8158E0B
 	lockall
 	message2 LilycoveCity_ContestLobby_Text_1888C6
 	waittext
-	pause 20
+	delay 20
 	closebutton
 	move 2, LilycoveCity_ContestLobby_Movement_158E9C
 	waitmove 0
-	playsfx 71
+	playse 71
 	setmaptile 9, 2, 545, 1
 	setmaptile 9, 3, 609, 1
 	special DrawWholeMapView
 	move 2, LilycoveCity_ContestLobby_Movement_158EA0
 	waitmove 0
-	playsfx 71
+	playse 71
 	setmaptile 9, 2, 721, 1
 	setmaptile 9, 3, 729, 1
 	special DrawWholeMapView
-	pause 20
+	delay 20
 	move 2, LilycoveCity_ContestLobby_Movement_158EAE
 	waitmove 0
 	move 255, LilycoveCity_ContestLobby_Movement_158E99
 	waitmove 0
 	message2 LilycoveCity_ContestLobby_Text_1A6832
 	waittext
-	pause 20
+	delay 20
 	closebutton
 	move 2, LilycoveCity_ContestLobby_Movement_158EA4
 	move 255, LilycoveCity_ContestLobby_Movement_158E8E
@@ -568,7 +568,7 @@ LilycoveCity_ContestLobby_Movement_158EAE:: @ 8158EAE
 	step_end
 
 LilycoveCity_ContestLobby_EventScript_158EB0:: @ 8158EB0
-	specialval RESULT, sub_80C5044
+	specialvar RESULT, sub_80C5044
 	compare_var_to_imm RESULT, 1
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158EE8
 	setvar 0x800b, 8
@@ -602,31 +602,31 @@ LilycoveCity_ContestLobby_EventScript_158F08:: @ 8158F08
 	return
 
 LilycoveCity_ContestLobby_EventScript_158F45:: @ 8158F45
-	warp3 LinkContestRoom4, 255, 7, 5
+	setwarp LinkContestRoom4, 255, 7, 5
 	special sub_8081334
 	waitstate
 	return
 
 LilycoveCity_ContestLobby_EventScript_158F52:: @ 8158F52
-	warp3 LinkContestRoom2, 255, 7, 5
+	setwarp LinkContestRoom2, 255, 7, 5
 	special sub_8081334
 	waitstate
 	return
 
 LilycoveCity_ContestLobby_EventScript_158F5F:: @ 8158F5F
-	warp3 LinkContestRoom6, 255, 7, 5
+	setwarp LinkContestRoom6, 255, 7, 5
 	special sub_8081334
 	waitstate
 	return
 
 LilycoveCity_ContestLobby_EventScript_158F6C:: @ 8158F6C
-	warp3 LinkContestRoom5, 255, 7, 5
+	setwarp LinkContestRoom5, 255, 7, 5
 	special sub_8081334
 	waitstate
 	return
 
 LilycoveCity_ContestLobby_EventScript_158F79:: @ 8158F79
-	warp3 LinkContestRoom3, 255, 7, 5
+	setwarp LinkContestRoom3, 255, 7, 5
 	special sub_8081334
 	waitstate
 	return
@@ -635,17 +635,17 @@ LilycoveCity_ContestLobby_EventScript_158F86:: @ 8158F86
 	lockall
 	move 1, LilycoveCity_ContestLobby_Movement_15900B
 	waitmove 0
-	playsfx 71
+	playse 71
 	setmaptile 4, 2, 545, 1
 	setmaptile 4, 3, 609, 1
 	special DrawWholeMapView
 	move 1, LilycoveCity_ContestLobby_Movement_15900F
 	waitmove 0
-	playsfx 71
+	playse 71
 	setmaptile 4, 2, 721, 1
 	setmaptile 4, 3, 729, 1
 	special DrawWholeMapView
-	pause 20
+	delay 20
 	move 1, LilycoveCity_ContestLobby_Movement_15901C
 	waitmove 0
 	move 255, LilycoveCity_ContestLobby_Movement_159008

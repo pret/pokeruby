@@ -18,7 +18,7 @@ Route101_EventScript_14E93F:: @ 814E93F
 
 Route101_EventScript_14E948:: @ 814E948
 	lockall
-	playmusic 410, 1
+	playbgm 410, 1
 	msgbox Route101_Text_16D10E, 4
 	closebutton
 	movesprite 2, 0, 15

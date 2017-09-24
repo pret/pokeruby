@@ -22,7 +22,7 @@ GraniteCave_StevensRoom_EventScript_15CBFA:: @ 815CBFA
 	call_if 1, GraniteCave_StevensRoom_EventScript_15CC6D
 	compare_var_to_imm FACING, 4
 	call_if 1, GraniteCave_StevensRoom_EventScript_15CC6D
-	playsfx 9
+	playse 9
 	disappear 1
 	release
 	end

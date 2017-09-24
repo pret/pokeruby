@@ -333,7 +333,7 @@ RustboroCity_EventScript_14C5FF:: @ 814C5FF
 	end
 
 RustboroCity_EventScript_14C614:: @ 814C614
-	checksound
+	waitse
 	setvar 0x4001, 4
 	goto RustboroCity_EventScript_14C77D
 	end
@@ -381,7 +381,7 @@ RustboroCity_EventScript_14C650:: @ 814C650
 RustboroCity_EventScript_14C691:: @ 814C691
 	move 9, RustboroCity_Movement_1A0841
 	waitmove 0
-	playsfx 21
+	playse 21
 	move 9, RustboroCity_Movement_1A0833
 	waitmove 0
 	move 9, RustboroCity_Movement_1A0835
@@ -393,7 +393,7 @@ RustboroCity_EventScript_14C691:: @ 814C691
 RustboroCity_EventScript_14C6BD:: @ 814C6BD
 	move 9, RustboroCity_Movement_1A083F
 	waitmove 0
-	playsfx 21
+	playse 21
 	move 9, RustboroCity_Movement_1A0833
 	waitmove 0
 	move 9, RustboroCity_Movement_1A0835
@@ -405,7 +405,7 @@ RustboroCity_EventScript_14C6BD:: @ 814C6BD
 RustboroCity_EventScript_14C6E9:: @ 814C6E9
 	move 9, RustboroCity_Movement_1A0845
 	waitmove 0
-	playsfx 21
+	playse 21
 	move 9, RustboroCity_Movement_1A0833
 	waitmove 0
 	move 9, RustboroCity_Movement_1A0835
@@ -417,7 +417,7 @@ RustboroCity_EventScript_14C6E9:: @ 814C6E9
 RustboroCity_EventScript_14C715:: @ 814C715
 	move 9, RustboroCity_Movement_1A0845
 	waitmove 0
-	playsfx 21
+	playse 21
 	move 9, RustboroCity_Movement_1A0833
 	waitmove 0
 	move 9, RustboroCity_Movement_1A0835
@@ -476,7 +476,7 @@ RustboroCity_EventScript_14C77D:: @ 814C77D
 	setflag 144
 	setflag 732
 	setvar 0x405a, 5
-	pause 30
+	delay 30
 	warp RustboroCity_DevonCorp_3F, 255, 2, 2
 	waitstate
 	releaseall
@@ -489,7 +489,7 @@ RustboroCity_EventScript_14C7F5:: @ 814C7F5
 RustboroCity_EventScript_14C7FE:: @ 814C7FE
 	move 9, RustboroCity_Movement_1A0841
 	waitmove 0
-	playsfx 21
+	playse 21
 	move 9, RustboroCity_Movement_1A0833
 	waitmove 0
 	move 9, RustboroCity_Movement_1A0835
@@ -501,7 +501,7 @@ RustboroCity_EventScript_14C7FE:: @ 814C7FE
 RustboroCity_EventScript_14C82A:: @ 814C82A
 	move 9, RustboroCity_Movement_1A0843
 	waitmove 0
-	playsfx 21
+	playse 21
 	move 9, RustboroCity_Movement_1A0833
 	waitmove 0
 	move 9, RustboroCity_Movement_1A0835
@@ -513,7 +513,7 @@ RustboroCity_EventScript_14C82A:: @ 814C82A
 RustboroCity_EventScript_14C856:: @ 814C856
 	move 9, RustboroCity_Movement_1A0845
 	waitmove 0
-	playsfx 21
+	playse 21
 	move 9, RustboroCity_Movement_1A0833
 	waitmove 0
 	move 9, RustboroCity_Movement_1A0835
@@ -525,7 +525,7 @@ RustboroCity_EventScript_14C856:: @ 814C856
 RustboroCity_EventScript_14C882:: @ 814C882
 	move 9, RustboroCity_Movement_1A0845
 	waitmove 0
-	playsfx 21
+	playse 21
 	move 9, RustboroCity_Movement_1A0833
 	waitmove 0
 	move 9, RustboroCity_Movement_1A0835
@@ -539,7 +539,7 @@ RustboroCity_EventScript_14C882:: @ 814C882
 RustboroCity_EventScript_14C8B8:: @ 814C8B8
 	move 9, RustboroCity_Movement_1A083F
 	waitmove 0
-	playsfx 21
+	playse 21
 	move 9, RustboroCity_Movement_1A0833
 	waitmove 0
 	move 9, RustboroCity_Movement_1A0835

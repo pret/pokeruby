@@ -57,9 +57,9 @@ AncientTomb_EventScript_15F042:: @ 815F042
 AncientTomb_EventScript_15F050:: @ 815F050
 	lock
 	faceplayer
-	checksound
+	waitse
 	pokecry SPECIES_REGISTEEL, 2
-	pause 40
+	delay 40
 	waitpokecry
 	setwildbattle SPECIES_REGISTEEL, 40, ITEM_NONE
 	setflag 937

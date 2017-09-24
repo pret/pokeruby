@@ -15,7 +15,7 @@ Route115_EventScript_150940:: @ 8150940
 
 Route115_EventScript_150949:: @ 8150949
 	trainerbattle 0, OPPONENT_TIMOTHY_1, 0, Route115_Text_1BC9AC, Route115_Text_1BC9E6
-	specialval RESULT, sub_8082C68
+	specialvar RESULT, sub_8082C68
 	compare_var_to_imm RESULT, 1
 	goto_if_eq Route115_EventScript_150970
 	msgbox Route115_Text_1BCA0E, 6
@@ -33,7 +33,7 @@ Route115_EventScript_150987:: @ 8150987
 
 Route115_EventScript_15099E:: @ 815099E
 	trainerbattle 0, OPPONENT_NOB_1, 0, Route115_Text_1BCB8A, Route115_Text_1BCBC1
-	specialval RESULT, sub_8082C68
+	specialvar RESULT, sub_8082C68
 	compare_var_to_imm RESULT, 1
 	goto_if_eq Route115_EventScript_1509C5
 	msgbox Route115_Text_1BCBDE, 6
@@ -46,7 +46,7 @@ Route115_EventScript_1509C5:: @ 81509C5
 
 Route115_EventScript_1509DC:: @ 81509DC
 	trainerbattle 0, OPPONENT_CYNDY_1, 0, Route115_Text_1BCCF4, Route115_Text_1BCD32
-	specialval RESULT, sub_8082C68
+	specialvar RESULT, sub_8082C68
 	compare_var_to_imm RESULT, 1
 	goto_if_eq Route115_EventScript_150A03
 	msgbox Route115_Text_1BCD4C, 6

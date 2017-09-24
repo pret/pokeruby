@@ -84,10 +84,10 @@ PetalburgCity_Gym_EventScript_15456C:: @ 815456C
 	move 255, PetalburgCity_Gym_Movement_1A0845
 	move 10, PetalburgCity_Gym_Movement_1545B4
 	waitmove 0
-	playsfx 9
+	playse 9
 	disappear 10
 	setflag 726
-	pause 30
+	delay 30
 	move 255, PetalburgCity_Gym_Movement_1A0841
 	waitmove 0
 	msgbox PetalburgCity_Gym_Text_17A2A4, 4
@@ -143,7 +143,7 @@ PetalburgCity_Gym_EventScript_15465E:: @ 815465E
 
 PetalburgCity_Gym_EventScript_154669:: @ 8154669
 	reappear 10
-	playsfx 8
+	playse 8
 	compare_var_to_imm 0x8008, 0
 	call_if 1, PetalburgCity_Gym_EventScript_1547EE
 	compare_var_to_imm 0x8008, 1
@@ -195,7 +195,7 @@ PetalburgCity_Gym_EventScript_154669:: @ 8154669
 	msgbox PetalburgCity_Gym_Text_17A171, 4
 	closebutton
 	setflag 0x4001
-	playmusic 420, 0
+	playbgm 420, 0
 	compare_var_to_imm 0x8008, 0
 	call_if 1, PetalburgCity_Gym_EventScript_154835
 	compare_var_to_imm 0x8008, 1
@@ -363,7 +363,7 @@ PetalburgCity_Gym_EventScript_15493D:: @ 815493D
 	end
 
 PetalburgCity_Gym_EventScript_154969:: @ 8154969
-	specialval RESULT, IsEnigmaBerryValid
+	specialvar RESULT, IsEnigmaBerryValid
 	compare_var_to_imm RESULT, 0
 	goto_if_eq PetalburgCity_Gym_EventScript_1549B2
 	checkitem ITEM_ENIGMA_BERRY, 1
@@ -427,7 +427,7 @@ PetalburgCity_Gym_EventScript_154A2C:: @ 8154A2C
 	call_if 1, PetalburgCity_Gym_EventScript_154AD2
 	compare_var_to_imm FACING, 4
 	call_if 1, PetalburgCity_Gym_EventScript_154ADD
-	pause 70
+	delay 70
 	compare_var_to_imm FACING, 2
 	call_if 1, PetalburgCity_Gym_EventScript_154AE8
 	compare_var_to_imm FACING, 1
@@ -605,8 +605,8 @@ PetalburgCity_Gym_EventScript_154B73:: @ 8154B73
 
 PetalburgCity_Gym_EventScript_154BA8:: @ 8154BA8
 	closebutton
-	pause 30
-	warpwalk PetalburgCity_Gym, 255, 32776, 32777
+	delay 30
+	warpdoor PetalburgCity_Gym, 255, 32776, 32777
 	waitstate
 	releaseall
 	end

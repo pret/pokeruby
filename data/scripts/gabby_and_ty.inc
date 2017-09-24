@@ -2,7 +2,7 @@ Route111_EventScript_1AE313:: @ 81AE313
 Route118_EventScript_1AE313:: @ 81AE313
 Route120_EventScript_1AE313:: @ 81AE313
 	settrainerflag OPPONENT_GABBY_AND_TY_6
-	specialval RESULT, GabbyAndTyGetBattleNum
+	specialvar RESULT, GabbyAndTyGetBattleNum
 	switch RESULT
 	case 0, Route111_EventScript_1AE384
 	case 1, Route111_EventScript_1AE38A
@@ -244,11 +244,11 @@ Route120_EventScript_1AE60F:: @ 81AE60F
 	call_if 1, Route111_EventScript_1AE5FD
 	checkflag 1
 	goto_if_eq Route111_EventScript_1AE73A
-	specialval RESULT, GabbyAndTyGetLastQuote
+	specialvar RESULT, GabbyAndTyGetLastQuote
 	compare_var_to_imm RESULT, 0
 	goto_if_eq Route111_EventScript_1AE69F
 	msgbox Route111_Text_1AC10A, 4
-	specialval RESULT, sub_80BDD18
+	specialvar RESULT, sub_80BDD18
 	switch RESULT
 	case 0, Route111_EventScript_1AE6AD
 	case 1, Route111_EventScript_1AE6BB

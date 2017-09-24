@@ -8,7 +8,7 @@ RustboroCity_House1_EventScript_157C7D:: @ 8157C7D
 	goto_if_eq RustboroCity_House1_EventScript_157D13
 	setvar 0x8008, 0
 	copyvar 0x8004, 0x8008
-	specialval RESULT, sub_804D89C
+	specialvar RESULT, sub_804D89C
 	copyvar 0x8009, RESULT
 	msgbox RustboroCity_House1_Text_184EBA, 5
 	compare_var_to_imm RESULT, 0
@@ -19,7 +19,7 @@ RustboroCity_House1_EventScript_157C7D:: @ 8157C7D
 	compare_var_to_imm 0x8004, 255
 	goto_if_eq RustboroCity_House1_EventScript_157CFB
 	copyvar 0x8005, 0x800a
-	specialval RESULT, sub_804DB2C
+	specialvar RESULT, sub_804DB2C
 	copyvar 0x800b, RESULT
 	compare_var_to_var RESULT, 0x8009
 	goto_if 5, RustboroCity_House1_EventScript_157D05

@@ -36,7 +36,7 @@ yes_hear_song:
 	setvar 0x8004, 0
 	@ Give the player ear rape
 	special ScrSpecial_PlayBardSong
-	pause 60
+	delay 60
 	special ScrSpecial_HasBardSongBeenChanged
 	compare_var_to_imm RESULT, FALSE
 	@ Prompt new lyrics only if song hasn't been changed
@@ -69,7 +69,7 @@ write_lyrics:
 	setvar 0x8004, 1
 	@ Give the player ear rape again
 	special ScrSpecial_PlayBardSong
-	pause 60
+	delay 60
 	msgbox gTextBard_WasThatHowYouWanted, MSGBOX_YESNO
 	compare_var_to_imm RESULT, NO
 	goto_if_eq write_lyrics		@ Keep looping until player responds YES
@@ -227,7 +227,7 @@ SpeakToStoryteller:
 	msgbox gTextStoryteller_Introduction, MSGBOX_YESNO
 	compare_var_to_imm RESULT, NO
 	goto_if_eq dont_hear_story
-	specialval RESULT, ScrSpecial_StorytellerGetFreeStorySlot
+	specialvar RESULT, ScrSpecial_StorytellerGetFreeStorySlot
 	compare_var_to_imm RESULT, 0		@ If slot is 0, then the list is empty
 	goto_if_eq no_stories_recorded
 choose_story:
@@ -241,7 +241,7 @@ choose_story:
 	special ScrSpecial_StorytellerDisplayStory
 	waittext
 	waitbutton
-	specialval RESULT, ScrSpecial_StorytellerUpdateStat
+	specialvar RESULT, ScrSpecial_StorytellerUpdateStat
 	compare_var_to_imm RESULT, FALSE
 	goto_if_eq no_stat_update
 	goto stat_update
@@ -255,10 +255,10 @@ no_stat_update:
 	compare_var_to_imm RESULT, YES
 	goto_if_eq choose_story
 yes_hear_story:
-	specialval RESULT, ScrSpecial_HasStorytellerAlreadyRecorded
+	specialvar RESULT, ScrSpecial_HasStorytellerAlreadyRecorded
 	compare_var_to_imm RESULT, TRUE
 	goto_if_eq cant_record_story		@ already recorded story
-	specialval RESULT, ScrSpecial_StorytellerGetFreeStorySlot
+	specialvar RESULT, ScrSpecial_StorytellerGetFreeStorySlot
 	compare_var_to_imm RESULT, 4
 	goto_if_eq cant_record_story		@ story list is full
 	goto prompt_record_story
@@ -268,7 +268,7 @@ prompt_record_story:
 	msgbox gTextStoryteller_HaveYouAnyTales, MSGBOX_YESNO
 	compare_var_to_imm RESULT, NO
 	goto_if_eq dont_hear_story
-	specialval RESULT, ScrSpecial_StorytellerInitializeRandomStat
+	specialvar RESULT, ScrSpecial_StorytellerInitializeRandomStat
 	compare_var_to_imm RESULT, TRUE
 	goto_if_eq stat_update
 	msgbox gTextStoryteller_ImNotSatisfied, 4

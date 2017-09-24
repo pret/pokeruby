@@ -56,21 +56,21 @@ Route119_EventScript_1511DB:: @ 81511DB
 	call_if 1, Route119_EventScript_151254
 	compare_var_to_imm RESULT, 1
 	call_if 1, Route119_EventScript_151259
-	pause 65
+	delay 65
 	compare_var_to_imm 0x4001, 1
 	call_if 1, Route119_EventScript_1513A6
 	compare_var_to_imm 0x4001, 2
 	call_if 1, Route119_EventScript_1513B1
 	move 255, Route119_Movement_1A0845
 	waitmove 0
-	pause 30
+	delay 30
 	compare_var_to_imm 0x4001, 1
 	call_if 1, Route119_EventScript_1513D2
 	compare_var_to_imm 0x4001, 2
 	call_if 1, Route119_EventScript_1513E1
 	disappear 25
 	reappear 16
-	pause 30
+	delay 30
 	checkgender
 	compare_var_to_imm RESULT, 0
 	goto_if_eq Route119_EventScript_15125E
@@ -80,11 +80,11 @@ Route119_EventScript_1511DB:: @ 81511DB
 	end
 
 Route119_EventScript_151254:: @ 8151254
-	playmusic 415, 1
+	playbgm 415, 1
 	return
 
 Route119_EventScript_151259:: @ 8151259
-	playmusic 421, 1
+	playbgm 421, 1
 	return
 
 Route119_EventScript_15125E:: @ 815125E
@@ -160,15 +160,15 @@ Route119_EventScript_151362:: @ 8151362
 	call_if 1, Route119_EventScript_1513E1
 	disappear 16
 	reappear 25
-	pause 30
+	delay 30
 	compare_var_to_imm 0x4001, 1
 	call_if 1, Route119_EventScript_1513BC
 	compare_var_to_imm 0x4001, 2
 	call_if 1, Route119_EventScript_1513C7
 	disappear 25
 	setvar 0x4072, 1
-	playmusicbattle 0
-	fadedefault
+	savebgm 0
+	fadedefaultbgm
 	releaseall
 	end
 
@@ -296,7 +296,7 @@ Route119_EventScript_1514A8:: @ 81514A8
 
 Route119_EventScript_1514BF:: @ 81514BF
 	trainerbattle 0, OPPONENT_JACKSON_1, 0, Route119_Text_1BE8BB, Route119_Text_1BE90E
-	specialval RESULT, sub_8082C68
+	specialvar RESULT, sub_8082C68
 	compare_var_to_imm RESULT, 1
 	goto_if_eq Route119_EventScript_1514E6
 	msgbox Route119_Text_1BE937, 6
@@ -309,7 +309,7 @@ Route119_EventScript_1514E6:: @ 81514E6
 
 Route119_EventScript_1514FD:: @ 81514FD
 	trainerbattle 0, OPPONENT_CATHERINE_1, 0, Route119_Text_1BEA3A, Route119_Text_1BEA88
-	specialval RESULT, sub_8082C68
+	specialvar RESULT, sub_8082C68
 	compare_var_to_imm RESULT, 1
 	goto_if_eq Route119_EventScript_151524
 	msgbox Route119_Text_1BEAB3, 6

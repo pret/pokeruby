@@ -359,7 +359,7 @@ Route109_EventScript_14F77F:: @ 814F77F
 Route109_EventScript_14F788:: @ 814F788
 	lock
 	faceplayer
-	checksound
+	waitse
 	pokecry SPECIES_ZIGZAGOON, 0
 	msgbox Route109_Text_16E5CA, 4
 	waitpokecry
@@ -396,7 +396,7 @@ Route109_EventScript_14F7F2:: @ 814F7F2
 
 Route109_EventScript_14F809:: @ 814F809
 	trainerbattle 0, OPPONENT_RICKY_1, 0, Route109_Text_1B9C23, Route109_Text_1B9C65
-	specialval RESULT, sub_8082C68
+	specialvar RESULT, sub_8082C68
 	compare_var_to_imm RESULT, 1
 	goto_if_eq Route109_EventScript_14F830
 	msgbox Route109_Text_1B9C6E, 6
@@ -409,7 +409,7 @@ Route109_EventScript_14F830:: @ 814F830
 
 Route109_EventScript_14F847:: @ 814F847
 	trainerbattle 0, OPPONENT_LOLA_1, 0, Route109_Text_1B9D54, Route109_Text_1B9D87
-	specialval RESULT, sub_8082C68
+	specialvar RESULT, sub_8082C68
 	compare_var_to_imm RESULT, 1
 	goto_if_eq Route109_EventScript_14F86E
 	msgbox Route109_Text_1B9D8E, 6

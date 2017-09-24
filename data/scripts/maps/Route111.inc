@@ -59,7 +59,7 @@ Route111_EventScript_150023:: @ 8150023
 	setflag 963
 	setflag 964
 	disappear 34
-	pause 30
+	delay 30
 	move 35, Route111_Movement_1500AF
 	waitmove 0
 	disappear 35
@@ -81,7 +81,7 @@ Route111_EventScript_150069:: @ 8150069
 	setflag 964
 	setflag 963
 	disappear 35
-	pause 30
+	delay 30
 	move 34, Route111_Movement_1500AF
 	waitmove 0
 	disappear 34
@@ -120,7 +120,7 @@ Route111_Movement_1500AF:: @ 81500AF
 Route111_EventScript_1500C5:: @ 81500C5
 	lock
 	faceplayer
-	checkdailyflags
+	dodailyevents
 	checkflag 2252
 	goto_if_eq Route111_EventScript_150100
 	msgbox Route111_Text_1C56F0, 4
@@ -222,14 +222,14 @@ Route111_Movement_1501BA:: @ 81501BA
 
 Route111_EventScript_1501BC:: @ 81501BC
 	setweather 2
-	fademusic 360
+	fadenewbgm 360
 	doweather
 	setvar 0x4003, 0
 	end
 
 Route111_EventScript_1501C9:: @ 81501C9
 	setweather 8
-	fademusic 409
+	fadenewbgm 409
 	doweather
 	end
 
@@ -392,7 +392,7 @@ Route111_EventScript_1503EC:: @ 81503EC
 
 Route111_EventScript_150403:: @ 8150403
 	trainerbattle 0, OPPONENT_DUSTY_1, 0, Route111_Text_1BAEC9, Route111_Text_1BAF14
-	specialval RESULT, sub_8082C68
+	specialvar RESULT, sub_8082C68
 	compare_var_to_imm RESULT, 1
 	goto_if_eq Route111_EventScript_15042A
 	msgbox Route111_Text_1BAF5B, 6
@@ -420,7 +420,7 @@ Route111_EventScript_15046F:: @ 815046F
 
 Route111_EventScript_150486:: @ 8150486
 	trainerbattle 0, OPPONENT_WILTON_1, 0, Route111_Text_1BB2E3, Route111_Text_1BB313
-	specialval RESULT, sub_8082C68
+	specialvar RESULT, sub_8082C68
 	compare_var_to_imm RESULT, 1
 	goto_if_eq Route111_EventScript_1504AD
 	msgbox Route111_Text_1BB33E, 6
@@ -433,7 +433,7 @@ Route111_EventScript_1504AD:: @ 81504AD
 
 Route111_EventScript_1504C4:: @ 81504C4
 	trainerbattle 0, OPPONENT_BROOKE_1, 0, Route111_Text_1BB44F, Route111_Text_1BB49F
-	specialval RESULT, sub_8082C68
+	specialvar RESULT, sub_8082C68
 	compare_var_to_imm RESULT, 1
 	goto_if_eq Route111_EventScript_1504EB
 	msgbox Route111_Text_1BB4CE, 6

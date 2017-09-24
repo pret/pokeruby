@@ -29,7 +29,7 @@ MtPyre_Summit_EventScript_15D4E1:: @ 815D4E1
 	waitmove 0
 	move 2, MtPyre_Summit_Movement_1A0845
 	waitmove 0
-	pause 50
+	delay 50
 	compare_var_to_imm 0x8008, 0
 	call_if 1, MtPyre_Summit_EventScript_15D593
 	compare_var_to_imm 0x8008, 1
@@ -50,7 +50,7 @@ MtPyre_Summit_EventScript_15D4E1:: @ 815D4E1
 	setflag 916
 	setflag 917
 	fadescreen 0
-	pause 20
+	delay 20
 	call MtPyre_Summit_EventScript_15D57A
 	compare_var_to_imm 0x8008, 0
 	call_if 1, MtPyre_Summit_EventScript_15D5AA
@@ -201,10 +201,10 @@ MtPyre_Summit_EventScript_15D669:: @ 815D669
 	closebutton
 	move LAST_TALKED, MtPyre_Summit_Movement_1A0841
 	waitmove 0
-	pause 40
+	delay 40
 	move LAST_TALKED, MtPyre_Summit_Movement_1A0839
 	waitmove 0
-	pause 10
+	delay 10
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B5762, 4
 	.else
@@ -267,7 +267,7 @@ MtPyre_Summit_EventScript_15D6F2:: @ 815D6F2
 	waitmove 0
 	move 2, MtPyre_Summit_Movement_1A0845
 	waitmove 0
-	pause 50
+	delay 50
 	compare_var_to_imm 0x8008, 0
 	call_if 1, MtPyre_Summit_EventScript_15D75E
 	compare_var_to_imm 0x8008, 1

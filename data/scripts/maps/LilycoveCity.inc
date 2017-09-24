@@ -63,7 +63,7 @@ LilycoveCity_EventScript_14CB2B:: @ 814CB2B
 LilycoveCity_EventScript_14CB74:: @ 814CB74
 	lock
 	faceplayer
-	checkdailyflags
+	dodailyevents
 	checkflag 2255
 	goto_if_eq LilycoveCity_EventScript_14CBB4
 	msgbox LilycoveCity_Text_1C5A7A, 4
@@ -172,7 +172,7 @@ LilycoveCity_EventScript_14CC79:: @ 814CC79
 
 LilycoveCity_EventScript_14CC82:: @ 814CC82
 	lockall
-	specialval 0x8004, sub_80C4D50
+	specialvar 0x8004, sub_80C4D50
 	switch 0x8004
 	case 0, LilycoveCity_EventScript_14CCA2
 	msgbox LilycoveCity_Text_168EA4, 4
@@ -255,7 +255,7 @@ LilycoveCity_EventScript_14CD46:: @ 814CD46
 	end
 
 LilycoveCity_EventScript_14CD60:: @ 814CD60
-	playmusic 415, 1
+	playbgm 415, 1
 	checkflag 286
 	call_if 1, LilycoveCity_EventScript_14CDB0
 	checkflag 286
@@ -280,13 +280,13 @@ LilycoveCity_EventScript_14CDB9:: @ 814CDB9
 LilycoveCity_EventScript_14CDC2:: @ 814CDC2
 	setflag 286
 	msgbox LilycoveCity_Text_167AEB, 4
-	playmusicbattle 0
-	fadedefault
+	savebgm 0
+	fadedefaultbgm
 	release
 	end
 
 LilycoveCity_EventScript_14CDD3:: @ 814CDD3
-	playmusic 421, 1
+	playbgm 421, 1
 	checkflag 286
 	call_if 1, LilycoveCity_EventScript_14CE23
 	checkflag 286
@@ -311,8 +311,8 @@ LilycoveCity_EventScript_14CE2C:: @ 814CE2C
 LilycoveCity_EventScript_14CE35:: @ 814CE35
 	setflag 286
 	msgbox LilycoveCity_Text_16802C, 4
-	playmusicbattle 0
-	fadedefault
+	savebgm 0
+	fadedefaultbgm
 	release
 	end
 
@@ -414,14 +414,14 @@ LilycoveCity_EventScript_14CF6B:: @ 814CF6B
 	closebutton
 	move LAST_TALKED, LilycoveCity_Movement_1A0845
 	waitmove 0
-	pause 50
+	delay 50
 	setanimation 0, 1
 	doanimation 30
-	pause 15
+	delay 15
 	disappear LAST_TALKED
 	checkanimation 30
-	playmusicbattle 0
-	fadedefault
+	savebgm 0
+	fadedefaultbgm
 	setflag 292
 	release
 	end

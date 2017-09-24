@@ -31,7 +31,7 @@ MossdeepCity_StevensHouse_EventScript_15AA0B:: @ 815AA0B
 	lockall
 	move 1, MossdeepCity_StevensHouse_Movement_1A083F
 	waitmove 0
-	playsfx 21
+	playse 21
 	move 1, MossdeepCity_StevensHouse_Movement_1A0833
 	waitmove 0
 	move 1, MossdeepCity_StevensHouse_Movement_1A0835
@@ -44,7 +44,7 @@ MossdeepCity_StevensHouse_EventScript_15AA0B:: @ 815AA0B
 	setflag 302
 	msgbox MossdeepCity_StevensHouse_Text_18DB22, 4
 	closebutton
-	pause 20
+	delay 20
 	move 1, MossdeepCity_StevensHouse_Movement_15AA76
 	waitmove 0
 	setvar 0x40c6, 1
@@ -79,7 +79,7 @@ MossdeepCity_StevensHouse_EventScript_15AA7C:: @ 815AA7C
 	goto_if_eq MossdeepCity_StevensHouse_EventScript_15AADC
 	copyvar 0x8004, RESULT
 	disappear 2
-	fanfare 370
+	playfanfare 370
 	message MossdeepCity_StevensHouse_Text_18DD61
 	waitfanfare
 	waittext

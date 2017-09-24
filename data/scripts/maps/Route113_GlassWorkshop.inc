@@ -197,8 +197,8 @@ Route113_GlassWorkshop_EventScript_163851:: @ 8163851
 	msgbox Route113_GlassWorkshop_Text_19E827, 4
 	closebutton
 	fadescreen 1
-	playsfx 5
-	pause 30
+	playse 5
+	delay 30
 	fadescreen 0
 	msgbox Route113_GlassWorkshop_Text_19E9D7, 4
 	compare_var_to_imm 0x8009, 0

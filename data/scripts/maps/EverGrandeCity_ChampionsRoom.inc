@@ -24,7 +24,7 @@ EverGrandeCity_ChampionsRoom_EventScript_15B7DE:: @ 815B7DE
 	lockall
 	move 255, EverGrandeCity_ChampionsRoom_Movement_1A084E
 	waitmove 0
-	pause 40
+	delay 40
 	move 255, EverGrandeCity_ChampionsRoom_Movement_15B802
 	waitmove 0
 	setvar 0x4001, 1
@@ -38,20 +38,20 @@ EverGrandeCity_ChampionsRoom_Movement_15B802:: @ 815B802
 	step_end
 
 EverGrandeCity_ChampionsRoom_EventScript_15B805:: @ 815B805
-	playmusic 454, 0
+	playbgm 454, 0
 	msgbox EverGrandeCity_ChampionsRoom_Text_190F9C, 4
 	trainerbattle 3, OPPONENT_STEVEN, 0, EverGrandeCity_ChampionsRoom_Text_1910A0
 	goto EverGrandeCity_ChampionsRoom_EventScript_15B821
 	end
 
 EverGrandeCity_ChampionsRoom_EventScript_15B821:: @ 815B821
-	playsfx 8
+	playse 8
 	setmaptile 6, 1, 838, 0
 	setmaptile 6, 2, 839, 0
 	special DrawWholeMapView
 	msgbox EverGrandeCity_ChampionsRoom_Text_1910FE, 4
 	closebutton
-	playsfx 8
+	playse 8
 	checkgender
 	compare_var_to_imm RESULT, 0
 	call_if 1, EverGrandeCity_ChampionsRoom_EventScript_15B87C
@@ -67,17 +67,17 @@ EverGrandeCity_ChampionsRoom_EventScript_15B821:: @ 815B821
 	end
 
 EverGrandeCity_ChampionsRoom_EventScript_15B87C:: @ 815B87C
-	playmusic 415, 0
+	playbgm 415, 0
 	return
 
 EverGrandeCity_ChampionsRoom_EventScript_15B881:: @ 815B881
-	playmusic 421, 0
+	playbgm 421, 0
 	return
 
 EverGrandeCity_ChampionsRoom_EventScript_15B886:: @ 815B886
 	msgbox EverGrandeCity_ChampionsRoom_Text_191225, 4
-	pause 40
-	playsfx 21
+	delay 40
+	playse 21
 	move 2, EverGrandeCity_ChampionsRoom_Movement_1A0833
 	waitmove 0
 	move 2, EverGrandeCity_ChampionsRoom_Movement_1A0835
@@ -89,8 +89,8 @@ EverGrandeCity_ChampionsRoom_EventScript_15B886:: @ 815B886
 
 EverGrandeCity_ChampionsRoom_EventScript_15B8BB:: @ 815B8BB
 	msgbox EverGrandeCity_ChampionsRoom_Text_1912B3, 4
-	pause 40
-	playsfx 21
+	delay 40
+	playse 21
 	move 2, EverGrandeCity_ChampionsRoom_Movement_1A0833
 	waitmove 0
 	move 2, EverGrandeCity_ChampionsRoom_Movement_1A0835
@@ -112,18 +112,18 @@ EverGrandeCity_ChampionsRoom_EventScript_15B8F0:: @ 815B8F0
 	msgbox EverGrandeCity_ChampionsRoom_Text_1914C6, 4
 	move 1, EverGrandeCity_ChampionsRoom_Movement_1A0841
 	waitmove 0
-	pause 20
+	delay 20
 	move 1, EverGrandeCity_ChampionsRoom_Movement_1A0845
 	waitmove 0
 	msgbox EverGrandeCity_ChampionsRoom_Text_191512, 4
 	closebutton
-	pause 30
+	delay 30
 	move 1, EverGrandeCity_ChampionsRoom_Movement_15B9FB
 	move 255, EverGrandeCity_ChampionsRoom_Movement_15B9DD
 	move 3, EverGrandeCity_ChampionsRoom_Movement_1A0841
 	move 2, EverGrandeCity_ChampionsRoom_Movement_15B9F8
 	waitmove 0
-	pause 20
+	delay 20
 	move 255, EverGrandeCity_ChampionsRoom_Movement_1A0845
 	waitmove 0
 	msgbox EverGrandeCity_ChampionsRoom_Text_191546, 4

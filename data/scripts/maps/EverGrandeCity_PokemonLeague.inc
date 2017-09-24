@@ -56,15 +56,15 @@ EverGrandeCity_PokemonLeague_EventScript_15BAD2:: @ 815BAD2
 	call_if 3, EverGrandeCity_PokemonLeague_EventScript_15BB3F
 	message EverGrandeCity_PokemonLeague_Text_1916FD
 	waittext
-	pause 75
+	delay 75
 	checkflag 2060
 	goto_if 0, EverGrandeCity_PokemonLeague_EventScript_15BB4A
 	closebutton
 	move 3, EverGrandeCity_PokemonLeague_Movement_15BB7E
 	move 4, EverGrandeCity_PokemonLeague_Movement_15BB81
 	waitmove 0
-	pause 10
-	fanfare 369
+	delay 10
+	playfanfare 369
 	message EverGrandeCity_PokemonLeague_Text_191804
 	waittext
 	waitfanfare
@@ -86,7 +86,7 @@ EverGrandeCity_PokemonLeague_EventScript_15BB3F:: @ 815BB3F
 	return
 
 EverGrandeCity_PokemonLeague_EventScript_15BB4A:: @ 815BB4A
-	playsfx 32
+	playse 32
 	msgbox EverGrandeCity_PokemonLeague_Text_19179C, 4
 	releaseall
 	end

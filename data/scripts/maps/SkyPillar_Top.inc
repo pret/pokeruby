@@ -15,9 +15,9 @@ SkyPillar_Top_EventScript_15F316:: @ 815F316
 	lock
 	faceplayer
 	setwildbattle SPECIES_RAYQUAZA, 70, ITEM_NONE
-	checksound
+	waitse
 	pokecry SPECIES_RAYQUAZA, 2
-	pause 40
+	delay 40
 	waitpokecry
 	setflag 773
 	setflag 2145

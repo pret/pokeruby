@@ -9,7 +9,7 @@ Route123_BerryMastersHouse_MapScript1_1639E5:: @ 81639E5
 Route123_BerryMastersHouse_EventScript_1639E9:: @ 81639E9
 	lock
 	faceplayer
-	checkdailyflags
+	dodailyevents
 	checkflag 2253
 	goto_if_eq Route123_BerryMastersHouse_EventScript_163A5A
 	msgbox Route123_BerryMastersHouse_Text_1C5BC4, 4
@@ -39,7 +39,7 @@ Route123_BerryMastersHouse_EventScript_163A5A:: @ 8163A5A
 Route123_BerryMastersHouse_EventScript_163A64:: @ 8163A64
 	lock
 	faceplayer
-	checkdailyflags
+	dodailyevents
 	checkflag 2257
 	goto_if_eq Route123_BerryMastersHouse_EventScript_163C13
 	msgbox Route123_BerryMastersHouse_Text_1C5D24, 4

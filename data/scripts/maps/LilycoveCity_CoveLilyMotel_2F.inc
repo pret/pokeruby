@@ -8,7 +8,7 @@ LilycoveCity_CoveLilyMotel_2F_EventScript_1583A1:: @ 81583A1
 	call_if 0, LilycoveCity_CoveLilyMotel_2F_EventScript_1583C7
 	checkflag 2
 	call_if 1, LilycoveCity_CoveLilyMotel_2F_EventScript_1583DD
-	specialval RESULT, sub_8090FC0
+	specialvar RESULT, sub_8090FC0
 	compare_var_to_imm RESULT, 1
 	goto_if_eq LilycoveCity_CoveLilyMotel_2F_EventScript_1583D0
 	release
@@ -20,7 +20,7 @@ LilycoveCity_CoveLilyMotel_2F_EventScript_1583C7:: @ 81583C7
 
 LilycoveCity_CoveLilyMotel_2F_EventScript_1583D0:: @ 81583D0
 	setflag 2
-	fanfare 370
+	playfanfare 370
 	waitfanfare
 	goto LilycoveCity_CoveLilyMotel_2F_EventScript_1583DD
 	end

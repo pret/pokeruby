@@ -144,7 +144,7 @@ SlateportCity_PokemonFanClub_EventScript_155998:: @ 8155998
 	end
 
 SlateportCity_PokemonFanClub_EventScript_1559A2:: @ 81559A2
-	specialval RESULT, CheckLeadMonCool
+	specialvar RESULT, CheckLeadMonCool
 	compare_var_to_imm RESULT, 1
 	call_if 1, SlateportCity_PokemonFanClub_EventScript_1559B3
 	return
@@ -154,7 +154,7 @@ SlateportCity_PokemonFanClub_EventScript_1559B3:: @ 81559B3
 	return
 
 SlateportCity_PokemonFanClub_EventScript_1559B9:: @ 81559B9
-	specialval RESULT, CheckLeadMonBeauty
+	specialvar RESULT, CheckLeadMonBeauty
 	compare_var_to_imm RESULT, 1
 	call_if 1, SlateportCity_PokemonFanClub_EventScript_1559CA
 	return
@@ -164,7 +164,7 @@ SlateportCity_PokemonFanClub_EventScript_1559CA:: @ 81559CA
 	return
 
 SlateportCity_PokemonFanClub_EventScript_1559D0:: @ 81559D0
-	specialval RESULT, CheckLeadMonCute
+	specialvar RESULT, CheckLeadMonCute
 	compare_var_to_imm RESULT, 1
 	call_if 1, SlateportCity_PokemonFanClub_EventScript_1559E1
 	return
@@ -174,7 +174,7 @@ SlateportCity_PokemonFanClub_EventScript_1559E1:: @ 81559E1
 	return
 
 SlateportCity_PokemonFanClub_EventScript_1559E7:: @ 81559E7
-	specialval RESULT, CheckLeadMonSmart
+	specialvar RESULT, CheckLeadMonSmart
 	compare_var_to_imm RESULT, 1
 	call_if 1, SlateportCity_PokemonFanClub_EventScript_1559F8
 	return
@@ -184,7 +184,7 @@ SlateportCity_PokemonFanClub_EventScript_1559F8:: @ 81559F8
 	return
 
 SlateportCity_PokemonFanClub_EventScript_1559FE:: @ 81559FE
-	specialval RESULT, CheckLeadMonTough
+	specialvar RESULT, CheckLeadMonTough
 	compare_var_to_imm RESULT, 1
 	call_if 1, SlateportCity_PokemonFanClub_EventScript_155A0F
 	return
@@ -199,14 +199,14 @@ SlateportCity_PokemonFanClub_EventScript_155A15:: @ 8155A15
 	checkflag 278
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_155A75
 	msgbox SlateportCity_PokemonFanClub_Text_17DE6B, 4
-	specialval RESULT, GetLeadMonFriendshipScore
+	specialvar RESULT, GetLeadMonFriendshipScore
 	compare_var_to_imm RESULT, 4
 	goto_if 4, SlateportCity_PokemonFanClub_EventScript_155A3A
 	release
 	end
 
 SlateportCity_PokemonFanClub_EventScript_155A3A:: @ 8155A3A
-	playsfx 21
+	playse 21
 	move LAST_TALKED, SlateportCity_PokemonFanClub_Movement_1A0833
 	waitmove 0
 	move LAST_TALKED, SlateportCity_PokemonFanClub_Movement_1A0835
@@ -235,7 +235,7 @@ SlateportCity_PokemonFanClub_EventScript_155A88:: @ 8155A88
 SlateportCity_PokemonFanClub_EventScript_155A91:: @ 8155A91
 	lock
 	faceplayer
-	checksound
+	waitse
 	pokecry SPECIES_SKITTY, 0
 	msgbox SlateportCity_PokemonFanClub_Text_17E14E, 4
 	waitpokecry
@@ -245,7 +245,7 @@ SlateportCity_PokemonFanClub_EventScript_155A91:: @ 8155A91
 SlateportCity_PokemonFanClub_EventScript_155AA4:: @ 8155AA4
 	lock
 	faceplayer
-	checksound
+	waitse
 	pokecry SPECIES_ZIGZAGOON, 0
 	msgbox SlateportCity_PokemonFanClub_Text_17E164, 4
 	waitpokecry
@@ -255,7 +255,7 @@ SlateportCity_PokemonFanClub_EventScript_155AA4:: @ 8155AA4
 SlateportCity_PokemonFanClub_EventScript_155AB7:: @ 8155AB7
 	lock
 	faceplayer
-	checksound
+	waitse
 	pokecry SPECIES_AZUMARILL, 0
 	msgbox SlateportCity_PokemonFanClub_Text_17E178, 4
 	waitpokecry

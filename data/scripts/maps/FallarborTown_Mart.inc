@@ -40,7 +40,7 @@ FallarborTown_Mart_EventScript_1539A5:: @ 81539A5
 FallarborTown_Mart_EventScript_1539AE:: @ 81539AE
 	lock
 	faceplayer
-	checksound
+	waitse
 	pokecry SPECIES_SKITTY, 0
 	msgbox FallarborTown_Mart_Text_1770D3, 4
 	waitpokecry

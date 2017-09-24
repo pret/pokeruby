@@ -31,7 +31,7 @@ InsideOfTruck_EventScript_15FC45:: @ 815FC45
 	setflag 784
 	setflag 760
 	setvar 0x408c, 1
-	warpplace LittlerootTown, 255, 3, 10
+	setdynamicwarp LittlerootTown, 255, 3, 10
 	releaseall
 	end
 
@@ -43,7 +43,7 @@ InsideOfTruck_EventScript_15FC68:: @ 815FC68
 	setflag 785
 	setflag 722
 	setvar 0x4082, 1
-	warpplace LittlerootTown, 255, 12, 10
+	setdynamicwarp LittlerootTown, 255, 12, 10
 	releaseall
 	end
 

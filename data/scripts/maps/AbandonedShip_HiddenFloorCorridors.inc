@@ -4,7 +4,7 @@ AbandonedShip_HiddenFloorCorridors_MapScripts:: @ 815EB46
 	.byte 0
 
 AbandonedShip_HiddenFloorCorridors_MapScript1_15EB51:: @ 815EB51
-	warp4 AbandonedShip_Underwater1, 255, 5, 4
+	setdivewarp AbandonedShip_Underwater1, 255, 5, 4
 	end
 
 AbandonedShip_HiddenFloorCorridors_MapScript1_15EB5A:: @ 815EB5A
@@ -66,7 +66,7 @@ AbandonedShip_HiddenFloorCorridors_EventScript_15EBF3:: @ 815EBF3
 	compare_var_to_imm RESULT, 0
 	goto_if_eq AbandonedShip_HiddenFloorCorridors_EventScript_15ECCF
 	msgbox AbandonedShip_HiddenFloorCorridors_Text_198E90, 4
-	playsfx 21
+	playse 21
 	removeitem ITEM_ROOM_1_KEY, 1
 	setflag 240
 	call AbandonedShip_HiddenFloorCorridors_EventScript_15EBA3
@@ -82,7 +82,7 @@ AbandonedShip_HiddenFloorCorridors_EventScript_15EC2A:: @ 815EC2A
 	compare_var_to_imm RESULT, 0
 	goto_if_eq AbandonedShip_HiddenFloorCorridors_EventScript_15ECD9
 	msgbox AbandonedShip_HiddenFloorCorridors_Text_198E90, 4
-	playsfx 21
+	playse 21
 	removeitem ITEM_ROOM_2_KEY, 1
 	setflag 241
 	call AbandonedShip_HiddenFloorCorridors_EventScript_15EBAD
@@ -98,7 +98,7 @@ AbandonedShip_HiddenFloorCorridors_EventScript_15EC61:: @ 815EC61
 	compare_var_to_imm RESULT, 0
 	goto_if_eq AbandonedShip_HiddenFloorCorridors_EventScript_15ECE3
 	msgbox AbandonedShip_HiddenFloorCorridors_Text_198E90, 4
-	playsfx 21
+	playse 21
 	removeitem ITEM_ROOM_4_KEY, 1
 	setflag 242
 	call AbandonedShip_HiddenFloorCorridors_EventScript_15EBB7
@@ -114,7 +114,7 @@ AbandonedShip_HiddenFloorCorridors_EventScript_15EC98:: @ 815EC98
 	compare_var_to_imm RESULT, 0
 	goto_if_eq AbandonedShip_HiddenFloorCorridors_EventScript_15ECED
 	msgbox AbandonedShip_HiddenFloorCorridors_Text_198E90, 4
-	playsfx 21
+	playse 21
 	removeitem ITEM_ROOM_6_KEY, 1
 	setflag 243
 	call AbandonedShip_HiddenFloorCorridors_EventScript_15EBC1

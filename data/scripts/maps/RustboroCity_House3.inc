@@ -12,7 +12,7 @@ RustboroCity_House3_EventScript_157DF6:: @ 8157DF6
 RustboroCity_House3_EventScript_157DFF:: @ 8157DFF
 	lock
 	faceplayer
-	checksound
+	waitse
 	pokecry SPECIES_PIKACHU, 0
 	msgbox RustboroCity_House3_Text_18567D, 4
 	waitpokecry

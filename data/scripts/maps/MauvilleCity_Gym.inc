@@ -91,7 +91,7 @@ MauvilleCity_Gym_EventScript_1565DB:: @ 81565DB
 	call MauvilleCity_Gym_EventScript_1A01C0
 	special MauvilleGymSpecial3
 	special DrawWholeMapView
-	playsfx 44
+	playse 44
 	goto MauvilleCity_Gym_EventScript_15661D
 	end
 
@@ -146,7 +146,7 @@ MauvilleCity_Gym_EventScript_1566BA:: @ 81566BA
 	special MauvilleGymSpecial2
 	special MauvilleGymSpecial1
 	special DrawWholeMapView
-	playsfx 44
+	playse 44
 	checkflag 99
 	goto_if_eq MauvilleCity_Gym_EventScript_1566E1
 	checkflag 99

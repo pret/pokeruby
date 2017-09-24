@@ -27,14 +27,14 @@ SlateportCity_House1_EventScript_1556BF:: @ 81556BF
 	end
 
 SlateportCity_House1_EventScript_1556C9:: @ 81556C9
-	specialval RESULT, ScriptGetPartyMonSpecies
+	specialvar RESULT, ScriptGetPartyMonSpecies
 	compare_var_to_imm RESULT, SPECIES_EGG
 	goto_if_eq SlateportCity_House1_EventScript_15571C
 	special sub_80BFAE0
 	special sub_80BFB10
 	compare_var_to_imm RESULT, 1
 	goto_if_eq SlateportCity_House1_EventScript_155726
-	specialval RESULT, sub_810F96C
+	specialvar RESULT, sub_810F96C
 	special sub_80BFAE0
 	compare_var_to_imm RESULT, 1
 	goto_if_eq SlateportCity_House1_EventScript_155726
@@ -58,7 +58,7 @@ SlateportCity_House1_EventScript_155726:: @ 8155726
 SlateportCity_House1_EventScript_155730:: @ 8155730
 	msgbox SlateportCity_House1_Text_17D580, 4
 	call SlateportCity_House1_EventScript_1A0678
-	specialval RESULT, sub_80BF9B4
+	specialvar RESULT, sub_80BF9B4
 	special sub_80BFAE0
 	compare_var_to_imm RESULT, 1
 	goto_if_eq SlateportCity_House1_EventScript_15575A

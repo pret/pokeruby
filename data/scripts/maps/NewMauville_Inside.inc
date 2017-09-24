@@ -31,7 +31,7 @@ NewMauville_Inside_EventScript_15E5AA:: @ 815E5AA
 	lockall
 	setvar 0x4001, 1
 	setvar 0x4002, 0
-	playsfx 21
+	playse 21
 	call NewMauville_Inside_EventScript_15E5DA
 	special DrawWholeMapView
 	releaseall
@@ -41,7 +41,7 @@ NewMauville_Inside_EventScript_15E5C2:: @ 815E5C2
 	lockall
 	setvar 0x4001, 0
 	setvar 0x4002, 1
-	playsfx 21
+	playse 21
 	call NewMauville_Inside_EventScript_15E728
 	special DrawWholeMapView
 	releaseall
@@ -165,9 +165,9 @@ NewMauville_Inside_EventScript_15E900:: @ 815E900
 	lock
 	faceplayer
 	setwildbattle SPECIES_VOLTORB, 25, ITEM_NONE
-	checksound
+	waitse
 	pokecry SPECIES_VOLTORB, 2
-	pause 40
+	delay 40
 	waitpokecry
 	setflag 974
 	setflag 2145
@@ -180,9 +180,9 @@ NewMauville_Inside_EventScript_15E91E:: @ 815E91E
 	lock
 	faceplayer
 	setwildbattle SPECIES_VOLTORB, 25, ITEM_NONE
-	checksound
+	waitse
 	pokecry SPECIES_VOLTORB, 2
-	pause 40
+	delay 40
 	waitpokecry
 	setflag 975
 	setflag 2145
@@ -195,9 +195,9 @@ NewMauville_Inside_EventScript_15E93C:: @ 815E93C
 	lock
 	faceplayer
 	setwildbattle SPECIES_VOLTORB, 25, ITEM_NONE
-	checksound
+	waitse
 	pokecry SPECIES_VOLTORB, 2
-	pause 40
+	delay 40
 	waitpokecry
 	setflag 976
 	setflag 2145

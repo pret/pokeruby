@@ -24,7 +24,7 @@ JaggedPass_EventScript_15D285:: @ 815D285
 
 JaggedPass_EventScript_15D29C:: @ 815D29C
 	trainerbattle 0, OPPONENT_DIANA_1, 0, JaggedPass_Text_195E9E, JaggedPass_Text_195EDF
-	specialval RESULT, sub_8082C68
+	specialvar RESULT, sub_8082C68
 	compare_var_to_imm RESULT, 1
 	goto_if_eq JaggedPass_EventScript_15D2C3
 	msgbox JaggedPass_Text_195F04, 6
@@ -37,7 +37,7 @@ JaggedPass_EventScript_15D2C3:: @ 815D2C3
 
 JaggedPass_EventScript_15D2DA:: @ 815D2DA
 	trainerbattle 0, OPPONENT_ETHAN_1, 0, JaggedPass_Text_195FF2, JaggedPass_Text_196032
-	specialval RESULT, sub_8082C68
+	specialvar RESULT, sub_8082C68
 	compare_var_to_imm RESULT, 1
 	goto_if_eq JaggedPass_EventScript_15D301
 	msgbox JaggedPass_Text_196077, 6

@@ -62,7 +62,7 @@ SootopolisCity_EventScript_14D159:: @ 814D159
 	return
 
 SootopolisCity_MapScript1_14D165:: @ 814D165
-	warp4 Underwater_SootopolisCity, 255, 9, 6
+	setdivewarp Underwater_SootopolisCity, 255, 9, 6
 	end
 
 SootopolisCity_EventScript_14D16E:: @ 814D16E
@@ -90,7 +90,7 @@ SootopolisCity_EventScript_14D196:: @ 814D196
 SootopolisCity_EventScript_14D19F:: @ 814D19F
 	lock
 	faceplayer
-	checkdailyflags
+	dodailyevents
 	special GetPlayerBigGuyGirlString
 	checkflag 2258
 	goto_if_eq SootopolisCity_EventScript_14D241
@@ -216,7 +216,7 @@ SootopolisCity_EventScript_14D308:: @ 814D308
 	move 10, SootopolisCity_Movement_1A083F
 	move 255, SootopolisCity_Movement_1A0843
 	waitmove 0
-	playsfx 21
+	playse 21
 	move 10, SootopolisCity_Movement_1A0833
 	waitmove 0
 	move 10, SootopolisCity_Movement_1A0835
@@ -237,7 +237,7 @@ SootopolisCity_EventScript_14D308:: @ 814D308
 	.else
 	msgbox SootopolisCity_Text_169E82, 4
 	.endif
-	playsfx 21
+	playse 21
 	move 5, SootopolisCity_Movement_1A0833
 	waitmove 0
 	move 5, SootopolisCity_Movement_1A0835
@@ -248,7 +248,7 @@ SootopolisCity_EventScript_14D308:: @ 814D308
 	msgbox SootopolisCity_Text_169F3C, 4
 	.endif
 	closebutton
-	pause 30
+	delay 30
 	move 5, SootopolisCity_Movement_14D46A
 	move 10, SootopolisCity_Movement_14D41D
 	move 255, SootopolisCity_Movement_14D445
@@ -256,7 +256,7 @@ SootopolisCity_EventScript_14D308:: @ 814D308
 	move 5, SootopolisCity_Movement_1A0843
 	move 255, SootopolisCity_Movement_1A0843
 	waitmove 0
-	pause 30
+	delay 30
 	move 10, SootopolisCity_Movement_1A0845
 	waitmove 0
 	.ifdef SAPPHIRE
@@ -265,7 +265,7 @@ SootopolisCity_EventScript_14D308:: @ 814D308
 	msgbox SootopolisCity_Text_169F6B, 4
 	.endif
 	closebutton
-	pause 30
+	delay 30
 	move 5, SootopolisCity_Movement_14D47C
 	move 255, SootopolisCity_Movement_14D457
 	move 10, SootopolisCity_Movement_14D42D
@@ -460,10 +460,10 @@ SootopolisCity_EventScript_14D4AD:: @ 814D4AD
 	closebutton
 	move LAST_TALKED, SootopolisCity_Movement_1A0845
 	waitmove 0
-	pause 50
+	delay 50
 	setanimation 0, 1
 	doanimation 30
-	pause 15
+	delay 15
 	disappear LAST_TALKED
 	checkanimation 30
 	release

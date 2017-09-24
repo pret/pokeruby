@@ -43,7 +43,7 @@ OldaleTown_EventScript_14DDBC:: @ 814DDBC
 	checkflag 1
 	goto_if_eq OldaleTown_EventScript_14DE79
 	setflag 1
-	playmusic 420, 0
+	playbgm 420, 0
 	msgbox OldaleTown_Text_16AEF2, 4
 	closebutton
 	switch FACING
@@ -80,7 +80,7 @@ OldaleTown_EventScript_14DE4C:: @ 814DE4C
 	goto_if_eq OldaleTown_EventScript_14DE83
 	msgbox OldaleTown_Text_16AFE1, 4
 	setflag 132
-	fadedefault
+	fadedefaultbgm
 	release
 	end
 
@@ -91,7 +91,7 @@ OldaleTown_EventScript_14DE79:: @ 814DE79
 
 OldaleTown_EventScript_14DE83:: @ 814DE83
 	msgbox OldaleTown_Text_1A0CC2, 4
-	fadedefault
+	fadedefaultbgm
 	release
 	end
 

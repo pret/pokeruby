@@ -90,7 +90,7 @@ LittlerootTown_MaysHouse_1F_EventScript_152971:: @ 8152971
 
 LittlerootTown_MaysHouse_1F_EventScript_152982:: @ 8152982
 	lockall
-	playsfx 21
+	playse 21
 	move 4, LittlerootTown_MaysHouse_1F_Movement_1A0833
 	waitmove 0
 	move 4, LittlerootTown_MaysHouse_1F_Movement_1A0835

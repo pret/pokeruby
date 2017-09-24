@@ -17,7 +17,7 @@ BattleTower_Lobby_EventScript_16029C:: @ 816029C
 	goto_if_eq BattleTower_Lobby_EventScript_1602E4
 	checkflag 237
 	goto_if_eq BattleTower_Lobby_EventScript_1602CD
-	specialval 0x8007, sub_810F404
+	specialvar 0x8007, sub_810F404
 	compare_var_to_imm 0x8007, 50
 	goto_if 0, BattleTower_Lobby_EventScript_1602E4
 	clearflag 941
@@ -25,7 +25,7 @@ BattleTower_Lobby_EventScript_16029C:: @ 816029C
 	return
 
 BattleTower_Lobby_EventScript_1602CD:: @ 81602CD
-	specialval 0x8007, sub_810F404
+	specialvar 0x8007, sub_810F404
 	compare_var_to_imm 0x8007, 100
 	goto_if 0, BattleTower_Lobby_EventScript_1602E4
 	clearflag 941
@@ -84,7 +84,7 @@ BattleTower_Lobby_EventScript_160342:: @ 8160342
 	goto_if_eq BattleTower_Lobby_EventScript_16037D
 	message BattleTower_Lobby_Text_19A6BE
 	waittext
-	fanfare 370
+	playfanfare 370
 	waitfanfare
 	msgbox BattleTower_Lobby_Text_19A719, 4
 
@@ -100,8 +100,8 @@ BattleTower_Lobby_EventScript_16037D:: @ 816037D
 	special sub_8135D84
 	setvar 0x8004, 3
 	special sub_8135BA0
-	playsfx 55
-	checksound
+	playse 55
+	waitse
 
 BattleTower_Lobby_EventScript_1603AD:: @ 81603AD
 	setvar 0x8004, 0
@@ -114,7 +114,7 @@ BattleTower_Lobby_EventScript_1603AD:: @ 81603AD
 	case 0, BattleTower_Lobby_EventScript_160408
 	message BattleTower_Lobby_Text_19A506
 	waittext
-	fanfare 370
+	playfanfare 370
 	waitfanfare
 	setvar 0x8004, 9
 	special sub_81358A4
@@ -148,8 +148,8 @@ BattleTower_Lobby_EventScript_160419:: @ 8160419
 	special sub_8135668
 	setvar 0x8004, 0
 	special sub_8135BA0
-	playsfx 55
-	checksound
+	playse 55
+	waitse
 	msgbox BattleTower_Lobby_Text_199FA9, 4
 	closebutton
 	setvar 0x4000, 5
@@ -166,8 +166,8 @@ BattleTower_Lobby_EventScript_16044B:: @ 816044B
 	waittext
 	setvar 0x8004, 1
 	special sub_8135BA0
-	playsfx 55
-	checksound
+	playse 55
+	waitse
 	setvar 0x8004, 8
 	setvar 0x8005, 0
 	special sub_8135668
@@ -241,7 +241,7 @@ BattleTower_Lobby_EventScript_160587:: @ 8160587
 	special sub_8135668
 	special LoadPlayerParty
 	closebutton
-	pause 2
+	delay 2
 	call S_DoSaveDialog
 	setvar 0x4000, 5
 	hidebox 0, 0, 15, 10
@@ -402,7 +402,7 @@ BattleTower_Lobby_EventScript_160733:: @ 8160733
 	end
 
 BattleTower_Lobby_EventScript_160773:: @ 8160773
-	specialval RESULT, sub_810F404
+	specialvar RESULT, sub_810F404
 	compare_var_to_imm RESULT, 100
 	goto_if 0, BattleTower_Lobby_EventScript_1607C5
 	msgbox BattleTower_Lobby_Text_19AAC4, 4

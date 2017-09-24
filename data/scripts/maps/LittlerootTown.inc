@@ -81,7 +81,7 @@ LittlerootTown_EventScript_14D5EF:: @ 814D5EF
 	setvar 0x8005, 8
 	call LittlerootTown_EventScript_14D62B
 	setflag 761
-	warpmuted LittlerootTown_BrendansHouse_1F, 255, 8, 8
+	warpsilent LittlerootTown_BrendansHouse_1F, 255, 8, 8
 	waitstate
 	releaseall
 	end
@@ -92,14 +92,14 @@ LittlerootTown_EventScript_14D60D:: @ 814D60D
 	setvar 0x8005, 8
 	call LittlerootTown_EventScript_14D62B
 	setflag 762
-	warpmuted LittlerootTown_MaysHouse_1F, 255, 2, 8
+	warpsilent LittlerootTown_MaysHouse_1F, 255, 2, 8
 	waitstate
 	releaseall
 	end
 
 LittlerootTown_EventScript_14D62B:: @ 814D62B
-	pause 15
-	playsfx 10
+	delay 15
+	playse 10
 	move 255, LittlerootTown_Movement_14D6C0
 	waitmove 0
 	setdooropened 0x8004, 0x8005
@@ -109,7 +109,7 @@ LittlerootTown_EventScript_14D62B:: @ 814D62B
 	waitmove 0
 	setdoorclosed 0x8004, 0x8005
 	doorchange
-	pause 10
+	delay 10
 	move 4, LittlerootTown_Movement_14D6AE
 	waitmove 0
 	msgbox LittlerootTown_Text_16A7C9, 4
@@ -868,7 +868,7 @@ LittlerootTown_EventScript_14DD2B:: @ 814DD2B
 
 LittlerootTown_EventScript_14DD38:: @ 814DD38
 	msgbox LittlerootTown_Text_16A8FD, 4
-	fanfare 370
+	playfanfare 370
 	message LittlerootTown_Text_16AA32
 	waitfanfare
 	waittext
@@ -876,5 +876,5 @@ LittlerootTown_EventScript_14DD38:: @ 814DD38
 	msgbox LittlerootTown_Text_16AA5C, 4
 	msgbox LittlerootTown_Text_16AB10, 4
 	closebutton
-	pause 30
+	delay 30
 	return

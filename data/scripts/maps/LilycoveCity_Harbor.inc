@@ -78,13 +78,13 @@ LilycoveCity_Harbor_EventScript_15998A:: @ 815998A
 	closebutton
 	move LAST_TALKED, LilycoveCity_Harbor_Movement_1A0841
 	waitmove 0
-	pause 30
+	delay 30
 	spriteinvisible LAST_TALKED, 13, 10
 	compare_var_to_imm FACING, 2
 	call_if 1, LilycoveCity_Harbor_EventScript_1599D9
 	compare_var_to_imm FACING, 4
 	call_if 1, LilycoveCity_Harbor_EventScript_1599CE
-	pause 30
+	delay 30
 	spriteinvisible 255, 0, 0
 	setvar 0x8004, 2
 	call LilycoveCity_Harbor_EventScript_1A040E
@@ -116,24 +116,24 @@ LilycoveCity_Harbor_EventScript_1599EE:: @ 81599EE
 	closebutton
 	move LAST_TALKED, LilycoveCity_Harbor_Movement_1A0841
 	waitmove 0
-	pause 30
+	delay 30
 	spriteinvisible LAST_TALKED, 13, 10
-	pause 60
+	delay 60
 	reappear 4
-	pause 30
+	delay 30
 	move 4, LilycoveCity_Harbor_Movement_1A0839
 	waitmove 0
 	msgbox LilycoveCity_Harbor_Text_1C5120, 4
 	closebutton
 	move 4, LilycoveCity_Harbor_Movement_1A0841
 	waitmove 0
-	pause 30
+	delay 30
 	disappear 4
 	compare_var_to_imm FACING, 2
 	call_if 1, LilycoveCity_Harbor_EventScript_1599D9
 	compare_var_to_imm FACING, 4
 	call_if 1, LilycoveCity_Harbor_EventScript_1599CE
-	pause 30
+	delay 30
 	spriteinvisible 255, 0, 0
 	special ScrSpecial_HealPlayerParty
 	setvar 0x8004, 2

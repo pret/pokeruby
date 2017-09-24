@@ -37,7 +37,7 @@ CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 	doweather
 	special WaitWeather
 	waitstate
-	playsfx 209
+	playse 209
 	setanimation 0, 9
 	setanimation 1, 13
 	setanimation 2, 0
@@ -48,24 +48,24 @@ CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 	.else
 	setvar RESULT, 2
 	.endif
-	playsfx 107
+	playse 107
 	special sub_80818A4
 	waitstate
 	special sub_80818FC
 	waitstate
 	move 1, CaveOfOrigin_B4F_Movement_15DE7D
 	waitmove 0
-	pause 60
+	delay 60
 	setwildbattle SPECIES_GROUDON_OR_KYOGRE, 45, ITEM_NONE
-	checksound
+	waitse
 	pokecry SPECIES_GROUDON_OR_KYOGRE, 2
-	pause 40
+	delay 40
 	waitpokecry
 	setflag 2145
 	special ScrSpecial_StartGroudonKyogreBattle
 	waitstate
 	clearflag 2145
-	specialval RESULT, sub_810E300
+	specialvar RESULT, sub_810E300
 	compare_var_to_imm RESULT, 1
 	call_if 1, CaveOfOrigin_B4F_EventScript_15DE73
 	setflag 816

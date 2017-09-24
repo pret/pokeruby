@@ -59,7 +59,7 @@ FortreeCity_House4_Movement_158218:: @ 8158218
 FortreeCity_House4_EventScript_15821E:: @ 815821E
 	lock
 	faceplayer
-	checksound
+	waitse
 	pokecry SPECIES_WINGULL, 0
 	msgbox FortreeCity_House4_Text_18695C, 4
 	waitpokecry

@@ -21,7 +21,7 @@ Route102_EventScript_1A1533:: @ 81A1533
 Route102_EventScript_1A153D:: @ 81A153D
 	lock
 	faceplayer
-	specialval RESULT, PlayerHasBerries
+	specialvar RESULT, PlayerHasBerries
 	compare_var_to_imm RESULT, 1
 	goto_if_eq Route102_EventScript_1A1558
 	message Route102_Text_1A16B6
@@ -113,7 +113,7 @@ Route102_EventScript_1A161D:: @ 81A161D
 	goto_if_eq Route102_EventScript_1A1642
 	special FieldObjectInteractionRemoveBerryTree
 	message Route102_Text_1A17FD
-	fanfare 387
+	playfanfare 387
 	waittext
 	waitfanfare
 	waitbutton

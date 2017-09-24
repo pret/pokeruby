@@ -37,7 +37,7 @@ MtChimney_EventScript_1B2CCB:: @ 81B2CCB
 	.endif
 	move 2, MtChimney_Movement_1A0839
 	waitmove 0
-	playsfx 21
+	playse 21
 	move 2, MtChimney_Movement_1A0833
 	waitmove 0
 	move 2, MtChimney_Movement_1A0835
@@ -58,7 +58,7 @@ MtChimney_EventScript_1B2CCB:: @ 81B2CCB
 	msgbox MtChimney_Text_1B3A90, 4
 	.endif
 	closebutton
-	pause 30
+	delay 30
 	fadescreen 1
 	disappear 2
 	disappear 3

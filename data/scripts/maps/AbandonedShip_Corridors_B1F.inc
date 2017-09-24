@@ -4,7 +4,7 @@ AbandonedShip_Corridors_B1F_MapScripts:: @ 815E98F
 	.byte 0
 
 AbandonedShip_Corridors_B1F_MapScript1_15E99A:: @ 815E99A
-	warp4 AbandonedShip_Underwater1, 255, 5, 4
+	setdivewarp AbandonedShip_Underwater1, 255, 5, 4
 	end
 
 AbandonedShip_Corridors_B1F_MapScript1_15E9A3:: @ 815E9A3
@@ -34,7 +34,7 @@ AbandonedShip_Corridors_B1F_EventScript_15E9D3:: @ 815E9D3
 	compare_var_to_imm RESULT, 0
 	goto_if_eq AbandonedShip_Corridors_B1F_EventScript_15EA0A
 	msgbox AbandonedShip_Corridors_B1F_Text_198692, 4
-	playsfx 21
+	playse 21
 	removeitem ITEM_STORAGE_KEY, 1
 	setflag 239
 	call AbandonedShip_Corridors_B1F_EventScript_15E9C0

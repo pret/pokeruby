@@ -43,7 +43,7 @@ MauvilleCity_GameCorner_EventScript_156AAE:: @ 8156AAE
 	updatemoney 0, 0
 	nop
 	updatecoins 0, 5
-	playsfx 95
+	playse 95
 	msgbox MauvilleCity_GameCorner_Text_181CFE, 4
 	hidemoney 0, 0
 	hidecoins 0, 5
@@ -62,7 +62,7 @@ MauvilleCity_GameCorner_EventScript_156AF0:: @ 8156AF0
 	updatemoney 0, 0
 	nop
 	updatecoins 0, 5
-	playsfx 95
+	playse 95
 	msgbox MauvilleCity_GameCorner_Text_181CFE, 4
 	hidemoney 0, 0
 	hidecoins 0, 5
@@ -163,7 +163,7 @@ MauvilleCity_GameCorner_EventScript_156C46:: @ 8156C46
 	removecoins 1000
 	adddecor 88
 	updatecoins 0, 0
-	playsfx 95
+	playse 95
 	msgbox MauvilleCity_GameCorner_Text_181E49, 4
 	goto MauvilleCity_GameCorner_EventScript_156B9B
 	end
@@ -179,7 +179,7 @@ MauvilleCity_GameCorner_EventScript_156C80:: @ 8156C80
 	removecoins 1000
 	adddecor 89
 	updatecoins 0, 0
-	playsfx 95
+	playse 95
 	msgbox MauvilleCity_GameCorner_Text_181E49, 4
 	goto MauvilleCity_GameCorner_EventScript_156B9B
 	end
@@ -195,7 +195,7 @@ MauvilleCity_GameCorner_EventScript_156CBA:: @ 8156CBA
 	removecoins 1000
 	adddecor 90
 	updatecoins 0, 0
-	playsfx 95
+	playse 95
 	msgbox MauvilleCity_GameCorner_Text_181E49, 4
 	goto MauvilleCity_GameCorner_EventScript_156B9B
 	end
@@ -297,7 +297,7 @@ MauvilleCity_GameCorner_EventScript_156E3C:: @ 8156E3C
 	removecoins 1500
 	additem ITEM_TM32, 1
 	updatecoins 0, 0
-	playsfx 95
+	playse 95
 	msgbox MauvilleCity_GameCorner_Text_181F08, 4
 	goto MauvilleCity_GameCorner_EventScript_156D49
 	end
@@ -312,7 +312,7 @@ MauvilleCity_GameCorner_EventScript_156E76:: @ 8156E76
 	removecoins 3500
 	additem ITEM_TM29, 1
 	updatecoins 0, 0
-	playsfx 95
+	playse 95
 	msgbox MauvilleCity_GameCorner_Text_181F08, 4
 	goto MauvilleCity_GameCorner_EventScript_156D49
 	end
@@ -327,7 +327,7 @@ MauvilleCity_GameCorner_EventScript_156EB0:: @ 8156EB0
 	removecoins 4000
 	additem ITEM_TM35, 1
 	updatecoins 0, 0
-	playsfx 95
+	playse 95
 	msgbox MauvilleCity_GameCorner_Text_181F08, 4
 	goto MauvilleCity_GameCorner_EventScript_156D49
 	end
@@ -342,7 +342,7 @@ MauvilleCity_GameCorner_EventScript_156EEA:: @ 8156EEA
 	removecoins 4000
 	additem ITEM_TM24, 1
 	updatecoins 0, 0
-	playsfx 95
+	playse 95
 	msgbox MauvilleCity_GameCorner_Text_181F08, 4
 	goto MauvilleCity_GameCorner_EventScript_156D49
 	end
@@ -357,7 +357,7 @@ MauvilleCity_GameCorner_EventScript_156F24:: @ 8156F24
 	removecoins 4000
 	additem ITEM_TM13, 1
 	updatecoins 0, 0
-	playsfx 95
+	playse 95
 	msgbox MauvilleCity_GameCorner_Text_181F08, 4
 	goto MauvilleCity_GameCorner_EventScript_156D49
 	end
@@ -468,7 +468,7 @@ MauvilleCity_GameCorner_EventScript_15709C:: @ 815709C
 	setflag 225
 	givecoins 20
 	msgbox MauvilleCity_GameCorner_Text_18208E, 4
-	playsfx 95
+	playse 95
 	goto MauvilleCity_GameCorner_EventScript_1570CA
 	end
 
@@ -525,7 +525,7 @@ MauvilleCity_GameCorner_EventScript_157135:: @ 8157135
 	compare_var_to_imm RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
 	setvar 0x8004, 0
-	specialval RESULT, sub_810F424
+	specialvar RESULT, sub_810F424
 	pokecasino RESULT
 	releaseall
 	end
@@ -536,7 +536,7 @@ MauvilleCity_GameCorner_EventScript_157155:: @ 8157155
 	compare_var_to_imm RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
 	setvar 0x8004, 1
-	specialval RESULT, sub_810F424
+	specialvar RESULT, sub_810F424
 	pokecasino RESULT
 	releaseall
 	end
@@ -547,7 +547,7 @@ MauvilleCity_GameCorner_EventScript_157175:: @ 8157175
 	compare_var_to_imm RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
 	setvar 0x8004, 2
-	specialval RESULT, sub_810F424
+	specialvar RESULT, sub_810F424
 	pokecasino RESULT
 	releaseall
 	end
@@ -558,7 +558,7 @@ MauvilleCity_GameCorner_EventScript_157195:: @ 8157195
 	compare_var_to_imm RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
 	setvar 0x8004, 3
-	specialval RESULT, sub_810F424
+	specialvar RESULT, sub_810F424
 	pokecasino RESULT
 	releaseall
 	end
@@ -569,7 +569,7 @@ MauvilleCity_GameCorner_EventScript_1571B5:: @ 81571B5
 	compare_var_to_imm RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
 	setvar 0x8004, 4
-	specialval RESULT, sub_810F424
+	specialvar RESULT, sub_810F424
 	pokecasino RESULT
 	releaseall
 	end
@@ -580,7 +580,7 @@ MauvilleCity_GameCorner_EventScript_1571D5:: @ 81571D5
 	compare_var_to_imm RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
 	setvar 0x8004, 5
-	specialval RESULT, sub_810F424
+	specialvar RESULT, sub_810F424
 	pokecasino RESULT
 	releaseall
 	end
@@ -591,7 +591,7 @@ MauvilleCity_GameCorner_EventScript_1571F5:: @ 81571F5
 	compare_var_to_imm RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
 	setvar 0x8004, 6
-	specialval RESULT, sub_810F424
+	specialvar RESULT, sub_810F424
 	pokecasino RESULT
 	releaseall
 	end
@@ -602,7 +602,7 @@ MauvilleCity_GameCorner_EventScript_157215:: @ 8157215
 	compare_var_to_imm RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
 	setvar 0x8004, 7
-	specialval RESULT, sub_810F424
+	specialvar RESULT, sub_810F424
 	pokecasino RESULT
 	releaseall
 	end
@@ -613,7 +613,7 @@ MauvilleCity_GameCorner_EventScript_157235:: @ 8157235
 	compare_var_to_imm RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
 	setvar 0x8004, 8
-	specialval RESULT, sub_810F424
+	specialvar RESULT, sub_810F424
 	pokecasino RESULT
 	releaseall
 	end
@@ -624,7 +624,7 @@ MauvilleCity_GameCorner_EventScript_157255:: @ 8157255
 	compare_var_to_imm RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
 	setvar 0x8004, 9
-	specialval RESULT, sub_810F424
+	specialvar RESULT, sub_810F424
 	pokecasino RESULT
 	releaseall
 	end
@@ -635,7 +635,7 @@ MauvilleCity_GameCorner_EventScript_157275:: @ 8157275
 	compare_var_to_imm RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
 	setvar 0x8004, 10
-	specialval RESULT, sub_810F424
+	specialvar RESULT, sub_810F424
 	pokecasino RESULT
 	releaseall
 	end
@@ -646,7 +646,7 @@ MauvilleCity_GameCorner_EventScript_157295:: @ 8157295
 	compare_var_to_imm RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
 	setvar 0x8004, 11
-	specialval RESULT, sub_810F424
+	specialvar RESULT, sub_810F424
 	pokecasino RESULT
 	releaseall
 	end

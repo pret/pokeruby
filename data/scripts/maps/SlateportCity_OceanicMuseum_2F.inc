@@ -11,7 +11,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_155CE6:: @ 8155CE6
 	faceplayer
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17ECFD, 4
 	closebutton
-	playmusic BGM_EVIL_TEAM, 1
+	playbgm BGM_EVIL_TEAM, 1
 	reappear 3
 	move 3, SlateportCity_OceanicMuseum_2F_Movement_155EB4
 	waitmove 0
@@ -45,7 +45,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_155CE6:: @ 8155CE6
 	move 3, SlateportCity_OceanicMuseum_2F_Movement_155EB2
 	waitmove 0
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17EEA5, 4
-	playmusicbattle 0
+	savebgm 0
 	trainerbattle 3, OPPONENT_MUSEUM_2F_GRUNT_2, 0, SlateportCity_OceanicMuseum_2F_Text_17EED6
 	move 3, SlateportCity_OceanicMuseum_2F_Movement_155EBF
 	waitmove 0
@@ -54,7 +54,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_155CE6:: @ 8155CE6
 	waitmove 0
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17EEEA, 4
 	closebutton
-	pause 35
+	delay 35
 	reappear 2
 	move 2, SlateportCity_OceanicMuseum_2F_Movement_155EA8
 	move 4, SlateportCity_OceanicMuseum_2F_Movement_155ECE
@@ -73,7 +73,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_155CE6:: @ 8155CE6
 	disappear 3
 	disappear 4
 	fadescreen 0
-	pause 30
+	delay 30
 	setflag 883
 	move 255, SlateportCity_OceanicMuseum_2F_Movement_1A0843
 	waitmove 0
@@ -84,7 +84,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_155CE6:: @ 8155CE6
 	closebutton
 	move 1, SlateportCity_OceanicMuseum_2F_Movement_155E98
 	waitmove 0
-	playsfx 9
+	playse 9
 	disappear 1
 	setflag 900
 	setflag 149

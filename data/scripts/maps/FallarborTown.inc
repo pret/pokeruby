@@ -34,7 +34,7 @@ FallarborTown_EventScript_14E81D:: @ 814E81D
 FallarborTown_EventScript_14E826:: @ 814E826
 	lock
 	faceplayer
-	checksound
+	waitse
 	pokecry SPECIES_AZURILL, 0
 	msgbox FallarborTown_Text_16C92C, 4
 	waitpokecry

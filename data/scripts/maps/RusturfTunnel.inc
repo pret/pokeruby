@@ -148,7 +148,7 @@ RusturfTunnel_EventScript_15C91B:: @ 815C91B
 	return
 
 RusturfTunnel_EventScript_15C92D:: @ 815C92D
-	playsfx 21
+	playse 21
 	move 1, RusturfTunnel_Movement_1A0833
 	waitmove 0
 	move 1, RusturfTunnel_Movement_1A0835
@@ -299,7 +299,7 @@ RusturfTunnel_Movement_15C9D3:: @ 815C9D3
 RusturfTunnel_EventScript_15C9D7:: @ 815C9D7
 	lock
 	faceplayer
-	checksound
+	waitse
 	pokecry SPECIES_WINGULL, 0
 	msgbox RusturfTunnel_Text_194188, 4
 	waitpokecry
@@ -309,7 +309,7 @@ RusturfTunnel_EventScript_15C9D7:: @ 815C9D7
 RusturfTunnel_EventScript_15C9EA:: @ 815C9EA
 	lock
 	faceplayer
-	playmusic BGM_EVIL_TEAM, 0
+	playbgm BGM_EVIL_TEAM, 0
 	msgbox RusturfTunnel_Text_19419B, 4
 	trainerbattle 3, OPPONENT_RUSTURF_TUNNEL_GRUNT, 0, RusturfTunnel_Text_194243
 	msgbox RusturfTunnel_Text_194274, 4
@@ -319,7 +319,7 @@ RusturfTunnel_EventScript_15C9EA:: @ 815C9EA
 	move 6, RusturfTunnel_Movement_15CAA2
 	waitmove 0
 	disappear 6
-	pause 50
+	delay 50
 	reappear 5
 	move 5, RusturfTunnel_Movement_15CAAC
 	waitmove 0
@@ -331,7 +331,7 @@ RusturfTunnel_EventScript_15C9EA:: @ 815C9EA
 	waitmove 0
 	message RusturfTunnel_Text_19434F
 	waittext
-	checksound
+	waitse
 	pokecry SPECIES_WINGULL, 0
 	waitbutton
 	waitpokecry

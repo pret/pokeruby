@@ -63,7 +63,7 @@ LittlerootTown_MaysHouse_2F_EventScript_1B69EB:: @ 81B69EB
 	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1B6A91
 	msgbox LittlerootTown_BrendansHouse_2F_Text_172E18, 4
 	call LittlerootTown_BrendansHouse_2F_EventScript_1B6A9B
-	pause 30
+	delay 30
 	setvar 0x4092, 6
 	setflag 81
 	setflag 754
@@ -73,7 +73,7 @@ LittlerootTown_MaysHouse_2F_EventScript_1B69EB:: @ 81B69EB
 	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_1B6A31
 	compare_var_to_imm RESULT, 1
 	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_1B6A61
-	playsfx 9
+	playse 9
 	disappear 0x8008
 	releaseall
 	end
@@ -160,7 +160,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1B6ABF:: @ 81B6ABF
 	call LittlerootTown_BrendansHouse_1F_EventScript_1B6B9D
 	move 255, LittlerootTown_BrendansHouse_1F_Movement_1B6CCC
 	waitmove 0
-	playmusic 453, 0
+	playbgm 453, 0
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1725C9, 4
 	closebutton
 	move 0x8005, LittlerootTown_BrendansHouse_1F_Movement_1B6BDB
@@ -185,7 +185,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6B2E:: @ 81B6B2E
 	call LittlerootTown_MaysHouse_1F_EventScript_1B6B9D
 	move 255, LittlerootTown_MaysHouse_1F_Movement_1B6CD4
 	waitmove 0
-	playmusic 453, 0
+	playbgm 453, 0
 	msgbox LittlerootTown_MaysHouse_1F_Text_1725C9, 4
 	closebutton
 	move 0x8005, LittlerootTown_MaysHouse_1F_Movement_1B6BDE
@@ -206,7 +206,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6B2E:: @ 81B6B2E
 
 LittlerootTown_BrendansHouse_1F_EventScript_1B6B9D:: @ 81B6B9D
 LittlerootTown_MaysHouse_1F_EventScript_1B6B9D:: @ 81B6B9D
-	playsfx 21
+	playse 21
 	move 0x8005, LittlerootTown_BrendansHouse_1F_Movement_1A0833
 	waitmove 0
 	move 0x8005, LittlerootTown_BrendansHouse_1F_Movement_1A0835
@@ -220,10 +220,10 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6BBE:: @ 81B6BBE
 	move 255, LittlerootTown_BrendansHouse_1F_Movement_1A0841
 	waitmove 0
 	msgbox LittlerootTown_BrendansHouse_1F_Text_172841, 4
-	fadedefault
+	fadedefaultbgm
 	special TurnOffTVScreen
 	setflag 2096
-	pause 35
+	delay 35
 	return
 
 LittlerootTown_BrendansHouse_1F_Movement_1B6BDB:: @ 81B6BDB
@@ -312,7 +312,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1B6CA6:: @ 81B6CA6
 LittlerootTown_MaysHouse_1F_EventScript_1B6CA6:: @ 81B6CA6
 	lock
 	faceplayer
-	checksound
+	waitse
 	pokecry SPECIES_MACHOKE, 0
 	msgbox LittlerootTown_BrendansHouse_1F_Text_17281D, 4
 	waitpokecry
@@ -323,7 +323,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1B6CB9:: @ 81B6CB9
 LittlerootTown_MaysHouse_1F_EventScript_1B6CB9:: @ 81B6CB9
 	lock
 	faceplayer
-	checksound
+	waitse
 	pokecry SPECIES_MACHOKE, 0
 	msgbox LittlerootTown_BrendansHouse_1F_Text_172831, 4
 	waitpokecry
@@ -372,12 +372,12 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6CDE:: @ 81B6CDE
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1B6E28
 	move 0x8009, LittlerootTown_BrendansHouse_1F_Movement_1A0839
 	waitmove 0
-	playsfx 21
+	playse 21
 	move 0x8009, LittlerootTown_BrendansHouse_1F_Movement_1A0833
 	waitmove 0
 	move 0x8009, LittlerootTown_BrendansHouse_1F_Movement_1A0835
 	waitmove 0
-	pause 20
+	delay 20
 	compare_var_to_imm 0x8008, 0
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1B6DCD
 	compare_var_to_imm 0x8008, 1
@@ -396,7 +396,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6CDE:: @ 81B6CDE
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1B6DF9
 	compare_var_to_imm 0x8008, 1
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1B6E0B
-	playsfx 8
+	playse 8
 	disappear 0x8009
 	setflag 291
 	setvar 0x4082, 4

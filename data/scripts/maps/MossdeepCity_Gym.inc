@@ -94,7 +94,7 @@ MossdeepCity_Gym_EventScript_15A5EA:: @ 815A5EA
 
 MossdeepCity_Gym_EventScript_15A619:: @ 815A619
 	special DrawWholeMapView
-	playsfx 36
+	playse 36
 	releaseall
 	end
 

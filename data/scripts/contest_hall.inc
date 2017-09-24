@@ -345,13 +345,13 @@ LinkContestRoom1_EventScript_1A5323:: @ 81A5323
 	waitmove 0
 	releaseall
 	reappear 13
-	playsfx 10
+	playse 10
 	lockall
 	move 0x800b, LinkContestRoom1_Movement_1A5D9C
 	waitmove 0
 	releaseall
 	addvar 0x8006, -1
-	playsfx 15
+	playse 15
 	special ShowContestEntryMonPic
 	call LinkContestRoom1_EventScript_1A535E
 	return
@@ -371,14 +371,14 @@ LinkContestRoom1_EventScript_1A5370:: @ 81A5370
 LinkContestRoom1_EventScript_1A5377:: @ 81A5377
 	call LinkContestRoom1_EventScript_1A53B3
 	call LinkContestRoom1_EventScript_1A53CE
-	playsfx 223
+	playse 223
 	waittext
 	call LinkContestRoom1_EventScript_1A5A90
 	move 1, LinkContestRoom1_Movement_1A5D9F
 	waitmove 0
 	move 2, LinkContestRoom1_Movement_1A5DA1
 	waitmove 0
-	pause 20
+	delay 20
 	move 1, LinkContestRoom1_Movement_1A5D8F
 	move 2, LinkContestRoom1_Movement_1A5D8F
 	waitmove 0
@@ -408,7 +408,7 @@ LinkContestRoom1_EventScript_1A53DF:: @ 81A53DF
 LinkContestRoom1_EventScript_1A53E5:: @ 81A53E5
 	move 1, LinkContestRoom1_Movement_1A5DAF
 	waitmove 0
-	playsfx 223
+	playse 223
 	call LinkContestRoom1_EventScript_1A5AE4
 	move 9, LinkContestRoom1_Movement_1A5DB7
 	move 12, LinkContestRoom1_Movement_1A5DBB
@@ -621,8 +621,8 @@ LinkContestRoom1_EventScript_1A5760:: @ 81A5760
 	compare_var_to_imm 0x4001, 1
 	goto_if_eq LinkContestRoom1_EventScript_1A5783
 	move 6, LinkContestRoom1_Movement_1A5D8D
-	playsfx 21
-	pause 14
+	playse 21
+	delay 14
 	setvar 0x4001, 1
 	addvar 0x4000, 65535
 	return
@@ -634,8 +634,8 @@ LinkContestRoom1_EventScript_1A5784:: @ 81A5784
 	compare_var_to_imm 0x4002, 1
 	goto_if_eq LinkContestRoom1_EventScript_1A57A7
 	move 12, LinkContestRoom1_Movement_1A5D8D
-	playsfx 21
-	pause 14
+	playse 21
+	delay 14
 	setvar 0x4002, 1
 	addvar 0x4000, 65535
 	return
@@ -647,8 +647,8 @@ LinkContestRoom1_EventScript_1A57A8:: @ 81A57A8
 	compare_var_to_imm 0x4003, 1
 	goto_if_eq LinkContestRoom1_EventScript_1A57CB
 	move 7, LinkContestRoom1_Movement_1A5D8D
-	playsfx 21
-	pause 14
+	playse 21
+	delay 14
 	setvar 0x4003, 1
 	addvar 0x4000, 65535
 	return
@@ -660,8 +660,8 @@ LinkContestRoom1_EventScript_1A57CC:: @ 81A57CC
 	compare_var_to_imm 0x4004, 1
 	goto_if_eq LinkContestRoom1_EventScript_1A57EF
 	move 8, LinkContestRoom1_Movement_1A5D8D
-	playsfx 21
-	pause 14
+	playse 21
+	delay 14
 	setvar 0x4004, 1
 	addvar 0x4000, 65535
 	return
@@ -673,8 +673,8 @@ LinkContestRoom1_EventScript_1A57F0:: @ 81A57F0
 	compare_var_to_imm 0x4005, 1
 	goto_if_eq LinkContestRoom1_EventScript_1A5813
 	move 9, LinkContestRoom1_Movement_1A5D8D
-	playsfx 21
-	pause 14
+	playse 21
+	delay 14
 	setvar 0x4005, 1
 	addvar 0x4000, 65535
 	return
@@ -686,8 +686,8 @@ LinkContestRoom1_EventScript_1A5814:: @ 81A5814
 	compare_var_to_imm 0x4006, 1
 	goto_if_eq LinkContestRoom1_EventScript_1A5837
 	move 10, LinkContestRoom1_Movement_1A5D8D
-	playsfx 21
-	pause 14
+	playse 21
+	delay 14
 	setvar 0x4006, 1
 	addvar 0x4000, 65535
 	return
@@ -699,8 +699,8 @@ LinkContestRoom1_EventScript_1A5838:: @ 81A5838
 	compare_var_to_imm 0x4007, 1
 	goto_if_eq LinkContestRoom1_EventScript_1A585B
 	move 11, LinkContestRoom1_Movement_1A5D8D
-	playsfx 21
-	pause 14
+	playse 21
+	delay 14
 	setvar 0x4007, 1
 	addvar 0x4000, 65535
 	return
@@ -712,8 +712,8 @@ LinkContestRoom1_EventScript_1A585C:: @ 81A585C
 	compare_var_to_imm 0x4008, 1
 	goto_if_eq LinkContestRoom1_EventScript_1A587F
 	move 15, LinkContestRoom1_Movement_1A5D8D
-	playsfx 21
-	pause 14
+	playse 21
+	delay 14
 	setvar 0x4008, 1
 	addvar 0x4000, 65535
 	return
@@ -805,7 +805,7 @@ LinkContestRoom1_EventScript_1A594A:: @ 81A594A
 	setvar 0x4009, 1
 	showcontestresults
 	setvar 0x4009, 0
-	playmusic 439, 0
+	playbgm 439, 0
 	return
 
 LinkContestRoom1_EventScript_1A5984:: @ 81A5984
@@ -817,7 +817,7 @@ LinkContestRoom1_EventScript_1A5984:: @ 81A5984
 LinkContestRoom1_EventScript_1A5998:: @ 81A5998
 	message2 LinkContestRoom1_Text_1A6C06
 	waittext
-	pause 30
+	delay 30
 	return
 
 LinkContestRoom1_EventScript_1A59A2:: @ 81A59A2
@@ -829,7 +829,7 @@ LinkContestRoom1_EventScript_1A59A2:: @ 81A59A2
 LinkContestRoom1_EventScript_1A59B6:: @ 81A59B6
 	message2 LinkContestRoom1_Text_1A6C21
 	waittext
-	pause 30
+	delay 30
 	return
 
 LinkContestRoom1_EventScript_1A59C0:: @ 81A59C0
@@ -841,7 +841,7 @@ LinkContestRoom1_EventScript_1A59C0:: @ 81A59C0
 LinkContestRoom1_EventScript_1A59D4:: @ 81A59D4
 	message2 LinkContestRoom1_Text_1A6C9D
 	waittext
-	pause 30
+	delay 30
 	return
 
 LinkContestRoom1_EventScript_1A59DE:: @ 81A59DE
@@ -853,7 +853,7 @@ LinkContestRoom1_EventScript_1A59DE:: @ 81A59DE
 LinkContestRoom1_EventScript_1A59F2:: @ 81A59F2
 	message2 LinkContestRoom1_Text_1A6D16
 	waittext
-	pause 30
+	delay 30
 	return
 
 LinkContestRoom1_EventScript_1A59FC:: @ 81A59FC
@@ -890,7 +890,7 @@ LinkContestRoom1_EventScript_1A5A49:: @ 81A5A49
 	call LinkContestRoom1_EventScript_1A5A75
 	move 0x4003, LinkContestRoom1_Movement_1A5D99
 	waitmove 0
-	playsfx 223
+	playse 223
 	setvar 0x4001, 0
 	return
 
@@ -913,14 +913,14 @@ LinkContestRoom1_EventScript_1A5A90:: @ 81A5A90
 	move 9, LinkContestRoom1_Movement_1A5DB7
 	move 12, LinkContestRoom1_Movement_1A5DBB
 	move 7, LinkContestRoom1_Movement_1A5DB7
-	pause 30
+	delay 30
 	move 10, LinkContestRoom1_Movement_1A5DAF
 	move 11, LinkContestRoom1_Movement_1A5DBB
 	move 6, LinkContestRoom1_Movement_1A5DB3
 	move 8, LinkContestRoom1_Movement_1A5DAF
 	compare_var_to_imm 0x4001, 4
 	goto_if 5, LinkContestRoom1_EventScript_1A5A90
-	pause 30
+	delay 30
 	return
 
 LinkContestRoom1_EventScript_1A5AE4:: @ 81A5AE4
@@ -939,7 +939,7 @@ LinkContestRoom1_EventScript_1A5AE4:: @ 81A5AE4
 	vspriteface 25, 4
 	vspriteface 27, 3
 	vspriteface 28, 4
-	pause 10
+	delay 10
 	vspriteface 0, 4
 	vspriteface 2, 4
 	vspriteface 4, 4
@@ -955,7 +955,7 @@ LinkContestRoom1_EventScript_1A5AE4:: @ 81A5AE4
 	vspriteface 25, 2
 	vspriteface 27, 2
 	vspriteface 28, 2
-	pause 10
+	delay 10
 	vspriteface 1, 2
 	vspriteface 3, 2
 	vspriteface 5, 2
@@ -972,7 +972,7 @@ LinkContestRoom1_EventScript_1A5AE4:: @ 81A5AE4
 	vspriteface 26, 4
 	vspriteface 29, 3
 	vspriteface 30, 3
-	pause 10
+	delay 10
 	vspriteface 1, 4
 	vspriteface 3, 4
 	vspriteface 5, 4
@@ -989,7 +989,7 @@ LinkContestRoom1_EventScript_1A5AE4:: @ 81A5AE4
 	vspriteface 26, 2
 	vspriteface 29, 2
 	vspriteface 30, 2
-	pause 10
+	delay 10
 	return
 
 LinkContestRoom1_EventScript_1A5BAB:: @ 81A5BAB
@@ -1002,10 +1002,10 @@ LinkContestRoom1_EventScript_1A5BAB:: @ 81A5BAB
 	waittext
 	call LinkContestRoom1_EventScript_1A5C7F
 	call LinkContestRoom1_EventScript_1A5CE5
-	playsfx 223
+	playse 223
 	setvar 0x4001, 0
 	call LinkContestRoom1_EventScript_1A5A90
-	pause 30
+	delay 30
 	special sub_80C4CF8
 	compare_var_to_imm 0x8004, 1
 	goto_if_eq LinkContestRoom1_EventScript_1A5C46
@@ -1014,14 +1014,14 @@ LinkContestRoom1_EventScript_1A5BAB:: @ 81A5BAB
 LinkContestRoom1_EventScript_1A5BF6:: @ 81A5BF6
 	inccounter GAME_STAT_WON_CONTEST
 	msgbox LinkContestRoom1_Text_1A6DF1, 3
-	pause 90
+	delay 90
 	special sub_80C4CF8
 	compare_var_to_imm 0x8004, 1
 	goto_if_eq LinkContestRoom1_EventScript_1A5C46
 	return
 
 LinkContestRoom1_EventScript_1A5C12:: @ 81A5C12
-	specialval RESULT, sub_80C4440
+	specialvar RESULT, sub_80C4440
 	compare_var_to_imm RESULT, 1
 	goto_if_eq LinkContestRoom1_EventScript_1A5C23
 	return
@@ -1050,7 +1050,7 @@ LinkContestRoom1_EventScript_1A5C46:: @ 81A5C46
 	return
 
 LinkContestRoom1_EventScript_1A5C4C:: @ 81A5C4C
-	pause 60
+	delay 60
 	call LinkContestRoom1_EventScript_1A5C6A
 	special sub_80C4CF8
 	compare_var_to_imm 0x8004, 1
@@ -1120,7 +1120,7 @@ LinkContestRoom1_EventScript_1A5CFC:: @ 81A5CFC
 	compare_var_to_imm 0x4088, 2
 	call_if 1, LinkContestRoom1_EventScript_1A5C42
 	inccounter GAME_STAT_WON_CONTEST
-	specialval RESULT, sub_80C4440
+	specialvar RESULT, sub_80C4440
 	compare_var_to_imm RESULT, 0
 	goto_if_eq LinkContestRoom1_EventScript_1A5D5B
 	compare_var_to_imm CONTEST_RANK, 3
@@ -1146,7 +1146,7 @@ LinkContestRoom1_EventScript_1A5D5B:: @ 81A5D5B
 	setflag 2107
 	lockall
 	msgbox LinkContestRoom1_Text_1A6D6A, 4
-	fanfare 370
+	playfanfare 370
 	msgbox LinkContestRoom1_Text_1A6D96, 4
 	waitfanfare
 	special sub_80C4858

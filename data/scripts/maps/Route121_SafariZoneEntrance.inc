@@ -71,7 +71,7 @@ Route121_SafariZoneEntrance_EventScript_15C3B3:: @ 815C3B3
 	updatemoney 0, 0
 	nop
 	msgbox Route121_SafariZoneEntrance_Text_1C38F4, 4
-	fanfare 370
+	playfanfare 370
 	message Route121_SafariZoneEntrance_Text_1C3910
 	waitfanfare
 	waittext
@@ -90,7 +90,7 @@ Route121_SafariZoneEntrance_EventScript_15C425:: @ 815C425
 	countpokemon
 	compare_var_to_imm RESULT, 6
 	goto_if 5, Route121_SafariZoneEntrance_EventScript_15C44F
-	specialval RESULT, CheckFreePokemonStorageSpace
+	specialvar RESULT, CheckFreePokemonStorageSpace
 	compare_var_to_imm RESULT, 1
 	goto_if_eq Route121_SafariZoneEntrance_EventScript_15C44F
 	msgbox Route121_SafariZoneEntrance_Text_1C39A3, 4

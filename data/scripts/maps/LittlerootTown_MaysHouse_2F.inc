@@ -37,18 +37,18 @@ LittlerootTown_MaysHouse_2F_EventScript_152A9D:: @ 8152A9D
 	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_152AD4
 	compare_var_to_imm RESULT, 1
 	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_152B4A
-	playsfx 9
+	playse 9
 	disappear LAST_TALKED
 	setvar 0x408d, 3
 	setvar 0x4050, 1
-	playmusicbattle 0
-	fadedefault
+	savebgm 0
+	fadedefaultbgm
 	releaseall
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_152AD4:: @ 8152AD4
 	msgbox LittlerootTown_BrendansHouse_2F_Text_17337E, 4
-	playmusic 415, 1
+	playbgm 415, 1
 	move LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_1A0839
 	waitmove 0
 	move LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_1A0833
@@ -82,7 +82,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_152B3F:: @ 8152B3F
 
 LittlerootTown_BrendansHouse_2F_EventScript_152B4A:: @ 8152B4A
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1735C9, 4
-	playmusic 421, 1
+	playbgm 421, 1
 	move LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_1A0839
 	waitmove 0
 	move LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_1A0833
@@ -208,7 +208,7 @@ LittlerootTown_MaysHouse_2F_EventScript_152C52:: @ 8152C52
 LittlerootTown_MaysHouse_2F_EventScript_152C5C:: @ 8152C5C
 	setvar 0x8004, 2
 	special DoPCTurnOnEffect
-	playsfx SE_PC_ON
+	playse SE_PC_ON
 	msgbox LittlerootTown_MaysHouse_2F_Text_1A10D6, 4
 	special BedroomPC
 	waitstate
@@ -217,7 +217,7 @@ LittlerootTown_MaysHouse_2F_EventScript_152C5C:: @ 8152C5C
 
 gMayHouse_TurnPCOff:: @ 8152C75
 	setvar 0x8004, 2
-	playsfx SE_PC_OFF
+	playse SE_PC_OFF
 	special DoPCTurnOffEffect
 	releaseall
 	end

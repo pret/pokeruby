@@ -1,7 +1,7 @@
 gUnknown_081C340A:: @ 81C340A
 	setvar 0x40a4, 1
 	special ExitSafariMode
-	warp3 Route121_SafariZoneEntrance, 255, 2, 5
+	setwarp Route121_SafariZoneEntrance, 255, 2, 5
 	end
 
 EventScript_1C341B: @ 81C341B
@@ -24,7 +24,7 @@ EventScript_1C3443:
 
 gUnknown_081C3448:: @ 81C3448
 	lockall
-	playsfx 73
+	playse 73
 	message UnknownString_81C34E4
 	waittext
 	waitbutton
@@ -33,7 +33,7 @@ gUnknown_081C3448:: @ 81C3448
 
 gUnknown_081C3459:: @ 81C3459
 	lockall
-	playsfx 73
+	playse 73
 	message UnknownString_81C3514
 	waittext
 	waitbutton

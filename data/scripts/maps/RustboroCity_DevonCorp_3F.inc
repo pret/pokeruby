@@ -32,25 +32,25 @@ RustboroCity_DevonCorp_3F_EventScript_157752:: @ 8157752
 	closebutton
 	move 2, RustboroCity_DevonCorp_3F_Movement_157815
 	waitmove 0
-	pause 80
+	delay 80
 	move 2, RustboroCity_DevonCorp_3F_Movement_15781E
 	waitmove 0
 	msgbox RustboroCity_DevonCorp_3F_Text_183903, 4
 	closebutton
-	playmusic 420, 0
+	playbgm 420, 0
 	move 2, RustboroCity_DevonCorp_3F_Movement_157803
 	move 255, RustboroCity_DevonCorp_3F_Movement_157827
 	waitmove 0
 	msgbox RustboroCity_DevonCorp_3F_Text_18394A, 4
 	closebutton
-	fadedefault
+	fadedefaultbgm
 	move 2, RustboroCity_DevonCorp_3F_Movement_157812
 	move 255, RustboroCity_DevonCorp_3F_Movement_157835
 	waitmove 0
 	msgbox RustboroCity_DevonCorp_3F_Text_18320B, 4
 	giveitem ITEM_LETTER
 	msgbox RustboroCity_DevonCorp_3F_Text_18337E, 4
-	fanfare 370
+	playfanfare 370
 	message RustboroCity_DevonCorp_3F_Text_183422
 	waitfanfare
 	waittext

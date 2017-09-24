@@ -80,7 +80,7 @@ RustboroCity_DevonCorp_2F_EventScript_157564:: @ 8157564
 
 RustboroCity_DevonCorp_2F_EventScript_1575A6:: @ 81575A6
 	closebutton
-	playsfx 21
+	playse 21
 	move 5, RustboroCity_DevonCorp_2F_Movement_1A0833
 	waitmove 0
 	move 5, RustboroCity_DevonCorp_2F_Movement_1A0835
@@ -98,7 +98,7 @@ RustboroCity_DevonCorp_2F_EventScript_1575A6:: @ 81575A6
 
 RustboroCity_DevonCorp_2F_EventScript_1575EE:: @ 81575EE
 	closebutton
-	playsfx 21
+	playse 21
 	move 5, RustboroCity_DevonCorp_2F_Movement_1A0833
 	waitmove 0
 	move 5, RustboroCity_DevonCorp_2F_Movement_1A0835
@@ -140,7 +140,7 @@ RustboroCity_DevonCorp_2F_EventScript_157661:: @ 8157661
 	copyvar 0x8004, RESULT
 	setvar 0x40c4, 0
 	setflag 267
-	fanfare 370
+	playfanfare 370
 	message RustboroCity_DevonCorp_2F_Text_18319E
 	waitfanfare
 	waittext
@@ -160,7 +160,7 @@ RustboroCity_DevonCorp_2F_EventScript_1576B4:: @ 81576B4
 	copyvar 0x8004, RESULT
 	setvar 0x40c4, 0
 	setflag 267
-	fanfare 370
+	playfanfare 370
 	message RustboroCity_DevonCorp_2F_Text_18319E
 	waitfanfare
 	waittext

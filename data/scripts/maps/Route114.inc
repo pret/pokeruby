@@ -4,7 +4,7 @@ Route114_MapScripts:: @ 8150732
 Route114_EventScript_150733:: @ 8150733
 	lock
 	faceplayer
-	checkdailyflags
+	dodailyevents
 	checkflag 2251
 	goto_if_eq Route114_EventScript_150778
 	msgbox Route114_Text_1C5803, 4
@@ -46,7 +46,7 @@ Route114_EventScript_1507B9:: @ 81507B9
 Route114_EventScript_1507C3:: @ 81507C3
 	lock
 	faceplayer
-	checksound
+	waitse
 	pokecry SPECIES_POOCHYENA, 2
 	msgbox Route114_Text_1701F9, 4
 	waitpokecry
@@ -87,7 +87,7 @@ Route114_EventScript_150836:: @ 8150836
 
 Route114_EventScript_15084D:: @ 815084D
 	trainerbattle 0, OPPONENT_STEVE_1, 0, Route114_Text_1BC2F5, Route114_Text_1BC327
-	specialval RESULT, sub_8082C68
+	specialvar RESULT, sub_8082C68
 	compare_var_to_imm RESULT, 1
 	goto_if_eq Route114_EventScript_150874
 	msgbox Route114_Text_1BC337, 6
@@ -100,7 +100,7 @@ Route114_EventScript_150874:: @ 8150874
 
 Route114_EventScript_15088B:: @ 815088B
 	trainerbattle 0, OPPONENT_BERNIE_1, 0, Route114_Text_1BC45A, Route114_Text_1BC499
-	specialval RESULT, sub_8082C68
+	specialvar RESULT, sub_8082C68
 	compare_var_to_imm RESULT, 1
 	goto_if_eq Route114_EventScript_1508B2
 	msgbox Route114_Text_1BC4B5, 6

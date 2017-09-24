@@ -22,17 +22,17 @@ FallarborTown_ContestLobby_EventScript_1539F8:: @ 81539F8
 	lockall
 	move 1, FallarborTown_ContestLobby_Movement_153A7C
 	waitmove 0
-	playsfx 71
+	playse 71
 	setmaptile 4, 2, 545, 1
 	setmaptile 4, 3, 609, 1
 	special DrawWholeMapView
 	move 1, FallarborTown_ContestLobby_Movement_153A7F
 	waitmove 0
-	playsfx 71
+	playse 71
 	setmaptile 4, 2, 721, 1
 	setmaptile 4, 3, 729, 1
 	special DrawWholeMapView
-	pause 20
+	delay 20
 	move 1, FallarborTown_ContestLobby_Movement_153A8C
 	waitmove 0
 	move 255, FallarborTown_ContestLobby_Movement_153A7A

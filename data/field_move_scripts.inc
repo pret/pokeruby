@@ -87,7 +87,7 @@ DoRockSmashMovement: @ 81B0F0C
 	move LAST_TALKED, RockSmashMovement
 	waitmove 0
 	disappear LAST_TALKED
-	specialval RESULT, sub_810F5BC
+	specialvar RESULT, sub_810F5BC
 	compare_var_to_imm RESULT, 1
 	goto_if_eq DoRockSmashMovement_Done
 	special ScrSpecial_RockSmashWildEncounter

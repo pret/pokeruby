@@ -54,7 +54,7 @@ BattleTower_BattleRoom_EventScript_160961:: @ 8160961
 	special LoadPlayerParty
 	special SavePlayerParty
 	special sub_8135A14
-	fanfare 368
+	playfanfare 368
 	waitfanfare
 	special ScrSpecial_HealPlayerParty
 
@@ -108,10 +108,10 @@ BattleTower_BattleRoom_EventScript_160A94:: @ 8160A94
 	setvar 0x8004, 2
 	special sub_8135BA0
 	message BattleTower_BattleRoom_Text_1C6CE1
-	pause 60
+	delay 60
 	waittext
-	playsfx 55
-	checksound
+	playse 55
+	waitse
 	msgbox BattleTower_BattleRoom_Text_1C6D05, 4
 
 BattleTower_BattleRoom_EventScript_160AB1:: @ 8160AB1
