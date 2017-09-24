@@ -187,7 +187,7 @@ void ItemUseOutOfBattle_Bike(u8 taskId)
     }
     else
     {
-        if (Overworld_IsBikeAllowedOnCurrentMap() == TRUE && IsBikingDisallowedByPlayer() == FALSE)
+        if (Overworld_IsBikingAllowed() == TRUE && IsBikingDisallowedByPlayer() == FALSE)
         {
             gFieldItemUseCallback = (void *)ItemUseOnFieldCB_Bike;
             SetUpItemUseOnFieldCallback(taskId);

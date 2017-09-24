@@ -283,9 +283,12 @@ void SetGameStat(u8 index, u32 value)
         gSaveBlock1.gameStats[index] = value;
 }
 
-void sub_8053154(void)
+void LoadMapObjTemplatesFromHeader(void)
 {
+    // Clear map object templates
     CpuFill32(0, gSaveBlock1.mapObjectTemplates, sizeof(gSaveBlock1.mapObjectTemplates));
+    
+    // Copy map header events to save block
     CpuCopy32(gMapHeader.events->mapObjects,
               gSaveBlock1.mapObjectTemplates,
               gMapHeader.events->mapObjectCount * sizeof(struct MapObjectTemplate));
@@ -300,7 +303,7 @@ static void LoadSaveblockMapObjScripts(void)
         mapObjectTemplates[i].script = gMapHeader.events->mapObjects[i].script;
 }
 
-void Overworld_SaveMapObjCoords(u8 localId, s16 x, s16 y)
+void Overworld_SetMapObjTemplateCoords(u8 localId, s16 x, s16 y)
 {
     s32 i;
     for (i = 0; i < 64; i++)
@@ -315,7 +318,7 @@ void Overworld_SaveMapObjCoords(u8 localId, s16 x, s16 y)
     }
 }
 
-void Overworld_SaveMapObjMovementType(u8 localId, u8 movementType)
+void Overworld_SetMapObjTemplateMovementType(u8 localId, u8 movementType)
 {
     s32 i;
 
@@ -476,9 +479,9 @@ void Overworld_SetHealLocationWarp(u8 healLocationId)
 
 void sub_80535C4(s16 a1, s16 a2)
 {
-    u8 v4 = Overworld_GetMapTypeOfSaveblockLocation();
-    u8 v5 = GetMapTypeByGroupAndId(gWarpDestination.mapGroup, gWarpDestination.mapNum);
-    if (is_map_type_1_2_3_5_or_6(v4) && is_map_type_1_2_3_5_or_6(v5) != TRUE)
+    u8 currMapType = Overworld_GetMapTypeOfSaveblockLocation();
+    u8 destMapType = GetMapTypeByGroupAndId(gWarpDestination.mapGroup, gWarpDestination.mapNum);
+    if (is_map_type_1_2_3_5_or_6(currMapType) && is_map_type_1_2_3_5_or_6(destMapType) != TRUE)
         sub_805363C(gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum, -1, a1 - 7, a2 - 6);
 }
 
@@ -593,7 +596,7 @@ void sub_80538F0(u8 mapGroup, u8 mapNum)
     sub_8053F0C();
     ApplyCurrentWarp();
     set_current_map_header_from_sav1_save_old_name();
-    sub_8053154();
+    LoadMapObjTemplatesFromHeader();
     ClearTempFieldEventData();
     ResetCyclingRoadChallengeData();
     prev_quest_postbuffer_cursor_backup_reset();
@@ -602,7 +605,7 @@ void sub_80538F0(u8 mapGroup, u8 mapNum)
     sub_80806E4();
     ChooseAmbientCrySpecies();
     SetDefaultFlashLevel();
-    sav1_reset_battle_music_maybe();
+    Overworld_ClearSavedMusic();
     mapheader_run_script_with_tag_x3();
     not_trainer_hill_battle_pyramid();
     sub_8056D38(gMapHeader.mapData);
@@ -626,7 +629,7 @@ void sub_8053994(u32 a1)
     bool8 v3;
 
     set_current_map_header_from_sav1_save_old_name();
-    sub_8053154();
+    LoadMapObjTemplatesFromHeader();
     v2 = is_map_type_1_2_3_5_or_6(gMapHeader.mapType);
     v3 = Overworld_MapTypeIsIndoors(gMapHeader.mapType);
     ClearTempFieldEventData();
@@ -640,7 +643,7 @@ void sub_8053994(u32 a1)
     if (v2)
         FlagClear(SYS_USE_FLASH);
     SetDefaultFlashLevel();
-    sav1_reset_battle_music_maybe();
+    Overworld_ClearSavedMusic();
     mapheader_run_script_with_tag_x3();
     UpdateLocationHistoryForRoamer();
     RoamerMoveToOtherLocationSet();
@@ -694,7 +697,7 @@ u8 sub_8053B00(struct UnkPlayerStruct *playerStruct, u16 a2, u8 a3)
         return 16;
     if (MetatileBehavior_IsSurfableWaterOrUnderwater(a2) == 1)
         return 8;
-    if (Overworld_IsBikeAllowedOnCurrentMap() != TRUE)
+    if (Overworld_IsBikingAllowed() != TRUE)
         return 1;
     if (playerStruct->player_field_0 == 2)
         return 2;
@@ -732,7 +735,7 @@ u16 cur_mapdata_block_role_at_screen_center_acc_to_sav1(void)
     return MapGridGetMetatileBehaviorAt(gSaveBlock1.pos.x + 7, gSaveBlock1.pos.y + 7);
 }
 
-bool32 Overworld_IsBikeAllowedOnCurrentMap(void)
+bool32 Overworld_IsBikingAllowed(void)
 {
     // is player in cycling road entrance?
     if (gSaveBlock1.location.mapGroup == MAP_GROUP_ROUTE110_SEASIDE_CYCLING_ROAD_SOUTH_ENTRANCE
@@ -833,10 +836,11 @@ static u16 GetLocationMusic(struct WarpData *warp)
         return Overworld_GetMapHeaderByGroupAndId(warp->mapGroup, warp->mapNum)->music;
 }
 
-u16 GetCurrLocationMusic(void)
+u16 GetCurrLocationDefaultMusic(void)
 {
     u16 music;
 
+    // Play the desert music only when the sandstorm is active on Route 111.
     if (gSaveBlock1.location.mapGroup == MAP_GROUP_ROUTE111
      && gSaveBlock1.location.mapNum == MAP_ID_ROUTE111
      && GetSav1Weather() == 8)
@@ -856,7 +860,7 @@ u16 GetCurrLocationMusic(void)
     }
 }
 
-u16 warp1_target_get_music(void)
+u16 GetWarpDestinationMusic(void)
 {
     u16 music = GetLocationMusic(&gWarpDestination);
     if (music != 0x7FFF)
@@ -873,19 +877,19 @@ u16 warp1_target_get_music(void)
     }
 }
 
-void call_map_music_set_to_zero(void)
+void Overworld_ResetMapMusic(void)
 {
     ResetMapMusic();
 }
 
-void sub_8053E90(void)
+void Overworld_PlaySpecialMapMusic(void)
 {
-    u16 music = GetCurrLocationMusic();
+    u16 music = GetCurrLocationDefaultMusic();
 
     if (music != LEGENDARY_MUSIC)
     {
-        if (gSaveBlock1.battleMusic)
-            music = gSaveBlock1.battleMusic;
+        if (gSaveBlock1.savedMusic)
+            music = gSaveBlock1.savedMusic;
         else if (Overworld_GetMapTypeOfSaveblockLocation() == MAP_TYPE_UNDERWATER)
             music = BGM_DEEPDEEP;
         else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
@@ -896,21 +900,21 @@ void sub_8053E90(void)
         PlayNewMapMusic(music);
 }
 
-void sav1_set_battle_music_maybe(u16 songNum)
+void Overworld_SetSavedMusic(u16 songNum)
 {
-    gSaveBlock1.battleMusic = songNum;
+    gSaveBlock1.savedMusic = songNum;
 }
 
-void sav1_reset_battle_music_maybe(void)
+void Overworld_ClearSavedMusic(void)
 {
-    gSaveBlock1.battleMusic = 0;
+    gSaveBlock1.savedMusic = 0;
 }
 
 void sub_8053F0C(void)
 {
     if (FlagGet(SPECIAL_FLAG_1) != TRUE)
     {
-        u16 newMusic = warp1_target_get_music();
+        u16 newMusic = GetWarpDestinationMusic();
         u16 currentMusic = GetCurrentMapMusic();
         if (newMusic != LEGENDARY_MUSIC)
         {
@@ -929,11 +933,11 @@ void sub_8053F0C(void)
     }
 }
 
-void sub_8053F84(void)
+void Overworld_ChangeMusicToDefault(void)
 {
     u16 currentMusic = GetCurrentMapMusic();
-    if (currentMusic != GetCurrLocationMusic())
-        FadeOutAndPlayNewMapMusic(GetCurrLocationMusic(), 8);
+    if (currentMusic != GetCurrLocationDefaultMusic())
+        FadeOutAndPlayNewMapMusic(GetCurrLocationDefaultMusic(), 8);
 }
 
 void Overworld_ChangeMusicTo(u16 newMusic)
@@ -954,7 +958,7 @@ u8 GetMapMusicFadeoutSpeed(void)
 
 void sub_8053FF8(void)
 {
-    u16 music = warp1_target_get_music();
+    u16 music = GetWarpDestinationMusic();
     if (FlagGet(SPECIAL_FLAG_1) != TRUE && music != GetCurrentMapMusic())
     {
         u8 speed = GetMapMusicFadeoutSpeed();
@@ -967,7 +971,7 @@ bool8 sub_8054034(void)
     return IsNotWaitingForBGMStop();
 }
 
-void sub_8054044(void)
+void Overworld_FadeOutMapMusic(void)
 {
     FadeOutMapMusic(4);
 }
@@ -975,14 +979,16 @@ void sub_8054044(void)
 static void PlayAmbientCry(void)
 {
     s16 x, y;
+    s8 pan;
+    s8 volume;
+    
     PlayerGetDestCoords(&x, &y);
-    if (sIsAmbientCryWaterMon != TRUE
-     || MetatileBehavior_IsSurfableWaterOrUnderwater(MapGridGetMetatileBehaviorAt(x, y)))
-    {
-        s8 pan = (Random() % 88) + 212;
-        s8 volume = (Random() % 30) + 50;
-        PlayCry2(sAmbientCrySpecies, pan, volume, 1);
-    }
+    if (sIsAmbientCryWaterMon == TRUE
+     && !MetatileBehavior_IsSurfableWaterOrUnderwater(MapGridGetMetatileBehaviorAt(x, y)))
+        return;
+    pan = (Random() % 88) + 212;
+    volume = (Random() % 30) + 50;
+    PlayCry2(sAmbientCrySpecies, pan, volume, 1);
 }
 
 void UpdateAmbientCry(s16 *state, u16 *delayCounter)
@@ -1152,6 +1158,7 @@ void OverworldBasic(void)
     sub_8072EDC();
 }
 
+// This CB2 is used when starting 
 void CB2_OverworldBasic(void)
 {
     OverworldBasic();
@@ -1179,7 +1186,7 @@ void sub_80543DC(u16 (*a1)(u32))
 
 void sub_80543E8(void)
 {
-    if (gFieldCallback)
+    if (gFieldCallback != NULL)
         gFieldCallback();
     else
         mapldr_default();
@@ -1980,27 +1987,27 @@ void sub_8055280(u16 a1)
 
 u16 sub_80552B0(u32 a1)
 {
-    if (gMain.heldKeys & 0x40)
+    if (gMain.heldKeys & DPAD_UP)
     {
         return 19;
     }
-    else if (gMain.heldKeys & 0x80)
+    else if (gMain.heldKeys & DPAD_DOWN)
     {
         return 18;
     }
-    else if (gMain.heldKeys & 0x20)
+    else if (gMain.heldKeys & DPAD_LEFT)
     {
         return 20;
     }
-    else if (gMain.heldKeys & 0x10)
+    else if (gMain.heldKeys & DPAD_RIGHT)
     {
         return 21;
     }
-    else if (gMain.newKeys & 8)
+    else if (gMain.newKeys & START_BUTTON)
     {
         return 24;
     }
-    else if (gMain.newKeys & 1)
+    else if (gMain.newKeys & A_BUTTON)
     {
         return 25;
     }

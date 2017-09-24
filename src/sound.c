@@ -81,8 +81,6 @@ void MapMusicMain(void)
         PlayBGM(sCurrentMapMusic);
         break;
     case 2:
-    case 3:
-    case 4:
         break;
     case 5:
         if (IsBGMStopped())

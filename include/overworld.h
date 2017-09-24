@@ -35,10 +35,10 @@ void ResetGameStats(void);
 void IncrementGameStat(u8 index);
 u32 GetGameStat(u8 index);
 void SetGameStat(u8, u32);
-// sub_8053154
+// LoadMapObjTemplatesFromHeader
 // LoadSaveblockMapObjScripts
-void Overworld_SaveMapObjCoords(u8, s16, s16);
-void Overworld_SaveMapObjMovementType(u8, u8);
+void Overworld_SetMapObjTemplateCoords(u8, s16, s16);
+void Overworld_SetMapObjTemplateMovementType(u8, u8);
 // mapdata_load_assets_to_gpu_and_full_redraw
 // get_mapdata_header
 // ApplyCurrentWarp
@@ -81,7 +81,7 @@ void walkrun_find_lowest_active_bit_in_bitfield(void);
 u8 sub_8053B00(struct UnkPlayerStruct *playerStruct, u16 a2, u8 a3);
 u8 sub_8053B60(struct UnkPlayerStruct *playerStruct, u8, u16, u8);
 u16 cur_mapdata_block_role_at_screen_center_acc_to_sav1(void);
-bool32 Overworld_IsBikeAllowedOnCurrentMap(void);
+bool32 Overworld_IsBikingAllowed(void);
 void SetDefaultFlashLevel(void);
 void Overworld_SetFlashLevel(s32 a1);
 u8 Overworld_GetFlashLevel(void);
@@ -89,19 +89,19 @@ void sub_8053D14(u16);
 // sub_8053D30
 // sub_8053D6C
 // GetLocationMusic
-// GetCurrLocationMusic
-// warp1_target_get_music
-// call_map_music_set_to_zero
-void sub_8053E90(void);
-void sav1_set_battle_music_maybe(u16);
-void sav1_reset_battle_music_maybe(void);
+// GetCurrLocationDefaultMusic
+// GetWarpDestinationMusic
+// Overworld_ResetMapMusic
+void Overworld_PlaySpecialMapMusic(void);
+void Overworld_SetSavedMusic(u16);
+void Overworld_ClearSavedMusic(void);
 void sub_8053F0C(void);
-void sub_8053F84(void);
+void Overworld_ChangeMusicToDefault(void);
 void Overworld_ChangeMusicTo(u16);
 // GetMapMusicFadeoutSpeed
 void sub_8053FF8(void);
 bool8 sub_8054034(void);
-void sub_8054044(void);
+void Overworld_FadeOutMapMusic(void);
 // PlayAmbientCry
 void UpdateAmbientCry(s16 *, u16 *);
 void ChooseAmbientCrySpecies(void);

@@ -1365,8 +1365,8 @@ void sub_805A20C(u8 a)
     u8 taskId;
 
     ScriptContext2_Enable();
-    sav1_reset_battle_music_maybe();
-    sub_8053F84();
+    Overworld_ClearSavedMusic();
+    Overworld_ChangeMusicToDefault();
     gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_SURFING;
     gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_ON_FOOT;
     gPlayerAvatar.unk6 = 1;

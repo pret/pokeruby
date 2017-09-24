@@ -2462,24 +2462,24 @@ extern void sub_8064970(struct Sprite *);
 extern void sub_8060470(s16 *, s16 *, s16, s16);
 extern void InitObjectPriorityByZCoord();
 
-u8 sub_805B410(u8 a, u8 b, s16 c, s16 d, u8 e, u8 f)
+u8 sub_805B410(u8 graphicsId, u8 b, s16 x, s16 y, u8 elevation, u8 direction)
 {
     const struct MapObjectGraphicsInfo *gfxInfo;
     struct SpriteTemplate spriteTemplate;
     const struct SubspriteTable *subspriteTables;
     u8 spriteId;
 
-    gfxInfo = GetFieldObjectGraphicsInfo(a);
-    MakeObjectTemplateFromFieldObjectGraphicsInfo(a, sub_8064970, &spriteTemplate, &subspriteTables);
+    gfxInfo = GetFieldObjectGraphicsInfo(graphicsId);
+    MakeObjectTemplateFromFieldObjectGraphicsInfo(graphicsId, sub_8064970, &spriteTemplate, &subspriteTables);
 #ifdef NONMATCHING
     spriteTemplate.paletteTag = 0xFFFF;
 #else
     *(u16 *)&spriteTemplate.paletteTag = 0xFFFF;
 #endif
-    c += 7;
-    d += 7;
-    sub_8060470(&c, &d, 8, 16);
-    spriteId = CreateSpriteAtEnd(&spriteTemplate, c, d, 0);
+    x += 7;
+    y += 7;
+    sub_8060470(&x, &y, 8, 16);
+    spriteId = CreateSpriteAtEnd(&spriteTemplate, x, y, 0);
     if (spriteId != 64)
     {
         struct Sprite *sprite = &gSprites[spriteId];
@@ -2490,7 +2490,7 @@ u8 sub_805B410(u8 a, u8 b, s16 c, s16 d, u8 e, u8 f)
         sprite->oam.paletteNum = gfxInfo->paletteSlot;
         sprite->coordOffsetEnabled = TRUE;
         sprite->data0 = b;
-        sprite->data1 = e;
+        sprite->data1 = elevation;
         if (gfxInfo->paletteSlot == 10)
             npc_load_two_palettes__and_record(gfxInfo->paletteTag1, gfxInfo->paletteSlot);
         if (subspriteTables != NULL)
@@ -2498,9 +2498,9 @@ u8 sub_805B410(u8 a, u8 b, s16 c, s16 d, u8 e, u8 f)
             SetSubspriteTables(sprite, subspriteTables);
             sprite->subspriteMode = 2;
         }
-        InitObjectPriorityByZCoord(sprite, e);
-        SetObjectSubpriorityByZCoord(e, sprite, 1);
-        StartSpriteAnim(sprite, FieldObjectDirectionToImageAnimId(f));
+        InitObjectPriorityByZCoord(sprite, elevation);
+        SetObjectSubpriorityByZCoord(elevation, sprite, 1);
+        StartSpriteAnim(sprite, FieldObjectDirectionToImageAnimId(direction));
     }
     return spriteId;
 }

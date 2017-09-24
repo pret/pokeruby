@@ -667,7 +667,7 @@ static void Task_EvolutionScene(u8 taskID)
             {
                 u8 text[20];
 
-                sub_8053E90();
+                Overworld_PlaySpecialMapMusic();
                 gTasks[taskID].tBits |= TASK_BIT_LEARN_MOVE;
                 gTasks[taskID].tLearnsFirstMove = FALSE;
                 gTasks[taskID].tLearnMoveState = 0;
@@ -691,7 +691,7 @@ static void Task_EvolutionScene(u8 taskID)
         if (!gPaletteFade.active)
         {
             if (!(gTasks[taskID].tBits & TASK_BIT_LEARN_MOVE))
-                sub_8053E90();
+                Overworld_PlaySpecialMapMusic();
             if (!gTasks[taskID].tEvoWasStopped)
                 CreateShedinja(gTasks[taskID].tPreEvoSpecies, mon);
             DestroyTask(taskID);

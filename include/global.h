@@ -605,7 +605,7 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x14*/ struct WarpData warp2;
     /*0x1C*/ struct WarpData lastHealLocation;
     /*0x24*/ struct WarpData warp4;
-    /*0x2C*/ u16 battleMusic;
+    /*0x2C*/ u16 savedMusic;
     /*0x2E*/ u8 weather;
     /*0x2F*/ u8 filler_2F;
     /*0x30*/ u8 flashLevel;  // flash level on current map, 0 being normal and 4 being the darkest

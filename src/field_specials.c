@@ -213,7 +213,7 @@ void UpdateCyclingRoadState(void) {
     if (VarGet(0x40a9) == 2 || VarGet(0x40a9) == 3)
     {
         VarSet(0x40a9, 0);
-        sav1_set_battle_music_maybe(SE_STOP);
+        Overworld_SetSavedMusic(SE_STOP);
     }
 }
 
