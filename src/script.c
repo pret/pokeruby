@@ -3,6 +3,14 @@
 #include "event_data.h"
 
 #define RAM_SCRIPT_MAGIC 51
+#define SCRIPT_STACK_SIZE 20
+
+enum
+{
+    SCRIPT_MODE_STOPPED,
+    SCRIPT_MODE_BYTECODE,
+    SCRIPT_MODE_NATIVE,
+};
 
 EWRAM_DATA u8 *gUnknown_0202E8AC = NULL;
 
@@ -19,66 +27,66 @@ void InitScriptContext(struct ScriptContext *ctx, void *cmdTable, void *cmdTable
 {
     s32 i;
 
-    ctx->mode = 0;
-    ctx->scriptPtr = 0;
+    ctx->mode = SCRIPT_MODE_STOPPED;
+    ctx->scriptPtr = NULL;
     ctx->stackDepth = 0;
-    ctx->nativePtr = 0;
+    ctx->nativePtr = NULL;
     ctx->cmdTable = cmdTable;
     ctx->cmdTableEnd = cmdTableEnd;
 
     for (i = 0; i < 4; i++)
         ctx->data[i] = 0;
 
-    for (i = 0; i < 20; i++)
+    for (i = 0; i < SCRIPT_STACK_SIZE; i++)
         ctx->stack[i] = 0;
 }
 
 u8 SetupBytecodeScript(struct ScriptContext *ctx, const u8 *ptr)
 {
     ctx->scriptPtr = ptr;
-    ctx->mode = 1;
+    ctx->mode = SCRIPT_MODE_BYTECODE;
     return 1;
 }
 
 void SetupNativeScript(struct ScriptContext *ctx, bool8 (*ptr)(void))
 {
-    ctx->mode = 2;
+    ctx->mode = SCRIPT_MODE_NATIVE;
     ctx->nativePtr = ptr;
 }
 
 void StopScript(struct ScriptContext *ctx)
 {
-    ctx->mode = 0;
-    ctx->scriptPtr = 0;
+    ctx->mode = SCRIPT_MODE_STOPPED;
+    ctx->scriptPtr = NULL;
 }
 
-u8 RunScriptCommand(struct ScriptContext *ctx)
+bool8 RunScriptCommand(struct ScriptContext *ctx)
 {
-    if (ctx->mode == 0)
-        return 0;
+    if (ctx->mode == SCRIPT_MODE_STOPPED)
+        return FALSE;
 
     switch (ctx->mode)
     {
-    case 0:
-        return 0;
-    case 2:
+    case SCRIPT_MODE_STOPPED:
+        return FALSE;
+    case SCRIPT_MODE_NATIVE:
         if (ctx->nativePtr)
         {
             if (ctx->nativePtr() == TRUE)
-                ctx->mode = 1;
-            return 1;
+                ctx->mode = SCRIPT_MODE_BYTECODE;
+            return TRUE;
         }
-        ctx->mode = 1;
-    case 1:
+        ctx->mode = SCRIPT_MODE_BYTECODE;
+    case SCRIPT_MODE_BYTECODE:
         while (1)
         {
             u8 cmdCode;
-            ScrCmdFunc *func;
+            ScrCmdFunc *cmdFunc;
 
-            if (!ctx->scriptPtr)
+            if (ctx->scriptPtr == NULL)
             {
-                ctx->mode = 0;
-                return 0;
+                ctx->mode = SCRIPT_MODE_STOPPED;
+                return FALSE;
             }
 
             if (ctx->scriptPtr == gNullScriptPtr)
@@ -89,25 +97,25 @@ u8 RunScriptCommand(struct ScriptContext *ctx)
 
             cmdCode = *(ctx->scriptPtr);
             ctx->scriptPtr++;
-            func = &ctx->cmdTable[cmdCode];
+            cmdFunc = &ctx->cmdTable[cmdCode];
 
-            if (func >= ctx->cmdTableEnd)
+            if (cmdFunc >= ctx->cmdTableEnd)
             {
-                ctx->mode = 0;
-                return 0;
+                ctx->mode = SCRIPT_MODE_STOPPED;
+                return FALSE;
             }
 
-            if ((*func)(ctx) == 1)
-                return 1;
+            if ((*cmdFunc)(ctx) == TRUE)
+                return TRUE;
         }
     }
 
-    return 1;
+    return TRUE;
 }
 
 u8 ScriptPush(struct ScriptContext *ctx, const u8 *ptr)
 {
-    if (ctx->stackDepth + 1 >= 20)
+    if (ctx->stackDepth + 1 >= SCRIPT_STACK_SIZE)
     {
         return 1;
     }
