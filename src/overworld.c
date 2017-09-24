@@ -91,7 +91,7 @@ extern struct MapHeader * const * const gMapGroups[];
 extern s32 gMaxFlashLevel;
 
 EWRAM_DATA struct WarpData gUnknown_020297F0 = {0};
-EWRAM_DATA struct WarpData gUnknown_020297F8 = {0};
+EWRAM_DATA struct WarpData gWarpDestination = {0};  // new warp position
 EWRAM_DATA struct WarpData gUnknown_02029800 = {0};
 EWRAM_DATA struct WarpData gUnknown_02029808 = {0};
 EWRAM_DATA struct UnkPlayerStruct gUnknown_02029810 = {0};
@@ -195,12 +195,12 @@ static void DoWhiteOut(void)
     ScriptContext2_RunNewScript(S_WhiteOut);
     gSaveBlock1.money /= 2;
     ScrSpecial_HealPlayerParty();
-    sub_8053050();
-    sub_8053570();
+    Overworld_ResetStateAfterWhiteOut();
+    Overworld_SetWarpDestToLastHealLoc();
     warp_in();
 }
 
-void flag_var_implications_of_teleport_(void)
+void Overworld_ResetStateAfterFly(void)
 {
     player_avatar_init_params_reset();
     FlagClear(SYS_CYCLING_ROAD);
@@ -221,7 +221,7 @@ void Overworld_ResetStateAfterTeleport(void)
     ScriptContext2_RunNewScript(gUnknown_0819FC9F);
 }
 
-void sub_8053014(void)
+void Overworld_ResetStateAfterDigEscRope(void)
 {
     player_avatar_init_params_reset();
     FlagClear(SYS_CYCLING_ROAD);
@@ -231,7 +231,7 @@ void sub_8053014(void)
     FlagClear(SYS_USE_FLASH);
 }
 
-void sub_8053050(void)
+void Overworld_ResetStateAfterWhiteOut(void)
 {
     player_avatar_init_params_reset();
     FlagClear(SYS_CYCLING_ROAD);
@@ -318,6 +318,7 @@ void Overworld_SaveMapObjCoords(u8 localId, s16 x, s16 y)
 void Overworld_SaveMapObjMovementType(u8 localId, u8 movementType)
 {
     s32 i;
+
     for (i = 0; i < 64; i++)
     {
         struct MapObjectTemplate *mapObjectTemplate = &gSaveBlock1.mapObjectTemplates[i];
@@ -346,15 +347,15 @@ static struct MapData *get_mapdata_header(void)
     return NULL;
 }
 
-static void warp_shift(void)
+static void ApplyCurrentWarp(void)
 {
     gUnknown_020297F0 = gSaveBlock1.location;
-    gSaveBlock1.location = gUnknown_020297F8;
+    gSaveBlock1.location = gWarpDestination;
     gUnknown_02029800 = sDummyWarpData;
     gUnknown_02029808 = sDummyWarpData;
 }
 
-static void warp_set(struct WarpData *warp, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
+static void SetWarpData(struct WarpData *warp, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
 {
     warp->mapGroup = mapGroup;
     warp->mapNum = mapNum;
@@ -385,7 +386,7 @@ struct MapHeader *const Overworld_GetMapHeaderByGroupAndId(u16 mapGroup, u16 map
 
 struct MapHeader *const warp1_get_mapheader(void)
 {
-    return Overworld_GetMapHeaderByGroupAndId(gUnknown_020297F8.mapGroup, gUnknown_020297F8.mapNum);
+    return Overworld_GetMapHeaderByGroupAndId(gWarpDestination.mapGroup, gWarpDestination.mapNum);
 }
 
 static void set_current_map_header_from_sav1_save_old_name(void)
@@ -422,34 +423,34 @@ void sub_80533CC(void)
 
 void warp_in(void)
 {
-    warp_shift();
+    ApplyCurrentWarp();
     set_current_map_header_from_sav1_save_old_name();
     sub_80533CC();
 }
 
-void warp1_set(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
+void Overworld_SetWarpDestination(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
 {
-    warp_set(&gUnknown_020297F8, mapGroup, mapNum, warpId, x, y);
+    SetWarpData(&gWarpDestination, mapGroup, mapNum, warpId, x, y);
 }
 
 void warp1_set_2(s8 mapGroup, s8 mapNum, s8 warpId)
 {
-    warp1_set(mapGroup, mapNum, warpId, -1, -1);
+    Overworld_SetWarpDestination(mapGroup, mapNum, warpId, -1, -1);
 }
 
 void saved_warp2_set(int unused, s8 mapGroup, s8 mapNum, s8 warpId)
 {
-    warp_set(&gSaveBlock1.warp2, mapGroup, mapNum, warpId, gSaveBlock1.pos.x, gSaveBlock1.pos.y);
+    SetWarpData(&gSaveBlock1.warp2, mapGroup, mapNum, warpId, gSaveBlock1.pos.x, gSaveBlock1.pos.y);
 }
 
 void saved_warp2_set_2(int unused, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
 {
-    warp_set(&gSaveBlock1.warp2, mapGroup, mapNum, warpId, x, y);
+    SetWarpData(&gSaveBlock1.warp2, mapGroup, mapNum, warpId, x, y);
 }
 
 void copy_saved_warp2_bank_and_enter_x_to_warp1(u8 unused)
 {
-    gUnknown_020297F8 = gSaveBlock1.warp2;
+    gWarpDestination = gSaveBlock1.warp2;
 }
 
 void sub_8053538(u8 a1)
@@ -457,81 +458,82 @@ void sub_8053538(u8 a1)
     const struct HealLocation *warp = GetHealLocation(a1);
 
     if (warp)
-        warp1_set(warp->group, warp->map, -1, warp->x, warp->y);
+        Overworld_SetWarpDestination(warp->group, warp->map, -1, warp->x, warp->y);
 }
 
-void sub_8053570(void)
+void Overworld_SetWarpDestToLastHealLoc(void)
 {
-    gUnknown_020297F8 = gSaveBlock1.warp3;
+    gWarpDestination = gSaveBlock1.lastHealLocation;
 }
 
-void sub_8053588(u8 a1)
+void Overworld_SetHealLocationWarp(u8 healLocationId)
 {
-    const struct HealLocation *warp = GetHealLocation(a1);
-    if (warp)
-        warp_set(&gSaveBlock1.warp3, warp->group, warp->map, -1, warp->x, warp->y);
+    const struct HealLocation *healLocation = GetHealLocation(healLocationId);
+
+    if (healLocation != NULL)
+        SetWarpData(&gSaveBlock1.lastHealLocation, healLocation->group, healLocation->map, -1, healLocation->x, healLocation->y);
 }
 
 void sub_80535C4(s16 a1, s16 a2)
 {
     u8 v4 = Overworld_GetMapTypeOfSaveblockLocation();
-    u8 v5 = GetMapTypeByGroupAndId(gUnknown_020297F8.mapGroup, gUnknown_020297F8.mapNum);
+    u8 v5 = GetMapTypeByGroupAndId(gWarpDestination.mapGroup, gWarpDestination.mapNum);
     if (is_map_type_1_2_3_5_or_6(v4) && is_map_type_1_2_3_5_or_6(v5) != TRUE)
         sub_805363C(gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum, -1, a1 - 7, a2 - 6);
 }
 
 void sub_805363C(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
 {
-    warp_set(&gSaveBlock1.warp4, mapGroup, mapNum, warpId, x, y);
+    SetWarpData(&gSaveBlock1.warp4, mapGroup, mapNum, warpId, x, y);
 }
 
 void sub_8053678(void)
 {
-    gUnknown_020297F8 = gSaveBlock1.warp4;
+    gWarpDestination = gSaveBlock1.warp4;
 }
 
 void sub_8053690(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
 {
-    warp_set(&gUnknown_02029800, mapGroup, mapNum, warpId, x, y);
+    SetWarpData(&gUnknown_02029800, mapGroup, mapNum, warpId, x, y);
 }
 
-void warp1_set_to_warp2(void)
+static void warp1_set_to_warp2(void)
 {
-    gUnknown_020297F8 = gUnknown_02029800;
+    gWarpDestination = gUnknown_02029800;
 }
 
 void sub_80536E4(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
 {
-    warp_set(&gUnknown_02029808, mapGroup, mapNum, warpId, x, y);
+    SetWarpData(&gUnknown_02029808, mapGroup, mapNum, warpId, x, y);
 }
 
 void sub_8053720(s16 x, s16 y)
 {
     if (warp_data_is_not_neg_1(&gUnknown_02029808) == TRUE)
     {
-        gUnknown_020297F8 = gUnknown_020297F0;
+        gWarpDestination = gUnknown_020297F0;
     }
     else
     {
-        warp1_set(gUnknown_02029808.mapGroup, gUnknown_02029808.mapNum, -1, x, y);
+        Overworld_SetWarpDestination(gUnknown_02029808.mapGroup, gUnknown_02029808.mapNum, -1, x, y);
     }
 }
 
 void sub_8053778(void)
 {
-    gUnknown_020297F8 = gSaveBlock1.warp1;
+    gWarpDestination = gSaveBlock1.warp1;
 }
 
 void unref_sub_8053790(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
 {
-    warp_set(&gSaveBlock1.warp1, mapGroup, mapNum, warpId, x, y);
+    SetWarpData(&gSaveBlock1.warp1, mapGroup, mapNum, warpId, x, y);
 }
 
 void sub_80537CC(u8 a1)
 {
     const struct HealLocation *warp = GetHealLocation(a1);
     if (warp)
-        warp_set(&gSaveBlock1.warp1, warp->group, warp->map, -1, warp->x, warp->y);
+        SetWarpData(&gSaveBlock1.warp1, warp->group, warp->map, -1, warp->x, warp->y);
 }
 
 void gpu_sync_bg_hide()
@@ -539,7 +541,7 @@ void gpu_sync_bg_hide()
     gSaveBlock1.warp1 = gSaveBlock1.warp2;
 }
 
-struct MapConnection *sub_8053818(u8 dir)
+struct MapConnection *GetMapConnection(u8 dir)
 {
     s32 i;
     s32 count = gMapHeader.connections->count;
@@ -557,10 +559,11 @@ struct MapConnection *sub_8053818(u8 dir)
 
 bool8 sub_8053850(u8 dir, u16 x, u16 y)
 {
-    struct MapConnection *connection = sub_8053818(dir);
+    struct MapConnection *connection = GetMapConnection(dir);
+
     if (connection != NULL)
     {
-        warp1_set(connection->mapGroup, connection->mapNum, -1, x, y);
+        Overworld_SetWarpDestination(connection->mapGroup, connection->mapNum, -1, x, y);
     }
     else
     {
@@ -586,9 +589,9 @@ void sub_80538F0(u8 mapGroup, u8 mapNum)
 {
     s32 i;
 
-    warp1_set(mapGroup, mapNum, -1, -1, -1);
+    Overworld_SetWarpDestination(mapGroup, mapNum, -1, -1, -1);
     sub_8053F0C();
-    warp_shift();
+    ApplyCurrentWarp();
     set_current_map_header_from_sav1_save_old_name();
     sub_8053154();
     ClearTempFieldEventData();
@@ -830,7 +833,7 @@ static u16 GetLocationMusic(struct WarpData *warp)
         return Overworld_GetMapHeaderByGroupAndId(warp->mapGroup, warp->mapNum)->music;
 }
 
-u16 sav1_map_get_music(void)
+u16 GetCurrLocationMusic(void)
 {
     u16 music;
 
@@ -855,7 +858,7 @@ u16 sav1_map_get_music(void)
 
 u16 warp1_target_get_music(void)
 {
-    u16 music = GetLocationMusic(&gUnknown_020297F8);
+    u16 music = GetLocationMusic(&gWarpDestination);
     if (music != 0x7FFF)
     {
         return music;
@@ -877,7 +880,7 @@ void call_map_music_set_to_zero(void)
 
 void sub_8053E90(void)
 {
-    u16 music = sav1_map_get_music();
+    u16 music = GetCurrLocationMusic();
 
     if (music != LEGENDARY_MUSIC)
     {
@@ -929,8 +932,8 @@ void sub_8053F0C(void)
 void sub_8053F84(void)
 {
     u16 currentMusic = GetCurrentMapMusic();
-    if (currentMusic != sav1_map_get_music())
-        FadeOutAndPlayNewMapMusic(sav1_map_get_music(), 8);
+    if (currentMusic != GetCurrLocationMusic())
+        FadeOutAndPlayNewMapMusic(GetCurrLocationMusic(), 8);
 }
 
 void Overworld_ChangeMusicTo(u16 newMusic)

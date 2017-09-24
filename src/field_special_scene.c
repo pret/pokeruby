@@ -250,7 +250,7 @@ bool8 sub_80C7754(void)
     }
     else
     {
-        warp1_set(mapGroup, mapNum, -1, x, y);
+        Overworld_SetWarpDestination(mapGroup, mapNum, -1, x, y);
         return TRUE;
     }
 }

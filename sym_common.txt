@@ -172,7 +172,7 @@ gUnknown_03005CF0: @ 3005CF0
 @ item_menu
 
 	.align 4
-gUnknown_03005D00: @ 3005D00
+gFieldItemUseCallback: @ 3005D00
 	.space 0x10
 
 gBagPocketScrollStates: @ 3005D10

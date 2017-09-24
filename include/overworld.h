@@ -26,10 +26,10 @@ extern const struct UCoords32 gUnknown_0821664C[];
 extern void (*gFieldCallback)(void);
 
 // sub_8052F5C
-void flag_var_implications_of_teleport_(void);
+void Overworld_ResetStateAfterFly(void);
 void Overworld_ResetStateAfterTeleport(void);
-void sub_8053014(void);
-void sub_8053050(void);
+void Overworld_ResetStateAfterDigEscRope(void);
+void Overworld_ResetStateAfterWhiteOut(void);
 // sub_805308C
 void ResetGameStats(void);
 void IncrementGameStat(u8 index);
@@ -41,8 +41,8 @@ void Overworld_SaveMapObjCoords(u8, s16, s16);
 void Overworld_SaveMapObjMovementType(u8, u8);
 // mapdata_load_assets_to_gpu_and_full_redraw
 // get_mapdata_header
-// warp_shift
-// warp_set
+// ApplyCurrentWarp
+// SetWarpData
 // warp_data_is_not_neg_1
 struct MapHeader * const Overworld_GetMapHeaderByGroupAndId(u16 mapGroup, u16 mapNum);
 struct MapHeader * const warp1_get_mapheader(void);
@@ -50,14 +50,14 @@ struct MapHeader * const warp1_get_mapheader(void);
 // LoadSaveblockMapHeader
 // sub_80533CC
 void warp_in(void);
-void warp1_set(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
+void Overworld_SetWarpDestination(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 void warp1_set_2(s8 mapGroup, s8 mapNum, s8 warpId);
 void saved_warp2_set(int unused, s8 mapGroup, s8 mapNum, s8 warpId);
 void saved_warp2_set_2(int unused, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 void copy_saved_warp2_bank_and_enter_x_to_warp1(u8 unused);
 void sub_8053538(u8);
-void sub_8053570(void);
-void sub_8053588(u8);
+void Overworld_SetWarpDestToLastHealLoc(void);
+void Overworld_SetHealLocationWarp(u8);
 void sub_80535C4(s16 a1, s16 a2);
 void sub_805363C(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 void sub_8053678(void);
@@ -69,7 +69,7 @@ void sub_8053720(s16, s16);
 // unref_sub_8053790
 void sub_80537CC(u8);
 void gpu_sync_bg_hide();
-// sub_8053818
+// GetMapConnection
 // sub_8053850
 bool8 sub_80538B0(u16 x, u16 y);
 bool8 sub_80538D0(u16 x, u16 y);
@@ -89,7 +89,7 @@ void sub_8053D14(u16);
 // sub_8053D30
 // sub_8053D6C
 // GetLocationMusic
-// sav1_map_get_music
+// GetCurrLocationMusic
 // warp1_target_get_music
 // call_map_music_set_to_zero
 void sub_8053E90(void);

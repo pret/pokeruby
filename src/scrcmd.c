@@ -670,12 +670,13 @@ bool8 ScrCmd_setmapfooter(struct ScriptContext *ctx)
 
 bool8 ScrCmd_warp(struct ScriptContext *ctx)
 {
-    u8 v1 = ScriptReadByte(ctx);
-    u8 v2 = ScriptReadByte(ctx);
-    u8 v3 = ScriptReadByte(ctx);
-    u16 v4 = VarGet(ScriptReadHalfword(ctx));
-    s8 v5 = VarGet(ScriptReadHalfword(ctx));
-    warp1_set(v1, v2, v3, v4, v5);
+    u8 mapGroup = ScriptReadByte(ctx);
+    u8 mapNum = ScriptReadByte(ctx);
+    u8 warpId = ScriptReadByte(ctx);
+    u16 x = VarGet(ScriptReadHalfword(ctx));
+    u16 y = VarGet(ScriptReadHalfword(ctx));
+
+    Overworld_SetWarpDestination(mapGroup, mapNum, warpId, x, y);
     sub_8080E88();
     player_avatar_init_params_reset();
     return TRUE;
@@ -683,12 +684,13 @@ bool8 ScrCmd_warp(struct ScriptContext *ctx)
 
 bool8 ScrCmd_warpmuted(struct ScriptContext *ctx)
 {
-    u8 v1 = ScriptReadByte(ctx);
-    u8 v2 = ScriptReadByte(ctx);
-    u8 v3 = ScriptReadByte(ctx);
-    u16 v4 = VarGet(ScriptReadHalfword(ctx));
-    s8 v5 = VarGet(ScriptReadHalfword(ctx));
-    warp1_set(v1, v2, v3, v4, v5);
+    u8 mapGroup = ScriptReadByte(ctx);
+    u8 mapNum = ScriptReadByte(ctx);
+    u8 warpId = ScriptReadByte(ctx);
+    u16 x = VarGet(ScriptReadHalfword(ctx));
+    u16 y = VarGet(ScriptReadHalfword(ctx));
+
+    Overworld_SetWarpDestination(mapGroup, mapNum, warpId, x, y);
     sp13E_warp_to_last_warp();
     player_avatar_init_params_reset();
     return TRUE;
@@ -696,12 +698,13 @@ bool8 ScrCmd_warpmuted(struct ScriptContext *ctx)
 
 bool8 ScrCmd_warpwalk(struct ScriptContext *ctx)
 {
-    u8 v1 = ScriptReadByte(ctx);
-    u8 v2 = ScriptReadByte(ctx);
-    u8 v3 = ScriptReadByte(ctx);
-    u16 v4 = VarGet(ScriptReadHalfword(ctx));
-    s8 v5 = VarGet(ScriptReadHalfword(ctx));
-    warp1_set(v1, v2, v3, v4, v5);
+    u8 mapGroup = ScriptReadByte(ctx);
+    u8 mapNum = ScriptReadByte(ctx);
+    u8 warpId = ScriptReadByte(ctx);
+    u16 x = VarGet(ScriptReadHalfword(ctx));
+    u16 y = VarGet(ScriptReadHalfword(ctx));
+
+    Overworld_SetWarpDestination(mapGroup, mapNum, warpId, x, y);
     sub_8080EF0();
     player_avatar_init_params_reset();
     return TRUE;
@@ -709,17 +712,17 @@ bool8 ScrCmd_warpwalk(struct ScriptContext *ctx)
 
 bool8 ScrCmd_warphole(struct ScriptContext *ctx)
 {
-    u8 v1 = ScriptReadByte(ctx);
-    u8 v2 = ScriptReadByte(ctx);
+    u8 mapGroup = ScriptReadByte(ctx);
+    u8 mapNum = ScriptReadByte(ctx);
     u16 x;
     u16 y;
 
     PlayerGetDestCoords(&x, &y);
 
-    if (v1 == 0xFF && v2 == 0xFF)
+    if (mapGroup == 0xFF && mapNum == 0xFF)
         sub_8053720(x - 7, y - 7);
     else
-        warp1_set(v1, v2, -1, x - 7, y - 7);
+        Overworld_SetWarpDestination(mapGroup, mapNum, -1, x - 7, y - 7);
 
     sp13F_fall_to_last_warp();
     player_avatar_init_params_reset();
@@ -728,12 +731,13 @@ bool8 ScrCmd_warphole(struct ScriptContext *ctx)
 
 bool8 ScrCmd_warpteleport(struct ScriptContext *ctx)
 {
-    u8 v1 = ScriptReadByte(ctx);
-    u8 v2 = ScriptReadByte(ctx);
-    u8 v3 = ScriptReadByte(ctx);
-    u16 v4 = VarGet(ScriptReadHalfword(ctx));
-    s8 v5 = VarGet(ScriptReadHalfword(ctx));
-    warp1_set(v1, v2, v3, v4, v5);
+    u8 mapGroup = ScriptReadByte(ctx);
+    u8 mapNum = ScriptReadByte(ctx);
+    u8 warpId = ScriptReadByte(ctx);
+    u16 x = VarGet(ScriptReadHalfword(ctx));
+    u16 y = VarGet(ScriptReadHalfword(ctx));
+
+    Overworld_SetWarpDestination(mapGroup, mapNum, warpId, x, y);
     sub_8080F68();
     player_avatar_init_params_reset();
     return TRUE;
@@ -741,65 +745,71 @@ bool8 ScrCmd_warpteleport(struct ScriptContext *ctx)
 
 bool8 ScrCmd_warp3(struct ScriptContext *ctx)
 {
-    u8 v1 = ScriptReadByte(ctx);
-    u8 v2 = ScriptReadByte(ctx);
-    u8 v3 = ScriptReadByte(ctx);
-    u16 v4 = VarGet(ScriptReadHalfword(ctx));
-    s8 v5 = VarGet(ScriptReadHalfword(ctx));
-    warp1_set(v1, v2, v3, v4, v5);
+    u8 mapGroup = ScriptReadByte(ctx);
+    u8 mapNum = ScriptReadByte(ctx);
+    u8 warpId = ScriptReadByte(ctx);
+    u16 x = VarGet(ScriptReadHalfword(ctx));
+    u16 y = VarGet(ScriptReadHalfword(ctx));
+
+    Overworld_SetWarpDestination(mapGroup, mapNum, warpId, x, y);
     return FALSE;
 }
 
 bool8 ScrCmd_warpplace(struct ScriptContext *ctx)
 {
-    u8 v1 = ScriptReadByte(ctx);
-    u8 v2 = ScriptReadByte(ctx);
-    u8 v3 = ScriptReadByte(ctx);
-    u16 v4 = VarGet(ScriptReadHalfword(ctx));
-    s8 v5 = VarGet(ScriptReadHalfword(ctx));
-    saved_warp2_set_2(0, v1, v2, v3, v4, v5);
+    u8 mapGroup = ScriptReadByte(ctx);
+    u8 mapNum = ScriptReadByte(ctx);
+    u8 warpId = ScriptReadByte(ctx);
+    u16 x = VarGet(ScriptReadHalfword(ctx));
+    u16 y = VarGet(ScriptReadHalfword(ctx));
+
+    saved_warp2_set_2(0, mapGroup, mapNum, warpId, x, y);
     return FALSE;
 }
 
 bool8 ScrCmd_warp4(struct ScriptContext *ctx)
 {
-    u8 v1 = ScriptReadByte(ctx);
-    u8 v2 = ScriptReadByte(ctx);
-    u8 v3 = ScriptReadByte(ctx);
-    u16 v4 = VarGet(ScriptReadHalfword(ctx));
-    s8 v5 = VarGet(ScriptReadHalfword(ctx));
-    sub_8053690(v1, v2, v3, v4, v5);
+    u8 mapGroup = ScriptReadByte(ctx);
+    u8 mapNum = ScriptReadByte(ctx);
+    u8 warpId = ScriptReadByte(ctx);
+    u16 x = VarGet(ScriptReadHalfword(ctx));
+    u16 y = VarGet(ScriptReadHalfword(ctx));
+
+    sub_8053690(mapGroup, mapNum, warpId, x, y);
     return FALSE;
 }
 
 bool8 ScrCmd_warp5(struct ScriptContext *ctx)
 {
-    u8 v1 = ScriptReadByte(ctx);
-    u8 v2 = ScriptReadByte(ctx);
-    u8 v3 = ScriptReadByte(ctx);
-    u16 v4 = VarGet(ScriptReadHalfword(ctx));
-    s8 v5 = VarGet(ScriptReadHalfword(ctx));
-    sub_80536E4(v1, v2, v3, v4, v5);
+    u8 mapGroup = ScriptReadByte(ctx);
+    u8 mapNum = ScriptReadByte(ctx);
+    u8 warpId = ScriptReadByte(ctx);
+    u16 x = VarGet(ScriptReadHalfword(ctx));
+    u16 y = VarGet(ScriptReadHalfword(ctx));
+
+    sub_80536E4(mapGroup, mapNum, warpId, x, y);
     return FALSE;
 }
 
 bool8 ScrCmd_warp6(struct ScriptContext *ctx)
 {
-    u8 v1 = ScriptReadByte(ctx);
-    u8 v2 = ScriptReadByte(ctx);
-    u8 v3 = ScriptReadByte(ctx);
-    u16 v4 = VarGet(ScriptReadHalfword(ctx));
-    s8 v5 = VarGet(ScriptReadHalfword(ctx));
-    sub_805363C(v1, v2, v3, v4, v5);
+    u8 mapGroup = ScriptReadByte(ctx);
+    u8 mapNum = ScriptReadByte(ctx);
+    u8 warpId = ScriptReadByte(ctx);
+    u16 x = VarGet(ScriptReadHalfword(ctx));
+    u16 y = VarGet(ScriptReadHalfword(ctx));
+
+    sub_805363C(mapGroup, mapNum, warpId, x, y);
     return FALSE;
 }
 
 bool8 ScrCmd_getplayerxy(struct ScriptContext *ctx)
 {
-    u16 *ptr1 = GetVarPointer(ScriptReadHalfword(ctx));
-    u16 *ptr2 = GetVarPointer(ScriptReadHalfword(ctx));
-    *ptr1 = gSaveBlock1.pos.x;
-    *ptr2 = gSaveBlock1.pos.y;
+    u16 *pX = GetVarPointer(ScriptReadHalfword(ctx));
+    u16 *pY = GetVarPointer(ScriptReadHalfword(ctx));
+
+    *pX = gSaveBlock1.pos.x;
+    *pY = gSaveBlock1.pos.y;
     return FALSE;
 }
 
@@ -1748,8 +1758,8 @@ bool8 ScrCmd_checkanimation(struct ScriptContext *ctx)
 
 bool8 ScrCmd_sethealplace(struct ScriptContext *ctx)
 {
-    u16 v2 = VarGet(ScriptReadHalfword(ctx));
-    sub_8053588(v2);
+    u16 healLocationId = VarGet(ScriptReadHalfword(ctx));
+    Overworld_SetHealLocationWarp(healLocationId);
     return FALSE;
 }
 

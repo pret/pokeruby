@@ -1213,7 +1213,7 @@ void task00_8084310(u8 taskId)
     }
     if (!FieldEffectActiveListContains(FLDEFF_USE_FLY))
     {
-        flag_var_implications_of_teleport_();
+        Overworld_ResetStateAfterFly();
         warp_in();
         SetMainCallback2(CB2_LoadMap);
         gFieldCallback = mapldr_08084390;
@@ -2267,7 +2267,7 @@ void sub_8087D78(struct Task *task)
 {
     if (!gPaletteFade.active && sub_8054034() == TRUE)
     {
-        sub_8053570();
+        Overworld_SetWarpDestToLastHealLoc();
         warp_in();
         SetMainCallback2(CB2_LoadMap);
         gFieldCallback = mapldr_08085D88;
