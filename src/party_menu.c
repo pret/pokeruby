@@ -4,6 +4,7 @@
 #include "battle_interface.h"
 #include "battle_party_menu.h"
 #include "data2.h"
+#include "decompress.h"
 #include "event_data.h"
 #include "evolution_scene.h"
 #include "item.h"
@@ -15,6 +16,7 @@
 #include "menu.h"
 #include "palette.h"
 #include "pokemon.h"
+#include "pokemon_icon.h"
 #include "pokemon_item_effect.h"
 #include "pokemon_menu.h"
 #include "pokemon_summary_screen.h"
@@ -66,6 +68,28 @@ struct GenderIconCoords
     u8 y;
 };
 
+struct PartyMenuWindowCoords
+{
+    u8 left;
+    u8 top;
+    u8 right;
+    u8 bottom;
+};
+
+struct UnknownPokemonStruct2
+{
+    /*0x00*/ u16 species;
+    /*0x02*/ u16 heldItem;
+    /*0x04*/ u8 nickname[11];
+    /*0x0F*/ u8 level;
+    /*0x10*/ u16 hp;
+    /*0x12*/ u16 maxhp;
+    /*0x14*/ u32 status;
+    /*0x18*/ u32 personality;
+    /*0x1C*/ u8 gender;
+    /*0x1D*/ u8 language;
+};
+
 #define ewram1C000 (*(struct Unk201C000 *)(ewram + 0x1C000))
 #define ewram1F000 (*(struct Unk201F000 *)(ewram + 0x1F000))
 
@@ -79,6 +103,11 @@ extern s32 gBattleMoveDamage;
 extern u16 gMoveToLearn;
 
 extern struct GenderIconCoords const gUnknown_08376738[12][6];
+extern struct GenderIconCoords const gUnknown_08376678[12][6];
+extern struct PartyMenuWindowCoords const gUnknown_08376948[2][6];
+extern struct PartyMenuWindowCoords const gUnknown_08376978[2][6];
+extern u8 *const gUnknown_08376624[];
+extern const u8 gUnknown_083769C0[];
 //extern const u16 gUnknown_083769A8[][6];
 //extern const u8 gUnknown_083769A8[][12];
 extern u16 *const gUnknown_08376858[][6];
@@ -93,9 +122,28 @@ extern const struct UnknownStruct5 gUnknown_08376BB4[][6];
 extern u8 gUnknown_02039460[];
 extern u8 gTileBuffer[];
 extern const struct SpriteTemplate gSpriteTemplate_837660C[];
+extern struct Window gUnknown_03004210;
 
+extern const u8 gPartyMenuMisc_Gfx[];
+extern const u8 gPartyMenuMisc_Tilemap[];
+extern const u8 gPartyMenuMisc_Pal[];
+extern const u8 gFontDefaultPalette[];
+extern const u8 gPartyMenuHpBar_Gfx[];
+extern const u8 gPartyMenuOrderText_Gfx[];
+extern const u8 gStatusGfx_Icons[];
+extern const u8 gStatusPal_Icons[];
+
+static void nullsub_12(u8 monIndex, struct Pokemon *pokemon);
+static void TryPrintPartyMenuMonNickname(u8 monIndex, struct Pokemon *pokemon);
+static void PartyMenuTryPrintHP(u8 monIndex, struct Pokemon *pokemon);
+static void sub_806D05C(u8 taskId);
+static void sub_806D15C(u8 taskId);
+static void sub_806D198(u8 taskId);
 static void sub_806E884(u8 taskId);
 static void sub_8070D90(u8 taskId);
+static void sub_806D5B8(u8 taskId);
+static void sub_806D014(u8 taskId);
+static void sub_806D118(u8 taskId);
 
 /*
 void sub_806AEDC(void)
@@ -121,8 +169,694 @@ void sub_806AEDC(void)
 #define WINDOW_RIGHT (29)
 #endif
 
+extern u8 UpdateMonIconFrame(struct Sprite *sprite);
 extern u8 GetMonIconSpriteId_maybe(u8 taskId, u8 monIndex);
+extern u8 CreateMonIcon(u16 species, void (*callback)(struct Sprite *), s16 x, s16 y, u8 subpriority, u32 personality);
+extern void sub_809D62C(struct Sprite *sprite);
+extern void UpdateMonIconFrame_806DA0C(struct Sprite *sprite);
+extern void UpdateMonIconFrame_806DA38(struct Sprite *sprite);
+extern void sub_806BB3C(s16 a, u8 b);
+extern void sub_806BA94(s16 a, u8 b, u8 c, u8 d);
+extern void sub_806B9A4(s16 a, u8 b, u8 c);
+extern void SpriteCB_sub_806D37C(struct Sprite *sprite);
+extern void sub_806BA34(s16 a, u8 b);
+extern void sub_806BF24(const u8 *a, u8 monIndex, u8 c, u8 d);
+extern void sub_806CD44(u8 taskId);
 
+
+void sub_806CAFC(u8 a, s16 b)
+{
+    struct Sprite *sprite1 = &gSprites[ewram01000.unk1];
+    struct Sprite *sprite2 = &gSprites[ewram01000.unk2];
+
+    sub_806BF74(a, b);
+
+    if (sprite1->data0 != sprite2->data0)
+    {
+        sub_806BF24(&gUnknown_083769A8[sprite1->data0 * 2], sprite1->data0, 6, 1);
+    }
+    else
+    {
+        sub_806BF24(&gUnknown_083769A8[sprite1->data0 * 2], sprite1->data0, 6, 0);
+    }
+}
+
+void sub_806CB74(u8 taskId)
+{
+    switch (gMain.newAndRepeatedKeys)
+    {
+    case DPAD_UP:
+        sub_806CAFC(ewram01000.unk0, -1);
+        break;
+    case DPAD_DOWN:
+        sub_806CAFC(ewram01000.unk0, 1);
+        break;
+    case DPAD_LEFT:
+        sub_806CAFC(ewram01000.unk0, -2);
+        break;
+    case DPAD_RIGHT:
+        sub_806CAFC(ewram01000.unk0, 2);
+        break;
+    }
+
+    if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(5);
+        gTasks[taskId].func = ewram01000.unkC;
+        gTasks[taskId].func(taskId);
+    }
+    else if (gMain.newKeys == B_BUTTON)
+    {
+        PlaySE(5);
+        sub_806CD44(taskId);
+    }
+}
+
+void sub_806CC2C(u8 taskId)
+{
+    DestroySprite(&gSprites[ewram01000.unk1]);
+    sub_806D538(0, 0);
+
+    ewram1B000.unk261 = 2;
+    SwitchTaskToFollowupFunc(ewram01000.unk0);
+    DestroyTask(taskId);
+}
+
+void sub_806CC74(u8 taskId)
+{
+    sub_806BF24(&gUnknown_083769A8[gSprites[ewram01000.unk2].data0 * 2], gSprites[ewram01000.unk2].data0, 3, 1);
+    sub_806BF24(&gUnknown_083769A8[gSprites[ewram01000.unk1].data0 * 2], gSprites[ewram01000.unk1].data0, 3, 0);
+    sub_806CC2C(taskId);
+}
+
+void sub_806CCE4()
+{
+    u8 monIndex1 = gSprites[ewram01000.unk1].data0;
+    u8 monIndex2 = gSprites[ewram01000.unk2].data0;
+
+    if (monIndex1 <= 5)
+    {
+        sub_806BF24(&gUnknown_083769A8[monIndex1 * 2], monIndex1, 3, 0);
+    }
+
+    if (monIndex2 <= 5)
+    {
+        sub_806BF24(&gUnknown_083769A8[monIndex2 * 2], monIndex2, 3, 1);
+    }
+}
+
+void sub_806CD44(u8 taskId)
+{
+    sub_806CCE4();
+    sub_806CC2C(taskId);
+}
+
+void sub_806CD5C(u8 taskId)
+{
+    u8 monIndex1 = gSprites[ewram01000.unk1].data0;
+    u8 monIndex2 = gSprites[ewram01000.unk2].data0;
+
+    if (monIndex1 == monIndex2 || monIndex1 == 7 || monIndex2 == 7)
+    {
+        sub_806CD44(taskId);
+    }
+    else
+    {
+        u8 var1;
+
+        sub_806D5B8(monIndex1);
+        sub_806D5B8(monIndex2);
+
+        if (monIndex1 > monIndex2)
+        {
+            ewram01000.unk5 = monIndex2;
+            ewram01000.unk6 = monIndex1;
+        }
+        else
+        {
+            ewram01000.unk5 = monIndex1;
+            ewram01000.unk6 = monIndex2;
+        }
+
+        ewram01000.unk3 = GetMonIconSpriteId_maybe(ewram01000.unk0, ewram01000.unk5);
+        ewram01000.unk4 = GetMonIconSpriteId_maybe(ewram01000.unk0, ewram01000.unk6);
+
+        var1 = ewram01000.unk5;
+        if (!var1)
+        {
+            gSprites[ewram01000.unk3].data0 = -8;
+            gSprites[ewram01000.unk3].data2 = -0xA8;
+            ewram01000.unk8 = var1;
+            ewram01000.unkA = 11;
+
+            gTasks[taskId].func = sub_806D014;
+            ewram1B000.unk261 = 1;
+        }
+        else
+        {
+            gSprites[ewram01000.unk3].data0 = 8;
+            gSprites[ewram01000.unk3].data2 = 0xA8;
+            ewram01000.unk8 = 11;
+            ewram01000.unkA = 11;
+
+            gTasks[taskId].func = sub_806D118;
+            ewram1B000.unk261 = 1;
+        }
+
+        gSprites[ewram01000.unk3].callback = SpriteCB_sub_806D37C;
+
+        gSprites[ewram01000.unk4].data0 = 8;
+        gSprites[ewram01000.unk4].data2 = 0xA8;
+        gSprites[ewram01000.unk4].callback = SpriteCB_sub_806D37C;
+
+        gSprites[ewram01000.unk3].callback(&gSprites[ewram01000.unk3]);
+        gSprites[ewram01000.unk4].callback(&gSprites[ewram01000.unk4]);
+    }
+}
+
+void sub_806CEF8(s16 *x, s16 *y)
+{
+    s16 temp = *x;
+    *x = *y;
+    *y = temp;
+}
+
+#ifdef NONMATCHING
+void sub_806CF04(void)
+{
+    sub_806CEF8(&gSprites[ewram01000.unk3].pos1.x, &gSprites[ewram01000.unk4].pos1.x);
+    sub_806CEF8(&gSprites[ewram01000.unk3].pos1.y, &gSprites[ewram01000.unk4].pos1.y);
+    sub_806CEF8(&gSprites[ewram01000.unk3].pos2.x, &gSprites[ewram01000.unk4].pos2.x);
+    sub_806CEF8(&gSprites[ewram01000.unk3].data0, &gSprites[ewram01000.unk4].data0);
+
+    gSprites[ewram01000.unk3].callback = SpriteCB_sub_806D37C;
+    gSprites[ewram01000.unk4].callback = SpriteCB_sub_806D37C;
+}
+#else
+__attribute__((naked))
+void sub_806CF04(void)
+{
+    asm(".syntax unified\n\
+    push {r4,r5,lr}\n\
+    ldr r4, _0806CF94 @ =0x02001000\n\
+    ldrb r1, [r4, 0x3]\n\
+    lsls r0, r1, 4\n\
+    adds r0, r1\n\
+    lsls r0, 2\n\
+    ldr r5, _0806CF98 @ =gSprites + 0x20\n\
+    adds r0, r5\n\
+    ldrb r2, [r4, 0x4]\n\
+    lsls r1, r2, 4\n\
+    adds r1, r2\n\
+    lsls r1, 2\n\
+    adds r1, r5\n\
+    bl sub_806CEF8\n\
+    ldrb r1, [r4, 0x3]\n\
+    lsls r0, r1, 4\n\
+    adds r0, r1\n\
+    lsls r0, 2\n\
+    adds r3, r5, 0x2\n\
+    adds r0, r3\n\
+    ldrb r2, [r4, 0x4]\n\
+    lsls r1, r2, 4\n\
+    adds r1, r2\n\
+    lsls r1, 2\n\
+    adds r1, r3\n\
+    bl sub_806CEF8\n\
+    ldrb r1, [r4, 0x3]\n\
+    lsls r0, r1, 4\n\
+    adds r0, r1\n\
+    lsls r0, 2\n\
+    adds r3, r5, 0x4\n\
+    adds r0, r3\n\
+    ldrb r2, [r4, 0x4]\n\
+    lsls r1, r2, 4\n\
+    adds r1, r2\n\
+    lsls r1, 2\n\
+    adds r1, r3\n\
+    bl sub_806CEF8\n\
+    ldrb r1, [r4, 0x3]\n\
+    lsls r0, r1, 4\n\
+    adds r0, r1\n\
+    lsls r0, 2\n\
+    adds r3, r5, 0\n\
+    adds r3, 0xE\n\
+    adds r0, r3\n\
+    ldrb r2, [r4, 0x4]\n\
+    lsls r1, r2, 4\n\
+    adds r1, r2\n\
+    lsls r1, 2\n\
+    adds r1, r3\n\
+    bl sub_806CEF8\n\
+    ldrb r1, [r4, 0x3]\n\
+    lsls r0, r1, 4\n\
+    adds r0, r1\n\
+    lsls r0, 2\n\
+    subs r5, 0x4\n\
+    adds r0, r5\n\
+    ldr r2, _0806CF9C @ =SpriteCB_sub_806D37C\n\
+    str r2, [r0]\n\
+    ldrb r1, [r4, 0x4]\n\
+    lsls r0, r1, 4\n\
+    adds r0, r1\n\
+    lsls r0, 2\n\
+    adds r0, r5\n\
+    str r2, [r0]\n\
+    pop {r4,r5}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
+_0806CF94: .4byte 0x02001000\n\
+_0806CF98: .4byte gSprites + 0x20\n\
+_0806CF9C: .4byte SpriteCB_sub_806D37C\n\
+    .syntax divided\n");
+}
+#endif // NONMATCHING
+
+void sub_806CFA0(u8 taskId, u8 b)
+{
+    u8 var1 = ((ewram01000.unk6 - 1) * 3) + 1;
+
+    sub_806BA34(ewram01000.unk8, 3);
+    sub_806BB3C(ewram01000.unkA, var1);
+
+    if (!b)
+    {
+        ewram01000.unk8--;
+        ewram01000.unkA++;
+    }
+    else
+    {
+        ewram01000.unk8++;
+        ewram01000.unkA--;
+    }
+
+    sub_806B9A4(ewram01000.unk8, 3, 10);
+    sub_806BA94(ewram01000.unkA, var1, 0, 10);
+}
+
+void sub_806D014(u8 taskId)
+{
+    sub_806CFA0(taskId, 0);
+
+    if (ewram01000.unk8 < -13 && ewram01000.unkA > 32)
+    {
+        sub_806CF04();
+        gTasks[taskId].func = sub_806D05C;
+    }
+}
+
+void sub_806D05C(u8 taskId)
+{
+    sub_806CFA0(taskId, 1);
+
+    if (ewram01000.unk8 == 0 && ewram01000.unkA == 11)
+    {
+        gTasks[taskId].func = sub_806D198;
+    }
+}
+
+void sub_806D098(u8 a, u8 b)
+{
+    u8 var1 = ((ewram01000.unk5 - 1) * 3) + 1;
+    u8 var2 = ((ewram01000.unk6 - 1) * 3) + 1;
+
+    sub_806BB3C(ewram01000.unk8, var1);
+    sub_806BB3C(ewram01000.unkA, var2);
+
+    if (!b)
+    {
+        ewram01000.unk8++;
+        ewram01000.unkA++;
+    }
+    else
+    {
+        ewram01000.unk8--;
+        ewram01000.unkA--;
+    }
+
+    sub_806BA94(ewram01000.unk8, var1, 0, 10);
+    sub_806BA94(ewram01000.unkA, var2, 0, 10);
+}
+
+void sub_806D118(u8 taskId)
+{
+    sub_806D098(taskId, 0);
+
+    if (ewram01000.unk8 > 32 && ewram01000.unkA > 32)
+    {
+        sub_806CF04();
+        gTasks[taskId].func = sub_806D15C;
+    }
+}
+
+void sub_806D15C(u8 taskId)
+{
+    sub_806D098(taskId, 1);
+
+    if (ewram01000.unk8 == 11 && ewram01000.unkA == 11)
+    {
+        gTasks[taskId].func = sub_806D198;
+    }
+}
+
+void sub_806D198(u8 taskId)
+{
+    u8 spriteId;
+
+    SetMonIconSpriteId_maybe(ewram01000.unk0, ewram01000.unk5, ewram01000.unk4);
+    SetMonIconSpriteId_maybe(ewram01000.unk0, ewram01000.unk6, ewram01000.unk3);
+
+    gSprites[ewram01000.unk3].pos1.x = gUnknown_08376678[IsDoubleBattle()][ewram01000.unk6].x;
+    gSprites[ewram01000.unk3].pos1.y = gUnknown_08376678[IsDoubleBattle()][ewram01000.unk6].y;
+    gSprites[ewram01000.unk3].pos2.x = 0;
+    gSprites[ewram01000.unk3].pos2.y = 0;
+    gSprites[ewram01000.unk3].callback = UpdateMonIconFrame_806DA38;
+
+    gSprites[ewram01000.unk4].pos1.x = gUnknown_08376678[IsDoubleBattle()][ewram01000.unk5].x;
+    gSprites[ewram01000.unk4].pos1.y = gUnknown_08376678[IsDoubleBattle()][ewram01000.unk5].y;
+    gSprites[ewram01000.unk4].pos2.x = 0;
+    gSprites[ewram01000.unk4].pos2.y = 0;
+    gSprites[ewram01000.unk4].callback = UpdateMonIconFrame_806DA38;
+
+    spriteId = GetMonIconSpriteId_maybe(ewram01000.unk0, gSprites[ewram01000.unk2].data0);
+    gSprites[spriteId].callback = UpdateMonIconFrame_806DA0C;
+
+    SwapPokemon(&gPlayerParty[ewram01000.unk5], &gPlayerParty[ewram01000.unk6]);
+
+    PartyMenuPrintMonLevelOrStatus(ewram01000.unk5, &gPlayerParty[ewram01000.unk5]);
+    TryPrintPartyMenuMonNickname(ewram01000.unk5, &gPlayerParty[ewram01000.unk5]);
+    PartyMenuTryPrintHP(ewram01000.unk5, &gPlayerParty[ewram01000.unk5]);
+    nullsub_12(ewram01000.unk5, &gPlayerParty[ewram01000.unk5]);
+
+    PartyMenuPrintMonLevelOrStatus(ewram01000.unk6, &gPlayerParty[ewram01000.unk6]);
+    TryPrintPartyMenuMonNickname(ewram01000.unk6, &gPlayerParty[ewram01000.unk6]);
+    PartyMenuTryPrintHP(ewram01000.unk6, &gPlayerParty[ewram01000.unk6]);
+    nullsub_12(ewram01000.unk6, &gPlayerParty[ewram01000.unk6]);
+
+    PartyMenuDrawHPBars();
+    sub_806CC74(taskId);
+}
+
+void SpriteCB_sub_806D37C(struct Sprite *sprite)
+{
+    UpdateMonIconFrame(sprite);
+
+    if (sprite->pos2.x == sprite->data2)
+    {
+        sprite->data0 *= -1;
+        sprite->data2 = 0;
+        sprite->callback = UpdateMonIconFrame_806DA38;
+    }
+    else
+    {
+        sprite->pos2.x += sprite->data0;
+    }
+}
+
+void sub_806D3B4(u8 taskId, u16 species1, u16 species2)
+{
+    const u8 *var1 = gUnknown_083769C0;
+
+    sub_806BA34(var1[2] + gTasks[taskId].data[0], var1[3]);
+    sub_806BB3C(var1[8] + gTasks[taskId].data[0], var1[9]);
+    sub_806BB3C(var1[10] + gTasks[taskId].data[0], var1[11]);
+
+    gTasks[taskId].data[0]--;
+
+    sub_806B9A4(var1[2] + gTasks[taskId].data[0], var1[3], 4);
+
+    if (species1)
+    {
+        sub_806BA94(var1[8] + gTasks[taskId].data[0], var1[9], 0, 4);
+    }
+    else
+    {
+        sub_806BA94(var1[8] + gTasks[taskId].data[0], var1[9], 1, 4);
+    }
+
+    if (species2)
+    {
+        sub_806BA94(var1[10] + gTasks[taskId].data[0], var1[11], 0, 4);
+    }
+    else
+    {
+        sub_806BA94(var1[10] + gTasks[taskId].data[0], var1[11], 1, 4);
+    }
+}
+
+void sub_806D4AC(u8 taskId, u16 species, u8 c)
+{
+    if (species)
+    {
+        u8 monIndex = c + 3;
+        u8 spriteId = GetMonIconSpriteId_maybe(taskId, monIndex);
+
+        gSprites[spriteId].data0 = -8;
+        gSprites[spriteId].data2 = gTasks[taskId].data[0] * -8;
+        gSprites[spriteId].callback = SpriteCB_sub_806D37C;
+    }
+}
+
+void sub_806D50C(u8 taskId, u8 monIndex)
+{
+    gSprites[GetMonIconSpriteId_maybe(taskId, monIndex)].pos1.x += 0xF0;
+}
+
+void sub_806D538(u8 textId, u8 b)
+{
+    if (textId != 0xFF)
+    {
+        switch (b)
+        {
+        case 0:
+            MenuDrawTextWindow(0, 16, 23, 19);
+            break;
+        case 1:
+            MenuDrawTextWindow(0, 16, 19, 19);
+            break;
+        case 2:
+            MenuDrawTextWindow(0, 16, 22, 19);
+            break;
+        case 3:
+            MenuDrawTextWindow(0, 16, 18, 19);
+            break;
+        }
+
+        MenuPrint(gUnknown_08376624[textId], 1, 17);
+    }
+}
+
+void sub_806D5A4(void)
+{
+    MenuZeroFillWindowRect(0, 16, 29, 19);
+}
+
+void sub_806D5B8(u8 monIndex)
+{
+    u32 var1;
+    u8 left = gUnknown_08376948[IsDoubleBattle()][monIndex].left;
+    u8 top = gUnknown_08376948[IsDoubleBattle()][monIndex].top;
+    u8 right = gUnknown_08376948[IsDoubleBattle()][monIndex].right;
+    u8 bottom = gUnknown_08376948[IsDoubleBattle()][monIndex].bottom;
+
+    ZeroFillWindowRect(&gUnknown_03004210, left, top, right, bottom);
+
+    var1 = 0;
+    CpuFastSet(&var1, (void *)(OBJ_VRAM1 + monIndex * 0x400), 0x1000100);
+}
+
+void sub_806D668(u8 monIndex)
+{
+    u32 var1;
+    u8 left = gUnknown_08376978[IsDoubleBattle()][monIndex].left;
+    u8 top = gUnknown_08376978[IsDoubleBattle()][monIndex].top;
+    u8 right = gUnknown_08376978[IsDoubleBattle()][monIndex].right;
+    u8 bottom = gUnknown_08376978[IsDoubleBattle()][monIndex].bottom;
+
+    ZeroFillWindowRect(&gUnknown_03004210, left, top, right, bottom);
+
+    var1 = 0;
+    CpuFastSet(&var1, (void *)(OBJ_VRAM1 + 0x300 + monIndex * 0x400), 0x1000040);
+}
+
+u8 LoadPartyMenuGraphics(u8 a)
+{
+    u16 palette = 0x7FFF;
+    u8 retVal = 0;
+
+    if (a < 2)
+    {
+        LZDecompressVram(gPartyMenuMisc_Gfx, (void *)BG_VRAM);
+    }
+
+    if (a == 2 || a == 0)
+    {
+        LZDecompressVram(gPartyMenuMisc_Tilemap, (void *)(BG_VRAM + 0x3800));
+    }
+
+    if (a == 3 || a == 0)
+    {
+        LoadCompressedPalette(gPartyMenuMisc_Pal, 0, 0x160);
+    }
+
+    if (a == 4 || a == 0)
+    {
+        LoadPalette(&palette, 0, 2);
+        LoadPalette(gFontDefaultPalette, 0xF0, 0x20);
+    }
+
+    if (a == 5 || a == 0)
+    {
+        LZDecompressVram(gPartyMenuHpBar_Gfx, (void *)(BG_VRAM + 0x6000));
+    }
+
+    if (a == 6 || a == 0)
+    {
+        LZDecompressVram(gPartyMenuOrderText_Gfx, (void *)(BG_VRAM + 0x6180));
+    }
+
+    if (a == 7 || a == 0)
+    {
+        LZDecompressVram(gStatusGfx_Icons, (void *)(BG_VRAM + 0x7180));
+    }
+
+    if (a == 8 || a == 0)
+    {
+        LoadCompressedPalette(gStatusPal_Icons, 0xB0, 0x20);
+        retVal = 1;
+    }
+
+    return retVal;
+}
+
+void SetMonIconAnimByHP(u8 spriteId, u16 currentHP, u16 maxHP)
+{
+    u8 hpBarLevel = GetHPBarLevel(currentHP, maxHP);
+    u8 animNum = 0;
+
+    if (currentHP != maxHP)
+    {
+        if (hpBarLevel == 3)
+        {
+            animNum = 1;
+        }
+        else if (hpBarLevel == 2)
+        {
+            animNum = 2;
+        }
+        else if (hpBarLevel == 1)
+        {
+            animNum = 3;
+        }
+        else
+        {
+            animNum = 4;
+        }
+    }
+
+    sub_809D824(&gSprites[spriteId], animNum);
+}
+
+void SetMonIconAnim(u8 spriteId, struct Pokemon *pokemon)
+{
+    u16 currentHP = GetMonData(pokemon, MON_DATA_HP);
+    u16 maxHP = GetMonData(pokemon, MON_DATA_MAX_HP);
+
+    SetMonIconAnimByHP(spriteId, currentHP, maxHP);
+}
+
+void CreatePartyMenuMonIcon(u8 taskId, u8 monIndex, u8 c, struct Pokemon *pokemon)
+{
+    u8 x = gUnknown_08376678[c][monIndex].x;
+    u8 y = gUnknown_08376678[c][monIndex].y;
+
+    u16 species2 = GetMonData(pokemon, MON_DATA_SPECIES2);
+    u32 personality = GetMonData(pokemon, MON_DATA_PERSONALITY);
+
+    u8 spriteId = CreateMonIcon(species2, sub_809D62C, x, y, 5, personality);
+    SetMonIconSpriteId_maybe(taskId, monIndex, spriteId);
+    SetMonIconAnim(spriteId, pokemon);
+}
+
+void TryCreatePartyMenuMonIcon(u8 a, u8 monIndex, struct Pokemon *pokemon)
+{
+    if (GetMonData(pokemon, MON_DATA_SPECIES))
+    {
+        bool8 isLinkDoubleBattle = IsLinkDoubleBattle();
+        if (isLinkDoubleBattle == TRUE)
+        {
+            CreatePartyMenuMonIcon(a, monIndex, 2, pokemon);
+        }
+        else
+        {
+            CreatePartyMenuMonIcon(a, monIndex, IsDoubleBattle(), pokemon);
+        }
+    }
+}
+
+void unref_sub_806D964(u8 a)
+{
+    u8 i;
+    for (i = 0; i < gPlayerPartyCount; i++)
+    {
+        TryCreatePartyMenuMonIcon(a, i, &gPlayerParty[i]);
+    }
+}
+
+void CreateMonIcon_806D99C(u8 taskId, u8 monIndex, u8 c, struct UnknownPokemonStruct2 *d)
+{
+    u8 x = gUnknown_08376678[c][monIndex].x;
+    u8 y = gUnknown_08376678[c][monIndex].y;
+
+    u8 spriteId = CreateMonIcon(d->species, sub_809D62C, x, y, 5, d->personality);
+    SetMonIconSpriteId_maybe(taskId, monIndex, spriteId);
+    SetMonIconAnimByHP(spriteId, d->hp, d->maxhp);
+}
+
+void UpdateMonIconFrame_806DA0C(struct Sprite *sprite)
+{
+    u8 var1;
+
+    var1 = UpdateMonIconFrame(sprite);
+    if (var1)
+    {
+        if (var1 & 1)
+        {
+            sprite->pos2.y = -3;
+        }
+        else
+        {
+            sprite->pos2.y = 1;
+        }
+    }
+}
+
+void UpdateMonIconFrame_806DA38(struct Sprite *sprite)
+{
+    UpdateMonIconFrame(sprite);
+}
+
+void UpdateMonIconFrame_806DA44(u8 taskId, u8 monIndex, u8 c)
+{
+    u8 spriteId;
+
+    if (monIndex < PARTY_SIZE)
+    {
+        spriteId = GetMonIconSpriteId_maybe(taskId, monIndex);
+        gSprites[spriteId].pos2.y = 0;
+        gSprites[spriteId].data0 = 0;
+
+        if (!c)
+        {
+            gSprites[spriteId].callback = UpdateMonIconFrame_806DA38;
+        }
+        else
+        {
+            gSprites[spriteId].callback = UpdateMonIconFrame_806DA0C;
+        }
+    }
+}
 
 void LoadHeldItemIconGraphics(void)
 {
@@ -168,7 +902,7 @@ void CreateHeldItemIcons(u8 *a, u8 *b, u8 c)
     u16 i;
     u16 heldItem;
 
-    switch(c)
+    switch (c)
     {
     case 0:
         i = 0;
@@ -358,7 +1092,7 @@ void SpriteCB_UpdateHeldItemIconPosition(struct Sprite *sprite)
 
 u8 GetMonIconSpriteId_maybe(u8 taskId, u8 monIndex)
 {
-    switch(monIndex)
+    switch (monIndex)
     {
         case 1:
             return gTasks[taskId].data[0]; 
@@ -382,27 +1116,27 @@ u8 GetMonIconSpriteId_maybe(u8 taskId, u8 monIndex)
     }
 }
 
-void SetMonIconSpriteId_maybe(u8 taskId, u8 monIndex, u8 c)
+void SetMonIconSpriteId_maybe(u8 taskId, u8 monIndex, u8 spriteId)
 {
-    switch(monIndex)
+    switch (monIndex)
     {
         case 0:
-            gTasks[taskId].data[0] = (u8)gTasks[taskId].data[0] | (c << 8);
+            gTasks[taskId].data[0] = (u8)gTasks[taskId].data[0] | (spriteId << 8);
             break;
         case 1:
-            gTasks[taskId].data[0] = (gTasks[taskId].data[0] & -0x100) | c;
+            gTasks[taskId].data[0] = (gTasks[taskId].data[0] & -0x100) | spriteId;
             break;
         case 2:
-            gTasks[taskId].data[1] = (u8)gTasks[taskId].data[1] | (c << 8);
+            gTasks[taskId].data[1] = (u8)gTasks[taskId].data[1] | (spriteId << 8);
             break;
         case 3:
-            gTasks[taskId].data[1] = (gTasks[taskId].data[1] & -0x100) | c;
+            gTasks[taskId].data[1] = (gTasks[taskId].data[1] & -0x100) | spriteId;
             break;
         case 4:
-            gTasks[taskId].data[2] = (u8)gTasks[taskId].data[2] | (c << 8);
+            gTasks[taskId].data[2] = (u8)gTasks[taskId].data[2] | (spriteId << 8);
             break;
         case 5:
-            gTasks[taskId].data[2] = (gTasks[taskId].data[2] & -0x100) | c;
+            gTasks[taskId].data[2] = (gTasks[taskId].data[2] & -0x100) | spriteId;
             break;
     }
 }
@@ -780,7 +1514,7 @@ void PartyMenuTryPrintMonsHP(void)
 
 void unref_sub_806E564(void) { }
 void unref_sub_806E568(void) { }
-void nullsub_12(void) { }
+void nullsub_12(u8 monIndex, struct Pokemon *pokemon) { }
 void nullsub_13(void) { }
 
 void PartyMenuDoDrawHPBar(u8 monIndex, u8 b, u16 currentHP, u16 maxHP)

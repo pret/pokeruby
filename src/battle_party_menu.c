@@ -23,12 +23,10 @@ extern u8 ewram[];
 #define UNK_201606C_ARRAY (ewram + 0x1606C) // lazy define but whatever.
 
 extern u8 IsLinkDoubleBattle(void);
-extern void TryCreatePartyMenuMonIcon(u8, u8, struct Pokemon *);
 extern u8 sub_806BD58(u8, u8);
 extern void PartyMenuPrintMonsLevelOrStatus(void);
 extern void nullsub_13(void);
 extern u8 sub_806B58C(u8);
-extern void sub_806D5A4(void);
 extern void sub_802E414(void);
 extern void sub_80A6DCC(void);
 extern void sub_806AF4C();
