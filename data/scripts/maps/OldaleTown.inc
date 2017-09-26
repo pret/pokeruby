@@ -277,7 +277,7 @@ OldaleTown_EventScript_14DFC6:: @ 814DFC6
 	closebutton
 	applymovement 4, OldaleTown_Movement_14DFE5
 	waitmovement 0
-	disappear 4
+	removeobject 4
 	setvar 0x40c7, 2
 	setflag 979
 	releaseall

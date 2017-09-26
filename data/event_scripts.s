@@ -1607,7 +1607,7 @@ Std_FindItem: @ 819FF21
 	return
 
 Std_FindItem_Success: @ 819FF52
-	disappear LAST_TALKED
+	removeobject LAST_TALKED
 	message Message_FoundOneItem
 	waitfanfare
 	waittext
@@ -2254,8 +2254,8 @@ PetalburgCity_Gym_EventScript_1A0424:: @ 81A0424
 	return
 
 RusturfTunnel_EventScript_1A0442:: @ 81A0442
-	disappear 1
-	disappear 10
+	removeobject 1
+	removeobject 10
 	clearflag 808
 	clearflag 984
 	setvar 0x409a, 6
@@ -2266,7 +2266,7 @@ EventScript_1A0457: @ unreferenced?
 	delay 30
 	applymovement 255, SlateportCity_OceanicMuseum_2F_Movement_1A0841
 	waitmovement 0
-	spritevisible 255, 0, 0
+	showobject 255, 0, 0
 	delay 30
 	applymovement 255, Movement_1A047A
 	waitmovement 0
@@ -2284,7 +2284,7 @@ SouthernIsland_Exterior_EventScript_1A047C:: @ 81A047C
 	compare FACING, 3
 	call_if 1, BattleTower_Outside_EventScript_160B3A
 	delay 30
-	spriteinvisible 255, 0, 0
+	hideobject 255, 0, 0
 	call BattleTower_Outside_EventScript_1A040E
 	return
 
@@ -3877,7 +3877,7 @@ EventScript_1A2F95:
 	addvar 0x8004, 1
 	compare 0x8005, 0
 	goto_if_eq EventScript_1A2F95
-	disappear 0x8006
+	removeobject 0x8006
 	setflag 0x8005
 	goto EventScript_1A2F95
 	end

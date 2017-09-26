@@ -1011,9 +1011,9 @@ bool8 ScrCmd_waitmovexy(struct ScriptContext *ctx)
 
 bool8 ScrCmd_disappear(struct ScriptContext *ctx)
 {
-    u16 objectId = VarGet(ScriptReadHalfword(ctx));
+    u16 localId = VarGet(ScriptReadHalfword(ctx));
 
-    RemoveFieldObjectByLocalIdAndMap(objectId, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
+    RemoveFieldObjectByLocalIdAndMap(localId, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
     return FALSE;
 }
 

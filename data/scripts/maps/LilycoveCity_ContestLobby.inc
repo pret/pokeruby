@@ -20,7 +20,7 @@ LilycoveCity_ContestLobby_EventScript_158889:: @ 8158889
 
 LilycoveCity_ContestLobby_EventScript_158898:: @ 8158898
 	lockall
-	reappear 4
+	addobject 4
 	applymovement 4, LilycoveCity_ContestLobby_Movement_158A3B
 	waitmovement 4
 	applymovement 255, LilycoveCity_ContestLobby_Movement_158A4C
@@ -48,7 +48,7 @@ LilycoveCity_ContestLobby_EventScript_1588DE:: @ 81588DE
 	call_if 1, LilycoveCity_ContestLobby_EventScript_158948
 	applymovement 4, LilycoveCity_ContestLobby_Movement_158A43
 	waitmovement 0
-	disappear 4
+	removeobject 4
 	call LilycoveCity_ContestLobby_EventScript_158994
 	call LilycoveCity_ContestLobby_EventScript_1589EA
 	releaseall
@@ -63,7 +63,7 @@ LilycoveCity_ContestLobby_EventScript_158918:: @ 8158918
 	applymovement 4, LilycoveCity_ContestLobby_Movement_158A43
 	waitmovement 0
 	setvar 0x4099, 0
-	disappear 4
+	removeobject 4
 	releaseall
 	end
 
@@ -195,7 +195,7 @@ LilycoveCity_ContestLobby_EventScript_158A5B:: @ 8158A5B
 
 LilycoveCity_ContestLobby_EventScript_158A6A:: @ 8158A6A
 	lockall
-	reappear 11
+	addobject 11
 	applymovement 11, LilycoveCity_ContestLobby_Movement_158B64
 	waitmovement 11
 	applymovement 255, LilycoveCity_ContestLobby_Movement_158B76
@@ -221,7 +221,7 @@ LilycoveCity_ContestLobby_EventScript_158AAE:: @ 8158AAE
 	call_if 1, LilycoveCity_ContestLobby_EventScript_158B18
 	applymovement 11, LilycoveCity_ContestLobby_Movement_158B6D
 	waitmovement 0
-	disappear 11
+	removeobject 11
 	call LilycoveCity_ContestLobby_EventScript_158994
 	call LilycoveCity_ContestLobby_EventScript_1589EA
 	releaseall
@@ -236,7 +236,7 @@ LilycoveCity_ContestLobby_EventScript_158AE8:: @ 8158AE8
 	applymovement 11, LilycoveCity_ContestLobby_Movement_158B6D
 	waitmovement 0
 	setvar 0x4099, 0
-	disappear 11
+	removeobject 11
 	releaseall
 	end
 

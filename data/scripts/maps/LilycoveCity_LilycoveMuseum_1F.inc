@@ -38,7 +38,7 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_158481:: @ 8158481
 	msgbox LilycoveCity_LilycoveMuseum_1F_Text_187534, 3
 	applymovement 2, LilycoveCity_LilycoveMuseum_1F_Movement_1584FC
 	waitmovement 0
-	disappear 2
+	removeobject 2
 	switch FACING
 	case 2, LilycoveCity_LilycoveMuseum_1F_EventScript_1584BD
 	case 3, LilycoveCity_LilycoveMuseum_1F_EventScript_1584D2

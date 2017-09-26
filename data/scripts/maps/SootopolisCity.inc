@@ -464,7 +464,7 @@ SootopolisCity_EventScript_14D4AD:: @ 814D4AD
 	setanimation 0, 1
 	doanimation 30
 	delay 15
-	disappear LAST_TALKED
+	removeobject LAST_TALKED
 	checkanimation 30
 	release
 	end

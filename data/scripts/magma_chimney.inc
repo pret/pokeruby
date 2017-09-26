@@ -60,13 +60,13 @@ MtChimney_EventScript_1B2CCB:: @ 81B2CCB
 	closebutton
 	delay 30
 	fadescreen 1
-	disappear 2
-	disappear 3
-	disappear 22
+	removeobject 2
+	removeobject 3
+	removeobject 22
 	setflag 926
 	fadescreen 0
 	movespriteperm 1, 10, 12
-	reappear 1
+	addobject 1
 	compare FACING, 4
 	call_if 1, MtChimney_EventScript_1B2D7D
 	compare FACING, 2
@@ -83,7 +83,7 @@ MtChimney_EventScript_1B2CCB:: @ 81B2CCB
 	call_if 1, MtChimney_EventScript_1B2D93
 	compare FACING, 2
 	call_if 1, MtChimney_EventScript_1B2D9E
-	disappear 1
+	removeobject 1
 	setflag 927
 	setflag 139
 	clearflag 928

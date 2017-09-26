@@ -318,9 +318,9 @@ RusturfTunnel_EventScript_15C9EA:: @ 815C9EA
 	applymovement 255, RusturfTunnel_Movement_15CA99
 	applymovement 6, RusturfTunnel_Movement_15CAA2
 	waitmovement 0
-	disappear 6
+	removeobject 6
 	delay 50
-	reappear 5
+	addobject 5
 	applymovement 5, RusturfTunnel_Movement_15CAAC
 	waitmovement 0
 	applymovement 255, RusturfTunnel_Movement_15CA9F
@@ -339,8 +339,8 @@ RusturfTunnel_EventScript_15C9EA:: @ 815C9EA
 	applymovement 5, RusturfTunnel_Movement_15CAB4
 	applymovement 7, RusturfTunnel_Movement_15CAC3
 	waitmovement 0
-	disappear 5
-	disappear 7
+	removeobject 5
+	removeobject 7
 	clearflag 142
 	setflag 143
 	setvar 0x405a, 4

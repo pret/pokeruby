@@ -165,18 +165,18 @@ RustboroCity_EventScript_14C4DD:: @ 814C4DD
 RustboroCity_EventScript_14C4F4:: @ 814C4F4
 	msgbox RustboroCity_Text_166E65, 4
 	closebutton
-	reappear 10
-	reappear 9
+	addobject 10
+	addobject 9
 	applymovement 10, RustboroCity_Movement_14C5C2
 	waitmovement 0
-	disappear 10
+	removeobject 10
 	applymovement 9, RustboroCity_Movement_14C5D3
 	waitmovement 0
 	msgbox RustboroCity_Text_166E7E, 4
 	closebutton
 	applymovement 9, RustboroCity_Movement_14C5DB
 	waitmovement 0
-	disappear 9
+	removeobject 9
 	movespriteperm 9, 30, 10
 	clearflag 732
 	setflag 142

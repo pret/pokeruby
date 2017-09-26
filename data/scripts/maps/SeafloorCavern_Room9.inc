@@ -28,7 +28,7 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	msgbox SeafloorCavern_Room9_Text_1B4850, 4
 	.endif
 	closebutton
-	reappear 0x8004
+	addobject 0x8004
 	applymovement 255, SeafloorCavern_Room9_Movement_1A083F
 	waitmovement 0
 	applymovement 0x8004, SeafloorCavern_Room9_Movement_15DD36
@@ -96,8 +96,8 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	applymovement 255, SeafloorCavern_Room9_Movement_1A0841
 	waitmovement 0
 	delay 150
-	disappear 7
-	reappear 1
+	removeobject 7
+	addobject 1
 	waitstate
 	delay 60
 	applymovement 1, SeafloorCavern_Room9_Movement_15DD4C
@@ -110,7 +110,7 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	waitstate
 	applymovement 1, SeafloorCavern_Room9_Movement_15DD57
 	waitmovement 0
-	disappear 1
+	removeobject 1
 	delay 4
 	setvar 0x8004, 2
 	setvar 0x8005, 2
@@ -153,9 +153,9 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	msgbox SeafloorCavern_Room9_Text_1B4C79, 4
 	.endif
 	closebutton
-	reappear 0x8005
-	reappear 0x8006
-	reappear 0x8007
+	addobject 0x8005
+	addobject 0x8006
+	addobject 0x8007
 	applymovement 0x8007, SeafloorCavern_Room9_Movement_15DD63
 	applymovement 0x8006, SeafloorCavern_Room9_Movement_15DD63
 	applymovement 0x8005, SeafloorCavern_Room9_Movement_15DD5A

@@ -8,7 +8,7 @@ SkyPillar_Top_MapScript1_15F308:: @ 815F308
 	end
 
 SkyPillar_Top_EventScript_15F312:: @ 815F312
-	disappear LAST_TALKED
+	removeobject LAST_TALKED
 	return
 
 SkyPillar_Top_EventScript_15F316:: @ 815F316

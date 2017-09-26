@@ -122,24 +122,24 @@ DewfordTown_EventScript_14E151:: @ 814E151
 	spritelevelup 255, 0, 11, 0
 	applymovement 2, DewfordTown_Movement_14E40E
 	waitmovement 0
-	disappear 2
+	removeobject 2
 	applymovement 255, DewfordTown_Movement_14E402
 	waitmovement 0
-	spriteinvisible 255, 0, 11
+	hideobject 255, 0, 11
 	call DewfordTown_EventScript_1A02E7
 	applymovement 4, DewfordTown_Movement_14E293
 	applymovement 255, DewfordTown_Movement_14E293
 	waitmovement 0
-	spritevisible 255, 0, 19
+	showobject 255, 0, 19
 	call DewfordTown_EventScript_1A02EF
 	applymovement 255, DewfordTown_Movement_14E405
 	waitmovement 0
-	spritevisible 255, 0, 19
+	showobject 255, 0, 19
 	clearflag 739
 	clearflag 881
 	clearflag 742
 	setflag 743
-	spriteinvisible 4, 0, 11
+	hideobject 4, 0, 11
 	setvar 0x408e, 2
 	restorespritelevel 255, 0, 11
 	warp Route104_MrBrineysHouse, 255, 5, 4
@@ -154,28 +154,28 @@ DewfordTown_EventScript_14E1D8:: @ 814E1D8
 	spritelevelup 255, 0, 11, 1
 	applymovement 2, DewfordTown_Movement_14E40E
 	waitmovement 0
-	disappear 2
+	removeobject 2
 	applymovement 255, DewfordTown_Movement_14E402
 	waitmovement 0
-	spriteinvisible 255, 0, 11
+	hideobject 255, 0, 11
 	call DewfordTown_EventScript_1A02E7
 	applymovement 4, DewfordTown_Movement_14E356
 	applymovement 255, DewfordTown_Movement_14E356
 	waitmovement 0
 	call DewfordTown_EventScript_1A02EF
-	spritevisible 255, 0, 24
+	showobject 255, 0, 24
 	applymovement 255, DewfordTown_Movement_14E409
 	waitmovement 0
 	movespriteperm 2, 21, 26
-	reappear 2
+	addobject 2
 	spritelevelup 2, 0, 24, 0
 	applymovement 2, DewfordTown_Movement_14E410
 	waitmovement 0
 	clearflag 741
-	reappear 1
+	addobject 1
 	clearflag 744
 	setflag 743
-	spriteinvisible 4, 0, 11
+	hideobject 4, 0, 11
 	checkflag 149
 	call_if 0, DewfordTown_EventScript_14E281
 	checkflag 149

@@ -86,7 +86,7 @@ PetalburgWoods_EventScript_15CDFA:: @ 815CDFA
 	closebutton
 	applymovement 3, PetalburgWoods_Movement_15CEB7
 	waitmovement 0
-	disappear 3
+	removeobject 3
 	applymovement 255, PetalburgWoods_Movement_1A0845
 	waitmovement 0
 	msgbox PetalburgWoods_Text_19507E, 4
@@ -110,7 +110,7 @@ PetalburgWoods_EventScript_15CE4D:: @ 815CE4D
 	return
 
 PetalburgWoods_EventScript_15CE69:: @ 815CE69
-	disappear 4
+	removeobject 4
 	setvar 0x4098, 1
 	releaseall
 	end

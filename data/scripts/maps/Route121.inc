@@ -26,9 +26,9 @@ Route121_EventScript_151B25:: @ 8151B25
 	applymovement 13, Route121_Movement_151B60
 	applymovement 14, Route121_Movement_151B69
 	waitmovement 0
-	disappear 12
-	disappear 13
-	disappear 14
+	removeobject 12
+	removeobject 13
+	removeobject 14
 	setvar 0x4074, 1
 	releaseall
 	end

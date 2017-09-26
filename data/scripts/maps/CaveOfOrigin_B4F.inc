@@ -9,7 +9,7 @@ CaveOfOrigin_B4F_MapScript1_15DDB7:: @ 815DDB7
 	end
 
 CaveOfOrigin_B4F_EventScript_15DDC1:: @ 815DDC1
-	disappear 1
+	removeobject 1
 	return
 
 CaveOfOrigin_B4F_MapScript1_15DDC5:: @ 815DDC5

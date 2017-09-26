@@ -344,7 +344,7 @@ LinkContestRoom1_EventScript_1A5323:: @ 81A5323
 	applymovement 0x800b, LinkContestRoom1_Movement_1A5D9C
 	waitmovement 0
 	releaseall
-	reappear 13
+	addobject 13
 	playse 10
 	lockall
 	applymovement 0x800b, LinkContestRoom1_Movement_1A5D9C
@@ -724,7 +724,7 @@ LinkContestRoom1_EventScript_1A587F:: @ 81A587F
 LinkContestRoom1_EventScript_1A5880:: @ 81A5880
 	closebutton
 	release
-	disappear 13
+	removeobject 13
 	special sub_80C5164
 	switch 0x8006
 	case 0, LinkContestRoom1_EventScript_1A58BA

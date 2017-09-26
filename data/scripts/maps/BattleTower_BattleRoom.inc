@@ -13,7 +13,7 @@ BattleTower_BattleRoom_EventScript_1608EB:: @ 81608EB
 
 BattleTower_BattleRoom_EventScript_1608FA:: @ 81608FA
 	special sub_81347F8
-	reappear 1
+	addobject 1
 	applymovement 1, BattleTower_BattleRoom_Movement_160AC0
 	waitmovement 0
 	special sub_8135474
@@ -45,7 +45,7 @@ BattleTower_BattleRoom_EventScript_160961:: @ 8160961
 	case 8, BattleTower_BattleRoom_EventScript_160A56
 	applymovement 1, BattleTower_BattleRoom_Movement_160AC6
 	waitmovement 0
-	disappear 1
+	removeobject 1
 	applymovement 2, BattleTower_BattleRoom_Movement_160ACB
 	waitmovement 0
 	applymovement 255, BattleTower_BattleRoom_Movement_160ABC

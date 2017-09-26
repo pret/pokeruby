@@ -58,11 +58,11 @@ Route111_EventScript_150023:: @ 8150023
 	closebutton
 	setflag 963
 	setflag 964
-	disappear 34
+	removeobject 34
 	delay 30
 	applymovement 35, Route111_Movement_1500AF
 	waitmovement 0
-	disappear 35
+	removeobject 35
 	releaseall
 	end
 
@@ -80,11 +80,11 @@ Route111_EventScript_150069:: @ 8150069
 	closebutton
 	setflag 964
 	setflag 963
-	disappear 35
+	removeobject 35
 	delay 30
 	applymovement 34, Route111_Movement_1500AF
 	waitmovement 0
-	disappear 34
+	removeobject 34
 	releaseall
 	end
 
@@ -254,12 +254,12 @@ Route111_EventScript_1501F3:: @ 81501F3
 	closebutton
 	applymovement 1, Route111_Movement_150356
 	waitmovement 0
-	disappear 1
+	removeobject 1
 	call Route111_EventScript_15034F
 	applymovement 255, Route111_Movement_15035B
 	waitmovement 0
 	call Route111_EventScript_150348
-	reappear 2
+	addobject 2
 	applymovement 2, Route111_Movement_150359
 	waitmovement 0
 	call Route111_EventScript_15034F
@@ -272,12 +272,12 @@ Route111_EventScript_1501F3:: @ 81501F3
 	closebutton
 	applymovement 2, Route111_Movement_150356
 	waitmovement 0
-	disappear 2
+	removeobject 2
 	call Route111_EventScript_15034F
 	applymovement 255, Route111_Movement_15035B
 	waitmovement 0
 	call Route111_EventScript_150348
-	reappear 3
+	addobject 3
 	applymovement 3, Route111_Movement_150359
 	waitmovement 0
 	call Route111_EventScript_15034F
@@ -290,12 +290,12 @@ Route111_EventScript_1501F3:: @ 81501F3
 	closebutton
 	applymovement 3, Route111_Movement_150356
 	waitmovement 0
-	disappear 3
+	removeobject 3
 	call Route111_EventScript_15034F
 	applymovement 255, Route111_Movement_15035B
 	waitmovement 0
 	call Route111_EventScript_150348
-	reappear 4
+	addobject 4
 	applymovement 4, Route111_Movement_150359
 	waitmovement 0
 	call Route111_EventScript_15034F
@@ -308,7 +308,7 @@ Route111_EventScript_1501F3:: @ 81501F3
 	call Route111_EventScript_150348
 	applymovement 4, Route111_Movement_150356
 	waitmovement 0
-	disappear 4
+	removeobject 4
 	call Route111_EventScript_15034F
 	release
 	end

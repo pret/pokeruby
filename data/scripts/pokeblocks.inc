@@ -272,10 +272,10 @@ FallarborTown_ContestLobby_EventScript_1B790F:: @ 81B790F
 FallarborTown_ContestLobby_EventScript_1B791D:: @ 81B791D
 	setvar 0x8004, 0
 	fadescreen 1
-	disappear 240
-	disappear 239
-	disappear 238
-	disappear 237
+	removeobject 240
+	removeobject 239
+	removeobject 238
+	removeobject 237
 	special sub_804E538
 	waitstate
 	releaseall

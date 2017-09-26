@@ -14,7 +14,7 @@ LittlerootTown_ProfessorBirchsLab_MapScript2_152C9D:: @ 8152C9D
 	.2byte 0
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152CA7:: @ 8152CA7
-	spriteface 255, 2
+	turnobject 255, 2
 	end
 
 LittlerootTown_ProfessorBirchsLab_MapScript2_152CAC:: @ 8152CAC

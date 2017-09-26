@@ -433,8 +433,8 @@ Route110_EventScript_14FEB2:: @ 814FEB2
 	call_if 1, Route110_EventScript_14FF66
 	spritebehave 28, 10
 	spritebehave 29, 10
-	disappear 28
-	reappear 29
+	removeobject 28
+	addobject 29
 	delay 45
 	compare 0x8008, 1
 	call_if 1, Route110_EventScript_14FF35
@@ -442,7 +442,7 @@ Route110_EventScript_14FEB2:: @ 814FEB2
 	call_if 1, Route110_EventScript_14FF40
 	compare 0x8008, 3
 	call_if 1, Route110_EventScript_14FF4B
-	disappear 29
+	removeobject 29
 	setvar 0x4069, 1
 	savebgm 0
 	fadedefaultbgm

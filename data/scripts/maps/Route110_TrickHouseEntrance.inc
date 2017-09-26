@@ -138,15 +138,15 @@ Route110_TrickHouseEntrance_MapScript2_1610B2:: @ 81610B2
 	.2byte 0
 
 Route110_TrickHouseEntrance_EventScript_1610F4:: @ 81610F4
-	reappear 1
-	spritevisible 1, 29, 0
-	spriteface 1, 4
-	spriteface 255, 3
+	addobject 1
+	showobject 1, 29, 0
+	turnobject 1, 4
+	turnobject 255, 3
 	end
 
 Route110_TrickHouseEntrance_EventScript_161105:: @ 8161105
-	reappear 1
-	spriteinvisible 1, 29, 0
+	addobject 1
+	hideobject 1, 29, 0
 	switch 0x4044
 	case 0, Route110_TrickHouseEntrance_EventScript_16116B
 	case 1, Route110_TrickHouseEntrance_EventScript_161173
@@ -159,51 +159,51 @@ Route110_TrickHouseEntrance_EventScript_161105:: @ 8161105
 	end
 
 Route110_TrickHouseEntrance_EventScript_16116B:: @ 816116B
-	movesprite 1, 6, 3
+	setobjectxy 1, 6, 3
 	end
 
 Route110_TrickHouseEntrance_EventScript_161173:: @ 8161173
-	movesprite 1, 11, 5
+	setobjectxy 1, 11, 5
 	end
 
 Route110_TrickHouseEntrance_EventScript_16117B:: @ 816117B
-	movesprite 1, 11, 1
+	setobjectxy 1, 11, 1
 	end
 
 Route110_TrickHouseEntrance_EventScript_161183:: @ 8161183
-	movesprite 1, 3, 1
+	setobjectxy 1, 3, 1
 	end
 
 Route110_TrickHouseEntrance_EventScript_16118B:: @ 816118B
-	movesprite 1, 0, 5
+	setobjectxy 1, 0, 5
 	end
 
 Route110_TrickHouseEntrance_EventScript_161193:: @ 8161193
-	movesprite 1, 9, 1
+	setobjectxy 1, 9, 1
 	end
 
 Route110_TrickHouseEntrance_EventScript_16119B:: @ 816119B
-	movesprite 1, 8, 1
+	setobjectxy 1, 8, 1
 	end
 
 Route110_TrickHouseEntrance_EventScript_1611A3:: @ 81611A3
-	movesprite 1, 4, 4
+	setobjectxy 1, 4, 4
 	end
 
 Route110_TrickHouseEntrance_EventScript_1611AB:: @ 81611AB
-	disappear 1
+	removeobject 1
 	end
 
 Route110_TrickHouseEntrance_EventScript_1611AF:: @ 81611AF
-	reappear 1
-	movesprite 1, 5, 2
-	spriteface 1, 2
+	addobject 1
+	setobjectxy 1, 5, 2
+	turnobject 1, 2
 	end
 
 Route110_TrickHouseEntrance_EventScript_1611BE:: @ 81611BE
-	reappear 1
-	movesprite 1, 5, 2
-	spriteface 1, 1
+	addobject 1
+	setobjectxy 1, 5, 2
+	turnobject 1, 1
 	end
 
 Route110_TrickHouseEntrance_MapScript2_1611CD:: @ 81611CD
@@ -223,7 +223,7 @@ Route110_TrickHouseEntrance_EventScript_1611D7:: @ 81611D7
 	playse 178
 	applymovement 1, Route110_TrickHouseEntrance_Movement_16131E
 	waitmovement 0
-	disappear 1
+	removeobject 1
 	setvar 0x40a7, 1
 	setvar 0x40a6, 0
 	releaseall
@@ -472,7 +472,7 @@ Route110_TrickHouseEntrance_EventScript_161551:: @ 8161551
 	playse 178
 	applymovement 1, Route110_TrickHouseEntrance_Movement_16131E
 	waitmovement 0
-	disappear 1
+	removeobject 1
 	setvar 0x40c1, 0
 	setvar 0x40a7, 5
 	releaseall

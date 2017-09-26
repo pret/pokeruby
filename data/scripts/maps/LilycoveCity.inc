@@ -418,7 +418,7 @@ LilycoveCity_EventScript_14CF6B:: @ 814CF6B
 	setanimation 0, 1
 	doanimation 30
 	delay 15
-	disappear LAST_TALKED
+	removeobject LAST_TALKED
 	checkanimation 30
 	savebgm 0
 	fadedefaultbgm

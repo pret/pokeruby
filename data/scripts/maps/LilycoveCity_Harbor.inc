@@ -79,13 +79,13 @@ LilycoveCity_Harbor_EventScript_15998A:: @ 815998A
 	applymovement LAST_TALKED, LilycoveCity_Harbor_Movement_1A0841
 	waitmovement 0
 	delay 30
-	spriteinvisible LAST_TALKED, 13, 10
+	hideobject LAST_TALKED, 13, 10
 	compare FACING, 2
 	call_if 1, LilycoveCity_Harbor_EventScript_1599D9
 	compare FACING, 4
 	call_if 1, LilycoveCity_Harbor_EventScript_1599CE
 	delay 30
-	spriteinvisible 255, 0, 0
+	hideobject 255, 0, 0
 	setvar 0x8004, 2
 	call LilycoveCity_Harbor_EventScript_1A040E
 	return
@@ -117,9 +117,9 @@ LilycoveCity_Harbor_EventScript_1599EE:: @ 81599EE
 	applymovement LAST_TALKED, LilycoveCity_Harbor_Movement_1A0841
 	waitmovement 0
 	delay 30
-	spriteinvisible LAST_TALKED, 13, 10
+	hideobject LAST_TALKED, 13, 10
 	delay 60
-	reappear 4
+	addobject 4
 	delay 30
 	applymovement 4, LilycoveCity_Harbor_Movement_1A0839
 	waitmovement 0
@@ -128,13 +128,13 @@ LilycoveCity_Harbor_EventScript_1599EE:: @ 81599EE
 	applymovement 4, LilycoveCity_Harbor_Movement_1A0841
 	waitmovement 0
 	delay 30
-	disappear 4
+	removeobject 4
 	compare FACING, 2
 	call_if 1, LilycoveCity_Harbor_EventScript_1599D9
 	compare FACING, 4
 	call_if 1, LilycoveCity_Harbor_EventScript_1599CE
 	delay 30
-	spriteinvisible 255, 0, 0
+	hideobject 255, 0, 0
 	special ScrSpecial_HealPlayerParty
 	setvar 0x8004, 2
 	call LilycoveCity_Harbor_EventScript_1A040E

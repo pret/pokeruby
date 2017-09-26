@@ -56,7 +56,7 @@ Route116_EventScript_150A94:: @ 8150A94
 	call_if 1, Route116_EventScript_150AEE
 	compare FACING, 4
 	call_if 1, Route116_EventScript_150AF9
-	disappear LAST_TALKED
+	removeobject LAST_TALKED
 	clearflag 949
 	setflag 256
 	release
@@ -189,7 +189,7 @@ Route116_EventScript_150C03:: @ 8150C03
 	call_if 1, Route116_EventScript_150C37
 	compare FACING, 4
 	call_if 1, Route116_EventScript_150C42
-	disappear LAST_TALKED
+	removeobject LAST_TALKED
 	release
 	end
 

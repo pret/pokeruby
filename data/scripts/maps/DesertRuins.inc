@@ -10,7 +10,7 @@ DesertRuins_MapScript1_15CB03:: @ 815CB03
 	end
 
 DesertRuins_EventScript_15CB0D:: @ 815CB0D
-	disappear LAST_TALKED
+	removeobject LAST_TALKED
 	return
 
 DesertRuins_MapScript1_15CB11:: @ 815CB11

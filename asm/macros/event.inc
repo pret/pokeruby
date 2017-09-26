@@ -535,88 +535,88 @@
 	@ Applies the movement data at movements to the specified (index) Person event. Also closes any standard message boxes that are still open.
 	@ This command in fact uses variables to access the Person event ID. So, for example, if you setvar 0x8000 to 0x3, and then use applymovementpos 0x8000 @move1, Person event 3 will have the movements at @move1 applied to them. Thank you Shiny Quagsire for bringing this to my attention.
 	.macro applymovement index, movements, mapGroup, mapNum
-	.ifb \mapGroup
-	 .byte 0x4f
-	 .2byte \index
-	 .4byte \movements
-	.else
-	 .byte 0x50
-	 .2byte \index
-	 .4byte \movements
-	 .byte \mapGroup
-	 .byte \mapNum
-	.endif
+		.ifb \mapGroup
+			.byte 0x4f
+			.2byte \index
+			.4byte \movements
+		.else
+			.byte 0x50
+			.2byte \index
+			.4byte \movements
+			.byte \mapGroup
+			.byte \mapNum
+		.endif
 	.endm
 
 	@ Blocks script execution until the movements being applied to the specified (index) Person event finish. If the specified Person event is 0x0000, then the command will block script execution until all Person events affected by applymovement finish their movements. If the specified Person event is not currently being manipulated with applymovement, then this command does nothing.
 	.macro waitmovement index, mapBank, mapNum
-	.ifb \mapBank
-	 .byte 0x51
-	 .2byte \index
-	.else
-	 .byte 0x52
-	 .2byte \index
-	 .byte \mapBank
-	 .byte \mapNum
-	.endif
+		.ifb \mapBank
+			.byte 0x51
+			.2byte \index
+		.else
+			.byte 0x52
+			.2byte \index
+			.byte \mapBank
+			.byte \mapNum
+		.endif
 	.endm
 
-	@ Attempts to hide the specified (local_ID, a local ID) Person event on the current map, by setting its visibility flag if it has a valid one. If the Person does not have a valid visibility flag, this command does nothing.
-	.macro disappear local_ID
-	.byte 0x53
-	.2byte \local_ID
+	@ Attempts to hide the specified (local_ID, a local ID) Person event on the specified map, by setting its visibility flag if it has a valid one. If the Person does not have a valid visibility flag, this command does nothing.
+	@ If no map is specified, then the current map is used
+	.macro removeobject localId, mapGroup, mapNum
+		.ifb \mapGroup
+			.byte 0x53
+			.2byte \localId
+		.else
+			.byte 0x54
+			.2byte \localId
+			.byte \mapGroup
+			.byte \mapNum
+		.endif
 	.endm
 
-	@ Clone of hidesprite that also moves the Person? Test it!
-	.macro disappearxy index, X, Y
-	.byte 0x54
-	.2byte \index
-	.byte \X
-	.byte \Y
+	.macro addobject localId, mapGroup, mapNum
+		.ifb \mapGroup
+			.byte 0x55
+			.2byte \localId
+		.else
+			.byte 0x56
+			.2byte \localId
+			.byte \mapGroup
+			.byte \mapNum
+		.endif
 	.endm
 
-	.macro reappear word
-	.byte 0x55
-	.2byte \word
+	.macro setobjectxy word1, word2, word3
+		.byte 0x57
+		.2byte \word1
+		.2byte \word2
+		.2byte \word3
 	.endm
 
-	.macro reappearxy word, byte1, byte2
-	.byte 0x56
-	.2byte \word
-	.byte \byte1
-	.byte \byte2
+	.macro showobject word, byte1, byte2
+		.byte 0x58
+		.2byte \word
+		.byte \byte1
+		.byte \byte2
 	.endm
 
-	.macro movesprite word1, word2, word3
-	.byte 0x57
-	.2byte \word1
-	.2byte \word2
-	.2byte \word3
-	.endm
-
-	.macro spritevisible word, byte1, byte2
-	.byte 0x58
-	.2byte \word
-	.byte \byte1
-	.byte \byte2
-	.endm
-
-	.macro spriteinvisible word, byte1, byte2
-	.byte 0x59
-	.2byte \word
-	.byte \byte1
-	.byte \byte2
+	.macro hideobject word, byte1, byte2
+		.byte 0x59
+		.2byte \word
+		.byte \byte1
+		.byte \byte2
 	.endm
 
 	@ If the script was called by a Person event, then that Person will turn to face toward the tile that the player is stepping off of.
 	.macro faceplayer
-	.byte 0x5a
+		.byte 0x5a
 	.endm
 
-	.macro spriteface word, byte
-	.byte 0x5b
-	.2byte \word
-	.byte \byte
+	.macro turnobject word, byte
+		.byte 0x5b
+		.2byte \word
+		.byte \byte
 	.endm
 
 	@ If the Trainer flag for Trainer index is not set, this command does absolutely nothing.

@@ -38,7 +38,7 @@ LittlerootTown_MaysHouse_2F_EventScript_152A9D:: @ 8152A9D
 	compare RESULT, 1
 	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_152B4A
 	playse 9
-	disappear LAST_TALKED
+	removeobject LAST_TALKED
 	setvar 0x408d, 3
 	setvar 0x4050, 1
 	savebgm 0

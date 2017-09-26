@@ -502,8 +502,8 @@ SlateportCity_EventScript_14BEBC:: @ 814BEBC
 	applymovement 10, SlateportCity_Movement_14BFDD
 	applymovement 9, SlateportCity_Movement_14BFEA
 	waitmovement 0
-	disappear 10
-	disappear 9
+	removeobject 10
+	removeobject 9
 	msgbox SlateportCity_Text_16558D, 4
 	applymovement 11, SlateportCity_Movement_1A0841
 	waitmovement 0
@@ -532,7 +532,7 @@ SlateportCity_EventScript_14BEBC:: @ 814BEBC
 	applymovement 11, SlateportCity_Movement_14BFFB
 	applymovement 255, SlateportCity_Movement_14C008
 	waitmovement 0
-	disappear 11
+	removeobject 11
 	clearflag 841
 	clearflag 848
 	clearflag 845

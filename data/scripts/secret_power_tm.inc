@@ -22,7 +22,7 @@ Route111_EventScript_1A3877:: @ 81A3877
 	call_if 1, Route111_EventScript_1A38C3
 	compare FACING, 2
 	call_if 1, Route111_EventScript_1A38CE
-	disappear LAST_TALKED
+	removeobject LAST_TALKED
 	release
 	end
 

@@ -69,7 +69,7 @@ PetalburgCity_Gym_MapScript2_154553:: @ 8154553
 	.2byte 0
 
 PetalburgCity_Gym_EventScript_15455D:: @ 815455D
-	spriteface 255, 2
+	turnobject 255, 2
 	end
 
 PetalburgCity_Gym_MapScript2_154562:: @ 8154562
@@ -85,7 +85,7 @@ PetalburgCity_Gym_EventScript_15456C:: @ 815456C
 	applymovement 10, PetalburgCity_Gym_Movement_1545B4
 	waitmovement 0
 	playse 9
-	disappear 10
+	removeobject 10
 	setflag 726
 	delay 30
 	applymovement 255, PetalburgCity_Gym_Movement_1A0841
@@ -142,7 +142,7 @@ PetalburgCity_Gym_EventScript_15465E:: @ 815465E
 	end
 
 PetalburgCity_Gym_EventScript_154669:: @ 8154669
-	reappear 10
+	addobject 10
 	playse 8
 	compare 0x8008, 0
 	call_if 1, PetalburgCity_Gym_EventScript_1547EE
@@ -204,7 +204,7 @@ PetalburgCity_Gym_EventScript_154669:: @ 8154669
 	call_if 1, PetalburgCity_Gym_EventScript_154860
 	compare 0x8008, 3
 	call_if 1, PetalburgCity_Gym_EventScript_154872
-	disappear 10
+	removeobject 10
 	setflag 728
 	setvar 0x4085, 1
 	setvar 0x4057, 2

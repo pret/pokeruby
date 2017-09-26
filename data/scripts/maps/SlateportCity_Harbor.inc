@@ -59,9 +59,9 @@ SlateportCity_Harbor_EventScript_155FD5:: @ 8155FD5
 	applymovement 7, SlateportCity_Harbor_Movement_15609B
 	applymovement 8, SlateportCity_Harbor_Movement_1560A5
 	waitmovement 0
-	disappear 6
-	disappear 7
-	disappear 8
+	removeobject 6
+	removeobject 7
+	removeobject 8
 	setvar 0x40a0, 2
 	compare 0x8008, 0
 	call_if 1, SlateportCity_Harbor_EventScript_15605C
@@ -222,13 +222,13 @@ SlateportCity_Harbor_EventScript_156196:: @ 8156196
 	applymovement LAST_TALKED, SlateportCity_Harbor_Movement_1A0841
 	waitmovement 0
 	delay 30
-	spriteinvisible LAST_TALKED, 9, 8
+	hideobject LAST_TALKED, 9, 8
 	compare FACING, 2
 	call_if 1, SlateportCity_Harbor_EventScript_1561EF
 	compare FACING, 4
 	call_if 1, SlateportCity_Harbor_EventScript_1561E4
 	delay 30
-	spriteinvisible 255, 0, 0
+	hideobject 255, 0, 0
 	setvar 0x8004, 5
 	call SlateportCity_Harbor_EventScript_1A040E
 	return

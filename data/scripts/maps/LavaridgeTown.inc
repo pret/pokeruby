@@ -31,7 +31,7 @@ LavaridgeTown_EventScript_14E4ED:: @ 814E4ED
 	setvar 0x8008, 1
 	setdooropened 12, 15
 	doorchange
-	reappear 8
+	addobject 8
 	applymovement 8, LavaridgeTown_Movement_14E70E
 	waitmovement 0
 	setdoorclosed 12, 15
@@ -103,14 +103,14 @@ LavaridgeTown_EventScript_14E5F5:: @ 814E5F5
 	call_if 1, LavaridgeTown_EventScript_14E646
 	compare 0x8008, 0
 	call_if 1, LavaridgeTown_EventScript_14E64E
-	disappear 8
-	reappear 7
+	removeobject 8
+	addobject 7
 	delay 30
 	compare 0x8008, 1
 	call_if 1, LavaridgeTown_EventScript_14E69A
 	compare 0x8008, 0
 	call_if 1, LavaridgeTown_EventScript_14E6A5
-	disappear 7
+	removeobject 7
 	setvar 0x4053, 2
 	savebgm 0
 	fadedefaultbgm

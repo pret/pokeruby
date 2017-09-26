@@ -33,9 +33,9 @@ MeteorFalls_1F_1R_EventScript_15C49C:: @ 815C49C
 	applymovement 5, MeteorFalls_1F_1R_Movement_1A083F
 	applymovement 6, MeteorFalls_1F_1R_Movement_1A083F
 	waitmovement 0
-	reappear 7
-	reappear 8
-	reappear 9
+	addobject 7
+	addobject 8
+	addobject 9
 	applymovement 7, MeteorFalls_1F_1R_Movement_15C608
 	applymovement 8, MeteorFalls_1F_1R_Movement_15C60F
 	applymovement 9, MeteorFalls_1F_1R_Movement_15C617
@@ -49,8 +49,8 @@ MeteorFalls_1F_1R_EventScript_15C49C:: @ 815C49C
 	applymovement 5, MeteorFalls_1F_1R_Movement_15C5F1
 	applymovement 6, MeteorFalls_1F_1R_Movement_15C5FC
 	waitmovement 0
-	disappear 5
-	disappear 6
+	removeobject 5
+	removeobject 6
 	applymovement 7, MeteorFalls_1F_1R_Movement_15C628
 	waitmovement 0
 	.ifdef SAPPHIRE
@@ -74,9 +74,9 @@ MeteorFalls_1F_1R_EventScript_15C49C:: @ 815C49C
 	applymovement 8, MeteorFalls_1F_1R_Movement_15C62E
 	applymovement 9, MeteorFalls_1F_1R_Movement_15C63E
 	waitmovement 0
-	disappear 7
-	disappear 8
-	disappear 9
+	removeobject 7
+	removeobject 8
+	removeobject 9
 	setflag 819
 	setvar 0x40bf, 1
 	releaseall

@@ -49,13 +49,13 @@ Route128_EventScript_15213F:: @ 815213F
 	applymovement 5, Route128_Movement_152296
 	applymovement 4, Route128_Movement_152283
 	waitmovement 0
-	disappear 5
-	disappear 4
+	removeobject 5
+	removeobject 4
 	delay 100
 	setanimation 0, 1
 	doanimation 30
 	checkanimation 30
-	reappear 3
+	addobject 3
 	applymovement 3, Route128_Movement_15226F
 	waitmovement 0
 	applymovement 255, Route128_Movement_1A0843
@@ -80,7 +80,7 @@ Route128_EventScript_15213F:: @ 815213F
 	setanimation 0, 1
 	doanimation 30
 	delay 15
-	disappear 3
+	removeobject 3
 	checkanimation 30
 	setvar 0x407b, 2
 	releaseall

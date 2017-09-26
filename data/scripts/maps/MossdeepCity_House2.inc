@@ -23,7 +23,7 @@ MossdeepCity_House2_EventScript_15A87B:: @ 815A87B
 	call_if 1, MossdeepCity_House2_EventScript_15A8AE
 	compare FACING, 3
 	call_if 1, MossdeepCity_House2_EventScript_15A8B9
-	disappear 3
+	removeobject 3
 	release
 	end
 

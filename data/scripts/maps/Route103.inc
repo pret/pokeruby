@@ -116,7 +116,7 @@ Route103_EventScript_14ED29:: @ 814ED29
 	end
 
 Route103_EventScript_14ED46:: @ 814ED46
-	disappear 2
+	removeobject 2
 	setvar 0x4062, 1
 	setvar 0x4084, 4
 	clearflag 889

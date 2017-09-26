@@ -21,8 +21,8 @@ Route101_EventScript_14E948:: @ 814E948
 	playbgm 410, 1
 	msgbox Route101_Text_16D10E, 4
 	closebutton
-	movesprite 2, 0, 15
-	movesprite 4, 0, 16
+	setobjectxy 2, 0, 15
+	setobjectxy 4, 0, 16
 	applymovement 255, Route101_Movement_14EA2C
 	applymovement 2, Route101_Movement_14EA50
 	applymovement 4, Route101_Movement_14EA1F
@@ -220,8 +220,8 @@ Route101_EventScript_14EA7F:: @ 814EA7F
 	setflag 2048
 	setflag 82
 	fadescreen 1
-	disappear 4
-	movesprite 255, 6, 13
+	removeobject 4
+	setobjectxy 255, 6, 13
 	applymovement 255, Route101_Movement_1A083F
 	waitmovement 0
 	special ScrSpecial_ChooseStarter

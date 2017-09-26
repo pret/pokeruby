@@ -29,7 +29,7 @@ BattleTower_Elevator_MapScript2_160821:: @ 8160821
 
 BattleTower_Elevator_EventScript_16082B:: @ 816082B
 	setvar 0x4001, 1
-	spriteface 255, 2
+	turnobject 255, 2
 	end
 
 BattleTower_Elevator_Movement_160835:: @ 8160835

@@ -23,7 +23,7 @@ GraniteCave_StevensRoom_EventScript_15CBFA:: @ 815CBFA
 	compare FACING, 4
 	call_if 1, GraniteCave_StevensRoom_EventScript_15CC6D
 	playse 9
-	disappear 1
+	removeobject 1
 	release
 	end
 

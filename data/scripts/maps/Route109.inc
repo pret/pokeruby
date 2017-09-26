@@ -7,7 +7,7 @@ Route109_EventScript_14F4D3:: @ 814F4D3
 	spritelevelup 255, 0, 24, 0
 	applymovement 2, Route109_Movement_14F67B
 	waitmovement 0
-	disappear 2
+	removeobject 2
 	switch FACING
 	case 1, Route109_EventScript_14F518
 	case 3, Route109_EventScript_14F538
@@ -33,25 +33,25 @@ Route109_EventScript_14F538:: @ 814F538
 	end
 
 Route109_EventScript_14F548:: @ 814F548
-	spriteinvisible 255, 0, 24
+	hideobject 255, 0, 24
 	call Route109_EventScript_1A02E7
 	applymovement 1, Route109_Movement_14F5BF
 	applymovement 255, Route109_Movement_14F5BF
 	waitmovement 0
 	call Route109_EventScript_1A02EF
-	spritevisible 255, 0, 11
+	showobject 255, 0, 11
 	applymovement 255, Route109_Movement_14F670
 	waitmovement 0
-	reappear 4
+	addobject 4
 	clearflag 743
 	movespriteperm 2, 12, 8
-	reappear 2
+	addobject 2
 	spritelevelup 2, 0, 11, 0
 	applymovement 2, Route109_Movement_14F67D
 	waitmovement 0
 	clearflag 740
 	setflag 744
-	spriteinvisible 1, 0, 24
+	hideobject 1, 0, 24
 	msgbox Route109_Text_16B4B5, 4
 	closebutton
 	copyvar 0x4096, 0x8008

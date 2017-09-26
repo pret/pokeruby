@@ -25,7 +25,7 @@ EverGrandeCity_SidneysRoom_MapScript2_15B570:: @ 815B570
 	.2byte 0
 
 EverGrandeCity_SidneysRoom_EventScript_15B57A:: @ 815B57A
-	spriteface 255, 2
+	turnobject 255, 2
 	end
 
 EverGrandeCity_SidneysRoom_MapScript2_15B57F:: @ 815B57F

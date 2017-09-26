@@ -154,8 +154,8 @@ MauvilleCity_EventScript_14C1D9:: @ 814C1D9
 	end
 
 MauvilleCity_EventScript_14C22B:: @ 814C22B
-	disappear 6
-	disappear 7
+	removeobject 6
+	removeobject 7
 	clearflag 806
 	clearflag 809
 	setflag 190

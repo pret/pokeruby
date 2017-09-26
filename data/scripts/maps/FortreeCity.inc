@@ -81,7 +81,7 @@ FortreeCity_EventScript_14C9E4:: @ 814C9E4
 	waitpokecry
 	applymovement LAST_TALKED, FortreeCity_Movement_14CA13
 	waitmovement 0
-	disappear LAST_TALKED
+	removeobject LAST_TALKED
 	setflag 295
 	release
 	end

@@ -21,7 +21,7 @@ VerdanturfTown_PokemonCenter_2F_MapScript2_1A3D03:: @ 81A3D03
 	.2byte 0
 
 OldaleTown_PokemonCenter_2F_EventScript_1A3D2D:: @ 81A3D2D
-	spriteface 0x8007, 4
+	turnobject 0x8007, 4
 	end
 
 DewfordTown_PokemonCenter_2F_MapScript1_1A3D32:: @ 81A3D32
@@ -233,7 +233,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A3F5E:: @ 81A3F5E
 	doorchange
 	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_1A435F
 	waitmovement 0
-	spriteinvisible 255, 0, 0
+	hideobject 255, 0, 0
 	setdoorclosed 5, 1
 	doorchange
 	release
@@ -398,7 +398,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A4166:: @ 81A4166
 	doorchange
 	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_1A435F
 	waitmovement 0
-	spriteinvisible 255, 0, 0
+	hideobject 255, 0, 0
 	setdoorclosed 8, 1
 	doorchange
 	release
@@ -496,7 +496,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A4294:: @ 81A4294
 	doorchange
 	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_1A435F
 	waitmovement 0
-	spriteinvisible 255, 0, 0
+	hideobject 255, 0, 0
 	setdoorclosed 11, 1
 	doorchange
 	release

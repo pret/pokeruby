@@ -19,7 +19,7 @@ FortreeCity_House4_EventScript_158188:: @ 8158188
 	clearflag 934
 	applymovement 3, FortreeCity_House4_Movement_158218
 	waitmovement 0
-	disappear 3
+	removeobject 3
 	releaseall
 	end
 

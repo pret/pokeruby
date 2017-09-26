@@ -17,7 +17,7 @@ SouthernIsland_Exterior_EventScript_160AE0:: @ 8160AE0
 	applymovement LAST_TALKED, SouthernIsland_Exterior_Movement_1A0845
 	waitmovement 0
 	delay 30
-	spriteinvisible 1, 26, 9
+	hideobject 1, 26, 9
 	setvar 0x8004, 2
 	call SouthernIsland_Exterior_EventScript_1A047C
 	warp LilycoveCity_Harbor, 255, 8, 11

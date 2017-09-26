@@ -13,7 +13,7 @@ VictoryRoad_1F_EventScript_15DE93:: @ 815DE93
 
 VictoryRoad_1F_EventScript_15DE97:: @ 815DE97
 	lockall
-	reappear 4
+	addobject 4
 	applymovement 4, VictoryRoad_1F_Movement_15DF07
 	waitmovement 0
 	goto VictoryRoad_1F_EventScript_15DED3
@@ -21,7 +21,7 @@ VictoryRoad_1F_EventScript_15DE97:: @ 815DE97
 
 VictoryRoad_1F_EventScript_15DEAB:: @ 815DEAB
 	lockall
-	reappear 4
+	addobject 4
 	applymovement 4, VictoryRoad_1F_Movement_15DF13
 	waitmovement 0
 	goto VictoryRoad_1F_EventScript_15DED3
@@ -29,7 +29,7 @@ VictoryRoad_1F_EventScript_15DEAB:: @ 815DEAB
 
 VictoryRoad_1F_EventScript_15DEBF:: @ 815DEBF
 	lockall
-	reappear 4
+	addobject 4
 	applymovement 4, VictoryRoad_1F_Movement_15DF1E
 	waitmovement 0
 	goto VictoryRoad_1F_EventScript_15DED3

@@ -104,7 +104,7 @@ LittlerootTown_EventScript_14D62B:: @ 814D62B
 	waitmovement 0
 	setdooropened 0x8004, 0x8005
 	doorchange
-	reappear 4
+	addobject 4
 	applymovement 4, LittlerootTown_Movement_14D6AC
 	waitmovement 0
 	setdoorclosed 0x8004, 0x8005
@@ -124,7 +124,7 @@ LittlerootTown_EventScript_14D62B:: @ 814D62B
 	waitmovement 0
 	setflag 752
 	setvar 0x4092, 3
-	spriteinvisible 255, 0, 0
+	hideobject 255, 0, 0
 	setdoorclosed 0x8004, 0x8005
 	doorchange
 	clearflag 868
@@ -370,14 +370,14 @@ LittlerootTown_EventScript_14D857:: @ 814D857
 LittlerootTown_EventScript_14D860:: @ 814D860
 	lockall
 	setvar 0x8008, 0
-	movesprite 4, 10, 9
+	setobjectxy 4, 10, 9
 	goto LittlerootTown_EventScript_14D8B6
 	end
 
 LittlerootTown_EventScript_14D873:: @ 814D873
 	lockall
 	setvar 0x8008, 1
-	movesprite 4, 11, 9
+	setobjectxy 4, 11, 9
 	goto LittlerootTown_EventScript_14D8B6
 	end
 
@@ -599,7 +599,7 @@ LittlerootTown_EventScript_14DB46:: @ 814DB46
 	doorchange
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
-	spriteinvisible 4, 0, 9
+	hideobject 4, 0, 9
 	setdoorclosed 0x8009, 0x800a
 	doorchange
 	return
@@ -611,7 +611,7 @@ LittlerootTown_EventScript_14DB6C:: @ 814DB6C
 	doorchange
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
-	spriteinvisible 4, 0, 9
+	hideobject 4, 0, 9
 	setdoorclosed 0x8009, 0x800a
 	doorchange
 	return
@@ -623,7 +623,7 @@ LittlerootTown_EventScript_14DB92:: @ 814DB92
 	doorchange
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
-	spriteinvisible 4, 0, 9
+	hideobject 4, 0, 9
 	setdoorclosed 0x8009, 0x800a
 	doorchange
 	return
@@ -635,7 +635,7 @@ LittlerootTown_EventScript_14DBB8:: @ 814DBB8
 	doorchange
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
-	spriteinvisible 4, 0, 9
+	hideobject 4, 0, 9
 	setdoorclosed 0x8009, 0x800a
 	doorchange
 	return
@@ -647,7 +647,7 @@ LittlerootTown_EventScript_14DBDE:: @ 814DBDE
 	doorchange
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
-	spriteinvisible 4, 0, 9
+	hideobject 4, 0, 9
 	setdoorclosed 0x8009, 0x800a
 	doorchange
 	return
@@ -659,7 +659,7 @@ LittlerootTown_EventScript_14DC04:: @ 814DC04
 	doorchange
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
-	spriteinvisible 4, 0, 9
+	hideobject 4, 0, 9
 	setdoorclosed 0x8009, 0x800a
 	doorchange
 	return
@@ -671,7 +671,7 @@ LittlerootTown_EventScript_14DC2A:: @ 814DC2A
 	doorchange
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
-	spriteinvisible 4, 0, 9
+	hideobject 4, 0, 9
 	setdoorclosed 0x8009, 0x800a
 	doorchange
 	return
@@ -683,7 +683,7 @@ LittlerootTown_EventScript_14DC50:: @ 814DC50
 	doorchange
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
-	spriteinvisible 4, 0, 9
+	hideobject 4, 0, 9
 	setdoorclosed 0x8009, 0x800a
 	doorchange
 	return
@@ -853,14 +853,14 @@ LittlerootTown_EventScript_14DCE2:: @ 814DCE2
 	doorchange
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
-	spriteinvisible 4, 0, 9
+	hideobject 4, 0, 9
 	setdoorclosed 0x8009, 0x800a
 	doorchange
 	goto LittlerootTown_EventScript_14DD2B
 	end
 
 LittlerootTown_EventScript_14DD2B:: @ 814DD2B
-	disappear 4
+	removeobject 4
 	setflag 2144
 	setvar 0x4050, 4
 	release

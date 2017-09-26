@@ -13,7 +13,7 @@ EverGrandeCity_ChampionsRoom_MapScript2_15B7C5:: @ 815B7C5
 	.2byte 0
 
 EverGrandeCity_ChampionsRoom_EventScript_15B7CF:: @ 815B7CF
-	spriteface 255, 2
+	turnobject 255, 2
 	end
 
 EverGrandeCity_ChampionsRoom_MapScript2_15B7D4:: @ 815B7D4
@@ -57,7 +57,7 @@ EverGrandeCity_ChampionsRoom_EventScript_15B821:: @ 815B821
 	call_if 1, EverGrandeCity_ChampionsRoom_EventScript_15B87C
 	compare RESULT, 1
 	call_if 1, EverGrandeCity_ChampionsRoom_EventScript_15B881
-	reappear 2
+	addobject 2
 	call EverGrandeCity_ChampionsRoom_EventScript_15B9BD
 	checkgender
 	compare RESULT, 0
@@ -102,7 +102,7 @@ EverGrandeCity_ChampionsRoom_EventScript_15B8BB:: @ 815B8BB
 
 EverGrandeCity_ChampionsRoom_EventScript_15B8F0:: @ 815B8F0
 	closebutton
-	reappear 3
+	addobject 3
 	applymovement 3, EverGrandeCity_ChampionsRoom_Movement_15BA03
 	waitmovement 0
 	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_1A0843

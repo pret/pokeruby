@@ -43,9 +43,9 @@ Route119_WeatherInstitute_2F_EventScript_163D45:: @ 8163D45
 	fadedefaultbgm
 	fadescreen 1
 	setflag 890
-	disappear 1
-	disappear 2
-	disappear 3
+	removeobject 1
+	removeobject 2
+	removeobject 3
 	fadescreen 0
 	applymovement 5, Route119_WeatherInstitute_2F_Movement_163DC8
 	waitmovement 0

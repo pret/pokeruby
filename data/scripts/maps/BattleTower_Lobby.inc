@@ -46,7 +46,7 @@ BattleTower_Lobby_MapScript2_1602EE:: @ 81602EE
 
 BattleTower_Lobby_EventScript_1602F8:: @ 81602F8
 	setvar 0x4001, 1
-	spriteface 255, 2
+	turnobject 255, 2
 	end
 
 BattleTower_Lobby_MapScript2_160302:: @ 8160302

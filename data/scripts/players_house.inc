@@ -74,13 +74,13 @@ LittlerootTown_MaysHouse_2F_EventScript_1B69EB:: @ 81B69EB
 	compare RESULT, 1
 	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_1B6A61
 	playse 9
-	disappear 0x8008
+	removeobject 0x8008
 	releaseall
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_1B6A31:: @ 81B6A31
 	setvar 0x8008, 14
-	reappear 0x8008
+	addobject 0x8008
 	applymovement 0x8008, LittlerootTown_BrendansHouse_2F_Movement_1B6AA2
 	waitmovement 0
 	applymovement 255, LittlerootTown_BrendansHouse_2F_Movement_1A0843
@@ -93,7 +93,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_1B6A31:: @ 81B6A31
 
 LittlerootTown_BrendansHouse_2F_EventScript_1B6A61:: @ 81B6A61
 	setvar 0x8008, 14
-	reappear 0x8008
+	addobject 0x8008
 	applymovement 0x8008, LittlerootTown_BrendansHouse_2F_Movement_1B6AAD
 	waitmovement 0
 	applymovement 255, LittlerootTown_BrendansHouse_2F_Movement_1A083F
@@ -397,7 +397,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6CDE:: @ 81B6CDE
 	compare 0x8008, 1
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1B6E0B
 	playse 8
-	disappear 0x8009
+	removeobject 0x8009
 	setflag 291
 	setvar 0x4082, 4
 	setvar 0x408c, 4

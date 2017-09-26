@@ -90,7 +90,7 @@ Route118_EventScript_151004:: @ 8151004
 	compare 0x8008, 2
 	call_if 1, Route118_EventScript_15105E
 	setvar 0x4071, 1
-	disappear 19
+	removeobject 19
 	releaseall
 	end
 

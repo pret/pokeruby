@@ -181,7 +181,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_155C98:: @ 8155C98
 	waitmovement 0
 	setflag 965
 	playse 9
-	disappear 13
+	removeobject 13
 	release
 	end
 
@@ -190,7 +190,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_155CAD:: @ 8155CAD
 	waitmovement 0
 	setflag 965
 	playse 9
-	disappear 13
+	removeobject 13
 	release
 	end
 

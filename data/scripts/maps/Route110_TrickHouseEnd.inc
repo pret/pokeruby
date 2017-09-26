@@ -21,9 +21,9 @@ Route110_TrickHouseEnd_MapScript2_161965:: @ 8161965
 	.2byte 0
 
 Route110_TrickHouseEnd_EventScript_16196F:: @ 816196F
-	reappear 1
-	spritevisible 1, 29, 1
-	spriteface 1, 4
+	addobject 1
+	showobject 1, 29, 1
+	turnobject 1, 4
 	end
 
 Route110_TrickHouseEnd_MapScript2_16197C:: @ 816197C
@@ -185,7 +185,7 @@ Route110_TrickHouseEnd_EventScript_161C2E:: @ 8161C2E
 	playse 178
 	applymovement 1, Route110_TrickHouseEnd_Movement_16131E
 	waitmovement 0
-	disappear 1
+	removeobject 1
 	addvar 0x4044, 1
 	return
 
@@ -223,7 +223,7 @@ Route110_TrickHouseEnd_EventScript_161C95:: @ 8161C95
 
 Route110_TrickHouseEnd_EventScript_161CA0:: @ 8161CA0
 	lockall
-	spriteface 1, 3
+	turnobject 1, 3
 	playse 21
 	applymovement 1, Route110_TrickHouseEnd_Movement_1A0833
 	waitmovement 0
@@ -238,7 +238,7 @@ Route110_TrickHouseEnd_EventScript_161CA0:: @ 8161CA0
 	applymovement 255, Route110_TrickHouseEnd_Movement_161CE8
 	waitmovement 0
 	delay 4
-	spriteface 1, 4
+	turnobject 1, 4
 	releaseall
 	end
 

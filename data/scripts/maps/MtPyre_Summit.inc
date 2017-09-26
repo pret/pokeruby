@@ -43,10 +43,10 @@ MtPyre_Summit_EventScript_15D4E1:: @ 815D4E1
 	.endif
 	closebutton
 	fadescreen 1
-	disappear 2
-	disappear 4
-	disappear 5
-	disappear 6
+	removeobject 2
+	removeobject 4
+	removeobject 5
+	removeobject 6
 	setflag 916
 	setflag 917
 	fadescreen 0
@@ -286,7 +286,7 @@ MtPyre_Summit_EventScript_15D6F2:: @ 815D6F2
 	call_if 1, MtPyre_Summit_EventScript_15D78A
 	compare 0x8008, 2
 	call_if 1, MtPyre_Summit_EventScript_15D795
-	disappear 2
+	removeobject 2
 	setvar 0x40b9, 3
 	releaseall
 	end

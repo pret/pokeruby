@@ -16,11 +16,11 @@ Route119_EventScript_15117C:: @ 815117C
 	return
 
 Route119_EventScript_151193:: @ 8151193
-	disappear 35
+	removeobject 35
 	return
 
 Route119_EventScript_151197:: @ 8151197
-	disappear 36
+	removeobject 36
 	return
 
 Route119_MapScript1_15119B:: @ 815119B
@@ -50,7 +50,7 @@ Route119_EventScript_1511D0:: @ 81511D0
 
 Route119_EventScript_1511DB:: @ 81511DB
 	lockall
-	reappear 25
+	addobject 25
 	checkgender
 	compare RESULT, 0
 	call_if 1, Route119_EventScript_151254
@@ -68,8 +68,8 @@ Route119_EventScript_1511DB:: @ 81511DB
 	call_if 1, Route119_EventScript_1513D2
 	compare 0x4001, 2
 	call_if 1, Route119_EventScript_1513E1
-	disappear 25
-	reappear 16
+	removeobject 25
+	addobject 16
 	delay 30
 	checkgender
 	compare RESULT, 0
@@ -158,14 +158,14 @@ Route119_EventScript_151362:: @ 8151362
 	call_if 1, Route119_EventScript_1513D2
 	compare 0x4001, 2
 	call_if 1, Route119_EventScript_1513E1
-	disappear 16
-	reappear 25
+	removeobject 16
+	addobject 25
 	delay 30
 	compare 0x4001, 1
 	call_if 1, Route119_EventScript_1513BC
 	compare 0x4001, 2
 	call_if 1, Route119_EventScript_1513C7
-	disappear 25
+	removeobject 25
 	setvar 0x4072, 1
 	savebgm 0
 	fadedefaultbgm

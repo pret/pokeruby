@@ -19,7 +19,7 @@ RustboroCity_DevonCorp_3F_MapScript2_157739:: @ 8157739
 	.2byte 0
 
 RustboroCity_DevonCorp_3F_EventScript_157743:: @ 8157743
-	spriteface 255, 4
+	turnobject 255, 4
 	end
 
 RustboroCity_DevonCorp_3F_MapScript2_157748:: @ 8157748

@@ -59,7 +59,7 @@ AquaHideout_B2F_EventScript_15D8FD:: @ 815D8FD
 	applymovement 0x8009, AquaHideout_B2F_Movement_15D95D
 	.endif
 	waitmovement 0
-	disappear 0x8009
+	removeobject 0x8009
 	delay 20
 	applymovement 0x8008, AquaHideout_B2F_Movement_1A0839
 	waitmovement 0

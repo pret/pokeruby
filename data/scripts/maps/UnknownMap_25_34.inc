@@ -68,7 +68,7 @@ LinkContestRoom1_EventScript_15F61A:: @ 815F61A
 	end
 
 LinkContestRoom1_EventScript_15F625:: @ 815F625
-	spriteinvisible 255, 0, 9
+	hideobject 255, 0, 9
 	call LinkContestRoom1_EventScript_15F919
 	end
 

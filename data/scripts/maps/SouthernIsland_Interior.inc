@@ -9,7 +9,7 @@ SouthernIsland_Interior_MapScript1_160B5E:: @ 8160B5E
 	end
 
 SouthernIsland_Interior_EventScript_160B68:: @ 8160B68
-	disappear 2
+	removeobject 2
 	return
 
 SouthernIsland_Interior_MapScript1_160B6C:: @ 8160B6C
@@ -57,7 +57,7 @@ SouthernIsland_Interior_EventScript_160BA7:: @ 8160BA7
 	pokecry SPECIES_LATIAS_OR_LATIOS, 0
 	delay 30
 	waitpokecry
-	reappear 2
+	addobject 2
 	delay 30
 	applymovement 127, SouthernIsland_Interior_Movement_160C16
 	applymovement 2, SouthernIsland_Interior_Movement_160C22

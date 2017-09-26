@@ -28,7 +28,7 @@ S_UseCut:: @ 81B0E16
 DoTreeCutMovement: @ 81B0E21
 	applymovement LAST_TALKED, TreeCutMovement @ tree cut animation
 	waitmovement 0
-	disappear LAST_TALKED @ tree disappears
+	removeobject LAST_TALKED @ tree disappears
 	releaseall
 	end
 
@@ -86,7 +86,7 @@ S_UseRockSmash:: @ 81B0F01
 DoRockSmashMovement: @ 81B0F0C
 	applymovement LAST_TALKED, RockSmashMovement
 	waitmovement 0
-	disappear LAST_TALKED
+	removeobject LAST_TALKED
 	specialvar RESULT, sub_810F5BC
 	compare RESULT, 1
 	goto_if_eq DoRockSmashMovement_Done

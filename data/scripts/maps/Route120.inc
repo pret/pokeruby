@@ -25,28 +25,28 @@ Route120_EventScript_151628:: @ 8151628
 	return
 
 Route120_EventScript_15166B:: @ 815166B
-	disappear 30
-	disappear 36
+	removeobject 30
+	removeobject 36
 	return
 
 Route120_EventScript_151672:: @ 8151672
-	disappear 37
+	removeobject 37
 	return
 
 Route120_EventScript_151676:: @ 8151676
-	disappear 38
+	removeobject 38
 	return
 
 Route120_EventScript_15167A:: @ 815167A
-	disappear 39
+	removeobject 39
 	return
 
 Route120_EventScript_15167E:: @ 815167E
-	disappear 41
+	removeobject 41
 	return
 
 Route120_EventScript_151682:: @ 8151682
-	disappear 40
+	removeobject 40
 	return
 
 Route120_MapScript1_151686:: @ 8151686
@@ -248,7 +248,7 @@ Route120_EventScript_151908:: @ 8151908
 	setanimation 0, 1
 	doanimation 30
 	delay 15
-	disappear 31
+	removeobject 31
 	checkanimation 30
 	setmaptile 13, 15, 663, 0
 	setmaptile 12, 16, 671, 0

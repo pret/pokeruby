@@ -12,10 +12,10 @@ SlateportCity_OceanicMuseum_2F_EventScript_155CE6:: @ 8155CE6
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17ECFD, 4
 	closebutton
 	playbgm BGM_EVIL_TEAM, 1
-	reappear 3
+	addobject 3
 	applymovement 3, SlateportCity_OceanicMuseum_2F_Movement_155EB4
 	waitmovement 0
-	reappear 4
+	addobject 4
 	applymovement 4, SlateportCity_OceanicMuseum_2F_Movement_155EC3
 	waitmovement 0
 	applymovement 3, SlateportCity_OceanicMuseum_2F_Movement_155EB8
@@ -55,7 +55,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_155CE6:: @ 8155CE6
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17EEEA, 4
 	closebutton
 	delay 35
-	reappear 2
+	addobject 2
 	applymovement 2, SlateportCity_OceanicMuseum_2F_Movement_155EA8
 	applymovement 4, SlateportCity_OceanicMuseum_2F_Movement_155ECE
 	waitmovement 0
@@ -69,9 +69,9 @@ SlateportCity_OceanicMuseum_2F_EventScript_155CE6:: @ 8155CE6
 	.endif
 	closebutton
 	fadescreen 1
-	disappear 2
-	disappear 3
-	disappear 4
+	removeobject 2
+	removeobject 3
+	removeobject 4
 	fadescreen 0
 	delay 30
 	setflag 883
@@ -85,7 +85,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_155CE6:: @ 8155CE6
 	applymovement 1, SlateportCity_OceanicMuseum_2F_Movement_155E98
 	waitmovement 0
 	playse 9
-	disappear 1
+	removeobject 1
 	setflag 900
 	setflag 149
 	clearflag 947
