@@ -76,7 +76,7 @@ OldaleTown_EventScript_14DE35:: @ 814DE35
 OldaleTown_EventScript_14DE4C:: @ 814DE4C
 	msgbox OldaleTown_Text_16AF2F, 4
 	giveitem ITEM_POTION
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq OldaleTown_EventScript_14DE83
 	msgbox OldaleTown_Text_16AFE1, 4
 	setflag 132
@@ -257,9 +257,9 @@ OldaleTown_EventScript_14DF77:: @ 814DF77
 
 OldaleTown_EventScript_14DF92:: @ 814DF92
 	checkgender
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq OldaleTown_EventScript_14DFAA
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq OldaleTown_EventScript_14DFB8
 	end
 

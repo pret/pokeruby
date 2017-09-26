@@ -4,7 +4,7 @@ Route130_MapScripts:: @ 81523C2
 
 Route130_MapScript1_1523C8:: @ 81523C8
 	specialvar RESULT, IsMirageIslandPresent
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq Route130_EventScript_15240C
 	setflag 17
 	setflag 18

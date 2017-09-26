@@ -14,7 +14,7 @@ MossdeepCity_StevensHouse_EventScript_15A9DF:: @ 815A9DF
 	return
 
 MossdeepCity_StevensHouse_MapScript1_15A9E9:: @ 815A9E9
-	compare_var_to_imm 0x40c6, 1
+	compare 0x40c6, 1
 	call_if 1, MossdeepCity_StevensHouse_EventScript_15A9F5
 	end
 
@@ -72,10 +72,10 @@ MossdeepCity_StevensHouse_Movement_15AA76:: @ 815AA76
 MossdeepCity_StevensHouse_EventScript_15AA7C:: @ 815AA7C
 	lockall
 	msgbox MossdeepCity_StevensHouse_Text_18DD12, 5
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq MossdeepCity_StevensHouse_EventScript_15AAE6
 	countpokemon
-	compare_var_to_imm RESULT, 6
+	compare RESULT, 6
 	goto_if_eq MossdeepCity_StevensHouse_EventScript_15AADC
 	copyvar 0x8004, RESULT
 	disappear 2
@@ -86,7 +86,7 @@ MossdeepCity_StevensHouse_EventScript_15AA7C:: @ 815AA7C
 	givepokemon SPECIES_BELDUM, 5, ITEM_NONE, 0x0, 0x0, 0
 	bufferpoke 1, SPECIES_BELDUM
 	msgbox MossdeepCity_StevensHouse_Text_1A1102, 5
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	call_if 1, MossdeepCity_StevensHouse_EventScript_1A0678
 	setflag 968
 	setflag 298

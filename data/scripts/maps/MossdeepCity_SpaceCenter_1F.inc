@@ -7,9 +7,9 @@ MossdeepCity_SpaceCenter_1F_EventScript_15AB8B:: @ 815AB8B
 	dodailyevents
 	specialvar RESULT, GetWeekCount
 	buffernum 0, RESULT
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	call_if 1, MossdeepCity_SpaceCenter_1F_EventScript_15ABBA
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	call_if 4, MossdeepCity_SpaceCenter_1F_EventScript_15ABC3
 	closebutton
 	applymovement LAST_TALKED, MossdeepCity_SpaceCenter_1F_Movement_1A083D
@@ -36,7 +36,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_15ABD5:: @ 815ABD5
 	goto_if_eq MossdeepCity_SpaceCenter_1F_EventScript_15AC0C
 	msgbox MossdeepCity_SpaceCenter_1F_Text_18E335, 4
 	giveitem ITEM_SUN_STONE
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq MossdeepCity_SpaceCenter_1F_EventScript_1A029B
 	setflag 192
 	msgbox MossdeepCity_SpaceCenter_1F_Text_18E39B, 4

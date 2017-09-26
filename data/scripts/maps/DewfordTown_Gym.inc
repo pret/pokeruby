@@ -11,11 +11,11 @@ DewfordTown_Gym_EventScript_153071:: @ 8153071
 	goto_if_eq DewfordTown_Gym_EventScript_1530AA
 	call DewfordTown_Gym_EventScript_153122
 	copyvar 0x8001, 0x8000
-	compare_var_to_imm 0x8000, 0
+	compare 0x8000, 0
 	goto_if_eq DewfordTown_Gym_EventScript_1530BA
-	compare_var_to_imm 0x8000, 1
+	compare 0x8000, 1
 	goto_if_eq DewfordTown_Gym_EventScript_1530B6
-	compare_var_to_imm 0x8000, 2
+	compare 0x8000, 2
 	goto_if_eq DewfordTown_Gym_EventScript_1530B2
 	goto DewfordTown_Gym_EventScript_1530AE
 
@@ -42,14 +42,14 @@ DewfordTown_Gym_EventScript_1530BA:: @ 81530BA
 DewfordTown_Gym_EventScript_1530BE:: @ 81530BE
 	call DewfordTown_Gym_EventScript_153122
 	nop1
-	compare_var_to_var 0x8000, 0x8001
+	compare 0x8000, 0x8001
 	goto_if_eq DewfordTown_Gym_EventScript_1530F5
 	copyvar 0x8001, 0x8000
-	compare_var_to_imm 0x8000, 1
+	compare 0x8000, 1
 	goto_if_eq DewfordTown_Gym_EventScript_1530F6
-	compare_var_to_imm 0x8000, 2
+	compare 0x8000, 2
 	goto_if_eq DewfordTown_Gym_EventScript_153101
-	compare_var_to_imm 0x8000, 3
+	compare 0x8000, 3
 	goto_if_eq DewfordTown_Gym_EventScript_15310C
 
 DewfordTown_Gym_EventScript_1530F5:: @ 81530F5
@@ -115,7 +115,7 @@ DewfordTown_Gym_EventScript_153177:: @ 8153177
 	setflag 1204
 	setflag 2056
 	addvar 0x4085, 1
-	compare_var_to_imm 0x4085, 6
+	compare 0x4085, 6
 	call_if 1, DewfordTown_Gym_EventScript_1A00FB
 	setvar 0x8008, 2
 	call DewfordTown_Gym_EventScript_1A01C0
@@ -124,7 +124,7 @@ DewfordTown_Gym_EventScript_153177:: @ 8153177
 
 DewfordTown_Gym_EventScript_1531B5:: @ 81531B5
 	giveitem ITEM_TM08
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq DewfordTown_Gym_EventScript_1A029B
 	msgbox DewfordTown_Gym_Text_1753BF, 4
 	setflag 166

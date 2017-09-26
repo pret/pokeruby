@@ -31,9 +31,9 @@ LilycoveCity_ContestLobby_EventScript_158898:: @ 8158898
 	showcontestwinner 0
 	lockall
 	msgbox LilycoveCity_ContestLobby_Text_1889FD, 5
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_1588DE
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158918
 	releaseall
 	end
@@ -44,7 +44,7 @@ LilycoveCity_ContestLobby_EventScript_1588DE:: @ 81588DE
 	special sub_80C4CEC
 	setvar 0x4099, 0
 	specialvar RESULT, GiveMonArtistRibbon
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	call_if 1, LilycoveCity_ContestLobby_EventScript_158948
 	applymovement 4, LilycoveCity_ContestLobby_Movement_158A43
 	waitmovement 0
@@ -56,7 +56,7 @@ LilycoveCity_ContestLobby_EventScript_1588DE:: @ 81588DE
 
 LilycoveCity_ContestLobby_EventScript_158918:: @ 8158918
 	msgbox LilycoveCity_ContestLobby_Text_188C41, 5
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_1588DE
 	msgbox LilycoveCity_ContestLobby_Text_188CBD, 4
 	closebutton
@@ -205,9 +205,9 @@ LilycoveCity_ContestLobby_EventScript_158A6A:: @ 8158A6A
 	fadescreen 1
 	showcontestwinner 0
 	msgbox LilycoveCity_ContestLobby_Text_1889FD, 5
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158AAE
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158AE8
 	end
 
@@ -217,7 +217,7 @@ LilycoveCity_ContestLobby_EventScript_158AAE:: @ 8158AAE
 	special sub_80C4CEC
 	setvar 0x4099, 0
 	specialvar RESULT, GiveMonArtistRibbon
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	call_if 1, LilycoveCity_ContestLobby_EventScript_158B18
 	applymovement 11, LilycoveCity_ContestLobby_Movement_158B6D
 	waitmovement 0
@@ -229,7 +229,7 @@ LilycoveCity_ContestLobby_EventScript_158AAE:: @ 8158AAE
 
 LilycoveCity_ContestLobby_EventScript_158AE8:: @ 8158AE8
 	msgbox LilycoveCity_ContestLobby_Text_188C41, 5
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158AAE
 	msgbox LilycoveCity_ContestLobby_Text_188CBD, 4
 	closebutton
@@ -305,7 +305,7 @@ LilycoveCity_ContestLobby_Movement_158B7C:: @ 8158B7C
 LilycoveCity_ContestLobby_EventScript_158B85:: @ 8158B85
 	lockall
 	checkitem ITEM_CONTEST_PASS, 1
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158BBA
 	checkflag 2
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158BAE
@@ -328,11 +328,11 @@ LilycoveCity_ContestLobby_EventScript_158BBA:: @ 8158BBA
 
 LilycoveCity_ContestLobby_EventScript_158BC4:: @ 8158BC4
 	msgbox LilycoveCity_ContestLobby_Text_188521, 5
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158C35
 	call S_DoSaveDialog
 	hidebox 0, 0, 15, 9
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158C35
 	setflag 3
 	return
@@ -361,18 +361,18 @@ LilycoveCity_ContestLobby_EventScript_158C42:: @ 8158C42
 	msgbox LilycoveCity_ContestLobby_Text_188703, 4
 	setvar CONTEST_RANK, 0
 	choosecontestpkmn
-	compare_var_to_imm 0x8004, 255
+	compare 0x8004, 255
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158CEA
 	special sub_80C43F4
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158C96
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158CC0
-	compare_var_to_imm RESULT, 2
+	compare RESULT, 2
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158CC0
-	compare_var_to_imm RESULT, 3
+	compare RESULT, 3
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158CA4
-	compare_var_to_imm RESULT, 4
+	compare RESULT, 4
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158CB2
 	end
 
@@ -420,11 +420,11 @@ LilycoveCity_ContestLobby_EventScript_158D24:: @ 8158D24
 	copyvar 0x8004, RESULT
 	special sub_808363C
 	waitstate
-	compare_var_to_imm RESULT, 3
+	compare RESULT, 3
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158D90
-	compare_var_to_imm RESULT, 5
+	compare RESULT, 5
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158DA1
-	compare_var_to_imm RESULT, 6
+	compare RESULT, 6
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158DB2
 	message2 LilycoveCity_ContestLobby_Text_18872A
 	waittext
@@ -569,7 +569,7 @@ LilycoveCity_ContestLobby_Movement_158EAE:: @ 8158EAE
 
 LilycoveCity_ContestLobby_EventScript_158EB0:: @ 8158EB0
 	specialvar RESULT, sub_80C5044
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158EE8
 	setvar 0x800b, 8
 	setvar CONTEST_RANK, 3

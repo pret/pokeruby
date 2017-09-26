@@ -105,7 +105,7 @@ VerdanturfTown_ContestLobby_EventScript_153E47:: @ 8153E47
 	goto_if_eq VerdanturfTown_ContestLobby_EventScript_153E76
 	msgbox VerdanturfTown_ContestLobby_Text_177DEC, 4
 	giveitem ITEM_TM45
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq VerdanturfTown_ContestLobby_EventScript_1A029B
 	setflag 235
 	release

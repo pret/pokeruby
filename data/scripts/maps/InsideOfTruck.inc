@@ -17,9 +17,9 @@ InsideOfTruck_EventScript_15FC29:: @ 815FC29
 	lockall
 	setflag 0x4000
 	checkgender
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq InsideOfTruck_EventScript_15FC45
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq InsideOfTruck_EventScript_15FC68
 	end
 

@@ -13,11 +13,11 @@ Route123_EventScript_151C5D:: @ 8151C5D
 	goto_if_eq Route123_EventScript_151CAC
 	msgbox Route123_Text_171D83, 4
 	special IsGrassTypeInParty
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq Route123_EventScript_151CAA
 	msgbox Route123_Text_171DC2, 4
 	giveitem ITEM_TM19
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq Route123_EventScript_1A029B
 	setflag 232
 	msgbox Route123_Text_171E34, 4
@@ -63,7 +63,7 @@ Route123_EventScript_151CFF:: @ 8151CFF
 Route123_EventScript_151D16:: @ 8151D16
 	trainerbattle 0, OPPONENT_CAMERON_1, 0, Route123_Text_1C013F, Route123_Text_1C01A3
 	specialvar RESULT, sub_8082C68
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq Route123_EventScript_151D3D
 	msgbox Route123_Text_1C01B1, 6
 	end
@@ -76,7 +76,7 @@ Route123_EventScript_151D3D:: @ 8151D3D
 Route123_EventScript_151D54:: @ 8151D54
 	trainerbattle 0, OPPONENT_JACKI_1, 0, Route123_Text_1C028C, Route123_Text_1C0303
 	specialvar RESULT, sub_8082C68
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq Route123_EventScript_151D7B
 	msgbox Route123_Text_1C030F, 6
 	end

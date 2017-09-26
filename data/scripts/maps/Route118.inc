@@ -12,9 +12,9 @@ Route118_EventScript_150F34:: @ 8150F34
 	checkflag 227
 	goto_if_eq Route118_EventScript_150F89
 	msgbox Route118_Text_170F12, 5
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq Route118_EventScript_150F5E
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq Route118_EventScript_150F7F
 	end
 
@@ -83,11 +83,11 @@ Route118_EventScript_151004:: @ 8151004
 	delay 30
 	msgbox Route118_Text_170D66, 4
 	closebutton
-	compare_var_to_imm 0x8008, 0
+	compare 0x8008, 0
 	call_if 1, Route118_EventScript_151048
-	compare_var_to_imm 0x8008, 1
+	compare 0x8008, 1
 	call_if 1, Route118_EventScript_151053
-	compare_var_to_imm 0x8008, 2
+	compare 0x8008, 2
 	call_if 1, Route118_EventScript_15105E
 	setvar 0x4071, 1
 	disappear 19
@@ -162,7 +162,7 @@ Route118_Movement_151086:: @ 8151086
 Route118_EventScript_15108F:: @ 815108F
 	trainerbattle 0, OPPONENT_ROSE_1, 0, Route118_Text_1BDFF4, Route118_Text_1BE03C
 	specialvar RESULT, sub_8082C68
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq Route118_EventScript_1510B6
 	msgbox Route118_Text_1BE05E, 6
 	end
@@ -185,7 +185,7 @@ Route118_EventScript_1510E4:: @ 81510E4
 Route118_EventScript_1510FB:: @ 81510FB
 	trainerbattle 0, OPPONENT_DALTON_1, 0, Route118_Text_1BE3E8, Route118_Text_1BE406
 	specialvar RESULT, sub_8082C68
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq Route118_EventScript_151122
 	msgbox Route118_Text_1BE413, 6
 	end

@@ -8,7 +8,7 @@ MtPyre_1F_EventScript_15D323:: @ 815D323
 	goto_if_eq MtPyre_1F_EventScript_15D352
 	msgbox MtPyre_1F_Text_196151, 4
 	giveitem ITEM_CLEANSE_TAG
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq MtPyre_1F_EventScript_1A029B
 	setflag 282
 	release

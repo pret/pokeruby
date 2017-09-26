@@ -73,7 +73,7 @@ Route110_TrickHousePuzzle7_EventScript_163240:: @ 8163240
 	return
 
 Route110_TrickHousePuzzle7_MapScript1_163253:: @ 8163253
-	compare_var_to_imm 0x40b6, 1
+	compare 0x40b6, 1
 	goto_if_eq Route110_TrickHousePuzzle7_EventScript_16326E
 	clearflag 194
 	clearflag 195
@@ -86,7 +86,7 @@ Route110_TrickHousePuzzle7_EventScript_16326E:: @ 816326E
 	end
 
 Route110_TrickHousePuzzle7_MapScript1_16326F:: @ 816326F
-	compare_var_to_imm 0x40b6, 1
+	compare 0x40b6, 1
 	call_if 1, Route110_TrickHousePuzzle7_EventScript_163167
 	end
 
@@ -100,7 +100,7 @@ Route110_TrickHousePuzzle7_EventScript_163285:: @ 8163285
 
 Route110_TrickHousePuzzle7_EventScript_16328B:: @ 816328B
 	lockall
-	compare_var_to_imm 0x40b1, 0
+	compare 0x40b1, 0
 	goto_if_eq Route110_TrickHousePuzzle7_EventScript_16329D
 	goto Route110_TrickHousePuzzle7_EventScript_161892
 	end

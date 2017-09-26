@@ -44,17 +44,17 @@ Route116_EventScript_150A7B:: @ 8150A7B
 Route116_EventScript_150A94:: @ 8150A94
 	setflag 287
 	giveitem ITEM_REPEAT_BALL
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq Route116_EventScript_150B12
 	msgbox Route116_Text_1707B8, 4
 	closebutton
-	compare_var_to_imm FACING, 2
+	compare FACING, 2
 	call_if 1, Route116_EventScript_150AEE
-	compare_var_to_imm FACING, 1
+	compare FACING, 1
 	call_if 1, Route116_EventScript_150AEE
-	compare_var_to_imm FACING, 3
+	compare FACING, 3
 	call_if 1, Route116_EventScript_150AEE
-	compare_var_to_imm FACING, 4
+	compare FACING, 4
 	call_if 1, Route116_EventScript_150AF9
 	disappear LAST_TALKED
 	clearflag 949
@@ -148,10 +148,10 @@ Route116_EventScript_150B8F:: @ 8150B8F
 	lock
 	faceplayer
 	checkitem ITEM_BLACK_GLASSES, 1
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq Route116_EventScript_150BCA
 	specialvar RESULT, sub_810F828
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq Route116_EventScript_150BBB
 	msgbox Route116_Text_1708EE, 4
 	release
@@ -167,7 +167,7 @@ Route116_EventScript_150BCA:: @ 8150BCA
 	msgbox Route116_Text_1708EE, 4
 	msgbox Route116_Text_170921, 4
 	specialvar RESULT, sub_810F828
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq Route116_EventScript_150BF4
 	msgbox Route116_Text_170A03, 4
 	release
@@ -181,13 +181,13 @@ Route116_EventScript_150BF4:: @ 8150BF4
 
 Route116_EventScript_150C03:: @ 8150C03
 	delay 20
-	compare_var_to_imm FACING, 2
+	compare FACING, 2
 	call_if 1, Route116_EventScript_150C37
-	compare_var_to_imm FACING, 1
+	compare FACING, 1
 	call_if 1, Route116_EventScript_150C37
-	compare_var_to_imm FACING, 3
+	compare FACING, 3
 	call_if 1, Route116_EventScript_150C37
-	compare_var_to_imm FACING, 4
+	compare FACING, 4
 	call_if 1, Route116_EventScript_150C42
 	disappear LAST_TALKED
 	release
@@ -241,7 +241,7 @@ Route116_EventScript_150C79:: @ 8150C79
 Route116_EventScript_150C90:: @ 8150C90
 	trainerbattle 0, OPPONENT_JERRY_1, 0, Route116_Text_1BD1C0, Route116_Text_1BD21A
 	specialvar RESULT, sub_8082C68
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq Route116_EventScript_150CB7
 	msgbox Route116_Text_1BD248, 6
 	end
@@ -264,7 +264,7 @@ Route116_EventScript_150CE5:: @ 8150CE5
 Route116_EventScript_150CFC:: @ 8150CFC
 	trainerbattle 0, OPPONENT_KAREN_1, 0, Route116_Text_1BD377, Route116_Text_1BD3AC
 	specialvar RESULT, sub_8082C68
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq Route116_EventScript_150D23
 	msgbox Route116_Text_1BD3C3, 6
 	end

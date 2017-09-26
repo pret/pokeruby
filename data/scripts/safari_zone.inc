@@ -14,7 +14,7 @@ EventScript_1C341B: @ 81C341B
 gUnknown_081C342D:: @ 81C342D
 	lockall
 	msgbox UnknownString_81C34B2, 5
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq EventScript_1C3443
 	releaseall
 	end
@@ -43,10 +43,10 @@ gUnknown_081C3459:: @ 81C3459
 gUnknown_081C346A:: @ 81C346A
 	lockall
 	special SafariZoneGetPokeblockNameInFeeder
-	compare_var_to_imm RESULT, -1
+	compare RESULT, 0xFFFF
 	goto_if 5, EventScript_1C34A9
 	msgbox UnknownString_81C354E, 5
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq EventScript_1C348E
 	releaseall
 	end
@@ -55,7 +55,7 @@ EventScript_1C348E:
 	fadescreen 1
 	special sub_810BAF4
 	waitstate
-	compare_var_to_imm RESULT, -1
+	compare RESULT, 0xFFFF
 	goto_if 5, EventScript_1C34A0
 	end
 

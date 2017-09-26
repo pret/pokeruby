@@ -3,30 +3,30 @@ Event_TV:: @ 81A6E72
 	inccounter GAME_STAT_WATCHED_TV
 	special sub_80C2014
 	specialvar RESULT, CheckForBigMovieOrEmergencyNewsOnTV
-	compare_var_to_imm RESULT, 2
+	compare RESULT, 2
 	goto_if_eq EventScript_1A6F01
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq EventScript_1A6F0B
 	checkflag 2098
 	goto_if 0, EventScript_1A6EF1
 	checkflag 2097
 	goto_if_eq EventScript_1A6EF1
 	specialvar RESULT, IsTVShowInSearchOfTrainersAiring
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq EventScript_1A6F66
 	goto EventScript_1A6F50
 	end
 
 EventScript_1A6EBB:
 	specialvar 0x8004, special_0x44
-	compare_var_to_imm 0x8004, 255
+	compare 0x8004, 255
 	goto_if_eq EventScript_1A6F3F
 	specialvar RESULT, special_0x4a
-	compare_var_to_imm RESULT, 255
+	compare RESULT, 255
 	goto_if_eq EventScript_1A6F3F
 	copyvar 0x8004, RESULT
 	specialvar RESULT, sub_80BDA0C
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if 5, EventScript_1A6F21
 	end
 
@@ -59,7 +59,7 @@ EventScript_1A6F21:
 	special DoTVShow
 	waittext
 	waitbutton
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if 5, EventScript_1A6F21
 	goto EventScript_1A6F37
 	end
@@ -78,7 +78,7 @@ EventScript_1A6F3F:
 
 EventScript_1A6F50:
 	special sub_80BECE8
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq EventScript_1A6EBB
 	waittext
 	waitbutton
@@ -89,7 +89,7 @@ EventScript_1A6F66:
 	special DoTVShowInSearchOfTrainers
 	waittext
 	waitbutton
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq EventScript_1A6F66
 	goto EventScript_1A6F37
 	end

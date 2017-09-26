@@ -73,7 +73,7 @@ MossdeepCity_Gym_EventScript_15A594:: @ 815A594
 
 MossdeepCity_Gym_EventScript_15A5C6:: @ 815A5C6
 	giveitem ITEM_TM04
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq MossdeepCity_Gym_EventScript_1A029B
 	msgbox MossdeepCity_Gym_Text_18D1CF, 4
 	setflag 171

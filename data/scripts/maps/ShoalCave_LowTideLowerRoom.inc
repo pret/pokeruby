@@ -20,7 +20,7 @@ ShoalCave_LowTideLowerRoom_EventScript_15E413:: @ 815E413
 	checkflag 955
 	goto_if_eq ShoalCave_LowTideLowerRoom_EventScript_15E445
 	giveitem ITEM_SHOAL_SALT
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq ShoalCave_LowTideLowerRoom_EventScript_1A029B
 	setmaptile 18, 2, 858, 0
 	special DrawWholeMapView
@@ -40,7 +40,7 @@ ShoalCave_LowTideLowerRoom_EventScript_15E44F:: @ 815E44F
 	goto_if_eq ShoalCave_LowTideLowerRoom_EventScript_15E47E
 	msgbox ShoalCave_LowTideLowerRoom_Text_198200, 4
 	giveitem ITEM_FOCUS_BAND
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq ShoalCave_LowTideLowerRoom_EventScript_1A029B
 	setflag 283
 	release

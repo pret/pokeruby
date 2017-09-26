@@ -4,7 +4,7 @@ Route104_MrBrineysHouse_MapScripts:: @ 815BCB2
 
 Route104_MrBrineysHouse_MapScript1_15BCB8:: @ 815BCB8
 	setflag 2109
-	compare_var_to_imm 0x4090, 1
+	compare 0x4090, 1
 	call_if 1, Route104_MrBrineysHouse_EventScript_15BCD4
 	checkflag 188
 	call_if 1, Route104_MrBrineysHouse_EventScript_15BCD0
@@ -37,7 +37,7 @@ Route104_MrBrineysHouse_EventScript_15BD0E:: @ 815BD0E
 	setflag 147
 	msgbox Route104_MrBrineysHouse_Text_191A82, 4
 	msgbox Route104_MrBrineysHouse_Text_191AAD, 5
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq Route104_MrBrineysHouse_EventScript_15BD97
 	goto Route104_MrBrineysHouse_EventScript_15BDAB
 	end
@@ -54,14 +54,14 @@ Route104_MrBrineysHouse_EventScript_15BD32:: @ 815BD32
 
 Route104_MrBrineysHouse_EventScript_15BD65:: @ 815BD65
 	msgbox Route104_MrBrineysHouse_Text_191CC3, 5
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq Route104_MrBrineysHouse_EventScript_15BD97
 	goto Route104_MrBrineysHouse_EventScript_15BDAB
 	end
 
 Route104_MrBrineysHouse_EventScript_15BD7E:: @ 815BD7E
 	msgbox Route104_MrBrineysHouse_Text_191DA6, 5
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq Route104_MrBrineysHouse_EventScript_15BD97
 	goto Route104_MrBrineysHouse_EventScript_15BDAB
 	end

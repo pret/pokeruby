@@ -22,7 +22,7 @@ FortreeCity_House2_EventScript_1580B4:: @ 81580B4
 	case 0, FortreeCity_House2_EventScript_158161
 	msgbox FortreeCity_House2_Text_1864C6, 4
 	giveitem ITEM_TM10
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq FortreeCity_House2_EventScript_1A029B
 	setflag 264
 	msgbox FortreeCity_House2_Text_18652F, 4

@@ -13,9 +13,9 @@ PacifidlogTown_House4_EventScript_15435E:: @ 815435E
 	lock
 	faceplayer
 	msgbox PacifidlogTown_House4_Text_17963D, 5
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq PacifidlogTown_House4_EventScript_15437F
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq PacifidlogTown_House4_EventScript_154389
 	end
 

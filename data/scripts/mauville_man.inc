@@ -26,9 +26,9 @@ SpeakToBard:
 	lock
 	faceplayer
 	msgbox gTextBard_HiImTheBard, MSGBOX_YESNO
-	compare_var_to_imm RESULT, YES
+	compare RESULT, YES
 	goto_if_eq yes_hear_song
-	compare_var_to_imm RESULT, NO
+	compare RESULT, NO
 	goto_if_eq dont_hear_song
 	end
 
@@ -38,7 +38,7 @@ yes_hear_song:
 	special ScrSpecial_PlayBardSong
 	delay 60
 	special ScrSpecial_HasBardSongBeenChanged
-	compare_var_to_imm RESULT, FALSE
+	compare RESULT, FALSE
 	@ Prompt new lyrics only if song hasn't been changed
 	goto_if_eq prompt_write_lyrics
 	msgbox gTextBard_OhWhatAMovingSong, 4
@@ -52,9 +52,9 @@ dont_hear_song:
 
 prompt_write_lyrics:
 	msgbox gTextBard_SoHowDoYouLikeMySong, MSGBOX_YESNO
-	compare_var_to_imm RESULT, YES
+	compare RESULT, YES
 	goto_if_eq write_lyrics
-	compare_var_to_imm RESULT, NO
+	compare RESULT, NO
 	goto_if_eq dont_write_lyrics
 	end
 
@@ -63,7 +63,7 @@ write_lyrics:
 	call MauvilleCity_PokemonCenter_1F_EventScript_1A00F3
 	lock
 	faceplayer
-	compare_var_to_imm RESULT, NO
+	compare RESULT, NO
 	goto_if_eq dont_write_lyrics
 	msgbox gTextBard_ThankYouKindly, 4
 	setvar 0x8004, 1
@@ -71,7 +71,7 @@ write_lyrics:
 	special ScrSpecial_PlayBardSong
 	delay 60
 	msgbox gTextBard_WasThatHowYouWanted, MSGBOX_YESNO
-	compare_var_to_imm RESULT, NO
+	compare RESULT, NO
 	goto_if_eq write_lyrics		@ Keep looping until player responds YES
 	special ScrSpecial_SaveBardSongLyrics
 	msgbox gTextBard_OkayThatsIt, 4
@@ -94,7 +94,7 @@ SpeakToHipster:
 	setflag 2054
 	msgbox gTextHipster_TheyCallMeTheHipster, 4
 	special ScrSpecial_GetHipsterSpokenFlag
-	compare_var_to_imm RESULT, FALSE
+	compare RESULT, FALSE
 	goto_if_eq hipster_first_time
 	msgbox gTextHipster_TaughtYouAlready, 4
 	release
@@ -102,7 +102,7 @@ SpeakToHipster:
 
 hipster_first_time:
 	special ScrSpecial_HipsterTeachWord
-	compare_var_to_imm RESULT, TRUE		@ TRUE if player learned a new word
+	compare RESULT, TRUE		@ TRUE if player learned a new word
 	goto_if_eq teach_new_word
 	msgbox gTextHipster_YouAlreadyKnowALot, 4
 	release
@@ -125,10 +125,10 @@ SpeakToTrader:
 	lock
 	faceplayer
 	msgbox gTextTrader_Introduction, MSGBOX_YESNO
-	compare_var_to_imm RESULT, NO
+	compare RESULT, NO
 	goto_if_eq dont_want_to_trade
 	special ScrSpecial_GetTraderTradedFlag
-	compare_var_to_imm RESULT, TRUE
+	compare RESULT, TRUE
 	goto_if_eq already_traded
 	message gTextTrader_MenuPrompt
 	waittext
@@ -146,15 +146,15 @@ already_traded:
 do_trader_menu_get:
 	special ScrSpecial_TraderMenuGetDecoration
 	waitstate
-	compare_var_to_imm 0x8004, 0
+	compare 0x8004, 0
 	goto_if_eq cancelled_get_menu
-	compare_var_to_imm 0x8004, 65535
+	compare 0x8004, 65535
 	goto_if_eq rare_item_cant_trade_away
 	msgbox gTextTrader_ItemOnceBelongedTo, MSGBOX_YESNO
-	compare_var_to_imm RESULT, NO
+	compare RESULT, NO
 	goto_if_eq dont_want_item
 	special ScrSpecial_DoesPlayerHaveNoDecorations
-	compare_var_to_imm RESULT, TRUE
+	compare RESULT, TRUE
 	goto_if_eq player_has_no_decorations
 	goto do_trader_menu_give
 	end
@@ -183,15 +183,15 @@ do_trader_menu_give:
 	msgbox gTextTrader_PickDecorationYoullTrade, 4
 	special ScrSpecial_TraderMenuGiveDecoration
 	waitstate
-	compare_var_to_imm 0x8006, 0
+	compare 0x8006, 0
 	goto_if_eq cancelled_give_menu
-	compare_var_to_imm 0x8006, 65535
+	compare 0x8006, 65535
 	goto_if_eq decoration_is_in_use
 	special ScrSpecial_IsDecorationFull
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq decorations_full
 	msgbox gTextTrader_SoWellTrade, MSGBOX_YESNO
-	compare_var_to_imm RESULT, NO
+	compare RESULT, NO
 	goto_if_eq do_trader_menu_give
 	special ScrSpecial_TraderDoDecorationTrade
 	msgbox gTextTrader_ThenWellTrade, 2
@@ -225,51 +225,51 @@ SpeakToStoryteller:
 	lock
 	faceplayer
 	msgbox gTextStoryteller_Introduction, MSGBOX_YESNO
-	compare_var_to_imm RESULT, NO
+	compare RESULT, NO
 	goto_if_eq dont_hear_story
 	specialvar RESULT, ScrSpecial_StorytellerGetFreeStorySlot
-	compare_var_to_imm RESULT, 0		@ If slot is 0, then the list is empty
+	compare RESULT, 0		@ If slot is 0, then the list is empty
 	goto_if_eq no_stories_recorded
 choose_story:
 	message gTextStoryteller_WhichTale
 	waittext
 	special ScrSpecial_StorytellerStoryListMenu
 	waitstate
-	compare_var_to_imm RESULT, FALSE
+	compare RESULT, FALSE
 	goto_if_eq cancel_story_menu
 	setvar 0x8008, 1
 	special ScrSpecial_StorytellerDisplayStory
 	waittext
 	waitbutton
 	specialvar RESULT, ScrSpecial_StorytellerUpdateStat
-	compare_var_to_imm RESULT, FALSE
+	compare RESULT, FALSE
 	goto_if_eq no_stat_update
 	goto stat_update
 cancel_story_menu:
-	compare_var_to_imm 0x8008, 0
+	compare 0x8008, 0
 	goto_if_eq dont_hear_story
 	goto yes_hear_story
 no_stat_update:
 	msgbox gTextStoryteller_CouldThereBeOtherTrainers, 4
 	msgbox gTextStoryteller_HearAnotherLegendaryTale, MSGBOX_YESNO
-	compare_var_to_imm RESULT, YES
+	compare RESULT, YES
 	goto_if_eq choose_story
 yes_hear_story:
 	specialvar RESULT, ScrSpecial_HasStorytellerAlreadyRecorded
-	compare_var_to_imm RESULT, TRUE
+	compare RESULT, TRUE
 	goto_if_eq cant_record_story		@ already recorded story
 	specialvar RESULT, ScrSpecial_StorytellerGetFreeStorySlot
-	compare_var_to_imm RESULT, 4
+	compare RESULT, 4
 	goto_if_eq cant_record_story		@ story list is full
 	goto prompt_record_story
 no_stories_recorded:
 	msgbox gTextStoryteller_ButIKnowOfNoLegendaryTrainers, 4
 prompt_record_story:
 	msgbox gTextStoryteller_HaveYouAnyTales, MSGBOX_YESNO
-	compare_var_to_imm RESULT, NO
+	compare RESULT, NO
 	goto_if_eq dont_hear_story
 	specialvar RESULT, ScrSpecial_StorytellerInitializeRandomStat
-	compare_var_to_imm RESULT, TRUE
+	compare RESULT, TRUE
 	goto_if_eq stat_update
 	msgbox gTextStoryteller_ImNotSatisfied, 4
 	closebutton
@@ -305,25 +305,25 @@ SpeakToGiddy:
 	lock
 	faceplayer
 	msgbox gTextGiddy_Introduction, MSGBOX_YESNO
-	compare_var_to_imm RESULT, YES
+	compare RESULT, YES
 	goto_if_eq yes_hear_giddy
-	compare_var_to_imm RESULT, NO
+	compare RESULT, NO
 	goto_if_eq dont_hear_giddy
 	end
 
 yes_hear_giddy:
 	special ScrSpecial_GiddyShouldTellAnotherTale
-	compare_var_to_imm RESULT, TRUE
+	compare RESULT, TRUE
 	goto_if_eq tell_giddy_tale
-	compare_var_to_imm RESULT, FALSE
+	compare RESULT, FALSE
 	goto_if_eq bye_bye
 	end
 
 tell_another_giddy_tale:
 	special ScrSpecial_GiddyShouldTellAnotherTale
-	compare_var_to_imm RESULT, TRUE
+	compare RESULT, TRUE
 	goto_if_eq also_i_was_thinking
-	compare_var_to_imm RESULT, FALSE
+	compare RESULT, FALSE
 	goto_if_eq bye_bye
 	end
 
@@ -337,9 +337,9 @@ tell_giddy_tale:
 	special ShowFieldMessageStringVar4
 	waittext
 	yesnobox 20, 8
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq tell_another_giddy_tale
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq tell_another_giddy_tale
 	end
 

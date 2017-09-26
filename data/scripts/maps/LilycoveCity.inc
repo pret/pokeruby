@@ -70,7 +70,7 @@ LilycoveCity_EventScript_14CB74:: @ 814CB74
 	random 10
 	addvar RESULT, 133
 	giveitem RESULT
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq LilycoveCity_EventScript_1A029B
 	setflag 2255
 	msgbox LilycoveCity_Text_1C5B1D, 4
@@ -248,9 +248,9 @@ LilycoveCity_EventScript_14CD46:: @ 814CD46
 	lock
 	faceplayer
 	checkgender
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq LilycoveCity_EventScript_14CD60
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq LilycoveCity_EventScript_14CDD3
 	end
 
@@ -260,7 +260,7 @@ LilycoveCity_EventScript_14CD60:: @ 814CD60
 	call_if 1, LilycoveCity_EventScript_14CDB0
 	checkflag 286
 	call_if 0, LilycoveCity_EventScript_14CDB9
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq LilycoveCity_EventScript_14CDC2
 	msgbox LilycoveCity_Text_167B94, 4
 	switch 0x4023
@@ -291,7 +291,7 @@ LilycoveCity_EventScript_14CDD3:: @ 814CDD3
 	call_if 1, LilycoveCity_EventScript_14CE23
 	checkflag 286
 	call_if 0, LilycoveCity_EventScript_14CE2C
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq LilycoveCity_EventScript_14CE35
 	msgbox LilycoveCity_Text_1680A9, 4
 	switch 0x4023
@@ -351,9 +351,9 @@ LilycoveCity_EventScript_14CEA6:: @ 814CEA6
 	setvar RESULT, 0
 	checkflag 2060
 	call_if 1, LilycoveCity_EventScript_14CEDE
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	call_if 1, LilycoveCity_EventScript_14CEEE
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	call_if 1, LilycoveCity_EventScript_14CEF7
 	clearflag 722
 	clearflag 849
@@ -388,9 +388,9 @@ LilycoveCity_EventScript_14CF12:: @ 814CF12
 	setvar RESULT, 0
 	checkflag 2060
 	call_if 1, LilycoveCity_EventScript_14CEDE
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	call_if 1, LilycoveCity_EventScript_14CF47
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	call_if 1, LilycoveCity_EventScript_14CF50
 	clearflag 760
 	goto LilycoveCity_EventScript_14CF6B

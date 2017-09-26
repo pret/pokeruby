@@ -9,12 +9,12 @@ LilycoveCity_DepartmentStore_1F_EventScript_159D5E:: @ 8159D5E
 	lock
 	faceplayer
 	dodailyevents
-	compare_var_to_imm 0x4045, 0
+	compare 0x4045, 0
 	goto_if 5, LilycoveCity_DepartmentStore_1F_EventScript_159EB1
 	checkflag 2250
 	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E4C
 	msgbox LilycoveCity_DepartmentStore_1F_Text_1C4B5E, 5
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E56
 	setflag 2250
 	message LilycoveCity_DepartmentStore_1F_Text_1C4CC6
@@ -33,24 +33,24 @@ LilycoveCity_DepartmentStore_1F_EventScript_159D5E:: @ 8159D5E
 	delay 10
 	applymovement 2, LilycoveCity_DepartmentStore_1F_Movement_1A0839
 	waitmovement 0
-	compare_var_to_imm 0x8004, 0
+	compare 0x8004, 0
 	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E60
 	inccounter GAME_STAT_WON_POKEMON_LOTTERY
-	compare_var_to_imm 0x8006, 0
+	compare 0x8006, 0
 	call_if 1, LilycoveCity_DepartmentStore_1F_EventScript_159E3A
-	compare_var_to_imm 0x8006, 1
+	compare 0x8006, 1
 	call_if 1, LilycoveCity_DepartmentStore_1F_EventScript_159E43
 	bufferitem 0, 0x8005
-	compare_var_to_imm 0x8004, 1
+	compare 0x8004, 1
 	call_if 1, LilycoveCity_DepartmentStore_1F_EventScript_159E78
-	compare_var_to_imm 0x8004, 2
+	compare 0x8004, 2
 	call_if 1, LilycoveCity_DepartmentStore_1F_EventScript_159E81
-	compare_var_to_imm 0x8004, 3
+	compare 0x8004, 3
 	call_if 1, LilycoveCity_DepartmentStore_1F_EventScript_159E8A
-	compare_var_to_imm 0x8004, 4
+	compare 0x8004, 4
 	call_if 1, LilycoveCity_DepartmentStore_1F_EventScript_159E93
 	giveitem 0x8005
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E9C
 	goto LilycoveCity_DepartmentStore_1F_EventScript_159E6E
 	end
@@ -112,7 +112,7 @@ LilycoveCity_DepartmentStore_1F_EventScript_159EA7:: @ 8159EA7
 LilycoveCity_DepartmentStore_1F_EventScript_159EB1:: @ 8159EB1
 	msgbox LilycoveCity_DepartmentStore_1F_Text_1C4FCC, 4
 	giveitem 0x4045
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159EA7
 	setvar 0x4045, 0
 	release

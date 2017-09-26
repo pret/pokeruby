@@ -20,7 +20,7 @@ ShoalCave_LowTideStairsRoom_EventScript_15E3B7:: @ 815E3B7
 	checkflag 954
 	goto_if_eq ShoalCave_LowTideStairsRoom_EventScript_15E3E9
 	giveitem ITEM_SHOAL_SALT
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq ShoalCave_LowTideStairsRoom_EventScript_1A029B
 	setmaptile 11, 11, 858, 0
 	special DrawWholeMapView

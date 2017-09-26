@@ -5,9 +5,9 @@ PetalburgCity_MapScripts:: @ 814B70C
 
 PetalburgCity_MapScript1_14B717:: @ 814B717
 	setflag 2070
-	compare_var_to_imm 0x4057, 0
+	compare 0x4057, 0
 	call_if 1, PetalburgCity_EventScript_14B731
-	compare_var_to_imm 0x4057, 2
+	compare 0x4057, 2
 	call_if 1, PetalburgCity_EventScript_14B739
 	end
 
@@ -187,23 +187,23 @@ PetalburgCity_EventScript_14B866:: @ 814B866
 	waitmovement 0
 	applymovement 9, PetalburgCity_Movement_1A0835
 	waitmovement 0
-	compare_var_to_imm 0x8008, 0
+	compare 0x8008, 0
 	call_if 1, PetalburgCity_EventScript_14B91B
-	compare_var_to_imm 0x8008, 1
+	compare 0x8008, 1
 	call_if 1, PetalburgCity_EventScript_14B930
-	compare_var_to_imm 0x8008, 2
+	compare 0x8008, 2
 	call_if 1, PetalburgCity_EventScript_14B93B
-	compare_var_to_imm 0x8008, 3
+	compare 0x8008, 3
 	call_if 1, PetalburgCity_EventScript_14B950
 	msgbox PetalburgCity_Text_16438A, 4
 	closebutton
-	compare_var_to_imm 0x8008, 0
+	compare 0x8008, 0
 	call_if 1, PetalburgCity_EventScript_14B965
-	compare_var_to_imm 0x8008, 1
+	compare 0x8008, 1
 	call_if 1, PetalburgCity_EventScript_14B977
-	compare_var_to_imm 0x8008, 2
+	compare 0x8008, 2
 	call_if 1, PetalburgCity_EventScript_14B989
-	compare_var_to_imm 0x8008, 3
+	compare 0x8008, 3
 	call_if 1, PetalburgCity_EventScript_14B99B
 	msgbox PetalburgCity_Text_164426, 4
 	applymovement 9, PetalburgCity_Movement_1A0843

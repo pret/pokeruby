@@ -363,13 +363,13 @@ RustboroCity_EventScript_14C644:: @ 814C644
 	end
 
 RustboroCity_EventScript_14C650:: @ 814C650
-	compare_var_to_imm 0x4001, 0
+	compare 0x4001, 0
 	call_if 1, RustboroCity_EventScript_14C691
-	compare_var_to_imm 0x4001, 1
+	compare 0x4001, 1
 	call_if 1, RustboroCity_EventScript_14C6BD
-	compare_var_to_imm 0x4001, 2
+	compare 0x4001, 2
 	call_if 1, RustboroCity_EventScript_14C6E9
-	compare_var_to_imm 0x4001, 3
+	compare 0x4001, 3
 	call_if 1, RustboroCity_EventScript_14C715
 	setflag 159
 	setvar 0x405a, 3
@@ -457,19 +457,19 @@ RustboroCity_EventScript_14C771:: @ 814C771
 	end
 
 RustboroCity_EventScript_14C77D:: @ 814C77D
-	compare_var_to_imm 0x4001, 0
+	compare 0x4001, 0
 	call_if 1, RustboroCity_EventScript_14C7FE
-	compare_var_to_imm 0x4001, 1
+	compare 0x4001, 1
 	call_if 1, RustboroCity_EventScript_14C82A
-	compare_var_to_imm 0x4001, 2
+	compare 0x4001, 2
 	call_if 1, RustboroCity_EventScript_14C856
-	compare_var_to_imm 0x4001, 3
+	compare 0x4001, 3
 	call_if 1, RustboroCity_EventScript_14C882
-	compare_var_to_imm 0x4001, 4
+	compare 0x4001, 4
 	call_if 1, RustboroCity_EventScript_14C8B8
 	msgbox RustboroCity_Text_166FB4, 4
 	giveitem ITEM_GREAT_BALL
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	call_if 1, RustboroCity_EventScript_14C7F5
 	msgbox RustboroCity_Text_16707F, 4
 	closebutton
@@ -552,9 +552,9 @@ RustboroCity_EventScript_14C8DA:: @ 814C8DA
 	checkflag 288
 	goto_if_eq RustboroCity_EventScript_14C917
 	checkgender
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq RustboroCity_EventScript_14C8FD
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq RustboroCity_EventScript_14C90A
 	end
 
@@ -572,9 +572,9 @@ RustboroCity_EventScript_14C90A:: @ 814C90A
 
 RustboroCity_EventScript_14C917:: @ 814C917
 	checkgender
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq RustboroCity_EventScript_14C92F
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq RustboroCity_EventScript_14C939
 	end
 

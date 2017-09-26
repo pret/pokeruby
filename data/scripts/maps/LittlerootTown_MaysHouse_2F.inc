@@ -6,7 +6,7 @@ LittlerootTown_MaysHouse_2F_MapScripts:: @ 8152A50
 LittlerootTown_MaysHouse_2F_MapScript1_152A5B:: @ 8152A5B
 	checkflag 130
 	call_if 0, LittlerootTown_MaysHouse_2F_EventScript_152A7A
-	compare_var_to_imm 0x4092, 4
+	compare 0x4092, 4
 	call_if 1, LittlerootTown_MaysHouse_2F_EventScript_1B6950
 	call LittlerootTown_MaysHouse_2F_EventScript_1A2F3D
 	setvar 0x4089, 0
@@ -23,7 +23,7 @@ LittlerootTown_MaysHouse_2F_MapScript2_152A86:: @ 8152A86
 
 LittlerootTown_MaysHouse_2F_EventScript_152A90:: @ 8152A90
 	checkgender
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq LittlerootTown_MaysHouse_2F_EventScript_1A2F68
 	end
 
@@ -33,9 +33,9 @@ LittlerootTown_MaysHouse_2F_EventScript_152A9D:: @ 8152A9D
 	checkflag 292
 	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_152BB5
 	checkgender
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_152AD4
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_152B4A
 	playse 9
 	disappear LAST_TALKED
@@ -57,11 +57,11 @@ LittlerootTown_BrendansHouse_2F_EventScript_152AD4:: @ 8152AD4
 	waitmovement 0
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1733AF, 4
 	closebutton
-	compare_var_to_imm FACING, 4
+	compare FACING, 4
 	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_152B29
-	compare_var_to_imm FACING, 2
+	compare FACING, 2
 	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_152B34
-	compare_var_to_imm FACING, 3
+	compare FACING, 3
 	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_152B3F
 	return
 
@@ -91,11 +91,11 @@ LittlerootTown_BrendansHouse_2F_EventScript_152B4A:: @ 8152B4A
 	waitmovement 0
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1735FC, 4
 	closebutton
-	compare_var_to_imm FACING, 4
+	compare FACING, 4
 	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_152B9F
-	compare_var_to_imm FACING, 2
+	compare FACING, 2
 	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_152B9F
-	compare_var_to_imm FACING, 3
+	compare FACING, 3
 	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_152BAA
 	return
 
@@ -113,9 +113,9 @@ LittlerootTown_BrendansHouse_2F_EventScript_152BB5:: @ 8152BB5
 	applymovement LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_1A0839
 	waitmovement 0
 	checkgender
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_152BDB
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_152BED
 	setflag 293
 	releaseall
@@ -194,9 +194,9 @@ gUnknown_08152C39:: @ 8152C39
 LittlerootTown_MaysHouse_2F_EventScript_152C39:: @ 8152C39
 	lockall
 	checkgender
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq LittlerootTown_MaysHouse_2F_EventScript_152C52
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq LittlerootTown_MaysHouse_2F_EventScript_152C5C
 	end
 

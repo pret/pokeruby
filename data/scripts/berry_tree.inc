@@ -22,7 +22,7 @@ Route102_EventScript_1A153D:: @ 81A153D
 	lock
 	faceplayer
 	specialvar RESULT, PlayerHasBerries
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq Route102_EventScript_1A1558
 	message Route102_Text_1A16B6
 	waittext
@@ -32,9 +32,9 @@ Route102_EventScript_1A153D:: @ 81A153D
 
 Route102_EventScript_1A1558:: @ 81A1558
 	msgbox Route102_Text_1A16CD, 5
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq Route102_EventScript_1A1577
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq Route102_EventScript_1A1593
 	end
 
@@ -43,7 +43,7 @@ Route102_EventScript_1A1577:: @ 81A1577
 	closebutton
 	special sub_80B4EE4
 	waitstate
-	compare_var_to_imm ITEM_ID, 0
+	compare ITEM_ID, 0
 	goto_if_eq Route102_EventScript_1A1593
 	removeitem ITEM_ID, 1
 	call Route102_EventScript_1A16A9
@@ -82,9 +82,9 @@ Route102_EventScript_1A15BC:: @ 81A15BC
 	goto Route102_EventScript_1A165F
 
 Route102_EventScript_1A15CE:: @ 81A15CE
-	compare_var_to_imm 0x8005, 0
+	compare 0x8005, 0
 	goto_if_eq Route102_EventScript_1A15F2
-	compare_var_to_imm 0x8005, 4
+	compare 0x8005, 4
 	goto_if_eq Route102_EventScript_1A15EB
 	buffertext 1, Route102_Text_1A17B7
 	return
@@ -102,14 +102,14 @@ Route102_EventScript_1A15F9:: @ 81A15F9
 	lock
 	faceplayer
 	msgbox Route102_Text_1A17C0, 5
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq Route102_EventScript_1A161D
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq Route102_EventScript_1A164B
 
 Route102_EventScript_1A161D:: @ 81A161D
 	special FieldObjectInteractionPickBerryTree
-	compare_var_to_imm 0x8004, 0
+	compare 0x8004, 0
 	goto_if_eq Route102_EventScript_1A1642
 	special FieldObjectInteractionRemoveBerryTree
 	message Route102_Text_1A17FD
@@ -146,12 +146,12 @@ gUnknown_081A1654:: @ 81A1654
 
 Route102_EventScript_1A165F:: @ 81A165F
 	checkitem ITEM_WAILMER_PAIL, 1
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq Route102_EventScript_1A168D
 	msgbox Route102_Text_1A18E6, 5
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq Route102_EventScript_1A1693
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq Route102_EventScript_1A168D
 
 Route102_EventScript_1A168D:: @ 81A168D

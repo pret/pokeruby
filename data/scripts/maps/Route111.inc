@@ -22,15 +22,15 @@ Route111_MapScript1_14FFB9:: @ 814FFB9
 
 Route111_EventScript_14FFCD:: @ 814FFCD
 	getplayerxy 0x4000, 0x4001
-	compare_var_to_imm 0x4001, 34
+	compare 0x4001, 34
 	goto_if 0, Route111_EventScript_15000C
-	compare_var_to_imm 0x4001, 107
+	compare 0x4001, 107
 	goto_if 2, Route111_EventScript_15000C
-	compare_var_to_imm 0x4001, 72
+	compare 0x4001, 72
 	goto_if 2, Route111_EventScript_150009
-	compare_var_to_imm 0x4000, 2000
+	compare 0x4000, 2000
 	goto_if 2, Route111_EventScript_15000C
-	compare_var_to_imm 0x4000, 8
+	compare 0x4000, 8
 	goto_if 0, Route111_EventScript_15000C
 
 Route111_EventScript_150009:: @ 8150009
@@ -52,7 +52,7 @@ Route111_EventScript_15000D:: @ 815000D
 Route111_EventScript_150023:: @ 8150023
 	lockall
 	msgbox Route111_Text_16FA54, 5
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq Route111_EventScript_15005F
 	giveitem ITEM_ROOT_FOSSIL
 	closebutton
@@ -74,7 +74,7 @@ Route111_EventScript_15005F:: @ 815005F
 Route111_EventScript_150069:: @ 8150069
 	lockall
 	msgbox Route111_Text_16FAED, 5
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq Route111_EventScript_1500A5
 	giveitem ITEM_CLAW_FOSSIL
 	closebutton
@@ -125,7 +125,7 @@ Route111_EventScript_1500C5:: @ 81500C5
 	goto_if_eq Route111_EventScript_150100
 	msgbox Route111_Text_1C56F0, 4
 	giveitem ITEM_RAZZ_BERRY
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq Route111_EventScript_1A029B
 	setflag 2252
 	special GetPlayerBigGuyGirlString
@@ -164,7 +164,7 @@ Route111_EventScript_150122:: @ 8150122
 
 Route111_EventScript_15013A:: @ 815013A
 	checkitem ITEM_GO_GOGGLES, 1
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq Route111_EventScript_150151
 	setvar 0x4003, 1
 	releaseall
@@ -173,13 +173,13 @@ Route111_EventScript_15013A:: @ 815013A
 Route111_EventScript_150151:: @ 8150151
 	msgbox Route111_Text_1A0F93, 4
 	closebutton
-	compare_var_to_imm 0x8004, 0
+	compare 0x8004, 0
 	call_if 1, Route111_EventScript_150188
-	compare_var_to_imm 0x8004, 1
+	compare 0x8004, 1
 	call_if 1, Route111_EventScript_150193
-	compare_var_to_imm 0x8004, 2
+	compare 0x8004, 2
 	call_if 1, Route111_EventScript_15019E
-	compare_var_to_imm 0x8004, 3
+	compare 0x8004, 3
 	call_if 1, Route111_EventScript_1501A9
 	releaseall
 	end
@@ -238,7 +238,7 @@ Route111_EventScript_1501D1:: @ 81501D1
 	faceplayer
 	setflag 2115
 	msgbox Route111_Text_16F705, 5
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq Route111_EventScript_1501F3
 	msgbox Route111_Text_16F785, 4
 	release
@@ -393,7 +393,7 @@ Route111_EventScript_1503EC:: @ 81503EC
 Route111_EventScript_150403:: @ 8150403
 	trainerbattle 0, OPPONENT_DUSTY_1, 0, Route111_Text_1BAEC9, Route111_Text_1BAF14
 	specialvar RESULT, sub_8082C68
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq Route111_EventScript_15042A
 	msgbox Route111_Text_1BAF5B, 6
 	end
@@ -421,7 +421,7 @@ Route111_EventScript_15046F:: @ 815046F
 Route111_EventScript_150486:: @ 8150486
 	trainerbattle 0, OPPONENT_WILTON_1, 0, Route111_Text_1BB2E3, Route111_Text_1BB313
 	specialvar RESULT, sub_8082C68
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq Route111_EventScript_1504AD
 	msgbox Route111_Text_1BB33E, 6
 	end
@@ -434,7 +434,7 @@ Route111_EventScript_1504AD:: @ 81504AD
 Route111_EventScript_1504C4:: @ 81504C4
 	trainerbattle 0, OPPONENT_BROOKE_1, 0, Route111_Text_1BB44F, Route111_Text_1BB49F
 	specialvar RESULT, sub_8082C68
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq Route111_EventScript_1504EB
 	msgbox Route111_Text_1BB4CE, 6
 	end

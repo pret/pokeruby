@@ -28,7 +28,7 @@ Route109_SeashoreHouse_EventScript_160DFE:: @ 8160DFE
 Route109_SeashoreHouse_EventScript_160E08:: @ 8160E08
 	msgbox Route109_SeashoreHouse_Text_19B609, 4
 	giveitem ITEM_SODA_POP, 6
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq Route109_SeashoreHouse_EventScript_160E2C
 	setflag 140
 	release
@@ -43,7 +43,7 @@ Route109_SeashoreHouse_EventScript_160E36:: @ 8160E36
 	showmoney 0, 0
 	nop
 	msgbox Route109_SeashoreHouse_Text_19B702, 5
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq Route109_SeashoreHouse_EventScript_160E5A
 	msgbox Route109_SeashoreHouse_Text_19B773, 4
 	hidemoney 0, 0
@@ -52,10 +52,10 @@ Route109_SeashoreHouse_EventScript_160E36:: @ 8160E36
 
 Route109_SeashoreHouse_EventScript_160E5A:: @ 8160E5A
 	checkmoney 0x12c, 0
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq Route109_SeashoreHouse_EventScript_160E9E
 	checkitemspace ITEM_SODA_POP, 1
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq Route109_SeashoreHouse_EventScript_160EAB
 	msgbox Route109_SeashoreHouse_Text_19B74C, 4
 	paymoney 0x12c, 0

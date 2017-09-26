@@ -10,17 +10,17 @@ Route120_MapScript1_15161E:: @ 815161E
 	end
 
 Route120_EventScript_151628:: @ 8151628
-	compare_var_to_imm 0x8004, 0
+	compare 0x8004, 0
 	call_if 1, Route120_EventScript_15166B
-	compare_var_to_imm 0x8004, 1
+	compare 0x8004, 1
 	call_if 1, Route120_EventScript_151672
-	compare_var_to_imm 0x8004, 2
+	compare 0x8004, 2
 	call_if 1, Route120_EventScript_151676
-	compare_var_to_imm 0x8004, 3
+	compare 0x8004, 3
 	call_if 1, Route120_EventScript_15167A
-	compare_var_to_imm 0x8004, 4
+	compare 0x8004, 4
 	call_if 1, Route120_EventScript_15167E
-	compare_var_to_imm 0x8004, 5
+	compare 0x8004, 5
 	call_if 1, Route120_EventScript_151682
 	return
 
@@ -81,11 +81,11 @@ Route120_MapScript1_1516DF:: @ 81516DF
 
 Route120_EventScript_1516EA:: @ 81516EA
 	getplayerxy 0x4000, 0x4001
-	compare_var_to_imm 0x4001, 14
+	compare 0x4001, 14
 	goto_if 3, Route120_EventScript_151715
-	compare_var_to_imm 0x4001, 60
+	compare 0x4001, 60
 	goto_if 3, Route120_EventScript_151719
-	compare_var_to_imm 0x4001, 61
+	compare 0x4001, 61
 	goto_if 4, Route120_EventScript_151711
 	return
 
@@ -98,9 +98,9 @@ Route120_EventScript_151715:: @ 8151715
 	return
 
 Route120_EventScript_151719:: @ 8151719
-	compare_var_to_imm 0x4000, 7
+	compare 0x4000, 7
 	goto_if 3, Route120_EventScript_151735
-	compare_var_to_imm 0x4000, 19
+	compare 0x4000, 19
 	goto_if 3, Route120_EventScript_151715
 	goto Route120_EventScript_151735
 	end
@@ -116,9 +116,9 @@ Route120_EventScript_151739:: @ 8151739
 	checkflag 2254
 	goto_if_eq Route120_EventScript_151837
 	msgbox Route120_Text_1C58F1, 5
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	call_if 1, Route120_EventScript_151841
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	call_if 1, Route120_EventScript_15184A
 	specialvar RESULT, GetPlayerTrainerIdOnesDigit
 	switch RESULT
@@ -161,7 +161,7 @@ Route120_EventScript_151808:: @ 8151808
 
 Route120_EventScript_151813:: @ 8151813
 	giveitem 0x8004
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq Route120_EventScript_1A029B
 	setflag 2254
 	msgbox Route120_Text_1C5A0B, 4
@@ -187,7 +187,7 @@ Route120_EventScript_151853:: @ 8151853
 	checkflag 290
 	goto_if_eq Route120_EventScript_151884
 	msgbox Route120_Text_171827, 5
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq Route120_EventScript_151877
 	goto Route120_EventScript_15189D
 	end
@@ -200,7 +200,7 @@ Route120_EventScript_151877:: @ 8151877
 
 Route120_EventScript_151884:: @ 8151884
 	msgbox Route120_Text_17196F, 5
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq Route120_EventScript_151877
 	goto Route120_EventScript_15189D
 	end
@@ -208,9 +208,9 @@ Route120_EventScript_151884:: @ 8151884
 Route120_EventScript_15189D:: @ 815189D
 	msgbox Route120_Text_1719A0, 4
 	closebutton
-	compare_var_to_imm FACING, 2
+	compare FACING, 2
 	call_if 1, Route120_EventScript_15197F
-	compare_var_to_imm FACING, 3
+	compare FACING, 3
 	call_if 1, Route120_EventScript_15198A
 	applymovement 31, Route120_Movement_1A083F
 	waitmovement 0
@@ -293,7 +293,7 @@ Route120_EventScript_1519B3:: @ 81519B3
 Route120_EventScript_1519CA:: @ 81519CA
 	trainerbattle 0, OPPONENT_ROBERT_1, 0, Route120_Text_1BF07E, Route120_Text_1BF0A5
 	specialvar RESULT, sub_8082C68
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq Route120_EventScript_1519F1
 	msgbox Route120_Text_1BF0C3, 6
 	end
@@ -316,7 +316,7 @@ Route120_EventScript_151A1F:: @ 8151A1F
 Route120_EventScript_151A36:: @ 8151A36
 	trainerbattle 0, OPPONENT_BRANDON_1, 0, Route120_Text_1BF32B, Route120_Text_1BF36B
 	specialvar RESULT, sub_8082C68
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq Route120_EventScript_151A5D
 	msgbox Route120_Text_1BF38D, 6
 	end

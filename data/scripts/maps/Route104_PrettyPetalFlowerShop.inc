@@ -25,18 +25,18 @@ Route104_PrettyPetalFlowerShop_EventScript_15BE0B:: @ 815BE0B
 	goto_if_eq Route104_PrettyPetalFlowerShop_EventScript_15BE4A
 	setflag 127
 	msgbox Route104_PrettyPetalFlowerShop_Text_1C5F48, 5
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	call_if 1, Route104_PrettyPetalFlowerShop_EventScript_15BE6A
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	call_if 1, Route104_PrettyPetalFlowerShop_EventScript_15BE73
 	release
 	end
 
 Route104_PrettyPetalFlowerShop_EventScript_15BE4A:: @ 815BE4A
 	msgbox Route104_PrettyPetalFlowerShop_Text_1C5F1B, 5
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	call_if 1, Route104_PrettyPetalFlowerShop_EventScript_15BE6A
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	call_if 1, Route104_PrettyPetalFlowerShop_EventScript_15BE73
 	release
 	end
@@ -96,7 +96,7 @@ Route104_PrettyPetalFlowerShop_EventScript_15BEDA:: @ 815BEDA
 	random 8
 	addvar RESULT, 133
 	giveitem RESULT
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq Route104_PrettyPetalFlowerShop_EventScript_1A029B
 	setflag 2256
 	msgbox Route104_PrettyPetalFlowerShop_Text_1C6335, 4

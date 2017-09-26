@@ -26,7 +26,7 @@ EverGrandeCity_DrakesRoom_EventScript_15B736:: @ 815B736
 EverGrandeCity_DrakesRoom_MapScript1_15B743:: @ 815B743
 	checkflag 1248
 	call_if 1, EverGrandeCity_DrakesRoom_EventScript_15B758
-	compare_var_to_imm 0x409c, 4
+	compare 0x409c, 4
 	call_if 1, EverGrandeCity_DrakesRoom_EventScript_15B75E
 	end
 

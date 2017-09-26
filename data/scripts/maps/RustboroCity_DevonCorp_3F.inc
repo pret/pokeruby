@@ -5,7 +5,7 @@ RustboroCity_DevonCorp_3F_MapScripts:: @ 8157711
 	.byte 0
 
 RustboroCity_DevonCorp_3F_MapScript1_157721:: @ 8157721
-	compare_var_to_imm 0x408f, 0
+	compare 0x408f, 0
 	call_if 1, RustboroCity_DevonCorp_3F_EventScript_15772D
 	end
 
@@ -160,7 +160,7 @@ RustboroCity_DevonCorp_3F_EventScript_15783B:: @ 815783B
 RustboroCity_DevonCorp_3F_EventScript_157864:: @ 8157864
 	msgbox RustboroCity_DevonCorp_3F_Text_18353E, 4
 	giveitem ITEM_EXP_SHARE
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq RustboroCity_DevonCorp_3F_EventScript_1A029B
 	setflag 272
 	msgbox RustboroCity_DevonCorp_3F_Text_1835B3, 4

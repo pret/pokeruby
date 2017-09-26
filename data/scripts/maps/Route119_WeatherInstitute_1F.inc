@@ -4,7 +4,7 @@ Route119_WeatherInstitute_1F_MapScripts:: @ 8163C2A
 
 Route119_WeatherInstitute_1F_MapScript1_163C30:: @ 8163C30
 	call Route119_WeatherInstitute_1F_EventScript_1A0196
-	compare_var_to_imm 0x40b3, 0
+	compare 0x40b3, 0
 	call_if 1, Route119_WeatherInstitute_1F_EventScript_163C41
 	end
 
@@ -17,7 +17,7 @@ Route119_WeatherInstitute_1F_EventScript_163C4D:: @ 8163C4D
 	lock
 	faceplayer
 	special GetPlayerBigGuyGirlString
-	compare_var_to_imm 0x40b3, 0
+	compare 0x40b3, 0
 	goto_if_eq Route119_WeatherInstitute_1F_EventScript_163C67
 	msgbox Route119_WeatherInstitute_1F_Text_19ED22, 4
 	release

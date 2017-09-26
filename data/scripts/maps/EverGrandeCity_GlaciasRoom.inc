@@ -26,7 +26,7 @@ EverGrandeCity_GlaciasRoom_EventScript_15B69C:: @ 815B69C
 EverGrandeCity_GlaciasRoom_MapScript1_15B6A9:: @ 815B6A9
 	checkflag 1247
 	call_if 1, EverGrandeCity_GlaciasRoom_EventScript_15B6BE
-	compare_var_to_imm 0x409c, 3
+	compare 0x409c, 3
 	call_if 1, EverGrandeCity_GlaciasRoom_EventScript_15B6C4
 	end
 

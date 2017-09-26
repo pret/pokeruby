@@ -23,24 +23,24 @@ ShoalCave_LowTideEntranceRoom_EventScript_15E076:: @ 815E076
 	checkflag 2143
 	call_if 1, ShoalCave_LowTideEntranceRoom_EventScript_15E176
 	checkitem ITEM_SHOAL_SALT, 4
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_15E138
 	checkitem ITEM_SHOAL_SHELL, 4
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_15E138
 	msgbox ShoalCave_LowTideEntranceRoom_Text_1C6793, 5
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_15E16C
 	checkitemspace ITEM_SHELL_BELL, 1
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	call_if 1, ShoalCave_LowTideEntranceRoom_EventScript_15E106
-	compare_var_to_imm RESULT, 2
+	compare RESULT, 2
 	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_15E12E
 	msgbox ShoalCave_LowTideEntranceRoom_Text_1C6808, 4
 	removeitem ITEM_SHOAL_SALT, 4
 	removeitem ITEM_SHOAL_SHELL, 4
 	giveitem ITEM_SHELL_BELL
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_1A029B
 	msgbox ShoalCave_LowTideEntranceRoom_Text_1C688E, 4
 	setflag 2
@@ -49,13 +49,13 @@ ShoalCave_LowTideEntranceRoom_EventScript_15E076:: @ 815E076
 
 ShoalCave_LowTideEntranceRoom_EventScript_15E106:: @ 815E106
 	checkitem ITEM_SHOAL_SALT, 5
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_15E117
 	return
 
 ShoalCave_LowTideEntranceRoom_EventScript_15E117:: @ 815E117
 	checkitem ITEM_SHOAL_SHELL, 5
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_15E128
 	return
 
@@ -70,10 +70,10 @@ ShoalCave_LowTideEntranceRoom_EventScript_15E12E:: @ 815E12E
 
 ShoalCave_LowTideEntranceRoom_EventScript_15E138:: @ 815E138
 	checkitem ITEM_SHOAL_SALT, 1
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_15E162
 	checkitem ITEM_SHOAL_SHELL, 1
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_15E162
 	msgbox ShoalCave_LowTideEntranceRoom_Text_1C6668, 4
 	release

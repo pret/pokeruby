@@ -3,9 +3,9 @@ Route110_SeasideCyclingRoadNorthEntrance_MapScripts:: @ 81634C8
 	.byte 0
 
 Route110_SeasideCyclingRoadNorthEntrance_MapScript1_1634CE:: @ 81634CE
-	compare_var_to_imm 0x40a9, 3
+	compare 0x40a9, 3
 	call_if 1, Route110_SeasideCyclingRoadNorthEntrance_EventScript_1634E5
-	compare_var_to_imm 0x40a9, 2
+	compare 0x40a9, 2
 	call_if 1, Route110_SeasideCyclingRoadNorthEntrance_EventScript_1634E5
 	end
 
@@ -24,9 +24,9 @@ Route110_SeasideCyclingRoadNorthEntrance_EventScript_1634F7:: @ 81634F7
 @ Coord event directly in front of the gatesman heading left to right
 	lockall
 	specialvar RESULT, GetPlayerAvatarBike @ player state?
-	compare_var_to_imm RESULT, 2
+	compare RESULT, 2
 	call_if 1, Route110_SeasideCyclingRoadNorthEntrance_EventScript_16351D
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq Route110_SeasideCyclingRoadNorthEntrance_EventScript_163523
 	setflag 2091
 	setvar 0x4001, 1

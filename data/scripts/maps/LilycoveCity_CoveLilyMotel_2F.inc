@@ -9,7 +9,7 @@ LilycoveCity_CoveLilyMotel_2F_EventScript_1583A1:: @ 81583A1
 	checkflag 2
 	call_if 1, LilycoveCity_CoveLilyMotel_2F_EventScript_1583DD
 	specialvar RESULT, sub_8090FC0
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq LilycoveCity_CoveLilyMotel_2F_EventScript_1583D0
 	release
 	end

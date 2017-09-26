@@ -7,10 +7,10 @@ Route114_FossilManiacsTunnel_EventScript_15C20F:: @ 815C20F
 	checkflag 267
 	goto_if_eq Route114_FossilManiacsTunnel_EventScript_15C24E
 	checkitem ITEM_ROOT_FOSSIL, 1
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq Route114_FossilManiacsTunnel_EventScript_15C244
 	checkitem ITEM_CLAW_FOSSIL, 1
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq Route114_FossilManiacsTunnel_EventScript_15C244
 	msgbox Route114_FossilManiacsTunnel_Text_192795, 4
 	release

@@ -9,7 +9,7 @@ SealedChamber_InnerRoom_EventScript_15F1E8:: @ 815F1E8
 	checkflag 228
 	goto_if_eq SealedChamber_InnerRoom_EventScript_15F247
 	specialvar RESULT, CheckRelicanthWailord
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq SealedChamber_InnerRoom_EventScript_15F247
 	fadeoutbgm 0
 	playse 49

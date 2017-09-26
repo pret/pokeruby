@@ -5,7 +5,7 @@ Route112_CableCarStation_MapScripts:: @ 815C033
 
 Route112_CableCarStation_MapScript1_15C03E:: @ 815C03E
 	warp6 Route112, 255, 28, 28
-	compare_var_to_imm 0x40a3, 2
+	compare 0x40a3, 2
 	call_if 1, Route112_CableCarStation_EventScript_15C052
 	end
 
@@ -33,9 +33,9 @@ Route112_CableCarStation_EventScript_15C08C:: @ 815C08C
 	lock
 	faceplayer
 	msgbox Route112_CableCarStation_Text_1924F5, 5
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq Route112_CableCarStation_EventScript_15C0AD
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq Route112_CableCarStation_EventScript_15C0DC
 	end
 

@@ -45,7 +45,7 @@ SootopolisCity_EventScript_14D123:: @ 814D123
 	call SootopolisCity_EventScript_1A02C1
 	movespriteperm 1, 29, 19
 	movespriteperm 2, 33, 19
-	compare_var_to_imm 0x405e, 1
+	compare 0x405e, 1
 	call_if 1, SootopolisCity_EventScript_14D142
 	return
 
@@ -99,20 +99,20 @@ SootopolisCity_EventScript_14D19F:: @ 814D19F
 	addvar RESULT, 20
 	addvar RESULT, 133
 	giveitem RESULT
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq SootopolisCity_EventScript_1A029B
 	setflag 2258
 	msgbox SootopolisCity_Text_1C64D0, 4
 	random 2
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq SootopolisCity_EventScript_14D1FF
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq SootopolisCity_EventScript_14D220
 	end
 
 SootopolisCity_EventScript_14D1FF:: @ 814D1FF
 	giveitem ITEM_FIGY_BERRY
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq SootopolisCity_EventScript_1A029B
 	msgbox SootopolisCity_Text_1C650B, 4
 	release
@@ -120,7 +120,7 @@ SootopolisCity_EventScript_14D1FF:: @ 814D1FF
 
 SootopolisCity_EventScript_14D220:: @ 814D220
 	giveitem ITEM_IAPAPA_BERRY
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq SootopolisCity_EventScript_1A029B
 	msgbox SootopolisCity_Text_1C650B, 4
 	release
@@ -128,7 +128,7 @@ SootopolisCity_EventScript_14D220:: @ 814D220
 
 SootopolisCity_EventScript_14D241:: @ 814D241
 	msgbox SootopolisCity_Text_1C6540, 5
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq SootopolisCity_EventScript_14D25E
 	msgbox SootopolisCity_Text_1C6626, 4
 	release

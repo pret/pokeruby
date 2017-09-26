@@ -4,7 +4,7 @@ MtChimney_CableCarStation_MapScripts:: @ 815C0FA
 	.byte 0
 
 MtChimney_CableCarStation_MapScript1_15C105:: @ 815C105
-	compare_var_to_imm 0x40a3, 1
+	compare 0x40a3, 1
 	call_if 1, MtChimney_CableCarStation_EventScript_15C111
 	end
 
@@ -32,9 +32,9 @@ MtChimney_CableCarStation_EventScript_15C14B:: @ 815C14B
 	lock
 	faceplayer
 	msgbox MtChimney_CableCarStation_Text_19256A, 5
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq MtChimney_CableCarStation_EventScript_15C16C
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq MtChimney_CableCarStation_EventScript_15C19B
 	end
 

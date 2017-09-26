@@ -8,7 +8,7 @@ MtPyre_Exterior_MapScript1_15D48C:: @ 815D48C
 
 MtPyre_Exterior_EventScript_15D492:: @ 815D492
 	getplayerxy 0x4000, 0x4001
-	compare_var_to_imm 0x4001, 12
+	compare 0x4001, 12
 	goto_if 0, MtPyre_Exterior_EventScript_15D4A3
 	return
 

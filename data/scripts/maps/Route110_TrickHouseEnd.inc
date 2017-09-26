@@ -6,7 +6,7 @@ Route110_TrickHouseEnd_MapScripts:: @ 8161936
 	.byte 0
 
 Route110_TrickHouseEnd_MapScript1_16194B:: @ 816194B
-	compare_var_to_imm 0x4001, 1
+	compare 0x4001, 1
 	call_if 1, Route110_TrickHouseEnd_EventScript_161994
 	end
 
@@ -61,7 +61,7 @@ Route110_TrickHouseEnd_EventScript_161A0B:: @ 8161A0B
 	msgbox Route110_TrickHouseEnd_Text_19C90B, 4
 	setvar 0x40c1, 0
 	giveitem ITEM_RARE_CANDY
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_161C4E
 	msgbox Route110_TrickHouseEnd_Text_19C9BD, 4
 	closebutton
@@ -74,7 +74,7 @@ Route110_TrickHouseEnd_EventScript_161A47:: @ 8161A47
 	msgbox Route110_TrickHouseEnd_Text_19C90B, 4
 	setvar 0x40c1, 0
 	giveitem ITEM_TIMER_BALL
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_161C4E
 	msgbox Route110_TrickHouseEnd_Text_19C9BD, 4
 	closebutton
@@ -87,7 +87,7 @@ Route110_TrickHouseEnd_EventScript_161A83:: @ 8161A83
 	msgbox Route110_TrickHouseEnd_Text_19C90B, 4
 	setvar 0x40c1, 0
 	giveitem ITEM_HARD_STONE
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_161C4E
 	msgbox Route110_TrickHouseEnd_Text_19C9BD, 4
 	closebutton
@@ -100,7 +100,7 @@ Route110_TrickHouseEnd_EventScript_161ABF:: @ 8161ABF
 	msgbox Route110_TrickHouseEnd_Text_19C90B, 4
 	setvar 0x40c1, 0
 	giveitem ITEM_SMOKE_BALL
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_161C4E
 	msgbox Route110_TrickHouseEnd_Text_19C9BD, 4
 	closebutton
@@ -113,7 +113,7 @@ Route110_TrickHouseEnd_EventScript_161AFB:: @ 8161AFB
 	msgbox Route110_TrickHouseEnd_Text_19C90B, 4
 	setvar 0x40c1, 0
 	giveitem ITEM_TM12
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_161C4E
 	msgbox Route110_TrickHouseEnd_Text_19C9BD, 4
 	closebutton
@@ -126,7 +126,7 @@ Route110_TrickHouseEnd_EventScript_161B37:: @ 8161B37
 	msgbox Route110_TrickHouseEnd_Text_19C90B, 4
 	setvar 0x40c1, 0
 	giveitem ITEM_MAGNET
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_161C4E
 	msgbox Route110_TrickHouseEnd_Text_19C9BD, 4
 	closebutton
@@ -139,7 +139,7 @@ Route110_TrickHouseEnd_EventScript_161B73:: @ 8161B73
 	msgbox Route110_TrickHouseEnd_Text_19C90B, 4
 	setvar 0x40c1, 0
 	giveitem ITEM_PP_MAX
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_161C4E
 	msgbox Route110_TrickHouseEnd_Text_19C9BD, 4
 	closebutton
@@ -150,13 +150,13 @@ Route110_TrickHouseEnd_EventScript_161B73:: @ 8161B73
 Route110_TrickHouseEnd_EventScript_161BAF:: @ 8161BAF
 	msgbox Route110_TrickHouseEnd_Text_19C5AF, 4
 	closebutton
-	compare_var_to_imm FACING, 1
+	compare FACING, 1
 	call_if 1, Route110_TrickHouseEnd_EventScript_161C74
-	compare_var_to_imm FACING, 2
+	compare FACING, 2
 	call_if 1, Route110_TrickHouseEnd_EventScript_161C7F
-	compare_var_to_imm FACING, 3
+	compare FACING, 3
 	call_if 1, Route110_TrickHouseEnd_EventScript_161C8A
-	compare_var_to_imm FACING, 4
+	compare FACING, 4
 	call_if 1, Route110_TrickHouseEnd_EventScript_161C95
 	delay 30
 	msgbox Route110_TrickHouseEnd_Text_19C602, 4
@@ -171,7 +171,7 @@ Route110_TrickHouseEnd_EventScript_161BAF:: @ 8161BAF
 	.else
 	givedecoration 31
 	.endc
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_161C61
 	msgbox Route110_TrickHouseEnd_Text_19C85C, 4
 	call Route110_TrickHouseEnd_EventScript_161C2E

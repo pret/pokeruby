@@ -3,7 +3,7 @@ Route110_TrickHousePuzzle1_MapScripts:: @ 8161CF8
 	.byte 0
 
 Route110_TrickHousePuzzle1_MapScript1_161CFE:: @ 8161CFE
-	compare_var_to_imm 0x40ab, 2
+	compare 0x40ab, 2
 	goto_if_eq Route110_TrickHousePuzzle1_EventScript_161D0A
 	end
 
@@ -13,7 +13,7 @@ Route110_TrickHousePuzzle1_EventScript_161D0A:: @ 8161D0A
 
 Route110_TrickHousePuzzle1_EventScript_161D14:: @ 8161D14
 	lockall
-	compare_var_to_imm 0x40ab, 0
+	compare 0x40ab, 0
 	goto_if_eq Route110_TrickHousePuzzle1_EventScript_161D26
 	goto Route110_TrickHousePuzzle1_EventScript_161892
 	end

@@ -12,7 +12,7 @@ SlateportCity_MapScript1_14BA3C:: @ 814BA3C
 	.endif
 	setvar 0x40aa, 0
 	call SlateportCity_EventScript_14BA5C
-	compare_var_to_imm 0x4058, 1
+	compare 0x4058, 1
 	call_if 1, SlateportCity_EventScript_14BA68
 	end
 
@@ -67,10 +67,10 @@ SlateportCity_EventScript_14BAE0:: @ 814BAE0
 	bufferfirstpoke 0
 	msgbox SlateportCity_Text_164682, 4
 	specialvar RESULT, LeadMonHasEffortRibbon
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	call_if 1, SlateportCity_EventScript_14BB35
 	specialvar RESULT, ScrSpecial_AreLeadMonEVsMaxedOut
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	call_if 1, SlateportCity_EventScript_14BB2B
 	msgbox SlateportCity_Text_164691, 4
 	playfanfare 370
@@ -95,7 +95,7 @@ SlateportCity_EventScript_14BB35:: @ 814BB35
 SlateportCity_EventScript_14BB3F:: @ 814BB3F
 	lock
 	faceplayer
-	compare_var_to_imm 0x4058, 1
+	compare 0x4058, 1
 	call_if 1, SlateportCity_EventScript_14BB56
 	msgbox SlateportCity_Text_164814, 4
 	release
@@ -109,7 +109,7 @@ SlateportCity_EventScript_14BB56:: @ 814BB56
 SlateportCity_EventScript_14BB60:: @ 814BB60
 	lock
 	faceplayer
-	compare_var_to_imm 0x4058, 1
+	compare 0x4058, 1
 	call_if 1, SlateportCity_EventScript_14BB77
 	msgbox SlateportCity_Text_1648A0, 4
 	release
@@ -123,7 +123,7 @@ SlateportCity_EventScript_14BB77:: @ 814BB77
 SlateportCity_EventScript_14BB81:: @ 814BB81
 	lock
 	faceplayer
-	compare_var_to_imm 0x4058, 1
+	compare 0x4058, 1
 	call_if 1, SlateportCity_EventScript_14BBA1
 	checkflag 96
 	goto_if_eq SlateportCity_EventScript_14BBAB
@@ -144,7 +144,7 @@ SlateportCity_EventScript_14BBAB:: @ 814BBAB
 SlateportCity_EventScript_14BBB5:: @ 814BBB5
 	lock
 	faceplayer
-	compare_var_to_imm 0x4058, 1
+	compare 0x4058, 1
 	call_if 1, SlateportCity_EventScript_14BBCC
 	msgbox SlateportCity_Text_164A30, 4
 	release
@@ -156,7 +156,7 @@ SlateportCity_EventScript_14BBCC:: @ 814BBCC
 	end
 
 SlateportCity_EventScript_14BBD6:: @ 814BBD6
-	compare_var_to_imm 0x4058, 1
+	compare 0x4058, 1
 	goto_if_eq SlateportCity_EventScript_14BBEA
 	msgbox SlateportCity_Text_164AA9, 2
 	end
@@ -168,7 +168,7 @@ SlateportCity_EventScript_14BBEA:: @ 814BBEA
 SlateportCity_EventScript_14BBF3:: @ 814BBF3
 	lock
 	faceplayer
-	compare_var_to_imm 0x4058, 1
+	compare 0x4058, 1
 	call_if 1, SlateportCity_EventScript_14BC0A
 	msgbox SlateportCity_Text_164B34, 4
 	release
@@ -253,7 +253,7 @@ SlateportCity_EventScript_14BCAF:: @ 814BCAF
 SlateportCity_EventScript_14BCB8:: @ 814BCB8
 	lock
 	faceplayer
-	compare_var_to_imm 0x4058, 1
+	compare 0x4058, 1
 	call_if 1, SlateportCity_EventScript_14BCCF
 	msgbox SlateportCity_Text_164F9E, 4
 	release
@@ -288,9 +288,9 @@ SlateportCity_EventScript_14BD06:: @ 814BD06
 	lock
 	faceplayer
 	msgbox SlateportCity_Text_1650F1, 5
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	call_if 1, SlateportCity_EventScript_14BD28
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	call_if 1, SlateportCity_EventScript_14BD31
 	release
 	end

@@ -10,7 +10,7 @@ LilycoveCity_Harbor_EventScript_1598A2:: @ 81598A2
 	lock
 	faceplayer
 	checkitem ITEM_EON_TICKET, 1
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq LilycoveCity_Harbor_EventScript_1599EE
 	goto LilycoveCity_Harbor_EventScript_1598BA
 	end
@@ -25,7 +25,7 @@ LilycoveCity_Harbor_EventScript_1598BA:: @ 81598BA
 LilycoveCity_Harbor_EventScript_1598CD:: @ 81598CD
 	msgbox LilycoveCity_Harbor_Text_18B36F, 4
 	checkitem ITEM_SS_TICKET, 1
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq LilycoveCity_Harbor_EventScript_159929
 	message LilycoveCity_Harbor_Text_18B406
 	waittext
@@ -48,7 +48,7 @@ LilycoveCity_Harbor_EventScript_159929:: @ 8159929
 
 LilycoveCity_Harbor_EventScript_159933:: @ 8159933
 	msgbox LilycoveCity_Harbor_Text_18B47D, 5
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq LilycoveCity_Harbor_EventScript_15997E
 	setvar 0x40b4, 5
 	call LilycoveCity_Harbor_EventScript_15998A
@@ -59,7 +59,7 @@ LilycoveCity_Harbor_EventScript_159933:: @ 8159933
 
 LilycoveCity_Harbor_EventScript_15995B:: @ 815995B
 	msgbox LilycoveCity_Harbor_Text_18B499, 5
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq LilycoveCity_Harbor_EventScript_15997E
 	call LilycoveCity_Harbor_EventScript_15998A
 	warp BattleTower_Outside, 255, 19, 23
@@ -80,9 +80,9 @@ LilycoveCity_Harbor_EventScript_15998A:: @ 815998A
 	waitmovement 0
 	delay 30
 	spriteinvisible LAST_TALKED, 13, 10
-	compare_var_to_imm FACING, 2
+	compare FACING, 2
 	call_if 1, LilycoveCity_Harbor_EventScript_1599D9
-	compare_var_to_imm FACING, 4
+	compare FACING, 4
 	call_if 1, LilycoveCity_Harbor_EventScript_1599CE
 	delay 30
 	spriteinvisible 255, 0, 0
@@ -129,9 +129,9 @@ LilycoveCity_Harbor_EventScript_1599EE:: @ 81599EE
 	waitmovement 0
 	delay 30
 	disappear 4
-	compare_var_to_imm FACING, 2
+	compare FACING, 2
 	call_if 1, LilycoveCity_Harbor_EventScript_1599D9
-	compare_var_to_imm FACING, 4
+	compare FACING, 4
 	call_if 1, LilycoveCity_Harbor_EventScript_1599CE
 	delay 30
 	spriteinvisible 255, 0, 0

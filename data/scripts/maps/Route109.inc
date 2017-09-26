@@ -279,7 +279,7 @@ Route109_EventScript_14F680:: @ 814F680
 Route109_EventScript_14F691:: @ 814F691
 	message Route109_Text_16E0F9
 	msgbox Route109_Text_16E0F9, 5
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq Route109_EventScript_14F6F1
 	goto Route109_EventScript_14F6E2
 	end
@@ -332,7 +332,7 @@ Route109_EventScript_14F725:: @ 814F725
 	goto_if_eq Route109_EventScript_14F762
 	msgbox Route109_Text_16E433, 4
 	giveitem ITEM_SOFT_SAND
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq Route109_EventScript_1A029B
 	closebutton
 	applymovement LAST_TALKED, Route109_Movement_1A083D
@@ -397,7 +397,7 @@ Route109_EventScript_14F7F2:: @ 814F7F2
 Route109_EventScript_14F809:: @ 814F809
 	trainerbattle 0, OPPONENT_RICKY_1, 0, Route109_Text_1B9C23, Route109_Text_1B9C65
 	specialvar RESULT, sub_8082C68
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq Route109_EventScript_14F830
 	msgbox Route109_Text_1B9C6E, 6
 	end
@@ -410,7 +410,7 @@ Route109_EventScript_14F830:: @ 814F830
 Route109_EventScript_14F847:: @ 814F847
 	trainerbattle 0, OPPONENT_LOLA_1, 0, Route109_Text_1B9D54, Route109_Text_1B9D87
 	specialvar RESULT, sub_8082C68
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq Route109_EventScript_14F86E
 	msgbox Route109_Text_1B9D8E, 6
 	end

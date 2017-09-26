@@ -35,7 +35,7 @@ FortreeCity_House4_EventScript_1581D6:: @ 81581D6
 	waitmovement 0
 	msgbox FortreeCity_House4_Text_186881, 4
 	giveitem ITEM_MENTAL_HERB
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq FortreeCity_House4_EventScript_1A029B
 	setflag 223
 	releaseall

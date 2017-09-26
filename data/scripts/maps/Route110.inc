@@ -12,7 +12,7 @@ Route110_MapScript1_14F914:: @ 814F914
 	call Route110_EventScript_1A0196
 	call Route110_EventScript_1A014E
 	call Route110_EventScript_1A0172
-	compare_var_to_imm 0x40a9, 1
+	compare 0x40a9, 1
 	call_if 1, Route110_EventScript_14F92F
 	end
 
@@ -132,7 +132,7 @@ Route110_EventScript_14FA25:: @ 814FA25
 Route110_EventScript_14FA2E:: @ 814FA2E
 	lockall
 	specialvar RESULT, GetRecordedCyclingRoadResults
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq Route110_EventScript_14FA49
 	msgbox Route110_Text_16F53A, 4
 	releaseall
@@ -147,9 +147,9 @@ Route110_EventScript_14FA53:: @ 814FA53
 	lock
 	faceplayer
 	specialvar RESULT, GetPlayerAvatarBike
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq Route110_EventScript_14FA84
-	compare_var_to_imm 0x40a9, 0
+	compare 0x40a9, 0
 	goto_if_eq Route110_EventScript_14FA7A
 	msgbox Route110_Text_16F26A, 4
 	release
@@ -178,7 +178,7 @@ Route110_EventScript_14FAA5:: @ 814FAA5
 Route110_EventScript_14FABC:: @ 814FABC
 	trainerbattle 0, OPPONENT_EDWIN_1, 0, Route110_Text_1BA7D2, Route110_Text_1BA803
 	specialvar RESULT, sub_8082C68
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq Route110_EventScript_14FAE3
 	msgbox Route110_Text_1BA829, 6
 	end
@@ -206,7 +206,7 @@ Route110_EventScript_14FB28:: @ 814FB28
 Route110_EventScript_14FB3F:: @ 814FB3F
 	trainerbattle 0, OPPONENT_BENJAMIN_1, 0, Route110_Text_1BA352, Route110_Text_1BA379
 	specialvar RESULT, sub_8082C68
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq Route110_EventScript_14FB66
 	msgbox Route110_Text_1BA3A5, 6
 	end
@@ -224,7 +224,7 @@ Route110_EventScript_14FB7D:: @ 814FB7D
 Route110_EventScript_14FB94:: @ 814FB94
 	trainerbattle 0, OPPONENT_ABIGAIL_1, 0, Route110_Text_1BA4A0, Route110_Text_1BA50F
 	specialvar RESULT, sub_8082C68
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq Route110_EventScript_14FBBB
 	msgbox Route110_Text_1BA52E, 6
 	end
@@ -237,7 +237,7 @@ Route110_EventScript_14FBBB:: @ 814FBBB
 Route110_EventScript_14FBD2:: @ 814FBD2
 	trainerbattle 0, OPPONENT_ISABEL_1, 0, Route110_Text_1BA990, Route110_Text_1BA9D0
 	specialvar RESULT, sub_8082C68
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq Route110_EventScript_14FBF9
 	msgbox Route110_Text_1BA9E9, 6
 	end
@@ -326,9 +326,9 @@ Route110_EventScript_14FD29:: @ 814FD29
 Route110_EventScript_14FD34:: @ 814FD34
 	lockall
 	checkgender
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	call_if 1, Route110_EventScript_14FDA7
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	call_if 1, Route110_EventScript_14FDAC
 	applymovement 28, Route110_Movement_1A0845
 	waitmovement 0
@@ -337,16 +337,16 @@ Route110_EventScript_14FD34:: @ 814FD34
 	applymovement 28, Route110_Movement_1A0835
 	waitmovement 0
 	delay 30
-	compare_var_to_imm 0x8008, 1
+	compare 0x8008, 1
 	call_if 1, Route110_EventScript_14FF14
-	compare_var_to_imm 0x8008, 2
+	compare 0x8008, 2
 	call_if 1, Route110_EventScript_14FF1F
-	compare_var_to_imm 0x8008, 3
+	compare 0x8008, 3
 	call_if 1, Route110_EventScript_14FF2A
 	checkgender
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq Route110_EventScript_14FDB1
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq Route110_EventScript_14FE2B
 	releaseall
 	end
@@ -425,22 +425,22 @@ Route110_EventScript_14FEA5:: @ 814FEA5
 
 Route110_EventScript_14FEB2:: @ 814FEB2
 	closebutton
-	compare_var_to_imm 0x8008, 1
+	compare 0x8008, 1
 	call_if 1, Route110_EventScript_14FF56
-	compare_var_to_imm 0x8008, 2
+	compare 0x8008, 2
 	call_if 1, Route110_EventScript_14FF5E
-	compare_var_to_imm 0x8008, 3
+	compare 0x8008, 3
 	call_if 1, Route110_EventScript_14FF66
 	spritebehave 28, 10
 	spritebehave 29, 10
 	disappear 28
 	reappear 29
 	delay 45
-	compare_var_to_imm 0x8008, 1
+	compare 0x8008, 1
 	call_if 1, Route110_EventScript_14FF35
-	compare_var_to_imm 0x8008, 2
+	compare 0x8008, 2
 	call_if 1, Route110_EventScript_14FF40
-	compare_var_to_imm 0x8008, 3
+	compare 0x8008, 3
 	call_if 1, Route110_EventScript_14FF4B
 	disappear 29
 	setvar 0x4069, 1

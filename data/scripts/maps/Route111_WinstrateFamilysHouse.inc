@@ -17,7 +17,7 @@ Route111_WinstrateFamilysHouse_EventScript_15BF3A:: @ 815BF3A
 	goto_if_eq Route111_WinstrateFamilysHouse_EventScript_15BF72
 	msgbox Route111_WinstrateFamilysHouse_Text_19208A, 4
 	giveitem ITEM_MACHO_BRACE
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq Route111_WinstrateFamilysHouse_EventScript_1A029B
 	setflag 277
 	goto Route111_WinstrateFamilysHouse_EventScript_15BFC4

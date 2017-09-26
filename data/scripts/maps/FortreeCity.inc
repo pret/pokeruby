@@ -57,7 +57,7 @@ FortreeCity_EventScript_14C9B3:: @ 814C9B3
 	lock
 	faceplayer
 	checkitem ITEM_DEVON_SCOPE, 1
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq FortreeCity_EventScript_14C9CF
 	msgbox FortreeCity_Text_167868, 4
 	release
@@ -65,7 +65,7 @@ FortreeCity_EventScript_14C9B3:: @ 814C9B3
 
 FortreeCity_EventScript_14C9CF:: @ 814C9CF
 	msgbox FortreeCity_Text_16788B, 5
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq FortreeCity_EventScript_14C9E4
 	release
 	end

@@ -29,11 +29,11 @@ PetalburgCity_PokemonCenter_1F_EventScript_1B1B7A:: @ 81B1B7A
 	call PetalburgCity_PokemonCenter_1F_EventScript_1A00F3
 	lock
 	faceplayer
-	compare_var_to_imm 0x8004, 1
+	compare 0x8004, 1
 	call_if 1, PetalburgCity_PokemonCenter_1F_EventScript_1B1C77
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq PetalburgCity_PokemonCenter_1F_EventScript_1B1BB1
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq PetalburgCity_PokemonCenter_1F_EventScript_1B1BBB
 	end
 
@@ -83,11 +83,11 @@ PetalburgCity_PokemonCenter_1F_EventScript_1B1C36:: @ 81B1C36
 	call PetalburgCity_PokemonCenter_1F_EventScript_1A00F3
 	lock
 	faceplayer
-	compare_var_to_imm 0x8004, 1
+	compare 0x8004, 1
 	call_if 1, PetalburgCity_PokemonCenter_1F_EventScript_1B1C77
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq PetalburgCity_PokemonCenter_1F_EventScript_1B1BB1
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq PetalburgCity_PokemonCenter_1F_EventScript_1B1BBB
 	end
 

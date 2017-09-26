@@ -35,7 +35,7 @@ Route104_EventScript_14EEC8:: @ 814EEC8
 	goto_if_eq Route104_EventScript_14EEFF
 	msgbox Route104_Text_1C55B9, 4
 	giveitem ITEM_CHESTO_BERRY
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq Route104_EventScript_1A029B
 	setflag 246
 	msgbox Route104_Text_1C5665, 4
@@ -54,7 +54,7 @@ Route104_EventScript_14EF09:: @ 814EF09
 	goto_if_eq Route104_EventScript_14EF38
 	msgbox Route104_Text_16DD91, 4
 	giveitem ITEM_WHITE_HERB
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq Route104_EventScript_1A029B
 	setflag 279
 	release
@@ -108,7 +108,7 @@ Route104_EventScript_14EF93:: @ 814EF93
 	goto_if_eq Route104_EventScript_14EFC2
 	msgbox Route104_Text_16DC5F, 4
 	giveitem ITEM_TM09
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq Route104_EventScript_1A029B
 	setflag 262
 	release
@@ -410,7 +410,7 @@ Route104_EventScript_14F189:: @ 814F189
 Route104_EventScript_14F1A0:: @ 814F1A0
 	trainerbattle 0, OPPONENT_HALEY_1, 0, Route104_Text_1B8770, Route104_Text_1B87A7
 	specialvar RESULT, sub_8082C68
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq Route104_EventScript_14F1C7
 	msgbox Route104_Text_1B87C3, 6
 	end
@@ -423,7 +423,7 @@ Route104_EventScript_14F1C7:: @ 814F1C7
 Route104_EventScript_14F1DE:: @ 814F1DE
 	trainerbattle 0, OPPONENT_WINSTON_1, 0, Route104_Text_1B88D4, Route104_Text_1B8911
 	specialvar RESULT, sub_8082C68
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq Route104_EventScript_14F205
 	msgbox Route104_Text_1B8925, 6
 	end
@@ -436,7 +436,7 @@ Route104_EventScript_14F205:: @ 814F205
 Route104_EventScript_14F21C:: @ 814F21C
 	trainerbattle 0, OPPONENT_CINDY_1, 0, Route104_Text_1B8A24, Route104_Text_1B8A61
 	specialvar RESULT, sub_8082C68
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq Route104_EventScript_14F243
 	msgbox Route104_Text_1B8A69, 6
 	end

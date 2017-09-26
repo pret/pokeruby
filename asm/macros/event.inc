@@ -226,6 +226,21 @@
 	.2byte \var2
 	.endm
 
+	@ Generic compare macro which attempts to deduce argument types based on their values
+	@ Any negative values are considered local variable indentifiers
+	@ Any values between 0x4000 to 0x4FFF and 0x8000 to 0x8FFF are considered event variable identifiers
+	.macro compare arg1, arg2
+		.if (\arg1 < 0) && (\arg2 >= 0 && \arg2 < 0xFF)
+			compare_local_to_imm -\arg1, \arg2
+		.elseif ((\arg1 >> 12) == 4 || (\arg1 >> 12) == 8) && ((\arg2 >> 12) == 4 || (\arg2 >> 12) == 8)
+			compare_var_to_var \arg1, \arg2
+		.elseif ((\arg1 >> 12) == 4 || (\arg1 >> 12) == 8) && (\arg2 >= 0 && \arg2 <= 0xFFFF)
+			compare_var_to_imm \arg1, \arg2
+		.else
+			.error "Invalid arguments for 'compare'"
+		.endif
+	.endm
+
 	@ Calls the native C function stored at `func`.
 	.macro callnative func
 	.byte 0x23

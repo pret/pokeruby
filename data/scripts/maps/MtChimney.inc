@@ -18,17 +18,17 @@ MtChimney_EventScript_15CF95:: @ 815CF95
 	showmoney 0, 0
 	nop
 	msgbox MtChimney_Text_195760, 5
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq MtChimney_EventScript_15D00B
 	checkmoney 0xc8, 0
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq MtChimney_EventScript_15D018
 	msgbox MtChimney_Text_1957A9, 4
 	checkitemspace ITEM_LAVA_COOKIE, 1
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	call_if 1, MtChimney_EventScript_15D000
 	giveitem ITEM_LAVA_COOKIE
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq MtChimney_EventScript_15CFF3
 	hidemoney 0, 0
 	release
@@ -411,7 +411,7 @@ MtChimney_EventScript_15D17D:: @ 815D17D
 	checkflag 115
 	goto_if_eq MtChimney_EventScript_15D1C6
 	msgbox MtChimney_Text_195870, 5
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq MtChimney_EventScript_15D1BC
 	msgbox MtChimney_Text_1958C6, 4
 	giveitem ITEM_METEORITE
@@ -441,7 +441,7 @@ MtChimney_EventScript_15D1DA:: @ 815D1DA
 MtChimney_EventScript_15D1E3:: @ 815D1E3
 	trainerbattle 0, OPPONENT_SHELBY_1, 0, MtChimney_Text_19597F, MtChimney_Text_1959D8
 	specialvar RESULT, sub_8082C68
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq MtChimney_EventScript_15D20A
 	msgbox MtChimney_Text_195A04, 6
 	end

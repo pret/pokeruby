@@ -7,7 +7,7 @@ EverGrandeCity_SidneysRoom_MapScripts:: @ 815B53F
 EverGrandeCity_SidneysRoom_MapScript1_15B54F:: @ 815B54F
 	checkflag 1245
 	call_if 1, EverGrandeCity_SidneysRoom_EventScript_15B564
-	compare_var_to_imm 0x409c, 1
+	compare 0x409c, 1
 	call_if 1, EverGrandeCity_SidneysRoom_EventScript_15B56A
 	end
 

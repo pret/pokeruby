@@ -2,7 +2,7 @@ Route111_EventScript_1A3858:: @ 81A3858
 	lock
 	faceplayer
 	msgbox Route111_Text_1A3520, 5
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq Route111_EventScript_1A3877
 	msgbox Route111_Text_1A37B5, 4
 	release
@@ -10,17 +10,17 @@ Route111_EventScript_1A3858:: @ 81A3858
 
 Route111_EventScript_1A3877:: @ 81A3877
 	giveitem ITEM_TM43
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq Route111_EventScript_1A38D9
 	msgbox Route111_Text_1A35C5, 4
 	closebutton
 	setflag 96
 	clearflag 948
-	compare_var_to_imm FACING, 3
+	compare FACING, 3
 	call_if 1, Route111_EventScript_1A38C3
-	compare_var_to_imm FACING, 4
+	compare FACING, 4
 	call_if 1, Route111_EventScript_1A38C3
-	compare_var_to_imm FACING, 2
+	compare FACING, 2
 	call_if 1, Route111_EventScript_1A38CE
 	disappear LAST_TALKED
 	release

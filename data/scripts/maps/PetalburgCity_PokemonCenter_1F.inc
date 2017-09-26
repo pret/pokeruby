@@ -28,17 +28,17 @@ PetalburgCity_PokemonCenter_1F_EventScript_155233:: @ 8155233
 	faceplayer
 	msgbox PetalburgCity_PokemonCenter_1F_Text_17BDC5, 4
 	specialvar RESULT, IsStarterInParty
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq PetalburgCity_PokemonCenter_1F_EventScript_15524F
 	release
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_15524F:: @ 815524F
-	compare_var_to_imm 0x4023, 0
+	compare 0x4023, 0
 	call_if 1, PetalburgCity_PokemonCenter_1F_EventScript_155272
-	compare_var_to_imm 0x4023, 1
+	compare 0x4023, 1
 	call_if 1, PetalburgCity_PokemonCenter_1F_EventScript_15527B
-	compare_var_to_imm 0x4023, 2
+	compare 0x4023, 2
 	call_if 1, PetalburgCity_PokemonCenter_1F_EventScript_155284
 	release
 	end

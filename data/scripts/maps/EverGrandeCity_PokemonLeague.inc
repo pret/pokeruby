@@ -50,9 +50,9 @@ EverGrandeCity_PokemonLeague_EventScript_15BAD2:: @ 815BAD2
 	checkflag 263
 	goto_if_eq EverGrandeCity_PokemonLeague_EventScript_15BB57
 	getplayerxy 0x4000, 0x4001
-	compare_var_to_imm 0x4000, 11
+	compare 0x4000, 11
 	call_if 4, EverGrandeCity_PokemonLeague_EventScript_15BB34
-	compare_var_to_imm 0x4000, 8
+	compare 0x4000, 8
 	call_if 3, EverGrandeCity_PokemonLeague_EventScript_15BB3F
 	message EverGrandeCity_PokemonLeague_Text_1916FD
 	waittext

@@ -19,9 +19,9 @@ MossdeepCity_House2_EventScript_15A87B:: @ 815A87B
 	closebutton
 	setflag 224
 	clearflag 933
-	compare_var_to_imm FACING, 2
+	compare FACING, 2
 	call_if 1, MossdeepCity_House2_EventScript_15A8AE
-	compare_var_to_imm FACING, 3
+	compare FACING, 3
 	call_if 1, MossdeepCity_House2_EventScript_15A8B9
 	disappear 3
 	release

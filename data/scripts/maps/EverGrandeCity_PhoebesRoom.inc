@@ -26,7 +26,7 @@ EverGrandeCity_PhoebesRoom_EventScript_15B602:: @ 815B602
 EverGrandeCity_PhoebesRoom_MapScript1_15B60F:: @ 815B60F
 	checkflag 1246
 	call_if 1, EverGrandeCity_PhoebesRoom_EventScript_15B624
-	compare_var_to_imm 0x409c, 2
+	compare 0x409c, 2
 	call_if 1, EverGrandeCity_PhoebesRoom_EventScript_15B62A
 	end
 

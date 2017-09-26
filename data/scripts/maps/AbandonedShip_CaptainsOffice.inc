@@ -7,7 +7,7 @@ AbandonedShip_CaptainsOffice_EventScript_15EAF5:: @ 815EAF5
 	checkflag 294
 	goto_if_eq AbandonedShip_CaptainsOffice_EventScript_15EB2D
 	checkitem ITEM_SCANNER, 1
-	compare_var_to_imm RESULT, 1
+	compare RESULT, 1
 	goto_if_eq AbandonedShip_CaptainsOffice_EventScript_15EB23
 	checkflag 1078
 	goto_if_eq AbandonedShip_CaptainsOffice_EventScript_15EB2D

@@ -11,17 +11,17 @@ RustboroCity_House1_EventScript_157C7D:: @ 8157C7D
 	specialvar RESULT, sub_804D89C
 	copyvar 0x8009, RESULT
 	msgbox RustboroCity_House1_Text_184EBA, 5
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	goto_if_eq RustboroCity_House1_EventScript_157CFB
 	special sub_80F9A0C
 	waitstate
 	copyvar 0x800a, 0x8004
-	compare_var_to_imm 0x8004, 255
+	compare 0x8004, 255
 	goto_if_eq RustboroCity_House1_EventScript_157CFB
 	copyvar 0x8005, 0x800a
 	specialvar RESULT, sub_804DB2C
 	copyvar 0x800b, RESULT
-	compare_var_to_var RESULT, 0x8009
+	compare RESULT, 0x8009
 	goto_if 5, RustboroCity_House1_EventScript_157D05
 	copyvar 0x8004, 0x8008
 	copyvar 0x8005, 0x800a

@@ -10,17 +10,17 @@ GraniteCave_StevensRoom_EventScript_15CBFA:: @ 815CBFA
 	setflag 189
 	msgbox GraniteCave_StevensRoom_Text_194BDD, 4
 	giveitem ITEM_TM47
-	compare_var_to_imm RESULT, 0
+	compare RESULT, 0
 	call_if 1, GraniteCave_StevensRoom_EventScript_15CC83
 	msgbox GraniteCave_StevensRoom_Text_194C8D, 4
 	closebutton
-	compare_var_to_imm FACING, 2
+	compare FACING, 2
 	call_if 1, GraniteCave_StevensRoom_EventScript_15CC6D
-	compare_var_to_imm FACING, 1
+	compare FACING, 1
 	call_if 1, GraniteCave_StevensRoom_EventScript_15CC78
-	compare_var_to_imm FACING, 3
+	compare FACING, 3
 	call_if 1, GraniteCave_StevensRoom_EventScript_15CC6D
-	compare_var_to_imm FACING, 4
+	compare FACING, 4
 	call_if 1, GraniteCave_StevensRoom_EventScript_15CC6D
 	playse 9
 	disappear 1
