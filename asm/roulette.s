@@ -1472,7 +1472,7 @@ _08115D4C: .4byte 0x000003ff
 _08115D50: .4byte gUnknown_083F8C00
 _08115D54: .4byte gSharedMem + 0x19000
 	thumb_func_end sub_8115B58
-*/
+
 	thumb_func_start sub_8115D58
 sub_8115D58: @ 8115D58
 	push {lr}
@@ -3693,7 +3693,7 @@ _08116EF2:
 	pop {r1}
 	bx r1
 	thumb_func_end sub_8116E5C
-
+*/
 	thumb_func_start sub_8116EF8
 sub_8116EF8: @ 8116EF8
 	push {r4-r7,lr}
