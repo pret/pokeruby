@@ -20,7 +20,7 @@
 #include "pokemon_storage_system.h"
 #include "rng.h"
 #include "roamer.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "rtc.h"
 #include "script.h"
 #include "secret_base.h"

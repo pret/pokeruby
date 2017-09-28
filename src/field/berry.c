@@ -974,7 +974,7 @@ const struct Berry gBerries[] =
 
 const struct BerryTree gBlankBerryTree = {0};
 
-extern u8 BerryTreeScript;
+extern u8 S_BerryTree[];
 extern u16 gScriptLastTalked;
 extern u16 gSpecialVar_0x8004;
 extern u16 gSpecialVar_0x8005;
@@ -1078,7 +1078,7 @@ bool32 FieldObjectInteractionWaterBerryTree(void)
 
 bool8 IsPlayerFacingPlantedBerryTree(void)
 {
-    if (GetFieldObjectScriptPointerForComparison() == &BerryTreeScript
+    if (GetFieldObjectScriptPointerForComparison() == S_BerryTree
      && GetStageByBerryTreeId(FieldObjectGetBerryTreeId(gSelectedMapObject)) == 0)
         return TRUE;
     else
@@ -1087,7 +1087,7 @@ bool8 IsPlayerFacingPlantedBerryTree(void)
 
 bool8 TryToWaterBerryTree(void)
 {
-    if (GetFieldObjectScriptPointerForComparison() != &BerryTreeScript)
+    if (GetFieldObjectScriptPointerForComparison() != S_BerryTree)
         return FALSE;
     else
         return FieldObjectInteractionWaterBerryTree();

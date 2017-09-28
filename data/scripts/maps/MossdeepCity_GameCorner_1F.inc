@@ -103,7 +103,7 @@ MossdeepCity_GameCorner_1F_EventScript_15AD59:: @ 815AD59
 	compare RESULT, 0
 	callif 1, MossdeepCity_GameCorner_1F_EventScript_15ADE8
 	special LoadPlayerParty
-	call MossdeepCity_GameCorner_1F_EventScript_19F806
+	call S_DoSaveDialog
 	compare RESULT, 0
 	jumpeq MossdeepCity_GameCorner_1F_EventScript_15ADE8
 	hidebox 0, 0, 15, 10

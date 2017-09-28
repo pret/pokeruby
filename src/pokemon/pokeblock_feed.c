@@ -6,7 +6,7 @@
 #include "text.h"
 #include "text_window.h"
 #include "menu.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "decompress.h"
 #include "data2.h"
 #include "sprite.h"

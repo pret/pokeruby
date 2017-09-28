@@ -20,7 +20,7 @@ BattleTower_BattleRoom_EventScript_1608FA:: @ 81608FA
 	msgbox 0x20234cc, 4
 	waittext
 	closebutton
-	special HealPlayerParty
+	special ScrSpecial_HealPlayerParty
 	setvar 0x8004, 0
 	setvar 0x8005, 0
 	special sub_813556C
@@ -56,7 +56,7 @@ BattleTower_BattleRoom_EventScript_160961:: @ 8160961
 	special sub_8135A14
 	fanfare 368
 	waitfanfare
-	special HealPlayerParty
+	special ScrSpecial_HealPlayerParty
 
 BattleTower_BattleRoom_EventScript_1609B2:: @ 81609B2
 	msgbox BattleTower_BattleRoom_Text_19AD09, 5

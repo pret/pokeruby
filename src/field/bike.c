@@ -6,7 +6,7 @@
 #include "flags.h"
 #include "global.fieldmap.h"
 #include "metatile_behavior.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "songs.h"
 #include "sound.h"
 
@@ -944,7 +944,7 @@ void GetOnOffBike(u8 var)
     {
         SetPlayerAvatarTransitionFlags(var);
         sav1_set_battle_music_maybe(BGM_CYCLING);
-        sub_8053FB0(BGM_CYCLING);
+        Overworld_ChangeMusicTo(BGM_CYCLING);
     }
 }
 

@@ -8,7 +8,7 @@
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "sprite.h"
 #include "start_menu.h"
 #include "string_util.h"

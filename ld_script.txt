@@ -85,7 +85,7 @@ SECTIONS {
         src/scene/berry_blender.o(.text);
         src/engine/play_time.o(.text);
         src/scene/new_game.o(.text);
-        src/misc/rom4.o(.text);
+        src/field/overworld.o(.text);
         src/field/fieldmap.o(.text);
         src/field/metatile_behavior.o(.text);
         src/field/field_camera.o(.text);
@@ -341,7 +341,7 @@ SECTIONS {
         data/trade.o(.rodata);
         src/scene/berry_blender.o(.rodata);
         src/scene/new_game.o(.rodata);
-        data/rom4.o(.rodata);
+        src/field/overworld.o(.rodata);
         data/tilesets.o(.rodata);
         data/maps.o(.rodata);
         src/field/fieldmap.o(.rodata);
@@ -376,6 +376,7 @@ SECTIONS {
         src/battle/battle_setup.o(.rodata);
         data/cable_club.o(.rodata);
         data/mori_debug_menu.o(.rodata);
+        src/field/trainer_see.o(.rodata);
         data/trainer_see.o(.rodata);
         src/field/wild_encounter.o(.rodata);
         data/wild_encounter.o(.rodata);

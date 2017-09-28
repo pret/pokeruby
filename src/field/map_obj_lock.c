@@ -75,7 +75,7 @@ bool8 sub_8064DB4(void)
     }
 }
 
-void sub_8064DD8(void)
+void LockSelectedMapObject(void)
 {
     u8 taskId;
     FreezeMapObjectsExceptOne(gSelectedMapObject);

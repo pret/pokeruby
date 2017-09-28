@@ -38,7 +38,7 @@ void sub_80C9FC0(u8);
 void ItemUseOutOfBattle_Repel(u8);
 void ItemUseOutOfBattle_BlackWhiteFlute(u8);
 void task08_080A1C44(u8);
-u8 sub_80CA1C8(void);
+u8 CanUseEscapeRopeOnCurrMap(void);
 void ItemUseOutOfBattle_EscapeRope(u8);
 void ItemUseOutOfBattle_EvolutionStone(u8);
 void ItemUseInBattle_PokeBall(u8);

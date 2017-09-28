@@ -8,7 +8,7 @@
 #include "name_string_util.h"
 #include "palette.h"
 #include "pokemon_icon.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "sprite.h"
 #include "string_util.h"
 #include "strings2.h"

@@ -14,7 +14,7 @@
 #include "metatile_behavior.h"
 #include "palette.h"
 #include "pokemon.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "script.h"
 #include "string_util.h"
 #include "strings.h"
@@ -270,7 +270,7 @@ void sub_80BBAF0(void)
 
 bool8 sub_80BBB24(void)
 {
-    if (gMapHeader.mapType == 9 && VarGet(VAR_0x4097) == 0)
+    if (gMapHeader.mapType == MAP_TYPE_SECRET_BASE && VarGet(VAR_0x4097) == 0)
         return FALSE;
     return TRUE;
 }
@@ -380,7 +380,7 @@ void sub_80BBDD0(void)
                 gScriptResult = gMapHeader.events->mapObjects[objid].graphicsId + 0x3f20;
                 VarSet(gScriptResult, gDecorations[roomdecor[decidx]].tiles[0]);
                 gScriptResult = gMapHeader.events->mapObjects[objid].localId;
-                FlagReset(gSpecialVar_0x8004 + 0xAE);
+                FlagClear(gSpecialVar_0x8004 + 0xAE);
                 show_sprite(gScriptResult, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
                 sub_805C0F8(gScriptResult, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, gSpecialVar_0x8006, gSpecialVar_0x8007);
                 sub_805C78C(gScriptResult, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
@@ -690,7 +690,7 @@ _080BBEDA:\n\
     adds r0, 0xAE\n\
     lsls r0, 16\n\
     lsrs r0, 16\n\
-    bl FlagReset\n\
+    bl FlagClear\n\
     ldr r3, _080BBF9C @ =gScriptResult\n\
     ldrb r0, [r3]\n\
     mov r4, r10\n\

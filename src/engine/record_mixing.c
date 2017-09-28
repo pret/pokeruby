@@ -14,7 +14,7 @@
 #include "menu.h"
 #include "mystery_event_script.h"
 #include "rng.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "save.h"
 #include "script.h"
 #include "secret_base.h"
