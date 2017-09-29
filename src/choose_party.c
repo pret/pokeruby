@@ -6,9 +6,10 @@
 #include "name_string_util.h"
 #include "palette.h"
 #include "party_menu.h"
+#include "pokemon_menu.h"
 #include "pokemon.h"
 #include "pokemon_summary_screen.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "script.h"
 #include "songs.h"
 #include "sound.h"
@@ -50,10 +51,8 @@ extern void PartyMenuPrintMonsLevelOrStatus(void);
 extern void PrintPartyMenuMonNicknames(void);
 extern void sub_806BC3C(u8, u8);
 extern u8 sub_806B58C(u8);
-extern void sub_806D538();
 extern u16 sub_806BE38();
 extern u8 sub_806CA38();
-extern void sub_808B5B4();
 extern TaskFunc PartyMenuGetPopupMenuFunc(u8, const struct PartyPopupMenu *, const struct PartyMenuItem *, u8);
 extern u8 sub_806B124();
 extern void sub_806C994();
@@ -84,8 +83,6 @@ extern void PartyMenuDoPutNicknameTilemap(u16, u8, u8, u8, const u8 *);
 extern void box_print(u8, int, const u8 *);
 extern void sub_806BCE8(void);
 extern void sub_806E750(u8, const struct PartyPopupMenu *, const struct PartyMenuItem *, int);
-extern u16 sub_806BD80();
-extern void sub_806BF74();
 
 static void ClearPartySelection(void);
 static bool8 IsMonAllowedInBattleTower(struct Pokemon *);

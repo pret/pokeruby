@@ -10,7 +10,7 @@
 #include "money.h"
 #include "palette.h"
 #include "pokedex.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "script_pokemon_80C4.h"
 #include "songs.h"
 #include "sound.h"
@@ -509,7 +509,7 @@ static void sub_8093688(void)
     ewram0.var_5 = 0;
     ewram0.var_6 = 0;
     for (i = 0; i < 4; i++)
-        sub_80EB3FC(ewram0.var_20[i], ewram0.var_64.var_28[i]);
+        EasyChat_GetWordText(ewram0.var_20[i], ewram0.var_64.var_28[i]);
     sub_80936D4();
 }
 

@@ -4,7 +4,7 @@
 #include "main.h"
 #include "pokemon.h"
 #include "rng.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "species.h"
 #include "sprite.h"
 #include "string_util.h"
@@ -17,9 +17,9 @@
 #define LOHALF(n) ((n) & 0xFFFF)
 
 extern u8 unk_2000000[];
-extern u16 word_2024E82;
+extern u16 gMoveToLearn;
 
-static EWRAM_DATA u8 byte_2024E88 = 0;
+static EWRAM_DATA u8 sLearningMoveTableID = 0;
 
 u8 gPlayerPartyCount;
 struct Pokemon gPlayerParty[6];
@@ -69,6 +69,7 @@ void ZeroEnemyPartyMons(void)
 void CreateMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId)
 {
     u32 arg;
+
     ZeroMonData(mon);
     CreateBoxMon(&mon->box, species, level, fixedIV, hasFixedPersonality, fixedPersonality, otIdType, fixedOtId);
     SetMonData(mon, MON_DATA_LEVEL, &level);
@@ -583,29 +584,33 @@ void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon)
     }
 }
 
-u16 sub_803B7C8(struct Pokemon *mon, u8 a2)
+u16 MonTryLearningNewMove(struct Pokemon *mon, bool8 firstMove)
 {
     u32 retVal = 0;
     u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
     u8 level = GetMonData(mon, MON_DATA_LEVEL, NULL);
 
-    if (a2)
+    // since you can learn more than one move per level
+    // the game needs to know whether you decided to
+    // learn it or keep the old set to avoid asking
+    // you to learn the same move over and over again
+    if (firstMove)
     {
-        byte_2024E88 = retVal;
+        sLearningMoveTableID = 0;
 
-        while ((gLevelUpLearnsets[species][byte_2024E88] & 0xFE00) != (level << 9))
+        while ((gLevelUpLearnsets[species][sLearningMoveTableID] & 0xFE00) != (level << 9))
         {
-            byte_2024E88++;
-            if (gLevelUpLearnsets[species][byte_2024E88] == (u16)-1)
+            sLearningMoveTableID++;
+            if (gLevelUpLearnsets[species][sLearningMoveTableID] == 0xFFFF)
                 return 0;
         }
     }
 
-    if ((gLevelUpLearnsets[species][byte_2024E88] & 0xFE00) == (level << 9))
+    if ((gLevelUpLearnsets[species][sLearningMoveTableID] & 0xFE00) == (level << 9))
     {
-        word_2024E82 = (gLevelUpLearnsets[species][byte_2024E88] & 0x1FF);
-        byte_2024E88++;
-        retVal = GiveMoveToMon(mon, word_2024E82);
+        gMoveToLearn = (gLevelUpLearnsets[species][sLearningMoveTableID] & 0x1FF);
+        sLearningMoveTableID++;
+        retVal = GiveMoveToMon(mon, gMoveToLearn);
     }
 
     return retVal;

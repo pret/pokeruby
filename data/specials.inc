@@ -7,7 +7,7 @@
 .set __special__, 0
 	.align 2
 gSpecials::
-	def_special HealPlayerParty
+	def_special ScrSpecial_HealPlayerParty
 	def_special SetCableClubWarp
 	def_special DoCableClubWarp
 	def_special sub_80810DC
@@ -58,15 +58,15 @@ gSpecials::
 	def_special FieldObjectInteractionWaterBerryTree
 	def_special PlayerHasBerries
 	def_special IsEnigmaBerryValid
-	def_special sub_8082558
-	def_special sub_80826D8
-	def_special sub_8082718
-	def_special sub_8082564
-	def_special sub_80847C8
+	def_special ScrSpecial_GetTrainerBattleMode
+	def_special ScrSpecial_ShowTrainerIntroSpeech
+	def_special ScrSpecial_ShowTrainerNonBattlingSpeech
+	def_special ScrSpecial_HasTrainerBeenFought
+	def_special ScrSpecial_EndTrainerApproach
 	def_special PlayTrainerEncounterMusic
 	def_special sub_8082C68
-	def_special sub_8082C9C
-	def_special sub_80826B0
+	def_special ScrSpecial_GetTrainerEyeRematchFlag
+	def_special ScrSpecial_StartTrainerEyeRematch
 	def_special ShowPokemonStorageSystem
 	def_special CheckForAlivePartyMons
 	def_special TurnOffTVScreen
@@ -100,32 +100,32 @@ gSpecials::
 	def_special sub_80C5044
 	def_special GiveMonArtistRibbon
 	def_special sub_808363C
-	def_special InitSaveDialog
+	def_special ScrSpecial_DoSaveDialog
 	def_special DoWateringBerryTreeAnim
 	def_special sub_80E60D8
 	def_special sub_80EB7C4
-	def_special sub_80F7B14
-	def_special sub_80F7B2C
-	def_special sub_80F7B40
-	def_special sub_80F7C70
-	def_special sub_80F7C84
-	def_special sub_80F7C90
-	def_special sub_80F7C54
+	def_special ScrSpecial_GetCurrentMauvilleMan
+	def_special ScrSpecial_HasBardSongBeenChanged
+	def_special ScrSpecial_SaveBardSongLyrics
+	def_special ScrSpecial_GetHipsterSpokenFlag
+	def_special ScrSpecial_SetHipsterSpokenFlag
+	def_special ScrSpecial_HipsterTeachWord
+	def_special ScrSpecial_PlayBardSong
 	def_special sub_80F83D0
-	def_special sub_80F7CF4
-	def_special sub_80F7CC8
-	def_special sub_80F889C
-	def_special sub_80F8888
-	def_special sub_80F8874
-	def_special sub_80F88AC
-	def_special sub_80F88FC
-	def_special sub_80F88E0
-	def_special sub_8109E34
-	def_special sub_8109C44
-	def_special sub_8109C58
-	def_special sub_8109C90
-	def_special sub_8109CF0
-	def_special sub_8109DE0
+	def_special ScrSpecial_GenerateGiddyLine
+	def_special ScrSpecial_GiddyShouldTellAnotherTale
+	def_special ScrSpecial_StorytellerGetFreeStorySlot
+	def_special ScrSpecial_StorytellerDisplayStory
+	def_special ScrSpecial_StorytellerStoryListMenu
+	def_special ScrSpecial_StorytellerUpdateStat
+	def_special ScrSpecial_StorytellerInitializeRandomStat
+	def_special ScrSpecial_HasStorytellerAlreadyRecorded
+	def_special ScrSpecial_TraderMenuGetDecoration
+	def_special ScrSpecial_GetTraderTradedFlag
+	def_special ScrSpecial_DoesPlayerHaveNoDecorations
+	def_special ScrSpecial_IsDecorationFull
+	def_special ScrSpecial_TraderMenuGiveDecoration
+	def_special ScrSpecial_TraderDoDecorationTrade
 	def_special GetShroomishSizeRecordInfo
 	def_special CompareShroomishSize
 	def_special GetBarboachSizeRecordInfo
@@ -162,9 +162,9 @@ gSpecials::
 	def_special sub_8123218
 	def_special sub_8053E90
 	def_special StartWallClock
-	def_special sub_810D6B8
-	def_special ChooseStarter
-	def_special StartBattle_WallyTutorial
+	def_special ScrSpecial_ViewWallClock
+	def_special ScrSpecial_ChooseStarter
+	def_special ScrSpecial_StartWallyTutorialBattle
 	def_special sub_80BF9F8
 	def_special sub_80F9A0C
 	def_special sub_810CA00
@@ -178,7 +178,7 @@ gSpecials::
 	def_special sub_810FF48
 	def_special sub_810FAA0
 	def_special sub_810FF60
-	def_special RockSmashWildEncounter
+	def_special ScrSpecial_RockSmashWildEncounter
 	def_special GabbyAndTyGetBattleNum
 	def_special sub_80BDC14
 	def_special GabbyAndTyBeforeInterview
@@ -229,11 +229,11 @@ gSpecials::
 	def_special sub_80F9A4C
 	def_special sub_80F9EEC
 	def_special sub_80FA0DC
-	def_special sub_80F9F84
-	def_special sub_80F9F3C
+	def_special ScrSpecial_GetPokemonNicknameAndMoveName
+	def_special ScrSpecial_CountPokemonMoves
 	def_special sub_8132670
 	def_special GetRecordedCyclingRoadResults
-	def_special BeginCyclingRoadChallenge
+	def_special ScrSpecial_BeginCyclingRoadChallenge
 	def_special GetPlayerAvatarBike
 	def_special FinishCyclingRoadChallenge
 	def_special UpdateCyclingRoadState
@@ -269,9 +269,9 @@ gSpecials::
 	def_special ShowBerryBlenderRecordWindow
 	def_special ResetTrickHouseEndRoomFlag
 	def_special SetTrickHouseEndRoomFlag
-	def_special TryCreatePCMenu
+	def_special ScrSpecial_CreatePCMenu
 	def_special AccessHallOfFamePC
-	def_special sub_810D6A4
+	def_special ScrSpecial_ShowDiploma
 	def_special CheckLeadMonCool
 	def_special CheckLeadMonBeauty
 	def_special CheckLeadMonCute
@@ -301,7 +301,7 @@ gSpecials::
 	def_special sub_810F4FC
 	def_special LeadMonHasEffortRibbon
 	def_special GivLeadMonEffortRibbon
-	def_special GetLeadMonEVCount
+	def_special ScrSpecial_AreLeadMonEVsMaxedOut
 	def_special sub_8064EAC
 	def_special sub_8064ED4
 	def_special InitRoamer
@@ -318,9 +318,9 @@ gSpecials::
 	def_special IsPokerusInParty
 	def_special sub_8069D78
 	def_special sub_810F758
-	def_special StartBattle_GroudonKyogre
-	def_special StartBattle_Rayquaza
-	def_special StartBattle_Regi
+	def_special ScrSpecial_StartGroudonKyogreBattle
+	def_special ScrSpecial_StartRayquazaBattle
+	def_special ScrSpecial_StartRegiBattle
 	def_special sub_8082524
 	def_special DoSealedChamberShakingEffect2
 	def_special sub_810F828
@@ -330,7 +330,7 @@ gSpecials::
 	def_special ShowContestEntryMonPic
 	def_special sub_80C5164
 	def_special sub_8134AB4
-	def_special StartBattle_SouthernIsland
+	def_special ScrSpecial_StartSouthernIslandBattle
 	def_special SetRoute119Weather
 	def_special SetRoute123Weather
 	def_special ScriptGetMultiplayerId

@@ -11,7 +11,7 @@
 #include "menu.h"
 #include "save.h"
 #include "species.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "m4a.h"
 #include "data2.h"
 #include "decompress.h"

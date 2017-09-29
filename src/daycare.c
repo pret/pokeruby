@@ -21,9 +21,7 @@
 #include "sound.h"
 #include "songs.h"
 #include "script.h"
-#include "rom4.h"
-
-extern u16 word_2024E82;
+#include "overworld.h"
 
 IWRAM_DATA u16 gUnknown_03000470[52];
 IWRAM_DATA u16 gUnknown_030004D8[4];
@@ -150,6 +148,9 @@ static void sub_80414C0(struct DayCareData * daycare_data)
     }
 }
 
+u8 TryIncrementMonLevel(struct Pokemon *);
+extern u16 gMoveToLearn;
+
 static void DayCare_LevelUpMoves(struct Pokemon * mon)
 {
     s32 i;
@@ -161,11 +162,11 @@ static void DayCare_LevelUpMoves(struct Pokemon * mon)
         if (TryIncrementMonLevel(mon))
         {
             r6 = 1;
-            while ((temp = sub_803B7C8(mon, r6)) != 0)
+            while ((temp = MonTryLearningNewMove(mon, r6)) != 0)
             {
                 r6 = 0;
                 if (temp == 0xffff)
-                    DeleteFirstMoveAndGiveMoveToMon(mon, word_2024E82);
+                    DeleteFirstMoveAndGiveMoveToMon(mon, gMoveToLearn);
             }
         }
         else

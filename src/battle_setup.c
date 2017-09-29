@@ -18,7 +18,7 @@
 #include "opponent_constants.h"
 #include "palette.h"
 #include "rng.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "safari_zone.h"
 #include "script.h"
 #include "script_pokemon_80C4.h"
@@ -37,15 +37,15 @@ extern u16 gScriptResult;
 
 extern void (*gFieldCallback)(void);
 
-EWRAM_DATA u16 gTrainerBattleMode = 0;
+EWRAM_DATA static u16 sTrainerBattleMode = 0;
 EWRAM_DATA u16 gTrainerBattleOpponent = 0;
-EWRAM_DATA u16 gTrainerMapObjectLocalId = 0;
-EWRAM_DATA u8 *gTrainerIntroSpeech = NULL;
-EWRAM_DATA u8 *gTrainerDefeatSpeech = NULL;
-EWRAM_DATA u8 *gTrainerVictorySpeech = NULL;
-EWRAM_DATA u8 *gTrainerCannotBattleSpeech = NULL;
-EWRAM_DATA u8 *gTrainerBattleScriptReturnAddress = NULL;
-EWRAM_DATA u8 *gTrainerBattleEndScript = NULL;
+EWRAM_DATA static u16 sTrainerMapObjectLocalId = 0;
+EWRAM_DATA static u8 *sTrainerIntroSpeech = NULL;
+EWRAM_DATA static u8 *sTrainerDefeatSpeech = NULL;
+EWRAM_DATA static u8 *sTrainerVictorySpeech = NULL;
+EWRAM_DATA static u8 *sTrainerCannotBattleSpeech = NULL;
+EWRAM_DATA static u8 *sTrainerBattleScriptRetAddr = NULL;
+EWRAM_DATA static u8 *sTrainerBattleEndScript = NULL;
 
 extern u16 gBattleTypeFlags;
 extern u16 gScriptLastTalked;
@@ -62,80 +62,99 @@ extern u8 gUnknown_0819F8AE[];
 extern u8 gUnknown_0819F80B[];
 extern u8 gUnknown_081C6C02[];
 
-
+// The first transition is used if the enemy pokemon are lower level than our pokemon.
+// Otherwise, the second transition is used.
 static const u8 gBattleTransitionTable_Wild[][2] =
 {
-    {8, 9},
-    {5, 10},
-    {0, 10},
-    {7, 6},
+    {B_TRANSITION_SLICE,               B_TRANSITION_WHITEFADE},     // Normal
+    {B_TRANSITION_CLOCKWISE_BLACKFADE, B_TRANSITION_GRID_SQUARES},  // Cave
+    {B_TRANSITION_BLUR,                B_TRANSITION_GRID_SQUARES},  // Cave with flash used
+    {B_TRANSITION_WAVE,                B_TRANSITION_RIPPLE},        // Water
 };
 static const u8 gBattleTransitionTable_Trainer[][2] =
 {
-    {4, 11},
-    {2, 3},
-    {0, 10},
-    {1, 6},
+    {B_TRANSITION_POKEBALLS_TRAIL, B_TRANSITION_SHARDS},        // Normal
+    {B_TRANSITION_SHUFFLE,         B_TRANSITION_BIG_POKEBALL},  // Cave
+    {B_TRANSITION_BLUR,            B_TRANSITION_GRID_SQUARES},  // Cave with flash used
+    {B_TRANSITION_SWIRL,           B_TRANSITION_RIPPLE},        // Water
 };
-static const struct TrainerBattleSpec gTrainerBattleSpecs_0[] =
+
+enum
 {
-    {&gTrainerBattleMode, 0},
-    {&gTrainerBattleOpponent, 1},
-    {&gTrainerMapObjectLocalId, 1},
-    {&gTrainerIntroSpeech, 2},
-    {&gTrainerDefeatSpeech, 2},
-    {&gTrainerVictorySpeech, 5},
-    {&gTrainerCannotBattleSpeech, 5},
-    {&gTrainerBattleEndScript, 5},
-    {&gTrainerBattleScriptReturnAddress, 6},
+    TRAINER_PARAM_LOAD_VAL_8BIT,
+    TRAINER_PARAM_LOAD_VAL_16BIT,
+    TRAINER_PARAM_LOAD_VAL_32BIT,
+    TRAINER_PARAM_CLEAR_VAL_8BIT,
+    TRAINER_PARAM_CLEAR_VAL_16BIT,
+    TRAINER_PARAM_CLEAR_VAL_32BIT,
+    TRAINER_PARAM_LOAD_SCRIPT_RET_ADDR,
 };
-static const struct TrainerBattleSpec gTrainerBattleSpecs_1[] =
+
+struct TrainerBattleParameter
 {
-    {&gTrainerBattleMode, 0},
-    {&gTrainerBattleOpponent, 1},
-    {&gTrainerMapObjectLocalId, 1},
-    {&gTrainerIntroSpeech, 2},
-    {&gTrainerDefeatSpeech, 2},
-    {&gTrainerVictorySpeech, 5},
-    {&gTrainerCannotBattleSpeech, 5},
-    {&gTrainerBattleEndScript, 2},
-    {&gTrainerBattleScriptReturnAddress, 6},
+    void *varPtr;
+    u8 ptrType;
 };
-static const struct TrainerBattleSpec gTrainerBattleSpecs_2[] =
+
+static const struct TrainerBattleParameter gTrainerBattleSpecs_0[] =
 {
-    {&gTrainerBattleMode, 0},
-    {&gTrainerBattleOpponent, 1},
-    {&gTrainerMapObjectLocalId, 1},
-    {&gTrainerIntroSpeech, 2},
-    {&gTrainerDefeatSpeech, 2},
-    {&gTrainerVictorySpeech, 5},
-    {&gTrainerCannotBattleSpeech, 2},
-    {&gTrainerBattleEndScript, 5},
-    {&gTrainerBattleScriptReturnAddress, 6},
+    {&sTrainerBattleMode,          TRAINER_PARAM_LOAD_VAL_8BIT},
+    {&gTrainerBattleOpponent,      TRAINER_PARAM_LOAD_VAL_16BIT},
+    {&sTrainerMapObjectLocalId,    TRAINER_PARAM_LOAD_VAL_16BIT},
+    {&sTrainerIntroSpeech,         TRAINER_PARAM_LOAD_VAL_32BIT},
+    {&sTrainerDefeatSpeech,        TRAINER_PARAM_LOAD_VAL_32BIT},
+    {&sTrainerVictorySpeech,       TRAINER_PARAM_CLEAR_VAL_32BIT},
+    {&sTrainerCannotBattleSpeech,  TRAINER_PARAM_CLEAR_VAL_32BIT},
+    {&sTrainerBattleEndScript,     TRAINER_PARAM_CLEAR_VAL_32BIT},
+    {&sTrainerBattleScriptRetAddr, TRAINER_PARAM_LOAD_SCRIPT_RET_ADDR},
 };
-static const struct TrainerBattleSpec gTrainerBattleSpecs_3[] =
+static const struct TrainerBattleParameter gTrainerBattleSpecs_1[] =
 {
-    {&gTrainerBattleMode, 0},
-    {&gTrainerBattleOpponent, 1},
-    {&gTrainerMapObjectLocalId, 1},
-    {&gTrainerIntroSpeech, 5},
-    {&gTrainerDefeatSpeech, 2},
-    {&gTrainerVictorySpeech, 5},
-    {&gTrainerCannotBattleSpeech, 5},
-    {&gTrainerBattleEndScript, 5},
-    {&gTrainerBattleScriptReturnAddress, 6},
+    {&sTrainerBattleMode,          TRAINER_PARAM_LOAD_VAL_8BIT},
+    {&gTrainerBattleOpponent,      TRAINER_PARAM_LOAD_VAL_16BIT},
+    {&sTrainerMapObjectLocalId,    TRAINER_PARAM_LOAD_VAL_16BIT},
+    {&sTrainerIntroSpeech,         TRAINER_PARAM_LOAD_VAL_32BIT},
+    {&sTrainerDefeatSpeech,        TRAINER_PARAM_LOAD_VAL_32BIT},
+    {&sTrainerVictorySpeech,       TRAINER_PARAM_CLEAR_VAL_32BIT},
+    {&sTrainerCannotBattleSpeech,  TRAINER_PARAM_CLEAR_VAL_32BIT},
+    {&sTrainerBattleEndScript,     TRAINER_PARAM_LOAD_VAL_32BIT},
+    {&sTrainerBattleScriptRetAddr, TRAINER_PARAM_LOAD_SCRIPT_RET_ADDR},
 };
-static const struct TrainerBattleSpec gTrainerBattleSpecs_4[] =
+static const struct TrainerBattleParameter gTrainerBattleSpecs_2[] =
 {
-    {&gTrainerBattleMode, 0},
-    {&gTrainerBattleOpponent, 1},
-    {&gTrainerMapObjectLocalId, 1},
-    {&gTrainerIntroSpeech, 2},
-    {&gTrainerDefeatSpeech, 2},
-    {&gTrainerVictorySpeech, 5},
-    {&gTrainerCannotBattleSpeech, 2},
-    {&gTrainerBattleEndScript, 2},
-    {&gTrainerBattleScriptReturnAddress, 6},
+    {&sTrainerBattleMode,          TRAINER_PARAM_LOAD_VAL_8BIT},
+    {&gTrainerBattleOpponent,      TRAINER_PARAM_LOAD_VAL_16BIT},
+    {&sTrainerMapObjectLocalId,    TRAINER_PARAM_LOAD_VAL_16BIT},
+    {&sTrainerIntroSpeech,         TRAINER_PARAM_LOAD_VAL_32BIT},
+    {&sTrainerDefeatSpeech,        TRAINER_PARAM_LOAD_VAL_32BIT},
+    {&sTrainerVictorySpeech,       TRAINER_PARAM_CLEAR_VAL_32BIT},
+    {&sTrainerCannotBattleSpeech,  TRAINER_PARAM_LOAD_VAL_32BIT},
+    {&sTrainerBattleEndScript,     TRAINER_PARAM_CLEAR_VAL_32BIT},
+    {&sTrainerBattleScriptRetAddr, TRAINER_PARAM_LOAD_SCRIPT_RET_ADDR},
+};
+static const struct TrainerBattleParameter gTrainerBattleSpecs_3[] =
+{
+    {&sTrainerBattleMode,          TRAINER_PARAM_LOAD_VAL_8BIT},
+    {&gTrainerBattleOpponent,      TRAINER_PARAM_LOAD_VAL_16BIT},
+    {&sTrainerMapObjectLocalId,    TRAINER_PARAM_LOAD_VAL_16BIT},
+    {&sTrainerIntroSpeech,         TRAINER_PARAM_CLEAR_VAL_32BIT},
+    {&sTrainerDefeatSpeech,        TRAINER_PARAM_LOAD_VAL_32BIT},
+    {&sTrainerVictorySpeech,       TRAINER_PARAM_CLEAR_VAL_32BIT},
+    {&sTrainerCannotBattleSpeech,  TRAINER_PARAM_CLEAR_VAL_32BIT},
+    {&sTrainerBattleEndScript,     TRAINER_PARAM_CLEAR_VAL_32BIT},
+    {&sTrainerBattleScriptRetAddr, TRAINER_PARAM_LOAD_SCRIPT_RET_ADDR},
+};
+static const struct TrainerBattleParameter gTrainerBattleSpecs_4[] =
+{
+    {&sTrainerBattleMode,          TRAINER_PARAM_LOAD_VAL_8BIT},
+    {&gTrainerBattleOpponent,      TRAINER_PARAM_LOAD_VAL_16BIT},
+    {&sTrainerMapObjectLocalId,    TRAINER_PARAM_LOAD_VAL_16BIT},
+    {&sTrainerIntroSpeech,         TRAINER_PARAM_LOAD_VAL_32BIT},
+    {&sTrainerDefeatSpeech,        TRAINER_PARAM_LOAD_VAL_32BIT},
+    {&sTrainerVictorySpeech,       TRAINER_PARAM_CLEAR_VAL_32BIT},
+    {&sTrainerCannotBattleSpeech,  TRAINER_PARAM_LOAD_VAL_32BIT},
+    {&sTrainerBattleEndScript,     TRAINER_PARAM_LOAD_VAL_32BIT},
+    {&sTrainerBattleScriptRetAddr, TRAINER_PARAM_LOAD_SCRIPT_RET_ADDR},
 };
 
 const struct TrainerEyeTrainer gTrainerEyeTrainers[] =
@@ -424,17 +443,32 @@ const struct TrainerEyeTrainer gTrainerEyeTrainers[] =
 
 static const u16 sBadgeFlags[] = {BADGE01_GET, BADGE02_GET, BADGE03_GET, BADGE04_GET, BADGE05_GET, BADGE06_GET, BADGE07_GET, BADGE08_GET};
 
-void task01_battle_start(u8 taskId)
+static void DoStandardWildBattle(void);
+static void DoSafariBattle(void);
+static void SetTrainerFlagsAfterTrainerEyeRematch(void);
+static void CB2_EndWildBattle(void);
+static void CB2_EndScriptedWildBattle(void);
+static u8 GetWildBattleTransition(void);
+static u8 GetTrainerBattleTransition(void);
+static void CB2_GiveStarter(void);
+static void CB2_StartFirstBattle(void);
+static void CB2_EndFirstBattle(void);
+static bool32 IsPlayerDefeated(u32 a1);
+
+#define tState data[0]
+#define tTransition data[1]
+
+static void Task_BattleStart(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    switch (data[0])
+    switch (tState)
     {
     case 0:
         if (!FieldPoisonEffectIsRunning()) // is poison not active?
         {
-            sub_811AABC(data[1]);
-            data[0]++; // go to case 1.
+            BattleTransition_StartOnField(tTransition);
+            tState++; // go to case 1.
         }
         break;
     case 1:
@@ -449,132 +483,135 @@ void task01_battle_start(u8 taskId)
     }
 }
 
-void task_add_01_battle_start(u8 transition, u16 song)
+static void CreateBattleStartTask(u8 transition, u16 song)
 {
-    u8 taskId = CreateTask(task01_battle_start, 1);
+    u8 taskId = CreateTask(Task_BattleStart, 1);
 
-    gTasks[taskId].data[1] = transition;
+    gTasks[taskId].tTransition = transition;
     current_map_music_set__default_for_battle(song);
 }
 
-void CheckForSafariZoneAndProceed(void)
+#undef tState
+#undef tTransition
+
+void BattleSetup_StartWildBattle(void)
 {
     if (GetSafariZoneFlag())
-        StartBattle_Safari();
+        DoSafariBattle();
     else
-        StartBattle_StandardWild();
+        DoStandardWildBattle();
 }
 
-void StartBattle_StandardWild(void)
+static void DoStandardWildBattle(void)
 {
     ScriptContext2_Enable();
     FreezeMapObjects();
     sub_80597F4();
-    gMain.savedCallback = HandleWildBattleEnd;
+    gMain.savedCallback = CB2_EndWildBattle;
     gBattleTypeFlags = 0;
-    task_add_01_battle_start(GetWildBattleTransition(), 0);
+    CreateBattleStartTask(GetWildBattleTransition(), 0);
     IncrementGameStat(7);
     IncrementGameStat(8);
 }
 
-void StartBattle_Roamer(void)
+void BattleSetup_StartRoamerBattle(void)
 {
     ScriptContext2_Enable();
     FreezeMapObjects();
     sub_80597F4();
-    gMain.savedCallback = HandleWildBattleEnd;
+    gMain.savedCallback = CB2_EndWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_ROAMER;
-    task_add_01_battle_start(GetWildBattleTransition(), 0);
+    CreateBattleStartTask(GetWildBattleTransition(), 0);
     IncrementGameStat(7);
     IncrementGameStat(8);
 }
 
-void StartBattle_Safari(void)
+static void DoSafariBattle(void)
 {
     ScriptContext2_Enable();
     FreezeMapObjects();
     sub_80597F4();
     gMain.savedCallback = sub_80C824C;
     gBattleTypeFlags = BATTLE_TYPE_SAFARI;
-    task_add_01_battle_start(GetWildBattleTransition(), 0);
+    CreateBattleStartTask(GetWildBattleTransition(), 0);
 }
 
-void task_add_01_battle_start_with_music_and_stats(void)
+static void StartTheBattle(void)
 {
-    task_add_01_battle_start(GetTrainerBattleTransition(), 0);
+    CreateBattleStartTask(GetTrainerBattleTransition(), 0);
     IncrementGameStat(7);
     IncrementGameStat(9);
 }
 
 //Initiates battle where Wally catches Ralts
-void StartBattle_WallyTutorial(void)
+void ScrSpecial_StartWallyTutorialBattle(void)
 {
     CreateMaleMon(&gEnemyParty[0], SPECIES_RALTS, 5);
     ScriptContext2_Enable();
     gMain.savedCallback = c2_exit_to_overworld_1_continue_scripts_restart_music;
     gBattleTypeFlags = BATTLE_TYPE_WALLY_TUTORIAL;
-    task_add_01_battle_start(8, 0);
+    CreateBattleStartTask(B_TRANSITION_SLICE, 0);
 }
 
-void StartBattle_ScriptedWild(void)
+void BattleSetup_StartScriptedWildBattle(void)
 {
     ScriptContext2_Enable();
-    gMain.savedCallback = HandleScriptedWildBattleEnd;
+    gMain.savedCallback = CB2_EndScriptedWildBattle;
     gBattleTypeFlags = 0;
-    task_add_01_battle_start(GetWildBattleTransition(), 0);
+    CreateBattleStartTask(GetWildBattleTransition(), 0);
     IncrementGameStat(7);
     IncrementGameStat(8);
 }
 
-void StartBattle_SouthernIsland(void)
+void ScrSpecial_StartSouthernIslandBattle(void)
 {
     ScriptContext2_Enable();
-    gMain.savedCallback = HandleScriptedWildBattleEnd;
+    gMain.savedCallback = CB2_EndScriptedWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_LEGENDARY;
-    task_add_01_battle_start(GetWildBattleTransition(), 0);
+    CreateBattleStartTask(GetWildBattleTransition(), 0);
     IncrementGameStat(7);
     IncrementGameStat(8);
 }
 
-void StartBattle_Rayquaza(void)
+void ScrSpecial_StartRayquazaBattle(void)
 {
     ScriptContext2_Enable();
-    gMain.savedCallback = HandleScriptedWildBattleEnd;
+    gMain.savedCallback = CB2_EndScriptedWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_LEGENDARY;
-    task_add_01_battle_start(0, BGM_BATTLE34);
+    CreateBattleStartTask(B_TRANSITION_BLUR, BGM_BATTLE34);
     IncrementGameStat(7);
     IncrementGameStat(8);
 }
 
-void StartBattle_GroudonKyogre(void)
+void ScrSpecial_StartGroudonKyogreBattle(void)
 {
     ScriptContext2_Enable();
-    gMain.savedCallback = HandleScriptedWildBattleEnd;
+    gMain.savedCallback = CB2_EndScriptedWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_KYOGRE_GROUDON;
-    if (gGameVersion == 2)
-        task_add_01_battle_start(0xB, BGM_BATTLE34); // KYOGRE
+    if (gGameVersion == VERSION_RUBY)
+        CreateBattleStartTask(B_TRANSITION_SHARDS, BGM_BATTLE34); // GROUDON
     else
-        task_add_01_battle_start(0x6, BGM_BATTLE34); // GROUDON
+        CreateBattleStartTask(B_TRANSITION_RIPPLE, BGM_BATTLE34); // KYOGRE
     IncrementGameStat(7);
     IncrementGameStat(8);
 }
 
-void StartBattle_Regi(void)
+void ScrSpecial_StartRegiBattle(void)
 {
     ScriptContext2_Enable();
-    gMain.savedCallback = HandleScriptedWildBattleEnd;
+    gMain.savedCallback = CB2_EndScriptedWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_REGI;
-    task_add_01_battle_start(0xA, BGM_BATTLE36);
+    CreateBattleStartTask(B_TRANSITION_GRID_SQUARES, BGM_BATTLE36);
     IncrementGameStat(7);
     IncrementGameStat(8);
 }
 
-void HandleWildBattleEnd(void)
+static void CB2_EndWildBattle(void)
 {
     CpuFill16(0, (void *)BG_PLTT, BG_PLTT_SIZE);
     ResetOamRange(0, 128);
 
-    if (battle_exit_is_player_defeat(gBattleOutcome) == TRUE)
+    if (IsPlayerDefeated(gBattleOutcome) == TRUE)
     {
         SetMainCallback2(CB2_WhiteOut);
     }
@@ -585,18 +622,18 @@ void HandleWildBattleEnd(void)
     }
 }
 
-void HandleScriptedWildBattleEnd(void)
+void CB2_EndScriptedWildBattle(void)
 {
     CpuFill16(0, (void *)BG_PLTT, BG_PLTT_SIZE);
     ResetOamRange(0, 128);
 
-    if (battle_exit_is_player_defeat(gBattleOutcome) == TRUE)
+    if (IsPlayerDefeated(gBattleOutcome) == TRUE)
         SetMainCallback2(CB2_WhiteOut);
     else
         SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
 }
 
-s8 GetBattleTerrain(void)
+s8 BattleSetup_GetTerrain(void)
 {
     u16 tileBehavior;
     s16 x, y;
@@ -605,11 +642,11 @@ s8 GetBattleTerrain(void)
     tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
 
     if (MetatileBehavior_IsTallGrass(tileBehavior))
-        return 0;
+        return BATTLE_TERRAIN_GRASS;
     if (MetatileBehavior_IsLongGrass(tileBehavior))
-        return 1;
+        return BATTLE_TERRAIN_LONG_GRASS;
     if (MetatileBehavior_IsSandOrDeepSand(tileBehavior))
-        return 2;
+        return BATTLE_TERRAIN_SAND;
     switch (gMapHeader.mapType)
     {
     case MAP_TYPE_TOWN:
@@ -618,54 +655,49 @@ s8 GetBattleTerrain(void)
         break;
     case MAP_TYPE_UNDERGROUND:
         if (sub_80574C4(tileBehavior))
-            return 8;
+            return BATTLE_TERRAIN_BUILDING;
         if (MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior))
-            return 5;
-        return 7;
+            return BATTLE_TERRAIN_POND;
+        return BATTLE_TERRAIN_CAVE;
     case MAP_TYPE_INDOOR:
     case MAP_TYPE_SECRET_BASE:
-        return 8;
+        return BATTLE_TERRAIN_BUILDING;
     case MAP_TYPE_UNDERWATER:
-        return 3;
+        return BATTLE_TERRAIN_UNDERWATER;
     case MAP_TYPE_6:
         if (MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior))
-            return 4;
-        return 9;
+            return BATTLE_TERRAIN_WATER;
+        return BATTLE_TERRAIN_PLAIN;
     }
     if (sub_8057568(tileBehavior))
-        return 4;
+        return BATTLE_TERRAIN_WATER;
     if (MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior))
-        return 5;
+        return BATTLE_TERRAIN_POND;
     if (sub_80574D8(tileBehavior))
-        return 6;
+        return BATTLE_TERRAIN_MOUNTAIN;
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
     {
         if (sub_8057450(tileBehavior))
-            return 5;
+            return BATTLE_TERRAIN_POND;
         if (MetatileBehavior_IsBridge(tileBehavior) == TRUE)
-            return 4;
+            return BATTLE_TERRAIN_WATER;
     }
-    if (gSaveBlock1.location.mapGroup == 0 && gSaveBlock1.location.mapNum == 28)
-        return 2;
+    if (gSaveBlock1.location.mapGroup == MAP_GROUP_ROUTE113 && gSaveBlock1.location.mapNum == MAP_ID_ROUTE113)
+        return BATTLE_TERRAIN_SAND;
     if (GetSav1Weather() == 8)
-        return 2;
-    return 9;
+        return BATTLE_TERRAIN_SAND;
+    return BATTLE_TERRAIN_PLAIN;
 }
 
-s8 GetBattleTransitionTypeByMap(void)
+static s8 GetBattleTransitionTypeByMap(void)
 {
-    u8 flashUsed;
     u16 tileBehavior;
     s16 x, y;
 
     PlayerGetDestCoords(&x, &y);
     tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
-
-    flashUsed = sav1_get_flash_used_on_map();
-
-    if (flashUsed)
+    if (Overworld_GetFlashLevel())
         return 2;
-
     if (!MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior))
     {
         switch (gMapHeader.mapType)
@@ -681,7 +713,7 @@ s8 GetBattleTransitionTypeByMap(void)
     return 3;
 }
 
-u16 GetSumOfPartyMonLevel(u8 numMons)
+static u16 GetSumOfPlayerPartyLevel(u8 numMons)
 {
     u8 sum = 0;
     int i;
@@ -701,37 +733,37 @@ u16 GetSumOfPartyMonLevel(u8 numMons)
     return sum;
 }
 
-u8 GetSumOfEnemyPartyLevel(u16 trainerNum, u8 numMons)
+static u8 GetSumOfEnemyPartyLevel(u16 opponentId, u8 numMons)
 {
     u8 i;
     u8 sum;
     u32 count = numMons;
     void *party;
 
-    if (gTrainers[trainerNum].partySize < count)
-        count = gTrainers[trainerNum].partySize;
+    if (gTrainers[opponentId].partySize < count)
+        count = gTrainers[opponentId].partySize;
 
     sum = 0;
 
-    switch (gTrainers[trainerNum].partyFlags)
+    switch (gTrainers[opponentId].partyFlags)
     {
     case 0:
-        party = gTrainers[trainerNum].party;
+        party = gTrainers[opponentId].party;
         for (i = 0; i < count; i++)
             sum += ((struct TrainerPartyMember0 *)party)[i].level;
         break;
     case 1:
-        party = gTrainers[trainerNum].party;
+        party = gTrainers[opponentId].party;
         for (i = 0; i < count; i++)
             sum += ((struct TrainerPartyMember1 *)party)[i].level;
         break;
     case 2:
-        party = gTrainers[trainerNum].party;
+        party = gTrainers[opponentId].party;
         for (i = 0; i < count; i++)
             sum += ((struct TrainerPartyMember2 *)party)[i].level;
         break;
     case 3:
-        party = gTrainers[trainerNum].party;
+        party = gTrainers[opponentId].party;
         for (i = 0; i < count; i++)
             sum += ((struct TrainerPartyMember3 *)party)[i].level;
         break;
@@ -740,76 +772,79 @@ u8 GetSumOfEnemyPartyLevel(u16 trainerNum, u8 numMons)
     return sum;
 }
 
-u8 GetWildBattleTransition(void)
+static u8 GetWildBattleTransition(void)
 {
-    u8 flashVar = GetBattleTransitionTypeByMap();
-    u8 level = GetMonData(&gEnemyParty[0], MON_DATA_LEVEL);
+    u8 transitionType = GetBattleTransitionTypeByMap();
+    u8 enemyLevel = GetMonData(&gEnemyParty[0], MON_DATA_LEVEL);
+    u8 playerLevel = GetSumOfPlayerPartyLevel(1);
 
-    if (level < (u8)GetSumOfPartyMonLevel(1)) // is wild mon level than the player's mon level?
-        return gBattleTransitionTable_Wild[flashVar][0];
+    if (enemyLevel < playerLevel)
+        return gBattleTransitionTable_Wild[transitionType][0];
     else
-        return gBattleTransitionTable_Wild[flashVar][1]; // use a white fade in instead of normal transition.
+        return gBattleTransitionTable_Wild[transitionType][1];
 }
 
-u8 GetTrainerBattleTransition(void)
+static u8 GetTrainerBattleTransition(void)
 {
     const struct Trainer *trainer;
     u8 minPartyCount;
-    u8 flashVar;
-    u8 level;
+    u8 transitionType;
+    u8 enemyLevel;
+    u8 playerLevel;
 
     if (gTrainerBattleOpponent == 1024) // link battle?
-        return 16;
+        return B_TRANSITION_STEVEN;
 
     trainer = gTrainers;
 
     if (trainer[gTrainerBattleOpponent].trainerClass == 24) // league?
     {
         if (gTrainerBattleOpponent == 261)
-            return 12;
+            return B_TRANSITION_SYDNEY;
         if (gTrainerBattleOpponent == 262)
-            return 13;
+            return B_TRANSITION_PHOEBE;
         if (gTrainerBattleOpponent == 263)
-            return 14;
+            return B_TRANSITION_GLACIA;
         if (gTrainerBattleOpponent == 264)
-            return 15;
-        return 16;
+            return B_TRANSITION_DRAKE;
+        return B_TRANSITION_STEVEN;
     }
 
     if (trainer[gTrainerBattleOpponent].trainerClass == 32) // team leader?
-        return 16;
+        return B_TRANSITION_STEVEN;
 
     if (trainer[gTrainerBattleOpponent].doubleBattle == TRUE)
         minPartyCount = 2; // double battles always at least have 2 pokemon.
     else
         minPartyCount = 1;
 
-    flashVar = GetBattleTransitionTypeByMap();
-    level = GetSumOfEnemyPartyLevel(gTrainerBattleOpponent, minPartyCount);
-
-    if (level < (u8)GetSumOfPartyMonLevel(minPartyCount)) // is wild mon level than the player's mon level?
-        return gBattleTransitionTable_Trainer[flashVar][0];
+    transitionType = GetBattleTransitionTypeByMap();
+    enemyLevel = GetSumOfEnemyPartyLevel(gTrainerBattleOpponent, minPartyCount);
+    playerLevel = GetSumOfPlayerPartyLevel(minPartyCount);
+    if (enemyLevel < playerLevel) // is wild mon level than the player's mon level?
+        return gBattleTransitionTable_Trainer[transitionType][0];
     else
-        return gBattleTransitionTable_Trainer[flashVar][1];
+        return gBattleTransitionTable_Trainer[transitionType][1];
 }
 
-u8 GetBattleTowerBattleTransition(void)
+u8 BattleSetup_GetBattleTowerBattleTransition(void)
 {
-    u8 monData = GetMonData(&gEnemyParty[0], MON_DATA_LEVEL);
+    u8 enemyLevel = GetMonData(&gEnemyParty[0], MON_DATA_LEVEL);
+    u8 playerLevel = GetSumOfPlayerPartyLevel(1);
 
-    if (monData < (u8)GetSumOfPartyMonLevel(1))
-        return 4;
+    if (enemyLevel < playerLevel)
+        return B_TRANSITION_POKEBALLS_TRAIL;
     else
-        return 3;
+        return B_TRANSITION_BIG_POKEBALL;
 }
 
-void ChooseStarter(void)
+void ScrSpecial_ChooseStarter(void)
 {
     SetMainCallback2(CB2_ChooseStarter);
     gMain.savedCallback = CB2_GiveStarter;
 }
 
-void CB2_GiveStarter(void)
+static void CB2_GiveStarter(void)
 {
     u16 starterPoke;
 
@@ -819,10 +854,10 @@ void CB2_GiveStarter(void)
     ResetTasks();
     sub_80408BC();
     SetMainCallback2(CB2_StartFirstBattle);
-    sub_811AAD8(0);
+    BattleTransition_Start(0);
 }
 
-void CB2_StartFirstBattle(void)
+static void CB2_StartFirstBattle(void)
 {
     UpdatePaletteFade();
     RunTasks();
@@ -830,7 +865,7 @@ void CB2_StartFirstBattle(void)
     if (IsBattleTransitionDone() == TRUE)
     {
         gBattleTypeFlags = BATTLE_TYPE_FIRST_BATTLE;
-        gMain.savedCallback = HandleFirstBattleEnd;
+        gMain.savedCallback = CB2_EndFirstBattle;
         SetMainCallback2(sub_800E7C4);
         prev_quest_postbuffer_cursor_backup_reset();
         overworld_poison_timer_set();
@@ -839,35 +874,35 @@ void CB2_StartFirstBattle(void)
     }
 }
 
-void HandleFirstBattleEnd(void)
+static void CB2_EndFirstBattle(void)
 {
     sav1_reset_battle_music_maybe();
     SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
 }
 
-u32 TrainerBattleLoadArg32(const u8 *ptr)
+static u32 TrainerBattleLoadArg32(const u8 *ptr)
 {
     return ptr[0] | (ptr[1] << 8) | (ptr[2] << 16) | (ptr[3] << 24);
 }
 
-u16 TrainerBattleLoadArg16(const u8 *ptr)
+static u16 TrainerBattleLoadArg16(const u8 *ptr)
 {
     return ptr[0] | (ptr[1] << 8);
 }
 
-u8 TrainerBattleLoadArg8(const u8 *ptr)
+static u8 TrainerBattleLoadArg8(const u8 *ptr)
 {
     return ptr[0];
 }
 
-u16 trainerflag_opponent(void)
+static u16 CurrentOpponentTrainerFlag(void)
 {
     return TRAINER_FLAG_START + gTrainerBattleOpponent;
 }
 
-bool32 battle_exit_is_player_defeat(u32 a1)
+static bool32 IsPlayerDefeated(u32 battleOutcome)
 {
-    switch (a1)
+    switch (battleOutcome)
     {
     case 2:
     case 3:
@@ -882,69 +917,69 @@ bool32 battle_exit_is_player_defeat(u32 a1)
     return FALSE;
 }
 
-void sub_80822BC(void)
+static void sub_80822BC(void)
 {
-    gTrainerBattleMode = 0;
+    sTrainerBattleMode = 0;
     gTrainerBattleOpponent = 0;
-    gTrainerMapObjectLocalId = 0;
-    gTrainerIntroSpeech = 0;
-    gTrainerDefeatSpeech = 0;
-    gTrainerVictorySpeech = 0;
-    gTrainerCannotBattleSpeech = 0;
-    gTrainerBattleScriptReturnAddress = 0;
-    gTrainerBattleEndScript = 0;
+    sTrainerMapObjectLocalId = 0;
+    sTrainerIntroSpeech = 0;
+    sTrainerDefeatSpeech = 0;
+    sTrainerVictorySpeech = 0;
+    sTrainerCannotBattleSpeech = 0;
+    sTrainerBattleScriptRetAddr = 0;
+    sTrainerBattleEndScript = 0;
 }
 
-void TrainerBattleLoadArgs(const struct TrainerBattleSpec *specs, const u8 *data)
+static void TrainerBattleLoadArgs(const struct TrainerBattleParameter *specs, const u8 *data)
 {
     while (1)
     {
         switch (specs->ptrType)
         {
-        case 0:
-            *(u8 *)specs->ptr = TrainerBattleLoadArg8(data);
-            data++;
+        case TRAINER_PARAM_LOAD_VAL_8BIT:
+            *(u8 *)specs->varPtr = TrainerBattleLoadArg8(data);
+            data += 1;
             break;
-        case 1:
-            *(u16 *)specs->ptr = TrainerBattleLoadArg16(data);
+        case TRAINER_PARAM_LOAD_VAL_16BIT:
+            *(u16 *)specs->varPtr = TrainerBattleLoadArg16(data);
             data += 2;
             break;
-        case 2:
-            *(u32 *)specs->ptr = TrainerBattleLoadArg32(data);
+        case TRAINER_PARAM_LOAD_VAL_32BIT:
+            *(u32 *)specs->varPtr = TrainerBattleLoadArg32(data);
             data += 4;
             break;
-        case 3:
-            *(u8 *)specs->ptr = 0;
+        case TRAINER_PARAM_CLEAR_VAL_8BIT:
+            *(u8 *)specs->varPtr = 0;
             break;
-        case 4:
-            *(u16 *)specs->ptr = 0;
+        case TRAINER_PARAM_CLEAR_VAL_16BIT:
+            *(u16 *)specs->varPtr = 0;
             break;
-        case 5:
-            *(u32 *)specs->ptr = 0;
+        case TRAINER_PARAM_CLEAR_VAL_32BIT:
+            *(u32 *)specs->varPtr = 0;
             break;
-        case 6:
-            *(const u8 **)specs->ptr = data;
+        case TRAINER_PARAM_LOAD_SCRIPT_RET_ADDR:
+            *(const u8 **)specs->varPtr = data;
             return;
         }
         specs++;
     }
 }
 
-void battle_80801F0(void)
+static void battle_80801F0(void)
 {
-    if (gTrainerMapObjectLocalId)
+    if (sTrainerMapObjectLocalId)
     {
-        gScriptLastTalked = gTrainerMapObjectLocalId;
-        gSelectedMapObject = GetFieldObjectIdByLocalIdAndMap(gTrainerMapObjectLocalId, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
+        gScriptLastTalked = sTrainerMapObjectLocalId;
+        gSelectedMapObject = GetFieldObjectIdByLocalIdAndMap(sTrainerMapObjectLocalId, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
     }
 }
 
-u8 *TrainerBattleConfigure(const u8 *data)
+u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
 {
     sub_80822BC();
-    gTrainerBattleMode = TrainerBattleLoadArg8(data);
+    sTrainerBattleMode = TrainerBattleLoadArg8(data);
 
-    switch (gTrainerBattleMode)
+    switch (sTrainerBattleMode)
     {
     case 3:
         TrainerBattleLoadArgs(gTrainerBattleSpecs_3, data);
@@ -984,7 +1019,7 @@ void TrainerWantsBattle(u8 trainerMapObjId, u8 *trainerScript)
 {
     gSelectedMapObject = trainerMapObjId;
     gScriptLastTalked = gMapObjects[trainerMapObjId].localId;
-    TrainerBattleConfigure(trainerScript + 1);
+    BattleSetup_ConfigureTrainerBattle(trainerScript + 1);
     ScriptContext1_SetupScript(gUnknown_0819F80B);
     ScriptContext2_Enable();
 }
@@ -1002,27 +1037,27 @@ void sub_8082524(void)
     npc_set_running_behaviour_etc(mapObject, npc_running_behaviour_by_direction(mapObject->mapobj_unk_18));
 }
 
-u8 sub_8082558(void)
+u8 ScrSpecial_GetTrainerBattleMode(void)
 {
-    return gTrainerBattleMode;
+    return sTrainerBattleMode;
 }
 
-u8 sub_8082564(void)
+u8 ScrSpecial_HasTrainerBeenFought(void)
 {
-    return FlagGet(trainerflag_opponent());
+    return FlagGet(CurrentOpponentTrainerFlag());
 }
 
-void sub_808257C(void)
+void SetCurrentTrainerBattledFlag(void)
 {
-    FlagSet(trainerflag_opponent());
+    FlagSet(CurrentOpponentTrainerFlag());
 }
 
 void unref_sub_8082590(void)
 {
-    FlagSet(trainerflag_opponent()); // duplicate function
+    FlagSet(CurrentOpponentTrainerFlag()); // duplicate function
 }
 
-u8 trainer_flag_check(u16 flag)
+u8 HasTrainerAlreadyBeenFought(u16 flag)
 {
     return FlagGet(TRAINER_FLAG_START + flag);
 }
@@ -1034,14 +1069,14 @@ void trainer_flag_set(u16 flag)
 
 void trainer_flag_clear(u16 flag)
 {
-    FlagReset(TRAINER_FLAG_START + flag);
+    FlagClear(TRAINER_FLAG_START + flag);
 }
 
-void sub_80825E4(void)
+void BattleSetup_StartTrainerBattle(void)
 {
     gBattleTypeFlags = BATTLE_TYPE_TRAINER;
     gMain.savedCallback = sub_808260C;
-    task_add_01_battle_start_with_music_and_stats();
+    StartTheBattle();
     ScriptContext1_Stop();
 }
 
@@ -1051,74 +1086,77 @@ void sub_808260C(void)
     {
         SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music); // link battle?
     }
-    else if (battle_exit_is_player_defeat(gBattleOutcome) == TRUE)
+    else if (IsPlayerDefeated(gBattleOutcome) == TRUE)
     {
         SetMainCallback2(CB2_WhiteOut);
     }
     else
     {
         SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
-        sub_808257C();
+        SetCurrentTrainerBattledFlag();
     }
 }
 
-void do_choose_name_or_words_screen(void)
+void CB2_EndTrainerEyeRematchBattle(void)
 {
     if (gTrainerBattleOpponent == 1024)
     {
         SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music); // link battle?
     }
-    else if (battle_exit_is_player_defeat(gBattleOutcome) == TRUE)
+    else if (IsPlayerDefeated(gBattleOutcome) == TRUE)
     {
         SetMainCallback2(CB2_WhiteOut);
     }
     else
     {
         SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
-        sub_808257C();
-        sub_8082CB8();
+        SetCurrentTrainerBattledFlag();
+        SetTrainerFlagsAfterTrainerEyeRematch();
     }
 }
 
-void sub_80826B0(void)
+void ScrSpecial_StartTrainerEyeRematch(void)
 {
     gBattleTypeFlags = BATTLE_TYPE_TRAINER;
-    gMain.savedCallback = do_choose_name_or_words_screen;
-    task_add_01_battle_start_with_music_and_stats();
+    gMain.savedCallback = CB2_EndTrainerEyeRematchBattle;
+    StartTheBattle();
     ScriptContext1_Stop();
 }
 
-void sub_80826D8(void)
+static u8 *GetTrainerIntroSpeech(void);
+static u8 *GetTrainerNonBattlingSpeech(void);
+
+void ScrSpecial_ShowTrainerIntroSpeech(void)
 {
-    ShowFieldMessage(sub_808281C());
+    ShowFieldMessage(GetTrainerIntroSpeech());
 }
 
-u8 *sub_80826E8(void)
+u8 *BattleSetup_GetScriptAddrAfterBattle(void)
 {
-    if (gTrainerBattleScriptReturnAddress)
-        return gTrainerBattleScriptReturnAddress;
+    if (sTrainerBattleScriptRetAddr)
+        return sTrainerBattleScriptRetAddr;
     else
         return gUnknown_081C6C02;
 }
 
-u8 *sub_8082700(void)
+u8 *BattleSetup_GetTrainerPostBattleScript(void)
 {
-    if (gTrainerBattleEndScript)
-        return gTrainerBattleEndScript;
+    if (sTrainerBattleEndScript)
+        return sTrainerBattleEndScript;
     else
         return gUnknown_081C6C02;
 }
 
-void sub_8082718(void)
+void ScrSpecial_ShowTrainerNonBattlingSpeech(void)
 {
-    ShowFieldMessage(sub_8082880());
+    ShowFieldMessage(GetTrainerNonBattlingSpeech());
 }
 
 void PlayTrainerEncounterMusic(void)
 {
     u16 music;
 
-    if (gTrainerBattleMode != 1 && gTrainerBattleMode != 8)
+    if (sTrainerBattleMode != 1 && sTrainerBattleMode != 8)
     {
         switch (sub_803FC58(gTrainerBattleOpponent))
         {
@@ -1169,7 +1207,7 @@ void PlayTrainerEncounterMusic(void)
 }
 
 //Returns an empty string if a null pointer was passed, otherwise returns str
-u8 *SanitizeString(const u8 *str)
+static u8 *SanitizeString(const u8 *str)
 {
     if (str)
         return (u8 *) str;
@@ -1177,9 +1215,9 @@ u8 *SanitizeString(const u8 *str)
         return (u8 *) gOtherText_CancelWithTerminator;
 }
 
-u8 *sub_808281C(void)
+static u8 *GetTrainerIntroSpeech(void)
 {
-    return SanitizeString(gTrainerIntroSpeech);
+    return SanitizeString(sTrainerIntroSpeech);
 }
 
 u8 *sub_8082830(void)
@@ -1189,7 +1227,7 @@ u8 *sub_8082830(void)
     if (gTrainerBattleOpponent == 1024)
         str = sub_80BCCE8();
     else
-        str = gTrainerDefeatSpeech;
+        str = sTrainerDefeatSpeech;
 
     StringExpandPlaceholders(gStringVar4, SanitizeString(str));
     return gStringVar4;
@@ -1197,43 +1235,43 @@ u8 *sub_8082830(void)
 
 u8 *unref_sub_808286C(void)
 {
-    return SanitizeString(gTrainerVictorySpeech);
+    return SanitizeString(sTrainerVictorySpeech);
 }
 
-u8 *sub_8082880(void)
+static u8 *GetTrainerNonBattlingSpeech(void)
 {
-    return SanitizeString(gTrainerCannotBattleSpeech);
+    return SanitizeString(sTrainerCannotBattleSpeech);
 }
 
-s32 sub_8082894(const struct TrainerEyeTrainer *trainers, u16 trainerNum)
+s32 sub_8082894(const struct TrainerEyeTrainer *trainers, u16 opponentId)
 {
     s32 i;
 
     for (i = 0; i < NUM_TRAINER_EYE_TRAINERS; i++)
     {
-        if (trainers[i].trainerNums[0] == trainerNum)
+        if (trainers[i].opponentIDs[0] == opponentId)
             return i;
     }
     return -1;
 }
 
-s32 sub_80828B8(const struct TrainerEyeTrainer *trainers, u16 trainerNum)
+s32 sub_80828B8(const struct TrainerEyeTrainer *trainers, u16 opponentId)
 {
     s32 i;
     s32 j;
 
     for (i = 0; i < NUM_TRAINER_EYE_TRAINERS; i++)
     {
-        for (j = 0; j < 5 && trainers[i].trainerNums[j] != 0; j++)
+        for (j = 0; j < 5 && trainers[i].opponentIDs[j] != 0; j++)
         {
-            if (trainers[i].trainerNums[j] == trainerNum)
+            if (trainers[i].opponentIDs[j] == opponentId)
                 return i;
         }
     }
     return -1;
 }
 
-bool32 sub_80828FC(const struct TrainerEyeTrainer *trainers, u16 mapGroup, u16 mapNum)
+bool32 UpdateRandomTrainerEyeRematches(const struct TrainerEyeTrainer *trainers, u16 mapGroup, u16 mapNum)
 {
     int i;
     bool32 ret = FALSE;
@@ -1243,14 +1281,19 @@ bool32 sub_80828FC(const struct TrainerEyeTrainer *trainers, u16 mapGroup, u16 m
         if (trainers[i].mapGroup == mapGroup && trainers[i].mapNum == mapNum)
         {
             if (gSaveBlock1.trainerRematches[i] != 0)
-                ret = TRUE;
-            else if (trainer_flag_check(trainers[i].trainerNums[0]) == TRUE && (Random() % 100) <= 30)
             {
-                int j = 1;
+                // Trainer already wants rematch. Don't bother updating it
+                ret = TRUE;
+            }
+            else if (HasTrainerAlreadyBeenFought(trainers[i].opponentIDs[0]) == TRUE
+             && (Random() % 100) <= 30)  // 31% chance of getting a rematch
+            {
+                int rematches = 1;
 
-                while (j < 5 && trainers[i].trainerNums[j] != 0 && trainer_flag_check(trainers[i].trainerNums[j]))
-                    j++;
-                gSaveBlock1.trainerRematches[i] = j;
+                while (rematches < 5 && trainers[i].opponentIDs[rematches] != 0
+                 && HasTrainerAlreadyBeenFought(trainers[i].opponentIDs[rematches]))
+                    rematches++;
+                gSaveBlock1.trainerRematches[i] = rematches;
                 ret = TRUE;
             }
         }
@@ -1282,9 +1325,9 @@ s32 sub_80829E8(const struct TrainerEyeTrainer *trainers, u16 mapGroup, u16 mapN
     return 0;
 }
 
-bool8 sub_8082A18(const struct TrainerEyeTrainer *trainers, u16 trainerNum)
+bool8 sub_8082A18(const struct TrainerEyeTrainer *trainers, u16 opponentId)
 {
-    s32 trainerEyeIndex = sub_8082894(trainers, trainerNum);
+    s32 trainerEyeIndex = sub_8082894(trainers, opponentId);
 
     if (trainerEyeIndex != -1 && trainerEyeIndex < 100 && gSaveBlock1.trainerRematches[trainerEyeIndex])
         return TRUE;
@@ -1292,9 +1335,9 @@ bool8 sub_8082A18(const struct TrainerEyeTrainer *trainers, u16 trainerNum)
         return FALSE;
 }
 
-bool8 sub_8082A54(const struct TrainerEyeTrainer *trainers, u16 trainerNum)
+bool8 GetTrainerEyeRematchFlag(const struct TrainerEyeTrainer *trainers, u16 opponentId)
 {
-    s32 trainerEyeIndex = sub_80828B8(trainers, trainerNum);
+    s32 trainerEyeIndex = sub_80828B8(trainers, opponentId);
 
     if (trainerEyeIndex != -1 && trainerEyeIndex < 100 && gSaveBlock1.trainerRematches[trainerEyeIndex])
         return TRUE;
@@ -1302,38 +1345,38 @@ bool8 sub_8082A54(const struct TrainerEyeTrainer *trainers, u16 trainerNum)
         return FALSE;
 }
 
-u16 sub_8082A90(const struct TrainerEyeTrainer *trainers, u16 trainerNum)
+u16 sub_8082A90(const struct TrainerEyeTrainer *trainers, u16 opponentId)
 {
     int i;
     const struct TrainerEyeTrainer *trainer;
-    s32 trainerEyeIndex = sub_8082894(trainers, trainerNum);
+    s32 trainerEyeIndex = sub_8082894(trainers, opponentId);
 
     if (trainerEyeIndex == -1)
         return 0;
     trainer = &trainers[trainerEyeIndex];
     for (i = 1; i < 5; i++)
     {
-        if (!trainer->trainerNums[i])
-            return trainer->trainerNums[i - 1];
-        if (!trainer_flag_check(trainer->trainerNums[i]))
-            return trainer->trainerNums[i];
+        if (!trainer->opponentIDs[i])
+            return trainer->opponentIDs[i - 1];
+        if (!HasTrainerAlreadyBeenFought(trainer->opponentIDs[i]))
+            return trainer->opponentIDs[i];
     }
-    return trainer->trainerNums[4];
+    return trainer->opponentIDs[4];
 }
 
-void sub_8082AE4(const struct TrainerEyeTrainer *trainers, u16 trainerNum)
+void ClearTrainerEyeRematchFlag(const struct TrainerEyeTrainer *trainers, u16 opponentId)
 {
-    s32 trainerEyeIndex = sub_80828B8(trainers, trainerNum);
+    s32 trainerEyeIndex = sub_80828B8(trainers, opponentId);
 
     if (trainerEyeIndex != -1)
         gSaveBlock1.trainerRematches[trainerEyeIndex] = 0;
 }
 
-bool8 sub_8082B10(const struct TrainerEyeTrainer *trainers, u16 trainerNum)
+bool8 sub_8082B10(const struct TrainerEyeTrainer *trainers, u16 opponentId)
 {
-    s32 trainerEyeIndex = sub_8082894(trainers, trainerNum);
+    s32 trainerEyeIndex = sub_8082894(trainers, opponentId);
 
-    if (trainerEyeIndex != -1 && trainer_flag_check(trainers[trainerEyeIndex].trainerNums[1]))
+    if (trainerEyeIndex != -1 && HasTrainerAlreadyBeenFought(trainers[trainerEyeIndex].opponentIDs[1]))
         return TRUE;
     else
         return FALSE;
@@ -1377,7 +1420,7 @@ bool32 sub_8082BA4(void)
 
 void sub_8082BD0(u16 mapGroup, u16 mapNum)
 {
-    if (sub_8082BA4() && sub_80828FC(gTrainerEyeTrainers, mapGroup, mapNum) == TRUE)
+    if (sub_8082BA4() && UpdateRandomTrainerEyeRematches(gTrainerEyeTrainers, mapGroup, mapNum) == TRUE)
         gSaveBlock1.trainerRematchStepCounter = 0;
 }
 
@@ -1391,9 +1434,9 @@ s32 unref_sub_8082C2C(u16 mapGroup, u16 mapNum)
     return sub_80829E8(gTrainerEyeTrainers, mapGroup, mapNum);
 }
 
-u16 sub_8082C4C(u16 trainerNum)
+u16 sub_8082C4C(u16 opponentId)
 {
-    return sub_8082A90(gTrainerEyeTrainers, trainerNum);
+    return sub_8082A90(gTrainerEyeTrainers, opponentId);
 }
 
 s32 sub_8082C68(void)
@@ -1404,13 +1447,13 @@ s32 sub_8082C68(void)
         return sub_8082B10(gTrainerEyeTrainers, gTrainerBattleOpponent);
 }
 
-u8 sub_8082C9C(void)
+u8 ScrSpecial_GetTrainerEyeRematchFlag(void)
 {
-    return sub_8082A54(gTrainerEyeTrainers, gTrainerBattleOpponent);
+    return GetTrainerEyeRematchFlag(gTrainerEyeTrainers, gTrainerBattleOpponent);
 }
 
-void sub_8082CB8(void)
+void SetTrainerFlagsAfterTrainerEyeRematch(void)
 {
-    sub_8082AE4(gTrainerEyeTrainers, gTrainerBattleOpponent);
-    sub_808257C();
+    ClearTrainerEyeRematchFlag(gTrainerEyeTrainers, gTrainerBattleOpponent);
+    SetCurrentTrainerBattledFlag();
 }

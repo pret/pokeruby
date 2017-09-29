@@ -1,8 +1,8 @@
 #ifndef GUARD_BATTLE_TRANSITION_H
 #define GUARD_BATTLE_TRANSITION_H
 
-void sub_811AABC(u8 transitionID);
-void sub_811AAD8(u8 transitionID);
+void BattleTransition_StartOnField(u8 transitionID);
+void BattleTransition_Start(u8 transitionID);
 bool8 IsBattleTransitionDone(void);
 
 #define TRANSITIONS_NO         17

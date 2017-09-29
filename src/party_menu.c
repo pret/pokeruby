@@ -33,15 +33,6 @@
 #include "species.h"
 #include "party_menu.h"
 
-#define DATA_COUNT (6)
-
-struct Unk2001000
-{
-    u8 unk0;
-    u8 unk1;
-    u8 unk2;
-};
-
 struct Unk201C000
 {
     /*0x00*/ struct Pokemon *pokemon;
@@ -68,8 +59,6 @@ struct UnknownStruct5
     u16 *unk4;
 };
 
-extern u8 ewram[];
-#define ewram01000 (*(struct Unk2001000 *)(ewram + 0x01000))
 #define ewram1C000 (*(struct Unk201C000 *)(ewram + 0x1C000))
 #define ewram1F000 (*(struct Unk201F000 *)(ewram + 0x1F000))
 

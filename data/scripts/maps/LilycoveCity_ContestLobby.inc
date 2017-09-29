@@ -330,7 +330,7 @@ LilycoveCity_ContestLobby_EventScript_158BC4:: @ 8158BC4
 	msgbox LilycoveCity_ContestLobby_Text_188521, 5
 	compare RESULT, 0
 	jumpeq LilycoveCity_ContestLobby_EventScript_158C35
-	call LilycoveCity_ContestLobby_EventScript_19F806
+	call S_DoSaveDialog
 	hidebox 0, 0, 15, 9
 	compare RESULT, 0
 	jumpeq LilycoveCity_ContestLobby_EventScript_158C35

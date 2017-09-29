@@ -1,7 +1,8 @@
 #ifndef GUARD_SPECIES_H
 #define GUARD_SPECIES_H
 
-enum {
+enum
+{
     SPECIES_NONE,       // 0x000
     SPECIES_BULBASAUR,  // 0x001
     SPECIES_IVYSAUR,    // 0x002

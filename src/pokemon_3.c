@@ -11,7 +11,7 @@
 #include "main.h"
 #include "pokemon.h"
 #include "rng.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "rom_8077ABC.h"
 #include "rom_8094928.h"
 #include "rtc.h"
@@ -1197,7 +1197,7 @@ const struct CompressedSpritePalette *sub_80409C8(u16 species, u32 otId , u32 pe
         return &gMonPaletteTable[species];
 }
 
-bool8 IsHMMove2(u16 move)
+bool32 IsHMMove2(u16 move)
 {
     int i = 0;
     while (gHMMoves[i] != 0xFFFF)

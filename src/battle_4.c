@@ -82,7 +82,7 @@ extern void (*gBattleMainFunc)(void);
 extern struct Window gUnknown_03004210;
 extern const u8 gUnknown_08400D7A[];
 extern u8 gPlayerPartyCount;
-extern u16 word_2024E82; //move to learn
+extern u16 gMoveToLearn; //move to learn
 extern const u8 gTrainerMoney[];
 extern u16 gRandomMove;
 extern u8* gBattleScriptsEffectsTable[];
@@ -129,7 +129,7 @@ u16 sub_803FBFC(u8 a);
 u8 GetBankByPlayerAI(u8 ID);
 void sub_8012258(u8);
 void sub_80157C4(u8 bank); //update sent pokes in battle
-//sub_803B7C8 teach poke a move
+//MonTryLearningNewMove teach poke a move
 u16 GiveMoveToBattleMon(struct BattlePokemon *mon, u16 move);
 void IncrementGameStat(u8 index);
 u8 GetScaledHPFraction(s16 hp, s16 maxhp, u8 scale);
@@ -144,7 +144,7 @@ void sub_802BBD4(u8 r0, u8 r1, u8 r2, u8 r3, u8 sp0);
 void nullsub_6(void);
 void ReshowBattleScreenAfterMenu(void);
 void sub_800F808(void);
-void sub_80B79B8(u32* moneySaveblock, u32 to_give);
+void AddMoney(u32* moneySaveblock, u32 to_give);
 void sub_80156DC(void); //set sentpokes value
 bool8 sub_8014AB8(u8 bank); //can run from battle
 u8 CountAliveMons(u8 caseID);
@@ -154,7 +154,7 @@ u8 GetMoveTarget(u16 move, u8 targetbyte); //get target of move
 void sub_80153D0(u8 atk); //pressure perish song pp decrement
 u8 CastformDataTypeChange(u8 bank);
 void b_push_move_exec(u8* bs_ptr);
-u8 sav1_map_get_light_level(void);
+u8 Overworld_GetMapTypeOfSaveblockLocation(void);
 u8 CalculatePlayerPartyCount(void);
 u16 Sqrt(u32 num);
 u8 sub_809070C(u16 nationalNum, u32 TiD, u32 PiD); //task prepare poke dex display
@@ -11460,9 +11460,9 @@ void atk59_learnmove_inbattle(void)
     u8* loc1 = BSScriptReadPtr(gBattlescriptCurrInstr + 1);
     u8* loc2 = BSScriptReadPtr(gBattlescriptCurrInstr + 5);
 
-    u16 ret = sub_803B7C8(&gPlayerParty[BATTLE_STRUCT->expGetterID], BSScriptRead8(gBattlescriptCurrInstr + 9));
+    u16 ret = MonTryLearningNewMove(&gPlayerParty[BATTLE_STRUCT->expGetterID], BSScriptRead8(gBattlescriptCurrInstr + 9));
     while (ret == 0xFFFE)
-        ret = sub_803B7C8(&gPlayerParty[BATTLE_STRUCT->expGetterID], 0);
+        ret = MonTryLearningNewMove(&gPlayerParty[BATTLE_STRUCT->expGetterID], 0);
 
     if (ret == 0)
     {
@@ -11549,7 +11549,7 @@ static void atk5A(void)
     case 2:
         if (!gPaletteFade.active)
         {
-            sub_809D9F0(gPlayerParty, BATTLE_STRUCT->expGetterID, gPlayerPartyCount - 1, ReshowBattleScreenAfterMenu, word_2024E82);
+            sub_809D9F0(gPlayerParty, BATTLE_STRUCT->expGetterID, gPlayerPartyCount - 1, ReshowBattleScreenAfterMenu, gMoveToLearn);
             BATTLE_STRUCT->atk5A_StateTracker++;
         }
         break;
@@ -11584,18 +11584,18 @@ static void atk5A(void)
                     }
                     ptr[0] = 0xFF;
                     RemoveMonPPBonus(&gPlayerParty[BATTLE_STRUCT->expGetterID], move_pos);
-                    SetMonMoveSlot(&gPlayerParty[BATTLE_STRUCT->expGetterID], word_2024E82, move_pos);
+                    SetMonMoveSlot(&gPlayerParty[BATTLE_STRUCT->expGetterID], gMoveToLearn, move_pos);
                     if (gBattlePartyID[0] == BATTLE_STRUCT->expGetterID && !(gBattleMons[0].status2 & STATUS2_TRANSFORMED)
                         && !(gDisableStructs[0].unk18_b & gBitTable[move_pos]))
                     {
                         RemoveBattleMonPPBonus(&gBattleMons[0], move_pos);
-                        SetBattleMonMoveSlot(&gBattleMons[0], word_2024E82, move_pos);
+                        SetBattleMonMoveSlot(&gBattleMons[0], gMoveToLearn, move_pos);
                     }
                     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && gBattlePartyID[2] == BATTLE_STRUCT->expGetterID && !(gBattleMons[2].status2 & STATUS2_TRANSFORMED)
                         && !(gDisableStructs[2].unk18_b & gBitTable[move_pos]))
                     {
                         RemoveBattleMonPPBonus(&gBattleMons[2], move_pos);
-                        SetBattleMonMoveSlot(&gBattleMons[2], word_2024E82, move_pos);
+                        SetBattleMonMoveSlot(&gBattleMons[2], gMoveToLearn, move_pos);
                     }
                 }
             }
@@ -11717,7 +11717,7 @@ static void atk5D_getmoneyreward(void)
             money_to_give = 1 * gTrainerMoney[i * 4 + 1] * money_to_give;
     }
 
-    sub_80B79B8(&gSaveBlock1.money, money_to_give);
+    AddMoney(&gSaveBlock1.money, money_to_give);
     gBattleTextBuff1[0] = 0xFD;
     gBattleTextBuff1[1] = 1;
     gBattleTextBuff1[2] = 4;
@@ -11889,7 +11889,7 @@ _0802413C:\n\
 _08024140:\n\
     mov r0, r8\n\
     adds r1, r4, 0\n\
-    bl sub_80B79B8\n\
+    bl AddMoney\n\
     ldr r1, _0802418C @ =gBattleTextBuff1\n\
     movs r0, 0xFD\n\
     strb r0, [r1]\n\
@@ -12653,8 +12653,8 @@ void sub_8024CEC(void)
 {
     gBattleTextBuff2[0] = 0xFD;
     gBattleTextBuff2[1] = 2;
-    gBattleTextBuff2[2] = (word_2024E82);
-    gBattleTextBuff2[3] = uBYTE1_16(word_2024E82);
+    gBattleTextBuff2[2] = (gMoveToLearn);
+    gBattleTextBuff2[3] = uBYTE1_16(gMoveToLearn);
     gBattleTextBuff2[4] = 0xFF;
 }
 
@@ -14186,7 +14186,7 @@ static void atk91_givepaydaymoney(void)
 {
     if (!(gBattleTypeFlags & BATTLE_TYPE_LINK) && gPaydayMoney)
     {
-        sub_80B79B8(&gSaveBlock1.money, gPaydayMoney * BATTLE_STRUCT->moneyMultiplier);
+        AddMoney(&gSaveBlock1.money, gPaydayMoney * BATTLE_STRUCT->moneyMultiplier);
         gBattleTextBuff1[0] = 0xFD;
         gBattleTextBuff1[1] = 1;
         gBattleTextBuff1[2] = 2;
@@ -17570,28 +17570,28 @@ static void atkE4_getsecretpowereffect(void)
 {
     switch (gBattleTerrain)
     {
-    case 0:
+    case BATTLE_TERRAIN_GRASS:
         gBattleCommunication[MOVE_EFFECT_BYTE] = 2;
         break;
-    case 1:
+    case BATTLE_TERRAIN_LONG_GRASS:
         gBattleCommunication[MOVE_EFFECT_BYTE] = 1;
         break;
-    case 2:
+    case BATTLE_TERRAIN_SAND:
         gBattleCommunication[MOVE_EFFECT_BYTE] = 27;
         break;
-    case 3:
+    case BATTLE_TERRAIN_UNDERWATER:
         gBattleCommunication[MOVE_EFFECT_BYTE] = 23;
         break;
-    case 4:
+    case BATTLE_TERRAIN_WATER:
         gBattleCommunication[MOVE_EFFECT_BYTE] = 22;
         break;
-    case 5:
+    case BATTLE_TERRAIN_POND:
         gBattleCommunication[MOVE_EFFECT_BYTE] = 24;
         break;
-    case 6:
+    case BATTLE_TERRAIN_MOUNTAIN:
         gBattleCommunication[MOVE_EFFECT_BYTE] = 7;
         break;
-    case 7:
+    case BATTLE_TERRAIN_CAVE:
         gBattleCommunication[MOVE_EFFECT_BYTE] = 8;
         break;
     default:
@@ -17818,7 +17818,7 @@ void atkEF_pokeball_catch_calculation(void)
                     ball_multiplier = 10;
                 break;
             case ITEM_DIVE_BALL:
-                if (sav1_map_get_light_level() == 5)
+                if (Overworld_GetMapTypeOfSaveblockLocation() == 5)
                     ball_multiplier = 35;
                 else
                     ball_multiplier = 10;

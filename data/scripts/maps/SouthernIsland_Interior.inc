@@ -67,7 +67,7 @@ SouthernIsland_Interior_EventScript_160BA7:: @ 8160BA7
 	setwildbattle SPECIES_LATIAS_OR_LATIOS, 50, ITEM_SOUL_DEW
 	setflag 911
 	setflag 2145
-	special StartBattle_SouthernIsland
+	special ScrSpecial_StartSouthernIslandBattle
 	waitstate
 	clearflag 2145
 	releaseall

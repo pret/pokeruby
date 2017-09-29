@@ -27,5 +27,8 @@ void sub_8127ED0(u8, u8);
 void sub_8127F28(u8, u8, s16);
 u8 sub_8128124(u8 id);
 void ash(s16, s16, u16, u8);
+void SetUpReflection(struct MapObject *mapObj, struct Sprite *sprite, u8 a);
+u32 oe_exec_and_other_stuff(u8 fieldEffectId, struct MapObject *mapObject);
+u8 sub_8126FF0(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s16 y);
 
 #endif // GUARD_FIELD_EFFECT_HELPERS_H

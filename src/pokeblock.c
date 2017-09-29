@@ -3,7 +3,7 @@
 //
 
 #include "global.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "sprite.h"
 #include "script.h"
 #include "strings.h"
@@ -816,7 +816,7 @@ static void sub_810C368(u8 taskId)
     sub_80F98A4(1);
     BasicInitMenuWindow(&gWindowConfig_81E6E50);
     MenuDrawTextWindow(7, v0 + 4, 13, 11);
-    PrintMenuItemsReordered(8, v0 + 5, gUnknown_0203924C, (const struct MenuAction *)gUnknown_083F7EF4, gUnknown_03000758);
+    PrintMenuItemsReordered(8, v0 + 5, gUnknown_0203924C, gUnknown_083F7EF4, gUnknown_03000758);
     InitMenu(0, 8, v0 + 5, gUnknown_0203924C, 0, 5);
     gScriptItemId = gUnknown_02039248.unk0 + gUnknown_02039248.unk1;
     gTasks[taskId].func = sub_810C40C;

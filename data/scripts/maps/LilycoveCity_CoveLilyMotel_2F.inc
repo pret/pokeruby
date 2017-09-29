@@ -29,7 +29,7 @@ LilycoveCity_CoveLilyMotel_2F_EventScript_1583DD:: @ 81583DD
 	message LilycoveCity_CoveLilyMotel_2F_Text_18708F
 	waittext
 	call LilycoveCity_CoveLilyMotel_2F_EventScript_1A02C5
-	special sub_810D6A4
+	special ScrSpecial_ShowDiploma
 	waitstate
 	release
 	end
