@@ -16,6 +16,8 @@ extern u32 gUnknown_083E53A8[];
 
 extern u16 gUnknown_083E537C[];
 
+IWRAM_DATA u8 gUnknown_03000748;
+
 void sub_80F7A34(void)
 {
     u16 i;

@@ -25,6 +25,12 @@
 
 extern u16 word_2024E82;
 
+IWRAM_DATA u16 gUnknown_03000470[52];
+IWRAM_DATA u16 gUnknown_030004D8[4];
+IWRAM_DATA u16 gUnknown_030004E0[4];
+IWRAM_DATA u16 gUnknown_030004E8[12];
+IWRAM_DATA u16 gUnknown_03000500[4];
+
 static void sub_80417F4(struct DayCareMail *);
 static void sub_80420FC(struct Pokemon *, u16, struct DayCareData *);
 static u8 daycare_relationship_score(struct DayCareData *);
@@ -430,11 +436,6 @@ u8 pokemon_get_eggmoves(struct Pokemon *pokemon, u16 *eggMoves)
 }
 
 #ifdef NONMATCHING
-extern u16 gUnknown_03000470[50];
-extern u16 gUnknown_030004D8[4];
-extern u16 gUnknown_030004E0[4];
-extern u16 gUnknown_030004E8[10];
-extern u16 gUnknown_03000500[4];
 
 void daycare_build_child_moveset(struct Pokemon *egg, struct BoxPokemon *dad, struct BoxPokemon *mom)
 {
