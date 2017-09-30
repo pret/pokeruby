@@ -252,7 +252,7 @@ bool8 ScrCmd_callstd(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_jumpstdif(struct ScriptContext *ctx)
+bool8 ScrCmd_gotostd_if(struct ScriptContext *ctx)
 {
     u8 condition = ScriptReadByte(ctx);
     u8 index = ScriptReadByte(ctx);
@@ -266,7 +266,7 @@ bool8 ScrCmd_jumpstdif(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_callstdif(struct ScriptContext *ctx)
+bool8 ScrCmd_callstd_if(struct ScriptContext *ctx)
 {
     u8 condition = ScriptReadByte(ctx);
     u8 index = ScriptReadByte(ctx);
@@ -280,20 +280,20 @@ bool8 ScrCmd_callstdif(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_jumpram(struct ScriptContext *ctx)
+bool8 ScrCmd_gotoram(struct ScriptContext *ctx)
 {
     ScriptJump(ctx, (u8 *)gUnknown_0202E8AC);
     return FALSE;
 }
 
-bool8 ScrCmd_die(struct ScriptContext *ctx)
+bool8 ScrCmd_killscript(struct ScriptContext *ctx)
 {
     ClearRamScript();
     StopScript(ctx);
     return TRUE;
 }
 
-bool8 ScrCmd_setbyte(struct ScriptContext *ctx)
+bool8 ScrCmd_setmestatus(struct ScriptContext *ctx)
 {
     u8 value = ScriptReadByte(ctx);
 
@@ -301,7 +301,7 @@ bool8 ScrCmd_setbyte(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_loadptr(struct ScriptContext *ctx)
+bool8 ScrCmd_loadword(struct ScriptContext *ctx)
 {
     u8 index = ScriptReadByte(ctx);
 
@@ -309,7 +309,7 @@ bool8 ScrCmd_loadptr(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_loadbytefrompointer(struct ScriptContext *ctx)
+bool8 ScrCmd_loadbytefromaddr(struct ScriptContext *ctx)
 {
     u8 index = ScriptReadByte(ctx);
 
@@ -317,7 +317,7 @@ bool8 ScrCmd_loadbytefrompointer(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_writebytetooffset(struct ScriptContext *ctx)
+bool8 ScrCmd_writebytetoaddr(struct ScriptContext *ctx)
 {
     u8 value = ScriptReadByte(ctx);
 
@@ -325,7 +325,7 @@ bool8 ScrCmd_writebytetooffset(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_setbufferbyte(struct ScriptContext *ctx)
+bool8 ScrCmd_loadbyte(struct ScriptContext *ctx)
 {
     u8 index = ScriptReadByte(ctx);
 
@@ -341,7 +341,7 @@ bool8 ScrCmd_setptrbyte(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_copybuffers(struct ScriptContext *ctx)
+bool8 ScrCmd_copylocal(struct ScriptContext *ctx)
 {
     u8 destIndex = ScriptReadByte(ctx);
     u8 srcIndex = ScriptReadByte(ctx);

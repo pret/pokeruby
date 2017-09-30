@@ -10,17 +10,17 @@ gScriptCmdTable:: @ 814AE30
 	.4byte ScrCmd_call_if                 @ 0x07
 	.4byte ScrCmd_gotostd                 @ 0x08
 	.4byte ScrCmd_callstd                 @ 0x09
-	.4byte ScrCmd_jumpstdif               @ 0x0A
-	.4byte ScrCmd_callstdif               @ 0x0B
-	.4byte ScrCmd_jumpram                 @ 0x0C
-	.4byte ScrCmd_die                     @ 0x0D
-	.4byte ScrCmd_setbyte                 @ 0x0E
-	.4byte ScrCmd_loadptr                 @ 0x0F
-	.4byte ScrCmd_setbufferbyte           @ 0x10
-	.4byte ScrCmd_writebytetooffset       @ 0x11
-	.4byte ScrCmd_loadbytefrompointer     @ 0x12
+	.4byte ScrCmd_gotostd_if               @ 0x0A
+	.4byte ScrCmd_callstd_if               @ 0x0B
+	.4byte ScrCmd_gotoram                 @ 0x0C
+	.4byte ScrCmd_killscript                     @ 0x0D
+	.4byte ScrCmd_setmestatus                 @ 0x0E
+	.4byte ScrCmd_loadword                 @ 0x0F
+	.4byte ScrCmd_loadbyte           @ 0x10
+	.4byte ScrCmd_writebytetoaddr       @ 0x11
+	.4byte ScrCmd_loadbytefromaddr     @ 0x12
 	.4byte ScrCmd_setptrbyte              @ 0x13
-	.4byte ScrCmd_copybuffers             @ 0x14
+	.4byte ScrCmd_copylocal             @ 0x14
 	.4byte ScrCmd_copybyte                @ 0x15
 	.4byte ScrCmd_setvar                  @ 0x16
 	.4byte ScrCmd_addvar                  @ 0x17
