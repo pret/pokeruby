@@ -608,7 +608,7 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x2C*/ u16 battleMusic;
     /*0x2E*/ u8 weather;
     /*0x2F*/ u8 filler_2F;
-    /*0x30*/ u8 flashUsed;
+    /*0x30*/ u8 flashLevel;  // flash level on current map, 0 being normal and 4 being the darkest
     /*0x32*/ u16 mapDataId;
     /*0x34*/ u16 mapView[0x100];
     /*0x234*/ u8 playerPartyCount;

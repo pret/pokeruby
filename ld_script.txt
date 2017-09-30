@@ -59,8 +59,7 @@ SECTIONS {
         src/battle_7.o(.text);
         src/battle_controller_opponent.o(.text);
         asm/battle_9.o(.text);
-        asm/battle_controller_linkopponent1.o(.text);
-        src/battle_controller_linkopponent2.o(.text);
+        src/battle_controller_linkopponent.o(.text);
         src/pokemon_1.o(.text);
         src/calculate_base_damage.o(.text);
         src/pokemon_2.o(.text);
@@ -82,7 +81,7 @@ SECTIONS {
         src/berry_blender.o(.text);
         src/play_time.o(.text);
         src/new_game.o(.text);
-        src/rom4.o(.text);
+        src/overworld.o(.text);
         src/fieldmap.o(.text);
         src/metatile_behavior.o(.text);
         src/field_camera.o(.text);
@@ -231,9 +230,7 @@ SECTIONS {
         asm/field_effect_helpers.o(.text);
         asm/contest_ai.o(.text);
         asm/battle_anim_81258BC.o(.text);
-        asm/battle_controller_safari.o(.text);
         src/battle_controller_safari.o(.text);
-        asm/battle_controller_safari.o(.text_812BBFC);
         src/fldeff_sweetscent.o(.text);
         asm/battle_anim_812C144.o(.text);
         src/learn_move.o(.text);
@@ -326,7 +323,7 @@ SECTIONS {
         src/battle_controller_player.o(.rodata);
         data/data2b.o(.rodata);
         src/battle_controller_opponent.o(.rodata);
-        src/battle_controller_linkopponent2.o(.rodata);
+        src/battle_controller_linkopponent.o(.rodata);
         data/battle_moves.o(.rodata);
         src/battle_3.o(.rodata);
         src/pokemon_data.o(.rodata);
@@ -340,7 +337,7 @@ SECTIONS {
         src/trade.o(.rodata);
         src/berry_blender.o(.rodata);
         src/new_game.o(.rodata);
-        data/rom4.o(.rodata);
+        src/overworld.o(.rodata);
         data/tilesets.o(.rodata);
         data/maps.o(.rodata);
         src/fieldmap.o(.rodata);
@@ -375,6 +372,7 @@ SECTIONS {
         src/battle_setup.o(.rodata);
         data/cable_club.o(.rodata);
         data/mori_debug_menu.o(.rodata);
+        src/trainer_see.o(.rodata);
         data/trainer_see.o(.rodata);
         src/wild_encounter.o(.rodata);
         data/wild_encounter.o(.rodata);

@@ -18,7 +18,7 @@
 #include "pokedex.h"
 #include "pokemon.h"
 #include "rng.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "script_pokemon_80C4.h"
 #include "species.h"
 #include "task.h"
@@ -511,7 +511,7 @@ void ScriptRandom(void)
     *scriptPtr = random % *scriptPtr;
 }
 
-void HealPlayerParty(void)
+void ScrSpecial_HealPlayerParty(void)
 {
     u8 i, j;
     u8 ppBonuses;
@@ -542,41 +542,39 @@ void HealPlayerParty(void)
     }
 }
 
-u8 ScriptGiveMon(u16 species, u8 var, u16 item, u32 var3, u32 var4, u8 var5)
+u8 ScriptGiveMon(u16 species, u8 level, u16 item, u32 unused1, u32 unused2, u8 unused3)
 {
-    u16 nationalSpecies;
+    u16 nationalDexNum;
     int sentToPc;
-    u8 array[2];
+    u8 heldItem[2];
     struct Pokemon mon;
 
-    CreateMon(&mon, species, var, 32, 0, 0, 0, 0);
-    array[0] = item;
-    array[1] = item >> 8;
-    SetMonData(&mon, MON_DATA_HELD_ITEM, array);
+    CreateMon(&mon, species, level, 32, 0, 0, 0, 0);
+    heldItem[0] = item;
+    heldItem[1] = item >> 8;
+    SetMonData(&mon, MON_DATA_HELD_ITEM, heldItem);
     sentToPc = GiveMonToPlayer(&mon);
-    nationalSpecies = SpeciesToNationalPokedexNum(species);
+    nationalDexNum = SpeciesToNationalPokedexNum(species);
 
-    // nested if check to fool compiler
     switch(sentToPc)
     {
-        case 0:
-        case 1:
-            GetNationalPokedexFlag(nationalSpecies, 2);
-            GetNationalPokedexFlag(nationalSpecies, 3);
-            return sentToPc;
-        default:
-            return sentToPc;
+    case 0:
+    case 1:
+        GetNationalPokedexFlag(nationalDexNum, 2);
+        GetNationalPokedexFlag(nationalDexNum, 3);
+        break;
     }
+    return sentToPc;
 }
 
-u8 ScriptGiveEgg(u16 value)
+u8 ScriptGiveEgg(u16 species)
 {
     struct Pokemon mon;
-    u8 data;
+    u8 isEgg;
 
-    sub_8042044(&mon, value, 1);
-    data = 1;
-    SetMonData(&mon, MON_DATA_IS_EGG, &data);
+    sub_8042044(&mon, species, 1);
+    isEgg = TRUE;
+    SetMonData(&mon, MON_DATA_IS_EGG, &isEgg);
 
     return GiveMonToPlayer(&mon);
 }
@@ -622,18 +620,18 @@ bool8 GetNameOfEnigmaBerryInPlayerParty(void)
     return hasItem;
 }
 
-void ScriptWildBattle(u16 species, u8 level, u16 item)
+void CreateScriptedWildMon(u16 species, u8 level, u16 item)
 {
-    u8 data[2];
+    u8 heldItem[2];
 
     ZeroEnemyPartyMons();
     CreateMon(&gEnemyParty[0], species, level, 0x20, 0, 0, 0, 0);
 
     if(item)
     {
-        data[0] = item;
-        data[1] = item >> 8;
-        SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, data);
+        heldItem[0] = item;
+        heldItem[1] = item >> 8;
+        SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, heldItem);
     }
 }
 

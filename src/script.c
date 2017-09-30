@@ -40,7 +40,7 @@ u8 SetupBytecodeScript(struct ScriptContext *ctx, const u8 *ptr)
     return 1;
 }
 
-void SetupNativeScript(struct ScriptContext *ctx, void *ptr)
+void SetupNativeScript(struct ScriptContext *ctx, bool8 (*ptr)(void))
 {
     ctx->mode = 2;
     ctx->nativePtr = ptr;
@@ -64,7 +64,7 @@ u8 RunScriptCommand(struct ScriptContext *ctx)
     case 2:
         if (ctx->nativePtr)
         {
-            if (ctx->nativePtr() == 1)
+            if (ctx->nativePtr() == TRUE)
                 ctx->mode = 1;
             return 1;
         }
@@ -228,16 +228,16 @@ void ScriptContext2_RunNewScript(const u8 *ptr)
         ;
 }
 
-u8 *mapheader_get_tagged_pointer(u8 tag)
+static u8 *mapheader_get_tagged_pointer(u8 tag)
 {
     u8 *mapScripts = gMapHeader.mapScripts;
 
-    if (!mapScripts)
+    if (mapScripts == NULL)
         return NULL;
 
     while (1)
     {
-        if (!*mapScripts)
+        if (*mapScripts == 0)
             return NULL;
         if (*mapScripts == tag)
         {
@@ -248,14 +248,14 @@ u8 *mapheader_get_tagged_pointer(u8 tag)
     }
 }
 
-void mapheader_run_script_by_tag(u8 tag)
+static void mapheader_run_script_by_tag(u8 tag)
 {
     u8 *ptr = mapheader_get_tagged_pointer(tag);
     if (ptr)
         ScriptContext2_RunNewScript(ptr);
 }
 
-u8 *mapheader_get_first_match_from_tagged_ptr_list(u8 tag)
+static u8 *mapheader_get_first_match_from_tagged_ptr_list(u8 tag)
 {
     u8 *ptr = mapheader_get_tagged_pointer(tag);
 
@@ -316,7 +316,7 @@ void mapheader_run_first_tag4_script_list_match(void)
         ScriptContext2_RunNewScript(ptr);
 }
 
-u32 CalculateRamScriptChecksum(void)
+static u32 CalculateRamScriptChecksum(void)
 {
     u32 i;
     u32 sum = 0;

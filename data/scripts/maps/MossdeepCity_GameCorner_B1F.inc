@@ -29,7 +29,7 @@ MossdeepCity_GameCorner_B1F_EventScript_15AE6E:: @ 815AE6E
 	compare RESULT, 2
 	callif 1, MossdeepCity_GameCorner_B1F_EventScript_15AEEE
 	closebutton
-	special HealPlayerParty
+	special ScrSpecial_HealPlayerParty
 	move 255, MossdeepCity_GameCorner_B1F_Movement_15AEFF
 	waitmove 0
 	special LoadPlayerParty

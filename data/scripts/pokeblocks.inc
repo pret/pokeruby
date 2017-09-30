@@ -235,7 +235,7 @@ FallarborTown_ContestLobby_EventScript_1B7897:: @ 81B7897
 	end
 
 FallarborTown_ContestLobby_EventScript_1B78A1:: @ 81B78A1
-	call FallarborTown_ContestLobby_EventScript_19F806
+	call S_DoSaveDialog
 	compare RESULT, 0
 	jumpeq FallarborTown_ContestLobby_EventScript_1B7936
 	message FallarborTown_ContestLobby_Text_1B7304

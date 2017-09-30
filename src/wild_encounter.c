@@ -5,11 +5,12 @@
 #include "event_data.h"
 #include "field_player_avatar.h"
 #include "fieldmap.h"
+#include "map_constants.h"
 #include "metatile_behavior.h"
 #include "pokeblock.h"
 #include "rng.h"
 #include "roamer.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "safari_zone.h"
 #include "script.h"
 #include "species.h"
@@ -2901,7 +2902,7 @@ const struct WildPokemonInfo Underwater2_WaterMonsInfo = {4, Underwater2_WaterMo
 extern u16 gRoute119WaterTileData[];
 extern u16 gScriptResult;
 extern struct WildPokemon gWildFeebasRoute119Data;
-extern u8 Event_RepelWoreOff[];
+extern u8 S_RepelWoreOff[];
 
 EWRAM_DATA static u8 sWildEncountersDisabled = 0;
 EWRAM_DATA static u32 sFeebasRngValue = 0;
@@ -2911,7 +2912,7 @@ EWRAM_DATA static u32 sFeebasRngValue = 0;
 static u16 FeebasRandom(void);
 static void FeebasSeedRng(u16 seed);
 
-static bool8 RepelCheck(u8 level);
+static bool8 IsWildLevelAllowedByRepel(u8 level);
 static void ApplyFluteEncounterRateMod(u32 *encRate);
 static void ApplyCleanseTagEncounterRateMod(u32 *encRate);
 
@@ -2952,7 +2953,8 @@ static bool8 CheckFeebas(void)
     u8 route119section = 0;
     u16 waterTileNum;
 
-    if (gSaveBlock1.location.mapGroup == 0 && gSaveBlock1.location.mapNum == 0x22)
+    if (gSaveBlock1.location.mapGroup == MAP_GROUP_ROUTE119
+     && gSaveBlock1.location.mapNum == MAP_ID_ROUTE119)
     {
         GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
         x -= 7;
@@ -3193,7 +3195,7 @@ static bool8 GenerateWildMon(struct WildPokemonInfo *wildMonInfo, u8 area, bool8
         break;
     }
     level = ChooseWildMonLevel(&wildMonInfo->wildPokemon[wildMonIndex]);
-    if (checkRepel == TRUE && RepelCheck(level) == FALSE)
+    if (checkRepel == TRUE && IsWildLevelAllowedByRepel(level) == FALSE)
         return FALSE;
     else
     {
@@ -3215,7 +3217,7 @@ static bool8 SetUpMassOutbreakEncounter(bool8 checkRepel)
 {
     u16 i;
 
-    if (checkRepel == TRUE && RepelCheck(gSaveBlock1.outbreakPokemonLevel) == 0)
+    if (checkRepel == TRUE && IsWildLevelAllowedByRepel(gSaveBlock1.outbreakPokemonLevel) == FALSE)
         return FALSE;
     else
     {
@@ -3302,9 +3304,9 @@ bool8 StandardWildEncounter(u16 a, u16 b)
                         if (TryStartRoamerEncounter() == TRUE)
                         {
                             roamer = &gSaveBlock1.roamer;
-                            if (RepelCheck(roamer->level))
+                            if (IsWildLevelAllowedByRepel(roamer->level))
                             {
-                                StartBattle_Roamer();
+                                BattleSetup_StartRoamerBattle();
                                 return 1;
                             }
                         }
@@ -3312,7 +3314,7 @@ bool8 StandardWildEncounter(u16 a, u16 b)
                         {
                             if (DoMassOutbreakEncounterTest() == TRUE && SetUpMassOutbreakEncounter(1) == TRUE)
                             {
-                                CheckForSafariZoneAndProceed();
+                                BattleSetup_StartWildBattle();
                                 return 1;
                             }
                             if (GenerateWildMon(gWildMonHeaders[headerNum].landMonsInfo, 0, TRUE) == TRUE)
@@ -3336,9 +3338,9 @@ bool8 StandardWildEncounter(u16 a, u16 b)
                         if (TryStartRoamerEncounter() == TRUE)
                         {
                             roamer = &gSaveBlock1.roamer;
-                            if (RepelCheck(roamer->level))
+                            if (IsWildLevelAllowedByRepel(roamer->level))
                             {
-                                StartBattle_Roamer();
+                                BattleSetup_StartRoamerBattle();
                                 return 1;
                             }
                         }
@@ -3349,7 +3351,7 @@ bool8 StandardWildEncounter(u16 a, u16 b)
                             {
                             label:
                                 //_0808527A
-                                CheckForSafariZoneAndProceed();
+                                BattleSetup_StartWildBattle();
                                 return 1;
                             }
                         }
@@ -3361,7 +3363,7 @@ bool8 StandardWildEncounter(u16 a, u16 b)
     return 0;
 }
 
-void RockSmashWildEncounter(void)
+void ScrSpecial_RockSmashWildEncounter(void)
 {
     u16 headerNum = GetCurrentMapWildMonHeader();
 
@@ -3377,7 +3379,7 @@ void RockSmashWildEncounter(void)
         else if (DoWildEncounterTest(wildPokemonInfo->encounterRate, 1) == TRUE
          && GenerateWildMon(wildPokemonInfo, 2, TRUE) == TRUE)
         {
-            CheckForSafariZoneAndProceed();
+            BattleSetup_StartWildBattle();
             gScriptResult = 1;
             return;
         }
@@ -3403,14 +3405,14 @@ bool8 SweetScentWildEncounter(void)
                 return FALSE;
             if (TryStartRoamerEncounter() == TRUE)
             {
-                StartBattle_Roamer();
+                BattleSetup_StartRoamerBattle();
                 return TRUE;
             }
             if (DoMassOutbreakEncounterTest() == TRUE)
-                SetUpMassOutbreakEncounter(0);
+                SetUpMassOutbreakEncounter(FALSE);
             else
                 GenerateWildMon(wildPokemonInfo, 0, FALSE);
-            CheckForSafariZoneAndProceed();
+            BattleSetup_StartWildBattle();
             return TRUE;
         }
         else if (MetatileBehavior_IsWaterWildEncounter(MapGridGetMetatileBehaviorAt(x, y)) == 1)
@@ -3420,18 +3422,18 @@ bool8 SweetScentWildEncounter(void)
                 return FALSE;
             if (TryStartRoamerEncounter() == TRUE)
             {
-                StartBattle_Roamer();
+                BattleSetup_StartRoamerBattle();
                 return TRUE;
             }
             GenerateWildMon(wildPokemonInfo, 1, FALSE);
-            CheckForSafariZoneAndProceed();
+            BattleSetup_StartWildBattle();
             return TRUE;
         }
     }
     return FALSE;
 }
 
-bool8 GetFishingWildMonListHeader(void)
+bool8 DoesCurrentMapHaveFishingMons(void)
 {
     u16 headerNum = GetCurrentMapWildMonHeader();
 
@@ -3460,7 +3462,7 @@ void FishingWildEncounter(u8 rod)
     }
     IncrementGameStat(12);
     sub_80BEA50(species);
-    CheckForSafariZoneAndProceed();
+    BattleSetup_StartWildBattle();
 }
 
 u16 GetLocalWildMon(bool8 *isWaterMon)
@@ -3497,7 +3499,7 @@ u16 GetLocalWildMon(bool8 *isWaterMon)
     }
 }
 
-u16 GetMirageIslandMon(void)
+u16 GetLocalWaterMon(void)
 {
     u16 headerNum = GetCurrentMapWildMonHeader();
 
@@ -3521,20 +3523,21 @@ bool8 UpdateRepelCounter(void)
         VarSet(VAR_REPEL_STEP_COUNT, steps);
         if (steps == 0)
         {
-            ScriptContext1_SetupScript(Event_RepelWoreOff);
+            ScriptContext1_SetupScript(S_RepelWoreOff);
             return TRUE;
         }
     }
     return FALSE;
 }
 
-//Returns FALSE if Repel prevents wild Pokemon at the specified level from appearing
-static bool8 RepelCheck(u8 level)
+static bool8 IsWildLevelAllowedByRepel(u8 wildLevel)
 {
     u8 i;
 
     if (!VarGet(VAR_REPEL_STEP_COUNT))
+    {
         return TRUE;
+    }
     else
     {
         for (i = 0; i < 6; i++)
@@ -3542,7 +3545,9 @@ static bool8 RepelCheck(u8 level)
             // UB: Too few arguments for function 'GetMonData'
             if (GetMonData(&gPlayerParty[i], MON_DATA_HP) && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
             {
-                if (level < (u8)GetMonData(&gPlayerParty[i], MON_DATA_LEVEL))
+                u8 ourLevel = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
+
+                if (wildLevel < ourLevel)
                     return FALSE;
                 else
                     return TRUE;

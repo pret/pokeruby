@@ -918,20 +918,15 @@ Std_5:
 @ 819F805
 	return
 
-BattleTower_Lobby_EventScript_19F806:: @ 819F806
-FallarborTown_ContestLobby_EventScript_19F806:: @ 819F806
-LilycoveCity_ContestLobby_EventScript_19F806:: @ 819F806
-MossdeepCity_GameCorner_1F_EventScript_19F806:: @ 819F806
-OldaleTown_PokemonCenter_2F_EventScript_19F806:: @ 819F806
-SecretBase_RedCave1_EventScript_19F806:: @ 819F806
-	special InitSaveDialog
+S_DoSaveDialog:: @ 819F806
+	special ScrSpecial_DoSaveDialog
 	waitstate
 	return
 
 gUnknown_0819F80B:: @ 819F80B
 	lock
 	special PlayTrainerEncounterMusic
-	special sub_80847C8
+	special ScrSpecial_EndTrainerApproach
 	waitstate
 	jump EventScript_19F8F2
 
@@ -940,7 +935,7 @@ gUnknown_0819F818:: @ 819F818
 	faceplayer
 	move LAST_TALKED, Movement_19F8F0
 	waitmove 0
-	specialval RESULT, sub_8082564
+	specialval RESULT, ScrSpecial_HasTrainerBeenFought
 	compare RESULT, 0
 	jumpif 5, EventScript_19F83F
 	special PlayTrainerEncounterMusic
@@ -954,7 +949,7 @@ gUnknown_0819F840:: @ 819F840
 	lock
 	faceplayer
 	call EventScript_19F8E5
-	specialval RESULT, sub_8082564
+	specialval RESULT, ScrSpecial_HasTrainerBeenFought
 	compare RESULT, 0
 	jumpif 5, EventScript_19F877
 	special CheckForAlivePartyMons
@@ -965,7 +960,7 @@ gUnknown_0819F840:: @ 819F840
 	jump EventScript_19F8F2
 
 EventScript_19F870:
-	special sub_8082718
+	special ScrSpecial_ShowTrainerNonBattlingSpeech
 	waittext
 	waitbutton
 	release
@@ -983,15 +978,15 @@ gUnknown_0819F878:: @ 819F878
 
 gUnknown_0819F887:: @ 819F887
 	call EventScript_19F8E5
-	specialval RESULT, sub_8082C9C
+	specialval RESULT, ScrSpecial_GetTrainerEyeRematchFlag
 	compare RESULT, 0
 	jumpeq EventScript_19F8AD
 	special PlayTrainerEncounterMusic
 	special sub_8082524
-	special sub_80826D8
+	special ScrSpecial_ShowTrainerIntroSpeech
 	waittext
 	waitbutton
-	special sub_80826B0
+	special ScrSpecial_StartTrainerEyeRematch
 	waitstate
 	releaseall
 	end
@@ -1000,7 +995,7 @@ EventScript_19F8AD:
 	endtrainerbattle
 
 gUnknown_0819F8AE:: @ 819F8AE
-	specialval RESULT, sub_8082C9C
+	specialval RESULT, ScrSpecial_GetTrainerEyeRematchFlag
 	compare RESULT, 0
 	jumpeq EventScript_19F8DD
 	special CheckForAlivePartyMons
@@ -1008,10 +1003,10 @@ gUnknown_0819F8AE:: @ 819F8AE
 	jumpif 5, EventScript_19F8DE
 	special PlayTrainerEncounterMusic
 	special sub_8082524
-	special sub_80826D8
+	special ScrSpecial_ShowTrainerIntroSpeech
 	waittext
 	waitbutton
-	special sub_80826B0
+	special ScrSpecial_StartTrainerEyeRematch
 	waitstate
 	releaseall
 	end
@@ -1020,7 +1015,7 @@ EventScript_19F8DD:
 	endtrainerbattle
 
 EventScript_19F8DE:
-	special sub_8082718
+	special ScrSpecial_ShowTrainerNonBattlingSpeech
 	waittext
 	waitbutton
 	release
@@ -1036,11 +1031,11 @@ Movement_19F8F0::
 	step_end
 
 EventScript_19F8F2:
-	special sub_80826D8
+	special ScrSpecial_ShowTrainerIntroSpeech
 	waittext
 	waitbutton
 	reptrainerbattle
-	specialval RESULT, sub_8082558
+	specialval RESULT, ScrSpecial_GetTrainerBattleMode
 	compare RESULT, 0
 	jumpeq EventScript_19F934
 	compare RESULT, 2
@@ -1324,7 +1319,7 @@ EverGrandeCity_HallOfFame_EventScript_19FC70:: @ 819FC70
 	setflag 2141
 	return
 
-EventScript_LeagueWhiteOut:: @ 819FC74
+S_WhiteOut:: @ 819FC74
 	call EverGrandeCity_HallOfFame_EventScript_19FD09
 	call EventScript_19FC84
 	jump gUnknown_0819FC9F
@@ -1437,16 +1432,16 @@ SootopolisCity_PokemonCenter_1F_EventScript_19FD5B:: @ 819FD5B
 VerdanturfTown_PokemonCenter_1F_EventScript_19FD5B:: @ 819FD5B
 	lock
 	faceplayer
-	msgbox OldaleTown_PokemonCenter_1F_Text_1A0A7D, 5
+	msgbox gText_NurseJoy_Welcome, MSGBOX_YESNO
 	compare RESULT, 1
-	jumpeq OldaleTown_PokemonCenter_1F_EventScript_19FD7C
+	jumpeq do_heal_party
 	compare RESULT, 0
-	jumpeq OldaleTown_PokemonCenter_1F_EventScript_19FDC7
+	jumpeq dont_heal_party
 	end
 
-OldaleTown_PokemonCenter_1F_EventScript_19FD7C:: @ 819FD7C
+do_heal_party:: @ 819FD7C
 	inccounter GAME_STAT_USED_POKECENTER
-	message OldaleTown_PokemonCenter_1F_Text_1A1245
+	message gText_NurseJoy_OkayIllTakeYourPokemon
 	waittext
 	move 0x800b, OldaleTown_PokemonCenter_1F_Movement_1A083F
 	waitmove 0
@@ -1454,23 +1449,23 @@ OldaleTown_PokemonCenter_1F_EventScript_19FD7C:: @ 819FD7C
 	checkanimation 25
 	move 0x800b, OldaleTown_PokemonCenter_1F_Movement_1A0845
 	waitmove 0
-	special HealPlayerParty
+	special ScrSpecial_HealPlayerParty
 	checkflag 273
 	jumpif 0, OldaleTown_PokemonCenter_1F_EventScript_19FDCE
 	jump OldaleTown_PokemonCenter_1F_EventScript_19FDB0
 	end
 
 OldaleTown_PokemonCenter_1F_EventScript_19FDB0:: @ 819FDB0
-	message OldaleTown_PokemonCenter_1F_Text_1A0B14
+	message gText_NurseJoy_ThankYouForWaiting
 	waittext
 	move 0x800b, OldaleTown_PokemonCenter_1F_Movement_19FDF4
 	waitmove 0
-	message OldaleTown_PokemonCenter_1F_Text_1A0AFA
+	message gText_NurseJoy_WeHopeToSeeYouAgain
 	waittext
 	return
 
-OldaleTown_PokemonCenter_1F_EventScript_19FDC7:: @ 819FDC7
-	message OldaleTown_PokemonCenter_1F_Text_1A0AFA
+dont_heal_party:: @ 819FDC7
+	message gText_NurseJoy_WeHopeToSeeYouAgain
 	waittext
 	return
 
@@ -1483,7 +1478,7 @@ OldaleTown_PokemonCenter_1F_EventScript_19FDCE:: @ 819FDCE
 	end
 
 OldaleTown_PokemonCenter_1F_EventScript_19FDEA:: @ 819FDEA
-	message OldaleTown_PokemonCenter_1F_Text_1A1275
+	message gText_NurseJoy_Pokerus
 	waittext
 	setflag 273
 	return
@@ -1688,7 +1683,7 @@ gUnknown_081A0009:: @ 81A0009
 EventScript_1A0023:
 	message gPCText_WhichPCShouldBeAccessed
 	waittext
-	special TryCreatePCMenu
+	special ScrSpecial_CreatePCMenu
 	waitstate
 	jump EventScript_1A0033
 	end
@@ -2111,7 +2106,7 @@ SSTidalRooms_EventScript_1A02CA:: @ 81A02CA
 	fadescreen 1
 	fanfare 368
 	waitfanfare
-	special HealPlayerParty
+	special ScrSpecial_HealPlayerParty
 	fadescreen 0
 	return
 
@@ -2985,17 +2980,17 @@ UnknownString_81A0A54: @ 81A0A54
 UnknownString_81A0A66: @ 81A0A66
 	.string "Accessed LANETTE’s PC.$"
 
-OldaleTown_PokemonCenter_1F_Text_1A0A7D:: @ 81A0A7D
+gText_NurseJoy_Welcome:: @ 81A0A7D
 	.string "Hello, and welcome to the POKéMON\n"
 	.string "CENTER.\p"
 	.string "We restore your tired POKéMON to\n"
 	.string "full health.\p"
 	.string "Would you like to rest your POKéMON?$"
 
-OldaleTown_PokemonCenter_1F_Text_1A0AFA:: @ 81A0AFA
+gText_NurseJoy_WeHopeToSeeYouAgain:: @ 81A0AFA
 	.string "We hope to see you again!$"
 
-OldaleTown_PokemonCenter_1F_Text_1A0B14:: @ 81A0B14
+gText_NurseJoy_ThankYouForWaiting:: @ 81A0B14
 	.string "Thank you for waiting.\p"
 	.string "We’ve restored your POKéMON to\n"
 	.string "full health.$"
@@ -3209,11 +3204,11 @@ SlateportCity_Text_1A116E:: @ 81A116E
 	.string "We’ll accept you as a member and sell\n"
 	.string "you good stuff in secrecy.$"
 
-OldaleTown_PokemonCenter_1F_Text_1A1245:: @ 81A1245
+gText_NurseJoy_OkayIllTakeYourPokemon:: @ 81A1245
 	.string "Okay, I’ll take your POKéMON for a\n"
 	.string "few seconds.$"
 
-OldaleTown_PokemonCenter_1F_Text_1A1275:: @ 81A1275
+gText_NurseJoy_Pokerus:: @ 81A1275
 	.string "Your POKéMON may be infected with\n"
 	.string "POKéRUS.\p"
 	.string "Little is known about the POKéRUS\n"
@@ -3949,7 +3944,7 @@ SecretBase_RedCave1_EventScript_1A3032:: @ 81A3032
 	jumpeq SecretBase_RedCave1_EventScript_1A308F
 	setvar RESULT, 1
 	special sub_80BCE4C
-	call SecretBase_RedCave1_EventScript_19F806
+	call S_DoSaveDialog
 	compare RESULT, 0
 	jumpeq SecretBase_RedCave1_EventScript_1A308F
 	hidebox 0, 0, 15, 10
@@ -3984,7 +3979,7 @@ SecretBase_RedCave1_EventScript_1A30AE:: @ 81A30AE
 	jumpeq SecretBase_RedCave1_EventScript_1A310B
 	setvar RESULT, 1
 	special sub_80BCE4C
-	call SecretBase_RedCave1_EventScript_19F806
+	call S_DoSaveDialog
 	compare RESULT, 0
 	jumpeq SecretBase_RedCave1_EventScript_1A310B
 	hidebox 0, 0, 15, 10
@@ -4019,7 +4014,7 @@ SecretBase_RedCave1_EventScript_1A312A:: @ 81A312A
 	jumpeq SecretBase_RedCave1_EventScript_1A3187
 	setvar RESULT, 1
 	special sub_80BCE4C
-	call SecretBase_RedCave1_EventScript_19F806
+	call S_DoSaveDialog
 	compare RESULT, 0
 	jumpeq SecretBase_RedCave1_EventScript_1A3187
 	hidebox 0, 0, 15, 10
@@ -4054,7 +4049,7 @@ SecretBase_RedCave1_EventScript_1A31A6:: @ 81A31A6
 	jumpeq SecretBase_RedCave1_EventScript_1A3203
 	setvar RESULT, 1
 	special sub_80BCE4C
-	call SecretBase_RedCave1_EventScript_19F806
+	call S_DoSaveDialog
 	compare RESULT, 0
 	jumpeq SecretBase_RedCave1_EventScript_1A3203
 	hidebox 0, 0, 15, 10
@@ -4089,7 +4084,7 @@ SecretBase_RedCave1_EventScript_1A3222:: @ 81A3222
 	jumpeq SecretBase_RedCave1_EventScript_1A327F
 	setvar RESULT, 1
 	special sub_80BCE4C
-	call SecretBase_RedCave1_EventScript_19F806
+	call S_DoSaveDialog
 	compare RESULT, 0
 	jumpeq SecretBase_RedCave1_EventScript_1A327F
 	hidebox 0, 0, 15, 10
@@ -4124,7 +4119,7 @@ SecretBase_RedCave1_EventScript_1A329E:: @ 81A329E
 	jumpeq SecretBase_RedCave1_EventScript_1A32FB
 	setvar RESULT, 1
 	special sub_80BCE4C
-	call SecretBase_RedCave1_EventScript_19F806
+	call S_DoSaveDialog
 	compare RESULT, 0
 	jumpeq SecretBase_RedCave1_EventScript_1A32FB
 	hidebox 0, 0, 15, 10
@@ -4159,7 +4154,7 @@ SecretBase_RedCave1_EventScript_1A331A:: @ 81A331A
 	jumpeq SecretBase_RedCave1_EventScript_1A3377
 	setvar RESULT, 1
 	special sub_80BCE4C
-	call SecretBase_RedCave1_EventScript_19F806
+	call S_DoSaveDialog
 	compare RESULT, 0
 	jumpeq SecretBase_RedCave1_EventScript_1A3377
 	hidebox 0, 0, 15, 10
@@ -4194,7 +4189,7 @@ SecretBase_RedCave1_EventScript_1A3396:: @ 81A3396
 	jumpeq SecretBase_RedCave1_EventScript_1A33F3
 	setvar RESULT, 1
 	special sub_80BCE4C
-	call SecretBase_RedCave1_EventScript_19F806
+	call S_DoSaveDialog
 	compare RESULT, 0
 	jumpeq SecretBase_RedCave1_EventScript_1A33F3
 	hidebox 0, 0, 15, 10
@@ -4229,7 +4224,7 @@ SecretBase_RedCave1_EventScript_1A3412:: @ 81A3412
 	jumpeq SecretBase_RedCave1_EventScript_1A346F
 	setvar RESULT, 1
 	special sub_80BCE4C
-	call SecretBase_RedCave1_EventScript_19F806
+	call S_DoSaveDialog
 	compare RESULT, 0
 	jumpeq SecretBase_RedCave1_EventScript_1A346F
 	hidebox 0, 0, 15, 10
@@ -4264,7 +4259,7 @@ SecretBase_RedCave1_EventScript_1A348E:: @ 81A348E
 	jumpeq SecretBase_RedCave1_EventScript_1A34EB
 	setvar RESULT, 1
 	special sub_80BCE4C
-	call SecretBase_RedCave1_EventScript_19F806
+	call S_DoSaveDialog
 	compare RESULT, 0
 	jumpeq SecretBase_RedCave1_EventScript_1A34EB
 	hidebox 0, 0, 15, 10
@@ -4293,7 +4288,7 @@ SecretBase_RedCave1_EventScript_1A350A:: @ 81A350A
 	setvar 0x8005, 0
 	special sub_813556C
 	waitstate
-	special HealPlayerParty
+	special ScrSpecial_HealPlayerParty
 	release
 	end
 
@@ -4774,7 +4769,7 @@ gUnknown_081B694A:: @ 81B694A
 
 	.include "data/scripts/players_house.inc"
 
-Event_RunningShoesManual:: @ 81B6E5A
+S_RunningShoesManual:: @ 81B6E5A
 	msgbox UnknownString_81728E3, 3
 	end
 
@@ -4783,7 +4778,7 @@ Event_RunningShoesManual:: @ 81B6E5A
 
 	.include "data/text/trainers.inc"
 
-Event_RepelWoreOff:: @ 81C33E6
+S_RepelWoreOff:: @ 81C33E6
 	msgbox Text_RepelWoreOff, 3
 	end
 
@@ -4863,7 +4858,7 @@ GraniteCave_B1F_MapScript2_1C6BB5:: @ 81C6BB5
 MtPyre_2F_MapScript2_1C6BB5:: @ 81C6BB5
 SkyPillar_2F_MapScript2_1C6BB5:: @ 81C6BB5
 SkyPillar_4F_MapScript2_1C6BB5:: @ 81C6BB5
-	map_script_2 0x4022, 0, GraniteCave_B1F_EventScript_1C6BC5
+	map_script_2 0x4022, 0, S_FallDownHole
 	.2byte 0
 
 GraniteCave_B1F_MapScript1_1C6BBF:: @ 81C6BBF
@@ -4873,7 +4868,7 @@ SkyPillar_4F_MapScript1_1C6BBF:: @ 81C6BBF
 	copyvar 0x4022, 0x1
 	end
 
-GraniteCave_B1F_EventScript_1C6BC5:: @ 81C6BC5
+S_FallDownHole:: @ 81C6BC5
 	lockall
 	pause 20
 	move 255, GraniteCave_B1F_Movement_1C6BF7

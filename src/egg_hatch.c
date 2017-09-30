@@ -6,7 +6,7 @@
 #include "task.h"
 #include "script.h"
 #include "palette.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "main.h"
 #include "event_data.h"
 #include "sound.h"

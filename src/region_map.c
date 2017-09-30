@@ -9,7 +9,7 @@
 #include "palette.h"
 #include "pokemon_menu.h"
 #include "region_map.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "secret_base.h"
 #include "songs.h"
 #include "sprite.h"
@@ -714,7 +714,7 @@ static void InitializeCursorPosition(void)
         return;
     }
 
-    switch (get_map_light_level_by_bank_and_number(gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum) - 1)
+    switch (GetMapTypeByGroupAndId(gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum) - 1)
     {
     default:
     case 0:
@@ -733,7 +733,7 @@ static void InitializeCursorPosition(void)
         break;
     case 3:
     case 6:
-        mapHeader = get_mapheader_by_bank_and_number(gSaveBlock1.warp4.mapGroup, gSaveBlock1.warp4.mapNum);
+        mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1.warp4.mapGroup, gSaveBlock1.warp4.mapNum);
         gRegionMap->mapSecId = mapHeader->regionMapSectionId;
         gRegionMap->playerIsInCave = TRUE;
         mapWidth = mapHeader->mapData->width;
@@ -742,7 +742,7 @@ static void InitializeCursorPosition(void)
         y = gSaveBlock1.warp4.y;
         break;
     case 8:
-        mapHeader = get_mapheader_by_bank_and_number(gSaveBlock1.warp2.mapGroup, gSaveBlock1.warp2.mapNum);
+        mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1.warp2.mapGroup, gSaveBlock1.warp2.mapNum);
         gRegionMap->mapSecId = mapHeader->regionMapSectionId;
         gRegionMap->playerIsInCave = TRUE;
         mapWidth = mapHeader->mapData->width;
@@ -758,12 +758,12 @@ static void InitializeCursorPosition(void)
             if (gRegionMap->mapSecId != MAPSEC_UNK_0x57)
             {
                 r4 = &gSaveBlock1.warp4;
-                mapHeader = get_mapheader_by_bank_and_number(r4->mapGroup, r4->mapNum);
+                mapHeader = Overworld_GetMapHeaderByGroupAndId(r4->mapGroup, r4->mapNum);
             }
             else
             {
                 r4 = &gSaveBlock1.warp2;
-                mapHeader = get_mapheader_by_bank_and_number(r4->mapGroup, r4->mapNum);
+                mapHeader = Overworld_GetMapHeaderByGroupAndId(r4->mapGroup, r4->mapNum);
                 gRegionMap->mapSecId = mapHeader->regionMapSectionId;
             }
             gRegionMap->playerIsInCave = FALSE;
@@ -850,7 +850,7 @@ static void sub_80FB600(void)
     default:
     case 0:
         {
-            struct MapHeader *mapHeader = get_mapheader_by_bank_and_number(mapGroup, mapNum);
+            struct MapHeader *mapHeader = Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum);
             u16 r1;
 
             gRegionMap->mapSecId = mapHeader->regionMapSectionId;

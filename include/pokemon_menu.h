@@ -37,7 +37,7 @@ extern void (*gUnknown_03005CE4)(void);
 void sub_808B5B4(u32 taskID);
 void sub_8089A70(void);
 void sub_808A004(u8 taskID);
-void sub_808AB90(void);
+void FieldCallback_Teleport(void);
 void sub_808AD58(void);
 void sub_808B020(void);
 void sub_808B0C0(u8 taskID);

@@ -32,7 +32,7 @@ PetalburgCity_EventScript_14B747:: @ 814B747
 	move 255, PetalburgCity_Movement_14B7CC
 	waitmove 0
 	msgbox PetalburgCity_Text_16D361, 4
-	special StartBattle_WallyTutorial
+	special ScrSpecial_StartWallyTutorialBattle
 	waitstate
 	msgbox PetalburgCity_Text_16D3DE, 4
 	movecoords 2, PetalburgCity_Movement_1A083F, 0, 0

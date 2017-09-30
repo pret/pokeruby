@@ -12,7 +12,7 @@
 #include "string_util.h"
 #include "link.h"
 #include "task.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "item.h"
 #include "items.h"
 #include "rng.h"

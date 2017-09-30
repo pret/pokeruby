@@ -9,7 +9,7 @@
 #include "play_time.h"
 #include "rng.h"
 #include "rom3.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "rtc.h"
 #include "siirtc.h"
 #include "sound.h"

@@ -21,7 +21,7 @@
 #include "sound.h"
 #include "data2.h"
 #include "pokemon_summary_screen.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "rom_8077ABC.h"
 #include "daycare.h"
 #include "event_data.h"
