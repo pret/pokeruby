@@ -14,9 +14,9 @@ struct SomeTradeStruct
 
 extern struct SomeTradeStruct* gUnknown_03004828;
 
-const u8 gOtherText_MaleSymbol3[1];
-const u8 gOtherText_FemaleSymbol3[1];
-const u8 gOtherText_GenderlessSymbol[1];
+extern const u8 gOtherText_MaleSymbol3[1];
+extern const u8 gOtherText_FemaleSymbol3[1];
+extern const u8 gOtherText_GenderlessSymbol[1];
 
 void sub_804E22C(void);
 

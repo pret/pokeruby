@@ -71,7 +71,7 @@ void sub_8106448(void) {
     u32 offsetRead, offsetWrite;
     u32 size;
 
-    sub_800D238(gSlotMachine_Gfx, (void *) 0x02010000);
+    LZDecompressWram(gSlotMachine_Gfx, (void *) 0x02010000);
 
     offsetRead = 0x02010000;
     offsetWrite = BG_VRAM;

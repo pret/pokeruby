@@ -91,15 +91,15 @@ const u8 *GetPokedexRatingText(u16 count)
         return gBirchDexRatingText_LessThan200;
     if (count == 200)
     {
-        if (GetNationalPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_JIRACHI), 1)
-         || GetNationalPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_DEOXYS), 1)) // Jirachi or Deoxys is not counted towards the dex completion. If either of these flags are enabled, it means the actual count is less than 200.
+        if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_JIRACHI), 1)
+         || GetSetPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_DEOXYS), 1)) // Jirachi or Deoxys is not counted towards the dex completion. If either of these flags are enabled, it means the actual count is less than 200.
             return gBirchDexRatingText_LessThan200;
         return gBirchDexRatingText_DexCompleted;
     }
     if (count == 201)
     {
-        if (GetNationalPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_JIRACHI), 1)
-         && GetNationalPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_DEOXYS), 1)) // If both of these flags are enabled, it means the actual count is less than 200.
+        if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_JIRACHI), 1)
+         && GetSetPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_DEOXYS), 1)) // If both of these flags are enabled, it means the actual count is less than 200.
             return gBirchDexRatingText_LessThan200;
         return gBirchDexRatingText_DexCompleted;
     }

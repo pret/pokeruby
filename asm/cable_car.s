@@ -256,22 +256,22 @@ _081233EC:
 	ldr r0, _0812345C @ =gCableCarMtChimneyTilemap
 	ldr r4, _08123460 @ =0x02019000
 	adds r1, r4, 0
-	bl sub_800D238
+	bl LZDecompressWram
 	ldr r0, _08123464 @ =gCableCarTreeTilemap
 	movs r2, 0xB4
 	lsls r2, 1
 	adds r1, r4, r2
-	bl sub_800D238
+	bl LZDecompressWram
 	ldr r0, _08123468 @ =gCableCarMountainTilemap
 	movs r2, 0xA5
 	lsls r2, 3
 	adds r1, r4, r2
-	bl sub_800D238
+	bl LZDecompressWram
 	ldr r0, _0812346C @ =gCableCarPylonStemTilemap
 	ldr r1, _08123470 @ =0x000009d8
 	adds r4, r1
 	adds r1, r4, 0
-	bl sub_800D238
+	bl LZDecompressWram
 	ldr r0, _08123474 @ =gCableCarBG_Pal
 	movs r1, 0
 	movs r2, 0x80

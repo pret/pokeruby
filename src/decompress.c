@@ -6,7 +6,7 @@
 
 #define WRAM 0x02000000
 
-void sub_800D238(const void *src, void *dest)
+void LZDecompressWram(const void *src, void *dest)
 {
     LZ77UnCompWram(src, dest);
 }

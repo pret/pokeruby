@@ -12958,7 +12958,7 @@ _0809C08C:
 	adds r1, r6, r2
 	str r0, [r1]
 	adds r0, r7, 0
-	bl pokemon_get_pal
+	bl GetMonSpritePal
 	ldr r2, _0809C11C @ =0x000011e8
 	adds r1, r6, r2
 	str r0, [r1]
@@ -13031,7 +13031,7 @@ _0809C120:
 	str r2, [r4]
 	ldrh r0, [r5]
 	mov r1, r9
-	bl species_and_otid_get_pal
+	bl GetMonSpritePalFromOtIdPersonality
 	ldr r2, _0809C1D0 @ =0x000011e8
 	adds r1, r6, r2
 	str r0, [r1]

@@ -2501,7 +2501,7 @@ static void sub_8045458(u8 a, u8 b)
     if (GetBankSide(r4) != 0)
     {
         u16 species = GetMonData(&gEnemyParty[gBattlePartyID[r4]], MON_DATA_SPECIES);
-        if (GetNationalPokedexFlag(SpeciesToNationalPokedexNum(species), 1) != 0)
+        if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), 1) != 0)
         {
             r4 = gSprites[a].data5;
             if (b != 0)

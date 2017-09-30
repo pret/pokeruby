@@ -123,7 +123,7 @@ bool8 IsTradedMon(struct Pokemon*);
 void b_movescr_stack_pop_cursor(void);
 void SwitchInClearStructs(void);
 u8* ConvertIntToDecimalStringN(u8*, s32, u8, u8);
-u8 GetNationalPokedexFlag(u16 nationalNum, u8 caseID);
+u8 GetSetPokedexFlag(u16 nationalNum, u8 caseID);
 u16 SpeciesToNationalPokedexNum(u16 species);
 u8 sub_803FC34(u8 bank);
 u16 sub_803FBFC(u8 a);
@@ -9602,7 +9602,7 @@ static void atk4E_switchin_anim(void)
     gActiveBank = GetBattleBank(BSScriptRead8(gBattlescriptCurrInstr + 1));
     if (GetBankSide(gActiveBank) == 1 && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_BATTLE_TOWER)))
     {
-        GetNationalPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gActiveBank].species), 2);
+        GetSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gActiveBank].species), 2);
     }
     gAbsentBankFlags &= ~(gBitTable[gActiveBank]);
     EmitSendOutPoke(0, gBattlePartyID[gActiveBank], BSScriptRead8(gBattlescriptCurrInstr + 2));
@@ -17314,7 +17314,7 @@ void atkEF_pokeball_catch_calculation(void)
                     ball_multiplier = 10;
                 break;
             case ITEM_REPEAT_BALL:
-                if (GetNationalPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gBankTarget].species), 1))
+                if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gBankTarget].species), 1))
                     ball_multiplier = 30;
                 else
                     ball_multiplier = 10;
@@ -17400,11 +17400,11 @@ static void atkF0_copy_caught_poke(void)
 
 static void atkF1_setpoke_as_caught(void)
 {
-    if (GetNationalPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gBankTarget].species), 1))
+    if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gBankTarget].species), 1))
         gBattlescriptCurrInstr = BSScriptReadPtr(gBattlescriptCurrInstr + 1);
     else
     {
-        GetNationalPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gBankTarget].species), 3);
+        GetSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gBankTarget].species), 3);
         if (gBattleMons[gBankTarget].species == SPECIES_UNOWN)
             gSaveBlock2.pokedex.unownPersonality = gBattleMons[gBankTarget].personality;
         if (gBattleMons[gBankTarget].species == SPECIES_SPINDA) //else if
