@@ -71,7 +71,6 @@ SECTIONS {
         src/engine/util.o(.text);
         src/engine/blend_palette.o(.text);
         src/field/daycare.o(.text);
-        asm/daycare.o(.text);
         src/scene/egg_hatch.o(.text);
         src/battle/battle_interface.o(.text);
         src/battle/smokescreen.o(.text);
@@ -92,8 +91,6 @@ SECTIONS {
         src/field/field_door.o(.text);
         src/field/field_player_avatar.o(.text);
         src/field/field_map_obj.o(.text);
-        asm/field_map_obj.o(.text);
-        src/field/field_map_obj.o(.text_fmocb2_c);
         src/field/field_ground_effect.o(.text);
         src/field/field_map_obj_helpers.o(.text);
         src/field/field_message_box.o(.text);
@@ -231,7 +228,7 @@ SECTIONS {
         src/misc/unused_8124F94.o(.text);
         src/engine/save.o(.text);
         src/engine/mystery_event_script.o(.text);
-        asm/field_effect_helpers.o(.text);
+        src/field/field_effect_helpers.o(.text);
         asm/contest_ai.o(.text);
         asm/battle_anim_81258BC.o(.text);
         src/battle/battle_controller_safari.o(.text);
@@ -334,7 +331,7 @@ SECTIONS {
         . = ALIGN(4);
         src/engine/trig.o(.rodata);
         src/engine/util.o(.rodata);
-        data/daycare.o(.rodata);
+        src/field/daycare.o(.rodata);
         src/scene/egg_hatch.o(.rodata);
         data/battle_interface.o(.rodata);
         src/battle/pokeball.o(.rodata);
@@ -447,7 +444,7 @@ SECTIONS {
         src/field/choose_party.o(.rodata);
         data/cable_car.o(.rodata);
         src/engine/save.o(.rodata);
-        data/field_effect_helpers.o(.rodata);
+        src/field/field_effect_helpers.o(.rodata);
         data/contest_ai.o(.rodata);
         src/battle/battle_controller_safari.o(.rodata);
         data/battle_anim_812C144.o(.rodata);

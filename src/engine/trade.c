@@ -37,6 +37,7 @@ struct UnkStructD {
 extern const struct InGameTrade gIngameTrades[];
 extern const u16 gIngameTradeMail[][10];
 
+IWRAM_DATA u8 gUnknown_03000508[8];
 
 void sub_804A96C(struct UnkStructD *arg0, u8 left, u8 top, u16 *tilemap, u8 width, u8 height, u16 sp8) {
     int y, x;

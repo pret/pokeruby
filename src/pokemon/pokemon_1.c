@@ -468,10 +468,10 @@ void CalculateMonStats(struct Pokemon *mon)
     SetMonData(mon, MON_DATA_HP, (u8 *)&currentHP);
 }
 
-void sub_803B4B4(struct Pokemon *src, struct Pokemon *dest)
+void sub_803B4B4(const struct BoxPokemon *src, struct Pokemon *dest)
 {
     u32 value = 0;
-    memcpy(&dest->box, &src->box, sizeof(struct BoxPokemon));
+    dest->box = *src;
     SetMonData(dest, MON_DATA_STATUS, (u8 *)&value);
     SetMonData(dest, MON_DATA_HP, (u8 *)&value);
     SetMonData(dest, MON_DATA_MAX_HP, (u8 *)&value);

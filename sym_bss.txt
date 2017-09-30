@@ -4,38 +4,11 @@
 	.include "src/engine/string_util.o"
 	.include "src/engine/link.o"
 	.include "src/engine/rtc.o"
-
-@ daycare
-
-	.align 2
-gUnknown_03000470: @ 3000470
-	.space 0x68
-
-gUnknown_030004D8: @ 30004D8
-	.space 0x8
-
-gUnknown_030004E0: @ 30004E0
-	.space 0x8
-
-gUnknown_030004E8: @ 30004E8
-	.space 0x18
-
-gUnknown_03000500: @ 3000500
-	.space 0x8
-
-@ trade
-
-gUnknown_03000508: @ 3000508
-	.space 0x8
-
+	.include "src/field/daycare.o"
+    .include "src/engine/trade.o"
 	.include "src/scene/berry_blender.o"
 	.include "src/engine/play_time.o"
 	.include "src/field/overworld.o"
-
-	@ unused variable?
-	.align 2
-	.space 0x4
-
 	.include "src/field/field_camera.o"
 	.include "src/field/field_map_obj.o"
 	.include "src/field/field_message_box.o"
@@ -45,49 +18,19 @@ gUnknown_03000508: @ 3000508
 	.include "src/engine/menu.o"
 	.include "src/engine/tileset_anim.o"
 	.include "src/engine/sound.o"
-
-@ field_weather
-
-gUnknown_030006DC: @ 30006DC
-	.space 0x4
-
+	.include "src/field/field_weather.o"
 	.include "src/field/field_effect.o"
 	.include "src/field/item_menu.o"
 	.include "src/field/shop.o"
 	.include "src/engine/record_mixing.o"
 	.include "src/field/tv.o"
-
-	@ unused variable?
-	.align 2
-	.space 0x4
-
-@ battle_anim_80CA710
-
-gUnknown_03000728: @ 3000728
-	.space 0x8
-
-gUnknown_03000730: @ 3000730
-	.space 0x10
-
-@ easy_chat
-
-gUnknown_03000740: @ 3000740
-	.space 0x4
-
-@ pokenav
-
-gUnknown_03000744: @ 3000744
-	.space 0x4
-
+    .include "src/battle/battle_anim_80CA710.o"
+    .include "src/field/easy_chat.o"
+    .include "src/field/pokenav.o"
 	.include "src/field/mauville_man.o"
 	.include "src/field/menu_helpers.o"
 	.include "src/scene/contest_painting.o"
 	.include "src/field/pokeblock.o"
-
-	@ unused variable?
-	.align 2
-	.space 0x4
-
 	.include "src/field/field_specials.o"
     .include "src/pokemon/learn_move.o"
 	.include "src/field/player_pc.o"

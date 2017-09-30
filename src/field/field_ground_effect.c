@@ -472,7 +472,7 @@ void GroundEffect_SpawnOnTallGrass(struct MapObject *mapObj, struct Sprite *spri
                          | (u8)gSaveBlock1.location.mapGroup;
 
     gFieldEffectArguments[7] = 1;
-    FieldEffectStart(4);
+    FieldEffectStart(FLDEFF_TALL_GRASS);
 }
 
 void sub_8063E94(struct MapObject *mapObj, struct Sprite *sprite)
@@ -491,7 +491,7 @@ void sub_8063E94(struct MapObject *mapObj, struct Sprite *sprite)
                          | (u8)gSaveBlock1.location.mapGroup;
 
     gFieldEffectArguments[7] = 0;
-    FieldEffectStart(4);
+    FieldEffectStart(FLDEFF_TALL_GRASS);
 }
 
 void sub_8063EE0(struct MapObject *mapObj, struct Sprite *sprite)
@@ -510,7 +510,7 @@ void sub_8063EE0(struct MapObject *mapObj, struct Sprite *sprite)
                          | (u8)gSaveBlock1.location.mapGroup;
 
     gFieldEffectArguments[7] = 1;
-    FieldEffectStart(17);
+    FieldEffectStart(FLDEFF_LONG_GRASS);
 }
 
 void sub_8063F2C(struct MapObject *mapObj, struct Sprite *sprite)
@@ -529,7 +529,7 @@ void sub_8063F2C(struct MapObject *mapObj, struct Sprite *sprite)
                          | (u8)gSaveBlock1.location.mapGroup;
 
     gFieldEffectArguments[7] = 0;
-    FieldEffectStart(17);
+    FieldEffectStart(FLDEFF_LONG_GRASS);
 }
 
 void GroundEffect_WaterReflection(struct MapObject *mapObj, struct Sprite *sprite)
@@ -570,7 +570,10 @@ static void nullsub(struct MapObject *mapObj, struct Sprite *sprite, u8 a)
 static void DoTracksGroundEffect_Footprints(struct MapObject *mapObj, struct Sprite *sprite, u8 a)
 {
     // First half-word is a Field Effect script id. (gFieldEffectScriptPointers)
-    u16 sandFootprints_FieldEffectData[2] = { 0xD, 0x18 };
+    u16 sandFootprints_FieldEffectData[2] = {
+            FLDEFF_SAND_FOOTPRINTS,
+            FLDEFF_DEEP_SAND_FOOTPRINTS
+    };
 
     gFieldEffectArguments[0] = mapObj->coords3.x;
     gFieldEffectArguments[1] = mapObj->coords3.y;
