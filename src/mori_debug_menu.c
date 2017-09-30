@@ -117,7 +117,7 @@ s8 MoriDebugMenu_BreedEgg(void)
             SetMonData(&gPlayerParty[loopCounter], MON_DATA_FRIENDSHIP, &friendship);
         }
     }
-    gSaveBlock1.daycareData.mail.egg.unk_11a = -3;
+    gSaveBlock1.daycareData.misc.countersEtc.unk_11a = -3;
     CloseMenu();
     return 1;
 }

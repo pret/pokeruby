@@ -74,8 +74,8 @@ void RecordMixing_PrepareExchangePacket(void)
     memcpy(unk_2018000.filler1004, gUnknown_083D0274, sizeof(unk_2008000.filler1004));
     memcpy(unk_2018000.filler1044, gUnknown_083D0278, sizeof(unk_2008000.filler1044));
     memcpy(unk_2018000.easyChatPairs, recordMixingEasyChatPairs, sizeof(unk_2018000.easyChatPairs));
-    gUnknown_02038738.data[0] = gSaveBlock1.daycareData.mail.data[0];
-    gUnknown_02038738.data[1] = gSaveBlock1.daycareData.mail.data[1];
+    gUnknown_02038738.mail[0] = gSaveBlock1.daycareData.misc.mail[0];
+    gUnknown_02038738.mail[1] = gSaveBlock1.daycareData.misc.mail[1];
     sub_8041324(gSaveBlock1.daycareData.mons, &gUnknown_02038738);
     memcpy(&unk_2018000.filler10AC, gUnknown_083D0280, sizeof(struct RecordMixingDayCareMail));
     memcpy(unk_2018000.filler1124, gUnknown_083D0284, sizeof(unk_2018000.filler1124));
@@ -511,7 +511,7 @@ void sub_80B9C6C(u8 *a, u32 b, u8 c, void *d)
     u16 i;  // r3
     u16 r7;
     u8 r1;
-    struct DayCareMailEtc *r6;
+    struct DayCareMisc *r6;
 
     //asm("":::"r8");
     SeedRng(gLinkPlayers[0].trainerId);
@@ -526,7 +526,7 @@ void sub_80B9C6C(u8 *a, u32 b, u8 c, void *d)
     sp3C = 0;
     for (i = 0; i < r8; i++)
     {
-        r6 = (struct DayCareMailEtc *)(a + b * i);
+        r6 = (struct DayCareMisc *)(a + b * i);
         if (r6->unk70 != 0)
         {
             for (r7 = 0; r7 < r6->unk70; r7++)
@@ -540,7 +540,7 @@ void sub_80B9C6C(u8 *a, u32 b, u8 c, void *d)
     //_080B9D46
     for (r7 = 0, i = 0; i < r8; i++)
     {
-        r6 = (struct DayCareMailEtc *)(a + b * i);
+        r6 = (struct DayCareMisc *)(a + b * i);
         if (sp1C[i][0] == 1 || sp1C[i][1] == 1)
             sp3C++;
         if (sp1C[i][0] == 1 && sp1C[i][1] == 0)
@@ -596,7 +596,7 @@ void sub_80B9C6C(u8 *a, u32 b, u8 c, void *d)
     //_080B9E3E
     for (i = 0; i < 4; i++)
     {
-        r6 = (struct DayCareMailEtc *)a + b * c;
+        r6 = (struct DayCareMisc *)a + b * c;
         spC[i] = r6;
     }
     r1 = sub_80B9C4C(d) % 3;
@@ -630,7 +630,7 @@ void sub_80B9C6C(u8 *a, u32 b, u8 c, void *d)
     //_080B9EF0
     //memcpy(&gSaveBlock1.filler_303C.data[0], a + b * c, 0x38);
     //memcpy(&gSaveBlock1.filler_303C.data[1], a + b * c + 0x38, 0x38);
-    r6 = (struct DayCareMailEtc *)(a + b * c);
+    r6 = (struct DayCareMisc *)(a + b * c);
     gSaveBlock1.filler_303C.data[0] = r6->data[0];
     gSaveBlock1.filler_303C.data[1] = r6->data[1];
     //memcpy(&gSaveBlock1.filler_303C.data[0], &r6->data[0], 0x38);

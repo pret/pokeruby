@@ -562,16 +562,11 @@ struct GabbyAndTyData
 
 struct DayCareMail
 {
-    /*0x00*/ struct MailStruct mail;
+    /*0x00*/ struct MailStruct message;
     /*0x24*/ u8 names[19];
 };
 
-struct DayCareMailExtra_RecordMixing {
-    u32 unk70;
-    u16 unk74[2];
-};
-
-struct DayCareMailExtra_EggData {
+struct DayCareStepCountersEtc {
     u32 steps[2];
     u16 personalityLo;
     u8 unk_11a;
@@ -579,20 +574,20 @@ struct DayCareMailExtra_EggData {
 
 struct RecordMixingDayCareMail
 {
-    struct DayCareMail data[2];
+    struct DayCareMail mail[2];
     u32 unk70;
     u16 unk74[2];
 };
 
-struct DayCareMailEtc
+struct DayCareMisc
 {
-    struct DayCareMail data[2];
-    struct DayCareMailExtra_EggData egg;
+    struct DayCareMail mail[2];
+    struct DayCareStepCountersEtc countersEtc;
 };
 
 struct DayCareData {
     struct BoxPokemon mons[2];
-    struct DayCareMailEtc mail;
+    struct DayCareMisc misc;
 };
 
 struct LinkBattleRecord
