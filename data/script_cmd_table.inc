@@ -1,203 +1,203 @@
 	.align 2
 gScriptCmdTable:: @ 814AE30
-	.4byte ScrCmd_snop
-	.4byte ScrCmd_snop1
-	.4byte ScrCmd_end
-	.4byte ScrCmd_return
-	.4byte ScrCmd_call
-	.4byte ScrCmd_jump
-	.4byte ScrCmd_jumpif
-	.4byte ScrCmd_callif
-	.4byte ScrCmd_jumpstd
-	.4byte ScrCmd_callstd
-	.4byte ScrCmd_jumpstdif
-	.4byte ScrCmd_callstdif
-	.4byte ScrCmd_jumpram
-	.4byte ScrCmd_die
-	.4byte ScrCmd_setbyte
-	.4byte ScrCmd_loadptr
-	.4byte ScrCmd_setbufferbyte
-	.4byte ScrCmd_writebytetooffset
-	.4byte ScrCmd_loadbytefrompointer
-	.4byte ScrCmd_setptrbyte
-	.4byte ScrCmd_copybuffers
-	.4byte ScrCmd_copybyte
-	.4byte ScrCmd_setvar
-	.4byte ScrCmd_addvar
-	.4byte ScrCmd_subvar
-	.4byte ScrCmd_copyvar
-	.4byte ScrCmd_setorcopyvar
-	.4byte ScrCmd_comparebuffers
-	.4byte ScrCmd_comparebuffertobyte
-	.4byte ScrCmd_comparebuffertoptrbyte
-	.4byte ScrCmd_compareptrbytetobuffer
-	.4byte ScrCmd_compareptrbytetobyte
-	.4byte ScrCmd_compareptrbytes
-	.4byte ScrCmd_compare
-	.4byte ScrCmd_comparevars
-	.4byte ScrCmd_callasm
-	.4byte ScrCmd_jumpasm
-	.4byte ScrCmd_special
-	.4byte ScrCmd_specialval
-	.4byte ScrCmd_waitstate
-	.4byte ScrCmd_pause
-	.4byte ScrCmd_setflag
-	.4byte ScrCmd_clearflag
-	.4byte ScrCmd_checkflag
-	.4byte ScrCmd_compareflags
-	.4byte ScrCmd_checkdailyflags
-	.4byte ScrCmd_resetvars
-	.4byte ScrCmd_playsfx
-	.4byte ScrCmd_checksound
-	.4byte ScrCmd_fanfare
-	.4byte ScrCmd_waitfanfare
-	.4byte ScrCmd_playmusic
-	.4byte ScrCmd_playmusicbattle
-	.4byte ScrCmd_fadedefault
-	.4byte ScrCmd_fademusic
-	.4byte ScrCmd_fadeout
-	.4byte ScrCmd_fadein
-	.4byte ScrCmd_warp
-	.4byte ScrCmd_warpmuted
-	.4byte ScrCmd_warpwalk
-	.4byte ScrCmd_warphole
-	.4byte ScrCmd_warpteleport
-	.4byte ScrCmd_warp3
-	.4byte ScrCmd_warpplace
-	.4byte ScrCmd_warp4
-	.4byte ScrCmd_warp5
-	.4byte ScrCmd_getplayerxy
-	.4byte ScrCmd_countpokemon
-	.4byte ScrCmd_additem
-	.4byte ScrCmd_removeitem
-	.4byte ScrCmd_checkitemspace
-	.4byte ScrCmd_checkitem
-	.4byte ScrCmd_checkitemtype
-	.4byte ScrCmd_addpcitem
-	.4byte ScrCmd_checkpcitem
-	.4byte ScrCmd_adddecor
-	.4byte ScrCmd_removedecor
-	.4byte ScrCmd_testdecor
-	.4byte ScrCmd_checkdecor
-	.4byte ScrCmd_move
-	.4byte ScrCmd_movecoords
-	.4byte ScrCmd_waitmove
-	.4byte ScrCmd_waitmovexy
-	.4byte ScrCmd_disappear
-	.4byte ScrCmd_disappearxy
-	.4byte ScrCmd_reappear
-	.4byte ScrCmd_reappearxy
-	.4byte ScrCmd_movesprite
-	.4byte ScrCmd_spritevisible
-	.4byte ScrCmd_spriteinvisible
-	.4byte ScrCmd_faceplayer
-	.4byte ScrCmd_spriteface
-	.4byte ScrCmd_trainerbattle
-	.4byte ScrCmd_reptrainerbattle
-	.4byte ScrCmd_endtrainerbattle
-	.4byte ScrCmd_endtrainerbattle2
-	.4byte ScrCmd_checktrainerflag
-	.4byte ScrCmd_cleartrainerflag
-	.4byte ScrCmd_settrainerflag
-	.4byte ScrCmd_movespriteperm
-	.4byte ScrCmd_moveoffscreen
-	.4byte ScrCmd_spritebehave
-	.4byte ScrCmd_waittext
-	.4byte ScrCmd_message
-	.4byte ScrCmd_closebutton
-	.4byte ScrCmd_lockall
-	.4byte ScrCmd_lock
-	.4byte ScrCmd_releaseall
-	.4byte ScrCmd_release
-	.4byte ScrCmd_waitbutton
-	.4byte ScrCmd_yesnobox
-	.4byte ScrCmd_multichoice
-	.4byte ScrCmd_multichoicedef
-	.4byte ScrCmd_multichoicerow
-	.4byte ScrCmd_showbox
-	.4byte ScrCmd_hidebox
-	.4byte ScrCmd_clearbox
-	.4byte ScrCmd_showpokepic
-	.4byte ScrCmd_hidepokepic
-	.4byte ScrCmd_showcontestwinner
-	.4byte ScrCmd_braillemsg
-	.4byte ScrCmd_givepokemon
-	.4byte ScrCmd_giveegg
-	.4byte ScrCmd_setpokemove
-	.4byte ScrCmd_checkattack
-	.4byte ScrCmd_bufferpoke
-	.4byte ScrCmd_bufferfirstpoke
-	.4byte ScrCmd_bufferpartypoke
-	.4byte ScrCmd_bufferitem
-	.4byte ScrCmd_bufferdecor
-	.4byte ScrCmd_bufferattack
-	.4byte ScrCmd_buffernum
-	.4byte ScrCmd_bufferstd
-	.4byte ScrCmd_buffertext
-	.4byte ScrCmd_pokemart
-	.4byte ScrCmd_pokemartdecor
-	.4byte ScrCmd_pokemartbp
-	.4byte ScrCmd_pokecasino
-	.4byte ScrCmd_event_8a
-	.4byte ScrCmd_choosecontestpkmn
-	.4byte ScrCmd_startcontest
-	.4byte ScrCmd_showcontestresults
-	.4byte ScrCmd_contestlinktransfer
-	.4byte ScrCmd_random
-	.4byte ScrCmd_givemoney
-	.4byte ScrCmd_paymoney
-	.4byte ScrCmd_checkmoney
-	.4byte ScrCmd_showmoney
-	.4byte ScrCmd_hidemoney
-	.4byte ScrCmd_updatemoney
-	.4byte ScrCmd_event_96
-	.4byte ScrCmd_fadescreen
-	.4byte ScrCmd_fadescreendelay
-	.4byte ScrCmd_darken
-	.4byte ScrCmd_lighten
-	.4byte ScrCmd_message2
-	.4byte ScrCmd_doanimation
-	.4byte ScrCmd_setanimation
-	.4byte ScrCmd_checkanimation
-	.4byte ScrCmd_sethealplace
-	.4byte ScrCmd_checkgender
-	.4byte ScrCmd_pokecry
-	.4byte ScrCmd_setmaptile
-	.4byte ScrCmd_resetweather
-	.4byte ScrCmd_setweather
-	.4byte ScrCmd_doweather
-	.4byte ScrCmd_tileeffect
-	.4byte ScrCmd_setmapfooter
-	.4byte ScrCmd_spritelevelup
-	.4byte ScrCmd_restorespritelevel
-	.4byte ScrCmd_createvsprite
-	.4byte ScrCmd_vspriteface
-	.4byte ScrCmd_setdooropened
-	.4byte ScrCmd_setdoorclosed
-	.4byte ScrCmd_doorchange
-	.4byte ScrCmd_setdooropened2
-	.4byte ScrCmd_setdoorclosed2
-	.4byte ScrCmd_event_b1
-	.4byte ScrCmd_event_b2
-	.4byte ScrCmd_checkcoins
-	.4byte ScrCmd_givecoins
-	.4byte ScrCmd_removecoins
-	.4byte ScrCmd_setwildbattle
-	.4byte ScrCmd_dowildbattle
-	.4byte ScrCmd_setvaddress
-	.4byte ScrCmd_vjump
-	.4byte ScrCmd_vcall
-	.4byte ScrCmd_if5
-	.4byte ScrCmd_if6
-	.4byte ScrCmd_vtext
-	.4byte ScrCmd_vloadptr
-	.4byte ScrCmd_vbuffer
-	.4byte ScrCmd_showcoins
-	.4byte ScrCmd_hidecoins
-	.4byte ScrCmd_updatecoins
-	.4byte ScrCmd_inccounter
-	.4byte ScrCmd_warp6
-	.4byte ScrCmd_waitpokecry
+	.4byte ScrCmd_nop                     @ 0x00
+	.4byte ScrCmd_nop1                    @ 0x01
+	.4byte ScrCmd_end                     @ 0x02
+	.4byte ScrCmd_return                  @ 0x03
+	.4byte ScrCmd_call                    @ 0x04
+	.4byte ScrCmd_goto                    @ 0x05
+	.4byte ScrCmd_goto_if                 @ 0x06
+	.4byte ScrCmd_call_if                 @ 0x07
+	.4byte ScrCmd_gotostd                 @ 0x08
+	.4byte ScrCmd_callstd                 @ 0x09
+	.4byte ScrCmd_jumpstdif               @ 0x0A
+	.4byte ScrCmd_callstdif               @ 0x0B
+	.4byte ScrCmd_jumpram                 @ 0x0C
+	.4byte ScrCmd_die                     @ 0x0D
+	.4byte ScrCmd_setbyte                 @ 0x0E
+	.4byte ScrCmd_loadptr                 @ 0x0F
+	.4byte ScrCmd_setbufferbyte           @ 0x10
+	.4byte ScrCmd_writebytetooffset       @ 0x11
+	.4byte ScrCmd_loadbytefrompointer     @ 0x12
+	.4byte ScrCmd_setptrbyte              @ 0x13
+	.4byte ScrCmd_copybuffers             @ 0x14
+	.4byte ScrCmd_copybyte                @ 0x15
+	.4byte ScrCmd_setvar                  @ 0x16
+	.4byte ScrCmd_addvar                  @ 0x17
+	.4byte ScrCmd_subvar                  @ 0x18
+	.4byte ScrCmd_copyvar                 @ 0x19
+	.4byte ScrCmd_setorcopyvar            @ 0x1A
+	.4byte ScrCmd_comparebuffers          @ 0x1B
+	.4byte ScrCmd_comparebuffertobyte     @ 0x1C
+	.4byte ScrCmd_comparebuffertoptrbyte  @ 0x1D
+	.4byte ScrCmd_compareptrbytetobuffer  @ 0x1E
+	.4byte ScrCmd_compareptrbytetobyte    @ 0x1F
+	.4byte ScrCmd_compareptrbytes         @ 0x20
+	.4byte ScrCmd_compare                 @ 0x21
+	.4byte ScrCmd_comparevars             @ 0x22
+	.4byte ScrCmd_callasm                 @ 0x23
+	.4byte ScrCmd_jumpasm                 @ 0x24
+	.4byte ScrCmd_special                 @ 0x25
+	.4byte ScrCmd_specialval              @ 0x26
+	.4byte ScrCmd_waitstate               @ 0x27
+	.4byte ScrCmd_pause                   @ 0x28
+	.4byte ScrCmd_setflag                 @ 0x29
+	.4byte ScrCmd_clearflag               @ 0x2A
+	.4byte ScrCmd_checkflag               @ 0x2B
+	.4byte ScrCmd_compareflags            @ 0x2C
+	.4byte ScrCmd_checkdailyflags         @ 0x2D
+	.4byte ScrCmd_resetvars               @ 0x2E
+	.4byte ScrCmd_playsfx                 @ 0x2F
+	.4byte ScrCmd_checksound              @ 0x30
+	.4byte ScrCmd_fanfare                 @ 0x31
+	.4byte ScrCmd_waitfanfare             @ 0x32
+	.4byte ScrCmd_playmusic               @ 0x33
+	.4byte ScrCmd_playmusicbattle         @ 0x34
+	.4byte ScrCmd_fadedefault             @ 0x35
+	.4byte ScrCmd_fademusic               @ 0x36
+	.4byte ScrCmd_fadeout                 @ 0x37
+	.4byte ScrCmd_fadein                  @ 0x38
+	.4byte ScrCmd_warp                    @ 0x39
+	.4byte ScrCmd_warpmuted               @ 0x3A
+	.4byte ScrCmd_warpwalk                @ 0x3B
+	.4byte ScrCmd_warphole                @ 0x3C
+	.4byte ScrCmd_warpteleport            @ 0x3D
+	.4byte ScrCmd_warp3                   @ 0x3E
+	.4byte ScrCmd_warpplace               @ 0x3F
+	.4byte ScrCmd_warp4                   @ 0x40
+	.4byte ScrCmd_warp5                   @ 0x41
+	.4byte ScrCmd_getplayerxy             @ 0x42
+	.4byte ScrCmd_countpokemon            @ 0x43
+	.4byte ScrCmd_additem                 @ 0x44
+	.4byte ScrCmd_removeitem              @ 0x45
+	.4byte ScrCmd_checkitemspace          @ 0x46
+	.4byte ScrCmd_checkitem               @ 0x47
+	.4byte ScrCmd_checkitemtype           @ 0x48
+	.4byte ScrCmd_addpcitem               @ 0x49
+	.4byte ScrCmd_checkpcitem             @ 0x4A
+	.4byte ScrCmd_adddecor                @ 0x4B
+	.4byte ScrCmd_removedecor             @ 0x4C
+	.4byte ScrCmd_testdecor               @ 0x4D
+	.4byte ScrCmd_checkdecor              @ 0x4E
+	.4byte ScrCmd_move                    @ 0x4F
+	.4byte ScrCmd_movecoords              @ 0x50
+	.4byte ScrCmd_waitmove                @ 0x51
+	.4byte ScrCmd_waitmovexy              @ 0x52
+	.4byte ScrCmd_disappear               @ 0x53
+	.4byte ScrCmd_disappearxy             @ 0x54
+	.4byte ScrCmd_reappear                @ 0x55
+	.4byte ScrCmd_reappearxy              @ 0x56
+	.4byte ScrCmd_movesprite              @ 0x57
+	.4byte ScrCmd_spritevisible           @ 0x58
+	.4byte ScrCmd_spriteinvisible         @ 0x59
+	.4byte ScrCmd_faceplayer              @ 0x5A
+	.4byte ScrCmd_spriteface              @ 0x5B
+	.4byte ScrCmd_trainerbattle           @ 0x5C
+	.4byte ScrCmd_reptrainerbattle        @ 0x5D
+	.4byte ScrCmd_endtrainerbattle        @ 0x5E
+	.4byte ScrCmd_endtrainerbattle2       @ 0x5F
+	.4byte ScrCmd_checktrainerflag        @ 0x60
+	.4byte ScrCmd_cleartrainerflag        @ 0x61
+	.4byte ScrCmd_settrainerflag          @ 0x62
+	.4byte ScrCmd_movespriteperm          @ 0x63
+	.4byte ScrCmd_moveoffscreen           @ 0x64
+	.4byte ScrCmd_spritebehave            @ 0x65
+	.4byte ScrCmd_waittext                @ 0x66
+	.4byte ScrCmd_message                 @ 0x67
+	.4byte ScrCmd_closebutton             @ 0x68
+	.4byte ScrCmd_lockall                 @ 0x69
+	.4byte ScrCmd_lock                    @ 0x6A
+	.4byte ScrCmd_releaseall              @ 0x6B
+	.4byte ScrCmd_release                 @ 0x6C
+	.4byte ScrCmd_waitbutton              @ 0x6D
+	.4byte ScrCmd_yesnobox                @ 0x6E
+	.4byte ScrCmd_multichoice             @ 0x6F
+	.4byte ScrCmd_multichoicedef          @ 0x70
+	.4byte ScrCmd_multichoicerow          @ 0x71
+	.4byte ScrCmd_showbox                 @ 0x72
+	.4byte ScrCmd_hidebox                 @ 0x73
+	.4byte ScrCmd_clearbox                @ 0x74
+	.4byte ScrCmd_showpokepic             @ 0x75
+	.4byte ScrCmd_hidepokepic             @ 0x76
+	.4byte ScrCmd_showcontestwinner       @ 0x77
+	.4byte ScrCmd_braillemsg              @ 0x78
+	.4byte ScrCmd_givepokemon             @ 0x79
+	.4byte ScrCmd_giveegg                 @ 0x7A
+	.4byte ScrCmd_setpokemove             @ 0x7B
+	.4byte ScrCmd_checkattack             @ 0x7C
+	.4byte ScrCmd_bufferpoke              @ 0x7D
+	.4byte ScrCmd_bufferfirstpoke         @ 0x7E
+	.4byte ScrCmd_bufferpartypoke         @ 0x7F
+	.4byte ScrCmd_bufferitem              @ 0x80
+	.4byte ScrCmd_bufferdecor             @ 0x81
+	.4byte ScrCmd_bufferattack            @ 0x82
+	.4byte ScrCmd_buffernum               @ 0x83
+	.4byte ScrCmd_bufferstd               @ 0x84
+	.4byte ScrCmd_buffertext              @ 0x85
+	.4byte ScrCmd_pokemart                @ 0x86
+	.4byte ScrCmd_pokemartdecor           @ 0x87
+	.4byte ScrCmd_pokemartbp              @ 0x88
+	.4byte ScrCmd_pokecasino              @ 0x89
+	.4byte ScrCmd_event_8a                @ 0x8A
+	.4byte ScrCmd_choosecontestpkmn       @ 0x8B
+	.4byte ScrCmd_startcontest            @ 0x8C
+	.4byte ScrCmd_showcontestresults      @ 0x8D
+	.4byte ScrCmd_contestlinktransfer     @ 0x8E
+	.4byte ScrCmd_random                  @ 0x8F
+	.4byte ScrCmd_givemoney               @ 0x90
+	.4byte ScrCmd_paymoney                @ 0x91
+	.4byte ScrCmd_checkmoney              @ 0x92
+	.4byte ScrCmd_showmoney               @ 0x93
+	.4byte ScrCmd_hidemoney               @ 0x94
+	.4byte ScrCmd_updatemoney             @ 0x95
+	.4byte ScrCmd_event_96                @ 0x96
+	.4byte ScrCmd_fadescreen              @ 0x97
+	.4byte ScrCmd_fadescreendelay         @ 0x98
+	.4byte ScrCmd_darken                  @ 0x99
+	.4byte ScrCmd_lighten                 @ 0x9A
+	.4byte ScrCmd_message2                @ 0x9B
+	.4byte ScrCmd_doanimation             @ 0x9C
+	.4byte ScrCmd_setanimation            @ 0x9D
+	.4byte ScrCmd_checkanimation          @ 0x9E
+	.4byte ScrCmd_sethealplace            @ 0x9F
+	.4byte ScrCmd_checkgender             @ 0xA0
+	.4byte ScrCmd_pokecry                 @ 0xA1
+	.4byte ScrCmd_setmaptile              @ 0xA2
+	.4byte ScrCmd_resetweather            @ 0xA3
+	.4byte ScrCmd_setweather              @ 0xA4
+	.4byte ScrCmd_doweather               @ 0xA5
+	.4byte ScrCmd_tileeffect              @ 0xA6
+	.4byte ScrCmd_setmapfooter            @ 0xA7
+	.4byte ScrCmd_spritelevelup           @ 0xA8
+	.4byte ScrCmd_restorespritelevel      @ 0xA9
+	.4byte ScrCmd_createvsprite           @ 0xAA
+	.4byte ScrCmd_vspriteface             @ 0xAB
+	.4byte ScrCmd_setdooropened           @ 0xAC
+	.4byte ScrCmd_setdoorclosed           @ 0xAD
+	.4byte ScrCmd_doorchange              @ 0xAE
+	.4byte ScrCmd_setdooropened2          @ 0xAF
+	.4byte ScrCmd_setdoorclosed2          @ 0xB0
+	.4byte ScrCmd_event_b1                @ 0xB1
+	.4byte ScrCmd_event_b2                @ 0xB2
+	.4byte ScrCmd_checkcoins              @ 0xB3
+	.4byte ScrCmd_givecoins               @ 0xB4
+	.4byte ScrCmd_removecoins             @ 0xB5
+	.4byte ScrCmd_setwildbattle           @ 0xB6
+	.4byte ScrCmd_dowildbattle            @ 0xB7
+	.4byte ScrCmd_setvaddress             @ 0xB8
+	.4byte ScrCmd_vjump                   @ 0xB9
+	.4byte ScrCmd_vcall                   @ 0xBA
+	.4byte ScrCmd_if5                     @ 0xBB
+	.4byte ScrCmd_if6                     @ 0xBC
+	.4byte ScrCmd_vtext                   @ 0xBD
+	.4byte ScrCmd_vloadptr                @ 0xBE
+	.4byte ScrCmd_vbuffer                 @ 0xBF
+	.4byte ScrCmd_showcoins               @ 0xC0
+	.4byte ScrCmd_hidecoins               @ 0xC1
+	.4byte ScrCmd_updatecoins             @ 0xC2
+	.4byte ScrCmd_inccounter              @ 0xC3
+	.4byte ScrCmd_warp6                   @ 0xC4
+	.4byte ScrCmd_waitpokecry             @ 0xC5
 
 gScriptCmdTableEnd::
-	.4byte ScrCmd_snop
+	.4byte ScrCmd_nop

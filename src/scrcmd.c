@@ -91,12 +91,12 @@ static u8 * const sScriptStringVars[] =
     gStringVar3,
 };
 
-bool8 ScrCmd_snop(struct ScriptContext *ctx)
+bool8 ScrCmd_nop(struct ScriptContext *ctx)
 {
     return FALSE;
 }
 
-bool8 ScrCmd_snop1(struct ScriptContext *ctx)
+bool8 ScrCmd_nop1(struct ScriptContext *ctx)
 {
     return FALSE;
 }
@@ -145,7 +145,7 @@ bool8 ScrCmd_waitstate(struct ScriptContext *ctx)
     return TRUE;
 }
 
-bool8 ScrCmd_jump(struct ScriptContext *ctx)
+bool8 ScrCmd_goto(struct ScriptContext *ctx)
 {
     u8 *ptr = (u8 *)ScriptReadWord(ctx);
 
@@ -167,7 +167,7 @@ bool8 ScrCmd_call(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_jumpif(struct ScriptContext *ctx)
+bool8 ScrCmd_goto_if(struct ScriptContext *ctx)
 {
     u8 condition = ScriptReadByte(ctx);
     u8 *ptr = (u8 *)ScriptReadWord(ctx);
@@ -177,7 +177,7 @@ bool8 ScrCmd_jumpif(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_callif(struct ScriptContext *ctx)
+bool8 ScrCmd_call_if(struct ScriptContext *ctx)
 {
     u8 condition = ScriptReadByte(ctx);
     u8 *ptr = (u8 *)ScriptReadWord(ctx);
@@ -232,7 +232,7 @@ bool8 ScrCmd_if6(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_jumpstd(struct ScriptContext *ctx)
+bool8 ScrCmd_gotostd(struct ScriptContext *ctx)
 {
     u8 index = ScriptReadByte(ctx);
     u8 **ptr = &gStdScripts[index];
