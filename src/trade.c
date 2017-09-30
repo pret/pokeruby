@@ -122,6 +122,8 @@ struct TradeEwramSubstruct {
     /*0x08fc*/ u8 filler_08fc[0x704];
 };
 
+IWRAM_DATA u8 gUnknown_03000508[8];
+
 struct UnkStructF {
     u8 filler_0000[9];
     u8 unk_0009;
@@ -214,7 +216,6 @@ void sub_804DB84(void);
 extern u8 gUnknown_020297D8[2];
 extern u8 *gUnknown_020296CC[13];
 extern struct TradeEwramSubstruct *gUnknown_03004824;
-extern u8 gUnknown_03000508;
 extern struct MailStruct gUnknown_02029700[16];
 
 #define ewram_2010000 (*(struct TradeEwramStruct *)(ewram + 0x10000))
@@ -1046,7 +1047,7 @@ static void sub_8047EC0(void)
             gUnknown_03004824->unk_0086 = 0;
             gUnknown_03004824->unk_0087 = 0;
             gUnknown_03004824->unk_00b4 = 0;
-            gUnknown_03000508 = 0;
+            gUnknown_03000508[0] = 0;
             gMain.state ++;
             sub_804AA0C(0);
             CpuFill16(0, ewram_2010000.tileBuffers, sizeof(ewram_2010000.tileBuffers));
@@ -1187,7 +1188,7 @@ static void sub_8047EC0(void)
             {
                 gMain.callback1 = sub_80494D8;
                 SetMainCallback2(sub_8048AB4);
-                gUnknown_03000508 = 0;
+                gUnknown_03000508[0] = 0;
             }
             break;
     }
@@ -1226,7 +1227,7 @@ static void sub_80484F4(void)
             gUnknown_03004824->unk_0086 = 0;
             gUnknown_03004824->unk_0087 = 0;
             gUnknown_03004824->unk_00b4 = 0;
-            gUnknown_03000508 = 0;
+            gUnknown_03000508[0] = 0;
             gMain.state ++;
             for (i = 0; i < 13; i ++)
                 gUnknown_020296CC[i] = ewram_2010000.tileBuffers[i];
@@ -1329,7 +1330,7 @@ static void sub_80484F4(void)
             if (!gPaletteFade.active)
             {
                 SetMainCallback2(sub_8048AB4);
-                gUnknown_03000508 = 0;
+                gUnknown_03000508[0] = 0;
             }
             break;
     }
