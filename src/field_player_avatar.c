@@ -1224,8 +1224,8 @@ u8 sub_8059EA4(struct Task *task, struct MapObject *b, struct MapObject *c)
     {
         FieldObjectClearAnimIfSpecialAnimFinished(b);
         FieldObjectClearAnimIfSpecialAnimFinished(c);
-        FieldObjectSetSpecialAnim(b, GetStepInPlaceDelay16AnimId(task->data[2]));
-        FieldObjectSetSpecialAnim(c, GetSimpleGoAnimId(task->data[2]));
+        FieldObjectSetSpecialAnim(b, GetStepInPlaceDelay16AnimId((u8)task->data[2]));
+        FieldObjectSetSpecialAnim(c, GetSimpleGoAnimId((u8)task->data[2]));
         gFieldEffectArguments[0] = c->coords2.x;
         gFieldEffectArguments[1] = c->coords2.y;
         gFieldEffectArguments[2] = c->elevation;
@@ -1385,7 +1385,7 @@ static void taskFF_0805D1D4(u8 taskId)
             return;
     }
     sub_8127ED0(playerMapObj->mapobj_unk_1A, 2);
-    FieldObjectSetSpecialAnim(playerMapObj, sub_80608D0(gTasks[taskId].data[0]));
+    FieldObjectSetSpecialAnim(playerMapObj, sub_80608D0((u8)gTasks[taskId].data[0]));
     gTasks[taskId].func = sub_805A2D0;
 }
 

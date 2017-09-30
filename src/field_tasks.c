@@ -845,11 +845,11 @@ void Task_MuddySlope(u8 taskId)
             }
             break;
     }
-    if (gUnknown_0202E844.field_0 && mapIndices != data[0])
+    if (gCamera.field_0 && mapIndices != data[0])
     {
         data[0] = mapIndices;
-        x2 = gUnknown_0202E844.x;
-        y2 = gUnknown_0202E844.y;
+        x2 = gCamera.x;
+        y2 = gCamera.y;
     }
     else
     {

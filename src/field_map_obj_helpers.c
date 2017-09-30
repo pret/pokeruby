@@ -303,7 +303,7 @@ void DoShadowFieldEffect(struct MapObject *mapObject)
     if (!mapObject->mapobj_bit_22)
     {
         mapObject->mapobj_bit_22 = 1;
-        oe_exec_and_other_stuff(3, mapObject);
+        oe_exec_and_other_stuff(FLDEFF_SHADOW, mapObject);
     }
 }
 

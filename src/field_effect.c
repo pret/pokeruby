@@ -1894,7 +1894,6 @@ bool8 sub_80873F4(struct Task *task, struct MapObject *mapObject, struct Sprite 
 }
 
 void sub_8087470(u8);
-extern u8 sub_80608A4(u8);
 
 void mapldr_080851BC(void)
 {
