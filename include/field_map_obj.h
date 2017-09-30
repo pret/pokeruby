@@ -3,6 +3,8 @@
 
 #include "sprite.h"
 
+extern const u8 gUnknown_0830FD14[];
+
 #define fieldmap_object_cb(setup, callback, table) \
 static u8 callback(struct MapObject *, struct Sprite *);\
 void setup(struct Sprite *sprite)\
@@ -427,5 +429,8 @@ void sub_80634D0(struct MapObject *, struct Sprite *);
 u8 SpawnSpecialFieldObjectParametrized(u8, u8, u8, s16, s16, u8);
 void CameraObjectSetFollowedObjectId(u8);
 u8 sub_805ADDC(u8);
+u8 obj_unfreeze(struct Sprite *, s16, s16, u8);
+u16 npc_paltag_by_palslot(u8);
+void sub_8060470(s16 *, s16 *, s16, s16);
 
 #endif // GUARD_FIELD_MAP_OBJ_H
