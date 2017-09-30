@@ -19,6 +19,8 @@ extern const u8 gEasyChatGroupSizes[];
 
 extern u16 gSpecialVar_0x8004;
 
+IWRAM_DATA u8 gUnknown_03000740;
+
 // returns the end of the destination buffer text
 u8 *EasyChat_GetWordText(u8 *dst, u16 word)
 {

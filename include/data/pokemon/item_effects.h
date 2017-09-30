@@ -1,5 +1,5 @@
 //
-// Created by Scott Norton on 6/27/17.
+
 //
 
 #ifndef POKERUBY_ITEM_EFFECTS_H

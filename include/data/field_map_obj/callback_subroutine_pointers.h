@@ -1,5 +1,5 @@
 //
-// Created by scott on 6/18/2017.
+
 //
 
 #ifndef POKERUBY_CALLBACK_SUBROUTINE_POINTERS_H

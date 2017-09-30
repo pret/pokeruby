@@ -1,5 +1,5 @@
 //
-// Created by Scott Norton on 5/31/17.
+
 // Modified by Dizzy Egg on 8/15/17.
 //
 
