@@ -3485,7 +3485,7 @@ BattleScript_PerishSongTimerGoesDown:: @ 81D921D
 	waitmessage 64
 	end2
 
-gUnknown_081D9224:: @ 81D9224
+BattleScript_AllStatsUp:: @ 81D9224
 	jumpifstat USER, 3, 1, 12, BattleScript_1D9251
 	jumpifstat USER, 3, 2, 12, BattleScript_1D9251
 	jumpifstat USER, 3, 3, 12, BattleScript_1D9251
@@ -3659,7 +3659,7 @@ BattleScript_1D93EC: @ 81D93EC
 	waitmessage 64
 	jump BattleScript_EndTurn
 
-gUnknown_081D93FA:: @ 81D93FA
+BattleScript_AtkDefDown:: @ 81D93FA
 	setbyte 0x20160dc, 0
 	playstatchangeanimation USER, 6, 13
 	playstatchangeanimation USER, 2, 9
@@ -3731,7 +3731,7 @@ BattleScript_OneHitKOMsg:: @ 81D94A9
 	waitmessage 64
 	return
 
-gUnknown_081D94B0:: @ 81D94B0
+BattleScript_SAtkDown2:: @ 81D94B0
 	setbyte 0x20160dc, 0
 	playstatchangeanimation USER, 16, 11
 	setbyte 0x201601e, 164
