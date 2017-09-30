@@ -1,5 +1,5 @@
 //
-// Created by scott on 6/27/2017.
+
 //
 
 #include "global.h"

@@ -1,5 +1,5 @@
 //
-// Created by Scott Norton on 8/30/17.
+
 //
 
 #ifndef POKERUBY_DAYCARE_H
