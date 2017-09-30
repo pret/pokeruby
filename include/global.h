@@ -560,18 +560,34 @@ struct GabbyAndTyData
     /*2b1b*/ u8 valB_5:3;
 };
 
-struct RecordMixing_UnknownStructSub
+struct DayCareMail
 {
-    u32 unk0;
-    u8 data[0x34];
-    //u8 data[0x38];
+    /*0x00*/ struct MailStruct message;
+    /*0x24*/ u8 names[19];
 };
 
-struct RecordMixing_UnknownStruct
+struct DayCareStepCountersEtc {
+    u32 steps[2];
+    u16 personalityLo;
+    u8 unk_11a;
+};
+
+struct RecordMixingDayCareMail
 {
-    struct RecordMixing_UnknownStructSub data[2];
+    struct DayCareMail mail[2];
     u32 unk70;
-    u16 unk74[0x2];
+    u16 unk74[2];
+};
+
+struct DayCareMisc
+{
+    struct DayCareMail mail[2];
+    struct DayCareStepCountersEtc countersEtc;
+};
+
+struct DayCareData {
+    struct BoxPokemon mons[2];
+    struct DayCareMisc misc;
 };
 
 struct LinkBattleRecord
@@ -670,11 +686,7 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x2DD4*/ struct EasyChatPair easyChatPairs[5]; //Dewford trend [0] and some other stuff
     /*0x2DFC*/ u8 filler_2DFC[0x8];
     /*0x2E04*/ SB_Struct sbStruct;
-    /*0x2F9C*/ struct BoxPokemon daycareData[2];
-    /*0x303C*/ struct RecordMixing_UnknownStruct filler_303C;
-    /*0x30AC*/ u8 filler_30B4[0x2];
-    /*0x30B6*/ u8 filler_30B6;
-    /*0x30B7*/ u8 filler_30B7[1];
+    /*0x2F9C*/ struct DayCareData daycareData;
     /*0x30B8*/ struct LinkBattleRecord linkBattleRecords[5];
     /*0x3108*/ u8 filler_3108[8];
     /*0x3110*/ u8 giftRibbons[7];
