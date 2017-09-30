@@ -1901,7 +1901,7 @@ extern void CameraObjectReset1(void);
 
 extern struct LinkPlayerMapObject gLinkPlayerMapObjects[];
 extern u8 gReservedSpritePaletteCount;
-extern struct Camera gUnknown_0202E844;
+extern struct Camera gCamera;
 
 static u8 gUnknown_030005A4;
 static u16 gUnknown_030005A6;
@@ -2986,24 +2986,21 @@ void UpdateFieldObjectCoordsForCameraUpdate(void)
     s16 deltaX;
     s16 deltaY;
 
-#ifndef NONMATCHING
-    asm(""::"r"(i));  //makes the compiler store i in r3
-#endif
-
-    if (gUnknown_0202E844.field_0)
+    if (gCamera.field_0)
     {
-        for (i = 0, deltaX = gUnknown_0202E844.x, deltaY = gUnknown_0202E844.y; i < 16; i++)
+        deltaX = gCamera.x;
+        deltaY = gCamera.y;
+        for (i = 0; i < 16; i++)
         {
-            struct MapObject *mapObject = &gMapObjects[i];
 
-            if (mapObject->active)
+            if (gMapObjects[i].active)
             {
-                mapObject->coords1.x -= deltaX;
-                mapObject->coords1.y -= deltaY;
-                mapObject->coords2.x -= deltaX;
-                mapObject->coords2.y -= deltaY;
-                mapObject->coords3.x -= deltaX;
-                mapObject->coords3.y -= deltaY;
+                gMapObjects[i].coords1.x -= deltaX;
+                gMapObjects[i].coords1.y -= deltaY;
+                gMapObjects[i].coords2.x -= deltaX;
+                gMapObjects[i].coords2.y -= deltaY;
+                gMapObjects[i].coords3.x -= deltaX;
+                gMapObjects[i].coords3.y -= deltaY;
             }
         }
     }
