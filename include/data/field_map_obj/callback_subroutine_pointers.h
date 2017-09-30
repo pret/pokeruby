@@ -394,7 +394,7 @@ u8 (*const gUnknown_08375588[])(struct MapObject *, struct Sprite *) = {
     sub_805F3C4
 };
 
-u8 (*const gUnknown_08375594[])(struct MapObject *, struct Sprite *, u8, bool8 (*const)(u8)) = {
+u8 (*const gUnknown_08375594[])(struct MapObject *, struct Sprite *, u8, bool8(u8)) = {
     sub_805F3EC,
     sub_805F3F0,
     sub_805F438,

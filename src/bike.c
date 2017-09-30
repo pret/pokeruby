@@ -10,8 +10,6 @@
 #include "songs.h"
 #include "sound.h"
 
-extern u8 sub_80608A4(u8);
-
 extern u8 gUnknown_02039250;
 extern u8 gUnknown_02039251;
 extern u8 gUnknown_0202E854;
