@@ -94,7 +94,7 @@ static void CB2_MysteryEventMenu(void)
     case 1:
         if (gPaletteFade.active)
             break;
-        sub_8072044(gSystemText_LinkStandby);
+        MenuPrintMessageDefaultCoords(gSystemText_LinkStandby);
         gMain.state++;
         break;
     case 2:
@@ -109,7 +109,7 @@ static void CB2_MysteryEventMenu(void)
         if ((gLinkStatus & 0x20) && (gLinkStatus & 0x1C) > 4)
         {
             PlaySE(SE_PIN);
-            sub_8072044(gSystemText_LoadEventPressA);
+            MenuPrintMessageDefaultCoords(gSystemText_LoadEventPressA);
             gMain.state++;
         }
         if (gMain.newKeys & B_BUTTON)
@@ -128,7 +128,7 @@ static void CB2_MysteryEventMenu(void)
         if (GetLinkPlayerCount_2() != 2)
         {
             GetEventLoadMessage(gStringVar4, 1);
-            sub_8072044(gStringVar4);
+            MenuPrintMessageDefaultCoords(gStringVar4);
             gMain.state = 13;
             break;
         }
@@ -158,13 +158,13 @@ static void CB2_MysteryEventMenu(void)
                 sub_800832C();
                 MenuZeroFillWindowRect(6, 5, 23, 8);
                 GetEventLoadMessage(gStringVar4, 1);
-                sub_8072044(gStringVar4);
+                MenuPrintMessageDefaultCoords(gStringVar4);
                 gMain.state = 13;
                 break;
             }
             else if (CheckLanguageMatch())
             {
-                sub_8072044(gSystemText_DontCutLink);
+                MenuPrintMessageDefaultCoords(gSystemText_DontCutLink);
                 gMain.state++;
                 break;
             }
@@ -173,7 +173,7 @@ static void CB2_MysteryEventMenu(void)
                 CloseLink();
                 MenuZeroFillWindowRect(6, 5, 23, 8);
                 GetEventLoadMessage(gStringVar4, 1);
-                sub_8072044(gStringVar4);
+                MenuPrintMessageDefaultCoords(gStringVar4);
                 gMain.state = 13;
                 break;
             }
@@ -222,7 +222,7 @@ static void CB2_MysteryEventMenu(void)
                 sub_800832C();
                 MenuZeroFillWindowRect(6, 5, 23, 8);
                 GetEventLoadMessage(gStringVar4, 1);
-                sub_8072044(gStringVar4);
+                MenuPrintMessageDefaultCoords(gStringVar4);
                 ptr = (u8 *)&gMain;
                 offset1 = offsetof(struct Main, state);
                 asm("" ::: "r1");
@@ -234,7 +234,7 @@ static void CB2_MysteryEventMenu(void)
                 register u8 *ptr2 asm("r1");
                 register int offset3 asm("r0");
                 register int dummy asm("r2");
-                sub_8072044(gSystemText_DontCutLink);
+                MenuPrintMessageDefaultCoords(gSystemText_DontCutLink);
                 ptr2 = (u8 *)&gMain;
                 offset3 = offsetof(struct Main, state);
                 if (dummy)
@@ -249,7 +249,7 @@ static void CB2_MysteryEventMenu(void)
                 MenuZeroFillWindowRect(6, 5, 23, 8);
             label:
                 GetEventLoadMessage(gStringVar4, 1);
-                sub_8072044(gStringVar4);
+                MenuPrintMessageDefaultCoords(gStringVar4);
                 ptr = (u8 *)&gMain;
                 offset2 = offsetof(struct Main, state);
                 ptr += offset2;
@@ -294,7 +294,7 @@ static void CB2_MysteryEventMenu(void)
         gMain.state++;
         break;
     case 12:
-        sub_8072044(gStringVar4);
+        MenuPrintMessageDefaultCoords(gStringVar4);
         gMain.state++;
         break;
     case 13:
@@ -329,7 +329,7 @@ static void CB2_MysteryEventMenu(void)
             CloseLink();
             MenuZeroFillWindowRect(6, 5, 23, 8);
             GetEventLoadMessage(gStringVar4, 1);
-            sub_8072044(gStringVar4);
+            MenuPrintMessageDefaultCoords(gStringVar4);
             gMain.state = 13;
         }
     }

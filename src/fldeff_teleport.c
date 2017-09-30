@@ -3,7 +3,7 @@
 #include "field_effect.h"
 #include "field_player_avatar.h"
 #include "pokemon_menu.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "rom6.h"
 #include "task.h"
 
@@ -13,9 +13,9 @@ extern void (*gUnknown_03005CE4)(void);
 
 bool8 SetUpFieldMove_Teleport(void)
 {
-    if (is_light_level_1_2_3_or_6(gMapHeader.mapType) == TRUE)
+    if (Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) == TRUE)
     {
-        gFieldCallback = sub_808AB90;
+        gFieldCallback = FieldCallback_Teleport;
         gUnknown_03005CE4 = hm_teleport_run_dp02scr;
         return TRUE;
     }
@@ -25,9 +25,9 @@ bool8 SetUpFieldMove_Teleport(void)
 
 void hm_teleport_run_dp02scr(void)
 {
-    new_game();
-    FieldEffectStart(63);
-    gUnknown_0202FF84[0] = gLastFieldPokeMenuOpened;
+    Overworld_ResetStateAfterTeleport();
+    FieldEffectStart(FLDEFF_USE_TELEPORT);
+    gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
 }
 
 bool8 FldEff_UseTeleport(void)
@@ -41,6 +41,6 @@ bool8 FldEff_UseTeleport(void)
 
 void sub_814A404(void)
 {
-    FieldEffectActiveListRemove(63);
+    FieldEffectActiveListRemove(FLDEFF_USE_TELEPORT);
     sub_8087BA8();
 }

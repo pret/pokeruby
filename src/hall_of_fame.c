@@ -11,7 +11,7 @@
 #include "menu.h"
 #include "save.h"
 #include "species.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "m4a.h"
 #include "data2.h"
 #include "decompress.h"
@@ -224,12 +224,12 @@ static const struct SpriteFrameImage sSpriteImageTable_840B67C[] =
 static const struct SpriteFrameImage* const sUnknown_0840B69C[7] =
 {
     sSpriteImageTable_840B5BC,
-	sSpriteImageTable_840B5DC,
-	sSpriteImageTable_840B5FC,
-	sSpriteImageTable_840B61C,
-	sSpriteImageTable_840B63C,
-	sSpriteImageTable_840B65C,
-	sSpriteImageTable_840B67C
+    sSpriteImageTable_840B5DC,
+    sSpriteImageTable_840B5FC,
+    sSpriteImageTable_840B61C,
+    sSpriteImageTable_840B63C,
+    sSpriteImageTable_840B65C,
+    sSpriteImageTable_840B67C
 };
 
 static const struct SpriteTemplate sUnknown_0840B6B8 =
@@ -365,22 +365,22 @@ static const union AnimCmd sSpriteAnim_840B758[] =
 static const union AnimCmd* const sSpriteAnimTable_840B760[] =
 {
     sSpriteAnim_840B6D8,
-	sSpriteAnim_840B6E0,
-	sSpriteAnim_840B6E8,
-	sSpriteAnim_840B6F0,
-	sSpriteAnim_840B6F8,
-	sSpriteAnim_840B700,
-	sSpriteAnim_840B708,
-	sSpriteAnim_840B710,
-	sSpriteAnim_840B718,
-	sSpriteAnim_840B720,
-	sSpriteAnim_840B728,
-	sSpriteAnim_840B730,
-	sSpriteAnim_840B738,
-	sSpriteAnim_840B740,
-	sSpriteAnim_840B748,
-	sSpriteAnim_840B750,
-	sSpriteAnim_840B758
+    sSpriteAnim_840B6E0,
+    sSpriteAnim_840B6E8,
+    sSpriteAnim_840B6F0,
+    sSpriteAnim_840B6F8,
+    sSpriteAnim_840B700,
+    sSpriteAnim_840B708,
+    sSpriteAnim_840B710,
+    sSpriteAnim_840B718,
+    sSpriteAnim_840B720,
+    sSpriteAnim_840B728,
+    sSpriteAnim_840B730,
+    sSpriteAnim_840B738,
+    sSpriteAnim_840B740,
+    sSpriteAnim_840B748,
+    sSpriteAnim_840B750,
+    sSpriteAnim_840B758
 };
 
 static const struct SpriteTemplate sSpriteTemplate_840B7A4 =

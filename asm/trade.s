@@ -10512,7 +10512,7 @@ _0804D4CC:
 	ldrb r0, [r0]
 	movs r1, 0
 	bl sub_804BA94
-	ldr r1, _0804D514 @ =gUnknown_03005E94
+	ldr r1, _0804D514 @ =gCB2_AfterEvolution
 	ldr r0, _0804D518 @ =sub_804BBCC
 	str r0, [r1]
 	ldr r7, _0804D51C @ =gUnknown_020297D8
@@ -10541,7 +10541,7 @@ _0804D4CC:
 	b _0804D538
 	.align 2, 0
 _0804D510: .4byte gSpecialVar_0x8005
-_0804D514: .4byte gUnknown_03005E94
+_0804D514: .4byte gCB2_AfterEvolution
 _0804D518: .4byte sub_804BBCC
 _0804D51C: .4byte gUnknown_020297D8
 _0804D520: .4byte gPlayerParty
@@ -10623,7 +10623,7 @@ _0804D5A8:
 	.align 2, 0
 _0804D5B4: .4byte gSoftResetDisabled
 _0804D5B8:
-	ldr r0, _0804D5F4 @ =gUnknown_03005E94
+	ldr r0, _0804D5F4 @ =gCB2_AfterEvolution
 	ldr r1, _0804D5F8 @ =sub_804DC88
 	mov r8, r1
 	str r1, [r0]
@@ -10652,7 +10652,7 @@ _0804D5B8:
 	bl TradeEvolutionScene
 	b _0804D60E
 	.align 2, 0
-_0804D5F4: .4byte gUnknown_03005E94
+_0804D5F4: .4byte gCB2_AfterEvolution
 _0804D5F8: .4byte sub_804DC88
 _0804D5FC: .4byte gUnknown_020297D8
 _0804D600: .4byte gPlayerParty

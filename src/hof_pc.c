@@ -2,7 +2,7 @@
 #include "hall_of_fame.h"
 #include "main.h"
 #include "palette.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "script.h"
 #include "script_menu.h"
 #include "task.h"
@@ -30,8 +30,8 @@ static void ReshowPCMenuAfterHallOfFamePC(void)
     ScriptContext2_Enable();
     sub_8053E90();
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
-    TryCreatePCMenu();
-    sub_80B5838();
+    ScrSpecial_CreatePCMenu();
+    ScriptMenu_DisplayPCStartupPrompt();
     CreateTask(Task_WaitForPaletteFade, 10);
 }
 

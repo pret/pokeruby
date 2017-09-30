@@ -15,7 +15,7 @@
 #include "map_obj_lock.h"
 #include "metatile_behavior.h"
 #include "palette.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "script.h"
 #include "songs.h"
 #include "sound.h"
@@ -40,8 +40,8 @@ void palette_bg_fill_black(void)
 
 void pal_fill_for_map_transition(void)
 {
-    u8 map_light = get_map_light_from_warp0();
-    switch (fade_type_for_given_maplight_pair(map_light, sav1_map_get_light_level()))
+    u8 map_light = get_map_type_from_warp0();
+    switch (fade_type_for_given_maplight_pair(map_light, Overworld_GetMapTypeOfSaveblockLocation()))
     {
     case 0:
         fade_screen(0, 0);
@@ -61,7 +61,7 @@ void pal_fill_black(void)
 
 void fade_8080918(void)
 {
-    u8 light_level = sav1_map_get_light_level();
+    u8 light_level = Overworld_GetMapTypeOfSaveblockLocation();
     switch (sub_810CDB8(light_level, warp1_get_mapheader()->mapType))
     {
     case 0:
@@ -547,7 +547,7 @@ void sub_808115C(u8 taskId)
     case 0:
         FreezeMapObjects();
         PlayerGetDestCoords(x, y);
-        PlaySE(sub_8058790(*x, *y - 1));
+        PlaySE(GetDoorSoundEffect(*x, *y - 1));
         task->data[1] = FieldAnimateDoorOpen(*x, *y - 1);
         task->data[0] = 1;
         break;

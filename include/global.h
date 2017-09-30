@@ -448,43 +448,69 @@ struct MailStruct
     /*0x20*/ u16 itemId;
 };
 
-struct UnkMauvilleOldManStruct
-{
-               u8 unk_2D94;
-               u8 unk_2D95;
-    /*0x2D96*/ u16 mauvilleOldMan_ecArray[6];
-    /*0x2DA2*/ u16 mauvilleOldMan_ecArray2[6];
-    /*0x2DAE*/ u8 playerName[8];
-    /*0x2DB6*/ u8 filler_2DB6[0x3];
-    /*0x2DB9*/ u8 playerTrainerId[4];
-               u8 unk_2DBD;
-}; /*size = 0x2C*/
 
-struct UnkMauvilleOldManStruct2
-{
-    u8 filler0;
-    u8 unk1;
-    u8 unk2;
-    u16 mauvilleOldMan_ecArray[10];
-    u8 mauvilleOldMan_ecArray2[12];
-    u8 fillerF[0x2];
-}; /*size = 0x2C*/
+// Mauville Pokemon Center men
 
-struct MauvilleOldManTrader
+struct MauvilleManCommon
 {
-    u8 unk0;
-    u8 unk1[4];
-    u8 unk5[4][11];
-    u8 unk31;
+    u8 id;
 };
 
-typedef union OldMan
+struct MauvilleManBard
 {
-    struct UnkMauvilleOldManStruct oldMan1;
-    struct UnkMauvilleOldManStruct2 oldMan2;
-    struct MauvilleOldManTrader trader;
-    u8 filler[0x40];
-} OldMan;
+    /*0x00*/ u8 id;
+    /*0x02*/ u16 songLyrics[6];
+    /*0x0E*/ u16 temporaryLyrics[6];
+    /*0x1A*/ u8 playerName[8];
+    /*0x22*/ u8 filler_2DB6[0x3];
+    /*0x25*/ u8 playerTrainerId[4];
+    /*0x29*/ bool8 hasChangedSong;
+}; /*size = 0x2C*/
+
+struct MauvilleManHipster
+{
+    u8 id;
+    bool8 alreadySpoken;
+};
+
+struct MauvilleManTrader
+{
+    u8 id;
+    u8 unk1[4];
+    u8 unk5[4][11];
+    bool8 alreadyTraded;
+};
+
+struct MauvilleManStoryteller
+{
+    u8 id;
+    bool8 alreadyRecorded;
+    u8 filler2[2];
+    u8 gameStatIDs[4];
+    u8 trainerNames[4][7];
+    u8 statValues[4][4];
+};
+
+struct MauvilleManGiddy
+{
+    /*0x00*/ u8 id;
+    /*0x01*/ u8 taleCounter;
+    /*0x02*/ u8 questionNum;
+    /*0x04*/ u16 randomWords[10];
+    /*0x18*/ u8 questionList[12];
+}; /*size = 0x2C*/
+
+
+union MauvilleMan
+{
+    struct MauvilleManCommon common;
+    struct MauvilleManBard bard;
+    struct MauvilleManHipster hipster;
+    struct MauvilleManTrader trader;
+    struct MauvilleManStoryteller storyteller;
+    struct MauvilleManGiddy giddy;
+    u8 filler[0x40];  // needed to pad out the struct
+};
 
 struct Unk_SB_Access_Struct1
 {
@@ -535,18 +561,34 @@ struct GabbyAndTyData
     /*2b1b*/ u8 valB_5:3;
 };
 
-struct RecordMixing_UnknownStructSub
+struct DayCareMail
 {
-    u32 unk0;
-    u8 data[0x34];
-    //u8 data[0x38];
+    /*0x00*/ struct MailStruct message;
+    /*0x24*/ u8 names[19];
 };
 
-struct RecordMixing_UnknownStruct
+struct DayCareStepCountersEtc {
+    u32 steps[2];
+    u16 personalityLo;
+    u8 unk_11a;
+};
+
+struct RecordMixingDayCareMail
 {
-    struct RecordMixing_UnknownStructSub data[2];
+    struct DayCareMail mail[2];
     u32 unk70;
-    u16 unk74[0x2];
+    u16 unk74[2];
+};
+
+struct DayCareMisc
+{
+    struct DayCareMail mail[2];
+    struct DayCareStepCountersEtc countersEtc;
+};
+
+struct DayCareData {
+    struct BoxPokemon mons[2];
+    struct DayCareMisc misc;
 };
 
 struct LinkBattleRecord
@@ -588,7 +630,7 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x2C*/ u16 battleMusic;
     /*0x2E*/ u8 weather;
     /*0x2F*/ u8 filler_2F;
-    /*0x30*/ u8 flashUsed;
+    /*0x30*/ u8 flashLevel;  // flash level on current map, 0 being normal and 4 being the darkest
     /*0x32*/ u16 mapDataId;
     /*0x34*/ u16 mapView[0x100];
     /*0x234*/ u8 playerPartyCount;
@@ -646,15 +688,11 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x2B4C*/ struct MailStruct mail[16];
     /*0x2D8C*/ u8 unk2D8C[4];
     /*0x2D90*/ u8 filler_2D90[0x4];
-    /*0x2D94*/ OldMan oldMan;
+    /*0x2D94*/ union MauvilleMan mauvilleMan;
     /*0x2DD4*/ struct EasyChatPair easyChatPairs[5]; //Dewford trend [0] and some other stuff
     /*0x2DFC*/ u8 filler_2DFC[0x8];
     /*0x2E04*/ SB_Struct sbStruct;
-    /*0x2F9C*/ struct BoxPokemon daycareData[2];
-    /*0x303C*/ struct RecordMixing_UnknownStruct filler_303C;
-    /*0x30AC*/ u8 filler_30B4[0x2];
-    /*0x30B6*/ u8 filler_30B6;
-    /*0x30B7*/ u8 filler_30B7[1];
+    /*0x2F9C*/ struct DayCareData daycareData;
     /*0x30B8*/ struct LinkBattleRecord linkBattleRecords[5];
     /*0x3108*/ u8 filler_3108[8];
     /*0x3110*/ u8 giftRibbons[7];

@@ -11,7 +11,7 @@
 #include "main.h"
 #include "pokemon.h"
 #include "rng.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "rom_8077ABC.h"
 #include "rom_8094928.h"
 #include "rtc.h"
@@ -457,7 +457,7 @@ u16 HoennToNationalOrder(u16 hoennNum)
     return gHoennToNationalOrder[hoennNum - 1];
 }
 
-u32 SpeciesToCryId(u16 species)
+u16 SpeciesToCryId(u16 species)
 {
     if (species <= 250)
         return species;
@@ -1197,7 +1197,7 @@ const struct CompressedSpritePalette *GetMonSpritePalStructFromOtIdPersonality(u
         return &gMonPaletteTable[species];
 }
 
-bool8 IsHMMove2(u16 move)
+bool32 IsHMMove2(u16 move)
 {
     int i = 0;
     while (gHMMoves[i] != 0xFFFF)

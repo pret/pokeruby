@@ -1,5 +1,5 @@
 //
-// Created by scott on 6/18/2017.
+
 //
 
 #ifndef POKERUBY_ANIM_FUNC_PTRS_H

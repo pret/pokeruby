@@ -23,15 +23,15 @@ extern u8 SweetScentNothingHereScript[];
 
 bool8 SetUpFieldMove_SweetScent(void)
 {
-    gFieldCallback = sub_808AB90;
+    gFieldCallback = FieldCallback_Teleport;
     gUnknown_03005CE4 = sub_812BFD4;
     return TRUE;
 }
 
 static void sub_812BFD4(void)
 {
-    FieldEffectStart(51);
-    gUnknown_0202FF84[0] = gLastFieldPokeMenuOpened;
+    FieldEffectStart(FLDEFF_SWEET_SCENT);
+    gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
 }
 
 bool8 FldEff_SweetScent()
@@ -51,7 +51,7 @@ static void sub_812C01C(void)
     BeginNormalPaletteFade(~(1 << (gSprites[GetPlayerAvatarObjectId()].oam.paletteNum + 16)), 4, 0, 8, 0x1F);
     taskId = CreateTask(sub_812C084, 0);
     gTasks[taskId].data[0] = 0;
-    FieldEffectActiveListRemove(51);
+    FieldEffectActiveListRemove(FLDEFF_SWEET_SCENT);
 }
 
 static void sub_812C084(u8 taskId)

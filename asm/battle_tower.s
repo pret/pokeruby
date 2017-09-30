@@ -2082,7 +2082,7 @@ sub_8135534: @ 8135534
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_811AAE8
+	bl IsBattleTransitionDone
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2163,10 +2163,10 @@ _081355D6:
 	bl CreateTask
 	movs r0, 0
 	bl current_map_music_set__default_for_battle
-	bl GetBattleTowerBattleTransition
+	bl BattleSetup_GetBattleTowerBattleTransition
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_811AABC
+	bl BattleTransition_StartOnField
 	b _08135648
 	.align 2, 0
 _081355F4: .4byte gPlayerParty
@@ -2200,10 +2200,10 @@ _08135606:
 	bl CreateTask
 	movs r0, 0
 	bl current_map_music_set__default_for_battle
-	bl GetBattleTowerBattleTransition
+	bl BattleSetup_GetBattleTowerBattleTransition
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_811AABC
+	bl BattleTransition_StartOnField
 _08135648:
 	add sp, 0x4
 	pop {r4,r5}

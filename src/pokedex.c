@@ -15,7 +15,7 @@
 #include "pokedex_cry_screen.h"
 #include "pokemon.h"
 #include "rng.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "songs.h"
 #include "sound.h"
 #include "species.h"

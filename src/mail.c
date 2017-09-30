@@ -8,7 +8,7 @@
 #include "name_string_util.h"
 #include "palette.h"
 #include "pokemon_icon.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "sprite.h"
 #include "string_util.h"
 #include "strings2.h"
@@ -92,7 +92,7 @@ void HandleReadMail(struct MailStruct *arg0, MainCallback arg1, bool8 arg2)
 
     ewram0.varFF = GAME_LANGUAGE;
     ewram0.var100 = 1;
-    ewram0.var104 = (MainCallback)sub_80EB3FC;
+    ewram0.var104 = (MainCallback)EasyChat_GetWordText;
     ewram0.var108 = (MainCallback)ConvertEasyChatWordsToString;
 
     mailDesign = arg0->itemId - ITEM_ORANGE_MAIL;

@@ -10,7 +10,7 @@
 #include "menu.h"
 #include "menu_helpers.h"
 #include "palette.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "songs.h"
 #include "sound.h"
 #include "sprite.h"
@@ -363,30 +363,30 @@ static void sub_81466A0(void)
 
 static void sub_81466E8(u8 taskId, s8 direction)
 {
-	u8 berryPocket = 3;
-	s16 *data = gTasks[taskId].data;
+    u8 berryPocket = 3;
+    s16 *data = gTasks[taskId].data;
 
-	if (gBagPocketScrollStates[berryPocket].scrollTop + gBagPocketScrollStates[berryPocket].cursorPos == 0
-	 && direction < 0)
-		return;
-	if (gBagPocketScrollStates[berryPocket].scrollTop + gBagPocketScrollStates[berryPocket].cursorPos + 1 == gBagPocketScrollStates[berryPocket].numSlots
-	 && direction > 0)
-		return;
+    if (gBagPocketScrollStates[berryPocket].scrollTop + gBagPocketScrollStates[berryPocket].cursorPos == 0
+     && direction < 0)
+        return;
+    if (gBagPocketScrollStates[berryPocket].scrollTop + gBagPocketScrollStates[berryPocket].cursorPos + 1 == gBagPocketScrollStates[berryPocket].numSlots
+     && direction > 0)
+        return;
 
-	PlaySE(SE_SELECT);
-	if (gBagPocketScrollStates[berryPocket].scrollTop + gBagPocketScrollStates[berryPocket].cursorPos + direction < 0)
-		data[1] = -(gBagPocketScrollStates[berryPocket].scrollTop + gBagPocketScrollStates[berryPocket].cursorPos);
-	else if (gBagPocketScrollStates[berryPocket].scrollTop + gBagPocketScrollStates[berryPocket].cursorPos + direction >= gBagPocketScrollStates[berryPocket].numSlots)
-		data[1] = gBagPocketScrollStates[berryPocket].numSlots - gBagPocketScrollStates[berryPocket].scrollTop - gBagPocketScrollStates[berryPocket].cursorPos - 1;
-	else
-		data[1] = direction;
+    PlaySE(SE_SELECT);
+    if (gBagPocketScrollStates[berryPocket].scrollTop + gBagPocketScrollStates[berryPocket].cursorPos + direction < 0)
+        data[1] = -(gBagPocketScrollStates[berryPocket].scrollTop + gBagPocketScrollStates[berryPocket].cursorPos);
+    else if (gBagPocketScrollStates[berryPocket].scrollTop + gBagPocketScrollStates[berryPocket].cursorPos + direction >= gBagPocketScrollStates[berryPocket].numSlots)
+        data[1] = gBagPocketScrollStates[berryPocket].numSlots - gBagPocketScrollStates[berryPocket].scrollTop - gBagPocketScrollStates[berryPocket].cursorPos - 1;
+    else
+        data[1] = direction;
 
-	gTasks[taskId].func = sub_8146798;
+    gTasks[taskId].func = sub_8146798;
 
-	if (direction < 0)
-		data[0] = -16;
-	else
-		data[0] = 16;
+    if (direction < 0)
+        data[0] = -16;
+    else
+        data[0] = 16;
 
 }
 
@@ -411,36 +411,36 @@ static void sub_8146798(u8 taskId)
 
 static void sub_8146810(s8 berry)
 {
-	u8 berryPocket = 3;
+    u8 berryPocket = 3;
 
-	if (berry > 0)
-	{
-		if (gBagPocketScrollStates[berryPocket].cursorPos + berry > 7)
-		{
-			gBagPocketScrollStates[berryPocket].scrollTop += gBagPocketScrollStates[berryPocket].cursorPos - 7 + berry;
-			gBagPocketScrollStates[berryPocket].cursorPos = 7;
-		}
-		else
-		{
-			gBagPocketScrollStates[berryPocket].cursorPos += berry;
-		}
-	}
-	else
-	{
-		if (gBagPocketScrollStates[berryPocket].cursorPos + berry < 0)
-		{
-			gBagPocketScrollStates[berryPocket].scrollTop += gBagPocketScrollStates[berryPocket].cursorPos + berry;
-			gBagPocketScrollStates[berryPocket].cursorPos = 0;
-		}
-		else
-		{
-			gBagPocketScrollStates[berryPocket].cursorPos += berry;
-		}
-	}
-	gScriptItemId = gCurrentBagPocketItemSlots[gBagPocketScrollStates[berryPocket].scrollTop + gBagPocketScrollStates[berryPocket].cursorPos].itemId;
-	DestroySprite(&gSprites[gUnknown_0203932C]);
-	sub_81466A0();
-	sub_80A7DD4();
+    if (berry > 0)
+    {
+        if (gBagPocketScrollStates[berryPocket].cursorPos + berry > 7)
+        {
+            gBagPocketScrollStates[berryPocket].scrollTop += gBagPocketScrollStates[berryPocket].cursorPos - 7 + berry;
+            gBagPocketScrollStates[berryPocket].cursorPos = 7;
+        }
+        else
+        {
+            gBagPocketScrollStates[berryPocket].cursorPos += berry;
+        }
+    }
+    else
+    {
+        if (gBagPocketScrollStates[berryPocket].cursorPos + berry < 0)
+        {
+            gBagPocketScrollStates[berryPocket].scrollTop += gBagPocketScrollStates[berryPocket].cursorPos + berry;
+            gBagPocketScrollStates[berryPocket].cursorPos = 0;
+        }
+        else
+        {
+            gBagPocketScrollStates[berryPocket].cursorPos += berry;
+        }
+    }
+    gScriptItemId = gCurrentBagPocketItemSlots[gBagPocketScrollStates[berryPocket].scrollTop + gBagPocketScrollStates[berryPocket].cursorPos].itemId;
+    DestroySprite(&gSprites[gUnknown_0203932C]);
+    sub_81466A0();
+    sub_80A7DD4();
 }
 
 static void sub_81468BC(void)

@@ -69,7 +69,7 @@ SlateportCity_EventScript_14BAE0:: @ 814BAE0
 	specialval RESULT, LeadMonHasEffortRibbon
 	compare RESULT, 1
 	callif 1, SlateportCity_EventScript_14BB35
-	specialval RESULT, GetLeadMonEVCount
+	specialval RESULT, ScrSpecial_AreLeadMonEVsMaxedOut
 	compare RESULT, 0
 	callif 1, SlateportCity_EventScript_14BB2B
 	msgbox SlateportCity_Text_164691, 4

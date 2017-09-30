@@ -23,7 +23,7 @@
 #include "party_menu.h"
 #include "player_pc.h"
 #include "pokemon_menu.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "script.h"
 #include "songs.h"
 #include "sound.h"
@@ -2313,164 +2313,164 @@ __attribute__((naked))
 static void sub_80A5600(u8 taskId)
 {
     asm(".syntax unified\n\
-	push {r4,r5,lr}\n\
-	lsls r0, 24\n\
-	lsrs r4, r0, 24\n\
-	movs r5, 0\n\
-	ldr r2, _080A563C @ =gMain\n\
-	ldrh r0, [r2, 0x30]\n\
-	movs r1, 0xF0\n\
-	ands r1, r0\n\
-	cmp r1, 0x40\n\
-	bne _080A5648\n\
-	ldr r4, _080A5640 @ =sPopupMenuSelection\n\
-	ldrb r0, [r4]\n\
-	cmp r0, 0\n\
-	bne _080A561E\n\
-	b _080A5736\n\
+    push {r4,r5,lr}\n\
+    lsls r0, 24\n\
+    lsrs r4, r0, 24\n\
+    movs r5, 0\n\
+    ldr r2, _080A563C @ =gMain\n\
+    ldrh r0, [r2, 0x30]\n\
+    movs r1, 0xF0\n\
+    ands r1, r0\n\
+    cmp r1, 0x40\n\
+    bne _080A5648\n\
+    ldr r4, _080A5640 @ =sPopupMenuSelection\n\
+    ldrb r0, [r4]\n\
+    cmp r0, 0\n\
+    bne _080A561E\n\
+    b _080A5736\n\
 _080A561E:\n\
-	adds r1, r0, 0\n\
-	ldr r0, _080A5644 @ =sPopupMenuActionList\n\
-	ldr r0, [r0]\n\
-	adds r1, r0\n\
-	subs r1, 0x1\n\
-	ldrb r0, [r1]\n\
-	cmp r0, 0x8\n\
-	bne _080A5630\n\
-	b _080A5736\n\
+    adds r1, r0, 0\n\
+    ldr r0, _080A5644 @ =sPopupMenuActionList\n\
+    ldr r0, [r0]\n\
+    adds r1, r0\n\
+    subs r1, 0x1\n\
+    ldrb r0, [r1]\n\
+    cmp r0, 0x8\n\
+    bne _080A5630\n\
+    b _080A5736\n\
 _080A5630:\n\
-	movs r0, 0x5\n\
-	bl PlaySE\n\
-	movs r0, 0x1\n\
-	negs r0, r0\n\
-	b _080A56D2\n\
-	.align 2, 0\n\
+    movs r0, 0x5\n\
+    bl PlaySE\n\
+    movs r0, 0x1\n\
+    negs r0, r0\n\
+    b _080A56D2\n\
+    .align 2, 0\n\
 _080A563C: .4byte gMain\n\
 _080A5640: .4byte sPopupMenuSelection\n\
 _080A5644: .4byte sPopupMenuActionList\n\
 _080A5648:\n\
-	cmp r1, 0x80\n\
-	bne _080A5680\n\
-	ldr r4, _080A5674 @ =sPopupMenuSelection\n\
-	ldrb r1, [r4]\n\
-	ldr r0, _080A5678 @ =gUnknown_02038564\n\
-	ldrb r0, [r0]\n\
-	subs r0, 0x1\n\
-	cmp r1, r0\n\
-	beq _080A5736\n\
-	cmp r1, 0x2\n\
-	beq _080A5736\n\
-	ldr r0, _080A567C @ =sPopupMenuActionList\n\
-	ldr r0, [r0]\n\
-	adds r0, r1, r0\n\
-	ldrb r0, [r0, 0x1]\n\
-	cmp r0, 0x8\n\
-	beq _080A5736\n\
-	movs r0, 0x5\n\
-	bl PlaySE\n\
-	movs r0, 0x1\n\
-	b _080A56D2\n\
-	.align 2, 0\n\
+    cmp r1, 0x80\n\
+    bne _080A5680\n\
+    ldr r4, _080A5674 @ =sPopupMenuSelection\n\
+    ldrb r1, [r4]\n\
+    ldr r0, _080A5678 @ =gUnknown_02038564\n\
+    ldrb r0, [r0]\n\
+    subs r0, 0x1\n\
+    cmp r1, r0\n\
+    beq _080A5736\n\
+    cmp r1, 0x2\n\
+    beq _080A5736\n\
+    ldr r0, _080A567C @ =sPopupMenuActionList\n\
+    ldr r0, [r0]\n\
+    adds r0, r1, r0\n\
+    ldrb r0, [r0, 0x1]\n\
+    cmp r0, 0x8\n\
+    beq _080A5736\n\
+    movs r0, 0x5\n\
+    bl PlaySE\n\
+    movs r0, 0x1\n\
+    b _080A56D2\n\
+    .align 2, 0\n\
 _080A5674: .4byte sPopupMenuSelection\n\
 _080A5678: .4byte gUnknown_02038564\n\
 _080A567C: .4byte sPopupMenuActionList\n\
 _080A5680:\n\
-	cmp r1, 0x20\n\
-	bne _080A56B0\n\
-	ldr r4, _080A56A8 @ =sPopupMenuSelection\n\
-	ldrb r0, [r4]\n\
-	cmp r0, 0x2\n\
-	bls _080A5736\n\
-	adds r1, r0, 0\n\
-	ldr r0, _080A56AC @ =sPopupMenuActionList\n\
-	ldr r0, [r0]\n\
-	adds r1, r0\n\
-	subs r1, 0x3\n\
-	ldrb r0, [r1]\n\
-	cmp r0, 0x8\n\
-	beq _080A5736\n\
-	movs r0, 0x5\n\
-	bl PlaySE\n\
-	movs r0, 0x3\n\
-	negs r0, r0\n\
-	b _080A56D2\n\
-	.align 2, 0\n\
+    cmp r1, 0x20\n\
+    bne _080A56B0\n\
+    ldr r4, _080A56A8 @ =sPopupMenuSelection\n\
+    ldrb r0, [r4]\n\
+    cmp r0, 0x2\n\
+    bls _080A5736\n\
+    adds r1, r0, 0\n\
+    ldr r0, _080A56AC @ =sPopupMenuActionList\n\
+    ldr r0, [r0]\n\
+    adds r1, r0\n\
+    subs r1, 0x3\n\
+    ldrb r0, [r1]\n\
+    cmp r0, 0x8\n\
+    beq _080A5736\n\
+    movs r0, 0x5\n\
+    bl PlaySE\n\
+    movs r0, 0x3\n\
+    negs r0, r0\n\
+    b _080A56D2\n\
+    .align 2, 0\n\
 _080A56A8: .4byte sPopupMenuSelection\n\
 _080A56AC: .4byte sPopupMenuActionList\n\
 _080A56B0:\n\
-	cmp r1, 0x10\n\
-	bne _080A56E4\n\
-	ldr r4, _080A56DC @ =sPopupMenuSelection\n\
-	ldrb r0, [r4]\n\
-	cmp r0, 0x2\n\
-	bhi _080A5736\n\
-	adds r1, r0, 0\n\
-	ldr r0, _080A56E0 @ =sPopupMenuActionList\n\
-	ldr r0, [r0]\n\
-	adds r1, r0\n\
-	ldrb r0, [r1, 0x3]\n\
-	cmp r0, 0x8\n\
-	beq _080A5736\n\
-	movs r0, 0x5\n\
-	bl PlaySE\n\
-	movs r0, 0x3\n\
+    cmp r1, 0x10\n\
+    bne _080A56E4\n\
+    ldr r4, _080A56DC @ =sPopupMenuSelection\n\
+    ldrb r0, [r4]\n\
+    cmp r0, 0x2\n\
+    bhi _080A5736\n\
+    adds r1, r0, 0\n\
+    ldr r0, _080A56E0 @ =sPopupMenuActionList\n\
+    ldr r0, [r0]\n\
+    adds r1, r0\n\
+    ldrb r0, [r1, 0x3]\n\
+    cmp r0, 0x8\n\
+    beq _080A5736\n\
+    movs r0, 0x5\n\
+    bl PlaySE\n\
+    movs r0, 0x3\n\
 _080A56D2:\n\
-	bl MoveMenuCursor3\n\
-	strb r0, [r4]\n\
-	b _080A5736\n\
-	.align 2, 0\n\
+    bl MoveMenuCursor3\n\
+    strb r0, [r4]\n\
+    b _080A5736\n\
+    .align 2, 0\n\
 _080A56DC: .4byte sPopupMenuSelection\n\
 _080A56E0: .4byte sPopupMenuActionList\n\
 _080A56E4:\n\
-	ldrh r1, [r2, 0x2E]\n\
-	movs r0, 0x1\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	bne _080A5768\n\
-	movs r0, 0x2\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _080A5736\n\
-	ldr r1, _080A574C @ =gTasks\n\
-	lsls r0, r4, 2\n\
-	adds r0, r4\n\
-	lsls r0, 3\n\
-	adds r0, r1\n\
-	strh r5, [r0, 0x1C]\n\
-	ldr r1, _080A5750 @ =gBagPocketScrollStates\n\
-	ldr r0, _080A5754 @ =sCurrentBagPocket\n\
-	ldrb r0, [r0]\n\
-	lsls r0, 24\n\
-	asrs r0, 24\n\
-	lsls r0, 2\n\
-	adds r0, r1\n\
-	ldrb r2, [r0]\n\
-	adds r0, r4, 0\n\
-	adds r1, r2, 0\n\
-	bl sub_80A48E8\n\
-	ldr r0, _080A5758 @ =gBGTilemapBuffers + 0x800\n\
-	bl sub_80A4DA4\n\
-	ldr r1, _080A575C @ =sItemPopupMenuActions\n\
-	ldr r0, _080A5760 @ =sPopupMenuActionList\n\
-	ldr r0, [r0]\n\
-	ldrb r0, [r0, 0x5]\n\
-	lsls r0, 3\n\
-	adds r1, 0x4\n\
-	adds r0, r1\n\
-	ldr r5, [r0]\n\
-	adds r0, r4, 0\n\
-	bl _call_via_r5\n\
+    ldrh r1, [r2, 0x2E]\n\
+    movs r0, 0x1\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    bne _080A5768\n\
+    movs r0, 0x2\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _080A5736\n\
+    ldr r1, _080A574C @ =gTasks\n\
+    lsls r0, r4, 2\n\
+    adds r0, r4\n\
+    lsls r0, 3\n\
+    adds r0, r1\n\
+    strh r5, [r0, 0x1C]\n\
+    ldr r1, _080A5750 @ =gBagPocketScrollStates\n\
+    ldr r0, _080A5754 @ =sCurrentBagPocket\n\
+    ldrb r0, [r0]\n\
+    lsls r0, 24\n\
+    asrs r0, 24\n\
+    lsls r0, 2\n\
+    adds r0, r1\n\
+    ldrb r2, [r0]\n\
+    adds r0, r4, 0\n\
+    adds r1, r2, 0\n\
+    bl sub_80A48E8\n\
+    ldr r0, _080A5758 @ =gBGTilemapBuffers + 0x800\n\
+    bl sub_80A4DA4\n\
+    ldr r1, _080A575C @ =sItemPopupMenuActions\n\
+    ldr r0, _080A5760 @ =sPopupMenuActionList\n\
+    ldr r0, [r0]\n\
+    ldrb r0, [r0, 0x5]\n\
+    lsls r0, 3\n\
+    adds r1, 0x4\n\
+    adds r0, r1\n\
+    ldr r5, [r0]\n\
+    adds r0, r4, 0\n\
+    bl _call_via_r5\n\
 _080A5736:\n\
-	cmp r5, 0\n\
-	bne _080A57BE\n\
-	ldr r0, _080A5764 @ =sPopupMenuSelection\n\
-	ldrb r0, [r0]\n\
-	cmp r0, 0\n\
-	bne _080A57AC\n\
-	movs r0, 0xC\n\
-	bl sub_8072DDC\n\
-	b _080A57BE\n\
-	.align 2, 0\n\
+    cmp r5, 0\n\
+    bne _080A57BE\n\
+    ldr r0, _080A5764 @ =sPopupMenuSelection\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0\n\
+    bne _080A57AC\n\
+    movs r0, 0xC\n\
+    bl sub_8072DDC\n\
+    b _080A57BE\n\
+    .align 2, 0\n\
 _080A574C: .4byte gTasks\n\
 _080A5750: .4byte gBagPocketScrollStates\n\
 _080A5754: .4byte sCurrentBagPocket\n\
@@ -2479,47 +2479,47 @@ _080A575C: .4byte sItemPopupMenuActions\n\
 _080A5760: .4byte sPopupMenuActionList\n\
 _080A5764: .4byte sPopupMenuSelection\n\
 _080A5768:\n\
-	ldr r1, _080A5798 @ =gTasks\n\
-	lsls r0, r4, 2\n\
-	adds r0, r4\n\
-	lsls r0, 3\n\
-	adds r0, r1\n\
-	strh r5, [r0, 0x1C]\n\
-	ldr r0, _080A579C @ =gBGTilemapBuffers + 0x800\n\
-	bl sub_80A4DA4\n\
-	ldr r1, _080A57A0 @ =sItemPopupMenuActions\n\
-	ldr r0, _080A57A4 @ =sPopupMenuSelection\n\
-	ldrb r2, [r0]\n\
-	ldr r0, _080A57A8 @ =sPopupMenuActionList\n\
-	ldr r0, [r0]\n\
-	adds r0, r2\n\
-	ldrb r0, [r0]\n\
-	lsls r0, 3\n\
-	adds r1, 0x4\n\
-	adds r0, r1\n\
-	ldr r5, [r0]\n\
-	adds r0, r4, 0\n\
-	bl _call_via_r5\n\
-	b _080A5736\n\
-	.align 2, 0\n\
+    ldr r1, _080A5798 @ =gTasks\n\
+    lsls r0, r4, 2\n\
+    adds r0, r4\n\
+    lsls r0, 3\n\
+    adds r0, r1\n\
+    strh r5, [r0, 0x1C]\n\
+    ldr r0, _080A579C @ =gBGTilemapBuffers + 0x800\n\
+    bl sub_80A4DA4\n\
+    ldr r1, _080A57A0 @ =sItemPopupMenuActions\n\
+    ldr r0, _080A57A4 @ =sPopupMenuSelection\n\
+    ldrb r2, [r0]\n\
+    ldr r0, _080A57A8 @ =sPopupMenuActionList\n\
+    ldr r0, [r0]\n\
+    adds r0, r2\n\
+    ldrb r0, [r0]\n\
+    lsls r0, 3\n\
+    adds r1, 0x4\n\
+    adds r0, r1\n\
+    ldr r5, [r0]\n\
+    adds r0, r4, 0\n\
+    bl _call_via_r5\n\
+    b _080A5736\n\
+    .align 2, 0\n\
 _080A5798: .4byte gTasks\n\
 _080A579C: .4byte gBGTilemapBuffers + 0x800\n\
 _080A57A0: .4byte sItemPopupMenuActions\n\
 _080A57A4: .4byte sPopupMenuSelection\n\
 _080A57A8: .4byte sPopupMenuActionList\n\
 _080A57AC:\n\
-	cmp r0, 0x2\n\
-	bhi _080A57B8\n\
-	movs r0, 0x2F\n\
-	bl sub_8072DCC\n\
-	b _080A57BE\n\
+    cmp r0, 0x2\n\
+    bhi _080A57B8\n\
+    movs r0, 0x2F\n\
+    bl sub_8072DCC\n\
+    b _080A57BE\n\
 _080A57B8:\n\
-	movs r0, 0x30\n\
-	bl sub_8072DCC\n\
+    movs r0, 0x30\n\
+    bl sub_8072DCC\n\
 _080A57BE:\n\
-	pop {r4,r5}\n\
-	pop {r0}\n\
-	bx r0\n\
+    pop {r4,r5}\n\
+    pop {r0}\n\
+    bx r0\n\
     .syntax divided\n");
 }
 
@@ -3115,7 +3115,7 @@ static void sub_80A6760(u8 taskId)
 static void BuyMenuPrintItemQuantityAndPrice(u8 taskId)
 {
     sub_80A36B8(gBGTilemapBuffers[1], 0, 0, 31, 31);
-    RemoveMoneyLabelObject(0, 0);
+    CloseMoneyWindow(0, 0);
     MenuZeroFillWindowRect(0, 4, 13, 13);
     MenuZeroFillWindowRect(0, 14, 29, 19);
     gTasks[taskId].func = sub_80A6760;
@@ -3123,20 +3123,20 @@ static void BuyMenuPrintItemQuantityAndPrice(u8 taskId)
 
 static void BuyMenuDisplayMessage(u16 itemId, u16 quantity)
 {
-    sub_80B7A94(ItemId_GetPrice(itemId) / 2 * quantity, 6, 6, 11);
+    PrintMoneyAmount(ItemId_GetPrice(itemId) / 2 * quantity, 6, 6, 11);
     ConvertIntToDecimalStringN(gStringVar1, ItemId_GetPrice(itemId) / 2 * quantity, STR_CONV_MODE_LEFT_ALIGN, 6);
 }
 
 static void sub_80A683C(void)
 {
-    sub_80B7C14(gSaveBlock1.money, 0, 0);
+    OpenMoneyWindow(gSaveBlock1.money, 0, 0);
     sub_80A4008(gBGTilemapBuffers[1], 1, 1, 12, 2);
 }
 
 static void sub_80A6870(u16 itemId, u8 quantity)
 {
-    sub_80B79B8(&gSaveBlock1.money, ItemId_GetPrice(itemId) / 2 * quantity);
-    sub_80B7BEC(gSaveBlock1.money, 0, 0);
+    AddMoney(&gSaveBlock1.money, ItemId_GetPrice(itemId) / 2 * quantity);
+    UpdateMoneyWindow(gSaveBlock1.money, 0, 0);
 }
 
 static void sub_80A68A4(void)

@@ -244,7 +244,7 @@ void sub_808948C(struct Task *);
 void sub_80894C4(struct Task *);
 void fishE(struct Task *);
 
-u8 CreateTrainerSprite_BirchSpeech(u8 gender, s16 x, s16 y, u8 subpriority, u8 *buffer);
+u8 CreateTrainerSprite(u8 trainerSpriteID, s16 x, s16 y, u8 subpriority, u8 *buffer);
 void LoadTrainerGfx_TrainerCard(u8 gender, u16 palOffset, u8 *dest);
 u8 CreateBirchSprite(s16 x, s16 y, u8 subpriority);
 u8 CreateMonSprite_PicBox(u16, s16, s16, u8);
@@ -253,6 +253,6 @@ void MultiplyInvertedPaletteRGBComponents(u16, u8, u8, u8);
 void sub_80878A8(void);
 void sub_8087BA8(void);
 
-extern u32 gUnknown_0202FF84[8];
+extern u32 gFieldEffectArguments[8];
 
 #endif // GUARD_FIELD_EFFECT_H

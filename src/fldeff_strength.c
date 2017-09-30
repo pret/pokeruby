@@ -18,14 +18,14 @@ extern u16 gScriptResult;
 extern void (*gFieldCallback)(void);
 extern void (*gUnknown_03005CE4)(void);
 
-extern u8 UseStrengthScript[];
+extern u8 S_UseStrength[];
 
 bool8 SetUpFieldMove_Strength(void)
 {
     if (ShouldDoBrailleStrengthEffect())
     {
         gScriptResult = gLastFieldPokeMenuOpened;
-        gFieldCallback = sub_808AB90;
+        gFieldCallback = FieldCallback_Teleport;
         gUnknown_03005CE4 = sub_811AA38;
     }
     else
@@ -33,7 +33,7 @@ bool8 SetUpFieldMove_Strength(void)
         if (npc_before_player_of_type(87) != TRUE)
             return 0;
         gScriptResult = gLastFieldPokeMenuOpened;
-        gFieldCallback = sub_808AB90;
+        gFieldCallback = FieldCallback_Teleport;
         gUnknown_03005CE4 = sub_811AA18;
     }
 
@@ -42,14 +42,14 @@ bool8 SetUpFieldMove_Strength(void)
 
 static void sub_811AA18(void)
 {
-    gUnknown_0202FF84[0] = gLastFieldPokeMenuOpened;
-    ScriptContext1_SetupScript(UseStrengthScript);
+    gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
+    ScriptContext1_SetupScript(S_UseStrength);
 }
 
 static void sub_811AA38(void)
 {
-    gUnknown_0202FF84[0] = gLastFieldPokeMenuOpened;
-    FieldEffectStart(40);
+    gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
+    FieldEffectStart(FLDEFF_USE_STRENGTH);
 }
 
 bool8 FldEff_UseStrength(void)
@@ -58,7 +58,7 @@ bool8 FldEff_UseStrength(void)
 
     gTasks[taskId].data[8] = (u32)sub_811AA9C >> 16;
     gTasks[taskId].data[9] = (u32)sub_811AA9C;
-    GetMonNickname(&gPlayerParty[gUnknown_0202FF84[0]], gStringVar1);
+    GetMonNickname(&gPlayerParty[gFieldEffectArguments[0]], gStringVar1);
     return FALSE;
 }
 

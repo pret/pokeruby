@@ -3,7 +3,7 @@
 #include "gba/flash_internal.h"
 #include "save.h"
 #include "load_save.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "save_failed_screen.h"
 
 #define GETVALIDSTATUSBITFIELD ((1 << ARRAY_COUNT(gSaveSectionLocations)) - 1)

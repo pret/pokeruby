@@ -1,9 +1,9 @@
 //
-// Created by scott on 6/27/2017.
+
 //
 
 #include "global.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "sprite.h"
 #include "script.h"
 #include "strings.h"
@@ -25,7 +25,6 @@
 #include "sound.h"
 #include "songs.h"
 #include "safari_zone.h"
-#include "use_pokeblock.h"
 #include "event_data.h"
 #include "pokeblock.h"
 
@@ -582,7 +581,7 @@ static void sub_810BDAC(bool8 flag)
         v0 = ((i % 3) << 6) + 0x1a1 + (i / 3) * 6;
         if (gUnknown_02039248.unk0 + gUnknown_02039248.unk1 != gUnknown_02039248.unk2)
         {
-            if (sub_810CA9C(&gSaveBlock1.pokeblocks[gUnknown_02039248.unk0 + gUnknown_02039248.unk1], i + 1) > 0)
+            if (GetPokeblockData(&gSaveBlock1.pokeblocks[gUnknown_02039248.unk0 + gUnknown_02039248.unk1], i + 1) > 0)
             {
                 gBGTilemapBuffers[2][v0] = (i << 12) + 23;
                 gBGTilemapBuffers[2][v0 + 32] = (i << 12) + 24;
@@ -817,7 +816,7 @@ static void sub_810C368(u8 taskId)
     sub_80F98A4(1);
     BasicInitMenuWindow(&gWindowConfig_81E6E50);
     MenuDrawTextWindow(7, v0 + 4, 13, 11);
-    PrintMenuItemsReordered(8, v0 + 5, gUnknown_0203924C, (const struct MenuAction *)gUnknown_083F7EF4, gUnknown_03000758);
+    PrintMenuItemsReordered(8, v0 + 5, gUnknown_0203924C, gUnknown_083F7EF4, gUnknown_03000758);
     InitMenu(0, 8, v0 + 5, gUnknown_0203924C, 0, 5);
     gScriptItemId = gUnknown_02039248.unk0 + gUnknown_02039248.unk1;
     gTasks[taskId].func = sub_810C40C;
@@ -894,7 +893,7 @@ static void sub_810C5EC(u8 taskId)
 static void sub_810C610(u8 taskId)
 {
     MenuZeroFillWindowRect(7, 6, 13, 11);
-    sub_810CA6C((gUnknown_02039248.unk0 + gUnknown_02039248.unk1));
+    PokeblockClearIfExists((gUnknown_02039248.unk0 + gUnknown_02039248.unk1));
     StringExpandPlaceholders(gStringVar4, gContestStatsText_WasThrownAway);
     DisplayItemMessageOnField(taskId, gStringVar4, sub_810C704, 0);
     sub_810BC98();
@@ -942,9 +941,9 @@ static void sub_810C748(u8 taskId)
 
 static void sub_810C788(u8 taskId)
 {
-    s16 v0 = sub_810CAE4(GetNature(&gEnemyParty[0]), &gSaveBlock1.pokeblocks[gScriptItemId]);
+    s16 v0 = PokeblockGetGain(GetNature(&gEnemyParty[0]), &gSaveBlock1.pokeblocks[gScriptItemId]);
     StringCopy(gBattleTextBuff1, gPokeblockNames[gSaveBlock1.pokeblocks[gScriptItemId].color]);
-    sub_810CA6C(gScriptItemId);
+    PokeblockClearIfExists(gScriptItemId);
     gScriptItemId = gSaveBlock1.pokeblocks[gScriptItemId].color << 8;
     if (v0 == 0)
     {
@@ -967,7 +966,7 @@ static void sub_810C854(u8 taskId)
     SafariZoneActivatePokeblockFeeder(gScriptItemId);
     StringCopy(gStringVar1, gPokeblockNames[gSaveBlock1.pokeblocks[gScriptItemId].color]);
     gScriptResult = gScriptItemId;
-    sub_810CA6C(gScriptItemId);
+    PokeblockClearIfExists(gScriptItemId);
     BeginNormalPaletteFade(-1, 0, 0, 16, 0);
     gTasks[taskId].func = sub_810C2C8;
 }
@@ -1024,10 +1023,10 @@ u8 sub_810C9B0(struct Pokeblock *pokeblock)
 {
     u8 contestStat;
     u8 maxRating;
-    u8 rating = sub_810CA9C(pokeblock, 1);
+    u8 rating = GetPokeblockData(pokeblock, 1);
     for (contestStat=1; contestStat<5; contestStat++)
     {
-        maxRating = sub_810CA9C(pokeblock, contestStat + 1);
+        maxRating = GetPokeblockData(pokeblock, contestStat + 1);
         if (rating < maxRating)
         {
             rating = maxRating;
@@ -1038,7 +1037,7 @@ u8 sub_810C9B0(struct Pokeblock *pokeblock)
 
 u8 sub_810C9E8(struct Pokeblock *pokeblock)
 {
-    u8 feel = sub_810CA9C(pokeblock, 6);
+    u8 feel = GetPokeblockData(pokeblock, 6);
     if (feel > 99)
         feel = 99;
     return feel;
@@ -1068,7 +1067,7 @@ bool8 sub_810CA34(struct Pokeblock *pokeblock)
     return TRUE;
 }
 
-bool8 sub_810CA6C(u8 pokeblockIdx)
+bool8 PokeblockClearIfExists(u8 pokeblockIdx)
 {
     if (gSaveBlock1.pokeblocks[pokeblockIdx].color == 0)
     {
@@ -1078,33 +1077,33 @@ bool8 sub_810CA6C(u8 pokeblockIdx)
     return TRUE;
 }
 
-s16 sub_810CA9C(const struct Pokeblock *pokeblock, u8 field)
+s16 GetPokeblockData(const struct Pokeblock *pokeblock, u8 field)
 {
-    if (field == 0)
+    if (field == PBLOCK_COLOR)
         return pokeblock->color;
-    if (field == 1)
+    if (field == PBLOCK_SPICY)
         return pokeblock->spicy;
-    if (field == 2)
+    if (field == PBLOCK_DRY)
         return pokeblock->dry;
-    if (field == 3)
+    if (field == PBLOCK_SWEET)
         return pokeblock->sweet;
-    if (field == 4)
+    if (field == PBLOCK_BITTER)
         return pokeblock->bitter;
-    if (field == 5)
+    if (field == PBLOCK_SOUR)
         return pokeblock->sour;
-    if (field == 6)
+    if (field == PBLOCK_FEEL)
         return pokeblock->feel;
     return 0;
 }
 
-s16 sub_810CAE4(u8 nature, const struct Pokeblock *pokeblock)
+s16 PokeblockGetGain(u8 nature, const struct Pokeblock *pokeblock)
 {
     u8 flavor;
     s16 curGain;
     s16 totalGain = 0;
     for (flavor=0; flavor<5; flavor++)
     {
-        curGain = sub_810CA9C(pokeblock, flavor + 1);
+        curGain = GetPokeblockData(pokeblock, flavor + 1);
         if (curGain > 0)
         {
             totalGain += curGain * gPokeblockFlavorCompatibilityTable[5 * nature + flavor];
@@ -1113,9 +1112,9 @@ s16 sub_810CAE4(u8 nature, const struct Pokeblock *pokeblock)
     return totalGain;
 }
 
-void sub_810CB44(struct Pokeblock *pokeblock, u8 *dest)
+void PokeblockCopyName(struct Pokeblock *pokeblock, u8 *dest)
 {
-    u8 color = sub_810CA9C(pokeblock, 0);
+    u8 color = GetPokeblockData(pokeblock, PBLOCK_COLOR);
     StringCopy(dest, gPokeblockNames[color]);
 }
 
@@ -1124,7 +1123,7 @@ bool8 sub_810CB68(u8 nature, u8 *dest)
     u8 flavor;
     for (flavor=0; flavor<5; flavor++)
     {
-        if (sub_810CAE4(nature, &gUnknown_083F7F9C[flavor]) > 0)
+        if (PokeblockGetGain(nature, &gUnknown_083F7F9C[flavor]) > 0)
         {
             StringCopy(dest, gPokeblockNames[flavor + 1]);
             return TRUE;

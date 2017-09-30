@@ -4,6 +4,7 @@
 #include "battle.h"
 #include "m4a.h"
 #include "main.h"
+#include "pokemon.h"
 #include "songs.h"
 #include "task.h"
 
@@ -12,9 +13,6 @@ struct Fanfare
     u16 songNum;
     u16 duration;
 };
-
-// FIXME: different prototype than definition
-u32 SpeciesToCryId(u32);
 
 extern u16 gBattleTypeFlags;
 
@@ -355,21 +353,9 @@ void PlayCry5(u16 species, u8 mode)
     RestoreBGMVolumeAfterPokemonCry();
 }
 
-#define GET_CRY_PTR(a, b)\
-{\
-    struct ToneData *tone;\
-    if (v0)\
-        tone = &a[index];\
-    else\
-        tone = &b[index];\
-    gMPlay_PokemonCry = SetPokemonCryTone(tone);\
-    break;\
-}
-
 static void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode)
 {
-    u32 cryId;
-    u32 v0;
+    bool32 v0;
     u32 release;
     u32 length;
     u32 pitch;
@@ -378,10 +364,7 @@ static void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode
     u8 table;
 
     species--;
-
-    cryId = species;
-
-    v0 = 0;
+    v0 = FALSE;
     release = 0;
     length = 140;
     pitch = 15360;
@@ -427,26 +410,28 @@ static void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode
     SetPokemonCryChorus(chorus);
     SetPokemonCryPriority(priority);
 
-    asm("");
-    asm("");
-    asm("");
-    asm("");
-    asm("");
-    asm("");
-    asm("");
-
-    cryId = SpeciesToCryId(cryId);
-    index = 0x7F;
-    asm("" ::: "r0");
-    index &= cryId;
-    table = cryId >> 7;
+    species = SpeciesToCryId(species);
+    index = species & 0x7F;
+    table = species >> 7;
 
     switch (table)
     {
-    case 0: GET_CRY_PTR(voicegroup_84537C0, voicegroup_8452590);
-    case 1: GET_CRY_PTR(voicegroup_8453DC0, voicegroup_8452B90);
-    case 2: GET_CRY_PTR(voicegroup_84543C0, voicegroup_8453190);
-    case 3: GET_CRY_PTR(voicegroup_84549C0, voicegroup_8453790);
+    case 0:
+        gMPlay_PokemonCry = SetPokemonCryTone(
+          v0 ? &voicegroup_84537C0[index] : &voicegroup_8452590[index]);
+        break;
+    case 1:
+        gMPlay_PokemonCry = SetPokemonCryTone(
+          v0 ? &voicegroup_8453DC0[index] : &voicegroup_8452B90[index]);
+        break;
+    case 2:
+        gMPlay_PokemonCry = SetPokemonCryTone(
+          v0 ? &voicegroup_84543C0[index] : &voicegroup_8453190[index]);
+        break;
+    case 3:
+        gMPlay_PokemonCry = SetPokemonCryTone(
+          v0 ? &voicegroup_84549C0[index] : &voicegroup_8453790[index]);
+        break;
     }
 }
 

@@ -242,7 +242,7 @@ BattleTower_Lobby_EventScript_160587:: @ 8160587
 	special LoadPlayerParty
 	closebutton
 	pause 2
-	call BattleTower_Lobby_EventScript_19F806
+	call S_DoSaveDialog
 	setvar 0x4000, 5
 	hidebox 0, 0, 15, 10
 	compare RESULT, 0

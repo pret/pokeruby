@@ -53,38 +53,55 @@ struct Struct201B000
     u16 unk282;
 };
 
+struct Unk2001000
+{
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+    u8 unk3;
+    u8 unk4;
+    u8 unk5;
+    u8 unk6;
+    u8 unk7;
+    u8 unk8;
+    u8 unk9;
+    u8 unkA;
+    u8 unkB;
+    void* unkC;
+    u16 array[53561];
+};
+
 extern u8 ewram[];
+#define ewram01000 (*(struct Unk2001000 *)(ewram + 0x01000))
 #define ewram1B000 (*(struct Unk201B000 *)(ewram + 0x1B000))
 #define ewram1B000_alt (*(struct Struct201B000 *)(ewram + 0x1B000))
 #define EWRAM_1B000 ewram1B000_alt
 
 void sub_806AEDC(void);
-void sub_806AF4C();
+void sub_806AF4C(u8 arg0, u8 arg1, void* arg2, u8 arg3);
 void OpenPartyMenu(u8, u8);
 void OpenPartyMenu();
-u8 sub_806B124(void);
+bool8 sub_806B124(void);
 u8 IsLinkDoubleBattle(void);
 u8 sub_806B58C(u8);
 u8 sub_806B58C(u8);
 void sub_806BC3C(u8, u8);
 u8 sub_806BD58(u8, u8);
 u8 sub_806BD58(u8, u8);
-u16 sub_806BD80(); // undefined args in battle_party_menu.c
+u16 sub_806BD80(u8);
 void task_pc_turn_off();
-void sub_806BF74();
-void sub_806C994();
-u8 sub_806CA38(u8);
+void sub_806BF74(u8 arg0, u8 arg1);
+void sub_806C994(u8 arg0, u8 arg1);
+u8 sub_806CA38(u8 taskID);
 void sub_806CB74(u8 taskId);
 void sub_806CCE4(void);
 void sub_806CD44(u8 taskId);
-void sub_806D538();
-void sub_806D538();
-void sub_806D538();
+void sub_806D538(u8 arg0, u8 arg1);
 void sub_806D5A4(void);
 void SetMonIconAnim();
 void TryCreatePartyMenuMonIcon(u8, u8, struct Pokemon *);
 void LoadHeldItemIconGraphics(void);
-void LoadHeldItemIconGraphics(void);
+void PartyMenuTryGiveMonHeldItem(u8 taskId, u16 newItem, TaskFunc c);
 void CreateHeldItemIcons_806DC34(); // undefined args
 void CreateHeldItemIcons_806DC34();
 u8 GetMonIconSpriteId_maybe();
@@ -151,5 +168,13 @@ void DoRareCandyItemEffect(u8, u16, TaskFunc);
 void Task_RareCandy1(u8);
 void Task_RareCandy2(u8);
 void sub_8070848(u8 taskId);
+void sub_806CA60(u8 taskId);
+void sub_806CD5C(u8 taskId);
+void DoTakeMail(u8 taskId, TaskFunc func);
+void PartyMenuTryGiveMonHeldItem_806ECE8(u8 taskId, TaskFunc func);
+void PartyMenuTryGiveMonMail(u8 taskId, TaskFunc func);
+void sub_806D668(u8 partyID);
+void TaughtMove(u8 taskId);
+void StopTryingToTeachMove_806F588(u8 taskId);
 
 #endif // GUARD_PARTY_MENU_H

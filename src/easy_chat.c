@@ -19,8 +19,10 @@ extern const u8 gEasyChatGroupSizes[];
 
 extern u16 gSpecialVar_0x8004;
 
+IWRAM_DATA u8 gUnknown_03000740;
 
-u8 *sub_80EB3FC(u8 *dst, u16 word)
+// returns the end of the destination buffer text
+u8 *EasyChat_GetWordText(u8 *dst, u16 word)
 {
     u16 group;
     u16 wordIndex;
@@ -32,13 +34,13 @@ u8 *sub_80EB3FC(u8 *dst, u16 word)
 
     if (word == 0xFFFF)
     {
-        dst[0] = EOS;
+        *dst = EOS;
         return dst;
     }
     else
     {
-        group = word >> 9;
-        wordIndex = word & 0x1FF;
+        group = EC_GROUP(word);
+        wordIndex = EC_INDEX(word);
         switch (group)
         {
         case EC_GROUP_POKEMON: // 0
@@ -59,7 +61,7 @@ u8 *sub_80EB3FC(u8 *dst, u16 word)
             dst = StringCopy(dst, src);
             break;
         }
-        dst[0] = EOS;
+        *dst = EOS;
         return dst;
     }
 }
@@ -77,7 +79,7 @@ u8 *ConvertEasyChatWordsToString(u8 *dst, u16 *words, u16 arg2, u16 arg3)
 
         for (n = 0; n < i1; n++)
         {
-            dst = sub_80EB3FC(dst, words[0]);
+            dst = EasyChat_GetWordText(dst, words[0]);
 
             if (words[0] != 0xFFFF)
             {
@@ -90,7 +92,7 @@ u8 *ConvertEasyChatWordsToString(u8 *dst, u16 *words, u16 arg2, u16 arg3)
 
         word = words[0];
         words++;
-        dst = sub_80EB3FC(dst, word);
+        dst = EasyChat_GetWordText(dst, word);
 
         dst[0] = CHAR_NEWLINE;
         dst++;
@@ -115,7 +117,7 @@ u8 *sub_80EB544(u8 *dst, u16 *words, u16 arg2, u16 arg3)
 
         for (n = 0; n < i1; n++)
         {
-            dst = sub_80EB3FC(dst, words[0]);
+            dst = EasyChat_GetWordText(dst, words[0]);
 
             if (words[0] != 0xFFFF)
             {
@@ -128,7 +130,7 @@ u8 *sub_80EB544(u8 *dst, u16 *words, u16 arg2, u16 arg3)
 
         word = words[0];
         words++;
-        dst = sub_80EB3FC(dst, word);
+        dst = EasyChat_GetWordText(dst, word);
 
         // Only difference with ConvertEasyChatWordsToString
         dst[0] = (i == 0) ? CHAR_NEWLINE : CHAR_PROMPT_SCROLL;
@@ -144,7 +146,7 @@ u8 *sub_80EB544(u8 *dst, u16 *words, u16 arg2, u16 arg3)
 
 u16 unref_sub_80EB5E0(u16 arg0)
 {
-    u8 *chars;
+    const u8 *chars;
     u16 i;
     u16 length;
     int group, word;
@@ -153,8 +155,8 @@ u16 unref_sub_80EB5E0(u16 arg0)
     if (arg0 == 0xFFFF)
         return 0;
 
-    group = arg0 >> 9;
-    word = arg0 & 0x1FF;
+    group = EC_GROUP(arg0);
+    word = EC_INDEX(arg0);
     switch (group)
     {
     case EC_GROUP_POKEMON: // 0
@@ -321,7 +323,7 @@ void sub_80EB83C(void)
         group = EC_GROUP_LIFESTYLE;
 
     local2 = sub_80EB784(group);
-    sub_80EB3FC(gStringVar2, local2);
+    EasyChat_GetWordText(gStringVar2, local2);
 }
 
 u8 sub_80EB868(u8 arg0)

@@ -1,7 +1,7 @@
 #include "global.h"
 #include "fieldmap.h"
 #include "palette.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "script.h"
 #include "secret_base.h"
 #include "tv.h"
@@ -22,7 +22,7 @@ struct Coords32
 
 EWRAM_DATA static u16 gUnknown_02029828[0x2800] = {0};
 EWRAM_DATA struct MapHeader gMapHeader = {0};
-EWRAM_DATA struct Camera gUnknown_0202E844 = {0};
+EWRAM_DATA struct Camera gCamera = {0};
 EWRAM_DATA static struct ConnectionFlags gUnknown_0202E850 = {0};
 
 struct BackupMapData gUnknown_03004870;
@@ -31,7 +31,7 @@ static const struct ConnectionFlags sDummyConnectionFlags = {0};
 
 struct MapHeader *mapconnection_get_mapheader(struct MapConnection *connection)
 {
-    return get_mapheader_by_bank_and_number(connection->mapGroup, connection->mapNum);
+    return Overworld_GetMapHeaderByGroupAndId(connection->mapGroup, connection->mapNum);
 }
 
 void not_trainer_hill_battle_pyramid(void)
@@ -713,7 +713,7 @@ bool8 CameraMove(int x, int y)
     unsigned int direction;
     struct MapConnection *connection;
     int old_x, old_y;
-    gUnknown_0202E844.field_0 = FALSE;
+    gCamera.field_0 = FALSE;
     direction = GetPostCameraMoveMapBorderId(x, y);
     if (direction + 1 <= 1)
     {
@@ -728,14 +728,14 @@ bool8 CameraMove(int x, int y)
         connection = sub_8056A64(direction, gSaveBlock1.pos.x, gSaveBlock1.pos.y);
         sub_8056918(connection, direction, x, y);
         sub_80538F0(connection->mapGroup, connection->mapNum);
-        gUnknown_0202E844.field_0 = TRUE;
-        gUnknown_0202E844.x = old_x - gSaveBlock1.pos.x;
-        gUnknown_0202E844.y = old_y - gSaveBlock1.pos.y;
+        gCamera.field_0 = TRUE;
+        gCamera.x = old_x - gSaveBlock1.pos.x;
+        gCamera.y = old_y - gSaveBlock1.pos.y;
         gSaveBlock1.pos.x += x;
         gSaveBlock1.pos.y += y;
         sub_80566F0(direction);
     }
-    return gUnknown_0202E844.field_0;
+    return gCamera.field_0;
 }
 
 struct MapConnection *sub_8056A64(u8 direction, int x, int y)

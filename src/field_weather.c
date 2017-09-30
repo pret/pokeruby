@@ -55,7 +55,7 @@ extern struct Weather gWeather;
 extern u8 *gUnknown_083970E8;
 extern u8 (*gUnknown_08396FC8[][4])(void);
 extern u8 (*gUnknown_083970B8[])(void);
-extern u8 *gUnknown_030006DC;
+IWRAM_DATA u8 *gUnknown_030006DC;
 extern u8 gUnknown_083970C8;
 extern u8 (*gUnknown_0202FC48)[32];
 extern u8 gUnknown_0202F9E8[32];

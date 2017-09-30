@@ -116,22 +116,7 @@ struct StatusFlagString
 extern const struct StatusFlagString gUnknown_081FA6D4[7]; // status flag/text
 extern const u8 gUnknown_084017A8[8]; // empty flags
 
-struct StringInfo
-{
-    u16 currentMove;
-    u16 lastMove;
-    u16 lastItem;
-    u8 lastAbility;
-    u8 scrActive;
-    u8 unk1605E;
-    u8 hpScale;
-    u8 StringBank;
-    u8 moveType;
-    u8 abilities[4];
-    u8 textBuffs[3][0x10];
-};
-
-extern struct StringInfo* gSelectedOrderFromParty;
+extern struct StringInfoBattle* gSelectedOrderFromParty;
 #define gStringInfo gSelectedOrderFromParty
 
 void sub_8121D1C(u8* textBuff);
@@ -156,7 +141,7 @@ void BufferStringBattle(u16 stringID)
     int i;
     const u8* stringPtr = NULL;
 
-    gStringInfo = (struct StringInfo*)(&gBattleBufferA[gActiveBank][4]);
+    gStringInfo = (struct StringInfoBattle*)(&gBattleBufferA[gActiveBank][4]);
     gLastUsedItem = gStringInfo->lastItem;
     gLastUsedAbility = gStringInfo->lastAbility;
     BATTLE_STRUCT->scriptingActive = gStringInfo->scrActive;

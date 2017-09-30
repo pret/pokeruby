@@ -93,6 +93,8 @@
 #define MON_DATA_SPATK2            87
 #define MON_DATA_SPDEF2            88
 
+#define MAX_LEVEL 100
+
 #define MON_MALE       0x00
 #define MON_FEMALE     0xFE
 #define MON_GENDERLESS 0xFF
@@ -510,7 +512,7 @@ void sub_803ADE8(struct Pokemon *mon, struct UnknownPokemonStruct *src);
 void sub_803AF78(struct Pokemon *mon, struct UnknownPokemonStruct *dest);
 u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon);
 void CalculateMonStats(struct Pokemon *mon);
-void sub_803B4B4(struct Pokemon *src, struct Pokemon *dest);
+void sub_803B4B4(const struct BoxPokemon *src, struct Pokemon *dest);
 u8 GetLevelFromMonExp(struct Pokemon *mon);
 u8 GetLevelFromBoxMonExp(struct BoxPokemon *boxMon);
 u16 GiveMoveToMon(struct Pokemon *mon, u16 move);
@@ -520,7 +522,7 @@ void SetMonMoveSlot(struct Pokemon *mon, u16 move, u8 slot);
 void SetBattleMonMoveSlot(struct BattlePokemon *mon, u16 move, u8 slot);
 void GiveMonInitialMoveset(struct Pokemon *mon);
 void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon);
-u16 sub_803B7C8(struct Pokemon *mon, u8 a2);
+u16 MonTryLearningNewMove(struct Pokemon *mon, bool8 a2);
 void DeleteFirstMoveAndGiveMoveToMon(struct Pokemon *mon, u16 move);
 void DeleteFirstMoveAndGiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
 
@@ -576,6 +578,7 @@ u16 NationalPokedexNumToSpecies(u16 nationalNum);
 u16 NationalToHoennOrder(u16);
 u16 SpeciesToNationalPokedexNum(u16);
 u16 HoennToNationalOrder(u16);
+u16 SpeciesToCryId(u16 species);
 void DrawSpindaSpots(u16, u32, u8 *, u8);
 u8 sub_803FBBC(void);
 u8 sub_803FC58(u16);
@@ -598,5 +601,7 @@ u8 *sub_8040D08();
 bool32 sub_8040D3C(u16 species, u8 *name, u8 language);
 s8 sub_8040A54(struct Pokemon *, u8);
 u16 GetMonEVCount(struct Pokemon *);
+u8 GetLevelUpMovesBySpecies(u16, u16 *);
+u8 TryIncrementMonLevel(struct Pokemon *);
 
 #endif // GUARD_POKEMON_H

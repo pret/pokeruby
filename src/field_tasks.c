@@ -1,5 +1,5 @@
 //
-// Created by scott on 6/22/2017.
+
 //
 
 #include "global.h"
@@ -10,7 +10,7 @@
 #include "item.h"
 #include "items.h"
 #include "event_data.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "clock.h"
 #include "script.h"
 #include "field_special_scene.h"
@@ -48,21 +48,25 @@ void Task_RunPerStepCallback(u8 taskId)
     gUnknown_08376364[idx](taskId);
 }
 
-static void RunTimeBasedEvents(s16 *taskData)
+#define tState           data[0]
+#define tAmbientCryState data[1]
+#define tAmbientCryDelay data[2]
+
+static void RunTimeBasedEvents(s16 *data)
 {
-    switch (*taskData)
+    switch (tState)
     {
         case 0:
             if (gMain.vblankCounter1 & 0x1000)
             {
                 DoTimeBasedEvents();
-                (*taskData)++;
+                tState++;
             }
             break;
         case 1:
             if (!(gMain.vblankCounter1 & 0x1000))
             {
-                (*taskData)--;
+                tState--;
             }
             break;
     }
@@ -70,13 +74,18 @@ static void RunTimeBasedEvents(s16 *taskData)
 
 void Task_RunTimeBasedEvents(u8 taskId)
 {
-    s16 *taskData = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
+
     if (!ScriptContext2_IsEnabled())
     {
-        RunTimeBasedEvents(taskData);
-        sub_80540D0(taskData + 1, taskData + 2);
+        RunTimeBasedEvents(data);
+        UpdateAmbientCry(&tAmbientCryState, &tAmbientCryDelay);
     }
 }
+
+#undef tState
+#undef tAmbientCryState
+#undef tAmbientCryDelay
 
 void Task_MuddySlope(u8);
 
@@ -836,11 +845,11 @@ void Task_MuddySlope(u8 taskId)
             }
             break;
     }
-    if (gUnknown_0202E844.field_0 && mapIndices != data[0])
+    if (gCamera.field_0 && mapIndices != data[0])
     {
         data[0] = mapIndices;
-        x2 = gUnknown_0202E844.x;
-        y2 = gUnknown_0202E844.y;
+        x2 = gCamera.x;
+        y2 = gCamera.y;
     }
     else
     {
