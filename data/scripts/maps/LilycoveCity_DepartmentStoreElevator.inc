@@ -9,7 +9,7 @@ LilycoveCity_DepartmentStoreElevator_EventScript_15A39C:: @ 815A39C
 	copyvar 0x8005, 0x4043
 	special sub_810E944
 	message LilycoveCity_DepartmentStoreElevator_Text_1A0EF6
-	waittext
+	waitmessage
 	multichoice 0, 0, 57, 0
 	switch RESULT
 	case 0, LilycoveCity_DepartmentStoreElevator_EventScript_15A402
@@ -66,12 +66,12 @@ LilycoveCity_DepartmentStoreElevator_EventScript_15A48E:: @ 815A48E
 	end
 
 LilycoveCity_DepartmentStoreElevator_EventScript_15A4B1:: @ 815A4B1
-	hidebox 0, 0, 29, 19
+	erasebox 0, 0, 29, 19
 	release
 	end
 
 LilycoveCity_DepartmentStoreElevator_EventScript_15A4B8:: @ 815A4B8
-	hidebox 0, 0, 29, 19
+	erasebox 0, 0, 29, 19
 	applymovement LAST_TALKED, LilycoveCity_DepartmentStoreElevator_Movement_1A0845
 	waitmovement 0
 	special sub_810EBEC

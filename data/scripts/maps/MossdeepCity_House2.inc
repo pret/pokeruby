@@ -16,7 +16,7 @@ MossdeepCity_House2_EventScript_15A87B:: @ 815A87B
 	pokecry SPECIES_WINGULL, 0
 	msgbox MossdeepCity_House2_Text_18D61E, 4
 	waitpokecry
-	closebutton
+	closemessage
 	setflag 224
 	clearflag 933
 	compare FACING, 2

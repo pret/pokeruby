@@ -17,7 +17,7 @@ MossdeepCity_GameCorner_B1F_EventScript_15AE6E:: @ 815AE6E
 	waitmovement 0
 	special sub_81360C0
 	msgbox 0x20234cc, 4
-	closebutton
+	closemessage
 	setvar 0x8004, 2
 	setvar 0x8005, 0
 	special sub_813556C
@@ -28,7 +28,7 @@ MossdeepCity_GameCorner_B1F_EventScript_15AE6E:: @ 815AE6E
 	call_if 1, MossdeepCity_GameCorner_B1F_EventScript_15AEE3
 	compare RESULT, 2
 	call_if 1, MossdeepCity_GameCorner_B1F_EventScript_15AEEE
-	closebutton
+	closemessage
 	special ScrSpecial_HealPlayerParty
 	applymovement 255, MossdeepCity_GameCorner_B1F_Movement_15AEFF
 	waitmovement 0
@@ -47,14 +47,14 @@ MossdeepCity_GameCorner_B1F_EventScript_15AED5:: @ 815AED5
 MossdeepCity_GameCorner_B1F_EventScript_15AEE3:: @ 815AEE3
 	setvar 0x40c0, 1
 	special ShowFieldMessageStringVar4
-	waittext
+	waitmessage
 	waitbutton
 	return
 
 MossdeepCity_GameCorner_B1F_EventScript_15AEEE:: @ 815AEEE
 	setvar 0x40c0, 2
 	special ShowFieldMessageStringVar4
-	waittext
+	waitmessage
 	waitbutton
 	return
 

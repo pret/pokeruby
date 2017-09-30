@@ -11,7 +11,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_15AB8B:: @ 815AB8B
 	call_if 1, MossdeepCity_SpaceCenter_1F_EventScript_15ABBA
 	compare RESULT, 1
 	call_if 4, MossdeepCity_SpaceCenter_1F_EventScript_15ABC3
-	closebutton
+	closemessage
 	applymovement LAST_TALKED, MossdeepCity_SpaceCenter_1F_Movement_1A083D
 	waitmovement 0
 	release
@@ -56,7 +56,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_15AC1F:: @ 815AC1F
 	lock
 	faceplayer
 	msgbox MossdeepCity_SpaceCenter_1F_Text_18E427, 4
-	closebutton
+	closemessage
 	applymovement LAST_TALKED, MossdeepCity_SpaceCenter_1F_Movement_1A083D
 	waitmovement 0
 	release

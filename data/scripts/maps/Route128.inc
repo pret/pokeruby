@@ -26,25 +26,25 @@ Route128_EventScript_15213F:: @ 815213F
 	applymovement 4, Route128_Movement_152279
 	waitmovement 0
 	msgbox Route128_Text_171F35, 4
-	closebutton
+	closemessage
 	applymovement 5, Route128_Movement_152293
 	waitmovement 0
 	applymovement 4, Route128_Movement_1A0841
 	waitmovement 0
 	msgbox Route128_Text_171F4B, 4
-	closebutton
+	closemessage
 	applymovement 5, Route128_Movement_1522A1
 	waitmovement 0
 	applymovement 255, Route128_Movement_1A0841
 	waitmovement 0
 	msgbox Route128_Text_172008, 4
-	closebutton
+	closemessage
 	applymovement 4, Route128_Movement_15227E
 	applymovement 255, Route128_Movement_1A083F
 	applymovement 5, Route128_Movement_152290
 	waitmovement 0
 	msgbox Route128_Text_17210B, 4
-	closebutton
+	closemessage
 	delay 40
 	applymovement 5, Route128_Movement_152296
 	applymovement 4, Route128_Movement_152283
@@ -61,7 +61,7 @@ Route128_EventScript_15213F:: @ 815213F
 	applymovement 255, Route128_Movement_1A0843
 	waitmovement 0
 	msgbox Route128_Text_172181, 4
-	closebutton
+	closemessage
 	applymovement 3, Route128_Movement_15226D
 	applymovement 255, Route128_Movement_1A0841
 	waitmovement 0
@@ -73,7 +73,7 @@ Route128_EventScript_15213F:: @ 815213F
 	applymovement 3, Route128_Movement_1A0845
 	waitmovement 0
 	msgbox Route128_Text_1723BE, 4
-	closebutton
+	closemessage
 	applymovement 3, Route128_Movement_1A0845
 	waitmovement 0
 	delay 50

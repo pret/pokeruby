@@ -53,15 +53,15 @@ PetalburgCity_Gym_MapScript1_15451B:: @ 815451B
 	end
 
 PetalburgCity_Gym_EventScript_15453B:: @ 815453B
-	movespriteperm 10, 5, 108
+	setobjectxyperm 10, 5, 108
 	return
 
 PetalburgCity_Gym_EventScript_154543:: @ 8154543
-	movespriteperm 1, 4, 107
+	setobjectxyperm 1, 4, 107
 	return
 
 PetalburgCity_Gym_EventScript_15454B:: @ 815454B
-	movespriteperm 1, 4, 107
+	setobjectxyperm 1, 4, 107
 	return
 
 PetalburgCity_Gym_MapScript2_154553:: @ 8154553
@@ -80,7 +80,7 @@ PetalburgCity_Gym_EventScript_15456C:: @ 815456C
 	lockall
 	msgbox PetalburgCity_Gym_Text_17A196, 4
 	msgbox PetalburgCity_Gym_Text_17A1B0, 4
-	closebutton
+	closemessage
 	applymovement 255, PetalburgCity_Gym_Movement_1A0845
 	applymovement 10, PetalburgCity_Gym_Movement_1545B4
 	waitmovement 0
@@ -113,7 +113,7 @@ PetalburgCity_Gym_EventScript_1545B9:: @ 81545B9
 	case 6, PetalburgCity_Gym_EventScript_1549D6
 	case 7, PetalburgCity_Gym_EventScript_15493D
 	msgbox PetalburgCity_Gym_Text_179DF6, 4
-	closebutton
+	closemessage
 	switch FACING
 	case 1, PetalburgCity_Gym_EventScript_15463D
 	case 2, PetalburgCity_Gym_EventScript_154648
@@ -193,7 +193,7 @@ PetalburgCity_Gym_EventScript_154669:: @ 8154669
 	compare 0x8008, 3
 	call_if 1, PetalburgCity_Gym_EventScript_1548F1
 	msgbox PetalburgCity_Gym_Text_17A171, 4
-	closebutton
+	closemessage
 	setflag 0x4001
 	playbgm 420, 0
 	compare 0x8008, 0
@@ -394,7 +394,7 @@ PetalburgCity_Gym_EventScript_1549D6:: @ 81549D6
 	msgbox PetalburgCity_Gym_Text_17A653, 4
 	trainerbattle 3, OPPONENT_NORMAN, 0, PetalburgCity_Gym_Text_17A77A
 	message PetalburgCity_Gym_Text_17A7DD
-	waittext
+	waitmessage
 	call PetalburgCity_Gym_EventScript_1A02C5
 	msgbox PetalburgCity_Gym_Text_17A805, 4
 	setflag 1217
@@ -418,7 +418,7 @@ PetalburgCity_Gym_EventScript_154A2C:: @ 8154A2C
 	setflag 169
 	msgbox PetalburgCity_Gym_Text_17A8CF, 4
 	msgbox PetalburgCity_Gym_Text_17A976, 4
-	closebutton
+	closemessage
 	compare FACING, 2
 	call_if 1, PetalburgCity_Gym_EventScript_154ABC
 	compare FACING, 1
@@ -604,7 +604,7 @@ PetalburgCity_Gym_EventScript_154B73:: @ 8154B73
 	end
 
 PetalburgCity_Gym_EventScript_154BA8:: @ 8154BA8
-	closebutton
+	closemessage
 	delay 30
 	warpdoor PetalburgCity_Gym, 255, 32776, 32777
 	waitstate

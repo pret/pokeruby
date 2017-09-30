@@ -9,14 +9,14 @@ MauvilleCity_GameCorner_EventScript_156A34:: @ 8156A34
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_156B32
 	message MauvilleCity_GameCorner_Text_181CB4
-	waittext
+	waitmessage
 	showmoney 0, 0
 	nop
 	showcoins 0, 5
 	goto MauvilleCity_GameCorner_EventScript_156A60
 
 MauvilleCity_GameCorner_EventScript_156A60:: @ 8156A60
-	multichoicedef 15, 0, 49, 0, 0
+	multichoicedefault 15, 0, 49, 0, 0
 	switch RESULT
 	case 0, MauvilleCity_GameCorner_EventScript_156AAE
 	case 1, MauvilleCity_GameCorner_EventScript_156AF0
@@ -24,7 +24,7 @@ MauvilleCity_GameCorner_EventScript_156A60:: @ 8156A60
 	end
 
 @ 8156A87
-	multichoicedef 15, 0, 49, 1, 0
+	multichoicedefault 15, 0, 49, 1, 0
 	switch RESULT
 	case 0, MauvilleCity_GameCorner_EventScript_156AAE
 	case 1, MauvilleCity_GameCorner_EventScript_156AF0
@@ -107,14 +107,14 @@ MauvilleCity_GameCorner_EventScript_156B6C:: @ 8156B6C
 
 MauvilleCity_GameCorner_EventScript_156B88:: @ 8156B88
 	message MauvilleCity_GameCorner_Text_181E17
-	waittext
+	waitmessage
 	showcoins 0, 0
 	setvar 0x4001, 0
 	goto MauvilleCity_GameCorner_EventScript_156BA6
 
 MauvilleCity_GameCorner_EventScript_156B9B:: @ 8156B9B
 	message MauvilleCity_GameCorner_Text_181E17
-	waittext
+	waitmessage
 	goto MauvilleCity_GameCorner_EventScript_156BA6
 
 MauvilleCity_GameCorner_EventScript_156BA6:: @ 8156BA6
@@ -228,14 +228,14 @@ MauvilleCity_GameCorner_EventScript_156D1A:: @ 8156D1A
 
 MauvilleCity_GameCorner_EventScript_156D36:: @ 8156D36
 	message MauvilleCity_GameCorner_Text_181E17
-	waittext
+	waitmessage
 	showcoins 0, 0
 	setvar 0x4001, 0
 	goto MauvilleCity_GameCorner_EventScript_156D54
 
 MauvilleCity_GameCorner_EventScript_156D49:: @ 8156D49
 	message MauvilleCity_GameCorner_Text_181E17
-	waittext
+	waitmessage
 	goto MauvilleCity_GameCorner_EventScript_156D54
 
 MauvilleCity_GameCorner_EventScript_156D54:: @ 8156D54
@@ -499,7 +499,7 @@ MauvilleCity_GameCorner_EventScript_1570F8:: @ 81570F8
 	end
 
 MauvilleCity_GameCorner_EventScript_157108:: @ 8157108
-	closebutton
+	closemessage
 	applymovement LAST_TALKED, MauvilleCity_GameCorner_Movement_1A083D
 	waitmovement 0
 	release

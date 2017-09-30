@@ -19,8 +19,8 @@ MossdeepCity_StevensHouse_MapScript1_15A9E9:: @ 815A9E9
 	end
 
 MossdeepCity_StevensHouse_EventScript_15A9F5:: @ 815A9F5
-	movespriteperm 1, 6, 5
-	spritebehave 1, 7
+	setobjectxyperm 1, 6, 5
+	setobjectmovementtype 1, 7
 	return
 
 MossdeepCity_StevensHouse_MapScript2_15AA01:: @ 815AA01
@@ -43,7 +43,7 @@ MossdeepCity_StevensHouse_EventScript_15AA0B:: @ 815AA0B
 	setflag 123
 	setflag 302
 	msgbox MossdeepCity_StevensHouse_Text_18DB22, 4
-	closebutton
+	closemessage
 	delay 20
 	applymovement 1, MossdeepCity_StevensHouse_Movement_15AA76
 	waitmovement 0
@@ -82,8 +82,8 @@ MossdeepCity_StevensHouse_EventScript_15AA7C:: @ 815AA7C
 	playfanfare 370
 	message MossdeepCity_StevensHouse_Text_18DD61
 	waitfanfare
-	waittext
-	givepokemon SPECIES_BELDUM, 5, ITEM_NONE, 0x0, 0x0, 0
+	waitmessage
+	givepoke SPECIES_BELDUM, 5, ITEM_NONE, 0x0, 0x0, 0
 	bufferpoke 1, SPECIES_BELDUM
 	msgbox MossdeepCity_StevensHouse_Text_1A1102, 5
 	compare RESULT, 1

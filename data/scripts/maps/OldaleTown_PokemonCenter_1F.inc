@@ -10,7 +10,7 @@ OldaleTown_PokemonCenter_1F_MapScript1_152F0E:: @ 8152F0E
 OldaleTown_PokemonCenter_1F_EventScript_152F17:: @ 8152F17
 	setvar 0x800b, 1
 	call OldaleTown_PokemonCenter_1F_EventScript_19FD5B
-	waittext
+	waitmessage
 	waitbutton
 	release
 	end

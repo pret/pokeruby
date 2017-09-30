@@ -25,13 +25,13 @@ MossdeepCity_GameCorner_1F_MapScript1_15AC84:: @ 815AC84
 
 MossdeepCity_GameCorner_1F_EventScript_15AC9E:: @ 815AC9E
 	setvar 0x4001, 1
-	movespriteperm 1, 3, 2
-	spritebehave 1, 8
+	setobjectxyperm 1, 3, 2
+	setobjectmovementtype 1, 8
 	return
 
 MossdeepCity_GameCorner_1F_EventScript_15ACAF:: @ 815ACAF
-	movespriteperm 1, 2, 2
-	spritebehave 1, 10
+	setobjectxyperm 1, 2, 2
+	setobjectmovementtype 1, 10
 	return
 
 MossdeepCity_GameCorner_1F_MapScript2_15ACBB:: @ 815ACBB
@@ -46,7 +46,7 @@ MossdeepCity_GameCorner_1F_EventScript_15ACD5:: @ 815ACD5
 	waitmovement 0
 	applymovement 1, MossdeepCity_GameCorner_1F_Movement_15AD3F
 	waitmovement 0
-	moveoffscreen 1
+	moveobjectoffscreen 1
 	applymovement 255, MossdeepCity_GameCorner_1F_Movement_1A0841
 	waitmovement 0
 	compare 0x40c0, 1
@@ -106,11 +106,11 @@ MossdeepCity_GameCorner_1F_EventScript_15AD59:: @ 815AD59
 	call S_DoSaveDialog
 	compare RESULT, 0
 	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_15ADE8
-	hidebox 0, 0, 15, 10
+	erasebox 0, 0, 15, 10
 	special SavePlayerParty
 	special ReducePlayerPartyToThree
 	msgbox MossdeepCity_GameCorner_1F_Text_18E777, 4
-	closebutton
+	closemessage
 	compare FACING, 2
 	call_if 1, MossdeepCity_GameCorner_1F_EventScript_15AE04
 	compare FACING, 4

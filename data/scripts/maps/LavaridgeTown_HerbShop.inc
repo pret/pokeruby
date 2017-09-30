@@ -5,7 +5,7 @@ LavaridgeTown_HerbShop_EventScript_153629:: @ 8153629
 	lock
 	faceplayer
 	message LavaridgeTown_HerbShop_Text_17615C
-	waittext
+	waitmessage
 	pokemart LavaridgeTown_HerbShop_Items
 	msgbox LavaridgeTown_HerbShop_Text_1A0C02, 4
 	release

@@ -13,8 +13,8 @@ LittlerootTown_MaysHouse_2F_MapScript1_152A5B:: @ 8152A5B
 	end
 
 LittlerootTown_MaysHouse_2F_EventScript_152A7A:: @ 8152A7A
-	movespriteperm 1, 7, 2
-	spritebehave 1, 7
+	setobjectxyperm 1, 7, 2
+	setobjectmovementtype 1, 7
 	return
 
 LittlerootTown_MaysHouse_2F_MapScript2_152A86:: @ 8152A86
@@ -56,7 +56,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_152AD4:: @ 8152AD4
 	applymovement LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_1A0835
 	waitmovement 0
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1733AF, 4
-	closebutton
+	closemessage
 	compare FACING, 4
 	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_152B29
 	compare FACING, 2
@@ -90,7 +90,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_152B4A:: @ 8152B4A
 	applymovement LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_1A0835
 	waitmovement 0
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1735FC, 4
-	closebutton
+	closemessage
 	compare FACING, 4
 	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_152B9F
 	compare FACING, 2

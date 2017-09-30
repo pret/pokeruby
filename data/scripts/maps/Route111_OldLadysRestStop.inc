@@ -18,7 +18,7 @@ Route111_OldLadysRestStop_EventScript_15BFDB:: @ 815BFDB
 
 Route111_OldLadysRestStop_EventScript_15BFFC:: @ 815BFFC
 	msgbox Route111_OldLadysRestStop_Text_192423, 4
-	closebutton
+	closemessage
 	call Route111_OldLadysRestStop_EventScript_1A02CA
 	msgbox Route111_OldLadysRestStop_Text_19244D, 5
 	compare RESULT, 1

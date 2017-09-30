@@ -37,7 +37,7 @@ DesertRuins_EventScript_15CB56:: @ 815CB56
 	goto_if_eq DesertRuins_EventScript_15CB6D
 	braillemsg DesertRuins_Braille_1C54C8
 	waitbutton
-	hidebox 0, 0, 29, 19
+	erasebox 0, 0, 29, 19
 	releaseall
 	end
 
@@ -50,7 +50,7 @@ DesertRuins_EventScript_15CB77:: @ 815CB77
 	lockall
 	braillemsg DesertRuins_Braille_1C54C8
 	waitbutton
-	hidebox 0, 0, 29, 19
+	erasebox 0, 0, 29, 19
 	releaseall
 	end
 

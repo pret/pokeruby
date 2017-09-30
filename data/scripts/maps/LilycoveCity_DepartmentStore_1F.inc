@@ -18,7 +18,7 @@ LilycoveCity_DepartmentStore_1F_EventScript_159D5E:: @ 8159D5E
 	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E56
 	setflag 2250
 	message LilycoveCity_DepartmentStore_1F_Text_1C4CC6
-	waittext
+	waitmessage
 	special RetrieveLotteryNumber
 	copyvar 0x8008, RESULT
 	special sub_810F9AC

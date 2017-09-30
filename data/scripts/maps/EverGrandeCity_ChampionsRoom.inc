@@ -50,7 +50,7 @@ EverGrandeCity_ChampionsRoom_EventScript_15B821:: @ 815B821
 	setmaptile 6, 2, 839, 0
 	special DrawWholeMapView
 	msgbox EverGrandeCity_ChampionsRoom_Text_1910FE, 4
-	closebutton
+	closemessage
 	playse 8
 	checkgender
 	compare RESULT, 0
@@ -101,7 +101,7 @@ EverGrandeCity_ChampionsRoom_EventScript_15B8BB:: @ 815B8BB
 	end
 
 EverGrandeCity_ChampionsRoom_EventScript_15B8F0:: @ 815B8F0
-	closebutton
+	closemessage
 	addobject 3
 	applymovement 3, EverGrandeCity_ChampionsRoom_Movement_15BA03
 	waitmovement 0
@@ -116,7 +116,7 @@ EverGrandeCity_ChampionsRoom_EventScript_15B8F0:: @ 815B8F0
 	applymovement 1, EverGrandeCity_ChampionsRoom_Movement_1A0845
 	waitmovement 0
 	msgbox EverGrandeCity_ChampionsRoom_Text_191512, 4
-	closebutton
+	closemessage
 	delay 30
 	applymovement 1, EverGrandeCity_ChampionsRoom_Movement_15B9FB
 	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_15B9DD
@@ -132,7 +132,7 @@ EverGrandeCity_ChampionsRoom_EventScript_15B8F0:: @ 815B8F0
 	call_if 1, EverGrandeCity_ChampionsRoom_EventScript_15B9AB
 	compare RESULT, 1
 	call_if 1, EverGrandeCity_ChampionsRoom_EventScript_15B9B4
-	closebutton
+	closemessage
 	applymovement 1, EverGrandeCity_ChampionsRoom_Movement_15B9FF
 	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_15B9E0
 	waitmovement 0

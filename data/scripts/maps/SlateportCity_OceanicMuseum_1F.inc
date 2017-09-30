@@ -36,7 +36,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_155B06:: @ 8155B06
 	msgbox SlateportCity_OceanicMuseum_1F_Text_17E18D, 5
 	compare RESULT, 1
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_155B2D
-	closebutton
+	closemessage
 	hidemoney 0, 0
 	applymovement 255, SlateportCity_OceanicMuseum_1F_Movement_155B8D
 	waitmovement 0
@@ -60,7 +60,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_155B5A:: @ 8155B5A
 	checkflag 149
 	goto_if 0, SlateportCity_OceanicMuseum_1F_EventScript_155B7B
 	msgbox SlateportCity_OceanicMuseum_1F_Text_17E1F5, 4
-	closebutton
+	closemessage
 	hidemoney 0, 0
 	applymovement 255, SlateportCity_OceanicMuseum_1F_Movement_155B8D
 	waitmovement 0
@@ -169,7 +169,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_155C3A:: @ 8155C3A
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_155CC2
 	setflag 269
 	msgbox SlateportCity_OceanicMuseum_1F_Text_17E606, 4
-	closebutton
+	closemessage
 	compare FACING, 2
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_155C98
 	compare FACING, 2

@@ -55,7 +55,7 @@ Route111_EventScript_150023:: @ 8150023
 	compare RESULT, 0
 	goto_if_eq Route111_EventScript_15005F
 	giveitem ITEM_ROOT_FOSSIL
-	closebutton
+	closemessage
 	setflag 963
 	setflag 964
 	removeobject 34
@@ -77,7 +77,7 @@ Route111_EventScript_150069:: @ 8150069
 	compare RESULT, 0
 	goto_if_eq Route111_EventScript_1500A5
 	giveitem ITEM_CLAW_FOSSIL
-	closebutton
+	closemessage
 	setflag 964
 	setflag 963
 	removeobject 35
@@ -172,7 +172,7 @@ Route111_EventScript_15013A:: @ 815013A
 
 Route111_EventScript_150151:: @ 8150151
 	msgbox Route111_Text_1A0F93, 4
-	closebutton
+	closemessage
 	compare 0x8004, 0
 	call_if 1, Route111_EventScript_150188
 	compare 0x8004, 1
@@ -251,7 +251,7 @@ Route111_EventScript_1501F3:: @ 81501F3
 	waitmovement 0
 	call Route111_EventScript_150348
 	msgbox Route111_Text_16F7FF, 4
-	closebutton
+	closemessage
 	applymovement 1, Route111_Movement_150356
 	waitmovement 0
 	removeobject 1
@@ -269,7 +269,7 @@ Route111_EventScript_1501F3:: @ 81501F3
 	waitmovement 0
 	call Route111_EventScript_150348
 	msgbox Route111_Text_16F8D5, 4
-	closebutton
+	closemessage
 	applymovement 2, Route111_Movement_150356
 	waitmovement 0
 	removeobject 2
@@ -287,7 +287,7 @@ Route111_EventScript_1501F3:: @ 81501F3
 	waitmovement 0
 	call Route111_EventScript_150348
 	msgbox Route111_Text_16F96C, 4
-	closebutton
+	closemessage
 	applymovement 3, Route111_Movement_150356
 	waitmovement 0
 	removeobject 3
@@ -302,7 +302,7 @@ Route111_EventScript_1501F3:: @ 81501F3
 	msgbox Route111_Text_16F991, 4
 	trainerbattle 3, OPPONENT_VICKY, 0, Route111_Text_16F9EC
 	msgbox Route111_Text_16FA22, 4
-	closebutton
+	closemessage
 	applymovement 4, Route111_Movement_1A0841
 	waitmovement 0
 	call Route111_EventScript_150348

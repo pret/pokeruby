@@ -57,7 +57,7 @@ EventScript_1A6F0B:
 
 EventScript_1A6F21:
 	special DoTVShow
-	waittext
+	waitmessage
 	waitbutton
 	compare RESULT, 1
 	goto_if 5, EventScript_1A6F21
@@ -80,14 +80,14 @@ EventScript_1A6F50:
 	special sub_80BECE8
 	compare RESULT, 0
 	goto_if_eq EventScript_1A6EBB
-	waittext
+	waitmessage
 	waitbutton
 	goto EventScript_1A6F37
 	end
 
 EventScript_1A6F66:
 	special DoTVShowInSearchOfTrainers
-	waittext
+	waitmessage
 	waitbutton
 	compare RESULT, 0
 	goto_if_eq EventScript_1A6F66

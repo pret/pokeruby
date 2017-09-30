@@ -44,7 +44,7 @@ Route109_EventScript_14F548:: @ 814F548
 	waitmovement 0
 	addobject 4
 	clearflag 743
-	movespriteperm 2, 12, 8
+	setobjectxyperm 2, 12, 8
 	addobject 2
 	spritelevelup 2, 0, 11, 0
 	applymovement 2, Route109_Movement_14F67D
@@ -53,11 +53,11 @@ Route109_EventScript_14F548:: @ 814F548
 	setflag 744
 	hideobject 1, 0, 24
 	msgbox Route109_Text_16B4B5, 4
-	closebutton
+	closemessage
 	copyvar 0x4096, 0x8008
 	restorespritelevel 255, 0, 24
 	restorespritelevel 2, 0, 11
-	moveoffscreen 2
+	moveobjectoffscreen 2
 	release
 	end
 
@@ -286,8 +286,8 @@ Route109_EventScript_14F691:: @ 814F691
 
 Route109_EventScript_14F6AF:: @ 814F6AF
 	message Route109_Text_16E26A
-	waittext
-	multichoicedef 21, 8, 14, 1, 0
+	waitmessage
+	multichoicedefault 21, 8, 14, 1, 0
 	switch RESULT
 	case 0, Route109_EventScript_14F6E2
 	case 1, Route109_EventScript_14F6FB
@@ -296,7 +296,7 @@ Route109_EventScript_14F6AF:: @ 814F6AF
 
 Route109_EventScript_14F6E2:: @ 814F6E2
 	msgbox Route109_Text_16E159, 4
-	closebutton
+	closemessage
 	goto Route109_EventScript_14F4D3
 	end
 
@@ -318,7 +318,7 @@ Route109_EventScript_14F70E:: @ 814F70E
 	lock
 	faceplayer
 	msgbox Route109_Text_16E405, 4
-	closebutton
+	closemessage
 	applymovement LAST_TALKED, Route109_Movement_1A083D
 	waitmovement 0
 	release
@@ -334,7 +334,7 @@ Route109_EventScript_14F725:: @ 814F725
 	giveitem ITEM_SOFT_SAND
 	compare RESULT, 0
 	goto_if_eq Route109_EventScript_1A029B
-	closebutton
+	closemessage
 	applymovement LAST_TALKED, Route109_Movement_1A083D
 	waitmovement 0
 	setflag 280

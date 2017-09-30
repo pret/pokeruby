@@ -18,8 +18,8 @@ BattleTower_BattleRoom_EventScript_1608FA:: @ 81608FA
 	waitmovement 0
 	special sub_8135474
 	msgbox 0x20234cc, 4
-	waittext
-	closebutton
+	waitmessage
+	closemessage
 	special ScrSpecial_HealPlayerParty
 	setvar 0x8004, 0
 	setvar 0x8005, 0
@@ -80,7 +80,7 @@ BattleTower_BattleRoom_EventScript_160A0E:: @ 8160A0E
 	case 127, BattleTower_BattleRoom_EventScript_1609B2
 
 BattleTower_BattleRoom_EventScript_160A3C:: @ 8160A3C
-	closebutton
+	closemessage
 	applymovement 255, BattleTower_BattleRoom_Movement_160ABE
 	waitmovement 0
 	applymovement 2, BattleTower_BattleRoom_Movement_160AD0
@@ -109,7 +109,7 @@ BattleTower_BattleRoom_EventScript_160A94:: @ 8160A94
 	special sub_8135BA0
 	message BattleTower_BattleRoom_Text_1C6CE1
 	delay 60
-	waittext
+	waitmessage
 	playse 55
 	waitse
 	msgbox BattleTower_BattleRoom_Text_1C6D05, 4

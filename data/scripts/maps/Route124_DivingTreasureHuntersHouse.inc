@@ -67,7 +67,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_163EA2:: @ 8163EA2
 
 Route124_DivingTreasureHuntersHouse_EventScript_163EB0:: @ 8163EB0
 	message Route124_DivingTreasureHuntersHouse_Text_19F5C5
-	waittext
+	waitmessage
 	switch 0x4001
 	case 1, Route124_DivingTreasureHuntersHouse_EventScript_163F61
 	case 2, Route124_DivingTreasureHuntersHouse_EventScript_163F87

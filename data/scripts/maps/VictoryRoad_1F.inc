@@ -42,7 +42,7 @@ VictoryRoad_1F_EventScript_15DED3:: @ 815DED3
 	trainerbattle 3, OPPONENT_WALLY_1, 0, VictoryRoad_1F_Text_197943
 	msgbox VictoryRoad_1F_Text_197967, 4
 	clearflag 858
-	moveoffscreen 4
+	moveobjectoffscreen 4
 	setflag 126
 	setvar 0x40c3, 1
 	releaseall

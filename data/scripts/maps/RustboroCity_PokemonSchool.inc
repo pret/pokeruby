@@ -9,8 +9,8 @@ RustboroCity_PokemonSchool_EventScript_1579E2:: @ 81579E2
 
 RustboroCity_PokemonSchool_EventScript_1579F1:: @ 81579F1
 	message RustboroCity_PokemonSchool_Text_184368
-	waittext
-	multichoicerow 8, 1, 13, 3, 0
+	waitmessage
+	multichoicegrid 8, 1, 13, 3, 0
 	switch RESULT
 	case 0, RustboroCity_PokemonSchool_EventScript_157A50
 	case 1, RustboroCity_PokemonSchool_EventScript_157A5E
@@ -87,7 +87,7 @@ RustboroCity_PokemonSchool_EventScript_157ACE:: @ 8157ACE
 	giveitem ITEM_QUICK_CLAW
 	compare RESULT, 0
 	goto_if_eq RustboroCity_PokemonSchool_EventScript_1A029B
-	closebutton
+	closemessage
 	applymovement LAST_TALKED, RustboroCity_PokemonSchool_Movement_1A0845
 	waitmovement 0
 	setflag 275
@@ -106,7 +106,7 @@ RustboroCity_PokemonSchool_EventScript_157B29:: @ 8157B29
 
 RustboroCity_PokemonSchool_EventScript_157B34:: @ 8157B34
 	msgbox RustboroCity_PokemonSchool_Text_184737, 4
-	closebutton
+	closemessage
 	applymovement LAST_TALKED, RustboroCity_PokemonSchool_Movement_1A0845
 	waitmovement 0
 	release

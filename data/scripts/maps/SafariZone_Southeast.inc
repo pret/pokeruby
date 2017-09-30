@@ -14,7 +14,7 @@ SafariZone_Southeast_EventScript_16004B:: @ 816004B
 	waitmovement 0
 	applymovement 1, SafariZone_Southeast_Movement_160089
 	waitmovement 0
-	movespriteperm 1, 32, 34
+	setobjectxyperm 1, 32, 34
 	setvar 0x40a4, 0
 	releaseall
 	end
@@ -25,7 +25,7 @@ SafariZone_Southeast_MapScript1_160073:: @ 8160073
 	end
 
 SafariZone_Southeast_EventScript_16007F:: @ 816007F
-	movespriteperm 1, 31, 34
+	setobjectxyperm 1, 31, 34
 	return
 
 SafariZone_Southeast_Movement_160087:: @ 8160087
@@ -69,7 +69,7 @@ SafariZone_Southeast_EventScript_1600D1:: @ 81600D1
 
 SafariZone_Southeast_EventScript_1600E0:: @ 81600E0
 	msgbox SafariZone_Southeast_Text_1C3ACA, 4
-	closebutton
+	closemessage
 	switch FACING
 	case 2, SafariZone_Southeast_EventScript_160105
 	case 4, SafariZone_Southeast_EventScript_16011F

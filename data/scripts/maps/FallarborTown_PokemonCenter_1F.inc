@@ -10,7 +10,7 @@ FallarborTown_PokemonCenter_1F_MapScript1_153AF9:: @ 8153AF9
 FallarborTown_PokemonCenter_1F_EventScript_153B02:: @ 8153B02
 	setvar 0x800b, 1
 	call FallarborTown_PokemonCenter_1F_EventScript_19FD5B
-	waittext
+	waitmessage
 	waitbutton
 	release
 	end
@@ -27,7 +27,7 @@ FallarborTown_PokemonCenter_1F_EventScript_153B22:: @ 8153B22
 	lock
 	faceplayer
 	msgbox FallarborTown_PokemonCenter_1F_Text_1774D4, 4
-	closebutton
+	closemessage
 	switch FACING
 	case 2, FallarborTown_PokemonCenter_1F_EventScript_153B49
 	case 3, FallarborTown_PokemonCenter_1F_EventScript_153B59

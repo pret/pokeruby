@@ -13,7 +13,7 @@ SouthernIsland_Exterior_EventScript_160AE0:: @ 8160AE0
 	compare RESULT, 0
 	goto_if_eq SouthernIsland_Exterior_EventScript_160B25
 	msgbox SouthernIsland_Exterior_Text_1C5281, 4
-	closebutton
+	closemessage
 	applymovement LAST_TALKED, SouthernIsland_Exterior_Movement_1A0845
 	waitmovement 0
 	delay 30

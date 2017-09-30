@@ -11,13 +11,13 @@ Route119_WeatherInstitute_2F_MapScript1_163CC8:: @ 8163CC8
 	end
 
 Route119_WeatherInstitute_2F_EventScript_163CE4:: @ 8163CE4
-	movespriteperm 5, 1, 6
-	spritebehave 5, 10
+	setobjectxyperm 5, 1, 6
+	setobjectmovementtype 5, 10
 	return
 
 Route119_WeatherInstitute_2F_EventScript_163CF0:: @ 8163CF0
-	movespriteperm 5, 4, 6
-	spritebehave 5, 10
+	setobjectxyperm 5, 4, 6
+	setobjectmovementtype 5, 10
 	return
 
 Route119_WeatherInstitute_2F_EventScript_163CFC:: @ 8163CFC
@@ -37,7 +37,7 @@ Route119_WeatherInstitute_2F_EventScript_163D2A:: @ 8163D2A
 
 Route119_WeatherInstitute_2F_EventScript_163D45:: @ 8163D45
 	msgbox Route119_WeatherInstitute_2F_Text_19F11B, 4
-	closebutton
+	closemessage
 	setvar 0x40b3, 1
 	clearflag 893
 	fadedefaultbgm
@@ -49,7 +49,7 @@ Route119_WeatherInstitute_2F_EventScript_163D45:: @ 8163D45
 	fadescreen 0
 	applymovement 5, Route119_WeatherInstitute_2F_Movement_163DC8
 	waitmovement 0
-	moveoffscreen 5
+	moveobjectoffscreen 5
 	goto Route119_WeatherInstitute_2F_EventScript_163D7A
 	end
 
@@ -61,8 +61,8 @@ Route119_WeatherInstitute_2F_EventScript_163D7A:: @ 8163D7A
 	playfanfare 370
 	message Route119_WeatherInstitute_2F_Text_19F267
 	waitfanfare
-	waittext
-	givepokemon SPECIES_CASTFORM, 25, ITEM_MYSTIC_WATER, 0x0, 0x0, 0
+	waitmessage
+	givepoke SPECIES_CASTFORM, 25, ITEM_MYSTIC_WATER, 0x0, 0x0, 0
 	setflag 151
 	msgbox Route119_WeatherInstitute_2F_Text_19F27D, 4
 	release

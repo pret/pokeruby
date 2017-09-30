@@ -41,7 +41,7 @@ Route110_SeasideCyclingRoadNorthEntrance_EventScript_16351D:: @ 816351D
 Route110_SeasideCyclingRoadNorthEntrance_EventScript_163523:: @ 8163523
 @ You don't have a bike!
 	msgbox Route110_SeasideCyclingRoadNorthEntrance_Text_19E3AD, 4
-	closebutton
+	closemessage
 	applymovement 255, Route110_SeasideCyclingRoadNorthEntrance_Movement_163538
 	waitmovement 0
 	releaseall

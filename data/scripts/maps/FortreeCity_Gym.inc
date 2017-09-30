@@ -25,7 +25,7 @@ FortreeCity_Gym_EventScript_157EF0:: @ 8157EF0
 
 FortreeCity_Gym_EventScript_157F15:: @ 8157F15
 	message FortreeCity_Gym_Text_185E48
-	waittext
+	waitmessage
 	call FortreeCity_Gym_EventScript_1A02C5
 	msgbox FortreeCity_Gym_Text_185E73, 4
 	setflag 1225

@@ -124,47 +124,47 @@ RustboroCity_EventScript_14C475:: @ 814C475
 
 RustboroCity_EventScript_14C481:: @ 814C481
 	lockall
-	movespriteperm 9, 14, 21
-	spritebehave 9, 10
+	setobjectxyperm 9, 14, 21
+	setobjectmovementtype 9, 10
 	setvar 0x8004, 0
 	goto RustboroCity_EventScript_14C4F4
 	end
 
 RustboroCity_EventScript_14C498:: @ 814C498
 	lockall
-	movespriteperm 9, 14, 21
-	spritebehave 9, 10
+	setobjectxyperm 9, 14, 21
+	setobjectmovementtype 9, 10
 	setvar 0x8004, 1
 	goto RustboroCity_EventScript_14C4F4
 	end
 
 RustboroCity_EventScript_14C4AF:: @ 814C4AF
 	lockall
-	movespriteperm 9, 14, 21
-	spritebehave 9, 10
+	setobjectxyperm 9, 14, 21
+	setobjectmovementtype 9, 10
 	setvar 0x8004, 2
 	goto RustboroCity_EventScript_14C4F4
 	end
 
 RustboroCity_EventScript_14C4C6:: @ 814C4C6
 	lockall
-	movespriteperm 9, 14, 21
-	spritebehave 9, 10
+	setobjectxyperm 9, 14, 21
+	setobjectmovementtype 9, 10
 	setvar 0x8004, 3
 	goto RustboroCity_EventScript_14C4F4
 	end
 
 RustboroCity_EventScript_14C4DD:: @ 814C4DD
 	lockall
-	movespriteperm 9, 14, 21
-	spritebehave 9, 10
+	setobjectxyperm 9, 14, 21
+	setobjectmovementtype 9, 10
 	setvar 0x8004, 4
 	goto RustboroCity_EventScript_14C4F4
 	end
 
 RustboroCity_EventScript_14C4F4:: @ 814C4F4
 	msgbox RustboroCity_Text_166E65, 4
-	closebutton
+	closemessage
 	addobject 10
 	addobject 9
 	applymovement 10, RustboroCity_Movement_14C5C2
@@ -173,11 +173,11 @@ RustboroCity_EventScript_14C4F4:: @ 814C4F4
 	applymovement 9, RustboroCity_Movement_14C5D3
 	waitmovement 0
 	msgbox RustboroCity_Text_166E7E, 4
-	closebutton
+	closemessage
 	applymovement 9, RustboroCity_Movement_14C5DB
 	waitmovement 0
 	removeobject 9
-	movespriteperm 9, 30, 10
+	setobjectxyperm 9, 30, 10
 	clearflag 732
 	setflag 142
 	setvar 0x405a, 2
@@ -373,7 +373,7 @@ RustboroCity_EventScript_14C650:: @ 814C650
 	call_if 1, RustboroCity_EventScript_14C715
 	setflag 159
 	setvar 0x405a, 3
-	moveoffscreen 9
+	moveobjectoffscreen 9
 	msgbox RustboroCity_Text_166EA5, 4
 	releaseall
 	end
@@ -472,7 +472,7 @@ RustboroCity_EventScript_14C77D:: @ 814C77D
 	compare RESULT, 0
 	call_if 1, RustboroCity_EventScript_14C7F5
 	msgbox RustboroCity_Text_16707F, 4
-	closebutton
+	closemessage
 	setflag 144
 	setflag 732
 	setvar 0x405a, 5

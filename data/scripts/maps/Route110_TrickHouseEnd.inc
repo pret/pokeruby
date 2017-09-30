@@ -64,7 +64,7 @@ Route110_TrickHouseEnd_EventScript_161A0B:: @ 8161A0B
 	compare RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_161C4E
 	msgbox Route110_TrickHouseEnd_Text_19C9BD, 4
-	closebutton
+	closemessage
 	call Route110_TrickHouseEnd_EventScript_161C2E
 	release
 	end
@@ -77,7 +77,7 @@ Route110_TrickHouseEnd_EventScript_161A47:: @ 8161A47
 	compare RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_161C4E
 	msgbox Route110_TrickHouseEnd_Text_19C9BD, 4
-	closebutton
+	closemessage
 	call Route110_TrickHouseEnd_EventScript_161C2E
 	release
 	end
@@ -90,7 +90,7 @@ Route110_TrickHouseEnd_EventScript_161A83:: @ 8161A83
 	compare RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_161C4E
 	msgbox Route110_TrickHouseEnd_Text_19C9BD, 4
-	closebutton
+	closemessage
 	call Route110_TrickHouseEnd_EventScript_161C2E
 	release
 	end
@@ -103,7 +103,7 @@ Route110_TrickHouseEnd_EventScript_161ABF:: @ 8161ABF
 	compare RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_161C4E
 	msgbox Route110_TrickHouseEnd_Text_19C9BD, 4
-	closebutton
+	closemessage
 	call Route110_TrickHouseEnd_EventScript_161C2E
 	release
 	end
@@ -116,7 +116,7 @@ Route110_TrickHouseEnd_EventScript_161AFB:: @ 8161AFB
 	compare RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_161C4E
 	msgbox Route110_TrickHouseEnd_Text_19C9BD, 4
-	closebutton
+	closemessage
 	call Route110_TrickHouseEnd_EventScript_161C2E
 	release
 	end
@@ -129,7 +129,7 @@ Route110_TrickHouseEnd_EventScript_161B37:: @ 8161B37
 	compare RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_161C4E
 	msgbox Route110_TrickHouseEnd_Text_19C9BD, 4
-	closebutton
+	closemessage
 	call Route110_TrickHouseEnd_EventScript_161C2E
 	release
 	end
@@ -142,14 +142,14 @@ Route110_TrickHouseEnd_EventScript_161B73:: @ 8161B73
 	compare RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_161C4E
 	msgbox Route110_TrickHouseEnd_Text_19C9BD, 4
-	closebutton
+	closemessage
 	call Route110_TrickHouseEnd_EventScript_161C2E
 	release
 	end
 
 Route110_TrickHouseEnd_EventScript_161BAF:: @ 8161BAF
 	msgbox Route110_TrickHouseEnd_Text_19C5AF, 4
-	closebutton
+	closemessage
 	compare FACING, 1
 	call_if 1, Route110_TrickHouseEnd_EventScript_161C74
 	compare FACING, 2
@@ -160,7 +160,7 @@ Route110_TrickHouseEnd_EventScript_161BAF:: @ 8161BAF
 	call_if 1, Route110_TrickHouseEnd_EventScript_161C95
 	delay 30
 	msgbox Route110_TrickHouseEnd_Text_19C602, 4
-	closebutton
+	closemessage
 	applymovement 1, Route110_TrickHouseEnd_Movement_1A0839
 	waitmovement 0
 	delay 30
@@ -234,7 +234,7 @@ Route110_TrickHouseEnd_EventScript_161CA0:: @ 8161CA0
 	applymovement 255, Route110_TrickHouseEnd_Movement_1A0845
 	waitmovement 0
 	msgbox Route110_TrickHouseEnd_Text_19CA8B, 4
-	closebutton
+	closemessage
 	applymovement 255, Route110_TrickHouseEnd_Movement_161CE8
 	waitmovement 0
 	delay 4

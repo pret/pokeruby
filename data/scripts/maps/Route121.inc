@@ -21,7 +21,7 @@ Route121_EventScript_151B1C:: @ 8151B1C
 Route121_EventScript_151B25:: @ 8151B25
 	lockall
 	msgbox Route121_Text_171C8F, 4
-	closebutton
+	closemessage
 	applymovement 12, Route121_Movement_151B57
 	applymovement 13, Route121_Movement_151B60
 	applymovement 14, Route121_Movement_151B69

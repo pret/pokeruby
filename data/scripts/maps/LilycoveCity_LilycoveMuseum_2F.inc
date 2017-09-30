@@ -128,14 +128,14 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_15875C:: @ 815875C
 	compare RESULT, 0
 	goto_if_eq LilycoveCity_LilycoveMuseum_2F_EventScript_158783
 	setflag 236
-	closebutton
+	closemessage
 	releaseall
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_158783:: @ 8158783
 	call LilycoveCity_LilycoveMuseum_2F_EventScript_1A02B8
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_188166, 4
-	closebutton
+	closemessage
 	releaseall
 	end
 
@@ -198,34 +198,34 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_158817:: @ 8158817
 LilycoveCity_LilycoveMuseum_2F_EventScript_158820:: @ 8158820
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_18831A, 3
 	fadescreen 1
-	showcontestwinner 9
+	drawcontestwinner 9
 	releaseall
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_15882E:: @ 815882E
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_18831A, 3
 	fadescreen 1
-	showcontestwinner 10
+	drawcontestwinner 10
 	releaseall
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_15883C:: @ 815883C
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_18831A, 3
 	fadescreen 1
-	showcontestwinner 11
+	drawcontestwinner 11
 	releaseall
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_15884A:: @ 815884A
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_18831A, 3
 	fadescreen 1
-	showcontestwinner 12
+	drawcontestwinner 12
 	releaseall
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_158858:: @ 8158858
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_18831A, 3
 	fadescreen 1
-	showcontestwinner 13
+	drawcontestwinner 13
 	releaseall
 	end

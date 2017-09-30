@@ -16,12 +16,12 @@ BattleTower_Outside_EventScript_160168:: @ 8160168
 	compare RESULT, 0
 	goto_if_eq BattleTower_Outside_EventScript_1601C6
 	message BattleTower_Outside_Text_199D9D
-	waittext
+	waitmessage
 	goto BattleTower_Outside_EventScript_16018E
 	end
 
 BattleTower_Outside_EventScript_16018E:: @ 816018E
-	multichoicedef 21, 6, 53, 2, 0
+	multichoicedefault 21, 6, 53, 2, 0
 	switch RESULT
 	case 0, BattleTower_Outside_EventScript_1601D0
 	case 1, BattleTower_Outside_EventScript_1601FB
@@ -58,12 +58,12 @@ BattleTower_Outside_EventScript_1601FB:: @ 81601FB
 
 BattleTower_Outside_EventScript_160226:: @ 8160226
 	message BattleTower_Outside_Text_199E7A
-	waittext
+	waitmessage
 	goto BattleTower_Outside_EventScript_16018E
 	end
 
 BattleTower_Outside_EventScript_160232:: @ 8160232
-	closebutton
+	closemessage
 	applymovement LAST_TALKED, BattleTower_Outside_Movement_1A0845
 	waitmovement 0
 	delay 30

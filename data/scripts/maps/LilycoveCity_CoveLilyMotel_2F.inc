@@ -27,7 +27,7 @@ LilycoveCity_CoveLilyMotel_2F_EventScript_1583D0:: @ 81583D0
 
 LilycoveCity_CoveLilyMotel_2F_EventScript_1583DD:: @ 81583DD
 	message LilycoveCity_CoveLilyMotel_2F_Text_18708F
-	waittext
+	waitmessage
 	call LilycoveCity_CoveLilyMotel_2F_EventScript_1A02C5
 	special ScrSpecial_ShowDiploma
 	waitstate

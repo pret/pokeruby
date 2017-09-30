@@ -13,7 +13,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6956:: @ 81B6956
 	compare 0x8005, 1
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1B69AA
 	msgbox LittlerootTown_BrendansHouse_1F_Text_172453, 4
-	closebutton
+	closemessage
 	setvar 0x4092, 4
 	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_1B69B5
 	applymovement 0x8004, LittlerootTown_BrendansHouse_1F_Movement_1A0841
@@ -38,7 +38,7 @@ LittlerootTown_BrendansHouse_1F_Movement_1B69B5:: @ 81B69B5
 LittlerootTown_BrendansHouse_1F_EventScript_1B69B7:: @ 81B69B7
 LittlerootTown_MaysHouse_1F_EventScript_1B69B7:: @ 81B69B7
 	msgbox LittlerootTown_BrendansHouse_1F_Text_172531, 4
-	closebutton
+	closemessage
 	applymovement 0x8004, LittlerootTown_BrendansHouse_1F_Movement_1A0841
 	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_1B6CDC
 	waitmovement 0
@@ -86,7 +86,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_1B6A31:: @ 81B6A31
 	applymovement 255, LittlerootTown_BrendansHouse_2F_Movement_1A0843
 	waitmovement 0
 	msgbox LittlerootTown_BrendansHouse_2F_Text_172E4C, 4
-	closebutton
+	closemessage
 	applymovement 0x8008, LittlerootTown_BrendansHouse_2F_Movement_1B6AA9
 	waitmovement 0
 	return
@@ -99,7 +99,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_1B6A61:: @ 81B6A61
 	applymovement 255, LittlerootTown_BrendansHouse_2F_Movement_1A083F
 	waitmovement 0
 	msgbox LittlerootTown_BrendansHouse_2F_Text_172E4C, 4
-	closebutton
+	closemessage
 	applymovement 0x8008, LittlerootTown_BrendansHouse_2F_Movement_1B6AB4
 	waitmovement 0
 	return
@@ -162,7 +162,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1B6ABF:: @ 81B6ABF
 	waitmovement 0
 	playbgm 453, 0
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1725C9, 4
-	closebutton
+	closemessage
 	applymovement 0x8005, LittlerootTown_BrendansHouse_1F_Movement_1B6BDB
 	waitmovement 0
 	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_1B6CD2
@@ -172,7 +172,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1B6ABF:: @ 81B6ABF
 	waitmovement 0
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1725FE, 4
 	msgbox LittlerootTown_BrendansHouse_1F_Text_172644, 4
-	closebutton
+	closemessage
 	setvar 0x4001, 1
 	applymovement 0x8005, LittlerootTown_BrendansHouse_1F_Movement_1B6BE1
 	waitmovement 0
@@ -187,7 +187,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6B2E:: @ 81B6B2E
 	waitmovement 0
 	playbgm 453, 0
 	msgbox LittlerootTown_MaysHouse_1F_Text_1725C9, 4
-	closebutton
+	closemessage
 	applymovement 0x8005, LittlerootTown_MaysHouse_1F_Movement_1B6BDE
 	waitmovement 0
 	applymovement 255, LittlerootTown_MaysHouse_1F_Movement_1B6CDA
@@ -197,7 +197,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6B2E:: @ 81B6B2E
 	waitmovement 0
 	msgbox LittlerootTown_MaysHouse_1F_Text_1725FE, 4
 	msgbox LittlerootTown_MaysHouse_1F_Text_172644, 4
-	closebutton
+	closemessage
 	setvar 0x4001, 1
 	applymovement 0x8005, LittlerootTown_MaysHouse_1F_Movement_1B6BE5
 	waitmovement 0
@@ -212,7 +212,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6B9D:: @ 81B6B9D
 	applymovement 0x8005, LittlerootTown_BrendansHouse_1F_Movement_1A0835
 	waitmovement 0
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1725A3, 4
-	closebutton
+	closemessage
 	return
 
 LittlerootTown_BrendansHouse_1F_EventScript_1B6BBE:: @ 81B6BBE
@@ -296,7 +296,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1B6C80:: @ 81B6C80
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_1B6C8A:: @ 81B6C8A
-	closebutton
+	closemessage
 	call LittlerootTown_BrendansHouse_1F_EventScript_1A02CA
 	inccounter GAME_STAT_RESTED_AT_HOME
 	msgbox LittlerootTown_BrendansHouse_1F_Text_17276B, 4
@@ -385,13 +385,13 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6CDE:: @ 81B6CDE
 	msgbox LittlerootTown_BrendansHouse_1F_Text_17298B, 4
 	giveitem ITEM_SS_TICKET
 	msgbox LittlerootTown_BrendansHouse_1F_Text_172A7D, 4
-	closebutton
+	closemessage
 	compare 0x8008, 0
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1B6DE3
 	compare 0x8008, 1
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1B6DEE
 	msgbox LittlerootTown_BrendansHouse_1F_Text_172B5E, 4
-	closebutton
+	closemessage
 	compare 0x8008, 0
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1B6DF9
 	compare 0x8008, 1

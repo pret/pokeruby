@@ -36,24 +36,24 @@ LittlerootTown_EventScript_14D570:: @ 814D570
 	return
 
 LittlerootTown_EventScript_14D57B:: @ 814D57B
-	movespriteperm 4, 14, 8
+	setobjectxyperm 4, 14, 8
 	return
 
 LittlerootTown_EventScript_14D583:: @ 814D583
 	compare 0x4050, 0
 	goto_if_eq LittlerootTown_EventScript_14D59A
-	movespriteperm 1, 10, 1
-	spritebehave 1, 7
+	setobjectxyperm 1, 10, 1
+	setobjectmovementtype 1, 7
 	return
 
 LittlerootTown_EventScript_14D59A:: @ 814D59A
-	movespriteperm 1, 7, 2
-	spritebehave 1, 8
+	setobjectxyperm 1, 7, 2
+	setobjectmovementtype 1, 8
 	return
 
 LittlerootTown_EventScript_14D5A6:: @ 814D5A6
 	clearflag 752
-	spritebehave 4, 8
+	setobjectmovementtype 4, 8
 	checkgender
 	compare RESULT, 0
 	call_if 1, LittlerootTown_EventScript_14D5C5
@@ -62,11 +62,11 @@ LittlerootTown_EventScript_14D5A6:: @ 814D5A6
 	return
 
 LittlerootTown_EventScript_14D5C5:: @ 814D5C5
-	movespriteperm 4, 5, 9
+	setobjectxyperm 4, 5, 9
 	return
 
 LittlerootTown_EventScript_14D5CD:: @ 814D5CD
-	movespriteperm 4, 14, 9
+	setobjectxyperm 4, 14, 9
 	return
 
 LittlerootTown_MapScript2_14D5D5:: @ 814D5D5
@@ -113,7 +113,7 @@ LittlerootTown_EventScript_14D62B:: @ 814D62B
 	applymovement 4, LittlerootTown_Movement_14D6AE
 	waitmovement 0
 	msgbox LittlerootTown_Text_16A7C9, 4
-	closebutton
+	closemessage
 	applymovement 4, LittlerootTown_Movement_14D6B1
 	applymovement 255, LittlerootTown_Movement_14D6B8
 	waitmovement 0
@@ -199,7 +199,7 @@ LittlerootTown_EventScript_14D6DF:: @ 814D6DF
 
 LittlerootTown_EventScript_14D708:: @ 814D708
 	msgbox LittlerootTown_Text_16AD82, 4
-	closebutton
+	closemessage
 	applymovement 1, LittlerootTown_Movement_1A083D
 	waitmovement 0
 	setvar 0x4050, 2
@@ -229,12 +229,12 @@ LittlerootTown_EventScript_14D739:: @ 814D739
 
 LittlerootTown_EventScript_14D755:: @ 814D755
 	msgbox LittlerootTown_Text_16ACEB, 4
-	closebutton
+	closemessage
 	applymovement 1, LittlerootTown_Movement_14D787
 	applymovement 255, LittlerootTown_Movement_14D793
 	waitmovement 0
 	msgbox LittlerootTown_Text_16AD3C, 4
-	closebutton
+	closemessage
 	return
 
 LittlerootTown_Movement_14D779:: @ 814D779
@@ -316,7 +316,7 @@ LittlerootTown_EventScript_14D7C7:: @ 814D7C7
 	applymovement 255, LittlerootTown_Movement_1A083F
 	waitmovement 0
 	msgbox LittlerootTown_Text_16AD82, 4
-	closebutton
+	closemessage
 	applymovement 1, LittlerootTown_Movement_1A083D
 	waitmovement 0
 	setvar 0x4050, 2
@@ -417,7 +417,7 @@ LittlerootTown_EventScript_14D8B6:: @ 814D8B6
 	compare RESULT, 1
 	call_if 1, LittlerootTown_EventScript_14D931
 	msgbox LittlerootTown_Text_16A8EE, 4
-	closebutton
+	closemessage
 	checkgender
 	compare RESULT, 0
 	call_if 1, LittlerootTown_EventScript_14D952
@@ -871,10 +871,10 @@ LittlerootTown_EventScript_14DD38:: @ 814DD38
 	playfanfare 370
 	message LittlerootTown_Text_16AA32
 	waitfanfare
-	waittext
+	waitmessage
 	setflag 274
 	msgbox LittlerootTown_Text_16AA5C, 4
 	msgbox LittlerootTown_Text_16AB10, 4
-	closebutton
+	closemessage
 	delay 30
 	return

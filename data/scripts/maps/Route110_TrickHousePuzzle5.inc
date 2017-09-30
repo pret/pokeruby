@@ -398,9 +398,9 @@ Route110_TrickHousePuzzle5_EventScript_162D90:: @ 8162D90
 	applymovement 5, Route110_TrickHousePuzzle5_Movement_16309F
 	msgbox Route110_TrickHousePuzzle5_Text_19D5ED, 4
 	waitmovement 0
-	closebutton
+	closemessage
 	msgbox Route110_TrickHousePuzzle5_Text_19D615, 4
-	closebutton
+	closemessage
 	warp Route110_TrickHousePuzzle5, 255, 0, 21
 	waitstate
 	releaseall

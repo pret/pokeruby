@@ -70,7 +70,7 @@ MauvilleCity_EventScript_14C0C4:: @ 814C0C4
 	checkflag 284
 	goto_if_eq MauvilleCity_EventScript_14C0E4
 	msgbox MauvilleCity_Text_165B76, 4
-	closebutton
+	closemessage
 	applymovement 7, MauvilleCity_Movement_1A083D
 	waitmovement 0
 	release
@@ -78,7 +78,7 @@ MauvilleCity_EventScript_14C0C4:: @ 814C0C4
 
 MauvilleCity_EventScript_14C0E4:: @ 814C0E4
 	msgbox MauvilleCity_Text_165E45, 4
-	closebutton
+	closemessage
 	applymovement 7, MauvilleCity_Movement_1A083D
 	waitmovement 0
 	release
@@ -109,7 +109,7 @@ MauvilleCity_EventScript_14C154:: @ 814C154
 	call_if 1, MauvilleCity_EventScript_14C23C
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_EventScript_14C285
-	closebutton
+	closemessage
 	switch FACING
 	case 2, MauvilleCity_EventScript_14C187
 	case 4, MauvilleCity_EventScript_14C1D9
@@ -127,7 +127,7 @@ MauvilleCity_EventScript_14C187:: @ 814C187
 	applymovement 255, MauvilleCity_Movement_1A0845
 	waitmovement 0
 	msgbox MauvilleCity_Text_1660FA, 4
-	closebutton
+	closemessage
 	applymovement 6, MauvilleCity_Movement_14C2B6
 	applymovement 7, MauvilleCity_Movement_14C2DF
 	waitmovement 0
@@ -146,7 +146,7 @@ MauvilleCity_EventScript_14C1D9:: @ 814C1D9
 	applymovement 255, MauvilleCity_Movement_1A0845
 	waitmovement 0
 	msgbox MauvilleCity_Text_1660FA, 4
-	closebutton
+	closemessage
 	applymovement 6, MauvilleCity_Movement_14C2C1
 	applymovement 7, MauvilleCity_Movement_14C2E8
 	waitmovement 0

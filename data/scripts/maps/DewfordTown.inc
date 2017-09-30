@@ -12,8 +12,8 @@ DewfordTown_EventScript_14E002:: @ 814E002
 	checkflag 189
 	goto_if 0, DewfordTown_EventScript_14E076
 	message DewfordTown_Text_16B522
-	waittext
-	multichoicedef 21, 6, 0, 2, 0
+	waitmessage
+	multichoicedefault 21, 6, 0, 2, 0
 	switch RESULT
 	case 0, DewfordTown_EventScript_14E04B
 	case 1, DewfordTown_EventScript_14E05B
@@ -23,21 +23,21 @@ DewfordTown_EventScript_14E002:: @ 814E002
 
 DewfordTown_EventScript_14E04B:: @ 814E04B
 	msgbox DewfordTown_Text_16B57D, 4
-	closebutton
+	closemessage
 	goto DewfordTown_EventScript_14E151
 	release
 	end
 
 DewfordTown_EventScript_14E05B:: @ 814E05B
 	msgbox DewfordTown_Text_16B5D2, 4
-	closebutton
+	closemessage
 	goto DewfordTown_EventScript_14E1D8
 	release
 	end
 
 DewfordTown_EventScript_14E06B:: @ 814E06B
 	msgbox DewfordTown_Text_16B627, 4
-	closebutton
+	closemessage
 	release
 	end
 
@@ -51,7 +51,7 @@ DewfordTown_EventScript_14E076:: @ 814E076
 
 DewfordTown_EventScript_14E093:: @ 814E093
 	msgbox DewfordTown_Text_16B417, 4
-	closebutton
+	closemessage
 	goto DewfordTown_EventScript_14E151
 	end
 
@@ -98,7 +98,7 @@ DewfordTown_EventScript_14E111:: @ 814E111
 
 DewfordTown_EventScript_14E11B:: @ 814E11B
 	message DewfordTown_Text_16B84E
-	waittext
+	waitmessage
 	multichoice 20, 8, 50, 1
 	compare RESULT, 0
 	goto_if_eq DewfordTown_EventScript_14E13D
@@ -166,7 +166,7 @@ DewfordTown_EventScript_14E1D8:: @ 814E1D8
 	showobject 255, 0, 24
 	applymovement 255, DewfordTown_Movement_14E409
 	waitmovement 0
-	movespriteperm 2, 21, 26
+	setobjectxyperm 2, 21, 26
 	addobject 2
 	spritelevelup 2, 0, 24, 0
 	applymovement 2, DewfordTown_Movement_14E410
@@ -180,11 +180,11 @@ DewfordTown_EventScript_14E1D8:: @ 814E1D8
 	call_if 0, DewfordTown_EventScript_14E281
 	checkflag 149
 	call_if 1, DewfordTown_EventScript_14E28A
-	closebutton
+	closemessage
 	copyvar 0x4096, 0x8008
 	restorespritelevel 255, 0, 11
 	restorespritelevel 2, 0, 24
-	moveoffscreen 2
+	moveobjectoffscreen 2
 	release
 	end
 

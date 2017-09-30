@@ -10,7 +10,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_155CE6:: @ 8155CE6
 	lock
 	faceplayer
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17ECFD, 4
-	closebutton
+	closemessage
 	playbgm BGM_EVIL_TEAM, 1
 	addobject 3
 	applymovement 3, SlateportCity_OceanicMuseum_2F_Movement_155EB4
@@ -30,7 +30,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_155CE6:: @ 8155CE6
 	call_if 5, SlateportCity_OceanicMuseum_2F_EventScript_155E6D
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17EDD7, 4
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17EE01, 4
-	closebutton
+	closemessage
 	applymovement 4, SlateportCity_OceanicMuseum_2F_Movement_155EB2
 	waitmovement 0
 	compare FACING, 1
@@ -39,7 +39,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_155CE6:: @ 8155CE6
 	call_if 1, SlateportCity_OceanicMuseum_2F_EventScript_155E83
 	trainerbattle 3, OPPONENT_MUSEUM_2F_GRUNT_1, 0, SlateportCity_OceanicMuseum_2F_Text_17EE4E
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17EE66, 4
-	closebutton
+	closemessage
 	applymovement 4, SlateportCity_OceanicMuseum_2F_Movement_155EBF
 	waitmovement 0
 	applymovement 3, SlateportCity_OceanicMuseum_2F_Movement_155EB2
@@ -53,7 +53,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_155CE6:: @ 8155CE6
 	applymovement 4, SlateportCity_OceanicMuseum_2F_Movement_1A0841
 	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17EEEA, 4
-	closebutton
+	closemessage
 	delay 35
 	addobject 2
 	applymovement 2, SlateportCity_OceanicMuseum_2F_Movement_155EA8
@@ -67,7 +67,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_155CE6:: @ 8155CE6
 	.else
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17F17E, 4
 	.endif
-	closebutton
+	closemessage
 	fadescreen 1
 	removeobject 2
 	removeobject 3
@@ -81,7 +81,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_155CE6:: @ 8155CE6
 	setvar 0x8004, 269
 	call SlateportCity_OceanicMuseum_2F_EventScript_1A067F
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17F433, 4
-	closebutton
+	closemessage
 	applymovement 1, SlateportCity_OceanicMuseum_2F_Movement_155E98
 	waitmovement 0
 	playse 9
@@ -265,7 +265,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_155F46:: @ 8155F46
 	lock
 	faceplayer
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17F53B, 4
-	closebutton
+	closemessage
 	applymovement LAST_TALKED, SlateportCity_OceanicMuseum_2F_Movement_1A083D
 	waitmovement 0
 	release

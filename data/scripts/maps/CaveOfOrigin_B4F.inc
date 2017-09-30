@@ -32,7 +32,7 @@ CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 	.else
 	msgbox CaveOfOrigin_B4F_Text_1B4FE4, 4
 	.endif
-	closebutton
+	closemessage
 	setweather 0
 	doweather
 	special WaitWeather
@@ -87,7 +87,7 @@ CaveOfOrigin_B4F_EventScript_15DE73:: @ 815DE73
 	.else
 	msgbox CaveOfOrigin_B4F_Text_1B5009, 4
 	.endif
-	closebutton
+	closemessage
 	return
 
 CaveOfOrigin_B4F_Movement_15DE7D:: @ 815DE7D

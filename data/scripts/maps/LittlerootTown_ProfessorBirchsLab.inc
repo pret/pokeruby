@@ -26,7 +26,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152CBE:: @ 8152CBE
 	lockall
 	bufferfirstpoke 0
 	message LittlerootTown_ProfessorBirchsLab_Text_173D94
-	waittext
+	waitmessage
 	playfanfare 370
 	waitfanfare
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_173EF8, 5
@@ -158,7 +158,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152E6D:: @ 8152E6D
 	playfanfare 370
 	message LittlerootTown_ProfessorBirchsLab_Text_17422F
 	waitfanfare
-	waittext
+	waitmessage
 	setflag 2049
 	return
 

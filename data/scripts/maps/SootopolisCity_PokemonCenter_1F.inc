@@ -9,7 +9,7 @@ SootopolisCity_PokemonCenter_1F_MapScript1_15B196:: @ 815B196
 @ 815B19A
 	setvar 0x800B, 1
 	call VerdanturfTown_PokemonCenter_1F_EventScript_19FD5B
-	waittext
+	waitmessage
 	waitbutton
 	release
 	end

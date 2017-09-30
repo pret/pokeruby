@@ -14,7 +14,7 @@ FortreeCity_House4_EventScript_158188:: @ 8158188
 	checkflag 222
 	goto_if_eq FortreeCity_House4_EventScript_1581C2
 	msgbox FortreeCity_House4_Text_186835, 4
-	closebutton
+	closemessage
 	setflag 222
 	clearflag 934
 	applymovement 3, FortreeCity_House4_Movement_158218

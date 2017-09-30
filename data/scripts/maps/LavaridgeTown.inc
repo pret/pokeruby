@@ -14,8 +14,8 @@ LavaridgeTown_MapScript1_14E4AE:: @ 814E4AE
 	end
 
 LavaridgeTown_EventScript_14E4D0:: @ 814E4D0
-	movespriteperm 8, 11, 9
-	movespriteperm 7, 11, 9
+	setobjectxyperm 8, 11, 9
+	setobjectxyperm 7, 11, 9
 	return
 
 LavaridgeTown_EventScript_14E4DF:: @ 814E4DF
@@ -98,7 +98,7 @@ LavaridgeTown_EventScript_14E5D0:: @ 814E5D0
 	end
 
 LavaridgeTown_EventScript_14E5F5:: @ 814E5F5
-	closebutton
+	closemessage
 	compare 0x8008, 1
 	call_if 1, LavaridgeTown_EventScript_14E646
 	compare 0x8008, 0
@@ -124,7 +124,7 @@ LavaridgeTown_EventScript_14E644:: @ 814E644
 	end
 
 LavaridgeTown_EventScript_14E646:: @ 814E646
-	movespriteperm 7, 6, 16
+	setobjectxyperm 7, 6, 16
 	return
 
 LavaridgeTown_EventScript_14E64E:: @ 814E64E
@@ -139,19 +139,19 @@ LavaridgeTown_EventScript_14E64E:: @ 814E64E
 	return
 
 LavaridgeTown_EventScript_14E67B:: @ 814E67B
-	spritebehave 7, 8
+	setobjectmovementtype 7, 8
 	return
 
 LavaridgeTown_EventScript_14E680:: @ 814E680
-	spritebehave 7, 7
+	setobjectmovementtype 7, 7
 	return
 
 LavaridgeTown_EventScript_14E685:: @ 814E685
-	spritebehave 7, 10
+	setobjectmovementtype 7, 10
 	return
 
 LavaridgeTown_EventScript_14E68A:: @ 814E68A
-	spritebehave 7, 9
+	setobjectmovementtype 7, 9
 	return
 
 LavaridgeTown_EventScript_14E68F:: @ 814E68F
@@ -285,7 +285,7 @@ LavaridgeTown_EventScript_14E75A:: @ 814E75A
 	playfanfare 370
 	message LavaridgeTown_Text_16C2EA
 	waitfanfare
-	waittext
+	waitmessage
 	giveegg 360
 	release
 	end

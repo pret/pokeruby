@@ -691,26 +691,26 @@
 	.2byte \trainer
 	.endm
 
-	.macro movespriteperm word1, word2, word3
+	.macro setobjectxyperm word1, word2, word3
 	.byte 0x63
 	.2byte \word1
 	.2byte \word2
 	.2byte \word3
 	.endm
 
-	.macro moveoffscreen word
+	.macro moveobjectoffscreen word
 	.byte 0x64
 	.2byte \word
 	.endm
 
-	.macro spritebehave word, byte
+	.macro setobjectmovementtype word, byte
 	.byte 0x65
 	.2byte \word
 	.byte \byte
 	.endm
 
 	@ If a standard message box (or its text) is being drawn on-screen, this command blocks script execution until the box and its text have been fully drawn.
-	.macro waittext
+	.macro waitmessage
 	.byte 0x66
 	.endm
 
@@ -721,7 +721,7 @@
 	.endm
 
 	@ Holds the current message box open until the player presses a key. The message box is then closed.
-	.macro closebutton
+	.macro closemessage
 	.byte 0x68
 	.endm
 
@@ -767,7 +767,7 @@
 	.endm
 
 	@ Displays a multichoice box from which the user can choose a selection, and blocks script execution until a selection is made. Lists of options are predefined and the one to be used is specified with list. The default argument determines the initial position of the cursor when the box is first opened; it is zero-indexed, and if it is too large, it is treated as 0x00. If B is set to a non-zero value, then the user will not be allowed to back out of the multichoice with the B button.
-	.macro multichoicedef X, Y, list, default, B
+	.macro multichoicedefault X, Y, list, default, B
 	.byte 0x70
 	.byte \X
 	.byte \Y
@@ -777,7 +777,7 @@
 	.endm
 
 	@ Displays a multichoice box from which the user can choose a selection, and blocks script execution until a selection is made. Lists of options are predefined and the one to be used is specified with list. The per_row argument determines how many list items will be shown on a single row of the box.
-	.macro multichoicerow X, Y, list, per_row, B
+	.macro multichoicegrid X, Y, list, per_row, B
 	.byte 0x71
 	.byte \X
 	.byte \Y
@@ -786,7 +786,7 @@
 	.byte \B
 	.endm
 
-	.macro showbox byte1, byte2, byte3, byte4
+	.macro drawbox byte1, byte2, byte3, byte4
 	.byte 0x72
 	.byte \byte1
 	.byte \byte2
@@ -794,7 +794,7 @@
 	.byte \byte4
 	.endm
 
-	.macro hidebox byte1, byte2, byte3, byte4
+	.macro erasebox byte1, byte2, byte3, byte4
 	.byte 0x73
 	.byte \byte1
 	.byte \byte2
@@ -802,7 +802,7 @@
 	.byte \byte4
 	.endm
 
-	.macro clearbox byte1, byte2, byte3, byte4
+	.macro drawboxtext byte1, byte2, byte3, byte4
 	.byte 0x74
 	.byte \byte1
 	.byte \byte2
@@ -811,7 +811,7 @@
 	.endm
 
 	@ Displays a box containing the front sprite for the specified (species) Pokmon species.
-	.macro showpokepic species, X, Y
+	.macro drawpokepic species, X, Y
 	.byte 0x75
 	.2byte \species
 	.byte \X
@@ -819,12 +819,12 @@
 	.endm
 
 	@ Hides all boxes displayed with showpokepic.
-	.macro hidepokepic
+	.macro erasepokepic
 	.byte 0x76
 	.endm
 
 	@ In FireRed, this command is a nop. (The argument is discarded.)
-	.macro showcontestwinner a
+	.macro drawcontestwinner a
 	.byte 0x77
 	.byte \a
 	.endm
@@ -836,7 +836,7 @@
 	.endm
 
 	@ Gives the player one of the specified (species) Pokmon at level level holding item. The unknown arguments should all be zeroes.
-	.macro givepokemon species, level, item, unknown1, unknown2, unknown3
+	.macro givepoke species, level, item, unknown1, unknown2, unknown3
 	.byte 0x79
 	.2byte \species
 	.byte \level
@@ -859,7 +859,7 @@
 	.endm
 
 	@ Checks if at least one Pokmon in the player's party knows the specified (index) attack. If so, variable 0x800D (LASTRESULT) is set to the (zero-indexed) slot number of the Pokmon that knows the move. If not, LASTRESULT is set to 0x0006.
-	.macro checkattack index
+	.macro checkpokemove index
 	.byte 0x7c
 	.2byte \index
 	.endm

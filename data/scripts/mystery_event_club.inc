@@ -24,7 +24,7 @@ PetalburgCity_PokemonCenter_1F_EventScript_1B1B6C:: @ 81B1B6C
 
 PetalburgCity_PokemonCenter_1F_EventScript_1B1B7A:: @ 81B1B7A
 	msgbox PetalburgCity_PokemonCenter_1F_Text_1B1F7B, 4
-	closebutton
+	closemessage
 	setvar 0x8004, 0
 	call PetalburgCity_PokemonCenter_1F_EventScript_1A00F3
 	lock
@@ -45,7 +45,7 @@ PetalburgCity_PokemonCenter_1F_EventScript_1B1BB1:: @ 81B1BB1
 PetalburgCity_PokemonCenter_1F_EventScript_1B1BBB:: @ 81B1BBB
 	setvar 0x8004, 0
 	special sub_80EB7C4
-	waittext
+	waitmessage
 	delay 80
 	msgbox PetalburgCity_PokemonCenter_1F_Text_1B2137, 4
 	release
@@ -78,7 +78,7 @@ PetalburgCity_PokemonCenter_1F_EventScript_1B1C28:: @ 81B1C28
 
 PetalburgCity_PokemonCenter_1F_EventScript_1B1C36:: @ 81B1C36
 	msgbox PetalburgCity_PokemonCenter_1F_Text_1B207F, 4
-	closebutton
+	closemessage
 	setvar 0x8004, 0
 	call PetalburgCity_PokemonCenter_1F_EventScript_1A00F3
 	lock

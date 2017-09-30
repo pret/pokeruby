@@ -82,7 +82,7 @@ Route118_EventScript_151004:: @ 8151004
 	waitmovement 0
 	delay 30
 	msgbox Route118_Text_170D66, 4
-	closebutton
+	closemessage
 	compare 0x8008, 0
 	call_if 1, Route118_EventScript_151048
 	compare 0x8008, 1

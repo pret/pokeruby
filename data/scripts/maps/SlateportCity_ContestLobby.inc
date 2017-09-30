@@ -38,7 +38,7 @@ SlateportCity_ContestLobby_EventScript_155448:: @ 8155448
 	applymovement 255, SlateportCity_ContestLobby_Movement_1554CA
 	waitmovement 0
 	msgbox SlateportCity_ContestLobby_Text_1A6832, 4
-	closebutton
+	closemessage
 	applymovement 1, SlateportCity_ContestLobby_Movement_1554D3
 	applymovement 255, SlateportCity_ContestLobby_Movement_1554C0
 	waitmovement 0
@@ -118,7 +118,7 @@ SlateportCity_ContestLobby_EventScript_155526:: @ 8155526
 SlateportCity_ContestLobby_EventScript_15552F:: @ 815552F
 	lockall
 	fadescreen 1
-	showcontestwinner 3
+	drawcontestwinner 3
 	releaseall
 	end
 
@@ -130,6 +130,6 @@ SlateportCity_ContestLobby_EventScript_155536:: @ 8155536
 	lockall
 	special ShowBerryBlenderRecordWindow
 	waitbutton
-	hidebox 0, 0, 29, 19
+	erasebox 0, 0, 29, 19
 	releaseall
 	end

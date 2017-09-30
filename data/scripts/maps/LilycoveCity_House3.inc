@@ -14,7 +14,7 @@ LilycoveCity_House3_EventScript_159BF3:: @ 8159BF3
 	compare RESULT, 0
 	goto_if_eq LilycoveCity_House3_EventScript_159C1D
 	msgbox LilycoveCity_House3_Text_18BA2B, 4
-	closebutton
+	closemessage
 	applymovement LAST_TALKED, LilycoveCity_House3_Movement_1A083D
 	waitmovement 0
 	release
@@ -22,7 +22,7 @@ LilycoveCity_House3_EventScript_159BF3:: @ 8159BF3
 
 LilycoveCity_House3_EventScript_159C1D:: @ 8159C1D
 	msgbox LilycoveCity_House3_Text_18B9DC, 4
-	closebutton
+	closemessage
 	applymovement LAST_TALKED, LilycoveCity_House3_Movement_1A083D
 	waitmovement 0
 	release
@@ -32,7 +32,7 @@ LilycoveCity_House3_EventScript_159C32:: @ 8159C32
 	lock
 	faceplayer
 	msgbox LilycoveCity_House3_Text_18BD64, 4
-	closebutton
+	closemessage
 	applymovement LAST_TALKED, LilycoveCity_House3_Movement_1A083D
 	waitmovement 0
 	release

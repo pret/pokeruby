@@ -12,7 +12,7 @@ SootopolisCity_MapScript1_14D08D:: @ 814D08D
 	end
 
 SootopolisCity_EventScript_14D0A0:: @ 814D0A0
-	movespriteperm 3, 31, 18
+	setobjectxyperm 3, 31, 18
 	setmaptile 31, 32, 592, 1
 	return
 
@@ -43,22 +43,22 @@ SootopolisCity_MapScript1_14D10D:: @ 814D10D
 
 SootopolisCity_EventScript_14D123:: @ 814D123
 	call SootopolisCity_EventScript_1A02C1
-	movespriteperm 1, 29, 19
-	movespriteperm 2, 33, 19
+	setobjectxyperm 1, 29, 19
+	setobjectxyperm 2, 33, 19
 	compare 0x405e, 1
 	call_if 1, SootopolisCity_EventScript_14D142
 	return
 
 SootopolisCity_EventScript_14D142:: @ 814D142
-	movespriteperm 10, 29, 6
-	spritebehave 10, 10
-	movespriteperm 5, 30, 6
-	spritebehave 5, 9
+	setobjectxyperm 10, 29, 6
+	setobjectmovementtype 10, 10
+	setobjectxyperm 5, 30, 6
+	setobjectmovementtype 5, 9
 	return
 
 SootopolisCity_EventScript_14D159:: @ 814D159
-	movespriteperm 10, 31, 33
-	spritebehave 10, 8
+	setobjectxyperm 10, 31, 33
+	setobjectmovementtype 10, 8
 	return
 
 SootopolisCity_MapScript1_14D165:: @ 814D165
@@ -228,7 +228,7 @@ SootopolisCity_EventScript_14D308:: @ 814D308
 	.else
 	msgbox SootopolisCity_Text_169E0F, 4
 	.endif
-	closebutton
+	closemessage
 	applymovement 10, SootopolisCity_Movement_14D417
 	applymovement 255, SootopolisCity_Movement_14D440
 	waitmovement 10
@@ -247,7 +247,7 @@ SootopolisCity_EventScript_14D308:: @ 814D308
 	.else
 	msgbox SootopolisCity_Text_169F3C, 4
 	.endif
-	closebutton
+	closemessage
 	delay 30
 	applymovement 5, SootopolisCity_Movement_14D46A
 	applymovement 10, SootopolisCity_Movement_14D41D
@@ -264,7 +264,7 @@ SootopolisCity_EventScript_14D308:: @ 814D308
 	.else
 	msgbox SootopolisCity_Text_169F6B, 4
 	.endif
-	closebutton
+	closemessage
 	delay 30
 	applymovement 5, SootopolisCity_Movement_14D47C
 	applymovement 255, SootopolisCity_Movement_14D457
@@ -284,10 +284,10 @@ SootopolisCity_EventScript_14D308:: @ 814D308
 	.else
 	msgbox SootopolisCity_Text_16A13E, 4
 	.endif
-	moveoffscreen 5
-	spritebehave 5, 9
-	moveoffscreen 10
-	spritebehave 10, 10
+	moveobjectoffscreen 5
+	setobjectmovementtype 5, 9
+	moveobjectoffscreen 10
+	setobjectmovementtype 10, 10
 	setvar 0x405e, 2
 	releaseall
 	end
@@ -457,7 +457,7 @@ SootopolisCity_EventScript_14D498:: @ 814D498
 
 SootopolisCity_EventScript_14D4AD:: @ 814D4AD
 	msgbox SootopolisCity_Text_16A33E, 4
-	closebutton
+	closemessage
 	applymovement LAST_TALKED, SootopolisCity_Movement_1A0845
 	waitmovement 0
 	delay 50

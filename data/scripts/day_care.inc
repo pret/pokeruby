@@ -38,7 +38,7 @@ Route117_EventScript_1B22B2:: @ 81B22B2
 	message Route117_Text_1B27A2
 	playfanfare 367
 	waitfanfare
-	waittext
+	waitmessage
 	waitbutton
 	msgbox Route117_Text_1B27CD, 4
 	special sp0B8_daycare
@@ -69,7 +69,7 @@ Route117_EventScript_1B22FE:: @ 81B22FE
 	msgbox Route117_Text_1B2897, 4
 	special sp0B9_daycare_relationship_comment
 	special ShowFieldMessageStringVar4
-	waittext
+	waitmessage
 	waitbutton
 	setvar 0x8004, 0
 	call Route117_EventScript_1B22CD

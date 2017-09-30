@@ -424,15 +424,15 @@ Route110_EventScript_14FEA5:: @ 814FEA5
 	return
 
 Route110_EventScript_14FEB2:: @ 814FEB2
-	closebutton
+	closemessage
 	compare 0x8008, 1
 	call_if 1, Route110_EventScript_14FF56
 	compare 0x8008, 2
 	call_if 1, Route110_EventScript_14FF5E
 	compare 0x8008, 3
 	call_if 1, Route110_EventScript_14FF66
-	spritebehave 28, 10
-	spritebehave 29, 10
+	setobjectmovementtype 28, 10
+	setobjectmovementtype 29, 10
 	removeobject 28
 	addobject 29
 	delay 45
@@ -480,15 +480,15 @@ Route110_EventScript_14FF4B:: @ 814FF4B
 	return
 
 Route110_EventScript_14FF56:: @ 814FF56
-	movespriteperm 29, 33, 55
+	setobjectxyperm 29, 33, 55
 	return
 
 Route110_EventScript_14FF5E:: @ 814FF5E
-	movespriteperm 29, 34, 55
+	setobjectxyperm 29, 34, 55
 	return
 
 Route110_EventScript_14FF66:: @ 814FF66
-	movespriteperm 29, 35, 55
+	setobjectxyperm 29, 35, 55
 	return
 
 Route110_Movement_14FF6E:: @ 814FF6E

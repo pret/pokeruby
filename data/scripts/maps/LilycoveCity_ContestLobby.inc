@@ -28,7 +28,7 @@ LilycoveCity_ContestLobby_EventScript_158898:: @ 8158898
 	msgbox LilycoveCity_ContestLobby_Text_18890F, 4
 	lockall
 	fadescreen 1
-	showcontestwinner 0
+	drawcontestwinner 0
 	lockall
 	msgbox LilycoveCity_ContestLobby_Text_1889FD, 5
 	compare RESULT, 1
@@ -40,7 +40,7 @@ LilycoveCity_ContestLobby_EventScript_158898:: @ 8158898
 
 LilycoveCity_ContestLobby_EventScript_1588DE:: @ 81588DE
 	msgbox LilycoveCity_ContestLobby_Text_188AE8, 4
-	closebutton
+	closemessage
 	special sub_80C4CEC
 	setvar 0x4099, 0
 	specialvar RESULT, GiveMonArtistRibbon
@@ -59,7 +59,7 @@ LilycoveCity_ContestLobby_EventScript_158918:: @ 8158918
 	compare RESULT, 1
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_1588DE
 	msgbox LilycoveCity_ContestLobby_Text_188CBD, 4
-	closebutton
+	closemessage
 	applymovement 4, LilycoveCity_ContestLobby_Movement_158A43
 	waitmovement 0
 	setvar 0x4099, 0
@@ -83,7 +83,7 @@ LilycoveCity_ContestLobby_EventScript_158948:: @ 8158948
 	waitfanfare
 	msgbox LilycoveCity_ContestLobby_Text_188C19, 4
 	msgbox LilycoveCity_ContestLobby_Text_188C32, 4
-	closebutton
+	closemessage
 	return
 
 LilycoveCity_ContestLobby_EventScript_158994:: @ 8158994
@@ -203,7 +203,7 @@ LilycoveCity_ContestLobby_EventScript_158A6A:: @ 8158A6A
 	msgbox LilycoveCity_ContestLobby_Text_18890F, 4
 	lockall
 	fadescreen 1
-	showcontestwinner 0
+	drawcontestwinner 0
 	msgbox LilycoveCity_ContestLobby_Text_1889FD, 5
 	compare RESULT, 1
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158AAE
@@ -213,7 +213,7 @@ LilycoveCity_ContestLobby_EventScript_158A6A:: @ 8158A6A
 
 LilycoveCity_ContestLobby_EventScript_158AAE:: @ 8158AAE
 	msgbox LilycoveCity_ContestLobby_Text_188AE8, 4
-	closebutton
+	closemessage
 	special sub_80C4CEC
 	setvar 0x4099, 0
 	specialvar RESULT, GiveMonArtistRibbon
@@ -232,7 +232,7 @@ LilycoveCity_ContestLobby_EventScript_158AE8:: @ 8158AE8
 	compare RESULT, 1
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158AAE
 	msgbox LilycoveCity_ContestLobby_Text_188CBD, 4
-	closebutton
+	closemessage
 	applymovement 11, LilycoveCity_ContestLobby_Movement_158B6D
 	waitmovement 0
 	setvar 0x4099, 0
@@ -256,7 +256,7 @@ LilycoveCity_ContestLobby_EventScript_158B18:: @ 8158B18
 	waitfanfare
 	msgbox LilycoveCity_ContestLobby_Text_188C19, 4
 	msgbox LilycoveCity_ContestLobby_Text_188C32, 4
-	closebutton
+	closemessage
 	return
 
 LilycoveCity_ContestLobby_Movement_158B64:: @ 8158B64
@@ -310,14 +310,14 @@ LilycoveCity_ContestLobby_EventScript_158B85:: @ 8158B85
 	checkflag 2
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158BAE
 	message LilycoveCity_ContestLobby_Text_18848C
-	waittext
+	waitmessage
 	setflag 2
 	goto LilycoveCity_ContestLobby_EventScript_158BF0
 	end
 
 LilycoveCity_ContestLobby_EventScript_158BAE:: @ 8158BAE
 	message LilycoveCity_ContestLobby_Text_188584
-	waittext
+	waitmessage
 	goto LilycoveCity_ContestLobby_EventScript_158BF0
 	end
 
@@ -331,7 +331,7 @@ LilycoveCity_ContestLobby_EventScript_158BC4:: @ 8158BC4
 	compare RESULT, 0
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158C35
 	call S_DoSaveDialog
-	hidebox 0, 0, 15, 9
+	erasebox 0, 0, 15, 9
 	compare RESULT, 0
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158C35
 	setflag 3
@@ -394,7 +394,7 @@ LilycoveCity_ContestLobby_EventScript_158CB2:: @ 8158CB2
 LilycoveCity_ContestLobby_EventScript_158CC0:: @ 8158CC0
 	copyvar 0x8008, 0x8004
 	message LilycoveCity_ContestLobby_Text_1A67A3
-	waittext
+	waitmessage
 	yesnobox 20, 8
 	switch RESULT
 	case 0, LilycoveCity_ContestLobby_EventScript_158C42
@@ -405,7 +405,7 @@ LilycoveCity_ContestLobby_EventScript_158CEA:: @ 8158CEA
 	checkflag 3
 	call_if 0, LilycoveCity_ContestLobby_EventScript_158BC4
 	message LilycoveCity_ContestLobby_Text_1886DC
-	waittext
+	waitmessage
 	multichoice 0, 0, 4, 0
 	switch RESULT
 	case 5, LilycoveCity_ContestLobby_EventScript_158C35
@@ -416,7 +416,7 @@ LilycoveCity_ContestLobby_EventScript_158CEA:: @ 8158CEA
 
 LilycoveCity_ContestLobby_EventScript_158D24:: @ 8158D24
 	message LilycoveCity_ContestLobby_Text_1887C7
-	waittext
+	waitmessage
 	copyvar 0x8004, RESULT
 	special sub_808363C
 	waitstate
@@ -427,7 +427,7 @@ LilycoveCity_ContestLobby_EventScript_158D24:: @ 8158D24
 	compare RESULT, 6
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158DB2
 	message2 LilycoveCity_ContestLobby_Text_18872A
-	waittext
+	waitmessage
 	contestlinktransfer
 	switch 0x8004
 	case 0, LilycoveCity_ContestLobby_EventScript_158DD1
@@ -443,7 +443,7 @@ LilycoveCity_ContestLobby_EventScript_158D82:: @ 8158D82
 LilycoveCity_ContestLobby_EventScript_158D90:: @ 8158D90
 	special CloseLink
 	msgbox LilycoveCity_ContestLobby_Text_18878D, 4
-	closebutton
+	closemessage
 	releaseall
 	clearflag 3
 	end
@@ -451,7 +451,7 @@ LilycoveCity_ContestLobby_EventScript_158D90:: @ 8158D90
 LilycoveCity_ContestLobby_EventScript_158DA1:: @ 8158DA1
 	special CloseLink
 	msgbox LilycoveCity_ContestLobby_Text_1887F4, 4
-	closebutton
+	closemessage
 	releaseall
 	clearflag 3
 	end
@@ -459,7 +459,7 @@ LilycoveCity_ContestLobby_EventScript_158DA1:: @ 8158DA1
 LilycoveCity_ContestLobby_EventScript_158DB2:: @ 8158DB2
 	special CloseLink
 	msgbox LilycoveCity_ContestLobby_Text_18881F, 4
-	closebutton
+	closemessage
 	releaseall
 	clearflag 3
 	end
@@ -474,7 +474,7 @@ LilycoveCity_ContestLobby_EventScript_158DD1:: @ 8158DD1
 	addvar 0x8004, 1
 	buffernum 1, 32772
 	message2 LilycoveCity_ContestLobby_Text_188845
-	waittext
+	waitmessage
 	addvar 0x8004, 65535
 	goto LilycoveCity_ContestLobby_EventScript_158DEE
 	end
@@ -491,9 +491,9 @@ LilycoveCity_ContestLobby_EventScript_158DEE:: @ 8158DEE
 LilycoveCity_ContestLobby_EventScript_158E0B:: @ 8158E0B
 	lockall
 	message2 LilycoveCity_ContestLobby_Text_1888C6
-	waittext
+	waitmessage
 	delay 20
-	closebutton
+	closemessage
 	applymovement 2, LilycoveCity_ContestLobby_Movement_158E9C
 	waitmovement 0
 	playse 71
@@ -512,9 +512,9 @@ LilycoveCity_ContestLobby_EventScript_158E0B:: @ 8158E0B
 	applymovement 255, LilycoveCity_ContestLobby_Movement_158E99
 	waitmovement 0
 	message2 LilycoveCity_ContestLobby_Text_1A6832
-	waittext
+	waitmessage
 	delay 20
-	closebutton
+	closemessage
 	applymovement 2, LilycoveCity_ContestLobby_Movement_158EA4
 	applymovement 255, LilycoveCity_ContestLobby_Movement_158E8E
 	waitmovement 0
@@ -651,7 +651,7 @@ LilycoveCity_ContestLobby_EventScript_158F86:: @ 8158F86
 	applymovement 255, LilycoveCity_ContestLobby_Movement_159008
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_1A6832, 4
-	closebutton
+	closemessage
 	applymovement 1, LilycoveCity_ContestLobby_Movement_159013
 	applymovement 255, LilycoveCity_ContestLobby_Movement_158FFE
 	waitmovement 0
@@ -735,21 +735,21 @@ LilycoveCity_ContestLobby_EventScript_15905D:: @ 815905D
 LilycoveCity_ContestLobby_EventScript_159066:: @ 8159066
 	lockall
 	fadescreen 1
-	showcontestwinner 6
+	drawcontestwinner 6
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_15906D:: @ 815906D
 	lockall
 	fadescreen 1
-	showcontestwinner 7
+	drawcontestwinner 7
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_159074:: @ 8159074
 	lockall
 	fadescreen 1
-	showcontestwinner 8
+	drawcontestwinner 8
 	releaseall
 	end
 
@@ -766,6 +766,6 @@ SlateportCity_ContestLobby_EventScript_15908D:: @ 815908D
 	lockall
 	special ShowBerryBlenderRecordWindow
 	waitbutton
-	hidebox 0, 0, 29, 19
+	erasebox 0, 0, 29, 19
 	releaseall
 	end

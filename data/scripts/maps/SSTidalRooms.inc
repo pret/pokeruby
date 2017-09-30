@@ -23,7 +23,7 @@ SSTidalRooms_EventScript_15FF3D:: @ 815FF3D
 SSTidalRooms_EventScript_15FF47:: @ 815FF47
 	lockall
 	msgbox SSTidalRooms_Text_19956B, 4
-	closebutton
+	closemessage
 	call SSTidalRooms_EventScript_1A02CA
 	call SSTidalRooms_EventScript_15FD64
 	releaseall

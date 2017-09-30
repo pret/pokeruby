@@ -9,7 +9,7 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_158425:: @ 8158425
 	lockall
 	applymovement 2, LilycoveCity_LilycoveMuseum_1F_Movement_1A0839
 	message LilycoveCity_LilycoveMuseum_1F_Text_1873B9
-	waittext
+	waitmessage
 	multichoice 20, 8, 16, 1
 	compare RESULT, 0
 	goto_if_eq LilycoveCity_LilycoveMuseum_1F_EventScript_158458

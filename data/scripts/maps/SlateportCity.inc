@@ -23,27 +23,27 @@ SlateportCity_EventScript_14BA5C:: @ 814BA5C
 	return
 
 SlateportCity_EventScript_14BA68:: @ 814BA68
-	movespriteperm 11, 28, 13
-	movespriteperm 7, 25, 13
-	movespriteperm 3, 25, 14
-	movespriteperm 6, 27, 16
-	movespriteperm 8, 28, 16
-	movespriteperm 1, 29, 16
-	movespriteperm 2, 31, 14
-	spritebehave 11, 8
-	spritebehave 7, 18
-	spritebehave 3, 16
-	spritebehave 6, 7
-	spritebehave 8, 7
-	spritebehave 1, 7
-	spritebehave 2, 9
+	setobjectxyperm 11, 28, 13
+	setobjectxyperm 7, 25, 13
+	setobjectxyperm 3, 25, 14
+	setobjectxyperm 6, 27, 16
+	setobjectxyperm 8, 28, 16
+	setobjectxyperm 1, 29, 16
+	setobjectxyperm 2, 31, 14
+	setobjectmovementtype 11, 8
+	setobjectmovementtype 7, 18
+	setobjectmovementtype 3, 16
+	setobjectmovementtype 6, 7
+	setobjectmovementtype 8, 7
+	setobjectmovementtype 1, 7
+	setobjectmovementtype 2, 9
 	return
 
 SlateportCity_EventScript_14BAB6:: @ 814BAB6
 	lock
 	faceplayer
 	message SlateportCity_Text_164642
-	waittext
+	waitmessage
 	pokemart SlateportCity_Items1
 	msgbox SlateportCity_Text_1A0C02, 4
 	release
@@ -76,7 +76,7 @@ SlateportCity_EventScript_14BAE0:: @ 814BAE0
 	playfanfare 370
 	message SlateportCity_Text_1646DD
 	waitfanfare
-	waittext
+	waitmessage
 	msgbox SlateportCity_Text_1646FC, 4
 	special GivLeadMonEffortRibbon
 	release
@@ -307,7 +307,7 @@ SlateportCity_EventScript_14BD3A:: @ 814BD3A
 	lock
 	faceplayer
 	msgbox SlateportCity_Text_164C64, 4
-	closebutton
+	closemessage
 	applymovement 5, SlateportCity_Movement_1A083D
 	waitmovement 0
 	release
@@ -317,7 +317,7 @@ SlateportCity_EventScript_14BD51:: @ 814BD51
 	lock
 	faceplayer
 	msgbox SlateportCity_Text_164C9F, 4
-	closebutton
+	closemessage
 	applymovement 19, SlateportCity_Movement_1A083D
 	waitmovement 0
 	release
@@ -327,7 +327,7 @@ SlateportCity_EventScript_14BD68:: @ 814BD68
 	lock
 	faceplayer
 	msgbox SlateportCity_Text_164CE8, 4
-	closebutton
+	closemessage
 	applymovement 20, SlateportCity_Movement_1A083D
 	waitmovement 0
 	release
@@ -337,7 +337,7 @@ SlateportCity_EventScript_14BD7F:: @ 814BD7F
 	lock
 	faceplayer
 	msgbox SlateportCity_Text_164D2B, 4
-	closebutton
+	closemessage
 	applymovement 27, SlateportCity_Movement_1A083D
 	waitmovement 0
 	release
@@ -347,7 +347,7 @@ SlateportCity_EventScript_14BD96:: @ 814BD96
 	lock
 	faceplayer
 	msgbox SlateportCity_Text_164D92, 4
-	closebutton
+	closemessage
 	applymovement 28, SlateportCity_Movement_1A083D
 	waitmovement 0
 	release
@@ -357,7 +357,7 @@ SlateportCity_EventScript_14BDAD:: @ 814BDAD
 	lock
 	faceplayer
 	msgbox SlateportCity_Text_164DD5, 4
-	closebutton
+	closemessage
 	applymovement 29, SlateportCity_Movement_1A083D
 	waitmovement 0
 	release
@@ -367,7 +367,7 @@ SlateportCity_EventScript_14BDC4:: @ 814BDC4
 	lock
 	faceplayer
 	msgbox SlateportCity_Text_164DF4, 4
-	closebutton
+	closemessage
 	applymovement 30, SlateportCity_Movement_1A083D
 	waitmovement 0
 	release
@@ -377,7 +377,7 @@ SlateportCity_EventScript_14BDDB:: @ 814BDDB
 	lock
 	faceplayer
 	msgbox SlateportCity_Text_164E46, 4
-	closebutton
+	closemessage
 	applymovement 31, SlateportCity_Movement_1A083D
 	waitmovement 0
 	release
@@ -387,7 +387,7 @@ SlateportCity_EventScript_14BDF2:: @ 814BDF2
 	lock
 	faceplayer
 	message SlateportCity_Text_1A0BE4
-	waittext
+	waitmessage
 	pokemartdecor SlateportCity_Decorations1
 	msgbox SlateportCity_Text_1A0C02, 4
 	release
@@ -413,7 +413,7 @@ SlateportCity_EventScript_14BE20:: @ 814BE20
 	checkflag 96
 	goto_if 0, SlateportCity_EventScript_14BE16
 	message SlateportCity_Text_1A0BE4
-	waittext
+	waitmessage
 	pokemartdecor SlateportCity_Decorations2
 	msgbox SlateportCity_Text_1A0C02, 4
 	release
@@ -445,7 +445,7 @@ SlateportCity_Decorations2:: @ 814BE40
 	checkflag 96
 	goto_if 0, SlateportCity_EventScript_14BE16
 	message SlateportCity_Text_1A0BE4
-	waittext
+	waitmessage
 	pokemartdecor SlateportCity_Decorations3
 	msgbox SlateportCity_Text_1A0C02, 4
 	release
@@ -472,7 +472,7 @@ SlateportCity_EventScript_14BE9A:: @ 814BE9A
 	lock
 	faceplayer
 	message SlateportCity_Text_1A0BE4
-	waittext
+	waitmessage
 	pokemart SlateportCity_Items2
 	msgbox SlateportCity_Text_1A0C02, 4
 	release
@@ -490,7 +490,7 @@ SlateportCity_EventScript_14BEBC:: @ 814BEBC
 	lockall
 	msgbox SlateportCity_Text_165498, 4
 	msgbox SlateportCity_Text_1654E0, 4
-	closebutton
+	closemessage
 	applymovement 10, SlateportCity_Movement_1A0843
 	waitmovement 0
 	delay 10
@@ -528,7 +528,7 @@ SlateportCity_EventScript_14BEBC:: @ 814BEBC
 	applymovement 11, SlateportCity_Movement_1A0839
 	waitmovement 0
 	msgbox SlateportCity_Text_16583A, 4
-	closebutton
+	closemessage
 	applymovement 11, SlateportCity_Movement_14BFFB
 	applymovement 255, SlateportCity_Movement_14C008
 	waitmovement 0

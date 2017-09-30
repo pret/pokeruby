@@ -20,7 +20,7 @@ Route101_EventScript_14E948:: @ 814E948
 	lockall
 	playbgm 410, 1
 	msgbox Route101_Text_16D10E, 4
-	closebutton
+	closemessage
 	setobjectxy 2, 0, 15
 	setobjectxy 4, 0, 16
 	applymovement 255, Route101_Movement_14EA2C
@@ -36,7 +36,7 @@ Route101_EventScript_14E948:: @ 814E948
 	applymovement 2, Route101_Movement_14EA58
 	waitmovement 0
 	msgbox Route101_Text_16D119, 4
-	closebutton
+	closemessage
 	setvar 0x4060, 2
 	releaseall
 	end
@@ -44,7 +44,7 @@ Route101_EventScript_14E948:: @ 814E948
 Route101_EventScript_14E9B8:: @ 814E9B8
 	lockall
 	msgbox Route101_Text_16D15E, 4
-	closebutton
+	closemessage
 	applymovement 255, Route101_Movement_14E9FA
 	waitmovement 0
 	releaseall
@@ -53,7 +53,7 @@ Route101_EventScript_14E9B8:: @ 814E9B8
 Route101_EventScript_14E9CE:: @ 814E9CE
 	lockall
 	msgbox Route101_Text_16D15E, 4
-	closebutton
+	closemessage
 	applymovement 255, Route101_Movement_14E9FC
 	waitmovement 0
 	releaseall
@@ -62,7 +62,7 @@ Route101_EventScript_14E9CE:: @ 814E9CE
 Route101_EventScript_14E9E4:: @ 814E9E4
 	lockall
 	msgbox Route101_Text_16D15E, 4
-	closebutton
+	closemessage
 	applymovement 255, Route101_Movement_14E9FE
 	waitmovement 0
 	releaseall

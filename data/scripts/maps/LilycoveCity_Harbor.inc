@@ -28,12 +28,12 @@ LilycoveCity_Harbor_EventScript_1598CD:: @ 81598CD
 	compare RESULT, 0
 	goto_if_eq LilycoveCity_Harbor_EventScript_159929
 	message LilycoveCity_Harbor_Text_18B406
-	waittext
+	waitmessage
 	goto LilycoveCity_Harbor_EventScript_1598F1
 	end
 
 LilycoveCity_Harbor_EventScript_1598F1:: @ 81598F1
-	multichoicedef 18, 6, 56, 2, 0
+	multichoicedefault 18, 6, 56, 2, 0
 	switch RESULT
 	case 0, LilycoveCity_Harbor_EventScript_159933
 	case 1, LilycoveCity_Harbor_EventScript_15995B
@@ -69,13 +69,13 @@ LilycoveCity_Harbor_EventScript_15995B:: @ 815995B
 
 LilycoveCity_Harbor_EventScript_15997E:: @ 815997E
 	message LilycoveCity_Harbor_Text_18B4E2
-	waittext
+	waitmessage
 	goto LilycoveCity_Harbor_EventScript_1598F1
 	end
 
 LilycoveCity_Harbor_EventScript_15998A:: @ 815998A
 	msgbox LilycoveCity_Harbor_Text_18B4B3, 4
-	closebutton
+	closemessage
 	applymovement LAST_TALKED, LilycoveCity_Harbor_Movement_1A0841
 	waitmovement 0
 	delay 30
@@ -113,7 +113,7 @@ LilycoveCity_Harbor_EventScript_1599EE:: @ 81599EE
 	checkflag 2131
 	goto_if 0, LilycoveCity_Harbor_EventScript_1598BA
 	msgbox LilycoveCity_Harbor_Text_1C50F2, 4
-	closebutton
+	closemessage
 	applymovement LAST_TALKED, LilycoveCity_Harbor_Movement_1A0841
 	waitmovement 0
 	delay 30
@@ -124,7 +124,7 @@ LilycoveCity_Harbor_EventScript_1599EE:: @ 81599EE
 	applymovement 4, LilycoveCity_Harbor_Movement_1A0839
 	waitmovement 0
 	msgbox LilycoveCity_Harbor_Text_1C5120, 4
-	closebutton
+	closemessage
 	applymovement 4, LilycoveCity_Harbor_Movement_1A0841
 	waitmovement 0
 	delay 30

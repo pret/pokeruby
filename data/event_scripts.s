@@ -390,7 +390,7 @@ gUnknown_0815F36C:: @ 815F36C
 	message UnknownString_81A3A72
 	doanimation 61
 	waitstate
-	waittext
+	waitmessage
 	waitbutton
 	playse 5
 	goto EventScript_15F384
@@ -398,7 +398,7 @@ gUnknown_0815F36C:: @ 815F36C
 
 EventScript_15F384:
 	message UnknownString_81A3A87
-	waittext
+	waitmessage
 	checkflag 268
 	goto_if_eq EventScript_15F3A0
 	goto EventScript_15F3E2
@@ -432,7 +432,7 @@ EventScript_15F419:
 	msgbox UnknownString_81A38FB, 5
 	compare RESULT, 0
 	goto_if_eq EventScript_15F384
-	closebutton
+	closemessage
 	special SecretBasePC_PackUp
 	releaseall
 	end
@@ -451,7 +451,7 @@ gUnknown_0815F43A:: @ 815F43A
 	playse 2
 	doanimation 61
 	waitstate
-	waittext
+	waitmessage
 	waitbutton
 	playse 5
 	goto EventScript_15F452
@@ -459,7 +459,7 @@ gUnknown_0815F43A:: @ 815F43A
 
 EventScript_15F452:
 	message UnknownString_81A3A87
-	waittext
+	waitmessage
 	multichoice 0, 0, 7, 0
 	switch RESULT
 	case 0, EventScript_15F4A1
@@ -503,19 +503,19 @@ EventScript_15F4E0:
 EventScript_15F503:
 	msgbox UnknownString_81A39C0, 3
 	special sub_80C683C
-	closebutton
+	closemessage
 	releaseall
 	end
 
 EventScript_15F511:
 	message UnknownString_81A3AA2
-	waittext
+	waitmessage
 	goto EventScript_15F452
 	end
 
 EventScript_15F51D:
 	special sub_80C683C
-	closebutton
+	closemessage
 	releaseall
 	end
 
@@ -890,7 +890,7 @@ Std_2:
 	lock
 	faceplayer
 	message 0x0
-	waittext
+	waitmessage
 	waitbutton
 	release
 	return
@@ -898,20 +898,20 @@ Std_2:
 Std_3:
 	lockall
 	message 0x0
-	waittext
+	waitmessage
 	waitbutton
 	releaseall
 	return
 
 Std_4:
 	message 0x0
-	waittext
+	waitmessage
 	waitbutton
 	return
 
 Std_5:
 	message 0x0
-	waittext
+	waitmessage
 	yesnobox 20, 8
 	return
 
@@ -961,7 +961,7 @@ gUnknown_0819F840:: @ 819F840
 
 EventScript_19F870:
 	special ScrSpecial_ShowTrainerNonBattlingSpeech
-	waittext
+	waitmessage
 	waitbutton
 	release
 	end
@@ -984,7 +984,7 @@ gUnknown_0819F887:: @ 819F887
 	special PlayTrainerEncounterMusic
 	special sub_8082524
 	special ScrSpecial_ShowTrainerIntroSpeech
-	waittext
+	waitmessage
 	waitbutton
 	special ScrSpecial_StartTrainerEyeRematch
 	waitstate
@@ -1004,7 +1004,7 @@ gUnknown_0819F8AE:: @ 819F8AE
 	special PlayTrainerEncounterMusic
 	special sub_8082524
 	special ScrSpecial_ShowTrainerIntroSpeech
-	waittext
+	waitmessage
 	waitbutton
 	special ScrSpecial_StartTrainerEyeRematch
 	waitstate
@@ -1016,7 +1016,7 @@ EventScript_19F8DD:
 
 EventScript_19F8DE:
 	special ScrSpecial_ShowTrainerNonBattlingSpeech
-	waittext
+	waitmessage
 	waitbutton
 	release
 	end
@@ -1032,7 +1032,7 @@ Movement_19F8F0::
 
 EventScript_19F8F2:
 	special ScrSpecial_ShowTrainerIntroSpeech
-	waittext
+	waitmessage
 	waitbutton
 	battlebegin
 	specialvar RESULT, ScrSpecial_GetTrainerBattleMode
@@ -1056,7 +1056,7 @@ EventScript_19F936:
 
 Std_6::
 	message 0x0
-	waittext
+	waitmessage
 	waitbutton
 	release
 	return
@@ -1442,7 +1442,7 @@ VerdanturfTown_PokemonCenter_1F_EventScript_19FD5B:: @ 819FD5B
 do_heal_party:: @ 819FD7C
 	inccounter GAME_STAT_USED_POKECENTER
 	message gText_NurseJoy_OkayIllTakeYourPokemon
-	waittext
+	waitmessage
 	applymovement 0x800b, OldaleTown_PokemonCenter_1F_Movement_1A083F
 	waitmovement 0
 	doanimation 25
@@ -1457,16 +1457,16 @@ do_heal_party:: @ 819FD7C
 
 OldaleTown_PokemonCenter_1F_EventScript_19FDB0:: @ 819FDB0
 	message gText_NurseJoy_ThankYouForWaiting
-	waittext
+	waitmessage
 	applymovement 0x800b, OldaleTown_PokemonCenter_1F_Movement_19FDF4
 	waitmovement 0
 	message gText_NurseJoy_WeHopeToSeeYouAgain
-	waittext
+	waitmessage
 	return
 
 dont_heal_party:: @ 819FDC7
 	message gText_NurseJoy_WeHopeToSeeYouAgain
-	waittext
+	waitmessage
 	return
 
 OldaleTown_PokemonCenter_1F_EventScript_19FDCE:: @ 819FDCE
@@ -1479,7 +1479,7 @@ OldaleTown_PokemonCenter_1F_EventScript_19FDCE:: @ 819FDCE
 
 OldaleTown_PokemonCenter_1F_EventScript_19FDEA:: @ 819FDEA
 	message gText_NurseJoy_Pokerus
-	waittext
+	waitmessage
 	setflag 273
 	return
 
@@ -1546,7 +1546,7 @@ GetItem_HandlePocket_Berries:
 Std_ObtainItem_Success: @ 819FEB7
 	message Message_ObtainedItem
 	waitfanfare
-	waittext
+	waitmessage
 	msgbox Message_PutAwayItem
 	setvar RESULT, 1
 	return
@@ -1581,7 +1581,7 @@ Std_ObtainDecoration_Success: @ 819FF03
 	playfanfare 0x172
 	message Message_ObtainedDecoration
 	waitfanfare
-	waittext
+	waitmessage
 	msgbox Message_TransferredToPC
 	setvar RESULT, 1
 	return
@@ -1610,7 +1610,7 @@ Std_FindItem_Success: @ 819FF52
 	removeobject LAST_TALKED
 	message Message_FoundOneItem
 	waitfanfare
-	waittext
+	waitmessage
 	msgbox Message_PutAwayItem
 	return
 
@@ -1637,7 +1637,7 @@ HiddenItemScript:: @ 819FF7B
 HiddenItemScript_Success:
 	message Message_FoundOneItem
 	waitfanfare
-	waittext
+	waitmessage
 	msgbox Message_PutAwayItem
 	special SetFlagInVar
 	releaseall
@@ -1666,7 +1666,7 @@ UnusedMixRecordsScript_Yes: @ 819FFFA
 	faceplayer
 UnusedMixRecordsScript_Done: @ 81A0000
 	message UnusedMixRecordsSeeYouAgainText
-	waittext
+	waitmessage
 	waitbutton
 	release
 	end
@@ -1682,7 +1682,7 @@ gUnknown_081A0009:: @ 81A0009
 
 EventScript_1A0023:
 	message gPCText_WhichPCShouldBeAccessed
-	waittext
+	waitmessage
 	special ScrSpecial_CreatePCMenu
 	waitstate
 	goto EventScript_1A0033
@@ -1810,7 +1810,7 @@ Route109_EventScript_1A010C:: @ 81A010C
 	return
 
 UseSurfScript:: @ 81A0117
-	checkattack MOVE_SURF
+	checkpokemove MOVE_SURF
 	compare RESULT, 6
 	goto_if_eq UseSurfScript_NoMon
 	bufferpartypoke 0, RESULT
@@ -2197,7 +2197,7 @@ Route101_EventScript_1A039B:: @ 81A039B
 Route101_EventScript_1A03A5:: @ 81A03A5
 	copyvar 0x8004, 0x8009
 	special ShowPokedexRatingMessage
-	waittext
+	waitmessage
 	waitbutton
 	return
 
@@ -2439,7 +2439,7 @@ Route119_EventScript_1A05AE:: @ 81A05AE
 
 Route119_EventScript_1A05C3:: @ 81A05C3
 	msgbox Route119_Text_171BF6, 4
-	closebutton
+	closemessage
 	applymovement LAST_TALKED, Route119_Movement_1A0839
 	waitmovement 0
 	applymovement LAST_TALKED, Route119_Movement_1A0662
@@ -2539,7 +2539,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_1A067F:: @ 81A067F
 	bufferitem 0, 0x8004
 	playfanfare 372
 	message FallarborTown_House1_Text_1A1498
-	waittext
+	waitmessage
 	waitfanfare
 	removeitem 0x8004, 1
 	return
@@ -3260,7 +3260,7 @@ gUnknown_081A14B8:: @ 81A14B8
 
 EventScript_1A14CA::
 	message UnknownString_81A1141
-	waittext
+	waitmessage
 	waitbutton
 	special sub_8081924
 	waitstate
@@ -3599,7 +3599,7 @@ gUnknown_081A2C51:: @ 81A2C51
 	special sub_80BB63C
 	compare RESULT, 1
 	goto_if_eq EventScript_1A2E45
-	checkattack MOVE_SECRET_POWER
+	checkpokemove MOVE_SECRET_POWER
 	setanimation 0, RESULT
 	bufferattack 1, MOVE_SECRET_POWER
 	compare 0x8007, 1
@@ -3625,7 +3625,7 @@ EventScript_1A2CB0:
 	compare RESULT, 0
 	goto_if_eq EventScript_1A2F3A
 	msgbox UsedCutRockSmashText, 4
-	closebutton
+	closemessage
 	doanimation 11
 	waitstate
 	goto EventScript_1A2CFA
@@ -3656,7 +3656,7 @@ EventScript_1A2D08:
 	compare RESULT, 0
 	goto_if_eq EventScript_1A2F3A
 	msgbox UsedCutRockSmashText, 4
-	closebutton
+	closemessage
 	doanimation 26
 	waitstate
 	goto EventScript_1A2D52
@@ -3687,7 +3687,7 @@ EventScript_1A2D60:
 	compare RESULT, 0
 	goto_if_eq EventScript_1A2F3A
 	msgbox UsedCutRockSmashText, 4
-	closebutton
+	closemessage
 	doanimation 27
 	waitstate
 	goto EventScript_1A2DAA
@@ -3710,7 +3710,7 @@ EventScript_1A2DAA:
 	end
 
 EventScript_1A2DB8:
-	closebutton
+	closemessage
 	playse 9
 	setvar 0x4097, 0
 	setflag 173
@@ -3730,13 +3730,13 @@ SecretBase_RedCave1_EventScript_1A2DDE:: @ 81A2DDE
 	msgbox SecretBase_RedCave1_Text_198F89, 5
 	compare RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A2E08
-	closebutton
+	closemessage
 	playse 9
 	special sub_80BC440
 	end
 
 SecretBase_RedCave1_EventScript_1A2E08:: @ 81A2E08
-	closebutton
+	closemessage
 	setflag 96
 	special sub_80BBC78
 	waitstate
@@ -3768,7 +3768,7 @@ EventScript_1A2E38:
 	end
 
 EventScript_1A2E45:
-	checkattack MOVE_SECRET_POWER
+	checkpokemove MOVE_SECRET_POWER
 	compare RESULT, 6
 	goto_if_eq EventScript_1A2EF7
 	setanimation 0, RESULT
@@ -3783,7 +3783,7 @@ EventScript_1A2E45:
 	goto_if_eq EventScript_1A2F3A
 	fadescreen 1
 	special sub_80BC50C
-	closebutton
+	closemessage
 	fadescreen 0
 	msgbox UnknownString_81A3CC9, 5
 	compare RESULT, 0
@@ -3791,8 +3791,8 @@ EventScript_1A2E45:
 	bufferpartypoke 0, 0x8004
 	bufferattack 1, MOVE_SECRET_POWER
 	msgbox UsedCutRockSmashText, 4
-	closebutton
-	closebutton
+	closemessage
+	closemessage
 	compare 0x8007, 1
 	goto_if_eq gUnknown_081A2CE6
 	compare 0x8007, 2
@@ -3824,7 +3824,7 @@ EventScript_1A2EF7::
 	end
 
 EventScript_1A2F3A::
-	closebutton
+	closemessage
 	releaseall
 	end
 
@@ -3947,7 +3947,7 @@ SecretBase_RedCave1_EventScript_1A3032:: @ 81A3032
 	call S_DoSaveDialog
 	compare RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_1A308F
-	hidebox 0, 0, 15, 10
+	erasebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A1B83, 4
 	goto SecretBase_RedCave1_EventScript_1A350A
 	end
@@ -3959,7 +3959,7 @@ SecretBase_RedCave1_EventScript_1A3086:: @ 81A3086
 SecretBase_RedCave1_EventScript_1A308F:: @ 81A308F
 	setvar RESULT, 0
 	special sub_80BCE4C
-	hidebox 0, 0, 15, 10
+	erasebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A1B97, 2
 	end
 
@@ -3982,7 +3982,7 @@ SecretBase_RedCave1_EventScript_1A30AE:: @ 81A30AE
 	call S_DoSaveDialog
 	compare RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_1A310B
-	hidebox 0, 0, 15, 10
+	erasebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A1F04, 4
 	goto SecretBase_RedCave1_EventScript_1A350A
 	end
@@ -3994,7 +3994,7 @@ SecretBase_RedCave1_EventScript_1A3102:: @ 81A3102
 SecretBase_RedCave1_EventScript_1A310B:: @ 81A310B
 	setvar RESULT, 0
 	special sub_80BCE4C
-	hidebox 0, 0, 15, 10
+	erasebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A1F2E, 2
 	end
 
@@ -4017,7 +4017,7 @@ SecretBase_RedCave1_EventScript_1A312A:: @ 81A312A
 	call S_DoSaveDialog
 	compare RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3187
-	hidebox 0, 0, 15, 10
+	erasebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A2220, 4
 	goto SecretBase_RedCave1_EventScript_1A350A
 	end
@@ -4029,7 +4029,7 @@ SecretBase_RedCave1_EventScript_1A317E:: @ 81A317E
 SecretBase_RedCave1_EventScript_1A3187:: @ 81A3187
 	setvar RESULT, 0
 	special sub_80BCE4C
-	hidebox 0, 0, 15, 10
+	erasebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A2230, 2
 	end
 
@@ -4052,7 +4052,7 @@ SecretBase_RedCave1_EventScript_1A31A6:: @ 81A31A6
 	call S_DoSaveDialog
 	compare RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3203
-	hidebox 0, 0, 15, 10
+	erasebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A256F, 4
 	goto SecretBase_RedCave1_EventScript_1A350A
 	end
@@ -4064,7 +4064,7 @@ SecretBase_RedCave1_EventScript_1A31FA:: @ 81A31FA
 SecretBase_RedCave1_EventScript_1A3203:: @ 81A3203
 	setvar RESULT, 0
 	special sub_80BCE4C
-	hidebox 0, 0, 15, 10
+	erasebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A258A, 2
 	end
 
@@ -4087,7 +4087,7 @@ SecretBase_RedCave1_EventScript_1A3222:: @ 81A3222
 	call S_DoSaveDialog
 	compare RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_1A327F
-	hidebox 0, 0, 15, 10
+	erasebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A28D7, 4
 	goto SecretBase_RedCave1_EventScript_1A350A
 	end
@@ -4099,7 +4099,7 @@ SecretBase_RedCave1_EventScript_1A3276:: @ 81A3276
 SecretBase_RedCave1_EventScript_1A327F:: @ 81A327F
 	setvar RESULT, 0
 	special sub_80BCE4C
-	hidebox 0, 0, 15, 10
+	erasebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A28F4, 2
 	end
 
@@ -4122,7 +4122,7 @@ SecretBase_RedCave1_EventScript_1A329E:: @ 81A329E
 	call S_DoSaveDialog
 	compare RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_1A32FB
-	hidebox 0, 0, 15, 10
+	erasebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A1D48, 4
 	goto SecretBase_RedCave1_EventScript_1A350A
 	end
@@ -4134,7 +4134,7 @@ SecretBase_RedCave1_EventScript_1A32F2:: @ 81A32F2
 SecretBase_RedCave1_EventScript_1A32FB:: @ 81A32FB
 	setvar RESULT, 0
 	special sub_80BCE4C
-	hidebox 0, 0, 15, 10
+	erasebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A1D59, 2
 	end
 
@@ -4157,7 +4157,7 @@ SecretBase_RedCave1_EventScript_1A331A:: @ 81A331A
 	call S_DoSaveDialog
 	compare RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3377
-	hidebox 0, 0, 15, 10
+	erasebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A2095, 4
 	goto SecretBase_RedCave1_EventScript_1A350A
 	end
@@ -4169,7 +4169,7 @@ SecretBase_RedCave1_EventScript_1A336E:: @ 81A336E
 SecretBase_RedCave1_EventScript_1A3377:: @ 81A3377
 	setvar RESULT, 0
 	special sub_80BCE4C
-	hidebox 0, 0, 15, 10
+	erasebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A20AE, 2
 	end
 
@@ -4192,7 +4192,7 @@ SecretBase_RedCave1_EventScript_1A3396:: @ 81A3396
 	call S_DoSaveDialog
 	compare RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_1A33F3
-	hidebox 0, 0, 15, 10
+	erasebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A2405, 4
 	goto SecretBase_RedCave1_EventScript_1A350A
 	end
@@ -4204,7 +4204,7 @@ SecretBase_RedCave1_EventScript_1A33EA:: @ 81A33EA
 SecretBase_RedCave1_EventScript_1A33F3:: @ 81A33F3
 	setvar RESULT, 0
 	special sub_80BCE4C
-	hidebox 0, 0, 15, 10
+	erasebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A2420, 2
 	end
 
@@ -4227,7 +4227,7 @@ SecretBase_RedCave1_EventScript_1A3412:: @ 81A3412
 	call S_DoSaveDialog
 	compare RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_1A346F
-	hidebox 0, 0, 15, 10
+	erasebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A2710, 4
 	goto SecretBase_RedCave1_EventScript_1A350A
 	end
@@ -4239,7 +4239,7 @@ SecretBase_RedCave1_EventScript_1A3466:: @ 81A3466
 SecretBase_RedCave1_EventScript_1A346F:: @ 81A346F
 	setvar RESULT, 0
 	special sub_80BCE4C
-	hidebox 0, 0, 15, 10
+	erasebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A2736, 2
 	end
 
@@ -4262,7 +4262,7 @@ SecretBase_RedCave1_EventScript_1A348E:: @ 81A348E
 	call S_DoSaveDialog
 	compare RESULT, 0
 	goto_if_eq SecretBase_RedCave1_EventScript_1A34EB
-	hidebox 0, 0, 15, 10
+	erasebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A2AE2, 4
 	goto SecretBase_RedCave1_EventScript_1A350A
 	end
@@ -4274,7 +4274,7 @@ SecretBase_RedCave1_EventScript_1A34E2:: @ 81A34E2
 SecretBase_RedCave1_EventScript_1A34EB:: @ 81A34EB
 	setvar RESULT, 0
 	special sub_80BCE4C
-	hidebox 0, 0, 15, 10
+	erasebox 0, 0, 15, 10
 	msgbox SecretBase_RedCave1_Text_1A2AFB, 2
 	end
 
@@ -4671,7 +4671,7 @@ BattleTower_Lobby_EventScript_1AE1FF:: @ 81AE1FF
 
 BattleTower_Lobby_EventScript_1AE241:: @ 81AE241
 	message BattleTower_Lobby_Text_1A7823
-	waittext
+	waitmessage
 	multichoice 19, 8, 45, 1
 	copyvar 0x8008, RESULT
 	compare RESULT, 0
@@ -4919,7 +4919,7 @@ gUnknown_081C6C02:: @ 81C6C02
 	lockall
 	braillemsg Underwater_SealedChamber_Braille_1C533D
 	waitbutton
-	hidebox 0, 0, 29, 19
+	erasebox 0, 0, 29, 19
 	releaseall
 	end
 

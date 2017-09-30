@@ -10,8 +10,8 @@ RustboroCity_DevonCorp_3F_MapScript1_157721:: @ 8157721
 	end
 
 RustboroCity_DevonCorp_3F_EventScript_15772D:: @ 815772D
-	movespriteperm 2, 3, 2
-	spritebehave 2, 9
+	setobjectxyperm 2, 3, 2
+	setobjectmovementtype 2, 9
 	return
 
 RustboroCity_DevonCorp_3F_MapScript2_157739:: @ 8157739
@@ -29,20 +29,20 @@ RustboroCity_DevonCorp_3F_MapScript2_157748:: @ 8157748
 RustboroCity_DevonCorp_3F_EventScript_157752:: @ 8157752
 	lockall
 	msgbox RustboroCity_DevonCorp_3F_Text_18374C, 4
-	closebutton
+	closemessage
 	applymovement 2, RustboroCity_DevonCorp_3F_Movement_157815
 	waitmovement 0
 	delay 80
 	applymovement 2, RustboroCity_DevonCorp_3F_Movement_15781E
 	waitmovement 0
 	msgbox RustboroCity_DevonCorp_3F_Text_183903, 4
-	closebutton
+	closemessage
 	playbgm 420, 0
 	applymovement 2, RustboroCity_DevonCorp_3F_Movement_157803
 	applymovement 255, RustboroCity_DevonCorp_3F_Movement_157827
 	waitmovement 0
 	msgbox RustboroCity_DevonCorp_3F_Text_18394A, 4
-	closebutton
+	closemessage
 	fadedefaultbgm
 	applymovement 2, RustboroCity_DevonCorp_3F_Movement_157812
 	applymovement 255, RustboroCity_DevonCorp_3F_Movement_157835
@@ -53,7 +53,7 @@ RustboroCity_DevonCorp_3F_EventScript_157752:: @ 8157752
 	playfanfare 370
 	message RustboroCity_DevonCorp_3F_Text_183422
 	waitfanfare
-	waittext
+	waitmessage
 	setflag 2050
 	setflag 188
 	msgbox RustboroCity_DevonCorp_3F_Text_183439, 4
@@ -151,7 +151,7 @@ RustboroCity_DevonCorp_3F_EventScript_15783B:: @ 815783B
 	checkflag 189
 	goto_if_eq RustboroCity_DevonCorp_3F_EventScript_157864
 	msgbox RustboroCity_DevonCorp_3F_Text_18351E, 4
-	closebutton
+	closemessage
 	applymovement LAST_TALKED, RustboroCity_DevonCorp_3F_Movement_1A083D
 	waitmovement 0
 	release
@@ -164,7 +164,7 @@ RustboroCity_DevonCorp_3F_EventScript_157864:: @ 8157864
 	goto_if_eq RustboroCity_DevonCorp_3F_EventScript_1A029B
 	setflag 272
 	msgbox RustboroCity_DevonCorp_3F_Text_1835B3, 4
-	closebutton
+	closemessage
 	applymovement LAST_TALKED, RustboroCity_DevonCorp_3F_Movement_1A083D
 	waitmovement 0
 	release
@@ -172,7 +172,7 @@ RustboroCity_DevonCorp_3F_EventScript_157864:: @ 8157864
 
 RustboroCity_DevonCorp_3F_EventScript_15789B:: @ 815789B
 	msgbox RustboroCity_DevonCorp_3F_Text_18368D, 4
-	closebutton
+	closemessage
 	applymovement LAST_TALKED, RustboroCity_DevonCorp_3F_Movement_1A083D
 	waitmovement 0
 	release

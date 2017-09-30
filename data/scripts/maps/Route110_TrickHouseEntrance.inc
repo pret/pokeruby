@@ -106,8 +106,8 @@ Route110_TrickHouseEntrance_EventScript_161088:: @ 8161088
 	return
 
 Route110_TrickHouseEntrance_EventScript_16108E:: @ 816108E
-	movespriteperm 1, 5, 2
-	spritebehave 1, 4
+	setobjectxyperm 1, 5, 2
+	setobjectmovementtype 1, 4
 	end
 
 Route110_TrickHouseEntrance_EventScript_16109A:: @ 816109A
@@ -216,7 +216,7 @@ Route110_TrickHouseEntrance_EventScript_1611D7:: @ 81611D7
 	compare 0x4044, 0
 	call_if 1, Route110_TrickHouseEntrance_EventScript_161327
 	msgbox Route110_TrickHouseEntrance_Text_19BD82, 4
-	closebutton
+	closemessage
 	delay 20
 	applymovement 1, Route110_TrickHouseEntrance_Movement_161315
 	waitmovement 0
@@ -264,7 +264,7 @@ Route110_TrickHouseEntrance_EventScript_16124D:: @ 816124D
 	call_if 1, Route110_TrickHouseEntrance_EventScript_161303
 	compare 0x4044, 7
 	call_if 1, Route110_TrickHouseEntrance_EventScript_16130C
-	closebutton
+	closemessage
 	setvar 0x40a6, 1
 	warp Route110_TrickHouseEntrance, 255, 6, 2
 	waitstate
@@ -333,7 +333,7 @@ Route110_TrickHouseEntrance_EventScript_161327:: @ 8161327
 
 Route110_TrickHouseEntrance_EventScript_161330:: @ 8161330
 	msgbox Route110_TrickHouseEntrance_Text_19BF19, 4
-	closebutton
+	closemessage
 	applymovement 1, Route110_TrickHouseEntrance_Movement_1A0839
 	waitmovement 0
 	playse 21
@@ -464,7 +464,7 @@ Route110_TrickHouseEntrance_EventScript_161518:: @ 8161518
 
 Route110_TrickHouseEntrance_EventScript_161551:: @ 8161551
 	msgbox Route110_TrickHouseEntrance_Text_19C17E, 4
-	closebutton
+	closemessage
 	applymovement 1, Route110_TrickHouseEntrance_Movement_16309F
 	waitmovement 0
 	applymovement 1, Route110_TrickHouseEntrance_Movement_161315
@@ -494,7 +494,7 @@ Route110_TrickHouseEntrance_EventScript_1615BD:: @ 81615BD
 
 Route110_TrickHouseEntrance_EventScript_1615C7:: @ 81615C7
 	msgbox Route110_TrickHouseEntrance_Text_19BE7D, 5
-	closebutton
+	closemessage
 	compare RESULT, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_1615DD
 	releaseall
@@ -717,7 +717,7 @@ Route110_TrickHousePuzzle8_EventScript_16189C:: @ 816189C
 	playfanfare 370
 	message Route110_TrickHousePuzzle1_Text_19C1B8
 	waitfanfare
-	waittext
+	waitmessage
 	msgbox Route110_TrickHousePuzzle1_Text_19C1CB, 4
 	releaseall
 	end

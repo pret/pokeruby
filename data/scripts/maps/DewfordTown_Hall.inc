@@ -52,7 +52,7 @@ DewfordTown_Hall_EventScript_15330A:: @ 815330A
 	faceplayer
 	call DewfordTown_Hall_EventScript_1A0102
 	msgbox DewfordTown_Hall_Text_17570D, 4
-	closebutton
+	closemessage
 	applymovement 4, DewfordTown_Hall_Movement_1A0841
 	waitmovement 0
 	release
@@ -63,7 +63,7 @@ DewfordTown_Hall_EventScript_153326:: @ 8153326
 	faceplayer
 	call DewfordTown_Hall_EventScript_1A0102
 	msgbox DewfordTown_Hall_Text_17574C, 4
-	closebutton
+	closemessage
 	applymovement 5, DewfordTown_Hall_Movement_1A0841
 	waitmovement 0
 	release

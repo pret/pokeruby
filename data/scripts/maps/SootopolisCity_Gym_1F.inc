@@ -97,7 +97,7 @@ SootopolisCity_Gym_1F_EventScript_15AFFF:: @ 815AFFF
 
 SootopolisCity_Gym_1F_EventScript_15B02D:: @ 815B02D
 	message SootopolisCity_Gym_1F_Text_18F342
-	waittext
+	waitmessage
 	call SootopolisCity_Gym_1F_EventScript_1A02C5
 	msgbox SootopolisCity_Gym_1F_Text_18F36B, 4
 	setflag 1236

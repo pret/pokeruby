@@ -36,18 +36,18 @@ LittlerootTown_BrendansHouse_1F_MapScript1_15268A:: @ 815268A
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_1526AC:: @ 81526AC
-	movespriteperm 1, 8, 4
-	spritebehave 1, 7
+	setobjectxyperm 1, 8, 4
+	setobjectmovementtype 1, 7
 	return
 
 LittlerootTown_BrendansHouse_1F_EventScript_1526B8:: @ 81526B8
-	movespriteperm 1, 4, 5
-	spritebehave 1, 7
+	setobjectxyperm 1, 4, 5
+	setobjectmovementtype 1, 7
 	return
 
 LittlerootTown_BrendansHouse_1F_EventScript_1526C4:: @ 81526C4
-	movespriteperm 1, 9, 8
-	spritebehave 1, 7
+	setobjectxyperm 1, 9, 8
+	setobjectmovementtype 1, 7
 	return
 
 LittlerootTown_BrendansHouse_1F_MapScript2_1526D0:: @ 81526D0
@@ -61,7 +61,7 @@ LittlerootTown_BrendansHouse_1F_MapScript2_1526D0:: @ 81526D0
 LittlerootTown_BrendansHouse_1F_EventScript_1526FA:: @ 81526FA
 	lockall
 	msgbox LittlerootTown_BrendansHouse_1F_Text_172574, 4
-	closebutton
+	closemessage
 	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_152720
 	applymovement 1, LittlerootTown_BrendansHouse_1F_Movement_152720
 	waitmovement 0

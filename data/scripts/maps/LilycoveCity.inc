@@ -411,7 +411,7 @@ LilycoveCity_EventScript_14CF62:: @ 814CF62
 	return
 
 LilycoveCity_EventScript_14CF6B:: @ 814CF6B
-	closebutton
+	closemessage
 	applymovement LAST_TALKED, LilycoveCity_Movement_1A0845
 	waitmovement 0
 	delay 50

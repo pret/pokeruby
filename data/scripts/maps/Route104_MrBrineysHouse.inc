@@ -15,10 +15,10 @@ Route104_MrBrineysHouse_EventScript_15BCD0:: @ 815BCD0
 	return
 
 Route104_MrBrineysHouse_EventScript_15BCD4:: @ 815BCD4
-	movespriteperm 1, 9, 3
-	spritebehave 1, 50
-	movespriteperm 2, 9, 6
-	spritebehave 2, 51
+	setobjectxyperm 1, 9, 3
+	setobjectmovementtype 1, 50
+	setobjectxyperm 2, 9, 6
+	setobjectmovementtype 2, 51
 	return
 
 Route104_MrBrineysHouse_EventScript_15BCEB:: @ 815BCEB
@@ -44,8 +44,8 @@ Route104_MrBrineysHouse_EventScript_15BD0E:: @ 815BD0E
 
 Route104_MrBrineysHouse_EventScript_15BD32:: @ 815BD32
 	message Route104_MrBrineysHouse_Text_191E80
-	waittext
-	multichoicedef 21, 8, 14, 1, 0
+	waitmessage
+	multichoicedefault 21, 8, 14, 1, 0
 	switch RESULT
 	case 0, Route104_MrBrineysHouse_EventScript_15BDAB
 	case 1, Route104_MrBrineysHouse_EventScript_15BDA1

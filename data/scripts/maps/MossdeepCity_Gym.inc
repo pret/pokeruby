@@ -58,7 +58,7 @@ MossdeepCity_Gym_EventScript_15A56B:: @ 815A56B
 
 MossdeepCity_Gym_EventScript_15A594:: @ 815A594
 	message MossdeepCity_Gym_Text_18D0F9
-	waittext
+	waitmessage
 	call MossdeepCity_Gym_EventScript_1A02C5
 	msgbox MossdeepCity_Gym_Text_18D128, 4
 	setflag 1229

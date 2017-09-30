@@ -38,7 +38,7 @@ FallarborTown_ContestLobby_EventScript_1539F8:: @ 81539F8
 	applymovement 255, FallarborTown_ContestLobby_Movement_153A7A
 	waitmovement 0
 	msgbox FallarborTown_ContestLobby_Text_1A6832, 4
-	closebutton
+	closemessage
 	applymovement 1, FallarborTown_ContestLobby_Movement_153A83
 	applymovement 255, FallarborTown_ContestLobby_Movement_153A70
 	waitmovement 0
@@ -108,7 +108,7 @@ FallarborTown_ContestLobby_EventScript_153AB2:: @ 8153AB2
 FallarborTown_ContestLobby_EventScript_153ABB:: @ 8153ABB
 	lockall
 	fadescreen 1
-	showcontestwinner 2
+	drawcontestwinner 2
 	releaseall
 	end
 
@@ -116,6 +116,6 @@ FallarborTown_ContestLobby_EventScript_153AC2:: @ 8153AC2
 	lockall
 	special ShowBerryBlenderRecordWindow
 	waitbutton
-	hidebox 0, 0, 29, 19
+	erasebox 0, 0, 29, 19
 	releaseall
 	end

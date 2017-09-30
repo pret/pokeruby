@@ -74,9 +74,9 @@ Route121_SafariZoneEntrance_EventScript_15C3B3:: @ 815C3B3
 	playfanfare 370
 	message Route121_SafariZoneEntrance_Text_1C3910
 	waitfanfare
-	waittext
+	waitmessage
 	msgbox Route121_SafariZoneEntrance_Text_1C392D, 4
-	closebutton
+	closemessage
 	hidemoney 0, 0
 	applymovement 255, Route121_SafariZoneEntrance_Movement_15C47E
 	waitmovement 0
@@ -111,7 +111,7 @@ Route121_SafariZoneEntrance_EventScript_15C45E:: @ 815C45E
 	end
 
 Route121_SafariZoneEntrance_EventScript_15C46C:: @ 815C46C
-	closebutton
+	closemessage
 	hidemoney 0, 0
 	applymovement 255, Route121_SafariZoneEntrance_Movement_15C47C
 	waitmovement 0

@@ -43,27 +43,27 @@ LavaridgeTown_Gym_1F_EventScript_1536FE:: @ 81536FE
 LavaridgeTown_Gym_1F_EventScript_1536FF:: @ 81536FF
 	checktrainerflag OPPONENT_COLE
 	goto_if_eq LavaridgeTown_Gym_1F_EventScript_15370C
-	spritebehave 2, 63
+	setobjectmovementtype 2, 63
 
 LavaridgeTown_Gym_1F_EventScript_15370C:: @ 815370C
 	checktrainerflag OPPONENT_ZANE
 	goto_if_eq LavaridgeTown_Gym_1F_EventScript_153719
-	spritebehave 3, 63
+	setobjectmovementtype 3, 63
 
 LavaridgeTown_Gym_1F_EventScript_153719:: @ 8153719
 	checktrainerflag OPPONENT_AXLE
 	goto_if_eq LavaridgeTown_Gym_1F_EventScript_153726
-	spritebehave 4, 63
+	setobjectmovementtype 4, 63
 
 LavaridgeTown_Gym_1F_EventScript_153726:: @ 8153726
 	checktrainerflag OPPONENT_SADIE
 	goto_if_eq LavaridgeTown_Gym_1F_EventScript_153733
-	spritebehave 5, 63
+	setobjectmovementtype 5, 63
 
 LavaridgeTown_Gym_1F_EventScript_153733:: @ 8153733
 	checktrainerflag OPPONENT_ANDY
 	goto_if_eq LavaridgeTown_Gym_1F_EventScript_153740
-	spritebehave 7, 63
+	setobjectmovementtype 7, 63
 
 LavaridgeTown_Gym_1F_EventScript_153740:: @ 8153740
 	return
@@ -78,7 +78,7 @@ LavaridgeTown_Gym_1F_EventScript_153741:: @ 8153741
 
 LavaridgeTown_Gym_1F_EventScript_153766:: @ 8153766
 	message LavaridgeTown_Gym_1F_Text_176A62
-	waittext
+	waitmessage
 	call LavaridgeTown_Gym_1F_EventScript_1A02C5
 	msgbox LavaridgeTown_Gym_1F_Text_176A8C, 4
 	setflag 1213

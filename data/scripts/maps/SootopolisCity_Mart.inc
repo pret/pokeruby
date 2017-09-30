@@ -5,7 +5,7 @@ SootopolisCity_Mart_EventScript_15B21B:: @ 815B21B
 	lock
 	faceplayer
 	message SootopolisCity_Mart_Text_1A0BE4
-	waittext
+	waitmessage
 	pokemart SootopolisCity_Mart_Items
 	msgbox SootopolisCity_Mart_Text_1A0C02, 4
 	release

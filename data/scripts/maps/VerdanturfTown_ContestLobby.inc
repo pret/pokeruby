@@ -38,7 +38,7 @@ VerdanturfTown_ContestLobby_EventScript_153DA1:: @ 8153DA1
 	applymovement 255, VerdanturfTown_ContestLobby_Movement_153E23
 	waitmovement 0
 	msgbox VerdanturfTown_ContestLobby_Text_1A6832, 4
-	closebutton
+	closemessage
 	applymovement 1, VerdanturfTown_ContestLobby_Movement_153E2C
 	applymovement 255, VerdanturfTown_ContestLobby_Movement_153E19
 	waitmovement 0
@@ -90,7 +90,7 @@ VerdanturfTown_ContestLobby_Movement_153E35:: @ 8153E35
 VerdanturfTown_ContestLobby_EventScript_153E37:: @ 8153E37
 	lockall
 	fadescreen 1
-	showcontestwinner 1
+	drawcontestwinner 1
 	releaseall
 	end
 
@@ -124,6 +124,6 @@ VerdanturfTown_ContestLobby_EventScript_153E89:: @ 8153E89
 	lockall
 	special ShowBerryBlenderRecordWindow
 	waitbutton
-	hidebox 0, 0, 29, 19
+	erasebox 0, 0, 29, 19
 	releaseall
 	end

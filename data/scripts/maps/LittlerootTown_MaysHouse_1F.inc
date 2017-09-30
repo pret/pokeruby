@@ -36,18 +36,18 @@ LittlerootTown_MaysHouse_1F_MapScript1_1528C8:: @ 81528C8
 	end
 
 LittlerootTown_MaysHouse_1F_EventScript_1528EA:: @ 81528EA
-	movespriteperm 1, 2, 4
-	spritebehave 1, 7
+	setobjectxyperm 1, 2, 4
+	setobjectmovementtype 1, 7
 	return
 
 LittlerootTown_MaysHouse_1F_EventScript_1528F6:: @ 81528F6
-	movespriteperm 1, 6, 5
-	spritebehave 1, 7
+	setobjectxyperm 1, 6, 5
+	setobjectmovementtype 1, 7
 	return
 
 LittlerootTown_MaysHouse_1F_EventScript_152902:: @ 8152902
-	movespriteperm 1, 1, 8
-	spritebehave 1, 7
+	setobjectxyperm 1, 1, 8
+	setobjectmovementtype 1, 7
 	return
 
 LittlerootTown_MaysHouse_1F_MapScript2_15290E:: @ 815290E
@@ -61,7 +61,7 @@ LittlerootTown_MaysHouse_1F_MapScript2_15290E:: @ 815290E
 LittlerootTown_MaysHouse_1F_EventScript_152938:: @ 8152938
 	lockall
 	msgbox LittlerootTown_MaysHouse_1F_Text_172574, 4
-	closebutton
+	closemessage
 	applymovement 255, LittlerootTown_MaysHouse_1F_Movement_15295E
 	applymovement 1, LittlerootTown_MaysHouse_1F_Movement_15295E
 	waitmovement 0

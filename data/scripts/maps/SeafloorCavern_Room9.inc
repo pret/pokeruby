@@ -27,7 +27,7 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	.else
 	msgbox SeafloorCavern_Room9_Text_1B4850, 4
 	.endif
-	closebutton
+	closemessage
 	addobject 0x8004
 	applymovement 255, SeafloorCavern_Room9_Movement_1A083F
 	waitmovement 0
@@ -134,7 +134,7 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	.else
 	msgbox SeafloorCavern_Room9_Text_1B4ADB, 4
 	.endif
-	closebutton
+	closemessage
 	applymovement 0x8004, SeafloorCavern_Room9_Movement_15DD41
 	waitmovement 0
 	.ifdef SAPPHIRE
@@ -142,7 +142,7 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	.else
 	msgbox SeafloorCavern_Room9_Text_1B4B11, 4
 	.endif
-	closebutton
+	closemessage
 	playse 3
 	delay 20
 	applymovement 0x8004, SeafloorCavern_Room9_Movement_1A0845
@@ -152,7 +152,7 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	.else
 	msgbox SeafloorCavern_Room9_Text_1B4C79, 4
 	.endif
-	closebutton
+	closemessage
 	addobject 0x8005
 	addobject 0x8006
 	addobject 0x8007
@@ -182,7 +182,7 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	.else
 	msgbox SeafloorCavern_Room9_Text_1B4E37, 4
 	.endif
-	closebutton
+	closemessage
 	applymovement 0x8005, SeafloorCavern_Room9_Movement_15DD60
 	applymovement 0x8004, SeafloorCavern_Room9_Movement_15DD46
 	waitmovement 0

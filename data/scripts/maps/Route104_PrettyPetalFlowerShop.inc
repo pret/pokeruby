@@ -12,7 +12,7 @@ Route104_PrettyPetalFlowerShop_MapScript1_15BDEA:: @ 815BDEA
 	end
 
 Route104_PrettyPetalFlowerShop_EventScript_15BE03:: @ 815BE03
-	movespriteperm 1, 4, 6
+	setobjectxyperm 1, 4, 6
 	end
 
 Route104_PrettyPetalFlowerShop_EventScript_15BE0B:: @ 815BE0B
@@ -51,7 +51,7 @@ Route104_PrettyPetalFlowerShop_EventScript_15BE73:: @ 815BE73
 
 Route104_PrettyPetalFlowerShop_EventScript_15BE7C:: @ 815BE7C
 	message Route104_PrettyPetalFlowerShop_Text_1A0C42
-	waittext
+	waitmessage
 	pokemartbp Route104_PrettyPetalFlowerShop_Items
 	msgbox Route104_PrettyPetalFlowerShop_Text_1A0C02, 4
 	release

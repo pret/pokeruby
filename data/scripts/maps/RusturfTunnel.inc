@@ -15,15 +15,15 @@ RusturfTunnel_MapScript1_15C762:: @ 815C762
 	end
 
 RusturfTunnel_EventScript_15C773:: @ 815C773
-	movespriteperm 7, 13, 4
-	movespriteperm 6, 13, 5
+	setobjectxyperm 7, 13, 4
+	setobjectxyperm 6, 13, 5
 	return
 
 RusturfTunnel_EventScript_15C782:: @ 815C782
 	lock
 	faceplayer
 	msgbox RusturfTunnel_Text_194766, 4
-	closebutton
+	closemessage
 	applymovement LAST_TALKED, RusturfTunnel_Movement_1A083D
 	waitmovement 0
 	release
@@ -36,7 +36,7 @@ RusturfTunnel_EventScript_15C799:: @ 815C799
 	goto_if_eq RusturfTunnel_EventScript_15C7BC
 	setflag 1
 	msgbox RusturfTunnel_Text_1944C5, 4
-	closebutton
+	closemessage
 	applymovement LAST_TALKED, RusturfTunnel_Movement_1A083D
 	waitmovement 0
 	release
@@ -44,7 +44,7 @@ RusturfTunnel_EventScript_15C799:: @ 815C799
 
 RusturfTunnel_EventScript_15C7BC:: @ 815C7BC
 	msgbox RusturfTunnel_Text_1945B2, 4
-	closebutton
+	closemessage
 	applymovement LAST_TALKED, RusturfTunnel_Movement_1A083D
 	waitmovement 0
 	release
@@ -67,7 +67,7 @@ RusturfTunnel_EventScript_15C7D1:: @ 815C7D1
 	giveitem ITEM_HM04
 	setflag 106
 	msgbox RusturfTunnel_Text_194693, 4
-	closebutton
+	closemessage
 	compare 0x4001, 1
 	call_if 1, RusturfTunnel_EventScript_15C880
 	compare 0x4001, 2
@@ -75,7 +75,7 @@ RusturfTunnel_EventScript_15C7D1:: @ 815C7D1
 	compare 0x4001, 3
 	call_if 1, RusturfTunnel_EventScript_15C8AE
 	msgbox RusturfTunnel_Text_194706, 4
-	closebutton
+	closemessage
 	compare 0x4001, 1
 	call_if 1, RusturfTunnel_EventScript_15C8F7
 	compare 0x4001, 2
@@ -124,7 +124,7 @@ RusturfTunnel_EventScript_15C8EA:: @ 815C8EA
 	return
 
 RusturfTunnel_EventScript_15C8EB:: @ 815C8EB
-	closebutton
+	closemessage
 	applymovement 1, RusturfTunnel_Movement_15C98D
 	waitmovement 0
 	return
@@ -280,12 +280,12 @@ RusturfTunnel_EventScript_15C9A5:: @ 815C9A5
 RusturfTunnel_EventScript_15C9AB:: @ 815C9AB
 	lockall
 	msgbox RusturfTunnel_Text_194159, 4
-	closebutton
+	closemessage
 	applymovement 6, RusturfTunnel_Movement_15C9D3
 	applymovement 7, RusturfTunnel_Movement_15C9D3
 	waitmovement 0
-	moveoffscreen 6
-	moveoffscreen 7
+	moveobjectoffscreen 6
+	moveobjectoffscreen 7
 	setvar 0x409a, 3
 	releaseall
 	end
@@ -314,7 +314,7 @@ RusturfTunnel_EventScript_15C9EA:: @ 815C9EA
 	trainerbattle 3, OPPONENT_RUSTURF_TUNNEL_GRUNT, 0, RusturfTunnel_Text_194243
 	msgbox RusturfTunnel_Text_194274, 4
 	giveitem ITEM_DEVON_GOODS
-	closebutton
+	closemessage
 	applymovement 255, RusturfTunnel_Movement_15CA99
 	applymovement 6, RusturfTunnel_Movement_15CAA2
 	waitmovement 0
@@ -330,12 +330,12 @@ RusturfTunnel_EventScript_15C9EA:: @ 815C9EA
 	applymovement 5, RusturfTunnel_Movement_1A0839
 	waitmovement 0
 	message RusturfTunnel_Text_19434F
-	waittext
+	waitmessage
 	waitse
 	pokecry SPECIES_WINGULL, 0
 	waitbutton
 	waitpokecry
-	closebutton
+	closemessage
 	applymovement 5, RusturfTunnel_Movement_15CAB4
 	applymovement 7, RusturfTunnel_Movement_15CAC3
 	waitmovement 0

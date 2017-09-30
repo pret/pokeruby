@@ -12,18 +12,18 @@ PetalburgWoods_EventScript_15CCA8:: @ 815CCA8
 	applymovement 4, PetalburgWoods_Movement_15CE89
 	waitmovement 0
 	msgbox PetalburgWoods_Text_194D92, 4
-	closebutton
+	closemessage
 	playbgm BGM_EVIL_TEAM, 0
 	applymovement 3, PetalburgWoods_Movement_15CEC3
 	waitmovement 0
 	msgbox PetalburgWoods_Text_194DED, 4
-	closebutton
+	closemessage
 	applymovement 3, PetalburgWoods_Movement_15CEB0
 	waitmovement 0
 	applymovement 4, PetalburgWoods_Movement_1A0841
 	waitmovement 0
 	msgbox PetalburgWoods_Text_194E6B, 4
-	closebutton
+	closemessage
 	applymovement 4, PetalburgWoods_Movement_15CE9E
 	waitmovement 0
 	msgbox PetalburgWoods_Text_194E9A, 4
@@ -47,18 +47,18 @@ PetalburgWoods_EventScript_15CD42:: @ 815CD42
 	applymovement 255, PetalburgWoods_Movement_1A083F
 	waitmovement 0
 	msgbox PetalburgWoods_Text_194D92, 4
-	closebutton
+	closemessage
 	playbgm BGM_EVIL_TEAM, 0
 	applymovement 3, PetalburgWoods_Movement_15CEC3
 	waitmovement 0
 	msgbox PetalburgWoods_Text_194DED, 4
-	closebutton
+	closemessage
 	applymovement 3, PetalburgWoods_Movement_15CEBF
 	waitmovement 0
 	applymovement 4, PetalburgWoods_Movement_1A0841
 	waitmovement 0
 	msgbox PetalburgWoods_Text_194E6B, 4
-	closebutton
+	closemessage
 	applymovement 4, PetalburgWoods_Movement_15CEA4
 	waitmovement 0
 	msgbox PetalburgWoods_Text_194E9A, 4
@@ -78,12 +78,12 @@ PetalburgWoods_EventScript_15CDE6:: @ 815CDE6
 	applymovement 4, PetalburgWoods_Movement_15CE73
 	waitmovement 0
 	msgbox PetalburgWoods_Text_194D71, 4
-	closebutton
+	closemessage
 	return
 
 PetalburgWoods_EventScript_15CDFA:: @ 815CDFA
 	msgbox PetalburgWoods_Text_194FA4, 4
-	closebutton
+	closemessage
 	applymovement 3, PetalburgWoods_Movement_15CEB7
 	waitmovement 0
 	removeobject 3
@@ -106,7 +106,7 @@ PetalburgWoods_EventScript_15CE4D:: @ 815CE4D
 	applymovement 4, PetalburgWoods_Movement_15CEA8
 	waitmovement 0
 	msgbox PetalburgWoods_Text_195153, 4
-	closebutton
+	closemessage
 	return
 
 PetalburgWoods_EventScript_15CE69:: @ 815CE69

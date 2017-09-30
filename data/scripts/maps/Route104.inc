@@ -142,7 +142,7 @@ Route104_EventScript_14EFD5:: @ 814EFD5
 	showobject 255, 0, 11
 	applymovement 255, Route104_Movement_14F168
 	waitmovement 0
-	movespriteperm 2, 12, 8
+	setobjectxyperm 2, 12, 8
 	addobject 2
 	spritelevelup 2, 0, 11, 0
 	clearflag 740
@@ -156,7 +156,7 @@ Route104_EventScript_14EFD5:: @ 814EFD5
 	copyvar 0x4096, 0x8008
 	restorespritelevel 255, 0, 19
 	restorespritelevel 2, 0, 11
-	moveoffscreen 2
+	moveobjectoffscreen 2
 	setvar 0x408e, 0
 	checkflag 189
 	goto_if 0, Route104_EventScript_14F08B

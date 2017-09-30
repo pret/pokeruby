@@ -5,7 +5,7 @@ RustboroCity_Mart_EventScript_157BD4:: @ 8157BD4
 	lock
 	faceplayer
 	message RustboroCity_Mart_Text_1A0BE4
-	waittext
+	waitmessage
 	checkflag 287
 	goto_if 0, RustboroCity_Mart_EventScript_157BEF
 	checkflag 287

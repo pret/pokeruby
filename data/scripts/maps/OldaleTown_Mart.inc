@@ -5,7 +5,7 @@ OldaleTown_Mart_EventScript_152F79:: @ 8152F79
 	lock
 	faceplayer
 	message OldaleTown_Mart_Text_1A0BE4
-	waittext
+	waitmessage
 	checkflag 116
 	goto_if_eq OldaleTown_Mart_EventScript_152FA8
 	pokemart OldaleTown_Mart_Items1

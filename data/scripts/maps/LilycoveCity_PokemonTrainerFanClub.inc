@@ -104,35 +104,35 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_159429:: @ 8159429
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_1594D5:: @ 81594D5
-	movespriteperm 1, 7, 5
+	setobjectxyperm 1, 7, 5
 	return
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_1594DD:: @ 81594DD
-	movespriteperm 3, 3, 4
+	setobjectxyperm 3, 3, 4
 	return
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_1594E5:: @ 81594E5
-	movespriteperm 4, 7, 2
+	setobjectxyperm 4, 7, 2
 	return
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_1594ED:: @ 81594ED
-	movespriteperm 5, 5, 5
+	setobjectxyperm 5, 5, 5
 	return
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_1594F5:: @ 81594F5
-	movespriteperm 6, 5, 2
+	setobjectxyperm 6, 5, 2
 	return
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_1594FD:: @ 81594FD
-	movespriteperm 2, 8, 4
+	setobjectxyperm 2, 8, 4
 	return
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_159505:: @ 8159505
-	movespriteperm 7, 3, 3
+	setobjectxyperm 7, 3, 3
 	return
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_15950D:: @ 815950D
-	movespriteperm 8, 8, 3
+	setobjectxyperm 8, 8, 3
 	return
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_159515:: @ 8159515

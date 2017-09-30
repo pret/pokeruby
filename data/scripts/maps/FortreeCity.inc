@@ -72,7 +72,7 @@ FortreeCity_EventScript_14C9CF:: @ 814C9CF
 
 FortreeCity_EventScript_14C9E4:: @ 814C9E4
 	msgbox FortreeCity_Text_1678CB, 4
-	closebutton
+	closemessage
 	applymovement LAST_TALKED, FortreeCity_Movement_1A0662
 	waitmovement 0
 	waitse

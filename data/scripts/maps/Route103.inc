@@ -89,7 +89,7 @@ Route103_EventScript_14ECCB:: @ 814ECCB
 	end
 
 Route103_EventScript_14ECD9:: @ 814ECD9
-	closebutton
+	closemessage
 	switch FACING
 	case 1, Route103_EventScript_14ED29
 	case 2, Route103_EventScript_14ED0C

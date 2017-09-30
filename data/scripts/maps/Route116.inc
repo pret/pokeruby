@@ -8,7 +8,7 @@ Route116_MapScript1_150A37:: @ 8150A37
 	end
 
 Route116_EventScript_150A41:: @ 8150A41
-	movespriteperm 21, 41, 10
+	setobjectxyperm 21, 41, 10
 	return
 
 Route116_EventScript_150A49:: @ 8150A49
@@ -47,7 +47,7 @@ Route116_EventScript_150A94:: @ 8150A94
 	compare RESULT, 0
 	goto_if_eq Route116_EventScript_150B12
 	msgbox Route116_Text_1707B8, 4
-	closebutton
+	closemessage
 	compare FACING, 2
 	call_if 1, Route116_EventScript_150AEE
 	compare FACING, 1
@@ -159,7 +159,7 @@ Route116_EventScript_150B8F:: @ 8150B8F
 
 Route116_EventScript_150BBB:: @ 8150BBB
 	msgbox Route116_Text_1709B7, 4
-	closebutton
+	closemessage
 	goto Route116_EventScript_150C03
 	end
 
@@ -175,7 +175,7 @@ Route116_EventScript_150BCA:: @ 8150BCA
 
 Route116_EventScript_150BF4:: @ 8150BF4
 	msgbox Route116_Text_17094D, 4
-	closebutton
+	closemessage
 	goto Route116_EventScript_150C03
 	end
 

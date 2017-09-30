@@ -15,7 +15,7 @@ SlateportCity_SternsShipyard_1F_EventScript_155336:: @ 8155336
 	applymovement 1, SlateportCity_SternsShipyard_1F_Movement_1A0839
 	waitmovement 0
 	msgbox SlateportCity_SternsShipyard_1F_Text_17C1EC, 4
-	closebutton
+	closemessage
 	applymovement 1, SlateportCity_SternsShipyard_1F_Movement_1A083D
 	waitmovement 0
 	setflag 148
@@ -41,7 +41,7 @@ SlateportCity_SternsShipyard_1F_EventScript_1553B0:: @ 81553B0
 	applymovement 1, SlateportCity_SternsShipyard_1F_Movement_1A0839
 	waitmovement 0
 	msgbox SlateportCity_SternsShipyard_1F_Text_17C2F2, 4
-	closebutton
+	closemessage
 	applymovement 1, SlateportCity_SternsShipyard_1F_Movement_1A083D
 	waitmovement 0
 	releaseall

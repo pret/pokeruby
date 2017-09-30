@@ -37,7 +37,7 @@ AncientTomb_EventScript_15F021:: @ 815F021
 	goto_if_eq AncientTomb_EventScript_15F038
 	braillemsg AncientTomb_Braille_1C552E
 	waitbutton
-	hidebox 0, 0, 29, 19
+	erasebox 0, 0, 29, 19
 	releaseall
 	end
 
@@ -50,7 +50,7 @@ AncientTomb_EventScript_15F042:: @ 815F042
 	lockall
 	braillemsg AncientTomb_Braille_1C552E
 	waitbutton
-	hidebox 0, 0, 29, 19
+	erasebox 0, 0, 29, 19
 	releaseall
 	end
 

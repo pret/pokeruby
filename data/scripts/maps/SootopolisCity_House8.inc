@@ -41,7 +41,7 @@ SootopolisCity_House8_EventScript_15B466:: @ 815B466
 	giveitem ITEM_ELIXIR
 	compare RESULT, 0
 	goto_if_eq SootopolisCity_House8_EventScript_15B488
-	closebutton
+	closemessage
 	release
 	end
 
@@ -90,7 +90,7 @@ SootopolisCity_House8_EventScript_15B4F7:: @ 815B4F7
 	giveitem ITEM_ELIXIR
 	compare RESULT, 0
 	goto_if_eq SootopolisCity_House8_EventScript_15B519
-	closebutton
+	closemessage
 	release
 	end
 

@@ -26,7 +26,7 @@ MauvilleCity_BikeShop_EventScript_1567D1:: @ 81567D1
 
 MauvilleCity_BikeShop_EventScript_1567F0:: @ 81567F0
 	message MauvilleCity_BikeShop_Text_1810B1
-	waittext
+	waitmessage
 	multichoice 21, 8, 12, 1
 	switch RESULT
 	case 0, MauvilleCity_BikeShop_EventScript_15682D
@@ -109,7 +109,7 @@ MauvilleCity_BikeShop_EventScript_15690B:: @ 815690B
 
 MauvilleCity_BikeShop_EventScript_156914:: @ 8156914
 	message MauvilleCity_BikeShop_Text_1815EA
-	waittext
+	waitmessage
 	goto MauvilleCity_BikeShop_EventScript_156920
 	end
 
@@ -125,19 +125,19 @@ MauvilleCity_BikeShop_EventScript_156920:: @ 8156920
 
 MauvilleCity_BikeShop_EventScript_156962:: @ 8156962
 	message MauvilleCity_BikeShop_Text_18162C
-	waittext
+	waitmessage
 	goto MauvilleCity_BikeShop_EventScript_156920
 	end
 
 MauvilleCity_BikeShop_EventScript_15696E:: @ 815696E
 	message MauvilleCity_BikeShop_Text_1816F5
-	waittext
+	waitmessage
 	goto MauvilleCity_BikeShop_EventScript_156920
 	end
 
 MauvilleCity_BikeShop_EventScript_15697A:: @ 815697A
 	message MauvilleCity_BikeShop_Text_1817BF
-	waittext
+	waitmessage
 	goto MauvilleCity_BikeShop_EventScript_156920
 	end
 
@@ -147,7 +147,7 @@ MauvilleCity_BikeShop_EventScript_156986:: @ 8156986
 
 MauvilleCity_BikeShop_EventScript_156988:: @ 8156988
 	message MauvilleCity_BikeShop_Text_181892
-	waittext
+	waitmessage
 	goto MauvilleCity_BikeShop_EventScript_156994
 	end
 
@@ -163,19 +163,19 @@ MauvilleCity_BikeShop_EventScript_156994:: @ 8156994
 
 MauvilleCity_BikeShop_EventScript_1569D6:: @ 81569D6
 	message MauvilleCity_BikeShop_Text_1818D4
-	waittext
+	waitmessage
 	goto MauvilleCity_BikeShop_EventScript_156994
 	end
 
 MauvilleCity_BikeShop_EventScript_1569E2:: @ 81569E2
 	message MauvilleCity_BikeShop_Text_18199A
-	waittext
+	waitmessage
 	goto MauvilleCity_BikeShop_EventScript_156994
 	end
 
 MauvilleCity_BikeShop_EventScript_1569EE:: @ 81569EE
 	message MauvilleCity_BikeShop_Text_181A3D
-	waittext
+	waitmessage
 	goto MauvilleCity_BikeShop_EventScript_156994
 	end
 

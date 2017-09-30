@@ -41,7 +41,7 @@ Route113_GlassWorkshop_EventScript_1635B5:: @ 81635B5
 	compare 0x4048, 250
 	goto_if 0, Route113_GlassWorkshop_EventScript_163818
 	message Route113_GlassWorkshop_Text_19E757
-	waittext
+	waitmessage
 	goto Route113_GlassWorkshop_EventScript_1635EE
 	end
 
@@ -183,19 +183,19 @@ Route113_GlassWorkshop_EventScript_163830:: @ 8163830
 	subvar 0x800a, 16456
 	buffernum 1, 32778
 	message Route113_GlassWorkshop_Text_19E890
-	waittext
+	waitmessage
 	goto Route113_GlassWorkshop_EventScript_1635EE
 	end
 
 Route113_GlassWorkshop_EventScript_163845:: @ 8163845
 	message Route113_GlassWorkshop_Text_19E802
-	waittext
+	waitmessage
 	goto Route113_GlassWorkshop_EventScript_1635EE
 	end
 
 Route113_GlassWorkshop_EventScript_163851:: @ 8163851
 	msgbox Route113_GlassWorkshop_Text_19E827, 4
-	closebutton
+	closemessage
 	fadescreen 1
 	playse 5
 	delay 30

@@ -11,7 +11,7 @@ RustboroCity_Gym_EventScript_1578D9:: @ 81578D9
 
 RustboroCity_Gym_EventScript_1578FE:: @ 81578FE
 	message RustboroCity_Gym_Text_1840AB
-	waittext
+	waitmessage
 	call RustboroCity_Gym_EventScript_1A02C5
 	msgbox RustboroCity_Gym_Text_1840D5, 4
 	setflag 1201

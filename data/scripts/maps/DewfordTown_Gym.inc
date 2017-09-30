@@ -109,7 +109,7 @@ DewfordTown_Gym_EventScript_153152:: @ 8153152
 DewfordTown_Gym_EventScript_153177:: @ 8153177
 	call DewfordTown_Gym_EventScript_153117
 	message DewfordTown_Gym_Text_1752BB
-	waittext
+	waitmessage
 	call DewfordTown_Gym_EventScript_1A02C5
 	msgbox DewfordTown_Gym_Text_1752E6, 4
 	setflag 1204

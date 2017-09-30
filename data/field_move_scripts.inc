@@ -2,7 +2,7 @@ S_CuttableTree:: @ 81B0DCC
 	lockall
 	checkflag 2055
 	goto_if 0, CannotUseCut
-	checkattack MOVE_CUT
+	checkpokemove MOVE_CUT
 	compare RESULT, 6
 	goto_if_eq CannotUseCut
 	setanimation 0, RESULT
@@ -12,7 +12,7 @@ S_CuttableTree:: @ 81B0DCC
 	compare RESULT, 0
 	goto_if_eq Cut_ChoseNo
 	msgbox UsedCutRockSmashText, 4
-	closebutton
+	closemessage
 	doanimation 2
 	waitstate
 	goto DoTreeCutMovement
@@ -42,7 +42,7 @@ CannotUseCut: @ 81B0E32
 	end
 
 Cut_ChoseNo: @ 81B0E3C
-	closebutton
+	closemessage
 	releaseall
 	end
 
@@ -60,7 +60,7 @@ S_BreakableRock:: @ 81B0EB7
 	lockall
 	checkflag 2057
 	goto_if 0, CannotUseRockSmash
-	checkattack MOVE_ROCK_SMASH
+	checkpokemove MOVE_ROCK_SMASH
 	compare RESULT, 6
 	goto_if_eq CannotUseRockSmash
 	setanimation 0, RESULT
@@ -70,7 +70,7 @@ S_BreakableRock:: @ 81B0EB7
 	compare RESULT, 0
 	goto_if_eq RockSmash_ChoseNo
 	msgbox UsedCutRockSmashText, 4
-	closebutton
+	closemessage
 	doanimation 37
 	waitstate
 	goto DoRockSmashMovement
@@ -111,7 +111,7 @@ CannotUseRockSmash: @ 81B0F3E
 	end
 
 RockSmash_ChoseNo: @ 81B0F48
-	closebutton
+	closemessage
 	releaseall
 	end
 
@@ -129,14 +129,14 @@ S_PushableBoulder:: @ 81B0FCB
 	goto_if 0, CannotUseStrength
 	checkflag 2089
 	goto_if_eq AlreadyUsedStrength
-	checkattack 70
+	checkpokemove 70
 	compare RESULT, 6
 	goto_if_eq CannotUseStrength
 	setanimation 0, RESULT
 	msgbox UseStrengthPromptText, 5
 	compare RESULT, 0
 	goto_if_eq Strength_ChoseNo
-	closebutton
+	closemessage
 	doanimation 40
 	waitstate
 	goto UsedStrength
@@ -166,7 +166,7 @@ AlreadyUsedStrength: @ 81B1030
 	end
 
 Strength_ChoseNo: @ 81B103A
-	closebutton
+	closemessage
 	releaseall
 	end
 
@@ -190,7 +190,7 @@ AlreadyUsedStrengthText: @ 81B1127
 
 S_UseWaterfall:: @ 81B115A
 	lockall
-	checkattack MOVE_WATERFALL
+	checkpokemove MOVE_WATERFALL
 	compare RESULT, 6
 	goto_if_eq Waterfall_NoMonKnows
 	bufferpartypoke 0, RESULT
@@ -223,7 +223,7 @@ UsedWaterfallText: @ 81B120D
 
 UseDiveScript:: @ 81B1220
 	lockall
-	checkattack MOVE_DIVE
+	checkpokemove MOVE_DIVE
 	compare RESULT, 6
 	goto_if_eq CannotUseDive
 	bufferpartypoke 0, RESULT
@@ -246,7 +246,7 @@ Dive_Done: @ 81B1267
 
 S_UseDiveUnderwater:: @ 81B1269
 	lockall
-	checkattack MOVE_DIVE
+	checkpokemove MOVE_DIVE
 	compare RESULT, 6
 	goto_if_eq UnderwaterCannotUseDive
 	bufferpartypoke 0, RESULT

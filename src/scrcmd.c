@@ -1055,7 +1055,7 @@ bool8 ScrCmd_setobjectxy(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_movespriteperm(struct ScriptContext *ctx)
+bool8 ScrCmd_setobjectxyperm(struct ScriptContext *ctx)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
     u16 x = VarGet(ScriptReadHalfword(ctx));
@@ -1065,7 +1065,7 @@ bool8 ScrCmd_movespriteperm(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_moveoffscreen(struct ScriptContext *ctx)
+bool8 ScrCmd_moveobjectoffscreen(struct ScriptContext *ctx)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
 
@@ -1133,7 +1133,7 @@ bool8 ScrCmd_turnobject(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_spritebehave(struct ScriptContext *ctx)
+bool8 ScrCmd_setobjectmovementtype(struct ScriptContext *ctx)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
     u8 movementType = ScriptReadByte(ctx);
@@ -1246,13 +1246,13 @@ bool8 ScrCmd_message2(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_waittext(struct ScriptContext *ctx)
+bool8 ScrCmd_waitmessage(struct ScriptContext *ctx)
 {
     SetupNativeScript(ctx, IsFieldMessageBoxHidden);
     return TRUE;
 }
 
-bool8 ScrCmd_closebutton(struct ScriptContext *ctx)
+bool8 ScrCmd_closemessage(struct ScriptContext *ctx)
 {
     HideFieldMessageBox();
     return FALSE;
@@ -1307,7 +1307,7 @@ bool8 ScrCmd_multichoice(struct ScriptContext *ctx)
     }
 }
 
-bool8 ScrCmd_multichoicedef(struct ScriptContext *ctx)
+bool8 ScrCmd_multichoicedefault(struct ScriptContext *ctx)
 {
     u8 left = ScriptReadByte(ctx);
     u8 top = ScriptReadByte(ctx);
@@ -1326,7 +1326,7 @@ bool8 ScrCmd_multichoicedef(struct ScriptContext *ctx)
     }
 }
 
-bool8 ScrCmd_showbox(struct ScriptContext *ctx)
+bool8 ScrCmd_drawbox(struct ScriptContext *ctx)
 {
     u8 left = ScriptReadByte(ctx);
     u8 top = ScriptReadByte(ctx);
@@ -1337,7 +1337,7 @@ bool8 ScrCmd_showbox(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_multichoicerow(struct ScriptContext *ctx)
+bool8 ScrCmd_multichoicegrid(struct ScriptContext *ctx)
 {
     u8 left = ScriptReadByte(ctx);
     u8 top = ScriptReadByte(ctx);
@@ -1356,7 +1356,7 @@ bool8 ScrCmd_multichoicerow(struct ScriptContext *ctx)
     }
 }
 
-bool8 ScrCmd_hidebox(struct ScriptContext *ctx)
+bool8 ScrCmd_erasebox(struct ScriptContext *ctx)
 {
     u8 left = ScriptReadByte(ctx);
     u8 top = ScriptReadByte(ctx);
@@ -1368,7 +1368,7 @@ bool8 ScrCmd_hidebox(struct ScriptContext *ctx)
 }
 
 // unused
-bool8 ScrCmd_clearbox(struct ScriptContext *ctx)
+bool8 ScrCmd_drawboxtext(struct ScriptContext *ctx)
 {
     u8 left = ScriptReadByte(ctx);
     u8 top = ScriptReadByte(ctx);
@@ -1386,7 +1386,7 @@ bool8 ScrCmd_clearbox(struct ScriptContext *ctx)
     }
 }
 
-bool8 ScrCmd_showpokepic(struct ScriptContext *ctx)
+bool8 ScrCmd_drawpokepic(struct ScriptContext *ctx)
 {
     u16 species = VarGet(ScriptReadHalfword(ctx));
     u8 x = ScriptReadByte(ctx);
@@ -1396,7 +1396,7 @@ bool8 ScrCmd_showpokepic(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_hidepokepic(struct ScriptContext *ctx)
+bool8 ScrCmd_erasepokepic(struct ScriptContext *ctx)
 {
     bool8 (*func)(void) = ScriptMenu_GetPicboxWaitFunc();
 
@@ -1406,7 +1406,7 @@ bool8 ScrCmd_hidepokepic(struct ScriptContext *ctx)
     return TRUE;
 }
 
-bool8 ScrCmd_showcontestwinner(struct ScriptContext *ctx)
+bool8 ScrCmd_drawcontestwinner(struct ScriptContext *ctx)
 {
     u8 v1 = ScriptReadByte(ctx);
 
@@ -1545,7 +1545,7 @@ bool8 ScrCmd_vbuffer(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_givepokemon(struct ScriptContext *ctx)
+bool8 ScrCmd_givepoke(struct ScriptContext *ctx)
 {
     u16 species = VarGet(ScriptReadHalfword(ctx));
     u8 level = ScriptReadByte(ctx);
@@ -1576,7 +1576,7 @@ bool8 ScrCmd_setpokemove(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_checkattack(struct ScriptContext *ctx)
+bool8 ScrCmd_checkpokemove(struct ScriptContext *ctx)
 {
     u8 i;
     u16 moveId = ScriptReadHalfword(ctx);

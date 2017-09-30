@@ -13,8 +13,8 @@ LittlerootTown_BrendansHouse_2F_MapScript1_1527AF:: @ 81527AF
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_1527CE:: @ 81527CE
-	movespriteperm 1, 1, 2
-	spritebehave 1, 7
+	setobjectxyperm 1, 1, 2
+	setobjectmovementtype 1, 7
 	return
 
 LittlerootTown_BrendansHouse_2F_MapScript2_1527DA:: @ 81527DA

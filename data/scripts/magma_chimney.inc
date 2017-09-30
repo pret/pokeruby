@@ -5,7 +5,7 @@ MtChimney_EventScript_1B2C95:: @ 81B2C95
 	call_if 0, MtChimney_EventScript_1B2CB9
 	checkflag 219
 	call_if 1, MtChimney_EventScript_1B2CC2
-	closebutton
+	closemessage
 	applymovement 1, MtChimney_Movement_1A083D
 	waitmovement 0
 	setflag 219
@@ -57,7 +57,7 @@ MtChimney_EventScript_1B2CCB:: @ 81B2CCB
 	.else
 	msgbox MtChimney_Text_1B3A90, 4
 	.endif
-	closebutton
+	closemessage
 	delay 30
 	fadescreen 1
 	removeobject 2
@@ -65,7 +65,7 @@ MtChimney_EventScript_1B2CCB:: @ 81B2CCB
 	removeobject 22
 	setflag 926
 	fadescreen 0
-	movespriteperm 1, 10, 12
+	setobjectxyperm 1, 10, 12
 	addobject 1
 	compare FACING, 4
 	call_if 1, MtChimney_EventScript_1B2D7D
@@ -78,7 +78,7 @@ MtChimney_EventScript_1B2CCB:: @ 81B2CCB
 	.else
 	msgbox MtChimney_Text_1B3FFE, 4
 	.endif
-	closebutton
+	closemessage
 	compare FACING, 4
 	call_if 1, MtChimney_EventScript_1B2D93
 	compare FACING, 2

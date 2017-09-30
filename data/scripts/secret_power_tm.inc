@@ -13,7 +13,7 @@ Route111_EventScript_1A3877:: @ 81A3877
 	compare RESULT, 0
 	goto_if_eq Route111_EventScript_1A38D9
 	msgbox Route111_Text_1A35C5, 4
-	closebutton
+	closemessage
 	setflag 96
 	clearflag 948
 	compare FACING, 3

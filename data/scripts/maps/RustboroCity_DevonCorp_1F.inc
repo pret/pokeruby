@@ -8,8 +8,8 @@ RustboroCity_DevonCorp_1F_MapScript1_15740C:: @ 815740C
 	end
 
 RustboroCity_DevonCorp_1F_EventScript_157416:: @ 8157416
-	movespriteperm 2, 14, 2
-	spritebehave 2, 8
+	setobjectxyperm 2, 14, 2
+	setobjectmovementtype 2, 8
 	return
 
 RustboroCity_DevonCorp_1F_EventScript_157422:: @ 8157422

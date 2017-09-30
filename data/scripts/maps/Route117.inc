@@ -9,7 +9,7 @@ Route117_MapScript1_150D40:: @ 8150D40
 Route117_EventScript_150D46:: @ 8150D46
 	checkflag 134
 	goto_if 0, Route117_EventScript_150D56
-	movespriteperm 3, 47, 6
+	setobjectxyperm 3, 47, 6
 
 Route117_EventScript_150D56:: @ 8150D56
 	return

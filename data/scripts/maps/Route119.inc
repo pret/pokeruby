@@ -153,7 +153,7 @@ Route119_EventScript_151352:: @ 8151352
 	return
 
 Route119_EventScript_151362:: @ 8151362
-	closebutton
+	closemessage
 	compare 0x4001, 1
 	call_if 1, Route119_EventScript_1513D2
 	compare 0x4001, 2
@@ -193,13 +193,13 @@ Route119_EventScript_1513C7:: @ 81513C7
 	return
 
 Route119_EventScript_1513D2:: @ 81513D2
-	movespriteperm 16, 25, 32
-	movespriteperm 25, 25, 32
+	setobjectxyperm 16, 25, 32
+	setobjectxyperm 25, 25, 32
 	return
 
 Route119_EventScript_1513E1:: @ 81513E1
-	movespriteperm 16, 26, 32
-	movespriteperm 25, 26, 32
+	setobjectxyperm 16, 26, 32
+	setobjectxyperm 25, 26, 32
 	return
 
 Route119_Movement_1513F0:: @ 81513F0
@@ -354,7 +354,7 @@ Route119_EventScript_1515C5:: @ 81515C5
 	lock
 	faceplayer
 	msgbox Route119_Text_171520, 4
-	closebutton
+	closemessage
 	applymovement LAST_TALKED, Route119_Movement_1A083D
 	waitmovement 0
 	release
@@ -364,7 +364,7 @@ Route119_EventScript_1515DC:: @ 81515DC
 	lock
 	faceplayer
 	msgbox Route119_Text_17157C, 4
-	closebutton
+	closemessage
 	applymovement LAST_TALKED, Route119_Movement_1A083D
 	waitmovement 0
 	release

@@ -71,7 +71,7 @@ Route120_EventScript_1516B5:: @ 81516B5
 	return
 
 Route120_EventScript_1516DA:: @ 81516DA
-	spritebehave 36, 10
+	setobjectmovementtype 36, 10
 	return
 
 Route120_MapScript1_1516DF:: @ 81516DF
@@ -207,7 +207,7 @@ Route120_EventScript_151884:: @ 8151884
 
 Route120_EventScript_15189D:: @ 815189D
 	msgbox Route120_Text_1719A0, 4
-	closebutton
+	closemessage
 	compare FACING, 2
 	call_if 1, Route120_EventScript_15197F
 	compare FACING, 3
@@ -216,7 +216,7 @@ Route120_EventScript_15189D:: @ 815189D
 	waitmovement 0
 	delay 20
 	msgbox Route120_Text_1719D4, 4
-	closebutton
+	closemessage
 	applymovement 30, Route120_Movement_1A0843
 	waitmovement 0
 	applymovement 30, Route120_Movement_1A0662
@@ -241,7 +241,7 @@ Route120_EventScript_151908:: @ 8151908
 	giveitem ITEM_DEVON_SCOPE
 	setflag 285
 	msgbox Route120_Text_171B0E, 4
-	closebutton
+	closemessage
 	applymovement 31, Route120_Movement_1A0845
 	waitmovement 0
 	delay 50

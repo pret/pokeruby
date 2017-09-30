@@ -79,7 +79,7 @@ RustboroCity_DevonCorp_2F_EventScript_157564:: @ 8157564
 	end
 
 RustboroCity_DevonCorp_2F_EventScript_1575A6:: @ 81575A6
-	closebutton
+	closemessage
 	playse 21
 	applymovement 5, RustboroCity_DevonCorp_2F_Movement_1A0833
 	waitmovement 0
@@ -97,7 +97,7 @@ RustboroCity_DevonCorp_2F_EventScript_1575A6:: @ 81575A6
 	end
 
 RustboroCity_DevonCorp_2F_EventScript_1575EE:: @ 81575EE
-	closebutton
+	closemessage
 	playse 21
 	applymovement 5, RustboroCity_DevonCorp_2F_Movement_1A0833
 	waitmovement 0
@@ -143,8 +143,8 @@ RustboroCity_DevonCorp_2F_EventScript_157661:: @ 8157661
 	playfanfare 370
 	message RustboroCity_DevonCorp_2F_Text_18319E
 	waitfanfare
-	waittext
-	givepokemon SPECIES_LILEEP, 20, ITEM_NONE, 0x0, 0x0, 0
+	waitmessage
+	givepoke SPECIES_LILEEP, 20, ITEM_NONE, 0x0, 0x0, 0
 	msgbox RustboroCity_DevonCorp_2F_Text_1A1102, 5
 	compare RESULT, 1
 	call_if 1, RustboroCity_DevonCorp_2F_EventScript_1A0678
@@ -163,8 +163,8 @@ RustboroCity_DevonCorp_2F_EventScript_1576B4:: @ 81576B4
 	playfanfare 370
 	message RustboroCity_DevonCorp_2F_Text_18319E
 	waitfanfare
-	waittext
-	givepokemon SPECIES_ANORITH, 20, ITEM_NONE, 0x0, 0x0, 0
+	waitmessage
+	givepoke SPECIES_ANORITH, 20, ITEM_NONE, 0x0, 0x0, 0
 	msgbox RustboroCity_DevonCorp_2F_Text_1A1102, 5
 	compare RESULT, 1
 	call_if 1, RustboroCity_DevonCorp_2F_EventScript_1A0678

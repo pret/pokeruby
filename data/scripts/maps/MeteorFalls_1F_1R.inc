@@ -14,7 +14,7 @@ MeteorFalls_1F_1R_EventScript_15C49C:: @ 815C49C
 	applymovement 5, MeteorFalls_1F_1R_Movement_1A0845
 	waitmovement 0
 	msgbox MeteorFalls_1F_1R_Text_193237, 4
-	closebutton
+	closemessage
 	applymovement 5, MeteorFalls_1F_1R_Movement_1A0841
 	applymovement 6, MeteorFalls_1F_1R_Movement_1A0841
 	waitmovement 0
@@ -24,11 +24,11 @@ MeteorFalls_1F_1R_EventScript_15C49C:: @ 815C49C
 	applymovement 5, MeteorFalls_1F_1R_Movement_1A0835
 	waitmovement 0
 	msgbox MeteorFalls_1F_1R_Text_193268, 4
-	closebutton
+	closemessage
 	applymovement 5, MeteorFalls_1F_1R_Movement_15C5EE
 	waitmovement 0
 	msgbox MeteorFalls_1F_1R_Text_1932C5, 4
-	closebutton
+	closemessage
 	applymovement 255, MeteorFalls_1F_1R_Movement_1A083F
 	applymovement 5, MeteorFalls_1F_1R_Movement_1A083F
 	applymovement 6, MeteorFalls_1F_1R_Movement_1A083F
@@ -44,7 +44,7 @@ MeteorFalls_1F_1R_EventScript_15C49C:: @ 815C49C
 	applymovement 6, MeteorFalls_1F_1R_Movement_1A083F
 	waitmovement 0
 	msgbox MeteorFalls_1F_1R_Text_193320, 4
-	closebutton
+	closemessage
 	applymovement 255, MeteorFalls_1F_1R_Movement_15C64F
 	applymovement 5, MeteorFalls_1F_1R_Movement_15C5F1
 	applymovement 6, MeteorFalls_1F_1R_Movement_15C5FC
@@ -58,7 +58,7 @@ MeteorFalls_1F_1R_EventScript_15C49C:: @ 815C49C
 	.else
 	msgbox MeteorFalls_1F_1R_Text_193584, 4
 	.endif
-	closebutton
+	closemessage
 	applymovement 8, MeteorFalls_1F_1R_Movement_15C639
 	applymovement 9, MeteorFalls_1F_1R_Movement_15C64A
 	waitmovement 0
@@ -69,7 +69,7 @@ MeteorFalls_1F_1R_EventScript_15C49C:: @ 815C49C
 	applymovement 7, MeteorFalls_1F_1R_Movement_1A083F
 	waitmovement 0
 	msgbox MeteorFalls_1F_1R_Text_1937AA, 4
-	closebutton
+	closemessage
 	applymovement 7, MeteorFalls_1F_1R_Movement_15C61F
 	applymovement 8, MeteorFalls_1F_1R_Movement_15C62E
 	applymovement 9, MeteorFalls_1F_1R_Movement_15C63E

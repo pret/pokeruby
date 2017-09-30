@@ -79,7 +79,7 @@ MauvilleCity_Gym_EventScript_1565AB:: @ 81565AB
 
 MauvilleCity_Gym_EventScript_1565DB:: @ 81565DB
 	message MauvilleCity_Gym_Text_180DAF
-	waittext
+	waitmessage
 	call MauvilleCity_Gym_EventScript_1A02C5
 	msgbox MauvilleCity_Gym_Text_180DDA, 4
 	setflag 1208

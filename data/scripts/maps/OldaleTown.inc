@@ -18,13 +18,13 @@ OldaleTown_EventScript_14DD8C:: @ 814DD8C
 	return
 
 OldaleTown_EventScript_14DD92:: @ 814DD92
-	movespriteperm 3, 1, 11
-	spritebehave 3, 9
+	setobjectxyperm 3, 1, 11
+	setobjectmovementtype 3, 9
 	return
 
 OldaleTown_EventScript_14DD9E:: @ 814DD9E
-	movespriteperm 2, 13, 14
-	spritebehave 2, 8
+	setobjectxyperm 2, 13, 14
+	setobjectmovementtype 2, 8
 	return
 
 OldaleTown_EventScript_14DDAA:: @ 814DDAA
@@ -45,7 +45,7 @@ OldaleTown_EventScript_14DDBC:: @ 814DDBC
 	setflag 1
 	playbgm 420, 0
 	msgbox OldaleTown_Text_16AEF2, 4
-	closebutton
+	closemessage
 	switch FACING
 	case 1, OldaleTown_EventScript_14DE07
 	case 2, OldaleTown_EventScript_14DE1E
@@ -198,7 +198,7 @@ OldaleTown_EventScript_14DEDF:: @ 814DEDF
 	checkflag 116
 	goto_if_eq OldaleTown_EventScript_14DF26
 	msgbox OldaleTown_Text_16B0CC, 4
-	closebutton
+	closemessage
 	applymovement 3, OldaleTown_Movement_1A083D
 	waitmovement 0
 	release
@@ -210,7 +210,7 @@ OldaleTown_EventScript_14DEFF:: @ 814DEFF
 	applymovement 3, OldaleTown_Movement_14DFEF
 	waitmovement 0
 	msgbox OldaleTown_Text_16B045, 4
-	closebutton
+	closemessage
 	applymovement 3, OldaleTown_Movement_14DFF5
 	waitmovement 0
 	releaseall
@@ -274,7 +274,7 @@ OldaleTown_EventScript_14DFB8:: @ 814DFB8
 	end
 
 OldaleTown_EventScript_14DFC6:: @ 814DFC6
-	closebutton
+	closemessage
 	applymovement 4, OldaleTown_Movement_14DFE5
 	waitmovement 0
 	removeobject 4

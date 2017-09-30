@@ -10,8 +10,8 @@ Route112_CableCarStation_MapScript1_15C03E:: @ 815C03E
 	end
 
 Route112_CableCarStation_EventScript_15C052:: @ 815C052
-	movespriteperm 1, 7, 4
-	spritebehave 1, 9
+	setobjectxyperm 1, 7, 4
+	setobjectmovementtype 1, 9
 	return
 
 Route112_CableCarStation_MapScript2_15C05E:: @ 815C05E
@@ -24,8 +24,8 @@ Route112_CableCarStation_EventScript_15C068:: @ 815C068
 	applymovement 1, Route112_CableCarStation_Movement_15C0EB
 	waitmovement 0
 	setvar 0x40a3, 0
-	movespriteperm 1, 6, 7
-	spritebehave 1, 8
+	setobjectxyperm 1, 6, 7
+	setobjectmovementtype 1, 8
 	releaseall
 	end
 
@@ -41,7 +41,7 @@ Route112_CableCarStation_EventScript_15C08C:: @ 815C08C
 
 Route112_CableCarStation_EventScript_15C0AD:: @ 815C0AD
 	msgbox Route112_CableCarStation_Text_1925A9, 4
-	closebutton
+	closemessage
 	applymovement 1, Route112_CableCarStation_Movement_15C0E6
 	applymovement 255, Route112_CableCarStation_Movement_15C0F0
 	waitmovement 0

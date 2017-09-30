@@ -65,7 +65,7 @@ BattleTower_Lobby_EventScript_160330:: @ 8160330
 	lock
 	faceplayer
 	msgbox BattleTower_Lobby_Text_19A3FD, 4
-	closebutton
+	closemessage
 	setvar 0x4000, 5
 	release
 	end
@@ -74,7 +74,7 @@ BattleTower_Lobby_EventScript_160342:: @ 8160342
 	lock
 	faceplayer
 	message BattleTower_Lobby_Text_19A487
-	waittext
+	waitmessage
 	setvar 0x8004, 0
 	special sub_81358A4
 	compare RESULT, 6
@@ -83,7 +83,7 @@ BattleTower_Lobby_EventScript_160342:: @ 8160342
 	compare RESULT, 0
 	goto_if_eq BattleTower_Lobby_EventScript_16037D
 	message BattleTower_Lobby_Text_19A6BE
-	waittext
+	waitmessage
 	playfanfare 370
 	waitfanfare
 	msgbox BattleTower_Lobby_Text_19A719, 4
@@ -94,7 +94,7 @@ BattleTower_Lobby_EventScript_16037D:: @ 816037D
 	compare RESULT, 1
 	goto_if_eq BattleTower_Lobby_EventScript_1603AD
 	message BattleTower_Lobby_Text_19A589
-	waittext
+	waitmessage
 	setvar 0x8004, 13
 	special sub_8135668
 	special sub_8135D84
@@ -108,12 +108,12 @@ BattleTower_Lobby_EventScript_1603AD:: @ 81603AD
 	setvar 0x8005, 3
 	special sub_8135668
 	message BattleTower_Lobby_Text_19A4BB
-	waittext
+	waitmessage
 	special sub_8135DEC
 	switch RESULT
 	case 0, BattleTower_Lobby_EventScript_160408
 	message BattleTower_Lobby_Text_19A506
-	waittext
+	waitmessage
 	playfanfare 370
 	waitfanfare
 	setvar 0x8004, 9
@@ -124,15 +124,15 @@ BattleTower_Lobby_EventScript_1603AD:: @ 81603AD
 
 BattleTower_Lobby_EventScript_1603F8:: @ 81603F8
 	msgbox BattleTower_Lobby_Text_199FA9, 4
-	closebutton
+	closemessage
 	setvar 0x4000, 5
 	release
 	end
 
 BattleTower_Lobby_EventScript_160408:: @ 8160408
 	msgbox BattleTower_Lobby_Text_19A520, 4
-	waittext
-	closebutton
+	waitmessage
+	closemessage
 	setvar 0x4000, 5
 	release
 	end
@@ -141,9 +141,9 @@ BattleTower_Lobby_EventScript_160419:: @ 8160419
 	lock
 	faceplayer
 	message BattleTower_Lobby_Text_19A571
-	waittext
+	waitmessage
 	message BattleTower_Lobby_Text_19A589
-	waittext
+	waitmessage
 	setvar 0x8004, 13
 	special sub_8135668
 	setvar 0x8004, 0
@@ -151,7 +151,7 @@ BattleTower_Lobby_EventScript_160419:: @ 8160419
 	playse 55
 	waitse
 	msgbox BattleTower_Lobby_Text_199FA9, 4
-	closebutton
+	closemessage
 	setvar 0x4000, 5
 	release
 	end
@@ -161,9 +161,9 @@ BattleTower_Lobby_EventScript_16044B:: @ 816044B
 	faceplayer
 	setvar 0x40bc, 1
 	message BattleTower_Lobby_Text_19A5B1
-	waittext
+	waitmessage
 	message BattleTower_Lobby_Text_19A5CE
-	waittext
+	waitmessage
 	setvar 0x8004, 1
 	special sub_8135BA0
 	playse 55
@@ -175,7 +175,7 @@ BattleTower_Lobby_EventScript_16044B:: @ 816044B
 	special SavePlayerParty
 	special sub_8135A14
 	msgbox BattleTower_Lobby_Text_19A0A8, 4
-	closebutton
+	closemessage
 	call BattleTower_Lobby_EventScript_160664
 	warp BattleTower_Elevator, 255, 1, 6
 	setvar 0x4000, 0
@@ -193,7 +193,7 @@ BattleTower_Lobby_EventScript_16049E:: @ 816049E
 
 BattleTower_Lobby_EventScript_1604BE:: @ 81604BE
 	message BattleTower_Lobby_Text_199F79
-	waittext
+	waitmessage
 	multichoice 15, 6, 23, 0
 	switch RESULT
 	case 0, BattleTower_Lobby_EventScript_1604FA
@@ -203,7 +203,7 @@ BattleTower_Lobby_EventScript_1604BE:: @ 81604BE
 
 BattleTower_Lobby_EventScript_1604FA:: @ 81604FA
 	message BattleTower_Lobby_Text_19A024
-	waittext
+	waitmessage
 	multichoice 18, 6, 24, 0
 	switch RESULT
 	case 2, BattleTower_Lobby_EventScript_160652
@@ -240,11 +240,11 @@ BattleTower_Lobby_EventScript_160587:: @ 8160587
 	setvar 0x8005, 0
 	special sub_8135668
 	special LoadPlayerParty
-	closebutton
+	closemessage
 	delay 2
 	call S_DoSaveDialog
 	setvar 0x4000, 5
-	hidebox 0, 0, 15, 10
+	erasebox 0, 0, 15, 10
 	compare RESULT, 0
 	goto_if_eq BattleTower_Lobby_EventScript_160642
 	inccounter GAME_STAT_ENTERED_BATTLE_TOWER
@@ -252,7 +252,7 @@ BattleTower_Lobby_EventScript_160587:: @ 8160587
 	special sub_8135A14
 	setvar 0x40bc, 1
 	msgbox BattleTower_Lobby_Text_19A0A8, 4
-	closebutton
+	closemessage
 	call BattleTower_Lobby_EventScript_160664
 	warp BattleTower_Elevator, 255, 1, 6
 	setvar 0x4000, 0
@@ -380,7 +380,7 @@ BattleTower_Lobby_EventScript_160727:: @ 8160727
 	lockall
 	special ShowBattleTowerRecords
 	waitbutton
-	hidebox 0, 0, 29, 19
+	erasebox 0, 0, 29, 19
 	releaseall
 	end
 

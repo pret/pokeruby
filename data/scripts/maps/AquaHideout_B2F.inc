@@ -47,7 +47,7 @@ AquaHideout_B2F_EventScript_15D8FD:: @ 815D8FD
 	applymovement 0x8008, AquaHideout_B2F_Movement_1A0839
 	waitmovement 0
 	msgbox AquaHideout_B2F_Text_197162, 4
-	closebutton
+	closemessage
 	.ifdef SAPPHIRE
 	applymovement 0x8008, Movement_1A083F
 	.else

@@ -13,7 +13,7 @@ GraniteCave_StevensRoom_EventScript_15CBFA:: @ 815CBFA
 	compare RESULT, 0
 	call_if 1, GraniteCave_StevensRoom_EventScript_15CC83
 	msgbox GraniteCave_StevensRoom_Text_194C8D, 4
-	closebutton
+	closemessage
 	compare FACING, 2
 	call_if 1, GraniteCave_StevensRoom_EventScript_15CC6D
 	compare FACING, 1

@@ -239,7 +239,7 @@ FallarborTown_ContestLobby_EventScript_1B78A1:: @ 81B78A1
 	compare RESULT, 0
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7936
 	message FallarborTown_ContestLobby_Text_1B7304
-	waittext
+	waitmessage
 	special sub_8083614
 	waitstate
 	compare RESULT, 1

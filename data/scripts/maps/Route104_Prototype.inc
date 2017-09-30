@@ -56,7 +56,7 @@ Route104_Prototype_EventScript_160CF1:: @ 8160CF1
 	end
 
 Route104_Prototype_EventScript_160CFB:: @ 8160CFB
-	closebutton
+	closemessage
 	delay 60
 	fadescreen 1
 	delay 60

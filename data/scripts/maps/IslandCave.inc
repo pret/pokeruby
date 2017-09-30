@@ -70,7 +70,7 @@ IslandCave_EventScript_15EF7C:: @ 815EF7C
 
 IslandCave_EventScript_15EF95:: @ 815EF95
 	waitbutton
-	hidebox 0, 0, 29, 19
+	erasebox 0, 0, 29, 19
 	releaseall
 	end
 

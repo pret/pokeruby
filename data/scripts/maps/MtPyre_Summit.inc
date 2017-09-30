@@ -41,7 +41,7 @@ MtPyre_Summit_EventScript_15D4E1:: @ 815D4E1
 	.else
 	msgbox MtPyre_Summit_Text_1B5EEC, 4
 	.endif
-	closebutton
+	closemessage
 	fadescreen 1
 	removeobject 2
 	removeobject 4
@@ -198,7 +198,7 @@ MtPyre_Summit_EventScript_15D64A:: @ 815D64A
 MtPyre_Summit_EventScript_15D669:: @ 815D669
 	setvar 0x8004, ITEM_RED_OR_BLUE_ORB
 	call MtPyre_Summit_EventScript_1A067F
-	closebutton
+	closemessage
 	applymovement LAST_TALKED, MtPyre_Summit_Movement_1A0841
 	waitmovement 0
 	delay 40
@@ -279,7 +279,7 @@ MtPyre_Summit_EventScript_15D6F2:: @ 815D6F2
 	.else
 	msgbox MtPyre_Summit_Text_1B6848, 4
 	.endif
-	closebutton
+	closemessage
 	compare 0x8008, 0
 	call_if 1, MtPyre_Summit_EventScript_15D77F
 	compare 0x8008, 1

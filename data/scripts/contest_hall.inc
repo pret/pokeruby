@@ -66,7 +66,7 @@ FallarborTown_ContestLobby_EventScript_1A4F67:: @ 81A4F67
 	compare RESULT, 0
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1A4F86
 	setvar 0x408a, 0
-	closebutton
+	closemessage
 	release
 	end
 
@@ -76,7 +76,7 @@ FallarborTown_ContestLobby_EventScript_1A4F86:: @ 81A4F86
 
 FallarborTown_ContestLobby_EventScript_1A4F8F:: @ 81A4F8F
 	message FallarborTown_ContestLobby_Text_1A5E46
-	waittext
+	waitmessage
 	multichoice 0, 0, 2, 0
 	switch RESULT
 	case 0, FallarborTown_ContestLobby_EventScript_1A5097
@@ -87,7 +87,7 @@ FallarborTown_ContestLobby_EventScript_1A4F8F:: @ 81A4F8F
 
 FallarborTown_ContestLobby_EventScript_1A4FCC:: @ 81A4FCC
 	message FallarborTown_ContestLobby_Text_1A5E7C
-	waittext
+	waitmessage
 	multichoice 0, 0, 3, 0
 	switch RESULT
 	case 0, FallarborTown_ContestLobby_EventScript_1A5014
@@ -137,7 +137,7 @@ FallarborTown_ContestLobby_EventScript_1A5048:: @ 81A5048
 
 FallarborTown_ContestLobby_EventScript_1A5097:: @ 81A5097
 	message FallarborTown_ContestLobby_Text_1A6623
-	waittext
+	waitmessage
 	multichoice 0, 0, 4, 0
 	switch RESULT
 	case 5, FallarborTown_ContestLobby_EventScript_1A503E
@@ -180,7 +180,7 @@ FallarborTown_ContestLobby_EventScript_1A512E:: @ 81A512E
 
 FallarborTown_ContestLobby_EventScript_1A513D:: @ 81A513D
 	msgbox FallarborTown_ContestLobby_Text_1A67C1, 4
-	closebutton
+	closemessage
 	releaseall
 	setvar 0x4086, 1
 	return
@@ -277,7 +277,7 @@ LinkContestRoom1_EventScript_1A525F:: @ 81A525F
 
 LinkContestRoom1_EventScript_1A5273:: @ 81A5273
 	message2 LinkContestRoom1_Text_1A6976
-	waittext
+	waitmessage
 	return
 
 LinkContestRoom1_EventScript_1A527A:: @ 81A527A
@@ -360,19 +360,19 @@ LinkContestRoom1_EventScript_1A535E:: @ 81A535E
 	compare 0x4088, 5
 	goto_if_eq LinkContestRoom1_EventScript_1A5370
 	message LinkContestRoom1_Text_1A6A04
-	waittext
+	waitmessage
 	return
 
 LinkContestRoom1_EventScript_1A5370:: @ 81A5370
 	message2 LinkContestRoom1_Text_1A6A04
-	waittext
+	waitmessage
 	return
 
 LinkContestRoom1_EventScript_1A5377:: @ 81A5377
 	call LinkContestRoom1_EventScript_1A53B3
 	call LinkContestRoom1_EventScript_1A53CE
 	playse 223
-	waittext
+	waitmessage
 	call LinkContestRoom1_EventScript_1A5A90
 	applymovement 1, LinkContestRoom1_Movement_1A5D9F
 	waitmovement 0
@@ -392,7 +392,7 @@ LinkContestRoom1_EventScript_1A53B3:: @ 81A53B3
 
 LinkContestRoom1_EventScript_1A53C7:: @ 81A53C7
 	message2 LinkContestRoom1_Text_1A6A1F
-	waittext
+	waitmessage
 	return
 
 LinkContestRoom1_EventScript_1A53CE:: @ 81A53CE
@@ -722,7 +722,7 @@ LinkContestRoom1_EventScript_1A587F:: @ 81A587F
 	return
 
 LinkContestRoom1_EventScript_1A5880:: @ 81A5880
-	closebutton
+	closemessage
 	release
 	removeobject 13
 	special sub_80C5164
@@ -766,7 +766,7 @@ LinkContestRoom1_EventScript_1A58EE:: @ 81A58EE
 	applymovement 1, LinkContestRoom1_Movement_1A5DA3
 	waitmovement 0
 	call LinkContestRoom1_EventScript_1A5930
-	waittext
+	waitmessage
 	applymovement 1, LinkContestRoom1_Movement_1A5D91
 	applymovement 2, LinkContestRoom1_Movement_1A5D95
 	waitmovement 0
@@ -800,7 +800,7 @@ LinkContestRoom1_EventScript_1A594A:: @ 81A594A
 	call LinkContestRoom1_EventScript_1A59DE
 	applymovement 1, LinkContestRoom1_Movement_1A5D8F
 	waitmovement 0
-	closebutton
+	closemessage
 	releaseall
 	setvar 0x4009, 1
 	showcontestresults
@@ -816,7 +816,7 @@ LinkContestRoom1_EventScript_1A5984:: @ 81A5984
 
 LinkContestRoom1_EventScript_1A5998:: @ 81A5998
 	message2 LinkContestRoom1_Text_1A6C06
-	waittext
+	waitmessage
 	delay 30
 	return
 
@@ -828,7 +828,7 @@ LinkContestRoom1_EventScript_1A59A2:: @ 81A59A2
 
 LinkContestRoom1_EventScript_1A59B6:: @ 81A59B6
 	message2 LinkContestRoom1_Text_1A6C21
-	waittext
+	waitmessage
 	delay 30
 	return
 
@@ -840,7 +840,7 @@ LinkContestRoom1_EventScript_1A59C0:: @ 81A59C0
 
 LinkContestRoom1_EventScript_1A59D4:: @ 81A59D4
 	message2 LinkContestRoom1_Text_1A6C9D
-	waittext
+	waitmessage
 	delay 30
 	return
 
@@ -852,7 +852,7 @@ LinkContestRoom1_EventScript_1A59DE:: @ 81A59DE
 
 LinkContestRoom1_EventScript_1A59F2:: @ 81A59F2
 	message2 LinkContestRoom1_Text_1A6D16
-	waittext
+	waitmessage
 	delay 30
 	return
 
@@ -902,7 +902,7 @@ LinkContestRoom1_EventScript_1A5A75:: @ 81A5A75
 
 LinkContestRoom1_EventScript_1A5A89:: @ 81A5A89
 	message2 LinkContestRoom1_Text_1A6D3C
-	waittext
+	waitmessage
 	return
 
 LinkContestRoom1_EventScript_1A5A90:: @ 81A5A90
@@ -999,7 +999,7 @@ LinkContestRoom1_EventScript_1A5BAB:: @ 81A5BAB
 	checkflag 2
 	goto_if_eq LinkContestRoom1_EventScript_1A5BF6
 	msgbox LinkContestRoom1_Text_1A6DC5, 3
-	waittext
+	waitmessage
 	call LinkContestRoom1_EventScript_1A5C7F
 	call LinkContestRoom1_EventScript_1A5CE5
 	playse 223
@@ -1055,7 +1055,7 @@ LinkContestRoom1_EventScript_1A5C4C:: @ 81A5C4C
 	special sub_80C4CF8
 	compare 0x8004, 1
 	goto_if_eq LinkContestRoom1_EventScript_1A5C64
-	closebutton
+	closemessage
 	return
 
 LinkContestRoom1_EventScript_1A5C64:: @ 81A5C64

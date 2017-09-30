@@ -17,8 +17,8 @@ SlateportCity_Harbor_EventScript_155F85:: @ 8155F85
 
 SlateportCity_Harbor_EventScript_155F89:: @ 8155F89
 	savebgm BGM_EVIL_TEAM
-	movespriteperm 4, 12, 13
-	spritebehave 4, 9
+	setobjectxyperm 4, 12, 13
+	setobjectmovementtype 4, 9
 	setflag 905
 	return
 
@@ -54,7 +54,7 @@ SlateportCity_Harbor_EventScript_155FD5:: @ 8155FD5
 	applymovement 255, SlateportCity_Harbor_Movement_1A0841
 	waitmovement 0
 	msgbox SlateportCity_Harbor_Text_17FD7D, 4
-	closebutton
+	closemessage
 	applymovement 6, SlateportCity_Harbor_Movement_15609B
 	applymovement 7, SlateportCity_Harbor_Movement_15609B
 	applymovement 8, SlateportCity_Harbor_Movement_1560A5
@@ -72,11 +72,11 @@ SlateportCity_Harbor_EventScript_155FD5:: @ 8155FD5
 	compare 0x8008, 3
 	call_if 1, SlateportCity_Harbor_EventScript_156086
 	msgbox SlateportCity_Harbor_Text_17FE60, 4
-	closebutton
+	closemessage
 	setflag 821
 	setflag 822
-	moveoffscreen 4
-	spritebehave 4, 10
+	moveobjectoffscreen 4
+	setobjectmovementtype 4, 10
 	releaseall
 	end
 
@@ -171,12 +171,12 @@ SlateportCity_Harbor_EventScript_1560D9:: @ 81560D9
 	compare RESULT, 0
 	goto_if_eq SlateportCity_Harbor_EventScript_156135
 	message SlateportCity_Harbor_Text_17FB0A
-	waittext
+	waitmessage
 	goto SlateportCity_Harbor_EventScript_1560FD
 	end
 
 SlateportCity_Harbor_EventScript_1560FD:: @ 81560FD
-	multichoicedef 18, 6, 52, 2, 0
+	multichoicedefault 18, 6, 52, 2, 0
 	switch RESULT
 	case 0, SlateportCity_Harbor_EventScript_15613F
 	case 1, SlateportCity_Harbor_EventScript_156167
@@ -212,13 +212,13 @@ SlateportCity_Harbor_EventScript_156167:: @ 8156167
 
 SlateportCity_Harbor_EventScript_15618A:: @ 815618A
 	message SlateportCity_Harbor_Text_17FBE5
-	waittext
+	waitmessage
 	goto SlateportCity_Harbor_EventScript_1560FD
 	end
 
 SlateportCity_Harbor_EventScript_156196:: @ 8156196
 	msgbox SlateportCity_Harbor_Text_17FBB6, 4
-	closebutton
+	closemessage
 	applymovement LAST_TALKED, SlateportCity_Harbor_Movement_1A0841
 	waitmovement 0
 	delay 30
@@ -277,7 +277,7 @@ SlateportCity_Harbor_EventScript_156211:: @ 8156211
 	compare 0x40a0, 2
 	goto_if_eq SlateportCity_Harbor_EventScript_15624E
 	msgbox SlateportCity_Harbor_Text_17FD1C, 4
-	closebutton
+	closemessage
 	applymovement LAST_TALKED, SlateportCity_Harbor_Movement_1A083D
 	waitmovement 0
 	release
@@ -318,7 +318,7 @@ SlateportCity_Harbor_EventScript_15629D:: @ 815629D
 
 SlateportCity_Harbor_EventScript_1562A7:: @ 81562A7
 	message SlateportCity_Harbor_Text_18028B
-	waittext
+	waitmessage
 	goto SlateportCity_Harbor_EventScript_1562B3
 	end
 
@@ -364,7 +364,7 @@ SlateportCity_Harbor_EventScript_15636A:: @ 815636A
 
 SlateportCity_Harbor_EventScript_156374:: @ 8156374
 	message SlateportCity_Harbor_Text_180447
-	waittext
+	waitmessage
 	goto SlateportCity_Harbor_EventScript_1562B3
 	end
 

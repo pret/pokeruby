@@ -99,12 +99,12 @@ gScriptCmdTable:: @ 814AE30
 	.4byte ScrCmd_checktrainerflag        @ 0x60
 	.4byte ScrCmd_settrainerflag        @ 0x61
 	.4byte ScrCmd_cleartrainerflag          @ 0x62
-	.4byte ScrCmd_movespriteperm          @ 0x63
-	.4byte ScrCmd_moveoffscreen           @ 0x64
-	.4byte ScrCmd_spritebehave            @ 0x65
-	.4byte ScrCmd_waittext                @ 0x66
+	.4byte ScrCmd_setobjectxyperm          @ 0x63
+	.4byte ScrCmd_moveobjectoffscreen           @ 0x64
+	.4byte ScrCmd_setobjectmovementtype            @ 0x65
+	.4byte ScrCmd_waitmessage                @ 0x66
 	.4byte ScrCmd_message                 @ 0x67
-	.4byte ScrCmd_closebutton             @ 0x68
+	.4byte ScrCmd_closemessage             @ 0x68
 	.4byte ScrCmd_lockall                 @ 0x69
 	.4byte ScrCmd_lock                    @ 0x6A
 	.4byte ScrCmd_releaseall              @ 0x6B
@@ -112,19 +112,19 @@ gScriptCmdTable:: @ 814AE30
 	.4byte ScrCmd_waitbutton              @ 0x6D
 	.4byte ScrCmd_yesnobox                @ 0x6E
 	.4byte ScrCmd_multichoice             @ 0x6F
-	.4byte ScrCmd_multichoicedef          @ 0x70
-	.4byte ScrCmd_multichoicerow          @ 0x71
-	.4byte ScrCmd_showbox                 @ 0x72
-	.4byte ScrCmd_hidebox                 @ 0x73
-	.4byte ScrCmd_clearbox                @ 0x74
-	.4byte ScrCmd_showpokepic             @ 0x75
-	.4byte ScrCmd_hidepokepic             @ 0x76
-	.4byte ScrCmd_showcontestwinner       @ 0x77
+	.4byte ScrCmd_multichoicedefault          @ 0x70
+	.4byte ScrCmd_multichoicegrid          @ 0x71
+	.4byte ScrCmd_drawbox                 @ 0x72
+	.4byte ScrCmd_erasebox                 @ 0x73
+	.4byte ScrCmd_drawboxtext                @ 0x74
+	.4byte ScrCmd_drawpokepic             @ 0x75
+	.4byte ScrCmd_erasepokepic             @ 0x76
+	.4byte ScrCmd_drawcontestwinner       @ 0x77
 	.4byte ScrCmd_braillemsg              @ 0x78
-	.4byte ScrCmd_givepokemon             @ 0x79
+	.4byte ScrCmd_givepoke             @ 0x79
 	.4byte ScrCmd_giveegg                 @ 0x7A
 	.4byte ScrCmd_setpokemove             @ 0x7B
-	.4byte ScrCmd_checkattack             @ 0x7C
+	.4byte ScrCmd_checkpokemove             @ 0x7C
 	.4byte ScrCmd_bufferpoke              @ 0x7D
 	.4byte ScrCmd_bufferfirstpoke         @ 0x7E
 	.4byte ScrCmd_bufferpartypoke         @ 0x7F

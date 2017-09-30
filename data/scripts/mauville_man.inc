@@ -131,7 +131,7 @@ SpeakToTrader:
 	compare RESULT, TRUE
 	goto_if_eq already_traded
 	message gTextTrader_MenuPrompt
-	waittext
+	waitmessage
 	goto do_trader_menu_get
 	end
 
@@ -165,13 +165,13 @@ cancelled_get_menu:
 
 rare_item_cant_trade_away:
 	message gTextTrader_ICantTradeThatOneAway
-	waittext
+	waitmessage
 	goto do_trader_menu_get
 	end
 
 dont_want_item:
 	message gTextTrader_MenuPrompt
-	waittext
+	waitmessage
 	goto do_trader_menu_get
 	end
 
@@ -232,14 +232,14 @@ SpeakToStoryteller:
 	goto_if_eq no_stories_recorded
 choose_story:
 	message gTextStoryteller_WhichTale
-	waittext
+	waitmessage
 	special ScrSpecial_StorytellerStoryListMenu
 	waitstate
 	compare RESULT, FALSE
 	goto_if_eq cancel_story_menu
 	setvar 0x8008, 1
 	special ScrSpecial_StorytellerDisplayStory
-	waittext
+	waitmessage
 	waitbutton
 	specialvar RESULT, ScrSpecial_StorytellerUpdateStat
 	compare RESULT, FALSE
@@ -272,25 +272,25 @@ prompt_record_story:
 	compare RESULT, TRUE
 	goto_if_eq stat_update
 	msgbox gTextStoryteller_ImNotSatisfied, 4
-	closebutton
+	closemessage
 	release
 	end
 
 stat_update:
 	msgbox gTextStoryteller_BirthOfANewLegend, 4
-	closebutton
+	closemessage
 	release
 	end
 
 dont_hear_story:
 	msgbox gTextStoryteller_OhIFeelStifled, 4
-	closebutton
+	closemessage
 	release
 	end
 
 cant_record_story:
 	msgbox gTextStoryteller_WishMorePeopleWould, 4
-	closebutton
+	closemessage
 	release
 	end
 
@@ -335,7 +335,7 @@ also_i_was_thinking:
 tell_giddy_tale:
 	special ScrSpecial_GenerateGiddyLine
 	special ShowFieldMessageStringVar4
-	waittext
+	waitmessage
 	yesnobox 20, 8
 	compare RESULT, 1
 	goto_if_eq tell_another_giddy_tale

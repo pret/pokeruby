@@ -13,7 +13,7 @@ S_BerryTree:: @ 81A14DD
 Route102_EventScript_1A1533:: @ 81A1533
 	lockall
 	message Route102_Text_1A1946
-	waittext
+	waitmessage
 	waitbutton
 	releaseall
 	end
@@ -25,7 +25,7 @@ Route102_EventScript_1A153D:: @ 81A153D
 	compare RESULT, 1
 	goto_if_eq Route102_EventScript_1A1558
 	message Route102_Text_1A16B6
-	waittext
+	waitmessage
 	waitbutton
 	release
 	end
@@ -40,7 +40,7 @@ Route102_EventScript_1A1558:: @ 81A1558
 
 Route102_EventScript_1A1577:: @ 81A1577
 	fadescreen 1
-	closebutton
+	closemessage
 	special sub_80B4EE4
 	waitstate
 	compare ITEM_ID, 0
@@ -55,21 +55,21 @@ Route102_EventScript_1A1593:: @ 81A1593
 Route102_EventScript_1A1595:: @ 81A1595
 	lockall
 	message Route102_Text_1A172C
-	waittext
+	waitmessage
 	waitbutton
 	goto Route102_EventScript_1A165F
 
 Route102_EventScript_1A15A2:: @ 81A15A2
 	lockall
 	message Route102_Text_1A174B
-	waittext
+	waitmessage
 	waitbutton
 	goto Route102_EventScript_1A165F
 
 Route102_EventScript_1A15AF:: @ 81A15AF
 	lockall
 	message Route102_Text_1A175C
-	waittext
+	waitmessage
 	waitbutton
 	goto Route102_EventScript_1A165F
 
@@ -77,7 +77,7 @@ Route102_EventScript_1A15BC:: @ 81A15BC
 	call Route102_EventScript_1A15CE
 	lockall
 	message Route102_Text_1A177D
-	waittext
+	waitmessage
 	waitbutton
 	goto Route102_EventScript_1A165F
 
@@ -114,25 +114,25 @@ Route102_EventScript_1A161D:: @ 81A161D
 	special FieldObjectInteractionRemoveBerryTree
 	message Route102_Text_1A17FD
 	playfanfare 387
-	waittext
+	waitmessage
 	waitfanfare
 	waitbutton
 	message Route102_Text_1A181A
-	waittext
+	waitmessage
 	waitbutton
 	release
 	end
 
 Route102_EventScript_1A1642:: @ 81A1642
 	message Route102_Text_1A1881
-	waittext
+	waitmessage
 	waitbutton
 	release
 	end
 
 Route102_EventScript_1A164B:: @ 81A164B
 	message Route102_Text_1A18C5
-	waittext
+	waitmessage
 	waitbutton
 	release
 	end
@@ -164,12 +164,12 @@ gUnknown_081A168F:: @ 81A168F
 
 Route102_EventScript_1A1693:: @ 81A1693
 	message Route102_Text_1A1912
-	waittext
+	waitmessage
 	special FieldObjectInteractionWaterBerryTree
 	special DoWateringBerryTreeAnim
 	waitstate
 	message Route102_Text_1A1925
-	waittext
+	waitmessage
 	waitbutton
 	releaseall
 	end
@@ -178,6 +178,6 @@ Route102_EventScript_1A16A9:: @ 81A16A9
 	special FieldObjectInteractionPlantBerryTree
 	inccounter GAME_STAT_PLANTED_BERRIES
 	message Route102_Text_1A16FB
-	waittext
+	waitmessage
 	waitbutton
 	return

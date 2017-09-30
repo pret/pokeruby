@@ -22,7 +22,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A167:: @ 815A167
 	lock
 	faceplayer
 	message LilycoveCity_DepartmentStoreRooftop_Text_1A0BE4
-	waittext
+	waitmessage
 	pokemartdecor LilycoveCity_DepartmentStoreRooftop_Decorations
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_1A0C02, 4
 	release
@@ -70,7 +70,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A1C4:: @ 815A1C4
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A1CD:: @ 815A1CD
 	lockall
 	message LilycoveCity_DepartmentStoreRooftop_Text_18C72B
-	waittext
+	waitmessage
 	showmoney 0, 0
 	nop
 	goto LilycoveCity_DepartmentStoreRooftop_EventScript_15A1DE
@@ -182,7 +182,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A267:: @ 815A267
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A36E:: @ 815A36E
 	message LilycoveCity_DepartmentStoreRooftop_Text_18C72B
-	waittext
+	waitmessage
 	goto LilycoveCity_DepartmentStoreRooftop_EventScript_15A1DE
 	end
 

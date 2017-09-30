@@ -12,7 +12,7 @@ PetalburgCity_MapScript1_14B717:: @ 814B717
 	end
 
 PetalburgCity_EventScript_14B731:: @ 814B731
-	movespriteperm 9, 5, 11
+	setobjectxyperm 9, 5, 11
 	return
 
 PetalburgCity_EventScript_14B739:: @ 814B739
@@ -38,7 +38,7 @@ PetalburgCity_EventScript_14B747:: @ 814B747
 	applymovement 2, PetalburgCity_Movement_1A083F, 0, 0
 	waitmovement 0, 0, 2
 	msgbox PetalburgCity_Text_16D408, 4
-	closebutton
+	closemessage
 	clearflag 0x4000
 	setvar 0x4057, 3
 	fadedefaultbgm
@@ -54,7 +54,7 @@ PetalburgCity_EventScript_14B7AC:: @ 814B7AC
 	lock
 	faceplayer
 	msgbox PetalburgCity_Text_164490, 4
-	closebutton
+	closemessage
 	applymovement 3, PetalburgCity_Movement_1A083D
 	waitmovement 0
 	release
@@ -196,7 +196,7 @@ PetalburgCity_EventScript_14B866:: @ 814B866
 	compare 0x8008, 3
 	call_if 1, PetalburgCity_EventScript_14B950
 	msgbox PetalburgCity_Text_16438A, 4
-	closebutton
+	closemessage
 	compare 0x8008, 0
 	call_if 1, PetalburgCity_EventScript_14B965
 	compare 0x8008, 1
@@ -210,7 +210,7 @@ PetalburgCity_EventScript_14B866:: @ 814B866
 	applymovement 255, PetalburgCity_Movement_1A0843
 	waitmovement 0
 	msgbox PetalburgCity_Text_164449, 4
-	closebutton
+	closemessage
 	applymovement 9, PetalburgCity_Movement_14B9F4
 	waitmovement 0
 	fadedefaultbgm
