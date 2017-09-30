@@ -27,45 +27,45 @@ gScriptCmdTable:: @ 814AE30
 	.4byte ScrCmd_subvar                  @ 0x18
 	.4byte ScrCmd_copyvar                 @ 0x19
 	.4byte ScrCmd_setorcopyvar            @ 0x1A
-	.4byte ScrCmd_comparebuffers          @ 0x1B
-	.4byte ScrCmd_comparebuffertobyte     @ 0x1C
-	.4byte ScrCmd_comparebuffertoptrbyte  @ 0x1D
-	.4byte ScrCmd_compareptrbytetobuffer  @ 0x1E
-	.4byte ScrCmd_compareptrbytetobyte    @ 0x1F
-	.4byte ScrCmd_compareptrbytes         @ 0x20
-	.4byte ScrCmd_compare                 @ 0x21
-	.4byte ScrCmd_comparevars             @ 0x22
-	.4byte ScrCmd_callasm                 @ 0x23
-	.4byte ScrCmd_jumpasm                 @ 0x24
+	.4byte ScrCmd_compare_local_to_local          @ 0x1B
+	.4byte ScrCmd_compare_local_to_imm     @ 0x1C
+	.4byte ScrCmd_compare_local_to_addr  @ 0x1D
+	.4byte ScrCmd_compare_addr_to_local  @ 0x1E
+	.4byte ScrCmd_compare_addr_to_imm    @ 0x1F
+	.4byte ScrCmd_compare_addr_to_addr         @ 0x20
+	.4byte ScrCmd_compare_var_to_imm                 @ 0x21
+	.4byte ScrCmd_compare_var_to_var             @ 0x22
+	.4byte ScrCmd_callnative                 @ 0x23
+	.4byte ScrCmd_gotonative                 @ 0x24
 	.4byte ScrCmd_special                 @ 0x25
-	.4byte ScrCmd_specialval              @ 0x26
+	.4byte ScrCmd_specialvar              @ 0x26
 	.4byte ScrCmd_waitstate               @ 0x27
-	.4byte ScrCmd_pause                   @ 0x28
+	.4byte ScrCmd_delay                   @ 0x28
 	.4byte ScrCmd_setflag                 @ 0x29
 	.4byte ScrCmd_clearflag               @ 0x2A
 	.4byte ScrCmd_checkflag               @ 0x2B
-	.4byte ScrCmd_compareflags            @ 0x2C
-	.4byte ScrCmd_checkdailyflags         @ 0x2D
-	.4byte ScrCmd_resetvars               @ 0x2E
-	.4byte ScrCmd_playsfx                 @ 0x2F
-	.4byte ScrCmd_checksound              @ 0x30
-	.4byte ScrCmd_fanfare                 @ 0x31
+	.4byte ScrCmd_initclock            @ 0x2C
+	.4byte ScrCmd_dodailyevents         @ 0x2D
+	.4byte ScrCmd_gettime               @ 0x2E
+	.4byte ScrCmd_playse                 @ 0x2F
+	.4byte ScrCmd_waitse              @ 0x30
+	.4byte ScrCmd_playfanfare                 @ 0x31
 	.4byte ScrCmd_waitfanfare             @ 0x32
-	.4byte ScrCmd_playmusic               @ 0x33
-	.4byte ScrCmd_playmusicbattle         @ 0x34
-	.4byte ScrCmd_fadedefault             @ 0x35
-	.4byte ScrCmd_fademusic               @ 0x36
-	.4byte ScrCmd_fadeout                 @ 0x37
-	.4byte ScrCmd_fadein                  @ 0x38
+	.4byte ScrCmd_playbgm               @ 0x33
+	.4byte ScrCmd_savebgm         @ 0x34
+	.4byte ScrCmd_fadedefaultbgm             @ 0x35
+	.4byte ScrCmd_fadenewbgm               @ 0x36
+	.4byte ScrCmd_fadeoutbgm                 @ 0x37
+	.4byte ScrCmd_fadeinbgm                  @ 0x38
 	.4byte ScrCmd_warp                    @ 0x39
-	.4byte ScrCmd_warpmuted               @ 0x3A
-	.4byte ScrCmd_warpwalk                @ 0x3B
+	.4byte ScrCmd_warpsilent               @ 0x3A
+	.4byte ScrCmd_warpdoor                @ 0x3B
 	.4byte ScrCmd_warphole                @ 0x3C
 	.4byte ScrCmd_warpteleport            @ 0x3D
-	.4byte ScrCmd_warp3                   @ 0x3E
-	.4byte ScrCmd_warpplace               @ 0x3F
-	.4byte ScrCmd_warp4                   @ 0x40
-	.4byte ScrCmd_warp5                   @ 0x41
+	.4byte ScrCmd_setwarp                   @ 0x3E
+	.4byte ScrCmd_setdynamicwarp               @ 0x3F
+	.4byte ScrCmd_setdivewarp                   @ 0x40
+	.4byte ScrCmd_setholewarp                   @ 0x41
 	.4byte ScrCmd_getplayerxy             @ 0x42
 	.4byte ScrCmd_countpokemon            @ 0x43
 	.4byte ScrCmd_additem                 @ 0x44
@@ -77,28 +77,28 @@ gScriptCmdTable:: @ 814AE30
 	.4byte ScrCmd_checkpcitem             @ 0x4A
 	.4byte ScrCmd_adddecor                @ 0x4B
 	.4byte ScrCmd_removedecor             @ 0x4C
-	.4byte ScrCmd_testdecor               @ 0x4D
+	.4byte ScrCmd_hasdecor               @ 0x4D
 	.4byte ScrCmd_checkdecor              @ 0x4E
-	.4byte ScrCmd_move                    @ 0x4F
-	.4byte ScrCmd_movecoords              @ 0x50
-	.4byte ScrCmd_waitmove                @ 0x51
-	.4byte ScrCmd_waitmovexy              @ 0x52
-	.4byte ScrCmd_disappear               @ 0x53
-	.4byte ScrCmd_disappearxy             @ 0x54
-	.4byte ScrCmd_reappear                @ 0x55
-	.4byte ScrCmd_reappearxy              @ 0x56
-	.4byte ScrCmd_movesprite              @ 0x57
-	.4byte ScrCmd_spritevisible           @ 0x58
-	.4byte ScrCmd_spriteinvisible         @ 0x59
+	.4byte ScrCmd_applymovement                    @ 0x4F
+	.4byte ScrCmd_applymovement_at              @ 0x50
+	.4byte ScrCmd_waitmovement                @ 0x51
+	.4byte ScrCmd_waitmovement_at              @ 0x52
+	.4byte ScrCmd_removeobject               @ 0x53
+	.4byte ScrCmd_removeobject_at             @ 0x54
+	.4byte ScrCmd_addobject                @ 0x55
+	.4byte ScrCmd_addobject_at              @ 0x56
+	.4byte ScrCmd_setobjectxy              @ 0x57
+	.4byte ScrCmd_showobject           @ 0x58
+	.4byte ScrCmd_hideobject         @ 0x59
 	.4byte ScrCmd_faceplayer              @ 0x5A
-	.4byte ScrCmd_spriteface              @ 0x5B
+	.4byte ScrCmd_turnobject              @ 0x5B
 	.4byte ScrCmd_trainerbattle           @ 0x5C
-	.4byte ScrCmd_reptrainerbattle        @ 0x5D
-	.4byte ScrCmd_endtrainerbattle        @ 0x5E
-	.4byte ScrCmd_endtrainerbattle2       @ 0x5F
+	.4byte ScrCmd_battlebegin        @ 0x5D
+	.4byte ScrCmd_ontrainerbattleend        @ 0x5E
+	.4byte ScrCmd_ontrainerbattleendgoto       @ 0x5F
 	.4byte ScrCmd_checktrainerflag        @ 0x60
-	.4byte ScrCmd_cleartrainerflag        @ 0x61
-	.4byte ScrCmd_settrainerflag          @ 0x62
+	.4byte ScrCmd_settrainerflag        @ 0x61
+	.4byte ScrCmd_cleartrainerflag          @ 0x62
 	.4byte ScrCmd_movespriteperm          @ 0x63
 	.4byte ScrCmd_moveoffscreen           @ 0x64
 	.4byte ScrCmd_spritebehave            @ 0x65
