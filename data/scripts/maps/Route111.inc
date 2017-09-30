@@ -44,9 +44,9 @@ Route111_EventScript_15000D:: @ 815000D
 	setflag 769
 	setflag 770
 	setflag 771
-	settrainerflag OPPONENT_VICTOR
-	settrainerflag OPPONENT_VICTORIA
-	settrainerflag OPPONENT_VIVI
+	cleartrainerflag OPPONENT_VICTOR
+	cleartrainerflag OPPONENT_VICTORIA
+	cleartrainerflag OPPONENT_VIVI
 	end
 
 Route111_EventScript_150023:: @ 8150023

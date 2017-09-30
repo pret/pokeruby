@@ -949,7 +949,7 @@ gUnknown_0819F818:: @ 819F818
 	goto EventScript_19F8F2
 
 EventScript_19F83F:
-	endtrainerbattle
+	ontrainerbattleend
 
 gUnknown_0819F840:: @ 819F840
 	lock
@@ -973,14 +973,14 @@ EventScript_19F870:
 	end
 
 EventScript_19F877:
-	endtrainerbattle
+	ontrainerbattleend
 
 gUnknown_0819F878:: @ 819F878
 	applymovement LAST_TALKED, Movement_19F8F0
 	waitmovement 0
 	special PlayTrainerEncounterMusic
-	reptrainerbattle
-	endtrainerbattle
+	battlebegin
+	ontrainerbattleend
 
 gUnknown_0819F887:: @ 819F887
 	call EventScript_19F8E5
@@ -998,7 +998,7 @@ gUnknown_0819F887:: @ 819F887
 	end
 
 EventScript_19F8AD:
-	endtrainerbattle
+	ontrainerbattleend
 
 gUnknown_0819F8AE:: @ 819F8AE
 	specialvar RESULT, ScrSpecial_GetTrainerEyeRematchFlag
@@ -1018,7 +1018,7 @@ gUnknown_0819F8AE:: @ 819F8AE
 	end
 
 EventScript_19F8DD:
-	endtrainerbattle
+	ontrainerbattleend
 
 EventScript_19F8DE:
 	special ScrSpecial_ShowTrainerNonBattlingSpeech
@@ -1040,7 +1040,7 @@ EventScript_19F8F2:
 	special ScrSpecial_ShowTrainerIntroSpeech
 	waittext
 	waitbutton
-	reptrainerbattle
+	battlebegin
 	specialvar RESULT, ScrSpecial_GetTrainerBattleMode
 	compare RESULT, 0
 	goto_if_eq EventScript_19F934
@@ -1058,7 +1058,7 @@ EventScript_19F934:
 	end
 
 EventScript_19F936:
-	endtrainerbattle2
+	ontrainerbattleendgoto
 
 Std_6::
 	message 0x0
@@ -1945,66 +1945,66 @@ SootopolisCity_Gym_1F_EventScript_1A01C0:: @ 81A01C0
 	end
 
 DewfordTown_Gym_EventScript_1A021E:: @ 81A021E
-	cleartrainerflag OPPONENT_JOSH
-	cleartrainerflag OPPONENT_TOMMY
+	settrainerflag OPPONENT_JOSH
+	settrainerflag OPPONENT_TOMMY
 	return
 
 DewfordTown_Gym_EventScript_1A0225:: @ 81A0225
-	cleartrainerflag OPPONENT_HIDEKI
-	cleartrainerflag OPPONENT_TESSA
-	cleartrainerflag OPPONENT_LAURA
+	settrainerflag OPPONENT_HIDEKI
+	settrainerflag OPPONENT_TESSA
+	settrainerflag OPPONENT_LAURA
 	return
 
 DewfordTown_Gym_EventScript_1A022F:: @ 81A022F
-	cleartrainerflag OPPONENT_KIRK
-	cleartrainerflag OPPONENT_SHAWN
-	cleartrainerflag OPPONENT_BEN
-	cleartrainerflag OPPONENT_VIVIAN
+	settrainerflag OPPONENT_KIRK
+	settrainerflag OPPONENT_SHAWN
+	settrainerflag OPPONENT_BEN
+	settrainerflag OPPONENT_VIVIAN
 	return
 
 DewfordTown_Gym_EventScript_1A023C:: @ 81A023C
-	cleartrainerflag OPPONENT_COLE
-	cleartrainerflag OPPONENT_AXLE
-	cleartrainerflag OPPONENT_ANDY
-	cleartrainerflag OPPONENT_ZANE
-	cleartrainerflag OPPONENT_SADIE
+	settrainerflag OPPONENT_COLE
+	settrainerflag OPPONENT_AXLE
+	settrainerflag OPPONENT_ANDY
+	settrainerflag OPPONENT_ZANE
+	settrainerflag OPPONENT_SADIE
 	return
 
 DewfordTown_Gym_EventScript_1A024C:: @ 81A024C
-	cleartrainerflag OPPONENT_RANDALL
-	cleartrainerflag OPPONENT_PARKER
-	cleartrainerflag OPPONENT_GEORGE
-	cleartrainerflag OPPONENT_BERKE
-	cleartrainerflag OPPONENT_MARY
-	cleartrainerflag OPPONENT_LORI
-	cleartrainerflag OPPONENT_JODY
+	settrainerflag OPPONENT_RANDALL
+	settrainerflag OPPONENT_PARKER
+	settrainerflag OPPONENT_GEORGE
+	settrainerflag OPPONENT_BERKE
+	settrainerflag OPPONENT_MARY
+	settrainerflag OPPONENT_LORI
+	settrainerflag OPPONENT_JODY
 	return
 
 DewfordTown_Gym_EventScript_1A0262:: @ 81A0262
-	cleartrainerflag OPPONENT_JARED
-	cleartrainerflag OPPONENT_TERRELL
-	cleartrainerflag OPPONENT_KYLEE
-	cleartrainerflag OPPONENT_WILL
+	settrainerflag OPPONENT_JARED
+	settrainerflag OPPONENT_TERRELL
+	settrainerflag OPPONENT_KYLEE
+	settrainerflag OPPONENT_WILL
 	return
 
 DewfordTown_Gym_EventScript_1A026F:: @ 81A026F
-	cleartrainerflag OPPONENT_PRESTON
-	cleartrainerflag OPPONENT_VIRGIL
-	cleartrainerflag OPPONENT_FRITZ
-	cleartrainerflag OPPONENT_HANNAH
-	cleartrainerflag OPPONENT_SAMANTHA
-	cleartrainerflag OPPONENT_MAURA
+	settrainerflag OPPONENT_PRESTON
+	settrainerflag OPPONENT_VIRGIL
+	settrainerflag OPPONENT_FRITZ
+	settrainerflag OPPONENT_HANNAH
+	settrainerflag OPPONENT_SAMANTHA
+	settrainerflag OPPONENT_MAURA
 	return
 
 DewfordTown_Gym_EventScript_1A0282:: @ 81A0282
-	cleartrainerflag OPPONENT_ANDREA
-	cleartrainerflag OPPONENT_CRISSY
-	cleartrainerflag OPPONENT_BRIANNA_2
-	cleartrainerflag OPPONENT_CONNIE
-	cleartrainerflag OPPONENT_BRIDGET
-	cleartrainerflag OPPONENT_OLIVIA
-	cleartrainerflag OPPONENT_TIFFANY
-	cleartrainerflag OPPONENT_MARISSA
+	settrainerflag OPPONENT_ANDREA
+	settrainerflag OPPONENT_CRISSY
+	settrainerflag OPPONENT_BRIANNA_2
+	settrainerflag OPPONENT_CONNIE
+	settrainerflag OPPONENT_BRIDGET
+	settrainerflag OPPONENT_OLIVIA
+	settrainerflag OPPONENT_TIFFANY
+	settrainerflag OPPONENT_MARISSA
 	return
 
 DewfordTown_Gym_EventScript_1A029B:: @ 81A029B

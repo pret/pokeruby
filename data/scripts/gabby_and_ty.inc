@@ -1,7 +1,7 @@
 Route111_EventScript_1AE313:: @ 81AE313
 Route118_EventScript_1AE313:: @ 81AE313
 Route120_EventScript_1AE313:: @ 81AE313
-	settrainerflag OPPONENT_GABBY_AND_TY_6
+	cleartrainerflag OPPONENT_GABBY_AND_TY_6
 	specialvar RESULT, GabbyAndTyGetBattleNum
 	switch RESULT
 	case 0, Route111_EventScript_1AE384
