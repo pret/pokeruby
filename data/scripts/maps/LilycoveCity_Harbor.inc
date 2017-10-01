@@ -3,7 +3,7 @@ LilycoveCity_Harbor_MapScripts:: @ 8159893
 	.byte 0
 
 LilycoveCity_Harbor_MapScript1_159899:: @ 8159899
-	warp6 LilycoveCity, 255, 12, 33
+	setescapewarp LilycoveCity, 255, 12, 33
 	end
 
 LilycoveCity_Harbor_EventScript_1598A2:: @ 81598A2

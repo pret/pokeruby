@@ -12,7 +12,7 @@ MauvilleCity_GameCorner_EventScript_156A34:: @ 8156A34
 	waitmessage
 	showmoneybox 0, 0
 	nop
-	showcoins 0, 5
+	showcoinsbox 0, 5
 	goto MauvilleCity_GameCorner_EventScript_156A60
 
 MauvilleCity_GameCorner_EventScript_156A60:: @ 8156A60
@@ -42,11 +42,11 @@ MauvilleCity_GameCorner_EventScript_156AAE:: @ 8156AAE
 	takemoney 0x3e8, 0
 	updatemoneybox 0, 0
 	nop
-	updatecoins 0, 5
+	updatecoinsbox 0, 5
 	playse 95
 	msgbox MauvilleCity_GameCorner_Text_181CFE, 4
 	hidemoneybox 0, 0
-	hidecoins 0, 5
+	hidecoinsbox 0, 5
 	release
 	end
 
@@ -61,11 +61,11 @@ MauvilleCity_GameCorner_EventScript_156AF0:: @ 8156AF0
 	takemoney 0x2710, 0
 	updatemoneybox 0, 0
 	nop
-	updatecoins 0, 5
+	updatecoinsbox 0, 5
 	playse 95
 	msgbox MauvilleCity_GameCorner_Text_181CFE, 4
 	hidemoneybox 0, 0
-	hidecoins 0, 5
+	hidecoinsbox 0, 5
 	release
 	end
 
@@ -77,21 +77,21 @@ MauvilleCity_GameCorner_EventScript_156B32:: @ 8156B32
 MauvilleCity_GameCorner_EventScript_156B3C:: @ 8156B3C
 	msgbox MauvilleCity_GameCorner_Text_181D28, 4
 	hidemoneybox 0, 0
-	hidecoins 0, 5
+	hidecoinsbox 0, 5
 	release
 	end
 
 MauvilleCity_GameCorner_EventScript_156B4C:: @ 8156B4C
 	msgbox MauvilleCity_GameCorner_Text_181D73, 4
 	hidemoneybox 0, 0
-	hidecoins 0, 5
+	hidecoinsbox 0, 5
 	release
 	end
 
 MauvilleCity_GameCorner_EventScript_156B5C:: @ 8156B5C
 	msgbox MauvilleCity_GameCorner_Text_181D57, 4
 	hidemoneybox 0, 0
-	hidecoins 0, 5
+	hidecoinsbox 0, 5
 	release
 	end
 
@@ -108,7 +108,7 @@ MauvilleCity_GameCorner_EventScript_156B6C:: @ 8156B6C
 MauvilleCity_GameCorner_EventScript_156B88:: @ 8156B88
 	message MauvilleCity_GameCorner_Text_181E17
 	waitmessage
-	showcoins 0, 0
+	showcoinsbox 0, 0
 	setvar 0x4001, 0
 	goto MauvilleCity_GameCorner_EventScript_156BA6
 
@@ -160,9 +160,9 @@ MauvilleCity_GameCorner_EventScript_156C46:: @ 8156C46
 	checkdecor 88
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_156D02
-	removecoins 1000
+	takecoins 1000
 	adddecor 88
-	updatecoins 0, 0
+	updatecoinsbox 0, 0
 	playse 95
 	msgbox MauvilleCity_GameCorner_Text_181E49, 4
 	goto MauvilleCity_GameCorner_EventScript_156B9B
@@ -176,9 +176,9 @@ MauvilleCity_GameCorner_EventScript_156C80:: @ 8156C80
 	checkdecor 89
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_156D02
-	removecoins 1000
+	takecoins 1000
 	adddecor 89
-	updatecoins 0, 0
+	updatecoinsbox 0, 0
 	playse 95
 	msgbox MauvilleCity_GameCorner_Text_181E49, 4
 	goto MauvilleCity_GameCorner_EventScript_156B9B
@@ -192,9 +192,9 @@ MauvilleCity_GameCorner_EventScript_156CBA:: @ 8156CBA
 	checkdecor 90
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_156D02
-	removecoins 1000
+	takecoins 1000
 	adddecor 90
-	updatecoins 0, 0
+	updatecoinsbox 0, 0
 	playse 95
 	msgbox MauvilleCity_GameCorner_Text_181E49, 4
 	goto MauvilleCity_GameCorner_EventScript_156B9B
@@ -212,7 +212,7 @@ MauvilleCity_GameCorner_EventScript_156D02:: @ 8156D02
 
 MauvilleCity_GameCorner_EventScript_156D0D:: @ 8156D0D
 	msgbox MauvilleCity_GameCorner_Text_181EC2, 4
-	hidecoins 0, 0
+	hidecoinsbox 0, 0
 	release
 	end
 
@@ -229,7 +229,7 @@ MauvilleCity_GameCorner_EventScript_156D1A:: @ 8156D1A
 MauvilleCity_GameCorner_EventScript_156D36:: @ 8156D36
 	message MauvilleCity_GameCorner_Text_181E17
 	waitmessage
-	showcoins 0, 0
+	showcoinsbox 0, 0
 	setvar 0x4001, 0
 	goto MauvilleCity_GameCorner_EventScript_156D54
 
@@ -294,9 +294,9 @@ MauvilleCity_GameCorner_EventScript_156E3C:: @ 8156E3C
 	checkitemspace ITEM_TM32, 1
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_156F6C
-	removecoins 1500
+	takecoins 1500
 	additem ITEM_TM32, 1
-	updatecoins 0, 0
+	updatecoinsbox 0, 0
 	playse 95
 	msgbox MauvilleCity_GameCorner_Text_181F08, 4
 	goto MauvilleCity_GameCorner_EventScript_156D49
@@ -309,9 +309,9 @@ MauvilleCity_GameCorner_EventScript_156E76:: @ 8156E76
 	checkitemspace ITEM_TM29, 1
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_156F6C
-	removecoins 3500
+	takecoins 3500
 	additem ITEM_TM29, 1
-	updatecoins 0, 0
+	updatecoinsbox 0, 0
 	playse 95
 	msgbox MauvilleCity_GameCorner_Text_181F08, 4
 	goto MauvilleCity_GameCorner_EventScript_156D49
@@ -324,9 +324,9 @@ MauvilleCity_GameCorner_EventScript_156EB0:: @ 8156EB0
 	checkitemspace ITEM_TM35, 1
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_156F6C
-	removecoins 4000
+	takecoins 4000
 	additem ITEM_TM35, 1
-	updatecoins 0, 0
+	updatecoinsbox 0, 0
 	playse 95
 	msgbox MauvilleCity_GameCorner_Text_181F08, 4
 	goto MauvilleCity_GameCorner_EventScript_156D49
@@ -339,9 +339,9 @@ MauvilleCity_GameCorner_EventScript_156EEA:: @ 8156EEA
 	checkitemspace ITEM_TM24, 1
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_156F6C
-	removecoins 4000
+	takecoins 4000
 	additem ITEM_TM24, 1
-	updatecoins 0, 0
+	updatecoinsbox 0, 0
 	playse 95
 	msgbox MauvilleCity_GameCorner_Text_181F08, 4
 	goto MauvilleCity_GameCorner_EventScript_156D49
@@ -354,9 +354,9 @@ MauvilleCity_GameCorner_EventScript_156F24:: @ 8156F24
 	checkitemspace ITEM_TM13, 1
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_156F6C
-	removecoins 4000
+	takecoins 4000
 	additem ITEM_TM13, 1
-	updatecoins 0, 0
+	updatecoinsbox 0, 0
 	playse 95
 	msgbox MauvilleCity_GameCorner_Text_181F08, 4
 	goto MauvilleCity_GameCorner_EventScript_156D49
@@ -374,7 +374,7 @@ MauvilleCity_GameCorner_EventScript_156F6C:: @ 8156F6C
 
 MauvilleCity_GameCorner_EventScript_156F77:: @ 8156F77
 	msgbox MauvilleCity_GameCorner_Text_181EC2, 4
-	hidecoins 0, 0
+	hidecoinsbox 0, 0
 	release
 	end
 

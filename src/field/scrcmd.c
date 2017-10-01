@@ -196,7 +196,7 @@ bool8 ScrCmd_setvaddress(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_vjump(struct ScriptContext *ctx)
+bool8 ScrCmd_vgoto(struct ScriptContext *ctx)
 {
     u32 addr = ScriptReadWord(ctx);
 
@@ -212,7 +212,7 @@ bool8 ScrCmd_vcall(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_if5(struct ScriptContext *ctx)
+bool8 ScrCmd_vgoto_if(struct ScriptContext *ctx)
 {
     u8 condition = ScriptReadByte(ctx);
     u8 *ptr = (u8 *)(ScriptReadWord(ctx) - gUnknown_0202E8B0);
@@ -222,7 +222,7 @@ bool8 ScrCmd_if5(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_if6(struct ScriptContext *ctx)
+bool8 ScrCmd_vcall_if(struct ScriptContext *ctx)
 {
     u8 condition = ScriptReadByte(ctx);
     u8 *ptr = (u8 *)(ScriptReadWord(ctx) - gUnknown_0202E8B0);
@@ -595,7 +595,7 @@ bool8 ScrCmd_checkflag(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_inccounter(struct ScriptContext *ctx)
+bool8 ScrCmd_incrementgamestat(struct ScriptContext *ctx)
 {
     IncrementGameStat(ScriptReadByte(ctx));
     return FALSE;
@@ -837,7 +837,7 @@ bool8 ScrCmd_setholewarp(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_warp6(struct ScriptContext *ctx)
+bool8 ScrCmd_setescapewarp(struct ScriptContext *ctx)
 {
     u8 mapGroup = ScriptReadByte(ctx);
     u8 mapNum = ScriptReadByte(ctx);
@@ -1433,7 +1433,7 @@ bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_vtext(struct ScriptContext *ctx)
+bool8 ScrCmd_vmessage(struct ScriptContext *ctx)
 {
     u32 v1 = ScriptReadWord(ctx);
 
@@ -1534,7 +1534,7 @@ bool8 ScrCmd_vloadptr(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_vbuffer(struct ScriptContext *ctx)
+bool8 ScrCmd_vgetstring(struct ScriptContext *ctx)
 {
     u8 stringVarIndex = ScriptReadByte(ctx);
     u32 addr = ScriptReadWord(ctx);
@@ -1659,7 +1659,7 @@ bool8 ScrCmd_updatemoneybox(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_showcoins(struct ScriptContext *ctx)
+bool8 ScrCmd_showcoinsbox(struct ScriptContext *ctx)
 {
     u8 x = ScriptReadByte(ctx);
     u8 y = ScriptReadByte(ctx);
@@ -1668,7 +1668,7 @@ bool8 ScrCmd_showcoins(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_hidecoins(struct ScriptContext *ctx)
+bool8 ScrCmd_hidecoinsbox(struct ScriptContext *ctx)
 {
     u8 x = ScriptReadByte(ctx);
     u8 y = ScriptReadByte(ctx);
@@ -1677,7 +1677,7 @@ bool8 ScrCmd_hidecoins(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_updatecoins(struct ScriptContext *ctx)
+bool8 ScrCmd_updatecoinsbox(struct ScriptContext *ctx)
 {
     u8 x = ScriptReadByte(ctx);
     u8 y = ScriptReadByte(ctx);
@@ -1972,7 +1972,7 @@ bool8 ScrCmd_setdoorclosed(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_event_b1(struct ScriptContext *ctx)
+bool8 ScrCmd_addelevmenuitem(struct ScriptContext *ctx)
 {
     u8 v3 = ScriptReadByte(ctx);
     u16 v5 = VarGet(ScriptReadHalfword(ctx));
@@ -1983,7 +1983,7 @@ bool8 ScrCmd_event_b1(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_event_b2(struct ScriptContext *ctx)
+bool8 ScrCmd_showelevmenu(struct ScriptContext *ctx)
 {
     ScriptShowElevatorMenu();
     ScriptContext1_Stop();
@@ -2008,7 +2008,7 @@ bool8 ScrCmd_givecoins(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_removecoins(struct ScriptContext *ctx)
+bool8 ScrCmd_takecoins(struct ScriptContext *ctx)
 {
     u16 coins = VarGet(ScriptReadHalfword(ctx));
 

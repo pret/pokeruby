@@ -623,7 +623,7 @@ DewfordTown_EventScript_14E443:: @ 814E443
 	end
 
 DewfordTown_EventScript_14E46E:: @ 814E46E
-	inccounter GAME_STAT_STARTED_TRENDS
+	incrementgamestat GAME_STAT_STARTED_TRENDS
 	compare 0x8004, 0
 	goto_if_eq DewfordTown_EventScript_14E48F
 	msgbox DewfordTown_Text_16BB44, 4

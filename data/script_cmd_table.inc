@@ -177,26 +177,26 @@ gScriptCmdTable:: @ 814AE30
 	.4byte ScrCmd_waitdooranim              @ 0xAE
 	.4byte ScrCmd_setdooropen          @ 0xAF
 	.4byte ScrCmd_setdoorclosed          @ 0xB0
-	.4byte ScrCmd_event_b1                @ 0xB1
-	.4byte ScrCmd_event_b2                @ 0xB2
+	.4byte ScrCmd_addelevmenuitem                @ 0xB1
+	.4byte ScrCmd_showelevmenu                @ 0xB2
 	.4byte ScrCmd_checkcoins              @ 0xB3
 	.4byte ScrCmd_givecoins               @ 0xB4
-	.4byte ScrCmd_removecoins             @ 0xB5
+	.4byte ScrCmd_takecoins             @ 0xB5
 	.4byte ScrCmd_setwildbattle           @ 0xB6
 	.4byte ScrCmd_dowildbattle            @ 0xB7
 	.4byte ScrCmd_setvaddress             @ 0xB8
-	.4byte ScrCmd_vjump                   @ 0xB9
+	.4byte ScrCmd_vgoto                   @ 0xB9
 	.4byte ScrCmd_vcall                   @ 0xBA
-	.4byte ScrCmd_if5                     @ 0xBB
-	.4byte ScrCmd_if6                     @ 0xBC
-	.4byte ScrCmd_vtext                   @ 0xBD
+	.4byte ScrCmd_vgoto_if                     @ 0xBB
+	.4byte ScrCmd_vcall_if                     @ 0xBC
+	.4byte ScrCmd_vmessage                   @ 0xBD
 	.4byte ScrCmd_vloadptr                @ 0xBE
-	.4byte ScrCmd_vbuffer                 @ 0xBF
-	.4byte ScrCmd_showcoins               @ 0xC0
-	.4byte ScrCmd_hidecoins               @ 0xC1
-	.4byte ScrCmd_updatecoins             @ 0xC2
-	.4byte ScrCmd_inccounter              @ 0xC3
-	.4byte ScrCmd_warp6                   @ 0xC4
+	.4byte ScrCmd_vgetstring                 @ 0xBF
+	.4byte ScrCmd_showcoinsbox               @ 0xC0
+	.4byte ScrCmd_hidecoinsbox               @ 0xC1
+	.4byte ScrCmd_updatecoinsbox             @ 0xC2
+	.4byte ScrCmd_incrementgamestat              @ 0xC3
+	.4byte ScrCmd_setescapewarp                   @ 0xC4
 	.4byte ScrCmd_waitpokecry             @ 0xC5
 
 gScriptCmdTableEnd::

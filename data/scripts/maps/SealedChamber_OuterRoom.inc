@@ -6,7 +6,7 @@ SealedChamber_OuterRoom_MapScripts:: @ 815F0C6
 
 SealedChamber_OuterRoom_MapScript1_15F0D6:: @ 815F0D6
 	setdivewarp Underwater_SealedChamber, 255, 12, 44
-	warp6 Underwater_SealedChamber, 255, 12, 44
+	setescapewarp Underwater_SealedChamber, 255, 12, 44
 	end
 
 SealedChamber_OuterRoom_MapScript1_15F0E7:: @ 815F0E7

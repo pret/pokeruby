@@ -247,7 +247,7 @@ BattleTower_Lobby_EventScript_160587:: @ 8160587
 	erasebox 0, 0, 15, 10
 	compare RESULT, 0
 	goto_if_eq BattleTower_Lobby_EventScript_160642
-	inccounter GAME_STAT_ENTERED_BATTLE_TOWER
+	incrementgamestat GAME_STAT_ENTERED_BATTLE_TOWER
 	special SavePlayerParty
 	special sub_8135A14
 	setvar 0x40bc, 1

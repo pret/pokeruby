@@ -3,7 +3,7 @@ SlateportCity_Harbor_MapScripts:: @ 8155F5D
 	.byte 0
 
 SlateportCity_Harbor_MapScript1_155F63:: @ 8155F63
-	warp6 SlateportCity, 255, 28, 13
+	setescapewarp SlateportCity, 255, 28, 13
 	setvar 0x4001, 0
 	compare 0x40a0, 1
 	call_if 1, SlateportCity_Harbor_EventScript_155F89

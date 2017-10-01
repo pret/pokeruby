@@ -176,7 +176,7 @@ Route102_EventScript_1A1693:: @ 81A1693
 
 Route102_EventScript_1A16A9:: @ 81A16A9
 	special FieldObjectInteractionPlantBerryTree
-	inccounter GAME_STAT_PLANTED_BERRIES
+	incrementgamestat GAME_STAT_PLANTED_BERRIES
 	message Route102_Text_1A16FB
 	waitmessage
 	waitbutton

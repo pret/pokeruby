@@ -1194,12 +1194,12 @@
 	.endm
 
 	@ In FireRed, this command is a nop.
-	.macro event_b1
+	.macro addelevmenuitem
 	.byte 0xb1
 	.endm
 
 	@ In FireRed, this command is a nop.
-	.macro event_b2
+	.macro showelevmenu
 	.byte 0xb2
 	.endm
 
@@ -1213,7 +1213,7 @@
 	.2byte \word
 	.endm
 
-	.macro removecoins word
+	.macro takecoins word
 	.byte 0xb5
 	.2byte \word
 	.endm
@@ -1237,7 +1237,7 @@
 	.2byte \word
 	.endm
 
-	.macro vjump pointer
+	.macro vgoto pointer
 	.byte 0xb9
 	.4byte \pointer
 	.endm
@@ -1247,19 +1247,19 @@
 	.4byte \pointer
 	.endm
 
-	.macro if5 byte, pointer
+	.macro vgoto_if byte, pointer
 	.byte 0xbb
 	.byte \byte
 	.4byte \pointer
 	.endm
 
-	.macro if6 byte, pointer
+	.macro vcall_if byte, pointer
 	.byte 0xbc
 	.byte \byte
 	.4byte \pointer
 	.endm
 
-	.macro vtext pointer
+	.macro vmessage pointer
 	.byte 0xbd
 	.4byte \pointer
 	.endm
@@ -1269,41 +1269,41 @@
 	.4byte \pointer
 	.endm
 
-	.macro vbuffer byte, pointer
+	.macro vgetstring byte, pointer
 	.byte 0xbf
 	.byte \byte
 	.4byte \pointer
 	.endm
 
 	@ Spawns a secondary box showing how many Coins the player has.
-	.macro showcoins X, Y
+	.macro showcoinsbox X, Y
 	.byte 0xc0
 	.byte \X
 	.byte \Y
 	.endm
 
 	@ Hides the secondary box spawned by showcoins. It doesn't appear to use its arguments, but they are still required.
-	.macro hidecoins X, Y
+	.macro hidecoinsbox X, Y
 	.byte 0xc1
 	.byte \X
 	.byte \Y
 	.endm
 
 	@ Updates the secondary box spawned by showcoins. (What does it do with its arguments?)
-	.macro updatecoins X, Y
+	.macro updatecoinsbox X, Y
 	.byte 0xc2
 	.byte \X
 	.byte \Y
 	.endm
 
 	@ Increases the value of the specified hidden variable by 1. The hidden variable's value will not be allowed to exceed 0x00FFFFFF.
-	.macro inccounter a
+	.macro incrementgamestat a
 	.byte 0xc3
 	.byte \a
 	.endm
 
 	@ Clone of warp... Except that it doesn't appear to have any effect when used in some of FireRed's default level scripts. (If it did, Berry Forest would be impossible to enter...)
-	.macro warp6 map, warp, X, Y
+	.macro setescapewarp map, warp, X, Y
 	.byte 0xc4
 	map \map
 	.byte \warp

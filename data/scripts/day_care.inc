@@ -114,7 +114,7 @@ Route117_PokemonDayCare_EventScript_1B236C:: @ 81B236C
 	msgbox Route117_PokemonDayCare_Text_1B296E, 4
 	waitpokecry
 	special Daycare_SendPokemon_Special
-	inccounter GAME_STAT_USED_DAYCARE
+	incrementgamestat GAME_STAT_USED_DAYCARE
 	specialvar RESULT, sp0B6_daycare
 	compare RESULT, 2
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B23DA

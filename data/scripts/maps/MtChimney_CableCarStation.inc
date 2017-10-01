@@ -46,7 +46,7 @@ MtChimney_CableCarStation_EventScript_15C16C:: @ 815C16C
 	waitmovement 0
 	setvar 0x8004, 1
 	setvar 0x40a3, 2
-	inccounter GAME_STAT_RODE_CABLE_CAR
+	incrementgamestat GAME_STAT_RODE_CABLE_CAR
 	special CableCarWarp
 	special sub_8123218
 	waitstate

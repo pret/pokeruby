@@ -1446,7 +1446,7 @@ VerdanturfTown_PokemonCenter_1F_EventScript_19FD5B:: @ 819FD5B
 	end
 
 OldaleTown_PokemonCenter_1F_EventScript_19FD7C:: @ 819FD7C
-	inccounter GAME_STAT_USED_POKECENTER
+	incrementgamestat GAME_STAT_USED_POKECENTER
 	message gText_NurseJoy_OkayIllTakeYourPokemon
 	waitmessage
 	applymovement 0x800b, OldaleTown_PokemonCenter_1F_Movement_1A083F
@@ -4406,7 +4406,7 @@ FallarborTown_ContestLobby_EventScript_1ADE46:: @ 81ADE46
 SlateportCity_OceanicMuseum_1F_EventScript_1ADE46:: @ 81ADE46
 SlateportCity_PokemonFanClub_EventScript_1ADE46:: @ 81ADE46
 	special sub_80BDE48
-	inccounter GAME_STAT_GOT_INTERVIEWED
+	incrementgamestat GAME_STAT_GOT_INTERVIEWED
 	release
 	end
 

@@ -242,7 +242,7 @@ LavaridgeTown_EventScript_14E710:: @ 814E710
 	end
 
 LavaridgeTown_EventScript_14E721:: @ 814E721
-	inccounter GAME_STAT_ENTERED_HOT_SPRINGS
+	incrementgamestat GAME_STAT_ENTERED_HOT_SPRINGS
 	end
 
 LavaridgeTown_EventScript_14E724:: @ 814E724

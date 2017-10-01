@@ -4,7 +4,7 @@ Route112_CableCarStation_MapScripts:: @ 815C033
 	.byte 0
 
 Route112_CableCarStation_MapScript1_15C03E:: @ 815C03E
-	warp6 Route112, 255, 28, 28
+	setescapewarp Route112, 255, 28, 28
 	compare 0x40a3, 2
 	call_if 1, Route112_CableCarStation_EventScript_15C052
 	end
@@ -47,7 +47,7 @@ Route112_CableCarStation_EventScript_15C0AD:: @ 815C0AD
 	waitmovement 0
 	setvar 0x8004, 0
 	setvar 0x40a3, 1
-	inccounter GAME_STAT_RODE_CABLE_CAR
+	incrementgamestat GAME_STAT_RODE_CABLE_CAR
 	special CableCarWarp
 	special sub_8123218
 	waitstate

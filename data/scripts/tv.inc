@@ -1,6 +1,6 @@
 Event_TV:: @ 81A6E72
 	lockall
-	inccounter GAME_STAT_WATCHED_TV
+	incrementgamestat GAME_STAT_WATCHED_TV
 	special sub_80C2014
 	specialvar RESULT, CheckForBigMovieOrEmergencyNewsOnTV
 	compare RESULT, 2

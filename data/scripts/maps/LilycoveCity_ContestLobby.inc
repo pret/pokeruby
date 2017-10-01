@@ -68,7 +68,7 @@ LilycoveCity_ContestLobby_EventScript_158918:: @ 8158918
 	end
 
 LilycoveCity_ContestLobby_EventScript_158948:: @ 8158948
-	inccounter GAME_STAT_RECEIVED_RIBBONS
+	incrementgamestat GAME_STAT_RECEIVED_RIBBONS
 	special sub_80C4858
 	applymovement 4, LilycoveCity_ContestLobby_Movement_158A4E
 	waitmovement 0
@@ -241,7 +241,7 @@ LilycoveCity_ContestLobby_EventScript_158AE8:: @ 8158AE8
 	end
 
 LilycoveCity_ContestLobby_EventScript_158B18:: @ 8158B18
-	inccounter GAME_STAT_RECEIVED_RIBBONS
+	incrementgamestat GAME_STAT_RECEIVED_RIBBONS
 	special sub_80C4858
 	applymovement 11, LilycoveCity_ContestLobby_Movement_158B78
 	waitmovement 0
