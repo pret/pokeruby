@@ -6904,7 +6904,7 @@ sub_80AE9FC: @ 80AE9FC
 	adds r0, r5, 0
 	mov r1, r8
 	adds r2, r6, 0
-	bl species_and_otid_get_pal
+	bl GetMonSpritePalFromOtIdPersonality
 	movs r1, 0x90
 	lsls r1, 1
 	movs r2, 0x20

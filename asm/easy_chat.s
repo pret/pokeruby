@@ -9975,7 +9975,7 @@ _080EAE50:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0
-	bl GetNationalPokedexFlag
+	bl GetSetPokedexFlag
 	b _080EAE7C
 _080EAE62:
 	ldr r0, _080EAE74 @ =gUnknown_083DB694

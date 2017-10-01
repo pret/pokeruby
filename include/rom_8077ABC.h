@@ -4,10 +4,18 @@
 #include "sprite.h"
 #include "task.h"
 
+enum
+{
+    ANIM_BANK_ATK,
+    ANIM_BANK_DEF,
+    ANIM_BANK_ATK_PARTNER,
+    ANIM_BANK_DEF_PARTNER
+};
+
 u8 sub_8077ABC(u8, u8);
 u8 sub_8077E44(u8 slot, u16 species, u8 a3);
-u8 obj_id_for_side_relative_to_move(u8 side);
-void oamt_set_x3A_32(struct Sprite *sprite, void(*callback)(struct Sprite *));
+u8 GetAnimBankSpriteId(u8 side);
+void StoreSpriteCallbackInData6(struct Sprite *sprite, void(*callback)(struct Sprite *));
 void sub_8078314(struct Sprite *sprite);
 void sub_8078364(struct Sprite *sprite);
 void sub_8078458(struct Sprite *sprite);
@@ -22,8 +30,8 @@ u8 GetBankIdentity(u8 slot);
 u8 GetBankByPlayerAI(u8);
 u8 GetBankByPlayerAI(u8);
 u8 GetBankByPlayerAI(u8 state);
-u8 sub_8078874(u8);
-bool8 sub_8078874(u8);
+u8 AnimBankSpriteExists(u8);
+bool8 AnimBankSpriteExists(u8);
 bool8 IsDoubleBattle();
 u8 IsDoubleBattle(void);
 bool8 IsDoubleBattle(void);
