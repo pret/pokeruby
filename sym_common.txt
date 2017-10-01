@@ -188,12 +188,7 @@ gUnknown_03005D28: @ 3005D28
 	.space 0x4
 
 	.include "engine/record_mixing.o"
-	.include "engine/sound_check_menu.o"
-
-	.align 2
-gUnknown_03005D34: @ 3005D34
-	.space 0x4
-
+	.include "debug/sound_check_menu.o"
 	.include "field/tv.o"
 
 	.space 0x64 @ unused variable?

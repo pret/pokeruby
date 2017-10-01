@@ -509,7 +509,7 @@ gScriptContestRank: @ 203869E
 gUnknown_02038738: @ 2038738
 	.space 0x78
 
-	.include "src/engine/sound_check_menu.o"
+	.include "src/debug/sound_check_menu.o"
 
 @ secret_base
 
