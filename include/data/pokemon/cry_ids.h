@@ -1,5 +1,5 @@
 //
-// Created by Scott Norton on 6/27/17.
+
 //
 
 #ifndef POKERUBY_CRY_IDS_H

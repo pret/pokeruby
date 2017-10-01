@@ -37,6 +37,7 @@ fndec\
 
 #define ARRAY_COUNT(array) (sizeof(array) / sizeof((array)[0]))
 
+#define POKEMON_SLOTS_NUMBER 412
 #define POKEMON_NAME_LENGTH 10
 #define OT_NAME_LENGTH 7
 
@@ -560,18 +561,34 @@ struct GabbyAndTyData
     /*2b1b*/ u8 valB_5:3;
 };
 
-struct RecordMixing_UnknownStructSub
+struct DayCareMail
 {
-    u32 unk0;
-    u8 data[0x34];
-    //u8 data[0x38];
+    /*0x00*/ struct MailStruct message;
+    /*0x24*/ u8 names[19];
 };
 
-struct RecordMixing_UnknownStruct
+struct DayCareStepCountersEtc {
+    u32 steps[2];
+    u16 personalityLo;
+    u8 unk_11a;
+};
+
+struct RecordMixingDayCareMail
 {
-    struct RecordMixing_UnknownStructSub data[2];
+    struct DayCareMail mail[2];
     u32 unk70;
-    u16 unk74[0x2];
+    u16 unk74[2];
+};
+
+struct DayCareMisc
+{
+    struct DayCareMail mail[2];
+    struct DayCareStepCountersEtc countersEtc;
+};
+
+struct DayCareData {
+    struct BoxPokemon mons[2];
+    struct DayCareMisc misc;
 };
 
 struct LinkBattleRecord
@@ -596,6 +613,11 @@ struct RecordMixingGift
     int checksum;
     struct RecordMixingGiftData data;
 };
+
+// there should be enough flags for all 412 slots
+// each slot takes up 8 flags
+// if the value is not divisible by 8, we need to account for the reminder as well
+#define DEX_FLAGS_NO ((POKEMON_SLOTS_NUMBER / 8) + ((POKEMON_SLOTS_NUMBER % 8) ? 1 : 0))
 
 struct SaveBlock1 /* 0x02025734 */
 {
@@ -623,7 +645,7 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x640*/ struct ItemSlot bagPocket_TMHM[64];
     /*0x740*/ struct ItemSlot bagPocket_Berries[46];
     /*0x7F8*/ struct Pokeblock pokeblocks[40];
-    /*0x938*/ u8 unk938[52];  // pokedex related
+    /*0x938*/ u8 dexSeen2[DEX_FLAGS_NO];
     /*0x96C*/ u16 berryBlenderRecords[3];
     /*0x972*/ u8 filler_972[0x6];
     /*0x978*/ u16 trainerRematchStepCounter;
@@ -670,11 +692,7 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x2DD4*/ struct EasyChatPair easyChatPairs[5]; //Dewford trend [0] and some other stuff
     /*0x2DFC*/ u8 filler_2DFC[0x8];
     /*0x2E04*/ SB_Struct sbStruct;
-    /*0x2F9C*/ struct BoxPokemon daycareData[2];
-    /*0x303C*/ struct RecordMixing_UnknownStruct filler_303C;
-    /*0x30AC*/ u8 filler_30B4[0x2];
-    /*0x30B6*/ u8 filler_30B6;
-    /*0x30B7*/ u8 filler_30B7[1];
+    /*0x2F9C*/ struct DayCareData daycareData;
     /*0x30B8*/ struct LinkBattleRecord linkBattleRecords[5];
     /*0x3108*/ u8 filler_3108[8];
     /*0x3110*/ u8 giftRibbons[7];
@@ -683,7 +701,7 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x3160*/ struct EnigmaBerry enigmaBerry;
     /*0x3690*/ struct RamScript ramScript;
     /*0x3A7C*/ struct RecordMixingGift recordMixingGift;
-    /*0x3A8C*/ u8 unk3A8C[52]; //pokedex related
+    /*0x3A8C*/ u8 dexSeen3[DEX_FLAGS_NO];
 };
 
 extern struct SaveBlock1 gSaveBlock1;
@@ -705,8 +723,8 @@ struct Pokedex
     /*0x04*/ u32 unownPersonality; // set when you first see Unown
     /*0x08*/ u32 spindaPersonality; // set when you first see Spinda
     /*0x0C*/ u32 unknown3;
-    /*0x10*/ u8 owned[52];
-    /*0x44*/ u8 seen[52];
+    /*0x10*/ u8 owned[DEX_FLAGS_NO];
+    /*0x44*/ u8 seen[DEX_FLAGS_NO];
 };
 
 struct SaveBlock2_Sub
