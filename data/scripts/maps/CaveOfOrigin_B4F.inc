@@ -14,9 +14,9 @@ CaveOfOrigin_B4F_EventScript_15DDC1:: @ 815DDC1
 
 CaveOfOrigin_B4F_MapScript1_15DDC5:: @ 815DDC5
 	.ifdef SAPPHIRE
-	setmapfooter 163
+	setmaplayoutindex 163
 	.else
-	setmapfooter 313
+	setmaplayoutindex 313
 	.endif
 	call CaveOfOrigin_B4F_EventScript_1A01B5
 	checkflag 113

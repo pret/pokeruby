@@ -302,73 +302,73 @@ LinkContestRoom1_EventScript_15F919:: @ 815F919
 	return
 
 LinkContestRoom1_EventScript_15F956:: @ 815F956
-	createvsprite 5, 20, 3, 2, 3, 1
-	createvsprite 46, 24, 11, 2, 3, 1
+	createvobject 5, 20, 3, 2, 3, 1
+	createvobject 46, 24, 11, 2, 3, 1
 	return
 
 LinkContestRoom1_EventScript_15F969:: @ 815F969
-	createvsprite 45, 0, 2, 3, 3, 4
-	createvsprite 66, 1, 2, 4, 3, 4
-	createvsprite 55, 2, 2, 7, 3, 4
-	createvsprite 46, 3, 2, 8, 3, 4
-	createvsprite 5, 10, 12, 3, 3, 3
-	createvsprite 20, 11, 12, 4, 3, 3
-	createvsprite 24, 12, 12, 7, 3, 3
-	createvsprite 12, 13, 12, 8, 3, 3
-	createvsprite 47, 20, 3, 2, 3, 1
-	createvsprite 46, 24, 11, 2, 3, 1
+	createvobject 45, 0, 2, 3, 3, 4
+	createvobject 66, 1, 2, 4, 3, 4
+	createvobject 55, 2, 2, 7, 3, 4
+	createvobject 46, 3, 2, 8, 3, 4
+	createvobject 5, 10, 12, 3, 3, 3
+	createvobject 20, 11, 12, 4, 3, 3
+	createvobject 24, 12, 12, 7, 3, 3
+	createvobject 12, 13, 12, 8, 3, 3
+	createvobject 47, 20, 3, 2, 3, 1
+	createvobject 46, 24, 11, 2, 3, 1
 	return
 
 LinkContestRoom1_EventScript_15F9C4:: @ 815F9C4
-	createvsprite 45, 0, 2, 3, 3, 4
-	createvsprite 66, 1, 2, 4, 3, 4
-	createvsprite 55, 2, 2, 7, 3, 4
-	createvsprite 48, 3, 2, 8, 3, 4
-	createvsprite 5, 10, 12, 3, 3, 3
-	createvsprite 20, 11, 12, 4, 3, 3
-	createvsprite 24, 12, 12, 7, 3, 3
-	createvsprite 45, 13, 12, 8, 3, 3
-	createvsprite 22, 20, 3, 2, 3, 1
-	createvsprite 23, 20, 6, 2, 3, 1
-	createvsprite 34, 20, 7, 2, 3, 1
-	createvsprite 46, 24, 8, 2, 3, 1
-	createvsprite 48, 24, 11, 2, 3, 1
-	createvsprite 11, 25, 3, 9, 3, 2
-	createvsprite 35, 26, 4, 9, 3, 2
-	createvsprite 17, 27, 5, 9, 3, 2
-	createvsprite 41, 28, 9, 9, 3, 2
-	createvsprite 38, 29, 10, 9, 3, 2
-	createvsprite 83, 30, 11, 9, 3, 2
+	createvobject 45, 0, 2, 3, 3, 4
+	createvobject 66, 1, 2, 4, 3, 4
+	createvobject 55, 2, 2, 7, 3, 4
+	createvobject 48, 3, 2, 8, 3, 4
+	createvobject 5, 10, 12, 3, 3, 3
+	createvobject 20, 11, 12, 4, 3, 3
+	createvobject 24, 12, 12, 7, 3, 3
+	createvobject 45, 13, 12, 8, 3, 3
+	createvobject 22, 20, 3, 2, 3, 1
+	createvobject 23, 20, 6, 2, 3, 1
+	createvobject 34, 20, 7, 2, 3, 1
+	createvobject 46, 24, 8, 2, 3, 1
+	createvobject 48, 24, 11, 2, 3, 1
+	createvobject 11, 25, 3, 9, 3, 2
+	createvobject 35, 26, 4, 9, 3, 2
+	createvobject 17, 27, 5, 9, 3, 2
+	createvobject 41, 28, 9, 9, 3, 2
+	createvobject 38, 29, 10, 9, 3, 2
+	createvobject 83, 30, 11, 9, 3, 2
 	return
 
 LinkContestRoom1_EventScript_15FA70:: @ 815FA70
-	createvsprite 45, 0, 2, 3, 3, 4
-	createvsprite 66, 1, 2, 4, 3, 4
-	createvsprite 55, 2, 2, 7, 3, 4
-	createvsprite 12, 3, 2, 8, 3, 4
-	createvsprite 39, 4, 1, 3, 3, 4
-	createvsprite 34, 6, 1, 5, 3, 4
-	createvsprite 26, 7, 1, 6, 3, 4
-	createvsprite 48, 9, 1, 8, 3, 4
-	createvsprite 5, 10, 12, 3, 3, 3
-	createvsprite 20, 11, 12, 4, 3, 3
-	createvsprite 24, 12, 12, 7, 3, 3
-	createvsprite 45, 13, 12, 8, 3, 3
-	createvsprite 50, 14, 13, 3, 3, 3
-	createvsprite 52, 15, 13, 4, 3, 3
-	createvsprite 65, 17, 13, 6, 3, 3
-	createvsprite 83, 18, 13, 7, 3, 3
-	createvsprite 116, 19, 13, 8, 3, 3
-	createvsprite 25, 20, 3, 2, 3, 1
-	createvsprite 31, 21, 6, 2, 3, 1
-	createvsprite 33, 22, 7, 2, 3, 1
-	createvsprite 46, 24, 11, 2, 3, 1
-	createvsprite 49, 25, 3, 9, 3, 2
-	createvsprite 35, 26, 4, 9, 3, 2
-	createvsprite 48, 27, 5, 9, 3, 2
-	createvsprite 41, 28, 9, 9, 3, 2
-	createvsprite 38, 29, 10, 9, 3, 2
-	createvsprite 83, 30, 11, 9, 3, 2
+	createvobject 45, 0, 2, 3, 3, 4
+	createvobject 66, 1, 2, 4, 3, 4
+	createvobject 55, 2, 2, 7, 3, 4
+	createvobject 12, 3, 2, 8, 3, 4
+	createvobject 39, 4, 1, 3, 3, 4
+	createvobject 34, 6, 1, 5, 3, 4
+	createvobject 26, 7, 1, 6, 3, 4
+	createvobject 48, 9, 1, 8, 3, 4
+	createvobject 5, 10, 12, 3, 3, 3
+	createvobject 20, 11, 12, 4, 3, 3
+	createvobject 24, 12, 12, 7, 3, 3
+	createvobject 45, 13, 12, 8, 3, 3
+	createvobject 50, 14, 13, 3, 3, 3
+	createvobject 52, 15, 13, 4, 3, 3
+	createvobject 65, 17, 13, 6, 3, 3
+	createvobject 83, 18, 13, 7, 3, 3
+	createvobject 116, 19, 13, 8, 3, 3
+	createvobject 25, 20, 3, 2, 3, 1
+	createvobject 31, 21, 6, 2, 3, 1
+	createvobject 33, 22, 7, 2, 3, 1
+	createvobject 46, 24, 11, 2, 3, 1
+	createvobject 49, 25, 3, 9, 3, 2
+	createvobject 35, 26, 4, 9, 3, 2
+	createvobject 48, 27, 5, 9, 3, 2
+	createvobject 41, 28, 9, 9, 3, 2
+	createvobject 38, 29, 10, 9, 3, 2
+	createvobject 83, 30, 11, 9, 3, 2
 	return
 
 LinkContestRoom1_EventScript_15FB64:: @ 815FB64

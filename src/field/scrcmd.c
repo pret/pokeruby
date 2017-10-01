@@ -708,7 +708,7 @@ bool8 ScrCmd_tileeffect(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_setmapfooter(struct ScriptContext *ctx)
+bool8 ScrCmd_setmaplayoutindex(struct ScriptContext *ctx)
 {
     u16 value = VarGet(ScriptReadHalfword(ctx));
 
@@ -1093,7 +1093,7 @@ bool8 ScrCmd_hideobject(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_spritelevelup(struct ScriptContext *ctx)
+bool8 ScrCmd_setobjectpriority(struct ScriptContext *ctx)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
     u8 mapGroup = ScriptReadByte(ctx);
@@ -1104,7 +1104,7 @@ bool8 ScrCmd_spritelevelup(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_restorespritelevel(struct ScriptContext *ctx)
+bool8 ScrCmd_resetobjectpriority(struct ScriptContext *ctx)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
     u8 mapGroup = ScriptReadByte(ctx);
@@ -1142,7 +1142,7 @@ bool8 ScrCmd_setobjectmovementtype(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_createvsprite(struct ScriptContext *ctx)
+bool8 ScrCmd_createvobject(struct ScriptContext *ctx)
 {
     u8 graphicsId = ScriptReadByte(ctx);
     u8 v2 = ScriptReadByte(ctx);
@@ -1155,7 +1155,7 @@ bool8 ScrCmd_createvsprite(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_vspriteface(struct ScriptContext *ctx)
+bool8 ScrCmd_turnvobject(struct ScriptContext *ctx)
 {
     u8 v1 = ScriptReadByte(ctx);
     u8 direction = ScriptReadByte(ctx);
@@ -1913,7 +1913,7 @@ bool8 ScrCmd_setmaptile(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_setdooropened(struct ScriptContext *ctx)
+bool8 ScrCmd_opendoor(struct ScriptContext *ctx)
 {
     u16 x = VarGet(ScriptReadHalfword(ctx));
     u16 y = VarGet(ScriptReadHalfword(ctx));
@@ -1925,7 +1925,7 @@ bool8 ScrCmd_setdooropened(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_setdoorclosed(struct ScriptContext *ctx)
+bool8 ScrCmd_closedoor(struct ScriptContext *ctx)
 {
     u16 x = VarGet(ScriptReadHalfword(ctx));
     u16 y = VarGet(ScriptReadHalfword(ctx));
@@ -1944,13 +1944,13 @@ static bool8 IsDoorAnimationStopped()
         return FALSE;
 }
 
-bool8 ScrCmd_doorchange(struct ScriptContext *ctx)
+bool8 ScrCmd_waitdooranim(struct ScriptContext *ctx)
 {
     SetupNativeScript(ctx, IsDoorAnimationStopped);
     return TRUE;
 }
 
-bool8 ScrCmd_setdooropened2(struct ScriptContext *ctx)
+bool8 ScrCmd_setdooropen(struct ScriptContext *ctx)
 {
     u16 x = VarGet(ScriptReadHalfword(ctx));
     u16 y = VarGet(ScriptReadHalfword(ctx));
@@ -1961,7 +1961,7 @@ bool8 ScrCmd_setdooropened2(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_setdoorclosed2(struct ScriptContext *ctx)
+bool8 ScrCmd_setdoorclosed(struct ScriptContext *ctx)
 {
     u16 x = VarGet(ScriptReadHalfword(ctx));
     u16 y = VarGet(ScriptReadHalfword(ctx));

@@ -22,11 +22,11 @@ Route130_MapScript1_1523C8:: @ 81523C8
 	setflag 30
 	setflag 31
 	setflag 32
-	setmapfooter 264
+	setmaplayoutindex 264
 	end
 
 Route130_EventScript_15240C:: @ 815240C
-	setmapfooter 46
+	setmaplayoutindex 46
 	end
 
 Route130_EventScript_152410:: @ 8152410

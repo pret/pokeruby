@@ -229,13 +229,13 @@ OldaleTown_PokemonCenter_2F_EventScript_1A3F5E:: @ 81A3F5E
 	closemessage
 	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_1A435B
 	waitmovement 0
-	setdooropened 5, 1
-	doorchange
+	opendoor 5, 1
+	waitdooranim
 	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_1A435F
 	waitmovement 0
 	hideobject 255, 0, 0
-	setdoorclosed 5, 1
-	doorchange
+	closedoor 5, 1
+	waitdooranim
 	release
 	compare 0x8004, 5
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A3FCD
@@ -394,13 +394,13 @@ OldaleTown_PokemonCenter_2F_EventScript_1A4166:: @ 81A4166
 	closemessage
 	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_1A435B
 	waitmovement 0
-	setdooropened 8, 1
-	doorchange
+	opendoor 8, 1
+	waitdooranim
 	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_1A435F
 	waitmovement 0
 	hideobject 255, 0, 0
-	setdoorclosed 8, 1
-	doorchange
+	closedoor 8, 1
+	waitdooranim
 	release
 	goto OldaleTown_PokemonCenter_2F_EventScript_1A4325
 
@@ -492,13 +492,13 @@ OldaleTown_PokemonCenter_2F_EventScript_1A4294:: @ 81A4294
 	closemessage
 	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_1A435B
 	waitmovement 0
-	setdooropened 11, 1
-	doorchange
+	opendoor 11, 1
+	waitdooranim
 	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_1A435F
 	waitmovement 0
 	hideobject 255, 0, 0
-	setdoorclosed 11, 1
-	doorchange
+	closedoor 11, 1
+	waitdooranim
 	release
 	goto OldaleTown_PokemonCenter_2F_EventScript_1A4325
 

@@ -102,13 +102,13 @@ LittlerootTown_EventScript_14D62B:: @ 814D62B
 	playse 10
 	applymovement 255, LittlerootTown_Movement_14D6C0
 	waitmovement 0
-	setdooropened 0x8004, 0x8005
-	doorchange
+	opendoor 0x8004, 0x8005
+	waitdooranim
 	addobject 4
 	applymovement 4, LittlerootTown_Movement_14D6AC
 	waitmovement 0
-	setdoorclosed 0x8004, 0x8005
-	doorchange
+	closedoor 0x8004, 0x8005
+	waitdooranim
 	delay 10
 	applymovement 4, LittlerootTown_Movement_14D6AE
 	waitmovement 0
@@ -117,16 +117,16 @@ LittlerootTown_EventScript_14D62B:: @ 814D62B
 	applymovement 4, LittlerootTown_Movement_14D6B1
 	applymovement 255, LittlerootTown_Movement_14D6B8
 	waitmovement 0
-	setdooropened 0x8004, 0x8005
-	doorchange
+	opendoor 0x8004, 0x8005
+	waitdooranim
 	applymovement 4, LittlerootTown_Movement_14D6B5
 	applymovement 255, LittlerootTown_Movement_14D6BD
 	waitmovement 0
 	setflag 752
 	setvar 0x4092, 3
 	hideobject 255, 0, 0
-	setdoorclosed 0x8004, 0x8005
-	doorchange
+	closedoor 0x8004, 0x8005
+	waitdooranim
 	clearflag 868
 	clearflag 0x4000
 	return
@@ -595,97 +595,97 @@ LittlerootTown_EventScript_14DB3B:: @ 814DB3B
 LittlerootTown_EventScript_14DB46:: @ 814DB46
 	applymovement 4, LittlerootTown_Movement_14DCB4
 	waitmovement 0
-	setdooropened 0x8009, 0x800a
-	doorchange
+	opendoor 0x8009, 0x800a
+	waitdooranim
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
 	hideobject 4, 0, 9
-	setdoorclosed 0x8009, 0x800a
-	doorchange
+	closedoor 0x8009, 0x800a
+	waitdooranim
 	return
 
 LittlerootTown_EventScript_14DB6C:: @ 814DB6C
 	applymovement 4, LittlerootTown_Movement_14DCBA
 	waitmovement 0
-	setdooropened 0x8009, 0x800a
-	doorchange
+	opendoor 0x8009, 0x800a
+	waitdooranim
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
 	hideobject 4, 0, 9
-	setdoorclosed 0x8009, 0x800a
-	doorchange
+	closedoor 0x8009, 0x800a
+	waitdooranim
 	return
 
 LittlerootTown_EventScript_14DB92:: @ 814DB92
 	applymovement 4, LittlerootTown_Movement_14DCC1
 	waitmovement 0
-	setdooropened 0x8009, 0x800a
-	doorchange
+	opendoor 0x8009, 0x800a
+	waitdooranim
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
 	hideobject 4, 0, 9
-	setdoorclosed 0x8009, 0x800a
-	doorchange
+	closedoor 0x8009, 0x800a
+	waitdooranim
 	return
 
 LittlerootTown_EventScript_14DBB8:: @ 814DBB8
 	applymovement 4, LittlerootTown_Movement_14DCC5
 	waitmovement 0
-	setdooropened 0x8009, 0x800a
-	doorchange
+	opendoor 0x8009, 0x800a
+	waitdooranim
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
 	hideobject 4, 0, 9
-	setdoorclosed 0x8009, 0x800a
-	doorchange
+	closedoor 0x8009, 0x800a
+	waitdooranim
 	return
 
 LittlerootTown_EventScript_14DBDE:: @ 814DBDE
 	applymovement 4, LittlerootTown_Movement_14DCCA
 	waitmovement 0
-	setdooropened 0x8009, 0x800a
-	doorchange
+	opendoor 0x8009, 0x800a
+	waitdooranim
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
 	hideobject 4, 0, 9
-	setdoorclosed 0x8009, 0x800a
-	doorchange
+	closedoor 0x8009, 0x800a
+	waitdooranim
 	return
 
 LittlerootTown_EventScript_14DC04:: @ 814DC04
 	applymovement 4, LittlerootTown_Movement_14DCCF
 	waitmovement 0
-	setdooropened 0x8009, 0x800a
-	doorchange
+	opendoor 0x8009, 0x800a
+	waitdooranim
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
 	hideobject 4, 0, 9
-	setdoorclosed 0x8009, 0x800a
-	doorchange
+	closedoor 0x8009, 0x800a
+	waitdooranim
 	return
 
 LittlerootTown_EventScript_14DC2A:: @ 814DC2A
 	applymovement 4, LittlerootTown_Movement_14DCD3
 	waitmovement 0
-	setdooropened 0x8009, 0x800a
-	doorchange
+	opendoor 0x8009, 0x800a
+	waitdooranim
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
 	hideobject 4, 0, 9
-	setdoorclosed 0x8009, 0x800a
-	doorchange
+	closedoor 0x8009, 0x800a
+	waitdooranim
 	return
 
 LittlerootTown_EventScript_14DC50:: @ 814DC50
 	applymovement 4, LittlerootTown_Movement_14DCDA
 	waitmovement 0
-	setdooropened 0x8009, 0x800a
-	doorchange
+	opendoor 0x8009, 0x800a
+	waitdooranim
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
 	hideobject 4, 0, 9
-	setdoorclosed 0x8009, 0x800a
-	doorchange
+	closedoor 0x8009, 0x800a
+	waitdooranim
 	return
 
 LittlerootTown_Movement_14DC76:: @ 814DC76
@@ -849,13 +849,13 @@ LittlerootTown_EventScript_14DCE2:: @ 814DCE2
 	call LittlerootTown_EventScript_14DD38
 	applymovement 4, LittlerootTown_Movement_1A0841
 	waitmovement 0
-	setdooropened 0x8009, 0x800a
-	doorchange
+	opendoor 0x8009, 0x800a
+	waitdooranim
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
 	hideobject 4, 0, 9
-	setdoorclosed 0x8009, 0x800a
-	doorchange
+	closedoor 0x8009, 0x800a
+	waitdooranim
 	goto LittlerootTown_EventScript_14DD2B
 	end
 

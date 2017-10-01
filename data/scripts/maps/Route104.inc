@@ -124,8 +124,8 @@ Route104_EventScript_14EFCC:: @ 814EFCC
 	end
 
 Route104_EventScript_14EFD5:: @ 814EFD5
-	spritelevelup 8, 0, 19, 0
-	spritelevelup 255, 0, 19, 0
+	setobjectpriority 8, 0, 19, 0
+	setobjectpriority 255, 0, 19, 0
 	applymovement 8, Route104_Movement_14F16C
 	waitmovement 0
 	removeobject 8
@@ -144,7 +144,7 @@ Route104_EventScript_14EFD5:: @ 814EFD5
 	waitmovement 0
 	setobjectxyperm 2, 12, 8
 	addobject 2
-	spritelevelup 2, 0, 11, 0
+	setobjectpriority 2, 0, 11, 0
 	clearflag 740
 	applymovement 2, Route104_Movement_14F16F
 	waitmovement 0
@@ -154,8 +154,8 @@ Route104_EventScript_14EFD5:: @ 814EFD5
 	setflag 742
 	hideobject 7, 0, 19
 	copyvar 0x4096, 0x8008
-	restorespritelevel 255, 0, 19
-	restorespritelevel 2, 0, 11
+	resetobjectpriority 255, 0, 19
+	resetobjectpriority 2, 0, 11
 	moveobjectoffscreen 2
 	setvar 0x408e, 0
 	checkflag 189

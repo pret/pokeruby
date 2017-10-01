@@ -314,13 +314,13 @@ Route111_EventScript_1501F3:: @ 81501F3
 	end
 
 Route111_EventScript_150348:: @ 8150348
-	setdooropened 13, 113
-	doorchange
+	opendoor 13, 113
+	waitdooranim
 	return
 
 Route111_EventScript_15034F:: @ 815034F
-	setdoorclosed 13, 113
-	doorchange
+	closedoor 13, 113
+	waitdooranim
 	return
 
 Route111_Movement_150356:: @ 8150356

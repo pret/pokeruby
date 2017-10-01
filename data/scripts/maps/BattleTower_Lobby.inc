@@ -296,13 +296,13 @@ BattleTower_Lobby_EventScript_160664:: @ 8160664
 	applymovement 1, BattleTower_Lobby_Movement_160693
 	applymovement 255, BattleTower_Lobby_Movement_160693
 	waitmovement 0
-	setdooropened 6, 1
-	doorchange
+	opendoor 6, 1
+	waitdooranim
 	applymovement 1, BattleTower_Lobby_Movement_160697
 	applymovement 255, BattleTower_Lobby_Movement_16069A
 	waitmovement 0
-	setdoorclosed 6, 1
-	doorchange
+	closedoor 6, 1
+	waitdooranim
 	return
 
 BattleTower_Lobby_Movement_160693:: @ 8160693

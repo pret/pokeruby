@@ -1124,12 +1124,12 @@
 	.byte \subroutine
 	.endm
 
-	.macro setmapfooter word
+	.macro setmaplayoutindex word
 	.byte 0xa7
 	.2byte \word
 	.endm
 
-	.macro spritelevelup word, byte1, byte2, byte3
+	.macro setobjectpriority word, byte1, byte2, byte3
 	.byte 0xa8
 	.2byte \word
 	.byte \byte1
@@ -1137,14 +1137,14 @@
 	.byte \byte3
 	.endm
 
-	.macro restorespritelevel word, byte1, byte2
+	.macro resetobjectpriority word, byte1, byte2
 	.byte 0xa9
 	.2byte \word
 	.byte \byte1
 	.byte \byte2
 	.endm
 
-	.macro createvsprite byte1, byte2, word1, word2, byte3, byte4
+	.macro createvobject byte1, byte2, word1, word2, byte3, byte4
 	.byte 0xaa
 	.byte \byte1
 	.byte \byte2
@@ -1154,40 +1154,40 @@
 	.byte \byte4
 	.endm
 
-	.macro vspriteface byte1, byte2
+	.macro turnvobject byte1, byte2
 	.byte 0xab
 	.byte \byte1
 	.byte \byte2
 	.endm
 
 	@ Queues the opening of the door tile at (X, Y) with an animation.
-	.macro setdooropened X, Y
+	.macro opendoor X, Y
 	.byte 0xac
 	.2byte \X
 	.2byte \Y
 	.endm
 
 	@ Queues the closing of the door tile at (X, Y) with an animation.
-	.macro setdoorclosed X, Y
+	.macro closedoor X, Y
 	.byte 0xad
 	.2byte \X
 	.2byte \Y
 	.endm
 
 	@ Executes the state changes queued with setdooropened, setdoorclosed, setdooropened2, and setdoorclosed2.
-	.macro doorchange
+	.macro waitdooranim
 	.byte 0xae
 	.endm
 
 	@ Queues the opening of the door tile at (X, Y) without an animation.
-	.macro setdooropened2 X, Y
+	.macro setdooropen X, Y
 	.byte 0xaf
 	.2byte \X
 	.2byte \Y
 	.endm
 
 	@ Queues the closing of the door tile at (X, Y) without an animation.
-	.macro setdoorclosed2 X, Y
+	.macro setdoorclosed X, Y
 	.byte 0xb0
 	.2byte \X
 	.2byte \Y

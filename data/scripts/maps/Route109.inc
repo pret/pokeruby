@@ -3,8 +3,8 @@ Route109_MapScripts:: @ 814F4D2
 
 Route109_EventScript_14F4D3:: @ 814F4D3
 	call Route109_EventScript_1A010C
-	spritelevelup 2, 0, 24, 0
-	spritelevelup 255, 0, 24, 0
+	setobjectpriority 2, 0, 24, 0
+	setobjectpriority 255, 0, 24, 0
 	applymovement 2, Route109_Movement_14F67B
 	waitmovement 0
 	removeobject 2
@@ -46,7 +46,7 @@ Route109_EventScript_14F548:: @ 814F548
 	clearflag 743
 	setobjectxyperm 2, 12, 8
 	addobject 2
-	spritelevelup 2, 0, 11, 0
+	setobjectpriority 2, 0, 11, 0
 	applymovement 2, Route109_Movement_14F67D
 	waitmovement 0
 	clearflag 740
@@ -55,8 +55,8 @@ Route109_EventScript_14F548:: @ 814F548
 	msgbox Route109_Text_16B4B5, 4
 	closemessage
 	copyvar 0x4096, 0x8008
-	restorespritelevel 255, 0, 24
-	restorespritelevel 2, 0, 11
+	resetobjectpriority 255, 0, 24
+	resetobjectpriority 2, 0, 11
 	moveobjectoffscreen 2
 	release
 	end

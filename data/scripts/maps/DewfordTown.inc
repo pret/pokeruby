@@ -118,8 +118,8 @@ DewfordTown_EventScript_14E147:: @ 814E147
 
 DewfordTown_EventScript_14E151:: @ 814E151
 	call DewfordTown_EventScript_1A010C
-	spritelevelup 2, 0, 11, 0
-	spritelevelup 255, 0, 11, 0
+	setobjectpriority 2, 0, 11, 0
+	setobjectpriority 255, 0, 11, 0
 	applymovement 2, DewfordTown_Movement_14E40E
 	waitmovement 0
 	removeobject 2
@@ -141,7 +141,7 @@ DewfordTown_EventScript_14E151:: @ 814E151
 	setflag 743
 	hideobject 4, 0, 11
 	setvar 0x408e, 2
-	restorespritelevel 255, 0, 11
+	resetobjectpriority 255, 0, 11
 	warp Route104_MrBrineysHouse, 255, 5, 4
 	copyvar 0x4096, 0x8008
 	waitstate
@@ -150,8 +150,8 @@ DewfordTown_EventScript_14E151:: @ 814E151
 
 DewfordTown_EventScript_14E1D8:: @ 814E1D8
 	call DewfordTown_EventScript_1A010C
-	spritelevelup 2, 0, 11, 0
-	spritelevelup 255, 0, 11, 1
+	setobjectpriority 2, 0, 11, 0
+	setobjectpriority 255, 0, 11, 1
 	applymovement 2, DewfordTown_Movement_14E40E
 	waitmovement 0
 	removeobject 2
@@ -168,7 +168,7 @@ DewfordTown_EventScript_14E1D8:: @ 814E1D8
 	waitmovement 0
 	setobjectxyperm 2, 21, 26
 	addobject 2
-	spritelevelup 2, 0, 24, 0
+	setobjectpriority 2, 0, 24, 0
 	applymovement 2, DewfordTown_Movement_14E410
 	waitmovement 0
 	clearflag 741
@@ -182,8 +182,8 @@ DewfordTown_EventScript_14E1D8:: @ 814E1D8
 	call_if 1, DewfordTown_EventScript_14E28A
 	closemessage
 	copyvar 0x4096, 0x8008
-	restorespritelevel 255, 0, 11
-	restorespritelevel 2, 0, 24
+	resetobjectpriority 255, 0, 11
+	resetobjectpriority 2, 0, 24
 	moveobjectoffscreen 2
 	release
 	end

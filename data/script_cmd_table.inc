@@ -167,16 +167,16 @@ gScriptCmdTable:: @ 814AE30
 	.4byte ScrCmd_setweather              @ 0xA4
 	.4byte ScrCmd_doweather               @ 0xA5
 	.4byte ScrCmd_tileeffect              @ 0xA6
-	.4byte ScrCmd_setmapfooter            @ 0xA7
-	.4byte ScrCmd_spritelevelup           @ 0xA8
-	.4byte ScrCmd_restorespritelevel      @ 0xA9
-	.4byte ScrCmd_createvsprite           @ 0xAA
-	.4byte ScrCmd_vspriteface             @ 0xAB
-	.4byte ScrCmd_setdooropened           @ 0xAC
-	.4byte ScrCmd_setdoorclosed           @ 0xAD
-	.4byte ScrCmd_doorchange              @ 0xAE
-	.4byte ScrCmd_setdooropened2          @ 0xAF
-	.4byte ScrCmd_setdoorclosed2          @ 0xB0
+	.4byte ScrCmd_setmaplayoutindex            @ 0xA7
+	.4byte ScrCmd_setobjectpriority           @ 0xA8
+	.4byte ScrCmd_resetobjectpriority      @ 0xA9
+	.4byte ScrCmd_createvobject           @ 0xAA
+	.4byte ScrCmd_turnvobject             @ 0xAB
+	.4byte ScrCmd_opendoor           @ 0xAC
+	.4byte ScrCmd_closedoor           @ 0xAD
+	.4byte ScrCmd_waitdooranim              @ 0xAE
+	.4byte ScrCmd_setdooropen          @ 0xAF
+	.4byte ScrCmd_setdoorclosed          @ 0xB0
 	.4byte ScrCmd_event_b1                @ 0xB1
 	.4byte ScrCmd_event_b2                @ 0xB2
 	.4byte ScrCmd_checkcoins              @ 0xB3

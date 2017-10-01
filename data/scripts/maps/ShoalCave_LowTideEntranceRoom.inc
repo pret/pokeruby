@@ -9,11 +9,11 @@ ShoalCave_LowTideEntranceRoom_MapScript1_15E05D:: @ 815E05D
 	goto ShoalCave_LowTideEntranceRoom_EventScript_15E072
 
 ShoalCave_LowTideEntranceRoom_EventScript_15E06E:: @ 815E06E
-	setmapfooter 169
+	setmaplayoutindex 169
 	end
 
 ShoalCave_LowTideEntranceRoom_EventScript_15E072:: @ 815E072
-	setmapfooter 165
+	setmaplayoutindex 165
 	end
 
 ShoalCave_LowTideEntranceRoom_EventScript_15E076:: @ 815E076

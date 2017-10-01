@@ -29,13 +29,13 @@ LavaridgeTown_MapScript2_14E4E3:: @ 814E4E3
 LavaridgeTown_EventScript_14E4ED:: @ 814E4ED
 	lockall
 	setvar 0x8008, 1
-	setdooropened 12, 15
-	doorchange
+	opendoor 12, 15
+	waitdooranim
 	addobject 8
 	applymovement 8, LavaridgeTown_Movement_14E70E
 	waitmovement 0
-	setdoorclosed 12, 15
-	doorchange
+	closedoor 12, 15
+	waitdooranim
 	applymovement 8, LavaridgeTown_Movement_1A083F
 	waitmovement 0
 	applymovement 255, LavaridgeTown_Movement_1A0843

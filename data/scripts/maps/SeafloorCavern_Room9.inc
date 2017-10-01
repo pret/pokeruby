@@ -6,9 +6,9 @@ SeafloorCavern_Room9_MapScript1_15DAEC:: @ 815DAEC
 	call SeafloorCavern_Room9_EventScript_1A0196
 	call SeafloorCavern_Room9_EventScript_1A01B5
 	.ifdef SAPPHIRE
-	setmapfooter 157
+	setmaplayoutindex 157
 	.else
-	setmapfooter 327
+	setmaplayoutindex 327
 	.endif
 	end
 
