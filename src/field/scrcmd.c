@@ -1526,7 +1526,7 @@ bool8 ScrCmd_getstring(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_vloadptr(struct ScriptContext *ctx)
+bool8 ScrCmd_vloadword(struct ScriptContext *ctx)
 {
     u8 *ptr = (u8 *)(ScriptReadWord(ctx) - gUnknown_0202E8B0);
 

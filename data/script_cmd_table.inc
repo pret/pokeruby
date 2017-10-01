@@ -190,7 +190,7 @@ gScriptCmdTable:: @ 814AE30
 	.4byte ScrCmd_vgoto_if                @ 0xBB
 	.4byte ScrCmd_vcall_if                @ 0xBC
 	.4byte ScrCmd_vmessage                @ 0xBD
-	.4byte ScrCmd_vloadptr                @ 0xBE
+	.4byte ScrCmd_vloadword                @ 0xBE
 	.4byte ScrCmd_vgetstring              @ 0xBF
 	.4byte ScrCmd_showcoinsbox            @ 0xC0
 	.4byte ScrCmd_hidecoinsbox            @ 0xC1

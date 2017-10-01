@@ -1264,7 +1264,7 @@
 	.4byte \pointer
 	.endm
 
-	.macro vloadptr pointer
+	.macro vloadword pointer
 	.byte 0xbe
 	.4byte \pointer
 	.endm
