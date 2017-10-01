@@ -3,7 +3,7 @@
 	.include "engine/string_util.o"
 	.include "engine/link.o"
 	.include "engine/rtc.o"
-	.include "misc/rom3.o"
+	.include "rom3.o"
 
 @ battle
 
@@ -160,7 +160,7 @@ gUnknown_03005560: @ 3005560
 gUnknown_030056A0: @ 30056A0
 	.space 0x640
 
-    .include "pokemon/pokemon_menu.o"
+	.include "pokemon/pokemon_menu.o"
 	.include "pokemon/pokedex.o"
 
 @ pokemon_summary_screen
@@ -237,7 +237,7 @@ gUnknown_03005E0C: @ 3005E0C
 	.space 0x4
 
 	.include "scene/contest_painting.o"
-    .include "scene/evolution_scene.o"
+	.include "scene/evolution_scene.o"
 
 @ pokedex_cry_screen
 

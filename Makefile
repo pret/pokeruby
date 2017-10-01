@@ -40,7 +40,7 @@ VERSIONS := ruby sapphire ruby_rev1 sapphire_rev1 ruby_rev2 sapphire_rev2 ruby_d
 $(VERSIONS) $(VERSIONS:%=compare_%)
 
 
-$(shell mkdir -p build/ $(VERSIONS:%=build/%/{,asm,data,src{,/battle,/field,/debug,/misc,/scene,/pokemon,/engine,/libs}}))
+$(shell mkdir -p build/ $(VERSIONS:%=build/%/{,asm,data,src{,/battle,/field,/debug,/scene,/pokemon,/engine,/libs}}))
 
 C_SRCS := $(wildcard src/*/*.c) $(wildcard src/*.c)
 ASM_SRCS := $(wildcard asm/*.s)

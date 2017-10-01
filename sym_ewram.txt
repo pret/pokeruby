@@ -6,7 +6,7 @@
 	.space 0x2E8
 
 	.include "src/engine/link.o"
-	.include "src/misc/rom3.o"
+	.include "src/rom3.o"
 
 @ battle
 
@@ -344,7 +344,7 @@ gUnknown_0202E8FA: @ 202E8FA
 	.include "src/engine/palette.o"
 	.include "src/engine/sound.o"
 	.include "src/battle/battle_anim.o"
-	.include "src/misc/rom_8077ABC.o"
+	.include "src/rom_8077ABC.o"
 	.include "src/scene/title_screen.o"
 
 @ field_weather
@@ -549,7 +549,7 @@ gUnknown_020388B4: @ 20388B4
 	.include "src/field/region_map.o"
 	.include "src/field/decoration.o"
 	.include "src/battle/battle_ai.o"
-	.include "src/misc/rom6.o"
+	.include "src/rom6.o"
 	.include "src/field/pokeblock.o"
 	.include "src/field/field_specials.o"
 

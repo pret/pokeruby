@@ -46,10 +46,10 @@ SECTIONS {
         src/engine/link.o(.text);
         src/engine/rtc.o(.text);
         src/engine/main_menu.o(.text);
-        src/misc/rom3.o(.text);
+        src/rom3.o(.text);
         src/engine/decompress.o(.text);
         asm/battle_1.o(.text);
-        src/misc/rom_800D42C.o(.text);
+        src/rom_800D42C.o(.text);
         asm/battle_1.o(.text_800DC24);
         src/battle/battle_2.o(.text);
         asm/battle_2.o(.text);
@@ -65,7 +65,7 @@ SECTIONS {
         src/pokemon/pokemon_2.o(.text);
         asm/pokemon_item_effect.o(.text);
         src/pokemon/pokemon_3.o(.text);
-        src/misc/de_rom_8040FE0.o(.text);
+        src/de_rom_8040FE0.o(.text);
         src/engine/trig.o(.text);
         src/engine/rng.o(.text);
         src/engine/util.o(.text);
@@ -113,7 +113,7 @@ SECTIONS {
         src/engine/palette.o(.text);
         src/engine/sound.o(.text);
         src/battle/battle_anim.o(.text);
-        src/misc/rom_8077ABC.o(.text);
+        src/rom_8077ABC.o(.text);
         src/engine/task.o(.text);
         src/battle/reshow_battle_screen.o(.text);
         src/battle/battle_anim_807B69C.o(.text);
@@ -128,7 +128,7 @@ SECTIONS {
         src/field/trainer_see.o(.text);
         src/field/wild_encounter.o(.text);
         src/field/field_effect.o(.text);
-        src/misc/unknown_task.o(.text);
+        src/unknown_task.o(.text);
         src/pokemon/pokemon_menu.o(.text);
         src/engine/option_menu.o(.text);
         src/pokemon/pokedex.o(.text);
@@ -163,7 +163,7 @@ SECTIONS {
         asm/secret_base.o(.text_80BC1D0);
         src/field/tv.o(.text);
         asm/contest_link_80C2020.o(.text);
-        src/misc/script_pokemon_util_80C4BF0.o(.text);
+        src/script_pokemon_util_80C4BF0.o(.text);
         src/field/field_poison.o(.text);
         src/pokemon/pokemon_size_record.o(.text);
         asm/fldeff_80C5CD4.o(.text);
@@ -184,7 +184,7 @@ SECTIONS {
         src/field/mauville_man.o(.text);
         src/pokemon/mail.o(.text);
         src/field/menu_helpers.o(.text);
-        src/misc/script_pokemon_util_80F99CC.o(.text);
+        src/script_pokemon_util_80F99CC.o(.text);
         src/field/dewford_trend.o(.text);
         src/field/heal_location.o(.text);
         src/field/region_map.o(.text);
@@ -200,7 +200,7 @@ SECTIONS {
         src/field/trader.o(.text);
         src/field/starter_choose.o(.text);
         src/field/wallclock.o(.text);
-        src/misc/rom6.o(.text);
+        src/rom6.o(.text);
         src/field/pokeblock.o(.text);
         src/field/fldeff_flash.o(.text);
         src/battle/post_battle_event_funcs.o(.text);
@@ -225,7 +225,7 @@ SECTIONS {
         asm/cable_car.o(.text);
         asm/roulette_util.o(.text);
         asm/cable_car_util.o(.text);
-        src/misc/unused_8124F94.o(.text);
+        src/unused_8124F94.o(.text);
         src/engine/save.o(.text);
         src/engine/mystery_event_script.o(.text);
         src/field/field_effect_helpers.o(.text);
@@ -362,7 +362,7 @@ SECTIONS {
         src/engine/sound.o(.rodata);
         data/battle_anim.o(.rodata);
         src/battle/battle_anim.o(.rodata);
-        src/misc/rom_8077ABC.o(.rodata);
+        src/rom_8077ABC.o(.rodata);
         data/map_events.o(.rodata);
         data/data_8393054.o(.rodata);
         src/engine/task.o(.rodata);
