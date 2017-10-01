@@ -327,7 +327,7 @@ static void task50_0807F0C8(u8);
 
 void sub_8081924(void)
 {
-    sub_8054044();
+    Overworld_FadeOutMapMusic();
     CreateTask(task50_0807F0C8, 80);
 }
 

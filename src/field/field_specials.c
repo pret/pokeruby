@@ -213,7 +213,7 @@ void UpdateCyclingRoadState(void) {
     if (VarGet(0x40a9) == 2 || VarGet(0x40a9) == 3)
     {
         VarSet(0x40a9, 0);
-        sav1_set_battle_music_maybe(SE_STOP);
+        Overworld_SetSavedMusic(SE_STOP);
     }
 }
 
@@ -700,11 +700,11 @@ void CableCarWarp(void)
 {
     if (gSpecialVar_0x8004 != 0)
     {
-        warp1_set(MAP_GROUP_ROUTE112_CABLE_CAR_STATION, MAP_ID_ROUTE112_CABLE_CAR_STATION, -1, 6, 4);
+        Overworld_SetWarpDestination(MAP_GROUP_ROUTE112_CABLE_CAR_STATION, MAP_ID_ROUTE112_CABLE_CAR_STATION, -1, 6, 4);
     }
     else
     {
-        warp1_set(MAP_GROUP_MT_CHIMNEY_CABLE_CAR_STATION, MAP_ID_MT_CHIMNEY_CABLE_CAR_STATION, -1, 6, 4);
+        Overworld_SetWarpDestination(MAP_GROUP_MT_CHIMNEY_CABLE_CAR_STATION, MAP_ID_MT_CHIMNEY_CABLE_CAR_STATION, -1, 6, 4);
     }
 }
 

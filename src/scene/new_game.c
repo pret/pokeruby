@@ -99,7 +99,7 @@ void sub_8052DE4(void)
 
 void WarpToTruck(void)
 {
-    warp1_set(25, 40, -1, -1, -1); // inside of truck
+    Overworld_SetWarpDestination(25, 40, -1, -1, -1); // inside of truck
     warp_in();
 }
 

@@ -935,13 +935,13 @@ void GetOnOffBike(u8 var)
     if (gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
     {
         SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ON_FOOT);
-        sav1_reset_battle_music_maybe();
-        sub_8053E90();
+        Overworld_ClearSavedMusic();
+        Overworld_PlaySpecialMapMusic();
     }
     else
     {
         SetPlayerAvatarTransitionFlags(var);
-        sav1_set_battle_music_maybe(BGM_CYCLING);
+        Overworld_SetSavedMusic(BGM_CYCLING);
         Overworld_ChangeMusicTo(BGM_CYCLING);
     }
 }

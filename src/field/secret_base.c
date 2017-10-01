@@ -301,7 +301,7 @@ void sub_80BBBEC(u8 taskid)
     s8 idx;
     if (!gPaletteFade.active) {
         idx = 4 * (gUnknown_020387DC / 10);
-        warp1_set(gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum, -1, gUnknown_083D1374[idx + 2], gUnknown_083D1374[idx + 3]);
+        Overworld_SetWarpDestination(gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum, -1, gUnknown_083D1374[idx + 2], gUnknown_083D1374[idx + 3]);
         warp_in();
         gFieldCallback = sub_80BBB90;
         SetMainCallback2(CB2_LoadMap);

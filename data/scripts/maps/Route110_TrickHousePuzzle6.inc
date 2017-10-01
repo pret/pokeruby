@@ -18,13 +18,13 @@ Route110_TrickHousePuzzle6_EventScript_1630E6:: @ 81630E6
 Route110_TrickHousePuzzle6_EventScript_1630EA:: @ 81630EA
 	lockall
 	compare 0x40b0, 0
-	jumpeq Route110_TrickHousePuzzle6_EventScript_1630FC
-	jump Route110_TrickHousePuzzle6_EventScript_161892
+	goto_if_eq Route110_TrickHousePuzzle6_EventScript_1630FC
+	goto Route110_TrickHousePuzzle6_EventScript_161892
 	end
 
 Route110_TrickHousePuzzle6_EventScript_1630FC:: @ 81630FC
 	setvar 0x40b0, 1
-	jump Route110_TrickHousePuzzle6_EventScript_16189C
+	goto Route110_TrickHousePuzzle6_EventScript_16189C
 	end
 
 Route110_TrickHousePuzzle6_EventScript_163107:: @ 8163107

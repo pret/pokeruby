@@ -68,7 +68,7 @@ static void sub_8083B6C(void);
 static void sub_8083CA4(u8 taskId);
 
 extern void sub_80831F8(u8 taskId);
-extern void call_map_music_set_to_zero(void);
+extern void Overworld_ResetMapMusic(void);
 extern void sub_810FEFC(void);
 extern void sub_8047CD8(void);
 extern void sub_805559C(void);
@@ -708,7 +708,7 @@ static void sub_808382C(u8 taskId)
 
 static void sub_8083958(void)
 {
-    call_map_music_set_to_zero();
+    Overworld_ResetMapMusic();
     LoadPlayerParty();
     SavePlayerBag();
     sub_810FEFC();

@@ -36,7 +36,7 @@
 #include "task.h"
 #include "vars.h"
 
-extern void (*gUnknown_03005D00)(u8);
+extern void (*gFieldItemUseCallback)(u8);
 extern void (*gFieldCallback)(void);
 extern void (*gUnknown_0300485C)(void);
 extern void (*gUnknown_03004AE4)(u8, u16, TaskFunc);
@@ -106,11 +106,13 @@ void SetUpItemUseOnFieldCallback(u8 taskId)
 {
     if (gTasks[taskId].data[2] != 1)
     {
-        gFieldCallback = (void *)ExecuteItemUseFromBlackPalette;
+        gFieldCallback = ExecuteItemUseFromBlackPalette;
         ItemMenu_ConfirmNormalFade(taskId);
     }
     else
-        gUnknown_03005D00(taskId);
+    {
+        gFieldItemUseCallback(taskId);
+    }
 }
 
 void HandleDeniedItemUseMessage(u8 var1, u8 playerMenuStatus, const u8 *text)
@@ -185,9 +187,9 @@ void ItemUseOutOfBattle_Bike(u8 taskId)
     }
     else
     {
-        if (Overworld_IsBikeAllowedOnCurrentMap() == TRUE && IsBikingDisallowedByPlayer() == FALSE)
+        if (Overworld_IsBikingAllowed() == TRUE && IsBikingDisallowedByPlayer() == FALSE)
         {
-            gUnknown_03005D00 = (void *)ItemUseOnFieldCB_Bike;
+            gFieldItemUseCallback = (void *)ItemUseOnFieldCB_Bike;
             SetUpItemUseOnFieldCallback(taskId);
         }
         else
@@ -241,7 +243,7 @@ void ItemUseOutOfBattle_Rod(u8 taskId)
 {
     if (CanFish() == TRUE)
     {
-        gUnknown_03005D00 = (void *)ItemUseOnFieldCB_Rod;
+        gFieldItemUseCallback = (void *)ItemUseOnFieldCB_Rod;
         SetUpItemUseOnFieldCallback(taskId);
     }
     else
@@ -257,7 +259,7 @@ void ItemUseOnFieldCB_Rod(u8 taskId)
 void ItemUseOutOfBattle_Itemfinder(u8 var)
 {
     IncrementGameStat(0x27);
-    gUnknown_03005D00 = (void *)ItemUseOnFieldCB_Itemfinder;
+    gFieldItemUseCallback = (void *)ItemUseOnFieldCB_Itemfinder;
     SetUpItemUseOnFieldCallback(var);
 }
 
@@ -780,7 +782,7 @@ void sub_80C9C7C(u8 taskId)
 {
     if (IsPlayerFacingPlantedBerryTree() == TRUE)
     {
-        gUnknown_03005D00 = sub_80C9D00;
+        gFieldItemUseCallback = sub_80C9D00;
         gFieldCallback = ExecuteItemUseFromBlackPalette;
         gTasks[taskId].data[8] = (u32)c2_exit_to_overworld_2_switch >> 16;
         gTasks[taskId].data[9] = (u32)c2_exit_to_overworld_2_switch;
@@ -805,7 +807,7 @@ void ItemUseOutOfBattle_WailmerPail(u8 taskId)
 {
     if (TryToWaterBerryTree() == TRUE)
     {
-        gUnknown_03005D00 = sub_80C9D74;
+        gFieldItemUseCallback = sub_80C9D74;
         SetUpItemUseOnFieldCallback(taskId);
     }
     else
@@ -909,7 +911,7 @@ void sub_80C9FC0(u8 var)
     sub_80C9D98(var);
 }
 
-void sub_80C9FDC(void)
+static void PrepareItemUseMessage(void)
 {
     RemoveBagItem(gScriptItemId, 1);
     sub_80A3E0C();
@@ -922,7 +924,7 @@ void ItemUseOutOfBattle_Repel(u8 var)
     if (VarGet(VAR_REPEL_STEP_COUNT) == FALSE)
     {
         VarSet(VAR_REPEL_STEP_COUNT, ItemId_GetHoldEffectParam(gScriptItemId));
-        sub_80C9FDC();
+        PrepareItemUseMessage();
         DisplayItemMessageOnField(var, gStringVar4, CleanUpItemMenuMessage, 1);
     }
     else
@@ -975,10 +977,10 @@ void task08_080A1C44(u8 taskId)
     DestroyTask(taskId);
 }
 
-void sub_80CA18C(u8 taskId)
+void EscapeRopeCallback(u8 taskId)
 {
-    sub_8053014();
-    sub_80C9FDC();
+    Overworld_ResetStateAfterDigEscRope();
+    PrepareItemUseMessage();
     gTasks[taskId].data[0] = 0;
     DisplayItemMessageOnField(taskId, gStringVar4, task08_080A1C44, 0);
 }
@@ -995,7 +997,7 @@ void ItemUseOutOfBattle_EscapeRope(u8 taskId)
 {
     if (CanUseEscapeRopeOnCurrMap() == TRUE)
     {
-        gUnknown_03005D00 = sub_80CA18C;
+        gFieldItemUseCallback = EscapeRopeCallback;
         SetUpItemUseOnFieldCallback(taskId);
     }
     else
@@ -1114,7 +1116,7 @@ void ItemUseInBattle_Escape(u8 taskId)
 
     if((gBattleTypeFlags & BATTLE_TYPE_TRAINER) == FALSE)
     {
-        sub_80C9FDC();
+        PrepareItemUseMessage();
         DisplayItemMessageOnField(taskId, gStringVar4, sub_80A7094, 1);
     }
     else

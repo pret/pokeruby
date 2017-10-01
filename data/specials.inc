@@ -160,7 +160,7 @@ gSpecials::
 	def_special SetFlagInVar
 	def_special CableCarWarp
 	def_special sub_8123218
-	def_special sub_8053E90
+	def_special Overworld_PlaySpecialMapMusic
 	def_special StartWallClock
 	def_special ScrSpecial_ViewWallClock
 	def_special ScrSpecial_ChooseStarter

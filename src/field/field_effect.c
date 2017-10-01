@@ -1213,7 +1213,7 @@ void task00_8084310(u8 taskId)
     }
     if (!FieldEffectActiveListContains(FLDEFF_USE_FLY))
     {
-        flag_var_implications_of_teleport_();
+        Overworld_ResetStateAfterFly();
         warp_in();
         SetMainCallback2(CB2_LoadMap);
         gFieldCallback = mapldr_08084390;
@@ -1223,7 +1223,7 @@ void task00_8084310(u8 taskId)
 
 void mapldr_08084390(void)
 {
-    sub_8053E90();
+    Overworld_PlaySpecialMapMusic();
     pal_fill_black();
     CreateTask(c3_080843F8, 0);
     gMapObjects[gPlayerAvatar.mapObjectId].mapobj_bit_13 = 1;
@@ -1264,7 +1264,7 @@ extern void CameraObjectReset1(void);
 
 void sub_8086748(void)
 {
-    sub_8053E90();
+    Overworld_PlaySpecialMapMusic();
     pal_fill_for_map_transition();
     ScriptContext2_Enable();
     FreezeMapObjects();
@@ -1533,7 +1533,7 @@ void sub_8086C40(void)
 
 void sub_8086C94(void)
 {
-    sub_8053E90();
+    Overworld_PlaySpecialMapMusic();
     pal_fill_for_map_transition();
     ScriptContext2_Enable();
     CreateTask(sub_8086CBC, 0);
@@ -1897,7 +1897,7 @@ void sub_8087470(u8);
 
 void mapldr_080851BC(void)
 {
-    sub_8053E90();
+    Overworld_PlaySpecialMapMusic();
     pal_fill_for_map_transition();
     ScriptContext2_Enable();
     gFieldCallback = NULL;
@@ -2134,7 +2134,7 @@ void sub_8087A74(u8);
 
 void mapldr_080859D4(void)
 {
-    sub_8053E90();
+    Overworld_PlaySpecialMapMusic();
     pal_fill_for_map_transition();
     ScriptContext2_Enable();
     FreezeMapObjects();
@@ -2266,7 +2266,7 @@ void sub_8087D78(struct Task *task)
 {
     if (!gPaletteFade.active && sub_8054034() == TRUE)
     {
-        sub_8053570();
+        Overworld_SetWarpDestToLastHealLoc();
         warp_in();
         SetMainCallback2(CB2_LoadMap);
         gFieldCallback = mapldr_08085D88;
@@ -2278,7 +2278,7 @@ void sub_8087E1C(u8);
 
 void mapldr_08085D88(void)
 {
-    sub_8053E90();
+    Overworld_PlaySpecialMapMusic();
     pal_fill_for_map_transition();
     ScriptContext2_Enable();
     FreezeMapObjects();
@@ -2879,7 +2879,7 @@ u8 FldEff_UseSurf(void)
     u8 taskId;
     taskId = CreateTask(sub_8088954, 0xff);
     gTasks[taskId].data[15] = gFieldEffectArguments[0];
-    sav1_reset_battle_music_maybe();
+    Overworld_ClearSavedMusic();
     Overworld_ChangeMusicTo(0x016d);
     return FALSE;
 }

@@ -876,7 +876,7 @@ static void CB2_StartFirstBattle(void)
 
 static void CB2_EndFirstBattle(void)
 {
-    sav1_reset_battle_music_maybe();
+    Overworld_ClearSavedMusic();
     SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
 }
 

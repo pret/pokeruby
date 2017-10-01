@@ -169,7 +169,7 @@ int SetUpFieldMove_Dig(void)
 
 static void sub_810B5D8(void)
 {
-    sub_8053014();
+    Overworld_ResetStateAfterDigEscRope();
     FieldEffectStart(FLDEFF_USE_DIG);
     gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
 }

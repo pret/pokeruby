@@ -6,47 +6,47 @@
 
 #define MAX_COINS 9999
 
-void UpdateCoinsWindow(s32 a, u8 b, u8 c)
+void UpdateCoinsWindow(s32 coins, u8 x, u8 y)
 {
-    PrintCoins(a, 4, b + 2, c + 1);
+    PrintCoins(coins, 4, x + 2, y + 1);
 }
 
-void ShowCoinsWindow(u32 a, u8 b, u8 c)
+void ShowCoinsWindow(u32 coins, u8 x, u8 y)
 {
-    MenuDrawTextWindow(b, c, b + 9, c + 3);
-    UpdateCoinsWindow(a, b, c);
+    MenuDrawTextWindow(x, y, x + 9, y + 3);
+    UpdateCoinsWindow(coins, x, y);
 }
 
-void HideCoinsWindow(u8 a, u8 b)
+void HideCoinsWindow(u8 x, u8 y)
 {
-    MenuZeroFillWindowRect(a, b, a + 9, b + 3);
+    MenuZeroFillWindowRect(x, y, x + 9, y + 3);
 }
 
-void PrintCoins(s32 a, u8 b, u8 c, u8 d)
+void PrintCoins(s32 coins, u8 b, u8 x, u8 y)
 {
     u8 string[16];
     u8 *ptr;
     u8 r1;
     u8 foo;
 
-    ConvertIntToDecimalString(string, a);
+    ConvertIntToDecimalString(string, coins);
     r1 = (b * 6 + 0x21 - 8 * (b + 2));
-    c = c - r1 / 8;
+    x = x - r1 / 8;
     foo = r1 % 8;
     ptr = gStringVar1;
     if (foo)
     {
-        ptr[0] = 0xFC;
+        ptr[0] = EXT_CTRL_CODE_BEGIN;
         ptr[1] = 0x11;
         ptr[2] = 8 - (foo);
         ptr += 3;
     }
-    ptr[0] = 0xFC;
+    ptr[0] = EXT_CTRL_CODE_BEGIN;
     ptr[1] = 0x11;
     ptr[2] = (b - StringLength(string)) * 6;
     ptr += 3;
     StringCopy(ptr, string);
-    MenuPrint(gOtherText_Coins2, c, d);
+    MenuPrint(gOtherText_Coins2, x, y);
 }
 
 u16 GetCoins(void)

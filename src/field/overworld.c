@@ -91,7 +91,7 @@ extern struct MapHeader * const * const gMapGroups[];
 extern s32 gMaxFlashLevel;
 
 EWRAM_DATA struct WarpData gUnknown_020297F0 = {0};
-EWRAM_DATA struct WarpData gUnknown_020297F8 = {0};
+EWRAM_DATA struct WarpData gWarpDestination = {0};  // new warp position
 EWRAM_DATA struct WarpData gUnknown_02029800 = {0};
 EWRAM_DATA struct WarpData gUnknown_02029808 = {0};
 EWRAM_DATA struct UnkPlayerStruct gUnknown_02029810 = {0};
@@ -195,12 +195,12 @@ static void DoWhiteOut(void)
     ScriptContext2_RunNewScript(S_WhiteOut);
     gSaveBlock1.money /= 2;
     ScrSpecial_HealPlayerParty();
-    sub_8053050();
-    sub_8053570();
+    Overworld_ResetStateAfterWhiteOut();
+    Overworld_SetWarpDestToLastHealLoc();
     warp_in();
 }
 
-void flag_var_implications_of_teleport_(void)
+void Overworld_ResetStateAfterFly(void)
 {
     player_avatar_init_params_reset();
     FlagClear(SYS_CYCLING_ROAD);
@@ -221,7 +221,7 @@ void Overworld_ResetStateAfterTeleport(void)
     ScriptContext2_RunNewScript(gUnknown_0819FC9F);
 }
 
-void sub_8053014(void)
+void Overworld_ResetStateAfterDigEscRope(void)
 {
     player_avatar_init_params_reset();
     FlagClear(SYS_CYCLING_ROAD);
@@ -231,7 +231,7 @@ void sub_8053014(void)
     FlagClear(SYS_USE_FLASH);
 }
 
-void sub_8053050(void)
+void Overworld_ResetStateAfterWhiteOut(void)
 {
     player_avatar_init_params_reset();
     FlagClear(SYS_CYCLING_ROAD);
@@ -283,9 +283,12 @@ void SetGameStat(u8 index, u32 value)
         gSaveBlock1.gameStats[index] = value;
 }
 
-void sub_8053154(void)
+void LoadMapObjTemplatesFromHeader(void)
 {
+    // Clear map object templates
     CpuFill32(0, gSaveBlock1.mapObjectTemplates, sizeof(gSaveBlock1.mapObjectTemplates));
+    
+    // Copy map header events to save block
     CpuCopy32(gMapHeader.events->mapObjects,
               gSaveBlock1.mapObjectTemplates,
               gMapHeader.events->mapObjectCount * sizeof(struct MapObjectTemplate));
@@ -300,7 +303,7 @@ static void LoadSaveblockMapObjScripts(void)
         mapObjectTemplates[i].script = gMapHeader.events->mapObjects[i].script;
 }
 
-void Overworld_SaveMapObjCoords(u8 localId, s16 x, s16 y)
+void Overworld_SetMapObjTemplateCoords(u8 localId, s16 x, s16 y)
 {
     s32 i;
     for (i = 0; i < 64; i++)
@@ -315,9 +318,10 @@ void Overworld_SaveMapObjCoords(u8 localId, s16 x, s16 y)
     }
 }
 
-void Overworld_SaveMapObjMovementType(u8 localId, u8 movementType)
+void Overworld_SetMapObjTemplateMovementType(u8 localId, u8 movementType)
 {
     s32 i;
+
     for (i = 0; i < 64; i++)
     {
         struct MapObjectTemplate *mapObjectTemplate = &gSaveBlock1.mapObjectTemplates[i];
@@ -346,15 +350,15 @@ static struct MapData *get_mapdata_header(void)
     return NULL;
 }
 
-static void warp_shift(void)
+static void ApplyCurrentWarp(void)
 {
     gUnknown_020297F0 = gSaveBlock1.location;
-    gSaveBlock1.location = gUnknown_020297F8;
+    gSaveBlock1.location = gWarpDestination;
     gUnknown_02029800 = sDummyWarpData;
     gUnknown_02029808 = sDummyWarpData;
 }
 
-static void warp_set(struct WarpData *warp, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
+static void SetWarpData(struct WarpData *warp, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
 {
     warp->mapGroup = mapGroup;
     warp->mapNum = mapNum;
@@ -385,7 +389,7 @@ struct MapHeader *const Overworld_GetMapHeaderByGroupAndId(u16 mapGroup, u16 map
 
 struct MapHeader *const warp1_get_mapheader(void)
 {
-    return Overworld_GetMapHeaderByGroupAndId(gUnknown_020297F8.mapGroup, gUnknown_020297F8.mapNum);
+    return Overworld_GetMapHeaderByGroupAndId(gWarpDestination.mapGroup, gWarpDestination.mapNum);
 }
 
 static void set_current_map_header_from_sav1_save_old_name(void)
@@ -422,34 +426,34 @@ void sub_80533CC(void)
 
 void warp_in(void)
 {
-    warp_shift();
+    ApplyCurrentWarp();
     set_current_map_header_from_sav1_save_old_name();
     sub_80533CC();
 }
 
-void warp1_set(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
+void Overworld_SetWarpDestination(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
 {
-    warp_set(&gUnknown_020297F8, mapGroup, mapNum, warpId, x, y);
+    SetWarpData(&gWarpDestination, mapGroup, mapNum, warpId, x, y);
 }
 
 void warp1_set_2(s8 mapGroup, s8 mapNum, s8 warpId)
 {
-    warp1_set(mapGroup, mapNum, warpId, -1, -1);
+    Overworld_SetWarpDestination(mapGroup, mapNum, warpId, -1, -1);
 }
 
 void saved_warp2_set(int unused, s8 mapGroup, s8 mapNum, s8 warpId)
 {
-    warp_set(&gSaveBlock1.warp2, mapGroup, mapNum, warpId, gSaveBlock1.pos.x, gSaveBlock1.pos.y);
+    SetWarpData(&gSaveBlock1.warp2, mapGroup, mapNum, warpId, gSaveBlock1.pos.x, gSaveBlock1.pos.y);
 }
 
 void saved_warp2_set_2(int unused, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
 {
-    warp_set(&gSaveBlock1.warp2, mapGroup, mapNum, warpId, x, y);
+    SetWarpData(&gSaveBlock1.warp2, mapGroup, mapNum, warpId, x, y);
 }
 
 void copy_saved_warp2_bank_and_enter_x_to_warp1(u8 unused)
 {
-    gUnknown_020297F8 = gSaveBlock1.warp2;
+    gWarpDestination = gSaveBlock1.warp2;
 }
 
 void sub_8053538(u8 a1)
@@ -457,81 +461,82 @@ void sub_8053538(u8 a1)
     const struct HealLocation *warp = GetHealLocation(a1);
 
     if (warp)
-        warp1_set(warp->group, warp->map, -1, warp->x, warp->y);
+        Overworld_SetWarpDestination(warp->group, warp->map, -1, warp->x, warp->y);
 }
 
-void sub_8053570(void)
+void Overworld_SetWarpDestToLastHealLoc(void)
 {
-    gUnknown_020297F8 = gSaveBlock1.warp3;
+    gWarpDestination = gSaveBlock1.lastHealLocation;
 }
 
-void sub_8053588(u8 a1)
+void Overworld_SetHealLocationWarp(u8 healLocationId)
 {
-    const struct HealLocation *warp = GetHealLocation(a1);
-    if (warp)
-        warp_set(&gSaveBlock1.warp3, warp->group, warp->map, -1, warp->x, warp->y);
+    const struct HealLocation *healLocation = GetHealLocation(healLocationId);
+
+    if (healLocation != NULL)
+        SetWarpData(&gSaveBlock1.lastHealLocation, healLocation->group, healLocation->map, -1, healLocation->x, healLocation->y);
 }
 
 void sub_80535C4(s16 a1, s16 a2)
 {
-    u8 v4 = Overworld_GetMapTypeOfSaveblockLocation();
-    u8 v5 = GetMapTypeByGroupAndId(gUnknown_020297F8.mapGroup, gUnknown_020297F8.mapNum);
-    if (is_map_type_1_2_3_5_or_6(v4) && is_map_type_1_2_3_5_or_6(v5) != TRUE)
+    u8 currMapType = Overworld_GetMapTypeOfSaveblockLocation();
+    u8 destMapType = GetMapTypeByGroupAndId(gWarpDestination.mapGroup, gWarpDestination.mapNum);
+    if (is_map_type_1_2_3_5_or_6(currMapType) && is_map_type_1_2_3_5_or_6(destMapType) != TRUE)
         sub_805363C(gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum, -1, a1 - 7, a2 - 6);
 }
 
 void sub_805363C(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
 {
-    warp_set(&gSaveBlock1.warp4, mapGroup, mapNum, warpId, x, y);
+    SetWarpData(&gSaveBlock1.warp4, mapGroup, mapNum, warpId, x, y);
 }
 
 void sub_8053678(void)
 {
-    gUnknown_020297F8 = gSaveBlock1.warp4;
+    gWarpDestination = gSaveBlock1.warp4;
 }
 
 void sub_8053690(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
 {
-    warp_set(&gUnknown_02029800, mapGroup, mapNum, warpId, x, y);
+    SetWarpData(&gUnknown_02029800, mapGroup, mapNum, warpId, x, y);
 }
 
-void warp1_set_to_warp2(void)
+static void warp1_set_to_warp2(void)
 {
-    gUnknown_020297F8 = gUnknown_02029800;
+    gWarpDestination = gUnknown_02029800;
 }
 
 void sub_80536E4(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
 {
-    warp_set(&gUnknown_02029808, mapGroup, mapNum, warpId, x, y);
+    SetWarpData(&gUnknown_02029808, mapGroup, mapNum, warpId, x, y);
 }
 
 void sub_8053720(s16 x, s16 y)
 {
     if (warp_data_is_not_neg_1(&gUnknown_02029808) == TRUE)
     {
-        gUnknown_020297F8 = gUnknown_020297F0;
+        gWarpDestination = gUnknown_020297F0;
     }
     else
     {
-        warp1_set(gUnknown_02029808.mapGroup, gUnknown_02029808.mapNum, -1, x, y);
+        Overworld_SetWarpDestination(gUnknown_02029808.mapGroup, gUnknown_02029808.mapNum, -1, x, y);
     }
 }
 
 void sub_8053778(void)
 {
-    gUnknown_020297F8 = gSaveBlock1.warp1;
+    gWarpDestination = gSaveBlock1.warp1;
 }
 
 void unref_sub_8053790(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
 {
-    warp_set(&gSaveBlock1.warp1, mapGroup, mapNum, warpId, x, y);
+    SetWarpData(&gSaveBlock1.warp1, mapGroup, mapNum, warpId, x, y);
 }
 
 void sub_80537CC(u8 a1)
 {
     const struct HealLocation *warp = GetHealLocation(a1);
     if (warp)
-        warp_set(&gSaveBlock1.warp1, warp->group, warp->map, -1, warp->x, warp->y);
+        SetWarpData(&gSaveBlock1.warp1, warp->group, warp->map, -1, warp->x, warp->y);
 }
 
 void gpu_sync_bg_hide()
@@ -539,7 +544,7 @@ void gpu_sync_bg_hide()
     gSaveBlock1.warp1 = gSaveBlock1.warp2;
 }
 
-struct MapConnection *sub_8053818(u8 dir)
+struct MapConnection *GetMapConnection(u8 dir)
 {
     s32 i;
     s32 count = gMapHeader.connections->count;
@@ -557,10 +562,11 @@ struct MapConnection *sub_8053818(u8 dir)
 
 bool8 sub_8053850(u8 dir, u16 x, u16 y)
 {
-    struct MapConnection *connection = sub_8053818(dir);
+    struct MapConnection *connection = GetMapConnection(dir);
+
     if (connection != NULL)
     {
-        warp1_set(connection->mapGroup, connection->mapNum, -1, x, y);
+        Overworld_SetWarpDestination(connection->mapGroup, connection->mapNum, -1, x, y);
     }
     else
     {
@@ -586,11 +592,11 @@ void sub_80538F0(u8 mapGroup, u8 mapNum)
 {
     s32 i;
 
-    warp1_set(mapGroup, mapNum, -1, -1, -1);
+    Overworld_SetWarpDestination(mapGroup, mapNum, -1, -1, -1);
     sub_8053F0C();
-    warp_shift();
+    ApplyCurrentWarp();
     set_current_map_header_from_sav1_save_old_name();
-    sub_8053154();
+    LoadMapObjTemplatesFromHeader();
     ClearTempFieldEventData();
     ResetCyclingRoadChallengeData();
     prev_quest_postbuffer_cursor_backup_reset();
@@ -599,7 +605,7 @@ void sub_80538F0(u8 mapGroup, u8 mapNum)
     sub_80806E4();
     ChooseAmbientCrySpecies();
     SetDefaultFlashLevel();
-    sav1_reset_battle_music_maybe();
+    Overworld_ClearSavedMusic();
     mapheader_run_script_with_tag_x3();
     not_trainer_hill_battle_pyramid();
     sub_8056D38(gMapHeader.mapData);
@@ -623,7 +629,7 @@ void sub_8053994(u32 a1)
     bool8 v3;
 
     set_current_map_header_from_sav1_save_old_name();
-    sub_8053154();
+    LoadMapObjTemplatesFromHeader();
     v2 = is_map_type_1_2_3_5_or_6(gMapHeader.mapType);
     v3 = Overworld_MapTypeIsIndoors(gMapHeader.mapType);
     ClearTempFieldEventData();
@@ -637,7 +643,7 @@ void sub_8053994(u32 a1)
     if (v2)
         FlagClear(SYS_USE_FLASH);
     SetDefaultFlashLevel();
-    sav1_reset_battle_music_maybe();
+    Overworld_ClearSavedMusic();
     mapheader_run_script_with_tag_x3();
     UpdateLocationHistoryForRoamer();
     RoamerMoveToOtherLocationSet();
@@ -691,7 +697,7 @@ u8 sub_8053B00(struct UnkPlayerStruct *playerStruct, u16 a2, u8 a3)
         return 16;
     if (MetatileBehavior_IsSurfableWaterOrUnderwater(a2) == 1)
         return 8;
-    if (Overworld_IsBikeAllowedOnCurrentMap() != TRUE)
+    if (Overworld_IsBikingAllowed() != TRUE)
         return 1;
     if (playerStruct->player_field_0 == 2)
         return 2;
@@ -729,7 +735,7 @@ u16 cur_mapdata_block_role_at_screen_center_acc_to_sav1(void)
     return MapGridGetMetatileBehaviorAt(gSaveBlock1.pos.x + 7, gSaveBlock1.pos.y + 7);
 }
 
-bool32 Overworld_IsBikeAllowedOnCurrentMap(void)
+bool32 Overworld_IsBikingAllowed(void)
 {
     // is player in cycling road entrance?
     if (gSaveBlock1.location.mapGroup == MAP_GROUP_ROUTE110_SEASIDE_CYCLING_ROAD_SOUTH_ENTRANCE
@@ -830,10 +836,11 @@ static u16 GetLocationMusic(struct WarpData *warp)
         return Overworld_GetMapHeaderByGroupAndId(warp->mapGroup, warp->mapNum)->music;
 }
 
-u16 sav1_map_get_music(void)
+u16 GetCurrLocationDefaultMusic(void)
 {
     u16 music;
 
+    // Play the desert music only when the sandstorm is active on Route 111.
     if (gSaveBlock1.location.mapGroup == MAP_GROUP_ROUTE111
      && gSaveBlock1.location.mapNum == MAP_ID_ROUTE111
      && GetSav1Weather() == 8)
@@ -853,9 +860,9 @@ u16 sav1_map_get_music(void)
     }
 }
 
-u16 warp1_target_get_music(void)
+u16 GetWarpDestinationMusic(void)
 {
-    u16 music = GetLocationMusic(&gUnknown_020297F8);
+    u16 music = GetLocationMusic(&gWarpDestination);
     if (music != 0x7FFF)
     {
         return music;
@@ -870,19 +877,19 @@ u16 warp1_target_get_music(void)
     }
 }
 
-void call_map_music_set_to_zero(void)
+void Overworld_ResetMapMusic(void)
 {
     ResetMapMusic();
 }
 
-void sub_8053E90(void)
+void Overworld_PlaySpecialMapMusic(void)
 {
-    u16 music = sav1_map_get_music();
+    u16 music = GetCurrLocationDefaultMusic();
 
     if (music != LEGENDARY_MUSIC)
     {
-        if (gSaveBlock1.battleMusic)
-            music = gSaveBlock1.battleMusic;
+        if (gSaveBlock1.savedMusic)
+            music = gSaveBlock1.savedMusic;
         else if (Overworld_GetMapTypeOfSaveblockLocation() == MAP_TYPE_UNDERWATER)
             music = BGM_DEEPDEEP;
         else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
@@ -893,21 +900,21 @@ void sub_8053E90(void)
         PlayNewMapMusic(music);
 }
 
-void sav1_set_battle_music_maybe(u16 songNum)
+void Overworld_SetSavedMusic(u16 songNum)
 {
-    gSaveBlock1.battleMusic = songNum;
+    gSaveBlock1.savedMusic = songNum;
 }
 
-void sav1_reset_battle_music_maybe(void)
+void Overworld_ClearSavedMusic(void)
 {
-    gSaveBlock1.battleMusic = 0;
+    gSaveBlock1.savedMusic = 0;
 }
 
 void sub_8053F0C(void)
 {
     if (FlagGet(SPECIAL_FLAG_1) != TRUE)
     {
-        u16 newMusic = warp1_target_get_music();
+        u16 newMusic = GetWarpDestinationMusic();
         u16 currentMusic = GetCurrentMapMusic();
         if (newMusic != LEGENDARY_MUSIC)
         {
@@ -926,11 +933,11 @@ void sub_8053F0C(void)
     }
 }
 
-void sub_8053F84(void)
+void Overworld_ChangeMusicToDefault(void)
 {
     u16 currentMusic = GetCurrentMapMusic();
-    if (currentMusic != sav1_map_get_music())
-        FadeOutAndPlayNewMapMusic(sav1_map_get_music(), 8);
+    if (currentMusic != GetCurrLocationDefaultMusic())
+        FadeOutAndPlayNewMapMusic(GetCurrLocationDefaultMusic(), 8);
 }
 
 void Overworld_ChangeMusicTo(u16 newMusic)
@@ -951,7 +958,7 @@ u8 GetMapMusicFadeoutSpeed(void)
 
 void sub_8053FF8(void)
 {
-    u16 music = warp1_target_get_music();
+    u16 music = GetWarpDestinationMusic();
     if (FlagGet(SPECIAL_FLAG_1) != TRUE && music != GetCurrentMapMusic())
     {
         u8 speed = GetMapMusicFadeoutSpeed();
@@ -964,7 +971,7 @@ bool8 sub_8054034(void)
     return IsNotWaitingForBGMStop();
 }
 
-void sub_8054044(void)
+void Overworld_FadeOutMapMusic(void)
 {
     FadeOutMapMusic(4);
 }
@@ -972,14 +979,16 @@ void sub_8054044(void)
 static void PlayAmbientCry(void)
 {
     s16 x, y;
+    s8 pan;
+    s8 volume;
+    
     PlayerGetDestCoords(&x, &y);
-    if (sIsAmbientCryWaterMon != TRUE
-     || MetatileBehavior_IsSurfableWaterOrUnderwater(MapGridGetMetatileBehaviorAt(x, y)))
-    {
-        s8 pan = (Random() % 88) + 212;
-        s8 volume = (Random() % 30) + 50;
-        PlayCry2(sAmbientCrySpecies, pan, volume, 1);
-    }
+    if (sIsAmbientCryWaterMon == TRUE
+     && !MetatileBehavior_IsSurfableWaterOrUnderwater(MapGridGetMetatileBehaviorAt(x, y)))
+        return;
+    pan = (Random() % 88) + 212;
+    volume = (Random() % 30) + 50;
+    PlayCry2(sAmbientCrySpecies, pan, volume, 1);
 }
 
 void UpdateAmbientCry(s16 *state, u16 *delayCounter)
@@ -1149,6 +1158,7 @@ void OverworldBasic(void)
     sub_8072EDC();
 }
 
+// This CB2 is used when starting 
 void CB2_OverworldBasic(void)
 {
     OverworldBasic();
@@ -1176,7 +1186,7 @@ void sub_80543DC(u16 (*a1)(u32))
 
 void sub_80543E8(void)
 {
-    if (gFieldCallback)
+    if (gFieldCallback != NULL)
         gFieldCallback();
     else
         mapldr_default();
@@ -1977,27 +1987,27 @@ void sub_8055280(u16 a1)
 
 u16 sub_80552B0(u32 a1)
 {
-    if (gMain.heldKeys & 0x40)
+    if (gMain.heldKeys & DPAD_UP)
     {
         return 19;
     }
-    else if (gMain.heldKeys & 0x80)
+    else if (gMain.heldKeys & DPAD_DOWN)
     {
         return 18;
     }
-    else if (gMain.heldKeys & 0x20)
+    else if (gMain.heldKeys & DPAD_LEFT)
     {
         return 20;
     }
-    else if (gMain.heldKeys & 0x10)
+    else if (gMain.heldKeys & DPAD_RIGHT)
     {
         return 21;
     }
-    else if (gMain.newKeys & 8)
+    else if (gMain.newKeys & START_BUTTON)
     {
         return 24;
     }
-    else if (gMain.newKeys & 1)
+    else if (gMain.newKeys & A_BUTTON)
     {
         return 25;
     }

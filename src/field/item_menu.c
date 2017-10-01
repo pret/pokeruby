@@ -152,7 +152,7 @@ static u8 sReturnLocation;
 static const u8 *sPopupMenuActionList;
 
 // common
-void (*gUnknown_03005D00)(u8) = NULL;
+void (*gFieldItemUseCallback)(u8) = NULL;
 extern u16 gUnknown_030041B4;
 extern struct PocketScrollState gBagPocketScrollStates[];
 extern struct ItemSlot *gCurrentBagPocketItemSlots;  // selected pocket item slots
@@ -2718,7 +2718,7 @@ void ExecuteItemUseFromBlackPalette(void)
 static void Task_CallItemUseOnFieldCallback(u8 taskId)
 {
     if (sub_807D770() == TRUE)
-        gUnknown_03005D00(taskId);
+        gFieldItemUseCallback(taskId);
 }
 
 void sub_80A5D04(void)

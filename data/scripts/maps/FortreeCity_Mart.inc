@@ -5,7 +5,7 @@ FortreeCity_Mart_EventScript_158067:: @ 8158067
 	lock
 	faceplayer
 	message FortreeCity_Mart_Text_1A0BE4
-	waittext
+	waitmessage
 	pokemart FortreeCity_Mart_Items
 	msgbox FortreeCity_Mart_Text_1A0C02, 4
 	release

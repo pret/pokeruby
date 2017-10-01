@@ -5,7 +5,7 @@ VerdanturfTown_FriendshipRatersHouse_EventScript_154030:: @ 8154030
 	lock
 	faceplayer
 	msgbox VerdanturfTown_FriendshipRatersHouse_Text_178A9C, 4
-	specialval RESULT, GetLeadMonFriendshipScore
+	specialvar RESULT, GetLeadMonFriendshipScore
 	switch RESULT
 	case 0, VerdanturfTown_FriendshipRatersHouse_EventScript_154093
 	case 1, VerdanturfTown_FriendshipRatersHouse_EventScript_15409D
@@ -55,8 +55,8 @@ VerdanturfTown_FriendshipRatersHouse_EventScript_1540CF:: @ 81540CF
 VerdanturfTown_FriendshipRatersHouse_EventScript_1540D9:: @ 81540D9
 	lock
 	faceplayer
-	checksound
-	pokecry SPECIES_PIKACHU, 0
+	waitse
+	playpokecry SPECIES_PIKACHU, 0
 	msgbox VerdanturfTown_FriendshipRatersHouse_Text_178CFD, 4
 	waitpokecry
 	release

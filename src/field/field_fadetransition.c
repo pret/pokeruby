@@ -89,7 +89,7 @@ void task0A_asap_script_env_2_enable_and_set_ctx_running(u8 taskID)
 void sub_8080990(void)
 {
     ScriptContext2_Enable();
-    sub_8053E90();
+    Overworld_PlaySpecialMapMusic();
     pal_fill_black();
     CreateTask(task0A_asap_script_env_2_enable_and_set_ctx_running, 10);
 }
@@ -130,7 +130,7 @@ void task_mpl_807DD60(u8 taskId)
 void sub_8080A3C(void)
 {
     ScriptContext2_Enable();
-    sub_8053E90();
+    Overworld_PlaySpecialMapMusic();
     palette_bg_fill_black();
     CreateTask(task_mpl_807DD60, 10);
 }
@@ -165,7 +165,7 @@ void sub_8080A5C(u8 taskId)
 void sub_8080AC4(void)
 {
     ScriptContext2_Enable();
-    sub_8053E90();
+    Overworld_PlaySpecialMapMusic();
     palette_bg_fill_black();
     CreateTask(sub_8080A5C, 10);
 }
@@ -188,7 +188,7 @@ void sub_8080AE4(void)
 
 void mapldr_default(void)
 {
-    sub_8053E90();
+    Overworld_PlaySpecialMapMusic();
     pal_fill_for_map_transition();
     sub_8080AE4();
     ScriptContext2_Enable();
@@ -196,7 +196,7 @@ void mapldr_default(void)
 
 void sub_8080B60(void)
 {
-    sub_8053E90();
+    Overworld_PlaySpecialMapMusic();
     pal_fill_black();
     sub_8080AE4();
     ScriptContext2_Enable();
@@ -204,7 +204,7 @@ void sub_8080B60(void)
 
 void sub_8080B78(void)
 {
-    sub_8053E90();
+    Overworld_PlaySpecialMapMusic();
     pal_fill_for_map_transition();
     PlaySE(SE_TK_WARPOUT);
     CreateTask(task_map_chg_seq_0807E2CC, 10);
@@ -354,7 +354,7 @@ void sub_8080E28(void)
 void sub_8080E44(void)
 {
     ScriptContext2_Enable();
-    sub_8053E90();
+    Overworld_PlaySpecialMapMusic();
     pal_fill_black();
     CreateTask(task_mpl_807E3C8, 10);
 }

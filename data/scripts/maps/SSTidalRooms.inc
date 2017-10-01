@@ -5,11 +5,11 @@ SSTidalRooms_EventScript_15FF06:: @ 815FF06
 	lock
 	faceplayer
 	checkflag 260
-	jumpeq SSTidalRooms_EventScript_15FF3D
+	goto_if_eq SSTidalRooms_EventScript_15FF3D
 	msgbox SSTidalRooms_Text_199B65, 4
 	giveitem ITEM_TM49
 	compare RESULT, 0
-	jumpeq SSTidalRooms_EventScript_1A029B
+	goto_if_eq SSTidalRooms_EventScript_1A029B
 	setflag 260
 	msgbox SSTidalRooms_Text_199C1A, 4
 	release
@@ -23,7 +23,7 @@ SSTidalRooms_EventScript_15FF3D:: @ 815FF3D
 SSTidalRooms_EventScript_15FF47:: @ 815FF47
 	lockall
 	msgbox SSTidalRooms_Text_19956B, 4
-	closebutton
+	closemessage
 	call SSTidalRooms_EventScript_1A02CA
 	call SSTidalRooms_EventScript_15FD64
 	releaseall
