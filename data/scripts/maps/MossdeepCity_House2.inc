@@ -12,29 +12,29 @@ MossdeepCity_House2_EventScript_15A872:: @ 815A872
 MossdeepCity_House2_EventScript_15A87B:: @ 815A87B
 	lock
 	faceplayer
-	checksound
-	pokecry SPECIES_WINGULL, 0
+	waitse
+	playpokecry SPECIES_WINGULL, 0
 	msgbox MossdeepCity_House2_Text_18D61E, 4
 	waitpokecry
-	closebutton
+	closemessage
 	setflag 224
 	clearflag 933
 	compare FACING, 2
-	callif 1, MossdeepCity_House2_EventScript_15A8AE
+	call_if 1, MossdeepCity_House2_EventScript_15A8AE
 	compare FACING, 3
-	callif 1, MossdeepCity_House2_EventScript_15A8B9
-	disappear 3
+	call_if 1, MossdeepCity_House2_EventScript_15A8B9
+	removeobject 3
 	release
 	end
 
 MossdeepCity_House2_EventScript_15A8AE:: @ 815A8AE
-	move 3, MossdeepCity_House2_Movement_15A8C4
-	waitmove 0
+	applymovement 3, MossdeepCity_House2_Movement_15A8C4
+	waitmovement 0
 	return
 
 MossdeepCity_House2_EventScript_15A8B9:: @ 815A8B9
-	move 3, MossdeepCity_House2_Movement_15A8CB
-	waitmove 0
+	applymovement 3, MossdeepCity_House2_Movement_15A8CB
+	waitmovement 0
 	return
 
 MossdeepCity_House2_Movement_15A8C4:: @ 815A8C4

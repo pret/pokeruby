@@ -393,7 +393,7 @@ struct BaseStats
     /*0x17*/ u8 ability2;
     /*0x18*/ u8 safariZoneFleeRate;
     /*0x19*/ u8 bodyColor:7;
-             u8 unk19_7:1;
+             u8 noFlip:1;
 };
 
 struct BattleMove
@@ -591,9 +591,9 @@ u8 sub_8040574(struct Pokemon *party);
 void ClearBattleMonForms(void);
 void sub_80408BC();
 void current_map_music_set__default_for_battle(u16);
-const u8 *pokemon_get_pal(struct Pokemon *mon);
-const u8 *species_and_otid_get_pal(u16, u32, u32);
-const struct CompressedSpritePalette *sub_80409C8(u16, u32, u32);
+const u8 *GetMonSpritePal(struct Pokemon *mon);
+const u8 *GetMonSpritePalFromOtIdPersonality(u16, u32, u32);
+const struct CompressedSpritePalette *GetMonSpritePalStructFromOtIdPersonality(u16, u32, u32);
 bool8 IsOtherTrainer(u32, u8 *);
 void sub_8040B8C(void);
 void SetWildMonHeldItem(void);
@@ -602,8 +602,8 @@ bool32 sub_8040D3C(u16 species, u8 *name, u8 language);
 s8 sub_8040A54(struct Pokemon *, u8);
 u16 GetMonEVCount(struct Pokemon *);
 u16 GetEvolutionTargetSpecies(struct Pokemon *, u8, u16);
-const struct CompressedSpritePalette *sub_8040990(struct Pokemon *);
-bool8 sub_8040A3C(u16);
+const struct CompressedSpritePalette *GetMonSpritePalStruct(struct Pokemon *);
+bool8 IsPokeSpriteNotFlipped(u16);
 u8 GetLevelUpMovesBySpecies(u16, u16 *);
 u8 TryIncrementMonLevel(struct Pokemon *);
 

@@ -5,22 +5,22 @@ Route119_MapScripts:: @ 8151167
 
 Route119_MapScript1_151172:: @ 8151172
 	checkflag 2145
-	callif 1, Route119_EventScript_15117C
+	call_if 1, Route119_EventScript_15117C
 	end
 
 Route119_EventScript_15117C:: @ 815117C
 	compare 0x8004, 6
-	callif 1, Route119_EventScript_151193
+	call_if 1, Route119_EventScript_151193
 	compare 0x8004, 7
-	callif 1, Route119_EventScript_151197
+	call_if 1, Route119_EventScript_151197
 	return
 
 Route119_EventScript_151193:: @ 8151193
-	disappear 35
+	removeobject 35
 	return
 
 Route119_EventScript_151197:: @ 8151197
-	disappear 36
+	removeobject 36
 	return
 
 Route119_MapScript1_15119B:: @ 815119B
@@ -28,7 +28,7 @@ Route119_MapScript1_15119B:: @ 815119B
 	call Route119_EventScript_1A0172
 	call Route119_EventScript_1A0196
 	compare 0x40b3, 1
-	callif 1, Route119_EventScript_1511B9
+	call_if 1, Route119_EventScript_1511B9
 	special SetRoute119Weather
 	end
 
@@ -40,51 +40,51 @@ Route119_EventScript_1511B9:: @ 81511B9
 
 Route119_EventScript_1511C5:: @ 81511C5
 	setvar 0x4001, 1
-	jump Route119_EventScript_1511DB
+	goto Route119_EventScript_1511DB
 	end
 
 Route119_EventScript_1511D0:: @ 81511D0
 	setvar 0x4001, 2
-	jump Route119_EventScript_1511DB
+	goto Route119_EventScript_1511DB
 	end
 
 Route119_EventScript_1511DB:: @ 81511DB
 	lockall
-	reappear 25
-	checkgender
+	addobject 25
+	checkplayergender
 	compare RESULT, 0
-	callif 1, Route119_EventScript_151254
+	call_if 1, Route119_EventScript_151254
 	compare RESULT, 1
-	callif 1, Route119_EventScript_151259
-	pause 65
+	call_if 1, Route119_EventScript_151259
+	delay 65
 	compare 0x4001, 1
-	callif 1, Route119_EventScript_1513A6
+	call_if 1, Route119_EventScript_1513A6
 	compare 0x4001, 2
-	callif 1, Route119_EventScript_1513B1
-	move 255, Route119_Movement_1A0845
-	waitmove 0
-	pause 30
+	call_if 1, Route119_EventScript_1513B1
+	applymovement 255, Route119_Movement_1A0845
+	waitmovement 0
+	delay 30
 	compare 0x4001, 1
-	callif 1, Route119_EventScript_1513D2
+	call_if 1, Route119_EventScript_1513D2
 	compare 0x4001, 2
-	callif 1, Route119_EventScript_1513E1
-	disappear 25
-	reappear 16
-	pause 30
-	checkgender
+	call_if 1, Route119_EventScript_1513E1
+	removeobject 25
+	addobject 16
+	delay 30
+	checkplayergender
 	compare RESULT, 0
-	jumpeq Route119_EventScript_15125E
+	goto_if_eq Route119_EventScript_15125E
 	compare RESULT, 1
-	jumpeq Route119_EventScript_1512D8
+	goto_if_eq Route119_EventScript_1512D8
 	releaseall
 	end
 
 Route119_EventScript_151254:: @ 8151254
-	playmusic 415, 1
+	playbgm 415, 1
 	return
 
 Route119_EventScript_151259:: @ 8151259
-	playmusic 421, 1
+	playbgm 421, 1
 	return
 
 Route119_EventScript_15125E:: @ 815125E
@@ -97,24 +97,24 @@ Route119_EventScript_15125E:: @ 815125E
 
 Route119_EventScript_15128D:: @ 815128D
 	trainerbattle 3, OPPONENT_MAY_6, 0, Route119_Text_171156
-	jump Route119_EventScript_1512BD
+	goto Route119_EventScript_1512BD
 	end
 
 Route119_EventScript_15129D:: @ 815129D
 	trainerbattle 3, OPPONENT_MAY_9, 0, Route119_Text_171156
-	jump Route119_EventScript_1512BD
+	goto Route119_EventScript_1512BD
 	end
 
 Route119_EventScript_1512AD:: @ 81512AD
 	trainerbattle 3, OPPONENT_MAY_3, 0, Route119_Text_171156
-	jump Route119_EventScript_1512BD
+	goto Route119_EventScript_1512BD
 	end
 
 Route119_EventScript_1512BD:: @ 81512BD
 	msgbox Route119_Text_1711B1, 4
 	call Route119_EventScript_151352
 	msgbox Route119_Text_171214, 4
-	jump Route119_EventScript_151362
+	goto Route119_EventScript_151362
 	end
 
 Route119_EventScript_1512D8:: @ 81512D8
@@ -127,24 +127,24 @@ Route119_EventScript_1512D8:: @ 81512D8
 
 Route119_EventScript_151307:: @ 8151307
 	trainerbattle 3, OPPONENT_BRENDAN_6, 0, Route119_Text_1713E2
-	jump Route119_EventScript_151337
+	goto Route119_EventScript_151337
 	end
 
 Route119_EventScript_151317:: @ 8151317
 	trainerbattle 3, OPPONENT_BRENDAN_9, 0, Route119_Text_1713E2
-	jump Route119_EventScript_151337
+	goto Route119_EventScript_151337
 	end
 
 Route119_EventScript_151327:: @ 8151327
 	trainerbattle 3, OPPONENT_BRENDAN_3, 0, Route119_Text_1713E2
-	jump Route119_EventScript_151337
+	goto Route119_EventScript_151337
 	end
 
 Route119_EventScript_151337:: @ 8151337
 	msgbox Route119_Text_17140B, 4
 	call Route119_EventScript_151352
 	msgbox Route119_Text_171475, 4
-	jump Route119_EventScript_151362
+	goto Route119_EventScript_151362
 	end
 
 Route119_EventScript_151352:: @ 8151352
@@ -153,53 +153,53 @@ Route119_EventScript_151352:: @ 8151352
 	return
 
 Route119_EventScript_151362:: @ 8151362
-	closebutton
+	closemessage
 	compare 0x4001, 1
-	callif 1, Route119_EventScript_1513D2
+	call_if 1, Route119_EventScript_1513D2
 	compare 0x4001, 2
-	callif 1, Route119_EventScript_1513E1
-	disappear 16
-	reappear 25
-	pause 30
+	call_if 1, Route119_EventScript_1513E1
+	removeobject 16
+	addobject 25
+	delay 30
 	compare 0x4001, 1
-	callif 1, Route119_EventScript_1513BC
+	call_if 1, Route119_EventScript_1513BC
 	compare 0x4001, 2
-	callif 1, Route119_EventScript_1513C7
-	disappear 25
+	call_if 1, Route119_EventScript_1513C7
+	removeobject 25
 	setvar 0x4072, 1
-	playmusicbattle 0
-	fadedefault
+	savebgm 0
+	fadedefaultbgm
 	releaseall
 	end
 
 Route119_EventScript_1513A6:: @ 81513A6
-	move 25, Route119_Movement_1513F0
-	waitmove 0
+	applymovement 25, Route119_Movement_1513F0
+	waitmovement 0
 	return
 
 Route119_EventScript_1513B1:: @ 81513B1
-	move 25, Route119_Movement_1513FA
-	waitmove 0
+	applymovement 25, Route119_Movement_1513FA
+	waitmovement 0
 	return
 
 Route119_EventScript_1513BC:: @ 81513BC
-	move 25, Route119_Movement_151405
-	waitmove 0
+	applymovement 25, Route119_Movement_151405
+	waitmovement 0
 	return
 
 Route119_EventScript_1513C7:: @ 81513C7
-	move 25, Route119_Movement_15140F
-	waitmove 0
+	applymovement 25, Route119_Movement_15140F
+	waitmovement 0
 	return
 
 Route119_EventScript_1513D2:: @ 81513D2
-	movespriteperm 16, 25, 32
-	movespriteperm 25, 25, 32
+	setobjectxyperm 16, 25, 32
+	setobjectxyperm 25, 25, 32
 	return
 
 Route119_EventScript_1513E1:: @ 81513E1
-	movespriteperm 16, 26, 32
-	movespriteperm 25, 26, 32
+	setobjectxyperm 16, 26, 32
+	setobjectxyperm 25, 26, 32
 	return
 
 Route119_Movement_1513F0:: @ 81513F0
@@ -296,9 +296,9 @@ Route119_EventScript_1514A8:: @ 81514A8
 
 Route119_EventScript_1514BF:: @ 81514BF
 	trainerbattle 0, OPPONENT_JACKSON_1, 0, Route119_Text_1BE8BB, Route119_Text_1BE90E
-	specialval RESULT, sub_8082C68
+	specialvar RESULT, sub_8082C68
 	compare RESULT, 1
-	jumpeq Route119_EventScript_1514E6
+	goto_if_eq Route119_EventScript_1514E6
 	msgbox Route119_Text_1BE937, 6
 	end
 
@@ -309,9 +309,9 @@ Route119_EventScript_1514E6:: @ 81514E6
 
 Route119_EventScript_1514FD:: @ 81514FD
 	trainerbattle 0, OPPONENT_CATHERINE_1, 0, Route119_Text_1BEA3A, Route119_Text_1BEA88
-	specialval RESULT, sub_8082C68
+	specialvar RESULT, sub_8082C68
 	compare RESULT, 1
-	jumpeq Route119_EventScript_151524
+	goto_if_eq Route119_EventScript_151524
 	msgbox Route119_Text_1BEAB3, 6
 	end
 
@@ -354,9 +354,9 @@ Route119_EventScript_1515C5:: @ 81515C5
 	lock
 	faceplayer
 	msgbox Route119_Text_171520, 4
-	closebutton
-	move LAST_TALKED, Route119_Movement_1A083D
-	waitmove 0
+	closemessage
+	applymovement LAST_TALKED, Route119_Movement_1A083D
+	waitmovement 0
 	release
 	end
 
@@ -364,9 +364,9 @@ Route119_EventScript_1515DC:: @ 81515DC
 	lock
 	faceplayer
 	msgbox Route119_Text_17157C, 4
-	closebutton
-	move LAST_TALKED, Route119_Movement_1A083D
-	waitmove 0
+	closemessage
+	applymovement LAST_TALKED, Route119_Movement_1A083D
+	waitmovement 0
 	release
 	end
 

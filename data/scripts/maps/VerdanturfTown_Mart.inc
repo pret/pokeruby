@@ -5,7 +5,7 @@ VerdanturfTown_Mart_EventScript_153EBC:: @ 8153EBC
 	lock
 	faceplayer
 	message VerdanturfTown_Mart_Text_1A0BE4
-	waittext
+	waitmessage
 	pokemart VerdanturfTown_Mart_Items
 	msgbox VerdanturfTown_Mart_Text_1A0C02, 4
 	release

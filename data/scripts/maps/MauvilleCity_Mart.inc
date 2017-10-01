@@ -5,7 +5,7 @@ MauvilleCity_Mart_EventScript_1573BE:: @ 81573BE
 	lock
 	faceplayer
 	message MauvilleCity_Mart_Text_1A0BE4
-	waittext
+	waitmessage
 	pokemart MauvilleCity_Mart_Items
 	msgbox MauvilleCity_Mart_Text_1A0C02, 4
 	release

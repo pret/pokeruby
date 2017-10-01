@@ -10,7 +10,7 @@ DewfordTown_PokemonCenter_1F_MapScript1_15301A:: @ 815301A
 DewfordTown_PokemonCenter_1F_EventScript_153023:: @ 8153023
 	setvar 0x800b, 1
 	call DewfordTown_PokemonCenter_1F_EventScript_19FD5B
-	waittext
+	waitmessage
 	waitbutton
 	release
 	end
