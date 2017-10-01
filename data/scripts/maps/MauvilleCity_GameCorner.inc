@@ -129,17 +129,17 @@ MauvilleCity_GameCorner_EventScript_156BA6:: @ 8156BA6
 
 MauvilleCity_GameCorner_EventScript_156BE2:: @ 8156BE2
 	setvar 0x4001, 1
-	bufferdecor 0, 88
+	getdecorname 0, 88
 	goto MauvilleCity_GameCorner_EventScript_156C0C
 
 MauvilleCity_GameCorner_EventScript_156BF0:: @ 8156BF0
 	setvar 0x4001, 2
-	bufferdecor 0, 89
+	getdecorname 0, 89
 	goto MauvilleCity_GameCorner_EventScript_156C0C
 
 MauvilleCity_GameCorner_EventScript_156BFE:: @ 8156BFE
 	setvar 0x4001, 3
-	bufferdecor 0, 90
+	getdecorname 0, 90
 	goto MauvilleCity_GameCorner_EventScript_156C0C
 
 MauvilleCity_GameCorner_EventScript_156C0C:: @ 8156C0C
@@ -156,7 +156,7 @@ MauvilleCity_GameCorner_EventScript_156C46:: @ 8156C46
 	checkcoins 16386
 	compare 0x4002, 1000
 	goto_if 0, MauvilleCity_GameCorner_EventScript_156CF4
-	bufferdecor 1, 88
+	getdecorname 1, 88
 	checkdecor 88
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_156D02
@@ -172,7 +172,7 @@ MauvilleCity_GameCorner_EventScript_156C80:: @ 8156C80
 	checkcoins 16386
 	compare 0x4002, 1000
 	goto_if 0, MauvilleCity_GameCorner_EventScript_156CF4
-	bufferdecor 1, 89
+	getdecorname 1, 89
 	checkdecor 89
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_156D02
@@ -188,7 +188,7 @@ MauvilleCity_GameCorner_EventScript_156CBA:: @ 8156CBA
 	checkcoins 16386
 	compare 0x4002, 1000
 	goto_if 0, MauvilleCity_GameCorner_EventScript_156CF4
-	bufferdecor 1, 90
+	getdecorname 1, 90
 	checkdecor 90
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_156D02
@@ -252,27 +252,27 @@ MauvilleCity_GameCorner_EventScript_156D54:: @ 8156D54
 
 MauvilleCity_GameCorner_EventScript_156DA6:: @ 8156DA6
 	setvar 0x4001, 1
-	bufferitem 0, ITEM_TM32
+	getitemname 0, ITEM_TM32
 	goto MauvilleCity_GameCorner_EventScript_156DEC
 
 MauvilleCity_GameCorner_EventScript_156DB4:: @ 8156DB4
 	setvar 0x4001, 2
-	bufferitem 0, ITEM_TM29
+	getitemname 0, ITEM_TM29
 	goto MauvilleCity_GameCorner_EventScript_156DEC
 
 MauvilleCity_GameCorner_EventScript_156DC2:: @ 8156DC2
 	setvar 0x4001, 3
-	bufferitem 0, ITEM_TM35
+	getitemname 0, ITEM_TM35
 	goto MauvilleCity_GameCorner_EventScript_156DEC
 
 MauvilleCity_GameCorner_EventScript_156DD0:: @ 8156DD0
 	setvar 0x4001, 4
-	bufferitem 0, ITEM_TM24
+	getitemname 0, ITEM_TM24
 	goto MauvilleCity_GameCorner_EventScript_156DEC
 
 MauvilleCity_GameCorner_EventScript_156DDE:: @ 8156DDE
 	setvar 0x4001, 5
-	bufferitem 0, ITEM_TM13
+	getitemname 0, ITEM_TM13
 	goto MauvilleCity_GameCorner_EventScript_156DEC
 
 MauvilleCity_GameCorner_EventScript_156DEC:: @ 8156DEC
@@ -401,7 +401,7 @@ MauvilleCity_GameCorner_EventScript_156F96:: @ 8156F96
 	end
 
 MauvilleCity_GameCorner_EventScript_156FDB:: @ 8156FDB
-	bufferdecor 1, 88
+	getdecorname 1, 88
 	checkdecor 88
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_157059
@@ -412,7 +412,7 @@ MauvilleCity_GameCorner_EventScript_156FDB:: @ 8156FDB
 	end
 
 MauvilleCity_GameCorner_EventScript_157005:: @ 8157005
-	bufferdecor 1, 89
+	getdecorname 1, 89
 	checkdecor 89
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_157059
@@ -423,7 +423,7 @@ MauvilleCity_GameCorner_EventScript_157005:: @ 8157005
 	end
 
 MauvilleCity_GameCorner_EventScript_15702F:: @ 815702F
-	bufferdecor 1, 90
+	getdecorname 1, 90
 	checkdecor 90
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_157059
@@ -526,7 +526,7 @@ MauvilleCity_GameCorner_EventScript_157135:: @ 8157135
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
 	setvar 0x8004, 0
 	specialvar RESULT, sub_810F424
-	pokecasino RESULT
+	playslotmachine RESULT
 	releaseall
 	end
 
@@ -537,7 +537,7 @@ MauvilleCity_GameCorner_EventScript_157155:: @ 8157155
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
 	setvar 0x8004, 1
 	specialvar RESULT, sub_810F424
-	pokecasino RESULT
+	playslotmachine RESULT
 	releaseall
 	end
 
@@ -548,7 +548,7 @@ MauvilleCity_GameCorner_EventScript_157175:: @ 8157175
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
 	setvar 0x8004, 2
 	specialvar RESULT, sub_810F424
-	pokecasino RESULT
+	playslotmachine RESULT
 	releaseall
 	end
 
@@ -559,7 +559,7 @@ MauvilleCity_GameCorner_EventScript_157195:: @ 8157195
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
 	setvar 0x8004, 3
 	specialvar RESULT, sub_810F424
-	pokecasino RESULT
+	playslotmachine RESULT
 	releaseall
 	end
 
@@ -570,7 +570,7 @@ MauvilleCity_GameCorner_EventScript_1571B5:: @ 81571B5
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
 	setvar 0x8004, 4
 	specialvar RESULT, sub_810F424
-	pokecasino RESULT
+	playslotmachine RESULT
 	releaseall
 	end
 
@@ -581,7 +581,7 @@ MauvilleCity_GameCorner_EventScript_1571D5:: @ 81571D5
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
 	setvar 0x8004, 5
 	specialvar RESULT, sub_810F424
-	pokecasino RESULT
+	playslotmachine RESULT
 	releaseall
 	end
 
@@ -592,7 +592,7 @@ MauvilleCity_GameCorner_EventScript_1571F5:: @ 81571F5
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
 	setvar 0x8004, 6
 	specialvar RESULT, sub_810F424
-	pokecasino RESULT
+	playslotmachine RESULT
 	releaseall
 	end
 
@@ -603,7 +603,7 @@ MauvilleCity_GameCorner_EventScript_157215:: @ 8157215
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
 	setvar 0x8004, 7
 	specialvar RESULT, sub_810F424
-	pokecasino RESULT
+	playslotmachine RESULT
 	releaseall
 	end
 
@@ -614,7 +614,7 @@ MauvilleCity_GameCorner_EventScript_157235:: @ 8157235
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
 	setvar 0x8004, 8
 	specialvar RESULT, sub_810F424
-	pokecasino RESULT
+	playslotmachine RESULT
 	releaseall
 	end
 
@@ -625,7 +625,7 @@ MauvilleCity_GameCorner_EventScript_157255:: @ 8157255
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
 	setvar 0x8004, 9
 	specialvar RESULT, sub_810F424
-	pokecasino RESULT
+	playslotmachine RESULT
 	releaseall
 	end
 
@@ -636,7 +636,7 @@ MauvilleCity_GameCorner_EventScript_157275:: @ 8157275
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
 	setvar 0x8004, 10
 	specialvar RESULT, sub_810F424
-	pokecasino RESULT
+	playslotmachine RESULT
 	releaseall
 	end
 
@@ -647,7 +647,7 @@ MauvilleCity_GameCorner_EventScript_157295:: @ 8157295
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
 	setvar 0x8004, 11
 	specialvar RESULT, sub_810F424
-	pokecasino RESULT
+	playslotmachine RESULT
 	releaseall
 	end
 

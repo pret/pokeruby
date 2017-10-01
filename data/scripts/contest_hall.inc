@@ -11,7 +11,7 @@ VerdanturfTown_ContestLobby_EventScript_1A4E92:: @ 81A4E92
 	goto_if 5, FallarborTown_ContestLobby_EventScript_1A4F4E
 	checkflag 1
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1A4F8F
-	bufferstd 0, 0x800b
+	getstdstring 0, 0x800b
 	msgbox FallarborTown_ContestLobby_Text_1A5DFC, 4
 	checkitem ITEM_CONTEST_PASS, 1
 	compare RESULT, 0
@@ -260,8 +260,8 @@ LinkContestRoom1_EventScript_1A523F:: @ 81A523F
 	return
 
 LinkContestRoom1_EventScript_1A5245:: @ 81A5245
-	bufferstd 1, 0x8008
-	bufferstd 2, 0x8009
+	getstdstring 1, 0x8008
+	getstdstring 2, 0x8009
 	call LinkContestRoom1_EventScript_1A525F
 	lockall
 	applymovement 1, LinkContestRoom1_Movement_1A5D87
@@ -339,7 +339,7 @@ LinkContestRoom1_EventScript_1A5311:: @ 81A5311
 LinkContestRoom1_EventScript_1A5323:: @ 81A5323
 	special sub_80C4C64
 	addvar 0x8006, 1
-	buffernum 1, 0x8006
+	getnumberstring 1, 0x8006
 	lockall
 	applymovement 0x800b, LinkContestRoom1_Movement_1A5D9C
 	waitmovement 0
@@ -885,7 +885,7 @@ LinkContestRoom1_EventScript_1A5A49:: @ 81A5A49
 	special sub_80C47F0
 	special sub_80C4858
 	addvar 0x8005, 1
-	buffernum 1, 0x8005
+	getnumberstring 1, 0x8005
 	addvar 0x8005, -1
 	call LinkContestRoom1_EventScript_1A5A75
 	applymovement 0x4003, LinkContestRoom1_Movement_1A5D99

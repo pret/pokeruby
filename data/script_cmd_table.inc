@@ -120,25 +120,25 @@ gScriptCmdTable:: @ 814AE30
 	.4byte ScrCmd_drawpokepic             @ 0x75
 	.4byte ScrCmd_erasepokepic             @ 0x76
 	.4byte ScrCmd_drawcontestwinner       @ 0x77
-	.4byte ScrCmd_braillemsg              @ 0x78
+	.4byte ScrCmd_braillemessage              @ 0x78
 	.4byte ScrCmd_givepoke             @ 0x79
 	.4byte ScrCmd_giveegg                 @ 0x7A
 	.4byte ScrCmd_setpokemove             @ 0x7B
 	.4byte ScrCmd_checkpokemove             @ 0x7C
-	.4byte ScrCmd_bufferpoke              @ 0x7D
-	.4byte ScrCmd_bufferfirstpoke         @ 0x7E
-	.4byte ScrCmd_bufferpartypoke         @ 0x7F
-	.4byte ScrCmd_bufferitem              @ 0x80
-	.4byte ScrCmd_bufferdecor             @ 0x81
-	.4byte ScrCmd_bufferattack            @ 0x82
-	.4byte ScrCmd_buffernum               @ 0x83
-	.4byte ScrCmd_bufferstd               @ 0x84
-	.4byte ScrCmd_buffertext              @ 0x85
+	.4byte ScrCmd_getspeciesname              @ 0x7D
+	.4byte ScrCmd_getfirstpartypokename         @ 0x7E
+	.4byte ScrCmd_getpartypokename         @ 0x7F
+	.4byte ScrCmd_getitemname              @ 0x80
+	.4byte ScrCmd_getdecorname             @ 0x81
+	.4byte ScrCmd_getmovename            @ 0x82
+	.4byte ScrCmd_getnumberstring               @ 0x83
+	.4byte ScrCmd_getstdstring               @ 0x84
+	.4byte ScrCmd_getstring              @ 0x85
 	.4byte ScrCmd_pokemart                @ 0x86
 	.4byte ScrCmd_pokemartdecor           @ 0x87
 	.4byte ScrCmd_pokemartbp              @ 0x88
-	.4byte ScrCmd_pokecasino              @ 0x89
-	.4byte ScrCmd_event_8a                @ 0x8A
+	.4byte ScrCmd_playslotmachine              @ 0x89
+	.4byte ScrCmd_plantberrytree                @ 0x8A
 	.4byte ScrCmd_choosecontestpkmn       @ 0x8B
 	.4byte ScrCmd_startcontest            @ 0x8C
 	.4byte ScrCmd_showcontestresults      @ 0x8D

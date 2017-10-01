@@ -6,8 +6,8 @@ S_CuttableTree:: @ 81B0DCC
 	compare RESULT, 6
 	goto_if_eq CannotUseCut
 	setanimation 0, RESULT
-	bufferpartypoke 0, RESULT
-	bufferattack 1, MOVE_CUT
+	getpartypokename 0, RESULT
+	getmovename 1, MOVE_CUT
 	msgbox UseCutPromptText, 5
 	compare RESULT, 0
 	goto_if_eq Cut_ChoseNo
@@ -67,8 +67,8 @@ S_BreakableRock:: @ 81B0EB7
 	compare RESULT, 6
 	goto_if_eq CannotUseRockSmash
 	setanimation 0, RESULT
-	bufferpartypoke 0, RESULT
-	bufferattack 1, MOVE_ROCK_SMASH
+	getpartypokename 0, RESULT
+	getmovename 1, MOVE_ROCK_SMASH
 	msgbox UseRockSmashPromptText, 5
 	compare RESULT, 0
 	goto_if_eq RockSmash_ChoseNo
@@ -196,7 +196,7 @@ S_UseWaterfall:: @ 81B115A
 	checkpokemove MOVE_WATERFALL
 	compare RESULT, 6
 	goto_if_eq Waterfall_NoMonKnows
-	bufferpartypoke 0, RESULT
+	getpartypokename 0, RESULT
 	setanimation 0, RESULT
 	msgbox UseWaterfallPromptText, 5
 	compare RESULT, 0
@@ -229,7 +229,7 @@ UseDiveScript:: @ 81B1220
 	checkpokemove MOVE_DIVE
 	compare RESULT, 6
 	goto_if_eq CannotUseDive
-	bufferpartypoke 0, RESULT
+	getpartypokename 0, RESULT
 	setanimation 0, RESULT
 	setanimation 1, 1
 	msgbox UseDivePromptText, 5
@@ -252,7 +252,7 @@ S_UseDiveUnderwater:: @ 81B1269
 	checkpokemove MOVE_DIVE
 	compare RESULT, 6
 	goto_if_eq UnderwaterCannotUseDive
-	bufferpartypoke 0, RESULT
+	getpartypokename 0, RESULT
 	setanimation 0, RESULT
 	setanimation 1, 1
 	msgbox UnderwaterUseDivePromptText, 5

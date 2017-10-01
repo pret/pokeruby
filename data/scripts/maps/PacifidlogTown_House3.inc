@@ -28,7 +28,7 @@ PacifidlogTown_House3_EventScript_15429E:: @ 815429E
 	special sub_804DB68
 	special sub_804E174
 	waitstate
-	bufferpoke 0, 0x8009
+	getspeciesname 0, 0x8009
 	msgbox PacifidlogTown_House3_Text_1794C4, 4
 	setflag 154
 	release
@@ -40,7 +40,7 @@ PacifidlogTown_House3_EventScript_154320:: @ 8154320
 	end
 
 PacifidlogTown_House3_EventScript_15432A:: @ 815432A
-	bufferpoke 0, 0x8009
+	getspeciesname 0, 0x8009
 	msgbox PacifidlogTown_House3_Text_1794DF, 4
 	release
 	end

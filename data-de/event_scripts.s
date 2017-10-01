@@ -1068,86 +1068,86 @@ Std_6::
 	return
 
 Event_ResetBerryTrees: @ 19F940
-	event_8a 2, 7, 5
-	event_8a 1, 3, 5
-	event_8a 11, 7, 5
-	event_8a 13, 3, 5
-	event_8a 4, 7, 5
-	event_8a 76, 1, 5
-	event_8a 8, 1, 5
-	event_8a 10, 6, 5
-	event_8a 25, 20, 5
-	event_8a 26, 2, 5
-	event_8a 66, 2, 5
-	event_8a 67, 20, 5
-	event_8a 69, 22, 5
-	event_8a 70, 22, 5
-	event_8a 71, 22, 5
-	event_8a 55, 17, 5
-	event_8a 56, 17, 5
-	event_8a 5, 1, 5
-	event_8a 6, 6, 5
-	event_8a 7, 1, 5
-	event_8a 16, 18, 5
-	event_8a 17, 18, 5
-	event_8a 18, 18, 5
-	event_8a 29, 19, 5
-	event_8a 28, 19, 5
-	event_8a 27, 19, 5
-	event_8a 24, 4, 5
-	event_8a 23, 3, 5
-	event_8a 22, 3, 5
-	event_8a 21, 4, 5
-	event_8a 19, 16, 5
-	event_8a 20, 16, 5
-	event_8a 80, 7, 5
-	event_8a 81, 7, 5
-	event_8a 77, 8, 5
-	event_8a 78, 8, 5
-	event_8a 68, 8, 5
-	event_8a 31, 10, 5
-	event_8a 33, 10, 5
-	event_8a 34, 21, 5
-	event_8a 35, 21, 5
-	event_8a 36, 21, 5
-	event_8a 83, 24, 5
-	event_8a 84, 24, 5
-	event_8a 85, 10, 5
-	event_8a 86, 6, 5
-	event_8a 37, 5, 5
-	event_8a 38, 5, 5
-	event_8a 39, 5, 5
-	event_8a 40, 3, 5
-	event_8a 41, 3, 5
-	event_8a 42, 3, 5
-	event_8a 46, 19, 5
-	event_8a 45, 20, 5
-	event_8a 44, 18, 5
-	event_8a 43, 16, 5
-	event_8a 47, 8, 5
-	event_8a 48, 5, 5
-	event_8a 49, 4, 5
-	event_8a 50, 2, 5
-	event_8a 52, 18, 5
-	event_8a 53, 18, 5
-	event_8a 62, 6, 5
-	event_8a 64, 6, 5
-	event_8a 58, 21, 5
-	event_8a 59, 21, 5
-	event_8a 60, 25, 5
-	event_8a 61, 25, 5
-	event_8a 79, 23, 5
-	event_8a 14, 23, 5
-	event_8a 15, 21, 5
-	event_8a 30, 21, 5
-	event_8a 65, 25, 5
-	event_8a 72, 25, 5
-	event_8a 73, 23, 5
-	event_8a 74, 23, 5
-	event_8a 87, 3, 5
-	event_8a 88, 10, 5
-	event_8a 89, 4, 5
-	event_8a 82, 36, 5
+	plantberrytree 2, 7, 5
+	plantberrytree 1, 3, 5
+	plantberrytree 11, 7, 5
+	plantberrytree 13, 3, 5
+	plantberrytree 4, 7, 5
+	plantberrytree 76, 1, 5
+	plantberrytree 8, 1, 5
+	plantberrytree 10, 6, 5
+	plantberrytree 25, 20, 5
+	plantberrytree 26, 2, 5
+	plantberrytree 66, 2, 5
+	plantberrytree 67, 20, 5
+	plantberrytree 69, 22, 5
+	plantberrytree 70, 22, 5
+	plantberrytree 71, 22, 5
+	plantberrytree 55, 17, 5
+	plantberrytree 56, 17, 5
+	plantberrytree 5, 1, 5
+	plantberrytree 6, 6, 5
+	plantberrytree 7, 1, 5
+	plantberrytree 16, 18, 5
+	plantberrytree 17, 18, 5
+	plantberrytree 18, 18, 5
+	plantberrytree 29, 19, 5
+	plantberrytree 28, 19, 5
+	plantberrytree 27, 19, 5
+	plantberrytree 24, 4, 5
+	plantberrytree 23, 3, 5
+	plantberrytree 22, 3, 5
+	plantberrytree 21, 4, 5
+	plantberrytree 19, 16, 5
+	plantberrytree 20, 16, 5
+	plantberrytree 80, 7, 5
+	plantberrytree 81, 7, 5
+	plantberrytree 77, 8, 5
+	plantberrytree 78, 8, 5
+	plantberrytree 68, 8, 5
+	plantberrytree 31, 10, 5
+	plantberrytree 33, 10, 5
+	plantberrytree 34, 21, 5
+	plantberrytree 35, 21, 5
+	plantberrytree 36, 21, 5
+	plantberrytree 83, 24, 5
+	plantberrytree 84, 24, 5
+	plantberrytree 85, 10, 5
+	plantberrytree 86, 6, 5
+	plantberrytree 37, 5, 5
+	plantberrytree 38, 5, 5
+	plantberrytree 39, 5, 5
+	plantberrytree 40, 3, 5
+	plantberrytree 41, 3, 5
+	plantberrytree 42, 3, 5
+	plantberrytree 46, 19, 5
+	plantberrytree 45, 20, 5
+	plantberrytree 44, 18, 5
+	plantberrytree 43, 16, 5
+	plantberrytree 47, 8, 5
+	plantberrytree 48, 5, 5
+	plantberrytree 49, 4, 5
+	plantberrytree 50, 2, 5
+	plantberrytree 52, 18, 5
+	plantberrytree 53, 18, 5
+	plantberrytree 62, 6, 5
+	plantberrytree 64, 6, 5
+	plantberrytree 58, 21, 5
+	plantberrytree 59, 21, 5
+	plantberrytree 60, 25, 5
+	plantberrytree 61, 25, 5
+	plantberrytree 79, 23, 5
+	plantberrytree 14, 23, 5
+	plantberrytree 15, 21, 5
+	plantberrytree 30, 21, 5
+	plantberrytree 65, 25, 5
+	plantberrytree 72, 25, 5
+	plantberrytree 73, 23, 5
+	plantberrytree 74, 23, 5
+	plantberrytree 87, 3, 5
+	plantberrytree 88, 10, 5
+	plantberrytree 89, 4, 5
+	plantberrytree 82, 36, 5
 	return
 
 gUnknown_0819FA81:: @ 819FA81
@@ -1501,7 +1501,7 @@ Std_ObtainItem: @ 819FDF7
 	return
 
 Std_ObtainItem_: @ 819FE07
-	bufferitem 1, 0x8000
+	getitemname 1, 0x8000
 	checkitemtype 0x8000
 	call GetItem_HandlePocket
 	compare 0x8007, 0x1
@@ -1520,31 +1520,31 @@ GetItem_HandlePocket:
 	end
 
 GetItem_HandlePocket_Items:
-	bufferstd 2, 0xE
+	getstdstring 2, 0xE
 	compare 0x8007, 1
 	call_if 1, PlayGetItemFanfare
 	return
 
 GetItem_HandlePocket_KeyItems:
-	bufferstd 2, 0xF
+	getstdstring 2, 0xF
 	compare 0x8007, 1
 	call_if 1, PlayGetItemFanfare
 	return
 
 GetItem_HandlePocket_PokeBalls:
-	bufferstd 2, 0x10
+	getstdstring 2, 0x10
 	compare 0x8007, 1
 	call_if 1, PlayGetItemFanfare
 	return
 
 GetItem_HandlePocket_TMsHMs:
-	bufferstd 2, 0x11
+	getstdstring 2, 0x11
 	compare 0x8007, 1
 	call_if 1, PlayGetTMHMFanfare
 	return
 
 GetItem_HandlePocket_Berries:
-	bufferstd 2, 0x12
+	getstdstring 2, 0x12
 	compare 0x8007, 1
 	call_if 1, PlayGetItemFanfare
 	return
@@ -1576,7 +1576,7 @@ Std_ObtainDecoration: @ 819FEDA
 	return
 
 Std_ObtainDecoration_: @ 819FEE8
-	bufferdecor 1, 0x8000
+	getdecorname 1, 0x8000
 	compare 0x8007, 1
 	call_if 1, Std_ObtainDecoration_Success
 	compare 0x8007, 0
@@ -1602,7 +1602,7 @@ Std_FindItem: @ 819FF21
 	waitse
 	additem 0x8000, 0x8001
 	copyvar 0x8007, RESULT
-	bufferitem 1, 0x8000
+	getitemname 1, 0x8000
 	checkitemtype 0x8000
 	call GetItem_HandlePocket
 	compare 0x8007, 1
@@ -1631,7 +1631,7 @@ HiddenItemScript:: @ 819FF7B
 	waitse
 	additem 0x8005, 1
 	copyvar 0x8007, RESULT
-	bufferitem 0x1, 0x8005
+	getitemname 0x1, 0x8005
 	checkitemtype 0x8005
 	call GetItem_HandlePocket
 	compare 0x8007, 1
@@ -1819,7 +1819,7 @@ UseSurfScript:: @ 81A0117
 	checkpokemove MOVE_SURF
 	compare RESULT, 6
 	goto_if_eq UseSurfScript_NoMon
-	bufferpartypoke 0, RESULT
+	getpartypokename 0, RESULT
 	setanimation 0, RESULT
 	lockall
 	msgbox UseSurfPromptText, 5
@@ -2214,8 +2214,8 @@ Route101_EventScript_1A03B0:: @ 81A03B0
 	copyvar 0x8008, 0x8005
 	copyvar 0x8009, 0x8006
 	copyvar 0x800a, RESULT
-	buffernum 0, 0x8008
-	buffernum 1, 0x8009
+	getnumberstring 0, 0x8008
+	getnumberstring 1, 0x8009
 	msgbox Route101_Text_1C44DC, 4
 	call Route101_EventScript_1A03A5
 	compare 0x800a, 0
@@ -2224,8 +2224,8 @@ Route101_EventScript_1A03B0:: @ 81A03B0
 	specialvar RESULT, ScriptGetPokedexInfo
 	copyvar 0x8008, 0x8005
 	copyvar 0x8009, 0x8006
-	buffernum 0, 0x8008
-	buffernum 1, 0x8009
+	getnumberstring 0, 0x8008
+	getnumberstring 1, 0x8009
 	msgbox Route101_Text_1C4B05, 4
 	return
 
@@ -2542,7 +2542,7 @@ FallarborTown_House1_EventScript_1A067F:: @ 81A067F
 GraniteCave_StevensRoom_EventScript_1A067F:: @ 81A067F
 MtPyre_Summit_EventScript_1A067F:: @ 81A067F
 SlateportCity_OceanicMuseum_2F_EventScript_1A067F:: @ 81A067F
-	bufferitem 0, 0x8004
+	getitemname 0, 0x8004
 	playfanfare 372
 	message FallarborTown_House1_Text_1A1498
 	waitmessage
@@ -3622,7 +3622,7 @@ gUnknown_081A2C51:: @ 81A2C51
 	goto_if_eq EventScript_1A2E45
 	checkpokemove MOVE_SECRET_POWER
 	setanimation 0, RESULT
-	bufferattack 1, MOVE_SECRET_POWER
+	getmovename 1, MOVE_SECRET_POWER
 	compare 0x8007, 1
 	goto_if_eq EventScript_1A2CB0
 	compare 0x8007, 2
@@ -3641,7 +3641,7 @@ EventScript_1A2CB0:
 	lockall
 	compare RESULT, 6
 	goto_if_eq EventScript_1A2CF1
-	bufferpartypoke 0, RESULT
+	getpartypokename 0, RESULT
 	msgbox UnknownString_8198F34, 5
 	compare RESULT, 0
 	goto_if_eq EventScript_1A2F3A
@@ -3672,7 +3672,7 @@ EventScript_1A2D08:
 	lockall
 	compare RESULT, 6
 	goto_if_eq EventScript_1A2D49
-	bufferpartypoke 0, RESULT
+	getpartypokename 0, RESULT
 	msgbox UnknownString_81A197B, 5
 	compare RESULT, 0
 	goto_if_eq EventScript_1A2F3A
@@ -3703,7 +3703,7 @@ EventScript_1A2D60:
 	lockall
 	compare RESULT, 6
 	goto_if_eq EventScript_1A2DA1
-	bufferpartypoke 0, RESULT
+	getpartypokename 0, RESULT
 	msgbox UnknownString_81A1A4B, 5
 	compare RESULT, 0
 	goto_if_eq EventScript_1A2F3A
@@ -3809,8 +3809,8 @@ EventScript_1A2E45:
 	msgbox UnknownString_81A3CC9, 5
 	compare RESULT, 0
 	goto_if_eq EventScript_1A2F3A
-	bufferpartypoke 0, 0x8004
-	bufferattack 1, MOVE_SECRET_POWER
+	getpartypokename 0, 0x8004
+	getmovename 1, MOVE_SECRET_POWER
 	msgbox UsedCutRockSmashText, 4
 	closemessage
 	closemessage
@@ -4949,7 +4949,7 @@ gUnknown_081C6C02:: @ 81C6C02
 
 @ 81C6C1D
 	lockall
-	braillemsg Underwater_SealedChamber_Braille_1C533D
+	braillemessage Underwater_SealedChamber_Braille_1C533D
 	waitbutton
 	erasebox 0, 0, 29, 19
 	releaseall

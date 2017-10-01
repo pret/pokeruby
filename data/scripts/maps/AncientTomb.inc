@@ -35,7 +35,7 @@ AncientTomb_EventScript_15F021:: @ 815F021
 	lockall
 	checkflag 2130
 	goto_if_eq AncientTomb_EventScript_15F038
-	braillemsg AncientTomb_Braille_1C552E
+	braillemessage AncientTomb_Braille_1C552E
 	waitbutton
 	erasebox 0, 0, 29, 19
 	releaseall
@@ -48,7 +48,7 @@ AncientTomb_EventScript_15F038:: @ 815F038
 
 AncientTomb_EventScript_15F042:: @ 815F042
 	lockall
-	braillemsg AncientTomb_Braille_1C552E
+	braillemessage AncientTomb_Braille_1C552E
 	waitbutton
 	erasebox 0, 0, 29, 19
 	releaseall

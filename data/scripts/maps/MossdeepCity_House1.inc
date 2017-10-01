@@ -4,7 +4,7 @@ MossdeepCity_House1_MapScripts:: @ 815A82E
 MossdeepCity_House1_EventScript_15A82F:: @ 815A82F
 	lock
 	faceplayer
-	bufferfirstpoke 0
+	getfirstpartypokename 0
 	msgbox MossdeepCity_House1_Text_18D465, 4
 	specialvar RESULT, GetPokeblockNameByMonNature
 	compare RESULT, 0

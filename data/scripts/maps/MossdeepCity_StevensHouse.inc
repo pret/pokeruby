@@ -84,7 +84,7 @@ MossdeepCity_StevensHouse_EventScript_15AA7C:: @ 815AA7C
 	waitfanfare
 	waitmessage
 	givepoke SPECIES_BELDUM, 5, ITEM_NONE, 0x0, 0x0, 0
-	bufferpoke 1, SPECIES_BELDUM
+	getspeciesname 1, SPECIES_BELDUM
 	msgbox MossdeepCity_StevensHouse_Text_1A1102, 5
 	compare RESULT, 1
 	call_if 1, MossdeepCity_StevensHouse_EventScript_1A0678

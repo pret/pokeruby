@@ -35,7 +35,7 @@ DesertRuins_EventScript_15CB56:: @ 815CB56
 	lockall
 	checkflag 2128
 	goto_if_eq DesertRuins_EventScript_15CB6D
-	braillemsg DesertRuins_Braille_1C54C8
+	braillemessage DesertRuins_Braille_1C54C8
 	waitbutton
 	erasebox 0, 0, 29, 19
 	releaseall
@@ -48,7 +48,7 @@ DesertRuins_EventScript_15CB6D:: @ 815CB6D
 
 DesertRuins_EventScript_15CB77:: @ 815CB77
 	lockall
-	braillemsg DesertRuins_Braille_1C54C8
+	braillemessage DesertRuins_Braille_1C54C8
 	waitbutton
 	erasebox 0, 0, 29, 19
 	releaseall

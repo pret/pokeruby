@@ -88,7 +88,7 @@ RustboroCity_DevonCorp_2F_EventScript_1575A6:: @ 81575A6
 	msgbox RustboroCity_DevonCorp_2F_Text_182F35, 5
 	compare RESULT, 0
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_157636
-	bufferitem 0, ITEM_ROOT_FOSSIL
+	getitemname 0, ITEM_ROOT_FOSSIL
 	msgbox RustboroCity_DevonCorp_2F_Text_183023, 4
 	removeitem ITEM_ROOT_FOSSIL, 1
 	setvar 0x40c4, 1
@@ -106,7 +106,7 @@ RustboroCity_DevonCorp_2F_EventScript_1575EE:: @ 81575EE
 	msgbox RustboroCity_DevonCorp_2F_Text_182F35, 5
 	compare RESULT, 0
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_157636
-	bufferitem 0, ITEM_CLAW_FOSSIL
+	getitemname 0, ITEM_CLAW_FOSSIL
 	msgbox RustboroCity_DevonCorp_2F_Text_183023, 4
 	removeitem ITEM_CLAW_FOSSIL, 1
 	setvar 0x40c4, 1
@@ -132,7 +132,7 @@ RustboroCity_DevonCorp_2F_EventScript_15764A:: @ 815764A
 	end
 
 RustboroCity_DevonCorp_2F_EventScript_157661:: @ 8157661
-	bufferpoke 1, SPECIES_LILEEP
+	getspeciesname 1, SPECIES_LILEEP
 	msgbox RustboroCity_DevonCorp_2F_Text_183124, 4
 	countpokemon
 	compare RESULT, 6
@@ -152,7 +152,7 @@ RustboroCity_DevonCorp_2F_EventScript_157661:: @ 8157661
 	end
 
 RustboroCity_DevonCorp_2F_EventScript_1576B4:: @ 81576B4
-	bufferpoke 1, SPECIES_ANORITH
+	getspeciesname 1, SPECIES_ANORITH
 	msgbox RustboroCity_DevonCorp_2F_Text_183124, 4
 	countpokemon
 	compare RESULT, 6

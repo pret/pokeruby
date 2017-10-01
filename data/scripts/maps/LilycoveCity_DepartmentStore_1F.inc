@@ -40,7 +40,7 @@ LilycoveCity_DepartmentStore_1F_EventScript_159D5E:: @ 8159D5E
 	call_if 1, LilycoveCity_DepartmentStore_1F_EventScript_159E3A
 	compare 0x8006, 1
 	call_if 1, LilycoveCity_DepartmentStore_1F_EventScript_159E43
-	bufferitem 0, 0x8005
+	getitemname 0, 0x8005
 	compare 0x8004, 1
 	call_if 1, LilycoveCity_DepartmentStore_1F_EventScript_159E78
 	compare 0x8004, 2

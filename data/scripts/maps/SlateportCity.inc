@@ -64,7 +64,7 @@ SlateportCity_Items1:: @ 814BAD0
 SlateportCity_EventScript_14BAE0:: @ 814BAE0
 	lock
 	faceplayer
-	bufferfirstpoke 0
+	getfirstpartypokename 0
 	msgbox SlateportCity_Text_164682, 4
 	specialvar RESULT, LeadMonHasEffortRibbon
 	compare RESULT, 1

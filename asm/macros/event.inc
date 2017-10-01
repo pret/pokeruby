@@ -830,7 +830,7 @@
 	.endm
 
 	@ Displays the string at pointer as braille text in a standard message box. The string must be formatted to use braille characters.
-	.macro braillemsg text
+	.macro braillemessage text
 	.byte 0x78
 	.4byte \text
 	.endm
@@ -865,62 +865,62 @@
 	.endm
 
 	@ Writes the name of the Pokmon at index species to the specified buffer.
-	.macro bufferpoke out, species
+	.macro getspeciesname out, species
 	.byte 0x7d
 	.byte \out
 	.2byte \species
 	.endm
 
 	@ Writes the name of the first Pokmon in the player's party to the specified buffer.
-	.macro bufferfirstpoke out
+	.macro getfirstpartypokename out
 	.byte 0x7e
 	.byte \out
 	.endm
 
 	@ Writes the name of the Pokmon in slot slot (zero-indexed) of the player's party to the specified buffer. If an empty or invalid slot is specified, ten spaces ("") are written to the buffer.
-	.macro bufferpartypoke out, slot
+	.macro getpartypokename out, slot
 	.byte 0x7f
 	.byte \out
 	.2byte \slot
 	.endm
 
 	@ Writes the name of the item at index item to the specified buffer. If the specified index is larger than the number of items in the game (0x176), the name of item 0 ("????????") is buffered instead.
-	.macro bufferitem out, item
+	.macro getitemname out, item
 	.byte 0x80
 	.byte \out
 	.2byte \item
 	.endm
 
 	@ In FireRed, this command is a nop. (The first argument is discarded immediately. The second argument is read, but not used for anything.)
-	.macro bufferdecor a, b
+	.macro getdecorname a, b
 	.byte 0x81
 	.byte \a
 	.2byte \b
 	.endm
 
 	@ Writes the name of the attack at index attack to the specified buffer.
-	.macro bufferattack out, attack
+	.macro getmovename out, attack
 	.byte 0x82
 	.byte \out
 	.2byte \attack
 	.endm
 
 	@ Converts the value of input to a decimal string, and writes that string to the specified buffer.
-	.macro buffernum out, input
+	.macro getnumberstring out, input
 	.byte 0x83
 	.byte \out
 	.2byte \input
 	.endm
 
 	@ Writes the standard string identified by index to the specified buffer. Specifying an invalid standard string (e.x. 0x2B) can and usually will cause data corruption (I've observed destruction of the stored player name and crashes when entering/exiting certain menu screens).
-	.macro bufferstd out, index
+	.macro getstdstring out, index
 	.byte 0x84
 	.byte \out
 	.2byte \index
 	.endm
 
 	@ Copies the string at offset to the specified buffer.
-	.macro buffertext out, offset
+	.macro getstring out, offset
 	.byte 0x85
 	.byte \out
 	.4byte \offset
@@ -944,13 +944,13 @@
 	.4byte \products
 	.endm
 
-	.macro pokecasino word
+	.macro playslotmachine word
 	.byte 0x89
 	.2byte \word
 	.endm
 
 	@ In FireRed, this command is a nop.
-	.macro event_8a byte1, byte2, byte3
+	.macro plantberrytree byte1, byte2, byte3
 	.byte 0x8a
 	.byte \byte1, \byte2, \byte3
 	.endm

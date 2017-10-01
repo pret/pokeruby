@@ -86,19 +86,19 @@ Route102_EventScript_1A15CE:: @ 81A15CE
 	goto_if_eq Route102_EventScript_1A15F2
 	compare 0x8005, 4
 	goto_if_eq Route102_EventScript_1A15EB
-	buffertext 1, Route102_Text_1A17B7
+	getstring 1, Route102_Text_1A17B7
 	return
 
 Route102_EventScript_1A15EB:: @ 81A15EB
-	buffertext 1, Route102_Text_1A179F
+	getstring 1, Route102_Text_1A179F
 	return
 
 Route102_EventScript_1A15F2:: @ 81A15F2
-	buffertext 1, Route102_Text_1A17B0
+	getstring 1, Route102_Text_1A17B0
 	return
 
 Route102_EventScript_1A15F9:: @ 81A15F9
-	buffernum 1, 0x8006
+	getnumberstring 1, 0x8006
 	lock
 	faceplayer
 	msgbox Route102_Text_1A17C0, 5

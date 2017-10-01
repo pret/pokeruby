@@ -28,7 +28,7 @@ FortreeCity_House1_EventScript_157E13:: @ 8157E13
 	special sub_804DB68
 	special sub_804E174
 	waitstate
-	bufferpoke 0, 0x8009
+	getspeciesname 0, 0x8009
 	msgbox FortreeCity_House1_Text_1856F7, 4
 	setflag 155
 	release
@@ -40,7 +40,7 @@ FortreeCity_House1_EventScript_157E95:: @ 8157E95
 	end
 
 FortreeCity_House1_EventScript_157E9F:: @ 8157E9F
-	bufferpoke 0, 0x8009
+	getspeciesname 0, 0x8009
 	msgbox FortreeCity_House1_Text_185737, 4
 	release
 	end

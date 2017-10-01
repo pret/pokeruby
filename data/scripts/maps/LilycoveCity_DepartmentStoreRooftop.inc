@@ -146,12 +146,12 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A267:: @ 815A267
 	call_if 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A260
 	updatemoney 0, 0
 	nop
-	bufferitem 0, 0x4000
+	getitemname 0, 0x4000
 	playse 106
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_18C75F, 4
 	additem 0x4000, 1
-	bufferitem 1, 0x4000
-	bufferstd 2, 14
+	getitemname 1, 0x4000
+	getstdstring 2, 14
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_1A0C8C, 4
 	random 64
 	compare RESULT, 0
@@ -162,8 +162,8 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A267:: @ 815A267
 	playse 106
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_18C780, 4
 	additem 0x4000, 1
-	bufferitem 1, 0x4000
-	bufferstd 2, 14
+	getitemname 1, 0x4000
+	getstdstring 2, 14
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_1A0C8C, 4
 	random 64
 	compare RESULT, 0
@@ -174,8 +174,8 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A267:: @ 815A267
 	playse 106
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_18C780, 4
 	additem 0x4000, 1
-	bufferitem 1, 0x4000
-	bufferstd 2, 14
+	getitemname 1, 0x4000
+	getstdstring 2, 14
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_1A0C8C, 4
 	goto LilycoveCity_DepartmentStoreRooftop_EventScript_15A36E
 	end

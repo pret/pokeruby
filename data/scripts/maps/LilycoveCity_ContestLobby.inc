@@ -472,7 +472,7 @@ LilycoveCity_ContestLobby_EventScript_158DC3:: @ 8158DC3
 LilycoveCity_ContestLobby_EventScript_158DD1:: @ 8158DD1
 	special sub_80C496C
 	addvar 0x8004, 1
-	buffernum 1, 32772
+	getnumberstring 1, 32772
 	message2 LilycoveCity_ContestLobby_Text_188845
 	waitmessage
 	addvar 0x8004, 65535

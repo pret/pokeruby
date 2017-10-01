@@ -416,7 +416,7 @@ BattleTower_Lobby_EventScript_160773:: @ 8160773
 	end
 
 BattleTower_Lobby_EventScript_1607AF:: @ 81607AF
-	bufferdecor 1, 0x8008
+	getdecorname 1, 0x8008
 	msgbox BattleTower_Lobby_Text_1A0CEF, 4
 	msgbox BattleTower_Lobby_Text_19ABED, 4
 	release

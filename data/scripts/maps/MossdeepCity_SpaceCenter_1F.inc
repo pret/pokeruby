@@ -6,7 +6,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_15AB8B:: @ 815AB8B
 	faceplayer
 	dodailyevents
 	specialvar RESULT, GetWeekCount
-	buffernum 0, RESULT
+	getnumberstring 0, RESULT
 	compare RESULT, 0
 	call_if 1, MossdeepCity_SpaceCenter_1F_EventScript_15ABBA
 	compare RESULT, 1

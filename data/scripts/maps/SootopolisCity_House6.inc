@@ -28,7 +28,7 @@ SootopolisCity_House6_EventScript_15B3CD:: @ 815B3CD
 	end
 
 SootopolisCity_House6_EventScript_15B3D7:: @ 815B3D7
-	bufferdecor 1, 117
+	getdecorname 1, 117
 	msgbox SootopolisCity_House6_Text_1A0CEF, 4
 	msgbox SootopolisCity_House6_Text_18FF28, 4
 	release

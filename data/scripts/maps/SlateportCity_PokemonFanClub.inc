@@ -59,7 +59,7 @@ SlateportCity_PokemonFanClub_EventScript_155808:: @ 8155808
 	call_if 0, SlateportCity_PokemonFanClub_EventScript_1559B9
 	checkflag 200
 	call_if 0, SlateportCity_PokemonFanClub_EventScript_1559A2
-	bufferfirstpoke 0
+	getfirstpartypokename 0
 	switch 0x4001
 	case 0, SlateportCity_PokemonFanClub_EventScript_155899
 	case 1, SlateportCity_PokemonFanClub_EventScript_1558A3

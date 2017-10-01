@@ -24,7 +24,7 @@ LittlerootTown_ProfessorBirchsLab_MapScript2_152CAC:: @ 8152CAC
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152CBE:: @ 8152CBE
 	lockall
-	bufferfirstpoke 0
+	getfirstpartypokename 0
 	message LittlerootTown_ProfessorBirchsLab_Text_173D94
 	waitmessage
 	playfanfare 370

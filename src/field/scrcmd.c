@@ -1417,7 +1417,7 @@ bool8 ScrCmd_drawcontestwinner(struct ScriptContext *ctx)
     return TRUE;
 }
 
-bool8 ScrCmd_braillemsg(struct ScriptContext *ctx)
+bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
 {
     u8 *ptr = (u8 *)ScriptReadWord(ctx);
 
@@ -1441,7 +1441,7 @@ bool8 ScrCmd_vtext(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_bufferpoke(struct ScriptContext *ctx)
+bool8 ScrCmd_getspeciesname(struct ScriptContext *ctx)
 {
     u8 stringVarIndex = ScriptReadByte(ctx);
     u16 species = VarGet(ScriptReadHalfword(ctx));
@@ -1450,7 +1450,7 @@ bool8 ScrCmd_bufferpoke(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_bufferfirstpoke(struct ScriptContext *ctx)
+bool8 ScrCmd_getfirstpartypokename(struct ScriptContext *ctx)
 {
     u8 stringVarIndex = ScriptReadByte(ctx);
 
@@ -1461,7 +1461,7 @@ bool8 ScrCmd_bufferfirstpoke(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_bufferpartypoke(struct ScriptContext *ctx)
+bool8 ScrCmd_getpartypokename(struct ScriptContext *ctx)
 {
     u8 stringVarIndex = ScriptReadByte(ctx);
     u16 partyIndex = VarGet(ScriptReadHalfword(ctx));
@@ -1471,7 +1471,7 @@ bool8 ScrCmd_bufferpartypoke(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_bufferitem(struct ScriptContext *ctx)
+bool8 ScrCmd_getitemname(struct ScriptContext *ctx)
 {
     u8 stringVarIndex = ScriptReadByte(ctx);
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
@@ -1480,7 +1480,7 @@ bool8 ScrCmd_bufferitem(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_bufferdecor(struct ScriptContext *ctx)
+bool8 ScrCmd_getdecorname(struct ScriptContext *ctx)
 {
     u8 stringVarIndex = ScriptReadByte(ctx);
     u16 decorId = VarGet(ScriptReadHalfword(ctx));
@@ -1489,7 +1489,7 @@ bool8 ScrCmd_bufferdecor(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_bufferattack(struct ScriptContext *ctx)
+bool8 ScrCmd_getmovename(struct ScriptContext *ctx)
 {
     u8 stringVarIndex = ScriptReadByte(ctx);
     u16 moveId = VarGet(ScriptReadHalfword(ctx));
@@ -1498,7 +1498,7 @@ bool8 ScrCmd_bufferattack(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_buffernum(struct ScriptContext *ctx)
+bool8 ScrCmd_getnumberstring(struct ScriptContext *ctx)
 {
     u8 stringVarIndex = ScriptReadByte(ctx);
     u16 v1 = VarGet(ScriptReadHalfword(ctx));
@@ -1508,7 +1508,7 @@ bool8 ScrCmd_buffernum(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_bufferstd(struct ScriptContext *ctx)
+bool8 ScrCmd_getstdstring(struct ScriptContext *ctx)
 {
     u8 stringVarIndex = ScriptReadByte(ctx);
     u16 index = VarGet(ScriptReadHalfword(ctx));
@@ -1517,7 +1517,7 @@ bool8 ScrCmd_bufferstd(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_buffertext(struct ScriptContext *ctx)
+bool8 ScrCmd_getstring(struct ScriptContext *ctx)
 {
     u8 stringVarIndex = ScriptReadByte(ctx);
     u8 *text = (u8 *)ScriptReadWord(ctx);
@@ -1778,7 +1778,7 @@ bool8 ScrCmd_pokemartbp(struct ScriptContext *ctx)
     return TRUE;
 }
 
-bool8 ScrCmd_pokecasino(struct ScriptContext *ctx)
+bool8 ScrCmd_playslotmachine(struct ScriptContext *ctx)
 {
     u8 v2 = VarGet(ScriptReadHalfword(ctx));
 
@@ -1787,7 +1787,7 @@ bool8 ScrCmd_pokecasino(struct ScriptContext *ctx)
     return TRUE;
 }
 
-bool8 ScrCmd_event_8a(struct ScriptContext *ctx)
+bool8 ScrCmd_plantberrytree(struct ScriptContext *ctx)
 {
     u8 treeId = ScriptReadByte(ctx);
     u8 berry = ScriptReadByte(ctx);

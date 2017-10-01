@@ -47,7 +47,7 @@ IslandCave_EventScript_15EF59:: @ 815EF59
 	lockall
 	checkflag 2129
 	goto_if_eq IslandCave_EventScript_15EF72
-	braillemsg IslandCave_Braille_1C54FC
+	braillemessage IslandCave_Braille_1C54FC
 	special DoBrailleWait
 	waitstate
 	goto IslandCave_EventScript_15EF95
@@ -60,7 +60,7 @@ IslandCave_EventScript_15EF72:: @ 815EF72
 
 IslandCave_EventScript_15EF7C:: @ 815EF7C
 	lockall
-	braillemsg IslandCave_Braille_1C54FC
+	braillemessage IslandCave_Braille_1C54FC
 	checkflag 2129
 	goto_if_eq IslandCave_EventScript_15EF95
 	special DoBrailleWait

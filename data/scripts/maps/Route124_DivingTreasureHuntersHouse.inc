@@ -244,8 +244,8 @@ Route124_DivingTreasureHuntersHouse_EventScript_164283:: @ 8164283
 	goto Route124_DivingTreasureHuntersHouse_EventScript_164292
 
 Route124_DivingTreasureHuntersHouse_EventScript_164292:: @ 8164292
-	bufferitem 0, 0x8008
-	bufferitem 1, 0x8009
+	getitemname 0, 0x8008
+	getitemname 1, 0x8009
 	msgbox Route124_DivingTreasureHuntersHouse_Text_19F5E0, 5
 	compare RESULT, 0
 	goto_if_eq Route124_DivingTreasureHuntersHouse_EventScript_16431F

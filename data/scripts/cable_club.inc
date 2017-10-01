@@ -719,7 +719,7 @@ RecordCorner_EventScript_1A4457:: @ 81A4457
 	end
 
 RecordCorner_EventScript_1A446C:: @ 81A446C
-	bufferitem 1, 0x4001
+	getitemname 1, 0x4001
 	message RecordCorner_Text_1A4E3B
 	waitmessage
 	waitbutton
