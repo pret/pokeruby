@@ -81,7 +81,7 @@
 	.endm
 
 	@ Sets mystery event status
-	.macro setmestatus value
+	.macro setmysteryeventstatus value
 	.byte 0x0e
 	.byte \value
 	.endm

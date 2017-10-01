@@ -293,7 +293,7 @@ bool8 ScrCmd_killscript(struct ScriptContext *ctx)
     return TRUE;
 }
 
-bool8 ScrCmd_setmestatus(struct ScriptContext *ctx)
+bool8 ScrCmd_setmysteryeventstatus(struct ScriptContext *ctx)
 {
     u8 value = ScriptReadByte(ctx);
 
