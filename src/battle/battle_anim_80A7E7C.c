@@ -12,8 +12,8 @@ extern s16 gBattleAnimArgs[8];
 extern u8 gObjectBankIDs[];
 extern s32 gMoveDmgMoveAnim;
 extern u16 gMovePowerMoveAnim;
-extern u8 gBattleAnimPlayerMonIndex;
-extern u8 gBattleAnimEnemyMonIndex;
+extern u8 gBattleAnimBankAttacker;
+extern u8 gBattleAnimBankTarget;
 
 static void sub_80A7EF0(u8 taskId);
 static void sub_80A808C(u8 taskId);
@@ -34,7 +34,7 @@ static void sub_80A913C(u8 taskId);
 void sub_80A7E7C(u8 taskId)
 {
     u8 sprite;
-    sprite = obj_id_for_side_relative_to_move(gBattleAnimArgs[0]);
+    sprite = GetAnimBankSpriteId(gBattleAnimArgs[0]);
     if (sprite == 0xff)
     {
         DestroyAnimVisualTask(taskId);
@@ -96,7 +96,7 @@ void sub_80A7FA0(u8 taskId)
     r6 = 0;
     if (gBattleAnimArgs[0] < 4)
     {
-        sprite = obj_id_for_side_relative_to_move(gBattleAnimArgs[0]);
+        sprite = GetAnimBankSpriteId(gBattleAnimArgs[0]);
         if (sprite == 0xff)
         {
             DestroyAnimVisualTask(taskId);
@@ -121,7 +121,7 @@ void sub_80A7FA0(u8 taskId)
             side = GetBankByPlayerAI(3);
             break;
         }
-        if (b_side_obj__get_some_boolean(side) == FALSE)
+        if (IsAnimBankSpriteVisible(side) == FALSE)
         {
             r6 = 1;
         }
@@ -129,7 +129,7 @@ void sub_80A7FA0(u8 taskId)
     }
     else
     {
-        sprite = gObjectBankIDs[gBattleAnimPlayerMonIndex];
+        sprite = gObjectBankIDs[gBattleAnimBankAttacker];
     }
     if (r6)
     {
@@ -186,7 +186,7 @@ static void sub_80A808C(u8 taskId)
 void sub_80A8154(u8 taskId)
 {
     u8 sprite;
-    sprite = obj_id_for_side_relative_to_move(gBattleAnimArgs[0]);
+    sprite = GetAnimBankSpriteId(gBattleAnimArgs[0]);
     if (sprite == 0xff)
     {
         DestroyAnimVisualTask(taskId);
@@ -244,7 +244,7 @@ static void sub_80A81D8(u8 taskId)
 
 void sub_80A8314(u8 taskId)
 {
-    u8 sprite = obj_id_for_side_relative_to_move(gBattleAnimArgs[0]);
+    u8 sprite = GetAnimBankSpriteId(gBattleAnimArgs[0]);
     gSprites[sprite].pos2.x = gBattleAnimArgs[1];
     TASK.data[0] = sprite;
     TASK.data[1] = gBattleAnimArgs[1];
@@ -286,7 +286,7 @@ void sub_80A8408(u8 taskId)
     u8 sprite;
     u8 v1;
     v1 = 1;
-    sprite = obj_id_for_side_relative_to_move(gBattleAnimArgs[0]);
+    sprite = GetAnimBankSpriteId(gBattleAnimArgs[0]);
     if (gBattleAnimArgs[4] > 5)
     {
         gBattleAnimArgs[4] = 5;
@@ -328,7 +328,7 @@ static void sub_80A8488(u8 taskId)
 
 void sub_80A8500(u8 taskId)
 {
-    if (GetBankSide(gBattleAnimPlayerMonIndex))
+    if (GetBankSide(gBattleAnimBankAttacker))
     {
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
     }
@@ -338,7 +338,7 @@ void sub_80A8500(u8 taskId)
 void sub_80A8530(struct Sprite *sprite)
 {
     sprite->invisible = TRUE;
-    if (GetBankSide(gBattleAnimPlayerMonIndex))
+    if (GetBankSide(gBattleAnimBankAttacker))
     {
         sprite->data1 = -gBattleAnimArgs[1];
     }
@@ -348,9 +348,9 @@ void sub_80A8530(struct Sprite *sprite)
     }
     sprite->data0 = gBattleAnimArgs[0];
     sprite->data2 = 0;
-    sprite->data3 = gObjectBankIDs[gBattleAnimPlayerMonIndex];
+    sprite->data3 = gObjectBankIDs[gBattleAnimBankAttacker];
     sprite->data4 = gBattleAnimArgs[0];
-    oamt_set_x3A_32(sprite, sub_80A85A4);
+    StoreSpriteCallbackInData6(sprite, sub_80A85A4);
     sprite->callback = sub_8078458;
 }
 
@@ -359,20 +359,20 @@ static void sub_80A85A4(struct Sprite *sprite)
     sprite->data0 = sprite->data4;
     sprite->data1 = -sprite->data1;
     sprite->callback = sub_8078458;
-    oamt_set_x3A_32(sprite, move_anim_8072740);
+    StoreSpriteCallbackInData6(sprite, move_anim_8072740);
 }
 
 void sub_80A85C8(struct Sprite *sprite)
 {
     u8 spriteId;
     sprite->invisible = TRUE;
-    spriteId = obj_id_for_side_relative_to_move(gBattleAnimArgs[2]);
+    spriteId = GetAnimBankSpriteId(gBattleAnimArgs[2]);
     sprite->data0 = gBattleAnimArgs[0];
     sprite->data1 = 0;
     sprite->data2 = gBattleAnimArgs[1];
     sprite->data3 = spriteId;
     sprite->data4 = gBattleAnimArgs[0];
-    oamt_set_x3A_32(sprite, sub_80A8614);
+    StoreSpriteCallbackInData6(sprite, sub_80A8614);
     sprite->callback = sub_8078458;
 }
 
@@ -381,7 +381,7 @@ void sub_80A8614(struct Sprite *sprite)
     sprite->data0 = sprite->data4;
     sprite->data2 = -sprite->data2;
     sprite->callback = sub_8078458;
-    oamt_set_x3A_32(sprite, move_anim_8072740);
+    StoreSpriteCallbackInData6(sprite, move_anim_8072740);
 }
 
 void sub_80A8638(struct Sprite *sprite)
@@ -390,11 +390,11 @@ void sub_80A8638(struct Sprite *sprite)
     int spriteId;
     if (!gBattleAnimArgs[0])
     {
-        spriteId = gObjectBankIDs[gBattleAnimPlayerMonIndex];
+        spriteId = gObjectBankIDs[gBattleAnimBankAttacker];
     }
     else
     {
-        spriteId = gObjectBankIDs[gBattleAnimEnemyMonIndex];
+        spriteId = gObjectBankIDs[gBattleAnimBankTarget];
     }
     sprite->data0 = gBattleAnimArgs[2];
     sprite->data1 = gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x;
@@ -457,11 +457,11 @@ void sub_80A8764(struct Sprite *sprite)
     u8 spriteId;
     if (!gBattleAnimArgs[0])
     {
-        v1 = gBattleAnimPlayerMonIndex;
+        v1 = gBattleAnimBankAttacker;
     }
     else
     {
-        v1 = gBattleAnimEnemyMonIndex;
+        v1 = gBattleAnimBankTarget;
     }
     spriteId = gObjectBankIDs[v1];
     if (GetBankSide(v1))
@@ -482,7 +482,7 @@ void sub_80A8764(struct Sprite *sprite)
     sprite->data4 = 0;
     sprite->data5 = spriteId;
     sprite->invisible = TRUE;
-    oamt_set_x3A_32(sprite, move_anim_8072740);
+    StoreSpriteCallbackInData6(sprite, move_anim_8072740);
     sprite->callback = sub_80784A8;
 }
 
@@ -493,11 +493,11 @@ void sub_80A8818(struct Sprite *sprite)
     sprite->invisible = TRUE;
     if (!gBattleAnimArgs[0])
     {
-        v1 = gBattleAnimPlayerMonIndex;
+        v1 = gBattleAnimBankAttacker;
     }
     else
     {
-        v1 = gBattleAnimEnemyMonIndex;
+        v1 = gBattleAnimBankTarget;
     }
     spriteId = gObjectBankIDs[v1];
     if (GetBankSide(v1))
@@ -520,11 +520,11 @@ void sub_80A8818(struct Sprite *sprite)
     sprite->data6 = gBattleAnimArgs[5];
     if (!gBattleAnimArgs[5])
     {
-        oamt_set_x3A_32(sprite, move_anim_8072740);
+        StoreSpriteCallbackInData6(sprite, move_anim_8072740);
     }
     else
     {
-        oamt_set_x3A_32(sprite, sub_80A88F0);
+        StoreSpriteCallbackInData6(sprite, sub_80A88F0);
     }
     sprite->callback = sub_80784A8;
 }
@@ -541,12 +541,12 @@ void sub_80A8920(u8 taskId)
 {
     s16 r7;
     r7 = 0x8000 / gBattleAnimArgs[3];
-    if (GetBankSide(gBattleAnimPlayerMonIndex))
+    if (GetBankSide(gBattleAnimBankAttacker))
     {
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
         gBattleAnimArgs[5] = -gBattleAnimArgs[5];
     }
-    TASK.data[0] = obj_id_for_side_relative_to_move(gBattleAnimArgs[0]);
+    TASK.data[0] = GetAnimBankSpriteId(gBattleAnimArgs[0]);
     TASK.data[1] = (gBattleAnimArgs[1] << 8) / gBattleAnimArgs[3];
     TASK.data[2] = gBattleAnimArgs[2];
     TASK.data[3] = gBattleAnimArgs[3];
@@ -600,30 +600,30 @@ void sub_80A8A80(u8 taskId)
     {
     case 0:
     case 1:
-        spriteId = obj_id_for_side_relative_to_move(gBattleAnimArgs[0]);
+        spriteId = GetAnimBankSpriteId(gBattleAnimArgs[0]);
         break;
     case 2:
-        if (!b_side_obj__get_some_boolean(gBattleAnimPlayerMonIndex ^ 2))
+        if (!IsAnimBankSpriteVisible(gBattleAnimBankAttacker ^ 2))
         {
             DestroyAnimVisualTask(taskId);
             return;
         }
-        spriteId = gObjectBankIDs[gBattleAnimPlayerMonIndex ^ 2];
+        spriteId = gObjectBankIDs[gBattleAnimBankAttacker ^ 2];
         break;
     case 3:
-        if (!b_side_obj__get_some_boolean(gBattleAnimEnemyMonIndex ^ 2))
+        if (!IsAnimBankSpriteVisible(gBattleAnimBankTarget ^ 2))
         {
             DestroyAnimVisualTask(taskId);
             return;
         }
-        spriteId = gObjectBankIDs[gBattleAnimEnemyMonIndex ^ 2];
+        spriteId = gObjectBankIDs[gBattleAnimBankTarget ^ 2];
         break;
     default:
         DestroyAnimVisualTask(taskId);
         return;
     }
     TASK.data[0] = spriteId;
-    if (GetBankSide(gBattleAnimEnemyMonIndex))
+    if (GetBankSide(gBattleAnimBankTarget))
     {
         TASK.data[1] = gBattleAnimArgs[1];
     }
@@ -648,11 +648,11 @@ static void sub_80A8B3C(u8 taskId)
 void sub_80A8B88(u8 taskId)
 {
     u8 spriteId;
-    if (GetBankSide(gBattleAnimPlayerMonIndex))
+    if (GetBankSide(gBattleAnimBankAttacker))
     {
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
     }
-    spriteId = obj_id_for_side_relative_to_move(gBattleAnimArgs[4]);
+    spriteId = GetAnimBankSpriteId(gBattleAnimArgs[4]);
     TASK.data[0] = gBattleAnimArgs[0];
     TASK.data[1] = gBattleAnimArgs[1];
     TASK.data[2] = gBattleAnimArgs[2];
@@ -660,11 +660,11 @@ void sub_80A8B88(u8 taskId)
     TASK.data[4] = spriteId;
     if (gBattleAnimArgs[4] == 0)
     {
-        TASK.data[5] = gBattleAnimPlayerMonIndex;
+        TASK.data[5] = gBattleAnimBankAttacker;
     }
     else
     {
-        TASK.data[5] = gBattleAnimEnemyMonIndex;
+        TASK.data[5] = gBattleAnimBankTarget;
     }
     TASK.data[12] = 1;
     TASK.func = sub_80A8C0C;
@@ -714,7 +714,7 @@ static void sub_80A8C0C(u8 taskId)
 void sub_80A8D34(u8 taskId)
 {
     u8 spriteId;
-    spriteId = obj_id_for_side_relative_to_move(gBattleAnimArgs[3]);
+    spriteId = GetAnimBankSpriteId(gBattleAnimArgs[3]);
     sub_8078E70(spriteId, gBattleAnimArgs[4]);
     TASK.data[0] = gBattleAnimArgs[0];
     TASK.data[1] = gBattleAnimArgs[1];
@@ -754,7 +754,7 @@ static void sub_80A8D8C(u8 taskId)
 void sub_80A8E04(u8 taskId)
 {
     u8 spriteId;
-    spriteId = obj_id_for_side_relative_to_move(gBattleAnimArgs[2]);
+    spriteId = GetAnimBankSpriteId(gBattleAnimArgs[2]);
     sub_8078E70(spriteId, 0);
     TASK.data[1] = 0;
     TASK.data[2] = gBattleAnimArgs[0];
@@ -777,11 +777,11 @@ void sub_80A8E04(u8 taskId)
     {
         if (gBattleAnimArgs[2] == 0)
         {
-            TASK.data[7] = !GetBankSide(gBattleAnimPlayerMonIndex);
+            TASK.data[7] = !GetBankSide(gBattleAnimBankAttacker);
         }
         else
         {
-            TASK.data[7] = !GetBankSide(gBattleAnimEnemyMonIndex);
+            TASK.data[7] = !GetBankSide(gBattleAnimBankTarget);
         }
     }
     if (TASK.data[7])
@@ -798,20 +798,20 @@ void sub_80A8E04(u8 taskId)
 void sub_80A8EFC(u8 taskId)
 {
     u8 spriteId;
-    spriteId = obj_id_for_side_relative_to_move(gBattleAnimArgs[2]);
+    spriteId = GetAnimBankSpriteId(gBattleAnimArgs[2]);
     sub_8078E70(spriteId, 0);
     TASK.data[1] = 0;
     TASK.data[2] = gBattleAnimArgs[0];
     if (gBattleAnimArgs[2] == 0)
     {
-        if (GetBankSide(gBattleAnimPlayerMonIndex))
+        if (GetBankSide(gBattleAnimBankAttacker))
         {
             gBattleAnimArgs[1] = -gBattleAnimArgs[1];
         }
     }
     else
     {
-        if (GetBankSide(gBattleAnimEnemyMonIndex))
+        if (GetBankSide(gBattleAnimBankTarget))
         {
             gBattleAnimArgs[1] = -gBattleAnimArgs[1];
         }
@@ -891,7 +891,7 @@ void sub_80A9058(u8 taskId)
     TASK.data[12] = 0;
     TASK.data[10] = gBattleAnimArgs[3];
     TASK.data[11] = gBattleAnimArgs[4];
-    TASK.data[7] = obj_id_for_side_relative_to_move(1);
+    TASK.data[7] = GetAnimBankSpriteId(1);
     TASK.data[8] = gSprites[TASK.data[7]].pos2.x;
     TASK.data[9] = gSprites[TASK.data[7]].pos2.y;
     TASK.data[0] = 0;

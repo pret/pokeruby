@@ -48,10 +48,10 @@ extern const struct SpriteSheet sUnknown_0820A3B0;
 extern const struct SpriteSheet sUnknown_0820A3B8;
 extern const struct SpritePalette sUnknown_0820A3C0;
 
-bool8 GetNationalPokedexFlag(u16 nationalNum, u8 caseID);
+bool8 GetSetPokedexFlag(u16 nationalNum, u8 caseID);
 u8* GetMonNick(struct Pokemon* mon, u8* dst);
 u8 sav1_map_get_name(void);
-const struct CompressedSpritePalette* sub_8040990(struct Pokemon* mon); //gets pokemon palette address
+const struct CompressedSpritePalette* GetMonSpritePalStruct(struct Pokemon* mon); //gets pokemon palette address
 void sub_8080990(void);
 
 static void Task_EggHatch(u8 taskID);
@@ -289,8 +289,8 @@ static void AddHatchedMonToParty(u8 id)
     SetMonData(mon, MON_DATA_NICKNAME, name);
 
     pokeNum = SpeciesToNationalPokedexNum(pokeNum);
-    GetNationalPokedexFlag(pokeNum, 2);
-    GetNationalPokedexFlag(pokeNum, 3);
+    GetSetPokedexFlag(pokeNum, 2);
+    GetSetPokedexFlag(pokeNum, 3);
 
     GetMonNick(mon, gStringVar1);
 
@@ -419,11 +419,11 @@ static u8 EggHatchCreateMonSprite(u8 a0, u8 switchID, u8 pokeID)
             u16 species = GetMonData(mon, MON_DATA_SPECIES);
             u32 pid = GetMonData(mon, MON_DATA_PERSONALITY);
             HandleLoadSpecialPokePic(&gMonFrontPicTable[species], gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset,(u32)(&ewram[0]), gUnknown_081FAF4C[2 * a0 + 1], species, pid);
-            LoadCompressedObjectPalette(sub_8040990(mon));
+            LoadCompressedObjectPalette(GetMonSpritePalStruct(mon));
         }
         break;
     case 1:
-        GetMonSpriteTemplate_803C56C(sub_8040990(mon)->tag, r5);
+        GetMonSpriteTemplate_803C56C(GetMonSpritePalStruct(mon)->tag, r5);
         spriteID = CreateSprite(&gUnknown_02024E8C, 120, 70, 6);
         gSprites[spriteID].invisible = 1;
         gSprites[spriteID].callback = SpriteCallbackDummy;

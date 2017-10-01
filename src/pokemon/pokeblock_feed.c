@@ -46,7 +46,7 @@ extern const u8 gBattleTerrainPalette_BattleTower[];
 extern const struct CompressedSpriteSheet gUnknown_083F7F74;
 extern const struct CompressedSpritePalette gUnknown_083F7F7C;
 
-bool8 sub_8040A3C(u16 species);
+bool8 IsPokeSpriteNotFlipped(u16 species);
 
 // this file's functions
 static void sub_8147B04(void);
@@ -626,7 +626,7 @@ static bool8 sub_8147B20(struct Pokemon* mon)
             species = GetMonData(mon, MON_DATA_SPECIES2);
             PiD = GetMonData(mon, MON_DATA_PERSONALITY);
             TiD = GetMonData(mon, MON_DATA_OT_ID);
-            palette = sub_80409C8(species, TiD, PiD);
+            palette = GetMonSpritePalStructFromOtIdPersonality(species, TiD, PiD);
             LoadCompressedObjectPalette(palette);
             GetMonSpriteTemplate_803C56C(palette->tag, 1);
             ewram[0x1FFFF]++;
@@ -766,7 +766,7 @@ static u8 PokeblockFeed_CreatePokeSprite(struct Pokemon* mon)
     gSprites[spriteID].data2 = species;
     gSprites[spriteID].callback = SpriteCallbackDummy;
     gPokeblockMonNotFlipped = 1;
-    if (!sub_8040A3C(species))
+    if (!IsPokeSpriteNotFlipped(species))
     {
         gSprites[spriteID].affineAnims = sSpriteAffineAnimTable_84120EC;
         gSprites[spriteID].oam.affineMode = 3;

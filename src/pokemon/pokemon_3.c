@@ -278,7 +278,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
     else
         holdEffect = ItemId_GetHoldEffect(heldItem);
 
-    if (holdEffect == 38 && type != 3)
+    if (holdEffect == HOLD_EFFECT_PREVENT_EVOLVE && type != 3)
         return 0;
 
     switch (type)
@@ -1096,7 +1096,7 @@ void ClearBattleMonForms(void)
         gBattleMonForms[i] = 0;
 }
 
-u16 sub_8040728(void)
+u16 GetBGM_ForBattle(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_KYOGRE_GROUDON)
         return BGM_BATTLE34;
@@ -1137,7 +1137,7 @@ void sub_80408BC(void)
 {
     ResetMapMusic();
     m4aMPlayAllStop();
-    PlayBGM(sub_8040728());
+    PlayBGM(GetBGM_ForBattle());
 }
 
 void current_map_music_set__default_for_battle(u16 song)
@@ -1147,15 +1147,15 @@ void current_map_music_set__default_for_battle(u16 song)
     if (song)
         PlayNewMapMusic(song);
     else
-        PlayNewMapMusic(sub_8040728());
+        PlayNewMapMusic(GetBGM_ForBattle());
 }
 
-const u8 *pokemon_get_pal(struct Pokemon *mon)
+const u8 *GetMonSpritePal(struct Pokemon *mon)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES2, 0);
     u32 otId = GetMonData(mon, MON_DATA_OT_ID, 0);
     u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, 0);
-    return species_and_otid_get_pal(species, otId, personality);
+    return GetMonSpritePalFromOtIdPersonality(species, otId, personality);
 }
 
 //Extracts the upper 16 bits of a 32-bit number
@@ -1164,7 +1164,7 @@ const u8 *pokemon_get_pal(struct Pokemon *mon)
 //Extracts the lower 16 bits of a 32-bit number
 #define LOHALF(n) ((n) & 0xFFFF)
 
-const u8 *species_and_otid_get_pal(u16 species, u32 otId, u32 personality)
+const u8 *GetMonSpritePalFromOtIdPersonality(u16 species, u32 otId, u32 personality)
 {
     u32 shinyValue;
 
@@ -1178,15 +1178,15 @@ const u8 *species_and_otid_get_pal(u16 species, u32 otId, u32 personality)
         return gMonPaletteTable[species].data;
 }
 
-const struct CompressedSpritePalette *sub_8040990(struct Pokemon *mon)
+const struct CompressedSpritePalette *GetMonSpritePalStruct(struct Pokemon *mon)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES2, 0);
     u32 otId = GetMonData(mon, MON_DATA_OT_ID, 0);
     u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, 0);
-    return sub_80409C8(species, otId, personality);
+    return GetMonSpritePalStructFromOtIdPersonality(species, otId, personality);
 }
 
-const struct CompressedSpritePalette *sub_80409C8(u16 species, u32 otId , u32 personality)
+const struct CompressedSpritePalette *GetMonSpritePalStructFromOtIdPersonality(u16 species, u32 otId , u32 personality)
 {
     u32 shinyValue;
 
@@ -1208,9 +1208,9 @@ bool32 IsHMMove2(u16 move)
     return FALSE;
 }
 
-bool8 sub_8040A3C(u16 species)
+bool8 IsPokeSpriteNotFlipped(u16 species)
 {
-    return gBaseStats[species].unk19_7;
+    return gBaseStats[species].noFlip;
 }
 
 s8 sub_8040A54(struct Pokemon *mon, u8 a2)

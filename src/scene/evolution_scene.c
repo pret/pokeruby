@@ -236,7 +236,7 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
                              gMonFrontPicCoords[currSpecies].y_offset,
                              (void*)(0x2000000),
                              gUnknown_081FAF4C[1], currSpecies);
-    pokePal = (void*) sub_80409C8(currSpecies, TiD, PiD);
+    pokePal = (void*) GetMonSpritePalStructFromOtIdPersonality(currSpecies, TiD, PiD);
     LoadCompressedPalette(*pokePal, 0x110, 0x20);
 
     GetMonSpriteTemplate_803C56C(currSpecies, 1);
@@ -253,7 +253,7 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
                              gMonFrontPicCoords[speciesToEvolve].y_offset,
                              (void*)(0x2000000),
                              gUnknown_081FAF4C[3], speciesToEvolve);
-    pokePal = (void*) sub_80409C8(speciesToEvolve, TiD, PiD);
+    pokePal = (void*) GetMonSpritePalStructFromOtIdPersonality(speciesToEvolve, TiD, PiD);
     LoadCompressedPalette(*pokePal, 0x120, 0x20);
 
     GetMonSpriteTemplate_803C56C(speciesToEvolve, 3);
@@ -333,7 +333,7 @@ static void CB2_EvolutionSceneLoadGraphics(void)
                              gMonFrontPicCoords[postEvoSpecies].y_offset,
                              (void*)(0x2000000),
                              gUnknown_081FAF4C[3], postEvoSpecies);
-    pokePal = (void*) sub_80409C8(postEvoSpecies, TiD, PiD);
+    pokePal = (void*) GetMonSpritePalStructFromOtIdPersonality(postEvoSpecies, TiD, PiD);
     LoadCompressedPalette(*pokePal, 0x120, 0x20);
 
     GetMonSpriteTemplate_803C56C(postEvoSpecies, 3);
@@ -403,7 +403,7 @@ static void CB2_TradeEvolutionSceneLoadGraphics(void)
                                      gMonFrontPicCoords[postEvoSpecies].y_offset,
                                      (void*)(0x2000000),
                                      gUnknown_081FAF4C[3], postEvoSpecies);
-            pokePal = (void*) sub_80409C8(postEvoSpecies, TiD, PiD);
+            pokePal = (void*) GetMonSpritePalStructFromOtIdPersonality(postEvoSpecies, TiD, PiD);
             LoadCompressedPalette(*pokePal, 0x120, 0x20);
             gMain.state++;
         }
@@ -453,7 +453,7 @@ void TradeEvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, u8 preEvoSpri
                              gMonFrontPicCoords[speciesToEvolve].y_offset,
                              (void*)(0x2000000),
                              gUnknown_081FAF4C[1], speciesToEvolve);
-    pokePal = (void*) sub_80409C8(speciesToEvolve, TiD, PiD);
+    pokePal = (void*) GetMonSpritePalStructFromOtIdPersonality(speciesToEvolve, TiD, PiD);
     LoadCompressedPalette(*pokePal, 0x120, 0x20);
 
     GetMonSpriteTemplate_803C56C(speciesToEvolve, 1);
@@ -527,8 +527,8 @@ static void CreateShedinja(u16 preEvoSpecies, struct Pokemon* mon)
         // can't match it otherwise, ehh
         EvoTable = gEvolutionTable;
         Evos = EvoTable + preEvoSpecies;
-        GetNationalPokedexFlag(SpeciesToNationalPokedexNum(Evos->evolutions[1].targetSpecies), 2);
-        GetNationalPokedexFlag(SpeciesToNationalPokedexNum(Evos->evolutions[1].targetSpecies), 3);
+        GetSetPokedexFlag(SpeciesToNationalPokedexNum(Evos->evolutions[1].targetSpecies), 2);
+        GetSetPokedexFlag(SpeciesToNationalPokedexNum(Evos->evolutions[1].targetSpecies), 3);
 
         if (GetMonData(Shedinja, MON_DATA_SPECIES) == SPECIES_SHEDINJA
             && GetMonData(Shedinja, MON_DATA_LANGUAGE) == LANGUAGE_JAPANESE
@@ -654,8 +654,8 @@ static void Task_EvolutionScene(u8 taskID)
             SetMonData(mon, MON_DATA_SPECIES, (void*)(&gTasks[taskID].tPostEvoSpecies));
             CalculateMonStats(mon);
             EvolutionRenameMon(mon, gTasks[taskID].tPreEvoSpecies, gTasks[taskID].tPostEvoSpecies);
-            GetNationalPokedexFlag(SpeciesToNationalPokedexNum(gTasks[taskID].tPostEvoSpecies), 2);
-            GetNationalPokedexFlag(SpeciesToNationalPokedexNum(gTasks[taskID].tPostEvoSpecies), 3);
+            GetSetPokedexFlag(SpeciesToNationalPokedexNum(gTasks[taskID].tPostEvoSpecies), 2);
+            GetSetPokedexFlag(SpeciesToNationalPokedexNum(gTasks[taskID].tPostEvoSpecies), 3);
             IncrementGameStat(14);
         }
         break;
@@ -996,8 +996,8 @@ static void Task_TradeEvolutionScene(u8 taskID)
             SetMonData(mon, MON_DATA_SPECIES, (void*)(&gTasks[taskID].tPostEvoSpecies));
             CalculateMonStats(mon);
             EvolutionRenameMon(mon, gTasks[taskID].tPreEvoSpecies, gTasks[taskID].tPostEvoSpecies);
-            GetNationalPokedexFlag(SpeciesToNationalPokedexNum(gTasks[taskID].tPostEvoSpecies), 2);
-            GetNationalPokedexFlag(SpeciesToNationalPokedexNum(gTasks[taskID].tPostEvoSpecies), 3);
+            GetSetPokedexFlag(SpeciesToNationalPokedexNum(gTasks[taskID].tPostEvoSpecies), 2);
+            GetSetPokedexFlag(SpeciesToNationalPokedexNum(gTasks[taskID].tPostEvoSpecies), 3);
             IncrementGameStat(14);
         }
         break;

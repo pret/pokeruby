@@ -48,8 +48,8 @@ extern struct MusicPlayerInfo gMPlay_BGM;
 extern u32 gBitTable[];
 extern u16 gBattleTypeFlags;
 extern u8 gBattleMonForms[];
-extern u8 gBattleAnimPlayerMonIndex;
-extern u8 gBattleAnimEnemyMonIndex;
+extern u8 gBattleAnimBankAttacker;
+extern u8 gBattleAnimBankTarget;
 extern void (*gAnimScriptCallback)(void);
 extern u8 gAnimScriptActive;
 extern const u8 *const gBattleAnims_Unknown1[];
@@ -78,7 +78,7 @@ extern void sub_80440EC();
 extern void sub_804777C();
 extern void sub_8141828();
 extern u8 sub_8077ABC();
-extern u8 sub_8078874(u8);
+extern u8 AnimBankSpriteExists(u8);
 extern u8 sub_8077F68(u8);
 extern u8 sub_8077F7C(u8);
 extern void sub_8094958(void);
@@ -185,8 +185,8 @@ bool8 move_anim_start_t3(u8 a, u8 b, u8 c, u8 d, u16 e)
         sub_80324E0(a);
         return TRUE;
     }
-    gBattleAnimPlayerMonIndex = b;
-    gBattleAnimEnemyMonIndex = c;
+    gBattleAnimBankAttacker = b;
+    gBattleAnimBankTarget = c;
     ewram17840.unk0 = e;
     DoMoveAnim(gBattleAnims_Unknown1, d, 0);
     taskId = CreateTask(sub_80315E8, 10);
@@ -225,8 +225,8 @@ void move_anim_start_t4(u8 a, u8 b, u8 c, u8 d)
 {
     u8 taskId;
 
-    gBattleAnimPlayerMonIndex = b;
-    gBattleAnimEnemyMonIndex = c;
+    gBattleAnimBankAttacker = b;
+    gBattleAnimBankTarget = c;
     DoMoveAnim(gBattleAnims_Unknown2, d, 0);
     taskId = CreateTask(sub_80316CC, 10);
     gTasks[taskId].data[0] = a;
@@ -301,16 +301,16 @@ void BattleLoadOpponentMonSprite(struct Pokemon *pkmn, u8 b)
       r7);
     paletteOffset = 0x100 + b * 16;
     if (ewram17800[b].transformedSpecies == 0)
-        lzPaletteData = pokemon_get_pal(pkmn);
+        lzPaletteData = GetMonSpritePal(pkmn);
     else
-        lzPaletteData = species_and_otid_get_pal(species, otId, personalityValue);
-    sub_800D238(lzPaletteData, ewram);
+        lzPaletteData = GetMonSpritePalFromOtIdPersonality(species, otId, personalityValue);
+    LZDecompressWram(lzPaletteData, ewram);
     LoadPalette(ewram, paletteOffset, 0x20);
     LoadPalette(ewram, 0x80 + b * 16, 0x20);
     if (species == SPECIES_CASTFORM)
     {
         paletteOffset = 0x100 + b * 16;
-        sub_800D238(lzPaletteData, ewram + 0x16400);
+        LZDecompressWram(lzPaletteData, ewram + 0x16400);
         LoadPalette(ewram + 0x16400 + gBattleMonForms[b] * 32, paletteOffset, 0x20);
     }
     if (ewram17800[b].transformedSpecies != 0)
@@ -353,16 +353,16 @@ void BattleLoadPlayerMonSprite(struct Pokemon *pkmn, u8 b)
       r7);
     paletteOffset = 0x100 + b * 16;
     if (ewram17800[b].transformedSpecies == 0)
-        lzPaletteData = pokemon_get_pal(pkmn);
+        lzPaletteData = GetMonSpritePal(pkmn);
     else
-        lzPaletteData = species_and_otid_get_pal(species, otId, personalityValue);
-    sub_800D238(lzPaletteData, ewram);
+        lzPaletteData = GetMonSpritePalFromOtIdPersonality(species, otId, personalityValue);
+    LZDecompressWram(lzPaletteData, ewram);
     LoadPalette(ewram, paletteOffset, 0x20);
     LoadPalette(ewram, 0x80 + b * 16, 0x20);
     if (species == SPECIES_CASTFORM)
     {
         paletteOffset = 0x100 + b * 16;
-        sub_800D238(lzPaletteData, ewram + 0x16400);
+        LZDecompressWram(lzPaletteData, ewram + 0x16400);
         LoadPalette(ewram + 0x16400 + gBattleMonForms[b] * 32, paletteOffset, 0x20);
     }
     if (ewram17800[b].transformedSpecies != 0)
@@ -506,7 +506,7 @@ bool8 sub_8031C30(u8 a)
 
 void load_gfxc_health_bar(void)
 {
-    sub_800D238(gUnknown_08D09C48, (void *)0x02000000);
+    LZDecompressWram(gUnknown_08D09C48, (void *)0x02000000);
 }
 
 u8 battle_load_something(u8 *pState, u8 *b)
@@ -690,14 +690,14 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
         dst = (void *)(VRAM + 0x10000 + gSprites[gObjectBankIDs[a]].oam.tileNum * 32);
         DmaCopy32(3, src, dst, 0x800);
         paletteOffset = 0x100 + a * 16;
-        lzPaletteData = species_and_otid_get_pal(species, otId, personalityValue);
-        sub_800D238(lzPaletteData, ewram);
+        lzPaletteData = GetMonSpritePalFromOtIdPersonality(species, otId, personalityValue);
+        LZDecompressWram(lzPaletteData, ewram);
         LoadPalette(ewram, paletteOffset, 32);
         if (species == SPECIES_CASTFORM)
         {
             u16 *paletteSrc = (u16 *)(ewram + 0x16400);
 
-            sub_800D238(lzPaletteData, paletteSrc);
+            LZDecompressWram(lzPaletteData, paletteSrc);
             LoadPalette(paletteSrc + gBattleMonForms[b] * 16, paletteOffset, 32);
         }
         BlendPalette(paletteOffset, 16, 6, 0x7FFF);
@@ -846,7 +846,7 @@ void sub_80326EC(u8 a)
 
     for (i = 0; i < gNoOfAllBanks; i++)
     {
-        if (sub_8078874(i) != 0)
+        if (AnimBankSpriteExists(i) != 0)
         {
             gSprites[gObjectBankIDs[i]].oam.affineMode = a;
             if (a == 0)
@@ -884,7 +884,7 @@ void sub_80328A4(struct Sprite *sprite)
     u8 r4 = sprite->data0;
     struct Sprite *r7 = &gSprites[gObjectBankIDs[r4]];
 
-    if (!r7->inUse || sub_8078874(r4) == 0)
+    if (!r7->inUse || AnimBankSpriteExists(r4) == 0)
     {
         sprite->callback = sub_8032978;
         return;

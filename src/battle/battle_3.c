@@ -378,7 +378,7 @@ u8 UpdateTurnCounters(void)
                 s32 j;
                 for (j = i + 1; j < gNoOfAllBanks; j++)
                 {
-                    if (b_first_side(gTurnOrder[i], gTurnOrder[j], 0))
+                    if (GetWhoStrikesFirst(gTurnOrder[i], gTurnOrder[j], 0))
                         sub_8012FBC(i, j);
                 }
             }

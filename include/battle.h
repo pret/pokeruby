@@ -795,7 +795,7 @@ void BattleTurnPassed(void);
 // asm/battle_2.o
 void sub_8012324(void);
 void sub_8012FBC(u8, u8);
-u8 b_first_side(u8, u8, u8);
+u8 GetWhoStrikesFirst(u8, u8, u8);
 void TurnValuesCleanUp(u8);
 void SpecialStatusesClear(void);
 void sub_80138F0(void);

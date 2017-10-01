@@ -828,7 +828,7 @@ static bool8 sub_804E2EC(void)
     switch (gBerryBlenderData->field_1)
     {
     case 0:
-        sub_800D238(gUnknown_08E6C100, &ewram[0x10000]);
+        LZDecompressWram(gUnknown_08E6C100, &ewram[0x10000]);
         gBerryBlenderData->field_1++;
         break;
     case 1:
@@ -862,11 +862,11 @@ static bool8 sub_804E2EC(void)
         }
         break;
     case 3:
-        sub_800D238(gUnknown_08E6C920, &ewram[0x10000]);
+        LZDecompressWram(gUnknown_08E6C920, &ewram[0x10000]);
         gBerryBlenderData->field_1++;
         break;
     case 4:
-        sub_800D238(gUnknown_08E6D354, &ewram[0x13000]);
+        LZDecompressWram(gUnknown_08E6D354, &ewram[0x13000]);
         gBerryBlenderData->field_1++;
         break;
     case 5:

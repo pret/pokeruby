@@ -353,7 +353,7 @@ static void sub_8106AC4(u16 species, u8 arg1)
     void *pal;
 
     // Unsure what gUnknown_03005E8C->var0 is supposed to be.
-    pal = species_and_otid_get_pal(species, gUnknown_03005E8C->var4, gUnknown_03005E8C->var0);
+    pal = GetMonSpritePalFromOtIdPersonality(species, gUnknown_03005E8C->var4, gUnknown_03005E8C->var0);
     LZDecompressVram(pal, gUnknown_03005E90);
 
     if (arg1 == 1)
@@ -402,7 +402,7 @@ static void sub_8106AC4(u16 arg0, u8 arg2)
     ldr r1, [r0, 0x4]\n\
     ldr r2, [r0]\n\
     adds r0, r6, 0\n\
-    bl species_and_otid_get_pal\n\
+    bl GetMonSpritePalFromOtIdPersonality\n\
     ldr r1, _08106B2C @ =gUnknown_03005E90\n\
     mov r8, r1\n\
     ldr r1, [r1]\n\

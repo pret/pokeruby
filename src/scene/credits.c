@@ -1387,7 +1387,7 @@ static u8 sub_81456B4(u16 species, u16 x, u16 y, u16 position)
         1
     );
 
-    lzPaletteData = species_and_otid_get_pal(species, 0, 0xFFFF);
+    lzPaletteData = GetMonSpritePalFromOtIdPersonality(species, 0, 0xFFFF);
     LoadCompressedPalette(lzPaletteData, 0x100 + (position * 16), 0x20);
     sub_8143648(position, position);
 
@@ -1433,7 +1433,7 @@ static void sub_81458DC(void)
 
     for (dexNum = 1, seenTypesCount = 0; dexNum < 386; dexNum++)
     {
-        if (GetNationalPokedexFlag(dexNum, 1))
+        if (GetSetPokedexFlag(dexNum, 1))
         {
             unk201C000->unk90[seenTypesCount] = dexNum;
             seenTypesCount++;
