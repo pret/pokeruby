@@ -145,15 +145,15 @@ gScriptCmdTable:: @ 814AE30
 	.4byte ScrCmd_contestlinktransfer     @ 0x8E
 	.4byte ScrCmd_random                  @ 0x8F
 	.4byte ScrCmd_givemoney               @ 0x90
-	.4byte ScrCmd_paymoney                @ 0x91
+	.4byte ScrCmd_takemoney                @ 0x91
 	.4byte ScrCmd_checkmoney              @ 0x92
-	.4byte ScrCmd_showmoney               @ 0x93
-	.4byte ScrCmd_hidemoney               @ 0x94
-	.4byte ScrCmd_updatemoney             @ 0x95
-	.4byte ScrCmd_event_96                @ 0x96
+	.4byte ScrCmd_showmoneybox               @ 0x93
+	.4byte ScrCmd_hidemoneybox               @ 0x94
+	.4byte ScrCmd_updatemoneybox             @ 0x95
+	.4byte ScrCmd_getpricereduction                @ 0x96
 	.4byte ScrCmd_fadescreen              @ 0x97
 	.4byte ScrCmd_fadescreendelay         @ 0x98
-	.4byte ScrCmd_darken                  @ 0x99
+	.4byte ScrCmd_setdarklevel                  @ 0x99
 	.4byte ScrCmd_lighten                 @ 0x9A
 	.4byte ScrCmd_message2                @ 0x9B
 	.4byte ScrCmd_doanimation             @ 0x9C

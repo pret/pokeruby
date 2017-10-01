@@ -3,7 +3,7 @@ LilycoveCity_DepartmentStoreRooftop_MapScripts:: @ 815A13F
 	.byte 0
 
 LilycoveCity_DepartmentStoreRooftop_MapScript1_15A145:: @ 815A145
-	event_96 3
+	getpricereduction 3
 	compare RESULT, 1
 	call_if 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A15F
 	compare RESULT, 0
@@ -51,7 +51,7 @@ LilycoveCity_DepartmentStoreRooftop_Decorations:: @ 815A180
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A1A0:: @ 815A1A0
 	lock
 	faceplayer
-	event_96 3
+	getpricereduction 3
 	compare RESULT, 1
 	call_if 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A1BA
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_18C61F, 4
@@ -71,7 +71,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A1CD:: @ 815A1CD
 	lockall
 	message LilycoveCity_DepartmentStoreRooftop_Text_18C72B
 	waitmessage
-	showmoney 0, 0
+	showmoneybox 0, 0
 	nop
 	goto LilycoveCity_DepartmentStoreRooftop_EventScript_15A1DE
 	end
@@ -115,15 +115,15 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A24B:: @ 815A24B
 	return
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A252:: @ 815A252
-	paymoney 0xc8, 0
+	takemoney 0xc8, 0
 	return
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A259:: @ 815A259
-	paymoney 0x12c, 0
+	takemoney 0x12c, 0
 	return
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A260:: @ 815A260
-	paymoney 0x15e, 0
+	takemoney 0x15e, 0
 	return
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A267:: @ 815A267
@@ -144,7 +144,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A267:: @ 815A267
 	call_if 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A259
 	compare 0x4001, 2
 	call_if 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A260
-	updatemoney 0, 0
+	updatemoneybox 0, 0
 	nop
 	getitemname 0, 0x4000
 	playse 106
@@ -197,6 +197,6 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A388:: @ 815A388
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A396:: @ 815A396
-	hidemoney 0, 0
+	hidemoneybox 0, 0
 	releaseall
 	end

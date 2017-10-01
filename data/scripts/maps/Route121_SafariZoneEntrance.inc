@@ -49,7 +49,7 @@ Route121_SafariZoneEntrance_EventScript_15C383:: @ 815C383
 	lockall
 	applymovement 255, Route121_SafariZoneEntrance_Movement_1A0841
 	waitmovement 0
-	showmoney 0, 0
+	showmoneybox 0, 0
 	nop
 	msgbox Route121_SafariZoneEntrance_Text_1C3832, 5
 	compare RESULT, 1
@@ -67,8 +67,8 @@ Route121_SafariZoneEntrance_EventScript_15C3B3:: @ 815C3B3
 	compare RESULT, 0
 	goto_if_eq Route121_SafariZoneEntrance_EventScript_15C45E
 	msgbox Route121_SafariZoneEntrance_Text_1C38D9, 4
-	paymoney 0x1f4, 0
-	updatemoney 0, 0
+	takemoney 0x1f4, 0
+	updatemoneybox 0, 0
 	nop
 	msgbox Route121_SafariZoneEntrance_Text_1C38F4, 4
 	playfanfare 370
@@ -77,7 +77,7 @@ Route121_SafariZoneEntrance_EventScript_15C3B3:: @ 815C3B3
 	waitmessage
 	msgbox Route121_SafariZoneEntrance_Text_1C392D, 4
 	closemessage
-	hidemoney 0, 0
+	hidemoneybox 0, 0
 	applymovement 255, Route121_SafariZoneEntrance_Movement_15C47E
 	waitmovement 0
 	special EnterSafariMode
@@ -112,7 +112,7 @@ Route121_SafariZoneEntrance_EventScript_15C45E:: @ 815C45E
 
 Route121_SafariZoneEntrance_EventScript_15C46C:: @ 815C46C
 	closemessage
-	hidemoney 0, 0
+	hidemoneybox 0, 0
 	applymovement 255, Route121_SafariZoneEntrance_Movement_15C47C
 	waitmovement 0
 	releaseall

@@ -608,7 +608,7 @@ bool8 ScrCmd_lighten(struct ScriptContext *ctx)
     return TRUE;
 }
 
-bool8 ScrCmd_darken(struct ScriptContext *ctx)
+bool8 ScrCmd_setdarklevel(struct ScriptContext *ctx)
 {
     u16 flashLevel = VarGet(ScriptReadHalfword(ctx));
 
@@ -1608,7 +1608,7 @@ bool8 ScrCmd_givemoney(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_paymoney(struct ScriptContext *ctx)
+bool8 ScrCmd_takemoney(struct ScriptContext *ctx)
 {
     u32 amount = ScriptReadWord(ctx);
     u8 ignore = ScriptReadByte(ctx);
@@ -1628,7 +1628,7 @@ bool8 ScrCmd_checkmoney(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_showmoney(struct ScriptContext *ctx)
+bool8 ScrCmd_showmoneybox(struct ScriptContext *ctx)
 {
     u8 x = ScriptReadByte(ctx);
     u8 y = ScriptReadByte(ctx);
@@ -1639,7 +1639,7 @@ bool8 ScrCmd_showmoney(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_hidemoney(struct ScriptContext *ctx)
+bool8 ScrCmd_hidemoneybox(struct ScriptContext *ctx)
 {
     u8 x = ScriptReadByte(ctx);
     u8 y = ScriptReadByte(ctx);
@@ -1648,7 +1648,7 @@ bool8 ScrCmd_hidemoney(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_updatemoney(struct ScriptContext *ctx)
+bool8 ScrCmd_updatemoneybox(struct ScriptContext *ctx)
 {
     u8 x = ScriptReadByte(ctx);
     u8 y = ScriptReadByte(ctx);
@@ -1800,7 +1800,7 @@ bool8 ScrCmd_plantberrytree(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_event_96(struct ScriptContext *ctx)
+bool8 ScrCmd_getpricereduction(struct ScriptContext *ctx)
 {
     u16 value = VarGet(ScriptReadHalfword(ctx));
 

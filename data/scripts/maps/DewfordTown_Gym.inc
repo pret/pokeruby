@@ -20,23 +20,23 @@ DewfordTown_Gym_EventScript_153071:: @ 8153071
 	goto DewfordTown_Gym_EventScript_1530AE
 
 DewfordTown_Gym_EventScript_1530AA:: @ 81530AA
-	darken 0
+	setdarklevel 0
 	return
 
 DewfordTown_Gym_EventScript_1530AE:: @ 81530AE
-	darken 1
+	setdarklevel 1
 	return
 
 DewfordTown_Gym_EventScript_1530B2:: @ 81530B2
-	darken 2
+	setdarklevel 2
 	return
 
 DewfordTown_Gym_EventScript_1530B6:: @ 81530B6
-	darken 3
+	setdarklevel 3
 	return
 
 DewfordTown_Gym_EventScript_1530BA:: @ 81530BA
-	darken 4
+	setdarklevel 4
 	return
 
 DewfordTown_Gym_EventScript_1530BE:: @ 81530BE

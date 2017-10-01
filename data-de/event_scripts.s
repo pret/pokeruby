@@ -4796,7 +4796,7 @@ BattleTower_Lobby_EventScript_1AE30F:: @ 81AE30F
 
 gUnknown_081B694A:: @ 81B694A
 	lighten 1
-	darken 1
+	setdarklevel 1
 	end
 
 	.include "data/scripts/players_house.inc"
@@ -4825,7 +4825,7 @@ MauvilleCity_GameCorner_EventScript_1C407E:: @ 81C407E
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
 	setvar 0x8004, 0
-	event_96 2
+	getpricereduction 2
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1C40DA
 	addvar 0x8004, 128
@@ -4837,7 +4837,7 @@ MauvilleCity_GameCorner_EventScript_1C40AC:: @ 81C40AC
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
 	setvar 0x8004, 1
-	event_96 2
+	getpricereduction 2
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1C40DA
 	addvar 0x8004, 128

@@ -31,13 +31,13 @@ SlateportCity_OceanicMuseum_1F_EventScript_155AF5:: @ 8155AF5
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_155B06:: @ 8155B06
-	showmoney 0, 0
+	showmoneybox 0, 0
 	nop
 	msgbox SlateportCity_OceanicMuseum_1F_Text_17E18D, 5
 	compare RESULT, 1
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_155B2D
 	closemessage
-	hidemoney 0, 0
+	hidemoneybox 0, 0
 	applymovement 255, SlateportCity_OceanicMuseum_1F_Movement_155B8D
 	waitmovement 0
 	releaseall
@@ -47,12 +47,12 @@ SlateportCity_OceanicMuseum_1F_EventScript_155B2D:: @ 8155B2D
 	checkmoney 0x32, 0
 	compare RESULT, 0
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_155B5A
-	paymoney 0x32, 0
-	updatemoney 0, 0
+	takemoney 0x32, 0
+	updatemoneybox 0, 0
 	nop
 	msgbox SlateportCity_OceanicMuseum_1F_Text_17E1DE, 4
 	setvar 0x40aa, 1
-	hidemoney 0, 0
+	hidemoneybox 0, 0
 	releaseall
 	end
 
@@ -61,7 +61,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_155B5A:: @ 8155B5A
 	goto_if 0, SlateportCity_OceanicMuseum_1F_EventScript_155B7B
 	msgbox SlateportCity_OceanicMuseum_1F_Text_17E1F5, 4
 	closemessage
-	hidemoney 0, 0
+	hidemoneybox 0, 0
 	applymovement 255, SlateportCity_OceanicMuseum_1F_Movement_155B8D
 	waitmovement 0
 	releaseall
@@ -70,7 +70,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_155B5A:: @ 8155B5A
 SlateportCity_OceanicMuseum_1F_EventScript_155B7B:: @ 8155B7B
 	msgbox SlateportCity_OceanicMuseum_1F_Text_17E22D, 4
 	setvar 0x40aa, 1
-	hidemoney 0, 0
+	hidemoneybox 0, 0
 	releaseall
 	end
 

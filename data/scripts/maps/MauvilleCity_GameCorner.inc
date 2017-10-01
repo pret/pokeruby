@@ -10,7 +10,7 @@ MauvilleCity_GameCorner_EventScript_156A34:: @ 8156A34
 	goto_if_eq MauvilleCity_GameCorner_EventScript_156B32
 	message MauvilleCity_GameCorner_Text_181CB4
 	waitmessage
-	showmoney 0, 0
+	showmoneybox 0, 0
 	nop
 	showcoins 0, 5
 	goto MauvilleCity_GameCorner_EventScript_156A60
@@ -39,13 +39,13 @@ MauvilleCity_GameCorner_EventScript_156AAE:: @ 8156AAE
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_156B3C
 	givecoins 50
-	paymoney 0x3e8, 0
-	updatemoney 0, 0
+	takemoney 0x3e8, 0
+	updatemoneybox 0, 0
 	nop
 	updatecoins 0, 5
 	playse 95
 	msgbox MauvilleCity_GameCorner_Text_181CFE, 4
-	hidemoney 0, 0
+	hidemoneybox 0, 0
 	hidecoins 0, 5
 	release
 	end
@@ -58,13 +58,13 @@ MauvilleCity_GameCorner_EventScript_156AF0:: @ 8156AF0
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_156B3C
 	givecoins 500
-	paymoney 0x2710, 0
-	updatemoney 0, 0
+	takemoney 0x2710, 0
+	updatemoneybox 0, 0
 	nop
 	updatecoins 0, 5
 	playse 95
 	msgbox MauvilleCity_GameCorner_Text_181CFE, 4
-	hidemoney 0, 0
+	hidemoneybox 0, 0
 	hidecoins 0, 5
 	release
 	end
@@ -76,21 +76,21 @@ MauvilleCity_GameCorner_EventScript_156B32:: @ 8156B32
 
 MauvilleCity_GameCorner_EventScript_156B3C:: @ 8156B3C
 	msgbox MauvilleCity_GameCorner_Text_181D28, 4
-	hidemoney 0, 0
+	hidemoneybox 0, 0
 	hidecoins 0, 5
 	release
 	end
 
 MauvilleCity_GameCorner_EventScript_156B4C:: @ 8156B4C
 	msgbox MauvilleCity_GameCorner_Text_181D73, 4
-	hidemoney 0, 0
+	hidemoneybox 0, 0
 	hidecoins 0, 5
 	release
 	end
 
 MauvilleCity_GameCorner_EventScript_156B5C:: @ 8156B5C
 	msgbox MauvilleCity_GameCorner_Text_181D57, 4
-	hidemoney 0, 0
+	hidemoneybox 0, 0
 	hidecoins 0, 5
 	release
 	end

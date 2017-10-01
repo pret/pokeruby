@@ -989,7 +989,7 @@
 	.endm
 
 	@ If check is 0x00, this command subtracts value from the player's money.
-	.macro paymoney value, check
+	.macro takemoney value, check
 	.byte 0x91
 	.4byte \value
 	.byte \check
@@ -1003,28 +1003,28 @@
 	.endm
 
 	@ Spawns a secondary box showing how much money the player has.
-	.macro showmoney X, Y
+	.macro showmoneybox X, Y
 	.byte 0x93
 	.byte \X
 	.byte \Y
 	.endm
 
 	@ Hides the secondary box spawned by showmoney.
-	.macro hidemoney X, Y
+	.macro hidemoneybox X, Y
 	.byte 0x94
 	.byte \X
 	.byte \Y
 	.endm
 
 	@ Updates the secondary box spawned by showmoney. (What does it do with its arguments?)
-	.macro updatemoney X, Y
+	.macro updatemoneybox X, Y
 	.byte 0x95
 	.byte \X
 	.byte \Y
 	.endm
 
 	@ In FireRed, this command is a nop.
-	.macro event_96 word
+	.macro getpricereduction word
 	.byte 0x96
 	.2byte \word
 	.endm
@@ -1041,7 +1041,7 @@
 	.byte \byte2
 	.endm
 
-	.macro darken word
+	.macro setdarklevel word
 	.byte 0x99
 	.2byte \word
 	.endm

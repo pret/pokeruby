@@ -15,7 +15,7 @@ MtChimney_MapScript1_15CF92:: @ 815CF92
 MtChimney_EventScript_15CF95:: @ 815CF95
 	lock
 	faceplayer
-	showmoney 0, 0
+	showmoneybox 0, 0
 	nop
 	msgbox MtChimney_Text_195760, 5
 	compare RESULT, 0
@@ -30,31 +30,31 @@ MtChimney_EventScript_15CF95:: @ 815CF95
 	giveitem ITEM_LAVA_COOKIE
 	compare RESULT, 0
 	goto_if_eq MtChimney_EventScript_15CFF3
-	hidemoney 0, 0
+	hidemoneybox 0, 0
 	release
 	end
 
 MtChimney_EventScript_15CFF3:: @ 815CFF3
 	msgbox MtChimney_Text_1A0CC2, 4
-	hidemoney 0, 0
+	hidemoneybox 0, 0
 	release
 	end
 
 MtChimney_EventScript_15D000:: @ 815D000
-	paymoney 0xc8, 0
-	updatemoney 0, 0
+	takemoney 0xc8, 0
+	updatemoneybox 0, 0
 	nop
 	return
 
 MtChimney_EventScript_15D00B:: @ 815D00B
 	msgbox MtChimney_Text_1957F7, 4
-	hidemoney 0, 0
+	hidemoneybox 0, 0
 	release
 	end
 
 MtChimney_EventScript_15D018:: @ 815D018
 	msgbox MtChimney_Text_1957BA, 4
-	hidemoney 0, 0
+	hidemoneybox 0, 0
 	release
 	end
 
