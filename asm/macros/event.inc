@@ -178,7 +178,7 @@
 	.endm
 
 	@ Compares the least-significant byte of the value of script bank a to a fixed byte value (b).
-	.macro compare_local_to_imm a, b
+	.macro compare_local_to_value a, b
 	.byte 0x1c
 	.byte \a
 	.byte \b
@@ -199,7 +199,7 @@
 	.endm
 
 	@ Compares the byte located at offset a to a fixed byte value (b).
-	.macro compare_addr_to_imm a, b
+	.macro compare_addr_to_value a, b
 	.byte 0x1f
 	.4byte \a
 	.byte \b
@@ -213,7 +213,7 @@
 	.endm
 
 	@ Compares the value of `var` to a fixed word value (b).
-	.macro compare_var_to_imm var, value
+	.macro compare_var_to_value var, value
 	.byte 0x21
 	.2byte \var
 	.2byte \value
@@ -232,7 +232,7 @@
 		.if ((\arg1 >> 12) == 4 || (\arg1 >> 12) == 8) && ((\arg2 >> 12) == 4 || (\arg2 >> 12) == 8)
 			compare_var_to_var \arg1, \arg2
 		.elseif ((\arg1 >> 12) == 4 || (\arg1 >> 12) == 8) && (\arg2 >= 0 && \arg2 <= 0xFFFF)
-			compare_var_to_imm \arg1, \arg2
+			compare_var_to_value \arg1, \arg2
 		.else
 			.error "Invalid arguments for 'compare'"
 		.endif

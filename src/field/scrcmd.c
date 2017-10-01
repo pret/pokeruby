@@ -398,7 +398,7 @@ bool8 ScrCmd_compare_local_to_local(struct ScriptContext *ctx)
 }
 
 // comparelocaltoimm
-bool8 ScrCmd_compare_local_to_imm(struct ScriptContext *ctx)
+bool8 ScrCmd_compare_local_to_value(struct ScriptContext *ctx)
 {
     u8 value1 = ctx->data[ScriptReadByte(ctx)];
     u8 value2 = ScriptReadByte(ctx);
@@ -425,7 +425,7 @@ bool8 ScrCmd_compare_addr_to_local(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_compare_addr_to_imm(struct ScriptContext *ctx)
+bool8 ScrCmd_compare_addr_to_value(struct ScriptContext *ctx)
 {
     u8 value1 = *(u8 *)ScriptReadWord(ctx);
     u8 value2 = ScriptReadByte(ctx);
@@ -443,7 +443,7 @@ bool8 ScrCmd_compare_addr_to_addr(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_compare_var_to_imm(struct ScriptContext *ctx)
+bool8 ScrCmd_compare_var_to_value(struct ScriptContext *ctx)
 {
     u16 value1 = *GetVarPointer(ScriptReadHalfword(ctx));
     u16 value2 = ScriptReadHalfword(ctx);
