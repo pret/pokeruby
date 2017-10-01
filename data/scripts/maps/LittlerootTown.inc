@@ -54,7 +54,7 @@ LittlerootTown_EventScript_14D59A:: @ 814D59A
 LittlerootTown_EventScript_14D5A6:: @ 814D5A6
 	clearflag 752
 	setobjectmovementtype 4, 8
-	checkgender
+	checkplayergender
 	compare RESULT, 0
 	call_if 1, LittlerootTown_EventScript_14D5C5
 	compare RESULT, 1
@@ -333,7 +333,7 @@ LittlerootTown_EventScript_14D7FF:: @ 814D7FF
 
 LittlerootTown_EventScript_14D808:: @ 814D808
 	lockall
-	checkgender
+	checkplayergender
 	compare RESULT, 0
 	call_if 1, LittlerootTown_EventScript_14D822
 	compare RESULT, 1
@@ -351,7 +351,7 @@ LittlerootTown_EventScript_14D82B:: @ 814D82B
 
 LittlerootTown_EventScript_14D834:: @ 814D834
 	lockall
-	checkgender
+	checkplayergender
 	compare RESULT, 0
 	call_if 1, LittlerootTown_EventScript_14D84E
 	compare RESULT, 1
@@ -406,25 +406,25 @@ LittlerootTown_EventScript_14D8AA:: @ 814D8AA
 	end
 
 LittlerootTown_EventScript_14D8B6:: @ 814D8B6
-	checkgender
+	checkplayergender
 	compare RESULT, 0
 	call_if 1, LittlerootTown_EventScript_14D93C
 	compare RESULT, 1
 	call_if 1, LittlerootTown_EventScript_14D947
-	checkgender
+	checkplayergender
 	compare RESULT, 0
 	call_if 1, LittlerootTown_EventScript_14D926
 	compare RESULT, 1
 	call_if 1, LittlerootTown_EventScript_14D931
 	msgbox LittlerootTown_Text_16A8EE, 4
 	closemessage
-	checkgender
+	checkplayergender
 	compare RESULT, 0
 	call_if 1, LittlerootTown_EventScript_14D952
 	compare RESULT, 1
 	call_if 1, LittlerootTown_EventScript_14D995
 	call LittlerootTown_EventScript_14DD38
-	checkgender
+	checkplayergender
 	compare RESULT, 0
 	call_if 1, LittlerootTown_EventScript_14DAAA
 	compare RESULT, 1
@@ -841,7 +841,7 @@ LittlerootTown_Movement_14DCE0:: @ 814DCE0
 LittlerootTown_EventScript_14DCE2:: @ 814DCE2
 	lock
 	faceplayer
-	checkgender
+	checkplayergender
 	compare RESULT, 0
 	call_if 1, LittlerootTown_EventScript_14D926
 	compare RESULT, 1

@@ -300,7 +300,7 @@ RusturfTunnel_EventScript_15C9D7:: @ 815C9D7
 	lock
 	faceplayer
 	waitse
-	pokecry SPECIES_WINGULL, 0
+	playpokecry SPECIES_WINGULL, 0
 	msgbox RusturfTunnel_Text_194188, 4
 	waitpokecry
 	release
@@ -332,7 +332,7 @@ RusturfTunnel_EventScript_15C9EA:: @ 815C9EA
 	message RusturfTunnel_Text_19434F
 	waitmessage
 	waitse
-	pokecry SPECIES_WINGULL, 0
+	playpokecry SPECIES_WINGULL, 0
 	waitbutton
 	waitpokecry
 	closemessage

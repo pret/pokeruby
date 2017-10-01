@@ -58,7 +58,7 @@ FortreeCity_House1_EventScript_157EC0:: @ 8157EC0
 	lock
 	faceplayer
 	waitse
-	pokecry SPECIES_ZIGZAGOON, 0
+	playpokecry SPECIES_ZIGZAGOON, 0
 	msgbox FortreeCity_House1_Text_185888, 4
 	waitpokecry
 	release

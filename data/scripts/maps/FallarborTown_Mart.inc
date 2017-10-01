@@ -41,7 +41,7 @@ FallarborTown_Mart_EventScript_1539AE:: @ 81539AE
 	lock
 	faceplayer
 	waitse
-	pokecry SPECIES_SKITTY, 0
+	playpokecry SPECIES_SKITTY, 0
 	msgbox FallarborTown_Mart_Text_1770D3, 4
 	waitpokecry
 	release

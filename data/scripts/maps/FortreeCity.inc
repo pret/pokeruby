@@ -76,7 +76,7 @@ FortreeCity_EventScript_14C9E4:: @ 814C9E4
 	applymovement LAST_TALKED, FortreeCity_Movement_1A0662
 	waitmovement 0
 	waitse
-	pokecry SPECIES_KECLEON, 2
+	playpokecry SPECIES_KECLEON, 2
 	delay 40
 	waitpokecry
 	applymovement LAST_TALKED, FortreeCity_Movement_14CA13

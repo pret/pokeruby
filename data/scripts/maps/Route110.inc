@@ -325,7 +325,7 @@ Route110_EventScript_14FD29:: @ 814FD29
 
 Route110_EventScript_14FD34:: @ 814FD34
 	lockall
-	checkgender
+	checkplayergender
 	compare RESULT, 0
 	call_if 1, Route110_EventScript_14FDA7
 	compare RESULT, 1
@@ -343,7 +343,7 @@ Route110_EventScript_14FD34:: @ 814FD34
 	call_if 1, Route110_EventScript_14FF1F
 	compare 0x8008, 3
 	call_if 1, Route110_EventScript_14FF2A
-	checkgender
+	checkplayergender
 	compare RESULT, 0
 	goto_if_eq Route110_EventScript_14FDB1
 	compare RESULT, 1

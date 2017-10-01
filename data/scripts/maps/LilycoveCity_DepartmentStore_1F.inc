@@ -134,7 +134,7 @@ LilycoveCity_DepartmentStore_1F_EventScript_159EF2:: @ 8159EF2
 	lock
 	faceplayer
 	waitse
-	pokecry SPECIES_AZUMARILL, 0
+	playpokecry SPECIES_AZUMARILL, 0
 	msgbox LilycoveCity_DepartmentStore_1F_Text_18C0C3, 4
 	waitpokecry
 	release

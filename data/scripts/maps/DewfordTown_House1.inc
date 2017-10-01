@@ -13,7 +13,7 @@ DewfordTown_House1_EventScript_153001:: @ 8153001
 	lock
 	faceplayer
 	waitse
-	pokecry SPECIES_ZIGZAGOON, 0
+	playpokecry SPECIES_ZIGZAGOON, 0
 	msgbox DewfordTown_House1_Text_174CC8, 4
 	waitpokecry
 	release

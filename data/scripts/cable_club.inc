@@ -219,7 +219,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A3F5E:: @ 81A3F5E
 	special SavePlayerParty
 	special LoadPlayerBag
 	copyvar 0x4087, 0x8004
-	message2 OldaleTown_PokemonCenter_2F_Text_1A4A22
+	messageautoscroll OldaleTown_PokemonCenter_2F_Text_1A4A22
 	waitmessage
 	setmaptile 5, 3, 514, 0
 	special DrawWholeMapView
@@ -384,7 +384,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A40FA:: @ 81A40FA
 OldaleTown_PokemonCenter_2F_EventScript_1A4166:: @ 81A4166
 	setvar 0x8004, 3
 	copyvar 0x4087, 0x8004
-	message2 OldaleTown_PokemonCenter_2F_Text_1A4A22
+	messageautoscroll OldaleTown_PokemonCenter_2F_Text_1A4A22
 	waitmessage
 	setmaptile 8, 3, 514, 0
 	special DrawWholeMapView
@@ -482,7 +482,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A4229:: @ 81A4229
 OldaleTown_PokemonCenter_2F_EventScript_1A4294:: @ 81A4294
 	setvar 0x8004, 4
 	copyvar 0x4087, 0x8004
-	message2 OldaleTown_PokemonCenter_2F_Text_1A4A22
+	messageautoscroll OldaleTown_PokemonCenter_2F_Text_1A4A22
 	waitmessage
 	setmaptile 11, 3, 514, 0
 	special DrawWholeMapView
@@ -797,7 +797,7 @@ TradeRoom_PromptToCancelLink:: @ 81A44E5
 	end
 
 TradeRoom_TerminateLink:: @ 81A44FE
-	message2 TradeRoom_TerminatingLink
+	messageautoscroll TradeRoom_TerminatingLink
 	waitmessage
 	special sub_80839D0
 	end

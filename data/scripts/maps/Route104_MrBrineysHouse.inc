@@ -92,7 +92,7 @@ Route104_MrBrineysHouse_EventScript_15BDD1:: @ 815BDD1
 	lock
 	faceplayer
 	waitse
-	pokecry SPECIES_WINGULL, 0
+	playpokecry SPECIES_WINGULL, 0
 	msgbox Route104_MrBrineysHouse_Text_191FB9, 4
 	waitpokecry
 	release

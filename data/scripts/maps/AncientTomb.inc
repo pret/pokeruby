@@ -58,7 +58,7 @@ AncientTomb_EventScript_15F050:: @ 815F050
 	lock
 	faceplayer
 	waitse
-	pokecry SPECIES_REGISTEEL, 2
+	playpokecry SPECIES_REGISTEEL, 2
 	delay 40
 	waitpokecry
 	setwildbattle SPECIES_REGISTEEL, 40, ITEM_NONE

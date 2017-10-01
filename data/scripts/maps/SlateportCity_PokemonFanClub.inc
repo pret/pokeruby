@@ -236,7 +236,7 @@ SlateportCity_PokemonFanClub_EventScript_155A91:: @ 8155A91
 	lock
 	faceplayer
 	waitse
-	pokecry SPECIES_SKITTY, 0
+	playpokecry SPECIES_SKITTY, 0
 	msgbox SlateportCity_PokemonFanClub_Text_17E14E, 4
 	waitpokecry
 	release
@@ -246,7 +246,7 @@ SlateportCity_PokemonFanClub_EventScript_155AA4:: @ 8155AA4
 	lock
 	faceplayer
 	waitse
-	pokecry SPECIES_ZIGZAGOON, 0
+	playpokecry SPECIES_ZIGZAGOON, 0
 	msgbox SlateportCity_PokemonFanClub_Text_17E164, 4
 	waitpokecry
 	release
@@ -256,7 +256,7 @@ SlateportCity_PokemonFanClub_EventScript_155AB7:: @ 8155AB7
 	lock
 	faceplayer
 	waitse
-	pokecry SPECIES_AZUMARILL, 0
+	playpokecry SPECIES_AZUMARILL, 0
 	msgbox SlateportCity_PokemonFanClub_Text_17E178, 4
 	waitpokecry
 	release

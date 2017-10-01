@@ -601,7 +601,7 @@ bool8 ScrCmd_inccounter(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_lighten(struct ScriptContext *ctx)
+bool8 ScrCmd_animdarklevel(struct ScriptContext *ctx)
 {
     sub_8081594(ScriptReadByte(ctx));
     ScriptContext1_Stop();
@@ -1236,7 +1236,7 @@ bool8 ScrCmd_message(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_message2(struct ScriptContext *ctx)
+bool8 ScrCmd_messageautoscroll(struct ScriptContext *ctx)
 {
     u8 *msg = (u8 *)ScriptReadWord(ctx);
 
@@ -1836,7 +1836,7 @@ bool8 ScrCmd_contestlinktransfer(struct ScriptContext *ctx)
     return TRUE;
 }
 
-bool8 ScrCmd_doanimation(struct ScriptContext *ctx)
+bool8 ScrCmd_dofieldeffect(struct ScriptContext *ctx)
 {
     u16 effectId = VarGet(ScriptReadHalfword(ctx));
 
@@ -1845,7 +1845,7 @@ bool8 ScrCmd_doanimation(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_setanimation(struct ScriptContext *ctx)
+bool8 ScrCmd_setfieldeffect(struct ScriptContext *ctx)
 {
     u8 argNum = ScriptReadByte(ctx);
 
@@ -1861,7 +1861,7 @@ static bool8 sub_8067B48()
         return FALSE;
 }
 
-bool8 ScrCmd_checkanimation(struct ScriptContext *ctx)
+bool8 ScrCmd_waitfieldeffect(struct ScriptContext *ctx)
 {
     sFieldEffectScriptId = VarGet(ScriptReadHalfword(ctx));
     SetupNativeScript(ctx, sub_8067B48);
@@ -1876,13 +1876,13 @@ bool8 ScrCmd_sethealplace(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_checkgender(struct ScriptContext *ctx)
+bool8 ScrCmd_checkplayergender(struct ScriptContext *ctx)
 {
     gScriptResult = gSaveBlock2.playerGender;
     return FALSE;
 }
 
-bool8 ScrCmd_pokecry(struct ScriptContext *ctx)
+bool8 ScrCmd_playpokecry(struct ScriptContext *ctx)
 {
     u16 species = VarGet(ScriptReadHalfword(ctx));
     u16 mode = VarGet(ScriptReadHalfword(ctx));

@@ -88,7 +88,7 @@ SSTidalCorridor_EventScript_15FD9F:: @ 815FD9F
 	lock
 	faceplayer
 	waitse
-	pokecry SPECIES_WINGULL, 0
+	playpokecry SPECIES_WINGULL, 0
 	msgbox SSTidalCorridor_Text_199388, 4
 	waitpokecry
 	release

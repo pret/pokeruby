@@ -9,7 +9,7 @@ Route103_MapScript1_14EB87:: @ 814EB87
 
 Route103_EventScript_14EB92:: @ 814EB92
 	lockall
-	checkgender
+	checkplayergender
 	compare RESULT, 0
 	goto_if_eq Route103_EventScript_14EBAB
 	compare RESULT, 1

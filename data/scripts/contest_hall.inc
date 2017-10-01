@@ -276,7 +276,7 @@ LinkContestRoom1_EventScript_1A525F:: @ 81A525F
 	return
 
 LinkContestRoom1_EventScript_1A5273:: @ 81A5273
-	message2 LinkContestRoom1_Text_1A6976
+	messageautoscroll LinkContestRoom1_Text_1A6976
 	waitmessage
 	return
 
@@ -364,7 +364,7 @@ LinkContestRoom1_EventScript_1A535E:: @ 81A535E
 	return
 
 LinkContestRoom1_EventScript_1A5370:: @ 81A5370
-	message2 LinkContestRoom1_Text_1A6A04
+	messageautoscroll LinkContestRoom1_Text_1A6A04
 	waitmessage
 	return
 
@@ -391,7 +391,7 @@ LinkContestRoom1_EventScript_1A53B3:: @ 81A53B3
 	return
 
 LinkContestRoom1_EventScript_1A53C7:: @ 81A53C7
-	message2 LinkContestRoom1_Text_1A6A1F
+	messageautoscroll LinkContestRoom1_Text_1A6A1F
 	waitmessage
 	return
 
@@ -402,7 +402,7 @@ LinkContestRoom1_EventScript_1A53CE:: @ 81A53CE
 	return
 
 LinkContestRoom1_EventScript_1A53DF:: @ 81A53DF
-	message2 LinkContestRoom1_Text_1A6AE1
+	messageautoscroll LinkContestRoom1_Text_1A6AE1
 	return
 
 LinkContestRoom1_EventScript_1A53E5:: @ 81A53E5
@@ -788,7 +788,7 @@ LinkContestRoom1_EventScript_1A5930:: @ 81A5930
 	return
 
 LinkContestRoom1_EventScript_1A5944:: @ 81A5944
-	message2 LinkContestRoom1_Text_1A6AF5
+	messageautoscroll LinkContestRoom1_Text_1A6AF5
 	return
 
 LinkContestRoom1_EventScript_1A594A:: @ 81A594A
@@ -815,7 +815,7 @@ LinkContestRoom1_EventScript_1A5984:: @ 81A5984
 	return
 
 LinkContestRoom1_EventScript_1A5998:: @ 81A5998
-	message2 LinkContestRoom1_Text_1A6C06
+	messageautoscroll LinkContestRoom1_Text_1A6C06
 	waitmessage
 	delay 30
 	return
@@ -827,7 +827,7 @@ LinkContestRoom1_EventScript_1A59A2:: @ 81A59A2
 	return
 
 LinkContestRoom1_EventScript_1A59B6:: @ 81A59B6
-	message2 LinkContestRoom1_Text_1A6C21
+	messageautoscroll LinkContestRoom1_Text_1A6C21
 	waitmessage
 	delay 30
 	return
@@ -839,7 +839,7 @@ LinkContestRoom1_EventScript_1A59C0:: @ 81A59C0
 	return
 
 LinkContestRoom1_EventScript_1A59D4:: @ 81A59D4
-	message2 LinkContestRoom1_Text_1A6C9D
+	messageautoscroll LinkContestRoom1_Text_1A6C9D
 	waitmessage
 	delay 30
 	return
@@ -851,7 +851,7 @@ LinkContestRoom1_EventScript_1A59DE:: @ 81A59DE
 	return
 
 LinkContestRoom1_EventScript_1A59F2:: @ 81A59F2
-	message2 LinkContestRoom1_Text_1A6D16
+	messageautoscroll LinkContestRoom1_Text_1A6D16
 	waitmessage
 	delay 30
 	return
@@ -901,7 +901,7 @@ LinkContestRoom1_EventScript_1A5A75:: @ 81A5A75
 	return
 
 LinkContestRoom1_EventScript_1A5A89:: @ 81A5A89
-	message2 LinkContestRoom1_Text_1A6D3C
+	messageautoscroll LinkContestRoom1_Text_1A6D3C
 	waitmessage
 	return
 

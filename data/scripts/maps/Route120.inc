@@ -222,7 +222,7 @@ Route120_EventScript_15189D:: @ 815189D
 	applymovement 30, Route120_Movement_1A0662
 	waitmovement 0
 	waitse
-	pokecry SPECIES_KECLEON, 2
+	playpokecry SPECIES_KECLEON, 2
 	delay 40
 	waitpokecry
 	setwildbattle SPECIES_KECLEON, 30, ITEM_NONE
@@ -245,11 +245,11 @@ Route120_EventScript_151908:: @ 8151908
 	applymovement 31, Route120_Movement_1A0845
 	waitmovement 0
 	delay 50
-	setanimation 0, 1
-	doanimation 30
+	setfieldeffect 0, 1
+	dofieldeffect 30
 	delay 15
 	removeobject 31
-	checkanimation 30
+	waitfieldeffect 30
 	setmaptile 13, 15, 663, 0
 	setmaptile 12, 16, 671, 0
 	setmaptile 12, 17, 161, 0

@@ -1046,31 +1046,31 @@
 	.2byte \word
 	.endm
 
-	.macro lighten byte
+	.macro animdarklevel byte
 	.byte 0x9a
 	.byte \byte
 	.endm
 
-	.macro message2 pointer
+	.macro messageautoscroll pointer
 	.byte 0x9b
 	.4byte \pointer
 	.endm
 
 	@ Executes the specified field move animation.
-	.macro doanimation animation
+	.macro dofieldeffect animation
 	.byte 0x9c
 	.2byte \animation
 	.endm
 
 	@ Tells the game which party Pokmon to use for the next field move animation.
-	.macro setanimation animation, slot
+	.macro setfieldeffect animation, slot
 	.byte 0x9d
 	.byte \animation
 	.2byte \slot
 	.endm
 
 	@ Blocks script execution until all playing field move animations complete.
-	.macro checkanimation animation
+	.macro waitfieldeffect animation
 	.byte 0x9e
 	.2byte \animation
 	.endm
@@ -1082,12 +1082,12 @@
 	.endm
 
 	@ Checks the player's gender. If male, then 0x0000 is stored in variable 0x800D (LASTRESULT). If female, then 0x0001 is stored in LASTRESULT.
-	.macro checkgender
+	.macro checkplayergender
 	.byte 0xa0
 	.endm
 
 	@ Plays the specified (species) Pokmon's cry. You can use waitcry to block script execution until the sound finishes.
-	.macro pokecry species, effect
+	.macro playpokecry species, effect
 	.byte 0xa1
 	.2byte \species
 	.2byte \effect

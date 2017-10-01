@@ -60,7 +60,7 @@ FortreeCity_House4_EventScript_15821E:: @ 815821E
 	lock
 	faceplayer
 	waitse
-	pokecry SPECIES_WINGULL, 0
+	playpokecry SPECIES_WINGULL, 0
 	msgbox FortreeCity_House4_Text_18695C, 4
 	waitpokecry
 	release

@@ -388,7 +388,7 @@ gUnknown_0815F36C:: @ 815F36C
 	lockall
 	playse 2
 	message UnknownString_81A3A72
-	doanimation 61
+	dofieldeffect 61
 	waitstate
 	waitmessage
 	waitbutton
@@ -449,7 +449,7 @@ gUnknown_0815F43A:: @ 815F43A
 	lockall
 	message UnknownString_81A3A72
 	playse 2
-	doanimation 61
+	dofieldeffect 61
 	waitstate
 	waitmessage
 	waitbutton
@@ -520,7 +520,7 @@ EventScript_15F51D:
 	end
 
 gUnknown_0815F523:: @ 815F523
-	doanimation 52
+	dofieldeffect 52
 	waitstate
 	end
 
@@ -1451,8 +1451,8 @@ OldaleTown_PokemonCenter_1F_EventScript_19FD7C:: @ 819FD7C
 	waitmessage
 	applymovement 0x800b, OldaleTown_PokemonCenter_1F_Movement_1A083F
 	waitmovement 0
-	doanimation 25
-	checkanimation 25
+	dofieldeffect 25
+	waitfieldeffect 25
 	applymovement 0x800b, OldaleTown_PokemonCenter_1F_Movement_1A0845
 	waitmovement 0
 	special ScrSpecial_HealPlayerParty
@@ -1820,13 +1820,13 @@ UseSurfScript:: @ 81A0117
 	compare RESULT, 6
 	goto_if_eq UseSurfScript_NoMon
 	getpartypokename 0, RESULT
-	setanimation 0, RESULT
+	setfieldeffect 0, RESULT
 	lockall
 	msgbox UseSurfPromptText, 5
 	compare RESULT, 0
 	goto_if_eq UseSurfScript_No
 	msgbox UsedSurfText, 4
-	doanimation 9
+	dofieldeffect 9
 UseSurfScript_No: @ 81A014C
 	releaseall
 UseSurfScript_NoMon: @ 81A014D
@@ -1841,7 +1841,7 @@ Route103_EventScript_1A014E:: @ 81A014E
 Route110_EventScript_1A014E:: @ 81A014E
 Route119_EventScript_1A014E:: @ 81A014E
 RustboroCity_EventScript_1A014E:: @ 81A014E
-	checkgender
+	checkplayergender
 	compare RESULT, 0
 	goto_if_eq RustboroCity_EventScript_1A0166
 	compare RESULT, 1
@@ -1859,7 +1859,7 @@ RustboroCity_EventScript_1A016C:: @ 81A016C
 LavaridgeTown_EventScript_1A0172:: @ 81A0172
 Route110_EventScript_1A0172:: @ 81A0172
 Route119_EventScript_1A0172:: @ 81A0172
-	checkgender
+	checkplayergender
 	compare RESULT, 0
 	goto_if_eq LavaridgeTown_EventScript_1A018A
 	compare RESULT, 1
@@ -2297,7 +2297,7 @@ SouthernIsland_Exterior_EventScript_1A047C:: @ 81A047C
 CaveOfOrigin_B4F_EventScript_1A04A0:: @ 81A04A0
 	lockall
 	waitse
-	pokecry SPECIES_GROUDON_OR_KYOGRE, 2
+	playpokecry SPECIES_GROUDON_OR_KYOGRE, 2
 	waitpokecry
 	setvar 0x4005, 1
 	releaseall
@@ -2352,7 +2352,7 @@ MagmaHideout_B1F_EventScript_1A04FD:: @ 81A04FD
 	faceplayer
 	setwildbattle SPECIES_ELECTRODE, 30, ITEM_NONE
 	waitse
-	pokecry SPECIES_ELECTRODE, 2
+	playpokecry SPECIES_ELECTRODE, 2
 	delay 40
 	waitpokecry
 	setflag 977
@@ -2368,7 +2368,7 @@ MagmaHideout_B1F_EventScript_1A051B:: @ 81A051B
 	faceplayer
 	setwildbattle SPECIES_ELECTRODE, 30, ITEM_NONE
 	waitse
-	pokecry SPECIES_ELECTRODE, 2
+	playpokecry SPECIES_ELECTRODE, 2
 	delay 40
 	waitpokecry
 	setflag 978
@@ -2451,7 +2451,7 @@ Route119_EventScript_1A05C3:: @ 81A05C3
 	applymovement LAST_TALKED, Route119_Movement_1A0662
 	waitmovement 0
 	waitse
-	pokecry SPECIES_KECLEON, 2
+	playpokecry SPECIES_KECLEON, 2
 	delay 40
 	waitpokecry
 	setwildbattle SPECIES_KECLEON, 30, ITEM_NONE
@@ -3621,7 +3621,7 @@ gUnknown_081A2C51:: @ 81A2C51
 	compare RESULT, 1
 	goto_if_eq EventScript_1A2E45
 	checkpokemove MOVE_SECRET_POWER
-	setanimation 0, RESULT
+	setfieldeffect 0, RESULT
 	getmovename 1, MOVE_SECRET_POWER
 	compare 0x8007, 1
 	goto_if_eq EventScript_1A2CB0
@@ -3647,14 +3647,14 @@ EventScript_1A2CB0:
 	goto_if_eq EventScript_1A2F3A
 	msgbox UsedCutRockSmashText, 4
 	closemessage
-	doanimation 11
+	dofieldeffect 11
 	waitstate
 	goto EventScript_1A2CFA
 	end
 
 gUnknown_081A2CE6:: @ 81A2CE6
 	lockall
-	doanimation 11
+	dofieldeffect 11
 	waitstate
 	goto EventScript_1A2CFA
 	end
@@ -3678,14 +3678,14 @@ EventScript_1A2D08:
 	goto_if_eq EventScript_1A2F3A
 	msgbox UsedCutRockSmashText, 4
 	closemessage
-	doanimation 26
+	dofieldeffect 26
 	waitstate
 	goto EventScript_1A2D52
 	end
 
 gUnknown_081A2D3E:: @ 81A2D3E
 	lockall
-	doanimation 26
+	dofieldeffect 26
 	waitstate
 	goto EventScript_1A2D52
 	end
@@ -3709,14 +3709,14 @@ EventScript_1A2D60:
 	goto_if_eq EventScript_1A2F3A
 	msgbox UsedCutRockSmashText, 4
 	closemessage
-	doanimation 27
+	dofieldeffect 27
 	waitstate
 	goto EventScript_1A2DAA
 	end
 
 gUnknown_081A2D96:: @ 81A2D96
 	lockall
-	doanimation 27
+	dofieldeffect 27
 	waitstate
 	goto EventScript_1A2DAA
 	end
@@ -3792,7 +3792,7 @@ EventScript_1A2E45:
 	checkpokemove MOVE_SECRET_POWER
 	compare RESULT, 6
 	goto_if_eq EventScript_1A2EF7
-	setanimation 0, RESULT
+	setfieldeffect 0, RESULT
 	setorcopyvar 0x8004, RESULT
 	lockall
 	special GetSecretBaseNearbyMapName
@@ -4795,7 +4795,7 @@ BattleTower_Lobby_EventScript_1AE30F:: @ 81AE30F
 	.include "data/text/magma_summit.inc"
 
 gUnknown_081B694A:: @ 81B694A
-	lighten 1
+	animdarklevel 1
 	setdarklevel 1
 	end
 

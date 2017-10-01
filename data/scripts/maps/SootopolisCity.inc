@@ -461,10 +461,10 @@ SootopolisCity_EventScript_14D4AD:: @ 814D4AD
 	applymovement LAST_TALKED, SootopolisCity_Movement_1A0845
 	waitmovement 0
 	delay 50
-	setanimation 0, 1
-	doanimation 30
+	setfieldeffect 0, 1
+	dofieldeffect 30
 	delay 15
 	removeobject LAST_TALKED
-	checkanimation 30
+	waitfieldeffect 30
 	release
 	end

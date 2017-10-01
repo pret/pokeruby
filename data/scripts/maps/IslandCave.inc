@@ -78,7 +78,7 @@ IslandCave_EventScript_15EF9D:: @ 815EF9D
 	lock
 	faceplayer
 	waitse
-	pokecry SPECIES_REGICE, 2
+	playpokecry SPECIES_REGICE, 2
 	delay 40
 	waitpokecry
 	setwildbattle SPECIES_REGICE, 40, ITEM_NONE

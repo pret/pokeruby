@@ -68,7 +68,7 @@ LittlerootTown_MaysHouse_2F_EventScript_1B69EB:: @ 81B69EB
 	setflag 81
 	setflag 754
 	setflag 755
-	checkgender
+	checkplayergender
 	compare RESULT, 0
 	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_1B6A31
 	compare RESULT, 1
@@ -313,7 +313,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6CA6:: @ 81B6CA6
 	lock
 	faceplayer
 	waitse
-	pokecry SPECIES_MACHOKE, 0
+	playpokecry SPECIES_MACHOKE, 0
 	msgbox LittlerootTown_BrendansHouse_1F_Text_17281D, 4
 	waitpokecry
 	release
@@ -324,7 +324,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6CB9:: @ 81B6CB9
 	lock
 	faceplayer
 	waitse
-	pokecry SPECIES_MACHOKE, 0
+	playpokecry SPECIES_MACHOKE, 0
 	msgbox LittlerootTown_BrendansHouse_1F_Text_172831, 4
 	waitpokecry
 	release
@@ -361,7 +361,7 @@ LittlerootTown_BrendansHouse_1F_Movement_1B6CDC:: @ 81B6CDC
 LittlerootTown_BrendansHouse_1F_EventScript_1B6CDE:: @ 81B6CDE
 LittlerootTown_MaysHouse_1F_EventScript_1B6CDE:: @ 81B6CDE
 	lockall
-	checkgender
+	checkplayergender
 	compare RESULT, 0
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1B6DAD
 	compare RESULT, 1

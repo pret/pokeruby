@@ -51,7 +51,7 @@ Route119_EventScript_1511D0:: @ 81511D0
 Route119_EventScript_1511DB:: @ 81511DB
 	lockall
 	addobject 25
-	checkgender
+	checkplayergender
 	compare RESULT, 0
 	call_if 1, Route119_EventScript_151254
 	compare RESULT, 1
@@ -71,7 +71,7 @@ Route119_EventScript_1511DB:: @ 81511DB
 	removeobject 25
 	addobject 16
 	delay 30
-	checkgender
+	checkplayergender
 	compare RESULT, 0
 	goto_if_eq Route119_EventScript_15125E
 	compare RESULT, 1

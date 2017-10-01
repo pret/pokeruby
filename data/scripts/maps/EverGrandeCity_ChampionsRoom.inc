@@ -52,14 +52,14 @@ EverGrandeCity_ChampionsRoom_EventScript_15B821:: @ 815B821
 	msgbox EverGrandeCity_ChampionsRoom_Text_1910FE, 4
 	closemessage
 	playse 8
-	checkgender
+	checkplayergender
 	compare RESULT, 0
 	call_if 1, EverGrandeCity_ChampionsRoom_EventScript_15B87C
 	compare RESULT, 1
 	call_if 1, EverGrandeCity_ChampionsRoom_EventScript_15B881
 	addobject 2
 	call EverGrandeCity_ChampionsRoom_EventScript_15B9BD
-	checkgender
+	checkplayergender
 	compare RESULT, 0
 	goto_if_eq EverGrandeCity_ChampionsRoom_EventScript_15B886
 	compare RESULT, 1
@@ -127,7 +127,7 @@ EverGrandeCity_ChampionsRoom_EventScript_15B8F0:: @ 815B8F0
 	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_1A0845
 	waitmovement 0
 	msgbox EverGrandeCity_ChampionsRoom_Text_191546, 4
-	checkgender
+	checkplayergender
 	compare RESULT, 0
 	call_if 1, EverGrandeCity_ChampionsRoom_EventScript_15B9AB
 	compare RESULT, 1

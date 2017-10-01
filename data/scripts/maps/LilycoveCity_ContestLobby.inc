@@ -426,7 +426,7 @@ LilycoveCity_ContestLobby_EventScript_158D24:: @ 8158D24
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158DA1
 	compare RESULT, 6
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158DB2
-	message2 LilycoveCity_ContestLobby_Text_18872A
+	messageautoscroll LilycoveCity_ContestLobby_Text_18872A
 	waitmessage
 	contestlinktransfer
 	switch 0x8004
@@ -473,7 +473,7 @@ LilycoveCity_ContestLobby_EventScript_158DD1:: @ 8158DD1
 	special sub_80C496C
 	addvar 0x8004, 1
 	getnumberstring 1, 32772
-	message2 LilycoveCity_ContestLobby_Text_188845
+	messageautoscroll LilycoveCity_ContestLobby_Text_188845
 	waitmessage
 	addvar 0x8004, 65535
 	goto LilycoveCity_ContestLobby_EventScript_158DEE
@@ -490,7 +490,7 @@ LilycoveCity_ContestLobby_EventScript_158DEE:: @ 8158DEE
 
 LilycoveCity_ContestLobby_EventScript_158E0B:: @ 8158E0B
 	lockall
-	message2 LilycoveCity_ContestLobby_Text_1888C6
+	messageautoscroll LilycoveCity_ContestLobby_Text_1888C6
 	waitmessage
 	delay 20
 	closemessage
@@ -511,7 +511,7 @@ LilycoveCity_ContestLobby_EventScript_158E0B:: @ 8158E0B
 	waitmovement 0
 	applymovement 255, LilycoveCity_ContestLobby_Movement_158E99
 	waitmovement 0
-	message2 LilycoveCity_ContestLobby_Text_1A6832
+	messageautoscroll LilycoveCity_ContestLobby_Text_1A6832
 	waitmessage
 	delay 20
 	closemessage

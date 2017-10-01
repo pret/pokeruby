@@ -247,7 +247,7 @@ LilycoveCity_EventScript_14CD3D:: @ 814CD3D
 LilycoveCity_EventScript_14CD46:: @ 814CD46
 	lock
 	faceplayer
-	checkgender
+	checkplayergender
 	compare RESULT, 0
 	goto_if_eq LilycoveCity_EventScript_14CD60
 	compare RESULT, 1
@@ -415,11 +415,11 @@ LilycoveCity_EventScript_14CF6B:: @ 814CF6B
 	applymovement LAST_TALKED, LilycoveCity_Movement_1A0845
 	waitmovement 0
 	delay 50
-	setanimation 0, 1
-	doanimation 30
+	setfieldeffect 0, 1
+	dofieldeffect 30
 	delay 15
 	removeobject LAST_TALKED
-	checkanimation 30
+	waitfieldeffect 30
 	savebgm 0
 	fadedefaultbgm
 	setflag 292

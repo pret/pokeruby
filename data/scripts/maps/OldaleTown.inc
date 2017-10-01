@@ -256,7 +256,7 @@ OldaleTown_EventScript_14DF77:: @ 814DF77
 	end
 
 OldaleTown_EventScript_14DF92:: @ 814DF92
-	checkgender
+	checkplayergender
 	compare RESULT, 0
 	goto_if_eq OldaleTown_EventScript_14DFAA
 	compare RESULT, 1

@@ -5,7 +5,7 @@ S_CuttableTree:: @ 81B0DCC
 	checkpokemove MOVE_CUT
 	compare RESULT, 6
 	goto_if_eq CannotUseCut
-	setanimation 0, RESULT
+	setfieldeffect 0, RESULT
 	getpartypokename 0, RESULT
 	getmovename 1, MOVE_CUT
 	msgbox UseCutPromptText, 5
@@ -13,14 +13,14 @@ S_CuttableTree:: @ 81B0DCC
 	goto_if_eq Cut_ChoseNo
 	msgbox UsedCutRockSmashText, 4
 	closemessage
-	doanimation 2
+	dofieldeffect 2
 	waitstate
 	goto DoTreeCutMovement
 	end
 
 S_UseCut:: @ 81B0E16
 	lockall
-	doanimation 2
+	dofieldeffect 2
 	waitstate
 	goto DoTreeCutMovement
 	end
@@ -63,7 +63,7 @@ S_BreakableRock:: @ 81B0EB7
 	checkpokemove MOVE_ROCK_SMASH
 	compare RESULT, 6
 	goto_if_eq CannotUseRockSmash
-	setanimation 0, RESULT
+	setfieldeffect 0, RESULT
 	getpartypokename 0, RESULT
 	getmovename 1, MOVE_ROCK_SMASH
 	msgbox UseRockSmashPromptText, 5
@@ -71,14 +71,14 @@ S_BreakableRock:: @ 81B0EB7
 	goto_if_eq RockSmash_ChoseNo
 	msgbox UsedCutRockSmashText, 4
 	closemessage
-	doanimation 37
+	dofieldeffect 37
 	waitstate
 	goto DoRockSmashMovement
 	end
 
 S_UseRockSmash:: @ 81B0F01
 	lockall
-	doanimation 37
+	dofieldeffect 37
 	waitstate
 	goto DoRockSmashMovement
 	end
@@ -132,19 +132,19 @@ S_PushableBoulder:: @ 81B0FCB
 	checkpokemove 70
 	compare RESULT, 6
 	goto_if_eq CannotUseStrength
-	setanimation 0, RESULT
+	setfieldeffect 0, RESULT
 	msgbox UseStrengthPromptText, 5
 	compare RESULT, 0
 	goto_if_eq Strength_ChoseNo
 	closemessage
-	doanimation 40
+	dofieldeffect 40
 	waitstate
 	goto UsedStrength
 	end
 
 S_UseStrength:: @ 81B100E
 	lockall
-	doanimation 40
+	dofieldeffect 40
 	waitstate
 	goto UsedStrength
 	end
@@ -194,12 +194,12 @@ S_UseWaterfall:: @ 81B115A
 	compare RESULT, 6
 	goto_if_eq Waterfall_NoMonKnows
 	getpartypokename 0, RESULT
-	setanimation 0, RESULT
+	setfieldeffect 0, RESULT
 	msgbox UseWaterfallPromptText, 5
 	compare RESULT, 0
 	goto_if_eq Waterfall_Done
 	msgbox UsedWaterfallText, 4
-	doanimation 43
+	dofieldeffect 43
 	goto Waterfall_Done
 
 S_CannotUseWaterfall:: @ 81B1194
@@ -227,13 +227,13 @@ UseDiveScript:: @ 81B1220
 	compare RESULT, 6
 	goto_if_eq CannotUseDive
 	getpartypokename 0, RESULT
-	setanimation 0, RESULT
-	setanimation 1, 1
+	setfieldeffect 0, RESULT
+	setfieldeffect 1, 1
 	msgbox UseDivePromptText, 5
 	compare RESULT, 0
 	goto_if_eq Dive_Done
 	msgbox UsedDiveText, 4
-	doanimation 44
+	dofieldeffect 44
 	goto Dive_Done
 	lockall
 
@@ -250,13 +250,13 @@ S_UseDiveUnderwater:: @ 81B1269
 	compare RESULT, 6
 	goto_if_eq UnderwaterCannotUseDive
 	getpartypokename 0, RESULT
-	setanimation 0, RESULT
-	setanimation 1, 1
+	setfieldeffect 0, RESULT
+	setfieldeffect 1, 1
 	msgbox UnderwaterUseDivePromptText, 5
 	compare RESULT, 0
 	goto_if_eq UnderwaterDive_Done
 	msgbox UsedDiveText, 4
-	doanimation 44
+	dofieldeffect 44
 	goto UnderwaterDive_Done
 
 UnderwaterCannotUseDive: @ 81B12A7

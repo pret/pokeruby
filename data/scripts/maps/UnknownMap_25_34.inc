@@ -413,7 +413,7 @@ FallarborTown_ContestLobby_EventScript_15FBDB:: @ 815FBDB
 LilycoveCity_ContestLobby_EventScript_15FBDB:: @ 815FBDB
 SlateportCity_ContestLobby_EventScript_15FBDB:: @ 815FBDB
 VerdanturfTown_ContestLobby_EventScript_15FBDB:: @ 815FBDB
-	checkgender
+	checkplayergender
 	compare RESULT, 0
 	goto_if_eq FallarborTown_ContestLobby_EventScript_15FBF3
 	compare RESULT, 1

@@ -22,14 +22,14 @@ LittlerootTown_BrendansHouse_2F_MapScript2_1527DA:: @ 81527DA
 	.2byte 0
 
 LittlerootTown_BrendansHouse_2F_EventScript_1527E4:: @ 81527E4
-	checkgender
+	checkplayergender
 	compare RESULT, 0
 	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1A2F68
 	end
 
 @ 81527F1
 	lockall
-	checkgender
+	checkplayergender
 	compare RESULT, 0
 	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_15280A
 	compare RESULT, 1
@@ -50,7 +50,7 @@ gUnknown_0815281E:: @ 815281E
 
 LittlerootTown_BrendansHouse_2F_EventScript_15281E:: @ 815281E
 	lockall
-	checkgender
+	checkplayergender
 	compare RESULT, 0
 	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_152837
 	compare RESULT, 1

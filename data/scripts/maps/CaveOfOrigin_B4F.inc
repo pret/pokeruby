@@ -38,11 +38,11 @@ CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 	special WaitWeather
 	waitstate
 	playse 209
-	setanimation 0, 9
-	setanimation 1, 13
-	setanimation 2, 0
-	doanimation 54
-	checkanimation 54
+	setfieldeffect 0, 9
+	setfieldeffect 1, 13
+	setfieldeffect 2, 0
+	dofieldeffect 54
+	waitfieldeffect 54
 	.ifdef SAPPHIRE
 	setvar RESULT, 3
 	.else
@@ -58,7 +58,7 @@ CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 	delay 60
 	setwildbattle SPECIES_GROUDON_OR_KYOGRE, 45, ITEM_NONE
 	waitse
-	pokecry SPECIES_GROUDON_OR_KYOGRE, 2
+	playpokecry SPECIES_GROUDON_OR_KYOGRE, 2
 	delay 40
 	waitpokecry
 	setflag 2145

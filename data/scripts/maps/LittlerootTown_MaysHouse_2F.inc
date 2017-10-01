@@ -22,7 +22,7 @@ LittlerootTown_MaysHouse_2F_MapScript2_152A86:: @ 8152A86
 	.2byte 0
 
 LittlerootTown_MaysHouse_2F_EventScript_152A90:: @ 8152A90
-	checkgender
+	checkplayergender
 	compare RESULT, 1
 	goto_if_eq LittlerootTown_MaysHouse_2F_EventScript_1A2F68
 	end
@@ -32,7 +32,7 @@ LittlerootTown_MaysHouse_2F_EventScript_152A9D:: @ 8152A9D
 	lockall
 	checkflag 292
 	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_152BB5
-	checkgender
+	checkplayergender
 	compare RESULT, 0
 	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_152AD4
 	compare RESULT, 1
@@ -112,7 +112,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_152BAA:: @ 8152BAA
 LittlerootTown_BrendansHouse_2F_EventScript_152BB5:: @ 8152BB5
 	applymovement LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_1A0839
 	waitmovement 0
-	checkgender
+	checkplayergender
 	compare RESULT, 0
 	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_152BDB
 	compare RESULT, 1
@@ -193,7 +193,7 @@ gUnknown_08152C39:: @ 8152C39
 
 LittlerootTown_MaysHouse_2F_EventScript_152C39:: @ 8152C39
 	lockall
-	checkgender
+	checkplayergender
 	compare RESULT, 0
 	goto_if_eq LittlerootTown_MaysHouse_2F_EventScript_152C52
 	compare RESULT, 1

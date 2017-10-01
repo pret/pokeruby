@@ -43,14 +43,14 @@ LavaridgeTown_EventScript_14E4ED:: @ 814E4ED
 	waitmovement 0
 	applymovement 8, LavaridgeTown_Movement_1A0835
 	waitmovement 0
-	checkgender
+	checkplayergender
 	compare RESULT, 0
 	call_if 1, LavaridgeTown_EventScript_14E56B
 	compare RESULT, 1
 	call_if 1, LavaridgeTown_EventScript_14E570
 	compare 0x8008, 1
 	call_if 1, LavaridgeTown_EventScript_14E68F
-	checkgender
+	checkplayergender
 	compare RESULT, 0
 	goto_if_eq LavaridgeTown_EventScript_14E5AB
 	compare RESULT, 1
@@ -69,12 +69,12 @@ LavaridgeTown_EventScript_14E575:: @ 814E575
 	lock
 	faceplayer
 	setvar 0x8008, 0
-	checkgender
+	checkplayergender
 	compare RESULT, 0
 	call_if 1, LavaridgeTown_EventScript_14E56B
 	compare RESULT, 1
 	call_if 1, LavaridgeTown_EventScript_14E570
-	checkgender
+	checkplayergender
 	compare RESULT, 0
 	goto_if_eq LavaridgeTown_EventScript_14E5AB
 	compare RESULT, 1

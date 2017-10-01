@@ -38,12 +38,12 @@ EverGrandeCity_HallOfFame_EventScript_15BBA8:: @ 815BBA8
 	applymovement 255, EverGrandeCity_HallOfFame_Movement_1A0841
 	waitmovement 0
 	delay 20
-	doanimation 62
-	checkanimation 62
+	dofieldeffect 62
+	waitfieldeffect 62
 	delay 40
 	setvar 0x4001, 1
 	call EverGrandeCity_HallOfFame_EventScript_19FC13
-	checkgender
+	checkplayergender
 	compare RESULT, 0
 	goto_if_eq EverGrandeCity_HallOfFame_EventScript_15BC41
 	compare RESULT, 1

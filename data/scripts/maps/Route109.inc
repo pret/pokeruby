@@ -360,7 +360,7 @@ Route109_EventScript_14F788:: @ 814F788
 	lock
 	faceplayer
 	waitse
-	pokecry SPECIES_ZIGZAGOON, 0
+	playpokecry SPECIES_ZIGZAGOON, 0
 	msgbox Route109_Text_16E5CA, 4
 	waitpokecry
 	release

@@ -22,7 +22,7 @@ SootopolisCity_House1_EventScript_15B2D1:: @ 815B2D1
 	lock
 	faceplayer
 	waitse
-	pokecry SPECIES_KECLEON, 0
+	playpokecry SPECIES_KECLEON, 0
 	msgbox SootopolisCity_House1_Text_18FA50, 4
 	waitpokecry
 	release

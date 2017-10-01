@@ -9,7 +9,7 @@ LilycoveCity_House1_EventScript_159B8F:: @ 8159B8F
 	lock
 	faceplayer
 	waitse
-	pokecry SPECIES_KECLEON, 0
+	playpokecry SPECIES_KECLEON, 0
 	msgbox LilycoveCity_House1_Text_18B82B, 4
 	waitpokecry
 	release

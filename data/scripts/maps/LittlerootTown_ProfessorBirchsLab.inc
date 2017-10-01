@@ -123,7 +123,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152DBA:: @ 8152DBA
 	waitmovement 0
 	applymovement 255, LittlerootTown_ProfessorBirchsLab_Movement_1A0843
 	waitmovement 0
-	checkgender
+	checkplayergender
 	compare RESULT, 0
 	call_if 1, LittlerootTown_ProfessorBirchsLab_EventScript_152E13
 	compare RESULT, 1
@@ -187,7 +187,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152E9A:: @ 8152E9A
 LittlerootTown_ProfessorBirchsLab_EventScript_152EA3:: @ 8152EA3
 	lock
 	faceplayer
-	checkgender
+	checkplayergender
 	compare RESULT, 0
 	call_if 1, LittlerootTown_ProfessorBirchsLab_EventScript_152EBE
 	compare RESULT, 1

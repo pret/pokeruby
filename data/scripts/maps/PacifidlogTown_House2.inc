@@ -81,7 +81,7 @@ PacifidlogTown_House2_EventScript_154267:: @ 8154267
 	lock
 	faceplayer
 	waitse
-	pokecry SPECIES_AZURILL, 0
+	playpokecry SPECIES_AZURILL, 0
 	msgbox PacifidlogTown_House2_Text_17938B, 4
 	waitpokecry
 	msgbox PacifidlogTown_House2_Text_17939B, 4
@@ -92,7 +92,7 @@ PacifidlogTown_House2_EventScript_154282:: @ 8154282
 	lock
 	faceplayer
 	waitse
-	pokecry SPECIES_AZURILL, 2
+	playpokecry SPECIES_AZURILL, 2
 	msgbox PacifidlogTown_House2_Text_1793CC, 4
 	waitpokecry
 	msgbox PacifidlogTown_House2_Text_1793DD, 4

@@ -22,7 +22,7 @@ SouthernIsland_Interior_MapScript1_160B6C:: @ 8160B6C
 	end
 
 SouthernIsland_Interior_EventScript_160B77:: @ 8160B77
-	checkgender
+	checkplayergender
 	compare RESULT, 0
 	goto_if_eq SouthernIsland_Interior_EventScript_160B8F
 	compare RESULT, 1
@@ -54,7 +54,7 @@ SouthernIsland_Interior_EventScript_160BA7:: @ 8160BA7
 	waitmovement 0
 	delay 50
 	waitse
-	pokecry SPECIES_LATIAS_OR_LATIOS, 0
+	playpokecry SPECIES_LATIAS_OR_LATIOS, 0
 	delay 30
 	waitpokecry
 	addobject 2

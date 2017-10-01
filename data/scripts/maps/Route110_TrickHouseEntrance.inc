@@ -757,10 +757,10 @@ Route110_TrickHouseEntrance_EventScript_16190B:: @ 816190B
 	return
 
 Route110_TrickHouseEntrance_EventScript_161920:: @ 8161920
-	setanimation 0, 32772
-	setanimation 1, 32773
-	setanimation 2, 32774
-	doanimation 54
-	checkanimation 54
+	setfieldeffect 0, 32772
+	setfieldeffect 1, 32773
+	setfieldeffect 2, 32774
+	dofieldeffect 54
+	waitfieldeffect 54
 	delay 10
 	return

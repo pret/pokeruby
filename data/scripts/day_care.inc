@@ -110,7 +110,7 @@ Route117_PokemonDayCare_EventScript_1B236C:: @ 81B236C
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B23FD
 	specialvar 0x8005, sub_8042328
 	waitse
-	pokecry 0x8005, 0
+	playpokecry 0x8005, 0
 	msgbox Route117_PokemonDayCare_Text_1B296E, 4
 	waitpokecry
 	special Daycare_SendPokemon_Special
@@ -211,7 +211,7 @@ Route117_PokemonDayCare_EventScript_1B24DE:: @ 81B24DE
 	playse 95
 	msgbox Route117_PokemonDayCare_Text_1B2B75, 4
 	waitse
-	pokecry RESULT, 0
+	playpokecry RESULT, 0
 	msgbox Route117_PokemonDayCare_Text_1B2B93, 4
 	waitpokecry
 	specialvar RESULT, sp0B6_daycare

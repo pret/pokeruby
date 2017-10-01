@@ -551,7 +551,7 @@ RustboroCity_EventScript_14C8DA:: @ 814C8DA
 	faceplayer
 	checkflag 288
 	goto_if_eq RustboroCity_EventScript_14C917
-	checkgender
+	checkplayergender
 	compare RESULT, 0
 	goto_if_eq RustboroCity_EventScript_14C8FD
 	compare RESULT, 1
@@ -571,7 +571,7 @@ RustboroCity_EventScript_14C90A:: @ 814C90A
 	end
 
 RustboroCity_EventScript_14C917:: @ 814C917
-	checkgender
+	checkplayergender
 	compare RESULT, 0
 	goto_if_eq RustboroCity_EventScript_14C92F
 	compare RESULT, 1

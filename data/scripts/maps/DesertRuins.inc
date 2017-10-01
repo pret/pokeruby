@@ -58,7 +58,7 @@ DesertRuins_EventScript_15CB85:: @ 815CB85
 	lock
 	faceplayer
 	waitse
-	pokecry SPECIES_REGIROCK, 2
+	playpokecry SPECIES_REGIROCK, 2
 	delay 40
 	waitpokecry
 	setwildbattle SPECIES_REGIROCK, 40, ITEM_NONE

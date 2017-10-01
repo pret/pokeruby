@@ -166,7 +166,7 @@ NewMauville_Inside_EventScript_15E900:: @ 815E900
 	faceplayer
 	setwildbattle SPECIES_VOLTORB, 25, ITEM_NONE
 	waitse
-	pokecry SPECIES_VOLTORB, 2
+	playpokecry SPECIES_VOLTORB, 2
 	delay 40
 	waitpokecry
 	setflag 974
@@ -181,7 +181,7 @@ NewMauville_Inside_EventScript_15E91E:: @ 815E91E
 	faceplayer
 	setwildbattle SPECIES_VOLTORB, 25, ITEM_NONE
 	waitse
-	pokecry SPECIES_VOLTORB, 2
+	playpokecry SPECIES_VOLTORB, 2
 	delay 40
 	waitpokecry
 	setflag 975
@@ -196,7 +196,7 @@ NewMauville_Inside_EventScript_15E93C:: @ 815E93C
 	faceplayer
 	setwildbattle SPECIES_VOLTORB, 25, ITEM_NONE
 	waitse
-	pokecry SPECIES_VOLTORB, 2
+	playpokecry SPECIES_VOLTORB, 2
 	delay 40
 	waitpokecry
 	setflag 976

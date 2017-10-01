@@ -154,14 +154,14 @@ gScriptCmdTable:: @ 814AE30
 	.4byte ScrCmd_fadescreen              @ 0x97
 	.4byte ScrCmd_fadescreendelay         @ 0x98
 	.4byte ScrCmd_setdarklevel                  @ 0x99
-	.4byte ScrCmd_lighten                 @ 0x9A
-	.4byte ScrCmd_message2                @ 0x9B
-	.4byte ScrCmd_doanimation             @ 0x9C
-	.4byte ScrCmd_setanimation            @ 0x9D
-	.4byte ScrCmd_checkanimation          @ 0x9E
+	.4byte ScrCmd_animdarklevel                 @ 0x9A
+	.4byte ScrCmd_messageautoscroll                @ 0x9B
+	.4byte ScrCmd_dofieldeffect             @ 0x9C
+	.4byte ScrCmd_setfieldeffect            @ 0x9D
+	.4byte ScrCmd_waitfieldeffect          @ 0x9E
 	.4byte ScrCmd_sethealplace            @ 0x9F
-	.4byte ScrCmd_checkgender             @ 0xA0
-	.4byte ScrCmd_pokecry                 @ 0xA1
+	.4byte ScrCmd_checkplayergender             @ 0xA0
+	.4byte ScrCmd_playpokecry                 @ 0xA1
 	.4byte ScrCmd_setmaptile              @ 0xA2
 	.4byte ScrCmd_resetweather            @ 0xA3
 	.4byte ScrCmd_setweather              @ 0xA4

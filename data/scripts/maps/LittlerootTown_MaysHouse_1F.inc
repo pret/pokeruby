@@ -17,7 +17,7 @@ LittlerootTown_MaysHouse_1F_EventScript_15289E:: @ 815289E
 	return
 
 LittlerootTown_MaysHouse_1F_EventScript_1528B1:: @ 81528B1
-	checkgender
+	checkplayergender
 	compare RESULT, 1
 	goto_if_eq LittlerootTown_MaysHouse_1F_EventScript_1528BE
 	return
@@ -116,7 +116,7 @@ LittlerootTown_MaysHouse_1F_Movement_1529C0:: @ 81529C0
 
 @ 81529C7
 	lockall
-	checkgender
+	checkplayergender
 	compare RESULT, 0
 	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1529E1
 	compare RESULT, 1

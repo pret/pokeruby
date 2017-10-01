@@ -47,7 +47,7 @@ Route114_EventScript_1507C3:: @ 81507C3
 	lock
 	faceplayer
 	waitse
-	pokecry SPECIES_POOCHYENA, 2
+	playpokecry SPECIES_POOCHYENA, 2
 	msgbox Route114_Text_1701F9, 4
 	waitpokecry
 	release
