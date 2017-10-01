@@ -1167,750 +1167,399 @@ void sub_80BB1D4(void)
     sub_80BAE78(IsSEPlaying(), 12, 8, 1);
 }
 
-// bgm names
-static const u8 BGMName_STOP[] = _("STOP");
-static const u8 BGMName_TETSUJI[] = _("TETSUJI");
-static const u8 BGMName_FIELD13[] = _("FIELD13");
-static const u8 BGMName_KACHI22[] = _("KACHI22");
-static const u8 BGMName_KACHI2[] = _("KACHI2");
-static const u8 BGMName_KACHI3[] = _("KACHI3");
-static const u8 BGMName_KACHI5[] = _("KACHI5");
-static const u8 BGMName_PCC[] = _("PCC");
-static const u8 BGMName_NIBI[] = _("NIBI");
-static const u8 BGMName_SUIKUN[] = _("SUIKUN");
-static const u8 BGMName_DOORO1[] = _("DOORO1");
-static const u8 BGMName_DOORO_X1[] = _("DOORO-X1");
-static const u8 BGMName_DOORO_X3[] = _("DOORO-X3");
-static const u8 BGMName_MACHI_S2[] = _("MACHI-S2");
-static const u8 BGMName_MACHI_S4[] = _("MACHI-S4");
-static const u8 BGMName_GIM[] = _("GIM");
-static const u8 BGMName_NAMINORI[] = _("NAMINORI");
-static const u8 BGMName_DAN01[] = _("DAN01");
-static const u8 BGMName_FANFA1[] = _("FANFA1");
-static const u8 BGMName_ME_ASA[] = _("ME-ASA");
-static const u8 BGMName_ME_BACHI[] = _("ME-BACHI");
-static const u8 BGMName_FANFA4[] = _("FANFA4");
-static const u8 BGMName_FANFA5[] = _("FANFA5");
-static const u8 BGMName_ME_WAZA[] = _("ME-WAZA");
-static const u8 BGMName_BIJYUTU[] = _("BIJYUTU");
-static const u8 BGMName_DOORO_X4[] = _("DOORO-X4");
-static const u8 BGMName_FUNE_KAN[] = _("FUNE-KAN");
-static const u8 BGMName_ME_SHINKA[] = _("ME-SHINKA");
-static const u8 BGMName_SHINKA[] = _("SHINKA");
-static const u8 BGMName_ME_WASURE[] = _("ME-WASURE");
-static const u8 BGMName_SYOUJOEYE[] = _("SYOUJOEYE");
-static const u8 BGMName_BOYEYE[] = _("BOYEYE");
-static const u8 BGMName_DAN02[] = _("DAN02");
-static const u8 BGMName_MACHI_S3[] = _("MACHI-S3");
-static const u8 BGMName_ODAMAKI[] = _("ODAMAKI");
-static const u8 BGMName_B_TOWER[] = _("B-TOWER");
-static const u8 BGMName_SWIMEYE[] = _("SWIMEYE");
-static const u8 BGMName_DAN03[] = _("DAN03");
-static const u8 BGMName_ME_KINOMI[] = _("ME-KINOMI");
-static const u8 BGMName_ME_TAMA[] = _("ME-TAMA");
-static const u8 BGMName_ME_B_BIG[] = _("ME-B-BIG");
-static const u8 BGMName_ME_B_SMALL[] = _("ME-B-SMALL");
-static const u8 BGMName_ME_ZANNEN[] = _("ME-ZANNEN");
-static const u8 BGMName_BD_TIME[] = _("BD-TIME");
-static const u8 BGMName_TEST1[] = _("TEST1");
-static const u8 BGMName_TEST2[] = _("TEST2");
-static const u8 BGMName_TEST3[] = _("TEST3");
-static const u8 BGMName_TEST4[] = _("TEST4");
-static const u8 BGMName_TEST[] = _("TEST");
-static const u8 BGMName_GOMACHI0[] = _("GOMACHI0");
-static const u8 BGMName_GOTOWN[] = _("GOTOWN");
-static const u8 BGMName_POKECEN[] = _("POKECEN");
-static const u8 BGMName_NEXTROAD[] = _("NEXTROAD");
-static const u8 BGMName_GRANROAD[] = _("GRANROAD");
-static const u8 BGMName_CYCLING[] = _("CYCLING");
-static const u8 BGMName_FRIENDLY[] = _("FRIENDLY");
-static const u8 BGMName_MISHIRO[] = _("MISHIRO");
-static const u8 BGMName_TOZAN[] = _("TOZAN");
-static const u8 BGMName_GIRLEYE[] = _("GIRLEYE");
-static const u8 BGMName_MINAMO[] = _("MINAMO");
-static const u8 BGMName_ASHROAD[] = _("ASHROAD");
-static const u8 BGMName_EVENT0[] = _("EVENT0");
-static const u8 BGMName_DEEPDEEP[] = _("DEEPDEEP");
-static const u8 BGMName_KACHI1[] = _("KACHI1");
-static const u8 BGMName_TITLE3[] = _("TITLE3");
-static const u8 BGMName_DEMO1[] = _("DEMO1");
-static const u8 BGMName_GIRL_SUP[] = _("GIRL-SUP");
-static const u8 BGMName_HAGESHII[] = _("HAGESHII");
-static const u8 BGMName_KAKKOII[] = _("KAKKOII");
-static const u8 BGMName_KAZANBAI[] = _("KAZANBAI");
-static const u8 BGMName_AQA_0[] = _("AQA-0");
-static const u8 BGMName_TSURETEK[] = _("TSURETEK");
-static const u8 BGMName_BOY_SUP[] = _("BOY-SUP");
-static const u8 BGMName_RAINBOW[] = _("RAINBOW");
-static const u8 BGMName_AYASII[] = _("AYASII");
-static const u8 BGMName_KACHI4[] = _("KACHI4");
-static const u8 BGMName_ROPEWAY[] = _("ROPEWAY");
-static const u8 BGMName_CASINO[] = _("CASINO");
-static const u8 BGMName_HIGHTOWN[] = _("HIGHTOWN");
-static const u8 BGMName_SAFARI[] = _("SAFARI");
-static const u8 BGMName_C_ROAD[] = _("C-ROAD");
-static const u8 BGMName_AJITO[] = _("AJITO");
-static const u8 BGMName_M_BOAT[] = _("M-BOAT");
-static const u8 BGMName_M_DUNGON[] = _("M-DUNGON");
-static const u8 BGMName_FINECITY[] = _("FINECITY");
-static const u8 BGMName_MACHUPI[] = _("MACHUPI");
-static const u8 BGMName_P_SCHOOL[] = _("P-SCHOOL");
-static const u8 BGMName_DENDOU[] = _("DENDOU");
-static const u8 BGMName_TONEKUSA[] = _("TONEKUSA");
-static const u8 BGMName_MABOROSI[] = _("MABOROSI");
-static const u8 BGMName_CON_FAN[] = _("CON-FAN");
-static const u8 BGMName_CONTEST0[] = _("CONTEST0");
-static const u8 BGMName_MGM0[] = _("MGM0");
-static const u8 BGMName_T_BATTLE[] = _("T-BATTLE");
-static const u8 BGMName_OOAME[] = _("OOAME");
-static const u8 BGMName_HIDERI[] = _("HIDERI");
-static const u8 BGMName_RUNECITY[] = _("RUNECITY");
-static const u8 BGMName_CON_K[] = _("CON-K");
-static const u8 BGMName_EIKOU_R[] = _("EIKOU-R");
-static const u8 BGMName_KARAKURI[] = _("KARAKURI");
-static const u8 BGMName_HUTAGO[] = _("HUTAGO");
-static const u8 BGMName_SITENNOU[] = _("SITENNOU");
-static const u8 BGMName_YAMA_EYE[] = _("YAMA-EYE");
-static const u8 BGMName_CONLOBBY[] = _("CONLOBBY");
-static const u8 BGMName_INTER_V[] = _("INTER-V");
-static const u8 BGMName_DAIGO[] = _("DAIGO");
-static const u8 BGMName_THANKFOR[] = _("THANKFOR");
-static const u8 BGMName_END[] = _("END");
-static const u8 BGMName_BATTLE27[] = _("BATTLE27");
-static const u8 BGMName_BATTLE31[] = _("BATTLE31");
-static const u8 BGMName_BATTLE20[] = _("BATTLE20");
-static const u8 BGMName_BATTLE32[] = _("BATTLE32");
-static const u8 BGMName_BATTLE33[] = _("BATTLE33");
-static const u8 BGMName_BATTLE36[] = _("BATTLE36");
-static const u8 BGMName_BATTLE34[] = _("BATTLE34");
-static const u8 BGMName_BATTLE35[] = _("BATTLE35");
-static const u8 BGMName_BATTLE38[] = _("BATTLE38");
-static const u8 BGMName_BATTLE30[] = _("BATTLE30");
+#define SOUND_LIST_BGM \
+	X(BGM_STOP, "STOP") \
+	X(BGM_TETSUJI, "TETSUJI") \
+	X(BGM_FIELD13, "FIELD13") \
+	X(BGM_KACHI22, "KACHI22") \
+	X(BGM_KACHI2, "KACHI2") \
+	X(BGM_KACHI3, "KACHI3") \
+	X(BGM_KACHI5, "KACHI5") \
+	X(BGM_PCC, "PCC") \
+	X(BGM_NIBI, "NIBI") \
+	X(BGM_SUIKUN, "SUIKUN") \
+	X(BGM_DOORO1, "DOORO1") \
+	X(BGM_DOORO_X1, "DOORO-X1") \
+	X(BGM_DOORO_X3, "DOORO-X3") \
+	X(BGM_MACHI_S2, "MACHI-S2") \
+	X(BGM_MACHI_S4, "MACHI-S4") \
+	X(BGM_GIM, "GIM") \
+	X(BGM_NAMINORI, "NAMINORI") \
+	X(BGM_DAN01, "DAN01") \
+	X(BGM_FANFA1, "FANFA1") \
+	X(BGM_ME_ASA, "ME-ASA") \
+	X(BGM_ME_BACHI, "ME-BACHI") \
+	X(BGM_FANFA4, "FANFA4") \
+	X(BGM_FANFA5, "FANFA5") \
+	X(BGM_ME_WAZA, "ME-WAZA") \
+	X(BGM_BIJYUTU, "BIJYUTU") \
+	X(BGM_DOORO_X4, "DOORO-X4") \
+	X(BGM_FUNE_KAN, "FUNE-KAN") \
+	X(BGM_ME_SHINKA, "ME-SHINKA") \
+	X(BGM_SHINKA, "SHINKA") \
+	X(BGM_ME_WASURE, "ME-WASURE") \
+	X(BGM_SYOUJOEYE, "SYOUJOEYE") \
+	X(BGM_BOYEYE, "BOYEYE") \
+	X(BGM_DAN02, "DAN02") \
+	X(BGM_MACHI_S3, "MACHI-S3") \
+	X(BGM_ODAMAKI, "ODAMAKI") \
+	X(BGM_B_TOWER, "B-TOWER") \
+	X(BGM_SWIMEYE, "SWIMEYE") \
+	X(BGM_DAN03, "DAN03") \
+	X(BGM_ME_KINOMI, "ME-KINOMI") \
+	X(BGM_ME_TAMA, "ME-TAMA") \
+	X(BGM_ME_B_BIG, "ME-B-BIG") \
+	X(BGM_ME_B_SMALL, "ME-B-SMALL") \
+	X(BGM_ME_ZANNEN, "ME-ZANNEN") \
+	X(BGM_BD_TIME, "BD-TIME") \
+	X(BGM_TEST1, "TEST1") \
+	X(BGM_TEST2, "TEST2") \
+	X(BGM_TEST3, "TEST3") \
+	X(BGM_TEST4, "TEST4") \
+	X(BGM_TEST, "TEST") \
+	X(BGM_GOMACHI0, "GOMACHI0") \
+	X(BGM_GOTOWN, "GOTOWN") \
+	X(BGM_POKECEN, "POKECEN") \
+	X(BGM_NEXTROAD, "NEXTROAD") \
+	X(BGM_GRANROAD, "GRANROAD") \
+	X(BGM_CYCLING, "CYCLING") \
+	X(BGM_FRIENDLY, "FRIENDLY") \
+	X(BGM_MISHIRO, "MISHIRO") \
+	X(BGM_TOZAN, "TOZAN") \
+	X(BGM_GIRLEYE, "GIRLEYE") \
+	X(BGM_MINAMO, "MINAMO") \
+	X(BGM_ASHROAD, "ASHROAD") \
+	X(BGM_EVENT0, "EVENT0") \
+	X(BGM_DEEPDEEP, "DEEPDEEP") \
+	X(BGM_KACHI1, "KACHI1") \
+	X(BGM_TITLE3, "TITLE3") \
+	X(BGM_DEMO1, "DEMO1") \
+	X(BGM_GIRL_SUP, "GIRL-SUP") \
+	X(BGM_HAGESHII, "HAGESHII") \
+	X(BGM_KAKKOII, "KAKKOII") \
+	X(BGM_KAZANBAI, "KAZANBAI") \
+	X(BGM_AQA_0, "AQA-0") \
+	X(BGM_TSURETEK, "TSURETEK") \
+	X(BGM_BOY_SUP, "BOY-SUP") \
+	X(BGM_RAINBOW, "RAINBOW") \
+	X(BGM_AYASII, "AYASII") \
+	X(BGM_KACHI4, "KACHI4") \
+	X(BGM_ROPEWAY, "ROPEWAY") \
+	X(BGM_CASINO, "CASINO") \
+	X(BGM_HIGHTOWN, "HIGHTOWN") \
+	X(BGM_SAFARI, "SAFARI") \
+	X(BGM_C_ROAD, "C-ROAD") \
+	X(BGM_AJITO, "AJITO") \
+	X(BGM_M_BOAT, "M-BOAT") \
+	X(BGM_M_DUNGON, "M-DUNGON") \
+	X(BGM_FINECITY, "FINECITY") \
+	X(BGM_MACHUPI, "MACHUPI") \
+	X(BGM_P_SCHOOL, "P-SCHOOL") \
+	X(BGM_DENDOU, "DENDOU") \
+	X(BGM_TONEKUSA, "TONEKUSA") \
+	X(BGM_MABOROSI, "MABOROSI") \
+	X(BGM_CON_FAN, "CON-FAN") \
+	X(BGM_CONTEST0, "CONTEST0") \
+	X(BGM_MGM0, "MGM0") \
+	X(BGM_T_BATTLE, "T-BATTLE") \
+	X(BGM_OOAME, "OOAME") \
+	X(BGM_HIDERI, "HIDERI") \
+	X(BGM_RUNECITY, "RUNECITY") \
+	X(BGM_CON_K, "CON-K") \
+	X(BGM_EIKOU_R, "EIKOU-R") \
+	X(BGM_KARAKURI, "KARAKURI") \
+	X(BGM_HUTAGO, "HUTAGO") \
+	X(BGM_SITENNOU, "SITENNOU") \
+	X(BGM_YAMA_EYE, "YAMA-EYE") \
+	X(BGM_CONLOBBY, "CONLOBBY") \
+	X(BGM_INTER_V, "INTER-V") \
+	X(BGM_DAIGO, "DAIGO") \
+	X(BGM_THANKFOR, "THANKFOR") \
+	X(BGM_END, "END") \
+	X(BGM_BATTLE27, "BATTLE27") \
+	X(BGM_BATTLE31, "BATTLE31") \
+	X(BGM_BATTLE20, "BATTLE20") \
+	X(BGM_BATTLE32, "BATTLE32") \
+	X(BGM_BATTLE33, "BATTLE33") \
+	X(BGM_BATTLE36, "BATTLE36") \
+	X(BGM_BATTLE34, "BATTLE34") \
+	X(BGM_BATTLE35, "BATTLE35") \
+	X(BGM_BATTLE38, "BATTLE38") \
+	X(BGM_BATTLE30, "BATTLE30")
 
+#define SOUND_LIST_SE \
+	X(SE_STOP, "STOP") \
+	X(SE_KAIFUKU, "KAIFUKU") \
+	X(SE_PC_LOGON, "PC-LOGON") \
+	X(SE_PC_OFF, "PC-OFF") \
+	X(SE_PC_ON, "PC-ON") \
+	X(SE_SELECT, "SELECT") \
+	X(SE_WIN_OPEN, "WIN-OPEN") \
+	X(SE_WALL_HIT, "WALL-HIT") \
+	X(SE_DOOR, "DOOR") \
+	X(SE_KAIDAN, "KAIDAN") \
+	X(SE_DANSA, "DANSA") \
+	X(SE_JITENSYA, "JITENSYA") \
+	X(SE_KOUKA_L, "KOUKA-L") \
+	X(SE_KOUKA_M, "KOUKA-M") \
+	X(SE_KOUKA_H, "KOUKA-H") \
+	X(SE_BOWA2, "BOWA2") \
+	X(SE_POKE_DEAD, "POKE-DEAD") \
+	X(SE_NIGERU, "NIGERU") \
+	X(SE_JIDO_DOA, "JIDO-DOA") \
+	X(SE_NAMINORI, "NAMINORI") \
+	X(SE_BAN, "BAN") \
+	X(SE_PIN, "PIN") \
+	X(SE_BOO, "BOO") \
+	X(SE_BOWA, "BOWA") \
+	X(SE_JYUNI, "JYUNI") \
+	X(SE_A, "A") \
+	X(SE_I, "I") \
+	X(SE_U, "U") \
+	X(SE_E, "E") \
+	X(SE_O, "O") \
+	X(SE_N, "N") \
+	X(SE_SEIKAI, "SEIKAI") \
+	X(SE_HAZURE, "HAZURE") \
+	X(SE_EXP, "EXP") \
+	X(SE_JITE_PYOKO, "JITE-PYOKO") \
+	X(SE_MU_PACHI, "MU-PACHI") \
+	X(SE_TK_KASYA, "TK-KASYA") \
+	X(SE_FU_ZAKU, "FU-ZAKU") \
+	X(SE_FU_ZAKU2, "FU-ZAKU2") \
+	X(SE_FU_ZUZUZU, "FU-ZUZUZU") \
+	X(SE_RU_GASHIN, "RU-GASHIN") \
+	X(SE_RU_GASYAN, "RU-GASYAN") \
+	X(SE_RU_BARI, "RU-BARI") \
+	X(SE_RU_HYUU, "RU-HYUU") \
+	X(SE_KI_GASYAN, "KI-GASYAN") \
+	X(SE_TK_WARPIN, "TK-WARPIN") \
+	X(SE_TK_WARPOUT, "TK-WARPOUT") \
+	X(SE_TU_SAA, "TU-SAA") \
+	X(SE_HI_TURUN, "HI-TURUN") \
+	X(SE_TRACK_MOVE, "TRACK-MOVE") \
+	X(SE_TRACK_STOP, "TRACK-STOP") \
+	X(SE_TRACK_HAIK, "TRACK-HAIK") \
+	X(SE_TRACK_DOOR, "TRACK-DOOR") \
+	X(SE_MOTER, "MOTER") \
+	X(SE_CARD, "CARD") \
+	X(SE_SAVE, "SAVE") \
+	X(SE_KON, "KON") \
+	X(SE_KON2, "KON2") \
+	X(SE_KON3, "KON3") \
+	X(SE_KON4, "KON4") \
+	X(SE_SUIKOMU, "SUIKOMU") \
+	X(SE_NAGERU, "NAGERU") \
+	X(SE_TOY_C, "TOY-C") \
+	X(SE_TOY_D, "TOY-D") \
+	X(SE_TOY_E, "TOY-E") \
+	X(SE_TOY_F, "TOY-F") \
+	X(SE_TOY_G, "TOY-G") \
+	X(SE_TOY_A, "TOY-A") \
+	X(SE_TOY_B, "TOY-B") \
+	X(SE_TOY_C1, "TOY-C1") \
+	X(SE_MIZU, "MIZU") \
+	X(SE_HASHI, "HASHI") \
+	X(SE_DAUGI, "DAUGI") \
+	X(SE_PINPON, "PINPON") \
+	X(SE_FUUSEN1, "FUUSEN1") \
+	X(SE_FUUSEN2, "FUUSEN2") \
+	X(SE_FUUSEN3, "FUUSEN3") \
+	X(SE_TOY_KABE, "TOY-KABE") \
+	X(SE_TOY_DANGO, "TOY-DANGO") \
+	X(SE_DOKU, "DOKU") \
+	X(SE_ESUKA, "ESUKA") \
+	X(SE_T_AME, "T-AME") \
+	X(SE_T_AME_E, "T-AME-E") \
+	X(SE_T_OOAME, "T-OOAME") \
+	X(SE_T_OOAME_E, "T-OOAME-E") \
+	X(SE_T_KOAME, "T-KOAME") \
+	X(SE_T_KOAME_E, "T-KOAME-E") \
+	X(SE_T_KAMI, "T-KAMI") \
+	X(SE_T_KAMI2, "T-KAMI2") \
+	X(SE_ELEBETA, "ELEBETA") \
+	X(SE_HINSI, "HINSI") \
+	X(SE_EXPMAX, "EXPMAX") \
+	X(SE_TAMAKORO, "TAMAKORO") \
+	X(SE_TAMAKORO_E, "TAMAKORO-E") \
+	X(SE_BASABASA, "BASABASA") \
+	X(SE_REGI, "REGI") \
+	X(SE_C_GAJI, "C-GAJI") \
+	X(SE_C_MAKU_U, "C-MAKU-U") \
+	X(SE_C_MAKU_D, "C-MAKU-D") \
+	X(SE_C_PASI, "C-PASI") \
+	X(SE_C_SYU, "C-SYU") \
+	X(SE_C_PIKON, "C-PIKON") \
+	X(SE_REAPOKE, "REAPOKE") \
+	X(SE_OP_BASYU, "OP-BASYU") \
+	X(SE_BT_START, "BT-START") \
+	X(SE_DENDOU, "DENDOU") \
+	X(SE_JIHANKI, "JIHANKI") \
+	X(SE_TAMA, "TAMA") \
+	X(SE_Z_SCROLL, "Z-SCROLL") \
+	X(SE_Z_PAGE, "Z-PAGE") \
+	X(SE_PN_ON, "PN-ON") \
+	X(SE_PN_OFF, "PN-OFF") \
+	X(SE_Z_SEARCH, "Z-SEARCH") \
+	X(SE_TAMAGO, "TAMAGO") \
+	X(SE_TB_START, "TB-START") \
+	X(SE_TB_KON, "TB-KON") \
+	X(SE_TB_KARA, "TB-KARA") \
+	X(SE_BIDORO, "BIDORO") \
+	X(SE_W085, "W085") \
+	X(SE_W085B, "W085B") \
+	X(SE_W231, "W231") \
+	X(SE_W171, "W171") \
+	X(SE_W233, "W233") \
+	X(SE_W233B, "W233B") \
+	X(SE_W145, "W145") \
+	X(SE_W145B, "W145B") \
+	X(SE_W145C, "W145C") \
+	X(SE_W240, "W240") \
+	X(SE_W015, "W015") \
+	X(SE_W081, "W081") \
+	X(SE_W081B, "W081B") \
+	X(SE_W088, "W088") \
+	X(SE_W016, "W016") \
+	X(SE_W016B, "W016B") \
+	X(SE_W003, "W003") \
+	X(SE_W104, "W104") \
+	X(SE_W013, "W013") \
+	X(SE_W196, "W196") \
+	X(SE_W086, "W086") \
+	X(SE_W004, "W004") \
+	X(SE_W025, "W025") \
+	X(SE_W025B, "W025B") \
+	X(SE_W152, "W152") \
+	X(SE_W026, "W026") \
+	X(SE_W172, "W172") \
+	X(SE_W172B, "W172B") \
+	X(SE_W053, "W053") \
+	X(SE_W007, "W007") \
+	X(SE_W092, "W092") \
+	X(SE_W221, "W221") \
+	X(SE_W221B, "W221B") \
+	X(SE_W052, "W052") \
+	X(SE_W036, "W036") \
+	X(SE_W059, "W059") \
+	X(SE_W059B, "W059B") \
+	X(SE_W010, "W010") \
+	X(SE_W011, "W011") \
+	X(SE_W017, "W017") \
+	X(SE_W019, "W019") \
+	X(SE_W028, "W028") \
+	X(SE_W013B, "W013B") \
+	X(SE_W044, "W044") \
+	X(SE_W029, "W029") \
+	X(SE_W057, "W057") \
+	X(SE_W056, "W056") \
+	X(SE_W250, "W250") \
+	X(SE_W030, "W030") \
+	X(SE_W039, "W039") \
+	X(SE_W054, "W054") \
+	X(SE_W077, "W077") \
+	X(SE_W020, "W020") \
+	X(SE_W082, "W082") \
+	X(SE_W047, "W047") \
+	X(SE_W195, "W195") \
+	X(SE_W006, "W006") \
+	X(SE_W091, "W091") \
+	X(SE_W146, "W146") \
+	X(SE_W120, "W120") \
+	X(SE_W153, "W153") \
+	X(SE_W071B, "W071B") \
+	X(SE_W071, "W071") \
+	X(SE_W103, "W103") \
+	X(SE_W062, "W062") \
+	X(SE_W062B, "W062B") \
+	X(SE_W048, "W048") \
+	X(SE_W187, "W187") \
+	X(SE_W118, "W118") \
+	X(SE_W155, "W155") \
+	X(SE_W122, "W122") \
+	X(SE_W060, "W060") \
+	X(SE_W185, "W185") \
+	X(SE_W014, "W014") \
+	X(SE_W043, "W043") \
+	X(SE_W207, "W207") \
+	X(SE_W207B, "W207B") \
+	X(SE_W215, "W215") \
+	X(SE_W109, "W109") \
+	X(SE_W173, "W173") \
+	X(SE_W280, "W280") \
+	X(SE_W202, "W202") \
+	X(SE_W060B, "W060B") \
+	X(SE_W076, "W076") \
+	X(SE_W080, "W080") \
+	X(SE_W100, "W100") \
+	X(SE_W107, "W107") \
+	X(SE_W166, "W166") \
+	X(SE_W129, "W129") \
+	X(SE_W115, "W115") \
+	X(SE_W112, "W112") \
+	X(SE_W197, "W197") \
+	X(SE_W199, "W199") \
+	X(SE_W236, "W236") \
+	X(SE_W204, "W204") \
+	X(SE_W268, "W268") \
+	X(SE_W070, "W070") \
+	X(SE_W063, "W063") \
+	X(SE_W127, "W127") \
+	X(SE_W179, "W179") \
+	X(SE_W151, "W151") \
+	X(SE_W201, "W201") \
+	X(SE_W161, "W161") \
+	X(SE_W161B, "W161B") \
+	X(SE_W227, "W227") \
+	X(SE_W227B, "W227B") \
+	X(SE_W226, "W226") \
+	X(SE_W208, "W208") \
+	X(SE_W213, "W213") \
+	X(SE_W213B, "W213B") \
+	X(SE_W234, "W234") \
+	X(SE_W260, "W260") \
+	X(SE_W328, "W328") \
+	X(SE_W320, "W320") \
+	X(SE_W255, "W255") \
+	X(SE_W291, "W291") \
+	X(SE_W089, "W089") \
+	X(SE_W239, "W239") \
+	X(SE_W230, "W230") \
+	X(SE_W281, "W281") \
+	X(SE_W327, "W327") \
+	X(SE_W287, "W287") \
+	X(SE_W257, "W257") \
+	X(SE_W253, "W253") \
+	X(SE_W258, "W258") \
+	X(SE_W322, "W322") \
+	X(SE_W298, "W298") \
+	X(SE_W287B, "W287B") \
+	X(SE_W114, "W114") \
+	X(SE_W063B, "W063B")
+
+// Create BGM list
+#define X(songId, name) static const u8 sBGMName_##songId[] = _(name);
+SOUND_LIST_BGM
+#undef X
+
+#define X(songId, name) sBGMName_##songId,
 static const u8 *const gBGMNames[] =
 {
-    BGMName_STOP,
-    BGMName_TETSUJI,
-    BGMName_FIELD13,
-    BGMName_KACHI22,
-    BGMName_KACHI2,
-    BGMName_KACHI3,
-    BGMName_KACHI5,
-    BGMName_PCC,
-    BGMName_NIBI,
-    BGMName_SUIKUN,
-    BGMName_DOORO1,
-    BGMName_DOORO_X1,
-    BGMName_DOORO_X3,
-    BGMName_MACHI_S2,
-    BGMName_MACHI_S4,
-    BGMName_GIM,
-    BGMName_NAMINORI,
-    BGMName_DAN01,
-    BGMName_FANFA1,
-    BGMName_ME_ASA,
-    BGMName_ME_BACHI,
-    BGMName_FANFA4,
-    BGMName_FANFA5,
-    BGMName_ME_WAZA,
-    BGMName_BIJYUTU,
-    BGMName_DOORO_X4,
-    BGMName_FUNE_KAN,
-    BGMName_ME_SHINKA,
-    BGMName_SHINKA,
-    BGMName_ME_WASURE,
-    BGMName_SYOUJOEYE,
-    BGMName_BOYEYE,
-    BGMName_DAN02,
-    BGMName_MACHI_S3,
-    BGMName_ODAMAKI,
-    BGMName_B_TOWER,
-    BGMName_SWIMEYE,
-    BGMName_DAN03,
-    BGMName_ME_KINOMI,
-    BGMName_ME_TAMA,
-    BGMName_ME_B_BIG,
-    BGMName_ME_B_SMALL,
-    BGMName_ME_ZANNEN,
-    BGMName_BD_TIME,
-    BGMName_TEST1,
-    BGMName_TEST2,
-    BGMName_TEST3,
-    BGMName_TEST4,
-    BGMName_TEST,
-    BGMName_GOMACHI0,
-    BGMName_GOTOWN,
-    BGMName_POKECEN,
-    BGMName_NEXTROAD,
-    BGMName_GRANROAD,
-    BGMName_CYCLING,
-    BGMName_FRIENDLY,
-    BGMName_MISHIRO,
-    BGMName_TOZAN,
-    BGMName_GIRLEYE,
-    BGMName_MINAMO,
-    BGMName_ASHROAD,
-    BGMName_EVENT0,
-    BGMName_DEEPDEEP,
-    BGMName_KACHI1,
-    BGMName_TITLE3,
-    BGMName_DEMO1,
-    BGMName_GIRL_SUP,
-    BGMName_HAGESHII,
-    BGMName_KAKKOII,
-    BGMName_KAZANBAI,
-    BGMName_AQA_0,
-    BGMName_TSURETEK,
-    BGMName_BOY_SUP,
-    BGMName_RAINBOW,
-    BGMName_AYASII,
-    BGMName_KACHI4,
-    BGMName_ROPEWAY,
-    BGMName_CASINO,
-    BGMName_HIGHTOWN,
-    BGMName_SAFARI,
-    BGMName_C_ROAD,
-    BGMName_AJITO,
-    BGMName_M_BOAT,
-    BGMName_M_DUNGON,
-    BGMName_FINECITY,
-    BGMName_MACHUPI,
-    BGMName_P_SCHOOL,
-    BGMName_DENDOU,
-    BGMName_TONEKUSA,
-    BGMName_MABOROSI,
-    BGMName_CON_FAN,
-    BGMName_CONTEST0,
-    BGMName_MGM0,
-    BGMName_T_BATTLE,
-    BGMName_OOAME,
-    BGMName_HIDERI,
-    BGMName_RUNECITY,
-    BGMName_CON_K,
-    BGMName_EIKOU_R,
-    BGMName_KARAKURI,
-    BGMName_HUTAGO,
-    BGMName_SITENNOU,
-    BGMName_YAMA_EYE,
-    BGMName_CONLOBBY,
-    BGMName_INTER_V,
-    BGMName_DAIGO,
-    BGMName_THANKFOR,
-    BGMName_END,
-    BGMName_BATTLE27,
-    BGMName_BATTLE31,
-    BGMName_BATTLE20,
-    BGMName_BATTLE32,
-    BGMName_BATTLE33,
-    BGMName_BATTLE36,
-    BGMName_BATTLE34,
-    BGMName_BATTLE35,
-    BGMName_BATTLE38,
-    BGMName_BATTLE30
+SOUND_LIST_BGM
 };
+#undef X
 
-// SE names
-static const u8 SEName_STOP[] = _("STOP");
-static const u8 SEName_KAIFUKU[] = _("KAIFUKU");
-static const u8 SEName_PC_LOGON[] = _("PC-LOGON");
-static const u8 SEName_PC_OFF[] = _("PC-OFF");
-static const u8 SEName_PC_ON[] = _("PC-ON");
-static const u8 SEName_SELECT[] = _("SELECT");
-static const u8 SEName_WIN_OPEN[] = _("WIN-OPEN");
-static const u8 SEName_WALL_HIT[] = _("WALL-HIT");
-static const u8 SEName_DOOR[] = _("DOOR");
-static const u8 SEName_KAIDAN[] = _("KAIDAN");
-static const u8 SEName_DANSA[] = _("DANSA");
-static const u8 SEName_JITENSYA[] = _("JITENSYA");
-static const u8 SEName_KOUKA_L[] = _("KOUKA-L");
-static const u8 SEName_KOUKA_M[] = _("KOUKA-M");
-static const u8 SEName_KOUKA_H[] = _("KOUKA-H");
-static const u8 SEName_BOWA2[] = _("BOWA2");
-static const u8 SEName_POKE_DEAD[] = _("POKE-DEAD");
-static const u8 SEName_NIGERU[] = _("NIGERU");
-static const u8 SEName_JIDO_DOA[] = _("JIDO-DOA");
-static const u8 SEName_NAMINORI[] = _("NAMINORI");
-static const u8 SEName_BAN[] = _("BAN");
-static const u8 SEName_PIN[] = _("PIN");
-static const u8 SEName_BOO[] = _("BOO");
-static const u8 SEName_BOWA[] = _("BOWA");
-static const u8 SEName_JYUNI[] = _("JYUNI");
-static const u8 SEName_A[] = _("A");
-static const u8 SEName_I[] = _("I");
-static const u8 SEName_U[] = _("U");
-static const u8 SEName_E[] = _("E");
-static const u8 SEName_O[] = _("O");
-static const u8 SEName_N[] = _("N");
-static const u8 SEName_SEIKAI[] = _("SEIKAI");
-static const u8 SEName_HAZURE[] = _("HAZURE");
-static const u8 SEName_EXP[] = _("EXP");
-static const u8 SEName_JITE_PYOKO[] = _("JITE-PYOKO");
-static const u8 SEName_MU_PACHI[] = _("MU-PACHI");
-static const u8 SEName_TK_KASYA[] = _("TK-KASYA");
-static const u8 SEName_FU_ZAKU[] = _("FU-ZAKU");
-static const u8 SEName_FU_ZAKU2[] = _("FU-ZAKU2");
-static const u8 SEName_FU_ZUZUZU[] = _("FU-ZUZUZU");
-static const u8 SEName_RU_GASHIN[] = _("RU-GASHIN");
-static const u8 SEName_RU_GASYAN[] = _("RU-GASYAN");
-static const u8 SEName_RU_BARI[] = _("RU-BARI");
-static const u8 SEName_RU_HYUU[] = _("RU-HYUU");
-static const u8 SEName_KI_GASYAN[] = _("KI-GASYAN");
-static const u8 SEName_TK_WARPIN[] = _("TK-WARPIN");
-static const u8 SEName_TK_WARPOUT[] = _("TK-WARPOUT");
-static const u8 SEName_TU_SAA[] = _("TU-SAA");
-static const u8 SEName_HI_TURUN[] = _("HI-TURUN");
-static const u8 SEName_TRACK_MOVE[] = _("TRACK-MOVE");
-static const u8 SEName_TRACK_STOP[] = _("TRACK-STOP");
-static const u8 SEName_TRACK_HAIK[] = _("TRACK-HAIK");
-static const u8 SEName_TRACK_DOOR[] = _("TRACK-DOOR");
-static const u8 SEName_MOTER[] = _("MOTER");
-static const u8 SEName_CARD[] = _("CARD");
-static const u8 SEName_SAVE[] = _("SAVE");
-static const u8 SEName_KON[] = _("KON");
-static const u8 SEName_KON2[] = _("KON2");
-static const u8 SEName_KON3[] = _("KON3");
-static const u8 SEName_KON4[] = _("KON4");
-static const u8 SEName_SUIKOMU[] = _("SUIKOMU");
-static const u8 SEName_NAGERU[] = _("NAGERU");
-static const u8 SEName_TOY_C[] = _("TOY-C");
-static const u8 SEName_TOY_D[] = _("TOY-D");
-static const u8 SEName_TOY_E[] = _("TOY-E");
-static const u8 SEName_TOY_F[] = _("TOY-F");
-static const u8 SEName_TOY_G[] = _("TOY-G");
-static const u8 SEName_TOY_A[] = _("TOY-A");
-static const u8 SEName_TOY_B[] = _("TOY-B");
-static const u8 SEName_TOY_C1[] = _("TOY-C1");
-static const u8 SEName_MIZU[] = _("MIZU");
-static const u8 SEName_HASHI[] = _("HASHI");
-static const u8 SEName_DAUGI[] = _("DAUGI");
-static const u8 SEName_PINPON[] = _("PINPON");
-static const u8 SEName_FUUSEN1[] = _("FUUSEN1");
-static const u8 SEName_FUUSEN2[] = _("FUUSEN2");
-static const u8 SEName_FUUSEN3[] = _("FUUSEN3");
-static const u8 SEName_TOY_KABE[] = _("TOY-KABE");
-static const u8 SEName_TOY_DANGO[] = _("TOY-DANGO");
-static const u8 SEName_DOKU[] = _("DOKU");
-static const u8 SEName_ESUKA[] = _("ESUKA");
-static const u8 SEName_T_AME[] = _("T-AME");
-static const u8 SEName_T_AME_E[] = _("T-AME-E");
-static const u8 SEName_T_OOAME[] = _("T-OOAME");
-static const u8 SEName_T_OOAME_E[] = _("T-OOAME-E");
-static const u8 SEName_T_KOAME[] = _("T-KOAME");
-static const u8 SEName_T_KOAME_E[] = _("T-KOAME-E");
-static const u8 SEName_T_KAMI[] = _("T-KAMI");
-static const u8 SEName_T_KAMI2[] = _("T-KAMI2");
-static const u8 SEName_ELEBETA[] = _("ELEBETA");
-static const u8 SEName_HINSI[] = _("HINSI");
-static const u8 SEName_EXPMAX[] = _("EXPMAX");
-static const u8 SEName_TAMAKORO[] = _("TAMAKORO");
-static const u8 SEName_TAMAKORO_E[] = _("TAMAKORO-E");
-static const u8 SEName_BASABASA[] = _("BASABASA");
-static const u8 SEName_REGI[] = _("REGI");
-static const u8 SEName_C_GAJI[] = _("C-GAJI");
-static const u8 SEName_C_MAKU_U[] = _("C-MAKU-U");
-static const u8 SEName_C_MAKU_D[] = _("C-MAKU-D");
-static const u8 SEName_C_PASI[] = _("C-PASI");
-static const u8 SEName_C_SYU[] = _("C-SYU");
-static const u8 SEName_C_PIKON[] = _("C-PIKON");
-static const u8 SEName_REAPOKE[] = _("REAPOKE");
-static const u8 SEName_OP_BASYU[] = _("OP-BASYU");
-static const u8 SEName_BT_START[] = _("BT-START");
-static const u8 SEName_DENDOU[] = _("DENDOU");
-static const u8 SEName_JIHANKI[] = _("JIHANKI");
-static const u8 SEName_TAMA[] = _("TAMA");
-static const u8 SEName_Z_SCROLL[] = _("Z-SCROLL");
-static const u8 SEName_Z_PAGE[] = _("Z-PAGE");
-static const u8 SEName_PN_ON[] = _("PN-ON");
-static const u8 SEName_PN_OFF[] = _("PN-OFF");
-static const u8 SEName_Z_SEARCH[] = _("Z-SEARCH");
-static const u8 SEName_TAMAGO[] = _("TAMAGO");
-static const u8 SEName_TB_START[] = _("TB-START");
-static const u8 SEName_TB_KON[] = _("TB-KON");
-static const u8 SEName_TB_KARA[] = _("TB-KARA");
-static const u8 SEName_BIDORO[] = _("BIDORO");
-static const u8 SEName_W085[] = _("W085");
-static const u8 SEName_W085B[] = _("W085B");
-static const u8 SEName_W231[] = _("W231");
-static const u8 SEName_W171[] = _("W171");
-static const u8 SEName_W233[] = _("W233");
-static const u8 SEName_W233B[] = _("W233B");
-static const u8 SEName_W145[] = _("W145");
-static const u8 SEName_W145B[] = _("W145B");
-static const u8 SEName_W145C[] = _("W145C");
-static const u8 SEName_W240[] = _("W240");
-static const u8 SEName_W015[] = _("W015");
-static const u8 SEName_W081[] = _("W081");
-static const u8 SEName_W081B[] = _("W081B");
-static const u8 SEName_W088[] = _("W088");
-static const u8 SEName_W016[] = _("W016");
-static const u8 SEName_W016B[] = _("W016B");
-static const u8 SEName_W003[] = _("W003");
-static const u8 SEName_W104[] = _("W104");
-static const u8 SEName_W013[] = _("W013");
-static const u8 SEName_W196[] = _("W196");
-static const u8 SEName_W086[] = _("W086");
-static const u8 SEName_W004[] = _("W004");
-static const u8 SEName_W025[] = _("W025");
-static const u8 SEName_W025B[] = _("W025B");
-static const u8 SEName_W152[] = _("W152");
-static const u8 SEName_W026[] = _("W026");
-static const u8 SEName_W172[] = _("W172");
-static const u8 SEName_W172B[] = _("W172B");
-static const u8 SEName_W053[] = _("W053");
-static const u8 SEName_W007[] = _("W007");
-static const u8 SEName_W092[] = _("W092");
-static const u8 SEName_W221[] = _("W221");
-static const u8 SEName_W221B[] = _("W221B");
-static const u8 SEName_W052[] = _("W052");
-static const u8 SEName_W036[] = _("W036");
-static const u8 SEName_W059[] = _("W059");
-static const u8 SEName_W059B[] = _("W059B");
-static const u8 SEName_W010[] = _("W010");
-static const u8 SEName_W011[] = _("W011");
-static const u8 SEName_W017[] = _("W017");
-static const u8 SEName_W019[] = _("W019");
-static const u8 SEName_W028[] = _("W028");
-static const u8 SEName_W013B[] = _("W013B");
-static const u8 SEName_W044[] = _("W044");
-static const u8 SEName_W029[] = _("W029");
-static const u8 SEName_W057[] = _("W057");
-static const u8 SEName_W056[] = _("W056");
-static const u8 SEName_W250[] = _("W250");
-static const u8 SEName_W030[] = _("W030");
-static const u8 SEName_W039[] = _("W039");
-static const u8 SEName_W054[] = _("W054");
-static const u8 SEName_W077[] = _("W077");
-static const u8 SEName_W020[] = _("W020");
-static const u8 SEName_W082[] = _("W082");
-static const u8 SEName_W047[] = _("W047");
-static const u8 SEName_W195[] = _("W195");
-static const u8 SEName_W006[] = _("W006");
-static const u8 SEName_W091[] = _("W091");
-static const u8 SEName_W146[] = _("W146");
-static const u8 SEName_W120[] = _("W120");
-static const u8 SEName_W153[] = _("W153");
-static const u8 SEName_W071B[] = _("W071B");
-static const u8 SEName_W071[] = _("W071");
-static const u8 SEName_W103[] = _("W103");
-static const u8 SEName_W062[] = _("W062");
-static const u8 SEName_W062B[] = _("W062B");
-static const u8 SEName_W048[] = _("W048");
-static const u8 SEName_W187[] = _("W187");
-static const u8 SEName_W118[] = _("W118");
-static const u8 SEName_W155[] = _("W155");
-static const u8 SEName_W122[] = _("W122");
-static const u8 SEName_W060[] = _("W060");
-static const u8 SEName_W185[] = _("W185");
-static const u8 SEName_W014[] = _("W014");
-static const u8 SEName_W043[] = _("W043");
-static const u8 SEName_W207[] = _("W207");
-static const u8 SEName_W207B[] = _("W207B");
-static const u8 SEName_W215[] = _("W215");
-static const u8 SEName_W109[] = _("W109");
-static const u8 SEName_W173[] = _("W173");
-static const u8 SEName_W280[] = _("W280");
-static const u8 SEName_W202[] = _("W202");
-static const u8 SEName_W060B[] = _("W060B");
-static const u8 SEName_W076[] = _("W076");
-static const u8 SEName_W080[] = _("W080");
-static const u8 SEName_W100[] = _("W100");
-static const u8 SEName_W107[] = _("W107");
-static const u8 SEName_W166[] = _("W166");
-static const u8 SEName_W129[] = _("W129");
-static const u8 SEName_W115[] = _("W115");
-static const u8 SEName_W112[] = _("W112");
-static const u8 SEName_W197[] = _("W197");
-static const u8 SEName_W199[] = _("W199");
-static const u8 SEName_W236[] = _("W236");
-static const u8 SEName_W204[] = _("W204");
-static const u8 SEName_W268[] = _("W268");
-static const u8 SEName_W070[] = _("W070");
-static const u8 SEName_W063[] = _("W063");
-static const u8 SEName_W127[] = _("W127");
-static const u8 SEName_W179[] = _("W179");
-static const u8 SEName_W151[] = _("W151");
-static const u8 SEName_W201[] = _("W201");
-static const u8 SEName_W161[] = _("W161");
-static const u8 SEName_W161B[] = _("W161B");
-static const u8 SEName_W227[] = _("W227");
-static const u8 SEName_W227B[] = _("W227B");
-static const u8 SEName_W226[] = _("W226");
-static const u8 SEName_W208[] = _("W208");
-static const u8 SEName_W213[] = _("W213");
-static const u8 SEName_W213B[] = _("W213B");
-static const u8 SEName_W234[] = _("W234");
-static const u8 SEName_W260[] = _("W260");
-static const u8 SEName_W328[] = _("W328");
-static const u8 SEName_W320[] = _("W320");
-static const u8 SEName_W255[] = _("W255");
-static const u8 SEName_W291[] = _("W291");
-static const u8 SEName_W089[] = _("W089");
-static const u8 SEName_W239[] = _("W239");
-static const u8 SEName_W230[] = _("W230");
-static const u8 SEName_W281[] = _("W281");
-static const u8 SEName_W327[] = _("W327");
-static const u8 SEName_W287[] = _("W287");
-static const u8 SEName_W257[] = _("W257");
-static const u8 SEName_W253[] = _("W253");
-static const u8 SEName_W258[] = _("W258");
-static const u8 SEName_W322[] = _("W322");
-static const u8 SEName_W298[] = _("W298");
-static const u8 SEName_W287B[] = _("W287B");
-static const u8 SEName_W114[] = _("W114");
-static const u8 SEName_W063B[] = _("W063B");
+// Create SE list
+#define X(songId, name) static const u8 sSEName_##songId[] = _(name);
+SOUND_LIST_SE
+#undef X
 
+#define X(songId, name) sSEName_##songId,
 static const u8 *const gSENames[] =
 {
-    SEName_STOP,
-    SEName_KAIFUKU,
-    SEName_PC_LOGON,
-    SEName_PC_OFF,
-    SEName_PC_ON,
-    SEName_SELECT,
-    SEName_WIN_OPEN,
-    SEName_WALL_HIT,
-    SEName_DOOR,
-    SEName_KAIDAN,
-    SEName_DANSA,
-    SEName_JITENSYA,
-    SEName_KOUKA_L,
-    SEName_KOUKA_M,
-    SEName_KOUKA_H,
-    SEName_BOWA2,
-    SEName_POKE_DEAD,
-    SEName_NIGERU,
-    SEName_JIDO_DOA,
-    SEName_NAMINORI,
-    SEName_BAN,
-    SEName_PIN,
-    SEName_BOO,
-    SEName_BOWA,
-    SEName_JYUNI,
-    SEName_A,
-    SEName_I,
-    SEName_U,
-    SEName_E,
-    SEName_O,
-    SEName_N,
-    SEName_SEIKAI,
-    SEName_HAZURE,
-    SEName_EXP,
-    SEName_JITE_PYOKO,
-    SEName_MU_PACHI,
-    SEName_TK_KASYA,
-    SEName_FU_ZAKU,
-    SEName_FU_ZAKU2,
-    SEName_FU_ZUZUZU,
-    SEName_RU_GASHIN,
-    SEName_RU_GASYAN,
-    SEName_RU_BARI,
-    SEName_RU_HYUU,
-    SEName_KI_GASYAN,
-    SEName_TK_WARPIN,
-    SEName_TK_WARPOUT,
-    SEName_TU_SAA,
-    SEName_HI_TURUN,
-    SEName_TRACK_MOVE,
-    SEName_TRACK_STOP,
-    SEName_TRACK_HAIK,
-    SEName_TRACK_DOOR,
-    SEName_MOTER,
-    SEName_CARD,
-    SEName_SAVE,
-    SEName_KON,
-    SEName_KON2,
-    SEName_KON3,
-    SEName_KON4,
-    SEName_SUIKOMU,
-    SEName_NAGERU,
-    SEName_TOY_C,
-    SEName_TOY_D,
-    SEName_TOY_E,
-    SEName_TOY_F,
-    SEName_TOY_G,
-    SEName_TOY_A,
-    SEName_TOY_B,
-    SEName_TOY_C1,
-    SEName_MIZU,
-    SEName_HASHI,
-    SEName_DAUGI,
-    SEName_PINPON,
-    SEName_FUUSEN1,
-    SEName_FUUSEN2,
-    SEName_FUUSEN3,
-    SEName_TOY_KABE,
-    SEName_TOY_DANGO,
-    SEName_DOKU,
-    SEName_ESUKA,
-    SEName_T_AME,
-    SEName_T_AME_E,
-    SEName_T_OOAME,
-    SEName_T_OOAME_E,
-    SEName_T_KOAME,
-    SEName_T_KOAME_E,
-    SEName_T_KAMI,
-    SEName_T_KAMI2,
-    SEName_ELEBETA,
-    SEName_HINSI,
-    SEName_EXPMAX,
-    SEName_TAMAKORO,
-    SEName_TAMAKORO_E,
-    SEName_BASABASA,
-    SEName_REGI,
-    SEName_C_GAJI,
-    SEName_C_MAKU_U,
-    SEName_C_MAKU_D,
-    SEName_C_PASI,
-    SEName_C_SYU,
-    SEName_C_PIKON,
-    SEName_REAPOKE,
-    SEName_OP_BASYU,
-    SEName_BT_START,
-    SEName_DENDOU,
-    SEName_JIHANKI,
-    SEName_TAMA,
-    SEName_Z_SCROLL,
-    SEName_Z_PAGE,
-    SEName_PN_ON,
-    SEName_PN_OFF,
-    SEName_Z_SEARCH,
-    SEName_TAMAGO,
-    SEName_TB_START,
-    SEName_TB_KON,
-    SEName_TB_KARA,
-    SEName_BIDORO,
-    SEName_W085,
-    SEName_W085B,
-    SEName_W231,
-    SEName_W171,
-    SEName_W233,
-    SEName_W233B,
-    SEName_W145,
-    SEName_W145B,
-    SEName_W145C,
-    SEName_W240,
-    SEName_W015,
-    SEName_W081,
-    SEName_W081B,
-    SEName_W088,
-    SEName_W016,
-    SEName_W016B,
-    SEName_W003,
-    SEName_W104,
-    SEName_W013,
-    SEName_W196,
-    SEName_W086,
-    SEName_W004,
-    SEName_W025,
-    SEName_W025B,
-    SEName_W152,
-    SEName_W026,
-    SEName_W172,
-    SEName_W172B,
-    SEName_W053,
-    SEName_W007,
-    SEName_W092,
-    SEName_W221,
-    SEName_W221B,
-    SEName_W052,
-    SEName_W036,
-    SEName_W059,
-    SEName_W059B,
-    SEName_W010,
-    SEName_W011,
-    SEName_W017,
-    SEName_W019,
-    SEName_W028,
-    SEName_W013B,
-    SEName_W044,
-    SEName_W029,
-    SEName_W057,
-    SEName_W056,
-    SEName_W250,
-    SEName_W030,
-    SEName_W039,
-    SEName_W054,
-    SEName_W077,
-    SEName_W020,
-    SEName_W082,
-    SEName_W047,
-    SEName_W195,
-    SEName_W006,
-    SEName_W091,
-    SEName_W146,
-    SEName_W120,
-    SEName_W153,
-    SEName_W071B,
-    SEName_W071,
-    SEName_W103,
-    SEName_W062,
-    SEName_W062B,
-    SEName_W048,
-    SEName_W187,
-    SEName_W118,
-    SEName_W155,
-    SEName_W122,
-    SEName_W060,
-    SEName_W185,
-    SEName_W014,
-    SEName_W043,
-    SEName_W207,
-    SEName_W207B,
-    SEName_W215,
-    SEName_W109,
-    SEName_W173,
-    SEName_W280,
-    SEName_W202,
-    SEName_W060B,
-    SEName_W076,
-    SEName_W080,
-    SEName_W100,
-    SEName_W107,
-    SEName_W166,
-    SEName_W129,
-    SEName_W115,
-    SEName_W112,
-    SEName_W197,
-    SEName_W199,
-    SEName_W236,
-    SEName_W204,
-    SEName_W268,
-    SEName_W070,
-    SEName_W063,
-    SEName_W127,
-    SEName_W179,
-    SEName_W151,
-    SEName_W201,
-    SEName_W161,
-    SEName_W161B,
-    SEName_W227,
-    SEName_W227B,
-    SEName_W226,
-    SEName_W208,
-    SEName_W213,
-    SEName_W213B,
-    SEName_W234,
-    SEName_W260,
-    SEName_W328,
-    SEName_W320,
-    SEName_W255,
-    SEName_W291,
-    SEName_W089,
-    SEName_W239,
-    SEName_W230,
-    SEName_W281,
-    SEName_W327,
-    SEName_W287,
-    SEName_W257,
-    SEName_W253,
-    SEName_W258,
-    SEName_W322,
-    SEName_W298,
-    SEName_W287B,
-    SEName_W114,
-    SEName_W063B
+SOUND_LIST_SE
 };
-
+#undef X
 
 void sub_80BB25C(u8 taskId)
 {
