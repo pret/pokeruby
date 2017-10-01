@@ -92,64 +92,1080 @@ void sub_80BB25C(u8);
 void sub_80BB3B4(u8);
 void sub_80BB494(void);
 
-static const u8 gDebugText_SoundCheckJap[] = _("サウンドチェック");
-static const u8 gDebugText_BGM[] = _("BGM");
-static const u8 gDebugText_SE[] = _("SE ");
-static const u8 gDebugText_ABDesc[] = _("A‥さいせい　B‥おわり");
-static const u8 gDebugText_UpDown[] = _("L‥UP R‥DOWN");
-static const u8 gDebugText_DriverTest[] = _("R‥DRIVER-TEST");
+void sub_80BA0A8(void)
+{
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+}
+
+void sub_80BA0C0(void)
+{
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    TransferPlttBuffer();
+
+    if (gUnknown_020387B0 != 0)
+    {
+        m4aSoundMain();
+        m4aSoundMain();
+        m4aSoundMain();
+    }
+}
+
+// unused
+void CB2_StartSoundCheckMenu(void)
+{
+    u8 taskId;
+
+    SetVBlankCallback(NULL);
+    REG_DISPCNT = 0;
+    REG_BG2CNT = 0;
+    REG_BG1CNT = 0;
+    REG_BG0CNT = 0;
+    REG_BG2HOFS = 0;
+    REG_BG2VOFS = 0;
+    REG_BG1HOFS = 0;
+    REG_BG1VOFS = 0;
+    REG_BG0HOFS = 0;
+    REG_BG0VOFS = 0;
+    DmaFill16(3, 0, VRAM, VRAM_SIZE);
+    DmaFill32(3, 0, OAM, OAM_SIZE);
+    DmaFill16(3, 0, PLTT, PLTT_SIZE);
+    ResetPaletteFade();
+    ResetTasks();
+    ResetSpriteData();
+    SetUpWindowConfig(&gWindowConfig_81E6C3C);
+    InitMenuWindow(&gWindowConfig_81E6CE4);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+    REG_WIN0H = WIN_RANGE(0, 0);
+    REG_WIN0V = WIN_RANGE(0, 0);
+    REG_WIN1H = WIN_RANGE(0, 0);
+    REG_WIN1V = WIN_RANGE(0, 0);
+    REG_WININ = 0x1111;
+    REG_WINOUT = 0x31;
+    REG_BLDCNT = 0xE1;
+    REG_BLDALPHA = 0;
+    REG_BLDY = 7;
+    REG_IE = 1; // could be a typo of REG_IME
+    REG_IE |= 1;
+    REG_DISPSTAT |= 8;
+    SetVBlankCallback(sub_80BA0C0);
+    SetMainCallback2(sub_80BA0A8);
+    REG_DISPCNT = 0x7140;
+    taskId = CreateTask(sub_80BA258, 0);
+    gTasks[taskId].WINDOW_SELECTED = BGM_WINDOW;
+    gTasks[taskId].BGM_INDEX = 0;
+    gTasks[taskId].SE_INDEX = 0;
+    gTasks[taskId].UNK_DATA3 = 0;
+    gUnknown_020387B0 = 0;
+    gTasks[taskId].UNK_DATA3 = 0; // why?
+    m4aSoundInit();
+}
+
+// Task_InitSoundCheckMenu
+void sub_80BA258(u8 taskId)
+{
+    u8 soundcheckStr[] = _("サウンドチェック");
+    u8 bgmStr[] = _("BGM");
+    u8 seStr[] = _("SE ");
+    u8 abDescStr[] = _("A‥さいせい　B‥おわり");
+    u8 upDownStr[] = _("L‥UP R‥DOWN");
+    u8 driverStr[] = _("R‥DRIVER-TEST");
+
+    if (!gPaletteFade.active)
+    {
+        MenuDrawTextWindow(0x2, 0, 0x1B, 0x3);
+        MenuDrawTextWindow(0x2, 0x5, 0x1B, 0xA);
+        MenuDrawTextWindow(0x2, 0xC, 0x1B, 0x11);
+        MenuPrint(soundcheckStr, 4, 1);
+        MenuPrint(abDescStr, 14, 1);
+        MenuPrint(bgmStr, 4, 6);
+        MenuPrint(upDownStr, 14, 6);
+        MenuPrint(seStr, 4, 13);
+        MenuPrint(upDownStr, 14, 13);
+        MenuPrint(driverStr, 14, 18);
+        gTasks[taskId].FUNC = sub_80BA384;
+        REG_WIN0H = WIN_RANGE(17, 223);
+        REG_WIN0V = WIN_RANGE(1, 31);
+    }
+}
 
 // ideally this should be a multi Coords8 struct, but it wont match when its treated like a struct.
 static const u8 gUnknown_083D0300[] = { 1, 1, 1, 3, 1, 5, 1, 7, 1, 9, 1, 11, 1, 13, 1, 15, 1, 17 };
 
-static const u8 gDebugText_BBack[] = _("Bぼたんで　もどる");
-static const u8 gDebugText_APlay[] = _("Aぼたんで　さいせい");
-static const u8 gDebugText_Voice[] = _("VOICE‥‥‥‥");
-static const u8 gDebugText_Volume[] = _("VOLUME‥‥‥");
-static const u8 gDebugText_Panpot[] = _("PANPOT‥‥‥");
-static const u8 gDebugText_Pitch[] = _("PITCH‥‥‥‥");
-static const u8 gDebugText_Length[] = _("LENGTH‥‥‥");
-static const u8 gDebugText_Release[] = _("RELEASE‥‥");
-static const u8 gDebugText_Progress[] = _("PROGRESS‥");
-static const u8 gDebugText_Chorus[] = _("CHORUS‥‥‥");
-static const u8 gDebugText_Priority[] = _("PRIORITY‥");
-static const u8 gDebugText_Playing[] = _("さいせいちゆう‥"); // 再生中 (playing)
-static const u8 gDebugText_Reverse[] = _("はんてん‥‥‥‥"); // 反転 (reverse)
-static const u8 gDebugText_Stereo[] = _("すてれお‥‥‥‥"); // stereo
+extern const u8 *const gBGMNames[];
+extern const u8 *const gSENames[];
 
-// also ideally should be a MinMax struct, but any attempt to make this into a struct causes it to not match due to the weird multi dim access.
-static const int gUnknown_083D039C[16] =
+void sub_80BA384(u8 taskId) // Task_HandleDrawingSoundCheckMenuText
 {
-    0, 387,
-    0, 127,
-    -127, 127,
-    -128, 32639,
-    0, 65535,
-    0, 255,
-    0, 65535,
-    -64, 63
-};
+    sub_80BA6B8(gTasks[taskId].WINDOW_SELECTED);
+    sub_80BA700(gTasks[taskId].BGM_INDEX + BGM_STOP, 7, 8); // print by BGM index
+    sub_80BA79C(gBGMNames[gTasks[taskId].BGM_INDEX], 11, 8);
+    sub_80BA700(gTasks[taskId].SE_INDEX, 7, 15);
+    sub_80BA79C(gSENames[gTasks[taskId].SE_INDEX], 11, 15);
+    gTasks[taskId].FUNC = sub_80BA65C;
+}
 
-static const u8 gUnknown_083D03DC[] = _("▶");
-static const u8 gUnknown_083D03DE[] = _(" ");
-
-// why not just use Powers of ten from string_util?
-static const int gUnknown_083D03E0[6] =
+#ifdef NONMATCHING
+bool8 sub_80BA400(u8 taskId) // Task_ProcessSoundCheckMenuInput
 {
-          1,
-         10,
-        100,
-       1000,
-      10000,
-     100000
-};
+    if (gMain.newKeys & R_BUTTON) // driver test
+    {
+        gTasks[taskId].FUNC = sub_80BA800;
+        return FALSE;
+    }
+    if (gMain.newKeys & L_BUTTON)
+    {
+        gTasks[taskId].FUNC = sub_80BAF84;
+        return FALSE;
+    }
+    if (gMain.newKeys & START_BUTTON)
+    {
+        gTasks[taskId].FUNC = sub_80BB25C;
+        return FALSE;
+    }
+    if (gMain.newKeys & A_BUTTON) // both these cases insist on non reuses of certain data variables and cause the function to not match.
+    {
+        if (gTasks[taskId].WINDOW_SELECTED != 0) // is playing?
+        {
+            if (gTasks[taskId].UNK_DATA4 != 0)
+            {
+                if (gTasks[taskId].SE_INDEX != 0) // why are you insiting on a non signed halfword?
+                {
+                    m4aSongNumStop(gTasks[taskId].UNK_DATA4);
+                }
+                else
+                {
+                    m4aSongNumStop(gTasks[taskId].SE_INDEX);
+                    gTasks[taskId].UNK_DATA4 = gTasks[taskId].SE_INDEX;
+                    return FALSE;
+                }
+            }
+            else if (gTasks[taskId].SE_INDEX == 0) // _080BA4BA
+            {
+                return FALSE;
+            }
+            // _080BA4C4
+            m4aSongNumStart(gTasks[taskId].SE_INDEX);
+            gTasks[taskId].UNK_DATA4 = gTasks[taskId].SE_INDEX;
+            return FALSE;
+        }
+        else // _080BA4D0
+        {
+            if (gTasks[taskId].UNK_DATA3 != 0)
+            {
+                if (gTasks[taskId].BGM_INDEX != 0)
+                {
+                    m4aSongNumStop(gTasks[taskId].UNK_DATA3 + BGM_STOP);
+                }
+                else // _080BA500
+                {
+                    m4aSongNumStop(gTasks[taskId].UNK_DATA3 + BGM_STOP);
+                    gTasks[taskId].UNK_DATA3 = gTasks[taskId].BGM_INDEX;
+                    return FALSE;
+                }
+            }
+            else if (gTasks[taskId].BGM_INDEX == 0) // _080BA514
+                return FALSE;
+
+            m4aSongNumStart(gTasks[taskId].BGM_INDEX + BGM_STOP);
+            gTasks[taskId].UNK_DATA3 = gTasks[taskId].BGM_INDEX;
+        }
+        return FALSE;
+    }
+    if (gMain.newKeys & B_BUTTON)
+    {
+        m4aSongNumStart(5);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+        gTasks[taskId].FUNC = sub_80BA68C;
+        return FALSE;
+    }
+    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    {
+        gTasks[taskId].data[8] ^= A_BUTTON; // huh?
+        return TRUE;
+    }
+    if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    {
+        gTasks[taskId].data[8] ^= A_BUTTON; // huh?
+        return TRUE;
+    }
+    else
+    {
+    u16 keys = gMain.newAndRepeatedKeys & DPAD_RIGHT;
+    if (keys)
+    {
+        if (gTasks[taskId].WINDOW_SELECTED != 0)
+        {
+            if (gTasks[taskId].SE_INDEX > 0)
+            {
+                gTasks[taskId].SE_INDEX--;
+            }
+            else
+            {
+                gTasks[taskId].SE_INDEX = 0xF7;
+            }
+        }
+        else if (gTasks[taskId].BGM_INDEX > 0)
+        {
+            gTasks[taskId].BGM_INDEX--;
+        }
+        else
+        {
+            gTasks[taskId].BGM_INDEX = 0x75;
+        }
+        return TRUE;
+    }
+    if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+    {
+        if (gTasks[taskId].WINDOW_SELECTED != 0)
+        {
+            if (gTasks[taskId].SE_INDEX < 0xF7)
+            {
+                gTasks[taskId].SE_INDEX++;
+            }
+            else
+            {
+                gTasks[taskId].SE_INDEX = keys; // ??
+            }
+        }
+        else if (gTasks[taskId].BGM_INDEX < 0x75)
+        {
+            gTasks[taskId].BGM_INDEX++;
+            return TRUE;
+        }
+        else
+        {
+            gTasks[taskId].BGM_INDEX = gTasks[taskId].SE_INDEX;
+            return TRUE;
+        }
+        return TRUE;
+    }
+    if (gMain.heldKeys & SELECT_BUTTON)
+    {
+        gUnknown_020387B0 = A_BUTTON;
+        return FALSE;
+    }
+    else
+    {
+        gUnknown_020387B0 = (gMain.heldKeys & SELECT_BUTTON);
+        return FALSE;
+    }
+    }
+}
+#else
+__attribute__((naked))
+bool8 sub_80BA400(u8 taskId)
+{
+    asm(".syntax unified\n\
+    push {r4-r6,lr}\n\
+    sub sp, 0x4\n\
+    lsls r0, 24\n\
+    lsrs r4, r0, 24\n\
+    ldr r2, _080BA428 @ =gMain\n\
+    ldrh r1, [r2, 0x2E]\n\
+    movs r0, 0x80\n\
+    lsls r0, 1\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _080BA434\n\
+    ldr r0, _080BA42C @ =gTasks\n\
+    lsls r1, r4, 2\n\
+    adds r1, r4\n\
+    lsls r1, 3\n\
+    adds r1, r0\n\
+    ldr r0, _080BA430 @ =sub_80BA800\n\
+    str r0, [r1]\n\
+    b _080BA64C\n\
+    .align 2, 0\n\
+_080BA428: .4byte gMain\n\
+_080BA42C: .4byte gTasks\n\
+_080BA430: .4byte sub_80BA800\n\
+_080BA434:\n\
+    movs r0, 0x80\n\
+    lsls r0, 2\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _080BA458\n\
+    ldr r0, _080BA450 @ =gTasks\n\
+    lsls r1, r4, 2\n\
+    adds r1, r4\n\
+    lsls r1, 3\n\
+    adds r1, r0\n\
+    ldr r0, _080BA454 @ =sub_80BAF84\n\
+    str r0, [r1]\n\
+    b _080BA64C\n\
+    .align 2, 0\n\
+_080BA450: .4byte gTasks\n\
+_080BA454: .4byte sub_80BAF84\n\
+_080BA458:\n\
+    movs r0, 0x8\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _080BA478\n\
+    ldr r0, _080BA470 @ =gTasks\n\
+    lsls r1, r4, 2\n\
+    adds r1, r4\n\
+    lsls r1, 3\n\
+    adds r1, r0\n\
+    ldr r0, _080BA474 @ =sub_80BB25C\n\
+    str r0, [r1]\n\
+    b _080BA64C\n\
+    .align 2, 0\n\
+_080BA470: .4byte gTasks\n\
+_080BA474: .4byte sub_80BB25C\n\
+_080BA478:\n\
+    movs r6, 0x1\n\
+    movs r5, 0x1\n\
+    ands r5, r1\n\
+    cmp r5, 0\n\
+    beq _080BA538\n\
+    ldr r0, _080BA4AC @ =gTasks\n\
+    lsls r1, r4, 2\n\
+    adds r1, r4\n\
+    lsls r1, 3\n\
+    adds r5, r1, r0\n\
+    movs r1, 0x8\n\
+    ldrsh r0, [r5, r1]\n\
+    cmp r0, 0\n\
+    beq _080BA4D0\n\
+    movs r2, 0x10\n\
+    ldrsh r0, [r5, r2]\n\
+    cmp r0, 0\n\
+    beq _080BA4BA\n\
+    movs r3, 0xC\n\
+    ldrsh r4, [r5, r3]\n\
+    cmp r4, 0\n\
+    beq _080BA4B0\n\
+    ldrh r0, [r5, 0x10]\n\
+    bl m4aSongNumStop\n\
+    b _080BA4C4\n\
+    .align 2, 0\n\
+_080BA4AC: .4byte gTasks\n\
+_080BA4B0:\n\
+    ldrh r0, [r5, 0x10]\n\
+    bl m4aSongNumStop\n\
+    strh r4, [r5, 0x10]\n\
+    b _080BA64C\n\
+_080BA4BA:\n\
+    movs r4, 0xC\n\
+    ldrsh r0, [r5, r4]\n\
+    cmp r0, 0\n\
+    bne _080BA4C4\n\
+    b _080BA64C\n\
+_080BA4C4:\n\
+    ldrh r0, [r5, 0xC]\n\
+    bl m4aSongNumStart\n\
+    ldrh r0, [r5, 0xC]\n\
+    strh r0, [r5, 0x10]\n\
+    b _080BA64C\n\
+_080BA4D0:\n\
+    ldrh r1, [r5, 0xE]\n\
+    movs r2, 0xE\n\
+    ldrsh r0, [r5, r2]\n\
+    cmp r0, 0\n\
+    beq _080BA514\n\
+    movs r3, 0xA\n\
+    ldrsh r4, [r5, r3]\n\
+    cmp r4, 0\n\
+    beq _080BA500\n\
+    ldr r0, _080BA4FC @ =0x0000015d\n\
+    adds r4, r0, 0\n\
+    adds r0, r1, r4\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+    bl m4aSongNumStop\n\
+    ldrh r1, [r5, 0xA]\n\
+    adds r4, r1\n\
+    lsls r4, 16\n\
+    lsrs r4, 16\n\
+    adds r0, r4, 0\n\
+    b _080BA528\n\
+    .align 2, 0\n\
+_080BA4FC: .4byte 0x0000015d\n\
+_080BA500:\n\
+    ldr r2, _080BA510 @ =0x0000015d\n\
+    adds r0, r1, r2\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+    bl m4aSongNumStop\n\
+    strh r4, [r5, 0xE]\n\
+    b _080BA64C\n\
+    .align 2, 0\n\
+_080BA510: .4byte 0x0000015d\n\
+_080BA514:\n\
+    ldrh r1, [r5, 0xA]\n\
+    movs r3, 0xA\n\
+    ldrsh r0, [r5, r3]\n\
+    cmp r0, 0\n\
+    bne _080BA520\n\
+    b _080BA64C\n\
+_080BA520:\n\
+    ldr r4, _080BA534 @ =0x0000015d\n\
+    adds r0, r1, r4\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+_080BA528:\n\
+    bl m4aSongNumStart\n\
+    ldrh r0, [r5, 0xA]\n\
+    strh r0, [r5, 0xE]\n\
+    b _080BA64C\n\
+    .align 2, 0\n\
+_080BA534: .4byte 0x0000015d\n\
+_080BA538:\n\
+    movs r0, 0x2\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _080BA570\n\
+    movs r0, 0x5\n\
+    bl m4aSongNumStart\n\
+    movs r0, 0x1\n\
+    negs r0, r0\n\
+    str r5, [sp]\n\
+    movs r1, 0\n\
+    movs r2, 0\n\
+    movs r3, 0x10\n\
+    bl BeginNormalPaletteFade\n\
+    ldr r1, _080BA568 @ =gTasks\n\
+    lsls r0, r4, 2\n\
+    adds r0, r4\n\
+    lsls r0, 3\n\
+    adds r0, r1\n\
+    ldr r1, _080BA56C @ =sub_80BA68C\n\
+    str r1, [r0]\n\
+    b _080BA64C\n\
+    .align 2, 0\n\
+_080BA568: .4byte gTasks\n\
+_080BA56C: .4byte sub_80BA68C\n\
+_080BA570:\n\
+    ldrh r1, [r2, 0x30]\n\
+    movs r0, 0x40\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    bne _080BA582\n\
+    movs r0, 0x80\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _080BA59C\n\
+_080BA582:\n\
+    ldr r0, _080BA598 @ =gTasks\n\
+    lsls r1, r4, 2\n\
+    adds r1, r4\n\
+    lsls r1, 3\n\
+    adds r1, r0\n\
+    ldrh r0, [r1, 0x8]\n\
+    eors r0, r6\n\
+    strh r0, [r1, 0x8]\n\
+_080BA592:\n\
+    movs r0, 0x1\n\
+    b _080BA64E\n\
+    .align 2, 0\n\
+_080BA598: .4byte gTasks\n\
+_080BA59C:\n\
+    movs r0, 0x10\n\
+    ands r0, r1\n\
+    lsls r0, 16\n\
+    lsrs r3, r0, 16\n\
+    cmp r3, 0\n\
+    beq _080BA5EA\n\
+    ldr r0, _080BA5CC @ =gTasks\n\
+    lsls r1, r4, 2\n\
+    adds r1, r4\n\
+    lsls r1, 3\n\
+    adds r1, r0\n\
+    movs r2, 0x8\n\
+    ldrsh r0, [r1, r2]\n\
+    cmp r0, 0\n\
+    beq _080BA5D6\n\
+    ldrh r2, [r1, 0xC]\n\
+    movs r3, 0xC\n\
+    ldrsh r0, [r1, r3]\n\
+    cmp r0, 0\n\
+    ble _080BA5D0\n\
+    subs r0, r2, 0x1\n\
+    strh r0, [r1, 0xC]\n\
+    b _080BA592\n\
+    .align 2, 0\n\
+_080BA5CC: .4byte gTasks\n\
+_080BA5D0:\n\
+    movs r0, 0xF7\n\
+    strh r0, [r1, 0xC]\n\
+    b _080BA592\n\
+_080BA5D6:\n\
+    ldrh r2, [r1, 0xA]\n\
+    movs r4, 0xA\n\
+    ldrsh r0, [r1, r4]\n\
+    cmp r0, 0\n\
+    ble _080BA5E4\n\
+    subs r0, r2, 0x1\n\
+    b _080BA5E6\n\
+_080BA5E4:\n\
+    movs r0, 0x75\n\
+_080BA5E6:\n\
+    strh r0, [r1, 0xA]\n\
+    b _080BA592\n\
+_080BA5EA:\n\
+    movs r0, 0x20\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _080BA630\n\
+    ldr r1, _080BA614 @ =gTasks\n\
+    lsls r0, r4, 2\n\
+    adds r0, r4\n\
+    lsls r0, 3\n\
+    adds r1, r0, r1\n\
+    movs r0, 0x8\n\
+    ldrsh r2, [r1, r0]\n\
+    cmp r2, 0\n\
+    beq _080BA61C\n\
+    ldrh r2, [r1, 0xC]\n\
+    movs r4, 0xC\n\
+    ldrsh r0, [r1, r4]\n\
+    cmp r0, 0xF6\n\
+    bgt _080BA618\n\
+    adds r0, r2, 0x1\n\
+    strh r0, [r1, 0xC]\n\
+    b _080BA592\n\
+    .align 2, 0\n\
+_080BA614: .4byte gTasks\n\
+_080BA618:\n\
+    strh r3, [r1, 0xC]\n\
+    b _080BA592\n\
+_080BA61C:\n\
+    ldrh r3, [r1, 0xA]\n\
+    movs r4, 0xA\n\
+    ldrsh r0, [r1, r4]\n\
+    cmp r0, 0x74\n\
+    bgt _080BA62C\n\
+    adds r0, r3, 0x1\n\
+    strh r0, [r1, 0xA]\n\
+    b _080BA592\n\
+_080BA62C:\n\
+    strh r2, [r1, 0xA]\n\
+    b _080BA592\n\
+_080BA630:\n\
+    ldrh r1, [r2, 0x2C]\n\
+    movs r0, 0x4\n\
+    ands r0, r1\n\
+    lsls r0, 16\n\
+    lsrs r1, r0, 16\n\
+    cmp r1, 0\n\
+    beq _080BA648\n\
+    ldr r0, _080BA644 @ =gUnknown_020387B0\n\
+    strb r6, [r0]\n\
+    b _080BA64C\n\
+    .align 2, 0\n\
+_080BA644: .4byte gUnknown_020387B0\n\
+_080BA648:\n\
+    ldr r0, _080BA658 @ =gUnknown_020387B0\n\
+    strb r1, [r0]\n\
+_080BA64C:\n\
+    movs r0, 0\n\
+_080BA64E:\n\
+    add sp, 0x4\n\
+    pop {r4-r6}\n\
+    pop {r1}\n\
+    bx r1\n\
+    .align 2, 0\n\
+_080BA658: .4byte gUnknown_020387B0\n\
+    .syntax divided");
+}
+#endif
+
+void sub_80BA65C(u8 taskId)
+{
+    if (sub_80BA400(taskId) != FALSE)
+        gTasks[taskId].FUNC = sub_80BA384;
+}
+
+void sub_80BA68C(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        DestroyTask(taskId);
+        SetMainCallback2(CB2_InitTitleScreen);
+    }
+}
+
+void sub_80BA6B8(u8 windowType)
+{
+    switch (windowType)
+    {
+    case BGM_WINDOW:
+    default:
+        REG_WIN1H = WIN_RANGE(17, 223);
+        REG_WIN1V = WIN_RANGE(41, 87);
+        break;
+    case SE_WINDOW:
+        REG_WIN1H = WIN_RANGE(17, 223);
+        REG_WIN1V = WIN_RANGE(97, 143);
+        break;
+    }
+}
+
+void sub_80BA700(u16 soundIndex, u16 x, u16 y) // PrintSoundNumber ?
+{
+    u8 i;
+    u8 str[5];
+    bool8 someBool;
+    u8 divisorValue;
+
+    for (i = 0; i < 3; i++)
+        str[i] = 0; // initialize array
+
+    str[3] = CHAR_ELLIPSIS;
+    str[4] = EOS;
+    someBool = FALSE;
+
+    divisorValue = soundIndex / 100;
+    if (divisorValue)
+    {
+        str[0] = divisorValue + CHAR_0;
+        someBool = TRUE;
+    }
+
+    divisorValue = (soundIndex % 100) / 10;
+    if (divisorValue || someBool != FALSE)
+        str[1] = divisorValue + CHAR_0;
+
+    str[2] = ((soundIndex % 100) % 10) + CHAR_0;
+    MenuPrint(str, x, y);
+}
+
+void sub_80BA79C(const u8 *const string, u16 x, u16 y)
+{
+    u8 i;
+    u8 str[11];
+
+    for (i = 0; i < 11; i++)
+        str[i] = 0; // format string.
+
+    str[10] = EOS; // the above for loop formats the last element of the array unnecessarily.
+
+    for (i = 0; string[i] != EOS && i < 10; i++)
+        str[i] = string[i];
+
+    MenuPrint(str, x, y);
+}
+
+void sub_80BA800(u8 taskId) // Task_DrawDriverTestMenu
+{
+
+    u8 bbackStr[] = _("Bぼたんで　もどる");
+    u8 aplayStr[] = _("Aぼたんで　さいせい");
+    u8 voiceStr[] = _("VOICE‥‥‥‥");
+    u8 volumeStr[] = _("VOLUME‥‥‥");
+    u8 panpotStr[] = _("PANPOT‥‥‥");
+    u8 pitchStr[] = _("PITCH‥‥‥‥");
+    u8 lengthStr[] = _("LENGTH‥‥‥");
+    u8 releaseStr[] = _("RELEASE‥‥");
+    u8 progressStr[] = _("PROGRESS‥");
+    u8 chorusStr[] = _("CHORUS‥‥‥");
+    u8 priorityStr[] = _("PRIORITY‥");
+    u8 playingStr[] = _("さいせいちゆう‥"); // 再生中 (playing)
+    u8 reverseStr[] = _("はんてん‥‥‥‥"); // 反転 (reverse)
+    u8 stereoStr[] = _("すてれお‥‥‥‥"); // stereo
+
+    REG_DISPCNT = 0x3140;
+    MenuDrawTextWindow(0, 0, 0x1D, 0x13);
+    MenuPrint(bbackStr, 0x13, 0x4);
+    MenuPrint(aplayStr, 0x13, 0x2);
+    MenuPrint(voiceStr, 0x2, 0x1);
+    MenuPrint(volumeStr, 0x2, 0x3);
+    MenuPrint(panpotStr, 0x2, 0x5);
+    MenuPrint(pitchStr, 0x2, 0x7);
+    MenuPrint(lengthStr, 0x2, 0x9);
+    MenuPrint(releaseStr, 0x2, 0xB);
+    MenuPrint(progressStr, 0x2, 0xD);
+    MenuPrint(chorusStr, 0x2, 0xF);
+    MenuPrint(priorityStr, 0x2, 0x11);
+    MenuPrint(playingStr, 0x13, 0x10);
+    MenuPrint(reverseStr, 0x13, 0xE);
+    MenuPrint(stereoStr, 0x13, 0xC);
+    REG_WIN0H = WIN_RANGE(0, 240);
+    REG_WIN0V = WIN_RANGE(0, 160);
+    gUnknown_020387B3 = 0;
+    gUnknown_020387B1 = 0;
+    gUnknown_020387B2 = 0;
+    gUnknown_03005D30 = NULL;
+    gUnknown_020387D8 = 0;
+    gUnknown_020387D9 = 1;
+    gUnknown_020387B4[CRY_TEST_UNK0] = 0;
+    gUnknown_020387B4[CRY_TEST_VOLUME] = 0x78;
+    gUnknown_020387B4[CRY_TEST_PANPOT] = 0;
+    gUnknown_020387B4[CRY_TEST_PITCH] = 0x3C00;
+    gUnknown_020387B4[CRY_TEST_LENGTH] = 0xB4;
+    gUnknown_020387B4[CRY_TEST_PROGRESS] = 0;
+    gUnknown_020387B4[CRY_TEST_RELEASE] = 0;
+    gUnknown_020387B4[CRY_TEST_CHORUS] = 0;
+    gUnknown_020387B4[CRY_TEST_PRIORITY] = 2;
+    sub_80BAD5C();
+    sub_80BAE10(0, 0);
+    gTasks[taskId].FUNC = sub_80BAA48;
+}
+
+
+
+void sub_80BAA48(u8 taskId) // Task_ProcessDriverTestInput
+{
+    if (gMain.newKeys & B_BUTTON)
+    {
+        REG_DISPCNT = 0x7140;
+        REG_WIN0H = WIN_RANGE(17, 223);
+        REG_WIN0V = WIN_RANGE(1, 31);
+        MenuZeroFillWindowRect(0, 0, 0x1D, 0x13);
+        gTasks[taskId].FUNC = sub_80BA258;
+        return;
+    }
+    if (gMain.newAndRepeatedKeys & DPAD_UP) // _080BAAA8
+    {
+        u8 backupVar = gUnknown_020387B3;
+        if(--gUnknown_020387B3 < 0)
+            gUnknown_020387B3 = 8;
+
+        sub_80BAE10(backupVar, gUnknown_020387B3);
+        return;
+    }
+    if (gMain.newAndRepeatedKeys & DPAD_DOWN) // _080BAAD0
+    {
+        u8 backupVar = gUnknown_020387B3;
+        if(++gUnknown_020387B3 > 8)
+            gUnknown_020387B3 = 0;
+
+        sub_80BAE10(backupVar, gUnknown_020387B3);
+        return;
+    }
+    if (gMain.newKeys & START_BUTTON) // _080BAAF8
+    {
+        gUnknown_020387D8 ^= 1;
+        sub_80BAD5C();
+        return;
+    }
+    if (gMain.newKeys & SELECT_BUTTON) // _080BAB14
+    {
+        gUnknown_020387D9 ^= 1;
+        sub_80BAD5C();
+        SetPokemonCryStereo(gUnknown_020387D9);
+        return;
+    }
+    if (gMain.newAndRepeatedKeys & R_BUTTON) // _080BAB38
+    {
+        sub_80BACDC(10);
+        sub_80BAD5C();
+        return;
+    }
+    if (gMain.newAndRepeatedKeys & L_BUTTON) // _080BAB46
+    {
+        sub_80BACDC(-10);
+        sub_80BAD5C();
+        return;
+    }
+    if (gMain.newAndRepeatedKeys & DPAD_LEFT) // _080BAB56
+    {
+        sub_80BACDC(-1);
+        sub_80BAD5C();
+        return;
+    }
+    if (gMain.newAndRepeatedKeys & DPAD_RIGHT) // _080BAB64
+    {
+        sub_80BACDC(1);
+        sub_80BAD5C();
+        return;
+    }
+    if (gMain.newKeys & A_BUTTON) // _080BAB78
+    {
+        u8 divide, remaining;
+
+        SetPokemonCryVolume(gUnknown_020387B4[CRY_TEST_VOLUME]);
+        SetPokemonCryPanpot(gUnknown_020387B4[CRY_TEST_PANPOT]);
+        SetPokemonCryPitch(gUnknown_020387B4[CRY_TEST_PITCH]);
+        SetPokemonCryLength(gUnknown_020387B4[CRY_TEST_LENGTH]);
+        SetPokemonCryProgress(gUnknown_020387B4[CRY_TEST_PROGRESS]);
+        SetPokemonCryRelease(gUnknown_020387B4[CRY_TEST_RELEASE]);
+        SetPokemonCryChorus(gUnknown_020387B4[CRY_TEST_CHORUS]);
+        SetPokemonCryPriority(gUnknown_020387B4[CRY_TEST_PRIORITY]);
+
+        remaining = gUnknown_020387B4[CRY_TEST_UNK0] % 128;
+        divide = gUnknown_020387B4[CRY_TEST_UNK0] / 128;
+
+        switch (divide)
+        {
+        case 0:
+            if (gUnknown_020387D8)
+                gUnknown_03005D30 = SetPokemonCryTone(&voicegroup_84537C0[remaining]);
+            else
+                gUnknown_03005D30 = SetPokemonCryTone(&voicegroup_8452590[remaining]);
+            break;
+        case 1:
+            if (gUnknown_020387D8)
+                gUnknown_03005D30 = SetPokemonCryTone(&voicegroup_8453DC0[remaining]);
+            else
+                gUnknown_03005D30 = SetPokemonCryTone(&voicegroup_8452B90[remaining]);
+            break;
+        case 2:
+            if (gUnknown_020387D8)
+                gUnknown_03005D30 = SetPokemonCryTone(&voicegroup_84543C0[remaining]);
+            else
+                gUnknown_03005D30 = SetPokemonCryTone(&voicegroup_8453190[remaining]);
+            break;
+        case 3:
+            if (gUnknown_020387D8)
+                gUnknown_03005D30 = SetPokemonCryTone(&voicegroup_84549C0[remaining]);
+            else
+                gUnknown_03005D30 = SetPokemonCryTone(&voicegroup_8453790[remaining]);
+            break;
+        }
+    }
+
+    // _080BACA2
+    if (gUnknown_03005D30 != NULL)
+    {
+        gUnknown_020387B1 = IsPokemonCryPlaying(gUnknown_03005D30);
+
+        if (gUnknown_020387B1 != gUnknown_020387B2)
+            sub_80BAD5C();
+
+        gUnknown_020387B2 = gUnknown_020387B1;
+    }
+}
+
+void sub_80BACDC(s8 var)
+{
+    // also ideally should be a MinMax struct, but any attempt to make this into a struct causes it to not match due to the weird multi dim access.
+    int minMaxArray[16] =
+    {
+        0, 387,
+        0, 127,
+        -127, 127,
+        -128, 32639,
+        0, 65535,
+        0, 255,
+        0, 65535,
+        -64, 63
+    };
+
+    gUnknown_020387B4[gUnknown_020387B3] += var;
+
+    if (gUnknown_020387B4[gUnknown_020387B3] > minMaxArray[MULTI_DIM_ARR(gUnknown_020387B3, B_16, MAX)])
+        gUnknown_020387B4[gUnknown_020387B3] = minMaxArray[MULTI_DIM_ARR(gUnknown_020387B3, B_16, MIN)];
+
+    if (gUnknown_020387B4[gUnknown_020387B3] < minMaxArray[MULTI_DIM_ARR(gUnknown_020387B3, B_16, MIN)])
+        gUnknown_020387B4[gUnknown_020387B3] = minMaxArray[MULTI_DIM_ARR(gUnknown_020387B3, B_16, MAX)];
+}
+
+void sub_80BAD5C(void)
+{
+    sub_80BAE78(gUnknown_020387B4[CRY_TEST_UNK0] + 1, 0xB, 0x1, 0x5);
+    sub_80BAE78(gUnknown_020387B4[CRY_TEST_VOLUME], 0xB, 0x3, 0x5);
+    sub_80BAE78(gUnknown_020387B4[CRY_TEST_PANPOT], 0xB, 0x5, 0x5);
+    sub_80BAE78(gUnknown_020387B4[CRY_TEST_PITCH], 0xB, 0x7, 0x5);
+    sub_80BAE78(gUnknown_020387B4[CRY_TEST_LENGTH], 0xB, 0x9, 0x5);
+    sub_80BAE78(gUnknown_020387B4[CRY_TEST_RELEASE], 0xB, 0xB, 0x5);
+    sub_80BAE78(gUnknown_020387B4[CRY_TEST_PROGRESS], 0xB, 0xD, 0x5);
+    sub_80BAE78(gUnknown_020387B4[CRY_TEST_CHORUS], 0xB, 0xF, 0x5);
+    sub_80BAE78(gUnknown_020387B4[CRY_TEST_PRIORITY], 0xB, 0x11, 0x5);
+    sub_80BAE78(gUnknown_020387B1, 0x1B, 0x10, 0x1);
+    sub_80BAE78(gUnknown_020387D8, 0x1B, 0xE, 0x1);
+    sub_80BAE78(gUnknown_020387D9, 0x1B, 0xC, 0x1);
+}
+
+void sub_80BAE10(u8 var1, u8 var2)
+{
+    u8 str1[] = _("▶");
+    u8 str2[] = _(" ");
+
+    MenuPrint(str2, gUnknown_083D0300[MULTI_DIM_ARR(var1, B_16, 0)], gUnknown_083D0300[MULTI_DIM_ARR(var1, B_16, 1)]);
+    MenuPrint(str1, gUnknown_083D0300[MULTI_DIM_ARR(var2, B_16, 0)], gUnknown_083D0300[MULTI_DIM_ARR(var2, B_16, 1)]);
+}
+
+void sub_80BAE78(int n, u16 x, u16 y, u8 digits)
+{
+    int powersOfTen[6] =
+    {
+              1,
+             10,
+            100,
+           1000,
+          10000,
+         100000
+    };
+    u8 str[8];
+    s8 i;
+    s8 negative;
+    s8 someVar2;
+
+    for (i = 0; i <= digits; i++)
+        str[i] = CHAR_SPACE;
+    str[digits + 1] = EOS;
+
+    negative = FALSE;
+    if (n < 0)
+    {
+        n = -n;
+        negative = TRUE;
+    }
+
+    if (digits == 1)
+        someVar2 = TRUE;
+    else
+        someVar2 = FALSE;
+
+    for (i = digits - 1; i >= 0; i--)
+    {
+        s8 d = n / powersOfTen[i];
+
+        if (d != 0 || someVar2 || i == 0)
+        {
+            if (negative && !someVar2)
+                str[digits - i - 1] = CHAR_HYPHEN;
+            str[digits - i] = CHAR_0 + d;
+            someVar2 = TRUE;
+        }
+        n %= powersOfTen[i];
+    }
+
+    MenuPrint(str, x, y);
+}
 
 static const s8 gUnknown_083D03F8[5] = { 0x3F, 0x00, 0xC0, 0x7F, 0x80 };
 
-static const u8 gOtherText_SE[] = _("SE");
-static const u8 gOtherText_Pan[] = _("PAN");
-static const u8 gOtherText_LR[] = _("  LR");
-static const u8 gOtherText_RL[] = _("  RL");
+void sub_80BAF84(u8 taskId)
+{
+    u8 seStr[] = _("SE");
+    u8 panStr[] = _("PAN");
+    u8 playingStr[] = _("さいせいちゆう‥");
+
+    REG_DISPCNT = 0x3140;
+    MenuDrawTextWindow(0, 0, 0x1D, 0x13);
+    MenuPrint(seStr, 3, 2);
+    MenuPrint(panStr, 3, 4);
+    MenuPrint(playingStr, 3, 8);
+    REG_WIN0H = WIN_RANGE(0, 240);
+    REG_WIN0V = WIN_RANGE(0, 160);
+    gUnknown_020387B4[CRY_TEST_UNK0] = 1;
+    gUnknown_020387B4[CRY_TEST_PANPOT] = 0;
+    gUnknown_020387B4[CRY_TEST_CHORUS] = 0;
+    gUnknown_020387B4[CRY_TEST_PROGRESS] = 0;
+    gUnknown_020387B4[CRY_TEST_RELEASE] = 0;
+    sub_80BB1D4();
+    gTasks[taskId].FUNC = sub_80BB038;
+}
+
+void sub_80BB038(u8 taskId)
+{
+    sub_80BB1D4();
+    if (gUnknown_020387B4[CRY_TEST_PROGRESS])
+    {
+        if (gUnknown_020387B4[CRY_TEST_RELEASE])
+        {
+            gUnknown_020387B4[CRY_TEST_RELEASE]--;
+        }
+        else // _080BB05C
+        {
+            s8 panpot = gUnknown_083D03F8[gUnknown_020387B4[CRY_TEST_PANPOT]];
+            if (panpot != -128)
+            {
+                if (panpot == 0x7F)
+                {
+                    gUnknown_020387B4[CRY_TEST_CHORUS] += 2;
+                    if (gUnknown_020387B4[CRY_TEST_CHORUS] < 0x3F)
+                        SE12PanpotControl(gUnknown_020387B4[CRY_TEST_CHORUS]);
+                }
+            }
+            else // _080BB08C
+            {
+                gUnknown_020387B4[CRY_TEST_CHORUS] -= 2;
+                if (gUnknown_020387B4[CRY_TEST_CHORUS] > -0x40)
+                    SE12PanpotControl(gUnknown_020387B4[CRY_TEST_CHORUS]);
+            }
+        }
+    }
+     // _080BB0A2
+    if (gMain.newKeys & B_BUTTON)
+    {
+        REG_DISPCNT = 0x7140;
+        REG_WIN0H = WIN_RANGE(17, 223);
+        REG_WIN0V = WIN_RANGE(1, 31);
+        MenuZeroFillWindowRect(0, 0, 0x1D, 0x13);
+        gTasks[taskId].FUNC = sub_80BA258;
+        return;
+    }
+    if (gMain.newKeys & A_BUTTON) // _080BB104
+    {
+        s8 panpot = gUnknown_083D03F8[gUnknown_020387B4[CRY_TEST_PANPOT]];
+        if (panpot != -128)
+        {
+            if (panpot == 0x7F)
+            {
+                PlaySE12WithPanning(gUnknown_020387B4[CRY_TEST_UNK0], -0x40);
+                gUnknown_020387B4[CRY_TEST_CHORUS] = -0x40;
+                gUnknown_020387B4[CRY_TEST_PROGRESS] = 1;
+                gUnknown_020387B4[CRY_TEST_RELEASE] = 0x1E;
+                return;
+            }
+        }
+        else // _080BB140
+        {
+            PlaySE12WithPanning(gUnknown_020387B4[CRY_TEST_UNK0], 0x3F);
+            gUnknown_020387B4[CRY_TEST_CHORUS] = 0x3F;
+            gUnknown_020387B4[CRY_TEST_PROGRESS] = 1;
+            gUnknown_020387B4[CRY_TEST_RELEASE] = 0x1E;
+            return;
+        }
+        // _080BB154
+        PlaySE12WithPanning(gUnknown_020387B4[CRY_TEST_UNK0], panpot);
+        gUnknown_020387B4[CRY_TEST_PROGRESS] = 0;
+        return;
+    }
+    if (gMain.newKeys & L_BUTTON) // _080BB15E
+    {
+        gUnknown_020387B4[CRY_TEST_PANPOT]++;
+        if (gUnknown_020387B4[CRY_TEST_PANPOT] > 4)
+            gUnknown_020387B4[CRY_TEST_PANPOT] = 0;
+    }
+    if (gMain.newKeys & R_BUTTON) // _080BB176
+    {
+        gUnknown_020387B4[CRY_TEST_PANPOT]--;
+        if (gUnknown_020387B4[CRY_TEST_PANPOT] < 0)
+            gUnknown_020387B4[CRY_TEST_PANPOT] = 4;
+    }
+    if (gMain.newAndRepeatedKeys & DPAD_RIGHT) // _080BB192
+    {
+        gUnknown_020387B4[CRY_TEST_UNK0]++;
+        if (gUnknown_020387B4[CRY_TEST_UNK0] > 0xF7)
+            gUnknown_020387B4[CRY_TEST_UNK0] = 0;
+    }
+    else if (gMain.newAndRepeatedKeys & DPAD_LEFT) // _080BB1B0
+    {
+        gUnknown_020387B4[CRY_TEST_UNK0]--;
+        if (gUnknown_020387B4[CRY_TEST_UNK0] < 0)
+            gUnknown_020387B4[CRY_TEST_UNK0] = 0xF7;
+    }
+}
+
+void sub_80BB1D4(void)
+{
+    u8 lrStr[] = _("  LR");
+    u8 rlStr[] = _("  RL");
+
+    sub_80BAE78(gUnknown_020387B4[CRY_TEST_UNK0], 7, 2, 3);
+
+    switch (gUnknown_083D03F8[gUnknown_020387B4[CRY_TEST_PANPOT]])
+    {
+    case 0x7F:
+        MenuPrint(lrStr, 7, 4);
+        break;
+    case -0x80:
+        MenuPrint(rlStr, 7, 4);
+        break;
+    default:
+        sub_80BAE78(gUnknown_083D03F8[gUnknown_020387B4[CRY_TEST_PANPOT]], 7, 4, 3);
+        break;
+    }
+    sub_80BAE78(IsSEPlaying(), 12, 8, 1);
+}
 
 // bgm names
 static const u8 BGMName_STOP[] = _("STOP");
@@ -895,1223 +1911,6 @@ static const u8 *const gSENames[] =
     SEName_W063B
 };
 
-void sub_80BA0A8(void)
-{
-    RunTasks();
-    AnimateSprites();
-    BuildOamBuffer();
-    UpdatePaletteFade();
-}
-
-void sub_80BA0C0(void)
-{
-    LoadOam();
-    ProcessSpriteCopyRequests();
-    TransferPlttBuffer();
-
-    if(gUnknown_020387B0 != 0)
-    {
-        m4aSoundMain();
-        m4aSoundMain();
-        m4aSoundMain();
-    }
-}
-
-// unused
-void CB2_StartSoundCheckMenu(void)
-{
-    u8 taskId;
-
-    SetVBlankCallback(NULL);
-    REG_DISPCNT = 0;
-    REG_BG2CNT = 0;
-    REG_BG1CNT = 0;
-    REG_BG0CNT = 0;
-    REG_BG2HOFS = 0;
-    REG_BG2VOFS = 0;
-    REG_BG1HOFS = 0;
-    REG_BG1VOFS = 0;
-    REG_BG0HOFS = 0;
-    REG_BG0VOFS = 0;
-    DmaFill16(3, 0, VRAM, VRAM_SIZE);
-    DmaFill32(3, 0, OAM, OAM_SIZE);
-    DmaFill16(3, 0, PLTT, PLTT_SIZE);
-    ResetPaletteFade();
-    ResetTasks();
-    ResetSpriteData();
-    SetUpWindowConfig(&gWindowConfig_81E6C3C);
-    InitMenuWindow(&gWindowConfig_81E6CE4);
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
-    REG_WIN0H = WIN_RANGE(0, 0);
-    REG_WIN0V = WIN_RANGE(0, 0);
-    REG_WIN1H = WIN_RANGE(0, 0);
-    REG_WIN1V = WIN_RANGE(0, 0);
-    REG_WININ = 0x1111;
-    REG_WINOUT = 0x31;
-    REG_BLDCNT = 0xE1;
-    REG_BLDALPHA = 0;
-    REG_BLDY = 7;
-    REG_IE = 1; // could be a typo of REG_IME
-    REG_IE |= 1;
-    REG_DISPSTAT |= 8;
-    SetVBlankCallback(sub_80BA0C0);
-    SetMainCallback2(sub_80BA0A8);
-    REG_DISPCNT = 0x7140;
-    taskId = CreateTask(sub_80BA258, 0);
-    TASK.WINDOW_SELECTED = BGM_WINDOW;
-    TASK.BGM_INDEX = 0;
-    TASK.SE_INDEX = 0;
-    TASK.UNK_DATA3 = 0;
-    gUnknown_020387B0 = 0;
-    TASK.UNK_DATA3 = 0; // why?
-    m4aSoundInit();
-}
-
-// Task_InitSoundCheckMenu
-void sub_80BA258(u8 taskId)
-{
-    u8 soundcheckStr[sizeof(gDebugText_SoundCheckJap)];
-    u8 bgmStr[sizeof(gDebugText_BGM)];
-    u8 seStr[sizeof(gDebugText_SE)];
-    u8 abDescStr[sizeof(gDebugText_ABDesc)];
-    u8 upDownStr[sizeof(gDebugText_UpDown)];
-    u8 driverStr[sizeof(gDebugText_DriverTest)];
-
-    memcpy(soundcheckStr, gDebugText_SoundCheckJap, sizeof(gDebugText_SoundCheckJap));
-    memcpy(bgmStr, gDebugText_BGM, sizeof(gDebugText_BGM));
-    memcpy(seStr, gDebugText_SE, sizeof(gDebugText_SE));
-    memcpy(abDescStr, gDebugText_ABDesc, sizeof(gDebugText_ABDesc));
-    memcpy(upDownStr, gDebugText_UpDown, sizeof(gDebugText_UpDown));
-    memcpy(driverStr, gDebugText_DriverTest, sizeof(gDebugText_DriverTest));
-
-    if(!gPaletteFade.active)
-    {
-        MenuDrawTextWindow(0x2, 0, 0x1B, 0x3);
-        MenuDrawTextWindow(0x2, 0x5, 0x1B, 0xA);
-        MenuDrawTextWindow(0x2, 0xC, 0x1B, 0x11);
-        MenuPrint(soundcheckStr, 4, 1);
-        MenuPrint(abDescStr, 14, 1);
-        MenuPrint(bgmStr, 4, 6);
-        MenuPrint(upDownStr, 14, 6);
-        MenuPrint(seStr, 4, 13);
-        MenuPrint(upDownStr, 14, 13);
-        MenuPrint(driverStr, 14, 18);
-        TASK.FUNC = sub_80BA384;
-        REG_WIN0H = WIN_RANGE(17, 223);
-        REG_WIN0V = WIN_RANGE(1, 31); 
-    }
-}
-
-void sub_80BA384(u8 taskId) // Task_HandleDrawingSoundCheckMenuText
-{
-    sub_80BA6B8(TASK.WINDOW_SELECTED);
-    sub_80BA700(TASK.BGM_INDEX + BGM_STOP, 7, 8); // print by BGM index
-    sub_80BA79C(gBGMNames[TASK.BGM_INDEX], 11, 8);
-    sub_80BA700(TASK.SE_INDEX, 7, 15);
-    sub_80BA79C(gSENames[TASK.SE_INDEX], 11, 15);
-    TASK.FUNC = sub_80BA65C;
-}
-
-#ifdef NONMATCHING
-bool8 sub_80BA400(u8 taskId) // Task_ProcessSoundCheckMenuInput
-{
-    if(gMain.newKeys & R_BUTTON) // driver test
-    {
-        TASK.FUNC = sub_80BA800;
-        return FALSE;
-    }
-    if(gMain.newKeys & L_BUTTON)
-    {
-        TASK.FUNC = sub_80BAF84;
-        return FALSE;
-    }
-    if(gMain.newKeys & START_BUTTON)
-    {
-        TASK.FUNC = sub_80BB25C;
-        return FALSE;
-    }
-    if(gMain.newKeys & A_BUTTON) // both these cases insist on non reuses of certain data variables and cause the function to not match.
-    {
-        if(TASK.WINDOW_SELECTED != 0) // is playing?
-        {
-            if(TASK.UNK_DATA4 != 0)
-            {
-                if(TASK.SE_INDEX != 0) // why are you insiting on a non signed halfword?
-                {
-                    m4aSongNumStop(TASK.UNK_DATA4);
-                }
-                else
-                {
-                    m4aSongNumStop(TASK.SE_INDEX);
-                    TASK.UNK_DATA4 = TASK.SE_INDEX;
-                    return FALSE;
-                }
-            }
-            else if(TASK.SE_INDEX == 0) // _080BA4BA
-            {
-                return FALSE;
-            }
-            // _080BA4C4
-            m4aSongNumStart(TASK.SE_INDEX);
-            TASK.UNK_DATA4 = TASK.SE_INDEX;
-            return FALSE;
-        }
-        else // _080BA4D0
-        {
-            if(TASK.UNK_DATA3 != 0)
-            {
-                if(TASK.BGM_INDEX != 0)
-                {
-                    m4aSongNumStop(TASK.UNK_DATA3 + BGM_STOP);
-                }
-                else // _080BA500
-                {
-                    m4aSongNumStop(TASK.UNK_DATA3 + BGM_STOP);
-                    TASK.UNK_DATA3 = TASK.BGM_INDEX;
-                    return FALSE;
-                }
-            }
-            else if(TASK.BGM_INDEX == 0) // _080BA514
-                return FALSE;
-
-            m4aSongNumStart(TASK.BGM_INDEX + BGM_STOP);
-            TASK.UNK_DATA3 = TASK.BGM_INDEX;
-        }
-        return FALSE;
-    }
-    if(gMain.newKeys & B_BUTTON)
-    {
-        m4aSongNumStart(5);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
-        TASK.FUNC = sub_80BA68C;
-        return FALSE;
-    }
-    if(gMain.newAndRepeatedKeys & DPAD_UP)
-    {
-        TASK.data[8] ^= A_BUTTON; // huh?
-        return TRUE;
-    }
-    if(gMain.newAndRepeatedKeys & DPAD_DOWN)
-    {
-        TASK.data[8] ^= A_BUTTON; // huh?
-        return TRUE;
-    }
-    else
-    {
-    u16 keys = gMain.newAndRepeatedKeys & DPAD_RIGHT;
-    if(keys)
-    {
-        if(TASK.WINDOW_SELECTED != 0)
-        {
-            if(TASK.SE_INDEX > 0)
-            {
-                TASK.SE_INDEX--;
-            }
-            else
-            {
-                TASK.SE_INDEX = 0xF7;
-            }
-        }
-        else if(TASK.BGM_INDEX > 0)
-        {
-            TASK.BGM_INDEX--;
-        }
-        else
-        {
-            TASK.BGM_INDEX = 0x75;
-        }
-        return TRUE;
-    }
-    if(gMain.newAndRepeatedKeys & DPAD_LEFT)
-    {
-        if(TASK.WINDOW_SELECTED != 0)
-        {
-            if(TASK.SE_INDEX < 0xF7)
-            {
-                TASK.SE_INDEX++;
-            }
-            else
-            {
-                TASK.SE_INDEX = keys; // ??
-            }
-        }
-        else if(TASK.BGM_INDEX < 0x75)
-        {
-            TASK.BGM_INDEX++;
-            return TRUE;
-        }
-        else
-        {
-            TASK.BGM_INDEX = TASK.SE_INDEX;
-            return TRUE;
-        }
-        return TRUE;
-    }
-    if(gMain.heldKeys & SELECT_BUTTON)
-    {
-        gUnknown_020387B0 = A_BUTTON;
-        return FALSE;
-    }
-    else
-    {
-        gUnknown_020387B0 = (gMain.heldKeys & SELECT_BUTTON);
-        return FALSE;
-    }
-    }
-}
-#else
-__attribute__((naked))
-bool8 sub_80BA400(u8 taskId)
-{
-    asm(".syntax unified\n\
-    push {r4-r6,lr}\n\
-    sub sp, 0x4\n\
-    lsls r0, 24\n\
-    lsrs r4, r0, 24\n\
-    ldr r2, _080BA428 @ =gMain\n\
-    ldrh r1, [r2, 0x2E]\n\
-    movs r0, 0x80\n\
-    lsls r0, 1\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080BA434\n\
-    ldr r0, _080BA42C @ =gTasks\n\
-    lsls r1, r4, 2\n\
-    adds r1, r4\n\
-    lsls r1, 3\n\
-    adds r1, r0\n\
-    ldr r0, _080BA430 @ =sub_80BA800\n\
-    str r0, [r1]\n\
-    b _080BA64C\n\
-    .align 2, 0\n\
-_080BA428: .4byte gMain\n\
-_080BA42C: .4byte gTasks\n\
-_080BA430: .4byte sub_80BA800\n\
-_080BA434:\n\
-    movs r0, 0x80\n\
-    lsls r0, 2\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080BA458\n\
-    ldr r0, _080BA450 @ =gTasks\n\
-    lsls r1, r4, 2\n\
-    adds r1, r4\n\
-    lsls r1, 3\n\
-    adds r1, r0\n\
-    ldr r0, _080BA454 @ =sub_80BAF84\n\
-    str r0, [r1]\n\
-    b _080BA64C\n\
-    .align 2, 0\n\
-_080BA450: .4byte gTasks\n\
-_080BA454: .4byte sub_80BAF84\n\
-_080BA458:\n\
-    movs r0, 0x8\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080BA478\n\
-    ldr r0, _080BA470 @ =gTasks\n\
-    lsls r1, r4, 2\n\
-    adds r1, r4\n\
-    lsls r1, 3\n\
-    adds r1, r0\n\
-    ldr r0, _080BA474 @ =sub_80BB25C\n\
-    str r0, [r1]\n\
-    b _080BA64C\n\
-    .align 2, 0\n\
-_080BA470: .4byte gTasks\n\
-_080BA474: .4byte sub_80BB25C\n\
-_080BA478:\n\
-    movs r6, 0x1\n\
-    movs r5, 0x1\n\
-    ands r5, r1\n\
-    cmp r5, 0\n\
-    beq _080BA538\n\
-    ldr r0, _080BA4AC @ =gTasks\n\
-    lsls r1, r4, 2\n\
-    adds r1, r4\n\
-    lsls r1, 3\n\
-    adds r5, r1, r0\n\
-    movs r1, 0x8\n\
-    ldrsh r0, [r5, r1]\n\
-    cmp r0, 0\n\
-    beq _080BA4D0\n\
-    movs r2, 0x10\n\
-    ldrsh r0, [r5, r2]\n\
-    cmp r0, 0\n\
-    beq _080BA4BA\n\
-    movs r3, 0xC\n\
-    ldrsh r4, [r5, r3]\n\
-    cmp r4, 0\n\
-    beq _080BA4B0\n\
-    ldrh r0, [r5, 0x10]\n\
-    bl m4aSongNumStop\n\
-    b _080BA4C4\n\
-    .align 2, 0\n\
-_080BA4AC: .4byte gTasks\n\
-_080BA4B0:\n\
-    ldrh r0, [r5, 0x10]\n\
-    bl m4aSongNumStop\n\
-    strh r4, [r5, 0x10]\n\
-    b _080BA64C\n\
-_080BA4BA:\n\
-    movs r4, 0xC\n\
-    ldrsh r0, [r5, r4]\n\
-    cmp r0, 0\n\
-    bne _080BA4C4\n\
-    b _080BA64C\n\
-_080BA4C4:\n\
-    ldrh r0, [r5, 0xC]\n\
-    bl m4aSongNumStart\n\
-    ldrh r0, [r5, 0xC]\n\
-    strh r0, [r5, 0x10]\n\
-    b _080BA64C\n\
-_080BA4D0:\n\
-    ldrh r1, [r5, 0xE]\n\
-    movs r2, 0xE\n\
-    ldrsh r0, [r5, r2]\n\
-    cmp r0, 0\n\
-    beq _080BA514\n\
-    movs r3, 0xA\n\
-    ldrsh r4, [r5, r3]\n\
-    cmp r4, 0\n\
-    beq _080BA500\n\
-    ldr r0, _080BA4FC @ =0x0000015d\n\
-    adds r4, r0, 0\n\
-    adds r0, r1, r4\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    bl m4aSongNumStop\n\
-    ldrh r1, [r5, 0xA]\n\
-    adds r4, r1\n\
-    lsls r4, 16\n\
-    lsrs r4, 16\n\
-    adds r0, r4, 0\n\
-    b _080BA528\n\
-    .align 2, 0\n\
-_080BA4FC: .4byte 0x0000015d\n\
-_080BA500:\n\
-    ldr r2, _080BA510 @ =0x0000015d\n\
-    adds r0, r1, r2\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    bl m4aSongNumStop\n\
-    strh r4, [r5, 0xE]\n\
-    b _080BA64C\n\
-    .align 2, 0\n\
-_080BA510: .4byte 0x0000015d\n\
-_080BA514:\n\
-    ldrh r1, [r5, 0xA]\n\
-    movs r3, 0xA\n\
-    ldrsh r0, [r5, r3]\n\
-    cmp r0, 0\n\
-    bne _080BA520\n\
-    b _080BA64C\n\
-_080BA520:\n\
-    ldr r4, _080BA534 @ =0x0000015d\n\
-    adds r0, r1, r4\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-_080BA528:\n\
-    bl m4aSongNumStart\n\
-    ldrh r0, [r5, 0xA]\n\
-    strh r0, [r5, 0xE]\n\
-    b _080BA64C\n\
-    .align 2, 0\n\
-_080BA534: .4byte 0x0000015d\n\
-_080BA538:\n\
-    movs r0, 0x2\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080BA570\n\
-    movs r0, 0x5\n\
-    bl m4aSongNumStart\n\
-    movs r0, 0x1\n\
-    negs r0, r0\n\
-    str r5, [sp]\n\
-    movs r1, 0\n\
-    movs r2, 0\n\
-    movs r3, 0x10\n\
-    bl BeginNormalPaletteFade\n\
-    ldr r1, _080BA568 @ =gTasks\n\
-    lsls r0, r4, 2\n\
-    adds r0, r4\n\
-    lsls r0, 3\n\
-    adds r0, r1\n\
-    ldr r1, _080BA56C @ =sub_80BA68C\n\
-    str r1, [r0]\n\
-    b _080BA64C\n\
-    .align 2, 0\n\
-_080BA568: .4byte gTasks\n\
-_080BA56C: .4byte sub_80BA68C\n\
-_080BA570:\n\
-    ldrh r1, [r2, 0x30]\n\
-    movs r0, 0x40\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _080BA582\n\
-    movs r0, 0x80\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080BA59C\n\
-_080BA582:\n\
-    ldr r0, _080BA598 @ =gTasks\n\
-    lsls r1, r4, 2\n\
-    adds r1, r4\n\
-    lsls r1, 3\n\
-    adds r1, r0\n\
-    ldrh r0, [r1, 0x8]\n\
-    eors r0, r6\n\
-    strh r0, [r1, 0x8]\n\
-_080BA592:\n\
-    movs r0, 0x1\n\
-    b _080BA64E\n\
-    .align 2, 0\n\
-_080BA598: .4byte gTasks\n\
-_080BA59C:\n\
-    movs r0, 0x10\n\
-    ands r0, r1\n\
-    lsls r0, 16\n\
-    lsrs r3, r0, 16\n\
-    cmp r3, 0\n\
-    beq _080BA5EA\n\
-    ldr r0, _080BA5CC @ =gTasks\n\
-    lsls r1, r4, 2\n\
-    adds r1, r4\n\
-    lsls r1, 3\n\
-    adds r1, r0\n\
-    movs r2, 0x8\n\
-    ldrsh r0, [r1, r2]\n\
-    cmp r0, 0\n\
-    beq _080BA5D6\n\
-    ldrh r2, [r1, 0xC]\n\
-    movs r3, 0xC\n\
-    ldrsh r0, [r1, r3]\n\
-    cmp r0, 0\n\
-    ble _080BA5D0\n\
-    subs r0, r2, 0x1\n\
-    strh r0, [r1, 0xC]\n\
-    b _080BA592\n\
-    .align 2, 0\n\
-_080BA5CC: .4byte gTasks\n\
-_080BA5D0:\n\
-    movs r0, 0xF7\n\
-    strh r0, [r1, 0xC]\n\
-    b _080BA592\n\
-_080BA5D6:\n\
-    ldrh r2, [r1, 0xA]\n\
-    movs r4, 0xA\n\
-    ldrsh r0, [r1, r4]\n\
-    cmp r0, 0\n\
-    ble _080BA5E4\n\
-    subs r0, r2, 0x1\n\
-    b _080BA5E6\n\
-_080BA5E4:\n\
-    movs r0, 0x75\n\
-_080BA5E6:\n\
-    strh r0, [r1, 0xA]\n\
-    b _080BA592\n\
-_080BA5EA:\n\
-    movs r0, 0x20\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080BA630\n\
-    ldr r1, _080BA614 @ =gTasks\n\
-    lsls r0, r4, 2\n\
-    adds r0, r4\n\
-    lsls r0, 3\n\
-    adds r1, r0, r1\n\
-    movs r0, 0x8\n\
-    ldrsh r2, [r1, r0]\n\
-    cmp r2, 0\n\
-    beq _080BA61C\n\
-    ldrh r2, [r1, 0xC]\n\
-    movs r4, 0xC\n\
-    ldrsh r0, [r1, r4]\n\
-    cmp r0, 0xF6\n\
-    bgt _080BA618\n\
-    adds r0, r2, 0x1\n\
-    strh r0, [r1, 0xC]\n\
-    b _080BA592\n\
-    .align 2, 0\n\
-_080BA614: .4byte gTasks\n\
-_080BA618:\n\
-    strh r3, [r1, 0xC]\n\
-    b _080BA592\n\
-_080BA61C:\n\
-    ldrh r3, [r1, 0xA]\n\
-    movs r4, 0xA\n\
-    ldrsh r0, [r1, r4]\n\
-    cmp r0, 0x74\n\
-    bgt _080BA62C\n\
-    adds r0, r3, 0x1\n\
-    strh r0, [r1, 0xA]\n\
-    b _080BA592\n\
-_080BA62C:\n\
-    strh r2, [r1, 0xA]\n\
-    b _080BA592\n\
-_080BA630:\n\
-    ldrh r1, [r2, 0x2C]\n\
-    movs r0, 0x4\n\
-    ands r0, r1\n\
-    lsls r0, 16\n\
-    lsrs r1, r0, 16\n\
-    cmp r1, 0\n\
-    beq _080BA648\n\
-    ldr r0, _080BA644 @ =gUnknown_020387B0\n\
-    strb r6, [r0]\n\
-    b _080BA64C\n\
-    .align 2, 0\n\
-_080BA644: .4byte gUnknown_020387B0\n\
-_080BA648:\n\
-    ldr r0, _080BA658 @ =gUnknown_020387B0\n\
-    strb r1, [r0]\n\
-_080BA64C:\n\
-    movs r0, 0\n\
-_080BA64E:\n\
-    add sp, 0x4\n\
-    pop {r4-r6}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .align 2, 0\n\
-_080BA658: .4byte gUnknown_020387B0\n\
-    .syntax divided");
-}
-#endif
-
-void sub_80BA65C(u8 taskId)
-{
-    if(sub_80BA400(taskId) != FALSE)
-        TASK.FUNC = sub_80BA384;
-}
-
-void sub_80BA68C(u8 taskId)
-{
-    if(!gPaletteFade.active)
-    {
-        DestroyTask(taskId);
-        SetMainCallback2(CB2_InitTitleScreen);
-    }
-}
-
-void sub_80BA6B8(u8 windowType)
-{
-    switch(windowType)
-    {
-        case BGM_WINDOW:
-        default:
-            REG_WIN1H = WIN_RANGE(17, 223);
-            REG_WIN1V = WIN_RANGE(41, 87);
-            break;
-        case SE_WINDOW:
-            REG_WIN1H = WIN_RANGE(17, 223);
-            REG_WIN1V = WIN_RANGE(97, 143);
-            break;
-    }
-}
-
-void sub_80BA700(u16 soundIndex, u16 x, u16 y) // PrintSoundNumber ?
-{
-    u8 i;
-    u8 str[5];
-    bool8 someBool;
-    u8 divisorValue;
-
-    for(i = 0; i < 3; i++)
-        str[i] = 0; // initialize array
-
-    str[3] = CHAR_ELLIPSIS;
-    str[4] = EOS;
-    someBool = FALSE;
-
-    divisorValue = soundIndex / 100;
-    if(divisorValue)
-    {
-        str[0] = divisorValue + CHAR_0;
-        someBool = TRUE;
-    }
-
-    divisorValue = (soundIndex % 100) / 10;
-    if(divisorValue || someBool != FALSE)
-        str[1] = divisorValue + CHAR_0;
-
-    str[2] = ((soundIndex % 100) % 10) + CHAR_0;
-    MenuPrint(str, x, y);
-}
-
-void sub_80BA79C(const u8 *const string, u16 x, u16 y)
-{
-    u8 i;
-    u8 str[11];
-
-    for(i = 0; i < 11; i++)
-        str[i] = 0; // format string.
-
-    str[10] = EOS; // the above for loop formats the last element of the array unnecessarily.
-
-    for(i = 0; string[i] != EOS && i < 10; i++)
-        str[i] = string[i];
-
-    MenuPrint(str, x, y);
-}
-
-void sub_80BA800(u8 taskId) // Task_DrawDriverTestMenu
-{
-    u8 bbackStr[sizeof(gDebugText_BBack)];
-    u8 aplayStr[sizeof(gDebugText_APlay)];
-    u8 voiceStr[sizeof(gDebugText_Voice)];
-    u8 volumeStr[sizeof(gDebugText_Volume)];
-    u8 panpotStr[sizeof(gDebugText_Panpot)];
-    u8 pitchStr[sizeof(gDebugText_Pitch)];
-    u8 lengthStr[sizeof(gDebugText_Length)];
-    u8 releaseStr[sizeof(gDebugText_Release)];
-    u8 progressStr[sizeof(gDebugText_Progress)];
-    u8 chorusStr[sizeof(gDebugText_Chorus)];
-    u8 priorityStr[sizeof(gDebugText_Priority)];
-    u8 playingStr[sizeof(gDebugText_Playing)];
-    u8 reverseStr[sizeof(gDebugText_Reverse)];
-    u8 stereoStr[sizeof(gDebugText_Stereo)];
-
-    memcpy(bbackStr, gDebugText_BBack, sizeof(gDebugText_BBack));
-    memcpy(aplayStr, gDebugText_APlay, sizeof(gDebugText_APlay));
-    memcpy(voiceStr, gDebugText_Voice, sizeof(gDebugText_Voice));
-    memcpy(volumeStr, gDebugText_Volume, sizeof(gDebugText_Volume));
-    memcpy(panpotStr, gDebugText_Panpot, sizeof(gDebugText_Panpot));
-    memcpy(pitchStr, gDebugText_Pitch, sizeof(gDebugText_Pitch));
-    memcpy(lengthStr, gDebugText_Length, sizeof(gDebugText_Length));
-    memcpy(releaseStr, gDebugText_Release, sizeof(gDebugText_Release));
-    memcpy(progressStr, gDebugText_Progress, sizeof(gDebugText_Progress));
-    memcpy(chorusStr, gDebugText_Chorus, sizeof(gDebugText_Chorus));
-    memcpy(priorityStr, gDebugText_Priority, sizeof(gDebugText_Priority));
-    memcpy(playingStr, gDebugText_Playing, sizeof(gDebugText_Playing));
-    memcpy(reverseStr, gDebugText_Reverse, sizeof(gDebugText_Reverse));
-    memcpy(stereoStr, gDebugText_Stereo, sizeof(gDebugText_Stereo));
-
-    REG_DISPCNT = 0x3140;
-    MenuDrawTextWindow(0, 0, 0x1D, 0x13);
-    MenuPrint(bbackStr, 0x13, 0x4);
-    MenuPrint(aplayStr, 0x13, 0x2);
-    MenuPrint(voiceStr, 0x2, 0x1);
-    MenuPrint(volumeStr, 0x2, 0x3);
-    MenuPrint(panpotStr, 0x2, 0x5);
-    MenuPrint(pitchStr, 0x2, 0x7);
-    MenuPrint(lengthStr, 0x2, 0x9);
-    MenuPrint(releaseStr, 0x2, 0xB);
-    MenuPrint(progressStr, 0x2, 0xD);
-    MenuPrint(chorusStr, 0x2, 0xF);
-    MenuPrint(priorityStr, 0x2, 0x11);
-    MenuPrint(playingStr, 0x13, 0x10);
-    MenuPrint(reverseStr, 0x13, 0xE);
-    MenuPrint(stereoStr, 0x13, 0xC);
-    REG_WIN0H = WIN_RANGE(0, 240);
-    REG_WIN0V = WIN_RANGE(0, 160);
-    gUnknown_020387B3 = 0;
-    gUnknown_020387B1 = 0;
-    gUnknown_020387B2 = 0;
-    gUnknown_03005D30 = NULL;
-    gUnknown_020387D8 = 0;
-    gUnknown_020387D9 = 1;
-    gUnknown_020387B4[CRY_TEST_UNK0] = 0;
-    gUnknown_020387B4[CRY_TEST_VOLUME] = 0x78;
-    gUnknown_020387B4[CRY_TEST_PANPOT] = 0;
-    gUnknown_020387B4[CRY_TEST_PITCH] = 0x3C00;
-    gUnknown_020387B4[CRY_TEST_LENGTH] = 0xB4;
-    gUnknown_020387B4[CRY_TEST_PROGRESS] = 0;
-    gUnknown_020387B4[CRY_TEST_RELEASE] = 0;
-    gUnknown_020387B4[CRY_TEST_CHORUS] = 0;
-    gUnknown_020387B4[CRY_TEST_PRIORITY] = 2;
-    sub_80BAD5C();
-    sub_80BAE10(0, 0);
-    TASK.FUNC = sub_80BAA48;
-}
-
-void sub_80BAA48(u8 taskId) // Task_ProcessDriverTestInput
-{
-    if(gMain.newKeys & B_BUTTON)
-    {
-        REG_DISPCNT = 0x7140;
-        REG_WIN0H = WIN_RANGE(17, 223);
-        REG_WIN0V = WIN_RANGE(1, 31);
-        MenuZeroFillWindowRect(0, 0, 0x1D, 0x13);
-        TASK.FUNC = sub_80BA258;
-        return;
-    }
-    if(gMain.newAndRepeatedKeys & DPAD_UP) // _080BAAA8
-    {
-        u8 backupVar = gUnknown_020387B3;
-        if(--gUnknown_020387B3 < 0)
-            gUnknown_020387B3 = 8;
-
-        sub_80BAE10(backupVar, gUnknown_020387B3);
-        return;
-    }
-    if(gMain.newAndRepeatedKeys & DPAD_DOWN) // _080BAAD0
-    {
-        u8 backupVar = gUnknown_020387B3;
-        if(++gUnknown_020387B3 > 8)
-            gUnknown_020387B3 = 0;
-
-        sub_80BAE10(backupVar, gUnknown_020387B3);
-        return;
-    }
-    if(gMain.newKeys & START_BUTTON) // _080BAAF8
-    {
-        gUnknown_020387D8 ^= 1;
-        sub_80BAD5C();
-        return;
-    }
-    if(gMain.newKeys & SELECT_BUTTON) // _080BAB14
-    {
-        gUnknown_020387D9 ^= 1;
-        sub_80BAD5C();
-        SetPokemonCryStereo(gUnknown_020387D9);
-        return;
-    }
-    if(gMain.newAndRepeatedKeys & R_BUTTON) // _080BAB38
-    {
-        sub_80BACDC(10);
-        sub_80BAD5C();
-        return;
-    }
-    if(gMain.newAndRepeatedKeys & L_BUTTON) // _080BAB46
-    {
-        sub_80BACDC(-10);
-        sub_80BAD5C();
-        return;
-    }
-    if(gMain.newAndRepeatedKeys & DPAD_LEFT) // _080BAB56
-    {
-        sub_80BACDC(-1);
-        sub_80BAD5C();
-        return;
-    }
-    if(gMain.newAndRepeatedKeys & DPAD_RIGHT) // _080BAB64
-    {
-        sub_80BACDC(1);
-        sub_80BAD5C();
-        return;
-    }
-    if(gMain.newKeys & A_BUTTON) // _080BAB78
-    {
-        u8 divide, remaining;
-
-        SetPokemonCryVolume(gUnknown_020387B4[CRY_TEST_VOLUME]);
-        SetPokemonCryPanpot(gUnknown_020387B4[CRY_TEST_PANPOT]);
-        SetPokemonCryPitch(gUnknown_020387B4[CRY_TEST_PITCH]);
-        SetPokemonCryLength(gUnknown_020387B4[CRY_TEST_LENGTH]);
-        SetPokemonCryProgress(gUnknown_020387B4[CRY_TEST_PROGRESS]);
-        SetPokemonCryRelease(gUnknown_020387B4[CRY_TEST_RELEASE]);
-        SetPokemonCryChorus(gUnknown_020387B4[CRY_TEST_CHORUS]);
-        SetPokemonCryPriority(gUnknown_020387B4[CRY_TEST_PRIORITY]);
-
-        remaining = gUnknown_020387B4[CRY_TEST_UNK0] % 128;
-        divide = gUnknown_020387B4[CRY_TEST_UNK0] / 128;
-
-        switch(divide)
-        {
-            case 0:
-                if(gUnknown_020387D8)
-                    gUnknown_03005D30 = SetPokemonCryTone(&voicegroup_84537C0[remaining]);
-                else
-                    gUnknown_03005D30 = SetPokemonCryTone(&voicegroup_8452590[remaining]);
-                break;
-            case 1:
-                if(gUnknown_020387D8)
-                    gUnknown_03005D30 = SetPokemonCryTone(&voicegroup_8453DC0[remaining]);
-                else
-                    gUnknown_03005D30 = SetPokemonCryTone(&voicegroup_8452B90[remaining]);
-                break;
-            case 2:
-                if(gUnknown_020387D8)
-                    gUnknown_03005D30 = SetPokemonCryTone(&voicegroup_84543C0[remaining]);
-                else
-                    gUnknown_03005D30 = SetPokemonCryTone(&voicegroup_8453190[remaining]);
-                break;
-            case 3:
-                if(gUnknown_020387D8)
-                    gUnknown_03005D30 = SetPokemonCryTone(&voicegroup_84549C0[remaining]);
-                else
-                    gUnknown_03005D30 = SetPokemonCryTone(&voicegroup_8453790[remaining]);
-                break;
-        }
-    }
-
-    // _080BACA2
-    if(gUnknown_03005D30 != NULL)
-    {
-        gUnknown_020387B1 = IsPokemonCryPlaying(gUnknown_03005D30);
-
-        if(gUnknown_020387B1 != gUnknown_020387B2)
-            sub_80BAD5C();
-
-        gUnknown_020387B2 = gUnknown_020387B1;
-    }
-}
-
-void sub_80BACDC(s8 var)
-{
-    int minMaxArray[ARRAY_COUNT(gUnknown_083D039C)];
-
-    memcpy(minMaxArray, gUnknown_083D039C, sizeof(gUnknown_083D039C));
-    gUnknown_020387B4[gUnknown_020387B3] += var;
-
-    if(gUnknown_020387B4[gUnknown_020387B3] > minMaxArray[MULTI_DIM_ARR(gUnknown_020387B3, B_16, MAX)])
-        gUnknown_020387B4[gUnknown_020387B3] = minMaxArray[MULTI_DIM_ARR(gUnknown_020387B3, B_16, MIN)];
-
-    if(gUnknown_020387B4[gUnknown_020387B3] < minMaxArray[MULTI_DIM_ARR(gUnknown_020387B3, B_16, MIN)])
-        gUnknown_020387B4[gUnknown_020387B3] = minMaxArray[MULTI_DIM_ARR(gUnknown_020387B3, B_16, MAX)];
-}
-
-void sub_80BAD5C(void)
-{
-    sub_80BAE78(gUnknown_020387B4[CRY_TEST_UNK0] + 1, 0xB, 0x1, 0x5);
-    sub_80BAE78(gUnknown_020387B4[CRY_TEST_VOLUME], 0xB, 0x3, 0x5);
-    sub_80BAE78(gUnknown_020387B4[CRY_TEST_PANPOT], 0xB, 0x5, 0x5);
-    sub_80BAE78(gUnknown_020387B4[CRY_TEST_PITCH], 0xB, 0x7, 0x5);
-    sub_80BAE78(gUnknown_020387B4[CRY_TEST_LENGTH], 0xB, 0x9, 0x5);
-    sub_80BAE78(gUnknown_020387B4[CRY_TEST_RELEASE], 0xB, 0xB, 0x5);
-    sub_80BAE78(gUnknown_020387B4[CRY_TEST_PROGRESS], 0xB, 0xD, 0x5);
-    sub_80BAE78(gUnknown_020387B4[CRY_TEST_CHORUS], 0xB, 0xF, 0x5);
-    sub_80BAE78(gUnknown_020387B4[CRY_TEST_PRIORITY], 0xB, 0x11, 0x5);
-    sub_80BAE78(gUnknown_020387B1, 0x1B, 0x10, 0x1);
-    sub_80BAE78(gUnknown_020387D8, 0x1B, 0xE, 0x1);
-    sub_80BAE78(gUnknown_020387D9, 0x1B, 0xC, 0x1);
-}
-
-void sub_80BAE10(u8 var1, u8 var2)
-{
-    u8 str1[sizeof(gUnknown_083D03DC)];
-    u8 str2[sizeof(gUnknown_083D03DE)];
-
-    memcpy(str1, gUnknown_083D03DC, sizeof(gUnknown_083D03DC));
-    memcpy(str2, gUnknown_083D03DE, sizeof(gUnknown_083D03DE));
-
-    MenuPrint(str2, gUnknown_083D0300[MULTI_DIM_ARR(var1, B_16, 0)], gUnknown_083D0300[MULTI_DIM_ARR(var1, B_16, 1)]);
-    MenuPrint(str1, gUnknown_083D0300[MULTI_DIM_ARR(var2, B_16, 0)], gUnknown_083D0300[MULTI_DIM_ARR(var2, B_16, 1)]);
-}
-
-/*void sub_80BAE78(int var1, u16 var2, u16 var3, u8 var4)
-{
-    u32 powers[6];
-    u8 str[8];
-    u8 i;
-    u8 someVar, someVar2;
-
-    memcpy(powers, gUnknown_083D03E0, sizeof(powers);
-
-    for(i = 0; i < var4; i++)
-        str[i] = 0;
-
-    str[var4 + 1] = CHAR_0;
-    someVar = 0;
-
-    if(var1 < 0) // make absolute value? wtf
-    {
-        var1 = -var1; // just use abs?
-        someVar = 1;
-    }
-
-    // _080BAED6
-    someVar2 = 0;
-    if(var4 == 1)
-        someVar2 = 1;
-
-    // _080BAEE2
-    for(;;)
-    {
-        
-    }
-}*/
-
-// no.
-__attribute__((naked))
-void sub_80BAE78(int var1, u16 var2, u16 var3, u8 var4)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x2C\n\
-    mov r8, r0\n\
-    lsls r1, 16\n\
-    lsrs r6, r1, 16\n\
-    lsls r2, 16\n\
-    lsrs r2, 16\n\
-    lsls r3, 24\n\
-    lsrs r7, r3, 24\n\
-    mov r1, sp\n\
-    ldr r0, _080BAF80 @ =gUnknown_083D03E0\n\
-    ldm r0!, {r3-r5}\n\
-    stm r1!, {r3-r5}\n\
-    ldm r0!, {r3-r5}\n\
-    stm r1!, {r3-r5}\n\
-    movs r5, 0\n\
-    add r0, sp, 0x18\n\
-    mov r9, r0\n\
-    cmp r5, r7\n\
-    bgt _080BAEC0\n\
-    mov r4, r9\n\
-    movs r3, 0\n\
-_080BAEAC:\n\
-    lsls r0, r5, 24\n\
-    asrs r0, 24\n\
-    adds r1, r4, r0\n\
-    strb r3, [r1]\n\
-    adds r0, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    asrs r0, 24\n\
-    cmp r0, r7\n\
-    ble _080BAEAC\n\
-_080BAEC0:\n\
-    adds r0, r7, 0x1\n\
-    add r0, r9\n\
-    movs r1, 0xFF\n\
-    strb r1, [r0]\n\
-    movs r1, 0\n\
-    mov r3, r8\n\
-    cmp r3, 0\n\
-    bge _080BAED6\n\
-    negs r3, r3\n\
-    mov r8, r3\n\
-    movs r1, 0x1\n\
-_080BAED6:\n\
-    movs r4, 0\n\
-    mov r10, r4\n\
-    cmp r7, 0x1\n\
-    bne _080BAEE2\n\
-    movs r5, 0x1\n\
-    mov r10, r5\n\
-_080BAEE2:\n\
-    subs r0, r7, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    lsls r0, r5, 24\n\
-    lsls r6, 24\n\
-    str r6, [sp, 0x24]\n\
-    lsls r2, 24\n\
-    str r2, [sp, 0x28]\n\
-    cmp r0, 0\n\
-    blt _080BAF62\n\
-    str r1, [sp, 0x20]\n\
-_080BAEF8:\n\
-    asrs r6, r0, 24\n\
-    lsls r0, r6, 2\n\
-    add r0, sp\n\
-    ldr r1, [r0]\n\
-    mov r0, r8\n\
-    bl __divsi3\n\
-    lsls r0, 24\n\
-    lsrs r2, r0, 24\n\
-    cmp r0, 0\n\
-    bne _080BAF1A\n\
-    mov r0, r10\n\
-    cmp r0, 0\n\
-    bne _080BAF1A\n\
-    lsls r4, r5, 24\n\
-    cmp r6, 0\n\
-    bne _080BAF46\n\
-_080BAF1A:\n\
-    lsls r4, r5, 24\n\
-    ldr r3, [sp, 0x20]\n\
-    cmp r3, 0\n\
-    beq _080BAF34\n\
-    mov r5, r10\n\
-    cmp r5, 0\n\
-    bne _080BAF34\n\
-    asrs r0, r4, 24\n\
-    subs r0, r7, r0\n\
-    subs r0, 0x1\n\
-    add r0, r9\n\
-    movs r1, 0xAE\n\
-    strb r1, [r0]\n\
-_080BAF34:\n\
-    asrs r1, r4, 24\n\
-    subs r1, r7, r1\n\
-    add r1, r9\n\
-    lsls r0, r2, 24\n\
-    asrs r0, 24\n\
-    subs r0, 0x5F\n\
-    strb r0, [r1]\n\
-    movs r0, 0x1\n\
-    mov r10, r0\n\
-_080BAF46:\n\
-    asrs r4, 24\n\
-    lsls r0, r4, 2\n\
-    add r0, sp\n\
-    ldr r1, [r0]\n\
-    mov r0, r8\n\
-    bl __modsi3\n\
-    mov r8, r0\n\
-    subs r4, 0x1\n\
-    lsls r4, 24\n\
-    lsrs r5, r4, 24\n\
-    lsls r0, r5, 24\n\
-    cmp r0, 0\n\
-    bge _080BAEF8\n\
-_080BAF62:\n\
-    ldr r3, [sp, 0x24]\n\
-    lsrs r1, r3, 24\n\
-    ldr r4, [sp, 0x28]\n\
-    lsrs r2, r4, 24\n\
-    mov r0, r9\n\
-    bl MenuPrint\n\
-    add sp, 0x2C\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_080BAF80: .4byte gUnknown_083D03E0\n\
-    .syntax divided");
-}
-
-void sub_80BAF84(u8 taskId)
-{
-    u8 seStr[sizeof(gOtherText_SE)];
-    u8 panStr[sizeof(gOtherText_Pan)];
-    u8 playingStr[sizeof(gDebugText_Playing)];
-
-    memcpy(seStr, gOtherText_SE, sizeof(gOtherText_SE));
-    memcpy(panStr, gOtherText_Pan, sizeof(gOtherText_Pan));
-    memcpy(playingStr, gDebugText_Playing, sizeof(gDebugText_Playing));
-
-    REG_DISPCNT = 0x3140;
-    MenuDrawTextWindow(0, 0, 0x1D, 0x13);
-    MenuPrint(seStr, 3, 2);
-    MenuPrint(panStr, 3, 4);
-    MenuPrint(playingStr, 3, 8);
-    REG_WIN0H = WIN_RANGE(0, 240);
-    REG_WIN0V = WIN_RANGE(0, 160);
-    gUnknown_020387B4[CRY_TEST_UNK0] = 1;
-    gUnknown_020387B4[CRY_TEST_PANPOT] = 0;
-    gUnknown_020387B4[CRY_TEST_CHORUS] = 0;
-    gUnknown_020387B4[CRY_TEST_PROGRESS] = 0;
-    gUnknown_020387B4[CRY_TEST_RELEASE] = 0;
-    sub_80BB1D4();
-    TASK.FUNC = sub_80BB038;
-}
-
-void sub_80BB038(u8 taskId)
-{
-    sub_80BB1D4();
-    if(gUnknown_020387B4[CRY_TEST_PROGRESS])
-    {
-        if(gUnknown_020387B4[CRY_TEST_RELEASE])
-        {
-            gUnknown_020387B4[CRY_TEST_RELEASE]--;
-        }
-        else // _080BB05C
-        {
-            s8 panpot = gUnknown_083D03F8[gUnknown_020387B4[CRY_TEST_PANPOT]];
-            if(panpot != -128)
-            {
-                if(panpot == 0x7F)
-                {
-                    gUnknown_020387B4[CRY_TEST_CHORUS] += 2;
-                    if(gUnknown_020387B4[CRY_TEST_CHORUS] < 0x3F)
-                        SE12PanpotControl(gUnknown_020387B4[CRY_TEST_CHORUS]);
-                }
-            }
-            else // _080BB08C
-            {
-                gUnknown_020387B4[CRY_TEST_CHORUS] -= 2;
-                if(gUnknown_020387B4[CRY_TEST_CHORUS] > -0x40)
-                    SE12PanpotControl(gUnknown_020387B4[CRY_TEST_CHORUS]);
-            }
-        }
-    }
-     // _080BB0A2
-    if(gMain.newKeys & B_BUTTON)
-    {
-        REG_DISPCNT = 0x7140;
-        REG_WIN0H = WIN_RANGE(17, 223);
-        REG_WIN0V = WIN_RANGE(1, 31);
-        MenuZeroFillWindowRect(0, 0, 0x1D, 0x13);
-        TASK.FUNC = sub_80BA258;
-        return;
-    }
-    if(gMain.newKeys & A_BUTTON) // _080BB104
-    {
-        s8 panpot = gUnknown_083D03F8[gUnknown_020387B4[CRY_TEST_PANPOT]];
-        if(panpot != -128)
-        {
-            if(panpot == 0x7F)
-            {
-                PlaySE12WithPanning(gUnknown_020387B4[CRY_TEST_UNK0], -0x40);
-                gUnknown_020387B4[CRY_TEST_CHORUS] = -0x40;
-                gUnknown_020387B4[CRY_TEST_PROGRESS] = 1;
-                gUnknown_020387B4[CRY_TEST_RELEASE] = 0x1E;
-                return;
-            }
-        }
-        else // _080BB140
-        {
-            PlaySE12WithPanning(gUnknown_020387B4[CRY_TEST_UNK0], 0x3F);
-            gUnknown_020387B4[CRY_TEST_CHORUS] = 0x3F;
-            gUnknown_020387B4[CRY_TEST_PROGRESS] = 1;
-            gUnknown_020387B4[CRY_TEST_RELEASE] = 0x1E;
-            return;
-        }
-        // _080BB154
-        PlaySE12WithPanning(gUnknown_020387B4[CRY_TEST_UNK0], panpot);
-        gUnknown_020387B4[CRY_TEST_PROGRESS] = 0;
-        return;
-    }
-    if(gMain.newKeys & L_BUTTON) // _080BB15E
-    {
-        gUnknown_020387B4[CRY_TEST_PANPOT]++;
-        if(gUnknown_020387B4[CRY_TEST_PANPOT] > 4)
-            gUnknown_020387B4[CRY_TEST_PANPOT] = 0;
-    }
-    if(gMain.newKeys & R_BUTTON) // _080BB176
-    {
-        gUnknown_020387B4[CRY_TEST_PANPOT]--;
-        if(gUnknown_020387B4[CRY_TEST_PANPOT] < 0)
-            gUnknown_020387B4[CRY_TEST_PANPOT] = 4;
-    }
-    if(gMain.newAndRepeatedKeys & DPAD_RIGHT) // _080BB192
-    {
-        gUnknown_020387B4[CRY_TEST_UNK0]++;
-        if(gUnknown_020387B4[CRY_TEST_UNK0] > 0xF7)
-            gUnknown_020387B4[CRY_TEST_UNK0] = 0;
-    }
-    else if(gMain.newAndRepeatedKeys & DPAD_LEFT) // _080BB1B0
-    {
-        gUnknown_020387B4[CRY_TEST_UNK0]--;
-        if(gUnknown_020387B4[CRY_TEST_UNK0] < 0)
-            gUnknown_020387B4[CRY_TEST_UNK0] = 0xF7;
-    }
-}
-
-void sub_80BB1D4(void)
-{
-    u8 lrStr[sizeof(gOtherText_LR)];
-    u8 rlStr[sizeof(gOtherText_RL)];
-
-    memcpy(lrStr, gOtherText_LR, sizeof(lrStr));
-    memcpy(rlStr, gOtherText_RL, sizeof(rlStr));
-
-    sub_80BAE78(gUnknown_020387B4[CRY_TEST_UNK0], 7, 2, 3);
-
-    switch(gUnknown_083D03F8[gUnknown_020387B4[CRY_TEST_PANPOT]])
-    {
-        case 0x7F:
-            MenuPrint(lrStr, 7, 4);
-            break;
-        case -0x80:
-            MenuPrint(rlStr, 7, 4);
-            break;
-        default:
-            sub_80BAE78(gUnknown_083D03F8[gUnknown_020387B4[CRY_TEST_PANPOT]], 7, 4, 3);
-            break;
-    }
-    sub_80BAE78(IsSEPlaying(), 12, 8, 1);
-}
 
 void sub_80BB25C(u8 taskId)
 {
@@ -2133,7 +1932,7 @@ void sub_80BB25C(u8 taskId)
     zero = 0; // wtf?
     gUnknown_03005E98 = 0;
 
-    while(sub_8119E3C(&cryStruct, 3) == FALSE);
+    while (sub_8119E3C(&cryStruct, 3) == FALSE);
 
     cryStruct2.unk0 = 0;
     cryStruct2.unk2 = 15;
@@ -2144,7 +1943,7 @@ void sub_80BB25C(u8 taskId)
     zero = 0; // wtf?
     gUnknown_03005E98 = 0;
 
-    while(ShowPokedexCryScreen(&cryStruct2, 2) == FALSE);
+    while (ShowPokedexCryScreen(&cryStruct2, 2) == FALSE);
 
     MenuDrawTextWindow(0, 16, 5, 19);
     sub_80BB494();
@@ -2155,40 +1954,40 @@ void sub_80BB25C(u8 taskId)
     REG_BG3CNT = 0x1D03;
     REG_DISPCNT = 0x1d40;
     m4aMPlayFadeOutTemporarily(&gMPlay_BGM, 2);
-    TASK.FUNC = sub_80BB3B4;
+    gTasks[taskId].FUNC = sub_80BB3B4;
 }
 
 void sub_80BB3B4(u8 taskId)
 {
     sub_8119F88(3);
 
-    if(gMain.newKeys & A_BUTTON)
+    if (gMain.newKeys & A_BUTTON)
     {
         sub_811A050(gUnknown_03005D34);
     }
-    if(gMain.newKeys & R_BUTTON)
+    if (gMain.newKeys & R_BUTTON)
     {
         StopCryAndClearCrySongs();
     }
-    if(gMain.newAndRepeatedKeys & DPAD_UP)
+    if (gMain.newAndRepeatedKeys & DPAD_UP)
     {
         if(--gUnknown_03005D34 == 0)
             gUnknown_03005D34 = 384; // total species
         sub_80BB494();
     }
-    if(gMain.newAndRepeatedKeys & DPAD_DOWN)
+    if (gMain.newAndRepeatedKeys & DPAD_DOWN)
     {
         if(++gUnknown_03005D34 > 384)
             gUnknown_03005D34 = 1;
         sub_80BB494();
     }
-    if(gMain.newKeys & B_BUTTON)
+    if (gMain.newKeys & B_BUTTON)
     {
         REG_DISPCNT = 0x7140;
         REG_WIN0H = WIN_RANGE(17, 223);
         REG_WIN0V = WIN_RANGE(1, 31);
         MenuZeroFillWindowRect(0, 0, 0x1D, 0x13);
-        TASK.FUNC = sub_80BA258;
+        gTasks[taskId].FUNC = sub_80BA258;
         DestroyCryMeterNeedleSprite();
     }
 }
