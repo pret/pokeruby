@@ -1496,7 +1496,7 @@
 	.endm
 
 	.macro case condition, dest
-	compare_var_to_imm 0x8000, \condition
+	compare_var_to_value 0x8000, \condition
 	goto_if_eq \dest
 	.endm
 
