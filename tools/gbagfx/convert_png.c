@@ -93,14 +93,14 @@ void GetPngPalette(png_structp png_ptr, png_infop info_ptr, struct Image *image)
 
     if (png_get_PLTE(png_ptr, info_ptr, &colors, &numColors) != PNG_INFO_PLTE)
         FATAL_ERROR("Failed to retrieve palette.\n");
-    for (int i = 0; i < numColors; i++)
-    {
+
+    for (int i = 0; i < numColors; i++) {
         image->palette.colors[i].red = colors[i].red;
         image->palette.colors[i].green = colors[i].green;
         image->palette.colors[i].blue = colors[i].blue;
     }
+
     image->palette.numColors = numColors;
-    free(colors);
 }
 
 void SetPngPalette(png_structp png_ptr, png_infop info_ptr, struct Palette *palette)
