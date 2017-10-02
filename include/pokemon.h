@@ -601,6 +601,9 @@ u8 *sub_8040D08();
 bool32 sub_8040D3C(u16 species, u8 *name, u8 language);
 s8 sub_8040A54(struct Pokemon *, u8);
 u16 GetMonEVCount(struct Pokemon *);
+u16 GetEvolutionTargetSpecies(struct Pokemon *, u8, u16);
+const struct CompressedSpritePalette *GetMonSpritePalStruct(struct Pokemon *);
+bool8 IsPokeSpriteNotFlipped(u16);
 u8 GetLevelUpMovesBySpecies(u16, u16 *);
 u8 TryIncrementMonLevel(struct Pokemon *);
 

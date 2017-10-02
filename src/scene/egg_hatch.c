@@ -19,6 +19,7 @@
 #include "naming_screen.h"
 #include "trig.h"
 #include "rng.h"
+#include "trade.h"
 
 extern u8 ewram[];
 extern struct SpriteTemplate gUnknown_02024E8C;
@@ -40,10 +41,7 @@ struct EggHatchData* gEggHatchData;
 
 extern const u32 gUnknown_08D00000[];
 extern const u32 gUnknown_08D00524[];
-extern const u32 gUnknown_0820CA98[];
-extern const u32 gUnknown_0820F798[];
 extern const u16 gUnknown_08D004E0[]; //palette
-extern const u16 gUnknown_0820C9F8[]; //palette
 extern const struct SpriteSheet sUnknown_0820A3B0;
 extern const struct SpriteSheet sUnknown_0820A3B8;
 extern const struct SpritePalette sUnknown_0820A3C0;
@@ -512,7 +510,7 @@ static void CB2_EggHatch_0(void)
             u32 size;
 
             REG_BG2CNT = 0x4C06;
-            LoadPalette(&gUnknown_0820C9F8, 0x10, 0xA0);
+            LoadPalette(gUnknown_0820C9F8, 0x10, 0xA0);
 
             offsetRead = (u32)(&gUnknown_0820CA98);
             offsetWrite = (VRAM + 0x4000);

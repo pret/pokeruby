@@ -104,6 +104,7 @@ void LoadHeldItemIconGraphics(void);
 void PartyMenuTryGiveMonHeldItem(u8 taskId, u16 newItem, TaskFunc c);
 void CreateHeldItemIcons_806DC34(); // undefined args
 void CreateHeldItemIcons_806DC34();
+void CreateHeldItemIcons(u8 *, u8 *, u8);
 u8 GetMonIconSpriteId_maybe();
 void SetHeldItemIconVisibility();
 void TryPrintPartyMenuMonNickname();

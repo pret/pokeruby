@@ -76,11 +76,7 @@ SECTIONS {
         src/battle/smokescreen.o(.text);
         src/battle/pokeball.o(.text);
         src/engine/load_save.o(.text);
-        asm/trade.o(.text);
         src/engine/trade.o(.text);
-        asm/trade.o(.text.sub_804A9F4);
-        src/engine/trade.o(.text.sub_804DAD4);
-        asm/trade.o(.text.sub_804DB2C);
         src/scene/berry_blender.o(.text);
         src/engine/play_time.o(.text);
         src/scene/new_game.o(.text);
@@ -335,7 +331,7 @@ SECTIONS {
         src/scene/egg_hatch.o(.rodata);
         data/battle_interface.o(.rodata);
         src/battle/pokeball.o(.rodata);
-        data/trade.o(.rodata);
+        src/engine/trade.o(.rodata);
         src/scene/berry_blender.o(.rodata);
         src/scene/new_game.o(.rodata);
         src/field/overworld.o(.rodata);
