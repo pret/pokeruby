@@ -14,6 +14,7 @@
 #include "mail_data.h"
 #include "main.h"
 #include "menu.h"
+#include "menu_helpers.h"
 #include "palette.h"
 #include "pokemon.h"
 #include "pokemon_icon.h"
@@ -29,12 +30,7 @@
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
-#include "sprite.h"
-#include "palette.h"
-#include "event_data.h"
-#include "main.h"
-#include "battle_interface.h"
-#include "species.h"
+#include "util.h"
 
 struct Unk201C000
 {
@@ -62,7 +58,7 @@ struct UnknownStruct5
     u16 *unk4;
 };
 
-struct GenderIconCoords
+struct Coords8
 {
     u8 x;
     u8 y;
@@ -90,8 +86,17 @@ struct UnknownPokemonStruct2
     /*0x1D*/ u8 language;
 };
 
+struct PartyMenuFunctionsStruct
+{
+    /*0x0*/TaskFunc func1;
+    /*0x4*/TaskFunc func2;
+    /*0x8*/u8 unk8;
+};
+
 #define ewram1C000 (*(struct Unk201C000 *)(ewram + 0x1C000))
 #define ewram1F000 (*(struct Unk201F000 *)(ewram + 0x1F000))
+
+extern u16 gBattleTypeFlags;
 
 extern u8 gUnknown_0202E8F4;
 extern u8 gUnknown_0202E8F6;
@@ -102,10 +107,19 @@ extern u8 gPlayerPartyCount;
 extern s32 gBattleMoveDamage;
 extern u16 gMoveToLearn;
 
-extern struct GenderIconCoords const gUnknown_08376738[12][6];
-extern struct GenderIconCoords const gUnknown_08376678[12][6];
+extern struct PartyMenuFunctionsStruct const gUnknown_08376C74[];
+extern u8 gUnknown_083769D8[];
+extern u8 gUnknown_08376A25[];
+extern u8 gUnknown_08376A5E[];
+extern u16 gUnknown_08E9A300[];
+extern const u16 gUnknown_08376CD4[];
+extern const u16 gUnknown_08376CEC[];
+extern u16 *const gUnknown_08376918[2][PARTY_SIZE];
+extern struct Coords8 const gUnknown_08376738[12][6];
+extern struct Coords8 const gUnknown_08376678[12][6];
 extern struct PartyMenuWindowCoords const gUnknown_08376948[2][6];
 extern struct PartyMenuWindowCoords const gUnknown_08376978[2][6];
+extern struct Coords8 const gUnknown_083768B8[3][8];
 extern u8 *const gUnknown_08376624[];
 extern const u8 gUnknown_083769C0[];
 //extern const u16 gUnknown_083769A8[][6];
@@ -144,22 +158,8 @@ static void sub_8070D90(u8 taskId);
 static void sub_806D5B8(u8 taskId);
 static void sub_806D014(u8 taskId);
 static void sub_806D118(u8 taskId);
-
-/*
-void sub_806AEDC(void)
-{
-    const struct UnknownStruct5 *r5;
-    s32 i;
-
-    AnimateSprites();
-    BuildOamBuffer();
-    r5 = gUnknown_08376BB4[gUnknown_0202E8FA];
-    for (i = 0; i < 6; i++)
-        sub_800142C(r5[i].unk0 * 8, r5[i].unk1 * 8, r5[i].unk4, 0, (i << 5) | 0x200);
-    RunTasks();
-    UpdatePaletteFade();
-}
-*/
+static void sub_806B460(void);
+static void sub_806B548(void);
 
 #if ENGLISH
 #define WINDOW_LEFT (3)
@@ -175,14 +175,2548 @@ extern u8 CreateMonIcon(u16 species, void (*callback)(struct Sprite *), s16 x, s
 extern void sub_809D62C(struct Sprite *sprite);
 extern void UpdateMonIconFrame_806DA0C(struct Sprite *sprite);
 extern void UpdateMonIconFrame_806DA38(struct Sprite *sprite);
-extern void sub_806BB3C(s16 a, u8 b);
-extern void sub_806BA94(s16 a, u8 b, u8 c, u8 d);
-extern void sub_806B9A4(s16 a, u8 b, u8 c);
 extern void SpriteCB_sub_806D37C(struct Sprite *sprite);
-extern void sub_806BA34(s16 a, u8 b);
-extern void sub_806BF24(const u8 *a, u8 monIndex, u8 c, u8 d);
 extern void sub_806CD44(u8 taskId);
+extern u8 sub_806CA00(u8 taskId);
+extern void sub_806BA34(s16 a, u16 b);
+extern void UpdateMonIconFrame_806DA44(u8 taskId, u8 monIndex, u8 c);
+extern void sub_806C490(u8 spriteId, u8 menuIndex, s8 directionPressed);
+extern void sub_806C1E4(u8 spriteId, u8 menuIndex, s8 directionPressed);
+extern void sub_806C310(u8 spriteId, u8 menuIndex, s8 directionPressed);
+extern void sub_806C658(u8 taskId, s8 directionPressed);
+extern void sub_806CA18(u8 taskId, u8 b);
+extern void sub_806B9A4(s16 a, u16 b, u8 c);
+extern void sub_806BA94(s16 a, u16 b, u8 c, u8 d);
 
+
+#ifdef NONMATCHING
+void sub_806AEDC(void)
+{
+    const struct UnknownStruct5 *var1;
+    s32 i;
+
+    AnimateSprites();
+    BuildOamBuffer();
+
+    var1 = gUnknown_08376BB4[gUnknown_0202E8FA];
+    for (i = 0; i < 6; i++)
+    {
+        sub_800142C(var1[i].unk0 * 8, var1[i].unk1 * 8, var1[i].unk4, 0, (i << 5) | 0x200);
+    }
+
+    RunTasks();
+    UpdatePaletteFade();
+}
+#else
+__attribute__((naked))
+void sub_806AEDC(void)
+{
+    asm(".syntax unified\n\
+    push {r4-r6,lr}\n\
+    sub sp, 0x4\n\
+    bl AnimateSprites\n\
+    bl BuildOamBuffer\n\
+    ldr r0, _0806AF2C @ =gUnknown_0202E8FA\n\
+    ldrb r1, [r0]\n\
+    lsls r0, r1, 1\n\
+    adds r0, r1\n\
+    lsls r0, 4\n\
+    ldr r1, _0806AF30 @ =gUnknown_08376BB4\n\
+    adds r5, r0, r1\n\
+    movs r6, 0\n\
+_0806AEF8:\n\
+    ldrb r0, [r5]\n\
+    lsls r0, 3\n\
+    ldrb r1, [r5, 0x1]\n\
+    lsls r1, 3\n\
+    ldr r2, [r5, 0x4]\n\
+    lsls r3, r6, 5\n\
+    movs r4, 0x80\n\
+    lsls r4, 2\n\
+    orrs r3, r4\n\
+    str r3, [sp]\n\
+    movs r3, 0\n\
+    bl sub_800142C\n\
+    adds r5, 0x8\n\
+    adds r6, 0x1\n\
+    cmp r6, 0x5\n\
+    ble _0806AEF8\n\
+    bl RunTasks\n\
+    bl UpdatePaletteFade\n\
+    add sp, 0x4\n\
+    pop {r4-r6}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
+_0806AF2C: .4byte gUnknown_0202E8FA\n\
+_0806AF30: .4byte gUnknown_08376BB4\n\
+    .syntax divided\n");
+}
+#endif // NONMATCHING
+
+void sub_806AF34(void)
+{
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    TransferPlttBuffer();
+    sub_806B548();
+}
+
+void sub_806AF4C(u8 a, u8 battleFlags, TaskFunc func, u8 d)
+{
+    if (battleFlags != 0xFF)
+    {
+        gBattleTypeFlags = battleFlags;
+    }
+
+    ewram1B000.unk258 = a;
+    ewram1B000.taskFunc = func;
+    ewram1B000.unk259 = d;
+}
+
+void sub_806AF8C(u8 a, u8 battleFlags, TaskFunc func, u8 d)
+{
+    sub_806AF4C(a, battleFlags, func, d);
+    SetMainCallback2(sub_806B460);
+}
+
+void OpenPartyMenu(u8 a, u8 battleFlags)
+{
+    sub_806AF8C(a, battleFlags, gUnknown_08376C74[a].func1, gUnknown_08376C74[a].unk8);
+}
+
+__attribute__((naked))
+bool8 sub_806AFD0(void)
+{
+    asm(".syntax unified\n\
+    push {r4,r5,lr}\n\
+    ldr r1, _0806AFF0 @ =0x0201b000\n\
+    movs r2, 0x99\n\
+    lsls r2, 2\n\
+    adds r0, r1, r2\n\
+    movs r2, 0\n\
+    ldrsh r0, [r0, r2]\n\
+    adds r4, r1, 0\n\
+    cmp r0, 0x9\n\
+    bls _0806AFE6\n\
+    b _0806B11A\n\
+_0806AFE6:\n\
+    lsls r0, 2\n\
+    ldr r1, _0806AFF4 @ =_0806AFF8\n\
+    adds r0, r1\n\
+    ldr r0, [r0]\n\
+    mov pc, r0\n\
+    .align 2, 0\n\
+_0806AFF0: .4byte 0x0201b000\n\
+_0806AFF4: .4byte _0806AFF8\n\
+    .align 2, 0\n\
+_0806AFF8:\n\
+    .4byte _0806B020\n\
+    .4byte _0806B060\n\
+    .4byte _0806B066\n\
+    .4byte _0806B07A\n\
+    .4byte _0806B0A4\n\
+    .4byte _0806B0AA\n\
+    .4byte _0806B0BC\n\
+    .4byte _0806B0C2\n\
+    .4byte _0806B0D4\n\
+    .4byte _0806B0EC\n\
+_0806B020:\n\
+    ldr r0, _0806B048 @ =0x00000266\n\
+    adds r5, r4, r0\n\
+    movs r1, 0\n\
+    ldrsh r3, [r5, r1]\n\
+    ldr r0, _0806B04C @ =gPlayerPartyCount\n\
+    ldrb r0, [r0]\n\
+    cmp r3, r0\n\
+    bge _0806B054\n\
+    movs r2, 0x98\n\
+    lsls r2, 2\n\
+    adds r0, r4, r2\n\
+    ldrb r0, [r0]\n\
+    ldrb r1, [r5]\n\
+    movs r2, 0x64\n\
+    muls r2, r3\n\
+    ldr r3, _0806B050 @ =gPlayerParty\n\
+    adds r2, r3\n\
+    bl TryCreatePartyMenuMonIcon\n\
+    b _0806B114\n\
+    .align 2, 0\n\
+_0806B048: .4byte 0x00000266\n\
+_0806B04C: .4byte gPlayerPartyCount\n\
+_0806B050: .4byte gPlayerParty\n\
+_0806B054:\n\
+    movs r0, 0\n\
+    strh r0, [r5]\n\
+    movs r0, 0x99\n\
+    lsls r0, 2\n\
+    adds r1, r4, r0\n\
+    b _0806B0E0\n\
+_0806B060:\n\
+    bl LoadHeldItemIconGraphics\n\
+    b _0806B0D8\n\
+_0806B066:\n\
+    movs r1, 0x98\n\
+    lsls r1, 2\n\
+    adds r0, r4, r1\n\
+    ldrb r0, [r0]\n\
+    bl CreateHeldItemIcons_806DC34\n\
+    movs r2, 0x99\n\
+    lsls r2, 2\n\
+    adds r1, r4, r2\n\
+    b _0806B0E0\n\
+_0806B07A:\n\
+    movs r1, 0x98\n\
+    lsls r1, 2\n\
+    adds r0, r4, r1\n\
+    ldrb r0, [r0]\n\
+    ldr r2, _0806B0A0 @ =0x00000266\n\
+    adds r5, r4, r2\n\
+    ldrb r1, [r5]\n\
+    bl sub_806BD58\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    cmp r0, 0x1\n\
+    bne _0806B114\n\
+    movs r0, 0\n\
+    strh r0, [r5]\n\
+    movs r0, 0x99\n\
+    lsls r0, 2\n\
+    adds r1, r4, r0\n\
+    b _0806B0E0\n\
+    .align 2, 0\n\
+_0806B0A0: .4byte 0x00000266\n\
+_0806B0A4:\n\
+    bl PartyMenuPrintMonsLevelOrStatus\n\
+    b _0806B0D8\n\
+_0806B0AA:\n\
+    bl PrintPartyMenuMonNicknames\n\
+    ldr r1, _0806B0B8 @ =0x0201b000\n\
+    movs r0, 0x99\n\
+    lsls r0, 2\n\
+    adds r1, r0\n\
+    b _0806B0E0\n\
+    .align 2, 0\n\
+_0806B0B8: .4byte 0x0201b000\n\
+_0806B0BC:\n\
+    bl PartyMenuTryPrintMonsHP\n\
+    b _0806B0D8\n\
+_0806B0C2:\n\
+    bl nullsub_13\n\
+    ldr r1, _0806B0D0 @ =0x0201b000\n\
+    movs r0, 0x99\n\
+    lsls r0, 2\n\
+    adds r1, r0\n\
+    b _0806B0E0\n\
+    .align 2, 0\n\
+_0806B0D0: .4byte 0x0201b000\n\
+_0806B0D4:\n\
+    bl PartyMenuDrawHPBars\n\
+_0806B0D8:\n\
+    ldr r1, _0806B0E8 @ =0x0201b000\n\
+    movs r2, 0x99\n\
+    lsls r2, 2\n\
+    adds r1, r2\n\
+_0806B0E0:\n\
+    ldrh r0, [r1]\n\
+    adds r0, 0x1\n\
+    strh r0, [r1]\n\
+    b _0806B11A\n\
+    .align 2, 0\n\
+_0806B0E8: .4byte 0x0201b000\n\
+_0806B0EC:\n\
+    ldr r0, _0806B110 @ =0x00000266\n\
+    adds r5, r4, r0\n\
+    ldrb r0, [r5]\n\
+    bl sub_806B58C\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    cmp r0, 0x1\n\
+    bne _0806B114\n\
+    movs r1, 0\n\
+    strh r1, [r5]\n\
+    movs r2, 0x99\n\
+    lsls r2, 2\n\
+    adds r0, r4, r2\n\
+    strh r1, [r0]\n\
+    movs r0, 0x1\n\
+    b _0806B11C\n\
+    .align 2, 0\n\
+_0806B110: .4byte 0x00000266\n\
+_0806B114:\n\
+    ldrh r0, [r5]\n\
+    adds r0, 0x1\n\
+    strh r0, [r5]\n\
+_0806B11A:\n\
+    movs r0, 0\n\
+_0806B11C:\n\
+    pop {r4,r5}\n\
+    pop {r1}\n\
+    bx r1\n\
+    .syntax divided\n");
+}
+
+__attribute__((naked))
+bool8 sub_806B124(void)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+    mov r7, r8\n\
+    push {r7}\n\
+    sub sp, 0xC\n\
+    ldr r0, _0806B144 @ =gMain\n\
+    ldr r1, _0806B148 @ =0x0000043c\n\
+    adds r0, r1\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0x11\n\
+    bls _0806B13A\n\
+    b _0806B450\n\
+_0806B13A:\n\
+    lsls r0, 2\n\
+    ldr r1, _0806B14C @ =_0806B150\n\
+    adds r0, r1\n\
+    ldr r0, [r0]\n\
+    mov pc, r0\n\
+    .align 2, 0\n\
+_0806B144: .4byte gMain\n\
+_0806B148: .4byte 0x0000043c\n\
+_0806B14C: .4byte _0806B150\n\
+    .align 2, 0\n\
+_0806B150:\n\
+    .4byte _0806B198\n\
+    .4byte _0806B240\n\
+    .4byte _0806B246\n\
+    .4byte _0806B27C\n\
+    .4byte _0806B282\n\
+    .4byte _0806B2AC\n\
+    .4byte _0806B2B2\n\
+    .4byte _0806B2D0\n\
+    .4byte _0806B2EC\n\
+    .4byte _0806B318\n\
+    .4byte _0806B344\n\
+    .4byte _0806B37C\n\
+    .4byte _0806B382\n\
+    .4byte _0806B3C0\n\
+    .4byte _0806B3CC\n\
+    .4byte _0806B3E4\n\
+    .4byte _0806B40C\n\
+    .4byte _0806B440\n\
+_0806B198:\n\
+    movs r0, 0\n\
+    bl SetVBlankCallback\n\
+    movs r3, 0xC0\n\
+    lsls r3, 19\n\
+    movs r4, 0xC0\n\
+    lsls r4, 9\n\
+    add r2, sp, 0x8\n\
+    mov r8, r2\n\
+    add r2, sp, 0x4\n\
+    movs r6, 0\n\
+    ldr r1, _0806B22C @ =0x040000d4\n\
+    movs r5, 0x80\n\
+    lsls r5, 5\n\
+    ldr r7, _0806B230 @ =0x81000800\n\
+    movs r0, 0x81\n\
+    lsls r0, 24\n\
+    mov r12, r0\n\
+_0806B1BC:\n\
+    strh r6, [r2]\n\
+    add r0, sp, 0x4\n\
+    str r0, [r1]\n\
+    str r3, [r1, 0x4]\n\
+    str r7, [r1, 0x8]\n\
+    ldr r0, [r1, 0x8]\n\
+    adds r3, r5\n\
+    subs r4, r5\n\
+    cmp r4, r5\n\
+    bhi _0806B1BC\n\
+    strh r6, [r2]\n\
+    add r2, sp, 0x4\n\
+    str r2, [r1]\n\
+    str r3, [r1, 0x4]\n\
+    lsrs r0, r4, 1\n\
+    mov r3, r12\n\
+    orrs r0, r3\n\
+    str r0, [r1, 0x8]\n\
+    ldr r0, [r1, 0x8]\n\
+    movs r0, 0xE0\n\
+    lsls r0, 19\n\
+    movs r3, 0x80\n\
+    lsls r3, 3\n\
+    movs r4, 0\n\
+    str r4, [sp, 0x8]\n\
+    ldr r2, _0806B22C @ =0x040000d4\n\
+    mov r1, r8\n\
+    str r1, [r2]\n\
+    str r0, [r2, 0x4]\n\
+    lsrs r0, r3, 2\n\
+    movs r1, 0x85\n\
+    lsls r1, 24\n\
+    orrs r0, r1\n\
+    str r0, [r2, 0x8]\n\
+    ldr r0, [r2, 0x8]\n\
+    movs r1, 0xA0\n\
+    lsls r1, 19\n\
+    add r0, sp, 0x4\n\
+    strh r4, [r0]\n\
+    str r0, [r2]\n\
+    str r1, [r2, 0x4]\n\
+    lsrs r3, 1\n\
+    movs r0, 0x81\n\
+    lsls r0, 24\n\
+    orrs r3, r0\n\
+    str r3, [r2, 0x8]\n\
+    ldr r0, [r2, 0x8]\n\
+    ldr r2, _0806B234 @ =gPaletteFade\n\
+    ldrb r0, [r2, 0x8]\n\
+    movs r1, 0x80\n\
+    orrs r0, r1\n\
+    strb r0, [r2, 0x8]\n\
+    ldr r1, _0806B238 @ =gMain\n\
+    ldr r2, _0806B23C @ =0x0000043c\n\
+    adds r1, r2\n\
+    b _0806B42C\n\
+    .align 2, 0\n\
+_0806B22C: .4byte 0x040000d4\n\
+_0806B230: .4byte 0x81000800\n\
+_0806B234: .4byte gPaletteFade\n\
+_0806B238: .4byte gMain\n\
+_0806B23C: .4byte 0x0000043c\n\
+_0806B240:\n\
+    bl remove_some_task\n\
+    b _0806B426\n\
+_0806B246:\n\
+    bl sub_806B4A8\n\
+    ldr r1, _0806B26C @ =0x0201b000\n\
+    movs r2, 0x99\n\
+    lsls r2, 2\n\
+    adds r0, r1, r2\n\
+    movs r2, 0\n\
+    strh r2, [r0]\n\
+    ldr r3, _0806B270 @ =0x00000266\n\
+    adds r0, r1, r3\n\
+    strh r2, [r0]\n\
+    movs r0, 0x9A\n\
+    lsls r0, 2\n\
+    adds r1, r0\n\
+    strh r2, [r1]\n\
+    ldr r1, _0806B274 @ =gMain\n\
+    ldr r2, _0806B278 @ =0x0000043c\n\
+    adds r1, r2\n\
+    b _0806B42C\n\
+    .align 2, 0\n\
+_0806B26C: .4byte 0x0201b000\n\
+_0806B270: .4byte 0x00000266\n\
+_0806B274: .4byte gMain\n\
+_0806B278: .4byte 0x0000043c\n\
+_0806B27C:\n\
+    bl ResetSpriteData\n\
+    b _0806B426\n\
+_0806B282:\n\
+    ldr r0, _0806B2A0 @ =0x0201b000\n\
+    movs r1, 0x96\n\
+    lsls r1, 2\n\
+    adds r0, r1\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0x1\n\
+    beq _0806B298\n\
+    cmp r0, 0x5\n\
+    beq _0806B298\n\
+    bl ResetTasks\n\
+_0806B298:\n\
+    ldr r1, _0806B2A4 @ =gMain\n\
+    ldr r2, _0806B2A8 @ =0x0000043c\n\
+    adds r1, r2\n\
+    b _0806B42C\n\
+    .align 2, 0\n\
+_0806B2A0: .4byte 0x0201b000\n\
+_0806B2A4: .4byte gMain\n\
+_0806B2A8: .4byte 0x0000043c\n\
+_0806B2AC:\n\
+    bl FreeAllSpritePalettes\n\
+    b _0806B426\n\
+_0806B2B2:\n\
+    ldr r4, _0806B2CC @ =0x0201b000\n\
+    movs r1, 0x97\n\
+    lsls r1, 2\n\
+    adds r0, r4, r1\n\
+    ldr r0, [r0]\n\
+    movs r1, 0\n\
+    bl CreateTask\n\
+    movs r2, 0x98\n\
+    lsls r2, 2\n\
+    adds r1, r4, r2\n\
+    strb r0, [r1]\n\
+    b _0806B426\n\
+    .align 2, 0\n\
+_0806B2CC: .4byte 0x0201b000\n\
+_0806B2D0:\n\
+    ldr r0, _0806B2E0 @ =gWindowConfig_81E6C90\n\
+    bl SetUpWindowConfig\n\
+    ldr r1, _0806B2E4 @ =gMain\n\
+    ldr r0, _0806B2E8 @ =0x0000043c\n\
+    adds r1, r0\n\
+    b _0806B42C\n\
+    .align 2, 0\n\
+_0806B2E0: .4byte gWindowConfig_81E6C90\n\
+_0806B2E4: .4byte gMain\n\
+_0806B2E8: .4byte 0x0000043c\n\
+_0806B2EC:\n\
+    ldr r4, _0806B308 @ =gUnknown_03004210\n\
+    ldr r1, _0806B30C @ =gWindowConfig_81E6C90\n\
+    adds r0, r4, 0\n\
+    bl InitWindowFromConfig\n\
+    adds r0, r4, 0\n\
+    movs r1, 0x1\n\
+    bl MultistepInitWindowTileData\n\
+    ldr r1, _0806B310 @ =gMain\n\
+    ldr r2, _0806B314 @ =0x0000043c\n\
+    adds r1, r2\n\
+    b _0806B42C\n\
+    .align 2, 0\n\
+_0806B308: .4byte gUnknown_03004210\n\
+_0806B30C: .4byte gWindowConfig_81E6C90\n\
+_0806B310: .4byte gMain\n\
+_0806B314: .4byte 0x0000043c\n\
+_0806B318:\n\
+    bl MultistepLoadFont\n\
+    cmp r0, 0\n\
+    bne _0806B322\n\
+    b _0806B450\n\
+_0806B322:\n\
+    ldr r0, _0806B338 @ =0x0201b000\n\
+    movs r3, 0x99\n\
+    lsls r3, 2\n\
+    adds r0, r3\n\
+    movs r1, 0x1\n\
+    strh r1, [r0]\n\
+    ldr r1, _0806B33C @ =gMain\n\
+    ldr r0, _0806B340 @ =0x0000043c\n\
+    adds r1, r0\n\
+    b _0806B42C\n\
+    .align 2, 0\n\
+_0806B338: .4byte 0x0201b000\n\
+_0806B33C: .4byte gMain\n\
+_0806B340: .4byte 0x0000043c\n\
+_0806B344:\n\
+    ldr r0, _0806B368 @ =0x0201b000\n\
+    movs r1, 0x99\n\
+    lsls r1, 2\n\
+    adds r4, r0, r1\n\
+    ldrb r0, [r4]\n\
+    bl LoadPartyMenuGraphics\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    cmp r0, 0x1\n\
+    bne _0806B374\n\
+    movs r0, 0\n\
+    strh r0, [r4]\n\
+    ldr r1, _0806B36C @ =gMain\n\
+    ldr r2, _0806B370 @ =0x0000043c\n\
+    adds r1, r2\n\
+    b _0806B42C\n\
+    .align 2, 0\n\
+_0806B368: .4byte 0x0201b000\n\
+_0806B36C: .4byte gMain\n\
+_0806B370: .4byte 0x0000043c\n\
+_0806B374:\n\
+    ldrh r0, [r4]\n\
+    adds r0, 0x1\n\
+    strh r0, [r4]\n\
+    b _0806B450\n\
+_0806B37C:\n\
+    bl sub_809D51C\n\
+    b _0806B426\n\
+_0806B382:\n\
+    ldr r2, _0806B3B0 @ =gUnknown_08376C74\n\
+    ldr r0, _0806B3B4 @ =0x0201b000\n\
+    movs r1, 0x96\n\
+    lsls r1, 2\n\
+    adds r0, r1\n\
+    ldrb r1, [r0]\n\
+    lsls r0, r1, 1\n\
+    adds r0, r1\n\
+    lsls r0, 2\n\
+    adds r2, 0x4\n\
+    adds r0, r2\n\
+    ldr r0, [r0]\n\
+    bl _call_via_r0\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    cmp r0, 0x1\n\
+    bne _0806B450\n\
+    ldr r1, _0806B3B8 @ =gMain\n\
+    ldr r2, _0806B3BC @ =0x0000043c\n\
+    adds r1, r2\n\
+    b _0806B42C\n\
+    .align 2, 0\n\
+_0806B3B0: .4byte gUnknown_08376C74\n\
+_0806B3B4: .4byte 0x0201b000\n\
+_0806B3B8: .4byte gMain\n\
+_0806B3BC: .4byte 0x0000043c\n\
+_0806B3C0:\n\
+    ldr r0, _0806B3C8 @ =gWindowConfig_81E6CC8\n\
+    bl MultistepInitMenuWindowBegin\n\
+    b _0806B426\n\
+    .align 2, 0\n\
+_0806B3C8: .4byte gWindowConfig_81E6CC8\n\
+_0806B3CC:\n\
+    bl MultistepInitMenuWindowContinue\n\
+    cmp r0, 0\n\
+    beq _0806B450\n\
+    ldr r1, _0806B3DC @ =gMain\n\
+    ldr r0, _0806B3E0 @ =0x0000043c\n\
+    adds r1, r0\n\
+    b _0806B42C\n\
+    .align 2, 0\n\
+_0806B3DC: .4byte gMain\n\
+_0806B3E0: .4byte 0x0000043c\n\
+_0806B3E4:\n\
+    ldr r0, _0806B3FC @ =0x0201b000\n\
+    ldr r1, _0806B400 @ =0x00000259\n\
+    adds r0, r1\n\
+    ldrb r0, [r0]\n\
+    movs r1, 0\n\
+    bl sub_806D538\n\
+    ldr r1, _0806B404 @ =gMain\n\
+    ldr r2, _0806B408 @ =0x0000043c\n\
+    adds r1, r2\n\
+    b _0806B42C\n\
+    .align 2, 0\n\
+_0806B3FC: .4byte 0x0201b000\n\
+_0806B400: .4byte 0x00000259\n\
+_0806B404: .4byte gMain\n\
+_0806B408: .4byte 0x0000043c\n\
+_0806B40C:\n\
+    movs r0, 0x1\n\
+    negs r0, r0\n\
+    movs r1, 0\n\
+    str r1, [sp]\n\
+    movs r2, 0x10\n\
+    movs r3, 0\n\
+    bl BeginNormalPaletteFade\n\
+    ldr r2, _0806B434 @ =gPaletteFade\n\
+    ldrb r1, [r2, 0x8]\n\
+    movs r0, 0x7F\n\
+    ands r0, r1\n\
+    strb r0, [r2, 0x8]\n\
+_0806B426:\n\
+    ldr r1, _0806B438 @ =gMain\n\
+    ldr r3, _0806B43C @ =0x0000043c\n\
+    adds r1, r3\n\
+_0806B42C:\n\
+    ldrb r0, [r1]\n\
+    adds r0, 0x1\n\
+    strb r0, [r1]\n\
+    b _0806B450\n\
+    .align 2, 0\n\
+_0806B434: .4byte gPaletteFade\n\
+_0806B438: .4byte gMain\n\
+_0806B43C: .4byte 0x0000043c\n\
+_0806B440:\n\
+    ldr r0, _0806B44C @ =sub_806AF34\n\
+    bl SetVBlankCallback\n\
+    movs r0, 0x1\n\
+    b _0806B452\n\
+    .align 2, 0\n\
+_0806B44C: .4byte sub_806AF34\n\
+_0806B450:\n\
+    movs r0, 0\n\
+_0806B452:\n\
+    add sp, 0xC\n\
+    pop {r3}\n\
+    mov r8, r3\n\
+    pop {r4-r7}\n\
+    pop {r1}\n\
+    bx r1\n\
+    .syntax divided\n");
+}
+
+void sub_806B460(void)
+{
+    while (sub_806B124() != TRUE)
+    {
+        if (sub_80F9344() == TRUE)
+        {
+            return;
+        }
+    }
+
+    if (ewram1B000.unk258 != 5)
+    {
+        sub_806BF74(ewram1B000.unk260, 0);
+    }
+
+    SetMainCallback2(sub_806AEDC);
+}
+
+void sub_806B4A8(void)
+{
+    SetHBlankCallback(NULL);
+    REG_DISPCNT = 8000;
+    REG_BG0CNT = 0x1E05;
+    REG_BG1CNT = 0x703;
+    REG_BG2CNT = 0xF08;
+    REG_BG3CNT = 0x602;
+    REG_BLDCNT = 0;
+    REG_BG0HOFS = 0;
+    REG_BG0VOFS = 0;
+    REG_BG1HOFS = 0;
+    REG_BG1VOFS = 0;
+    REG_BG2HOFS = 0;
+    REG_BG2VOFS = 0;
+    REG_BG3HOFS = 0;
+    REG_BG3VOFS = 0;
+    REG_BG3VOFS = -1;
+}
+
+bool8 IsLinkDoubleBattle()
+{
+    if ((gBattleTypeFlags & BATTLE_TYPE_LINK_DOUBLE) == BATTLE_TYPE_LINK_DOUBLE)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+#ifdef NONMATCHING
+void sub_806B548(void)
+{
+    if (ewram1B000.unk261)
+    {
+        u32 src = (u32)&gBGTilemapBuffers[2];
+        u32 dest = BG_VRAM + 0x3000;
+
+        REG_DMA3SAD = src;
+        REG_DMA3DAD = dest;
+        REG_DMA3CNT = ((DMA_ENABLE) << 16) | 0x400;
+
+        if (ewram1B000.unk261 == 2)
+        {
+            ewram1B000.unk261 = 0;
+        }
+    }
+}
+#else
+__attribute__((naked))
+void sub_806B548(void)
+{
+    asm(".syntax unified\n\
+    push {r4,lr}\n\
+    ldr r0, _0806B574 @ =0x0201b000\n\
+    ldr r1, _0806B578 @ =0x00000261\n\
+    adds r4, r0, r1\n\
+    ldrb r3, [r4]\n\
+    cmp r3, 0\n\
+    beq _0806B56E\n\
+    ldr r1, _0806B57C @ =gBGTilemapBuffers + 0x1000\n\
+    ldr r2, _0806B580 @ =0x06003000\n\
+    ldr r0, _0806B584 @ =0x040000d4\n\
+    str r1, [r0]\n\
+    str r2, [r0, 0x4]\n\
+    ldr r1, _0806B588 @ =0x80000400\n\
+    str r1, [r0, 0x8]\n\
+    ldr r0, [r0, 0x8]\n\
+    cmp r3, 0x2\n\
+    bne _0806B56E\n\
+    movs r0, 0\n\
+    strb r0, [r4]\n\
+_0806B56E:\n\
+    pop {r4}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
+_0806B574: .4byte 0x0201b000\n\
+_0806B578: .4byte 0x00000261\n\
+_0806B57C: .4byte gBGTilemapBuffers + 0x1000\n\
+_0806B580: .4byte 0x06003000\n\
+_0806B584: .4byte 0x040000d4\n\
+_0806B588: .4byte 0x80000400\n\
+    .syntax divided\n");
+}
+#endif // NONMATCHING
+
+__attribute__((naked))
+u8 sub_806B58C(u8 a)
+{
+    asm(".syntax unified\n\
+    push {r4,r5,lr}\n\
+    lsls r0, 24\n\
+    lsrs r5, r0, 24\n\
+    bl IsDoubleBattle\n\
+    lsls r0, 24\n\
+    lsrs r2, r0, 24\n\
+    cmp r2, 0\n\
+    bne _0806B5A8\n\
+    ldr r0, _0806B5A4 @ =gUnknown_0202E8FA\n\
+    strb r2, [r0]\n\
+    b _0806B5C8\n\
+    .align 2, 0\n\
+_0806B5A4: .4byte gUnknown_0202E8FA\n\
+_0806B5A8:\n\
+    bl IsLinkDoubleBattle\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    cmp r0, 0x1\n\
+    bne _0806B5C0\n\
+    ldr r1, _0806B5BC @ =gUnknown_0202E8FA\n\
+    movs r0, 0x2\n\
+    b _0806B5C4\n\
+    .align 2, 0\n\
+_0806B5BC: .4byte gUnknown_0202E8FA\n\
+_0806B5C0:\n\
+    ldr r1, _0806B5E4 @ =gUnknown_0202E8FA\n\
+    movs r0, 0x1\n\
+_0806B5C4:\n\
+    strb r0, [r1]\n\
+    adds r0, r1, 0\n\
+_0806B5C8:\n\
+    ldrb r0, [r0]\n\
+    lsls r1, r0, 1\n\
+    adds r1, r0\n\
+    lsls r1, 2\n\
+    ldr r0, _0806B5E8 @ =gUnknown_083769A8\n\
+    adds r4, r1, r0\n\
+    cmp r5, 0x8\n\
+    bls _0806B5DA\n\
+    b _0806B900\n\
+_0806B5DA:\n\
+    lsls r0, r5, 2\n\
+    ldr r1, _0806B5EC @ =_0806B5F0\n\
+    adds r0, r1\n\
+    ldr r0, [r0]\n\
+    mov pc, r0\n\
+    .align 2, 0\n\
+_0806B5E4: .4byte gUnknown_0202E8FA\n\
+_0806B5E8: .4byte gUnknown_083769A8\n\
+_0806B5EC: .4byte _0806B5F0\n\
+    .align 2, 0\n\
+_0806B5F0:\n\
+    .4byte _0806B614\n\
+    .4byte _0806B628\n\
+    .4byte _0806B638\n\
+    .4byte _0806B694\n\
+    .4byte _0806B71A\n\
+    .4byte _0806B7A2\n\
+    .4byte _0806B832\n\
+    .4byte _0806B8C6\n\
+    .4byte _0806B8E8\n\
+_0806B614:\n\
+    ldr r0, _0806B624 @ =gBGTilemapBuffers + 0x1000\n\
+    movs r2, 0x80\n\
+    lsls r2, 4\n\
+    movs r1, 0\n\
+    bl memset\n\
+    b _0806B900\n\
+    .align 2, 0\n\
+_0806B624: .4byte gBGTilemapBuffers + 0x1000\n\
+_0806B628:\n\
+    ldrb r0, [r4]\n\
+    ldrb r1, [r4, 0x1]\n\
+    movs r2, 0x3\n\
+    bl sub_806B9A4\n\
+    adds r0, r4, 0\n\
+    movs r1, 0\n\
+    b _0806B8A8\n\
+_0806B638:\n\
+    bl IsDoubleBattle\n\
+    lsls r0, 24\n\
+    cmp r0, 0\n\
+    bne _0806B666\n\
+    ldr r0, _0806B65C @ =gPlayerPartyCount\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0x1\n\
+    bls _0806B660\n\
+    ldrb r0, [r4, 0x2]\n\
+    ldrb r1, [r4, 0x3]\n\
+    movs r2, 0\n\
+    movs r3, 0x3\n\
+    bl sub_806BA94\n\
+    adds r0, r4, 0x2\n\
+    movs r1, 0x1\n\
+    b _0806B8A8\n\
+    .align 2, 0\n\
+_0806B65C: .4byte gPlayerPartyCount\n\
+_0806B660:\n\
+    ldrb r0, [r4, 0x2]\n\
+    ldrb r1, [r4, 0x3]\n\
+    b _0806B8BC\n\
+_0806B666:\n\
+    bl IsLinkDoubleBattle\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    cmp r0, 0x1\n\
+    bne _0806B684\n\
+    ldrb r0, [r4, 0x2]\n\
+    ldrb r1, [r4, 0x3]\n\
+    movs r2, 0x4\n\
+    bl sub_806B9A4\n\
+    adds r0, r4, 0x2\n\
+    movs r1, 0x1\n\
+    movs r2, 0x4\n\
+    b _0806B8AA\n\
+_0806B684:\n\
+    ldrb r0, [r4, 0x2]\n\
+    ldrb r1, [r4, 0x3]\n\
+    movs r2, 0x3\n\
+    bl sub_806B9A4\n\
+    adds r0, r4, 0x2\n\
+    movs r1, 0x1\n\
+    b _0806B8A8\n\
+_0806B694:\n\
+    bl IsDoubleBattle\n\
+    lsls r0, 24\n\
+    cmp r0, 0\n\
+    bne _0806B6C2\n\
+    ldr r0, _0806B6B8 @ =gPlayerPartyCount\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0x2\n\
+    bls _0806B6BC\n\
+    ldrb r0, [r4, 0x4]\n\
+    ldrb r1, [r4, 0x5]\n\
+    movs r2, 0\n\
+    movs r3, 0x3\n\
+    bl sub_806BA94\n\
+    adds r0, r4, 0x4\n\
+    movs r1, 0x2\n\
+    b _0806B8A8\n\
+    .align 2, 0\n\
+_0806B6B8: .4byte gPlayerPartyCount\n\
+_0806B6BC:\n\
+    ldrb r0, [r4, 0x4]\n\
+    ldrb r1, [r4, 0x5]\n\
+    b _0806B8BC\n\
+_0806B6C2:\n\
+    bl IsLinkDoubleBattle\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    cmp r0, 0x1\n\
+    bne _0806B6F6\n\
+    ldr r0, _0806B6EC @ =gPlayerParty + 2 * 0x64\n\
+    movs r1, 0xB\n\
+    bl GetMonData\n\
+    cmp r0, 0\n\
+    beq _0806B6F0\n\
+    ldrb r0, [r4, 0x4]\n\
+    ldrb r1, [r4, 0x5]\n\
+    movs r2, 0\n\
+    movs r3, 0x3\n\
+    bl sub_806BA94\n\
+    adds r0, r4, 0x4\n\
+    movs r1, 0x2\n\
+    b _0806B8A8\n\
+    .align 2, 0\n\
+_0806B6EC: .4byte gPlayerParty + 2 * 0x64\n\
+_0806B6F0:\n\
+    ldrb r0, [r4, 0x4]\n\
+    ldrb r1, [r4, 0x5]\n\
+    b _0806B8BC\n\
+_0806B6F6:\n\
+    ldr r0, _0806B710 @ =gPlayerPartyCount\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0x2\n\
+    bls _0806B714\n\
+    ldrb r0, [r4, 0x4]\n\
+    ldrb r1, [r4, 0x5]\n\
+    movs r2, 0\n\
+    movs r3, 0x3\n\
+    bl sub_806BA94\n\
+    adds r0, r4, 0x4\n\
+    movs r1, 0x2\n\
+    b _0806B8A8\n\
+    .align 2, 0\n\
+_0806B710: .4byte gPlayerPartyCount\n\
+_0806B714:\n\
+    ldrb r0, [r4, 0x4]\n\
+    ldrb r1, [r4, 0x5]\n\
+    b _0806B8BC\n\
+_0806B71A:\n\
+    bl IsDoubleBattle\n\
+    lsls r0, 24\n\
+    cmp r0, 0\n\
+    bne _0806B74A\n\
+    ldr r0, _0806B740 @ =gPlayerPartyCount\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0x3\n\
+    bls _0806B744\n\
+    ldrb r0, [r4, 0x6]\n\
+    ldrb r1, [r4, 0x7]\n\
+    movs r2, 0\n\
+    movs r3, 0x3\n\
+    bl sub_806BA94\n\
+    adds r0, r4, 0x6\n\
+    movs r1, 0x3\n\
+    b _0806B8A8\n\
+    .align 2, 0\n\
+_0806B740: .4byte gPlayerPartyCount\n\
+_0806B744:\n\
+    ldrb r0, [r4, 0x6]\n\
+    ldrb r1, [r4, 0x7]\n\
+    b _0806B8BC\n\
+_0806B74A:\n\
+    bl IsLinkDoubleBattle\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    cmp r0, 0x1\n\
+    bne _0806B77E\n\
+    ldr r0, _0806B774 @ =gPlayerParty + 3 * 0x64\n\
+    movs r1, 0xB\n\
+    bl GetMonData\n\
+    cmp r0, 0\n\
+    beq _0806B778\n\
+    ldrb r0, [r4, 0x6]\n\
+    ldrb r1, [r4, 0x7]\n\
+    movs r2, 0\n\
+    movs r3, 0x3\n\
+    bl sub_806BA94\n\
+    adds r0, r4, 0x6\n\
+    movs r1, 0x3\n\
+    b _0806B8A8\n\
+    .align 2, 0\n\
+_0806B774: .4byte gPlayerParty + 3 * 0x64\n\
+_0806B778:\n\
+    ldrb r0, [r4, 0x6]\n\
+    ldrb r1, [r4, 0x7]\n\
+    b _0806B8BC\n\
+_0806B77E:\n\
+    ldr r0, _0806B798 @ =gPlayerPartyCount\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0x3\n\
+    bls _0806B79C\n\
+    ldrb r0, [r4, 0x6]\n\
+    ldrb r1, [r4, 0x7]\n\
+    movs r2, 0\n\
+    movs r3, 0x3\n\
+    bl sub_806BA94\n\
+    adds r0, r4, 0x6\n\
+    movs r1, 0x3\n\
+    b _0806B8A8\n\
+    .align 2, 0\n\
+_0806B798: .4byte gPlayerPartyCount\n\
+_0806B79C:\n\
+    ldrb r0, [r4, 0x6]\n\
+    ldrb r1, [r4, 0x7]\n\
+    b _0806B8BC\n\
+_0806B7A2:\n\
+    bl IsDoubleBattle\n\
+    lsls r0, 24\n\
+    cmp r0, 0\n\
+    bne _0806B7D2\n\
+    ldr r0, _0806B7C8 @ =gPlayerPartyCount\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0x4\n\
+    bls _0806B7CC\n\
+    ldrb r0, [r4, 0x8]\n\
+    ldrb r1, [r4, 0x9]\n\
+    movs r2, 0\n\
+    movs r3, 0x3\n\
+    bl sub_806BA94\n\
+    adds r0, r4, 0\n\
+    adds r0, 0x8\n\
+    movs r1, 0x4\n\
+    b _0806B8A8\n\
+    .align 2, 0\n\
+_0806B7C8: .4byte gPlayerPartyCount\n\
+_0806B7CC:\n\
+    ldrb r0, [r4, 0x8]\n\
+    ldrb r1, [r4, 0x9]\n\
+    b _0806B8BC\n\
+_0806B7D2:\n\
+    bl IsLinkDoubleBattle\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    cmp r0, 0x1\n\
+    bne _0806B80A\n\
+    ldr r0, _0806B800 @ =gPlayerParty + 4 * 0x64\n\
+    movs r1, 0xB\n\
+    bl GetMonData\n\
+    cmp r0, 0\n\
+    beq _0806B804\n\
+    ldrb r0, [r4, 0x8]\n\
+    ldrb r1, [r4, 0x9]\n\
+    movs r2, 0\n\
+    movs r3, 0x4\n\
+    bl sub_806BA94\n\
+    adds r0, r4, 0\n\
+    adds r0, 0x8\n\
+    movs r1, 0x4\n\
+    movs r2, 0x4\n\
+    b _0806B8AA\n\
+    .align 2, 0\n\
+_0806B800: .4byte gPlayerParty + 4 * 0x64\n\
+_0806B804:\n\
+    ldrb r0, [r4, 0x8]\n\
+    ldrb r1, [r4, 0x9]\n\
+    b _0806B884\n\
+_0806B80A:\n\
+    ldr r0, _0806B828 @ =gPlayerPartyCount\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0x4\n\
+    bls _0806B82C\n\
+    ldrb r0, [r4, 0x8]\n\
+    ldrb r1, [r4, 0x9]\n\
+    movs r2, 0\n\
+    movs r3, 0x3\n\
+    bl sub_806BA94\n\
+    adds r0, r4, 0\n\
+    adds r0, 0x8\n\
+    movs r1, 0x4\n\
+    b _0806B8A8\n\
+    .align 2, 0\n\
+_0806B828: .4byte gPlayerPartyCount\n\
+_0806B82C:\n\
+    ldrb r0, [r4, 0x8]\n\
+    ldrb r1, [r4, 0x9]\n\
+    b _0806B8BC\n\
+_0806B832:\n\
+    bl IsDoubleBattle\n\
+    lsls r0, 24\n\
+    cmp r0, 0\n\
+    bne _0806B84C\n\
+    ldr r0, _0806B848 @ =gPlayerPartyCount\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0x5\n\
+    bhi _0806B896\n\
+    b _0806B8B8\n\
+    .align 2, 0\n\
+_0806B848: .4byte gPlayerPartyCount\n\
+_0806B84C:\n\
+    bl IsLinkDoubleBattle\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    cmp r0, 0x1\n\
+    bne _0806B88E\n\
+    ldr r0, _0806B87C @ =gPlayerParty + 5 * 0x64\n\
+    movs r1, 0xB\n\
+    bl GetMonData\n\
+    cmp r0, 0\n\
+    beq _0806B880\n\
+    ldrb r0, [r4, 0xA]\n\
+    ldrb r1, [r4, 0xB]\n\
+    movs r2, 0\n\
+    movs r3, 0x4\n\
+    bl sub_806BA94\n\
+    adds r0, r4, 0\n\
+    adds r0, 0xA\n\
+    movs r1, 0x5\n\
+    movs r2, 0x4\n\
+    b _0806B8AA\n\
+    .align 2, 0\n\
+_0806B87C: .4byte gPlayerParty + 5 * 0x64\n\
+_0806B880:\n\
+    ldrb r0, [r4, 0xA]\n\
+    ldrb r1, [r4, 0xB]\n\
+_0806B884:\n\
+    movs r2, 0x1\n\
+    movs r3, 0x4\n\
+    bl sub_806BA94\n\
+    b _0806B900\n\
+_0806B88E:\n\
+    ldr r0, _0806B8B4 @ =gPlayerPartyCount\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0x5\n\
+    bls _0806B8B8\n\
+_0806B896:\n\
+    ldrb r0, [r4, 0xA]\n\
+    ldrb r1, [r4, 0xB]\n\
+    movs r2, 0\n\
+    movs r3, 0x3\n\
+    bl sub_806BA94\n\
+    adds r0, r4, 0\n\
+    adds r0, 0xA\n\
+    movs r1, 0x5\n\
+_0806B8A8:\n\
+    movs r2, 0x3\n\
+_0806B8AA:\n\
+    movs r3, 0\n\
+    bl sub_806BF24\n\
+    b _0806B900\n\
+    .align 2, 0\n\
+_0806B8B4: .4byte gPlayerPartyCount\n\
+_0806B8B8:\n\
+    ldrb r0, [r4, 0xA]\n\
+    ldrb r1, [r4, 0xB]\n\
+_0806B8BC:\n\
+    movs r2, 0x1\n\
+    movs r3, 0x3\n\
+    bl sub_806BA94\n\
+    b _0806B900\n\
+_0806B8C6:\n\
+    ldr r0, _0806B8E4 @ =0x0201b000\n\
+    movs r1, 0x96\n\
+    lsls r1, 2\n\
+    adds r0, r1\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0x4\n\
+    bne _0806B8DA\n\
+    movs r0, 0x1\n\
+    bl sub_806BB9C\n\
+_0806B8DA:\n\
+    movs r0, 0x1\n\
+    bl sub_806BBEC\n\
+    b _0806B900\n\
+    .align 2, 0\n\
+_0806B8E4: .4byte 0x0201b000\n\
+_0806B8E8:\n\
+    ldr r0, _0806B8F8 @ =0x0201b000\n\
+    ldr r1, _0806B8FC @ =0x00000261\n\
+    adds r0, r1\n\
+    movs r1, 0x2\n\
+    strb r1, [r0]\n\
+    movs r0, 0x1\n\
+    b _0806B902\n\
+    .align 2, 0\n\
+_0806B8F8: .4byte 0x0201b000\n\
+_0806B8FC: .4byte 0x00000261\n\
+_0806B900:\n\
+    movs r0, 0\n\
+_0806B902:\n\
+    pop {r4,r5}\n\
+    pop {r1}\n\
+    bx r1\n\
+    .syntax divided\n");
+}
+
+#ifdef NONMATCHING
+void sub_806B908(void)
+{
+    memset(&gBGTilemapBuffers[2], 0, 0x800);
+    gUnknown_0202E8FA = 3;
+    sub_806B9A4(gUnknown_083769C0[12], gUnknown_083769C0[13], 3);
+
+    if (GetMonData(&gPlayerParty[1], MON_DATA_SPECIES))
+        sub_806BA94(gUnknown_083769C0[16], gUnknown_083769C0[17], 0, 3);
+    else
+        sub_806BA94(gUnknown_083769C0[16], gUnknown_083769C0[17], 1, 3);
+
+    if (GetMonData(&gPlayerParty[2], MON_DATA_SPECIES))
+        sub_806BA94(gUnknown_083769C0[18], gUnknown_083769C0[19], 0, 3);
+    else
+        sub_806BA94(gUnknown_083769C0[18], gUnknown_083769C0[19], 1, 3);
+
+    ewram1B000.unk261 = 2;
+}
+#else
+__attribute__((naked))
+void sub_806B908(void)
+{
+    asm(".syntax unified\n\
+    push {r4,r5,lr}\n\
+    ldr r0, _0806B948 @ =gBGTilemapBuffers + 0x1000\n\
+    movs r2, 0x80\n\
+    lsls r2, 4\n\
+    movs r1, 0\n\
+    bl memset\n\
+    ldr r1, _0806B94C @ =gUnknown_0202E8FA\n\
+    movs r0, 0x3\n\
+    strb r0, [r1]\n\
+    ldr r0, _0806B950 @ =gUnknown_083769A8\n\
+    adds r4, r0, 0\n\
+    adds r4, 0x24\n\
+    ldr r5, _0806B954 @ =gPlayerParty + 1 * 0x64\n\
+    ldrb r0, [r4]\n\
+    ldrb r1, [r4, 0x1]\n\
+    movs r2, 0x3\n\
+    bl sub_806B9A4\n\
+    adds r0, r5, 0\n\
+    movs r1, 0xB\n\
+    bl GetMonData\n\
+    cmp r0, 0\n\
+    beq _0806B958\n\
+    ldrb r0, [r4, 0x4]\n\
+    ldrb r1, [r4, 0x5]\n\
+    movs r2, 0\n\
+    movs r3, 0x3\n\
+    bl sub_806BA94\n\
+    b _0806B964\n\
+    .align 2, 0\n\
+_0806B948: .4byte gBGTilemapBuffers + 0x1000\n\
+_0806B94C: .4byte gUnknown_0202E8FA\n\
+_0806B950: .4byte gUnknown_083769A8\n\
+_0806B954: .4byte gPlayerParty + 1 * 0x64\n\
+_0806B958:\n\
+    ldrb r0, [r4, 0x4]\n\
+    ldrb r1, [r4, 0x5]\n\
+    movs r2, 0x1\n\
+    movs r3, 0x3\n\
+    bl sub_806BA94\n\
+_0806B964:\n\
+    adds r0, r5, 0\n\
+    adds r0, 0x64\n\
+    movs r1, 0xB\n\
+    bl GetMonData\n\
+    cmp r0, 0\n\
+    beq _0806B980\n\
+    ldrb r0, [r4, 0x6]\n\
+    ldrb r1, [r4, 0x7]\n\
+    movs r2, 0\n\
+    movs r3, 0x3\n\
+    bl sub_806BA94\n\
+    b _0806B98C\n\
+_0806B980:\n\
+    ldrb r0, [r4, 0x6]\n\
+    ldrb r1, [r4, 0x7]\n\
+    movs r2, 0x1\n\
+    movs r3, 0x3\n\
+    bl sub_806BA94\n\
+_0806B98C:\n\
+    ldr r0, _0806B99C @ =0x0201b000\n\
+    ldr r1, _0806B9A0 @ =0x00000261\n\
+    adds r0, r1\n\
+    movs r1, 0x2\n\
+    strb r1, [r0]\n\
+    pop {r4,r5}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
+_0806B99C: .4byte 0x0201b000\n\
+_0806B9A0: .4byte 0x00000261\n\
+    .syntax divided\n");
+}
+#endif // NONMATCHING
+
+void sub_806B9A4(s16 a, u16 b, u8 c)
+{
+    u8 i;
+    u16 var1 = b * 32;
+
+    for (i = 0; i <= 6; i++)
+    {
+        u8 j = 0;
+
+        if (a <= 0x1F)
+        {
+            for (; j <= 10 && a + j <= 0x1F; j++)
+            {
+                if (a + j >= 0)
+                {
+                    gBGTilemapBuffers[2][var1 + (i * 32) + (a + j)] = (c << 12) | gUnknown_083769D8[i * 11 + j];
+                }
+            }
+        }
+    }
+}
+
+void sub_806BA34(s16 a, u16 b)
+{
+    u8 i;
+    u16 var1 = b * 32;
+
+    for (i = 0; i <= 6; i++)
+    {
+        u8 j = 0;
+
+        if (a <= 0x1F)
+        {
+            for (; j <= 10 && a + j <= 0x1F; j++)
+            {
+                if (a + j >= 0)
+                {
+                    gBGTilemapBuffers[2][var1 + (i * 32) + (a + j)] = 0;
+                }
+            }
+        }
+    }
+}
+
+void sub_806BA94(s16 a, u16 b, u8 c, u8 d)
+{
+    u8 i;
+    u8 *arr;
+    u16 var1;
+
+    arr = gUnknown_08376A5E;
+    if (c == 0)
+    {
+        arr = gUnknown_08376A25;
+    }
+
+    var1 = b * 32;
+
+
+    for (i = 0; i < 3; i++)
+    {
+        u8 j = 0;
+
+        if (a <= 0x1F)
+        {
+            while (j <= 0x12 && a + j <= 0x1F)
+            {
+                if (a + j >= 0)
+                {
+                    gBGTilemapBuffers[2][var1 + (i * 32) + (a + j)] = (d << 12) | arr[i * 19 + j];
+                }
+
+                j++;
+            }
+        }
+    }
+}
+
+void sub_806BB3C(s16 a, u16 b)
+{
+    u8 i;
+    u16 var1 = (b * 32);
+
+    for (i = 0; i < 3; i++)
+    {
+        u8 j = 0;
+
+        if (a <= 0x1F)
+        {
+            for (; j <= 0x12 && a + j <= 0x1F; j++)
+            {
+                if (a + j >= 0)
+                {
+                    gBGTilemapBuffers[2][var1 + (i * 32) + (a + j)] = 0;
+                }                
+            }
+        }
+    }
+}
+
+void sub_806BB9C(u8 a)
+{
+    u8 i;
+    u16 *vramPtr;
+    const u16 arr[12];
+
+    memcpy(&arr, gUnknown_08376CD4, 12 * 2);
+
+    vramPtr = (u16 *)(BG_VRAM + 0x3C30);
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        vramPtr[i] = arr[i] + (a << 12);
+        vramPtr[i + 0x20] = arr[i + PARTY_SIZE] + (a << 12);
+    }
+}
+
+void sub_806BBEC(u8 a)
+{
+    u8 i;
+    u16 *vramPtr;
+    const u16 arr[12];
+
+    memcpy(&arr, gUnknown_08376CEC, 12 * 2);
+
+    vramPtr = (u16 *)(BG_VRAM + 0x3CB0);
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        vramPtr[i] = arr[i] + (a << 12);
+        vramPtr[i + 0x20] = arr[i + PARTY_SIZE] + (a << 12);
+    }
+}
+
+#ifdef NONMATCHING
+// The original THUMB is preserving r8 for seemingly no reason. Unsure how to match.
+void sub_806BC3C(u8 monIndex, u8 b)
+{
+    u16 *vramPtr = gUnknown_08376918[IsDoubleBattle()][monIndex];
+    u8 i;
+    u16 var1;
+
+    for (i = 0, var1 = (b / 7) * 32; i <= PARTY_SIZE; i++)
+    {
+        u32 offset = i + var1;
+        vramPtr[i] = gUnknown_08E9A300[offset] + 0x10C;
+        vramPtr[i + 0x20] = gUnknown_08E9A300[offset + 0x20] + 0x10C;
+    }
+}
+#else
+__attribute__((naked))
+void sub_806BC3C(u8 monIndex, u8 b)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+    mov r7, r8\n\
+    push {r7}\n\
+    adds r4, r0, 0\n\
+    adds r5, r1, 0\n\
+    lsls r4, 24\n\
+    lsrs r4, 24\n\
+    lsls r5, 24\n\
+    lsrs r5, 24\n\
+    ldr r6, _0806BCB0 @ =gUnknown_08376918\n\
+    bl IsDoubleBattle\n\
+    lsls r4, 2\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    lsls r1, r0, 1\n\
+    adds r1, r0\n\
+    lsls r1, 3\n\
+    adds r4, r1\n\
+    adds r4, r6\n\
+    ldr r7, [r4]\n\
+    movs r6, 0\n\
+    adds r0, r5, 0\n\
+    movs r1, 0x7\n\
+    bl __udivsi3\n\
+    lsls r0, 24\n\
+    lsrs r4, r0, 19\n\
+    ldr r5, _0806BCB4 @ =gUnknown_08E9A300\n\
+    movs r0, 0x86\n\
+    lsls r0, 1\n\
+    adds r3, r0, 0\n\
+_0806BC7C:\n\
+    adds r1, r6, r4\n\
+    lsls r2, r6, 1\n\
+    adds r2, r7\n\
+    lsls r0, r1, 1\n\
+    adds r0, r5\n\
+    ldrh r0, [r0]\n\
+    adds r0, r3, r0\n\
+    strh r0, [r2]\n\
+    adds r2, 0x40\n\
+    adds r1, 0x20\n\
+    lsls r1, 1\n\
+    adds r1, r5\n\
+    ldrh r1, [r1]\n\
+    adds r0, r3, r1\n\
+    strh r0, [r2]\n\
+    adds r0, r6, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r6, r0, 24\n\
+    cmp r6, 0x6\n\
+    bls _0806BC7C\n\
+    pop {r3}\n\
+    mov r8, r3\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
+_0806BCB0: .4byte gUnknown_08376918\n\
+_0806BCB4: .4byte gUnknown_08E9A300\n\
+    .syntax divided\n");
+}
+#endif // NONMATCHING
+
+void unref_sub_806BCB8(u8 a)
+{
+    u8 i;
+
+    for (i = 0; i < gPlayerPartyCount; i++)
+    {
+        sub_806BC3C(i, a);
+    }
+}
+
+void sub_806BCE8()
+{
+    u8 i;
+
+    for (i = 0; i < gPlayerPartyCount; i++)
+    {
+        if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+        {
+            u8 gender = GetMonGender(&gPlayerParty[i]);
+            switch (gender)
+            {
+            case MON_MALE:
+                sub_806BC3C(i, 0x54);
+                break;
+            case MON_FEMALE:
+                sub_806BC3C(i, 0x62);
+                break;
+            default:
+                sub_806BC3C(i, 0x46);
+                break;
+            }
+        }
+        else
+        {
+            sub_806BC3C(i, 0x46);
+        }
+    }    
+}
+
+u8 sub_806BD58(u8 taskId, u8 b)
+{
+    u8 spriteId = CreateInvisibleSpriteWithCallback(SpriteCallbackDummy);
+    sub_806CA18(taskId, spriteId);
+    return 1;
+}
+
+#ifdef NONMATCHING
+u16 sub_806BD80(u8 taskId)
+{
+    s8 menuDirectionPressed = 0x0;
+
+    switch (gMain.newAndRepeatedKeys)
+    {
+    case DPAD_UP:
+        menuDirectionPressed = 0xFF;
+        break;
+    case DPAD_DOWN:
+        menuDirectionPressed = 0x1;
+        break;
+    case DPAD_LEFT:
+        menuDirectionPressed = 0xFE;
+        break;
+    case DPAD_RIGHT:
+        menuDirectionPressed = 0x2;
+        break;
+    }
+
+    if (menuDirectionPressed == 0)
+    {
+        u8 var1 = sub_80F92BC();
+        switch (var1)
+        {
+        case 1:
+            menuDirectionPressed = 0xFF;
+            break;
+        case 2:
+            menuDirectionPressed = 0x1;
+            break;
+        }
+
+        if (menuDirectionPressed == 0)
+        {
+            if ((gMain.newKeys & A_BUTTON) && gSprites[sub_806CA00(taskId)].data0 == 7)
+            {
+                // Selected "CANCEL"
+                return B_BUTTON;
+            }
+            else
+            {
+                return gMain.newKeys & (A_BUTTON | B_BUTTON);
+            }
+        }
+    }
+
+    sub_806BF74(taskId, menuDirectionPressed);
+    return gMain.newAndRepeatedKeys;
+}
+#else
+__attribute__((naked))
+u16 sub_806BD80(u8 taskId)
+{
+    asm(".syntax unified\n\
+    push {r4,r5,lr}\n\
+    lsls r0, 24\n\
+    lsrs r5, r0, 24\n\
+    movs r4, 0\n\
+    ldr r0, _0806BD9C @ =gMain\n\
+    ldrh r0, [r0, 0x30]\n\
+    cmp r0, 0x20\n\
+    beq _0806BDB2\n\
+    cmp r0, 0x20\n\
+    bgt _0806BDA0\n\
+    cmp r0, 0x10\n\
+    beq _0806BDB6\n\
+    b _0806BDB8\n\
+    .align 2, 0\n\
+_0806BD9C: .4byte gMain\n\
+_0806BDA0:\n\
+    cmp r0, 0x40\n\
+    beq _0806BDAA\n\
+    cmp r0, 0x80\n\
+    beq _0806BDAE\n\
+    b _0806BDB8\n\
+_0806BDAA:\n\
+    movs r4, 0xFF\n\
+    b _0806BDB8\n\
+_0806BDAE:\n\
+    movs r4, 0x1\n\
+    b _0806BDB8\n\
+_0806BDB2:\n\
+    movs r4, 0xFE\n\
+    b _0806BDB8\n\
+_0806BDB6:\n\
+    movs r4, 0x2\n\
+_0806BDB8:\n\
+    lsls r0, r4, 24\n\
+    cmp r0, 0\n\
+    bne _0806BDDC\n\
+    bl sub_80F92BC\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    cmp r0, 0x1\n\
+    beq _0806BDD0\n\
+    cmp r0, 0x2\n\
+    beq _0806BDD4\n\
+    b _0806BDD6\n\
+_0806BDD0:\n\
+    movs r4, 0xFF\n\
+    b _0806BDD6\n\
+_0806BDD4:\n\
+    movs r4, 0x1\n\
+_0806BDD6:\n\
+    lsls r0, r4, 24\n\
+    cmp r0, 0\n\
+    beq _0806BDF0\n\
+_0806BDDC:\n\
+    asrs r1, r0, 24\n\
+    adds r0, r5, 0\n\
+    bl sub_806BF74\n\
+    ldr r0, _0806BDEC @ =gMain\n\
+    ldrh r0, [r0, 0x30]\n\
+    b _0806BE2C\n\
+    .align 2, 0\n\
+_0806BDEC: .4byte gMain\n\
+_0806BDF0:\n\
+    ldr r0, _0806BE1C @ =gMain\n\
+    ldrh r1, [r0, 0x2E]\n\
+    movs r0, 0x1\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _0806BE24\n\
+    ldr r4, _0806BE20 @ =gSprites\n\
+    adds r0, r5, 0\n\
+    bl sub_806CA00\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    lsls r1, r0, 4\n\
+    adds r1, r0\n\
+    lsls r1, 2\n\
+    adds r1, r4\n\
+    movs r2, 0x2E\n\
+    ldrsh r0, [r1, r2]\n\
+    cmp r0, 0x7\n\
+    bne _0806BE24\n\
+    movs r0, 0x2\n\
+    b _0806BE2C\n\
+    .align 2, 0\n\
+_0806BE1C: .4byte gMain\n\
+_0806BE20: .4byte gSprites\n\
+_0806BE24:\n\
+    ldr r0, _0806BE34 @ =gMain\n\
+    ldrh r1, [r0, 0x2E]\n\
+    movs r0, 0x3\n\
+    ands r0, r1\n\
+_0806BE2C:\n\
+    pop {r4,r5}\n\
+    pop {r1}\n\
+    bx r1\n\
+    .align 2, 0\n\
+_0806BE34: .4byte gMain\n\
+    .syntax divided\n");
+}
+#endif // NONMATCHING
+
+u16 sub_806BE38(u8 taskId)
+{
+    u8 menuDirectionPressed = 0x0;
+
+    switch (gMain.newAndRepeatedKeys)
+    {
+    case DPAD_UP:
+        menuDirectionPressed = 0xFF;
+        break;
+    case DPAD_DOWN:
+        menuDirectionPressed = 0x1;
+        break;
+    case DPAD_LEFT:
+        menuDirectionPressed = 0xFE;
+        break;
+    case DPAD_RIGHT:
+        menuDirectionPressed = 0x2;
+        break;   
+    }
+
+    if (menuDirectionPressed == 0)
+    {
+        u8 var1 = sub_80F92BC();
+        switch (var1)
+        {
+        case 1:
+            menuDirectionPressed = 0xFF;
+            break;
+        case 2:
+            menuDirectionPressed = 0x1;
+            break;
+        }
+    }
+
+    if (gMain.newKeys & START_BUTTON)
+    {
+        sub_806C890(taskId);
+        return START_BUTTON;
+    }
+    else
+    {
+        s8 signedMenuDirection = menuDirectionPressed;
+        if (signedMenuDirection)
+        {
+            sub_806C658(taskId, signedMenuDirection);
+            return gMain.newAndRepeatedKeys;
+        }
+        else
+        {
+            if (gMain.newKeys & A_BUTTON)
+            {
+                if (gSprites[sub_806CA00(taskId)].data0 == 7)
+                {
+                    return B_BUTTON;
+                }
+            }
+        }
+    }
+
+    return gMain.newKeys & (A_BUTTON | B_BUTTON);
+}
+
+void task_pc_turn_off(const u8 *a, u8 b)
+{
+    if (a[0])
+        sub_806BA94(a[0], a[1], 0, b);
+    else
+        sub_806B9A4(a[0], a[1], b);
+}
+
+void sub_806BF24(const u8 *a, u8 monIndex, u8 c, u8 d)
+{
+    if (GetMonData(&gPlayerParty[monIndex], MON_DATA_SPECIES) && GetMonData(&gPlayerParty[monIndex], MON_DATA_HP) == 0)
+        c = PARTY_SIZE - 1;
+
+    if (d == 1)
+        c += 4;
+
+    task_pc_turn_off(a, c);
+}
+
+void sub_806BF74(u8 taskId, s8 directionPressed)
+{
+    bool8 isLinkDoubleBattle;
+    u8 spriteId = sub_806CA00(taskId);
+    u8 menuIndex = gSprites[spriteId].data0;
+
+    UpdateMonIconFrame_806DA44(taskId, menuIndex, 0);
+    
+    isLinkDoubleBattle = IsLinkDoubleBattle();
+    if (isLinkDoubleBattle == 1)
+    {
+        if (menuIndex == 0 || menuIndex == 2 || menuIndex == 3)
+            sub_806BF24(&gUnknown_083769C0[menuIndex * 2], menuIndex, 3, 0);
+        if (menuIndex == 1 || menuIndex == 4 || menuIndex == 5)
+            sub_806BF24(&gUnknown_083769C0[menuIndex * 2], menuIndex, 4, 0);
+        if (menuIndex == 7)
+            sub_806BBEC(1);
+
+        sub_806C490(spriteId, menuIndex, directionPressed);
+
+        if (gSprites[spriteId].data0 == 0 || gSprites[spriteId].data0 == 2 || gSprites[spriteId].data0 == 3)
+            sub_806BF24(&gUnknown_083769C0[gSprites[spriteId].data0 * 2], gSprites[spriteId].data0, 3, 1);
+        if (gSprites[spriteId].data0 == 1 || gSprites[spriteId].data0 == 4 || gSprites[spriteId].data0 == 5)
+                sub_806BF24(&gUnknown_083769C0[gSprites[spriteId].data0 * 2], gSprites[spriteId].data0, 4, 1);
+        if (gSprites[spriteId].data0 == 7)
+            sub_806BBEC(2);
+
+        ewram1B000.unk261 = 2;
+
+        gSprites[spriteId].pos1.x = gUnknown_083768B8[2][gSprites[spriteId].data0].x;
+        gSprites[spriteId].pos1.y = gUnknown_083768B8[2][gSprites[spriteId].data0].y;
+    }
+    else
+    {
+        u8 isDoubleBattle = IsDoubleBattle();
+
+        if (menuIndex <= PARTY_SIZE - 1)
+        {
+            sub_806BF24(&gUnknown_083769A8[isDoubleBattle * 12 + menuIndex * 2], menuIndex, 3, 0);
+        }
+        else
+        {
+            sub_806BBEC(1);
+        }
+
+        if (!isDoubleBattle)
+        {
+            sub_806C1E4(spriteId, menuIndex, directionPressed);
+        }
+        else
+        {
+            sub_806C310(spriteId, menuIndex, directionPressed);
+        }
+
+        if (gSprites[spriteId].data0 <= PARTY_SIZE - 1)
+        {
+            sub_806BF24(&gUnknown_083769A8[isDoubleBattle * 12 + gSprites[spriteId].data0 * 2], gSprites[spriteId].data0, 3, 1);
+        }
+        else
+        {
+            sub_806BBEC(2);
+        }
+
+        ewram1B000.unk261 = 2;
+
+        gSprites[spriteId].pos1.x = gUnknown_083768B8[isDoubleBattle][gSprites[spriteId].data0].x;
+        gSprites[spriteId].pos1.y = gUnknown_083768B8[isDoubleBattle][gSprites[spriteId].data0].y;
+    }
+
+    UpdateMonIconFrame_806DA44(taskId, gSprites[spriteId].data0, 1);
+
+    if (menuIndex != gSprites[spriteId].data0)
+    {
+        PlaySE(5);
+    }
+}
+
+void sub_806C1E4(u8 spriteId, u8 menuIndex, s8 directionPressed)
+{
+    u8 var1;
+    s8 menuMovement = directionPressed + 2;
+
+    switch (menuMovement)
+    {
+    case 2:
+        gSprites[spriteId].data1 = 0;
+        break;
+    case 1:
+        if (menuIndex == 0) {
+            gSprites[spriteId].data0 = 7;
+        } else if (menuIndex == 7) {
+            gSprites[spriteId].data0 = gPlayerPartyCount - 1;
+        } else {
+            s8 diff = directionPressed;
+            gSprites[spriteId].data0 += diff;
+        }
+
+        gSprites[spriteId].data1 = 0;
+        break;
+    case 3:
+        if (menuIndex == gPlayerPartyCount - 1) {
+            gSprites[spriteId].data0 = 7;
+        } else if (menuIndex == 7) {
+            gSprites[spriteId].data0 = 0;
+        } else {
+            s8 diff = directionPressed;
+            gSprites[spriteId].data0 += diff;
+        }
+
+        gSprites[spriteId].data1 = 0;
+        break;
+    case 4:
+        if (gPlayerPartyCount > 1 && menuIndex == 0)
+        {
+            if (gSprites[spriteId].data1 == 0)
+                gSprites[spriteId].data1 = 1;
+
+            gSprites[spriteId].data0 = gSprites[spriteId].data1;
+        }
+        break;
+    case 0:
+        var1 = menuIndex - 1;
+        if (var1 <= 4) {
+            gSprites[spriteId].data0 = 0;
+            gSprites[spriteId].data1 = menuIndex;
+        }
+        break;
+    }
+}
+
+void sub_806C310(u8 spriteId, u8 menuIndex, s8 directionPressed)
+{
+    u8 var3;
+    s8 menuMovement = directionPressed + 2;
+
+    switch(menuMovement)
+    {
+    case 2:
+        gSprites[spriteId].data1 = 0;
+        break;
+    case 3:
+        if (menuIndex == 7) {
+            gSprites[spriteId].data0 = 0;
+        } else if (menuIndex == gPlayerPartyCount - 1) {
+            gSprites[spriteId].data0 = 7;
+        } else {
+            s8 diff = directionPressed;
+            gSprites[spriteId].data0 += diff;
+        }
+
+        gSprites[spriteId].data1 = 0;
+        break;
+    case 1:
+        if (menuIndex == 0) {
+            gSprites[spriteId].data0 = 7;
+        } else if (menuIndex == 7) {
+            gSprites[spriteId].data0 = gPlayerPartyCount - 1;
+        } else {
+            s8 diff = directionPressed;
+            gSprites[spriteId].data0 += diff;
+        }
+
+        gSprites[spriteId].data1 = 0;
+        break;
+    case 4:
+        if (menuIndex == 0) {
+            if (gPlayerPartyCount > 2) {
+                u16 var1 = gSprites[spriteId].data1 - 2;
+                if (var1 > 1)
+                    gSprites[spriteId].data0 = 2;
+                else
+                    gSprites[spriteId].data0 = gSprites[spriteId].data1;
+            }
+        }
+        else if (menuIndex == 1) {
+            if (gPlayerPartyCount > 4) {
+                u16 var1 = gSprites[spriteId].data1 - 4;
+                if (var1 <= 1)
+                    gSprites[spriteId].data0 = gSprites[spriteId].data1;
+                else
+                    gSprites[spriteId].data0 = 4;
+            }
+        }
+        break;
+    case 0:
+        var3 = menuIndex - 2;
+        if (var3 <= 1) {
+            gSprites[spriteId].data0 = 0;
+            gSprites[spriteId].data1 = menuIndex;
+        } else {
+            u8 var2 = menuIndex - 4;
+            if (var2 <= 1) {
+                gSprites[spriteId].data0 = 1;
+                gSprites[spriteId].data1 = menuIndex;
+            }
+        }
+        break;
+    }
+}
+
+/*void sub_806C490(u8 spriteId, u8 menuIndex, s8 directionPressed)
+{
+    s8 menuMovement;
+    s16 var1;
+    u8 var2;
+
+    menuMovement = directionPressed + 2;
+    switch (menuMovement)
+    {
+    case 2:
+        gSprites[spriteId].data1 = 0;
+        break;
+    case 3:
+        if (menuIndex == 7) {
+            gSprites[spriteId].data0 = 0;
+        } else if (menuIndex == PARTY_SIZE - 1) {
+            gSprites[spriteId].data0 = 7;
+        } else {
+            // Put if statment here
+            while (menuIndex++ != PARTY_SIZE - 1) {
+                if (GetMonData(&gPlayerParty[menuIndex], MON_DATA_SPECIES))
+                {
+                    gSprites[spriteId].data0 = menuIndex;
+                    gSprites[spriteId].data1 = 0;
+                    return;
+                }
+            }
+
+            gSprites[spriteId].data0 = 7;
+        }
+
+        gSprites[spriteId].data1 = 0;
+        break;
+    case 1:
+        while (menuIndex-- != 0) {
+            if (GetMonData(gPlayerParty[menuIndex], MON_DATA_SPECIES))
+            {
+                gSprites[spriteId].data0 = menuIndex;
+                gSprites[spriteId].data1 = 0;
+                return;
+            }
+        }
+
+        gSprites[spriteId].data0 = 7;
+        gSprites[spriteId].data1 = 0;
+        break;
+    case 4:
+        if (menuIndex == 0) {
+            var1 = gSprites[spriteId].data1 - 2;
+            if (var1 > 1) {
+                if (GetMonData(&gPlayerParty[2], MON_DATA_SPECIES)) {
+                    gSprites[spriteId].data0 = 2;
+                } else if (GetMonData(&gPlayerParty[3], MON_DATA_SPECIES)) {
+                    gSprites[spriteId].data0 = 3;
+                }
+            } else {
+                gSprites[spriteId].data0 = 1;
+            }
+        } else if (menuIndex == 1) {
+            var1 = gSprites[spriteId].data1 - 4;
+            if (var1 <= 1) {
+                gSprites[spriteId].data0 = var1;
+            } else {
+                if (GetMonData(&gPlayerParty[4], MON_DATA_SPECIES)) {
+                    gSprites[spriteId].data0 = 4;
+                } else if (GetMonData(&gPlayerParty[5], MON_DATA_SPECIES)) {
+                    gSprites[spriteId].data0 = 5;
+                }
+            }
+        }
+        break;
+    case 0:
+        var2 = menuIndex - 2;
+        if (var2 <= 1) {
+            gSprites[spriteId].data0 = 0;
+        } else {
+            var2 = menuIndex - 4;
+            if (var2 <= 1) {
+                gSprites[spriteId].data0 = 1;
+            }
+        }
+
+        gSprites[spriteId].data1 = menuIndex;
+        break;
+    }
+}*/
+__attribute__((naked))
+void sub_806C490(u8 spriteId, u8 menuIndex, s8 directionPressed)
+{
+    asm(".syntax unified\n\
+    push {r4-r6,lr}\n\
+    lsls r0, 24\n\
+    lsrs r5, r0, 24\n\
+    lsls r1, 24\n\
+    lsrs r4, r1, 24\n\
+    lsls r2, 24\n\
+    movs r0, 0x80\n\
+    lsls r0, 18\n\
+    adds r2, r0\n\
+    asrs r0, r2, 24\n\
+    cmp r0, 0x4\n\
+    bls _0806C4AA\n\
+    b _0806C64E\n\
+_0806C4AA:\n\
+    lsls r0, 2\n\
+    ldr r1, _0806C4B4 @ =_0806C4B8\n\
+    adds r0, r1\n\
+    ldr r0, [r0]\n\
+    mov pc, r0\n\
+    .align 2, 0\n\
+_0806C4B4: .4byte _0806C4B8\n\
+    .align 2, 0\n\
+_0806C4B8:\n\
+    .4byte _0806C618\n\
+    .4byte _0806C524\n\
+    .4byte _0806C4CC\n\
+    .4byte _0806C4E0\n\
+    .4byte _0806C57C\n\
+_0806C4CC:\n\
+    ldr r0, _0806C4DC @ =gSprites\n\
+    lsls r1, r5, 4\n\
+    adds r1, r5\n\
+    lsls r1, 2\n\
+    adds r1, r0\n\
+    movs r0, 0\n\
+    strh r0, [r1, 0x30]\n\
+    b _0806C64E\n\
+    .align 2, 0\n\
+_0806C4DC: .4byte gSprites\n\
+_0806C4E0:\n\
+    cmp r4, 0x7\n\
+    bne _0806C4FC\n\
+    ldr r2, _0806C4F8 @ =gSprites\n\
+    lsls r3, r5, 4\n\
+    adds r0, r3, r5\n\
+    lsls r0, 2\n\
+    adds r0, r2\n\
+    movs r1, 0\n\
+    strh r1, [r0, 0x2E]\n\
+    adds r1, r2, 0\n\
+    adds r6, r3, 0\n\
+    b _0806C566\n\
+    .align 2, 0\n\
+_0806C4F8: .4byte gSprites\n\
+_0806C4FC:\n\
+    lsls r6, r5, 4\n\
+    b _0806C518\n\
+_0806C500:\n\
+    adds r0, r4, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r4, r0, 24\n\
+    movs r0, 0x64\n\
+    muls r0, r4\n\
+    ldr r1, _0806C520 @ =gPlayerParty\n\
+    adds r0, r1\n\
+    movs r1, 0xB\n\
+    bl GetMonData\n\
+    cmp r0, 0\n\
+    bne _0806C528\n\
+_0806C518:\n\
+    cmp r4, 0x5\n\
+    bne _0806C500\n\
+    b _0806C558\n\
+    .align 2, 0\n\
+_0806C520: .4byte gPlayerParty\n\
+_0806C524:\n\
+    lsls r6, r5, 4\n\
+    b _0806C554\n\
+_0806C528:\n\
+    ldr r1, _0806C534 @ =gSprites\n\
+    adds r0, r6, r5\n\
+    lsls r0, 2\n\
+    adds r0, r1\n\
+    strh r4, [r0, 0x2E]\n\
+    b _0806C566\n\
+    .align 2, 0\n\
+_0806C534: .4byte gSprites\n\
+_0806C538:\n\
+    subs r0, r4, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r4, r0, 24\n\
+    cmp r4, 0x6\n\
+    beq _0806C554\n\
+    movs r0, 0x64\n\
+    muls r0, r4\n\
+    ldr r1, _0806C574 @ =gPlayerParty\n\
+    adds r0, r1\n\
+    movs r1, 0xB\n\
+    bl GetMonData\n\
+    cmp r0, 0\n\
+    bne _0806C528\n\
+_0806C554:\n\
+    cmp r4, 0\n\
+    bne _0806C538\n\
+_0806C558:\n\
+    ldr r0, _0806C578 @ =gSprites\n\
+    adds r1, r6, r5\n\
+    lsls r1, 2\n\
+    adds r1, r0\n\
+    movs r2, 0x7\n\
+    strh r2, [r1, 0x2E]\n\
+    adds r1, r0, 0\n\
+_0806C566:\n\
+    adds r0, r6, r5\n\
+    lsls r0, 2\n\
+    adds r0, r1\n\
+    movs r1, 0\n\
+    strh r1, [r0, 0x30]\n\
+    b _0806C64E\n\
+    .align 2, 0\n\
+_0806C574: .4byte gPlayerParty\n\
+_0806C578: .4byte gSprites\n\
+_0806C57C:\n\
+    cmp r4, 0\n\
+    bne _0806C5C8\n\
+    ldr r0, _0806C5AC @ =gSprites\n\
+    lsls r1, r5, 4\n\
+    adds r1, r5\n\
+    lsls r1, 2\n\
+    adds r4, r1, r0\n\
+    ldrh r1, [r4, 0x30]\n\
+    subs r0, r1, 0x2\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+    cmp r0, 0x1\n\
+    bls _0806C5E2\n\
+    ldr r5, _0806C5B0 @ =gPlayerParty + 2 * 0x64\n\
+    adds r0, r5, 0\n\
+    movs r1, 0xB\n\
+    bl GetMonData\n\
+    cmp r0, 0\n\
+    beq _0806C5B4\n\
+    movs r0, 0x2\n\
+    strh r0, [r4, 0x2E]\n\
+    b _0806C64E\n\
+    .align 2, 0\n\
+_0806C5AC: .4byte gSprites\n\
+_0806C5B0: .4byte gPlayerParty + 2 * 0x64\n\
+_0806C5B4:\n\
+    adds r0, r5, 0\n\
+    adds r0, 0x64\n\
+    movs r1, 0xB\n\
+    bl GetMonData\n\
+    cmp r0, 0\n\
+    beq _0806C64E\n\
+    movs r0, 0x3\n\
+    strh r0, [r4, 0x2E]\n\
+    b _0806C64E\n\
+_0806C5C8:\n\
+    cmp r4, 0x1\n\
+    bne _0806C64E\n\
+    ldr r0, _0806C5E8 @ =gSprites\n\
+    lsls r1, r5, 4\n\
+    adds r1, r5\n\
+    lsls r1, 2\n\
+    adds r4, r1, r0\n\
+    ldrh r1, [r4, 0x30]\n\
+    subs r0, r1, 0x4\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+    cmp r0, 0x1\n\
+    bhi _0806C5EC\n\
+_0806C5E2:\n\
+    strh r1, [r4, 0x2E]\n\
+    b _0806C64E\n\
+    .align 2, 0\n\
+_0806C5E8: .4byte gSprites\n\
+_0806C5EC:\n\
+    ldr r5, _0806C600 @ =gPlayerParty + 4 * 0x64\n\
+    adds r0, r5, 0\n\
+    movs r1, 0xB\n\
+    bl GetMonData\n\
+    cmp r0, 0\n\
+    beq _0806C604\n\
+    movs r0, 0x4\n\
+    strh r0, [r4, 0x2E]\n\
+    b _0806C64E\n\
+    .align 2, 0\n\
+_0806C600: .4byte gPlayerParty + 4 * 0x64\n\
+_0806C604:\n\
+    adds r0, r5, 0\n\
+    adds r0, 0x64\n\
+    movs r1, 0xB\n\
+    bl GetMonData\n\
+    cmp r0, 0\n\
+    beq _0806C64E\n\
+    movs r0, 0x5\n\
+    strh r0, [r4, 0x2E]\n\
+    b _0806C64E\n\
+_0806C618:\n\
+    subs r0, r4, 0x2\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    cmp r0, 0x1\n\
+    bhi _0806C634\n\
+    ldr r0, _0806C630 @ =gSprites\n\
+    lsls r1, r5, 4\n\
+    adds r1, r5\n\
+    lsls r1, 2\n\
+    adds r1, r0\n\
+    movs r0, 0\n\
+    b _0806C64A\n\
+    .align 2, 0\n\
+_0806C630: .4byte gSprites\n\
+_0806C634:\n\
+    subs r0, r4, 0x4\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    cmp r0, 0x1\n\
+    bhi _0806C64E\n\
+    ldr r0, _0806C654 @ =gSprites\n\
+    lsls r1, r5, 4\n\
+    adds r1, r5\n\
+    lsls r1, 2\n\
+    adds r1, r0\n\
+    movs r0, 0x1\n\
+_0806C64A:\n\
+    strh r0, [r1, 0x2E]\n\
+    strh r4, [r1, 0x30]\n\
+_0806C64E:\n\
+    pop {r4-r6}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
+_0806C654: .4byte gSprites\n\
+    .syntax divided\n");
+}
+
+
+// directionPressed = -2 for left, 2 for right, 1 for down, -1 for up
+void sub_806C658(u8 taskId, s8 directionPressed)
+{
+    u16 newMenuIndex;
+    u8 newMenuIndex2;
+    u8 newMenuIndex3;
+    s8 menuMovement;
+    u8 spriteId = sub_806CA00(taskId);
+    u8 menuIndex = gSprites[spriteId].data0;
+
+    UpdateMonIconFrame_806DA44(taskId, menuIndex, 0);
+
+    if (menuIndex < PARTY_SIZE)
+    {
+        sub_806BF24(&gUnknown_083769A8[menuIndex * 2], menuIndex, 3, 0);
+    }
+    else if (menuIndex == PARTY_SIZE)
+    {
+        sub_806BB9C(1);
+    }
+    else
+    {
+        sub_806BBEC(1);
+    }
+
+    menuMovement = directionPressed + 2;
+
+    switch (menuMovement)
+    {
+    case 2:
+        gSprites[spriteId].data1 = 0;
+        break;
+    case 1:
+        if (menuIndex == 0) {
+            gSprites[spriteId].data0 = 7;
+        } else if (menuIndex == PARTY_SIZE) {
+            gSprites[spriteId].data0 = gPlayerPartyCount - 1;
+        } else {
+            gSprites[spriteId].data0 += directionPressed;
+        }
+
+        gSprites[spriteId].data1 = 0;
+        break;
+    case 3:
+        if (menuIndex == gPlayerPartyCount - 1) {
+            gSprites[spriteId].data0 = 6;
+        } else if (menuIndex == 7) {
+            gSprites[spriteId].data0 = 0;
+        } else {
+            gSprites[spriteId].data0 += directionPressed;
+        }
+
+        gSprites[spriteId].data1 = 0;
+        break;
+    case 4:
+        if (gPlayerPartyCount > 1 && menuIndex == 0)
+        {
+            if (gSprites[spriteId].data1 == 0) {
+                gSprites[spriteId].data1 = 1;
+            }
+
+            gSprites[spriteId].data0 = gSprites[spriteId].data1;
+        }
+        break;
+    case 0:
+        newMenuIndex3 = menuIndex - 1;
+        if (newMenuIndex3 <= 4)
+        {
+            gSprites[spriteId].data0 = 0;
+            gSprites[spriteId].data1 = menuIndex;
+        }
+        break;
+    }
+    
+    gSprites[spriteId].pos1.x = gUnknown_083768B8[0][gSprites[spriteId].data0].x;
+    gSprites[spriteId].pos1.y = gUnknown_083768B8[0][gSprites[spriteId].data0].y;
+
+
+    newMenuIndex = gSprites[spriteId].data0;
+    if (gSprites[spriteId].data0 <= PARTY_SIZE - 1)
+    {
+        sub_806BF24(&gUnknown_083769A8[gSprites[spriteId].data0 * 2], newMenuIndex, 3, 1);
+    }
+    else if (gSprites[spriteId].data0 == PARTY_SIZE)
+    {
+        sub_806BB9C(2);
+    }
+    else
+    {
+        sub_806BBEC(2);
+    }
+
+    ewram1B000.unk261 = 2;
+
+    newMenuIndex2 = gSprites[spriteId].data0;
+    UpdateMonIconFrame_806DA44(taskId, newMenuIndex2, 1);
+
+    if (menuIndex != gSprites[spriteId].data0)
+    {
+        PlaySE(5);
+    }
+}
+
+void sub_806C890(u8 taskId)
+{
+    u8 spriteId = sub_806CA00(taskId);
+
+    u8 monIndex = gSprites[spriteId].data0;
+    if (monIndex != 6)
+    {
+        UpdateMonIconFrame_806DA44(taskId, monIndex, 0);
+
+        if (monIndex < PARTY_SIZE)
+        {
+            sub_806BF24(&gUnknown_083769A8[monIndex * 2], monIndex, 3, 0);
+        }
+        else
+        {
+            sub_806BBEC(1);
+        }
+
+        gSprites[spriteId].data1 = 0;
+        gSprites[spriteId].data0 = 6;
+        gSprites[spriteId].pos1.x = gUnknown_083768B8[0][6].x;
+        gSprites[spriteId].pos1.y = gUnknown_083768B8[0][6].y;
+
+        sub_806BB9C(2);
+
+        ewram1B000.unk261 = 2;
+        PlaySE(5);
+    }
+}
+
+void sub_806C92C(u8 spriteId)
+{
+    u8 monIndex1 = gSprites[spriteId].data0;
+    u8 monIndex2 = gSprites[spriteId].data1;
+
+    if (!IsDoubleBattle())
+    {
+        if (monIndex1 < 1) {
+            if (monIndex2 < 1) {
+                monIndex2 = 1;
+            }
+        } else {
+            if (monIndex2 >= 1) {
+                monIndex2 = 0;
+            }
+        }
+    } else {
+        if (monIndex1 < 2) {
+            if (monIndex2 < 2) {
+                monIndex2 = 2;
+            }
+        } else {
+            if (monIndex2 >= 2) {
+                monIndex2 = 0;
+            }
+        }
+    }
+
+    gSprites[spriteId].data1 = monIndex2;
+}
+
+void sub_806C994(u8 taskId, u8 b)
+{
+    u8 spriteId = sub_806CA00(taskId);
+
+    gSprites[spriteId].data0 = b;
+    sub_806C92C(spriteId);
+}
+
+void sub_806C9C4(u8 taskId, u8 spriteId)
+{
+    u8 spriteId2 = sub_806CA00(taskId);
+
+    gSprites[spriteId].pos1.x = gSprites[spriteId2].pos1.x;
+    gSprites[spriteId].pos1.y = gSprites[spriteId2].pos1.y;
+    gSprites[spriteId].data0 = gSprites[spriteId2].data0;
+}
+
+u8 sub_806CA00(u8 taskId)
+{
+    return gTasks[taskId].data[3] >> 8;
+}
+
+void sub_806CA18(u8 taskId, u8 b)
+{
+    u8 var1 = gTasks[taskId].data[3];
+    gTasks[taskId].data[3] = var1 | (b << 8);
+}
+
+u8 sub_806CA38(u8 taskId)
+{
+    u8 spriteId = sub_806CA00(taskId);
+    return gSprites[spriteId].data0;
+}
+
+void sub_806CA60(u8 taskId)
+{
+    gTasks[taskId].func = TaskDummy;
+    ewram01000.unk0 = taskId;
+
+    CreateTask(sub_806CB74, 0);
+    ewram01000.unk1 = CreateInvisibleSpriteWithCallback(SpriteCallbackDummy);
+
+    sub_806C9C4(taskId, ewram01000.unk1);
+    ewram01000.unk2 = sub_806CA00(taskId);
+
+    sub_806D538(ewram1B000_alt.unk272, 0);
+
+    sub_806BF24(&gUnknown_083769A8[gSprites[ewram01000.unk1].data0 * 2], gSprites[ewram01000.unk1].data0, 6, 0);
+    ewram1B000.unk261 = 2;
+}
 
 void sub_806CAFC(u8 a, s16 b)
 {
@@ -1282,7 +3816,7 @@ void TryPrintPartyMenuMonNickname(u8 monIndex, struct Pokemon *pokemon)
 {
     if (GetMonData(pokemon, MON_DATA_SPECIES))
     {
-        u8 isLinkDoubleBattle = IsLinkDoubleBattle();
+        bool8 isLinkDoubleBattle = IsLinkDoubleBattle();
         if (isLinkDoubleBattle == TRUE)
         {
             PrintPartyMenuMonNickname(monIndex, 2, pokemon);
@@ -1326,7 +3860,7 @@ void PartyMenuPutStatusTilemap(u8 monIndex, u8 b, u8 status)
 
 static void PartyMenuClearLevelStatusTilemap(u8 monIndex)
 {
-    u8 isLinkDoubleBattle;
+    bool8 isLinkDoubleBattle;
     u8 b;
     u8 x;
     u8 y;
@@ -1392,7 +3926,7 @@ void PartyMenuPrintMonLevelOrStatus(u8 monIndex, struct Pokemon *pokemon)
     if (GetMonData(pokemon, MON_DATA_SPECIES) && !GetMonData(pokemon, MON_DATA_IS_EGG))
     {
         u8 statusAndPkrs;
-        u8 isLinkDoubleBattle;
+        bool8 isLinkDoubleBattle;
         u8 b;
 
         statusAndPkrs = GetMonStatusAndPokerus(pokemon);
@@ -1490,7 +4024,7 @@ void PartyMenuTryPrintHP(u8 monIndex, struct Pokemon *pokemon)
 {
     if (GetMonData(pokemon, MON_DATA_SPECIES) && !GetMonData(pokemon, MON_DATA_IS_EGG))
     {
-        u8 isLinkDoubleBattle = IsLinkDoubleBattle();
+        bool8 isLinkDoubleBattle = IsLinkDoubleBattle();
         if (isLinkDoubleBattle == TRUE)
         {
             PartyMenuPrintHP(monIndex, 2, pokemon);
@@ -1565,7 +4099,7 @@ void PartyMenuTryDrawHPBar(u8 monIndex, struct Pokemon *pokemon)
 {
     if (GetMonData(pokemon, MON_DATA_SPECIES) && !GetMonData(pokemon, MON_DATA_IS_EGG))
     {
-        u8 isDoubleBattle = IsLinkDoubleBattle();
+        bool8 isDoubleBattle = IsLinkDoubleBattle();
         if (isDoubleBattle == TRUE)
         {
             PartyMenuDrawHPBar(monIndex, 2, pokemon);

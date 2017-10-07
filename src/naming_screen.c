@@ -30,6 +30,8 @@ extern u8 unk_2000000[];
 
 #define namingScreenData (*(struct NamingScreenData *)(unk_2000000))
 
+extern u8 CreateMonIcon(u16 species, void (*callback)(struct Sprite *), s16 x, s16 y, u8 subpriority, u32 personality);
+
 const u32 gSpriteImage_83CE094[] = INCBIN_U32("graphics/naming_screen/pc_icon/0.4bpp");
 const u32 gSpriteImage_83CE154[] = INCBIN_U32("graphics/naming_screen/pc_icon/1.4bpp");
 

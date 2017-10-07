@@ -15,11 +15,11 @@ struct PartyPopupMenu
 
 struct Unk201B000
 {
-    //u8 filler0[0x260];
     struct Pokemon unk0[6];
-    u8 filler258[1];
+    u8 unk258;
     u8 unk259;
-    u8 filler25A[6];
+    u8 filler25A[2];
+    TaskFunc taskFunc;
     u8 unk260;
     u8 unk261;
     u8 unk262;
@@ -71,20 +71,23 @@ extern u8 ewram[];
 #define EWRAM_1B000 ewram1B000_alt
 
 void sub_806AEDC(void);
-void sub_806AF4C(u8 arg0, u8 arg1, void* arg2, u8 arg3);
-void OpenPartyMenu(u8, u8);
-void OpenPartyMenu();
+void sub_806AF4C(u8 a, u8 battleFlags, TaskFunc func, u8 d);
+void OpenPartyMenu(u8 a, u8 b);
 bool8 sub_806B124(void);
-u8 IsLinkDoubleBattle(void);
+bool8 IsLinkDoubleBattle(void);
 u8 sub_806B58C(u8);
 u8 sub_806B58C(u8);
+void sub_806B908(void);
 void sub_806BC3C(u8, u8);
+void sub_806BCE8(void);
 u8 sub_806BD58(u8, u8);
 u8 sub_806BD58(u8, u8);
-u16 sub_806BD80(u8);
-void task_pc_turn_off();
-void sub_806BF74(u8 arg0, s8 arg1);
-void sub_806C994(u8 arg0, u8 arg1);
+u16 sub_806BD80(u8 taskId);
+u16 sub_806BE38(u8 taskId);
+void task_pc_turn_off(const u8 *a, u8 b);
+void sub_806BF74(u8 taskId, s8 directionPressed);
+void sub_806C890(u8 taskId);
+void sub_806C994(u8 taskId, u8 b);
 u8 sub_806CA38(u8 taskID);
 void sub_806CB74(u8 taskId);
 void sub_806CCE4(void);

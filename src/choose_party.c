@@ -42,27 +42,20 @@ extern const u16 gBattleTowerBanlist[];
 
 EWRAM_DATA u8 gSelectedOrderFromParty[3] = {0};
 
-extern void OpenPartyMenu();
 extern u8 sub_806BD58(u8, u8);
 extern void PartyMenuPrintMonsLevelOrStatus(void);
 extern void sub_806BC3C(u8, u8);
 extern u8 sub_806B58C(u8);
-extern u16 sub_806BE38();
-extern u8 sub_806CA38();
 extern u8 sub_806B124();
-extern void sub_806C994();
 extern void sub_806C658();
 extern void sub_806AEDC(void);
 extern void sub_806AF4C();
 extern void ShowPokemonSummaryScreen(struct Pokemon *, u8, u8, void (*)(void), int);
-extern void sub_806C890();
-extern void sub_806B908(void);
 extern void CreateMonIcon_806D99C(int, u8, int, struct UnknownPokemonStruct2 *);
 extern void CreateHeldItemIcon_806DCD4(int, u8, int);
 extern u8 GetMonStatusAndPokerus();
 extern void PartyMenuPrintHP();
 extern bool8 sub_80F9344(void);
-extern void sub_806BCE8(void);
 
 static void ClearPartySelection(void);
 static bool8 IsMonAllowedInBattleTower(struct Pokemon *);

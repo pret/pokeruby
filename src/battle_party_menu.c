@@ -22,7 +22,6 @@
 extern u8 ewram[];
 #define UNK_201606C_ARRAY (ewram + 0x1606C) // lazy define but whatever.
 
-extern u8 IsLinkDoubleBattle(void);
 extern u8 sub_806BD58(u8, u8);
 extern void PartyMenuPrintMonsLevelOrStatus(void);
 extern void nullsub_13(void);
@@ -34,7 +33,6 @@ extern void sub_806AEDC(void);
 extern u8 *sub_8040D08();
 extern void sub_8040B8C(void);
 extern void nullsub_14();
-extern void OpenPartyMenu();
 extern u8 sub_803FBBC(void);
 
 extern u8 gPlayerPartyCount;

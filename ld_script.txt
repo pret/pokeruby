@@ -107,7 +107,6 @@ SECTIONS {
         src/field_tasks.o(.text);
         src/clock.o(.text);
         src/reset_rtc_screen.o(.text);
-        asm/party_menu.o(.text);
         src/party_menu.o(.text);
         src/start_menu.o(.text);
         src/menu.o(.text);
