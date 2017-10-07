@@ -47,7 +47,6 @@ extern void PartyMenuPrintMonsLevelOrStatus(void);
 extern void sub_806BC3C(u8, u8);
 extern u8 sub_806B58C(u8);
 extern u8 sub_806B124();
-extern void sub_806C658();
 extern void sub_806AEDC(void);
 extern void sub_806AF4C();
 extern void ShowPokemonSummaryScreen(struct Pokemon *, u8, u8, void (*)(void), int);

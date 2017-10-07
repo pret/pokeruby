@@ -160,6 +160,18 @@ static void sub_806D014(u8 taskId);
 static void sub_806D118(u8 taskId);
 static void sub_806B460(void);
 static void sub_806B548(void);
+static void sub_806BA94(s16 a, u16 b, u8 c, u8 d);
+static void sub_806B9A4(s16 a, u16 b, u8 c);
+static void sub_806CA18(u8 taskId, u8 b);
+static void sub_806C310(u8 spriteId, u8 menuIndex, s8 directionPressed);
+static void sub_806C1E4(u8 spriteId, u8 menuIndex, s8 directionPressed);
+static void sub_806C490(u8 spriteId, u8 menuIndex, s8 directionPressed);
+static void UpdateMonIconFrame_806DA0C(struct Sprite *sprite);
+static void UpdateMonIconFrame_806DA38(struct Sprite *sprite);
+static void UpdateMonIconFrame_806DA44(u8 taskId, u8 monIndex, u8 c);
+static u8 sub_806CA00(u8 taskId);
+static void SpriteCB_sub_806D37C(struct Sprite *sprite);
+static u8 GetMonIconSpriteId_maybe(u8 taskId, u8 monIndex);
 
 #if ENGLISH
 #define WINDOW_LEFT (3)
@@ -168,25 +180,6 @@ static void sub_806B548(void);
 #define WINDOW_LEFT (0)
 #define WINDOW_RIGHT (29)
 #endif
-
-extern u8 UpdateMonIconFrame(struct Sprite *sprite);
-extern u8 GetMonIconSpriteId_maybe(u8 taskId, u8 monIndex);
-extern u8 CreateMonIcon(u16 species, void (*callback)(struct Sprite *), s16 x, s16 y, u8 subpriority, u32 personality);
-extern void sub_809D62C(struct Sprite *sprite);
-extern void UpdateMonIconFrame_806DA0C(struct Sprite *sprite);
-extern void UpdateMonIconFrame_806DA38(struct Sprite *sprite);
-extern void SpriteCB_sub_806D37C(struct Sprite *sprite);
-extern void sub_806CD44(u8 taskId);
-extern u8 sub_806CA00(u8 taskId);
-extern void sub_806BA34(s16 a, u16 b);
-extern void UpdateMonIconFrame_806DA44(u8 taskId, u8 monIndex, u8 c);
-extern void sub_806C490(u8 spriteId, u8 menuIndex, s8 directionPressed);
-extern void sub_806C1E4(u8 spriteId, u8 menuIndex, s8 directionPressed);
-extern void sub_806C310(u8 spriteId, u8 menuIndex, s8 directionPressed);
-extern void sub_806C658(u8 taskId, s8 directionPressed);
-extern void sub_806CA18(u8 taskId, u8 b);
-extern void sub_806B9A4(s16 a, u16 b, u8 c);
-extern void sub_806BA94(s16 a, u16 b, u8 c, u8 d);
 
 
 #ifdef NONMATCHING

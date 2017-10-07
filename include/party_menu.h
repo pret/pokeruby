@@ -70,6 +70,7 @@ extern u8 ewram[];
 #define ewram1B000_alt (*(struct Struct201B000 *)(ewram + 0x1B000))
 #define EWRAM_1B000 ewram1B000_alt
 
+void sub_806C658(u8 taskId, s8 directionPressed);
 void sub_806AEDC(void);
 void sub_806AF4C(u8 a, u8 battleFlags, TaskFunc func, u8 d);
 void OpenPartyMenu(u8 a, u8 b);
