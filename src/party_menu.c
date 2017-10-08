@@ -303,6 +303,8 @@ static const u8 gUnknown_083769A8[] = {
 };
 
 // This is actually a 2x6x2 array, but the code reads it as a flat array.
+//FIXME: sub_806B908() accesses this data via gUnknown_083769A8 (directly above this). This means these
+// two arrays might be a struct, rather than separate arrays.
 static const u8 gUnknown_083769C0[] = {
     0, 1,    0, 8,   11, 2,    11, 5,    11, 9,    11, 12,
     0, 1,    0, 8,   11, 2,    11, 5,    11, 9,    11, 12, // Double battle
@@ -862,17 +864,13 @@ bool8 IsLinkDoubleBattle()
         return FALSE;
 }
 
-#ifdef NONMATCHING
 void sub_806B548(void)
 {
     if (ewram1B000.unk261)
     {
-        u32 src = (u32)&gBGTilemapBuffers[2];
-        u32 dest = BG_VRAM + 0x3000;
-
-        REG_DMA3SAD = src;
-        REG_DMA3DAD = dest;
-        REG_DMA3CNT = ((DMA_ENABLE) << 16) | 0x400;
+        const void *src = gBGTilemapBuffers[2];
+        void *dest = (void *)(BG_VRAM + 0x3000);
+        DmaCopy16(3, src, dest, 0x800);
 
         if (ewram1B000.unk261 == 2)
         {
@@ -880,44 +878,6 @@ void sub_806B548(void)
         }
     }
 }
-#else
-__attribute__((naked))
-void sub_806B548(void)
-{
-    asm(".syntax unified\n\
-    push {r4,lr}\n\
-    ldr r0, _0806B574 @ =0x0201b000\n\
-    ldr r1, _0806B578 @ =0x00000261\n\
-    adds r4, r0, r1\n\
-    ldrb r3, [r4]\n\
-    cmp r3, 0\n\
-    beq _0806B56E\n\
-    ldr r1, _0806B57C @ =gBGTilemapBuffers + 0x1000\n\
-    ldr r2, _0806B580 @ =0x06003000\n\
-    ldr r0, _0806B584 @ =0x040000d4\n\
-    str r1, [r0]\n\
-    str r2, [r0, 0x4]\n\
-    ldr r1, _0806B588 @ =0x80000400\n\
-    str r1, [r0, 0x8]\n\
-    ldr r0, [r0, 0x8]\n\
-    cmp r3, 0x2\n\
-    bne _0806B56E\n\
-    movs r0, 0\n\
-    strb r0, [r4]\n\
-_0806B56E:\n\
-    pop {r4}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_0806B574: .4byte 0x0201b000\n\
-_0806B578: .4byte 0x00000261\n\
-_0806B57C: .4byte gBGTilemapBuffers + 0x1000\n\
-_0806B580: .4byte 0x06003000\n\
-_0806B584: .4byte 0x040000d4\n\
-_0806B588: .4byte 0x80000400\n\
-    .syntax divided\n");
-}
-#endif // NONMATCHING
 
 __attribute__((naked))
 u8 sub_806B58C(u8 a)
