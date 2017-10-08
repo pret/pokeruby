@@ -46,7 +46,6 @@ extern u8 sub_806BD58(u8, u8);
 extern void PartyMenuPrintMonsLevelOrStatus(void);
 extern void sub_806BC3C(u8, u8);
 extern u8 sub_806B58C(u8);
-extern u8 sub_806B124();
 extern void sub_806AEDC(void);
 extern void sub_806AF4C();
 extern void ShowPokemonSummaryScreen(struct Pokemon *, u8, u8, void (*)(void), int);
@@ -422,7 +421,7 @@ static void sub_8122530(void)
 {
     while (1)
     {
-        if (sub_806B124() == 1)
+        if (InitPartyMenu() == TRUE)
         {
             sub_806C994(ewram1B000.unk260, gUnknown_020384F0);
             sub_806C658(ewram1B000.unk260, 0);
@@ -873,7 +872,7 @@ static void sub_8122F90(void)
 {
     while (1)
     {
-        if (sub_806B124() == 1)
+        if (InitPartyMenu() == TRUE)
         {
             sub_806C994(ewram1B000.unk260, gUnknown_020384F0);
             sub_806BF74(ewram1B000.unk260, 0);

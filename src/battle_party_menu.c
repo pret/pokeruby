@@ -566,7 +566,7 @@ static void Task_809538C(void)
 {
     do
     {
-        if (sub_806B124() == TRUE)
+        if (InitPartyMenu() == TRUE)
         {
             sub_806C994(EWRAM_1B000.unk260, gUnknown_020384F0);
             sub_806BF74(EWRAM_1B000.unk260, 0);

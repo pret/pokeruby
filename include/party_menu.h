@@ -42,7 +42,8 @@ struct Struct201B000
     u8 unk262;
     s16 unk264;
     s16 unk266;
-    u8 filler268[10];
+    s16 unk268;
+    u8 filler26A[8];
     u16 unk272;
     u8 filler274[14];
     u16 unk282;
@@ -74,7 +75,7 @@ void sub_806C658(u8 taskId, s8 directionPressed);
 void sub_806AEDC(void);
 void sub_806AF4C(u8 a, u8 battleFlags, TaskFunc func, u8 d);
 void OpenPartyMenu(u8 a, u8 b);
-bool8 sub_806B124(void);
+bool8 InitPartyMenu(void);
 bool8 IsLinkDoubleBattle(void);
 u8 sub_806B58C(u8);
 u8 sub_806B58C(u8);

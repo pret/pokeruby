@@ -916,9 +916,9 @@ void DestroySpriteAndFreeResources(struct Sprite *sprite)
     DestroySprite(sprite);
 }
 
-void sub_800142C(u32 a1, u32 a2, u16 *a3, u16 a4, u32 a5)
+void sub_800142C(u32 a1, u32 a2, const u16 *a3, u16 a4, u32 a5)
 {
-    u16 *d = a3;
+    const u16 *d = a3;
     struct OamData *oam = &gMain.oamBuffer[gMain.objCount];
     while (!(gMain.objCount & 0x80) && (s16)(d[0] + 1) != 0)
     {

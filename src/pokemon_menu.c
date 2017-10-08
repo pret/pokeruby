@@ -324,7 +324,7 @@ static void sub_8089EBC(void)
 {
     do
     {
-        if (sub_806B124() == TRUE)
+        if (InitPartyMenu() == TRUE)
         {
             sub_806C994(EWRAM_1B000.unk260, gUnknown_020384F0);
             sub_806BF74(EWRAM_1B000.unk260, 0);
@@ -475,7 +475,7 @@ static void sub_808A358(void)
 {
     while (1)
     {
-        if (sub_806B124() == TRUE)
+        if (InitPartyMenu() == TRUE)
         {
             sub_806C994(EWRAM_1B000.unk260, gLastFieldPokeMenuOpened);
             sub_806BF74(EWRAM_1B000.unk260, 0);
@@ -491,7 +491,7 @@ static void sub_808A3A4(void)
 {
     while (1)
     {
-        if (sub_806B124() == TRUE)
+        if (InitPartyMenu() == TRUE)
         {
             sub_806C994(EWRAM_1B000.unk260, gLastFieldPokeMenuOpened);
             sub_806BF74(EWRAM_1B000.unk260, 0);
@@ -539,7 +539,7 @@ static void sub_808A4D4(void)
 {
     while (1)
     {
-        if (sub_806B124() == TRUE)
+        if (InitPartyMenu() == TRUE)
         {
             sub_806C994(EWRAM_1B000.unk260, gLastFieldPokeMenuOpened);
             sub_806BF74(EWRAM_1B000.unk260, 0);
@@ -848,7 +848,7 @@ static void sub_808AD0C(void)
 {
     while (1)
     {
-        if (sub_806B124() == TRUE)
+        if (InitPartyMenu() == TRUE)
         {
             sub_806C994(EWRAM_1B000.unk260, gLastFieldPokeMenuOpened);
             sub_806BF74(EWRAM_1B000.unk260, 0);
@@ -951,7 +951,7 @@ static void sub_808AF80(void)
 {
     while (1)
     {
-        if (sub_806B124() == TRUE)
+        if (InitPartyMenu() == TRUE)
         {
             if (gUnknown_02038561 == 0)
             {
@@ -1103,7 +1103,7 @@ static void sub_808B3A0(void)
 {
     while (1)
     {
-        if (sub_806B124() == TRUE)
+        if (InitPartyMenu() == TRUE)
         {
             sub_806C994(EWRAM_1B000.unk260, gLastFieldPokeMenuOpened);
             sub_806BF74(EWRAM_1B000.unk260, 0);
@@ -1163,7 +1163,7 @@ static void sub_808B518(void)
 {
     while (1)
     {
-        if (sub_806B124() == TRUE)
+        if (InitPartyMenu() == TRUE)
         {
             sub_806C994(EWRAM_1B000.unk260, gUnknown_020384F0);
             sub_806BF74(EWRAM_1B000.unk260, 0);

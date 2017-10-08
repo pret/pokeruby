@@ -33,6 +33,7 @@
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
+#include "unknown_task.h"
 #include "util.h"
 
 struct Coords8
@@ -92,6 +93,9 @@ static void SpriteCB_UpdateHeldItemIconPosition(struct Sprite *sprite);
 static void ItemUseMoveMenu_HandleMoveSelection(u8 taskId);
 static void ItemUseMoveMenu_HandleCancel(u8 taskId);
 static bool8 sub_806AFD0(void);
+static void sub_806B4A8(void);
+static void sub_806AF34(void);
+static bool8 LoadPartyMenuGraphics(u8 a);
 
 const u16 TMHMMoves[] = {
     MOVE_FOCUS_PUNCH,
@@ -688,385 +692,133 @@ bool8 sub_806AFD0(void)
     return FALSE;
 }
 
-__attribute__((naked))
-bool8 sub_806B124(void)
+bool8 InitPartyMenu(void)
 {
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r8\n\
-    push {r7}\n\
-    sub sp, 0xC\n\
-    ldr r0, _0806B144 @ =gMain\n\
-    ldr r1, _0806B148 @ =0x0000043c\n\
-    adds r0, r1\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x11\n\
-    bls _0806B13A\n\
-    b _0806B450\n\
-_0806B13A:\n\
-    lsls r0, 2\n\
-    ldr r1, _0806B14C @ =_0806B150\n\
-    adds r0, r1\n\
-    ldr r0, [r0]\n\
-    mov pc, r0\n\
-    .align 2, 0\n\
-_0806B144: .4byte gMain\n\
-_0806B148: .4byte 0x0000043c\n\
-_0806B14C: .4byte _0806B150\n\
-    .align 2, 0\n\
-_0806B150:\n\
-    .4byte _0806B198\n\
-    .4byte _0806B240\n\
-    .4byte _0806B246\n\
-    .4byte _0806B27C\n\
-    .4byte _0806B282\n\
-    .4byte _0806B2AC\n\
-    .4byte _0806B2B2\n\
-    .4byte _0806B2D0\n\
-    .4byte _0806B2EC\n\
-    .4byte _0806B318\n\
-    .4byte _0806B344\n\
-    .4byte _0806B37C\n\
-    .4byte _0806B382\n\
-    .4byte _0806B3C0\n\
-    .4byte _0806B3CC\n\
-    .4byte _0806B3E4\n\
-    .4byte _0806B40C\n\
-    .4byte _0806B440\n\
-_0806B198:\n\
-    movs r0, 0\n\
-    bl SetVBlankCallback\n\
-    movs r3, 0xC0\n\
-    lsls r3, 19\n\
-    movs r4, 0xC0\n\
-    lsls r4, 9\n\
-    add r2, sp, 0x8\n\
-    mov r8, r2\n\
-    add r2, sp, 0x4\n\
-    movs r6, 0\n\
-    ldr r1, _0806B22C @ =0x040000d4\n\
-    movs r5, 0x80\n\
-    lsls r5, 5\n\
-    ldr r7, _0806B230 @ =0x81000800\n\
-    movs r0, 0x81\n\
-    lsls r0, 24\n\
-    mov r12, r0\n\
-_0806B1BC:\n\
-    strh r6, [r2]\n\
-    add r0, sp, 0x4\n\
-    str r0, [r1]\n\
-    str r3, [r1, 0x4]\n\
-    str r7, [r1, 0x8]\n\
-    ldr r0, [r1, 0x8]\n\
-    adds r3, r5\n\
-    subs r4, r5\n\
-    cmp r4, r5\n\
-    bhi _0806B1BC\n\
-    strh r6, [r2]\n\
-    add r2, sp, 0x4\n\
-    str r2, [r1]\n\
-    str r3, [r1, 0x4]\n\
-    lsrs r0, r4, 1\n\
-    mov r3, r12\n\
-    orrs r0, r3\n\
-    str r0, [r1, 0x8]\n\
-    ldr r0, [r1, 0x8]\n\
-    movs r0, 0xE0\n\
-    lsls r0, 19\n\
-    movs r3, 0x80\n\
-    lsls r3, 3\n\
-    movs r4, 0\n\
-    str r4, [sp, 0x8]\n\
-    ldr r2, _0806B22C @ =0x040000d4\n\
-    mov r1, r8\n\
-    str r1, [r2]\n\
-    str r0, [r2, 0x4]\n\
-    lsrs r0, r3, 2\n\
-    movs r1, 0x85\n\
-    lsls r1, 24\n\
-    orrs r0, r1\n\
-    str r0, [r2, 0x8]\n\
-    ldr r0, [r2, 0x8]\n\
-    movs r1, 0xA0\n\
-    lsls r1, 19\n\
-    add r0, sp, 0x4\n\
-    strh r4, [r0]\n\
-    str r0, [r2]\n\
-    str r1, [r2, 0x4]\n\
-    lsrs r3, 1\n\
-    movs r0, 0x81\n\
-    lsls r0, 24\n\
-    orrs r3, r0\n\
-    str r3, [r2, 0x8]\n\
-    ldr r0, [r2, 0x8]\n\
-    ldr r2, _0806B234 @ =gPaletteFade\n\
-    ldrb r0, [r2, 0x8]\n\
-    movs r1, 0x80\n\
-    orrs r0, r1\n\
-    strb r0, [r2, 0x8]\n\
-    ldr r1, _0806B238 @ =gMain\n\
-    ldr r2, _0806B23C @ =0x0000043c\n\
-    adds r1, r2\n\
-    b _0806B42C\n\
-    .align 2, 0\n\
-_0806B22C: .4byte 0x040000d4\n\
-_0806B230: .4byte 0x81000800\n\
-_0806B234: .4byte gPaletteFade\n\
-_0806B238: .4byte gMain\n\
-_0806B23C: .4byte 0x0000043c\n\
-_0806B240:\n\
-    bl remove_some_task\n\
-    b _0806B426\n\
-_0806B246:\n\
-    bl sub_806B4A8\n\
-    ldr r1, _0806B26C @ =0x0201b000\n\
-    movs r2, 0x99\n\
-    lsls r2, 2\n\
-    adds r0, r1, r2\n\
-    movs r2, 0\n\
-    strh r2, [r0]\n\
-    ldr r3, _0806B270 @ =0x00000266\n\
-    adds r0, r1, r3\n\
-    strh r2, [r0]\n\
-    movs r0, 0x9A\n\
-    lsls r0, 2\n\
-    adds r1, r0\n\
-    strh r2, [r1]\n\
-    ldr r1, _0806B274 @ =gMain\n\
-    ldr r2, _0806B278 @ =0x0000043c\n\
-    adds r1, r2\n\
-    b _0806B42C\n\
-    .align 2, 0\n\
-_0806B26C: .4byte 0x0201b000\n\
-_0806B270: .4byte 0x00000266\n\
-_0806B274: .4byte gMain\n\
-_0806B278: .4byte 0x0000043c\n\
-_0806B27C:\n\
-    bl ResetSpriteData\n\
-    b _0806B426\n\
-_0806B282:\n\
-    ldr r0, _0806B2A0 @ =0x0201b000\n\
-    movs r1, 0x96\n\
-    lsls r1, 2\n\
-    adds r0, r1\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x1\n\
-    beq _0806B298\n\
-    cmp r0, 0x5\n\
-    beq _0806B298\n\
-    bl ResetTasks\n\
-_0806B298:\n\
-    ldr r1, _0806B2A4 @ =gMain\n\
-    ldr r2, _0806B2A8 @ =0x0000043c\n\
-    adds r1, r2\n\
-    b _0806B42C\n\
-    .align 2, 0\n\
-_0806B2A0: .4byte 0x0201b000\n\
-_0806B2A4: .4byte gMain\n\
-_0806B2A8: .4byte 0x0000043c\n\
-_0806B2AC:\n\
-    bl FreeAllSpritePalettes\n\
-    b _0806B426\n\
-_0806B2B2:\n\
-    ldr r4, _0806B2CC @ =0x0201b000\n\
-    movs r1, 0x97\n\
-    lsls r1, 2\n\
-    adds r0, r4, r1\n\
-    ldr r0, [r0]\n\
-    movs r1, 0\n\
-    bl CreateTask\n\
-    movs r2, 0x98\n\
-    lsls r2, 2\n\
-    adds r1, r4, r2\n\
-    strb r0, [r1]\n\
-    b _0806B426\n\
-    .align 2, 0\n\
-_0806B2CC: .4byte 0x0201b000\n\
-_0806B2D0:\n\
-    ldr r0, _0806B2E0 @ =gWindowConfig_81E6C90\n\
-    bl SetUpWindowConfig\n\
-    ldr r1, _0806B2E4 @ =gMain\n\
-    ldr r0, _0806B2E8 @ =0x0000043c\n\
-    adds r1, r0\n\
-    b _0806B42C\n\
-    .align 2, 0\n\
-_0806B2E0: .4byte gWindowConfig_81E6C90\n\
-_0806B2E4: .4byte gMain\n\
-_0806B2E8: .4byte 0x0000043c\n\
-_0806B2EC:\n\
-    ldr r4, _0806B308 @ =gUnknown_03004210\n\
-    ldr r1, _0806B30C @ =gWindowConfig_81E6C90\n\
-    adds r0, r4, 0\n\
-    bl InitWindowFromConfig\n\
-    adds r0, r4, 0\n\
-    movs r1, 0x1\n\
-    bl MultistepInitWindowTileData\n\
-    ldr r1, _0806B310 @ =gMain\n\
-    ldr r2, _0806B314 @ =0x0000043c\n\
-    adds r1, r2\n\
-    b _0806B42C\n\
-    .align 2, 0\n\
-_0806B308: .4byte gUnknown_03004210\n\
-_0806B30C: .4byte gWindowConfig_81E6C90\n\
-_0806B310: .4byte gMain\n\
-_0806B314: .4byte 0x0000043c\n\
-_0806B318:\n\
-    bl MultistepLoadFont\n\
-    cmp r0, 0\n\
-    bne _0806B322\n\
-    b _0806B450\n\
-_0806B322:\n\
-    ldr r0, _0806B338 @ =0x0201b000\n\
-    movs r3, 0x99\n\
-    lsls r3, 2\n\
-    adds r0, r3\n\
-    movs r1, 0x1\n\
-    strh r1, [r0]\n\
-    ldr r1, _0806B33C @ =gMain\n\
-    ldr r0, _0806B340 @ =0x0000043c\n\
-    adds r1, r0\n\
-    b _0806B42C\n\
-    .align 2, 0\n\
-_0806B338: .4byte 0x0201b000\n\
-_0806B33C: .4byte gMain\n\
-_0806B340: .4byte 0x0000043c\n\
-_0806B344:\n\
-    ldr r0, _0806B368 @ =0x0201b000\n\
-    movs r1, 0x99\n\
-    lsls r1, 2\n\
-    adds r4, r0, r1\n\
-    ldrb r0, [r4]\n\
-    bl LoadPartyMenuGraphics\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x1\n\
-    bne _0806B374\n\
-    movs r0, 0\n\
-    strh r0, [r4]\n\
-    ldr r1, _0806B36C @ =gMain\n\
-    ldr r2, _0806B370 @ =0x0000043c\n\
-    adds r1, r2\n\
-    b _0806B42C\n\
-    .align 2, 0\n\
-_0806B368: .4byte 0x0201b000\n\
-_0806B36C: .4byte gMain\n\
-_0806B370: .4byte 0x0000043c\n\
-_0806B374:\n\
-    ldrh r0, [r4]\n\
-    adds r0, 0x1\n\
-    strh r0, [r4]\n\
-    b _0806B450\n\
-_0806B37C:\n\
-    bl sub_809D51C\n\
-    b _0806B426\n\
-_0806B382:\n\
-    ldr r2, _0806B3B0 @ =gUnknown_08376C74\n\
-    ldr r0, _0806B3B4 @ =0x0201b000\n\
-    movs r1, 0x96\n\
-    lsls r1, 2\n\
-    adds r0, r1\n\
-    ldrb r1, [r0]\n\
-    lsls r0, r1, 1\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    adds r2, 0x4\n\
-    adds r0, r2\n\
-    ldr r0, [r0]\n\
-    bl _call_via_r0\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x1\n\
-    bne _0806B450\n\
-    ldr r1, _0806B3B8 @ =gMain\n\
-    ldr r2, _0806B3BC @ =0x0000043c\n\
-    adds r1, r2\n\
-    b _0806B42C\n\
-    .align 2, 0\n\
-_0806B3B0: .4byte gUnknown_08376C74\n\
-_0806B3B4: .4byte 0x0201b000\n\
-_0806B3B8: .4byte gMain\n\
-_0806B3BC: .4byte 0x0000043c\n\
-_0806B3C0:\n\
-    ldr r0, _0806B3C8 @ =gWindowConfig_81E6CC8\n\
-    bl MultistepInitMenuWindowBegin\n\
-    b _0806B426\n\
-    .align 2, 0\n\
-_0806B3C8: .4byte gWindowConfig_81E6CC8\n\
-_0806B3CC:\n\
-    bl MultistepInitMenuWindowContinue\n\
-    cmp r0, 0\n\
-    beq _0806B450\n\
-    ldr r1, _0806B3DC @ =gMain\n\
-    ldr r0, _0806B3E0 @ =0x0000043c\n\
-    adds r1, r0\n\
-    b _0806B42C\n\
-    .align 2, 0\n\
-_0806B3DC: .4byte gMain\n\
-_0806B3E0: .4byte 0x0000043c\n\
-_0806B3E4:\n\
-    ldr r0, _0806B3FC @ =0x0201b000\n\
-    ldr r1, _0806B400 @ =0x00000259\n\
-    adds r0, r1\n\
-    ldrb r0, [r0]\n\
-    movs r1, 0\n\
-    bl sub_806D538\n\
-    ldr r1, _0806B404 @ =gMain\n\
-    ldr r2, _0806B408 @ =0x0000043c\n\
-    adds r1, r2\n\
-    b _0806B42C\n\
-    .align 2, 0\n\
-_0806B3FC: .4byte 0x0201b000\n\
-_0806B400: .4byte 0x00000259\n\
-_0806B404: .4byte gMain\n\
-_0806B408: .4byte 0x0000043c\n\
-_0806B40C:\n\
-    movs r0, 0x1\n\
-    negs r0, r0\n\
-    movs r1, 0\n\
-    str r1, [sp]\n\
-    movs r2, 0x10\n\
-    movs r3, 0\n\
-    bl BeginNormalPaletteFade\n\
-    ldr r2, _0806B434 @ =gPaletteFade\n\
-    ldrb r1, [r2, 0x8]\n\
-    movs r0, 0x7F\n\
-    ands r0, r1\n\
-    strb r0, [r2, 0x8]\n\
-_0806B426:\n\
-    ldr r1, _0806B438 @ =gMain\n\
-    ldr r3, _0806B43C @ =0x0000043c\n\
-    adds r1, r3\n\
-_0806B42C:\n\
-    ldrb r0, [r1]\n\
-    adds r0, 0x1\n\
-    strb r0, [r1]\n\
-    b _0806B450\n\
-    .align 2, 0\n\
-_0806B434: .4byte gPaletteFade\n\
-_0806B438: .4byte gMain\n\
-_0806B43C: .4byte 0x0000043c\n\
-_0806B440:\n\
-    ldr r0, _0806B44C @ =sub_806AF34\n\
-    bl SetVBlankCallback\n\
-    movs r0, 0x1\n\
-    b _0806B452\n\
-    .align 2, 0\n\
-_0806B44C: .4byte sub_806AF34\n\
-_0806B450:\n\
-    movs r0, 0\n\
-_0806B452:\n\
-    add sp, 0xC\n\
-    pop {r3}\n\
-    mov r8, r3\n\
-    pop {r4-r7}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .syntax divided\n");
+    u8 *addr;
+    u32 size;
+
+    switch (gMain.state)
+    {
+    case 0:
+        SetVBlankCallback(NULL);
+        addr = (u8 *)VRAM;
+        size = VRAM_SIZE;
+        while (1)
+        {
+            DmaFill16(3, 0, addr, 0x1000);
+            addr += 0x1000;
+            size -= 0x1000;
+            if (size <= 0x1000)
+            {
+                DmaFill16(3, 0, addr, size);
+                break;
+            }
+        }
+
+        DmaClear32(3, OAM, OAM_SIZE);
+        DmaClear16(3, PLTT, PLTT_SIZE);
+
+        gPaletteFade.bufferTransferDisabled = 1;
+        gMain.state++;
+        break;
+    case 1:
+        remove_some_task();
+        gMain.state++;
+        break;
+    case 2:
+        sub_806B4A8();
+        ewram1B000_alt.unk264 = 0;
+        ewram1B000_alt.unk266 = 0;
+        ewram1B000_alt.unk268 = 0;
+        gMain.state++;
+        break;
+    case 3:
+        ResetSpriteData();
+        gMain.state++;
+        break;
+    case 4:
+        if (ewram1B000.unk258 != 1 && ewram1B000.unk258 != 5)
+        {
+            ResetTasks();
+        }
+
+        gMain.state++;
+        break;
+    case 5:
+        FreeAllSpritePalettes();
+        gMain.state++;
+        break;
+    case 6:
+        ewram1B000.unk260 = CreateTask(ewram1B000.taskFunc, 0);
+        gMain.state++;
+        break;
+    case 7:
+        SetUpWindowConfig(&gWindowConfig_81E6C90);
+        gMain.state++;
+        break;
+    case 8:
+        InitWindowFromConfig(&gUnknown_03004210, &gWindowConfig_81E6C90);
+        MultistepInitWindowTileData(&gUnknown_03004210, 1);
+        gMain.state++;
+        break;
+    case 9:
+        if (MultistepLoadFont())
+        {
+            ewram1B000_alt.unk264 = 1;
+            gMain.state++;
+        }
+        break;
+    case 10:
+        if (LoadPartyMenuGraphics(ewram1B000_alt.unk264) == TRUE)
+        {
+            ewram1B000_alt.unk264 = 0;
+            gMain.state++;
+        }
+        else
+        {
+            ewram1B000_alt.unk264++;
+        }
+        break;
+    case 11:
+        sub_809D51C();
+        gMain.state++;
+        break;
+    case 12:
+        if (gUnknown_08376C74[ewram1B000.unk258].func2() == TRUE)
+        {
+            gMain.state++;
+        }
+        break;
+    case 13:
+        MultistepInitMenuWindowBegin(&gWindowConfig_81E6CC8);
+        gMain.state++;
+        break;
+    case 14:
+        if (MultistepInitMenuWindowContinue())
+        {
+            gMain.state++;
+        }
+        break;
+    case 15:
+        sub_806D538(ewram1B000.unk259, 0);
+        gMain.state++;
+        break;
+    case 16:
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+        gPaletteFade.bufferTransferDisabled = 0;
+        gMain.state++;
+        break;
+    case 17:
+        SetVBlankCallback(sub_806AF34);
+        return TRUE;
+    }
+
+    return FALSE;
 }
 
 void sub_806B460(void)
 {
-    while (sub_806B124() != TRUE)
+    while (InitPartyMenu() != TRUE)
     {
         if (sub_80F9344() == TRUE)
         {
@@ -3446,10 +3198,10 @@ void sub_806D668(u8 monIndex)
     CpuFastSet(&var1, (void *)(OBJ_VRAM1 + 0x300 + monIndex * 0x400), 0x1000040);
 }
 
-u8 LoadPartyMenuGraphics(u8 a)
+bool8 LoadPartyMenuGraphics(u8 a)
 {
     u16 palette = 0x7FFF;
-    u8 retVal = 0;
+    bool8 retVal = FALSE;
 
     if (a < 2)
     {
@@ -3490,7 +3242,7 @@ u8 LoadPartyMenuGraphics(u8 a)
     if (a == 8 || a == 0)
     {
         LoadCompressedPalette(gStatusPal_Icons, 0xB0, 0x20);
-        retVal = 1;
+        retVal = TRUE;
     }
 
     return retVal;
