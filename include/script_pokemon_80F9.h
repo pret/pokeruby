@@ -13,5 +13,9 @@ void sub_80F9A8C(u8);
 void sub_80F9C00(void);
 void sub_80F9E1C(void);
 void sub_80F99CC(void);
+void sub_80F9C6C(u8 var);
+bool8 sub_80F9ACC(void);
+void sub_80F9E64(u8 var);
+bool8 sub_80F9CE8(void);
 
 #endif

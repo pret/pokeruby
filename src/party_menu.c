@@ -3,6 +3,7 @@
 #include "battle.h"
 #include "battle_interface.h"
 #include "battle_party_menu.h"
+#include "choose_party.h"
 #include "data2.h"
 #include "decompress.h"
 #include "event_data.h"
@@ -15,6 +16,7 @@
 #include "main.h"
 #include "menu.h"
 #include "menu_helpers.h"
+#include "moves.h"
 #include "palette.h"
 #include "pokemon.h"
 #include "pokemon_icon.h"
@@ -23,6 +25,7 @@
 #include "pokemon_summary_screen.h"
 #include "rom_8077ABC.h"
 #include "rom_8094928.h"
+#include "script_pokemon_80F9.h"
 #include "songs.h"
 #include "sound.h"
 #include "species.h"
@@ -31,32 +34,6 @@
 #include "strings.h"
 #include "task.h"
 #include "util.h"
-
-struct Unk201C000
-{
-    /*0x00*/ struct Pokemon *pokemon;
-    /*0x04*/ u8 unk4;
-    /*0x05*/ u8 unk5;
-    /*0x06*/ u16 unk6;
-    /*0x08*/ u16 unk8;
-    /*0x0A*/ u8 pad_0A[2];
-    /*0x0C*/ s32 unkC;
-    /*0x10*/ TaskFunc unk10;
-    /*0x14*/ TaskFunc unk14;
-};
-
-struct Unk201F000
-{
-    u8 filler0[0xE00];
-    u8 unkE00[3];  // not sure if this is an array or struct, or how big it is
-};
-
-struct UnknownStruct5
-{
-    u8 unk0;
-    u8 unk1;
-    u16 *unk4;
-};
 
 struct Coords8
 {
@@ -72,80 +49,19 @@ struct PartyMenuWindowCoords
     u8 bottom;
 };
 
-struct UnknownPokemonStruct2
+struct UnknownStruct5
 {
-    /*0x00*/ u16 species;
-    /*0x02*/ u16 heldItem;
-    /*0x04*/ u8 nickname[11];
-    /*0x0F*/ u8 level;
-    /*0x10*/ u16 hp;
-    /*0x12*/ u16 maxhp;
-    /*0x14*/ u32 status;
-    /*0x18*/ u32 personality;
-    /*0x1C*/ u8 gender;
-    /*0x1D*/ u8 language;
+    u8 unk0;
+    u8 unk1;
+    const u16 *unk4;
 };
 
 struct PartyMenuFunctionsStruct
 {
     /*0x0*/TaskFunc func1;
-    /*0x4*/TaskFunc func2;
+    /*0x4*/bool8 (*func2)(void);
     /*0x8*/u8 unk8;
 };
-
-#define ewram1C000 (*(struct Unk201C000 *)(ewram + 0x1C000))
-#define ewram1F000 (*(struct Unk201F000 *)(ewram + 0x1F000))
-
-extern u16 gBattleTypeFlags;
-
-extern u8 gUnknown_0202E8F4;
-extern u8 gUnknown_0202E8F6;
-extern u16 gUnknown_0202E8F8;
-extern u8 gUnknown_0202E8FA;
-extern u8 gLastFieldPokeMenuOpened;
-extern u8 gPlayerPartyCount;
-extern s32 gBattleMoveDamage;
-extern u16 gMoveToLearn;
-
-extern struct PartyMenuFunctionsStruct const gUnknown_08376C74[];
-extern u8 gUnknown_083769D8[];
-extern u8 gUnknown_08376A25[];
-extern u8 gUnknown_08376A5E[];
-extern u16 gUnknown_08E9A300[];
-extern const u16 gUnknown_08376CD4[];
-extern const u16 gUnknown_08376CEC[];
-extern u16 *const gUnknown_08376918[2][PARTY_SIZE];
-extern struct Coords8 const gUnknown_08376738[12][6];
-extern struct Coords8 const gUnknown_08376678[12][6];
-extern struct PartyMenuWindowCoords const gUnknown_08376948[2][6];
-extern struct PartyMenuWindowCoords const gUnknown_08376978[2][6];
-extern struct Coords8 const gUnknown_083768B8[3][8];
-extern u8 *const gUnknown_08376624[];
-extern const u8 gUnknown_083769C0[];
-//extern const u16 gUnknown_083769A8[][6];
-//extern const u8 gUnknown_083769A8[][12];
-extern u16 *const gUnknown_08376858[][6];
-extern const u8 gUnknown_083769A8[];
-extern const u8 gUnknown_08376D1C[NUM_STATS];
-extern const u16 gUnknown_08376504[];
-extern const struct SpriteSheet gUnknown_083765DC;
-extern const struct SpritePalette gUnknown_083765E4;
-extern void (*const gUnknown_08376B54[])(u8);
-extern const u8 *const gUnknown_08376D04[NUM_STATS];
-extern const struct UnknownStruct5 gUnknown_08376BB4[][6];
-extern u8 gUnknown_02039460[];
-extern u8 gTileBuffer[];
-extern const struct SpriteTemplate gSpriteTemplate_837660C[];
-extern struct Window gUnknown_03004210;
-
-extern const u8 gPartyMenuMisc_Gfx[];
-extern const u8 gPartyMenuMisc_Tilemap[];
-extern const u8 gPartyMenuMisc_Pal[];
-extern const u8 gFontDefaultPalette[];
-extern const u8 gPartyMenuHpBar_Gfx[];
-extern const u8 gPartyMenuOrderText_Gfx[];
-extern const u8 gStatusGfx_Icons[];
-extern const u8 gStatusPal_Icons[];
 
 static void nullsub_12(u8 monIndex, struct Pokemon *pokemon);
 static void TryPrintPartyMenuMonNickname(u8 monIndex, struct Pokemon *pokemon);
@@ -172,6 +88,426 @@ static void UpdateMonIconFrame_806DA44(u8 taskId, u8 monIndex, u8 c);
 static u8 sub_806CA00(u8 taskId);
 static void SpriteCB_sub_806D37C(struct Sprite *sprite);
 static u8 GetMonIconSpriteId_maybe(u8 taskId, u8 monIndex);
+static void SpriteCB_UpdateHeldItemIconPosition(struct Sprite *sprite);
+static void ItemUseMoveMenu_HandleMoveSelection(u8 taskId);
+static void ItemUseMoveMenu_HandleCancel(u8 taskId);
+static bool8 sub_806AFD0(void);
+
+const u16 TMHMMoves[] = {
+    MOVE_FOCUS_PUNCH,
+    MOVE_DRAGON_CLAW,
+    MOVE_WATER_PULSE,
+    MOVE_CALM_MIND,
+    MOVE_ROAR,
+    MOVE_TOXIC,
+    MOVE_HAIL,
+    MOVE_BULK_UP,
+    MOVE_BULLET_SEED,
+    MOVE_HIDDEN_POWER,
+    MOVE_SUNNY_DAY,
+    MOVE_TAUNT,
+    MOVE_ICE_BEAM,
+    MOVE_BLIZZARD,
+    MOVE_HYPER_BEAM,
+    MOVE_LIGHT_SCREEN,
+    MOVE_PROTECT,
+    MOVE_RAIN_DANCE,
+    MOVE_GIGA_DRAIN,
+    MOVE_SAFEGUARD,
+    MOVE_FRUSTRATION,
+    MOVE_SOLAR_BEAM,
+    MOVE_IRON_TAIL,
+    MOVE_THUNDERBOLT,
+    MOVE_THUNDER,
+    MOVE_EARTHQUAKE,
+    MOVE_RETURN,
+    MOVE_DIG,
+    MOVE_PSYCHIC,
+    MOVE_SHADOW_BALL,
+    MOVE_BRICK_BREAK,
+    MOVE_DOUBLE_TEAM,
+    MOVE_REFLECT,
+    MOVE_SHOCK_WAVE,
+    MOVE_FLAMETHROWER,
+    MOVE_SLUDGE_BOMB,
+    MOVE_SANDSTORM,
+    MOVE_FIRE_BLAST,
+    MOVE_ROCK_TOMB,
+    MOVE_AERIAL_ACE,
+    MOVE_TORMENT,
+    MOVE_FACADE,
+    MOVE_SECRET_POWER,
+    MOVE_REST,
+    MOVE_ATTRACT,
+    MOVE_THIEF,
+    MOVE_STEEL_WING,
+    MOVE_SKILL_SWAP,
+    MOVE_SNATCH,
+    MOVE_OVERHEAT,
+    MOVE_CUT,
+    MOVE_FLY,
+    MOVE_SURF,
+    MOVE_STRENGTH,
+    MOVE_FLASH,
+    MOVE_ROCK_SMASH,
+    MOVE_WATERFALL,
+    MOVE_DIVE,
+};
+
+//FIXME
+//const u8 *unrefTileBuffer = gTileBuffer;
+asm(".4byte gTileBuffer\n");
+
+static const u8 MenuGfx_HoldIcons[] = INCBIN_U8("graphics/interface/hold_icons.4bpp");
+static const u16 MenuPal_HoldIcons[] = INCBIN_U16("graphics/interface/hold_icons.gbapal");
+
+static const struct SpriteSheet gUnknown_083765DC = {
+    MenuGfx_HoldIcons,
+    sizeof MenuGfx_HoldIcons,
+    0xd750
+};
+
+static const struct SpritePalette gUnknown_083765E4 = {
+    MenuPal_HoldIcons,
+    0xd750
+};
+
+static const struct OamData gOamData_83765EC =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 0,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd gSpriteAnim_83765F4[] = {
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END
+};
+
+static const union AnimCmd gSpriteAnim_83765FC[] = {
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const gSpriteAnimTable_8376604[] = {
+    gSpriteAnim_83765F4,
+    gSpriteAnim_83765FC,
+};
+
+static const struct SpriteTemplate gSpriteTemplate_837660C = {
+    55120,
+    55120,
+    &gOamData_83765EC,
+    gSpriteAnimTable_8376604,
+    NULL,
+    gDummySpriteAffineAnimTable,
+    SpriteCB_UpdateHeldItemIconPosition
+};
+
+static const u8 *const gUnknown_08376624[] = {
+    OtherText_ChoosePoke,
+    OtherText_MovePokeTo,
+    OtherText_TeachWhat,
+    OtherText_UseWhat,
+    OtherText_GiveWhat,
+    OtherText_DoWhat,
+    OtherText_NothingToCut,
+    OtherText_CantSurf,
+    OtherText_AlreadySurfing,
+    OtherText_CantUseThatHere,
+    OtherText_RestoreWhatMove,
+    OtherText_BoostPP,
+    gOtherText_CancelWithTerminator,
+    OtherText_DoWhatWithItem,
+    OtherText_NoPokeForBattle,
+    OtherText_ChoosePoke2,
+    OtherText_NotEnoughHP,
+    OtherText_ThreePokeNeeded,
+    OtherText_PokeCantBeSame,
+    OtherText_NoIdenticalHoldItems,
+    OtherText_TeachWhichPoke,
+};
+
+static const struct Coords8 gUnknown_08376678[8][6] = {
+    {{16, 40}, {104, 18}, {104, 42}, {104, 66}, {104, 90}, {104, 114}},
+    {{16, 24}, { 16, 80}, {104, 18}, {104, 50}, {104, 82}, {104, 114}},
+    {{16, 24}, { 16, 80}, {104, 26}, {104, 50}, {104, 82}, {104, 106}},
+    {{16, 24}, {104, 26}, {104, 50}, { 16, 80}, {104, 82}, {104, 106}},
+    {{ 5,  4}, { 16,  1}, { 16,  4}, { 16,  7}, { 16, 10}, { 16,  13}},
+    {{ 5,  2}, {  5,  9}, { 16,  1}, { 16,  5}, { 16,  9}, { 16,  13}},
+    {{ 5,  2}, {  5,  9}, { 16,  2}, { 16,  5}, { 16,  9}, { 16,  12}},
+    {{ 5,  2}, { 16,  2}, { 16,  5}, {  5,  9}, { 16,  9}, { 16,  12}},
+};
+
+static const struct Coords8 gUnknown_08376738[12][6] = {
+    {{6,  5}, {17,  2}, {17,  5}, {17,  8}, {17, 11}, {17, 14}},
+    {{6,  3}, { 6, 10}, {17,  2}, {17,  6}, {17, 10}, {17, 14}},
+    {{6,  3}, { 6, 10}, {17,  3}, {17,  6}, {17, 10}, {17, 13}},
+    {{6,  3}, {17,  3}, {17,  6}, { 6, 10}, {17, 10}, {17, 13}},
+    {{3,  7}, {22,  2}, {22,  5}, {22,  8}, {22, 11}, {22, 14}},
+    {{3,  5}, { 3, 12}, {22,  2}, {22,  6}, {22, 10}, {22, 14}},
+    {{3,  5}, { 3, 12}, {22,  3}, {22,  6}, {22, 10}, {22, 13}},
+    {{3,  5}, {22,  3}, {22,  6}, { 3, 12}, {22, 10}, {22, 13}},
+    {{7,  7}, {26,  2}, {26,  5}, {26,  8}, {26, 11}, {26, 14}},
+    {{7,  5}, { 7, 12}, {26,  2}, {26,  6}, {26, 10}, {26, 14}},
+    {{7,  5}, { 7, 12}, {26,  3}, {26,  6}, {26, 10}, {26, 13}},
+    {{7,  5}, {26,  3}, {26,  6}, { 7, 12}, {26, 10}, {26, 13}},
+};
+
+static u16 *const gUnknown_08376858[4][6] = {
+    {(u16*)(BG_VRAM + 0xF1C8), (u16*)(BG_VRAM + 0xF0AE), (u16*)(BG_VRAM + 0xF16E), (u16*)(BG_VRAM + 0xF22E), (u16*)(BG_VRAM + 0xF2EE), (u16*)(BG_VRAM + 0xF3AE)},
+    {(u16*)(BG_VRAM + 0xF148), (u16*)(BG_VRAM + 0xF308), (u16*)(BG_VRAM + 0xF0AE), (u16*)(BG_VRAM + 0xF1AE), (u16*)(BG_VRAM + 0xF2AE), (u16*)(BG_VRAM + 0xF3AE)},
+    {(u16*)(BG_VRAM + 0xF148), (u16*)(BG_VRAM + 0xF308), (u16*)(BG_VRAM + 0xF0EE), (u16*)(BG_VRAM + 0xF1AE), (u16*)(BG_VRAM + 0xF2AE), (u16*)(BG_VRAM + 0xF36E)},
+    {(u16*)(BG_VRAM + 0xF148), (u16*)(BG_VRAM + 0xF0EE), (u16*)(BG_VRAM + 0xF1AE), (u16*)(BG_VRAM + 0xF308), (u16*)(BG_VRAM + 0xF2AE), (u16*)(BG_VRAM + 0xF36E)},
+};
+
+static const struct Coords8 gUnknown_083768B8[3][8] = {
+    {{8,  44}, {92,  22}, {92,  46}, {92,  70}, {92,  94}, {92, 118}, {196, 136}, {196, 152}},
+    {{8,  28}, { 8,  84}, {92,  22}, {92,  54}, {92,  86}, {92, 118}, {196, 136}, {196, 152}},
+    {{8,  28}, { 8,  84}, {92,  30}, {92,  54}, {92,  86}, {92, 110}, {196, 136}, {196, 152}},
+};
+
+static u16 *const gUnknown_08376918[2][PARTY_SIZE] = {
+    {(u16*)(BG_VRAM + 0xF1C6), (u16*)(BG_VRAM + 0xF06C), (u16*)(BG_VRAM + 0xF12C), (u16*)(BG_VRAM + 0xF1EC), (u16*)(BG_VRAM + 0xF2AC), (u16*)(BG_VRAM + 0xF36C)},
+    {(u16*)(BG_VRAM + 0xF148), (u16*)(BG_VRAM + 0xF308), (u16*)(BG_VRAM + 0xF0AE), (u16*)(BG_VRAM + 0xF1AE), (u16*)(BG_VRAM + 0xF2AE), (u16*)(BG_VRAM + 0xF3AE)},
+};
+
+static const struct PartyMenuWindowCoords gUnknown_08376948[2][6] = {
+    {{2, 4, 10, 9}, {16, 1, 29,  3}, {16, 4, 29, 6}, {16, 7, 29, 9}, {16, 10, 29, 12}, {16, 13, 29, 15}},
+    {{2, 2, 10, 7}, { 2, 9, 10, 14}, {16, 1, 29, 3}, {16, 5, 29, 7}, {16,  9, 29, 11}, {16, 13, 29, 15}},
+};
+
+static const struct PartyMenuWindowCoords gUnknown_08376978[2][6] = {
+    {{2, 7, 10,  9}, {21, 1, 29,  3}, {21, 4, 29,  6}, {21, 7, 29, 9}, {21, 10, 29, 12}, {21, 13, 29, 15}},
+    {{2, 2, 10,  7}, { 2, 9, 10, 14}, {16, 1, 29,  3}, {16, 5, 29, 7}, {16,  9, 29, 11}, {16, 13, 29, 15}},
+};
+
+// This is actually a 2x6x2 array, but the code reads it as a flat array.
+static const u8 gUnknown_083769A8[] = {
+    0, 3,   11, 1,   11, 4,    11, 7,    11, 10,    11, 13,
+    0, 1,    0, 8,   11, 1,    11, 5,    11,  9,    11, 13, // Double battle
+};
+
+// This is actually a 2x6x2 array, but the code reads it as a flat array.
+static const u8 gUnknown_083769C0[] = {
+    0, 1,    0, 8,   11, 2,    11, 5,    11, 9,    11, 12,
+    0, 1,    0, 8,   11, 2,    11, 5,    11, 9,    11, 12, // Double battle
+};
+
+static const u8 gUnknown_083769D8[] = {
+    0x24,0x25,0x25,0x25,0x25,0x25,0x25,0x25,0x25,0x25,0x27,
+    0x34,0x35,0x35,0x35,0x35,0x35,0x35,0x35,0x35,0x35,0x37,
+    0x34,0x35,0x35,0x35,0x35,0x35,0x35,0x35,0x35,0x35,0x37,
+    0x34,0x35,0x35,0x35,0x35,0x35,0x35,0x35,0x35,0x35,0x37,
+    0x44,0x45,0x45,0x45,0x45,0x45,0x45,0x45,0x45,0x45,0x47,
+    0x44,0x45,0x45,0x45,0x45,0x45,0x45,0x45,0x45,0x45,0x47,
+    0x54,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x57,
+};
+
+static const u8 gUnknown_08376A25[] = {
+    0x50,0x51,0x51,0x51,0x51,0x51,0x51,0x51,0x51,0x51,0x51,0x51,0x51,0x51,0x51,0x51,0x51,0x51,0x53,
+    0x60,0x61,0x61,0x61,0x61,0x61,0x61,0x61,0x61,0x61,0x61,0x61,0x61,0x61,0x61,0x61,0x61,0x61,0x63,
+    0x70,0x71,0x71,0x71,0x71,0x71,0x71,0x71,0x71,0x71,0x71,0x71,0x71,0x71,0x71,0x71,0x71,0x71,0x73,
+};
+
+static const u8 gUnknown_08376A5E[] = {
+    0x20,0x21,0x21,0x21,0x21,0x21,0x21,0x21,0x21,0x21,0x21,0x21,0x21,0x21,0x21,0x21,0x21,0x21,0x23,
+    0x30,0x31,0x31,0x31,0x31,0x31,0x31,0x31,0x31,0x31,0x31,0x31,0x31,0x31,0x31,0x31,0x31,0x31,0x33,
+    0x40,0x41,0x41,0x41,0x41,0x41,0x41,0x41,0x41,0x41,0x41,0x41,0x41,0x41,0x41,0x41,0x41,0x41,0x43,
+};
+
+static const u8 gUnusedData_08376A97[] = {
+    0x0C,0x0D,0x0E,0x0F,0x00,0x01,0x02,0x03,0x04,0x05,0x0F,
+    0x10,0x11,0x12,0x13,0x14,0x15,0x0F,0x06,0x05,0x01,0x07,
+    0x08,0x09,0x0F,0x16,0x15,0x11,0x17,0x18,0x19,0x0F,0x09,
+    0x0A,0x0B,0x05,0x0C,0x0F,0x0F,0x19,0x1A,0x1B,0x15,0x1C,
+    0x0F,0x0F,0x0D,0x0B,0x05,0x0C,0x0F,0x0F,0x0F,0x1D,0x1B,
+    0x15,0x1C,0x0F,0x0F,0x0F,0x06,0x05,0x0B,0x05,0x0C,0x0F,
+    0x0F,0x16,0x15,0x1B,0x15,0x1C,0x0F,0x0F,0x0F,0x0F,0x20,
+    0x0C,0x09,0x0F,0x0F,0x0F,0x1F,0x30,0x1C,0x19,0x0F,0x0F,
+    0x0F,0x25,0x0F,0x22,0x24,0x0F,0x0F,0x0F,0x35,0x41,0x32,
+    0x34,0x0F,0x0F,0x0F,0x26,0x0F,0x23,0x0E,0x0F,0x0F,0x0F,
+    0x36,0x43,0x33,0x1E,0x0F,0x0F,0x27,0x28,0x29,0x03,0x2A,
+    0x0F,0x0F,0x37,0x38,0x39,0x13,0x3A,0x0F,0x0F,0x27,0x28,
+    0x29,0x03,0x04,0x05,0x0F,0x37,0x38,0x39,0x13,0x14,0x15,
+    0x0F,0x2B,0x2C,0x02,0x28,0x29,0x2D,0x21,0x3B,0x3C,0x12,
+    0x38,0x39,0x3D,0x31,0x2B,0x2C,0x02,0x28,0x29,0x08,0x09,
+    0x3B,0x3C,0x12,0x38,0x39,0x18,0x19,0x2E,0x2F,0x2B,0x2C,
+    0x02,0x27,0x2D,0x3E,0x3F,0x3B,0x3C,0x12,0x45,0x3D,
+};
+
+static const TaskFunc gUnknown_08376B54[] = {
+    ItemUseMoveMenu_HandleMoveSelection,
+    ItemUseMoveMenu_HandleCancel,
+};
+
+static const u16 Unknown_08376B5C[] = {
+    0x4000, 0x4018, 0xF400,
+    0x4000, 0x4038, 0xF404,
+    0x4008, 0x4018, 0xF408,
+    0x4008, 0x4038, 0xF40C,
+    0x4010, 0x4020, 0xF410,
+    0x4020, 0x4025, 0xF418,
+    0x4020, 0x4045, 0xF41C,
+    0xFFFF,
+};
+
+static const u16 Unknown_08376B88[] = {
+    0x4000, 0x4018, 0xF400,
+    0x4000, 0x4038, 0xF404,
+    0x4008, 0x4018, 0xF408,
+    0x4008, 0x4038, 0xF40C,
+    0x4010, 0x4020, 0xF410,
+    0x4010, 0x4065, 0xF418,
+    0x4010, 0x4085, 0xF41C,
+    0xFFFF,
+};
+
+static struct UnknownStruct5 const gUnknown_08376BB4[4][6] = {
+    {
+        { 1,  4, Unknown_08376B5C},
+        {12,  1, Unknown_08376B88},
+        {12,  4, Unknown_08376B88},
+        {12,  7, Unknown_08376B88},
+        {12, 10, Unknown_08376B88},
+        {12, 13, Unknown_08376B88},
+    },
+    {
+        { 1,  2, Unknown_08376B5C},
+        { 1,  9, Unknown_08376B5C},
+        {12,  1, Unknown_08376B88},
+        {12,  5, Unknown_08376B88},
+        {12,  9, Unknown_08376B88},
+        {12, 13, Unknown_08376B88},
+    },
+    {
+        { 1,  2, Unknown_08376B5C},
+        { 1,  9, Unknown_08376B5C},
+        {12,  2, Unknown_08376B88},
+        {12,  5, Unknown_08376B88},
+        {12,  9, Unknown_08376B88},
+        {12, 12, Unknown_08376B88},
+    },
+    {
+        { 1,  2, Unknown_08376B5C},
+        {12,  2, Unknown_08376B88},
+        {12,  5, Unknown_08376B88},
+        { 1,  9, Unknown_08376B5C},
+        {12,  9, Unknown_08376B88},
+        {12, 12, Unknown_08376B88},
+    },
+};
+
+static const struct PartyMenuFunctionsStruct gUnknown_08376C74[] = {
+    {sub_8089CD4,            sub_806AFD0,          0},
+    {SetUpBattlePokemonMenu, SetUpBattlePartyMenu, 0},
+    {sub_80F9C6C,            sub_80F9ACC,          0},
+    {sub_80F9C6C,            sub_806AFD0,          0},
+    {sub_81222B0,            sub_8121E78,          0},
+    {sub_8122A48,            sub_8122854,       0xFF},
+    {sub_8122E0C,            sub_806AFD0,       0x0F},
+    {sub_80F9E64,            sub_80F9CE8,          0},
+};
+
+static const u16 gUnknown_08376CD4[] = {
+    0x2A, 0x2B, 0x2C, 0x2D, 0x2E, 0x2F,
+    0x3A, 0x3B, 0x3C, 0x3D, 0x3E, 0x3F,
+};
+
+static const u16 gUnknown_08376CEC[] = {
+    0x2A, 0x0B, 0x0C, 0x0D, 0x0E, 0x2F,
+    0x1A, 0x1B, 0x1C, 0x1D, 0x1E, 0x1F,
+};
+
+static const u8 *const StatNames[] = {
+    gOtherText_HP,
+    gOtherText_Attack,
+    gOtherText_Defense,
+    gOtherText_SpAtk,
+    gOtherText_SpDef,
+    gOtherText_Speed,
+};
+
+static const u8 StatDataTypes[] = {
+    MON_DATA_MAX_HP,
+    MON_DATA_ATK,
+    MON_DATA_DEF,
+    MON_DATA_SPATK,
+    MON_DATA_SPDEF,
+    MON_DATA_SPD,
+};
+
+struct Unk201C000
+{
+    /*0x00*/ struct Pokemon *pokemon;
+    /*0x04*/ u8 unk4;
+    /*0x05*/ u8 unk5;
+    /*0x06*/ u16 unk6;
+    /*0x08*/ u16 unk8;
+    /*0x0A*/ u8 pad_0A[2];
+    /*0x0C*/ s32 unkC;
+    /*0x10*/ TaskFunc unk10;
+    /*0x14*/ TaskFunc unk14;
+};
+
+struct Unk201F000
+{
+    u8 filler0[0xE00];
+    u8 unkE00[3];  // not sure if this is an array or struct, or how big it is
+};
+
+struct UnknownPokemonStruct2
+{
+    /*0x00*/ u16 species;
+    /*0x02*/ u16 heldItem;
+    /*0x04*/ u8 nickname[11];
+    /*0x0F*/ u8 level;
+    /*0x10*/ u16 hp;
+    /*0x12*/ u16 maxhp;
+    /*0x14*/ u32 status;
+    /*0x18*/ u32 personality;
+    /*0x1C*/ u8 gender;
+    /*0x1D*/ u8 language;
+};
+
+#define ewram1C000 (*(struct Unk201C000 *)(ewram + 0x1C000))
+#define ewram1F000 (*(struct Unk201F000 *)(ewram + 0x1F000))
+
+extern u16 gBattleTypeFlags;
+extern u8 gTileBuffer[];
+extern u8 gUnknown_0202E8F4;
+extern u8 gUnknown_0202E8F6;
+extern u16 gUnknown_0202E8F8;
+extern u8 gUnknown_0202E8FA;
+extern u8 gLastFieldPokeMenuOpened;
+extern u8 gPlayerPartyCount;
+extern s32 gBattleMoveDamage;
+extern u16 gMoveToLearn;
+
+extern u16 gUnknown_08E9A300[];
+extern struct Coords8 const gUnknown_08376738[12][6];
+extern const u8 gUnknown_083769C0[];
+extern u8 gUnknown_02039460[];
+extern struct Window gUnknown_03004210;
+
+extern const u8 gPartyMenuMisc_Gfx[];
+extern const u8 gPartyMenuMisc_Tilemap[];
+extern const u8 gPartyMenuMisc_Pal[];
+extern const u8 gFontDefaultPalette[];
+extern const u8 gPartyMenuHpBar_Gfx[];
+extern const u8 gPartyMenuOrderText_Gfx[];
+extern const u8 gStatusGfx_Icons[];
+extern const u8 gStatusPal_Icons[];
 
 #if ENGLISH
 #define WINDOW_LEFT (3)
@@ -1514,7 +1850,7 @@ void sub_806BA34(s16 a, u16 b)
 void sub_806BA94(s16 a, u16 b, u8 c, u8 d)
 {
     u8 i;
-    u8 *arr;
+    const u8 *arr;
     u16 var1;
 
     arr = gUnknown_08376A5E;
@@ -1573,7 +1909,7 @@ void sub_806BB9C(u8 a)
     u16 *vramPtr;
     const u16 arr[12];
 
-    memcpy(&arr, gUnknown_08376CD4, 12 * 2);
+    memcpy(&arr, gUnknown_08376CD4, sizeof gUnknown_08376CD4);
 
     vramPtr = (u16 *)(BG_VRAM + 0x3C30);
     for (i = 0; i < PARTY_SIZE; i++)
@@ -1589,7 +1925,7 @@ void sub_806BBEC(u8 a)
     u16 *vramPtr;
     const u16 arr[12];
 
-    memcpy(&arr, gUnknown_08376CEC, 12 * 2);
+    memcpy(&arr, gUnknown_08376CEC, sizeof gUnknown_08376CEC);
 
     vramPtr = (u16 *)(BG_VRAM + 0x3CB0);
     for (i = 0; i < PARTY_SIZE; i++)
@@ -3413,7 +3749,7 @@ void CreateHeldItemIcon(u8 a, u8 b)
     u8 spriteId;
 
     subPriority = gSprites[a].subpriority;
-    spriteId = CreateSprite(gSpriteTemplate_837660C, 0xFA, 0xAA, subPriority - 1);
+    spriteId = CreateSprite(&gSpriteTemplate_837660C, 0xFA, 0xAA, subPriority - 1);
 
     gSprites[spriteId].pos2.x = 4;
     gSprites[spriteId].pos2.y = 10;
@@ -3471,7 +3807,7 @@ void CreateHeldItemIcons_806DC34(u8 taskId)
         if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES))
         {
             monIconSpriteId = GetMonIconSpriteId_maybe(taskId, i);
-            heldItemSpriteId = CreateSprite(gSpriteTemplate_837660C, 0xFA, 0xAA, 4);
+            heldItemSpriteId = CreateSprite(&gSpriteTemplate_837660C, 0xFA, 0xAA, 4);
 
             gSprites[heldItemSpriteId].pos2.x = 4;
             gSprites[heldItemSpriteId].pos2.y = 10;
@@ -4555,9 +4891,8 @@ void Task_ConfirmTakeHeldMail(u8 taskId)
 
 u16 ItemIdToBattleMoveId(u16 item)
 {
-    u16 moveId = item - 289;
-
-    return gUnknown_08376504[moveId];
+    u16 machineNumber = item - ITEM_TM01;
+    return TMHMMoves[machineNumber];
 }
 
 bool8 pokemon_has_move(struct Pokemon *pkmn, u16 move)
@@ -4812,11 +5147,12 @@ bool8 IsHMMove(u16 move)
 {
     u8 i;
 
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < NUM_HIDDEN_MACHINES; i++)
     {
-        if (gUnknown_08376504[50 + i] == move)
+        if (TMHMMoves[NUM_TECHNICAL_MACHINES + i] == move)
             return TRUE;
     }
+
     return FALSE;
 }
 
@@ -5334,7 +5670,7 @@ void DoRareCandyItemEffect(u8 taskId, u16 b, TaskFunc c)
     if (GetMonData(ewram1C000.pokemon, MON_DATA_LEVEL) != 100)
     {
         for (i = 0; i < 6; i++)
-            ewram1B000.statGrowths[i] = GetMonData(ewram1C000.pokemon, gUnknown_08376D1C[i]);
+            ewram1B000.statGrowths[i] = GetMonData(ewram1C000.pokemon, StatDataTypes[i]);
         r0 = ExecuteTableBasedItemEffect__(ewram1C000.unk5, b, 0);
     }
     else
@@ -5400,7 +5736,7 @@ void PrintStatGrowthsInLevelUpWindow(u8 taskId)
         u8 y;
         u32 stat;
 
-        stat = GetMonData(ewram1C000.pokemon, gUnknown_08376D1C[i]);
+        stat = GetMonData(ewram1C000.pokemon, StatDataTypes[i]);
 
         ewram1B000.statGrowths[i + NUM_STATS] = stat;
         ewram1B000.statGrowths[i] = stat - ewram1B000.statGrowths[i];
@@ -5408,7 +5744,7 @@ void PrintStatGrowthsInLevelUpWindow(u8 taskId)
         x = (i / 3) * 9 + 11;
         y = ((i % 3) << 1) + 1;
 
-        MenuPrint_PixelCoords(gUnknown_08376D04[i], (x + 1) * 8, y * 8, 1);
+        MenuPrint_PixelCoords(StatNames[i], (x + 1) * 8, y * 8, 1);
 
         if (i == 2)
             MenuPrint_PixelCoords(gOtherText_TallPlusAndRightArrow, (x + 6) * 8 + 6, y * 8, 0);
@@ -5448,7 +5784,7 @@ void PrintStatGrowthsInLevelUpWindow(u8 taskId) {
 _0807086C:\n\
     ldr r1, _08070930 @ =0x0201c000\n\
     ldr r0, [r1]\n\
-    ldr r1, _08070934 @ =gUnknown_08376D1C\n\
+    ldr r1, _08070934 @ =StatDataTypes\n\
     adds r1, r7, r1\n\
     ldrb r1, [r1]\n\
     bl GetMonData\n\
@@ -5480,7 +5816,7 @@ _0807086C:\n\
     adds r5, 0x1\n\
     lsls r5, 24\n\
     lsrs r5, 24\n\
-    ldr r1, _0807093C @ =gUnknown_08376D04\n\
+    ldr r1, _0807093C @ =StatNames\n\
     lsls r0, r7, 2\n\
     adds r0, r1\n\
     ldr r1, [r0]\n\
@@ -5537,9 +5873,9 @@ _0807086C:\n\
     .align 2, 0\n\
 _0807092C: .4byte gStringVar1\n\
 _08070930: .4byte 0x0201c000\n\
-_08070934: .4byte gUnknown_08376D1C\n\
+_08070934: .4byte StatDataTypes\n\
 _08070938: .4byte 0x0201b264\n\
-_0807093C: .4byte gUnknown_08376D04\n\
+_0807093C: .4byte StatNames\n\
 _08070940: .4byte gOtherText_TallPlusAndRightArrow\n\
     .syntax divided\n");
 }
@@ -5556,7 +5892,7 @@ void PrintNewStatsInLevelUpWindow(u8 taskId)
         u32 stat;
         u32 newStatIndex;
 
-        stat = GetMonData(ewram1C000.pokemon, gUnknown_08376D1C[i]);
+        stat = GetMonData(ewram1C000.pokemon, StatDataTypes[i]);
         newStatIndex = i + 6;
         ewram1B000.statGrowths[newStatIndex] = stat;
 

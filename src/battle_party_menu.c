@@ -348,7 +348,7 @@ void sub_8094E4C(void)
     sub_8094E20(3);
 }
 
-int SetUpBattlePartyMenu(void)
+bool8 SetUpBattlePartyMenu(void)
 {
     switch (EWRAM_1B000.unk264)
     //switch (ewram1B000.unk264[0])
