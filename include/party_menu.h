@@ -78,7 +78,6 @@ void OpenPartyMenu(u8 a, u8 b);
 bool8 InitPartyMenu(void);
 bool8 IsLinkDoubleBattle(void);
 u8 sub_806B58C(u8);
-u8 sub_806B58C(u8);
 void sub_806B908(void);
 void sub_806BC3C(u8, u8);
 void sub_806BCE8(void);

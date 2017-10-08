@@ -96,6 +96,9 @@ static bool8 sub_806AFD0(void);
 static void sub_806B4A8(void);
 static void sub_806AF34(void);
 static bool8 LoadPartyMenuGraphics(u8 a);
+static void sub_806BF24(const u8 *a, u8 monIndex, u8 c, u8 d);
+static void sub_806BB9C(u8 a);
+static void sub_806BBEC(u8 a);
 
 const u16 TMHMMoves[] = {
     MOVE_FOCUS_PUNCH,
@@ -879,445 +882,150 @@ void sub_806B548(void)
     }
 }
 
-__attribute__((naked))
-u8 sub_806B58C(u8 a)
+bool8 sub_806B58C(u8 a)
 {
-    asm(".syntax unified\n\
-    push {r4,r5,lr}\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    bl IsDoubleBattle\n\
-    lsls r0, 24\n\
-    lsrs r2, r0, 24\n\
-    cmp r2, 0\n\
-    bne _0806B5A8\n\
-    ldr r0, _0806B5A4 @ =gUnknown_0202E8FA\n\
-    strb r2, [r0]\n\
-    b _0806B5C8\n\
-    .align 2, 0\n\
-_0806B5A4: .4byte gUnknown_0202E8FA\n\
-_0806B5A8:\n\
-    bl IsLinkDoubleBattle\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x1\n\
-    bne _0806B5C0\n\
-    ldr r1, _0806B5BC @ =gUnknown_0202E8FA\n\
-    movs r0, 0x2\n\
-    b _0806B5C4\n\
-    .align 2, 0\n\
-_0806B5BC: .4byte gUnknown_0202E8FA\n\
-_0806B5C0:\n\
-    ldr r1, _0806B5E4 @ =gUnknown_0202E8FA\n\
-    movs r0, 0x1\n\
-_0806B5C4:\n\
-    strb r0, [r1]\n\
-    adds r0, r1, 0\n\
-_0806B5C8:\n\
-    ldrb r0, [r0]\n\
-    lsls r1, r0, 1\n\
-    adds r1, r0\n\
-    lsls r1, 2\n\
-    ldr r0, _0806B5E8 @ =gUnknown_083769A8\n\
-    adds r4, r1, r0\n\
-    cmp r5, 0x8\n\
-    bls _0806B5DA\n\
-    b _0806B900\n\
-_0806B5DA:\n\
-    lsls r0, r5, 2\n\
-    ldr r1, _0806B5EC @ =_0806B5F0\n\
-    adds r0, r1\n\
-    ldr r0, [r0]\n\
-    mov pc, r0\n\
-    .align 2, 0\n\
-_0806B5E4: .4byte gUnknown_0202E8FA\n\
-_0806B5E8: .4byte gUnknown_083769A8\n\
-_0806B5EC: .4byte _0806B5F0\n\
-    .align 2, 0\n\
-_0806B5F0:\n\
-    .4byte _0806B614\n\
-    .4byte _0806B628\n\
-    .4byte _0806B638\n\
-    .4byte _0806B694\n\
-    .4byte _0806B71A\n\
-    .4byte _0806B7A2\n\
-    .4byte _0806B832\n\
-    .4byte _0806B8C6\n\
-    .4byte _0806B8E8\n\
-_0806B614:\n\
-    ldr r0, _0806B624 @ =gBGTilemapBuffers + 0x1000\n\
-    movs r2, 0x80\n\
-    lsls r2, 4\n\
-    movs r1, 0\n\
-    bl memset\n\
-    b _0806B900\n\
-    .align 2, 0\n\
-_0806B624: .4byte gBGTilemapBuffers + 0x1000\n\
-_0806B628:\n\
-    ldrb r0, [r4]\n\
-    ldrb r1, [r4, 0x1]\n\
-    movs r2, 0x3\n\
-    bl sub_806B9A4\n\
-    adds r0, r4, 0\n\
-    movs r1, 0\n\
-    b _0806B8A8\n\
-_0806B638:\n\
-    bl IsDoubleBattle\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    bne _0806B666\n\
-    ldr r0, _0806B65C @ =gPlayerPartyCount\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x1\n\
-    bls _0806B660\n\
-    ldrb r0, [r4, 0x2]\n\
-    ldrb r1, [r4, 0x3]\n\
-    movs r2, 0\n\
-    movs r3, 0x3\n\
-    bl sub_806BA94\n\
-    adds r0, r4, 0x2\n\
-    movs r1, 0x1\n\
-    b _0806B8A8\n\
-    .align 2, 0\n\
-_0806B65C: .4byte gPlayerPartyCount\n\
-_0806B660:\n\
-    ldrb r0, [r4, 0x2]\n\
-    ldrb r1, [r4, 0x3]\n\
-    b _0806B8BC\n\
-_0806B666:\n\
-    bl IsLinkDoubleBattle\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x1\n\
-    bne _0806B684\n\
-    ldrb r0, [r4, 0x2]\n\
-    ldrb r1, [r4, 0x3]\n\
-    movs r2, 0x4\n\
-    bl sub_806B9A4\n\
-    adds r0, r4, 0x2\n\
-    movs r1, 0x1\n\
-    movs r2, 0x4\n\
-    b _0806B8AA\n\
-_0806B684:\n\
-    ldrb r0, [r4, 0x2]\n\
-    ldrb r1, [r4, 0x3]\n\
-    movs r2, 0x3\n\
-    bl sub_806B9A4\n\
-    adds r0, r4, 0x2\n\
-    movs r1, 0x1\n\
-    b _0806B8A8\n\
-_0806B694:\n\
-    bl IsDoubleBattle\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    bne _0806B6C2\n\
-    ldr r0, _0806B6B8 @ =gPlayerPartyCount\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x2\n\
-    bls _0806B6BC\n\
-    ldrb r0, [r4, 0x4]\n\
-    ldrb r1, [r4, 0x5]\n\
-    movs r2, 0\n\
-    movs r3, 0x3\n\
-    bl sub_806BA94\n\
-    adds r0, r4, 0x4\n\
-    movs r1, 0x2\n\
-    b _0806B8A8\n\
-    .align 2, 0\n\
-_0806B6B8: .4byte gPlayerPartyCount\n\
-_0806B6BC:\n\
-    ldrb r0, [r4, 0x4]\n\
-    ldrb r1, [r4, 0x5]\n\
-    b _0806B8BC\n\
-_0806B6C2:\n\
-    bl IsLinkDoubleBattle\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x1\n\
-    bne _0806B6F6\n\
-    ldr r0, _0806B6EC @ =gPlayerParty + 2 * 0x64\n\
-    movs r1, 0xB\n\
-    bl GetMonData\n\
-    cmp r0, 0\n\
-    beq _0806B6F0\n\
-    ldrb r0, [r4, 0x4]\n\
-    ldrb r1, [r4, 0x5]\n\
-    movs r2, 0\n\
-    movs r3, 0x3\n\
-    bl sub_806BA94\n\
-    adds r0, r4, 0x4\n\
-    movs r1, 0x2\n\
-    b _0806B8A8\n\
-    .align 2, 0\n\
-_0806B6EC: .4byte gPlayerParty + 2 * 0x64\n\
-_0806B6F0:\n\
-    ldrb r0, [r4, 0x4]\n\
-    ldrb r1, [r4, 0x5]\n\
-    b _0806B8BC\n\
-_0806B6F6:\n\
-    ldr r0, _0806B710 @ =gPlayerPartyCount\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x2\n\
-    bls _0806B714\n\
-    ldrb r0, [r4, 0x4]\n\
-    ldrb r1, [r4, 0x5]\n\
-    movs r2, 0\n\
-    movs r3, 0x3\n\
-    bl sub_806BA94\n\
-    adds r0, r4, 0x4\n\
-    movs r1, 0x2\n\
-    b _0806B8A8\n\
-    .align 2, 0\n\
-_0806B710: .4byte gPlayerPartyCount\n\
-_0806B714:\n\
-    ldrb r0, [r4, 0x4]\n\
-    ldrb r1, [r4, 0x5]\n\
-    b _0806B8BC\n\
-_0806B71A:\n\
-    bl IsDoubleBattle\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    bne _0806B74A\n\
-    ldr r0, _0806B740 @ =gPlayerPartyCount\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x3\n\
-    bls _0806B744\n\
-    ldrb r0, [r4, 0x6]\n\
-    ldrb r1, [r4, 0x7]\n\
-    movs r2, 0\n\
-    movs r3, 0x3\n\
-    bl sub_806BA94\n\
-    adds r0, r4, 0x6\n\
-    movs r1, 0x3\n\
-    b _0806B8A8\n\
-    .align 2, 0\n\
-_0806B740: .4byte gPlayerPartyCount\n\
-_0806B744:\n\
-    ldrb r0, [r4, 0x6]\n\
-    ldrb r1, [r4, 0x7]\n\
-    b _0806B8BC\n\
-_0806B74A:\n\
-    bl IsLinkDoubleBattle\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x1\n\
-    bne _0806B77E\n\
-    ldr r0, _0806B774 @ =gPlayerParty + 3 * 0x64\n\
-    movs r1, 0xB\n\
-    bl GetMonData\n\
-    cmp r0, 0\n\
-    beq _0806B778\n\
-    ldrb r0, [r4, 0x6]\n\
-    ldrb r1, [r4, 0x7]\n\
-    movs r2, 0\n\
-    movs r3, 0x3\n\
-    bl sub_806BA94\n\
-    adds r0, r4, 0x6\n\
-    movs r1, 0x3\n\
-    b _0806B8A8\n\
-    .align 2, 0\n\
-_0806B774: .4byte gPlayerParty + 3 * 0x64\n\
-_0806B778:\n\
-    ldrb r0, [r4, 0x6]\n\
-    ldrb r1, [r4, 0x7]\n\
-    b _0806B8BC\n\
-_0806B77E:\n\
-    ldr r0, _0806B798 @ =gPlayerPartyCount\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x3\n\
-    bls _0806B79C\n\
-    ldrb r0, [r4, 0x6]\n\
-    ldrb r1, [r4, 0x7]\n\
-    movs r2, 0\n\
-    movs r3, 0x3\n\
-    bl sub_806BA94\n\
-    adds r0, r4, 0x6\n\
-    movs r1, 0x3\n\
-    b _0806B8A8\n\
-    .align 2, 0\n\
-_0806B798: .4byte gPlayerPartyCount\n\
-_0806B79C:\n\
-    ldrb r0, [r4, 0x6]\n\
-    ldrb r1, [r4, 0x7]\n\
-    b _0806B8BC\n\
-_0806B7A2:\n\
-    bl IsDoubleBattle\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    bne _0806B7D2\n\
-    ldr r0, _0806B7C8 @ =gPlayerPartyCount\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x4\n\
-    bls _0806B7CC\n\
-    ldrb r0, [r4, 0x8]\n\
-    ldrb r1, [r4, 0x9]\n\
-    movs r2, 0\n\
-    movs r3, 0x3\n\
-    bl sub_806BA94\n\
-    adds r0, r4, 0\n\
-    adds r0, 0x8\n\
-    movs r1, 0x4\n\
-    b _0806B8A8\n\
-    .align 2, 0\n\
-_0806B7C8: .4byte gPlayerPartyCount\n\
-_0806B7CC:\n\
-    ldrb r0, [r4, 0x8]\n\
-    ldrb r1, [r4, 0x9]\n\
-    b _0806B8BC\n\
-_0806B7D2:\n\
-    bl IsLinkDoubleBattle\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x1\n\
-    bne _0806B80A\n\
-    ldr r0, _0806B800 @ =gPlayerParty + 4 * 0x64\n\
-    movs r1, 0xB\n\
-    bl GetMonData\n\
-    cmp r0, 0\n\
-    beq _0806B804\n\
-    ldrb r0, [r4, 0x8]\n\
-    ldrb r1, [r4, 0x9]\n\
-    movs r2, 0\n\
-    movs r3, 0x4\n\
-    bl sub_806BA94\n\
-    adds r0, r4, 0\n\
-    adds r0, 0x8\n\
-    movs r1, 0x4\n\
-    movs r2, 0x4\n\
-    b _0806B8AA\n\
-    .align 2, 0\n\
-_0806B800: .4byte gPlayerParty + 4 * 0x64\n\
-_0806B804:\n\
-    ldrb r0, [r4, 0x8]\n\
-    ldrb r1, [r4, 0x9]\n\
-    b _0806B884\n\
-_0806B80A:\n\
-    ldr r0, _0806B828 @ =gPlayerPartyCount\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x4\n\
-    bls _0806B82C\n\
-    ldrb r0, [r4, 0x8]\n\
-    ldrb r1, [r4, 0x9]\n\
-    movs r2, 0\n\
-    movs r3, 0x3\n\
-    bl sub_806BA94\n\
-    adds r0, r4, 0\n\
-    adds r0, 0x8\n\
-    movs r1, 0x4\n\
-    b _0806B8A8\n\
-    .align 2, 0\n\
-_0806B828: .4byte gPlayerPartyCount\n\
-_0806B82C:\n\
-    ldrb r0, [r4, 0x8]\n\
-    ldrb r1, [r4, 0x9]\n\
-    b _0806B8BC\n\
-_0806B832:\n\
-    bl IsDoubleBattle\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    bne _0806B84C\n\
-    ldr r0, _0806B848 @ =gPlayerPartyCount\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x5\n\
-    bhi _0806B896\n\
-    b _0806B8B8\n\
-    .align 2, 0\n\
-_0806B848: .4byte gPlayerPartyCount\n\
-_0806B84C:\n\
-    bl IsLinkDoubleBattle\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x1\n\
-    bne _0806B88E\n\
-    ldr r0, _0806B87C @ =gPlayerParty + 5 * 0x64\n\
-    movs r1, 0xB\n\
-    bl GetMonData\n\
-    cmp r0, 0\n\
-    beq _0806B880\n\
-    ldrb r0, [r4, 0xA]\n\
-    ldrb r1, [r4, 0xB]\n\
-    movs r2, 0\n\
-    movs r3, 0x4\n\
-    bl sub_806BA94\n\
-    adds r0, r4, 0\n\
-    adds r0, 0xA\n\
-    movs r1, 0x5\n\
-    movs r2, 0x4\n\
-    b _0806B8AA\n\
-    .align 2, 0\n\
-_0806B87C: .4byte gPlayerParty + 5 * 0x64\n\
-_0806B880:\n\
-    ldrb r0, [r4, 0xA]\n\
-    ldrb r1, [r4, 0xB]\n\
-_0806B884:\n\
-    movs r2, 0x1\n\
-    movs r3, 0x4\n\
-    bl sub_806BA94\n\
-    b _0806B900\n\
-_0806B88E:\n\
-    ldr r0, _0806B8B4 @ =gPlayerPartyCount\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x5\n\
-    bls _0806B8B8\n\
-_0806B896:\n\
-    ldrb r0, [r4, 0xA]\n\
-    ldrb r1, [r4, 0xB]\n\
-    movs r2, 0\n\
-    movs r3, 0x3\n\
-    bl sub_806BA94\n\
-    adds r0, r4, 0\n\
-    adds r0, 0xA\n\
-    movs r1, 0x5\n\
-_0806B8A8:\n\
-    movs r2, 0x3\n\
-_0806B8AA:\n\
-    movs r3, 0\n\
-    bl sub_806BF24\n\
-    b _0806B900\n\
-    .align 2, 0\n\
-_0806B8B4: .4byte gPlayerPartyCount\n\
-_0806B8B8:\n\
-    ldrb r0, [r4, 0xA]\n\
-    ldrb r1, [r4, 0xB]\n\
-_0806B8BC:\n\
-    movs r2, 0x1\n\
-    movs r3, 0x3\n\
-    bl sub_806BA94\n\
-    b _0806B900\n\
-_0806B8C6:\n\
-    ldr r0, _0806B8E4 @ =0x0201b000\n\
-    movs r1, 0x96\n\
-    lsls r1, 2\n\
-    adds r0, r1\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x4\n\
-    bne _0806B8DA\n\
-    movs r0, 0x1\n\
-    bl sub_806BB9C\n\
-_0806B8DA:\n\
-    movs r0, 0x1\n\
-    bl sub_806BBEC\n\
-    b _0806B900\n\
-    .align 2, 0\n\
-_0806B8E4: .4byte 0x0201b000\n\
-_0806B8E8:\n\
-    ldr r0, _0806B8F8 @ =0x0201b000\n\
-    ldr r1, _0806B8FC @ =0x00000261\n\
-    adds r0, r1\n\
-    movs r1, 0x2\n\
-    strb r1, [r0]\n\
-    movs r0, 0x1\n\
-    b _0806B902\n\
-    .align 2, 0\n\
-_0806B8F8: .4byte 0x0201b000\n\
-_0806B8FC: .4byte 0x00000261\n\
-_0806B900:\n\
-    movs r0, 0\n\
-_0806B902:\n\
-    pop {r4,r5}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .syntax divided\n");
+    const u8 *arr;
+
+    if (!IsDoubleBattle())
+        gUnknown_0202E8FA = 0;
+    else if (IsLinkDoubleBattle() == TRUE)
+        gUnknown_0202E8FA = 2;
+    else
+        gUnknown_0202E8FA = 1;
+
+    arr = &gUnknown_083769A8[gUnknown_0202E8FA * 12];
+
+    switch (a)
+    {
+    case 0:
+        memset(&gBGTilemapBuffers[2], 0, 0x800);
+        break;
+    case 1:
+        sub_806B9A4(arr[0], arr[1], 3);
+        sub_806BF24(&arr[0], 0, 3, 0);
+        break;
+    case 2:
+        if (!IsDoubleBattle()) {
+            if (gPlayerPartyCount > 1) {
+                sub_806BA94(arr[2], arr[3], 0, 3);
+                sub_806BF24(&arr[2], 1, 3, 0);
+            } else {
+                sub_806BA94(arr[2], arr[3], 1, 3);
+            }
+        } else if (IsLinkDoubleBattle() == TRUE) {
+            sub_806B9A4(arr[2], arr[3], 4);
+            sub_806BF24(&arr[2], 1, 4, 0);
+        } else {
+            sub_806B9A4(arr[2], arr[3], 3);
+            sub_806BF24(&arr[2], 1, 3, 0);
+        }
+
+        break;
+    case 3:
+        if (!IsDoubleBattle()) {
+            if (gPlayerPartyCount > 2) {
+                sub_806BA94(arr[4], arr[5], 0, 3);
+                sub_806BF24(&arr[4], 2, 3, 0);
+            } else {
+                sub_806BA94(arr[4], arr[5], 1, 3);
+            }
+        } else if (IsLinkDoubleBattle() == TRUE) {
+            if (GetMonData(&gPlayerParty[2], MON_DATA_SPECIES)) {
+                sub_806BA94(arr[4], arr[5], 0, 3);
+                sub_806BF24(&arr[4], 2, 3, 0);
+            } else {
+                sub_806BA94(arr[4], arr[5], 1, 3);
+            }
+        } else if (gPlayerPartyCount > 2) {
+            sub_806BA94(arr[4], arr[5], 0, 3);
+            sub_806BF24(&arr[4], 2, 3, 0);
+        } else {
+            sub_806BA94(arr[4], arr[5], 1, 3);
+        }
+
+        break;
+    case 4:
+        if (!IsDoubleBattle()) {
+            if (gPlayerPartyCount > 3) {
+                sub_806BA94(arr[6], arr[7], 0, 3);
+                sub_806BF24(&arr[6], 3, 3, 0);
+            } else {
+                sub_806BA94(arr[6], arr[7], 1, 3);
+            }
+        } else if (IsLinkDoubleBattle() == TRUE) {
+            if (GetMonData(&gPlayerParty[3], MON_DATA_SPECIES)) {
+                sub_806BA94(arr[6], arr[7], 0, 3);
+                sub_806BF24(&arr[6], 3, 3, 0);
+            } else {
+                sub_806BA94(arr[6], arr[7], 1, 3);
+            }
+        } else if (gPlayerPartyCount > 3) {
+            sub_806BA94(arr[6], arr[7], 0, 3);
+            sub_806BF24(&arr[6], 3, 3, 0);
+        } else {
+            sub_806BA94(arr[6], arr[7], 1, 3);
+        }
+
+        break;
+    case 5:
+        if (!IsDoubleBattle()) {
+            if (gPlayerPartyCount > 4) {
+                sub_806BA94(arr[8], arr[9], 0, 3);
+                sub_806BF24(&arr[8], 4, 3, 0);
+            } else {
+                sub_806BA94(arr[8], arr[9], 1, 3);
+            }
+        } else if (IsLinkDoubleBattle() == TRUE) {
+            if (GetMonData(&gPlayerParty[4], MON_DATA_SPECIES)) {
+                sub_806BA94(arr[8], arr[9], 0, 4);
+                sub_806BF24(&arr[8], 4, 4, 0);
+            } else {
+                sub_806BA94(arr[8], arr[9], 1, 4);
+            }
+        } else if (gPlayerPartyCount > 4) {
+            sub_806BA94(arr[8], arr[9], 0, 3);
+            sub_806BF24(&arr[8], 4, 3, 0);
+        } else {
+            sub_806BA94(arr[8], arr[9], 1, 3);
+        }
+
+        break;
+    case 6:
+        if (!IsDoubleBattle()) {
+            if (gPlayerPartyCount > 5) {
+                sub_806BA94(arr[10], arr[11], 0, 3);
+                sub_806BF24(&arr[10], 5, 3, 0);
+            } else {
+                sub_806BA94(arr[10], arr[11], 1, 3);
+            }
+        } else if (IsLinkDoubleBattle() == TRUE) {
+            if (GetMonData(&gPlayerParty[5], MON_DATA_SPECIES)) {
+                sub_806BA94(arr[10], arr[11], 0, 4);
+                sub_806BF24(&arr[10], 5, 4, 0);
+            } else {
+                sub_806BA94(arr[10], arr[11], 1, 4);
+            }
+        } else if (gPlayerPartyCount > 5) {
+            sub_806BA94(arr[10], arr[11], 0, 3);
+            sub_806BF24(&arr[10], 5, 3, 0);
+        } else {
+            sub_806BA94(arr[10], arr[11], 1, 3);
+        }
+
+        break;
+    case 7:
+        if (ewram1B000.unk258 == 4) {
+            sub_806BB9C(1);
+        }
+
+        sub_806BBEC(1);
+        break;
+    case 8:
+        ewram1B000.unk261 = 2;
+        return TRUE;
+    }
+
+    return FALSE;
 }
 
 #ifdef NONMATCHING
