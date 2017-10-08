@@ -614,175 +614,78 @@ void OpenPartyMenu(u8 a, u8 battleFlags)
     sub_806AF8C(a, battleFlags, gUnknown_08376C74[a].func1, gUnknown_08376C74[a].unk8);
 }
 
-__attribute__((naked))
 bool8 sub_806AFD0(void)
 {
-    asm(".syntax unified\n\
-    push {r4,r5,lr}\n\
-    ldr r1, _0806AFF0 @ =0x0201b000\n\
-    movs r2, 0x99\n\
-    lsls r2, 2\n\
-    adds r0, r1, r2\n\
-    movs r2, 0\n\
-    ldrsh r0, [r0, r2]\n\
-    adds r4, r1, 0\n\
-    cmp r0, 0x9\n\
-    bls _0806AFE6\n\
-    b _0806B11A\n\
-_0806AFE6:\n\
-    lsls r0, 2\n\
-    ldr r1, _0806AFF4 @ =_0806AFF8\n\
-    adds r0, r1\n\
-    ldr r0, [r0]\n\
-    mov pc, r0\n\
-    .align 2, 0\n\
-_0806AFF0: .4byte 0x0201b000\n\
-_0806AFF4: .4byte _0806AFF8\n\
-    .align 2, 0\n\
-_0806AFF8:\n\
-    .4byte _0806B020\n\
-    .4byte _0806B060\n\
-    .4byte _0806B066\n\
-    .4byte _0806B07A\n\
-    .4byte _0806B0A4\n\
-    .4byte _0806B0AA\n\
-    .4byte _0806B0BC\n\
-    .4byte _0806B0C2\n\
-    .4byte _0806B0D4\n\
-    .4byte _0806B0EC\n\
-_0806B020:\n\
-    ldr r0, _0806B048 @ =0x00000266\n\
-    adds r5, r4, r0\n\
-    movs r1, 0\n\
-    ldrsh r3, [r5, r1]\n\
-    ldr r0, _0806B04C @ =gPlayerPartyCount\n\
-    ldrb r0, [r0]\n\
-    cmp r3, r0\n\
-    bge _0806B054\n\
-    movs r2, 0x98\n\
-    lsls r2, 2\n\
-    adds r0, r4, r2\n\
-    ldrb r0, [r0]\n\
-    ldrb r1, [r5]\n\
-    movs r2, 0x64\n\
-    muls r2, r3\n\
-    ldr r3, _0806B050 @ =gPlayerParty\n\
-    adds r2, r3\n\
-    bl TryCreatePartyMenuMonIcon\n\
-    b _0806B114\n\
-    .align 2, 0\n\
-_0806B048: .4byte 0x00000266\n\
-_0806B04C: .4byte gPlayerPartyCount\n\
-_0806B050: .4byte gPlayerParty\n\
-_0806B054:\n\
-    movs r0, 0\n\
-    strh r0, [r5]\n\
-    movs r0, 0x99\n\
-    lsls r0, 2\n\
-    adds r1, r4, r0\n\
-    b _0806B0E0\n\
-_0806B060:\n\
-    bl LoadHeldItemIconGraphics\n\
-    b _0806B0D8\n\
-_0806B066:\n\
-    movs r1, 0x98\n\
-    lsls r1, 2\n\
-    adds r0, r4, r1\n\
-    ldrb r0, [r0]\n\
-    bl CreateHeldItemIcons_806DC34\n\
-    movs r2, 0x99\n\
-    lsls r2, 2\n\
-    adds r1, r4, r2\n\
-    b _0806B0E0\n\
-_0806B07A:\n\
-    movs r1, 0x98\n\
-    lsls r1, 2\n\
-    adds r0, r4, r1\n\
-    ldrb r0, [r0]\n\
-    ldr r2, _0806B0A0 @ =0x00000266\n\
-    adds r5, r4, r2\n\
-    ldrb r1, [r5]\n\
-    bl sub_806BD58\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x1\n\
-    bne _0806B114\n\
-    movs r0, 0\n\
-    strh r0, [r5]\n\
-    movs r0, 0x99\n\
-    lsls r0, 2\n\
-    adds r1, r4, r0\n\
-    b _0806B0E0\n\
-    .align 2, 0\n\
-_0806B0A0: .4byte 0x00000266\n\
-_0806B0A4:\n\
-    bl PartyMenuPrintMonsLevelOrStatus\n\
-    b _0806B0D8\n\
-_0806B0AA:\n\
-    bl PrintPartyMenuMonNicknames\n\
-    ldr r1, _0806B0B8 @ =0x0201b000\n\
-    movs r0, 0x99\n\
-    lsls r0, 2\n\
-    adds r1, r0\n\
-    b _0806B0E0\n\
-    .align 2, 0\n\
-_0806B0B8: .4byte 0x0201b000\n\
-_0806B0BC:\n\
-    bl PartyMenuTryPrintMonsHP\n\
-    b _0806B0D8\n\
-_0806B0C2:\n\
-    bl nullsub_13\n\
-    ldr r1, _0806B0D0 @ =0x0201b000\n\
-    movs r0, 0x99\n\
-    lsls r0, 2\n\
-    adds r1, r0\n\
-    b _0806B0E0\n\
-    .align 2, 0\n\
-_0806B0D0: .4byte 0x0201b000\n\
-_0806B0D4:\n\
-    bl PartyMenuDrawHPBars\n\
-_0806B0D8:\n\
-    ldr r1, _0806B0E8 @ =0x0201b000\n\
-    movs r2, 0x99\n\
-    lsls r2, 2\n\
-    adds r1, r2\n\
-_0806B0E0:\n\
-    ldrh r0, [r1]\n\
-    adds r0, 0x1\n\
-    strh r0, [r1]\n\
-    b _0806B11A\n\
-    .align 2, 0\n\
-_0806B0E8: .4byte 0x0201b000\n\
-_0806B0EC:\n\
-    ldr r0, _0806B110 @ =0x00000266\n\
-    adds r5, r4, r0\n\
-    ldrb r0, [r5]\n\
-    bl sub_806B58C\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x1\n\
-    bne _0806B114\n\
-    movs r1, 0\n\
-    strh r1, [r5]\n\
-    movs r2, 0x99\n\
-    lsls r2, 2\n\
-    adds r0, r4, r2\n\
-    strh r1, [r0]\n\
-    movs r0, 0x1\n\
-    b _0806B11C\n\
-    .align 2, 0\n\
-_0806B110: .4byte 0x00000266\n\
-_0806B114:\n\
-    ldrh r0, [r5]\n\
-    adds r0, 0x1\n\
-    strh r0, [r5]\n\
-_0806B11A:\n\
-    movs r0, 0\n\
-_0806B11C:\n\
-    pop {r4,r5}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .syntax divided\n");
+    switch (ewram1B000_alt.unk264)
+    {
+    case 0:
+        if (ewram1B000_alt.unk266 < gPlayerPartyCount)
+        {
+            TryCreatePartyMenuMonIcon(ewram1B000_alt.unk260, ewram1B000_alt.unk266, &gPlayerParty[ewram1B000_alt.unk266]);
+            ewram1B000_alt.unk266++;
+        }
+        else
+        {
+            ewram1B000_alt.unk266 = 0;
+            ewram1B000_alt.unk264++;
+        }
+
+        break;;
+    case 1:
+        LoadHeldItemIconGraphics();
+        ewram1B000_alt.unk264++;
+        break;
+    case 2:
+        CreateHeldItemIcons_806DC34(ewram1B000_alt.unk260);
+        ewram1B000_alt.unk264++;
+        break;
+    case 3:
+        if (sub_806BD58(ewram1B000_alt.unk260, ewram1B000_alt.unk266) != 1)
+        {
+            ewram1B000_alt.unk266++;
+        }
+        else
+        {
+            ewram1B000_alt.unk266 = 0;
+            ewram1B000_alt.unk264++;
+        }
+
+        break;
+    case 4:
+        PartyMenuPrintMonsLevelOrStatus();
+        ewram1B000_alt.unk264++;
+        break;
+    case 5:
+        PrintPartyMenuMonNicknames();
+        ewram1B000_alt.unk264++;
+        break;
+    case 6:
+        PartyMenuTryPrintMonsHP();
+        ewram1B000_alt.unk264++;
+        break;
+    case 7:
+        nullsub_13();
+        ewram1B000_alt.unk264++;
+        break;
+    case 8:
+        PartyMenuDrawHPBars();
+        ewram1B000_alt.unk264++;
+        break;
+    case 9:
+        if (sub_806B58C(ewram1B000_alt.unk266) == 1)
+        {
+            ewram1B000_alt.unk266 = 0;
+            ewram1B000_alt.unk264 = 0;
+            return TRUE;
+        }
+        else
+        {
+            ewram1B000_alt.unk266++;
+            break;
+        }
+    }
+
+    return FALSE;
 }
 
 __attribute__((naked))
@@ -4283,7 +4186,7 @@ void PartyMenuPrintMonLevelOrStatus(u8 monIndex, struct Pokemon *pokemon)
     }
 }
 
-void PartyMenuPrintMonsLevelOrStatus()
+void PartyMenuPrintMonsLevelOrStatus(void)
 {
     u8 i;
 
