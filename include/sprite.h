@@ -299,4 +299,6 @@ u8 SpriteTileAllocBitmapOp(u16 bit, u8 op);
 
 extern const union AffineAnimCmd *const gDummySpriteAffineAnimTable[];
 
+extern const struct SpriteTemplate gDummySpriteTemplate;
+
 #endif // GUARD_SPRITE_H

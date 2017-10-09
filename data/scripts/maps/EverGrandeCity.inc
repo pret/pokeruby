@@ -4,7 +4,7 @@ EverGrandeCity_MapScripts:: @ 814D4D5
 
 EverGrandeCity_MapScript1_14D4DB:: @ 814D4DB
 	checkflag 2090
-	callif 1, EverGrandeCity_EventScript_1A02C1
+	call_if 1, EverGrandeCity_EventScript_1A02C1
 	end
 
 EverGrandeCity_EventScript_14D4E5:: @ 814D4E5

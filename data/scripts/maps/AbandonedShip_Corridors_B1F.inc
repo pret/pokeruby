@@ -4,14 +4,14 @@ AbandonedShip_Corridors_B1F_MapScripts:: @ 815E98F
 	.byte 0
 
 AbandonedShip_Corridors_B1F_MapScript1_15E99A:: @ 815E99A
-	warp4 AbandonedShip_Underwater1, 255, 5, 4
+	setdivewarp AbandonedShip_Underwater1, 255, 5, 4
 	end
 
 AbandonedShip_Corridors_B1F_MapScript1_15E9A3:: @ 815E9A3
 	checkflag 239
-	callif 0, AbandonedShip_Corridors_B1F_EventScript_15E9B6
+	call_if 0, AbandonedShip_Corridors_B1F_EventScript_15E9B6
 	checkflag 239
-	callif 1, AbandonedShip_Corridors_B1F_EventScript_15E9C0
+	call_if 1, AbandonedShip_Corridors_B1F_EventScript_15E9C0
 	end
 
 AbandonedShip_Corridors_B1F_EventScript_15E9B6:: @ 815E9B6
@@ -29,12 +29,12 @@ AbandonedShip_Corridors_B1F_EventScript_15E9CA:: @ 815E9CA
 AbandonedShip_Corridors_B1F_EventScript_15E9D3:: @ 815E9D3
 	lockall
 	checkflag 239
-	jumpeq AbandonedShip_Corridors_B1F_EventScript_15EA14
+	goto_if_eq AbandonedShip_Corridors_B1F_EventScript_15EA14
 	checkitem ITEM_STORAGE_KEY, 1
 	compare RESULT, 0
-	jumpeq AbandonedShip_Corridors_B1F_EventScript_15EA0A
+	goto_if_eq AbandonedShip_Corridors_B1F_EventScript_15EA0A
 	msgbox AbandonedShip_Corridors_B1F_Text_198692, 4
-	playsfx 21
+	playse 21
 	removeitem ITEM_STORAGE_KEY, 1
 	setflag 239
 	call AbandonedShip_Corridors_B1F_EventScript_15E9C0

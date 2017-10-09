@@ -6,15 +6,15 @@ NewMauville_Inside_MapScripts:: @ 815E55F
 
 NewMauville_Inside_MapScript1_15E56F:: @ 815E56F
 	compare 0x4001, 1
-	callif 1, NewMauville_Inside_EventScript_15E5DA
+	call_if 1, NewMauville_Inside_EventScript_15E5DA
 	compare 0x4002, 1
-	callif 1, NewMauville_Inside_EventScript_15E728
+	call_if 1, NewMauville_Inside_EventScript_15E728
 	checkflag 2145
-	callif 1, NewMauville_Inside_EventScript_15E58F
+	call_if 1, NewMauville_Inside_EventScript_15E58F
 	end
 
 NewMauville_Inside_EventScript_15E58F:: @ 815E58F
-	disappear LAST_TALKED
+	removeobject LAST_TALKED
 	return
 
 NewMauville_Inside_MapScript1_15E593:: @ 815E593
@@ -24,14 +24,14 @@ NewMauville_Inside_MapScript1_15E593:: @ 815E593
 
 NewMauville_Inside_MapScript1_15E59E:: @ 815E59E
 	compare 0x40ba, 2
-	callif 1, NewMauville_Inside_EventScript_15E88B
+	call_if 1, NewMauville_Inside_EventScript_15E88B
 	end
 
 NewMauville_Inside_EventScript_15E5AA:: @ 815E5AA
 	lockall
 	setvar 0x4001, 1
 	setvar 0x4002, 0
-	playsfx 21
+	playse 21
 	call NewMauville_Inside_EventScript_15E5DA
 	special DrawWholeMapView
 	releaseall
@@ -41,7 +41,7 @@ NewMauville_Inside_EventScript_15E5C2:: @ 815E5C2
 	lockall
 	setvar 0x4001, 0
 	setvar 0x4002, 1
-	playsfx 21
+	playse 21
 	call NewMauville_Inside_EventScript_15E728
 	special DrawWholeMapView
 	releaseall
@@ -151,7 +151,7 @@ NewMauville_Inside_EventScript_15E88B:: @ 815E88B
 NewMauville_Inside_EventScript_15E8E0:: @ 815E8E0
 	lockall
 	compare 0x40ba, 2
-	jumpeq NewMauville_Inside_EventScript_15E8F6
+	goto_if_eq NewMauville_Inside_EventScript_15E8F6
 	msgbox NewMauville_Inside_Text_198315, 4
 	releaseall
 	end
@@ -165,9 +165,9 @@ NewMauville_Inside_EventScript_15E900:: @ 815E900
 	lock
 	faceplayer
 	setwildbattle SPECIES_VOLTORB, 25, ITEM_NONE
-	checksound
-	pokecry SPECIES_VOLTORB, 2
-	pause 40
+	waitse
+	playpokecry SPECIES_VOLTORB, 2
+	delay 40
 	waitpokecry
 	setflag 974
 	setflag 2145
@@ -180,9 +180,9 @@ NewMauville_Inside_EventScript_15E91E:: @ 815E91E
 	lock
 	faceplayer
 	setwildbattle SPECIES_VOLTORB, 25, ITEM_NONE
-	checksound
-	pokecry SPECIES_VOLTORB, 2
-	pause 40
+	waitse
+	playpokecry SPECIES_VOLTORB, 2
+	delay 40
 	waitpokecry
 	setflag 975
 	setflag 2145
@@ -195,9 +195,9 @@ NewMauville_Inside_EventScript_15E93C:: @ 815E93C
 	lock
 	faceplayer
 	setwildbattle SPECIES_VOLTORB, 25, ITEM_NONE
-	checksound
-	pokecry SPECIES_VOLTORB, 2
-	pause 40
+	waitse
+	playpokecry SPECIES_VOLTORB, 2
+	delay 40
 	waitpokecry
 	setflag 976
 	setflag 2145

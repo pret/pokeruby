@@ -1361,7 +1361,7 @@ _080C2B14:
 	adds r0, r6, 0
 	ldr r1, [sp, 0xC]
 	adds r2, r4, 0
-	bl sub_80409C8
+	bl GetMonSpritePalStructFromOtIdPersonality
 	adds r4, r0, 0
 	bl LoadCompressedObjectPalette
 	adds r0, r6, 0
@@ -1601,7 +1601,7 @@ _080C2D42:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2
-	bl GetNationalPokedexFlag
+	bl GetSetPokedexFlag
 	adds r5, 0x40
 	subs r4, 0x1
 	cmp r4, 0

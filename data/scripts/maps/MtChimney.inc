@@ -15,46 +15,46 @@ MtChimney_MapScript1_15CF92:: @ 815CF92
 MtChimney_EventScript_15CF95:: @ 815CF95
 	lock
 	faceplayer
-	showmoney 0, 0
-	snop
+	showmoneybox 0, 0
+	nop
 	msgbox MtChimney_Text_195760, 5
 	compare RESULT, 0
-	jumpeq MtChimney_EventScript_15D00B
+	goto_if_eq MtChimney_EventScript_15D00B
 	checkmoney 0xc8, 0
 	compare RESULT, 0
-	jumpeq MtChimney_EventScript_15D018
+	goto_if_eq MtChimney_EventScript_15D018
 	msgbox MtChimney_Text_1957A9, 4
 	checkitemspace ITEM_LAVA_COOKIE, 1
 	compare RESULT, 1
-	callif 1, MtChimney_EventScript_15D000
+	call_if 1, MtChimney_EventScript_15D000
 	giveitem ITEM_LAVA_COOKIE
 	compare RESULT, 0
-	jumpeq MtChimney_EventScript_15CFF3
-	hidemoney 0, 0
+	goto_if_eq MtChimney_EventScript_15CFF3
+	hidemoneybox 0, 0
 	release
 	end
 
 MtChimney_EventScript_15CFF3:: @ 815CFF3
 	msgbox MtChimney_Text_1A0CC2, 4
-	hidemoney 0, 0
+	hidemoneybox 0, 0
 	release
 	end
 
 MtChimney_EventScript_15D000:: @ 815D000
-	paymoney 0xc8, 0
-	updatemoney 0, 0
-	snop
+	takemoney 0xc8, 0
+	updatemoneybox 0, 0
+	nop
 	return
 
 MtChimney_EventScript_15D00B:: @ 815D00B
 	msgbox MtChimney_Text_1957F7, 4
-	hidemoney 0, 0
+	hidemoneybox 0, 0
 	release
 	end
 
 MtChimney_EventScript_15D018:: @ 815D018
 	msgbox MtChimney_Text_1957BA, 4
-	hidemoney 0, 0
+	hidemoneybox 0, 0
 	release
 	end
 
@@ -407,12 +407,12 @@ MtChimney_EventScript_15D174:: @ 815D174
 MtChimney_EventScript_15D17D:: @ 815D17D
 	lockall
 	checkflag 139
-	jumpif 0, MtChimney_EventScript_15D1D0
+	goto_if 0, MtChimney_EventScript_15D1D0
 	checkflag 115
-	jumpeq MtChimney_EventScript_15D1C6
+	goto_if_eq MtChimney_EventScript_15D1C6
 	msgbox MtChimney_Text_195870, 5
 	compare RESULT, 0
-	jumpeq MtChimney_EventScript_15D1BC
+	goto_if_eq MtChimney_EventScript_15D1BC
 	msgbox MtChimney_Text_1958C6, 4
 	giveitem ITEM_METEORITE
 	setflag 115
@@ -440,9 +440,9 @@ MtChimney_EventScript_15D1DA:: @ 815D1DA
 
 MtChimney_EventScript_15D1E3:: @ 815D1E3
 	trainerbattle 0, OPPONENT_SHELBY_1, 0, MtChimney_Text_19597F, MtChimney_Text_1959D8
-	specialval RESULT, sub_8082C68
+	specialvar RESULT, sub_8082C68
 	compare RESULT, 1
-	jumpeq MtChimney_EventScript_15D20A
+	goto_if_eq MtChimney_EventScript_15D20A
 	msgbox MtChimney_Text_195A04, 6
 	end
 

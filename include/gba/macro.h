@@ -84,4 +84,38 @@
     dmaRegs[5];                                                 \
 }
 
+#define DmaCopyLarge(dmaNum, src, dest, size, block, bit) \
+{                                                         \
+    const void *_src = src;                               \
+    void *_dest = dest;                                   \
+    u32 _size = size;                                     \
+    while (1)                                             \
+    {                                                     \
+        DmaCopy##bit(dmaNum, _src, _dest, (block));       \
+        _src += (block);                                  \
+        _dest += (block);                                 \
+        _size -= (block);                                 \
+        if (_size <= (block))                             \
+        {                                                 \
+            DmaCopy##bit(dmaNum, _src, _dest, _size);     \
+            break;                                        \
+        }                                                 \
+    }                                                     \
+}
+
+#define DmaCopyLarge16(dmaNum, src, dest, size, block) DmaCopyLarge(dmaNum, src, dest, size, block, 16)
+
+#define DmaCopyLarge32(dmaNum, src, dest, size, block) DmaCopyLarge(dmaNum, src, dest, size, block, 32)
+
+#define DmaCopyDefvars(dmaNum, src, dest, size, bit) \
+{                                                    \
+    const void *_src = src;                          \
+    void *_dest = dest;                              \
+    u32 _size = size;                                \
+    DmaCopy##bit(dmaNum, _src, _dest, _size);        \
+}
+
+#define DmaCopy16Defvars(dmaNum, src, dest, size) DmaCopyDefvars(dmaNum, src, dest, size, 16)
+#define DmaCopy32Defvars(dmaNum, src, dest, size) DmaCopyDefvars(dmaNum, src, dest, size, 32)
+
 #endif // GUARD_GBA_MACRO_H

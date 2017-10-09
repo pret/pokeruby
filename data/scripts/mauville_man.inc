@@ -27,20 +27,20 @@ SpeakToBard:
 	faceplayer
 	msgbox gTextBard_HiImTheBard, MSGBOX_YESNO
 	compare RESULT, YES
-	jumpeq yes_hear_song
+	goto_if_eq yes_hear_song
 	compare RESULT, NO
-	jumpeq dont_hear_song
+	goto_if_eq dont_hear_song
 	end
 
 yes_hear_song:
 	setvar 0x8004, 0
 	@ Give the player ear rape
 	special ScrSpecial_PlayBardSong
-	pause 60
+	delay 60
 	special ScrSpecial_HasBardSongBeenChanged
 	compare RESULT, FALSE
 	@ Prompt new lyrics only if song hasn't been changed
-	jumpeq prompt_write_lyrics
+	goto_if_eq prompt_write_lyrics
 	msgbox gTextBard_OhWhatAMovingSong, 4
 	release
 	end
@@ -53,9 +53,9 @@ dont_hear_song:
 prompt_write_lyrics:
 	msgbox gTextBard_SoHowDoYouLikeMySong, MSGBOX_YESNO
 	compare RESULT, YES
-	jumpeq write_lyrics
+	goto_if_eq write_lyrics
 	compare RESULT, NO
-	jumpeq dont_write_lyrics
+	goto_if_eq dont_write_lyrics
 	end
 
 write_lyrics:
@@ -64,15 +64,15 @@ write_lyrics:
 	lock
 	faceplayer
 	compare RESULT, NO
-	jumpeq dont_write_lyrics
+	goto_if_eq dont_write_lyrics
 	msgbox gTextBard_ThankYouKindly, 4
 	setvar 0x8004, 1
 	@ Give the player ear rape again
 	special ScrSpecial_PlayBardSong
-	pause 60
+	delay 60
 	msgbox gTextBard_WasThatHowYouWanted, MSGBOX_YESNO
 	compare RESULT, NO
-	jumpeq write_lyrics		@ Keep looping until player responds YES
+	goto_if_eq write_lyrics		@ Keep looping until player responds YES
 	special ScrSpecial_SaveBardSongLyrics
 	msgbox gTextBard_OkayThatsIt, 4
 	release
@@ -95,7 +95,7 @@ SpeakToHipster:
 	msgbox gTextHipster_TheyCallMeTheHipster, 4
 	special ScrSpecial_GetHipsterSpokenFlag
 	compare RESULT, FALSE
-	jumpeq hipster_first_time
+	goto_if_eq hipster_first_time
 	msgbox gTextHipster_TaughtYouAlready, 4
 	release
 	end
@@ -103,7 +103,7 @@ SpeakToHipster:
 hipster_first_time:
 	special ScrSpecial_HipsterTeachWord
 	compare RESULT, TRUE		@ TRUE if player learned a new word
-	jumpeq teach_new_word
+	goto_if_eq teach_new_word
 	msgbox gTextHipster_YouAlreadyKnowALot, 4
 	release
 	end
@@ -126,13 +126,13 @@ SpeakToTrader:
 	faceplayer
 	msgbox gTextTrader_Introduction, MSGBOX_YESNO
 	compare RESULT, NO
-	jumpeq dont_want_to_trade
+	goto_if_eq dont_want_to_trade
 	special ScrSpecial_GetTraderTradedFlag
 	compare RESULT, TRUE
-	jumpeq already_traded
+	goto_if_eq already_traded
 	message gTextTrader_MenuPrompt
-	waittext
-	jump do_trader_menu_get
+	waitmessage
+	goto do_trader_menu_get
 	end
 
 dont_want_to_trade:
@@ -147,16 +147,16 @@ do_trader_menu_get:
 	special ScrSpecial_TraderMenuGetDecoration
 	waitstate
 	compare 0x8004, 0
-	jumpeq cancelled_get_menu
+	goto_if_eq cancelled_get_menu
 	compare 0x8004, 65535
-	jumpeq rare_item_cant_trade_away
+	goto_if_eq rare_item_cant_trade_away
 	msgbox gTextTrader_ItemOnceBelongedTo, MSGBOX_YESNO
 	compare RESULT, NO
-	jumpeq dont_want_item
+	goto_if_eq dont_want_item
 	special ScrSpecial_DoesPlayerHaveNoDecorations
 	compare RESULT, TRUE
-	jumpeq player_has_no_decorations
-	jump do_trader_menu_give
+	goto_if_eq player_has_no_decorations
+	goto do_trader_menu_give
 	end
 
 cancelled_get_menu:
@@ -165,14 +165,14 @@ cancelled_get_menu:
 
 rare_item_cant_trade_away:
 	message gTextTrader_ICantTradeThatOneAway
-	waittext
-	jump do_trader_menu_get
+	waitmessage
+	goto do_trader_menu_get
 	end
 
 dont_want_item:
 	message gTextTrader_MenuPrompt
-	waittext
-	jump do_trader_menu_get
+	waitmessage
+	goto do_trader_menu_get
 	end
 
 player_has_no_decorations:
@@ -184,15 +184,15 @@ do_trader_menu_give:
 	special ScrSpecial_TraderMenuGiveDecoration
 	waitstate
 	compare 0x8006, 0
-	jumpeq cancelled_give_menu
+	goto_if_eq cancelled_give_menu
 	compare 0x8006, 65535
-	jumpeq decoration_is_in_use
+	goto_if_eq decoration_is_in_use
 	special ScrSpecial_IsDecorationFull
 	compare RESULT, 1
-	jumpeq decorations_full
+	goto_if_eq decorations_full
 	msgbox gTextTrader_SoWellTrade, MSGBOX_YESNO
 	compare RESULT, NO
-	jumpeq do_trader_menu_give
+	goto_if_eq do_trader_menu_give
 	special ScrSpecial_TraderDoDecorationTrade
 	msgbox gTextTrader_ThenWellTrade, 2
 	end
@@ -203,7 +203,7 @@ cancelled_give_menu:
 
 decoration_is_in_use:
 	msgbox gTextTrader_InUseYouCantTradeIt, 4
-	jump do_trader_menu_give
+	goto do_trader_menu_give
 	end
 
 decorations_full:
@@ -226,71 +226,71 @@ SpeakToStoryteller:
 	faceplayer
 	msgbox gTextStoryteller_Introduction, MSGBOX_YESNO
 	compare RESULT, NO
-	jumpeq dont_hear_story
-	specialval RESULT, ScrSpecial_StorytellerGetFreeStorySlot
+	goto_if_eq dont_hear_story
+	specialvar RESULT, ScrSpecial_StorytellerGetFreeStorySlot
 	compare RESULT, 0		@ If slot is 0, then the list is empty
-	jumpeq no_stories_recorded
+	goto_if_eq no_stories_recorded
 choose_story:
 	message gTextStoryteller_WhichTale
-	waittext
+	waitmessage
 	special ScrSpecial_StorytellerStoryListMenu
 	waitstate
 	compare RESULT, FALSE
-	jumpeq cancel_story_menu
+	goto_if_eq cancel_story_menu
 	setvar 0x8008, 1
 	special ScrSpecial_StorytellerDisplayStory
-	waittext
+	waitmessage
 	waitbutton
-	specialval RESULT, ScrSpecial_StorytellerUpdateStat
+	specialvar RESULT, ScrSpecial_StorytellerUpdateStat
 	compare RESULT, FALSE
-	jumpeq no_stat_update
-	jump stat_update
+	goto_if_eq no_stat_update
+	goto stat_update
 cancel_story_menu:
 	compare 0x8008, 0
-	jumpeq dont_hear_story
-	jump yes_hear_story
+	goto_if_eq dont_hear_story
+	goto yes_hear_story
 no_stat_update:
 	msgbox gTextStoryteller_CouldThereBeOtherTrainers, 4
 	msgbox gTextStoryteller_HearAnotherLegendaryTale, MSGBOX_YESNO
 	compare RESULT, YES
-	jumpeq choose_story
+	goto_if_eq choose_story
 yes_hear_story:
-	specialval RESULT, ScrSpecial_HasStorytellerAlreadyRecorded
+	specialvar RESULT, ScrSpecial_HasStorytellerAlreadyRecorded
 	compare RESULT, TRUE
-	jumpeq cant_record_story		@ already recorded story
-	specialval RESULT, ScrSpecial_StorytellerGetFreeStorySlot
+	goto_if_eq cant_record_story		@ already recorded story
+	specialvar RESULT, ScrSpecial_StorytellerGetFreeStorySlot
 	compare RESULT, 4
-	jumpeq cant_record_story		@ story list is full
-	jump prompt_record_story
+	goto_if_eq cant_record_story		@ story list is full
+	goto prompt_record_story
 no_stories_recorded:
 	msgbox gTextStoryteller_ButIKnowOfNoLegendaryTrainers, 4
 prompt_record_story:
 	msgbox gTextStoryteller_HaveYouAnyTales, MSGBOX_YESNO
 	compare RESULT, NO
-	jumpeq dont_hear_story
-	specialval RESULT, ScrSpecial_StorytellerInitializeRandomStat
+	goto_if_eq dont_hear_story
+	specialvar RESULT, ScrSpecial_StorytellerInitializeRandomStat
 	compare RESULT, TRUE
-	jumpeq stat_update
+	goto_if_eq stat_update
 	msgbox gTextStoryteller_ImNotSatisfied, 4
-	closebutton
+	closemessage
 	release
 	end
 
 stat_update:
 	msgbox gTextStoryteller_BirthOfANewLegend, 4
-	closebutton
+	closemessage
 	release
 	end
 
 dont_hear_story:
 	msgbox gTextStoryteller_OhIFeelStifled, 4
-	closebutton
+	closemessage
 	release
 	end
 
 cant_record_story:
 	msgbox gTextStoryteller_WishMorePeopleWould, 4
-	closebutton
+	closemessage
 	release
 	end
 
@@ -306,41 +306,41 @@ SpeakToGiddy:
 	faceplayer
 	msgbox gTextGiddy_Introduction, MSGBOX_YESNO
 	compare RESULT, YES
-	jumpeq yes_hear_giddy
+	goto_if_eq yes_hear_giddy
 	compare RESULT, NO
-	jumpeq dont_hear_giddy
+	goto_if_eq dont_hear_giddy
 	end
 
 yes_hear_giddy:
 	special ScrSpecial_GiddyShouldTellAnotherTale
 	compare RESULT, TRUE
-	jumpeq tell_giddy_tale
+	goto_if_eq tell_giddy_tale
 	compare RESULT, FALSE
-	jumpeq bye_bye
+	goto_if_eq bye_bye
 	end
 
 tell_another_giddy_tale:
 	special ScrSpecial_GiddyShouldTellAnotherTale
 	compare RESULT, TRUE
-	jumpeq also_i_was_thinking
+	goto_if_eq also_i_was_thinking
 	compare RESULT, FALSE
-	jumpeq bye_bye
+	goto_if_eq bye_bye
 	end
 
 also_i_was_thinking:
 	msgbox gTextGiddy_AlsoIWasThinking, 4
-	jump tell_giddy_tale
+	goto tell_giddy_tale
 	end
 
 tell_giddy_tale:
 	special ScrSpecial_GenerateGiddyLine
 	special ShowFieldMessageStringVar4
-	waittext
+	waitmessage
 	yesnobox 20, 8
 	compare RESULT, 1
-	jumpeq tell_another_giddy_tale
+	goto_if_eq tell_another_giddy_tale
 	compare RESULT, 0
-	jumpeq tell_another_giddy_tale
+	goto_if_eq tell_another_giddy_tale
 	end
 
 dont_hear_giddy:

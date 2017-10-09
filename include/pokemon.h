@@ -93,6 +93,8 @@
 #define MON_DATA_SPATK2            87
 #define MON_DATA_SPDEF2            88
 
+#define MAX_LEVEL 100
+
 #define MON_MALE       0x00
 #define MON_FEMALE     0xFE
 #define MON_GENDERLESS 0xFF
@@ -391,7 +393,7 @@ struct BaseStats
     /*0x17*/ u8 ability2;
     /*0x18*/ u8 safariZoneFleeRate;
     /*0x19*/ u8 bodyColor:7;
-             u8 unk19_7:1;
+             u8 noFlip:1;
 };
 
 struct BattleMove
@@ -510,7 +512,7 @@ void sub_803ADE8(struct Pokemon *mon, struct UnknownPokemonStruct *src);
 void sub_803AF78(struct Pokemon *mon, struct UnknownPokemonStruct *dest);
 u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon);
 void CalculateMonStats(struct Pokemon *mon);
-void sub_803B4B4(struct Pokemon *src, struct Pokemon *dest);
+void sub_803B4B4(const struct BoxPokemon *src, struct Pokemon *dest);
 u8 GetLevelFromMonExp(struct Pokemon *mon);
 u8 GetLevelFromBoxMonExp(struct BoxPokemon *boxMon);
 u16 GiveMoveToMon(struct Pokemon *mon, u16 move);
@@ -591,9 +593,9 @@ u8 sub_8040574(struct Pokemon *party);
 void ClearBattleMonForms(void);
 void sub_80408BC();
 void current_map_music_set__default_for_battle(u16);
-const u8 *pokemon_get_pal(struct Pokemon *mon);
-const u8 *species_and_otid_get_pal(u16, u32, u32);
-const struct CompressedSpritePalette *sub_80409C8(u16, u32, u32);
+const u8 *GetMonSpritePal(struct Pokemon *mon);
+const u8 *GetMonSpritePalFromOtIdPersonality(u16, u32, u32);
+const struct CompressedSpritePalette *GetMonSpritePalStructFromOtIdPersonality(u16, u32, u32);
 bool8 IsOtherTrainer(u32, u8 *);
 void sub_8040B8C(void);
 void SetWildMonHeldItem(void);
@@ -602,6 +604,11 @@ bool32 ShouldHideGenderIconForLanguage(u16 species, u8 *name, u8 language);
 bool32 ShouldHideGenderIcon(u16 species, u8 *name);
 s8 sub_8040A54(struct Pokemon *, u8);
 u16 GetMonEVCount(struct Pokemon *);
+u16 GetEvolutionTargetSpecies(struct Pokemon *, u8, u16);
+const struct CompressedSpritePalette *GetMonSpritePalStruct(struct Pokemon *);
+bool8 IsPokeSpriteNotFlipped(u16);
+u8 GetLevelUpMovesBySpecies(u16, u16 *);
+u8 TryIncrementMonLevel(struct Pokemon *);
 
 
 #endif // GUARD_POKEMON_H

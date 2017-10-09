@@ -1,5 +1,5 @@
 //
-// Created by scott on 6/17/2017.
+
 //
 
 #ifndef POKERUBY_BERRY_TREE_GRAPHICS_TABLES_H

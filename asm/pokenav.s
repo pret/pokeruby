@@ -17787,7 +17787,7 @@ sub_80F4824: @ 80F4824
 	adds r0, r5, 0
 	mov r1, r8
 	adds r2, r4, 0
-	bl species_and_otid_get_pal
+	bl GetMonSpritePalFromOtIdPersonality
 	mov r2, r9
 	lsls r1, r2, 7
 	adds r1, r7, r1

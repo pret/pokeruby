@@ -10,7 +10,7 @@ SlateportCity_PokemonCenter_1F_MapScript1_1563C5:: @ 81563C5
 SlateportCity_PokemonCenter_1F_EventScript_1563CE:: @ 81563CE
 	setvar 0x800b, 1
 	call SlateportCity_PokemonCenter_1F_EventScript_19FD5B
-	waittext
+	waitmessage
 	waitbutton
 	release
 	end

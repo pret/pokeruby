@@ -8,7 +8,7 @@ LilycoveCity_MapScript1_14CA20:: @ 814CA20
 	setvar 0x4086, 0
 	setflag 802
 	checkflag 2090
-	callif 1, LilycoveCity_EventScript_1A02C1
+	call_if 1, LilycoveCity_EventScript_1A02C1
 	call LilycoveCity_EventScript_1A0196
 	call LilycoveCity_EventScript_1A014E
 	end
@@ -29,9 +29,9 @@ LilycoveCity_MapScript1_14CA3F:: @ 814CA3F
 	setmaptile 72, 6, 445, 0
 	.endif
 	checkflag 112
-	callif 0, LilycoveCity_EventScript_14CABE
+	call_if 0, LilycoveCity_EventScript_14CABE
 	checkflag 2061
-	callif 1, LilycoveCity_EventScript_14CB2B
+	call_if 1, LilycoveCity_EventScript_14CB2B
 	end
 
 LilycoveCity_EventScript_14CABE:: @ 814CABE
@@ -63,15 +63,15 @@ LilycoveCity_EventScript_14CB2B:: @ 814CB2B
 LilycoveCity_EventScript_14CB74:: @ 814CB74
 	lock
 	faceplayer
-	checkdailyflags
+	dodailyevents
 	checkflag 2255
-	jumpeq LilycoveCity_EventScript_14CBB4
+	goto_if_eq LilycoveCity_EventScript_14CBB4
 	msgbox LilycoveCity_Text_1C5A7A, 4
 	random 10
 	addvar RESULT, 133
 	giveitem RESULT
 	compare RESULT, 0
-	jumpeq LilycoveCity_EventScript_1A029B
+	goto_if_eq LilycoveCity_EventScript_1A029B
 	setflag 2255
 	msgbox LilycoveCity_Text_1C5B1D, 4
 	release
@@ -90,7 +90,7 @@ LilycoveCity_EventScript_14CBC7:: @ 814CBC7
 	lock
 	faceplayer
 	checkflag 2061
-	jumpeq LilycoveCity_EventScript_14CBDC
+	goto_if_eq LilycoveCity_EventScript_14CBDC
 	msgbox LilycoveCity_Text_168750, 4
 	release
 	end
@@ -108,7 +108,7 @@ LilycoveCity_EventScript_14CBEF:: @ 814CBEF
 	lock
 	faceplayer
 	checkflag 112
-	jumpeq LilycoveCity_EventScript_14CC04
+	goto_if_eq LilycoveCity_EventScript_14CC04
 	msgbox LilycoveCity_Text_1688C1, 4
 	release
 	end
@@ -122,7 +122,7 @@ LilycoveCity_EventScript_14CC0E:: @ 814CC0E
 	lock
 	faceplayer
 	checkflag 112
-	jumpeq LilycoveCity_EventScript_14CC23
+	goto_if_eq LilycoveCity_EventScript_14CC23
 	msgbox LilycoveCity_Text_1689BF, 4
 	release
 	end
@@ -148,7 +148,7 @@ LilycoveCity_EventScript_14CC48:: @ 814CC48
 	lock
 	faceplayer
 	checkflag 2061
-	jumpeq LilycoveCity_EventScript_14CC5D
+	goto_if_eq LilycoveCity_EventScript_14CC5D
 	msgbox LilycoveCity_Text_168C16, 4
 	release
 	end
@@ -172,7 +172,7 @@ LilycoveCity_EventScript_14CC79:: @ 814CC79
 
 LilycoveCity_EventScript_14CC82:: @ 814CC82
 	lockall
-	specialval 0x8004, sub_80C4D50
+	specialvar 0x8004, sub_80C4D50
 	switch 0x8004
 	case 0, LilycoveCity_EventScript_14CCA2
 	msgbox LilycoveCity_Text_168EA4, 4
@@ -187,7 +187,7 @@ LilycoveCity_EventScript_14CCA2:: @ 814CCA2
 LilycoveCity_EventScript_14CCAC:: @ 814CCAC
 	lockall
 	checkflag 2052
-	jumpeq LilycoveCity_EventScript_14CCC0
+	goto_if_eq LilycoveCity_EventScript_14CCC0
 	msgbox LilycoveCity_Text_168EDA, 4
 	releaseall
 	end
@@ -212,13 +212,13 @@ LilycoveCity_EventScript_14CCDC:: @ 814CCDC
 LilycoveCity_EventScript_14CCE5:: @ 814CCE5
 	lockall
 	checkflag 218
-	jumpeq LilycoveCity_EventScript_14CD18
+	goto_if_eq LilycoveCity_EventScript_14CD18
 	msgbox LilycoveCity_Text_16864A, 4
-	move LAST_TALKED, LilycoveCity_Movement_1A0839
-	waitmove 0
+	applymovement LAST_TALKED, LilycoveCity_Movement_1A0839
+	waitmovement 0
 	msgbox LilycoveCity_Text_168675, 4
-	move LAST_TALKED, LilycoveCity_Movement_1A083D
-	waitmove 0
+	applymovement LAST_TALKED, LilycoveCity_Movement_1A083D
+	waitmovement 0
 	setflag 218
 	releaseall
 	end
@@ -247,21 +247,21 @@ LilycoveCity_EventScript_14CD3D:: @ 814CD3D
 LilycoveCity_EventScript_14CD46:: @ 814CD46
 	lock
 	faceplayer
-	checkgender
+	checkplayergender
 	compare RESULT, 0
-	jumpeq LilycoveCity_EventScript_14CD60
+	goto_if_eq LilycoveCity_EventScript_14CD60
 	compare RESULT, 1
-	jumpeq LilycoveCity_EventScript_14CDD3
+	goto_if_eq LilycoveCity_EventScript_14CDD3
 	end
 
 LilycoveCity_EventScript_14CD60:: @ 814CD60
-	playmusic 415, 1
+	playbgm 415, 1
 	checkflag 286
-	callif 1, LilycoveCity_EventScript_14CDB0
+	call_if 1, LilycoveCity_EventScript_14CDB0
 	checkflag 286
-	callif 0, LilycoveCity_EventScript_14CDB9
+	call_if 0, LilycoveCity_EventScript_14CDB9
 	compare RESULT, 0
-	jumpeq LilycoveCity_EventScript_14CDC2
+	goto_if_eq LilycoveCity_EventScript_14CDC2
 	msgbox LilycoveCity_Text_167B94, 4
 	switch 0x4023
 	case 0, LilycoveCity_EventScript_14CE46
@@ -280,19 +280,19 @@ LilycoveCity_EventScript_14CDB9:: @ 814CDB9
 LilycoveCity_EventScript_14CDC2:: @ 814CDC2
 	setflag 286
 	msgbox LilycoveCity_Text_167AEB, 4
-	playmusicbattle 0
-	fadedefault
+	savebgm 0
+	fadedefaultbgm
 	release
 	end
 
 LilycoveCity_EventScript_14CDD3:: @ 814CDD3
-	playmusic 421, 1
+	playbgm 421, 1
 	checkflag 286
-	callif 1, LilycoveCity_EventScript_14CE23
+	call_if 1, LilycoveCity_EventScript_14CE23
 	checkflag 286
-	callif 0, LilycoveCity_EventScript_14CE2C
+	call_if 0, LilycoveCity_EventScript_14CE2C
 	compare RESULT, 0
-	jumpeq LilycoveCity_EventScript_14CE35
+	goto_if_eq LilycoveCity_EventScript_14CE35
 	msgbox LilycoveCity_Text_1680A9, 4
 	switch 0x4023
 	case 0, LilycoveCity_EventScript_14CE76
@@ -311,58 +311,58 @@ LilycoveCity_EventScript_14CE2C:: @ 814CE2C
 LilycoveCity_EventScript_14CE35:: @ 814CE35
 	setflag 286
 	msgbox LilycoveCity_Text_16802C, 4
-	playmusicbattle 0
-	fadedefault
+	savebgm 0
+	fadedefaultbgm
 	release
 	end
 
 LilycoveCity_EventScript_14CE46:: @ 814CE46
 	trainerbattle 3, OPPONENT_MAY_11, 0, LilycoveCity_Text_167BD5
-	jump LilycoveCity_EventScript_14CEA6
+	goto LilycoveCity_EventScript_14CEA6
 	end
 
 LilycoveCity_EventScript_14CE56:: @ 814CE56
 	trainerbattle 3, OPPONENT_MAY_12, 0, LilycoveCity_Text_167BD5
-	jump LilycoveCity_EventScript_14CEA6
+	goto LilycoveCity_EventScript_14CEA6
 	end
 
 LilycoveCity_EventScript_14CE66:: @ 814CE66
 	trainerbattle 3, OPPONENT_MAY_10, 0, LilycoveCity_Text_167BD5
-	jump LilycoveCity_EventScript_14CEA6
+	goto LilycoveCity_EventScript_14CEA6
 	end
 
 LilycoveCity_EventScript_14CE76:: @ 814CE76
 	trainerbattle 3, OPPONENT_BRENDAN_11, 0, LilycoveCity_Text_1680E4
-	jump LilycoveCity_EventScript_14CF12
+	goto LilycoveCity_EventScript_14CF12
 	end
 
 LilycoveCity_EventScript_14CE86:: @ 814CE86
 	trainerbattle 3, OPPONENT_BRENDAN_12, 0, LilycoveCity_Text_1680E4
-	jump LilycoveCity_EventScript_14CF12
+	goto LilycoveCity_EventScript_14CF12
 	end
 
 LilycoveCity_EventScript_14CE96:: @ 814CE96
 	trainerbattle 3, OPPONENT_BRENDAN_10, 0, LilycoveCity_Text_1680E4
-	jump LilycoveCity_EventScript_14CF12
+	goto LilycoveCity_EventScript_14CF12
 	end
 
 LilycoveCity_EventScript_14CEA6:: @ 814CEA6
 	msgbox LilycoveCity_Text_167C6B, 4
 	setvar RESULT, 0
 	checkflag 2060
-	callif 1, LilycoveCity_EventScript_14CEDE
+	call_if 1, LilycoveCity_EventScript_14CEDE
 	compare RESULT, 0
-	callif 1, LilycoveCity_EventScript_14CEEE
+	call_if 1, LilycoveCity_EventScript_14CEEE
 	compare RESULT, 1
-	callif 1, LilycoveCity_EventScript_14CEF7
+	call_if 1, LilycoveCity_EventScript_14CEF7
 	clearflag 722
 	clearflag 849
-	jump LilycoveCity_EventScript_14CF6B
+	goto LilycoveCity_EventScript_14CF6B
 	end
 
 LilycoveCity_EventScript_14CEDE:: @ 814CEDE
 	checkflag 2062
-	jumpeq LilycoveCity_EventScript_14CEE8
+	goto_if_eq LilycoveCity_EventScript_14CEE8
 	return
 
 LilycoveCity_EventScript_14CEE8:: @ 814CEE8
@@ -375,7 +375,7 @@ LilycoveCity_EventScript_14CEEE:: @ 814CEEE
 
 LilycoveCity_EventScript_14CEF7:: @ 814CEF7
 	checkflag 2052
-	jumpeq LilycoveCity_EventScript_14CF09
+	goto_if_eq LilycoveCity_EventScript_14CF09
 	msgbox LilycoveCity_Text_167DDD, 4
 	return
 
@@ -387,13 +387,13 @@ LilycoveCity_EventScript_14CF12:: @ 814CF12
 	msgbox LilycoveCity_Text_168149, 4
 	setvar RESULT, 0
 	checkflag 2060
-	callif 1, LilycoveCity_EventScript_14CEDE
+	call_if 1, LilycoveCity_EventScript_14CEDE
 	compare RESULT, 0
-	callif 1, LilycoveCity_EventScript_14CF47
+	call_if 1, LilycoveCity_EventScript_14CF47
 	compare RESULT, 1
-	callif 1, LilycoveCity_EventScript_14CF50
+	call_if 1, LilycoveCity_EventScript_14CF50
 	clearflag 760
-	jump LilycoveCity_EventScript_14CF6B
+	goto LilycoveCity_EventScript_14CF6B
 	end
 
 LilycoveCity_EventScript_14CF47:: @ 814CF47
@@ -402,7 +402,7 @@ LilycoveCity_EventScript_14CF47:: @ 814CF47
 
 LilycoveCity_EventScript_14CF50:: @ 814CF50
 	checkflag 2052
-	jumpeq LilycoveCity_EventScript_14CF62
+	goto_if_eq LilycoveCity_EventScript_14CF62
 	msgbox LilycoveCity_Text_168282, 4
 	return
 
@@ -411,17 +411,17 @@ LilycoveCity_EventScript_14CF62:: @ 814CF62
 	return
 
 LilycoveCity_EventScript_14CF6B:: @ 814CF6B
-	closebutton
-	move LAST_TALKED, LilycoveCity_Movement_1A0845
-	waitmove 0
-	pause 50
-	setanimation 0, 1
-	doanimation 30
-	pause 15
-	disappear LAST_TALKED
-	checkanimation 30
-	playmusicbattle 0
-	fadedefault
+	closemessage
+	applymovement LAST_TALKED, LilycoveCity_Movement_1A0845
+	waitmovement 0
+	delay 50
+	setfieldeffect 0, 1
+	dofieldeffect 30
+	delay 15
+	removeobject LAST_TALKED
+	waitfieldeffect 30
+	savebgm 0
+	fadedefaultbgm
 	setflag 292
 	release
 	end

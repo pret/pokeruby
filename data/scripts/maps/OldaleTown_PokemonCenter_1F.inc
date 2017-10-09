@@ -10,7 +10,7 @@ OldaleTown_PokemonCenter_1F_MapScript1_152F0E:: @ 8152F0E
 OldaleTown_PokemonCenter_1F_EventScript_152F17:: @ 8152F17
 	setvar 0x800b, 1
 	call OldaleTown_PokemonCenter_1F_EventScript_19FD5B
-	waittext
+	waitmessage
 	waitbutton
 	release
 	end
@@ -27,7 +27,7 @@ OldaleTown_PokemonCenter_1F_EventScript_152F37:: @ 8152F37
 	lock
 	faceplayer
 	checkflag 2049
-	jumpeq OldaleTown_PokemonCenter_1F_EventScript_152F4C
+	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_152F4C
 	msgbox OldaleTown_PokemonCenter_1F_Text_1749C0, 4
 	release
 	end
