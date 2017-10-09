@@ -4,57 +4,57 @@ LilycoveCity_CoveLilyMotel_1F_MapScripts:: @ 81582C4
 LilycoveCity_CoveLilyMotel_1F_EventScript_1582C5:: @ 81582C5
 	lockall
 	checkflag 2052
-	jumpeq LilycoveCity_CoveLilyMotel_1F_EventScript_158326
+	goto_if_eq LilycoveCity_CoveLilyMotel_1F_EventScript_158326
 	checkflag 2061
-	jumpeq LilycoveCity_CoveLilyMotel_1F_EventScript_1582FF
+	goto_if_eq LilycoveCity_CoveLilyMotel_1F_EventScript_1582FF
 	msgbox LilycoveCity_CoveLilyMotel_1F_Text_186B71, 4
-	move 1, LilycoveCity_CoveLilyMotel_1F_Movement_1A0839
-	waitmove 0
+	applymovement 1, LilycoveCity_CoveLilyMotel_1F_Movement_1A0839
+	waitmovement 0
 	msgbox LilycoveCity_CoveLilyMotel_1F_Text_186C2B, 4
-	closebutton
-	move 1, LilycoveCity_CoveLilyMotel_1F_Movement_1A083D
-	waitmove 0
+	closemessage
+	applymovement 1, LilycoveCity_CoveLilyMotel_1F_Movement_1A083D
+	waitmovement 0
 	releaseall
 	end
 
 LilycoveCity_CoveLilyMotel_1F_EventScript_1582FF:: @ 81582FF
 	msgbox LilycoveCity_CoveLilyMotel_1F_Text_186CCE, 4
-	move 1, LilycoveCity_CoveLilyMotel_1F_Movement_1A0839
-	waitmove 0
+	applymovement 1, LilycoveCity_CoveLilyMotel_1F_Movement_1A0839
+	waitmovement 0
 	msgbox LilycoveCity_CoveLilyMotel_1F_Text_186D7F, 4
-	closebutton
-	move 1, LilycoveCity_CoveLilyMotel_1F_Movement_1A083D
-	waitmove 0
+	closemessage
+	applymovement 1, LilycoveCity_CoveLilyMotel_1F_Movement_1A083D
+	waitmovement 0
 	releaseall
 	end
 
 LilycoveCity_CoveLilyMotel_1F_EventScript_158326:: @ 8158326
 	msgbox LilycoveCity_CoveLilyMotel_1F_Text_186E57, 4
-	move 1, LilycoveCity_CoveLilyMotel_1F_Movement_1A0839
-	waitmove 0
+	applymovement 1, LilycoveCity_CoveLilyMotel_1F_Movement_1A0839
+	waitmovement 0
 	msgbox LilycoveCity_CoveLilyMotel_1F_Text_186F09, 4
-	closebutton
-	move 1, LilycoveCity_CoveLilyMotel_1F_Movement_1A083D
-	waitmove 0
+	closemessage
+	applymovement 1, LilycoveCity_CoveLilyMotel_1F_Movement_1A083D
+	waitmovement 0
 	releaseall
 	end
 
 LilycoveCity_CoveLilyMotel_1F_EventScript_15834D:: @ 815834D
 	lockall
-	playsfx 21
-	move 1, LilycoveCity_CoveLilyMotel_1F_Movement_1A0833
-	waitmove 0
-	move 1, LilycoveCity_CoveLilyMotel_1F_Movement_1A0835
-	waitmove 0
-	move 255, LilycoveCity_CoveLilyMotel_1F_Movement_1A0845
-	waitmove 0
+	playse 21
+	applymovement 1, LilycoveCity_CoveLilyMotel_1F_Movement_1A0833
+	waitmovement 0
+	applymovement 1, LilycoveCity_CoveLilyMotel_1F_Movement_1A0835
+	waitmovement 0
+	applymovement 255, LilycoveCity_CoveLilyMotel_1F_Movement_1A0845
+	waitmovement 0
 	msgbox LilycoveCity_CoveLilyMotel_1F_Text_186CA6, 4
-	closebutton
-	move 255, LilycoveCity_CoveLilyMotel_1F_Movement_158395
-	move 1, LilycoveCity_CoveLilyMotel_1F_Movement_15839A
-	waitmove 0
-	move 1, LilycoveCity_CoveLilyMotel_1F_Movement_15839C
-	waitmove 0
+	closemessage
+	applymovement 255, LilycoveCity_CoveLilyMotel_1F_Movement_158395
+	applymovement 1, LilycoveCity_CoveLilyMotel_1F_Movement_15839A
+	waitmovement 0
+	applymovement 1, LilycoveCity_CoveLilyMotel_1F_Movement_15839C
+	waitmovement 0
 	release
 	end
 

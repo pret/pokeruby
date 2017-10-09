@@ -1,33 +1,33 @@
 Event_TV:: @ 81A6E72
 	lockall
-	inccounter GAME_STAT_WATCHED_TV
+	incrementgamestat GAME_STAT_WATCHED_TV
 	special sub_80C2014
-	specialval RESULT, CheckForBigMovieOrEmergencyNewsOnTV
+	specialvar RESULT, CheckForBigMovieOrEmergencyNewsOnTV
 	compare RESULT, 2
-	jumpeq EventScript_1A6F01
+	goto_if_eq EventScript_1A6F01
 	compare RESULT, 1
-	jumpeq EventScript_1A6F0B
+	goto_if_eq EventScript_1A6F0B
 	checkflag 2098
-	jumpif 0, EventScript_1A6EF1
+	goto_if 0, EventScript_1A6EF1
 	checkflag 2097
-	jumpeq EventScript_1A6EF1
-	specialval RESULT, IsTVShowInSearchOfTrainersAiring
+	goto_if_eq EventScript_1A6EF1
+	specialvar RESULT, IsTVShowInSearchOfTrainersAiring
 	compare RESULT, 1
-	jumpeq EventScript_1A6F66
-	jump EventScript_1A6F50
+	goto_if_eq EventScript_1A6F66
+	goto EventScript_1A6F50
 	end
 
 EventScript_1A6EBB:
-	specialval 0x8004, special_0x44
+	specialvar 0x8004, special_0x44
 	compare 0x8004, 255
-	jumpeq EventScript_1A6F3F
-	specialval RESULT, special_0x4a
+	goto_if_eq EventScript_1A6F3F
+	specialvar RESULT, special_0x4a
 	compare RESULT, 255
-	jumpeq EventScript_1A6F3F
+	goto_if_eq EventScript_1A6F3F
 	copyvar 0x8004, RESULT
-	specialval RESULT, sub_80BDA0C
+	specialvar RESULT, sub_80BDA0C
 	compare RESULT, 0
-	jumpif 5, EventScript_1A6F21
+	goto_if 5, EventScript_1A6F21
 	end
 
 EventScript_1A6EF1:
@@ -57,11 +57,11 @@ EventScript_1A6F0B:
 
 EventScript_1A6F21:
 	special DoTVShow
-	waittext
+	waitmessage
 	waitbutton
 	compare RESULT, 1
-	jumpif 5, EventScript_1A6F21
-	jump EventScript_1A6F37
+	goto_if 5, EventScript_1A6F21
+	goto EventScript_1A6F37
 	end
 
 EventScript_1A6F37:
@@ -73,23 +73,23 @@ EventScript_1A6F37:
 EventScript_1A6F3F:
 	special GetMomOrDadStringForTVMessage
 	msgbox UnknownString_81A0E68, 4
-	jump EventScript_1A6F37
+	goto EventScript_1A6F37
 	end
 
 EventScript_1A6F50:
 	special sub_80BECE8
 	compare RESULT, 0
-	jumpeq EventScript_1A6EBB
-	waittext
+	goto_if_eq EventScript_1A6EBB
+	waitmessage
 	waitbutton
-	jump EventScript_1A6F37
+	goto EventScript_1A6F37
 	end
 
 EventScript_1A6F66:
 	special DoTVShowInSearchOfTrainers
-	waittext
+	waitmessage
 	waitbutton
 	compare RESULT, 0
-	jumpeq EventScript_1A6F66
-	jump EventScript_1A6F37
+	goto_if_eq EventScript_1A6F66
+	goto EventScript_1A6F37
 	end

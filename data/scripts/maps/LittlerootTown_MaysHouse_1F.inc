@@ -6,9 +6,9 @@ LittlerootTown_MaysHouse_1F_MapScripts:: @ 8152879
 
 LittlerootTown_MaysHouse_1F_MapScript1_152889:: @ 8152889
 	compare 0x4092, 6
-	callif 0, LittlerootTown_MaysHouse_1F_EventScript_15289E
+	call_if 0, LittlerootTown_MaysHouse_1F_EventScript_15289E
 	checkflag 274
-	callif 1, LittlerootTown_MaysHouse_1F_EventScript_1528B1
+	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1528B1
 	end
 
 LittlerootTown_MaysHouse_1F_EventScript_15289E:: @ 815289E
@@ -17,9 +17,9 @@ LittlerootTown_MaysHouse_1F_EventScript_15289E:: @ 815289E
 	return
 
 LittlerootTown_MaysHouse_1F_EventScript_1528B1:: @ 81528B1
-	checkgender
+	checkplayergender
 	compare RESULT, 1
-	jumpeq LittlerootTown_MaysHouse_1F_EventScript_1528BE
+	goto_if_eq LittlerootTown_MaysHouse_1F_EventScript_1528BE
 	return
 
 LittlerootTown_MaysHouse_1F_EventScript_1528BE:: @ 81528BE
@@ -28,26 +28,26 @@ LittlerootTown_MaysHouse_1F_EventScript_1528BE:: @ 81528BE
 
 LittlerootTown_MaysHouse_1F_MapScript1_1528C8:: @ 81528C8
 	compare 0x4092, 3
-	callif 1, LittlerootTown_MaysHouse_1F_EventScript_152902
+	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_152902
 	compare 0x4092, 5
-	callif 1, LittlerootTown_MaysHouse_1F_EventScript_1528EA
+	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1528EA
 	compare 0x4092, 6
-	callif 1, LittlerootTown_MaysHouse_1F_EventScript_1528F6
+	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1528F6
 	end
 
 LittlerootTown_MaysHouse_1F_EventScript_1528EA:: @ 81528EA
-	movespriteperm 1, 2, 4
-	spritebehave 1, 7
+	setobjectxyperm 1, 2, 4
+	setobjectmovementtype 1, 7
 	return
 
 LittlerootTown_MaysHouse_1F_EventScript_1528F6:: @ 81528F6
-	movespriteperm 1, 6, 5
-	spritebehave 1, 7
+	setobjectxyperm 1, 6, 5
+	setobjectmovementtype 1, 7
 	return
 
 LittlerootTown_MaysHouse_1F_EventScript_152902:: @ 8152902
-	movespriteperm 1, 1, 8
-	spritebehave 1, 7
+	setobjectxyperm 1, 1, 8
+	setobjectmovementtype 1, 7
 	return
 
 LittlerootTown_MaysHouse_1F_MapScript2_15290E:: @ 815290E
@@ -61,10 +61,10 @@ LittlerootTown_MaysHouse_1F_MapScript2_15290E:: @ 815290E
 LittlerootTown_MaysHouse_1F_EventScript_152938:: @ 8152938
 	lockall
 	msgbox LittlerootTown_MaysHouse_1F_Text_172574, 4
-	closebutton
-	move 255, LittlerootTown_MaysHouse_1F_Movement_15295E
-	move 1, LittlerootTown_MaysHouse_1F_Movement_15295E
-	waitmove 0
+	closemessage
+	applymovement 255, LittlerootTown_MaysHouse_1F_Movement_15295E
+	applymovement 1, LittlerootTown_MaysHouse_1F_Movement_15295E
+	waitmovement 0
 	warp LittlerootTown_MaysHouse_2F, 255, 1, 1
 	waitstate
 	releaseall
@@ -78,26 +78,26 @@ LittlerootTown_MaysHouse_1F_EventScript_152960:: @ 8152960
 	lockall
 	setvar 0x8004, 1
 	setvar 0x8005, 1
-	jump LittlerootTown_MaysHouse_1F_EventScript_1B6956
+	goto LittlerootTown_MaysHouse_1F_EventScript_1B6956
 	end
 
 LittlerootTown_MaysHouse_1F_EventScript_152971:: @ 8152971
 	lockall
 	setvar 0x8004, 1
 	setvar 0x8005, 1
-	jump LittlerootTown_MaysHouse_1F_EventScript_1B6B2E
+	goto LittlerootTown_MaysHouse_1F_EventScript_1B6B2E
 	end
 
 LittlerootTown_MaysHouse_1F_EventScript_152982:: @ 8152982
 	lockall
-	playsfx 21
-	move 4, LittlerootTown_MaysHouse_1F_Movement_1A0833
-	waitmove 0
-	move 4, LittlerootTown_MaysHouse_1F_Movement_1A0835
-	waitmove 0
-	move 255, LittlerootTown_MaysHouse_1F_Movement_1A0843
-	move 4, LittlerootTown_MaysHouse_1F_Movement_1529C0
-	waitmove 0
+	playse 21
+	applymovement 4, LittlerootTown_MaysHouse_1F_Movement_1A0833
+	waitmovement 0
+	applymovement 4, LittlerootTown_MaysHouse_1F_Movement_1A0835
+	waitmovement 0
+	applymovement 255, LittlerootTown_MaysHouse_1F_Movement_1A0843
+	applymovement 4, LittlerootTown_MaysHouse_1F_Movement_1529C0
+	waitmovement 0
 	special GetRivalSonDaughterString
 	msgbox LittlerootTown_MaysHouse_1F_Text_1730C2, 4
 	setflag 87
@@ -116,11 +116,11 @@ LittlerootTown_MaysHouse_1F_Movement_1529C0:: @ 81529C0
 
 @ 81529C7
 	lockall
-	checkgender
+	checkplayergender
 	compare RESULT, 0
-	callif 1, LittlerootTown_MaysHouse_1F_EventScript_1529E1
+	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1529E1
 	compare RESULT, 1
-	callif 1, LittlerootTown_MaysHouse_1F_EventScript_1529E2
+	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1529E2
 	releaseall
 	end
 
@@ -136,11 +136,11 @@ LittlerootTown_MaysHouse_1F_EventScript_1529EB:: @ 81529EB
 	lock
 	faceplayer
 	checkflag 130
-	jumpeq LittlerootTown_BrendansHouse_1F_EventScript_152A21
+	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_152A21
 	checkflag 301
-	jumpeq LittlerootTown_BrendansHouse_1F_EventScript_152A17
+	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_152A17
 	compare 0x408d, 3
-	jumpeq LittlerootTown_BrendansHouse_1F_EventScript_152A2B
+	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_152A2B
 	special GetRivalSonDaughterString
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1731C6, 4
 	release
@@ -165,7 +165,7 @@ LittlerootTown_MaysHouse_1F_EventScript_152A35:: @ 8152A35
 	lockall
 	setvar 0x8004, 1
 	setvar 0x8005, 1
-	move 0x8004, LittlerootTown_MaysHouse_1F_Movement_1A0843
-	waitmove 0
-	jump LittlerootTown_MaysHouse_1F_EventScript_1B69B7
+	applymovement 0x8004, LittlerootTown_MaysHouse_1F_Movement_1A0843
+	waitmovement 0
+	goto LittlerootTown_MaysHouse_1F_EventScript_1B69B7
 	end

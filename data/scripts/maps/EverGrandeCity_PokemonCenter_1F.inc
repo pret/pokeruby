@@ -10,7 +10,7 @@ EverGrandeCity_PokemonCenter_1F_EventScript_15BC70:: @ 815BC70
 SootopolisCity_PokemonCenter_1F_EventScript_15BC70:: @ 815BC70
 	setvar 0x800b, 1
 	call SootopolisCity_PokemonCenter_1F_EventScript_19FD5B
-	waittext
+	waitmessage
 	waitbutton
 	release
 	end

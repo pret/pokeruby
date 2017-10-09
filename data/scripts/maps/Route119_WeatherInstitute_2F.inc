@@ -5,19 +5,19 @@ Route119_WeatherInstitute_2F_MapScripts:: @ 8163CC2
 Route119_WeatherInstitute_2F_MapScript1_163CC8:: @ 8163CC8
 	call Route119_WeatherInstitute_2F_EventScript_1A0196
 	compare 0x40b3, 0
-	callif 1, Route119_WeatherInstitute_2F_EventScript_163CE4
+	call_if 1, Route119_WeatherInstitute_2F_EventScript_163CE4
 	compare 0x40b3, 1
-	callif 1, Route119_WeatherInstitute_2F_EventScript_163CF0
+	call_if 1, Route119_WeatherInstitute_2F_EventScript_163CF0
 	end
 
 Route119_WeatherInstitute_2F_EventScript_163CE4:: @ 8163CE4
-	movespriteperm 5, 1, 6
-	spritebehave 5, 10
+	setobjectxyperm 5, 1, 6
+	setobjectmovementtype 5, 10
 	return
 
 Route119_WeatherInstitute_2F_EventScript_163CF0:: @ 8163CF0
-	movespriteperm 5, 4, 6
-	spritebehave 5, 10
+	setobjectxyperm 5, 4, 6
+	setobjectmovementtype 5, 10
 	return
 
 Route119_WeatherInstitute_2F_EventScript_163CFC:: @ 8163CFC
@@ -37,32 +37,32 @@ Route119_WeatherInstitute_2F_EventScript_163D2A:: @ 8163D2A
 
 Route119_WeatherInstitute_2F_EventScript_163D45:: @ 8163D45
 	msgbox Route119_WeatherInstitute_2F_Text_19F11B, 4
-	closebutton
+	closemessage
 	setvar 0x40b3, 1
 	clearflag 893
-	fadedefault
+	fadedefaultbgm
 	fadescreen 1
 	setflag 890
-	disappear 1
-	disappear 2
-	disappear 3
+	removeobject 1
+	removeobject 2
+	removeobject 3
 	fadescreen 0
-	move 5, Route119_WeatherInstitute_2F_Movement_163DC8
-	waitmove 0
-	moveoffscreen 5
-	jump Route119_WeatherInstitute_2F_EventScript_163D7A
+	applymovement 5, Route119_WeatherInstitute_2F_Movement_163DC8
+	waitmovement 0
+	moveobjectoffscreen 5
+	goto Route119_WeatherInstitute_2F_EventScript_163D7A
 	end
 
 Route119_WeatherInstitute_2F_EventScript_163D7A:: @ 8163D7A
 	msgbox Route119_WeatherInstitute_2F_Text_19F1CF, 4
 	countpokemon
 	compare RESULT, 6
-	jumpeq Route119_WeatherInstitute_2F_EventScript_163DB4
-	fanfare 370
+	goto_if_eq Route119_WeatherInstitute_2F_EventScript_163DB4
+	playfanfare 370
 	message Route119_WeatherInstitute_2F_Text_19F267
 	waitfanfare
-	waittext
-	givepokemon SPECIES_CASTFORM, 25, ITEM_MYSTIC_WATER, 0x0, 0x0, 0
+	waitmessage
+	givepoke SPECIES_CASTFORM, 25, ITEM_MYSTIC_WATER, 0x0, 0x0, 0
 	setflag 151
 	msgbox Route119_WeatherInstitute_2F_Text_19F27D, 4
 	release
@@ -88,6 +88,6 @@ Route119_WeatherInstitute_2F_EventScript_163DCC:: @ 8163DCC
 	lock
 	faceplayer
 	checkflag 151
-	jumpeq Route119_WeatherInstitute_2F_EventScript_163DBE
-	jump Route119_WeatherInstitute_2F_EventScript_163D7A
+	goto_if_eq Route119_WeatherInstitute_2F_EventScript_163DBE
+	goto Route119_WeatherInstitute_2F_EventScript_163D7A
 	end

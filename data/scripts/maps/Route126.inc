@@ -4,7 +4,7 @@ Route126_MapScripts:: @ 8151FFE
 
 Route126_MapScript1_152004:: @ 8152004
 	checkflag 2090
-	callif 1, Route126_EventScript_1A02C1
+	call_if 1, Route126_EventScript_1A02C1
 	end
 
 Route126_EventScript_15200E:: @ 815200E

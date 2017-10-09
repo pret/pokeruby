@@ -1,11 +1,11 @@
-	.include "src/main.o"
-	.include "src/sprite.o"
-	.include "src/text.o"
-	.include "src/string_util.o"
+	.include "src/engine/main.o"
+	.include "src/engine/sprite.o"
+	.include "src/engine/text.o"
+	.include "src/engine/string_util.o"
 
 	.space 0x2E8
 
-	.include "src/link.o"
+	.include "src/engine/link.o"
 	.include "src/rom3.o"
 
 @ battle
@@ -113,7 +113,7 @@ gCurrentMove: @ 2024BE6
 gUnknown_02024BE8: @ 2024BE8
 	.space 0x2
 
-gUnknown_02024BEA: @ 2024BEA
+gRandomMove: @ 2024BEA
 	.space 0x2
 
 gBattleMoveDamage: @ 2024BEC
@@ -287,15 +287,15 @@ gPID_perBank: @ 2024E70
 gBattleMovePower: @ 2024E80
 	.space 0x2
 
-word_2024E82: @ 2024E82
+gMoveToLearn: @ 2024E82
 	.space 0x2
 
 gBattleMonForms: @ 2024E84
 	.space 0x4
 
-	.include "src/pokemon_1.o"
-	.include "src/pokemon_2.o"
-	.include "src/load_save.o"
+	.include "src/pokemon/pokemon_1.o"
+	.include "src/pokemon/pokemon_2.o"
+	.include "src/engine/load_save.o"
 
 @ trade
 
@@ -308,30 +308,17 @@ gUnknown_02029700: @ 2029700
 gUnknown_020297D8: @ 20297D8
 	.space 0x4
 
-@ berry_blender
-
-gUnknown_020297DC: @ 20297DC
-	.space 0x4
-
-gUnknown_020297E0: @ 20297E0
-	.space 0x4
-
-gUnknown_020297E4: @ 20297E4
-	.space 0x4
-
-gUnknown_020297E8: @ 20297E8
-	.space 0x4
-
-	.include "src/new_game.o"
-	.include "src/rom4.o"
-	.include "src/fieldmap.o"
-	.include "src/field_camera.o"
-	.include "src/field_player_avatar.o"
-	.include "src/field_message_box.o"
-	.include "src/script.o"
-	.include "src/scrcmd.o"
-	.include "src/field_control_avatar.o"
-	.include "src/event_data.o"
+	.include "src/scene/berry_blender.o"
+	.include "src/scene/new_game.o"
+	.include "src/field/overworld.o"
+	.include "src/field/fieldmap.o"
+	.include "src/field/field_camera.o"
+	.include "src/field/field_player_avatar.o"
+	.include "src/field/field_message_box.o"
+	.include "src/engine/script.o"
+	.include "src/field/scrcmd.o"
+	.include "src/field/field_control_avatar.o"
+	.include "src/field/event_data.o"
 
 @ party_menu
 
@@ -351,14 +338,14 @@ gUnknown_0202E8F8: @ 202E8F8
 gUnknown_0202E8FA: @ 202E8FA
 	.space 0x2
 
-	.include "src/start_menu.o"
-	.include "src/menu.o"
-	.include "src/tileset_anim.o"
-	.include "src/palette.o"
-	.include "src/sound.o"
-	.include "src/battle_anim.o"
+	.include "src/field/start_menu.o"
+	.include "src/engine/menu.o"
+	.include "src/engine/tileset_anim.o"
+	.include "src/engine/palette.o"
+	.include "src/engine/sound.o"
+	.include "src/battle/battle_anim.o"
 	.include "src/rom_8077ABC.o"
-	.include "src/title_screen.o"
+	.include "src/scene/title_screen.o"
 
 @ field_weather
 
@@ -378,29 +365,19 @@ gUnknown_0202FF38: @ 202FF38
 gUnknown_0202FF58: @ 202FF58
 	.space 0x4
 
-	.include "src/battle_setup.o"
-	.include "src/wild_encounter.o"
-	.include "src/field_effect.o"
+	.include "src/battle/battle_setup.o"
+	.include "src/field/wild_encounter.o"
+	.include "src/field/field_effect.o"
 
 @ unknown_task
 
 gUnknown_0202FFA4: @ 202FFA4
 	.space 0x4
 
-@ pokemon_menu
-
-gUnknown_0202FFA8: @ 202FFA8
-	.space 0x1
-
-gUnknown_0202FFA9: @ 202FFA9
-	.space 0x1
-
-gUnknown_0202FFAA: @ 202FFAA
-	.space 0xA
-
-	.include "src/pokedex.o"
-	.include "src/trainer_card.o"
-	.include "src/pokemon_storage_system.o"
+	.include "src/pokemon/pokemon_menu.o"
+	.include "src/pokemon/pokedex.o"
+	.include "src/engine/trainer_card.o"
+	.include "src/pokemon/pokemon_storage_system.o"
 
 @ still pokemon_storage_system
 
@@ -464,9 +441,9 @@ gUnknown_020384F0: @ 20384F0
 gUnknown_020384F4: @ 20384F4
 	.space 0x4
 
-	.include "src/script_movement.o"
-	.include "src/map_name_popup.o"
-	.include "src/item_menu.o"
+	.include "src/field/script_movement.o"
+	.include "src/field/map_name_popup.o"
+	.include "src/field/item_menu.o"
 
 @ contest
 
@@ -523,30 +500,8 @@ gScriptContestCategory: @ 203869C
 gScriptContestRank: @ 203869E
 	.space 0x2
 
-@ shop
-
-gUnknown_020386A0: @ 20386A0
-	.space 0x4
-
-gUnknown_020386A4: @ 20386A4
-	.space 0x4
-
-gUnknown_020386A8: @ 20386A8
-	.space 0x2
-
-gUnknown_020386AA: @ 20386AA
-	.space 0x7A
-
-gUnknown_02038724: @ 2038724
-	.space 0xC
-
-gUnknown_02038730: @ 2038730
-	.space 0x1
-
-gUnknown_02038731: @ 2038731
-	.space 0x3
-
-	.include "src/money.o"
+	.include "src/field/shop.o"
+	.include "src/field/money.o"
 
 @ record_mixing
 
@@ -554,7 +509,7 @@ gUnknown_02038731: @ 2038731
 gUnknown_02038738: @ 2038738
 	.space 0x78
 
-	.include "src/sound_check_menu.o"
+	.include "src/debug/sound_check_menu.o"
 
 @ secret_base
 
@@ -564,7 +519,7 @@ gUnknown_020387DC: @ 20387DC
 
 @ tv
 
-	.include "src/tv.o"
+	.include "src/field/tv.o"
 
 @ fldeff_80C5CD4
 
@@ -572,8 +527,8 @@ gUnknown_020387DC: @ 20387DC
 gUnknown_020387EC: @ 20387EC
 	.space 0x4
 
-	.include "src/rotating_gate.o"
-	.include "src/safari_zone.o"
+	.include "src/field/rotating_gate.o"
+	.include "src/field/safari_zone.o"
 
 @ easy_chat
 
@@ -588,21 +543,15 @@ gUnknown_020388B0: @ 20388B0
 gUnknown_020388B4: @ 20388B4
 	.space 0x4
 
-	.include "src/mon_markings.o"
-
-@ mauville_old_man
-
-	.align 2
-gUnknown_020388BC: @ 20388BC
-	.space 0x4
-
-	.include "src/menu_helpers.o"
-	.include "src/region_map.o"
-	.include "src/decoration.o"
-	.include "src/battle_ai.o"
+	.include "src/pokemon/mon_markings.o"
+	.include "src/field/mauville_man.o"
+	.include "src/field/menu_helpers.o"
+	.include "src/field/region_map.o"
+	.include "src/field/decoration.o"
+	.include "src/battle/battle_ai.o"
 	.include "src/rom6.o"
-	.include "src/pokeblock.o"
-	.include "src/field_specials.o"
+	.include "src/field/pokeblock.o"
+	.include "src/field/field_specials.o"
 
 @ pokedex_area_screen
 
@@ -630,7 +579,7 @@ gUnknown_0203926A: @ 203926A
 gAbilitiesPerBank: @ 203926C
 	.space 0x4
 
-	.include "src/choose_party.o"
+	.include "src/field/choose_party.o"
 
 @ cable_car
 
@@ -656,30 +605,19 @@ gUnknown_0203927C: @ 203927C
 gUnknown_0203927D: @ 203927D
 	.space 0x7
 
-	.include "src/save.o"
-	.include "src/mystery_event_script.o"
-	.include "src/roamer.o"
-	.include "src/use_pokeblock.o"
-	.include "src/player_pc.o"
-	.include "src/intro.o"
-
-@ hall_of_fame
-
-	.align 2
-gUnknown_0203931C: @ 203931C
-	.space 0x4
-
-	.include "src/credits.o"
-	.include "src/lottery_corner.o"
-	.include "src/berry_tag_screen.o"
-	.include "src/mystery_event_menu.o"
-	.include "src/save_failed_screen.o"
-
-@ pokeblock_feed
-
-	.align 2
-gUnknown_02039350: @ 2039350
-	.space 0x8
+	.include "src/engine/save.o"
+	.include "src/engine/mystery_event_script.o"
+	.include "src/field/roamer.o"
+	.include "src/field/use_pokeblock.o"
+	.include "src/field/player_pc.o"
+	.include "src/scene/intro.o"
+	.include "src/scene/hall_of_fame.o"
+	.include "src/scene/credits.o"
+	.include "src/field/lottery_corner.o"
+	.include "src/field/berry_tag_screen.o"
+	.include "src/engine/mystery_event_menu.o"
+	.include "src/engine/save_failed_screen.o"
+	.include "src/pokemon/pokeblock_feed.o"
 
 @ intro_credits_graphics
 
@@ -706,4 +644,4 @@ gUnknown_02039760: @ 2039760
 gUnknown_0203A360: @ 203A360
 	.space 0x20
 
-	.include "src/menu_cursor.o"
+	.include "src/engine/menu_cursor.o"

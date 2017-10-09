@@ -4,14 +4,14 @@ Route112_CableCarStation_MapScripts:: @ 815C033
 	.byte 0
 
 Route112_CableCarStation_MapScript1_15C03E:: @ 815C03E
-	warp6 Route112, 255, 28, 28
+	setescapewarp Route112, 255, 28, 28
 	compare 0x40a3, 2
-	callif 1, Route112_CableCarStation_EventScript_15C052
+	call_if 1, Route112_CableCarStation_EventScript_15C052
 	end
 
 Route112_CableCarStation_EventScript_15C052:: @ 815C052
-	movespriteperm 1, 7, 4
-	spritebehave 1, 9
+	setobjectxyperm 1, 7, 4
+	setobjectmovementtype 1, 9
 	return
 
 Route112_CableCarStation_MapScript2_15C05E:: @ 815C05E
@@ -20,12 +20,12 @@ Route112_CableCarStation_MapScript2_15C05E:: @ 815C05E
 
 Route112_CableCarStation_EventScript_15C068:: @ 815C068
 	lockall
-	move 255, Route112_CableCarStation_Movement_15C0F5
-	move 1, Route112_CableCarStation_Movement_15C0EB
-	waitmove 0
+	applymovement 255, Route112_CableCarStation_Movement_15C0F5
+	applymovement 1, Route112_CableCarStation_Movement_15C0EB
+	waitmovement 0
 	setvar 0x40a3, 0
-	movespriteperm 1, 6, 7
-	spritebehave 1, 8
+	setobjectxyperm 1, 6, 7
+	setobjectmovementtype 1, 8
 	releaseall
 	end
 
@@ -34,20 +34,20 @@ Route112_CableCarStation_EventScript_15C08C:: @ 815C08C
 	faceplayer
 	msgbox Route112_CableCarStation_Text_1924F5, 5
 	compare RESULT, 1
-	jumpeq Route112_CableCarStation_EventScript_15C0AD
+	goto_if_eq Route112_CableCarStation_EventScript_15C0AD
 	compare RESULT, 0
-	jumpeq Route112_CableCarStation_EventScript_15C0DC
+	goto_if_eq Route112_CableCarStation_EventScript_15C0DC
 	end
 
 Route112_CableCarStation_EventScript_15C0AD:: @ 815C0AD
 	msgbox Route112_CableCarStation_Text_1925A9, 4
-	closebutton
-	move 1, Route112_CableCarStation_Movement_15C0E6
-	move 255, Route112_CableCarStation_Movement_15C0F0
-	waitmove 0
+	closemessage
+	applymovement 1, Route112_CableCarStation_Movement_15C0E6
+	applymovement 255, Route112_CableCarStation_Movement_15C0F0
+	waitmovement 0
 	setvar 0x8004, 0
 	setvar 0x40a3, 1
-	inccounter GAME_STAT_RODE_CABLE_CAR
+	incrementgamestat GAME_STAT_RODE_CABLE_CAR
 	special CableCarWarp
 	special sub_8123218
 	waitstate

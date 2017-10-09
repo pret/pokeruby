@@ -20,6 +20,6 @@ void FieldSetDoorClosed(u32, u32);
 s8 FieldAnimateDoorClose(u32, u32);
 s8 FieldAnimateDoorOpen(u32, u32);
 bool8 FieldIsDoorAnimationRunning(void);
-u32 sub_8058790(u32 x, u32 y);
+u32 GetDoorSoundEffect(u32 x, u32 y);
 
 #endif

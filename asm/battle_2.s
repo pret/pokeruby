@@ -189,7 +189,7 @@ _080124A8:
 	lsls r0, 8
 	orrs r2, r0
 	movs r0, 0
-	bl dp01_build_cmdbuf_x12_a_bb
+	bl Emitcmd18
 	bl _08012E32
 	.align 2, 0
 _080124C0: .4byte gActionForBanks
@@ -262,7 +262,7 @@ _08012538:
 	.4byte _08012968
 	.4byte _0801292C
 _0801256C:
-	bl sub_8015C90
+	bl AreAllMovesUnusable
 	lsls r0, 24
 	cmp r0, 0
 	beq _080125D0
@@ -408,7 +408,7 @@ _0801264E:
 	movs r0, 0
 	movs r2, 0
 	add r3, sp, 0x4
-	bl sub_800CBA4
+	bl Emitcmd20
 	b _0801289E
 	.align 2, 0
 _080126AC: .4byte gBattleMons
@@ -573,7 +573,7 @@ _080127E0:
 	str r0, [sp]
 	movs r0, 0
 	movs r2, 0x6
-	bl dp01_build_cmdbuf_x16_a_b_c_ptr_d_e_f
+	bl EmitChoosePokemon
 	b _0801289E
 	.align 2, 0
 _08012808: .4byte gActiveBank
@@ -624,7 +624,7 @@ _08012854:
 	movs r1, 0
 _0801286C:
 	movs r3, 0
-	bl dp01_build_cmdbuf_x16_a_b_c_ptr_d_e_f
+	bl EmitChoosePokemon
 	b _0801289E
 	.align 2, 0
 _08012874: .4byte gActionForBanks
@@ -643,7 +643,7 @@ _08012884:
 	movs r1, 0
 	movs r2, 0x6
 	movs r3, 0
-	bl dp01_build_cmdbuf_x16_a_b_c_ptr_d_e_f
+	bl EmitChoosePokemon
 _0801289E:
 	ldr r0, _080128A8 @ =gActiveBank
 	ldrb r0, [r0]
@@ -698,7 +698,7 @@ _08012908:
 	ldr r0, _08012928 @ =0x0201606c
 	adds r1, r0
 	movs r0, 0
-	bl sub_800CBE0
+	bl EmitOpenBag
 	ldrb r0, [r4]
 	bl MarkBufferBankForExecution
 	b _08012968
@@ -725,7 +725,7 @@ _0801292C:
 	adds r0, r4
 	strb r5, [r0]
 	movs r0, 0
-	bl dp01_build_cmdbuf_x32_32_32_32
+	bl Emitcmd50
 	mov r4, r8
 	ldrb r0, [r4]
 	bl MarkBufferBankForExecution
@@ -1514,8 +1514,8 @@ _08012FE8: .4byte gUnknown_02024A76
 _08012FEC: .4byte gTurnOrder
 	thumb_func_end sub_8012FBC
 
-	thumb_func_start b_first_side
-b_first_side: @ 8012FF0
+	thumb_func_start GetWhoStrikesFirst
+GetWhoStrikesFirst: @ 8012FF0
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2003,7 +2003,7 @@ _080133B6:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end b_first_side
+	thumb_func_end GetWhoStrikesFirst
 
 	thumb_func_start sub_80133C8
 sub_80133C8: @ 80133C8
@@ -2285,7 +2285,7 @@ _080135D0:
 	beq _0801360C
 	adds r0, r3, 0
 	movs r2, 0
-	bl b_first_side
+	bl GetWhoStrikesFirst
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801360C
@@ -2789,7 +2789,7 @@ _08013A04:
 	beq _08013A0E
 	b _08013B42
 _08013A0E:
-	bl sub_80325B8
+	bl BattleMusicStop
 	ldr r1, _08013A3C @ =gBattlescriptCurrInstr
 	ldr r0, _08013A40 @ =gUnknown_081D8DBE
 	str r0, [r1]
@@ -3144,7 +3144,7 @@ _08013D4C:
 	ldr r1, _08013D6C @ =gBattleMainFunc
 	ldr r0, _08013D70 @ =sub_8013DA8
 	str r0, [r1]
-	ldr r1, _08013D74 @ =gUnknown_03005E94
+	ldr r1, _08013D74 @ =gCB2_AfterEvolution
 	ldr r0, _08013D78 @ =sub_800F808
 	str r0, [r1]
 	b _08013D96
@@ -3152,7 +3152,7 @@ _08013D4C:
 _08013D68: .4byte gNoOfAllBanks
 _08013D6C: .4byte gBattleMainFunc
 _08013D70: .4byte sub_8013DA8
-_08013D74: .4byte gUnknown_03005E94
+_08013D74: .4byte gCB2_AfterEvolution
 _08013D78: .4byte sub_800F808
 _08013D7C:
 	ldr r0, _08013D9C @ =gBattleExecBuffer
@@ -3558,7 +3558,7 @@ _08014044:
 	str r0, [r2]
 	movs r0, 0xA5
 	movs r1, 0
-	bl sub_801B5C0
+	bl GetMoveTarget
 	ldrb r1, [r7]
 	ldr r2, _080140EC @ =0x00016010
 	adds r1, r2
@@ -3646,7 +3646,7 @@ _08014138:
 	strb r0, [r3]
 	ldrh r0, [r1]
 	movs r1, 0
-	bl sub_801B5C0
+	bl GetMoveTarget
 	ldrb r1, [r7]
 	ldr r4, _0801419C @ =0x00016010
 	adds r1, r4
@@ -3702,7 +3702,7 @@ _080141A0:
 	strb r0, [r1, 0xE]
 	ldrh r0, [r3]
 	movs r1, 0
-	bl sub_801B5C0
+	bl GetMoveTarget
 	ldrb r1, [r7]
 	ldr r3, _08014214 @ =0x00016010
 	adds r1, r3
@@ -3740,7 +3740,7 @@ _08014218:
 	strh r3, [r1]
 	ldrh r0, [r1]
 	movs r1, 0
-	bl sub_801B5C0
+	bl GetMoveTarget
 	ldr r2, _08014270 @ =0x02000000
 	ldrb r1, [r4]
 	ldr r3, _08014274 @ =0x00016010
@@ -3936,14 +3936,14 @@ _080143B6:
 	cmp r0, 0x1F
 	bne _08014404
 	adds r0, r2, 0
-	bl sub_801E3B4
+	bl BankGetTurnOrder
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, [sp]
 	cmp r0, r1
 	bcs _08014404
 	ldrb r0, [r4]
-	bl sub_801E3B4
+	bl BankGetTurnOrder
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp]
@@ -4261,7 +4261,7 @@ _0801469A:
 	strb r0, [r5]
 _080146AC:
 	ldr r4, _080146E0 @ =gBattlescriptCurrInstr
-	ldr r3, _080146E4 @ =gUnknown_081D6BBC
+	ldr r3, _080146E4 @ =gBattleScriptsEffectsTable
 	ldr r2, _080146E8 @ =gBattleMoves
 	ldr r0, _080146EC @ =gCurrentMove
 	ldrh r1, [r0]
@@ -4288,7 +4288,7 @@ _080146CC:
 	bx r0
 	.align 2, 0
 _080146E0: .4byte gBattlescriptCurrInstr
-_080146E4: .4byte gUnknown_081D6BBC
+_080146E4: .4byte gBattleScriptsEffectsTable
 _080146E8: .4byte gBattleMoves
 _080146EC: .4byte gCurrentMove
 _080146F0: .4byte gFightStateTracker
@@ -5528,8 +5528,8 @@ _08015148: .4byte 0x00016112
 _0801514C: .4byte 0x00017130
 	thumb_func_end bsC_8016D70
 
-	thumb_func_start sub_8015150
-sub_8015150: @ 8015150
+	thumb_func_start GetBattleBank
+GetBattleBank: @ 8015150
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -5592,10 +5592,10 @@ _080151C8:
 	bx r1
 	.align 2, 0
 _080151D0: .4byte gBank1
-	thumb_func_end sub_8015150
+	thumb_func_end GetBattleBank
 
-	thumb_func_start sub_80151D4
-sub_80151D4: @ 80151D4
+	thumb_func_start PressurePPLose
+PressurePPLose: @ 80151D4
 	push {r4-r7,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -5695,7 +5695,7 @@ _08015286:
 _08015290: .4byte gDisableStructs
 _08015294: .4byte gBitTable
 _08015298: .4byte gActiveBank
-	thumb_func_end sub_80151D4
+	thumb_func_end PressurePPLose
 
 	thumb_func_start sub_801529C
 sub_801529C: @ 801529C

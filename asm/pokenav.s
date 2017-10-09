@@ -17787,7 +17787,7 @@ sub_80F4824: @ 80F4824
 	adds r0, r5, 0
 	mov r1, r8
 	adds r2, r4, 0
-	bl species_and_otid_get_pal
+	bl GetMonSpritePalFromOtIdPersonality
 	mov r2, r9
 	lsls r1, r2, 7
 	adds r1, r7, r1
@@ -22370,7 +22370,7 @@ _080F6C3A:
 	adds r6, r0, r1
 	ldrh r7, [r6]
 	adds r0, r7, 0
-	bl trainer_flag_check
+	bl HasTrainerAlreadyBeenFought
 	lsls r0, 24
 	cmp r0, 0
 	beq _080F6CA0
@@ -22402,7 +22402,7 @@ _080F6C3A:
 	strb r1, [r0]
 	ldrh r0, [r6, 0xA]
 	ldrh r1, [r6, 0xC]
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	ldrh r1, [r5]
 	lsls r1, 3
 	adds r4, r1
@@ -22431,7 +22431,7 @@ _080F6CB4:
 	adds r5, r0, r1
 	ldrh r4, [r5]
 	adds r0, r4, 0
-	bl trainer_flag_check
+	bl HasTrainerAlreadyBeenFought
 	lsls r0, 24
 	cmp r0, 0
 	beq _080F6D0E

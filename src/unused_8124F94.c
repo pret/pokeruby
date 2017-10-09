@@ -64,7 +64,7 @@ u8 unref_sub_8124FD8(struct UnknownStruct1 *a, const struct UnknownStruct2 *b)
         }
         else
         {
-            sub_800D238(b->src, a->dest + a->unk2 * 64);
+            LZDecompressWram(b->src, a->dest + a->unk2 * 64);
         }
         a->unk88[a->unk1].unk8 = a->unk2;
         temp = r6 + a->unk2;
@@ -95,7 +95,7 @@ u8 unref_sub_81250A4(struct UnknownStruct1 *a, struct UnknownStruct3 *b)
         {
             u16 palette[16];
 
-            sub_800D238(b->paletteSrc, palette);
+            LZDecompressWram(b->paletteSrc, palette);
             LoadPalette(palette, a->paletteNum * 16, 32);
         }
         a->unk8[a->paletteNum].paletteCount = a->paletteNum;
@@ -111,7 +111,7 @@ u8 unref_sub_8125118(struct UnknownStruct1 *a, struct UnknownStruct3 *b)
     u8 r7 = b->paletteCount;
     u8 i;
 
-    sub_800D238(b->paletteSrc, palettes);
+    LZDecompressWram(b->paletteSrc, palettes);
     for (i = a->paletteNum; i < r7; i++)
     {
         if (a->paletteNum + i >= 16)

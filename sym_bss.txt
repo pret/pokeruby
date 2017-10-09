@@ -1,138 +1,41 @@
-	.include "src/main.o"
-	.include "src/sprite.o"
-	.include "src/text.o"
-	.include "src/string_util.o"
-	.include "src/link.o"
-	.include "src/rtc.o"
-
-@ daycare
-
-	.align 2
-gUnknown_03000470: @ 3000470
-	.space 0x68
-
-gUnknown_030004D8: @ 30004D8
-	.space 0x8
-
-gUnknown_030004E0: @ 30004E0
-	.space 0x8
-
-gUnknown_030004E8: @ 30004E8
-	.space 0x18
-
-gUnknown_03000500: @ 3000500
-	.space 0x8
-
-@ trade
-
-gUnknown_03000508: @ 3000508
-	.space 0x8
-
-@ berry_blender
-
-gUnknown_03000510: @ 3000510
-	.space 0x10
-
-gUnknown_03000520: @ 3000520
-	.space 0xC
-
-gUnknown_0300052C: @ 300052C
-	.space 0x2
-
-gUnknown_0300052E: @ 300052E
-	.space 0x2
-
-gUnknown_03000530: @ 3000530
-	.space 0x18
-
-gUnknown_03000548: @ 3000548
-	.space 0x14
-
-gUnknown_0300055C: @ 300055C
-	.space 0x4
-
-gUnknown_03000560: @ 3000560
-	.space 0x1C
-
-	.include "src/play_time.o"
-	.include "src/rom4.o"
-
-	@ unused variable?
-	.align 2
-	.space 0x4
-
-	.include "src/field_camera.o"
-	.include "src/field_map_obj.o"
-	.include "src/field_message_box.o"
-	.include "src/text_window.o"
-	.include "src/script.o"
-	.include "src/start_menu.o"
-	.include "src/menu.o"
-	.include "src/tileset_anim.o"
-	.include "src/sound.o"
-
-@ field_weather
-
-gUnknown_030006DC: @ 30006DC
-	.space 0x4
-
-	.include "src/field_effect.o"
-	.include "src/item_menu.o"
-
-@ shop
-
-gUnknown_03000708: @ 3000708
-	.space 0x10
-
-	.include "src/record_mixing.o"
-	.include "src/tv.o"
-
-	@ unused variable?
-	.align 2
-	.space 0x4
-
-@ battle_anim_80CA710
-
-gUnknown_03000728: @ 3000728
-	.space 0x8
-
-gUnknown_03000730: @ 3000730
-	.space 0x10
-
-@ easy_chat
-
-gUnknown_03000740: @ 3000740
-	.space 0x4
-
-@ pokenav
-
-gUnknown_03000744: @ 3000744
-	.space 0x4
-
-@ mauville_old_man
-
-gUnknown_03000748: @ 3000748
-	.space 0x4
-
-	.include "src/menu_helpers.o"
-	.include "src/contest_painting.o"
-	.include "src/pokeblock.o"
-
-	@ unused variable?
-	.align 2
-	.space 0x4
-
-	.include "src/field_specials.o"
-
-@ learn_move
-
-	.align 2
-gUnknown_030007B0: @ 30007B0
-	.space 0x4
-
-	.include "src/player_pc.o"
+	.include "src/engine/main.o"
+	.include "src/engine/sprite.o"
+	.include "src/engine/text.o"
+	.include "src/engine/string_util.o"
+	.include "src/engine/link.o"
+	.include "src/engine/rtc.o"
+	.include "src/field/daycare.o"
+	.include "src/engine/trade.o"
+	.include "src/scene/berry_blender.o"
+	.include "src/engine/play_time.o"
+	.include "src/field/overworld.o"
+	.include "src/field/field_camera.o"
+	.include "src/field/field_map_obj.o"
+	.include "src/field/field_message_box.o"
+	.include "src/engine/text_window.o"
+	.include "src/engine/script.o"
+	.include "src/field/start_menu.o"
+	.include "src/engine/menu.o"
+	.include "src/engine/tileset_anim.o"
+	.include "src/engine/sound.o"
+	.include "src/field/field_weather.o"
+	.include "src/field/field_effect.o"
+	.include "src/field/item_menu.o"
+	.include "src/field/shop.o"
+	.include "src/engine/record_mixing.o"
+	.include "src/field/tv.o"
+	.include "src/battle/battle_anim_80CA710.o"
+	.include "src/field/easy_chat.o"
+	.include "src/field/pokenav.o"
+	.include "src/field/mauville_man.o"
+	.include "src/field/menu_helpers.o"
+	.include "src/scene/contest_painting.o"
+	.include "src/field/pokeblock.o"
+	.include "src/field/field_specials.o"
+	.include "src/pokemon/learn_move.o"
+	.include "src/field/player_pc.o"
 	.include "asm/m4a_1.o"
-	.include "src/agb_flash.o"
-	.include "src/siirtc.o"
+	.include "src/libs/agb_flash.o"
+	.include "src/libs/siirtc.o"
 	.include "tools/agbcc/lib/libgcc.a:dp-bit.o"
 	.include "tools/agbcc/lib/libgcc.a:fp-bit.o"
