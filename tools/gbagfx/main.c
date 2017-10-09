@@ -42,7 +42,7 @@ void ConvertGbaToPng(char *inputPath, char *outputPath, int width, int bitDepth,
     FreeImage(&image);
 }
 
-void ConvertPngToGba(char *inputPath, char *outputPath, int numTiles, int bitDepth)
+void ConvertPngToGba(char *inputPath, char *outputPath, int numTiles, int bitDepth, char *paletteFilePath)
 {
     struct Image image;
 
@@ -51,6 +51,13 @@ void ConvertPngToGba(char *inputPath, char *outputPath, int numTiles, int bitDep
     ReadPng(inputPath, &image);
 
     WriteImage(outputPath, numTiles, bitDepth, &image, !image.hasPalette);
+
+    if (paletteFilePath != NULL)
+    {
+        if (!image.hasPalette)
+            FATAL_ERROR("Input file \"%s\" does not contain a palette.\n", inputPath);
+        WriteGbaPalette(paletteFilePath, &image.palette);
+    }
 
     FreeImage(&image);
 }
@@ -107,6 +114,7 @@ void HandlePngToGbaCommand(char *inputPath, char *outputPath, int argc, char **a
     char *outputFileExtension = GetFileExtension(outputPath);
     int bitDepth = outputFileExtension[0] - '0';
     int numTiles = 0;
+    char *paletteFilePath = NULL;
 
     for (int i = 3; i < argc; i++)
     {
@@ -125,13 +133,22 @@ void HandlePngToGbaCommand(char *inputPath, char *outputPath, int argc, char **a
             if (numTiles < 1)
                 FATAL_ERROR("Number of tiles must be positive.\n");
         }
+        else if (strcmp(option, "-palette") == 0)
+        {
+            if (i + 1 >= argc)
+                FATAL_ERROR("No palette file path following \"-palette\".\n");
+
+            i++;
+
+            paletteFilePath = argv[i];
+        }
         else
         {
             FATAL_ERROR("Unrecognized option \"%s\".\n", option);
         }
     }
 
-    ConvertPngToGba(inputPath, outputPath, numTiles, bitDepth);
+    ConvertPngToGba(inputPath, outputPath, numTiles, bitDepth, paletteFilePath);
 }
 
 void HandleGbaToJascPaletteCommand(char *inputPath, char *outputPath, int argc UNUSED, char **argv UNUSED)
