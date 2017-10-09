@@ -114,7 +114,7 @@ $1_DATA_ASM_OBJS := $$(DATA_ASM_SRCS:%.s=build/$1/%.o)
 
 ifeq ($$(NODEP),)
 build/$1/src/%.o: c_path = $$(*D)/$$(*F).c
-build/$1/src/%.o: c_dep = $$(shell $$(SCANINC) $$(wildcard $$(c_path:build/$1/=)))
+build/$1/src/%.o: c_dep = $$(shell $$(SCANINC) -I include $$(wildcard $$(c_path:build/$1/=)))
 build/$1/asm/%.o: asm_dep = $$(shell $$(SCANINC) asm/$$(*F).s)
 build/$1/data/%.o: asm_dep = $$(shell $$(SCANINC) data/$$(*F).s)
 endif
