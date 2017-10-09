@@ -5197,7 +5197,7 @@ void Task_RareCandy3(u8 taskId)
             u16 learnedMove;
             u16 evolutionSpecies;
 
-            MenuZeroFillWindowRect(WINDOW_LEFT + 8, 0, WINDOW_RIGHT + 3, 7);
+            MenuZeroFillWindowRect(11, 0, 29, 7);
 
             learnedMove = MonTryLearningNewMove(ewram1C000.pokemon, TRUE);
             ewram1B000.unk282 = 1;
