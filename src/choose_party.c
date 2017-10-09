@@ -50,7 +50,6 @@ extern void sub_806AEDC(void);
 extern void sub_806AF4C();
 extern void ShowPokemonSummaryScreen(struct Pokemon *, u8, u8, void (*)(void), int);
 extern void CreateMonIcon_806D99C(int, u8, int, struct UnknownPokemonStruct2 *);
-extern void CreateHeldItemIcon_806DCD4(int, u8, int);
 extern u8 GetMonStatusAndPokerus();
 extern void PartyMenuPrintHP();
 extern bool8 sub_80F9344(void);

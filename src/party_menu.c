@@ -469,10 +469,11 @@ struct Unk201C000
     /*0x14*/ TaskFunc unk14;
 };
 
-struct Unk201F000
+struct Unk201FE00
 {
-    u8 filler0[0xE00];
-    u8 unkE00[3];  // not sure if this is an array or struct, or how big it is
+    u8 unkE00;  // not sure if this is an array or struct, or how big it is
+    u8 unkE01;
+    u8 unkE02;
 };
 
 struct UnknownPokemonStruct2
@@ -490,7 +491,7 @@ struct UnknownPokemonStruct2
 };
 
 #define ewram1C000 (*(struct Unk201C000 *)(ewram + 0x1C000))
-#define ewram1F000 (*(struct Unk201F000 *)(ewram + 0x1F000))
+#define ewram1FE00 (*(struct Unk201FE00 *)(ewram + 0x1FE00))
 
 extern u16 gBattleTypeFlags;
 extern u8 gTileBuffer[];
@@ -1826,10 +1827,11 @@ void sub_806C310(u8 spriteId, u8 menuIndex, s8 directionPressed)
     }
 }
 
-/*void sub_806C490(u8 spriteId, u8 menuIndex, s8 directionPressed)
+#ifdef NONMATCHING
+void sub_806C490(u8 spriteId, u8 menuIndex, s8 directionPressed)
 {
     s8 menuMovement;
-    s16 var1;
+    u16 var1;
     u8 var2;
 
     menuMovement = directionPressed + 2;
@@ -1841,11 +1843,9 @@ void sub_806C310(u8 spriteId, u8 menuIndex, s8 directionPressed)
     case 3:
         if (menuIndex == 7) {
             gSprites[spriteId].data0 = 0;
-        } else if (menuIndex == PARTY_SIZE - 1) {
-            gSprites[spriteId].data0 = 7;
         } else {
-            // Put if statment here
-            while (menuIndex++ != PARTY_SIZE - 1) {
+            while (menuIndex != PARTY_SIZE - 1) {
+                menuIndex++;
                 if (GetMonData(&gPlayerParty[menuIndex], MON_DATA_SPECIES))
                 {
                     gSprites[spriteId].data0 = menuIndex;
@@ -1860,8 +1860,9 @@ void sub_806C310(u8 spriteId, u8 menuIndex, s8 directionPressed)
         gSprites[spriteId].data1 = 0;
         break;
     case 1:
-        while (menuIndex-- != 0) {
-            if (GetMonData(gPlayerParty[menuIndex], MON_DATA_SPECIES))
+        while (menuIndex != 0) {
+            menuIndex--;
+            if (menuIndex != PARTY_SIZE && GetMonData(gPlayerParty[menuIndex], MON_DATA_SPECIES))
             {
                 gSprites[spriteId].data0 = menuIndex;
                 gSprites[spriteId].data1 = 0;
@@ -1887,7 +1888,7 @@ void sub_806C310(u8 spriteId, u8 menuIndex, s8 directionPressed)
         } else if (menuIndex == 1) {
             var1 = gSprites[spriteId].data1 - 4;
             if (var1 <= 1) {
-                gSprites[spriteId].data0 = var1;
+                gSprites[spriteId].data0 = gSprites[spriteId].data1;
             } else {
                 if (GetMonData(&gPlayerParty[4], MON_DATA_SPECIES)) {
                     gSprites[spriteId].data0 = 4;
@@ -1901,17 +1902,20 @@ void sub_806C310(u8 spriteId, u8 menuIndex, s8 directionPressed)
         var2 = menuIndex - 2;
         if (var2 <= 1) {
             gSprites[spriteId].data0 = 0;
+            gSprites[spriteId].data1 = menuIndex;
         } else {
             var2 = menuIndex - 4;
             if (var2 <= 1) {
                 gSprites[spriteId].data0 = 1;
+                gSprites[spriteId].data1 = menuIndex;
             }
         }
 
-        gSprites[spriteId].data1 = menuIndex;
         break;
     }
-}*/
+}
+
+#else
 __attribute__((naked))
 void sub_806C490(u8 spriteId, u8 menuIndex, s8 directionPressed)
 {
@@ -2153,7 +2157,7 @@ _0806C64E:\n\
 _0806C654: .4byte gSprites\n\
     .syntax divided\n");
 }
-
+#endif // NONMATCHING
 
 // directionPressed = -2 for left, 2 for right, 1 for down, -1 for up
 void sub_806C658(u8 taskId, s8 directionPressed)
@@ -3144,7 +3148,7 @@ void CreateHeldItemIcons_806DC34(u8 taskId)
 }
 
 #ifdef NONMATCHING
-void CreateHeldItemIcon_806DCD4(int taskId, u8 monIndex, int item)
+void CreateHeldItemIcon_806DCD4(u8 taskId, u8 monIndex, u16 item)
 {
     u8 monIconSpriteId;
     u8 heldItemSpriteId;
@@ -3179,7 +3183,7 @@ void CreateHeldItemIcon_806DCD4(int taskId, u8 monIndex, int item)
 }
 #else
 __attribute__((naked))
-void CreateHeldItemIcon_806DCD4(u8 a, u8 monIndex)
+void CreateHeldItemIcon_806DCD4(u8 taskId, u8 monIndex, u16 item)
 {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\
@@ -3985,19 +3989,19 @@ void DisplayGiveHeldItemMessage(u8 a, u16 b, u8 c)
     sub_806E834(gStringVar4, c);
 }
 
-
-// Not sure about this one for now.
-/*
 void PartyMenuTryGiveMonMail(u8 taskId, TaskFunc func)
 {
+    u32 var1;
     u16 currentItem;
-    struct MailStruct *r4;
+    struct MailStruct *mail;
 
     gTasks[taskId].func = TaskDummy;
     sub_806E8D0(taskId, 0, func);
     currentItem = GetMonData(ewram1C000.pokemon, MON_DATA_HELD_ITEM);
     gUnknown_0202E8F4 = 0;
-    r4 = &gSaveBlock1.mail[ewram1F000.unkE00[0] + ewram1F000.unkE00[2]];
+    var1 = ewram1FE00.unkE00 + 6;
+    mail = &gSaveBlock1.mail[var1 + ewram1FE00.unkE02];
+
     if (currentItem != 0)
     {
         sub_806E834(gOtherText_PokeHoldingItemCantMail, 1);
@@ -4005,87 +4009,11 @@ void PartyMenuTryGiveMonMail(u8 taskId, TaskFunc func)
     }
     else
     {
-        GiveMailToMon2(ewram1C000.pokemon, r4);
-        ClearMailStruct(r4);
+        GiveMailToMon2(ewram1C000.pokemon, mail);
+        ClearMailStruct(mail);
         sub_806E834(gOtherText_MailTransferredMailbox, 1);
         CreateTask(party_menu_link_mon_held_item_object, 5);
     }
-}
-*/
-__attribute__((naked))
-void PartyMenuTryGiveMonMail(u8 taskId, TaskFunc func)
-{
-    asm(".syntax unified\n\
-    push {r4,r5,lr}\n\
-    adds r2, r1, 0\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    ldr r3, _0806ECA0 @ =gTasks\n\
-    lsls r1, r0, 2\n\
-    adds r1, r0\n\
-    lsls r1, 3\n\
-    adds r1, r3\n\
-    ldr r3, _0806ECA4 @ =TaskDummy\n\
-    str r3, [r1]\n\
-    movs r1, 0\n\
-    bl sub_806E8D0\n\
-    ldr r5, _0806ECA8 @ =0x0201c000\n\
-    ldr r0, [r5]\n\
-    movs r1, 0xC\n\
-    bl GetMonData\n\
-    lsls r0, 16\n\
-    ldr r2, _0806ECAC @ =gUnknown_0202E8F4\n\
-    movs r1, 0\n\
-    strb r1, [r2]\n\
-    movs r1, 0xF8\n\
-    lsls r1, 6\n\
-    adds r2, r5, r1\n\
-    ldrb r1, [r2]\n\
-    adds r1, 0x6\n\
-    ldrb r2, [r2, 0x2]\n\
-    adds r1, r2\n\
-    lsls r2, r1, 3\n\
-    adds r2, r1\n\
-    lsls r2, 2\n\
-    ldr r1, _0806ECB0 @ =gSaveBlock1 + 0x2B4C\n\
-    adds r4, r2, r1\n\
-    cmp r0, 0\n\
-    beq _0806ECBC\n\
-    ldr r0, _0806ECB4 @ =gOtherText_PokeHoldingItemCantMail\n\
-    movs r1, 0x1\n\
-    bl sub_806E834\n\
-    ldr r0, _0806ECB8 @ =party_menu_link_mon_held_item_object\n\
-    movs r1, 0x5\n\
-    bl CreateTask\n\
-    b _0806ECDA\n\
-    .align 2, 0\n\
-_0806ECA0: .4byte gTasks\n\
-_0806ECA4: .4byte TaskDummy\n\
-_0806ECA8: .4byte 0x0201c000\n\
-_0806ECAC: .4byte gUnknown_0202E8F4\n\
-_0806ECB0: .4byte gSaveBlock1 + 0x2B4C\n\
-_0806ECB4: .4byte gOtherText_PokeHoldingItemCantMail\n\
-_0806ECB8: .4byte party_menu_link_mon_held_item_object\n\
-_0806ECBC:\n\
-    ldr r0, [r5]\n\
-    adds r1, r4, 0\n\
-    bl GiveMailToMon2\n\
-    adds r0, r4, 0\n\
-    bl ClearMailStruct\n\
-    ldr r0, _0806ECE0 @ =gOtherText_MailTransferredMailbox\n\
-    movs r1, 0x1\n\
-    bl sub_806E834\n\
-    ldr r0, _0806ECE4 @ =party_menu_link_mon_held_item_object\n\
-    movs r1, 0x5\n\
-    bl CreateTask\n\
-_0806ECDA:\n\
-    pop {r4,r5}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_0806ECE0: .4byte gOtherText_MailTransferredMailbox\n\
-_0806ECE4: .4byte party_menu_link_mon_held_item_object\n\
-    .syntax divided\n");
 }
 
 void PartyMenuTryGiveMonHeldItem_806ECE8(u8 taskId, TaskFunc func)
@@ -5398,121 +5326,123 @@ void DoEvolutionStoneItemEffect(u8 taskId, u16 evolutionStoneItem, TaskFunc c)
     }
 }
 
-// u8 GetItemEffectType(u16 item)
-// {
-//     const u8 *itemEffect;
-//     register u8 itemEffect0 asm("r1");
-//     u8 mask;
+#ifdef NONMATCHING
+u8 GetItemEffectType(u16 item)
+{
+    const u8 *itemEffect;
+    register u8 itemEffect0 asm("r1");
+    u8 mask;
 
-//     // Read the item's effect properties.
-//     if (item == ITEM_ENIGMA_BERRY)
-//     {
-//         itemEffect = gSaveBlock1.enigmaBerry.itemEffect;
-//     }
-//     else
-//     {
-//         itemEffect = gItemEffectTable[item - ITEM_POTION];
-//     }
+    // Read the item's effect properties.
+    if (item == ITEM_ENIGMA_BERRY)
+    {
+        itemEffect = gSaveBlock1.enigmaBerry.itemEffect;
+    }
+    else
+    {
+        itemEffect = gItemEffectTable[item - ITEM_POTION];
+    }
 
-//     itemEffect0 = itemEffect[0];
-//     mask = 0x3F;
+    itemEffect0 = itemEffect[0];
+    mask = 0x3F;
 
-//     if ((itemEffect0 & mask) || itemEffect[1] || itemEffect[2] || (itemEffect[3] & 0x80))
-//     {
-//         return 0;
-//     }
-//     else if (itemEffect0 & 0x40)
-//     {
-//         return 10;
-//     }
-//     else if (itemEffect[3] & 0x40)
-//     {
-//         return 1;
-//     }
-//     else if ((itemEffect[3] & mask) || (itemEffect0 >> 7))
-//     {
-//         if ((itemEffect[3] & mask) == 0x20)
-//         {
-//             return 4;
-//         }
-//         else if ((itemEffect[3] & mask) == 0x10)
-//         {
-//             return 3;
-//         }
-//         else if ((itemEffect[3] & mask) == 0x8)
-//         {
-//             return 5;
-//         }
-//         else if ((itemEffect[3] & mask) == 0x4)
-//         {
-//             return 6;
-//         }
-//         else if ((itemEffect[3] & mask) == 0x2)
-//         {
-//             return 7;
-//         }
-//         else if ((itemEffect[3] & mask) == 0x1)
-//         {
-//             return 8;
-//         }
-//         else if ((itemEffect0 >> 7) != 0 && (itemEffect[3] & mask) == 0)
-//         {
-//             return 9;
-//         }
-//         else
-//         {
-//             return 11;
-//         }
-//     }
-//     else if (itemEffect[4] & 0x44)
-//     {
-//         return 2;
-//     }
-//     else if (itemEffect[4] & 0x2)
-//     {
-//         return 12;
-//     }
-//     else if (itemEffect[4] & 0x1)
-//     {
-//         return 13;
-//     }
-//     else if (itemEffect[5] & 0x8)
-//     {
-//         return 14;
-//     }
-//     else if (itemEffect[5] & 0x4)
-//     {
-//         return 15;
-//     }
-//     else if (itemEffect[5] & 0x2)
-//     {
-//         return 16;
-//     }
-//     else if (itemEffect[5] & 0x1)
-//     {
-//         return 17;
-//     }
-//     else if (itemEffect[4] & 0x80)
-//     {
-//         return 18;
-//     }
-//     else if (itemEffect[4] & 0x20)
-//     {
-//         return 19;
-//     }
-//     else if (itemEffect[5] & 0x10)
-//     {
-//         return 20;
-//     }
-//     else if (itemEffect[4] & 0x18)
-//     {
-//         return 21;
-//     }
-//     else
-//     {
-//         return 22;
-//     }
-// }
+    if ((itemEffect0 & mask) || itemEffect[1] || itemEffect[2] || (itemEffect[3] & 0x80))
+    {
+        return 0;
+    }
+    else if (itemEffect0 & 0x40)
+    {
+        return 10;
+    }
+    else if (itemEffect[3] & 0x40)
+    {
+        return 1;
+    }
+    else if ((itemEffect[3] & mask) || (itemEffect0 >> 7))
+    {
+        if ((itemEffect[3] & mask) == 0x20)
+        {
+            return 4;
+        }
+        else if ((itemEffect[3] & mask) == 0x10)
+        {
+            return 3;
+        }
+        else if ((itemEffect[3] & mask) == 0x8)
+        {
+            return 5;
+        }
+        else if ((itemEffect[3] & mask) == 0x4)
+        {
+            return 6;
+        }
+        else if ((itemEffect[3] & mask) == 0x2)
+        {
+            return 7;
+        }
+        else if ((itemEffect[3] & mask) == 0x1)
+        {
+            return 8;
+        }
+        else if ((itemEffect0 >> 7) != 0 && (itemEffect[3] & mask) == 0)
+        {
+            return 9;
+        }
+        else
+        {
+            return 11;
+        }
+    }
+    else if (itemEffect[4] & 0x44)
+    {
+        return 2;
+    }
+    else if (itemEffect[4] & 0x2)
+    {
+        return 12;
+    }
+    else if (itemEffect[4] & 0x1)
+    {
+        return 13;
+    }
+    else if (itemEffect[5] & 0x8)
+    {
+        return 14;
+    }
+    else if (itemEffect[5] & 0x4)
+    {
+        return 15;
+    }
+    else if (itemEffect[5] & 0x2)
+    {
+        return 16;
+    }
+    else if (itemEffect[5] & 0x1)
+    {
+        return 17;
+    }
+    else if (itemEffect[4] & 0x80)
+    {
+        return 18;
+    }
+    else if (itemEffect[4] & 0x20)
+    {
+        return 19;
+    }
+    else if (itemEffect[5] & 0x10)
+    {
+        return 20;
+    }
+    else if (itemEffect[4] & 0x18)
+    {
+        return 21;
+    }
+    else
+    {
+        return 22;
+    }
+}
+#else
 __attribute__((naked))
 u8 GetItemEffectType(u16 item)
 {
@@ -5709,6 +5639,7 @@ _08070F8A:\n\
     bx r1\n\
     .syntax divided\n");
 }
+#endif // NONMATCHING
 
 void unref_sub_8070F90(void)
 {
