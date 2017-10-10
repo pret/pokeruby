@@ -38,11 +38,11 @@ struct PartyPopupMenu
 struct Unk201B000
 {
     struct Pokemon unk0[6];
-    u8 unk258;
-    u8 unk259;
+    u8 menuType;
+    u8 promptTextId;
     u8 filler25A[2];
-    TaskFunc taskFunc;
-    u8 unk260;
+    TaskFunc menuHandler;
+    u8 menuHandlerTaskId;
     u8 unk261;
     u8 unk262;
     u8 unk263;
@@ -57,13 +57,13 @@ struct Unk201B000
 struct Struct201B000
 {
     u8 filler0[0x259];
-    u8 unk259;
+    u8 promptTextId;
     u8 filler25A[6];
-    u8 unk260;
+    u8 menuHandlerTaskId;
     u8 unk261;
     u8 unk262;
-    s16 unk264;
-    s16 unk266;
+    s16 setupState;
+    s16 monIndex;
     s16 unk268;
     u8 filler26A[8];
     u16 unk272;
@@ -95,7 +95,7 @@ extern u8 ewram[];
 
 void CB2_PartyMenuMain(void);
 void sub_806C658(u8 taskId, s8 directionPressed);
-void sub_806AF4C(u8 a, u8 battleFlags, TaskFunc func, u8 d);
+void SetPartyMenuSettings(u8 menuType, u8 battleTypeFlags, TaskFunc menuHandlerFunc, u8 textId);
 void OpenPartyMenu(u8 menuType, u8 battleFlags);
 bool8 InitPartyMenu(void);
 bool8 IsLinkDoubleBattle(void);
@@ -118,7 +118,7 @@ void sub_806CD44(u8 taskId);
 void sub_806D3B4(u8 taskId, u16 species1, u16 species2);
 void sub_806D4AC(u8 taskId, u16 species, u8 c);
 void sub_806D50C(u8 taskId, u8 monIndex);
-void sub_806D538(u8 arg0, u8 arg1);
+void PrintPartyMenuPromptText(u8 textId, u8 b);
 void sub_806D5A4(void);
 void SetMonIconAnim(u8 spriteId, struct Pokemon *pokemon);
 void CreatePartyMenuMonIcon(u8 taskId, u8 monIndex, u8 c, struct Pokemon *pokemon);

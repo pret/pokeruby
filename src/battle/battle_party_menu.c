@@ -348,91 +348,91 @@ void sub_8094E4C(void)
 
 bool8 SetUpBattlePartyMenu(void)
 {
-    switch (EWRAM_1B000.unk264)
+    switch (EWRAM_1B000.setupState)
     //switch (ewram1B000.unk264[0])
     {
     case 0:
         //TODO: try to get rid of this duplicate code
         if (IsLinkDoubleBattle() == TRUE)
         {
-            if (EWRAM_1B000.unk266 != 6)
+            if (EWRAM_1B000.monIndex != 6)
             {
-                TryCreatePartyMenuMonIcon(EWRAM_1B000.unk260, EWRAM_1B000.unk266, &gPlayerParty[EWRAM_1B000.unk266]);
-                EWRAM_1B000.unk266++;
+                TryCreatePartyMenuMonIcon(EWRAM_1B000.menuHandlerTaskId, EWRAM_1B000.monIndex, &gPlayerParty[EWRAM_1B000.monIndex]);
+                EWRAM_1B000.monIndex++;
             }
             else
             {
-                EWRAM_1B000.unk266 = 0;
-                EWRAM_1B000.unk264++;
+                EWRAM_1B000.monIndex = 0;
+                EWRAM_1B000.setupState++;
             }
         }
         else
         {
-            if (EWRAM_1B000.unk266 < 6)
+            if (EWRAM_1B000.monIndex < 6)
             {
-                TryCreatePartyMenuMonIcon(EWRAM_1B000.unk260, EWRAM_1B000.unk266, &gPlayerParty[EWRAM_1B000.unk266]);
-                EWRAM_1B000.unk266++;
+                TryCreatePartyMenuMonIcon(EWRAM_1B000.menuHandlerTaskId, EWRAM_1B000.monIndex, &gPlayerParty[EWRAM_1B000.monIndex]);
+                EWRAM_1B000.monIndex++;
             }
             else
             {
-                EWRAM_1B000.unk266 = 0;
-                EWRAM_1B000.unk264++;
+                EWRAM_1B000.monIndex = 0;
+                EWRAM_1B000.setupState++;
             }
         }
         break;
     case 1:
         LoadHeldItemIconGraphics();
-        EWRAM_1B000.unk264++;
+        EWRAM_1B000.setupState++;
         break;
     case 2:
-        CreateHeldItemIcons_806DC34(EWRAM_1B000.unk260);
-        EWRAM_1B000.unk264++;
+        CreateHeldItemIcons_806DC34(EWRAM_1B000.menuHandlerTaskId);
+        EWRAM_1B000.setupState++;
         break;
     case 3:
-        if (sub_806BD58(EWRAM_1B000.unk260, EWRAM_1B000.unk266) == 1)
+        if (sub_806BD58(EWRAM_1B000.menuHandlerTaskId, EWRAM_1B000.monIndex) == 1)
         {
-            EWRAM_1B000.unk266 = 0;
-            EWRAM_1B000.unk264++;
+            EWRAM_1B000.monIndex = 0;
+            EWRAM_1B000.setupState++;
         }
         else
-            EWRAM_1B000.unk266++;
+            EWRAM_1B000.monIndex++;
         break;
     case 4:
         PartyMenuPrintMonsLevelOrStatus();
-        EWRAM_1B000.unk264++;
+        EWRAM_1B000.setupState++;
         break;
     case 5:
         PrintPartyMenuMonNicknames();
-        EWRAM_1B000.unk264++;
+        EWRAM_1B000.setupState++;
         break;
     case 6:
         PartyMenuTryPrintMonsHP();
-        EWRAM_1B000.unk264++;
+        EWRAM_1B000.setupState++;
         break;
     case 7:
         nullsub_13();
-        EWRAM_1B000.unk264++;
+        EWRAM_1B000.setupState++;
         break;
     case 8:
         PartyMenuDrawHPBars();
-        EWRAM_1B000.unk264++;
+        EWRAM_1B000.setupState++;
         break;
     case 9:
-        if (sub_806B58C(EWRAM_1B000.unk266) == 1)
+        if (sub_806B58C(EWRAM_1B000.monIndex) == 1)
         {
-            EWRAM_1B000.unk266 = 0;
-            EWRAM_1B000.unk264++;
+            EWRAM_1B000.monIndex = 0;
+            EWRAM_1B000.setupState++;
         }
         else
-            EWRAM_1B000.unk266++;
+            EWRAM_1B000.monIndex++;
         break;
     case 10:
         if (gUnknown_02038473 == 3)
         {
             if (GetItemEffectType(gScriptItemId) == 10)
-                ewram1B000.unk259 = 0xFF;
+                ewram1B000.promptTextId = 0xFF;
             else
-                ewram1B000.unk259 = 3;
+                ewram1B000.promptTextId = 3;
         }
         return TRUE;
     }
@@ -445,19 +445,19 @@ static void sub_8095050(u8 a, u8 b)
     {
         if (gUnknown_02038473 == 1)
         {
-            gTasks[EWRAM_1B000.unk260].data[4] = 1;
-            gTasks[EWRAM_1B000.unk260].data[5] = 1;
+            gTasks[EWRAM_1B000.menuHandlerTaskId].data[4] = 1;
+            gTasks[EWRAM_1B000.menuHandlerTaskId].data[5] = 1;
         }
         else
         {
-            gTasks[EWRAM_1B000.unk260].data[4] = 0;
-            gTasks[EWRAM_1B000.unk260].data[5] = 0;
+            gTasks[EWRAM_1B000.menuHandlerTaskId].data[4] = 0;
+            gTasks[EWRAM_1B000.menuHandlerTaskId].data[5] = 0;
         }
     }
     else
     {
-        gTasks[EWRAM_1B000.unk260].data[4] = 2;
-        gTasks[EWRAM_1B000.unk260].data[5] = 2;
+        gTasks[EWRAM_1B000.menuHandlerTaskId].data[4] = 2;
+        gTasks[EWRAM_1B000.menuHandlerTaskId].data[5] = 2;
     }
 
     ShowPartyPopupMenu(gTasks[a].data[4], sBattlePartyPopupMenus, sBattlePartyMenuActions, 0);
@@ -556,7 +556,7 @@ static void Task_8095330(u8 taskId)
 static void Task_809535C(void)
 {
     gPaletteFade.bufferTransferDisabled = TRUE;
-    sub_806AF4C(1, 0xFF, HandleBattlePartyMenu, 5);
+    SetPartyMenuSettings(PARTY_MENU_TYPE_BATTLE, 0xFF, HandleBattlePartyMenu, 5);
     SetMainCallback2(Task_809538C);
 }
 
@@ -566,11 +566,11 @@ static void Task_809538C(void)
     {
         if (InitPartyMenu() == TRUE)
         {
-            sub_806C994(EWRAM_1B000.unk260, gUnknown_020384F0);
-            sub_806BF74(EWRAM_1B000.unk260, 0);
+            sub_806C994(EWRAM_1B000.menuHandlerTaskId, gUnknown_020384F0);
+            sub_806BF74(EWRAM_1B000.menuHandlerTaskId, 0);
             GetMonNickname(&gPlayerParty[gUnknown_020384F0], gStringVar1);
-            sub_8095050(EWRAM_1B000.unk260, gUnknown_020384F0);
-            SetTaskFuncWithFollowupFunc(EWRAM_1B000.unk260, Task_HandlePopupMenuInput, HandleBattlePartyMenu);
+            sub_8095050(EWRAM_1B000.menuHandlerTaskId, gUnknown_020384F0);
+            SetTaskFuncWithFollowupFunc(EWRAM_1B000.menuHandlerTaskId, Task_HandlePopupMenuInput, HandleBattlePartyMenu);
             SetMainCallback2(CB2_PartyMenuMain);
             return;
         }
@@ -729,6 +729,6 @@ static void Task_BattlePartyMenuCancel(u8 taskId)
     HandleDestroyMenuCursors();
     ClosePartyPopupMenu(gTasks[taskId].data[4], sBattlePartyPopupMenus);
     gTasks[taskId].data[4] = gTasks[taskId].data[5];
-    sub_806D538(0, 0);
+    PrintPartyMenuPromptText(0, 0);
     SwitchTaskToFollowupFunc(taskId);
 }

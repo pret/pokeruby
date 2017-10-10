@@ -132,7 +132,7 @@ static void sub_8133E74(u8 taskId) {
     }
 
     MenuZeroFillWindowRect(WINDOW_LEFT, 14, WINDOW_RIGHT, 19);
-    sub_806D538(3, 0);
+    PrintPartyMenuPromptText(3, 0);
     gTasks[taskId].func = sub_806CB74;
 }
 
@@ -148,6 +148,6 @@ static void sub_8133EF8(void) {
     EWRAM_1B000_2.unk261 = 2;
     DestroySprite(&gSprites[EWRAM_1000.unk1]);
     MenuZeroFillWindowRect(WINDOW_LEFT, 14, WINDOW_RIGHT, 19);
-    sub_806D538(0, 0);
+    PrintPartyMenuPromptText(0, 0);
     SwitchTaskToFollowupFunc(EWRAM_1000.unk0);
 }

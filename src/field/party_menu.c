@@ -75,8 +75,8 @@ static void sub_8070D90(u8 taskId);
 static void sub_806D5B8(u8 taskId);
 static void sub_806D014(u8 taskId);
 static void sub_806D118(u8 taskId);
-static void sub_806B460(void);
-static void sub_806B548(void);
+static void CB2_InitPartyMenu(void);
+static void DrawPartyMonBackgrounds(void);
 static void sub_806BA94(s16 a, u16 b, u8 c, u8 d);
 static void sub_806B9A4(s16 a, u16 b, u8 c);
 static void sub_806CA18(u8 taskId, u8 b);
@@ -168,13 +168,13 @@ asm(".4byte gTileBuffer\n");
 static const u8 MenuGfx_HoldIcons[] = INCBIN_U8("graphics/interface/hold_icons.4bpp");
 static const u16 MenuPal_HoldIcons[] = INCBIN_U16("graphics/interface/hold_icons.gbapal");
 
-static const struct SpriteSheet gUnknown_083765DC = {
+static const struct SpriteSheet HeldItemsSpriteSheet = {
     MenuGfx_HoldIcons,
     sizeof MenuGfx_HoldIcons,
     0xd750
 };
 
-static const struct SpritePalette gUnknown_083765E4 = {
+static const struct SpritePalette HeldItemsPalette = {
     MenuPal_HoldIcons,
     0xd750
 };
@@ -246,14 +246,14 @@ static const u8 *const gUnknown_08376624[] = {
 };
 
 static const struct Coords8 gUnknown_08376678[8][6] = {
-    {{16, 40}, {104, 18}, {104, 42}, {104, 66}, {104, 90}, {104, 114}},
-    {{16, 24}, { 16, 80}, {104, 18}, {104, 50}, {104, 82}, {104, 114}},
-    {{16, 24}, { 16, 80}, {104, 26}, {104, 50}, {104, 82}, {104, 106}},
-    {{16, 24}, {104, 26}, {104, 50}, { 16, 80}, {104, 82}, {104, 106}},
-    {{ 5,  4}, { 16,  1}, { 16,  4}, { 16,  7}, { 16, 10}, { 16,  13}},
-    {{ 5,  2}, {  5,  9}, { 16,  1}, { 16,  5}, { 16,  9}, { 16,  13}},
-    {{ 5,  2}, {  5,  9}, { 16,  2}, { 16,  5}, { 16,  9}, { 16,  12}},
-    {{ 5,  2}, { 16,  2}, { 16,  5}, {  5,  9}, { 16,  9}, { 16,  12}},
+    {{16, 40}, {104, 18}, {104, 42}, {104, 66}, {104, 90}, {104, 114}}, // PARTY_MENU_TYPE_STANDARD
+    {{16, 24}, { 16, 80}, {104, 18}, {104, 50}, {104, 82}, {104, 114}}, // PARTY_MENU_TYPE_BATTLE
+    {{16, 24}, { 16, 80}, {104, 26}, {104, 50}, {104, 82}, {104, 106}}, // PARTY_MENU_TYPE_CONTEST
+    {{16, 24}, {104, 26}, {104, 50}, { 16, 80}, {104, 82}, {104, 106}}, // PARTY_MENU_TYPE_IN_GAME_TRADE
+    {{ 5,  4}, { 16,  1}, { 16,  4}, { 16,  7}, { 16, 10}, { 16,  13}}, // PARTY_MENU_TYPE_BATTLE_TOWER
+    {{ 5,  2}, {  5,  9}, { 16,  1}, { 16,  5}, { 16,  9}, { 16,  13}}, // PARTY_MENU_TYPE_LINK_MULTI_BATTLE
+    {{ 5,  2}, {  5,  9}, { 16,  2}, { 16,  5}, { 16,  9}, { 16,  12}}, // PARTY_MENU_TYPE_DAYCARE
+    {{ 5,  2}, { 16,  2}, { 16,  5}, {  5,  9}, { 16,  9}, { 16,  12}}, // PARTY_MENU_TYPE_MOVE_TUTOR
 };
 
 static const struct Coords8 gUnknown_08376738[12][6] = {
@@ -272,16 +272,16 @@ static const struct Coords8 gUnknown_08376738[12][6] = {
 };
 
 static u16 *const gUnknown_08376858[4][6] = {
-    {(u16*)(BG_VRAM + 0xF1C8), (u16*)(BG_VRAM + 0xF0AE), (u16*)(BG_VRAM + 0xF16E), (u16*)(BG_VRAM + 0xF22E), (u16*)(BG_VRAM + 0xF2EE), (u16*)(BG_VRAM + 0xF3AE)},
-    {(u16*)(BG_VRAM + 0xF148), (u16*)(BG_VRAM + 0xF308), (u16*)(BG_VRAM + 0xF0AE), (u16*)(BG_VRAM + 0xF1AE), (u16*)(BG_VRAM + 0xF2AE), (u16*)(BG_VRAM + 0xF3AE)},
-    {(u16*)(BG_VRAM + 0xF148), (u16*)(BG_VRAM + 0xF308), (u16*)(BG_VRAM + 0xF0EE), (u16*)(BG_VRAM + 0xF1AE), (u16*)(BG_VRAM + 0xF2AE), (u16*)(BG_VRAM + 0xF36E)},
-    {(u16*)(BG_VRAM + 0xF148), (u16*)(BG_VRAM + 0xF0EE), (u16*)(BG_VRAM + 0xF1AE), (u16*)(BG_VRAM + 0xF308), (u16*)(BG_VRAM + 0xF2AE), (u16*)(BG_VRAM + 0xF36E)},
+    {(u16*)(BG_VRAM + 0xF1C8), (u16*)(BG_VRAM + 0xF0AE), (u16*)(BG_VRAM + 0xF16E), (u16*)(BG_VRAM + 0xF22E), (u16*)(BG_VRAM + 0xF2EE), (u16*)(BG_VRAM + 0xF3AE)}, // PARTY_MENU_STANDARD
+    {(u16*)(BG_VRAM + 0xF148), (u16*)(BG_VRAM + 0xF308), (u16*)(BG_VRAM + 0xF0AE), (u16*)(BG_VRAM + 0xF1AE), (u16*)(BG_VRAM + 0xF2AE), (u16*)(BG_VRAM + 0xF3AE)}, // PARTY_MENU_LAYOUT_DOUBLE_BATTLE
+    {(u16*)(BG_VRAM + 0xF148), (u16*)(BG_VRAM + 0xF308), (u16*)(BG_VRAM + 0xF0EE), (u16*)(BG_VRAM + 0xF1AE), (u16*)(BG_VRAM + 0xF2AE), (u16*)(BG_VRAM + 0xF36E)}, // PARTY_MENU_LAYOUT_LINK_DOUBLE_BATTLE
+    {(u16*)(BG_VRAM + 0xF148), (u16*)(BG_VRAM + 0xF0EE), (u16*)(BG_VRAM + 0xF1AE), (u16*)(BG_VRAM + 0xF308), (u16*)(BG_VRAM + 0xF2AE), (u16*)(BG_VRAM + 0xF36E)}, // PARTY_MENU_LAYOUT_MULTI_BATTLE
 };
 
 static const struct Coords8 gUnknown_083768B8[3][8] = {
-    {{8,  44}, {92,  22}, {92,  46}, {92,  70}, {92,  94}, {92, 118}, {196, 136}, {196, 152}},
-    {{8,  28}, { 8,  84}, {92,  22}, {92,  54}, {92,  86}, {92, 118}, {196, 136}, {196, 152}},
-    {{8,  28}, { 8,  84}, {92,  30}, {92,  54}, {92,  86}, {92, 110}, {196, 136}, {196, 152}},
+    {{8,  44}, {92,  22}, {92,  46}, {92,  70}, {92,  94}, {92, 118}, {196, 136}, {196, 152}}, // PARTY_MENU_LAYOUT_STANDARD
+    {{8,  28}, { 8,  84}, {92,  22}, {92,  54}, {92,  86}, {92, 118}, {196, 136}, {196, 152}}, // PARTY_MENU_LAYOUT_DOUBLE_BATTLE
+    {{8,  28}, { 8,  84}, {92,  30}, {92,  54}, {92,  86}, {92, 110}, {196, 136}, {196, 152}}, // PARTY_MENU_LAYOUT_LINK_DOUBLE_BATTLE
 };
 
 static u16 *const gUnknown_08376918[2][PARTY_SIZE] = {
@@ -611,99 +611,97 @@ void VBlankCB_PartyMenu(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
-    sub_806B548();
+    DrawPartyMonBackgrounds();
 }
 
-void sub_806AF4C(u8 a, u8 battleTypeFlags, TaskFunc func, u8 d)
+void SetPartyMenuSettings(u8 menuType, u8 battleTypeFlags, TaskFunc menuHandlerFunc, u8 textId)
 {
     if (battleTypeFlags != 0xFF)
     {
         gBattleTypeFlags = battleTypeFlags;
     }
 
-    ewram1B000.unk258 = a;
-    ewram1B000.taskFunc = func;
-    ewram1B000.unk259 = d;
+    ewram1B000.menuType = menuType;
+    ewram1B000.menuHandler = menuHandlerFunc;
+    ewram1B000.promptTextId = textId;
 }
 
-void sub_806AF8C(u8 a, u8 battleFlags, TaskFunc func, u8 d)
+void DoOpenPartyMenu(u8 menuType, u8 battleFlags, TaskFunc menuHandlerFunc, u8 textId)
 {
-    sub_806AF4C(a, battleFlags, func, d);
-    SetMainCallback2(sub_806B460);
+    SetPartyMenuSettings(menuType, battleFlags, menuHandlerFunc, textId);
+    SetMainCallback2(CB2_InitPartyMenu);
 }
 
 void OpenPartyMenu(u8 menuType, u8 battleFlags)
 {
-    sub_806AF8C(menuType, battleFlags, PartyMenuHandlers[menuType].menuHandler, PartyMenuHandlers[menuType].initialPromptTextId);
+    DoOpenPartyMenu(menuType, battleFlags, PartyMenuHandlers[menuType].menuHandler, PartyMenuHandlers[menuType].initialPromptTextId);
 }
 
+// This is a Task which is repeatedly called until it eventually returns TRUE when finished.
 bool8 SetupDefaultPartyMenu(void)
 {
-    switch (ewram1B000_alt.unk264)
+    switch (ewram1B000_alt.setupState)
     {
     case 0:
-        if (ewram1B000_alt.unk266 < gPlayerPartyCount)
-        {
-            TryCreatePartyMenuMonIcon(ewram1B000_alt.unk260, ewram1B000_alt.unk266, &gPlayerParty[ewram1B000_alt.unk266]);
-            ewram1B000_alt.unk266++;
-        }
-        else
-        {
-            ewram1B000_alt.unk266 = 0;
-            ewram1B000_alt.unk264++;
+        if (ewram1B000_alt.monIndex < gPlayerPartyCount) {
+            TryCreatePartyMenuMonIcon(ewram1B000_alt.menuHandlerTaskId, ewram1B000_alt.monIndex, &gPlayerParty[ewram1B000_alt.monIndex]);
+            ewram1B000_alt.monIndex++;
+        } else {
+            ewram1B000_alt.monIndex = 0;
+            ewram1B000_alt.setupState++;
         }
 
-        break;;
+        break;
     case 1:
         LoadHeldItemIconGraphics();
-        ewram1B000_alt.unk264++;
+        ewram1B000_alt.setupState++;
         break;
     case 2:
-        CreateHeldItemIcons_806DC34(ewram1B000_alt.unk260);
-        ewram1B000_alt.unk264++;
+        CreateHeldItemIcons_806DC34(ewram1B000_alt.menuHandlerTaskId);
+        ewram1B000_alt.setupState++;
         break;
     case 3:
-        if (sub_806BD58(ewram1B000_alt.unk260, ewram1B000_alt.unk266) != 1)
+        if (sub_806BD58(ewram1B000_alt.menuHandlerTaskId, ewram1B000_alt.monIndex) != 1)
         {
-            ewram1B000_alt.unk266++;
+            ewram1B000_alt.monIndex++;
         }
         else
         {
-            ewram1B000_alt.unk266 = 0;
-            ewram1B000_alt.unk264++;
+            ewram1B000_alt.monIndex = 0;
+            ewram1B000_alt.setupState++;
         }
 
         break;
     case 4:
         PartyMenuPrintMonsLevelOrStatus();
-        ewram1B000_alt.unk264++;
+        ewram1B000_alt.setupState++;
         break;
     case 5:
         PrintPartyMenuMonNicknames();
-        ewram1B000_alt.unk264++;
+        ewram1B000_alt.setupState++;
         break;
     case 6:
         PartyMenuTryPrintMonsHP();
-        ewram1B000_alt.unk264++;
+        ewram1B000_alt.setupState++;
         break;
     case 7:
         nullsub_13();
-        ewram1B000_alt.unk264++;
+        ewram1B000_alt.setupState++;
         break;
     case 8:
         PartyMenuDrawHPBars();
-        ewram1B000_alt.unk264++;
+        ewram1B000_alt.setupState++;
         break;
     case 9:
-        if (sub_806B58C(ewram1B000_alt.unk266) == 1)
+        if (sub_806B58C(ewram1B000_alt.monIndex) == 1)
         {
-            ewram1B000_alt.unk266 = 0;
-            ewram1B000_alt.unk264 = 0;
+            ewram1B000_alt.monIndex = 0;
+            ewram1B000_alt.setupState = 0;
             return TRUE;
         }
         else
         {
-            ewram1B000_alt.unk266++;
+            ewram1B000_alt.monIndex++;
             break;
         }
     }
@@ -746,8 +744,8 @@ bool8 InitPartyMenu(void)
         break;
     case 2:
         sub_806B4A8();
-        ewram1B000_alt.unk264 = 0;
-        ewram1B000_alt.unk266 = 0;
+        ewram1B000_alt.setupState = 0;
+        ewram1B000_alt.monIndex = 0;
         ewram1B000_alt.unk268 = 0;
         gMain.state++;
         break;
@@ -756,7 +754,7 @@ bool8 InitPartyMenu(void)
         gMain.state++;
         break;
     case 4:
-        if (ewram1B000.unk258 != 1 && ewram1B000.unk258 != 5)
+        if (ewram1B000.menuType != PARTY_MENU_TYPE_BATTLE && ewram1B000.menuType != PARTY_MENU_TYPE_LINK_MULTI_BATTLE)
         {
             ResetTasks();
         }
@@ -768,7 +766,7 @@ bool8 InitPartyMenu(void)
         gMain.state++;
         break;
     case 6:
-        ewram1B000.unk260 = CreateTask(ewram1B000.taskFunc, 0);
+        ewram1B000.menuHandlerTaskId = CreateTask(ewram1B000.menuHandler, 0);
         gMain.state++;
         break;
     case 7:
@@ -783,19 +781,19 @@ bool8 InitPartyMenu(void)
     case 9:
         if (MultistepLoadFont())
         {
-            ewram1B000_alt.unk264 = 1;
+            ewram1B000_alt.setupState = 1;
             gMain.state++;
         }
         break;
     case 10:
-        if (LoadPartyMenuGraphics(ewram1B000_alt.unk264) == TRUE)
+        if (LoadPartyMenuGraphics(ewram1B000_alt.setupState) == TRUE)
         {
-            ewram1B000_alt.unk264 = 0;
+            ewram1B000_alt.setupState = 0;
             gMain.state++;
         }
         else
         {
-            ewram1B000_alt.unk264++;
+            ewram1B000_alt.setupState++;
         }
         break;
     case 11:
@@ -803,7 +801,7 @@ bool8 InitPartyMenu(void)
         gMain.state++;
         break;
     case 12:
-        if (PartyMenuHandlers[ewram1B000.unk258].menuSetup() == TRUE)
+        if (PartyMenuHandlers[ewram1B000.menuType].menuSetup() == TRUE)
         {
             gMain.state++;
         }
@@ -819,7 +817,7 @@ bool8 InitPartyMenu(void)
         }
         break;
     case 15:
-        sub_806D538(ewram1B000.unk259, 0);
+        PrintPartyMenuPromptText(ewram1B000.promptTextId, 0);
         gMain.state++;
         break;
     case 16:
@@ -835,7 +833,7 @@ bool8 InitPartyMenu(void)
     return FALSE;
 }
 
-void sub_806B460(void)
+void CB2_InitPartyMenu(void)
 {
     while (InitPartyMenu() != TRUE)
     {
@@ -845,9 +843,9 @@ void sub_806B460(void)
         }
     }
 
-    if (ewram1B000.unk258 != 5)
+    if (ewram1B000.menuType != PARTY_MENU_TYPE_LINK_MULTI_BATTLE)
     {
-        sub_806BF74(ewram1B000.unk260, 0);
+        sub_806BF74(ewram1B000.menuHandlerTaskId, 0);
     }
 
     SetMainCallback2(CB2_PartyMenuMain);
@@ -881,7 +879,8 @@ bool8 IsLinkDoubleBattle()
         return FALSE;
 }
 
-void sub_806B548(void)
+// Draws the blue rectangular regions surrounding each of the party mons.
+void DrawPartyMonBackgrounds(void)
 {
     if (ewram1B000.unk261)
     {
@@ -896,7 +895,7 @@ void sub_806B548(void)
     }
 }
 
-bool8 sub_806B58C(u8 a)
+bool8 sub_806B58C(u8 monIndex)
 {
     const u8 *arr;
 
@@ -909,7 +908,7 @@ bool8 sub_806B58C(u8 a)
 
     arr = &gUnknown_083769A8[gPartyMenuType * 12];
 
-    switch (a)
+    switch (monIndex)
     {
     case 0:
         memset(&gBGTilemapBuffers[2], 0, 0x800);
@@ -1028,7 +1027,7 @@ bool8 sub_806B58C(u8 a)
 
         break;
     case 7:
-        if (ewram1B000.unk258 == 4) {
+        if (ewram1B000.menuType == PARTY_MENU_TYPE_BATTLE_TOWER) {
             sub_806BB9C(1);
         }
 
@@ -1669,8 +1668,8 @@ void sub_806BF74(u8 taskId, s8 directionPressed)
 
         ewram1B000.unk261 = 2;
 
-        gSprites[spriteId].pos1.x = gUnknown_083768B8[2][gSprites[spriteId].data0].x;
-        gSprites[spriteId].pos1.y = gUnknown_083768B8[2][gSprites[spriteId].data0].y;
+        gSprites[spriteId].pos1.x = gUnknown_083768B8[PARTY_MENU_LAYOUT_LINK_DOUBLE_BATTLE][gSprites[spriteId].data0].x;
+        gSprites[spriteId].pos1.y = gUnknown_083768B8[PARTY_MENU_LAYOUT_LINK_DOUBLE_BATTLE][gSprites[spriteId].data0].y;
     }
     else
     {
@@ -2246,8 +2245,8 @@ void sub_806C658(u8 taskId, s8 directionPressed)
         break;
     }
     
-    gSprites[spriteId].pos1.x = gUnknown_083768B8[0][gSprites[spriteId].data0].x;
-    gSprites[spriteId].pos1.y = gUnknown_083768B8[0][gSprites[spriteId].data0].y;
+    gSprites[spriteId].pos1.x = gUnknown_083768B8[PARTY_MENU_LAYOUT_STANDARD][gSprites[spriteId].data0].x;
+    gSprites[spriteId].pos1.y = gUnknown_083768B8[PARTY_MENU_LAYOUT_STANDARD][gSprites[spriteId].data0].y;
 
 
     newMenuIndex = gSprites[spriteId].data0;
@@ -2295,8 +2294,8 @@ void sub_806C890(u8 taskId)
 
         gSprites[spriteId].data1 = 0;
         gSprites[spriteId].data0 = 6;
-        gSprites[spriteId].pos1.x = gUnknown_083768B8[0][6].x;
-        gSprites[spriteId].pos1.y = gUnknown_083768B8[0][6].y;
+        gSprites[spriteId].pos1.x = gUnknown_083768B8[PARTY_MENU_LAYOUT_STANDARD][6].x;
+        gSprites[spriteId].pos1.y = gUnknown_083768B8[PARTY_MENU_LAYOUT_STANDARD][6].y;
 
         sub_806BB9C(2);
 
@@ -2381,7 +2380,7 @@ void sub_806CA60(u8 taskId)
     sub_806C9C4(taskId, ewram01000.unk1);
     ewram01000.unk2 = sub_806CA00(taskId);
 
-    sub_806D538(ewram1B000_alt.unk272, 0);
+    PrintPartyMenuPromptText(ewram1B000_alt.unk272, 0);
 
     sub_806BF24(&gUnknown_083769A8[gSprites[ewram01000.unk1].data0 * 2], gSprites[ewram01000.unk1].data0, 6, 0);
     ewram1B000.unk261 = 2;
@@ -2438,7 +2437,7 @@ void sub_806CB74(u8 taskId)
 void sub_806CC2C(u8 taskId)
 {
     DestroySprite(&gSprites[ewram01000.unk1]);
-    sub_806D538(0, 0);
+    PrintPartyMenuPromptText(0, 0);
 
     ewram1B000.unk261 = 2;
     SwitchTaskToFollowupFunc(ewram01000.unk0);
@@ -2826,7 +2825,7 @@ void sub_806D50C(u8 taskId, u8 monIndex)
     gSprites[GetMonIconSpriteId_maybe(taskId, monIndex)].pos1.x += 0xF0;
 }
 
-void sub_806D538(u8 textId, u8 b)
+void PrintPartyMenuPromptText(u8 textId, u8 b)
 {
     if (textId != 0xFF)
     {
@@ -2969,10 +2968,10 @@ void SetMonIconAnim(u8 spriteId, struct Pokemon *pokemon)
     SetMonIconAnimByHP(spriteId, currentHP, maxHP);
 }
 
-void CreatePartyMenuMonIcon(u8 taskId, u8 monIndex, u8 c, struct Pokemon *pokemon)
+void CreatePartyMenuMonIcon(u8 taskId, u8 monIndex, u8 menuType, struct Pokemon *pokemon)
 {
-    u8 x = gUnknown_08376678[c][monIndex].x;
-    u8 y = gUnknown_08376678[c][monIndex].y;
+    u8 x = gUnknown_08376678[menuType][monIndex].x;
+    u8 y = gUnknown_08376678[menuType][monIndex].y;
 
     u16 species2 = GetMonData(pokemon, MON_DATA_SPECIES2);
     u32 personality = GetMonData(pokemon, MON_DATA_PERSONALITY);
@@ -2982,39 +2981,39 @@ void CreatePartyMenuMonIcon(u8 taskId, u8 monIndex, u8 c, struct Pokemon *pokemo
     SetMonIconAnim(spriteId, pokemon);
 }
 
-void TryCreatePartyMenuMonIcon(u8 a, u8 monIndex, struct Pokemon *pokemon)
+void TryCreatePartyMenuMonIcon(u8 taskId, u8 monIndex, struct Pokemon *pokemon)
 {
     if (GetMonData(pokemon, MON_DATA_SPECIES))
     {
         bool8 isLinkDoubleBattle = IsLinkDoubleBattle();
         if (isLinkDoubleBattle == TRUE)
         {
-            CreatePartyMenuMonIcon(a, monIndex, 2, pokemon);
+            CreatePartyMenuMonIcon(taskId, monIndex, PARTY_MENU_LAYOUT_LINK_DOUBLE_BATTLE, pokemon);
         }
         else
         {
-            CreatePartyMenuMonIcon(a, monIndex, IsDoubleBattle(), pokemon);
+            CreatePartyMenuMonIcon(taskId, monIndex, IsDoubleBattle(), pokemon);
         }
     }
 }
 
-void unref_sub_806D964(u8 a)
+void unref_sub_806D964(u8 taskId)
 {
     u8 i;
     for (i = 0; i < gPlayerPartyCount; i++)
     {
-        TryCreatePartyMenuMonIcon(a, i, &gPlayerParty[i]);
+        TryCreatePartyMenuMonIcon(taskId, i, &gPlayerParty[i]);
     }
 }
 
-void CreateMonIcon_806D99C(u8 taskId, u8 monIndex, u8 c, struct UnknownPokemonStruct2 *d)
+void CreateMonIcon_806D99C(u8 taskId, u8 monIndex, u8 menuType, struct UnknownPokemonStruct2 *pokemon)
 {
-    u8 x = gUnknown_08376678[c][monIndex].x;
-    u8 y = gUnknown_08376678[c][monIndex].y;
+    u8 x = gUnknown_08376678[menuType][monIndex].x;
+    u8 y = gUnknown_08376678[menuType][monIndex].y;
 
-    u8 spriteId = CreateMonIcon(d->species, sub_809D62C, x, y, 5, d->personality);
+    u8 spriteId = CreateMonIcon(pokemon->species, sub_809D62C, x, y, 5, pokemon->personality);
     SetMonIconSpriteId_maybe(taskId, monIndex, spriteId);
-    SetMonIconAnimByHP(spriteId, d->hp, d->maxhp);
+    SetMonIconAnimByHP(spriteId, pokemon->hp, pokemon->maxhp);
 }
 
 void UpdateMonIconFrame_806DA0C(struct Sprite *sprite)
@@ -3063,8 +3062,8 @@ void UpdateMonIconFrame_806DA44(u8 taskId, u8 monIndex, u8 c)
 
 void LoadHeldItemIconGraphics(void)
 {
-    LoadSpriteSheet(&gUnknown_083765DC);
-    LoadSpritePalette(&gUnknown_083765E4);
+    LoadSpriteSheet(&HeldItemsSpriteSheet);
+    LoadSpritePalette(&HeldItemsPalette);
 }
 
 void SpriteCB_HeldItemIcon(struct Sprite *sprite)
@@ -3488,7 +3487,7 @@ void TryPrintPartyMenuMonNickname(u8 monIndex, struct Pokemon *pokemon)
         bool8 isLinkDoubleBattle = IsLinkDoubleBattle();
         if (isLinkDoubleBattle == TRUE)
         {
-            PrintPartyMenuMonNickname(monIndex, 2, pokemon);
+            PrintPartyMenuMonNickname(monIndex, PARTY_MENU_LAYOUT_LINK_DOUBLE_BATTLE, pokemon);
         }
         else
         {
@@ -3513,11 +3512,11 @@ u8 *GetMonNickname(struct Pokemon *pokemon, u8 *stringBuffer)
     return StringGetEnd10(stringBuffer);
 }
 
-void PartyMenuPutStatusTilemap(u8 monIndex, u8 b, u8 status)
+void PartyMenuPutStatusTilemap(u8 monIndex, u8 menuLayout, u8 status)
 {
     u8 i;
-    u8 x = gUnknown_08376738[b][monIndex].x - 1;
-    u8 y = gUnknown_08376738[b][monIndex].y + 1;
+    u8 x = gUnknown_08376738[menuLayout][monIndex].x - 1;
+    u8 y = gUnknown_08376738[menuLayout][monIndex].y + 1;
     u16 *vramPtr = (u16*)(VRAM + 0xF000) + (x + y * 32);
     u8 var1 = status * 4;
 
@@ -3530,7 +3529,7 @@ void PartyMenuPutStatusTilemap(u8 monIndex, u8 b, u8 status)
 static void PartyMenuClearLevelStatusTilemap(u8 monIndex)
 {
     bool8 isLinkDoubleBattle;
-    u8 b;
+    u8 menuLayout;
     u8 x;
     u8 y;
     u16 *vramPtr;
@@ -3539,15 +3538,15 @@ static void PartyMenuClearLevelStatusTilemap(u8 monIndex)
     isLinkDoubleBattle = IsLinkDoubleBattle();
     if (isLinkDoubleBattle == TRUE)
     {
-        b = 2;
+        menuLayout = PARTY_MENU_LAYOUT_LINK_DOUBLE_BATTLE;
     }
     else
     {
-        b = IsDoubleBattle();
+        menuLayout = IsDoubleBattle();
     }
 
-    x = gUnknown_08376738[b][monIndex].x - 1;
-    y = gUnknown_08376738[b][monIndex].y + 1;
+    x = gUnknown_08376738[menuLayout][monIndex].x - 1;
+    y = gUnknown_08376738[menuLayout][monIndex].y + 1;
 
     vramPtr = (u16*)(VRAM + 0xF000) + (x + y * 32);
     for (i = 0; i < 4; i++)
@@ -3562,12 +3561,12 @@ static void PartyMenuWriteTilemap(u8 a, u8 x, u8 y)
     *vramPtr = a + 0x10C;
 }
 
-void PartyMenuDoPrintLevel(u8 monIndex, u8 b, u8 level)
+void PartyMenuDoPrintLevel(u8 monIndex, u8 menuLayout, u8 level)
 {
     u8 *stringVar;
     u32 var1;
-    u8 x = gUnknown_08376738[b][monIndex].x;
-    u8 y = gUnknown_08376738[b][monIndex].y;
+    u8 x = gUnknown_08376738[menuLayout][monIndex].x;
+    u8 y = gUnknown_08376738[menuLayout][monIndex].y;
 
     PartyMenuWriteTilemap(0x40, x - 1, y + 1);
 
@@ -3584,10 +3583,10 @@ void PartyMenuDoPrintLevel(u8 monIndex, u8 b, u8 level)
     CpuFastSet(gUnknown_02039460, (void *)(OBJ_VRAM1 + 0x200 + (monIndex * 0x400)), 32);
 }
 
-void PartyMenuPrintLevel(u8 monIndex, u8 b, struct Pokemon *pokemon)
+void PartyMenuPrintLevel(u8 monIndex, u8 menuLayout, struct Pokemon *pokemon)
 {
     u16 level = GetMonData(pokemon, MON_DATA_LEVEL);
-    PartyMenuDoPrintLevel(monIndex, b, level);
+    PartyMenuDoPrintLevel(monIndex, menuLayout, level);
 }
 
 void PartyMenuPrintMonLevelOrStatus(u8 monIndex, struct Pokemon *pokemon)
@@ -3596,30 +3595,30 @@ void PartyMenuPrintMonLevelOrStatus(u8 monIndex, struct Pokemon *pokemon)
     {
         u8 statusAndPkrs;
         bool8 isLinkDoubleBattle;
-        u8 b;
+        u8 menuLayout;
 
         statusAndPkrs = GetMonStatusAndPokerus(pokemon);
 
         isLinkDoubleBattle = IsLinkDoubleBattle();
         if (isLinkDoubleBattle == TRUE)
         {
-            b = 2;
+            menuLayout = PARTY_MENU_LAYOUT_LINK_DOUBLE_BATTLE;
         }
         else
         {
-            b = IsDoubleBattle();
+            menuLayout = IsDoubleBattle();
         }
 
         if (statusAndPkrs != 0 && statusAndPkrs != 6)
         {
-            PartyMenuPutStatusTilemap(monIndex, b, statusAndPkrs - 1);
+            PartyMenuPutStatusTilemap(monIndex, menuLayout, statusAndPkrs - 1);
         }
         else
         {
-            PartyMenuPrintLevel(monIndex, b, pokemon);
+            PartyMenuPrintLevel(monIndex, menuLayout, pokemon);
         }
 
-        PartyMenuPrintGenderIcon(monIndex, b, pokemon);
+        PartyMenuPrintGenderIcon(monIndex, menuLayout, pokemon);
     }
 }
 
@@ -3633,12 +3632,12 @@ void PartyMenuPrintMonsLevelOrStatus(void)
     }
 }
 
-void PartyMenuDoPrintGenderIcon(u16 species, u8 gender, u8 c, u8 monIndex, u8 *nickname)
+void PartyMenuDoPrintGenderIcon(u16 species, u8 gender, u8 menuLayout, u8 monIndex, u8 *nickname)
 {
     if (!ShouldHideGenderIcon(species, nickname))
     {
-        u8 x = gUnknown_08376738[c][monIndex].x + 3;
-        u8 y = gUnknown_08376738[c][monIndex].y + 1;
+        u8 x = gUnknown_08376738[menuLayout][monIndex].x + 3;
+        u8 y = gUnknown_08376738[menuLayout][monIndex].y + 1;
 
         switch (gender)
         {
@@ -3652,7 +3651,7 @@ void PartyMenuDoPrintGenderIcon(u16 species, u8 gender, u8 c, u8 monIndex, u8 *n
     }
 }
 
-void PartyMenuPrintGenderIcon(u8 monIndex, u8 b, struct Pokemon *pokemon)
+void PartyMenuPrintGenderIcon(u8 monIndex, u8 menuLayout, struct Pokemon *pokemon)
 {
     u16 species2;
     u8 gender;
@@ -3660,7 +3659,7 @@ void PartyMenuPrintGenderIcon(u8 monIndex, u8 b, struct Pokemon *pokemon)
     GetMonNickname(pokemon, gStringVar1);
     species2 = GetMonData(pokemon, MON_DATA_SPECIES2);
     gender = GetMonGender(pokemon);
-    PartyMenuDoPrintGenderIcon(species2, gender, b, monIndex, gStringVar1);
+    PartyMenuDoPrintGenderIcon(species2, gender, menuLayout, monIndex, gStringVar1);
 }
 
 void PartyMenuDoPrintHP(u8 monIndex, u8 b, u16 currentHP, u16 maxHP)
@@ -3696,7 +3695,7 @@ void PartyMenuTryPrintHP(u8 monIndex, struct Pokemon *pokemon)
         bool8 isLinkDoubleBattle = IsLinkDoubleBattle();
         if (isLinkDoubleBattle == TRUE)
         {
-            PartyMenuPrintHP(monIndex, 2, pokemon);
+            PartyMenuPrintHP(monIndex, PARTY_MENU_LAYOUT_LINK_DOUBLE_BATTLE, pokemon);
         }
         else
         {
@@ -3720,7 +3719,7 @@ void unref_sub_806E568(void) { }
 void nullsub_12(u8 monIndex, struct Pokemon *pokemon) { }
 void nullsub_13(void) { }
 
-void PartyMenuDoDrawHPBar(u8 monIndex, u8 b, u16 currentHP, u16 maxHP)
+void PartyMenuDoDrawHPBar(u8 monIndex, u8 menuLayout, u16 currentHP, u16 maxHP)
 {
     u8 hpBarLevel;
     u16 *vramPtr;
@@ -3746,7 +3745,7 @@ void PartyMenuDoDrawHPBar(u8 monIndex, u8 b, u16 currentHP, u16 maxHP)
 
     battleInterface.unk10 = 0x100;
 
-    vramPtr = gUnknown_08376858[b][monIndex];
+    vramPtr = gUnknown_08376858[menuLayout][monIndex];
     sub_80460C8(&battleInterface, &var, vramPtr, 0);
 
     vramPtr -= 2;
@@ -3756,12 +3755,12 @@ void PartyMenuDoDrawHPBar(u8 monIndex, u8 b, u16 currentHP, u16 maxHP)
     vramPtr[8] = 0x310B;
 }
 
-void PartyMenuDrawHPBar(u8 monIndex, u8 b, struct Pokemon *pokemon)
+void PartyMenuDrawHPBar(u8 monIndex, u8 menuLayout, struct Pokemon *pokemon)
 {
     u16 currentHP = GetMonData(pokemon, MON_DATA_HP);
     u16 maxHP = GetMonData(pokemon, MON_DATA_MAX_HP);
 
-    PartyMenuDoDrawHPBar(monIndex, b, currentHP, maxHP);
+    PartyMenuDoDrawHPBar(monIndex, menuLayout, currentHP, maxHP);
 }
 
 void PartyMenuTryDrawHPBar(u8 monIndex, struct Pokemon *pokemon)
@@ -3771,7 +3770,7 @@ void PartyMenuTryDrawHPBar(u8 monIndex, struct Pokemon *pokemon)
         bool8 isDoubleBattle = IsLinkDoubleBattle();
         if (isDoubleBattle == TRUE)
         {
-            PartyMenuDrawHPBar(monIndex, 2, pokemon);
+            PartyMenuDrawHPBar(monIndex, PARTY_MENU_LAYOUT_LINK_DOUBLE_BATTLE, pokemon);
         }
         else
         {
@@ -4539,10 +4538,10 @@ bool8 IsHPRecoveryItem(u16 item)
         return FALSE;
 }
 
-void PartyMenuUpdateLevelOrStatus(struct Pokemon *pkmn, u8 b)
+void PartyMenuUpdateLevelOrStatus(struct Pokemon *pkmn, u8 monIndex)
 {
-    PartyMenuClearLevelStatusTilemap(b);
-    PartyMenuPrintMonLevelOrStatus(b, pkmn);
+    PartyMenuClearLevelStatusTilemap(monIndex);
+    PartyMenuPrintMonLevelOrStatus(monIndex, pkmn);
 }
 
 void GetMedicineItemEffectMessage(u16 item)
@@ -4861,7 +4860,7 @@ void DoPPRecoveryItemEffect(u8 taskId, u16 item, TaskFunc c)
     else
     {
         PlaySE(SE_SELECT);
-        sub_806D538(10, 3);
+        PrintPartyMenuPromptText(10, 3);
         CreateItemUseMoveMenu(ewram1C000.unk5);
         gTasks[taskId2].func = Task_HandleItemUseMoveMenuInput;
         gMain.newKeys = 0;
@@ -4885,7 +4884,7 @@ void ItemUseMoveMenu_HandleCancel(u8 taskId)
         gTasks[ewram1C000.unk4].func = HandleBattlePartyMenu;
     else
         gTasks[ewram1C000.unk4].func = sub_808B0C0;
-    sub_806D538(3, 0);
+    PrintPartyMenuPromptText(3, 0);
     DestroyTask(taskId);
 }
 
@@ -4917,7 +4916,7 @@ void DoPPUpItemEffect(u8 taskId, u16 b, TaskFunc c)
     gTasks[taskId].func = TaskDummy;
     sub_806E8D0(taskId, b, c);
     PlaySE(SE_SELECT);
-    sub_806D538(11, 3);
+    PrintPartyMenuPromptText(11, 3);
     CreateItemUseMoveMenu(ewram1C000.unk5);
     CreateTask(Task_HandleItemUseMoveMenuInput, 5);
     gMain.newKeys = 0;
