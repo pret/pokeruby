@@ -183,7 +183,7 @@ static const struct PokeMenuFieldMoveFunc sFieldMoveFuncs[] =
 void sub_8089A70(void)
 {
     gPaletteFade.bufferTransferDisabled = 1;
-    OpenPartyMenu(0, 0);
+    OpenPartyMenu(PARTY_MENU_TYPE_STANDARD, 0);
 }
 
 static void sub_8089A8C(void)
@@ -247,7 +247,7 @@ static void sub_8089C7C(u8 arg0)
     InitMenu(0, 20, r4, sPokeMenuOptionsNo, arg0, 9);
 }
 
-void sub_8089CD4(u8 taskID)
+void HandleDefaultPartyMenu(u8 taskID)
 {
     if (!gPaletteFade.active)
     {
@@ -330,7 +330,7 @@ static void sub_8089EBC(void)
             sub_806BF74(EWRAM_1B000.unk260, 0);
             gLastFieldPokeMenuOpened = gUnknown_020384F0;
             sub_8089E84();
-            SetMainCallback2(sub_806AEDC);
+            SetMainCallback2(CB2_PartyMenuMain);
             break;
         }
     } while (sub_80F9344() != TRUE);
@@ -362,7 +362,7 @@ static void PokemonMenu_Summary(u8 taskID)
 
 void sub_808A004(u8 taskID)
 {
-    SetTaskFuncWithFollowupFunc(taskID, sub_806CA60, sub_8089CD4);
+    SetTaskFuncWithFollowupFunc(taskID, sub_806CA60, HandleDefaultPartyMenu);
     MenuZeroFillWindowRect(19, 0, 29, 19);
 }
 
@@ -429,7 +429,7 @@ static void sub_808A1E0(u8 taskID)
     {
         SetHeldItemIconVisibility(taskID, sub_806CA38(taskID));
         sub_806D538(0, 0);
-        gTasks[taskID].func = sub_8089CD4;
+        gTasks[taskID].func = HandleDefaultPartyMenu;
     }
 }
 
@@ -444,7 +444,7 @@ static void sub_808A228(u8 taskID)
     {
         MenuZeroFillWindowRect(0, 0, 29, 19);
         sub_806D538(0, 0);
-        gTasks[taskID].func = sub_8089CD4;
+        gTasks[taskID].func = HandleDefaultPartyMenu;
     }
 }
 
@@ -479,7 +479,7 @@ static void sub_808A358(void)
         {
             sub_806C994(EWRAM_1B000.unk260, gLastFieldPokeMenuOpened);
             sub_806BF74(EWRAM_1B000.unk260, 0);
-            SetMainCallback2(sub_806AEDC);
+            SetMainCallback2(CB2_PartyMenuMain);
             break;
         }
         if (sub_80F9344() == TRUE)
@@ -497,7 +497,7 @@ static void sub_808A3A4(void)
             sub_806BF74(EWRAM_1B000.unk260, 0);
             EWRAM_1B000.unk262 = 3;
             sub_8089E84();
-            SetMainCallback2(sub_806AEDC);
+            SetMainCallback2(CB2_PartyMenuMain);
             break;
         }
         if (sub_80F9344() == TRUE)
@@ -543,7 +543,7 @@ static void sub_808A4D4(void)
         {
             sub_806C994(EWRAM_1B000.unk260, gLastFieldPokeMenuOpened);
             sub_806BF74(EWRAM_1B000.unk260, 0);
-            SetMainCallback2(sub_806AEDC);
+            SetMainCallback2(CB2_PartyMenuMain);
             break;
         }
         if (sub_80F9344() == TRUE)
@@ -561,7 +561,7 @@ void sub_808A520(void)
         AddBagItem(GetMonData(&gPlayerParty[gLastFieldPokeMenuOpened], MON_DATA_HELD_ITEM), 1);
         TakeMailFromMon(&gPlayerParty[gLastFieldPokeMenuOpened]);
         SetMonData(&gPlayerParty[gLastFieldPokeMenuOpened], MON_DATA_HELD_ITEM, (void*) &gUnknown_0202E8F8);
-        sub_806AF4C(0, 0xFF, sub_8089CD4, 0);
+        sub_806AF4C(0, 0xFF, HandleDefaultPartyMenu, 0);
     }
     else
         sub_806AF4C(0, 0xFF, sub_808A5BC, 0xFF);
@@ -681,7 +681,7 @@ static void sub_808A8D4(u8 taskID)
     sPokeMenuCursorPos = 0;
     MenuZeroFillWindowRect(19, 0, 29, 19);
     sub_806D538(0, 0);
-    gTasks[taskID].func = sub_8089CD4;
+    gTasks[taskID].func = HandleDefaultPartyMenu;
 }
 
 static void PokemonMenu_Cancel(u8 taskID)
@@ -852,7 +852,7 @@ static void sub_808AD0C(void)
         {
             sub_806C994(EWRAM_1B000.unk260, gLastFieldPokeMenuOpened);
             sub_806BF74(EWRAM_1B000.unk260, 0);
-            SetMainCallback2(sub_806AEDC);
+            SetMainCallback2(CB2_PartyMenuMain);
             break;
         }
         if (sub_80F9344() == TRUE)
@@ -863,7 +863,7 @@ static void sub_808AD0C(void)
 void sub_808AD58(void)
 {
     gPaletteFade.bufferTransferDisabled = 1;
-    sub_806AF4C(0, 0xFF, sub_8089CD4, 0);
+    sub_806AF4C(0, 0xFF, HandleDefaultPartyMenu, 0);
     SetMainCallback2(sub_808AD0C);
 }
 
@@ -969,7 +969,7 @@ static void sub_808AF80(void)
                 gLastFieldPokeMenuOpened = 0;
             sub_806C994(ewram1B000.unk260, gLastFieldPokeMenuOpened);
             sub_806BF74(ewram1B000.unk260, 0);
-            SetMainCallback2(sub_806AEDC);
+            SetMainCallback2(CB2_PartyMenuMain);
             break;
         }
         if (sub_80F9344() == TRUE)
@@ -1107,7 +1107,7 @@ static void sub_808B3A0(void)
         {
             sub_806C994(EWRAM_1B000.unk260, gLastFieldPokeMenuOpened);
             sub_806BF74(EWRAM_1B000.unk260, 0);
-            SetMainCallback2(sub_806AEDC);
+            SetMainCallback2(CB2_PartyMenuMain);
             break;
         }
         if (sub_80F9344() == TRUE)
@@ -1129,7 +1129,7 @@ static void sub_808B3EC(void)
         SetMonData(&gPlayerParty[gLastFieldPokeMenuOpened], MON_DATA_HELD_ITEM, (void*) &gUnknown_0202E8F8);
         CreateTask(sub_808B25C, 5);
         gPaletteFade.bufferTransferDisabled = 0;
-        callback = sub_806AEDC;
+        callback = CB2_PartyMenuMain;
     }
     else
     {
@@ -1167,7 +1167,7 @@ static void sub_808B518(void)
         {
             sub_806C994(EWRAM_1B000.unk260, gUnknown_020384F0);
             sub_806BF74(EWRAM_1B000.unk260, 0);
-            SetMainCallback2(sub_806AEDC);
+            SetMainCallback2(CB2_PartyMenuMain);
             break;
         }
         if (sub_80F9344() == TRUE)

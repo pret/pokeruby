@@ -46,8 +46,6 @@ extern u8 sub_806BD58(u8, u8);
 extern void PartyMenuPrintMonsLevelOrStatus(void);
 extern void sub_806BC3C(u8, u8);
 extern u8 sub_806B58C(u8);
-extern void sub_806AEDC(void);
-extern void sub_806AF4C();
 extern void ShowPokemonSummaryScreen(struct Pokemon *, u8, u8, void (*)(void), int);
 extern void CreateMonIcon_806D99C(int, u8, int, struct UnknownPokemonStruct2 *);
 extern u8 GetMonStatusAndPokerus();
@@ -76,14 +74,14 @@ void sub_8121E10(void)
 {
     ClearPartySelection();
     ewram1B000.unk263 = 0;
-    OpenPartyMenu(4, 0);
+    OpenPartyMenu(PARTY_MENU_TYPE_BATTLE_TOWER, 0);
 }
 
 void sub_8121E34(void)
 {
     ClearPartySelection();
     ewram1B000.unk263 = 1;
-    OpenPartyMenu(4, 0);
+    OpenPartyMenu(PARTY_MENU_TYPE_BATTLE_TOWER, 0);
 }
 
 static void ClearPartySelection(void)
@@ -94,7 +92,7 @@ static void ClearPartySelection(void)
         gSelectedOrderFromParty[i] = 0;
 }
 
-bool8 sub_8121E78(void)
+bool8 SetupBattleTowerPartyMenu(void)
 {
     u8 i;
 
@@ -298,7 +296,7 @@ static void sub_81221F8(u8 taskId)
     }
 }
 
-void sub_81222B0(u8 taskId)
+void HandleBattleTowerPartyMenu(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -427,7 +425,7 @@ static void sub_8122530(void)
             GetMonNickname(&gPlayerParty[gUnknown_020384F0], gStringVar1);
             gLastFieldPokeMenuOpened = gUnknown_020384F0;
             sub_81221F8(ewram1B000.unk260);
-            SetMainCallback2(sub_806AEDC);
+            SetMainCallback2(CB2_PartyMenuMain);
             break;
         }
         if (sub_80F9344() == 1)
@@ -536,7 +534,7 @@ static void sub_81227FC(u8 taskId)
     MenuZeroFillWindowRect(20, 10, 29, 19);
     HandleDestroyMenuCursors();
     sub_806D538(0, 0);
-    gTasks[taskId].func = sub_81222B0;
+    gTasks[taskId].func = HandleBattleTowerPartyMenu;
 }
 
 static void BattleTowerEntryMenuCallback_Exit(u8 taskId)
@@ -545,7 +543,7 @@ static void BattleTowerEntryMenuCallback_Exit(u8 taskId)
     sub_81227FC(taskId);
 }
 
-bool8 sub_8122854(void)
+bool8 SetupLinkMultiBattlePartyMenu(void)
 {
     switch (ewram1B000_alt.unk264)
     {
@@ -628,7 +626,7 @@ static void sub_81229B8(void)
     }
 }
 
-void sub_8122A48(u8 taskId)
+void HandleLinkMultiBattlePartyMenu(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -693,7 +691,7 @@ static void sub_8122C18(u8 taskId)
     }
 }
 
-// Exactly the same as sub_8121E78 except for case 6
+// Exactly the same as SetupBattleTowerPartyMenu except for case 6
 bool8 unref_sub_8122C60(void)
 {
     switch (ewram1B000_alt.unk264)
@@ -795,7 +793,7 @@ static void sub_8122D94(u8 taskId)
     }
 }
 
-void sub_8122E0C(u8 taskId)
+void HandleDaycarePartyMenu(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -878,7 +876,7 @@ static void sub_8122F90(void)
             GetMonNickname(&gPlayerParty[gUnknown_020384F0], gStringVar1);
             gLastFieldPokeMenuOpened = gUnknown_020384F0;
             sub_8122D94(ewram1B000.unk260);
-            SetMainCallback2(sub_806AEDC);
+            SetMainCallback2(CB2_PartyMenuMain);
             break;
         }
         if (sub_80F9344() == 1)
@@ -917,7 +915,7 @@ static void DaycareStorageMenuCallback_Exit(u8 taskId)
     MenuZeroFillWindowRect(20, 10, 29, 19);
     HandleDestroyMenuCursors();
     sub_806D538(15, 0);
-    gTasks[taskId].func = sub_8122E0C;
+    gTasks[taskId].func = HandleDaycarePartyMenu;
 }
 
 void sub_8123138(u8 taskId)

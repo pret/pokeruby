@@ -4,6 +4,28 @@
 #include "menu.h"
 #include "task.h"
 
+
+enum
+{
+    PARTY_MENU_TYPE_STANDARD,
+    PARTY_MENU_TYPE_BATTLE,
+    PARTY_MENU_TYPE_CONTEST,
+    PARTY_MENU_TYPE_IN_GAME_TRADE,
+    PARTY_MENU_TYPE_BATTLE_TOWER,
+    PARTY_MENU_TYPE_LINK_MULTI_BATTLE,
+    PARTY_MENU_TYPE_DAYCARE,
+    PARTY_MENU_TYPE_MOVE_TUTOR,
+};
+
+// The party menu screen is presented differently depending on which menu layout is set.
+enum
+{
+    PARTY_MENU_LAYOUT_STANDARD,
+    PARTY_MENU_LAYOUT_DOUBLE_BATTLE,
+    PARTY_MENU_LAYOUT_LINK_DOUBLE_BATTLE,
+    PARTY_MENU_LAYOUT_MULTI_BATTLE,
+};
+
 struct PartyPopupMenu
 {
     /*0x0*/u8 numChoices; // number of menu choices
@@ -71,10 +93,10 @@ extern u8 ewram[];
 #define ewram1B000_alt (*(struct Struct201B000 *)(ewram + 0x1B000))
 #define EWRAM_1B000 ewram1B000_alt
 
+void CB2_PartyMenuMain(void);
 void sub_806C658(u8 taskId, s8 directionPressed);
-void sub_806AEDC(void);
 void sub_806AF4C(u8 a, u8 battleFlags, TaskFunc func, u8 d);
-void OpenPartyMenu(u8 a, u8 b);
+void OpenPartyMenu(u8 menuType, u8 battleFlags);
 bool8 InitPartyMenu(void);
 bool8 IsLinkDoubleBattle(void);
 u8 sub_806B58C(u8);

@@ -36,7 +36,7 @@ enum
 extern u8 gLastFieldPokeMenuOpened;
 extern void (*gUnknown_03005CE4)(void);
 
-void sub_8089CD4(u8 taskID);
+void HandleDefaultPartyMenu(u8 taskID);
 void sub_808B5B4(u32 taskID);
 void sub_8089A70(void);
 void sub_8089C50(u8 arg0, u8 arg1, u8 arg2, u8 noOfOptions, const struct MenuAction2 *menuActions, const u8 *order);

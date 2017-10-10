@@ -50,18 +50,18 @@ struct PartyMenuWindowCoords
     u8 bottom;
 };
 
-struct UnknownStruct5
+struct PartyMonTextSettingsStruct
 {
-    u8 unk0;
-    u8 unk1;
-    const u16 *unk4;
+    u8 xOffset;
+    u8 yOffset;
+    const u16 *oamSettings;
 };
 
-struct PartyMenuFunctionsStruct
+struct PartyMenuHandlersStruct
 {
-    /*0x0*/TaskFunc func1;
-    /*0x4*/bool8 (*func2)(void);
-    /*0x8*/u8 unk8;
+    /*0x0*/TaskFunc menuHandler;
+    /*0x4*/bool8 (*menuSetup)(void);
+    /*0x8*/u8 initialPromptTextId; // element in gUnknown_08376624
 };
 
 static void nullsub_12(u8 monIndex, struct Pokemon *pokemon);
@@ -92,9 +92,9 @@ static u8 GetMonIconSpriteId_maybe(u8 taskId, u8 monIndex);
 static void SpriteCB_UpdateHeldItemIconPosition(struct Sprite *sprite);
 static void ItemUseMoveMenu_HandleMoveSelection(u8 taskId);
 static void ItemUseMoveMenu_HandleCancel(u8 taskId);
-static bool8 sub_806AFD0(void);
+static bool8 SetupDefaultPartyMenu(void);
 static void sub_806B4A8(void);
-static void sub_806AF34(void);
+static void VBlankCB_PartyMenu(void);
 static bool8 LoadPartyMenuGraphics(u8 a);
 static void sub_806BF24(const u8 *a, u8 monIndex, u8 c, u8 d);
 static void sub_806BB9C(u8 a);
@@ -360,72 +360,78 @@ static const TaskFunc gUnknown_08376B54[] = {
     ItemUseMoveMenu_HandleCancel,
 };
 
-static const u16 Unknown_08376B5C[] = {
-    0x4000, 0x4018, 0xF400,
-    0x4000, 0x4038, 0xF404,
-    0x4008, 0x4018, 0xF408,
-    0x4008, 0x4038, 0xF40C,
-    0x4010, 0x4020, 0xF410,
-    0x4020, 0x4025, 0xF418,
-    0x4020, 0x4045, 0xF41C,
+#define PartyMonOAMSettings(x, y, palette, shape, size, priority, tileOffset) \
+    ((shape)   << 14) | (y),                                                  \
+    ((size)    << 14) | (x),                                                  \
+    ((palette) << 12) | ((priority) << 10) | (tileOffset)
+
+static const u16 PartyMonOAMSettings_LeftColumn[] = {
+    PartyMonOAMSettings(24,  0, 15, ST_OAM_H_RECTANGLE, 1, 1,  0),
+    PartyMonOAMSettings(56,  0, 15, ST_OAM_H_RECTANGLE, 1, 1,  4),
+    PartyMonOAMSettings(24,  8, 15, ST_OAM_H_RECTANGLE, 1, 1,  8),
+    PartyMonOAMSettings(56,  8, 15, ST_OAM_H_RECTANGLE, 1, 1, 12),
+    PartyMonOAMSettings(32, 16, 15, ST_OAM_H_RECTANGLE, 1, 1, 16),
+    PartyMonOAMSettings(37, 32, 15, ST_OAM_H_RECTANGLE, 1, 1, 24),
+    PartyMonOAMSettings(69, 32, 15, ST_OAM_H_RECTANGLE, 1, 1, 28),
     0xFFFF,
 };
 
-static const u16 Unknown_08376B88[] = {
-    0x4000, 0x4018, 0xF400,
-    0x4000, 0x4038, 0xF404,
-    0x4008, 0x4018, 0xF408,
-    0x4008, 0x4038, 0xF40C,
-    0x4010, 0x4020, 0xF410,
-    0x4010, 0x4065, 0xF418,
-    0x4010, 0x4085, 0xF41C,
+static const u16 PartyMonOAMSettings_RightColumn[] = {
+    PartyMonOAMSettings( 24,  0, 15, ST_OAM_H_RECTANGLE, 1, 1,  0),
+    PartyMonOAMSettings( 56,  0, 15, ST_OAM_H_RECTANGLE, 1, 1,  4),
+    PartyMonOAMSettings( 24,  8, 15, ST_OAM_H_RECTANGLE, 1, 1,  8),
+    PartyMonOAMSettings( 56,  8, 15, ST_OAM_H_RECTANGLE, 1, 1, 12),
+    PartyMonOAMSettings( 32, 16, 15, ST_OAM_H_RECTANGLE, 1, 1, 16),
+    PartyMonOAMSettings(101, 16, 15, ST_OAM_H_RECTANGLE, 1, 1, 24),
+    PartyMonOAMSettings(133, 16, 15, ST_OAM_H_RECTANGLE, 1, 1, 28),
     0xFFFF,
 };
 
-static struct UnknownStruct5 const gUnknown_08376BB4[4][6] = {
-    {
-        { 1,  4, Unknown_08376B5C},
-        {12,  1, Unknown_08376B88},
-        {12,  4, Unknown_08376B88},
-        {12,  7, Unknown_08376B88},
-        {12, 10, Unknown_08376B88},
-        {12, 13, Unknown_08376B88},
+// Controls where and how the mons' text appears in the party menu screen (nickname, HP, and level).
+static struct PartyMonTextSettingsStruct const PartyMonTextSettings[4][6] = {
+    { // PARTY_MENU_LAYOUT_STANDARD
+        { 1,  4, PartyMonOAMSettings_LeftColumn},
+        {12,  1, PartyMonOAMSettings_RightColumn},
+        {12,  4, PartyMonOAMSettings_RightColumn},
+        {12,  7, PartyMonOAMSettings_RightColumn},
+        {12, 10, PartyMonOAMSettings_RightColumn},
+        {12, 13, PartyMonOAMSettings_RightColumn},
     },
-    {
-        { 1,  2, Unknown_08376B5C},
-        { 1,  9, Unknown_08376B5C},
-        {12,  1, Unknown_08376B88},
-        {12,  5, Unknown_08376B88},
-        {12,  9, Unknown_08376B88},
-        {12, 13, Unknown_08376B88},
+    { // PARTY_MENU_LAYOUT_DOUBLE_BATTLE
+        { 1,  2, PartyMonOAMSettings_LeftColumn},
+        { 1,  9, PartyMonOAMSettings_LeftColumn},
+        {12,  1, PartyMonOAMSettings_RightColumn},
+        {12,  5, PartyMonOAMSettings_RightColumn},
+        {12,  9, PartyMonOAMSettings_RightColumn},
+        {12, 13, PartyMonOAMSettings_RightColumn},
     },
-    {
-        { 1,  2, Unknown_08376B5C},
-        { 1,  9, Unknown_08376B5C},
-        {12,  2, Unknown_08376B88},
-        {12,  5, Unknown_08376B88},
-        {12,  9, Unknown_08376B88},
-        {12, 12, Unknown_08376B88},
+    { // PARTY_MENU_LAYOUT_LINK_DOUBLE_BATTLE
+        { 1,  2, PartyMonOAMSettings_LeftColumn},
+        { 1,  9, PartyMonOAMSettings_LeftColumn},
+        {12,  2, PartyMonOAMSettings_RightColumn},
+        {12,  5, PartyMonOAMSettings_RightColumn},
+        {12,  9, PartyMonOAMSettings_RightColumn},
+        {12, 12, PartyMonOAMSettings_RightColumn},
     },
-    {
-        { 1,  2, Unknown_08376B5C},
-        {12,  2, Unknown_08376B88},
-        {12,  5, Unknown_08376B88},
-        { 1,  9, Unknown_08376B5C},
-        {12,  9, Unknown_08376B88},
-        {12, 12, Unknown_08376B88},
+    { // PARTY_MENU_LAYOUT_MULTI_BATTLE
+        { 1,  2, PartyMonOAMSettings_LeftColumn},
+        {12,  2, PartyMonOAMSettings_RightColumn},
+        {12,  5, PartyMonOAMSettings_RightColumn},
+        { 1,  9, PartyMonOAMSettings_LeftColumn},
+        {12,  9, PartyMonOAMSettings_RightColumn},
+        {12, 12, PartyMonOAMSettings_RightColumn},
     },
 };
 
-static const struct PartyMenuFunctionsStruct gUnknown_08376C74[] = {
-    {sub_8089CD4,            sub_806AFD0,          0},
-    {SetUpBattlePokemonMenu, SetUpBattlePartyMenu, 0},
-    {sub_80F9C6C,            sub_80F9ACC,          0},
-    {sub_80F9C6C,            sub_806AFD0,          0},
-    {sub_81222B0,            sub_8121E78,          0},
-    {sub_8122A48,            sub_8122854,       0xFF},
-    {sub_8122E0C,            sub_806AFD0,       0x0F},
-    {sub_80F9E64,            sub_80F9CE8,          0},
+static const struct PartyMenuHandlersStruct PartyMenuHandlers[] = {
+    {HandleDefaultPartyMenu,         SetupDefaultPartyMenu,            0}, // PARTY_MENU_TYPE_STANDARD
+    {HandleBattlePartyMenu,          SetUpBattlePartyMenu,             0}, // PARTY_MENU_TYPE_BATTLE
+    {HandleSelectPartyMenu,          SetupContestPartyMenu,            0}, // PARTY_MENU_TYPE_CONTEST
+    {HandleSelectPartyMenu,          SetupDefaultPartyMenu,            0}, // PARTY_MENU_TYPE_IN_GAME_TRADE
+    {HandleBattleTowerPartyMenu,     SetupBattleTowerPartyMenu,        0}, // PARTY_MENU_TYPE_BATTLE_TOWER
+    {HandleLinkMultiBattlePartyMenu, SetupLinkMultiBattlePartyMenu, 0xFF}, // PARTY_MENU_TYPE_LINK_MULTI_BATTLE
+    {HandleDaycarePartyMenu,         SetupDefaultPartyMenu,         0x0F}, // PARTY_MENU_TYPE_DAYCARE
+    {HandleMoveTutorPartyMenu,       SetupMoveTutorPartyMenu,          0}, // PARTY_MENU_TYPE_MOVE_TUTOR
 };
 
 static const u16 gUnknown_08376CD4[] = {
@@ -498,7 +504,7 @@ extern u8 gTileBuffer[];
 extern u8 gUnknown_0202E8F4;
 extern u8 gUnknown_0202E8F6;
 extern u16 gUnknown_0202E8F8;
-extern u8 gUnknown_0202E8FA;
+extern u8 gPartyMenuType;
 extern u8 gLastFieldPokeMenuOpened;
 extern u8 gPlayerPartyCount;
 extern s32 gBattleMoveDamage;
@@ -529,18 +535,25 @@ extern const u8 gStatusPal_Icons[];
 
 
 #ifdef NONMATCHING
-void sub_806AEDC(void)
+// Main handler for the party menu.
+void CB2_PartyMenuMain(void)
 {
-    const struct UnknownStruct5 *var1;
+    const struct PartyMonTextSettingsStruct *textSettings;
     s32 i;
 
     AnimateSprites();
     BuildOamBuffer();
 
-    var1 = gUnknown_08376BB4[gUnknown_0202E8FA];
-    for (i = 0; i < 6; i++)
+    textSettings = PartyMonTextSettings[gPartyMenuType];
+    for (i = 0; i < PARTY_SIZE; i++)
     {
-        sub_800142C(var1[i].unk0 * 8, var1[i].unk1 * 8, var1[i].unk4, 0, (i << 5) | 0x200);
+        // Draw mon name, level, and hp sprites
+        DrawPartyMenuMonText(
+            textSettings[i].xOffset * 8,
+            textSettings[i].yOffset * 8,
+            textSettings[i].oamSettings,
+            0,
+            (i << 5) | 0x200);
     }
 
     RunTasks();
@@ -548,19 +561,19 @@ void sub_806AEDC(void)
 }
 #else
 __attribute__((naked))
-void sub_806AEDC(void)
+void CB2_PartyMenuMain(void)
 {
     asm(".syntax unified\n\
     push {r4-r6,lr}\n\
     sub sp, 0x4\n\
     bl AnimateSprites\n\
     bl BuildOamBuffer\n\
-    ldr r0, _0806AF2C @ =gUnknown_0202E8FA\n\
+    ldr r0, _0806AF2C @ =gPartyMenuType\n\
     ldrb r1, [r0]\n\
     lsls r0, r1, 1\n\
     adds r0, r1\n\
     lsls r0, 4\n\
-    ldr r1, _0806AF30 @ =gUnknown_08376BB4\n\
+    ldr r1, _0806AF30 @ =PartyMonTextSettings\n\
     adds r5, r0, r1\n\
     movs r6, 0\n\
 _0806AEF8:\n\
@@ -575,7 +588,7 @@ _0806AEF8:\n\
     orrs r3, r4\n\
     str r3, [sp]\n\
     movs r3, 0\n\
-    bl sub_800142C\n\
+    bl DrawPartyMenuMonText\n\
     adds r5, 0x8\n\
     adds r6, 0x1\n\
     cmp r6, 0x5\n\
@@ -587,13 +600,13 @@ _0806AEF8:\n\
     pop {r0}\n\
     bx r0\n\
     .align 2, 0\n\
-_0806AF2C: .4byte gUnknown_0202E8FA\n\
-_0806AF30: .4byte gUnknown_08376BB4\n\
+_0806AF2C: .4byte gPartyMenuType\n\
+_0806AF30: .4byte PartyMonTextSettings\n\
     .syntax divided\n");
 }
 #endif // NONMATCHING
 
-void sub_806AF34(void)
+void VBlankCB_PartyMenu(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
@@ -601,11 +614,11 @@ void sub_806AF34(void)
     sub_806B548();
 }
 
-void sub_806AF4C(u8 a, u8 battleFlags, TaskFunc func, u8 d)
+void sub_806AF4C(u8 a, u8 battleTypeFlags, TaskFunc func, u8 d)
 {
-    if (battleFlags != 0xFF)
+    if (battleTypeFlags != 0xFF)
     {
-        gBattleTypeFlags = battleFlags;
+        gBattleTypeFlags = battleTypeFlags;
     }
 
     ewram1B000.unk258 = a;
@@ -619,12 +632,12 @@ void sub_806AF8C(u8 a, u8 battleFlags, TaskFunc func, u8 d)
     SetMainCallback2(sub_806B460);
 }
 
-void OpenPartyMenu(u8 a, u8 battleFlags)
+void OpenPartyMenu(u8 menuType, u8 battleFlags)
 {
-    sub_806AF8C(a, battleFlags, gUnknown_08376C74[a].func1, gUnknown_08376C74[a].unk8);
+    sub_806AF8C(menuType, battleFlags, PartyMenuHandlers[menuType].menuHandler, PartyMenuHandlers[menuType].initialPromptTextId);
 }
 
-bool8 sub_806AFD0(void)
+bool8 SetupDefaultPartyMenu(void)
 {
     switch (ewram1B000_alt.unk264)
     {
@@ -790,7 +803,7 @@ bool8 InitPartyMenu(void)
         gMain.state++;
         break;
     case 12:
-        if (gUnknown_08376C74[ewram1B000.unk258].func2() == TRUE)
+        if (PartyMenuHandlers[ewram1B000.unk258].menuSetup() == TRUE)
         {
             gMain.state++;
         }
@@ -815,7 +828,7 @@ bool8 InitPartyMenu(void)
         gMain.state++;
         break;
     case 17:
-        SetVBlankCallback(sub_806AF34);
+        SetVBlankCallback(VBlankCB_PartyMenu);
         return TRUE;
     }
 
@@ -837,7 +850,7 @@ void sub_806B460(void)
         sub_806BF74(ewram1B000.unk260, 0);
     }
 
-    SetMainCallback2(sub_806AEDC);
+    SetMainCallback2(CB2_PartyMenuMain);
 }
 
 void sub_806B4A8(void)
@@ -888,13 +901,13 @@ bool8 sub_806B58C(u8 a)
     const u8 *arr;
 
     if (!IsDoubleBattle())
-        gUnknown_0202E8FA = 0;
+        gPartyMenuType = PARTY_MENU_LAYOUT_STANDARD;
     else if (IsLinkDoubleBattle() == TRUE)
-        gUnknown_0202E8FA = 2;
+        gPartyMenuType = PARTY_MENU_LAYOUT_LINK_DOUBLE_BATTLE;
     else
-        gUnknown_0202E8FA = 1;
+        gPartyMenuType = PARTY_MENU_LAYOUT_DOUBLE_BATTLE;
 
-    arr = &gUnknown_083769A8[gUnknown_0202E8FA * 12];
+    arr = &gUnknown_083769A8[gPartyMenuType * 12];
 
     switch (a)
     {
@@ -1033,7 +1046,7 @@ bool8 sub_806B58C(u8 a)
 void sub_806B908(void)
 {
     memset(&gBGTilemapBuffers[2], 0, 0x800);
-    gUnknown_0202E8FA = 3;
+    gPartyMenuType = PARTY_MENU_LAYOUT_MULTI_BATTLE;
     sub_806B9A4(gUnknown_083769C0[12], gUnknown_083769C0[13], 3);
 
     if (GetMonData(&gPlayerParty[1], MON_DATA_SPECIES))
@@ -1059,7 +1072,7 @@ void sub_806B908(void)
     lsls r2, 4\n\
     movs r1, 0\n\
     bl memset\n\
-    ldr r1, _0806B94C @ =gUnknown_0202E8FA\n\
+    ldr r1, _0806B94C @ =gPartyMenuType\n\
     movs r0, 0x3\n\
     strb r0, [r1]\n\
     ldr r0, _0806B950 @ =gUnknown_083769A8\n\
@@ -1083,7 +1096,7 @@ void sub_806B908(void)
     b _0806B964\n\
     .align 2, 0\n\
 _0806B948: .4byte gBGTilemapBuffers + 0x1000\n\
-_0806B94C: .4byte gUnknown_0202E8FA\n\
+_0806B94C: .4byte gPartyMenuType\n\
 _0806B950: .4byte gUnknown_083769A8\n\
 _0806B954: .4byte gPlayerParty + 1 * 0x64\n\
 _0806B958:\n\
@@ -4828,18 +4841,18 @@ void Task_HandleItemUseMoveMenuInput(u8 taskId)
     }
 }
 
-void DoPPRecoveryItemEffect(u8 taskId, u16 b, TaskFunc c)
+void DoPPRecoveryItemEffect(u8 taskId, u16 item, TaskFunc c)
 {
     const u8 *itemEffect;
     u8 taskId2;
 
-    if (b == ITEM_ENIGMA_BERRY)
+    if (item == ITEM_ENIGMA_BERRY)
         itemEffect = gSaveBlock1.enigmaBerry.itemEffect;
     else
-        itemEffect = gItemEffectTable[b - ITEM_POTION];
+        itemEffect = gItemEffectTable[item - ITEM_POTION];
     gTasks[taskId].func = TaskDummy;
     taskId2 = CreateTask(TaskDummy, 5);
-    sub_806E8D0(taskId, b, c);
+    sub_806E8D0(taskId, item, c);
     if (!(itemEffect[4] & 0x10))
     {
         gTasks[taskId2].data[11] = 0;
@@ -4869,7 +4882,7 @@ void ItemUseMoveMenu_HandleCancel(u8 taskId)
     HandleDestroyMenuCursors();
     MenuZeroFillWindowRect(19, 10, 29, 19);
     if (gMain.inBattle)
-        gTasks[ewram1C000.unk4].func = SetUpBattlePokemonMenu;
+        gTasks[ewram1C000.unk4].func = HandleBattlePartyMenu;
     else
         gTasks[ewram1C000.unk4].func = sub_808B0C0;
     sub_806D538(3, 0);

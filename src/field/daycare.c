@@ -1685,6 +1685,6 @@ void ShowDaycareLevelMenu(void)
 
 void ChooseSendDaycareMon(void)
 {
-    OpenPartyMenu(6, 0);
+    OpenPartyMenu(PARTY_MENU_TYPE_DAYCARE, 0);
     gMain.savedCallback = c2_exit_to_overworld_2_switch;
 }

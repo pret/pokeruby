@@ -612,7 +612,7 @@ void sub_800F104(void)
             *pSavedCallback = gMain.savedCallback;
             *pSavedBattleTypeFlags = gBattleTypeFlags;
             gMain.savedCallback = sub_800F104;
-            OpenPartyMenu(5, 0);
+            OpenPartyMenu(PARTY_MENU_TYPE_LINK_MULTI_BATTLE, 0);
         }
         break;
     case 2:

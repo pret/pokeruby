@@ -28,8 +28,6 @@ extern void nullsub_13(void);
 extern u8 sub_806B58C(u8);
 extern void sub_802E414(void);
 extern void sub_80A6DCC(void);
-extern void sub_806AF4C();
-extern void sub_806AEDC(void);
 extern u8 *sub_8040D08();
 extern void sub_8040B8C(void);
 extern void nullsub_14();
@@ -340,7 +338,7 @@ void sub_8094E20(u8 a)
     gUnknown_02038473 = a;
     nullsub_14();
     pokemon_change_order();
-    OpenPartyMenu(1, 0xFF);
+    OpenPartyMenu(PARTY_MENU_TYPE_BATTLE, 0xFF);
 }
 
 void sub_8094E4C(void)
@@ -465,7 +463,7 @@ static void sub_8095050(u8 a, u8 b)
     ShowPartyPopupMenu(gTasks[a].data[4], sBattlePartyPopupMenus, sBattlePartyMenuActions, 0);
 }
 
-void SetUpBattlePokemonMenu(u8 a)
+void HandleBattlePartyMenu(u8 a)
 {
     if (!gPaletteFade.active)
     {
@@ -493,7 +491,7 @@ void SetUpBattlePokemonMenu(u8 a)
                 PlaySE(SE_SELECT);
                 GetMonNickname(&gPlayerParty[sub_806CA38(a)], gStringVar1);
                 sub_8095050(a, sub_806CA38(a));
-                SetTaskFuncWithFollowupFunc(a, Task_HandlePopupMenuInput, SetUpBattlePokemonMenu);
+                SetTaskFuncWithFollowupFunc(a, Task_HandlePopupMenuInput, HandleBattlePartyMenu);
             }
             break;
         case 2:
@@ -558,7 +556,7 @@ static void Task_8095330(u8 taskId)
 static void Task_809535C(void)
 {
     gPaletteFade.bufferTransferDisabled = TRUE;
-    sub_806AF4C(1, 0xFF, SetUpBattlePokemonMenu, 5);
+    sub_806AF4C(1, 0xFF, HandleBattlePartyMenu, 5);
     SetMainCallback2(Task_809538C);
 }
 
@@ -572,8 +570,8 @@ static void Task_809538C(void)
             sub_806BF74(EWRAM_1B000.unk260, 0);
             GetMonNickname(&gPlayerParty[gUnknown_020384F0], gStringVar1);
             sub_8095050(EWRAM_1B000.unk260, gUnknown_020384F0);
-            SetTaskFuncWithFollowupFunc(EWRAM_1B000.unk260, Task_HandlePopupMenuInput, SetUpBattlePokemonMenu);
-            SetMainCallback2(sub_806AEDC);
+            SetTaskFuncWithFollowupFunc(EWRAM_1B000.unk260, Task_HandlePopupMenuInput, HandleBattlePartyMenu);
+            SetMainCallback2(CB2_PartyMenuMain);
             return;
         }
     } while (sub_80F9344() != 1);

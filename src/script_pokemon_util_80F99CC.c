@@ -31,8 +31,8 @@ void sub_80F99CC(void)
     u8 taskId;
 
     ScriptContext2_Enable();
-    taskId = CreateTask((void *)sub_80F9A8C, 0xA);
-    gTasks[taskId].data[0] = 2;
+    taskId = CreateTask((void *)OpenPartyMenuFromScriptContext, 0xA);
+    gTasks[taskId].data[0] = PARTY_MENU_TYPE_CONTEST;
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
 }
 
@@ -41,8 +41,8 @@ void sub_80F9A0C(void)
     u8 taskId;
 
     ScriptContext2_Enable();
-    taskId = CreateTask((void *)sub_80F9A8C, 0xA);
-    gTasks[taskId].data[0] = 3;
+    taskId = CreateTask((void *)OpenPartyMenuFromScriptContext, 0xA);
+    gTasks[taskId].data[0] = PARTY_MENU_TYPE_IN_GAME_TRADE;
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
 }
 
@@ -51,12 +51,12 @@ void sub_80F9A4C(void)
     u8 taskId;
 
     ScriptContext2_Enable();
-    taskId = CreateTask((void *)sub_80F9A8C, 0xA);
-    gTasks[taskId].data[0] = 7;
+    taskId = CreateTask((void *)OpenPartyMenuFromScriptContext, 0xA);
+    gTasks[taskId].data[0] = PARTY_MENU_TYPE_MOVE_TUTOR;
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
 }
 
-void sub_80F9A8C(u8 taskId)
+void OpenPartyMenuFromScriptContext(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -66,7 +66,7 @@ void sub_80F9A8C(u8 taskId)
     }
 }
 
-bool8 sub_80F9ACC(void)
+bool8 SetupContestPartyMenu(void)
 {
     switch (EWRAM_1B000.unk264)
     {
@@ -151,7 +151,7 @@ void sub_80F9C00(void)
     }
 }
 
-void sub_80F9C6C(u8 var)
+void HandleSelectPartyMenu(u8 var)
 {
     if (!gPaletteFade.active)
     {
@@ -173,7 +173,7 @@ void sub_80F9C6C(u8 var)
     }
 }
 
-bool8 sub_80F9CE8(void) // this is the same function as sub_80F9ACC except case 6 calls a different function. why
+bool8 SetupMoveTutorPartyMenu(void)
 {
     switch (EWRAM_1B000.unk264)
     {
@@ -250,7 +250,7 @@ void sub_80F9E1C(void)
     }
 }
 
-void sub_80F9E64(u8 var)
+void HandleMoveTutorPartyMenu(u8 var)
 {
     if (!gPaletteFade.active)
     {

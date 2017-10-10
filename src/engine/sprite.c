@@ -916,7 +916,8 @@ void DestroySpriteAndFreeResources(struct Sprite *sprite)
     DestroySprite(sprite);
 }
 
-void sub_800142C(u32 a1, u32 a2, const u16 *a3, u16 a4, u32 a5)
+// Loads the mon name, level, and hp sprites into OAM.
+void DrawPartyMenuMonText(u32 a1, u32 a2, const u16 *a3, u16 a4, u32 baseTileNumber)
 {
     const u16 *d = a3;
     struct OamData *oam = &gMain.oamBuffer[gMain.objCount];
@@ -925,7 +926,7 @@ void sub_800142C(u32 a1, u32 a2, const u16 *a3, u16 a4, u32 a5)
         u16 *x = (u16 *)oam;
         x[0] = (d[0] & sOamBitmasks[0]) | ((d[0] + a2) & sOamBitmasks[1]) | ((a4 & sOamBitmasks[2]) << 8);
         x[1] = (d[1] & sOamBitmasks[3]) | ((d[1] + a1) & sOamBitmasks[4]) | ((a4 & sOamBitmasks[5]) << 4);
-        x[2] = (d[2] & sOamBitmasks[6]) | ((d[2] + a5) & sOamBitmasks[7]) | (a4 & sOamBitmasks[8]);
+        x[2] = (d[2] & sOamBitmasks[6]) | ((d[2] + baseTileNumber) & sOamBitmasks[7]) | (a4 & sOamBitmasks[8]);
         oam++;
         gMain.objCount++;
         d += 3;
