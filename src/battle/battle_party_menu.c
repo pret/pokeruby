@@ -25,7 +25,6 @@ extern u8 ewram[];
 extern u8 sub_806BD58(u8, u8);
 extern void PartyMenuPrintMonsLevelOrStatus(void);
 extern void nullsub_13(void);
-extern u8 sub_806B58C(u8);
 extern void sub_802E414(void);
 extern void sub_80A6DCC(void);
 extern u8 *sub_8040D08();
@@ -418,7 +417,7 @@ bool8 SetUpBattlePartyMenu(void)
         EWRAM_1B000.setupState++;
         break;
     case 9:
-        if (sub_806B58C(EWRAM_1B000.monIndex) == 1)
+        if (DrawPartyMonBackground(EWRAM_1B000.monIndex) == 1)
         {
             EWRAM_1B000.monIndex = 0;
             EWRAM_1B000.setupState++;
@@ -463,38 +462,38 @@ static void sub_8095050(u8 a, u8 b)
     ShowPartyPopupMenu(gTasks[a].data[4], sBattlePartyPopupMenus, sBattlePartyMenuActions, 0);
 }
 
-void HandleBattlePartyMenu(u8 a)
+void HandleBattlePartyMenu(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
         if (gUnknown_02038473 == 3 && GetItemEffectType(gScriptItemId) == 10)
         {
-            gUnknown_03004AE4(a, gScriptItemId, Task_80952E4);
+            gUnknown_03004AE4(taskId, gScriptItemId, Task_80952E4);
             return;
         }
 
-        switch (sub_806BD80(a))
+        switch (HandleDefaultPartyMenuInput(taskId))
         {
-        case 1:
+        case A_BUTTON:
             if (gUnknown_02038473 == 3)
             {
-                if (GetMonData(&gPlayerParty[sub_806CA38(a)], MON_DATA_IS_EGG))
+                if (GetMonData(&gPlayerParty[sub_806CA38(taskId)], MON_DATA_IS_EGG))
                     PlaySE(SE_HAZURE);
                 else
                 {
                     sub_806D5A4();
-                    gUnknown_03004AE4(a, gScriptItemId, Task_80952E4);
+                    gUnknown_03004AE4(taskId, gScriptItemId, Task_80952E4);
                 }
             }
             else
             {
                 PlaySE(SE_SELECT);
-                GetMonNickname(&gPlayerParty[sub_806CA38(a)], gStringVar1);
-                sub_8095050(a, sub_806CA38(a));
-                SetTaskFuncWithFollowupFunc(a, Task_HandlePopupMenuInput, HandleBattlePartyMenu);
+                GetMonNickname(&gPlayerParty[sub_806CA38(taskId)], gStringVar1);
+                sub_8095050(taskId, sub_806CA38(taskId));
+                SetTaskFuncWithFollowupFunc(taskId, Task_HandlePopupMenuInput, HandleBattlePartyMenu);
             }
             break;
-        case 2:
+        case B_BUTTON:
             if (gUnknown_02038473 == 1)
                 PlaySE(SE_HAZURE);
             else
@@ -503,12 +502,12 @@ void HandleBattlePartyMenu(u8 a)
                 if (gUnknown_02038473 == 3)
                 {
                     gUnknown_0202E8F4 = 0;
-                    gTasks[a].func = Task_80952E4;
+                    gTasks[taskId].func = Task_80952E4;
                 }
                 else
                 {
                     gUnknown_0202E8F4 = 0;
-                    gTasks[a].func = Task_809527C;
+                    gTasks[taskId].func = Task_809527C;
                 }
             }
             break;
@@ -567,7 +566,7 @@ static void Task_809538C(void)
         if (InitPartyMenu() == TRUE)
         {
             sub_806C994(EWRAM_1B000.menuHandlerTaskId, gUnknown_020384F0);
-            sub_806BF74(EWRAM_1B000.menuHandlerTaskId, 0);
+            ChangePartyMenuSelection(EWRAM_1B000.menuHandlerTaskId, 0);
             GetMonNickname(&gPlayerParty[gUnknown_020384F0], gStringVar1);
             sub_8095050(EWRAM_1B000.menuHandlerTaskId, gUnknown_020384F0);
             SetTaskFuncWithFollowupFunc(EWRAM_1B000.menuHandlerTaskId, Task_HandlePopupMenuInput, HandleBattlePartyMenu);

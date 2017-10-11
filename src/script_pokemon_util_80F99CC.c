@@ -115,7 +115,7 @@ bool8 SetupContestPartyMenu(void)
         EWRAM_1B000.setupState++;
         break;
     case 7: // the only case that can return true.
-        if (sub_806B58C(EWRAM_1B000.monIndex) != 1)
+        if (DrawPartyMonBackground(EWRAM_1B000.monIndex) != 1)
         {
             EWRAM_1B000.monIndex++;
             break;
@@ -155,15 +155,15 @@ void HandleSelectPartyMenu(u8 var)
 {
     if (!gPaletteFade.active)
     {
-        switch (sub_806BD80(var))
+        switch (HandleDefaultPartyMenuInput(var))
         {
-        case 1:
+        case A_BUTTON:
             PlaySE(SE_SELECT);
             gUnknown_02038694 = sub_806CA38(var);
             gSpecialVar_0x8004 = gUnknown_02038694;
             sub_8123138(var);
             break;
-        case 2:
+        case B_BUTTON:
             PlaySE(SE_SELECT);
             gUnknown_02038694 = 0xFF;
             gSpecialVar_0x8004 = 0xFF;
@@ -201,14 +201,13 @@ bool8 SetupMoveTutorPartyMenu(void)
         if (sub_806BD58(EWRAM_1B000.menuHandlerTaskId, EWRAM_1B000.monIndex) != 1)
         {
             EWRAM_1B000.monIndex++;
-            break;
         }
         else
         {
             EWRAM_1B000.monIndex = 0;
             EWRAM_1B000.setupState++;
-            break;
         }
+        break;
     case 4:
         PartyMenuPrintMonsLevelOrStatus();
         EWRAM_1B000.setupState++;
@@ -222,10 +221,9 @@ bool8 SetupMoveTutorPartyMenu(void)
         EWRAM_1B000.setupState++;
         break;
     case 7: // the only case that can return true.
-        if (sub_806B58C(EWRAM_1B000.monIndex) != 1)
+        if (DrawPartyMonBackground(EWRAM_1B000.monIndex) != 1)
         {
             EWRAM_1B000.monIndex++;
-            break;
         }
         else
         {
@@ -234,6 +232,7 @@ bool8 SetupMoveTutorPartyMenu(void)
             return TRUE;
         }
     }
+
     return FALSE;
 }
 
@@ -254,15 +253,15 @@ void HandleMoveTutorPartyMenu(u8 var)
 {
     if (!gPaletteFade.active)
     {
-        switch (sub_806BD80(var))
+        switch (HandleDefaultPartyMenuInput(var))
         {
-        case 1:
+        case A_BUTTON:
             PlaySE(SE_SELECT);
             gSpecialVar_0x8004 = sub_806CA38(var);
             gSpecialVar_0x8005 = sub_8040574(&gPlayerParty[gSpecialVar_0x8004]);
             sub_8123138(var);
             break;
-        case 2:
+        case B_BUTTON:
             PlaySE(SE_SELECT);
             gSpecialVar_0x8004 = 0xFF;
             sub_8123138(var);

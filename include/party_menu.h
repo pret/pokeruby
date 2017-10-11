@@ -87,6 +87,20 @@ struct Unk2001000
     u16 array[53561];
 };
 
+struct UnknownPokemonStruct2
+{
+    /*0x00*/ u16 species;
+    /*0x02*/ u16 heldItem;
+    /*0x04*/ u8 nickname[11];
+    /*0x0F*/ u8 level;
+    /*0x10*/ u16 hp;
+    /*0x12*/ u16 maxhp;
+    /*0x14*/ u32 status;
+    /*0x18*/ u32 personality;
+    /*0x1C*/ u8 gender;
+    /*0x1D*/ u8 language;
+};
+
 extern u8 ewram[];
 #define ewram01000 (*(struct Unk2001000 *)(ewram + 0x01000))
 #define ewram1B000 (*(struct Unk201B000 *)(ewram + 0x1B000))
@@ -94,25 +108,25 @@ extern u8 ewram[];
 #define EWRAM_1B000 ewram1B000_alt
 
 void CB2_PartyMenuMain(void);
-void sub_806C658(u8 taskId, s8 directionPressed);
+void ChangeBattleTowerPartyMenuSelection(u8 taskId, s8 directionPressed);
 void SetPartyMenuSettings(u8 menuType, u8 battleTypeFlags, TaskFunc menuHandlerFunc, u8 textId);
 void OpenPartyMenu(u8 menuType, u8 battleFlags);
 bool8 InitPartyMenu(void);
 bool8 IsLinkDoubleBattle(void);
-u8 sub_806B58C(u8);
+u8 DrawPartyMonBackground(u8);
 void sub_806B908(void);
 void sub_806BC3C(u8, u8);
 void sub_806BCE8(void);
 u8 sub_806BD58(u8, u8);
 u8 sub_806BD58(u8, u8);
-u16 sub_806BD80(u8 taskId);
-u16 sub_806BE38(u8 taskId);
+u16 HandleDefaultPartyMenuInput(u8 taskId);
+u16 HandleBattleTowerPartyMenuInput(u8 taskId);
 void task_pc_turn_off(const u8 *a, u8 b);
-void sub_806BF74(u8 taskId, s8 directionPressed);
-void sub_806C890(u8 taskId);
+void ChangePartyMenuSelection(u8 taskId, s8 directionPressed);
+void SelectBattleTowerOKButton(u8 taskId);
 void sub_806C994(u8 taskId, u8 b);
 u8 sub_806CA38(u8 taskID);
-void sub_806CB74(u8 taskId);
+void HandlePartyMenuSwitchPokemonInput(u8 taskId);
 void sub_806CCE4(void);
 void sub_806CD44(u8 taskId);
 void sub_806D3B4(u8 taskId, u16 species1, u16 species2);
@@ -125,7 +139,7 @@ void CreatePartyMenuMonIcon(u8 taskId, u8 monIndex, u8 c, struct Pokemon *pokemo
 void TryCreatePartyMenuMonIcon(u8 a, u8 monIndex, struct Pokemon *pokemon);
 void LoadHeldItemIconGraphics(void);
 void PartyMenuTryGiveMonHeldItem(u8 taskId, u16 newItem, TaskFunc c);
-void SetMonIconSpriteId_maybe(u8 taskId, u8 monIndex, u8 spriteId);
+void SetMonIconSpriteId(u8 taskId, u8 monIndex, u8 spriteId);
 void CreateHeldItemIcon_806DCD4(u8 taskId, u8 monIndex, u16 item);
 void CreateHeldItemIcons_806DC34(u8 taskId);
 void CreateHeldItemIcons(u8 *a, u8 *b, u8 c);
@@ -133,6 +147,7 @@ void SetHeldItemIconVisibility(u8 a, u8 monIndex);
 void PartyMenuDoPrintMonNickname(u8 monIndex, int b, const u8 *nameBuffer);
 void PrintPartyMenuMonNickname(u8 monIndex, u8 b, struct Pokemon *pokemon);
 void PrintPartyMenuMonNicknames(void);
+void CreateMonIcon_LinkMultiBattle(u8 taskId, u8 monIndex, u8 menuType, struct UnknownPokemonStruct2 *pokemon);
 u8 *GetMonNickname(struct Pokemon *pokemon, u8 *stringBuffer);
 void PartyMenuPutStatusTilemap(u8 monIndex, u8 b, u8 status);
 void PartyMenuDoPrintLevel(u8 monIndex, u8 b, u8 level);
@@ -199,7 +214,7 @@ void Task_RareCandy3(u8);
 void TeachMonMoveInPartyMenu(u8);
 void DoEvolutionStoneItemEffect(u8 taskId, u16 evolutionStoneItem, TaskFunc c);
 u8 GetItemEffectType(u16 item);
-void sub_806CA60(u8 taskId);
+void SetupDefaultPartyMenuSwitchPokemon(u8 taskId);
 void sub_806CD5C(u8 taskId);
 void DoTakeMail(u8 taskId, TaskFunc func);
 void PartyMenuTryGiveMonHeldItem_806ECE8(u8 taskId, TaskFunc func);

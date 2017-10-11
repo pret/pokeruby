@@ -75,7 +75,7 @@ bool8 SetUpFieldMove_SoftBoiled(void) {
 void sub_8133D28(u8 taskid) {
     EWRAM_1000.unkC = sub_8133D50;
     EWRAM_1B000_2.unk272 = 3;
-    sub_808A004(taskid);
+    DoPokemonMenu_Switch(taskid);
 }
 
 static void sub_8133D50(u8 taskId) {
@@ -133,7 +133,7 @@ static void sub_8133E74(u8 taskId) {
 
     MenuZeroFillWindowRect(WINDOW_LEFT, 14, WINDOW_RIGHT, 19);
     PrintPartyMenuPromptText(3, 0);
-    gTasks[taskId].func = sub_806CB74;
+    gTasks[taskId].func = HandlePartyMenuSwitchPokemonInput;
 }
 
 static void sub_8133EB8(u8 taskId) {

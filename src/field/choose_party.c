@@ -18,20 +18,6 @@
 #include "task.h"
 #include "text.h"
 
-struct UnknownPokemonStruct2
-{
-    /*0x00*/ u16 species;
-    /*0x02*/ u16 heldItem;
-    /*0x04*/ u8 nickname[11];
-    /*0x0F*/ u8 level;
-    /*0x10*/ u16 hp;
-    /*0x12*/ u16 maxhp;
-    /*0x14*/ u32 status;
-    /*0x18*/ u32 personality;
-    /*0x1C*/ u8 gender;
-    /*0x1D*/ u8 language;
-};
-
 extern u8 gPlayerPartyCount;
 extern u8 gLastFieldPokeMenuOpened;
 extern u8 gUnknown_020384F0;
@@ -45,9 +31,7 @@ EWRAM_DATA u8 gSelectedOrderFromParty[3] = {0};
 extern u8 sub_806BD58(u8, u8);
 extern void PartyMenuPrintMonsLevelOrStatus(void);
 extern void sub_806BC3C(u8, u8);
-extern u8 sub_806B58C(u8);
 extern void ShowPokemonSummaryScreen(struct Pokemon *, u8, u8, void (*)(void), int);
-extern void CreateMonIcon_806D99C(int, u8, int, struct UnknownPokemonStruct2 *);
 extern u8 GetMonStatusAndPokerus();
 extern void PartyMenuPrintHP();
 extern bool8 sub_80F9344(void);
@@ -161,7 +145,7 @@ bool8 SetupBattleTowerPartyMenu(void)
         ewram1B000_alt.setupState++;
         break;
     case 7:
-        if (sub_806B58C(ewram1B000_alt.monIndex) == 1)
+        if (DrawPartyMonBackground(ewram1B000_alt.monIndex) == 1)
         {
             ewram1B000_alt.monIndex = 0;
             ewram1B000_alt.setupState = 0;
@@ -300,9 +284,9 @@ void HandleBattleTowerPartyMenu(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        switch (sub_806BE38(taskId))
+        switch (HandleBattleTowerPartyMenuInput(taskId))
         {
-        case 1:
+        case A_BUTTON:
             PlaySE(SE_SELECT);
             gLastFieldPokeMenuOpened = sub_806CA38(taskId);
             if (gLastFieldPokeMenuOpened != 6)
@@ -317,7 +301,7 @@ void HandleBattleTowerPartyMenu(u8 taskId)
             }
             sub_808B5B4(taskId);
             break;
-        case 2:
+        case B_BUTTON:
             PlaySE(SE_SELECT);
             ClearPartySelection();
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
@@ -421,7 +405,7 @@ static void sub_8122530(void)
         if (InitPartyMenu() == TRUE)
         {
             sub_806C994(ewram1B000.menuHandlerTaskId, gUnknown_020384F0);
-            sub_806C658(ewram1B000.menuHandlerTaskId, 0);
+            ChangeBattleTowerPartyMenuSelection(ewram1B000.menuHandlerTaskId, 0);
             GetMonNickname(&gPlayerParty[gUnknown_020384F0], gStringVar1);
             gLastFieldPokeMenuOpened = gUnknown_020384F0;
             sub_81221F8(ewram1B000.menuHandlerTaskId);
@@ -471,7 +455,7 @@ static void BattleTowerEntryMenuCallback_Enter(u8 taskId)
             gSelectedOrderFromParty[i] = gLastFieldPokeMenuOpened + 1;
             sub_806BC3C(gLastFieldPokeMenuOpened, i * 14 + 0x1C);
             if (i == 2)
-                sub_806C890(taskId);
+                SelectBattleTowerOKButton(taskId);
             BattleTowerEntryMenuCallback_Exit(taskId);
             return;
         }
@@ -580,7 +564,7 @@ static void sub_81228E8(u8 a)
             CreatePartyMenuMonIcon(a, i, 3, &gPlayerParty[i]);
         if (gUnknown_02023A00[i].species != 0)
         {
-            CreateMonIcon_806D99C(a, i + 3, 3, &gUnknown_02023A00[i]);
+            CreateMonIcon_LinkMultiBattle(a, i + 3, 3, &gUnknown_02023A00[i]);
             sub_806D50C(a, i + 3);
         }
     }
@@ -740,7 +724,7 @@ bool8 unref_sub_8122C60(void)
         ewram1B000_alt.setupState++;
         break;
     case 7:
-        if (sub_806B58C(ewram1B000_alt.monIndex) == 1)
+        if (DrawPartyMonBackground(ewram1B000_alt.monIndex) == 1)
         {
             ewram1B000_alt.monIndex = 0;
             ewram1B000_alt.setupState = 0;
@@ -797,16 +781,16 @@ void HandleDaycarePartyMenu(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        switch (sub_806BD80(taskId))
+        switch (HandleDefaultPartyMenuInput(taskId))
         {
-        case 1:
+        case A_BUTTON:
             PlaySE(SE_SELECT);
             gLastFieldPokeMenuOpened = sub_806CA38(taskId);
             GetMonNickname(&gPlayerParty[gLastFieldPokeMenuOpened], gStringVar1);
             sub_8122D94(taskId);
             gTasks[taskId].func = Task_DaycareStorageMenu8122EAC;
             break;
-        case 2:
+        case B_BUTTON:
             PlaySE(SE_SELECT);
             gLastFieldPokeMenuOpened = 0xFF;
             gSpecialVar_0x8004 = 0xFF;
@@ -872,7 +856,7 @@ static void sub_8122F90(void)
         if (InitPartyMenu() == TRUE)
         {
             sub_806C994(ewram1B000.menuHandlerTaskId, gUnknown_020384F0);
-            sub_806BF74(ewram1B000.menuHandlerTaskId, 0);
+            ChangePartyMenuSelection(ewram1B000.menuHandlerTaskId, 0);
             GetMonNickname(&gPlayerParty[gUnknown_020384F0], gStringVar1);
             gLastFieldPokeMenuOpened = gUnknown_020384F0;
             sub_8122D94(ewram1B000.menuHandlerTaskId);
