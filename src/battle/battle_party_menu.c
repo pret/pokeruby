@@ -22,31 +22,14 @@
 extern u8 ewram[];
 #define UNK_201606C_ARRAY (ewram + 0x1606C) // lazy define but whatever.
 
-extern u8 IsLinkDoubleBattle(void);
-extern void TryCreatePartyMenuMonIcon(u8, u8, struct Pokemon *);
-extern void LoadHeldItemIconGraphics(void);
-extern void CreateHeldItemIcons_806DC34();
 extern u8 sub_806BD58(u8, u8);
 extern void PartyMenuPrintMonsLevelOrStatus(void);
-extern void PrintPartyMenuMonNicknames(void);
-extern void PartyMenuTryPrintMonsHP(void);
 extern void nullsub_13(void);
-extern void PartyMenuDrawHPBars(void);
-extern u8 sub_806B58C(u8);
-extern u8 GetItemEffectType();
-extern void sub_806E750(u8, const struct PartyPopupMenu *, const struct PartyMenuItem *, int);
-extern void sub_806D5A4(void);
 extern void sub_802E414(void);
 extern void sub_80A6DCC(void);
-extern void sub_806AF4C();
-extern void sub_806AEDC(void);
-extern TaskFunc PartyMenuGetPopupMenuFunc(u8, const struct PartyPopupMenu *, const struct PartyMenuItem *, u8);
-extern void sub_806E7D0(u8, const struct PartyPopupMenu *);
 extern u8 *sub_8040D08();
 extern void sub_8040B8C(void);
-extern void sub_806E6F0();
 extern void nullsub_14();
-extern void OpenPartyMenu();
 extern u8 sub_803FBBC(void);
 
 extern u8 gPlayerPartyCount;
@@ -79,7 +62,7 @@ static void Task_BattlePartyMenuSummary(u8 taskId);
 static void Task_BattlePartyMenuShift(u8 taskId);
 static void Task_BattlePartyMenuCancel(u8 taskId);
 
-static const struct PartyMenuItem sBattlePartyMenuActions[] =
+static const struct MenuAction2 sBattlePartyMenuActions[] =
 {
     {OtherText_Summary,             Task_BattlePartyMenuSummary},
     {gOtherText_CancelNoTerminator, Task_BattlePartyMenuCancel},
@@ -342,7 +325,7 @@ void unref_sub_8094DB0(void)
         {
             r4 = sub_8094C20(0);
             sub_8094C98(0, i);
-            sub_806E6F0(&gPlayerParty[r4], &gPlayerParty[n]);
+            SwapPokemon(&gPlayerParty[r4], &gPlayerParty[n]);
             break;
         }
     }
@@ -354,7 +337,7 @@ void sub_8094E20(u8 a)
     gUnknown_02038473 = a;
     nullsub_14();
     pokemon_change_order();
-    OpenPartyMenu(1, 0xFF);
+    OpenPartyMenu(PARTY_MENU_TYPE_BATTLE, 0xFF);
 }
 
 void sub_8094E4C(void)
@@ -362,93 +345,93 @@ void sub_8094E4C(void)
     sub_8094E20(3);
 }
 
-int SetUpBattlePartyMenu(void)
+bool8 SetUpBattlePartyMenu(void)
 {
-    switch (EWRAM_1B000.unk264)
+    switch (EWRAM_1B000.setupState)
     //switch (ewram1B000.unk264[0])
     {
     case 0:
         //TODO: try to get rid of this duplicate code
         if (IsLinkDoubleBattle() == TRUE)
         {
-            if (EWRAM_1B000.unk266 != 6)
+            if (EWRAM_1B000.monIndex != 6)
             {
-                TryCreatePartyMenuMonIcon(EWRAM_1B000.unk260, EWRAM_1B000.unk266, &gPlayerParty[EWRAM_1B000.unk266]);
-                EWRAM_1B000.unk266++;
+                TryCreatePartyMenuMonIcon(EWRAM_1B000.menuHandlerTaskId, EWRAM_1B000.monIndex, &gPlayerParty[EWRAM_1B000.monIndex]);
+                EWRAM_1B000.monIndex++;
             }
             else
             {
-                EWRAM_1B000.unk266 = 0;
-                EWRAM_1B000.unk264++;
+                EWRAM_1B000.monIndex = 0;
+                EWRAM_1B000.setupState++;
             }
         }
         else
         {
-            if (EWRAM_1B000.unk266 < 6)
+            if (EWRAM_1B000.monIndex < 6)
             {
-                TryCreatePartyMenuMonIcon(EWRAM_1B000.unk260, EWRAM_1B000.unk266, &gPlayerParty[EWRAM_1B000.unk266]);
-                EWRAM_1B000.unk266++;
+                TryCreatePartyMenuMonIcon(EWRAM_1B000.menuHandlerTaskId, EWRAM_1B000.monIndex, &gPlayerParty[EWRAM_1B000.monIndex]);
+                EWRAM_1B000.monIndex++;
             }
             else
             {
-                EWRAM_1B000.unk266 = 0;
-                EWRAM_1B000.unk264++;
+                EWRAM_1B000.monIndex = 0;
+                EWRAM_1B000.setupState++;
             }
         }
         break;
     case 1:
         LoadHeldItemIconGraphics();
-        EWRAM_1B000.unk264++;
+        EWRAM_1B000.setupState++;
         break;
     case 2:
-        CreateHeldItemIcons_806DC34(EWRAM_1B000.unk260);
-        EWRAM_1B000.unk264++;
+        CreateHeldItemIcons_806DC34(EWRAM_1B000.menuHandlerTaskId);
+        EWRAM_1B000.setupState++;
         break;
     case 3:
-        if (sub_806BD58(EWRAM_1B000.unk260, EWRAM_1B000.unk266) == 1)
+        if (sub_806BD58(EWRAM_1B000.menuHandlerTaskId, EWRAM_1B000.monIndex) == 1)
         {
-            EWRAM_1B000.unk266 = 0;
-            EWRAM_1B000.unk264++;
+            EWRAM_1B000.monIndex = 0;
+            EWRAM_1B000.setupState++;
         }
         else
-            EWRAM_1B000.unk266++;
+            EWRAM_1B000.monIndex++;
         break;
     case 4:
         PartyMenuPrintMonsLevelOrStatus();
-        EWRAM_1B000.unk264++;
+        EWRAM_1B000.setupState++;
         break;
     case 5:
         PrintPartyMenuMonNicknames();
-        EWRAM_1B000.unk264++;
+        EWRAM_1B000.setupState++;
         break;
     case 6:
         PartyMenuTryPrintMonsHP();
-        EWRAM_1B000.unk264++;
+        EWRAM_1B000.setupState++;
         break;
     case 7:
         nullsub_13();
-        EWRAM_1B000.unk264++;
+        EWRAM_1B000.setupState++;
         break;
     case 8:
         PartyMenuDrawHPBars();
-        EWRAM_1B000.unk264++;
+        EWRAM_1B000.setupState++;
         break;
     case 9:
-        if (sub_806B58C(EWRAM_1B000.unk266) == 1)
+        if (DrawPartyMonBackground(EWRAM_1B000.monIndex) == 1)
         {
-            EWRAM_1B000.unk266 = 0;
-            EWRAM_1B000.unk264++;
+            EWRAM_1B000.monIndex = 0;
+            EWRAM_1B000.setupState++;
         }
         else
-            EWRAM_1B000.unk266++;
+            EWRAM_1B000.monIndex++;
         break;
     case 10:
         if (gUnknown_02038473 == 3)
         {
             if (GetItemEffectType(gScriptItemId) == 10)
-                ewram1B000.unk259 = 0xFF;
+                ewram1B000.promptTextId = 0xFF;
             else
-                ewram1B000.unk259 = 3;
+                ewram1B000.promptTextId = 3;
         }
         return TRUE;
     }
@@ -461,55 +444,56 @@ static void sub_8095050(u8 a, u8 b)
     {
         if (gUnknown_02038473 == 1)
         {
-            gTasks[EWRAM_1B000.unk260].data[4] = 1;
-            gTasks[EWRAM_1B000.unk260].data[5] = 1;
+            gTasks[EWRAM_1B000.menuHandlerTaskId].data[4] = 1;
+            gTasks[EWRAM_1B000.menuHandlerTaskId].data[5] = 1;
         }
         else
         {
-            gTasks[EWRAM_1B000.unk260].data[4] = 0;
-            gTasks[EWRAM_1B000.unk260].data[5] = 0;
+            gTasks[EWRAM_1B000.menuHandlerTaskId].data[4] = 0;
+            gTasks[EWRAM_1B000.menuHandlerTaskId].data[5] = 0;
         }
     }
     else
     {
-        gTasks[EWRAM_1B000.unk260].data[4] = 2;
-        gTasks[EWRAM_1B000.unk260].data[5] = 2;
+        gTasks[EWRAM_1B000.menuHandlerTaskId].data[4] = 2;
+        gTasks[EWRAM_1B000.menuHandlerTaskId].data[5] = 2;
     }
-    sub_806E750(gTasks[a].data[4], sBattlePartyPopupMenus, sBattlePartyMenuActions, 0);
+
+    ShowPartyPopupMenu(gTasks[a].data[4], sBattlePartyPopupMenus, sBattlePartyMenuActions, 0);
 }
 
-void SetUpBattlePokemonMenu(u8 a)
+void HandleBattlePartyMenu(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
         if (gUnknown_02038473 == 3 && GetItemEffectType(gScriptItemId) == 10)
         {
-            gUnknown_03004AE4(a, gScriptItemId, Task_80952E4);
+            gUnknown_03004AE4(taskId, gScriptItemId, Task_80952E4);
             return;
         }
 
-        switch (sub_806BD80(a))
+        switch (HandleDefaultPartyMenuInput(taskId))
         {
-        case 1:
+        case A_BUTTON:
             if (gUnknown_02038473 == 3)
             {
-                if (GetMonData(&gPlayerParty[sub_806CA38(a)], MON_DATA_IS_EGG))
+                if (GetMonData(&gPlayerParty[sub_806CA38(taskId)], MON_DATA_IS_EGG))
                     PlaySE(SE_HAZURE);
                 else
                 {
                     sub_806D5A4();
-                    gUnknown_03004AE4(a, gScriptItemId, Task_80952E4);
+                    gUnknown_03004AE4(taskId, gScriptItemId, Task_80952E4);
                 }
             }
             else
             {
                 PlaySE(SE_SELECT);
-                GetMonNickname(&gPlayerParty[sub_806CA38(a)], gStringVar1);
-                sub_8095050(a, sub_806CA38(a));
-                SetTaskFuncWithFollowupFunc(a, Task_HandlePopupMenuInput, SetUpBattlePokemonMenu);
+                GetMonNickname(&gPlayerParty[sub_806CA38(taskId)], gStringVar1);
+                sub_8095050(taskId, sub_806CA38(taskId));
+                SetTaskFuncWithFollowupFunc(taskId, Task_HandlePopupMenuInput, HandleBattlePartyMenu);
             }
             break;
-        case 2:
+        case B_BUTTON:
             if (gUnknown_02038473 == 1)
                 PlaySE(SE_HAZURE);
             else
@@ -518,12 +502,12 @@ void SetUpBattlePokemonMenu(u8 a)
                 if (gUnknown_02038473 == 3)
                 {
                     gUnknown_0202E8F4 = 0;
-                    gTasks[a].func = Task_80952E4;
+                    gTasks[taskId].func = Task_80952E4;
                 }
                 else
                 {
                     gUnknown_0202E8F4 = 0;
-                    gTasks[a].func = Task_809527C;
+                    gTasks[taskId].func = Task_809527C;
                 }
             }
             break;
@@ -571,7 +555,7 @@ static void Task_8095330(u8 taskId)
 static void Task_809535C(void)
 {
     gPaletteFade.bufferTransferDisabled = TRUE;
-    sub_806AF4C(1, 0xFF, SetUpBattlePokemonMenu, 5);
+    SetPartyMenuSettings(PARTY_MENU_TYPE_BATTLE, 0xFF, HandleBattlePartyMenu, 5);
     SetMainCallback2(Task_809538C);
 }
 
@@ -579,14 +563,14 @@ static void Task_809538C(void)
 {
     do
     {
-        if (sub_806B124() == TRUE)
+        if (InitPartyMenu() == TRUE)
         {
-            sub_806C994(EWRAM_1B000.unk260, gUnknown_020384F0);
-            sub_806BF74(EWRAM_1B000.unk260, 0);
+            sub_806C994(EWRAM_1B000.menuHandlerTaskId, gUnknown_020384F0);
+            ChangePartyMenuSelection(EWRAM_1B000.menuHandlerTaskId, 0);
             GetMonNickname(&gPlayerParty[gUnknown_020384F0], gStringVar1);
-            sub_8095050(EWRAM_1B000.unk260, gUnknown_020384F0);
-            SetTaskFuncWithFollowupFunc(EWRAM_1B000.unk260, Task_HandlePopupMenuInput, SetUpBattlePokemonMenu);
-            SetMainCallback2(sub_806AEDC);
+            sub_8095050(EWRAM_1B000.menuHandlerTaskId, gUnknown_020384F0);
+            SetTaskFuncWithFollowupFunc(EWRAM_1B000.menuHandlerTaskId, Task_HandlePopupMenuInput, HandleBattlePartyMenu);
+            SetMainCallback2(CB2_PartyMenuMain);
             return;
         }
     } while (sub_80F9344() != 1);
@@ -660,7 +644,7 @@ static void Task_BattlePartyMenuShift(u8 taskId)
     u8 i;
     u8 r4;
 
-    sub_806E7D0(gTasks[taskId].data[4], sBattlePartyPopupMenus);
+    ClosePartyPopupMenu(gTasks[taskId].data[4], sBattlePartyPopupMenus);
     partySelection = sub_806CA38(taskId);
     if (IsLinkDoubleBattle() == TRUE && (partySelection == 1 || partySelection == 4 || partySelection == 5))
     {
@@ -735,15 +719,15 @@ static void Task_BattlePartyMenuShift(u8 taskId)
     gUnknown_0202E8F4 = 1;
     r4 = pokemon_order_func(gBattlePartyID[gBankInMenu]);
     sub_8094C98(r4, partySelection);
-    sub_806E6F0(&gPlayerParty[r4], &gPlayerParty[partySelection]);
+    SwapPokemon(&gPlayerParty[r4], &gPlayerParty[partySelection]);
     gTasks[taskId].func = Task_809527C;
 }
 
 static void Task_BattlePartyMenuCancel(u8 taskId)
 {
     HandleDestroyMenuCursors();
-    sub_806E7D0(gTasks[taskId].data[4], sBattlePartyPopupMenus);
+    ClosePartyPopupMenu(gTasks[taskId].data[4], sBattlePartyPopupMenus);
     gTasks[taskId].data[4] = gTasks[taskId].data[5];
-    sub_806D538(0, 0);
+    PrintPartyMenuPromptText(0, 0);
     SwitchTaskToFollowupFunc(taskId);
 }

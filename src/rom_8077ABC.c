@@ -111,6 +111,8 @@ extern struct OamMatrix gOamMatrices[];
 extern struct Struct_2017810 unk_2017810[];
 extern u8 gHappinessMoveAnim;
 
+extern u8 UpdateMonIconFrame(struct Sprite *sprite);
+
 EWRAM_DATA union AffineAnimCmd *gUnknown_0202F7D4 = NULL;
 EWRAM_DATA u32 filler_0202F7D8[3] = {0};
 

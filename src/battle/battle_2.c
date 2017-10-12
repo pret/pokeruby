@@ -53,20 +53,6 @@ struct UnknownStruct8
     u8 unk1A;
 };
 
-struct UnknownPokemonStruct2
-{
-    /*0x00*/ u16 species;
-    /*0x02*/ u16 heldItem;
-    /*0x04*/ u8 nickname[11];
-    /*0x0F*/ u8 level;
-    /*0x10*/ u16 hp;
-    /*0x12*/ u16 maxhp;
-    /*0x14*/ u32 status;
-    /*0x18*/ u32 personality;
-    /*0x1C*/ u8 gender;
-    /*0x1D*/ u8 language;
-};
-
 struct UnknownStruct12
 {
     u32 unk0;
@@ -612,7 +598,7 @@ void sub_800F104(void)
             *pSavedCallback = gMain.savedCallback;
             *pSavedBattleTypeFlags = gBattleTypeFlags;
             gMain.savedCallback = sub_800F104;
-            OpenPartyMenu(5, 0);
+            OpenPartyMenu(PARTY_MENU_TYPE_LINK_MULTI_BATTLE, 0);
         }
         break;
     case 2:

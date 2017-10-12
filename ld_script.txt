@@ -100,9 +100,7 @@ SECTIONS {
         src/field/field_tasks.o(.text);
         src/engine/clock.o(.text);
         src/engine/reset_rtc_screen.o(.text);
-        asm/party_menu.o(.text);
         src/field/party_menu.o(.text);
-        asm/party_menu.o(.text_8070968);
         src/field/start_menu.o(.text);
         src/engine/menu.o(.text);
         src/engine/tileset_anim.o(.text);
@@ -350,7 +348,7 @@ SECTIONS {
         src/field/coord_event_weather.o(.rodata);
         src/field/field_tasks.o(.rodata);
         data/reset_rtc_screen.o(.rodata);
-        data/party_menu.o(.rodata);
+        src/field/party_menu.o(.rodata);
         src/field/start_menu.o(.rodata);
         src/engine/menu.o(.rodata);
         data/tileset_anim.o(.rodata);

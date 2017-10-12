@@ -335,7 +335,7 @@ gUnknown_0202E8F6: @ 202E8F6
 gUnknown_0202E8F8: @ 202E8F8
 	.space 0x2
 
-gUnknown_0202E8FA: @ 202E8FA
+gPartyMenuType: @ 202E8FA
 	.space 0x2
 
 	.include "src/field/start_menu.o"
