@@ -6,30 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_81231EC
-sub_81231EC: @ 81231EC
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	ldr r0, _08123210 @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _0812320A
-	ldr r0, _08123214 @ =sub_8123244
-	bl SetMainCallback2
-	adds r0, r4, 0
-	bl DestroyTask
-_0812320A:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08123210: .4byte gPaletteFade
-_08123214: .4byte sub_8123244
-	thumb_func_end sub_81231EC
-
 	thumb_func_start sub_8123218
 sub_8123218: @ 8123218
 	push {lr}
