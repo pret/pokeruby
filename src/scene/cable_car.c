@@ -467,13 +467,49 @@ void sub_8123CB8(struct Sprite *sprite)
     {
         if (gSpecialVar_0x8004 == 0)
         {
-            sprite->pos1.x = sprite->data0 - (u8)((f32)0.14 * S16TOPOSFLOAT(gUnknown_02039274->unk_0006));
-            sprite->pos1.y = sprite->data1 - (u8)((f32)0.067 * S16TOPOSFLOAT(gUnknown_02039274->unk_0006));
+            sprite->pos1.x = sprite->data0 - (u8)(0.14f * S16TOPOSFLOAT(gUnknown_02039274->unk_0006));
+            sprite->pos1.y = sprite->data1 - (u8)(0.067f * S16TOPOSFLOAT(gUnknown_02039274->unk_0006));
         }
         else
         {
-            sprite->pos1.x = sprite->data0 + (u8)((f32)0.14 * S16TOPOSFLOAT(gUnknown_02039274->unk_0006));
-            sprite->pos1.y = sprite->data1 + (u8)((f32)0.067 * S16TOPOSFLOAT(gUnknown_02039274->unk_0006));
+            sprite->pos1.x = sprite->data0 + (u8)(0.14f * S16TOPOSFLOAT(gUnknown_02039274->unk_0006));
+            sprite->pos1.y = sprite->data1 + (u8)(0.067f * S16TOPOSFLOAT(gUnknown_02039274->unk_0006));
+        }
+    }
+}
+
+void sub_8123D98(struct Sprite *sprite)
+{
+    if (gUnknown_02039274->unk_0001 != 255)
+    {
+        if (gSpecialVar_0x8004 == 0)
+        {
+            sprite->pos1.x = sprite->data0 - (u8)(0.14f * S16TOPOSFLOAT(gUnknown_02039274->unk_0006));
+            sprite->pos1.y = sprite->data1 - (u8)(0.067f * S16TOPOSFLOAT(gUnknown_02039274->unk_0006));
+        }
+        else
+        {
+            sprite->pos1.x = sprite->data0 + (u8)(0.14f * S16TOPOSFLOAT(gUnknown_02039274->unk_0006));
+            sprite->pos1.y = sprite->data1 + (u8)(0.067f * S16TOPOSFLOAT(gUnknown_02039274->unk_0006));
+        }
+        switch (sprite->data2)
+        {
+            case 0:
+                sprite->pos2.y = 17;
+                if (sprite->data3 ++ > 9)
+                {
+                    sprite->data3 = 0;
+                    sprite->data2 ++;
+                }
+                break;
+            default:
+                sprite->pos2.y = 16;
+                if (sprite->data3 ++ > 9)
+                {
+                    sprite->data3 = 0;
+                    sprite->data2 = 0;
+                }
+                break;
         }
     }
 }
