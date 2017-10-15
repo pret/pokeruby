@@ -13,6 +13,7 @@
 #include "unknown_task.h"
 #include "event_data.h"
 #include "cable_car_util.h"
+#include "map_object_constants.h"
 
 // Static type declarations
 
@@ -79,6 +80,10 @@ void sub_81239E4(u8 taskId);
 void sub_8123AF8(u8 taskId);
 void sub_812453C(void);
 void sub_8124598(void);
+void sub_8123CB8(struct Sprite *sprite);
+void nullsub_76(struct Sprite *sprite);
+void sub_8123EB8(struct Sprite *sprite);
+void sub_8123F44(struct Sprite *sprite);
 
 // .rodata
 
@@ -119,6 +124,83 @@ const struct CompressedSpriteSheet gUnknown_08401CF8[] = {
 const struct SpritePalette gUnknown_08401D18[] = {
     { gCableCar_Pal, 1 },
     {                  }
+};
+
+const struct OamData gOamData_8401D28 = {
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .size = 3,
+    .priority = 2
+};
+
+const struct OamData gOamData_8401D30 = {
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .shape = ST_OAM_H_RECTANGLE,
+    .priority = 2
+};
+
+const struct OamData gOamData_8401D38 = {
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .size = 1,
+    .priority = 2
+};
+
+const struct SpriteTemplate gSpriteTemplate_8401D40 = {
+    1,
+    1,
+    &gOamData_8401D28,
+    gDummySpriteAnimTable,
+    NULL,
+    gDummySpriteAffineAnimTable,
+    sub_8123CB8
+};
+
+const struct SpriteTemplate gSpriteTemplate_8401D58 = {
+    2,
+    1,
+    &gOamData_8401D30,
+    gDummySpriteAnimTable,
+    NULL,
+    gDummySpriteAffineAnimTable,
+    sub_8123CB8
+};
+
+const struct SpriteTemplate gSpriteTemplate_8401D70 = {
+    3,
+    1,
+    &gOamData_8401D38,
+    gDummySpriteAnimTable,
+    NULL,
+    gDummySpriteAffineAnimTable,
+    nullsub_76
+};
+
+const u8 gCableCarPlayerGraphicsIDs[] = {
+    MAP_OBJ_GFX_RIVAL_BRENDAN_NORMAL,
+    MAP_OBJ_GFX_RIVAL_MAY_NORMAL
+};
+
+const u8 gMtChimneyHikerGraphicsIDs[] = {
+    MAP_OBJ_GFX_HIKER,
+    MAP_OBJ_GFX_CAMPER,
+    MAP_OBJ_GFX_PICNICKER,
+    MAP_OBJ_GFX_POOCHYENA
+};
+
+const u16 gMtChimneyHikerCoords[][2] = {
+    {   0,  80 },
+    { 240, 146 }
+};
+
+const u8 gMtChimneyHikerMovementDelayTable[] = {
+      0,
+     60,
+    120,
+    170
+};
+
+void (*const gUnknown_08401D9C[])(struct Sprite *sprite) = {
+    sub_8123EB8,
+    sub_8123F44
 };
 
 // .text
@@ -456,7 +538,7 @@ void sub_8123C40(void)
     TransferPlttBuffer();
 }
 
-void nullsub_76(void)
+void nullsub_76(struct Sprite *sprite)
 {
 
 }

@@ -438,7 +438,6 @@ SECTIONS {
         data/battle_message.o(.rodata);
         src/field/choose_party.o(.rodata);
         src/scene/cable_car.o(.rodata);
-        data/cable_car.o(.rodata);
         src/engine/save.o(.rodata);
         src/field/field_effect_helpers.o(.rodata);
         data/contest_ai.o(.rodata);
