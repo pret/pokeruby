@@ -67,6 +67,7 @@ void sub_8123878(u8 taskId);
 void sub_81239E4(u8 taskId);
 void sub_8123AF8(u8 taskId);
 void sub_812453C(void);
+void sub_8124598(void);
 
 // .rodata
 
@@ -381,4 +382,50 @@ void sub_81239E4(u8 taskId)
     }
     sub_812453C();
     gSpriteCoordOffsetX = (gSpriteCoordOffsetX + 1) % 128;
+}
+
+void sub_8123AF8(u8 taskId)
+{
+    if (gUnknown_02039274->unk_0001 != 255)
+    {
+        gUnknown_02039274->unk_0014 ++;
+        if ((gUnknown_02039274->unk_0006 % 2) == 0)
+        {
+            gUnknown_02039274->unk_0015 ++;
+        }
+        if ((gUnknown_02039274->unk_0006 % 8) == 0)
+        {
+            gUnknown_02039274->unk_000c ++;
+            gUnknown_02039274->unk_000d ++;
+        }
+        switch (gUnknown_02039274->unk_0014)
+        {
+            case 176:
+                sub_8124F08(gUnknown_02039274->unk_08fc, ewram_19000.pylonStemTilemap, 0, 2, 2, 30);
+                break;
+            case 16:
+                sub_8124E7C(gUnknown_02039274->unk_08fc, 0, 2, 0, 3, 2);
+                sub_8124E7C(gUnknown_02039274->unk_08fc, 0, 0, 22, 2, 10);
+                gUnknown_02039274->unk_0015 = 192;
+                break;
+            case 32:
+                gUnknown_02039274->unk_08fc[2] = (gCableCarPylonHookTilemapEntries + 2)[0];
+                gUnknown_02039274->unk_08fc[3] = (gCableCarPylonHookTilemapEntries + 2)[1];
+                gUnknown_02039274->unk_08fc[34] = (gCableCarPylonHookTilemapEntries + 2)[5];
+                gUnknown_02039274->unk_08fc[35] = (gCableCarPylonHookTilemapEntries + 2)[6];
+                break;
+            case 40:
+                gUnknown_02039274->unk_08fc[4] = (gCableCarPylonHookTilemapEntries + 4)[0];
+                gUnknown_02039274->unk_08fc[36] = (gCableCarPylonHookTilemapEntries + 4)[5];
+                break;
+        }
+    }
+    sub_8124598();
+    if (gUnknown_02039274->unk_0006 < gUnknown_02039274->unk_0004) {
+        gSpriteCoordOffsetX = (gSpriteCoordOffsetX + 247) % 248;
+    }
+    else
+    {
+        gUnknown_08396FC4->unknown_6FC = (gUnknown_08396FC4->unknown_6FC + 247) % 248;
+    }
 }

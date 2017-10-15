@@ -84,7 +84,8 @@ struct Weather
     u8 filler_6E5[0x15];
     u8 unknown_6FA;
     u8 unknown_6FB;
-    u8 filler_6FC[4];
+    u16 unknown_6FC;
+    u8 filler_6FE[2];
     u8 unknown_700;
     u8 filler_701[0x15];
     u8 unknown_716;
