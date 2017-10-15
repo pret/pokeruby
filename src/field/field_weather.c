@@ -4,54 +4,6 @@
 #include "sprite.h"
 #include "task.h"
 
-struct Weather
-{
-    u8 filler_000[0x200];
-    u8 unknown_200[2][32];
-    u8 filler_240[0x480];
-    s8 unknown_6C0;
-    s8 unknown_6C1;
-    u8 unknown_6C2;
-    u8 unknown_6C3;
-    u16 unknown_6C4;
-    u8 unknown_6C6;
-    u8 unknown_6C7;
-    u8 unknown_6C8;
-    u8 unknown_6C9;
-    u8 unknown_6CA;
-    u8 unknown_6CB;
-    u8 filler_6CC[2];
-    u16 unknown_6CE;
-    u8 unknown_6D0;
-    u8 unknown_6D1;
-    u8 filler_6D2[1];
-    u8 unknown_6D3;
-    u8 unknown_6D4;
-    u8 unknown_6D5;
-    u8 filler_6D6[2];
-    u8 unknown_6D8;
-    u8 filler_6D9[1];
-    u8 unknown_6DA;
-    u8 filler_6DB[3];
-    u8 unknown_6DE;
-    u8 filler_6DF[5];
-    u8 unknown_6E4;
-    u8 filler_6E5[0x15];
-    u8 unknown_6FA;
-    u8 unknown_6FB;
-    u8 filler_6FC[4];
-    u8 unknown_700;
-    u8 filler_701[0x15];
-    u8 unknown_716;
-    u8 unknown_717;
-    u8 filler_718[0xc];
-    u8 unknown_724;
-    u8 filler_725[9];
-    u8 unknown_72E;
-};
-
-#define gWeather gUnknown_0202F7E8
-extern struct Weather gWeather;
 extern u8 *gUnknown_083970E8;
 extern u8 (*gUnknown_08396FC8[][4])(void);
 extern u8 (*gUnknown_083970B8[])(void);

@@ -799,5 +799,6 @@ struct HallOfFame
 
 extern struct HallOfFame gHallOfFame;
 extern struct SaveBlock2 gSaveBlock2;
+extern u8 ewram[];
 
 #endif // GUARD_GLOBAL_H

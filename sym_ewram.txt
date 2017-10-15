@@ -580,31 +580,7 @@ gAbilitiesPerBank: @ 203926C
 	.space 0x4
 
 	.include "src/field/choose_party.o"
-
-@ cable_car
-
-	.align 2
-gUnknown_02039274: @ 2039274
-	.space 0x4
-
-gUnknown_02039278: @ 2039278
-	.space 0x1
-
-gUnknown_02039279: @ 2039279
-	.space 0x1
-
-gUnknown_0203927A: @ 203927A
-	.space 0x1
-
-gUnknown_0203927B: @ 203927B
-	.space 0x1
-
-gUnknown_0203927C: @ 203927C
-	.space 0x1
-
-gUnknown_0203927D: @ 203927D
-	.space 0x7
-
+	.include "src/scene/cable_car.o"
 	.include "src/engine/save.o"
 	.include "src/engine/mystery_event_script.o"
 	.include "src/field/roamer.o"
