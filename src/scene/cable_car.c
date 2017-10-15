@@ -513,3 +513,39 @@ void sub_8123D98(struct Sprite *sprite)
         }
     }
 }
+
+void sub_8123EB8(struct Sprite *sprite)
+{
+    if (sprite->data0 == 0)
+    {
+        sprite->pos1.x += 2 * sprite->centerToCornerVecX;
+        sprite->pos1.y += 16 + sprite->centerToCornerVecY;
+    }
+    if (++ sprite->data0 >= sprite->data2)
+    {
+        switch (sprite->data1)
+        {
+            case 0:
+                sprite->pos1.x ++;
+                if ((sprite->data0 % 4) == 0)
+                {
+                    sprite->pos1.y ++;
+                }
+                break;
+            case 1:
+                if ((sprite->data0 % 2) != 0)
+                {
+                    sprite->pos1.x ++;
+                    if ((sprite->pos1.x % 4) == 0)
+                    {
+                        sprite->pos1.y ++;
+                    }
+                }
+                break;
+        }
+        if (sprite->pos1.y > 0xa0)
+        {
+            DestroySprite(sprite);
+        }
+    }
+}
