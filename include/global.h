@@ -130,7 +130,7 @@ struct UCoords16
 
 struct SecretBaseRecord
 {
-    /*ID?*/ /*0x1A08*/ u8 sbr_field_0;
+    /*ID?*/ /*0x1A08*/ u8 secretBaseId;
     /*0x1A09*/ u8 sbr_field_1_0:4;
     /*0x1A09*/ u8 gender:1;
     /*0x1A09*/ u8 sbr_field_1_5:1;
