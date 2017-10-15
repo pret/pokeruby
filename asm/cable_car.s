@@ -6,60 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_8123C40
-sub_8123C40: @ 8123C40
-	push {r4,lr}
-	ldr r1, _08123C9C @ =0x040000d4
-	ldr r0, _08123CA0 @ =gUnknown_02039274
-	ldr r2, [r0]
-	adds r0, r2, 0
-	adds r0, 0xFC
-	str r0, [r1]
-	ldr r0, _08123CA4 @ =0x0600e000
-	str r0, [r1, 0x4]
-	ldr r3, _08123CA8 @ =0x80000400
-	str r3, [r1, 0x8]
-	ldr r0, [r1, 0x8]
-	ldr r4, _08123CAC @ =0x000008fc
-	adds r0, r2, r4
-	str r0, [r1]
-	ldr r0, _08123CB0 @ =0x0600f800
-	str r0, [r1, 0x4]
-	str r3, [r1, 0x8]
-	ldr r0, [r1, 0x8]
-	subs r1, 0xB8
-	ldrb r0, [r2, 0x14]
-	strh r0, [r1]
-	adds r1, 0x2
-	ldrb r0, [r2, 0x15]
-	strh r0, [r1]
-	subs r1, 0xA
-	ldrb r0, [r2, 0xC]
-	strh r0, [r1]
-	adds r1, 0x2
-	ldrb r0, [r2, 0xD]
-	strh r0, [r1]
-	subs r1, 0x6
-	ldrb r0, [r2, 0x8]
-	strh r0, [r1]
-	adds r1, 0x2
-	ldrb r0, [r2, 0x9]
-	strh r0, [r1]
-	bl LoadOam
-	bl ProcessSpriteCopyRequests
-	bl TransferPlttBuffer
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08123C9C: .4byte 0x040000d4
-_08123CA0: .4byte gUnknown_02039274
-_08123CA4: .4byte 0x0600e000
-_08123CA8: .4byte 0x80000400
-_08123CAC: .4byte 0x000008fc
-_08123CB0: .4byte 0x0600f800
-	thumb_func_end sub_8123C40
-
 	thumb_func_start nullsub_76
 nullsub_76: @ 8123CB4
 	bx lr

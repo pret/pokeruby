@@ -23,7 +23,9 @@ struct Unk_2017000 {
     u8 unk_0003;
     u16 unk_0004;
     u16 unk_0006;
-    u8 filler_0008[4];
+    u8 unk_0008;
+    u8 unk_0009;
+    u8 filler_000a[2];
     u8 unk_000c;
     u8 unk_000d;
     u8 filler_0000e[6];
@@ -428,4 +430,19 @@ void sub_8123AF8(u8 taskId)
     {
         gUnknown_08396FC4->unknown_6FC = (gUnknown_08396FC4->unknown_6FC + 247) % 248;
     }
+}
+
+void sub_8123C40(void)
+{
+    DmaCopy16(3, gUnknown_02039274->unk_00fc, BG_SCREEN_ADDR(28), 0x800);
+    DmaCopy16(3, gUnknown_02039274->unk_08fc, BG_SCREEN_ADDR(31), 0x800);
+    REG_BG3HOFS = gUnknown_02039274->unk_0014;
+    REG_BG3VOFS = gUnknown_02039274->unk_0015;
+    REG_BG1HOFS = gUnknown_02039274->unk_000c;
+    REG_BG1VOFS = gUnknown_02039274->unk_000d;
+    REG_BG0HOFS = gUnknown_02039274->unk_0008;
+    REG_BG0VOFS = gUnknown_02039274->unk_0009;
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    TransferPlttBuffer();
 }
