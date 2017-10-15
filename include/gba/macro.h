@@ -87,7 +87,7 @@
 #define DmaCopyLarge(dmaNum, src, dest, size, block, bit) \
 {                                                         \
     const void *_src = src;                               \
-    void *_dest = dest;                                   \
+    void *_dest = (void *)(dest);                         \
     u32 _size = size;                                     \
     while (1)                                             \
     {                                                     \
@@ -110,7 +110,7 @@
 #define DmaCopyDefvars(dmaNum, src, dest, size, bit) \
 {                                                    \
     const void *_src = src;                          \
-    void *_dest = dest;                              \
+    void *_dest = (void *)(dest);                    \
     u32 _size = size;                                \
     DmaCopy##bit(dmaNum, _src, _dest, _size);        \
 }
@@ -120,8 +120,8 @@
 
 #define DmaFillLarge(dmaNum, fillval, dest, size, block, bit) \
 {                                                             \
-    void *_dest = dest;                                       \
-    u32 _size = (u32)(size);                               \
+    void *_dest = (void *)(dest);                             \
+    u32 _size = (u32)(size);                                  \
     while (1)                                                 \
     {                                                         \
         DmaFill##bit(dmaNum, fillval, _dest, (block));        \
@@ -140,7 +140,7 @@
 
 #define DmaFillDefvars(dmaNum, fillval, dest, size, bit) \
 {                                                        \
-    void *_dest = dest;                                  \
+    void *_dest = (void *)(dest);                        \
     u32 _size = (u##bit)(size);                          \
     DmaFill##bit(dmaNum, fillval, _dest, _size);         \
 }

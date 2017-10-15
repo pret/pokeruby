@@ -1,6 +1,7 @@
 
 // Includes
 #include "global.h"
+#include "overworld.h"
 #include "palette.h"
 #include "main.h"
 #include "script.h"
@@ -127,9 +128,9 @@ void sub_8123244(void)
         default:
             SetVBlankCallback(NULL);
             remove_some_task();
-            DmaFill16Large(3, 0, (void *)VRAM, VRAM_SIZE, 0x1000);
-            DmaFill32Defvars(3, 0, (void *)OAM, OAM_SIZE);
-            DmaFill16Defvars(3, 0, (void *)PLTT, PLTT_SIZE);
+            DmaFill16Large(3, 0, VRAM, VRAM_SIZE, 0x1000);
+            DmaFill32Defvars(3, 0, OAM, OAM_SIZE);
+            DmaFill16Defvars(3, 0, PLTT, PLTT_SIZE);
             gUnknown_02039274 = &ewram_17000;
             DmaFill16Large(3, 0, &ewram_17000, 0x10FC, 0x1000);
             gMain.state ++;
@@ -228,4 +229,34 @@ void sub_8123244(void)
             }
             break;
     }
+}
+
+void sub_8123724(void)
+{
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+    MapMusicMain();
+}
+
+void sub_8123740(void)
+{
+    u8 i;
+
+    for (i = 0, sub_8123FBC(0), gSpriteCoordOffsetX = 0, sub_807C9B4(0); i < 20; i ++)
+    {
+        gUnknown_08396FC4->unk_0f0[i] = NULL;
+    }
+    ResetTasks();
+    ResetSpriteData();
+    ResetPaletteFade();
+    DmaFill32Large(3, 0, ewram, 0x20000, 0x1000);
+    gUnknown_02039274 = NULL;
+    DmaFill16Large(3, 0, VRAM, VRAM_SIZE, 0x1000);
+    DmaFill32Defvars(3, 0, OAM, OAM_SIZE);
+    DmaFill16Defvars(3, 0, PLTT, PLTT_SIZE);
+    warp_in();
+    gFieldCallback = NULL;
+    SetMainCallback2(CB2_LoadMap);
 }
