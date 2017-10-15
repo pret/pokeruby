@@ -584,3 +584,73 @@ void sub_8123F44(struct Sprite *sprite)
         }
     }
 }
+
+void sub_8123FBC(bool8 which)
+{
+    switch (which)
+    {
+        case FALSE:
+        default:
+            REG_WININ = 0;
+            REG_WINOUT = 0;
+            REG_WIN0H = 0;
+            REG_WIN1H = 0;
+            REG_WIN0V = 0;
+            REG_WIN1V = 0;
+            REG_DISPCNT = 0;
+            REG_BG3CNT = 0;
+            REG_BG2CNT = 0;
+            REG_BG1CNT = 0;
+            REG_BG0CNT = 0;
+            REG_BG3HOFS = 0;
+            REG_BG3VOFS = 0;
+            REG_BG2HOFS = 0;
+            REG_BG2VOFS = 0;
+            REG_BG1HOFS = 0;
+            REG_BG1VOFS = 0;
+            REG_BG0HOFS = 0;
+            REG_BG0VOFS = 0;
+            REG_BLDCNT = 0;
+            break;
+        case TRUE:
+            REG_WININ = 0;
+            REG_WINOUT = 0;
+            REG_WIN0H = 0;
+            REG_WIN1H = 0;
+            REG_WIN0V = 0;
+            REG_WIN1V = 0;
+            if (gSpecialVar_0x8004 == 0)
+            {
+                gUnknown_02039274->unk_0014 = 0xb0;
+                gUnknown_02039274->unk_0015 = 0x10;
+                gUnknown_02039274->unk_000c = 0x00;
+                gUnknown_02039274->unk_000d = 0x50;
+                gUnknown_02039274->unk_0009 = 0;
+                gUnknown_02039274->unk_0009 = 0;
+            }
+            else
+            {
+                gUnknown_02039274->unk_0014 = 0x60;
+                gUnknown_02039274->unk_0015 = 0xe8;
+                gUnknown_02039274->unk_000c = 0x00;
+                gUnknown_02039274->unk_000d = 0x04;
+                gUnknown_02039274->unk_0009 = 0;
+                gUnknown_02039274->unk_0009 = 0;
+            }
+            REG_BG3HOFS = gUnknown_02039274->unk_0014;
+            REG_BG3VOFS = gUnknown_02039274->unk_0015;
+            REG_BG2HOFS = 0;
+            REG_BG2VOFS = 0;
+            REG_BG1HOFS = gUnknown_02039274->unk_000c;
+            REG_BG1VOFS = gUnknown_02039274->unk_000d;
+            REG_BG0HOFS = gUnknown_02039274->unk_0008;
+            REG_BG0VOFS = gUnknown_02039274->unk_0009;
+            REG_BG0CNT = BGCNT_PRIORITY(1) | BGCNT_SCREENBASE(28) | BGCNT_WRAP;
+            REG_BG1CNT = BGCNT_PRIORITY(2) | BGCNT_SCREENBASE(29) | BGCNT_WRAP;
+            REG_BG2CNT = BGCNT_PRIORITY(3) | BGCNT_SCREENBASE(30) | BGCNT_WRAP;
+            REG_BG3CNT = BGCNT_PRIORITY(0) | BGCNT_SCREENBASE(31) | BGCNT_WRAP;
+            REG_DISPCNT = DISPCNT_OBJ_1D_MAP | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON;
+            REG_BLDCNT = 0x3f00;
+            break;
+    }
+}
