@@ -20,7 +20,10 @@ struct Unk_2017000 {
     u8 unk_0000;
     u8 unk_0001;
     u8 unk_0002;
-    u8 filler_0003[0xf9];
+    u8 unk_0003;
+    u16 unk_0004;
+    u16 unk_0006;
+    u8 filler_0008[0xf4];
     u16 unk_00fc[0x400];
     u16 unk_08fc[0x400];
 }; // size 0x10FC
@@ -180,7 +183,7 @@ void sub_8123244(void)
                 {
                     if (gUnknown_08396FC4->unk_0f0[i] != NULL)
                     {
-                        gUnknown_08396FC4->unk_0f0[i]->unk_5_2 = 0;
+                        gUnknown_08396FC4->unk_0f0[i]->oam.priority = 0;
                     }
                 }
                 gMain.state ++;
@@ -244,7 +247,11 @@ void sub_8123740(void)
 {
     u8 i;
 
-    for (i = 0, sub_8123FBC(0), gSpriteCoordOffsetX = 0, sub_807C9B4(0); i < 20; i ++)
+    i = 0;
+    sub_8123FBC(0);
+    gSpriteCoordOffsetX = 0;
+    sub_807C9B4(0);
+    for (; i < 20; i ++)
     {
         gUnknown_08396FC4->unk_0f0[i] = NULL;
     }
@@ -259,4 +266,76 @@ void sub_8123740(void)
     warp_in();
     gFieldCallback = NULL;
     SetMainCallback2(CB2_LoadMap);
+}
+
+void sub_8123878(u8 taskId)
+{
+    u8 i;
+
+    i = 0;
+    gUnknown_02039274->unk_0006 ++;
+    switch (gUnknown_02039274->unk_0001)
+    {
+        case 0:
+            if (gUnknown_02039274->unk_0006 == gUnknown_02039274->unk_0004)
+            {
+                DoWeatherEffect(gUnknown_02039274->unk_0002);
+                gUnknown_02039274->unk_0001 = 1;
+            }
+            break;
+        case 1:
+            switch (gUnknown_02039274->unk_0002)
+            {
+                case 7:
+                    if (gUnknown_08396FC4->unk_0f0[0] != NULL && gUnknown_08396FC4->unk_0f0[0]->oam.priority != 0)
+                    {
+                        for (; i < 20; i ++)
+                        {
+                            if (gUnknown_08396FC4->unk_0f0[i] != NULL)
+                            {
+                                gUnknown_08396FC4->unk_0f0[i]->oam.priority = 0;
+                            }
+                        }
+                        gUnknown_02039274->unk_0001 = 2;
+                    }
+                    break;
+                case 2:
+                    if (gUnknown_08396FC4->unknown_6D0 == 2)
+                    {
+                        gUnknown_02039274->unk_0001 = 2;
+                    }
+                    else if (gUnknown_02039274->unk_0006 >= gUnknown_02039274->unk_0004 + 8)
+                    {
+                        for (; i < 20; i ++)
+                        {
+                            if (gUnknown_08396FC4->unk_0f0[i] != NULL)
+                            {
+                                gUnknown_08396FC4->unk_0f0[i]->invisible ^= TRUE;
+                            }
+                        }
+                    }
+                    break;
+            }
+            break;
+        case 2:
+            if (gUnknown_02039274->unk_0006 == 570)
+            {
+                gUnknown_02039274->unk_0001 = 3;
+                BeginNormalPaletteFade(-1, 3, 0, 16, 0);
+                FadeOutBGM(4);
+            }
+            break;
+        case 3:
+            if (!gPaletteFade.active)
+            {
+                gUnknown_02039274->unk_0001 = 255;
+            }
+            break;
+        case 255:
+            SetVBlankCallback(NULL);
+            DestroyTask(taskId);
+            DestroyTask(gUnknown_02039274->unk_0000);
+            SetMainCallback2(sub_8123740);
+            break;
+    }
 }

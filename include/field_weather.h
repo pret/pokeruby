@@ -47,17 +47,10 @@ bool8 sub_807DDFC(void);
 void SetWeather(u32);
 void UpdateWeatherPerDay(u16);
 
-struct WeatherSubstruct {
-    u8 filler_0[5];
-    u8 unk_5_0:2;
-    u8 unk_5_2:2;
-    u8 unk_5_4:4;
-};
-
 struct Weather
 {
     u8 filler_000[0xf0];
-    struct WeatherSubstruct *unk_0f0[20];
+    struct Sprite *unk_0f0[20];
     u8 filler_140[0xc0];
     u8 unknown_200[2][32];
     u8 filler_240[0x480];
