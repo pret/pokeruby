@@ -3,6 +3,7 @@
 #include "global.h"
 #include "overworld.h"
 #include "palette.h"
+#include "rng.h"
 #include "main.h"
 #include "script.h"
 #include "task.h"
@@ -10,6 +11,7 @@
 #include "songs.h"
 #include "decompress.h"
 #include "field_weather.h"
+#include "field_map_obj.h"
 #include "unknown_task.h"
 #include "event_data.h"
 #include "cable_car_util.h"
@@ -144,63 +146,32 @@ const struct OamData gOamData_8401D38 = {
     .priority = 2
 };
 
-const struct SpriteTemplate gSpriteTemplate_8401D40 = {
-    1,
-    1,
-    &gOamData_8401D28,
-    gDummySpriteAnimTable,
-    NULL,
-    gDummySpriteAffineAnimTable,
-    sub_8123CB8
-};
-
-const struct SpriteTemplate gSpriteTemplate_8401D58 = {
-    2,
-    1,
-    &gOamData_8401D30,
-    gDummySpriteAnimTable,
-    NULL,
-    gDummySpriteAffineAnimTable,
-    sub_8123CB8
-};
-
-const struct SpriteTemplate gSpriteTemplate_8401D70 = {
-    3,
-    1,
-    &gOamData_8401D38,
-    gDummySpriteAnimTable,
-    NULL,
-    gDummySpriteAffineAnimTable,
-    nullsub_76
-};
-
-const u8 gCableCarPlayerGraphicsIDs[] = {
-    MAP_OBJ_GFX_RIVAL_BRENDAN_NORMAL,
-    MAP_OBJ_GFX_RIVAL_MAY_NORMAL
-};
-
-const u8 gMtChimneyHikerGraphicsIDs[] = {
-    MAP_OBJ_GFX_HIKER,
-    MAP_OBJ_GFX_CAMPER,
-    MAP_OBJ_GFX_PICNICKER,
-    MAP_OBJ_GFX_POOCHYENA
-};
-
-const u16 gMtChimneyHikerCoords[][2] = {
-    {   0,  80 },
-    { 240, 146 }
-};
-
-const u8 gMtChimneyHikerMovementDelayTable[] = {
-      0,
-     60,
-    120,
-    170
-};
-
-void (*const gUnknown_08401D9C[])(struct Sprite *sprite) = {
-    sub_8123EB8,
-    sub_8123F44
+const struct SpriteTemplate gSpriteTemplate_8401D40[] = {
+    {
+        1,
+        1,
+        &gOamData_8401D28,
+        gDummySpriteAnimTable,
+        NULL,
+        gDummySpriteAffineAnimTable,
+        sub_8123CB8
+    }, {
+        2,
+        1,
+        &gOamData_8401D30,
+        gDummySpriteAnimTable,
+        NULL,
+        gDummySpriteAffineAnimTable,
+        sub_8123CB8
+    }, {
+        3,
+        1,
+        &gOamData_8401D38,
+        gDummySpriteAnimTable,
+        NULL,
+        gDummySpriteAffineAnimTable,
+        nullsub_76
+    }
 };
 
 // .text
@@ -734,5 +705,134 @@ void sub_8123FBC(bool8 which)
             REG_DISPCNT = DISPCNT_OBJ_1D_MAP | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON;
             REG_BLDCNT = 0x3f00;
             break;
+    }
+}
+
+void sub_8124118(void)
+{
+    u8 spriteId;
+    u8 i;
+
+    u8 playerGraphicsIds[2] = {
+        MAP_OBJ_GFX_RIVAL_BRENDAN_NORMAL,
+        MAP_OBJ_GFX_RIVAL_MAY_NORMAL
+    };
+    u16 rval = Random();
+    u8 hikerGraphicsIds[4] = {
+        MAP_OBJ_GFX_HIKER,
+        MAP_OBJ_GFX_CAMPER,
+        MAP_OBJ_GFX_PICNICKER,
+        MAP_OBJ_GFX_POOCHYENA
+    };
+    s16 hikerCoords[2][2] = {
+        {   0,  80 },
+        { 240, 146 }
+    };
+    u8 hikerMovementDelayTable[4] = {
+        0,
+        60,
+        120,
+        170
+    };
+    void (*callbacks[2])(struct Sprite *) = {
+        sub_8123EB8,
+        sub_8123F44
+    };
+
+    switch (gSpecialVar_0x8004)
+    {
+        case 0:
+        default:
+            spriteId = AddPseudoFieldObject(playerGraphicsIds[gSaveBlock2.playerGender], sub_8123D98, 0xc8, 0x49, 0x66);
+            if (spriteId != MAX_SPRITES)
+            {
+                gSprites[spriteId].oam.priority = 2;
+                gSprites[spriteId].pos2.x = 0x08;
+                gSprites[spriteId].pos2.y = 0x10;
+                gSprites[spriteId].data0 = 0xc8;
+                gSprites[spriteId].data1 = 0x49;
+            }
+            spriteId = CreateSprite(&gSpriteTemplate_8401D40[0], 0xb0, 0x2b, 0x67);
+            gSprites[spriteId].pos2.x = gSprites[spriteId].pos2.y = 0x20;
+            gSprites[spriteId].data0 = 0xb0;
+            gSprites[spriteId].data1 = 0x2b;
+            spriteId = CreateSprite(&gSpriteTemplate_8401D40[1], 0xc8, 0x63, 0x65);
+            gSprites[spriteId].pos2.x = 8;
+            gSprites[spriteId].pos2.y = 4;
+            gSprites[spriteId].data0 = 0xc8;
+            gSprites[spriteId].data1 = 0x63;
+            gUnknown_02039274->unk_0002 = 7;
+            gUnknown_02039274->unk_0004 = 0x15e;
+            sub_807C9B4(2);
+            break;
+        case 1:
+            sub_8124F08(gUnknown_02039274->unk_00fc, ewram_19000.mtChimneyTilemap + 0x24, 0x18, 0x1a, 0x0c, 0x03);
+            spriteId = AddPseudoFieldObject(playerGraphicsIds[gSaveBlock2.playerGender], sub_8123D98, 0x80, 0x27, 0x66);
+            if (spriteId != MAX_SPRITES)
+            {
+                gSprites[spriteId].oam.priority = 2;
+                gSprites[spriteId].pos2.x = 0x08;
+                gSprites[spriteId].pos2.y = 0x10;
+                gSprites[spriteId].data0 = 0x80;
+                gSprites[spriteId].data1 = 0x27;
+            }
+            spriteId = CreateSprite(&gSpriteTemplate_8401D40[0], 0x68, 0x09, 0x67);
+            gSprites[spriteId].pos2.x = gSprites[spriteId].pos2.y = 0x20;
+            gSprites[spriteId].data0 = 0x68;
+            gSprites[spriteId].data1 = 0x09;
+            spriteId = CreateSprite(&gSpriteTemplate_8401D40[1], 0x80, 0x41, 0x65);
+            gSprites[spriteId].pos2.x = 8;
+            gSprites[spriteId].pos2.y = 4;
+            gSprites[spriteId].data0 = 0x80;
+            gSprites[spriteId].data1 = 0x41;
+            gUnknown_02039274->unk_0002 = 2;
+            gUnknown_02039274->unk_0004 = 0x109;
+            sub_807C9B4(7);
+            break;
+    }
+    for (i = 0; i < 9; i ++)
+    {
+        spriteId = CreateSprite(&gSpriteTemplate_8401D40[2], 16 * i + 0x60, 8 * i - 8, 0x68);
+        gSprites[spriteId].pos2.x = 8;
+        gSprites[spriteId].pos2.y = 8;
+    }
+    if ((rval % 64) == 0)
+    {
+        spriteId = AddPseudoFieldObject(hikerGraphicsIds[rval % 3], callbacks[gSpecialVar_0x8004], hikerCoords[gSpecialVar_0x8004][0], hikerCoords[gSpecialVar_0x8004][1], 0x6a);
+        if (spriteId != MAX_SPRITES)
+        {
+            gSprites[spriteId].oam.priority = 2;
+            gSprites[spriteId].pos2.x = -gSprites[spriteId].centerToCornerVecX;
+            gSprites[spriteId].pos2.y = -gSprites[spriteId].centerToCornerVecY;
+            if (gSpecialVar_0x8004 == 0)
+            {
+                if (rval % 2)
+                {
+                    StartSpriteAnim(&gSprites[spriteId], 6);
+                    gSprites[spriteId].data1 = 1;
+                    gSprites[spriteId].pos1.y += 2;
+                }
+                else
+                {
+                    StartSpriteAnim(&gSprites[spriteId], 7);
+                    gSprites[spriteId].data1 = 0;
+                }
+            }
+            else
+            {
+                if (rval % 2)
+                {
+                    StartSpriteAnim(&gSprites[spriteId], 7);
+                    gSprites[spriteId].data1 = 1;
+                    gSprites[spriteId].pos1.y += 2;
+                }
+                else
+                {
+                    StartSpriteAnim(&gSprites[spriteId], 6);
+                    gSprites[spriteId].data1 = 0;
+                }
+            }
+            gSprites[spriteId].data2 = hikerMovementDelayTable[rval % 4];
+        }
     }
 }
