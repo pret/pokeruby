@@ -16,6 +16,15 @@
 
 // Static type declarations
 
+// Credits to Made (dolphin emoji)
+#define S16TOPOSFLOAT(val)   \
+({                           \
+    s16 v = (val);           \
+    float f = (float)v;      \
+    if(v < 0) f += 65536.0f; \
+    f;                       \
+})
+
 struct Unk_2017000 {
     u8 unk_0000;
     u8 unk_0001;
@@ -445,4 +454,26 @@ void sub_8123C40(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
+}
+
+void nullsub_76(void)
+{
+
+}
+
+void sub_8123CB8(struct Sprite *sprite)
+{
+    if (gUnknown_02039274->unk_0001 != 255)
+    {
+        if (gSpecialVar_0x8004 == 0)
+        {
+            sprite->pos1.x = sprite->data0 - (u8)((f32)0.14 * S16TOPOSFLOAT(gUnknown_02039274->unk_0006));
+            sprite->pos1.y = sprite->data1 - (u8)((f32)0.067 * S16TOPOSFLOAT(gUnknown_02039274->unk_0006));
+        }
+        else
+        {
+            sprite->pos1.x = sprite->data0 + (u8)((f32)0.14 * S16TOPOSFLOAT(gUnknown_02039274->unk_0006));
+            sprite->pos1.y = sprite->data1 + (u8)((f32)0.067 * S16TOPOSFLOAT(gUnknown_02039274->unk_0006));
+        }
+    }
 }
