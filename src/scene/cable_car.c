@@ -23,7 +23,13 @@ struct Unk_2017000 {
     u8 unk_0003;
     u16 unk_0004;
     u16 unk_0006;
-    u8 filler_0008[0xf4];
+    u8 filler_0008[4];
+    u8 unk_000c;
+    u8 unk_000d;
+    u8 filler_0000e[6];
+    u8 unk_0014;
+    u8 unk_0015;
+    u8 filler_0016[0xe6];
     u16 unk_00fc[0x400];
     u16 unk_08fc[0x400];
 }; // size 0x10FC
@@ -60,6 +66,7 @@ void sub_8123724(void);
 void sub_8123878(u8 taskId);
 void sub_81239E4(u8 taskId);
 void sub_8123AF8(u8 taskId);
+void sub_812453C(void);
 
 // .rodata
 
@@ -338,4 +345,40 @@ void sub_8123878(u8 taskId)
             SetMainCallback2(sub_8123740);
             break;
     }
+}
+
+void sub_81239E4(u8 taskId)
+{
+    if (gUnknown_02039274->unk_0001 != 255)
+    {
+        gUnknown_02039274->unk_0014 --;
+        if ((gUnknown_02039274->unk_0006 % 2) == 0)
+        {
+            gUnknown_02039274->unk_0015 --;
+        }
+        if ((gUnknown_02039274->unk_0006 % 8) == 0)
+        {
+            gUnknown_02039274->unk_000c --;
+            gUnknown_02039274->unk_000d --;
+        }
+        switch (gUnknown_02039274->unk_0014)
+        {
+            case 175:
+                sub_8124E7C(gUnknown_02039274->unk_08fc, 0, 0, 22, 2, 10);
+                break;
+            case 40:
+                sub_8124E7C(gUnknown_02039274->unk_08fc, 0, 3, 0, 2, 2);
+                break;
+            case 32:
+                sub_8124E7C(gUnknown_02039274->unk_08fc, 0, 2, 0, 1, 2);
+                break;
+            case 16:
+                sub_8124F08(gUnknown_02039274->unk_08fc, gCableCarPylonHookTilemapEntries, 0, 0, 5, 2);
+                sub_8124F08(gUnknown_02039274->unk_08fc, ewram_19000.pylonStemTilemap, 0, 2, 2, 30);
+                gUnknown_02039274->unk_0015 = 64;
+                break;
+        }
+    }
+    sub_812453C();
+    gSpriteCoordOffsetX = (gSpriteCoordOffsetX + 1) % 128;
 }
