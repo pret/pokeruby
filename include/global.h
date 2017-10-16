@@ -37,6 +37,7 @@ fndec\
 
 #define ARRAY_COUNT(array) (sizeof(array) / sizeof((array)[0]))
 
+#define POKEMON_SLOTS_NUMBER 412
 #define POKEMON_NAME_LENGTH 10
 #define OT_NAME_LENGTH 7
 
@@ -113,11 +114,6 @@ enum
     BAG_TMsHMs,
     BAG_BERRIES,
     BAG_KEYITEMS
-};
-
-struct TextStruct
-{
-    const u8 *text;
 };
 
 struct Coords16
@@ -452,33 +448,69 @@ struct MailStruct
     /*0x20*/ u16 itemId;
 };
 
-struct UnkMauvilleOldManStruct
+
+// Mauville Pokemon Center men
+
+struct MauvilleManCommon
 {
-               u8 unk_2D94;
-               u8 unk_2D95;
-    /*0x2D96*/ u16 mauvilleOldMan_ecArray[6];
-    /*0x2DA2*/ u16 mauvilleOldMan_ecArray2[6];
-    /*0x2DAE*/ u8 playerName[8];
-    /*0x2DB6*/ u8 filler_2DB6[0x3];
-    /*0x2DB9*/ u8 playerTrainerId[4];
-               u8 unk_2DBD;
+    u8 id;
+};
+
+struct MauvilleManBard
+{
+    /*0x00*/ u8 id;
+    /*0x02*/ u16 songLyrics[6];
+    /*0x0E*/ u16 temporaryLyrics[6];
+    /*0x1A*/ u8 playerName[8];
+    /*0x22*/ u8 filler_2DB6[0x3];
+    /*0x25*/ u8 playerTrainerId[4];
+    /*0x29*/ bool8 hasChangedSong;
 }; /*size = 0x2C*/
 
-struct UnkMauvilleOldManStruct2
+struct MauvilleManHipster
 {
-    u8 filler0;
-    u8 unk1;
-    u8 unk2;
-    u16 mauvilleOldMan_ecArray[10];
-    u8 mauvilleOldMan_ecArray2[12];
-    u8 fillerF[0x2];
+    u8 id;
+    bool8 alreadySpoken;
+};
+
+struct MauvilleManTrader
+{
+    u8 id;
+    u8 unk1[4];
+    u8 unk5[4][11];
+    bool8 alreadyTraded;
+};
+
+struct MauvilleManStoryteller
+{
+    u8 id;
+    bool8 alreadyRecorded;
+    u8 filler2[2];
+    u8 gameStatIDs[4];
+    u8 trainerNames[4][7];
+    u8 statValues[4][4];
+};
+
+struct MauvilleManGiddy
+{
+    /*0x00*/ u8 id;
+    /*0x01*/ u8 taleCounter;
+    /*0x02*/ u8 questionNum;
+    /*0x04*/ u16 randomWords[10];
+    /*0x18*/ u8 questionList[12];
 }; /*size = 0x2C*/
 
-typedef union OldMan
+
+union MauvilleMan
 {
-    struct UnkMauvilleOldManStruct oldMan1;
-    struct UnkMauvilleOldManStruct2 oldMan2;
-} OldMan;
+    struct MauvilleManCommon common;
+    struct MauvilleManBard bard;
+    struct MauvilleManHipster hipster;
+    struct MauvilleManTrader trader;
+    struct MauvilleManStoryteller storyteller;
+    struct MauvilleManGiddy giddy;
+    u8 filler[0x40];  // needed to pad out the struct
+};
 
 struct Unk_SB_Access_Struct1
 {
@@ -529,17 +561,63 @@ struct GabbyAndTyData
     /*2b1b*/ u8 valB_5:3;
 };
 
-struct RecordMixing_UnknownStructSub
+struct DayCareMail
 {
-    u8 data[0x38];
+    /*0x00*/ struct MailStruct message;
+    /*0x24*/ u8 names[19];
 };
 
-struct RecordMixing_UnknownStruct
-{
-    struct RecordMixing_UnknownStructSub data[2];
-    u32 unk70;
-    u16 unk74[0x2];
+struct DayCareStepCountersEtc {
+    u32 steps[2];
+    u16 personalityLo;
+    u8 unk_11a;
 };
+
+struct RecordMixingDayCareMail
+{
+    struct DayCareMail mail[2];
+    u32 unk70;
+    u16 unk74[2];
+};
+
+struct DayCareMisc
+{
+    struct DayCareMail mail[2];
+    struct DayCareStepCountersEtc countersEtc;
+};
+
+struct DayCareData {
+    struct BoxPokemon mons[2];
+    struct DayCareMisc misc;
+};
+
+struct LinkBattleRecord
+{
+    u8 name[8];
+    u16 trainerId;
+    u16 wins;
+    u16 losses;
+    u16 draws;
+};
+
+struct RecordMixingGiftData
+{
+    u8 unk0;
+    u8 quantity;
+    u16 itemId;
+    u8 filler4[8];
+};
+
+struct RecordMixingGift
+{
+    int checksum;
+    struct RecordMixingGiftData data;
+};
+
+// there should be enough flags for all 412 slots
+// each slot takes up 8 flags
+// if the value is not divisible by 8, we need to account for the reminder as well
+#define DEX_FLAGS_NO ((POKEMON_SLOTS_NUMBER / 8) + ((POKEMON_SLOTS_NUMBER % 8) ? 1 : 0))
 
 struct SaveBlock1 /* 0x02025734 */
 {
@@ -547,12 +625,12 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x04*/ struct WarpData location;
     /*0x0C*/ struct WarpData warp1;
     /*0x14*/ struct WarpData warp2;
-    /*0x1C*/ struct WarpData warp3;
+    /*0x1C*/ struct WarpData lastHealLocation;
     /*0x24*/ struct WarpData warp4;
-    /*0x2C*/ u16 battleMusic;
+    /*0x2C*/ u16 savedMusic;
     /*0x2E*/ u8 weather;
     /*0x2F*/ u8 filler_2F;
-    /*0x30*/ u8 flashUsed;
+    /*0x30*/ u8 flashLevel;  // flash level on current map, 0 being normal and 4 being the darkest
     /*0x32*/ u16 mapDataId;
     /*0x34*/ u16 mapView[0x100];
     /*0x234*/ u8 playerPartyCount;
@@ -567,7 +645,7 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x640*/ struct ItemSlot bagPocket_TMHM[64];
     /*0x740*/ struct ItemSlot bagPocket_Berries[46];
     /*0x7F8*/ struct Pokeblock pokeblocks[40];
-    /*0x938*/ u8 unk938[52];  // pokedex related
+    /*0x938*/ u8 dexSeen2[DEX_FLAGS_NO];
     /*0x96C*/ u16 berryBlenderRecords[3];
     /*0x972*/ u8 filler_972[0x6];
     /*0x978*/ u16 trainerRematchStepCounter;
@@ -610,25 +688,20 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x2B4C*/ struct MailStruct mail[16];
     /*0x2D8C*/ u8 unk2D8C[4];
     /*0x2D90*/ u8 filler_2D90[0x4];
-    /*0x2D94*/ OldMan oldMan;
-    /*0x2DC0*/ u8 unk_2DC0[0x14];
+    /*0x2D94*/ union MauvilleMan mauvilleMan;
     /*0x2DD4*/ struct EasyChatPair easyChatPairs[5]; //Dewford trend [0] and some other stuff
     /*0x2DFC*/ u8 filler_2DFC[0x8];
     /*0x2E04*/ SB_Struct sbStruct;
-    /*0x2F9C*/ struct BoxPokemon daycareData[2];
-    /*0x303C*/ struct RecordMixing_UnknownStruct filler_303C;
-    /*0x30AC*/ u8 filler_30B4[0x2];
-    /*0x30B6*/ u8 filler_30B6;
-    /*0x30B7*/ u8 filler_30B7[1];
-    /*0x30B8*/ u8 linkBattleRecords[5][16];
+    /*0x2F9C*/ struct DayCareData daycareData;
+    /*0x30B8*/ struct LinkBattleRecord linkBattleRecords[5];
     /*0x3108*/ u8 filler_3108[8];
-    /*0x3110*/ u8 giftRibbons[7];
-    /*0x3117*/ u8 filler_311B[0x2D];
+    /*0x3110*/ u8 giftRibbons[11];
+    /*0x3117*/ u8 filler_311B[0x29];
     /*0x3144*/ struct Roamer roamer;
     /*0x3160*/ struct EnigmaBerry enigmaBerry;
     /*0x3690*/ struct RamScript ramScript;
-    /*0x3A7C*/ u8 filler_3A7C[0x10];
-    /*0x3A8C*/ u8 unk3A8C[52]; //pokedex related
+    /*0x3A7C*/ struct RecordMixingGift recordMixingGift;
+    /*0x3A8C*/ u8 dexSeen3[DEX_FLAGS_NO];
 };
 
 extern struct SaveBlock1 gSaveBlock1;
@@ -650,8 +723,8 @@ struct Pokedex
     /*0x04*/ u32 unownPersonality; // set when you first see Unown
     /*0x08*/ u32 spindaPersonality; // set when you first see Spinda
     /*0x0C*/ u32 unknown3;
-    /*0x10*/ u8 owned[52];
-    /*0x44*/ u8 seen[52];
+    /*0x10*/ u8 owned[DEX_FLAGS_NO];
+    /*0x44*/ u8 seen[DEX_FLAGS_NO];
 };
 
 struct SaveBlock2_Sub
@@ -659,19 +732,20 @@ struct SaveBlock2_Sub
     /*0x0000, 0x00A8*/ u8 filler_000[0x3D8];
     /*0x03D8, 0x0480*/ u16 var_480;
     /*0x03DA, 0x0482*/ u16 var_482;
-    /*0x03DC, 0x0484*/ u8 filler_3DC[0xD0];
+    /*0x03DC, 0x0484*/ u8 filler_3DC[0x14];
+    /*0x03F0, 0x0498*/ u8 ereaderTrainer[0xBC];
     /*0x04AC, 0x0554*/ u8 var_4AC;
     /*0x04AD, 0x0555*/ u8 var_4AD;
-    /*0x04AE, 0x0556*/ u8 var_4AE;
-    /*0x04AF, 0x0557*/ u8 var_4AF;
+    /*0x04AE, 0x0556*/ u8 var_4AE[2];
     /*0x04B0, 0x0558*/ u16 var_4B0;
     /*0x04B2, 0x055A*/ u16 var_4B2;
     /*0x04B4, 0x055C*/ u16 var_4B4;
     /*0x04B6, 0x055E*/ u16 var_4B6;
-    /*0x04B8, 0x0560*/ u8 filler_4B8[0x10];
+    /*0x04B8, 0x0560*/ u16 recordWinStreak[2];
+    /*0x04BC, 0x0564*/ u8 filler_4BC[0xC];
     /*0x04C8, 0x0570*/ u16 var_4C8;
     /*0x04CA, 0x0572*/ u16 var_4CA;
-    /*0x04CC, 0x0574*/ u8 filler_4CC[4];
+    /*0x04CC, 0x0574*/ u16 winStreak[2];
     /*0x04D0, 0x0578*/ u8 var_4D0;
     /*0x04D1, 0x0579*/ u8 filler_4D1[0x317];
 };

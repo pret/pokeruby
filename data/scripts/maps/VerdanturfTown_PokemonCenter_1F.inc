@@ -11,7 +11,7 @@ PacifidlogTown_PokemonCenter_1F_EventScript_153F18:: @ 8153F18
 VerdanturfTown_PokemonCenter_1F_EventScript_153F18:: @ 8153F18
 	setvar 0x800b, 1
 	call VerdanturfTown_PokemonCenter_1F_EventScript_19FD5B
-	waittext
+	waitmessage
 	waitbutton
 	release
 	end

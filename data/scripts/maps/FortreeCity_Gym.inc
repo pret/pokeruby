@@ -4,7 +4,7 @@ FortreeCity_Gym_MapScripts:: @ 8157ED3
 	.byte 0
 
 FortreeCity_Gym_MapScript1_157EDE:: @ 8157EDE
-	special 201
+	special RotatingGate_InitPuzzle
 	end
 
 FortreeCity_Gym_MapScript2_157EE2:: @ 8157EE2
@@ -12,33 +12,33 @@ FortreeCity_Gym_MapScript2_157EE2:: @ 8157EE2
 	.2byte 0
 
 FortreeCity_Gym_EventScript_157EEC:: @ 8157EEC
-	special 202
+	special RotatingGate_InitPuzzleAndGraphics
 	end
 
 FortreeCity_Gym_EventScript_157EF0:: @ 8157EF0
 	trainerbattle 1, OPPONENT_WINONA, 0, FortreeCity_Gym_Text_185CCB, FortreeCity_Gym_Text_185DBA, FortreeCity_Gym_EventScript_157F15
 	checkflag 170
-	jumpif 0, FortreeCity_Gym_EventScript_157F3E
+	goto_if 0, FortreeCity_Gym_EventScript_157F3E
 	msgbox FortreeCity_Gym_Text_185F98, 4
 	release
 	end
 
 FortreeCity_Gym_EventScript_157F15:: @ 8157F15
 	message FortreeCity_Gym_Text_185E48
-	waittext
+	waitmessage
 	call FortreeCity_Gym_EventScript_1A02C5
 	msgbox FortreeCity_Gym_Text_185E73, 4
 	setflag 1225
 	setflag 2060
 	setvar 0x8008, 6
 	call FortreeCity_Gym_EventScript_1A01C0
-	jump FortreeCity_Gym_EventScript_157F3E
+	goto FortreeCity_Gym_EventScript_157F3E
 	end
 
 FortreeCity_Gym_EventScript_157F3E:: @ 8157F3E
 	giveitem ITEM_TM40
 	compare RESULT, 0
-	jumpeq FortreeCity_Gym_EventScript_1A029B
+	goto_if_eq FortreeCity_Gym_EventScript_1A029B
 	msgbox FortreeCity_Gym_Text_185F4A, 4
 	setflag 170
 	release
@@ -68,7 +68,7 @@ FortreeCity_Gym_EventScript_157FBE:: @ 8157FBE
 	lock
 	faceplayer
 	checkflag 1225
-	jumpeq FortreeCity_Gym_EventScript_157FD3
+	goto_if_eq FortreeCity_Gym_EventScript_157FD3
 	msgbox FortreeCity_Gym_Text_18589C, 4
 	release
 	end
@@ -81,15 +81,15 @@ FortreeCity_Gym_EventScript_157FD3:: @ 8157FD3
 FortreeCity_Gym_EventScript_157FDD:: @ 8157FDD
 	lockall
 	checkflag 2060
-	jumpeq FortreeCity_Gym_EventScript_157FFD
-	jump FortreeCity_Gym_EventScript_158007
+	goto_if_eq FortreeCity_Gym_EventScript_157FFD
+	goto FortreeCity_Gym_EventScript_158007
 	end
 
 FortreeCity_Gym_EventScript_157FED:: @ 8157FED
 	lockall
 	checkflag 2060
-	jumpeq FortreeCity_Gym_EventScript_157FFD
-	jump FortreeCity_Gym_EventScript_158007
+	goto_if_eq FortreeCity_Gym_EventScript_157FFD
+	goto FortreeCity_Gym_EventScript_158007
 	end
 
 FortreeCity_Gym_EventScript_157FFD:: @ 8157FFD

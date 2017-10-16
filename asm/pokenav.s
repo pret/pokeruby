@@ -340,7 +340,7 @@ sub_80EBD30: @ 80EBD30
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
-	bl sub_80FB260
+	bl UpdateRegionMapVideoRegs
 	bl sub_80EFE7C
 	pop {r0}
 	bx r0
@@ -10523,7 +10523,7 @@ sub_80F0FFC: @ 80F0FFC
 	ldrh r1, [r0]
 	adds r0, r5, 0
 	movs r2, 0
-	bl sub_80FBFB4
+	bl GetMapSectionName
 	ldr r0, _080F1054 @ =gWindowConfig_81E710C
 	bl BasicInitMenuWindow
 	adds r0, r5, 0
@@ -14321,10 +14321,10 @@ sub_80F2DD8: @ 80F2DD8
 	push {lr}
 	movs r0, 0x7
 	movs r1, 0x7
-	bl sub_80FBB3C
+	bl CreateRegionMapCursor
 	movs r0, 0x8
 	movs r1, 0x8
-	bl sub_80FBCF0
+	bl CreateRegionMapPlayerIcon
 	bl sub_80FBF94
 	pop {r0}
 	bx r0
@@ -14333,7 +14333,7 @@ sub_80F2DD8: @ 80F2DD8
 	thumb_func_start sub_80F2DF4
 sub_80F2DF4: @ 80F2DF4
 	push {lr}
-	bl sub_80FAB10
+	bl FreeRegionMapIconResources
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80F2DF4
@@ -17787,7 +17787,7 @@ sub_80F4824: @ 80F4824
 	adds r0, r5, 0
 	mov r1, r8
 	adds r2, r4, 0
-	bl species_and_otid_get_pal
+	bl GetMonSpritePalFromOtIdPersonality
 	mov r2, r9
 	lsls r1, r2, 7
 	adds r1, r7, r1
@@ -21564,7 +21564,7 @@ _080F65EA:
 	lsrs r4, r0, 24
 	mov r0, r9
 	mov r1, r10
-	bl sub_8040D8C
+	bl ShouldHideGenderIcon
 	cmp r0, 0
 	beq _080F65FC
 	movs r4, 0xFF
@@ -22370,7 +22370,7 @@ _080F6C3A:
 	adds r6, r0, r1
 	ldrh r7, [r6]
 	adds r0, r7, 0
-	bl trainer_flag_check
+	bl HasTrainerAlreadyBeenFought
 	lsls r0, 24
 	cmp r0, 0
 	beq _080F6CA0
@@ -22402,7 +22402,7 @@ _080F6C3A:
 	strb r1, [r0]
 	ldrh r0, [r6, 0xA]
 	ldrh r1, [r6, 0xC]
-	bl get_mapheader_by_bank_and_number
+	bl Overworld_GetMapHeaderByGroupAndId
 	ldrh r1, [r5]
 	lsls r1, 3
 	adds r4, r1
@@ -22431,7 +22431,7 @@ _080F6CB4:
 	adds r5, r0, r1
 	ldrh r4, [r5]
 	adds r0, r4, 0
-	bl trainer_flag_check
+	bl HasTrainerAlreadyBeenFought
 	lsls r0, 24
 	cmp r0, 0
 	beq _080F6D0E

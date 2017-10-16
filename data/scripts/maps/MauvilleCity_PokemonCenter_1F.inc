@@ -5,17 +5,17 @@ MauvilleCity_PokemonCenter_1F_MapScripts:: @ 8157351
 MauvilleCity_PokemonCenter_1F_MapScript1_157357:: @ 8157357
 	sethealplace 5
 	call MauvilleCity_PokemonCenter_1F_EventScript_19FD1B
-	jump MauvilleCity_PokemonCenter_1F_EventScript_157365
+	goto MauvilleCity_PokemonCenter_1F_EventScript_157365
 	end
 
 MauvilleCity_PokemonCenter_1F_EventScript_157365:: @ 8157365
-	special 104
+	special sub_80F83D0
 	end
 
 MauvilleCity_PokemonCenter_1F_EventScript_157369:: @ 8157369
 	setvar 0x800b, 1
 	call MauvilleCity_PokemonCenter_1F_EventScript_19FD5B
-	waittext
+	waitmessage
 	waitbutton
 	release
 	end

@@ -6,16 +6,16 @@ DesertRuins_MapScripts:: @ 815CAF3
 
 DesertRuins_MapScript1_15CB03:: @ 815CB03
 	checkflag 2145
-	callif 1, DesertRuins_EventScript_15CB0D
+	call_if 1, DesertRuins_EventScript_15CB0D
 	end
 
 DesertRuins_EventScript_15CB0D:: @ 815CB0D
-	disappear LAST_TALKED
+	removeobject LAST_TALKED
 	return
 
 DesertRuins_MapScript1_15CB11:: @ 815CB11
 	checkflag 2128
-	callif 0, DesertRuins_EventScript_15CB1B
+	call_if 0, DesertRuins_EventScript_15CB1B
 	end
 
 DesertRuins_EventScript_15CB1B:: @ 815CB1B
@@ -34,10 +34,10 @@ DesertRuins_MapScript1_15CB52:: @ 815CB52
 DesertRuins_EventScript_15CB56:: @ 815CB56
 	lockall
 	checkflag 2128
-	jumpeq DesertRuins_EventScript_15CB6D
-	braillemsg DesertRuins_Braille_1C54C8
+	goto_if_eq DesertRuins_EventScript_15CB6D
+	braillemessage DesertRuins_Braille_1C54C8
 	waitbutton
-	hidebox 0, 0, 29, 19
+	erasebox 0, 0, 29, 19
 	releaseall
 	end
 
@@ -48,23 +48,23 @@ DesertRuins_EventScript_15CB6D:: @ 815CB6D
 
 DesertRuins_EventScript_15CB77:: @ 815CB77
 	lockall
-	braillemsg DesertRuins_Braille_1C54C8
+	braillemessage DesertRuins_Braille_1C54C8
 	waitbutton
-	hidebox 0, 0, 29, 19
+	erasebox 0, 0, 29, 19
 	releaseall
 	end
 
 DesertRuins_EventScript_15CB85:: @ 815CB85
 	lock
 	faceplayer
-	checksound
-	pokecry SPECIES_REGIROCK, 2
-	pause 40
+	waitse
+	playpokecry SPECIES_REGIROCK, 2
+	delay 40
 	waitpokecry
 	setwildbattle SPECIES_REGIROCK, 40, ITEM_NONE
 	setflag 935
 	setflag 2145
-	special 313
+	special ScrSpecial_StartRegiBattle
 	waitstate
 	clearflag 2145
 	release

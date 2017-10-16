@@ -1,4 +1,10 @@
 	.ifdef SAPPHIRE
+	.equiv GAME_VERSION, 1
+	.else
+	.equiv GAME_VERSION, 2
+	.endif
+
+	.ifdef SAPPHIRE
 	.set BGM_EVIL_TEAM, BGM_AQA_0
 	.set BGM_GOOD_TEAM, BGM_MGM0
 	.else

@@ -1,7 +1,8 @@
 #ifndef GUARD_ITEMS_H
 #define GUARD_ITEMS_H
 
-enum {
+enum
+{
     ITEM_NONE,           // 0x000
     ITEM_MASTER_BALL,    // 0x001
     ITEM_ULTRA_BALL,     // 0x002
@@ -384,5 +385,8 @@ enum {
     ITEM_MAGMA_EMBLEM,   // 0x177
     ITEM_OLD_SEA_MAP,    // 0x178
 };
+
+#define NUM_TECHNICAL_MACHINES 50
+#define NUM_HIDDEN_MACHINES     8
 
 #endif // GUARD_ITEMS_H

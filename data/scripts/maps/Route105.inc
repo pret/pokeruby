@@ -4,7 +4,7 @@ Route105_MapScripts:: @ 814F298
 
 Route105_MapScript1_14F29E:: @ 814F29E
 	checkflag 228
-	callif 0, Route105_EventScript_14F2A8
+	call_if 0, Route105_EventScript_14F2A8
 	end
 
 Route105_EventScript_14F2A8:: @ 814F2A8

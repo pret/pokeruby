@@ -14,16 +14,16 @@ enum
 // map types
 enum
 {
-    MAP_TYPE_0,
-    MAP_TYPE_TOWN,
-    MAP_TYPE_CITY,
-    MAP_TYPE_ROUTE,
-    MAP_TYPE_UNDERGROUND,
-    MAP_TYPE_UNDERWATER,
-    MAP_TYPE_6,
-    MAP_TYPE_7,
-    MAP_TYPE_INDOOR,
-    MAP_TYPE_SECRET_BASE
+    MAP_TYPE_0,             // 0
+    MAP_TYPE_TOWN,          // 1
+    MAP_TYPE_CITY,          // 2
+    MAP_TYPE_ROUTE,         // 3
+    MAP_TYPE_UNDERGROUND,   // 4
+    MAP_TYPE_UNDERWATER,    // 5
+    MAP_TYPE_6,             // 6
+    MAP_TYPE_7,             // 7
+    MAP_TYPE_INDOOR,        // 8
+    MAP_TYPE_SECRET_BASE    // 9
 };
 
 // map battle scenes
@@ -166,7 +166,7 @@ struct MapHeader
     /* 0x0C */ struct MapConnections *connections;
     /* 0x10 */ u16 music;
     /* 0x12 */ u16 mapDataId;
-    /* 0x14 */ u8 name;
+    /* 0x14 */ u8 regionMapSectionId;
     /* 0x15 */ u8 cave;
     /* 0x16 */ u8 weather;
     /* 0x17 */ u8 mapType;

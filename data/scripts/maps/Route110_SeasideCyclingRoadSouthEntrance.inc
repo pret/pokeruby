@@ -10,9 +10,9 @@ Route110_SeasideCyclingRoadSouthEntrance_EventScript_16347F:: @ 816347F
 
 Route110_SeasideCyclingRoadSouthEntrance_EventScript_16348B:: @ 816348B
 	lockall
-	specialval RESULT, 227
+	specialvar RESULT, GetPlayerAvatarBike
 	compare RESULT, 0
-	jumpeq Route110_SeasideCyclingRoadSouthEntrance_EventScript_1634A6
+	goto_if_eq Route110_SeasideCyclingRoadSouthEntrance_EventScript_1634A6
 	setflag 2091
 	setvar 0x4001, 1
 	releaseall
@@ -20,9 +20,9 @@ Route110_SeasideCyclingRoadSouthEntrance_EventScript_16348B:: @ 816348B
 
 Route110_SeasideCyclingRoadSouthEntrance_EventScript_1634A6:: @ 81634A6
 	msgbox Route110_SeasideCyclingRoadSouthEntrance_Text_19E3AD, 4
-	closebutton
-	move 255, Route110_SeasideCyclingRoadSouthEntrance_Movement_1634BB
-	waitmove 0
+	closemessage
+	applymovement 255, Route110_SeasideCyclingRoadSouthEntrance_Movement_1634BB
+	waitmovement 0
 	releaseall
 	end
 

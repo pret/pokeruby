@@ -197,7 +197,7 @@ const u8 OtherText_TheField[] = _("the field.");
 const u8 OtherText_TheField2[] = _("the field.");
 const u8 OtherText_ThePC[] = _("the PC.");
 
-const struct TextStruct gUnknown_0840E740[7] =
+const u8 *const gUnknown_0840E740[7] =
 {
     OtherText_TheField3,
     OtherText_TheBattle,
@@ -861,7 +861,7 @@ const u8 gOtherText_AtBattleStart[] = _("At the battle’s start.");
 const u8 gOtherText_UponWinningBattle[] = _("Upon winning a battle.");
 const u8 gOtherText_UponLosingBattle[] = _("Upon losing a battle.");
 
-// mauville_old_man?
+// mauville_man?
 const u8 gOtherText_TheBardsSong[] = _("The BARD’s Song");
 const u8 gOtherText_WhatsHipHappening[] = _("What’s hip and happening?");
 const u8 gOtherText_Interview[] = _("Interview");
@@ -1120,7 +1120,7 @@ const u8 OtherText_TheField[] = _("zum Hauptmenü.");
 const u8 OtherText_TheField2[] = _("zum Hauptmenü.");
 const u8 OtherText_ThePC[] = _("zum PC.");
 
-const struct TextStruct gUnknown_0840E740[7] =
+const u8 *const gUnknown_0840E740[7] =
 {
     OtherText_TheField3,
     OtherText_TheBattle,
@@ -1781,7 +1781,7 @@ const u8 gOtherText_AtBattleStart[] = _("Zum Kampfbeginn");
 const u8 gOtherText_UponWinningBattle[] = _("Über den Sieg");
 const u8 gOtherText_UponLosingBattle[] = _("Über die Niederlage");
 
-// mauville_old_man?
+// mauville_man?
 const u8 gOtherText_TheBardsSong[] = _("Das BARDEN-Lied");
 const u8 gOtherText_WhatsHipHappening[] = _("Was ist hip? Was ist top?");
 const u8 gOtherText_Interview[] = _("Interview");

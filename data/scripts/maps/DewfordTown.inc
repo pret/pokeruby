@@ -10,10 +10,10 @@ DewfordTown_EventScript_14E002:: @ 814E002
 	lock
 	faceplayer
 	checkflag 189
-	jumpif 0, DewfordTown_EventScript_14E076
+	goto_if 0, DewfordTown_EventScript_14E076
 	message DewfordTown_Text_16B522
-	waittext
-	multichoicedef 21, 6, 0, 2, 0
+	waitmessage
+	multichoicedefault 21, 6, 0, 2, 0
 	switch RESULT
 	case 0, DewfordTown_EventScript_14E04B
 	case 1, DewfordTown_EventScript_14E05B
@@ -23,36 +23,36 @@ DewfordTown_EventScript_14E002:: @ 814E002
 
 DewfordTown_EventScript_14E04B:: @ 814E04B
 	msgbox DewfordTown_Text_16B57D, 4
-	closebutton
-	jump DewfordTown_EventScript_14E151
+	closemessage
+	goto DewfordTown_EventScript_14E151
 	release
 	end
 
 DewfordTown_EventScript_14E05B:: @ 814E05B
 	msgbox DewfordTown_Text_16B5D2, 4
-	closebutton
-	jump DewfordTown_EventScript_14E1D8
+	closemessage
+	goto DewfordTown_EventScript_14E1D8
 	release
 	end
 
 DewfordTown_EventScript_14E06B:: @ 814E06B
 	msgbox DewfordTown_Text_16B627, 4
-	closebutton
+	closemessage
 	release
 	end
 
 DewfordTown_EventScript_14E076:: @ 814E076
 	msgbox DewfordTown_Text_16B3BC, 5
 	compare RESULT, 1
-	jumpeq DewfordTown_EventScript_14E093
+	goto_if_eq DewfordTown_EventScript_14E093
 	msgbox DewfordTown_Text_16B471, 4
 	release
 	end
 
 DewfordTown_EventScript_14E093:: @ 814E093
 	msgbox DewfordTown_Text_16B417, 4
-	closebutton
-	jump DewfordTown_EventScript_14E151
+	closemessage
+	goto DewfordTown_EventScript_14E151
 	end
 
 DewfordTown_EventScript_14E0A2:: @ 814E0A2
@@ -75,12 +75,12 @@ DewfordTown_EventScript_14E0C6:: @ 814E0C6
 	lock
 	faceplayer
 	checkflag 257
-	jumpeq DewfordTown_EventScript_14E11B
+	goto_if_eq DewfordTown_EventScript_14E11B
 	msgbox DewfordTown_Text_16B665, 5
 	compare RESULT, 1
-	jumpeq DewfordTown_EventScript_14E0F0
+	goto_if_eq DewfordTown_EventScript_14E0F0
 	compare RESULT, 0
-	jumpeq DewfordTown_EventScript_14E111
+	goto_if_eq DewfordTown_EventScript_14E111
 	end
 
 DewfordTown_EventScript_14E0F0:: @ 814E0F0
@@ -98,12 +98,12 @@ DewfordTown_EventScript_14E111:: @ 814E111
 
 DewfordTown_EventScript_14E11B:: @ 814E11B
 	message DewfordTown_Text_16B84E
-	waittext
+	waitmessage
 	multichoice 20, 8, 50, 1
 	compare RESULT, 0
-	jumpeq DewfordTown_EventScript_14E13D
+	goto_if_eq DewfordTown_EventScript_14E13D
 	compare RESULT, 1
-	jumpeq DewfordTown_EventScript_14E147
+	goto_if_eq DewfordTown_EventScript_14E147
 	end
 
 DewfordTown_EventScript_14E13D:: @ 814E13D
@@ -118,30 +118,30 @@ DewfordTown_EventScript_14E147:: @ 814E147
 
 DewfordTown_EventScript_14E151:: @ 814E151
 	call DewfordTown_EventScript_1A010C
-	spritelevelup 2, 0, 11, 0
-	spritelevelup 255, 0, 11, 0
-	move 2, DewfordTown_Movement_14E40E
-	waitmove 0
-	disappear 2
-	move 255, DewfordTown_Movement_14E402
-	waitmove 0
-	spriteinvisible 255, 0, 11
+	setobjectpriority 2, 0, 11, 0
+	setobjectpriority 255, 0, 11, 0
+	applymovement 2, DewfordTown_Movement_14E40E
+	waitmovement 0
+	removeobject 2
+	applymovement 255, DewfordTown_Movement_14E402
+	waitmovement 0
+	hideobject 255, 0, 11
 	call DewfordTown_EventScript_1A02E7
-	move 4, DewfordTown_Movement_14E293
-	move 255, DewfordTown_Movement_14E293
-	waitmove 0
-	spritevisible 255, 0, 19
+	applymovement 4, DewfordTown_Movement_14E293
+	applymovement 255, DewfordTown_Movement_14E293
+	waitmovement 0
+	showobject 255, 0, 19
 	call DewfordTown_EventScript_1A02EF
-	move 255, DewfordTown_Movement_14E405
-	waitmove 0
-	spritevisible 255, 0, 19
+	applymovement 255, DewfordTown_Movement_14E405
+	waitmovement 0
+	showobject 255, 0, 19
 	clearflag 739
 	clearflag 881
 	clearflag 742
 	setflag 743
-	spriteinvisible 4, 0, 11
+	hideobject 4, 0, 11
 	setvar 0x408e, 2
-	restorespritelevel 255, 0, 11
+	resetobjectpriority 255, 0, 11
 	warp Route104_MrBrineysHouse, 255, 5, 4
 	copyvar 0x4096, 0x8008
 	waitstate
@@ -150,41 +150,41 @@ DewfordTown_EventScript_14E151:: @ 814E151
 
 DewfordTown_EventScript_14E1D8:: @ 814E1D8
 	call DewfordTown_EventScript_1A010C
-	spritelevelup 2, 0, 11, 0
-	spritelevelup 255, 0, 11, 1
-	move 2, DewfordTown_Movement_14E40E
-	waitmove 0
-	disappear 2
-	move 255, DewfordTown_Movement_14E402
-	waitmove 0
-	spriteinvisible 255, 0, 11
+	setobjectpriority 2, 0, 11, 0
+	setobjectpriority 255, 0, 11, 1
+	applymovement 2, DewfordTown_Movement_14E40E
+	waitmovement 0
+	removeobject 2
+	applymovement 255, DewfordTown_Movement_14E402
+	waitmovement 0
+	hideobject 255, 0, 11
 	call DewfordTown_EventScript_1A02E7
-	move 4, DewfordTown_Movement_14E356
-	move 255, DewfordTown_Movement_14E356
-	waitmove 0
+	applymovement 4, DewfordTown_Movement_14E356
+	applymovement 255, DewfordTown_Movement_14E356
+	waitmovement 0
 	call DewfordTown_EventScript_1A02EF
-	spritevisible 255, 0, 24
-	move 255, DewfordTown_Movement_14E409
-	waitmove 0
-	movespriteperm 2, 21, 26
-	reappear 2
-	spritelevelup 2, 0, 24, 0
-	move 2, DewfordTown_Movement_14E410
-	waitmove 0
+	showobject 255, 0, 24
+	applymovement 255, DewfordTown_Movement_14E409
+	waitmovement 0
+	setobjectxyperm 2, 21, 26
+	addobject 2
+	setobjectpriority 2, 0, 24, 0
+	applymovement 2, DewfordTown_Movement_14E410
+	waitmovement 0
 	clearflag 741
-	reappear 1
+	addobject 1
 	clearflag 744
 	setflag 743
-	spriteinvisible 4, 0, 11
+	hideobject 4, 0, 11
 	checkflag 149
-	callif 0, DewfordTown_EventScript_14E281
+	call_if 0, DewfordTown_EventScript_14E281
 	checkflag 149
-	callif 1, DewfordTown_EventScript_14E28A
-	closebutton
+	call_if 1, DewfordTown_EventScript_14E28A
+	closemessage
 	copyvar 0x4096, 0x8008
-	restorespritelevel 255, 0, 11
-	restorespritelevel 2, 0, 24
-	moveoffscreen 2
+	resetobjectpriority 255, 0, 11
+	resetobjectpriority 2, 0, 24
+	moveobjectoffscreen 2
 	release
 	end
 
@@ -600,9 +600,9 @@ DewfordTown_EventScript_14E413:: @ 814E413
 	call DewfordTown_EventScript_1A0102
 	msgbox DewfordTown_Text_16B9CE, 5
 	compare RESULT, 1
-	jumpeq DewfordTown_EventScript_14E439
+	goto_if_eq DewfordTown_EventScript_14E439
 	compare RESULT, 0
-	jumpeq DewfordTown_EventScript_14E443
+	goto_if_eq DewfordTown_EventScript_14E443
 	end
 
 DewfordTown_EventScript_14E439:: @ 814E439
@@ -617,15 +617,15 @@ DewfordTown_EventScript_14E443:: @ 814E443
 	lock
 	faceplayer
 	compare RESULT, 1
-	jumpeq DewfordTown_EventScript_14E46E
+	goto_if_eq DewfordTown_EventScript_14E46E
 	compare RESULT, 0
-	jumpeq DewfordTown_EventScript_14E485
+	goto_if_eq DewfordTown_EventScript_14E485
 	end
 
 DewfordTown_EventScript_14E46E:: @ 814E46E
-	inccounter GAME_STAT_STARTED_TRENDS
+	incrementgamestat GAME_STAT_STARTED_TRENDS
 	compare 0x8004, 0
-	jumpeq DewfordTown_EventScript_14E48F
+	goto_if_eq DewfordTown_EventScript_14E48F
 	msgbox DewfordTown_Text_16BB44, 4
 	release
 	end
