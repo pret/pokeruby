@@ -3,8 +3,10 @@
 #include "decoration.h"
 #include "event_data.h"
 #include "field_camera.h"
+#include "field_effect.h"
 #include "field_fadetransition.h"
 #include "field_player_avatar.h"
+#include "field_specials.h"
 #include "field_weather.h"
 #include "fieldmap.h"
 #include "main.h"
@@ -18,12 +20,18 @@
 #include "overworld.h"
 #include "script.h"
 #include "sound.h"
+#include "species.h"
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
 #include "text.h"
 #include "vars.h"
 
+
+extern void DoDecorationSoundEffect(s16 metatileId);
+extern void sub_80C6A54(s16 x, s16 y);
+extern void sub_80C68A4(s16 metatileId, s16 x, s16 y);
+extern void DoYellowCave4Sparkle(void);
 extern void sub_80BCBF8(u8 taskId);
 extern void sub_80BCC54(u8 taskId);
 extern void sub_80BC824(u8 taskId);
@@ -1730,4 +1738,191 @@ u8 *sub_80BCCE8(void)
     {
         return UnknownString_81A2B2A;
     }
+}
+
+// Debugging function to test secret base battles.
+void unref_sub_80BCD7C(u8 secretBaseIndex)
+{
+    u16 i;
+    for (i = 0; i == 0; i++)
+    {
+        gSaveBlock1.secretBases[secretBaseIndex].partyPersonality[i] = i + 1;
+        gSaveBlock1.secretBases[secretBaseIndex].partyMoves[i * 4] = i + 1;
+        gSaveBlock1.secretBases[secretBaseIndex].partySpecies[i] = SPECIES_TREECKO;
+        gSaveBlock1.secretBases[secretBaseIndex].partyHeldItems[i] = i + 1;
+        gSaveBlock1.secretBases[secretBaseIndex].partyLevels[i] = i + 5;
+        gSaveBlock1.secretBases[secretBaseIndex].partyEVs[i] = i * 5;
+    }
+}
+
+void sub_80BCE1C(void)
+{
+    u16 curBaseIndex = VarGet(VAR_0x4054);
+    sub_810FB10(1);
+
+    CreateSecretBaseEnemyParty(&gSaveBlock1.secretBases[curBaseIndex]);
+}
+
+void sub_80BCE4C()
+{
+    gSaveBlock1.secretBases[VarGet(VAR_0x4054)].sbr_field_1_5 = gScriptResult;
+}
+
+void sub_80BCE90()
+{
+    u16 curBaseIndex = VarGet(VAR_0x4054);
+
+    if (!FlagGet(0x8C2))
+    {
+        u8 i;
+
+        for (i = 0; i < 20; i++)
+        {
+            gSaveBlock1.secretBases[i].sbr_field_1_5 = 0;
+        }
+
+        FlagSet(0x8C2);
+    }
+
+    gSpecialVar_0x8004 = sub_80BCCA4(curBaseIndex);
+    gScriptResult = gSaveBlock1.secretBases[curBaseIndex].sbr_field_1_5;
+}
+
+void sub_80BCF1C(u8 taskId)
+{
+    s16 x, y;
+    u32 behavior;
+    s16 *taskData = gTasks[taskId].data;
+
+    switch (taskData[1])
+    {
+    case 0:
+        PlayerGetDestCoords(&taskData[2], &taskData[3]);
+        taskData[1] = 1;
+        break;
+    case 1:
+        PlayerGetDestCoords(&x, &y);
+        if (x != taskData[2] || y != taskData[3])
+        {
+            taskData[2] = x;
+            taskData[3] = y;
+
+            behavior = MapGridGetMetatileBehaviorAt(x, y);
+            if (sub_8057350(behavior) == TRUE)
+            {
+                DoYellowCave4Sparkle();
+            }
+            else if (sub_8057314(behavior) == TRUE)
+            {
+                sub_80C68A4(MapGridGetMetatileIdAt(x, y), x, y);
+            }
+            else if (sub_8057328(behavior) == TRUE)
+            {
+                sub_80C6A54(x, y);
+            }
+            else if (sub_805733C(behavior) == TRUE)
+            {
+                DoDecorationSoundEffect(MapGridGetMetatileIdAt(x, y));
+            }
+        }
+        break;
+    case 2:
+        if (!FieldEffectActiveListContains(taskData[4]))
+        {
+            taskData[1] = 1;
+        }
+        break;
+    }
+}
+
+void sub_80BD034(u8 i, struct SecretBaseRecord *secretBase)
+{
+    gSaveBlock1.secretBases[i] = *secretBase;
+    gSaveBlock1.secretBases[i].sbr_field_1_6 = 2;
+}
+
+bool8 sub_80BD070(struct SecretBaseRecord *baseA, struct SecretBaseRecord *baseB)
+{
+    u8 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        if (baseA->trainerId[i] != baseB->trainerId[i])
+        {
+            return FALSE;
+        }
+    }
+
+    return TRUE;
+}
+
+bool8 sub_80BD0A0(struct SecretBaseRecord *baseA, struct SecretBaseRecord *baseB)
+{
+    u8 i;
+
+    for (i = 0; i < 7 && (baseA->sbr_field_2[i] != 0xFF || baseB->sbr_field_2[i] != 0xFF); i++)
+    {
+        if (baseA->sbr_field_2[i] != baseB->sbr_field_2[i])
+        {
+            return FALSE;
+        }
+    }
+
+    return TRUE;
+}
+
+bool8 sub_80BD0EC(struct SecretBaseRecord *baseA, struct SecretBaseRecord *baseB)
+{
+    if (baseA->gender == baseB->gender && sub_80BD070(baseA, baseB) && sub_80BD0A0(baseA, baseB))
+    {
+        return TRUE;
+    }
+
+
+    return FALSE;
+}
+
+s16 sub_80BD12C(u8 secretBaseId)
+{
+    s16 i;
+
+    for (i = 0; i < 20; i++)
+    {
+        if (gSaveBlock1.secretBases[i].secretBaseId == secretBaseId)
+        {
+            return i;
+        }
+    }
+
+    return -1;
+}
+
+u8 sub_80BD170(void)
+{
+    s16 i;
+
+    for (i = 1; i < 20; i++)
+    {
+        if (gSaveBlock1.secretBases[i].secretBaseId == 0)
+        {
+            return i;
+        }
+    }
+
+    return 0;
+}
+
+u8 sub_80BD1B0(void)
+{
+    s16 i;
+
+    for (i = 1; i < 20; i++)
+    {
+        if (gSaveBlock1.secretBases[i].sbr_field_1_6 == 0 && gSaveBlock1.secretBases[i].sbr_field_1_0 == 0)
+        {
+            return i;
+        }
+    }
+
+    return 0;
 }
