@@ -1,6 +1,9 @@
 #include "global.h"
 #include "secret_base.h"
 #include "decoration.h"
+#include "species.h"
+#include "items.h"
+#include "moves.h"
 #include "event_data.h"
 #include "field_camera.h"
 #include "field_effect.h"
@@ -10,6 +13,8 @@
 #include "field_weather.h"
 #include "fieldmap.h"
 #include "main.h"
+#include "sound.h"
+#include "songs.h"
 #include "map_constants.h"
 #include "map_name_popup.h"
 #include "menu.h"
@@ -28,38 +33,112 @@
 #include "vars.h"
 
 
+static u8 sub_80BC948(u8 a);
+
+extern u8 gUnknown_0815F399[];
+extern u8 gUnknown_0815F49A[];
+
 extern void DoDecorationSoundEffect(s16 metatileId);
 extern void sub_80C6A54(s16 x, s16 y);
 extern void sub_80C68A4(s16 metatileId, s16 x, s16 y);
 extern void DoYellowCave4Sparkle(void);
-extern void sub_80BCBF8(u8 taskId);
-extern void sub_80BCC54(u8 taskId);
-extern void sub_80BC824(u8 taskId);
-extern void sub_80BC7D8(u8 taskId);
-static void sub_80BCAEC(u8 taskId);
-static void sub_80BC980(u8 taskId);
-static void sub_80BC9E4(u8 taskId);
-static u8 sub_80BC948(u8 a);
-static void Task_SecretBasePC_Registry(u8 taskId);
 
-extern struct YesNoFuncTable gUnknown_083D13E4;
-extern struct MenuAction gUnknown_083D13D4[];
-extern u8 gUnknown_020387DC;
-extern u16 gSpecialVar_0x8004;
-extern u16 gSpecialVar_0x8005;
-extern u16 gSpecialVar_0x8006;
-extern u16 gSpecialVar_0x8007;
-extern u16 gScriptResult;
-extern const struct
+void sub_80BCA84(u8);
+void sub_80BCBF8(u8 taskId);
+void sub_80BCB90(u8);
+void sub_80BCBC0(u8);
+
+void Task_SecretBasePC_Registry(u8 taskId);
+void sub_80BC7D8(u8 taskId);
+void sub_80BC824(u8 taskId);
+void sub_80BCC54(u8 taskId);
+void sub_80BC980(u8 taskId);
+void sub_80BC9E4(u8 taskId);
+void sub_80BCAEC(u8 taskId);
+u8 sub_80BCCA4(u8);
+
+const struct
 {
     u16 unk_083D1358_0;
     u16 unk_083D1358_1;
-} gUnknown_083D1358[7];
-extern const u8 gUnknown_083D1374[4 * 16];
+} gUnknown_083D1358[] = {
+    {0x26,  0x36},
+    {0x27,  0x37},
+    {0x1a0, 0x1a1},
+    {0x1a8, 0x1a9},
+    {0x1b0, 0x1b1},
+    {0x208, 0x210},
+    {0x271, 0x278}
+};
+
+extern u8 gUnknown_020387DC;
+
+const u8 gUnknown_083D1374[] = {
+    MAP_ID_SECRET_BASE_RED_CAVE1,     0,
+    MAP_ID_SECRET_BASE_BROWN_CAVE1,   3,
+    MAP_ID_SECRET_BASE_RED_CAVE2,     0,
+    MAP_ID_SECRET_BASE_SHRUB1,        9,
+    MAP_ID_SECRET_BASE_RED_CAVE3,     0,
+    MAP_ID_SECRET_BASE_BROWN_CAVE1,   3,
+    MAP_ID_SECRET_BASE_RED_CAVE4,     0,
+    MAP_ID_SECRET_BASE_BROWN_CAVE2,  13,
+    MAP_ID_SECRET_BASE_BROWN_CAVE1,   0,
+    MAP_ID_SECRET_BASE_BLUE_CAVE1,    3,
+    MAP_ID_SECRET_BASE_BROWN_CAVE2,   0,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE2,  2,
+    MAP_ID_SECRET_BASE_BROWN_CAVE3,   0,
+    MAP_ID_SECRET_BASE_BROWN_CAVE3,   4,
+    MAP_ID_SECRET_BASE_BROWN_CAVE4,   0,
+    MAP_ID_SECRET_BASE_BROWN_CAVE1,   2,
+    MAP_ID_SECRET_BASE_BLUE_CAVE1,    0,
+    MAP_ID_SECRET_BASE_BROWN_CAVE1,   3,
+    MAP_ID_SECRET_BASE_BLUE_CAVE2,    0,
+    MAP_ID_SECRET_BASE_BROWN_CAVE1,   2,
+    MAP_ID_SECRET_BASE_BLUE_CAVE3,    0,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE1, 15,
+    MAP_ID_SECRET_BASE_BLUE_CAVE4,    0,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE1, 14,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE1,  0,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE2,  3,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE2,  0,
+    MAP_ID_SECRET_BASE_BLUE_CAVE2,    7,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE3,  0,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE1,  6,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE4,  0,
+    MAP_ID_SECRET_BASE_SHRUB1,        9,
+    MAP_ID_SECRET_BASE_TREE1,         0,
+    MAP_ID_SECRET_BASE_BLUE_CAVE1,    3,
+    MAP_ID_SECRET_BASE_TREE2,         0,
+    MAP_ID_SECRET_BASE_SHRUB1,        6,
+    MAP_ID_SECRET_BASE_TREE3,         0,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE3,  3,
+    MAP_ID_SECRET_BASE_TREE4,         0,
+    MAP_ID_SECRET_BASE_TREE1,        10,
+    MAP_ID_SECRET_BASE_SHRUB1,        0,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE1,  3,
+    MAP_ID_SECRET_BASE_SHRUB2,        0,
+    MAP_ID_SECRET_BASE_BROWN_CAVE1,   2,
+    MAP_ID_SECRET_BASE_SHRUB3,        0,
+    MAP_ID_SECRET_BASE_BROWN_CAVE2,   8,
+    MAP_ID_SECRET_BASE_SHRUB4,        0,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE2,  6
+};
+
+const struct MenuAction2 gUnknown_083D13D4[] = {
+    {SecretBaseText_DelRegist, sub_80BCA84},
+    {gUnknownText_Exit, sub_80BCBF8}
+};
+
+const struct YesNoFuncTable gUnknown_083D13E4 = {
+    sub_80BCB90,
+    sub_80BCBC0
+};
+
+const u8 gUnknown_083D13EC[] = {
+    0x23,0x24,0xF,0x1F,0x21,0x2F,0xE,0x14,0x20,0x22,0x0,0x0
+};
+
 extern void *gUnknown_0300485C;
-extern const u8 gUnknown_083D13EC[12];
-extern u8 gUnknown_0815F399[];
-extern u8 gUnknown_0815F49A[];
 extern u8 gUnknown_081A2E14[];
 extern u8 UnknownString_81A1BB2[];
 extern u8 UnknownString_81A1F67[];
@@ -357,7 +436,6 @@ bool8 CurrentMapIsSecretBase(void)
     return FALSE;
 }
 
-#ifdef NONMATCHING
 void sub_80BBCCC(u8 flagIn)
 {
     u16 curBaseId;
@@ -365,8 +443,8 @@ void sub_80BBCCC(u8 flagIn)
     if (CurrentMapIsSecretBase()) {
         curBaseId = VarGet(VAR_0x4054);
         for (x=0; x<16; x++) {
-            if ((u8)(gSaveBlock1.secretBases[curBaseId].decorations[x] - 1) <= 0x77 && gDecorations[gSaveBlock1.secretBases[curBaseId].decorations[x]].decor_field_11 != 4) {
-                sub_80FF394((gSaveBlock1.secretBases[0].decorationPos[x] >> 4) + 7, (gSaveBlock1.secretBases[0].decorationPos[x] & 0xF) + 7, gSaveBlock1.secretBases[curBaseId].decorations[x]);
+            if (gSaveBlock1.secretBases[curBaseId].decorations[x] > 0 && gSaveBlock1.secretBases[curBaseId].decorations[x] <= 0x78 && gDecorations[gSaveBlock1.secretBases[curBaseId].decorations[x]].permission != DECORPERM_SOLID_MAT) {
+                sub_80FF394((gSaveBlock1.secretBases[curBaseId].decorationPos[x] >> 4) + 7, (gSaveBlock1.secretBases[curBaseId].decorationPos[x] & 0xF) + 7, gSaveBlock1.secretBases[curBaseId].decorations[x]);
             }
         }
         if (curBaseId != 0) {
@@ -379,6 +457,9 @@ void sub_80BBCCC(u8 flagIn)
     }
 }
 
+#ifdef NONMATCHING
+// The only nonmatching property of this function is that the implicit variables &gSaveBlock1 and &roomdecor[decidx]
+// are stored in the wrong registers.
 void sub_80BBDD0(void)
 {
     u8 *roomdecor;
@@ -398,20 +479,19 @@ void sub_80BBDD0(void)
         ndecor = 16;
     }
     for (decidx=0; decidx<ndecor; decidx++) {
-        if (roomdecor[decidx] == 0)
-            continue;
-        if (gDecorations[roomdecor[decidx]].decor_field_11 != 4)
-            continue;
-        for (objid=0; objid<gMapHeader.events->mapObjectCount; objid++) {
-            if (gMapHeader.events->mapObjects[objid].flagId == gSpecialVar_0x8004 + 0xAE)
-                break;
-        }
-        if (objid != gMapHeader.events->mapObjectCount) {
+        if (roomdecor[decidx] != 0 && gDecorations[roomdecor[decidx]].permission == DECORPERM_SOLID_MAT)
+        {
+            for (objid=0; objid<gMapHeader.events->mapObjectCount; objid++) {
+                if (gMapHeader.events->mapObjects[objid].flagId == gSpecialVar_0x8004 + 0xAE)
+                    break;
+            }
+            if (objid == gMapHeader.events->mapObjectCount)
+                continue;
             gSpecialVar_0x8006 = roomdecorpos[decidx] >> 4;
             gSpecialVar_0x8007 = roomdecorpos[decidx] & 0xF;
             metatile = MapGridGetMetatileBehaviorAt(gSpecialVar_0x8006 + 7, gSpecialVar_0x8007 + 7);
-            if (sub_80572D8(metatile) == 1 || sub_80572EC(metatile) == 1) {
-                gScriptResult = gMapHeader.events->mapObjects[objid].graphicsId + 0x3f20;
+            if (sub_80572D8(metatile) == TRUE || sub_80572EC(metatile) == TRUE) {
+                gScriptResult = gMapHeader.events->mapObjects[objid].graphicsId + VAR_0x3F20;
                 VarSet(gScriptResult, gDecorations[roomdecor[decidx]].tiles[0]);
                 gScriptResult = gMapHeader.events->mapObjects[objid].localId;
                 FlagClear(gSpecialVar_0x8004 + 0xAE);
@@ -425,132 +505,6 @@ void sub_80BBDD0(void)
 }
 
 #else
-__attribute__((naked))
-void sub_80BBCCC(u8 flagIn)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r8\n\
-    push {r7}\n\
-    sub sp, 0x4\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    mov r8, r0\n\
-    bl CurrentMapIsSecretBase\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    beq _080BBDBC\n\
-    ldr r0, _080BBD70 @ =0x00004054\n\
-    bl VarGet\n\
-    lsls r0, 16\n\
-    lsrs r5, r0, 16\n\
-    movs r1, 0\n\
-    mov r0, sp\n\
-    strh r1, [r0]\n\
-    ldr r6, _080BBD74 @ =gSaveBlock1\n\
-    mov r4, sp\n\
-    ldr r0, _080BBD78 @ =0x00001a2a\n\
-    adds r7, r6, r0\n\
-_080BBCFC:\n\
-    lsls r0, r5, 2\n\
-    adds r0, r5\n\
-    lsls r0, 5\n\
-    ldrh r1, [r4]\n\
-    adds r2, r0, r1\n\
-    ldr r1, _080BBD7C @ =0x00001a1a\n\
-    adds r0, r6, r1\n\
-    adds r1, r2, r0\n\
-    ldrb r0, [r1]\n\
-    subs r0, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x77\n\
-    bhi _080BBD3A\n\
-    ldr r0, _080BBD80 @ =gDecorations\n\
-    ldrb r3, [r1]\n\
-    lsls r1, r3, 5\n\
-    adds r1, r0\n\
-    ldrb r0, [r1, 0x11]\n\
-    cmp r0, 0x4\n\
-    beq _080BBD3A\n\
-    adds r0, r2, r7\n\
-    ldrb r2, [r0]\n\
-    lsrs r0, r2, 4\n\
-    adds r0, 0x7\n\
-    movs r1, 0xF\n\
-    ands r1, r2\n\
-    adds r1, 0x7\n\
-    adds r2, r3, 0\n\
-    bl sub_80FF394\n\
-_080BBD3A:\n\
-    ldrh r0, [r4]\n\
-    adds r0, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    strh r0, [r4]\n\
-    cmp r0, 0xF\n\
-    bls _080BBCFC\n\
-    cmp r5, 0\n\
-    beq _080BBD88\n\
-    mov r4, sp\n\
-    adds r4, 0x2\n\
-    movs r2, 0x88\n\
-    lsls r2, 2\n\
-    mov r0, sp\n\
-    adds r1, r4, 0\n\
-    bl sub_80BB764\n\
-    mov r0, sp\n\
-    ldrh r0, [r0]\n\
-    adds r0, 0x7\n\
-    ldrh r1, [r4]\n\
-    adds r1, 0x7\n\
-    ldr r2, _080BBD84 @ =0x00000e21\n\
-    bl MapGridSetMetatileIdAt\n\
-    b _080BBDBC\n\
-    .align 2, 0\n\
-_080BBD70: .4byte 0x00004054\n\
-_080BBD74: .4byte gSaveBlock1\n\
-_080BBD78: .4byte 0x00001a2a\n\
-_080BBD7C: .4byte 0x00001a1a\n\
-_080BBD80: .4byte gDecorations\n\
-_080BBD84: .4byte 0x00000e21\n\
-_080BBD88:\n\
-    mov r0, r8\n\
-    cmp r0, 0x1\n\
-    bne _080BBDBC\n\
-    ldr r0, _080BBDC8 @ =0x00004089\n\
-    bl VarGet\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    cmp r0, 0x1\n\
-    bne _080BBDBC\n\
-    mov r4, sp\n\
-    adds r4, 0x2\n\
-    movs r2, 0x88\n\
-    lsls r2, 2\n\
-    mov r0, sp\n\
-    adds r1, r4, 0\n\
-    bl sub_80BB764\n\
-    mov r0, sp\n\
-    ldrh r0, [r0]\n\
-    adds r0, 0x7\n\
-    ldrh r1, [r4]\n\
-    adds r1, 0x7\n\
-    ldr r2, _080BBDCC @ =0x00000e0a\n\
-    bl MapGridSetMetatileIdAt\n\
-_080BBDBC:\n\
-    add sp, 0x4\n\
-    pop {r3}\n\
-    mov r8, r3\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_080BBDC8: .4byte 0x00004089\n\
-_080BBDCC: .4byte 0x00000e0a\n\
-.syntax divided\n");
-}
-
 __attribute__((naked))
 void sub_80BBDD0(void)
 {
@@ -789,18 +743,18 @@ void sub_80BBFA4(void)
     VarSet(VAR_0x401F, gUnknown_083D13EC[sub_80BCCA4(curBase)]);
 }
 
-void sub_80BBFD8(s16 *position, struct MapEvents *events)
+void sub_80BBFD8(struct MapPosition *position, struct MapEvents *events)
 {
     s16 bgevtidx;
     for (bgevtidx=0; bgevtidx<events->bgEventCount; bgevtidx++) {
-        if (events->bgEvents[bgevtidx].kind == 8 && position[0] == events->bgEvents[bgevtidx].x + 7 && position[1] == events->bgEvents[bgevtidx].y + 7) {
+        if (events->bgEvents[bgevtidx].kind == 8 && position->x == events->bgEvents[bgevtidx].x + 7 && position->y == events->bgEvents[bgevtidx].y + 7) {
             gUnknown_020387DC = events->bgEvents[bgevtidx].bgUnion.secretBaseId;
             break;
         }
     }
 }
 
-void sub_80BC038(s16 *position, struct MapEvents *events)
+void sub_80BC038(struct MapPosition *position, struct MapEvents *events)
 {
     sub_80BBFD8(position, events);
     sub_80BB5E4();
@@ -907,32 +861,31 @@ u8 sub_80BC298(struct Pokemon *mon) { // 80bc298
 }
 
 #ifdef NONMATCHING
+// So much is wrong with this function.
+// The compiler likes to store pointers in temp variables.  That's not what it's supposed to do.
 void sub_80BC300(void)
 {
+    u16 partyidx;
     u16 moveidx;
     u16 sbpartyidx = 0;
-    int resetVal = 0;
-    u16 partyidx = 0;
-    while (partyidx < 6) {
-        partyidx ++;
-        for (moveidx=0; moveidx<4; moveidx++) {
-            gSaveBlock1.secretBases[0].partyMoves[(partyidx - 1) * 6 + moveidx] = resetVal;
-        }
-        gSaveBlock1.secretBases[0].partySpecies[partyidx - 1] = resetVal;
-        gSaveBlock1.secretBases[0].partyHeldItems[partyidx - 1] = resetVal;
-        gSaveBlock1.secretBases[0].partyLevels[partyidx - 1] = resetVal;
-        gSaveBlock1.secretBases[0].partyPersonality[partyidx - 1] = resetVal;
-        gSaveBlock1.secretBases[0].partyEVs[partyidx - 1] = resetVal;
-        if (GetMonData(&(gPlayerParty[partyidx - 1]), MON_DATA_SPECIES) != 0 && !GetMonData(&(gPlayerParty[partyidx - 1]), MON_DATA_IS_EGG)) {
+    for (partyidx=0; partyidx<PARTY_SIZE; partyidx++)
+    {
+        for (moveidx=0; moveidx<4; moveidx++)
+            gSaveBlock1.secretBases[0].partyMoves[partyidx * 4 + moveidx] = MOVE_NONE;
+        gSaveBlock1.secretBases[0].partySpecies[partyidx] = SPECIES_NONE;
+        gSaveBlock1.secretBases[0].partyHeldItems[partyidx] = ITEM_NONE;
+        gSaveBlock1.secretBases[0].partyLevels[partyidx] = 0;
+        gSaveBlock1.secretBases[0].partyPersonality[partyidx] = 0;
+        gSaveBlock1.secretBases[0].partyEVs[partyidx] = 0;
+        if (GetMonData(&(gPlayerParty[partyidx]), MON_DATA_SPECIES) != SPECIES_NONE && !GetMonData(&(gPlayerParty[partyidx]), MON_DATA_IS_EGG)) {
+            for (moveidx=0; moveidx<4; moveidx++)
+                gSaveBlock1.secretBases[0].partyMoves[sbpartyidx * 4 + moveidx] = GetMonData(&(gPlayerParty[partyidx]), MON_DATA_MOVE1 + moveidx);
+            gSaveBlock1.secretBases[0].partySpecies[sbpartyidx] = GetMonData(&(gPlayerParty[partyidx]), MON_DATA_SPECIES);
+            gSaveBlock1.secretBases[0].partyHeldItems[sbpartyidx] = GetMonData(&(gPlayerParty[partyidx]), MON_DATA_HELD_ITEM);
+            gSaveBlock1.secretBases[0].partyLevels[sbpartyidx] = GetMonData(&(gPlayerParty[partyidx]), MON_DATA_LEVEL);
+            gSaveBlock1.secretBases[0].partyPersonality[sbpartyidx] = GetMonData(&(gPlayerParty[partyidx]), MON_DATA_PERSONALITY);
+            gSaveBlock1.secretBases[0].partyEVs[sbpartyidx] = sub_80BC298(&(gPlayerParty[partyidx]));
             sbpartyidx ++;
-            for (moveidx=0; moveidx<4; moveidx++) {
-                gSaveBlock1.secretBases[0].partyMoves[(sbpartyidx - 1) * 6 + moveidx] = GetMonData(&(gPlayerParty[partyidx - 1]), MON_DATA_MOVE1 + moveidx);
-            }
-            gSaveBlock1.secretBases[0].partySpecies[sbpartyidx - 1] = GetMonData(&(gPlayerParty[partyidx - 1]), MON_DATA_SPECIES);
-            gSaveBlock1.secretBases[0].partyHeldItems[sbpartyidx - 1] = GetMonData(&(gPlayerParty[partyidx - 1]), MON_DATA_HELD_ITEM);
-            gSaveBlock1.secretBases[0].partyLevels[sbpartyidx - 1] = GetMonData(&(gPlayerParty[partyidx - 1]), MON_DATA_LEVEL);
-            gSaveBlock1.secretBases[0].partyPersonality[sbpartyidx - 1] = GetMonData(&(gPlayerParty[partyidx - 1]), MON_DATA_PERSONALITY);
-            gSaveBlock1.secretBases[0].partyEVs[sbpartyidx - 1] = sub_80BC298(&(gPlayerParty[partyidx - 1]));
         }
     }
 }
@@ -1232,243 +1185,60 @@ void Task_SecretBasePC_Registry(u8 taskId)
     }
 }
 
-#ifdef NONMATCHING
 void sub_80BC6B0(u8 taskId)
 {
+    u8 i;
     s16 *taskData = gTasks[taskId].data;
-    u8 count = 0;
-    u8 var1 = 0;
-    u8 i = 1;
+    u8 m = 0;
+    u8 n = 0;
 
-    if (var1 == taskData[2])
+    for (i = 1; i < 20; i++)
     {
-        count = 1;
-    }
-    else
-    {
-        while (1)
+        if (m == taskData[2])
         {
-            if (sub_80BC268(i) == TRUE)
-            {
-                count++;
-            }
+            m = i;
+            break;
+        }
 
-            i++;
-            if (i > 19)
-            {
-                break;
-            }
+        if (sub_80BC268(i) == TRUE)
+            m++;
+    }
 
-            if (count == taskData[2])
-            {
-                count = i;
+    for (i = m; i < 20; i++)
+    {
+        if (sub_80BC268(i) == TRUE)
+        {
+            sub_80BC190(gStringVar1, i);
+            MenuFillWindowRectWithBlankTile(18, 2 * n + 2, 28, 2 * n + 3);
+            MenuPrint(gStringVar1, 18, 2 * n + 2);
+            if (++n == 8)
                 break;
-            }
         }
     }
 
-    while (count < 20)
+    if (n < 8)
     {
-        if (sub_80BC268(count) == TRUE)
-        {
-            sub_80BC190(gStringVar1, count);
-            MenuFillWindowRectWithBlankTile(18, var1 * 2 + 2, 28, var1 * 2 + 3);
-            MenuPrint(gStringVar1, 18, var1 * 2 + 2);
-
-            var1++;
-            if (var1 == 8)
-            {
-                break;
-            }
-        }
-
-        count++;
-    }
-
-    if (var1 < 8)
-    {
-        MenuFillWindowRectWithBlankTile(18, var1 * 2 + 2, 28, var1 * 2 + 3);
-        MenuPrint(gUnknownText_Exit, 18, var1 * 2 + 2);
+        MenuFillWindowRectWithBlankTile(18, 2 * n + 2, 28, 2 * n + 3);
+        MenuPrint(gUnknownText_Exit, 18, 2 * n + 2);
         DestroyVerticalScrollIndicator(1);
-
-        if (var1 != 7)
-        {
-            MenuFillWindowRectWithBlankTile(18, (((var1 << 25) + 0x4000000)) >> 24, 28, 18);
-        }
+        if (n != 7)
+            MenuFillWindowRectWithBlankTile(18, ((n << 25) + (1 << 26)) >> 24, 28, 18); // the shifts are needed to match
     }
     else
-    {
-        CreateVerticalScrollIndicators(1, 188, 152);
-    }
+        CreateVerticalScrollIndicators(1, 0xbc, 0x98);
 
     if (taskData[2] == 0)
-    {
         DestroyVerticalScrollIndicator(0);
-    }
     else
-    {
-        CreateVerticalScrollIndicators(0, 188, 8);
-    }
+        CreateVerticalScrollIndicators(0, 0xbc, 0x08);
 }
-#else
-__attribute__((naked))
-void sub_80BC6B0(u8 taskId)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r8\n\
-    push {r7}\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    lsls r1, r0, 2\n\
-    adds r1, r0\n\
-    lsls r1, 3\n\
-    ldr r0, _080BC6D8 @ =gTasks + 0x8\n\
-    adds r1, r0\n\
-    mov r8, r1\n\
-    movs r4, 0\n\
-    movs r6, 0\n\
-    movs r5, 0x1\n\
-    movs r2, 0x4\n\
-    ldrsh r0, [r1, r2]\n\
-    cmp r6, r0\n\
-    bne _080BC6DC\n\
-    movs r4, 0x1\n\
-    b _080BC706\n\
-    .align 2, 0\n\
-_080BC6D8: .4byte gTasks + 0x8\n\
-_080BC6DC:\n\
-    adds r0, r5, 0\n\
-    bl sub_80BC268\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x1\n\
-    bne _080BC6F0\n\
-    adds r0, r4, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r4, r0, 24\n\
-_080BC6F0:\n\
-    adds r0, r5, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    cmp r5, 0x13\n\
-    bhi _080BC706\n\
-    mov r1, r8\n\
-    movs r2, 0x4\n\
-    ldrsh r0, [r1, r2]\n\
-    cmp r4, r0\n\
-    bne _080BC6DC\n\
-    adds r4, r5, 0\n\
-_080BC706:\n\
-    adds r5, r4, 0\n\
-    cmp r5, 0x13\n\
-    bhi _080BC75A\n\
-    ldr r7, _080BC7A0 @ =gStringVar1\n\
-_080BC70E:\n\
-    adds r0, r5, 0\n\
-    bl sub_80BC268\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x1\n\
-    bne _080BC750\n\
-    adds r0, r7, 0\n\
-    adds r1, r5, 0\n\
-    bl sub_80BC190\n\
-    lsls r3, r6, 1\n\
-    adds r4, r3, 0x2\n\
-    lsls r4, 24\n\
-    lsrs r4, 24\n\
-    adds r3, 0x3\n\
-    lsls r3, 24\n\
-    lsrs r3, 24\n\
-    movs r0, 0x12\n\
-    adds r1, r4, 0\n\
-    movs r2, 0x1C\n\
-    bl MenuFillWindowRectWithBlankTile\n\
-    adds r0, r7, 0\n\
-    movs r1, 0x12\n\
-    adds r2, r4, 0\n\
-    bl MenuPrint\n\
-    adds r0, r6, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r6, r0, 24\n\
-    cmp r6, 0x8\n\
-    beq _080BC75A\n\
-_080BC750:\n\
-    adds r0, r5, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    cmp r5, 0x13\n\
-    bls _080BC70E\n\
-_080BC75A:\n\
-    cmp r6, 0x7\n\
-    bhi _080BC7A8\n\
-    lsls r3, r6, 1\n\
-    adds r4, r3, 0x2\n\
-    lsls r4, 24\n\
-    lsrs r4, 24\n\
-    adds r3, 0x3\n\
-    lsls r3, 24\n\
-    lsrs r3, 24\n\
-    movs r0, 0x12\n\
-    adds r1, r4, 0\n\
-    movs r2, 0x1C\n\
-    bl MenuFillWindowRectWithBlankTile\n\
-    ldr r0, _080BC7A4 @ =gUnknownText_Exit\n\
-    movs r1, 0x12\n\
-    adds r2, r4, 0\n\
-    bl MenuPrint\n\
-    movs r0, 0x1\n\
-    bl DestroyVerticalScrollIndicator\n\
-    cmp r6, 0x7\n\
-    beq _080BC7B2\n\
-    lsls r1, r6, 25\n\
-    movs r0, 0x80\n\
-    lsls r0, 19\n\
-    adds r1, r0\n\
-    lsrs r1, 24\n\
-    movs r0, 0x12\n\
-    movs r2, 0x1C\n\
-    movs r3, 0x12\n\
-    bl MenuFillWindowRectWithBlankTile\n\
-    b _080BC7B2\n\
-    .align 2, 0\n\
-_080BC7A0: .4byte gStringVar1\n\
-_080BC7A4: .4byte gUnknownText_Exit\n\
-_080BC7A8:\n\
-    movs r0, 0x1\n\
-    movs r1, 0xBC\n\
-    movs r2, 0x98\n\
-    bl CreateVerticalScrollIndicators\n\
-_080BC7B2:\n\
-    mov r1, r8\n\
-    movs r2, 0x4\n\
-    ldrsh r0, [r1, r2]\n\
-    cmp r0, 0\n\
-    bne _080BC7C4\n\
-    movs r0, 0\n\
-    bl DestroyVerticalScrollIndicator\n\
-    b _080BC7CE\n\
-_080BC7C4:\n\
-    movs r0, 0\n\
-    movs r1, 0xBC\n\
-    movs r2, 0x8\n\
-    bl CreateVerticalScrollIndicators\n\
-_080BC7CE:\n\
-    pop {r3}\n\
-    mov r8, r3\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .syntax divided\n");
-}
-#endif
 
 void sub_80BC7D8(u8 taskId)
 {
-    u16 *taskData = &gTasks[taskId].data[0];
+    u16 *taskData = gTasks[taskId].data;
     MenuDrawTextWindow(17, 0, 29, 19);
     InitMenu(0, 18, 2, taskData[3] + 1, taskData[1], 11);
+
     sub_80BC6B0(taskId);
 }
 
@@ -1488,10 +1258,6 @@ void sub_80BC824(u8 taskId)
             PlaySE(5);
             taskData[2]--;
             sub_80BC6B0(taskId);
-        }
-        else
-        {
-            return;
         }
     }
     else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
@@ -1549,10 +1315,8 @@ u8 sub_80BC948(u8 a)
             {
                 return secretBaseIndex;
             }
-            else
-            {
-                count++;
-            }
+            
+            count++;
         }
     }
 
@@ -1564,7 +1328,7 @@ void sub_80BC980(u8 taskId)
     PauseVerticalScrollIndicator(0);
     PauseVerticalScrollIndicator(1);
     MenuDrawTextWindow(1, 0, 12, 5);
-    PrintMenuItems(2, 1, 2, gUnknown_083D13D4);
+    PrintMenuItems(2, 1, 2, (const struct MenuAction *)gUnknown_083D13D4);
     InitMenu(0, 2, 1, 2, 0, 10);
     gTasks[taskId].func = sub_80BC9E4;
 }
@@ -1694,50 +1458,19 @@ u8 sub_80BCCA4(u8 secretBaseIndex)
         + gSaveBlock1.secretBases[secretBaseIndex].gender * 5;
 }
 
-u8 *sub_80BCCE8(void)
+const u8 *sub_80BCCE8(void)
 {
-    u8 var1 = sub_80BCCA4(VarGet(VAR_0x4054));
-
-    if (var1 == 0)
-    {
-        return UnknownString_81A1BB2;
-    }
-    else if (var1 == 1)
-    {
-        return UnknownString_81A1F67;
-    }
-    else if (var1 == 2)
-    {
-        return UnknownString_81A2254;
-    }
-    else if (var1 == 3)
-    {
-        return UnknownString_81A25C3;
-    }
-    else if (var1 == 4)
-    {
-        return UnknownString_81A2925;
-    }
-    else if (var1 == 5)
-    {
-        return UnknownString_81A1D74;
-    }
-    else if (var1 == 6)
-    {
-        return UnknownString_81A20C9;
-    }
-    else if (var1 == 7)
-    {
-        return UnknownString_81A2439;
-    }
-    else if (var1 == 8)
-    {
-        return UnknownString_81A2754;
-    }
-    else
-    {
-        return UnknownString_81A2B2A;
-    }
+    u8 param = sub_80BCCA4(VarGet(VAR_0x4054));
+    if (param == 0) return UnknownString_81A1BB2;
+    if (param == 1) return UnknownString_81A1F67;
+    if (param == 2) return UnknownString_81A2254;
+    if (param == 3) return UnknownString_81A25C3;
+    if (param == 4) return UnknownString_81A2925;
+    if (param == 5) return UnknownString_81A1D74;
+    if (param == 6) return UnknownString_81A20C9;
+    if (param == 7) return UnknownString_81A2439;
+    if (param == 8) return UnknownString_81A2754;
+    return UnknownString_81A2B2A;
 }
 
 // Debugging function to test secret base battles.

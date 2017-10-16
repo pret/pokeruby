@@ -1222,7 +1222,7 @@ static u8 *GetTrainerIntroSpeech(void)
 
 u8 *sub_8082830(void)
 {
-    u8 *str;
+    const u8 *str;
 
     if (gTrainerBattleOpponent == 1024)
         str = sub_80BCCE8();
