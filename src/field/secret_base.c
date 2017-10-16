@@ -12,6 +12,7 @@
 #include "field_specials.h"
 #include "field_weather.h"
 #include "fieldmap.h"
+#include "link.h"
 #include "main.h"
 #include "sound.h"
 #include "songs.h"
@@ -33,29 +34,27 @@
 #include "vars.h"
 
 
+static void sub_80BC7D8(u8 taskId);
+static void sub_80BC824(u8 taskId);
 static u8 sub_80BC948(u8 a);
-
-extern u8 gUnknown_0815F399[];
-extern u8 gUnknown_0815F49A[];
+static void sub_80BC980(u8 taskId);
+static void sub_80BC9E4(u8 taskId);
+static void sub_80BCA84(u8);
+static void sub_80BCAEC(u8 taskId);
+static void sub_80BCB90(u8);
+static void sub_80BCBC0(u8);
+static void sub_80BCBF8(u8 taskId);
+static void sub_80BCC54(u8 taskId);
+static void Task_SecretBasePC_Registry(u8 taskId);
 
 extern void DoDecorationSoundEffect(s16 metatileId);
 extern void sub_80C6A54(s16 x, s16 y);
 extern void sub_80C68A4(s16 metatileId, s16 x, s16 y);
 extern void DoYellowCave4Sparkle(void);
 
-void sub_80BCA84(u8);
-void sub_80BCBF8(u8 taskId);
-void sub_80BCB90(u8);
-void sub_80BCBC0(u8);
-
-void Task_SecretBasePC_Registry(u8 taskId);
-void sub_80BC7D8(u8 taskId);
-void sub_80BC824(u8 taskId);
-void sub_80BCC54(u8 taskId);
-void sub_80BC980(u8 taskId);
-void sub_80BC9E4(u8 taskId);
-void sub_80BCAEC(u8 taskId);
-u8 sub_80BCCA4(u8);
+extern u8 gUnknown_0815F399[];
+extern u8 gUnknown_0815F49A[];
+extern u8 gUnknown_020387DC;
 
 const struct
 {
@@ -71,7 +70,6 @@ const struct
     {0x271, 0x278}
 };
 
-extern u8 gUnknown_020387DC;
 
 const u8 gUnknown_083D1374[] = {
     MAP_ID_SECRET_BASE_RED_CAVE1,     0,
@@ -152,13 +150,13 @@ extern u8 UnknownString_81A2B2A[];
 extern u8 UnknownString_81A2754[];
 
 
-void sub_80BB4AC(struct SecretBaseRecord *record) // 080bb4ac
+void ClearSecretBase(struct SecretBaseRecord *record)
 {
     u16 i;
     u16 j;
     record->secretBaseId = 0;
-    for (i=0; i<7; i++)
-        record->sbr_field_2[i] = 0xff;
+    for (i=0; i<OT_NAME_LENGTH; i++)
+        record->playerName[i] = 0xff;
     for (i=0; i<4; i++)
         record->trainerId[i] = 0x00;
     record->sbr_field_e = 0;
@@ -184,32 +182,32 @@ void sub_80BB4AC(struct SecretBaseRecord *record) // 080bb4ac
     }
 }
 
-void ResetSecretBase(u8 idx) // 80bb594
+void ResetSecretBase(u8 idx)
 {
-    sub_80BB4AC(&(gSaveBlock1.secretBases[idx]));
+    ClearSecretBase(&gSaveBlock1.secretBases[idx]);
 }
 
-void ResetSecretBases(void) // 080bb5b4
+void ResetSecretBases(void)
 {
     u16 i;
-    for (i=0; i<20; i++)
+    for (i = 0; i < MAX_SECRET_BASES; i++)
         ResetSecretBase(i);
 }
 
-void sub_80BB5D0(void) // 080bb5d0
+void sub_80BB5D0(void)
 {
     gUnknown_020387DC = gSpecialVar_0x8004;
 }
 
-void sub_80BB5E4(void) // 80bb5e4
+void sub_80BB5E4(void)
 {
-    u16 idx;
+    u16 i;
     gScriptResult = 0;
-    for (idx=0; idx<20; idx++) {
-        if (gUnknown_020387DC != gSaveBlock1.secretBases[idx].secretBaseId)
+    for (i = 0; i < MAX_SECRET_BASES; i++) {
+        if (gUnknown_020387DC != gSaveBlock1.secretBases[i].secretBaseId)
             continue;
         gScriptResult = 1;
-        VarSet(VAR_0x4054, idx);
+        VarSet(VAR_0x4054, i);
         break;
     }
 }
@@ -315,8 +313,8 @@ void sub_80BB8CC(void)
     }
     VarSet(VAR_0x4054, 0);
     nameLength = sub_80BB8A8(gSaveBlock2.playerName);
-    memset(gSaveBlock1.secretBases[0].sbr_field_2, 0xFF, 7);
-    StringCopyN(gSaveBlock1.secretBases[0].sbr_field_2, gSaveBlock2.playerName, nameLength);
+    memset(gSaveBlock1.secretBases[0].playerName, 0xFF, OT_NAME_LENGTH);
+    StringCopyN(gSaveBlock1.secretBases[0].playerName, gSaveBlock2.playerName, nameLength);
     gSaveBlock1.secretBases[0].gender = gSaveBlock2.playerGender;
     VarSet(VAR_SECRET_BASE_MAP, gMapHeader.regionMapSectionId);
 }
@@ -327,7 +325,7 @@ void sub_80BB970(struct MapEvents *events)
     s16 tile_id;
     for (bgevidx=0; bgevidx<events->bgEventCount; bgevidx++) {
         if (events->bgEvents[bgevidx].kind == 8) {
-            for (jdx=0; jdx<20; jdx++) {
+            for (jdx=0; jdx<MAX_SECRET_BASES; jdx++) {
                 if (gSaveBlock1.secretBases[jdx].secretBaseId == events->bgEvents[bgevidx].bgUnion.secretBaseId) {
                     tile_id = MapGridGetMetatileIdAt(events->bgEvents[bgevidx].x + 7, events->bgEvents[bgevidx].y + 7);
                     for (idx=0; idx<7; idx++) {
@@ -364,7 +362,7 @@ void sub_80BBA48(u8 taskid)
     case 2:
         curbaseid = VarGet(VAR_0x4054);
         if (gSaveBlock1.secretBases[curbaseid].sbr_field_10 < 0xff)
-            gSaveBlock1.secretBases[curbaseid].sbr_field_10 ++;
+            gSaveBlock1.secretBases[curbaseid].sbr_field_10++;
         sub_80BBA14();
         warp_in();
         gFieldCallback = sub_8080990;
@@ -503,7 +501,6 @@ void sub_80BBDD0(void)
         }
     }
 }
-
 #else
 __attribute__((naked))
 void sub_80BBDD0(void)
@@ -808,7 +805,7 @@ void sub_80BC114(void) {
 u8 sub_80BC14C(u8 sbid)
 {
     s16 idx;
-    for (idx=0; idx<20; idx++) {
+    for (idx=0; idx<MAX_SECRET_BASES; idx++) {
         if (gSaveBlock1.secretBases[idx].secretBaseId == sbid)
             return idx;
     }
@@ -819,9 +816,9 @@ u8 *sub_80BC190(u8 *dest, u8 arg1) { // 80bc190
     u8 local1;
     u8 *str;
 
-    local1 = sub_80BB8A8(gSaveBlock1.secretBases[arg1].sbr_field_2);
+    local1 = sub_80BB8A8(gSaveBlock1.secretBases[arg1].playerName);
 
-    str = StringCopyN(dest, gSaveBlock1.secretBases[arg1].sbr_field_2, local1);
+    str = StringCopyN(dest, gSaveBlock1.secretBases[arg1].playerName, local1);
     str[0] = EOS;
 
 #if ENGLISH
@@ -837,7 +834,7 @@ u8 *GetSecretBaseMapName(u8 *dest) {
 }
 
 void sub_80BC224(void) {
-    u8 *var0 = gSaveBlock1.secretBases[(u8)VarGet(VAR_0x4054)].sbr_field_2;
+    u8 *var0 = gSaveBlock1.secretBases[(u8)VarGet(VAR_0x4054)].playerName;
     u8 *var1 = gStringVar1;
     u8 var2 = sub_80BB8A8(var0);
     u8 *var3 = StringCopyN(var1, var0, var2);
@@ -1107,7 +1104,7 @@ u8 sub_80BC538(void)
     s16 secretBaseIndex;
     u8 retVal = 0;
     
-    for (secretBaseIndex = 1; secretBaseIndex < 20; secretBaseIndex++)
+    for (secretBaseIndex = 1; secretBaseIndex < MAX_SECRET_BASES; secretBaseIndex++)
     {
         if (sub_80BC268(secretBaseIndex) == TRUE)
         {
@@ -1159,7 +1156,7 @@ void Task_SecretBasePC_Registry(u8 taskId)
     sub_80F944C();
     LoadScrollIndicatorPalette();
     
-    taskData = &gTasks[taskId].data[0];
+    taskData = gTasks[taskId].data;
     taskData[0] = sub_80BC538();
     if (taskData[0] != 0)
     {
@@ -1192,7 +1189,7 @@ void sub_80BC6B0(u8 taskId)
     u8 m = 0;
     u8 n = 0;
 
-    for (i = 1; i < 20; i++)
+    for (i = 1; i < MAX_SECRET_BASES; i++)
     {
         if (m == taskData[2])
         {
@@ -1204,7 +1201,7 @@ void sub_80BC6B0(u8 taskId)
             m++;
     }
 
-    for (i = m; i < 20; i++)
+    for (i = m; i < MAX_SECRET_BASES; i++)
     {
         if (sub_80BC268(i) == TRUE)
         {
@@ -1307,7 +1304,7 @@ u8 sub_80BC948(u8 a)
     u8 secretBaseIndex;
     u8 count = 0;
 
-    for (secretBaseIndex = 1; secretBaseIndex < 20; secretBaseIndex++)
+    for (secretBaseIndex = 1; secretBaseIndex < MAX_SECRET_BASES; secretBaseIndex++)
     {
         if (sub_80BC268(secretBaseIndex) == TRUE)
         {
@@ -1454,7 +1451,7 @@ void sub_80BCC54(u8 taskId)
 
 u8 sub_80BCCA4(u8 secretBaseIndex)
 {
-    return (gSaveBlock1.secretBases[secretBaseIndex].sbr_field_2[7] % 5) 
+    return (gSaveBlock1.secretBases[secretBaseIndex].playerName[OT_NAME_LENGTH] % 5) 
         + gSaveBlock1.secretBases[secretBaseIndex].gender * 5;
 }
 
@@ -1509,7 +1506,7 @@ void sub_80BCE90()
     {
         u8 i;
 
-        for (i = 0; i < 20; i++)
+        for (i = 0; i < MAX_SECRET_BASES; i++)
         {
             gSaveBlock1.secretBases[i].sbr_field_1_5 = 0;
         }
@@ -1593,9 +1590,9 @@ bool8 sub_80BD0A0(struct SecretBaseRecord *baseA, struct SecretBaseRecord *baseB
 {
     u8 i;
 
-    for (i = 0; i < 7 && (baseA->sbr_field_2[i] != 0xFF || baseB->sbr_field_2[i] != 0xFF); i++)
+    for (i = 0; i < OT_NAME_LENGTH && (baseA->playerName[i] != 0xFF || baseB->playerName[i] != 0xFF); i++)
     {
-        if (baseA->sbr_field_2[i] != baseB->sbr_field_2[i])
+        if (baseA->playerName[i] != baseB->playerName[i])
         {
             return FALSE;
         }
@@ -1619,7 +1616,7 @@ s16 sub_80BD12C(u8 secretBaseId)
 {
     s16 i;
 
-    for (i = 0; i < 20; i++)
+    for (i = 0; i < MAX_SECRET_BASES; i++)
     {
         if (gSaveBlock1.secretBases[i].secretBaseId == secretBaseId)
         {
@@ -1634,7 +1631,7 @@ u8 sub_80BD170(void)
 {
     s16 i;
 
-    for (i = 1; i < 20; i++)
+    for (i = 1; i < MAX_SECRET_BASES; i++)
     {
         if (gSaveBlock1.secretBases[i].secretBaseId == 0)
         {
@@ -1649,7 +1646,7 @@ u8 sub_80BD1B0(void)
 {
     s16 i;
 
-    for (i = 1; i < 20; i++)
+    for (i = 1; i < MAX_SECRET_BASES; i++)
     {
         if (gSaveBlock1.secretBases[i].sbr_field_1_6 == 0 && gSaveBlock1.secretBases[i].sbr_field_1_0 == 0)
         {
@@ -1658,4 +1655,389 @@ u8 sub_80BD1B0(void)
     }
 
     return 0;
+}
+
+#ifdef NONMATCHING
+u8 sub_80BD1FC(struct SecretBaseRecord *secretBase)
+{
+    s16 secretBaseIndex;
+
+    if (!secretBase->secretBaseId)
+    {
+        return 0;
+    }
+
+    secretBaseIndex = sub_80BD12C(secretBase->secretBaseId);
+    if (secretBaseIndex)
+    {
+        if (secretBaseIndex != -1)
+        {
+            if (gSaveBlock1.secretBases[secretBaseIndex].sbr_field_1_0 != 1)
+            {
+                if (gSaveBlock1.secretBases[secretBaseIndex].sbr_field_1_6 != 2
+                    || secretBase->sbr_field_1_0 == 1)
+                {
+                    sub_80BD034(secretBaseIndex, secretBase);
+                    return secretBaseIndex;
+                }
+            }
+        }
+        else
+        {
+            secretBaseIndex = sub_80BD170();
+            if (secretBaseIndex == 0)
+            {
+                secretBaseIndex = sub_80BD1B0();
+                if (secretBaseIndex)
+                {
+                    sub_80BD034(secretBaseIndex, secretBase);
+                    return secretBaseIndex;
+                }
+            }
+            else
+            {
+                sub_80BD034(secretBaseIndex, secretBase);
+                return secretBaseIndex;
+            }
+        }
+    }
+
+    return 0;
+}
+#else
+__attribute__((naked))
+u8 sub_80BD1FC(struct SecretBaseRecord *secretBase)
+{
+    asm(".syntax unified\n\
+    push {r4,r5,lr}\n\
+    adds r5, r0, 0\n\
+    ldrb r0, [r5]\n\
+    cmp r0, 0\n\
+    beq _080BD278\n\
+    ldrb r0, [r5]\n\
+    bl sub_80BD12C\n\
+    lsls r0, 16\n\
+    lsrs r4, r0, 16\n\
+    asrs r2, r0, 16\n\
+    cmp r2, 0\n\
+    beq _080BD278\n\
+    movs r0, 0x1\n\
+    negs r0, r0\n\
+    cmp r2, r0\n\
+    beq _080BD254\n\
+    ldr r0, _080BD24C @ =gSaveBlock1\n\
+    lsls r1, r2, 2\n\
+    adds r1, r2\n\
+    lsls r1, 5\n\
+    adds r1, r0\n\
+    ldr r0, _080BD250 @ =0x00001a09\n\
+    adds r1, r0\n\
+    ldrb r1, [r1]\n\
+    lsls r0, r1, 28\n\
+    lsrs r0, 28\n\
+    cmp r0, 0x1\n\
+    beq _080BD278\n\
+    lsrs r0, r1, 6\n\
+    cmp r0, 0x2\n\
+    bne _080BD246\n\
+    ldrb r1, [r5, 0x1]\n\
+    movs r0, 0xF\n\
+    ands r0, r1\n\
+    cmp r0, 0x1\n\
+    bne _080BD278\n\
+_080BD246:\n\
+    lsls r4, 24\n\
+    lsrs r4, 24\n\
+    b _080BD26C\n\
+    .align 2, 0\n\
+_080BD24C: .4byte gSaveBlock1\n\
+_080BD250: .4byte 0x00001a09\n\
+_080BD254:\n\
+    bl sub_80BD170\n\
+    lsls r0, 24\n\
+    lsrs r4, r0, 24\n\
+    cmp r4, 0\n\
+    bne _080BD26C\n\
+    bl sub_80BD1B0\n\
+    lsls r0, 24\n\
+    lsrs r4, r0, 24\n\
+    cmp r4, 0\n\
+    beq _080BD278\n\
+_080BD26C:\n\
+    adds r0, r4, 0\n\
+    adds r1, r5, 0\n\
+    bl sub_80BD034\n\
+    adds r0, r4, 0\n\
+    b _080BD27A\n\
+_080BD278:\n\
+    movs r0, 0\n\
+_080BD27A:\n\
+    pop {r4,r5}\n\
+    pop {r1}\n\
+    bx r1\n\
+.syntax divided\n");
+}
+#endif
+
+void sub_80BD280(void)
+{
+    u8 i;
+    u8 j;
+    struct SecretBaseRecord temp;
+    struct SecretBaseRecord *secretBases = gSaveBlock1.secretBases;
+
+    for (i = 1; i < MAX_SECRET_BASES - 1; i++)
+    {
+        for (j = i + 1; j < MAX_SECRET_BASES; j++)
+        {
+            if ((!secretBases[i].sbr_field_1_6 && secretBases[j].sbr_field_1_6 == 1)
+                || (secretBases[i].sbr_field_1_6 == 2 && secretBases[j].sbr_field_1_6 != 2))
+            {
+                temp = secretBases[i];
+                secretBases[i] = secretBases[j];
+                secretBases[j] = temp;
+            }
+        }
+    }
+}
+
+void sub_80BD328(struct SecretBaseRecord *secretBases, u8 b)
+{
+    u16 i;
+
+    for (i = 1; i < MAX_SECRET_BASES; i++)
+    {
+        if (secretBases[i].sbr_field_1_6 == b)
+        {
+            sub_80BD1FC(&secretBases[i]);
+        }
+    }
+}
+
+bool8 sub_80BD358(struct SecretBaseRecord *secretBase)
+{
+    u8 i;
+
+    if (!secretBase->secretBaseId)
+        return FALSE;
+
+    if (secretBase->secretBaseId && secretBase->gender != gSaveBlock2.playerGender)
+        return FALSE;
+
+    // Check if the player's trainer Id matches the secret base's id.
+    for (i = 0; i < 4; i++)
+    {
+        if (secretBase->trainerId[i] != gSaveBlock2.playerTrainerId[i])
+            return FALSE;
+    }
+
+    for (i = 0; i < OT_NAME_LENGTH && (secretBase->playerName[i] != 0xFF || gSaveBlock2.playerName[i] != 0xFF); i++)
+    {
+        if (secretBase->playerName[i] != gSaveBlock2.playerName[i])
+            return FALSE;
+    }
+
+    return TRUE;
+}
+
+void sub_80BD3DC(struct SecretBaseRecord *basesA, struct SecretBaseRecord *basesB, struct SecretBaseRecord *basesC)
+{
+    u8 i;
+    u8 var1 = 0;
+
+    for (i = 0; i < MAX_SECRET_BASES; i++)
+    {
+        if ((var1 & 1) == 0)
+        {
+            if (sub_80BD358(&basesA[i]) == TRUE)
+            {
+                ClearSecretBase(&basesA[i]);
+                var1 |= 1;
+            }
+        }
+
+        if ((var1 & 2) == 0)
+        {
+            if (sub_80BD358(&basesB[i]) == TRUE)
+            {
+                ClearSecretBase(&basesB[i]);
+                var1 |= 2;
+            }
+        }
+
+        if ((var1 & 4) == 0)
+        {
+            if (sub_80BD358(&basesC[i]) == TRUE)
+            {
+                ClearSecretBase(&basesC[i]);
+                var1 |= 4;
+            }
+        }
+
+        if (var1 == 7)
+        {
+            break;
+        }
+    }
+}
+
+bool8 sub_80BD494(struct SecretBaseRecord *base, struct SecretBaseRecord *secretBases, u8 c)
+{
+    u8 i;
+
+    for (i = 0; i < MAX_SECRET_BASES; i++)
+    {
+        if (secretBases[i].secretBaseId)
+        {
+            if (sub_80BD0EC(base, &secretBases[i]) == TRUE)
+            {
+                if (c == 0)
+                {
+                    ClearSecretBase(&secretBases[i]);
+                    return FALSE;
+                }
+
+                if (base->sbr_field_e > secretBases[i].sbr_field_e)
+                {
+                    ClearSecretBase(&secretBases[i]);
+                    return FALSE;
+                }
+
+                secretBases[i].sbr_field_1_0 = base->sbr_field_1_0;
+
+                ClearSecretBase(base);
+                return TRUE;
+            }
+        }
+    }
+
+    return FALSE;
+}
+
+void sub_80BD514(struct SecretBaseRecord *basesA, struct SecretBaseRecord *basesB, struct SecretBaseRecord *basesC, struct SecretBaseRecord *basesD)
+{
+    u8 i;
+
+    for (i = 1; i < MAX_SECRET_BASES; i++)
+    {
+        if (basesA[i].secretBaseId)
+        {
+            if (basesA[i].sbr_field_1_6 == 1)
+            {
+                basesA[i].sbr_field_1_0 = 1;
+            }
+
+            if (!sub_80BD494(&basesA[i], basesB, i))
+            {
+                if (!sub_80BD494(&basesA[i], basesC, i))
+                {
+                    sub_80BD494(&basesA[i], basesD, i);
+                }
+            }
+        }
+    }
+
+    for (i = 0; i < MAX_SECRET_BASES; i++)
+    {
+        if (basesB[i].secretBaseId)
+        {
+            basesB[i].sbr_field_1_5 = 0;
+
+            if (!sub_80BD494(&basesB[i], basesC, i))
+            {
+                sub_80BD494(&basesB[i], basesD, i);
+            }
+        }
+    }
+
+    for (i = 0; i < MAX_SECRET_BASES; i++)
+    {
+        if (basesC[i].secretBaseId)
+        {
+            basesC[i].sbr_field_1_5 = 0;
+            sub_80BD494(&basesC[i], basesD, i);
+        }
+
+        if (basesD[i].secretBaseId)
+        {
+            basesD[i].sbr_field_1_5 = 0;
+        }
+    }
+}
+
+void sub_80BD610(struct SecretBaseRecord *basesA, struct SecretBaseRecord *basesB, struct SecretBaseRecord *basesC)
+{
+    sub_80BD3DC(basesA, basesB, basesC);
+    sub_80BD514(gSaveBlock1.secretBases, basesA, basesB, basesC);
+
+    sub_80BD1FC(basesA);
+    sub_80BD1FC(basesB);
+    sub_80BD1FC(basesC);
+
+    sub_80BD328(basesA, 1);
+    sub_80BD328(basesB, 1);
+    sub_80BD328(basesC, 1);
+
+    sub_80BD328(basesA, 0);
+    sub_80BD328(basesB, 0);
+    sub_80BD328(basesC, 0);
+} 
+
+void sub_80BD674(void *playerRecords, u32 size, u8 c)
+{
+    if (FlagGet(0x60))
+    {
+        u16 i;
+        u8 numLinkedPlayers = GetLinkPlayerCount();
+        switch (numLinkedPlayers)
+        {
+        case 2:
+            memset(playerRecords + size * 2, 0, size);
+            memset(playerRecords + size * 3, 0, size);
+            break;
+        case 3:
+            memset(playerRecords + size * 3, 0, size);
+            break;
+        }
+
+        switch (c)
+        {
+        case 0:
+            sub_80BD610(playerRecords + size, playerRecords + size * 2, playerRecords + size * 3);
+            break;
+        case 1:
+            sub_80BD610(playerRecords + size * 2, playerRecords + size * 3, playerRecords);
+            break;
+        case 2:
+            sub_80BD610(playerRecords + size * 3, playerRecords, playerRecords + size);
+            break;
+        case 3:
+            sub_80BD610(playerRecords, playerRecords + size, playerRecords + size * 2);
+            break;
+        }
+
+        for (i = 1; i < MAX_SECRET_BASES; i++)
+        {
+            if (gSaveBlock1.secretBases[i].sbr_field_1_0 == 1)
+            {
+                gSaveBlock1.secretBases[i].sbr_field_1_6 = 1;
+                gSaveBlock1.secretBases[i].sbr_field_1_0 = 0;
+            }
+        }
+
+        sub_80BD280();
+
+        for (i = 1; i < MAX_SECRET_BASES; i++)
+        {
+            if (gSaveBlock1.secretBases[i].sbr_field_1_6 == 2)
+            {
+                gSaveBlock1.secretBases[i].sbr_field_1_6 = 0;
+            }
+        }
+
+        if (gSaveBlock1.secretBases[0].sbr_field_e != 0xFFFF)
+        {
+            gSaveBlock1.secretBases[0].sbr_field_e++;
+        }
+    }
 }
