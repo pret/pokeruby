@@ -1,6 +1,9 @@
 #include "global.h"
 #include "secret_base.h"
 #include "decoration.h"
+#include "species.h"
+#include "items.h"
+#include "moves.h"
 #include "event_data.h"
 #include "field_camera.h"
 #include "field_fadetransition.h"
@@ -8,9 +11,12 @@
 #include "field_weather.h"
 #include "fieldmap.h"
 #include "main.h"
+#include "sound.h"
+#include "songs.h"
 #include "map_constants.h"
 #include "map_name_popup.h"
 #include "menu.h"
+#include "menu_helpers.h"
 #include "metatile_behavior.h"
 #include "palette.h"
 #include "pokemon.h"
@@ -22,20 +28,117 @@
 #include "text.h"
 #include "vars.h"
 
-extern u8 gUnknown_020387DC;
-extern u16 gSpecialVar_0x8004;
-extern u16 gSpecialVar_0x8005;
-extern u16 gSpecialVar_0x8006;
-extern u16 gSpecialVar_0x8007;
-extern u16 gScriptResult;
-extern const struct
+extern u8 gUnknown_0815F399[];
+extern u8 gUnknown_0815F49A[];
+
+extern const u8 UnknownString_81A1BB2[];
+extern const u8 UnknownString_81A1F67[];
+extern const u8 UnknownString_81A2254[];
+extern const u8 UnknownString_81A25C3[];
+extern const u8 UnknownString_81A2925[];
+extern const u8 UnknownString_81A1D74[];
+extern const u8 UnknownString_81A20C9[];
+extern const u8 UnknownString_81A2439[];
+extern const u8 UnknownString_81A2754[];
+extern const u8 UnknownString_81A2B2A[];
+
+void sub_80BCA84(u8);
+void sub_80BCBF8(u8);
+void sub_80BCB90(u8);
+void sub_80BCBC0(u8);
+
+void Task_SecretBasePC_Registry(u8);
+void sub_80BC7D8(u8);
+void sub_80BC824(u8);
+void sub_80BCC54(u8);
+u8 sub_80BC948(u8);
+void sub_80BC980(u8);
+void sub_80BC9E4(u8);
+void sub_80BCAEC(u8);
+u8 sub_80BCCA4(u8);
+
+const struct
 {
     u16 unk_083D1358_0;
     u16 unk_083D1358_1;
-} gUnknown_083D1358[7];
-extern const u8 gUnknown_083D1374[4 * 16];
+} gUnknown_083D1358[] = {
+    {0x26,  0x36},
+    {0x27,  0x37},
+    {0x1a0, 0x1a1},
+    {0x1a8, 0x1a9},
+    {0x1b0, 0x1b1},
+    {0x208, 0x210},
+    {0x271, 0x278}
+};
+
+extern u8 gUnknown_020387DC;
+
+const u8 gUnknown_083D1374[] = {
+    MAP_ID_SECRET_BASE_RED_CAVE1,     0,
+    MAP_ID_SECRET_BASE_BROWN_CAVE1,   3,
+    MAP_ID_SECRET_BASE_RED_CAVE2,     0,
+    MAP_ID_SECRET_BASE_SHRUB1,        9,
+    MAP_ID_SECRET_BASE_RED_CAVE3,     0,
+    MAP_ID_SECRET_BASE_BROWN_CAVE1,   3,
+    MAP_ID_SECRET_BASE_RED_CAVE4,     0,
+    MAP_ID_SECRET_BASE_BROWN_CAVE2,  13,
+    MAP_ID_SECRET_BASE_BROWN_CAVE1,   0,
+    MAP_ID_SECRET_BASE_BLUE_CAVE1,    3,
+    MAP_ID_SECRET_BASE_BROWN_CAVE2,   0,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE2,  2,
+    MAP_ID_SECRET_BASE_BROWN_CAVE3,   0,
+    MAP_ID_SECRET_BASE_BROWN_CAVE3,   4,
+    MAP_ID_SECRET_BASE_BROWN_CAVE4,   0,
+    MAP_ID_SECRET_BASE_BROWN_CAVE1,   2,
+    MAP_ID_SECRET_BASE_BLUE_CAVE1,    0,
+    MAP_ID_SECRET_BASE_BROWN_CAVE1,   3,
+    MAP_ID_SECRET_BASE_BLUE_CAVE2,    0,
+    MAP_ID_SECRET_BASE_BROWN_CAVE1,   2,
+    MAP_ID_SECRET_BASE_BLUE_CAVE3,    0,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE1, 15,
+    MAP_ID_SECRET_BASE_BLUE_CAVE4,    0,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE1, 14,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE1,  0,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE2,  3,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE2,  0,
+    MAP_ID_SECRET_BASE_BLUE_CAVE2,    7,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE3,  0,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE1,  6,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE4,  0,
+    MAP_ID_SECRET_BASE_SHRUB1,        9,
+    MAP_ID_SECRET_BASE_TREE1,         0,
+    MAP_ID_SECRET_BASE_BLUE_CAVE1,    3,
+    MAP_ID_SECRET_BASE_TREE2,         0,
+    MAP_ID_SECRET_BASE_SHRUB1,        6,
+    MAP_ID_SECRET_BASE_TREE3,         0,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE3,  3,
+    MAP_ID_SECRET_BASE_TREE4,         0,
+    MAP_ID_SECRET_BASE_TREE1,        10,
+    MAP_ID_SECRET_BASE_SHRUB1,        0,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE1,  3,
+    MAP_ID_SECRET_BASE_SHRUB2,        0,
+    MAP_ID_SECRET_BASE_BROWN_CAVE1,   2,
+    MAP_ID_SECRET_BASE_SHRUB3,        0,
+    MAP_ID_SECRET_BASE_BROWN_CAVE2,   8,
+    MAP_ID_SECRET_BASE_SHRUB4,        0,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE2,  6
+};
+
+const struct MenuAction2 gUnknown_083D13D4[] = {
+    {SecretBaseText_DelRegist, sub_80BCA84},
+    {gUnknownText_Exit, sub_80BCBF8}
+};
+
+const struct YesNoFuncTable gUnknown_083D13E4 = {
+    sub_80BCB90,
+    sub_80BCBC0
+};
+
+const u8 gUnknown_083D13EC[] = {
+    0x23,0x24,0xF,0x1F,0x21,0x2F,0xE,0x14,0x20,0x22,0x0,0x0
+};
+
 extern void *gUnknown_0300485C;
-extern const u8 gUnknown_083D13EC[12];
 extern u8 gUnknown_081A2E14[];
 
 
@@ -323,7 +426,6 @@ bool8 CurrentMapIsSecretBase(void)
     return FALSE;
 }
 
-#ifdef NONMATCHING
 void sub_80BBCCC(u8 flagIn)
 {
     u16 curBaseId;
@@ -331,8 +433,8 @@ void sub_80BBCCC(u8 flagIn)
     if (CurrentMapIsSecretBase()) {
         curBaseId = VarGet(VAR_0x4054);
         for (x=0; x<16; x++) {
-            if ((u8)(gSaveBlock1.secretBases[curBaseId].decorations[x] - 1) <= 0x77 && gDecorations[gSaveBlock1.secretBases[curBaseId].decorations[x]].decor_field_11 != 4) {
-                sub_80FF394((gSaveBlock1.secretBases[0].decorationPos[x] >> 4) + 7, (gSaveBlock1.secretBases[0].decorationPos[x] & 0xF) + 7, gSaveBlock1.secretBases[curBaseId].decorations[x]);
+            if (gSaveBlock1.secretBases[curBaseId].decorations[x] > 0 && gSaveBlock1.secretBases[curBaseId].decorations[x] <= 0x78 && gDecorations[gSaveBlock1.secretBases[curBaseId].decorations[x]].permission != DECORPERM_SOLID_MAT) {
+                sub_80FF394((gSaveBlock1.secretBases[curBaseId].decorationPos[x] >> 4) + 7, (gSaveBlock1.secretBases[curBaseId].decorationPos[x] & 0xF) + 7, gSaveBlock1.secretBases[curBaseId].decorations[x]);
             }
         }
         if (curBaseId != 0) {
@@ -345,6 +447,9 @@ void sub_80BBCCC(u8 flagIn)
     }
 }
 
+#ifdef NONMATCHING
+// The only nonmatching property of this function is that the implicit variables &gSaveBlock1 and &roomdecor[decidx]
+// are stored in the wrong registers.
 void sub_80BBDD0(void)
 {
     u8 *roomdecor;
@@ -364,20 +469,19 @@ void sub_80BBDD0(void)
         ndecor = 16;
     }
     for (decidx=0; decidx<ndecor; decidx++) {
-        if (roomdecor[decidx] == 0)
-            continue;
-        if (gDecorations[roomdecor[decidx]].decor_field_11 != 4)
-            continue;
-        for (objid=0; objid<gMapHeader.events->mapObjectCount; objid++) {
-            if (gMapHeader.events->mapObjects[objid].flagId == gSpecialVar_0x8004 + 0xAE)
-                break;
-        }
-        if (objid != gMapHeader.events->mapObjectCount) {
+        if (roomdecor[decidx] != 0 && gDecorations[roomdecor[decidx]].permission == DECORPERM_SOLID_MAT)
+        {
+            for (objid=0; objid<gMapHeader.events->mapObjectCount; objid++) {
+                if (gMapHeader.events->mapObjects[objid].flagId == gSpecialVar_0x8004 + 0xAE)
+                    break;
+            }
+            if (objid == gMapHeader.events->mapObjectCount)
+                continue;
             gSpecialVar_0x8006 = roomdecorpos[decidx] >> 4;
             gSpecialVar_0x8007 = roomdecorpos[decidx] & 0xF;
             metatile = MapGridGetMetatileBehaviorAt(gSpecialVar_0x8006 + 7, gSpecialVar_0x8007 + 7);
-            if (sub_80572D8(metatile) == 1 || sub_80572EC(metatile) == 1) {
-                gScriptResult = gMapHeader.events->mapObjects[objid].graphicsId + 0x3f20;
+            if (sub_80572D8(metatile) == TRUE || sub_80572EC(metatile) == TRUE) {
+                gScriptResult = gMapHeader.events->mapObjects[objid].graphicsId + VAR_0x3F20;
                 VarSet(gScriptResult, gDecorations[roomdecor[decidx]].tiles[0]);
                 gScriptResult = gMapHeader.events->mapObjects[objid].localId;
                 FlagClear(gSpecialVar_0x8004 + 0xAE);
@@ -391,132 +495,6 @@ void sub_80BBDD0(void)
 }
 
 #else
-__attribute__((naked))
-void sub_80BBCCC(u8 flagIn)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r8\n\
-    push {r7}\n\
-    sub sp, 0x4\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    mov r8, r0\n\
-    bl CurrentMapIsSecretBase\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    beq _080BBDBC\n\
-    ldr r0, _080BBD70 @ =0x00004054\n\
-    bl VarGet\n\
-    lsls r0, 16\n\
-    lsrs r5, r0, 16\n\
-    movs r1, 0\n\
-    mov r0, sp\n\
-    strh r1, [r0]\n\
-    ldr r6, _080BBD74 @ =gSaveBlock1\n\
-    mov r4, sp\n\
-    ldr r0, _080BBD78 @ =0x00001a2a\n\
-    adds r7, r6, r0\n\
-_080BBCFC:\n\
-    lsls r0, r5, 2\n\
-    adds r0, r5\n\
-    lsls r0, 5\n\
-    ldrh r1, [r4]\n\
-    adds r2, r0, r1\n\
-    ldr r1, _080BBD7C @ =0x00001a1a\n\
-    adds r0, r6, r1\n\
-    adds r1, r2, r0\n\
-    ldrb r0, [r1]\n\
-    subs r0, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x77\n\
-    bhi _080BBD3A\n\
-    ldr r0, _080BBD80 @ =gDecorations\n\
-    ldrb r3, [r1]\n\
-    lsls r1, r3, 5\n\
-    adds r1, r0\n\
-    ldrb r0, [r1, 0x11]\n\
-    cmp r0, 0x4\n\
-    beq _080BBD3A\n\
-    adds r0, r2, r7\n\
-    ldrb r2, [r0]\n\
-    lsrs r0, r2, 4\n\
-    adds r0, 0x7\n\
-    movs r1, 0xF\n\
-    ands r1, r2\n\
-    adds r1, 0x7\n\
-    adds r2, r3, 0\n\
-    bl sub_80FF394\n\
-_080BBD3A:\n\
-    ldrh r0, [r4]\n\
-    adds r0, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    strh r0, [r4]\n\
-    cmp r0, 0xF\n\
-    bls _080BBCFC\n\
-    cmp r5, 0\n\
-    beq _080BBD88\n\
-    mov r4, sp\n\
-    adds r4, 0x2\n\
-    movs r2, 0x88\n\
-    lsls r2, 2\n\
-    mov r0, sp\n\
-    adds r1, r4, 0\n\
-    bl sub_80BB764\n\
-    mov r0, sp\n\
-    ldrh r0, [r0]\n\
-    adds r0, 0x7\n\
-    ldrh r1, [r4]\n\
-    adds r1, 0x7\n\
-    ldr r2, _080BBD84 @ =0x00000e21\n\
-    bl MapGridSetMetatileIdAt\n\
-    b _080BBDBC\n\
-    .align 2, 0\n\
-_080BBD70: .4byte 0x00004054\n\
-_080BBD74: .4byte gSaveBlock1\n\
-_080BBD78: .4byte 0x00001a2a\n\
-_080BBD7C: .4byte 0x00001a1a\n\
-_080BBD80: .4byte gDecorations\n\
-_080BBD84: .4byte 0x00000e21\n\
-_080BBD88:\n\
-    mov r0, r8\n\
-    cmp r0, 0x1\n\
-    bne _080BBDBC\n\
-    ldr r0, _080BBDC8 @ =0x00004089\n\
-    bl VarGet\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    cmp r0, 0x1\n\
-    bne _080BBDBC\n\
-    mov r4, sp\n\
-    adds r4, 0x2\n\
-    movs r2, 0x88\n\
-    lsls r2, 2\n\
-    mov r0, sp\n\
-    adds r1, r4, 0\n\
-    bl sub_80BB764\n\
-    mov r0, sp\n\
-    ldrh r0, [r0]\n\
-    adds r0, 0x7\n\
-    ldrh r1, [r4]\n\
-    adds r1, 0x7\n\
-    ldr r2, _080BBDCC @ =0x00000e0a\n\
-    bl MapGridSetMetatileIdAt\n\
-_080BBDBC:\n\
-    add sp, 0x4\n\
-    pop {r3}\n\
-    mov r8, r3\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_080BBDC8: .4byte 0x00004089\n\
-_080BBDCC: .4byte 0x00000e0a\n\
-.syntax divided\n");
-}
-
 __attribute__((naked))
 void sub_80BBDD0(void)
 {
@@ -755,18 +733,18 @@ void sub_80BBFA4(void)
     VarSet(VAR_0x401F, gUnknown_083D13EC[sub_80BCCA4(curBase)]);
 }
 
-void sub_80BBFD8(s16 *position, struct MapEvents *events)
+void sub_80BBFD8(struct MapPosition *position, struct MapEvents *events)
 {
     s16 bgevtidx;
     for (bgevtidx=0; bgevtidx<events->bgEventCount; bgevtidx++) {
-        if (events->bgEvents[bgevtidx].kind == 8 && position[0] == events->bgEvents[bgevtidx].x + 7 && position[1] == events->bgEvents[bgevtidx].y + 7) {
+        if (events->bgEvents[bgevtidx].kind == 8 && position->x == events->bgEvents[bgevtidx].x + 7 && position->y == events->bgEvents[bgevtidx].y + 7) {
             gUnknown_020387DC = events->bgEvents[bgevtidx].bgUnion.secretBaseId;
             break;
         }
     }
 }
 
-void sub_80BC038(s16 *position, struct MapEvents *events)
+void sub_80BC038(struct MapPosition *position, struct MapEvents *events)
 {
     sub_80BBFD8(position, events);
     sub_80BB5E4();
@@ -873,32 +851,31 @@ u8 sub_80BC298(struct Pokemon *mon) { // 80bc298
 }
 
 #ifdef NONMATCHING
+// So much is wrong with this function.
+// The compiler likes to store pointers in temp variables.  That's not what it's supposed to do.
 void sub_80BC300(void)
 {
+    u16 partyidx;
     u16 moveidx;
     u16 sbpartyidx = 0;
-    int resetVal = 0;
-    u16 partyidx = 0;
-    while (partyidx < 6) {
-        partyidx ++;
-        for (moveidx=0; moveidx<4; moveidx++) {
-            gSaveBlock1.secretBases[0].partyMoves[(partyidx - 1) * 6 + moveidx] = resetVal;
-        }
-        gSaveBlock1.secretBases[0].partySpecies[partyidx - 1] = resetVal;
-        gSaveBlock1.secretBases[0].partyHeldItems[partyidx - 1] = resetVal;
-        gSaveBlock1.secretBases[0].partyLevels[partyidx - 1] = resetVal;
-        gSaveBlock1.secretBases[0].partyPersonality[partyidx - 1] = resetVal;
-        gSaveBlock1.secretBases[0].partyEVs[partyidx - 1] = resetVal;
-        if (GetMonData(&(gPlayerParty[partyidx - 1]), MON_DATA_SPECIES) != 0 && !GetMonData(&(gPlayerParty[partyidx - 1]), MON_DATA_IS_EGG)) {
+    for (partyidx=0; partyidx<PARTY_SIZE; partyidx++)
+    {
+        for (moveidx=0; moveidx<4; moveidx++)
+            gSaveBlock1.secretBases[0].partyMoves[partyidx * 4 + moveidx] = MOVE_NONE;
+        gSaveBlock1.secretBases[0].partySpecies[partyidx] = SPECIES_NONE;
+        gSaveBlock1.secretBases[0].partyHeldItems[partyidx] = ITEM_NONE;
+        gSaveBlock1.secretBases[0].partyLevels[partyidx] = 0;
+        gSaveBlock1.secretBases[0].partyPersonality[partyidx] = 0;
+        gSaveBlock1.secretBases[0].partyEVs[partyidx] = 0;
+        if (GetMonData(&(gPlayerParty[partyidx]), MON_DATA_SPECIES) != SPECIES_NONE && !GetMonData(&(gPlayerParty[partyidx]), MON_DATA_IS_EGG)) {
+            for (moveidx=0; moveidx<4; moveidx++)
+                gSaveBlock1.secretBases[0].partyMoves[sbpartyidx * 4 + moveidx] = GetMonData(&(gPlayerParty[partyidx]), MON_DATA_MOVE1 + moveidx);
+            gSaveBlock1.secretBases[0].partySpecies[sbpartyidx] = GetMonData(&(gPlayerParty[partyidx]), MON_DATA_SPECIES);
+            gSaveBlock1.secretBases[0].partyHeldItems[sbpartyidx] = GetMonData(&(gPlayerParty[partyidx]), MON_DATA_HELD_ITEM);
+            gSaveBlock1.secretBases[0].partyLevels[sbpartyidx] = GetMonData(&(gPlayerParty[partyidx]), MON_DATA_LEVEL);
+            gSaveBlock1.secretBases[0].partyPersonality[sbpartyidx] = GetMonData(&(gPlayerParty[partyidx]), MON_DATA_PERSONALITY);
+            gSaveBlock1.secretBases[0].partyEVs[sbpartyidx] = sub_80BC298(&(gPlayerParty[partyidx]));
             sbpartyidx ++;
-            for (moveidx=0; moveidx<4; moveidx++) {
-                gSaveBlock1.secretBases[0].partyMoves[(sbpartyidx - 1) * 6 + moveidx] = GetMonData(&(gPlayerParty[partyidx - 1]), MON_DATA_MOVE1 + moveidx);
-            }
-            gSaveBlock1.secretBases[0].partySpecies[sbpartyidx - 1] = GetMonData(&(gPlayerParty[partyidx - 1]), MON_DATA_SPECIES);
-            gSaveBlock1.secretBases[0].partyHeldItems[sbpartyidx - 1] = GetMonData(&(gPlayerParty[partyidx - 1]), MON_DATA_HELD_ITEM);
-            gSaveBlock1.secretBases[0].partyLevels[sbpartyidx - 1] = GetMonData(&(gPlayerParty[partyidx - 1]), MON_DATA_LEVEL);
-            gSaveBlock1.secretBases[0].partyPersonality[sbpartyidx - 1] = GetMonData(&(gPlayerParty[partyidx - 1]), MON_DATA_PERSONALITY);
-            gSaveBlock1.secretBases[0].partyEVs[sbpartyidx - 1] = sub_80BC298(&(gPlayerParty[partyidx - 1]));
         }
     }
 }
@@ -1072,4 +1049,422 @@ void SecretBasePC_PackUp(void)
 {
     IncrementGameStat(20);
     sub_80BC440();
+}
+
+void sub_80BC474(void)
+{
+    u16 i, j;
+    s16 metatileId;
+    struct MapEvents *mapEvents = gMapHeader.events;
+    for (i=0; i<mapEvents->bgEventCount; i++)
+    {
+        if (mapEvents->bgEvents[i].kind == 8 && gSaveBlock1.secretBases[0].sbr_field_0 == mapEvents->bgEvents[i].bgUnion.secretBaseId)
+        {
+            metatileId = MapGridGetMetatileIdAt(mapEvents->bgEvents[i].x + 7, mapEvents->bgEvents[i].y + 7);
+            for (j=0; j<7; j++)
+            {
+                if (gUnknown_083D1358[j].unk_083D1358_1 == metatileId)
+                {
+                    MapGridSetMetatileIdAt(mapEvents->bgEvents[i].x + 7, mapEvents->bgEvents[i].y + 7, gUnknown_083D1358[j].unk_083D1358_0 | 0xc00);
+                    break;
+                }
+            }
+            DrawWholeMapView();
+            break;
+        }
+    }
+}
+
+void sub_80BC50C(void)
+{
+    u16 backup_sbr_field_e;
+    sub_80BC474();
+    IncrementGameStat(GAME_STAT_MOVED_SECRET_BASE);
+    backup_sbr_field_e = gSaveBlock1.secretBases[0].sbr_field_e;
+    ResetSecretBase(0);
+    gSaveBlock1.secretBases[0].sbr_field_e = backup_sbr_field_e;
+}
+
+u8 sub_80BC538(void)
+{
+    s16 i;
+    u8 count = 0;
+    for (i=1; i<20; i++)
+    {
+        if (sub_80BC268(i) == TRUE)
+            count++;
+    }
+    return count;
+}
+
+void sub_80BC56C(void)
+{
+    if (sub_80BC268(sub_80BC14C(gUnknown_020387DC)) == TRUE)
+        gScriptResult = 1;
+    else if (sub_80BC538() > 9)
+        gScriptResult = 2;
+    else
+        gScriptResult = 0;
+}
+
+void sub_80BC5BC(void)
+{
+    gSaveBlock1.secretBases[sub_80BC14C(gUnknown_020387DC)].sbr_field_1_6 ^= 1;
+    FlagSet(0x10c);
+}
+
+void SecretBasePC_Decoration(void)
+{
+    CreateTask(Task_SecretBasePC_Decoration, 0);
+}
+
+void SecretBasePC_Registry(void)
+{
+    CreateTask(Task_SecretBasePC_Registry, 0);
+}
+
+// This function tries to keep gTasks + 8 in a register.  It should not.
+#ifdef NONMATCHING
+void Task_SecretBasePC_Registry(u8 taskId)
+{
+    s16 *data;
+    ScriptContext2_Enable();
+    sub_80F944C();
+    LoadScrollIndicatorPalette();
+    data = gTasks[taskId].data;
+    if ((data[0] = sub_80BC538()) != 0)
+    {
+        data[3] = max(data[0], 7);
+        data[1] = 0;
+        data[2] = 0;
+        MenuZeroFillWindowRect(0, 0, 29, 19);
+        sub_80BC7D8(taskId);
+        gTasks[taskId].func = sub_80BC824;
+    }
+    else
+    {
+        DisplayItemMessageOnField(taskId, gSecretBaseText_NoRegistry, sub_80BCC54, 0);
+    }
+}
+#else
+__attribute__((naked))
+void Task_SecretBasePC_Registry(u8 taskId)
+{
+    asm_unified("\tpush {r4,r5,lr}\n"
+                    "\tlsls r0, 24\n"
+                    "\tlsrs r5, r0, 24\n"
+                    "\tbl ScriptContext2_Enable\n"
+                    "\tbl sub_80F944C\n"
+                    "\tbl LoadScrollIndicatorPalette\n"
+                    "\tlsls r0, r5, 2\n"
+                    "\tadds r0, r5\n"
+                    "\tlsls r0, 3\n"
+                    "\tldr r1, _080BC688 @ =gTasks + 0x8\n"
+                    "\tadds r4, r0, r1\n"
+                    "\tbl sub_80BC538\n"
+                    "\tlsls r0, 24\n"
+                    "\tlsrs r0, 24\n"
+                    "\tstrh r0, [r4]\n"
+                    "\tadds r1, r0, 0\n"
+                    "\tcmp r1, 0\n"
+                    "\tbeq _080BC694\n"
+                    "\tcmp r1, 0x7\n"
+                    "\tble _080BC65E\n"
+                    "\tmovs r0, 0x7\n"
+                    "_080BC65E:\n"
+                    "\tstrh r0, [r4, 0x6]\n"
+                    "\tmovs r0, 0\n"
+                    "\tstrh r0, [r4, 0x2]\n"
+                    "\tstrh r0, [r4, 0x4]\n"
+                    "\tmovs r0, 0\n"
+                    "\tmovs r1, 0\n"
+                    "\tmovs r2, 0x1D\n"
+                    "\tmovs r3, 0x13\n"
+                    "\tbl MenuZeroFillWindowRect\n"
+                    "\tadds r0, r5, 0\n"
+                    "\tbl sub_80BC7D8\n"
+                    "\tldr r1, _080BC68C @ =gTasks\n"
+                    "\tlsls r0, r5, 2\n"
+                    "\tadds r0, r5\n"
+                    "\tlsls r0, 3\n"
+                    "\tadds r0, r1\n"
+                    "\tldr r1, _080BC690 @ =sub_80BC824\n"
+                    "\tstr r1, [r0]\n"
+                    "\tb _080BC6A0\n"
+                    "\t.align 2, 0\n"
+                    "_080BC688: .4byte gTasks + 0x8\n"
+                    "_080BC68C: .4byte gTasks\n"
+                    "_080BC690: .4byte sub_80BC824\n"
+                    "_080BC694:\n"
+                    "\tldr r1, _080BC6A8 @ =gSecretBaseText_NoRegistry\n"
+                    "\tldr r2, _080BC6AC @ =sub_80BCC54\n"
+                    "\tadds r0, r5, 0\n"
+                    "\tmovs r3, 0\n"
+                    "\tbl DisplayItemMessageOnField\n"
+                    "_080BC6A0:\n"
+                    "\tpop {r4,r5}\n"
+                    "\tpop {r0}\n"
+                    "\tbx r0\n"
+                    "\t.align 2, 0\n"
+                    "_080BC6A8: .4byte gSecretBaseText_NoRegistry\n"
+                    "_080BC6AC: .4byte sub_80BCC54");
+}
+#endif
+
+void sub_80BC6B0(u8 taskId)
+{
+    u8 i;
+    s16 *data = gTasks[taskId].data;
+    u8 m = 0;
+    u8 n = 0;
+    for (i=1; i<20; i++)
+    {
+        if (m == data[2])
+        {
+            m = i;
+            break;
+        }
+        if (sub_80BC268(i) == TRUE)
+            m ++;
+    }
+    for (i=m; i<20; i++)
+    {
+        if (sub_80BC268(i) == TRUE)
+        {
+            sub_80BC190(gStringVar1, i);
+            MenuFillWindowRectWithBlankTile(18, 2 * n + 2, 28, 2 * n + 3);
+            MenuPrint(gStringVar1, 18, 2 * n + 2);
+            if (++n == 8)
+                break;
+        }
+    }
+    if (n < 8)
+    {
+        MenuFillWindowRectWithBlankTile(18, 2 * n + 2, 28, 2 * n + 3);
+        MenuPrint(gUnknownText_Exit, 18, 2 * n + 2);
+        DestroyVerticalScrollIndicator(1);
+        if (n != 7)
+            MenuFillWindowRectWithBlankTile(18, ((n << 25) + (1 << 26)) >> 24, 28, 18); // needed to match
+    }
+    else
+        CreateVerticalScrollIndicators(1, 0xbc, 0x98);
+    if (data[2] == 0)
+        DestroyVerticalScrollIndicator(0);
+    else
+        CreateVerticalScrollIndicators(0, 0xbc, 0x08);
+}
+
+void sub_80BC7D8(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    MenuDrawTextWindow(17, 0, 29, 19);
+    InitMenu(0, 18, 2, data[3] + 1, data[1], 11);
+    sub_80BC6B0(taskId);
+}
+
+void sub_80BC824(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    {
+        if (data[1] != 0)
+        {
+            PlaySE(SE_SELECT);
+            data[1] = MoveMenuCursor(-1);
+        }
+        else if (data[2] != 0)
+        {
+            PlaySE(SE_SELECT);
+            data[2]--;
+            sub_80BC6B0(taskId);
+        }
+    }
+    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    {
+        if (data[1] == data[3])
+        {
+            if (data[2] + data[1] != data[0])
+            {
+                PlaySE(SE_SELECT);
+                data[2]++;
+                sub_80BC6B0(taskId);
+            }
+        }
+        else
+        {
+            PlaySE(SE_SELECT);
+            data[1] = MoveMenuCursor(+1);
+        }
+    }
+    else if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        if (data[1] + data[2] == data[0])
+        {
+            HandleDestroyMenuCursors();
+            MenuZeroFillWindowRect(0, 0, 29, 19);
+            sub_80BCC54(taskId);
+        }
+        else
+        {
+            HandleDestroyMenuCursors();
+            data[4] = sub_80BC948(data[1] + data[2]);
+            sub_80BC980(taskId);
+        }
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        HandleDestroyMenuCursors();
+        MenuZeroFillWindowRect(0, 0, 29, 19);
+        sub_80BCC54(taskId);
+    }
+}
+
+u8 sub_80BC948(u8 a0)
+{
+    u8 n = 0;
+    u8 i;
+    for (i=1; i<20; i++)
+    {
+        if (sub_80BC268(i) == TRUE)
+        {
+            if (a0 == n)
+                return i;
+            n++;
+        }
+    }
+    return 0;
+}
+
+void sub_80BC980(u8 taskId)
+{
+    PauseVerticalScrollIndicator(0);
+    PauseVerticalScrollIndicator(1);
+    MenuDrawTextWindow(1, 0, 12, 5);
+    PrintMenuItems(2, 1, 2, (const struct MenuAction *)gUnknown_083D13D4);
+    InitMenu(0, 2, 1, 2, 0, 10);
+    gTasks[taskId].func = sub_80BC9E4;
+}
+
+void sub_80BC9E4(u8 taskId)
+{
+    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    {
+        if (GetMenuCursorPos() != 0)
+        {
+            PlaySE(SE_SELECT);
+            MoveMenuCursor(-1);
+        }
+    }
+    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    {
+        if (GetMenuCursorPos() != 1)
+        {
+            PlaySE(SE_SELECT);
+            MoveMenuCursor(+1);
+        }
+    }
+    else if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        gUnknown_083D13D4[GetMenuCursorPos()].func(taskId);
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        sub_80BCBF8(taskId);
+    }
+}
+
+void sub_80BCA84(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    DestroyVerticalScrollIndicator(0);
+    DestroyVerticalScrollIndicator(1);
+    HandleDestroyMenuCursors();
+    MenuZeroFillWindowRect(0, 0, 29, 19);
+    sub_80BC190(gStringVar1, data[4]);
+    StringExpandPlaceholders(gStringVar4, gOtherText_OkayToDeleteFromRegistry);
+    DisplayItemMessageOnField(taskId, gStringVar4, sub_80BCAEC, 0);
+}
+
+void sub_80BCAEC(u8 taskId)
+{
+    DisplayYesNoMenu(20, 8, 1);
+    DoYesNoFuncWithChoice(taskId, &gUnknown_083D13E4);
+}
+
+void sub_80BCB10(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    MenuZeroFillWindowRect(0, 0, 29, 19);
+    gSaveBlock1.secretBases[data[4]].sbr_field_1_6 = 0;
+    data[0]--;
+    if (data[2] > 0)
+        data[2]--;
+    if (data[0] < 8)
+        data[3]--;
+    sub_80BC7D8(taskId);
+    gTasks[taskId].func = sub_80BC824;
+}
+
+void sub_80BCB90(u8 taskId)
+{
+    MenuZeroFillWindowRect(20, 8, 26, 13);
+    DisplayItemMessageOnField(taskId, gOtherText_RegisteredDataDeleted, sub_80BCB10, 0);
+}
+
+void sub_80BCBC0(u8 taskId)
+{
+    MenuZeroFillWindowRect(0, 0, 29, 19);
+    sub_80BC7D8(taskId);
+    gTasks[taskId].func = sub_80BC824;
+}
+
+void sub_80BCBF8(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    InitMenu(0, 18, 2, data[3] + 1, data[1], 11);
+    MenuZeroFillWindowRect(1, 0, 12, 5);
+    StartVerticalScrollIndicators(0);
+    StartVerticalScrollIndicators(1);
+    gTasks[taskId].func = sub_80BC824;
+}
+
+void sub_80BCC54(u8 taskId)
+{
+    u16 var54 = VarGet(VAR_0x4054);
+    BuyMenuFreeMemory();
+    DestroyVerticalScrollIndicator(0);
+    DestroyVerticalScrollIndicator(1);
+    if (var54 == 0)
+    {
+        ScriptContext1_SetupScript(gUnknown_0815F399);
+    }
+    else
+    {
+        ScriptContext1_SetupScript(gUnknown_0815F49A);
+    }
+    DestroyTask(taskId);
+}
+
+u8 sub_80BCCA4(u8 sbid)
+{
+    return (gSaveBlock1.secretBases[sbid].trainerId[0] % 5) + gSaveBlock1.secretBases[sbid].gender * 5;
+}
+
+const u8 *sub_80BCCE8(void)
+{
+    u8 param = sub_80BCCA4(VarGet(VAR_0x4054));
+    if (param == 0) return UnknownString_81A1BB2;
+    if (param == 1) return UnknownString_81A1F67;
+    if (param == 2) return UnknownString_81A2254;
+    if (param == 3) return UnknownString_81A25C3;
+    if (param == 4) return UnknownString_81A2925;
+    if (param == 5) return UnknownString_81A1D74;
+    if (param == 6) return UnknownString_81A20C9;
+    if (param == 7) return UnknownString_81A2439;
+    if (param == 8) return UnknownString_81A2754;
+    return UnknownString_81A2B2A;
 }

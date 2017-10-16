@@ -291,6 +291,7 @@ extern void sub_8134104(u8); // src/decoration_inventory
 extern bool8 sub_807D770(void);
 extern void sub_8109DAC(u8); // src/trader
 extern void ReshowPlayerPC(u8); // src/player_pc
+void Task_SecretBasePC_Decoration(u8);
 
 void sub_80FE2B4(void);
 void Task_DecorationPCProcessMenuInput(u8);
