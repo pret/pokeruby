@@ -836,3 +836,132 @@ void sub_8124118(void)
         }
     }
 }
+
+#ifdef NONMATCHING
+// this is nowhere near correct
+void sub_812446C(void)
+{
+    u8 i;
+    u8 j;
+    u8 k;
+    u8 offset;
+
+    for (i = 0, k = 0, offset = 36 * (gUnknown_02039274->unk_001b + 2); i < 3; i ++)
+    {
+        for (j = 0; j < 12; j ++)
+        {
+            gUnknown_02039274->unk_0022[i][k] = ewram_19000.mtChimneyTilemap[0][offset + k];
+            gUnknown_02039274->unk_0022[i + 3][k] = ewram_19000.mtChimneyTilemap[0][k];
+            gUnknown_02039274->unk_0022[i + 6][k] = ewram_19000.mtChimneyTilemap[2][k];
+            k ++;
+        }
+    }
+    gUnknown_02039274->unk_001b = (gUnknown_02039274->unk_001b + 1) % 3;
+}
+#else
+__attribute__((naked)) void sub_812446C(void)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                    "\tmov r7, r10\n"
+                    "\tmov r6, r9\n"
+                    "\tmov r5, r8\n"
+                    "\tpush {r5-r7}\n"
+                    "\tsub sp, 0x8\n"
+                    "\tmovs r3, 0\n"
+                    "\tmov r9, r3\n"
+                    "\tldr r2, _08124530 @ =gUnknown_02039274\n"
+                    "\tldr r0, [r2]\n"
+                    "\tldrb r1, [r0, 0x1B]\n"
+                    "\tadds r1, 0x2\n"
+                    "\tlsls r0, r1, 3\n"
+                    "\tadds r0, r1\n"
+                    "\tlsls r0, 26\n"
+                    "\tlsrs r0, 24\n"
+                    "\tmov r12, r0\n"
+                    "_0812448E:\n"
+                    "\tmovs r6, 0\n"
+                    "\tlsls r0, r3, 1\n"
+                    "\tadds r1, r3, 0x3\n"
+                    "\tadds r2, r3, 0x6\n"
+                    "\tadds r4, r3, 0x1\n"
+                    "\tstr r4, [sp]\n"
+                    "\tadds r0, r3\n"
+                    "\tlsls r0, 3\n"
+                    "\tmov r10, r0\n"
+                    "\tlsls r0, r1, 1\n"
+                    "\tadds r0, r1\n"
+                    "\tlsls r0, 3\n"
+                    "\tmov r8, r0\n"
+                    "\tlsls r0, r2, 1\n"
+                    "\tadds r0, r2\n"
+                    "\tlsls r0, 3\n"
+                    "\tstr r0, [sp, 0x4]\n"
+                    "_081244B0:\n"
+                    "\tldr r7, _08124530 @ =gUnknown_02039274\n"
+                    "\tldr r5, [r7]\n"
+                    "\tlsls r3, r6, 1\n"
+                    "\tmov r0, r10\n"
+                    "\tadds r2, r3, r0\n"
+                    "\tadds r4, r5, 0\n"
+                    "\tadds r4, 0x22\n"
+                    "\tadds r2, r4, r2\n"
+                    "\tmov r1, r12\n"
+                    "\tadds r0, r1, 0x1\n"
+                    "\tlsls r0, 24\n"
+                    "\tlsrs r0, 24\n"
+                    "\tmov r12, r0\n"
+                    "\tlsls r1, 1\n"
+                    "\tldr r7, _08124534 @ =0x02019000\n"
+                    "\tadds r1, r7\n"
+                    "\tldrh r0, [r1]\n"
+                    "\tstrh r0, [r2]\n"
+                    "\tmov r0, r8\n"
+                    "\tadds r1, r3, r0\n"
+                    "\tadds r1, r4, r1\n"
+                    "\tmov r7, r9\n"
+                    "\tlsls r2, r7, 1\n"
+                    "\tldr r7, _08124534 @ =0x02019000\n"
+                    "\tadds r0, r2, r7\n"
+                    "\tldrh r0, [r0]\n"
+                    "\tstrh r0, [r1]\n"
+                    "\tldr r0, [sp, 0x4]\n"
+                    "\tadds r3, r0\n"
+                    "\tadds r4, r3\n"
+                    "\tldr r1, _08124538 @ =0x02019048\n"
+                    "\tadds r2, r1\n"
+                    "\tldrh r0, [r2]\n"
+                    "\tstrh r0, [r4]\n"
+                    "\tmov r0, r9\n"
+                    "\tadds r0, 0x1\n"
+                    "\tlsls r0, 24\n"
+                    "\tlsrs r0, 24\n"
+                    "\tmov r9, r0\n"
+                    "\tadds r0, r6, 0x1\n"
+                    "\tlsls r0, 24\n"
+                    "\tlsrs r6, r0, 24\n"
+                    "\tcmp r6, 0xB\n"
+                    "\tbls _081244B0\n"
+                    "\tldr r4, [sp]\n"
+                    "\tlsls r0, r4, 24\n"
+                    "\tlsrs r3, r0, 24\n"
+                    "\tcmp r3, 0x2\n"
+                    "\tbls _0812448E\n"
+                    "\tldrb r0, [r5, 0x1B]\n"
+                    "\tadds r0, 0x1\n"
+                    "\tmovs r1, 0x3\n"
+                    "\tbl __modsi3\n"
+                    "\tstrb r0, [r5, 0x1B]\n"
+                    "\tadd sp, 0x8\n"
+                    "\tpop {r3-r5}\n"
+                    "\tmov r8, r3\n"
+                    "\tmov r9, r4\n"
+                    "\tmov r10, r5\n"
+                    "\tpop {r4-r7}\n"
+                    "\tpop {r0}\n"
+                    "\tbx r0\n"
+                    "\t.align 2, 0\n"
+                    "_08124530: .4byte gUnknown_02039274\n"
+                    "_08124534: .4byte 0x02019000\n"
+                    "_08124538: .4byte 0x02019048");
+}
+#endif
