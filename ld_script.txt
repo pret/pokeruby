@@ -231,6 +231,7 @@ SECTIONS {
         src/field/fldeff_softboiled.o(.text);
         src/field/decoration_inventory.o(.text);
         src/field/roamer.o(.text);
+        src/battle_tower.o(.text);
         asm/battle_tower.o(.text);
         src/field/use_pokeblock.o(.text);
         src/battle/battle_controller_wally.o(.text);
