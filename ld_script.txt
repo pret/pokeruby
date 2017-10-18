@@ -154,7 +154,6 @@ SECTIONS {
         src/engine/record_mixing.o(.text);
         src/debug/sound_check_menu.o(.text);
         src/field/secret_base.o(.text);
-        asm/secret_base.o(.text_80BC1D0);
         src/field/tv.o(.text);
         asm/contest_link_80C2020.o(.text);
         src/script_pokemon_util_80C4BF0.o(.text);

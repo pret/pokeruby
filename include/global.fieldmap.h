@@ -111,11 +111,11 @@ struct CoordEvent
 
 struct BgEvent
 {
-    u16 x, y;
-    u8 unk4;
-    u8 kind;
-    // 0x2 padding for the union beginning.
-    union { // carried over from diego's FR/LG work, seems to be the same struct
+    /*0x00*/u16 x;
+    /*0x02*/u16 y;
+    /*0x04*/u8 unk4;
+    /*0x05*/u8 kind;
+    /*0x08*/union { // carried over from diego's FR/LG work, seems to be the same struct
         // in gen 3, "kind" (0x3 in BgEvent struct) determines the method to read the union.
         u8 *script;
 
