@@ -59,7 +59,7 @@ static void task08_080C9820(u8 taskId)
     u8 mapObjId;
 
     ScriptContext2_Enable();
-    gPlayerAvatar.unk6 = 1;
+    gPlayerAvatar.preventStep = TRUE;
     mapObjId = gPlayerAvatar.mapObjectId;
     if (!FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(&gMapObjects[mapObjId])
      || FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[mapObjId]))
@@ -112,7 +112,7 @@ static void sub_810B4CC(u8 taskId)
     void (*func)(void) = (void (*)(void))(((u16)gTasks[taskId].data[8] << 16) | (u16)gTasks[taskId].data[9]);
 
     func();
-    gPlayerAvatar.unk6 = 0;
+    gPlayerAvatar.preventStep = FALSE;
     DestroyTask(taskId);
 }
 

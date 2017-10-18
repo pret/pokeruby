@@ -124,8 +124,8 @@ void FieldClearPlayerInput(struct FieldInput *input)
 
 void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
 {
-    u8 r6 = gPlayerAvatar.running1;
-    u8 r9 = gPlayerAvatar.running2;
+    u8 r6 = gPlayerAvatar.tileTransitionState;
+    u8 r9 = gPlayerAvatar.runningState;
     bool8 forcedMove = MetatileBehavior_IsMoveTile(cur_mapdata_block_role_at_player_pos(r9));
 
     if ((r6 == 2 && forcedMove == FALSE) || r6 == 0)

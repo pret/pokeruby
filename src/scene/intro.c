@@ -768,7 +768,7 @@ const struct SpritePalette gIntro3MiscPal_Table[] =
 const u32 unusedData = 0x02000000;
 
 static void MainCB2_EndIntro(void);
-static void Task_IntroLoadPart1Graphics(u8);
+void Task_IntroLoadPart1Graphics(u8);
 static void Task_IntroFadeIn(u8);
 static void Task_IntroWaterDrops(u8);
 static void Task_IntroScrollDownAndShowEon(u8);
@@ -938,7 +938,7 @@ void CB2_InitCopyrightScreenAfterTitleScreen(void)
     SetUpCopyrightScreen();
 }
 
-static void Task_IntroLoadPart1Graphics(u8 taskId)
+void Task_IntroLoadPart1Graphics(u8 taskId)
 {
     SetVBlankCallback(NULL);
     gUnknown_02039318 = Random() & 1;

@@ -10,7 +10,7 @@ extern u16 gScriptFacing;
 
 bool8 walkrun_is_standing_still(void)
 {
-    if (gPlayerAvatar.running1 == 1)
+    if (gPlayerAvatar.tileTransitionState == T_TILE_TRANSITION)
         return FALSE;
     else
         return TRUE;
