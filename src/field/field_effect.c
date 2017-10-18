@@ -1287,7 +1287,7 @@ bool8 sub_80867AC(struct Task *task) // gUnknown_0839F2CC[0]
     playerSprite = &gSprites[gPlayerAvatar.spriteId];
     CameraObjectReset2();
     gMapObjects[gPlayerAvatar.mapObjectId].mapobj_bit_13 = 1;
-    gPlayerAvatar.unk6 = 1;
+    gPlayerAvatar.preventStep = TRUE;
     FieldObjectSetSpecialAnim(playerObject, GetFaceDirectionAnimId(player_get_direction_lower_nybble()));
     task->data[4] = playerSprite->subspriteMode;
     playerObject->mapobj_bit_26 = 1;
@@ -1382,7 +1382,7 @@ bool8 sub_80869B8(struct Task *task)
 
 bool8 sub_80869F8(struct Task *task)
 {
-    gPlayerAvatar.unk6 = 0;
+    gPlayerAvatar.preventStep = FALSE;
     ScriptContext2_Disable();
     CameraObjectReset1();
     UnfreezeMapObjects();
@@ -1678,7 +1678,7 @@ void sub_8086F64(u8 taskId)
 bool8 sub_8086FB0(struct Task *task, struct MapObject *mapObject)
 {
     ScriptContext2_Enable();
-    gPlayerAvatar.unk6 = 1;
+    gPlayerAvatar.preventStep = TRUE;
     task->data[0]++;
     return FALSE;
 }
@@ -1725,7 +1725,7 @@ bool8 sub_8087058(struct Task *task, struct MapObject *mapObject)
         return TRUE;
     }
     ScriptContext2_Disable();
-    gPlayerAvatar.unk6 = 0;
+    gPlayerAvatar.preventStep = FALSE;
     DestroyTask(FindTaskIdByFunc(sub_8086F64));
     FieldEffectActiveListRemove(FLDEFF_USE_WATERFALL);
     return FALSE;
@@ -1751,7 +1751,7 @@ void Task_Dive(u8 taskId)
 
 bool8 sub_8087124(struct Task *task)
 {
-    gPlayerAvatar.unk6 = 1;
+    gPlayerAvatar.preventStep = TRUE;
     task->data[0]++;
     return FALSE;
 }
@@ -1796,7 +1796,7 @@ bool8 sub_808722C(struct Task *task, struct MapObject *mapObject, struct Sprite 
     FreezeMapObjects();
     CameraObjectReset2();
     SetCameraPanningCallback(NULL);
-    gPlayerAvatar.unk6 = 1;
+    gPlayerAvatar.preventStep = TRUE;
     mapObject->mapobj_bit_26 = 1;
     task->data[1] = 1;
     task->data[0]++;
@@ -1913,7 +1913,7 @@ bool8 sub_80874CC(struct Task *task, struct MapObject *mapObject, struct Sprite 
 {
     CameraObjectReset2();
     FreezeMapObjects();
-    gPlayerAvatar.unk6 = 1;
+    gPlayerAvatar.preventStep = TRUE;
     mapObject->mapobj_bit_13 = 1;
     task->data[0]++;
     return FALSE;
@@ -1951,7 +1951,7 @@ bool8 sub_808759C(struct Task *task, struct MapObject *mapObject, struct Sprite 
 {
     if (FieldObjectClearAnimIfSpecialAnimFinished(mapObject))
     {
-        gPlayerAvatar.unk6 = 0;
+        gPlayerAvatar.preventStep = FALSE;
         ScriptContext2_Disable();
         UnfreezeMapObjects();
         DestroyTask(FindTaskIdByFunc(sub_8087470));
@@ -1996,7 +1996,7 @@ bool8 sub_80876C8(struct Task *task, struct MapObject *mapObject, struct Sprite 
 {
     FreezeMapObjects();
     CameraObjectReset2();
-    gPlayerAvatar.unk6 = 1;
+    gPlayerAvatar.preventStep = TRUE;
     mapObject->mapobj_bit_26 = 1;
     task->data[0]++;
     return FALSE;
@@ -2893,7 +2893,7 @@ void sub_8088984(struct Task *task)
 {
     ScriptContext2_Enable();
     FreezeMapObjects();
-    gPlayerAvatar.unk6 = 1;
+    gPlayerAvatar.preventStep = TRUE;
     SetPlayerAvatarStateMask(8);
     PlayerGetDestCoords(&task->data[1], &task->data[2]);
     MoveCoords(gMapObjects[gPlayerAvatar.mapObjectId].placeholder18, &task->data[1], &task->data[2]);
@@ -2947,7 +2947,7 @@ void sub_8088AF4(struct Task *task)
     mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
     if (FieldObjectClearAnimIfSpecialAnimFinished(mapObject))
     {
-        gPlayerAvatar.unk6 = 0;
+        gPlayerAvatar.preventStep = FALSE;
         gPlayerAvatar.flags &= 0xdf;
         FieldObjectSetSpecialAnim(mapObject, GetFaceDirectionAnimId(mapObject->placeholder18));
         sub_8127ED0(mapObject->mapobj_unk_1A, 1);
@@ -3024,7 +3024,7 @@ void sub_8088CA0(struct Task *task)
     if (!FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(mapObject) || FieldObjectClearAnimIfSpecialAnimFinished(mapObject))
     {
         task->data[15] = gPlayerAvatar.flags;
-        gPlayerAvatar.unk6 = 0x01;
+        gPlayerAvatar.preventStep = TRUE;
         SetPlayerAvatarStateMask(1);
         sub_8059BF4();
         FieldObjectSetSpecialAnim(mapObject, 0x39);
@@ -3296,7 +3296,7 @@ void sub_80892A0(struct Task *task)
         task->data[0]++;
         task->data[2] = 17;
         task->data[15] = gPlayerAvatar.flags;
-        gPlayerAvatar.unk6 = 1;
+        gPlayerAvatar.preventStep = TRUE;
         SetPlayerAvatarStateMask(0x01);
         if (task->data[15] & 0x08)
         {
@@ -3398,7 +3398,7 @@ void fishE(struct Task *task)
         sub_805B980(mapObject, GetPlayerAvatarGraphicsIdByStateId(state));
         FieldObjectTurn(mapObject, DIR_SOUTH);
         gPlayerAvatar.flags = task->data[15];
-        gPlayerAvatar.unk6 = 0;
+        gPlayerAvatar.preventStep = FALSE;
         FieldEffectActiveListRemove(FLDEFF_FLY_IN);
         DestroyTask(FindTaskIdByFunc(sub_8089270));
     }

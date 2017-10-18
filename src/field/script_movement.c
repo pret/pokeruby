@@ -5,19 +5,19 @@
 #include "task.h"
 #include "util.h"
 
-static EWRAM_DATA u8 *gUnknown_020384F8[16] = {0};
+static EWRAM_DATA const u8 *gUnknown_020384F8[16] = {0};
 
 static void sub_80A2198(u8);
 static u8 sub_80A21E0(void);
-static bool8 sub_80A21F4(u8, u8, u8 *);
+static bool8 sub_80A21F4(u8, u8, const u8 *);
 static u8 sub_80A2260(u8, u8);
 static bool8 sub_80A2370(u8, u8);
-static void sub_80A23C8(u8, u8, u8, u8 *);
+static void sub_80A23C8(u8, u8, u8, const u8 *);
 static void UnfreezeObjects(u8);
 static void Task_80A244C(u8);
-static void sub_80A2490(u8, u8, u8, u8 *);
+static void sub_80A2490(u8, u8, u8, const u8 *);
 
-bool8 ScriptMovement_StartObjectMovementScript(u8 localId, u8 mapNum, u8 mapGroup, u8 *movementScript)
+bool8 ScriptMovement_StartObjectMovementScript(u8 localId, u8 mapNum, u8 mapGroup, const u8 *movementScript)
 {
     u8 mapObjId;
 
@@ -70,7 +70,7 @@ static u8 sub_80A21E0(void)
     return FindTaskIdByFunc(Task_80A244C);
 }
 
-static bool8 sub_80A21F4(u8 taskId, u8 mapObjId, u8 *movementScript)
+static bool8 sub_80A21F4(u8 taskId, u8 mapObjId, const u8 *movementScript)
 {
     u8 r4;
 
@@ -160,17 +160,17 @@ static bool8 sub_80A2370(u8 taskId, u8 b)
         return FALSE;
 }
 
-static void npc_obj_offscreen_culling_and_flag_update(u8 a, u8 *movementScript)
+static void npc_obj_offscreen_culling_and_flag_update(u8 a, const u8 *movementScript)
 {
     gUnknown_020384F8[a] = movementScript;
 }
 
-static u8 *sub_80A23B8(u8 a)
+static const u8 *sub_80A23B8(u8 a)
 {
     return gUnknown_020384F8[a];
 }
 
-static void sub_80A23C8(u8 taskId, u8 b, u8 mapObjId, u8 *movementScript)
+static void sub_80A23C8(u8 taskId, u8 b, u8 mapObjId, const u8 *movementScript)
 {
     sub_80A2318(taskId, b);
     npc_obj_offscreen_culling_and_flag_update(b, movementScript);
@@ -203,7 +203,7 @@ static void Task_80A244C(u8 taskId)
     }
 }
 
-static void sub_80A2490(u8 taskId, u8 b, u8 mapObjId, u8 *d)
+static void sub_80A2490(u8 taskId, u8 b, u8 mapObjId, const u8 *d)
 {
     u8 var;
 
