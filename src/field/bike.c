@@ -17,7 +17,7 @@ extern u8 gUnusedBikeCameraAheadPanback;
 static void MovePlayerOnMachBike(u8, u16, u16);
 static u8 GetMachBikeTransition(u8 *);
 static void MachBikeTransition_FaceDirection(u8);
-static void MachBikeTransition_TurnFrame(u8);
+static void MachBikeTransition_TurnDirection(u8);
 static void MachBikeTransition_TrySpeedUp(u8);
 static void MachBikeTransition_TrySlowDown(u8);
 static void MovePlayerOnAcroBike(u8, u16, u16);
@@ -55,10 +55,19 @@ static u8 CanBikeFaceDirOnMetatile(u8, u8);
 static bool8 WillPlayerCollideWithCollision(u8, u8);
 static void Bike_SetBikeStill(void);
 
+/*
+    A bike transition is a type of callback for the bike that actually
+    modifies the bicycle's direction or momentum or otherwise movement.
+    Alternatively, a bike may also have input handlers which process the
+    bike transition to call: the acro bike has input handlers while the mach
+    bike does not. This is because the Acro needs to know the button inputs
+    for its complex tricks and actions.
+*/
+
 static void (*const sMachBikeTransitions[])(u8) =
 {
-    MachBikeTransition_FaceDirection, // the difference between this and turn frame is that face direction has no turn anim while turn frame does.
-    MachBikeTransition_TurnFrame,
+    MachBikeTransition_FaceDirection, // Face vs Turn: Face has no anim while Turn does. Turn checks for collision because if you turn right as opposed to face right, if there is a wall there, turn will make a bonk sound effect while face will not.
+    MachBikeTransition_TurnDirection,
     MachBikeTransition_TrySpeedUp,
     MachBikeTransition_TrySlowDown,
 };
@@ -103,16 +112,16 @@ static u8 (*const sAcroBikeInputHandlers[])(u8 *, u16, u16) =
 const u16 gMachBikeSpeeds[] = {SPEED_NORMAL, SPEED_FAST, SPEED_FASTEST};
 
 // this is a list of timers to compare against later, terminated with 0. the only timer being compared against is 4 frames in this list.
-static const u8 BikeTimerList[] = {4, 0};
+static const u8 AcroBikeJumpTimerList[] = {4, 0};
 
-// this is a list of history inputs to do in order to do the check to retrieve a jump direction for acro bike.
-static const struct BikeHistoryInputInfo gAcroBikeJumpInputList[] =
+// this is a list of history inputs to do in order to do the check to retrieve a jump direction for acro bike. it seems to be an extensible list, so its possible that Game Freak may have intended for the Acro Bike to have more complex tricks at some point. The final list only has the acro jump.
+static const struct BikeHistoryInputInfo gAcroBikeTricksList[] =
 {
     // the 0xF is a mask performed with each byte of the array in order to perform the check on only the last entry of the history list, otherwise the check wouldnt work as there can be 0xF0 as opposed to 0x0F.
-    {DIR_SOUTH, B_BUTTON, 0xF, 0xF, BikeTimerList, BikeTimerList, DIR_SOUTH},
-    {DIR_NORTH, B_BUTTON, 0xF, 0xF, BikeTimerList, BikeTimerList, DIR_NORTH},
-    {DIR_WEST, B_BUTTON, 0xF, 0xF, BikeTimerList, BikeTimerList, DIR_WEST},
-    {DIR_EAST, B_BUTTON, 0xF, 0xF, BikeTimerList, BikeTimerList, DIR_EAST},
+    {DIR_SOUTH, B_BUTTON, 0xF, 0xF, AcroBikeJumpTimerList, AcroBikeJumpTimerList, DIR_SOUTH},
+    {DIR_NORTH, B_BUTTON, 0xF, 0xF, AcroBikeJumpTimerList, AcroBikeJumpTimerList, DIR_NORTH},
+    {DIR_WEST, B_BUTTON, 0xF, 0xF, AcroBikeJumpTimerList, AcroBikeJumpTimerList, DIR_WEST},
+    {DIR_EAST, B_BUTTON, 0xF, 0xF, AcroBikeJumpTimerList, AcroBikeJumpTimerList, DIR_EAST},
 };
 
 void MovePlayerOnBike(u8 direction, u16 newKeys, u16 heldKeys)
@@ -141,10 +150,10 @@ static u8 GetMachBikeTransition(u8 *dirTraveling)
         if (gPlayerAvatar.bikeSpeed == SPEED_STANDING)
         {
             gPlayerAvatar.runningState = NOT_MOVING;
-            return MBT_FACE_DIRECTION;
+            return MACH_TRANS_FACE_DIRECTION;
         }
         gPlayerAvatar.runningState = MOVING;
-        return MBT_START_MOVING;
+        return MACH_TRANS_START_MOVING;
     }
 
     // we need to check if the last traveled direction changed from the new direction as well as ensuring that we dont update the state while the player is moving: see the else check.
@@ -154,27 +163,27 @@ static u8 GetMachBikeTransition(u8 *dirTraveling)
         {
             *dirTraveling = direction; // implement the new direction
             gPlayerAvatar.runningState = MOVING;
-            return MBT_START_MOVING;
+            return MACH_TRANS_START_MOVING;
         }
-        // if you didnt start moving but your dir was different, do a turn frame instead.
-        gPlayerAvatar.runningState = TURN_FRAME;
-        return MBT_TURN_FRAME;
+        // if you didnt start moving but your dir was different, do a turn direction instead.
+        gPlayerAvatar.runningState = TURN_DIRECTION;
+        return MACH_TRANS_TURN_DIRECTION;
     }
     else // the player is either going in the current direction and hasnt changed or their state is currently moving.
     {
         gPlayerAvatar.runningState = MOVING;
-        return MBT_KEEP_MOVING;
+        return MACH_TRANS_KEEP_MOVING;
     }
 }
 
-// the difference between face direction and turn frame is that one changes direction while the other does the animation of turning as well as changing direction.
+// the difference between face direction and turn direction is that one changes direction while the other does the animation of turning as well as changing direction.
 static void MachBikeTransition_FaceDirection(u8 direction)
 {
     PlayerFaceDirection(direction);
     Bike_SetBikeStill();
 }
 
-static void MachBikeTransition_TurnFrame(u8 direction)
+static void MachBikeTransition_TurnDirection(u8 direction)
 {
     struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
 
@@ -259,6 +268,7 @@ static void MachBikeTransition_TrySlowDown(u8 var)
     }
 }
 
+// the acro bike requires the input handler to be executed before the transition can.
 static void MovePlayerOnAcroBike(u8 newDirection, u16 newKeys, u16 heldKeys)
 {
     sAcroBikeTransitions[CheckMovementInputAcroBike(&newDirection, newKeys, heldKeys)](newDirection);
@@ -316,10 +326,10 @@ static u8 AcroBikeHandleInputTurning(u8 *newDirection, u16 newKeys, u16 heldKeys
     *newDirection = gPlayerAvatar.newDirBackup;
     gPlayerAvatar.bikeFrameCounter++;
 
-    //Wait 6 frames before actually changing direction
+    // Wait 6 frames before actually changing direction
     if (gPlayerAvatar.bikeFrameCounter > 6) // ... because it takes 6 frames to advance 1 tile.
     {
-        gPlayerAvatar.runningState = TURN_FRAME;
+        gPlayerAvatar.runningState = TURN_DIRECTION;
         gPlayerAvatar.acroBikeState = ACRO_STATE_NORMAL;
         Bike_SetBikeStill();
         return ACRO_TRANS_TURN_DIRECTION;
@@ -348,7 +358,7 @@ static u8 AcroBikeHandleInputTurning(u8 *newDirection, u16 newKeys, u16 heldKeys
     return ACRO_TRANS_FACE_DIRECTION;
 }
 
-static u8 AcroBikeHandleInputWheelieStanding(u8 *ptr, u16 newKeys, u16 heldKeys)
+static u8 AcroBikeHandleInputWheelieStanding(u8 *newDirection, u16 newKeys, u16 heldKeys)
 {
     u8 direction;
     struct MapObject *playerMapObj;
@@ -361,12 +371,12 @@ static u8 AcroBikeHandleInputWheelieStanding(u8 *ptr, u16 newKeys, u16 heldKeys)
         gPlayerAvatar.bikeFrameCounter++;
     else
     {
-        //B button was released.
+        // B button was released.
         gPlayerAvatar.bikeFrameCounter = 0;
         if (!MetatileBehavior_IsBumpySlope(playerMapObj->mapobj_unk_1E))
         {
-            //Go back to normal on flat ground
-            *ptr = direction;
+            // Go back to normal on flat ground
+            *newDirection = direction;
             gPlayerAvatar.acroBikeState = ACRO_STATE_NORMAL;
             Bike_SetBikeStill();
             return ACRO_TRANS_WHEELIE_TO_NORMAL;
@@ -374,28 +384,28 @@ static u8 AcroBikeHandleInputWheelieStanding(u8 *ptr, u16 newKeys, u16 heldKeys)
     }
     if (gPlayerAvatar.bikeFrameCounter >= 40)
     {
-        *ptr = direction;
+        *newDirection = direction;
         gPlayerAvatar.acroBikeState = ACRO_STATE_BUNNY_HOP;
         Bike_SetBikeStill();
         return ACRO_TRANS_WHEELIE_HOPPING_STANDING;
     }
-    if (*ptr == direction)
+    if (*newDirection == direction)
     {
         gPlayerAvatar.runningState = MOVING;
         gPlayerAvatar.acroBikeState = ACRO_STATE_WHEELIE_MOVING;
         Bike_SetBikeStill();
         return ACRO_TRANS_WHEELIE_MOVING;
     }
-    if (*ptr == 0)
+    if (*newDirection == 0)
     {
-        *ptr = direction;
+        *newDirection = direction;
         return ACRO_TRANS_WHEELIE_IDLE;
     }
-    gPlayerAvatar.runningState = TURN_FRAME;
+    gPlayerAvatar.runningState = TURN_DIRECTION;
     return ACRO_TRANS_WHEELIE_IDLE;
 }
 
-static u8 AcroBikeHandleInputBunnyHop(u8 *ptr, u16 newKeys, u16 heldKeys)
+static u8 AcroBikeHandleInputBunnyHop(u8 *newDirection, u16 newKeys, u16 heldKeys)
 {
     u8 direction;
     struct MapObject *playerMapObj;
@@ -404,42 +414,45 @@ static u8 AcroBikeHandleInputBunnyHop(u8 *ptr, u16 newKeys, u16 heldKeys)
     playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
     if (!(heldKeys & B_BUTTON))
     {
-        //B button was released
+        // B button was released
         Bike_SetBikeStill();
         if (MetatileBehavior_IsBumpySlope(playerMapObj->mapobj_unk_1E))
         {
-            //Do a standing wheelie on a bumpy slope
+            // even though B was released, dont undo the wheelie on the bumpy slope.
             gPlayerAvatar.acroBikeState = ACRO_STATE_WHEELIE_STANDING;
-            return CheckMovementInputAcroBike(ptr, newKeys, heldKeys);
+            return CheckMovementInputAcroBike(newDirection, newKeys, heldKeys);
         }
         else
         {
-            //Go back to normal on flat ground
-            *ptr = direction;
+            // .. otherwise, go back to normal on flat ground
+            *newDirection = direction;
             gPlayerAvatar.runningState = NOT_MOVING;
             gPlayerAvatar.acroBikeState = ACRO_STATE_NORMAL;
             return ACRO_TRANS_WHEELIE_TO_NORMAL;
         }
     }
 
-    //B Button is still held
+    // B Button is still held
 
-    if (*ptr == DIR_NONE)
+    if (*newDirection == DIR_NONE)
     {
-        *ptr = direction;
+        // we did not move, so keep hopping in place without moving.
+        *newDirection = direction;
         gPlayerAvatar.runningState = NOT_MOVING;
         return ACRO_TRANS_WHEELIE_HOPPING_STANDING;
     }
-    if (*ptr != direction && gPlayerAvatar.runningState != MOVING)
+    if (*newDirection != direction && gPlayerAvatar.runningState != MOVING)
     {
-        gPlayerAvatar.runningState = TURN_FRAME;
+        // we changed direction, so turn but do not move hop.
+        gPlayerAvatar.runningState = TURN_DIRECTION;
         return ACRO_TRANS_WHEELIE_HOPPING_STANDING;
     }
+    // otherwise, we started moving while hopping
     gPlayerAvatar.runningState = MOVING;
     return ACRO_TRANS_WHEELIE_HOPPING_MOVING;
 }
 
-static u8 AcroBikeHandleInputWheelieMoving(u8 *ptr, u16 newKeys, u16 heldKeys)
+static u8 AcroBikeHandleInputWheelieMoving(u8 *newDirection, u16 newKeys, u16 heldKeys)
 {
     u8 direction;
     struct MapObject *playerMapObj;
@@ -448,36 +461,44 @@ static u8 AcroBikeHandleInputWheelieMoving(u8 *ptr, u16 newKeys, u16 heldKeys)
     playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
     if (!(heldKeys & B_BUTTON))
     {
+        // we were moving on a wheelie, but we let go while moving. reset bike still status
         Bike_SetBikeStill();
         if (!MetatileBehavior_IsBumpySlope(playerMapObj->mapobj_unk_1E))
         {
+            // we let go of B and arent on a bumpy slope, set state to normal because now we need to handle this
             gPlayerAvatar.acroBikeState = ACRO_STATE_NORMAL;
-            if (*ptr == 0)
+            if (*newDirection == DIR_NONE)
             {
-                *ptr = direction;
+                // we stopped moving but are turning, still try to lower the wheelie in place.
+                *newDirection = direction;
                 gPlayerAvatar.runningState = NOT_MOVING;
                 return ACRO_TRANS_WHEELIE_TO_NORMAL;
             }
-            if (*ptr != direction && gPlayerAvatar.runningState != MOVING)
+            if (*newDirection != direction && gPlayerAvatar.runningState != MOVING)
             {
+                // we did not turn while lowering wheelie, so do so without turning.
                 gPlayerAvatar.runningState = NOT_MOVING;
                 return ACRO_TRANS_WHEELIE_TO_NORMAL;
             }
+            // if we are moving while lowering wheelie, put the acro into a lowering state while moving.
             gPlayerAvatar.runningState = MOVING;
             return ACRO_TRANS_WHEELIE_LOWERING_MOVING;
         }
+        // please do not undo the wheelie on a bumpy slope
         gPlayerAvatar.acroBikeState = ACRO_STATE_WHEELIE_STANDING;
-        return CheckMovementInputAcroBike(ptr, newKeys, heldKeys);
+        return CheckMovementInputAcroBike(newDirection, newKeys, heldKeys);
     }
-    if (*ptr == 0)
+    // we are still holding B.
+    if (*newDirection == DIR_NONE)
     {
-        *ptr = direction;
+        // idle the wheelie in place because we're holding B without moving.
+        *newDirection = direction;
         gPlayerAvatar.acroBikeState = ACRO_STATE_WHEELIE_STANDING;
         gPlayerAvatar.runningState = NOT_MOVING;
         Bike_SetBikeStill();
         return ACRO_TRANS_WHEELIE_IDLE;
     }
-    if (direction != *ptr && gPlayerAvatar.runningState != MOVING)
+    if (direction != *newDirection && gPlayerAvatar.runningState != MOVING)
     {
         gPlayerAvatar.runningState = NOT_MOVING;
         return ACRO_TRANS_WHEELIE_IDLE;
@@ -502,7 +523,6 @@ static u8 AcroBikeHandleInputTurnJump(u8 *ptr, u16 newKeys, u16 heldKeys)
     return CheckMovementInputAcroBike(ptr, newKeys, heldKeys);
 }
 
-// Face vs Turn: Face has no anim while Turn does. Turn checks for collision because if you turn right as opposed to face right, if there is a wall there, turn will make a bonk sound effect while face will not.
 static void AcroBikeTransition_FaceDirection(u8 direction)
 {
     PlayerFaceDirection(direction);
@@ -791,7 +811,7 @@ static u8 AcroBike_GetJumpDirection(void)
 
     for (i = 0; i < 4; i++)
     {
-        const struct BikeHistoryInputInfo *historyInputInfo = &gAcroBikeJumpInputList[i];
+        const struct BikeHistoryInputInfo *historyInputInfo = &gAcroBikeTricksList[i];
         u32 dirHistory = gPlayerAvatar.directionHistory;
         u32 abStartSelectHistory = gPlayerAvatar.abStartSelectHistory;
 

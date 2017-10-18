@@ -450,7 +450,7 @@ static u8 CheckMovementInputNotOnBike(u8 direction)
     }
     else if (direction != player_get_direction_upper_nybble() && gPlayerAvatar.runningState != MOVING)
     {
-        gPlayerAvatar.runningState = TURN_FRAME;
+        gPlayerAvatar.runningState = TURN_DIRECTION;
         return 1;
     }
     else
@@ -722,7 +722,7 @@ static bool8 player_is_anim_in_certain_ranges(void)
 
 static bool8 sub_80592A4(void)
 {
-    if (player_is_anim_in_certain_ranges() && gPlayerAvatar.runningState != TURN_FRAME)
+    if (player_is_anim_in_certain_ranges() && gPlayerAvatar.runningState != TURN_DIRECTION)
         return TRUE;
     else
         return FALSE;
