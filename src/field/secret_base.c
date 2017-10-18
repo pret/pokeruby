@@ -6,10 +6,13 @@
 #include "moves.h"
 #include "event_data.h"
 #include "field_camera.h"
+#include "field_effect.h"
 #include "field_fadetransition.h"
 #include "field_player_avatar.h"
+#include "field_specials.h"
 #include "field_weather.h"
 #include "fieldmap.h"
+#include "link.h"
 #include "main.h"
 #include "sound.h"
 #include "songs.h"
@@ -22,40 +25,36 @@
 #include "pokemon.h"
 #include "overworld.h"
 #include "script.h"
+#include "sound.h"
+#include "species.h"
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
 #include "text.h"
 #include "vars.h"
 
+
+static void sub_80BC7D8(u8 taskId);
+static void sub_80BC824(u8 taskId);
+static u8 sub_80BC948(u8 a);
+static void sub_80BC980(u8 taskId);
+static void sub_80BC9E4(u8 taskId);
+static void sub_80BCA84(u8);
+static void sub_80BCAEC(u8 taskId);
+static void sub_80BCB90(u8);
+static void sub_80BCBC0(u8);
+static void sub_80BCBF8(u8 taskId);
+static void sub_80BCC54(u8 taskId);
+static void Task_SecretBasePC_Registry(u8 taskId);
+
+extern void DoDecorationSoundEffect(s16 metatileId);
+extern void sub_80C6A54(s16 x, s16 y);
+extern void sub_80C68A4(s16 metatileId, s16 x, s16 y);
+extern void DoYellowCave4Sparkle(void);
+
 extern u8 gUnknown_0815F399[];
 extern u8 gUnknown_0815F49A[];
-
-extern const u8 UnknownString_81A1BB2[];
-extern const u8 UnknownString_81A1F67[];
-extern const u8 UnknownString_81A2254[];
-extern const u8 UnknownString_81A25C3[];
-extern const u8 UnknownString_81A2925[];
-extern const u8 UnknownString_81A1D74[];
-extern const u8 UnknownString_81A20C9[];
-extern const u8 UnknownString_81A2439[];
-extern const u8 UnknownString_81A2754[];
-extern const u8 UnknownString_81A2B2A[];
-
-void sub_80BCA84(u8);
-void sub_80BCBF8(u8);
-void sub_80BCB90(u8);
-void sub_80BCBC0(u8);
-
-void Task_SecretBasePC_Registry(u8);
-void sub_80BC7D8(u8);
-void sub_80BC824(u8);
-void sub_80BCC54(u8);
-u8 sub_80BC948(u8);
-void sub_80BC980(u8);
-void sub_80BC9E4(u8);
-void sub_80BCAEC(u8);
-u8 sub_80BCCA4(u8);
+extern u8 gUnknown_020387DC;
 
 const struct
 {
@@ -71,7 +70,6 @@ const struct
     {0x271, 0x278}
 };
 
-extern u8 gUnknown_020387DC;
 
 const u8 gUnknown_083D1374[] = {
     MAP_ID_SECRET_BASE_RED_CAVE1,     0,
@@ -140,15 +138,25 @@ const u8 gUnknown_083D13EC[] = {
 
 extern void *gUnknown_0300485C;
 extern u8 gUnknown_081A2E14[];
+extern u8 UnknownString_81A1BB2[];
+extern u8 UnknownString_81A1F67[];
+extern u8 UnknownString_81A2254[];
+extern u8 UnknownString_81A25C3[];
+extern u8 UnknownString_81A2925[];
+extern u8 UnknownString_81A1D74[];
+extern u8 UnknownString_81A20C9[];
+extern u8 UnknownString_81A2439[];
+extern u8 UnknownString_81A2B2A[];
+extern u8 UnknownString_81A2754[];
 
 
-void sub_80BB4AC(struct SecretBaseRecord *record) // 080bb4ac
+void ClearSecretBase(struct SecretBaseRecord *record)
 {
     u16 i;
     u16 j;
-    record->sbr_field_0 = 0;
-    for (i=0; i<7; i++)
-        record->sbr_field_2[i] = 0xff;
+    record->secretBaseId = 0;
+    for (i=0; i<OT_NAME_LENGTH; i++)
+        record->playerName[i] = 0xff;
     for (i=0; i<4; i++)
         record->trainerId[i] = 0x00;
     record->sbr_field_e = 0;
@@ -174,39 +182,39 @@ void sub_80BB4AC(struct SecretBaseRecord *record) // 080bb4ac
     }
 }
 
-void ResetSecretBase(u8 idx) // 80bb594
+void ResetSecretBase(u8 idx)
 {
-    sub_80BB4AC(&(gSaveBlock1.secretBases[idx]));
+    ClearSecretBase(&gSaveBlock1.secretBases[idx]);
 }
 
-void ResetSecretBases(void) // 080bb5b4
+void ResetSecretBases(void)
 {
     u16 i;
-    for (i=0; i<20; i++)
+    for (i = 0; i < MAX_SECRET_BASES; i++)
         ResetSecretBase(i);
 }
 
-void sub_80BB5D0(void) // 080bb5d0
+void sub_80BB5D0(void)
 {
     gUnknown_020387DC = gSpecialVar_0x8004;
 }
 
-void sub_80BB5E4(void) // 80bb5e4
+void sub_80BB5E4(void)
 {
-    u16 idx;
+    u16 i;
     gScriptResult = 0;
-    for (idx=0; idx<20; idx++) {
-        if (gUnknown_020387DC != gSaveBlock1.secretBases[idx].sbr_field_0)
+    for (i = 0; i < MAX_SECRET_BASES; i++) {
+        if (gUnknown_020387DC != gSaveBlock1.secretBases[i].secretBaseId)
             continue;
         gScriptResult = 1;
-        VarSet(VAR_0x4054, idx);
+        VarSet(VAR_0x4054, i);
         break;
     }
 }
 
 void sub_80BB63C(void) // 80bb63c
 {
-    if (gSaveBlock1.secretBases[0].sbr_field_0)
+    if (gSaveBlock1.secretBases[0].secretBaseId)
         gScriptResult = 1;
     else
         gScriptResult = 0;
@@ -299,14 +307,14 @@ void sub_80BB8CC(void)
 {
     u8 nameLength;
     u16 idx;
-    gSaveBlock1.secretBases[0].sbr_field_0 = gUnknown_020387DC;
+    gSaveBlock1.secretBases[0].secretBaseId = gUnknown_020387DC;
     for (idx=0; idx<4; idx++) {
         gSaveBlock1.secretBases[0].trainerId[idx] = gSaveBlock2.playerTrainerId[idx];
     }
     VarSet(VAR_0x4054, 0);
     nameLength = sub_80BB8A8(gSaveBlock2.playerName);
-    memset(gSaveBlock1.secretBases[0].sbr_field_2, 0xFF, 7);
-    StringCopyN(gSaveBlock1.secretBases[0].sbr_field_2, gSaveBlock2.playerName, nameLength);
+    memset(gSaveBlock1.secretBases[0].playerName, 0xFF, OT_NAME_LENGTH);
+    StringCopyN(gSaveBlock1.secretBases[0].playerName, gSaveBlock2.playerName, nameLength);
     gSaveBlock1.secretBases[0].gender = gSaveBlock2.playerGender;
     VarSet(VAR_SECRET_BASE_MAP, gMapHeader.regionMapSectionId);
 }
@@ -317,8 +325,8 @@ void sub_80BB970(struct MapEvents *events)
     s16 tile_id;
     for (bgevidx=0; bgevidx<events->bgEventCount; bgevidx++) {
         if (events->bgEvents[bgevidx].kind == 8) {
-            for (jdx=0; jdx<20; jdx++) {
-                if (gSaveBlock1.secretBases[jdx].sbr_field_0 == events->bgEvents[bgevidx].bgUnion.secretBaseId) {
+            for (jdx=0; jdx<MAX_SECRET_BASES; jdx++) {
+                if (gSaveBlock1.secretBases[jdx].secretBaseId == events->bgEvents[bgevidx].bgUnion.secretBaseId) {
                     tile_id = MapGridGetMetatileIdAt(events->bgEvents[bgevidx].x + 7, events->bgEvents[bgevidx].y + 7);
                     for (idx=0; idx<7; idx++) {
                         if (gUnknown_083D1358[idx].unk_083D1358_0 == tile_id) {
@@ -354,7 +362,7 @@ void sub_80BBA48(u8 taskid)
     case 2:
         curbaseid = VarGet(VAR_0x4054);
         if (gSaveBlock1.secretBases[curbaseid].sbr_field_10 < 0xff)
-            gSaveBlock1.secretBases[curbaseid].sbr_field_10 ++;
+            gSaveBlock1.secretBases[curbaseid].sbr_field_10++;
         sub_80BBA14();
         warp_in();
         gFieldCallback = sub_8080990;
@@ -493,7 +501,6 @@ void sub_80BBDD0(void)
         }
     }
 }
-
 #else
 __attribute__((naked))
 void sub_80BBDD0(void)
@@ -789,7 +796,7 @@ void sub_80BC0F8(void) {
 }
 
 void sub_80BC114(void) {
-    if (gSaveBlock1.secretBases[0].sbr_field_0 != gUnknown_020387DC)
+    if (gSaveBlock1.secretBases[0].secretBaseId != gUnknown_020387DC)
         gScriptResult = 1;
     else
         gScriptResult = 0;
@@ -798,8 +805,8 @@ void sub_80BC114(void) {
 u8 sub_80BC14C(u8 sbid)
 {
     s16 idx;
-    for (idx=0; idx<20; idx++) {
-        if (gSaveBlock1.secretBases[idx].sbr_field_0 == sbid)
+    for (idx=0; idx<MAX_SECRET_BASES; idx++) {
+        if (gSaveBlock1.secretBases[idx].secretBaseId == sbid)
             return idx;
     }
     return 0;
@@ -809,9 +816,9 @@ u8 *sub_80BC190(u8 *dest, u8 arg1) { // 80bc190
     u8 local1;
     u8 *str;
 
-    local1 = sub_80BB8A8(gSaveBlock1.secretBases[arg1].sbr_field_2);
+    local1 = sub_80BB8A8(gSaveBlock1.secretBases[arg1].playerName);
 
-    str = StringCopyN(dest, gSaveBlock1.secretBases[arg1].sbr_field_2, local1);
+    str = StringCopyN(dest, gSaveBlock1.secretBases[arg1].playerName, local1);
     str[0] = EOS;
 
 #if ENGLISH
@@ -822,22 +829,22 @@ u8 *sub_80BC190(u8 *dest, u8 arg1) { // 80bc190
 }
 
 u8 *GetSecretBaseMapName(u8 *dest) {
-    gUnknown_020387DC = gSaveBlock1.secretBases[VarGet(VAR_0x4054)].sbr_field_0;
+    gUnknown_020387DC = gSaveBlock1.secretBases[VarGet(VAR_0x4054)].secretBaseId;
     return sub_80BC190(dest, VarGet(VAR_0x4054));
 }
 
 void sub_80BC224(void) {
-    u8 *var0 = gSaveBlock1.secretBases[(u8)VarGet(VAR_0x4054)].sbr_field_2;
+    u8 *var0 = gSaveBlock1.secretBases[(u8)VarGet(VAR_0x4054)].playerName;
     u8 *var1 = gStringVar1;
     u8 var2 = sub_80BB8A8(var0);
     u8 *var3 = StringCopyN(var1, var0, var2);
     *var3 = EOS;
 }
 
-u8 sub_80BC268(u8 foo) { // 80bc268
-    if (gSaveBlock1.secretBases[foo].sbr_field_1_6)
-        return 1;
-    return 0;
+bool8 sub_80BC268(u8 i) { // 80bc268
+    if (gSaveBlock1.secretBases[i].sbr_field_1_6)
+        return TRUE;
+    return FALSE;
 }
 
 u8 sub_80BC298(struct Pokemon *mon) { // 80bc298
@@ -1047,28 +1054,34 @@ void sub_80BC440(void)
 
 void SecretBasePC_PackUp(void)
 {
-    IncrementGameStat(20);
+    IncrementGameStat(GAME_STAT_MOVED_SECRET_BASE);
     sub_80BC440();
 }
 
 void sub_80BC474(void)
 {
-    u16 i, j;
-    s16 metatileId;
+    u16 eventId;
     struct MapEvents *mapEvents = gMapHeader.events;
-    for (i=0; i<mapEvents->bgEventCount; i++)
+    for (eventId = 0; eventId < mapEvents->bgEventCount; eventId++)
     {
-        if (mapEvents->bgEvents[i].kind == 8 && gSaveBlock1.secretBases[0].sbr_field_0 == mapEvents->bgEvents[i].bgUnion.secretBaseId)
+        if (mapEvents->bgEvents[eventId].kind == 8
+            && gSaveBlock1.secretBases[0].secretBaseId == mapEvents->bgEvents[eventId].bgUnion.secretBaseId)
         {
-            metatileId = MapGridGetMetatileIdAt(mapEvents->bgEvents[i].x + 7, mapEvents->bgEvents[i].y + 7);
-            for (j=0; j<7; j++)
+            u16 i;
+            s16 tileId = MapGridGetMetatileIdAt(mapEvents->bgEvents[eventId].x + 7, mapEvents->bgEvents[eventId].y + 7);
+
+            for (i = 0; i < 7; i++)
             {
-                if (gUnknown_083D1358[j].unk_083D1358_1 == metatileId)
+                if (gUnknown_083D1358[i].unk_083D1358_1 == tileId)
                 {
-                    MapGridSetMetatileIdAt(mapEvents->bgEvents[i].x + 7, mapEvents->bgEvents[i].y + 7, gUnknown_083D1358[j].unk_083D1358_0 | 0xc00);
+                    MapGridSetMetatileIdAt(
+                        mapEvents->bgEvents[eventId].x + 7,
+                        mapEvents->bgEvents[eventId].y + 7,
+                        gUnknown_083D1358[i].unk_083D1358_0 | 0xc00);
                     break;
                 }
             }
+
             DrawWholeMapView();
             break;
         }
@@ -1077,40 +1090,52 @@ void sub_80BC474(void)
 
 void sub_80BC50C(void)
 {
-    u16 backup_sbr_field_e;
+    u16 backupValue;
     sub_80BC474();
     IncrementGameStat(GAME_STAT_MOVED_SECRET_BASE);
-    backup_sbr_field_e = gSaveBlock1.secretBases[0].sbr_field_e;
+
+    backupValue = gSaveBlock1.secretBases[0].sbr_field_e;
     ResetSecretBase(0);
-    gSaveBlock1.secretBases[0].sbr_field_e = backup_sbr_field_e;
+    gSaveBlock1.secretBases[0].sbr_field_e = backupValue;
 }
 
 u8 sub_80BC538(void)
 {
-    s16 i;
-    u8 count = 0;
-    for (i=1; i<20; i++)
+    s16 secretBaseIndex;
+    u8 retVal = 0;
+    
+    for (secretBaseIndex = 1; secretBaseIndex < MAX_SECRET_BASES; secretBaseIndex++)
     {
-        if (sub_80BC268(i) == TRUE)
-            count++;
+        if (sub_80BC268(secretBaseIndex) == TRUE)
+        {
+            retVal++;
+        }
     }
-    return count;
+
+    return retVal;
 }
 
 void sub_80BC56C(void)
 {
-    if (sub_80BC268(sub_80BC14C(gUnknown_020387DC)) == TRUE)
+    u8 secretBaseIndex = sub_80BC14C(gUnknown_020387DC);
+    if (sub_80BC268(secretBaseIndex) == TRUE)
+    {
         gScriptResult = 1;
+    }
     else if (sub_80BC538() > 9)
+    {
         gScriptResult = 2;
+    }
     else
+    {
         gScriptResult = 0;
+    }
 }
 
 void sub_80BC5BC(void)
 {
     gSaveBlock1.secretBases[sub_80BC14C(gUnknown_020387DC)].sbr_field_1_6 ^= 1;
-    FlagSet(0x10c);
+    FlagSet(0x10C);
 }
 
 void SecretBasePC_Decoration(void)
@@ -1123,22 +1148,32 @@ void SecretBasePC_Registry(void)
     CreateTask(Task_SecretBasePC_Registry, 0);
 }
 
-// This function tries to keep gTasks + 8 in a register.  It should not.
-#ifdef NONMATCHING
 void Task_SecretBasePC_Registry(u8 taskId)
 {
-    s16 *data;
+    s16 *taskData;
+
     ScriptContext2_Enable();
     sub_80F944C();
     LoadScrollIndicatorPalette();
-    data = gTasks[taskId].data;
-    if ((data[0] = sub_80BC538()) != 0)
+    
+    taskData = gTasks[taskId].data;
+    taskData[0] = sub_80BC538();
+    if (taskData[0] != 0)
     {
-        data[3] = max(data[0], 7);
-        data[1] = 0;
-        data[2] = 0;
+        if (taskData[0] > 7) {
+            taskData[3] = 7;
+        }
+        else
+        {
+            taskData[3] = taskData[0];
+        }
+
+        taskData[1] = 0;
+        taskData[2] = 0;
+
         MenuZeroFillWindowRect(0, 0, 29, 19);
         sub_80BC7D8(taskId);
+
         gTasks[taskId].func = sub_80BC824;
     }
     else
@@ -1146,88 +1181,27 @@ void Task_SecretBasePC_Registry(u8 taskId)
         DisplayItemMessageOnField(taskId, gSecretBaseText_NoRegistry, sub_80BCC54, 0);
     }
 }
-#else
-__attribute__((naked))
-void Task_SecretBasePC_Registry(u8 taskId)
-{
-    asm_unified("\tpush {r4,r5,lr}\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r5, r0, 24\n"
-                    "\tbl ScriptContext2_Enable\n"
-                    "\tbl sub_80F944C\n"
-                    "\tbl LoadScrollIndicatorPalette\n"
-                    "\tlsls r0, r5, 2\n"
-                    "\tadds r0, r5\n"
-                    "\tlsls r0, 3\n"
-                    "\tldr r1, _080BC688 @ =gTasks + 0x8\n"
-                    "\tadds r4, r0, r1\n"
-                    "\tbl sub_80BC538\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r0, 24\n"
-                    "\tstrh r0, [r4]\n"
-                    "\tadds r1, r0, 0\n"
-                    "\tcmp r1, 0\n"
-                    "\tbeq _080BC694\n"
-                    "\tcmp r1, 0x7\n"
-                    "\tble _080BC65E\n"
-                    "\tmovs r0, 0x7\n"
-                    "_080BC65E:\n"
-                    "\tstrh r0, [r4, 0x6]\n"
-                    "\tmovs r0, 0\n"
-                    "\tstrh r0, [r4, 0x2]\n"
-                    "\tstrh r0, [r4, 0x4]\n"
-                    "\tmovs r0, 0\n"
-                    "\tmovs r1, 0\n"
-                    "\tmovs r2, 0x1D\n"
-                    "\tmovs r3, 0x13\n"
-                    "\tbl MenuZeroFillWindowRect\n"
-                    "\tadds r0, r5, 0\n"
-                    "\tbl sub_80BC7D8\n"
-                    "\tldr r1, _080BC68C @ =gTasks\n"
-                    "\tlsls r0, r5, 2\n"
-                    "\tadds r0, r5\n"
-                    "\tlsls r0, 3\n"
-                    "\tadds r0, r1\n"
-                    "\tldr r1, _080BC690 @ =sub_80BC824\n"
-                    "\tstr r1, [r0]\n"
-                    "\tb _080BC6A0\n"
-                    "\t.align 2, 0\n"
-                    "_080BC688: .4byte gTasks + 0x8\n"
-                    "_080BC68C: .4byte gTasks\n"
-                    "_080BC690: .4byte sub_80BC824\n"
-                    "_080BC694:\n"
-                    "\tldr r1, _080BC6A8 @ =gSecretBaseText_NoRegistry\n"
-                    "\tldr r2, _080BC6AC @ =sub_80BCC54\n"
-                    "\tadds r0, r5, 0\n"
-                    "\tmovs r3, 0\n"
-                    "\tbl DisplayItemMessageOnField\n"
-                    "_080BC6A0:\n"
-                    "\tpop {r4,r5}\n"
-                    "\tpop {r0}\n"
-                    "\tbx r0\n"
-                    "\t.align 2, 0\n"
-                    "_080BC6A8: .4byte gSecretBaseText_NoRegistry\n"
-                    "_080BC6AC: .4byte sub_80BCC54");
-}
-#endif
 
 void sub_80BC6B0(u8 taskId)
 {
     u8 i;
-    s16 *data = gTasks[taskId].data;
+    s16 *taskData = gTasks[taskId].data;
     u8 m = 0;
     u8 n = 0;
-    for (i=1; i<20; i++)
+
+    for (i = 1; i < MAX_SECRET_BASES; i++)
     {
-        if (m == data[2])
+        if (m == taskData[2])
         {
             m = i;
             break;
         }
+
         if (sub_80BC268(i) == TRUE)
-            m ++;
+            m++;
     }
-    for (i=m; i<20; i++)
+
+    for (i = m; i < MAX_SECRET_BASES; i++)
     {
         if (sub_80BC268(i) == TRUE)
         {
@@ -1238,17 +1212,19 @@ void sub_80BC6B0(u8 taskId)
                 break;
         }
     }
+
     if (n < 8)
     {
         MenuFillWindowRectWithBlankTile(18, 2 * n + 2, 28, 2 * n + 3);
         MenuPrint(gUnknownText_Exit, 18, 2 * n + 2);
         DestroyVerticalScrollIndicator(1);
         if (n != 7)
-            MenuFillWindowRectWithBlankTile(18, ((n << 25) + (1 << 26)) >> 24, 28, 18); // needed to match
+            MenuFillWindowRectWithBlankTile(18, ((n << 25) + (1 << 26)) >> 24, 28, 18); // the shifts are needed to match
     }
     else
         CreateVerticalScrollIndicators(1, 0xbc, 0x98);
-    if (data[2] == 0)
+
+    if (taskData[2] == 0)
         DestroyVerticalScrollIndicator(0);
     else
         CreateVerticalScrollIndicators(0, 0xbc, 0x08);
@@ -1256,50 +1232,52 @@ void sub_80BC6B0(u8 taskId)
 
 void sub_80BC7D8(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    u16 *taskData = gTasks[taskId].data;
     MenuDrawTextWindow(17, 0, 29, 19);
-    InitMenu(0, 18, 2, data[3] + 1, data[1], 11);
+    InitMenu(0, 18, 2, taskData[3] + 1, taskData[1], 11);
+
     sub_80BC6B0(taskId);
 }
 
 void sub_80BC824(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s16 *taskData = gTasks[taskId].data;
+
     if (gMain.newAndRepeatedKeys & DPAD_UP)
     {
-        if (data[1] != 0)
+        if (taskData[1])
         {
-            PlaySE(SE_SELECT);
-            data[1] = MoveMenuCursor(-1);
+            PlaySE(5);
+            taskData[1] = MoveMenuCursor(-1);
         }
-        else if (data[2] != 0)
+        else if (taskData[2])
         {
-            PlaySE(SE_SELECT);
-            data[2]--;
+            PlaySE(5);
+            taskData[2]--;
             sub_80BC6B0(taskId);
         }
     }
     else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
     {
-        if (data[1] == data[3])
+        if (taskData[1] == taskData[3])
         {
-            if (data[2] + data[1] != data[0])
+            if (taskData[2] + taskData[1] != taskData[0])
             {
-                PlaySE(SE_SELECT);
-                data[2]++;
+                PlaySE(5);
+                taskData[2]++;
                 sub_80BC6B0(taskId);
             }
         }
         else
         {
-            PlaySE(SE_SELECT);
-            data[1] = MoveMenuCursor(+1);
+            PlaySE(5);
+            taskData[1] = MoveMenuCursor(1);
         }
     }
     else if (gMain.newKeys & A_BUTTON)
     {
-        PlaySE(SE_SELECT);
-        if (data[1] + data[2] == data[0])
+        PlaySE(5);
+        if (taskData[1] + taskData[2] == taskData[0])
         {
             HandleDestroyMenuCursors();
             MenuZeroFillWindowRect(0, 0, 29, 19);
@@ -1308,32 +1286,37 @@ void sub_80BC824(u8 taskId)
         else
         {
             HandleDestroyMenuCursors();
-            data[4] = sub_80BC948(data[1] + data[2]);
+            taskData[4] = sub_80BC948(taskData[1] + taskData[2]);
             sub_80BC980(taskId);
         }
     }
     else if (gMain.newKeys & B_BUTTON)
     {
-        PlaySE(SE_SELECT);
+        PlaySE(5);
         HandleDestroyMenuCursors();
         MenuZeroFillWindowRect(0, 0, 29, 19);
         sub_80BCC54(taskId);
     }
 }
 
-u8 sub_80BC948(u8 a0)
+u8 sub_80BC948(u8 a)
 {
-    u8 n = 0;
-    u8 i;
-    for (i=1; i<20; i++)
+    u8 secretBaseIndex;
+    u8 count = 0;
+
+    for (secretBaseIndex = 1; secretBaseIndex < MAX_SECRET_BASES; secretBaseIndex++)
     {
-        if (sub_80BC268(i) == TRUE)
+        if (sub_80BC268(secretBaseIndex) == TRUE)
         {
-            if (a0 == n)
-                return i;
-            n++;
+            if (a == count)
+            {
+                return secretBaseIndex;
+            }
+            
+            count++;
         }
     }
+
     return 0;
 }
 
@@ -1351,9 +1334,9 @@ void sub_80BC9E4(u8 taskId)
 {
     if (gMain.newAndRepeatedKeys & DPAD_UP)
     {
-        if (GetMenuCursorPos() != 0)
+        if (GetMenuCursorPos())
         {
-            PlaySE(SE_SELECT);
+            PlaySE(5);
             MoveMenuCursor(-1);
         }
     }
@@ -1361,30 +1344,32 @@ void sub_80BC9E4(u8 taskId)
     {
         if (GetMenuCursorPos() != 1)
         {
-            PlaySE(SE_SELECT);
-            MoveMenuCursor(+1);
+            PlaySE(5);
+            MoveMenuCursor(1);
         }
     }
     else if (gMain.newKeys & A_BUTTON)
     {
-        PlaySE(SE_SELECT);
+        PlaySE(5);
         gUnknown_083D13D4[GetMenuCursorPos()].func(taskId);
     }
     else if (gMain.newKeys & B_BUTTON)
     {
-        PlaySE(SE_SELECT);
+        PlaySE(5);
         sub_80BCBF8(taskId);
     }
 }
 
 void sub_80BCA84(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s16 *taskData = gTasks[taskId].data;
+
     DestroyVerticalScrollIndicator(0);
     DestroyVerticalScrollIndicator(1);
     HandleDestroyMenuCursors();
     MenuZeroFillWindowRect(0, 0, 29, 19);
-    sub_80BC190(gStringVar1, data[4]);
+
+    sub_80BC190(gStringVar1, taskData[4]);
     StringExpandPlaceholders(gStringVar4, gOtherText_OkayToDeleteFromRegistry);
     DisplayItemMessageOnField(taskId, gStringVar4, sub_80BCAEC, 0);
 }
@@ -1397,14 +1382,23 @@ void sub_80BCAEC(u8 taskId)
 
 void sub_80BCB10(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    s16 *taskData = gTasks[taskId].data;
+
     MenuZeroFillWindowRect(0, 0, 29, 19);
-    gSaveBlock1.secretBases[data[4]].sbr_field_1_6 = 0;
-    data[0]--;
-    if (data[2] > 0)
-        data[2]--;
-    if (data[0] < 8)
-        data[3]--;
+
+    gSaveBlock1.secretBases[taskData[4]].sbr_field_1_6 = 0;
+    taskData[0]--;
+
+    if (taskData[2] > 0)
+    {
+        taskData[2]--;
+    }
+
+    if (taskData[0] < 8)
+    {
+        taskData[3]--;
+    }
+
     sub_80BC7D8(taskId);
     gTasks[taskId].func = sub_80BC824;
 }
@@ -1418,27 +1412,32 @@ void sub_80BCB90(u8 taskId)
 void sub_80BCBC0(u8 taskId)
 {
     MenuZeroFillWindowRect(0, 0, 29, 19);
+
     sub_80BC7D8(taskId);
     gTasks[taskId].func = sub_80BC824;
 }
 
 void sub_80BCBF8(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
-    InitMenu(0, 18, 2, data[3] + 1, data[1], 11);
+    s16 *taskData = gTasks[taskId].data;
+
+    InitMenu(0, 18, 2, taskData[3] + 1, taskData[1], 11);
     MenuZeroFillWindowRect(1, 0, 12, 5);
     StartVerticalScrollIndicators(0);
     StartVerticalScrollIndicators(1);
+
     gTasks[taskId].func = sub_80BC824;
 }
 
 void sub_80BCC54(u8 taskId)
 {
-    u16 var54 = VarGet(VAR_0x4054);
+    u16 curBaseIndex = VarGet(VAR_0x4054);
+
     BuyMenuFreeMemory();
     DestroyVerticalScrollIndicator(0);
     DestroyVerticalScrollIndicator(1);
-    if (var54 == 0)
+
+    if (curBaseIndex == 0)
     {
         ScriptContext1_SetupScript(gUnknown_0815F399);
     }
@@ -1446,12 +1445,14 @@ void sub_80BCC54(u8 taskId)
     {
         ScriptContext1_SetupScript(gUnknown_0815F49A);
     }
+
     DestroyTask(taskId);
 }
 
-u8 sub_80BCCA4(u8 sbid)
+u8 sub_80BCCA4(u8 secretBaseIndex)
 {
-    return (gSaveBlock1.secretBases[sbid].trainerId[0] % 5) + gSaveBlock1.secretBases[sbid].gender * 5;
+    return (gSaveBlock1.secretBases[secretBaseIndex].playerName[OT_NAME_LENGTH] % 5) 
+        + gSaveBlock1.secretBases[secretBaseIndex].gender * 5;
 }
 
 const u8 *sub_80BCCE8(void)
@@ -1467,4 +1468,576 @@ const u8 *sub_80BCCE8(void)
     if (param == 7) return UnknownString_81A2439;
     if (param == 8) return UnknownString_81A2754;
     return UnknownString_81A2B2A;
+}
+
+// Debugging function to test secret base battles.
+void unref_sub_80BCD7C(u8 secretBaseIndex)
+{
+    u16 i;
+    for (i = 0; i == 0; i++)
+    {
+        gSaveBlock1.secretBases[secretBaseIndex].partyPersonality[i] = i + 1;
+        gSaveBlock1.secretBases[secretBaseIndex].partyMoves[i * 4] = i + 1;
+        gSaveBlock1.secretBases[secretBaseIndex].partySpecies[i] = SPECIES_TREECKO;
+        gSaveBlock1.secretBases[secretBaseIndex].partyHeldItems[i] = i + 1;
+        gSaveBlock1.secretBases[secretBaseIndex].partyLevels[i] = i + 5;
+        gSaveBlock1.secretBases[secretBaseIndex].partyEVs[i] = i * 5;
+    }
+}
+
+void sub_80BCE1C(void)
+{
+    u16 curBaseIndex = VarGet(VAR_0x4054);
+    sub_810FB10(1);
+
+    CreateSecretBaseEnemyParty(&gSaveBlock1.secretBases[curBaseIndex]);
+}
+
+void sub_80BCE4C()
+{
+    gSaveBlock1.secretBases[VarGet(VAR_0x4054)].sbr_field_1_5 = gScriptResult;
+}
+
+void sub_80BCE90()
+{
+    u16 curBaseIndex = VarGet(VAR_0x4054);
+
+    if (!FlagGet(0x8C2))
+    {
+        u8 i;
+
+        for (i = 0; i < MAX_SECRET_BASES; i++)
+        {
+            gSaveBlock1.secretBases[i].sbr_field_1_5 = 0;
+        }
+
+        FlagSet(0x8C2);
+    }
+
+    gSpecialVar_0x8004 = sub_80BCCA4(curBaseIndex);
+    gScriptResult = gSaveBlock1.secretBases[curBaseIndex].sbr_field_1_5;
+}
+
+void sub_80BCF1C(u8 taskId)
+{
+    s16 x, y;
+    u32 behavior;
+    s16 *taskData = gTasks[taskId].data;
+
+    switch (taskData[1])
+    {
+    case 0:
+        PlayerGetDestCoords(&taskData[2], &taskData[3]);
+        taskData[1] = 1;
+        break;
+    case 1:
+        PlayerGetDestCoords(&x, &y);
+        if (x != taskData[2] || y != taskData[3])
+        {
+            taskData[2] = x;
+            taskData[3] = y;
+
+            behavior = MapGridGetMetatileBehaviorAt(x, y);
+            if (sub_8057350(behavior) == TRUE)
+            {
+                DoYellowCave4Sparkle();
+            }
+            else if (sub_8057314(behavior) == TRUE)
+            {
+                sub_80C68A4(MapGridGetMetatileIdAt(x, y), x, y);
+            }
+            else if (sub_8057328(behavior) == TRUE)
+            {
+                sub_80C6A54(x, y);
+            }
+            else if (sub_805733C(behavior) == TRUE)
+            {
+                DoDecorationSoundEffect(MapGridGetMetatileIdAt(x, y));
+            }
+        }
+        break;
+    case 2:
+        if (!FieldEffectActiveListContains(taskData[4]))
+        {
+            taskData[1] = 1;
+        }
+        break;
+    }
+}
+
+void sub_80BD034(u8 i, struct SecretBaseRecord *secretBase)
+{
+    gSaveBlock1.secretBases[i] = *secretBase;
+    gSaveBlock1.secretBases[i].sbr_field_1_6 = 2;
+}
+
+bool8 sub_80BD070(struct SecretBaseRecord *baseA, struct SecretBaseRecord *baseB)
+{
+    u8 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        if (baseA->trainerId[i] != baseB->trainerId[i])
+        {
+            return FALSE;
+        }
+    }
+
+    return TRUE;
+}
+
+bool8 sub_80BD0A0(struct SecretBaseRecord *baseA, struct SecretBaseRecord *baseB)
+{
+    u8 i;
+
+    for (i = 0; i < OT_NAME_LENGTH && (baseA->playerName[i] != 0xFF || baseB->playerName[i] != 0xFF); i++)
+    {
+        if (baseA->playerName[i] != baseB->playerName[i])
+        {
+            return FALSE;
+        }
+    }
+
+    return TRUE;
+}
+
+bool8 sub_80BD0EC(struct SecretBaseRecord *baseA, struct SecretBaseRecord *baseB)
+{
+    if (baseA->gender == baseB->gender && sub_80BD070(baseA, baseB) && sub_80BD0A0(baseA, baseB))
+    {
+        return TRUE;
+    }
+
+
+    return FALSE;
+}
+
+s16 sub_80BD12C(u8 secretBaseId)
+{
+    s16 i;
+
+    for (i = 0; i < MAX_SECRET_BASES; i++)
+    {
+        if (gSaveBlock1.secretBases[i].secretBaseId == secretBaseId)
+        {
+            return i;
+        }
+    }
+
+    return -1;
+}
+
+u8 sub_80BD170(void)
+{
+    s16 i;
+
+    for (i = 1; i < MAX_SECRET_BASES; i++)
+    {
+        if (gSaveBlock1.secretBases[i].secretBaseId == 0)
+        {
+            return i;
+        }
+    }
+
+    return 0;
+}
+
+u8 sub_80BD1B0(void)
+{
+    s16 i;
+
+    for (i = 1; i < MAX_SECRET_BASES; i++)
+    {
+        if (gSaveBlock1.secretBases[i].sbr_field_1_6 == 0 && gSaveBlock1.secretBases[i].sbr_field_1_0 == 0)
+        {
+            return i;
+        }
+    }
+
+    return 0;
+}
+
+#ifdef NONMATCHING
+u8 sub_80BD1FC(struct SecretBaseRecord *secretBase)
+{
+    s16 secretBaseIndex;
+
+    if (!secretBase->secretBaseId)
+    {
+        return 0;
+    }
+
+    secretBaseIndex = sub_80BD12C(secretBase->secretBaseId);
+    if (secretBaseIndex)
+    {
+        if (secretBaseIndex != -1)
+        {
+            if (gSaveBlock1.secretBases[secretBaseIndex].sbr_field_1_0 != 1)
+            {
+                if (gSaveBlock1.secretBases[secretBaseIndex].sbr_field_1_6 != 2
+                    || secretBase->sbr_field_1_0 == 1)
+                {
+                    sub_80BD034(secretBaseIndex, secretBase);
+                    return secretBaseIndex;
+                }
+            }
+        }
+        else
+        {
+            secretBaseIndex = sub_80BD170();
+            if (secretBaseIndex == 0)
+            {
+                secretBaseIndex = sub_80BD1B0();
+                if (secretBaseIndex)
+                {
+                    sub_80BD034(secretBaseIndex, secretBase);
+                    return secretBaseIndex;
+                }
+            }
+            else
+            {
+                sub_80BD034(secretBaseIndex, secretBase);
+                return secretBaseIndex;
+            }
+        }
+    }
+
+    return 0;
+}
+#else
+__attribute__((naked))
+u8 sub_80BD1FC(struct SecretBaseRecord *secretBase)
+{
+    asm(".syntax unified\n\
+    push {r4,r5,lr}\n\
+    adds r5, r0, 0\n\
+    ldrb r0, [r5]\n\
+    cmp r0, 0\n\
+    beq _080BD278\n\
+    ldrb r0, [r5]\n\
+    bl sub_80BD12C\n\
+    lsls r0, 16\n\
+    lsrs r4, r0, 16\n\
+    asrs r2, r0, 16\n\
+    cmp r2, 0\n\
+    beq _080BD278\n\
+    movs r0, 0x1\n\
+    negs r0, r0\n\
+    cmp r2, r0\n\
+    beq _080BD254\n\
+    ldr r0, _080BD24C @ =gSaveBlock1\n\
+    lsls r1, r2, 2\n\
+    adds r1, r2\n\
+    lsls r1, 5\n\
+    adds r1, r0\n\
+    ldr r0, _080BD250 @ =0x00001a09\n\
+    adds r1, r0\n\
+    ldrb r1, [r1]\n\
+    lsls r0, r1, 28\n\
+    lsrs r0, 28\n\
+    cmp r0, 0x1\n\
+    beq _080BD278\n\
+    lsrs r0, r1, 6\n\
+    cmp r0, 0x2\n\
+    bne _080BD246\n\
+    ldrb r1, [r5, 0x1]\n\
+    movs r0, 0xF\n\
+    ands r0, r1\n\
+    cmp r0, 0x1\n\
+    bne _080BD278\n\
+_080BD246:\n\
+    lsls r4, 24\n\
+    lsrs r4, 24\n\
+    b _080BD26C\n\
+    .align 2, 0\n\
+_080BD24C: .4byte gSaveBlock1\n\
+_080BD250: .4byte 0x00001a09\n\
+_080BD254:\n\
+    bl sub_80BD170\n\
+    lsls r0, 24\n\
+    lsrs r4, r0, 24\n\
+    cmp r4, 0\n\
+    bne _080BD26C\n\
+    bl sub_80BD1B0\n\
+    lsls r0, 24\n\
+    lsrs r4, r0, 24\n\
+    cmp r4, 0\n\
+    beq _080BD278\n\
+_080BD26C:\n\
+    adds r0, r4, 0\n\
+    adds r1, r5, 0\n\
+    bl sub_80BD034\n\
+    adds r0, r4, 0\n\
+    b _080BD27A\n\
+_080BD278:\n\
+    movs r0, 0\n\
+_080BD27A:\n\
+    pop {r4,r5}\n\
+    pop {r1}\n\
+    bx r1\n\
+.syntax divided\n");
+}
+#endif
+
+void sub_80BD280(void)
+{
+    u8 i;
+    u8 j;
+    struct SecretBaseRecord temp;
+    struct SecretBaseRecord *secretBases = gSaveBlock1.secretBases;
+
+    for (i = 1; i < MAX_SECRET_BASES - 1; i++)
+    {
+        for (j = i + 1; j < MAX_SECRET_BASES; j++)
+        {
+            if ((!secretBases[i].sbr_field_1_6 && secretBases[j].sbr_field_1_6 == 1)
+                || (secretBases[i].sbr_field_1_6 == 2 && secretBases[j].sbr_field_1_6 != 2))
+            {
+                temp = secretBases[i];
+                secretBases[i] = secretBases[j];
+                secretBases[j] = temp;
+            }
+        }
+    }
+}
+
+void sub_80BD328(struct SecretBaseRecord *secretBases, u8 b)
+{
+    u16 i;
+
+    for (i = 1; i < MAX_SECRET_BASES; i++)
+    {
+        if (secretBases[i].sbr_field_1_6 == b)
+        {
+            sub_80BD1FC(&secretBases[i]);
+        }
+    }
+}
+
+bool8 sub_80BD358(struct SecretBaseRecord *secretBase)
+{
+    u8 i;
+
+    if (!secretBase->secretBaseId)
+        return FALSE;
+
+    if (secretBase->secretBaseId && secretBase->gender != gSaveBlock2.playerGender)
+        return FALSE;
+
+    // Check if the player's trainer Id matches the secret base's id.
+    for (i = 0; i < 4; i++)
+    {
+        if (secretBase->trainerId[i] != gSaveBlock2.playerTrainerId[i])
+            return FALSE;
+    }
+
+    for (i = 0; i < OT_NAME_LENGTH && (secretBase->playerName[i] != 0xFF || gSaveBlock2.playerName[i] != 0xFF); i++)
+    {
+        if (secretBase->playerName[i] != gSaveBlock2.playerName[i])
+            return FALSE;
+    }
+
+    return TRUE;
+}
+
+void sub_80BD3DC(struct SecretBaseRecord *basesA, struct SecretBaseRecord *basesB, struct SecretBaseRecord *basesC)
+{
+    u8 i;
+    u8 var1 = 0;
+
+    for (i = 0; i < MAX_SECRET_BASES; i++)
+    {
+        if ((var1 & 1) == 0)
+        {
+            if (sub_80BD358(&basesA[i]) == TRUE)
+            {
+                ClearSecretBase(&basesA[i]);
+                var1 |= 1;
+            }
+        }
+
+        if ((var1 & 2) == 0)
+        {
+            if (sub_80BD358(&basesB[i]) == TRUE)
+            {
+                ClearSecretBase(&basesB[i]);
+                var1 |= 2;
+            }
+        }
+
+        if ((var1 & 4) == 0)
+        {
+            if (sub_80BD358(&basesC[i]) == TRUE)
+            {
+                ClearSecretBase(&basesC[i]);
+                var1 |= 4;
+            }
+        }
+
+        if (var1 == 7)
+        {
+            break;
+        }
+    }
+}
+
+bool8 sub_80BD494(struct SecretBaseRecord *base, struct SecretBaseRecord *secretBases, u8 c)
+{
+    u8 i;
+
+    for (i = 0; i < MAX_SECRET_BASES; i++)
+    {
+        if (secretBases[i].secretBaseId)
+        {
+            if (sub_80BD0EC(base, &secretBases[i]) == TRUE)
+            {
+                if (c == 0)
+                {
+                    ClearSecretBase(&secretBases[i]);
+                    return FALSE;
+                }
+
+                if (base->sbr_field_e > secretBases[i].sbr_field_e)
+                {
+                    ClearSecretBase(&secretBases[i]);
+                    return FALSE;
+                }
+
+                secretBases[i].sbr_field_1_0 = base->sbr_field_1_0;
+
+                ClearSecretBase(base);
+                return TRUE;
+            }
+        }
+    }
+
+    return FALSE;
+}
+
+void sub_80BD514(struct SecretBaseRecord *basesA, struct SecretBaseRecord *basesB, struct SecretBaseRecord *basesC, struct SecretBaseRecord *basesD)
+{
+    u8 i;
+
+    for (i = 1; i < MAX_SECRET_BASES; i++)
+    {
+        if (basesA[i].secretBaseId)
+        {
+            if (basesA[i].sbr_field_1_6 == 1)
+            {
+                basesA[i].sbr_field_1_0 = 1;
+            }
+
+            if (!sub_80BD494(&basesA[i], basesB, i))
+            {
+                if (!sub_80BD494(&basesA[i], basesC, i))
+                {
+                    sub_80BD494(&basesA[i], basesD, i);
+                }
+            }
+        }
+    }
+
+    for (i = 0; i < MAX_SECRET_BASES; i++)
+    {
+        if (basesB[i].secretBaseId)
+        {
+            basesB[i].sbr_field_1_5 = 0;
+
+            if (!sub_80BD494(&basesB[i], basesC, i))
+            {
+                sub_80BD494(&basesB[i], basesD, i);
+            }
+        }
+    }
+
+    for (i = 0; i < MAX_SECRET_BASES; i++)
+    {
+        if (basesC[i].secretBaseId)
+        {
+            basesC[i].sbr_field_1_5 = 0;
+            sub_80BD494(&basesC[i], basesD, i);
+        }
+
+        if (basesD[i].secretBaseId)
+        {
+            basesD[i].sbr_field_1_5 = 0;
+        }
+    }
+}
+
+void sub_80BD610(struct SecretBaseRecord *basesA, struct SecretBaseRecord *basesB, struct SecretBaseRecord *basesC)
+{
+    sub_80BD3DC(basesA, basesB, basesC);
+    sub_80BD514(gSaveBlock1.secretBases, basesA, basesB, basesC);
+
+    sub_80BD1FC(basesA);
+    sub_80BD1FC(basesB);
+    sub_80BD1FC(basesC);
+
+    sub_80BD328(basesA, 1);
+    sub_80BD328(basesB, 1);
+    sub_80BD328(basesC, 1);
+
+    sub_80BD328(basesA, 0);
+    sub_80BD328(basesB, 0);
+    sub_80BD328(basesC, 0);
+} 
+
+void sub_80BD674(void *playerRecords, u32 size, u8 c)
+{
+    if (FlagGet(0x60))
+    {
+        u16 i;
+        u8 numLinkedPlayers = GetLinkPlayerCount();
+        switch (numLinkedPlayers)
+        {
+        case 2:
+            memset(playerRecords + size * 2, 0, size);
+            memset(playerRecords + size * 3, 0, size);
+            break;
+        case 3:
+            memset(playerRecords + size * 3, 0, size);
+            break;
+        }
+
+        switch (c)
+        {
+        case 0:
+            sub_80BD610(playerRecords + size, playerRecords + size * 2, playerRecords + size * 3);
+            break;
+        case 1:
+            sub_80BD610(playerRecords + size * 2, playerRecords + size * 3, playerRecords);
+            break;
+        case 2:
+            sub_80BD610(playerRecords + size * 3, playerRecords, playerRecords + size);
+            break;
+        case 3:
+            sub_80BD610(playerRecords, playerRecords + size, playerRecords + size * 2);
+            break;
+        }
+
+        for (i = 1; i < MAX_SECRET_BASES; i++)
+        {
+            if (gSaveBlock1.secretBases[i].sbr_field_1_0 == 1)
+            {
+                gSaveBlock1.secretBases[i].sbr_field_1_6 = 1;
+                gSaveBlock1.secretBases[i].sbr_field_1_0 = 0;
+            }
+        }
+
+        sub_80BD280();
+
+        for (i = 1; i < MAX_SECRET_BASES; i++)
+        {
+            if (gSaveBlock1.secretBases[i].sbr_field_1_6 == 2)
+            {
+                gSaveBlock1.secretBases[i].sbr_field_1_6 = 0;
+            }
+        }
+
+        if (gSaveBlock1.secretBases[0].sbr_field_e != 0xFFFF)
+        {
+            gSaveBlock1.secretBases[0].sbr_field_e++;
+        }
+    }
 }
