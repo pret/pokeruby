@@ -83,6 +83,7 @@ const u16 gBattleTowerHeldItems[] = {
 };
 
 #include "data/battle_tower/level_50_mons.h"
+#include "data/battle_tower/level_100_mons.h"
 
 extern u8 gUnknown_08400E23[];
 extern u8 gUnknown_08400E29[];

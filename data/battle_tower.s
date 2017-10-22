@@ -3,9 +3,6 @@
 
 	.section .rodata
 
-@ 8404BA0
-	.include "data/battle_tower/level_100_mons.inc"
-
 gUnknown_08405E60:: @ 8405E60
 	.byte  4
 	.byte  7
