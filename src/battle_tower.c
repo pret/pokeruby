@@ -1,13 +1,18 @@
 #include "global.h"
 #include "battle_tower.h"
 #include "data2.h"
+#include "easy_chat.h"
 #include "event_data.h"
 #include "map_object_constants.h"
+#include "moves.h"
 #include "pokedex.h"
 #include "rng.h"
 #include "string_util.h"
 #include "text.h"
+#include "trainer.h"
 #include "vars.h"
+
+#include "data/battle_tower/trainers.h"
 
 extern u8 gUnknown_08400E23[];
 extern u8 gUnknown_08400E29[];
@@ -21,7 +26,6 @@ extern u8 gUnknown_08405EB0[];
 extern u8 gUnknown_08405E7E[];
 extern u8 gUnknown_08405E92[];
 extern u8 gUnknown_08405E60[];
-extern struct BattleTowerTrainer gBattleTowerTrainers[];
 
 extern void sub_8135C44(void);
 extern void sub_813601C(void);

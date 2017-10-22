@@ -445,6 +445,7 @@ SECTIONS {
         src/pokemon/learn_move.o(.rodata);
         src/field/decoration_inventory.o(.rodata);
         src/field/roamer.o(.rodata);
+        src/battle_tower.o(.rodata);
         data/battle_tower.o(.rodata);
         src/field/use_pokeblock.o(.rodata);
         src/battle/battle_controller_wally.o(.rodata);

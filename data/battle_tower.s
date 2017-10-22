@@ -3,9 +3,6 @@
 
 	.section .rodata
 
-@ 8402F00
-	.include "data/battle_tower/trainers.inc"
-
 @ 8403860
 	.include "data/battle_tower/held_items.inc"
 
