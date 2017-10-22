@@ -1,10 +1,20 @@
 #include "global.h"
 #include "battle_tower.h"
+#include "data2.h"
 #include "event_data.h"
 #include "map_object_constants.h"
+#include "pokedex.h"
 #include "rng.h"
+#include "string_util.h"
+#include "text.h"
 #include "vars.h"
 
+extern u8 gUnknown_08400E23[];
+extern u8 gUnknown_08400E29[];
+extern u8 gUnknown_08400E2E[];
+extern u8 gUnknown_08400E30[];
+
+extern u16 gBattleTowerBanlist[];
 extern u8 gTrainerClassToPicIndex[];
 extern u8 gTrainerClassToNameIndex[];
 extern u8 gUnknown_08405EB0[];
@@ -1115,4 +1125,448 @@ void get_trainer_name(u8* dest)
 	}
 
 	dest[i] = 0xFF;
+}
+
+__attribute__((naked))
+void sub_8134DD4(void)
+{
+	asm(".syntax unified\n\
+	push {r4-r7,lr}\n\
+	mov r7, r10\n\
+	mov r6, r9\n\
+	mov r5, r8\n\
+	push {r5-r7}\n\
+	sub sp, 0x28\n\
+	movs r0, 0\n\
+	str r0, [sp, 0x18]\n\
+	movs r1, 0x3C\n\
+	str r1, [sp, 0x1C]\n\
+	add r4, sp, 0xC\n\
+	movs r0, 0xFF\n\
+	strb r0, [r4]\n\
+	bl ZeroEnemyPartyMons\n\
+	ldr r1, _08134E04 @ =gSaveBlock2\n\
+	ldr r2, _08134E08 @ =0x00000564\n\
+	adds r0, r1, r2\n\
+	ldrb r0, [r0]\n\
+	cmp r0, 0x13\n\
+	bhi _08134E0C\n\
+	movs r3, 0x6\n\
+	str r3, [sp, 0x14]\n\
+	b _08134ED8\n\
+	.align 2, 0\n\
+_08134E04: .4byte gSaveBlock2\n\
+_08134E08: .4byte 0x00000564\n\
+_08134E0C:\n\
+	cmp r0, 0x1D\n\
+	bhi _08134E1A\n\
+	movs r0, 0x9\n\
+	str r0, [sp, 0x14]\n\
+	movs r1, 0x1E\n\
+	str r1, [sp, 0x18]\n\
+	b _08134ED8\n\
+_08134E1A:\n\
+	cmp r0, 0x27\n\
+	bhi _08134E28\n\
+	movs r2, 0xC\n\
+	str r2, [sp, 0x14]\n\
+	movs r3, 0x3C\n\
+	str r3, [sp, 0x18]\n\
+	b _08134ED8\n\
+_08134E28:\n\
+	cmp r0, 0x31\n\
+	bhi _08134E36\n\
+	movs r0, 0xF\n\
+	str r0, [sp, 0x14]\n\
+	movs r1, 0x5A\n\
+	str r1, [sp, 0x18]\n\
+	b _08134ED8\n\
+_08134E36:\n\
+	cmp r0, 0x3B\n\
+	bhi _08134E44\n\
+	movs r2, 0x12\n\
+	str r2, [sp, 0x14]\n\
+	movs r3, 0x78\n\
+	str r3, [sp, 0x18]\n\
+	b _08134ED8\n\
+_08134E44:\n\
+	cmp r0, 0x45\n\
+	bhi _08134E52\n\
+	movs r0, 0x15\n\
+	str r0, [sp, 0x14]\n\
+	movs r1, 0x96\n\
+	str r1, [sp, 0x18]\n\
+	b _08134ED8\n\
+_08134E52:\n\
+	cmp r0, 0x4F\n\
+	bhi _08134E60\n\
+	movs r2, 0x1F\n\
+	str r2, [sp, 0x14]\n\
+	movs r3, 0xB4\n\
+	str r3, [sp, 0x18]\n\
+	b _08134ED8\n\
+_08134E60:\n\
+	cmp r0, 0x63\n\
+	bhi _08134E72\n\
+	movs r0, 0x1F\n\
+	str r0, [sp, 0x14]\n\
+	movs r1, 0xC8\n\
+	str r1, [sp, 0x18]\n\
+	movs r2, 0x64\n\
+	str r2, [sp, 0x1C]\n\
+	b _08134ED8\n\
+_08134E72:\n\
+	cmp r0, 0xC8\n\
+	bne _08134E9C\n\
+	movs r6, 0\n\
+_08134E78:\n\
+	movs r0, 0x64\n\
+	muls r0, r6\n\
+	ldr r1, _08134E94 @ =gEnemyParty\n\
+	adds r0, r1\n\
+	movs r1, 0x2C\n\
+	muls r1, r6\n\
+	ldr r2, _08134E98 @ =gSaveBlock2 + 0x4CC\n\
+	adds r1, r2\n\
+	bl sub_803ADE8\n\
+	adds r6, 0x1\n\
+	cmp r6, 0x2\n\
+	ble _08134E78\n\
+	b _08135082\n\
+	.align 2, 0\n\
+_08134E94: .4byte gEnemyParty\n\
+_08134E98: .4byte gSaveBlock2 + 0x4CC\n\
+_08134E9C:\n\
+	movs r6, 0\n\
+	adds r4, r1, 0\n\
+	ldr r3, _08134ECC @ =0xffffc158\n\
+	adds r5, r4, r3\n\
+_08134EA4:\n\
+	movs r0, 0x64\n\
+	muls r0, r6\n\
+	ldr r1, _08134ED0 @ =gEnemyParty\n\
+	adds r0, r1\n\
+	ldr r2, _08134ED4 @ =0x00000564\n\
+	adds r1, r4, r2\n\
+	ldrb r2, [r1]\n\
+	movs r1, 0xA4\n\
+	muls r1, r2\n\
+	adds r1, r5\n\
+	movs r2, 0x2C\n\
+	muls r2, r6\n\
+	adds r1, r2\n\
+	bl sub_803ADE8\n\
+	adds r6, 0x1\n\
+	cmp r6, 0x2\n\
+	ble _08134EA4\n\
+	b _08135082\n\
+	.align 2, 0\n\
+_08134ECC: .4byte 0xffffc158\n\
+_08134ED0: .4byte gEnemyParty\n\
+_08134ED4: .4byte 0x00000564\n\
+_08134ED8:\n\
+	ldr r2, _08134EF4 @ =gSaveBlock2\n\
+	ldr r3, _08134EF8 @ =0x00000554\n\
+	adds r0, r2, r3\n\
+	ldrb r1, [r0]\n\
+	movs r0, 0x1\n\
+	ands r0, r1\n\
+	adds r1, r2, 0\n\
+	cmp r0, 0\n\
+	beq _08134F00\n\
+	ldr r0, _08134EFC @ =gBattleTowerLevel100Mons\n\
+	mov r10, r0\n\
+	movs r2, 0x64\n\
+	str r2, [sp, 0x10]\n\
+	b _08134F08\n\
+	.align 2, 0\n\
+_08134EF4: .4byte gSaveBlock2\n\
+_08134EF8: .4byte 0x00000554\n\
+_08134EFC: .4byte gBattleTowerLevel100Mons\n\
+_08134F00:\n\
+	ldr r3, _08134F54 @ =gBattleTowerLevel50Mons\n\
+	mov r10, r3\n\
+	movs r0, 0x32\n\
+	str r0, [sp, 0x10]\n\
+_08134F08:\n\
+	ldr r2, _08134F58 @ =gBattleTowerTrainers\n\
+	ldr r3, _08134F5C @ =0x00000564\n\
+	adds r0, r1, r3\n\
+	ldrb r1, [r0]\n\
+	lsls r0, r1, 1\n\
+	adds r0, r1\n\
+	lsls r0, 3\n\
+	adds r0, r2\n\
+	ldrb r0, [r0, 0x9]\n\
+	str r0, [sp, 0x20]\n\
+	movs r6, 0\n\
+_08134F1E:\n\
+	bl Random\n\
+	movs r1, 0xFF\n\
+	ands r1, r0\n\
+	ldr r2, [sp, 0x1C]\n\
+	adds r0, r1, 0\n\
+	muls r0, r2\n\
+	asrs r0, 8\n\
+	ldr r3, [sp, 0x18]\n\
+	adds r7, r0, r3\n\
+	ldr r0, [sp, 0x20]\n\
+	cmp r0, 0\n\
+	beq _08134F48\n\
+	lsls r0, r7, 4\n\
+	add r0, r10\n\
+	ldrb r0, [r0, 0x3]\n\
+	ldr r1, [sp, 0x20]\n\
+	ands r0, r1\n\
+	cmp r0, r1\n\
+	beq _08134F48\n\
+	b _0813507C\n\
+_08134F48:\n\
+	movs r5, 0\n\
+	lsls r0, r7, 4\n\
+	mov r2, r10\n\
+	adds r3, r0, r2\n\
+	movs r4, 0\n\
+	b _08134F64\n\
+	.align 2, 0\n\
+_08134F54: .4byte gBattleTowerLevel50Mons\n\
+_08134F58: .4byte gBattleTowerTrainers\n\
+_08134F5C: .4byte 0x00000564\n\
+_08134F60:\n\
+	adds r4, 0x64\n\
+	adds r5, 0x1\n\
+_08134F64:\n\
+	cmp r5, r6\n\
+	bge _08134F7E\n\
+	ldr r1, _08135094 @ =gEnemyParty\n\
+	adds r0, r4, r1\n\
+	movs r1, 0xB\n\
+	movs r2, 0\n\
+	str r3, [sp, 0x24]\n\
+	bl GetMonData\n\
+	ldr r3, [sp, 0x24]\n\
+	ldrh r2, [r3]\n\
+	cmp r0, r2\n\
+	bne _08134F60\n\
+_08134F7E:\n\
+	cmp r5, r6\n\
+	bne _0813507C\n\
+	movs r5, 0\n\
+	cmp r5, r6\n\
+	bge _08134FCC\n\
+	ldr r3, _08135098 @ =gBattleTowerHeldItems\n\
+	mov r9, r3\n\
+	lsls r0, r7, 4\n\
+	add r0, r10\n\
+	mov r8, r0\n\
+	movs r3, 0\n\
+_08134F94:\n\
+	ldr r0, _08135094 @ =gEnemyParty\n\
+	adds r4, r3, r0\n\
+	adds r0, r4, 0\n\
+	movs r1, 0xC\n\
+	movs r2, 0\n\
+	str r3, [sp, 0x24]\n\
+	bl GetMonData\n\
+	ldr r3, [sp, 0x24]\n\
+	cmp r0, 0\n\
+	beq _08134FC4\n\
+	adds r0, r4, 0\n\
+	movs r1, 0xC\n\
+	movs r2, 0\n\
+	bl GetMonData\n\
+	mov r2, r8\n\
+	ldrb r1, [r2, 0x2]\n\
+	lsls r1, 1\n\
+	add r1, r9\n\
+	ldr r3, [sp, 0x24]\n\
+	ldrh r1, [r1]\n\
+	cmp r0, r1\n\
+	beq _08134FCC\n\
+_08134FC4:\n\
+	adds r3, 0x64\n\
+	adds r5, 0x1\n\
+	cmp r5, r6\n\
+	blt _08134F94\n\
+_08134FCC:\n\
+	cmp r5, r6\n\
+	bne _0813507C\n\
+	movs r5, 0\n\
+	cmp r5, r6\n\
+	bge _08134FEE\n\
+	add r0, sp, 0x4\n\
+	ldrh r0, [r0]\n\
+	cmp r0, r7\n\
+	beq _08134FEE\n\
+	add r1, sp, 0x4\n\
+_08134FE0:\n\
+	adds r1, 0x2\n\
+	adds r5, 0x1\n\
+	cmp r5, r6\n\
+	bge _08134FEE\n\
+	ldrh r0, [r1]\n\
+	cmp r0, r7\n\
+	bne _08134FE0\n\
+_08134FEE:\n\
+	cmp r5, r6\n\
+	bne _0813507C\n\
+	lsls r0, r6, 1\n\
+	add r0, sp\n\
+	adds r0, 0x4\n\
+	strh r7, [r0]\n\
+	movs r3, 0x64\n\
+	adds r0, r6, 0\n\
+	muls r0, r3\n\
+	ldr r1, _08135094 @ =gEnemyParty\n\
+	adds r0, r1\n\
+	lsls r4, r7, 4\n\
+	mov r3, r10\n\
+	adds r2, r4, r3\n\
+	ldrh r1, [r2]\n\
+	ldrb r2, [r2, 0xC]\n\
+	str r2, [sp]\n\
+	ldr r2, [sp, 0x10]\n\
+	ldr r3, [sp, 0x14]\n\
+	bl CreateMonWithEVSpread\n\
+	movs r5, 0\n\
+	adds r0, r6, 0x1\n\
+	mov r9, r0\n\
+	mov r8, r4\n\
+	movs r0, 0x64\n\
+	adds r7, r6, 0\n\
+	muls r7, r0\n\
+	mov r0, r10\n\
+	adds r0, 0x4\n\
+	adds r4, r0\n\
+	ldr r3, _08135094 @ =gEnemyParty\n\
+_0813502E:\n\
+	ldrh r1, [r4]\n\
+	lsls r2, r5, 24\n\
+	lsrs r2, 24\n\
+	adds r0, r7, r3\n\
+	str r3, [sp, 0x24]\n\
+	bl SetMonMoveSlot\n\
+	ldrh r0, [r4]\n\
+	ldr r3, [sp, 0x24]\n\
+	cmp r0, 0xDA\n\
+	bne _0813504A\n\
+	movs r0, 0\n\
+	mov r1, sp\n\
+	strb r0, [r1, 0xC]\n\
+_0813504A:\n\
+	adds r4, 0x2\n\
+	adds r5, 0x1\n\
+	cmp r5, 0x3\n\
+	ble _0813502E\n\
+	movs r2, 0x64\n\
+	adds r4, r6, 0\n\
+	muls r4, r2\n\
+	ldr r3, _08135094 @ =gEnemyParty\n\
+	adds r4, r3\n\
+	adds r0, r4, 0\n\
+	movs r1, 0x20\n\
+	add r2, sp, 0xC\n\
+	bl SetMonData\n\
+	mov r0, r8\n\
+	add r0, r10\n\
+	ldrb r2, [r0, 0x2]\n\
+	lsls r2, 1\n\
+	ldr r0, _08135098 @ =gBattleTowerHeldItems\n\
+	adds r2, r0\n\
+	adds r0, r4, 0\n\
+	movs r1, 0xC\n\
+	bl SetMonData\n\
+	mov r6, r9\n\
+_0813507C:\n\
+	cmp r6, 0x3\n\
+	beq _08135082\n\
+	b _08134F1E\n\
+_08135082:\n\
+	add sp, 0x28\n\
+	pop {r3-r5}\n\
+	mov r8, r3\n\
+	mov r9, r4\n\
+	mov r10, r5\n\
+	pop {r4-r7}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.align 2, 0\n\
+_08135094: .4byte gEnemyParty\n\
+_08135098: .4byte gBattleTowerHeldItems\n\
+.syntax divided\n");
+}
+
+u32 CountBattleTowerBanlistCaught()
+{
+	s32 i;
+	u32 numCaught = 0;
+
+	for (i = 0; gBattleTowerBanlist[i] != 0xFFFF; i++)
+	{
+		if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleTowerBanlist[i]), FLAG_GET_CAUGHT))
+		{
+			numCaught++;
+		}
+	}
+
+	return numCaught;
+}
+
+u8 AppendBattleTowerBannedSpeciesName(u16 species, u8 curIndexToAppend, s32 numToAppend)
+{
+	if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
+	{
+		curIndexToAppend++;
+
+		switch (curIndexToAppend - 1)
+		{
+		case 0:
+		case 2:
+		case 4:
+		case 6:
+		case 8:
+		case 10:
+			if (numToAppend == curIndexToAppend)
+			{
+				StringAppend(gStringVar1, gUnknown_08400E23);
+			}
+			else if (numToAppend > curIndexToAppend)
+			{
+				StringAppend(gStringVar1, gUnknown_08400E29);
+			}
+			break;
+		case 1:
+			if (curIndexToAppend == numToAppend)
+			{
+				StringAppend(gStringVar1, gUnknown_08400E23);
+			}
+			else
+			{
+				StringAppend(gStringVar1, gUnknown_08400E29);
+			}
+
+			StringAppend(gStringVar1, gUnknown_08400E30);
+			break;
+		case 3:
+		case 5:
+		case 7:
+		case 9:
+		default:
+			if (curIndexToAppend == numToAppend)
+			{
+				StringAppend(gStringVar1, gUnknown_08400E23);
+			}
+			else
+			{
+				StringAppend(gStringVar1, gUnknown_08400E29);
+			}
+
+			StringAppend(gStringVar1, gUnknown_08400E2E);
+			break;
+		}
+
+		StringAppend(gStringVar1, gSpeciesNames[species]);
+	}
+
+	return curIndexToAppend;
 }
