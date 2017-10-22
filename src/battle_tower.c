@@ -8,6 +8,7 @@
 #include "moves.h"
 #include "pokedex.h"
 #include "rng.h"
+#include "species.h"
 #include "string_util.h"
 #include "text.h"
 #include "trainer.h"
@@ -81,6 +82,7 @@ const u16 gBattleTowerHeldItems[] = {
 	ITEM_GANLON_BERRY,
 };
 
+#include "data/battle_tower/level_50_mons.h"
 
 extern u8 gUnknown_08400E23[];
 extern u8 gUnknown_08400E29[];

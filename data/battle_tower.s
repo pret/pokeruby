@@ -3,9 +3,6 @@
 
 	.section .rodata
 
-@ 84038E0
-	.include "data/battle_tower/level_50_mons.inc"
-
 @ 8404BA0
 	.include "data/battle_tower/level_100_mons.inc"
 
