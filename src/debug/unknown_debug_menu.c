@@ -1,4 +1,5 @@
 #include "global.h"
+#include "battle_tower.h"
 #include "menu.h"
 
 extern u8 gBattleCommunication[];
@@ -43,10 +44,10 @@ u8 sub_814A4B8(void)
 {
     gSaveBlock2.filler_A8.var_4AE[0] = 3;
     gSaveBlock2.filler_A8.var_4AE[1] = 3;
-    gSaveBlock2.filler_A8.var_4B4 = gBattleCommunication[0] + 1;
-    gSaveBlock2.filler_A8.var_4B6 = gBattleCommunication[0] + 1;
-    gSaveBlock2.filler_A8.var_4B0 = 1;
-    gSaveBlock2.filler_A8.var_4B2 = 1;
+    gSaveBlock2.filler_A8.var_4B4[0] = gBattleCommunication[0] + 1;
+    gSaveBlock2.filler_A8.var_4B4[1] = gBattleCommunication[0] + 1;
+    gSaveBlock2.filler_A8.var_4B0[0] = 1;
+    gSaveBlock2.filler_A8.var_4B0[1] = 1;
     CloseMenu();
     return 1;
 }

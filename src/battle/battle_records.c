@@ -295,13 +295,13 @@ static void PrintWinStreak(const u8 *str, u16 streak, u8 left, u8 top)
 static void PrintRecordWinStreak(u8 level, u8 left, u8 top)
 {
     struct SaveBlock2_Sub *sb2sub = &gSaveBlock2.filler_A8;
-    u16 winStreak = sb2sub->recordWinStreak[level];
+    u16 winStreak = sb2sub->recordWinStreaks[level];
     PrintWinStreak(gOtherText_Record, winStreak, left, top);
 }
 
 static u16 GetLastWinStreak(u8 level)
 {
-    u16 result = gSaveBlock2.filler_A8.winStreak[level];
+    u16 result = gSaveBlock2.filler_A8.currentWinStreaks[level];
     if (result > 9999)
         result = 9999;
     return result;

@@ -60,7 +60,7 @@ struct PlayerRecords
     u8 filler1044[0x40];
     struct EasyChatPair easyChatPairs[5];
     struct RecordMixingDayCareMail filler10AC;
-    u8 filler1124[0xA4];
+    struct BattleTowerRecord battleTowerRecord;
     u16 filler11C8[0x34];
 };
 
@@ -78,7 +78,7 @@ void RecordMixing_PrepareExchangePacket(void)
     gUnknown_02038738.mail[1] = gSaveBlock1.daycareData.misc.mail[1];
     sub_8041324(gSaveBlock1.daycareData.mons, &gUnknown_02038738);
     memcpy(&unk_2018000.filler10AC, gUnknown_083D0280, sizeof(struct RecordMixingDayCareMail));
-    memcpy(unk_2018000.filler1124, gUnknown_083D0284, sizeof(unk_2018000.filler1124));
+    memcpy(&unk_2018000.battleTowerRecord, gUnknown_083D0284, sizeof(struct BattleTowerRecord));
 
     if (GetMultiplayerId() == 0)
         unk_2018000.filler11C8[0] = GetRecordMixingGift();
@@ -92,7 +92,7 @@ void RecordMixing_ReceiveExchangePacket(u32 a)
     sub_80B9B1C(unk_2008000.filler1044, sizeof(struct PlayerRecords), a);
     sub_80FA4E4(unk_2008000.easyChatPairs, sizeof(struct PlayerRecords), a);
     sub_80B9C6C((u8 *)&unk_2008000.filler10AC, sizeof(struct PlayerRecords), a, unk_2008000.tvShows);
-    sub_80B9B70(unk_2008000.filler1124, sizeof(struct PlayerRecords), a);
+    sub_80B9B70(&unk_2008000.battleTowerRecord, sizeof(struct PlayerRecords), a);
     sub_80B9F3C(unk_2008000.filler11C8, a);
 }
 
@@ -447,11 +447,11 @@ void sub_80B9B1C(u8 *a, size_t size, u8 index)
     sub_80F7F30();
 }
 
-void sub_80B9B70(u8 *a, size_t size, u8 index)
+void sub_80B9B70(void *battleTowerRecord, u32 size, u8 index)
 {
     sub_80B9A88(gUnknown_0300071C);
-    memcpy(a + size * index, a + size * gUnknown_0300071C[index], 0xA4);
-    sub_8134AC0(a + size * index);
+    memcpy(battleTowerRecord + size * index, battleTowerRecord + size * gUnknown_0300071C[index], sizeof(struct BattleTowerRecord));
+    sub_8134AC0(battleTowerRecord + size * index);
 }
 
 u8 sub_80B9BBC(u16 *a)

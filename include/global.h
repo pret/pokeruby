@@ -727,26 +727,79 @@ struct Pokedex
     /*0x44*/ u8 seen[DEX_FLAGS_NO];
 };
 
+// struct EReaderTrainerPokemon
+// {
+//     /*0x00, 0x4CC*/u16 unk0;
+//     /*0x02, 0x4CE*/u16 unk2;
+//     /*0x04, 0x4D0*/u8 unk4[0x8];
+//     /*0x0C, 0x4D8*/u8 level;
+//     /*0x0D, 0x4D9*/u8 unk9[0x1F];
+// };
+
+// struct EReaderTrainer
+// {
+//     /*0x00, 0x498*/u8 filler_0[2];
+//     /*0x02, 0x49A*/u16 unk2;
+//     /*0x04, 0x49C*/u8 filler_4[0x30];
+//     /*0x34, 0x4CC*/struct EReaderTrainerPokemon party[3];
+//     /*0xB8, 0x550*/u32 unkB8;
+// };
+
+struct SaveBlock2_1
+{
+    u32 filler_0[0x29];
+};
+
+struct BattleTowerTrainer
+{
+    u8 trainerClass;
+    u8 name[8];
+    u8 teamFlags;
+    u16 padding;
+    u16 easyChat[6];
+};
+
+struct BattleTowerRecord // record mixing
+{
+    /*0x00*/u8 var_0;
+    /*0x01*/u8 trainerClass;
+    /*0x02*/u16 var_2;
+    /*0x04*/u8 name[8];
+    /*0x0C*/u8 var_C[5];
+    u8 filler[0x93];
+};
+
+struct BattleTowerEReaderTrainer
+{
+    /*0x00*/u8 unk0;
+    /*0x01*/u8 trainerClass;
+    /*0x02*/u16 filler_2;
+    /*0x04*/u8 name[8];
+    /*0x0B*/u8 ereaderTrainer[0xB0];
+};
+
 struct SaveBlock2_Sub
 {
-    /*0x0000, 0x00A8*/ u8 filler_000[0x3D8];
-    /*0x03D8, 0x0480*/ u16 var_480;
-    /*0x03DA, 0x0482*/ u16 var_482;
+    /*0x0000, 0x00A8*/ struct BattleTowerRecord var_A8;
+    /*0x00A4, 0x014C*/ struct BattleTowerRecord var_14C[5];
+    /*0x03D8, 0x0480*/ u16 firstMonSpecies; // species of the first pokemon in the player's battle tower party
+    /*0x03DA, 0x0482*/ u16 defeatedBySpecies; // species of the pokemon that defated the player in their battle tower streak.
     /*0x03DC, 0x0484*/ u8 filler_3DC[0x14];
-    /*0x03F0, 0x0498*/ u8 ereaderTrainer[0xBC];
-    /*0x04AC, 0x0554*/ u8 var_4AC;
-    /*0x04AD, 0x0555*/ u8 var_4AD;
+    /*0x03F0, 0x0498*/ struct BattleTowerEReaderTrainer ereaderTrainer;
+    /*0x04AC, 0x0554*/ u8 battleTowerLevelType:1; // 0 = level 50; 1 = level 100
+    /*0x04AD, 0x0555*/ u8 var_4AD; // used by tv, but ultimately does nothing, since both code paths are identical
     /*0x04AE, 0x0556*/ u8 var_4AE[2];
-    /*0x04B0, 0x0558*/ u16 var_4B0;
-    /*0x04B2, 0x055A*/ u16 var_4B2;
-    /*0x04B4, 0x055C*/ u16 var_4B4;
-    /*0x04B6, 0x055E*/ u16 var_4B6;
-    /*0x04B8, 0x0560*/ u16 recordWinStreak[2];
-    /*0x04BC, 0x0564*/ u8 filler_4BC[0xC];
-    /*0x04C8, 0x0570*/ u16 var_4C8;
-    /*0x04CA, 0x0572*/ u16 var_4CA;
-    /*0x04CC, 0x0574*/ u16 winStreak[2];
-    /*0x04D0, 0x0578*/ u8 var_4D0;
+    /*0x04B0, 0x0558*/ u16 var_4B0[2];
+    /*0x04B4, 0x055C*/ u16 var_4B4[2];
+    /*0x04B8, 0x0560*/ u16 recordWinStreaks[2];
+    /*0x04BC, 0x0564*/ u8 battleTowerTrainerId; // index for gBattleTowerTrainers table
+    /*0x04BD, 0x0565*/ u8 var_4BD[0x3];
+    /*0x04C0, 0x0568*/ u8 var_4C0;
+    /*0x04C1, 0x0569*/ u8 var_4C1[0x7];
+    /*0x04C8, 0x0570*/ u16 totalBattleTowerWins;
+    /*0x04CA, 0x0572*/ u16 bestBattleTowerWinStreak;
+    /*0x04CC, 0x0574*/ u16 currentWinStreaks[2];
+    /*0x04D0, 0x0578*/ u8 lastStreakLevelType; // 0 = level 50, 1 = level 100.  level type of the last streak. Used by tv to report the level mode.
     /*0x04D1, 0x0579*/ u8 filler_4D1[0x317];
 };
 
