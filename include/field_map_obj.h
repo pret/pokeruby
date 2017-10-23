@@ -381,7 +381,7 @@ void npc_set_running_behaviour_etc(struct MapObject *, u8);
 u8 npc_running_behaviour_by_direction(u8);
 u8 npc_block_way(struct MapObject *, s16, s16, u32);
 u8 sub_8060024(struct MapObject *, s16, s16, u8);
-u8 sub_8060234(u8, u8, u8);
+bool8 IsBerryTreeSparkling(u8, u8, u8);
 void sub_8060288(u8, u8, u8);
 void sub_8060388(s16, s16, s16 *, s16 *);
 void sub_80603CC(s16 x, s16 y, s16 *pInt, s16 *pInt1);

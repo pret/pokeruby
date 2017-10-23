@@ -780,7 +780,7 @@ void ItemUseOutOfBattle_SSTicket(u8 taskId)
 
 void sub_80C9C7C(u8 taskId)
 {
-    if (IsPlayerFacingPlantedBerryTree() == TRUE)
+    if (IsPlayerFacingUnplantedSoil() == TRUE)
     {
         gFieldItemUseCallback = sub_80C9D00;
         gFieldCallback = ExecuteItemUseFromBlackPalette;

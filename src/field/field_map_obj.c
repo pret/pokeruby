@@ -5549,17 +5549,16 @@ static bool8 DoesObjectCollideWithObjectAt(struct MapObject *mapObject, s16 x, s
     return 0;
 }
 
-bool8 sub_8060234(u8 localId, u8 mapNum, u8 mapGroup)
+// this function is only used in berry.c, but its unknown whether its intended context is the berry tree check or if its checking for the flickering.
+bool8 IsBerryTreeSparkling(u8 localId, u8 mapNum, u8 mapGroup)
 {
     u8 mapObjectId;
+
     if (!TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjectId))
-    {
         if (gSprites[gMapObjects[mapObjectId].spriteId].data7 & 2)
-        {
-            return 1;
-        }
-    }
-    return 0;
+            return TRUE;
+
+    return FALSE;
 }
 
 void sub_8060288(u8 localId, u8 mapNum, u8 mapGroup)

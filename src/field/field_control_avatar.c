@@ -856,7 +856,8 @@ u8 sub_8068F18(void)
     return 0;
 }
 
-u8 *GetFieldObjectScriptPointerForComparison(void)
+// GetFieldObjectScriptPointerPlayerFacing
+u8 *GetFieldObjectScriptPointerPlayerFacing(void)
 {
     u8 r4;
     struct MapPosition position;
