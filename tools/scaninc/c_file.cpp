@@ -136,10 +136,10 @@ bool CFile::ConsumeComment()
         m_pos += 2;
         while (m_buffer[m_pos] != '*' && m_buffer[m_pos + 1] != '/')
         {
+            if (m_buffer[m_pos] == 0)
+                return false;
             if (!ConsumeNewline())
-            {
                 m_pos++;
-            }
         }
         m_pos += 2;
         return true;
@@ -149,6 +149,8 @@ bool CFile::ConsumeComment()
         m_pos += 2;
         while (!ConsumeNewline())
         {
+            if (m_buffer[m_pos] == 0)
+                return false;
             m_pos++;
         }
         return true;
