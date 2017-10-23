@@ -1136,7 +1136,7 @@ void ClearBerryTrees(void)
 // when the player does not interact with the tree for a period of time, this is called to advance the grow state.
 static bool32 BerryTreeGrow(struct BerryTree *tree)
 {
-    if (tree->growthSparkle != FALSE)
+    if (tree->growthSparkle)
         return FALSE;
     switch (tree->stage)
     {
