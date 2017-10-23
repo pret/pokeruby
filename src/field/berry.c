@@ -996,6 +996,9 @@ extern u16 gSpecialVar_0x8006;
     berries.
 */
 
+static u8 CalcBerryYield(struct BerryTree *tree);
+static u16 GetStageDurationByBerryType(u8 berry);
+
 // unused
 // this could be static, but making it so causes a compile-time warning.
 void ClearEnigmaBerries(void)

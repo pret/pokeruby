@@ -856,7 +856,6 @@ u8 sub_8068F18(void)
     return 0;
 }
 
-// GetFieldObjectScriptPointerPlayerFacing
 u8 *GetFieldObjectScriptPointerPlayerFacing(void)
 {
     u8 r4;
