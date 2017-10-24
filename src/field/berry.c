@@ -1182,7 +1182,7 @@ void BerryTreeTimeUpdate(s32 totalMinutes)
             }
             else
             {
-                // not sure why Game Freak thought a temporary variable was necessary. because time is altered below, perhaps they thought it was unsafe to change it, even though that is not how passed arguments behave.
+                // because time is altered below, perhaps they thought it was unsafe to change it, even though that is not how passed arguments behave.
                 s32 time = totalMinutes;
 
                 while (time != 0)
