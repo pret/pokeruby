@@ -188,7 +188,7 @@ static u16 sub_8041570(struct DayCareData * daycare_data, u8 slot)
     if (GetMonData(&pokemon, MON_DATA_LEVEL) != MAX_LEVEL)
     {
         experience = GetMonData(&pokemon, MON_DATA_EXP) + daycare_data->misc.countersEtc.steps[slot];
-        SetMonData(&pokemon, MON_DATA_EXP, (u8 *)&experience);
+        SetMonData(&pokemon, MON_DATA_EXP, &experience);
         DayCare_LevelUpMoves(&pokemon);
     }
     gPlayerParty[PARTY_SIZE - 1] = pokemon;
@@ -213,7 +213,7 @@ u16 sub_8041648()
 u8 Daycare_GetLevelAfterSteps(struct BoxPokemon * mon, u32 steps){
     struct BoxPokemon temp = *mon;
     u32 new_exp = GetBoxMonData(mon, MON_DATA_EXP) + steps;
-    SetBoxMonData(&temp, MON_DATA_EXP, (u8 *) &new_exp);
+    SetBoxMonData(&temp, MON_DATA_EXP,  &new_exp);
     return GetLevelFromBoxMonExp(&temp);
 }
 
@@ -960,7 +960,7 @@ void sub_8042044(struct Pokemon *mon, u16 species, u8 overwriteMetLocation) // s
     metLevel = 0;
     ball = ITEM_POKE_BALL;
     language = LANGUAGE_JAPANESE;
-    SetMonData(mon, MON_DATA_POKEBALL, (u8 *)&ball);
+    SetMonData(mon, MON_DATA_POKEBALL, &ball);
     SetMonData(mon, MON_DATA_NICKNAME, gUnknown_08209AD4);
     SetMonData(mon, MON_DATA_FRIENDSHIP, &gBaseStats[species].eggCycles);
     SetMonData(mon, MON_DATA_MET_LEVEL, &metLevel);
@@ -985,7 +985,7 @@ static void sub_80420FC(struct Pokemon *mon, u16 species, struct DayCareData *da
     metLevel = 0;
     ball = ITEM_POKE_BALL;
     language = LANGUAGE_JAPANESE;
-    SetMonData(mon, MON_DATA_POKEBALL, (u8 *)&ball);
+    SetMonData(mon, MON_DATA_POKEBALL, &ball);
     SetMonData(mon, MON_DATA_NICKNAME, gUnknown_08209AD4);
     SetMonData(mon, MON_DATA_FRIENDSHIP, &gBaseStats[species].eggCycles);
     SetMonData(mon, MON_DATA_MET_LEVEL, &metLevel);
@@ -1030,7 +1030,7 @@ static bool8 sub_80421B0(struct DayCareData *dayCareData)
                     return TRUE;
                 }
                 steps--;
-                SetMonData(&gPlayerParty[i], MON_DATA_FRIENDSHIP, (u8 *)&steps);
+                SetMonData(&gPlayerParty[i], MON_DATA_FRIENDSHIP, &steps);
             }
         }
     }

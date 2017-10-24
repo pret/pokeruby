@@ -5447,7 +5447,7 @@ static void sub_804D948(u8 whichPlayerMon, u8 whichInGameTrade)
             sub_804DAD4(&mail, inGameTrade);
             gUnknown_02029700[0] = mail;
             SetMonData(pokemon, MON_DATA_MAIL, &isMail);
-            SetMonData(pokemon, MON_DATA_HELD_ITEM, (u8 *)&inGameTrade->heldItem);
+            SetMonData(pokemon, MON_DATA_HELD_ITEM, &inGameTrade->heldItem);
         }
         else
         {

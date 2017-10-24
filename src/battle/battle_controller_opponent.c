@@ -908,38 +908,38 @@ void sub_8033E24(u8 a)
         {
             u8 iv;
 
-            SetMonData(&gEnemyParty[a], MON_DATA_SPECIES, (u8 *)&battlePokemon->species);
-            SetMonData(&gEnemyParty[a], MON_DATA_HELD_ITEM, (u8 *)&battlePokemon->item);
+            SetMonData(&gEnemyParty[a], MON_DATA_SPECIES, &battlePokemon->species);
+            SetMonData(&gEnemyParty[a], MON_DATA_HELD_ITEM, &battlePokemon->item);
             for (i = 0; i < 4; i++)
             {
-                SetMonData(&gEnemyParty[a], MON_DATA_MOVE1 + i, (u8 *)&battlePokemon->moves[i]);
-                SetMonData(&gEnemyParty[a], MON_DATA_PP1 + i, (u8 *)&battlePokemon->pp[i]);
+                SetMonData(&gEnemyParty[a], MON_DATA_MOVE1 + i, &battlePokemon->moves[i]);
+                SetMonData(&gEnemyParty[a], MON_DATA_PP1 + i, &battlePokemon->pp[i]);
             }
-            SetMonData(&gEnemyParty[a], MON_DATA_PP_BONUSES, (u8 *)&battlePokemon->ppBonuses);
-            SetMonData(&gEnemyParty[a], MON_DATA_FRIENDSHIP, (u8 *)&battlePokemon->friendship);
-            SetMonData(&gEnemyParty[a], MON_DATA_EXP, (u8 *)&battlePokemon->experience);
+            SetMonData(&gEnemyParty[a], MON_DATA_PP_BONUSES, &battlePokemon->ppBonuses);
+            SetMonData(&gEnemyParty[a], MON_DATA_FRIENDSHIP, &battlePokemon->friendship);
+            SetMonData(&gEnemyParty[a], MON_DATA_EXP, &battlePokemon->experience);
             iv = battlePokemon->hpIV;
-            SetMonData(&gEnemyParty[a], MON_DATA_HP_IV, (u8 *)&iv);
+            SetMonData(&gEnemyParty[a], MON_DATA_HP_IV, &iv);
             iv = battlePokemon->attackIV;
-            SetMonData(&gEnemyParty[a], MON_DATA_ATK_IV, (u8 *)&iv);
+            SetMonData(&gEnemyParty[a], MON_DATA_ATK_IV, &iv);
             iv = battlePokemon->defenseIV;
-            SetMonData(&gEnemyParty[a], MON_DATA_DEF_IV, (u8 *)&iv);
+            SetMonData(&gEnemyParty[a], MON_DATA_DEF_IV, &iv);
             iv = battlePokemon->speedIV;
-            SetMonData(&gEnemyParty[a], MON_DATA_SPEED_IV, (u8 *)&iv);
+            SetMonData(&gEnemyParty[a], MON_DATA_SPEED_IV, &iv);
             iv = battlePokemon->spAttackIV;
-            SetMonData(&gEnemyParty[a], MON_DATA_SPATK_IV, (u8 *)&iv);
+            SetMonData(&gEnemyParty[a], MON_DATA_SPATK_IV, &iv);
             iv = battlePokemon->spDefenseIV;
-            SetMonData(&gEnemyParty[a], MON_DATA_SPDEF_IV, (u8 *)&iv);
-            SetMonData(&gEnemyParty[a], MON_DATA_PERSONALITY, (u8 *)&battlePokemon->personality);
-            SetMonData(&gEnemyParty[a], MON_DATA_STATUS, (u8 *)&battlePokemon->status1);
-            SetMonData(&gEnemyParty[a], MON_DATA_LEVEL, (u8 *)&battlePokemon->level);
-            SetMonData(&gEnemyParty[a], MON_DATA_HP, (u8 *)&battlePokemon->hp);
-            SetMonData(&gEnemyParty[a], MON_DATA_MAX_HP, (u8 *)&battlePokemon->maxHP);
-            SetMonData(&gEnemyParty[a], MON_DATA_ATK, (u8 *)&battlePokemon->attack);
-            SetMonData(&gEnemyParty[a], MON_DATA_DEF, (u8 *)&battlePokemon->defense);
-            SetMonData(&gEnemyParty[a], MON_DATA_SPEED, (u8 *)&battlePokemon->speed);
-            SetMonData(&gEnemyParty[a], MON_DATA_SPATK, (u8 *)&battlePokemon->spAttack);
-            SetMonData(&gEnemyParty[a], MON_DATA_SPDEF, (u8 *)&battlePokemon->spDefense);
+            SetMonData(&gEnemyParty[a], MON_DATA_SPDEF_IV, &iv);
+            SetMonData(&gEnemyParty[a], MON_DATA_PERSONALITY, &battlePokemon->personality);
+            SetMonData(&gEnemyParty[a], MON_DATA_STATUS, &battlePokemon->status1);
+            SetMonData(&gEnemyParty[a], MON_DATA_LEVEL, &battlePokemon->level);
+            SetMonData(&gEnemyParty[a], MON_DATA_HP, &battlePokemon->hp);
+            SetMonData(&gEnemyParty[a], MON_DATA_MAX_HP, &battlePokemon->maxHP);
+            SetMonData(&gEnemyParty[a], MON_DATA_ATK, &battlePokemon->attack);
+            SetMonData(&gEnemyParty[a], MON_DATA_DEF, &battlePokemon->defense);
+            SetMonData(&gEnemyParty[a], MON_DATA_SPEED, &battlePokemon->speed);
+            SetMonData(&gEnemyParty[a], MON_DATA_SPATK, &battlePokemon->spAttack);
+            SetMonData(&gEnemyParty[a], MON_DATA_SPDEF, &battlePokemon->spDefense);
         }
         break;
     case 1:
@@ -951,8 +951,8 @@ void sub_8033E24(u8 a)
     case 3:
         for (i = 0; i < 4; i++)
         {
-            SetMonData(&gEnemyParty[a], MON_DATA_MOVE1 + i, (u8 *)&moveData->moves[i]);
-            SetMonData(&gEnemyParty[a], MON_DATA_PP1 + i, (u8 *)&moveData->pp[i]);
+            SetMonData(&gEnemyParty[a], MON_DATA_MOVE1 + i, &moveData->moves[i]);
+            SetMonData(&gEnemyParty[a], MON_DATA_PP1 + i, &moveData->pp[i]);
         }
         SetMonData(&gEnemyParty[a], MON_DATA_PP_BONUSES, &moveData->ppBonuses);
         break;

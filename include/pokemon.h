@@ -544,8 +544,8 @@ union PokemonSubstruct *GetSubstruct(struct BoxPokemon *boxMon, u32 personality,
 u32 GetMonData();
 u32 GetBoxMonData();
 
-void SetMonData(struct Pokemon *mon, s32 field, const u8 *data);
-void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const u8 *data);
+void SetMonData(struct Pokemon *mon, s32 field, const void *dataArg);
+void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg);
 void CopyMon(void *dest, void *src, size_t size);
 u8 GiveMonToPlayer(struct Pokemon *mon);
 u8 SendMonToPC(struct Pokemon *mon);

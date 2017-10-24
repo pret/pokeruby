@@ -1905,13 +1905,13 @@ void PutZigzagoonInPlayerParty(void)
     u16 monData;
     CreateMon(&gPlayerParty[0], SPECIES_ZIGZAGOON, 7, 0x20, FALSE, 0, FALSE, 0);
     monData = TRUE;
-    SetMonData(&gPlayerParty[0], MON_DATA_ALT_ABILITY, (u8 *)&monData);
+    SetMonData(&gPlayerParty[0], MON_DATA_ALT_ABILITY, &monData);
     monData = MOVE_TACKLE;
-    SetMonData(&gPlayerParty[0], MON_DATA_MOVE1, (u8 *)&monData);
+    SetMonData(&gPlayerParty[0], MON_DATA_MOVE1, &monData);
     monData = MOVE_NONE;
-    SetMonData(&gPlayerParty[0], MON_DATA_MOVE2, (u8 *)&monData);
-    SetMonData(&gPlayerParty[0], MON_DATA_MOVE3, (u8 *)&monData);
-    SetMonData(&gPlayerParty[0], MON_DATA_MOVE4, (u8 *)&monData);
+    SetMonData(&gPlayerParty[0], MON_DATA_MOVE2, &monData);
+    SetMonData(&gPlayerParty[0], MON_DATA_MOVE3, &monData);
+    SetMonData(&gPlayerParty[0], MON_DATA_MOVE4, &monData);
 }
 
 bool8 IsStarterInParty(void)

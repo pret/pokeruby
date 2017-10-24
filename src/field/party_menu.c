@@ -4457,7 +4457,7 @@ void sub_806F8AC(u8 taskId)
         ewram1B000.unk261 = 2;
         sub_806E834(gStringVar4, 1);
         sp14 += sp0.unk4;
-        SetMonData(ewram1C000.pokemon, MON_DATA_HP, (u8 *)&sp14);
+        SetMonData(ewram1C000.pokemon, MON_DATA_HP, &sp14);
         RemoveBagItem(ewram1C000.unk6, 1);
         sub_8032638();
         gTasks[taskId].func = sub_806FB44;
@@ -4478,7 +4478,7 @@ void sub_806FA18(u8 taskId)
         PlaySE(SE_KAIFUKU);
         ewram1C000.unkC = 0;
         gTasks[taskId].data[11] -= gTasks[taskId].data[12];
-        SetMonData(ewram1C000.pokemon, MON_DATA_HP, (u8 *)&gTasks[taskId].data[11]);
+        SetMonData(ewram1C000.pokemon, MON_DATA_HP, &gTasks[taskId].data[11]);
         SetMonIconAnim(GetMonIconSpriteId(ewram1C000.unk4, ewram01000.unk1), ewram1C000.pokemon);
         ewram1C000.unk5 = gSprites[ewram01000.unk2].data0;
         ewram1C000.pokemon = &gPlayerParty[ewram1C000.unk5];
