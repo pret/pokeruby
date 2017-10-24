@@ -755,8 +755,9 @@ struct BattleTowerTrainer
     u8 trainerClass;
     u8 name[8];
     u8 teamFlags;
-    u16 padding;
-    u16 easyChat[6];
+    struct {
+        u16 easyChat[6];
+    } greeting;
 };
 
 struct BattleTowerRecord // record mixing
