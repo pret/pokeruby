@@ -51,7 +51,7 @@ gSpecials::
 	def_special sub_80C5568
 	def_special sub_8083BDC
 	def_special FieldObjectInteractionGetBerryTreeData
-	def_special sub_80B4EE4
+	def_special Berry_FadeAndGoToBerryBagMenu
 	def_special FieldObjectInteractionPlantBerryTree
 	def_special FieldObjectInteractionPickBerryTree
 	def_special FieldObjectInteractionRemoveBerryTree
