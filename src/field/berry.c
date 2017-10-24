@@ -1015,7 +1015,9 @@ void SetEnigmaBerry(u8 *src)
     for (i = 0; i < sizeof(gSaveBlock1.enigmaBerry); i++)
         dest[i] = src[i];
 
-    // at this point, the description pointer is not yet initialized. we need to initialize it since we dont know where in memory this is going to be. set the berry desc pointers to the EnigmaBerry struct's description arrays since these are where the descriptions are stored.
+    // at this point, the description pointer is not yet initialized. we need to initialize it since
+    // we dont know where in memory this is going to be. set the berry desc pointers to the
+    // EnigmaBerry struct's description arrays since these are where the descriptions are stored.
     gSaveBlock1.enigmaBerry.berry.description1 = gSaveBlock1.enigmaBerry.description1;
     gSaveBlock1.enigmaBerry.berry.description2 = gSaveBlock1.enigmaBerry.description2;
 }
@@ -1028,7 +1030,9 @@ static u32 GetEnigmaBerryChecksum(struct EnigmaBerry *enigmaBerry)
     u32 checksum;
     u8 *dest;
 
-    // the description pointers could be pointing to anywhere in memory. we do not want these pointers to factor into the checksum as it will produce a different result every time: so back the pointers up and set them to null so the checksum is safe to calculate.
+    // the description pointers could be pointing to anywhere in memory. we do not want these
+    // pointers to factor into the checksum as it will produce a different result every time: so
+    // back the pointers up and set them to null so the checksum is safe to calculate.
     description1 = gSaveBlock1.enigmaBerry.berry.description1;
     description2 = gSaveBlock1.enigmaBerry.berry.description2;
     gSaveBlock1.enigmaBerry.berry.description1 = NULL;
@@ -1048,7 +1052,8 @@ static u32 GetEnigmaBerryChecksum(struct EnigmaBerry *enigmaBerry)
     return checksum;
 }
 
-// due to e-reader scans being particularly volatile to failure, it is a requirement to check for their integrity here due to scans possibly failing to produce the correct result.
+// due to e-reader scans being particularly volatile to failure, it is a requirement to check for
+// their integrity here due to scans possibly failing to produce the correct result.
 bool32 IsEnigmaBerryValid(void)
 {
     if (gSaveBlock1.enigmaBerry.berry.stageDuration == 0)
@@ -1062,28 +1067,37 @@ bool32 IsEnigmaBerryValid(void)
 
 const struct Berry *GetBerryInfo(u8 berry)
 {
-    // when getting the pointer to the berry info, enigma berries are handled differently. if your berry is an Enigma Berry and its checksum is valid, fetch the pointer to its information in the save block.
+    // when getting the pointer to the berry info, enigma berries are handled differently. if your
+    // berry is an Enigma Berry and its checksum is valid, fetch the pointer to its information in
+    // the save block.
     if (berry == GETBERRYID(ITEM_ENIGMA_BERRY) && IsEnigmaBerryValid())
         return &gSaveBlock1.enigmaBerry.berry;
     else
     {
-        // invalid berries will be flattened into a cheri berry. Interestingly, if your berry was an enigma berry whos checksum failed, the game will use the Enigma Berry information for this: meaning if you see the Enigma Berry information, its actually because the checksum failed.
+        // invalid berries will be flattened into a cheri berry. Interestingly, if your berry was 
+        // an enigma berry whos checksum failed, the game will use the Enigma Berry information
+        // for this: meaning if you see the Enigma Berry information, its actually because the 
+        // checksum failed.
         if (berry == BERRY_NONE || berry > GETBERRYID(LAST_BERRY))
             berry = GETBERRYID(FIRST_BERRY);
         return &gBerries[berry - 1];
     }
 }
 
-// the save file can handle up to a number of 128 berry trees as indicated by its definition in global.h. Interestingly, this function does not check that limit of 128.
+// the save file can handle up to a number of 128 berry trees as indicated by its definition
+// in global.h. Interestingly, this function does not check that limit of 128.
 static struct BerryTree *GetBerryTreeInfo(u8 id)
 {
     return &gSaveBlock1.berryTrees[id];
 }
 
-// this was called because the berry script was successful: meaning the player chose to water the tree. We need to check for the current tree stage and set the appropriate water flag to true.
+// this was called because the berry script was successful: meaning the player chose to
+// water the tree. We need to check for the current tree stage and set the appropriate
+// water flag to true.
 bool32 FieldObjectInteractionWaterBerryTree(void)
 {
-    // GetBerryTreeInfo does not sanitize the tree retrieved, but there are no known instances where this can cause problems.
+    // GetBerryTreeInfo does not sanitize the tree retrieved, but there are no known
+    // instances where this can cause problems.
     struct BerryTree *tree = GetBerryTreeInfo(FieldObjectGetBerryTreeId(gSelectedMapObject));
 
     switch (tree->stage)
@@ -1133,7 +1147,8 @@ void ClearBerryTrees(void)
         saveBlock1->berryTrees[i] = berryTree;
 }
 
-// when the player does not interact with the tree for a period of time, this is called to advance the grow state.
+// when the player does not interact with the tree for a period of time, this is called
+// to advance the grow state.
 static bool32 BerryTreeGrow(struct BerryTree *tree)
 {
     if (tree->growthSparkle)
@@ -1174,24 +1189,33 @@ void BerryTreeTimeUpdate(s32 minutesPassed)
 
         if (tree->berry != BERRY_NONE && tree->stage != BERRY_STAGE_NO_BERRY && tree->growthSparkle == FALSE)
         {
-            // the player has waited too long to water the berry. Reset the tree. This is because if the berry state is not in the unwatered state, the tree will grow anyway despite this check, which means BerryTreeGrow will handle the regrow process for this, removing the need for this check. This only handles the unwatered soil state.
+            // the player has waited too long to water the berry. Reset the tree. This is because
+            // if the berry state is not in the unwatered state, the tree will grow anyway despite this 
+            // check, which means BerryTreeGrow will handle the regrow process for this, removing the 
+            // need for this check. This only handles the unwatered soil state.
             if (minutesPassed >= GetStageDurationByBerryType(tree->berry) * 71)
             {
                 *tree = gBlankBerryTree;
             }
             else
             {
-                // because time is altered below, perhaps they thought it was unsafe to change it, even though that is not how passed arguments behave.
+                // because time is altered below, perhaps they thought it was unsafe to change it, even
+                // though that is not how passed arguments behave.
                 s32 time = minutesPassed;
 
                 while (time != 0)
                 {
                     if (tree->minutesUntilNextStage > time)
                     {
-                        tree->minutesUntilNextStage -= time; // its been X minutes since the last berry update, so update minutesUntilNextStage appropriately to match the time offset that has passed since the update.
+                        // its been X minutes since the last berry update, so update
+                        // minutesUntilNextStage appropriately to match the time offset
+                        // that has passed since the update.
+                        tree->minutesUntilNextStage -= time; 
                         break;
                     }
-                    // perform the subtraction the other way around to get the number of minutes since the inferred stage update that occured, since minutesUntilNextStage is <= time. we may need this variable to simulate multiple berry cycles in the while loop.
+                    // perform the subtraction the other way around to get the number of minutes since
+                    // the inferred stage update that occured, since minutesUntilNextStage is <= time.
+                    // we may need this variable to simulate multiple berry cycles in the while loop.
                     time -= tree->minutesUntilNextStage;
                     tree->minutesUntilNextStage = GetStageDurationByBerryType(tree->berry); // since the tree was inferred to update, set the new minutesUntilNextStage.
                     if (BerryTreeGrow(tree) == FALSE)
@@ -1348,7 +1372,12 @@ void FieldObjectInteractionGetBerryTreeData(void)
     num = gSaveBlock1.location.mapNum;
     group = gSaveBlock1.location.mapGroup;
     if (IsBerryTreeSparkling(localId, num, group))
-        gSpecialVar_0x8004 = BERRY_STAGE_SPARKLING; // we cannot allow the player to grow/interact with the tree while the tree is undergoing the sparkling effect, so set the special var to the sparkling state and let the event script process the flag.
+    {
+        // we cannot allow the player to grow/interact with the tree while the tree
+        // is undergoing the sparkling effect, so set the special var to the sparkling
+        // state and let the event script process the flag.
+        gSpecialVar_0x8004 = BERRY_STAGE_SPARKLING; 
+    }
     else
         gSpecialVar_0x8004 = GetStageByBerryTreeId(id);
     gSpecialVar_0x8005 = GetNumStagesWateredByBerryTreeId(id);
@@ -1388,7 +1417,8 @@ bool8 PlayerHasBerries(void)
     return IsBagPocketNonEmpty(BAG_BERRIES);
 }
 
-// whenever the player is not within view of the berry tree during its sparkle state, the sparkle state will be reset.
+// whenever the player is not within view of the berry tree during its sparkle state, the
+// sparkle state will be reset.
 void ResetBerryTreeSparkleFlags(void)
 {
     s16 cam_left;
