@@ -61,17 +61,17 @@ static void UpdatePerDay(struct Time *time)
 static void UpdatePerMinute(struct Time *time)
 {
     struct Time newTime;
-    s32 totalMinutes;
+    s32 minutesPassed;
 
     CalcTimeDifference(&newTime, &gSaveBlock2.lastBerryTreeUpdate, time);
-    totalMinutes = 1440 * newTime.days + 60 * newTime.hours + newTime.minutes;
+    minutesPassed = 1440 * newTime.days + 60 * newTime.hours + newTime.minutes;
 
-    if (totalMinutes == 0) // do not do the update for the first minute.
+    if (minutesPassed == 0) // do not do the update for the first minute.
         return;
 
-    if (totalMinutes > -1) // do not perform an update on invalid totalMinutes.
+    if (minutesPassed > -1) // do not perform an update on invalid minutesPassed.
     {
-        BerryTreeTimeUpdate(totalMinutes);
+        BerryTreeTimeUpdate(minutesPassed);
         gSaveBlock2.lastBerryTreeUpdate = *time;
     }
 }

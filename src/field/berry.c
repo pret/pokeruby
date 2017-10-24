@@ -1163,8 +1163,7 @@ static bool32 BerryTreeGrow(struct BerryTree *tree)
     return TRUE;
 }
 
-// totalMinutes is how long its been since the last berry tree update.
-void BerryTreeTimeUpdate(s32 totalMinutes)
+void BerryTreeTimeUpdate(s32 minutesPassed)
 {
     int i;
     struct BerryTree *tree;
@@ -1176,14 +1175,14 @@ void BerryTreeTimeUpdate(s32 totalMinutes)
         if (tree->berry != BERRY_NONE && tree->stage != BERRY_STAGE_NO_BERRY && tree->growthSparkle == FALSE)
         {
             // the player has waited too long to water the berry. Reset the tree. This is because if the berry state is not in the unwatered state, the tree will grow anyway despite this check, which means BerryTreeGrow will handle the regrow process for this, removing the need for this check. This only handles the unwatered soil state.
-            if (totalMinutes >= GetStageDurationByBerryType(tree->berry) * 71)
+            if (minutesPassed >= GetStageDurationByBerryType(tree->berry) * 71)
             {
                 *tree = gBlankBerryTree;
             }
             else
             {
                 // because time is altered below, perhaps they thought it was unsafe to change it, even though that is not how passed arguments behave.
-                s32 time = totalMinutes;
+                s32 time = minutesPassed;
 
                 while (time != 0)
                 {
