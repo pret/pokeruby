@@ -929,7 +929,7 @@ u8* const gMoveEffectBS_Ptrs[] =
 
 const u8 sUnreferencedBitMask1[] = {0, 1, 3, 7, 0xF, 0x1F, 0x3F};
 
-const u8 gLevelUpStatBoxStats[] = {MON_DATA_MAX_HP, MON_DATA_SPATK, MON_DATA_ATK, MON_DATA_SPDEF, MON_DATA_DEF, MON_DATA_SPD};
+const u8 gLevelUpStatBoxStats[] = {MON_DATA_MAX_HP, MON_DATA_SPATK, MON_DATA_ATK, MON_DATA_SPDEF, MON_DATA_DEF, MON_DATA_SPEED};
 
 static const u16 sProtectSuccessRates[] = {0xFFFF, 0x7FFF, 0x3FFF, 0x1FFF};
 
@@ -5447,7 +5447,7 @@ static void atk23_getexp(void)
                 BATTLE_STRUCT->beforeLvlUp[0] = GetMonData(&gPlayerParty[BATTLE_STRUCT->expGetterID], MON_DATA_MAX_HP);
                 BATTLE_STRUCT->beforeLvlUp[1] = GetMonData(&gPlayerParty[BATTLE_STRUCT->expGetterID], MON_DATA_ATK);
                 BATTLE_STRUCT->beforeLvlUp[2] = GetMonData(&gPlayerParty[BATTLE_STRUCT->expGetterID], MON_DATA_DEF);
-                BATTLE_STRUCT->beforeLvlUp[3] = GetMonData(&gPlayerParty[BATTLE_STRUCT->expGetterID], MON_DATA_SPD);
+                BATTLE_STRUCT->beforeLvlUp[3] = GetMonData(&gPlayerParty[BATTLE_STRUCT->expGetterID], MON_DATA_SPEED);
                 BATTLE_STRUCT->beforeLvlUp[4] = GetMonData(&gPlayerParty[BATTLE_STRUCT->expGetterID], MON_DATA_SPATK);
                 BATTLE_STRUCT->beforeLvlUp[5] = GetMonData(&gPlayerParty[BATTLE_STRUCT->expGetterID], MON_DATA_SPDEF);
 
@@ -5496,7 +5496,7 @@ static void atk23_getexp(void)
                     gBattleMons[0].maxHP = GetMonData(&gPlayerParty[BATTLE_STRUCT->expGetterID], MON_DATA_MAX_HP);
                     gBattleMons[0].attack = GetMonData(&gPlayerParty[BATTLE_STRUCT->expGetterID], MON_DATA_ATK);
                     gBattleMons[0].defense = GetMonData(&gPlayerParty[BATTLE_STRUCT->expGetterID], MON_DATA_DEF);
-                    gBattleMons[0].speed = GetMonData(&gPlayerParty[BATTLE_STRUCT->expGetterID], MON_DATA_SPD);
+                    gBattleMons[0].speed = GetMonData(&gPlayerParty[BATTLE_STRUCT->expGetterID], MON_DATA_SPEED);
                     gBattleMons[0].spAttack = GetMonData(&gPlayerParty[BATTLE_STRUCT->expGetterID], MON_DATA_SPATK);
                     gBattleMons[0].spDefense = GetMonData(&gPlayerParty[BATTLE_STRUCT->expGetterID], MON_DATA_SPDEF);
                 }
@@ -5509,8 +5509,8 @@ static void atk23_getexp(void)
                     gBattleMons[2].attack = GetMonData(&gPlayerParty[BATTLE_STRUCT->expGetterID], MON_DATA_ATK);
                     gBattleMons[2].defense = GetMonData(&gPlayerParty[BATTLE_STRUCT->expGetterID], MON_DATA_DEF);
                     //There are no words...GF can't even copy&paste code properly
-                    gBattleMons[2].speed = GetMonData(&gPlayerParty[BATTLE_STRUCT->expGetterID], MON_DATA_SPD);
-                    gBattleMons[2].spAttack = GetMonData(&gPlayerParty[BATTLE_STRUCT->expGetterID], MON_DATA_SPD /*RIP*/);
+                    gBattleMons[2].speed = GetMonData(&gPlayerParty[BATTLE_STRUCT->expGetterID], MON_DATA_SPEED);
+                    gBattleMons[2].spAttack = GetMonData(&gPlayerParty[BATTLE_STRUCT->expGetterID], MON_DATA_SPEED /*RIP*/);
                     gBattleMons[2].spDefense = GetMonData(&gPlayerParty[BATTLE_STRUCT->expGetterID], MON_DATA_SPATK);
                 }
                 BATTLE_STRUCT->atk23StateTracker = 5;
