@@ -766,8 +766,11 @@ struct BattleTowerRecord // record mixing
     /*0x01*/u8 trainerClass;
     /*0x02*/u16 var_2;
     /*0x04*/u8 name[8];
-    /*0x0C*/u8 var_C[5];
-    u8 filler[0x93];
+    /*0x0C*/u8 var_C[4];
+    /*0x10*/struct {
+        u16 easyChat[6];
+    } greeting;
+    /*0x1C*/u8 filler[0x87];
 };
 
 struct BattleTowerEReaderTrainer
@@ -775,8 +778,14 @@ struct BattleTowerEReaderTrainer
     /*0x00*/u8 unk0;
     /*0x01*/u8 trainerClass;
     /*0x02*/u16 filler_2;
-    /*0x04*/u8 name[8];
-    /*0x0B*/u8 ereaderTrainer[0xB0];
+    /*0x04*/u8 name[7];
+    /*0x0B*/u8 filler_B[0x5];
+    /*0x10*/struct {
+        u16 easyChat[6];
+    } greeting;
+    /*0x1C*/u8 filler_1C[0x18];
+    /*0x34*/struct UnknownPokemonStruct party[3];
+    /*0xB8*/u32 unk_B0;
 };
 
 struct SaveBlock2_Sub
@@ -788,6 +797,7 @@ struct SaveBlock2_Sub
     /*0x03DC, 0x0484*/ u8 filler_3DC[0x14];
     /*0x03F0, 0x0498*/ struct BattleTowerEReaderTrainer ereaderTrainer;
     /*0x04AC, 0x0554*/ u8 battleTowerLevelType:1; // 0 = level 50; 1 = level 100
+    /*0x04AC, 0x0554*/ u8 unk_554:1;
     /*0x04AD, 0x0555*/ u8 var_4AD; // used by tv, but ultimately does nothing, since both code paths are identical
     /*0x04AE, 0x0556*/ u8 var_4AE[2];
     /*0x04B0, 0x0558*/ u16 var_4B0[2];
