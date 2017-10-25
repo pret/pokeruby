@@ -388,8 +388,8 @@ static void InheritIVs(struct Pokemon *egg, struct DayCareData *dayCareData)
                 SetMonData(egg, MON_DATA_DEF_IV, &iv);
                 break;
             case 3:
-                iv = GetBoxMonData(&dayCareData->mons[whichParent[i]], MON_DATA_SPD_IV);
-                SetMonData(egg, MON_DATA_SPD_IV, &iv);
+                iv = GetBoxMonData(&dayCareData->mons[whichParent[i]], MON_DATA_SPEED_IV);
+                SetMonData(egg, MON_DATA_SPEED_IV, &iv);
                 break;
             case 4:
                 iv = GetBoxMonData(&dayCareData->mons[whichParent[i]], MON_DATA_SPATK_IV);

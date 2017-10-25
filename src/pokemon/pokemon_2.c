@@ -278,7 +278,7 @@ u32 GetMonData(struct Pokemon *mon, s32 field, u8 *data)
         return mon->attack;
     case MON_DATA_DEF:
         return mon->defense;
-    case MON_DATA_SPD:
+    case MON_DATA_SPEED:
         return mon->speed;
     case MON_DATA_SPATK:
         return mon->spAttack;
@@ -476,7 +476,7 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
     case MON_DATA_DEF_IV:
         retVal = substruct3->defenseIV;
         break;
-    case MON_DATA_SPD_IV:
+    case MON_DATA_SPEED_IV:
         retVal = substruct3->speedIV;
         break;
     case MON_DATA_SPATK_IV:
@@ -653,7 +653,7 @@ void SetMonData(struct Pokemon *mon, s32 field, const u8 *data)
     case MON_DATA_DEF:
         SET16(mon->defense);
         break;
-    case MON_DATA_SPD:
+    case MON_DATA_SPEED:
         SET16(mon->speed);
         break;
     case MON_DATA_SPATK:
@@ -844,7 +844,7 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const u8 *data)
     case MON_DATA_DEF_IV:
         SET8(substruct3->defenseIV);
         break;
-    case MON_DATA_SPD_IV:
+    case MON_DATA_SPEED_IV:
         SET8(substruct3->speedIV);
         break;
     case MON_DATA_SPATK_IV:
@@ -1185,7 +1185,7 @@ void CopyPlayerPartyMonToBattleData(u8 battleIndex, u8 partyIndex)
     gBattleMons[battleIndex].hpIV = GetMonData(&gPlayerParty[partyIndex], MON_DATA_HP_IV, NULL);
     gBattleMons[battleIndex].attackIV = GetMonData(&gPlayerParty[partyIndex], MON_DATA_ATK_IV, NULL);
     gBattleMons[battleIndex].defenseIV = GetMonData(&gPlayerParty[partyIndex], MON_DATA_DEF_IV, NULL);
-    gBattleMons[battleIndex].speedIV = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPD_IV, NULL);
+    gBattleMons[battleIndex].speedIV = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPEED_IV, NULL);
     gBattleMons[battleIndex].spAttackIV = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPATK_IV, NULL);
     gBattleMons[battleIndex].spDefenseIV = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPDEF_IV, NULL);
     gBattleMons[battleIndex].personality = GetMonData(&gPlayerParty[partyIndex], MON_DATA_PERSONALITY, NULL);
@@ -1195,7 +1195,7 @@ void CopyPlayerPartyMonToBattleData(u8 battleIndex, u8 partyIndex)
     gBattleMons[battleIndex].maxHP = GetMonData(&gPlayerParty[partyIndex], MON_DATA_MAX_HP, NULL);
     gBattleMons[battleIndex].attack = GetMonData(&gPlayerParty[partyIndex], MON_DATA_ATK, NULL);
     gBattleMons[battleIndex].defense = GetMonData(&gPlayerParty[partyIndex], MON_DATA_DEF, NULL);
-    gBattleMons[battleIndex].speed = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPD, NULL);
+    gBattleMons[battleIndex].speed = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPEED, NULL);
     gBattleMons[battleIndex].spAttack = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPATK, NULL);
     gBattleMons[battleIndex].spDefense = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPDEF, NULL);
     gBattleMons[battleIndex].isEgg = GetMonData(&gPlayerParty[partyIndex], MON_DATA_IS_EGG, NULL);

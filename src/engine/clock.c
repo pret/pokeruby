@@ -61,19 +61,18 @@ static void UpdatePerDay(struct Time *time)
 static void UpdatePerMinute(struct Time *time)
 {
     struct Time newTime;
-    s32 minutes;
+    s32 minutesPassed;
 
     CalcTimeDifference(&newTime, &gSaveBlock2.lastBerryTreeUpdate, time);
-    minutes = 1440 * newTime.days + 60 * newTime.hours + newTime.minutes;
+    minutesPassed = 1440 * newTime.days + 60 * newTime.hours + newTime.minutes;
 
-    // there's no way to get the correct assembly other than with this nested if check. so dumb.
-    if (minutes != 0)
+    if (minutesPassed == 0) // do not do the update for the first minute.
+        return;
+
+    if (minutesPassed > -1) // do not perform an update on invalid minutesPassed.
     {
-        if (minutes >= 0)
-        {
-            BerryTreeTimeUpdate(minutes);
-            gSaveBlock2.lastBerryTreeUpdate = *time;
-        }
+        BerryTreeTimeUpdate(minutesPassed);
+        gSaveBlock2.lastBerryTreeUpdate = *time;
     }
 }
 

@@ -41,7 +41,7 @@ Route102_EventScript_1A1558:: @ 81A1558
 Route102_EventScript_1A1577:: @ 81A1577
 	fadescreen 1
 	closemessage
-	special sub_80B4EE4
+	special Berry_FadeAndGoToBerryBagMenu
 	waitstate
 	compare ITEM_ID, 0
 	goto_if_eq Route102_EventScript_1A1593

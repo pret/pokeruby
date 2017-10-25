@@ -94,8 +94,7 @@ s16 GetTruckBoxMovement(int a1) // for the box movement?
 void Task_Truck1(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    s16 cameraYpan;
-    s16 cameraXpan = 0;
+    s16 cameraYpan, cameraXpan = 0;
     s16 box1, box2, box3;
 
     box1 = GetTruckBoxMovement(data[0] + 30) * 4; // top box.

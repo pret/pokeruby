@@ -460,7 +460,7 @@ static const u8 StatDataTypes[] = {
     MON_DATA_DEF,
     MON_DATA_SPATK,
     MON_DATA_SPDEF,
-    MON_DATA_SPD,
+    MON_DATA_SPEED,
 };
 
 struct Unk201C000
