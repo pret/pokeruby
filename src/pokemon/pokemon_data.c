@@ -9,18 +9,18 @@
 #include "sprite.h"
 #include "data2.h"
 
-#include "data/pokemon/dex_order.h"
-#include "data/pokemon/spinda_spots.h"
-#include "data/pokemon/item_effects.h"
-#include "data/pokemon/nature_stats.h"
-#include "data/pokemon/tmhm_learnsets.h"
-#include "data/pokemon/trainer_class_lookups.h"
-#include "data/pokemon/cry_ids.h"
-#include "data/pokemon/experience_tables.h"
-#include "data/pokemon/base_stats.h"
-#include "data/pokemon/level_up_learnsets.h"
-#include "data/pokemon/evolution.h"
-#include "data/pokemon/level_up_learnset_pointers.h"
+#include "../data/pokemon/dex_order.h"
+#include "../data/pokemon/spinda_spots.h"
+#include "../data/pokemon/item_effects.h"
+#include "../data/pokemon/nature_stats.h"
+#include "../data/pokemon/tmhm_learnsets.h"
+#include "../data/pokemon/trainer_class_lookups.h"
+#include "../data/pokemon/cry_ids.h"
+#include "../data/pokemon/experience_tables.h"
+#include "../data/pokemon/base_stats.h"
+#include "../data/pokemon/level_up_learnsets.h"
+#include "../data/pokemon/evolution.h"
+#include "../data/pokemon/level_up_learnset_pointers.h"
 
 const u8 gUnknown_08208238[] = { // Masks for getting PP Up count, also PP Max values
     0x03, 0x0c, 0x30, 0xc0
@@ -93,7 +93,7 @@ const u8 gUnknown_082082F2[] = {
     MON_DATA_HP_EV,
     MON_DATA_ATK_EV,
     MON_DATA_DEF_EV,
-    MON_DATA_SPD_EV,
+    MON_DATA_SPEED_EV,
     MON_DATA_SPDEF_EV,
     MON_DATA_SPATK_EV
 };

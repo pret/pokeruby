@@ -596,7 +596,7 @@ u8 sub_80BC298(struct Pokemon *mon) { // 80bc298
     u16 evsum = GetMonData(mon, MON_DATA_HP_EV);
     evsum += GetMonData(mon, MON_DATA_ATK_EV);
     evsum += GetMonData(mon, MON_DATA_DEF_EV);
-    evsum += GetMonData(mon, MON_DATA_SPD_EV);
+    evsum += GetMonData(mon, MON_DATA_SPEED_EV);
     evsum += GetMonData(mon, MON_DATA_SPATK_EV);
     evsum += GetMonData(mon, MON_DATA_SPDEF_EV);
     return (u8)(evsum / 6);

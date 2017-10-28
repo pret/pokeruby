@@ -1849,7 +1849,7 @@ u32 dp01_getattr_by_ch1_for_player_pokemon_(u8 a, u8 *buffer)
         size = 1;
         break;
     case 22:
-        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_SPD_EV);
+        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_SPEED_EV);
         size = 1;
         break;
     case 23:
@@ -2164,7 +2164,7 @@ void dp01_setattr_by_ch1_for_player_pokemon(u8 a)
         SetMonData(&gPlayerParty[a], MON_DATA_DEF_EV, &gBattleBufferA[gActiveBank][3]);
         break;
     case 22:
-        SetMonData(&gPlayerParty[a], MON_DATA_SPD_EV, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_SPEED_EV, &gBattleBufferA[gActiveBank][3]);
         break;
     case 23:
         SetMonData(&gPlayerParty[a], MON_DATA_SPATK_EV, &gBattleBufferA[gActiveBank][3]);
