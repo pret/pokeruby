@@ -631,9 +631,8 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
 #define SET16(lhs) (lhs) = data[0] + (data[1] << 8)
 #define SET32(lhs) (lhs) = data[0] + (data[1] << 8) + (data[2] << 16) + (data[3] << 24)
 
-void SetMonData(struct Pokemon *mon, s32 field, const void *dataArg)
+void SetMonData(struct Pokemon *mon, s32 field, const u8 *data)
 {
-    u8 *data = (u8 *)dataArg;
     switch (field)
     {
     case MON_DATA_STATUS:
@@ -674,9 +673,8 @@ void SetMonData(struct Pokemon *mon, s32 field, const void *dataArg)
     }
 }
 
-void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
+void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const u8 *data)
 {
-    u8 *data = (u8 *)dataArg;
     struct PokemonSubstruct0 *substruct0 = NULL;
     struct PokemonSubstruct1 *substruct1 = NULL;
     struct PokemonSubstruct2 *substruct2 = NULL;
@@ -1079,14 +1077,15 @@ void CreateSecretBaseEnemyParty(struct SecretBaseRecord *secretBaseRecord)
                 2,
                 0);
 
-            SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gSecretBaseRecord.partyHeldItems[i]);
+            // these two SetMonData calls require the (u8 *) cast since SetMonData is declared in this function.
+            SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, (u8 *)&gSecretBaseRecord.partyHeldItems[i]);
 
             for (j = 0; j < 6; j++)
                 SetMonData(&gEnemyParty[i], MON_DATA_HP_EV + j, &gSecretBaseRecord.partyEVs[i]);
 
             for (j = 0; j < 4; j++)
             {
-                SetMonData(&gEnemyParty[i], MON_DATA_MOVE1 + j, &gSecretBaseRecord.partyMoves[i * 4 + j]);
+                SetMonData(&gEnemyParty[i], MON_DATA_MOVE1 + j, (u8 *)&gSecretBaseRecord.partyMoves[i * 4 + j]);
                 SetMonData(&gEnemyParty[i], MON_DATA_PP1 + j, &gBattleMoves[gSecretBaseRecord.partyMoves[i * 4 + j]].pp);
             }
         }
