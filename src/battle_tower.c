@@ -245,6 +245,9 @@ const u16 LongStreakPrizes[] = {
 	ITEM_CHOICE_BAND,
 };
 
+extern const u8 gUnknown_08400E2C[];
+extern const u8 gUnknown_08400E32[];
+extern const u8 gUnknown_08400E36[];
 extern void sub_81360D0(void);
 extern u16 gSpecialVar_0x8004;
 extern u8 gUnknown_08400E23[];
@@ -265,6 +268,7 @@ extern void ValidateBattleTowerRecordChecksums(void);
 extern void sub_81349FC(u8);
 extern void sub_8135A3C(void);
 extern void sub_8135CFC(void);
+extern void CheckMonBattleTowerBanlist(u16, u16, u16, u8, u8, u16 *, u16 *, u8 *);
 static void ClearEReaderTrainer(struct BattleTowerEReaderTrainer *);
 //static void SetEReaderTrainerChecksum(struct BattleTowerEReaderTrainer *ereaderTrainer);
 static void SetBattleTowerRecordChecksum(struct BattleTowerRecord *);
@@ -329,287 +333,105 @@ void sub_813461C(u8 levelType)
 	gSaveBlock2.battleTower.curStreakChallengesCompleted[levelType] = 1;
 }
 
-// u8 sub_8134650(u8 levelType, u16 b)
-// {
-// 	u8 trainerTeamLevel;
-// 	s32 i;
-// 	u32 numValid = 0;
-
-// 	sub_813601C();
-
-// 	if (gScriptResult || gSaveBlock2.battleTower.ereaderTrainer.unk2 != b)
-// 	{
-// 		return 0;
-// 	}
-
-// 	trainerTeamLevel = 50;
-// 	if (levelType != 0)
-// 	{
-// 		trainerTeamLevel = 100;
-// 	}
-
-// 	for (i = 0; i < 3; i++)
-// 	{
-// 		if (!gSaveBlock2.battleTower.ereaderTrainer.party[i].level != trainerTeamLevel)
-// 		{
-// 			return 0;
-// 		}
-
-// 		CheckMonBattleTowerBanlist(gSaveBlock2.battleTower.ereaderTrainer.party[i].unk0, gSaveBlock2.battleTower.ereaderTrainer.party[i].unk2, 1, levelType, &numValid);
-// 	}
-
-// 	return numValid == 3;
-// }
-
-__attribute__((naked))
 u8 sub_8134650(u8 levelType, u16 b)
 {
-	asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r8\n\
-    push {r7}\n\
-    sub sp, 0x2C\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    lsls r1, 16\n\
-    lsrs r6, r1, 16\n\
-    add r4, sp, 0x28\n\
-    movs r0, 0\n\
-    strb r0, [r4]\n\
-    bl sub_813601C\n\
-    ldr r0, _08134684 @ =gScriptResult\n\
-    ldrh r0, [r0]\n\
-    adds r7, r4, 0\n\
-    cmp r0, 0\n\
-    bne _08134680\n\
-    ldr r1, _08134688 @ =gSaveBlock2\n\
-    ldr r2, _0813468C @ =0x0000049a\n\
-    adds r0, r1, r2\n\
-    ldrh r0, [r0]\n\
-    cmp r0, r6\n\
-    beq _08134690\n\
-_08134680:\n\
-    movs r0, 0\n\
-    b _081346E2\n\
-    .align 2, 0\n\
-_08134684: .4byte gScriptResult\n\
-_08134688: .4byte gSaveBlock2\n\
-_0813468C: .4byte 0x0000049a\n\
-_08134690:\n\
-    movs r6, 0x32\n\
-    cmp r5, 0\n\
-    beq _08134698\n\
-    movs r6, 0x64\n\
-_08134698:\n\
-    movs r4, 0\n\
-    mov r8, r1\n\
-_0813469C:\n\
-    movs r0, 0x2C\n\
-    muls r0, r4\n\
-    mov r3, r8\n\
-    adds r1, r0, r3\n\
-    movs r2, 0x9B\n\
-    lsls r2, 3\n\
-    adds r0, r1, r2\n\
-    ldrb r2, [r0]\n\
-    cmp r2, r6\n\
-    bne _08134680\n\
-    ldr r3, _081346F0 @ =0x000004cc\n\
-    adds r0, r1, r3\n\
-    ldrh r0, [r0]\n\
-    adds r3, 0x2\n\
-    adds r1, r3\n\
-    ldrh r1, [r1]\n\
-    str r2, [sp]\n\
-    add r2, sp, 0x10\n\
-    str r2, [sp, 0x4]\n\
-    add r2, sp, 0x1C\n\
-    str r2, [sp, 0x8]\n\
-    str r7, [sp, 0xC]\n\
-    movs r2, 0x1\n\
-    adds r3, r5, 0\n\
-    bl CheckMonBattleTowerBanlist\n\
-    adds r4, 0x1\n\
-    cmp r4, 0x2\n\
-    ble _0813469C\n\
-    movs r1, 0\n\
-    ldrb r0, [r7]\n\
-    cmp r0, 0x3\n\
-    bne _081346E0\n\
-    movs r1, 0x1\n\
-_081346E0:\n\
-    adds r0, r1, 0\n\
-_081346E2:\n\
-    add sp, 0x2C\n\
-    pop {r3}\n\
-    mov r8, r3\n\
-    pop {r4-r7}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .align 2, 0\n\
-_081346F0: .4byte 0x000004cc\n\
-.syntax divided\n");
+	u8 trainerTeamLevel;
+	u8 monLevel;
+	s32 i;
+	u16 validPartySpecies[6];
+	u16 validPartyHeldItems[6];
+	u8 numValid;
+
+	numValid = 0;
+
+	sub_813601C();
+
+	if (gScriptResult != 0 || gSaveBlock2.battleTower.ereaderTrainer.var_2 != b)
+	{
+		return 0;
+	}
+
+	trainerTeamLevel = 50;
+	if (levelType != 0)
+	{
+		trainerTeamLevel = 100;
+	}
+
+	for (i = 0; i < 3; i++)
+	{
+		monLevel = gSaveBlock2.battleTower.ereaderTrainer.party[i].level;
+		if (gSaveBlock2.battleTower.ereaderTrainer.party[i].level != trainerTeamLevel)
+		{
+			return 0;
+		}
+
+		CheckMonBattleTowerBanlist(
+			gSaveBlock2.battleTower.ereaderTrainer.party[i].species,
+			gSaveBlock2.battleTower.ereaderTrainer.party[i].heldItem,
+			1,
+			levelType,
+			monLevel,
+			validPartySpecies,
+			validPartyHeldItems,
+			&numValid);
+	}
+
+	return numValid == 3;
 }
 
-// bool8 sub_81346F4(void)
-// {
-// 	s32 i;
-// 	u32 j;
-// 	u32 arr[4];
-// 	u16 var2 = sub_8135D3C(gSaveBlock2.battleTower.battleTowerLevelType);
-
-// 	if (sub_8134650(gSaveBlock2.battleTower.battleTowerLevelType))
-// 	{
-// 		gSaveBlock2.battleTower.battleTowerTrainerId = 0xC8;
-// 		return TRUE;
-// 	}
-
-// 	for (i = 0; i < 5; i++)
-// 	{
-// 		u32 var_or = 0;
-// 		u32 var_add = 0;
-// 		for (j = 0; j < 40; j++)
-// 		{
-// 			var_or |= gSaveBlock2.battleTower.var_0A4[i][j];
-// 			var_add += gSaveBlock2.battleTower.var_0A4[i][j];
-// 		}
-
-		
-// 	}
-// }
-
-__attribute__((naked))
 bool8 sub_81346F4(void)
 {
-	asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x18\n\
-    movs r0, 0\n\
-    mov r9, r0\n\
-    ldr r4, _08134738 @ =gSaveBlock2\n\
-    ldr r1, _0813473C @ =0x00000554\n\
-    adds r0, r4, r1\n\
-    ldrb r0, [r0]\n\
-    lsls r0, 31\n\
-    lsrs r7, r0, 31\n\
-    adds r0, r7, 0\n\
-    bl sub_8135D3C\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    mov r8, r0\n\
-    adds r0, r7, 0\n\
-    mov r1, r8\n\
-    bl sub_8134650\n\
-    lsls r0, 24\n\
-    adds r1, r4, 0\n\
-    cmp r0, 0\n\
-    beq _08134744\n\
-    ldr r2, _08134740 @ =0x00000564\n\
-    adds r1, r2\n\
-    movs r0, 0xC8\n\
-    strb r0, [r1]\n\
-    b _081347DE\n\
-    .align 2, 0\n\
-_08134738: .4byte gSaveBlock2\n\
-_0813473C: .4byte 0x00000554\n\
-_08134740: .4byte 0x00000564\n\
-_08134744:\n\
-    movs r5, 0\n\
-    movs r3, 0xA4\n\
-    mov r12, r3\n\
-    mov r10, sp\n\
-_0813474C:\n\
-    mov r0, r12\n\
-    muls r0, r5\n\
-    movs r4, 0\n\
-    movs r1, 0\n\
-    movs r2, 0\n\
-    adds r6, r5, 0x1\n\
-    str r6, [sp, 0x14]\n\
-    ldr r6, _081347B4 @ =gSaveBlock2 + 0x14C\n\
-    adds r3, r0, r6\n\
-_0813475E:\n\
-    ldm r3!, {r0}\n\
-    orrs r4, r0\n\
-    adds r1, r0\n\
-    adds r2, 0x1\n\
-    cmp r2, 0x27\n\
-    bls _0813475E\n\
-    mov r3, r12\n\
-    muls r3, r5\n\
-    ldr r0, _081347B8 @ =gSaveBlock2\n\
-    adds r2, r3, r0\n\
-    movs r6, 0xA7\n\
-    lsls r6, 1\n\
-    adds r0, r2, r6\n\
-    ldrh r0, [r0]\n\
-    cmp r0, r8\n\
-    bne _081347A4\n\
-    subs r6, 0x2\n\
-    adds r0, r2, r6\n\
-    ldrb r0, [r0]\n\
-    cmp r0, r7\n\
-    bne _081347A4\n\
-    cmp r4, 0\n\
-    beq _081347A4\n\
-    ldr r2, _081347BC @ =gSaveBlock2 + 0x1EC\n\
-    adds r0, r3, r2\n\
-    ldr r0, [r0]\n\
-    cmp r0, r1\n\
-    bne _081347A4\n\
-    mov r3, r10\n\
-    adds r3, 0x4\n\
-    mov r10, r3\n\
-    subs r3, 0x4\n\
-    stm r3!, {r5}\n\
-    movs r6, 0x1\n\
-    add r9, r6\n\
-_081347A4:\n\
-    ldr r5, [sp, 0x14]\n\
-    cmp r5, 0x4\n\
-    ble _0813474C\n\
-    mov r0, r9\n\
-    cmp r0, 0\n\
-    bne _081347C0\n\
-    movs r0, 0\n\
-    b _081347E0\n\
-    .align 2, 0\n\
-_081347B4: .4byte gSaveBlock2 + 0x14C\n\
-_081347B8: .4byte gSaveBlock2\n\
-_081347BC: .4byte gSaveBlock2 + 0x1EC\n\
-_081347C0:\n\
-    bl Random\n\
-    ldr r4, _081347F0 @ =gSaveBlock2\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    mov r1, r9\n\
-    bl __modsi3\n\
-    lsls r0, 2\n\
-    add r0, sp\n\
-    ldr r0, [r0]\n\
-    adds r0, 0x64\n\
-    ldr r1, _081347F4 @ =0x00000564\n\
-    adds r4, r1\n\
-    strb r0, [r4]\n\
-_081347DE:\n\
-    movs r0, 0x1\n\
-_081347E0:\n\
-    add sp, 0x18\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .align 2, 0\n\
-_081347F0: .4byte gSaveBlock2\n\
-_081347F4: .4byte 0x00000564\n\
-.syntax divided\n");
+	s32 recordIndex, j;
+	u8 battleTowerLevelType;
+	u16 winStreak;
+	bool8 retVal;
+	s32 numCandidates;
+	u32 trainerIds[5];
+
+	numCandidates = 0;
+	battleTowerLevelType = gSaveBlock2.battleTower.battleTowerLevelType;
+
+	winStreak = sub_8135D3C(battleTowerLevelType);
+	if (sub_8134650(battleTowerLevelType, winStreak))
+	{
+		gSaveBlock2.battleTower.battleTowerTrainerId = 0xC8;
+		retVal = TRUE;
+	}
+	else
+	{
+		for (recordIndex = 0; recordIndex < 5; recordIndex++)
+		{
+			struct BattleTowerRecord *record = &gSaveBlock2.battleTower.records[recordIndex];
+			u32 recordHasData = 0;
+			u32 checksum = 0;
+			for (j = 0; j < sizeof(struct BattleTowerRecord) / sizeof(u32) - 1; j++)
+			{
+				recordHasData |= ((u32 *)record)[j];
+				checksum += ((u32 *)record)[j];
+			}
+
+			if (gSaveBlock2.battleTower.records[recordIndex].var_2 == winStreak
+				&& gSaveBlock2.battleTower.records[recordIndex].var_0 == battleTowerLevelType
+				&& recordHasData
+				&& gSaveBlock2.battleTower.records[recordIndex].checksum == checksum)
+			{
+				trainerIds[numCandidates] = recordIndex;
+				numCandidates++;
+			}
+		}
+
+		if (numCandidates == 0)
+		{
+			retVal = FALSE;
+		}
+		else
+		{
+			gSaveBlock2.battleTower.battleTowerTrainerId = trainerIds[Random() % numCandidates] + 100;
+			retVal = TRUE;
+		}
+	}
+
+	return retVal;
 }
 
 // void sub_81347F8(void)
@@ -1816,310 +1638,104 @@ u8 AppendBattleTowerBannedSpeciesName(u16 species, u8 curIndexToAppend, s32 numT
 	return curIndexToAppend;
 }
 
-__attribute__((naked))
-void CheckMonBattleTowerBanlist()
+void CheckMonBattleTowerBanlist(u16 species, u16 heldItem, u16 hp, u8 battleTowerLevelType, u8 monLevel, u16 *validPartySpecies, u16 *validPartyHeldItems, u8 *numValid)
 {
-	asm(".syntax unified\n\
-	push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    ldr r2, [sp, 0x20]\n\
-    ldr r4, [sp, 0x24]\n\
-    mov r9, r4\n\
-    ldr r4, [sp, 0x28]\n\
-    mov r10, r4\n\
-    ldr r7, [sp, 0x2C]\n\
-    lsls r0, 16\n\
-    lsrs r4, r0, 16\n\
-    lsls r1, 16\n\
-    lsrs r6, r1, 16\n\
-    lsls r3, 24\n\
-    lsrs r3, 24\n\
-    mov r12, r3\n\
-    lsls r2, 24\n\
-    lsrs r2, 24\n\
-    mov r8, r2\n\
-    movs r2, 0\n\
-    movs r0, 0xCE\n\
-    lsls r0, 1\n\
-    cmp r4, r0\n\
-    beq _081352CE\n\
-    cmp r4, 0\n\
-    beq _081352CE\n\
-    ldr r0, _081352DC @ =gBattleTowerBanlist\n\
-    ldrh r1, [r0]\n\
-    ldr r5, _081352E0 @ =0x0000ffff\n\
-    adds r3, r0, 0\n\
-    cmp r1, r5\n\
-    beq _08135264\n\
-    cmp r1, r4\n\
-    beq _08135258\n\
-    adds r1, r3, 0\n\
-_0813524A:\n\
-    adds r1, 0x2\n\
-    adds r2, 0x1\n\
-    ldrh r0, [r1]\n\
-    cmp r0, r5\n\
-    beq _08135264\n\
-    cmp r0, r4\n\
-    bne _0813524A\n\
-_08135258:\n\
-    lsls r0, r2, 1\n\
-    adds r0, r3\n\
-    ldrh r1, [r0]\n\
-    ldr r0, _081352E0 @ =0x0000ffff\n\
-    cmp r1, r0\n\
-    bne _081352CE\n\
-_08135264:\n\
-    mov r0, r12\n\
-    cmp r0, 0\n\
-    bne _08135270\n\
-    mov r1, r8\n\
-    cmp r1, 0x32\n\
-    bhi _081352CE\n\
-_08135270:\n\
-    movs r2, 0\n\
-    ldrb r3, [r7]\n\
-    cmp r2, r3\n\
-    bge _08135290\n\
-    mov r1, r9\n\
-    ldrh r0, [r1]\n\
-    cmp r0, r4\n\
-    beq _08135290\n\
-    adds r5, r3, 0\n\
-_08135282:\n\
-    adds r1, 0x2\n\
-    adds r2, 0x1\n\
-    cmp r2, r5\n\
-    bge _08135290\n\
-    ldrh r0, [r1]\n\
-    cmp r0, r4\n\
-    bne _08135282\n\
-_08135290:\n\
-    cmp r2, r3\n\
-    bne _081352CE\n\
-    cmp r6, 0\n\
-    beq _081352BA\n\
-    movs r2, 0\n\
-    cmp r2, r3\n\
-    bge _081352B6\n\
-    mov r1, r10\n\
-    ldrh r0, [r1]\n\
-    cmp r0, r6\n\
-    beq _081352B6\n\
-    adds r5, r3, 0\n\
-_081352A8:\n\
-    adds r1, 0x2\n\
-    adds r2, 0x1\n\
-    cmp r2, r5\n\
-    bge _081352B6\n\
-    ldrh r0, [r1]\n\
-    cmp r0, r6\n\
-    bne _081352A8\n\
-_081352B6:\n\
-    cmp r2, r3\n\
-    bne _081352CE\n\
-_081352BA:\n\
-    lsls r0, r3, 1\n\
-    add r0, r9\n\
-    strh r4, [r0]\n\
-    ldrb r0, [r7]\n\
-    lsls r0, 1\n\
-    add r0, r10\n\
-    strh r6, [r0]\n\
-    ldrb r0, [r7]\n\
-    adds r0, 0x1\n\
-    strb r0, [r7]\n\
-_081352CE:\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_081352DC: .4byte gBattleTowerBanlist\n\
-_081352E0: .4byte 0x0000ffff\n\
-.syntax divided\n");
+	s32 i;
+	u32 counter = 0;
+
+	if (species == SPECIES_EGG || species == SPECIES_NONE)
+		return;
+
+	while (1)
+	{
+		if (gBattleTowerBanlist[counter] == 0xFFFF)
+			goto EXIT2;
+
+		if (gBattleTowerBanlist[counter] == species)
+			break;
+
+		counter++;
+	}
+
+	if (gBattleTowerBanlist[counter] != 0xFFFF)
+		return;
+
+	EXIT2:
+	if (battleTowerLevelType == 0 && monLevel > 50)
+		return;
+
+	for (i = 0; i < *numValid && validPartySpecies[i] != species ; i++);
+	if (i != *numValid)
+		return;
+
+	if (heldItem != 0)
+	{
+		for (i = 0; i < *numValid && validPartyHeldItems[i] != heldItem ; i++);
+		if (i != *numValid)
+			return;
+	}
+
+	validPartySpecies[*numValid] = species;
+	validPartyHeldItems[*numValid] = heldItem;
+	*numValid = *numValid + 1;
 }
 
-__attribute__((naked))
-void CheckPartyBattleTowerBanlist()
+void CheckPartyBattleTowerBanlist(void)
 {
-	asm(".syntax unified\n\
-	push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x2C\n\
-    add r1, sp, 0x28\n\
-    movs r0, 0\n\
-    strb r0, [r1]\n\
-    movs r7, 0\n\
-    mov r9, r1\n\
-    add r0, sp, 0x1C\n\
-    mov r10, r0\n\
-_081352FE:\n\
-    movs r0, 0x64\n\
-    adds r5, r7, 0\n\
-    muls r5, r0\n\
-    ldr r0, _081353C4 @ =gPlayerParty\n\
-    adds r5, r0\n\
-    adds r0, r5, 0\n\
-    movs r1, 0x41\n\
-    bl GetMonData\n\
-    mov r8, r0\n\
-    mov r1, r8\n\
-    lsls r1, 16\n\
-    lsrs r1, 16\n\
-    mov r8, r1\n\
-    adds r0, r5, 0\n\
-    movs r1, 0xC\n\
-    bl GetMonData\n\
-    adds r6, r0, 0\n\
-    lsls r6, 16\n\
-    lsrs r6, 16\n\
-    adds r0, r5, 0\n\
-    movs r1, 0x38\n\
-    bl GetMonData\n\
-    adds r4, r0, 0\n\
-    lsls r4, 24\n\
-    lsrs r4, 24\n\
-    adds r0, r5, 0\n\
-    movs r1, 0x39\n\
-    bl GetMonData\n\
-    adds r2, r0, 0\n\
-    lsls r2, 16\n\
-    lsrs r2, 16\n\
-    ldr r5, _081353C8 @ =gScriptResult\n\
-    ldrb r3, [r5]\n\
-    str r4, [sp]\n\
-    add r0, sp, 0x10\n\
-    str r0, [sp, 0x4]\n\
-    mov r1, r10\n\
-    str r1, [sp, 0x8]\n\
-    mov r0, r9\n\
-    str r0, [sp, 0xC]\n\
-    mov r0, r8\n\
-    adds r1, r6, 0\n\
-    bl CheckMonBattleTowerBanlist\n\
-    adds r7, 0x1\n\
-    cmp r7, 0x5\n\
-    ble _081352FE\n\
-    mov r1, r9\n\
-    ldrb r0, [r1]\n\
-    cmp r0, 0x2\n\
-    bhi _08135420\n\
-    ldr r1, _081353CC @ =gStringVar1\n\
-    movs r0, 0xFF\n\
-    strb r0, [r1]\n\
-    ldr r1, _081353D0 @ =gSpecialVar_0x8004\n\
-    movs r0, 0x1\n\
-    strh r0, [r1]\n\
-    movs r0, 0\n\
-    mov r1, r9\n\
-    strb r0, [r1]\n\
-    bl CountBattleTowerBanlistCaught\n\
-    adds r6, r0, 0\n\
-    ldr r2, _081353D4 @ =gBattleTowerBanlist\n\
-    ldrh r0, [r2]\n\
-    ldr r1, _081353D8 @ =0x0000ffff\n\
-    cmp r0, r1\n\
-    beq _081353A8\n\
-    mov r5, r9\n\
-    adds r7, r1, 0\n\
-    adds r4, r2, 0\n\
-_08135394:\n\
-    ldrh r0, [r4]\n\
-    ldrb r1, [r5]\n\
-    adds r2, r6, 0\n\
-    bl AppendBattleTowerBannedSpeciesName\n\
-    strb r0, [r5]\n\
-    adds r4, 0x2\n\
-    ldrh r0, [r4]\n\
-    cmp r0, r7\n\
-    bne _08135394\n\
-_081353A8:\n\
-    mov r0, r9\n\
-    ldrb r1, [r0]\n\
-    cmp r1, 0\n\
-    bne _081353E4\n\
-    ldr r4, _081353CC @ =gStringVar1\n\
-    ldr r1, _081353DC @ =gUnknown_08400E2C\n\
-    adds r0, r4, 0\n\
-    bl StringAppend\n\
-    ldr r1, _081353E0 @ =gUnknown_08400E32\n\
-    adds r0, r4, 0\n\
-    bl StringAppend\n\
-    b _0813543E\n\
-    .align 2, 0\n\
-_081353C4: .4byte gPlayerParty\n\
-_081353C8: .4byte gScriptResult\n\
-_081353CC: .4byte gStringVar1\n\
-_081353D0: .4byte gSpecialVar_0x8004\n\
-_081353D4: .4byte gBattleTowerBanlist\n\
-_081353D8: .4byte 0x0000ffff\n\
-_081353DC: .4byte gUnknown_08400E2C\n\
-_081353E0: .4byte gUnknown_08400E32\n\
-_081353E4:\n\
-    movs r0, 0x1\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _08135400\n\
-    ldr r0, _081353F8 @ =gStringVar1\n\
-    ldr r1, _081353FC @ =gUnknown_08400E2E\n\
-    bl StringAppend\n\
-    b _08135408\n\
-    .align 2, 0\n\
-_081353F8: .4byte gStringVar1\n\
-_081353FC: .4byte gUnknown_08400E2E\n\
-_08135400:\n\
-    ldr r0, _08135414 @ =gStringVar1\n\
-    ldr r1, _08135418 @ =gUnknown_08400E2C\n\
-    bl StringAppend\n\
-_08135408:\n\
-    ldr r0, _08135414 @ =gStringVar1\n\
-    ldr r1, _0813541C @ =gUnknown_08400E36\n\
-    bl StringAppend\n\
-    b _0813543E\n\
-    .align 2, 0\n\
-_08135414: .4byte gStringVar1\n\
-_08135418: .4byte gUnknown_08400E2C\n\
-_0813541C: .4byte gUnknown_08400E36\n\
-_08135420:\n\
-    ldr r1, _08135450 @ =gSpecialVar_0x8004\n\
-    movs r0, 0\n\
-    strh r0, [r1]\n\
-    ldr r2, _08135454 @ =gSaveBlock2\n\
-    ldrb r0, [r5]\n\
-    ldr r1, _08135458 @ =0x00000554\n\
-    adds r2, r1\n\
-    movs r1, 0x1\n\
-    ands r1, r0\n\
-    ldrb r3, [r2]\n\
-    movs r0, 0x2\n\
-    negs r0, r0\n\
-    ands r0, r3\n\
-    orrs r0, r1\n\
-    strb r0, [r2]\n\
-_0813543E:\n\
-    add sp, 0x2C\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_08135450: .4byte gSpecialVar_0x8004\n\
-_08135454: .4byte gSaveBlock2\n\
-_08135458: .4byte 0x00000554\n\
-.syntax divided\n");
+	s32 i;
+	u16 species2;
+	u16 heldItem;
+	u8 level;
+	u16 hp;
+	u32 numBanlistCaught;
+	u16 validPartySpecies[6];
+	u16 validPartyHeldItems[6];
+	u8 counter;
+
+	counter = 0;
+
+	for (i = 0; i < PARTY_SIZE; i++)
+	{
+		species2 = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
+		heldItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
+		level = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
+		hp = GetMonData(&gPlayerParty[i], MON_DATA_HP);
+
+		CheckMonBattleTowerBanlist(species2, heldItem, hp, gScriptResult, level, validPartySpecies, validPartyHeldItems, &counter);
+	}
+
+	if (counter < 3)
+	{
+		gStringVar1[0] = 0xFF;
+		gSpecialVar_0x8004 = 1;
+		counter = 0;
+
+		numBanlistCaught = CountBattleTowerBanlistCaught();
+
+		for (i = 0; gBattleTowerBanlist[i] != 0xFFFF; i++)
+		{
+			counter = AppendBattleTowerBannedSpeciesName(gBattleTowerBanlist[i], counter, numBanlistCaught);
+		}
+
+		if (counter == 0)
+		{
+			StringAppend(gStringVar1, gUnknown_08400E2C);
+			StringAppend(gStringVar1, gUnknown_08400E32);
+			return;
+		}
+		
+		if (1 & counter)
+			StringAppend(gStringVar1, gUnknown_08400E2E);
+		else
+			StringAppend(gStringVar1, gUnknown_08400E2C);
+
+		StringAppend(gStringVar1, gUnknown_08400E36);
+	}
+	else
+	{
+		gSpecialVar_0x8004 = 0;
+		gSaveBlock2.battleTower.battleTowerLevelType = gScriptResult;
+	}
 }
 
 void sub_813545C(u16 *easyChat)
@@ -2642,11 +2258,11 @@ void sub_8135D84(void)
 
     if (saveBlock->battleTower.curStreakChallengesCompleted[battleTowerLevelType] - 1 > 5)
     {
-        prizeItem = LongStreakPrizes[Random() % 9];
+        prizeItem = LongStreakPrizes[Random() % ARRAY_COUNT(LongStreakPrizes)];
     }
     else
     {
-        prizeItem = ShortStreakPrizes[Random() % 6];
+        prizeItem = ShortStreakPrizes[Random() % ARRAY_COUNT(ShortStreakPrizes)];
     }
 
     saveBlock->battleTower.prizeItem = prizeItem;
