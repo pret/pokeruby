@@ -1773,9 +1773,7 @@ u32 dp01_getattr_by_ch1_for_player_pokemon_(u8 a, u8 *buffer)
         GetMonData(&gPlayerParty[a], MON_DATA_NICKNAME, nickname);
         StringCopy10(battlePokemon.nickname, nickname);
         GetMonData(&gPlayerParty[a], MON_DATA_OT_NAME, battlePokemon.otName);
-        src = (u8 *)&battlePokemon;
-        for (size = 0; size < sizeof(battlePokemon); size++)
-            buffer[size] = src[size];
+        BAD_MEMSET_REVERSE(&battlePokemon, buffer, sizeof(battlePokemon), size, src)
         break;
     case 1:
         data16 = GetMonData(&gPlayerParty[a], MON_DATA_SPECIES);
@@ -1796,9 +1794,7 @@ u32 dp01_getattr_by_ch1_for_player_pokemon_(u8 a, u8 *buffer)
             moveData.pp[size] = GetMonData(&gPlayerParty[a], MON_DATA_PP1 + size);
         }
         moveData.ppBonuses = GetMonData(&gPlayerParty[a], MON_DATA_PP_BONUSES);
-        src = (u8 *)&moveData;
-        for (size = 0; size < sizeof(moveData); size++)
-            buffer[size] = src[size];
+        BAD_MEMSET_REVERSE(&moveData, buffer, sizeof(moveData), size, src)
         break;
     case 4:
     case 5:
@@ -2035,13 +2031,13 @@ u32 dp01_getattr_by_ch1_for_player_pokemon_(u8 a, u8 *buffer)
 
 void PlayerHandlecmd1(void)
 {
-    struct BattlePokemon battleMon;  // I think this is a BattlePokemon
-    u8 *src = (u8 *)&gPlayerParty[gBattlePartyID[gActiveBank]] + gBattleBufferA[gActiveBank][1];
-    u8 *dst = (u8 *)&battleMon + gBattleBufferA[gActiveBank][1];
+    struct BattlePokemon battleMon;
     u8 i;
+    // TODO: Maybe fix this. Integrating this into BAD_MEMSET is too hard.
+    u8 *src = (u8 *)&gPlayerParty[gBattlePartyID[gActiveBank]] + gBattleBufferA[gActiveBank][1];
+    u8 *dst;
 
-    for (i = 0; i < gBattleBufferA[gActiveBank][2]; i++)
-        dst[i] = src[i];
+    BAD_MEMSET(&battleMon + gBattleBufferA[gActiveBank][1], src[i], gBattleBufferA[gActiveBank][2], i, dst)
     Emitcmd29(1, gBattleBufferA[gActiveBank][2], dst);
     PlayerBufferExecCompleted();
 }
@@ -2288,11 +2284,11 @@ void dp01_setattr_by_ch1_for_player_pokemon(u8 a)
 
 void PlayerHandlecmd3(void)
 {
-    u8 *dst = (u8 *)&gPlayerParty[gBattlePartyID[gActiveBank]] + gBattleBufferA[gActiveBank][1];
     u8 i;
+    u8 *dst;
 
-    for (i = 0; i < gBattleBufferA[gActiveBank][2]; i++)
-        dst[i] = gBattleBufferA[gActiveBank][3 + i];
+    BAD_MEMSET(&gPlayerParty[gBattlePartyID[gActiveBank]] + gBattleBufferA[gActiveBank][1], gBattleBufferA[gActiveBank][3 + i], 
+        gBattleBufferA[gActiveBank][2], i, dst)
     PlayerBufferExecCompleted();
 }
 

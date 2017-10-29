@@ -686,6 +686,28 @@ extern u8 ewram[];
 #define ewram17840              (*(struct Struct2017840 *)   (ewram + 0x17840))
 #define ewram17000              ((u32 *)                     (ewram + 0x17100))
 
+// used in many battle files, it seems as though Hisashi Sogabe wrote
+// some sort of macro to replace the use of actually calling memset.
+// Perhaps it was thought calling memset was much slower?
+
+// The compiler wont allow us to locally declare ptr in this macro; some
+// functions that invoke this macro will not match without this egregeous
+// assumption about the variable names.
+#define BAD_MEMSET(data, c, size, var, ptr)    \
+{    \
+    ptr = (u8 *)data;    \
+    for(var = 0; var < (u32)size; var++)    \
+        ptr[var] = c;    \
+}    \
+
+// TODO: Try to combine these macros.
+#define BAD_MEMSET_REVERSE(data, ptr2, size, var, ptr)    \
+{    \
+    ptr = (u8 *)data;    \
+    for(var = 0; var < (u32)size; var++)    \
+        ptr2[var] = ptr[var];    \
+}    \
+
 typedef void (*BattleCmdFunc)(void);
 
 struct funcStack

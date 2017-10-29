@@ -601,9 +601,7 @@ u32 sub_8033598(u8 a, u8 *buffer)
         GetMonData(&gEnemyParty[a], MON_DATA_NICKNAME, nickname);
         StringCopy10(battlePokemon.nickname, nickname);
         GetMonData(&gEnemyParty[a], MON_DATA_OT_NAME, battlePokemon.otName);
-        src = (u8 *)&battlePokemon;
-        for (size = 0; size < sizeof(battlePokemon); size++)
-            buffer[size] = src[size];
+        BAD_MEMSET_REVERSE(&battlePokemon, buffer, sizeof(battlePokemon), size, src)
         break;
     case 1:
         data16 = GetMonData(&gEnemyParty[a], MON_DATA_SPECIES);
@@ -624,9 +622,7 @@ u32 sub_8033598(u8 a, u8 *buffer)
             moveData.pp[size] = GetMonData(&gEnemyParty[a], MON_DATA_PP1 + size);
         }
         moveData.ppBonuses = GetMonData(&gEnemyParty[a], MON_DATA_PP_BONUSES);
-        src = (u8 *)&moveData;
-        for (size = 0; size < sizeof(moveData); size++)
-            buffer[size] = src[size];
+        BAD_MEMSET_REVERSE(&moveData, buffer, sizeof(moveData), size, src)
         break;
     case 4:
     case 5:
@@ -864,12 +860,12 @@ u32 sub_8033598(u8 a, u8 *buffer)
 void OpponentHandlecmd1(void)
 {
     struct BattlePokemon buffer;
-    u8 *src = (u8 *)&gEnemyParty[gBattlePartyID[gActiveBank]] + gBattleBufferA[gActiveBank][1];
-    u8 *dst = (u8 *)&buffer + gBattleBufferA[gActiveBank][1];
     u8 i;
+    // TODO: Maybe fix this. Integrating this into BAD_MEMSET is too hard.
+    u8 *src = (u8 *)&gEnemyParty[gBattlePartyID[gActiveBank]] + gBattleBufferA[gActiveBank][1];
+    u8 *dst;
 
-    for (i = 0; i < gBattleBufferA[gActiveBank][2]; i++)
-        dst[i] = src[i];
+    BAD_MEMSET(&buffer + gBattleBufferA[gActiveBank][1], src[i], gBattleBufferA[gActiveBank][2], i, dst)
     Emitcmd29(1, gBattleBufferA[gActiveBank][2], dst);
     OpponentBufferExecCompleted();
 }
@@ -1117,9 +1113,8 @@ void OpponentHandlecmd3(void)
     u8 *dst;
     u8 i;
 
-    dst = (u8 *)&gEnemyParty[gBattlePartyID[gActiveBank]] + gBattleBufferA[gActiveBank][1];
-    for (i = 0; i < gBattleBufferA[gActiveBank][2]; i++)
-        dst[i] = gBattleBufferA[gActiveBank][3 + i];
+    BAD_MEMSET(&gEnemyParty[gBattlePartyID[gActiveBank]] + gBattleBufferA[gActiveBank][1], gBattleBufferA[gActiveBank][3 + i], 
+        gBattleBufferA[gActiveBank][2], i, dst)
     OpponentBufferExecCompleted();
 }
 

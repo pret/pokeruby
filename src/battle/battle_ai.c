@@ -267,10 +267,9 @@ const u16 sDiscouragedPowerfulMoveEffects[] =
 void BattleAI_HandleItemUseBeforeAISetup(void)
 {
     s32 i;
-    u8 *data = (u8 *)UNK_2016A00_STRUCT;
+    u8 *data;
 
-    for (i = 0; (u32)i < sizeof(struct UnkBattleStruct1); i++)
-        data[i] = 0;
+    BAD_MEMSET(UNK_2016A00_STRUCT, 0, sizeof(struct UnkBattleStruct1), i, data)
 
     if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
      && gTrainerBattleOpponent != 0x400
@@ -292,21 +291,23 @@ void BattleAI_HandleItemUseBeforeAISetup(void)
 void BattleAI_SetupAIData(void)
 {
     s32 i;
-    u8 *data = (u8 *)AI_THINKING_STRUCT;
-    u8 r7;
+    u8 limitations;
+    u8 *data;
 
     // clear AI data and set default move score to 100. strange that they didn't use memset here.
-    for (i = 0; (u32)i < sizeof(struct AI_ThinkingStruct); i++)
-        data[i] = 0;
+    BAD_MEMSET(AI_THINKING_STRUCT, 0, sizeof(struct AI_ThinkingStruct), i, data)
+
     for (i = 0; i < MAX_MON_MOVES; i++)
         AI_THINKING_STRUCT->score[i] = 100;
 
-    r7 = CheckMoveLimitations(gActiveBank, 0, 0xFF);
+    limitations = CheckMoveLimitations(gActiveBank, 0, 0xFF);
 
-    // probably sets up the moves to consider and ignores non-valid moves such as NO_MOVE or glitch moves.
+    // do not consider moves the AI cannot select
+    // also, roll simulated RNG for moves that have a degree of
+    // randomness.
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        if (gBitTable[i] & r7)
+        if (gBitTable[i] & limitations)
             AI_THINKING_STRUCT->score[i] = 0;
 
         AI_THINKING_STRUCT->simulatedRNG[i] = 100 - (Random() % 16);

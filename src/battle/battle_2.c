@@ -1375,6 +1375,7 @@ void sub_8010384(struct Sprite *sprite)
 void sub_8010494(struct Sprite *sprite)
 {
     s32 i;
+    u8 *dst;
 
     sprite->data4--;
     if (sprite->data4 == 0)
@@ -1389,8 +1390,8 @@ void sub_8010494(struct Sprite *sprite)
         }
         else
         {
-            u8 *dst = (u8 *)gUnknown_081FAF4C[GetBankIdentity(sprite->data0)] + (gBattleMonForms[sprite->data0] << 11) + (sprite->data3 << 8);
-
+            // this should use a BAD_MEMSET, but *(dst++) wont match with it.
+            dst = (u8 *)gUnknown_081FAF4C[GetBankIdentity(sprite->data0)] + (gBattleMonForms[sprite->data0] << 11) + (sprite->data3 << 8);
             for (i = 0; i < 0x100; i++)
                 *(dst++) = 0;
             StartSpriteAnim(sprite, gBattleMonForms[sprite->data0]);
@@ -1567,10 +1568,7 @@ void sub_8010874(void)
     {
         gStatuses3[i] = 0;
 
-        r4 = (u8 *)&gDisableStructs[i];
-        for (j = 0; j < (u32)0x1C; j++)
-            r4[j] = 0;
-
+        BAD_MEMSET(&gDisableStructs[i], 0, 0x1C, j, r4)
         gDisableStructs[i].isFirstTurn= 2;
         gUnknown_02024C70[i] = 0;
         gLastUsedMove[i] = 0;
@@ -1586,19 +1584,14 @@ void sub_8010874(void)
     for (i = 0; i < 2; i++)
     {
         gSideAffecting[i] = 0;
-
-        r4 = (u8 *)&gSideTimer[i];
-        for (j = 0; j < 12; j++)
-            r4[j] = 0;
+        BAD_MEMSET(&gSideTimer[i], 0, 12, j, r4)
     }
 
     gBankAttacker = 0;
     gBankTarget = 0;
     gBattleWeather = 0;
 
-    r4 = (u8 *)&gWishFutureKnock;
-    for (i = 0; i < (u32)0x2C; i++)
-        r4[i] = 0;
+    BAD_MEMSET(&gWishFutureKnock, 0, 0x2C, i, r4)
 
     gHitMarker = 0;
     if ((gBattleTypeFlags & BATTLE_TYPE_LINK) == 0 && gSaveBlock2.optionsBattleSceneOff == TRUE)
@@ -1721,9 +1714,7 @@ void SwitchInClearStructs(void)
     gActionSelectionCursor[gActiveBank] = 0;
     gMoveSelectionCursor[gActiveBank] = 0;
 
-    ptr = (u8 *)&gDisableStructs[gActiveBank];
-    for (i = 0; i < (u32)0x1C; i++)
-        ptr[i] = 0;
+    BAD_MEMSET(&gDisableStructs[gActiveBank], 0, 0x1C, i, ptr)
 
     if (gBattleMoves[gCurrentMove].effect == EFFECT_BATON_PASS)
     {
@@ -1778,9 +1769,7 @@ void UndoEffectsAfterFainting(void)
     gActionSelectionCursor[gActiveBank] = 0;
     gMoveSelectionCursor[gActiveBank] = 0;
 
-    ptr = (u8 *)&gDisableStructs[gActiveBank];
-    for (i = 0; i < (u32)0x1C; i++)
-        ptr[i] = 0;
+    BAD_MEMSET(&gDisableStructs[gActiveBank], 0, 0x1C, i, ptr)
     gProtectStructs[gActiveBank].protected = 0;
     gProtectStructs[gActiveBank].endured = 0;
     gProtectStructs[gActiveBank].onlyStruggle = 0;
@@ -1873,18 +1862,13 @@ void sub_8011384(void)
             if ((gBattleTypeFlags & BATTLE_TYPE_SAFARI)
              && GetBankSide(gActiveBank) == 0)
             {
-                ptr = (u8 *)&gBattleMons[gActiveBank];
-                for (i = 0; i < (u32)0x58; i++)
-                    ptr[i] = 0;
+                BAD_MEMSET(&gBattleMons[gActiveBank], 0, 0x58, i, ptr)
             }
             else
             {
                 u8 r0;
 
-                ptr = (u8 *)&gBattleMons[gActiveBank];
-                for (i = 0; i < (u32)0x58; i++)
-                    ptr[i] = gBattleBufferB[gActiveBank][4 + i];
-
+                BAD_MEMSET(&gBattleMons[gActiveBank], gBattleBufferB[gActiveBank][4 + i], 0x58, i, ptr)
                 gBattleMons[gActiveBank].type1 = gBaseStats[gBattleMons[gActiveBank].species].type1;
                 gBattleMons[gActiveBank].type2 = gBaseStats[gBattleMons[gActiveBank].species].type2;
                 gBattleMons[gActiveBank].ability = GetAbilityBySpecies(gBattleMons[gActiveBank].species, gBattleMons[gActiveBank].altAbility);
