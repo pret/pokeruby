@@ -681,10 +681,12 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x2B0D*/ u8 outbreakPokemonProbability;
     /*0x2B0E*/ u16 outbreakUnk5;
     /*0x2B10*/ struct GabbyAndTyData gabbyAndTyData;
-    /*0x2B1C*/ u16 unk2B1C[6];
-    /*0x2B28*/ u16 unk2B28[6];
-    /*0x2B34*/ u16 unk2B34[6];
-    /*0x2B40*/ u16 unk2B40[6];
+    /*0x2B1C*/ struct {
+        /*0x2B1C*/ u16 unk2B1C[6];
+        /*0x2B28*/ u16 unk2B28[6];
+        /*0x2B34*/ u16 unk2B34[6];
+        /*0x2B40*/ u16 unk2B40[6];
+    } easyChats;
     /*0x2B4C*/ struct MailStruct mail[16];
     /*0x2D8C*/ u8 unk2D8C[4];
     /*0x2D90*/ u8 filler_2D90[0x4];
@@ -766,11 +768,12 @@ struct BattleTowerRecord // record mixing
     /*0x01*/u8 trainerClass;
     /*0x02*/u16 var_2;
     /*0x04*/u8 name[8];
-    /*0x0C*/u8 var_C[4];
+    /*0x0C*/u8 trainerId[4];
     /*0x10*/struct {
         u16 easyChat[6];
     } greeting;
-    /*0x1C*/u8 filler[0x87];
+    /*0x1C*/struct UnknownPokemonStruct party[3];
+    /*0xA0*/u32 checksum;
 };
 
 struct BattleTowerEReaderTrainer
@@ -785,7 +788,7 @@ struct BattleTowerEReaderTrainer
     } greeting;
     /*0x1C*/u8 filler_1C[0x18];
     /*0x34*/struct UnknownPokemonStruct party[3];
-    /*0xB8*/u32 unk_B0;
+    /*0xB8*/u32 checksum;
 };
 
 struct SaveBlock2_Sub
@@ -793,8 +796,9 @@ struct SaveBlock2_Sub
     /*0x0000, 0x00A8*/ struct BattleTowerRecord var_A8;
     /*0x00A4, 0x014C*/ struct BattleTowerRecord var_14C[5];
     /*0x03D8, 0x0480*/ u16 firstMonSpecies; // species of the first pokemon in the player's battle tower party
-    /*0x03DA, 0x0482*/ u16 defeatedBySpecies; // species of the pokemon that defated the player in their battle tower streak.
-    /*0x03DC, 0x0484*/ u8 filler_3DC[0x14];
+    /*0x03DA, 0x0482*/ u16 defeatedBySpecies; // species of the pokemon that defated the player
+    /*0x03DC, 0x0484*/ u8 defeatedByTrainerName[8];
+    /*0x03E4, 0x048C*/ u8 firstMonNickname[POKEMON_NAME_LENGTH]; // nickname of the first pokemon in the player's battle tower party
     /*0x03F0, 0x0498*/ struct BattleTowerEReaderTrainer ereaderTrainer;
     /*0x04AC, 0x0554*/ u8 battleTowerLevelType:1; // 0 = level 50; 1 = level 100
     /*0x04AC, 0x0554*/ u8 unk_554:1;
@@ -805,8 +809,8 @@ struct SaveBlock2_Sub
     /*0x04B8, 0x0560*/ u16 recordWinStreaks[2];
     /*0x04BC, 0x0564*/ u8 battleTowerTrainerId; // index for gBattleTowerTrainers table
     /*0x04BD, 0x0565*/ u8 var_4BD[0x3];
-    /*0x04C0, 0x0568*/ u8 var_4C0;
-    /*0x04C1, 0x0569*/ u8 var_4C1[0x7];
+    /*0x04C0, 0x0568*/ u16 prizeItem;
+    /*0x04C2, 0x056A*/ u8 var_4C2[0x6];
     /*0x04C8, 0x0570*/ u16 totalBattleTowerWins;
     /*0x04CA, 0x0572*/ u16 bestBattleTowerWinStreak;
     /*0x04CC, 0x0574*/ u16 currentWinStreaks[2];

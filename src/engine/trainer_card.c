@@ -374,7 +374,7 @@ void sub_8093390(struct TrainerCard *trainerCard)
 
     for (i = 0; i < 4; i++)
     {
-        trainerCard->var_28[i] = gSaveBlock1.unk2B1C[i];
+        trainerCard->var_28[i] = gSaveBlock1.easyChats.unk2B1C[i];
     }
 
     for (i = 0; i < 8; i++)

@@ -674,7 +674,7 @@ void sub_80BE320(void)
     bravoTrainerTower->var00 = TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE;
     bravoTrainerTower->var01 = 1;
     StringCopy(bravoTrainerTower->trainerName, gSaveBlock2.playerName);
-    StringCopy(bravoTrainerTower->pokemonName, gSaveBlock2.filler_A8.filler_3DC);
+    StringCopy(bravoTrainerTower->pokemonName, gSaveBlock2.filler_A8.defeatedByTrainerName);
     bravoTrainerTower->species = gSaveBlock2.filler_A8.firstMonSpecies;
     bravoTrainerTower->defeatedSpecies = gSaveBlock2.filler_A8.defeatedBySpecies;
     bravoTrainerTower->var16 = sub_8135D3C(gSaveBlock2.filler_A8.lastStreakLevelType);

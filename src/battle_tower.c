@@ -6,13 +6,17 @@
 #include "data2.h"
 #include "easy_chat.h"
 #include "event_data.h"
+#include "item.h"
 #include "items.h"
 #include "main.h"
 #include "map_object_constants.h"
 #include "moves.h"
+#include "new_game.h"
 #include "overworld.h"
 #include "pokedex.h"
 #include "rng.h"
+#include "save.h"
+#include "script_pokemon_80C4.h"
 #include "species.h"
 #include "string_util.h"
 #include "task.h"
@@ -217,7 +221,8 @@ const u16 gBattleTowerBanlist[] = {
 	0xFFFF,
 };
 
-const u16 gUnknown_08405EDA[] = {
+// Item prizes for battle tower streaks of 5 or fewer sets.
+const u16 ShortStreakPrizes[] = {
 	ITEM_HP_UP,
 	ITEM_PROTEIN,
 	ITEM_IRON,
@@ -226,7 +231,8 @@ const u16 gUnknown_08405EDA[] = {
 	ITEM_ZINC,
 };
 
-const u16 gUnknown_08405EE6[] = {
+// Item prizes for battle tower streaks of greater than 5 sets.
+const u16 LongStreakPrizes[] = {
 	ITEM_BRIGHT_POWDER,
 	ITEM_WHITE_HERB,
 	ITEM_QUICK_CLAW,
@@ -250,12 +256,18 @@ extern u8 gTrainerClassToNameIndex[];
 extern u16 gTrainerBattleOpponent;
 extern u16 gBattleTypeFlags;
 extern u8 gSelectedOrderFromParty[];
+extern struct Pokemon gUnknown_030042FC[];
+extern u8 gBattleOutcome;
+extern struct BattlePokemon gBattleMons[];
 
-extern void sub_8135C44(void);
+extern void ValidateBattleTowerRecordChecksums(void);
 extern void sub_813601C(void);
 extern void sub_81349FC(u8);
 extern void sub_81360AC(struct BattleTowerEReaderTrainer *);
 extern void sub_8135A3C(void);
+extern void sub_8135CFC(void);
+static void SetBattleTowerRecordChecksum(struct BattleTowerRecord *);
+static void ClearBattleTowerRecord(struct BattleTowerRecord *);
 
 #define ewram160FB (ewram[0x160FB])
 
@@ -306,7 +318,7 @@ void sub_8134548(void)
 		VarSet(VAR_0x4000, 5);
 	}
 
-	sub_8135C44();
+	ValidateBattleTowerRecordChecksums();
 }
 
 void sub_813461C(u8 levelType)
@@ -2293,5 +2305,455 @@ void sub_8135668(void)
 	case 14:
 		gSaveBlock2.filler_A8.lastStreakLevelType = gSaveBlock2.filler_A8.battleTowerLevelType;
 		break;
+	}
+}
+
+void sub_81358A4(void)
+{
+	u8 battleTowerLevelType = gSaveBlock2.filler_A8.battleTowerLevelType;
+
+	switch (gSpecialVar_0x8004)
+	{
+	case 0:
+		gScriptResult = gSaveBlock2.filler_A8.var_4AE[battleTowerLevelType];
+		break;
+	case 1:
+		gScriptResult = gSaveBlock2.filler_A8.battleTowerLevelType;
+		break;
+	case 2:
+		gScriptResult = gSaveBlock2.filler_A8.var_4B0[battleTowerLevelType];
+		break;
+	case 3:
+		gScriptResult = gSaveBlock2.filler_A8.var_4B4[battleTowerLevelType];
+		break;
+	case 4:
+		gScriptResult = gSaveBlock2.filler_A8.battleTowerTrainerId;
+		break;
+	case 5:
+	case 6:
+	case 7:
+		break;
+	case 8:
+		gScriptResult = gSaveBlock2.filler_A8.unk_554;
+		break;
+	case 9:
+		gScriptResult = sub_8135D3C(battleTowerLevelType);
+		break;
+	case 10:
+		SetGameStat(GAME_STAT_BATTLE_TOWER_BEST_STREAK, gSaveBlock2.filler_A8.bestBattleTowerWinStreak);
+		break;
+	case 11:
+		sub_813461C(battleTowerLevelType);
+		break;
+	case 12:
+		gSaveBlock2.filler_A8.var_4AE[battleTowerLevelType] = ewram160FB;
+		break;
+	case 13:
+		gSaveBlock2.filler_A8.currentWinStreaks[battleTowerLevelType] = sub_8135D3C(battleTowerLevelType);
+		break;
+	case 14:
+		gSaveBlock2.filler_A8.lastStreakLevelType = gSaveBlock2.filler_A8.battleTowerLevelType;
+		break;
+	}
+}
+
+void sub_8135A14(void)
+{
+	s32 i;
+
+	for (i = 0; i < 3; i++)
+	{
+		gSelectedOrderFromParty[i] = gSaveBlock2.filler_A8.var_4BD[i];
+	}
+
+	ReducePlayerPartyToThree();
+}
+
+#ifdef NONMATCHING
+void sub_8135A3C(void)
+{
+	u8 battleTowerLevelType = gSaveBlock2.filler_A8.battleTowerLevelType;
+	u16 winStreak = sub_8135D3C(battleTowerLevelType);
+	if (gSaveBlock2.filler_A8.recordWinStreaks[battleTowerLevelType] < winStreak)
+	{
+		gSaveBlock2.filler_A8.recordWinStreaks[battleTowerLevelType] = winStreak;
+	}
+
+	if (gSaveBlock2.filler_A8.recordWinStreaks[0] > gSaveBlock2.filler_A8.recordWinStreaks[1])
+	{
+		SetGameStat(GAME_STAT_BATTLE_TOWER_BEST_STREAK, gSaveBlock2.filler_A8.recordWinStreaks[0]);
+		if (gSaveBlock2.filler_A8.recordWinStreaks[0] > 9999)
+		{
+			gSaveBlock2.filler_A8.bestBattleTowerWinStreak = 9999;
+		}
+		else
+		{
+			gSaveBlock2.filler_A8.bestBattleTowerWinStreak = gSaveBlock2.filler_A8.recordWinStreaks[0];
+		}
+	}
+	else
+	{
+		SetGameStat(GAME_STAT_BATTLE_TOWER_BEST_STREAK, gSaveBlock2.filler_A8.recordWinStreaks[1]);
+		if (gSaveBlock2.filler_A8.recordWinStreaks[1] > 9999)
+		{
+			gSaveBlock2.filler_A8.bestBattleTowerWinStreak = 9999;
+		}
+		else
+		{
+			gSaveBlock2.filler_A8.bestBattleTowerWinStreak = gSaveBlock2.filler_A8.recordWinStreaks[1];
+		}
+	}
+}
+#else
+__attribute__((naked))
+void sub_8135A3C(void)
+{
+    asm(".syntax unified\n\
+    push {r4-r6,lr}\n\
+    ldr r6, _08135A84 @ =gSaveBlock2\n\
+    ldr r1, _08135A88 @ =0x00000554\n\
+    adds r0, r6, r1\n\
+    ldrb r4, [r0]\n\
+    lsls r4, 31\n\
+    lsrs r4, 31\n\
+    adds r0, r4, 0\n\
+    bl sub_8135D3C\n\
+    lsls r0, 16\n\
+    lsrs r5, r0, 16\n\
+    lsls r4, 1\n\
+    movs r3, 0xAC\n\
+    lsls r3, 3\n\
+    adds r2, r6, r3\n\
+    adds r4, r2\n\
+    ldrh r0, [r4]\n\
+    cmp r0, r5\n\
+    bcs _08135A66\n\
+    strh r5, [r4]\n\
+_08135A66:\n\
+    ldr r0, _08135A8C @ =0x00000562\n\
+    adds r1, r6, r0\n\
+    ldrh r0, [r2]\n\
+    ldrh r3, [r1]\n\
+    cmp r0, r3\n\
+    bls _08135A94\n\
+    adds r5, r0, 0\n\
+    movs r0, 0x20\n\
+    adds r1, r5, 0\n\
+    bl SetGameStat\n\
+    ldr r1, _08135A90 @ =0x0000270f\n\
+    cmp r5, r1\n\
+    bhi _08135AA4\n\
+    b _08135AB4\n\
+    .align 2, 0\n\
+_08135A84: .4byte gSaveBlock2\n\
+_08135A88: .4byte 0x00000554\n\
+_08135A8C: .4byte 0x00000562\n\
+_08135A90: .4byte 0x0000270f\n\
+_08135A94:\n\
+    ldrh r5, [r1]\n\
+    movs r0, 0x20\n\
+    adds r1, r5, 0\n\
+    bl SetGameStat\n\
+    ldr r1, _08135AAC @ =0x0000270f\n\
+    cmp r5, r1\n\
+    bls _08135AB4\n\
+_08135AA4:\n\
+    ldr r2, _08135AB0 @ =0x00000572\n\
+    adds r0, r6, r2\n\
+    strh r1, [r0]\n\
+    b _08135ABA\n\
+    .align 2, 0\n\
+_08135AAC: .4byte 0x0000270f\n\
+_08135AB0: .4byte 0x00000572\n\
+_08135AB4:\n\
+    ldr r3, _08135AC0 @ =0x00000572\n\
+    adds r0, r6, r3\n\
+    strh r5, [r0]\n\
+_08135ABA:\n\
+    pop {r4-r6}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
+_08135AC0: .4byte 0x00000572\n\
+    .syntax divided\n");
+}
+#endif // NONMATCHING
+
+void sub_8135AC4(void)
+{
+	s32 i;
+	u8 trainerClass;
+	struct BattleTowerRecord *playerRecord = &gSaveBlock2.filler_A8.var_A8;
+	u8 battleTowerLevelType = gSaveBlock2.filler_A8.battleTowerLevelType;
+
+	if (gSaveBlock2.playerGender != 0)
+	{
+		trainerClass = gUnknown_08405E7E[(gSaveBlock2.playerTrainerId[0] + gSaveBlock2.playerTrainerId[1]
+								  + gSaveBlock2.playerTrainerId[2] + gSaveBlock2.playerTrainerId[3]) % 20u];
+	}
+	else
+	{
+		trainerClass = gUnknown_08405E60[(gSaveBlock2.playerTrainerId[0] + gSaveBlock2.playerTrainerId[1]
+								  + gSaveBlock2.playerTrainerId[2] + gSaveBlock2.playerTrainerId[3]) % 30u];
+	}
+
+	playerRecord->var_0 = battleTowerLevelType;
+	playerRecord->trainerClass = trainerClass;
+
+	copy_word_to_mem(playerRecord->trainerId, gSaveBlock2.playerTrainerId);
+	StringCopy8(playerRecord->name, gSaveBlock2.playerName);
+
+	playerRecord->var_2 = sub_8135D3C(battleTowerLevelType);
+
+	for (i = 0; i < 6; i++)
+	{
+		playerRecord->greeting.easyChat[i] = gSaveBlock1.easyChats.unk2B28[i];
+	}
+
+	for (i = 0; i < 3; i++)
+	{
+		sub_803AF78(&gUnknown_030042FC[gSaveBlock2.filler_A8.var_4BD[i]], &playerRecord->party[i]);
+	}
+
+	SetBattleTowerRecordChecksum(&gSaveBlock2.filler_A8.var_A8);
+	sub_8135A3C();
+}
+
+void sub_8135BA0(void)
+{
+	u8 battleTowerLevelType = gSaveBlock2.filler_A8.battleTowerLevelType;
+
+	if (gSpecialVar_0x8004 == 3 || gSpecialVar_0x8004 == 0)
+	{
+		if (gSaveBlock2.filler_A8.var_4B4[battleTowerLevelType] > 1
+			|| gSaveBlock2.filler_A8.var_4B0[battleTowerLevelType] > 1)
+		{
+			sub_8135AC4();
+		}
+	}
+
+	sub_8135CFC();
+
+	gSaveBlock2.filler_A8.var_4AD = gBattleOutcome;
+
+	if (gSpecialVar_0x8004 != 3)
+	{
+		gSaveBlock2.filler_A8.var_4AE[battleTowerLevelType] = gSpecialVar_0x8004;
+	}
+
+	VarSet(VAR_0x4000, 0);
+	gSaveBlock2.filler_A8.unk_554 = 1;
+	TrySavingData(EREADER_SAVE);
+}
+
+void sub_8135C38(void)
+{
+	DoSoftReset();
+}
+
+void ValidateBattleTowerRecordChecksums(void)
+{
+	u32 i;
+	s32 recordIndex;
+	struct BattleTowerRecord *record;
+	u32 checksum;
+
+	checksum = 0;
+	for (i = 0; i < (sizeof(struct BattleTowerRecord) / sizeof(u32)) - 1; i++)
+	{
+		checksum += ((u32 *)&gSaveBlock2.filler_A8.var_A8)[i];
+	}
+
+	if (gSaveBlock2.filler_A8.var_A8.checksum != checksum)
+	{
+		ClearBattleTowerRecord(&gSaveBlock2.filler_A8.var_A8);
+	}
+
+	for (recordIndex = 0; recordIndex < 5; recordIndex++)
+	{
+		record = &gSaveBlock2.filler_A8.var_14C[recordIndex];
+		checksum = 0;
+		for (i = 0; i < (sizeof(struct BattleTowerRecord) / sizeof(u32)) - 1; i++)
+		{
+			checksum += ((u32 *)record)[i];
+		}
+
+		if (gSaveBlock2.filler_A8.var_14C[recordIndex].checksum != checksum)
+		{
+			ClearBattleTowerRecord(&gSaveBlock2.filler_A8.var_14C[recordIndex]);
+		}
+	}
+}
+
+void SetBattleTowerRecordChecksum(struct BattleTowerRecord *record)
+{
+	u32 i;
+
+	record->checksum = 0;
+	for (i = 0; i < (sizeof(struct BattleTowerRecord) / sizeof(u32)) - 1; i++)
+	{
+		record->checksum += ((u32 *)record)[i];
+	}
+}
+
+void ClearBattleTowerRecord(struct BattleTowerRecord *record)
+{
+	u32 i;
+
+	for (i = 0; i < sizeof(struct BattleTowerRecord) / sizeof(u32); i++)
+	{
+		((u32 *)record)[i] = 0;
+	}
+}
+
+void sub_8135CFC(void)
+{
+	s32 i;
+
+	get_trainer_name(gSaveBlock2.filler_A8.defeatedByTrainerName);
+	gSaveBlock2.filler_A8.defeatedBySpecies = gBattleMons[1].species;
+	gSaveBlock2.filler_A8.firstMonSpecies = gBattleMons[0].species;
+
+	for (i = 0; i < POKEMON_NAME_LENGTH; i++)
+	{
+		gSaveBlock2.filler_A8.firstMonNickname[i] = gBattleMons[0].nickname[i];
+	}
+}
+
+u16 sub_8135D3C(u8 battleTowerLevelType)
+{
+	u16 var2 = ((gSaveBlock2.filler_A8.var_4B4[battleTowerLevelType] - 1) * 7 - 1) + gSaveBlock2.filler_A8.var_4B0[battleTowerLevelType];
+
+	if (var2 > 9999)
+	{
+		return 9999;
+	}
+
+	return var2;
+}
+
+#ifdef NONMATCHING
+void sub_8135D84(void)
+{
+    u16 prizeItem;
+    struct SaveBlock2 *saveBlock = &gSaveBlock2;
+    u8 battleTowerLevelType = saveBlock->filler_A8.battleTowerLevelType;
+
+    if (saveBlock->filler_A8.var_4B4[battleTowerLevelType] - 1 > 5)
+    {
+        prizeItem = LongStreakPrizes[Random() % 9];
+    }
+    else
+    {
+        prizeItem = ShortStreakPrizes[Random() % 6];
+    }
+
+    saveBlock->filler_A8.prizeItem = prizeItem;
+}
+#else
+__attribute__((naked))
+void sub_8135D84(void)
+{
+    asm(".syntax unified\n\
+    push {r4,r5,lr}\n\
+    ldr r5, _08135DB0 @ =gSaveBlock2\n\
+    ldr r1, _08135DB4 @ =0x00000554\n\
+    adds r0, r5, r1\n\
+    ldrb r0, [r0]\n\
+    lsls r0, 31\n\
+    lsrs r0, 31\n\
+    lsls r0, 1\n\
+    ldr r2, _08135DB8 @ =0x0000055c\n\
+    adds r1, r5, r2\n\
+    adds r0, r1\n\
+    ldrh r0, [r0]\n\
+    subs r0, 0x1\n\
+    cmp r0, 0x5\n\
+    ble _08135DC0\n\
+    bl Random\n\
+    ldr r4, _08135DBC @ =LongStreakPrizes\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+    movs r1, 0x9\n\
+    b _08135DCC\n\
+    .align 2, 0\n\
+_08135DB0: .4byte gSaveBlock2\n\
+_08135DB4: .4byte 0x00000554\n\
+_08135DB8: .4byte 0x0000055c\n\
+_08135DBC: .4byte LongStreakPrizes\n\
+_08135DC0:\n\
+    bl Random\n\
+    ldr r4, _08135DE8 @ =ShortStreakPrizes\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+    movs r1, 0x6\n\
+_08135DCC:\n\
+    bl __umodsi3\n\
+    lsls r0, 16\n\
+    lsrs r0, 15\n\
+    adds r0, r4\n\
+    ldrh r1, [r0]\n\
+    movs r2, 0xAD\n\
+    lsls r2, 3\n\
+    adds r0, r5, r2\n\
+    strh r1, [r0]\n\
+    pop {r4,r5}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
+_08135DE8: .4byte ShortStreakPrizes\n\
+    .syntax divided\n");
+}
+#endif // NONMATCHING
+
+void sub_8135DEC(void)
+{
+	u8 battleTowerLevelType = gSaveBlock2.filler_A8.battleTowerLevelType;
+
+	if (AddBagItem(gSaveBlock2.filler_A8.prizeItem, 1) == TRUE)
+	{
+		CopyItemName(gSaveBlock2.filler_A8.prizeItem, gStringVar1);
+		gScriptResult = 1;
+	}
+	else
+	{
+		gScriptResult = 0;
+		gSaveBlock2.filler_A8.var_4AE[battleTowerLevelType] = 6;
+	}
+}
+
+void sub_8135E50()
+{
+	s32 i;
+	u32 partyIndex;
+	struct Pokemon *pokemon;
+	u8 ribbonType;
+	u8 battleTowerLevelType = gSaveBlock2.filler_A8.battleTowerLevelType;
+
+	ribbonType = MON_DATA_WINNING_RIBBON;
+	if (battleTowerLevelType != 0)
+	{
+		ribbonType = MON_DATA_VICTORY_RIBBON;
+	}
+
+	gScriptResult = 0;
+
+	if (sub_8135D3C(battleTowerLevelType) > 55)
+	{
+		for (i = 0; i < 3; i++)
+		{
+			partyIndex = gSaveBlock2.filler_A8.var_4BD[i] - 1;
+			pokemon = &gPlayerParty[partyIndex];
+			if (!GetMonData(pokemon, ribbonType))
+			{
+				gScriptResult = 1;
+				SetMonData(pokemon, ribbonType, (u8 *)&gScriptResult);
+			}
+		}
+	}
+
+	if (gScriptResult != 0)
+	{
+		IncrementGameStat(GAME_STAT_RECEIVED_RIBBONS);
 	}
 }
