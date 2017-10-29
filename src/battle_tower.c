@@ -22,6 +22,7 @@
 #include "task.h"
 #include "text.h"
 #include "trainer.h"
+#include "tv.h"
 #include "vars.h"
 
 #include "data/battle_tower/trainers.h"
@@ -261,11 +262,11 @@ extern u8 gBattleOutcome;
 extern struct BattlePokemon gBattleMons[];
 
 extern void ValidateBattleTowerRecordChecksums(void);
-extern void sub_813601C(void);
 extern void sub_81349FC(u8);
-extern void sub_81360AC(struct BattleTowerEReaderTrainer *);
 extern void sub_8135A3C(void);
 extern void sub_8135CFC(void);
+static void ClearEReaderTrainer(struct BattleTowerEReaderTrainer *);
+//static void SetEReaderTrainerChecksum(struct BattleTowerEReaderTrainer *ereaderTrainer);
 static void SetBattleTowerRecordChecksum(struct BattleTowerRecord *);
 static void ClearBattleTowerRecord(struct BattleTowerRecord *);
 
@@ -2258,7 +2259,7 @@ void sub_8135668(void)
 	case 6:
 		if (gSaveBlock2.filler_A8.battleTowerTrainerId == 200)
 		{
-			sub_81360AC(&gSaveBlock2.filler_A8.ereaderTrainer);
+			ClearEReaderTrainer(&gSaveBlock2.filler_A8.ereaderTrainer);
 		}
 
 		if (gSaveBlock2.filler_A8.totalBattleTowerWins < 9999)
@@ -2757,3 +2758,281 @@ void sub_8135E50()
 		IncrementGameStat(GAME_STAT_RECEIVED_RIBBONS);
 	}
 }
+
+__attribute__((naked))
+void unref_sub_8135EE8()
+{
+	asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+	ldr r7, _08135F0C @ =gSaveBlock2 + 0x498\n\
+	ldr r0, _08135F10 @ =0xfffffb68\n\
+	adds r2, r7, r0\n\
+	ldrb r0, [r2, 0x8]\n\
+	cmp r0, 0\n\
+	beq _08135F18\n\
+	ldr r4, _08135F14 @ =gUnknown_08405E7E\n\
+	ldrb r0, [r2, 0xA]\n\
+	ldrb r1, [r2, 0xB]\n\
+	adds r0, r1\n\
+	ldrb r1, [r2, 0xC]\n\
+	adds r0, r1\n\
+	ldrb r1, [r2, 0xD]\n\
+	adds r0, r1\n\
+	movs r1, 0x14\n\
+	b _08135F2A\n\
+	.align 2, 0\n\
+_08135F0C: .4byte gSaveBlock2 + 0x498\n\
+_08135F10: .4byte 0xfffffb68\n\
+_08135F14: .4byte gUnknown_08405E7E\n\
+_08135F18:\n\
+	ldr r4, _08135FA8 @ =gUnknown_08405E60\n\
+	ldrb r0, [r2, 0xA]\n\
+	ldrb r1, [r2, 0xB]\n\
+	adds r0, r1\n\
+	ldrb r1, [r2, 0xC]\n\
+	adds r0, r1\n\
+	ldrb r1, [r2, 0xD]\n\
+	adds r0, r1\n\
+	movs r1, 0x1E\n\
+_08135F2A:\n\
+	bl __umodsi3\n\
+	adds r0, r4\n\
+	ldrb r0, [r0]\n\
+	strb r0, [r7, 0x1]\n\
+	adds r0, r7, 0\n\
+	adds r0, 0xC\n\
+	ldr r4, _08135FAC @ =gSaveBlock2 + 0xA\n\
+	adds r1, r4, 0\n\
+	bl copy_word_to_mem\n\
+	adds r0, r7, 0x4\n\
+	subs r4, 0xA\n\
+	adds r1, r4, 0\n\
+	bl StringCopy8\n\
+	movs r0, 0x1\n\
+	strh r0, [r7, 0x2]\n\
+	movs r5, 0x7\n\
+	movs r4, 0\n\
+	ldr r0, _08135FB0 @ =gSaveBlock1\n\
+	ldr r1, _08135FB4 @ =0x00002b28\n\
+	adds r6, r0, r1\n\
+	adds r3, r7, 0\n\
+	adds r3, 0x10\n\
+	adds r2, r7, 0\n\
+	adds r2, 0x28\n\
+	adds r1, r7, 0\n\
+	adds r1, 0x1C\n\
+_08135F64:\n\
+	ldrh r0, [r6]\n\
+	strh r0, [r3]\n\
+	strh r5, [r1]\n\
+	adds r0, r5, 0x6\n\
+	strh r0, [r2]\n\
+	adds r5, 0x1\n\
+	adds r6, 0x2\n\
+	adds r3, 0x2\n\
+	adds r2, 0x2\n\
+	adds r1, 0x2\n\
+	adds r4, 0x1\n\
+	cmp r4, 0x5\n\
+	ble _08135F64\n\
+	movs r4, 0\n\
+_08135F80:\n\
+	movs r0, 0x64\n\
+	muls r0, r4\n\
+	ldr r1, _08135FB8 @ =gPlayerParty\n\
+	adds r0, r1\n\
+	movs r1, 0x2C\n\
+	muls r1, r4\n\
+	adds r1, 0x34\n\
+	adds r1, r7, r1\n\
+	bl sub_803AF78\n\
+	adds r4, 0x1\n\
+	cmp r4, 0x2\n\
+	ble _08135F80\n\
+	adds r0, r7, 0\n\
+	bl SetEReaderTrainerChecksum\n\
+	pop {r4-r7}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.align 2, 0\n\
+_08135FA8: .4byte gUnknown_08405E60\n\
+_08135FAC: .4byte gSaveBlock2 + 0xA\n\
+_08135FB0: .4byte gSaveBlock1\n\
+_08135FB4: .4byte 0x00002b28\n\
+_08135FB8: .4byte gPlayerParty\n\
+.syntax divided\n");
+}
+
+u8 sub_8135FBC(void)
+{
+	return gTrainerClassToPicIndex[gSaveBlock2.filler_A8.ereaderTrainer.trainerClass];
+}
+
+u8 sub_8135FD8(void)
+{
+	return gTrainerClassToNameIndex[gSaveBlock2.filler_A8.ereaderTrainer.trainerClass];
+}
+
+void sub_8135FF4(u8 *text)
+{
+	s32 i;
+
+	for (i = 0; i < 7; i++)
+	{
+		text[i] = gSaveBlock2.filler_A8.ereaderTrainer.name[i];
+	}
+
+	text[i] = 0xFF;
+}
+
+void sub_813601C(void)
+{
+	u32 i;
+	u32 checksum;
+	struct BattleTowerEReaderTrainer *ereaderTrainer;
+
+	gScriptResult = 0;
+	ereaderTrainer = &gSaveBlock2.filler_A8.ereaderTrainer;
+
+	checksum = 0;
+	for (i = 0; i < sizeof(struct BattleTowerEReaderTrainer) / sizeof(u32) - 1; i++)
+	{
+		checksum |= ((u32 *)ereaderTrainer)[i];
+	}
+
+	if (checksum == 0)
+	{
+		gScriptResult = 1;
+		return;
+	}
+
+	checksum = 0;
+	for (i = 0; i < sizeof(struct BattleTowerEReaderTrainer) / sizeof(u32) - 1; i++)
+	{
+		checksum += ((u32 *)ereaderTrainer)[i];
+	}
+
+	if (gSaveBlock2.filler_A8.ereaderTrainer.checksum != checksum)
+	{
+		ClearEReaderTrainer(&gSaveBlock2.filler_A8.ereaderTrainer);
+		gScriptResult = 1;
+	}
+}
+
+void SetEReaderTrainerChecksum(struct BattleTowerEReaderTrainer *ereaderTrainer)
+{
+	s32 i;
+
+	ereaderTrainer->checksum = 0;
+	for (i = 0; i < sizeof(struct BattleTowerEReaderTrainer) / sizeof(u32) - 1; i++)
+	{
+		ereaderTrainer->checksum += ((u32 *)ereaderTrainer)[i];
+	}
+}
+
+void ClearEReaderTrainer(struct BattleTowerEReaderTrainer *ereaderTrainer)
+{
+	u32 i;
+
+	for (i = 0; i < sizeof(struct BattleTowerEReaderTrainer) / sizeof(u32); i++)
+	{
+		((u32 *)ereaderTrainer)[i] = 0;
+	}
+}
+
+void sub_81360C0(void)
+{
+	sub_813545C(gSaveBlock2.filler_A8.ereaderTrainer.greeting.easyChat);
+}
+
+void sub_81360D0(void)
+{
+	if (gBattleOutcome == BATTLE_DREW)
+	{
+		gStringVar4[0] = 0xFF;
+	}
+	else if (gBattleOutcome == BATTLE_WON)
+	{
+		sub_813545C(gSaveBlock2.filler_A8.ereaderTrainer.farewellPlayerWon.easyChat);
+	}
+	else
+	{
+		sub_813545C(gSaveBlock2.filler_A8.ereaderTrainer.farewellPlayerLost.easyChat);
+	}
+}
+
+void sub_813610C(void)
+{
+	s32 i;
+
+	for (i = 0; i < 2; i++)
+	{
+		if (gSaveBlock2.filler_A8.var_4AE[i] == 1)
+		{
+			sub_80BFD20();
+		}
+	}
+}
+
+
+#if GERMAN
+__attribute__((naked))
+u8 de_sub_81364AC(void)
+{
+	asm(".syntax unified\n\
+	push {lr}\n\
+	ldr r2, _DE_081364C0 @ =gSaveBlock2\n\
+	ldr r0, _DE_081364C4 @ =0x00000564\n\
+	adds r1, r2, r0\n\
+	ldrb r0, [r1]\n\
+	cmp r0, 0xC8\n\
+	bne _DE_081364CC\n\
+	ldr r1, _DE_081364C8 @ =0x00000499\n\
+	adds r0, r2, r1\n\
+	b _DE_081364F2\n\
+	.align 2, 0\n\
+_DE_081364C0: .4byte gSaveBlock2\n\
+_DE_081364C4: .4byte 0x00000564\n\
+_DE_081364C8: .4byte 0x00000499\n\
+_DE_081364CC:\n\
+	cmp r0, 0x63\n\
+	bhi _DE_081364E4\n\
+	ldr r2, _DE_081364E0 @ =gBattleTowerTrainers\n\
+	ldrb r1, [r1]\n\
+	lsls r0, r1, 1\n\
+	adds r0, r1\n\
+	lsls r0, 3\n\
+	adds r0, r2\n\
+	b _DE_081364F2\n\
+	.align 2, 0\n\
+_DE_081364E0: .4byte gBattleTowerTrainers\n\
+_DE_081364E4:\n\
+	ldrb r0, [r1]\n\
+	subs r0, 0x64\n\
+	movs r1, 0xA4\n\
+	muls r0, r1\n\
+	adds r0, r2\n\
+	adds r1, 0xA9\n\
+	adds r0, r1\n\
+_DE_081364F2:\n\
+	ldrb r0, [r0]\n\
+	pop {r1}\n\
+	bx r1\n\
+.syntax divided\n");
+}
+
+__attribute__((naked))
+u8 de_sub_81364F8(void)
+{
+	asm(".syntax unified\n\
+	ldr r0, _DE_08136504 @ =gSaveBlock2\n\
+	ldr r1, _DE_08136508 @ =0x00000499\n\
+	adds r0, r1\n\
+	ldrb r0, [r0]\n\
+	bx lr\n\
+	.align 2, 0\n\
+_DE_08136504: .4byte gSaveBlock2\n\
+_DE_08136508: .4byte 0x00000499\n\
+.syntax divided\n");
+}
+#endif

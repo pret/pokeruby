@@ -786,7 +786,12 @@ struct BattleTowerEReaderTrainer
     /*0x10*/struct {
         u16 easyChat[6];
     } greeting;
-    /*0x1C*/u8 filler_1C[0x18];
+    /*0x1C*/struct {
+        u16 easyChat[6];
+    } farewellPlayerLost;
+    /*0x28*/struct {
+        u16 easyChat[6];
+    } farewellPlayerWon;
     /*0x34*/struct UnknownPokemonStruct party[3];
     /*0xB8*/u32 checksum;
 };

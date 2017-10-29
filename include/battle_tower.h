@@ -92,5 +92,8 @@ void sub_813461C(u8 levelType);
 void sub_8134AC0(struct BattleTowerRecord *);
 u16 sub_8135D3C(u8);
 void sub_8135FF4(u8*);
+u8 sub_8135FBC(void);
+u8 sub_8135FD8(void);
+void sub_813601C(void);
 
 #endif // GUARD_BATTLE_TOWER_H

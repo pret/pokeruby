@@ -4,6 +4,7 @@
 #include "data2.h"
 #include "battle_811DA74.h"
 #include "battle_anim_813F0F4.h"
+#include "battle_tower.h"
 #include "link.h"
 #include "m4a.h"
 #include "main.h"
@@ -76,7 +77,6 @@ extern u8 sub_8046400();
 extern void sub_8032A08();
 extern void sub_8043DB0();
 extern void sub_8033160(void);
-extern u8 sub_8135FBC(void);
 extern u8 get_trainer_class_pic_index(void);
 extern void sub_80313A0(struct Sprite *);
 extern void sub_8032B4C(void);

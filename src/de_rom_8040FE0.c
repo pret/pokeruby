@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle.h"
+#include "battle_tower.h"
 
 #if GERMAN
 
@@ -59,7 +60,6 @@ u8 *de_sub_804100C(u8 gender) {
 u8 de_sub_81364AC(void);
 u8 get_trainer_class_name_index(void);
 u8 de_sub_81364F8(void);
-u8 sub_8135FD8(void);
 
 u8 *de_sub_8041024(s32 arg0, u32 arg1) {
     u8 nameIndex, trainerClass, gender;

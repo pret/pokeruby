@@ -1,5 +1,6 @@
 #include "global.h"
 #include "berry.h"
+#include "battle_tower.h"
 #include "easy_chat.h"
 #include "event_data.h"
 #include "mail_data.h"
@@ -27,7 +28,6 @@
 #endif
 
 extern void party_compaction(void);
-extern void sub_813601C(void);
 
 extern ScrCmdFunc gMysteryEventScriptCmdTable[];
 extern ScrCmdFunc gMysteryEventScriptCmdTableEnd[];
