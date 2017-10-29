@@ -314,7 +314,7 @@ void sub_803ADE8(struct Pokemon *mon, struct UnknownPokemonStruct *src)
     SetMonData(mon, MON_DATA_HP_EV, &src->hpEV);
     SetMonData(mon, MON_DATA_ATK_EV, &src->attackEV);
     SetMonData(mon, MON_DATA_DEF_EV, &src->defenseEV);
-    SetMonData(mon, MON_DATA_SPD_EV, &src->speedEV);
+    SetMonData(mon, MON_DATA_SPEED_EV, &src->speedEV);
     SetMonData(mon, MON_DATA_SPATK_EV, &src->spAttackEV);
     SetMonData(mon, MON_DATA_SPDEF_EV, &src->spDefenseEV);
     value = src->altAbility;
@@ -356,7 +356,7 @@ void sub_803AF78(struct Pokemon *mon, struct UnknownPokemonStruct *dest)
     dest->hpEV = GetMonData(mon, MON_DATA_HP_EV, NULL);
     dest->attackEV = GetMonData(mon, MON_DATA_ATK_EV, NULL);
     dest->defenseEV = GetMonData(mon, MON_DATA_DEF_EV, NULL);
-    dest->speedEV = GetMonData(mon, MON_DATA_SPD_EV, NULL);
+    dest->speedEV = GetMonData(mon, MON_DATA_SPEED_EV, NULL);
     dest->spAttackEV = GetMonData(mon, MON_DATA_SPATK_EV, NULL);
     dest->spDefenseEV = GetMonData(mon, MON_DATA_SPDEF_EV, NULL);
     dest->friendship = GetMonData(mon, MON_DATA_FRIENDSHIP, NULL);
@@ -415,7 +415,7 @@ void CalculateMonStats(struct Pokemon *mon)
     s32 defenseIV = GetMonData(mon, MON_DATA_DEF_IV, NULL);
     s32 defenseEV = GetMonData(mon, MON_DATA_DEF_EV, NULL);
     s32 speedIV = GetMonData(mon, MON_DATA_SPEED_IV, NULL);
-    s32 speedEV = GetMonData(mon, MON_DATA_SPD_EV, NULL);
+    s32 speedEV = GetMonData(mon, MON_DATA_SPEED_EV, NULL);
     s32 spAttackIV = GetMonData(mon, MON_DATA_SPATK_IV, NULL);
     s32 spAttackEV = GetMonData(mon, MON_DATA_SPATK_EV, NULL);
     s32 spDefenseIV = GetMonData(mon, MON_DATA_SPDEF_IV, NULL);

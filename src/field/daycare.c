@@ -13,7 +13,6 @@
 #include "moves.h"
 #include "trade.h"
 #include "strings2.h"
-#include "data/pokemon/egg_moves.h"
 #include "party_menu.h"
 #include "field_effect.h"
 #include "main.h"
@@ -32,6 +31,8 @@ IWRAM_DATA u16 gUnknown_03000500[4];
 static void sub_80417F4(struct DayCareMail *);
 static void sub_80420FC(struct Pokemon *, u16, struct DayCareData *);
 static u8 daycare_relationship_score(struct DayCareData *);
+
+#include "../data/pokemon/egg_moves.h"
 
 const u8 *const gUnknown_08209AC4[] = {
     DaycareText_GetAlongVeryWell,

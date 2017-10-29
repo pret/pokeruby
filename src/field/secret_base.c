@@ -72,54 +72,30 @@ const struct
 
 
 const u8 gUnknown_083D1374[] = {
-    MAP_ID_SECRET_BASE_RED_CAVE1,     0,
-    MAP_ID_SECRET_BASE_BROWN_CAVE1,   3,
-    MAP_ID_SECRET_BASE_RED_CAVE2,     0,
-    MAP_ID_SECRET_BASE_SHRUB1,        9,
-    MAP_ID_SECRET_BASE_RED_CAVE3,     0,
-    MAP_ID_SECRET_BASE_BROWN_CAVE1,   3,
-    MAP_ID_SECRET_BASE_RED_CAVE4,     0,
-    MAP_ID_SECRET_BASE_BROWN_CAVE2,  13,
-    MAP_ID_SECRET_BASE_BROWN_CAVE1,   0,
-    MAP_ID_SECRET_BASE_BLUE_CAVE1,    3,
-    MAP_ID_SECRET_BASE_BROWN_CAVE2,   0,
-    MAP_ID_SECRET_BASE_YELLOW_CAVE2,  2,
-    MAP_ID_SECRET_BASE_BROWN_CAVE3,   0,
-    MAP_ID_SECRET_BASE_BROWN_CAVE3,   4,
-    MAP_ID_SECRET_BASE_BROWN_CAVE4,   0,
-    MAP_ID_SECRET_BASE_BROWN_CAVE1,   2,
-    MAP_ID_SECRET_BASE_BLUE_CAVE1,    0,
-    MAP_ID_SECRET_BASE_BROWN_CAVE1,   3,
-    MAP_ID_SECRET_BASE_BLUE_CAVE2,    0,
-    MAP_ID_SECRET_BASE_BROWN_CAVE1,   2,
-    MAP_ID_SECRET_BASE_BLUE_CAVE3,    0,
-    MAP_ID_SECRET_BASE_YELLOW_CAVE1, 15,
-    MAP_ID_SECRET_BASE_BLUE_CAVE4,    0,
-    MAP_ID_SECRET_BASE_YELLOW_CAVE1, 14,
-    MAP_ID_SECRET_BASE_YELLOW_CAVE1,  0,
-    MAP_ID_SECRET_BASE_YELLOW_CAVE2,  3,
-    MAP_ID_SECRET_BASE_YELLOW_CAVE2,  0,
-    MAP_ID_SECRET_BASE_BLUE_CAVE2,    7,
-    MAP_ID_SECRET_BASE_YELLOW_CAVE3,  0,
-    MAP_ID_SECRET_BASE_YELLOW_CAVE1,  6,
-    MAP_ID_SECRET_BASE_YELLOW_CAVE4,  0,
-    MAP_ID_SECRET_BASE_SHRUB1,        9,
-    MAP_ID_SECRET_BASE_TREE1,         0,
-    MAP_ID_SECRET_BASE_BLUE_CAVE1,    3,
-    MAP_ID_SECRET_BASE_TREE2,         0,
-    MAP_ID_SECRET_BASE_SHRUB1,        6,
-    MAP_ID_SECRET_BASE_TREE3,         0,
-    MAP_ID_SECRET_BASE_YELLOW_CAVE3,  3,
-    MAP_ID_SECRET_BASE_TREE4,         0,
-    MAP_ID_SECRET_BASE_TREE1,        10,
-    MAP_ID_SECRET_BASE_SHRUB1,        0,
-    MAP_ID_SECRET_BASE_YELLOW_CAVE1,  3,
-    MAP_ID_SECRET_BASE_SHRUB2,        0,
-    MAP_ID_SECRET_BASE_BROWN_CAVE1,   2,
-    MAP_ID_SECRET_BASE_SHRUB3,        0,
-    MAP_ID_SECRET_BASE_BROWN_CAVE2,   8,
-    MAP_ID_SECRET_BASE_SHRUB4,        0,
-    MAP_ID_SECRET_BASE_YELLOW_CAVE2,  6
+    MAP_ID_SECRET_BASE_RED_CAVE1,     0,  1,  3,
+    MAP_ID_SECRET_BASE_RED_CAVE2,     0,  5,  9,
+    MAP_ID_SECRET_BASE_RED_CAVE3,     0,  1,  3,
+    MAP_ID_SECRET_BASE_RED_CAVE4,     0,  7, 13,
+    MAP_ID_SECRET_BASE_BROWN_CAVE1,   0,  2,  3,
+    MAP_ID_SECRET_BASE_BROWN_CAVE2,   0,  9,  2,
+    MAP_ID_SECRET_BASE_BROWN_CAVE3,   0, 13,  4,
+    MAP_ID_SECRET_BASE_BROWN_CAVE4,   0,  1,  2,
+    MAP_ID_SECRET_BASE_BLUE_CAVE1,    0,  1,  3,
+    MAP_ID_SECRET_BASE_BLUE_CAVE2,    0,  1,  2,
+    MAP_ID_SECRET_BASE_BLUE_CAVE3,    0,  3, 15,
+    MAP_ID_SECRET_BASE_BLUE_CAVE4,    0,  3, 14,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE1,  0,  9,  3,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE2,  0,  8,  7,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE3,  0,  3,  6,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE4,  0,  5,  9,
+    MAP_ID_SECRET_BASE_TREE1,         0,  2,  3,
+    MAP_ID_SECRET_BASE_TREE2,         0,  5,  6,
+    MAP_ID_SECRET_BASE_TREE3,         0, 15,  3,
+    MAP_ID_SECRET_BASE_TREE4,         0,  4, 10,
+    MAP_ID_SECRET_BASE_SHRUB1,        0,  3,  3,
+    MAP_ID_SECRET_BASE_SHRUB2,        0,  1,  2,
+    MAP_ID_SECRET_BASE_SHRUB3,        0,  7,  8,
+    MAP_ID_SECRET_BASE_SHRUB4,        0,  9,  6
 };
 
 const struct MenuAction2 gUnknown_083D13D4[] = {
@@ -455,17 +431,15 @@ void sub_80BBCCC(u8 flagIn)
     }
 }
 
-#ifdef NONMATCHING
-// The only nonmatching property of this function is that the implicit variables &gSaveBlock1 and &roomdecor[decidx]
-// are stored in the wrong registers.
 void sub_80BBDD0(void)
 {
     u8 *roomdecor;
     u8 *roomdecorpos;
-    u8 ndecor;
     u8 decidx;
     u8 objid = 0;
     u8 metatile;
+    u8 permission;
+    u8 ndecor;
     u16 curBase = VarGet(VAR_0x4054);
     if (!CurrentMapIsSecretBase()) {
         roomdecor = gSaveBlock1.playerRoomDecor;
@@ -477,262 +451,33 @@ void sub_80BBDD0(void)
         ndecor = 16;
     }
     for (decidx=0; decidx<ndecor; decidx++) {
-        if (roomdecor[decidx] != 0 && gDecorations[roomdecor[decidx]].permission == DECORPERM_SOLID_MAT)
-        {
-            for (objid=0; objid<gMapHeader.events->mapObjectCount; objid++) {
-                if (gMapHeader.events->mapObjects[objid].flagId == gSpecialVar_0x8004 + 0xAE)
-                    break;
-            }
-            if (objid == gMapHeader.events->mapObjectCount)
-                continue;
-            gSpecialVar_0x8006 = roomdecorpos[decidx] >> 4;
-            gSpecialVar_0x8007 = roomdecorpos[decidx] & 0xF;
-            metatile = MapGridGetMetatileBehaviorAt(gSpecialVar_0x8006 + 7, gSpecialVar_0x8007 + 7);
-            if (sub_80572D8(metatile) == TRUE || sub_80572EC(metatile) == TRUE) {
-                gScriptResult = gMapHeader.events->mapObjects[objid].graphicsId + VAR_0x3F20;
-                VarSet(gScriptResult, gDecorations[roomdecor[decidx]].tiles[0]);
-                gScriptResult = gMapHeader.events->mapObjects[objid].localId;
-                FlagClear(gSpecialVar_0x8004 + 0xAE);
-                show_sprite(gScriptResult, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
-                sub_805C0F8(gScriptResult, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, gSpecialVar_0x8006, gSpecialVar_0x8007);
-                sub_805C78C(gScriptResult, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
-                gSpecialVar_0x8004 ++;
+        if (roomdecor[decidx] != DECOR_NONE) {
+            permission = gDecorations[roomdecor[decidx]].permission;
+            if (permission == DECORPERM_SOLID_MAT)
+            {
+                for (objid=0; objid<gMapHeader.events->mapObjectCount; objid++) {
+                    if (gMapHeader.events->mapObjects[objid].flagId == gSpecialVar_0x8004 + 0xAE)
+                        break;
+                }
+                if (objid == gMapHeader.events->mapObjectCount)
+                    continue;
+                gSpecialVar_0x8006 = roomdecorpos[decidx] >> 4;
+                gSpecialVar_0x8007 = roomdecorpos[decidx] & 0xF;
+                metatile = MapGridGetMetatileBehaviorAt(gSpecialVar_0x8006 + 7, gSpecialVar_0x8007 + 7);
+                if (sub_80572D8(metatile) == TRUE || sub_80572EC(metatile) == TRUE) {
+                    gScriptResult = gMapHeader.events->mapObjects[objid].graphicsId + VAR_0x3F20;
+                    VarSet(gScriptResult, gDecorations[roomdecor[decidx]].tiles[0]);
+                    gScriptResult = gMapHeader.events->mapObjects[objid].localId;
+                    FlagClear(gSpecialVar_0x8004 + 0xAE);
+                    show_sprite(gScriptResult, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
+                    sub_805C0F8(gScriptResult, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, gSpecialVar_0x8006, gSpecialVar_0x8007);
+                    sub_805C78C(gScriptResult, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
+                    gSpecialVar_0x8004 ++;
+                }
             }
         }
     }
 }
-#else
-__attribute__((naked))
-void sub_80BBDD0(void)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x14\n\
-    ldr r0, _080BBE00 @ =0x00004054\n\
-    bl VarGet\n\
-    lsls r0, 16\n\
-    lsrs r4, r0, 16\n\
-    bl CurrentMapIsSecretBase\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    bne _080BBE08\n\
-    ldr r0, _080BBE04 @ =gSaveBlock1 + 0x2688\n\
-    str r0, [sp, 0x4]\n\
-    adds r0, 0xC\n\
-    str r0, [sp, 0x8]\n\
-    movs r1, 0xC\n\
-    str r1, [sp, 0xC]\n\
-    b _080BBE1E\n\
-    .align 2, 0\n\
-_080BBE00: .4byte 0x00004054\n\
-_080BBE04: .4byte gSaveBlock1 + 0x2688\n\
-_080BBE08:\n\
-    lsls r1, r4, 2\n\
-    adds r1, r4\n\
-    lsls r1, 5\n\
-    ldr r0, _080BBF7C @ =gSaveBlock1 + 0x1A1A\n\
-    adds r2, r1, r0\n\
-    str r2, [sp, 0x4]\n\
-    adds r0, 0x10\n\
-    adds r1, r0\n\
-    str r1, [sp, 0x8]\n\
-    movs r3, 0x10\n\
-    str r3, [sp, 0xC]\n\
-_080BBE1E:\n\
-    movs r6, 0\n\
-    ldr r4, [sp, 0xC]\n\
-    cmp r6, r4\n\
-    bcc _080BBE28\n\
-    b _080BBF6C\n\
-_080BBE28:\n\
-    ldr r5, _080BBF80 @ =gSaveBlock1\n\
-    mov r10, r5\n\
-_080BBE2C:\n\
-    ldr r1, [sp, 0x4]\n\
-    adds r0, r1, r6\n\
-    ldrb r1, [r0]\n\
-    mov r9, r0\n\
-    adds r2, r6, 0x1\n\
-    str r2, [sp, 0x10]\n\
-    cmp r1, 0\n\
-    bne _080BBE3E\n\
-    b _080BBF5E\n\
-_080BBE3E:\n\
-    ldrb r0, [r0]\n\
-    lsls r0, 5\n\
-    ldr r3, _080BBF84 @ =gDecorations\n\
-    adds r0, r3\n\
-    ldrb r0, [r0, 0x11]\n\
-    cmp r0, 0x4\n\
-    beq _080BBE4E\n\
-    b _080BBF5E\n\
-_080BBE4E:\n\
-    movs r5, 0\n\
-    ldr r0, _080BBF88 @ =gMapHeader\n\
-    ldr r2, [r0, 0x4]\n\
-    ldrb r3, [r2]\n\
-    mov r8, r0\n\
-    cmp r5, r3\n\
-    bcs _080BBE8E\n\
-    ldr r0, [r2, 0x4]\n\
-    ldrh r1, [r0, 0x14]\n\
-    ldr r4, _080BBF8C @ =gSpecialVar_0x8004\n\
-    ldrh r0, [r4]\n\
-    adds r0, 0xAE\n\
-    adds r7, r4, 0\n\
-    cmp r1, r0\n\
-    beq _080BBE8E\n\
-    adds r4, r2, 0\n\
-    adds r2, r3, 0\n\
-_080BBE70:\n\
-    adds r0, r5, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    cmp r5, r2\n\
-    bcs _080BBE8E\n\
-    ldr r1, [r4, 0x4]\n\
-    lsls r0, r5, 1\n\
-    adds r0, r5\n\
-    lsls r0, 3\n\
-    adds r0, r1\n\
-    ldrh r1, [r0, 0x14]\n\
-    ldrh r0, [r7]\n\
-    adds r0, 0xAE\n\
-    cmp r1, r0\n\
-    bne _080BBE70\n\
-_080BBE8E:\n\
-    mov r1, r8\n\
-    ldr r0, [r1, 0x4]\n\
-    ldrb r0, [r0]\n\
-    cmp r5, r0\n\
-    beq _080BBF5E\n\
-    ldr r7, _080BBF90 @ =gSpecialVar_0x8006\n\
-    ldr r2, [sp, 0x8]\n\
-    adds r1, r2, r6\n\
-    ldrb r0, [r1]\n\
-    lsrs r0, 4\n\
-    strh r0, [r7]\n\
-    ldr r6, _080BBF94 @ =gSpecialVar_0x8007\n\
-    ldrb r1, [r1]\n\
-    movs r0, 0xF\n\
-    ands r0, r1\n\
-    strh r0, [r6]\n\
-    ldrh r0, [r7]\n\
-    adds r0, 0x7\n\
-    ldrh r1, [r6]\n\
-    adds r1, 0x7\n\
-    bl MapGridGetMetatileBehaviorAt\n\
-    lsls r0, 24\n\
-    lsrs r4, r0, 24\n\
-    adds r0, r4, 0\n\
-    bl sub_80572D8\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x1\n\
-    beq _080BBEDA\n\
-    adds r0, r4, 0\n\
-    bl sub_80572EC\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x1\n\
-    bne _080BBF5E\n\
-_080BBEDA:\n\
-    mov r3, r8\n\
-    ldr r0, [r3, 0x4]\n\
-    ldr r1, [r0, 0x4]\n\
-    lsls r4, r5, 1\n\
-    adds r4, r5\n\
-    lsls r4, 3\n\
-    adds r1, r4, r1\n\
-    ldr r5, _080BBF98 @ =0x00003f20\n\
-    adds r0, r5, 0\n\
-    ldrb r1, [r1, 0x1]\n\
-    adds r0, r1\n\
-    ldr r1, _080BBF9C @ =gScriptResult\n\
-    strh r0, [r1]\n\
-    ldrh r0, [r1]\n\
-    mov r2, r9\n\
-    ldrb r1, [r2]\n\
-    lsls r1, 5\n\
-    ldr r3, _080BBFA0 @ =gDecorations + 0x1C\n\
-    adds r1, r3\n\
-    ldr r1, [r1]\n\
-    ldrh r1, [r1]\n\
-    bl VarSet\n\
-    mov r5, r8\n\
-    ldr r0, [r5, 0x4]\n\
-    ldr r0, [r0, 0x4]\n\
-    adds r4, r0\n\
-    ldrb r0, [r4]\n\
-    ldr r1, _080BBF9C @ =gScriptResult\n\
-    strh r0, [r1]\n\
-    ldr r2, _080BBF8C @ =gSpecialVar_0x8004\n\
-    ldrh r0, [r2]\n\
-    adds r0, 0xAE\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    bl FlagClear\n\
-    ldr r3, _080BBF9C @ =gScriptResult\n\
-    ldrb r0, [r3]\n\
-    mov r4, r10\n\
-    ldrb r1, [r4, 0x5]\n\
-    ldrb r2, [r4, 0x4]\n\
-    bl show_sprite\n\
-    ldr r5, _080BBF9C @ =gScriptResult\n\
-    ldrb r0, [r5]\n\
-    ldrb r1, [r4, 0x5]\n\
-    ldrb r2, [r4, 0x4]\n\
-    movs r4, 0\n\
-    ldrsh r3, [r7, r4]\n\
-    movs r5, 0\n\
-    ldrsh r4, [r6, r5]\n\
-    str r4, [sp]\n\
-    bl sub_805C0F8\n\
-    ldr r1, _080BBF9C @ =gScriptResult\n\
-    ldrb r0, [r1]\n\
-    mov r2, r10\n\
-    ldrb r1, [r2, 0x5]\n\
-    ldrb r2, [r2, 0x4]\n\
-    bl sub_805C78C\n\
-    ldr r3, _080BBF8C @ =gSpecialVar_0x8004\n\
-    ldrh r0, [r3]\n\
-    adds r0, 0x1\n\
-    strh r0, [r3]\n\
-_080BBF5E:\n\
-    ldr r4, [sp, 0x10]\n\
-    lsls r0, r4, 24\n\
-    lsrs r6, r0, 24\n\
-    ldr r5, [sp, 0xC]\n\
-    cmp r6, r5\n\
-    bcs _080BBF6C\n\
-    b _080BBE2C\n\
-_080BBF6C:\n\
-    add sp, 0x14\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_080BBF7C: .4byte gSaveBlock1 + 0x1A1A\n\
-_080BBF80: .4byte gSaveBlock1\n\
-_080BBF84: .4byte gDecorations\n\
-_080BBF88: .4byte gMapHeader\n\
-_080BBF8C: .4byte gSpecialVar_0x8004\n\
-_080BBF90: .4byte gSpecialVar_0x8006\n\
-_080BBF94: .4byte gSpecialVar_0x8007\n\
-_080BBF98: .4byte 0x00003f20\n\
-_080BBF9C: .4byte gScriptResult\n\
-_080BBFA0: .4byte gDecorations + 0x1C\n\
-.syntax divided\n");
-}
-#endif
 
 void sub_80BBFA4(void)
 {
@@ -851,7 +596,7 @@ u8 sub_80BC298(struct Pokemon *mon) { // 80bc298
     u16 evsum = GetMonData(mon, MON_DATA_HP_EV);
     evsum += GetMonData(mon, MON_DATA_ATK_EV);
     evsum += GetMonData(mon, MON_DATA_DEF_EV);
-    evsum += GetMonData(mon, MON_DATA_SPD_EV);
+    evsum += GetMonData(mon, MON_DATA_SPEED_EV);
     evsum += GetMonData(mon, MON_DATA_SPATK_EV);
     evsum += GetMonData(mon, MON_DATA_SPDEF_EV);
     return (u8)(evsum / 6);
