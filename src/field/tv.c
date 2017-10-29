@@ -674,12 +674,12 @@ void sub_80BE320(void)
     bravoTrainerTower->var00 = TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE;
     bravoTrainerTower->var01 = 1;
     StringCopy(bravoTrainerTower->trainerName, gSaveBlock2.playerName);
-    StringCopy(bravoTrainerTower->pokemonName, gSaveBlock2.filler_A8.defeatedByTrainerName);
-    bravoTrainerTower->species = gSaveBlock2.filler_A8.firstMonSpecies;
-    bravoTrainerTower->defeatedSpecies = gSaveBlock2.filler_A8.defeatedBySpecies;
-    bravoTrainerTower->var16 = sub_8135D3C(gSaveBlock2.filler_A8.lastStreakLevelType);
-    bravoTrainerTower->var1c = gSaveBlock2.filler_A8.var_4AD;
-    if (gSaveBlock2.filler_A8.lastStreakLevelType == 0)
+    StringCopy(bravoTrainerTower->pokemonName, gSaveBlock2.battleTower.defeatedByTrainerName);
+    bravoTrainerTower->species = gSaveBlock2.battleTower.firstMonSpecies;
+    bravoTrainerTower->defeatedSpecies = gSaveBlock2.battleTower.defeatedBySpecies;
+    bravoTrainerTower->var16 = sub_8135D3C(gSaveBlock2.battleTower.lastStreakLevelType);
+    bravoTrainerTower->var1c = gSaveBlock2.battleTower.battleOutcome;
+    if (gSaveBlock2.battleTower.lastStreakLevelType == 0)
         bravoTrainerTower->btLevel = 50;
     else
         bravoTrainerTower->btLevel = 100;

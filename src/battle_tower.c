@@ -280,7 +280,7 @@ void sub_8134548(void)
 
 	for (levelType = 0; levelType < 2; levelType++)
 	{
-		switch (gSaveBlock2.filler_A8.var_4AE[levelType])
+		switch (gSaveBlock2.battleTower.var_4AE[levelType])
 		{
 		case 0:
 		default:
@@ -313,8 +313,8 @@ void sub_8134548(void)
 		}
 	}
 
-	if ((gSaveBlock2.filler_A8.var_4AE[0] == 3 || gSaveBlock2.filler_A8.var_4AE[0] == 6)
-		&& (gSaveBlock2.filler_A8.var_4AE[1] == 3 || gSaveBlock2.filler_A8.var_4AE[1] == 6))
+	if ((gSaveBlock2.battleTower.var_4AE[0] == 3 || gSaveBlock2.battleTower.var_4AE[0] == 6)
+		&& (gSaveBlock2.battleTower.var_4AE[1] == 3 || gSaveBlock2.battleTower.var_4AE[1] == 6))
 	{
 		VarSet(VAR_0x4000, 5);
 	}
@@ -324,9 +324,9 @@ void sub_8134548(void)
 
 void sub_813461C(u8 levelType)
 {
-	gSaveBlock2.filler_A8.var_4AE[levelType] = 0;
-	gSaveBlock2.filler_A8.var_4B0[levelType] = 1;
-	gSaveBlock2.filler_A8.var_4B4[levelType] = 1;
+	gSaveBlock2.battleTower.var_4AE[levelType] = 0;
+	gSaveBlock2.battleTower.curChallengeWins[levelType] = 1;
+	gSaveBlock2.battleTower.curStreakChallengesCompleted[levelType] = 1;
 }
 
 // u8 sub_8134650(u8 levelType, u16 b)
@@ -337,7 +337,7 @@ void sub_813461C(u8 levelType)
 
 // 	sub_813601C();
 
-// 	if (gScriptResult || gSaveBlock2.filler_A8.ereaderTrainer.unk2 != b)
+// 	if (gScriptResult || gSaveBlock2.battleTower.ereaderTrainer.unk2 != b)
 // 	{
 // 		return 0;
 // 	}
@@ -350,12 +350,12 @@ void sub_813461C(u8 levelType)
 
 // 	for (i = 0; i < 3; i++)
 // 	{
-// 		if (!gSaveBlock2.filler_A8.ereaderTrainer.party[i].level != trainerTeamLevel)
+// 		if (!gSaveBlock2.battleTower.ereaderTrainer.party[i].level != trainerTeamLevel)
 // 		{
 // 			return 0;
 // 		}
 
-// 		CheckMonBattleTowerBanlist(gSaveBlock2.filler_A8.ereaderTrainer.party[i].unk0, gSaveBlock2.filler_A8.ereaderTrainer.party[i].unk2, 1, levelType, &numValid);
+// 		CheckMonBattleTowerBanlist(gSaveBlock2.battleTower.ereaderTrainer.party[i].unk0, gSaveBlock2.battleTower.ereaderTrainer.party[i].unk2, 1, levelType, &numValid);
 // 	}
 
 // 	return numValid == 3;
@@ -456,11 +456,11 @@ _081346F0: .4byte 0x000004cc\n\
 // 	s32 i;
 // 	u32 j;
 // 	u32 arr[4];
-// 	u16 var2 = sub_8135D3C(gSaveBlock2.filler_A8.battleTowerLevelType);
+// 	u16 var2 = sub_8135D3C(gSaveBlock2.battleTower.battleTowerLevelType);
 
-// 	if (sub_8134650(gSaveBlock2.filler_A8.battleTowerLevelType))
+// 	if (sub_8134650(gSaveBlock2.battleTower.battleTowerLevelType))
 // 	{
-// 		gSaveBlock2.filler_A8.battleTowerTrainerId = 0xC8;
+// 		gSaveBlock2.battleTower.battleTowerTrainerId = 0xC8;
 // 		return TRUE;
 // 	}
 
@@ -470,8 +470,8 @@ _081346F0: .4byte 0x000004cc\n\
 // 		u32 var_add = 0;
 // 		for (j = 0; j < 40; j++)
 // 		{
-// 			var_or |= gSaveBlock2.filler_A8.var_0A4[i][j];
-// 			var_add += gSaveBlock2.filler_A8.var_0A4[i][j];
+// 			var_or |= gSaveBlock2.battleTower.var_0A4[i][j];
+// 			var_add += gSaveBlock2.battleTower.var_0A4[i][j];
 // 		}
 
 		
@@ -614,27 +614,27 @@ _081347F4: .4byte 0x00000564\n\
 
 // void sub_81347F8(void)
 // {
-// 	bool8 levelType = gSaveBlock2.filler_A8.battleTowerLevelType;
+// 	bool8 levelType = gSaveBlock2.battleTower.battleTowerLevelType;
 // 	if (sub_81346F4())
 // 	{
-// 		sub_81349FC(gSaveBlock2.filler_A8.battleTowerTrainerId);
-// 		gSaveBlock2.filler_A8.var_4C1[gSaveBlock2.filler_A8.var_4B0[levelType]] = gSaveBlock2.filler_A8.battleTowerTrainerId;
+// 		sub_81349FC(gSaveBlock2.battleTower.battleTowerTrainerId);
+// 		gSaveBlock2.battleTower.var_4C1[gSaveBlock2.battleTower.curChallengeWins[levelType]] = gSaveBlock2.battleTower.battleTowerTrainerId;
 // 	}
 // 	else
 // 	{
 // 		u16 var1;
 
-// 		if (gSaveBlock2.filler_A8.var_4B4[levelType] > 7)
+// 		if (gSaveBlock2.battleTower.curStreakChallengesCompleted[levelType] > 7)
 // 		{
 // 			while (1)
 // 			{
 // 				s32 i;
 // 				u32 temp = ((Random() & 0xFF) * 30) >> 8;
 // 				var1 = temp + 70;
-// 				for (i = 0; i < gSaveBlock2.filler_A8.var_4B0[levelType] - 1 && var1 != gSaveBlock2.filler_A8.var_4C1[i]; i++) // TODO: [i + 1]???
+// 				for (i = 0; i < gSaveBlock2.battleTower.curChallengeWins[levelType] - 1 && var1 != gSaveBlock2.battleTower.var_4C1[i]; i++) // TODO: [i + 1]???
 // 				{ }
 
-// 				if (i == gSaveBlock2.filler_A8.var_4B0[levelType] - 1)
+// 				if (i == gSaveBlock2.battleTower.curChallengeWins[levelType] - 1)
 // 				{
 // 					break;
 // 				}
@@ -642,18 +642,18 @@ _081347F4: .4byte 0x00000564\n\
 // 		}
 // 		else
 // 		{
-// 			if (gSaveBlock2.filler_A8.var_4B0[levelType] == 7)
+// 			if (gSaveBlock2.battleTower.curChallengeWins[levelType] == 7)
 // 			{
 // 				while (1)
 // 				{
 // 					s32 i;
 // 					u32 temp = ((Random() & 0xFF) * 5);
-// 					u32 temp2 = (((gSaveBlock2.filler_A8.var_4B4[levelType] - 1) * 10) + 20);
+// 					u32 temp2 = (((gSaveBlock2.battleTower.curStreakChallengesCompleted[levelType] - 1) * 10) + 20);
 // 					var1 = temp / 128 + temp2;
-// 					for (i = 0; i < gSaveBlock2.filler_A8.var_4B0[levelType] - 1 && gSaveBlock2.filler_A8.var_4C1[i] != var1; i++) // TODO: [i + 1]????
+// 					for (i = 0; i < gSaveBlock2.battleTower.curChallengeWins[levelType] - 1 && gSaveBlock2.battleTower.var_4C1[i] != var1; i++) // TODO: [i + 1]????
 // 					{ }
 
-// 					if (i == gSaveBlock2.filler_A8.var_4B0[levelType] - 1)
+// 					if (i == gSaveBlock2.battleTower.curChallengeWins[levelType] - 1)
 // 					{
 // 						break;
 // 					}
@@ -665,12 +665,12 @@ _081347F4: .4byte 0x00000564\n\
 // 				{
 // 					s32 i;
 // 					u32 temp = ((Random() & 0xFF) * 320);
-// 					u32 temp2 = ((gSaveBlock2.filler_A8.var_4B4[levelType] - 1) * 10);
+// 					u32 temp2 = ((gSaveBlock2.battleTower.curStreakChallengesCompleted[levelType] - 1) * 10);
 // 					var1 = temp + temp2;
-// 					for (i = 0; i < gSaveBlock2.filler_A8.var_4B0[levelType] - 1 && gSaveBlock2.filler_A8.var_4C1[i] != var1; i++)
+// 					for (i = 0; i < gSaveBlock2.battleTower.curChallengeWins[levelType] - 1 && gSaveBlock2.battleTower.var_4C1[i] != var1; i++)
 // 					{ }
 
-// 					if (i == gSaveBlock2.filler_A8.var_4B0[levelType] - 1)
+// 					if (i == gSaveBlock2.battleTower.curChallengeWins[levelType] - 1)
 // 					{
 // 						break;
 // 					}
@@ -678,12 +678,12 @@ _081347F4: .4byte 0x00000564\n\
 // 			}
 // 		}
 
-// 		gSaveBlock2.filler_A8.battleTowerTrainerId = var1;
-// 		sub_81349FC(gSaveBlock2.filler_A8.battleTowerTrainerId);
+// 		gSaveBlock2.battleTower.battleTowerTrainerId = var1;
+// 		sub_81349FC(gSaveBlock2.battleTower.battleTowerTrainerId);
 
-// 		if (gSaveBlock2.filler_A8.var_4B0[levelType] < 7)
+// 		if (gSaveBlock2.battleTower.curChallengeWins[levelType] < 7)
 // 		{
-// 			gSaveBlock2.filler_A8.var_4C1[gSaveBlock2.filler_A8.var_4B0[levelType]] = gSaveBlock2.filler_A8.battleTowerTrainerId;
+// 			gSaveBlock2.battleTower.var_4C1[gSaveBlock2.battleTower.curChallengeWins[levelType]] = gSaveBlock2.battleTower.battleTowerTrainerId;
 // 		}
 // 	}
 // }
@@ -963,11 +963,11 @@ void sub_81349FC(u8 trainerIndex)
 	}
 	else if (trainerIndex < 200)
 	{
-		trainerClass = gSaveBlock2.filler_A8.var_14C[trainerIndex - 100].trainerClass;
+		trainerClass = gSaveBlock2.battleTower.records[trainerIndex - 100].trainerClass;
 	}
 	else
 	{
-		trainerClass = gSaveBlock2.filler_A8.ereaderTrainer.trainerClass;
+		trainerClass = gSaveBlock2.battleTower.ereaderTrainer.trainerClass;
 	}
 
 	for (i = 0; i < 30 && gUnknown_08405E60[i] != trainerClass; i++);
@@ -1004,10 +1004,10 @@ void sub_8134AB4()
 // 	for (i = 0; i < 5; i++)
 // 	{
 // 		k = 0;
-// 		for (j = 0; j < 4 && gSaveBlock2.filler_A8.var_14C[i].var_C[i] != record->var_C[j]; j++);
+// 		for (j = 0; j < 4 && gSaveBlock2.battleTower.records[i].var_C[i] != record->var_C[j]; j++);
 // 		if (j == 4)
 // 		{
-// 			for (k = 0; k < 7 && gSaveBlock2.filler_A8.var_14C[i].var_8 == record->var_8; k++)
+// 			for (k = 0; k < 7 && gSaveBlock2.battleTower.records[i].var_8 == record->var_8; k++)
 // 			{
 // 				if (record->var_8 == 0xFF)
 // 				{
@@ -1025,40 +1025,40 @@ void sub_8134AB4()
 
 // 	if (i < 5)
 // 	{
-// 		gSaveBlock2.filler_A8.var_14C[i] = *record;
+// 		gSaveBlock2.battleTower.records[i] = *record;
 // 		return;
 // 	}
 
 // 	i = 0;
 // 	while (i < 5)
 // 	{
-// 		if (gSaveBlock2.filler_A8.var_14C[i].var_2 == 0)
+// 		if (gSaveBlock2.battleTower.records[i].var_2 == 0)
 // 		{
 // 			if (i > 4)
 // 			{
 // 				break;
 // 			}
 
-// 			gSaveBlock2.filler_A8.var_14C[i] = *record;
+// 			gSaveBlock2.battleTower.records[i] = *record;
 // 			return;
 // 		}
 
 // 		i++;
 // 	}
 
-// 	var1[0] = gSaveBlock2.filler_A8.var_14C[0].var_2;
+// 	var1[0] = gSaveBlock2.battleTower.records[0].var_2;
 // 	var2[0] = 0;
 // 	l++;
 
 // 	for (i = 1; i < 5; i++)
 // 	{
-// 		for (j = 0; gSaveBlock2.filler_A8.var_14C[i].var_2 <= var1[0] && j < l; j++)
+// 		for (j = 0; gSaveBlock2.battleTower.records[i].var_2 <= var1[0] && j < l; j++)
 // 		{
-// 			if (gSaveBlock2.filler_A8.var_14C[i].var_2 < var1[0])
+// 			if (gSaveBlock2.battleTower.records[i].var_2 < var1[0])
 // 			{
 // 				j = 0;
 // 				l = 1;
-// 				var1[0] = gSaveBlock2.filler_A8.var_14C[i].var_2;
+// 				var1[0] = gSaveBlock2.battleTower.records[i].var_2;
 // 				var2[0] = i;
 // 				break;
 // 			}
@@ -1066,13 +1066,13 @@ void sub_8134AB4()
 
 // 		if (j == l)
 // 		{
-// 			var1[l] = gSaveBlock2.filler_A8.var_14C[i].var_2;
+// 			var1[l] = gSaveBlock2.battleTower.records[i].var_2;
 // 			var2[l] = i;
 // 			l++;
 // 		}
 // 	}
 
-// 	gSaveBlock2.filler_A8.var_14C[var2[(Random() % l)]] = *record;
+// 	gSaveBlock2.battleTower.records[var2[(Random() % l)]] = *record;
 // }
 
 __attribute__((naked))
@@ -1313,33 +1313,33 @@ _08134C70: .4byte gSaveBlock2\n\
 
 u8 get_trainer_class_pic_index(void)
 {
-	if (gSaveBlock2.filler_A8.battleTowerTrainerId == 200)
+	if (gSaveBlock2.battleTower.battleTowerTrainerId == 200)
 	{
-		return gTrainerClassToPicIndex[gSaveBlock2.filler_A8.ereaderTrainer.trainerClass];
+		return gTrainerClassToPicIndex[gSaveBlock2.battleTower.ereaderTrainer.trainerClass];
 	}
-	else if (gSaveBlock2.filler_A8.battleTowerTrainerId < 100)
+	else if (gSaveBlock2.battleTower.battleTowerTrainerId < 100)
 	{
-		return gTrainerClassToPicIndex[gBattleTowerTrainers[gSaveBlock2.filler_A8.battleTowerTrainerId].trainerClass];
+		return gTrainerClassToPicIndex[gBattleTowerTrainers[gSaveBlock2.battleTower.battleTowerTrainerId].trainerClass];
 	}
 	else
 	{
-		return gTrainerClassToPicIndex[gSaveBlock2.filler_A8.var_14C[gSaveBlock2.filler_A8.battleTowerTrainerId - 100].trainerClass];
+		return gTrainerClassToPicIndex[gSaveBlock2.battleTower.records[gSaveBlock2.battleTower.battleTowerTrainerId - 100].trainerClass];
 	}
 }
 
 u8 get_trainer_class_name_index(void)
 {
-	if (gSaveBlock2.filler_A8.battleTowerTrainerId == 200)
+	if (gSaveBlock2.battleTower.battleTowerTrainerId == 200)
 	{
-		return gTrainerClassToNameIndex[gSaveBlock2.filler_A8.ereaderTrainer.trainerClass];
+		return gTrainerClassToNameIndex[gSaveBlock2.battleTower.ereaderTrainer.trainerClass];
 	}
-	else if (gSaveBlock2.filler_A8.battleTowerTrainerId >= 100)
+	else if (gSaveBlock2.battleTower.battleTowerTrainerId >= 100)
 	{
-		return gTrainerClassToNameIndex[gSaveBlock2.filler_A8.var_14C[gSaveBlock2.filler_A8.battleTowerTrainerId - 100].trainerClass];
+		return gTrainerClassToNameIndex[gSaveBlock2.battleTower.records[gSaveBlock2.battleTower.battleTowerTrainerId - 100].trainerClass];
 	}
 	else
 	{
-		return gTrainerClassToNameIndex[gBattleTowerTrainers[gSaveBlock2.filler_A8.battleTowerTrainerId].trainerClass];
+		return gTrainerClassToNameIndex[gBattleTowerTrainers[gSaveBlock2.battleTower.battleTowerTrainerId].trainerClass];
 	}
 }
 
@@ -1347,25 +1347,25 @@ void get_trainer_name(u8* dest)
 {
 	s32 i;
 
-	if (gSaveBlock2.filler_A8.battleTowerTrainerId == 200)
+	if (gSaveBlock2.battleTower.battleTowerTrainerId == 200)
 	{
 		for (i = 0; i < 7; i++)
 		{
-			dest[i] = gSaveBlock2.filler_A8.ereaderTrainer.name[i];
+			dest[i] = gSaveBlock2.battleTower.ereaderTrainer.name[i];
 		}
 	}
-	else if (gSaveBlock2.filler_A8.battleTowerTrainerId < 100)
+	else if (gSaveBlock2.battleTower.battleTowerTrainerId < 100)
 	{
 		for (i = 0; i < 7; i++)
 		{
-			dest[i] = gBattleTowerTrainers[gSaveBlock2.filler_A8.battleTowerTrainerId].name[i];
+			dest[i] = gBattleTowerTrainers[gSaveBlock2.battleTower.battleTowerTrainerId].name[i];
 		}
 	}
 	else
 	{
 		for (i = 0; i < 7; i++)
 		{
-			dest[i] = gSaveBlock2.filler_A8.var_14C[gSaveBlock2.filler_A8.battleTowerTrainerId - 100].name[i];
+			dest[i] = gSaveBlock2.battleTower.records[gSaveBlock2.battleTower.battleTowerTrainerId - 100].name[i];
 		}
 	}
 
@@ -2129,17 +2129,17 @@ void sub_813545C(u16 *easyChat)
 
 void sub_8135474(void)
 {
-	if (gSaveBlock2.filler_A8.battleTowerTrainerId == 200)
+	if (gSaveBlock2.battleTower.battleTowerTrainerId == 200)
 	{
-		sub_813545C(gSaveBlock2.filler_A8.ereaderTrainer.greeting.easyChat);
+		sub_813545C(gSaveBlock2.battleTower.ereaderTrainer.greeting.easyChat);
 	}
-	else if (gSaveBlock2.filler_A8.battleTowerTrainerId < 100)
+	else if (gSaveBlock2.battleTower.battleTowerTrainerId < 100)
 	{
-		sub_813545C((u16 *)gBattleTowerTrainers[gSaveBlock2.filler_A8.battleTowerTrainerId].greeting.easyChat);
+		sub_813545C((u16 *)gBattleTowerTrainers[gSaveBlock2.battleTower.battleTowerTrainerId].greeting.easyChat);
 	}
 	else
 	{
-		sub_813545C(gSaveBlock2.filler_A8.var_14C[gSaveBlock2.filler_A8.battleTowerTrainerId - 100].greeting.easyChat);
+		sub_813545C(gSaveBlock2.battleTower.records[gSaveBlock2.battleTower.battleTowerTrainerId - 100].greeting.easyChat);
 	}
 }
 
@@ -2213,7 +2213,7 @@ void sub_813556C(void)
 
 		for (i = 0; i < 3; i++)
 		{
-			sub_803ADE8(&gEnemyParty[i], &gSaveBlock2.filler_A8.ereaderTrainer.party[i]);
+			sub_803ADE8(&gEnemyParty[i], &gSaveBlock2.battleTower.ereaderTrainer.party[i]);
 		}
 
 		gBattleTypeFlags = (BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_TRAINER);
@@ -2230,130 +2230,130 @@ void sub_813556C(void)
 void sub_8135668(void)
 {
 	s32 i;
-	u8 battleTowerLevelType = gSaveBlock2.filler_A8.battleTowerLevelType;
+	u8 battleTowerLevelType = gSaveBlock2.battleTower.battleTowerLevelType;
 
 	switch (gSpecialVar_0x8004)
 	{
 	case 0:
-		ewram160FB = gSaveBlock2.filler_A8.var_4AE[battleTowerLevelType];
-		gSaveBlock2.filler_A8.var_4AE[battleTowerLevelType] = gSpecialVar_0x8005;
+		ewram160FB = gSaveBlock2.battleTower.var_4AE[battleTowerLevelType];
+		gSaveBlock2.battleTower.var_4AE[battleTowerLevelType] = gSpecialVar_0x8005;
 		break;
 	case 1:
-		gSaveBlock2.filler_A8.battleTowerLevelType = gSpecialVar_0x8005;
+		gSaveBlock2.battleTower.battleTowerLevelType = gSpecialVar_0x8005;
 		break;
 	case 2:
-		gSaveBlock2.filler_A8.var_4B0[battleTowerLevelType] = gSpecialVar_0x8005;
+		gSaveBlock2.battleTower.curChallengeWins[battleTowerLevelType] = gSpecialVar_0x8005;
 		break;
 	case 3:
-		gSaveBlock2.filler_A8.var_4B4[battleTowerLevelType] = gSpecialVar_0x8005;
+		gSaveBlock2.battleTower.curStreakChallengesCompleted[battleTowerLevelType] = gSpecialVar_0x8005;
 		break;
 	case 4:
-		gSaveBlock2.filler_A8.battleTowerTrainerId = gSpecialVar_0x8005;
+		gSaveBlock2.battleTower.battleTowerTrainerId = gSpecialVar_0x8005;
 		break;
 	case 5:
 		for (i = 0; i < 3; i++)
 		{
-			gSaveBlock2.filler_A8.var_4BD[i] = gSelectedOrderFromParty[i];
+			gSaveBlock2.battleTower.selectedPartyMons[i] = gSelectedOrderFromParty[i];
 		}
 		break;
 	case 6:
-		if (gSaveBlock2.filler_A8.battleTowerTrainerId == 200)
+		if (gSaveBlock2.battleTower.battleTowerTrainerId == 200)
 		{
-			ClearEReaderTrainer(&gSaveBlock2.filler_A8.ereaderTrainer);
+			ClearEReaderTrainer(&gSaveBlock2.battleTower.ereaderTrainer);
 		}
 
-		if (gSaveBlock2.filler_A8.totalBattleTowerWins < 9999)
+		if (gSaveBlock2.battleTower.totalBattleTowerWins < 9999)
 		{
-			gSaveBlock2.filler_A8.totalBattleTowerWins++;
+			gSaveBlock2.battleTower.totalBattleTowerWins++;
 		}
 
-		gSaveBlock2.filler_A8.var_4B0[battleTowerLevelType]++;
+		gSaveBlock2.battleTower.curChallengeWins[battleTowerLevelType]++;
 		sub_8135A3C();
-		gScriptResult = gSaveBlock2.filler_A8.var_4B0[battleTowerLevelType];
+		gScriptResult = gSaveBlock2.battleTower.curChallengeWins[battleTowerLevelType];
 
-		gStringVar1[0] = gSaveBlock2.filler_A8.var_4B0[battleTowerLevelType] + 0xA1;
+		gStringVar1[0] = gSaveBlock2.battleTower.curChallengeWins[battleTowerLevelType] + 0xA1;
 		gStringVar1[1] = 0xFF;
 		break;
 	case 7:
-		if (gSaveBlock2.filler_A8.var_4B4[battleTowerLevelType] < 1430)
+		if (gSaveBlock2.battleTower.curStreakChallengesCompleted[battleTowerLevelType] < 1430)
 		{
-			gSaveBlock2.filler_A8.var_4B4[battleTowerLevelType]++;
+			gSaveBlock2.battleTower.curStreakChallengesCompleted[battleTowerLevelType]++;
 		}
 
 		sub_8135A3C();
-		gScriptResult = gSaveBlock2.filler_A8.var_4B4[battleTowerLevelType];
+		gScriptResult = gSaveBlock2.battleTower.curStreakChallengesCompleted[battleTowerLevelType];
 		break;
 	case 8:
-		gSaveBlock2.filler_A8.unk_554 = gSpecialVar_0x8005;
+		gSaveBlock2.battleTower.unk_554 = gSpecialVar_0x8005;
 		break;
 	case 9:
 		break;
 	case 10:
-		SetGameStat(GAME_STAT_BATTLE_TOWER_BEST_STREAK, gSaveBlock2.filler_A8.bestBattleTowerWinStreak);
+		SetGameStat(GAME_STAT_BATTLE_TOWER_BEST_STREAK, gSaveBlock2.battleTower.bestBattleTowerWinStreak);
 		break;
 	case 11:
-		if (gSaveBlock2.filler_A8.var_4AE[battleTowerLevelType] != 3)
+		if (gSaveBlock2.battleTower.var_4AE[battleTowerLevelType] != 3)
 		{
 			sub_813461C(battleTowerLevelType);
 		}
 		break;
 	case 12:
-		gSaveBlock2.filler_A8.var_4AE[battleTowerLevelType] = ewram160FB;
+		gSaveBlock2.battleTower.var_4AE[battleTowerLevelType] = ewram160FB;
 		break;
 	case 13:
-		gSaveBlock2.filler_A8.currentWinStreaks[battleTowerLevelType] = sub_8135D3C(battleTowerLevelType);
+		gSaveBlock2.battleTower.currentWinStreaks[battleTowerLevelType] = sub_8135D3C(battleTowerLevelType);
 		break;
 	case 14:
-		gSaveBlock2.filler_A8.lastStreakLevelType = gSaveBlock2.filler_A8.battleTowerLevelType;
+		gSaveBlock2.battleTower.lastStreakLevelType = gSaveBlock2.battleTower.battleTowerLevelType;
 		break;
 	}
 }
 
 void sub_81358A4(void)
 {
-	u8 battleTowerLevelType = gSaveBlock2.filler_A8.battleTowerLevelType;
+	u8 battleTowerLevelType = gSaveBlock2.battleTower.battleTowerLevelType;
 
 	switch (gSpecialVar_0x8004)
 	{
 	case 0:
-		gScriptResult = gSaveBlock2.filler_A8.var_4AE[battleTowerLevelType];
+		gScriptResult = gSaveBlock2.battleTower.var_4AE[battleTowerLevelType];
 		break;
 	case 1:
-		gScriptResult = gSaveBlock2.filler_A8.battleTowerLevelType;
+		gScriptResult = gSaveBlock2.battleTower.battleTowerLevelType;
 		break;
 	case 2:
-		gScriptResult = gSaveBlock2.filler_A8.var_4B0[battleTowerLevelType];
+		gScriptResult = gSaveBlock2.battleTower.curChallengeWins[battleTowerLevelType];
 		break;
 	case 3:
-		gScriptResult = gSaveBlock2.filler_A8.var_4B4[battleTowerLevelType];
+		gScriptResult = gSaveBlock2.battleTower.curStreakChallengesCompleted[battleTowerLevelType];
 		break;
 	case 4:
-		gScriptResult = gSaveBlock2.filler_A8.battleTowerTrainerId;
+		gScriptResult = gSaveBlock2.battleTower.battleTowerTrainerId;
 		break;
 	case 5:
 	case 6:
 	case 7:
 		break;
 	case 8:
-		gScriptResult = gSaveBlock2.filler_A8.unk_554;
+		gScriptResult = gSaveBlock2.battleTower.unk_554;
 		break;
 	case 9:
 		gScriptResult = sub_8135D3C(battleTowerLevelType);
 		break;
 	case 10:
-		SetGameStat(GAME_STAT_BATTLE_TOWER_BEST_STREAK, gSaveBlock2.filler_A8.bestBattleTowerWinStreak);
+		SetGameStat(GAME_STAT_BATTLE_TOWER_BEST_STREAK, gSaveBlock2.battleTower.bestBattleTowerWinStreak);
 		break;
 	case 11:
 		sub_813461C(battleTowerLevelType);
 		break;
 	case 12:
-		gSaveBlock2.filler_A8.var_4AE[battleTowerLevelType] = ewram160FB;
+		gSaveBlock2.battleTower.var_4AE[battleTowerLevelType] = ewram160FB;
 		break;
 	case 13:
-		gSaveBlock2.filler_A8.currentWinStreaks[battleTowerLevelType] = sub_8135D3C(battleTowerLevelType);
+		gSaveBlock2.battleTower.currentWinStreaks[battleTowerLevelType] = sub_8135D3C(battleTowerLevelType);
 		break;
 	case 14:
-		gSaveBlock2.filler_A8.lastStreakLevelType = gSaveBlock2.filler_A8.battleTowerLevelType;
+		gSaveBlock2.battleTower.lastStreakLevelType = gSaveBlock2.battleTower.battleTowerLevelType;
 		break;
 	}
 }
@@ -2364,7 +2364,7 @@ void sub_8135A14(void)
 
 	for (i = 0; i < 3; i++)
 	{
-		gSelectedOrderFromParty[i] = gSaveBlock2.filler_A8.var_4BD[i];
+		gSelectedOrderFromParty[i] = gSaveBlock2.battleTower.selectedPartyMons[i];
 	}
 
 	ReducePlayerPartyToThree();
@@ -2373,35 +2373,35 @@ void sub_8135A14(void)
 #ifdef NONMATCHING
 void sub_8135A3C(void)
 {
-	u8 battleTowerLevelType = gSaveBlock2.filler_A8.battleTowerLevelType;
+	u8 battleTowerLevelType = gSaveBlock2.battleTower.battleTowerLevelType;
 	u16 winStreak = sub_8135D3C(battleTowerLevelType);
-	if (gSaveBlock2.filler_A8.recordWinStreaks[battleTowerLevelType] < winStreak)
+	if (gSaveBlock2.battleTower.recordWinStreaks[battleTowerLevelType] < winStreak)
 	{
-		gSaveBlock2.filler_A8.recordWinStreaks[battleTowerLevelType] = winStreak;
+		gSaveBlock2.battleTower.recordWinStreaks[battleTowerLevelType] = winStreak;
 	}
 
-	if (gSaveBlock2.filler_A8.recordWinStreaks[0] > gSaveBlock2.filler_A8.recordWinStreaks[1])
+	if (gSaveBlock2.battleTower.recordWinStreaks[0] > gSaveBlock2.battleTower.recordWinStreaks[1])
 	{
-		SetGameStat(GAME_STAT_BATTLE_TOWER_BEST_STREAK, gSaveBlock2.filler_A8.recordWinStreaks[0]);
-		if (gSaveBlock2.filler_A8.recordWinStreaks[0] > 9999)
+		SetGameStat(GAME_STAT_BATTLE_TOWER_BEST_STREAK, gSaveBlock2.battleTower.recordWinStreaks[0]);
+		if (gSaveBlock2.battleTower.recordWinStreaks[0] > 9999)
 		{
-			gSaveBlock2.filler_A8.bestBattleTowerWinStreak = 9999;
+			gSaveBlock2.battleTower.bestBattleTowerWinStreak = 9999;
 		}
 		else
 		{
-			gSaveBlock2.filler_A8.bestBattleTowerWinStreak = gSaveBlock2.filler_A8.recordWinStreaks[0];
+			gSaveBlock2.battleTower.bestBattleTowerWinStreak = gSaveBlock2.battleTower.recordWinStreaks[0];
 		}
 	}
 	else
 	{
-		SetGameStat(GAME_STAT_BATTLE_TOWER_BEST_STREAK, gSaveBlock2.filler_A8.recordWinStreaks[1]);
-		if (gSaveBlock2.filler_A8.recordWinStreaks[1] > 9999)
+		SetGameStat(GAME_STAT_BATTLE_TOWER_BEST_STREAK, gSaveBlock2.battleTower.recordWinStreaks[1]);
+		if (gSaveBlock2.battleTower.recordWinStreaks[1] > 9999)
 		{
-			gSaveBlock2.filler_A8.bestBattleTowerWinStreak = 9999;
+			gSaveBlock2.battleTower.bestBattleTowerWinStreak = 9999;
 		}
 		else
 		{
-			gSaveBlock2.filler_A8.bestBattleTowerWinStreak = gSaveBlock2.filler_A8.recordWinStreaks[1];
+			gSaveBlock2.battleTower.bestBattleTowerWinStreak = gSaveBlock2.battleTower.recordWinStreaks[1];
 		}
 	}
 }
@@ -2484,8 +2484,8 @@ void sub_8135AC4(void)
 {
 	s32 i;
 	u8 trainerClass;
-	struct BattleTowerRecord *playerRecord = &gSaveBlock2.filler_A8.var_A8;
-	u8 battleTowerLevelType = gSaveBlock2.filler_A8.battleTowerLevelType;
+	struct BattleTowerRecord *playerRecord = &gSaveBlock2.battleTower.playerRecord;
+	u8 battleTowerLevelType = gSaveBlock2.battleTower.battleTowerLevelType;
 
 	if (gSaveBlock2.playerGender != 0)
 	{
@@ -2513,21 +2513,21 @@ void sub_8135AC4(void)
 
 	for (i = 0; i < 3; i++)
 	{
-		sub_803AF78(&gUnknown_030042FC[gSaveBlock2.filler_A8.var_4BD[i]], &playerRecord->party[i]);
+		sub_803AF78(&gUnknown_030042FC[gSaveBlock2.battleTower.selectedPartyMons[i]], &playerRecord->party[i]);
 	}
 
-	SetBattleTowerRecordChecksum(&gSaveBlock2.filler_A8.var_A8);
+	SetBattleTowerRecordChecksum(&gSaveBlock2.battleTower.playerRecord);
 	sub_8135A3C();
 }
 
 void sub_8135BA0(void)
 {
-	u8 battleTowerLevelType = gSaveBlock2.filler_A8.battleTowerLevelType;
+	u8 battleTowerLevelType = gSaveBlock2.battleTower.battleTowerLevelType;
 
 	if (gSpecialVar_0x8004 == 3 || gSpecialVar_0x8004 == 0)
 	{
-		if (gSaveBlock2.filler_A8.var_4B4[battleTowerLevelType] > 1
-			|| gSaveBlock2.filler_A8.var_4B0[battleTowerLevelType] > 1)
+		if (gSaveBlock2.battleTower.curStreakChallengesCompleted[battleTowerLevelType] > 1
+			|| gSaveBlock2.battleTower.curChallengeWins[battleTowerLevelType] > 1)
 		{
 			sub_8135AC4();
 		}
@@ -2535,15 +2535,15 @@ void sub_8135BA0(void)
 
 	sub_8135CFC();
 
-	gSaveBlock2.filler_A8.var_4AD = gBattleOutcome;
+	gSaveBlock2.battleTower.battleOutcome = gBattleOutcome;
 
 	if (gSpecialVar_0x8004 != 3)
 	{
-		gSaveBlock2.filler_A8.var_4AE[battleTowerLevelType] = gSpecialVar_0x8004;
+		gSaveBlock2.battleTower.var_4AE[battleTowerLevelType] = gSpecialVar_0x8004;
 	}
 
 	VarSet(VAR_0x4000, 0);
-	gSaveBlock2.filler_A8.unk_554 = 1;
+	gSaveBlock2.battleTower.unk_554 = 1;
 	TrySavingData(EREADER_SAVE);
 }
 
@@ -2562,26 +2562,26 @@ void ValidateBattleTowerRecordChecksums(void)
 	checksum = 0;
 	for (i = 0; i < (sizeof(struct BattleTowerRecord) / sizeof(u32)) - 1; i++)
 	{
-		checksum += ((u32 *)&gSaveBlock2.filler_A8.var_A8)[i];
+		checksum += ((u32 *)&gSaveBlock2.battleTower.playerRecord)[i];
 	}
 
-	if (gSaveBlock2.filler_A8.var_A8.checksum != checksum)
+	if (gSaveBlock2.battleTower.playerRecord.checksum != checksum)
 	{
-		ClearBattleTowerRecord(&gSaveBlock2.filler_A8.var_A8);
+		ClearBattleTowerRecord(&gSaveBlock2.battleTower.playerRecord);
 	}
 
 	for (recordIndex = 0; recordIndex < 5; recordIndex++)
 	{
-		record = &gSaveBlock2.filler_A8.var_14C[recordIndex];
+		record = &gSaveBlock2.battleTower.records[recordIndex];
 		checksum = 0;
 		for (i = 0; i < (sizeof(struct BattleTowerRecord) / sizeof(u32)) - 1; i++)
 		{
 			checksum += ((u32 *)record)[i];
 		}
 
-		if (gSaveBlock2.filler_A8.var_14C[recordIndex].checksum != checksum)
+		if (gSaveBlock2.battleTower.records[recordIndex].checksum != checksum)
 		{
-			ClearBattleTowerRecord(&gSaveBlock2.filler_A8.var_14C[recordIndex]);
+			ClearBattleTowerRecord(&gSaveBlock2.battleTower.records[recordIndex]);
 		}
 	}
 }
@@ -2611,19 +2611,19 @@ void sub_8135CFC(void)
 {
 	s32 i;
 
-	get_trainer_name(gSaveBlock2.filler_A8.defeatedByTrainerName);
-	gSaveBlock2.filler_A8.defeatedBySpecies = gBattleMons[1].species;
-	gSaveBlock2.filler_A8.firstMonSpecies = gBattleMons[0].species;
+	get_trainer_name(gSaveBlock2.battleTower.defeatedByTrainerName);
+	gSaveBlock2.battleTower.defeatedBySpecies = gBattleMons[1].species;
+	gSaveBlock2.battleTower.firstMonSpecies = gBattleMons[0].species;
 
 	for (i = 0; i < POKEMON_NAME_LENGTH; i++)
 	{
-		gSaveBlock2.filler_A8.firstMonNickname[i] = gBattleMons[0].nickname[i];
+		gSaveBlock2.battleTower.firstMonNickname[i] = gBattleMons[0].nickname[i];
 	}
 }
 
 u16 sub_8135D3C(u8 battleTowerLevelType)
 {
-	u16 var2 = ((gSaveBlock2.filler_A8.var_4B4[battleTowerLevelType] - 1) * 7 - 1) + gSaveBlock2.filler_A8.var_4B0[battleTowerLevelType];
+	u16 var2 = ((gSaveBlock2.battleTower.curStreakChallengesCompleted[battleTowerLevelType] - 1) * 7 - 1) + gSaveBlock2.battleTower.curChallengeWins[battleTowerLevelType];
 
 	if (var2 > 9999)
 	{
@@ -2638,9 +2638,9 @@ void sub_8135D84(void)
 {
     u16 prizeItem;
     struct SaveBlock2 *saveBlock = &gSaveBlock2;
-    u8 battleTowerLevelType = saveBlock->filler_A8.battleTowerLevelType;
+    u8 battleTowerLevelType = saveBlock->battleTower.battleTowerLevelType;
 
-    if (saveBlock->filler_A8.var_4B4[battleTowerLevelType] - 1 > 5)
+    if (saveBlock->battleTower.curStreakChallengesCompleted[battleTowerLevelType] - 1 > 5)
     {
         prizeItem = LongStreakPrizes[Random() % 9];
     }
@@ -2649,7 +2649,7 @@ void sub_8135D84(void)
         prizeItem = ShortStreakPrizes[Random() % 6];
     }
 
-    saveBlock->filler_A8.prizeItem = prizeItem;
+    saveBlock->battleTower.prizeItem = prizeItem;
 }
 #else
 __attribute__((naked))
@@ -2709,17 +2709,17 @@ _08135DE8: .4byte ShortStreakPrizes\n\
 
 void sub_8135DEC(void)
 {
-	u8 battleTowerLevelType = gSaveBlock2.filler_A8.battleTowerLevelType;
+	u8 battleTowerLevelType = gSaveBlock2.battleTower.battleTowerLevelType;
 
-	if (AddBagItem(gSaveBlock2.filler_A8.prizeItem, 1) == TRUE)
+	if (AddBagItem(gSaveBlock2.battleTower.prizeItem, 1) == TRUE)
 	{
-		CopyItemName(gSaveBlock2.filler_A8.prizeItem, gStringVar1);
+		CopyItemName(gSaveBlock2.battleTower.prizeItem, gStringVar1);
 		gScriptResult = 1;
 	}
 	else
 	{
 		gScriptResult = 0;
-		gSaveBlock2.filler_A8.var_4AE[battleTowerLevelType] = 6;
+		gSaveBlock2.battleTower.var_4AE[battleTowerLevelType] = 6;
 	}
 }
 
@@ -2729,7 +2729,7 @@ void sub_8135E50()
 	u32 partyIndex;
 	struct Pokemon *pokemon;
 	u8 ribbonType;
-	u8 battleTowerLevelType = gSaveBlock2.filler_A8.battleTowerLevelType;
+	u8 battleTowerLevelType = gSaveBlock2.battleTower.battleTowerLevelType;
 
 	ribbonType = MON_DATA_WINNING_RIBBON;
 	if (battleTowerLevelType != 0)
@@ -2743,7 +2743,7 @@ void sub_8135E50()
 	{
 		for (i = 0; i < 3; i++)
 		{
-			partyIndex = gSaveBlock2.filler_A8.var_4BD[i] - 1;
+			partyIndex = gSaveBlock2.battleTower.selectedPartyMons[i] - 1;
 			pokemon = &gPlayerParty[partyIndex];
 			if (!GetMonData(pokemon, ribbonType))
 			{
@@ -2865,12 +2865,12 @@ _08135FB8: .4byte gPlayerParty\n\
 
 u8 sub_8135FBC(void)
 {
-	return gTrainerClassToPicIndex[gSaveBlock2.filler_A8.ereaderTrainer.trainerClass];
+	return gTrainerClassToPicIndex[gSaveBlock2.battleTower.ereaderTrainer.trainerClass];
 }
 
 u8 sub_8135FD8(void)
 {
-	return gTrainerClassToNameIndex[gSaveBlock2.filler_A8.ereaderTrainer.trainerClass];
+	return gTrainerClassToNameIndex[gSaveBlock2.battleTower.ereaderTrainer.trainerClass];
 }
 
 void sub_8135FF4(u8 *text)
@@ -2879,7 +2879,7 @@ void sub_8135FF4(u8 *text)
 
 	for (i = 0; i < 7; i++)
 	{
-		text[i] = gSaveBlock2.filler_A8.ereaderTrainer.name[i];
+		text[i] = gSaveBlock2.battleTower.ereaderTrainer.name[i];
 	}
 
 	text[i] = 0xFF;
@@ -2892,7 +2892,7 @@ void sub_813601C(void)
 	struct BattleTowerEReaderTrainer *ereaderTrainer;
 
 	gScriptResult = 0;
-	ereaderTrainer = &gSaveBlock2.filler_A8.ereaderTrainer;
+	ereaderTrainer = &gSaveBlock2.battleTower.ereaderTrainer;
 
 	checksum = 0;
 	for (i = 0; i < sizeof(struct BattleTowerEReaderTrainer) / sizeof(u32) - 1; i++)
@@ -2912,9 +2912,9 @@ void sub_813601C(void)
 		checksum += ((u32 *)ereaderTrainer)[i];
 	}
 
-	if (gSaveBlock2.filler_A8.ereaderTrainer.checksum != checksum)
+	if (gSaveBlock2.battleTower.ereaderTrainer.checksum != checksum)
 	{
-		ClearEReaderTrainer(&gSaveBlock2.filler_A8.ereaderTrainer);
+		ClearEReaderTrainer(&gSaveBlock2.battleTower.ereaderTrainer);
 		gScriptResult = 1;
 	}
 }
@@ -2942,7 +2942,7 @@ void ClearEReaderTrainer(struct BattleTowerEReaderTrainer *ereaderTrainer)
 
 void sub_81360C0(void)
 {
-	sub_813545C(gSaveBlock2.filler_A8.ereaderTrainer.greeting.easyChat);
+	sub_813545C(gSaveBlock2.battleTower.ereaderTrainer.greeting.easyChat);
 }
 
 void sub_81360D0(void)
@@ -2953,11 +2953,11 @@ void sub_81360D0(void)
 	}
 	else if (gBattleOutcome == BATTLE_WON)
 	{
-		sub_813545C(gSaveBlock2.filler_A8.ereaderTrainer.farewellPlayerWon.easyChat);
+		sub_813545C(gSaveBlock2.battleTower.ereaderTrainer.farewellPlayerWon.easyChat);
 	}
 	else
 	{
-		sub_813545C(gSaveBlock2.filler_A8.ereaderTrainer.farewellPlayerLost.easyChat);
+		sub_813545C(gSaveBlock2.battleTower.ereaderTrainer.farewellPlayerLost.easyChat);
 	}
 }
 
@@ -2967,13 +2967,12 @@ void sub_813610C(void)
 
 	for (i = 0; i < 2; i++)
 	{
-		if (gSaveBlock2.filler_A8.var_4AE[i] == 1)
+		if (gSaveBlock2.battleTower.var_4AE[i] == 1)
 		{
 			sub_80BFD20();
 		}
 	}
 }
-
 
 #if GERMAN
 __attribute__((naked))

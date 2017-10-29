@@ -176,7 +176,7 @@ static bool8 IsMonAllowedInBattleTower(struct Pokemon *pkmn)
             return TRUE;
     }
 
-    if ((gSaveBlock2.filler_A8.battleTowerLevelType) == 0
+    if ((gSaveBlock2.battleTower.battleTowerLevelType) == 0
      && GetMonData(pkmn, MON_DATA_LEVEL) > 50)
         return FALSE;
 

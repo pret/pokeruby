@@ -43,7 +43,7 @@ void *gUnknown_083D0274 = &gSaveBlock1.unknown_2ABC;
 void *gUnknown_083D0278 = &gSaveBlock1.mauvilleMan;
 void *recordMixingEasyChatPairs = &gSaveBlock1.easyChatPairs;
 struct RecordMixingDayCareMail *gUnknown_083D0280 = &gUnknown_02038738;
-void *gUnknown_083D0284 = &gSaveBlock2.filler_A8;
+void *gBattleTowerPlayerRecord = &gSaveBlock2.battleTower.playerRecord;
 
 #define BUFFER_CHUNK_SIZE 200
 
@@ -78,7 +78,7 @@ void RecordMixing_PrepareExchangePacket(void)
     gUnknown_02038738.mail[1] = gSaveBlock1.daycareData.misc.mail[1];
     sub_8041324(gSaveBlock1.daycareData.mons, &gUnknown_02038738);
     memcpy(&unk_2018000.filler10AC, gUnknown_083D0280, sizeof(struct RecordMixingDayCareMail));
-    memcpy(&unk_2018000.battleTowerRecord, gUnknown_083D0284, sizeof(struct BattleTowerRecord));
+    memcpy(&unk_2018000.battleTowerRecord, gBattleTowerPlayerRecord, sizeof(struct BattleTowerRecord));
 
     if (GetMultiplayerId() == 0)
         unk_2018000.filler11C8[0] = GetRecordMixingGift();

@@ -42,12 +42,12 @@ static u8 sub_814A464(void)
 
 u8 sub_814A4B8(void)
 {
-    gSaveBlock2.filler_A8.var_4AE[0] = 3;
-    gSaveBlock2.filler_A8.var_4AE[1] = 3;
-    gSaveBlock2.filler_A8.var_4B4[0] = gBattleCommunication[0] + 1;
-    gSaveBlock2.filler_A8.var_4B4[1] = gBattleCommunication[0] + 1;
-    gSaveBlock2.filler_A8.var_4B0[0] = 1;
-    gSaveBlock2.filler_A8.var_4B0[1] = 1;
+    gSaveBlock2.battleTower.var_4AE[0] = 3;
+    gSaveBlock2.battleTower.var_4AE[1] = 3;
+    gSaveBlock2.battleTower.curStreakChallengesCompleted[0] = gBattleCommunication[0] + 1;
+    gSaveBlock2.battleTower.curStreakChallengesCompleted[1] = gBattleCommunication[0] + 1;
+    gSaveBlock2.battleTower.curChallengeWins[0] = 1;
+    gSaveBlock2.battleTower.curChallengeWins[1] = 1;
     CloseMenu();
     return 1;
 }

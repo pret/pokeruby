@@ -780,7 +780,7 @@ struct BattleTowerEReaderTrainer
 {
     /*0x00*/u8 unk0;
     /*0x01*/u8 trainerClass;
-    /*0x02*/u16 filler_2;
+    /*0x02*/u16 filler_2; // TODO: this gets set in MEScrCmd_addtrainer
     /*0x04*/u8 name[7];
     /*0x0B*/u8 filler_B[0x5];
     /*0x10*/struct {
@@ -796,10 +796,10 @@ struct BattleTowerEReaderTrainer
     /*0xB8*/u32 checksum;
 };
 
-struct SaveBlock2_Sub
+struct BattleTowerData
 {
-    /*0x0000, 0x00A8*/ struct BattleTowerRecord var_A8;
-    /*0x00A4, 0x014C*/ struct BattleTowerRecord var_14C[5];
+    /*0x0000, 0x00A8*/ struct BattleTowerRecord playerRecord;
+    /*0x00A4, 0x014C*/ struct BattleTowerRecord records[5]; // from record mixing
     /*0x03D8, 0x0480*/ u16 firstMonSpecies; // species of the first pokemon in the player's battle tower party
     /*0x03DA, 0x0482*/ u16 defeatedBySpecies; // species of the pokemon that defated the player
     /*0x03DC, 0x0484*/ u8 defeatedByTrainerName[8];
@@ -807,13 +807,13 @@ struct SaveBlock2_Sub
     /*0x03F0, 0x0498*/ struct BattleTowerEReaderTrainer ereaderTrainer;
     /*0x04AC, 0x0554*/ u8 battleTowerLevelType:1; // 0 = level 50; 1 = level 100
     /*0x04AC, 0x0554*/ u8 unk_554:1;
-    /*0x04AD, 0x0555*/ u8 var_4AD; // used by tv, but ultimately does nothing, since both code paths are identical
+    /*0x04AD, 0x0555*/ u8 battleOutcome;
     /*0x04AE, 0x0556*/ u8 var_4AE[2];
-    /*0x04B0, 0x0558*/ u16 var_4B0[2];
-    /*0x04B4, 0x055C*/ u16 var_4B4[2];
+    /*0x04B0, 0x0558*/ u16 curChallengeWins[2]; // number of wins in the current challenge. (challenges consist of 7 battles)
+    /*0x04B4, 0x055C*/ u16 curStreakChallengesCompleted[2]; // number of challenges completed in the current streak.
     /*0x04B8, 0x0560*/ u16 recordWinStreaks[2];
     /*0x04BC, 0x0564*/ u8 battleTowerTrainerId; // index for gBattleTowerTrainers table
-    /*0x04BD, 0x0565*/ u8 var_4BD[0x3];
+    /*0x04BD, 0x0565*/ u8 selectedPartyMons[0x3]; // indices of the 3 selected player party mons.
     /*0x04C0, 0x0568*/ u16 prizeItem;
     /*0x04C2, 0x056A*/ u8 var_4C2[0x6];
     /*0x04C8, 0x0570*/ u16 totalBattleTowerWins;
@@ -844,7 +844,7 @@ struct SaveBlock2 /* 0x02024EA4 */
     /*0x90*/ u8 filler_90[0x8];
     /*0x98*/ struct Time localTimeOffset;
     /*0xA0*/ struct Time lastBerryTreeUpdate;
-    /*0xA8*/ struct SaveBlock2_Sub filler_A8;
+    /*0xA8*/ struct BattleTowerData battleTower;
 };
 
 struct MapPosition

@@ -352,8 +352,8 @@ void sub_8093390(struct TrainerCard *trainerCard)
     trainerCard->pokemonTrades = sav12_xor_get_clamped_above(GAME_STAT_POKEMON_TRADES, 0xFFFF);
 
     // Battle Tower
-    trainerCard->battleTowerWins = gSaveBlock2.filler_A8.totalBattleTowerWins;
-    trainerCard->battleTowerLosses = gSaveBlock2.filler_A8.bestBattleTowerWinStreak;
+    trainerCard->battleTowerWins = gSaveBlock2.battleTower.totalBattleTowerWins;
+    trainerCard->battleTowerLosses = gSaveBlock2.battleTower.bestBattleTowerWinStreak;
     if (trainerCard->battleTowerWins > 9999)
     {
         trainerCard->battleTowerWins = 9999;
