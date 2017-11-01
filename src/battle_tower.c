@@ -816,91 +816,96 @@ void sub_8134AB4()
 	sub_81349FC(200);
 }
 
-// void sub_8134AC0(struct BattleTowerRecord *record)
-// {
-// 	u16 var1[5];
-// 	u16 var2[5];
-// 	s32 i, j, k;
-// 	s16 l = 0;
+#ifdef NONMATCHING
+void sub_8134AC0(struct BattleTowerRecord *record)
+{
+	u16 var1[6];
+	u16 var2[6];
+	s32 i, j, k;
+	s16 l = 0;
 
-// 	for (i = 0; i < 5; i++)
-// 	{
-// 		k = 0;
-// 		for (j = 0; j < 4 && gSaveBlock2.battleTower.records[i].var_C[i] != record->var_C[j]; j++);
-// 		if (j == 4)
-// 		{
-// 			for (k = 0; k < 7 && gSaveBlock2.battleTower.records[i].var_8 == record->var_8; k++)
-// 			{
-// 				if (record->var_8 == 0xFF)
-// 				{
-// 					k = 7;
-// 					break;
-// 				}
-// 			}
-// 		}
+	for (i = 0; i < 5; i++)
+	{
+		k = 0;
+		for (j = 0; j < 4 && gSaveBlock2.battleTower.records[i].trainerId[j] == record->trainerId[j]; j++);
+		if (j == 4)
+		{
+			for (; k < 7 && gSaveBlock2.battleTower.records[i].name[4] == record->name[4]; k++)
+			{
+				if (record->name[4] == 0xFF)
+				{
+					k = 7;
+					break;
+				}
+			}
+		}
 
-// 		if (k == 7)
-// 		{
-// 			break;
-// 		}
-// 	}
+		if (k == 7)
+		{
+			break;
+		}
+	}
 
-// 	if (i < 5)
-// 	{
-// 		gSaveBlock2.battleTower.records[i] = *record;
-// 		return;
-// 	}
+	if (i < 5)
+	{
+		gSaveBlock2.battleTower.records[i] = *record;
+		return;
+	}
 
-// 	i = 0;
-// 	while (i < 5)
-// 	{
-// 		if (gSaveBlock2.battleTower.records[i].var_2 == 0)
-// 		{
-// 			if (i > 4)
-// 			{
-// 				break;
-// 			}
+	i = 0;
+	while (i < 5)
+	{
+		if (gSaveBlock2.battleTower.records[i].var_2 == 0)
+		{
+			if (i > 4)
+			{
+				break;
+			}
 
-// 			gSaveBlock2.battleTower.records[i] = *record;
-// 			return;
-// 		}
+			gSaveBlock2.battleTower.records[i] = *record;
+			return;
+		}
 
-// 		i++;
-// 	}
+		i++;
+	}
 
-// 	var1[0] = gSaveBlock2.battleTower.records[0].var_2;
-// 	var2[0] = 0;
-// 	l++;
+	var1[0] = gSaveBlock2.battleTower.records[0].var_2;
+	var2[0] = 0;
+	l++;
 
-// 	for (i = 1; i < 5; i++)
-// 	{
-// 		for (j = 0; gSaveBlock2.battleTower.records[i].var_2 <= var1[0] && j < l; j++)
-// 		{
-// 			if (gSaveBlock2.battleTower.records[i].var_2 < var1[0])
-// 			{
-// 				j = 0;
-// 				l = 1;
-// 				var1[0] = gSaveBlock2.battleTower.records[i].var_2;
-// 				var2[0] = i;
-// 				break;
-// 			}
-// 		}
+	for (i = 1; i < 5; i++)
+	{
+		j = 0;
+		if (j < l)
+		{
+			for (; gSaveBlock2.battleTower.records[i].var_2 <= var1[j]; j++)
+			{
+				if (gSaveBlock2.battleTower.records[i].var_2 < var1[j])
+				{
+					j = 0;
+					l = 1;
+					var1[0] = gSaveBlock2.battleTower.records[i].var_2;
+					var2[0] = i;
+					break;
+				}
+			}
+		}
 
-// 		if (j == l)
-// 		{
-// 			var1[l] = gSaveBlock2.battleTower.records[i].var_2;
-// 			var2[l] = i;
-// 			l++;
-// 		}
-// 	}
+		if (j == l)
+		{
+			var1[l] = gSaveBlock2.battleTower.records[i].var_2;
+			var2[l] = i;
+			l++;
+		}
+	}
 
-// 	gSaveBlock2.battleTower.records[var2[(Random() % l)]] = *record;
-// }
-
+	gSaveBlock2.battleTower.records[var2[(Random() % l)]] = *record;
+}
+#else
 __attribute__((naked))
 void sub_8134AC0(struct BattleTowerRecord *record)
 {
-	asm(".syntax unified\n\
+    asm(".syntax unified\n\
     push {r4-r7,lr}\n\
     mov r7, r10\n\
     mov r6, r9\n\
@@ -1047,7 +1052,7 @@ _08134BC6:\n\
     adds r0, r5, 0x1\n\
     mov r12, r0\n\
     cmp r3, r7\n\
-    bge _08134C0A\n\
+    bge _08134C0A  @ j < l\n\
     movs r1, 0xA4\n\
     adds r0, r5, 0\n\
     muls r0, r1\n\
@@ -1130,8 +1135,9 @@ _08134C5E:\n\
     bx r0\n\
     .align 2, 0\n\
 _08134C70: .4byte gSaveBlock2\n\
-.syntax divided\n");
+	.syntax divided\n");
 }
+#endif // NONMATCHING
 
 u8 get_trainer_class_pic_index(void)
 {
@@ -1194,373 +1200,181 @@ void get_trainer_name(u8* dest)
 	dest[i] = 0xFF;
 }
 
-__attribute__((naked))
-void sub_8134DD4(void)
+void FillBattleTowerTrainerParty(void)
 {
-	asm(".syntax unified\n\
-	push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	sub sp, 0x28\n\
-	movs r0, 0\n\
-	str r0, [sp, 0x18]\n\
-	movs r1, 0x3C\n\
-	str r1, [sp, 0x1C]\n\
-	add r4, sp, 0xC\n\
-	movs r0, 0xFF\n\
-	strb r0, [r4]\n\
-	bl ZeroEnemyPartyMons\n\
-	ldr r1, _08134E04 @ =gSaveBlock2\n\
-	ldr r2, _08134E08 @ =0x00000564\n\
-	adds r0, r1, r2\n\
-	ldrb r0, [r0]\n\
-	cmp r0, 0x13\n\
-	bhi _08134E0C\n\
-	movs r3, 0x6\n\
-	str r3, [sp, 0x14]\n\
-	b _08134ED8\n\
-	.align 2, 0\n\
-_08134E04: .4byte gSaveBlock2\n\
-_08134E08: .4byte 0x00000564\n\
-_08134E0C:\n\
-	cmp r0, 0x1D\n\
-	bhi _08134E1A\n\
-	movs r0, 0x9\n\
-	str r0, [sp, 0x14]\n\
-	movs r1, 0x1E\n\
-	str r1, [sp, 0x18]\n\
-	b _08134ED8\n\
-_08134E1A:\n\
-	cmp r0, 0x27\n\
-	bhi _08134E28\n\
-	movs r2, 0xC\n\
-	str r2, [sp, 0x14]\n\
-	movs r3, 0x3C\n\
-	str r3, [sp, 0x18]\n\
-	b _08134ED8\n\
-_08134E28:\n\
-	cmp r0, 0x31\n\
-	bhi _08134E36\n\
-	movs r0, 0xF\n\
-	str r0, [sp, 0x14]\n\
-	movs r1, 0x5A\n\
-	str r1, [sp, 0x18]\n\
-	b _08134ED8\n\
-_08134E36:\n\
-	cmp r0, 0x3B\n\
-	bhi _08134E44\n\
-	movs r2, 0x12\n\
-	str r2, [sp, 0x14]\n\
-	movs r3, 0x78\n\
-	str r3, [sp, 0x18]\n\
-	b _08134ED8\n\
-_08134E44:\n\
-	cmp r0, 0x45\n\
-	bhi _08134E52\n\
-	movs r0, 0x15\n\
-	str r0, [sp, 0x14]\n\
-	movs r1, 0x96\n\
-	str r1, [sp, 0x18]\n\
-	b _08134ED8\n\
-_08134E52:\n\
-	cmp r0, 0x4F\n\
-	bhi _08134E60\n\
-	movs r2, 0x1F\n\
-	str r2, [sp, 0x14]\n\
-	movs r3, 0xB4\n\
-	str r3, [sp, 0x18]\n\
-	b _08134ED8\n\
-_08134E60:\n\
-	cmp r0, 0x63\n\
-	bhi _08134E72\n\
-	movs r0, 0x1F\n\
-	str r0, [sp, 0x14]\n\
-	movs r1, 0xC8\n\
-	str r1, [sp, 0x18]\n\
-	movs r2, 0x64\n\
-	str r2, [sp, 0x1C]\n\
-	b _08134ED8\n\
-_08134E72:\n\
-	cmp r0, 0xC8\n\
-	bne _08134E9C\n\
-	movs r6, 0\n\
-_08134E78:\n\
-	movs r0, 0x64\n\
-	muls r0, r6\n\
-	ldr r1, _08134E94 @ =gEnemyParty\n\
-	adds r0, r1\n\
-	movs r1, 0x2C\n\
-	muls r1, r6\n\
-	ldr r2, _08134E98 @ =gSaveBlock2 + 0x4CC\n\
-	adds r1, r2\n\
-	bl sub_803ADE8\n\
-	adds r6, 0x1\n\
-	cmp r6, 0x2\n\
-	ble _08134E78\n\
-	b _08135082\n\
-	.align 2, 0\n\
-_08134E94: .4byte gEnemyParty\n\
-_08134E98: .4byte gSaveBlock2 + 0x4CC\n\
-_08134E9C:\n\
-	movs r6, 0\n\
-	adds r4, r1, 0\n\
-	ldr r3, _08134ECC @ =0xffffc158\n\
-	adds r5, r4, r3\n\
-_08134EA4:\n\
-	movs r0, 0x64\n\
-	muls r0, r6\n\
-	ldr r1, _08134ED0 @ =gEnemyParty\n\
-	adds r0, r1\n\
-	ldr r2, _08134ED4 @ =0x00000564\n\
-	adds r1, r4, r2\n\
-	ldrb r2, [r1]\n\
-	movs r1, 0xA4\n\
-	muls r1, r2\n\
-	adds r1, r5\n\
-	movs r2, 0x2C\n\
-	muls r2, r6\n\
-	adds r1, r2\n\
-	bl sub_803ADE8\n\
-	adds r6, 0x1\n\
-	cmp r6, 0x2\n\
-	ble _08134EA4\n\
-	b _08135082\n\
-	.align 2, 0\n\
-_08134ECC: .4byte 0xffffc158\n\
-_08134ED0: .4byte gEnemyParty\n\
-_08134ED4: .4byte 0x00000564\n\
-_08134ED8:\n\
-	ldr r2, _08134EF4 @ =gSaveBlock2\n\
-	ldr r3, _08134EF8 @ =0x00000554\n\
-	adds r0, r2, r3\n\
-	ldrb r1, [r0]\n\
-	movs r0, 0x1\n\
-	ands r0, r1\n\
-	adds r1, r2, 0\n\
-	cmp r0, 0\n\
-	beq _08134F00\n\
-	ldr r0, _08134EFC @ =gBattleTowerLevel100Mons\n\
-	mov r10, r0\n\
-	movs r2, 0x64\n\
-	str r2, [sp, 0x10]\n\
-	b _08134F08\n\
-	.align 2, 0\n\
-_08134EF4: .4byte gSaveBlock2\n\
-_08134EF8: .4byte 0x00000554\n\
-_08134EFC: .4byte gBattleTowerLevel100Mons\n\
-_08134F00:\n\
-	ldr r3, _08134F54 @ =gBattleTowerLevel50Mons\n\
-	mov r10, r3\n\
-	movs r0, 0x32\n\
-	str r0, [sp, 0x10]\n\
-_08134F08:\n\
-	ldr r2, _08134F58 @ =gBattleTowerTrainers\n\
-	ldr r3, _08134F5C @ =0x00000564\n\
-	adds r0, r1, r3\n\
-	ldrb r1, [r0]\n\
-	lsls r0, r1, 1\n\
-	adds r0, r1\n\
-	lsls r0, 3\n\
-	adds r0, r2\n\
-	ldrb r0, [r0, 0x9]\n\
-	str r0, [sp, 0x20]\n\
-	movs r6, 0\n\
-_08134F1E:\n\
-	bl Random\n\
-	movs r1, 0xFF\n\
-	ands r1, r0\n\
-	ldr r2, [sp, 0x1C]\n\
-	adds r0, r1, 0\n\
-	muls r0, r2\n\
-	asrs r0, 8\n\
-	ldr r3, [sp, 0x18]\n\
-	adds r7, r0, r3\n\
-	ldr r0, [sp, 0x20]\n\
-	cmp r0, 0\n\
-	beq _08134F48\n\
-	lsls r0, r7, 4\n\
-	add r0, r10\n\
-	ldrb r0, [r0, 0x3]\n\
-	ldr r1, [sp, 0x20]\n\
-	ands r0, r1\n\
-	cmp r0, r1\n\
-	beq _08134F48\n\
-	b _0813507C\n\
-_08134F48:\n\
-	movs r5, 0\n\
-	lsls r0, r7, 4\n\
-	mov r2, r10\n\
-	adds r3, r0, r2\n\
-	movs r4, 0\n\
-	b _08134F64\n\
-	.align 2, 0\n\
-_08134F54: .4byte gBattleTowerLevel50Mons\n\
-_08134F58: .4byte gBattleTowerTrainers\n\
-_08134F5C: .4byte 0x00000564\n\
-_08134F60:\n\
-	adds r4, 0x64\n\
-	adds r5, 0x1\n\
-_08134F64:\n\
-	cmp r5, r6\n\
-	bge _08134F7E\n\
-	ldr r1, _08135094 @ =gEnemyParty\n\
-	adds r0, r4, r1\n\
-	movs r1, 0xB\n\
-	movs r2, 0\n\
-	str r3, [sp, 0x24]\n\
-	bl GetMonData\n\
-	ldr r3, [sp, 0x24]\n\
-	ldrh r2, [r3]\n\
-	cmp r0, r2\n\
-	bne _08134F60\n\
-_08134F7E:\n\
-	cmp r5, r6\n\
-	bne _0813507C\n\
-	movs r5, 0\n\
-	cmp r5, r6\n\
-	bge _08134FCC\n\
-	ldr r3, _08135098 @ =gBattleTowerHeldItems\n\
-	mov r9, r3\n\
-	lsls r0, r7, 4\n\
-	add r0, r10\n\
-	mov r8, r0\n\
-	movs r3, 0\n\
-_08134F94:\n\
-	ldr r0, _08135094 @ =gEnemyParty\n\
-	adds r4, r3, r0\n\
-	adds r0, r4, 0\n\
-	movs r1, 0xC\n\
-	movs r2, 0\n\
-	str r3, [sp, 0x24]\n\
-	bl GetMonData\n\
-	ldr r3, [sp, 0x24]\n\
-	cmp r0, 0\n\
-	beq _08134FC4\n\
-	adds r0, r4, 0\n\
-	movs r1, 0xC\n\
-	movs r2, 0\n\
-	bl GetMonData\n\
-	mov r2, r8\n\
-	ldrb r1, [r2, 0x2]\n\
-	lsls r1, 1\n\
-	add r1, r9\n\
-	ldr r3, [sp, 0x24]\n\
-	ldrh r1, [r1]\n\
-	cmp r0, r1\n\
-	beq _08134FCC\n\
-_08134FC4:\n\
-	adds r3, 0x64\n\
-	adds r5, 0x1\n\
-	cmp r5, r6\n\
-	blt _08134F94\n\
-_08134FCC:\n\
-	cmp r5, r6\n\
-	bne _0813507C\n\
-	movs r5, 0\n\
-	cmp r5, r6\n\
-	bge _08134FEE\n\
-	add r0, sp, 0x4\n\
-	ldrh r0, [r0]\n\
-	cmp r0, r7\n\
-	beq _08134FEE\n\
-	add r1, sp, 0x4\n\
-_08134FE0:\n\
-	adds r1, 0x2\n\
-	adds r5, 0x1\n\
-	cmp r5, r6\n\
-	bge _08134FEE\n\
-	ldrh r0, [r1]\n\
-	cmp r0, r7\n\
-	bne _08134FE0\n\
-_08134FEE:\n\
-	cmp r5, r6\n\
-	bne _0813507C\n\
-	lsls r0, r6, 1\n\
-	add r0, sp\n\
-	adds r0, 0x4\n\
-	strh r7, [r0]\n\
-	movs r3, 0x64\n\
-	adds r0, r6, 0\n\
-	muls r0, r3\n\
-	ldr r1, _08135094 @ =gEnemyParty\n\
-	adds r0, r1\n\
-	lsls r4, r7, 4\n\
-	mov r3, r10\n\
-	adds r2, r4, r3\n\
-	ldrh r1, [r2]\n\
-	ldrb r2, [r2, 0xC]\n\
-	str r2, [sp]\n\
-	ldr r2, [sp, 0x10]\n\
-	ldr r3, [sp, 0x14]\n\
-	bl CreateMonWithEVSpread\n\
-	movs r5, 0\n\
-	adds r0, r6, 0x1\n\
-	mov r9, r0\n\
-	mov r8, r4\n\
-	movs r0, 0x64\n\
-	adds r7, r6, 0\n\
-	muls r7, r0\n\
-	mov r0, r10\n\
-	adds r0, 0x4\n\
-	adds r4, r0\n\
-	ldr r3, _08135094 @ =gEnemyParty\n\
-_0813502E:\n\
-	ldrh r1, [r4]\n\
-	lsls r2, r5, 24\n\
-	lsrs r2, 24\n\
-	adds r0, r7, r3\n\
-	str r3, [sp, 0x24]\n\
-	bl SetMonMoveSlot\n\
-	ldrh r0, [r4]\n\
-	ldr r3, [sp, 0x24]\n\
-	cmp r0, 0xDA\n\
-	bne _0813504A\n\
-	movs r0, 0\n\
-	mov r1, sp\n\
-	strb r0, [r1, 0xC]\n\
-_0813504A:\n\
-	adds r4, 0x2\n\
-	adds r5, 0x1\n\
-	cmp r5, 0x3\n\
-	ble _0813502E\n\
-	movs r2, 0x64\n\
-	adds r4, r6, 0\n\
-	muls r4, r2\n\
-	ldr r3, _08135094 @ =gEnemyParty\n\
-	adds r4, r3\n\
-	adds r0, r4, 0\n\
-	movs r1, 0x20\n\
-	add r2, sp, 0xC\n\
-	bl SetMonData\n\
-	mov r0, r8\n\
-	add r0, r10\n\
-	ldrb r2, [r0, 0x2]\n\
-	lsls r2, 1\n\
-	ldr r0, _08135098 @ =gBattleTowerHeldItems\n\
-	adds r2, r0\n\
-	adds r0, r4, 0\n\
-	movs r1, 0xC\n\
-	bl SetMonData\n\
-	mov r6, r9\n\
-_0813507C:\n\
-	cmp r6, 0x3\n\
-	beq _08135082\n\
-	b _08134F1E\n\
-_08135082:\n\
-	add sp, 0x28\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_08135094: .4byte gEnemyParty\n\
-_08135098: .4byte gBattleTowerHeldItems\n\
-.syntax divided\n");
+	s32 partyIndex, i;
+	u16 chosenMonIndices[3];
+	u8 friendship;
+	u8 level;
+	u8 fixedIV;
+	u8 battleMonsOffset;
+	u8 monPoolSize;
+	u8 teamFlags;
+	const struct BattleTowerPokemon *battleTowerMons;
+
+	battleMonsOffset = 0;
+	monPoolSize = 60;
+	friendship = 255;
+
+	ZeroEnemyPartyMons();
+
+	// Different trainers have access to different sets of pokemon to use in battle.
+	// The pokemon later in gBattleTowerLevel100Mons or gBattleTowerLevel50Mons are
+	// stronger. Additionally, the later trainers' pokemon are granted higher IVs.
+	if (gSaveBlock2.battleTower.battleTowerTrainerId < 20)
+	{
+		fixedIV = 6;
+	}
+	else if (gSaveBlock2.battleTower.battleTowerTrainerId < 30)
+	{
+		fixedIV = 9;
+		battleMonsOffset = 30;
+	}
+	else if (gSaveBlock2.battleTower.battleTowerTrainerId < 40)
+	{
+		fixedIV = 12;
+		battleMonsOffset = 60;
+	}
+	else if (gSaveBlock2.battleTower.battleTowerTrainerId < 50)
+	{
+		fixedIV = 15;
+		battleMonsOffset = 90;
+	}
+	else if (gSaveBlock2.battleTower.battleTowerTrainerId < 60)
+	{
+		fixedIV = 18;
+		battleMonsOffset = 120;
+	}
+	else if (gSaveBlock2.battleTower.battleTowerTrainerId < 70)
+	{
+		fixedIV = 21;
+		battleMonsOffset = 150;
+	}
+	else if (gSaveBlock2.battleTower.battleTowerTrainerId < 80)
+	{
+		fixedIV = 31;
+		battleMonsOffset = 180;
+	}
+	else if (gSaveBlock2.battleTower.battleTowerTrainerId < 100)
+	{
+		fixedIV = 31;
+		battleMonsOffset = 200;
+		monPoolSize = 100;
+	}
+	else if (gSaveBlock2.battleTower.battleTowerTrainerId == 200)
+	{
+		// Load E-Reader trainer's party.
+		for (partyIndex = 0; partyIndex < 3; partyIndex++)
+		{
+			sub_803ADE8(&gEnemyParty[partyIndex], &gSaveBlock2.battleTower.ereaderTrainer.party[partyIndex]);
+		}
+
+		return;
+	}
+	else
+	{
+		// Load a battle tower record's party. (From record mixing)
+		for (partyIndex = 0; partyIndex < 3; partyIndex++)
+		{
+			sub_803ADE8(
+				&gEnemyParty[partyIndex],
+				&gSaveBlock2.battleTower.records[gSaveBlock2.battleTower.battleTowerTrainerId - 100].party[partyIndex]);
+		}
+
+		return;
+	}
+
+	// Use the appropriate list of pokemon and level depending on the
+	// current challenge type. (level 50 or level 100 challenge)
+	if (gSaveBlock2.battleTower.battleTowerLevelType != 0)
+	{
+		battleTowerMons = gBattleTowerLevel100Mons;
+		level = 100;
+	}
+	else
+	{
+		battleTowerMons = gBattleTowerLevel50Mons;
+		level = 50;
+	}
+
+	teamFlags = gBattleTowerTrainers[gSaveBlock2.battleTower.battleTowerTrainerId].teamFlags;
+
+	// Attempt to fill the trainer's party with random Pokemon until 3 have been
+	// successfully chosen. The trainer's party may not have duplicate pokemon species
+	// or duplicate held items. Each pokemon must have all of the trainer's team flags
+	// set, as well.  If any of those conditions are not met, then the loop starts over
+	// and another pokemon is chosen at random.
+	partyIndex = 0;
+	while (partyIndex != 3)
+	{
+		// Pick a random pokemon index based on the number of pokemon available to choose from
+		// and the starting offset in the battle tower pokemon array.
+		s32 battleMonIndex = ((Random() & 0xFF) * monPoolSize) / 256 + battleMonsOffset;
+
+		// Ensure the chosen pokemon has compatible team flags with the trainer.
+		if (teamFlags == 0 || (battleTowerMons[battleMonIndex].teamFlags & teamFlags) == teamFlags)
+		{
+			// Ensure this pokemon species isn't a duplicate.
+			for (i = 0; i < partyIndex; i++)
+			{
+				if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES, NULL) == battleTowerMons[battleMonIndex].species)
+					break;
+			}
+
+			if (i != partyIndex)
+				continue;
+
+			// Ensure this pokemon's held item isn't a duplicate.
+			for (i = 0; i < partyIndex; i++)
+			{
+				if (GetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, NULL) != 0
+					&& GetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, NULL) == gBattleTowerHeldItems[battleTowerMons[battleMonIndex].item])
+				{
+					break;
+				}
+			}
+
+			if (i != partyIndex)
+				continue;
+
+			// Ensure this exact pokemon index isn't a duplicate. This check doesn't seem necessary
+			// because the species and held items were already checked directly above. Perhaps this
+			// is leftover code before the logic for duplicate species and held items was added.
+			for (i = 0; i < partyIndex && chosenMonIndices[i] != battleMonIndex; i++);
+
+			if (i != partyIndex)
+				continue;
+
+			chosenMonIndices[partyIndex] = battleMonIndex;
+
+			// Place the chosen pokemon into the trainer's party.
+			CreateMonWithEVSpread(
+				&gEnemyParty[partyIndex],
+				battleTowerMons[battleMonIndex].species,
+				level,
+				fixedIV,
+				battleTowerMons[battleMonIndex].evSpread);
+
+			// Give the chosen pokemon its specified moves.
+			for (i = 0; i < 4; i++)
+			{
+				SetMonMoveSlot(&gEnemyParty[partyIndex], battleTowerMons[battleMonIndex].moves[i], i);
+				if (battleTowerMons[battleMonIndex].moves[i] == MOVE_FRUSTRATION)
+				{
+					// MOVE_FRUSTRATION is more powerful the lower the pokemon's friendship is.
+					friendship = 0;
+				}
+			}
+
+			SetMonData(&gEnemyParty[partyIndex], MON_DATA_FRIENDSHIP, &friendship);
+			SetMonData(&gEnemyParty[partyIndex], MON_DATA_HELD_ITEM, (u8 *)&gBattleTowerHeldItems[battleTowerMons[battleMonIndex].item]);
+
+			// The pokemon was successfully added to the trainer's party, so it's safe to move on to
+			// the next party slot.
+			partyIndex++;
+		}
+	}
+
 }
 
 u32 CountBattleTowerBanlistCaught()
@@ -1805,7 +1619,7 @@ void sub_813556C(void)
 		gBattleTypeFlags = (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_TRAINER);
 		gTrainerBattleOpponent = 0;
 
-		sub_8134DD4();
+		FillBattleTowerTrainerParty();
 
 		CreateTask(sub_8135534, 1);
 		current_map_music_set__default_for_battle(0);

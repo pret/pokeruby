@@ -81,7 +81,7 @@ enum
 struct BattleTowerPokemon
 {
 	/*0x00*/u16 species;
-	/*0x02*/u8 item;
+	/*0x02*/u8 item; // entry in gBattleTowerHeldItems
 	/*0x03*/u8 teamFlags;
 	/*0x04*/u16 moves[4];
 	/*0x0C*/u8 evSpread;
