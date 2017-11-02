@@ -820,92 +820,90 @@ void sub_8134AB4()
 	sub_81349FC(200);
 }
 
-#ifdef NONMATCHING
-void sub_8134AC0(struct BattleTowerRecord *record)
-{
-	u16 var1[6];
-	u16 var2[6];
-	s32 i, j, k;
-	s16 l = 0;
+// void sub_8134AC0(struct BattleTowerRecord *record)
+// {
+// 	u16 var1[6];
+// 	u16 var2[6];
+// 	s32 i, j, k;
+// 	s16 l = 0;
 
-	for (i = 0; i < 5; i++)
-	{
-		k = 0;
-		for (j = 0; j < 4 && gSaveBlock2.battleTower.records[i].trainerId[j] == record->trainerId[j]; j++);
-		if (j == 4)
-		{
-			for (; k < 7 && gSaveBlock2.battleTower.records[i].name[4] == record->name[4]; k++)
-			{
-				if (record->name[4] == 0xFF)
-				{
-					k = 7;
-					break;
-				}
-			}
-		}
+// 	for (i = 0; i < 5; i++)
+// 	{
+// 		k = 0;
+// 		for (j = 0; j < 4 && gSaveBlock2.battleTower.records[i].trainerId[j] == record->trainerId[j]; j++);
+// 		if (j == 4)
+// 		{
+// 			for (; k < 7 && gSaveBlock2.battleTower.records[i].name[4] == record->name[4]; k++)
+// 			{
+// 				if (record->name[4] == 0xFF)
+// 				{
+// 					k = 7;
+// 					break;
+// 				}
+// 			}
+// 		}
 
-		if (k == 7)
-		{
-			break;
-		}
-	}
+// 		if (k == 7)
+// 		{
+// 			break;
+// 		}
+// 	}
 
-	if (i < 5)
-	{
-		gSaveBlock2.battleTower.records[i] = *record;
-		return;
-	}
+// 	if (i < 5)
+// 	{
+// 		gSaveBlock2.battleTower.records[i] = *record;
+// 		return;
+// 	}
 
-	i = 0;
-	while (i < 5)
-	{
-		if (gSaveBlock2.battleTower.records[i].var_2 == 0)
-		{
-			if (i > 4)
-			{
-				break;
-			}
+// 	i = 0;
+// 	while (i < 5)
+// 	{
+// 		if (gSaveBlock2.battleTower.records[i].var_2 == 0)
+// 		{
+// 			if (i > 4)
+// 			{
+// 				break;
+// 			}
 
-			gSaveBlock2.battleTower.records[i] = *record;
-			return;
-		}
+// 			gSaveBlock2.battleTower.records[i] = *record;
+// 			return;
+// 		}
 
-		i++;
-	}
+// 		i++;
+// 	}
 
-	var1[0] = gSaveBlock2.battleTower.records[0].var_2;
-	var2[0] = 0;
-	l++;
+// 	var1[0] = gSaveBlock2.battleTower.records[0].var_2;
+// 	var2[0] = 0;
+// 	l++;
 
-	for (i = 1; i < 5; i++)
-	{
-		j = 0;
-		if (j < l)
-		{
-			for (; gSaveBlock2.battleTower.records[i].var_2 <= var1[j]; j++)
-			{
-				if (gSaveBlock2.battleTower.records[i].var_2 < var1[j])
-				{
-					j = 0;
-					l = 1;
-					var1[0] = gSaveBlock2.battleTower.records[i].var_2;
-					var2[0] = i;
-					break;
-				}
-			}
-		}
+// 	for (i = 1; i < 5; i++)
+// 	{
+// 		j = 0;
+// 		if (j < l)
+// 		{
+// 			for (; gSaveBlock2.battleTower.records[i].var_2 <= var1[j]; j++)
+// 			{
+// 				if (gSaveBlock2.battleTower.records[i].var_2 < var1[j])
+// 				{
+// 					j = 0;
+// 					l = 1;
+// 					var1[0] = gSaveBlock2.battleTower.records[i].var_2;
+// 					var2[0] = i;
+// 					break;
+// 				}
+// 			}
+// 		}
 
-		if (j == l)
-		{
-			var1[l] = gSaveBlock2.battleTower.records[i].var_2;
-			var2[l] = i;
-			l++;
-		}
-	}
+// 		if (j == l)
+// 		{
+// 			var1[l] = gSaveBlock2.battleTower.records[i].var_2;
+// 			var2[l] = i;
+// 			l++;
+// 		}
+// 	}
 
-	gSaveBlock2.battleTower.records[var2[(Random() % l)]] = *record;
-}
-#else
+// 	gSaveBlock2.battleTower.records[var2[(Random() % l)]] = *record;
+// }
 __attribute__((naked))
 void sub_8134AC0(struct BattleTowerRecord *record)
 {
@@ -1141,7 +1139,6 @@ _08134C5E:\n\
 _08134C70: .4byte gSaveBlock2\n\
 	.syntax divided\n");
 }
-#endif // NONMATCHING
 
 u8 get_trainer_class_pic_index(void)
 {
@@ -2351,63 +2348,24 @@ void sub_813610C(void)
 }
 
 #if GERMAN
-__attribute__((naked))
 u8 de_sub_81364AC(void)
 {
-	asm(".syntax unified\n\
-	push {lr}\n\
-	ldr r2, _DE_081364C0 @ =gSaveBlock2\n\
-	ldr r0, _DE_081364C4 @ =0x00000564\n\
-	adds r1, r2, r0\n\
-	ldrb r0, [r1]\n\
-	cmp r0, 0xC8\n\
-	bne _DE_081364CC\n\
-	ldr r1, _DE_081364C8 @ =0x00000499\n\
-	adds r0, r2, r1\n\
-	b _DE_081364F2\n\
-	.align 2, 0\n\
-_DE_081364C0: .4byte gSaveBlock2\n\
-_DE_081364C4: .4byte 0x00000564\n\
-_DE_081364C8: .4byte 0x00000499\n\
-_DE_081364CC:\n\
-	cmp r0, 0x63\n\
-	bhi _DE_081364E4\n\
-	ldr r2, _DE_081364E0 @ =gBattleTowerTrainers\n\
-	ldrb r1, [r1]\n\
-	lsls r0, r1, 1\n\
-	adds r0, r1\n\
-	lsls r0, 3\n\
-	adds r0, r2\n\
-	b _DE_081364F2\n\
-	.align 2, 0\n\
-_DE_081364E0: .4byte gBattleTowerTrainers\n\
-_DE_081364E4:\n\
-	ldrb r0, [r1]\n\
-	subs r0, 0x64\n\
-	movs r1, 0xA4\n\
-	muls r0, r1\n\
-	adds r0, r2\n\
-	adds r1, 0xA9\n\
-	adds r0, r1\n\
-_DE_081364F2:\n\
-	ldrb r0, [r0]\n\
-	pop {r1}\n\
-	bx r1\n\
-.syntax divided\n");
+	if (gSaveBlock2.battleTower.battleTowerTrainerId == 200)
+	{
+		return gSaveBlock2.battleTower.ereaderTrainer.trainerClass;
+	}
+	else if (gSaveBlock2.battleTower.battleTowerTrainerId >= 100)
+	{
+		return gSaveBlock2.battleTower.records[gSaveBlock2.battleTower.battleTowerTrainerId - 100].trainerClass;
+	}
+	else
+	{
+		return gBattleTowerTrainers[gSaveBlock2.battleTower.battleTowerTrainerId].trainerClass;
+	}
 }
 
-__attribute__((naked))
 u8 de_sub_81364F8(void)
 {
-	asm(".syntax unified\n\
-	ldr r0, _DE_08136504 @ =gSaveBlock2\n\
-	ldr r1, _DE_08136508 @ =0x00000499\n\
-	adds r0, r1\n\
-	ldrb r0, [r0]\n\
-	bx lr\n\
-	.align 2, 0\n\
-_DE_08136504: .4byte gSaveBlock2\n\
-_DE_08136508: .4byte 0x00000499\n\
-.syntax divided\n");
+	return gSaveBlock2.battleTower.ereaderTrainer.trainerClass;
 }
 #endif
