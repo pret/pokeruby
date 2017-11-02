@@ -1222,7 +1222,7 @@ void OpponentHandleTrainerThrow(void)
     else if (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
         trainerPicIndex = get_trainer_class_pic_index();
     else if (gBattleTypeFlags & BATTLE_TYPE_EREADER_TRAINER)
-        trainerPicIndex = sub_8135FBC();
+        trainerPicIndex = GetEReaderTrainerPicIndex();
     else
         trainerPicIndex = gTrainers[gTrainerBattleOpponent].trainerPic;
 
@@ -1252,7 +1252,7 @@ void OpponentHandleTrainerSlide(void)
     else if (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
         trainerPicIndex = get_trainer_class_pic_index();
     else if (gBattleTypeFlags & BATTLE_TYPE_EREADER_TRAINER)
-        trainerPicIndex = sub_8135FBC();
+        trainerPicIndex = GetEReaderTrainerPicIndex();
     else
         trainerPicIndex = gTrainers[gTrainerBattleOpponent].trainerPic;
 

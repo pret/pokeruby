@@ -421,7 +421,7 @@ bool8 MEScrCmd_addtrainer(struct ScriptContext *ctx)
 {
     u32 data = ScriptReadWord(ctx) - ctx->data[1] + ctx->data[0];
     memcpy(&gSaveBlock2.battleTower.ereaderTrainer, (void *)data, sizeof(gSaveBlock2.battleTower.ereaderTrainer));
-    sub_813601C();
+    ValidateEReaderTrainer();
     StringExpandPlaceholders(gStringVar4, gOtherText_NewTrainerInHoenn);
     ctx->data[2] = 2;
     return FALSE;

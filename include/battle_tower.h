@@ -81,19 +81,19 @@ enum
 struct BattleTowerPokemon
 {
 	/*0x00*/u16 species;
-	/*0x02*/u8 item; // entry in gBattleTowerHeldItems
+	/*0x02*/u8 heldItem; // entry in sBattleTowerHeldItems
 	/*0x03*/u8 teamFlags;
 	/*0x04*/u16 moves[4];
 	/*0x0C*/u8 evSpread;
 	/*0x0D*/u8 nature;
 };
 
-void sub_813461C(u8 levelType);
+u16 GetCurrentBattleTowerWinStreak(u8);
 void sub_8134AC0(struct BattleTowerRecord *);
 u16 sub_8135D3C(u8);
-void sub_8135FF4(u8*);
-u8 sub_8135FBC(void);
-u8 sub_8135FD8(void);
-void sub_813601C(void);
+void SetEReaderTrainerName(u8*);
+u8 GetEReaderTrainerPicIndex(void);
+u8 GetEReaderTrainerClassNameIndex(void);
+void ValidateEReaderTrainer(void);
 
 #endif // GUARD_BATTLE_TOWER_H

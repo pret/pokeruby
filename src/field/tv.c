@@ -123,7 +123,6 @@ void ClearTVShowData(void)
 
 bool8 sub_80BF1B4(u8);
 void sub_80BF20C(void);
-extern u16 sub_8135D3C(u8);
 extern u8 gScriptContestCategory;
 extern u8 gScriptContestRank;
 extern u8 gUnknown_03004316[11];
@@ -677,7 +676,7 @@ void sub_80BE320(void)
     StringCopy(bravoTrainerTower->pokemonName, gSaveBlock2.battleTower.defeatedByTrainerName);
     bravoTrainerTower->species = gSaveBlock2.battleTower.firstMonSpecies;
     bravoTrainerTower->defeatedSpecies = gSaveBlock2.battleTower.defeatedBySpecies;
-    bravoTrainerTower->var16 = sub_8135D3C(gSaveBlock2.battleTower.lastStreakLevelType);
+    bravoTrainerTower->var16 = GetCurrentBattleTowerWinStreak(gSaveBlock2.battleTower.lastStreakLevelType);
     bravoTrainerTower->var1c = gSaveBlock2.battleTower.battleOutcome;
     if (gSaveBlock2.battleTower.lastStreakLevelType == 0)
         bravoTrainerTower->btLevel = 50;

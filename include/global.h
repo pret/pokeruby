@@ -764,9 +764,9 @@ struct BattleTowerTrainer
 
 struct BattleTowerRecord // record mixing
 {
-    /*0x00*/u8 var_0;
+    /*0x00*/u8 battleTowerLevelType; // 0 = level 50, 1 = level 100
     /*0x01*/u8 trainerClass;
-    /*0x02*/u16 var_2;
+    /*0x02*/u16 winStreak;
     /*0x04*/u8 name[8];
     /*0x0C*/u8 trainerId[4];
     /*0x10*/struct {
@@ -780,7 +780,7 @@ struct BattleTowerEReaderTrainer
 {
     /*0x00*/u8 unk0;
     /*0x01*/u8 trainerClass;
-    /*0x02*/u16 var_2; // TODO: this gets set in MEScrCmd_addtrainer
+    /*0x02*/u16 winStreak;
     /*0x04*/u8 name[8];
     /*0x0C*/u8 trainerId[4];
     /*0x10*/struct {
@@ -809,8 +809,8 @@ struct BattleTowerData
     /*0x04AC, 0x0554*/ u8 unk_554:1;
     /*0x04AD, 0x0555*/ u8 battleOutcome;
     /*0x04AE, 0x0556*/ u8 var_4AE[2];
-    /*0x04B0, 0x0558*/ u16 curChallengeWins[2]; // number of wins in the current challenge. (challenges consist of 7 battles)
-    /*0x04B4, 0x055C*/ u16 curStreakChallengesCompleted[2]; // number of challenges completed in the current streak.
+    /*0x04B0, 0x0558*/ u16 curChallengeBattleNum[2]; // 1-based index of battle in the current challenge. (challenges consist of 7 battles)
+    /*0x04B4, 0x055C*/ u16 curStreakChallengesNum[2]; // 1-based index of the current challenge in the current streak.
     /*0x04B8, 0x0560*/ u16 recordWinStreaks[2];
     /*0x04BC, 0x0564*/ u8 battleTowerTrainerId; // index for gBattleTowerTrainers table
     /*0x04BD, 0x0565*/ u8 selectedPartyMons[0x3]; // indices of the 3 selected player party mons.

@@ -4,7 +4,7 @@ MossdeepCity_GameCorner_B1F_MapScripts:: @ 815AE55
 	.byte 0
 
 MossdeepCity_GameCorner_B1F_MapScript1_15AE60:: @ 815AE60
-	special sub_8134AB4
+	special SetEReaderTrainerGfxId
 	end
 
 MossdeepCity_GameCorner_B1F_MapScript2_15AE64:: @ 815AE64
@@ -15,7 +15,7 @@ MossdeepCity_GameCorner_B1F_EventScript_15AE6E:: @ 815AE6E
 	lockall
 	applymovement 255, MossdeepCity_GameCorner_B1F_Movement_15AEF9
 	waitmovement 0
-	special sub_81360C0
+	special PrintEReaderTrainerGreeting
 	msgbox 0x20234cc, 4
 	closemessage
 	setvar 0x8004, 2

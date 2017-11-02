@@ -632,7 +632,7 @@ u32 StrCpyDecodeBattle(const u8* src, u8* dst)
                 else if (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
                     toCpy = gTrainerClassNames[get_trainer_class_name_index()];
                 else if (gBattleTypeFlags & BATTLE_TYPE_EREADER_TRAINER)
-                    toCpy = gTrainerClassNames[sub_8135FD8()];
+                    toCpy = gTrainerClassNames[GetEReaderTrainerClassNameIndex()];
                 else
                     toCpy = gTrainerClassNames[gTrainers[gTrainerBattleOpponent].trainerClass];
                 break;
@@ -661,7 +661,7 @@ u32 StrCpyDecodeBattle(const u8* src, u8* dst)
                 }
                 else if (gBattleTypeFlags & BATTLE_TYPE_EREADER_TRAINER)
                 {
-                    sub_8135FF4(text);
+                    SetEReaderTrainerName(text);
                     toCpy = text;
                 }
                 else

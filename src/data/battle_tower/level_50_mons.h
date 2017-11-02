@@ -2,7 +2,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 {
 	{
 		.species = SPECIES_PIKACHU,
-		.item = BATTLE_TOWER_ITEM_ORAN_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_ORAN_BERRY,
 		.teamFlags = 0x42,
 		.moves = {
 			MOVE_QUICK_ATTACK,
@@ -15,7 +15,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_BEAUTIFLY,
-		.item = BATTLE_TOWER_ITEM_MIRACLE_SEED,
+		.heldItem = BATTLE_TOWER_ITEM_MIRACLE_SEED,
 		.teamFlags = 0x41,
 		.moves = {
 			MOVE_ABSORB,
@@ -28,7 +28,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SWELLOW,
-		.item = BATTLE_TOWER_ITEM_SHARP_BEAK,
+		.heldItem = BATTLE_TOWER_ITEM_SHARP_BEAK,
 		.teamFlags = 0x07,
 		.moves = {
 			MOVE_PECK,
@@ -41,7 +41,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_WALREIN,
-		.item = BATTLE_TOWER_ITEM_SCOPE_LENS,
+		.heldItem = BATTLE_TOWER_ITEM_SCOPE_LENS,
 		.teamFlags = 0x0B,
 		.moves = {
 			MOVE_HAIL,
@@ -54,7 +54,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SEAKING,
-		.item = BATTLE_TOWER_ITEM_MYSTIC_WATER,
+		.heldItem = BATTLE_TOWER_ITEM_MYSTIC_WATER,
 		.teamFlags = 0x07,
 		.moves = {
 			MOVE_PECK,
@@ -67,7 +67,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_TORCHIC,
-		.item = BATTLE_TOWER_ITEM_KINGS_ROCK,
+		.heldItem = BATTLE_TOWER_ITEM_KINGS_ROCK,
 		.teamFlags = 0x42,
 		.moves = {
 			MOVE_FIRE_SPIN,
@@ -80,7 +80,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_MASQUERAIN,
-		.item = BATTLE_TOWER_ITEM_WHITE_HERB,
+		.heldItem = BATTLE_TOWER_ITEM_WHITE_HERB,
 		.teamFlags = 0x41,
 		.moves = {
 			MOVE_STUN_SPORE,
@@ -93,7 +93,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_ILLUMISE,
-		.item = BATTLE_TOWER_ITEM_NONE,
+		.heldItem = BATTLE_TOWER_ITEM_NONE,
 		.teamFlags = 0x41,
 		.moves = {
 			MOVE_FLATTER,
@@ -106,7 +106,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_DELCATTY,
-		.item = BATTLE_TOWER_ITEM_SILK_SCARF,
+		.heldItem = BATTLE_TOWER_ITEM_SILK_SCARF,
 		.teamFlags = 0x42,
 		.moves = {
 			MOVE_ATTRACT,
@@ -119,7 +119,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_KECLEON,
-		.item = BATTLE_TOWER_ITEM_PERSIM_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_PERSIM_BERRY,
 		.teamFlags = 0x0B,
 		.moves = {
 			MOVE_TAIL_WHIP,
@@ -132,7 +132,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_MIGHTYENA,
-		.item = BATTLE_TOWER_ITEM_PECHA_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_PECHA_BERRY,
 		.teamFlags = 0x05,
 		.moves = {
 			MOVE_BITE,
@@ -145,7 +145,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SLAKING,
-		.item = BATTLE_TOWER_ITEM_BLACK_GLASSES,
+		.heldItem = BATTLE_TOWER_ITEM_BLACK_GLASSES,
 		.teamFlags = 0x05,
 		.moves = {
 			MOVE_FAINT_ATTACK,
@@ -158,7 +158,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_MACHOKE,
-		.item = BATTLE_TOWER_ITEM_CHESTO_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_CHESTO_BERRY,
 		.teamFlags = 0x05,
 		.moves = {
 			MOVE_LEER,
@@ -171,7 +171,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_RHYDON,
-		.item = BATTLE_TOWER_ITEM_PERSIM_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_PERSIM_BERRY,
 		.teamFlags = 0x05,
 		.moves = {
 			MOVE_STRENGTH,
@@ -184,7 +184,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_CACTURNE,
-		.item = BATTLE_TOWER_ITEM_POISON_BARB,
+		.heldItem = BATTLE_TOWER_ITEM_POISON_BARB,
 		.teamFlags = 0x0B,
 		.moves = {
 			MOVE_POISON_STING,
@@ -197,7 +197,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_ZIGZAGOON,
-		.item = BATTLE_TOWER_ITEM_KINGS_ROCK,
+		.heldItem = BATTLE_TOWER_ITEM_KINGS_ROCK,
 		.teamFlags = 0x0A,
 		.moves = {
 			MOVE_FLAIL,
@@ -210,7 +210,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_DODRIO,
-		.item = BATTLE_TOWER_ITEM_SHARP_BEAK,
+		.heldItem = BATTLE_TOWER_ITEM_SHARP_BEAK,
 		.teamFlags = 0x03,
 		.moves = {
 			MOVE_PURSUIT,
@@ -223,7 +223,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_WHISCASH,
-		.item = BATTLE_TOWER_ITEM_QUICK_CLAW,
+		.heldItem = BATTLE_TOWER_ITEM_QUICK_CLAW,
 		.teamFlags = 0x0B,
 		.moves = {
 			MOVE_WATER_GUN,
@@ -236,7 +236,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_NINJASK,
-		.item = BATTLE_TOWER_ITEM_SILVER_POWDER,
+		.heldItem = BATTLE_TOWER_ITEM_SILVER_POWDER,
 		.teamFlags = 0x41,
 		.moves = {
 			MOVE_SAND_ATTACK,
@@ -249,7 +249,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_DUSCLOPS,
-		.item = BATTLE_TOWER_ITEM_PECHA_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_PECHA_BERRY,
 		.teamFlags = 0x01,
 		.moves = {
 			MOVE_PROTECT,
@@ -262,7 +262,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_CAMERUPT,
-		.item = BATTLE_TOWER_ITEM_CHARCOAL,
+		.heldItem = BATTLE_TOWER_ITEM_CHARCOAL,
 		.teamFlags = 0x07,
 		.moves = {
 			MOVE_DIG,
@@ -275,7 +275,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SPINDA,
-		.item = BATTLE_TOWER_ITEM_CHERI_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_CHERI_BERRY,
 		.teamFlags = 0x4A,
 		.moves = {
 			MOVE_TEETER_DANCE,
@@ -288,7 +288,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SEVIPER,
-		.item = BATTLE_TOWER_ITEM_POISON_BARB,
+		.heldItem = BATTLE_TOWER_ITEM_POISON_BARB,
 		.teamFlags = 0x09,
 		.moves = {
 			MOVE_SCREECH,
@@ -301,7 +301,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_FLYGON,
-		.item = BATTLE_TOWER_ITEM_QUICK_CLAW,
+		.heldItem = BATTLE_TOWER_ITEM_QUICK_CLAW,
 		.teamFlags = 0x49,
 		.moves = {
 			MOVE_SAND_ATTACK,
@@ -314,7 +314,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_AZUMARILL,
-		.item = BATTLE_TOWER_ITEM_WHITE_HERB,
+		.heldItem = BATTLE_TOWER_ITEM_WHITE_HERB,
 		.teamFlags = 0x42,
 		.moves = {
 			MOVE_BUBBLE_BEAM,
@@ -327,7 +327,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_ZANGOOSE,
-		.item = BATTLE_TOWER_ITEM_MENTAL_HERB,
+		.heldItem = BATTLE_TOWER_ITEM_MENTAL_HERB,
 		.teamFlags = 0x07,
 		.moves = {
 			MOVE_STRENGTH,
@@ -340,7 +340,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_MEDICHAM,
-		.item = BATTLE_TOWER_ITEM_SCOPE_LENS,
+		.heldItem = BATTLE_TOWER_ITEM_SCOPE_LENS,
 		.teamFlags = 0x07,
 		.moves = {
 			MOVE_REVERSAL,
@@ -353,7 +353,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_ROSELIA,
-		.item = BATTLE_TOWER_ITEM_MIRACLE_SEED,
+		.heldItem = BATTLE_TOWER_ITEM_MIRACLE_SEED,
 		.teamFlags = 0x0A,
 		.moves = {
 			MOVE_GROWTH,
@@ -366,7 +366,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SWALOT,
-		.item = BATTLE_TOWER_ITEM_LUM_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_LUM_BERRY,
 		.teamFlags = 0x0B,
 		.moves = {
 			MOVE_STOCKPILE,
@@ -379,7 +379,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_MAGNETON,
-		.item = BATTLE_TOWER_ITEM_MAGNET,
+		.heldItem = BATTLE_TOWER_ITEM_MAGNET,
 		.teamFlags = 0x0B,
 		.moves = {
 			MOVE_SUPERSONIC,
@@ -392,7 +392,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_GARDEVOIR,
-		.item = BATTLE_TOWER_ITEM_TWISTED_SPOON,
+		.heldItem = BATTLE_TOWER_ITEM_TWISTED_SPOON,
 		.teamFlags = 0x09,
 		.moves = {
 			MOVE_CONFUSION,
@@ -405,7 +405,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_RELICANTH,
-		.item = BATTLE_TOWER_ITEM_MYSTIC_WATER,
+		.heldItem = BATTLE_TOWER_ITEM_MYSTIC_WATER,
 		.teamFlags = 0x01,
 		.moves = {
 			MOVE_SURF,
@@ -418,7 +418,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_NINETALES,
-		.item = BATTLE_TOWER_ITEM_RAWST_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_RAWST_BERRY,
 		.teamFlags = 0x03,
 		.moves = {
 			MOVE_CONFUSE_RAY,
@@ -431,7 +431,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SHARPEDO,
-		.item = BATTLE_TOWER_ITEM_BLACK_GLASSES,
+		.heldItem = BATTLE_TOWER_ITEM_BLACK_GLASSES,
 		.teamFlags = 0x05,
 		.moves = {
 			MOVE_BITE,
@@ -444,7 +444,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_GIRAFARIG,
-		.item = BATTLE_TOWER_ITEM_KINGS_ROCK,
+		.heldItem = BATTLE_TOWER_ITEM_KINGS_ROCK,
 		.teamFlags = 0x03,
 		.moves = {
 			MOVE_STRENGTH,
@@ -457,7 +457,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_PELIPPER,
-		.item = BATTLE_TOWER_ITEM_SITRUS_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_SITRUS_BERRY,
 		.teamFlags = 0x0B,
 		.moves = {
 			MOVE_MIST,
@@ -470,7 +470,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SABLEYE,
-		.item = BATTLE_TOWER_ITEM_CHERI_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_CHERI_BERRY,
 		.teamFlags = 0x09,
 		.moves = {
 			MOVE_SHADOW_BALL,
@@ -483,7 +483,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_LUNATONE,
-		.item = BATTLE_TOWER_ITEM_HARD_STONE,
+		.heldItem = BATTLE_TOWER_ITEM_HARD_STONE,
 		.teamFlags = 0x0B,
 		.moves = {
 			MOVE_COSMIC_POWER,
@@ -496,7 +496,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_LUDICOLO,
-		.item = BATTLE_TOWER_ITEM_NONE,
+		.heldItem = BATTLE_TOWER_ITEM_NONE,
 		.teamFlags = 0x0B,
 		.moves = {
 			MOVE_THIEF,
@@ -509,7 +509,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_GRUMPIG,
-		.item = BATTLE_TOWER_ITEM_SALAC_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_SALAC_BERRY,
 		.teamFlags = 0x0B,
 		.moves = {
 			MOVE_ODOR_SLEUTH,
@@ -522,7 +522,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_BRELOOM,
-		.item = BATTLE_TOWER_ITEM_QUICK_CLAW,
+		.heldItem = BATTLE_TOWER_ITEM_QUICK_CLAW,
 		.teamFlags = 0x0B,
 		.moves = {
 			MOVE_CUT,
@@ -535,7 +535,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_WAILORD,
-		.item = BATTLE_TOWER_ITEM_MYSTIC_WATER,
+		.heldItem = BATTLE_TOWER_ITEM_MYSTIC_WATER,
 		.teamFlags = 0x03,
 		.moves = {
 			MOVE_WATER_SPOUT,
@@ -548,7 +548,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_WEEZING,
-		.item = BATTLE_TOWER_ITEM_POISON_BARB,
+		.heldItem = BATTLE_TOWER_ITEM_POISON_BARB,
 		.teamFlags = 0x05,
 		.moves = {
 			MOVE_SMOG,
@@ -561,7 +561,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_KADABRA,
-		.item = BATTLE_TOWER_ITEM_LEPPA_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_LEPPA_BERRY,
 		.teamFlags = 0x0B,
 		.moves = {
 			MOVE_FUTURE_SIGHT,
@@ -574,7 +574,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_MANECTRIC,
-		.item = BATTLE_TOWER_ITEM_MAGNET,
+		.heldItem = BATTLE_TOWER_ITEM_MAGNET,
 		.teamFlags = 0x07,
 		.moves = {
 			MOVE_THUNDER_WAVE,
@@ -587,7 +587,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_RAICHU,
-		.item = BATTLE_TOWER_ITEM_ASPEAR_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_ASPEAR_BERRY,
 		.teamFlags = 0x03,
 		.moves = {
 			MOVE_QUICK_ATTACK,
@@ -600,7 +600,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_XATU,
-		.item = BATTLE_TOWER_ITEM_TWISTED_SPOON,
+		.heldItem = BATTLE_TOWER_ITEM_TWISTED_SPOON,
 		.teamFlags = 0x03,
 		.moves = {
 			MOVE_NIGHT_SHADE,
@@ -613,7 +613,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_LOUDRED,
-		.item = BATTLE_TOWER_ITEM_SITRUS_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_SITRUS_BERRY,
 		.teamFlags = 0x05,
 		.moves = {
 			MOVE_UPROAR,
@@ -626,7 +626,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SOLROCK,
-		.item = BATTLE_TOWER_ITEM_LEFTOVERS,
+		.heldItem = BATTLE_TOWER_ITEM_LEFTOVERS,
 		.teamFlags = 0x03,
 		.moves = {
 			MOVE_ROCK_THROW,
@@ -639,7 +639,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_CLAYDOL,
-		.item = BATTLE_TOWER_ITEM_BRIGHT_POWDER,
+		.heldItem = BATTLE_TOWER_ITEM_BRIGHT_POWDER,
 		.teamFlags = 0x03,
 		.moves = {
 			MOVE_SANDSTORM,
@@ -652,7 +652,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_CRAWDAUNT,
-		.item = BATTLE_TOWER_ITEM_SCOPE_LENS,
+		.heldItem = BATTLE_TOWER_ITEM_SCOPE_LENS,
 		.teamFlags = 0x03,
 		.moves = {
 			MOVE_WATER_PULSE,
@@ -665,7 +665,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_GOLBAT,
-		.item = BATTLE_TOWER_ITEM_WHITE_HERB,
+		.heldItem = BATTLE_TOWER_ITEM_WHITE_HERB,
 		.teamFlags = 0x09,
 		.moves = {
 			MOVE_CONFUSE_RAY,
@@ -678,7 +678,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_BELLOSSOM,
-		.item = BATTLE_TOWER_ITEM_MIRACLE_SEED,
+		.heldItem = BATTLE_TOWER_ITEM_MIRACLE_SEED,
 		.teamFlags = 0x0A,
 		.moves = {
 			MOVE_SOLAR_BEAM,
@@ -691,7 +691,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_DONPHAN,
-		.item = BATTLE_TOWER_ITEM_KINGS_ROCK,
+		.heldItem = BATTLE_TOWER_ITEM_KINGS_ROCK,
 		.teamFlags = 0x05,
 		.moves = {
 			MOVE_ROCK_SMASH,
@@ -704,7 +704,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_NOSEPASS,
-		.item = BATTLE_TOWER_ITEM_PERSIM_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_PERSIM_BERRY,
 		.teamFlags = 0x0B,
 		.moves = {
 			MOVE_SANDSTORM,
@@ -717,7 +717,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_PINSIR,
-		.item = BATTLE_TOWER_ITEM_CHESTO_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_CHESTO_BERRY,
 		.teamFlags = 0x05,
 		.moves = {
 			MOVE_SWORDS_DANCE,
@@ -730,7 +730,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_GOLDUCK,
-		.item = BATTLE_TOWER_ITEM_BRIGHT_POWDER,
+		.heldItem = BATTLE_TOWER_ITEM_BRIGHT_POWDER,
 		.teamFlags = 0x0B,
 		.moves = {
 			MOVE_DISABLE,
@@ -743,7 +743,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SHIFTRY,
-		.item = BATTLE_TOWER_ITEM_MENTAL_HERB,
+		.heldItem = BATTLE_TOWER_ITEM_MENTAL_HERB,
 		.teamFlags = 0x07,
 		.moves = {
 			MOVE_TORMENT,
@@ -756,7 +756,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_DUSTOX,
-		.item = BATTLE_TOWER_ITEM_SILVER_POWDER,
+		.heldItem = BATTLE_TOWER_ITEM_SILVER_POWDER,
 		.teamFlags = 0x01,
 		.moves = {
 			MOVE_CONFUSION,
@@ -769,7 +769,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SHUPPET,
-		.item = BATTLE_TOWER_ITEM_SCOPE_LENS,
+		.heldItem = BATTLE_TOWER_ITEM_SCOPE_LENS,
 		.teamFlags = 0x03,
 		.moves = {
 			MOVE_WILL_O_WISP,
@@ -782,7 +782,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SEAKING,
-		.item = BATTLE_TOWER_ITEM_MYSTIC_WATER,
+		.heldItem = BATTLE_TOWER_ITEM_MYSTIC_WATER,
 		.teamFlags = 0x07,
 		.moves = {
 			MOVE_RAIN_DANCE,
@@ -795,7 +795,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SKARMORY,
-		.item = BATTLE_TOWER_ITEM_SITRUS_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_SITRUS_BERRY,
 		.teamFlags = 0x07,
 		.moves = {
 			MOVE_STEEL_WING,
@@ -808,7 +808,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_TORKOAL,
-		.item = BATTLE_TOWER_ITEM_FOCUS_BAND,
+		.heldItem = BATTLE_TOWER_ITEM_FOCUS_BAND,
 		.teamFlags = 0x43,
 		.moves = {
 			MOVE_FLAMETHROWER,
@@ -821,7 +821,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_GOLEM,
-		.item = BATTLE_TOWER_ITEM_SOFT_SAND,
+		.heldItem = BATTLE_TOWER_ITEM_SOFT_SAND,
 		.teamFlags = 0x05,
 		.moves = {
 			MOVE_MAGNITUDE,
@@ -834,7 +834,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_GARDEVOIR,
-		.item = BATTLE_TOWER_ITEM_TWISTED_SPOON,
+		.heldItem = BATTLE_TOWER_ITEM_TWISTED_SPOON,
 		.teamFlags = 0x41,
 		.moves = {
 			MOVE_REFLECT,
@@ -847,7 +847,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SANDSLASH,
-		.item = BATTLE_TOWER_ITEM_BRIGHT_POWDER,
+		.heldItem = BATTLE_TOWER_ITEM_BRIGHT_POWDER,
 		.teamFlags = 0x07,
 		.moves = {
 			MOVE_SANDSTORM,
@@ -860,7 +860,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_WOBBUFFET,
-		.item = BATTLE_TOWER_ITEM_SALAC_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_SALAC_BERRY,
 		.teamFlags = 0x0B,
 		.moves = {
 			MOVE_COUNTER,
@@ -873,7 +873,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_TENTACRUEL,
-		.item = BATTLE_TOWER_ITEM_CHERI_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_CHERI_BERRY,
 		.teamFlags = 0x05,
 		.moves = {
 			MOVE_CONSTRICT,
@@ -886,7 +886,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_TROPIUS,
-		.item = BATTLE_TOWER_ITEM_LEFTOVERS,
+		.heldItem = BATTLE_TOWER_ITEM_LEFTOVERS,
 		.teamFlags = 0x05,
 		.moves = {
 			MOVE_SUNNY_DAY,
@@ -899,7 +899,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_MAWILE,
-		.item = BATTLE_TOWER_ITEM_METAL_COAT,
+		.heldItem = BATTLE_TOWER_ITEM_METAL_COAT,
 		.teamFlags = 0x43,
 		.moves = {
 			MOVE_IRON_DEFENSE,
@@ -912,7 +912,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_MUK,
-		.item = BATTLE_TOWER_ITEM_RAWST_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_RAWST_BERRY,
 		.teamFlags = 0x09,
 		.moves = {
 			MOVE_SLUDGE,
@@ -925,7 +925,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_MAGCARGO,
-		.item = BATTLE_TOWER_ITEM_CHARCOAL,
+		.heldItem = BATTLE_TOWER_ITEM_CHARCOAL,
 		.teamFlags = 0x0D,
 		.moves = {
 			MOVE_FLAMETHROWER,
@@ -938,7 +938,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_LINOONE,
-		.item = BATTLE_TOWER_ITEM_PECHA_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_PECHA_BERRY,
 		.teamFlags = 0x07,
 		.moves = {
 			MOVE_HEADBUTT,
@@ -951,7 +951,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_ELECTRODE,
-		.item = BATTLE_TOWER_ITEM_ASPEAR_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_ASPEAR_BERRY,
 		.teamFlags = 0x05,
 		.moves = {
 			MOVE_LIGHT_SCREEN,
@@ -964,7 +964,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_DUSCLOPS,
-		.item = BATTLE_TOWER_ITEM_SPELL_TAG,
+		.heldItem = BATTLE_TOWER_ITEM_SPELL_TAG,
 		.teamFlags = 0x09,
 		.moves = {
 			MOVE_MEAN_LOOK,
@@ -977,7 +977,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_VILEPLUME,
-		.item = BATTLE_TOWER_ITEM_MIRACLE_SEED,
+		.heldItem = BATTLE_TOWER_ITEM_MIRACLE_SEED,
 		.teamFlags = 0x0A,
 		.moves = {
 			MOVE_TOXIC,
@@ -990,7 +990,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_CROBAT,
-		.item = BATTLE_TOWER_ITEM_LEPPA_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_LEPPA_BERRY,
 		.teamFlags = 0x05,
 		.moves = {
 			MOVE_BITE,
@@ -1003,7 +1003,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_CORSOLA,
-		.item = BATTLE_TOWER_ITEM_SCOPE_LENS,
+		.heldItem = BATTLE_TOWER_ITEM_SCOPE_LENS,
 		.teamFlags = 0x0A,
 		.moves = {
 			MOVE_RECOVER,
@@ -1016,7 +1016,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_STARMIE,
-		.item = BATTLE_TOWER_ITEM_MYSTIC_WATER,
+		.heldItem = BATTLE_TOWER_ITEM_MYSTIC_WATER,
 		.teamFlags = 0x0B,
 		.moves = {
 			MOVE_RAPID_SPIN,
@@ -1029,7 +1029,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_EXPLOUD,
-		.item = BATTLE_TOWER_ITEM_LEFTOVERS,
+		.heldItem = BATTLE_TOWER_ITEM_LEFTOVERS,
 		.teamFlags = 0x41,
 		.moves = {
 			MOVE_HYPER_BEAM,
@@ -1042,7 +1042,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_ALAKAZAM,
-		.item = BATTLE_TOWER_ITEM_TWISTED_SPOON,
+		.heldItem = BATTLE_TOWER_ITEM_TWISTED_SPOON,
 		.teamFlags = 0x0B,
 		.moves = {
 			MOVE_PSYBEAM,
@@ -1055,7 +1055,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_HERACROSS,
-		.item = BATTLE_TOWER_ITEM_QUICK_CLAW,
+		.heldItem = BATTLE_TOWER_ITEM_QUICK_CLAW,
 		.teamFlags = 0x05,
 		.moves = {
 			MOVE_HORN_ATTACK,
@@ -1068,7 +1068,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_CASTFORM,
-		.item = BATTLE_TOWER_ITEM_SITRUS_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_SITRUS_BERRY,
 		.teamFlags = 0x0B,
 		.moves = {
 			MOVE_WEATHER_BALL,
@@ -1081,7 +1081,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_VIGOROTH,
-		.item = BATTLE_TOWER_ITEM_FOCUS_BAND,
+		.heldItem = BATTLE_TOWER_ITEM_FOCUS_BAND,
 		.teamFlags = 0x05,
 		.moves = {
 			MOVE_FOCUS_PUNCH,
@@ -1094,7 +1094,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_DUSKULL,
-		.item = BATTLE_TOWER_ITEM_BRIGHT_POWDER,
+		.heldItem = BATTLE_TOWER_ITEM_BRIGHT_POWDER,
 		.teamFlags = 0x09,
 		.moves = {
 			MOVE_TOXIC,
@@ -1107,7 +1107,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_LANTURN,
-		.item = BATTLE_TOWER_ITEM_QUICK_CLAW,
+		.heldItem = BATTLE_TOWER_ITEM_QUICK_CLAW,
 		.teamFlags = 0x07,
 		.moves = {
 			MOVE_FLAIL,
@@ -1120,7 +1120,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_HARIYAMA,
-		.item = BATTLE_TOWER_ITEM_KINGS_ROCK,
+		.heldItem = BATTLE_TOWER_ITEM_KINGS_ROCK,
 		.teamFlags = 0x05,
 		.moves = {
 			MOVE_STRENGTH,
@@ -1133,7 +1133,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_KINGDRA,
-		.item = BATTLE_TOWER_ITEM_MYSTIC_WATER,
+		.heldItem = BATTLE_TOWER_ITEM_MYSTIC_WATER,
 		.teamFlags = 0x43,
 		.moves = {
 			MOVE_AGILITY,
@@ -1146,7 +1146,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_GYARADOS,
-		.item = BATTLE_TOWER_ITEM_DRAGON_FANG,
+		.heldItem = BATTLE_TOWER_ITEM_DRAGON_FANG,
 		.teamFlags = 0x41,
 		.moves = {
 			MOVE_RAIN_DANCE,
@@ -1159,7 +1159,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_AGGRON,
-		.item = BATTLE_TOWER_ITEM_METAL_COAT,
+		.heldItem = BATTLE_TOWER_ITEM_METAL_COAT,
 		.teamFlags = 0x45,
 		.moves = {
 			MOVE_EARTHQUAKE,
@@ -1172,7 +1172,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_ABSOL,
-		.item = BATTLE_TOWER_ITEM_KINGS_ROCK,
+		.heldItem = BATTLE_TOWER_ITEM_KINGS_ROCK,
 		.teamFlags = 0xC7,
 		.moves = {
 			MOVE_SWORDS_DANCE,
@@ -1185,7 +1185,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SWELLOW,
-		.item = BATTLE_TOWER_ITEM_SHARP_BEAK,
+		.heldItem = BATTLE_TOWER_ITEM_SHARP_BEAK,
 		.teamFlags = 0x0F,
 		.moves = {
 			MOVE_DOUBLE_TEAM,
@@ -1198,7 +1198,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_MACHAMP,
-		.item = BATTLE_TOWER_ITEM_BLACK_BELT,
+		.heldItem = BATTLE_TOWER_ITEM_BLACK_BELT,
 		.teamFlags = 0x05,
 		.moves = {
 			MOVE_STRENGTH,
@@ -1211,7 +1211,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SWAMPERT,
-		.item = BATTLE_TOWER_ITEM_NEVER_MELT_ICE,
+		.heldItem = BATTLE_TOWER_ITEM_NEVER_MELT_ICE,
 		.teamFlags = 0x41,
 		.moves = {
 			MOVE_PROTECT,
@@ -1224,7 +1224,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SCEPTILE,
-		.item = BATTLE_TOWER_ITEM_MIRACLE_SEED,
+		.heldItem = BATTLE_TOWER_ITEM_MIRACLE_SEED,
 		.teamFlags = 0x41,
 		.moves = {
 			MOVE_LEAF_BLADE,
@@ -1237,7 +1237,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_BLAZIKEN,
-		.item = BATTLE_TOWER_ITEM_CHARCOAL,
+		.heldItem = BATTLE_TOWER_ITEM_CHARCOAL,
 		.teamFlags = 0x41,
 		.moves = {
 			MOVE_BLAZE_KICK,
@@ -1250,7 +1250,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_ALTARIA,
-		.item = BATTLE_TOWER_ITEM_DRAGON_FANG,
+		.heldItem = BATTLE_TOWER_ITEM_DRAGON_FANG,
 		.teamFlags = 0x43,
 		.moves = {
 			MOVE_DRAGON_CLAW,
@@ -1263,7 +1263,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_LUDICOLO,
-		.item = BATTLE_TOWER_ITEM_BLACK_BELT,
+		.heldItem = BATTLE_TOWER_ITEM_BLACK_BELT,
 		.teamFlags = 0x43,
 		.moves = {
 			MOVE_BRICK_BREAK,
@@ -1276,7 +1276,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SABLEYE,
-		.item = BATTLE_TOWER_ITEM_SPELL_TAG,
+		.heldItem = BATTLE_TOWER_ITEM_SPELL_TAG,
 		.teamFlags = 0x49,
 		.moves = {
 			MOVE_SHADOW_BALL,
@@ -1289,7 +1289,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_ZANGOOSE,
-		.item = BATTLE_TOWER_ITEM_BLACK_GLASSES,
+		.heldItem = BATTLE_TOWER_ITEM_BLACK_GLASSES,
 		.teamFlags = 0x0F,
 		.moves = {
 			MOVE_FACADE,
@@ -1302,7 +1302,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_LINOONE,
-		.item = BATTLE_TOWER_ITEM_CHESTO_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_CHESTO_BERRY,
 		.teamFlags = 0x0F,
 		.moves = {
 			MOVE_IRON_TAIL,
@@ -1315,7 +1315,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_WHISCASH,
-		.item = BATTLE_TOWER_ITEM_SOFT_SAND,
+		.heldItem = BATTLE_TOWER_ITEM_SOFT_SAND,
 		.teamFlags = 0x07,
 		.moves = {
 			MOVE_MUD_SLAP,
@@ -1328,7 +1328,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SOLROCK,
-		.item = BATTLE_TOWER_ITEM_HARD_STONE,
+		.heldItem = BATTLE_TOWER_ITEM_HARD_STONE,
 		.teamFlags = 0x43,
 		.moves = {
 			MOVE_EARTHQUAKE,
@@ -1341,7 +1341,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_STARMIE,
-		.item = BATTLE_TOWER_ITEM_BRIGHT_POWDER,
+		.heldItem = BATTLE_TOWER_ITEM_BRIGHT_POWDER,
 		.teamFlags = 0x03,
 		.moves = {
 			MOVE_RECOVER,
@@ -1354,7 +1354,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_CACTURNE,
-		.item = BATTLE_TOWER_ITEM_LEFTOVERS,
+		.heldItem = BATTLE_TOWER_ITEM_LEFTOVERS,
 		.teamFlags = 0x0F,
 		.moves = {
 			MOVE_INGRAIN,
@@ -1367,7 +1367,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SHIFTRY,
-		.item = BATTLE_TOWER_ITEM_FOCUS_BAND,
+		.heldItem = BATTLE_TOWER_ITEM_FOCUS_BAND,
 		.teamFlags = 0x05,
 		.moves = {
 			MOVE_FRUSTRATION,
@@ -1380,7 +1380,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_MANECTRIC,
-		.item = BATTLE_TOWER_ITEM_MAGNET,
+		.heldItem = BATTLE_TOWER_ITEM_MAGNET,
 		.teamFlags = 0x0F,
 		.moves = {
 			MOVE_THUNDER,
@@ -1393,7 +1393,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_KECLEON,
-		.item = BATTLE_TOWER_ITEM_BRIGHT_POWDER,
+		.heldItem = BATTLE_TOWER_ITEM_BRIGHT_POWDER,
 		.teamFlags = 0xC3,
 		.moves = {
 			MOVE_THUNDERBOLT,
@@ -1406,7 +1406,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_PINSIR,
-		.item = BATTLE_TOWER_ITEM_SOFT_SAND,
+		.heldItem = BATTLE_TOWER_ITEM_SOFT_SAND,
 		.teamFlags = 0x8D,
 		.moves = {
 			MOVE_GUILLOTINE,
@@ -1419,7 +1419,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_METANG,
-		.item = BATTLE_TOWER_ITEM_METAL_COAT,
+		.heldItem = BATTLE_TOWER_ITEM_METAL_COAT,
 		.teamFlags = 0x05,
 		.moves = {
 			MOVE_EARTHQUAKE,
@@ -1432,7 +1432,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_CLAYDOL,
-		.item = BATTLE_TOWER_ITEM_PECHA_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_PECHA_BERRY,
 		.teamFlags = 0x43,
 		.moves = {
 			MOVE_EARTHQUAKE,
@@ -1445,7 +1445,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_MASQUERAIN,
-		.item = BATTLE_TOWER_ITEM_PERSIM_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_PERSIM_BERRY,
 		.teamFlags = 0x0A,
 		.moves = {
 			MOVE_TOXIC,
@@ -1458,7 +1458,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_RELICANTH,
-		.item = BATTLE_TOWER_ITEM_LIECHI_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_LIECHI_BERRY,
 		.teamFlags = 0xC5,
 		.moves = {
 			MOVE_ROCK_TOMB,
@@ -1471,7 +1471,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_WALREIN,
-		.item = BATTLE_TOWER_ITEM_SALAC_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_SALAC_BERRY,
 		.teamFlags = 0x0D,
 		.moves = {
 			MOVE_SURF,
@@ -1484,7 +1484,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_WAILORD,
-		.item = BATTLE_TOWER_ITEM_APICOT_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_APICOT_BERRY,
 		.teamFlags = 0x0B,
 		.moves = {
 			MOVE_WATER_SPOUT,
@@ -1497,7 +1497,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_GIRAFARIG,
-		.item = BATTLE_TOWER_ITEM_GANLON_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_GANLON_BERRY,
 		.teamFlags = 0x4F,
 		.moves = {
 			MOVE_DOUBLE_TEAM,
@@ -1510,7 +1510,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_MEDICHAM,
-		.item = BATTLE_TOWER_ITEM_APICOT_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_APICOT_BERRY,
 		.teamFlags = 0x4B,
 		.moves = {
 			MOVE_CALM_MIND,
@@ -1523,7 +1523,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_TROPIUS,
-		.item = BATTLE_TOWER_ITEM_MENTAL_HERB,
+		.heldItem = BATTLE_TOWER_ITEM_MENTAL_HERB,
 		.teamFlags = 0xC7,
 		.moves = {
 			MOVE_EARTHQUAKE,
@@ -1536,7 +1536,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_NINJASK,
-		.item = BATTLE_TOWER_ITEM_SCOPE_LENS,
+		.heldItem = BATTLE_TOWER_ITEM_SCOPE_LENS,
 		.teamFlags = 0x05,
 		.moves = {
 			MOVE_DOUBLE_TEAM,
@@ -1549,7 +1549,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_CAMERUPT,
-		.item = BATTLE_TOWER_ITEM_CHARCOAL,
+		.heldItem = BATTLE_TOWER_ITEM_CHARCOAL,
 		.teamFlags = 0x0D,
 		.moves = {
 			MOVE_EARTHQUAKE,
@@ -1562,7 +1562,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SHARPEDO,
-		.item = BATTLE_TOWER_ITEM_KINGS_ROCK,
+		.heldItem = BATTLE_TOWER_ITEM_KINGS_ROCK,
 		.teamFlags = 0x05,
 		.moves = {
 			MOVE_CRUNCH,
@@ -1575,7 +1575,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_WIGGLYTUFF,
-		.item = BATTLE_TOWER_ITEM_SALAC_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_SALAC_BERRY,
 		.teamFlags = 0x0E,
 		.moves = {
 			MOVE_PROTECT,
@@ -1588,7 +1588,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SEVIPER,
-		.item = BATTLE_TOWER_ITEM_POISON_BARB,
+		.heldItem = BATTLE_TOWER_ITEM_POISON_BARB,
 		.teamFlags = 0x05,
 		.moves = {
 			MOVE_SLUDGE_BOMB,
@@ -1601,7 +1601,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_CRADILY,
-		.item = BATTLE_TOWER_ITEM_LEFTOVERS,
+		.heldItem = BATTLE_TOWER_ITEM_LEFTOVERS,
 		.teamFlags = 0xC1,
 		.moves = {
 			MOVE_ROCK_TOMB,
@@ -1614,7 +1614,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_ARMALDO,
-		.item = BATTLE_TOWER_ITEM_RAWST_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_RAWST_BERRY,
 		.teamFlags = 0xC1,
 		.moves = {
 			MOVE_EARTHQUAKE,
@@ -1627,7 +1627,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_MAGNETON,
-		.item = BATTLE_TOWER_ITEM_PERSIM_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_PERSIM_BERRY,
 		.teamFlags = 0x0D,
 		.moves = {
 			MOVE_ZAP_CANNON,
@@ -1640,7 +1640,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_LANTURN,
-		.item = BATTLE_TOWER_ITEM_QUICK_CLAW,
+		.heldItem = BATTLE_TOWER_ITEM_QUICK_CLAW,
 		.teamFlags = 0x06,
 		.moves = {
 			MOVE_THUNDER,
@@ -1653,7 +1653,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SWALOT,
-		.item = BATTLE_TOWER_ITEM_CHERI_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_CHERI_BERRY,
 		.teamFlags = 0x8B,
 		.moves = {
 			MOVE_SLUDGE_BOMB,
@@ -1666,7 +1666,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SKARMORY,
-		.item = BATTLE_TOWER_ITEM_METAL_COAT,
+		.heldItem = BATTLE_TOWER_ITEM_METAL_COAT,
 		.teamFlags = 0x81,
 		.moves = {
 			MOVE_STEEL_WING,
@@ -1679,7 +1679,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_DONPHAN,
-		.item = BATTLE_TOWER_ITEM_WHITE_HERB,
+		.heldItem = BATTLE_TOWER_ITEM_WHITE_HERB,
 		.teamFlags = 0x0D,
 		.moves = {
 			MOVE_EARTHQUAKE,
@@ -1692,7 +1692,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_HERACROSS,
-		.item = BATTLE_TOWER_ITEM_FOCUS_BAND,
+		.heldItem = BATTLE_TOWER_ITEM_FOCUS_BAND,
 		.teamFlags = 0x41,
 		.moves = {
 			MOVE_FACADE,
@@ -1705,7 +1705,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_BANETTE,
-		.item = BATTLE_TOWER_ITEM_PETAYA_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_PETAYA_BERRY,
 		.teamFlags = 0x83,
 		.moves = {
 			MOVE_SHADOW_BALL,
@@ -1718,7 +1718,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SANDSLASH,
-		.item = BATTLE_TOWER_ITEM_BRIGHT_POWDER,
+		.heldItem = BATTLE_TOWER_ITEM_BRIGHT_POWDER,
 		.teamFlags = 0x0F,
 		.moves = {
 			MOVE_SANDSTORM,
@@ -1731,7 +1731,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_CRAWDAUNT,
-		.item = BATTLE_TOWER_ITEM_SCOPE_LENS,
+		.heldItem = BATTLE_TOWER_ITEM_SCOPE_LENS,
 		.teamFlags = 0x05,
 		.moves = {
 			MOVE_GUILLOTINE,
@@ -1744,7 +1744,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_GRUMPIG,
-		.item = BATTLE_TOWER_ITEM_TWISTED_SPOON,
+		.heldItem = BATTLE_TOWER_ITEM_TWISTED_SPOON,
 		.teamFlags = 0x8B,
 		.moves = {
 			MOVE_MAGIC_COAT,
@@ -1757,7 +1757,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_RHYDON,
-		.item = BATTLE_TOWER_ITEM_CHOICE_BAND,
+		.heldItem = BATTLE_TOWER_ITEM_CHOICE_BAND,
 		.teamFlags = 0x45,
 		.moves = {
 			MOVE_IRON_TAIL,
@@ -1770,7 +1770,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_ALAKAZAM,
-		.item = BATTLE_TOWER_ITEM_PETAYA_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_PETAYA_BERRY,
 		.teamFlags = 0x8B,
 		.moves = {
 			MOVE_PSYCHIC,
@@ -1783,7 +1783,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_DUSCLOPS,
-		.item = BATTLE_TOWER_ITEM_SITRUS_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_SITRUS_BERRY,
 		.teamFlags = 0x41,
 		.moves = {
 			MOVE_SHADOW_BALL,
@@ -1796,7 +1796,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_TORKOAL,
-		.item = BATTLE_TOWER_ITEM_LEFTOVERS,
+		.heldItem = BATTLE_TOWER_ITEM_LEFTOVERS,
 		.teamFlags = 0x09,
 		.moves = {
 			MOVE_FLAMETHROWER,
@@ -1809,7 +1809,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_ELECTRODE,
-		.item = BATTLE_TOWER_ITEM_LUM_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_LUM_BERRY,
 		.teamFlags = 0x09,
 		.moves = {
 			MOVE_SCREECH,
@@ -1822,7 +1822,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_BRELOOM,
-		.item = BATTLE_TOWER_ITEM_LIECHI_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_LIECHI_BERRY,
 		.teamFlags = 0x0B,
 		.moves = {
 			MOVE_IRON_TAIL,
@@ -1835,7 +1835,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_MUK,
-		.item = BATTLE_TOWER_ITEM_POISON_BARB,
+		.heldItem = BATTLE_TOWER_ITEM_POISON_BARB,
 		.teamFlags = 0x05,
 		.moves = {
 			MOVE_SLUDGE_BOMB,
@@ -1848,7 +1848,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_WEEZING,
-		.item = BATTLE_TOWER_ITEM_QUICK_CLAW,
+		.heldItem = BATTLE_TOWER_ITEM_QUICK_CLAW,
 		.teamFlags = 0x05,
 		.moves = {
 			MOVE_EXPLOSION,
@@ -1861,7 +1861,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_RAICHU,
-		.item = BATTLE_TOWER_ITEM_SCOPE_LENS,
+		.heldItem = BATTLE_TOWER_ITEM_SCOPE_LENS,
 		.teamFlags = 0x4E,
 		.moves = {
 			MOVE_THUNDERBOLT,
@@ -1874,7 +1874,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_TENTACRUEL,
-		.item = BATTLE_TOWER_ITEM_MYSTIC_WATER,
+		.heldItem = BATTLE_TOWER_ITEM_MYSTIC_WATER,
 		.teamFlags = 0x09,
 		.moves = {
 			MOVE_DOUBLE_TEAM,
@@ -1887,7 +1887,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_EXPLOUD,
-		.item = BATTLE_TOWER_ITEM_CHOICE_BAND,
+		.heldItem = BATTLE_TOWER_ITEM_CHOICE_BAND,
 		.teamFlags = 0x05,
 		.moves = {
 			MOVE_BLIZZARD,
@@ -1900,7 +1900,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_XATU,
-		.item = BATTLE_TOWER_ITEM_WHITE_HERB,
+		.heldItem = BATTLE_TOWER_ITEM_WHITE_HERB,
 		.teamFlags = 0x43,
 		.moves = {
 			MOVE_PSYCHIC,
@@ -1913,7 +1913,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_GOLEM,
-		.item = BATTLE_TOWER_ITEM_SALAC_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_SALAC_BERRY,
 		.teamFlags = 0x05,
 		.moves = {
 			MOVE_EXPLOSION,
@@ -1926,7 +1926,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_GOLDUCK,
-		.item = BATTLE_TOWER_ITEM_PECHA_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_PECHA_BERRY,
 		.teamFlags = 0x83,
 		.moves = {
 			MOVE_SURF,
@@ -1939,7 +1939,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_NINETALES,
-		.item = BATTLE_TOWER_ITEM_CHARCOAL,
+		.heldItem = BATTLE_TOWER_ITEM_CHARCOAL,
 		.teamFlags = 0x4A,
 		.moves = {
 			MOVE_FLAMETHROWER,
@@ -1952,7 +1952,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_KINGDRA,
-		.item = BATTLE_TOWER_ITEM_CHESTO_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_CHESTO_BERRY,
 		.teamFlags = 0x13,
 		.moves = {
 			MOVE_DOUBLE_TEAM,
@@ -1965,7 +1965,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SLAKING,
-		.item = BATTLE_TOWER_ITEM_LEFTOVERS,
+		.heldItem = BATTLE_TOWER_ITEM_LEFTOVERS,
 		.teamFlags = 0x03,
 		.moves = {
 			MOVE_CURSE,
@@ -1978,7 +1978,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_GYARADOS,
-		.item = BATTLE_TOWER_ITEM_CHERI_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_CHERI_BERRY,
 		.teamFlags = 0x03,
 		.moves = {
 			MOVE_THUNDER,
@@ -1991,7 +1991,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_HARIYAMA,
-		.item = BATTLE_TOWER_ITEM_SALAC_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_SALAC_BERRY,
 		.teamFlags = 0x21,
 		.moves = {
 			MOVE_BELLY_DRUM,
@@ -2004,7 +2004,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_ABSOL,
-		.item = BATTLE_TOWER_ITEM_KINGS_ROCK,
+		.heldItem = BATTLE_TOWER_ITEM_KINGS_ROCK,
 		.teamFlags = 0xC3,
 		.moves = {
 			MOVE_FAINT_ATTACK,
@@ -2017,7 +2017,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_ALTARIA,
-		.item = BATTLE_TOWER_ITEM_SITRUS_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_SITRUS_BERRY,
 		.teamFlags = 0x83,
 		.moves = {
 			MOVE_DRAGON_DANCE,
@@ -2030,7 +2030,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_MACHAMP,
-		.item = BATTLE_TOWER_ITEM_BLACK_BELT,
+		.heldItem = BATTLE_TOWER_ITEM_BLACK_BELT,
 		.teamFlags = 0x11,
 		.moves = {
 			MOVE_CROSS_CHOP,
@@ -2043,7 +2043,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_FLYGON,
-		.item = BATTLE_TOWER_ITEM_DRAGON_FANG,
+		.heldItem = BATTLE_TOWER_ITEM_DRAGON_FANG,
 		.teamFlags = 0x43,
 		.moves = {
 			MOVE_CRUNCH,
@@ -2056,7 +2056,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_BLAZIKEN,
-		.item = BATTLE_TOWER_ITEM_PETAYA_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_PETAYA_BERRY,
 		.teamFlags = 0x33,
 		.moves = {
 			MOVE_COUNTER,
@@ -2069,7 +2069,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_GLALIE,
-		.item = BATTLE_TOWER_ITEM_NEVER_MELT_ICE,
+		.heldItem = BATTLE_TOWER_ITEM_NEVER_MELT_ICE,
 		.teamFlags = 0x81,
 		.moves = {
 			MOVE_BLIZZARD,
@@ -2082,7 +2082,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_HUNTAIL,
-		.item = BATTLE_TOWER_ITEM_MYSTIC_WATER,
+		.heldItem = BATTLE_TOWER_ITEM_MYSTIC_WATER,
 		.teamFlags = 0xA1,
 		.moves = {
 			MOVE_RAIN_DANCE,
@@ -2095,7 +2095,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_MILOTIC,
-		.item = BATTLE_TOWER_ITEM_GANLON_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_GANLON_BERRY,
 		.teamFlags = 0xD3,
 		.moves = {
 			MOVE_SURF,
@@ -2108,7 +2108,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_GOREBYSS,
-		.item = BATTLE_TOWER_ITEM_PECHA_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_PECHA_BERRY,
 		.teamFlags = 0x83,
 		.moves = {
 			MOVE_PSYCHIC,
@@ -2121,7 +2121,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SCEPTILE,
-		.item = BATTLE_TOWER_ITEM_SCOPE_LENS,
+		.heldItem = BATTLE_TOWER_ITEM_SCOPE_LENS,
 		.teamFlags = 0x53,
 		.moves = {
 			MOVE_LEAF_BLADE,
@@ -2134,7 +2134,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SWAMPERT,
-		.item = BATTLE_TOWER_ITEM_LEFTOVERS,
+		.heldItem = BATTLE_TOWER_ITEM_LEFTOVERS,
 		.teamFlags = 0x53,
 		.moves = {
 			MOVE_EARTHQUAKE,
@@ -2147,7 +2147,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_AGGRON,
-		.item = BATTLE_TOWER_ITEM_MENTAL_HERB,
+		.heldItem = BATTLE_TOWER_ITEM_MENTAL_HERB,
 		.teamFlags = 0x41,
 		.moves = {
 			MOVE_DOUBLE_EDGE,
@@ -2160,7 +2160,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_CRADILY,
-		.item = BATTLE_TOWER_ITEM_BRIGHT_POWDER,
+		.heldItem = BATTLE_TOWER_ITEM_BRIGHT_POWDER,
 		.teamFlags = 0xE1,
 		.moves = {
 			MOVE_STOCKPILE,
@@ -2173,7 +2173,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_ARMALDO,
-		.item = BATTLE_TOWER_ITEM_QUICK_CLAW,
+		.heldItem = BATTLE_TOWER_ITEM_QUICK_CLAW,
 		.teamFlags = 0xC1,
 		.moves = {
 			MOVE_EARTHQUAKE,
@@ -2186,7 +2186,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_BRELOOM,
-		.item = BATTLE_TOWER_ITEM_SHELL_BELL,
+		.heldItem = BATTLE_TOWER_ITEM_SHELL_BELL,
 		.teamFlags = 0x82,
 		.moves = {
 			MOVE_FOCUS_PUNCH,
@@ -2199,7 +2199,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_LUDICOLO,
-		.item = BATTLE_TOWER_ITEM_PETAYA_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_PETAYA_BERRY,
 		.teamFlags = 0x83,
 		.moves = {
 			MOVE_RAIN_DANCE,
@@ -2212,7 +2212,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SHIFTRY,
-		.item = BATTLE_TOWER_ITEM_SCOPE_LENS,
+		.heldItem = BATTLE_TOWER_ITEM_SCOPE_LENS,
 		.teamFlags = 0x03,
 		.moves = {
 			MOVE_TORMENT,
@@ -2225,7 +2225,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_TROPIUS,
-		.item = BATTLE_TOWER_ITEM_APICOT_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_APICOT_BERRY,
 		.teamFlags = 0xC3,
 		.moves = {
 			MOVE_SUNNY_DAY,
@@ -2238,7 +2238,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_GRUMPIG,
-		.item = BATTLE_TOWER_ITEM_MACHO_BRACE,
+		.heldItem = BATTLE_TOWER_ITEM_MACHO_BRACE,
 		.teamFlags = 0x23,
 		.moves = {
 			MOVE_TRICK,
@@ -2251,7 +2251,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_TORKOAL,
-		.item = BATTLE_TOWER_ITEM_LUM_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_LUM_BERRY,
 		.teamFlags = 0x81,
 		.moves = {
 			MOVE_IRON_DEFENSE,
@@ -2264,7 +2264,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_MANECTRIC,
-		.item = BATTLE_TOWER_ITEM_NONE,
+		.heldItem = BATTLE_TOWER_ITEM_NONE,
 		.teamFlags = 0x03,
 		.moves = {
 			MOVE_THUNDERBOLT,
@@ -2277,7 +2277,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_PINSIR,
-		.item = BATTLE_TOWER_ITEM_LEPPA_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_LEPPA_BERRY,
 		.teamFlags = 0x61,
 		.moves = {
 			MOVE_GUILLOTINE,
@@ -2290,7 +2290,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_STARMIE,
-		.item = BATTLE_TOWER_ITEM_CHESTO_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_CHESTO_BERRY,
 		.teamFlags = 0x93,
 		.moves = {
 			MOVE_LIGHT_SCREEN,
@@ -2303,7 +2303,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_HERACROSS,
-		.item = BATTLE_TOWER_ITEM_SALAC_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_SALAC_BERRY,
 		.teamFlags = 0x51,
 		.moves = {
 			MOVE_MEGAHORN,
@@ -2316,7 +2316,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_WALREIN,
-		.item = BATTLE_TOWER_ITEM_NEVER_MELT_ICE,
+		.heldItem = BATTLE_TOWER_ITEM_NEVER_MELT_ICE,
 		.teamFlags = 0x83,
 		.moves = {
 			MOVE_BLIZZARD,
@@ -2329,7 +2329,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_ALAKAZAM,
-		.item = BATTLE_TOWER_ITEM_SITRUS_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_SITRUS_BERRY,
 		.teamFlags = 0x13,
 		.moves = {
 			MOVE_PSYCHIC,
@@ -2342,7 +2342,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_MILOTIC,
-		.item = BATTLE_TOWER_ITEM_APICOT_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_APICOT_BERRY,
 		.teamFlags = 0x93,
 		.moves = {
 			MOVE_SURF,
@@ -2355,7 +2355,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_REGICE,
-		.item = BATTLE_TOWER_ITEM_CHESTO_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_CHESTO_BERRY,
 		.teamFlags = 0x11,
 		.moves = {
 			MOVE_REST,
@@ -2368,7 +2368,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_REGISTEEL,
-		.item = BATTLE_TOWER_ITEM_LUM_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_LUM_BERRY,
 		.teamFlags = 0x11,
 		.moves = {
 			MOVE_REST,
@@ -2381,7 +2381,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_REGIROCK,
-		.item = BATTLE_TOWER_ITEM_QUICK_CLAW,
+		.heldItem = BATTLE_TOWER_ITEM_QUICK_CLAW,
 		.teamFlags = 0x91,
 		.moves = {
 			MOVE_ROCK_TOMB,
@@ -2394,7 +2394,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_DUSCLOPS,
-		.item = BATTLE_TOWER_ITEM_SPELL_TAG,
+		.heldItem = BATTLE_TOWER_ITEM_SPELL_TAG,
 		.teamFlags = 0x20,
 		.moves = {
 			MOVE_SHADOW_BALL,
@@ -2407,7 +2407,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SEAKING,
-		.item = BATTLE_TOWER_ITEM_LEPPA_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_LEPPA_BERRY,
 		.teamFlags = 0xB2,
 		.moves = {
 			MOVE_HORN_DRILL,
@@ -2420,7 +2420,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_CAMERUPT,
-		.item = BATTLE_TOWER_ITEM_BRIGHT_POWDER,
+		.heldItem = BATTLE_TOWER_ITEM_BRIGHT_POWDER,
 		.teamFlags = 0x00,
 		.moves = {
 			MOVE_EARTHQUAKE,
@@ -2433,7 +2433,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_LANTURN,
-		.item = BATTLE_TOWER_ITEM_SALAC_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_SALAC_BERRY,
 		.teamFlags = 0x82,
 		.moves = {
 			MOVE_THUNDERBOLT,
@@ -2446,7 +2446,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_WEEZING,
-		.item = BATTLE_TOWER_ITEM_SALAC_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_SALAC_BERRY,
 		.teamFlags = 0x20,
 		.moves = {
 			MOVE_SLUDGE_BOMB,
@@ -2459,7 +2459,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_WHISCASH,
-		.item = BATTLE_TOWER_ITEM_PETAYA_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_PETAYA_BERRY,
 		.teamFlags = 0x41,
 		.moves = {
 			MOVE_EARTHQUAKE,
@@ -2472,7 +2472,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_AGGRON,
-		.item = BATTLE_TOWER_ITEM_LIECHI_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_LIECHI_BERRY,
 		.teamFlags = 0x11,
 		.moves = {
 			MOVE_DOUBLE_EDGE,
@@ -2485,7 +2485,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_CACTURNE,
-		.item = BATTLE_TOWER_ITEM_SCOPE_LENS,
+		.heldItem = BATTLE_TOWER_ITEM_SCOPE_LENS,
 		.teamFlags = 0x63,
 		.moves = {
 			MOVE_DYNAMIC_PUNCH,
@@ -2498,7 +2498,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SHARPEDO,
-		.item = BATTLE_TOWER_ITEM_KINGS_ROCK,
+		.heldItem = BATTLE_TOWER_ITEM_KINGS_ROCK,
 		.teamFlags = 0x01,
 		.moves = {
 			MOVE_CRUNCH,
@@ -2511,7 +2511,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_ABSOL,
-		.item = BATTLE_TOWER_ITEM_SALAC_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_SALAC_BERRY,
 		.teamFlags = 0x82,
 		.moves = {
 			MOVE_DOUBLE_EDGE,
@@ -2524,7 +2524,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_WAILORD,
-		.item = BATTLE_TOWER_ITEM_LEPPA_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_LEPPA_BERRY,
 		.teamFlags = 0x23,
 		.moves = {
 			MOVE_HYDRO_PUMP,
@@ -2537,7 +2537,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_TENTACRUEL,
-		.item = BATTLE_TOWER_ITEM_SITRUS_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_SITRUS_BERRY,
 		.teamFlags = 0x21,
 		.moves = {
 			MOVE_HYDRO_PUMP,
@@ -2550,7 +2550,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_LUDICOLO,
-		.item = BATTLE_TOWER_ITEM_LEFTOVERS,
+		.heldItem = BATTLE_TOWER_ITEM_LEFTOVERS,
 		.teamFlags = 0xA2,
 		.moves = {
 			MOVE_RAIN_DANCE,
@@ -2563,7 +2563,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_WOBBUFFET,
-		.item = BATTLE_TOWER_ITEM_LEFTOVERS,
+		.heldItem = BATTLE_TOWER_ITEM_LEFTOVERS,
 		.teamFlags = 0x23,
 		.moves = {
 			MOVE_ENCORE,
@@ -2576,7 +2576,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_RHYDON,
-		.item = BATTLE_TOWER_ITEM_QUICK_CLAW,
+		.heldItem = BATTLE_TOWER_ITEM_QUICK_CLAW,
 		.teamFlags = 0x21,
 		.moves = {
 			MOVE_EARTHQUAKE,
@@ -2589,7 +2589,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_GLALIE,
-		.item = BATTLE_TOWER_ITEM_SALAC_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_SALAC_BERRY,
 		.teamFlags = 0x21,
 		.moves = {
 			MOVE_CRUNCH,
@@ -2602,7 +2602,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SCEPTILE,
-		.item = BATTLE_TOWER_ITEM_SCOPE_LENS,
+		.heldItem = BATTLE_TOWER_ITEM_SCOPE_LENS,
 		.teamFlags = 0x13,
 		.moves = {
 			MOVE_LEAF_BLADE,
@@ -2615,7 +2615,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_BLAZIKEN,
-		.item = BATTLE_TOWER_ITEM_LIECHI_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_LIECHI_BERRY,
 		.teamFlags = 0x17,
 		.moves = {
 			MOVE_BLAZE_KICK,
@@ -2628,7 +2628,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SWAMPERT,
-		.item = BATTLE_TOWER_ITEM_SHELL_BELL,
+		.heldItem = BATTLE_TOWER_ITEM_SHELL_BELL,
 		.teamFlags = 0x17,
 		.moves = {
 			MOVE_SURF,
@@ -2641,7 +2641,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_GARDEVOIR,
-		.item = BATTLE_TOWER_ITEM_SALAC_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_SALAC_BERRY,
 		.teamFlags = 0x19,
 		.moves = {
 			MOVE_PSYCHIC,
@@ -2654,7 +2654,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_BRELOOM,
-		.item = BATTLE_TOWER_ITEM_SALAC_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_SALAC_BERRY,
 		.teamFlags = 0xF6,
 		.moves = {
 			MOVE_SPORE,
@@ -2667,7 +2667,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_ALAKAZAM,
-		.item = BATTLE_TOWER_ITEM_GANLON_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_GANLON_BERRY,
 		.teamFlags = 0x1B,
 		.moves = {
 			MOVE_PSYCHIC,
@@ -2680,7 +2680,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SHIFTRY,
-		.item = BATTLE_TOWER_ITEM_CHESTO_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_CHESTO_BERRY,
 		.teamFlags = 0x89,
 		.moves = {
 			MOVE_FAINT_ATTACK,
@@ -2693,7 +2693,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_HARIYAMA,
-		.item = BATTLE_TOWER_ITEM_SCOPE_LENS,
+		.heldItem = BATTLE_TOWER_ITEM_SCOPE_LENS,
 		.teamFlags = 0x85,
 		.moves = {
 			MOVE_CROSS_CHOP,
@@ -2706,7 +2706,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_CROBAT,
-		.item = BATTLE_TOWER_ITEM_BRIGHT_POWDER,
+		.heldItem = BATTLE_TOWER_ITEM_BRIGHT_POWDER,
 		.teamFlags = 0x49,
 		.moves = {
 			MOVE_ATTRACT,
@@ -2719,7 +2719,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_MACHAMP,
-		.item = BATTLE_TOWER_ITEM_SCOPE_LENS,
+		.heldItem = BATTLE_TOWER_ITEM_SCOPE_LENS,
 		.teamFlags = 0x15,
 		.moves = {
 			MOVE_CROSS_CHOP,
@@ -2732,7 +2732,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_MANECTRIC,
-		.item = BATTLE_TOWER_ITEM_PETAYA_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_PETAYA_BERRY,
 		.teamFlags = 0x0B,
 		.moves = {
 			MOVE_THUNDERBOLT,
@@ -2745,7 +2745,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_ELECTRODE,
-		.item = BATTLE_TOWER_ITEM_LUM_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_LUM_BERRY,
 		.teamFlags = 0x27,
 		.moves = {
 			MOVE_THUNDERBOLT,
@@ -2758,7 +2758,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_MUK,
-		.item = BATTLE_TOWER_ITEM_QUICK_CLAW,
+		.heldItem = BATTLE_TOWER_ITEM_QUICK_CLAW,
 		.teamFlags = 0x05,
 		.moves = {
 			MOVE_SLUDGE_BOMB,
@@ -2771,7 +2771,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_FLYGON,
-		.item = BATTLE_TOWER_ITEM_PETAYA_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_PETAYA_BERRY,
 		.teamFlags = 0x4D,
 		.moves = {
 			MOVE_DRAGON_CLAW,
@@ -2784,7 +2784,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_STARMIE,
-		.item = BATTLE_TOWER_ITEM_APICOT_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_APICOT_BERRY,
 		.teamFlags = 0x1B,
 		.moves = {
 			MOVE_SURF,
@@ -2797,7 +2797,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_DODRIO,
-		.item = BATTLE_TOWER_ITEM_LIECHI_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_LIECHI_BERRY,
 		.teamFlags = 0x2B,
 		.moves = {
 			MOVE_DRILL_PECK,
@@ -2810,7 +2810,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_RAICHU,
-		.item = BATTLE_TOWER_ITEM_FOCUS_BAND,
+		.heldItem = BATTLE_TOWER_ITEM_FOCUS_BAND,
 		.teamFlags = 0x0A,
 		.moves = {
 			MOVE_THUNDERBOLT,
@@ -2823,7 +2823,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_GOLDUCK,
-		.item = BATTLE_TOWER_ITEM_LIECHI_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_LIECHI_BERRY,
 		.teamFlags = 0x0A,
 		.moves = {
 			MOVE_SURF,
@@ -2836,7 +2836,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_HERACROSS,
-		.item = BATTLE_TOWER_ITEM_LIECHI_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_LIECHI_BERRY,
 		.teamFlags = 0x54,
 		.moves = {
 			MOVE_MEGAHORN,
@@ -2849,7 +2849,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_WALREIN,
-		.item = BATTLE_TOWER_ITEM_CHESTO_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_CHESTO_BERRY,
 		.teamFlags = 0x06,
 		.moves = {
 			MOVE_SURF,
@@ -2862,7 +2862,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_KINGDRA,
-		.item = BATTLE_TOWER_ITEM_CHESTO_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_CHESTO_BERRY,
 		.teamFlags = 0x1D,
 		.moves = {
 			MOVE_SURF,
@@ -2875,7 +2875,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SALAMENCE,
-		.item = BATTLE_TOWER_ITEM_LUM_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_LUM_BERRY,
 		.teamFlags = 0x9C,
 		.moves = {
 			MOVE_DRAGON_CLAW,
@@ -2888,7 +2888,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_METAGROSS,
-		.item = BATTLE_TOWER_ITEM_SHELL_BELL,
+		.heldItem = BATTLE_TOWER_ITEM_SHELL_BELL,
 		.teamFlags = 0x15,
 		.moves = {
 			MOVE_METEOR_MASH,
@@ -2901,7 +2901,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_REGIROCK,
-		.item = BATTLE_TOWER_ITEM_BRIGHT_POWDER,
+		.heldItem = BATTLE_TOWER_ITEM_BRIGHT_POWDER,
 		.teamFlags = 0xB5,
 		.moves = {
 			MOVE_EARTHQUAKE,
@@ -2914,7 +2914,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_REGICE,
-		.item = BATTLE_TOWER_ITEM_CHESTO_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_CHESTO_BERRY,
 		.teamFlags = 0x96,
 		.moves = {
 			MOVE_ICE_BEAM,
@@ -2927,7 +2927,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_REGISTEEL,
-		.item = BATTLE_TOWER_ITEM_QUICK_CLAW,
+		.heldItem = BATTLE_TOWER_ITEM_QUICK_CLAW,
 		.teamFlags = 0x94,
 		.moves = {
 			MOVE_METAL_CLAW,
@@ -2940,7 +2940,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_LATIAS,
-		.item = BATTLE_TOWER_ITEM_LUM_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_LUM_BERRY,
 		.teamFlags = 0x96,
 		.moves = {
 			MOVE_MIST_BALL,
@@ -2953,7 +2953,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_LATIOS,
-		.item = BATTLE_TOWER_ITEM_APICOT_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_APICOT_BERRY,
 		.teamFlags = 0x95,
 		.moves = {
 			MOVE_LUSTER_PURGE,
@@ -2966,7 +2966,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_MILOTIC,
-		.item = BATTLE_TOWER_ITEM_LEFTOVERS,
+		.heldItem = BATTLE_TOWER_ITEM_LEFTOVERS,
 		.teamFlags = 0x96,
 		.moves = {
 			MOVE_SURF,
@@ -2979,7 +2979,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SLAKING,
-		.item = BATTLE_TOWER_ITEM_CHOICE_BAND,
+		.heldItem = BATTLE_TOWER_ITEM_CHOICE_BAND,
 		.teamFlags = 0x05,
 		.moves = {
 			MOVE_HYPER_BEAM,
@@ -2992,7 +2992,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SCEPTILE,
-		.item = BATTLE_TOWER_ITEM_LEFTOVERS,
+		.heldItem = BATTLE_TOWER_ITEM_LEFTOVERS,
 		.teamFlags = 0x1F,
 		.moves = {
 			MOVE_GIGA_DRAIN,
@@ -3005,7 +3005,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_BLAZIKEN,
-		.item = BATTLE_TOWER_ITEM_CHESTO_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_CHESTO_BERRY,
 		.teamFlags = 0x17,
 		.moves = {
 			MOVE_BLAZE_KICK,
@@ -3018,7 +3018,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SWAMPERT,
-		.item = BATTLE_TOWER_ITEM_SHELL_BELL,
+		.heldItem = BATTLE_TOWER_ITEM_SHELL_BELL,
 		.teamFlags = 0x17,
 		.moves = {
 			MOVE_MUDDY_WATER,
@@ -3031,7 +3031,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_GARDEVOIR,
-		.item = BATTLE_TOWER_ITEM_SALAC_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_SALAC_BERRY,
 		.teamFlags = 0x7B,
 		.moves = {
 			MOVE_PSYCHIC,
@@ -3044,7 +3044,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_BRELOOM,
-		.item = BATTLE_TOWER_ITEM_SALAC_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_SALAC_BERRY,
 		.teamFlags = 0x56,
 		.moves = {
 			MOVE_SPORE,
@@ -3057,7 +3057,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_ALAKAZAM,
-		.item = BATTLE_TOWER_ITEM_BRIGHT_POWDER,
+		.heldItem = BATTLE_TOWER_ITEM_BRIGHT_POWDER,
 		.teamFlags = 0x0A,
 		.moves = {
 			MOVE_PSYCHIC,
@@ -3070,7 +3070,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_HARIYAMA,
-		.item = BATTLE_TOWER_ITEM_FOCUS_BAND,
+		.heldItem = BATTLE_TOWER_ITEM_FOCUS_BAND,
 		.teamFlags = 0x05,
 		.moves = {
 			MOVE_CROSS_CHOP,
@@ -3083,7 +3083,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_GYARADOS,
-		.item = BATTLE_TOWER_ITEM_SHELL_BELL,
+		.heldItem = BATTLE_TOWER_ITEM_SHELL_BELL,
 		.teamFlags = 0x0C,
 		.moves = {
 			MOVE_HYPER_BEAM,
@@ -3096,7 +3096,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_CROBAT,
-		.item = BATTLE_TOWER_ITEM_BRIGHT_POWDER,
+		.heldItem = BATTLE_TOWER_ITEM_BRIGHT_POWDER,
 		.teamFlags = 0x49,
 		.moves = {
 			MOVE_TOXIC,
@@ -3109,7 +3109,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_MACHAMP,
-		.item = BATTLE_TOWER_ITEM_SCOPE_LENS,
+		.heldItem = BATTLE_TOWER_ITEM_SCOPE_LENS,
 		.teamFlags = 0x15,
 		.moves = {
 			MOVE_CROSS_CHOP,
@@ -3122,7 +3122,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_MANECTRIC,
-		.item = BATTLE_TOWER_ITEM_CHESTO_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_CHESTO_BERRY,
 		.teamFlags = 0x63,
 		.moves = {
 			MOVE_THUNDER,
@@ -3135,7 +3135,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_ELECTRODE,
-		.item = BATTLE_TOWER_ITEM_SALAC_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_SALAC_BERRY,
 		.teamFlags = 0x07,
 		.moves = {
 			MOVE_THUNDERBOLT,
@@ -3148,7 +3148,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_MUK,
-		.item = BATTLE_TOWER_ITEM_LIECHI_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_LIECHI_BERRY,
 		.teamFlags = 0x45,
 		.moves = {
 			MOVE_SLUDGE_BOMB,
@@ -3161,7 +3161,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_FLYGON,
-		.item = BATTLE_TOWER_ITEM_LUM_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_LUM_BERRY,
 		.teamFlags = 0x4D,
 		.moves = {
 			MOVE_DRAGON_CLAW,
@@ -3174,7 +3174,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_STARMIE,
-		.item = BATTLE_TOWER_ITEM_CHESTO_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_CHESTO_BERRY,
 		.teamFlags = 0x1B,
 		.moves = {
 			MOVE_LIGHT_SCREEN,
@@ -3187,7 +3187,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_NINETALES,
-		.item = BATTLE_TOWER_ITEM_SITRUS_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_SITRUS_BERRY,
 		.teamFlags = 0x0A,
 		.moves = {
 			MOVE_CONFUSE_RAY,
@@ -3200,7 +3200,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_GOLEM,
-		.item = BATTLE_TOWER_ITEM_SALAC_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_SALAC_BERRY,
 		.teamFlags = 0x25,
 		.moves = {
 			MOVE_EARTHQUAKE,
@@ -3213,7 +3213,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_GOLDUCK,
-		.item = BATTLE_TOWER_ITEM_PETAYA_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_PETAYA_BERRY,
 		.teamFlags = 0x27,
 		.moves = {
 			MOVE_HYDRO_PUMP,
@@ -3226,7 +3226,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_HERACROSS,
-		.item = BATTLE_TOWER_ITEM_SALAC_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_SALAC_BERRY,
 		.teamFlags = 0x55,
 		.moves = {
 			MOVE_MEGAHORN,
@@ -3239,7 +3239,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_WALREIN,
-		.item = BATTLE_TOWER_ITEM_SALAC_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_SALAC_BERRY,
 		.teamFlags = 0x36,
 		.moves = {
 			MOVE_SURF,
@@ -3252,7 +3252,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_KINGDRA,
-		.item = BATTLE_TOWER_ITEM_LEFTOVERS,
+		.heldItem = BATTLE_TOWER_ITEM_LEFTOVERS,
 		.teamFlags = 0x5C,
 		.moves = {
 			MOVE_HYDRO_PUMP,
@@ -3265,7 +3265,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SALAMENCE,
-		.item = BATTLE_TOWER_ITEM_KINGS_ROCK,
+		.heldItem = BATTLE_TOWER_ITEM_KINGS_ROCK,
 		.teamFlags = 0x9D,
 		.moves = {
 			MOVE_DRAGON_CLAW,
@@ -3278,7 +3278,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_METAGROSS,
-		.item = BATTLE_TOWER_ITEM_QUICK_CLAW,
+		.heldItem = BATTLE_TOWER_ITEM_QUICK_CLAW,
 		.teamFlags = 0x15,
 		.moves = {
 			MOVE_METEOR_MASH,
@@ -3291,7 +3291,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_REGIROCK,
-		.item = BATTLE_TOWER_ITEM_QUICK_CLAW,
+		.heldItem = BATTLE_TOWER_ITEM_QUICK_CLAW,
 		.teamFlags = 0x95,
 		.moves = {
 			MOVE_EARTHQUAKE,
@@ -3304,7 +3304,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_REGICE,
-		.item = BATTLE_TOWER_ITEM_SHELL_BELL,
+		.heldItem = BATTLE_TOWER_ITEM_SHELL_BELL,
 		.teamFlags = 0x96,
 		.moves = {
 			MOVE_BLIZZARD,
@@ -3317,7 +3317,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_REGISTEEL,
-		.item = BATTLE_TOWER_ITEM_QUICK_CLAW,
+		.heldItem = BATTLE_TOWER_ITEM_QUICK_CLAW,
 		.teamFlags = 0x94,
 		.moves = {
 			MOVE_METAL_CLAW,
@@ -3330,7 +3330,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_LATIAS,
-		.item = BATTLE_TOWER_ITEM_APICOT_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_APICOT_BERRY,
 		.teamFlags = 0x96,
 		.moves = {
 			MOVE_MIST_BALL,
@@ -3343,7 +3343,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_LATIOS,
-		.item = BATTLE_TOWER_ITEM_SHELL_BELL,
+		.heldItem = BATTLE_TOWER_ITEM_SHELL_BELL,
 		.teamFlags = 0x95,
 		.moves = {
 			MOVE_LUSTER_PURGE,
@@ -3356,7 +3356,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_MILOTIC,
-		.item = BATTLE_TOWER_ITEM_APICOT_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_APICOT_BERRY,
 		.teamFlags = 0xD6,
 		.moves = {
 			MOVE_SURF,
@@ -3369,7 +3369,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_KECLEON,
-		.item = BATTLE_TOWER_ITEM_CHOICE_BAND,
+		.heldItem = BATTLE_TOWER_ITEM_CHOICE_BAND,
 		.teamFlags = 0x69,
 		.moves = {
 			MOVE_TRICK,
@@ -3382,7 +3382,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SCEPTILE,
-		.item = BATTLE_TOWER_ITEM_CHESTO_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_CHESTO_BERRY,
 		.teamFlags = 0x5F,
 		.moves = {
 			MOVE_LEAF_BLADE,
@@ -3395,7 +3395,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_BLAZIKEN,
-		.item = BATTLE_TOWER_ITEM_LUM_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_LUM_BERRY,
 		.teamFlags = 0x7F,
 		.moves = {
 			MOVE_FOCUS_PUNCH,
@@ -3408,7 +3408,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SWAMPERT,
-		.item = BATTLE_TOWER_ITEM_LUM_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_LUM_BERRY,
 		.teamFlags = 0x57,
 		.moves = {
 			MOVE_IRON_TAIL,
@@ -3421,7 +3421,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_GARDEVOIR,
-		.item = BATTLE_TOWER_ITEM_CHESTO_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_CHESTO_BERRY,
 		.teamFlags = 0x3B,
 		.moves = {
 			MOVE_SHADOW_BALL,
@@ -3434,7 +3434,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_BRELOOM,
-		.item = BATTLE_TOWER_ITEM_SALAC_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_SALAC_BERRY,
 		.teamFlags = 0x56,
 		.moves = {
 			MOVE_SPORE,
@@ -3447,7 +3447,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_ALAKAZAM,
-		.item = BATTLE_TOWER_ITEM_CHOICE_BAND,
+		.heldItem = BATTLE_TOWER_ITEM_CHOICE_BAND,
 		.teamFlags = 0x1A,
 		.moves = {
 			MOVE_PSYCHIC,
@@ -3460,7 +3460,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_HARIYAMA,
-		.item = BATTLE_TOWER_ITEM_SALAC_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_SALAC_BERRY,
 		.teamFlags = 0x65,
 		.moves = {
 			MOVE_REVENGE,
@@ -3473,7 +3473,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_LUDICOLO,
-		.item = BATTLE_TOWER_ITEM_LEFTOVERS,
+		.heldItem = BATTLE_TOWER_ITEM_LEFTOVERS,
 		.teamFlags = 0x54,
 		.moves = {
 			MOVE_RAIN_DANCE,
@@ -3486,7 +3486,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_CROBAT,
-		.item = BATTLE_TOWER_ITEM_BRIGHT_POWDER,
+		.heldItem = BATTLE_TOWER_ITEM_BRIGHT_POWDER,
 		.teamFlags = 0x4B,
 		.moves = {
 			MOVE_SLUDGE_BOMB,
@@ -3499,7 +3499,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_MACHAMP,
-		.item = BATTLE_TOWER_ITEM_SCOPE_LENS,
+		.heldItem = BATTLE_TOWER_ITEM_SCOPE_LENS,
 		.teamFlags = 0x75,
 		.moves = {
 			MOVE_CROSS_CHOP,
@@ -3512,7 +3512,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_MANECTRIC,
-		.item = BATTLE_TOWER_ITEM_PETAYA_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_PETAYA_BERRY,
 		.teamFlags = 0x0A,
 		.moves = {
 			MOVE_THUNDERBOLT,
@@ -3525,7 +3525,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_ELECTRODE,
-		.item = BATTLE_TOWER_ITEM_LIECHI_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_LIECHI_BERRY,
 		.teamFlags = 0x64,
 		.moves = {
 			MOVE_THUNDER,
@@ -3538,7 +3538,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_MUK,
-		.item = BATTLE_TOWER_ITEM_SALAC_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_SALAC_BERRY,
 		.teamFlags = 0x49,
 		.moves = {
 			MOVE_SLUDGE_BOMB,
@@ -3551,7 +3551,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_FLYGON,
-		.item = BATTLE_TOWER_ITEM_BRIGHT_POWDER,
+		.heldItem = BATTLE_TOWER_ITEM_BRIGHT_POWDER,
 		.teamFlags = 0xCD,
 		.moves = {
 			MOVE_PROTECT,
@@ -3564,7 +3564,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_STARMIE,
-		.item = BATTLE_TOWER_ITEM_KINGS_ROCK,
+		.heldItem = BATTLE_TOWER_ITEM_KINGS_ROCK,
 		.teamFlags = 0x5B,
 		.moves = {
 			MOVE_SURF,
@@ -3577,7 +3577,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_LUDICOLO,
-		.item = BATTLE_TOWER_ITEM_LEFTOVERS,
+		.heldItem = BATTLE_TOWER_ITEM_LEFTOVERS,
 		.teamFlags = 0x1A,
 		.moves = {
 			MOVE_RAIN_DANCE,
@@ -3590,7 +3590,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_RAICHU,
-		.item = BATTLE_TOWER_ITEM_LIECHI_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_LIECHI_BERRY,
 		.teamFlags = 0x4A,
 		.moves = {
 			MOVE_THUNDER,
@@ -3603,7 +3603,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_GOLDUCK,
-		.item = BATTLE_TOWER_ITEM_SALAC_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_SALAC_BERRY,
 		.teamFlags = 0x0A,
 		.moves = {
 			MOVE_SURF,
@@ -3616,7 +3616,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_HERACROSS,
-		.item = BATTLE_TOWER_ITEM_LIECHI_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_LIECHI_BERRY,
 		.teamFlags = 0x15,
 		.moves = {
 			MOVE_MEGAHORN,
@@ -3629,7 +3629,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_WALREIN,
-		.item = BATTLE_TOWER_ITEM_LEPPA_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_LEPPA_BERRY,
 		.teamFlags = 0x26,
 		.moves = {
 			MOVE_SURF,
@@ -3642,7 +3642,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_KINGDRA,
-		.item = BATTLE_TOWER_ITEM_SHELL_BELL,
+		.heldItem = BATTLE_TOWER_ITEM_SHELL_BELL,
 		.teamFlags = 0x4D,
 		.moves = {
 			MOVE_HYDRO_PUMP,
@@ -3655,7 +3655,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SALAMENCE,
-		.item = BATTLE_TOWER_ITEM_PETAYA_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_PETAYA_BERRY,
 		.teamFlags = 0x9C,
 		.moves = {
 			MOVE_DRAGON_CLAW,
@@ -3668,7 +3668,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_METAGROSS,
-		.item = BATTLE_TOWER_ITEM_LIECHI_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_LIECHI_BERRY,
 		.teamFlags = 0xB5,
 		.moves = {
 			MOVE_METEOR_MASH,
@@ -3681,7 +3681,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_REGIROCK,
-		.item = BATTLE_TOWER_ITEM_APICOT_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_APICOT_BERRY,
 		.teamFlags = 0x95,
 		.moves = {
 			MOVE_EARTHQUAKE,
@@ -3694,7 +3694,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_REGICE,
-		.item = BATTLE_TOWER_ITEM_LAX_INCENSE,
+		.heldItem = BATTLE_TOWER_ITEM_LAX_INCENSE,
 		.teamFlags = 0x96,
 		.moves = {
 			MOVE_ICE_BEAM,
@@ -3707,7 +3707,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_REGISTEEL,
-		.item = BATTLE_TOWER_ITEM_LEFTOVERS,
+		.heldItem = BATTLE_TOWER_ITEM_LEFTOVERS,
 		.teamFlags = 0xB4,
 		.moves = {
 			MOVE_CURSE,
@@ -3720,7 +3720,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_LATIAS,
-		.item = BATTLE_TOWER_ITEM_SHELL_BELL,
+		.heldItem = BATTLE_TOWER_ITEM_SHELL_BELL,
 		.teamFlags = 0x92,
 		.moves = {
 			MOVE_MIST_BALL,
@@ -3733,7 +3733,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_LATIOS,
-		.item = BATTLE_TOWER_ITEM_SHELL_BELL,
+		.heldItem = BATTLE_TOWER_ITEM_SHELL_BELL,
 		.teamFlags = 0x91,
 		.moves = {
 			MOVE_LUSTER_PURGE,
@@ -3746,7 +3746,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_MILOTIC,
-		.item = BATTLE_TOWER_ITEM_BRIGHT_POWDER,
+		.heldItem = BATTLE_TOWER_ITEM_BRIGHT_POWDER,
 		.teamFlags = 0xB2,
 		.moves = {
 			MOVE_SURF,
@@ -3759,7 +3759,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SLAKING,
-		.item = BATTLE_TOWER_ITEM_SALAC_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_SALAC_BERRY,
 		.teamFlags = 0x65,
 		.moves = {
 			MOVE_YAWN,
@@ -3772,7 +3772,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SCEPTILE,
-		.item = BATTLE_TOWER_ITEM_SHELL_BELL,
+		.heldItem = BATTLE_TOWER_ITEM_SHELL_BELL,
 		.teamFlags = 0xDF,
 		.moves = {
 			MOVE_LEAF_BLADE,
@@ -3785,7 +3785,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_BLAZIKEN,
-		.item = BATTLE_TOWER_ITEM_SALAC_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_SALAC_BERRY,
 		.teamFlags = 0xD7,
 		.moves = {
 			MOVE_BLAZE_KICK,
@@ -3798,7 +3798,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SWAMPERT,
-		.item = BATTLE_TOWER_ITEM_PETAYA_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_PETAYA_BERRY,
 		.teamFlags = 0x5F,
 		.moves = {
 			MOVE_SURF,
@@ -3811,7 +3811,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_SHEDINJA,
-		.item = BATTLE_TOWER_ITEM_BRIGHT_POWDER,
+		.heldItem = BATTLE_TOWER_ITEM_BRIGHT_POWDER,
 		.teamFlags = 0xDB,
 		.moves = {
 			MOVE_CONFUSE_RAY,
@@ -3824,7 +3824,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_METAGROSS,
-		.item = BATTLE_TOWER_ITEM_QUICK_CLAW,
+		.heldItem = BATTLE_TOWER_ITEM_QUICK_CLAW,
 		.teamFlags = 0x94,
 		.moves = {
 			MOVE_METEOR_MASH,
@@ -3837,7 +3837,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_GRUMPIG,
-		.item = BATTLE_TOWER_ITEM_MACHO_BRACE,
+		.heldItem = BATTLE_TOWER_ITEM_MACHO_BRACE,
 		.teamFlags = 0x4B,
 		.moves = {
 			MOVE_PSYCHIC,
@@ -3850,7 +3850,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_LATIAS,
-		.item = BATTLE_TOWER_ITEM_LUM_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_LUM_BERRY,
 		.teamFlags = 0x92,
 		.moves = {
 			MOVE_MIST_BALL,
@@ -3863,7 +3863,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_LATIOS,
-		.item = BATTLE_TOWER_ITEM_KINGS_ROCK,
+		.heldItem = BATTLE_TOWER_ITEM_KINGS_ROCK,
 		.teamFlags = 0x91,
 		.moves = {
 			MOVE_LUSTER_PURGE,
@@ -3876,7 +3876,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_STARMIE,
-		.item = BATTLE_TOWER_ITEM_LUM_BERRY,
+		.heldItem = BATTLE_TOWER_ITEM_LUM_BERRY,
 		.teamFlags = 0x1A,
 		.moves = {
 			MOVE_SURF,
@@ -3889,7 +3889,7 @@ const struct BattleTowerPokemon gBattleTowerLevel50Mons[] =
 	},
 	{
 		.species = SPECIES_MACHAMP,
-		.item = BATTLE_TOWER_ITEM_SCOPE_LENS,
+		.heldItem = BATTLE_TOWER_ITEM_SCOPE_LENS,
 		.teamFlags = 0x14,
 		.moves = {
 			MOVE_CROSS_CHOP,
