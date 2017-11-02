@@ -25,7 +25,11 @@
 #include "tv.h"
 #include "vars.h"
 
+#if ENGLISH
 #include "data/battle_tower/trainers.h"
+#elif GERMAN
+#include "data/battle_tower/trainers_de.h"
+#endif
 
 const u16 gBattleTowerHeldItems[] = {
 	ITEM_NONE,
