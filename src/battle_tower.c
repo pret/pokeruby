@@ -270,7 +270,7 @@ extern void sub_8135A3C(void);
 extern void sub_8135CFC(void);
 extern void CheckMonBattleTowerBanlist(u16, u16, u16, u8, u8, u16 *, u16 *, u8 *);
 static void ClearEReaderTrainer(struct BattleTowerEReaderTrainer *);
-//static void SetEReaderTrainerChecksum(struct BattleTowerEReaderTrainer *ereaderTrainer);
+static void SetEReaderTrainerChecksum(struct BattleTowerEReaderTrainer *ereaderTrainer);
 static void SetBattleTowerRecordChecksum(struct BattleTowerRecord *);
 static void ClearBattleTowerRecord(struct BattleTowerRecord *);
 
@@ -1805,6 +1805,7 @@ void sub_8135A3C(void)
 {
 	u8 battleTowerLevelType = gSaveBlock2.battleTower.battleTowerLevelType;
 	u16 winStreak = sub_8135D3C(battleTowerLevelType);
+
 	if (gSaveBlock2.battleTower.recordWinStreaks[battleTowerLevelType] < winStreak)
 	{
 		gSaveBlock2.battleTower.recordWinStreaks[battleTowerLevelType] = winStreak;
@@ -1812,26 +1813,28 @@ void sub_8135A3C(void)
 
 	if (gSaveBlock2.battleTower.recordWinStreaks[0] > gSaveBlock2.battleTower.recordWinStreaks[1])
 	{
-		SetGameStat(GAME_STAT_BATTLE_TOWER_BEST_STREAK, gSaveBlock2.battleTower.recordWinStreaks[0]);
-		if (gSaveBlock2.battleTower.recordWinStreaks[0] > 9999)
+		u16 streak = gSaveBlock2.battleTower.recordWinStreaks[0];
+		SetGameStat(GAME_STAT_BATTLE_TOWER_BEST_STREAK, streak);
+		if (streak > 9999)
 		{
 			gSaveBlock2.battleTower.bestBattleTowerWinStreak = 9999;
 		}
 		else
 		{
-			gSaveBlock2.battleTower.bestBattleTowerWinStreak = gSaveBlock2.battleTower.recordWinStreaks[0];
+			gSaveBlock2.battleTower.bestBattleTowerWinStreak = streak;
 		}
 	}
 	else
 	{
-		SetGameStat(GAME_STAT_BATTLE_TOWER_BEST_STREAK, gSaveBlock2.battleTower.recordWinStreaks[1]);
-		if (gSaveBlock2.battleTower.recordWinStreaks[1] > 9999)
+		u16 streak = gSaveBlock2.battleTower.recordWinStreaks[1];
+		SetGameStat(GAME_STAT_BATTLE_TOWER_BEST_STREAK, streak);
+		if (streak > 9999)
 		{
 			gSaveBlock2.battleTower.bestBattleTowerWinStreak = 9999;
 		}
 		else
 		{
-			gSaveBlock2.battleTower.bestBattleTowerWinStreak = gSaveBlock2.battleTower.recordWinStreaks[1];
+			gSaveBlock2.battleTower.bestBattleTowerWinStreak = streak;
 		}
 	}
 }
@@ -1917,7 +1920,7 @@ void sub_8135AC4(void)
 	struct BattleTowerRecord *playerRecord = &gSaveBlock2.battleTower.playerRecord;
 	u8 battleTowerLevelType = gSaveBlock2.battleTower.battleTowerLevelType;
 
-	if (gSaveBlock2.playerGender != 0)
+	if (gSaveBlock2.playerGender != MALE)
 	{
 		trainerClass = gUnknown_08405E7E[(gSaveBlock2.playerTrainerId[0] + gSaveBlock2.playerTrainerId[1]
 								  + gSaveBlock2.playerTrainerId[2] + gSaveBlock2.playerTrainerId[3]) % 20u];
@@ -2189,108 +2192,47 @@ void sub_8135E50()
 	}
 }
 
-__attribute__((naked))
-void unref_sub_8135EE8()
+// This is a leftover debugging function that is used to populate the E-Reader
+// trainer with the player's current data.
+void Debug_FillEReaderTrainerWithPlayerData(void)
 {
-	asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-	ldr r7, _08135F0C @ =gSaveBlock2 + 0x498\n\
-	ldr r0, _08135F10 @ =0xfffffb68\n\
-	adds r2, r7, r0\n\
-	ldrb r0, [r2, 0x8]\n\
-	cmp r0, 0\n\
-	beq _08135F18\n\
-	ldr r4, _08135F14 @ =gUnknown_08405E7E\n\
-	ldrb r0, [r2, 0xA]\n\
-	ldrb r1, [r2, 0xB]\n\
-	adds r0, r1\n\
-	ldrb r1, [r2, 0xC]\n\
-	adds r0, r1\n\
-	ldrb r1, [r2, 0xD]\n\
-	adds r0, r1\n\
-	movs r1, 0x14\n\
-	b _08135F2A\n\
-	.align 2, 0\n\
-_08135F0C: .4byte gSaveBlock2 + 0x498\n\
-_08135F10: .4byte 0xfffffb68\n\
-_08135F14: .4byte gUnknown_08405E7E\n\
-_08135F18:\n\
-	ldr r4, _08135FA8 @ =gUnknown_08405E60\n\
-	ldrb r0, [r2, 0xA]\n\
-	ldrb r1, [r2, 0xB]\n\
-	adds r0, r1\n\
-	ldrb r1, [r2, 0xC]\n\
-	adds r0, r1\n\
-	ldrb r1, [r2, 0xD]\n\
-	adds r0, r1\n\
-	movs r1, 0x1E\n\
-_08135F2A:\n\
-	bl __umodsi3\n\
-	adds r0, r4\n\
-	ldrb r0, [r0]\n\
-	strb r0, [r7, 0x1]\n\
-	adds r0, r7, 0\n\
-	adds r0, 0xC\n\
-	ldr r4, _08135FAC @ =gSaveBlock2 + 0xA\n\
-	adds r1, r4, 0\n\
-	bl copy_word_to_mem\n\
-	adds r0, r7, 0x4\n\
-	subs r4, 0xA\n\
-	adds r1, r4, 0\n\
-	bl StringCopy8\n\
-	movs r0, 0x1\n\
-	strh r0, [r7, 0x2]\n\
-	movs r5, 0x7\n\
-	movs r4, 0\n\
-	ldr r0, _08135FB0 @ =gSaveBlock1\n\
-	ldr r1, _08135FB4 @ =0x00002b28\n\
-	adds r6, r0, r1\n\
-	adds r3, r7, 0\n\
-	adds r3, 0x10\n\
-	adds r2, r7, 0\n\
-	adds r2, 0x28\n\
-	adds r1, r7, 0\n\
-	adds r1, 0x1C\n\
-_08135F64:\n\
-	ldrh r0, [r6]\n\
-	strh r0, [r3]\n\
-	strh r5, [r1]\n\
-	adds r0, r5, 0x6\n\
-	strh r0, [r2]\n\
-	adds r5, 0x1\n\
-	adds r6, 0x2\n\
-	adds r3, 0x2\n\
-	adds r2, 0x2\n\
-	adds r1, 0x2\n\
-	adds r4, 0x1\n\
-	cmp r4, 0x5\n\
-	ble _08135F64\n\
-	movs r4, 0\n\
-_08135F80:\n\
-	movs r0, 0x64\n\
-	muls r0, r4\n\
-	ldr r1, _08135FB8 @ =gPlayerParty\n\
-	adds r0, r1\n\
-	movs r1, 0x2C\n\
-	muls r1, r4\n\
-	adds r1, 0x34\n\
-	adds r1, r7, r1\n\
-	bl sub_803AF78\n\
-	adds r4, 0x1\n\
-	cmp r4, 0x2\n\
-	ble _08135F80\n\
-	adds r0, r7, 0\n\
-	bl SetEReaderTrainerChecksum\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_08135FA8: .4byte gUnknown_08405E60\n\
-_08135FAC: .4byte gSaveBlock2 + 0xA\n\
-_08135FB0: .4byte gSaveBlock1\n\
-_08135FB4: .4byte 0x00002b28\n\
-_08135FB8: .4byte gPlayerParty\n\
-.syntax divided\n");
+	struct BattleTowerEReaderTrainer *ereaderTrainer;
+	s32 i;
+	s32 j;
+
+	ereaderTrainer = &gSaveBlock2.battleTower.ereaderTrainer;
+
+	if (gSaveBlock2.playerGender != MALE)
+	{
+		ereaderTrainer->trainerClass = gUnknown_08405E7E[(gSaveBlock2.playerTrainerId[0] + gSaveBlock2.playerTrainerId[1]
+														+ gSaveBlock2.playerTrainerId[2] + gSaveBlock2.playerTrainerId[3]) % 20u];
+	}
+	else
+	{
+		ereaderTrainer->trainerClass = gUnknown_08405E60[(gSaveBlock2.playerTrainerId[0] + gSaveBlock2.playerTrainerId[1]
+														+ gSaveBlock2.playerTrainerId[2] + gSaveBlock2.playerTrainerId[3]) % 30u];
+	}
+
+	copy_word_to_mem(ereaderTrainer->trainerId, gSaveBlock2.playerTrainerId);
+	StringCopy8(ereaderTrainer->name, gSaveBlock2.playerName);
+
+	ereaderTrainer->var_2 = 1;
+
+	j = 7;
+	for (i = 0; i < 6; i++)
+	{
+		ereaderTrainer->greeting.easyChat[i] = gSaveBlock1.easyChats.unk2B28[i];
+		ereaderTrainer->farewellPlayerLost.easyChat[i] = j;
+		ereaderTrainer->farewellPlayerWon.easyChat[i] = j + 6;
+		j++;
+	}
+
+	for (i = 0; i < 3; i++)
+	{
+		sub_803AF78(&gPlayerParty[i], &ereaderTrainer->party[i]);
+	}
+
+	SetEReaderTrainerChecksum(ereaderTrainer);
 }
 
 u8 sub_8135FBC(void)

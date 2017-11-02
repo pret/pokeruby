@@ -781,8 +781,8 @@ struct BattleTowerEReaderTrainer
     /*0x00*/u8 unk0;
     /*0x01*/u8 trainerClass;
     /*0x02*/u16 var_2; // TODO: this gets set in MEScrCmd_addtrainer
-    /*0x04*/u8 name[7];
-    /*0x0B*/u8 filler_B[0x5];
+    /*0x04*/u8 name[8];
+    /*0x0C*/u8 trainerId[4];
     /*0x10*/struct {
         u16 easyChat[6];
     } greeting;
