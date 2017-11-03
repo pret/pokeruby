@@ -817,7 +817,7 @@ void SetBattleTowerTrainerGfxId(u8 trainerIndex)
 	VarSet(0x4010, MAP_OBJ_GFX_BOY_1);
 }
 
-void SetEReaderTrainerGfxId()
+void SetEReaderTrainerGfxId(void)
 {
 	SetBattleTowerTrainerGfxId(BATTLE_TOWER_EREADER_TRAINER_ID);
 }
@@ -1380,7 +1380,7 @@ void FillBattleTowerTrainerParty(void)
 
 }
 
-u32 CountBattleTowerBanlistCaught()
+u32 CountBattleTowerBanlistCaught(void)
 {
 	s32 i;
 	u32 numCaught = 0;
@@ -2160,7 +2160,7 @@ void GiveBattleTowerPrize(void)
 	}
 }
 
-void AwardBattleTowerRibbons()
+void AwardBattleTowerRibbons(void)
 {
 	s32 i;
 	u32 partyIndex;
