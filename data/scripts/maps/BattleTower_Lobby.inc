@@ -79,7 +79,7 @@ BattleTower_Lobby_EventScript_160342:: @ 8160342
 	special sub_81358A4
 	compare RESULT, 6
 	goto_if_eq BattleTower_Lobby_EventScript_16037D
-	special sub_8135E50
+	special AwardBattleTowerRibbons
 	compare RESULT, 0
 	goto_if_eq BattleTower_Lobby_EventScript_16037D
 	message BattleTower_Lobby_Text_19A6BE
@@ -97,7 +97,7 @@ BattleTower_Lobby_EventScript_16037D:: @ 816037D
 	waitmessage
 	setvar 0x8004, 13
 	special sub_8135668
-	special sub_8135D84
+	special DetermineBattleTowerPrize
 	setvar 0x8004, 3
 	special sub_8135BA0
 	playse 55
@@ -109,7 +109,7 @@ BattleTower_Lobby_EventScript_1603AD:: @ 81603AD
 	special sub_8135668
 	message BattleTower_Lobby_Text_19A4BB
 	waitmessage
-	special sub_8135DEC
+	special GiveBattleTowerPrize
 	switch RESULT
 	case 0, BattleTower_Lobby_EventScript_160408
 	message BattleTower_Lobby_Text_19A506

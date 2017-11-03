@@ -1789,7 +1789,7 @@ u16 sub_810F404(void)
 
 void sub_810F414(void)
 {
-    sub_8135FF4(gStringVar1);
+    SetEReaderTrainerName(gStringVar1);
 }
 
 const u8 gUnknown_083F83E0[] = {12, 2, 4, 5, 1, 8, 7, 11, 3, 10, 9, 6};

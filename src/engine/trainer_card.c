@@ -311,16 +311,16 @@ static void nullsub_60(u8 taskid)
 {
 }
 
-void sub_8093390(struct TrainerCard *arg1)
+void sub_8093390(struct TrainerCard *trainerCard)
 {
     u32 playTime;
     bool32 enteredHallOfFame;
     bool8 r4;
     u8 i;
 
-    arg1->gender = gSaveBlock2.playerGender;
-    arg1->playTimeHours = gSaveBlock2.playTimeHours;
-    arg1->playTimeMinutes = gSaveBlock2.playTimeMinutes;
+    trainerCard->gender = gSaveBlock2.playerGender;
+    trainerCard->playTimeHours = gSaveBlock2.playTimeHours;
+    trainerCard->playTimeMinutes = gSaveBlock2.playTimeMinutes;
 
     playTime = GetGameStat(GAME_STAT_FIRST_HOF_PLAY_TIME);
     enteredHallOfFame = GetGameStat(GAME_STAT_ENTERED_HOF);
@@ -328,39 +328,39 @@ void sub_8093390(struct TrainerCard *arg1)
     {
         playTime = 0;
     }
-    arg1->firstHallOfFameA = playTime >> 16;
-    arg1->firstHallOfFameB = (playTime >> 8) & 0xFF;
-    arg1->firstHallOfFameC = playTime & 0xFF;
+    trainerCard->firstHallOfFameA = playTime >> 16;
+    trainerCard->firstHallOfFameB = (playTime >> 8) & 0xFF;
+    trainerCard->firstHallOfFameC = playTime & 0xFF;
 
-    arg1->hasPokedex = FlagGet(SYS_POKEDEX_GET);
-    arg1->var_3 = sub_8090FC0();
-    arg1->pokedexSeen = GetPokedexSeenCount();
+    trainerCard->hasPokedex = FlagGet(SYS_POKEDEX_GET);
+    trainerCard->var_3 = sub_8090FC0();
+    trainerCard->pokedexSeen = GetPokedexSeenCount();
 
-    arg1->trainerId = (gSaveBlock2.playerTrainerId[1] << 8) | gSaveBlock2.playerTrainerId[0];
+    trainerCard->trainerId = (gSaveBlock2.playerTrainerId[1] << 8) | gSaveBlock2.playerTrainerId[0];
 
     // Link Cable Battles
-    arg1->linkBattleWins = sav12_xor_get_clamped_above(GAME_STAT_LINK_BATTLE_WINS, 9999);
-    arg1->linkBattleLosses = sav12_xor_get_clamped_above(GAME_STAT_LINK_BATTLE_LOSSES, 9999);
+    trainerCard->linkBattleWins = sav12_xor_get_clamped_above(GAME_STAT_LINK_BATTLE_WINS, 9999);
+    trainerCard->linkBattleLosses = sav12_xor_get_clamped_above(GAME_STAT_LINK_BATTLE_LOSSES, 9999);
 
     // Contests w/ Friends
-    arg1->contestsWithFriends = sav12_xor_get_clamped_above(GAME_STAT_WON_LINK_CONTEST, 999);
+    trainerCard->contestsWithFriends = sav12_xor_get_clamped_above(GAME_STAT_WON_LINK_CONTEST, 999);
 
     // Pokéblocks w/ Friends
-    arg1->pokeblocksWithFriends = sav12_xor_get_clamped_above(GAME_STAT_POKEBLOCKS_WITH_FRIENDS, 0xFFFF);
+    trainerCard->pokeblocksWithFriends = sav12_xor_get_clamped_above(GAME_STAT_POKEBLOCKS_WITH_FRIENDS, 0xFFFF);
 
     // Pokémon Trades
-    arg1->pokemonTrades = sav12_xor_get_clamped_above(GAME_STAT_POKEMON_TRADES, 0xFFFF);
+    trainerCard->pokemonTrades = sav12_xor_get_clamped_above(GAME_STAT_POKEMON_TRADES, 0xFFFF);
 
-    // Battle tower?
-    arg1->battleTowerWins = gSaveBlock2.filler_A8.var_4C8;
-    arg1->battleTowerLosses = gSaveBlock2.filler_A8.var_4CA;
-    if (arg1->battleTowerWins > 9999)
+    // Battle Tower
+    trainerCard->battleTowerWins = gSaveBlock2.battleTower.totalBattleTowerWins;
+    trainerCard->battleTowerLosses = gSaveBlock2.battleTower.bestBattleTowerWinStreak;
+    if (trainerCard->battleTowerWins > 9999)
     {
-        arg1->battleTowerWins = 9999;
+        trainerCard->battleTowerWins = 9999;
     }
-    if (arg1->battleTowerLosses > 9999)
+    if (trainerCard->battleTowerLosses > 9999)
     {
-        arg1->battleTowerLosses = 9999;
+        trainerCard->battleTowerLosses = 9999;
     }
 
     r4 = FALSE;
@@ -368,21 +368,21 @@ void sub_8093390(struct TrainerCard *arg1)
     {
         r4 = TRUE;
     }
-    arg1->var_4 = r4;
+    trainerCard->var_4 = r4;
 
-    arg1->money = gSaveBlock1.money;
+    trainerCard->money = gSaveBlock1.money;
 
     for (i = 0; i < 4; i++)
     {
-        arg1->var_28[i] = gSaveBlock1.unk2B1C[i];
+        trainerCard->var_28[i] = gSaveBlock1.easyChats.unk2B1C[i];
     }
 
     for (i = 0; i < 8; i++)
     {
-        arg1->playerName[i] = gSaveBlock2.playerName[i];
+        trainerCard->playerName[i] = gSaveBlock2.playerName[i];
     }
 
-    arg1->stars = sub_80934F4(arg1);
+    trainerCard->stars = sub_80934F4(trainerCard);
 }
 
 u8 sub_80934C4(u8 id)
