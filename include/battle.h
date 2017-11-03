@@ -748,7 +748,6 @@ void EmitEffectivenessSound(u8 a, u16 sound); //0x2B
 void Emitcmd44(u8 a, u16 sound);    //0x2C
 void EmitFaintingCry(u8 a); //0x2D
 void EmitIntroSlide(u8 a, u8 b); //0x2E
-void Emitcmd48(u8 a, u8 *b, u8 c); //0x30
 void Emitcmd49(u8 a);  //0x31
 void EmitSpriteInvisibility(u8 a, u8 b); //0x33
 void EmitBattleAnimation(u8 a, u8 b, u16 c); //0x34

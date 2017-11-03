@@ -1088,7 +1088,7 @@ static void sub_8047EC0(void)
             ResetSpriteData();
             FreeAllSpritePalettes();
             ResetTasks();
-            sub_804A964(&gUnknown_03004824->unk_00c8, (void *)BG_SCREEN_ADDR(5));
+            sub_804A964(&gUnknown_03004824->unk_00c8, BG_SCREEN_ADDR(5));
             SetVBlankCallback(sub_80489F4);
             InitMenuWindow(&gWindowConfig_81E6CE4);
             SetUpWindowConfig(&gWindowConfig_81E6F84);
@@ -1268,7 +1268,7 @@ static void sub_80484F4(void)
             ResetSpriteData();
             FreeAllSpritePalettes();
             ResetTasks();
-            sub_804A964(&gUnknown_03004824->unk_00c8, (void *)BG_SCREEN_ADDR(5));
+            sub_804A964(&gUnknown_03004824->unk_00c8, BG_SCREEN_ADDR(5));
             SetVBlankCallback(sub_80489F4);
             InitMenuWindow(&gWindowConfig_81E6CE4);
             SetUpWindowConfig(&gWindowConfig_81E6F84);
@@ -1484,12 +1484,12 @@ static void sub_8048B0C(u8 a0)
             }
             for (i = 0; i < 0x400; i ++)
                 gUnknown_03004824->unk_00c8.unk_12[i] = gUnknown_08EA15C8[i];
-            dest = (u16 *)BG_SCREEN_ADDR(6);
+            dest = BG_SCREEN_ADDR(6);
             DmaCopy16(3, gTradeStripesBG2Tilemap, dest, 0x800);
             break;
         case 1:
             src = gTradeStripesBG3Tilemap;
-            dest = (u16 *)BG_SCREEN_ADDR(7);
+            dest = BG_SCREEN_ADDR(7);
             DmaCopy16(3, src, dest, 0x800);
             sub_804A6DC(0);
             sub_804A6DC(1);
@@ -1853,7 +1853,7 @@ static void sub_8049088(void)
 {
     u8 string[28];
     StringCopy(string, gTradeText_TradeOkayPrompt);
-    sub_804ACD8(string, (u8 *)BG_CHAR_ADDR(4) + gUnknown_03004824->unk_007e * 32, 20);
+    sub_804ACD8(string, BG_CHAR_ADDR(4) + gUnknown_03004824->unk_007e * 32, 20);
 }
 
 static void sub_80490BC(u8 mpId, u8 a1)
@@ -2111,7 +2111,7 @@ static void sub_8049680(void)
             DrawTextWindow(&gUnknown_03004824->window, 24, 14, 29, 19);
             InitYesNoMenu(24, 14, 4);
             gUnknown_03004824->unk_007b = 4;
-            sub_804ACD8(gUnknown_0820C14C[4], (u8 *)(BG_CHAR_ADDR(4) + 32 * gUnknown_03004824->unk_007e), 20);
+            sub_804ACD8(gUnknown_0820C14C[4], BG_CHAR_ADDR(4) + 32 * gUnknown_03004824->unk_007e, 20);
         }
     }
     if (gMain.newKeys & R_BUTTON)
@@ -2130,7 +2130,7 @@ static void sub_8049804(void)
     sub_804A80C();
     gUnknown_03004824->unk_007b = 0;
     gSprites[gUnknown_03004824->tradeMenuCursorSpriteIdx].invisible = FALSE;
-    sub_804ACD8(gUnknown_0820C14C[1], (u8 *)(BG_CHAR_ADDR(4) + 32 * gUnknown_03004824->unk_007e), 20);
+    sub_804ACD8(gUnknown_0820C14C[1], BG_CHAR_ADDR(4) + 32 * gUnknown_03004824->unk_007e, 20);
 }
 
 static void sub_8049860(void)
@@ -2498,7 +2498,7 @@ static void sub_8049ED4(u8 a0)
             gUnknown_03004824->unk_0080[a0] ++;
             break;
         case 4:
-            sub_804ACD8(gUnknown_0820C14C[5], (u8 *)(BG_CHAR_ADDR(4) + 32 * gUnknown_03004824->unk_007e), 20);
+            sub_804ACD8(gUnknown_0820C14C[5], BG_CHAR_ADDR(4) + 32 * gUnknown_03004824->unk_007e, 20);
             sub_804A51C(a0, whichPokemon, gUnknown_0820C3D1[a0][0] + 4, gUnknown_0820C3D1[a0][1] + 1, gUnknown_0820C3D1[a0][0], gUnknown_0820C3D1[a0][1]);
             gUnknown_03004824->unk_0080[a0] ++;
             break;
@@ -3362,7 +3362,7 @@ static void sub_804A840(u8 whichParty)
         sub_804A740(1);
         sub_804A938(&gUnknown_03004824->unk_00c8);
     }
-    sub_804ACD8(gUnknown_0820C14C[1], (u8 *)(BG_CHAR_ADDR(4) + 32 * gUnknown_03004824->unk_007e), 20);
+    sub_804ACD8(gUnknown_0820C14C[1], BG_CHAR_ADDR(4) + 32 * gUnknown_03004824->unk_007e, 20);
     gUnknown_03004824->unk_0080[whichParty] = 0;
 }
 
@@ -4037,7 +4037,7 @@ static void sub_804B41C(void)
             gMain.state ++;
             LZDecompressVram(gUnknown_08D00000, (void *)VRAM);
             CpuCopy16(gUnknown_08D00524, ewram, 0x1000);
-            DmaCopy16Defvars(3, ewram, (void *)BG_SCREEN_ADDR(5), 0x500);
+            DmaCopy16Defvars(3, ewram, BG_SCREEN_ADDR(5), 0x500);
             LoadCompressedPalette(gUnknown_08D004E0, 0, 32);
             gUnknown_03004828->unk_00b6 = 0;
             gUnknown_03004828->unk_00c4 = 0;
@@ -4678,8 +4678,8 @@ static void sub_804BBE8(u8 a0)
     {
         case 0:
             LoadPalette(gUnknown_0820C9F8, 0x10, 0xa0);
-            DmaCopyLarge16(3, gUnknown_0820CA98, (void *)BG_CHAR_ADDR(1), 0x1300, 0x1000);
-            DmaCopy16Defvars(3, gUnknown_0820F798, (void *)BG_SCREEN_ADDR(18), 0x1000);
+            DmaCopyLarge16(3, gUnknown_0820CA98, BG_CHAR_ADDR(1), 0x1300, 0x1000);
+            DmaCopy16Defvars(3, gUnknown_0820F798, BG_SCREEN_ADDR(18), 0x1000);
             gUnknown_03004828->bg2vofs = 0;
             gUnknown_03004828->bg2hofs = 0xb4;
             REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_BG2_ON | DISPCNT_OBJ_ON;
@@ -4691,15 +4691,15 @@ static void sub_804BBE8(u8 a0)
             REG_BG1VOFS = 0x15c;
             REG_BG1CNT = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(5) | BGCNT_TXT256x512;
 
-            DmaCopy16Defvars(3, gUnknown_08210798, (void *)BG_SCREEN_ADDR(5), 0x1000);
-            DmaCopyLarge16(3, gUnknown_0820CA98, (void *)BG_CHAR_ADDR(0), 0x1300, 0x1000);
+            DmaCopy16Defvars(3, gUnknown_08210798, BG_SCREEN_ADDR(5), 0x1000);
+            DmaCopyLarge16(3, gUnknown_0820CA98, BG_CHAR_ADDR(0), 0x1300, 0x1000);
             REG_DISPCNT = DISPCNT_MODE_1 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG1_ON | DISPCNT_OBJ_ON;
             break;
         case 2:
             gUnknown_03004828->bg1vofs = 0;
             gUnknown_03004828->bg1hofs = 0;
             REG_DISPCNT = DISPCNT_MODE_1 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG1_ON | DISPCNT_OBJ_ON;
-            DmaCopy16Defvars(3, gUnknown_08211798, (void *)BG_SCREEN_ADDR(5), 0x800);
+            DmaCopy16Defvars(3, gUnknown_08211798, BG_SCREEN_ADDR(5), 0x800);
             break;
         case 3:
             REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG1_ON | DISPCNT_OBJ_ON;
@@ -4708,8 +4708,8 @@ static void sub_804BBE8(u8 a0)
             gUnknown_03004828->unk_010c = 0x78;
             gUnknown_03004828->unk_010e = -0x46;
             gUnknown_03004828->unk_011c = 0;
-            DmaCopyLarge16(3, gUnknown_0820DD98, (void *)BG_CHAR_ADDR(1), 0x1a00, 0x1000);
-            DmaCopy16Defvars(3, gUnknown_08211F98, (void *)BG_SCREEN_ADDR(18), 0x100);
+            DmaCopyLarge16(3, gUnknown_0820DD98, BG_CHAR_ADDR(1), 0x1a00, 0x1000);
+            DmaCopy16Defvars(3, gUnknown_08211F98, BG_SCREEN_ADDR(18), 0x100);
             break;
         case 4:
             REG_DISPCNT = DISPCNT_MODE_1 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG2_ON | DISPCNT_OBJ_ON;
@@ -4719,20 +4719,20 @@ static void sub_804BBE8(u8 a0)
             gUnknown_03004828->unk_0118 = 0x20;
             gUnknown_03004828->unk_011a = 0x400;
             gUnknown_03004828->unk_011c = 0;
-            DmaCopyLarge16(3, gUnknown_08213738, (void *)BG_CHAR_ADDR(1), 0x2040, 0x1000);
-            DmaCopy16Defvars(3, gUnknown_08215778, (void *)BG_SCREEN_ADDR(18), 0x100);
+            DmaCopyLarge16(3, gUnknown_08213738, BG_CHAR_ADDR(1), 0x2040, 0x1000);
+            DmaCopy16Defvars(3, gUnknown_08215778, BG_SCREEN_ADDR(18), 0x100);
             break;
         case 5:
             gUnknown_03004828->bg1vofs = 0;
             gUnknown_03004828->bg1hofs = 0;
             REG_BG1CNT = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(5);
-            LZDecompressVram(gUnknown_08D00000, (void *)BG_CHAR_ADDR(0));
+            LZDecompressVram(gUnknown_08D00000, BG_CHAR_ADDR(0));
             CpuCopy16(gUnknown_08D00524, buffer = (u16 *)ewram, 0x1000);
             LoadCompressedPalette(gUnknown_08D004E0, 0x70, 0x20);
             FillPalette(0, 0, 2);
             for (i = 0; i < 0x280; i ++)
                 buffer[i] |= 0x7000;
-            DmaCopy16Defvars(3, ewram, (void *)BG_SCREEN_ADDR(5), 0x500);
+            DmaCopy16Defvars(3, ewram, BG_SCREEN_ADDR(5), 0x500);
             MenuZeroFillWindowRect(2, 15, 27, 18);
             break;
         case 6:
@@ -4745,16 +4745,16 @@ static void sub_804BBE8(u8 a0)
             gUnknown_03004828->unk_010c = 0x78;
             gUnknown_03004828->unk_010e = 0x50;
             gUnknown_03004828->unk_011c = 0;
-            DmaCopyLarge16(3, gUnknown_08213738, (void *)BG_CHAR_ADDR(1), 0x2040, 0x1000);
-            DmaCopy16Defvars(3, gUnknown_08215778, (void *)BG_SCREEN_ADDR(18), 0x100);
+            DmaCopyLarge16(3, gUnknown_08213738, BG_CHAR_ADDR(1), 0x2040, 0x1000);
+            DmaCopy16Defvars(3, gUnknown_08215778, BG_SCREEN_ADDR(18), 0x100);
             break;
         case 7:
             gUnknown_03004828->bg2vofs = 0;
             gUnknown_03004828->bg2hofs = 0;
             REG_BG2CNT = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(18) | BGCNT_TXT512x256;
             LoadPalette(gUnknown_0820C9F8, 0x10, 0xa0);
-            DmaCopyLarge16(3, gUnknown_0820CA98, (void *)BG_CHAR_ADDR(1), 0x1300, 0x1000);
-            DmaCopy16Defvars(3, gUnknown_0820F798, (void *)BG_SCREEN_ADDR(18), 0x1000);
+            DmaCopyLarge16(3, gUnknown_0820CA98, BG_CHAR_ADDR(1), 0x1300, 0x1000);
+            DmaCopy16Defvars(3, gUnknown_0820F798, BG_SCREEN_ADDR(18), 0x1000);
             break;
     }
 }
@@ -5708,7 +5708,7 @@ void sub_804E22C(void)
     LZDecompressVram(gUnknown_08D00000, (u8 *)VRAM);
     CpuCopy16(gUnknown_08D00524, ewram, 0x1000);
     src = (const u16 *)ewram;
-    dest = (u16 *)(BG_SCREEN_ADDR(5));
+    dest = BG_SCREEN_ADDR(5);
     DmaCopy16(3, src, dest, 0x500)
     LoadCompressedPalette(gUnknown_08D004E0, 0, 32);
     REG_BG1CNT = BGCNT_PRIORITY(2) | BGCNT_SCREENBASE(5);

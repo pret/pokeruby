@@ -1,11 +1,6 @@
 #ifndef GUARD_BATTLEAI_H
 #define GUARD_BATTLEAI_H
 
-#define AIScriptRead32(ptr) ((ptr)[0] | (ptr)[1] << 8 | (ptr)[2] << 16 | (ptr)[3] << 24)
-#define AIScriptRead16(ptr) ((ptr)[0] | (ptr)[1] << 8)
-#define AIScriptRead8(ptr) ((ptr)[0])
-#define AIScriptReadPtr(ptr) (u8*) AIScriptRead32(ptr)
-
 enum
 {
     TARGET,

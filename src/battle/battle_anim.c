@@ -335,7 +335,7 @@ static void RunAnimScriptCommand(void)
 {
     do
     {
-        sScriptCmdTable[SCRIPT_READ_8(gBattleAnimScriptPtr)]();
+        sScriptCmdTable[T1_READ_8(gBattleAnimScriptPtr)]();
     } while (gAnimFramesToWait == 0 && gAnimScriptActive != FALSE);
 }
 
@@ -344,7 +344,7 @@ static void ScriptCmd_loadsprite(void)
     u16 index;
 
     gBattleAnimScriptPtr++;
-    index = SCRIPT_READ_16(gBattleAnimScriptPtr);
+    index = T1_READ_16(gBattleAnimScriptPtr);
     LoadCompressedObjectPic(&gBattleAnimPicTable[GET_TRUE_SPRITE_INDEX(index)]);
     LoadCompressedObjectPalette(&gBattleAnimPaletteTable[GET_TRUE_SPRITE_INDEX(index)]);
     gBattleAnimScriptPtr += 2;
@@ -358,7 +358,7 @@ static void ScriptCmd_unloadsprite(void)
     u16 index;
 
     gBattleAnimScriptPtr++;
-    index = SCRIPT_READ_16(gBattleAnimScriptPtr);
+    index = T1_READ_16(gBattleAnimScriptPtr);
     FreeSpriteTilesByTag(gBattleAnimPicTable[GET_TRUE_SPRITE_INDEX(index)].tag);
     FreeSpritePaletteByTag(gBattleAnimPicTable[GET_TRUE_SPRITE_INDEX(index)].tag);
     gBattleAnimScriptPtr += 2;
@@ -378,15 +378,15 @@ static void ScriptCmd_sprite(void)
     s8 r1;
 
     gBattleAnimScriptPtr++;
-    r7 = (struct SpriteTemplate *)(SCRIPT_READ_32(gBattleAnimScriptPtr));
+    r7 = (struct SpriteTemplate *)(T2_READ_32(gBattleAnimScriptPtr));
     gBattleAnimScriptPtr += 4;
-    r4 = SCRIPT_READ_8(gBattleAnimScriptPtr);
+    r4 = T1_READ_8(gBattleAnimScriptPtr);
     gBattleAnimScriptPtr++;
-    r0 = SCRIPT_READ_8(gBattleAnimScriptPtr);
+    r0 = T1_READ_8(gBattleAnimScriptPtr);
     gBattleAnimScriptPtr++;
     for (i = 0; i < r0; i++)
     {
-        gBattleAnimArgs[i] = SCRIPT_READ_16(gBattleAnimScriptPtr);
+        gBattleAnimArgs[i] = T1_READ_16(gBattleAnimScriptPtr);
         gBattleAnimScriptPtr += 2;
     }
     if (r4 & 0x80)
@@ -559,16 +559,16 @@ static void ScriptCmd_createtask(void)
     s32 i;
 
     gBattleAnimScriptPtr++;
-    taskFunc = (TaskFunc)SCRIPT_READ_32(gBattleAnimScriptPtr);
+    taskFunc = (TaskFunc)T2_READ_32(gBattleAnimScriptPtr);
     gBattleAnimScriptPtr += 4;
-    taskPriority = SCRIPT_READ_8(gBattleAnimScriptPtr);
+    taskPriority = T1_READ_8(gBattleAnimScriptPtr);
     gBattleAnimScriptPtr++;
-    numArgs = SCRIPT_READ_8(gBattleAnimScriptPtr);
+    numArgs = T1_READ_8(gBattleAnimScriptPtr);
     gBattleAnimScriptPtr++;
 
     for (i = 0; i < numArgs; i++)
     {
-        gBattleAnimArgs[i] = SCRIPT_READ_16(gBattleAnimScriptPtr);
+        gBattleAnimArgs[i] = T1_READ_16(gBattleAnimScriptPtr);
         gBattleAnimScriptPtr += 2;
     }
 
@@ -580,7 +580,7 @@ static void ScriptCmd_createtask(void)
 static void ScriptCmd_delay(void)
 {
     gBattleAnimScriptPtr++;
-    gAnimFramesToWait = SCRIPT_READ_8(gBattleAnimScriptPtr);
+    gAnimFramesToWait = T1_READ_8(gBattleAnimScriptPtr);
     if (gAnimFramesToWait == 0)
         gAnimFramesToWait = -1;
     gBattleAnimScriptPtr++;
@@ -666,7 +666,7 @@ static void ScriptCmd_end(void)
 static void ScriptCmd_playse(void)
 {
     gBattleAnimScriptPtr++;
-    PlaySE(SCRIPT_READ_16(gBattleAnimScriptPtr));
+    PlaySE(T1_READ_16(gBattleAnimScriptPtr));
     gBattleAnimScriptPtr += 2;
 }
 
@@ -680,7 +680,7 @@ static void ScriptCmd_monbg(void)
     u8 taskId;
 
     gBattleAnimScriptPtr++;
-    r6 = SCRIPT_READ_8(gBattleAnimScriptPtr);
+    r6 = T1_READ_8(gBattleAnimScriptPtr);
     if (r6 == 0)
         r6 = 2;
     else if (r6 == 1)
@@ -1090,7 +1090,7 @@ static void ScriptCmd_clearmonbg(void)
     u8 taskId;
 
     gBattleAnimScriptPtr++;
-    r4 = SCRIPT_READ_8(gBattleAnimScriptPtr);
+    r4 = T1_READ_8(gBattleAnimScriptPtr);
     if (r4 == 0)
         r4 = 2;
     else if (r4 == 1)
@@ -1149,7 +1149,7 @@ static void ScriptCmd_monbg_22(void)
     u8 r1;
 
     gBattleAnimScriptPtr++;
-    r5 = SCRIPT_READ_8(gBattleAnimScriptPtr);
+    r5 = T1_READ_8(gBattleAnimScriptPtr);
     if (r5 == 0)
         r5 = 2;
     else if (r5 == 1)
@@ -1191,7 +1191,7 @@ static void ScriptCmd_clearmonbg_23(void)
     u8 taskId;
 
     gBattleAnimScriptPtr++;
-    r5 = SCRIPT_READ_8(gBattleAnimScriptPtr);
+    r5 = T1_READ_8(gBattleAnimScriptPtr);
     if (r5 == 0)
         r5 = 2;
     else if (r5 == 1)
@@ -1268,12 +1268,9 @@ static void ScriptCmd_blendoff(void)
 
 static void ScriptCmd_call(void)
 {
-    u32 addr;
-
     gBattleAnimScriptPtr++;
     gBattleAnimScriptRetAddr = gBattleAnimScriptPtr + 4;
-    addr = SCRIPT_READ_32(gBattleAnimScriptPtr);
-    gBattleAnimScriptPtr = (u8 *)addr;
+    gBattleAnimScriptPtr = T2_READ_PTR(gBattleAnimScriptPtr);
 }
 
 static void ScriptCmd_return(void)
@@ -1288,36 +1285,31 @@ static void ScriptCmd_setvar(void)
     u8 r2;
 
     gBattleAnimScriptPtr++;
-    r2 = SCRIPT_READ_8(gBattleAnimScriptPtr);
+    r2 = T1_READ_8(gBattleAnimScriptPtr);
     gBattleAnimScriptPtr++;
-    r4 = SCRIPT_READ_16(gBattleAnimScriptPtr);
+    r4 = T1_READ_16(gBattleAnimScriptPtr);
     gBattleAnimScriptPtr = addr + 4;
     gBattleAnimArgs[r2] = r4;
 }
 
 static void ScriptCmd_ifelse(void)
 {
-    u32 addr;
-
     gBattleAnimScriptPtr++;
     if (gUnknown_0202F7C4 & 1)
         gBattleAnimScriptPtr += 4;
-    addr = SCRIPT_READ_32(gBattleAnimScriptPtr);
-    gBattleAnimScriptPtr = (u8 *)addr;
+    gBattleAnimScriptPtr = T2_READ_PTR(gBattleAnimScriptPtr);
 }
 
 static void ScriptCmd_jumpif(void)
 {
     u8 r1;
-    u32 addr;
 
     gBattleAnimScriptPtr++;
-    r1 = SCRIPT_READ_8(gBattleAnimScriptPtr);
+    r1 = T1_READ_8(gBattleAnimScriptPtr);
     gBattleAnimScriptPtr++;
     if (r1 == gUnknown_0202F7C4)
     {
-        addr = SCRIPT_READ_32(gBattleAnimScriptPtr);
-        gBattleAnimScriptPtr = (u8 *)addr;
+        gBattleAnimScriptPtr = T2_READ_PTR(gBattleAnimScriptPtr);
     }
     else
     {
@@ -1327,11 +1319,8 @@ static void ScriptCmd_jumpif(void)
 
 static void ScriptCmd_jump(void)
 {
-    u32 addr;
-
     gBattleAnimScriptPtr++;
-    addr = SCRIPT_READ_32(gBattleAnimScriptPtr);
-    gBattleAnimScriptPtr = (u8 *)addr;
+    gBattleAnimScriptPtr = T2_READ_PTR(gBattleAnimScriptPtr);
 }
 
 bool8 NotInBattle(void)
@@ -1348,7 +1337,7 @@ static void ScriptCmd_fadetobg(void)
     u8 taskId;
 
     gBattleAnimScriptPtr++;
-    r4 = SCRIPT_READ_8(gBattleAnimScriptPtr);
+    r4 = T1_READ_8(gBattleAnimScriptPtr);
     gBattleAnimScriptPtr++;
     taskId = CreateTask(task_p5_load_battle_screen_elements, 5);
     gTasks[taskId].data[0] = r4;
@@ -1484,7 +1473,7 @@ static void ScriptCmd_waitbgfadein(void)
 static void ScriptCmd_changebg(void)
 {
     gBattleAnimScriptPtr++;
-    sub_8076DB8(SCRIPT_READ_8(gBattleAnimScriptPtr));
+    sub_8076DB8(T1_READ_8(gBattleAnimScriptPtr));
     gBattleAnimScriptPtr++;
 }
 
@@ -1705,8 +1694,8 @@ static void ScriptCmd_panse_19(void)
     s8 r0;
 
     gBattleAnimScriptPtr++;
-    r4 = SCRIPT_READ_16(gBattleAnimScriptPtr);
-    r0 = SCRIPT_READ_8(gBattleAnimScriptPtr + 2);
+    r4 = T1_READ_16(gBattleAnimScriptPtr);
+    r0 = T1_READ_8(gBattleAnimScriptPtr + 2);
     PlaySE12WithPanning(r4, sub_8076F98(r0));
     gBattleAnimScriptPtr += 3;
 }
@@ -1716,7 +1705,7 @@ static void ScriptCmd_setpan(void)
     s8 r0;
 
     gBattleAnimScriptPtr++;
-    r0 = SCRIPT_READ_8(gBattleAnimScriptPtr);
+    r0 = T1_READ_8(gBattleAnimScriptPtr);
     SE12PanpotControl(sub_8076F98(r0));
     gBattleAnimScriptPtr++;
 }
@@ -1733,11 +1722,11 @@ static void ScriptCmd_panse_1B(void)
     u8 taskId;
 
     gBattleAnimScriptPtr++;
-    songNum = SCRIPT_READ_16(gBattleAnimScriptPtr);
-    r0 = SCRIPT_READ_8(gBattleAnimScriptPtr + 2);
-    r4 = SCRIPT_READ_8(gBattleAnimScriptPtr + 3);
-    r6 = SCRIPT_READ_8(gBattleAnimScriptPtr + 4);
-    r7 = SCRIPT_READ_8(gBattleAnimScriptPtr + 5);
+    songNum = T1_READ_16(gBattleAnimScriptPtr);
+    r0 = T1_READ_8(gBattleAnimScriptPtr + 2);
+    r4 = T1_READ_8(gBattleAnimScriptPtr + 3);
+    r6 = T1_READ_8(gBattleAnimScriptPtr + 4);
+    r7 = T1_READ_8(gBattleAnimScriptPtr + 5);
     panning = sub_8076F98(r0);
     r8 = sub_8076F98(r4);
     r4 = sub_807712C(panning, r8, r6);
@@ -1898,11 +1887,11 @@ static void ScriptCmd_panse_26(void)
     u8 taskId;
 
     gBattleAnimScriptPtr++;
-    r8 = SCRIPT_READ_16(gBattleAnimScriptPtr);
-    r4 = SCRIPT_READ_8(gBattleAnimScriptPtr + 2);
-    r5 = SCRIPT_READ_8(gBattleAnimScriptPtr + 3);
-    r6 = SCRIPT_READ_8(gBattleAnimScriptPtr + 4);
-    r10 = SCRIPT_READ_8(gBattleAnimScriptPtr + 5);
+    r8 = T1_READ_16(gBattleAnimScriptPtr);
+    r4 = T1_READ_8(gBattleAnimScriptPtr + 2);
+    r5 = T1_READ_8(gBattleAnimScriptPtr + 3);
+    r6 = T1_READ_8(gBattleAnimScriptPtr + 4);
+    r10 = T1_READ_8(gBattleAnimScriptPtr + 5);
     taskId = CreateTask(c3_08073CEC, 1);
     gTasks[taskId].data[0] = r4;
     gTasks[taskId].data[1] = r5;
@@ -1927,11 +1916,11 @@ static void ScriptCmd_panse_27(void)
     u8 taskId;
 
     gBattleAnimScriptPtr++;
-    r9 = SCRIPT_READ_16(gBattleAnimScriptPtr);
-    r0 = SCRIPT_READ_8(gBattleAnimScriptPtr + 2);
-    r4 = SCRIPT_READ_8(gBattleAnimScriptPtr + 3);
-    r8 = SCRIPT_READ_8(gBattleAnimScriptPtr + 4);
-    r7 = SCRIPT_READ_8(gBattleAnimScriptPtr + 5);
+    r9 = T1_READ_16(gBattleAnimScriptPtr);
+    r0 = T1_READ_8(gBattleAnimScriptPtr + 2);
+    r4 = T1_READ_8(gBattleAnimScriptPtr + 3);
+    r8 = T1_READ_8(gBattleAnimScriptPtr + 4);
+    r7 = T1_READ_8(gBattleAnimScriptPtr + 5);
     r6 = sub_8077094(r0);
     r5 = sub_8077094(r4);
     r4_2 = sub_8077094(r8);
@@ -1956,10 +1945,10 @@ static void ScriptCmd_panse_1C(void)
     u8 taskId;
 
     gBattleAnimScriptPtr++;
-    r5 = SCRIPT_READ_16(gBattleAnimScriptPtr);
-    r0 = SCRIPT_READ_8(gBattleAnimScriptPtr + 2);
-    r8 = SCRIPT_READ_8(gBattleAnimScriptPtr + 3);
-    r9 = SCRIPT_READ_8(gBattleAnimScriptPtr + 4);
+    r5 = T1_READ_16(gBattleAnimScriptPtr);
+    r0 = T1_READ_8(gBattleAnimScriptPtr + 2);
+    r8 = T1_READ_8(gBattleAnimScriptPtr + 3);
+    r9 = T1_READ_8(gBattleAnimScriptPtr + 4);
     r4 = sub_8076F98(r0);
     taskId = CreateTask(sub_80774FC, 1);
     gTasks[taskId].data[0] = r5;
@@ -2006,9 +1995,9 @@ static void ScriptCmd_panse_1D(void)
     u8 taskId;
 
     gBattleAnimScriptPtr++;
-    r5 = SCRIPT_READ_16(gBattleAnimScriptPtr);
-    r0 = SCRIPT_READ_8(gBattleAnimScriptPtr + 2);
-    r8 = SCRIPT_READ_8(gBattleAnimScriptPtr + 3);
+    r5 = T1_READ_16(gBattleAnimScriptPtr);
+    r0 = T1_READ_8(gBattleAnimScriptPtr + 2);
+    r8 = T1_READ_8(gBattleAnimScriptPtr + 3);
     r4 = sub_8076F98(r0);
     taskId = CreateTask(sub_80775CC, 1);
     gTasks[taskId].data[0] = r5;
@@ -2040,13 +2029,13 @@ static void ScriptCmd_createtask_1F(void)
     u8 taskId;
 
     gBattleAnimScriptPtr++;
-    func = (TaskFunc)SCRIPT_READ_32(gBattleAnimScriptPtr);
+    func = (TaskFunc)T2_READ_32(gBattleAnimScriptPtr);
     gBattleAnimScriptPtr += 4;
-    numArgs = SCRIPT_READ_8(gBattleAnimScriptPtr);
+    numArgs = T1_READ_8(gBattleAnimScriptPtr);
     gBattleAnimScriptPtr++;
     for (i = 0; i < numArgs; i++)
     {
-        gBattleAnimArgs[i] = SCRIPT_READ_16(gBattleAnimScriptPtr);
+        gBattleAnimArgs[i] = T1_READ_16(gBattleAnimScriptPtr);
         gBattleAnimScriptPtr += 2;
     }
     taskId = CreateTask(func, 1);
@@ -2089,11 +2078,11 @@ static void ScriptCmd_jumpvareq(void)
     u8 *addr;
 
     gBattleAnimScriptPtr++;
-    r2 = SCRIPT_READ_8(gBattleAnimScriptPtr);
-    r1 = SCRIPT_READ_16(gBattleAnimScriptPtr + 1);
+    r2 = T1_READ_8(gBattleAnimScriptPtr);
+    r1 = T1_READ_16(gBattleAnimScriptPtr + 1);
     if (r1 == gBattleAnimArgs[r2])
     {
-        addr = (u8 *)SCRIPT_READ_32(gBattleAnimScriptPtr + 3);
+        addr = T2_READ_PTR(gBattleAnimScriptPtr + 3);
         gBattleAnimScriptPtr = addr;
     }
     else
@@ -2109,7 +2098,7 @@ static void ScriptCmd_jumpunkcond(void)
     gBattleAnimScriptPtr++;
     if (NotInBattle())
     {
-        addr = (u8 *)SCRIPT_READ_32(gBattleAnimScriptPtr);
+        addr = T2_READ_PTR(gBattleAnimScriptPtr);
         gBattleAnimScriptPtr = addr;
     }
     else
@@ -2124,7 +2113,7 @@ static void ScriptCmd_monbgprio_28(void)
     u8 r0;
     u8 r4;
 
-    r2 = SCRIPT_READ_8(gBattleAnimScriptPtr + 1);
+    r2 = T1_READ_8(gBattleAnimScriptPtr + 1);
     gBattleAnimScriptPtr += 2;
     if (r2 != 0)
         r0 = gBattleAnimBankTarget;
@@ -2154,7 +2143,7 @@ static void ScriptCmd_monbgprio_2A(void)
     u8 r4;
     u8 r0;
 
-    r6 = SCRIPT_READ_8(gBattleAnimScriptPtr + 1);
+    r6 = T1_READ_8(gBattleAnimScriptPtr + 1);
     gBattleAnimScriptPtr += 2;
     if (GetBankSide(gBattleAnimBankAttacker) != GetBankSide(gBattleAnimBankTarget))
     {
@@ -2176,7 +2165,7 @@ static void ScriptCmd_invisible(void)
     u8 r0;
     u8 spriteId;
 
-    r0 = SCRIPT_READ_8(gBattleAnimScriptPtr + 1);
+    r0 = T1_READ_8(gBattleAnimScriptPtr + 1);
     spriteId = GetAnimBankSpriteId(r0);
     if (spriteId != 0xFF)
     {
@@ -2190,7 +2179,7 @@ static void ScriptCmd_visible(void)
     u8 r0;
     u8 spriteId;
 
-    r0 = SCRIPT_READ_8(gBattleAnimScriptPtr + 1);
+    r0 = T1_READ_8(gBattleAnimScriptPtr + 1);
     spriteId = GetAnimBankSpriteId(r0);
     if (spriteId != 0xFF)
     {
@@ -2205,7 +2194,7 @@ static void ScriptCmd_doublebattle_2D(void)
     u8 r4;
     u8 spriteId;
 
-    r7 = SCRIPT_READ_8(gBattleAnimScriptPtr + 1);
+    r7 = T1_READ_8(gBattleAnimScriptPtr + 1);
     gBattleAnimScriptPtr += 2;
     if (!NotInBattle() && IsDoubleBattle()
      && GetBankSide(gBattleAnimBankAttacker) == GetBankSide(gBattleAnimBankTarget))
@@ -2239,7 +2228,7 @@ static void ScriptCmd_doublebattle_2E(void)
     u8 r4;
     u8 spriteId;
 
-    r7 = SCRIPT_READ_8(gBattleAnimScriptPtr  + 1);
+    r7 = T1_READ_8(gBattleAnimScriptPtr  + 1);
     gBattleAnimScriptPtr += 2;
     if (!NotInBattle() && IsDoubleBattle()
      && GetBankSide(gBattleAnimBankAttacker) == GetBankSide(gBattleAnimBankTarget))

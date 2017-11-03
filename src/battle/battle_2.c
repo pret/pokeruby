@@ -1927,11 +1927,7 @@ void bc_801333C(void)
 
     if (gBattleExecBuffer == 0)
     {
-        struct
-        {
-            u16 hp;
-            u32 status;
-        } sp0[6];
+		struct HpAndStatus hpStatus[6];
 
         if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
         {
@@ -1940,17 +1936,17 @@ void bc_801333C(void)
                 if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) == 0
                  || GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
                 {
-                    sp0[i].hp = 0xFFFF;
-                    sp0[i].status = 0;
+                    hpStatus[i].hp = 0xFFFF;
+                    hpStatus[i].status = 0;
                 }
                 else
                 {
-                    sp0[i].hp = GetMonData(&gEnemyParty[i], MON_DATA_HP);
-                    sp0[i].status = GetMonData(&gEnemyParty[i], MON_DATA_STATUS);
+                    hpStatus[i].hp = GetMonData(&gEnemyParty[i], MON_DATA_HP);
+                    hpStatus[i].status = GetMonData(&gEnemyParty[i], MON_DATA_STATUS);
                 }
             }
             gActiveBank = GetBankByPlayerAI(1);
-            Emitcmd48(0, (u8 *)sp0, 0x80);
+            EmitDrawPartyStatusSummary(0, hpStatus, 0x80);
             MarkBufferBankForExecution(gActiveBank);
 
             for (i = 0; i < 6; i++)
@@ -1958,17 +1954,17 @@ void bc_801333C(void)
                 if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == 0
                  || GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
                 {
-                    sp0[i].hp = 0xFFFF;
-                    sp0[i].status = 0;
+                    hpStatus[i].hp = 0xFFFF;
+                    hpStatus[i].status = 0;
                 }
                 else
                 {
-                    sp0[i].hp = GetMonData(&gPlayerParty[i], MON_DATA_HP);
-                    sp0[i].status = GetMonData(&gPlayerParty[i], MON_DATA_STATUS);
+                    hpStatus[i].hp = GetMonData(&gPlayerParty[i], MON_DATA_HP);
+                    hpStatus[i].status = GetMonData(&gPlayerParty[i], MON_DATA_STATUS);
                 }
             }
             gActiveBank = GetBankByPlayerAI(0);
-            Emitcmd48(0, (u8 *)sp0, 0x80);
+            EmitDrawPartyStatusSummary(0, hpStatus, 0x80);
             MarkBufferBankForExecution(gActiveBank);
 
             gBattleMainFunc = bc_battle_begin_message;
@@ -1983,13 +1979,13 @@ void bc_801333C(void)
                 if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == 0
                  || GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
                 {
-                    sp0[i].hp = 0xFFFF;
-                    sp0[i].status = 0;
+                    hpStatus[i].hp = 0xFFFF;
+                    hpStatus[i].status = 0;
                 }
                 else
                 {
-                    sp0[i].hp = GetMonData(&gPlayerParty[i], MON_DATA_HP);
-                    sp0[i].status = GetMonData(&gPlayerParty[i], MON_DATA_STATUS);
+                    hpStatus[i].hp = GetMonData(&gPlayerParty[i], MON_DATA_HP);
+                    hpStatus[i].status = GetMonData(&gPlayerParty[i], MON_DATA_STATUS);
                 }
             }
 

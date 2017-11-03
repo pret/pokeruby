@@ -1097,7 +1097,7 @@ void EmitTrainerBallThrow(u8 a)
     PrepareBufferDataTransfer(a, gBattleBuffersTransferData, 4);
 }
 
-void Emitcmd48(u8 a, u8 *b, u8 c)
+void EmitDrawPartyStatusSummary(u8 a, struct HpAndStatus *hpAndStatus, u8 c)
 {
     int i;
 
@@ -1106,7 +1106,7 @@ void Emitcmd48(u8 a, u8 *b, u8 c)
     gBattleBuffersTransferData[2] = (c & 0x80) >> 7;
     gBattleBuffersTransferData[3] = 48;
     for (i = 0; i < 48; i++)
-        gBattleBuffersTransferData[4 + i] = b[i];
+        gBattleBuffersTransferData[4 + i] = *(i + (u8*)(hpAndStatus));
     PrepareBufferDataTransfer(a, gBattleBuffersTransferData, 52);
 }
 

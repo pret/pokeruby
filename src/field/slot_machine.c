@@ -94,7 +94,7 @@ void sub_8106448(void) {
 }
 
 void sub_81064B8(void) {
-    CpuCopy16(gUnknown_08E95AB8, (void *) BG_SCREEN_ADDR(29), 20 * 32 * 2);
+    CpuCopy16(gUnknown_08E95AB8, BG_SCREEN_ADDR(29), 20 * 32 * 2);
     LoadSlotMachineWheelOverlay();
 }
 
@@ -102,7 +102,7 @@ static void LoadSlotMachineWheelOverlay(void) {
     s16 x, y, dx;
     u16 *screen;
 
-    screen = (u16 *) BG_SCREEN_ADDR(30);
+    screen = BG_SCREEN_ADDR(30);
 
     for (x = 4; x < 18; x += 5)
     {
@@ -125,7 +125,7 @@ static void LoadSlotMachineWheelOverlay(void) {
 }
 
 void sub_81065A8(s16 arg0, u16 arg1, u16 arg2, u16 arg3, u16 arg4) {
-    u16 *vram = (u16 *) BG_SCREEN_ADDR(29);
+    u16 *vram = BG_SCREEN_ADDR(29);
 
     vram[15 * 32 + arg0] = arg1;
     vram[15 * 32 + 1 + arg0] = arg2;
@@ -137,9 +137,9 @@ void sub_81065DC(void) {
     s16 y, x;
     u16 *screen;
 
-    CpuCopy16(gUnknown_08E95FB8, (void *) BG_SCREEN_ADDR(29), 20 * 32 * 2);
+    CpuCopy16(gUnknown_08E95FB8, BG_SCREEN_ADDR(29), 20 * 32 * 2);
 
-    screen = (u16 *) BG_SCREEN_ADDR(30);
+    screen = BG_SCREEN_ADDR(30);
     for (y = 0; y < 20; y++)
     {
         for (x = 0; x < 30; x++)
