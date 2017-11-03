@@ -729,29 +729,6 @@ struct Pokedex
     /*0x44*/ u8 seen[DEX_FLAGS_NO];
 };
 
-// struct EReaderTrainerPokemon
-// {
-//     /*0x00, 0x4CC*/u16 unk0;
-//     /*0x02, 0x4CE*/u16 unk2;
-//     /*0x04, 0x4D0*/u8 unk4[0x8];
-//     /*0x0C, 0x4D8*/u8 level;
-//     /*0x0D, 0x4D9*/u8 unk9[0x1F];
-// };
-
-// struct EReaderTrainer
-// {
-//     /*0x00, 0x498*/u8 filler_0[2];
-//     /*0x02, 0x49A*/u16 unk2;
-//     /*0x04, 0x49C*/u8 filler_4[0x30];
-//     /*0x34, 0x4CC*/struct EReaderTrainerPokemon party[3];
-//     /*0xB8, 0x550*/u32 unkB8;
-// };
-
-struct SaveBlock2_1
-{
-    u32 filler_0[0x29];
-};
-
 struct BattleTowerTrainer
 {
     u8 trainerClass;
