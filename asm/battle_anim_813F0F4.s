@@ -368,7 +368,7 @@ _0813F3AC:
 	strh r1, [r0]
 	adds r0, 0x2
 	strh r1, [r0]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813F406

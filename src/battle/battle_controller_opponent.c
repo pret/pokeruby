@@ -601,7 +601,7 @@ u32 sub_8033598(u8 a, u8 *buffer)
         GetMonData(&gEnemyParty[a], MON_DATA_NICKNAME, nickname);
         StringCopy10(battlePokemon.nickname, nickname);
         GetMonData(&gEnemyParty[a], MON_DATA_OT_NAME, battlePokemon.otName);
-        BAD_MEMSET_REVERSE(&battlePokemon, buffer, sizeof(battlePokemon), size, src)
+        BAD_MEMCPY(&battlePokemon, buffer, sizeof(battlePokemon), size, src)
         break;
     case 1:
         data16 = GetMonData(&gEnemyParty[a], MON_DATA_SPECIES);
@@ -622,7 +622,7 @@ u32 sub_8033598(u8 a, u8 *buffer)
             moveData.pp[size] = GetMonData(&gEnemyParty[a], MON_DATA_PP1 + size);
         }
         moveData.ppBonuses = GetMonData(&gEnemyParty[a], MON_DATA_PP_BONUSES);
-        BAD_MEMSET_REVERSE(&moveData, buffer, sizeof(moveData), size, src)
+        BAD_MEMCPY(&moveData, buffer, sizeof(moveData), size, src)
         break;
     case 4:
     case 5:

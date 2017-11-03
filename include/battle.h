@@ -692,20 +692,21 @@ extern u8 ewram[];
 
 // The compiler wont allow us to locally declare ptr in this macro; some
 // functions that invoke this macro will not match without this egregeous
-// assumption about the variable names.
-#define BAD_MEMSET(data, c, size, var, ptr)    \
+// assumption about the variable names, so in order to avoid this assumption,
+// we opt to pass the variables themselves, even though it is likely that
+// Sogabe assumed the variables were named src and dest.
+#define BAD_MEMSET(data, c, size, var, dest)    \
 {    \
-    ptr = (u8 *)data;    \
+    dest = (u8 *)data;    \
     for(var = 0; var < (u32)size; var++)    \
-        ptr[var] = c;    \
+        dest[var] = c;    \
 }    \
 
-// TODO: Try to combine these macros.
-#define BAD_MEMSET_REVERSE(data, ptr2, size, var, ptr)    \
+#define BAD_MEMCPY(data, dest, size, var, src)    \
 {    \
-    ptr = (u8 *)data;    \
+    src = (u8 *)data;    \
     for(var = 0; var < (u32)size; var++)    \
-        ptr2[var] = ptr[var];    \
+        dest[var] = src[var];    \
 }    \
 
 typedef void (*BattleCmdFunc)(void);

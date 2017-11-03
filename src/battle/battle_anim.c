@@ -217,7 +217,7 @@ void DoMoveAnim(const u8 *const moveAnims[], u16 move, u8 c)
 {
     s32 i;
 
-    if (IsContest() == 0)
+    if (NotInBattle() == 0)
     {
         sub_8079E24();
         sub_8043EB4(0);
@@ -654,7 +654,7 @@ static void ScriptCmd_end(void)
     if (continuousAnim == FALSE) // may have been used for debug?
     {
         m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 256);
-        if (IsContest() == 0)
+        if (NotInBattle() == 0)
         {
             sub_8079E24();
             sub_8043EB4(1);
@@ -693,7 +693,7 @@ static void ScriptCmd_monbg(void)
     {
         r0 = GetBankIdentity(r5);
         r0 += 0xFF;
-        if (r0 <= 1 || IsContest() != 0)
+        if (r0 <= 1 || NotInBattle() != 0)
             r7 = 0;
         else
             r7 = 1;
@@ -723,7 +723,7 @@ static void ScriptCmd_monbg(void)
     {
         r0 = GetBankIdentity(r5);
         r0 += 0xFF;
-        if (r0 <= 1 || IsContest() != 0)
+        if (r0 <= 1 || NotInBattle() != 0)
             r7 = 0;
         else
             r7 = 1;
@@ -753,7 +753,7 @@ static void ScriptCmd_monbg(void)
 #ifdef NONMATCHING
 bool8 IsAnimBankSpriteVisible(u8 a)
 {
-    if (IsContest())
+    if (NotInBattle())
     {
         if (a == gBattleAnimBankAttacker)
             return TRUE;
@@ -762,7 +762,7 @@ bool8 IsAnimBankSpriteVisible(u8 a)
     }
     if (!AnimBankSpriteExists(a))
         return FALSE;
-    if (IsContest())
+    if (NotInBattle())
         return TRUE; // this line wont ever be reached.
     if (!(EWRAM_17800[a].unk0 & 1))
         return TRUE;
@@ -779,7 +779,7 @@ bool8 IsAnimBankSpriteVisible(u8 a)
     lsls r0, 24\n\
     lsrs r4, r0, 24\n\
     adds r5, r4, 0\n\
-    bl IsContest\n\
+    bl NotInBattle\n\
     lsls r0, 24\n\
     cmp r0, 0\n\
     beq _08075FDC\n\
@@ -796,7 +796,7 @@ _08075FDC:\n\
     lsls r0, 24\n\
     cmp r0, 0\n\
     beq _0807602C\n\
-    bl IsContest\n\
+    bl NotInBattle\n\
     lsls r0, 24\n\
     cmp r0, 0\n\
     bne _0807601C\n\
@@ -877,7 +877,7 @@ void sub_8076034(u8 a, u8 b)
 
         spriteId = gObjectBankIDs[a];
         gUnknown_030042C0 = -(gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x) + 32;
-        if (IsContest() != 0 && sub_80AEB1C(EWRAM_19348) != 0)
+        if (NotInBattle() != 0 && sub_80AEB1C(EWRAM_19348) != 0)
             gUnknown_030042C0--;
         gUnknown_030041B4 = -(gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y) + 32;
         gSprites[gObjectBankIDs[a]].invisible = TRUE;
@@ -889,12 +889,12 @@ void sub_8076034(u8 a, u8 b)
         addr3 = (u16 *)PLTT + s.unk8 * 16;
         DmaCopy32(3, gPlttBufferUnfaded + 0x100 + a * 16, addr3, 32);
 
-        if (IsContest() != 0)
+        if (NotInBattle() != 0)
             r2 = 0;
         else
             r2 = GetBankIdentity(a);
         sub_80E4EF8(0, 0, r2, s.unk8, (u32)s.unk0, (((s32)s.unk4 - VRAM) / 2048), REG_BG1CNT_BITFIELD.charBaseBlock);
-        if (IsContest() != 0)
+        if (NotInBattle() != 0)
             sub_8076380();
     }
     else
@@ -996,7 +996,7 @@ void sub_8076464(u8 a)
     struct UnknownStruct2 s;
 
     sub_8078914(&s);
-    if (a == 0 || IsContest() != 0)
+    if (a == 0 || NotInBattle() != 0)
     {
         u16 *addr2;
 
@@ -1121,7 +1121,7 @@ static void sub_807672C(u8 taskId)
     {
         var = GetBankIdentity(gTasks[taskId].data[2]);
         var += 0xFF;
-        if (var <= 1 || IsContest() != 0)
+        if (var <= 1 || NotInBattle() != 0)
             r4 = 0;
         else
             r4 = 1;
@@ -1162,7 +1162,7 @@ static void ScriptCmd_monbg_22(void)
     {
         r0 = GetBankIdentity(r4);
         r0 += 0xFF;
-        if (r0 <= 1 || IsContest() != 0)
+        if (r0 <= 1 || NotInBattle() != 0)
             r1 = 0;
         else
             r1 = 1;
@@ -1174,7 +1174,7 @@ static void ScriptCmd_monbg_22(void)
     {
         r0 = GetBankIdentity(r4);
         r0 += 0xFF;
-        if (r0 <= 1 || IsContest() != 0)
+        if (r0 <= 1 || NotInBattle() != 0)
             r1 = 0;
         else
             r1 = 1;
@@ -1224,7 +1224,7 @@ static void sub_80769A4(u8 taskId)
         r4 = gTasks[taskId].data[2];
         r0 = GetBankIdentity(r4);
         r0 += 0xFF;
-        if (r0 <= 1 || IsContest() != 0)
+        if (r0 <= 1 || NotInBattle() != 0)
             r5 = 0;
         else
             r5 = 1;
@@ -1334,8 +1334,7 @@ static void ScriptCmd_jump(void)
     gBattleAnimScriptPtr = (u8 *)addr;
 }
 
-// Uses of this function that rely on a TRUE return are expecting inBattle to not be ticked as defined in contest behavior. As a result, if misused, this function cannot reliably discern between field and contest status and could result in undefined behavior.
-bool8 IsContest(void)
+bool8 NotInBattle(void)
 {
     if (!gMain.inBattle)
         return TRUE;
@@ -1369,7 +1368,7 @@ static void ScriptCmd_fadetobg_25(void)
     r6 = gBattleAnimScriptPtr[2];
     gBattleAnimScriptPtr += 3;
     taskId = CreateTask(task_p5_load_battle_screen_elements, 5);
-    if (IsContest() != 0)
+    if (NotInBattle() != 0)
         gTasks[taskId].data[0] = r6;
     else if (GetBankSide(gBattleAnimBankTarget) == 0)
         gTasks[taskId].data[0] = r7;
@@ -1416,15 +1415,15 @@ static void task_p5_load_battle_screen_elements(u8 taskId)
 
 static void sub_8076DB8(u16 a)
 {
-    if (IsContest())
+    if (NotInBattle())
     {
         void *tilemap = gBattleAnimBackgroundTable[a].tilemap;
         void *dmaSrc;
         void *dmaDest;
 
-        LZDecompressWram(tilemap, IsContest() ? EWRAM_14800 : EWRAM_18000);
-        sub_80763FC(sub_80789BC(), IsContest() ? EWRAM_14800 : EWRAM_18000, 0x100, 0);
-        dmaSrc = IsContest() ? EWRAM_14800 : EWRAM_18000;
+        LZDecompressWram(tilemap, NotInBattle() ? EWRAM_14800 : EWRAM_18000);
+        sub_80763FC(sub_80789BC(), NotInBattle() ? EWRAM_14800 : EWRAM_18000, 0x100, 0);
+        dmaSrc = NotInBattle() ? EWRAM_14800 : EWRAM_18000;
         dmaDest = (void *)(VRAM + 0xD000);
         DmaCopy32(3, dmaSrc, dmaDest, 0x800);
         LZDecompressVram(gBattleAnimBackgroundTable[a].image, (void *)(VRAM + 0x2000));
@@ -1440,7 +1439,7 @@ static void sub_8076DB8(u16 a)
 
 static void dp01t_11_3_message_for_player_only(void)
 {
-    if (IsContest())
+    if (NotInBattle())
         sub_80AB2AC();
     else
         sub_800D7B8();
@@ -1493,14 +1492,14 @@ static void ScriptCmd_changebg(void)
 /*
 s8 sub_8076F98(s8 a)
 {
-    if (!IsContest() && (EWRAM_17810[gBattleAnimBankAttacker].unk0 & 0x10))
+    if (!NotInBattle() && (EWRAM_17810[gBattleAnimBankAttacker].unk0 & 0x10))
     {
         a = GetBankSide(gBattleAnimBankAttacker) ? 0xC0 : 0x3F;
     }
     //_08076FDC
     else
     {
-        if (IsContest())
+        if (NotInBattle())
         {
             if (gBattleAnimBankAttacker == gBattleAnimBankTarget && gBattleAnimBankAttacker == 2
              && a == 0x3F)
@@ -1536,7 +1535,7 @@ s8 sub_8076F98(s8 a)
     push {r4,lr}\n\
     lsls r0, 24\n\
     lsrs r4, r0, 24\n\
-    bl IsContest\n\
+    bl NotInBattle\n\
     lsls r0, 24\n\
     cmp r0, 0\n\
     bne _08076FDC\n\
@@ -1564,7 +1563,7 @@ s8 sub_8076F98(s8 a)
 _08076FD4: .4byte gBattleAnimBankAttacker\n\
 _08076FD8: .4byte 0x02017810\n\
 _08076FDC:\n\
-    bl IsContest\n\
+    bl NotInBattle\n\
     lsls r0, 24\n\
     cmp r0, 0\n\
     beq _08077004\n\
@@ -1661,7 +1660,7 @@ _08077088:\n\
 
 s8 sub_8077094(s8 a)
 {
-    if (!IsContest() && (EWRAM_17810[gBattleAnimBankAttacker].unk0 & 0x10))
+    if (!NotInBattle() && (EWRAM_17810[gBattleAnimBankAttacker].unk0 & 0x10))
     {
         if (GetBankSide(gBattleAnimBankAttacker) != 0)
             a = 0x3F;
@@ -1670,7 +1669,7 @@ s8 sub_8077094(s8 a)
     }
     else
     {
-        if (GetBankSide(gBattleAnimBankAttacker) != 0 || IsContest() != 0)
+        if (GetBankSide(gBattleAnimBankAttacker) != 0 || NotInBattle() != 0)
             a = -a;
     }
     return a;
@@ -2108,7 +2107,7 @@ static void ScriptCmd_jumpunkcond(void)
     u8 *addr;
 
     gBattleAnimScriptPtr++;
-    if (IsContest())
+    if (NotInBattle())
     {
         addr = (u8 *)SCRIPT_READ_32(gBattleAnimScriptPtr);
         gBattleAnimScriptPtr = addr;
@@ -2132,7 +2131,7 @@ static void ScriptCmd_monbgprio_28(void)
     else
         r0 = gBattleAnimBankAttacker;
     r4 = GetBankIdentity(r0);
-    if (!IsContest() && (r4 == 0 || r4 == 3))
+    if (!NotInBattle() && (r4 == 0 || r4 == 3))
     {
         REG_BG1CNT_BITFIELD.priority = 1;
         REG_BG2CNT_BITFIELD.priority = 2;
@@ -2142,7 +2141,7 @@ static void ScriptCmd_monbgprio_28(void)
 static void ScriptCmd_monbgprio_29(void)
 {
     gBattleAnimScriptPtr++;
-    if (!IsContest())
+    if (!NotInBattle())
     {
         REG_BG1CNT_BITFIELD.priority = 1;
         REG_BG2CNT_BITFIELD.priority = 2;
@@ -2164,7 +2163,7 @@ static void ScriptCmd_monbgprio_2A(void)
         else
             r0 = gBattleAnimBankAttacker;
         r4 = GetBankIdentity(r0);
-        if (!IsContest() && (r4 == 0 || r4 == 3))
+        if (!NotInBattle() && (r4 == 0 || r4 == 3))
         {
             REG_BG1CNT_BITFIELD.priority = 1;
             REG_BG2CNT_BITFIELD.priority = 2;
@@ -2208,7 +2207,7 @@ static void ScriptCmd_doublebattle_2D(void)
 
     r7 = SCRIPT_READ_8(gBattleAnimScriptPtr + 1);
     gBattleAnimScriptPtr += 2;
-    if (!IsContest() && IsDoubleBattle()
+    if (!NotInBattle() && IsDoubleBattle()
      && GetBankSide(gBattleAnimBankAttacker) == GetBankSide(gBattleAnimBankTarget))
     {
         if (r7 == 0)
@@ -2242,7 +2241,7 @@ static void ScriptCmd_doublebattle_2E(void)
 
     r7 = SCRIPT_READ_8(gBattleAnimScriptPtr  + 1);
     gBattleAnimScriptPtr += 2;
-    if (!IsContest() && IsDoubleBattle()
+    if (!NotInBattle() && IsDoubleBattle()
      && GetBankSide(gBattleAnimBankAttacker) == GetBankSide(gBattleAnimBankTarget))
     {
         if (r7 == 0)

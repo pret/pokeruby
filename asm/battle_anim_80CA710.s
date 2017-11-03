@@ -757,7 +757,7 @@ sub_80CACEC: @ 80CACEC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080CAD06
@@ -1329,7 +1329,7 @@ _080CB13C:
 sub_80CB144: @ 80CB144
 	push {r4,lr}
 	adds r4, r0, 0
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080CB170
@@ -2521,7 +2521,7 @@ _080CBA6C:
 	adds r0, r6, 0
 	adds r0, 0xA
 	strh r0, [r5, 0x3C]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080CBA84
@@ -2721,7 +2721,7 @@ sub_80CBBF0: @ 80CBBF0
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
 	bne _080CBC84
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080CBC18
@@ -2917,7 +2917,7 @@ _080CBD44:
 	movs r1, 0xFF
 	ands r0, r1
 	strh r0, [r4, 0x30]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080CBD92
@@ -4233,7 +4233,7 @@ _080CC74C:
 	bl sub_80790F0
 	lsls r0, 16
 	lsrs r4, r0, 16
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080CC7AE
@@ -4968,7 +4968,7 @@ _080CCD1C:
 sub_80CCD24: @ 80CCD24
 	push {r4-r6,lr}
 	adds r5, r0, 0
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080CCD3A
@@ -5000,7 +5000,7 @@ _080CCD3A:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080CCD78
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080CCDA0
@@ -7569,7 +7569,7 @@ sub_80CE09C: @ 80CE09C
 	ldrh r5, [r5, 0x2]
 	adds r0, r5
 	strh r0, [r6, 0x22]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080CE0E0
@@ -7872,7 +7872,7 @@ _080CE308: .4byte gNoOfAllBanks
 sub_80CE30C: @ 80CE30C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080CE322
@@ -8359,7 +8359,7 @@ _080CE68E:
 	ldrh r1, [r5, 0x20]
 	strh r1, [r5, 0x3A]
 	strh r0, [r5, 0x3C]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080CE700
@@ -8953,7 +8953,7 @@ _080CEB48:
 	strh r1, [r5, 0x32]
 	ldrh r0, [r4, 0x4]
 	strh r0, [r5, 0x34]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080CEB6C
@@ -10477,7 +10477,7 @@ sub_80CF6DC: @ 80CF6DC
 	push {r7}
 	sub sp, 0x4
 	adds r5, r0, 0
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080CF700
@@ -10550,7 +10550,7 @@ _080CF722:
 	lsls r1, 24
 	adds r0, r1
 	lsrs r4, r0, 16
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080CF794
@@ -11031,7 +11031,7 @@ sub_80CFB04: @ 80CFB04
 	mov r4, sp
 	adds r4, 0x2
 	strh r1, [r4]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	mov r10, r4
 	cmp r0, 0
@@ -15162,7 +15162,7 @@ _080D1AF4:
 	cmp r5, 0x4
 	ble _080D1AF4
 	ldr r4, _080D1B3C @ =gBattleAnimSpritePalette_206
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	ldr r1, _080D1B40 @ =0x02018000
 	cmp r0, 0
@@ -15175,7 +15175,7 @@ _080D1B1C:
 	movs r5, 0
 _080D1B24:
 	lsls r4, r5, 5
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D1B4C
@@ -15390,7 +15390,7 @@ sub_80D1CD0: @ 80D1CD0
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	movs r2, 0xF0
 	cmp r0, 0
@@ -15943,7 +15943,7 @@ sub_80D2100: @ 80D2100
 	movs r0, 0x3F
 	ands r0, r1
 	strb r0, [r4, 0x1]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D2144
@@ -15987,7 +15987,7 @@ _080D2144:
 	lsls r1, 4
 	movs r2, 0x20
 	bl LoadCompressedPalette
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D21A4
@@ -16200,7 +16200,7 @@ _080D230E:
 	ldr r1, _080D23A4 @ =0x85000200
 	str r1, [r0, 0x8]
 	ldr r0, [r0, 0x8]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D235C
@@ -16280,7 +16280,7 @@ sub_80D23B4: @ 80D23B4
 	movs r0, 0x3F
 	ands r0, r1
 	strb r0, [r4, 0x1]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D23FE
@@ -16313,7 +16313,7 @@ _080D23FE:
 	ldr r0, _080D2454 @ =0x85000400
 	str r0, [r1, 0x8]
 	ldr r0, [r1, 0x8]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D245C
@@ -16359,7 +16359,7 @@ _080D2488:
 	lsls r1, 4
 	movs r2, 0x20
 	bl LoadCompressedPalette
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D24B6
@@ -16564,7 +16564,7 @@ _080D25FE:
 	ldr r1, _080D2694 @ =0x85000200
 	str r1, [r0, 0x8]
 	ldr r0, [r0, 0x8]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D264C
@@ -18730,7 +18730,7 @@ sub_80D3698: @ 80D3698
 	bl sub_8079E90
 	lsls r0, 24
 	lsrs r5, r0, 24
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D36F2
@@ -19068,7 +19068,7 @@ _080D3920:
 	ldr r1, _080D399C @ =0x85000400
 	str r1, [r0, 0x8]
 	ldr r0, [r0, 0x8]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D39B8
@@ -19174,7 +19174,7 @@ _080D3A0E:
 	lsls r0, 5
 	strh r0, [r7, 0xA]
 	strh r0, [r7, 0xC]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0
@@ -19502,7 +19502,7 @@ _080D3CAA:
 	ldr r1, _080D3D58 @ =0x85000400
 	str r1, [r0, 0x8]
 	ldr r0, [r0, 0x8]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D3D02
@@ -21104,7 +21104,7 @@ sub_80D48F4: @ 80D48F4
 	movs r1, 0x1
 _080D4938:
 	strh r1, [r5, 0x16]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D494C
@@ -28400,7 +28400,7 @@ sub_80D80E0: @ 80D80E0
 	movs r0, 0x3F
 	ands r0, r1
 	strb r0, [r4, 0x1]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D812A
@@ -28448,7 +28448,7 @@ _080D812A:
 	lsls r1, 4
 	movs r2, 0x20
 	bl LoadPalette
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D8190
@@ -28679,7 +28679,7 @@ _080D832A:
 	ldr r1, _080D83C8 @ =0x85000200
 	str r1, [r0, 0x8]
 	ldr r0, [r0, 0x8]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D8378
@@ -28792,7 +28792,7 @@ sub_80D8414: @ 80D8414
 	movs r0, 0x3F
 	ands r0, r1
 	strb r0, [r4, 0x1]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D845E
@@ -28840,7 +28840,7 @@ _080D845E:
 	lsls r1, 4
 	movs r2, 0x20
 	bl LoadPalette
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D84C4
@@ -29061,7 +29061,7 @@ _080D864A:
 	ldr r1, _080D86E8 @ =0x85000200
 	str r1, [r0, 0x8]
 	ldr r0, [r0, 0x8]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D8698
@@ -29274,7 +29274,7 @@ _080D8824:
 	ldrh r1, [r5, 0x3C]
 	orrs r0, r1
 	strh r0, [r5, 0x3C]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D8858
@@ -30348,7 +30348,7 @@ _080D9074: .4byte gBattleAnimBankAttacker
 sub_80D9078: @ 80D9078
 	push {r4,lr}
 	adds r4, r0, 0
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D9094
@@ -31652,7 +31652,7 @@ _080D9A82:
 	ands r0, r2
 	orrs r0, r1
 	strb r0, [r5, 0x5]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D9ABC
@@ -31828,7 +31828,7 @@ _080D9BF0:
 	movs r1, 0
 	bl sub_8078764
 _080D9BF8:
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D9C0C
@@ -32631,7 +32631,7 @@ sub_80DA208: @ 80DA208
 	negs r0, r0
 	strh r0, [r1, 0x6]
 _080DA234:
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DA24C
@@ -35427,7 +35427,7 @@ sub_80DB74C: @ 80DB74C
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DB768
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DB77E
@@ -35444,7 +35444,7 @@ _080DB768:
 	movs r0, 0xC8
 	strb r0, [r1]
 _080DB77E:
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DB7DA
@@ -35485,7 +35485,7 @@ _080DB7BC:
 	adds r1, r5, 0
 	bl sub_8076034
 _080DB7DA:
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DB810
@@ -35540,7 +35540,7 @@ _080DB826:
 	adds r0, r4
 _080DB84A:
 	strh r0, [r6, 0x22]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DB85C
@@ -35679,7 +35679,7 @@ sub_80DB92C: @ 80DB92C
 	negs r1, r1
 	cmp r0, r1
 	bne _080DB9CC
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DB9BC
@@ -35754,7 +35754,7 @@ _080DB9E0: .4byte sub_80DB9E4
 sub_80DB9E4: @ 80DB9E4
 	push {r4-r6,lr}
 	adds r6, r0, 0
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DBA3C
@@ -35816,7 +35816,7 @@ sub_80DBA4C: @ 80DBA4C
 	bne _080DBA66
 	movs r6, 0x1
 _080DBA66:
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DBAAE
@@ -36651,7 +36651,7 @@ sub_80DC0B0: @ 80DC0B0
 	lsls r1, 3
 	ldr r0, _080DC10C @ =gTasks
 	adds r5, r1, r0
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DC154
@@ -37474,7 +37474,7 @@ _080DC720:
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DC74E
@@ -37594,7 +37594,7 @@ _080DC820: .4byte REG_BLDCNT
 sub_80DC824: @ 80DC824
 	push {r4-r6,lr}
 	adds r6, r0, 0
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DC850
@@ -37690,7 +37690,7 @@ _080DC8F0: .4byte move_anim_8072740
 sub_80DC8F4: @ 80DC8F4
 	push {r4-r6,lr}
 	adds r6, r0, 0
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DC918
@@ -37770,7 +37770,7 @@ _080DC99C: .4byte move_anim_8072740
 sub_80DC9A0: @ 80DC9A0
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DC9BC
@@ -38063,7 +38063,7 @@ sub_80DCBCC: @ 80DCBCC
 	push {r4-r7,lr}
 	sub sp, 0x4
 	adds r7, r0, 0
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DCBEC
@@ -38092,7 +38092,7 @@ _080DCBEC:
 	negs r0, r0
 	strh r0, [r1, 0x6]
 _080DCC0E:
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DCC5E
@@ -38668,7 +38668,7 @@ do_boulder_dust: @ 80DD078
 	movs r0, 0x3F
 	ands r0, r1
 	strb r0, [r4, 0x1]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DD0C4
@@ -38710,7 +38710,7 @@ _080DD0C4:
 	lsls r1, 4
 	movs r2, 0x20
 	bl LoadCompressedPalette
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DD120
@@ -38972,7 +38972,7 @@ _080DD2F6:
 	ldr r1, _080DD394 @ =0x85000200
 	str r1, [r0, 0x8]
 	ldr r0, [r0, 0x8]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DD344
@@ -41857,7 +41857,7 @@ sub_80DE918: @ 80DE918
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [sp, 0x8]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DE988
@@ -42296,7 +42296,7 @@ sub_80DECB0: @ 80DECB0
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DECF4
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DED0C
@@ -44938,7 +44938,7 @@ _080E015E:
 	ldr r0, _080E01BC @ =REG_BG1VOFS
 	str r0, [sp]
 	movs r7, 0x2
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E01F4
@@ -44967,7 +44967,7 @@ _080E01C4:
 	ldr r0, _080E0284 @ =REG_BG2VOFS
 	str r0, [sp]
 	movs r7, 0x4
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E01F4
@@ -45235,7 +45235,7 @@ _080E03EC:
 	.4byte _080E053C
 	.4byte _080E05A4
 _080E0400:
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -46092,7 +46092,7 @@ sub_80E0A4C: @ 80E0A4C
 	movs r0, 0x3F
 	ands r0, r1
 	strb r0, [r5, 0x1]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E0AC4
@@ -46108,7 +46108,7 @@ _080E0AC4:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080E0B40
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E0B40
@@ -46163,7 +46163,7 @@ _080E0AF4:
 	strb r0, [r5]
 	movs r7, 0x1
 _080E0B40:
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080E0B84
@@ -46379,7 +46379,7 @@ sub_80E0CD0: @ 80E0CD0
 	strh r1, [r0]
 	adds r0, 0x2
 	strh r1, [r0]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E0D40
@@ -49932,7 +49932,7 @@ sub_80E2838: @ 80E2838
 	lsls r0, 24
 	cmp r0, 0
 	beq _080E285C
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E285C
@@ -50880,7 +50880,7 @@ sub_80E2F2C: @ 80E2F2C
 	movs r1, 0x20
 	orrs r0, r1
 	strb r0, [r4, 0x1]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E2FAC
@@ -50896,7 +50896,7 @@ _080E2FAC:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080E3028
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E3028
@@ -50951,7 +50951,7 @@ _080E2FDC:
 	strb r0, [r4]
 	movs r7, 0x1
 _080E3028:
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080E306C
@@ -51033,7 +51033,7 @@ _080E30B4:
 	ldr r0, [r2, 0x8]
 	ldr r0, _080E3174 @ =gUnknown_08D20A30
 	bl LZDecompressVram
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080E3106
@@ -51150,7 +51150,7 @@ sub_80E3194: @ 80E3194
 	strh r1, [r0]
 	adds r0, 0x2
 	strh r1, [r0]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E3208
@@ -51358,7 +51358,7 @@ _080E3392:
 	mov r2, r8
 	eors r2, r0
 	mov r8, r2
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E33BC
@@ -51420,7 +51420,7 @@ _080E33C0:
 	movs r1, 0x20
 	orrs r0, r1
 	strb r0, [r4, 0x1]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E3432
@@ -51487,7 +51487,7 @@ _080E345E:
 	movs r2, 0x1
 	str r2, [sp, 0x20]
 _080E34A4:
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080E34E4
@@ -51581,7 +51581,7 @@ _080E3578:
 	ldr r1, [sp, 0x4]
 	bl LZDecompressVram
 _080E3580:
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080E3598
@@ -51884,7 +51884,7 @@ _080E378E:
 	strh r1, [r0]
 	adds r0, 0x2
 	strh r1, [r0]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E37E8
@@ -52505,7 +52505,7 @@ sub_80E3C4C: @ 80E3C4C
 	movs r0, 0x2
 	adds r6, r7, 0
 	eors r6, r0
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E3CAE
@@ -52565,7 +52565,7 @@ _080E3CB2:
 	movs r1, 0x20
 	orrs r0, r1
 	strb r0, [r4, 0x1]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E3D22
@@ -52577,7 +52577,7 @@ _080E3CB2:
 	orrs r1, r0
 	strb r1, [r4]
 _080E3D22:
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080E3D58
@@ -52651,7 +52651,7 @@ _080E3DC0:
 	ldr r1, [sp, 0x4]
 	ldr r0, [sp, 0x50]
 	bl LZDecompressVram
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080E3DE6
@@ -52865,7 +52865,7 @@ _080E3F32:
 	strh r1, [r0]
 	adds r0, 0x2
 	strh r1, [r0]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E3F90
@@ -53003,7 +53003,7 @@ _080E4084:
 	movs r1, 0x2
 	ldrsh r0, [r0, r1]
 	lsls r5, r0, 5
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080E40A8
@@ -53093,7 +53093,7 @@ _080E412C:
 	movs r1, 0x2
 	ldrsh r0, [r0, r1]
 	lsls r4, r0, 5
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080E4158
@@ -53197,7 +53197,7 @@ sub_80E4200: @ 80E4200
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -53326,7 +53326,7 @@ sub_80E4300: @ 80E4300
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080E4318
