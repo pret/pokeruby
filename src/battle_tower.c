@@ -399,7 +399,7 @@ bool8 sub_81346F4(void)
 	winStreak = GetCurrentBattleTowerWinStreak(battleTowerLevelType);
 	if (ShouldBattleEReaderTrainer(battleTowerLevelType, winStreak))
 	{
-		gSaveBlock2.battleTower.battleTowerTrainerId = 200;
+		gSaveBlock2.battleTower.battleTowerTrainerId = BATTLE_TOWER_EREADER_TRAINER_ID;
 		retVal = TRUE;
 	}
 	else
@@ -432,7 +432,7 @@ bool8 sub_81346F4(void)
 		}
 		else
 		{
-			gSaveBlock2.battleTower.battleTowerTrainerId = trainerIds[Random() % numCandidates] + 100;
+			gSaveBlock2.battleTower.battleTowerTrainerId = trainerIds[Random() % numCandidates] + BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID;
 			retVal = TRUE;
 		}
 	}
@@ -785,13 +785,13 @@ void SetBattleTowerTrainerGfxId(u8 trainerIndex)
 	u32 i;
 	u8 trainerClass;
 
-	if (trainerIndex < 100)
+	if (trainerIndex < BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID)
 	{
 		trainerClass = gBattleTowerTrainers[trainerIndex].trainerClass;
 	}
-	else if (trainerIndex < 200)
+	else if (trainerIndex < BATTLE_TOWER_EREADER_TRAINER_ID)
 	{
-		trainerClass = gSaveBlock2.battleTower.records[trainerIndex - 100].trainerClass;
+		trainerClass = gSaveBlock2.battleTower.records[trainerIndex - BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID].trainerClass;
 	}
 	else
 	{
@@ -819,7 +819,7 @@ void SetBattleTowerTrainerGfxId(u8 trainerIndex)
 
 void SetEReaderTrainerGfxId()
 {
-	SetBattleTowerTrainerGfxId(200);
+	SetBattleTowerTrainerGfxId(BATTLE_TOWER_EREADER_TRAINER_ID);
 }
 
 // void sub_8134AC0(struct BattleTowerRecord *record)
@@ -1144,29 +1144,29 @@ _08134C70: .4byte gSaveBlock2\n\
 
 u8 get_trainer_class_pic_index(void)
 {
-	if (gSaveBlock2.battleTower.battleTowerTrainerId == 200)
+	if (gSaveBlock2.battleTower.battleTowerTrainerId == BATTLE_TOWER_EREADER_TRAINER_ID)
 	{
 		return gTrainerClassToPicIndex[gSaveBlock2.battleTower.ereaderTrainer.trainerClass];
 	}
-	else if (gSaveBlock2.battleTower.battleTowerTrainerId < 100)
+	else if (gSaveBlock2.battleTower.battleTowerTrainerId < BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID)
 	{
 		return gTrainerClassToPicIndex[gBattleTowerTrainers[gSaveBlock2.battleTower.battleTowerTrainerId].trainerClass];
 	}
 	else
 	{
-		return gTrainerClassToPicIndex[gSaveBlock2.battleTower.records[gSaveBlock2.battleTower.battleTowerTrainerId - 100].trainerClass];
+		return gTrainerClassToPicIndex[gSaveBlock2.battleTower.records[gSaveBlock2.battleTower.battleTowerTrainerId - BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID].trainerClass];
 	}
 }
 
 u8 get_trainer_class_name_index(void)
 {
-	if (gSaveBlock2.battleTower.battleTowerTrainerId == 200)
+	if (gSaveBlock2.battleTower.battleTowerTrainerId == BATTLE_TOWER_EREADER_TRAINER_ID)
 	{
 		return gTrainerClassToNameIndex[gSaveBlock2.battleTower.ereaderTrainer.trainerClass];
 	}
-	else if (gSaveBlock2.battleTower.battleTowerTrainerId >= 100)
+	else if (gSaveBlock2.battleTower.battleTowerTrainerId >= BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID)
 	{
-		return gTrainerClassToNameIndex[gSaveBlock2.battleTower.records[gSaveBlock2.battleTower.battleTowerTrainerId - 100].trainerClass];
+		return gTrainerClassToNameIndex[gSaveBlock2.battleTower.records[gSaveBlock2.battleTower.battleTowerTrainerId - BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID].trainerClass];
 	}
 	else
 	{
@@ -1178,14 +1178,14 @@ void get_trainer_name(u8* dest)
 {
 	s32 i;
 
-	if (gSaveBlock2.battleTower.battleTowerTrainerId == 200)
+	if (gSaveBlock2.battleTower.battleTowerTrainerId == BATTLE_TOWER_EREADER_TRAINER_ID)
 	{
 		for (i = 0; i < 7; i++)
 		{
 			dest[i] = gSaveBlock2.battleTower.ereaderTrainer.name[i];
 		}
 	}
-	else if (gSaveBlock2.battleTower.battleTowerTrainerId < 100)
+	else if (gSaveBlock2.battleTower.battleTowerTrainerId < BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID)
 	{
 		for (i = 0; i < 7; i++)
 		{
@@ -1196,7 +1196,7 @@ void get_trainer_name(u8* dest)
 	{
 		for (i = 0; i < 7; i++)
 		{
-			dest[i] = gSaveBlock2.battleTower.records[gSaveBlock2.battleTower.battleTowerTrainerId - 100].name[i];
+			dest[i] = gSaveBlock2.battleTower.records[gSaveBlock2.battleTower.battleTowerTrainerId - BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID].name[i];
 		}
 	}
 
@@ -1258,13 +1258,13 @@ void FillBattleTowerTrainerParty(void)
 		fixedIV = 31;
 		battleMonsOffset = 180;
 	}
-	else if (gSaveBlock2.battleTower.battleTowerTrainerId < 100)
+	else if (gSaveBlock2.battleTower.battleTowerTrainerId < BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID)
 	{
 		fixedIV = 31;
 		battleMonsOffset = 200;
 		monPoolSize = 100;
 	}
-	else if (gSaveBlock2.battleTower.battleTowerTrainerId == 200)
+	else if (gSaveBlock2.battleTower.battleTowerTrainerId == BATTLE_TOWER_EREADER_TRAINER_ID)
 	{
 		// Load E-Reader trainer's party.
 		for (partyIndex = 0; partyIndex < 3; partyIndex++)
@@ -1281,7 +1281,7 @@ void FillBattleTowerTrainerParty(void)
 		{
 			sub_803ADE8(
 				&gEnemyParty[partyIndex],
-				&gSaveBlock2.battleTower.records[gSaveBlock2.battleTower.battleTowerTrainerId - 100].party[partyIndex]);
+				&gSaveBlock2.battleTower.records[gSaveBlock2.battleTower.battleTowerTrainerId - BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID].party[partyIndex]);
 		}
 
 		return;
@@ -1562,17 +1562,17 @@ void PrintBattleTowerTrainerMessage(u16 *easyChat)
 
 void PrintBattleTowerTrainerGreeting(void)
 {
-	if (gSaveBlock2.battleTower.battleTowerTrainerId == 200)
+	if (gSaveBlock2.battleTower.battleTowerTrainerId == BATTLE_TOWER_EREADER_TRAINER_ID)
 	{
 		PrintBattleTowerTrainerMessage(gSaveBlock2.battleTower.ereaderTrainer.greeting.easyChat);
 	}
-	else if (gSaveBlock2.battleTower.battleTowerTrainerId < 100)
+	else if (gSaveBlock2.battleTower.battleTowerTrainerId < BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID)
 	{
 		PrintBattleTowerTrainerMessage((u16 *)gBattleTowerTrainers[gSaveBlock2.battleTower.battleTowerTrainerId].greeting.easyChat);
 	}
 	else
 	{
-		PrintBattleTowerTrainerMessage(gSaveBlock2.battleTower.records[gSaveBlock2.battleTower.battleTowerTrainerId - 100].greeting.easyChat);
+		PrintBattleTowerTrainerMessage(gSaveBlock2.battleTower.records[gSaveBlock2.battleTower.battleTowerTrainerId - BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID].greeting.easyChat);
 	}
 }
 
@@ -1690,7 +1690,7 @@ void sub_8135668(void)
 		}
 		break;
 	case 6:
-		if (gSaveBlock2.battleTower.battleTowerTrainerId == 200)
+		if (gSaveBlock2.battleTower.battleTowerTrainerId == BATTLE_TOWER_EREADER_TRAINER_ID)
 		{
 			ClearEReaderTrainer(&gSaveBlock2.battleTower.ereaderTrainer);
 		}
@@ -2059,7 +2059,8 @@ void sub_8135CFC(void)
 
 u16 GetCurrentBattleTowerWinStreak(u8 battleTowerLevelType)
 {
-	u16 winStreak = ((gSaveBlock2.battleTower.curStreakChallengesNum[battleTowerLevelType] - 1) * 7 - 1) + gSaveBlock2.battleTower.curChallengeBattleNum[battleTowerLevelType];
+	u16 winStreak = ((gSaveBlock2.battleTower.curStreakChallengesNum[battleTowerLevelType] - 1) * 7 - 1)
+					+ gSaveBlock2.battleTower.curChallengeBattleNum[battleTowerLevelType];
 
 	if (winStreak > 9999)
 	{
@@ -2353,13 +2354,13 @@ void sub_813610C(void)
 #if GERMAN
 u8 de_sub_81364AC(void)
 {
-	if (gSaveBlock2.battleTower.battleTowerTrainerId == 200)
+	if (gSaveBlock2.battleTower.battleTowerTrainerId == BATTLE_TOWER_EREADER_TRAINER_ID)
 	{
 		return gSaveBlock2.battleTower.ereaderTrainer.trainerClass;
 	}
-	else if (gSaveBlock2.battleTower.battleTowerTrainerId >= 100)
+	else if (gSaveBlock2.battleTower.battleTowerTrainerId >= BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID)
 	{
-		return gSaveBlock2.battleTower.records[gSaveBlock2.battleTower.battleTowerTrainerId - 100].trainerClass;
+		return gSaveBlock2.battleTower.records[gSaveBlock2.battleTower.battleTowerTrainerId - BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID].trainerClass;
 	}
 	else
 	{
