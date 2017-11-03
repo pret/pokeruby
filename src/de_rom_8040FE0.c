@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle.h"
+#include "battle_tower.h"
 
 #if GERMAN
 
@@ -59,7 +60,6 @@ u8 *de_sub_804100C(u8 gender) {
 u8 de_sub_81364AC(void);
 u8 get_trainer_class_name_index(void);
 u8 de_sub_81364F8(void);
-u8 sub_8135FD8(void);
 
 u8 *de_sub_8041024(s32 arg0, u32 arg1) {
     u8 nameIndex, trainerClass, gender;
@@ -94,7 +94,7 @@ u8 *de_sub_8041024(s32 arg0, u32 arg1) {
 
     case 0x800:
         trainerClass = de_sub_81364F8();
-        nameIndex = sub_8135FD8();
+        nameIndex = GetEReaderTrainerClassNameIndex();
         if (trainerClass == TRAINER_CLASS_SCHOOL_KID_F)
         {
             return de_sub_8040FE0(FEMALE);
@@ -196,7 +196,7 @@ _08041086:\n\
     bl de_sub_81364F8\n\
     lsls r0, 24\n\
     lsrs r4, r0, 24\n\
-    bl sub_8135FD8\n\
+    bl GetEReaderTrainerClassNameIndex\n\
     b _08041070\n\
 _08041094:\n\
     movs r0, 0x1\n\

@@ -5,7 +5,7 @@ MossdeepCity_GameCorner_1F_MapScripts:: @ 815AC52
 	.byte 0
 
 MossdeepCity_GameCorner_1F_MapScript1_15AC62:: @ 815AC62
-	special sub_813601C
+	special ValidateEReaderTrainer
 	compare RESULT, 1
 	call_if 1, MossdeepCity_GameCorner_1F_EventScript_15AC71
 	end
@@ -16,7 +16,7 @@ MossdeepCity_GameCorner_1F_EventScript_15AC71:: @ 815AC71
 	return
 
 MossdeepCity_GameCorner_1F_MapScript1_15AC84:: @ 815AC84
-	special sub_813601C
+	special ValidateEReaderTrainer
 	compare RESULT, 0
 	call_if 1, MossdeepCity_GameCorner_1F_EventScript_15AC9E
 	compare 0x40c0, 0

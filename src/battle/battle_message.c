@@ -1,6 +1,7 @@
 #include "global.h"
-#include "battle_message.h"
 #include "battle.h"
+#include "battle_message.h"
+#include "battle_tower.h"
 #include "item.h"
 #include "items.h"
 #include "pokemon.h"
@@ -127,7 +128,6 @@ u8 GetBankSide(u8 bank);
 s32 sub_803FC34(u16);
 void get_trainer_name(u8* dst);
 u8 get_trainer_class_name_index(void);
-u8 sub_8135FD8(void);
 u8 GetMultiplayerId(void);
 u8 GetBankByPlayerAI(u8 ID);
 u8 GetBankSide(u8 bank);
@@ -632,7 +632,7 @@ u32 StrCpyDecodeBattle(const u8* src, u8* dst)
                 else if (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
                     toCpy = gTrainerClassNames[get_trainer_class_name_index()];
                 else if (gBattleTypeFlags & BATTLE_TYPE_EREADER_TRAINER)
-                    toCpy = gTrainerClassNames[sub_8135FD8()];
+                    toCpy = gTrainerClassNames[GetEReaderTrainerClassNameIndex()];
                 else
                     toCpy = gTrainerClassNames[gTrainers[gTrainerBattleOpponent].trainerClass];
                 break;
@@ -661,7 +661,7 @@ u32 StrCpyDecodeBattle(const u8* src, u8* dst)
                 }
                 else if (gBattleTypeFlags & BATTLE_TYPE_EREADER_TRAINER)
                 {
-                    sub_8135FF4(text);
+                    SetEReaderTrainerName(text);
                     toCpy = text;
                 }
                 else

@@ -92,9 +92,9 @@ void sub_8052DA8(void)
         gSaveBlock1.sbStruct.unkSB1.sb1_2EFC_struct[i] = gUnknown_08216604;
 }
 
-void sub_8052DE4(void)
+void ZeroBattleTowerData(void)
 {
-    CpuFill32(0, &gSaveBlock2.filler_A8, sizeof(gSaveBlock2.filler_A8));
+    CpuFill32(0, &gSaveBlock2.battleTower, sizeof(gSaveBlock2.battleTower));
 }
 
 void WarpToTruck(void)
@@ -127,7 +127,7 @@ void NewGameInitData(void)
     ZeroPlayerPartyMons();
     ZeroEnemyPartyMons();
     ResetPokedex();
-    sub_8052DE4();
+    ZeroBattleTowerData();
     memset(&gSaveBlock1, 0, sizeof(gSaveBlock1));
     ClearMailData();
     gSaveBlock2.specialSaveWarp = 0;

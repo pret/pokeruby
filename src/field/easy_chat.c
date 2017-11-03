@@ -278,13 +278,13 @@ void sub_80EB7C4(void)
     switch (gSpecialVar_0x8004)
     {
     case 0:
-        words = gSaveBlock1.unk2B1C;
+        words = gSaveBlock1.easyChats.unk2B1C;
         arg1 = 2;
         arg2 = 2;
         break;
     case 1:
-        words = gSaveBlock1.unk2B28;
-        if (sub_80EB680(gSaveBlock1.unk2B28, 3, 2, 20))
+        words = gSaveBlock1.easyChats.unk2B28;
+        if (sub_80EB680(gSaveBlock1.easyChats.unk2B28, 3, 2, 20))
         {
             arg1 = 2;
             arg2 = 3;
@@ -296,12 +296,12 @@ void sub_80EB7C4(void)
         }
         break;
     case 2:
-        words = gSaveBlock1.unk2B34;
+        words = gSaveBlock1.easyChats.unk2B34;
         arg1 = 3;
         arg2 = 2;
         break;
     case 3:
-        words = gSaveBlock1.unk2B40;
+        words = gSaveBlock1.easyChats.unk2B40;
         arg1 = 3;
         arg2 = 2;
         break;

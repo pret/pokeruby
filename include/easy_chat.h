@@ -1080,6 +1080,7 @@ u8 sub_80EB868(u8);
 void sub_80EB890(u8);
 u8 sub_80EB8C0(void);
 u16 sub_80EB8EC(void);
+u8 *sub_80EB544(u8 *dst, u16 *words, u16 arg2, u16 arg3);
 
 #if GERMAN
 u32 de_sub_80EB748(u32, u32);
