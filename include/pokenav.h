@@ -68,11 +68,15 @@ struct UnkPokenavStruct {
     /*0x9004*/ u8 unk9004[3][20];
     /*0x9040*/ u8 unk9040[0x304];
     /*0x9344*/ u8 unk9344;
-    /*0x9345*/ u8 filler9345[0x3ba3];
+    /*0x9345*/ u8 filler9345[0x3b07];
+    /*0xCE4C*/ u16 unkCE4C;
+    /*0xCE4E*/ u16 unkCE4E;
+    /*0xCE50*/ u16 unkCE50;
+    /*0xCE52*/ u16 palettesCE52[0x4B];
     /*0xCEE8*/ struct UnkPokenavStruct_Sub unkCEE8[78];
     /*0xD158*/ u16 unkD158;
     /*0xD15A*/ u8 fillerD15A[6];
-    /*0xD162*/ u16 unkD160;
+    /*0xD160*/ u16 unkD160;
     /*0xD162*/ u8 unkD162[2];
     /*0xD164*/ struct UnkPokenavStruct_Sub1 unkD164;
 };

@@ -4,10 +4,12 @@
 #include "battle.h"
 #include "data2.h"
 #include "de_rom_8040FE0.h"
+#include "menu.h"
 #include "overworld.h"
 #include "string_util.h"
 #include "palette.h"
 #include "task.h"
+#include "text.h"
 #include "unknown_task.h"
 #include "sound.h"
 #include "region_map.h"
@@ -87,8 +89,21 @@ struct UnknownPokenav0_1 {
 
 IWRAM_DATA void (*gUnknown_03000744)(void);
 
+extern const u8 *const gUnknown_083E31B0[];
+extern const u8 *const gUnknown_083E31CC[];
+extern const u8 *const gUnknown_083E31D8[];
+extern u8 *gUnknown_083DFEC8;
+extern const u8 gUnknown_083DFEEC[];
+extern const u8 gUnknown_083E005C[];
+extern const u8 gUnknown_083E007C[];
+extern const u8 gPokenavOutlineTilemap[];
+extern const u8 gPokenavOutlineTiles[];
+extern const u8 gPokenavOutlinePalette[];
+extern const u8 gUnknown_083DFECC[];
+extern const u8 gUnknown_083DFF8C[];
 extern const u8 gPokenavHoennMapMisc_Gfx[];
 extern const u8 gUnknown_08E99FB0[];
+extern const u8 gUnknown_08E9A100[];
 extern const u16 gPokenavHoennMap1_Pal[];
 
 static void sub_80EBCA8();
@@ -129,6 +144,9 @@ static void sub_80EE658();
 static void sub_80EE8F4();
 static void sub_80EEDC4();
 
+extern void sub_80EF7D4(void);
+extern void sub_80EF54C(u8);
+extern void sub_809D104(u16 *, u16, u16, const u8 *, u16, u16, u16, u16);
 extern void sub_80EF58C(u32);
 extern void sub_80F6FFC();
 extern void sub_80F3294();
@@ -167,7 +185,6 @@ extern void sub_80F3B94();
 extern bool8 sub_80F3BD4();
 extern void sub_80F66E0();
 extern bool8 sub_80F1080();
-extern void sub_80EEFBC();
 extern void sub_80F38B8();
 extern bool8 sub_80F38EC();
 extern void sub_80F638C();
@@ -195,7 +212,7 @@ extern void sub_80EFBB0();
 extern void sub_80F2DF4();
 extern void sub_80F1E84();
 extern bool8 sub_80F1F10();
-extern void sub_80EEFBC(u32);
+extern void sub_80EEFBC(u8);
 extern void sub_80F2620();
 extern void sub_80EF814();
 extern void sub_80EF840();
@@ -208,13 +225,13 @@ extern void sub_80F6C20();
 extern void sub_80F3FF0();
 extern bool8 sub_80F4024();
 extern void sub_80F2598();
-extern void sub_80EF248();
-extern bool8 sub_80EF284();
+extern void sub_80EF248(u8);
+extern bool8 sub_80EF284(u8);
 extern void sub_80F1B8C();
 extern bool8 sub_80F1BC8(u32 unk);
 extern void sub_80F1DF0();
 extern bool8 sub_80F1E50();
-extern void sub_80EF428();
+extern void sub_80EF428(u8, u8);
 extern bool8 sub_80EEF78();
 extern void sub_80F1A90();
 extern void sub_80F2D04(u32);
@@ -2848,19 +2865,19 @@ void sub_80EED2C(u8 param1) {
 	}
 }
 
-void sub_80EED9C() {
+void sub_80EED9C(void) {
 	gUnknown_03000744 = ewram0.var300;
 	ewram0.var300 = &sub_80EEDC4;
 	ewram0.var300();
 }
 
-void sub_80EEDC4() {
+void sub_80EEDC4(void) {
 	if (sub_8055870() != 0x1) {
 		ewram0.var300 = gUnknown_03000744;
 	}
 }
 
-void sub_80EEDE8() {
+void sub_80EEDE8(void) {
 	REG_BG0HOFS = 0;
 	REG_BG0VOFS = 0;
 	REG_BG2VOFS = 0;
@@ -2869,18 +2886,18 @@ void sub_80EEDE8() {
 	REG_BG3VOFS = 0;
 }
 
-void sub_80EEE08() {
+void sub_80EEE08(void) {
 	gUnknown_083DFEC4->unkD160 = 0;
 }
 
-void sub_80EEE20() {
+void sub_80EEE20(void) {
 	gUnknown_083DFEC4->unkD160 = 0;
 	if (!gUnknown_083DFEC4->unk6DAC) {
 		while (sub_80EEE54());
 	}
 }
 
-bool8 sub_80EEE54() {
+bool8 sub_80EEE54(void) {
 	switch (gUnknown_083DFEC4->unkD160) {
 	case 0:
 		LZ77UnCompVram(gPokenavHoennMapMisc_Gfx, (void *)VRAM + 0xC000);
@@ -2909,7 +2926,7 @@ bool8 sub_80EEE54() {
 	return 1;
 }
 
-bool8 sub_80EEF34() {
+bool8 sub_80EEF34(void) {
 	bool8 retVal = TRUE;
 
 	if (gUnknown_083DFEC4->unk030C.unk030C.unk0 == 32)
@@ -2946,4 +2963,206 @@ bool8 sub_80EEF78(void)
 
 	REG_BG1VOFS = gUnknown_083DFEC4->unk030C.unk030C.unk0;
 	return retVal;
+}
+
+void sub_80EEFBC(u8 a)
+{
+	u8 var1;
+
+	sub_809D104((void *)VRAM + 0xD800, 0, 22, gUnknown_08E9A100, 0, 0, 17, 2);
+
+	switch (a)
+	{
+	case 0:
+		sub_809D104((void *)VRAM + 0xD800, 0, 22, gUnknown_08E9A100, 17, 0, 10, 2);
+		sub_809D104((void *)VRAM + 0xD800, 10, 22, gUnknown_08E9A100, 0, 6, 7, 2);
+		break;
+	case 11:
+		sub_809D104((void *)VRAM + 0xD800, 8, 22, gUnknown_08E9A100, 0, 6, 7, 2);
+		break;
+	case 2:
+		var1 = gUnknown_083DFEC4->unk6DAC;
+		if (!var1)
+		{
+			sub_809D104((void *)VRAM + 0xD800, 0, 22, gUnknown_08E9A100, 10, 2, 10, 2);
+			sub_809D104((void *)VRAM + 0xD800, 10, 22, gUnknown_08E9A100, var1, 6, 7, 2);
+		}
+		else
+		{
+			sub_809D104((void *)VRAM + 0xD800, 10, 22, gUnknown_08E9A100, 0, 6, 7, 2);
+		}
+		break;
+	case 3:
+		sub_809D104((void *)VRAM + 0xD800, 0, 22, gUnknown_08E9A100, 0, 4, 10, 2);
+		sub_809D104((void *)VRAM + 0xD800, 10, 22, gUnknown_08E9A100, 0, 6, 7, 2);
+		break;
+	case 4:
+		sub_809D104((void *)VRAM + 0xD800, 0, 22, gUnknown_08E9A100, 20, 2, 10, 2);
+		sub_809D104((void *)VRAM + 0xD800, 10, 22, gUnknown_08E9A100, 0, 6, 7, 2);
+		break;
+	case 7:
+		sub_809D104((void *)VRAM + 0xD800, 0, 22, gUnknown_08E9A100, 10, 4, 10, 2);
+		sub_809D104((void *)VRAM + 0xD800, 7, 22, gUnknown_08E9A100, 0, 6, 7, 2);
+		break;
+	case 8:
+		sub_809D104((void *)VRAM + 0xD800, 0, 22, gUnknown_08E9A100, 20, 4, 10, 2);
+		sub_809D104((void *)VRAM + 0xD800, 7, 22, gUnknown_08E9A100, 0, 6, 7, 2);
+		break;
+	case 5:
+	case 9:
+		sub_809D104((void *)VRAM + 0xD800, 0, 22, gUnknown_08E9A100, 0, 2, 10, 2);
+		sub_809D104((void *)VRAM + 0xD800, 8, 22, gUnknown_08E9A100, 0, 6, 7, 2);
+		break;
+	case 10:
+		sub_809D104((void *)VRAM + 0xD800, 8, 22, gUnknown_08E9A100, 0, 6, 7, 2);
+		break;
+	}
+}
+
+void sub_80EF248(u8 a)
+{
+	gUnknown_083DFEC4->unkD160 = 0;
+
+	if (!gUnknown_083DFEC4->unk6DAC)
+	{
+		while (sub_80EF284(a));
+	}
+}
+
+bool8 sub_80EF284(u8 a)
+{
+	switch (gUnknown_083DFEC4->unkD160)
+	{
+	case 0:
+		sub_80EEDE8();
+		break;
+	case 1:
+		SetUpWindowConfig(&gWindowConfig_81E7224);
+		break;
+	case 2:
+		MultistepInitMenuWindowBegin(&gWindowConfig_81E7224);
+		break;
+	case 3:
+		if (!MultistepInitMenuWindowContinue())
+		{
+			return TRUE;
+		}
+		break;
+	case 4:
+		DmaCopy16Defvars(3, gUnknown_083DFEEC, (void *)VRAM + 0x5000, 0xA0);
+		break;
+	case 5:
+		LZ77UnCompVram(gUnknown_083DFF8C, (void *)VRAM + 0xF800);
+		break;
+	case 6:
+		DmaCopy16Defvars(3, gUnknown_083E005C, (void *)VRAM + 0x8000, 0x20);
+		break;
+	case 7:
+		LZ77UnCompVram(gUnknown_083E007C, (void *)VRAM + 0xE000);
+		break;
+	case 8:
+		LZ77UnCompVram(gPokenavOutlineTilemap, (void *)VRAM + 0xE800);
+		break;
+	case 9:
+		LZ77UnCompVram(gPokenavOutlineTiles, (void *)VRAM + 0x8020);
+		break;
+	case 10:
+		sub_80EF54C(a);
+		LoadPalette(gUnknown_083DFECC, 0xF0, 0x20);
+		LoadPalette(gPokenavOutlinePalette, 0x40, 0x20);
+		sub_80EF7D4();
+		break;
+	case 11:
+		REG_BG0CNT = 0x1F01;
+		REG_BG2CNT = 0x1D0A;
+		REG_BG3CNT = 0x1C0B;
+		REG_BLDCNT = 0;
+
+		gUnknown_083DFEC4->unkD160++;
+		return FALSE;
+	default:
+		return FALSE;
+	}
+
+	gUnknown_083DFEC4->unkD160++;
+	return TRUE;
+}
+
+void sub_80EF428(u8 a, u8 b)
+{
+	u8 *tileBuffer;
+	const u8 *pcText = 0;
+
+	switch (a)
+	{
+	case 0:
+		pcText = gUnknown_083E31B0[b];
+		break;
+	case 1:
+		pcText = gUnknown_083E31CC[b];
+		break;
+	case 2:
+		pcText = gUnknown_083E31D8[b];
+		break;
+	}
+
+	tileBuffer = gUnknown_083DFEC8;
+	sub_8072C74(&tileBuffer[0x800], pcText, 0xC0, 2);
+	MenuPrint(&tileBuffer[0x800], 3, 17);
+}
+
+void sub_80EF490(u8 a)
+{
+	u16 var1, var2;
+
+	if (a == 2)
+	{
+		a = 1;
+	}
+
+	gUnknown_083DFEC4->unkCE4E = a * 30;
+	var1 = gUnknown_083DFEC4->unkCE4C;
+	var2 = a * 30;
+	if (var1 < var2)
+	{
+		gUnknown_083DFEC4->unkCE50 = 2;
+	}
+	else if (var1 > var2)
+	{
+		gUnknown_083DFEC4->unkCE50 = -2;
+	}
+	else
+	{
+		gUnknown_083DFEC4->unkCE50 = 0;
+	}
+}
+
+bool8 sub_80EF4F8(void)
+{
+	u16 *palettes;
+
+	if (gUnknown_083DFEC4->unkCE4C == gUnknown_083DFEC4->unkCE4E)
+	{
+		return FALSE;
+	}
+	else
+	{
+		gUnknown_083DFEC4->unkCE4C = gUnknown_083DFEC4->unkCE50 + gUnknown_083DFEC4->unkCE4C;
+
+		palettes = gUnknown_083DFEC4->palettesCE52;
+		LoadPalette(&palettes[gUnknown_083DFEC4->unkCE4C], 0x31, 4);
+		return TRUE;
+	}
+
+}
+
+void sub_80EF54C(u8 a)
+{
+	if (a == 2)
+	{
+		a = 1;
+	}
+
+	gUnknown_083DFEC4->unkCE4C = a * 30;
+	LoadPalette(&gUnknown_083DFEC4->palettesCE52[gUnknown_083DFEC4->unkCE4C], 0x31, 4);
 }
