@@ -4,8 +4,8 @@
 #include "battle.h"
 #include "data2.h"
 #include "de_rom_8040FE0.h"
+#include "overworld.h"
 #include "string_util.h"
-#include "rom4.h"
 #include "palette.h"
 #include "task.h"
 #include "unknown_task.h"
@@ -2857,7 +2857,7 @@ void sub_80EED2C(u8 param1) {
 	}
 }
 
-void (*gUnknown_03000744)(void);
+IWRAM_DATA void (*gUnknown_03000744)(void);
 void _call_via_r1();
 void sub_80EEDC4();
 

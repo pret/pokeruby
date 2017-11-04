@@ -189,7 +189,7 @@ _080124A8:
 	lsls r0, 8
 	orrs r2, r0
 	movs r0, 0
-	bl dp01_build_cmdbuf_x12_a_bb
+	bl Emitcmd18
 	bl _08012E32
 	.align 2, 0
 _080124C0: .4byte gActionForBanks
@@ -408,7 +408,7 @@ _0801264E:
 	movs r0, 0
 	movs r2, 0
 	add r3, sp, 0x4
-	bl sub_800CBA4
+	bl Emitcmd20
 	b _0801289E
 	.align 2, 0
 _080126AC: .4byte gBattleMons
@@ -698,7 +698,7 @@ _08012908:
 	ldr r0, _08012928 @ =0x0201606c
 	adds r1, r0
 	movs r0, 0
-	bl sub_800CBE0
+	bl EmitOpenBag
 	ldrb r0, [r4]
 	bl MarkBufferBankForExecution
 	b _08012968
@@ -725,7 +725,7 @@ _0801292C:
 	adds r0, r4
 	strb r5, [r0]
 	movs r0, 0
-	bl dp01_build_cmdbuf_x32_32_32_32
+	bl Emitcmd50
 	mov r4, r8
 	ldrb r0, [r4]
 	bl MarkBufferBankForExecution
@@ -1514,8 +1514,8 @@ _08012FE8: .4byte gUnknown_02024A76
 _08012FEC: .4byte gTurnOrder
 	thumb_func_end sub_8012FBC
 
-	thumb_func_start b_first_side
-b_first_side: @ 8012FF0
+	thumb_func_start GetWhoStrikesFirst
+GetWhoStrikesFirst: @ 8012FF0
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2003,7 +2003,7 @@ _080133B6:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end b_first_side
+	thumb_func_end GetWhoStrikesFirst
 
 	thumb_func_start sub_80133C8
 sub_80133C8: @ 80133C8
@@ -2285,7 +2285,7 @@ _080135D0:
 	beq _0801360C
 	adds r0, r3, 0
 	movs r2, 0
-	bl b_first_side
+	bl GetWhoStrikesFirst
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801360C
@@ -3144,7 +3144,7 @@ _08013D4C:
 	ldr r1, _08013D6C @ =gBattleMainFunc
 	ldr r0, _08013D70 @ =sub_8013DA8
 	str r0, [r1]
-	ldr r1, _08013D74 @ =gUnknown_03005E94
+	ldr r1, _08013D74 @ =gCB2_AfterEvolution
 	ldr r0, _08013D78 @ =sub_800F808
 	str r0, [r1]
 	b _08013D96
@@ -3152,7 +3152,7 @@ _08013D4C:
 _08013D68: .4byte gNoOfAllBanks
 _08013D6C: .4byte gBattleMainFunc
 _08013D70: .4byte sub_8013DA8
-_08013D74: .4byte gUnknown_03005E94
+_08013D74: .4byte gCB2_AfterEvolution
 _08013D78: .4byte sub_800F808
 _08013D7C:
 	ldr r0, _08013D9C @ =gBattleExecBuffer

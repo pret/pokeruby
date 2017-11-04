@@ -1,6 +1,7 @@
 #ifndef GUARD_MENU_H
 #define GUARD_MENU_H
 
+#include "task.h"
 #include "text.h"
 
 struct MenuAction
@@ -12,7 +13,7 @@ struct MenuAction
 struct MenuAction2
 {
     const u8 *text;
-    void (*func)(u8);
+    TaskFunc func;
 };
 
 extern const struct MenuAction gMenuYesNoItems[];
@@ -43,7 +44,7 @@ u16 unref_sub_8071F98(u8, u8);
 void unref_sub_8071FBC(u16, u8, u8, u8, u8);
 void MenuDisplayMessageBox(void);
 void MenuPrintMessage(const u8 *, u8, u8);
-void sub_8072044(const u8 *);
+void MenuPrintMessageDefaultCoords(const u8 *);
 void MenuSetText(const u8 *);
 u8 MenuUpdateWindowText(void);
 u8 unref_sub_8072098(void);
@@ -59,7 +60,7 @@ void sub_807274C(u8, u8, u8, u8, const struct MenuAction[], u8, u32);
 s8 sub_80727CC(void);
 u8 sub_807288C(u8);
 void PrintMenuItems(u8, u8, u8, const struct MenuAction[]);
-void PrintMenuItemsReordered(u8, u8, u8, const struct MenuAction[], const u8*);
+void PrintMenuItemsReordered(u8 left, u8 top, u8 menuItemCount, const struct MenuAction2 menuItems[], const u8 *order);
 void InitYesNoMenu(u8, u8, u8);
 void DisplayYesNoMenu(u8, u8, u32);
 s8 ProcessMenuInputNoWrap_(void);

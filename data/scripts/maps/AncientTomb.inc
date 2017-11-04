@@ -6,11 +6,11 @@ AncientTomb_MapScripts:: @ 815EFBE
 
 AncientTomb_MapScript1_15EFCE:: @ 815EFCE
 	checkflag 2145
-	callif 1, AncientTomb_EventScript_15EFD8
+	call_if 1, AncientTomb_EventScript_15EFD8
 	end
 
 AncientTomb_EventScript_15EFD8:: @ 815EFD8
-	disappear LAST_TALKED
+	removeobject LAST_TALKED
 	return
 
 AncientTomb_MapScript1_15EFDC:: @ 815EFDC
@@ -19,7 +19,7 @@ AncientTomb_MapScript1_15EFDC:: @ 815EFDC
 
 AncientTomb_MapScript1_15EFE0:: @ 815EFE0
 	checkflag 2130
-	callif 0, AncientTomb_EventScript_15EFEA
+	call_if 0, AncientTomb_EventScript_15EFEA
 	end
 
 AncientTomb_EventScript_15EFEA:: @ 815EFEA
@@ -34,10 +34,10 @@ AncientTomb_EventScript_15EFEA:: @ 815EFEA
 AncientTomb_EventScript_15F021:: @ 815F021
 	lockall
 	checkflag 2130
-	jumpeq AncientTomb_EventScript_15F038
-	braillemsg AncientTomb_Braille_1C552E
+	goto_if_eq AncientTomb_EventScript_15F038
+	braillemessage AncientTomb_Braille_1C552E
 	waitbutton
-	hidebox 0, 0, 29, 19
+	erasebox 0, 0, 29, 19
 	releaseall
 	end
 
@@ -48,23 +48,23 @@ AncientTomb_EventScript_15F038:: @ 815F038
 
 AncientTomb_EventScript_15F042:: @ 815F042
 	lockall
-	braillemsg AncientTomb_Braille_1C552E
+	braillemessage AncientTomb_Braille_1C552E
 	waitbutton
-	hidebox 0, 0, 29, 19
+	erasebox 0, 0, 29, 19
 	releaseall
 	end
 
 AncientTomb_EventScript_15F050:: @ 815F050
 	lock
 	faceplayer
-	checksound
-	pokecry SPECIES_REGISTEEL, 2
-	pause 40
+	waitse
+	playpokecry SPECIES_REGISTEEL, 2
+	delay 40
 	waitpokecry
 	setwildbattle SPECIES_REGISTEEL, 40, ITEM_NONE
 	setflag 937
 	setflag 2145
-	special StartBattle_Regi
+	special ScrSpecial_StartRegiBattle
 	waitstate
 	clearflag 2145
 	release

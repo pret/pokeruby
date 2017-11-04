@@ -2,6 +2,7 @@
 #define GUARD_TEXT_H
 
 #define CHAR_SPACE          0x00
+#define CHAR_SONG_WORD_SEPARATOR 0x37  // separates words in the bard song. Not sure if it's used for anything else
 #define CHAR_0              0xA1
 #define CHAR_QUESTION_MARK  0xAC
 #define CHAR_PERIOD         0xAD
@@ -97,35 +98,35 @@ struct WindowConfig
 
 struct Window
 {
-    u8 textMode;
-    u8 fontNum;
-    u8 language;
-    u8 foregroundColor;
-    u8 backgroundColor;
-    u8 shadowColor;
-    u8 paletteNum;
-    u8 tilemapLeft;
-    u8 tilemapTop;
-    u8 width;
-    u8 height;
-    u8 win_field_B;
-    u8 win_field_C;
-    u8 delayCounter;
-    u8 spacing;
-    u8 win_field_F;
-    u8 cursorX;
-    u8 cursorY;
-    u8 left;
-    u16 top;
-    u16 state;
-    u16 downArrowCounter;
-    u16 tileDataStartOffset;
-    u16 tileDataOffset;
-    u16 textIndex;
-    const u8 *text;
-    u8 *tileData;
-    u16 *tilemap;
-    struct WindowConfig *config;
+ /*0x00*/ u8 textMode;
+ /*0x01*/ u8 fontNum;
+ /*0x02*/ u8 language;
+ /*0x03*/ u8 foregroundColor;
+ /*0x04*/ u8 backgroundColor;
+ /*0x05*/ u8 shadowColor;
+ /*0x06*/ u8 paletteNum;
+ /*0x07*/ u8 tilemapLeft;
+ /*0x08*/ u8 tilemapTop;
+ /*0x09*/ u8 width;
+ /*0x0A*/ u8 height;
+ /*0x0B*/ u8 win_field_B;
+ /*0x0C*/ u8 win_field_C;
+ /*0x0D*/ u8 delayCounter;
+ /*0x0E*/ u8 spacing;
+ /*0x0F*/ u8 win_field_F;
+ /*0x10*/ u8 cursorX;
+ /*0x11*/ u8 cursorY;
+ /*0x12*/ u8 left;
+ /*0x14*/ u16 top; // padded to 0x14
+ /*0x16*/ u16 state;
+ /*0x18*/ u16 downArrowCounter;
+ /*0x1A*/ u16 tileDataStartOffset;
+ /*0x1C*/ u16 tileDataOffset;
+ /*0x1E*/ u16 textIndex;
+ /*0x20*/ const u8 *text;
+ /*0x24*/ u8 *tileData;
+ /*0x28*/ u16 *tilemap;
+ /*0x2C*/ const struct WindowConfig *config;
 };
 
 extern vu16 *const gBGControlRegs[];
@@ -202,6 +203,7 @@ extern u8 gStringVar1[];
 extern u8 gStringVar2[];
 extern u8 gStringVar3[];
 extern u8 gStringVar4[];
+extern u8 gTileBuffer[];
 
 void LoadFontDefaultPalette(const struct WindowConfig *winConfig);
 void SetUpWindowConfig(const struct WindowConfig *winConfig);
@@ -244,8 +246,8 @@ u8 sub_8004D38(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 l
 u8 sub_8004DB0(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u8 top, u16 a6);
 u8 sub_8004E24(struct Window *win);
 void sub_8004E28(struct Window *win, u8 *foreground, u8 *background, u8 *shadow);
-void sub_8004E3C(struct WindowConfig *winConfig, u8 *tileData, const u8 *text);
-u8 GetStringWidthGivenWindowConfig(struct WindowConfig *winConfig, const u8 *s);
+void sub_8004E3C(const struct WindowConfig *winConfig, u8 *tileData, const u8 *text);
+u8 GetStringWidthGivenWindowConfig(const struct WindowConfig *winConfig, const u8 *s);
 void ConvertInternationalString(u8 *s, u8 language);
 void StripExtCtrlCodes(u8 *str);
 s32 StringCompareWithoutExtCtrlCodes(const u8 *str1, const u8 *str2);

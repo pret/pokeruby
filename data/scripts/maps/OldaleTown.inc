@@ -6,11 +6,11 @@ OldaleTown_MapScript1_14DD68:: @ 814DD68
 	call OldaleTown_EventScript_1A014E
 	setflag 2064
 	checkflag 116
-	callif 0, OldaleTown_EventScript_14DD92
+	call_if 0, OldaleTown_EventScript_14DD92
 	checkflag 132
-	callif 0, OldaleTown_EventScript_14DD9E
+	call_if 0, OldaleTown_EventScript_14DD9E
 	checkflag 116
-	callif 1, OldaleTown_EventScript_14DD8C
+	call_if 1, OldaleTown_EventScript_14DD8C
 	end
 
 OldaleTown_EventScript_14DD8C:: @ 814DD8C
@@ -18,13 +18,13 @@ OldaleTown_EventScript_14DD8C:: @ 814DD8C
 	return
 
 OldaleTown_EventScript_14DD92:: @ 814DD92
-	movespriteperm 3, 1, 11
-	spritebehave 3, 9
+	setobjectxyperm 3, 1, 11
+	setobjectmovementtype 3, 9
 	return
 
 OldaleTown_EventScript_14DD9E:: @ 814DD9E
-	movespriteperm 2, 13, 14
-	spritebehave 2, 8
+	setobjectxyperm 2, 13, 14
+	setobjectmovementtype 2, 8
 	return
 
 OldaleTown_EventScript_14DDAA:: @ 814DDAA
@@ -39,13 +39,13 @@ OldaleTown_EventScript_14DDBC:: @ 814DDBC
 	lock
 	faceplayer
 	checkflag 132
-	jumpeq OldaleTown_EventScript_14DE79
+	goto_if_eq OldaleTown_EventScript_14DE79
 	checkflag 1
-	jumpeq OldaleTown_EventScript_14DE79
+	goto_if_eq OldaleTown_EventScript_14DE79
 	setflag 1
-	playmusic 420, 0
+	playbgm 420, 0
 	msgbox OldaleTown_Text_16AEF2, 4
-	closebutton
+	closemessage
 	switch FACING
 	case 1, OldaleTown_EventScript_14DE07
 	case 2, OldaleTown_EventScript_14DE1E
@@ -53,34 +53,34 @@ OldaleTown_EventScript_14DDBC:: @ 814DDBC
 	end
 
 OldaleTown_EventScript_14DE07:: @ 814DE07
-	move 2, OldaleTown_Movement_14DE97
-	move 255, OldaleTown_Movement_14DEC1
-	waitmove 0
-	jump OldaleTown_EventScript_14DE4C
+	applymovement 2, OldaleTown_Movement_14DE97
+	applymovement 255, OldaleTown_Movement_14DEC1
+	waitmovement 0
+	goto OldaleTown_EventScript_14DE4C
 	end
 
 OldaleTown_EventScript_14DE1E:: @ 814DE1E
-	move 2, OldaleTown_Movement_14DEA2
-	move 255, OldaleTown_Movement_14DECB
-	waitmove 0
-	jump OldaleTown_EventScript_14DE4C
+	applymovement 2, OldaleTown_Movement_14DEA2
+	applymovement 255, OldaleTown_Movement_14DECB
+	waitmovement 0
+	goto OldaleTown_EventScript_14DE4C
 	end
 
 OldaleTown_EventScript_14DE35:: @ 814DE35
-	move 255, OldaleTown_Movement_14DEB9
-	move 2, OldaleTown_Movement_14DE8E
-	waitmove 0
-	jump OldaleTown_EventScript_14DE4C
+	applymovement 255, OldaleTown_Movement_14DEB9
+	applymovement 2, OldaleTown_Movement_14DE8E
+	waitmovement 0
+	goto OldaleTown_EventScript_14DE4C
 	end
 
 OldaleTown_EventScript_14DE4C:: @ 814DE4C
 	msgbox OldaleTown_Text_16AF2F, 4
 	giveitem ITEM_POTION
 	compare RESULT, 0
-	jumpeq OldaleTown_EventScript_14DE83
+	goto_if_eq OldaleTown_EventScript_14DE83
 	msgbox OldaleTown_Text_16AFE1, 4
 	setflag 132
-	fadedefault
+	fadedefaultbgm
 	release
 	end
 
@@ -91,7 +91,7 @@ OldaleTown_EventScript_14DE79:: @ 814DE79
 
 OldaleTown_EventScript_14DE83:: @ 814DE83
 	msgbox OldaleTown_Text_1A0CC2, 4
-	fadedefault
+	fadedefaultbgm
 	release
 	end
 
@@ -196,23 +196,23 @@ OldaleTown_EventScript_14DEDF:: @ 814DEDF
 	lock
 	faceplayer
 	checkflag 116
-	jumpeq OldaleTown_EventScript_14DF26
+	goto_if_eq OldaleTown_EventScript_14DF26
 	msgbox OldaleTown_Text_16B0CC, 4
-	closebutton
-	move 3, OldaleTown_Movement_1A083D
-	waitmove 0
+	closemessage
+	applymovement 3, OldaleTown_Movement_1A083D
+	waitmovement 0
 	release
 	end
 
 OldaleTown_EventScript_14DEFF:: @ 814DEFF
 	lockall
-	move 255, OldaleTown_Movement_14DFEC
-	move 3, OldaleTown_Movement_14DFEF
-	waitmove 0
+	applymovement 255, OldaleTown_Movement_14DFEC
+	applymovement 3, OldaleTown_Movement_14DFEF
+	waitmovement 0
 	msgbox OldaleTown_Text_16B045, 4
-	closebutton
-	move 3, OldaleTown_Movement_14DFF5
-	waitmove 0
+	closemessage
+	applymovement 3, OldaleTown_Movement_14DFF5
+	waitmovement 0
 	releaseall
 	end
 
@@ -223,61 +223,61 @@ OldaleTown_EventScript_14DF26:: @ 814DF26
 
 OldaleTown_EventScript_14DF30:: @ 814DF30
 	lockall
-	move 4, OldaleTown_Movement_1A0839
-	waitmove 0
-	jump OldaleTown_EventScript_14DF92
+	applymovement 4, OldaleTown_Movement_1A0839
+	waitmovement 0
+	goto OldaleTown_EventScript_14DF92
 	end
 
 OldaleTown_EventScript_14DF41:: @ 814DF41
 	lockall
-	move 4, OldaleTown_Movement_14DFDE
-	waitmove 0
-	move 255, OldaleTown_Movement_1A0843
-	waitmove 0
-	jump OldaleTown_EventScript_14DF92
+	applymovement 4, OldaleTown_Movement_14DFDE
+	waitmovement 0
+	applymovement 255, OldaleTown_Movement_1A0843
+	waitmovement 0
+	goto OldaleTown_EventScript_14DF92
 	end
 
 OldaleTown_EventScript_14DF5C:: @ 814DF5C
 	lockall
-	move 4, OldaleTown_Movement_14DFE1
-	waitmove 0
-	move 255, OldaleTown_Movement_1A0843
-	waitmove 0
-	jump OldaleTown_EventScript_14DF92
+	applymovement 4, OldaleTown_Movement_14DFE1
+	waitmovement 0
+	applymovement 255, OldaleTown_Movement_1A0843
+	waitmovement 0
+	goto OldaleTown_EventScript_14DF92
 	end
 
 OldaleTown_EventScript_14DF77:: @ 814DF77
 	lockall
-	move 4, OldaleTown_Movement_14DFE3
-	waitmove 0
-	move 255, OldaleTown_Movement_1A0843
-	waitmove 0
-	jump OldaleTown_EventScript_14DF92
+	applymovement 4, OldaleTown_Movement_14DFE3
+	waitmovement 0
+	applymovement 255, OldaleTown_Movement_1A0843
+	waitmovement 0
+	goto OldaleTown_EventScript_14DF92
 	end
 
 OldaleTown_EventScript_14DF92:: @ 814DF92
-	checkgender
+	checkplayergender
 	compare RESULT, 0
-	jumpeq OldaleTown_EventScript_14DFAA
+	goto_if_eq OldaleTown_EventScript_14DFAA
 	compare RESULT, 1
-	jumpeq OldaleTown_EventScript_14DFB8
+	goto_if_eq OldaleTown_EventScript_14DFB8
 	end
 
 OldaleTown_EventScript_14DFAA:: @ 814DFAA
 	msgbox OldaleTown_Text_16B196, 4
-	jump OldaleTown_EventScript_14DFC6
+	goto OldaleTown_EventScript_14DFC6
 	end
 
 OldaleTown_EventScript_14DFB8:: @ 814DFB8
 	msgbox OldaleTown_Text_16B1BE, 4
-	jump OldaleTown_EventScript_14DFC6
+	goto OldaleTown_EventScript_14DFC6
 	end
 
 OldaleTown_EventScript_14DFC6:: @ 814DFC6
-	closebutton
-	move 4, OldaleTown_Movement_14DFE5
-	waitmove 0
-	disappear 4
+	closemessage
+	applymovement 4, OldaleTown_Movement_14DFE5
+	waitmovement 0
+	removeobject 4
 	setvar 0x40c7, 2
 	setflag 979
 	releaseall

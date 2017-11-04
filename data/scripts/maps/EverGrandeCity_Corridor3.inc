@@ -7,5 +7,5 @@ EverGrandeCity_Corridor3_MapScript2_15BA3C:: @ 815BA3C
 	.2byte 0
 
 EverGrandeCity_Corridor3_EventScript_15BA46:: @ 815BA46
-	spriteface 255, 2
+	turnobject 255, 2
 	end

@@ -1,8 +1,8 @@
-	.include "main.o"
-	.include "sprite.o"
-	.include "string_util.o"
-	.include "link.o"
-	.include "rtc.o"
+	.include "engine/main.o"
+	.include "engine/sprite.o"
+	.include "engine/string_util.o"
+	.include "engine/link.o"
+	.include "engine/rtc.o"
 	.include "rom3.o"
 
 @ battle
@@ -104,10 +104,10 @@ gUnknown_03004348: @ 3004348
 gUnknown_0300434C: @ 300434C
 	.space 0x4
 
-	.include "pokemon_1.o"
-	.include "rng.o"
-	.include "egg_hatch.o"
-	.include "load_save.o"
+	.include "pokemon/pokemon_1.o"
+	.include "engine/rng.o"
+	.include "scene/egg_hatch.o"
+	.include "engine/load_save.o"
 
 @ trade
 
@@ -117,25 +117,12 @@ gUnknown_03004824: @ 3004824
 gUnknown_03004828: @ 3004828
 	.space 0x8
 
-@ berry_blender
-
-gUnknown_03004830: @ 3004830
-	.space 0x4
-
-gUnknown_03004834: @ 3004834
-	.space 0xC
-
-gUnknown_03004840: @ 3004840
-	.space 0x14
-
-gUnknown_03004854: @ 3004854
-	.space 0x4
-
-	.include "rom4.o"
-	.include "fieldmap.o"
-	.include "field_camera.o"
-	.include "field_map_obj.o"
-	.include "field_control_avatar.o"
+	.include "scene/berry_blender.o"
+	.include "field/overworld.o"
+	.include "field/fieldmap.o"
+	.include "field/field_camera.o"
+	.include "field/field_map_obj.o"
+	.include "field/field_control_avatar.o"
 
 @ party_menu?
 
@@ -143,11 +130,11 @@ gUnknown_03004854: @ 3004854
 gUnknown_03004AE4: @ 3004AE4
 	.space 0x4
 
-	.include "start_menu.o"
-	.include "sound.o"
-	.include "battle_anim.o"
-	.include "task.o"
-	.include "mori_debug_menu.o"
+	.include "field/start_menu.o"
+	.include "engine/sound.o"
+	.include "battle/battle_anim.o"
+	.include "engine/task.o"
+	.include "debug/mori_debug_menu.o"
 
 @ unknown_task
 
@@ -173,15 +160,8 @@ gUnknown_03005560: @ 3005560
 gUnknown_030056A0: @ 30056A0
 	.space 0x640
 
-@ pokemon_menu
-
-gLastFieldPokeMenuOpened: @ 3005CE0
-	.space 0x4
-
-gUnknown_03005CE4: @ 3005CE4
-	.space 0x4
-
-	.include "pokedex.o"
+	.include "pokemon/pokemon_menu.o"
+	.include "pokemon/pokedex.o"
 
 @ pokemon_summary_screen
 
@@ -192,7 +172,7 @@ gUnknown_03005CF0: @ 3005CF0
 @ item_menu
 
 	.align 4
-gUnknown_03005D00: @ 3005D00
+gFieldItemUseCallback: @ 3005D00
 	.space 0x10
 
 gBagPocketScrollStates: @ 3005D10
@@ -207,14 +187,9 @@ gCurrentBagPocketItemSlots: @ 3005D24
 gUnknown_03005D28: @ 3005D28
 	.space 0x4
 
-	.include "record_mixing.o"
-	.include "sound_check_menu.o"
-
-	.align 2
-gUnknown_03005D34: @ 3005D34
-	.space 0x4
-
-	.include "tv.o"
+	.include "engine/record_mixing.o"
+	.include "debug/sound_check_menu.o"
+	.include "field/tv.o"
 
 	.space 0x64 @ unused variable?
 
@@ -256,24 +231,19 @@ gUnknown_03005E08: @ 3005E08
 gUnknown_03005E0C: @ 3005E0C
 	.space 0x4
 
-	.include "contest_painting.o"
-
-@ evolution_scene
-
-	.align 2
-gUnknown_03005E94: @ 3005E94
-	.space 0x4
+	.include "scene/contest_painting.o"
+	.include "scene/evolution_scene.o"
 
 @ pokedex_cry_screen
 
 gUnknown_03005E98: @ 3005E98
 	.space 0x4
 
-	.include "save.o"
+	.include "engine/save.o"
 
 	.space 0x10 @ unused variable?
 
-	.include "intro.o"
+	.include "scene/intro.o"
 
 @ battle_anim_813F0F4
 
@@ -287,40 +257,6 @@ gUnknown_03005F10: @ 3005F10
 gUnknown_03005F14: @ 3005F14
 	.space 0xC
 
-@ pokeblock_feed
-
-gUnknown_03005F20: @ 3005F20
-	.space 0x4
-
-gUnknown_03005F24: @ 3005F24
-	.space 0x4
-
-gUnknown_03005F28: @ 3005F28
-	.space 0x4
-
-gUnknown_03005F2C: @ 3005F2C
-	.space 0x4
-
-gUnknown_03005F30: @ 3005F30
-	.space 0x4
-
-gUnknown_03005F34: @ 3005F34
-	.space 0x8
-
-gUnknown_03005F3C: @ 3005F3C
-	.space 0x4
-
-gUnknown_03005F40: @ 3005F40
-	.space 0x10
-
-gUnknown_03005F50: @ 3005F50
-	.space 0x44
-
-gUnknown_03005F94: @ 3005F94
-	.space 0xC
-
-gUnknown_03005FA0: @ 3005FA0
-	.space 0x30
-
-	.include "m4a_2.o"
-	.include "agb_flash.o"
+	.include "pokemon/pokeblock_feed.o"
+	.include "libs/m4a_2.o"
+	.include "libs/agb_flash.o"

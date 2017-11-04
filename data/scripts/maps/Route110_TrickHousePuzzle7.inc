@@ -11,15 +11,15 @@ Route110_TrickHousePuzzle7_MapScript1_163161:: @ 8163161
 
 Route110_TrickHousePuzzle7_EventScript_163167:: @ 8163167
 	checkflag 194
-	callif 1, Route110_TrickHousePuzzle7_EventScript_163195
+	call_if 1, Route110_TrickHousePuzzle7_EventScript_163195
 	checkflag 195
-	callif 1, Route110_TrickHousePuzzle7_EventScript_1631A8
+	call_if 1, Route110_TrickHousePuzzle7_EventScript_1631A8
 	checkflag 196
-	callif 1, Route110_TrickHousePuzzle7_EventScript_1631BB
+	call_if 1, Route110_TrickHousePuzzle7_EventScript_1631BB
 	checkflag 197
-	callif 1, Route110_TrickHousePuzzle7_EventScript_1631CE
+	call_if 1, Route110_TrickHousePuzzle7_EventScript_1631CE
 	checkflag 198
-	callif 1, Route110_TrickHousePuzzle7_EventScript_1631E1
+	call_if 1, Route110_TrickHousePuzzle7_EventScript_1631E1
 	return
 
 Route110_TrickHousePuzzle7_EventScript_163195:: @ 8163195
@@ -74,7 +74,7 @@ Route110_TrickHousePuzzle7_EventScript_163240:: @ 8163240
 
 Route110_TrickHousePuzzle7_MapScript1_163253:: @ 8163253
 	compare 0x40b6, 1
-	jumpeq Route110_TrickHousePuzzle7_EventScript_16326E
+	goto_if_eq Route110_TrickHousePuzzle7_EventScript_16326E
 	clearflag 194
 	clearflag 195
 	clearflag 196
@@ -87,7 +87,7 @@ Route110_TrickHousePuzzle7_EventScript_16326E:: @ 816326E
 
 Route110_TrickHousePuzzle7_MapScript1_16326F:: @ 816326F
 	compare 0x40b6, 1
-	callif 1, Route110_TrickHousePuzzle7_EventScript_163167
+	call_if 1, Route110_TrickHousePuzzle7_EventScript_163167
 	end
 
 Route110_TrickHousePuzzle7_MapScript2_16327B:: @ 816327B
@@ -101,13 +101,13 @@ Route110_TrickHousePuzzle7_EventScript_163285:: @ 8163285
 Route110_TrickHousePuzzle7_EventScript_16328B:: @ 816328B
 	lockall
 	compare 0x40b1, 0
-	jumpeq Route110_TrickHousePuzzle7_EventScript_16329D
-	jump Route110_TrickHousePuzzle7_EventScript_161892
+	goto_if_eq Route110_TrickHousePuzzle7_EventScript_16329D
+	goto Route110_TrickHousePuzzle7_EventScript_161892
 	end
 
 Route110_TrickHousePuzzle7_EventScript_16329D:: @ 816329D
 	setvar 0x40b1, 1
-	jump Route110_TrickHousePuzzle7_EventScript_16189C
+	goto Route110_TrickHousePuzzle7_EventScript_16189C
 	end
 
 Route110_TrickHousePuzzle7_EventScript_1632A8:: @ 81632A8
@@ -120,77 +120,77 @@ Route110_TrickHousePuzzle7_EventScript_1632A8:: @ 81632A8
 
 Route110_TrickHousePuzzle7_EventScript_1632B9:: @ 81632B9
 	lockall
-	pause 32
+	delay 32
 	checkflag 194
-	callif 0, Route110_TrickHousePuzzle7_EventScript_163195
+	call_if 0, Route110_TrickHousePuzzle7_EventScript_163195
 	checkflag 194
-	callif 1, Route110_TrickHousePuzzle7_EventScript_1631F4
+	call_if 1, Route110_TrickHousePuzzle7_EventScript_1631F4
 	special DrawWholeMapView
-	playsfx 36
+	playse 36
 	checkflag 194
-	jumpif 0, Route110_TrickHousePuzzle7_EventScript_1633A4
+	goto_if 0, Route110_TrickHousePuzzle7_EventScript_1633A4
 	checkflag 194
-	jumpeq Route110_TrickHousePuzzle7_EventScript_1633A9
+	goto_if_eq Route110_TrickHousePuzzle7_EventScript_1633A9
 	end
 
 Route110_TrickHousePuzzle7_EventScript_1632E8:: @ 81632E8
 	lockall
-	pause 32
+	delay 32
 	checkflag 195
-	callif 0, Route110_TrickHousePuzzle7_EventScript_1631A8
+	call_if 0, Route110_TrickHousePuzzle7_EventScript_1631A8
 	checkflag 195
-	callif 1, Route110_TrickHousePuzzle7_EventScript_163207
+	call_if 1, Route110_TrickHousePuzzle7_EventScript_163207
 	special DrawWholeMapView
-	playsfx 36
+	playse 36
 	checkflag 195
-	jumpif 0, Route110_TrickHousePuzzle7_EventScript_1633AE
+	goto_if 0, Route110_TrickHousePuzzle7_EventScript_1633AE
 	checkflag 195
-	jumpeq Route110_TrickHousePuzzle7_EventScript_1633B3
+	goto_if_eq Route110_TrickHousePuzzle7_EventScript_1633B3
 	end
 
 Route110_TrickHousePuzzle7_EventScript_163317:: @ 8163317
 	lockall
-	pause 32
+	delay 32
 	checkflag 196
-	callif 0, Route110_TrickHousePuzzle7_EventScript_1631BB
+	call_if 0, Route110_TrickHousePuzzle7_EventScript_1631BB
 	checkflag 196
-	callif 1, Route110_TrickHousePuzzle7_EventScript_16321A
+	call_if 1, Route110_TrickHousePuzzle7_EventScript_16321A
 	special DrawWholeMapView
-	playsfx 36
+	playse 36
 	checkflag 196
-	jumpif 0, Route110_TrickHousePuzzle7_EventScript_1633B8
+	goto_if 0, Route110_TrickHousePuzzle7_EventScript_1633B8
 	checkflag 196
-	jumpeq Route110_TrickHousePuzzle7_EventScript_1633BD
+	goto_if_eq Route110_TrickHousePuzzle7_EventScript_1633BD
 	end
 
 Route110_TrickHousePuzzle7_EventScript_163346:: @ 8163346
 	lockall
-	pause 32
+	delay 32
 	checkflag 197
-	callif 0, Route110_TrickHousePuzzle7_EventScript_1631CE
+	call_if 0, Route110_TrickHousePuzzle7_EventScript_1631CE
 	checkflag 197
-	callif 1, Route110_TrickHousePuzzle7_EventScript_16322D
+	call_if 1, Route110_TrickHousePuzzle7_EventScript_16322D
 	special DrawWholeMapView
-	playsfx 36
+	playse 36
 	checkflag 197
-	jumpif 0, Route110_TrickHousePuzzle7_EventScript_1633C2
+	goto_if 0, Route110_TrickHousePuzzle7_EventScript_1633C2
 	checkflag 197
-	jumpeq Route110_TrickHousePuzzle7_EventScript_1633C7
+	goto_if_eq Route110_TrickHousePuzzle7_EventScript_1633C7
 	end
 
 Route110_TrickHousePuzzle7_EventScript_163375:: @ 8163375
 	lockall
-	pause 32
+	delay 32
 	checkflag 198
-	callif 0, Route110_TrickHousePuzzle7_EventScript_1631E1
+	call_if 0, Route110_TrickHousePuzzle7_EventScript_1631E1
 	checkflag 198
-	callif 1, Route110_TrickHousePuzzle7_EventScript_163240
+	call_if 1, Route110_TrickHousePuzzle7_EventScript_163240
 	special DrawWholeMapView
-	playsfx 36
+	playse 36
 	checkflag 198
-	jumpif 0, Route110_TrickHousePuzzle7_EventScript_1633CC
+	goto_if 0, Route110_TrickHousePuzzle7_EventScript_1633CC
 	checkflag 198
-	jumpeq Route110_TrickHousePuzzle7_EventScript_1633D1
+	goto_if_eq Route110_TrickHousePuzzle7_EventScript_1633D1
 	end
 
 Route110_TrickHousePuzzle7_EventScript_1633A4:: @ 81633A4

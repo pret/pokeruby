@@ -4,11 +4,11 @@ Route131_MapScripts:: @ 815243E
 
 Route131_MapScript1_152444:: @ 8152444
 	checkflag 2052
-	callif 1, Route131_EventScript_15244E
+	call_if 1, Route131_EventScript_15244E
 	end
 
 Route131_EventScript_15244E:: @ 815244E
-	setmapfooter 320
+	setmaplayoutindex 320
 	return
 
 Route131_EventScript_152452:: @ 8152452

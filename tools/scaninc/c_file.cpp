@@ -45,78 +45,11 @@ CFile::CFile(std::string path)
 
     m_pos = 0;
     m_lineNum = 1;
-
-    RemoveComments();
 }
 
 CFile::~CFile()
 {
     delete[] m_buffer;
-}
-
-// Removes comments to simplify further processing.
-// It stops upon encountering a null character,
-// which may or may not be the end of file marker.
-// If it's not, the error will be caught later.
-void CFile::RemoveComments()
-{
-    long pos = 0;
-    char stringChar = 0;
-
-    for (;;)
-    {
-        if (m_buffer[pos] == 0)
-            return;
-
-        if (stringChar != 0)
-        {
-            if (m_buffer[pos] == '\\' && m_buffer[pos + 1] == stringChar)
-            {
-                pos += 2;
-            }
-            else
-            {
-                if (m_buffer[pos] == stringChar)
-                    stringChar = 0;
-                pos++;
-            }
-        }
-        else if (m_buffer[pos] == '/' && m_buffer[pos + 1] == '/')
-        {
-            while (m_buffer[pos] != '\n' && m_buffer[pos] != 0)
-                m_buffer[pos++] = ' ';
-        }
-        else if (m_buffer[pos] == '/' && m_buffer[pos + 1] == '*')
-        {
-            m_buffer[pos++] = ' ';
-            m_buffer[pos++] = ' ';
-
-            for (;;)
-            {
-                if (m_buffer[pos] == 0)
-                    return;
-
-                if (m_buffer[pos] == '*' && m_buffer[pos + 1] == '/')
-                {
-                    m_buffer[pos++] = ' ';
-                    m_buffer[pos++] = ' ';
-                    break;
-                }
-                else
-                {
-                    if (m_buffer[pos] != '\n')
-                        m_buffer[pos] = ' ';
-                    pos++;
-                }
-            }
-        }
-        else
-        {
-            if (m_buffer[pos] == '"' || m_buffer[pos] == '\'')
-                stringChar = m_buffer[pos];
-            pos++;
-        }
-    }
 }
 
 void CFile::FindIncbins()
@@ -145,6 +78,8 @@ void CFile::FindIncbins()
         }
         else
         {
+            SkipWhitespace();
+            CheckInclude();
             CheckIncbin();
 
             if (m_pos >= m_size)
@@ -177,6 +112,13 @@ bool CFile::ConsumeHorizontalWhitespace()
 
 bool CFile::ConsumeNewline()
 {
+    if (m_buffer[m_pos] == '\n')
+    {
+        m_pos++;
+        m_lineNum++;
+        return true;
+    }
+
     if (m_buffer[m_pos] == '\r' && m_buffer[m_pos + 1] == '\n')
     {
         m_pos += 2;
@@ -184,10 +126,33 @@ bool CFile::ConsumeNewline()
         return true;
     }
 
-    if (m_buffer[m_pos] == '\n')
+    return false;
+}
+
+bool CFile::ConsumeComment()
+{
+    if (m_buffer[m_pos] == '/' && m_buffer[m_pos + 1] == '*')
     {
-        m_pos++;
-        m_lineNum++;
+        m_pos += 2;
+        while (m_buffer[m_pos] != '*' && m_buffer[m_pos + 1] != '/')
+        {
+            if (m_buffer[m_pos] == 0)
+                return false;
+            if (!ConsumeNewline())
+                m_pos++;
+        }
+        m_pos += 2;
+        return true;
+    }
+    else if (m_buffer[m_pos] == '/' && m_buffer[m_pos + 1] == '/')
+    {
+        m_pos += 2;
+        while (!ConsumeNewline())
+        {
+            if (m_buffer[m_pos] == 0)
+                return false;
+            m_pos++;
+        }
         return true;
     }
 
@@ -196,7 +161,7 @@ bool CFile::ConsumeNewline()
 
 void CFile::SkipWhitespace()
 {
-    while (ConsumeHorizontalWhitespace() || ConsumeNewline())
+    while (ConsumeHorizontalWhitespace() || ConsumeNewline() || ConsumeComment())
         ;
 }
 
@@ -211,8 +176,43 @@ bool CFile::CheckIdentifier(const std::string& ident)
     return (i == ident.length());
 }
 
+void CFile::CheckInclude()
+{
+    if (m_buffer[m_pos] != '#')
+        return;
+
+    std::string ident = "#include";
+
+    if (!CheckIdentifier(ident))
+    {
+        return;
+    }
+
+    m_pos += ident.length();
+
+    ConsumeHorizontalWhitespace();
+
+    std::string path = ReadPath();
+
+    if (!path.empty()) {
+        m_includes.emplace(path);
+    }
+}
+
 void CFile::CheckIncbin()
 {
+    // Optimization: assume most lines are not incbins
+    if (!(m_buffer[m_pos+0] == 'I'
+       && m_buffer[m_pos+1] == 'N'
+       && m_buffer[m_pos+2] == 'C'
+       && m_buffer[m_pos+3] == 'B'
+       && m_buffer[m_pos+4] == 'I'
+       && m_buffer[m_pos+5] == 'N'
+       && m_buffer[m_pos+6] == '_'))
+    {
+            return;
+    }
+
     std::string idents[6] = { "INCBIN_S8", "INCBIN_U8", "INCBIN_S16", "INCBIN_U16", "INCBIN_S32", "INCBIN_U32" };
     int incbinType = -1;
 
@@ -246,8 +246,28 @@ void CFile::CheckIncbin()
 
     SkipWhitespace();
 
+    std::string path = ReadPath();
+
+    SkipWhitespace();
+
+    if (m_buffer[m_pos] != ')')
+        FATAL_INPUT_ERROR("expected ')'");
+
+    m_pos++;
+
+    m_incbins.emplace(path);
+}
+
+std::string CFile::ReadPath()
+{
     if (m_buffer[m_pos] != '"')
-        FATAL_INPUT_ERROR("expected double quote");
+    {
+        if (m_buffer[m_pos] == '<')
+        {
+            return std::string();
+        }
+        FATAL_INPUT_ERROR("expected '\"' or '<'");
+    }
 
     m_pos++;
 
@@ -272,16 +292,7 @@ void CFile::CheckIncbin()
         m_pos++;
     }
 
-    std::string path(&m_buffer[startPos], m_pos - startPos);
-
     m_pos++;
 
-    SkipWhitespace();
-
-    if (m_buffer[m_pos] != ')')
-        FATAL_INPUT_ERROR("expected ')'");
-
-    m_pos++;
-
-    m_incbins.emplace(path);
+    return std::string(m_buffer + startPos, m_pos - 1 - startPos);
 }

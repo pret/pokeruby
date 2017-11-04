@@ -6,7 +6,7 @@ MtPyre_2F_MapScripts:: @ 815D36E
 
 MtPyre_2F_MapScript1_15D37E:: @ 815D37E
 	tileeffect 7
-	warp5 MtPyre_1F, 255, 0, 0
+	setholewarp MtPyre_1F, 255, 0, 0
 	end
 
 MtPyre_2F_EventScript_15D389:: @ 815D389

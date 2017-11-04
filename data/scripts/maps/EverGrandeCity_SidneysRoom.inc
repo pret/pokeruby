@@ -6,9 +6,9 @@ EverGrandeCity_SidneysRoom_MapScripts:: @ 815B53F
 
 EverGrandeCity_SidneysRoom_MapScript1_15B54F:: @ 815B54F
 	checkflag 1245
-	callif 1, EverGrandeCity_SidneysRoom_EventScript_15B564
+	call_if 1, EverGrandeCity_SidneysRoom_EventScript_15B564
 	compare 0x409c, 1
-	callif 1, EverGrandeCity_SidneysRoom_EventScript_15B56A
+	call_if 1, EverGrandeCity_SidneysRoom_EventScript_15B56A
 	end
 
 EverGrandeCity_SidneysRoom_EventScript_15B564:: @ 815B564
@@ -25,7 +25,7 @@ EverGrandeCity_SidneysRoom_MapScript2_15B570:: @ 815B570
 	.2byte 0
 
 EverGrandeCity_SidneysRoom_EventScript_15B57A:: @ 815B57A
-	spriteface 255, 2
+	turnobject 255, 2
 	end
 
 EverGrandeCity_SidneysRoom_MapScript2_15B57F:: @ 815B57F
@@ -43,11 +43,11 @@ EverGrandeCity_SidneysRoom_EventScript_15B596:: @ 815B596
 	lock
 	faceplayer
 	checkflag 1245
-	jumpeq EverGrandeCity_SidneysRoom_EventScript_15B5BD
-	playmusic 450, 0
+	goto_if_eq EverGrandeCity_SidneysRoom_EventScript_15B5BD
+	playbgm 450, 0
 	msgbox EverGrandeCity_SidneysRoom_Text_190728, 4
 	trainerbattle 3, OPPONENT_SIDNEY, 0, EverGrandeCity_SidneysRoom_Text_190823
-	jump EverGrandeCity_SidneysRoom_EventScript_15B5C7
+	goto EverGrandeCity_SidneysRoom_EventScript_15B5C7
 	end
 
 EverGrandeCity_SidneysRoom_EventScript_15B5BD:: @ 815B5BD

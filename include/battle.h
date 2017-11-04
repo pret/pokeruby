@@ -19,6 +19,8 @@
 #define BATTLE_TYPE_LEGENDARY       0x2000
 #define BATTLE_TYPE_REGI            0x4000
 
+#define BATTLE_TYPE_LINK_DOUBLE     (BATTLE_TYPE_MULTI | BATTLE_TYPE_TRAINER | BATTLE_TYPE_LINK | BATTLE_TYPE_DOUBLE)
+
 #define BATTLE_WON                  0x1
 #define BATTLE_LOST                 0x2
 #define BATTLE_DREW                 0x3
@@ -173,6 +175,20 @@
 #define WEATHER_SUN_ANY ((WEATHER_SUN_TEMPORARY | WEATHER_SUN_PERMANENT))
 #define WEATHER_HAIL                (1 << 7)
 
+enum
+{
+    BATTLE_TERRAIN_GRASS,
+    BATTLE_TERRAIN_LONG_GRASS,
+    BATTLE_TERRAIN_SAND,
+    BATTLE_TERRAIN_UNDERWATER,
+    BATTLE_TERRAIN_WATER,
+    BATTLE_TERRAIN_POND,
+    BATTLE_TERRAIN_MOUNTAIN,
+    BATTLE_TERRAIN_CAVE,
+    BATTLE_TERRAIN_BUILDING,
+    BATTLE_TERRAIN_PLAIN,
+};
+
 // needed to match the hack that is get_item, thanks cam, someone else clean this up later.
 extern u8 unk_2000000[];
 
@@ -229,12 +245,11 @@ struct BattleStruct /* 0x2000000 */
     /*0x16001*/ u8 turnEffectsBank;
     /*0x16002*/ u8 animTurn;
     /*0x16003*/ u8 scriptingActive;
-    /*0x16004*/ u8 wrappedMove1[4];
-    /*0x16008*/ u8 wrappedMove2[4];
+    /*0x16004*/ u8 wrappedMove[8];
     /*0x1600C*/ u8 cmd49StateTracker;
     /*0x1600D*/ u8 unk1600D;
     /*0x1600E*/ u8 turncountersTracker;
-    /*0x1600F*/ u8 cmd23StateTracker;
+    /*0x1600F*/ u8 atk23StateTracker;
     /*0x16010*/ u8 moveTarget[4];
     /*0x16014*/ u8 unk16014;
     /*0x16015*/ u8 unk16015;
@@ -520,12 +535,12 @@ struct BattleResults
 
 struct Struct2017800
 {
-    u8 unk0_0:1;
+    u8 invisible:1;
     u8 unk0_1:1;
-    u8 unk0_2:1;
+    u8 substituteSprite:1;
     u8 unk0_3:1;
     u8 unk0_4:1;
-    u16 unk2;
+    u16 transformedSpecies;
 };
 
 struct Struct2017810
@@ -689,13 +704,13 @@ extern u8 gBattleTextBuff1[];
 
 //function declarations of buffer emits
 void EmitGetAttributes(u8 buffID, u8 request, u8 c);    //0x0
-void dp01_build_cmdbuf_x01_a_b_0(u8 a, u8 b, u8 c); //0x1
+void Emitcmd1(u8 a, u8 b, u8 c); //0x1
 void EmitSetAttributes(u8 a, u8 request, u8 c, u8 bytes, void *data);  //0x2
-void EmitSwitchInAnim(u8 a, u8 b, u8 c); //0x5
+void EmitSendOutPoke(u8 a, u8 b, u8 c); //0x5
 void EmitReturnPokeToBall(u8 a, u8 b); //0x6
 void EmitTrainerSlide(u8 a); //0x8
-void EmitFaintAnimation(u8 a);  //0xA
-void EmitBallThrowAnim(u8 a, u8 shakes);  //0xD
+void Emitcmd10(u8 a);  //0xA
+void EmitBallThrow(u8 a, u8 shakes);  //0xD
 //void EmitMoveAnimation(u8 a, u16 move, u8 turn, u16 power, s32 dmg, u8 happiness, void *disable_struct); //0xF
 void EmitPrintString(u8 a, u16 stringID);  //0x10
 //void EmitPrintStringPlayerOnly(u8 a, u16 stringID); //0x11
@@ -707,15 +722,15 @@ void EmitStatusAnimation(u8 a, u8 b, u32 c); //0x1B
 void EmitStatusXor(u8 a, u8 b); //0x1C
 void EmitHitAnimation(u8 a); //0x29
 void EmitEffectivenessSound(u8 a, u16 sound); //0x2B
-void EmitPlaySound(u8 a, u16 sound);    //0x2C
+void Emitcmd44(u8 a, u16 sound);    //0x2C
 void EmitFaintingCry(u8 a); //0x2D
-void EmitBattleIntroSlide(u8 a, u8 b); //0x2E
-void dp01_build_cmdbuf_x30_TODO(u8 a, u8 *b, u8 c); //0x30
-void dp01_build_cmdbuf_x31_31_31_31(u8 a);  //0x31
+void EmitIntroSlide(u8 a, u8 b); //0x2E
+void Emitcmd48(u8 a, u8 *b, u8 c); //0x30
+void Emitcmd49(u8 a);  //0x31
 void EmitSpriteInvisibility(u8 a, u8 b); //0x33
 void EmitBattleAnimation(u8 a, u8 b, u16 c); //0x34
 void EmitResetActionMoveSelection(u8 a, u8 b); //0x36
-void dp01_build_cmdbuf_x37_a(u8 a, u8 b); //0x37
+void Emitcmd55(u8 a, u8 b); //0x37
 
 #define REQUEST_ALL_BATTLE      0x0
 #define REQUEST_SPECIES_BATTLE  0x1
@@ -782,7 +797,7 @@ void BattleTurnPassed(void);
 // asm/battle_2.o
 void sub_8012324(void);
 void sub_8012FBC(u8, u8);
-u8 b_first_side(u8, u8, u8);
+u8 GetWhoStrikesFirst(u8, u8, u8);
 void TurnValuesCleanUp(u8);
 void SpecialStatusesClear(void);
 void sub_80138F0(void);

@@ -13,7 +13,7 @@ FallarborTown_EventScript_14E7F5:: @ 814E7F5
 	lock
 	faceplayer
 	checkflag 139
-	jumpeq FallarborTown_EventScript_14E80A
+	goto_if_eq FallarborTown_EventScript_14E80A
 	msgbox FallarborTown_Text_16C7FF, 4
 	release
 	end
@@ -34,8 +34,8 @@ FallarborTown_EventScript_14E81D:: @ 814E81D
 FallarborTown_EventScript_14E826:: @ 814E826
 	lock
 	faceplayer
-	checksound
-	pokecry SPECIES_AZURILL, 0
+	waitse
+	playpokecry SPECIES_AZURILL, 0
 	msgbox FallarborTown_Text_16C92C, 4
 	waitpokecry
 	release

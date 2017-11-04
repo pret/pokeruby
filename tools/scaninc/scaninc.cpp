@@ -20,7 +20,8 @@
 
 #include <cstdio>
 #include <cstdlib>
-#include <stack>
+#include <list>
+#include <queue>
 #include <set>
 #include <string>
 #include "scaninc.h"
@@ -38,15 +39,49 @@ bool CanOpenFile(std::string path)
     return true;
 }
 
+const char *const USAGE = "Usage: scaninc [-I INCLUDE_PATH] FILE_PATH\n";
+
 int main(int argc, char **argv)
 {
-    if (argc < 2)
-        FATAL_ERROR("Usage: scaninc FILE_PATH\n");
-
-    std::stack<std::string> filesToProcess;
+    std::queue<std::string> filesToProcess;
     std::set<std::string> dependencies;
 
-    std::string initialPath(argv[1]);
+    std::list<std::string> includeDirs;
+
+    argc--;
+    argv++;
+
+    while (argc > 1)
+    {
+        std::string arg(argv[0]);
+        if (arg.substr(0, 2) == "-I")
+        {
+            std::string includeDir = arg.substr(2);
+            if (includeDir.empty())
+            {
+                argc--;
+                argv++;
+                includeDir = std::string(argv[0]);
+            }
+            if (includeDir.back() != '/')
+            {
+                includeDir += '/';
+            }
+            includeDirs.push_back(includeDir);
+        }
+        else
+        {
+            FATAL_ERROR(USAGE);
+        }
+        argc--;
+        argv++;
+    }
+
+    if (argc != 1) {
+        FATAL_ERROR(USAGE);
+    }
+
+    std::string initialPath(argv[0]);
 
     std::size_t pos = initialPath.find_last_of('.');
 
@@ -55,20 +90,53 @@ int main(int argc, char **argv)
 
     std::string extension = initialPath.substr(pos + 1);
 
-    if (extension == "c")
+    std::string srcDir("");
+    std::size_t slash = initialPath.rfind('/');
+    if (slash != std::string::npos)
     {
-        CFile file(initialPath);
-
-        file.FindIncbins();
-        dependencies = file.GetIncbins();
+        srcDir = initialPath.substr(0, slash + 1);
     }
-    else if (extension == "s")
+    includeDirs.push_back(srcDir);
+
+    if (extension == "c" || extension == "h")
     {
-        filesToProcess.push(std::string(argv[1]));
+        filesToProcess.push(initialPath);
 
         while (!filesToProcess.empty())
         {
-            AsmFile file(filesToProcess.top());
+            CFile file(filesToProcess.front());
+            filesToProcess.pop();
+
+            file.FindIncbins();
+            for (auto incbin : file.GetIncbins())
+            {
+                dependencies.insert(incbin);
+            }
+            for (auto include : file.GetIncludes())
+            {
+                for (auto includeDir : includeDirs)
+                {
+                    std::string path(includeDir + include);
+                    if (CanOpenFile(path))
+                    {
+                        bool inserted = dependencies.insert(path).second;
+                        if (inserted)
+                        {
+                            filesToProcess.push(path);
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    else if (extension == "s" || extension == "inc")
+    {
+        filesToProcess.push(initialPath);
+
+        while (!filesToProcess.empty())
+        {
+            AsmFile file(filesToProcess.front());
 
             filesToProcess.pop();
 
