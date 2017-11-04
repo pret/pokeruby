@@ -6,46 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_80EEF78
-sub_80EEF78: @ 80EEF78
-	push {r4,lr}
-	movs r3, 0x1
-	ldr r0, _080EEF94 @ =gUnknown_083DFEC4
-	ldr r0, [r0]
-	movs r1, 0xC3
-	lsls r1, 2
-	adds r2, r0, r1
-	ldrh r1, [r2]
-	movs r4, 0
-	ldrsh r0, [r2, r4]
-	cmp r0, 0
-	bne _080EEF98
-	movs r0, 0
-	b _080EEFB0
-	.align 2, 0
-_080EEF94: .4byte gUnknown_083DFEC4
-_080EEF98:
-	subs r0, r1, 0x2
-	strh r0, [r2]
-	lsls r0, 16
-	cmp r0, 0
-	bgt _080EEFA8
-	movs r0, 0
-	strh r0, [r2]
-	movs r3, 0
-_080EEFA8:
-	ldr r1, _080EEFB8 @ =REG_BG1VOFS
-	ldrh r0, [r2]
-	strh r0, [r1]
-	adds r0, r3, 0
-_080EEFB0:
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_080EEFB8: .4byte REG_BG1VOFS
-	thumb_func_end sub_80EEF78
-
 	thumb_func_start sub_80EEFBC
 sub_80EEFBC: @ 80EEFBC
 	push {r4-r7,lr}

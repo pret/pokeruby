@@ -30,15 +30,22 @@ struct UnkPokenavStruct_Sub2 {
     /*0x26*/ u16 unk26;
 };
 
+struct UnkPokenavStruct_Sub3 {
+    /*0x00*/s16 unk0;
+};
+
 struct UnkUsePokeblockSub {
     /*0*/ u8 fil0[2];
     /*2*/ u8 partyIdx:5;
 };
 
 struct UnkPokenavStruct {
-    /*0x0000*/ u8 filler0000[0x30c];
-    /*0x0000*/ u16 unk030C;
-    /*0x0000*/ u8 filler030E[0x6a9e];
+    /*0x0000*/ u8 filler0000[0x30C];
+    /*0x030C*/ union { // TODO: what?
+        u16 val;
+        struct UnkPokenavStruct_Sub3 unk030C;
+    } unk030C;
+    /*0x0310*/ u8 filler030E[0x6a9c];
     /*0x6DAC*/ u8 unk6DAC;
     /*0x6DAD*/ u8 filler6DAD[0x8fd];
     /*0x76AA*/ u8 unk76AA;

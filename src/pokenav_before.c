@@ -2897,7 +2897,7 @@ bool8 sub_80EEE54() {
 		sub_80EF58C(2);
 		break;
 	case 4:
-		gUnknown_083DFEC4->unk030C = 0;
+		gUnknown_083DFEC4->unk030C.unk030C.unk0 = 0;
 		REG_BG1HOFS = 0;
 		REG_BG1VOFS = 0;
 		REG_BG1CNT = 0x1B0C;
@@ -2909,66 +2909,41 @@ bool8 sub_80EEE54() {
 	return 1;
 }
 
-#if 0
-// not matches because of register differences
 bool8 sub_80EEF34() {
-	bool8 ret = 0x1;
-	if ((s8)gUnknown_083DFEC4->unk030C == 0x20) {
-		return 0;
-	}
-	else {
-		gUnknown_083DFEC4->unk030C += 2;
-		if (gUnknown_083DFEC4->unk030C > 0x1F) {
-			gUnknown_083DFEC4->unk030C = 0x20;
-			ret = 0;
-		}
-		REG_BG1VOFS = gUnknown_083DFEC4->unk030C;
-		return ret;
-	}
-}
-#else
-__attribute__((naked))
-bool8 sub_80EEF34() {
-	asm(".text\n"
-	    ".include \"constants/gba_constants.inc\"");
+	bool8 retVal = TRUE;
 
-	asm_unified(
-	"push {r4,lr}\n\
-	movs r3, 0x1\n\
-	ldr r0, _080EEF50 @ =gUnknown_083DFEC4\n\
-	ldr r0, [r0]\n\
-	movs r1, 0xC3\n\
-	lsls r1, 2\n\
-	adds r2, r0, r1\n\
-	ldrh r1, [r2]\n\
-	movs r4, 0\n\
-	ldrsh r0, [r2, r4]\n\
-	cmp r0, 0x20\n\
-	bne _080EEF54\n\
-	movs r0, 0\n\
-	b _080EEF6E\n\
-	.align 2, 0\n\
-_080EEF50: .4byte gUnknown_083DFEC4\n\
-_080EEF54:\n\
-	adds r0, r1, 0x2\n\
-	strh r0, [r2]\n\
-	lsls r0, 16\n\
-	asrs r0, 16\n\
-	cmp r0, 0x1F\n\
-	ble _080EEF66\n\
-	movs r0, 0x20\n\
-	strh r0, [r2]\n\
-	movs r3, 0\n\
-_080EEF66:\n\
-	ldr r1, _080EEF74 @ =REG_BG1VOFS\n\
-	ldrh r0, [r2]\n\
-	strh r0, [r1]\n\
-	adds r0, r3, 0\n\
-_080EEF6E:\n\
-	pop {r4}\n\
-	pop {r1}\n\
-	bx r1\n\
-	.align 2, 0\n\
-_080EEF74: .4byte REG_BG1VOFS");
+	if (gUnknown_083DFEC4->unk030C.unk030C.unk0 == 32)
+	{
+		return FALSE;
+	}
+
+	gUnknown_083DFEC4->unk030C.unk030C.unk0 += 2;
+	if (gUnknown_083DFEC4->unk030C.unk030C.unk0 > 31)
+	{
+		gUnknown_083DFEC4->unk030C.unk030C.unk0 = 32;
+		retVal = FALSE;
+	}
+
+	REG_BG1VOFS = gUnknown_083DFEC4->unk030C.unk030C.unk0;
+	return retVal;
 }
-#endif
+
+bool8 sub_80EEF78(void)
+{
+	bool8 retVal = TRUE;
+
+	if (gUnknown_083DFEC4->unk030C.unk030C.unk0 == 0)
+	{
+		return FALSE;
+	}
+
+	gUnknown_083DFEC4->unk030C.unk030C.unk0 -= 2;
+	if (gUnknown_083DFEC4->unk030C.unk030C.unk0 <= 0)
+	{
+		gUnknown_083DFEC4->unk030C.unk030C.unk0 = 0;
+		retVal = FALSE;
+	}
+
+	REG_BG1VOFS = gUnknown_083DFEC4->unk030C.unk030C.unk0;
+	return retVal;
+}
