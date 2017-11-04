@@ -17,7 +17,7 @@
 extern u8 ewram[];
 
 struct UnknownPokenav0 {
-	/* 0x0000 */ u8 fill0000[0x0300];
+	/* 0x0000 */ u8 var0[0x0300];
 	/* 0x0300 */ void (*var300)(void);
 	/* 0x0304 */ u16 var304;
 	/* 0x0306 */ u16 var306;
@@ -60,7 +60,7 @@ struct UnknownPokenav0 {
 	/* 0x87DA */ s16 var87DA;
 	/* 0x87DC */ s16 var87DC;
 	/* 0x87DE */ u8 fill87DE[0x4a];
-	/* 0x8828 */ u8 var8828;
+	/* 0x8828 */ u8 playerPartyCount;
 	/* 0x8829 */ u8 fill8829[0x07bf];
 	/* 0x8FE8 */ s8 var8fe8;
 	/* 0x8FE9 */ u8 fill8FE9[0x16];
@@ -85,7 +85,139 @@ struct UnknownPokenav0_1 {
 
 #define ewram0_1 (*(struct UnknownPokenav0_1*)(ewram + 0))
 
+IWRAM_DATA void (*gUnknown_03000744)(void);
+
+extern const u8 gPokenavHoennMapMisc_Gfx[];
+extern const u8 gUnknown_08E99FB0[];
+extern const u16 gPokenavHoennMap1_Pal[];
+
+static void sub_80EBCA8();
+static void sub_80EEE20();
+static bool8 sub_80EEE54();
+static void sub_80EEE08();
+static void sub_80EED2C(u8);
+static void sub_80EC268();
+static void sub_80EED1C();
+static void sub_80EE9C0(u8, u8, u8);
+static bool8 sub_80EEA0C();
+static bool8 sub_80EEC10();
+static void sub_80EED9C();
+static void sub_80EDB88();
+static void sub_80EC4A0();
+static void sub_80EC81C();
+static void sub_80EE96C();
+static void sub_80EE3D8();
+static bool8 sub_80EEF34();
+static void sub_80EED0C();
+static void sub_80EC67C();
+static void sub_80EC86C();
+static bool8 sub_80EEC90();
+static void sub_80ED620();
+static void sub_80EC960();
+static void sub_80ED01C();
+static void sub_80ECC08();
+static void sub_80ED31C();
+static void sub_80ED4D8();
+static void sub_80ED858();
+static void sub_80EDDBC();
+static void sub_80EDE70();
+static void sub_80EDEE4();
+static void sub_80EE06C();
+static void sub_80EE294();
+static void sub_80EE58C();
+static void sub_80EE658();
+static void sub_80EE8F4();
+static void sub_80EEDC4();
+
+extern void sub_80EF58C(u32);
+extern void sub_80F6FFC();
+extern void sub_80F3294();
+extern void sub_80F0B24();
+extern bool8 sub_80F0B44();
+extern void sub_80F0F64();
+extern bool8 sub_80F0FEC();
+extern void sub_80F6FB8();
+extern void sub_80F6DB8();
+extern void sub_80F0CD8();
+extern bool8 sub_80F6E9C();
+extern bool8 sub_80F0D5C();
+extern bool8 sub_80F6ED4();
+extern bool8 sub_80F0EF4();
+extern void sub_80F2FB0();
+extern void sub_80F0FA0();
+extern void sub_80F0C28();
+extern bool8 sub_80F0C48();
+extern bool8 sub_80F70FC();
+extern void sub_80F708C(u32);
+extern void sub_80F4394();
+extern void sub_80F0EC0();
+extern void sub_80F700C();
+extern void sub_80F42C4();
+extern void sub_80F0FFC();
+extern void sub_80F6F10();
+extern void sub_80F3C2C();
+extern void sub_80F15A8();
+extern void sub_80F6A4C();
+extern bool8 sub_80F6AF0();
+extern void sub_80F3B00();
+extern bool8 sub_80F3B58();
+extern void sub_80F1494();
+extern u8 sub_80F68E8();
+extern void sub_80F3B94();
+extern bool8 sub_80F3BD4();
+extern void sub_80F66E0();
+extern bool8 sub_80F1080();
+extern void sub_80EEFBC();
+extern void sub_80F38B8();
+extern bool8 sub_80F38EC();
+extern void sub_80F638C();
+extern bool8 sub_80F63D0();
+extern void sub_80F4CF0();
+extern void sub_80EFF34();
+extern bool8 sub_80EFF68();
+extern void sub_80F35B4();
+extern void sub_80F6134();
+extern u8 sub_80F5DD4();
+extern void ShowMapNamePopUpWindow();
+extern bool8 sub_80F0718();
+extern bool8 sub_80F3264();
+extern void sub_80F4D44();
+extern bool8 sub_80F4D88();
+extern void sub_80F0264();
+extern bool8 sub_80F02A0();
+extern void sub_80F3008();
+extern void sub_80F3130();
+extern void sub_80F2D6C(u32);
+extern bool8 sub_80F1E6C();
+extern void sub_80EF9F8();
+extern bool8 sub_80EFBDC(u32);
+extern void sub_80EFBB0();
+extern void sub_80F2DF4();
+extern void sub_80F1E84();
+extern bool8 sub_80F1F10();
+extern void sub_80EEFBC(u32);
+extern void sub_80F2620();
+extern void sub_80EF814();
+extern void sub_80EF840();
+extern bool8 sub_80EF874();
+extern void sub_80F2DD8();
+extern bool8 sub_80F6250();
+extern void sub_80F6208();
+extern void sub_80F208C();
+extern void sub_80F6C20();
+extern void sub_80F3FF0();
+extern bool8 sub_80F4024();
+extern void sub_80F2598();
+extern void sub_80EF248();
+extern bool8 sub_80EF284();
+extern void sub_80F1B8C();
+extern bool8 sub_80F1BC8(u32 unk);
+extern void sub_80F1DF0();
+extern bool8 sub_80F1E50();
+extern void sub_80EF428();
+extern bool8 sub_80EEF78();
 extern void sub_80F1A90();
+extern void sub_80F2D04(u32);
 extern bool8 sub_80F1AC4();
 extern void sub_80F36F0();
 extern bool8 sub_80F3724();
@@ -102,8 +234,10 @@ extern void sub_80FB260();
 extern void sub_80EFE7C();
 extern void sub_80F5BF0();
 extern void sub_80F6F64();
-extern void _call_via_r0(void (*func)(void));
 extern void sub_80F19FC();
+
+extern u16 gKeyRepeatStartDelay;
+
 
 void sub_80EBA5C() {
 	switch (gMain.state) {
@@ -146,20 +280,20 @@ void sub_80EBA5C() {
 			sub_80F2688();
 			gMain.state++;
 
-		case 0xA:
+		case 10:
 			if (sub_80F26BC()) return;
 			break;
-		case 0xB:
+		case 11:
 			sub_80F36F0();
 			gMain.state++;
-		case 0xC:
+		case 12:
 			if (sub_80F3724()) return;
 			break;
-		case 0xD:
+		case 13:
 			sub_80EBC10();
 			sub_80EBDBC(&sub_80EBDD8);
 			break;
-		case 0xE:
+		case 14:
 			ewram0.var6dab = 1;
 			PlaySE(SE_PN_ON);
 			SetMainCallback2(&sub_80EBD90);
@@ -167,6 +301,7 @@ void sub_80EBA5C() {
 			sub_80F1A74();
 			break;
 	}
+
 	gMain.state++;
 }
 
@@ -181,24 +316,24 @@ void sub_80EBBE8() {
 	}
 }
 
-u16 gKeyRepeatStartDelay;
-void sub_80EBCA8();
-
 void sub_80EBC10() {
 	u16 i;
 	u16 *var1;
+
 	gKeyRepeatStartDelay = 0x14;
-	ewram0.var8828 = CalculatePlayerPartyCount();
+	ewram0.playerPartyCount = CalculatePlayerPartyCount();
 	ewram0.var6ddc = 0;
 	ewram0.var9344 = 0;
 	ewram0.var8768 = 0;
 	ewram0.varCED0 = 0;
-	for (i = 0; i <= 4; ++i) {
+
+	for (i = 0; i < 5; ++i) {
 		ewram0.var8fff[i] = 0;
-		var1 = (u16 *)ewram;
+		var1 = (u16 *)ewram0.var0;
 		var1[i*2 + 0x4820] = 0x9B;
 		var1[i*2 + 0x4821] = 0x5B;
 	}
+
 	ewram0.var6e95 = 0;
 	sub_80EBCA8();
 }
@@ -207,12 +342,14 @@ void sub_80EBCA8() {
 	ewram0.var6db2[0] = 1;
 	ewram0.var6db2[1] = 2;
 	ewram0.var6db2[2] = 3;
+
 	if (FlagGet(SYS_RIBBON_GET)) {
 		ewram0.var6db2[3] = 4;
 	}
 	else {
 		ewram0.var6db2[3] = 0;
 	}
+
 	ewram0.var6db2[4] = 5;
 }
 
@@ -252,7 +389,7 @@ void sub_80EBD80() {
 }
 
 void sub_80EBD90() {
-	_call_via_r0(ewram0.var300);
+	ewram0.var300();
 	AnimateSprites();
 	BuildOamBuffer();
 	RunTasks();
@@ -264,22 +401,6 @@ void sub_80EBDBC(void (*func)(void)) {
 	ewram0.var300 = func;
 	ewram0.var304 = 0;
 }
-
-void sub_80F3FF0();
-bool8 sub_80F4024();
-void sub_80F2598();
-void sub_80EEE20();
-bool8 sub_80EEE54();
-void sub_80EEE08();
-void sub_80EF248();
-bool8 sub_80EF284();
-void sub_80F1B8C();
-bool8 sub_80F1BC8(u32 unk);
-void sub_80EED2C(u8);
-void sub_80F1DF0();
-bool8 sub_80F1E50();
-void sub_80EF428();
-void sub_80EC268();
 
 void sub_80EBDD8() {
 	switch (ewram0.var304) {
@@ -361,9 +482,6 @@ void sub_80EBDD8() {
 
 }
 
-bool8 sub_80EEF78();
-void sub_80EED1C();
-
 void sub_80EC00C() {
 	switch (ewram0.var304) {
 	case 0:
@@ -429,34 +547,18 @@ void sub_80EC00C() {
 	}
 }
 
-void sub_80F2D04(u32);
-void sub_80EE9C0(u8, u8, u8);
-bool8 sub_80EEA0C();
-
 void sub_80EC210() {
 	switch (ewram0.var304) {
-		case 0:
-			sub_80F2D04(1);
-			sub_80EE9C0(0, ewram0.var6ddc, 0);
-			ewram0.var304++;
-			break;
-		case 1:
-			if (sub_80EEA0C()) return;
-			sub_80EBDBC(&sub_80EC268);
+	case 0:
+		sub_80F2D04(1);
+		sub_80EE9C0(0, ewram0.var6ddc, 0);
+		ewram0.var304++;
+		break;
+	case 1:
+		if (sub_80EEA0C()) return;
+		sub_80EBDBC(&sub_80EC268);
 	}
 }
-
-bool8 sub_80EEC10();
-bool8 sub_80F6250();
-void sub_80EED9C();
-void sub_80F6208();
-void sub_80EDB88();
-void sub_80EC4A0();
-void sub_80EC81C();
-void sub_80F208C();
-void sub_80EE96C();
-void sub_80F6C20();
-void sub_80EE3D8();
 
 void sub_80EC268() {
 	u8 var1;
@@ -549,18 +651,6 @@ void sub_80EC268() {
 	}
 }
 
-void sub_80F1E84();
-bool8 sub_80F1F10();
-void sub_80EEFBC(u32);
-bool8 sub_80EEF34();
-void sub_80EED0C();
-void sub_80F2620();
-void sub_80EF814();
-void sub_80EF840();
-bool8 sub_80EF874();
-void sub_80F2DD8();
-void sub_80EC67C();
-
 void sub_80EC4A0() {
 	u32 var1;
 	u32 var2;
@@ -637,12 +727,6 @@ void sub_80EC4A0() {
 	}
 }
 
-void sub_80EF9F8();
-void sub_80EED9C();
-bool8 sub_80EFBDC(u32);
-void sub_80EFBB0();
-void sub_80F2DF4();
-
 void sub_80EC67C() {
 	u32 var1;
 	u32 var2;
@@ -702,8 +786,6 @@ void sub_80EC67C() {
 	}
 }
 
-void sub_80EC86C();
-
 void sub_80EC81C() {
 	switch (ewram0.var304) {
 	case 0:
@@ -716,11 +798,6 @@ void sub_80EC81C() {
 		sub_80EBDBC(&sub_80EC86C);
 	}
 }
-
-bool8 sub_80EEC90();
-void sub_80ED620();
-void sub_80EC960();
-bool8 sub_80F1E6C();
 
 void sub_80EC86C() {
 	switch (ewram0.var304) {
@@ -760,8 +837,6 @@ void sub_80EC86C() {
 		sub_80EBDBC(&sub_80EC210);
 	}
 }
-
-void sub_80ECC08();
 
 void sub_80EC960() {
 	switch (ewram0.var304) {
@@ -854,17 +929,16 @@ void sub_80ECA10() {
 	}
 }
 
-void sub_80ED01C();
-
 void sub_80ECC08() {
 	switch (ewram0.var304) {
 	case 0:
 		if (sub_80EEC90()) {
 			PlaySE(0x5);
-	                sub_80EF428(2, ewram0.var6dad);
+			sub_80EF428(2, ewram0.var6dad);
 			sub_80EED9C();
 			break;
 		}
+
 		if (gMain.newKeys & A_BUTTON) {
 			PlaySE(0x5);
 			switch ((s8)ewram0.var6dad) {
@@ -887,6 +961,7 @@ void sub_80ECC08() {
 				sub_80EBDBC(&sub_80EC9A8);
 				return;
 			}
+
 			ewram0.var6dfc = ewram0.var6dad;
 			ewram0.var76aa = 1;
 			sub_80EBDBC(&sub_80ED01C);
@@ -896,16 +971,13 @@ void sub_80ECC08() {
 			ewram0.var6dad = 0x5;
 			ewram0.var304++;
 		}
-                break;
+		break;
 	case 1:
 		if (sub_80F1E6C()) return;;
 		sub_80EBDBC(&sub_80EC9A8);
 		break;
 	}
 }
-
-void sub_80F3130();
-void sub_80F2D6C(u32);
 
 void sub_80ECD80() {
 	u16 var1;
@@ -952,60 +1024,53 @@ void sub_80ECD80() {
 	case 9:
 		sub_80F1B8C(0x2);
 		ewram0.var304++;
-	case 0xA:
+	case 10:
 		if (sub_80F1BC8(0x2)) return;
 		ewram0.var304++;
 		break;
-	case 0xB:
+	case 11:
 		if (sub_8055870()) return;
 		ewram0.var304++;
 		break;
-	case 0xC:
+	case 12:
 		BeginNormalPaletteFade(ewram0.var308, -1, 0x10, 0, 0);
 		SetVBlankCallback(&sub_80EBD18);
 		ewram0.var304++;
 		break;
-	case 0xD:
+	case 13:
 		sub_80EED2C(0);
 		ewram0.var304++;
 		break;
-	case 0xE:
+	case 14:
 		sub_80F2598();
 		ewram0.var304++;
 		break;
-	case 0xF:
+	case 15:
 		if (gPaletteFade.active) return;
 		ewram0.var304++;
 		break;
-	case 0x10:
+	case 16:
 		sub_80F2C80(0x1);
 		ewram0.var304++;
-	case 0x11:
+	case 17:
 		if ((var1 = sub_80F2CBC(0x1))) return;
 		ewram0.var306 = var1;
 		ewram0.var304++;
 		break;
-	case 0x12:
+	case 18:
 		sub_80F2C80(0x5);
 		ewram0.var304++;
-	case 0x13:
+	case 19:
 		if (sub_80F2CBC(0x5)) return;
 		sub_80F1DF0();
 		ewram0.var304++;
 		break;
-	case 0x14:
+	case 20:
 		if (sub_80F1E50()) return;
 		sub_80EF428(2, ewram0.var6dad);
 		sub_80EBDBC(&sub_80ECC08);
 	}
 }
-
-void sub_80F4D44();
-bool8 sub_80F4D88();
-void sub_80F0264();
-bool8 sub_80F02A0();
-void sub_80F3008();
-void sub_80ED31C();
 
 void sub_80ED01C() {
 	u16 var1;
@@ -1059,55 +1124,49 @@ void sub_80ED01C() {
 	case 9:
 		sub_80F0264(0);
 		ewram0.var304++;
-	case 0xA:
+	case 10:
 		if (sub_80F02A0()) return;
 		ewram0.var304++;
 		break;
-	case 0xB:
+	case 11:
 		sub_80F3008(0);
 		ewram0.var304++;
 		break;
-	case 0xC:
+	case 12:
 		if (sub_8055870()) return;
 		ewram0.var304++;
 		break;
-	case 0xD:
+	case 13:
 		BeginNormalPaletteFade(ewram0.var308, -1, 0x10, 0, 0);
 		SetVBlankCallback(&sub_80EBD18);
 		ewram0.var304++;
 		break;
-	case 0xE:
+	case 14:
 		sub_80EED2C(0x4);
 		ewram0.var304++;
 		break;
-	case 0xF:
+	case 15:
 		if (gPaletteFade.active) return;
 		ewram0.var306 = (u8)(gPaletteFade.active << 24);
 		ewram0.var304++;
 		break;
-	case 0x10:
+	case 16:
 		sub_80F2C80(0x1);
 		ewram0.var304++;
-	case 0x11:
+	case 17:
 		if ((var3 = sub_80F2CBC(0x1))) return;
 		ewram0.var306 = var3;
 		ewram0.var304++;
 		break;
-	case 0x12:
+	case 18:
 		sub_80F2C80(ewram0.var6dfc + 7);
 		ewram0.var304++;
-	case 0x13:
+	case 19:
 		if (sub_80F2CBC(ewram0.var6dfc + 7)) return;
 		sub_80EBDBC(&sub_80ED31C);
 		break;
 	}
 }
-
-u8 sub_80F5DD4();
-void ShowMapNamePopUpWindow();
-void sub_80ED4D8();
-bool8 sub_80F0718();
-bool8 sub_80F3264();
 
 void sub_80ED31C() {
 	switch (ewram0.var304) {
@@ -1145,8 +1204,6 @@ void sub_80ED31C() {
 		break;
 	}
 }
-
-void sub_80F6134();
 
 void sub_80ED3D0() {
 	switch (ewram0.var304) {
@@ -1189,12 +1246,6 @@ void sub_80ED3D0() {
 		sub_80EBDBC(&sub_80ED31C);
 	}
 }
-
-void sub_80F4CF0();
-void sub_80EFF34();
-bool8 sub_80EFF68();
-void sub_80F35B4();
-void sub_80ED858();
 
 void sub_80ED4D8() {
 	switch (ewram0.var304) {
@@ -1293,36 +1344,35 @@ void sub_80ED620() {
 		if (sub_8055870()) return;
 		ewram0.var304++;
 		break;
-	case 0xA:
+	case 10:
 		sub_80F33A8();
 		BeginNormalPaletteFade(ewram0.var308, -1, 0x10, 0, 0);
 		SetVBlankCallback(&sub_80EBD4C);
 		ewram0.var304++;
 		break;
-	case 0xB:
+	case 11:
 		sub_80EED2C(0x2);
 		ewram0.var304++;
 		break;
-	case 0xC:
+	case 12:
 		if (gPaletteFade.active) return;
 		ewram0.var304++;
 		break;
-	case 0xD:
+	case 13:
 		sub_80F2C80(0x1);
 		ewram0.var304++;
-	case 0xE:
+	case 14:
 		if (sub_80F2CBC(0x1)) return;
 		ewram0.var304++;
 		break;
-	case 0xF:
+	case 15:
 		sub_80F2C80(0x6);
 		ewram0.var304++;
-	case 0x10:
+	case 16:
 		if (sub_80F2CBC(0x6)) return;
 		sub_80EBDBC(&sub_80ED858);
 		break;
 	}
-
 }
 
 #if 0
@@ -1866,10 +1916,6 @@ _080EDB84: .4byte sub_80ED3D0\n");
 }
 #endif
 
-void sub_80F638C();
-bool8 sub_80F63D0();
-void sub_80EDDBC();
-
 void sub_80EDB88() {
 	u8 var1;
 	switch (ewram0.var304) {
@@ -1921,43 +1967,40 @@ void sub_80EDB88() {
 	case 9:
 		sub_80F0264(0x1);
 		ewram0.var304++;
-	case 0xA:
+	case 10:
 		if (sub_80F02A0()) return;
 		ewram0.var304++;
 		break;
-	case 0xB:
+	case 11:
 		sub_80F2C80(0x2);
 		ewram0.var304++;
-	case 0xC:
+	case 12:
 		if (sub_80F2CBC(0x2)) return;
 		ewram0.var304++;
 		break;
-	case 0xD:
+	case 13:
 		sub_80F3008(0x1);
 		ewram0.var304++;
 		break;
-	case 0xE:
+	case 14:
 		if (sub_8055870()) return;
 		ewram0.var304++;
 		break;
-	case 0xF:
+	case 15:
 		BeginNormalPaletteFade(ewram0.var308, -1, 0x10, 0, 0);
 		SetVBlankCallback(&sub_80EBD18);
 		ewram0.var304++;
 		break;
-	case 0x10:
+	case 16:
 		sub_80EED2C(0x4);
 		ewram0.var304++;
 		break;
-	case 0x11:
+	case 17:
 		if (gPaletteFade.active) return;
 		sub_80EBDBC(&sub_80EDDBC);
 		break;
 	}
 }
-
-void sub_80EDE70();
-void sub_80EDEE4();
 
 void sub_80EDDBC() {
 	switch (ewram0.var304) {
@@ -2016,13 +2059,6 @@ void sub_80EDE70() {
 
 }
 
-void sub_80F66E0();
-bool8 sub_80F1080();
-void sub_80EEFBC();
-void sub_80F38B8();
-bool8 sub_80F38EC();
-void sub_80EE06C();
-
 void sub_80EDEE4() {
 	switch (ewram0.var304) {
 	case 0:
@@ -2070,23 +2106,12 @@ void sub_80EDEE4() {
 		if (gPaletteFade.active) return;
 		ewram0.var304++;
 		break;
-	case 0xA:
+	case 10:
 		if (sub_80F170C()) return;
 		sub_80EBDBC(&sub_80EE06C);
 		break;
 	}
 }
-
-void sub_80F15A8();
-void sub_80F6A4C();
-bool8 sub_80F6AF0();
-void sub_80F3B00();
-bool8 sub_80F3B58();
-void sub_80F1494();
-u8 sub_80F68E8();
-void sub_80F3B94();
-bool8 sub_80F3BD4();
-void sub_80EE294();
 
 void sub_80EE06C() {
 	u32 var1;
@@ -2178,8 +2203,6 @@ label2:
 	}
 }
 
-void sub_80F3C2C();
-
 void sub_80EE294() {
 	switch (ewram0.var304) {
 	case 0:
@@ -2226,9 +2249,6 @@ void sub_80EE294() {
 		break;
 	}
 }
-
-void sub_80F6F10();
-void sub_80EE58C();
 
 void sub_80EE3D8() {
 	u8 var1;
@@ -2279,30 +2299,26 @@ void sub_80EE3D8() {
 		sub_80F3008(0x2);
 		ewram0.var304++;
 		break;
-	case 0xA:
+	case 10:
 		if (sub_8055870()) return;
 		ewram0.var304++;
 		break;
-	case 0xB:
+	case 11:
 		sub_80F6F10();
 		BeginNormalPaletteFade(ewram0.var308, -1, 0x10, 0, 0);
 		SetVBlankCallback(&sub_80EBD68);
 		ewram0.var304++;
 		break;
-	case 0xC:
+	case 12:
 		sub_80EED2C(0x5);
 		ewram0.var304++;
 		break;
-	case 0xD:
+	case 13:
 		if (gPaletteFade.active) return;
 		sub_80EBDBC(&sub_80EE58C);
 		break;
 	}
 }
-
-void sub_80F0FFC();
-void sub_80EE658();
-void sub_80EE8F4();
 
 void sub_80EE58C() {
 	switch (ewram0.var304) {
@@ -2340,29 +2356,6 @@ void sub_80EE58C() {
 		break;
 	}
 }
-
-void sub_80F3294();
-void sub_80F0B24();
-bool8 sub_80F0B44();
-void sub_80F0F64();
-bool8 sub_80F0FEC();
-void sub_80F6FB8();
-void sub_80F6DB8();
-void sub_80F0CD8();
-bool8 sub_80F6E9C();
-bool8 sub_80F0D5C();
-bool8 sub_80F6ED4();
-bool8 sub_80F0EF4();
-void sub_80F2FB0();
-void sub_80F0FA0();
-void sub_80F0C28();
-bool8 sub_80F0C48();
-bool8 sub_80F70FC();
-void sub_80F708C(u32);
-void sub_80F4394();
-void sub_80F0EC0();
-void sub_80F700C();
-void sub_80F42C4();
 
 void sub_80EE658() {
 	switch (ewram0.var304) {
@@ -2439,44 +2432,42 @@ label2:
 		sub_80F2FB0();
 		ewram0.var304++;
 		break;
-	case 0xA:
+	case 10:
 		sub_80F6134();
 		ewram0.var304++;
 		break;
-	case 0xB:
+	case 11:
 		sub_80F0FA0();
 		ewram0.var304++;
 		break;
-	case 0xC:
+	case 12:
 		if (sub_80F0FEC()) return;
 		ewram0.var304++;
 		break;
-	case 0xD:
+	case 13:
 		sub_80F0C28();
 		ewram0.var304++;
 		break;
-	case 0xE:
+	case 14:
 		if (sub_80F0C48()) return;
 		ewram0.var304++;
 		break;
-	case 0xF:
+	case 15:
 		sub_80EEFBC(0x9);
 		sub_80F3294(0);
 		sub_80EBDBC(&sub_80EE58C);
 		sub_80EED9C();
 		break;
-	case 0x10:
+	case 16:
 		if (sub_80F70FC()) return;
 		ewram0.var304++;
 		break;
-	case 0x11:
+	case 17:
 		if (sub_8055870()) return;
 		ewram0.var304 = 0x8;
 		break;
 	}
 }
-
-void sub_80F6FFC();
 
 void sub_80EE8F4() {
 	switch (ewram0.var304) {
@@ -2857,14 +2848,10 @@ void sub_80EED2C(u8 param1) {
 	}
 }
 
-IWRAM_DATA void (*gUnknown_03000744)(void);
-void _call_via_r1();
-void sub_80EEDC4();
-
 void sub_80EED9C() {
 	gUnknown_03000744 = ewram0.var300;
 	ewram0.var300 = &sub_80EEDC4;
-	_call_via_r1();
+	ewram0.var300();
 }
 
 void sub_80EEDC4() {
@@ -2883,26 +2870,17 @@ void sub_80EEDE8() {
 }
 
 void sub_80EEE08() {
-	// Here i've used .h struct instead of .c struct
 	gUnknown_083DFEC4->unkD160 = 0;
 }
 
 void sub_80EEE20() {
-	// Here i've used .h struct instead of .c struct
 	gUnknown_083DFEC4->unkD160 = 0;
 	if (!gUnknown_083DFEC4->unk6DAC) {
 		while (sub_80EEE54());
 	}
 }
 
-extern const u8 gPokenavHoennMapMisc_Gfx[];
-extern const u8 gUnknown_08E99FB0[];
-extern const u16 gPokenavHoennMap1_Pal[];
-
-void sub_80EF58C(u32);
-
 bool8 sub_80EEE54() {
-	// Here i've used .h struct instead of .c struct
 	switch (gUnknown_083DFEC4->unkD160) {
 	case 0:
 		LZ77UnCompVram(gPokenavHoennMapMisc_Gfx, (void *)VRAM + 0xC000);
