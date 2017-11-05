@@ -637,7 +637,7 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
         const void *src;
         void *dst;
 
-        if (IsContest())
+        if (NotInBattle())
         {
             r10 = 0;
             species = ewram19348.unk2;
@@ -702,7 +702,7 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
         }
         BlendPalette(paletteOffset, 16, 6, 0x7FFF);
         CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, 32);
-        if (!IsContest())
+        if (!NotInBattle())
         {
             ewram17800[a].transformedSpecies = species;
             gBattleMonForms[a] = gBattleMonForms[b];
@@ -722,11 +722,11 @@ void BattleLoadSubstituteSprite(u8 a, u8 b)
 
     if (b == 0)
     {
-        if (IsContest())
+        if (NotInBattle())
             r4 = 0;
         else
             r4 = GetBankIdentity(a);
-        if (IsContest())
+        if (NotInBattle())
             LZDecompressVram(gSubstituteDollTilemap, gUnknown_081FAF4C[r4]);
         else if (GetBankSide(a) != 0)
             LZDecompressVram(gSubstituteDollGfx, gUnknown_081FAF4C[r4]);
@@ -742,7 +742,7 @@ void BattleLoadSubstituteSprite(u8 a, u8 b)
     }
     else
     {
-        if (!IsContest())
+        if (!NotInBattle())
         {
             if (GetBankSide(a) != 0)
                 BattleLoadOpponentMonSprite(&gEnemyParty[gBattlePartyID[a]], a);

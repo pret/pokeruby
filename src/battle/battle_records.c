@@ -243,7 +243,7 @@ static void PrintLinkBattleRecord(struct LinkBattleRecord *record, u8 y)
 void ShowLinkBattleRecords(void) {
     s32 i;
     MenuDrawTextWindow(1, 0, 28, 18);
-    sub_8072BD8((u8 *) gOtherText_BattleResults, 0, 1, 240);
+    sub_8072BD8(gOtherText_BattleResults, 0, 1, 240);
 
     PrintLinkBattleWinsLossesDraws(gSaveBlock1.linkBattleRecords);
 #if ENGLISH

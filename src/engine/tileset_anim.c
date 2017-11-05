@@ -32,8 +32,8 @@ extern u8 *gTilesetAnimTable_BikeShop[];
 
 struct Dma
 {
-    u8 *src;
-    u8 *dest;
+    void *src;
+    void *dest;
     u16 size;
 };
 
@@ -95,7 +95,7 @@ static void ClearTilesetAnimDmas(void)
     CpuFill32(0, &gTilesetAnimDmas, sizeof(gTilesetAnimDmas));
 }
 
-static void QueueTilesetAnimDma(u8 *src, u8 *dest, u16 size)
+static void QueueTilesetAnimDma(void *src, void *dest, u16 size)
 {
     if (gNumTilesetAnimDmas < 20)
     {
@@ -217,28 +217,28 @@ static void sub_8073070(u16 a1)
 {
     int v1;
     v1 = a1 % 4;
-    QueueTilesetAnimDma(gTilesetAnimTable_General_0[v1], (u8 *)(BG_VRAM + 0x3f80), 0x80);
+    QueueTilesetAnimDma(gTilesetAnimTable_General_0[v1], BG_TILE_ADDR(127), 0x80);
 }
 
 static void sub_8073098(u16 a1)
 {
     u8 v1;
     v1 = a1 % 8;
-    QueueTilesetAnimDma(gTilesetAnimTable_General_1[v1], (u8 *)(BG_VRAM + 0x3600), 0x3c0);
+    QueueTilesetAnimDma(gTilesetAnimTable_General_1[v1], BG_TILE_ADDR(108), 0x3c0);
 }
 
 static void sub_80730C0(u16 a1)
 {
     int v1;
     v1 = a1 % 8;
-    QueueTilesetAnimDma(gTilesetAnimTable_General_2[v1], (u8 *)(BG_VRAM + 0x3a00), 0x140);
+    QueueTilesetAnimDma(gTilesetAnimTable_General_2[v1], BG_TILE_ADDR(116), 0x140);
 }
 
 static void sub_80730E8(u16 a1)
 {
     int v1;
     v1 = a1 % 4;
-    QueueTilesetAnimDma(gTilesetAnimTable_General_3[v1], (u8 *)(BG_VRAM + 0x3e00), 0xc0);
+    QueueTilesetAnimDma(gTilesetAnimTable_General_3[v1], BG_TILE_ADDR(124), 0xc0);
 }
 
 void TilesetCB_Petalburg(void)
@@ -454,37 +454,37 @@ static void sub_807361C(u16 a1)
 {
     int v1;
     v1 = a1 % 4;
-    QueueTilesetAnimDma(gTilesetAnimTable_General_4[v1], (u8 *)(BG_VRAM + 0x3c00), 0x140);
+    QueueTilesetAnimDma(gTilesetAnimTable_General_4[v1], BG_TILE_ADDR(120), 0x140);
 }
 
 static void sub_8073644(u8 a1)
 {
     u8 v1;
     v1 = a1 % 4;
-    QueueTilesetAnimDma(gTilesetAnimTable_Lavaridge[v1], (u8 *)(BG_VRAM + 0x6400), 0x80);
+    QueueTilesetAnimDma(gTilesetAnimTable_Lavaridge[v1], BG_TILE_ADDR(200), 0x80);
     v1 = (a1 + 2) % 4;
-    QueueTilesetAnimDma(gTilesetAnimTable_Lavaridge[v1], (u8 *)(BG_VRAM + 0x6480), 0x80);
+    QueueTilesetAnimDma(gTilesetAnimTable_Lavaridge[v1], BG_TILE_ADDR(201), 0x80);
 }
 
 static void sub_807368C(u8 a1)
 {
     int v1;
     v1 = a1 % 4;
-    QueueTilesetAnimDma(gTilesetAnimTable_Pacifidlog_0[v1], (u8 *)(BG_VRAM + 0x7a00), 0x3c0);
+    QueueTilesetAnimDma(gTilesetAnimTable_Pacifidlog_0[v1], BG_TILE_ADDR(244), 0x3c0);
 }
 
 static void sub_80736B4(u8 a1)
 {
     int v1;
     v1 = a1 % 4;
-    QueueTilesetAnimDma(gTilesetAnimTable_Underwater[v1], (u8 *)(BG_VRAM + 0x7e00), 0x80);
+    QueueTilesetAnimDma(gTilesetAnimTable_Underwater[v1], BG_TILE_ADDR(252), 0x80);
 }
 
 static void sub_80736DC(u8 a1)
 {
     int v1;
     v1 = a1 % 8;
-    QueueTilesetAnimDma(gTilesetAnimTable_Pacifidlog_1[v1], (u8 *)(BG_VRAM + 0x7e00), 0x100);
+    QueueTilesetAnimDma(gTilesetAnimTable_Pacifidlog_1[v1], BG_TILE_ADDR(252), 0x100);
 }
 
 static void sub_8073704(u16 a1, u8 a2)
@@ -521,14 +521,14 @@ static void sub_80737E0(u16 a1)
 {
     int v1;
     v1 = a1 % 2;
-    QueueTilesetAnimDma(gTilesetAnimTable_Rustboro_1[v1], (u8 *)(BG_VRAM + 0x7800), 0x80);
+    QueueTilesetAnimDma(gTilesetAnimTable_Rustboro_1[v1], BG_TILE_ADDR(240), 0x80);
 }
 
 static void sub_8073808(u16 a1)
 {
     int v1;
     v1 = a1 % 4;
-    QueueTilesetAnimDma(gTilesetAnimTable_Cave[v1], (u8 *)(BG_VRAM + 0x5400), 0x80);
+    QueueTilesetAnimDma(gTilesetAnimTable_Cave[v1], BG_TILE_ADDR(168), 0x80);
 }
 
 static void sub_8073830(u16 a1, u8 a2)
@@ -543,7 +543,7 @@ static void sub_8073868(u16 a1)
 {
     int v1;
     v1 = a1 % 4;
-    QueueTilesetAnimDma(gTilesetAnimTable_Cave[v1], (u8 *)(BG_VRAM + 0x7400), 0x80);
+    QueueTilesetAnimDma(gTilesetAnimTable_Cave[v1], BG_TILE_ADDR(232), 0x80);
 }
 
 static void sub_8073890(u16 a1)
@@ -590,41 +590,41 @@ static void sub_8073904(u16 a1)
 {
     int v1;
     v1 = a1 % 2;
-    QueueTilesetAnimDma(gTilesetAnimTable_Building[v1], (u8 *)(BG_VRAM + 0x3e00), 0x80);
+    QueueTilesetAnimDma(gTilesetAnimTable_Building[v1], BG_TILE_ADDR(124), 0x80);
 }
 
 static void sub_807392C(u16 a1)
 {
     int v1;
     v1 = a1 % 3;
-    QueueTilesetAnimDma(gTilesetAnimTable_SootopolisGym_0[v1], (u8 *)(BG_VRAM + 0x7e00), 0x180);
-    QueueTilesetAnimDma(gTilesetAnimTable_SootopolisGym_1[v1], (u8 *)(BG_VRAM + 0x7a00), 0x280);
+    QueueTilesetAnimDma(gTilesetAnimTable_SootopolisGym_0[v1], BG_TILE_ADDR(252), 0x180);
+    QueueTilesetAnimDma(gTilesetAnimTable_SootopolisGym_1[v1], BG_TILE_ADDR(244), 0x280);
 }
 
 static void sub_8073974(u16 a1)
 {
     int v1;
     v1 = a1 % 4;
-    QueueTilesetAnimDma(gTilesetAnimTable_EliteFour_0[v1], (u8 *)(BG_VRAM + 0x7f00), 0x20);
+    QueueTilesetAnimDma(gTilesetAnimTable_EliteFour_0[v1], BG_TILE_ADDR(254), 0x20);
 }
 
 static void sub_807399C(u16 a1)
 {
     int v1;
     v1 = a1 % 2;
-    QueueTilesetAnimDma(gTilesetAnimTable_EliteFour_1[v1], (u8 *)(BG_VRAM + 0x7c00), 0x80);
+    QueueTilesetAnimDma(gTilesetAnimTable_EliteFour_1[v1], BG_TILE_ADDR(248), 0x80);
 }
 
 static void sub_80739C4(u16 a1)
 {
     int v1;
     v1 = a1 % 2;
-    QueueTilesetAnimDma(gTilesetAnimTable_MauvilleGym[v1], (u8 *)(BG_VRAM + 0x5200), 0x200);
+    QueueTilesetAnimDma(gTilesetAnimTable_MauvilleGym[v1], BG_TILE_ADDR(164), 0x200);
 }
 
 static void sub_80739EC(u16 a1)
 {
     int v1;
     v1 = a1 % 2;
-    QueueTilesetAnimDma(gTilesetAnimTable_BikeShop[v1], (u8 *)(BG_VRAM + 0x7e00), 0x120);
+    QueueTilesetAnimDma(gTilesetAnimTable_BikeShop[v1], BG_TILE_ADDR(252), 0x120);
 }

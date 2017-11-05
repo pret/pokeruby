@@ -267,10 +267,10 @@ static void VBlankCB_UpdateClockGraphics(void)
 
 static bool8 VerifySectorWipe(u16 sector)
 {
-    u32 *ptr = (u32 *)unk_2000000;
+    u32 *ptr = (u32 *)&unk_2000000;
     u16 i;
 
-    ReadFlash(sector, 0, (u8 *)ptr, 4096);
+    ReadFlash(sector, 0, ptr, 4096);
 
     for (i = 0; i < 0x400; i++, ptr++)
         if (*ptr)

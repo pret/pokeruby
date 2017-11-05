@@ -2855,7 +2855,7 @@ void sub_806D5B8(u8 monIndex)
     ZeroFillWindowRect(&gUnknown_03004210, left, top, right, bottom);
 
     var1 = 0;
-    CpuFastSet(&var1, (void *)(OBJ_VRAM1 + monIndex * 0x400), 0x1000100);
+    CpuFastSet(&var1, OBJ_VRAM1 + monIndex * 0x400, 0x1000100);
 }
 
 void sub_806D668(u8 monIndex)
@@ -2869,7 +2869,7 @@ void sub_806D668(u8 monIndex)
     ZeroFillWindowRect(&gUnknown_03004210, left, top, right, bottom);
 
     var1 = 0;
-    CpuFastSet(&var1, (void *)(OBJ_VRAM1 + 0x300 + monIndex * 0x400), 0x1000040);
+    CpuFastSet(&var1, OBJ_VRAM1 + 0x300 + monIndex * 0x400, 0x1000040);
 }
 
 bool8 LoadPartyMenuGraphics(u8 a)
@@ -3460,7 +3460,7 @@ void PartyMenuDoPrintMonNickname(u8 monIndex, int b, const u8 *nameBuffer)
     u32 var1 = 0;
     CpuFastSet(&var1, gTileBuffer, 0x1000100);
     sub_8004E3C((struct WindowConfig *)&gWindowConfig_81E6CAC, gTileBuffer, nameBuffer);
-    CpuFastSet(gTileBuffer, (void *)(OBJ_VRAM1 + (monIndex * 0x400)), 128);
+    CpuFastSet(gTileBuffer, OBJ_VRAM1 + (monIndex * 0x400), 128);
 }
 
 void PrintPartyMenuMonNickname(u8 monIndex, u8 b, struct Pokemon *pokemon)
@@ -3570,7 +3570,7 @@ void PartyMenuDoPrintLevel(u8 monIndex, u8 menuLayout, u8 level)
     var1 = 0;
     CpuFastSet(&var1, gUnknown_02039460, 0x1000020);
     sub_8004E3C((struct WindowConfig *)&gWindowConfig_81E6CAC, gUnknown_02039460 - 0x100 /*gTileBuffer*/, gStringVar1);
-    CpuFastSet(gUnknown_02039460, (void *)(OBJ_VRAM1 + 0x200 + (monIndex * 0x400)), 32);
+    CpuFastSet(gUnknown_02039460, OBJ_VRAM1 + 0x200 + (monIndex * 0x400), 32);
 }
 
 void PartyMenuPrintLevel(u8 monIndex, u8 menuLayout, struct Pokemon *pokemon)
@@ -3664,7 +3664,7 @@ void PartyMenuDoPrintHP(u8 monIndex, u8 b, u16 currentHP, u16 maxHP)
 
     CpuFastSet(&var, gUnknown_02039460, 0x1000040);
     sub_8004E3C((struct WindowConfig *)&gWindowConfig_81E6CAC, gUnknown_02039460 - 0x100 /*gTileBuffer*/, gStringVar1);
-    CpuFastSet(gUnknown_02039460, (void *)(OBJ_VRAM1 + 0x300 + (monIndex * 0x400)), 64);
+    CpuFastSet(gUnknown_02039460, OBJ_VRAM1 + 0x300 + (monIndex * 0x400), 64);
 }
 
 void PartyMenuPrintHP(u8 monIndex, u8 b, struct Pokemon *pokemon)
@@ -4457,7 +4457,7 @@ void sub_806F8AC(u8 taskId)
         ewram1B000.unk261 = 2;
         sub_806E834(gStringVar4, 1);
         sp14 += sp0.unk4;
-        SetMonData(ewram1C000.pokemon, MON_DATA_HP, (u8 *)&sp14);
+        SetMonData(ewram1C000.pokemon, MON_DATA_HP, &sp14);
         RemoveBagItem(ewram1C000.unk6, 1);
         sub_8032638();
         gTasks[taskId].func = sub_806FB44;
@@ -4478,7 +4478,7 @@ void sub_806FA18(u8 taskId)
         PlaySE(SE_KAIFUKU);
         ewram1C000.unkC = 0;
         gTasks[taskId].data[11] -= gTasks[taskId].data[12];
-        SetMonData(ewram1C000.pokemon, MON_DATA_HP, (u8 *)&gTasks[taskId].data[11]);
+        SetMonData(ewram1C000.pokemon, MON_DATA_HP, &gTasks[taskId].data[11]);
         SetMonIconAnim(GetMonIconSpriteId(ewram1C000.unk4, ewram01000.unk1), ewram1C000.pokemon);
         ewram1C000.unk5 = gSprites[ewram01000.unk2].data0;
         ewram1C000.pokemon = &gPlayerParty[ewram1C000.unk5];

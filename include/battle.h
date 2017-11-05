@@ -686,6 +686,32 @@ extern u8 ewram[];
 #define ewram17840              (*(struct Struct2017840 *)   (ewram + 0x17840))
 #define ewram17000              ((u32 *)                     (ewram + 0x17100))
 
+// used in many battle files, it seems as though Hisashi Sogabe wrote
+// some sort of macro to replace the use of actually calling memset.
+// Perhaps it was thought calling memset was much slower?
+
+// The compiler wont allow us to locally declare ptr in this macro; some
+// functions that invoke this macro will not match without this egregeous
+// assumption about the variable names, so in order to avoid this assumption,
+// we opt to pass the variables themselves, even though it is likely that
+// Sogabe assumed the variables were named src and dest. Trust me: I tried to
+// avoid assuming variable names, but the ROM just will not match without the
+// assumptions. Therefore, these macros are bad practice, but I'm putting them
+// here anyway.
+#define MEMSET_ALT(data, c, size, var, dest)    \
+{    \
+    dest = (u8 *)data;    \
+    for(var = 0; var < (u32)size; var++)    \
+        dest[var] = c;    \
+}    \
+
+#define MEMCPY_ALT(data, dest, size, var, src)    \
+{    \
+    src = (u8 *)data;    \
+    for(var = 0; var < (u32)size; var++)    \
+        dest[var] = src[var];    \
+}    \
+
 typedef void (*BattleCmdFunc)(void);
 
 struct funcStack
@@ -725,7 +751,6 @@ void EmitEffectivenessSound(u8 a, u16 sound); //0x2B
 void Emitcmd44(u8 a, u16 sound);    //0x2C
 void EmitFaintingCry(u8 a); //0x2D
 void EmitIntroSlide(u8 a, u8 b); //0x2E
-void Emitcmd48(u8 a, u8 *b, u8 c); //0x30
 void Emitcmd49(u8 a);  //0x31
 void EmitSpriteInvisibility(u8 a, u8 b); //0x33
 void EmitBattleAnimation(u8 a, u8 b, u16 c); //0x34

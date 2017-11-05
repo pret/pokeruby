@@ -49,7 +49,7 @@ u8 ShowPokedexCryScreen(struct CryRelatedStruct *cry, u8 arg1) {
         u32 r12;
         int x, y;
 
-        vram = (void *) BG_SCREEN_ADDR(cry->unk2);
+        vram = BG_SCREEN_ADDR(cry->unk2);
 
         r12 = (u32) (cry->unk0 << 18) >> 23;
 

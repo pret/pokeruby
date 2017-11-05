@@ -257,7 +257,7 @@ static bool8 sub_8084398(u8 taskId, struct Task *task, struct MapObject *trainer
 {
     u8 direction;
 
-    FieldObjectGetLocalIdAndMap(trainerObj, (u8 *)&gFieldEffectArguments[0], (u8 *)&gFieldEffectArguments[1], (u8 *)&gFieldEffectArguments[2]);
+    FieldObjectGetLocalIdAndMap(trainerObj, &gFieldEffectArguments[0], &gFieldEffectArguments[1], &gFieldEffectArguments[2]);
     FieldEffectStart(FLDEFF_EXCLAMATION_MARK_ICON_1);
     direction = GetFaceDirectionAnimId(trainerObj->mapobj_unk_18);
     FieldObjectSetSpecialAnim(trainerObj, direction);

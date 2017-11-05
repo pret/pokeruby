@@ -252,7 +252,7 @@ void SetOamMatrix(u8 matrixNum, u16 a, u16 b, u16 c, u16 d);
 void CalcCenterToCornerVec(struct Sprite *sprite, u8 shape, u8 size, u8 affineMode);
 void SpriteCallbackDummy(struct Sprite *sprite);
 void ProcessSpriteCopyRequests(void);
-void RequestSpriteCopy(const u8 *src, u8 *dest, u16 size);
+void RequestSpriteCopy(const void *src, u8 *dest, u16 size);
 void FreeSpriteTiles(struct Sprite *sprite);
 void FreeSpritePalette(struct Sprite *sprite);
 void FreeSpriteOamMatrix(struct Sprite *sprite);

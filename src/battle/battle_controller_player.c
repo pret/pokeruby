@@ -841,7 +841,7 @@ void sub_802CA60(void)
 
                 for (i = 0; i < 4; i++)
                 {
-                    SetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_MOVE1 + i, (u8 *)&sp0.moves[i]);
+                    SetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_MOVE1 + i, &sp0.moves[i]);
                     SetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_PP1 + i, &sp0.pp[i]);
                 }
                 SetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_PP_BONUSES, &totalPPBonuses);
@@ -1149,7 +1149,7 @@ void sub_802D924(u8 taskId)
         {
             u8 savedActiveBank;
 
-            SetMonData(pkmn, MON_DATA_EXP, (u8 *)&nextLvlExp);
+            SetMonData(pkmn, MON_DATA_EXP, &nextLvlExp);
             CalculateMonStats(pkmn);
             gainedExp -= nextLvlExp - currExp;
             savedActiveBank = gActiveBank;
@@ -1166,7 +1166,7 @@ void sub_802D924(u8 taskId)
         else
         {
             currExp += gainedExp;
-            SetMonData(pkmn, MON_DATA_EXP, (u8 *)&currExp);
+            SetMonData(pkmn, MON_DATA_EXP, &currExp);
             gBattleBankFunc[bank] = sub_802D90C;
             DestroyTask(taskId);
         }
@@ -1231,7 +1231,7 @@ void sub_802DB6C(u8 taskId)
                 u8 r5;
                 u32 asdf;
 
-                SetMonData(pkmn, MON_DATA_EXP, (u8 *)&sp0);
+                SetMonData(pkmn, MON_DATA_EXP, &sp0);
                 CalculateMonStats(pkmn);
                 //r10 -= sp0 - sp4;
                 asdf = sp0 - sp4;
@@ -1247,7 +1247,7 @@ void sub_802DB6C(u8 taskId)
             {
                 //u32 asdf = sp4 + r10;
                 sp4 += r10;
-                SetMonData(pkmn, MON_DATA_EXP, (u8 *)&sp4);
+                SetMonData(pkmn, MON_DATA_EXP, &sp4);
                 gBattleBankFunc[r7] = sub_802D90C;
                 DestroyTask(taskId);
             }
@@ -1773,9 +1773,7 @@ u32 dp01_getattr_by_ch1_for_player_pokemon_(u8 a, u8 *buffer)
         GetMonData(&gPlayerParty[a], MON_DATA_NICKNAME, nickname);
         StringCopy10(battlePokemon.nickname, nickname);
         GetMonData(&gPlayerParty[a], MON_DATA_OT_NAME, battlePokemon.otName);
-        src = (u8 *)&battlePokemon;
-        for (size = 0; size < sizeof(battlePokemon); size++)
-            buffer[size] = src[size];
+        MEMCPY_ALT(&battlePokemon, buffer, sizeof(battlePokemon), size, src);
         break;
     case 1:
         data16 = GetMonData(&gPlayerParty[a], MON_DATA_SPECIES);
@@ -1796,9 +1794,7 @@ u32 dp01_getattr_by_ch1_for_player_pokemon_(u8 a, u8 *buffer)
             moveData.pp[size] = GetMonData(&gPlayerParty[a], MON_DATA_PP1 + size);
         }
         moveData.ppBonuses = GetMonData(&gPlayerParty[a], MON_DATA_PP_BONUSES);
-        src = (u8 *)&moveData;
-        for (size = 0; size < sizeof(moveData); size++)
-            buffer[size] = src[size];
+        MEMCPY_ALT(&moveData, buffer, sizeof(moveData), size, src);
         break;
     case 4:
     case 5:
@@ -2035,13 +2031,13 @@ u32 dp01_getattr_by_ch1_for_player_pokemon_(u8 a, u8 *buffer)
 
 void PlayerHandlecmd1(void)
 {
-    struct BattlePokemon battleMon;  // I think this is a BattlePokemon
-    u8 *src = (u8 *)&gPlayerParty[gBattlePartyID[gActiveBank]] + gBattleBufferA[gActiveBank][1];
-    u8 *dst = (u8 *)&battleMon + gBattleBufferA[gActiveBank][1];
+    struct BattlePokemon battleMon;
     u8 i;
+    // TODO: Maybe fix this. Integrating this into MEMSET_ALT is too hard.
+    u8 *src = (u8 *)&gPlayerParty[gBattlePartyID[gActiveBank]] + gBattleBufferA[gActiveBank][1];
+    u8 *dst;
 
-    for (i = 0; i < gBattleBufferA[gActiveBank][2]; i++)
-        dst[i] = src[i];
+    MEMSET_ALT(&battleMon + gBattleBufferA[gActiveBank][1], src[i], gBattleBufferA[gActiveBank][2], i, dst);
     Emitcmd29(1, gBattleBufferA[gActiveBank][2], dst);
     PlayerBufferExecCompleted();
 }
@@ -2081,38 +2077,38 @@ void dp01_setattr_by_ch1_for_player_pokemon(u8 a)
         {
             u8 iv;
 
-            SetMonData(&gPlayerParty[a], MON_DATA_SPECIES, (u8 *)&battlePokemon->species);
-            SetMonData(&gPlayerParty[a], MON_DATA_HELD_ITEM, (u8 *)&battlePokemon->item);
+            SetMonData(&gPlayerParty[a], MON_DATA_SPECIES, &battlePokemon->species);
+            SetMonData(&gPlayerParty[a], MON_DATA_HELD_ITEM, &battlePokemon->item);
             for (i = 0; i < 4; i++)
             {
-                SetMonData(&gPlayerParty[a], MON_DATA_MOVE1 + i, (u8 *)&battlePokemon->moves[i]);
-                SetMonData(&gPlayerParty[a], MON_DATA_PP1 + i, (u8 *)&battlePokemon->pp[i]);
+                SetMonData(&gPlayerParty[a], MON_DATA_MOVE1 + i, &battlePokemon->moves[i]);
+                SetMonData(&gPlayerParty[a], MON_DATA_PP1 + i, &battlePokemon->pp[i]);
             }
-            SetMonData(&gPlayerParty[a], MON_DATA_PP_BONUSES, (u8 *)&battlePokemon->ppBonuses);
-            SetMonData(&gPlayerParty[a], MON_DATA_FRIENDSHIP, (u8 *)&battlePokemon->friendship);
-            SetMonData(&gPlayerParty[a], MON_DATA_EXP, (u8 *)&battlePokemon->experience);
+            SetMonData(&gPlayerParty[a], MON_DATA_PP_BONUSES, &battlePokemon->ppBonuses);
+            SetMonData(&gPlayerParty[a], MON_DATA_FRIENDSHIP, &battlePokemon->friendship);
+            SetMonData(&gPlayerParty[a], MON_DATA_EXP, &battlePokemon->experience);
             iv = battlePokemon->hpIV;
-            SetMonData(&gPlayerParty[a], MON_DATA_HP_IV, (u8 *)&iv);
+            SetMonData(&gPlayerParty[a], MON_DATA_HP_IV, &iv);
             iv = battlePokemon->attackIV;
-            SetMonData(&gPlayerParty[a], MON_DATA_ATK_IV, (u8 *)&iv);
+            SetMonData(&gPlayerParty[a], MON_DATA_ATK_IV, &iv);
             iv = battlePokemon->defenseIV;
-            SetMonData(&gPlayerParty[a], MON_DATA_DEF_IV, (u8 *)&iv);
+            SetMonData(&gPlayerParty[a], MON_DATA_DEF_IV, &iv);
             iv = battlePokemon->speedIV;
-            SetMonData(&gPlayerParty[a], MON_DATA_SPEED_IV, (u8 *)&iv);
+            SetMonData(&gPlayerParty[a], MON_DATA_SPEED_IV, &iv);
             iv = battlePokemon->spAttackIV;
-            SetMonData(&gPlayerParty[a], MON_DATA_SPATK_IV, (u8 *)&iv);
+            SetMonData(&gPlayerParty[a], MON_DATA_SPATK_IV, &iv);
             iv = battlePokemon->spDefenseIV;
-            SetMonData(&gPlayerParty[a], MON_DATA_SPDEF_IV, (u8 *)&iv);
-            SetMonData(&gPlayerParty[a], MON_DATA_PERSONALITY, (u8 *)&battlePokemon->personality);
-            SetMonData(&gPlayerParty[a], MON_DATA_STATUS, (u8 *)&battlePokemon->status1);
-            SetMonData(&gPlayerParty[a], MON_DATA_LEVEL, (u8 *)&battlePokemon->level);
-            SetMonData(&gPlayerParty[a], MON_DATA_HP, (u8 *)&battlePokemon->hp);
-            SetMonData(&gPlayerParty[a], MON_DATA_MAX_HP, (u8 *)&battlePokemon->maxHP);
-            SetMonData(&gPlayerParty[a], MON_DATA_ATK, (u8 *)&battlePokemon->attack);
-            SetMonData(&gPlayerParty[a], MON_DATA_DEF, (u8 *)&battlePokemon->defense);
-            SetMonData(&gPlayerParty[a], MON_DATA_SPEED, (u8 *)&battlePokemon->speed);
-            SetMonData(&gPlayerParty[a], MON_DATA_SPATK, (u8 *)&battlePokemon->spAttack);
-            SetMonData(&gPlayerParty[a], MON_DATA_SPDEF, (u8 *)&battlePokemon->spDefense);
+            SetMonData(&gPlayerParty[a], MON_DATA_SPDEF_IV, &iv);
+            SetMonData(&gPlayerParty[a], MON_DATA_PERSONALITY, &battlePokemon->personality);
+            SetMonData(&gPlayerParty[a], MON_DATA_STATUS, &battlePokemon->status1);
+            SetMonData(&gPlayerParty[a], MON_DATA_LEVEL, &battlePokemon->level);
+            SetMonData(&gPlayerParty[a], MON_DATA_HP, &battlePokemon->hp);
+            SetMonData(&gPlayerParty[a], MON_DATA_MAX_HP, &battlePokemon->maxHP);
+            SetMonData(&gPlayerParty[a], MON_DATA_ATK, &battlePokemon->attack);
+            SetMonData(&gPlayerParty[a], MON_DATA_DEF, &battlePokemon->defense);
+            SetMonData(&gPlayerParty[a], MON_DATA_SPEED, &battlePokemon->speed);
+            SetMonData(&gPlayerParty[a], MON_DATA_SPATK, &battlePokemon->spAttack);
+            SetMonData(&gPlayerParty[a], MON_DATA_SPDEF, &battlePokemon->spDefense);
         }
         break;
     case 1:
@@ -2124,8 +2120,8 @@ void dp01_setattr_by_ch1_for_player_pokemon(u8 a)
     case 3:
         for (i = 0; i < 4; i++)
         {
-            SetMonData(&gPlayerParty[a], MON_DATA_MOVE1 + i, (u8 *)&moveData->moves[i]);
-            SetMonData(&gPlayerParty[a], MON_DATA_PP1 + i, (u8 *)&moveData->pp[i]);
+            SetMonData(&gPlayerParty[a], MON_DATA_MOVE1 + i, &moveData->moves[i]);
+            SetMonData(&gPlayerParty[a], MON_DATA_PP1 + i, &moveData->pp[i]);
         }
         SetMonData(&gPlayerParty[a], MON_DATA_PP_BONUSES, &moveData->ppBonuses);
         break;
@@ -2288,11 +2284,11 @@ void dp01_setattr_by_ch1_for_player_pokemon(u8 a)
 
 void PlayerHandlecmd3(void)
 {
-    u8 *dst = (u8 *)&gPlayerParty[gBattlePartyID[gActiveBank]] + gBattleBufferA[gActiveBank][1];
     u8 i;
+    u8 *dst;
 
-    for (i = 0; i < gBattleBufferA[gActiveBank][2]; i++)
-        dst[i] = gBattleBufferA[gActiveBank][3 + i];
+    MEMSET_ALT(&gPlayerParty[gBattlePartyID[gActiveBank]] + gBattleBufferA[gActiveBank][1], gBattleBufferA[gActiveBank][3 + i], 
+        gBattleBufferA[gActiveBank][2], i, dst);
     PlayerBufferExecCompleted();
 }
 
@@ -2599,7 +2595,7 @@ void PlayerHandlecmd18(void)
 
     sub_802E3E4(gActionSelectionCursor[gActiveBank], 0);
 
-    StrCpyDecodeToDisplayedStringBattle((u8 *) gUnknown_08400CA8);
+    StrCpyDecodeToDisplayedStringBattle(gUnknown_08400CA8);
     InitWindow(&gUnknown_03004210, gDisplayedStringBattle, SUB_803037C_TILE_DATA_OFFSET, 2, 35);
     sub_8002F44(&gUnknown_03004210);
 }

@@ -128,7 +128,7 @@ s32 DoPoisonFieldEffect(void)
                 hp--;
             if (hp == 0)
                 numFainting++; //Pokemon will now faint due to poison
-            SetMonData(pkmn, MON_DATA_HP, (u8 *)&hp);
+            SetMonData(pkmn, MON_DATA_HP, &hp);
             numPoisoned++;
         }
         pkmn++;

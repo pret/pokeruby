@@ -954,7 +954,7 @@ static u16 LinkTestCalcBlockChecksum(void *data, u16 size)
 
 static void PrintHexDigit(u8 tileNum, u8 x, u8 y)
 {
-    u16 *tilemap = (u16 *)BG_SCREEN_ADDR(gLinkTestBGInfo.screenBaseBlock);
+    u16 *tilemap = BG_SCREEN_ADDR(gLinkTestBGInfo.screenBaseBlock);
     tilemap[(32 * y) + x] = (gLinkTestBGInfo.paletteNum << 12) | (tileNum + 1);
 }
 

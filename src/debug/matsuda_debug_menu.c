@@ -516,10 +516,10 @@ void SetDebugMonForContest(void)
     SetMonData(&gPlayerParty[0], MON_DATA_SMART, &gContestMons[gContestPlayerMonIndex].smart);
     SetMonData(&gPlayerParty[0], MON_DATA_TOUGH, &gContestMons[gContestPlayerMonIndex].tough);
     SetMonData(&gPlayerParty[0], MON_DATA_SHEEN, &gContestMons[gContestPlayerMonIndex].sheen);
-    SetMonData(&gPlayerParty[0], MON_DATA_MOVE1, (const u8 *) &gContestMons[gContestPlayerMonIndex].moves[0]);
-    SetMonData(&gPlayerParty[0], MON_DATA_MOVE2, (const u8 *) &gContestMons[gContestPlayerMonIndex].moves[1]);
-    SetMonData(&gPlayerParty[0], MON_DATA_MOVE3, (const u8 *) &gContestMons[gContestPlayerMonIndex].moves[2]);
-    SetMonData(&gPlayerParty[0], MON_DATA_MOVE4, (const u8 *) &gContestMons[gContestPlayerMonIndex].moves[3]);
+    SetMonData(&gPlayerParty[0], MON_DATA_MOVE1, &gContestMons[gContestPlayerMonIndex].moves[0]);
+    SetMonData(&gPlayerParty[0], MON_DATA_MOVE2, &gContestMons[gContestPlayerMonIndex].moves[1]);
+    SetMonData(&gPlayerParty[0], MON_DATA_MOVE3, &gContestMons[gContestPlayerMonIndex].moves[2]);
+    SetMonData(&gPlayerParty[0], MON_DATA_MOVE4, &gContestMons[gContestPlayerMonIndex].moves[3]);
 }
 
 void sub_80AA754(struct Sprite *sprite)

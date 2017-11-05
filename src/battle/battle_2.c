@@ -999,7 +999,7 @@ u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
 
                 for (j = 0; j < 4; j++)
                 {
-                    SetMonData(&party[i], MON_DATA_MOVE1 + j, (u8 *)&partyData[i].moves[j]);
+                    SetMonData(&party[i], MON_DATA_MOVE1 + j, &partyData[i].moves[j]);
                     SetMonData(&party[i], MON_DATA_PP1 + j, &gBattleMoves[partyData[i].moves[j]].pp);
                 }
                 break;
@@ -1014,7 +1014,7 @@ u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
                 fixedIV = partyData[i].iv * 31 / 255;
                 CreateMon(&party[i], partyData[i].species, partyData[i].level, fixedIV, TRUE, personalityValue, 2, 0);
 
-                SetMonData(&party[i], MON_DATA_HELD_ITEM, (u8 *)&partyData[i].heldItem);
+                SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
                 break;
             }
             case 3:
@@ -1027,10 +1027,10 @@ u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
                 fixedIV = partyData[i].iv * 31 / 255;
                 CreateMon(&party[i], partyData[i].species, partyData[i].level, fixedIV, TRUE, personalityValue, 2, 0);
 
-                SetMonData(&party[i], MON_DATA_HELD_ITEM, (u8 *)&partyData[i].heldItem);
+                SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
                 for (j = 0; j < 4; j++)
                 {
-                    SetMonData(&party[i], MON_DATA_MOVE1 + j, (u8 *)&partyData[i].moves[j]);
+                    SetMonData(&party[i], MON_DATA_MOVE1 + j, &partyData[i].moves[j]);
                     SetMonData(&party[i], MON_DATA_PP1 + j, &gBattleMoves[partyData[i].moves[j]].pp);
                 }
                 break;
@@ -1375,6 +1375,7 @@ void sub_8010384(struct Sprite *sprite)
 void sub_8010494(struct Sprite *sprite)
 {
     s32 i;
+    u8 *dst;
 
     sprite->data4--;
     if (sprite->data4 == 0)
@@ -1389,8 +1390,8 @@ void sub_8010494(struct Sprite *sprite)
         }
         else
         {
-            u8 *dst = (u8 *)gUnknown_081FAF4C[GetBankIdentity(sprite->data0)] + (gBattleMonForms[sprite->data0] << 11) + (sprite->data3 << 8);
-
+            // this should use a MEMSET_ALT, but *(dst++) wont match with it.
+            dst = (u8 *)gUnknown_081FAF4C[GetBankIdentity(sprite->data0)] + (gBattleMonForms[sprite->data0] << 11) + (sprite->data3 << 8);
             for (i = 0; i < 0x100; i++)
                 *(dst++) = 0;
             StartSpriteAnim(sprite, gBattleMonForms[sprite->data0]);
@@ -1567,10 +1568,7 @@ void sub_8010874(void)
     {
         gStatuses3[i] = 0;
 
-        r4 = (u8 *)&gDisableStructs[i];
-        for (j = 0; j < (u32)0x1C; j++)
-            r4[j] = 0;
-
+        MEMSET_ALT(&gDisableStructs[i], 0, 0x1C, j, r4);
         gDisableStructs[i].isFirstTurn= 2;
         gUnknown_02024C70[i] = 0;
         gLastUsedMove[i] = 0;
@@ -1586,19 +1584,14 @@ void sub_8010874(void)
     for (i = 0; i < 2; i++)
     {
         gSideAffecting[i] = 0;
-
-        r4 = (u8 *)&gSideTimer[i];
-        for (j = 0; j < 12; j++)
-            r4[j] = 0;
+        MEMSET_ALT(&gSideTimer[i], 0, 12, j, r4);
     }
 
     gBankAttacker = 0;
     gBankTarget = 0;
     gBattleWeather = 0;
 
-    r4 = (u8 *)&gWishFutureKnock;
-    for (i = 0; i < (u32)0x2C; i++)
-        r4[i] = 0;
+    MEMSET_ALT(&gWishFutureKnock, 0, 0x2C, i, r4);
 
     gHitMarker = 0;
     if ((gBattleTypeFlags & BATTLE_TYPE_LINK) == 0 && gSaveBlock2.optionsBattleSceneOff == TRUE)
@@ -1721,9 +1714,7 @@ void SwitchInClearStructs(void)
     gActionSelectionCursor[gActiveBank] = 0;
     gMoveSelectionCursor[gActiveBank] = 0;
 
-    ptr = (u8 *)&gDisableStructs[gActiveBank];
-    for (i = 0; i < (u32)0x1C; i++)
-        ptr[i] = 0;
+    MEMSET_ALT(&gDisableStructs[gActiveBank], 0, 0x1C, i, ptr);
 
     if (gBattleMoves[gCurrentMove].effect == EFFECT_BATON_PASS)
     {
@@ -1778,9 +1769,7 @@ void UndoEffectsAfterFainting(void)
     gActionSelectionCursor[gActiveBank] = 0;
     gMoveSelectionCursor[gActiveBank] = 0;
 
-    ptr = (u8 *)&gDisableStructs[gActiveBank];
-    for (i = 0; i < (u32)0x1C; i++)
-        ptr[i] = 0;
+    MEMSET_ALT(&gDisableStructs[gActiveBank], 0, 0x1C, i, ptr);
     gProtectStructs[gActiveBank].protected = 0;
     gProtectStructs[gActiveBank].endured = 0;
     gProtectStructs[gActiveBank].onlyStruggle = 0;
@@ -1873,18 +1862,13 @@ void sub_8011384(void)
             if ((gBattleTypeFlags & BATTLE_TYPE_SAFARI)
              && GetBankSide(gActiveBank) == 0)
             {
-                ptr = (u8 *)&gBattleMons[gActiveBank];
-                for (i = 0; i < (u32)0x58; i++)
-                    ptr[i] = 0;
+                MEMSET_ALT(&gBattleMons[gActiveBank], 0, 0x58, i, ptr);
             }
             else
             {
                 u8 r0;
 
-                ptr = (u8 *)&gBattleMons[gActiveBank];
-                for (i = 0; i < (u32)0x58; i++)
-                    ptr[i] = gBattleBufferB[gActiveBank][4 + i];
-
+                MEMSET_ALT(&gBattleMons[gActiveBank], gBattleBufferB[gActiveBank][4 + i], 0x58, i, ptr);
                 gBattleMons[gActiveBank].type1 = gBaseStats[gBattleMons[gActiveBank].species].type1;
                 gBattleMons[gActiveBank].type2 = gBaseStats[gBattleMons[gActiveBank].species].type2;
                 gBattleMons[gActiveBank].ability = GetAbilityBySpecies(gBattleMons[gActiveBank].species, gBattleMons[gActiveBank].altAbility);
@@ -1943,11 +1927,7 @@ void bc_801333C(void)
 
     if (gBattleExecBuffer == 0)
     {
-        struct
-        {
-            u16 hp;
-            u32 status;
-        } sp0[6];
+		struct HpAndStatus hpStatus[6];
 
         if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
         {
@@ -1956,17 +1936,17 @@ void bc_801333C(void)
                 if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) == 0
                  || GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
                 {
-                    sp0[i].hp = 0xFFFF;
-                    sp0[i].status = 0;
+                    hpStatus[i].hp = 0xFFFF;
+                    hpStatus[i].status = 0;
                 }
                 else
                 {
-                    sp0[i].hp = GetMonData(&gEnemyParty[i], MON_DATA_HP);
-                    sp0[i].status = GetMonData(&gEnemyParty[i], MON_DATA_STATUS);
+                    hpStatus[i].hp = GetMonData(&gEnemyParty[i], MON_DATA_HP);
+                    hpStatus[i].status = GetMonData(&gEnemyParty[i], MON_DATA_STATUS);
                 }
             }
             gActiveBank = GetBankByPlayerAI(1);
-            Emitcmd48(0, (u8 *)sp0, 0x80);
+            EmitDrawPartyStatusSummary(0, hpStatus, 0x80);
             MarkBufferBankForExecution(gActiveBank);
 
             for (i = 0; i < 6; i++)
@@ -1974,17 +1954,17 @@ void bc_801333C(void)
                 if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == 0
                  || GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
                 {
-                    sp0[i].hp = 0xFFFF;
-                    sp0[i].status = 0;
+                    hpStatus[i].hp = 0xFFFF;
+                    hpStatus[i].status = 0;
                 }
                 else
                 {
-                    sp0[i].hp = GetMonData(&gPlayerParty[i], MON_DATA_HP);
-                    sp0[i].status = GetMonData(&gPlayerParty[i], MON_DATA_STATUS);
+                    hpStatus[i].hp = GetMonData(&gPlayerParty[i], MON_DATA_HP);
+                    hpStatus[i].status = GetMonData(&gPlayerParty[i], MON_DATA_STATUS);
                 }
             }
             gActiveBank = GetBankByPlayerAI(0);
-            Emitcmd48(0, (u8 *)sp0, 0x80);
+            EmitDrawPartyStatusSummary(0, hpStatus, 0x80);
             MarkBufferBankForExecution(gActiveBank);
 
             gBattleMainFunc = bc_battle_begin_message;
@@ -1999,13 +1979,13 @@ void bc_801333C(void)
                 if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == 0
                  || GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
                 {
-                    sp0[i].hp = 0xFFFF;
-                    sp0[i].status = 0;
+                    hpStatus[i].hp = 0xFFFF;
+                    hpStatus[i].status = 0;
                 }
                 else
                 {
-                    sp0[i].hp = GetMonData(&gPlayerParty[i], MON_DATA_HP);
-                    sp0[i].status = GetMonData(&gPlayerParty[i], MON_DATA_STATUS);
+                    hpStatus[i].hp = GetMonData(&gPlayerParty[i], MON_DATA_HP);
+                    hpStatus[i].status = GetMonData(&gPlayerParty[i], MON_DATA_STATUS);
                 }
             }
 

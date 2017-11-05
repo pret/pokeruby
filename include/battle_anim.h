@@ -3,10 +3,6 @@
 
 #include "sprite.h"
 
-#define SCRIPT_READ_8(ptr)  ((ptr)[0])
-#define SCRIPT_READ_16(ptr) ((ptr)[0] | ((ptr)[1] << 8))
-#define SCRIPT_READ_32(ptr) ((ptr)[0] + ((ptr)[1] << 8) + ((ptr)[2] << 16) + ((ptr)[3] << 24))
-
 #define REG_BGnCNT_BITFIELD(n) (*(struct BGCntrlBitfield *)REG_ADDR_BG##n##CNT)
 #define REG_BG1CNT_BITFIELD REG_BGnCNT_BITFIELD(1)
 #define REG_BG2CNT_BITFIELD REG_BGnCNT_BITFIELD(2)
@@ -55,13 +51,12 @@ struct UnknownStruct3
 void DoMoveAnim(const u8 *const moveAnims[], u16 b, u8 c);
 bool8 IsAnimBankSpriteVisible(u8 a);
 void sub_8076034(u8, u8);
-bool8 IsContest(void);
+bool8 NotInBattle(void);
 void battle_anim_clear_some_data(void);
 void move_anim_8072740(struct Sprite *sprite);
 void DestroyAnimVisualTask(u8 task);
 void DestroyAnimVisualTask(u8 task);
 bool8 IsAnimBankSpriteVisible(u8);
-u8 IsContest();
 
 
 #endif

@@ -541,11 +541,13 @@ union PokemonSubstruct *GetSubstruct(struct BoxPokemon *boxMon, u32 personality,
 // but they are not used since some code erroneously omits the third arg.
 // u32 GetMonData(struct Pokemon *mon, s32 field, u8 *data);
 // u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data);
+// void SetMonData(struct Pokemon *mon, s32 field, const void *dataArg);
+// void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg);
 u32 GetMonData();
 u32 GetBoxMonData();
+void SetMonData();
+void SetBoxMonData();
 
-void SetMonData(struct Pokemon *mon, s32 field, const u8 *data);
-void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const u8 *data);
 void CopyMon(void *dest, void *src, size_t size);
 u8 GiveMonToPlayer(struct Pokemon *mon);
 u8 SendMonToPC(struct Pokemon *mon);

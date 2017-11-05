@@ -1494,7 +1494,7 @@ const union AnimCmd *const gSpriteAnimTable_83EC930[] = {
 };
 
 const struct SpriteFrameImage gSpriteImageTable_83EC934[] = {
-    {.data = (u8 *)&gUnknown_02038900.image, .size = sizeof gUnknown_02038900.image}
+    {.data = gUnknown_02038900.image, .size = sizeof(gUnknown_02038900.image)}
 };
 
 const struct SpriteTemplate gSpriteTemplate_83EC93C = {

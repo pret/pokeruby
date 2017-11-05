@@ -769,7 +769,7 @@ void sub_80A8E04(u8 taskId)
     TASK.data[4] = gBattleAnimArgs[1];
     TASK.data[5] = spriteId;
     TASK.data[6] = gBattleAnimArgs[3];
-    if (IsContest())
+    if (NotInBattle())
     {
         TASK.data[7] = 1;
     }
@@ -786,7 +786,7 @@ void sub_80A8E04(u8 taskId)
     }
     if (TASK.data[7])
     {
-        if (!IsContest())
+        if (!NotInBattle())
         {
             TASK.data[3] *= -1;
             TASK.data[4] *= -1;

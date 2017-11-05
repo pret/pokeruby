@@ -294,7 +294,7 @@ void sub_8064990(u8 a1, u8 dir)
 
 u32 oe_exec_and_other_stuff(u8 fieldEffectId, struct MapObject *mapObject)
 {
-    FieldObjectGetLocalIdAndMap(mapObject, (u8 *)&gFieldEffectArguments[0], (u8 *)&gFieldEffectArguments[1], (u8 *)&gFieldEffectArguments[2]);
+    FieldObjectGetLocalIdAndMap(mapObject, &gFieldEffectArguments[0], &gFieldEffectArguments[1], &gFieldEffectArguments[2]);
     return FieldEffectStart(fieldEffectId);
 }
 

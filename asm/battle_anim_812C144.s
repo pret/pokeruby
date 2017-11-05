@@ -241,7 +241,7 @@ sub_812C2BC: @ 812C2BC
 	lsls r1, 23
 	adds r0, r1
 	lsrs r4, r0, 16
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812C31A
@@ -954,7 +954,7 @@ sub_812C848: @ 812C848
 	ldrsh r1, [r5, r2]
 	adds r0, r4, 0
 	bl sub_807867C
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _0812C89C
@@ -1473,7 +1473,7 @@ sub_812CC44: @ 812CC44
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812CC7A
@@ -1518,7 +1518,7 @@ sub_812CCA8: @ 812CCA8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812CCCA
@@ -3125,7 +3125,7 @@ _0812D8C4:
 	ldrb r1, [r5]
 	mov r0, sp
 	bl sub_8078954
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	mov r9, r4
 	cmp r0, 0
@@ -3159,7 +3159,7 @@ _0812D906:
 	ldr r1, _0812D9DC @ =0x84000200
 	str r1, [r0, 0x8]
 	ldr r0, [r0, 0x8]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812DA20
@@ -3350,7 +3350,7 @@ _0812DAAE:
 	negs r0, r0
 	ands r0, r1
 	strb r0, [r2]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _0812DAF4
@@ -3507,7 +3507,7 @@ _0812DBD0:
 	movs r1, 0x1
 	orrs r0, r1
 	strb r0, [r4]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _0812DC12
@@ -3542,7 +3542,7 @@ _0812DC12:
 	lsls r1, 4
 	movs r2, 0x20
 	bl LoadCompressedPalette
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812DC9C
@@ -3786,7 +3786,7 @@ _0812DE0C:
 	ldr r1, _0812DE98 @ =0x85000200
 	str r1, [r0, 0x8]
 	ldr r0, [r0, 0x8]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _0812DE5A
@@ -4226,7 +4226,7 @@ _0812E194:
 	movs r1, 0x1
 	orrs r0, r1
 	strb r0, [r4]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _0812E1D4
@@ -4261,7 +4261,7 @@ _0812E1D4:
 	lsls r1, 4
 	movs r2, 0x20
 	bl LoadCompressedPalette
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812E260
@@ -4529,7 +4529,7 @@ _0812E420:
 	ldr r0, _0812E484 @ =0x85000200
 	str r0, [r1, 0x8]
 	ldr r0, [r1, 0x8]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _0812E450
@@ -5513,7 +5513,7 @@ _0812EBC2:
 	bl obj_id_set_rotscale
 	adds r0, r5, 0
 	bl sub_8079A64
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _0812EBE8
@@ -6047,7 +6047,7 @@ sub_812EFC8: @ 812EFC8
 	str r0, [sp, 0x10]
 	movs r0, 0
 	bl GetAnimBankSpriteId
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812F004
@@ -8382,7 +8382,7 @@ sub_81301EC: @ 81301EC
 	lsls r1, 3
 	ldr r0, _08130218 @ =gTasks
 	adds r6, r1, r0
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -9863,7 +9863,7 @@ sub_8130D20: @ 8130D20
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0x26]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _08130DA8
@@ -10557,7 +10557,7 @@ sub_8131264: @ 8131264
 	lsls r0, 24
 	cmp r0, 0
 	beq _08131290
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _081312A8
@@ -10690,7 +10690,7 @@ _08131384:
 	ldrb r0, [r4]
 	movs r1, 0
 	bl refresh_graphics_maybe
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _081313C6
@@ -11140,7 +11140,7 @@ sub_81316F8: @ 81316F8
 	lsls r0, 24
 	lsrs r4, r0, 24
 	mov r10, r4
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0
@@ -11560,7 +11560,7 @@ _08131A2E:
 _08131A3C: .4byte gSprites
 _08131A40: .4byte gTasks
 _08131A44:
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _08131A74
@@ -12151,7 +12151,7 @@ _08131ECA:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08131FF4
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _08131FF4

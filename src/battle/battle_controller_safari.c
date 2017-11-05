@@ -483,7 +483,7 @@ void SafariHandlecmd18(void)
         nullsub_8(i);
 
     sub_802E3E4(gActionSelectionCursor[gActiveBank], 0);
-    StrCpyDecodeToDisplayedStringBattle((u8 *) gUnknown_08400CBB);
+    StrCpyDecodeToDisplayedStringBattle(gUnknown_08400CBB);
 
     InitWindow(&gUnknown_03004210, gDisplayedStringBattle, SUB_812BB10_TILE_DATA_OFFSET, 2, 35);
     sub_8002F44(&gUnknown_03004210);

@@ -377,7 +377,7 @@ sub_812B18C: @ 812B18C
 	bl sub_8076F98
 	lsls r0, 24
 	lsrs r6, r0, 24
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812B1CC
@@ -524,7 +524,7 @@ sub_812B2B8: @ 812B2B8
 	bl sub_8076F98
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812B2DC

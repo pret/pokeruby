@@ -1077,6 +1077,7 @@ void CreateSecretBaseEnemyParty(struct SecretBaseRecord *secretBaseRecord)
                 2,
                 0);
 
+            // these two SetMonData calls require the (u8 *) cast since SetMonData is declared in this function.
             SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, (u8 *)&gSecretBaseRecord.partyHeldItems[i]);
 
             for (j = 0; j < 6; j++)
