@@ -32,7 +32,7 @@ extern u8 sub_807D770(void);
 extern void sub_808B020(void);
 extern void sub_80F944C(void);
 
-static EWRAM_DATA u8 *gPcItemMenuOptionOrder = NULL;
+static EWRAM_DATA const u8 *gPcItemMenuOptionOrder = NULL;
 
 static u8 gPcItemMenuOptionsNum;
 
@@ -211,14 +211,14 @@ void NewGameInitPCItems(void)
 
 void BedroomPC(void)
 {
-    gPcItemMenuOptionOrder = (u8 *)gBedroomPC_OptionOrder;
+    gPcItemMenuOptionOrder = gBedroomPC_OptionOrder;
     gPcItemMenuOptionsNum = 4;
     DisplayItemMessageOnField(CreateTask(TaskDummy, 0), gOtherText_WhatWillYouDo, InitPlayerPCMenu, 0);
 }
 
 void PlayerPC(void)
 {
-    gPcItemMenuOptionOrder = (u8 *)gPlayerPC_OptionOrder;
+    gPcItemMenuOptionOrder = gPlayerPC_OptionOrder;
     gPcItemMenuOptionsNum = 3;
     DisplayItemMessageOnField(CreateTask(TaskDummy, 0), gOtherText_WhatWillYouDo, InitPlayerPCMenu, 0);
 }
@@ -1064,7 +1064,7 @@ static void Mailbox_DrawMailList(u8 taskId) // taskId is unused
 
         if(i != mailbox->count)
         {
-            StringCopy(gStringVar1, (u8 *)gSaveBlock1.mail[i + 6].playerName);
+            StringCopy(gStringVar1, gSaveBlock1.mail[i + 6].playerName);
             SanitizeNameString(gStringVar1);
             MenuPrint(gStringVar1, 0x15, yCoord + 2);
         }

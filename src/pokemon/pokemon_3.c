@@ -203,7 +203,7 @@ void sub_803F324(int stat)
 u8 *sub_803F378(u16 itemId)
 {
     int i;
-    u8 *itemEffect;
+    const u8 *itemEffect;
 
     if (itemId == ITEM_ENIGMA_BERRY)
     {
@@ -218,7 +218,7 @@ u8 *sub_803F378(u16 itemId)
     }
     else
     {
-        itemEffect = (u8 *) gItemEffectTable[itemId - 13];
+        itemEffect = gItemEffectTable[itemId - 13];
     }
 
     gStringBank = gBankInMenu;
