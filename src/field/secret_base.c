@@ -1402,44 +1402,41 @@ u8 sub_80BD1B0(void)
     return 0;
 }
 
-#ifdef NONMATCHING
 u8 sub_80BD1FC(struct SecretBaseRecord *secretBase)
 {
     s16 secretBaseIndex;
 
-    if (!secretBase->secretBaseId)
+    if (secretBase->secretBaseId == 0)
     {
         return 0;
     }
 
     secretBaseIndex = sub_80BD12C(secretBase->secretBaseId);
-    if (secretBaseIndex)
+    if (secretBaseIndex != 0)
     {
         if (secretBaseIndex != -1)
         {
-            if (gSaveBlock1.secretBases[secretBaseIndex].sbr_field_1_0 != 1)
+            if (gSaveBlock1.secretBases[secretBaseIndex].sbr_field_1_0 == 1)
             {
-                if (gSaveBlock1.secretBases[secretBaseIndex].sbr_field_1_6 != 2
+                return 0;
+            }
+            if (gSaveBlock1.secretBases[secretBaseIndex].sbr_field_1_6 != 2
                     || secretBase->sbr_field_1_0 == 1)
-                {
-                    sub_80BD034(secretBaseIndex, secretBase);
-                    return secretBaseIndex;
-                }
+            {
+                sub_80BD034(secretBaseIndex, secretBase);
+                return secretBaseIndex;
             }
         }
         else
         {
             secretBaseIndex = sub_80BD170();
-            if (secretBaseIndex == 0)
+            if (secretBaseIndex != 0)
             {
-                secretBaseIndex = sub_80BD1B0();
-                if (secretBaseIndex)
-                {
-                    sub_80BD034(secretBaseIndex, secretBase);
-                    return secretBaseIndex;
-                }
+                sub_80BD034(secretBaseIndex, secretBase);
+                return secretBaseIndex;
             }
-            else
+            secretBaseIndex = sub_80BD1B0();
+            if (secretBaseIndex)
             {
                 sub_80BD034(secretBaseIndex, secretBase);
                 return secretBaseIndex;
@@ -1449,80 +1446,6 @@ u8 sub_80BD1FC(struct SecretBaseRecord *secretBase)
 
     return 0;
 }
-#else
-__attribute__((naked))
-u8 sub_80BD1FC(struct SecretBaseRecord *secretBase)
-{
-    asm(".syntax unified\n\
-    push {r4,r5,lr}\n\
-    adds r5, r0, 0\n\
-    ldrb r0, [r5]\n\
-    cmp r0, 0\n\
-    beq _080BD278\n\
-    ldrb r0, [r5]\n\
-    bl sub_80BD12C\n\
-    lsls r0, 16\n\
-    lsrs r4, r0, 16\n\
-    asrs r2, r0, 16\n\
-    cmp r2, 0\n\
-    beq _080BD278\n\
-    movs r0, 0x1\n\
-    negs r0, r0\n\
-    cmp r2, r0\n\
-    beq _080BD254\n\
-    ldr r0, _080BD24C @ =gSaveBlock1\n\
-    lsls r1, r2, 2\n\
-    adds r1, r2\n\
-    lsls r1, 5\n\
-    adds r1, r0\n\
-    ldr r0, _080BD250 @ =0x00001a09\n\
-    adds r1, r0\n\
-    ldrb r1, [r1]\n\
-    lsls r0, r1, 28\n\
-    lsrs r0, 28\n\
-    cmp r0, 0x1\n\
-    beq _080BD278\n\
-    lsrs r0, r1, 6\n\
-    cmp r0, 0x2\n\
-    bne _080BD246\n\
-    ldrb r1, [r5, 0x1]\n\
-    movs r0, 0xF\n\
-    ands r0, r1\n\
-    cmp r0, 0x1\n\
-    bne _080BD278\n\
-_080BD246:\n\
-    lsls r4, 24\n\
-    lsrs r4, 24\n\
-    b _080BD26C\n\
-    .align 2, 0\n\
-_080BD24C: .4byte gSaveBlock1\n\
-_080BD250: .4byte 0x00001a09\n\
-_080BD254:\n\
-    bl sub_80BD170\n\
-    lsls r0, 24\n\
-    lsrs r4, r0, 24\n\
-    cmp r4, 0\n\
-    bne _080BD26C\n\
-    bl sub_80BD1B0\n\
-    lsls r0, 24\n\
-    lsrs r4, r0, 24\n\
-    cmp r4, 0\n\
-    beq _080BD278\n\
-_080BD26C:\n\
-    adds r0, r4, 0\n\
-    adds r1, r5, 0\n\
-    bl sub_80BD034\n\
-    adds r0, r4, 0\n\
-    b _080BD27A\n\
-_080BD278:\n\
-    movs r0, 0\n\
-_080BD27A:\n\
-    pop {r4,r5}\n\
-    pop {r1}\n\
-    bx r1\n\
-.syntax divided\n");
-}
-#endif
 
 void sub_80BD280(void)
 {
