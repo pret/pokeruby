@@ -17,6 +17,7 @@
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
+#include "ewram.h"
 
 extern u8 gPlayerPartyCount;
 extern u16 gSpecialVar_0x8004;

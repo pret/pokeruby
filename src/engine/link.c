@@ -15,6 +15,7 @@
 #include "strings2.h"
 #include "task.h"
 #include "text.h"
+#include "ewram.h"
 
 #define SIO_MULTI_CNT ((struct SioMultiCnt *)REG_ADDR_SIOCNT)
 

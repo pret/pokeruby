@@ -17,6 +17,7 @@
 #include "task.h"
 #include "text.h"
 #include "util.h"
+#include "ewram.h"
 
 //Possibly PokemonSubstruct1
 struct UnknownStruct3

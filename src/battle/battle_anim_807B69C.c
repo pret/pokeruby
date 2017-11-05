@@ -7,6 +7,7 @@
 #include "sprite.h"
 #include "task.h"
 #include "trig.h"
+#include "ewram.h"
 
 extern u8 gBattleAnimBankAttacker;
 extern u8 gBattleAnimBankTarget;

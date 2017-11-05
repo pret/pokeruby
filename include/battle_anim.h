@@ -7,8 +7,6 @@
 #define REG_BG1CNT_BITFIELD REG_BGnCNT_BITFIELD(1)
 #define REG_BG2CNT_BITFIELD REG_BGnCNT_BITFIELD(2)
 
-#include "ewram.h"
-
 struct BGCntrlBitfield
 {
     volatile u16 priority:2;

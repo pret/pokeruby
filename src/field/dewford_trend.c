@@ -5,6 +5,7 @@
 #include "link.h"
 #include "rng.h"
 #include "text.h"
+#include "ewram.h"
 
 extern u8 ewram[];
 

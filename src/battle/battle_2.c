@@ -253,8 +253,8 @@ void sub_800E9EC(void)
         if (species != SPECIES_EGG && hp == 0)
             r6 |= 3 << i * 2;
     }
-    ewram0.unk2 = r6;
-    ewram0.unk3 = r6 >> 8;
+    BATTLE_STRUCT->unk2 = r6;
+    BATTLE_STRUCT->unk3 = r6 >> 8;
 }
 
 void sub_800EAAC(void)
@@ -350,11 +350,11 @@ void sub_800EC9C(void)
         {
             if (gReceivedRemoteLinkPlayers != 0 && sub_8007ECC())
             {
-                ewram0.unk0 = 1;
-                ewram0.unk1 = 1;
+                BATTLE_STRUCT->unk0 = 1;
+                BATTLE_STRUCT->unk1 = 1;
                 sub_800E9EC();
                 sub_800EAAC();
-                SendBlock(bitmask_all_link_players_but_self(), &ewram0, 32);
+                SendBlock(bitmask_all_link_players_but_self(), BATTLE_STRUCT, 32);
                 gBattleCommunication[0] = 1;
             }
         }
@@ -410,7 +410,7 @@ void sub_800EC9C(void)
             gTasks[taskId].data[1] = 0x10E;
             gTasks[taskId].data[2] = 0x5A;
             gTasks[taskId].data[5] = 0;
-            gTasks[taskId].data[3] = ewram0.unk2 | (ewram0.unk3 << 8);
+            gTasks[taskId].data[3] = BATTLE_STRUCT->unk2 | (BATTLE_STRUCT->unk3 << 8);
             gTasks[taskId].data[4] = gBlockRecvBuffer[enemyId][1];
             gBattleCommunication[0]++;
         }
@@ -593,8 +593,8 @@ void sub_800F298(void)
     case 0:
         if (gReceivedRemoteLinkPlayers != 0 && sub_8007ECC())
         {
-            ewram0.unk0 = 1;
-            ewram0.unk1 = 1;
+            BATTLE_STRUCT->unk0 = 1;
+            BATTLE_STRUCT->unk1 = 1;
             sub_800E9EC();
             sub_800EAAC();
             SendBlock(bitmask_all_link_players_but_self(), ewram, 0x20);
@@ -1537,7 +1537,7 @@ void sub_8010874(void)
         gUnknown_02024C5C[i] = 0xFF;
         gLockedMove[i] = 0;
         gUnknown_02024C2C[i] = 0;
-        ewram17100[i] = 0;
+        ewram17100.arr[i] = 0;
     }
 
     for (i = 0; i < 2; i++)
@@ -1621,7 +1621,6 @@ void SwitchInClearStructs(void)
     struct DisableStruct sp0 = gDisableStructs[gActiveBank];
     s32 i;
     u8 *ptr;
-    u32 *ptr2;
 
     if (gBattleMoves[gCurrentMove].effect != EFFECT_BATON_PASS)
     {
@@ -1700,8 +1699,7 @@ void SwitchInClearStructs(void)
     ewram[0x160E8 + gActiveBank * 2 + 0] = 0;
     ewram[0x160E8 + gActiveBank * 2 + 1] = 0;
 
-    ptr2 = (u32 *)(ewram + 0x17100);
-    ptr2[gActiveBank] = 0;
+    ewram17100.arr[gActiveBank] = 0;
 
     gCurrentMove = 0;
 }

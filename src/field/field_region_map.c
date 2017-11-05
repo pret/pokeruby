@@ -28,8 +28,8 @@ struct UnkStruct
 void FieldInitRegionMap(MainCallback callback)
 {
     SetVBlankCallback(NULL);
-    unk_2000000.unk888 = 0;
-    unk_2000000.callback = callback;
+    ewram0_5.unk888 = 0;
+    ewram0_5.callback = callback;
     SetMainCallback2(CB2_FieldInitRegionMap);
 }
 
@@ -47,7 +47,7 @@ void CB2_FieldInitRegionMap(void)
     ResetSpriteData();
     FreeAllSpritePalettes();
     // TODO: remove this cast
-    InitRegionMap((void *)&unk_2000000.unk8, 0);
+    InitRegionMap((void *)&ewram0_5.unk8, 0);
     CreateRegionMapPlayerIcon(0, 0);
     CreateRegionMapCursor(1, 1);
     SetUpWindowConfig(&gWindowConfig_81E709C);
@@ -80,15 +80,15 @@ void CB2_FieldRegionMap(void)
 
 void sub_813EFDC(void)
 {
-    switch (unk_2000000.unk888)
+    switch (ewram0_5.unk888)
     {
     case 0:
         REG_DISPCNT = DISPCNT_MODE_1 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG2_ON | DISPCNT_OBJ_ON;
-        unk_2000000.unk888++;
+        ewram0_5.unk888++;
         break;
     case 1:
         if (!gPaletteFade.active)
-            unk_2000000.unk888++;
+            ewram0_5.unk888++;
         break;
     case 2:
         switch (sub_80FAB60())
@@ -98,18 +98,18 @@ void sub_813EFDC(void)
             break;
         case 4:
         case 5:
-            unk_2000000.unk888++;
+            ewram0_5.unk888++;
         }
         break;
     case 3:
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
-        unk_2000000.unk888++;
+        ewram0_5.unk888++;
         break;
     case 4:
         if (!gPaletteFade.active)
         {
             FreeRegionMapIconResources();
-            SetMainCallback2(unk_2000000.callback);
+            SetMainCallback2(ewram0_5.callback);
         }
         break;
     }
@@ -118,6 +118,6 @@ void sub_813EFDC(void)
 void sub_813F0C8(void)
 {
     MenuFillWindowRectWithBlankTile(17, 17, 28, 18);
-    if (unk_2000000.unk8.unk16)
-        MenuPrint(unk_2000000.unk8.str, 17, 17);
+    if (ewram0_5.unk8.unk16)
+        MenuPrint(ewram0_5.unk8.str, 17, 17);
 }

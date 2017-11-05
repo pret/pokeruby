@@ -234,7 +234,11 @@ struct AI_ThinkingStruct /* 0x2016800 */
 
 struct BattleStruct /* 0x2000000 */
 {
-    u8 filler0[0x15DDE];
+    /*0x00000*/ u8 unk0;
+    /*0x00001*/ bool8 unk1;
+    /*0x00002*/ u8 unk2;
+    /*0x00003*/ bool8 unk3;
+    u8 filler4[0x15DDA];
     /*0x15DDE*/ u8 unk15DDE;
     /*0x15DDF*/ u8 unk15DDF;
     /*0x15DE0*/ u8 filler15DE0[0x220];
@@ -530,6 +534,11 @@ struct BattleResults
     u8 unk36[10];  // usedBalls?
 };
 
+struct Struct2017100
+{
+    u32 arr[4];
+};
+
 struct Struct2017800
 {
     u8 invisible:1;
@@ -667,8 +676,6 @@ extern struct sideTimer gSideTimer[2];
 extern struct WishFutureKnock gWishFutureKnock;
 extern struct AI_ThinkingStruct gAIThinkingSpace;
 extern struct Struct20238C8 gUnknown_020238C8;
-
-#include "ewram.h"
 
 // used in many battle files, it seems as though Hisashi Sogabe wrote
 // some sort of macro to replace the use of actually calling memset.

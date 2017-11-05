@@ -18,6 +18,7 @@
 #include "event_data.h"
 #include "field_weather.h"
 #include "decoration.h"
+#include "ewram.h"
 
 EWRAM_DATA u8 *gUnknown_020388D0 = NULL;
 EWRAM_DATA u8 gUnknown_020388D4 = 0;

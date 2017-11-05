@@ -17,6 +17,7 @@
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
+#include "ewram.h"
 
 extern u8 gPlayerPartyCount;
 extern u8 gLastFieldPokeMenuOpened;
@@ -34,7 +35,7 @@ extern void sub_806BC3C(u8, u8);
 extern void ShowPokemonSummaryScreen(struct Pokemon *, u8, u8, void (*)(void), int);
 extern u8 GetMonStatusAndPokerus();
 extern void PartyMenuPrintHP();
-extern bool8 sub_80F9344(void);
+extern bool8 sub_80F9344(void); 
 
 static void ClearPartySelection(void);
 static bool8 IsMonAllowedInBattleTower(struct Pokemon *);

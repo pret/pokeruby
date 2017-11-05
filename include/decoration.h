@@ -204,8 +204,6 @@ struct UnkStruct_803EC860
 
 extern const struct UnkStruct_803EC860 gUnknown_083EC860[];
 
-#include "ewram.h"
-
 struct UnkStruct_02038900
 {
     /*0x000; 0x02038900*/ const struct Decoration *decoration;

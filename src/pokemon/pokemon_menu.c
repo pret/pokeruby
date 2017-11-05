@@ -29,6 +29,7 @@
 #include "fieldmap.h"
 #include "item_menu.h"
 #include "player_pc.h"
+#include "ewram.h"
 
 /*
 Pokemon menu:

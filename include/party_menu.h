@@ -101,8 +101,6 @@ struct UnknownPokemonStruct2
     /*0x1D*/ u8 language;
 };
 
-#include "ewram.h"
-
 void CB2_PartyMenuMain(void);
 void ChangeBattleTowerPartyMenuSelection(u8 taskId, s8 directionPressed);
 void SetPartyMenuSettings(u8 menuType, u8 battleTypeFlags, TaskFunc menuHandlerFunc, u8 textId);

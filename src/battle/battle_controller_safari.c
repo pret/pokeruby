@@ -12,6 +12,7 @@
 #include "sound.h"
 #include "text.h"
 #include "util.h"
+#include "ewram.h"
 
 extern struct Window gUnknown_03004210;
 extern u8 gDisplayedStringBattle[];

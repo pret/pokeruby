@@ -1433,11 +1433,6 @@ u8 CastformDataTypeChange(u8 bank)
     return formChange;
 }
 
-struct Struct2017100
-{
-    u32 arr[4];
-};
-
 u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 {
     u8 effect = 0;
@@ -1723,14 +1718,14 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                 case ABILITY_FLASH_FIRE:
                     if (moveType == TYPE_FIRE && !(gBattleMons[bank].status1 & STATUS_FREEZE))
                     {
-                        if (!(ewram17100_2.arr[bank] & 1))
+                        if (!(ewram17100.arr[bank] & 1))
                         {
                             gBattleCommunication[MULTISTRING_CHOOSER] = 0;
                             if (gProtectStructs[gBankAttacker].notFirstStrike)
                                 gBattlescriptCurrInstr = BattleScript_FlashFireBoost;
                             else
                                 gBattlescriptCurrInstr = BattleScript_FlashFireBoost_PPLoss;
-                            ewram17100_2.arr[bank] |= 1;
+                            ewram17100.arr[bank] |= 1;
                             effect = 2;
                         }
                         else

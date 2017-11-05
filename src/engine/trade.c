@@ -39,6 +39,7 @@
 #include "util.h"
 #include "battle_interface.h"
 #include "trade.h"
+#include "ewram.h"
 
 #ifdef ENGLISH
 #define sub_804A96C_alt sub_804A96C

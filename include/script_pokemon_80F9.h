@@ -7,8 +7,6 @@ struct UnknownStruct2018000
     u8 unk8;
 };
 
-#include "ewram.h" // UNK_2018000_STRUCT requires this include. TODO: fix?
-
 void OpenPartyMenuFromScriptContext(u8 taskId);
 void sub_80F9C00(void);
 void sub_80F9E1C(void);

@@ -11,6 +11,7 @@
 #include "rom_8077ABC.h"
 #include "species.h"
 #include "util.h"
+#include "ewram.h"
 
 extern u16 gBattleTypeFlags;
 extern u16 gBattleWeather;

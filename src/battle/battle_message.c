@@ -12,6 +12,7 @@
 #include "battle_setup.h"
 #include "battle_tower.h"
 #include "flags.h"
+#include "ewram.h"
 
 #define BATTLESTRING_TO_SUB 12
 #define BATTLESTRINGS_NO    351

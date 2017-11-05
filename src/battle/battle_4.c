@@ -19,6 +19,7 @@
 #include "task.h"
 #include "decompress.h"
 #include "naming_screen.h"
+#include "ewram.h"
 
 //extern needed variables
 extern u8 gCritMultiplier;
