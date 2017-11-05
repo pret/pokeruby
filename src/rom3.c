@@ -92,7 +92,7 @@ void setup_poochyena_battle(void)
         ZeroEnemyPartyMons();
         CreateMon(&gEnemyParty[0], SPECIES_POOCHYENA, 2, 32, 0, 0, 0, 0);
         i = ITEM_NONE;
-        SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, (u8 *)&i);
+        SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &i);
     }
     gUnknown_020239FC = 0;
     gUnknown_02024C78 = 0;
@@ -489,7 +489,7 @@ void sub_800C35C(void)
     u8 i;  //r4
     s32 j;  //r2
     u16 r6;  //r6
-    u8 *recvBuffer;  //r3
+    u16 *recvBuffer;  //r3
     u8 *dest;  //r5
     u8 *src;  //r4
 
@@ -500,10 +500,10 @@ void sub_800C35C(void)
             if (GetBlockReceivedStatus() & gBitTable[i])
             {
                 ResetBlockReceivedFlag(i);
-                recvBuffer = (u8 *)&gBlockRecvBuffer[i];
+                recvBuffer = gBlockRecvBuffer[i];
 #ifndef NONMATCHING
                 asm("");
-                recvBuffer = (u8 *)&gBlockRecvBuffer[i];
+                recvBuffer = gBlockRecvBuffer[i];
 #endif
                 r6 = gBlockRecvBuffer[i][2];
                 if (gTasks[gUnknown_020238C5].data[14] + 9 + r6 > 0x1000)
@@ -513,7 +513,7 @@ void sub_800C35C(void)
                 }
                 //_0800C402
                 dest = EWRAM_15000 + gTasks[gUnknown_020238C5].data[14];
-                src = recvBuffer;
+                src = (u8 *)recvBuffer;
                 for (j = 0; j < r6 + 8; j++)
                     dest[j] = src[j];
                 gTasks[gUnknown_020238C5].data[14] = gTasks[gUnknown_020238C5].data[14] + r6 + 8;

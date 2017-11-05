@@ -282,7 +282,7 @@ u8 sub_81255B8(u16 a1, const struct SaveSectionLocation *location)
 
     for (i = 0; i < sizeof(struct UnkSaveSection); i++)
     {
-        if (ProgramFlashByte(sector, i, ((u8 *)gFastSaveSection)[i]))
+        if (ProgramFlashByte(sector, i, gFastSaveSection->data[i]))
         {
             status = 0xFF;
             break;
@@ -402,7 +402,7 @@ u8 sub_81258BC(u16 a1, const struct SaveSectionLocation *location)
         {
             u16 j;
             for (j = 0; j < location[id].size; j++)
-                ((u8 *)location[id].data)[j] = gFastSaveSection->data[j];
+                location[id].data[j] = gFastSaveSection->data[j];
         }
     }
 
@@ -774,7 +774,7 @@ u8 unref_sub_8125FF0(u8 *data, u16 size)
     for (i = 0; i < size; i++)
         section->data[i] = data[i];
 
-    gLastSaveSectorStatus = ProgramFlashSectorAndVerifyNBytes(gFlashSectors[0], (u8 *)section, sizeof(struct SaveSection));
+    gLastSaveSectorStatus = ProgramFlashSectorAndVerifyNBytes(gFlashSectors[0], section, sizeof(struct SaveSection));
 
     if (gLastSaveSectorStatus)
         return 0xFF;

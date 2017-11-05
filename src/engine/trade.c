@@ -112,7 +112,6 @@ struct TradeEwramSubstruct {
     /*0x0087*/ u8 unk_0087;
     /*0x0088*/ u8 filler_0088[2];
     /*0x008a*/ u8 unk_008a;
-    /*0x008b*/ u8 unk_008b;
     /*0x008c*/ u16 linkData[20];
     /*0x00b4*/ u8 unk_00b4;
     /*0x00b5*/ u8 unk_00b5[11];
@@ -1706,8 +1705,11 @@ static void sub_8048C70(void)
 
 static void nullsub_5(u8 a0, u8 a1) {}
 
-static void sub_8048D24(u8 *dest, const u8 *src, u32 size)
+// why not just use memcpy?
+static void Trade_Memcpy(void *dataDest, void *dataSrc, u32 size)
 {
+    u8 *dest = dataDest;
+    u8 *src = dataSrc;
     int i;
     for (i = 0; i < size; i ++) dest[i] = src[i];
 }
@@ -1724,7 +1726,7 @@ static bool8 sub_8048D44(void)
     switch (gUnknown_03004824->unk_0075)
     {
         case  0:
-            sub_8048D24(gBlockSendBuffer, (const u8 *)&gPlayerParty[0], 2 * sizeof(struct Pokemon));
+            Trade_Memcpy(gBlockSendBuffer, &gPlayerParty[0], 2 * sizeof(struct Pokemon));
             gUnknown_03004824->unk_0075 ++;
             break;
         case  1:
@@ -1751,13 +1753,13 @@ static bool8 sub_8048D44(void)
         case  3:
             if (GetBlockReceivedStatus() == 3)
             {
-                sub_8048D24((u8 *)&gEnemyParty[0], (const u8 *)gBlockRecvBuffer[mpId ^ 1], 2 * sizeof(struct Pokemon));
+                Trade_Memcpy(&gEnemyParty[0], gBlockRecvBuffer[mpId ^ 1], 2 * sizeof(struct Pokemon));
                 ResetBlockReceivedFlags();
                 gUnknown_03004824->unk_0075 ++;
             }
             break;
         case  4:
-            sub_8048D24(gBlockSendBuffer, (const u8 *)&gPlayerParty[2], 2 * sizeof(struct Pokemon));
+            Trade_Memcpy(gBlockSendBuffer, &gPlayerParty[2], 2 * sizeof(struct Pokemon));
             gUnknown_03004824->unk_0075 ++;
             break;
         case  5:
@@ -1770,13 +1772,13 @@ static bool8 sub_8048D44(void)
         case  6:
             if (GetBlockReceivedStatus() == 3)
             {
-                sub_8048D24((u8 *)&gEnemyParty[2], (const u8 *)gBlockRecvBuffer[mpId ^ 1], 2 * sizeof(struct Pokemon));
+                Trade_Memcpy(&gEnemyParty[2], gBlockRecvBuffer[mpId ^ 1], 2 * sizeof(struct Pokemon));
                 ResetBlockReceivedFlags();
                 gUnknown_03004824->unk_0075 ++;
             }
             break;
         case  7:
-            sub_8048D24(gBlockSendBuffer, (const u8 *)&gPlayerParty[4], 2 * sizeof(struct Pokemon));
+            Trade_Memcpy(gBlockSendBuffer, &gPlayerParty[4], 2 * sizeof(struct Pokemon));
             gUnknown_03004824->unk_0075 ++;
             break;
         case  8:
@@ -1789,13 +1791,13 @@ static bool8 sub_8048D44(void)
         case  9:
             if (GetBlockReceivedStatus() == 3)
             {
-                sub_8048D24((u8 *)&gEnemyParty[4], (const u8 *)gBlockRecvBuffer[mpId ^ 1], 2 * sizeof(struct Pokemon));
+                Trade_Memcpy(&gEnemyParty[4], gBlockRecvBuffer[mpId ^ 1], 2 * sizeof(struct Pokemon));
                 ResetBlockReceivedFlags();
                 gUnknown_03004824->unk_0075 ++;
             }
             break;
         case 10:
-            sub_8048D24(gBlockSendBuffer, (const u8 *)&gSaveBlock1.mail[0], 6 * sizeof(struct MailStruct) + 4);
+            Trade_Memcpy(gBlockSendBuffer, &gSaveBlock1.mail[0], 6 * sizeof(struct MailStruct) + 4);
             gUnknown_03004824->unk_0075 ++;
             break;
         case 11:
@@ -1808,13 +1810,13 @@ static bool8 sub_8048D44(void)
         case 12:
             if (GetBlockReceivedStatus() == 3)
             {
-                sub_8048D24((u8 *)&gUnknown_02029700[0], (const u8 *)gBlockRecvBuffer[mpId ^ 1], 6 * sizeof(struct MailStruct));
+                Trade_Memcpy(&gUnknown_02029700[0], gBlockRecvBuffer[mpId ^ 1], 6 * sizeof(struct MailStruct));
                 ResetBlockReceivedFlags();
                 gUnknown_03004824->unk_0075 ++;
             }
             break;
         case 13:
-            sub_8048D24(gBlockSendBuffer, (const u8 *)gSaveBlock1.giftRibbons, 11);
+            Trade_Memcpy(gBlockSendBuffer, gSaveBlock1.giftRibbons, 11);
             gUnknown_03004824->unk_0075 ++;
             break;
         case 14:
@@ -1827,7 +1829,7 @@ static bool8 sub_8048D44(void)
         case 15:
             if (GetBlockReceivedStatus() == 3)
             {
-                sub_8048D24((u8 *)gUnknown_03004824->unk_00b5, (const u8 *)gBlockRecvBuffer[mpId ^ 1], 11);
+                Trade_Memcpy(gUnknown_03004824->unk_00b5, gBlockRecvBuffer[mpId ^ 1], 11);
                 ResetBlockReceivedFlags();
                 gUnknown_03004824->unk_0075 ++;
             }
@@ -1915,7 +1917,7 @@ static void sub_80491E4(u8 mpId, u8 status)
                 gUnknown_03004824->unk_007b = 8;
                 break;
             case 0xdddd:
-                gUnknown_03004824->unk_008a = ((u8 *)gBlockRecvBuffer[0])[1 * sizeof(u16)] + 6;
+                gUnknown_03004824->unk_008a = gBlockRecvBuffer[0][1] + 6;
                 sub_8049E9C(gUnknown_03004824->tradeMenuCursorPosition);
                 sub_8049E9C(gUnknown_03004824->unk_008a);
                 gUnknown_03004824->unk_007b = 7;
@@ -5416,7 +5418,6 @@ static void sub_804D948(u8 whichPlayerMon, u8 whichInGameTrade)
     struct MailStruct mail;
     u8 metLocation = 0xFE;
     u8 isMail;
-    u8 *item;
     struct Pokemon *pokemon = &gEnemyParty[0];
 
     CreateMon(pokemon, inGameTrade->species, level, 32, TRUE, inGameTrade->personality, TRUE, inGameTrade->otId);
@@ -5451,8 +5452,7 @@ static void sub_804D948(u8 whichPlayerMon, u8 whichInGameTrade)
         }
         else
         {
-            item = (u8 *)&inGameTrade->heldItem;
-            SetMonData(pokemon, MON_DATA_HELD_ITEM, item);
+            SetMonData(pokemon, MON_DATA_HELD_ITEM, &inGameTrade->heldItem);
         }
     }
     CalculateMonStats(&gEnemyParty[0]);
@@ -5705,7 +5705,7 @@ void sub_804E22C(void)
 {
     const u16 *src;
     u16 *dest;
-    LZDecompressVram(gUnknown_08D00000, (u8 *)VRAM);
+    LZDecompressVram(gUnknown_08D00000, (void *)VRAM);
     CpuCopy16(gUnknown_08D00524, ewram, 0x1000);
     src = (const u16 *)ewram;
     dest = BG_SCREEN_ADDR(5);

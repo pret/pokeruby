@@ -536,7 +536,7 @@ const struct WindowConfig gWindowConfig_81E6C74 =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    (u8 *)OBJ_VRAM0, // tile data
+    OBJ_VRAM0, // tile data
     NULL, // tilemap
 };
 
@@ -1670,7 +1670,7 @@ const struct WindowConfig gWindowConfig_81E725C =
     0, // tilemap top coordinate
     30, // width
     20, // height
-    (u8 *)OBJ_VRAM0, // tile data
+    OBJ_VRAM0, // tile data
     NULL, // tilemap
 };
 

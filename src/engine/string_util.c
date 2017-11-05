@@ -376,7 +376,7 @@ u8 *StringExpandPlaceholders(u8 *dest, const u8 *src)
     {
         u8 c = *src++;
         u8 placeholderId;
-        u8 *expandedString;
+        const u8 *expandedString;
         u8 length;
 
         switch (c)
@@ -432,45 +432,45 @@ u8 *StringBraille(u8 *dest, const u8 *src)
     }
 }
 
-static u8 *ExpandPlaceholder_UnknownStringVar(void)
+static const u8 *ExpandPlaceholder_UnknownStringVar(void)
 {
     return gUnknownStringVar;
 }
 
-static u8 *ExpandPlaceholder_PlayerName(void)
+static const u8 *ExpandPlaceholder_PlayerName(void)
 {
     return gSaveBlock2.playerName;
 }
 
-static u8 *ExpandPlaceholder_StringVar1(void)
+static const u8 *ExpandPlaceholder_StringVar1(void)
 {
     return gStringVar1;
 }
 
-static u8 *ExpandPlaceholder_StringVar2(void)
+static const u8 *ExpandPlaceholder_StringVar2(void)
 {
     return gStringVar2;
 }
 
-static u8 *ExpandPlaceholder_StringVar3(void)
+static const u8 *ExpandPlaceholder_StringVar3(void)
 {
     return gStringVar3;
 }
 
-static u8 *ExpandPlaceholder_KunChan(void)
+static const u8 *ExpandPlaceholder_KunChan(void)
 {
     if (gSaveBlock2.playerGender == MALE)
-        return (u8 *) gExpandedPlaceholder_Kun;
+        return gExpandedPlaceholder_Kun;
     else
-        return (u8 *) gExpandedPlaceholder_Chan;
+        return gExpandedPlaceholder_Chan;
 }
 
-static u8 *ExpandPlaceholder_RivalName(void)
+static const u8 *ExpandPlaceholder_RivalName(void)
 {
     if (gSaveBlock2.playerGender == MALE)
-        return (u8 *) gExpandedPlaceholder_May;
+        return gExpandedPlaceholder_May;
     else
-        return (u8 *) gExpandedPlaceholder_Brendan;
+        return gExpandedPlaceholder_Brendan;
 }
 
 #define VERSION_DEPENDENT_PLACEHOLDER_LIST \
@@ -484,19 +484,19 @@ static u8 *ExpandPlaceholder_RivalName(void)
 
 #ifdef SAPPHIRE
 #define X(ph, r, s) \
-static u8 *ExpandPlaceholder_##ph(void) { return (u8 *) gExpandedPlaceholder_##s; }
+static const u8 *ExpandPlaceholder_##ph(void) { return gExpandedPlaceholder_##s; }
 VERSION_DEPENDENT_PLACEHOLDER_LIST
 #else
 #define X(ph, r, s) \
-static u8 *ExpandPlaceholder_##ph(void) { return (u8 *) gExpandedPlaceholder_##r; }
+static const u8 *ExpandPlaceholder_##ph(void) { return gExpandedPlaceholder_##r; }
 VERSION_DEPENDENT_PLACEHOLDER_LIST
 #endif
 
 #undef X
 
-u8 *GetExpandedPlaceholder(u32 id)
+const u8 *GetExpandedPlaceholder(u32 id)
 {
-    typedef u8 *(*ExpandPlaceholderFunc)(void);
+    typedef const u8 *(*ExpandPlaceholderFunc)(void);
 
     static const ExpandPlaceholderFunc funcs[] =
     {
@@ -517,7 +517,7 @@ u8 *GetExpandedPlaceholder(u32 id)
     };
 
     if (id >= ARRAY_COUNT(funcs))
-        return (u8 *) gExpandedPlaceholder_Empty;
+        return gExpandedPlaceholder_Empty;
     else
         return funcs[id]();
 }

@@ -2855,7 +2855,7 @@ void sub_806D5B8(u8 monIndex)
     ZeroFillWindowRect(&gUnknown_03004210, left, top, right, bottom);
 
     var1 = 0;
-    CpuFastSet(&var1, (void *)(OBJ_VRAM1 + monIndex * 0x400), 0x1000100);
+    CpuFastSet(&var1, OBJ_VRAM1 + monIndex * 0x400, 0x1000100);
 }
 
 void sub_806D668(u8 monIndex)
@@ -2869,7 +2869,7 @@ void sub_806D668(u8 monIndex)
     ZeroFillWindowRect(&gUnknown_03004210, left, top, right, bottom);
 
     var1 = 0;
-    CpuFastSet(&var1, (void *)(OBJ_VRAM1 + 0x300 + monIndex * 0x400), 0x1000040);
+    CpuFastSet(&var1, OBJ_VRAM1 + 0x300 + monIndex * 0x400, 0x1000040);
 }
 
 bool8 LoadPartyMenuGraphics(u8 a)
@@ -3460,7 +3460,7 @@ void PartyMenuDoPrintMonNickname(u8 monIndex, int b, const u8 *nameBuffer)
     u32 var1 = 0;
     CpuFastSet(&var1, gTileBuffer, 0x1000100);
     sub_8004E3C((struct WindowConfig *)&gWindowConfig_81E6CAC, gTileBuffer, nameBuffer);
-    CpuFastSet(gTileBuffer, (void *)(OBJ_VRAM1 + (monIndex * 0x400)), 128);
+    CpuFastSet(gTileBuffer, OBJ_VRAM1 + (monIndex * 0x400), 128);
 }
 
 void PrintPartyMenuMonNickname(u8 monIndex, u8 b, struct Pokemon *pokemon)
@@ -3570,7 +3570,7 @@ void PartyMenuDoPrintLevel(u8 monIndex, u8 menuLayout, u8 level)
     var1 = 0;
     CpuFastSet(&var1, gUnknown_02039460, 0x1000020);
     sub_8004E3C((struct WindowConfig *)&gWindowConfig_81E6CAC, gUnknown_02039460 - 0x100 /*gTileBuffer*/, gStringVar1);
-    CpuFastSet(gUnknown_02039460, (void *)(OBJ_VRAM1 + 0x200 + (monIndex * 0x400)), 32);
+    CpuFastSet(gUnknown_02039460, OBJ_VRAM1 + 0x200 + (monIndex * 0x400), 32);
 }
 
 void PartyMenuPrintLevel(u8 monIndex, u8 menuLayout, struct Pokemon *pokemon)
@@ -3664,7 +3664,7 @@ void PartyMenuDoPrintHP(u8 monIndex, u8 b, u16 currentHP, u16 maxHP)
 
     CpuFastSet(&var, gUnknown_02039460, 0x1000040);
     sub_8004E3C((struct WindowConfig *)&gWindowConfig_81E6CAC, gUnknown_02039460 - 0x100 /*gTileBuffer*/, gStringVar1);
-    CpuFastSet(gUnknown_02039460, (void *)(OBJ_VRAM1 + 0x300 + (monIndex * 0x400)), 64);
+    CpuFastSet(gUnknown_02039460, OBJ_VRAM1 + 0x300 + (monIndex * 0x400), 64);
 }
 
 void PartyMenuPrintHP(u8 monIndex, u8 b, struct Pokemon *pokemon)
