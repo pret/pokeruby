@@ -269,7 +269,7 @@ void BattleAI_HandleItemUseBeforeAISetup(void)
     s32 i;
     u8 *data;
 
-    BAD_MEMSET(UNK_2016A00_STRUCT, 0, sizeof(struct UnkBattleStruct1), i, data)
+    BAD_MEMSET(UNK_2016A00_STRUCT, 0, sizeof(struct UnkBattleStruct1), i, data);
 
     if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
      && gTrainerBattleOpponent != 0x400
@@ -295,7 +295,7 @@ void BattleAI_SetupAIData(void)
     u8 *data;
 
     // clear AI data and set default move score to 100. strange that they didn't use memset here.
-    BAD_MEMSET(AI_THINKING_STRUCT, 0, sizeof(struct AI_ThinkingStruct), i, data)
+    BAD_MEMSET(AI_THINKING_STRUCT, 0, sizeof(struct AI_ThinkingStruct), i, data);
 
     for (i = 0; i < MAX_MON_MOVES; i++)
         AI_THINKING_STRUCT->score[i] = 100;
