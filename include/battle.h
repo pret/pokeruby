@@ -694,15 +694,18 @@ extern u8 ewram[];
 // functions that invoke this macro will not match without this egregeous
 // assumption about the variable names, so in order to avoid this assumption,
 // we opt to pass the variables themselves, even though it is likely that
-// Sogabe assumed the variables were named src and dest.
-#define BAD_MEMSET(data, c, size, var, dest)    \
+// Sogabe assumed the variables were named src and dest. Trust me: I tried to
+// avoid assuming variable names, but the ROM just will not match without the
+// assumptions. Therefore, these macros are bad practice, but I'm putting them
+// here anyway.
+#define MEMSET_ALT(data, c, size, var, dest)    \
 {    \
     dest = (u8 *)data;    \
     for(var = 0; var < (u32)size; var++)    \
         dest[var] = c;    \
 }    \
 
-#define BAD_MEMCPY(data, dest, size, var, src)    \
+#define MEMCPY_ALT(data, dest, size, var, src)    \
 {    \
     src = (u8 *)data;    \
     for(var = 0; var < (u32)size; var++)    \

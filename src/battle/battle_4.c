@@ -7056,6 +7056,7 @@ static void atk2A_jumpifhalfword(void)
     }
 }
 
+// Strange that there's an instance of T1_READ_32 in what seems to be a T2 function. see global.h for the distinction.
 static void atk2B_jumpifword(void)
 {
     u8 caseID = T2_READ_8(gBattlescriptCurrInstr + 1);
@@ -7308,9 +7309,9 @@ static void atk41_call(void)
 
 static void atk42_jumpiftype2(void) //u8 bank, u8 type, *ptr
 {
-    u8 bank = GetBattleBank(T2_READ_8(gBattlescriptCurrInstr + 1));
+    u8 bank = GetBattleBank(T1_READ_8(gBattlescriptCurrInstr + 1));
 
-    if (T2_READ_8(gBattlescriptCurrInstr + 2) == gBattleMons[bank].type1 || T2_READ_8(gBattlescriptCurrInstr + 2) == gBattleMons[bank].type2)
+    if (T1_READ_8(gBattlescriptCurrInstr + 2) == gBattleMons[bank].type1 || T1_READ_8(gBattlescriptCurrInstr + 2) == gBattleMons[bank].type2)
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
     else
         gBattlescriptCurrInstr += 7;
@@ -11514,7 +11515,7 @@ static void atk65_status2animation(void)
     if (gBattleExecBuffer == 0)
     {
         u32 possible_to_anim;
-        gActiveBank = GetBattleBank(T2_READ_8(gBattlescriptCurrInstr + 1));
+        gActiveBank = GetBattleBank(T1_READ_8(gBattlescriptCurrInstr + 1));
         possible_to_anim = T1_READ_32(gBattlescriptCurrInstr + 2);
         if (!(gStatuses3[gActiveBank] & STATUS3_SEMI_INVULNERABLE) && gDisableStructs[gActiveBank].substituteHP == 0 && !(gHitMarker & HITMARKER_NO_ANIMATIONS))
         {
@@ -11530,11 +11531,11 @@ static void atk66_chosenstatusanimation(void)
     if (gBattleExecBuffer == 0)
     {
         u32 status;
-        gActiveBank = GetBattleBank(T2_READ_8(gBattlescriptCurrInstr + 1));
+        gActiveBank = GetBattleBank(T1_READ_8(gBattlescriptCurrInstr + 1));
         status = T1_READ_32(gBattlescriptCurrInstr + 3);
         if (!(gStatuses3[gActiveBank] & STATUS3_SEMI_INVULNERABLE) && gDisableStructs[gActiveBank].substituteHP == 0 && !(gHitMarker & HITMARKER_NO_ANIMATIONS))
         {
-            EmitStatusAnimation(0, T2_READ_8(gBattlescriptCurrInstr + 2), status);
+            EmitStatusAnimation(0, T1_READ_8(gBattlescriptCurrInstr + 2), status);
             MarkBufferBankForExecution(gActiveBank);
         }
         gBattlescriptCurrInstr += 7;
