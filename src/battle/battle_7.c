@@ -18,6 +18,7 @@
 #include "task.h"
 #include "text.h"
 #include "gba/m4a_internal.h"
+#include "ewram.h"
 
 struct Struct2019348
 {
@@ -70,8 +71,6 @@ extern const struct CompressedSpriteSheet gUnknown_0820A4AC;
 extern const struct CompressedSpriteSheet gUnknown_0820A4B4[];
 extern const struct SpritePalette gUnknown_0820A4D4[];
 extern const u8 gUnknown_08D09C48[];
-
-#define ewram19348 (*(struct Struct2019348 *)(ewram + 0x19348))
 
 extern void c3_0802FDF4(u8);
 extern void sub_80440EC();

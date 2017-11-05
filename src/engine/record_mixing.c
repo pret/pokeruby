@@ -24,10 +24,7 @@
 #include "strings2.h"
 #include "task.h"
 #include "tv.h"
-
-extern u8 ewram[];
-#define unk_2018000 (*(struct PlayerRecords *)(ewram + 0x18000))
-#define unk_2008000 (*(struct PlayerRecords *)(ewram + 0x08000))
+#include "ewram.h"
 
 extern struct RecordMixingDayCareMail gUnknown_02038738;
 extern u16 gSpecialVar_0x8005;

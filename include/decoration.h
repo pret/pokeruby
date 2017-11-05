@@ -204,8 +204,7 @@ struct UnkStruct_803EC860
 
 extern const struct UnkStruct_803EC860 gUnknown_083EC860[];
 
-extern u8 ewram[];
-#define ewram_1f000 (*(struct DecoPCPointers *)(ewram + 0x1f000))
+#include "ewram.h"
 
 struct UnkStruct_02038900
 {

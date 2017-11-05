@@ -7,6 +7,7 @@
 #include "sprite.h"
 #include "strings2.h"
 #include "text.h"
+#include "ewram.h"
 
 struct RegionMapStruct
 {
@@ -23,9 +24,6 @@ struct UnkStruct
     struct RegionMapStruct unk8;
     u16 unk888;
 };
-
-extern u8 ewram[];
-#define unk_2000000 (*(struct UnkStruct *)(ewram))
 
 void FieldInitRegionMap(MainCallback callback)
 {

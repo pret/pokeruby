@@ -45,7 +45,7 @@ extern u8 gUnknown_083C9282[];
 extern const u8 gUnknown_083C928E[][2];
 extern u8 gUnknown_083C9296[];
 extern u8 gUnknown_083C92A8[];
-extern u8 unk_2000000[];
+extern u8 unk_2000000[]; // TODO: use ewram
 extern u8 gMatsudaDebugMenu_GoBackText[];
 extern u8 gMatsudaDebugMenu_BattlePointsText[];
 extern u8 gMatsudaDebugMenu_StartText[];

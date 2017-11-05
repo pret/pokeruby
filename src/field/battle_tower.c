@@ -24,6 +24,7 @@
 #include "trainer.h"
 #include "tv.h"
 #include "vars.h"
+#include "ewram.h"
 
 #if ENGLISH
 #include "../data/battle_tower/trainers.h"
@@ -277,9 +278,6 @@ extern u8 gSelectedOrderFromParty[];
 extern u8 gBattleOutcome;
 extern struct Pokemon gUnknown_030042FC[];
 extern struct BattlePokemon gBattleMons[];
-
-#define ewram160FB (ewram[0x160FB])
-
 
 void sub_8134548(void)
 {

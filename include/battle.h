@@ -189,9 +189,6 @@ enum
     BATTLE_TERRAIN_PLAIN,
 };
 
-// needed to match the hack that is get_item, thanks cam, someone else clean this up later.
-extern u8 unk_2000000[];
-
 struct Trainer
 {
     /*0x00*/ u8 partyFlags;
@@ -671,20 +668,7 @@ extern struct WishFutureKnock gWishFutureKnock;
 extern struct AI_ThinkingStruct gAIThinkingSpace;
 extern struct Struct20238C8 gUnknown_020238C8;
 
-// TODO: move ewram to global.h
-extern u8 ewram[];
-
-#define BATTLE_STRUCT           ((struct BattleStruct *)     (ewram + 0x00000))
-#define AI_THINKING_STRUCT      ((struct AI_ThinkingStruct *)(ewram + 0x16800))
-#define UNK_2016A00_STRUCT      ((struct UnkBattleStruct1 *) (ewram + 0x16A00))
-#define AI_STACK                ((struct AI_Stack *)         (ewram + 0x16C00))
-#define AI_ARRAY_160CC          ((struct SmallItemStruct *)  (ewram + 0x160CC))
-#define B_BATTLESCRIPTS_STACK   ((struct scriptsStack *)     (ewram + 0x17110))
-#define B_FUNCTION_STACK        ((struct funcStack *)        (ewram + 0x17140))
-#define ewram17800              ((struct Struct2017800 *)    (ewram + 0x17800))
-#define ewram17810              ((struct Struct2017810 *)    (ewram + 0x17810))
-#define ewram17840              (*(struct Struct2017840 *)   (ewram + 0x17840))
-#define ewram17000              ((u32 *)                     (ewram + 0x17100))
+#include "ewram.h"
 
 // used in many battle files, it seems as though Hisashi Sogabe wrote
 // some sort of macro to replace the use of actually calling memset.

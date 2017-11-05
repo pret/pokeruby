@@ -12,11 +12,11 @@
 #include "songs.h"
 #include "trainer.h"
 #include "field_camera.h"
+#include "ewram.h"
 
 void sub_807DE10(void);
 void dp12_8087EA4(void);
 
-extern u8 ewram[];
 extern u16 gUnknown_03005560[];
 extern u16 gUnknown_03004DE0[][0x3C0];
 
@@ -45,7 +45,6 @@ struct TransitionData
     s16 data[11];
 };
 
-#define TRANSITION_STRUCT   (*(struct TransitionData *)   (ewram + 0xC000))
 typedef bool8 (*TransitionState)(struct Task* task);
 typedef bool8 (*TransitionSpriteCallback)(struct Sprite* sprite);
 

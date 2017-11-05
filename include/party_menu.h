@@ -101,11 +101,7 @@ struct UnknownPokemonStruct2
     /*0x1D*/ u8 language;
 };
 
-extern u8 ewram[];
-#define ewram01000 (*(struct Unk2001000 *)(ewram + 0x01000))
-#define ewram1B000 (*(struct Unk201B000 *)(ewram + 0x1B000))
-#define ewram1B000_alt (*(struct Struct201B000 *)(ewram + 0x1B000))
-#define EWRAM_1B000 ewram1B000_alt
+#include "ewram.h"
 
 void CB2_PartyMenuMain(void);
 void ChangeBattleTowerPartyMenuSelection(u8 taskId, s8 directionPressed);

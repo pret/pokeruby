@@ -13,6 +13,7 @@
 #include "battle_move_effects.h"
 #include "string_util.h"
 #include "flags.h"
+#include "ewram.h"
 
 extern u8* gBattlescriptCurrInstr;
 extern u8 gActiveBank;
@@ -197,8 +198,6 @@ extern u8 gUnknown_081D995F[]; //disobedient while asleep
 extern u8 gUnknown_081D996F[]; //disobedient, uses a random move
 extern u8 gUnknown_081D9989[]; //disobedient, went to sleep
 extern u8 gUnknown_081D99A0[]; //disobedient, hits itself
-
-#define CHOICED_MOVE(bank)(((u16*)(&ewram[bank * 2 + 0x160e8])))
 
 //array entries for battle communication
 #define MOVE_EFFECT_BYTE    0x3
@@ -1439,8 +1438,6 @@ struct Struct2017100
     u32 arr[4];
 };
 
-#define ewram17100 (*(struct Struct2017100 *)(ewram + 0x17100))
-
 u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 {
     u8 effect = 0;
@@ -1726,14 +1723,14 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                 case ABILITY_FLASH_FIRE:
                     if (moveType == TYPE_FIRE && !(gBattleMons[bank].status1 & STATUS_FREEZE))
                     {
-                        if (!(ewram17100.arr[bank] & 1))
+                        if (!(ewram17100_2.arr[bank] & 1))
                         {
                             gBattleCommunication[MULTISTRING_CHOOSER] = 0;
                             if (gProtectStructs[gBankAttacker].notFirstStrike)
                                 gBattlescriptCurrInstr = BattleScript_FlashFireBoost;
                             else
                                 gBattlescriptCurrInstr = BattleScript_FlashFireBoost_PPLoss;
-                            ewram17100.arr[bank] |= 1;
+                            ewram17100_2.arr[bank] |= 1;
                             effect = 2;
                         }
                         else

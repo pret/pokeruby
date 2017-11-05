@@ -29,6 +29,7 @@
 #include "items.h"
 #include "hold_effects.h"
 #include "battle_move_effects.h"
+#include "ewram.h"
 
 struct UnknownStruct6
 {
@@ -61,48 +62,6 @@ struct UnknownStruct12
 
 extern const u16 gUnknown_08D004E0[];
 extern const struct MonCoords gCastformFrontSpriteCoords[];
-
-extern u8 ewram[];
-#define ewram0 (*(struct UnknownStruct7 *)(ewram + 0x0))
-#define ewram4 (*(struct UnknownStruct8 *)(ewram + 0x4))
-#define ewram16000 (ewram[0x16000])
-#define ewram16001 (ewram[0x16001])
-#define ewram16002 (ewram[0x16002])
-#define ewram16003 (ewram[0x16003])
-#define ewram1600C (ewram[0x1600C])
-#define ewram1600E (ewram[0x1600E])
-#define ewram1601B (ewram[0x1601B])
-#define ewram16020 ((u8 *)(ewram + 0x16020))
-#define ewram16056 (ewram[0x16056])
-#define ewram16058 (ewram[0x16058])
-#define ewram16059 (ewram[0x16059])
-#define ewram16078 (ewram[0x16078])
-#define ewram16084 (ewram[0x16084])
-#define ewram16086 (ewram[0x16086])
-#define ewram16087 (ewram[0x16087])
-#define ewram16088 (ewram[0x16088])
-#define ewram16089 (ewram[0x16089])
-#define ewram160A1 (ewram[0x160A1])
-#define ewram160A6 (ewram[0x160A6])
-#define ewram160AC ((u8 *)(ewram + 0x160AC))
-#define ewram160BC ((u16 *)(ewram + 0x160BC))  // hp
-#define ewram160C8 (ewram[0x160C8])
-#define ewram160C9 (ewram[0x160C9])
-#define ewram160CB (ewram[0x160CB])
-#define ewram160CC ((u8 *)(ewram + 0x160CC))
-#define ewram160E6 (ewram[0x160E6])
-#define ewram160E8 ((u8 *)(ewram + 0x160E8))
-#define ewram160F0 ((u8 *)(ewram + 0x160F0))
-#define ewram160F9 (ewram[0x160F9])
-#define ewram16100 ((u8 *)(ewram + 0x16100))
-#define ewram16108 ((u8 *)(ewram + 0x16108))
-#define ewram16110 (ewram[0x16110])
-#define ewram16111 (ewram[0x16111])
-#define ewram16113 (ewram[0x16113])
-#define ewram17100 ((u32 *)(ewram + 0x17100))
-#define ewram17130 (ewram[0x17130])
-#define ewram17160 (ewram[0x17160])
-#define ewram1D000 ((struct Pokemon *)(ewram + 0x1D000))
 
 extern struct UnknownPokemonStruct2 gUnknown_02023A00[];
 extern u8 gBattleBufferB[][0x200];

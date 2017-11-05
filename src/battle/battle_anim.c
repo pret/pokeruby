@@ -16,7 +16,6 @@
 // sprites start at 10000 and thus must be subtracted of 10000 to account for the true index.
 #define GET_TRUE_SPRITE_INDEX(i) (i - 10000)
 
-extern u8 unk_2000000[];
 extern u16 gBattlePartyID[4];
 extern u8 gObjectBankIDs[];
 extern u8 gBankAttacker;

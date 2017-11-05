@@ -16,6 +16,7 @@
 #include "starter_choose.h"
 #include "task.h"
 #include "trig.h"
+#include "ewram.h"
 
 asm(".set REG_BASE, 0x4000000");
 asm(".set OFFSET_REG_BLDCNT,      0x50");
@@ -161,14 +162,6 @@ struct CreditsEntry
     u8 var_0;
     u8 *text;
 };
-
-extern u8 ewram[];
-
-#define EWRAM_1F800          ((u16 *)(ewram + 0x1F800))
-#define HALL_OF_FAME_SHEET_0 ((u8 *)(ewram + 0x1E000))
-#define HALL_OF_FAME_SHEET_1 ((u8 *)(ewram + 0x1E800))
-#define HALL_OF_FAME_SHEET_2 ((u8 *)(ewram + 0x1F000))
-#define ewram1c000           (*(struct Unk201C000 *)(ewram + 0x1C000))
 
 extern struct HallOfFame gHallOfFame;
 extern u8 unk_201e800[0x800];

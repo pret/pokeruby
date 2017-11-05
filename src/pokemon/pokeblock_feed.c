@@ -19,8 +19,8 @@
 #include "field_effect.h"
 #include "sound.h"
 #include "trig.h"
+#include "ewram.h"
 
-extern u8 ewram[];
 extern struct MusicPlayerInfo gMPlay_BGM;
 extern u8 gPokeblockMonID;
 extern s16 gPokeblockGain;
@@ -928,14 +928,11 @@ static bool8 sub_8148540(void)
     }
 }
 
-#define ewram1D000 ((u16 *)(ewram + 0x1D000))
-#define ewram1D400 ((u16 *)(ewram + 0x1D400))
-
 static bool8 sub_81485CC(void)
 {
     u16 var = gUnknown_03005FA0[12] - gUnknown_03005FA0[4];
 
-    gPokeblockFeedPokeSprite->pos2.x = ewram1D000[var];
+    gPokeblockFeedPokeSprite->pos2.x = ewram1D000_2[var];
     gPokeblockFeedPokeSprite->pos2.y = ewram1D400[var];
 
     if (--gUnknown_03005FA0[4] == 0)
@@ -960,7 +957,7 @@ static void sub_814862C(void)
 
     for (i = 0; i < r7 - 1; i++)
     {
-        s16* r3 = &ewram1D000[r8 + i];
+        s16* r3 = &ewram1D000_2[r8 + i];
         s16 r1 = *r3 - (var3);
 
         s16* r5 = &ewram1D400[r8 + i];
@@ -970,7 +967,7 @@ static void sub_814862C(void)
         *r5 -= r4 * (i + 1) / r7;
     }
 
-    ewram1D000[(r8 + r7) - 1] = var3;
+    ewram1D000_2[(r8 + r7) - 1] = var3;
     ewram1D400[(r8 + r7) - 1] = r9;
 }
 
@@ -999,12 +996,12 @@ void sub_8148710(void)
 
         if (!var_24)
         {
-            ewram1D000[r4] = Sin(gUnknown_03005FA0[0], gUnknown_03005FA0[2] + r5 / 256) + r8;
+            ewram1D000_2[r4] = Sin(gUnknown_03005FA0[0], gUnknown_03005FA0[2] + r5 / 256) + r8;
             ewram1D400[r4] = Cos(gUnknown_03005FA0[0], gUnknown_03005FA0[3] + r5 / 256) + r7;
         }
         else
         {
-            ewram1D000[r4] = Sin(gUnknown_03005FA0[0], gUnknown_03005FA0[2] - r5 / 256) + r8;
+            ewram1D000_2[r4] = Sin(gUnknown_03005FA0[0], gUnknown_03005FA0[2] - r5 / 256) + r8;
             ewram1D400[r4] = Cos(gUnknown_03005FA0[0], gUnknown_03005FA0[3] - r5 / 256) + r7;
         }
 

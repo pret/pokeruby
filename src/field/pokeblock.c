@@ -27,6 +27,7 @@
 #include "safari_zone.h"
 #include "event_data.h"
 #include "pokeblock.h"
+#include "ewram.h"
 
 struct UnkPokeblockStruct
 {
@@ -35,9 +36,6 @@ struct UnkPokeblockStruct
     u8 unk2;
     u8 unk3;
 };
-
-extern u8 ewram[];
-
 
 static EWRAM_DATA u8 gUnknown_02039244 = 0;
 static EWRAM_DATA struct UnkPokeblockStruct gUnknown_02039248 = {0};

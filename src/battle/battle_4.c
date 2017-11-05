@@ -259,8 +259,6 @@ extern u8 gUnknown_081D9468[];
 #define sBYTE2_32(value)(( (u8) (((s32)(value) & (0x00FF0000)) >> 0x10)))
 #define sBYTE3_32(value)(( (u8) (((s32)(value) & (0xFF000000)) >> 0x18)))
 
-#define USED_HELD_ITEM(bank)((((u16*)(&unk_2000000[bank * 2 + 0x160cc]))))
-
 #define RecordAbilitySetField6(ability, fieldValue) \
 (gLastUsedAbility = ability, gBattleCommunication[6] = fieldValue, RecordAbilityBattle(gBankTarget, ability))
 
@@ -2640,7 +2638,7 @@ void SetMoveEffect(bool8 primary, u8 certainArg)
                     {gBattlescriptCurrInstr++; return;}
 
 				gLastUsedItem = gBattleMons[gBankTarget].item;
-                unk_2000000[gBankAttacker * 2 + 0x160cc] = gLastUsedItem;
+                ewram[gBankAttacker * 2 + 0x160cc] = gLastUsedItem;
                 gBattleMons[gBankTarget].item = 0;
 
                 gActiveBank = gBankAttacker;
@@ -5123,7 +5121,7 @@ static void atk1E_jumpifability(void)
             gLastUsedAbility = ability;
             gBattlescriptCurrInstr = jump_loc;
             RecordAbilityBattle(bank -1, gLastUsedAbility);
-            unk_2000000[0x160f8] = bank - 1;
+            ewram[0x160f8] = bank - 1;
         }
         else
             gBattlescriptCurrInstr += 7;
@@ -5136,7 +5134,7 @@ static void atk1E_jumpifability(void)
             gLastUsedAbility = ability;
             gBattlescriptCurrInstr = jump_loc;
             RecordAbilityBattle(bank - 1, gLastUsedAbility);
-            unk_2000000[0x160f8] = bank - 1;
+            ewram[0x160f8] = bank - 1;
         }
         else
             gBattlescriptCurrInstr += 7;
@@ -5149,7 +5147,7 @@ static void atk1E_jumpifability(void)
             gLastUsedAbility = ability;
             gBattlescriptCurrInstr = jump_loc;
             RecordAbilityBattle(bank, gLastUsedAbility);
-            unk_2000000[0x160f8] = bank;
+            ewram[0x160f8] = bank;
         }
         else
             gBattlescriptCurrInstr += 7;
@@ -7327,7 +7325,7 @@ static void atk43_jumpifabilitypresent(void)
 
 static void atk44(void)
 {
-    unk_2000000[gBankAttacker + 0x16060] = 1;
+    ewram[gBankAttacker + 0x16060] = 1;
 }
 
 #ifdef NONMATCHING
@@ -9522,7 +9520,7 @@ static void atk4C_copy_poke_data(void)
 
     gActiveBank = GetBattleBank(T2_READ_8(gBattlescriptCurrInstr + 1));
 
-    gBattlePartyID[gActiveBank] = unk_2000000[0x16068 + gActiveBank];
+    gBattlePartyID[gActiveBank] = ewram[0x16068 + gActiveBank];
 
     EmitGetAttributes(0, 0, gBitTable[gBattlePartyID[gActiveBank]]);
     MarkBufferBankForExecution(gActiveBank);
@@ -11640,7 +11638,6 @@ static void atk69_dmg_adjustment2(void) //literally a copy of atk07 except there
 void atk6A_removeitem(void)
 {
     gActiveBank = GetBattleBank(T2_READ_8(gBattlescriptCurrInstr + 1));
-    #define USED_HELD_ITEMS(bank) (*(u16 *)&ewram[0x160CC + 2 * (bank)])
     USED_HELD_ITEMS(gActiveBank) = gBattleMons[gActiveBank].item;
 
     gBattleMons[gActiveBank].item = 0;

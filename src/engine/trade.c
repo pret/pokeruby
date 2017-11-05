@@ -217,9 +217,6 @@ extern u8 *gUnknown_020296CC[13];
 extern struct TradeEwramSubstruct *gUnknown_03004824;
 extern struct MailStruct gUnknown_02029700[16];
 
-#define ewram_2010000 (*(struct TradeEwramStruct *)(ewram + 0x10000))
-
-
 const u32 unref_data_820ABD4[] = {
     0x00000890,
     0x00003AC0,

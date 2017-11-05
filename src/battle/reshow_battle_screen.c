@@ -7,6 +7,7 @@
 #include "text.h"
 #include "rom_8077ABC.h"
 #include "data2.h"
+#include "ewram.h"
 
 extern struct SpriteTemplate gUnknown_02024E8C;
 extern struct Window gUnknown_03004210;
@@ -54,9 +55,6 @@ static bool8 LoadAppropiateBankSprite(u8 bank);
 static void sub_807B184(u8 bank);
 static void sub_807B508(u8 bank);
 static void sub_807B06C(void);
-
-#define gReshowState ewram[0x1FFFF]
-#define gHelperState ewram[0x1FFFE]
 
 void nullsub_14(void)
 {

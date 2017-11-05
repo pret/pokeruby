@@ -35,7 +35,6 @@ struct LinkTestBGInfo
     u32 dummy_C;
 };
 
-extern u8 unk_2000000[];
 extern u8 unk_2004000[];
 extern u16 gBattleTypeFlags;
 
@@ -507,7 +506,7 @@ static void ProcessRecvCmds(u8 unusedParam)
         case 0x8888:
             if (sBlockRecv[i].size > BLOCK_BUFFER_SIZE)
             {
-                u16 *buffer = (u16 *)unk_2000000;
+                u16 *buffer = (u16 *)ewram;
                 u16 j;
                 for (j = 0; j < CMD_LENGTH - 1; j++)
                     buffer[(sBlockRecv[i].pos / 2) + j] = gRecvCmds[j + 1][i];

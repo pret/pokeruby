@@ -38,6 +38,7 @@
 #include "string_util.h"
 #include "strings.h"
 #include "text.h"
+#include "ewram.h"
 
 struct UnkTvStruct
 {
@@ -94,9 +95,6 @@ extern u8 gUnknown_03004316[11];
 extern u8 gBattleOutcome;
 
 extern u16 gLastUsedItem;
-
-extern u8 ewram[];
-#define gUnknown_02007000 (*(ewramStruct_02007000 *)(ewram + 0x7000))
 
 static EWRAM_DATA u16 gUnknown_020387E0 = 0;
 static EWRAM_DATA u16 gUnknown_020387E2 = 0;

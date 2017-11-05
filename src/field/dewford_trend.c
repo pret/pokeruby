@@ -6,7 +6,7 @@
 #include "rng.h"
 #include "text.h"
 
-extern u8 unk_2000000[];
+extern u8 ewram[];
 
 extern u16 gScriptResult;
 extern u16 gSpecialVar_0x8004;

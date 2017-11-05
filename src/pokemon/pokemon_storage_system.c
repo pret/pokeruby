@@ -2,6 +2,7 @@
 #include "pokemon_storage_system.h"
 #include "menu.h"
 #include "string_util.h"
+#include "ewram.h"
 
 struct StorageAction {
     u8 *text;
@@ -10,14 +11,7 @@ struct StorageAction {
 
 extern const struct StorageAction gUnknown_083B6DF4[];
 
-extern const u8 unk_2000000[];
-
 EWRAM_DATA struct PokemonStorage gPokemonStorage = {0};
-
-#define gUnk2002694 (u8 *)(&unk_2000000[0x2694])
-#define gUnk20026A6 (u8 *)(&unk_2000000[0x26a6])
-#define gUnk20011fa (u8 *)(&unk_2000000[0x11fa])
-#define gUnk20026e4 (u8 *)(&unk_2000000[0x26e4])
 
 void sub_8098898(u8 index) {
     u8 *ptr;

@@ -24,6 +24,7 @@
 #include "pokemon_summary_screen.h"
 #include "menu_cursor.h"
 #include "strings2.h"
+#include "ewram.h"
 
 struct EvoInfo
 {
@@ -54,8 +55,6 @@ struct EvoInfo
 
     u8 unkA0C4; // 0x201E8C4
 };
-
-#define sEvoInfo ((*(struct EvoInfo*)(ewram + 0x14800)))
 
 void EvolutionRenameMon(struct Pokemon *mon, u16 oldSpecies, u16 newSpecies);
 void sub_8024CEC(void);
