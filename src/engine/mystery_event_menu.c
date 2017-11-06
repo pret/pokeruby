@@ -13,8 +13,7 @@
 #include "strings2.h"
 #include "task.h"
 #include "text.h"
-
-extern u8 ewram[];
+#include "ewram.h"
 
 static EWRAM_DATA u8 gUnknown_02039338 = 0;
 

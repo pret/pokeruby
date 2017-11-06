@@ -12,8 +12,7 @@
 #include "strings.h"
 #include "text.h"
 #include "unknown_task.h"
-
-extern u8 ewram[];
+#include "ewram.h"
 
 static u8 gUnknown_03000750;
 static u16 gUnknown_03000752;
@@ -184,15 +183,15 @@ static void ShowContestPainting(void)
     case 2:
         SeedRng(gMain.vblankCounter1);
         InitKeys();
-        ContestPaintingInitWindow(ewram[0x15DDF]);
+        ContestPaintingInitWindow(ewram15DDF);
         gMain.state++;
         break;
     case 3:
-        sub_8107090(ewram[0x15DDE], ewram[0x15DDF]);
+        sub_8107090(ewram15DDE, ewram15DDF);
         gMain.state++;
         break;
     case 4:
-        ContestPaintingPrintCaption(ewram[0x15DDE], ewram[0x15DDF]);
+        ContestPaintingPrintCaption(ewram15DDE, ewram15DDF);
         LoadPalette(gUnknown_083F6140, 0, 1 * 2);
         DmaClear32(3, PLTT, 0x400);
         BeginFastPaletteFade(2);

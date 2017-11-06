@@ -9,6 +9,7 @@
 #include "sprite.h"
 #include "string_util.h"
 #include "text.h"
+#include "ewram.h"
 
 //Extracts the upper 16 bits of a 32-bit number
 #define HIHALF(n) (((n) & 0xFFFF0000) >> 16)
@@ -16,7 +17,6 @@
 //Extracts the lower 16 bits of a 32-bit number
 #define LOHALF(n) ((n) & 0xFFFF)
 
-extern u8 ewram[];
 extern u16 gMoveToLearn;
 
 static EWRAM_DATA u8 sLearningMoveTableID = 0;
@@ -436,9 +436,9 @@ void CalculateMonStats(struct Pokemon *mon)
         newMaxHP = (((n + hpEV / 4) * level) / 100) + level + 10;
     }
 
-    ewram[0x160FA] = newMaxHP - oldMaxHP;
-    if (ewram[0x160FA] == 0)
-        ewram[0x160FA] = 1;
+    eStatHp = newMaxHP - oldMaxHP;
+    if (eStatHp == 0)
+        eStatHp = 1;
 
     SetMonData(mon, MON_DATA_MAX_HP, &newMaxHP);
 

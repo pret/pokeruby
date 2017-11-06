@@ -11,6 +11,7 @@
 #include "strings.h"
 #include "task.h"
 #include "text.h"
+#include "ewram.h"
 
 // In English 1.0, the text window is too small, causing text to overflow.
 
@@ -21,8 +22,6 @@
 #endif
 
 #define CLOCK_WIN_TOP (MSG_WIN_TOP - 4)
-
-extern u8 ewram[];
 
 static EWRAM_DATA u16 gSaveFailedType = 0;
 static EWRAM_DATA u16 gSaveFailedClockInfo[9] = {0};

@@ -2290,7 +2290,7 @@ void sub_8012258(u8 a)
     u8 r1;
 
     for (i = 0; i < 3; i++)
-        gUnknown_02038470[i] = ewram1606Carr(i, a, 3);
+        gUnknown_02038470[i] = ewram1606Carr(i, a);
     r4 = pokemon_order_func(gBattlePartyID[a]);
     r1 = pokemon_order_func(ewram16068arr(a));
     sub_8094C98(r4, r1);
@@ -2298,15 +2298,15 @@ void sub_8012258(u8 a)
     {
         for (i = 0; i < 3; i++)
         {
-            ewram1606Carr(i, a, 3) = gUnknown_02038470[i];
-            ewram1606Carr(i, (a ^ 2), 3) = gUnknown_02038470[i];
+            ewram1606Carr(i, a) = gUnknown_02038470[i];
+            ewram1606Carr(i, (a ^ 2)) = gUnknown_02038470[i];
         }
     }
     else
     {
         for (i = 0; i < 3; i++)
         {
-            ewram1606Carr(i, a, 3) = gUnknown_02038470[i];
+            ewram1606Carr(i, a) = gUnknown_02038470[i];
         }
     }
 }

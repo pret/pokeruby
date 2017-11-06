@@ -7,8 +7,6 @@
 #include "text.h"
 #include "ewram.h"
 
-extern u8 ewram[];
-
 extern u16 gScriptResult;
 extern u16 gSpecialVar_0x8004;
 

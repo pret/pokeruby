@@ -309,8 +309,8 @@ void BattleLoadOpponentMonSprite(struct Pokemon *pkmn, u8 b)
     if (species == SPECIES_CASTFORM)
     {
         paletteOffset = 0x100 + b * 16;
-        LZDecompressWram(lzPaletteData, ewram + 0x16400);
-        LoadPalette(ewram + 0x16400 + gBattleMonForms[b] * 32, paletteOffset, 0x20);
+        LZDecompressWram(lzPaletteData, ewram16400);
+        LoadPalette(ewram16400 + gBattleMonForms[b] * 32, paletteOffset, 0x20);
     }
     if (ewram17800[b].transformedSpecies != 0)
     {
@@ -361,8 +361,8 @@ void BattleLoadPlayerMonSprite(struct Pokemon *pkmn, u8 b)
     if (species == SPECIES_CASTFORM)
     {
         paletteOffset = 0x100 + b * 16;
-        LZDecompressWram(lzPaletteData, ewram + 0x16400);
-        LoadPalette(ewram + 0x16400 + gBattleMonForms[b] * 32, paletteOffset, 0x20);
+        LZDecompressWram(lzPaletteData, ewram16400);
+        LoadPalette(ewram16400 + gBattleMonForms[b] * 32, paletteOffset, 0x20);
     }
     if (ewram17800[b].transformedSpecies != 0)
     {
@@ -622,7 +622,7 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
     {
         StartSpriteAnim(&gSprites[gObjectBankIDs[a]], ewram17840.unk0);
         paletteOffset = 0x100 + a * 16;
-        LoadPalette(ewram + 0x16400 + ewram17840.unk0 * 32, paletteOffset, 32);
+        LoadPalette(ewram16400 + ewram17840.unk0 * 32, paletteOffset, 32);
         gBattleMonForms[a] = ewram17840.unk0;
         if (ewram17800[a].transformedSpecies != 0)
         {
@@ -694,7 +694,7 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
         LoadPalette(ewram, paletteOffset, 32);
         if (species == SPECIES_CASTFORM)
         {
-            u16 *paletteSrc = (u16 *)(ewram + 0x16400);
+            u16 *paletteSrc = (u16 *)ewram16400; // TODO: avoid casting?
 
             LZDecompressWram(lzPaletteData, paletteSrc);
             LoadPalette(paletteSrc + gBattleMonForms[b] * 16, paletteOffset, 32);

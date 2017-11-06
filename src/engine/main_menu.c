@@ -22,6 +22,7 @@
 #include "text.h"
 #include "title_screen.h"
 #include "unknown_task.h"
+#include "ewram.h"
 
 #define BirchSpeechUpdateWindowText() ((u8)MenuUpdateWindowText_OverrideLineLength(24))
 
@@ -53,8 +54,6 @@ extern const u8 gUnknown_081E7834[];
 extern const u8 gUnknown_081E796C[];
 
 extern const union AffineAnimCmd *const gSpriteAffineAnimTable_81E79AC[];
-
-extern u8 ewram[];
 
 //Menu layouts
 enum
@@ -1419,14 +1418,14 @@ void AddBirchSpeechObjects(u8 taskId)
     gTasks[taskId].tAzurillSpriteId = spriteId;
 
     //Create Brendan sprite
-    spriteId = CreateTrainerSprite(0, 120, 60, 0, ewram);
+    spriteId = CreateTrainerSprite(0, 120, 60, 0, eBrendanSprite);
     gSprites[spriteId].callback = nullsub_34;
     gSprites[spriteId].invisible = 1;
     gSprites[spriteId].oam.priority = 0;
     gTasks[taskId].tBrendanSpriteId = spriteId;
 
     //Create May sprite
-    spriteId = CreateTrainerSprite(1, 120, 60, 0, ewram + 0x800);
+    spriteId = CreateTrainerSprite(1, 120, 60, 0, eMaySprite);
     gSprites[spriteId].callback = nullsub_34;
     gSprites[spriteId].invisible = 1;
     gSprites[spriteId].oam.priority = 0;

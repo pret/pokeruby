@@ -399,16 +399,18 @@ void PrepareBufferDataTransferLink(u8 a, u16 size, u8 *data)
         gTasks[gUnknown_020238C4].data[12] = gTasks[gUnknown_020238C4].data[14];
         gTasks[gUnknown_020238C4].data[14] = 0;
     }
-    ewram[gTasks[gUnknown_020238C4].data[14] + 0x14000] = a;
-    ewram[gTasks[gUnknown_020238C4].data[14] + 0x14001] = gActiveBank;
-    ewram[gTasks[gUnknown_020238C4].data[14] + 0x14002] = gBankAttacker;
-    ewram[gTasks[gUnknown_020238C4].data[14] + 0x14003] = gBankTarget;
-    ewram[gTasks[gUnknown_020238C4].data[14] + 0x14004] = r9;
-    ewram[gTasks[gUnknown_020238C4].data[14] + 0x14005] = (r9 & 0x0000FF00) >> 8;
-    ewram[gTasks[gUnknown_020238C4].data[14] + 0x14006] = gAbsentBankFlags;
-    ewram[gTasks[gUnknown_020238C4].data[14] + 0x14007] = gEffectBank;
+
+	ewram14000arr(0, gTasks[gUnknown_020238C4].data[14]) = a;
+    ewram14000arr(1, gTasks[gUnknown_020238C4].data[14]) = gActiveBank;
+    ewram14000arr(2, gTasks[gUnknown_020238C4].data[14]) = gBankAttacker;
+    ewram14000arr(3, gTasks[gUnknown_020238C4].data[14]) = gBankTarget;
+    ewram14000arr(4, gTasks[gUnknown_020238C4].data[14]) = r9;
+    ewram14000arr(5, gTasks[gUnknown_020238C4].data[14]) = (r9 & 0x0000FF00) >> 8;
+    ewram14000arr(6, gTasks[gUnknown_020238C4].data[14]) = gAbsentBankFlags;
+    ewram14000arr(7, gTasks[gUnknown_020238C4].data[14]) = gEffectBank;
+
     for (i = 0; i < size; i++)
-        ewram[gTasks[gUnknown_020238C4].data[14] + 0x14008 + i] = data[i];
+        ewram14008arr(i, gTasks[gUnknown_020238C4].data[14]) = data[i];
     gTasks[gUnknown_020238C4].data[14] = gTasks[gUnknown_020238C4].data[14] + r9 + 8;
 }
 
@@ -448,8 +450,8 @@ void sub_800C1A8(u8 taskId)
                     gTasks[taskId].data[12] = 0;
                     gTasks[taskId].data[15] = 0;
                 }
-                var = (ewram[gTasks[taskId].data[15] + 0x14004] | (ewram[gTasks[taskId].data[15] + 0x14005] << 8)) + 8;
-                SendBlock(bitmask_all_link_players_but_self(), &ewram[gTasks[taskId].data[15] + 0x14000], var);
+                var = (ewram14004arr(0, gTasks[taskId].data[15]) | (ewram14004arr(1, gTasks[taskId].data[15]) << 8)) + 8;
+                SendBlock(bitmask_all_link_players_but_self(), &ewram14000arr(0, gTasks[taskId].data[15]), var);
                 gTasks[taskId].data[11]++;
             }
             else
@@ -462,7 +464,7 @@ void sub_800C1A8(u8 taskId)
     case 4:
         if (sub_8007ECC())
         {
-            var = ewram[gTasks[taskId].data[15] + 0x14004] | (ewram[gTasks[taskId].data[15] + 0x14005] << 8);
+            var = (ewram14004arr(0, gTasks[taskId].data[15]) | (ewram14004arr(1, gTasks[taskId].data[15]) << 8));
             gTasks[taskId].data[13] = 1;
             gTasks[taskId].data[15] = gTasks[taskId].data[15] + var + 8;
             gTasks[taskId].data[11] = 3;
@@ -533,28 +535,28 @@ void sub_800C47C(u8 taskId)
             gTasks[taskId].data[12] = 0;
             gTasks[taskId].data[15] = 0;
         }
-        r4 = ewram[0x15000 + gTasks[taskId].data[15] + 1];
-        r7 = ewram[0x15000 + gTasks[taskId].data[15] + 4] | (ewram[0x15000 + gTasks[taskId].data[15] + 5] << 8);
-        switch (ewram[0x15000 + gTasks[taskId].data[15] + 0])
+        r4 = ewram15000arr(1, gTasks[taskId].data[15]);
+        r7 = ewram15000arr(4, gTasks[taskId].data[15]) | (ewram15000arr(5, gTasks[taskId].data[15]) << 8);
+        switch (ewram15000arr(0, gTasks[taskId].data[15]))
         {
         case 0:
             if (gBattleExecBuffer & gBitTable[r4])
                 return;
-            memcpy(gBattleBufferA[r4], &ewram[0x15000 + gTasks[taskId].data[15] + 8], r7);
+            memcpy(gBattleBufferA[r4], &ewram15000arr(8, gTasks[taskId].data[15]), r7);
             sub_80155A4(r4);
             if (!(gBattleTypeFlags & BATTLE_TYPE_WILD))
             {
-                gBankAttacker = ewram[0x15000 + gTasks[taskId].data[15] + 2];
-                gBankTarget = ewram[0x15000 + gTasks[taskId].data[15] + 3];
-                gAbsentBankFlags = ewram[0x15000 + gTasks[taskId].data[15] + 6];
-                gEffectBank = ewram[0x15000 + gTasks[taskId].data[15] + 7];
+                gBankAttacker = ewram15000arr(2, gTasks[taskId].data[15]);
+                gBankTarget = ewram15000arr(3, gTasks[taskId].data[15]);
+                gAbsentBankFlags = ewram15000arr(6, gTasks[taskId].data[15]);
+                gEffectBank = ewram15000arr(7, gTasks[taskId].data[15]);
             }
             break;
         case 1:
-            memcpy(gBattleBufferB[r4], &ewram[0x15000 + gTasks[taskId].data[15] + 8], r7);
+            memcpy(gBattleBufferB[r4], &ewram15000arr(8, gTasks[taskId].data[15]), r7);
             break;
         case 2:
-            r2 = ewram[0x15000 + gTasks[taskId].data[15] + 8];
+            r2 = ewram15000arr(8, gTasks[taskId].data[15]);
             gBattleExecBuffer &= ~(gBitTable[r4] << (r2 * 4));
             break;
         }

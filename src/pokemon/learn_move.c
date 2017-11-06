@@ -16,8 +16,8 @@
 #include "strings2.h"
 #include "task.h"
 #include "trig.h"
+#include "ewram.h"
 
-extern u8 ewram[];
 extern u16 gSpecialVar_0x8004;
 extern u16 gSpecialVar_0x8005;
 extern u8 gTileBuffer[];
@@ -277,7 +277,7 @@ void CB2_InitLearnMove(void)
     ResetSpriteData();
     FreeAllSpritePalettes();
     ResetTasks();
-    sLearnMoveStruct = (struct LearnMoveStruct *)(ewram + 0x17000);
+    sLearnMoveStruct = eLearnMoveStruct;
     ClearLearnMoveVars();
     sLearnMoveStruct->partyMon = gSpecialVar_0x8004;
     sub_8133558();
@@ -312,7 +312,7 @@ void sub_81327A4(void)
     ResetSpriteData();
     FreeAllSpritePalettes();
     ResetTasks();
-    sLearnMoveStruct = (struct LearnMoveStruct *)(ewram + 0x17000);
+    sLearnMoveStruct = eLearnMoveStruct;
     sub_8133558();
     sLearnMoveStruct->unk2C6 = gSpecialVar_0x8005;
     SetVBlankCallback(VBlankCB_LearnMove);

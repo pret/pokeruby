@@ -204,7 +204,7 @@ void sub_8094B6C(u8 a, u8 b, u8 c)
 
     if (IsLinkDoubleBattle())
     {
-        u8 *arr = ewram + 0x1606C + a * 3;
+        u8 *arr = &ewram1606Carr(0, a);
 
         for (i = 0, j = 0; i < 3; i++)
         {

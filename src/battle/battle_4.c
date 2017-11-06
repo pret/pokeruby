@@ -10768,12 +10768,12 @@ static void atk51_switch_handle_order(void)
         ewram16068arr(gActiveBank) = gBattleBufferB[gActiveBank][1];
         if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
         {
-            ewram1606Carr(0, gActiveBank, 3) &= 0xF;
-            ewram1606Carr(0, gActiveBank, 3) |= (gBattleBufferB[gActiveBank][2] & 0xF0);
-            ewram1606Carr(1, gActiveBank, 3) = gBattleBufferB[gActiveBank][3];
-            ewram1606Carr(0, (gActiveBank ^ 2), 3) &= (0xF0);
-            ewram1606Carr(0, (gActiveBank ^ 2), 3) |= (gBattleBufferB[gActiveBank][2] & 0xF0) >> 4;
-            ewram1606Carr(2, (gActiveBank ^ 2), 3) = gBattleBufferB[gActiveBank][3];
+            ewram1606Carr(0, gActiveBank) &= 0xF;
+            ewram1606Carr(0, gActiveBank) |= (gBattleBufferB[gActiveBank][2] & 0xF0);
+            ewram1606Carr(1, gActiveBank) = gBattleBufferB[gActiveBank][3];
+            ewram1606Carr(0, (gActiveBank ^ 2)) &= (0xF0);
+            ewram1606Carr(0, (gActiveBank ^ 2)) |= (gBattleBufferB[gActiveBank][2] & 0xF0) >> 4;
+            ewram1606Carr(2, (gActiveBank ^ 2)) = gBattleBufferB[gActiveBank][3];
         }
         else
             sub_8012258(gActiveBank);

@@ -15,6 +15,7 @@
 #include "task.h"
 #include "text.h"
 #include "unknown_task.h"
+#include "ewram.h"
 
 extern u8 gUnknown_0203856C;
 extern u8 gUnknown_0203857D[][64];
@@ -45,7 +46,6 @@ extern u8 gUnknown_083C9282[];
 extern const u8 gUnknown_083C928E[][2];
 extern u8 gUnknown_083C9296[];
 extern u8 gUnknown_083C92A8[];
-extern u8 ewram[];
 extern u8 gMatsudaDebugMenu_GoBackText[];
 extern u8 gMatsudaDebugMenu_BattlePointsText[];
 extern u8 gMatsudaDebugMenu_StartText[];
@@ -739,7 +739,7 @@ void sub_80AACC4(void)
     {
         SetDebugMonForContest();
         if (!(gIsLinkContest & 1))
-            sub_80AE82C(ewram[0]);
+            sub_80AE82C(eMatsudaDebugVar);
         SetMainCallback2(sub_80AB47C);
     }
 }
@@ -748,7 +748,7 @@ void sub_80AAD08(struct Sprite *sprite, s8 var2)
 {
     if (var2 == 1)
     {
-        ewram[0] = sprite->data3;
+        eMatsudaDebugVar = sprite->data3;
         SetMainCallback2(sub_80AACC4);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
     }

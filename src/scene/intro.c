@@ -1207,6 +1207,7 @@ static void Task_IntroWaitToSetupPart3DoubleFight(u8 taskId)
         gTasks[taskId].func = Task_IntroLoadPart3Streaks;
 }
 
+// TODO: use ewram define instead
 extern u8 ewram[][32];
 
 static void Task_IntroLoadPart3Streaks(u8 taskId)
