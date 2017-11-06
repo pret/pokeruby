@@ -400,7 +400,7 @@ void PrepareBufferDataTransferLink(u8 a, u16 size, u8 *data)
         gTasks[gUnknown_020238C4].data[14] = 0;
     }
 
-	ewram14000arr(0, gTasks[gUnknown_020238C4].data[14]) = a;
+    ewram14000arr(0, gTasks[gUnknown_020238C4].data[14]) = a;
     ewram14000arr(1, gTasks[gUnknown_020238C4].data[14]) = gActiveBank;
     ewram14000arr(2, gTasks[gUnknown_020238C4].data[14]) = gBankAttacker;
     ewram14000arr(3, gTasks[gUnknown_020238C4].data[14]) = gBankTarget;
