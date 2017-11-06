@@ -2645,9 +2645,9 @@ void PlayerHandlecmd22(void)
 
     gUnknown_0300434C[gActiveBank] = CreateTask(TaskDummy, 0xFF);
     gTasks[gUnknown_0300434C[gActiveBank]].data[0] = gBattleBufferA[gActiveBank][1] & 0xF;
-    ewram[0x16054] = gBattleBufferA[gActiveBank][1] >> 4;
-    ewram[0x1609D] = gBattleBufferA[gActiveBank][2];
-    ewram[0x160C0] = gBattleBufferA[gActiveBank][3];
+    ewram16054 = gBattleBufferA[gActiveBank][1] >> 4;
+    EWRAM_1609D = gBattleBufferA[gActiveBank][2];
+    ewram160C0 = gBattleBufferA[gActiveBank][3];
     for (i = 0; i < 3; i++)
         gUnknown_02038470[i] = gBattleBufferA[gActiveBank][4 + i];
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);

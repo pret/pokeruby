@@ -22,7 +22,7 @@
 
 #define CLOCK_WIN_TOP (MSG_WIN_TOP - 4)
 
-extern u8 unk_2000000[];
+extern u8 ewram[];
 
 static EWRAM_DATA u16 gSaveFailedType = 0;
 static EWRAM_DATA u16 gSaveFailedClockInfo[9] = {0};
@@ -267,7 +267,7 @@ static void VBlankCB_UpdateClockGraphics(void)
 
 static bool8 VerifySectorWipe(u16 sector)
 {
-    u32 *ptr = (u32 *)&unk_2000000;
+    u32 *ptr = (u32 *)&ewram;
     u16 i;
 
     ReadFlash(sector, 0, ptr, 4096);

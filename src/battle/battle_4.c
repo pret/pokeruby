@@ -2639,7 +2639,7 @@ void SetMoveEffect(bool8 primary, u8 certainArg)
                     {gBattlescriptCurrInstr++; return;}
 
 				gLastUsedItem = gBattleMons[gBankTarget].item;
-                ewram[gBankAttacker * 2 + 0x160cc] = gLastUsedItem;
+                USED_HELD_ITEM(bank) = gLastUsedItem;
                 gBattleMons[gBankTarget].item = 0;
 
                 gActiveBank = gBankAttacker;
@@ -2653,8 +2653,7 @@ void SetMoveEffect(bool8 primary, u8 certainArg)
                 b_movescr_stack_push(gBattlescriptCurrInstr + 1);
                 gBattlescriptCurrInstr = BattleScript_ItemSteal;
 
-				ewram[gBankTarget * 2 + 0x160e8] = 0;
-                //STORE_CHOICEMOVE(gBankTarget, 0);
+				CHOICED_MOVE(gBankTarget) = 0;
             }
             break;
         case 32: //escape prevention
@@ -2729,8 +2728,7 @@ void SetMoveEffect(bool8 primary, u8 certainArg)
                 b_movescr_stack_push(gBattlescriptCurrInstr + 1);
                 gBattlescriptCurrInstr = BattleScript_KnockedOff;
 
-				ewram[gEffectBank * 2 + 0x160e8] = 0;
-                //STORE_CHOICEMOVE(gEffectBank, 0);
+                CHOICED_MOVE(gEffectBank) = 0;
             }
             break;
         case 59: //overheat
@@ -4998,12 +4996,12 @@ static void atk19_faint_pokemon(void)
         if (!(gAbsentBankFlags & gBitTable[gActiveBank])
          && gBattleMons[gActiveBank].hp == 0)
         {
-            ewram[0x160AC + bank * 2 + 0] = 0;
-            ewram[0x160AC + bank * 2 + 1] = 0;
-            ewram[0x16100 + bank * 4 + 0] = 0;
-            ewram[0x16100 + bank * 4 + 1] = 0;
-            ewram[0x16100 + bank * 4 + 2] = 0;
-            ewram[0x16100 + bank * 4 + 3] = 0;
+            ewram160ACarr2(0, bank) = 0;
+            ewram160ACarr2(1, bank) = 0;
+            ewram16100arr2(0, bank) = 0;
+            ewram16100arr2(1, bank) = 0;
+            ewram16100arr2(2, bank) = 0;
+            ewram16100arr2(3, bank) = 0;
 
             gHitMarker |= HITMARKER_FAINTED(gActiveBank);
             b_movescr_stack_push(gBattlescriptCurrInstr + 7);
@@ -5039,7 +5037,7 @@ static void atk19_faint_pokemon(void)
              && gBattleMons[gBankAttacker].hp != 0
              && gCurrentMove != MOVE_STRUGGLE)
             {
-                u8 moveIndex = ewram[0x1608C + gBankAttacker];
+                u8 moveIndex = ewram1608Carr(gBankAttacker);
 
                 gBattleMons[gBankAttacker].pp[moveIndex] = 0;
                 b_movescr_stack_push(gBattlescriptCurrInstr);
@@ -5122,7 +5120,7 @@ static void atk1E_jumpifability(void)
             gLastUsedAbility = ability;
             gBattlescriptCurrInstr = jump_loc;
             RecordAbilityBattle(bank -1, gLastUsedAbility);
-            ewram[0x160f8] = bank - 1;
+            ewram160F8 = bank - 1;
         }
         else
             gBattlescriptCurrInstr += 7;
@@ -5135,7 +5133,7 @@ static void atk1E_jumpifability(void)
             gLastUsedAbility = ability;
             gBattlescriptCurrInstr = jump_loc;
             RecordAbilityBattle(bank - 1, gLastUsedAbility);
-            ewram[0x160f8] = bank - 1;
+            ewram160F8 = bank - 1;
         }
         else
             gBattlescriptCurrInstr += 7;
@@ -5148,7 +5146,7 @@ static void atk1E_jumpifability(void)
             gLastUsedAbility = ability;
             gBattlescriptCurrInstr = jump_loc;
             RecordAbilityBattle(bank, gLastUsedAbility);
-            ewram[0x160f8] = bank;
+            ewram160F8 = bank;
         }
         else
             gBattlescriptCurrInstr += 7;
@@ -7326,11 +7324,10 @@ static void atk43_jumpifabilitypresent(void)
 
 static void atk44(void)
 {
-    ewram[gBankAttacker + 0x16060] = 1;
+    ewram16060(gBankAttacker) = 1;
 }
 
 #ifdef NONMATCHING
-
 static void atk45_playanimation(void)
 {
     #define ANIMATION_ID T2_READ_8(gBattlescriptCurrInstr + 2)
@@ -9521,7 +9518,7 @@ static void atk4C_copy_poke_data(void)
 
     gActiveBank = GetBattleBank(T2_READ_8(gBattlescriptCurrInstr + 1));
 
-    gBattlePartyID[gActiveBank] = ewram[0x16068 + gActiveBank];
+    gBattlePartyID[gActiveBank] = ewram16068arr(gActiveBank);
 
     EmitGetAttributes(0, 0, gBitTable[gBattlePartyID[gActiveBank]]);
     MarkBufferBankForExecution(gActiveBank);
@@ -9671,8 +9668,7 @@ static void atk4F_jump_if_cannot_switch(void)
 
 void sub_8022A3C(u8 unkown)
 {
-    //BATTLE_STRUCT->unk16064[gActiveBank] = gBattlePartyID[gActiveBank];
-    ewram[gActiveBank + 0x16064] = gBattlePartyID[gActiveBank];
+    BATTLE_PARTY_ID(gActiveBank) = gBattlePartyID[gActiveBank];
     EmitChoosePokemon(0, 1, unkown, 0, BATTLE_STRUCT->unk1606C[gActiveBank]);
     MarkBufferBankForExecution(gActiveBank);
 }
@@ -10760,7 +10756,7 @@ static void atk51_switch_handle_order(void)
         for (i = 0; i < gNoOfAllBanks; i++)
         {
             if (gBattleBufferB[i][0] == 0x22)
-                ewram[i + 0x16068] = gBattleBufferB[i][1];
+                ewram16068arr(i) = gBattleBufferB[i][1];
         }
         break;
     case 1:
@@ -10769,17 +10765,15 @@ static void atk51_switch_handle_order(void)
         break;
     case 2:
         gBattleCommunication[0] = gBattleBufferB[gActiveBank][1];
-        ewram[gActiveBank + 0x16068] = gBattleBufferB[gActiveBank][1];
+        ewram16068arr(gActiveBank) = gBattleBufferB[gActiveBank][1];
         if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
         {
-
-            ewram[(gActiveBank) * 3 + (0x1606C + 0)] &= 0xF;
-            ewram[(gActiveBank) * 3 + (0x1606C + 0)] |= (gBattleBufferB[gActiveBank][2] & 0xF0);
-            ewram[(gActiveBank) * 3 + (0x1606C + 1)] = gBattleBufferB[gActiveBank][3];
-
-            ewram[(gActiveBank ^ 2) * 3 + (0x1606C + 0)] &= (0xF0);
-            ewram[(gActiveBank ^ 2) * 3 + (0x1606C + 0)] |= (gBattleBufferB[gActiveBank][2] & 0xF0) >> 4;
-            ewram[(gActiveBank ^ 2) * 3 + (0x1606C + 2)] = gBattleBufferB[gActiveBank][3];
+            ewram1606Carr(0, gActiveBank, 3) &= 0xF;
+            ewram1606Carr(0, gActiveBank, 3) |= (gBattleBufferB[gActiveBank][2] & 0xF0);
+            ewram1606Carr(1, gActiveBank, 3) = gBattleBufferB[gActiveBank][3];
+            ewram1606Carr(0, (gActiveBank ^ 2), 3) &= (0xF0);
+            ewram1606Carr(0, (gActiveBank ^ 2), 3) |= (gBattleBufferB[gActiveBank][2] & 0xF0) >> 4;
+            ewram1606Carr(2, (gActiveBank ^ 2), 3) = gBattleBufferB[gActiveBank][3];
         }
         else
             sub_8012258(gActiveBank);
@@ -12168,7 +12162,7 @@ static void atk74_hp_thresholds2(void)
     {
         gActiveBank = GetBattleBank(T2_READ_8(gBattlescriptCurrInstr + 1));
         opposing_bank = gActiveBank ^ 1;
-        hp_switchout = ewram[2 * GetBankSide(opposing_bank) + 0x160bc]; //BATTLE_STRUCT->HP_OnSwitchout[GetBankSide(opposing_bank)];
+        hp_switchout = ewram160BCarr(GetBankSide(opposing_bank)); //BATTLE_STRUCT->HP_OnSwitchout[GetBankSide(opposing_bank)];
         result = (hp_switchout - gBattleMons[opposing_bank].hp) * 100 / hp_switchout;
 
         if (gBattleMons[opposing_bank].hp >= hp_switchout)
@@ -12242,7 +12236,7 @@ static void atk76_various(void)
             else
                 gActiveBank = 2;
 
-            choiced_move = (u16*)(&ewram[gActiveBank * 2 + 0x160e8]);
+            choiced_move = CHOICED_MOVE(gActiveBank);
             for (i = 0; i < 4; i++)
             {
                 if (gBattleMons[gActiveBank].moves[i] == *choiced_move)
@@ -12382,11 +12376,11 @@ static void atk7B_healhalfHP_if_possible(void)
 
 static void atk7C_8025508(void)
 {
-    u16 r7 = ewram[gBankAttacker * 2 + 0x160ac] | (ewram[gBankAttacker * 2 + 0x160ad] << 8);
-    u16 r6 = ewram[gBankAttacker * 4 + 0x16100] | (ewram[gBankAttacker * 4 + 0x16101] << 8);
-    u16 r5 = ewram[gBankAttacker * 4 + 0x16102] | (ewram[gBankAttacker * 4 + 0x16103] << 8);
+    u16 r7 = ewram160ACarr2(0, gBankAttacker) | (ewram160ACarr2(1, gBankAttacker) << 8);
+    u16 r6 = ewram16100arr2(0, gBankAttacker) | (ewram16100arr2(1, gBankAttacker) << 8);
+    u16 r5 = ewram16100arr2(2, gBankAttacker) | (ewram16100arr2(3, gBankAttacker) << 8);
 
-    if (r7 !=0 && r7 != 0xFFFF)
+    if (r7 != 0 && r7 != 0xFFFF)
     {
         gHitMarker &= ~(HITMARKER_ATTACKSTRING_PRINTED);
         gCurrentMove = r7;
@@ -13465,12 +13459,12 @@ static void atk8D_setmultihit_counter(void)
 
 static void atk8E_prepare_multihit(void)
 {
-    ewram[0x160e0] = 0xFD;
-    ewram[0x160e1] = 1;
-    ewram[0x160e2] = 1;
-    ewram[0x160e3] = 1;
-    ewram[0x160e4] = 0;
-    ewram[0x160e5] = 0xFF;
+    ewram160E0(0) = 0xFD;
+    ewram160E0(1) = 1;
+    ewram160E0(2) = 1;
+    ewram160E0(3) = 1;
+    ewram160E0(4) = 0;
+    ewram160E0(5) = 0xFF;
     gBattlescriptCurrInstr++;
 }
 
@@ -13478,7 +13472,7 @@ static bool8 sub_80264C0(void)
 {
     if (gBattleMons[gBankAttacker].level >= gBattleMons[gBankTarget].level)
     {
-        ewram[gBankTarget + 0x16064] = gBattlePartyID[gBankTarget];
+        ewram16064arr(gBankTarget) = gBattlePartyID[gBankTarget];
     }
     else
     {
@@ -13488,7 +13482,7 @@ static bool8 sub_80264C0(void)
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
             return 0;
         }
-        ewram[gBankTarget + 0x16064] = gBattlePartyID[gBankTarget];
+        ewram16064arr(gBankTarget) = gBattlePartyID[gBankTarget];
     }
     gBattlescriptCurrInstr = gUnknown_081D90FC;
     return 1;
@@ -13569,7 +13563,7 @@ static void atk8F_forcerandomswitch(void)
                     } while (i == gBattlePartyID[gBankTarget] || !MON_CAN_BATTLE(&party[i]));
                 }
             }
-            ewram[gBankTarget + 0x16068] = i;
+            ewram16068arr(gBankTarget) = i;
             if (!IsLinkDoubleBattle())
                 sub_8012258(gBankTarget);
             sub_8094B6C(gBankTarget, i, 0);
@@ -15430,7 +15424,7 @@ static void atkBA_jumpifnopursuitswitchdmg(void)
             gBankTarget = GetBankByPlayerAI(2);
     }
 
-    if (gActionForBanks[gBankTarget] == 0 && gBankAttacker == ewram[gBankTarget + 0x16010] && !(gBattleMons[gBankTarget].status1 & (STATUS_SLEEP | STATUS_FREEZE))
+    if (gActionForBanks[gBankTarget] == 0 && gBankAttacker == ewram16010arr(gBankTarget) && !(gBattleMons[gBankTarget].status1 & (STATUS_SLEEP | STATUS_FREEZE))
         && gBattleMons[gBankAttacker].hp && !gDisableStructs[gBankTarget].truantCounter && gChosenMovesByBanks[gBankTarget] == MOVE_PURSUIT)
     {
         int i;
@@ -15499,11 +15493,11 @@ static void atkBE_breakfree(void) //rapid spin
     if (gBattleMons[gBankAttacker].status2 & STATUS2_WRAPPED)
     {
         gBattleMons[gBankAttacker].status2 &= ~(STATUS2_WRAPPED);
-        gBankTarget = ewram[gBankAttacker + 0x16020];
+        gBankTarget = ewram16020arr(gBankAttacker);
         gBattleTextBuff1[0] = 0xFD;
         gBattleTextBuff1[1] = 2;
-        gBattleTextBuff1[2] = ewram[gBankAttacker * 2 + 0x16004];
-        gBattleTextBuff1[3] = ewram[gBankAttacker * 2 + 0x16005];
+        gBattleTextBuff1[2] = ewram16004arr(0, gBankAttacker);
+        gBattleTextBuff1[3] = ewram16004arr(1, gBankAttacker);
         gBattleTextBuff1[4] = 0xFF;
         b_movescr_stack_push_cursor();
         gBattlescriptCurrInstr = BattleScript_WrapFree;
@@ -16983,7 +16977,7 @@ static void atkE1_intimidate_string_loader(void)
 {
     u8 side;
 
-    BATTLE_STRUCT->scriptingActive = ewram[0x160dd];
+    BATTLE_STRUCT->scriptingActive = ewram160DD;
     side = GetBankSide(BATTLE_STRUCT->scriptingActive);
     gBattleTextBuff1[0] = 0xFD;
     gBattleTextBuff1[1] = 9;
@@ -17011,7 +17005,7 @@ static void atkE2_switchout_abilities(void)
     {
     case ABILITY_NATURAL_CURE:
         gBattleMons[gActiveBank].status1 = 0;
-        EmitSetAttributes(0, REQUEST_STATUS_BATTLE, gBitTable[ewram[gActiveBank + 0x16064]], 4, &gBattleMons[gActiveBank].status1);
+        EmitSetAttributes(0, REQUEST_STATUS_BATTLE, gBitTable[ewram16064arr(gActiveBank)], 4, &gBattleMons[gActiveBank].status1);
         MarkBufferBankForExecution(gActiveBank);
         break;
     }

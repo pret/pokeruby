@@ -1733,8 +1733,8 @@ static void Mugshots_CreateOpponentPlayerSprites(struct Task* task)
     task->tMugshotOpponentID = CreateTrainerSprite(sMugshotsTrainerPicIDsTable[mugshotID],
                                                      sMugshotsOpponentCoords[mugshotID][0] - 32,
                                                      sMugshotsOpponentCoords[mugshotID][1] + 42,
-                                                     0, &ewram[0xC03C]);
-    task->tMugshotPlayerID = CreateTrainerSprite(gSaveBlock2.playerGender, 272, 106, 0, &ewram[0xC03C]);
+                                                     0, ewramC03C);
+    task->tMugshotPlayerID = CreateTrainerSprite(gSaveBlock2.playerGender, 272, 106, 0, ewramC03C);
 
     opponentSprite = &gSprites[task->tMugshotOpponentID];
     playerSprite = &gSprites[task->tMugshotPlayerID];

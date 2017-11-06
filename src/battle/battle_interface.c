@@ -995,8 +995,8 @@ void sub_8044338(u8 a, struct Pokemon *pkmn)
     }
     //_08044486
     r5 = gSprites[a].data5;
-    ConvertIntToDecimalStringN(str + 6, ewram[0x16089], 1, 2);
-    ConvertIntToDecimalStringN(str + 9, ewram[0x16088], 1, 2);
+    ConvertIntToDecimalStringN(str + 6, ewram16089, 1, 2);
+    ConvertIntToDecimalStringN(str + 9, ewram16088, 1, 2);
     str[5] = 0;
     str[8] = 0xBA;
     sub_80034D4((u8 *)0x02000000, str);

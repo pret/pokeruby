@@ -11,7 +11,7 @@
 #define GETBLOCKOFFSET(n) (0xF80 * (n - 1))
 #define TOTALNUMSECTORS ((ARRAY_COUNT(gSaveSectionLocations) * 2) + (ARRAY_COUNT(gHallOfFameSaveSectionLocations) * 2)) // there are 2 slots, so double each array count and get the sum.
 
-extern struct SaveSection unk_2000000; // slow save RAM
+extern struct SaveSection ewram; // slow save RAM
 
 u16 gLastWrittenSector;
 u32 gLastSaveCounter;
@@ -95,7 +95,7 @@ u8 save_write_to_flash(u16 a1, const struct SaveSectionLocation *location)
     u32 retVal;
     u16 i;
 
-    gFastSaveSection = &unk_2000000;
+    gFastSaveSection = &ewram;
 
     if (a1 != 0xFFFF) // for link
     {
@@ -156,7 +156,7 @@ u8 HandleWriteSector(u16 a1, const struct SaveSectionLocation *location)
 u8 HandleWriteSectorNBytes(u8 sector, u8 *data, u16 size)
 {
     u16 i;
-    struct SaveSection *section = &unk_2000000;
+    struct SaveSection *section = &ewram;
 
     for (i = 0; i < sizeof(struct SaveSection); i++)
         ((char *)section)[i] = 0;
@@ -186,7 +186,7 @@ u8 TryWriteSector(u8 sector, u8 *data)
 
 u32 RestoreSaveBackupVarsAndIncrement(const struct SaveSectionLocation *location) // location is unused
 {
-    gFastSaveSection = &unk_2000000;
+    gFastSaveSection = &ewram;
     gLastKnownGoodSector = gLastWrittenSector;
     gLastSaveCounter = gSaveCounter;
     gLastWrittenSector++;
@@ -199,7 +199,7 @@ u32 RestoreSaveBackupVarsAndIncrement(const struct SaveSectionLocation *location
 
 u32 RestoreSaveBackupVars(const struct SaveSectionLocation *location) // only ever called once, and gSaveBlock2 is passed to this function. location is unused
 {
-    gFastSaveSection = &unk_2000000;
+    gFastSaveSection = &ewram;
     gLastKnownGoodSector = gLastWrittenSector;
     gLastSaveCounter = gSaveCounter;
     gUnknown_03005EB4 = 0;
@@ -369,7 +369,7 @@ u8 sub_81257F0(u16 a1, const struct SaveSectionLocation *location)
 u8 sub_812587C(u16 a1, const struct SaveSectionLocation *location)
 {
     u8 retVal;
-    gFastSaveSection = &unk_2000000;
+    gFastSaveSection = &ewram;
     if (a1 != 0xFFFF)
     {
         retVal = 0xFF;
@@ -537,7 +537,7 @@ u8 GetSaveValidStatus(const struct SaveSectionLocation *location)
 u8 sub_8125B88(u8 a1, u8 *data, u16 size)
 {
     u16 i;
-    struct SaveSection *section = &unk_2000000;
+    struct SaveSection *section = &ewram;
     DoReadFlashWholeSection(a1, section);
     if (section->security == UNKNOWN_CHECK_VALUE)
     {
@@ -764,7 +764,7 @@ u8 unref_sub_8125FA0(void)
 u8 unref_sub_8125FF0(u8 *data, u16 size)
 {
     u16 i;
-    struct UnkSaveSection *section = (struct UnkSaveSection *)&unk_2000000;
+    struct UnkSaveSection *section = (struct UnkSaveSection *)&ewram;
 
     for (i = 0; i < sizeof(struct SaveSection); i++)
         ((char *)section)[i] = 0;

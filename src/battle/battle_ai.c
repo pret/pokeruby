@@ -953,8 +953,8 @@ static void BattleAICmd_is_most_powerful_move(void)
      && sDiscouragedPowerfulMoveEffects[i] == 0xFFFF)
     {
         gDynamicBasePower = 0;
-        ewram[0x1601C] = 0; // why is this a manual array?
-        ewram[0x1601F] = 1;
+        eDynamicMoveType = 0;
+        eDmgMultiplier = 1;
         gBattleMoveFlags = 0;
         gCritMultiplier = 1;
 
@@ -1999,8 +1999,7 @@ static void BattleAICmd_get_used_item(void)
     else
         index = gBankTarget;
 
-    // this hack and a half matches. whatever. i dont care. someone else fix this mess later. PS: still cant fix this.
-    AI_THINKING_STRUCT->funcResult = ewram[MULTI_DIM_ARR(index, B_16, 0x160CC)];
+    AI_THINKING_STRUCT->funcResult = AI_ARRAY_160CC(index);
 
     gAIScriptPtr += 2;
 }

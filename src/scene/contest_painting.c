@@ -13,7 +13,7 @@
 #include "text.h"
 #include "unknown_task.h"
 
-extern u8 unk_2000000[];
+extern u8 ewram[];
 
 static u8 gUnknown_03000750;
 static u16 gUnknown_03000752;
@@ -184,15 +184,15 @@ static void ShowContestPainting(void)
     case 2:
         SeedRng(gMain.vblankCounter1);
         InitKeys();
-        ContestPaintingInitWindow(unk_2000000[0x15DDF]);
+        ContestPaintingInitWindow(ewram[0x15DDF]);
         gMain.state++;
         break;
     case 3:
-        sub_8107090(unk_2000000[0x15DDE], unk_2000000[0x15DDF]);
+        sub_8107090(ewram[0x15DDE], ewram[0x15DDF]);
         gMain.state++;
         break;
     case 4:
-        ContestPaintingPrintCaption(unk_2000000[0x15DDE], unk_2000000[0x15DDF]);
+        ContestPaintingPrintCaption(ewram[0x15DDE], ewram[0x15DDF]);
         LoadPalette(gUnknown_083F6140, 0, 1 * 2);
         DmaClear32(3, PLTT, 0x400);
         BeginFastPaletteFade(2);

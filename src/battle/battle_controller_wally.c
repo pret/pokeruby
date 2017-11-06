@@ -240,10 +240,10 @@ void unref_sub_8137220(void)
 void SetBankFuncToWallyBufferRunCommand(void)
 {
     gBattleBankFunc[gActiveBank] = WallyBufferRunCommand;
-    ewram[0x160A8] = 0;
-    ewram[0x160A9] = 0;
-    ewram[0x160AA] = 0;
-    ewram[0x160AB] = 0;
+    ewram160A8 = 0;
+    ewram160A9 = 0;
+    ewram160AA = 0;
+    ewram160AB = 0;
 }
 
 void WallyBufferRunCommand(void)
@@ -261,59 +261,59 @@ void sub_81372BC(void)
 {
     u8 r4;
 
-    switch (ewram[0x160A8])
+    switch (ewram160A8)
     {
     case 0:
-        ewram[0x160AA] = 64;
-        ewram[0x160A8]++;
+        ewram160AA = 64;
+        ewram160A8++;
         // fall through
     case 1:
-        r4 = --ewram[0x160AA];
+        r4 = --ewram160AA;
         if (r4 == 0)
         {
             PlaySE(SE_SELECT);
             Emitcmd33(1, 0, 0);
             WallyBufferExecCompleted();
-            ewram[0x160A8]++;
-            ewram[0x160A9] = r4;
-            ewram[0x160AA] = 64;
+            ewram160A8++;
+            ewram160A9 = r4;
+            ewram160AA = 64;
         }
         break;
     case 2:
-        r4 = --ewram[0x160AA];
+        r4 = --ewram160AA;
         if (r4 == 0)
         {
             PlaySE(SE_SELECT);
             Emitcmd33(1, 0, 0);
             WallyBufferExecCompleted();
-            ewram[0x160A8]++;
-            ewram[0x160A9] = r4;
-            ewram[0x160AA] = 64;
+            ewram160A8++;
+            ewram160A9 = r4;
+            ewram160AA = 64;
         }
         break;
     case 3:
-        r4 = --ewram[0x160AA];
+        r4 = --ewram160AA;
         if (r4 == 0)
         {
             Emitcmd33(1, 9, 0);
             WallyBufferExecCompleted();
-            ewram[0x160A8]++;
-            ewram[0x160A9] = r4;
-            ewram[0x160AA] = 64;
+            ewram160A8++;
+            ewram160A9 = r4;
+            ewram160AA = 64;
         }
         break;
     case 4:
-        if (--ewram[0x160AA] == 0)
+        if (--ewram160AA == 0)
         {
             PlaySE(SE_SELECT);
             nullsub_8(0);
             sub_802E3E4(1, 0);
-            ewram[0x160AA] = 64;
-            ewram[0x160A8]++;
+            ewram160AA = 64;
+            ewram160A8++;
         }
         break;
     case 5:
-        if (--ewram[0x160AA] == 0)
+        if (--ewram160AA == 0)
         {
             PlaySE(SE_SELECT);
             DestroyMenuCursor();
@@ -1291,16 +1291,16 @@ void WallyHandlecmd19(void)
 
 void WallyHandlecmd20(void)
 {
-    switch (ewram[0x160A9])
+    switch (ewram160A9)
     {
     case 0:
         sub_80304A8();
-        ewram[0x160A9]++;
-        ewram[0x160AB] = 80;
+        ewram160A9++;
+        ewram160AB = 80;
         // fall through
     case 1:
-        ewram[0x160AB]--;
-        if (ewram[0x160AB] == 0)
+        ewram160AB--;
+        if (ewram160AB == 0)
         {
             DestroyMenuCursor();
             PlaySE(SE_SELECT);

@@ -721,12 +721,12 @@ u8 TurnBasedEffects(void)
                     gBattleMons[gActiveBank].status2 -= 0x2000;
                     if (gBattleMons[gActiveBank].status2 & STATUS2_WRAPPED)  // damaged by wrap
                     {
-                        BATTLE_STRUCT->animArg1 = ewram[gActiveBank * 2 + 0x16004];
-                        BATTLE_STRUCT->animArg2 = ewram[gActiveBank * 2 + 0x16005];
+                        BATTLE_STRUCT->animArg1 = ewram16004arr(0, gActiveBank);
+                        BATTLE_STRUCT->animArg2 = ewram16004arr(1, gActiveBank);
                         gBattleTextBuff1[0] = 0xFD;
                         gBattleTextBuff1[1] = 2;
-                        gBattleTextBuff1[2] = ewram[gActiveBank * 2 + 0x16004];
-                        gBattleTextBuff1[3] = ewram[gActiveBank * 2 + 0x16005];
+                        gBattleTextBuff1[2] = ewram16004arr(0, gActiveBank);
+                        gBattleTextBuff1[3] = ewram16004arr(1, gActiveBank);
                         gBattleTextBuff1[4] = EOS;
                         gBattlescriptCurrInstr = BattleScript_WrapTurnDmg;
                         gBattleMoveDamage = gBattleMons[gActiveBank].maxHP / 16;
@@ -737,8 +737,8 @@ u8 TurnBasedEffects(void)
                     {
                         gBattleTextBuff1[0] = 0xFD;
                         gBattleTextBuff1[1] = 2;
-                        gBattleTextBuff1[2] = ewram[gActiveBank * 2 + 0x16004];
-                        gBattleTextBuff1[3] = ewram[gActiveBank * 2 + 0x16005];
+                        gBattleTextBuff1[2] = ewram16004arr(0, gActiveBank);
+                        gBattleTextBuff1[3] = ewram16004arr(1, gActiveBank);
                         gBattleTextBuff1[4] = EOS;
                         gBattlescriptCurrInstr = BattleScript_WrapEnds;
                     }
@@ -1377,7 +1377,7 @@ bool8 sub_8018018(u8 bank, u8 r1, u8 r2)
             r2 = gBattlePartyID[r6];
         for (i = 0; i < 6; i++)
         {
-            if (GetMonData(&party[i], MON_DATA_HP) && GetMonData(&party[i], MON_DATA_SPECIES2) && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_EGG && i != r1 && i != r2 && i != ewram[r7 + 0x16068] && i != ewram[r6 + 0x16068])
+            if (GetMonData(&party[i], MON_DATA_HP) && GetMonData(&party[i], MON_DATA_SPECIES2) && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_EGG && i != r1 && i != r2 && i != ewram16068arr(r7) && i != ewram16068arr(r6))
                 break;
         }
         return (i == 6);
@@ -3123,7 +3123,7 @@ u8 GetMoveTarget(u16 move, u8 useMoveTarget) //get move target
         targetBank = gBankAttacker;
         break;
     }
-    ewram[gBankAttacker + 0x16010] = targetBank;
+    ewram16010arr(gBankAttacker) = targetBank;
     return targetBank;
 }
 

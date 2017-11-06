@@ -652,7 +652,7 @@ u32 StrCpyDecodeBattle(const u8* src, u8* dst)
                 if (gTrainerBattleOpponent == 0x400)
                 {
                     memset(text, 0xFF, 8);
-                    memcpy(text, &ewram[0x17002], 7);
+                    memcpy(text, ewram17002, 7);
                     toCpy = text;
                 }
                 else if (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)

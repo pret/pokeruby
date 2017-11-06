@@ -54,7 +54,7 @@ extern const u8 gUnknown_081E796C[];
 
 extern const union AffineAnimCmd *const gSpriteAffineAnimTable_81E79AC[];
 
-extern u8 unk_2000000[];
+extern u8 ewram[];
 
 //Menu layouts
 enum
@@ -1419,14 +1419,14 @@ void AddBirchSpeechObjects(u8 taskId)
     gTasks[taskId].tAzurillSpriteId = spriteId;
 
     //Create Brendan sprite
-    spriteId = CreateTrainerSprite(0, 120, 60, 0, unk_2000000);
+    spriteId = CreateTrainerSprite(0, 120, 60, 0, ewram);
     gSprites[spriteId].callback = nullsub_34;
     gSprites[spriteId].invisible = 1;
     gSprites[spriteId].oam.priority = 0;
     gTasks[taskId].tBrendanSpriteId = spriteId;
 
     //Create May sprite
-    spriteId = CreateTrainerSprite(1, 120, 60, 0, unk_2000000 + 0x800);
+    spriteId = CreateTrainerSprite(1, 120, 60, 0, ewram + 0x800);
     gSprites[spriteId].callback = nullsub_34;
     gSprites[spriteId].invisible = 1;
     gSprites[spriteId].oam.priority = 0;
