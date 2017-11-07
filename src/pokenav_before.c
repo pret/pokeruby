@@ -4,6 +4,8 @@
 #include "battle.h"
 #include "data2.h"
 #include "de_rom_8040FE0.h"
+#include "landmark.h"
+#include "link.h"
 #include "menu.h"
 #include "overworld.h"
 #include "string_util.h"
@@ -89,6 +91,31 @@ struct UnknownPokenav0_1 {
 
 IWRAM_DATA void (*gUnknown_03000744)(void);
 
+extern const u8 gUnknown_083E0314[];
+extern const u16 gUnknown_08E9F9E8[];
+extern const u16 gUnknown_083E0274[];
+extern const u8 gUnknown_08E9FC64[];
+extern const u8 gUnknown_083E0354[];
+extern const u8 gUnknown_08E9FD64[];
+extern const u8 gUnknown_08E9FE54[];
+extern const u8 gUnknown_08E9FD1C[];
+extern const u16 gPokenavConditionSearch2_Pal[];
+extern const u8 gUnknown_083E0334[];
+extern const u16 gUnknown_083E02B4[];
+extern const u8 gPokenavConditionSearch2_Gfx[];
+extern const u8 gUnknownPalette_81E6692[];
+extern const u8 gUnknown_083E0254[];
+extern const u8 gUnknown_08E9FEB4[];
+extern const u8 gUnknown_083E01AC[];
+extern const u8 gUnknown_08E9AC4C[];
+extern const u8 gPokenavConditionMenu2_Pal[];
+extern const u8 gPokenavConditionView_Gfx[];
+extern const u8 gUnknown_08E9ABB4[];
+extern const u8 gUnknown_08E9AC2C[];
+extern const u8 *const gPokenavCityMaps[][2];
+extern const u8 gPokenavHoennMapSquares_Pal[];
+extern const u8 gPokenavHoennMapSquares_Gfx[];
+extern const u16 gUnknown_083E003C[];
 extern const u8 *const gUnknown_083E31B0[];
 extern const u8 *const gUnknown_083E31CC[];
 extern const u8 *const gUnknown_083E31D8[];
@@ -144,10 +171,26 @@ static void sub_80EE658();
 static void sub_80EE8F4();
 static void sub_80EEDC4();
 
+extern bool8 sub_80F0944(void);
+extern void sub_80F081C();
+extern void sub_80F0900(void);
+extern void sub_80F443C(u8 *, u16);
+extern bool8 sub_80F162C(u8);
+extern void sub_80F01E0(u16);
+extern void sub_80F01A4(void);
+extern void sub_80F1614(void);
+extern void sub_80EFD3C(void);
+extern void sub_8095C8C();
+extern void sub_80EFDA0(void);
+extern void sub_80EFD74(void);
+extern void sub_80F1A80(void);
+extern bool8 sub_80EFC64(void);
+extern void sub_80EFC3C(void);
+extern void sub_80EF624(const u16 *, const u16 *, u8, u8, u16 *);
 extern void sub_80EF7D4(void);
 extern void sub_80EF54C(u8);
 extern void sub_809D104(u16 *, u16, u16, const u8 *, u16, u16, u16, u16);
-extern void sub_80EF58C(u32);
+extern void sub_80EF58C(u8);
 extern void sub_80F6FFC();
 extern void sub_80F3294();
 extern void sub_80F0B24();
@@ -200,23 +243,23 @@ extern bool8 sub_80F0718();
 extern bool8 sub_80F3264();
 extern void sub_80F4D44();
 extern bool8 sub_80F4D88();
-extern void sub_80F0264();
+extern void sub_80F0264(u8);
 extern bool8 sub_80F02A0();
 extern void sub_80F3008();
 extern void sub_80F3130();
 extern void sub_80F2D6C(u32);
 extern bool8 sub_80F1E6C();
-extern void sub_80EF9F8();
-extern bool8 sub_80EFBDC(u32);
-extern void sub_80EFBB0();
+extern void sub_80EF9F8(void);
+extern bool8 sub_80EFBDC(bool8);
+extern void sub_80EFBB0(void);
 extern void sub_80F2DF4();
 extern void sub_80F1E84();
 extern bool8 sub_80F1F10();
 extern void sub_80EEFBC(u8);
 extern void sub_80F2620();
-extern void sub_80EF814();
-extern void sub_80EF840();
-extern bool8 sub_80EF874();
+extern void sub_80EF814(void);
+extern void sub_80EF840(void);
+extern bool8 sub_80EF874(void);
 extern void sub_80F2DD8();
 extern bool8 sub_80F6250();
 extern void sub_80F6208();
@@ -248,7 +291,7 @@ extern void sub_80EBD18();
 extern void sub_80F1A74();
 extern void sub_80F1FF0();
 extern void sub_80FB260();
-extern void sub_80EFE7C();
+extern void sub_80EFE7C(void);
 extern void sub_80F5BF0();
 extern void sub_80F6F64();
 extern void sub_80F19FC();
@@ -3166,3 +3209,1799 @@ void sub_80EF54C(u8 a)
 	gUnknown_083DFEC4->unkCE4C = a * 30;
 	LoadPalette(&gUnknown_083DFEC4->palettesCE52[gUnknown_083DFEC4->unkCE4C], 0x31, 4);
 }
+
+void sub_80EF58C(u8 a)
+{
+	u16 i;
+	u16 * palettes;
+	const u16 *var1;
+
+	switch (a)
+	{
+	case 0:
+		for (i = 0; i < 62; i++)
+		{
+			gUnknown_083DFEC4->palettesCE52[i] = 0;
+		}
+		break;
+	case 1:
+		palettes = gUnknown_083DFEC4->palettesCE52;
+		var1 = gUnknown_083E003C;
+		sub_80EF624(&var1[1], &var1[3], 16, 2, palettes);
+		break;
+	case 2:
+		palettes = gUnknown_083DFEC4->palettesCE8E;
+		var1 = gUnknown_083E003C;
+		sub_80EF624(&var1[3], &var1[7], 16, 2, palettes);
+		break;
+	}
+}
+
+#ifdef NONMATCHING
+void sub_80EF624(const u16 *a, const u16 *b, u8 c, u8 d, u16 *palettes)
+{
+	u16 red1, green1, blue1;
+	u16 red2, green2, blue2;
+	s32 redDiv, greenDiv, blueDiv;
+	u16 *palettes2;
+	u16 i, j;
+
+	i = 0;
+	while (i < d)
+	{
+		red1 = (*a & 0x1F) << 8;
+		green1 = ((*a >> 5) & 0x1F) << 8;
+		blue1 = ((*a >> 10) & 0x1F) << 8;
+
+		red2 = (*b & 0x1F) << 8;
+		green2 = ((*b >> 5) & 0x1F) << 8;
+		blue2 = ((*b >> 10) & 0x1F) << 8;
+
+		redDiv = (red2 - red1) / c;
+		greenDiv = (green2 - green1) / c;
+		blueDiv = (blue2 - blue1) / c;
+
+		palettes2 = palettes;
+		for (j = 0; j < c - 1; j++)
+		{
+			*palettes2 = (((blue1 << 8) >> 16) << 10) | (((green1 << 8) >> 16) << 5) | ((red1 << 8) >> 16);
+			palettes2 += d;
+			red1 += redDiv;
+			green1 += greenDiv;
+			blue1 += blueDiv;
+		}
+
+		*palettes2 = (red2 >> 8) | (blue2 << 2) | (green2 >> 3);
+		palettes++;
+
+		a++;
+		b++;
+		i++;
+	}
+}
+#else
+__attribute__((naked))
+void sub_80EF624(const u16 *a, const u16 *b, u8 c, u8 d, u16 *palettes)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    sub sp, 0x38\n\
+    str r0, [sp]\n\
+    str r1, [sp, 0x4]\n\
+    ldr r4, [sp, 0x58]\n\
+    lsls r2, 24\n\
+    lsrs r2, 24\n\
+    str r2, [sp, 0x8]\n\
+    lsls r3, 24\n\
+    lsrs r3, 24\n\
+    str r3, [sp, 0xC]\n\
+    movs r0, 0\n\
+    str r0, [sp, 0x10]\n\
+    lsls r0, r3, 16\n\
+    ldr r1, [sp, 0x10]\n\
+    cmp r1, r3\n\
+    bcs _080EF72E\n\
+    subs r2, 0x1\n\
+    str r2, [sp, 0x20]\n\
+    str r0, [sp, 0x2C]\n\
+_080EF654:\n\
+    ldr r2, [sp]\n\
+    ldrh r1, [r2]\n\
+    movs r0, 0x1F\n\
+    ands r0, r1\n\
+    lsls r7, r0, 8\n\
+    lsls r1, 16\n\
+    lsrs r0, r1, 21\n\
+    movs r2, 0x1F\n\
+    ands r0, r2\n\
+    lsls r6, r0, 8\n\
+    lsrs r1, 26\n\
+    ands r1, r2\n\
+    lsls r5, r1, 8\n\
+    ldr r0, [sp, 0x4]\n\
+    ldrh r1, [r0]\n\
+    movs r0, 0x1F\n\
+    ands r0, r1\n\
+    lsls r0, 8\n\
+    str r0, [sp, 0x14]\n\
+    lsls r1, 16\n\
+    lsrs r0, r1, 21\n\
+    ands r0, r2\n\
+    lsls r0, 8\n\
+    str r0, [sp, 0x18]\n\
+    lsrs r1, 26\n\
+    ands r1, r2\n\
+    lsls r1, 8\n\
+    str r1, [sp, 0x1C]\n\
+    ldr r1, [sp, 0x14]\n\
+    subs r0, r1, r7\n\
+    ldr r1, [sp, 0x8]\n\
+    bl __divsi3\n\
+    mov r10, r0\n\
+    ldr r2, [sp, 0x18]\n\
+    subs r0, r2, r6\n\
+    ldr r1, [sp, 0x8]\n\
+    bl __divsi3\n\
+    mov r9, r0\n\
+    ldr r1, [sp, 0x1C]\n\
+    subs r0, r1, r5\n\
+    ldr r1, [sp, 0x8]\n\
+    bl __divsi3\n\
+    mov r8, r0\n\
+    adds r3, r4, 0\n\
+    movs r4, 0\n\
+    ldr r2, [sp]\n\
+    adds r2, 0x2\n\
+    str r2, [sp, 0x30]\n\
+    ldr r0, [sp, 0x4]\n\
+    adds r0, 0x2\n\
+    str r0, [sp, 0x34]\n\
+    adds r1, r3, 0x2\n\
+    str r1, [sp, 0x24]\n\
+    ldr r2, [sp, 0x10]\n\
+    adds r2, 0x1\n\
+    str r2, [sp, 0x28]\n\
+    ldr r0, [sp, 0x20]\n\
+    cmp r4, r0\n\
+    bge _080EF700\n\
+    ldr r1, [sp, 0xC]\n\
+    lsls r1, 1\n\
+    mov r12, r1\n\
+_080EF6D6:\n\
+    lsls r0, r7, 8\n\
+    lsrs r2, r0, 16\n\
+    lsls r0, r6, 8\n\
+    lsrs r1, r0, 16\n\
+    lsls r0, r5, 8\n\
+    lsrs r0, 16\n\
+    lsls r0, 10\n\
+    lsls r1, 5\n\
+    orrs r0, r1\n\
+    orrs r2, r0\n\
+    strh r2, [r3]\n\
+    add r3, r12\n\
+    add r7, r10\n\
+    add r6, r9\n\
+    add r5, r8\n\
+    adds r0, r4, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r4, r0, 16\n\
+    ldr r2, [sp, 0x20]\n\
+    cmp r4, r2\n\
+    blt _080EF6D6\n\
+_080EF700:\n\
+    ldr r4, [sp, 0x14]\n\
+    lsrs r2, r4, 8\n\
+    ldr r1, [sp, 0x1C]\n\
+    lsls r0, r1, 2\n\
+    ldr r4, [sp, 0x18]\n\
+    lsrs r1, r4, 3\n\
+    orrs r0, r1\n\
+    orrs r2, r0\n\
+    strh r2, [r3]\n\
+    ldr r0, [sp, 0x30]\n\
+    str r0, [sp]\n\
+    ldr r1, [sp, 0x34]\n\
+    str r1, [sp, 0x4]\n\
+    ldr r4, [sp, 0x24]\n\
+    ldr r2, [sp, 0x28]\n\
+    lsls r0, r2, 16\n\
+    lsrs r0, 16\n\
+    str r0, [sp, 0x10]\n\
+    ldr r1, [sp, 0x2C]\n\
+    lsrs r0, r1, 16\n\
+    ldr r2, [sp, 0x10]\n\
+    cmp r2, r0\n\
+    bcc _080EF654\n\
+_080EF72E:\n\
+    add sp, 0x38\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .syntax divided\n");
+}
+#endif // NONMATCHING
+
+void sub_80EF740(void)
+{
+	gUnknown_083DFEC4->unk6DA0 = (gUnknown_083DFEC4->unk6DA0 + 1) & 1;
+	if (gUnknown_083DFEC4->unk6DA0)
+	{
+		gUnknown_083DFEC4->unk6DA2++;
+	}
+
+	REG_BG3HOFS = gUnknown_083DFEC4->unk6DA2;
+}
+
+void sub_80EF780(u8 taskId)
+{
+	if (gTasks[taskId].data[0] == 0 || (gUnknown_083DFEC4->unk6DA2 & 0x7) != 0)
+	{
+		sub_80EF740();
+	}
+	else
+	{
+		u16 value = gUnknown_083DFEC4->unk6DA2 & 0x7;
+		gUnknown_083DFEC4->unk6DA2 = value;
+		gUnknown_083DFEC4->unk6DA0 = value;
+		REG_BG3HOFS = value;
+	}
+}
+
+void sub_80EF7D4(void)
+{
+	gUnknown_083DFEC4->unk6DA2 = 0;
+	gUnknown_083DFEC4->unk6DA0 = 0;
+	gUnknown_083DFEC4->taskId6DA4 = CreateTask(sub_80EF780, 80);
+}
+
+void sub_80EF814(void)
+{
+	if (FuncIsActiveTask(sub_80EF780))
+	{
+		DestroyTask(gUnknown_083DFEC4->taskId6DA4);
+	}
+}
+
+void sub_80EF840(void)
+{
+	gUnknown_083DFEC4->unkD160 = 0;
+
+	if (gUnknown_083DFEC4->unk6DAC == 0)
+	{
+		while (sub_80EF874() != 0);
+	}
+}
+
+// The only non-matching part is the gSaveBlock2.regionMapZoom access.
+#ifdef NONMATCHING
+bool8 sub_80EF874(void)
+{
+	switch (gUnknown_083DFEC4->unkD160)
+	{
+	case 0:
+		sub_80EEDE8();
+		break;
+	case 1:
+		SetUpWindowConfig(&gWindowConfig_81E7224);
+		break;
+	case 2:
+		MultistepInitMenuWindowBegin(&gWindowConfig_81E7224);
+		break;
+	case 3:
+		if (!MultistepInitMenuWindowContinue())
+		{
+			return TRUE;
+		}
+		break;
+	case 4:
+		MenuZeroFillScreen();
+		break;
+	case 5:
+		sub_80FA904(&gUnknown_083DFEC4->regionMap, gSaveBlock2.regionMapZoom);
+		break;
+	case 6:
+		if (sub_80FA940())
+		{
+			return TRUE;
+		}
+		break;
+	case 7:
+		LZ77UnCompVram(gPokenavHoennMapSquares_Gfx, (void *)VRAM + 0x5000);
+		break;
+	case 8:
+		LoadPalette(gPokenavHoennMapSquares_Pal, 0x30, 0x20);
+		sub_80EFC3C();
+		break;
+	case 9:
+		if (sub_80EFC64())
+		{
+			return TRUE;
+		}
+		break;
+	case 10:
+		MenuDrawTextWindow(13, 3, 29, 17);
+		sub_80EF9F8();
+		break;
+	case 11:
+		if (!gUnknown_083DFEC4->regionMap.zoomed)
+		{
+			gUnknown_083DFEC4->unk7698 = 160;
+			REG_BG0VOFS = 160;
+		}
+		else
+		{
+			gUnknown_083DFEC4->unk7698 = 256;
+			REG_BG0VOFS = 0;
+		}
+
+		REG_BG0CNT = REG_BG0CNT;
+		REG_BG0CNT |= 1;
+		REG_BLDCNT = 0;
+		break;
+	default:
+		return FALSE;
+	}
+
+	gUnknown_083DFEC4->unkD160++;
+	return TRUE;
+}
+#else
+asm(".include \"constants/gba_constants.inc\"\n");
+
+__attribute__((naked))
+bool8 sub_80EF874(void)
+{
+    asm(".syntax unified\n\
+	push {lr}\n\
+	ldr r0, _080EF890 @ =gUnknown_083DFEC4\n\
+	ldr r0, [r0]\n\
+	ldr r1, _080EF894 @ =0x0000d160\n\
+	adds r0, r1\n\
+	ldrh r0, [r0]\n\
+	cmp r0, 0xB\n\
+	bls _080EF886\n\
+	b _080EF9D8\n\
+_080EF886:\n\
+	lsls r0, 2\n\
+	ldr r1, _080EF898 @ =_080EF89C\n\
+	adds r0, r1\n\
+	ldr r0, [r0]\n\
+	mov pc, r0\n\
+	.align 2, 0\n\
+_080EF890: .4byte gUnknown_083DFEC4\n\
+_080EF894: .4byte 0x0000d160\n\
+_080EF898: .4byte _080EF89C\n\
+	.align 2, 0\n\
+_080EF89C:\n\
+	.4byte _080EF8CC\n\
+	.4byte _080EF8D2\n\
+	.4byte _080EF8E0\n\
+	.4byte _080EF8EC\n\
+	.4byte _080EF8F6\n\
+	.4byte _080EF8FC\n\
+	.4byte _080EF920\n\
+	.4byte _080EF92C\n\
+	.4byte _080EF940\n\
+	.4byte _080EF954\n\
+	.4byte _080EF960\n\
+	.4byte _080EF972\n\
+_080EF8CC:\n\
+	bl sub_80EEDE8\n\
+	b _080EF9DC\n\
+_080EF8D2:\n\
+	ldr r0, _080EF8DC @ =gWindowConfig_81E7224\n\
+	bl SetUpWindowConfig\n\
+	b _080EF9DC\n\
+	.align 2, 0\n\
+_080EF8DC: .4byte gWindowConfig_81E7224\n\
+_080EF8E0:\n\
+	ldr r0, _080EF8E8 @ =gWindowConfig_81E7224\n\
+	bl MultistepInitMenuWindowBegin\n\
+	b _080EF9DC\n\
+	.align 2, 0\n\
+_080EF8E8: .4byte gWindowConfig_81E7224\n\
+_080EF8EC:\n\
+	bl MultistepInitMenuWindowContinue\n\
+	cmp r0, 0\n\
+	bne _080EF9DC\n\
+	b _080EF9EA\n\
+_080EF8F6:\n\
+	bl MenuZeroFillScreen\n\
+	b _080EF9DC\n\
+_080EF8FC:\n\
+	ldr r0, _080EF914 @ =gUnknown_083DFEC4\n\
+	ldr r0, [r0]\n\
+	ldr r2, _080EF918 @ =0x00006e18\n\
+	adds r0, r2\n\
+	ldr r1, _080EF91C @ =gSaveBlock2\n\
+	ldrb r1, [r1, 0x15]\n\
+	lsrs r1, 3\n\
+	movs r2, 0x1\n\
+	ands r1, r2\n\
+	bl sub_80FA904\n\
+	b _080EF9DC\n\
+	.align 2, 0\n\
+_080EF914: .4byte gUnknown_083DFEC4\n\
+_080EF918: .4byte 0x00006e18\n\
+_080EF91C: .4byte gSaveBlock2\n\
+_080EF920:\n\
+	bl sub_80FA940\n\
+	lsls r0, 24\n\
+	cmp r0, 0\n\
+	beq _080EF9DC\n\
+	b _080EF9EA\n\
+_080EF92C:\n\
+	ldr r0, _080EF938 @ =gPokenavHoennMapSquares_Gfx\n\
+	ldr r1, _080EF93C @ =0x06005000\n\
+	bl LZ77UnCompVram\n\
+	b _080EF9DC\n\
+	.align 2, 0\n\
+_080EF938: .4byte gPokenavHoennMapSquares_Gfx\n\
+_080EF93C: .4byte 0x06005000\n\
+_080EF940:\n\
+	ldr r0, _080EF950 @ =gPokenavHoennMapSquares_Pal\n\
+	movs r1, 0x30\n\
+	movs r2, 0x20\n\
+	bl LoadPalette\n\
+	bl sub_80EFC3C\n\
+	b _080EF9DC\n\
+	.align 2, 0\n\
+_080EF950: .4byte gPokenavHoennMapSquares_Pal\n\
+_080EF954:\n\
+	bl sub_80EFC64\n\
+	lsls r0, 24\n\
+	cmp r0, 0\n\
+	beq _080EF9DC\n\
+	b _080EF9EA\n\
+_080EF960:\n\
+	movs r0, 0xD\n\
+	movs r1, 0x3\n\
+	movs r2, 0x1D\n\
+	movs r3, 0x11\n\
+	bl MenuDrawTextWindow\n\
+	bl sub_80EF9F8\n\
+	b _080EF9DC\n\
+_080EF972:\n\
+	ldr r0, _080EF990 @ =gUnknown_083DFEC4\n\
+	ldr r1, [r0]\n\
+	ldr r2, _080EF994 @ =0x00006e90\n\
+	adds r0, r1, r2\n\
+	ldrb r0, [r0]\n\
+	cmp r0, 0\n\
+	bne _080EF9A0\n\
+	ldr r2, _080EF998 @ =0x00007698\n\
+	adds r0, r1, r2\n\
+	movs r1, 0xA0\n\
+	strh r1, [r0]\n\
+	ldr r0, _080EF99C @ =REG_BG0VOFS\n\
+	strh r1, [r0]\n\
+	b _080EF9B0\n\
+	.align 2, 0\n\
+_080EF990: .4byte gUnknown_083DFEC4\n\
+_080EF994: .4byte 0x00006e90\n\
+_080EF998: .4byte 0x00007698\n\
+_080EF99C: .4byte REG_BG0VOFS\n\
+_080EF9A0:\n\
+	ldr r0, _080EF9C8 @ =0x00007698\n\
+	adds r1, r0\n\
+	movs r2, 0\n\
+	movs r0, 0x80\n\
+	lsls r0, 1\n\
+	strh r0, [r1]\n\
+	ldr r0, _080EF9CC @ =REG_BG0VOFS\n\
+	strh r2, [r0]\n\
+_080EF9B0:\n\
+	ldr r2, _080EF9D0 @ =REG_BG0CNT\n\
+	ldrh r0, [r2]\n\
+	strh r0, [r2]\n\
+	ldrh r0, [r2]\n\
+	movs r1, 0x1\n\
+	orrs r0, r1\n\
+	strh r0, [r2]\n\
+	ldr r1, _080EF9D4 @ =REG_BLDCNT\n\
+	movs r0, 0\n\
+	strh r0, [r1]\n\
+	b _080EF9DC\n\
+	.align 2, 0\n\
+_080EF9C8: .4byte 0x00007698\n\
+_080EF9CC: .4byte REG_BG0VOFS\n\
+_080EF9D0: .4byte REG_BG0CNT\n\
+_080EF9D4: .4byte REG_BLDCNT\n\
+_080EF9D8:\n\
+	movs r0, 0\n\
+	b _080EF9EC\n\
+_080EF9DC:\n\
+	ldr r0, _080EF9F0 @ =gUnknown_083DFEC4\n\
+	ldr r1, [r0]\n\
+	ldr r2, _080EF9F4 @ =0x0000d160\n\
+	adds r1, r2\n\
+	ldrh r0, [r1]\n\
+	adds r0, 0x1\n\
+	strh r0, [r1]\n\
+_080EF9EA:\n\
+	movs r0, 0x1\n\
+_080EF9EC:\n\
+	pop {r1}\n\
+	bx r1\n\
+	.align 2, 0\n\
+_080EF9F0: .4byte gUnknown_083DFEC4\n\
+_080EF9F4: .4byte 0x0000d160\n\
+    .syntax divided\n");
+}
+#endif // NONMATCHING
+
+#ifdef NONMATCHING
+void sub_80EF9F8(void)
+{
+	s32 zero;
+	u16 i;
+	u8 *mapSectionName;
+	u32 offset;
+	u16 mapSectionId;
+	u8 b;
+	u8 **pointer;
+	u16 var1 = 4;
+
+
+	switch (gUnknown_083DFEC4->regionMap.unk16)
+	{
+	case 1:
+	case 4:
+		sub_8072A18(gUnknown_083DFEC4->regionMap.mapSectionName, 0x70, var1 * 8, 0x78, 1);
+		var1 += 2;
+
+		if (gLinkOpen == TRUE)
+		{
+			sub_80F1A80();
+		}
+		else
+		{
+			i = 0;
+			while (i < 4 && (mapSectionName = GetLandmarkName(gUnknown_083DFEC4->regionMap.mapSectionId, gUnknown_083DFEC4->regionMap.everGrandeCityArea, i)) != NULL)
+			{
+				sub_8072A18(mapSectionName, 0x70, var1 * 8, 0x78, 1);
+				var1 += 2;
+				i++;
+			}
+
+			// This check is always true, but somehow the compiler still performed it.
+			asm("mov %0, #0\n":"=r"(zero));  // zero = 0
+			if (!zero && var1 < 16)
+			{
+				MenuFillWindowRectWithBlankTile(14, var1, 28, 15);
+			}
+		}
+		break;
+	case 2:
+		sub_8072A18(gUnknown_083DFEC4->regionMap.mapSectionName, 0x70, var1 * 8, 0x78, 1);
+		var1 += 2;
+
+		mapSectionId = gUnknown_083DFEC4->regionMap.mapSectionId;
+		b = gUnknown_083DFEC4->regionMap.everGrandeCityArea;
+		offset = (b << 2) + (mapSectionId << 3);
+		pointer = (u8 **)((u8 *)&gUnknown_083DFEC4->unkCDCC + offset);
+		if (*pointer != NULL)
+		{
+			MenuFillWindowRectWithBlankTile(14, var1, 15, 15);
+			MenuFillWindowRectWithBlankTile(26, var1, 28, 15);
+
+			sub_8095C8C((void *)VRAM + 0xF800, 16, 6, *pointer, 0, 0, 10, 10, 10);
+
+			var1 += 11;
+		}
+
+		// This check is always true, but somehow the compiler still performed it.
+		asm("mov %0, #0\n":"=r"(zero));  // zero = 0
+		if (!zero && var1 < 16)
+		{
+			MenuFillWindowRectWithBlankTile(14, var1, 28, 15);
+		}
+		break;
+	case 3:
+		sub_8072A18(gUnknown_083DFEC4->regionMap.mapSectionName, 0x70, var1 * 8, 0x78, 1);
+		var1 += 2;
+
+		// This check is always true, but somehow the compiler still performed it.
+		asm("mov %0, #0\n":"=r"(zero));  // zero = 0
+		if (!zero && var1 < 16)
+		{
+			MenuFillWindowRectWithBlankTile(14, var1, 28, 15);
+		}
+		break;
+	case 0:
+	default:
+		// This check is always true, but somehow the compiler still performed it.
+		asm("mov %0, #0\n":"=r"(zero));  // zero = 0
+		if (!zero && var1 < 16)
+		{
+			MenuFillWindowRectWithBlankTile(14, var1, 28, 15);
+		}
+		break;
+	}
+
+	if (gUnknown_083DFEC4->regionMap.unk16 == 2)
+	{
+		sub_80EFD74();
+	}
+	else
+	{
+		sub_80EFDA0();
+	}
+}
+#else
+__attribute__((naked))
+void sub_80EF9F8(void)
+{
+    asm(".syntax unified\n\
+    push {r4-r6,lr}\n\
+    sub sp, 0x14\n\
+    movs r5, 0x4\n\
+    ldr r0, _080EFA18 @ =gUnknown_083DFEC4\n\
+    ldr r0, [r0]\n\
+    ldr r1, _080EFA1C @ =0x00006e2e\n\
+    adds r0, r1\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0x4\n\
+    bls _080EFA0E\n\
+    b _080EFB6A\n\
+_080EFA0E:\n\
+    lsls r0, 2\n\
+    ldr r1, _080EFA20 @ =_080EFA24\n\
+    adds r0, r1\n\
+    ldr r0, [r0]\n\
+    mov pc, r0\n\
+    .align 2, 0\n\
+_080EFA18: .4byte gUnknown_083DFEC4\n\
+_080EFA1C: .4byte 0x00006e2e\n\
+_080EFA20: .4byte _080EFA24\n\
+    .align 2, 0\n\
+_080EFA24:\n\
+    .4byte _080EFB6A\n\
+    .4byte _080EFA38\n\
+    .4byte _080EFAC0\n\
+    .4byte _080EFB4C\n\
+    .4byte _080EFA38\n\
+_080EFA38:\n\
+    ldr r0, _080EFA64 @ =gUnknown_083DFEC4\n\
+    ldr r0, [r0]\n\
+    ldr r2, _080EFA68 @ =0x00006e18\n\
+    adds r0, r2\n\
+    lsls r2, r5, 19\n\
+    lsrs r2, 16\n\
+    movs r1, 0x1\n\
+    str r1, [sp]\n\
+    movs r1, 0x70\n\
+    movs r3, 0x78\n\
+    bl sub_8072A18\n\
+    adds r0, r5, 0x2\n\
+    lsls r0, 16\n\
+    lsrs r5, r0, 16\n\
+    ldr r0, _080EFA6C @ =gLinkOpen\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0x1\n\
+    bne _080EFA70\n\
+    bl sub_80F1A80\n\
+    b _080EFB82\n\
+    .align 2, 0\n\
+_080EFA64: .4byte gUnknown_083DFEC4\n\
+_080EFA68: .4byte 0x00006e18\n\
+_080EFA6C: .4byte gLinkOpen\n\
+_080EFA70:\n\
+    movs r4, 0\n\
+    b _080EFA92\n\
+_080EFA74:\n\
+    lsls r2, r5, 19\n\
+    lsrs r2, 16\n\
+    movs r0, 0x1\n\
+    str r0, [sp]\n\
+    adds r0, r1, 0\n\
+    movs r1, 0x70\n\
+    movs r3, 0x78\n\
+    bl sub_8072A18\n\
+    adds r0, r5, 0x2\n\
+    lsls r0, 16\n\
+    lsrs r5, r0, 16\n\
+    adds r0, r4, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r4, r0, 16\n\
+_080EFA92:\n\
+    cmp r4, 0x3\n\
+    bhi _080EFB6A\n\
+    ldr r0, _080EFAB8 @ =gUnknown_083DFEC4\n\
+    ldr r1, [r0]\n\
+    ldr r2, _080EFABC @ =0x00006e2c\n\
+    adds r0, r1, r2\n\
+    ldrb r0, [r0]\n\
+    adds r2, 0x3\n\
+    adds r1, r2\n\
+    ldrb r1, [r1]\n\
+    lsls r2, r4, 24\n\
+    lsrs r2, 24\n\
+    bl GetLandmarkName\n\
+    adds r1, r0, 0\n\
+    cmp r1, 0\n\
+    bne _080EFA74\n\
+    b _080EFB6A\n\
+    .align 2, 0\n\
+_080EFAB8: .4byte gUnknown_083DFEC4\n\
+_080EFABC: .4byte 0x00006e2c\n\
+_080EFAC0:\n\
+    ldr r0, _080EFB38 @ =gUnknown_083DFEC4\n\
+    ldr r4, [r0]\n\
+    ldr r1, _080EFB3C @ =0x00006e18\n\
+    adds r0, r4, r1\n\
+    lsls r2, r5, 19\n\
+    lsrs r2, 16\n\
+    movs r1, 0x1\n\
+    str r1, [sp]\n\
+    movs r1, 0x70\n\
+    movs r3, 0x78\n\
+    bl sub_8072A18\n\
+    adds r0, r5, 0x2\n\
+    lsls r0, 16\n\
+    lsrs r5, r0, 16\n\
+    ldr r2, _080EFB40 @ =0x00006e2c\n\
+    adds r0, r4, r2\n\
+    ldrh r1, [r0]\n\
+    adds r2, 0x3\n\
+    adds r0, r4, r2\n\
+    ldrb r0, [r0]\n\
+    lsls r0, 2\n\
+    lsls r1, 3\n\
+    adds r0, r1\n\
+    ldr r1, _080EFB44 @ =0x0000cdcc\n\
+    adds r4, r1\n\
+    adds r6, r4, r0\n\
+    ldr r0, [r6]\n\
+    cmp r0, 0\n\
+    beq _080EFB6A\n\
+    lsls r4, r5, 24\n\
+    lsrs r4, 24\n\
+    movs r0, 0xE\n\
+    adds r1, r4, 0\n\
+    movs r2, 0xF\n\
+    movs r3, 0xF\n\
+    bl MenuFillWindowRectWithBlankTile\n\
+    movs r0, 0x1A\n\
+    adds r1, r4, 0\n\
+    movs r2, 0x1C\n\
+    movs r3, 0xF\n\
+    bl MenuFillWindowRectWithBlankTile\n\
+    ldr r0, _080EFB48 @ =0x0600f800\n\
+    ldr r3, [r6]\n\
+    movs r1, 0\n\
+    str r1, [sp]\n\
+    str r1, [sp, 0x4]\n\
+    movs r1, 0xA\n\
+    str r1, [sp, 0x8]\n\
+    str r1, [sp, 0xC]\n\
+    str r1, [sp, 0x10]\n\
+    movs r1, 0x10\n\
+    movs r2, 0x6\n\
+    bl sub_8095C8C\n\
+    adds r0, r5, 0\n\
+    adds r0, 0xB\n\
+    b _080EFB66\n\
+    .align 2, 0\n\
+_080EFB38: .4byte gUnknown_083DFEC4\n\
+_080EFB3C: .4byte 0x00006e18\n\
+_080EFB40: .4byte 0x00006e2c\n\
+_080EFB44: .4byte 0x0000cdcc\n\
+_080EFB48: .4byte 0x0600f800\n\
+_080EFB4C:\n\
+    ldr r0, _080EFB98 @ =gUnknown_083DFEC4\n\
+    ldr r0, [r0]\n\
+    ldr r2, _080EFB9C @ =0x00006e18\n\
+    adds r0, r2\n\
+    lsls r2, r5, 19\n\
+    lsrs r2, 16\n\
+    movs r1, 0x1\n\
+    str r1, [sp]\n\
+    movs r1, 0x70\n\
+    movs r3, 0x78\n\
+    bl sub_8072A18\n\
+    adds r0, r5, 0x2\n\
+_080EFB66:\n\
+    lsls r0, 16\n\
+    lsrs r5, r0, 16\n\
+_080EFB6A:\n\
+    movs r0, 0\n\
+    cmp r0, 0\n\
+    bne _080EFB82\n\
+    cmp r5, 0xF\n\
+    bhi _080EFB82\n\
+    lsls r1, r5, 24\n\
+    lsrs r1, 24\n\
+    movs r0, 0xE\n\
+    movs r2, 0x1C\n\
+    movs r3, 0xF\n\
+    bl MenuFillWindowRectWithBlankTile\n\
+_080EFB82:\n\
+    ldr r0, _080EFB98 @ =gUnknown_083DFEC4\n\
+    ldr r0, [r0]\n\
+    ldr r1, _080EFBA0 @ =0x00006e2e\n\
+    adds r0, r1\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0x2\n\
+    bne _080EFBA4\n\
+    bl sub_80EFD74\n\
+    b _080EFBA8\n\
+    .align 2, 0\n\
+_080EFB98: .4byte gUnknown_083DFEC4\n\
+_080EFB9C: .4byte 0x00006e18\n\
+_080EFBA0: .4byte 0x00006e2e\n\
+_080EFBA4:\n\
+    bl sub_80EFDA0\n\
+_080EFBA8:\n\
+    add sp, 0x14\n\
+    pop {r4-r6}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .syntax divided\n");
+}
+#endif // NONMATCHING
+
+void sub_80EFBB0(void)
+{
+	if (!gUnknown_083DFEC4->regionMap.zoomed)
+	{
+		sub_80EEFBC(8);
+	}
+	else
+	{
+		sub_80EEFBC(7);
+	}
+}
+
+bool8 sub_80EFBDC(bool8 a)
+{
+	bool8 retVal = TRUE;
+	u16 var1 = gUnknown_083DFEC4->unk7698;
+
+	if (a)
+	{
+		if (var1 > 168)
+		{
+			var1 = var1 - 8;
+		}
+		else
+		{
+			var1 = 160;
+			retVal = FALSE;
+		}
+	}
+	else
+	{
+		if (var1 < 248)
+		{
+			var1 = var1 + 8;
+		}
+		else
+		{
+			var1 = 256;
+			retVal = FALSE;
+		}
+	}
+
+	gUnknown_083DFEC4->unk7698 = var1;
+	REG_BG0VOFS = var1 & 0xFF;
+
+	return retVal;
+}
+
+void sub_80EFC3C(void)
+{
+	gUnknown_083DFEC4->unkBC9A = 0;
+	gUnknown_083DFEC4->unkBC9B = 0;
+	sub_80EFD3C();
+}
+
+#ifdef NONMATCHING // "var1 = gUnknown_083DFEC4->unkBC9A;" is the only thing that doesnt' match.
+bool8 sub_80EFC64(void)
+{
+	u16 i;
+	u16 var1;
+	u16 var2;
+
+	if (gUnknown_083DFEC4->unkBC9A < 16)
+	{
+		var1 = gUnknown_083DFEC4->unkBC9A;
+		var2 = gUnknown_083DFEC4->unkBC9B;
+		for (i = 0; i < 2; i++)
+		{
+			if (gPokenavCityMaps[var1][i] != 0)
+			{
+				LZ77UnCompVram(gPokenavCityMaps[var1][i], gUnknown_083DFEC4->unkBC9C[var2]);
+				gUnknown_083DFEC4->unkCDCC[var1][i] = gUnknown_083DFEC4->unkBC9C[var2];
+				var2++;
+			}
+			else
+			{
+				gUnknown_083DFEC4->unkCDCC[var1][i] = NULL;
+			}
+		}
+
+		gUnknown_083DFEC4->unkBC9A++;
+		if (gUnknown_083DFEC4->unkBC9A < 16)
+		{
+			gUnknown_083DFEC4->unkBC9B = var2;
+			return TRUE;
+		}
+	}
+
+	return FALSE;
+}
+#else
+__attribute__((naked))
+bool8 sub_80EFC64(void)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+    mov r7, r9\n\
+    mov r6, r8\n\
+    push {r6,r7}\n\
+    sub sp, 0x8\n\
+    ldr r4, _080EFCD0 @ =gUnknown_083DFEC4\n\
+    ldr r2, [r4]\n\
+    ldr r0, _080EFCD4 @ =0x0000bc9a\n\
+    adds r1, r2, r0\n\
+    ldrb r0, [r1]\n\
+    cmp r0, 0xF\n\
+    bhi _080EFD2C\n\
+    ldrb r1, [r1]\n\
+    mov r8, r1\n\
+    ldr r1, _080EFCD8 @ =0x0000bc9b\n\
+    adds r0, r2, r1\n\
+    ldrb r7, [r0]\n\
+    movs r2, 0\n\
+    ldr r0, _080EFCDC @ =gPokenavCityMaps\n\
+    mov r9, r0\n\
+    adds r3, r4, 0\n\
+_080EFC8E:\n\
+    lsls r0, r2, 2\n\
+    mov r4, r8\n\
+    lsls r1, r4, 3\n\
+    adds r6, r0, r1\n\
+    mov r1, r9\n\
+    adds r0, r6, r1\n\
+    ldr r1, [r0]\n\
+    cmp r1, 0\n\
+    beq _080EFCE8\n\
+    movs r0, 0xC8\n\
+    adds r5, r7, 0\n\
+    muls r5, r0\n\
+    ldr r4, _080EFCE0 @ =0x0000bc9c\n\
+    adds r5, r4\n\
+    ldr r4, [r3]\n\
+    adds r5, r4, r5\n\
+    adds r0, r1, 0\n\
+    adds r1, r5, 0\n\
+    str r2, [sp]\n\
+    str r3, [sp, 0x4]\n\
+    bl LZ77UnCompVram\n\
+    ldr r0, _080EFCE4 @ =0x0000cdcc\n\
+    adds r4, r0\n\
+    adds r4, r6\n\
+    str r5, [r4]\n\
+    adds r0, r7, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r7, r0, 16\n\
+    ldr r2, [sp]\n\
+    ldr r3, [sp, 0x4]\n\
+    b _080EFCF2\n\
+    .align 2, 0\n\
+_080EFCD0: .4byte gUnknown_083DFEC4\n\
+_080EFCD4: .4byte 0x0000bc9a\n\
+_080EFCD8: .4byte 0x0000bc9b\n\
+_080EFCDC: .4byte gPokenavCityMaps\n\
+_080EFCE0: .4byte 0x0000bc9c\n\
+_080EFCE4: .4byte 0x0000cdcc\n\
+_080EFCE8:\n\
+    ldr r0, [r3]\n\
+    ldr r4, _080EFD1C @ =0x0000cdcc\n\
+    adds r0, r4\n\
+    adds r0, r6\n\
+    str r1, [r0]\n\
+_080EFCF2:\n\
+    adds r0, r2, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r2, r0, 16\n\
+    cmp r2, 0x1\n\
+    bls _080EFC8E\n\
+    ldr r0, _080EFD20 @ =gUnknown_083DFEC4\n\
+    ldr r2, [r0]\n\
+    ldr r0, _080EFD24 @ =0x0000bc9a\n\
+    adds r1, r2, r0\n\
+    ldrb r0, [r1]\n\
+    adds r0, 0x1\n\
+    strb r0, [r1]\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    cmp r0, 0xF\n\
+    bhi _080EFD2C\n\
+    ldr r1, _080EFD28 @ =0x0000bc9b\n\
+    adds r0, r2, r1\n\
+    strb r7, [r0]\n\
+    movs r0, 0x1\n\
+    b _080EFD2E\n\
+    .align 2, 0\n\
+_080EFD1C: .4byte 0x0000cdcc\n\
+_080EFD20: .4byte gUnknown_083DFEC4\n\
+_080EFD24: .4byte 0x0000bc9a\n\
+_080EFD28: .4byte 0x0000bc9b\n\
+_080EFD2C:\n\
+    movs r0, 0\n\
+_080EFD2E:\n\
+    add sp, 0x8\n\
+    pop {r3,r4}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    pop {r4-r7}\n\
+    pop {r1}\n\
+    bx r1\n\
+    .syntax divided\n");
+}
+#endif // NONMATCHING
+
+void sub_80EFD3C(void)
+{
+	gUnknown_083DFEC4->unk769E = 0;
+	gUnknown_083DFEC4->unk769C = 47;
+	gUnknown_083DFEC4->unk769D = 0;
+	gUnknown_083DFEC4->unk769A = 0;
+}
+
+void sub_80EFD74(void)
+{
+	gUnknown_083DFEC4->unk769E = 1;
+
+	if (gUnknown_083DFEC4->unk769D == 1)
+	{
+		gUnknown_083DFEC4->unk769D = 2;
+	}
+}
+
+void sub_80EFDA0(void)
+{
+	sub_8095C8C((void *)VRAM + 0xF800, 14, 16, gUnknown_08E9AC2C, 0, 0, 15, 1, 15);
+	gUnknown_083DFEC4->unk769E = 0;
+}
+
+void sub_80EFDE4(u8 param0)
+{
+	u16 var1 = 60 - gUnknown_083DFEC4->unk769C;
+
+	if (var1 > 15)
+	{
+		var1 = 15;
+	}
+
+	if (gUnknown_083DFEC4->unk769E != 0)
+	{
+		sub_8095C8C((void *)VRAM + 0xF800, 14, 16, gUnknown_08E9ABB4, gUnknown_083DFEC4->unk769C, 0, var1, 1, 60);
+
+		if (var1 < 15)
+		{
+			u16 var2 = var1 + 14;
+
+			sub_8095C8C((void *)VRAM + 0xF800, var2, 16, gUnknown_08E9ABB4, 0, 0, (u16)(15 - var1), 1, 60);
+		}
+	}
+}
+
+void sub_80EFE7C(void)
+{
+	u16 var1;
+	u8 var2 = gUnknown_083DFEC4->unk769D;
+
+	switch (var2)
+	{
+	case 0:
+		var1 = ++gUnknown_083DFEC4->unk769C;
+
+		if (var1 > 59)
+		{
+			gUnknown_083DFEC4->unk769C = var2;
+		}
+
+		sub_80EFDE4(gUnknown_083DFEC4->unk769E);
+
+		switch (gUnknown_083DFEC4->unk769C)
+		{
+		case 0:
+		case 15:
+		case 30:
+		case 45:
+			gUnknown_083DFEC4->unk769D = 1;
+			gUnknown_083DFEC4->unk769A = 0;
+			break;
+		}
+		break;
+	case 1:
+		var1 = ++gUnknown_083DFEC4->unk769A;
+		if (var1 > 120)
+		{
+			gUnknown_083DFEC4->unk769A = 0;
+			gUnknown_083DFEC4->unk769D = 0;
+		}
+		break;
+	case 2:
+		sub_80EFDE4(1);
+		gUnknown_083DFEC4->unk769D = 1;
+		break;	
+	}
+}
+
+void sub_80EFF34(void)
+{
+	gUnknown_083DFEC4->unkD160 = 0;
+
+	if (gUnknown_083DFEC4->unk6DAC == 0)
+	{
+		while (sub_80EFF68());
+	}
+}
+
+bool8 sub_80EFF68(void)
+{
+	switch (gUnknown_083DFEC4->unkD160)
+	{
+	case 0:
+		sub_80EEDE8();
+		gUnknown_083DFEC4->unkD162[0] = 11;
+		break;
+	case 1:
+		SetUpWindowConfig(&gWindowConfig_81E7080);
+		break;
+	case 2:
+		MultistepInitMenuWindowBegin(&gWindowConfig_81E7080);
+		break;
+	case 3:
+		if (!MultistepInitMenuWindowContinue())
+		{
+			return TRUE;
+		}
+		break;
+	case 4:
+		MenuZeroFillScreen();
+		break;
+	case 5:
+		sub_80F1614();
+		break;
+	case 6:
+		if (sub_80F162C(0))
+		{
+			return TRUE;
+		}
+		break;
+	case 7:
+		LZ77UnCompVram(gPokenavConditionView_Gfx, (void *)VRAM + 0x5000);
+		break;
+	case 8:
+		LZ77UnCompVram(gUnknown_08E9AC4C, (void *)VRAM + 0xF000);
+		LoadPalette(gPokenavConditionMenu2_Pal, 0x20, 0x20);
+		break;
+	case 9:
+		if (gUnknown_083DFEC4->unk76AA == 1)
+		{
+			sub_8095C8C((void *)VRAM + 0xF000, 0, 5, gUnknown_083E01AC, 0, 0, 9, 4, 9);
+		}
+		break;
+	case 10:
+		LZ77UnCompVram(gUnknown_08E9FEB4, (void *)VRAM + 0xB800);
+		break;
+	case 11:
+		LoadPalette(gUnknown_083E0254, 0x30, 0x20);
+		LoadPalette(gUnknownPalette_81E6692, 0xB0, 0x20);
+		LoadPalette(&gPokenavConditionMenu2_Pal[2], 0xB1, 0x2);
+		LoadPalette(&gPokenavConditionMenu2_Pal[16], 0xB5, 0x2);
+		LoadPalette(&gPokenavConditionMenu2_Pal[30], 0xBF, 0x2);
+		sub_80F01A4();
+		break;
+	case 12:
+		sub_80F01E0((u16)gUnknown_083DFEC4->unk8fe9);
+		break;
+	case 13:
+		REG_BG3CNT = 0x1E03;
+		REG_BG2CNT = 0x1702;
+		REG_BLDCNT = 0x844;
+		REG_BLDALPHA = 0x40B;
+		break;
+	default:
+		return FALSE;
+	}
+
+	gUnknown_083DFEC4->unkD160++;
+	return TRUE;
+}
+
+void sub_80F0174(bool8 a)
+{
+	if (a)
+	{
+		REG_DISPCNT |= DISPCNT_BG2_ON;
+	}
+	else
+	{
+		REG_DISPCNT &= ~DISPCNT_BG2_ON;
+	}
+}
+
+void sub_80F01A4(void)
+{
+	REG_WIN0H = WIN_RANGE(0, 240);
+	REG_WIN1H = WIN_RANGE(0, 155);
+	REG_WIN0V = WIN_RANGE(56, 121);
+	REG_WIN1V = WIN_RANGE(56, 121);
+	REG_WININ = 0x3F3F;
+	REG_WINOUT = 0x001B;
+}
+
+void sub_80F01E0(u16 a)
+{
+	MenuPrint(gUnknown_083DFEC4->unk8829[a], 13, 1);
+
+	if (gUnknown_083DFEC4->unk76AA == 1)
+	{
+		MenuPrint(gUnknown_083DFEC4->unk88E9[a], 13, 3);
+		sub_80F443C(gUnknown_083DFEC4->unk8788, gUnknown_083DFEC4->unk893c[gUnknown_083DFEC4->unk87DC].unk2);
+		MenuPrint(gUnknown_083DFEC4->unk8788, 1, 6);
+	}
+}
+
+void sub_80F0264(u8 a)
+{
+	gUnknown_083DFEC4->unk306 = 0;
+	gUnknown_083DFEC4->unk87CA = a;
+
+	if (gUnknown_083DFEC4->unk6DAC == 0)
+	{
+		while (sub_80F02A0());
+	}
+}
+
+#ifdef NONMATCHING // small nonmatching part is in the third else clause in case 7.
+bool8 sub_80F02A0(void)
+{
+	const u16 *pointer;
+
+	switch (gUnknown_083DFEC4->unk306)
+	{
+	case 0:
+		sub_80EEDE8();
+
+		gUnknown_083DFEC4->unk87C8 = gUnknown_083DFEC4->unk87CA == 1;
+		gUnknown_083DFEC4->unkD162[0] = 11;
+		break;
+	case 1:
+		SetUpWindowConfig(&gWindowConfig_81E70D4);
+		break;
+	case 2:
+		MultistepInitMenuWindowBegin(&gWindowConfig_81E70D4);
+		break;
+	case 3:
+		if (!MultistepInitMenuWindowContinue())
+		{
+			return TRUE;
+		}
+		break;
+	case 4:
+		MenuZeroFillScreen();
+		break;
+	case 5:
+		LZ77UnCompVram(gUnknown_08E9FC64, (void *)VRAM + 0xE800);
+		break;
+	case 6:
+		LZ77UnCompVram(gPokenavConditionSearch2_Gfx, (void *)VRAM + 0x8000);
+		break;
+	case 7:
+		LoadPalette(gUnknown_083E02B4, 0xB0, 0x20);
+		LoadPalette(gUnknown_083E02B4, 0xF0, 0x20);
+		LoadPalette(gUnknown_083E0334, 0x40, 0x20);
+
+		if (gUnknown_083DFEC4->unk87CA == 0)
+		{
+			LoadPalette(gPokenavConditionSearch2_Pal, 0x30, 0x20);
+			gPlttBufferUnfaded[0] = gPokenavConditionSearch2_Pal[5];
+			LoadPalette(gUnknownPalette_81E6692, 0xB0, 0x20);
+			LoadPalette(&gUnknown_083E02B4[1], 0xB1, 0x2);
+			LoadPalette(&gUnknown_083E02B4[8], 0xB5, 0x2);
+			LoadPalette(&gPokenavConditionSearch2_Pal[5], 0xBF, 0x2);
+		}
+		else if (gUnknown_083DFEC4->unk87CA == 1)
+		{
+			LoadPalette(gUnknown_083E0274, 0x30, 0x20);
+			gPlttBufferUnfaded[0] = gUnknown_083E0274[5];
+			LoadPalette(gUnknownPalette_81E6692, 0xB0, 0x20);
+			LoadPalette(&gUnknown_083E02B4[1], 0xB1, 0x2);
+			LoadPalette(&gUnknown_083E02B4[8], 0xB5, 0x2);
+			LoadPalette(&gUnknown_083E0274[5], 0xBF, 0x2);
+		}
+		else
+		{
+			LoadPalette(gUnknown_08E9F9E8, 0x30, 0x20);
+			pointer = &gUnknown_08E9F9E8[5];
+			gPlttBufferUnfaded[0] = gUnknown_08E9F9E8[5];
+			LoadPalette(gUnknown_083E0314, 0x50, 0x20);
+			LoadPalette(&gUnknown_083E02B4[1], 0xB1, 0x2);
+			LoadPalette(&gUnknown_083E02B4[8], 0xB5, 0x2);
+			LoadPalette(pointer, 0xBF, 0x2);
+			LoadPalette(pointer, 0x5F, 0x2);
+		}
+		break;
+	case 8:
+		if (gUnknown_083DFEC4->unk87CA != 2)
+		{
+			sub_8095C8C((void *)VRAM + 0xE800, 0, 5, gUnknown_08E9FD1C, 0, 0, 9, 4, 9);
+		}
+		else
+		{
+			sub_8095C8C((void *)VRAM + 0xE800, 0, 4, gUnknown_08E9FE54, 0, 0, 12, 10, 12);
+			sub_8095C8C((void *)VRAM + 0xE800, 0, 8, gUnknown_08E9FD64, 0, 0, 12, 10, 12);
+		}
+		break;
+	case 9:
+		LZ77UnCompVram(gUnknown_083E0354, (void *)VRAM + 0x5000);
+		break;
+	case 10:
+		DmaClear16(3, (void *)VRAM + 0xF800, 0x800);
+		break;
+	case 11:
+		sub_80F0900();
+		break;
+	case 12:
+		if (sub_80F0944())
+		{
+			return TRUE;
+		}
+		break;
+	case 13:
+		if (gUnknown_083DFEC4->unk87CA != 2)
+		{
+			ShowMapNamePopUpWindow();
+		}
+		else
+		{
+			sub_80F081C(0);
+			sub_80F0FFC(gUnknown_083DFEC4->unk876E);
+		}
+		break;
+	case 14:
+		REG_BG2CNT = 0x1D0A;
+		REG_BG3CNT = 0x1E03;
+		REG_BG0CNT = 0x1F01;
+		REG_BG3VOFS = 0xF8;
+
+		gUnknown_083DFEC4->unk8776 = 0xF8;
+		gUnknown_083DFEC4->unk8778 = 0;
+
+		REG_BLDCNT = 0;
+		gUnknown_083DFEC4->unkD160++;
+		return FALSE;
+	default:
+		return FALSE;
+	}
+
+	gUnknown_083DFEC4->unk306++;
+	return TRUE;
+}
+#else
+__attribute__((naked))
+bool8 sub_80F02A0(void)
+{
+    asm(".syntax unified\n\
+    push {r4-r6,lr}\n\
+    mov r6, r8\n\
+    push {r6}\n\
+    sub sp, 0x18\n\
+    ldr r1, _080F02C4 @ =gUnknown_083DFEC4\n\
+    ldr r0, [r1]\n\
+    ldr r2, _080F02C8 @ =0x00000306\n\
+    adds r0, r2\n\
+    ldrh r0, [r0]\n\
+    adds r2, r1, 0\n\
+    cmp r0, 0xE\n\
+    bls _080F02BA\n\
+    b _080F05FA\n\
+_080F02BA:\n\
+    lsls r0, 2\n\
+    ldr r1, _080F02CC @ =_080F02D0\n\
+    adds r0, r1\n\
+    ldr r0, [r0]\n\
+    mov pc, r0\n\
+    .align 2, 0\n\
+_080F02C4: .4byte gUnknown_083DFEC4\n\
+_080F02C8: .4byte 0x00000306\n\
+_080F02CC: .4byte _080F02D0\n\
+    .align 2, 0\n\
+_080F02D0:\n\
+    .4byte _080F030C\n\
+    .4byte _080F0344\n\
+    .4byte _080F0350\n\
+    .4byte _080F035C\n\
+    .4byte _080F0368\n\
+    .4byte _080F036E\n\
+    .4byte _080F0380\n\
+    .4byte _080F0394\n\
+    .4byte _080F04BC\n\
+    .4byte _080F053C\n\
+    .4byte _080F0550\n\
+    .4byte _080F0574\n\
+    .4byte _080F057A\n\
+    .4byte _080F0586\n\
+    .4byte _080F05BC\n\
+_080F030C:\n\
+    bl sub_80EEDE8\n\
+    ldr r0, _080F0334 @ =gUnknown_083DFEC4\n\
+    ldr r1, [r0]\n\
+    movs r2, 0\n\
+    ldr r3, _080F0338 @ =0x000087ca\n\
+    adds r0, r1, r3\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0x1\n\
+    bne _080F0322\n\
+    movs r2, 0x1\n\
+_080F0322:\n\
+    ldr r3, _080F033C @ =0x000087c8\n\
+    adds r0, r1, r3\n\
+    strb r2, [r0]\n\
+    ldr r0, _080F0340 @ =0x0000d162\n\
+    adds r1, r0\n\
+    movs r0, 0xB\n\
+    strb r0, [r1]\n\
+    b _080F0618\n\
+    .align 2, 0\n\
+_080F0334: .4byte gUnknown_083DFEC4\n\
+_080F0338: .4byte 0x000087ca\n\
+_080F033C: .4byte 0x000087c8\n\
+_080F0340: .4byte 0x0000d162\n\
+_080F0344:\n\
+    ldr r0, _080F034C @ =gWindowConfig_81E70D4\n\
+    bl SetUpWindowConfig\n\
+    b _080F0618\n\
+    .align 2, 0\n\
+_080F034C: .4byte gWindowConfig_81E70D4\n\
+_080F0350:\n\
+    ldr r0, _080F0358 @ =gWindowConfig_81E70D4\n\
+    bl MultistepInitMenuWindowBegin\n\
+    b _080F0618\n\
+    .align 2, 0\n\
+_080F0358: .4byte gWindowConfig_81E70D4\n\
+_080F035C:\n\
+    bl MultistepInitMenuWindowContinue\n\
+    cmp r0, 0\n\
+    beq _080F0366\n\
+    b _080F0618\n\
+_080F0366:\n\
+    b _080F0626\n\
+_080F0368:\n\
+    bl MenuZeroFillScreen\n\
+    b _080F0618\n\
+_080F036E:\n\
+    ldr r0, _080F0378 @ =gUnknown_08E9FC64\n\
+    ldr r1, _080F037C @ =0x0600e800\n\
+    bl LZ77UnCompVram\n\
+    b _080F0618\n\
+    .align 2, 0\n\
+_080F0378: .4byte gUnknown_08E9FC64\n\
+_080F037C: .4byte 0x0600e800\n\
+_080F0380:\n\
+    ldr r0, _080F038C @ =gPokenavConditionSearch2_Gfx\n\
+    ldr r1, _080F0390 @ =0x06008000\n\
+    bl LZ77UnCompVram\n\
+    b _080F0618\n\
+    .align 2, 0\n\
+_080F038C: .4byte gPokenavConditionSearch2_Gfx\n\
+_080F0390: .4byte 0x06008000\n\
+_080F0394:\n\
+    ldr r6, _080F03FC @ =gUnknown_083E02B4\n\
+    adds r0, r6, 0\n\
+    movs r1, 0xB0\n\
+    movs r2, 0x20\n\
+    bl LoadPalette\n\
+    adds r0, r6, 0\n\
+    movs r1, 0xF0\n\
+    movs r2, 0x20\n\
+    bl LoadPalette\n\
+    ldr r0, _080F0400 @ =gUnknown_083E0334\n\
+    movs r1, 0x40\n\
+    movs r2, 0x20\n\
+    bl LoadPalette\n\
+    ldr r0, _080F0404 @ =gUnknown_083DFEC4\n\
+    ldr r0, [r0]\n\
+    ldr r1, _080F0408 @ =0x000087ca\n\
+    adds r0, r1\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0\n\
+    bne _080F0418\n\
+    ldr r4, _080F040C @ =gPokenavConditionSearch2_Pal\n\
+    adds r0, r4, 0\n\
+    movs r1, 0x30\n\
+    movs r2, 0x20\n\
+    bl LoadPalette\n\
+    ldr r1, _080F0410 @ =gPlttBufferUnfaded\n\
+    ldrh r0, [r4, 0xA]\n\
+    strh r0, [r1]\n\
+    ldr r0, _080F0414 @ =gUnknownPalette_81E6692\n\
+    movs r1, 0xB0\n\
+    movs r2, 0x20\n\
+    bl LoadPalette\n\
+    adds r0, r6, 0x2\n\
+    movs r1, 0xB1\n\
+    movs r2, 0x2\n\
+    bl LoadPalette\n\
+    adds r0, r6, 0\n\
+    adds r0, 0x10\n\
+    movs r1, 0xB5\n\
+    movs r2, 0x2\n\
+    bl LoadPalette\n\
+    adds r4, 0xA\n\
+    adds r0, r4, 0\n\
+    movs r1, 0xBF\n\
+    b _080F04A8\n\
+    .align 2, 0\n\
+_080F03FC: .4byte gUnknown_083E02B4\n\
+_080F0400: .4byte gUnknown_083E0334\n\
+_080F0404: .4byte gUnknown_083DFEC4\n\
+_080F0408: .4byte 0x000087ca\n\
+_080F040C: .4byte gPokenavConditionSearch2_Pal\n\
+_080F0410: .4byte gPlttBufferUnfaded\n\
+_080F0414: .4byte gUnknownPalette_81E6692\n\
+_080F0418:\n\
+    cmp r0, 0x1\n\
+    bne _080F0464\n\
+    ldr r4, _080F0458 @ =gUnknown_083E0274\n\
+    adds r0, r4, 0\n\
+    movs r1, 0x30\n\
+    movs r2, 0x20\n\
+    bl LoadPalette\n\
+    ldr r1, _080F045C @ =gPlttBufferUnfaded\n\
+    ldrh r0, [r4, 0xA]\n\
+    strh r0, [r1]\n\
+    ldr r0, _080F0460 @ =gUnknownPalette_81E6692\n\
+    movs r1, 0xB0\n\
+    movs r2, 0x20\n\
+    bl LoadPalette\n\
+    adds r0, r6, 0x2\n\
+    movs r1, 0xB1\n\
+    movs r2, 0x2\n\
+    bl LoadPalette\n\
+    adds r0, r6, 0\n\
+    adds r0, 0x10\n\
+    movs r1, 0xB5\n\
+    movs r2, 0x2\n\
+    bl LoadPalette\n\
+    adds r4, 0xA\n\
+    adds r0, r4, 0\n\
+    movs r1, 0xBF\n\
+    b _080F04A8\n\
+    .align 2, 0\n\
+_080F0458: .4byte gUnknown_083E0274\n\
+_080F045C: .4byte gPlttBufferUnfaded\n\
+_080F0460: .4byte gUnknownPalette_81E6692\n\
+_080F0464:\n\
+    ldr r4, _080F04B0 @ =gUnknown_08E9F9E8\n\
+    adds r0, r4, 0\n\
+    movs r1, 0x30\n\
+    movs r2, 0x20\n\
+    bl LoadPalette\n\
+    ldr r1, _080F04B4 @ =gPlttBufferUnfaded\n\
+    adds r5, r4, 0\n\
+    adds r5, 0xA\n\
+    ldrh r0, [r4, 0xA]\n\
+    strh r0, [r1]\n\
+    ldr r0, _080F04B8 @ =gUnknown_083E0314\n\
+    movs r1, 0x50\n\
+    movs r2, 0x20\n\
+    bl LoadPalette\n\
+    adds r0, r6, 0x2\n\
+    movs r1, 0xB1\n\
+    movs r2, 0x2\n\
+    bl LoadPalette\n\
+    adds r0, r6, 0\n\
+    adds r0, 0x10\n\
+    movs r1, 0xB5\n\
+    movs r2, 0x2\n\
+    bl LoadPalette\n\
+    adds r0, r5, 0\n\
+    movs r1, 0xBF\n\
+    movs r2, 0x2\n\
+    bl LoadPalette\n\
+    adds r0, r5, 0\n\
+    movs r1, 0x5F\n\
+_080F04A8:\n\
+    movs r2, 0x2\n\
+    bl LoadPalette\n\
+    b _080F0618\n\
+    .align 2, 0\n\
+_080F04B0: .4byte gUnknown_08E9F9E8\n\
+_080F04B4: .4byte gPlttBufferUnfaded\n\
+_080F04B8: .4byte gUnknown_083E0314\n\
+_080F04BC:\n\
+    ldr r0, _080F04E8 @ =gUnknown_083DFEC4\n\
+    ldr r0, [r0]\n\
+    ldr r2, _080F04EC @ =0x000087ca\n\
+    adds r0, r2\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0x2\n\
+    beq _080F04F8\n\
+    ldr r0, _080F04F0 @ =0x0600e800\n\
+    ldr r3, _080F04F4 @ =gUnknown_08E9FD1C\n\
+    movs r1, 0\n\
+    str r1, [sp]\n\
+    str r1, [sp, 0x4]\n\
+    movs r2, 0x9\n\
+    str r2, [sp, 0x8]\n\
+    movs r1, 0x4\n\
+    str r1, [sp, 0xC]\n\
+    str r2, [sp, 0x10]\n\
+    movs r1, 0\n\
+    movs r2, 0x5\n\
+    bl sub_8095C8C\n\
+    b _080F0618\n\
+    .align 2, 0\n\
+_080F04E8: .4byte gUnknown_083DFEC4\n\
+_080F04EC: .4byte 0x000087ca\n\
+_080F04F0: .4byte 0x0600e800\n\
+_080F04F4: .4byte gUnknown_08E9FD1C\n\
+_080F04F8:\n\
+    ldr r3, _080F0530 @ =0x0600e800\n\
+    mov r8, r3\n\
+    ldr r3, _080F0534 @ =gUnknown_08E9FE54\n\
+    movs r4, 0\n\
+    str r4, [sp]\n\
+    str r4, [sp, 0x4]\n\
+    movs r5, 0xC\n\
+    str r5, [sp, 0x8]\n\
+    movs r6, 0xA\n\
+    str r6, [sp, 0xC]\n\
+    str r5, [sp, 0x10]\n\
+    mov r0, r8\n\
+    movs r1, 0\n\
+    movs r2, 0x4\n\
+    bl sub_8095C8C\n\
+    ldr r3, _080F0538 @ =gUnknown_08E9FD64\n\
+    str r4, [sp]\n\
+    str r4, [sp, 0x4]\n\
+    str r5, [sp, 0x8]\n\
+    str r6, [sp, 0xC]\n\
+    str r5, [sp, 0x10]\n\
+    mov r0, r8\n\
+    movs r1, 0\n\
+    movs r2, 0x8\n\
+    bl sub_8095C8C\n\
+    b _080F0618\n\
+    .align 2, 0\n\
+_080F0530: .4byte 0x0600e800\n\
+_080F0534: .4byte gUnknown_08E9FE54\n\
+_080F0538: .4byte gUnknown_08E9FD64\n\
+_080F053C:\n\
+    ldr r0, _080F0548 @ =gUnknown_083E0354\n\
+    ldr r1, _080F054C @ =0x06005000\n\
+    bl LZ77UnCompVram\n\
+    b _080F0618\n\
+    .align 2, 0\n\
+_080F0548: .4byte gUnknown_083E0354\n\
+_080F054C: .4byte 0x06005000\n\
+_080F0550:\n\
+    ldr r2, _080F0568 @ =0x0600f800\n\
+    add r1, sp, 0x14\n\
+    movs r0, 0\n\
+    strh r0, [r1]\n\
+    ldr r0, _080F056C @ =0x040000d4\n\
+    str r1, [r0]\n\
+    str r2, [r0, 0x4]\n\
+    ldr r1, _080F0570 @ =0x81000400\n\
+    str r1, [r0, 0x8]\n\
+    ldr r0, [r0, 0x8]\n\
+    b _080F0618\n\
+    .align 2, 0\n\
+_080F0568: .4byte 0x0600f800\n\
+_080F056C: .4byte 0x040000d4\n\
+_080F0570: .4byte 0x81000400\n\
+_080F0574:\n\
+    bl sub_80F0900\n\
+    b _080F0618\n\
+_080F057A:\n\
+    bl sub_80F0944\n\
+    lsls r0, 24\n\
+    cmp r0, 0\n\
+    beq _080F0618\n\
+    b _080F0626\n\
+_080F0586:\n\
+    ldr r0, _080F059C @ =gUnknown_083DFEC4\n\
+    ldr r4, [r0]\n\
+    ldr r1, _080F05A0 @ =0x000087ca\n\
+    adds r0, r4, r1\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0x2\n\
+    beq _080F05A4\n\
+    bl ShowMapNamePopUpWindow\n\
+    b _080F0618\n\
+    .align 2, 0\n\
+_080F059C: .4byte gUnknown_083DFEC4\n\
+_080F05A0: .4byte 0x000087ca\n\
+_080F05A4:\n\
+    movs r0, 0\n\
+    bl sub_80F081C\n\
+    ldr r2, _080F05B8 @ =0x0000876e\n\
+    adds r0, r4, r2\n\
+    ldrb r0, [r0]\n\
+    bl sub_80F0FFC\n\
+    b _080F0618\n\
+    .align 2, 0\n\
+_080F05B8: .4byte 0x0000876e\n\
+_080F05BC:\n\
+    ldr r1, _080F0600 @ =REG_BG2CNT\n\
+    ldr r3, _080F0604 @ =0x00001d0a\n\
+    adds r0, r3, 0\n\
+    strh r0, [r1]\n\
+    adds r1, 0x2\n\
+    adds r3, 0xF9\n\
+    adds r0, r3, 0\n\
+    strh r0, [r1]\n\
+    subs r1, 0x6\n\
+    adds r3, 0xFE\n\
+    adds r0, r3, 0\n\
+    strh r0, [r1]\n\
+    adds r1, 0x16\n\
+    movs r0, 0xF8\n\
+    strh r0, [r1]\n\
+    ldr r1, [r2]\n\
+    ldr r0, _080F0608 @ =0x00008776\n\
+    adds r2, r1, r0\n\
+    movs r3, 0\n\
+    movs r0, 0xF8\n\
+    strh r0, [r2]\n\
+    ldr r2, _080F060C @ =0x00008778\n\
+    adds r0, r1, r2\n\
+    strh r3, [r0]\n\
+    ldr r0, _080F0610 @ =REG_BLDCNT\n\
+    strh r3, [r0]\n\
+    ldr r3, _080F0614 @ =0x0000d160\n\
+    adds r1, r3\n\
+    ldrh r0, [r1]\n\
+    adds r0, 0x1\n\
+    strh r0, [r1]\n\
+_080F05FA:\n\
+    movs r0, 0\n\
+    b _080F0628\n\
+    .align 2, 0\n\
+_080F0600: .4byte REG_BG2CNT\n\
+_080F0604: .4byte 0x00001d0a\n\
+_080F0608: .4byte 0x00008776\n\
+_080F060C: .4byte 0x00008778\n\
+_080F0610: .4byte REG_BLDCNT\n\
+_080F0614: .4byte 0x0000d160\n\
+_080F0618:\n\
+    ldr r0, _080F0634 @ =gUnknown_083DFEC4\n\
+    ldr r1, [r0]\n\
+    ldr r0, _080F0638 @ =0x00000306\n\
+    adds r1, r0\n\
+    ldrh r0, [r1]\n\
+    adds r0, 0x1\n\
+    strh r0, [r1]\n\
+_080F0626:\n\
+    movs r0, 0x1\n\
+_080F0628:\n\
+    add sp, 0x18\n\
+    pop {r3}\n\
+    mov r8, r3\n\
+    pop {r4-r6}\n\
+    pop {r1}\n\
+    bx r1\n\
+    .align 2, 0\n\
+_080F0634: .4byte gUnknown_083DFEC4\n\
+_080F0638: .4byte 0x00000306\n\
+    .syntax divided\n");
+}
+#endif // NONMATCHING
