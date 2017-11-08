@@ -1,6 +1,7 @@
 #ifndef GUARD_MENU_H
 #define GUARD_MENU_H
 
+#include "task.h"
 #include "text.h"
 
 struct MenuAction
@@ -12,7 +13,7 @@ struct MenuAction
 struct MenuAction2
 {
     const u8 *text;
-    void (*func)(u8);
+    TaskFunc func;
 };
 
 extern const struct MenuAction gMenuYesNoItems[];

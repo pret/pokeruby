@@ -51,7 +51,7 @@ gSpecials::
 	def_special sub_80C5568
 	def_special sub_8083BDC
 	def_special FieldObjectInteractionGetBerryTreeData
-	def_special sub_80B4EE4
+	def_special Berry_FadeAndGoToBerryBagMenu
 	def_special FieldObjectInteractionPlantBerryTree
 	def_special FieldObjectInteractionPickBerryTree
 	def_special FieldObjectInteractionRemoveBerryTree
@@ -160,7 +160,7 @@ gSpecials::
 	def_special SetFlagInVar
 	def_special CableCarWarp
 	def_special sub_8123218
-	def_special sub_8053E90
+	def_special Overworld_PlaySpecialMapMusic
 	def_special StartWallClock
 	def_special ScrSpecial_ViewWallClock
 	def_special ScrSpecial_ChooseStarter
@@ -241,19 +241,19 @@ gSpecials::
 	def_special sub_8134548
 	def_special sub_81347F8
 	def_special CheckPartyBattleTowerBanlist
-	def_special sub_8135474
-	def_special sub_81360C0
+	def_special PrintBattleTowerTrainerGreeting
+	def_special PrintEReaderTrainerGreeting
 	def_special sub_813556C
 	def_special sub_8135668
 	def_special sub_81358A4
 	def_special sub_8135A14
 	def_special sub_8135BA0
-	def_special sub_8135C38
-	def_special sub_8135D84
-	def_special sub_8135DEC
-	def_special sub_8135E50
+	def_special BattleTower_SoftReset
+	def_special DetermineBattleTowerPrize
+	def_special GiveBattleTowerPrize
+	def_special AwardBattleTowerRibbons
 	def_special ChooseBattleTowerPlayerParty
-	def_special sub_813601C
+	def_special ValidateEReaderTrainer
 	def_special sub_810F404
 	def_special ReducePlayerPartyToThree
 	def_special BedroomPC
@@ -329,7 +329,7 @@ gSpecials::
 	def_special sp13F_fall_to_last_warp
 	def_special ShowContestEntryMonPic
 	def_special sub_80C5164
-	def_special sub_8134AB4
+	def_special SetEReaderTrainerGfxId
 	def_special ScrSpecial_StartSouthernIslandBattle
 	def_special SetRoute119Weather
 	def_special SetRoute123Weather

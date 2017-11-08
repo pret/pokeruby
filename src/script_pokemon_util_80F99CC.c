@@ -31,8 +31,8 @@ void sub_80F99CC(void)
     u8 taskId;
 
     ScriptContext2_Enable();
-    taskId = CreateTask((void *)sub_80F9A8C, 0xA);
-    gTasks[taskId].data[0] = 2;
+    taskId = CreateTask((void *)OpenPartyMenuFromScriptContext, 0xA);
+    gTasks[taskId].data[0] = PARTY_MENU_TYPE_CONTEST;
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
 }
 
@@ -41,8 +41,8 @@ void sub_80F9A0C(void)
     u8 taskId;
 
     ScriptContext2_Enable();
-    taskId = CreateTask((void *)sub_80F9A8C, 0xA);
-    gTasks[taskId].data[0] = 3;
+    taskId = CreateTask((void *)OpenPartyMenuFromScriptContext, 0xA);
+    gTasks[taskId].data[0] = PARTY_MENU_TYPE_IN_GAME_TRADE;
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
 }
 
@@ -51,12 +51,12 @@ void sub_80F9A4C(void)
     u8 taskId;
 
     ScriptContext2_Enable();
-    taskId = CreateTask((void *)sub_80F9A8C, 0xA);
-    gTasks[taskId].data[0] = 7;
+    taskId = CreateTask((void *)OpenPartyMenuFromScriptContext, 0xA);
+    gTasks[taskId].data[0] = PARTY_MENU_TYPE_MOVE_TUTOR;
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
 }
 
-void sub_80F9A8C(u8 taskId)
+void OpenPartyMenuFromScriptContext(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -66,64 +66,64 @@ void sub_80F9A8C(u8 taskId)
     }
 }
 
-bool8 sub_80F9ACC(void)
+bool8 SetupContestPartyMenu(void)
 {
-    switch (EWRAM_1B000.unk264)
+    switch (EWRAM_1B000.setupState)
     {
     case 0:
-        if (EWRAM_1B000.unk266 < gPlayerPartyCount)
+        if (EWRAM_1B000.monIndex < gPlayerPartyCount)
         {
-            TryCreatePartyMenuMonIcon(EWRAM_1B000.unk260, EWRAM_1B000.unk266, &gPlayerParty[EWRAM_1B000.unk266]);
-            EWRAM_1B000.unk266++;
+            TryCreatePartyMenuMonIcon(EWRAM_1B000.menuHandlerTaskId, EWRAM_1B000.monIndex, &gPlayerParty[EWRAM_1B000.monIndex]);
+            EWRAM_1B000.monIndex++;
         }
         else
         {
-            EWRAM_1B000.unk266 = 0;
-            EWRAM_1B000.unk264++;
+            EWRAM_1B000.monIndex = 0;
+            EWRAM_1B000.setupState++;
         }
         break;
     case 1:
         LoadHeldItemIconGraphics();
-        EWRAM_1B000.unk264++;
+        EWRAM_1B000.setupState++;
         break;
     case 2:
-        CreateHeldItemIcons_806DC34(EWRAM_1B000.unk260);
-        EWRAM_1B000.unk264++;
+        CreateHeldItemIcons_806DC34(EWRAM_1B000.menuHandlerTaskId);
+        EWRAM_1B000.setupState++;
         break;
     case 3:
-        if (sub_806BD58(EWRAM_1B000.unk260, EWRAM_1B000.unk266) != 1)
+        if (sub_806BD58(EWRAM_1B000.menuHandlerTaskId, EWRAM_1B000.monIndex) != 1)
         {
-            EWRAM_1B000.unk266++;
+            EWRAM_1B000.monIndex++;
             break;
         }
         else
         {
-            EWRAM_1B000.unk266 = 0;
-            EWRAM_1B000.unk264++;
+            EWRAM_1B000.monIndex = 0;
+            EWRAM_1B000.setupState++;
             break;
         }
     case 4:
         PartyMenuPrintMonsLevelOrStatus();
-        EWRAM_1B000.unk264++;
+        EWRAM_1B000.setupState++;
         break;
     case 5:
         PrintPartyMenuMonNicknames();
-        EWRAM_1B000.unk264++;
+        EWRAM_1B000.setupState++;
         break;
     case 6:
         sub_80F9C00();
-        EWRAM_1B000.unk264++;
+        EWRAM_1B000.setupState++;
         break;
     case 7: // the only case that can return true.
-        if (sub_806B58C(EWRAM_1B000.unk266) != 1)
+        if (DrawPartyMonBackground(EWRAM_1B000.monIndex) != 1)
         {
-            EWRAM_1B000.unk266++;
+            EWRAM_1B000.monIndex++;
             break;
         }
         else
         {
-            EWRAM_1B000.unk266 = 0;
-            EWRAM_1B000.unk264 = 0;
+            EWRAM_1B000.monIndex = 0;
+            EWRAM_1B000.setupState = 0;
             return TRUE;
         }
     }
@@ -151,19 +151,19 @@ void sub_80F9C00(void)
     }
 }
 
-void sub_80F9C6C(u8 var)
+void HandleSelectPartyMenu(u8 var)
 {
     if (!gPaletteFade.active)
     {
-        switch (sub_806BD80(var))
+        switch (HandleDefaultPartyMenuInput(var))
         {
-        case 1:
+        case A_BUTTON:
             PlaySE(SE_SELECT);
             gUnknown_02038694 = sub_806CA38(var);
             gSpecialVar_0x8004 = gUnknown_02038694;
             sub_8123138(var);
             break;
-        case 2:
+        case B_BUTTON:
             PlaySE(SE_SELECT);
             gUnknown_02038694 = 0xFF;
             gSpecialVar_0x8004 = 0xFF;
@@ -173,67 +173,66 @@ void sub_80F9C6C(u8 var)
     }
 }
 
-bool8 sub_80F9CE8(void) // this is the same function as sub_80F9ACC except case 6 calls a different function. why
+bool8 SetupMoveTutorPartyMenu(void)
 {
-    switch (EWRAM_1B000.unk264)
+    switch (EWRAM_1B000.setupState)
     {
     case 0:
-        if (EWRAM_1B000.unk266 < gPlayerPartyCount)
+        if (EWRAM_1B000.monIndex < gPlayerPartyCount)
         {
-            TryCreatePartyMenuMonIcon(EWRAM_1B000.unk260, EWRAM_1B000.unk266, &gPlayerParty[EWRAM_1B000.unk266]);
-            EWRAM_1B000.unk266++;
+            TryCreatePartyMenuMonIcon(EWRAM_1B000.menuHandlerTaskId, EWRAM_1B000.monIndex, &gPlayerParty[EWRAM_1B000.monIndex]);
+            EWRAM_1B000.monIndex++;
         }
         else
         {
-            EWRAM_1B000.unk266 = 0;
-            EWRAM_1B000.unk264++;
+            EWRAM_1B000.monIndex = 0;
+            EWRAM_1B000.setupState++;
         }
         break;
     case 1:
         LoadHeldItemIconGraphics();
-        EWRAM_1B000.unk264++;
+        EWRAM_1B000.setupState++;
         break;
     case 2:
-        CreateHeldItemIcons_806DC34(EWRAM_1B000.unk260);
-        EWRAM_1B000.unk264++;
+        CreateHeldItemIcons_806DC34(EWRAM_1B000.menuHandlerTaskId);
+        EWRAM_1B000.setupState++;
         break;
     case 3:
-        if (sub_806BD58(EWRAM_1B000.unk260, EWRAM_1B000.unk266) != 1)
+        if (sub_806BD58(EWRAM_1B000.menuHandlerTaskId, EWRAM_1B000.monIndex) != 1)
         {
-            EWRAM_1B000.unk266++;
-            break;
+            EWRAM_1B000.monIndex++;
         }
         else
         {
-            EWRAM_1B000.unk266 = 0;
-            EWRAM_1B000.unk264++;
-            break;
+            EWRAM_1B000.monIndex = 0;
+            EWRAM_1B000.setupState++;
         }
+        break;
     case 4:
         PartyMenuPrintMonsLevelOrStatus();
-        EWRAM_1B000.unk264++;
+        EWRAM_1B000.setupState++;
         break;
     case 5:
         PrintPartyMenuMonNicknames();
-        EWRAM_1B000.unk264++;
+        EWRAM_1B000.setupState++;
         break;
     case 6:
         sub_80F9E1C();
-        EWRAM_1B000.unk264++;
+        EWRAM_1B000.setupState++;
         break;
     case 7: // the only case that can return true.
-        if (sub_806B58C(EWRAM_1B000.unk266) != 1)
+        if (DrawPartyMonBackground(EWRAM_1B000.monIndex) != 1)
         {
-            EWRAM_1B000.unk266++;
-            break;
+            EWRAM_1B000.monIndex++;
         }
         else
         {
-            EWRAM_1B000.unk266 = 0;
-            EWRAM_1B000.unk264 = 0;
+            EWRAM_1B000.monIndex = 0;
+            EWRAM_1B000.setupState = 0;
             return TRUE;
         }
     }
+
     return FALSE;
 }
 
@@ -250,19 +249,19 @@ void sub_80F9E1C(void)
     }
 }
 
-void sub_80F9E64(u8 var)
+void HandleMoveTutorPartyMenu(u8 var)
 {
     if (!gPaletteFade.active)
     {
-        switch (sub_806BD80(var))
+        switch (HandleDefaultPartyMenuInput(var))
         {
-        case 1:
+        case A_BUTTON:
             PlaySE(SE_SELECT);
             gSpecialVar_0x8004 = sub_806CA38(var);
             gSpecialVar_0x8005 = sub_8040574(&gPlayerParty[gSpecialVar_0x8004]);
             sub_8123138(var);
             break;
-        case 2:
+        case B_BUTTON:
             PlaySE(SE_SELECT);
             gSpecialVar_0x8004 = 0xFF;
             sub_8123138(var);

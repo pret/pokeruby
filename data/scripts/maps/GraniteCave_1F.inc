@@ -5,7 +5,7 @@ GraniteCave_1F_EventScript_15CBA7:: @ 815CBA7
 	lock
 	faceplayer
 	checkflag 109
-	jumpeq GraniteCave_1F_EventScript_15CBD3
+	goto_if_eq GraniteCave_1F_EventScript_15CBD3
 	msgbox GraniteCave_1F_Text_194917, 4
 	giveitem ITEM_HM05
 	setflag 109

@@ -1,10 +1,10 @@
 	@ Does nothing.
-	.macro snop
+	.macro nop
 	.byte 0x00
 	.endm
 
 	@ Does nothing.
-	.macro snop1
+	.macro nop1
 	.byte 0x01
 	.endm
 
@@ -25,27 +25,27 @@
 	.endm
 
 	@ Jumps to destination and continues script execution from there.
-	.macro jump destination
+	.macro goto destination
 	.byte 0x05
 	.4byte \destination
 	.endm
 
 	@ If the result of the last comparison matches condition (see Comparison operators), jumps to destination and continues script execution from there.
-	.macro jumpif condition, destination
+	.macro goto_if condition, destination
 	.byte 0x06
 	.byte \condition
 	.4byte \destination
 	.endm
 
 	@ If the result of the last comparison matches condition (see Comparison operators), calls destination.
-	.macro callif condition, destination
+	.macro call_if condition, destination
 	.byte 0x07
 	.byte \condition
 	.4byte \destination
 	.endm
 
 	@ Jumps to the standard function at index function.
-	.macro jumpstd function
+	.macro gotostd function
 	.byte 0x08
 	.byte \function
 	.endm
@@ -57,58 +57,58 @@
 	.endm
 
 	@ If the result of the last comparison matches condition (see Comparison operators), jumps to the standard function at index function.
-	.macro jumpstdif condition, function
+	.macro gotostd_if condition, function
 	.byte 0x0a
 	.byte \condition
 	.byte \function
 	.endm
 
 	@ If the result of the last comparison matches condition (see Comparison operators), calls the standard function at index function.
-	.macro callstdif condition, function
+	.macro callstd_if condition, function
 	.byte 0x0b
 	.byte \condition
 	.byte \function
 	.endm
 
 	@ Executes a script stored in a default RAM location.
-	.macro jumpram
+	.macro gotoram
 	.byte 0x0c
 	.endm
 
 	@ Terminates script execution and "resets the script RAM".
-	.macro die
+	.macro killscript
 	.byte 0x0d
 	.endm
 
-	@ Pads the specified value to a dword, and then writes that dword to a predefined address (0x0203AAA8).
-	.macro setbyte value
+	@ Sets mystery event status
+	.macro setmysteryeventstatus value
 	.byte 0x0e
 	.byte \value
 	.endm
 
-	@ Sets the specified script bank to value.
-	.macro loadptr destination, value
+	@ Sets the specified script bank to immediate value.
+	.macro loadword destination, value
 	.byte 0x0f
 	.byte \destination
 	.4byte \value
 	.endm
 
-	@ Sets the specified script bank to value.
-	.macro setbufferbyte destination, value
+	@ Sets the specified script bank to immediate value.
+	.macro loadbyte destination, value
 	.byte 0x10
 	.byte \destination
 	.byte \value
 	.endm
 
 	@ Sets the byte at offset to value.
-	.macro writebytetooffset value, offset
+	.macro writebytetoaddr value, offset
 	.byte 0x11
 	.byte \value
 	.4byte \offset
 	.endm
 
 	@ Copies the byte value at source into the specified script bank.
-	.macro loadbytefrompointer destination, source
+	.macro loadbytefromaddr destination, source
 	.byte 0x12
 	.byte \destination
 	.4byte \source
@@ -122,7 +122,7 @@
 	.endm
 
 	@ Copies the contents of bank source into bank destination.
-	.macro copybuffers destination, source
+	.macro copylocal destination, source
 	.byte 0x14
 	.byte \destination
 	.byte \source
@@ -171,71 +171,83 @@
 	.endm
 
 	@ Compares the values of script banks a and b, after forcing the values to bytes.
-	.macro comparebuffers byte1, byte2
+	.macro compare_local_to_local byte1, byte2
 	.byte 0x1b
 	.byte \byte1
 	.byte \byte2
 	.endm
 
 	@ Compares the least-significant byte of the value of script bank a to a fixed byte value (b).
-	.macro comparebuffertobyte a, b
+	.macro compare_local_to_value a, b
 	.byte 0x1c
 	.byte \a
 	.byte \b
 	.endm
 
 	@ Compares the least-significant byte of the value of script bank a to the byte located at offset b.
-	.macro comparebuffertoptrbyte a, b
+	.macro compare_local_to_addr a, b
 	.byte 0x1d
 	.byte \a
 	.4byte \b
 	.endm
 
 	@ Compares the byte located at offset a to the least-significant byte of the value of script bank b.
-	.macro compareptrbytetobuffer a, b
+	.macro compare_addr_to_local a, b
 	.byte 0x1e
 	.4byte \a
 	.byte \b
 	.endm
 
 	@ Compares the byte located at offset a to a fixed byte value (b).
-	.macro compareptrbytetobyte a, b
+	.macro compare_addr_to_value a, b
 	.byte 0x1f
 	.4byte \a
 	.byte \b
 	.endm
 
 	@ Compares the byte located at offset a to the byte located at offset b.
-	.macro compareptrbytes a, b
+	.macro compare_addr_to_addr a, b
 	.byte 0x20
 	.4byte \a
 	.4byte \b
 	.endm
 
 	@ Compares the value of `var` to a fixed word value (b).
-	.macro compare var, value
+	.macro compare_var_to_value var, value
 	.byte 0x21
 	.2byte \var
 	.2byte \value
 	.endm
 
 	@ Compares the value of `var` to the value of `var2`.
-	.macro comparevars var1, var2
+	.macro compare_var_to_var var1, var2
 	.byte 0x22
 	.2byte \var1
 	.2byte \var2
 	.endm
 
-	@ Calls the ASM routine stored at code. Script execution is blocked until the ASM returns (bx lr, mov pc, lr, etc.). Remember to add 1 to the offset when calling THUMB code.
-	.macro callasm code
-	.byte 0x23
-	.4byte \code
+	@ Generic compare macro which attempts to deduce argument types based on their values
+	@ Any values between 0x4000 to 0x4FFF and 0x8000 to 0x8FFF are considered event variable identifiers
+	.macro compare arg1, arg2
+		.if ((\arg1 >> 12) == 4 || (\arg1 >> 12) == 8) && ((\arg2 >> 12) == 4 || (\arg2 >> 12) == 8)
+			compare_var_to_var \arg1, \arg2
+		.elseif ((\arg1 >> 12) == 4 || (\arg1 >> 12) == 8) && (\arg2 >= 0 && \arg2 <= 0xFFFF)
+			compare_var_to_value \arg1, \arg2
+		.else
+			.error "Invalid arguments for 'compare'"
+		.endif
 	.endm
 
-	@ Replaces a pointer in the script engine RAM with asm_pointer.
-	.macro jumpasm asm_pointer
+	@ Calls the native C function stored at `func`.
+	.macro callnative func
+	.byte 0x23
+	.4byte \func
+	.endm
+
+	@ Replaces the script with the function stored at `func`. Execution returns to the bytecode script when func returns TRUE.
+	.macro gotonative func
 	.byte 0x24
-	.4byte \asm_pointer
+	.4byte \func
 	.endm
 
 	@ Calls a special function; that is, a piece of ASM code designed for use by scripts and listed in a table of pointers.
@@ -245,7 +257,7 @@
 	.endm
 
 	@ Calls a special function. That function's output (if any) will be written to the variable you specify.
-	.macro specialval output, function
+	.macro specialvar output, function
 	.byte 0x26
 	.2byte \output
 	.2byte SPECIAL_\function
@@ -257,7 +269,7 @@
 	.endm
 
 	@ Blocks script execution for time (frames? milliseconds?).
-	.macro pause time
+	.macro delay time
 	.byte 0x28
 	.2byte \time
 	.endm
@@ -281,33 +293,35 @@
 	.endm
 
 	@ In FireRed, this command is a nop.
-	.macro compareflags
+	.macro initclock hour minute
 	.byte 0x2c
+	.byte \hour
+	.byte \minute
 	.endm
 
 	@ In FireRed, this command is a nop.
-	.macro checkdailyflags
+	.macro dodailyevents
 	.byte 0x2d
 	.endm
 
 	@ Resets the values of variables 0x8000, 0x8001, and 0x8002. Related to RTC in RSE?
-	.macro resetvars
+	.macro gettime
 	.byte 0x2e
 	.endm
 
 	@ Plays the specified (sound_number) sound. Only one sound may play at a time, with newer ones interrupting older ones.
-	.macro playsfx sound_number
+	.macro playse sound_number
 	.byte 0x2f
 	.2byte \sound_number
 	.endm
 
 	@ Blocks script execution until the currently-playing sound (triggered by sound) finishes playing.
-	.macro checksound
+	.macro waitse
 	.byte 0x30
 	.endm
 
 	@ Plays the specified (fanfare_number) fanfare.
-	.macro fanfare fanfare_number
+	.macro playfanfare fanfare_number
 	.byte 0x31
 	.2byte \fanfare_number
 	.endm
@@ -318,37 +332,37 @@
 	.endm
 
 	@ Plays the specified (song_number) song. The byte is apparently supposed to be 0x00.
-	.macro playmusic song_number, unknown
+	.macro playbgm song_number, unknown
 	.byte 0x33
 	.2byte \song_number
 	.byte \unknown
 	.endm
 
 	@ Plays the specified (song_number) song.
-	.macro playmusicbattle song_number
+	.macro savebgm song_number
 	.byte 0x34
 	.2byte \song_number
 	.endm
 
 	@ Crossfades the currently-playing song into the map's default song.
-	.macro fadedefault
+	.macro fadedefaultbgm
 	.byte 0x35
 	.endm
 
 	@ Crossfades the currently-playng song into the specified (song_number) song.
-	.macro fademusic song_number
+	.macro fadenewbgm song_number
 	.byte 0x36
 	.2byte \song_number
 	.endm
 
 	@ Fades out the currently-playing song.
-	.macro fadeout speed
+	.macro fadeoutbgm speed
 	.byte 0x37
 	.byte \speed
 	.endm
 
 	@ Fades the currently-playing song back in.
-	.macro fadein speed
+	.macro fadeinbgm speed
 	.byte 0x38
 	.byte \speed
 	.endm
@@ -363,7 +377,7 @@
 	.endm
 
 	@ Clone of warp that does not play a sound effect.
-	.macro warpmuted map, warp, X, Y
+	.macro warpsilent map, warp, X, Y
 	.byte 0x3a
 	map \map
 	.byte \warp
@@ -372,7 +386,7 @@
 	.endm
 
 	@ Clone of warp that uses "a walking effect".
-	.macro warpwalk map, warp, X, Y
+	.macro warpdoor map, warp, X, Y
 	.byte 0x3b
 	map \map
 	.byte \warp
@@ -396,7 +410,7 @@
 	.endm
 
 	@ Clone of warp. Used by an (unused?) Safari Zone script to return the player to the gatehouse and end the Safari Game.
-	.macro warp3 map, warp, X, Y
+	.macro setwarp map, warp, X, Y
 	.byte 0x3e
 	map \map
 	.byte \warp
@@ -405,7 +419,7 @@
 	.endm
 
 	@ Sets a default warp place. If a warp tries to send the player to Warp 127 on Map 127.127, they will instead be sent here. Useful when a map has warps that need to go to script-controlled locations (i.e. elevators).
-	.macro warpplace map, warp, X, Y
+	.macro setdynamicwarp map, warp, X, Y
 	.byte 0x3f
 	map \map
 	.byte \warp
@@ -414,7 +428,7 @@
 	.endm
 
 	@ Clone of warp3, except that this writes data to different offsets...
-	.macro warp4 map, warp, X, Y
+	.macro setdivewarp map, warp, X, Y
 	.byte 0x40
 	map \map
 	.byte \warp
@@ -423,7 +437,7 @@
 	.endm
 
 	@ Clone of warp3, except that this writes data to different offsets...
-	.macro warp5 map, warp, X, Y
+	.macro setholewarp map, warp, X, Y
 	.byte 0x41
 	map \map
 	.byte \warp
@@ -504,7 +518,7 @@
 	.endm
 
 	@ In FireRed, this command is a nop. (The argument is read, but not used for anything.)
-	.macro testdecor a
+	.macro hasdecor a
 	.byte 0x4d
 	.2byte \a
 	.endm
@@ -516,148 +530,146 @@
 	.endm
 
 	@ Applies the movement data at movements to the specified (index) Person event. Also closes any standard message boxes that are still open.
-	.macro move index, movements
-	.byte 0x4f
-	.2byte \index
-	.4byte \movements
-	.endm
-
-	@ Apparent clone of applymovement. Oddly, it doesn't seem to work at all if applied to any Person other than the player (0xFF), and the X and Y arguments don't seem to do anything.
 	@ This command in fact uses variables to access the Person event ID. So, for example, if you setvar 0x8000 to 0x3, and then use applymovementpos 0x8000 @move1, Person event 3 will have the movements at @move1 applied to them. Thank you Shiny Quagsire for bringing this to my attention.
-	.macro movecoords variable, movements, x, y
-	.byte 0x50
-	.2byte \variable
-	.4byte \movements
-	.byte \x
-	.byte \y
+	.macro applymovement index, movements, mapGroup, mapNum
+		.ifb \mapGroup
+			.byte 0x4f
+			.2byte \index
+			.4byte \movements
+		.else
+			.byte 0x50
+			.2byte \index
+			.4byte \movements
+			.byte \mapGroup
+			.byte \mapNum
+		.endif
 	.endm
 
 	@ Blocks script execution until the movements being applied to the specified (index) Person event finish. If the specified Person event is 0x0000, then the command will block script execution until all Person events affected by applymovement finish their movements. If the specified Person event is not currently being manipulated with applymovement, then this command does nothing.
-	.macro waitmove index
-	.byte 0x51
-	.2byte \index
+	.macro waitmovement index, mapBank, mapNum
+		.ifb \mapBank
+			.byte 0x51
+			.2byte \index
+		.else
+			.byte 0x52
+			.2byte \index
+			.byte \mapBank
+			.byte \mapNum
+		.endif
 	.endm
 
-	@ Apparent clone of waitmovement. Oddly, it doesn't seem to work at all if applied to any Person other than the player (0xFF), and the X and Y arguments don't seem to do anything.
-	.macro waitmovexy index, X, Y
-	.byte 0x52
-	.2byte \index
-	.byte \X
-	.byte \Y
+	@ Attempts to hide the specified (local_ID, a local ID) Person event on the specified map, by setting its visibility flag if it has a valid one. If the Person does not have a valid visibility flag, this command does nothing.
+	@ If no map is specified, then the current map is used
+	.macro removeobject localId, mapGroup, mapNum
+		.ifb \mapGroup
+			.byte 0x53
+			.2byte \localId
+		.else
+			.byte 0x54
+			.2byte \localId
+			.byte \mapGroup
+			.byte \mapNum
+		.endif
 	.endm
 
-	@ Attempts to hide the specified (local_ID, a local ID) Person event on the current map, by setting its visibility flag if it has a valid one. If the Person does not have a valid visibility flag, this command does nothing.
-	.macro disappear local_ID
-	.byte 0x53
-	.2byte \local_ID
+	.macro addobject localId, mapGroup, mapNum
+		.ifb \mapGroup
+			.byte 0x55
+			.2byte \localId
+		.else
+			.byte 0x56
+			.2byte \localId
+			.byte \mapGroup
+			.byte \mapNum
+		.endif
 	.endm
 
-	@ Clone of hidesprite that also moves the Person? Test it!
-	.macro disappearxy index, X, Y
-	.byte 0x54
-	.2byte \index
-	.byte \X
-	.byte \Y
+	.macro setobjectxy word1, word2, word3
+		.byte 0x57
+		.2byte \word1
+		.2byte \word2
+		.2byte \word3
 	.endm
 
-	.macro reappear word
-	.byte 0x55
-	.2byte \word
+	.macro showobject word, byte1, byte2
+		.byte 0x58
+		.2byte \word
+		.byte \byte1
+		.byte \byte2
 	.endm
 
-	.macro reappearxy word, byte1, byte2
-	.byte 0x56
-	.2byte \word
-	.byte \byte1
-	.byte \byte2
-	.endm
-
-	.macro movesprite word1, word2, word3
-	.byte 0x57
-	.2byte \word1
-	.2byte \word2
-	.2byte \word3
-	.endm
-
-	.macro spritevisible word, byte1, byte2
-	.byte 0x58
-	.2byte \word
-	.byte \byte1
-	.byte \byte2
-	.endm
-
-	.macro spriteinvisible word, byte1, byte2
-	.byte 0x59
-	.2byte \word
-	.byte \byte1
-	.byte \byte2
+	.macro hideobject word, byte1, byte2
+		.byte 0x59
+		.2byte \word
+		.byte \byte1
+		.byte \byte2
 	.endm
 
 	@ If the script was called by a Person event, then that Person will turn to face toward the tile that the player is stepping off of.
 	.macro faceplayer
-	.byte 0x5a
+		.byte 0x5a
 	.endm
 
-	.macro spriteface word, byte
-	.byte 0x5b
-	.2byte \word
-	.byte \byte
+	.macro turnobject word, byte
+		.byte 0x5b
+		.2byte \word
+		.byte \byte
 	.endm
 
 	@ If the Trainer flag for Trainer index is not set, this command does absolutely nothing.
 	.macro trainerbattle type, trainer, word, pointer1, pointer2, pointer3, pointer4
-	.byte 0x5c
-	.byte \type
-	.2byte \trainer
-	.2byte \word
-	.if \type == 0
-		.4byte \pointer1 @ text
-		.4byte \pointer2 @ text
-	.elseif \type == 1
-		.4byte \pointer1 @ text
-		.4byte \pointer2 @ text
-		.4byte \pointer3 @ event script
-	.elseif \type == 2
-		.4byte \pointer1 @ text
-		.4byte \pointer2 @ text
-		.4byte \pointer3 @ event script
-	.elseif \type == 3
-		.4byte \pointer1 @ text
-	.elseif \type == 4
-		.4byte \pointer1 @ text
-		.4byte \pointer2 @ text
-		.4byte \pointer3 @ text
-	.elseif \type == 5
-		.4byte \pointer1 @ text
-		.4byte \pointer2 @ text
-	.elseif \type == 6
-		.4byte \pointer1 @ text
-		.4byte \pointer2 @ text
-		.4byte \pointer3 @ text
-		.4byte \pointer4 @ event script
-	.elseif \type == 7
-		.4byte \pointer1 @ text
-		.4byte \pointer2 @ text
-		.4byte \pointer3 @ text
-	.elseif \type == 8
-		.4byte \pointer1 @ text
-		.4byte \pointer2 @ text
-		.4byte \pointer3 @ text
-		.4byte \pointer4 @ event script
-	.endif
+		.byte 0x5c
+		.byte \type
+		.2byte \trainer
+		.2byte \word
+		.if \type == 0
+			.4byte \pointer1 @ text
+			.4byte \pointer2 @ text
+		.elseif \type == 1
+			.4byte \pointer1 @ text
+			.4byte \pointer2 @ text
+			.4byte \pointer3 @ event script
+		.elseif \type == 2
+			.4byte \pointer1 @ text
+			.4byte \pointer2 @ text
+			.4byte \pointer3 @ event script
+		.elseif \type == 3
+			.4byte \pointer1 @ text
+		.elseif \type == 4
+			.4byte \pointer1 @ text
+			.4byte \pointer2 @ text
+			.4byte \pointer3 @ text
+		.elseif \type == 5
+			.4byte \pointer1 @ text
+			.4byte \pointer2 @ text
+		.elseif \type == 6
+			.4byte \pointer1 @ text
+			.4byte \pointer2 @ text
+			.4byte \pointer3 @ text
+			.4byte \pointer4 @ event script
+		.elseif \type == 7
+			.4byte \pointer1 @ text
+			.4byte \pointer2 @ text
+			.4byte \pointer3 @ text
+		.elseif \type == 8
+			.4byte \pointer1 @ text
+			.4byte \pointer2 @ text
+			.4byte \pointer3 @ text
+			.4byte \pointer4 @ event script
+		.endif
 	.endm
 
 
 	@ Starts a trainer battle using the battle information stored in RAM (usually by trainerbattle, which actually calls this command behind-the-scenes), and blocks script execution until the battle finishes.
-	.macro reptrainerbattle
+	.macro battlebegin
 	.byte 0x5d
 	.endm
 
-	.macro endtrainerbattle
+	.macro ontrainerbattleend
 	.byte 0x5e
 	.endm
 
-	.macro endtrainerbattle2
+	.macro ontrainerbattleendgoto
 	.byte 0x5f
 	.endm
 
@@ -668,37 +680,37 @@
 	.endm
 
 	@ Sets Flag (trainer + 0x500). (I didn't make a mistake. The command names actually are backwards.)
-	.macro cleartrainerflag trainer
+	.macro settrainerflag trainer
 	.byte 0x61
 	.2byte \trainer
 	.endm
 
 	@ Clears Flag (trainer + 0x500). (I didn't make a mistake. The command names actually are backwards.)
-	.macro settrainerflag trainer
+	.macro cleartrainerflag trainer
 	.byte 0x62
 	.2byte \trainer
 	.endm
 
-	.macro movespriteperm word1, word2, word3
+	.macro setobjectxyperm word1, word2, word3
 	.byte 0x63
 	.2byte \word1
 	.2byte \word2
 	.2byte \word3
 	.endm
 
-	.macro moveoffscreen word
+	.macro moveobjectoffscreen word
 	.byte 0x64
 	.2byte \word
 	.endm
 
-	.macro spritebehave word, byte
+	.macro setobjectmovementtype word, byte
 	.byte 0x65
 	.2byte \word
 	.byte \byte
 	.endm
 
 	@ If a standard message box (or its text) is being drawn on-screen, this command blocks script execution until the box and its text have been fully drawn.
-	.macro waittext
+	.macro waitmessage
 	.byte 0x66
 	.endm
 
@@ -709,7 +721,7 @@
 	.endm
 
 	@ Holds the current message box open until the player presses a key. The message box is then closed.
-	.macro closebutton
+	.macro closemessage
 	.byte 0x68
 	.endm
 
@@ -755,7 +767,7 @@
 	.endm
 
 	@ Displays a multichoice box from which the user can choose a selection, and blocks script execution until a selection is made. Lists of options are predefined and the one to be used is specified with list. The default argument determines the initial position of the cursor when the box is first opened; it is zero-indexed, and if it is too large, it is treated as 0x00. If B is set to a non-zero value, then the user will not be allowed to back out of the multichoice with the B button.
-	.macro multichoicedef X, Y, list, default, B
+	.macro multichoicedefault X, Y, list, default, B
 	.byte 0x70
 	.byte \X
 	.byte \Y
@@ -765,7 +777,7 @@
 	.endm
 
 	@ Displays a multichoice box from which the user can choose a selection, and blocks script execution until a selection is made. Lists of options are predefined and the one to be used is specified with list. The per_row argument determines how many list items will be shown on a single row of the box.
-	.macro multichoicerow X, Y, list, per_row, B
+	.macro multichoicegrid X, Y, list, per_row, B
 	.byte 0x71
 	.byte \X
 	.byte \Y
@@ -774,7 +786,7 @@
 	.byte \B
 	.endm
 
-	.macro showbox byte1, byte2, byte3, byte4
+	.macro drawbox byte1, byte2, byte3, byte4
 	.byte 0x72
 	.byte \byte1
 	.byte \byte2
@@ -782,7 +794,7 @@
 	.byte \byte4
 	.endm
 
-	.macro hidebox byte1, byte2, byte3, byte4
+	.macro erasebox byte1, byte2, byte3, byte4
 	.byte 0x73
 	.byte \byte1
 	.byte \byte2
@@ -790,7 +802,7 @@
 	.byte \byte4
 	.endm
 
-	.macro clearbox byte1, byte2, byte3, byte4
+	.macro drawboxtext byte1, byte2, byte3, byte4
 	.byte 0x74
 	.byte \byte1
 	.byte \byte2
@@ -799,7 +811,7 @@
 	.endm
 
 	@ Displays a box containing the front sprite for the specified (species) Pokmon species.
-	.macro showpokepic species, X, Y
+	.macro drawpokepic species, X, Y
 	.byte 0x75
 	.2byte \species
 	.byte \X
@@ -807,24 +819,24 @@
 	.endm
 
 	@ Hides all boxes displayed with showpokepic.
-	.macro hidepokepic
+	.macro erasepokepic
 	.byte 0x76
 	.endm
 
 	@ In FireRed, this command is a nop. (The argument is discarded.)
-	.macro showcontestwinner a
+	.macro drawcontestwinner a
 	.byte 0x77
 	.byte \a
 	.endm
 
 	@ Displays the string at pointer as braille text in a standard message box. The string must be formatted to use braille characters.
-	.macro braillemsg text
+	.macro braillemessage text
 	.byte 0x78
 	.4byte \text
 	.endm
 
 	@ Gives the player one of the specified (species) Pokmon at level level holding item. The unknown arguments should all be zeroes.
-	.macro givepokemon species, level, item, unknown1, unknown2, unknown3
+	.macro givepoke species, level, item, unknown1, unknown2, unknown3
 	.byte 0x79
 	.2byte \species
 	.byte \level
@@ -847,68 +859,68 @@
 	.endm
 
 	@ Checks if at least one Pokmon in the player's party knows the specified (index) attack. If so, variable 0x800D (LASTRESULT) is set to the (zero-indexed) slot number of the Pokmon that knows the move. If not, LASTRESULT is set to 0x0006.
-	.macro checkattack index
+	.macro checkpokemove index
 	.byte 0x7c
 	.2byte \index
 	.endm
 
 	@ Writes the name of the Pokmon at index species to the specified buffer.
-	.macro bufferpoke out, species
+	.macro getspeciesname out, species
 	.byte 0x7d
 	.byte \out
 	.2byte \species
 	.endm
 
 	@ Writes the name of the first Pokmon in the player's party to the specified buffer.
-	.macro bufferfirstpoke out
+	.macro getfirstpartypokename out
 	.byte 0x7e
 	.byte \out
 	.endm
 
 	@ Writes the name of the Pokmon in slot slot (zero-indexed) of the player's party to the specified buffer. If an empty or invalid slot is specified, ten spaces ("") are written to the buffer.
-	.macro bufferpartypoke out, slot
+	.macro getpartypokename out, slot
 	.byte 0x7f
 	.byte \out
 	.2byte \slot
 	.endm
 
 	@ Writes the name of the item at index item to the specified buffer. If the specified index is larger than the number of items in the game (0x176), the name of item 0 ("????????") is buffered instead.
-	.macro bufferitem out, item
+	.macro getitemname out, item
 	.byte 0x80
 	.byte \out
 	.2byte \item
 	.endm
 
 	@ In FireRed, this command is a nop. (The first argument is discarded immediately. The second argument is read, but not used for anything.)
-	.macro bufferdecor a, b
+	.macro getdecorname a, b
 	.byte 0x81
 	.byte \a
 	.2byte \b
 	.endm
 
 	@ Writes the name of the attack at index attack to the specified buffer.
-	.macro bufferattack out, attack
+	.macro getmovename out, attack
 	.byte 0x82
 	.byte \out
 	.2byte \attack
 	.endm
 
 	@ Converts the value of input to a decimal string, and writes that string to the specified buffer.
-	.macro buffernum out, input
+	.macro getnumberstring out, input
 	.byte 0x83
 	.byte \out
 	.2byte \input
 	.endm
 
 	@ Writes the standard string identified by index to the specified buffer. Specifying an invalid standard string (e.x. 0x2B) can and usually will cause data corruption (I've observed destruction of the stored player name and crashes when entering/exiting certain menu screens).
-	.macro bufferstd out, index
+	.macro getstdstring out, index
 	.byte 0x84
 	.byte \out
 	.2byte \index
 	.endm
 
 	@ Copies the string at offset to the specified buffer.
-	.macro buffertext out, offset
+	.macro getstring out, offset
 	.byte 0x85
 	.byte \out
 	.4byte \offset
@@ -932,13 +944,13 @@
 	.4byte \products
 	.endm
 
-	.macro pokecasino word
+	.macro playslotmachine word
 	.byte 0x89
 	.2byte \word
 	.endm
 
 	@ In FireRed, this command is a nop.
-	.macro event_8a byte1, byte2, byte3
+	.macro plantberrytree byte1, byte2, byte3
 	.byte 0x8a
 	.byte \byte1, \byte2, \byte3
 	.endm
@@ -977,7 +989,7 @@
 	.endm
 
 	@ If check is 0x00, this command subtracts value from the player's money.
-	.macro paymoney value, check
+	.macro takemoney value, check
 	.byte 0x91
 	.4byte \value
 	.byte \check
@@ -991,28 +1003,28 @@
 	.endm
 
 	@ Spawns a secondary box showing how much money the player has.
-	.macro showmoney X, Y
+	.macro showmoneybox X, Y
 	.byte 0x93
 	.byte \X
 	.byte \Y
 	.endm
 
 	@ Hides the secondary box spawned by showmoney.
-	.macro hidemoney X, Y
+	.macro hidemoneybox X, Y
 	.byte 0x94
 	.byte \X
 	.byte \Y
 	.endm
 
 	@ Updates the secondary box spawned by showmoney. (What does it do with its arguments?)
-	.macro updatemoney X, Y
+	.macro updatemoneybox X, Y
 	.byte 0x95
 	.byte \X
 	.byte \Y
 	.endm
 
 	@ In FireRed, this command is a nop.
-	.macro event_96 word
+	.macro getpricereduction word
 	.byte 0x96
 	.2byte \word
 	.endm
@@ -1029,36 +1041,36 @@
 	.byte \byte2
 	.endm
 
-	.macro darken word
+	.macro setdarklevel word
 	.byte 0x99
 	.2byte \word
 	.endm
 
-	.macro lighten byte
+	.macro animdarklevel byte
 	.byte 0x9a
 	.byte \byte
 	.endm
 
-	.macro message2 pointer
+	.macro messageautoscroll pointer
 	.byte 0x9b
 	.4byte \pointer
 	.endm
 
 	@ Executes the specified field move animation.
-	.macro doanimation animation
+	.macro dofieldeffect animation
 	.byte 0x9c
 	.2byte \animation
 	.endm
 
 	@ Tells the game which party Pokmon to use for the next field move animation.
-	.macro setanimation animation, slot
+	.macro setfieldeffect animation, slot
 	.byte 0x9d
 	.byte \animation
 	.2byte \slot
 	.endm
 
 	@ Blocks script execution until all playing field move animations complete.
-	.macro checkanimation animation
+	.macro waitfieldeffect animation
 	.byte 0x9e
 	.2byte \animation
 	.endm
@@ -1070,12 +1082,12 @@
 	.endm
 
 	@ Checks the player's gender. If male, then 0x0000 is stored in variable 0x800D (LASTRESULT). If female, then 0x0001 is stored in LASTRESULT.
-	.macro checkgender
+	.macro checkplayergender
 	.byte 0xa0
 	.endm
 
 	@ Plays the specified (species) Pokmon's cry. You can use waitcry to block script execution until the sound finishes.
-	.macro pokecry species, effect
+	.macro playpokecry species, effect
 	.byte 0xa1
 	.2byte \species
 	.2byte \effect
@@ -1112,12 +1124,12 @@
 	.byte \subroutine
 	.endm
 
-	.macro setmapfooter word
+	.macro setmaplayoutindex word
 	.byte 0xa7
 	.2byte \word
 	.endm
 
-	.macro spritelevelup word, byte1, byte2, byte3
+	.macro setobjectpriority word, byte1, byte2, byte3
 	.byte 0xa8
 	.2byte \word
 	.byte \byte1
@@ -1125,14 +1137,14 @@
 	.byte \byte3
 	.endm
 
-	.macro restorespritelevel word, byte1, byte2
+	.macro resetobjectpriority word, byte1, byte2
 	.byte 0xa9
 	.2byte \word
 	.byte \byte1
 	.byte \byte2
 	.endm
 
-	.macro createvsprite byte1, byte2, word1, word2, byte3, byte4
+	.macro createvobject byte1, byte2, word1, word2, byte3, byte4
 	.byte 0xaa
 	.byte \byte1
 	.byte \byte2
@@ -1142,52 +1154,52 @@
 	.byte \byte4
 	.endm
 
-	.macro vspriteface byte1, byte2
+	.macro turnvobject byte1, byte2
 	.byte 0xab
 	.byte \byte1
 	.byte \byte2
 	.endm
 
 	@ Queues the opening of the door tile at (X, Y) with an animation.
-	.macro setdooropened X, Y
+	.macro opendoor X, Y
 	.byte 0xac
 	.2byte \X
 	.2byte \Y
 	.endm
 
 	@ Queues the closing of the door tile at (X, Y) with an animation.
-	.macro setdoorclosed X, Y
+	.macro closedoor X, Y
 	.byte 0xad
 	.2byte \X
 	.2byte \Y
 	.endm
 
 	@ Executes the state changes queued with setdooropened, setdoorclosed, setdooropened2, and setdoorclosed2.
-	.macro doorchange
+	.macro waitdooranim
 	.byte 0xae
 	.endm
 
 	@ Queues the opening of the door tile at (X, Y) without an animation.
-	.macro setdooropened2 X, Y
+	.macro setdooropen X, Y
 	.byte 0xaf
 	.2byte \X
 	.2byte \Y
 	.endm
 
 	@ Queues the closing of the door tile at (X, Y) without an animation.
-	.macro setdoorclosed2 X, Y
+	.macro setdoorclosed X, Y
 	.byte 0xb0
 	.2byte \X
 	.2byte \Y
 	.endm
 
 	@ In FireRed, this command is a nop.
-	.macro event_b1
+	.macro addelevmenuitem
 	.byte 0xb1
 	.endm
 
 	@ In FireRed, this command is a nop.
-	.macro event_b2
+	.macro showelevmenu
 	.byte 0xb2
 	.endm
 
@@ -1201,7 +1213,7 @@
 	.2byte \word
 	.endm
 
-	.macro removecoins word
+	.macro takecoins word
 	.byte 0xb5
 	.2byte \word
 	.endm
@@ -1225,7 +1237,7 @@
 	.2byte \word
 	.endm
 
-	.macro vjump pointer
+	.macro vgoto pointer
 	.byte 0xb9
 	.4byte \pointer
 	.endm
@@ -1235,63 +1247,63 @@
 	.4byte \pointer
 	.endm
 
-	.macro if5 byte, pointer
+	.macro vgoto_if byte, pointer
 	.byte 0xbb
 	.byte \byte
 	.4byte \pointer
 	.endm
 
-	.macro if6 byte, pointer
+	.macro vcall_if byte, pointer
 	.byte 0xbc
 	.byte \byte
 	.4byte \pointer
 	.endm
 
-	.macro vtext pointer
+	.macro vmessage pointer
 	.byte 0xbd
 	.4byte \pointer
 	.endm
 
-	.macro vloadptr pointer
+	.macro vloadword pointer
 	.byte 0xbe
 	.4byte \pointer
 	.endm
 
-	.macro vbuffer byte, pointer
+	.macro vgetstring byte, pointer
 	.byte 0xbf
 	.byte \byte
 	.4byte \pointer
 	.endm
 
 	@ Spawns a secondary box showing how many Coins the player has.
-	.macro showcoins X, Y
+	.macro showcoinsbox X, Y
 	.byte 0xc0
 	.byte \X
 	.byte \Y
 	.endm
 
 	@ Hides the secondary box spawned by showcoins. It doesn't appear to use its arguments, but they are still required.
-	.macro hidecoins X, Y
+	.macro hidecoinsbox X, Y
 	.byte 0xc1
 	.byte \X
 	.byte \Y
 	.endm
 
 	@ Updates the secondary box spawned by showcoins. (What does it do with its arguments?)
-	.macro updatecoins X, Y
+	.macro updatecoinsbox X, Y
 	.byte 0xc2
 	.byte \X
 	.byte \Y
 	.endm
 
 	@ Increases the value of the specified hidden variable by 1. The hidden variable's value will not be allowed to exceed 0x00FFFFFF.
-	.macro inccounter a
+	.macro incrementgamestat a
 	.byte 0xc3
 	.byte \a
 	.endm
 
 	@ Clone of warp... Except that it doesn't appear to have any effect when used in some of FireRed's default level scripts. (If it did, Berry Forest would be impossible to enter...)
-	.macro warp6 map, warp, X, Y
+	.macro setescapewarp map, warp, X, Y
 	.byte 0xc4
 	map \map
 	.byte \warp
@@ -1475,8 +1487,8 @@
 
 @ Supplementary
 
-	.macro jumpeq dest
-	jumpif 1, \dest
+	.macro goto_if_eq dest
+	goto_if 1, \dest
 	.endm
 
 	.macro switch var
@@ -1484,12 +1496,12 @@
 	.endm
 
 	.macro case condition, dest
-	compare 0x8000, \condition
-	jumpeq \dest
+	compare_var_to_value 0x8000, \condition
+	goto_if_eq \dest
 	.endm
 
 	.macro msgbox text, type=4
-	loadptr 0, \text
+	loadword 0, \text
 	callstd \type
 	.endm
 

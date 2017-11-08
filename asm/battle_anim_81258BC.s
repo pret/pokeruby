@@ -377,7 +377,7 @@ sub_812B18C: @ 812B18C
 	bl sub_8076F98
 	lsls r0, 24
 	lsrs r6, r0, 24
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812B1CC
@@ -403,29 +403,29 @@ _0812B1CC:
 	adds r2, r0, 0
 	cmp r1, 0
 	bne _0812B1E8
-	ldr r0, _0812B1E4 @ =gBattleAnimPlayerMonIndex
+	ldr r0, _0812B1E4 @ =gBattleAnimBankAttacker
 	ldrb r4, [r0]
 	b _0812B20E
 	.align 2, 0
 _0812B1E0: .4byte gBattleAnimArgs
-_0812B1E4: .4byte gBattleAnimPlayerMonIndex
+_0812B1E4: .4byte gBattleAnimBankAttacker
 _0812B1E8:
 	cmp r1, 0x1
 	bne _0812B1F8
-	ldr r0, _0812B1F4 @ =gBattleAnimEnemyMonIndex
+	ldr r0, _0812B1F4 @ =gBattleAnimBankTarget
 	ldrb r4, [r0]
 	b _0812B20E
 	.align 2, 0
-_0812B1F4: .4byte gBattleAnimEnemyMonIndex
+_0812B1F4: .4byte gBattleAnimBankTarget
 _0812B1F8:
 	cmp r1, 0x2
 	bne _0812B204
-	ldr r0, _0812B200 @ =gBattleAnimPlayerMonIndex
+	ldr r0, _0812B200 @ =gBattleAnimBankAttacker
 	b _0812B206
 	.align 2, 0
-_0812B200: .4byte gBattleAnimPlayerMonIndex
+_0812B200: .4byte gBattleAnimBankAttacker
 _0812B204:
-	ldr r0, _0812B230 @ =gBattleAnimEnemyMonIndex
+	ldr r0, _0812B230 @ =gBattleAnimBankTarget
 _0812B206:
 	ldrb r1, [r0]
 	movs r0, 0x2
@@ -440,7 +440,7 @@ _0812B20E:
 	bne _0812B234
 _0812B21A:
 	adds r0, r4, 0
-	bl b_side_obj__get_some_boolean
+	bl IsAnimBankSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	bne _0812B234
@@ -448,7 +448,7 @@ _0812B21A:
 	bl DestroyAnimVisualTask
 	b _0812B2B0
 	.align 2, 0
-_0812B230: .4byte gBattleAnimEnemyMonIndex
+_0812B230: .4byte gBattleAnimBankTarget
 _0812B234:
 	adds r0, r4, 0
 	bl GetBankSide
@@ -524,7 +524,7 @@ sub_812B2B8: @ 812B2B8
 	bl sub_8076F98
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812B2DC
@@ -534,7 +534,7 @@ sub_812B2B8: @ 812B2B8
 _0812B2D8: .4byte 0x02019348
 _0812B2DC:
 	ldr r1, _0812B304 @ =gUnknown_0202F7CA
-	ldr r0, _0812B308 @ =gBattleAnimPlayerMonIndex
+	ldr r0, _0812B308 @ =gBattleAnimBankAttacker
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -554,7 +554,7 @@ _0812B2F6:
 	bx r0
 	.align 2, 0
 _0812B304: .4byte gUnknown_0202F7CA
-_0812B308: .4byte gBattleAnimPlayerMonIndex
+_0812B308: .4byte gBattleAnimBankAttacker
 	thumb_func_end sub_812B2B8
 
 	thumb_func_start sub_812B30C

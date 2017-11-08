@@ -29,7 +29,7 @@ u8 sub_8044804(u8, const struct BattleInterfaceStruct2 *, u8, u8);
 void sub_8044CA0(u8);
 void sub_8045A5C(u8, struct Pokemon *, u8);
 s32 sub_8045C78(u8, u8, u8, u8);
-s16 sub_80460C8(struct BattleInterfaceStruct1 *, int *, void *, int);
+s16 sub_80460C8(struct BattleInterfaceStruct1 *, int *, u16 *, int);
 u8 GetScaledHPFraction(s16, s16, u8);
 u8 GetHPBarLevel(s16, s16);
 void sub_80440EC(u8 a, s16 b, u8 c);

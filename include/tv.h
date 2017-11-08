@@ -107,5 +107,6 @@ void sub_80BE3BC(void);
 void UpdateTVShowsPerDay(u16);
 void sub_80C045C();
 void sub_80BF088(u8, s32);
+void sub_80BFD20(void);
 
 #endif // GUARD_TV_H

@@ -20,28 +20,28 @@ SlateportCity_ContestLobby_EventScript_15541D:: @ 815541D
 
 SlateportCity_ContestLobby_EventScript_155448:: @ 8155448
 	lockall
-	move 1, SlateportCity_ContestLobby_Movement_1554CC
-	waitmove 0
-	playsfx 71
+	applymovement 1, SlateportCity_ContestLobby_Movement_1554CC
+	waitmovement 0
+	playse 71
 	setmaptile 4, 2, 545, 1
 	setmaptile 4, 3, 609, 1
 	special DrawWholeMapView
-	move 1, SlateportCity_ContestLobby_Movement_1554CF
-	waitmove 0
-	playsfx 71
+	applymovement 1, SlateportCity_ContestLobby_Movement_1554CF
+	waitmovement 0
+	playse 71
 	setmaptile 4, 2, 721, 1
 	setmaptile 4, 3, 729, 1
 	special DrawWholeMapView
-	pause 20
-	move 1, SlateportCity_ContestLobby_Movement_1554DC
-	waitmove 0
-	move 255, SlateportCity_ContestLobby_Movement_1554CA
-	waitmove 0
+	delay 20
+	applymovement 1, SlateportCity_ContestLobby_Movement_1554DC
+	waitmovement 0
+	applymovement 255, SlateportCity_ContestLobby_Movement_1554CA
+	waitmovement 0
 	msgbox SlateportCity_ContestLobby_Text_1A6832, 4
-	closebutton
-	move 1, SlateportCity_ContestLobby_Movement_1554D3
-	move 255, SlateportCity_ContestLobby_Movement_1554C0
-	waitmove 0
+	closemessage
+	applymovement 1, SlateportCity_ContestLobby_Movement_1554D3
+	applymovement 255, SlateportCity_ContestLobby_Movement_1554C0
+	waitmovement 0
 	releaseall
 	return
 
@@ -102,9 +102,9 @@ SlateportCity_ContestLobby_EventScript_1554F0:: @ 81554F0
 SlateportCity_ContestLobby_EventScript_1554F9:: @ 81554F9
 	lockall
 	checkflag 95
-	jumpeq SlateportCity_ContestLobby_EventScript_155526
-	move 7, SlateportCity_ContestLobby_Movement_1A0839
-	waitmove 0
+	goto_if_eq SlateportCity_ContestLobby_EventScript_155526
+	applymovement 7, SlateportCity_ContestLobby_Movement_1A0839
+	waitmovement 0
 	msgbox SlateportCity_ContestLobby_Text_17CA67, 4
 	giveitem ITEM_POKEBLOCK_CASE
 	setflag 95
@@ -118,7 +118,7 @@ SlateportCity_ContestLobby_EventScript_155526:: @ 8155526
 SlateportCity_ContestLobby_EventScript_15552F:: @ 815552F
 	lockall
 	fadescreen 1
-	showcontestwinner 3
+	drawcontestwinner 3
 	releaseall
 	end
 
@@ -130,6 +130,6 @@ SlateportCity_ContestLobby_EventScript_155536:: @ 8155536
 	lockall
 	special ShowBerryBlenderRecordWindow
 	waitbutton
-	hidebox 0, 0, 29, 19
+	erasebox 0, 0, 29, 19
 	releaseall
 	end
