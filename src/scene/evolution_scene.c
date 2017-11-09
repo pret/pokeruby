@@ -178,10 +178,6 @@ void BeginEvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStop
     SetMainCallback2(CB2_BeginEvolutionScene);
 }
 
-struct Struct2009000 {
-	u16 pal[0x30];
-};
-
 void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, u8 partyID)
 {
     u8 name[20];

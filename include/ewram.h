@@ -181,7 +181,6 @@ extern u8 ewram[];
 #define EWRAM_18000                     ((u16 *)(ewram + 0x18000))
 #define ewram18000                      ((u16 *)(ewram + 0x18000))
 #define ewram18000_2                    (&ewram[0x18000])
-// extern struct Pokemon *unk_2018000;
 #define ewram18000_3                    *(struct Pokemon **)(ewram + 0x18000)
 #define eBerryBlenderData               (struct BerryBlenderData*)(&ewram[0x18000])
 #define eEggHatchData                   (struct EggHatchData*)(&ewram[0x18000])
@@ -207,7 +206,6 @@ extern u8 ewram[];
 #define ewramSavedItemsPocket           ((struct ItemSlot *)(ewram + 0x1E000))  // saved items pocket (for Wally battle)
 #define ewram1E000(i)                   (ewram[0x1E000 + i])
 #define eHallOfFameMons2                (struct HallofFameMons*)(&ewram[0x1E000])
-// extern struct HallOfFame gHallOfFame;
 #define eHallOfFame                     (struct HallOfFame *)(ewram + 0x1E000)
 #define HALL_OF_FAME_SHEET_0            ((u8 *)(ewram + 0x1E000))
 #define HALL_OF_FAME_SHEET_1            ((u8 *)(ewram + 0x1E800))
