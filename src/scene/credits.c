@@ -163,10 +163,8 @@ struct CreditsEntry
     u8 *text;
 };
 
-extern struct HallOfFame gHallOfFame;
 extern u8 unk_201e800[0x800];
 extern u8 unk_201f000[0x800];
-extern u16 unk_201f800[];
 
 extern struct SpriteTemplate gUnknown_02024E8C;
 

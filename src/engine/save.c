@@ -5,13 +5,12 @@
 #include "load_save.h"
 #include "overworld.h"
 #include "save_failed_screen.h"
+#include "ewram.h"
 
 #define GETVALIDSTATUSBITFIELD ((1 << ARRAY_COUNT(gSaveSectionLocations)) - 1)
 #define GETCHUNKSIZE(chunk, n) ((sizeof(chunk) - (0xF80 * (n - 1))) >= 0xF80 ? 0xF80 : (sizeof(chunk) - (0xF80 * (n - 1))))
 #define GETBLOCKOFFSET(n) (0xF80 * (n - 1))
 #define TOTALNUMSECTORS ((ARRAY_COUNT(gSaveSectionLocations) * 2) + (ARRAY_COUNT(gHallOfFameSaveSectionLocations) * 2)) // there are 2 slots, so double each array count and get the sum.
-
-extern struct SaveSection ewram; // slow save RAM
 
 u16 gLastWrittenSector;
 u32 gLastSaveCounter;
@@ -24,7 +23,6 @@ u16 gSaveFileStatus;
 u32 gGameContinueCallback;
 
 extern struct PokemonStorage gPokemonStorage;
-extern struct HallOfFame gHallOfFame;
 
 static EWRAM_DATA u32 gLastSaveSectorStatus = 0; // used but in an unferenced function, so unused
 
@@ -48,8 +46,8 @@ const struct SaveSectionLocation gSaveSectionLocations[] =
 
 const struct SaveSectionLocation gHallOfFameSaveSectionLocations[] =
 {
-    {((u8 *) &gHallOfFame) + GETBLOCKOFFSET(1), GETCHUNKSIZE(struct HallOfFame, 1)}, // gHallOfFame is not a proper sym, so the struct must be used.
-    {((u8 *) &gHallOfFame) + GETBLOCKOFFSET(2), GETCHUNKSIZE(struct HallOfFame, 2)}
+    {((u8 *) eHallOfFame) + GETBLOCKOFFSET(1), GETCHUNKSIZE(struct HallOfFame, 1)}, // eHallOfFame is not a proper sym, so the struct must be used.
+    {((u8 *) eHallOfFame) + GETBLOCKOFFSET(2), GETCHUNKSIZE(struct HallOfFame, 2)}
 };
 
 const u8 gFlashSectors[] = { 0x1E, 0x1F };
@@ -95,7 +93,7 @@ u8 save_write_to_flash(u16 a1, const struct SaveSectionLocation *location)
     u32 retVal;
     u16 i;
 
-    gFastSaveSection = &ewram;
+    gFastSaveSection = eSaveSection;
 
     if (a1 != 0xFFFF) // for link
     {
@@ -156,7 +154,7 @@ u8 HandleWriteSector(u16 a1, const struct SaveSectionLocation *location)
 u8 HandleWriteSectorNBytes(u8 sector, u8 *data, u16 size)
 {
     u16 i;
-    struct SaveSection *section = &ewram;
+    struct SaveSection *section = eSaveSection;
 
     for (i = 0; i < sizeof(struct SaveSection); i++)
         ((char *)section)[i] = 0;
@@ -186,7 +184,7 @@ u8 TryWriteSector(u8 sector, u8 *data)
 
 u32 RestoreSaveBackupVarsAndIncrement(const struct SaveSectionLocation *location) // location is unused
 {
-    gFastSaveSection = &ewram;
+    gFastSaveSection = eSaveSection;
     gLastKnownGoodSector = gLastWrittenSector;
     gLastSaveCounter = gSaveCounter;
     gLastWrittenSector++;
@@ -199,7 +197,7 @@ u32 RestoreSaveBackupVarsAndIncrement(const struct SaveSectionLocation *location
 
 u32 RestoreSaveBackupVars(const struct SaveSectionLocation *location) // only ever called once, and gSaveBlock2 is passed to this function. location is unused
 {
-    gFastSaveSection = &ewram;
+    gFastSaveSection = eSaveSection;
     gLastKnownGoodSector = gLastWrittenSector;
     gLastSaveCounter = gSaveCounter;
     gUnknown_03005EB4 = 0;
@@ -369,7 +367,7 @@ u8 sub_81257F0(u16 a1, const struct SaveSectionLocation *location)
 u8 sub_812587C(u16 a1, const struct SaveSectionLocation *location)
 {
     u8 retVal;
-    gFastSaveSection = &ewram;
+    gFastSaveSection = eSaveSection;
     if (a1 != 0xFFFF)
     {
         retVal = 0xFF;
@@ -537,7 +535,7 @@ u8 GetSaveValidStatus(const struct SaveSectionLocation *location)
 u8 sub_8125B88(u8 a1, u8 *data, u16 size)
 {
     u16 i;
-    struct SaveSection *section = &ewram;
+    struct SaveSection *section = eSaveSection;
     DoReadFlashWholeSection(a1, section);
     if (section->security == UNKNOWN_CHECK_VALUE)
     {
@@ -764,7 +762,7 @@ u8 unref_sub_8125FA0(void)
 u8 unref_sub_8125FF0(u8 *data, u16 size)
 {
     u16 i;
-    struct UnkSaveSection *section = (struct UnkSaveSection *)&ewram;
+    struct UnkSaveSection *section = (struct UnkSaveSection *)eSaveSection;
 
     for (i = 0; i < sizeof(struct SaveSection); i++)
         ((char *)section)[i] = 0;

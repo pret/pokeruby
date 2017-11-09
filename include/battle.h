@@ -539,6 +539,16 @@ struct Struct2017100
     u32 arr[4];
 };
 
+struct Struct2019348
+{
+    u16 unk0;
+    u16 unk2;
+    u8 unk4;
+    u32 unk8;
+    u32 unkC;
+    u32 unk10;
+};
+
 struct Struct2017800
 {
     u8 invisible:1;
@@ -551,25 +561,25 @@ struct Struct2017800
 
 struct Struct2017810
 {
-    u8 unk0_0:1;
-    u8 unk0_1:1;
-    u8 unk0_2:1;
-    u8 unk0_3:1;
-    u8 unk0_4:1;
-    u8 unk0_5:1;
-    u8 unk0_6:1;
-    u8 unk0_7:1;
-    u8 unk1_0:1;
-    u8 unk1_1:5;
-    u8 unk2;
-    u8 unk3;
-    u8 unk4;
-    u8 unk5;
-    u8 unk6;
-    u8 unk7;
-    u8 unk8;
-    u8 unk9;
-    u8 fillerA[2];
+ /*0x00*/ u8 unk0_0:1;
+ /*0x00*/ u8 unk0_1:1;
+ /*0x00*/ u8 unk0_2:1;
+ /*0x00*/ u8 unk0_3:1;
+ /*0x00*/ u8 unk0_4:1;
+ /*0x00*/ u8 unk0_5:1;
+ /*0x00*/ u8 unk0_6:1;
+ /*0x00*/ u8 unk0_7:1;
+ /*0x01*/ u8 unk1_0:1;
+ /*0x01*/ u8 unk1_1:5;
+ /*0x02*/ u8 unk2;
+ /*0x03*/ u8 unk3;
+ /*0x04*/ u8 unk4;
+ /*0x05*/ u8 unk5;
+ /*0x06*/ u8 unk6;
+ /*0x07*/ u8 unk7;
+ /*0x08*/ u8 unk8;
+ /*0x09*/ u8 unk9;
+ /*0x0A*/ u8 fillerA[2];
 };
 
 struct Struct2017840

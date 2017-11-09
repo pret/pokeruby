@@ -120,11 +120,11 @@ gSpriteAnimTable_0840CA94:: @ 840CA94
 
 
 gUnknown_0840CAA0:: @ 840CAA0
-	obj_tiles gHallOfFame, 6144, 1001
+	obj_tiles 0x201E000, 6144, 1001 @ can't believe im making this a pointer again... this should be eHallOfFame, when represented in the original C file again. Please fix this by migrating data/credits.s to credits.c.
 	null_obj_tiles
 
 gUnknown_0840CAB0:: @ 840CAB0
-	obj_pal unk_201f800, 1001
+	obj_pal 0x201F800, 1001 @ same as above. When this is in credits.c, it will be able to proper see its definition in ewram.h, which is EWRAM_1F800.
 	null_obj_pal
 
 	.align 2

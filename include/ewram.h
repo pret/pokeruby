@@ -2,6 +2,7 @@
 #define GUARD_EWRAM_H
 
 extern u8 ewram[];
+#define ewram_addr 0x02000000 // used in ewram addr hacks
 
 // Note: we have duplicate ewram labels because its clear some memory
 // regions overlap others but have different definitions. Until some
@@ -18,6 +19,7 @@ extern u8 ewram[];
 #define eBrendanSprite                  (ewram + 0x0)
 #define ewram0_6                        (u32)(&ewram[0])
 #define ewram0_7                        (&ewram[0])
+#define eSaveSection                    (struct SaveSection *)(ewram + 0x0)
 #define ewram4                          (*(struct UnknownStruct8 *)(ewram + 0x4))
 #define ewram520                        ((struct UnknownStruct7 *)(ewram + 0x00520))
 #define eMaySprite                      (ewram + 0x800)
@@ -31,13 +33,15 @@ extern u8 ewram[];
 #define gUnk2002694                     (u8 *)(&ewram[0x2694])
 #define gUnk20026A6                     (u8 *)(&ewram[0x26A6])
 #define gUnk20026e4                     (u8 *)(&ewram[0x26E4])
+#define ewram4000                       (ewram + 0x4000)
 #define gUnknown_02007000               (*(ewramStruct_02007000 *)(ewram + 0x7000))
 #define ARRAY_2007800                   ((struct EasyChatPair *)(ewram + 0x7800))
 #define ARRAY_2007900                   ((struct EasyChatPair *)(ewram + 0x7900))
-#define unk_2008000                     (*(struct PlayerRecords *)(ewram + 0x08000))
+#define ewram_2008000                   (*(struct PlayerRecords *)(ewram + 0x08000))
 #define ewram8000                       (&ewram[0x8000])
 #define ewram8800                       (&ewram[0x8800])
 #define ewram9000                       (&ewram[0x9000])
+#define ewram9000_hack                  (void *)(ewram_addr + 0x9000) // TODO: Fix this.
 #define ewram9800                       (&ewram[0x9800])
 #define ewramA000                       (&ewram[0xA000])
 #define ewramA800                       (&ewram[0xA800])
@@ -73,6 +77,8 @@ extern u8 ewram[];
 #define ewram15800                      (&ewram[0x15800])
 #define ewram15DDE                      (ewram[0x15DDE])
 #define ewram15DDF                      (ewram[0x15DDF])
+#define ewram15DE0                      ((*(struct ContestEntry*)(ewram + 0x15DE0)))
+#define ewram15E00                      ((*(struct Unk2015E00*)(ewram + 0x15E00)))
 #define ewram16000                      (ewram[0x16000])
 #define ewram16001                      (ewram[0x16001])
 #define ewram16002                      (ewram[0x16002])
@@ -157,22 +163,26 @@ extern u8 ewram[];
 #define AI_STACK                        ((struct AI_Stack *)         (ewram + 0x16C00))
 #define AI_ARRAY_160CC(i)               (ewram[0x160CC + i * 2])
 #define eLearnMoveStruct                (struct LearnMoveStruct *)(ewram + 0x17000)
+#define eSecretBaseRecord               ((struct SecretBaseRecord *)(ewram + 0x17000))
 #define ewram17002                      (&ewram[0x17002])
-#define ewram17100                      (*(struct Struct2017100 *)(ewram + 0x17100))
+#define eFlashFireArr                   (*(struct Struct2017100 *)(ewram + 0x17100))
 #define B_BATTLESCRIPTS_STACK           ((struct scriptsStack *)     (ewram + 0x17110))
 #define ewram17130                      (ewram[0x17130])
 #define B_FUNCTION_STACK                ((struct funcStack *)        (ewram + 0x17140))
 #define ewram17160                      (ewram[0x17160])
 #define ewram17800                      ((struct Struct2017800 *)    (ewram + 0x17800))
 #define EWRAM_17800                     ((struct UnknownStruct1 *)(ewram + 0x17800))
+#define eTransformStatuses              ((struct TransformStatus *)(ewram + 0x17800))
 #define ewram17810                      ((struct Struct2017810 *)    (ewram + 0x17810))
 #define EWRAM_17810                     ((struct UnknownStruct3 *)(ewram + 0x17810))
 #define ewram17840                      (*(struct Struct2017840 *)   (ewram + 0x17840))
 #define ewram17850                      ((struct UnknownStruct5 *)(ewram + 0x17850))
-#define unk_2018000                     (*(struct PlayerRecords *)(ewram + 0x18000))
+#define ewram_2018000                   (*(struct PlayerRecords *)(ewram + 0x18000))
 #define EWRAM_18000                     ((u16 *)(ewram + 0x18000))
 #define ewram18000                      ((u16 *)(ewram + 0x18000))
 #define ewram18000_2                    (&ewram[0x18000])
+// extern struct Pokemon *unk_2018000;
+#define ewram18000_3                    *(struct Pokemon **)(ewram + 0x18000)
 #define eBerryBlenderData               (struct BerryBlenderData*)(&ewram[0x18000])
 #define eEggHatchData                   (struct EggHatchData*)(&ewram[0x18000])
 #define UNK_2018000_STRUCT              (*(struct UnknownStruct2018000 *)(ewram + 0x18000))
@@ -190,12 +200,15 @@ extern u8 ewram[];
 #define ewram1C000                      (*(struct Unk201C000 *)(ewram + 0x1C000))
 #define ewram1c000                      (*(struct Unk201C000 *)(ewram + 0x1C000)) // FIXME, names too similar
 #define eHallOfFameMons1                (struct HallofFameMons*)(&ewram[0x1C000])
+#define EWRAM_1C800                     (*(struct Unk201C800 *)(ewram + 0x1C800))
 #define ewram1D000                      ((struct Pokemon *)(ewram + 0x1D000))
 #define ewram1D000_2                    ((u16 *)(ewram + 0x1D000))
 #define ewram1D400                      ((u16 *)(ewram + 0x1D400))
 #define ewramSavedItemsPocket           ((struct ItemSlot *)(ewram + 0x1E000))  // saved items pocket (for Wally battle)
 #define ewram1E000(i)                   (ewram[0x1E000 + i])
 #define eHallOfFameMons2                (struct HallofFameMons*)(&ewram[0x1E000])
+// extern struct HallOfFame gHallOfFame;
+#define eHallOfFame                     (struct HallOfFame *)(ewram + 0x1E000)
 #define HALL_OF_FAME_SHEET_0            ((u8 *)(ewram + 0x1E000))
 #define HALL_OF_FAME_SHEET_1            ((u8 *)(ewram + 0x1E800))
 #define ewram_1f000                     (*(struct DecoPCPointers *)(ewram + 0x1f000))
@@ -203,6 +216,8 @@ extern u8 ewram[];
 #define HALL_OF_FAME_SHEET_2            ((u8 *)(ewram + 0x1F000))
 #define EWRAM_1F800                     ((u16 *)(ewram + 0x1F800))
 #define ewram1FE00                      (*(struct Unk201FE00 *)(ewram + 0x1FE00))
+#define eMailboxInfo                    (*(struct MailboxStruct *)(ewram + 0x1FE00))
+#define eCutGrassSpriteArray            (ewram + 0x1FFF0) // 8 sprite IDs
 #define ewram1FFFC                      (ewram[0x1FFFC])
 #define ewram1FFFD                      (ewram[0x1FFFD])
 #define gHelperState                    (ewram[0x1FFFE])

@@ -36,7 +36,6 @@ struct LinkTestBGInfo
     u32 dummy_C;
 };
 
-extern u8 unk_2004000[];
 extern u16 gBattleTypeFlags;
 
 extern u16 word_3004858;
@@ -404,7 +403,7 @@ static void LinkTestProcessKeyInput(void)
     if (gMain.newKeys & A_BUTTON)
         gShouldAdvanceLinkState = 1;
     if (gMain.heldKeys & B_BUTTON)
-        InitBlockSend(unk_2004000, 0x2004);
+        InitBlockSend(ewram4000, 0x2004);
     if (gMain.newKeys & L_BUTTON)
         BeginNormalPaletteFade(-1, 0, 0x10, 0, 2);
     if (gMain.newKeys & START_BUTTON)

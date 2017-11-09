@@ -20,6 +20,7 @@
 #include "mail.h"
 #include "overworld.h"
 #include "player_pc.h"
+#include "ewram.h"
 
 extern void DisplayItemMessageOnField(u8, const u8*, TaskFunc, u16);
 extern void DoPlayerPCDecoration(u8);
@@ -271,14 +272,14 @@ static void PlayerPC_ItemStorage(u8 taskId)
 static void PlayerPC_Mailbox(u8 taskId)
 {
     MenuZeroFillWindowRect(0, 0, 10, 9);
-    gMailboxInfo.count = GetMailboxMailCount();
+    eMailboxInfo.count = GetMailboxMailCount();
 
-    if (gMailboxInfo.count == 0)
+    if (eMailboxInfo.count == 0)
         DisplayItemMessageOnField(taskId, gOtherText_NoMailHere, ReshowPlayerPC, 0);
     else
     {
-        gMailboxInfo.cursorPos = 0;
-        gMailboxInfo.itemsAbove = 0;
+        eMailboxInfo.cursorPos = 0;
+        eMailboxInfo.itemsAbove = 0;
         Mailbox_UpdateMailList();
         ItemStorage_SetItemAndMailCount(taskId);
         Mailbox_DrawMailboxMenu(taskId);
@@ -442,10 +443,10 @@ static void ItemStorage_SetItemAndMailCount(u8 taskId)
     else
         NUM_PAGE_ITEMS = NUM_ITEMS + 1; // there are not enough items to fill a full page; take the # of items and add 1 for the cancel button.
 
-    if (gMailboxInfo.count > 7)
-        gMailboxInfo.pageItems = 8;
+    if (eMailboxInfo.count > 7)
+        eMailboxInfo.pageItems = 8;
     else
-        gMailboxInfo.pageItems = gMailboxInfo.count + 1;
+        eMailboxInfo.pageItems = eMailboxInfo.count + 1;
 }
 
 static void ItemStorage_ProcessInput(u8 taskId)
@@ -1048,8 +1049,8 @@ static void Mailbox_UpdateMailList(void)
 static void Mailbox_DrawMailList(u8 taskId) // taskId is unused
 {
     u16 yCoord = 0;
-    u16 i = gMailboxInfo.itemsAbove;
-    register struct MailboxStruct *tempMailbox asm("r1") = &gMailboxInfo;
+    u16 i = eMailboxInfo.itemsAbove;
+    register struct MailboxStruct *tempMailbox asm("r1") = &eMailboxInfo;
     register struct MailboxStruct *mailbox asm("r6");
 
     if(i < i + tempMailbox->pageItems)
@@ -1076,10 +1077,10 @@ static void Mailbox_DrawMailList(u8 taskId) // taskId is unused
     }
 
 beforeLabel:
-    if(i - gMailboxInfo.itemsAbove != 8)
+    if(i - eMailboxInfo.itemsAbove != 8)
         MenuFillWindowRectWithBlankTile(0x15, yCoord + 4, 0x1C, 0x12);
 
-    switch(gMailboxInfo.itemsAbove)
+    switch(eMailboxInfo.itemsAbove)
     {
     default:
         CreateVerticalScrollIndicators(0, 0xC8, 8);
@@ -1092,7 +1093,7 @@ weirdCase:
         break;
     }
 
-    if(gMailboxInfo.itemsAbove + gMailboxInfo.pageItems <= gMailboxInfo.count)
+    if(eMailboxInfo.itemsAbove + eMailboxInfo.pageItems <= eMailboxInfo.count)
         CreateVerticalScrollIndicators(1, 0xC8, 0x98);
     else
         DestroyVerticalScrollIndicator(1);
@@ -1107,7 +1108,7 @@ static void Mailbox_DrawMailboxMenu(u8 taskId)
     MenuPrint(gPCText_Mailbox, 1, 1);
     MenuDrawTextWindow(0x14, 0, 0x1D, 0x13);
     Mailbox_DrawMailList(taskId);
-    InitMenu(0, 0x15, 2, gMailboxInfo.pageItems, gMailboxInfo.cursorPos, 8);
+    InitMenu(0, 0x15, 2, eMailboxInfo.pageItems, eMailboxInfo.cursorPos, 8);
 }
 
 // Mailbox_ProcessInput
@@ -1117,29 +1118,29 @@ static void Mailbox_ProcessInput(u8 taskId)
     {
         if(gMain.newAndRepeatedKeys & DPAD_UP)
         {
-            if(gMailboxInfo.cursorPos != 0)
+            if(eMailboxInfo.cursorPos != 0)
             {
                 PlaySE(SE_SELECT);
-                gMailboxInfo.cursorPos = MoveMenuCursor(-1);
+                eMailboxInfo.cursorPos = MoveMenuCursor(-1);
             }
-            else if(gMailboxInfo.itemsAbove != 0)
+            else if(eMailboxInfo.itemsAbove != 0)
             {
                 PlaySE(SE_SELECT);
-                gMailboxInfo.itemsAbove--;
+                eMailboxInfo.itemsAbove--;
                 Mailbox_DrawMailList(taskId);
             }
         }
         else if(gMain.newAndRepeatedKeys & DPAD_DOWN)
         {
-            if(gMailboxInfo.cursorPos != gMailboxInfo.pageItems - 1)
+            if(eMailboxInfo.cursorPos != eMailboxInfo.pageItems - 1)
             {
                 PlaySE(SE_SELECT);
-                gMailboxInfo.cursorPos = MoveMenuCursor(1);
+                eMailboxInfo.cursorPos = MoveMenuCursor(1);
             }
-            else if(gMailboxInfo.itemsAbove + gMailboxInfo.cursorPos != gMailboxInfo.count)
+            else if(eMailboxInfo.itemsAbove + eMailboxInfo.cursorPos != eMailboxInfo.count)
             {
                 PlaySE(SE_SELECT);
-                gMailboxInfo.itemsAbove++;
+                eMailboxInfo.itemsAbove++;
                 Mailbox_DrawMailList(taskId);
             }
         }
@@ -1148,7 +1149,7 @@ static void Mailbox_ProcessInput(u8 taskId)
             HandleDestroyMenuCursors();
             PlaySE(SE_SELECT);
 
-            if(gMailboxInfo.itemsAbove + gMailboxInfo.cursorPos == gMailboxInfo.count)
+            if(eMailboxInfo.itemsAbove + eMailboxInfo.cursorPos == eMailboxInfo.count)
             {
                 Mailbox_TurnOff(taskId);
             }
@@ -1177,7 +1178,7 @@ static void Mailbox_CloseScrollIndicators(void)
 static void Mailbox_PrintWhatToDoWithPlayerMailText(u8 taskId)
 {
     MenuZeroFillWindowRect(0, 0, 0x1D, 0x13);
-    StringCopy(gStringVar1, gSaveBlock1.mail[gMailboxInfo.itemsAbove + 6 + gMailboxInfo.cursorPos].playerName);
+    StringCopy(gStringVar1, gSaveBlock1.mail[eMailboxInfo.itemsAbove + 6 + eMailboxInfo.cursorPos].playerName);
     SanitizeNameString(gStringVar1);
     StringExpandPlaceholders(gStringVar4, gOtherText_WhatWillYouDoMail);
     DisplayItemMessageOnField(taskId, gStringVar4, Mailbox_PrintMailOptions, 0);
@@ -1237,7 +1238,7 @@ static void Mailbox_FadeAndReadMail(u8 taskId)
 {
     if(!gPaletteFade.active)
     {
-        HandleReadMail(&gSaveBlock1.mail[gMailboxInfo.itemsAbove + 6 + gMailboxInfo.cursorPos], Mailbox_ReturnToFieldFromReadMail, 1);
+        HandleReadMail(&gSaveBlock1.mail[eMailboxInfo.itemsAbove + 6 + eMailboxInfo.cursorPos], Mailbox_ReturnToFieldFromReadMail, 1);
         DestroyTask(taskId);
     }
 }
@@ -1276,7 +1277,7 @@ static void Mailbox_DrawYesNoBeforeMove(u8 taskId)
 
 static void Mailbox_DoMailMoveToBag(u8 taskId)
 {
-    struct MailStruct *mail = &gSaveBlock1.mail[gMailboxInfo.itemsAbove + 6 + gMailboxInfo.cursorPos];
+    struct MailStruct *mail = &gSaveBlock1.mail[eMailboxInfo.itemsAbove + 6 + eMailboxInfo.cursorPos];
 
     MenuZeroFillWindowRect(0x14, 8, 0x1A, 0xD);
 
@@ -1290,10 +1291,10 @@ static void Mailbox_DoMailMoveToBag(u8 taskId)
         ClearMailStruct(mail);
         Mailbox_UpdateMailList();
 
-        gMailboxInfo.count--;
+        eMailboxInfo.count--;
 
-        if(gMailboxInfo.count < gMailboxInfo.pageItems + gMailboxInfo.itemsAbove && gMailboxInfo.itemsAbove != 0)
-            gMailboxInfo.itemsAbove--;
+        if(eMailboxInfo.count < eMailboxInfo.pageItems + eMailboxInfo.itemsAbove && eMailboxInfo.itemsAbove != 0)
+            eMailboxInfo.itemsAbove--;
 
         ItemStorage_SetItemAndMailCount(taskId);
     }
@@ -1329,13 +1330,13 @@ static void Mailbox_DoGiveMailPokeMenu(u8 taskId) // Mailbox_DoGiveMailPokeMenu
 static void Mailbox_UpdateMailListAfterDeposit(void)
 {
     u8 taskId = CreateTask(Mailbox_HandleReturnToProcessInput, 0);
-    u8 oldCount = gMailboxInfo.count;
+    u8 oldCount = eMailboxInfo.count;
 
-    gMailboxInfo.count = GetMailboxMailCount();
+    eMailboxInfo.count = GetMailboxMailCount();
     Mailbox_UpdateMailList();
 
-    if(oldCount != gMailboxInfo.count && gMailboxInfo.count < gMailboxInfo.pageItems + gMailboxInfo.itemsAbove && gMailboxInfo.itemsAbove != 0) // did the count update?
-        gMailboxInfo.itemsAbove--;
+    if(oldCount != eMailboxInfo.count && eMailboxInfo.count < eMailboxInfo.pageItems + eMailboxInfo.itemsAbove && eMailboxInfo.itemsAbove != 0) // did the count update?
+        eMailboxInfo.itemsAbove--;
 
     ItemStorage_SetItemAndMailCount(taskId);
     Mailbox_DrawMailboxMenu(taskId);

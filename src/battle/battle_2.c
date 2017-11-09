@@ -1537,7 +1537,7 @@ void sub_8010874(void)
         gUnknown_02024C5C[i] = 0xFF;
         gLockedMove[i] = 0;
         gUnknown_02024C2C[i] = 0;
-        ewram17100.arr[i] = 0;
+        eFlashFireArr.arr[i] = 0;
     }
 
     for (i = 0; i < 2; i++)
@@ -1699,7 +1699,7 @@ void SwitchInClearStructs(void)
     ewram160E8arr2(0, gActiveBank) = 0;
     ewram160E8arr2(1, gActiveBank) = 0;
 
-    ewram17100.arr[gActiveBank] = 0;
+    eFlashFireArr.arr[gActiveBank] = 0;
 
     gCurrentMove = 0;
 }
@@ -1763,7 +1763,7 @@ void UndoEffectsAfterFainting(void)
     ewram16100arr2(2, gActiveBank) = 0;
     ewram16100arr2(3, gActiveBank) = 0;
 
-    ewram17100.arr[gActiveBank] = 0;
+    eFlashFireArr.arr[gActiveBank] = 0;
 
     gBattleMons[gActiveBank].type1 = gBaseStats[gBattleMons[gActiveBank].species].type1;
     gBattleMons[gActiveBank].type2 = gBaseStats[gBattleMons[gActiveBank].species].type2;

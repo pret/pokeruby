@@ -20,16 +20,6 @@
 #include "gba/m4a_internal.h"
 #include "ewram.h"
 
-struct Struct2019348
-{
-    u8 filler0[2];
-    u16 unk2;
-    u8 filler4[4];
-    u32 unk8;
-    u32 unkC;
-    u32 unk10;
-};
-
 extern u8 gBattleBufferA[][0x200];
 extern u8 gActiveBank;
 extern u8 gNoOfAllBanks;

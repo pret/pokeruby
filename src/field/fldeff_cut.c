@@ -16,8 +16,7 @@
 #include "sprite.h"
 #include "task.h"
 #include "trig.h"
-
-extern u8 gCutGrassSpriteArray[8]; // seems to be an array of 8 sprite IDs
+#include "ewram.h"
 
 extern void (*gFieldCallback)(void);
 extern void (*gUnknown_03005CE4)(void);
@@ -135,9 +134,9 @@ bool8 FldEff_CutGrass(void)
     // populate sprite ID array
     for(i = 0; i < 8; i++)
     {
-        gCutGrassSpriteArray[i] = CreateSprite((struct SpriteTemplate *)&gSpriteTemplate_CutGrass,
+        eCutGrassSpriteArray[i] = CreateSprite((struct SpriteTemplate *)&gSpriteTemplate_CutGrass,
         gSprites[gPlayerAvatar.spriteId].oam.x + 8, gSprites[gPlayerAvatar.spriteId].oam.y + 20, 0);
-        gSprites[gCutGrassSpriteArray[i]].data2 = 32 * i;
+        gSprites[eCutGrassSpriteArray[i]].data2 = 32 * i;
     }
     return 0;
 }
@@ -273,8 +272,8 @@ void sub_80A2AB8(void)
     u8 i;
 
     for (i = 1; i < 8; i++)
-        DestroySprite(&gSprites[gCutGrassSpriteArray[i]]);
-    FieldEffectStop(&gSprites[gCutGrassSpriteArray[0]], FLDEFF_CUT_GRASS);
+        DestroySprite(&gSprites[eCutGrassSpriteArray[i]]);
+    FieldEffectStop(&gSprites[eCutGrassSpriteArray[0]], FLDEFF_CUT_GRASS);
     sub_8064E2C();
     ScriptContext2_Disable();
 }
