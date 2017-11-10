@@ -27,6 +27,7 @@
 #include "safari_zone.h"
 #include "event_data.h"
 #include "pokeblock.h"
+#include "ewram.h"
 
 struct UnkPokeblockStruct
 {
@@ -35,9 +36,6 @@ struct UnkPokeblockStruct
     u8 unk2;
     u8 unk3;
 };
-
-extern u8 ewram[];
-
 
 static EWRAM_DATA u8 gUnknown_02039244 = 0;
 static EWRAM_DATA struct UnkPokeblockStruct gUnknown_02039248 = {0};
@@ -301,7 +299,7 @@ static bool8 sub_810B6C0(void)
         case 10:
             if (MultistepInitMenuWindowContinue())
             {
-                ewram[0x1ffff] = 0;
+                ewram1FFFF = 0;
                 gMain.state++;
             }
             break;
@@ -319,7 +317,7 @@ static bool8 sub_810B6C0(void)
             gMain.state++;
             break;
         case 13:
-            ewram[0x1fffe] = sub_810BA50(0x38, 0x40, 0);
+            ewram1FFFE = sub_810BA50(0x38, 0x40, 0);
             gMain.state++;
             break;
         case 14:
@@ -371,27 +369,27 @@ void sub_810B96C(void)
 
 static bool8 sub_810B998(void)
 {
-    switch (ewram[0x1ffff])
+    switch (ewram1FFFF)
     {
         case 0:
             LZDecompressVram(gMenuPokeblock_Gfx, BG_CHAR_ADDR(2));
-            ewram[0x1ffff]++;
+            ewram1FFFF++;
             break;
         case 1:
             LZDecompressWram(gMenuPokeblock_Tilemap, gBGTilemapBuffers[2]);
-            ewram[0x1ffff]++;
+            ewram1FFFF++;
             break;
         case 2:
             LoadCompressedPalette(gMenuPokeblock_Pal, 0, 0xc0);
-            ewram[0x1ffff]++;
+            ewram1FFFF++;
             break;
         case 3:
             LoadCompressedObjectPic(&gUnknown_083F7F74);
-            ewram[0x1ffff]++;
+            ewram1FFFF++;
             break;
         case 4:
             LoadCompressedObjectPalette(&gUnknown_083F7F7C);
-            ewram[0x1ffff] = 0;
+            ewram1FFFF = 0;
             return TRUE;
     }
     return FALSE;
@@ -613,7 +611,7 @@ static void sub_810BDAC(bool8 flag)
 static void sub_810BF38(bool8 flag)
 {
     PlaySE(SE_SELECT);
-    gSprites[ewram[0x1fffe]].callback = sub_810C8D4;
+    gSprites[ewram1FFFE].callback = sub_810C8D4;
     sub_810BDAC(flag);
 }
 

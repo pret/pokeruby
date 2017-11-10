@@ -9,8 +9,6 @@ SECTIONS {
     ewram (NOLOAD) :
     ALIGN(4)
     {
-        . = 0x20000;
-
 <EWRAM>
 
         . = 0x40000;

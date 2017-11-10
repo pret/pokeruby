@@ -17,6 +17,7 @@
 #include "string_util.h"
 #include "text.h"
 #include "trig.h"
+#include "ewram.h"
 
 // Map Section IDs
 #define MAPSEC_LITTLEROOT_TOWN 0
@@ -1350,12 +1351,6 @@ struct UnknownStruct3
     struct RegionMap regionMap;
 };
 
-extern u8 ewram[];
-#define ewram0 (*(struct UnknownStruct3 *)(ewram + 0))
-#define ewram888 (ewram + 0x888)
-#define ewramA6E (ewram[0xA6E])
-#define ewramBlankMapName (ewram + 0xA48)
-
 static const u16 sFlyRegionMapFrame_Pal[] = INCBIN_U16("graphics/pokenav/map_frame.gbapal");
 static const u8 sFlyRegionMapFrame_ImageLZ[] = INCBIN_U8("graphics/pokenav/map_frame.4bpp.lz");
 static const u8 sFlyRegionMapFrame_TilemapLZ[] = INCBIN_U8("graphics/pokenav/map_frame.bin.lz");
@@ -1431,7 +1426,7 @@ static const struct UnknownStruct4 sUnknown_083E79C0[1] =
 };
 
 // XXX: what is this?
-static u8 *const ewram_ = ewram;
+static u8 *const ewram_ = gSharedMem;
 
 static const struct SpritePalette sFlyTargetIconSpritePalette = {sFlyTargetIcons_Pal, 2};
 
@@ -1552,10 +1547,10 @@ void CB2_InitFlyRegionMap(void)
         MenuZeroFillScreen();
         break;
     case 3:
-        InitRegionMap(&ewram0.regionMap, 0);
+        InitRegionMap(&ewram0_3.regionMap, 0);
         CreateRegionMapCursor(0, 0);
         CreateRegionMapPlayerIcon(1, 1);
-        ewram0.unk6 = ewram0.regionMap.mapSecId;
+        ewram0_3.unk6 = ewram0_3.regionMap.mapSecId;
         StringFill(ewramBlankMapName, CHAR_SPACE, 12);
         PrintFlyTargetName();
         break;
@@ -1598,20 +1593,20 @@ static void VBlankCB_FlyRegionMap(void)
 
 static void CB2_FlyRegionMap(void)
 {
-    ewram0.unk0();
+    ewram0_3.unk0();
     AnimateSprites();
     BuildOamBuffer();
 }
 
 static void sub_80FC244(void (*func)(void))
 {
-    ewram0.unk0 = func;
-    ewram0.unk4 = 0;
+    ewram0_3.unk0 = func;
+    ewram0_3.unk4 = 0;
 }
 
 static void PrintFlyTargetName(void)
 {
-    if (ewram0.regionMap.unk16 == 2 || ewram0.regionMap.unk16 == 4)
+    if (ewram0_3.regionMap.unk16 == 2 || ewram0_3.regionMap.unk16 == 4)
     {
         u16 i = 0;
         int zero;
@@ -1620,13 +1615,13 @@ static void PrintFlyTargetName(void)
         {
             const struct UnknownStruct4 *r4 = &sUnknown_083E79C0[i];
 
-            if (ewram0.regionMap.mapSecId == r4->mapSecId)
+            if (ewram0_3.regionMap.mapSecId == r4->mapSecId)
             {
                 if (FlagGet(r4->flag))
                 {
                     MenuDrawTextWindow(16, 14, 29, 19);
-                    MenuPrint(ewram0.regionMap.mapSecName, 17, 15);
-                    MenuPrint_RightAligned(r4->unk0[ewram0.regionMap.everGrandeCityArea], 29, 17);
+                    MenuPrint(ewram0_3.regionMap.mapSecName, 17, 15);
+                    MenuPrint_RightAligned(r4->unk0[ewram0_3.regionMap.everGrandeCityArea], 29, 17);
                     return;
                 }
                 break;
@@ -1637,7 +1632,7 @@ static void PrintFlyTargetName(void)
         if (zero == 0)
         {
             MenuDrawTextWindow(16, 16, 29, 19);
-            MenuPrint(ewram0.regionMap.mapSecName, 17, 17);
+            MenuPrint(ewram0_3.regionMap.mapSecName, 17, 17);
             MenuZeroFillWindowRect(16, 14, 29, 15);
         }
     }
@@ -1738,7 +1733,7 @@ static void CreateSpecialAreaFlyTargetIcons(void)
 static void SpriteCB_FlyTargetIcons(struct Sprite *sprite)
 {
     // Blink if our mapSecId is the one selected on the map
-    if (ewram0.regionMap.mapSecId == sprite->data0)
+    if (ewram0_3.regionMap.mapSecId == sprite->data0)
     {
         // Toggle visibility every 16 frames
         sprite->data1++;
@@ -1757,11 +1752,11 @@ static void SpriteCB_FlyTargetIcons(struct Sprite *sprite)
 
 static void sub_80FC5B4(void)
 {
-    switch (ewram0.unk4)
+    switch (ewram0_3.unk4)
     {
     case 0:
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
-        ewram0.unk4++;
+        ewram0_3.unk4++;
         break;
     case 1:
         if (UpdatePaletteFade() != 0)
@@ -1773,7 +1768,7 @@ static void sub_80FC5B4(void)
 
 static void sub_80FC600(void)
 {
-    if (ewram0.unk4 == 0)
+    if (ewram0_3.unk4 == 0)
     {
         switch (sub_80FAB60())
         {
@@ -1785,7 +1780,7 @@ static void sub_80FC600(void)
             PrintFlyTargetName();
             break;
         case INPUT_EVENT_A_BUTTON:
-            if (ewram0.regionMap.unk16 == 2 || ewram0.regionMap.unk16 == 4)
+            if (ewram0_3.regionMap.unk16 == 2 || ewram0_3.regionMap.unk16 == 4)
             {
                 m4aSongNumStart(SE_SELECT);
                 ewramA6E = 1;
@@ -1803,11 +1798,11 @@ static void sub_80FC600(void)
 
 static void sub_80FC69C(void)
 {
-    switch (ewram0.unk4)
+    switch (ewram0_3.unk4)
     {
     case 0:
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
-        ewram0.unk4++;
+        ewram0_3.unk4++;
         break;
     case 1:
         if (UpdatePaletteFade() != 0)
@@ -1815,7 +1810,7 @@ static void sub_80FC69C(void)
         FreeRegionMapIconResources();
         if (ewramA6E != 0)
         {
-            switch (ewram0.regionMap.mapSecId)
+            switch (ewram0_3.regionMap.mapSecId)
             {
             case MAPSEC_SOUTHERN_ISLAND:
                 sub_8053538(22);
@@ -1827,13 +1822,13 @@ static void sub_80FC69C(void)
                 sub_8053538((gSaveBlock2.playerGender == MALE) ? 12 : 13);
                 break;
             case MAPSEC_EVER_GRANDE_CITY:
-                sub_8053538((FlagGet(0x854) && ewram0.regionMap.everGrandeCityArea == 0) ? 20 : 11);
+                sub_8053538((FlagGet(0x854) && ewram0_3.regionMap.everGrandeCityArea == 0) ? 20 : 11);
                 break;
             default:
-                if (sUnknown_083E7920[ewram0.regionMap.mapSecId][2] != 0)
-                    sub_8053538(sUnknown_083E7920[ewram0.regionMap.mapSecId][2]);
+                if (sUnknown_083E7920[ewram0_3.regionMap.mapSecId][2] != 0)
+                    sub_8053538(sUnknown_083E7920[ewram0_3.regionMap.mapSecId][2]);
                 else
-                    warp1_set_2(sUnknown_083E7920[ewram0.regionMap.mapSecId][0], sUnknown_083E7920[ewram0.regionMap.mapSecId][1], -1);
+                    warp1_set_2(sUnknown_083E7920[ewram0_3.regionMap.mapSecId][0], sUnknown_083E7920[ewram0_3.regionMap.mapSecId][1], -1);
                 break;
             }
             sub_80865BC();

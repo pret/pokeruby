@@ -9,6 +9,7 @@
 #include "sprite.h"
 #include "strings.h"
 #include "task.h"
+#include "ewram.h"
 
 struct Struct2001000 {
     u8 unk0;
@@ -38,15 +39,9 @@ struct Struct201C000 {
 #define WINDOW_RIGHT 29
 #endif
 
-#define EWRAM_1000 (*(struct Struct2001000 *)(unk_2000000 + 0x1000))
-#define EWRAM_1B000_2 (*(struct Struct201B000 *)(unk_2000000 + 0x1B000))
-#define EWRAM_1C000 (*(struct Struct201C000 *)(unk_2000000 + 0x1C000))
-
 // extern
 extern u8 gUnknown_0202E8F6;
 extern u8 gLastFieldPokeMenuOpened;
-
-extern u8 unk_2000000[];
 extern u8 gUnknown_0202E8F4;
 
 // Static

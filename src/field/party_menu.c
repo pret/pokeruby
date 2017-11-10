@@ -25,7 +25,6 @@
 #include "pokemon_summary_screen.h"
 #include "rom_8077ABC.h"
 #include "rom_8094928.h"
-#include "script_pokemon_80F9.h"
 #include "songs.h"
 #include "sound.h"
 #include "species.h"
@@ -35,6 +34,8 @@
 #include "task.h"
 #include "unknown_task.h"
 #include "util.h"
+#include "script_pokemon_80F9.h"
+#include "ewram.h"
 
 struct Coords8
 {
@@ -482,9 +483,6 @@ struct Unk201FE00
     u8 unkE01;
     u8 unkE02;
 };
-
-#define ewram1C000 (*(struct Unk201C000 *)(ewram + 0x1C000))
-#define ewram1FE00 (*(struct Unk201FE00 *)(ewram + 0x1FE00))
 
 extern u16 gBattleTypeFlags;
 extern u8 gTileBuffer[];

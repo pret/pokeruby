@@ -18,9 +18,7 @@
 #include "strings.h"
 #include "task.h"
 #include "text.h"
-
-extern u8 ewram[];
-#define UNK_201606C_ARRAY (ewram + 0x1606C) // lazy define but whatever.
+#include "ewram.h"
 
 extern u8 sub_806BD58(u8, u8);
 extern void PartyMenuPrintMonsLevelOrStatus(void);
@@ -206,7 +204,7 @@ void sub_8094B6C(u8 a, u8 b, u8 c)
 
     if (IsLinkDoubleBattle())
     {
-        u8 *arr = ewram + 0x1606C + a * 3;
+        u8 *arr = &ewram1606Carr(0, a);
 
         for (i = 0, j = 0; i < 3; i++)
         {

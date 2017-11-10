@@ -29,6 +29,7 @@
 #include "items.h"
 #include "hold_effects.h"
 #include "battle_move_effects.h"
+#include "ewram.h"
 
 struct UnknownStruct6
 {
@@ -61,48 +62,6 @@ struct UnknownStruct12
 
 extern const u16 gUnknown_08D004E0[];
 extern const struct MonCoords gCastformFrontSpriteCoords[];
-
-extern u8 ewram[];
-#define ewram0 (*(struct UnknownStruct7 *)(ewram + 0x0))
-#define ewram4 (*(struct UnknownStruct8 *)(ewram + 0x4))
-#define ewram16000 (ewram[0x16000])
-#define ewram16001 (ewram[0x16001])
-#define ewram16002 (ewram[0x16002])
-#define ewram16003 (ewram[0x16003])
-#define ewram1600C (ewram[0x1600C])
-#define ewram1600E (ewram[0x1600E])
-#define ewram1601B (ewram[0x1601B])
-#define ewram16020 ((u8 *)(ewram + 0x16020))
-#define ewram16056 (ewram[0x16056])
-#define ewram16058 (ewram[0x16058])
-#define ewram16059 (ewram[0x16059])
-#define ewram16078 (ewram[0x16078])
-#define ewram16084 (ewram[0x16084])
-#define ewram16086 (ewram[0x16086])
-#define ewram16087 (ewram[0x16087])
-#define ewram16088 (ewram[0x16088])
-#define ewram16089 (ewram[0x16089])
-#define ewram160A1 (ewram[0x160A1])
-#define ewram160A6 (ewram[0x160A6])
-#define ewram160AC ((u8 *)(ewram + 0x160AC))
-#define ewram160BC ((u16 *)(ewram + 0x160BC))  // hp
-#define ewram160C8 (ewram[0x160C8])
-#define ewram160C9 (ewram[0x160C9])
-#define ewram160CB (ewram[0x160CB])
-#define ewram160CC ((u8 *)(ewram + 0x160CC))
-#define ewram160E6 (ewram[0x160E6])
-#define ewram160E8 ((u8 *)(ewram + 0x160E8))
-#define ewram160F0 ((u8 *)(ewram + 0x160F0))
-#define ewram160F9 (ewram[0x160F9])
-#define ewram16100 ((u8 *)(ewram + 0x16100))
-#define ewram16108 ((u8 *)(ewram + 0x16108))
-#define ewram16110 (ewram[0x16110])
-#define ewram16111 (ewram[0x16111])
-#define ewram16113 (ewram[0x16113])
-#define ewram17100 ((u32 *)(ewram + 0x17100))
-#define ewram17130 (ewram[0x17130])
-#define ewram17160 (ewram[0x17160])
-#define ewram1D000 ((struct Pokemon *)(ewram + 0x1D000))
 
 extern struct UnknownPokemonStruct2 gUnknown_02023A00[];
 extern u8 gBattleBufferB[][0x200];
@@ -294,8 +253,8 @@ void sub_800E9EC(void)
         if (species != SPECIES_EGG && hp == 0)
             r6 |= 3 << i * 2;
     }
-    ewram0.unk2 = r6;
-    ewram0.unk3 = r6 >> 8;
+    BATTLE_STRUCT->unk2 = r6;
+    BATTLE_STRUCT->unk3 = r6 >> 8;
 }
 
 void sub_800EAAC(void)
@@ -391,11 +350,11 @@ void sub_800EC9C(void)
         {
             if (gReceivedRemoteLinkPlayers != 0 && sub_8007ECC())
             {
-                ewram0.unk0 = 1;
-                ewram0.unk1 = 1;
+                BATTLE_STRUCT->unk0 = 1;
+                BATTLE_STRUCT->unk1 = 1;
                 sub_800E9EC();
                 sub_800EAAC();
-                SendBlock(bitmask_all_link_players_but_self(), &ewram0, 32);
+                SendBlock(bitmask_all_link_players_but_self(), BATTLE_STRUCT, 32);
                 gBattleCommunication[0] = 1;
             }
         }
@@ -451,7 +410,7 @@ void sub_800EC9C(void)
             gTasks[taskId].data[1] = 0x10E;
             gTasks[taskId].data[2] = 0x5A;
             gTasks[taskId].data[5] = 0;
-            gTasks[taskId].data[3] = ewram0.unk2 | (ewram0.unk3 << 8);
+            gTasks[taskId].data[3] = BATTLE_STRUCT->unk2 | (BATTLE_STRUCT->unk3 << 8);
             gTasks[taskId].data[4] = gBlockRecvBuffer[enemyId][1];
             gBattleCommunication[0]++;
         }
@@ -551,7 +510,7 @@ void sub_800F02C(void)
         if (gUnknown_02023A00[i].language != 1)
             PadNameString(nickname, 0);
     }
-    memcpy(ewram, gUnknown_02023A00, 0x60);
+    memcpy(gSharedMem, gUnknown_02023A00, 0x60);
 }
 
 void sub_800F104(void)
@@ -563,8 +522,8 @@ void sub_800F104(void)
     playerId = GetMultiplayerId();
     ewram160CB = playerId;
     // Seriously, Game Freak?
-    pSavedCallback = (MainCallback *)(ewram + 0x160C4);
-    pSavedBattleTypeFlags = (u16 *)(ewram + 0x160C2);
+    pSavedCallback = ewram160C4_Callback;
+    pSavedBattleTypeFlags = ewram160C2_Flags;
     RunTasks();
     AnimateSprites();
     BuildOamBuffer();
@@ -575,7 +534,7 @@ void sub_800F104(void)
         if (gReceivedRemoteLinkPlayers != 0 && sub_8007ECC())
         {
             sub_800F02C();
-            SendBlock(bitmask_all_link_players_but_self(), ewram, 0x60);
+            SendBlock(bitmask_all_link_players_but_self(), gSharedMem, 0x60);
             gBattleCommunication[0]++;
         }
         break;
@@ -634,11 +593,11 @@ void sub_800F298(void)
     case 0:
         if (gReceivedRemoteLinkPlayers != 0 && sub_8007ECC())
         {
-            ewram0.unk0 = 1;
-            ewram0.unk1 = 1;
+            BATTLE_STRUCT->unk0 = 1;
+            BATTLE_STRUCT->unk1 = 1;
             sub_800E9EC();
             sub_800EAAC();
-            SendBlock(bitmask_all_link_players_but_self(), ewram, 0x20);
+            SendBlock(bitmask_all_link_players_but_self(), gSharedMem, 0x20);
             gBattleCommunication[0]++;
         }
         break;
@@ -904,7 +863,7 @@ void sub_800F828(struct Sprite *sprite)
 
 void sub_800F838(struct Sprite *sprite)
 {
-    u16 *arr = (u16 *)ewram;
+    u16 *arr = (u16 *)gSharedMem;
 
     switch (sprite->data0)
     {
@@ -1578,7 +1537,7 @@ void sub_8010874(void)
         gUnknown_02024C5C[i] = 0xFF;
         gLockedMove[i] = 0;
         gUnknown_02024C2C[i] = 0;
-        ewram17100[i] = 0;
+        eFlashFireArr.arr[i] = 0;
     }
 
     for (i = 0; i < 2; i++)
@@ -1622,12 +1581,12 @@ void sub_8010874(void)
 
     for (i = 0; i < 8; i++)
     {
-        ewram[i + 0x160AC] = 0;
-        ewram[i + 0x160CC] = 0;
-        ewram[i + 0x160E8] = 0;
-        ewram[i + 0x160F0] = 0;
-        ewram[i + 0x16100] = 0;
-        ewram[i + 0x16108] = 0;
+        ewram160ACarr(i) = 0;
+        ewram160CCarr(i) = 0;
+        ewram160E8arr(i) = 0;
+        ewram160F0arr(i) = 0;
+        ewram16100arr(i) = 0;
+        ewram16108arr(i) = 0;
     }
 
     ewram160C8 = 6;
@@ -1662,7 +1621,6 @@ void SwitchInClearStructs(void)
     struct DisableStruct sp0 = gDisableStructs[gActiveBank];
     s32 i;
     u8 *ptr;
-    u32 *ptr2;
 
     if (gBattleMoves[gCurrentMove].effect != EFFECT_BATON_PASS)
     {
@@ -1707,7 +1665,7 @@ void SwitchInClearStructs(void)
     {
         if (gUnknown_02024AD0[i].unk0 & (gBitTable[gActiveBank] << 16))
             gUnknown_02024AD0[i].unk0 &= ~(gBitTable[gActiveBank] << 16);
-        if ((gUnknown_02024AD0[i].unk0 & 0xE000) && ewram[0x16020 + i] == gActiveBank)
+        if ((gUnknown_02024AD0[i].unk0 & 0xE000) && ewram16020arr(i) == gActiveBank)
             gUnknown_02024AD0[i].unk0 &= ~0xE000;
     }
 
@@ -1732,17 +1690,16 @@ void SwitchInClearStructs(void)
     gUnknown_02024C2C[gActiveBank] = 0;
     gUnknown_02024C5C[gActiveBank] = 0xFF;
 
-    ewram[0x160AC + gActiveBank * 2 + 0] = 0;
-    ewram[0x160AC + gActiveBank * 2 + 1] = 0;
-    ewram[0x16100 + gActiveBank * 4 + 0] = 0;
-    ewram[0x16100 + gActiveBank * 4 + 1] = 0;
-    ewram[0x16100 + gActiveBank * 4 + 2] = 0;
-    ewram[0x16100 + gActiveBank * 4 + 3] = 0;
-    ewram[0x160E8 + gActiveBank * 2 + 0] = 0;
-    ewram[0x160E8 + gActiveBank * 2 + 1] = 0;
+    ewram160ACarr2(0, gActiveBank) = 0;
+    ewram160ACarr2(1, gActiveBank) = 0;
+    ewram16100arr2(0, gActiveBank) = 0;
+    ewram16100arr2(1, gActiveBank) = 0;
+    ewram16100arr2(2, gActiveBank) = 0;
+    ewram16100arr2(3, gActiveBank) = 0;
+    ewram160E8arr2(0, gActiveBank) = 0;
+    ewram160E8arr2(1, gActiveBank) = 0;
 
-    ptr2 = (u32 *)(ewram + 0x17100);
-    ptr2[gActiveBank] = 0;
+    eFlashFireArr.arr[gActiveBank] = 0;
 
     gCurrentMove = 0;
 }
@@ -1751,7 +1708,6 @@ void UndoEffectsAfterFainting(void)
 {
     s32 i;
     u8 *ptr;
-    u32 *ptr2;
 
     for (i = 0; i < 8; i++)
         gBattleMons[gActiveBank].statStages[i] = 6;
@@ -1763,7 +1719,7 @@ void UndoEffectsAfterFainting(void)
             gBattleMons[i].status2 &= ~STATUS2_ESCAPE_PREVENTION;
         if (gBattleMons[i].status2 & (gBitTable[gActiveBank] << 16))
             gBattleMons[i].status2 &= ~(gBitTable[gActiveBank] << 16);
-        if ((gBattleMons[i].status2 & STATUS2_WRAPPED) && ewram[0x16020 + i] == gActiveBank)
+        if ((gBattleMons[i].status2 & STATUS2_WRAPPED) && ewram16020arr(i) == gActiveBank)
             gBattleMons[i].status2 &= ~STATUS2_WRAPPED;
     }
     gActionSelectionCursor[gActiveBank] = 0;
@@ -1798,17 +1754,16 @@ void UndoEffectsAfterFainting(void)
     gUnknown_02024C2C[gActiveBank] = 0;
     gUnknown_02024C5C[gActiveBank] = 0xFF;
 
-    ewram[0x160E8 + gActiveBank * 2 + 0] = 0;
-    ewram[0x160E8 + gActiveBank * 2 + 1] = 0;
-    ewram[0x160AC + gActiveBank * 2 + 0] = 0;
-    ewram[0x160AC + gActiveBank * 2 + 1] = 0;
-    ewram[0x16100 + gActiveBank * 4 + 0] = 0;
-    ewram[0x16100 + gActiveBank * 4 + 1] = 0;
-    ewram[0x16100 + gActiveBank * 4 + 2] = 0;
-    ewram[0x16100 + gActiveBank * 4 + 3] = 0;
+    ewram160E8arr2(0, gActiveBank) = 0;
+    ewram160E8arr2(1, gActiveBank) = 0;
+    ewram160ACarr2(0, gActiveBank) = 0;
+    ewram160ACarr2(1, gActiveBank) = 0;
+    ewram16100arr2(0, gActiveBank) = 0;
+    ewram16100arr2(1, gActiveBank) = 0;
+    ewram16100arr2(2, gActiveBank) = 0;
+    ewram16100arr2(3, gActiveBank) = 0;
 
-    ptr2 = (u32 *)(ewram + 0x17100);
-    ptr2[gActiveBank] = 0;
+    eFlashFireArr.arr[gActiveBank] = 0;
 
     gBattleMons[gActiveBank].type1 = gBaseStats[gBattleMons[gActiveBank].species].type1;
     gBattleMons[gActiveBank].type2 = gBaseStats[gBattleMons[gActiveBank].species].type2;
@@ -2169,7 +2124,7 @@ void BattleBeginFirstTurn(void)
             ;
         for (i = 0; i < 4; i++)
         {
-            ewram[0x16068 + i] = 6;
+            ewram16068arr(i) = 6;
             gActionForBanks[i] = 0xFF;
             gChosenMovesByBanks[i] = 0;
         }
@@ -2261,7 +2216,7 @@ void BattleTurnPassed(void)
         gChosenMovesByBanks[i] = 0;
     }
     for (i = 0; i < 4; i++)
-        ewram[0x16068 + i] = 6;
+        ewram16068arr(i) = 6;
     ewram160A6 = gAbsentBankFlags;
     gBattleMainFunc = sub_8012324;
     gRandomTurnNumber = Random();
@@ -2335,23 +2290,23 @@ void sub_8012258(u8 a)
     u8 r1;
 
     for (i = 0; i < 3; i++)
-        gUnknown_02038470[i] = ewram[0x1606C + i + a * 3];
+        gUnknown_02038470[i] = ewram1606Carr(i, a);
     r4 = pokemon_order_func(gBattlePartyID[a]);
-    r1 = pokemon_order_func(ewram[0x16068 + a]);
+    r1 = pokemon_order_func(ewram16068arr(a));
     sub_8094C98(r4, r1);
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
         for (i = 0; i < 3; i++)
         {
-            ewram[0x1606C + i + a * 3] = gUnknown_02038470[i];
-            ewram[0x1606C + i + (a ^ 2) * 3] = gUnknown_02038470[i];
+            ewram1606Carr(i, a) = gUnknown_02038470[i];
+            ewram1606Carr(i, (a ^ 2)) = gUnknown_02038470[i];
         }
     }
     else
     {
         for (i = 0; i < 3; i++)
         {
-            ewram[0x1606C + i + a * 3] = gUnknown_02038470[i];
+            ewram1606Carr(i, a) = gUnknown_02038470[i];
         }
     }
 }
@@ -2370,7 +2325,7 @@ void sub_8012324(void)
         switch (gBattleCommunication[gActiveBank])
         {
         case 0:
-            ewram[0x016068 + gActiveBank] = 6;
+            ewram16068arr(gActiveBank) = 6;
             if (!(gBattleTypeFlags & 0x40)
              && (r5 & 2)
              && !(ewram160A6 & gBitTable[GetBankByPlayerAI(r5 ^ 2)])

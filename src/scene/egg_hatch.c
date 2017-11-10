@@ -20,8 +20,8 @@
 #include "trig.h"
 #include "rng.h"
 #include "trade.h"
+#include "ewram.h"
 
-extern u8 ewram[];
 extern struct SpriteTemplate gUnknown_02024E8C;
 
 struct EggHatchData
@@ -416,7 +416,7 @@ static u8 EggHatchCreateMonSprite(u8 a0, u8 switchID, u8 pokeID)
         {
             u16 species = GetMonData(mon, MON_DATA_SPECIES);
             u32 pid = GetMonData(mon, MON_DATA_PERSONALITY);
-            HandleLoadSpecialPokePic(&gMonFrontPicTable[species], gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset,(u32)(&ewram[0]), gUnknown_081FAF4C[2 * a0 + 1], species, pid);
+            HandleLoadSpecialPokePic(&gMonFrontPicTable[species], gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset, ewram0_6, gUnknown_081FAF4C[2 * a0 + 1], species, pid);
             LoadCompressedObjectPalette(GetMonSpritePalStruct(mon));
         }
         break;
@@ -460,7 +460,7 @@ static void CB2_EggHatch_0(void)
     {
     case 0:
         REG_DISPCNT = 0;
-        gEggHatchData = (struct EggHatchData*)(&ewram[0x18000]);
+        gEggHatchData = eEggHatchData;
         gEggHatchData->eggPartyID = gSpecialVar_0x8004;
         gEggHatchData->eggShardVelocityID = 0;
         ResetTasks();
@@ -479,8 +479,8 @@ static void CB2_EggHatch_0(void)
         break;
     case 2:
         LZDecompressVram(&gUnknown_08D00000, (void*)(VRAM));
-        CpuSet(&gUnknown_08D00524, &ewram[0], 0x800);
-        DmaCopy16(3, &ewram[0], (void*)(VRAM + 0x2800), 0x500);
+        CpuSet(&gUnknown_08D00524, ewram0_7, 0x800);
+        DmaCopy16(3, ewram0_7, (void*)(VRAM + 0x2800), 0x500);
         LoadCompressedPalette(&gUnknown_08D004E0, 0, 0x20);
         gMain.state++;
         break;

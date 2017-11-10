@@ -1,7 +1,3 @@
-//
-
-//
-
 #include "global.h"
 #include "task.h"
 #include "main.h"

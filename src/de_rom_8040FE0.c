@@ -1,6 +1,7 @@
 #include "global.h"
 #include "battle.h"
 #include "battle_tower.h"
+#include "ewram.h"
 
 #if GERMAN
 
@@ -20,8 +21,6 @@ enum {
     TRAINER_CLASS_MAY_2 = 62,
     TRAINER_CLASS_MAY_3 = 63,
 };
-
-extern struct SecretBaseRecord gSecretBaseRecord;
 
 extern u8 gTrainerClassNames[][13];
 extern struct Trainer gTrainers[];
@@ -70,7 +69,7 @@ u8 *de_sub_8041024(s32 arg0, u32 arg1) {
     {
     case 0x400:
         nameIndex = GetSecretBaseTrainerNameIndex();
-        gender = gSecretBaseRecord.gender;
+        gender = eSecretBaseRecord.gender;
         if (nameIndex == TRAINER_CLASS_NAME_SCHOOL_KID)
         {
             return de_sub_8040FE0(gender);

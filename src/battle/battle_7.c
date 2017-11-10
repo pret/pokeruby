@@ -18,16 +18,7 @@
 #include "task.h"
 #include "text.h"
 #include "gba/m4a_internal.h"
-
-struct Struct2019348
-{
-    u8 filler0[2];
-    u16 unk2;
-    u8 filler4[4];
-    u32 unk8;
-    u32 unkC;
-    u32 unk10;
-};
+#include "ewram.h"
 
 extern u8 gBattleBufferA[][0x200];
 extern u8 gActiveBank;
@@ -70,8 +61,6 @@ extern const struct CompressedSpriteSheet gUnknown_0820A4AC;
 extern const struct CompressedSpriteSheet gUnknown_0820A4B4[];
 extern const struct SpritePalette gUnknown_0820A4D4[];
 extern const u8 gUnknown_08D09C48[];
-
-#define ewram19348 (*(struct Struct2019348 *)(ewram + 0x19348))
 
 extern void c3_0802FDF4(u8);
 extern void sub_80440EC();
@@ -304,14 +293,14 @@ void BattleLoadOpponentMonSprite(struct Pokemon *pkmn, u8 b)
         lzPaletteData = GetMonSpritePal(pkmn);
     else
         lzPaletteData = GetMonSpritePalFromOtIdPersonality(species, otId, personalityValue);
-    LZDecompressWram(lzPaletteData, ewram);
-    LoadPalette(ewram, paletteOffset, 0x20);
-    LoadPalette(ewram, 0x80 + b * 16, 0x20);
+    LZDecompressWram(lzPaletteData, gSharedMem);
+    LoadPalette(gSharedMem, paletteOffset, 0x20);
+    LoadPalette(gSharedMem, 0x80 + b * 16, 0x20);
     if (species == SPECIES_CASTFORM)
     {
         paletteOffset = 0x100 + b * 16;
-        LZDecompressWram(lzPaletteData, ewram + 0x16400);
-        LoadPalette(ewram + 0x16400 + gBattleMonForms[b] * 32, paletteOffset, 0x20);
+        LZDecompressWram(lzPaletteData, ewram16400);
+        LoadPalette(ewram16400 + gBattleMonForms[b] * 32, paletteOffset, 0x20);
     }
     if (ewram17800[b].transformedSpecies != 0)
     {
@@ -356,14 +345,14 @@ void BattleLoadPlayerMonSprite(struct Pokemon *pkmn, u8 b)
         lzPaletteData = GetMonSpritePal(pkmn);
     else
         lzPaletteData = GetMonSpritePalFromOtIdPersonality(species, otId, personalityValue);
-    LZDecompressWram(lzPaletteData, ewram);
-    LoadPalette(ewram, paletteOffset, 0x20);
-    LoadPalette(ewram, 0x80 + b * 16, 0x20);
+    LZDecompressWram(lzPaletteData, gSharedMem);
+    LoadPalette(gSharedMem, paletteOffset, 0x20);
+    LoadPalette(gSharedMem, 0x80 + b * 16, 0x20);
     if (species == SPECIES_CASTFORM)
     {
         paletteOffset = 0x100 + b * 16;
-        LZDecompressWram(lzPaletteData, ewram + 0x16400);
-        LoadPalette(ewram + 0x16400 + gBattleMonForms[b] * 32, paletteOffset, 0x20);
+        LZDecompressWram(lzPaletteData, ewram16400);
+        LoadPalette(ewram16400 + gBattleMonForms[b] * 32, paletteOffset, 0x20);
     }
     if (ewram17800[b].transformedSpecies != 0)
     {
@@ -623,7 +612,7 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
     {
         StartSpriteAnim(&gSprites[gObjectBankIDs[a]], ewram17840.unk0);
         paletteOffset = 0x100 + a * 16;
-        LoadPalette(ewram + 0x16400 + ewram17840.unk0 * 32, paletteOffset, 32);
+        LoadPalette(ewram16400 + ewram17840.unk0 * 32, paletteOffset, 32);
         gBattleMonForms[a] = ewram17840.unk0;
         if (ewram17800[a].transformedSpecies != 0)
         {
@@ -691,11 +680,11 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
         DmaCopy32(3, src, dst, 0x800);
         paletteOffset = 0x100 + a * 16;
         lzPaletteData = GetMonSpritePalFromOtIdPersonality(species, otId, personalityValue);
-        LZDecompressWram(lzPaletteData, ewram);
-        LoadPalette(ewram, paletteOffset, 32);
+        LZDecompressWram(lzPaletteData, gSharedMem);
+        LoadPalette(gSharedMem, paletteOffset, 32);
         if (species == SPECIES_CASTFORM)
         {
-            u16 *paletteSrc = (u16 *)(ewram + 0x16400);
+            u16 *paletteSrc = (u16 *)ewram16400; // TODO: avoid casting?
 
             LZDecompressWram(lzPaletteData, paletteSrc);
             LoadPalette(paletteSrc + gBattleMonForms[b] * 16, paletteOffset, 32);

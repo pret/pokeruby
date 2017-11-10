@@ -20,6 +20,7 @@
 #include "menu_cursor.h"
 #include "trig.h"
 #include "pokeblock.h"
+#include "ewram.h"
 
 //needed to match Blender_ControlHitPitch
 struct MusicPlayerInfo
@@ -207,7 +208,6 @@ extern void de_sub_8073110();
 
 extern struct MusicPlayerInfo gMPlay_SE2;
 extern struct MusicPlayerInfo gMPlay_BGM;
-extern u8 ewram[];
 extern u16 gScriptItemId;
 extern u8 gUnknown_020297ED;
 extern u8 byte_3002A68;
@@ -828,7 +828,7 @@ static bool8 sub_804E2EC(void)
     switch (gBerryBlenderData->field_1)
     {
     case 0:
-        LZDecompressWram(gUnknown_08E6C100, &ewram[0x10000]);
+        LZDecompressWram(gUnknown_08E6C100, ewram10000);
         gBerryBlenderData->field_1++;
         break;
     case 1:
@@ -843,7 +843,7 @@ static bool8 sub_804E2EC(void)
         break;
     case 2:
         {
-            void* offsetRead = &ewram[0x10000];
+            void* offsetRead = ewram10000;
             void* offsetWrite = (void*)(VRAM);
             u32 size = 0x2000;
             while (TRUE)
@@ -862,16 +862,16 @@ static bool8 sub_804E2EC(void)
         }
         break;
     case 3:
-        LZDecompressWram(gUnknown_08E6C920, &ewram[0x10000]);
+        LZDecompressWram(gUnknown_08E6C920, ewram10000);
         gBerryBlenderData->field_1++;
         break;
     case 4:
-        LZDecompressWram(gUnknown_08E6D354, &ewram[0x13000]);
+        LZDecompressWram(gUnknown_08E6D354, ewram13000);
         gBerryBlenderData->field_1++;
         break;
     case 5:
         {
-            void* offsetRead = &ewram[0x10000];
+            void* offsetRead = ewram10000;
             void* offsetWrite = (void*)(VRAM + 0xE000);
 
             DmaCopy16(3, offsetRead, offsetWrite, 0x1000);
@@ -880,7 +880,7 @@ static bool8 sub_804E2EC(void)
         break;
     case 6:
         {
-            void* offsetRead = &ewram[0x11000];
+            void* offsetRead = ewram11000;
             void* offsetWrite = (void*)(VRAM + 0xF000);
 
             DmaCopy16(3, offsetRead, offsetWrite, 0x1000);
@@ -890,7 +890,7 @@ static bool8 sub_804E2EC(void)
     case 7:
         {
             u16 i;
-            u16* palStore = (u16*)(&ewram[0x13000]);
+            u16* palStore = (u16*)(ewram13000);
             void* offsetRead;
             void* offsetWrite;
 
@@ -898,7 +898,7 @@ static bool8 sub_804E2EC(void)
             {
                 *(palStore + i) |= 0x100;
             }
-            offsetRead = &ewram[0x13000];
+            offsetRead = ewram13000;
             offsetWrite = (void*)(VRAM + 0x6000);
             DmaCopy16(3, offsetRead, offsetWrite, 0x500);
             LoadPalette(sBlenderOuterPal, 0x80, 0x20);
@@ -937,7 +937,7 @@ void sub_804E538(void)
 {
     u8* field6F; //this temp value is needed to match
 
-    gBerryBlenderData = (struct BerryBlenderData*)(&ewram[0x18000]);
+    gBerryBlenderData = eBerryBlenderData;
 
     field6F = &gBerryBlenderData->field_6F;
     gBerryBlenderData->field_0 = 0;
@@ -1111,7 +1111,7 @@ void sub_804E990(void)
     s32 i;
 
     REG_DISPCNT = 0;
-    gBerryBlenderData = (struct BerryBlenderData*)(&ewram[0x18000]);
+    gBerryBlenderData = eBerryBlenderData;
     gBerryBlenderData->field_0 = 0;
     gBerryBlenderData->field_134 = 0;
     for (i = 0; i < BLENDER_MAX_PLAYERS; i++)
@@ -3710,7 +3710,7 @@ static void sub_80527BC(void)
         gUnknown_020297E0 = 0;
         gUnknown_020297DC = 2;
         for (i = 0; i < 200; i++)
-            ewram[i] = 0;
+            gSharedMem[i] = 0;
         gUnknown_020297E8 = 0;
     }
     for (i = 0; i < 100; i++)
@@ -3719,7 +3719,7 @@ static void sub_80527BC(void)
             gUnknown_020297E0++;
         else
         {
-            u16* ewramPtr = ((u16*)(ewram));
+            u16* ewramPtr = ((u16*)(gSharedMem));
             ewramPtr[gUnknown_020297E4] = gUnknown_020297E0;
             gUnknown_020297E4++;
             gUnknown_020297E0 = 0;

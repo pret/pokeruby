@@ -2,6 +2,7 @@
 #include "battle.h"
 #include "link.h"
 #include "text.h"
+#include "ewram.h"
 
 extern u16 gBattleTypeFlags;
 extern u8 gBattleOutcome;

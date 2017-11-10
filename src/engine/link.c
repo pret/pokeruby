@@ -15,6 +15,7 @@
 #include "strings2.h"
 #include "task.h"
 #include "text.h"
+#include "ewram.h"
 
 #define SIO_MULTI_CNT ((struct SioMultiCnt *)REG_ADDR_SIOCNT)
 
@@ -35,8 +36,6 @@ struct LinkTestBGInfo
     u32 dummy_C;
 };
 
-extern u8 unk_2000000[];
-extern u8 unk_2004000[];
 extern u16 gBattleTypeFlags;
 
 extern u16 word_3004858;
@@ -404,7 +403,7 @@ static void LinkTestProcessKeyInput(void)
     if (gMain.newKeys & A_BUTTON)
         gShouldAdvanceLinkState = 1;
     if (gMain.heldKeys & B_BUTTON)
-        InitBlockSend(unk_2004000, 0x2004);
+        InitBlockSend(ewram4000, 0x2004);
     if (gMain.newKeys & L_BUTTON)
         BeginNormalPaletteFade(-1, 0, 0x10, 0, 2);
     if (gMain.newKeys & START_BUTTON)
@@ -507,7 +506,7 @@ static void ProcessRecvCmds(u8 unusedParam)
         case 0x8888:
             if (sBlockRecv[i].size > BLOCK_BUFFER_SIZE)
             {
-                u16 *buffer = (u16 *)unk_2000000;
+                u16 *buffer = (u16 *)gSharedMem;
                 u16 j;
                 for (j = 0; j < CMD_LENGTH - 1; j++)
                     buffer[(sBlockRecv[i].pos / 2) + j] = gRecvCmds[j + 1][i];

@@ -13,6 +13,7 @@
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
+#include "ewram.h"
 
 struct UnknownStruct5
 {
@@ -27,12 +28,6 @@ struct UnknownStruct7
 {
     u8 filler0[0x180];
 };
-
-extern u8 ewram[];
-#define ewram520   ((struct UnknownStruct7 *)(ewram + 0x00520))
-#define ewram16088 (*(u8 *)                  (ewram + 0x16088))
-#define ewram16089 (*(u8 *)                  (ewram + 0x16089))
-#define ewram17850 ((struct UnknownStruct5 *)(ewram + 0x17850))
 
 extern u8 gDisplayedStringBattle[];
 extern u8 gNoOfAllBanks;
@@ -1000,8 +995,8 @@ void sub_8044338(u8 a, struct Pokemon *pkmn)
     }
     //_08044486
     r5 = gSprites[a].data5;
-    ConvertIntToDecimalStringN(str + 6, ewram[0x16089], 1, 2);
-    ConvertIntToDecimalStringN(str + 9, ewram[0x16088], 1, 2);
+    ConvertIntToDecimalStringN(str + 6, ewram16089, 1, 2);
+    ConvertIntToDecimalStringN(str + 9, ewram16088, 1, 2);
     str[5] = 0;
     str[8] = 0xBA;
     sub_80034D4((u8 *)0x02000000, str);

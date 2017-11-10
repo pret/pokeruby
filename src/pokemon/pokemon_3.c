@@ -22,6 +22,7 @@
 #include "string_util.h"
 #include "text.h"
 #include "util.h"
+#include "ewram.h"
 
 extern u8 gPlayerPartyCount;
 extern u8 gEnemyPartyCount;

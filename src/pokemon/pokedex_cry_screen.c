@@ -2,6 +2,7 @@
 #include "pokedex_cry_screen.h"
 #include "palette.h"
 #include "sprite.h"
+#include "ewram.h"
 
 struct Unk201C800 {
     u8 unk_0;
@@ -10,10 +11,6 @@ struct Unk201C800 {
     u8 filler_3;
     u16 unk_4;
 };
-
-#define EWRAM_1C800 (*(struct Unk201C800 *)(unk_201C000 + 0x800))
-
-extern u8 unk_201C000[];
 
 extern u8 gUnknown_03005E98;
 

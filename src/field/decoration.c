@@ -18,6 +18,7 @@
 #include "event_data.h"
 #include "field_weather.h"
 #include "decoration.h"
+#include "ewram.h"
 
 EWRAM_DATA u8 *gUnknown_020388D0 = NULL;
 EWRAM_DATA u8 gUnknown_020388D4 = 0;
@@ -1555,7 +1556,7 @@ const struct SpriteTemplate gSpriteTemplate_83ECA88 = {
 
 const struct YesNoFuncTable gUnknown_083ECAA0 = {.yesFunc = sub_8101848, .noFunc = sub_80FED3C};
 
-u8 *const unref_label_083ECAA8[] = {ewram};
+u8 *const unref_label_083ECAA8[] = {gSharedMem};
 
 // text
 

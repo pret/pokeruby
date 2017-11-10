@@ -20,6 +20,7 @@
 #include "task.h"
 #include "text.h"
 #include "util.h"
+#include "ewram.h"
 
 struct UnknownStruct3
 {
@@ -1673,7 +1674,7 @@ _0803558A:\n\
 void OpponentHandleOpenBag(void)
 {
     // What is this?
-    Emitcmd35(1, ewram[0x160D4 + gActiveBank / 2 * 2]);
+    Emitcmd35(1, ewram160D4(gActiveBank));
     OpponentBufferExecCompleted();
 }
 
@@ -1681,7 +1682,7 @@ void OpponentHandlecmd22(void)
 {
     s32 r4;
 
-    if (ewram[0x160C8 + GetBankIdentity(gActiveBank) / 2] == 6)
+    if (ewram160C8arr(GetBankIdentity(gActiveBank)) == 6)
     {
         u8 r6;
         u8 r5;
@@ -1710,10 +1711,10 @@ void OpponentHandlecmd22(void)
     }
     else
     {
-        r4 = ewram[0x160C8 + GetBankIdentity(gActiveBank) / 2];
-        ewram[0x160C8 + GetBankIdentity(gActiveBank) / 2] = 6;
+        r4 = ewram160C8arr(GetBankIdentity(gActiveBank));
+        ewram160C8arr(GetBankIdentity(gActiveBank)) = 6;
     }
-    ewram[0x16068 + gActiveBank] = r4;
+    ewram16068arr(gActiveBank) = r4;
     Emitcmd34(1, r4, 0);
     OpponentBufferExecCompleted();
 }

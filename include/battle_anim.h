@@ -7,12 +7,6 @@
 #define REG_BG1CNT_BITFIELD REG_BGnCNT_BITFIELD(1)
 #define REG_BG2CNT_BITFIELD REG_BGnCNT_BITFIELD(2)
 
-#define EWRAM_14800 ((u16 *)(unk_2000000 + 0x14800))
-#define EWRAM_17800 ((struct UnknownStruct1 *)(unk_2000000 + 0x17800))
-#define EWRAM_17810 ((struct UnknownStruct3 *)(unk_2000000 + 0x17810))
-#define EWRAM_18000 ((u16 *)(unk_2000000 + 0x18000))
-#define EWRAM_19348 (*(u16 *)(unk_2000000 + 0x19348))
-
 struct BGCntrlBitfield
 {
     volatile u16 priority:2;

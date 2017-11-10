@@ -189,9 +189,6 @@ enum
     BATTLE_TERRAIN_PLAIN,
 };
 
-// needed to match the hack that is get_item, thanks cam, someone else clean this up later.
-extern u8 unk_2000000[];
-
 struct Trainer
 {
     /*0x00*/ u8 partyFlags;
@@ -237,7 +234,11 @@ struct AI_ThinkingStruct /* 0x2016800 */
 
 struct BattleStruct /* 0x2000000 */
 {
-    u8 filler0[0x15DDE];
+    /*0x00000*/ u8 unk0;
+    /*0x00001*/ bool8 unk1;
+    /*0x00002*/ u8 unk2;
+    /*0x00003*/ bool8 unk3;
+    u8 filler4[0x15DDA];
     /*0x15DDE*/ u8 unk15DDE;
     /*0x15DDF*/ u8 unk15DDF;
     /*0x15DE0*/ u8 filler15DE0[0x220];
@@ -533,6 +534,21 @@ struct BattleResults
     u8 unk36[10];  // usedBalls?
 };
 
+struct Struct2017100
+{
+    u32 arr[4];
+};
+
+struct Struct2019348
+{
+    u16 unk0;
+    u16 unk2;
+    u8 unk4;
+    u32 unk8;
+    u32 unkC;
+    u32 unk10;
+};
+
 struct Struct2017800
 {
     u8 invisible:1;
@@ -545,25 +561,25 @@ struct Struct2017800
 
 struct Struct2017810
 {
-    u8 unk0_0:1;
-    u8 unk0_1:1;
-    u8 unk0_2:1;
-    u8 unk0_3:1;
-    u8 unk0_4:1;
-    u8 unk0_5:1;
-    u8 unk0_6:1;
-    u8 unk0_7:1;
-    u8 unk1_0:1;
-    u8 unk1_1:5;
-    u8 unk2;
-    u8 unk3;
-    u8 unk4;
-    u8 unk5;
-    u8 unk6;
-    u8 unk7;
-    u8 unk8;
-    u8 unk9;
-    u8 fillerA[2];
+ /*0x00*/ u8 unk0_0:1;
+ /*0x00*/ u8 unk0_1:1;
+ /*0x00*/ u8 unk0_2:1;
+ /*0x00*/ u8 unk0_3:1;
+ /*0x00*/ u8 unk0_4:1;
+ /*0x00*/ u8 unk0_5:1;
+ /*0x00*/ u8 unk0_6:1;
+ /*0x00*/ u8 unk0_7:1;
+ /*0x01*/ u8 unk1_0:1;
+ /*0x01*/ u8 unk1_1:5;
+ /*0x02*/ u8 unk2;
+ /*0x03*/ u8 unk3;
+ /*0x04*/ u8 unk4;
+ /*0x05*/ u8 unk5;
+ /*0x06*/ u8 unk6;
+ /*0x07*/ u8 unk7;
+ /*0x08*/ u8 unk8;
+ /*0x09*/ u8 unk9;
+ /*0x0A*/ u8 fillerA[2];
 };
 
 struct Struct2017840
@@ -670,21 +686,6 @@ extern struct sideTimer gSideTimer[2];
 extern struct WishFutureKnock gWishFutureKnock;
 extern struct AI_ThinkingStruct gAIThinkingSpace;
 extern struct Struct20238C8 gUnknown_020238C8;
-
-// TODO: move ewram to global.h
-extern u8 ewram[];
-
-#define BATTLE_STRUCT           ((struct BattleStruct *)     (ewram + 0x00000))
-#define AI_THINKING_STRUCT      ((struct AI_ThinkingStruct *)(ewram + 0x16800))
-#define UNK_2016A00_STRUCT      ((struct UnkBattleStruct1 *) (ewram + 0x16A00))
-#define AI_STACK                ((struct AI_Stack *)         (ewram + 0x16C00))
-#define AI_ARRAY_160CC          ((struct SmallItemStruct *)  (ewram + 0x160CC))
-#define B_BATTLESCRIPTS_STACK   ((struct scriptsStack *)     (ewram + 0x17110))
-#define B_FUNCTION_STACK        ((struct funcStack *)        (ewram + 0x17140))
-#define ewram17800              ((struct Struct2017800 *)    (ewram + 0x17800))
-#define ewram17810              ((struct Struct2017810 *)    (ewram + 0x17810))
-#define ewram17840              (*(struct Struct2017840 *)   (ewram + 0x17840))
-#define ewram17000              ((u32 *)                     (ewram + 0x17100))
 
 // used in many battle files, it seems as though Hisashi Sogabe wrote
 // some sort of macro to replace the use of actually calling memset.

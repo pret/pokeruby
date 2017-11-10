@@ -15,7 +15,7 @@ struct UnkStruct1 {
     /*0x02*/ s16 unk02;
 };
 
-extern struct UnkStruct2000000 unk_2000000;
+extern struct UnkStruct2000000 gSharedMem;
 
 extern struct UnkStruct1 *gUnknown_083ED048[];
 extern const u16 gPalette_83EDE24[];
@@ -40,7 +40,7 @@ void sub_8104CAC(u8 arg0) {
 
     sub_8104DA4();
 
-    task = &gTasks[unk_2000000.unk3D];
+    task = &gTasks[gSharedMem.unk3D];
     task->data[1] = arg0;
 
     i = 0;

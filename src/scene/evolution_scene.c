@@ -24,6 +24,7 @@
 #include "pokemon_summary_screen.h"
 #include "menu_cursor.h"
 #include "strings2.h"
+#include "ewram.h"
 
 struct EvoInfo
 {
@@ -55,8 +56,6 @@ struct EvoInfo
     u8 unkA0C4; // 0x201E8C4
 };
 
-#define sEvoInfo ((*(struct EvoInfo*)(ewram + 0x14800)))
-
 void EvolutionRenameMon(struct Pokemon *mon, u16 oldSpecies, u16 newSpecies);
 void sub_8024CEC(void);
 void sub_8023A80(void);
@@ -78,7 +77,6 @@ extern u8 gBattleTerrain;
 extern u8 gReservedSpritePaletteCount;
 extern u16 gMoveToLearn;
 extern struct SpriteTemplate gUnknown_02024E8C;
-extern u8 gUnk_2009000[]; // won't match if I 'ewram' it
 extern bool8 gAffineAnimsDisabled;
 extern u8 gDisplayedStringBattle[];
 extern u8 gBattleTextBuff2[];
@@ -276,7 +274,7 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
     gTasks[ID].tEvoWasStopped = FALSE;
     gTasks[ID].tPartyID = partyID;
 
-    memcpy(gUnk_2009000, &gPlttBufferUnfaded[0x20], 0x60);
+    memcpy(ewram9000_hack, &gPlttBufferUnfaded[0x20], 0x60);
 
     REG_DISPCNT = DISPCNT_OBJ_ON | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_1D_MAP;
     SetHBlankCallback(EvoDummyFunc);
@@ -639,7 +637,7 @@ static void Task_EvolutionScene(u8 taskID)
         {
             m4aMPlayAllStop();
             PlayCry1(gTasks[taskID].tPostEvoSpecies, 0);
-            memcpy(&gPlttBufferUnfaded[0x20], gUnk_2009000, 0x60);
+            memcpy(&gPlttBufferUnfaded[0x20], ewram9000_hack, 0x60);
             BeginNormalPaletteFade(0x1C, 0, 0x10, 0, 0);
             gTasks[taskID].tState++;
         }
@@ -981,7 +979,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
         if (IsSEPlaying())
         {
             PlayCry1(gTasks[taskID].tPostEvoSpecies, 0);
-            memcpy(&gPlttBufferUnfaded[0x20], gUnk_2009000, 0x60);
+            memcpy(&gPlttBufferUnfaded[0x20], ewram9000_hack, 0x60);
             BeginNormalPaletteFade(1, 0, 0x10, 0, 0);
             gTasks[taskID].tState++;
         }
