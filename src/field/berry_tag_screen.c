@@ -28,7 +28,7 @@ struct Struct2000000
     /*0x1FFFF*/ u8 var_1FFFF;
 };
 
-extern struct Struct2000000 ewram;
+extern struct Struct2000000 gSharedMem;
 extern u16 gUnknown_030041B4;
 
 static EWRAM_DATA u8 gUnknown_0203932C = 0;
@@ -119,13 +119,13 @@ static bool8 sub_8146058(void)
     case 5:
         if (!MultistepInitMenuWindowContinue())
             break;
-        ewram.var_1FFFF = 0;
+        gSharedMem.var_1FFFF = 0;
         gMain.state += 1;
         break;
     case 6:
         if (!sub_81462B8())
             break;
-        ewram.var_1FFFF = 0;
+        gSharedMem.var_1FFFF = 0;
         gMain.state += 1;
         break;
     case 7:
@@ -191,19 +191,19 @@ bool8 sub_81462B8(void)
     u16 i;
     void *addr;
 
-    switch (ewram.var_1FFFF)
+    switch (gSharedMem.var_1FFFF)
     {
     case 0:
         LZDecompressVram(gBerryCheck_Gfx, (void *)VRAM);
-        ewram.var_1FFFF += 1;
+        gSharedMem.var_1FFFF += 1;
         break;
     case 1:
         LZDecompressVram(gUnknown_08E788E4, (void *)VRAM + 0x2800);
-        ewram.var_1FFFF += 1;
+        gSharedMem.var_1FFFF += 1;
         break;
     case 2:
         LZDecompressVram(gUnknown_08E78A84, (void *)VRAM + 0x3000);
-        ewram.var_1FFFF += 1;
+        gSharedMem.var_1FFFF += 1;
         break;
     case 3:
         for (i = 0; i < 0x400; i++)
@@ -215,19 +215,19 @@ bool8 sub_81462B8(void)
         }
         addr = (void *)(VRAM + 0x3800);
         DmaCopy16(3, gBGTilemapBuffers[2], addr, 0x800);
-        ewram.var_1FFFF += 1;
+        gSharedMem.var_1FFFF += 1;
         break;
     case 4:
         LoadCompressedPalette(gBerryCheck_Pal, 0, 96 * 2);
-        ewram.var_1FFFF += 1;
+        gSharedMem.var_1FFFF += 1;
         break;
     case 5:
         LoadCompressedObjectPic(&gUnknown_083C1F74);
-        ewram.var_1FFFF += 1;
+        gSharedMem.var_1FFFF += 1;
         break;
     case 6:
         LoadCompressedObjectPalette(&gUnknown_083C1F7C);
-        ewram.var_1FFFF = 0;
+        gSharedMem.var_1FFFF = 0;
         return TRUE;
     }
 

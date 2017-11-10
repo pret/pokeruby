@@ -68,7 +68,7 @@ extern const u16 gUnknown_083B5F8C[][4];
 
 const u8 gBadgesTiles[] = INCBIN_U8("graphics/trainer_card/badges.4bpp");
 // XXX: what is this?
-u8 *const ewram_ = ewram;
+u8 *const ewram_ = gSharedMem;
 
 bool8 sub_8093864(struct Task *);
 bool8 sub_80938A8(struct Task *);

@@ -266,7 +266,7 @@ static void VBlankCB_UpdateClockGraphics(void)
 
 static bool8 VerifySectorWipe(u16 sector)
 {
-    u32 *ptr = (u32 *)&ewram;
+    u32 *ptr = (u32 *)&gSharedMem;
     u16 i;
 
     ReadFlash(sector, 0, ptr, 4096);

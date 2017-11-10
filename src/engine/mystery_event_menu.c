@@ -286,8 +286,8 @@ static void CB2_MysteryEventMenu(void)
     case 11:
         if (gReceivedRemoteLinkPlayers)
             break;
-        unkVal = RunMysteryEventScript(ewram);
-        CpuFill32(0, ewram, 0x7D4);
+        unkVal = RunMysteryEventScript(gSharedMem);
+        CpuFill32(0, gSharedMem, 0x7D4);
         if (!GetEventLoadMessage(gStringVar4, unkVal))
             TrySavingData(NORMAL_SAVE);
         gMain.state++;

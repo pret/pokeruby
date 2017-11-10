@@ -1426,7 +1426,7 @@ static const struct UnknownStruct4 sUnknown_083E79C0[1] =
 };
 
 // XXX: what is this?
-static u8 *const ewram_ = ewram;
+static u8 *const ewram_ = gSharedMem;
 
 static const struct SpritePalette sFlyTargetIconSpritePalette = {sFlyTargetIcons_Pal, 2};
 

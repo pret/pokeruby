@@ -414,14 +414,14 @@ void sub_80AA280(u8 var) // no?
     u8 i;
 
     FillWindowRect_DefaultPalette(&gMenuWindow, 0, 0, 0, 0x1E, 3);
-    StringCopy(ewram, gMatsudaDebugMenu_StartText);
-    StringAppend(ewram, &gUnknown_0203857D[var][0]);
+    StringCopy(gSharedMem, gMatsudaDebugMenu_StartText);
+    StringAppend(gSharedMem, &gUnknown_0203857D[var][0]);
 
     for (i = 0; i < 4; i++)
     {
         if (var == i)
         {
-            sub_8003460(&gMenuWindow, ewram, (10 * i + 2), gUnknown_083C926E[i][0], gUnknown_083C926E[i][1]);
+            sub_8003460(&gMenuWindow, gSharedMem, (10 * i + 2), gUnknown_083C926E[i][0], gUnknown_083C926E[i][1]);
         }
         else
         {
@@ -433,38 +433,38 @@ void sub_80AA280(u8 var) // no?
 
 static void sub_80AA340(u8 var)
 {
-    ConvertIntToDecimalStringN(ewram, gContestMons[var].cool, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    sub_8003460(&gMenuWindow, ewram, 0x66, gUnknown_083C9282[0], gUnknown_083C9282[1]);
+    ConvertIntToDecimalStringN(gSharedMem, gContestMons[var].cool, STR_CONV_MODE_RIGHT_ALIGN, 3);
+    sub_8003460(&gMenuWindow, gSharedMem, 0x66, gUnknown_083C9282[0], gUnknown_083C9282[1]);
 }
 
 static void sub_80AA388(u8 var)
 {
-    ConvertIntToDecimalStringN(ewram, gContestMons[var].cute, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    sub_8003460(&gMenuWindow, ewram, 0x6C, gUnknown_083C9282[2], gUnknown_083C9282[3]);
+    ConvertIntToDecimalStringN(gSharedMem, gContestMons[var].cute, STR_CONV_MODE_RIGHT_ALIGN, 3);
+    sub_8003460(&gMenuWindow, gSharedMem, 0x6C, gUnknown_083C9282[2], gUnknown_083C9282[3]);
 }
 
 static void sub_80AA3D0(u8 var)
 {
-    ConvertIntToDecimalStringN(ewram, gContestMons[var].beauty, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    sub_8003460(&gMenuWindow, ewram, 0x72, gUnknown_083C9282[4], gUnknown_083C9282[5]);
+    ConvertIntToDecimalStringN(gSharedMem, gContestMons[var].beauty, STR_CONV_MODE_RIGHT_ALIGN, 3);
+    sub_8003460(&gMenuWindow, gSharedMem, 0x72, gUnknown_083C9282[4], gUnknown_083C9282[5]);
 }
 
 static void sub_80AA418(u8 var)
 {
-    ConvertIntToDecimalStringN(ewram, gContestMons[var].smart, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    sub_8003460(&gMenuWindow, ewram, 0x78, gUnknown_083C9282[6], gUnknown_083C9282[7]);
+    ConvertIntToDecimalStringN(gSharedMem, gContestMons[var].smart, STR_CONV_MODE_RIGHT_ALIGN, 3);
+    sub_8003460(&gMenuWindow, gSharedMem, 0x78, gUnknown_083C9282[6], gUnknown_083C9282[7]);
 }
 
 static void sub_80AA460(u8 var)
 {
-    ConvertIntToDecimalStringN(ewram, gContestMons[var].tough, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    sub_8003460(&gMenuWindow, ewram, 0x7E, gUnknown_083C9282[8], gUnknown_083C9282[9]);
+    ConvertIntToDecimalStringN(gSharedMem, gContestMons[var].tough, STR_CONV_MODE_RIGHT_ALIGN, 3);
+    sub_8003460(&gMenuWindow, gSharedMem, 0x7E, gUnknown_083C9282[8], gUnknown_083C9282[9]);
 }
 
 static void sub_80AA4A8(u8 var)
 {
-    ConvertIntToDecimalStringN(ewram, gContestMons[var].sheen, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    sub_8003460(&gMenuWindow, ewram, 0x84, gUnknown_083C9282[10], gUnknown_083C9282[11]);
+    ConvertIntToDecimalStringN(gSharedMem, gContestMons[var].sheen, STR_CONV_MODE_RIGHT_ALIGN, 3);
+    sub_8003460(&gMenuWindow, gSharedMem, 0x84, gUnknown_083C9282[10], gUnknown_083C9282[11]);
 }
 
 static void sub_80AA4F0(u8 var1, u8 var2)
@@ -489,8 +489,8 @@ static void sub_80AA614(u8 var1, u8 var2)
 {
     u16 var = sub_80AE770(var1, var2);
 
-    ConvertIntToDecimalStringN(ewram, var, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    sub_8003460(&gMenuWindow, ewram, 0xE2, 3, 0xC);
+    ConvertIntToDecimalStringN(gSharedMem, var, STR_CONV_MODE_RIGHT_ALIGN, 3);
+    sub_8003460(&gMenuWindow, gSharedMem, 0xE2, 3, 0xC);
 }
 
 void sub_80AA658(u8 var)

@@ -510,7 +510,7 @@ void sub_800F02C(void)
         if (gUnknown_02023A00[i].language != 1)
             PadNameString(nickname, 0);
     }
-    memcpy(ewram, gUnknown_02023A00, 0x60);
+    memcpy(gSharedMem, gUnknown_02023A00, 0x60);
 }
 
 void sub_800F104(void)
@@ -534,7 +534,7 @@ void sub_800F104(void)
         if (gReceivedRemoteLinkPlayers != 0 && sub_8007ECC())
         {
             sub_800F02C();
-            SendBlock(bitmask_all_link_players_but_self(), ewram, 0x60);
+            SendBlock(bitmask_all_link_players_but_self(), gSharedMem, 0x60);
             gBattleCommunication[0]++;
         }
         break;
@@ -597,7 +597,7 @@ void sub_800F298(void)
             BATTLE_STRUCT->unk1 = 1;
             sub_800E9EC();
             sub_800EAAC();
-            SendBlock(bitmask_all_link_players_but_self(), ewram, 0x20);
+            SendBlock(bitmask_all_link_players_but_self(), gSharedMem, 0x20);
             gBattleCommunication[0]++;
         }
         break;
@@ -863,7 +863,7 @@ void sub_800F828(struct Sprite *sprite)
 
 void sub_800F838(struct Sprite *sprite)
 {
-    u16 *arr = (u16 *)ewram;
+    u16 *arr = (u16 *)gSharedMem;
 
     switch (sprite->data0)
     {

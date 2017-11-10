@@ -506,7 +506,7 @@ static void ProcessRecvCmds(u8 unusedParam)
         case 0x8888:
             if (sBlockRecv[i].size > BLOCK_BUFFER_SIZE)
             {
-                u16 *buffer = (u16 *)ewram;
+                u16 *buffer = (u16 *)gSharedMem;
                 u16 j;
                 for (j = 0; j < CMD_LENGTH - 1; j++)
                     buffer[(sBlockRecv[i].pos / 2) + j] = gRecvCmds[j + 1][i];

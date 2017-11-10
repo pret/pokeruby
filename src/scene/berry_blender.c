@@ -3710,7 +3710,7 @@ static void sub_80527BC(void)
         gUnknown_020297E0 = 0;
         gUnknown_020297DC = 2;
         for (i = 0; i < 200; i++)
-            ewram[i] = 0;
+            gSharedMem[i] = 0;
         gUnknown_020297E8 = 0;
     }
     for (i = 0; i < 100; i++)
@@ -3719,7 +3719,7 @@ static void sub_80527BC(void)
             gUnknown_020297E0++;
         else
         {
-            u16* ewramPtr = ((u16*)(ewram));
+            u16* ewramPtr = ((u16*)(gSharedMem));
             ewramPtr[gUnknown_020297E4] = gUnknown_020297E0;
             gUnknown_020297E4++;
             gUnknown_020297E0 = 0;

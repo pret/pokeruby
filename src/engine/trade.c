@@ -4000,7 +4000,7 @@ static void sub_804B2D0(u8 whichParty, u8 a1)
         case 0:
             species = GetMonData(pokemon, MON_DATA_SPECIES2);
             personality = GetMonData(pokemon, MON_DATA_PERSONALITY);
-            HandleLoadSpecialPokePic(&gMonFrontPicTable[species], gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset, (u32)ewram, gUnknown_081FAF4C[whichParty * 2 + 1], species, personality);
+            HandleLoadSpecialPokePic(&gMonFrontPicTable[species], gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset, (u32)gSharedMem, gUnknown_081FAF4C[whichParty * 2 + 1], species, personality);
             LoadCompressedObjectPalette(GetMonSpritePalStruct(pokemon));
             gUnknown_03004828->tradeSpecies[whichParty] = species;
             break;
@@ -4727,12 +4727,12 @@ static void sub_804BBE8(u8 a0)
             gUnknown_03004828->bg1hofs = 0;
             REG_BG1CNT = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(5);
             LZDecompressVram(gUnknown_08D00000, BG_CHAR_ADDR(0));
-            CpuCopy16(gUnknown_08D00524, buffer = (u16 *)ewram, 0x1000);
+            CpuCopy16(gUnknown_08D00524, buffer = (u16 *)gSharedMem, 0x1000);
             LoadCompressedPalette(gUnknown_08D004E0, 0x70, 0x20);
             FillPalette(0, 0, 2);
             for (i = 0; i < 0x280; i ++)
                 buffer[i] |= 0x7000;
-            DmaCopy16Defvars(3, ewram, BG_SCREEN_ADDR(5), 0x500);
+            DmaCopy16Defvars(3, gSharedMem, BG_SCREEN_ADDR(5), 0x500);
             MenuZeroFillWindowRect(2, 15, 27, 18);
             break;
         case 6:
@@ -5704,8 +5704,8 @@ void sub_804E22C(void)
     const u16 *src;
     u16 *dest;
     LZDecompressVram(gUnknown_08D00000, (void *)VRAM);
-    CpuCopy16(gUnknown_08D00524, ewram, 0x1000);
-    src = (const u16 *)ewram;
+    CpuCopy16(gUnknown_08D00524, gSharedMem, 0x1000);
+    src = (const u16 *)gSharedMem;
     dest = BG_SCREEN_ADDR(5);
     DmaCopy16(3, src, dest, 0x500)
     LoadCompressedPalette(gUnknown_08D004E0, 0, 32);
