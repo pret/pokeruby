@@ -3,7 +3,7 @@
 
 struct SaveSectionLocation
 {
-    void *data;
+    u8 *data;
     u16 size;
 };
 
@@ -74,7 +74,7 @@ bool8 sub_8125DA8(void);
 u8 sub_8125DDC(void);
 u8 sub_8125E04(void);
 u8 sub_8125E2C(void);
-u8 sub_8125E6C(void);
+bool8 sub_8125E6C(void);
 u8 sub_8125EC8(u8 a1);
 bool8 unref_sub_8125F4C(struct UnkSaveSection *a1);
 u8 unref_sub_8125FA0(void);

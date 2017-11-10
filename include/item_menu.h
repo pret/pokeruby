@@ -3,6 +3,17 @@
 
 #include "string_util.h"
 
+struct PocketScrollState
+{
+    u8 cursorPos;
+    u8 scrollTop;
+    u8 numSlots;
+    u8 cursorMax;
+};
+
+extern struct PocketScrollState gBagPocketScrollStates[];
+extern struct ItemSlot *gCurrentBagPocketItemSlots;
+
 void ResetBagScrollPositions(void);
 void ClearBag(void);
 void sub_80A3E0C(void);

@@ -17,7 +17,7 @@ LilycoveCity_DepartmentStore_2F_EventScript_159F2A:: @ 8159F2A
 	lock
 	faceplayer
 	message LilycoveCity_DepartmentStore_2F_Text_1A0BE4
-	waittext
+	waitmessage
 	pokemart LilycoveCity_DepartmentStore_2F_Items1
 	msgbox LilycoveCity_DepartmentStore_2F_Text_1A0C02, 4
 	release
@@ -44,7 +44,7 @@ LilycoveCity_DepartmentStore_2F_EventScript_159F5E:: @ 8159F5E
 	lock
 	faceplayer
 	message LilycoveCity_DepartmentStore_2F_Text_1A0BE4
-	waittext
+	waitmessage
 	pokemart LilycoveCity_DepartmentStore_2F_Items2
 	msgbox LilycoveCity_DepartmentStore_2F_Text_1A0C02, 4
 	release

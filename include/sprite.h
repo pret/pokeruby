@@ -204,14 +204,14 @@ struct Sprite
     /*0x3A*/ s16 data6;
     /*0x3C*/ s16 data7;
 
-    /*0x3E*/ u16 inUse:1;
-             u16 coordOffsetEnabled:1;
-             u16 invisible:1;
-             u16 flags_3:1;
-             u16 flags_4:1;
-             u16 flags_5:1;
-             u16 flags_6:1;
-             u16 flags_7:1;
+    /*0x3E*/ u16 inUse:1;               //1
+             u16 coordOffsetEnabled:1;  //2
+             u16 invisible:1;           //4
+             u16 flags_3:1;             //8
+             u16 flags_4:1;             //0x10
+             u16 flags_5:1;             //0x20
+             u16 flags_6:1;             //0x40
+             u16 flags_7:1;             //0x80
     /*0x3F*/ u16 hFlip:1;
              u16 vFlip:1;
              u16 animBeginning:1;
@@ -252,12 +252,12 @@ void SetOamMatrix(u8 matrixNum, u16 a, u16 b, u16 c, u16 d);
 void CalcCenterToCornerVec(struct Sprite *sprite, u8 shape, u8 size, u8 affineMode);
 void SpriteCallbackDummy(struct Sprite *sprite);
 void ProcessSpriteCopyRequests(void);
-void RequestSpriteCopy(const u8 *src, u8 *dest, u16 size);
+void RequestSpriteCopy(const void *src, u8 *dest, u16 size);
 void FreeSpriteTiles(struct Sprite *sprite);
 void FreeSpritePalette(struct Sprite *sprite);
 void FreeSpriteOamMatrix(struct Sprite *sprite);
 void DestroySpriteAndFreeResources(struct Sprite *sprite);
-void sub_800142C(u32 a1, u32 a2, u16 *a3, u16 a4, u32 a5);
+void DrawPartyMenuMonText(u32 a1, u32 a2, const u16 *a3, u16 a4, u32 a5);
 void AnimateSprite(struct Sprite *sprite);
 void StartSpriteAnim(struct Sprite *sprite, u8 animNum);
 void StartSpriteAnimIfDifferent(struct Sprite *sprite, u8 animNum);
@@ -298,5 +298,7 @@ void CopyFromSprites(u8 *dest);
 u8 SpriteTileAllocBitmapOp(u16 bit, u8 op);
 
 extern const union AffineAnimCmd *const gDummySpriteAffineAnimTable[];
+
+extern const struct SpriteTemplate gDummySpriteTemplate;
 
 #endif // GUARD_SPRITE_H

@@ -3,9 +3,9 @@ MeteorFalls_1F_2R_MapScripts:: @ 815C678
 
 MeteorFalls_1F_2R_EventScript_15C679:: @ 815C679
 	trainerbattle 0, OPPONENT_NICOLAS_1, 0, MeteorFalls_1F_2R_Text_1939C5, MeteorFalls_1F_2R_Text_193A35
-	specialval RESULT, 57
+	specialvar RESULT, sub_8082C68
 	compare RESULT, 1
-	jumpeq MeteorFalls_1F_2R_EventScript_15C6A0
+	goto_if_eq MeteorFalls_1F_2R_EventScript_15C6A0
 	msgbox MeteorFalls_1F_2R_Text_193A60, 6
 	end
 
@@ -16,9 +16,9 @@ MeteorFalls_1F_2R_EventScript_15C6A0:: @ 815C6A0
 
 MeteorFalls_1F_2R_EventScript_15C6B7:: @ 815C6B7
 	trainerbattle 4, OPPONENT_JOHN_AND_JAY_1, 0, MeteorFalls_1F_2R_Text_193BB7, MeteorFalls_1F_2R_Text_193C10, MeteorFalls_1F_2R_Text_193C9F
-	specialval RESULT, 57
+	specialvar RESULT, sub_8082C68
 	compare RESULT, 1
-	jumpeq MeteorFalls_1F_2R_EventScript_15C6E2
+	goto_if_eq MeteorFalls_1F_2R_EventScript_15C6E2
 	msgbox MeteorFalls_1F_2R_Text_193C35, 6
 	end
 
@@ -29,9 +29,9 @@ MeteorFalls_1F_2R_EventScript_15C6E2:: @ 815C6E2
 
 MeteorFalls_1F_2R_EventScript_15C6FD:: @ 815C6FD
 	trainerbattle 4, OPPONENT_JOHN_AND_JAY_1, 0, MeteorFalls_1F_2R_Text_193D10, MeteorFalls_1F_2R_Text_193D6E, MeteorFalls_1F_2R_Text_193DFB
-	specialval RESULT, 57
+	specialvar RESULT, sub_8082C68
 	compare RESULT, 1
-	jumpeq MeteorFalls_1F_2R_EventScript_15C728
+	goto_if_eq MeteorFalls_1F_2R_EventScript_15C728
 	msgbox MeteorFalls_1F_2R_Text_193D9A, 6
 	end
 

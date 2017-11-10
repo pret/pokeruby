@@ -4212,7 +4212,7 @@ _080E812C:
 	mov r2, r8
 	strb r2, [r0]
 	adds r0, 0x1
-	ldr r1, _080E81A4 @ =0x083e7686
+	ldr r1, _080E81A4 @ =gBerryMasterWifePhrases + 0x2
 	adds r4, r1
 	ldrh r1, [r4]
 	movs r2, 0
@@ -4246,7 +4246,7 @@ _080E818A:
 _080E8198: .4byte 0x0200b19a
 _080E819C: .4byte 0xffff5e66
 _080E81A0: .4byte gBerryMasterWifePhrases
-_080E81A4: .4byte 0x083e7686
+_080E81A4: .4byte gBerryMasterWifePhrases + 0x2
 _080E81A8:
 	lsls r0, r4, 16
 	lsrs r5, r0, 16
@@ -9984,7 +9984,7 @@ _080EAE50:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0
-	bl GetNationalPokedexFlag
+	bl GetSetPokedexFlag
 	b _080EAE7C
 _080EAE62:
 	ldr r0, _080EAE74 @ =gUnknown_083DB694
@@ -10800,106 +10800,5 @@ _080EB45A:
 	pop {r1}
 	bx r1
 	thumb_func_end de_sub_80EB748
-
-	thumb_func_start sub_80EB3FC
-sub_80EB3FC: @ 80EB4B4
-	push {r4-r7,lr}
-	adds r5, r0, 0
-	lsls r6, r1, 16
-	lsrs r4, r6, 16
-	adds r7, r4, 0
-	adds r0, r4, 0
-	bl sub_80EB37C
-	lsls r0, 24
-	cmp r0, 0
-	beq _080EB4D8
-	ldr r1, _080EB4D4 @ =gOtherText_ThreeQuestions
-	adds r0, r5, 0
-	bl StringCopy
-	b _080EB55E
-	.align 2, 0
-_080EB4D4: .4byte gOtherText_ThreeQuestions
-_080EB4D8:
-	ldr r0, _080EB4F4 @ =0x0000ffff
-	cmp r4, r0
-	beq _080EB558
-	lsrs r1, r6, 25
-	ldr r2, _080EB4F8 @ =0x000001ff
-	ands r2, r7
-	cmp r1, 0x13
-	bgt _080EB4FC
-	cmp r1, 0x12
-	bge _080EB510
-	cmp r1, 0
-	beq _080EB500
-	b _080EB520
-	.align 2, 0
-_080EB4F4: .4byte 0x0000ffff
-_080EB4F8: .4byte 0x000001ff
-_080EB4FC:
-	cmp r1, 0x15
-	bne _080EB520
-_080EB500:
-	movs r0, 0xB
-	adds r1, r2, 0
-	muls r1, r0
-	ldr r0, _080EB50C @ =gSpeciesNames
-	adds r1, r0
-	b _080EB550
-	.align 2, 0
-_080EB50C: .4byte gSpeciesNames
-_080EB510:
-	movs r0, 0xD
-	adds r1, r2, 0
-	muls r1, r0
-	ldr r0, _080EB51C @ =gMoveNames
-	adds r1, r0
-	b _080EB550
-	.align 2, 0
-_080EB51C: .4byte gMoveNames
-_080EB520:
-	ldr r0, _080EB564 @ =gEasyChatGroupWords
-	lsls r1, 2
-	adds r1, r0
-	ldr r1, [r1]
-	subs r0, r2, 0x1
-	lsls r0, 16
-	lsrs r2, r0, 16
-	ldr r0, _080EB568 @ =0x0000ffff
-	cmp r2, r0
-	beq _080EB550
-	adds r3, r0, 0
-_080EB536:
-	ldrb r0, [r1]
-	adds r1, 0x1
-	subs r2, 0x1
-	cmp r0, 0xFF
-	beq _080EB548
-_080EB540:
-	ldrb r0, [r1]
-	adds r1, 0x1
-	cmp r0, 0xFF
-	bne _080EB540
-_080EB548:
-	lsls r0, r2, 16
-	lsrs r2, r0, 16
-	cmp r2, r3
-	bne _080EB536
-_080EB550:
-	adds r0, r5, 0
-	bl StringCopy
-	adds r5, r0, 0
-_080EB558:
-	movs r0, 0xFF
-	strb r0, [r5]
-	adds r0, r5, 0
-_080EB55E:
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_080EB564: .4byte gEasyChatGroupWords
-_080EB568: .4byte 0x0000ffff
-	thumb_func_end sub_80EB3FC
 
 	.align 2, 0 @ Don't pad with nop.

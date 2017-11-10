@@ -4,7 +4,7 @@ RustboroCity_DevonCorp_2F_MapScripts:: @ 81574CA
 
 RustboroCity_DevonCorp_2F_MapScript1_1574D0:: @ 81574D0
 	compare 0x40c4, 1
-	callif 1, RustboroCity_DevonCorp_2F_EventScript_1574DC
+	call_if 1, RustboroCity_DevonCorp_2F_EventScript_1574DC
 	end
 
 RustboroCity_DevonCorp_2F_EventScript_1574DC:: @ 81574DC
@@ -15,7 +15,7 @@ RustboroCity_DevonCorp_2F_EventScript_1574E2:: @ 81574E2
 	lock
 	faceplayer
 	compare 0x40c4, 1
-	callif 1, RustboroCity_DevonCorp_2F_EventScript_1574DC
+	call_if 1, RustboroCity_DevonCorp_2F_EventScript_1574DC
 	msgbox RustboroCity_DevonCorp_2F_Text_182B81, 4
 	release
 	end
@@ -24,9 +24,9 @@ RustboroCity_DevonCorp_2F_EventScript_1574F9:: @ 81574F9
 	lock
 	faceplayer
 	compare 0x40c4, 1
-	callif 1, RustboroCity_DevonCorp_2F_EventScript_1574DC
+	call_if 1, RustboroCity_DevonCorp_2F_EventScript_1574DC
 	checkflag 287
-	jumpeq RustboroCity_DevonCorp_2F_EventScript_157519
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_157519
 	msgbox RustboroCity_DevonCorp_2F_Text_182BD8, 4
 	release
 	end
@@ -40,9 +40,9 @@ RustboroCity_DevonCorp_2F_EventScript_157523:: @ 8157523
 	lock
 	faceplayer
 	compare 0x40c4, 1
-	callif 1, RustboroCity_DevonCorp_2F_EventScript_1574DC
+	call_if 1, RustboroCity_DevonCorp_2F_EventScript_1574DC
 	checkflag 188
-	jumpeq RustboroCity_DevonCorp_2F_EventScript_157543
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_157543
 	msgbox RustboroCity_DevonCorp_2F_Text_182D2A, 4
 	release
 	end
@@ -56,7 +56,7 @@ RustboroCity_DevonCorp_2F_EventScript_15754D:: @ 815754D
 	lock
 	faceplayer
 	compare 0x40c4, 1
-	callif 1, RustboroCity_DevonCorp_2F_EventScript_1574DC
+	call_if 1, RustboroCity_DevonCorp_2F_EventScript_1574DC
 	msgbox RustboroCity_DevonCorp_2F_Text_182E6B, 4
 	release
 	end
@@ -65,30 +65,30 @@ RustboroCity_DevonCorp_2F_EventScript_157564:: @ 8157564
 	lock
 	faceplayer
 	compare 0x40c4, 2
-	jumpeq RustboroCity_DevonCorp_2F_EventScript_15764A
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_15764A
 	compare 0x40c4, 1
-	jumpeq RustboroCity_DevonCorp_2F_EventScript_157640
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_157640
 	msgbox RustboroCity_DevonCorp_2F_Text_182ED5, 4
 	checkitem ITEM_ROOT_FOSSIL, 1
 	compare RESULT, 1
-	jumpeq RustboroCity_DevonCorp_2F_EventScript_1575A6
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_1575A6
 	checkitem ITEM_CLAW_FOSSIL, 1
 	compare RESULT, 1
-	jumpeq RustboroCity_DevonCorp_2F_EventScript_1575EE
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_1575EE
 	release
 	end
 
 RustboroCity_DevonCorp_2F_EventScript_1575A6:: @ 81575A6
-	closebutton
-	playsfx 21
-	move 5, RustboroCity_DevonCorp_2F_Movement_1A0833
-	waitmove 0
-	move 5, RustboroCity_DevonCorp_2F_Movement_1A0835
-	waitmove 0
+	closemessage
+	playse 21
+	applymovement 5, RustboroCity_DevonCorp_2F_Movement_1A0833
+	waitmovement 0
+	applymovement 5, RustboroCity_DevonCorp_2F_Movement_1A0835
+	waitmovement 0
 	msgbox RustboroCity_DevonCorp_2F_Text_182F35, 5
 	compare RESULT, 0
-	jumpeq RustboroCity_DevonCorp_2F_EventScript_157636
-	bufferitem 0, ITEM_ROOT_FOSSIL
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_157636
+	getitemname 0, ITEM_ROOT_FOSSIL
 	msgbox RustboroCity_DevonCorp_2F_Text_183023, 4
 	removeitem ITEM_ROOT_FOSSIL, 1
 	setvar 0x40c4, 1
@@ -97,16 +97,16 @@ RustboroCity_DevonCorp_2F_EventScript_1575A6:: @ 81575A6
 	end
 
 RustboroCity_DevonCorp_2F_EventScript_1575EE:: @ 81575EE
-	closebutton
-	playsfx 21
-	move 5, RustboroCity_DevonCorp_2F_Movement_1A0833
-	waitmove 0
-	move 5, RustboroCity_DevonCorp_2F_Movement_1A0835
-	waitmove 0
+	closemessage
+	playse 21
+	applymovement 5, RustboroCity_DevonCorp_2F_Movement_1A0833
+	waitmovement 0
+	applymovement 5, RustboroCity_DevonCorp_2F_Movement_1A0835
+	waitmovement 0
 	msgbox RustboroCity_DevonCorp_2F_Text_182F35, 5
 	compare RESULT, 0
-	jumpeq RustboroCity_DevonCorp_2F_EventScript_157636
-	bufferitem 0, ITEM_CLAW_FOSSIL
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_157636
+	getitemname 0, ITEM_CLAW_FOSSIL
 	msgbox RustboroCity_DevonCorp_2F_Text_183023, 4
 	removeitem ITEM_CLAW_FOSSIL, 1
 	setvar 0x40c4, 1
@@ -126,48 +126,48 @@ RustboroCity_DevonCorp_2F_EventScript_157640:: @ 8157640
 
 RustboroCity_DevonCorp_2F_EventScript_15764A:: @ 815764A
 	compare 0x40c5, 1
-	jumpeq RustboroCity_DevonCorp_2F_EventScript_157661
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_157661
 	compare 0x40c5, 2
-	jumpeq RustboroCity_DevonCorp_2F_EventScript_1576B4
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_1576B4
 	end
 
 RustboroCity_DevonCorp_2F_EventScript_157661:: @ 8157661
-	bufferpoke 1, SPECIES_LILEEP
+	getspeciesname 1, SPECIES_LILEEP
 	msgbox RustboroCity_DevonCorp_2F_Text_183124, 4
 	countpokemon
 	compare RESULT, 6
-	jumpeq RustboroCity_DevonCorp_2F_EventScript_157707
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_157707
 	copyvar 0x8004, RESULT
 	setvar 0x40c4, 0
 	setflag 267
-	fanfare 370
+	playfanfare 370
 	message RustboroCity_DevonCorp_2F_Text_18319E
 	waitfanfare
-	waittext
-	givepokemon SPECIES_LILEEP, 20, ITEM_NONE, 0x0, 0x0, 0
+	waitmessage
+	givepoke SPECIES_LILEEP, 20, ITEM_NONE, 0x0, 0x0, 0
 	msgbox RustboroCity_DevonCorp_2F_Text_1A1102, 5
 	compare RESULT, 1
-	callif 1, RustboroCity_DevonCorp_2F_EventScript_1A0678
+	call_if 1, RustboroCity_DevonCorp_2F_EventScript_1A0678
 	release
 	end
 
 RustboroCity_DevonCorp_2F_EventScript_1576B4:: @ 81576B4
-	bufferpoke 1, SPECIES_ANORITH
+	getspeciesname 1, SPECIES_ANORITH
 	msgbox RustboroCity_DevonCorp_2F_Text_183124, 4
 	countpokemon
 	compare RESULT, 6
-	jumpeq RustboroCity_DevonCorp_2F_EventScript_157707
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_157707
 	copyvar 0x8004, RESULT
 	setvar 0x40c4, 0
 	setflag 267
-	fanfare 370
+	playfanfare 370
 	message RustboroCity_DevonCorp_2F_Text_18319E
 	waitfanfare
-	waittext
-	givepokemon SPECIES_ANORITH, 20, ITEM_NONE, 0x0, 0x0, 0
+	waitmessage
+	givepoke SPECIES_ANORITH, 20, ITEM_NONE, 0x0, 0x0, 0
 	msgbox RustboroCity_DevonCorp_2F_Text_1A1102, 5
 	compare RESULT, 1
-	callif 1, RustboroCity_DevonCorp_2F_EventScript_1A0678
+	call_if 1, RustboroCity_DevonCorp_2F_EventScript_1A0678
 	release
 	end
 

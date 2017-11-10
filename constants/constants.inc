@@ -14,7 +14,6 @@
 	.include "constants/map_constants.inc"
 	.include "constants/berry_constants.inc"
 	.include "constants/map_object_constants.inc"
-	.include "constants/battle_tower_constants.inc"
 	.include "constants/opponent_constants.inc"
 	.include "constants/decorations.inc"
 	.include "constants/songs.inc"

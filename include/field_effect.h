@@ -109,6 +109,8 @@ void SpriteCB_PokeballGlow(struct Sprite *);
 void SpriteCB_PokecenterMonitor(struct Sprite *);
 void SpriteCB_HallOfFameMonitor(struct Sprite *);
 
+void sub_80865BC(void);
+
 void PokecenterHealEffect_0(struct Task *);
 void PokecenterHealEffect_1(struct Task *);
 void PokecenterHealEffect_2(struct Task *);
@@ -128,6 +130,8 @@ void PokeballGlowEffect_5(struct Sprite *);
 void PokeballGlowEffect_6(struct Sprite *);
 void PokeballGlowEffect_7(struct Sprite *);
 
+void sub_8086748(void);
+
 bool8 sub_80867AC(struct Task *);
 bool8 sub_8086854(struct Task *);
 bool8 sub_8086870(struct Task *);
@@ -135,6 +139,8 @@ bool8 sub_80868E4(struct Task *);
 bool8 sub_808699C(struct Task *);
 bool8 sub_80869B8(struct Task *);
 bool8 sub_80869F8(struct Task *);
+
+void sub_8086A2C(u8, u8);
 
 bool8 sub_8086AA0(struct Task *);
 bool8 sub_8086AC0(struct Task *);
@@ -161,6 +167,8 @@ bool8 sub_8087124(struct Task *);
 bool8 dive_2_unknown(struct Task *);
 bool8 dive_3_unknown(struct Task *);
 
+void sub_80871B8(u8);
+
 bool8 sub_808722C(struct Task *, struct MapObject *, struct Sprite *);
 bool8 sub_8087264(struct Task *, struct MapObject *, struct Sprite *);
 bool8 sub_8087298(struct Task *, struct MapObject *, struct Sprite *);
@@ -172,6 +180,8 @@ bool8 sub_80874CC(struct Task *, struct MapObject *, struct Sprite *);
 bool8 sub_80874FC(struct Task *, struct MapObject *, struct Sprite *);
 bool8 sub_8087548(struct Task *, struct MapObject *, struct Sprite *);
 bool8 sub_808759C(struct Task *, struct MapObject *, struct Sprite *);
+
+void sub_8087654(u8);
 
 bool8 sub_80876C8(struct Task *, struct MapObject *, struct Sprite *);
 bool8 sub_80876F8(struct Task *, struct MapObject *, struct Sprite *);
@@ -234,7 +244,7 @@ void sub_808948C(struct Task *);
 void sub_80894C4(struct Task *);
 void fishE(struct Task *);
 
-u8 CreateTrainerSprite_BirchSpeech(u8 gender, s16 x, s16 y, u8 subpriority, u8 *buffer);
+u8 CreateTrainerSprite(u8 trainerSpriteID, s16 x, s16 y, u8 subpriority, u8 *buffer);
 void LoadTrainerGfx_TrainerCard(u8 gender, u16 palOffset, u8 *dest);
 u8 CreateBirchSprite(s16 x, s16 y, u8 subpriority);
 u8 CreateMonSprite_PicBox(u16, s16, s16, u8);
@@ -242,5 +252,7 @@ void FreeResourcesAndDestroySprite(struct Sprite *sprite);
 void MultiplyInvertedPaletteRGBComponents(u16, u8, u8, u8);
 void sub_80878A8(void);
 void sub_8087BA8(void);
+
+extern u32 gFieldEffectArguments[8];
 
 #endif // GUARD_FIELD_EFFECT_H

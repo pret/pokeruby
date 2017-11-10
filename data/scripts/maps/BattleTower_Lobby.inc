@@ -6,30 +6,30 @@ BattleTower_Lobby_MapScripts:: @ 816027E
 	.byte 0
 
 BattleTower_Lobby_MapScript1_160293:: @ 8160293
-	special 338
+	special sub_813610C
 	call BattleTower_Lobby_EventScript_16029C
 	end
 
 BattleTower_Lobby_EventScript_16029C:: @ 816029C
 	setvar 0x8004, 10
-	special 237
+	special sub_8135668
 	checkflag 238
-	jumpeq BattleTower_Lobby_EventScript_1602E4
+	goto_if_eq BattleTower_Lobby_EventScript_1602E4
 	checkflag 237
-	jumpeq BattleTower_Lobby_EventScript_1602CD
-	specialval 0x8007, 247
+	goto_if_eq BattleTower_Lobby_EventScript_1602CD
+	specialvar 0x8007, sub_810F404
 	compare 0x8007, 50
-	jumpif 0, BattleTower_Lobby_EventScript_1602E4
+	goto_if 0, BattleTower_Lobby_EventScript_1602E4
 	clearflag 941
-	special 329
+	special sub_810F8FC
 	return
 
 BattleTower_Lobby_EventScript_1602CD:: @ 81602CD
-	specialval 0x8007, 247
+	specialvar 0x8007, sub_810F404
 	compare 0x8007, 100
-	jumpif 0, BattleTower_Lobby_EventScript_1602E4
+	goto_if 0, BattleTower_Lobby_EventScript_1602E4
 	clearflag 941
-	special 329
+	special sub_810F8FC
 	return
 
 BattleTower_Lobby_EventScript_1602E4:: @ 81602E4
@@ -46,7 +46,7 @@ BattleTower_Lobby_MapScript2_1602EE:: @ 81602EE
 
 BattleTower_Lobby_EventScript_1602F8:: @ 81602F8
 	setvar 0x4001, 1
-	spriteface 255, 2
+	turnobject 255, 2
 	end
 
 BattleTower_Lobby_MapScript2_160302:: @ 8160302
@@ -58,14 +58,14 @@ BattleTower_Lobby_MapScript2_160302:: @ 8160302
 	.2byte 0
 
 BattleTower_Lobby_EventScript_16032C:: @ 816032C
-	special 231
+	special sub_8134548
 	end
 
 BattleTower_Lobby_EventScript_160330:: @ 8160330
 	lock
 	faceplayer
 	msgbox BattleTower_Lobby_Text_19A3FD, 4
-	closebutton
+	closemessage
 	setvar 0x4000, 5
 	release
 	end
@@ -74,65 +74,65 @@ BattleTower_Lobby_EventScript_160342:: @ 8160342
 	lock
 	faceplayer
 	message BattleTower_Lobby_Text_19A487
-	waittext
+	waitmessage
 	setvar 0x8004, 0
-	special 238
+	special sub_81358A4
 	compare RESULT, 6
-	jumpeq BattleTower_Lobby_EventScript_16037D
-	special 244
+	goto_if_eq BattleTower_Lobby_EventScript_16037D
+	special AwardBattleTowerRibbons
 	compare RESULT, 0
-	jumpeq BattleTower_Lobby_EventScript_16037D
+	goto_if_eq BattleTower_Lobby_EventScript_16037D
 	message BattleTower_Lobby_Text_19A6BE
-	waittext
-	fanfare 370
+	waitmessage
+	playfanfare 370
 	waitfanfare
 	msgbox BattleTower_Lobby_Text_19A719, 4
 
 BattleTower_Lobby_EventScript_16037D:: @ 816037D
 	setvar 0x8004, 8
-	special 238
+	special sub_81358A4
 	compare RESULT, 1
-	jumpeq BattleTower_Lobby_EventScript_1603AD
+	goto_if_eq BattleTower_Lobby_EventScript_1603AD
 	message BattleTower_Lobby_Text_19A589
-	waittext
+	waitmessage
 	setvar 0x8004, 13
-	special 237
-	special 242
+	special sub_8135668
+	special DetermineBattleTowerPrize
 	setvar 0x8004, 3
-	special 240
-	playsfx 55
-	checksound
+	special sub_8135BA0
+	playse 55
+	waitse
 
 BattleTower_Lobby_EventScript_1603AD:: @ 81603AD
 	setvar 0x8004, 0
 	setvar 0x8005, 3
-	special 237
+	special sub_8135668
 	message BattleTower_Lobby_Text_19A4BB
-	waittext
-	special 243
+	waitmessage
+	special GiveBattleTowerPrize
 	switch RESULT
 	case 0, BattleTower_Lobby_EventScript_160408
 	message BattleTower_Lobby_Text_19A506
-	waittext
-	fanfare 370
+	waitmessage
+	playfanfare 370
 	waitfanfare
 	setvar 0x8004, 9
-	special 238
+	special sub_81358A4
 	compare RESULT, 49
-	jumpif 5, BattleTower_Lobby_EventScript_1603F8
+	goto_if 5, BattleTower_Lobby_EventScript_1603F8
 	msgbox BattleTower_Lobby_Text_19A617, 4
 
 BattleTower_Lobby_EventScript_1603F8:: @ 81603F8
 	msgbox BattleTower_Lobby_Text_199FA9, 4
-	closebutton
+	closemessage
 	setvar 0x4000, 5
 	release
 	end
 
 BattleTower_Lobby_EventScript_160408:: @ 8160408
 	msgbox BattleTower_Lobby_Text_19A520, 4
-	waittext
-	closebutton
+	waitmessage
+	closemessage
 	setvar 0x4000, 5
 	release
 	end
@@ -141,17 +141,17 @@ BattleTower_Lobby_EventScript_160419:: @ 8160419
 	lock
 	faceplayer
 	message BattleTower_Lobby_Text_19A571
-	waittext
+	waitmessage
 	message BattleTower_Lobby_Text_19A589
-	waittext
+	waitmessage
 	setvar 0x8004, 13
-	special 237
+	special sub_8135668
 	setvar 0x8004, 0
-	special 240
-	playsfx 55
-	checksound
+	special sub_8135BA0
+	playse 55
+	waitse
 	msgbox BattleTower_Lobby_Text_199FA9, 4
-	closebutton
+	closemessage
 	setvar 0x4000, 5
 	release
 	end
@@ -161,21 +161,21 @@ BattleTower_Lobby_EventScript_16044B:: @ 816044B
 	faceplayer
 	setvar 0x40bc, 1
 	message BattleTower_Lobby_Text_19A5B1
-	waittext
+	waitmessage
 	message BattleTower_Lobby_Text_19A5CE
-	waittext
+	waitmessage
 	setvar 0x8004, 1
-	special 240
-	playsfx 55
-	checksound
+	special sub_8135BA0
+	playse 55
+	waitse
 	setvar 0x8004, 8
 	setvar 0x8005, 0
-	special 237
+	special sub_8135668
 	setvar 0x4000, 5
-	special 39
-	special 239
+	special SavePlayerParty
+	special sub_8135A14
 	msgbox BattleTower_Lobby_Text_19A0A8, 4
-	closebutton
+	closemessage
 	call BattleTower_Lobby_EventScript_160664
 	warp BattleTower_Elevator, 255, 1, 6
 	setvar 0x4000, 0
@@ -185,15 +185,15 @@ BattleTower_Lobby_EventScript_16049E:: @ 816049E
 	lock
 	faceplayer
 	setvar 0x8004, 0
-	special 238
+	special sub_81358A4
 	compare RESULT, 6
-	jumpeq BattleTower_Lobby_EventScript_160342
-	special 39
+	goto_if_eq BattleTower_Lobby_EventScript_160342
+	special SavePlayerParty
 	msgbox BattleTower_Lobby_Text_199F2C, 4
 
 BattleTower_Lobby_EventScript_1604BE:: @ 81604BE
 	message BattleTower_Lobby_Text_199F79
-	waittext
+	waitmessage
 	multichoice 15, 6, 23, 0
 	switch RESULT
 	case 0, BattleTower_Lobby_EventScript_1604FA
@@ -203,24 +203,24 @@ BattleTower_Lobby_EventScript_1604BE:: @ 81604BE
 
 BattleTower_Lobby_EventScript_1604FA:: @ 81604FA
 	message BattleTower_Lobby_Text_19A024
-	waittext
+	waitmessage
 	multichoice 18, 6, 24, 0
 	switch RESULT
 	case 2, BattleTower_Lobby_EventScript_160652
 	case 127, BattleTower_Lobby_EventScript_160652
-	special 233
+	special CheckPartyBattleTowerBanlist
 	compare 0x8004, 1
-	jumpeq BattleTower_Lobby_EventScript_16060D
+	goto_if_eq BattleTower_Lobby_EventScript_16060D
 	setvar 0x8004, 1
 	copyvar 0x8005, RESULT
 	copyvar 0x8006, RESULT
-	special 237
+	special sub_8135668
 	msgbox BattleTower_Lobby_Text_19A07B, 4
 	fadescreen 1
-	special 245
+	special ChooseBattleTowerPlayerParty
 	waitstate
 	compare RESULT, 0
-	jumpeq BattleTower_Lobby_EventScript_16064F
+	goto_if_eq BattleTower_Lobby_EventScript_16064F
 	msgbox BattleTower_Lobby_Text_199FDA, 5
 	switch RESULT
 	case 0, BattleTower_Lobby_EventScript_16064F
@@ -229,30 +229,30 @@ BattleTower_Lobby_EventScript_1604FA:: @ 81604FA
 
 BattleTower_Lobby_EventScript_160587:: @ 8160587
 	setvar 0x8004, 5
-	special 237
+	special sub_8135668
 	setvar 0x4000, 0
 	setvar 0x8004, 11
-	special 237
+	special sub_8135668
 	setvar 0x8004, 0
 	setvar 0x8005, 1
-	special 237
+	special sub_8135668
 	setvar 0x8004, 8
 	setvar 0x8005, 0
-	special 237
-	special 40
-	closebutton
-	pause 2
-	call BattleTower_Lobby_EventScript_19F806
+	special sub_8135668
+	special LoadPlayerParty
+	closemessage
+	delay 2
+	call S_DoSaveDialog
 	setvar 0x4000, 5
-	hidebox 0, 0, 15, 10
+	erasebox 0, 0, 15, 10
 	compare RESULT, 0
-	jumpeq BattleTower_Lobby_EventScript_160642
-	inccounter GAME_STAT_ENTERED_BATTLE_TOWER
-	special 39
-	special 239
+	goto_if_eq BattleTower_Lobby_EventScript_160642
+	incrementgamestat GAME_STAT_ENTERED_BATTLE_TOWER
+	special SavePlayerParty
+	special sub_8135A14
 	setvar 0x40bc, 1
 	msgbox BattleTower_Lobby_Text_19A0A8, 4
-	closebutton
+	closemessage
 	call BattleTower_Lobby_EventScript_160664
 	warp BattleTower_Elevator, 255, 1, 6
 	setvar 0x4000, 0
@@ -260,7 +260,7 @@ BattleTower_Lobby_EventScript_160587:: @ 8160587
 
 BattleTower_Lobby_EventScript_160600:: @ 8160600
 	msgbox BattleTower_Lobby_Text_19A0D1, 4
-	jump BattleTower_Lobby_EventScript_1604BE
+	goto BattleTower_Lobby_EventScript_1604BE
 
 BattleTower_Lobby_EventScript_16060D:: @ 816060D
 	switch RESULT
@@ -269,40 +269,40 @@ BattleTower_Lobby_EventScript_16060D:: @ 816060D
 
 BattleTower_Lobby_EventScript_160628:: @ 8160628
 	msgbox BattleTower_Lobby_Text_19A249, 4
-	jump BattleTower_Lobby_EventScript_160662
+	goto BattleTower_Lobby_EventScript_160662
 
 BattleTower_Lobby_EventScript_160635:: @ 8160635
 	msgbox BattleTower_Lobby_Text_19A32D, 4
-	jump BattleTower_Lobby_EventScript_160662
+	goto BattleTower_Lobby_EventScript_160662
 
 BattleTower_Lobby_EventScript_160642:: @ 8160642
 	setvar 0x8004, 12
-	special 237
-	jump BattleTower_Lobby_EventScript_160652
+	special sub_8135668
+	goto BattleTower_Lobby_EventScript_160652
 
 BattleTower_Lobby_EventScript_16064F:: @ 816064F
-	special 40
+	special LoadPlayerParty
 
 BattleTower_Lobby_EventScript_160652:: @ 8160652
 	msgbox BattleTower_Lobby_Text_199FA9, 4
 	setvar 0x8004, 11
-	special 237
+	special sub_8135668
 
 BattleTower_Lobby_EventScript_160662:: @ 8160662
 	release
 	end
 
 BattleTower_Lobby_EventScript_160664:: @ 8160664
-	move 1, BattleTower_Lobby_Movement_160693
-	move 255, BattleTower_Lobby_Movement_160693
-	waitmove 0
-	setdooropened 6, 1
-	doorchange
-	move 1, BattleTower_Lobby_Movement_160697
-	move 255, BattleTower_Lobby_Movement_16069A
-	waitmove 0
-	setdoorclosed 6, 1
-	doorchange
+	applymovement 1, BattleTower_Lobby_Movement_160693
+	applymovement 255, BattleTower_Lobby_Movement_160693
+	waitmovement 0
+	opendoor 6, 1
+	waitdooranim
+	applymovement 1, BattleTower_Lobby_Movement_160697
+	applymovement 255, BattleTower_Lobby_Movement_16069A
+	waitmovement 0
+	closedoor 6, 1
+	waitdooranim
 	return
 
 BattleTower_Lobby_Movement_160693:: @ 8160693
@@ -348,9 +348,9 @@ BattleTower_Lobby_EventScript_1606CC:: @ 81606CC
 	lock
 	faceplayer
 	compare RESULT, 0
-	jumpeq BattleTower_Lobby_EventScript_160701
+	goto_if_eq BattleTower_Lobby_EventScript_160701
 	compare RESULT, 1
-	jumpeq BattleTower_Lobby_EventScript_16070B
+	goto_if_eq BattleTower_Lobby_EventScript_16070B
 	end
 
 BattleTower_Lobby_EventScript_1606F7:: @ 81606F7
@@ -378,9 +378,9 @@ BattleTower_Lobby_EventScript_16071E:: @ 816071E
 
 BattleTower_Lobby_EventScript_160727:: @ 8160727
 	lockall
-	special 283
+	special ShowBattleTowerRecords
 	waitbutton
-	hidebox 0, 0, 29, 19
+	erasebox 0, 0, 29, 19
 	releaseall
 	end
 
@@ -388,35 +388,35 @@ BattleTower_Lobby_EventScript_160733:: @ 8160733
 	lock
 	faceplayer
 	checkflag 238
-	jumpeq BattleTower_Lobby_EventScript_1607C5
+	goto_if_eq BattleTower_Lobby_EventScript_1607C5
 	checkflag 237
-	jumpeq BattleTower_Lobby_EventScript_160773
+	goto_if_eq BattleTower_Lobby_EventScript_160773
 	msgbox BattleTower_Lobby_Text_19A9EE, 4
 	setvar 0x8008, 42
 	givedecoration 42
 	compare RESULT, 0
-	jumpeq BattleTower_Lobby_EventScript_1607AF
+	goto_if_eq BattleTower_Lobby_EventScript_1607AF
 	setflag 237
 	msgbox BattleTower_Lobby_Text_19ABAA, 4
 	release
 	end
 
 BattleTower_Lobby_EventScript_160773:: @ 8160773
-	specialval RESULT, 247
+	specialvar RESULT, sub_810F404
 	compare RESULT, 100
-	jumpif 0, BattleTower_Lobby_EventScript_1607C5
+	goto_if 0, BattleTower_Lobby_EventScript_1607C5
 	msgbox BattleTower_Lobby_Text_19AAC4, 4
 	setvar 0x8008, 43
 	givedecoration 43
 	compare RESULT, 0
-	jumpeq BattleTower_Lobby_EventScript_1607AF
+	goto_if_eq BattleTower_Lobby_EventScript_1607AF
 	setflag 238
 	msgbox BattleTower_Lobby_Text_19ABAA, 4
 	release
 	end
 
 BattleTower_Lobby_EventScript_1607AF:: @ 81607AF
-	bufferdecor 1, 0x8008
+	getdecorname 1, 0x8008
 	msgbox BattleTower_Lobby_Text_1A0CEF, 4
 	msgbox BattleTower_Lobby_Text_19ABED, 4
 	release

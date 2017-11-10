@@ -14,16 +14,16 @@ enum
 // map types
 enum
 {
-    MAP_TYPE_0,
-    MAP_TYPE_TOWN,
-    MAP_TYPE_CITY,
-    MAP_TYPE_ROUTE,
-    MAP_TYPE_UNDERGROUND,
-    MAP_TYPE_UNDERWATER,
-    MAP_TYPE_6,
-    MAP_TYPE_7,
-    MAP_TYPE_INDOOR,
-    MAP_TYPE_SECRET_BASE
+    MAP_TYPE_0,             // 0
+    MAP_TYPE_TOWN,          // 1
+    MAP_TYPE_CITY,          // 2
+    MAP_TYPE_ROUTE,         // 3
+    MAP_TYPE_UNDERGROUND,   // 4
+    MAP_TYPE_UNDERWATER,    // 5
+    MAP_TYPE_6,             // 6
+    MAP_TYPE_7,             // 7
+    MAP_TYPE_INDOOR,        // 8
+    MAP_TYPE_SECRET_BASE    // 9
 };
 
 // map battle scenes
@@ -111,11 +111,11 @@ struct CoordEvent
 
 struct BgEvent
 {
-    u16 x, y;
-    u8 unk4;
-    u8 kind;
-    // 0x2 padding for the union beginning.
-    union { // carried over from diego's FR/LG work, seems to be the same struct
+    /*0x00*/u16 x;
+    /*0x02*/u16 y;
+    /*0x04*/u8 unk4;
+    /*0x05*/u8 kind;
+    /*0x08*/union { // carried over from diego's FR/LG work, seems to be the same struct
         // in gen 3, "kind" (0x3 in BgEvent struct) determines the method to read the union.
         u8 *script;
 
@@ -166,7 +166,7 @@ struct MapHeader
     /* 0x0C */ struct MapConnections *connections;
     /* 0x10 */ u16 music;
     /* 0x12 */ u16 mapDataId;
-    /* 0x14 */ u8 name;
+    /* 0x14 */ u8 regionMapSectionId;
     /* 0x15 */ u8 cave;
     /* 0x16 */ u8 weather;
     /* 0x17 */ u8 mapType;
@@ -353,25 +353,42 @@ enum
     COLLISION_LEDGE_JUMP = 6
 };
 
+// player running states
+enum
+{
+    NOT_MOVING,
+    TURN_DIRECTION, // not the same as turning! turns your avatar without moving. also known as a turn frame in some circles
+    MOVING,
+};
+
+// player tile transition states
+enum
+{
+    T_NOT_MOVING,
+    T_TILE_TRANSITION,
+    T_TILE_CENTER, // player is on a frame in which they are centered on a tile during which the player either stops or keeps their momentum and keeps going, changing direction if necessary.
+};
+
 struct PlayerAvatar /* 0x202E858 */
 {
     /*0x00*/ u8 flags;
-    /*0x01*/ u8 bike;
-    /*0x02*/ u8 running2;
-    /*0x03*/ u8 running1;
+    /*0x01*/ u8 unk1; // used to be named bike, but its definitely not that. seems to be some transition flags
+    /*0x02*/ u8 runningState; // this is a static running state. 00 is not moving, 01 is turn direction, 02 is moving.
+    /*0x03*/ u8 tileTransitionState; // this is a transition running state: 00 is not moving, 01 is transition between tiles, 02 means you are on the frame in which you have centered on a tile but are about to keep moving, even if changing directions. 2 is also used for a ledge hop, since you are transitioning.
     /*0x04*/ u8 spriteId;
     /*0x05*/ u8 mapObjectId;
-    /*0x06*/ u8 unk6;
+    /*0x06*/ bool8 preventStep;
     /*0x07*/ u8 gender;
-    u8 acroBikeState;
-    u8 unk9;
-    u8 bikeFrameCounter;
-    u8 unkB;
-    u32 unkC;
-    u32 unk10;
-    u8 unk14[8];
-    u8 unk1C[8];
-    // TODO: rest of struct
+    /*0x08*/ u8 acroBikeState; // 00 is normal, 01 is turning, 02 is standing wheelie, 03 is hopping wheelie
+    /*0x09*/ u8 newDirBackup; // during bike movement, the new direction as opposed to player's direction is backed up here.
+    /*0x0A*/ u8 bikeFrameCounter; // on the mach bike, when this value is 1, the bike is moving but not accelerating yet for 1 tile. on the acro bike, this acts as a timer for acro bike.
+    /*0x0B*/ u8 bikeSpeed;
+	// acro bike only
+    /*0x0C*/ u32 directionHistory; // up/down/left/right history is stored in each nybble, but using the field directions and not the io inputs.
+    /*0x10*/ u32 abStartSelectHistory; // same as above but for A + B + start + select only
+	// these two are timer history arrays which [0] is the active timer for acro bike. every element is backed up to the next element upon update.
+    /*0x14*/ u8 dirTimerHistory[8];
+    /*0x1C*/ u8 abStartSelectTimerHistory[8];
 };
 
 struct Camera

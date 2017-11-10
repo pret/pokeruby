@@ -10098,13 +10098,13 @@ sub_81063C0: @ 81063C0
 	ldr r0, _081063F0 @ =gSlotMachineReelTimeLights_Gfx
 	ldr r4, _081063F4 @ =0x02010000
 	adds r1, r4, 0
-	bl sub_800D238
+	bl LZDecompressWram
 	ldr r0, _081063F8 @ =gUnknown_083EDE8C
 	movs r1, 0xC8
 	lsls r1, 6
 	adds r4, r1
 	adds r1, r4, 0
-	bl sub_800D238
+	bl LZDecompressWram
 	ldr r0, _081063FC @ =gUnknown_083EDC2C
 	bl LoadSpriteSheets
 	ldr r0, _08106400 @ =gSlotMachineSpritePalettes

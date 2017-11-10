@@ -11,7 +11,7 @@ VerdanturfTown_ContestLobby_EventScript_153D76:: @ 8153D76
 	setvar CONTEST_RANK, 0
 	call VerdanturfTown_ContestLobby_EventScript_1A4E92
 	call VerdanturfTown_ContestLobby_EventScript_153DA1
-	special 83
+	special sub_80C4BF0
 	call VerdanturfTown_ContestLobby_EventScript_15FBDB
 	setvar 0x4088, 1
 	warp LinkContestRoom1, 255, 7, 5
@@ -20,28 +20,28 @@ VerdanturfTown_ContestLobby_EventScript_153D76:: @ 8153D76
 
 VerdanturfTown_ContestLobby_EventScript_153DA1:: @ 8153DA1
 	lockall
-	move 1, VerdanturfTown_ContestLobby_Movement_153E25
-	waitmove 0
-	playsfx 71
+	applymovement 1, VerdanturfTown_ContestLobby_Movement_153E25
+	waitmovement 0
+	playse 71
 	setmaptile 4, 2, 545, 1
 	setmaptile 4, 3, 609, 1
-	special 142
-	move 1, VerdanturfTown_ContestLobby_Movement_153E28
-	waitmove 0
-	playsfx 71
+	special DrawWholeMapView
+	applymovement 1, VerdanturfTown_ContestLobby_Movement_153E28
+	waitmovement 0
+	playse 71
 	setmaptile 4, 2, 721, 1
 	setmaptile 4, 3, 729, 1
-	special 142
-	pause 20
-	move 1, VerdanturfTown_ContestLobby_Movement_153E35
-	waitmove 0
-	move 255, VerdanturfTown_ContestLobby_Movement_153E23
-	waitmove 0
+	special DrawWholeMapView
+	delay 20
+	applymovement 1, VerdanturfTown_ContestLobby_Movement_153E35
+	waitmovement 0
+	applymovement 255, VerdanturfTown_ContestLobby_Movement_153E23
+	waitmovement 0
 	msgbox VerdanturfTown_ContestLobby_Text_1A6832, 4
-	closebutton
-	move 1, VerdanturfTown_ContestLobby_Movement_153E2C
-	move 255, VerdanturfTown_ContestLobby_Movement_153E19
-	waitmove 0
+	closemessage
+	applymovement 1, VerdanturfTown_ContestLobby_Movement_153E2C
+	applymovement 255, VerdanturfTown_ContestLobby_Movement_153E19
+	waitmovement 0
 	releaseall
 	return
 
@@ -90,7 +90,7 @@ VerdanturfTown_ContestLobby_Movement_153E35:: @ 8153E35
 VerdanturfTown_ContestLobby_EventScript_153E37:: @ 8153E37
 	lockall
 	fadescreen 1
-	showcontestwinner 1
+	drawcontestwinner 1
 	releaseall
 	end
 
@@ -102,11 +102,11 @@ VerdanturfTown_ContestLobby_EventScript_153E47:: @ 8153E47
 	lock
 	faceplayer
 	checkflag 235
-	jumpeq VerdanturfTown_ContestLobby_EventScript_153E76
+	goto_if_eq VerdanturfTown_ContestLobby_EventScript_153E76
 	msgbox VerdanturfTown_ContestLobby_Text_177DEC, 4
 	giveitem ITEM_TM45
 	compare RESULT, 0
-	jumpeq VerdanturfTown_ContestLobby_EventScript_1A029B
+	goto_if_eq VerdanturfTown_ContestLobby_EventScript_1A029B
 	setflag 235
 	release
 	end
@@ -122,8 +122,8 @@ VerdanturfTown_ContestLobby_EventScript_153E80:: @ 8153E80
 
 VerdanturfTown_ContestLobby_EventScript_153E89:: @ 8153E89
 	lockall
-	special 259
+	special ShowBerryBlenderRecordWindow
 	waitbutton
-	hidebox 0, 0, 29, 19
+	erasebox 0, 0, 29, 19
 	releaseall
 	end

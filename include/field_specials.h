@@ -8,11 +8,6 @@ struct ElevatorMenu {
     u8 var3;
 };
 
-extern struct ElevatorMenu gUnknown_03000760[20];
-extern struct WarpData gUnknown_020297F0;
-extern u8 gBattleOutcome;
-
-extern u16 gScriptResult;
 extern u8 gUnknown_02039250;
 extern u8 gUnknown_02039251;
 extern u32 gUnknown_02039254;
@@ -22,9 +17,6 @@ extern u8 gUnknown_0203925A;
 extern u8 gUnknown_0203925B;
 extern u8 gUnknown_0203925C;
 
-extern u16 gSpecialVar_0x8004;
-extern u16 gSpecialVar_0x8005;
-
 void ResetCyclingRoadChallengeData(void);
 bool32 CountSSTidalStep(u16);
 u8 GetSSTidalLocation(s8 *, s8 *, s16 *, s16 *);
@@ -33,5 +25,6 @@ void ScriptShowElevatorMenu(void);
 void SetShoalItemFlag(u16);
 u8 GetLeadMonIndex(void);
 void ResetFanClub(void);
+u8 sub_810FB10(u8 a0);
 
 #endif // GUARD_FIELD_SPECIALS_H

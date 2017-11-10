@@ -134,6 +134,14 @@ void HandlePngToGbaCommand(char *inputPath, char *outputPath, int argc, char **a
     ConvertPngToGba(inputPath, outputPath, numTiles, bitDepth);
 }
 
+void HandlePngToGbaPaletteCommand(char *inputPath, char *outputPath, int argc UNUSED, char **argv UNUSED)
+{
+    struct Palette palette;
+
+    ReadPngPalette(inputPath, &palette);
+    WriteGbaPalette(outputPath, &palette);
+}
+
 void HandleGbaToJascPaletteCommand(char *inputPath, char *outputPath, int argc UNUSED, char **argv UNUSED)
 {
     struct Palette palette;
@@ -353,6 +361,7 @@ int main(int argc, char **argv)
         { "png", "1bpp", HandlePngToGbaCommand },
         { "png", "4bpp", HandlePngToGbaCommand },
         { "png", "8bpp", HandlePngToGbaCommand },
+        { "png", "gbapal", HandlePngToGbaPaletteCommand },
         { "gbapal", "pal", HandleGbaToJascPaletteCommand },
         { "pal", "gbapal", HandleJascToGbaPaletteCommand },
         { "latfont", "png", HandleLatinFontToPngCommand },

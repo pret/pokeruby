@@ -14,9 +14,9 @@ PacifidlogTown_House4_EventScript_15435E:: @ 815435E
 	faceplayer
 	msgbox PacifidlogTown_House4_Text_17963D, 5
 	compare RESULT, 1
-	jumpeq PacifidlogTown_House4_EventScript_15437F
+	goto_if_eq PacifidlogTown_House4_EventScript_15437F
 	compare RESULT, 0
-	jumpeq PacifidlogTown_House4_EventScript_154389
+	goto_if_eq PacifidlogTown_House4_EventScript_154389
 	end
 
 PacifidlogTown_House4_EventScript_15437F:: @ 815437F

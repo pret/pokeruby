@@ -4,9 +4,9 @@ PacifidlogTown_House5_MapScripts:: @ 8154393
 PacifidlogTown_House5_EventScript_154394:: @ 8154394
 	lock
 	faceplayer
-	specialval RESULT, 209
+	specialvar RESULT, IsMirageIslandPresent
 	compare RESULT, 1
-	jumpeq PacifidlogTown_House5_EventScript_1543B0
+	goto_if_eq PacifidlogTown_House5_EventScript_1543B0
 	msgbox PacifidlogTown_House5_Text_179718, 4
 	release
 	end

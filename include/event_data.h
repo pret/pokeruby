@@ -22,7 +22,23 @@ bool8 VarSet(u16 id, u16 value);
 u8 VarGetFieldObjectGraphicsId(u8 id);
 u8 *GetFlagPointer(u16 id);
 u8 FlagSet(u16 id);
-u8 FlagReset(u16 id);
+u8 FlagClear(u16 id);
 bool8 FlagGet(u16 id);
+
+extern u16 gSpecialVar_0x8000;
+extern u16 gSpecialVar_0x8001;
+extern u16 gSpecialVar_0x8002;
+extern u16 gSpecialVar_0x8003;
+extern u16 gSpecialVar_0x8004;
+extern u16 gSpecialVar_0x8005;
+extern u16 gSpecialVar_0x8006;
+extern u16 gSpecialVar_0x8007;
+extern u16 gSpecialVar_0x8008;
+extern u16 gSpecialVar_0x8009;
+extern u16 gSpecialVar_0x800A;
+extern u16 gSpecialVar_0x800B;
+extern u16 gScriptResult;
+extern u16 gScriptLastTalked;
+extern u16 gScriptFacing;
 
 #endif // GUARD_EVENT_DATA_H

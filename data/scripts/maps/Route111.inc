@@ -5,7 +5,7 @@ Route111_MapScripts:: @ 814FF91
 
 Route111_MapScript1_14FF9C:: @ 814FF9C
 	checkflag 228
-	callif 0, Route111_EventScript_14FFA6
+	call_if 0, Route111_EventScript_14FFA6
 	end
 
 Route111_EventScript_14FFA6:: @ 814FFA6
@@ -17,21 +17,21 @@ Route111_MapScript1_14FFB9:: @ 814FFB9
 	call Route111_EventScript_14FFCD
 	call Route111_EventScript_1AE313
 	checktrainerflag OPPONENT_VICKY
-	jumpif 0, Route111_EventScript_15000D
+	goto_if 0, Route111_EventScript_15000D
 	end
 
 Route111_EventScript_14FFCD:: @ 814FFCD
 	getplayerxy 0x4000, 0x4001
 	compare 0x4001, 34
-	jumpif 0, Route111_EventScript_15000C
+	goto_if 0, Route111_EventScript_15000C
 	compare 0x4001, 107
-	jumpif 2, Route111_EventScript_15000C
+	goto_if 2, Route111_EventScript_15000C
 	compare 0x4001, 72
-	jumpif 2, Route111_EventScript_150009
+	goto_if 2, Route111_EventScript_150009
 	compare 0x4000, 2000
-	jumpif 2, Route111_EventScript_15000C
+	goto_if 2, Route111_EventScript_15000C
 	compare 0x4000, 8
-	jumpif 0, Route111_EventScript_15000C
+	goto_if 0, Route111_EventScript_15000C
 
 Route111_EventScript_150009:: @ 8150009
 	setweather 8
@@ -44,25 +44,25 @@ Route111_EventScript_15000D:: @ 815000D
 	setflag 769
 	setflag 770
 	setflag 771
-	settrainerflag OPPONENT_VICTOR
-	settrainerflag OPPONENT_VICTORIA
-	settrainerflag OPPONENT_VIVI
+	cleartrainerflag OPPONENT_VICTOR
+	cleartrainerflag OPPONENT_VICTORIA
+	cleartrainerflag OPPONENT_VIVI
 	end
 
 Route111_EventScript_150023:: @ 8150023
 	lockall
 	msgbox Route111_Text_16FA54, 5
 	compare RESULT, 0
-	jumpeq Route111_EventScript_15005F
+	goto_if_eq Route111_EventScript_15005F
 	giveitem ITEM_ROOT_FOSSIL
-	closebutton
+	closemessage
 	setflag 963
 	setflag 964
-	disappear 34
-	pause 30
-	move 35, Route111_Movement_1500AF
-	waitmove 0
-	disappear 35
+	removeobject 34
+	delay 30
+	applymovement 35, Route111_Movement_1500AF
+	waitmovement 0
+	removeobject 35
 	releaseall
 	end
 
@@ -75,16 +75,16 @@ Route111_EventScript_150069:: @ 8150069
 	lockall
 	msgbox Route111_Text_16FAED, 5
 	compare RESULT, 0
-	jumpeq Route111_EventScript_1500A5
+	goto_if_eq Route111_EventScript_1500A5
 	giveitem ITEM_CLAW_FOSSIL
-	closebutton
+	closemessage
 	setflag 964
 	setflag 963
-	disappear 35
-	pause 30
-	move 34, Route111_Movement_1500AF
-	waitmove 0
-	disappear 34
+	removeobject 35
+	delay 30
+	applymovement 34, Route111_Movement_1500AF
+	waitmovement 0
+	removeobject 34
 	releaseall
 	end
 
@@ -120,15 +120,15 @@ Route111_Movement_1500AF:: @ 81500AF
 Route111_EventScript_1500C5:: @ 81500C5
 	lock
 	faceplayer
-	checkdailyflags
+	dodailyevents
 	checkflag 2252
-	jumpeq Route111_EventScript_150100
+	goto_if_eq Route111_EventScript_150100
 	msgbox Route111_Text_1C56F0, 4
 	giveitem ITEM_RAZZ_BERRY
 	compare RESULT, 0
-	jumpeq Route111_EventScript_1A029B
+	goto_if_eq Route111_EventScript_1A029B
 	setflag 2252
-	special 148
+	special GetPlayerBigGuyGirlString
 	msgbox Route111_Text_1C5781, 4
 	release
 	end
@@ -141,67 +141,67 @@ Route111_EventScript_150100:: @ 8150100
 @ 815010A
 	lockall
 	setvar 0x8004, 0
-	jump Route111_EventScript_15013A
+	goto Route111_EventScript_15013A
 	end
 
 Route111_EventScript_150116:: @ 8150116
 	lockall
 	setvar 0x8004, 1
-	jump Route111_EventScript_15013A
+	goto Route111_EventScript_15013A
 	end
 
 Route111_EventScript_150122:: @ 8150122
 	lockall
 	setvar 0x8004, 2
-	jump Route111_EventScript_15013A
+	goto Route111_EventScript_15013A
 	end
 
 @ 815012E
 	lockall
 	setvar 0x8004, 3
-	jump Route111_EventScript_15013A
+	goto Route111_EventScript_15013A
 	end
 
 Route111_EventScript_15013A:: @ 815013A
 	checkitem ITEM_GO_GOGGLES, 1
 	compare RESULT, 0
-	jumpeq Route111_EventScript_150151
+	goto_if_eq Route111_EventScript_150151
 	setvar 0x4003, 1
 	releaseall
 	end
 
 Route111_EventScript_150151:: @ 8150151
 	msgbox Route111_Text_1A0F93, 4
-	closebutton
+	closemessage
 	compare 0x8004, 0
-	callif 1, Route111_EventScript_150188
+	call_if 1, Route111_EventScript_150188
 	compare 0x8004, 1
-	callif 1, Route111_EventScript_150193
+	call_if 1, Route111_EventScript_150193
 	compare 0x8004, 2
-	callif 1, Route111_EventScript_15019E
+	call_if 1, Route111_EventScript_15019E
 	compare 0x8004, 3
-	callif 1, Route111_EventScript_1501A9
+	call_if 1, Route111_EventScript_1501A9
 	releaseall
 	end
 
 Route111_EventScript_150188:: @ 8150188
-	move 255, Route111_Movement_1501B4
-	waitmove 0
+	applymovement 255, Route111_Movement_1501B4
+	waitmovement 0
 	return
 
 Route111_EventScript_150193:: @ 8150193
-	move 255, Route111_Movement_1501B6
-	waitmove 0
+	applymovement 255, Route111_Movement_1501B6
+	waitmovement 0
 	return
 
 Route111_EventScript_15019E:: @ 815019E
-	move 255, Route111_Movement_1501B8
-	waitmove 0
+	applymovement 255, Route111_Movement_1501B8
+	waitmovement 0
 	return
 
 Route111_EventScript_1501A9:: @ 81501A9
-	move 255, Route111_Movement_1501BA
-	waitmove 0
+	applymovement 255, Route111_Movement_1501BA
+	waitmovement 0
 	return
 
 Route111_Movement_1501B4:: @ 81501B4
@@ -222,14 +222,14 @@ Route111_Movement_1501BA:: @ 81501BA
 
 Route111_EventScript_1501BC:: @ 81501BC
 	setweather 2
-	fademusic 360
+	fadenewbgm 360
 	doweather
 	setvar 0x4003, 0
 	end
 
 Route111_EventScript_1501C9:: @ 81501C9
 	setweather 8
-	fademusic 409
+	fadenewbgm 409
 	doweather
 	end
 
@@ -239,7 +239,7 @@ Route111_EventScript_1501D1:: @ 81501D1
 	setflag 2115
 	msgbox Route111_Text_16F705, 5
 	compare RESULT, 1
-	jumpeq Route111_EventScript_1501F3
+	goto_if_eq Route111_EventScript_1501F3
 	msgbox Route111_Text_16F785, 4
 	release
 	end
@@ -247,80 +247,80 @@ Route111_EventScript_1501D1:: @ 81501D1
 Route111_EventScript_1501F3:: @ 81501F3
 	msgbox Route111_Text_16F7B3, 4
 	trainerbattle 3, OPPONENT_VICTOR, 0, Route111_Text_16F7D2
-	move 1, Route111_Movement_1A0841
-	waitmove 0
+	applymovement 1, Route111_Movement_1A0841
+	waitmovement 0
 	call Route111_EventScript_150348
 	msgbox Route111_Text_16F7FF, 4
-	closebutton
-	move 1, Route111_Movement_150356
-	waitmove 0
-	disappear 1
+	closemessage
+	applymovement 1, Route111_Movement_150356
+	waitmovement 0
+	removeobject 1
 	call Route111_EventScript_15034F
-	move 255, Route111_Movement_15035B
-	waitmove 0
+	applymovement 255, Route111_Movement_15035B
+	waitmovement 0
 	call Route111_EventScript_150348
-	reappear 2
-	move 2, Route111_Movement_150359
-	waitmove 0
+	addobject 2
+	applymovement 2, Route111_Movement_150359
+	waitmovement 0
 	call Route111_EventScript_15034F
 	msgbox Route111_Text_16F82D, 4
 	trainerbattle 3, OPPONENT_VICTORIA, 0, Route111_Text_16F8A6
-	move 2, Route111_Movement_1A0841
-	waitmove 0
+	applymovement 2, Route111_Movement_1A0841
+	waitmovement 0
 	call Route111_EventScript_150348
 	msgbox Route111_Text_16F8D5, 4
-	closebutton
-	move 2, Route111_Movement_150356
-	waitmove 0
-	disappear 2
+	closemessage
+	applymovement 2, Route111_Movement_150356
+	waitmovement 0
+	removeobject 2
 	call Route111_EventScript_15034F
-	move 255, Route111_Movement_15035B
-	waitmove 0
+	applymovement 255, Route111_Movement_15035B
+	waitmovement 0
 	call Route111_EventScript_150348
-	reappear 3
-	move 3, Route111_Movement_150359
-	waitmove 0
+	addobject 3
+	applymovement 3, Route111_Movement_150359
+	waitmovement 0
 	call Route111_EventScript_15034F
 	msgbox Route111_Text_16F90E, 4
 	trainerbattle 3, OPPONENT_VIVI, 0, Route111_Text_16F956
-	move 3, Route111_Movement_1A0841
-	waitmove 0
+	applymovement 3, Route111_Movement_1A0841
+	waitmovement 0
 	call Route111_EventScript_150348
 	msgbox Route111_Text_16F96C, 4
-	closebutton
-	move 3, Route111_Movement_150356
-	waitmove 0
-	disappear 3
+	closemessage
+	applymovement 3, Route111_Movement_150356
+	waitmovement 0
+	removeobject 3
 	call Route111_EventScript_15034F
-	move 255, Route111_Movement_15035B
-	waitmove 0
+	applymovement 255, Route111_Movement_15035B
+	waitmovement 0
 	call Route111_EventScript_150348
-	reappear 4
-	move 4, Route111_Movement_150359
-	waitmove 0
+	addobject 4
+	applymovement 4, Route111_Movement_150359
+	waitmovement 0
 	call Route111_EventScript_15034F
 	msgbox Route111_Text_16F991, 4
 	trainerbattle 3, OPPONENT_VICKY, 0, Route111_Text_16F9EC
 	msgbox Route111_Text_16FA22, 4
-	closebutton
-	move 4, Route111_Movement_1A0841
-	waitmove 0
+	closemessage
+	applymovement 4, Route111_Movement_1A0841
+	waitmovement 0
 	call Route111_EventScript_150348
-	move 4, Route111_Movement_150356
-	waitmove 0
-	disappear 4
+	applymovement 4, Route111_Movement_150356
+	waitmovement 0
+	removeobject 4
 	call Route111_EventScript_15034F
 	release
 	end
 
 Route111_EventScript_150348:: @ 8150348
-	setdooropened 13, 113
-	doorchange
+	opendoor 13, 113
+	waitdooranim
 	return
 
 Route111_EventScript_15034F:: @ 815034F
-	setdoorclosed 13, 113
-	doorchange
+	closedoor 13, 113
+	waitdooranim
 	return
 
 Route111_Movement_150356:: @ 8150356
@@ -392,9 +392,9 @@ Route111_EventScript_1503EC:: @ 81503EC
 
 Route111_EventScript_150403:: @ 8150403
 	trainerbattle 0, OPPONENT_DUSTY_1, 0, Route111_Text_1BAEC9, Route111_Text_1BAF14
-	specialval RESULT, 57
+	specialvar RESULT, sub_8082C68
 	compare RESULT, 1
-	jumpeq Route111_EventScript_15042A
+	goto_if_eq Route111_EventScript_15042A
 	msgbox Route111_Text_1BAF5B, 6
 	end
 
@@ -420,9 +420,9 @@ Route111_EventScript_15046F:: @ 815046F
 
 Route111_EventScript_150486:: @ 8150486
 	trainerbattle 0, OPPONENT_WILTON_1, 0, Route111_Text_1BB2E3, Route111_Text_1BB313
-	specialval RESULT, 57
+	specialvar RESULT, sub_8082C68
 	compare RESULT, 1
-	jumpeq Route111_EventScript_1504AD
+	goto_if_eq Route111_EventScript_1504AD
 	msgbox Route111_Text_1BB33E, 6
 	end
 
@@ -433,9 +433,9 @@ Route111_EventScript_1504AD:: @ 81504AD
 
 Route111_EventScript_1504C4:: @ 81504C4
 	trainerbattle 0, OPPONENT_BROOKE_1, 0, Route111_Text_1BB44F, Route111_Text_1BB49F
-	specialval RESULT, 57
+	specialvar RESULT, sub_8082C68
 	compare RESULT, 1
-	jumpeq Route111_EventScript_1504EB
+	goto_if_eq Route111_EventScript_1504EB
 	msgbox Route111_Text_1BB4CE, 6
 	end
 

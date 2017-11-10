@@ -9,15 +9,15 @@ BattleTower_Elevator_MapScript2_1607DA:: @ 81607DA
 
 BattleTower_Elevator_EventScript_1607E4:: @ 81607E4
 	setvar 0x4000, 1
-	move 1, BattleTower_Elevator_Movement_160835
-	move 255, BattleTower_Elevator_Movement_160839
-	waitmove 0
-	special 273
+	applymovement 1, BattleTower_Elevator_Movement_160835
+	applymovement 255, BattleTower_Elevator_Movement_160839
+	waitmovement 0
+	special sub_810EBEC
 	waitstate
-	pause 64
-	move 1, BattleTower_Elevator_Movement_16083D
-	move 255, BattleTower_Elevator_Movement_160841
-	waitmove 0
+	delay 64
+	applymovement 1, BattleTower_Elevator_Movement_16083D
+	applymovement 255, BattleTower_Elevator_Movement_160841
+	waitmovement 0
 	setvar 0x4000, 0
 	warp BattleTower_Corridor, 255, 8, 1
 	waitstate
@@ -29,7 +29,7 @@ BattleTower_Elevator_MapScript2_160821:: @ 8160821
 
 BattleTower_Elevator_EventScript_16082B:: @ 816082B
 	setvar 0x4001, 1
-	spriteface 255, 2
+	turnobject 255, 2
 	end
 
 BattleTower_Elevator_Movement_160835:: @ 8160835

@@ -5,7 +5,7 @@ MossdeepCity_Mart_EventScript_15A926:: @ 815A926
 	lock
 	faceplayer
 	message MossdeepCity_Mart_Text_1A0BE4
-	waittext
+	waitmessage
 	pokemart MossdeepCity_Mart_Items
 	msgbox MossdeepCity_Mart_Text_1A0C02, 4
 	release

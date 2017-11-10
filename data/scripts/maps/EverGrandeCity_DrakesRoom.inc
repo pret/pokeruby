@@ -9,7 +9,7 @@ EverGrandeCity_DrakesRoom_MapScripts:: @ 815B70D
 	.2byte 0
 
 EverGrandeCity_DrakesRoom_EventScript_15B727:: @ 815B727
-	spriteface 255, 2
+	turnobject 255, 2
 	end
 
 EverGrandeCity_DrakesRoom_MapScript2_15B72C:: @ 815B72C
@@ -25,9 +25,9 @@ EverGrandeCity_DrakesRoom_EventScript_15B736:: @ 815B736
 
 EverGrandeCity_DrakesRoom_MapScript1_15B743:: @ 815B743
 	checkflag 1248
-	callif 1, EverGrandeCity_DrakesRoom_EventScript_15B758
+	call_if 1, EverGrandeCity_DrakesRoom_EventScript_15B758
 	compare 0x409c, 4
-	callif 1, EverGrandeCity_DrakesRoom_EventScript_15B75E
+	call_if 1, EverGrandeCity_DrakesRoom_EventScript_15B75E
 	end
 
 EverGrandeCity_DrakesRoom_EventScript_15B758:: @ 815B758
@@ -42,11 +42,11 @@ EverGrandeCity_DrakesRoom_EventScript_15B764:: @ 815B764
 	lock
 	faceplayer
 	checkflag 1248
-	jumpeq EverGrandeCity_DrakesRoom_EventScript_15B78B
-	playmusic 450, 0
+	goto_if_eq EverGrandeCity_DrakesRoom_EventScript_15B78B
+	playbgm 450, 0
 	msgbox EverGrandeCity_DrakesRoom_Text_190CEB, 4
 	trainerbattle 3, OPPONENT_DRAKE, 0, EverGrandeCity_DrakesRoom_Text_190E42
-	jump EverGrandeCity_DrakesRoom_EventScript_15B795
+	goto EverGrandeCity_DrakesRoom_EventScript_15B795
 	end
 
 EverGrandeCity_DrakesRoom_EventScript_15B78B:: @ 815B78B
@@ -56,7 +56,7 @@ EverGrandeCity_DrakesRoom_EventScript_15B78B:: @ 815B78B
 
 EverGrandeCity_DrakesRoom_EventScript_15B795:: @ 815B795
 	setvar 0x8004, 0
-	special 170
+	special sub_810FF60
 	setflag 1248
 	call EverGrandeCity_DrakesRoom_EventScript_1A0693
 	msgbox EverGrandeCity_DrakesRoom_Text_190E5D, 4

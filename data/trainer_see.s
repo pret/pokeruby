@@ -4,47 +4,6 @@
 	.section .rodata
 
 	.align 2
-gSpriteImage_839B308:: @ 839B308
-	.incbin "graphics/unknown_sprites/839B4E0/0.4bpp"
-
-	.align 2
-gSpriteImage_839B388:: @ 839B388
-	.incbin "graphics/unknown_sprites/839B4E0/1.4bpp"
-
-	.align 2
-gSpriteImage_839B408:: @ 839B408
-	.incbin "graphics/unknown_sprites/839B408.4bpp"
-
-	.align 2
-gIsTrainerInRange:: @ 839B488
-	.4byte IsTrainerInRangeSouth
-	.4byte IsTrainerInRangeNorth
-	.4byte IsTrainerInRangeWest
-	.4byte IsTrainerInRangeEast
-
-	.align 2
-gTrainerSeeFuncList:: @ 839B498
-	.4byte sub_8084394
-	.4byte sub_8084398
-	.4byte sub_80843DC
-	.4byte sub_808441C
-	.4byte sub_8084478
-	.4byte sub_8084534
-	.4byte sub_8084578
-	.4byte sub_80845AC
-	.4byte sub_80845C8
-	.4byte sub_80845FC
-	.4byte sub_8084654
-	.4byte sub_80846C8
-
-	.align 2
-gTrainerSeeFuncList2:: @ 839B4C8
-	.4byte sub_80845C8
-	.4byte sub_80845FC
-	.4byte sub_8084654
-	.4byte sub_80846C8
-
-	.align 2
 gOamData_839B4D8:: @ 839B4D8
 	.2byte 0x0000
 	.2byte 0x4000

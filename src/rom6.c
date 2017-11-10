@@ -6,7 +6,7 @@
 #include "field_player_avatar.h"
 #include "item_use.h"
 #include "pokemon_menu.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "script.h"
 #include "songs.h"
 #include "sound.h"
@@ -14,12 +14,12 @@
 #include "task.h"
 
 extern u16 gScriptLastTalked;
-extern u32 gUnknown_0202FF84[];
-extern struct MapPosition gUnknown_0203923C;
 extern void (*gFieldCallback)(void);
 extern u8 gLastFieldPokeMenuOpened;
 extern void (*gUnknown_03005CE4)(void);
-extern u8 UseRockSmashScript[];
+extern u8 S_UseRockSmash[];
+
+EWRAM_DATA struct MapPosition gUnknown_0203923C = {0};
 
 static void task08_080C9820(u8);
 static void sub_810B3DC(u8);
@@ -59,14 +59,14 @@ static void task08_080C9820(u8 taskId)
     u8 mapObjId;
 
     ScriptContext2_Enable();
-    gPlayerAvatar.unk6 = 1;
+    gPlayerAvatar.preventStep = TRUE;
     mapObjId = gPlayerAvatar.mapObjectId;
     if (!FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(&gMapObjects[mapObjId])
      || FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[mapObjId]))
     {
-        if (gMapHeader.mapType == 5)
+        if (gMapHeader.mapType == MAP_TYPE_UNDERWATER)
         {
-            FieldEffectStart(0x3B);
+            FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
             gTasks[taskId].func = sub_810B428;
         }
         else
@@ -82,7 +82,7 @@ static void sub_810B3DC(u8 taskId)
 {
     if (FieldObjectCheckIfSpecialAnimFinishedOrInactive(&gMapObjects[gPlayerAvatar.mapObjectId]) == TRUE)
     {
-        FieldEffectStart(0x3B);
+        FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
         gTasks[taskId].func = sub_810B428;
     }
 }
@@ -91,17 +91,17 @@ static void sub_810B428(u8 taskId)
 {
     if (!FieldEffectActiveListContains(6))
     {
-        gUnknown_0202FF84[1] = player_get_direction_lower_nybble();
-        if (gUnknown_0202FF84[1] == 1)
-            gUnknown_0202FF84[2] = 0;
-        if (gUnknown_0202FF84[1] == 2)
-            gUnknown_0202FF84[2] = 1;
-        if (gUnknown_0202FF84[1] == 3)
-            gUnknown_0202FF84[2] = 2;
-        if (gUnknown_0202FF84[1] == 4)
-            gUnknown_0202FF84[2] = 3;
+        gFieldEffectArguments[1] = player_get_direction_lower_nybble();
+        if (gFieldEffectArguments[1] == 1)
+            gFieldEffectArguments[2] = 0;
+        if (gFieldEffectArguments[1] == 2)
+            gFieldEffectArguments[2] = 1;
+        if (gFieldEffectArguments[1] == 3)
+            gFieldEffectArguments[2] = 2;
+        if (gFieldEffectArguments[1] == 4)
+            gFieldEffectArguments[2] = 3;
         sub_805B980(&gMapObjects[gPlayerAvatar.mapObjectId], GetPlayerAvatarGraphicsIdByCurrentState());
-        StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], gUnknown_0202FF84[2]);
+        StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], gFieldEffectArguments[2]);
         FieldEffectActiveListRemove(6);
         gTasks[taskId].func = sub_810B4CC;
     }
@@ -112,7 +112,7 @@ static void sub_810B4CC(u8 taskId)
     void (*func)(void) = (void (*)(void))(((u16)gTasks[taskId].data[8] << 16) | (u16)gTasks[taskId].data[9]);
 
     func();
-    gPlayerAvatar.unk6 = 0;
+    gPlayerAvatar.preventStep = FALSE;
     DestroyTask(taskId);
 }
 
@@ -120,7 +120,7 @@ bool8 SetUpFieldMove_RockSmash(void)
 {
     if (npc_before_player_of_type(0x56) == TRUE)
     {
-        gFieldCallback = sub_808AB90;
+        gFieldCallback = FieldCallback_Teleport;
         gUnknown_03005CE4 = sub_810B53C;
         return TRUE;
     }
@@ -132,8 +132,8 @@ bool8 SetUpFieldMove_RockSmash(void)
 
 static void sub_810B53C(void)
 {
-    gUnknown_0202FF84[0] = gLastFieldPokeMenuOpened;
-    ScriptContext1_SetupScript(UseRockSmashScript);
+    gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
+    ScriptContext1_SetupScript(S_UseRockSmash);
 }
 
 int FldEff_RockSmash(void)
@@ -149,15 +149,15 @@ int FldEff_RockSmash(void)
 static void sub_810B58C(void)
 {
     PlaySE(SE_W088);
-    FieldEffectActiveListRemove(0x25);
+    FieldEffectActiveListRemove(FLDEFF_USE_ROCK_SMASH);
     EnableBothScriptContexts();
 }
 
 int SetUpFieldMove_Dig(void)
 {
-    if (sub_80CA1C8() == TRUE)
+    if (CanUseEscapeRopeOnCurrMap() == TRUE)
     {
-        gFieldCallback = sub_808AB90;
+        gFieldCallback = FieldCallback_Teleport;
         gUnknown_03005CE4 = sub_810B5D8;
         return TRUE;
     }
@@ -169,9 +169,9 @@ int SetUpFieldMove_Dig(void)
 
 static void sub_810B5D8(void)
 {
-    sub_8053014();
-    FieldEffectStart(0x26);
-    gUnknown_0202FF84[0] = gLastFieldPokeMenuOpened;
+    Overworld_ResetStateAfterDigEscRope();
+    FieldEffectStart(FLDEFF_USE_DIG);
+    gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
 }
 
 int FldEff_UseDig(void)
@@ -189,7 +189,7 @@ static void sub_810B634(void)
 {
     u8 taskId;
 
-    FieldEffectActiveListRemove(0x26);
+    FieldEffectActiveListRemove(FLDEFF_USE_DIG);
     if (ShouldDoBrailleDigEffect())
     {
         DoBrailleDigEffect();
