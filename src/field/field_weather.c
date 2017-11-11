@@ -21,7 +21,7 @@ struct RGBColor
     u16 b:5;
 };
 
-struct Struct2000000_2
+struct WeatherPaletteData
 {
     u16 data[0][0x1000];  // unknown length
 };
@@ -519,7 +519,7 @@ void sub_807CEBC(u8 a, u8 b, s8 c)
                     for (i = 0; i < 16; i++)
                     {
                         if (gPlttBufferUnfaded[palOffset] != 0x2D9F)
-                            gPlttBufferFaded[palOffset] = ewram0_10.data[c][MACRO1(gPlttBufferUnfaded[palOffset])];
+                            gPlttBufferFaded[palOffset] = eWeatherPaletteData.data[c][MACRO1(gPlttBufferUnfaded[palOffset])];
                         palOffset++;
                     }
                 }
@@ -527,7 +527,7 @@ void sub_807CEBC(u8 a, u8 b, s8 c)
                 {
                     for (i = 0; i < 16; i++)
                     {
-                        gPlttBufferFaded[palOffset] = ewram0_10.data[c][MACRO1(gPlttBufferUnfaded[palOffset])];
+                        gPlttBufferFaded[palOffset] = eWeatherPaletteData.data[c][MACRO1(gPlttBufferUnfaded[palOffset])];
                         palOffset++;
                     }
                 }
@@ -627,7 +627,7 @@ void sub_807D304(s8 a, u8 arg2, u16 c)
                 b1 = color1.b;
 
                 offset = ((b1 & 0x1E) << 7) | ((g1 & 0x1E) << 3) | ((r1 & 0x1E) >> 1);
-                color2 = *(struct RGBColor *)&ewram0_10.data[a][offset];
+                color2 = *(struct RGBColor *)&eWeatherPaletteData.data[a][offset];
                 r2 = color2.r;
                 g2 = color2.g;
                 b2 = color2.b;
@@ -870,17 +870,17 @@ void sub_807D8F0(u8 *a, u8 *b)
     if (r4 < 7)
     {
         r4--;
-        LZ77UnCompWram(gUnknown_08396FA8[r4], ewram0_10.data[r4]);
+        LZ77UnCompWram(gUnknown_08396FA8[r4], eWeatherPaletteData.data[r4]);
         if (r4 == 0)
         {
-            ewram0_10.data[r4][0] = 0x421;
+            eWeatherPaletteData.data[r4][0] = 0x421;
             for (i = 1; i < 0x1000; i++)
-                ewram0_10.data[r4][i] += ewram0_10.data[r4][i - 1];
+                eWeatherPaletteData.data[r4][i] += eWeatherPaletteData.data[r4][i - 1];
         }
         else
         {
             for (i = 0; i < 0x1000; i++)
-                ewram0_10.data[r4][i] += ewram0_10.data[r4 - 1][i];
+                eWeatherPaletteData.data[r4][i] += eWeatherPaletteData.data[r4 - 1][i];
         }
         (*a)++;
         if (*a == 7)
