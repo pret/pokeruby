@@ -102,7 +102,7 @@ BattleScript_TrainerBallBlock:: @ 81D9F35
 	atkf6
 
 BattleScript_1D9F45: @ 81D9F45
-	setbyte 0x201600c, 15
+	setbyte gSharedMem + 0x1600C, 15
 	atk49 1, 0
 	end
 
@@ -118,7 +118,7 @@ BattleScript_1D9F4F: @ 81D9F4F
 	printstring BATTLE_TEXT_RestoredHealth
 	waitmessage 64
 	atk98 1
-	setbyte 0x201600c, 15
+	setbyte gSharedMem + 0x1600C, 15
 	atk49 1, 0
 	atkf6
 
@@ -131,7 +131,7 @@ BattleScript_1D9F7B: @ 81D9F7B
 	printfromtable BattleTextList_401620
 	waitmessage 64
 	atk98 1
-	setbyte 0x201600c, 15
+	setbyte gSharedMem + 0x1600C, 15
 	atk49 1, 0
 	atkf6
 
@@ -143,7 +143,7 @@ BattleScript_1D9F9C: @ 81D9F9C
 	atk75
 	printfromtable BattleTextList_401570
 	waitmessage 64
-	setbyte 0x201600c, 15
+	setbyte gSharedMem + 0x1600C, 15
 	atk49 1, 0
 	atkf6
 
@@ -155,7 +155,7 @@ BattleScript_1D9FBB: @ 81D9FBB
 	atk75
 	printfromtable BattleTextList_4015A0
 	waitmessage 64
-	setbyte 0x201600c, 15
+	setbyte gSharedMem + 0x1600C, 15
 	atk49 1, 0
 	atkf6
 

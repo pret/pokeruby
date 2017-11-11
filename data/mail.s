@@ -175,4 +175,4 @@ gUnknown_083E57A4:: @ 83E57A4
 
 @ XXX: what is this?
 	.align 2
-	.4byte 0x2000000
+	.4byte gSharedMem

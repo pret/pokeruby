@@ -244,10 +244,10 @@ MoveEffect_Unused83: @ 81D6F14
 MoveEffect_Unused8D: @ 81D6F14
 MoveEffect_UnusedA3: @ 81D6F14
 MoveEffect_VitalThrow: @ 81D6F14
-	jumpifhalfword 1, 0x2024be6, 57, BattleScript_1D6F3A
+	jumpifhalfword 1, gCurrentMove, 57, BattleScript_1D6F3A
 	jumpifspecialstatusflag TARGET, 0x40000, 1, BattleScript_1D6F3A
-	orword 0x2024c6c, 0x40000
-	setbyte 0x201601f, 2
+	orword gHitMarker, 0x40000
+	setbyte gSharedMem + 0x1601F, 2
 
 BattleScript_1D6F3A: @ 81D6F3A
 	attackcanceler
@@ -281,12 +281,12 @@ BattleScript_1D6F48: @ 81D6F48
 	faintpokemon TARGET, 0, 0x0
 
 BattleScript_EndTurn:: @ 81D6F62
-	setbyte 0x201600c, 0
+	setbyte gSharedMem + 0x1600C, 0
 	atk49 0, 0
 	end
 
 BattleScript_1D6F6C: @ 81D6F6C
-	orbyte 0x2024c68, 1
+	orbyte gBattleMoveFlags, 1
 
 BattleScript_1D6F72: @ 81D6F72
 	attackstring
@@ -313,7 +313,7 @@ MoveEffect_Sleep: @ 81D6F81
 	jumpifhalverset TARGET, 32, BattleScript_1D9037
 	attackanimation
 	waitanimation
-	setbyte 0x2024d21, 1
+	setbyte gUnknown_02024D1F + 0x2, 1
 	seteffecttarget
 	jump BattleScript_EndTurn
 
@@ -337,7 +337,7 @@ BattleScript_1D6FE0: @ 81D6FE0
 
 MoveEffect_PoisonHit: @ 81D6FF0
 MoveEffect_PoisonTail: @ 81D6FF0
-	setbyte 0x2024d21, 2
+	setbyte gUnknown_02024D1F + 0x2, 2
 	jump BattleScript_1D6F14
 
 MoveEffect_Absorb: @ 81D6FFB
@@ -361,19 +361,19 @@ MoveEffect_Absorb: @ 81D6FFB
 	resultmessage
 	waitmessage 64
 	negativedamage
-	orword 0x2024c6c, 0x100
+	orword gHitMarker, 0x100
 	jumpifability TARGET, ABILITY_LIQUID_OOZE, BattleScript_1D7037
-	setbyte 0x2024d23, 0
+	setbyte gUnknown_02024D1F + 0x4, 0
 	jump BattleScript_1D703F
 
 BattleScript_1D7037: @ 81D7037
 	manipulatedamage 0
-	setbyte 0x2024d23, 1
+	setbyte gUnknown_02024D1F + 0x4, 1
 
 BattleScript_1D703F: @ 81D703F
 	graphicalhpupdate USER
 	datahpupdate USER
-	jumpifbyte 4, 0x2024c68, 41, BattleScript_1D7056
+	jumpifbyte 4, gBattleMoveFlags, 41, BattleScript_1D7056
 	printfromtable BattleTextList_4015D0
 	waitmessage 64
 
@@ -384,15 +384,15 @@ BattleScript_1D7056: @ 81D7056
 
 MoveEffect_BlazeKick: @ 81D7069
 MoveEffect_BurnHit: @ 81D7069
-	setbyte 0x2024d21, 3
+	setbyte gUnknown_02024D1F + 0x2, 3
 	jump BattleScript_1D6F14
 
 MoveEffect_FreezeHit: @ 81D7074
-	setbyte 0x2024d21, 4
+	setbyte gUnknown_02024D1F + 0x2, 4
 	jump BattleScript_1D6F14
 
 MoveEffect_ParalyzeHit: @ 81D707F
-	setbyte 0x2024d21, 5
+	setbyte gUnknown_02024D1F + 0x2, 5
 	jump BattleScript_1D6F14
 
 MoveEffect_Explosion: @ 81D708A
@@ -402,7 +402,7 @@ MoveEffect_Explosion: @ 81D708A
 	faintifabilitynotdamp
 	setuserhptozero
 	waitstateatk
-	jumpifbyte 5, 0x2024c68, 1, BattleScript_1D70A5
+	jumpifbyte 5, gBattleMoveFlags, 1, BattleScript_1D70A5
 	callatk BattleScript_1D70FB
 	jump BattleScript_1D70A7
 
@@ -427,7 +427,7 @@ BattleScript_1D70A7: @ 81D70A7
 	resultmessage
 	waitmessage 64
 	faintpokemon TARGET, 0, 0x0
-	setbyte 0x201600c, 0
+	setbyte gSharedMem + 0x1600C, 0
 	atk49 2, 16
 	jumpwhiletargetvalid BattleScript_1D70A7
 	faintpokemon USER, 0, 0x0
@@ -437,17 +437,17 @@ BattleScript_1D70E0: @ 81D70E0
 	missmessage
 	resultmessage
 	waitmessage 64
-	setbyte 0x201600c, 0
+	setbyte gSharedMem + 0x1600C, 0
 	atk49 2, 16
 	jumpwhiletargetvalid BattleScript_1D70A7
 	faintpokemon USER, 0, 0x0
 	end
 
 BattleScript_1D70FB: @ 81D70FB
-	bicbyte 0x2024c68, 1
+	bicbyte gBattleMoveFlags, 1
 	attackanimation
 	waitanimation
-	orbyte 0x2024c68, 1
+	orbyte gBattleMoveFlags, 1
 	return
 
 MoveEffect_DreamEater: @ 81D710A
@@ -481,10 +481,10 @@ BattleScript_1D7129: @ 81D7129
 	resultmessage
 	waitmessage 64
 	negativedamage
-	orword 0x2024c6c, 0x100
+	orword gHitMarker, 0x100
 	graphicalhpupdate USER
 	datahpupdate USER
-	jumpifbyte 4, 0x2024c68, 41, BattleScript_1D7167
+	jumpifbyte 4, gBattleMoveFlags, 41, BattleScript_1D7167
 	printstring BATTLE_TEXT_DreamEaten
 	waitmessage 64
 
@@ -498,25 +498,25 @@ MoveEffect_MirrorMove: @ 81D7173
 	pause 64
 	jumptolastusedattack
 	ppreduce
-	orbyte 0x2024c68, 32
+	orbyte gBattleMoveFlags, 32
 	printstring BATTLE_TEXT_MirrorFail
 	waitmessage 64
 	jump BattleScript_EndTurn
 
 MoveEffect_AttackUp: @ 81D718B
-	setbyte 0x201601e, 17
+	setbyte gSharedMem + 0x1601E, 17
 	jump BattleScript_1D71B2
 
 MoveEffect_DefenseUp: @ 81D7196
-	setbyte 0x201601e, 18
+	setbyte gSharedMem + 0x1601E, 18
 	jump BattleScript_1D71B2
 
 MoveEffect_SpecialAttackUp: @ 81D71A1
-	setbyte 0x201601e, 20
+	setbyte gSharedMem + 0x1601E, 20
 	jump BattleScript_1D71B2
 
 MoveEffect_EvasionUp: @ 81D71AC
-	setbyte 0x201601e, 23
+	setbyte gSharedMem + 0x1601E, 23
 
 BattleScript_1D71B2: @ 81D71B2
 	attackcanceler
@@ -525,7 +525,7 @@ BattleScript_1D71B3: @ 81D71B3
 	attackstring
 	ppreduce
 	statbuffchange 65, BattleScript_1D71E0
-	jumpifbyte 1, 0x2024d23, 2, BattleScript_1D71CE
+	jumpifbyte 1, gUnknown_02024D1F + 0x4, 2, BattleScript_1D71CE
 	pause 32
 	jump BattleScript_1D71D8
 
@@ -535,7 +535,7 @@ BattleScript_1D71CE: @ 81D71CE
 
 BattleScript_1D71D0: @ 81D71D0
 	atk47
-	playanimation USER, 1, 0x20160a4
+	playanimation USER, 1, gSharedMem + 0x160A4
 
 BattleScript_1D71D8: @ 81D71D8
 	printfromtable BattleTextList_401570
@@ -545,29 +545,29 @@ BattleScript_1D71E0: @ 81D71E0
 	jump BattleScript_EndTurn
 
 BattleScript_StatUp:: @ 81D71E5
-	playanimation 2, 1, 0x20160a4
+	playanimation 2, 1, gSharedMem + 0x160A4
 	printfromtable BattleTextList_401570
 	waitmessage 64
 	return
 
 MoveEffect_AttackDown: @ 81D71F5
-	setbyte 0x201601e, 145
+	setbyte gSharedMem + 0x1601E, 145
 	jump BattleScript_1D7227
 
 MoveEffect_DefenseDown: @ 81D7200
-	setbyte 0x201601e, 146
+	setbyte gSharedMem + 0x1601E, 146
 	jump BattleScript_1D7227
 
 MoveEffect_SpeedDown: @ 81D720B
-	setbyte 0x201601e, 147
+	setbyte gSharedMem + 0x1601E, 147
 	jump BattleScript_1D7227
 
 MoveEffect_AccuracyDown: @ 81D7216
-	setbyte 0x201601e, 150
+	setbyte gSharedMem + 0x1601E, 150
 	jump BattleScript_1D7227
 
 MoveEffect_EvasionDown: @ 81D7221
-	setbyte 0x201601e, 151
+	setbyte gSharedMem + 0x1601E, 151
 
 BattleScript_1D7227: @ 81D7227
 	attackcanceler
@@ -576,8 +576,8 @@ BattleScript_1D7227: @ 81D7227
 	attackstring
 	ppreduce
 	statbuffchange 1, BattleScript_1D7271
-	jumpifbyte 3, 0x2024d23, 2, BattleScript_1D725F
-	jumpifbyte 0, 0x2024d23, 3, BattleScript_1D7271
+	jumpifbyte 3, gUnknown_02024D1F + 0x4, 2, BattleScript_1D725F
+	jumpifbyte 0, gUnknown_02024D1F + 0x4, 3, BattleScript_1D7271
 	pause 32
 	jump BattleScript_1D7269
 
@@ -585,7 +585,7 @@ BattleScript_1D725F: @ 81D725F
 	attackanimation
 	waitanimation
 	atk47
-	playanimation TARGET, 1, 0x20160a4
+	playanimation TARGET, 1, gSharedMem + 0x160A4
 
 BattleScript_1D7269: @ 81D7269
 	printfromtable BattleTextList_40157C
@@ -595,7 +595,7 @@ BattleScript_1D7271: @ 81D7271
 	jump BattleScript_EndTurn
 
 BattleScript_StatDown:: @ 81D7276
-	playanimation 2, 1, 0x20160a4
+	playanimation 2, 1, gSharedMem + 0x160A4
 	printfromtable BattleTextList_40157C
 	waitmessage 64
 	return
@@ -617,7 +617,7 @@ MoveEffect_Bide: @ 81D7297
 	ppreduce
 	attackanimation
 	waitanimation
-	orword 0x2024c6c, 0x8000000
+	orword gHitMarker, 0x8000000
 	setbide
 	jump BattleScript_EndTurn
 
@@ -649,21 +649,21 @@ MoveEffect_MultiHit: @ 81D72ED
 	ppreduce
 	setloopcounter 0
 	atk8e
-	setbyte 0x2016112, 0
+	setbyte gSharedMem + 0x16112, 0
 
 BattleScript_1D7300: @ 81D7300
 	jumpiffainted USER, BattleScript_1D7396
 	jumpiffainted TARGET, BattleScript_1D7377
-	jumpifhalfword 0, 0x2024be8, 214, BattleScript_1D7322
+	jumpifhalfword 0, gUnknown_02024BE8, 214, BattleScript_1D7322
 	jumpifstatus USER, SLP, BattleScript_1D7377
 
 BattleScript_1D7322: @ 81D7322
 	atk25
-	copyarray 0x2024d21, 0x2016112, 1
+	copyarray gUnknown_02024D1F + 0x2, gSharedMem + 0x16112, 1
 	critcalc
 	atk5
 	atk6
-	jumpifbyte 4, 0x2024c68, 41, BattleScript_1D7374
+	jumpifbyte 4, gBattleMoveFlags, 41, BattleScript_1D7374
 	atk7
 	attackanimation
 	waitanimation
@@ -676,10 +676,10 @@ BattleScript_1D7322: @ 81D7322
 	waitmessage 64
 	printstring BATTLE_TEXT_Terminator2
 	waitmessage 1
-	addbyte 0x20160e4, 1
-	setbyte 0x201600c, 0
+	addbyte gSharedMem + 0x160E4, 1
+	setbyte gSharedMem + 0x1600C, 0
 	atk49 2, 16
-	jumpifbyte 4, 0x2024c68, 64, BattleScript_1D7377
+	jumpifbyte 4, gBattleMoveFlags, 64, BattleScript_1D7377
 	atk27 BattleScript_1D7300
 	jump BattleScript_1D7377
 
@@ -689,17 +689,17 @@ BattleScript_1D7374: @ 81D7374
 BattleScript_1D7377: @ 81D7377
 	resultmessage
 	waitmessage 64
-	jumpifbyte 4, 0x2024c68, 41, BattleScript_1D7396
-	copyarray gBattleTextBuff1, 0x20160e0, 6
+	jumpifbyte 4, gBattleMoveFlags, 41, BattleScript_1D7396
+	copyarray gBattleTextBuff1, gSharedMem + 0x160E0, 6
 	printstring BATTLE_TEXT_HitMulti
 	waitmessage 64
 
 BattleScript_1D7396: @ 81D7396
 	seteffectwithchancetarget
 	faintpokemon TARGET, 0, 0x0
-	setbyte 0x201600c, 2
+	setbyte gSharedMem + 0x1600C, 2
 	atk49 1, 0
-	setbyte 0x201600c, 4
+	setbyte gSharedMem + 0x1600C, 4
 	atk49 0, 0
 	end
 
@@ -715,7 +715,7 @@ MoveEffect_Conversion: @ 81D73B1
 	jump BattleScript_EndTurn
 
 MoveEffect_FlinchHit: @ 81D73C6
-	setbyte 0x2024d21, 8
+	setbyte gUnknown_02024D1F + 0x2, 8
 	jump BattleScript_1D6F14
 
 MoveEffect_RestoreHp: @ 81D73D1
@@ -725,7 +725,7 @@ MoveEffect_RestoreHp: @ 81D73D1
 	setdamageasrestorehalfmaxhp BattleScript_1D83B5, 1
 	attackanimation
 	waitanimation
-	orword 0x2024c6c, 0x100
+	orword gHitMarker, 0x100
 	graphicalhpupdate USER
 	datahpupdate USER
 	printstring BATTLE_TEXT_RegainedHealth
@@ -747,7 +747,7 @@ MoveEffect_Toxic: @ 81D73F4
 	jumpifhalverset TARGET, 32, BattleScript_1D9037
 	attackanimation
 	waitanimation
-	setbyte 0x2024d21, 6
+	setbyte gUnknown_02024D1F + 0x2, 6
 	seteffecttarget
 	resultmessage
 	waitmessage 64
@@ -760,13 +760,13 @@ BattleScript_1D7455: @ 81D7455
 	jump BattleScript_EndTurn
 
 BattleScript_1D7463: @ 81D7463
-	copyarray 0x2024c0a, 0x2024c08, 1
-	setbyte 0x2024d23, 0
+	copyarray gEffectBank, gBankTarget, 1
+	setbyte gUnknown_02024D1F + 0x4, 0
 	callatk BattleScript_PSNPrevention
 	jump BattleScript_EndTurn
 
 MoveEffect_PayDay: @ 81D747D
-	setbyte 0x2024d21, 11
+	setbyte gUnknown_02024D1F + 0x2, 11
 	jump BattleScript_1D6F14
 
 MoveEffect_LightScreen: @ 81D7488
@@ -777,7 +777,7 @@ MoveEffect_LightScreen: @ 81D7488
 	jump BattleScript_1D7786
 
 MoveEffect_TriAttack: @ 81D7491
-	setbyte 0x2024d21, 9
+	setbyte gUnknown_02024D1F + 0x2, 9
 	jump BattleScript_1D6F14
 
 MoveEffect_Rest: @ 81D749C
@@ -812,7 +812,7 @@ MoveEffect_Ohko: @ 81D74E4
 	ppreduce
 	accuracycheck BattleScript_ButItFailed, 65535
 	atk6
-	jumpifbyte 4, 0x2024c68, 41, BattleScript_1D6F48
+	jumpifbyte 4, gBattleMoveFlags, 41, BattleScript_1D6F48
 	koplussomethings BattleScript_1D7505
 	atkab
 	jump BattleScript_1D6F48
@@ -825,19 +825,19 @@ BattleScript_1D7505: @ 81D7505
 
 MoveEffect_RazorWind: @ 81D7515
 	jumpifsecondarytstatus USER, S_CONTINUE, BattleScript_1D753D
-	jumpifword 4, 0x2024c6c, 0x200, BattleScript_1D753D
-	setbyte 0x2016055, 0
+	jumpifword 4, gHitMarker, 0x200, BattleScript_1D753D
+	setbyte gSharedMem + 0x16055, 0
 	callatk BattleScript_1D756C
 	jump BattleScript_EndTurn
 
 BattleScript_1D753D: @ 81D753D
 	attackcanceler
-	setbyte 0x2024d21, 12
-	setbyte 0x2016002, 1
+	setbyte gUnknown_02024D1F + 0x2, 12
+	setbyte gSharedMem + 0x16002, 1
 	clearstatus USER
-	orword 0x2024c6c, 0x800
-	jumpifhalfword 1, 0x2024be6, 143, BattleScript_1D6F3B
-	setbyte 0x2024d21, 8
+	orword gHitMarker, 0x800
+	jumpifhalfword 1, gCurrentMove, 143, BattleScript_1D6F3B
+	setbyte gUnknown_02024D1F + 0x2, 8
 	jump BattleScript_1D6F3B
 
 BattleScript_1D756C: @ 81D756C
@@ -846,10 +846,10 @@ BattleScript_1D756C: @ 81D756C
 	ppreduce
 	attackanimation
 	waitanimation
-	orword 0x2024c6c, 0x8000000
-	setbyte 0x2024d21, 76
+	orword gHitMarker, 0x8000000
+	setbyte gUnknown_02024D1F + 0x2, 76
 	seteffecttarget
-	copyarray 0x2024d23, 0x2016055, 1
+	copyarray gUnknown_02024D1F + 0x4, gSharedMem + 0x16055, 1
 	printfromtable BattleTextList_401584
 	waitmessage 64
 	return
@@ -860,7 +860,7 @@ MoveEffect_SuperFang: @ 81D7596
 	attackstring
 	ppreduce
 	atk6
-	bicbyte 0x2024c68, 6
+	bicbyte gBattleMoveFlags, 6
 	gethalfcurrentenemyhp
 	jump BattleScript_1D6F48
 
@@ -870,22 +870,22 @@ MoveEffect_DragonRage: @ 81D75AD
 	attackstring
 	ppreduce
 	atk6
-	bicbyte 0x2024c68, 6
-	setbyte 0x2024bec, 40
-	setbyte 0x2024bed, 0
-	setbyte 0x2024bee, 0
-	setbyte 0x2024bef, 0
+	bicbyte gBattleMoveFlags, 6
+	setbyte gBattleMoveDamage, 40
+	setbyte gBattleMoveDamage + 0x1, 0
+	setbyte gBattleMoveDamage + 0x2, 0
+	setbyte gBattleMoveDamage + 0x3, 0
 	atk69
 	jump BattleScript_1D6F48
 
 MoveEffect_Trap: @ 81D75DC
-	jumpifhalfword 1, 0x2024be6, 250, BattleScript_1D7602
+	jumpifhalfword 1, gCurrentMove, 250, BattleScript_1D7602
 	jumpifspecialstatusflag TARGET, 0x40000, 1, BattleScript_1D7602
-	orword 0x2024c6c, 0x40000
-	setbyte 0x201601f, 2
+	orword gHitMarker, 0x40000
+	setbyte gSharedMem + 0x1601F, 2
 
 BattleScript_1D7602: @ 81D7602
-	setbyte 0x2024d21, 13
+	setbyte gUnknown_02024D1F + 0x2, 13
 	jump BattleScript_1D6F14
 
 MoveEffect_DoubleHit: @ 81D760D
@@ -895,7 +895,7 @@ MoveEffect_DoubleHit: @ 81D760D
 	ppreduce
 	setloopcounter 2
 	atk8e
-	setbyte 0x2016112, 0
+	setbyte gSharedMem + 0x16112, 0
 	jump BattleScript_1D7300
 
 MoveEffect_RecoilIfMiss: @ 81D7625
@@ -909,19 +909,19 @@ BattleScript_1D7632: @ 81D7632
 	pause 64
 	resultmessage
 	waitmessage 64
-	jumpifbyte 4, 0x2024c68, 8, BattleScript_EndTurn
+	jumpifbyte 4, gBattleMoveFlags, 8, BattleScript_EndTurn
 	printstring BATTLE_TEXT_KeptGoingCrash
 	waitmessage 64
 	atk5
 	atk6
 	atk7
 	manipulatedamage 1
-	bicbyte 0x2024c68, 1
-	orword 0x2024c6c, 0x100
+	bicbyte gBattleMoveFlags, 1
+	orword gHitMarker, 0x100
 	graphicalhpupdate USER
 	datahpupdate USER
 	faintpokemon USER, 0, 0x0
-	orbyte 0x2024c68, 1
+	orbyte gBattleMoveFlags, 1
 	jump BattleScript_EndTurn
 
 MoveEffect_Mist: @ 81D7676
@@ -948,8 +948,8 @@ MoveEffect_FocusEnergy: @ 81D7689
 	jump BattleScript_EndTurn
 
 MoveEffect_Recoil: @ 81D76A6
-	setbyte 0x2024d21, 206
-	jumpifhalfword 1, 0x2024be6, 165, BattleScript_1D6F14
+	setbyte gUnknown_02024D1F + 0x2, 206
+	jumpifhalfword 1, gCurrentMove, 165, BattleScript_1D6F14
 	atk60 27
 	jump BattleScript_1D6F14
 
@@ -964,7 +964,7 @@ MoveEffect_Confuse: @ 81D76BF
 	jumpifhalverset TARGET, 32, BattleScript_1D9037
 	attackanimation
 	waitanimation
-	setbyte 0x2024d21, 7
+	setbyte gUnknown_02024D1F + 0x2, 7
 	seteffecttarget
 	resultmessage
 	waitmessage 64
@@ -977,23 +977,23 @@ BattleScript_1D76FE: @ 81D76FE
 	jump BattleScript_EndTurn
 
 MoveEffect_AttackUp2: @ 81D770C
-	setbyte 0x201601e, 33
+	setbyte gSharedMem + 0x1601E, 33
 	jump BattleScript_1D71B2
 
 MoveEffect_DefenseUp2: @ 81D7717
-	setbyte 0x201601e, 34
+	setbyte gSharedMem + 0x1601E, 34
 	jump BattleScript_1D71B2
 
 MoveEffect_SpeedUp2: @ 81D7722
-	setbyte 0x201601e, 35
+	setbyte gSharedMem + 0x1601E, 35
 	jump BattleScript_1D71B2
 
 MoveEffect_SpecialAttackUp2: @ 81D772D
-	setbyte 0x201601e, 36
+	setbyte gSharedMem + 0x1601E, 36
 	jump BattleScript_1D71B2
 
 MoveEffect_SpecialDefenseUp2: @ 81D7738
-	setbyte 0x201601e, 37
+	setbyte gSharedMem + 0x1601E, 37
 	jump BattleScript_1D71B2
 
 MoveEffect_Transform: @ 81D7743
@@ -1008,19 +1008,19 @@ MoveEffect_Transform: @ 81D7743
 	jump BattleScript_EndTurn
 
 MoveEffect_AttackDown2: @ 81D7756
-	setbyte 0x201601e, 161
+	setbyte gSharedMem + 0x1601E, 161
 	jump BattleScript_1D7227
 
 MoveEffect_DefenseDown2: @ 81D7761
-	setbyte 0x201601e, 162
+	setbyte gSharedMem + 0x1601E, 162
 	jump BattleScript_1D7227
 
 MoveEffect_SpeedDown2: @ 81D776C
-	setbyte 0x201601e, 163
+	setbyte gSharedMem + 0x1601E, 163
 	jump BattleScript_1D7227
 
 MoveEffect_SpecialDefenseDown2: @ 81D7777
-	setbyte 0x201601e, 165
+	setbyte gSharedMem + 0x1601E, 165
 	jump BattleScript_1D7227
 
 MoveEffect_Reflect: @ 81D7782
@@ -1051,7 +1051,7 @@ MoveEffect_Poison: @ 81D7795
 	jumpifhalverset TARGET, 32, BattleScript_1D9037
 	attackanimation
 	waitanimation
-	setbyte 0x2024d21, 2
+	setbyte gUnknown_02024D1F + 0x2, 2
 	seteffecttarget
 	resultmessage
 	waitmessage 64
@@ -1064,14 +1064,14 @@ MoveEffect_Paralyze: @ 81D77F6
 	jumpifability TARGET, ABILITY_LIMBER, BattleScript_1D7859
 	jumpifsecondarytstatus TARGET, S_SUBSTITUTE, BattleScript_ButItFailed
 	atk6
-	jumpifbyte 4, 0x2024c68, 41, BattleScript_ButItFailed
+	jumpifbyte 4, gBattleMoveFlags, 41, BattleScript_ButItFailed
 	jumpifstatus TARGET, PAR, BattleScript_1D784B
 	jumpifstatus TARGET, SLP | PSN | BRN | FRZ | PAR | TOX, BattleScript_ButItFailed
 	accuracycheck BattleScript_ButItFailed, 0
 	jumpifhalverset TARGET, 32, BattleScript_1D9037
 	attackanimation
 	waitanimation
-	setbyte 0x2024d21, 5
+	setbyte gUnknown_02024D1F + 0x2, 5
 	seteffecttarget
 	resultmessage
 	waitmessage 64
@@ -1084,50 +1084,50 @@ BattleScript_1D784B: @ 81D784B
 	jump BattleScript_EndTurn
 
 BattleScript_1D7859: @ 81D7859
-	copyarray 0x2024c0a, 0x2024c08, 1
-	setbyte 0x2024d23, 0
+	copyarray gEffectBank, gBankTarget, 1
+	setbyte gUnknown_02024D1F + 0x4, 0
 	callatk BattleScript_PRLZPrevention
 	jump BattleScript_EndTurn
 
 MoveEffect_AttackDownHit: @ 81D7873
-	setbyte 0x2024d21, 22
+	setbyte gUnknown_02024D1F + 0x2, 22
 	jump BattleScript_1D6F14
 
 MoveEffect_DefenseDownHit: @ 81D787E
-	setbyte 0x2024d21, 23
+	setbyte gUnknown_02024D1F + 0x2, 23
 	jump BattleScript_1D6F14
 
 MoveEffect_SpeedDownHit: @ 81D7889
-	setbyte 0x2024d21, 24
+	setbyte gUnknown_02024D1F + 0x2, 24
 	jump BattleScript_1D6F14
 
 MoveEffect_SpecialAttackDownHit: @ 81D7894
-	setbyte 0x2024d21, 25
+	setbyte gUnknown_02024D1F + 0x2, 25
 	jump BattleScript_1D6F14
 
 MoveEffect_SpecialDefenseDownHit: @ 81D789F
-	setbyte 0x2024d21, 26
+	setbyte gUnknown_02024D1F + 0x2, 26
 	jump BattleScript_1D6F14
 
 MoveEffect_AccuracyDownHit: @ 81D78AA
-	setbyte 0x2024d21, 27
+	setbyte gUnknown_02024D1F + 0x2, 27
 	jump BattleScript_1D6F14
 
 MoveEffect_SkyAttack: @ 81D78B5
 	jumpifsecondarytstatus USER, S_CONTINUE, BattleScript_1D753D
-	jumpifword 4, 0x2024c6c, 0x200, BattleScript_1D753D
-	setbyte 0x2016055, 3
+	jumpifword 4, gHitMarker, 0x200, BattleScript_1D753D
+	setbyte gSharedMem + 0x16055, 3
 	callatk BattleScript_1D756C
 	jump BattleScript_EndTurn
 
 MoveEffect_ConfuseHit: @ 81D78DD
-	setbyte 0x2024d21, 7
+	setbyte gUnknown_02024D1F + 0x2, 7
 	jump BattleScript_1D6F14
 
 MoveEffect_Twineedle: @ 81D78E8
 	attackcanceler
 	accuracycheck BattleScript_1D6F72, 0
-	setbyte 0x2016112, 2
+	setbyte gSharedMem + 0x16112, 2
 	attackstring
 	ppreduce
 	setloopcounter 2
@@ -1141,7 +1141,7 @@ MoveEffect_Substitute: @ 81D7900
 	waitstateatk
 	jumpifsecondarytstatus USER, S_SUBSTITUTE, BattleScript_1D7935
 	setsubstituteeffect
-	jumpifbyte 1, 0x2024d23, 1, BattleScript_1D7922
+	jumpifbyte 1, gUnknown_02024D1F + 0x4, 1, BattleScript_1D7922
 	pause 32
 	jump BattleScript_1D7928
 
@@ -1165,7 +1165,7 @@ BattleScript_1D7935: @ 81D7935
 MoveEffect_Recharge: @ 81D7943
 	attackcanceler
 	accuracycheck BattleScript_1D6F72, 0
-	setbyte 0x2024d21, 221
+	setbyte gUnknown_02024D1F + 0x2, 221
 	jump BattleScript_1D6F42
 
 BattleScript_MoveUsedMustRecharge:: @ 81D7956
@@ -1176,13 +1176,13 @@ BattleScript_MoveUsedMustRecharge:: @ 81D7956
 MoveEffect_Rage: @ 81D7961
 	attackcanceler
 	accuracycheck BattleScript_1D797B, 0
-	setbyte 0x2024d21, 30
+	setbyte gUnknown_02024D1F + 0x2, 30
 	seteffecttarget
-	setbyte 0x2024d21, 0
+	setbyte gUnknown_02024D1F + 0x2, 0
 	jump BattleScript_1D6F42
 
 BattleScript_1D797B: @ 81D797B
-	setbyte 0x2024d21, 30
+	setbyte gUnknown_02024D1F + 0x2, 30
 	clearstatus USER
 	jump BattleScript_1D6F72
 
@@ -1205,8 +1205,8 @@ MoveEffect_Metronome: @ 81D79AE
 	pause 32
 	attackanimation
 	waitanimation
-	setbyte 0x2016002, 0
-	setbyte 0x20160a1, 0
+	setbyte gSharedMem + 0x16002, 0
+	setbyte gSharedMem + 0x160A1, 0
 	metronomeeffect
 
 MoveEffect_LeechSeed: @ 81D79C2
@@ -1254,7 +1254,7 @@ MoveEffect_LevelDamage: @ 81D7A17
 	attackstring
 	ppreduce
 	atk6
-	bicbyte 0x2024c68, 6
+	bicbyte gBattleMoveFlags, 6
 	nightshadedamageeffect
 	atk69
 	jump BattleScript_1D6F48
@@ -1265,7 +1265,7 @@ MoveEffect_Psywave: @ 81D7A2F
 	attackstring
 	ppreduce
 	atk6
-	bicbyte 0x2024c68, 6
+	bicbyte gBattleMoveFlags, 6
 	psywavedamageeffect
 	atk69
 	jump BattleScript_1D6F48
@@ -1300,10 +1300,10 @@ MoveEffect_PainSplit: @ 81D7A79
 	painsplitdamagecalculator BattleScript_ButItFailed
 	attackanimation
 	waitanimation
-	orword 0x2024c6c, 0x100
+	orword gHitMarker, 0x100
 	graphicalhpupdate USER
 	datahpupdate USER
-	copyarray 0x2024bec, 0x2016014, 4
+	copyarray gBattleMoveDamage, gSharedMem + 0x16014, 4
 	graphicalhpupdate TARGET
 	datahpupdate TARGET
 	printstring BATTLE_TEXT_PainSplit
@@ -1318,7 +1318,7 @@ MoveEffect_Snore: @ 81D7AB0
 	jump BattleScript_ButItFailed
 
 BattleScript_1D7AC2: @ 81D7AC2
-	jumpifhalfword 0, 0x2024be8, 214, BattleScript_1D7AD6
+	jumpifhalfword 0, gUnknown_02024BE8, 214, BattleScript_1D7AD6
 	printstring BATTLE_TEXT_FastAsleep
 	waitmessage 64
 	statusanimation USER
@@ -1327,7 +1327,7 @@ BattleScript_1D7AD6: @ 81D7AD6
 	attackstring
 	ppreduce
 	accuracycheck BattleScript_1D6F77, 0
-	setbyte 0x2024d21, 8
+	setbyte gUnknown_02024D1F + 0x2, 8
 	jump BattleScript_1D6F44
 
 MoveEffect_Conversion2: @ 81D7AEA
@@ -1379,7 +1379,7 @@ BattleScript_1D7B52: @ 81D7B52
 	statusanimation USER
 	attackstring
 	ppreduce
-	orword 0x2024c6c, 0x800
+	orword gHitMarker, 0x800
 	selectrandommovefromusermoves BattleScript_1D7B72
 	pause 64
 	jump BattleScript_ButItFailed
@@ -1387,8 +1387,8 @@ BattleScript_1D7B52: @ 81D7B52
 BattleScript_1D7B72: @ 81D7B72
 	attackanimation
 	waitanimation
-	setbyte 0x2016002, 0
-	setbyte 0x20160a1, 0
+	setbyte gSharedMem + 0x16002, 0
+	setbyte gSharedMem + 0x160A1, 0
 	jumptoattack USER
 
 MoveEffect_DestinyBond: @ 81D7B82
@@ -1428,13 +1428,13 @@ MoveEffect_HealBell: @ 81D7BB5
 	waitanimation
 	printfromtable BattleTextList_4015D8
 	waitmessage 64
-	jumpifhalfword 1, 0x2024be6, 215, BattleScript_1D7BF2
-	jumpifbyte 5, 0x2024d23, 1, BattleScript_1D7BE1
+	jumpifhalfword 1, gCurrentMove, 215, BattleScript_1D7BF2
+	jumpifbyte 5, gUnknown_02024D1F + 0x4, 1, BattleScript_1D7BE1
 	printstring BATTLE_TEXT_BlocksOther
 	waitmessage 64
 
 BattleScript_1D7BE1: @ 81D7BE1
-	jumpifbyte 5, 0x2024d23, 2, BattleScript_1D7BF2
+	jumpifbyte 5, gUnknown_02024D1F + 0x4, 2, BattleScript_1D7BF2
 	printstring BATTLE_TEXT_BlocksOther2
 	waitmessage 64
 
@@ -1447,28 +1447,28 @@ MoveEffect_TripleKick: @ 81D7BFA
 	attackcanceler
 	attackstring
 	ppreduce
-	setbyte 0x20160de, 0
-	setbyte 0x20160df, 0
+	setbyte gSharedMem + 0x160DE, 0
+	setbyte gSharedMem + 0x160DF, 0
 	atk8e
 	atk26 3
 
 BattleScript_1D7C0C: @ 81D7C0C
 	jumpiffainted USER, BattleScript_1D7CAF
 	jumpiffainted TARGET, BattleScript_1D7C8D
-	jumpifhalfword 0, 0x2024be8, 214, BattleScript_1D7C2E
+	jumpifhalfword 0, gUnknown_02024BE8, 214, BattleScript_1D7C2E
 	jumpifstatus USER, SLP, BattleScript_1D7C8D
 
 BattleScript_1D7C2E: @ 81D7C2E
 	atk25
 	accuracycheck BattleScript_1D7C8D, 0
-	addbyte 0x20160de, 10
-	addbyte 0x20160e4, 1
-	copyarray 0x2024dec, 0x20160de, 2
+	addbyte gSharedMem + 0x160DE, 10
+	addbyte gSharedMem + 0x160E4, 1
+	copyarray gDynamicBasePower, gSharedMem + 0x160DE, 2
 	critcalc
 	atk5
 	atk6
 	atk7
-	jumpifbyte 4, 0x2024c68, 41, BattleScript_1D7C8D
+	jumpifbyte 4, gBattleMoveFlags, 41, BattleScript_1D7C8D
 	attackanimation
 	waitanimation
 	missmessage
@@ -1480,9 +1480,9 @@ BattleScript_1D7C2E: @ 81D7C2E
 	waitmessage 64
 	printstring BATTLE_TEXT_Terminator2
 	waitmessage 1
-	setbyte 0x201600c, 0
+	setbyte gSharedMem + 0x1600C, 0
 	atk49 2, 16
-	jumpifbyte 4, 0x2024c68, 64, BattleScript_1D7C90
+	jumpifbyte 4, gBattleMoveFlags, 64, BattleScript_1D7C90
 	atk27 BattleScript_1D7C0C
 	jump BattleScript_1D7C90
 
@@ -1492,20 +1492,20 @@ BattleScript_1D7C8D: @ 81D7C8D
 BattleScript_1D7C90: @ 81D7C90
 	resultmessage
 	waitmessage 64
-	jumpifbyte 0, 0x20160e4, 0, BattleScript_1D7CAF
-	copyarray gBattleTextBuff1, 0x20160e0, 6
+	jumpifbyte 0, gSharedMem + 0x160E4, 0, BattleScript_1D7CAF
+	copyarray gBattleTextBuff1, gSharedMem + 0x160E0, 6
 	printstring BATTLE_TEXT_HitMulti
 	waitmessage 64
 
 BattleScript_1D7CAF: @ 81D7CAF
 	seteffectwithchancetarget
 	faintpokemon TARGET, 0, 0x0
-	setbyte 0x201600c, 14
+	setbyte gSharedMem + 0x1600C, 14
 	atk49 0, 0
 	end
 
 MoveEffect_Thief: @ 81D7CC1
-	setbyte 0x2024d21, 31
+	setbyte gUnknown_02024D1F + 0x2, 31
 	jump BattleScript_1D6F14
 
 MoveEffect_MeanLook: @ 81D7CCC
@@ -1516,7 +1516,7 @@ MoveEffect_MeanLook: @ 81D7CCC
 	jumpifsecondarytstatus TARGET, S_MEAN_LOOK, BattleScript_ButItFailed
 	attackanimation
 	waitanimation
-	setbyte 0x2024d21, 32
+	setbyte gUnknown_02024D1F + 0x2, 32
 	seteffecttarget
 	printstring BATTLE_TEXT_CantEscapeNow
 	waitmessage 64
@@ -1534,7 +1534,7 @@ MoveEffect_Nightmare: @ 81D7CF4
 BattleScript_1D7D1A: @ 81D7D1A
 	attackanimation
 	waitanimation
-	setbyte 0x2024d21, 33
+	setbyte gUnknown_02024D1F + 0x2, 33
 	seteffecttarget
 	printstring BATTLE_TEXT_NightmareStart
 	waitmessage 64
@@ -1543,7 +1543,7 @@ BattleScript_1D7D1A: @ 81D7D1A
 MoveEffect_Minimize: @ 81D7D2E
 	attackcanceler
 	setminimize
-	setbyte 0x201601e, 23
+	setbyte gSharedMem + 0x1601E, 23
 	jump BattleScript_1D71B3
 
 MoveEffect_Curse: @ 81D7D3B
@@ -1556,23 +1556,23 @@ MoveEffect_Curse: @ 81D7D3B
 	jumpifstat USER, 0, 2, 12, BattleScript_ButItFailed
 
 BattleScript_1D7D60: @ 81D7D60
-	copyarray 0x2024c08, 0x2024c07, 1
-	setbyte 0x2016002, 1
+	copyarray gBankTarget, gBankAttacker, 1
+	setbyte gSharedMem + 0x16002, 1
 	attackanimation
 	waitanimation
-	setbyte 0x201601e, 147
+	setbyte gSharedMem + 0x1601E, 147
 	statbuffchange 65, BattleScript_1D7D86
 	printfromtable BattleTextList_40157C
 	waitmessage 64
 
 BattleScript_1D7D86: @ 81D7D86
-	setbyte 0x201601e, 17
+	setbyte gSharedMem + 0x1601E, 17
 	statbuffchange 65, BattleScript_1D7D9A
 	printfromtable BattleTextList_401570
 	waitmessage 64
 
 BattleScript_1D7D9A: @ 81D7D9A
-	setbyte 0x201601e, 18
+	setbyte gSharedMem + 0x1601E, 18
 	statbuffchange 65, BattleScript_1D7DAE
 	printfromtable BattleTextList_401570
 	waitmessage 64
@@ -1581,7 +1581,7 @@ BattleScript_1D7DAE: @ 81D7DAE
 	jump BattleScript_EndTurn
 
 BattleScript_1D7DB3: @ 81D7DB3
-	jumpifarraynotequal 0x2024c07, 0x2024c08, 1, BattleScript_1D7DC4
+	jumpifarraynotequal gBankAttacker, gBankTarget, 1, BattleScript_1D7DC4
 	atk76 USER, 3
 
 BattleScript_1D7DC4: @ 81D7DC4
@@ -1590,8 +1590,8 @@ BattleScript_1D7DC4: @ 81D7DC4
 	ppreduce
 	jumpifsecondarytstatus TARGET, S_SUBSTITUTE, BattleScript_ButItFailed
 	cursetarget BattleScript_ButItFailed
-	orword 0x2024c6c, 0x100
-	setbyte 0x2016002, 0
+	orword gHitMarker, 0x100
+	setbyte gSharedMem + 0x16002, 0
 	attackanimation
 	waitanimation
 	graphicalhpupdate USER
@@ -1645,14 +1645,14 @@ MoveEffect_PerishSong: @ 81D7E3D
 	waitanimation
 	printstring BATTLE_TEXT_PerishSong
 	waitmessage 64
-	setbyte 0x2016003, 0
+	setbyte gSharedMem + 0x16003, 0
 
 BattleScript_1D7E53: @ 81D7E53
 	jumpifability 10, ABILITY_SOUNDPROOF, BattleScript_1D7E73
 
 BattleScript_1D7E5A: @ 81D7E5A
-	addbyte 0x2016003, 1
-	jumpifarraynotequal 0x2016003, 0x2024a68, 1, BattleScript_1D7E53
+	addbyte gSharedMem + 0x16003, 1
+	jumpifarraynotequal gSharedMem + 0x16003, gNoOfAllBanks, 1, BattleScript_1D7E53
 	jump BattleScript_EndTurn
 
 BattleScript_1D7E73: @ 81D7E73
@@ -1690,18 +1690,18 @@ MoveEffect_Swagger: @ 81D7EA2
 	jumpifconfusedandattackmaxed 1, BattleScript_ButItFailed
 	attackanimation
 	waitanimation
-	setbyte 0x201601e, 33
+	setbyte gSharedMem + 0x1601E, 33
 	statbuffchange 1, BattleScript_1D7EE5
-	jumpifbyte 0, 0x2024d23, 2, BattleScript_1D7EE5
+	jumpifbyte 0, gUnknown_02024D1F + 0x4, 2, BattleScript_1D7EE5
 	atk47
-	playanimation TARGET, 1, 0x20160a4
+	playanimation TARGET, 1, gSharedMem + 0x160A4
 	printfromtable BattleTextList_401570
 	waitmessage 64
 
 BattleScript_1D7EE5: @ 81D7EE5
 	jumpifability TARGET, ABILITY_OWN_TEMPO, BattleScript_1D98E5
 	jumpifhalverset TARGET, 32, BattleScript_1D9037
-	setbyte 0x2024d21, 7
+	setbyte gUnknown_02024D1F + 0x2, 7
 	seteffecttarget
 	jump BattleScript_EndTurn
 
@@ -1716,7 +1716,7 @@ BattleScript_1D7F0A: @ 81D7F0A
 	critcalc
 	atk5
 	atk6
-	jumpifbyte 4, 0x2024c68, 41, BattleScript_1D7F0A
+	jumpifbyte 4, gBattleMoveFlags, 41, BattleScript_1D7F0A
 	atk7
 	jump BattleScript_1D6F48
 
@@ -1755,7 +1755,7 @@ MoveEffect_Safeguard: @ 81D7F55
 	jump BattleScript_1D7786
 
 MoveEffect_ThawHit: @ 81D7F5E
-	setbyte 0x2024d21, 3
+	setbyte gUnknown_02024D1F + 0x2, 3
 	jump BattleScript_1D6F14
 
 MoveEffect_Magnitude: @ 81D7F69
@@ -1791,7 +1791,7 @@ MoveEffect_BatonPass: @ 81D7F7C
 	jump BattleScript_EndTurn
 
 MoveEffect_RapidSpin: @ 81D7FA9
-	setbyte 0x2024d21, 163
+	setbyte gUnknown_02024D1F + 0x2, 163
 	jump BattleScript_1D6F14
 
 MoveEffect_Sonicboom: @ 81D7FB4
@@ -1800,11 +1800,11 @@ MoveEffect_Sonicboom: @ 81D7FB4
 	attackstring
 	ppreduce
 	atk6
-	bicbyte 0x2024c68, 6
-	setbyte 0x2024bec, 20
-	setbyte 0x2024bed, 0
-	setbyte 0x2024bee, 0
-	setbyte 0x2024bef, 0
+	bicbyte gBattleMoveFlags, 6
+	setbyte gBattleMoveDamage, 20
+	setbyte gBattleMoveDamage + 0x1, 0
+	setbyte gBattleMoveDamage + 0x2, 0
+	setbyte gBattleMoveDamage + 0x3, 0
 	atk69
 	jump BattleScript_1D6F48
 
@@ -1843,15 +1843,15 @@ MoveEffect_SunnyDay: @ 81D800E
 	jump BattleScript_1D7FFA
 
 MoveEffect_DefenseUpHit: @ 81D8017
-	setbyte 0x2024d21, 80
+	setbyte gUnknown_02024D1F + 0x2, 80
 	jump BattleScript_1D6F14
 
 MoveEffect_AttackUpHit: @ 81D8022
-	setbyte 0x2024d21, 79
+	setbyte gUnknown_02024D1F + 0x2, 79
 	jump BattleScript_1D6F14
 
 MoveEffect_AllStatsUpHit: @ 81D802D
-	setbyte 0x2024d21, 98
+	setbyte gUnknown_02024D1F + 0x2, 98
 	jump BattleScript_1D6F14
 
 MoveEffect_BellyDrum: @ 81D8038
@@ -1859,7 +1859,7 @@ MoveEffect_BellyDrum: @ 81D8038
 	attackstring
 	ppreduce
 	maxattackhalvehp BattleScript_ButItFailed
-	orword 0x2024c6c, 0x100
+	orword gHitMarker, 0x100
 	attackanimation
 	waitanimation
 	graphicalhpupdate USER
@@ -1891,14 +1891,14 @@ MoveEffect_MirrorCoat: @ 81D806F
 
 MoveEffect_SkullBash: @ 81D8085
 	jumpifsecondarytstatus USER, S_CONTINUE, BattleScript_1D753D
-	jumpifword 4, 0x2024c6c, 0x200, BattleScript_1D753D
-	setbyte 0x2016055, 2
+	jumpifword 4, gHitMarker, 0x200, BattleScript_1D753D
+	setbyte gSharedMem + 0x16055, 2
 	callatk BattleScript_1D756C
-	setbyte 0x201601e, 18
+	setbyte gSharedMem + 0x1601E, 18
 	statbuffchange 65, BattleScript_1D80CF
-	jumpifbyte 0, 0x2024d23, 2, BattleScript_1D80CF
+	jumpifbyte 0, gUnknown_02024D1F + 0x4, 2, BattleScript_1D80CF
 	atk47
-	playanimation USER, 1, 0x20160a4
+	playanimation USER, 1, gSharedMem + 0x160A4
 	printfromtable BattleTextList_401570
 	waitmessage 64
 
@@ -1907,11 +1907,11 @@ BattleScript_1D80CF: @ 81D80CF
 
 MoveEffect_Twister: @ 81D80D4
 	jumpifspecialstatusflag TARGET, 0x40, 1, BattleScript_1D80EE
-	orword 0x2024c6c, 0x10000
-	setbyte 0x201601f, 2
+	orword gHitMarker, 0x10000
+	setbyte gSharedMem + 0x1601F, 2
 
 BattleScript_1D80EE: @ 81D80EE
-	setbyte 0x2024d21, 8
+	setbyte gUnknown_02024D1F + 0x2, 8
 	jump BattleScript_1D6F14
 
 MoveEffect_Earthquake: @ 81D80F9
@@ -1923,13 +1923,13 @@ MoveEffect_Earthquake: @ 81D80F9
 BattleScript_1D80FD: @ 81D80FD
 	atk25
 	jumpifspecialstatusflag TARGET, 0x80, 1, BattleScript_1D811D
-	orword 0x2024c6c, 0x20000
-	setbyte 0x201601f, 2
+	orword gHitMarker, 0x20000
+	setbyte gSharedMem + 0x1601F, 2
 	jump BattleScript_1D812C
 
 BattleScript_1D811D: @ 81D811D
-	bicword 0x2024c6c, 0x20000
-	setbyte 0x201601f, 1
+	bicword gHitMarker, 0x20000
+	setbyte gSharedMem + 0x1601F, 1
 
 BattleScript_1D812C: @ 81D812C
 	accuracycheck BattleScript_1D8165, 0
@@ -1951,7 +1951,7 @@ BattleScript_1D812C: @ 81D812C
 	printstring BATTLE_TEXT_Terminator2
 	waitmessage 1
 	faintpokemon TARGET, 0, 0x0
-	setbyte 0x201600c, 0
+	setbyte gSharedMem + 0x1600C, 0
 	atk49 2, 16
 	jumpwhiletargetvalid BattleScript_1D80FD
 	end
@@ -1962,7 +1962,7 @@ BattleScript_1D8165: @ 81D8165
 	missmessage
 	resultmessage
 	waitmessage 64
-	setbyte 0x201600c, 0
+	setbyte gSharedMem + 0x1600C, 0
 	atk49 2, 16
 	jumpwhiletargetvalid BattleScript_1D80FD
 	end
@@ -1980,52 +1980,52 @@ MoveEffect_FutureSight: @ 81D817D
 
 MoveEffect_Gust: @ 81D8194
 	jumpifspecialstatusflag TARGET, 0x40, 1, BattleScript_1D6F14
-	orword 0x2024c6c, 0x10000
-	setbyte 0x201601f, 2
+	orword gHitMarker, 0x10000
+	setbyte gSharedMem + 0x1601F, 2
 	jump BattleScript_1D6F14
 
 MoveEffect_FlinchHit2: @ 81D81B3
 	jumpifspecialstatusflag TARGET, 0x100, 1, BattleScript_1D80EE
-	setbyte 0x201601f, 2
+	setbyte gSharedMem + 0x1601F, 2
 	jump BattleScript_1D80EE
 
 MoveEffect_Solarbeam: @ 81D81C9
 	jumpifabilitypresent ABILITY_CLOUD_NINE, BattleScript_1D81E1
 	jumpifabilitypresent ABILITY_AIR_LOCK, BattleScript_1D81E1
-	jumpifhalfword 4, 0x2024db8, 96, BattleScript_1D8209
+	jumpifhalfword 4, gBattleWeather, 96, BattleScript_1D8209
 
 BattleScript_1D81E1: @ 81D81E1
 	jumpifsecondarytstatus USER, S_CONTINUE, BattleScript_1D753D
-	jumpifword 4, 0x2024c6c, 0x200, BattleScript_1D753D
-	setbyte 0x2016055, 1
+	jumpifword 4, gHitMarker, 0x200, BattleScript_1D753D
+	setbyte gSharedMem + 0x16055, 1
 	callatk BattleScript_1D756C
 	jump BattleScript_EndTurn
 
 BattleScript_1D8209: @ 81D8209
-	orword 0x2024c6c, 0x8000000
-	setbyte 0x2024d21, 76
+	orword gHitMarker, 0x8000000
+	setbyte gUnknown_02024D1F + 0x2, 76
 	seteffecttarget
 	ppreduce
 	jump BattleScript_1D753D
 
 MoveEffect_Thunder: @ 81D821F
-	setbyte 0x2024d21, 5
-	orword 0x2024c6c, 0x10000
+	setbyte gUnknown_02024D1F + 0x2, 5
+	orword gHitMarker, 0x10000
 	jump BattleScript_1D6F14
 
 MoveEffect_Teleport: @ 81D8233
 	attackcanceler
 	attackstring
 	ppreduce
-	jumpifhalfword 4, 0x20239f8, 8, BattleScript_ButItFailed
+	jumpifhalfword 4, gBattleTypeFlags, 8, BattleScript_ButItFailed
 	atk76 USER, 2
-	jumpifbyte 0, 0x2024d1e, 1, BattleScript_ButItFailed
-	jumpifbyte 0, 0x2024d1e, 2, BattleScript_1D8839
+	jumpifbyte 0, gBattleCommunication, 1, BattleScript_ButItFailed
+	jumpifbyte 0, gBattleCommunication, 2, BattleScript_1D8839
 	attackanimation
 	waitanimation
 	printstring BATTLE_TEXT_FledBattle
 	waitmessage 64
-	setbyte 0x2024d26, 5
+	setbyte gBattleOutcome, 5
 	jump BattleScript_EndTurn
 
 MoveEffect_BeatUp: @ 81D826E
@@ -2034,14 +2034,14 @@ MoveEffect_BeatUp: @ 81D826E
 	attackstring
 	pause 32
 	ppreduce
-	setbyte 0x2024d1e, 0
+	setbyte gBattleCommunication, 0
 
 BattleScript_1D8281: @ 81D8281
 	atk25
 	beatupcalculation BattleScript_1D82C4, BattleScript_ButItFailed
 	printstring BATTLE_TEXT_PokeAttack
 	critcalc
-	jumpifbyte 1, 0x2024c0d, 2, BattleScript_1D829C
+	jumpifbyte 1, gCritMultiplier, 2, BattleScript_1D829C
 	manipulatedamage 2
 
 BattleScript_1D829C: @ 81D829C
@@ -2058,7 +2058,7 @@ BattleScript_1D829C: @ 81D829C
 	resultmessage
 	waitmessage 64
 	faintpokemon TARGET, 0, 0x0
-	setbyte 0x201600c, 0
+	setbyte gSharedMem + 0x1600C, 0
 	atk49 2, 16
 	jump BattleScript_1D8281
 
@@ -2067,23 +2067,23 @@ BattleScript_1D82C4: @ 81D82C4
 
 MoveEffect_Fly: @ 81D82C5
 	jumpifsecondarytstatus USER, S_CONTINUE, BattleScript_1D8333
-	jumpifword 4, 0x2024c6c, 0x200, BattleScript_1D8333
-	jumpifhalfword 0, 0x2024be6, 19, BattleScript_1D8322
-	jumpifhalfword 0, 0x2024be6, 291, BattleScript_1D8317
-	jumpifhalfword 0, 0x2024be6, 340, BattleScript_1D830C
-	setbyte 0x2016055, 5
+	jumpifword 4, gHitMarker, 0x200, BattleScript_1D8333
+	jumpifhalfword 0, gCurrentMove, 19, BattleScript_1D8322
+	jumpifhalfword 0, gCurrentMove, 291, BattleScript_1D8317
+	jumpifhalfword 0, gCurrentMove, 340, BattleScript_1D830C
+	setbyte gSharedMem + 0x16055, 5
 	jump BattleScript_1D8328
 
 BattleScript_1D830C: @ 81D830C
-	setbyte 0x2016055, 7
+	setbyte gSharedMem + 0x16055, 7
 	jump BattleScript_1D8328
 
 BattleScript_1D8317: @ 81D8317
-	setbyte 0x2016055, 6
+	setbyte gSharedMem + 0x16055, 6
 	jump BattleScript_1D8328
 
 BattleScript_1D8322: @ 81D8322
-	setbyte 0x2016055, 4
+	setbyte gSharedMem + 0x16055, 4
 
 BattleScript_1D8328: @ 81D8328
 	callatk BattleScript_1D756C
@@ -2092,12 +2092,12 @@ BattleScript_1D8328: @ 81D8328
 
 BattleScript_1D8333: @ 81D8333
 	attackcanceler
-	setbyte 0x2024d21, 12
-	setbyte 0x2016002, 1
+	setbyte gUnknown_02024D1F + 0x2, 12
+	setbyte gSharedMem + 0x16002, 1
 	clearstatus USER
-	orword 0x2024c6c, 0x800
-	jumpifhalfword 1, 0x2024be6, 340, BattleScript_1D835D
-	setbyte 0x2024d21, 5
+	orword gHitMarker, 0x800
+	jumpifhalfword 1, gCurrentMove, 340, BattleScript_1D835D
+	setbyte gUnknown_02024D1F + 0x2, 5
 
 BattleScript_1D835D: @ 81D835D
 	accuracycheck BattleScript_1D836A, 0
@@ -2113,9 +2113,9 @@ MoveEffect_DefenseCurl: @ 81D8370
 	attackstring
 	ppreduce
 	setcurled
-	setbyte 0x201601e, 18
+	setbyte gSharedMem + 0x1601E, 18
 	statbuffchange 65, BattleScript_1D838D
-	jumpifbyte 0, 0x2024d23, 2, BattleScript_1D71D8
+	jumpifbyte 0, gUnknown_02024D1F + 0x4, 2, BattleScript_1D71D8
 	attackanimation
 	waitanimation
 
@@ -2131,7 +2131,7 @@ MoveEffect_Softboiled: @ 81D8392
 BattleScript_1D839B:: @ 81D839B
 	attackanimation
 	waitanimation
-	orword 0x2024c6c, 0x100
+	orword gHitMarker, 0x100
 	graphicalhpupdate TARGET
 	datahpupdate TARGET
 	printstring BATTLE_TEXT_RegainedHealth
@@ -2147,7 +2147,7 @@ BattleScript_1D83B5:: @ 81D83B5
 MoveEffect_FakeOut: @ 81D83C3
 	attackcanceler
 	jumpifnotfirstturn BattleScript_1D83D4
-	setbyte 0x2024d21, 136
+	setbyte gUnknown_02024D1F + 0x2, 136
 	jump BattleScript_1D6F14
 
 BattleScript_1D83D4: @ 81D83D4
@@ -2158,14 +2158,14 @@ BattleScript_1D83D5: @ 81D83D5
 
 BattleScript_ButItFailed:: @ 81D83D6
 	pause 32
-	orbyte 0x2024c68, 32
+	orbyte gBattleMoveFlags, 32
 	resultmessage
 	waitmessage 64
 	jump BattleScript_EndTurn
 
 BattleScript_1D83E8: @ 81D83E8
 	pause 32
-	orbyte 0x2024c68, 8
+	orbyte gBattleMoveFlags, 8
 	resultmessage
 	waitmessage 64
 	jump BattleScript_EndTurn
@@ -2173,7 +2173,7 @@ BattleScript_1D83E8: @ 81D83E8
 MoveEffect_Uproar: @ 81D83FA
 	attackcanceler
 	accuracycheck BattleScript_1D6F72, 0
-	setbyte 0x2024d21, 74
+	setbyte gUnknown_02024D1F + 0x2, 74
 	attackstring
 	jumpifsecondarytstatus USER, S_CONTINUE, BattleScript_1D8414
 	ppreduce
@@ -2195,7 +2195,7 @@ MoveEffect_Stockpile: @ 81D841A
 
 MoveEffect_SpitUp: @ 81D842D
 	attackcanceler
-	jumpifbyte 0, 0x2024d24, 1, BattleScript_1D845C
+	jumpifbyte 0, gUnknown_02024D1F + 0x5, 1, BattleScript_1D845C
 	attackstring
 	ppreduce
 	accuracycheck BattleScript_1D6F72, 0
@@ -2260,18 +2260,18 @@ MoveEffect_Flatter: @ 81D84B1
 	jumpifconfusedandattackmaxed 4, BattleScript_ButItFailed
 	attackanimation
 	waitanimation
-	setbyte 0x201601e, 20
+	setbyte gSharedMem + 0x1601E, 20
 	statbuffchange 1, BattleScript_1D84F4
-	jumpifbyte 0, 0x2024d23, 2, BattleScript_1D84F4
+	jumpifbyte 0, gUnknown_02024D1F + 0x4, 2, BattleScript_1D84F4
 	atk47
-	playanimation TARGET, 1, 0x20160a4
+	playanimation TARGET, 1, gSharedMem + 0x160A4
 	printfromtable BattleTextList_401570
 	waitmessage 64
 
 BattleScript_1D84F4: @ 81D84F4
 	jumpifability TARGET, ABILITY_OWN_TEMPO, BattleScript_1D98E5
 	jumpifhalverset TARGET, 32, BattleScript_1D9037
-	setbyte 0x2024d21, 7
+	setbyte gUnknown_02024D1F + 0x2, 7
 	seteffecttarget
 	jump BattleScript_EndTurn
 
@@ -2288,13 +2288,13 @@ MoveEffect_WillOWisp: @ 81D850F
 	jumpifhalverset TARGET, 32, BattleScript_1D9037
 	attackanimation
 	waitanimation
-	setbyte 0x2024d21, 3
+	setbyte gUnknown_02024D1F + 0x2, 3
 	seteffecttarget
 	jump BattleScript_EndTurn
 
 BattleScript_1D855B: @ 81D855B
-	copyarray 0x2024c0a, 0x2024c08, 1
-	setbyte 0x2024d23, 0
+	copyarray gEffectBank, gBankTarget, 1
+	setbyte gUnknown_02024D1F + 0x4, 0
 	callatk BattleScript_BRNPrevention
 	jump BattleScript_EndTurn
 
@@ -2306,7 +2306,7 @@ BattleScript_1D8575: @ 81D8575
 
 MoveEffect_Memento: @ 81D8583
 	attackcanceler
-	jumpifbyte 0, 0x2024d24, 1, BattleScript_1D860A
+	jumpifbyte 0, gUnknown_02024D1F + 0x5, 1, BattleScript_1D860A
 	attackstring
 	ppreduce
 	jumpifattackandspecialattackcannotfall BattleScript_ButItFailed
@@ -2314,20 +2314,20 @@ MoveEffect_Memento: @ 81D8583
 	attackanimation
 	waitanimation
 	jumpifsecondarytstatus TARGET, S_SUBSTITUTE, BattleScript_1D85FF
-	setbyte 0x20160dc, 0
+	setbyte gSharedMem + 0x160DC, 0
 	playstatchangeanimation TARGET, 18, 7
 	playstatchangeanimation TARGET, 2, 3
-	setbyte 0x201601e, 161
+	setbyte gSharedMem + 0x1601E, 161
 	statbuffchange 1, BattleScript_1D85D0
-	jumpifbyte 2, 0x2024d23, 1, BattleScript_1D85D0
+	jumpifbyte 2, gUnknown_02024D1F + 0x4, 1, BattleScript_1D85D0
 	printfromtable BattleTextList_40157C
 	waitmessage 64
 
 BattleScript_1D85D0: @ 81D85D0
 	playstatchangeanimation TARGET, 16, 3
-	setbyte 0x201601e, 164
+	setbyte gSharedMem + 0x1601E, 164
 	statbuffchange 1, BattleScript_1D85F3
-	jumpifbyte 2, 0x2024d23, 1, BattleScript_1D85F3
+	jumpifbyte 2, gUnknown_02024D1F + 0x4, 1, BattleScript_1D85F3
 	printfromtable BattleTextList_40157C
 	waitmessage 64
 
@@ -2359,7 +2359,7 @@ MoveEffect_Facade: @ 81D8626
 	jump BattleScript_1D6F14
 
 BattleScript_1D8635: @ 81D8635
-	setbyte 0x201601f, 2
+	setbyte gSharedMem + 0x1601F, 2
 	jump BattleScript_1D6F14
 
 MoveEffect_FocusPunch: @ 81D8640
@@ -2372,12 +2372,12 @@ MoveEffect_FocusPunch: @ 81D8640
 
 MoveEffect_Smellingsalt: @ 81D8652
 	jumpifsecondarytstatus TARGET, S_SUBSTITUTE, BattleScript_1D6F14
-	setbyte 0x2024d21, 164
+	setbyte gUnknown_02024D1F + 0x2, 164
 	jumpifstatus TARGET, PAR, BattleScript_1D8671
 	jump BattleScript_1D6F14
 
 BattleScript_1D8671: @ 81D8671
-	setbyte 0x201601f, 2
+	setbyte gSharedMem + 0x1601F, 2
 	jump BattleScript_1D6F14
 
 MoveEffect_FollowMe: @ 81D867C
@@ -2476,8 +2476,8 @@ MoveEffect_Assist: @ 81D8736
 	assistattackselect BattleScript_1D83D5
 	attackanimation
 	waitanimation
-	setbyte 0x2016002, 0
-	setbyte 0x20160a1, 0
+	setbyte gSharedMem + 0x16002, 0
+	setbyte gSharedMem + 0x160A1, 0
 	jumptoattack USER
 
 MoveEffect_Ingrain: @ 81D874D
@@ -2492,7 +2492,7 @@ MoveEffect_Ingrain: @ 81D874D
 	jump BattleScript_EndTurn
 
 MoveEffect_Superpower: @ 81D8762
-	setbyte 0x2024d21, 229
+	setbyte gUnknown_02024D1F + 0x2, 229
 	jump BattleScript_1D6F14
 
 MoveEffect_MagicCoat: @ 81D876D
@@ -2531,13 +2531,13 @@ MoveEffect_BrickBreak: @ 81D879D
 	atk5
 	atk6
 	atk7
-	jumpifbyte 0, 0x2016002, 0, BattleScript_1D87BD
-	bicbyte 0x2024c68, 9
+	jumpifbyte 0, gSharedMem + 0x16002, 0, BattleScript_1D87BD
+	bicbyte gBattleMoveFlags, 9
 
 BattleScript_1D87BD: @ 81D87BD
 	attackanimation
 	waitanimation
-	jumpifbyte 3, 0x2016002, 2, BattleScript_1D87D0
+	jumpifbyte 3, gSharedMem + 0x16002, 2, BattleScript_1D87D0
 	printstring BATTLE_TEXT_BrokeWall
 	waitmessage 64
 
@@ -2574,7 +2574,7 @@ MoveEffect_Yawn: @ 81D87EE
 	jump BattleScript_EndTurn
 
 BattleScript_1D882F: @ 81D882F
-	copyarray 0x2016003, 0x20160f8, 1
+	copyarray gSharedMem + 0x16003, gSharedMem + 0x160F8, 1
 
 BattleScript_1D8839: @ 81D8839
 	pause 32
@@ -2583,7 +2583,7 @@ BattleScript_1D8839: @ 81D8839
 	jump BattleScript_EndTurn
 
 MoveEffect_KnockOff: @ 81D8847
-	setbyte 0x2024d21, 54
+	setbyte gUnknown_02024D1F + 0x2, 54
 	jump BattleScript_1D6F14
 
 MoveEffect_Endeavor: @ 81D8852
@@ -2591,12 +2591,12 @@ MoveEffect_Endeavor: @ 81D8852
 	attackstring
 	ppreduce
 	setdamagetohealthdifference BattleScript_ButItFailed
-	copyarray 0x2024bf0, 0x2024bec, 4
+	copyarray gHP_dealt, gBattleMoveDamage, 4
 	accuracycheck BattleScript_1D6F77, 0
 	atk6
-	jumpifbyte 4, 0x2024c68, 41, BattleScript_1D6F48
-	bicbyte 0x2024c68, 6
-	copyarray 0x2024bec, 0x2024bf0, 4
+	jumpifbyte 4, gBattleMoveFlags, 41, BattleScript_1D6F48
+	bicbyte gBattleMoveFlags, 6
+	copyarray gBattleMoveDamage, gHP_dealt, 4
 	atk69
 	jump BattleScript_1D6F48
 
@@ -2675,19 +2675,19 @@ MoveEffect_SecretPower: @ 81D8918
 	jump BattleScript_1D6F14
 
 MoveEffect_DoubleEdge: @ 81D891E
-	setbyte 0x2024d21, 230
+	setbyte gUnknown_02024D1F + 0x2, 230
 	jump BattleScript_1D6F14
 
 MoveEffect_TeeterDance: @ 81D8929
 	attackcanceler
 	attackstring
 	ppreduce
-	setbyte 0x2024c08, 0
+	setbyte gBankTarget, 0
 
 BattleScript_1D8932: @ 81D8932
 	atk25
-	setbyte 0x2024d21, 7
-	jumpifarrayequal 0x2024c07, 0x2024c08, 1, BattleScript_1D8978
+	setbyte gUnknown_02024D1F + 0x2, 7
+	jumpifarrayequal gBankAttacker, gBankTarget, 1, BattleScript_1D8978
 	jumpifability TARGET, ABILITY_OWN_TEMPO, BattleScript_1D8996
 	jumpifsecondarytstatus TARGET, S_SUBSTITUTE, BattleScript_1D89B2
 	jumpifsecondarytstatus TARGET, S_CONFUSED, BattleScript_1D89C0
@@ -2700,10 +2700,10 @@ BattleScript_1D8932: @ 81D8932
 	waitmessage 64
 
 BattleScript_1D8978: @ 81D8978
-	setbyte 0x201600c, 0
+	setbyte gSharedMem + 0x1600C, 0
 	atk49 2, 16
-	addbyte 0x2024c08, 1
-	jumpifarraynotequal 0x2024c08, 0x2024a68, 1, BattleScript_1D8932
+	addbyte gBankTarget, 1
+	jumpifarraynotequal gBankTarget, gNoOfAllBanks, 1, BattleScript_1D8932
 	end
 
 BattleScript_1D8996: @ 81D8996
@@ -2748,7 +2748,7 @@ MoveEffect_WaterSport: @ 81D89D7
 	jump BattleScript_EndTurn
 
 MoveEffect_PoisonFang: @ 81D89EE
-	setbyte 0x2024d21, 6
+	setbyte gUnknown_02024D1F + 0x2, 6
 	jump BattleScript_1D6F14
 
 MoveEffect_WeatherBall: @ 81D89F9
@@ -2756,7 +2756,7 @@ MoveEffect_WeatherBall: @ 81D89F9
 	jump BattleScript_1D6F14
 
 MoveEffect_Overheat: @ 81D89FF
-	setbyte 0x2024d21, 251
+	setbyte gUnknown_02024D1F + 0x2, 251
 	jump BattleScript_1D6F14
 
 MoveEffect_Tickle: @ 81D8A0A
@@ -2770,20 +2770,20 @@ BattleScript_1D8A1F: @ 81D8A1F
 	accuracycheck BattleScript_ButItFailed, 0
 	attackanimation
 	waitanimation
-	setbyte 0x20160dc, 0
+	setbyte gSharedMem + 0x160DC, 0
 	playstatchangeanimation TARGET, 6, 5
 	playstatchangeanimation TARGET, 2, 1
-	setbyte 0x201601e, 145
+	setbyte gSharedMem + 0x1601E, 145
 	statbuffchange 1, BattleScript_1D8A55
-	jumpifbyte 0, 0x2024d23, 2, BattleScript_1D8A55
+	jumpifbyte 0, gUnknown_02024D1F + 0x4, 2, BattleScript_1D8A55
 	printfromtable BattleTextList_40157C
 	waitmessage 64
 
 BattleScript_1D8A55: @ 81D8A55
 	playstatchangeanimation TARGET, 4, 1
-	setbyte 0x201601e, 146
+	setbyte gSharedMem + 0x1601E, 146
 	statbuffchange 1, BattleScript_1D8A78
-	jumpifbyte 0, 0x2024d23, 2, BattleScript_1D8A78
+	jumpifbyte 0, gUnknown_02024D1F + 0x4, 2, BattleScript_1D8A78
 	printfromtable BattleTextList_40157C
 	waitmessage 64
 
@@ -2792,7 +2792,7 @@ BattleScript_1D8A78: @ 81D8A78
 
 BattleScript_1D8A7D: @ 81D8A7D
 	pause 32
-	orbyte 0x2024c68, 32
+	orbyte gBattleMoveFlags, 32
 	printstring BATTLE_TEXT_StatNoLower
 	waitmessage 64
 	jump BattleScript_EndTurn
@@ -2807,18 +2807,18 @@ MoveEffect_CosmicPower: @ 81D8A91
 BattleScript_1D8AA6: @ 81D8AA6
 	attackanimation
 	waitanimation
-	setbyte 0x20160dc, 0
+	setbyte gSharedMem + 0x160DC, 0
 	playstatchangeanimation USER, 36, 0
-	setbyte 0x201601e, 18
+	setbyte gSharedMem + 0x1601E, 18
 	statbuffchange 65, BattleScript_1D8AD1
-	jumpifbyte 0, 0x2024d23, 2, BattleScript_1D8AD1
+	jumpifbyte 0, gUnknown_02024D1F + 0x4, 2, BattleScript_1D8AD1
 	printfromtable BattleTextList_401570
 	waitmessage 64
 
 BattleScript_1D8AD1: @ 81D8AD1
-	setbyte 0x201601e, 21
+	setbyte gSharedMem + 0x1601E, 21
 	statbuffchange 65, BattleScript_1D8AF0
-	jumpifbyte 0, 0x2024d23, 2, BattleScript_1D8AF0
+	jumpifbyte 0, gUnknown_02024D1F + 0x4, 2, BattleScript_1D8AF0
 	printfromtable BattleTextList_401570
 	waitmessage 64
 
@@ -2826,7 +2826,7 @@ BattleScript_1D8AF0: @ 81D8AF0
 	jump BattleScript_EndTurn
 
 MoveEffect_SkyUppercut: @ 81D8AF5
-	orword 0x2024c6c, 0x10000
+	orword gHitMarker, 0x10000
 	jump BattleScript_1D6F14
 
 MoveEffect_BulkUp: @ 81D8B03
@@ -2839,18 +2839,18 @@ MoveEffect_BulkUp: @ 81D8B03
 BattleScript_1D8B18: @ 81D8B18
 	attackanimation
 	waitanimation
-	setbyte 0x20160dc, 0
+	setbyte gSharedMem + 0x160DC, 0
 	playstatchangeanimation USER, 6, 0
-	setbyte 0x201601e, 17
+	setbyte gSharedMem + 0x1601E, 17
 	statbuffchange 65, BattleScript_1D8B43
-	jumpifbyte 0, 0x2024d23, 2, BattleScript_1D8B43
+	jumpifbyte 0, gUnknown_02024D1F + 0x4, 2, BattleScript_1D8B43
 	printfromtable BattleTextList_401570
 	waitmessage 64
 
 BattleScript_1D8B43: @ 81D8B43
-	setbyte 0x201601e, 18
+	setbyte gSharedMem + 0x1601E, 18
 	statbuffchange 65, BattleScript_1D8B62
-	jumpifbyte 0, 0x2024d23, 2, BattleScript_1D8B62
+	jumpifbyte 0, gUnknown_02024D1F + 0x4, 2, BattleScript_1D8B62
 	printfromtable BattleTextList_401570
 	waitmessage 64
 
@@ -2867,18 +2867,18 @@ MoveEffect_CalmMind: @ 81D8B67
 BattleScript_1D8B7C: @ 81D8B7C
 	attackanimation
 	waitanimation
-	setbyte 0x20160dc, 0
+	setbyte gSharedMem + 0x160DC, 0
 	playstatchangeanimation USER, 48, 0
-	setbyte 0x201601e, 20
+	setbyte gSharedMem + 0x1601E, 20
 	statbuffchange 65, BattleScript_1D8BA7
-	jumpifbyte 0, 0x2024d23, 2, BattleScript_1D8BA7
+	jumpifbyte 0, gUnknown_02024D1F + 0x4, 2, BattleScript_1D8BA7
 	printfromtable BattleTextList_401570
 	waitmessage 64
 
 BattleScript_1D8BA7: @ 81D8BA7
-	setbyte 0x201601e, 21
+	setbyte gSharedMem + 0x1601E, 21
 	statbuffchange 65, BattleScript_1D8BC6
-	jumpifbyte 0, 0x2024d23, 2, BattleScript_1D8BC6
+	jumpifbyte 0, gUnknown_02024D1F + 0x4, 2, BattleScript_1D8BC6
 	printfromtable BattleTextList_401570
 	waitmessage 64
 
@@ -2887,7 +2887,7 @@ BattleScript_1D8BC6: @ 81D8BC6
 
 BattleScript_1D8BCB: @ 81D8BCB
 	pause 32
-	orbyte 0x2024c68, 32
+	orbyte gBattleMoveFlags, 32
 	printstring BATTLE_TEXT_StatNoHigher
 	waitmessage 64
 	jump BattleScript_EndTurn
@@ -2902,18 +2902,18 @@ MoveEffect_DragonDance: @ 81D8BDF
 BattleScript_1D8BF4: @ 81D8BF4
 	attackanimation
 	waitanimation
-	setbyte 0x20160dc, 0
+	setbyte gSharedMem + 0x160DC, 0
 	playstatchangeanimation USER, 10, 0
-	setbyte 0x201601e, 17
+	setbyte gSharedMem + 0x1601E, 17
 	statbuffchange 65, BattleScript_1D8C1F
-	jumpifbyte 0, 0x2024d23, 2, BattleScript_1D8C1F
+	jumpifbyte 0, gUnknown_02024D1F + 0x4, 2, BattleScript_1D8C1F
 	printfromtable BattleTextList_401570
 	waitmessage 64
 
 BattleScript_1D8C1F: @ 81D8C1F
-	setbyte 0x201601e, 19
+	setbyte gSharedMem + 0x1601E, 19
 	statbuffchange 65, BattleScript_1D8C3E
-	jumpifbyte 0, 0x2024d23, 2, BattleScript_1D8C3E
+	jumpifbyte 0, gUnknown_02024D1F + 0x4, 2, BattleScript_1D8C3E
 	printfromtable BattleTextList_401570
 	waitmessage 64
 
@@ -2948,40 +2948,40 @@ gUnknown_081D8C65:: @ 81D8C65
 	return
 
 gUnknown_081D8C72:: @ 81D8C72
-	setbyte 0x201600f, 0
+	setbyte gSharedMem + 0x1600F, 0
 	atk23 0
 	end2
 
 gUnknown_081D8C7B:: @ 81D8C7B
 	atk24 BattleScript_1D8D87
-	jumpifbyte 1, 0x2024d26, 0, BattleScript_1D8D86
-	jumpifhalfword 4, 0x20239f8, 8, BattleScript_1D8CC2
-	jumpifword 5, 0x2024c6c, 0x400000, BattleScript_1D8CC2
+	jumpifbyte 1, gBattleOutcome, 0, BattleScript_1D8D86
+	jumpifhalfword 4, gBattleTypeFlags, 8, BattleScript_1D8CC2
+	jumpifword 5, gHitMarker, 0x400000, BattleScript_1D8CC2
 	printstring BATTLE_TEXT_UseNext
-	setbyte 0x2024d1e, 0
+	setbyte gBattleCommunication, 0
 	atk67
-	jumpifbyte 0, 0x2024d1f, 0, BattleScript_1D8CC2
+	jumpifbyte 0, gUnknown_02024D1F, 0, BattleScript_1D8CC2
 	atk72 BattleScript_1D8D86
 	printstring BATTLE_TEXT_CantEscape
 
 BattleScript_1D8CC2: @ 81D8CC2
 	openpartyscreen 3, BattleScript_1D8D86
 	atk51 3, 2
-	jumpifhalfword 5, 0x20239f8, 8, BattleScript_1D8D66
-	jumpifhalfword 4, 0x20239f8, 2, BattleScript_1D8D66
-	jumpifhalfword 4, 0x20239f8, 256, BattleScript_1D8D66
-	jumpifhalfword 4, 0x20239f8, 1, BattleScript_1D8D66
-	jumpifword 4, 0x2024c6c, 0x400000, BattleScript_1D8D66
-	jumpifbyte 0, 0x2016084, 1, BattleScript_1D8D66
+	jumpifhalfword 5, gBattleTypeFlags, 8, BattleScript_1D8D66
+	jumpifhalfword 4, gBattleTypeFlags, 2, BattleScript_1D8D66
+	jumpifhalfword 4, gBattleTypeFlags, 256, BattleScript_1D8D66
+	jumpifhalfword 4, gBattleTypeFlags, 1, BattleScript_1D8D66
+	jumpifword 4, gHitMarker, 0x400000, BattleScript_1D8D66
+	jumpifbyte 0, gSharedMem + 0x16084, 1, BattleScript_1D8D66
 	jumpifcannotswitch USER, BattleScript_1D8D66
 	printstring BATTLE_TEXT_WillSwitch
-	setbyte 0x2024d1e, 0
+	setbyte gBattleCommunication, 0
 	atk67
-	jumpifbyte 0, 0x2024d1f, 1, BattleScript_1D8D66
+	jumpifbyte 0, gUnknown_02024D1F, 1, BattleScript_1D8D66
 	atk6e
 	openpartyscreen 129, BattleScript_1D8D66
 	atk51 USER, 2
-	jumpifbyte 0, 0x2024d1e, 6, BattleScript_1D8D66
+	jumpifbyte 0, gBattleCommunication, 6, BattleScript_1D8D66
 	atk6b
 	atk76 USER, 5
 	atk74 1
@@ -3011,7 +3011,7 @@ BattleScript_1D8D66: @ 81D8D66
 	switch3 3, 0
 	waitstateatk
 	atk52 3
-	jumpifhalfword 4, 0x20239f8, 1, BattleScript_1D8D86
+	jumpifhalfword 4, gBattleTypeFlags, 1, BattleScript_1D8D86
 	atk68
 
 BattleScript_1D8D86: @ 81D8D86
@@ -3036,7 +3036,7 @@ BattleScript_1D8D99: @ 81D8D99
 	switch3 3, 0
 	waitstateatk
 	atk52 5
-	jumpifarraynotequal 0x2024c09, 0x2024a68, 1, BattleScript_1D8D99
+	jumpifarraynotequal gBank1, gNoOfAllBanks, 1, BattleScript_1D8D99
 
 BattleScript_1D8DBD: @ 81D8DBD
 	end2
@@ -3056,9 +3056,9 @@ gUnknown_081D8DCE:: @ 81D8DCE
 	end2
 
 gUnknown_081D8DD1:: @ 81D8DD1
-	jumpifhalfword 4, 0x20239f8, 256, BattleScript_1D8E01
-	jumpifhalfword 4, 0x20239f8, 2048, BattleScript_1D8E01
-	jumpifhalfword 0, 0x202ff5e, 1024, BattleScript_1D8E01
+	jumpifhalfword 4, gBattleTypeFlags, 256, BattleScript_1D8E01
+	jumpifhalfword 4, gBattleTypeFlags, 2048, BattleScript_1D8E01
+	jumpifhalfword 0, gTrainerBattleOpponent, 1024, BattleScript_1D8E01
 	printstring BATTLE_TEXT_OutOfUsablePoke
 	waitmessage 64
 	printstring BATTLE_TEXT_WhitedOut
@@ -3121,8 +3121,8 @@ gUnknown_081D8E4A:: @ 81D8E4A
 gUnknown_081D8E4E:: @ 81D8E4E
 	atk74 1
 	printstring 2
-	setbyte 0x201601f, 2
-	jumpifbyte 4, 0x20239f8, 1, BattleScript_1D8E6B
+	setbyte gSharedMem + 0x1601F, 2
+	jumpifbyte 4, gBattleTypeFlags, 1, BattleScript_1D8E6B
 	atk26 1
 	jump BattleScript_1D8E6D
 
@@ -3152,9 +3152,9 @@ BattleScript_1D8E7A: @ 81D8E7A
 	switch3 USER, 0
 	waitstateatk
 	atk52 USER
-	setbyte 0x201600c, 4
+	setbyte gSharedMem + 0x1600C, 4
 	atk49 1, 0
-	setbyte 0x201600c, 15
+	setbyte gSharedMem + 0x1600C, 15
 	atk49 1, 0
 	end2
 
@@ -3178,11 +3178,11 @@ BattleScript_1D8EAD: @ 81D8EAD
 	resultmessage
 	waitmessage 64
 	faintpokemon TARGET, 0, 0x0
-	setbyte 0x201600c, 3
+	setbyte gSharedMem + 0x1600C, 3
 	atk49 2, 6
 	atk76 TARGET, 4
-	jumpifbyte 0, 0x2024d1e, 0, BattleScript_1D8EEE
-	setbyte 0x201600f, 0
+	jumpifbyte 0, gBattleCommunication, 0, BattleScript_1D8EEE
+	setbyte gSharedMem + 0x1600F, 0
 	atk23 0
 
 BattleScript_1D8EEE: @ 81D8EEE
@@ -3195,7 +3195,7 @@ BattleScript_Pausex20:: @ 81D8EEF
 BattleScript_LevelUp:: @ 81D8EF3
 	atk55 0xe10016f
 	attackcanceler
-	setbyte 0x201609c, 0
+	setbyte gSharedMem + 0x1609C, 0
 	atk6c
 	checkiflearnmoveinbattle BattleScript_1D8F4F, BattleScript_1D8F61, 1
 	jump BattleScript_1D8F19
@@ -3209,11 +3209,11 @@ BattleScript_1D8F19: @ 81D8F19
 	printstring BATTLE_TEXT_CantLearnMore
 	printstring BATTLE_TEXT_DeleteMove
 	waitstateatk
-	setbyte 0x201601a, 0
+	setbyte gSharedMem + 0x1601A, 0
 	atk5a BattleScript_1D8F46
 	printstring BATTLE_TEXT_StopLearning
 	waitstateatk
-	setbyte 0x201601a, 0
+	setbyte gSharedMem + 0x1601A, 0
 	atk5b BattleScript_1D8F19
 	printstring BATTLE_TEXT_DidNotLearn
 	jump BattleScript_1D8F0F
@@ -3237,7 +3237,7 @@ BattleScript_1D8F61: @ 81D8F61
 gUnknown_081D8F62:: @ 81D8F62
 	printfromtable BattleTextList_401534
 	waitmessage 64
-	jumpifbyte 0, 0x2024d23, 2, BattleScript_1D8F7C
+	jumpifbyte 0, gUnknown_02024D1F + 0x4, 2, BattleScript_1D8F7C
 	playanimation USER, 10, 0x0
 
 BattleScript_1D8F7C: @ 81D8F7C
@@ -3246,16 +3246,16 @@ BattleScript_1D8F7C: @ 81D8F7C
 gUnknown_081D8F7D:: @ 81D8F7D
 	printfromtable BattleTextList_401528
 	waitmessage 64
-	atk46 1, 0x20160a4, 0x0
-	setbyte 0x2024d1e, 0
+	atk46 1, gSharedMem + 0x160A4, 0x0
+	setbyte gBattleCommunication, 0
 
 BattleScript_1D8F95: @ 81D8F95
-	atk32 0x2024c07, 0x2024a7a, 0x2024d1e, 1
+	atk32 gBankAttacker, gTurnOrder, gBattleCommunication, 1
 	weatherdamage
-	jumpifword 0, 0x2024bec, 0x0, BattleScript_1D8FD6
+	jumpifword 0, gBattleMoveDamage, 0x0, BattleScript_1D8FD6
 	printfromtable BattleTextList_40152C
 	waitmessage 64
-	orword 0x2024c6c, 0x1100120
+	orword gHitMarker, 0x1100120
 	missmessage
 	atk5c USER
 	graphicalhpupdate USER
@@ -3264,12 +3264,12 @@ BattleScript_1D8F95: @ 81D8F95
 	atk24 BattleScript_1D8FD6
 
 BattleScript_1D8FD6: @ 81D8FD6
-	jumpifbyte 1, 0x2024d26, 0, BattleScript_1D8FF5
-	addbyte 0x2024d1e, 1
-	jumpifarraynotequal 0x2024d1e, 0x2024a68, 1, BattleScript_1D8F95
+	jumpifbyte 1, gBattleOutcome, 0, BattleScript_1D8FF5
+	addbyte gBattleCommunication, 1
+	jumpifarraynotequal gBattleCommunication, gNoOfAllBanks, 1, BattleScript_1D8F95
 
 BattleScript_1D8FF5: @ 81D8FF5
-	bicword 0x2024c6c, 0x1100120
+	bicword gHitMarker, 0x1100120
 	end2
 
 gUnknown_081D8FFF:: @ 81D8FFF
@@ -3291,7 +3291,7 @@ gUnknown_081D9016:: @ 81D9016
 gUnknown_081D901D:: @ 81D901D
 	printfromtable BattleTextList_4015EE
 	waitmessage 64
-	atk46 1, 0x20160a4, 0x0
+	atk46 1, gSharedMem + 0x160A4, 0x0
 	end3
 
 gUnknown_081D9030:: @ 81D9030
@@ -3312,21 +3312,21 @@ gUnknown_081D9041:: @ 81D9041
 	end2
 
 BattleScript_LeechSeedTurnDrain:: @ 81D904B
-	playanimation USER, 14, 0x20160a4
-	orword 0x2024c6c, 0x100100
+	playanimation USER, 14, gSharedMem + 0x160A4
+	orword gHitMarker, 0x100100
 	graphicalhpupdate USER
 	datahpupdate USER
-	copyarray 0x2024bec, 0x2024bf0, 4
+	copyarray gBattleMoveDamage, gHP_dealt, 4
 	jumpifability USER, ABILITY_LIQUID_OOZE, BattleScript_1D907D
 	manipulatedamage 0
-	setbyte 0x2024d23, 3
+	setbyte gUnknown_02024D1F + 0x4, 3
 	jump BattleScript_1D9083
 
 BattleScript_1D907D: @ 81D907D
-	setbyte 0x2024d23, 4
+	setbyte gUnknown_02024D1F + 0x4, 4
 
 BattleScript_1D9083: @ 81D9083
-	orword 0x2024c6c, 0x100100
+	orword gHitMarker, 0x100100
 	graphicalhpupdate TARGET
 	datahpupdate TARGET
 	printfromtable BattleTextList_40154C
@@ -3345,10 +3345,10 @@ BattleScript_BideAttack:: @ 81D90B2
 	waitmessage 64
 	accuracycheck BattleScript_1D6F77, 0
 	atk6
-	bicbyte 0x2024c68, 6
-	copyarray 0x2024bec, 0x2016090, 4
+	bicbyte gBattleMoveFlags, 6
+	copyarray gBattleMoveDamage, gSharedMem + 0x16090, 4
 	atk69
-	setbyte 0x2016002, 1
+	setbyte gSharedMem + 0x16002, 1
 	attackanimation
 	waitanimation
 	missmessage
@@ -3372,8 +3372,8 @@ gUnknown_081D90FC:: @ 81D90FC
 	atke2 TARGET
 	atk58 TARGET
 	waitstateatk
-	jumpifhalfword 4, 0x20239f8, 8, BattleScript_1D9116
-	setbyte 0x2024d26, 5
+	jumpifhalfword 4, gBattleTypeFlags, 8, BattleScript_1D9116
+	setbyte gBattleOutcome, 5
 	atkf6
 
 BattleScript_1D9116: @ 81D9116
@@ -3418,14 +3418,14 @@ BattleScript_EncoredNoMore:: @ 81D914F
 gUnknown_081D9156:: @ 81D9156
 	printstring BATTLE_TEXT_DestinyBondTaken
 	waitmessage 64
-	orword 0x2024c6c, 0x100100
+	orword gHitMarker, 0x100100
 	graphicalhpupdate USER
 	datahpupdate USER
 	faintpokemon USER, 0, 0x0
 	return
 
 gUnknown_081D9171:: @ 81D9171
-	orword 0x2024c6c, 0x100100
+	orword gHitMarker, 0x100100
 	graphicalhpupdate USER
 	datahpupdate USER
 	callatk BattleScript_1D91FB
@@ -3434,12 +3434,12 @@ gUnknown_081D9171:: @ 81D9171
 	return
 
 BattleScript_1D9192: @ 81D9192
-	setbyte 0x201600f, 0
+	setbyte gSharedMem + 0x1600F, 0
 	atk23 1
 	jump gUnknown_081D8C7B
 
 gUnknown_081D919F:: @ 81D919F
-	orword 0x2024c6c, 0x100100
+	orword gHitMarker, 0x100100
 	graphicalhpupdate TARGET
 	datahpupdate TARGET
 	callatk BattleScript_1D91FB
@@ -3448,12 +3448,12 @@ gUnknown_081D919F:: @ 81D919F
 	return
 
 BattleScript_1D91C0: @ 81D91C0
-	setbyte 0x201600f, 0
+	setbyte gSharedMem + 0x1600F, 0
 	atk23 0
 	jump gUnknown_081D8C7B
 
 gUnknown_081D91CD:: @ 81D91CD
-	orword 0x2024c6c, 0x100100
+	orword gHitMarker, 0x100100
 	graphicalhpupdate 3
 	datahpupdate 3
 	callatk BattleScript_1D91FB
@@ -3462,7 +3462,7 @@ gUnknown_081D91CD:: @ 81D91CD
 	return
 
 BattleScript_1D91EE: @ 81D91EE
-	setbyte 0x201600f, 0
+	setbyte gSharedMem + 0x1600F, 0
 	atk23 3
 	jump gUnknown_081D8C7B
 
@@ -3474,7 +3474,7 @@ BattleScript_1D91FB: @ 81D91FB
 BattleScript_PerishSongHits:: @ 81D9202
 	printstring BATTLE_TEXT_PerishSongFell
 	waitmessage 64
-	orword 0x2024c6c, 0x100100
+	orword gHitMarker, 0x100100
 	graphicalhpupdate USER
 	datahpupdate USER
 	faintpokemon USER, 0, 0x0
@@ -3493,33 +3493,33 @@ BattleScript_AllStatsUp:: @ 81D9224
 	jumpifstat USER, 0, 5, 12, BattleScript_1D92BF
 
 BattleScript_1D9251: @ 81D9251
-	setbyte 0x20160dc, 0
+	setbyte gSharedMem + 0x160DC, 0
 	playstatchangeanimation USER, 62, 0
-	setbyte 0x201601e, 17
+	setbyte gSharedMem + 0x1601E, 17
 	statbuffchange 65, BattleScript_1D926F
 	printfromtable BattleTextList_401570
 	waitmessage 64
 
 BattleScript_1D926F: @ 81D926F
-	setbyte 0x201601e, 18
+	setbyte gSharedMem + 0x1601E, 18
 	statbuffchange 65, BattleScript_1D9283
 	printfromtable BattleTextList_401570
 	waitmessage 64
 
 BattleScript_1D9283: @ 81D9283
-	setbyte 0x201601e, 19
+	setbyte gSharedMem + 0x1601E, 19
 	statbuffchange 65, BattleScript_1D9297
 	printfromtable BattleTextList_401570
 	waitmessage 64
 
 BattleScript_1D9297: @ 81D9297
-	setbyte 0x201601e, 20
+	setbyte gSharedMem + 0x1601E, 20
 	statbuffchange 65, BattleScript_1D92AB
 	printfromtable BattleTextList_401570
 	waitmessage 64
 
 BattleScript_1D92AB: @ 81D92AB
-	setbyte 0x201601e, 21
+	setbyte gSharedMem + 0x1601E, 21
 	statbuffchange 65, BattleScript_1D92BF
 	printfromtable BattleTextList_401570
 	waitmessage 64
@@ -3549,7 +3549,7 @@ BattleScript_SpikesFree:: @ 81D92D0
 BattleScript_FutureSightHits:: @ 81D92D7
 	printstring BATTLE_TEXT_TookAttack
 	waitmessage 64
-	jumpifbyte 1, 0x2024d23, 0, BattleScript_1D92F4
+	jumpifbyte 1, gUnknown_02024D1F + 0x4, 0, BattleScript_1D92F4
 	accuracycheck BattleScript_1D934B, 248
 	jump BattleScript_1D92FB
 
@@ -3558,7 +3558,7 @@ BattleScript_1D92F4: @ 81D92F4
 
 BattleScript_1D92FB: @ 81D92FB
 	atk8
-	jumpifbyte 1, 0x2024d23, 0, BattleScript_1D9313
+	jumpifbyte 1, gUnknown_02024D1F + 0x4, 0, BattleScript_1D9313
 	playanimation USER, 18, 0x0
 	jump BattleScript_1D931A
 
@@ -3577,20 +3577,20 @@ BattleScript_1D931A: @ 81D931A
 	atk24 BattleScript_1D9332
 
 BattleScript_1D9332: @ 81D9332
-	setbyte 0x201600c, 0
+	setbyte gSharedMem + 0x1600C, 0
 	atk49 1, 0
-	setbyte 0x201600c, 8
+	setbyte gSharedMem + 0x1600C, 8
 	atk49 2, 14
-	setbyte 0x2024c68, 0
+	setbyte gBattleMoveFlags, 0
 	end2
 
 BattleScript_1D934B: @ 81D934B
 	pause 32
-	setbyte 0x2024c68, 0
-	orbyte 0x2024c68, 32
+	setbyte gBattleMoveFlags, 0
+	orbyte gBattleMoveFlags, 32
 	resultmessage
 	waitmessage 64
-	setbyte 0x2024c68, 0
+	setbyte gBattleMoveFlags, 0
 	end2
 
 BattleScript_NoMovesLeft:: @ 81D9365
@@ -3629,7 +3629,7 @@ BattleScript_WishComesTrue:: @ 81D939A
 	playanimation TARGET, 22, 0x0
 	printstring BATTLE_TEXT_WishTrue
 	waitmessage 64
-	orword 0x2024c6c, 0x100
+	orword gHitMarker, 0x100
 	graphicalhpupdate TARGET
 	datahpupdate TARGET
 	printstring BATTLE_TEXT_RegainedHealth
@@ -3648,7 +3648,7 @@ BattleScript_IngrainTurnHeal:: @ 81D93D1
 	playanimation USER, 21, 0x0
 	printstring BATTLE_TEXT_AbsorbNutrients
 	waitmessage 64
-	orword 0x2024c6c, 0x100
+	orword gHitMarker, 0x100
 	graphicalhpupdate USER
 	datahpupdate USER
 	end2
@@ -3660,20 +3660,20 @@ BattleScript_1D93EC: @ 81D93EC
 	jump BattleScript_EndTurn
 
 BattleScript_AtkDefDown:: @ 81D93FA
-	setbyte 0x20160dc, 0
+	setbyte gSharedMem + 0x160DC, 0
 	playstatchangeanimation USER, 6, 13
 	playstatchangeanimation USER, 2, 9
-	setbyte 0x201601e, 145
+	setbyte gSharedMem + 0x1601E, 145
 	statbuffchange 193, BattleScript_1D9427
-	jumpifbyte 0, 0x2024d23, 2, BattleScript_1D9427
+	jumpifbyte 0, gUnknown_02024D1F + 0x4, 2, BattleScript_1D9427
 	printfromtable BattleTextList_40157C
 	waitmessage 64
 
 BattleScript_1D9427: @ 81D9427
 	playstatchangeanimation USER, 4, 9
-	setbyte 0x201601e, 146
+	setbyte gSharedMem + 0x1601E, 146
 	statbuffchange 193, BattleScript_1D944A
-	jumpifbyte 0, 0x2024d23, 2, BattleScript_1D944A
+	jumpifbyte 0, gUnknown_02024D1F + 0x4, 2, BattleScript_1D944A
 	printfromtable BattleTextList_40157C
 	waitmessage 64
 
@@ -3706,7 +3706,7 @@ BattleScript_MagicCoatBounce:: @ 81D946F
 	pause 32
 	printstring BATTLE_TEXT_MagicCoatBounce
 	waitmessage 64
-	orword 0x2024c6c, 0x800c00
+	orword gHitMarker, 0x800c00
 	atk76 USER, 1
 	return
 
@@ -3717,7 +3717,7 @@ BattleScript_SnatchedMove:: @ 81D9487
 	playanimation TARGET, 17, 0x0
 	printstring BATTLE_TEXT_SnatchedMove
 	waitmessage 64
-	orword 0x2024c6c, 0x800c00
+	orword gHitMarker, 0x800c00
 	atk5f
 	return
 
@@ -3732,11 +3732,11 @@ BattleScript_OneHitKOMsg:: @ 81D94A9
 	return
 
 BattleScript_SAtkDown2:: @ 81D94B0
-	setbyte 0x20160dc, 0
+	setbyte gSharedMem + 0x160DC, 0
 	playstatchangeanimation USER, 16, 11
-	setbyte 0x201601e, 164
+	setbyte gSharedMem + 0x1601E, 164
 	statbuffchange 193, BattleScript_1D94D9
-	jumpifbyte 0, 0x2024d23, 2, BattleScript_1D94D9
+	jumpifbyte 0, gUnknown_02024D1F + 0x4, 2, BattleScript_1D94D9
 	printfromtable BattleTextList_40157C
 	waitmessage 64
 
@@ -3758,7 +3758,7 @@ BattleScript_MoveUsedIsAsleep:: @ 81D94EE
 	jump BattleScript_EndTurn
 
 BattleScript_MoveUsedWokeUp:: @ 81D94FB
-	bicword 0x2024c6c, 0x10
+	bicword gHitMarker, 0x10
 	printfromtable BattleTextList_401562
 	waitmessage 64
 	atk98 1
@@ -3778,7 +3778,7 @@ BattleScript_1D951E: @ 81D951E
 	statusanimation USER
 
 BattleScript_1D9520: @ 81D9520
-	orword 0x2024c6c, 0x100100
+	orword gHitMarker, 0x100100
 	graphicalhpupdate USER
 	datahpupdate USER
 	faintpokemon USER, 0, 0x0
@@ -3836,7 +3836,7 @@ BattleScript_MoveUsedIsConfused:: @ 81D9595
 	printstring BATTLE_TEXT_Confused
 	waitmessage 64
 	atk65 1, 0x7
-	jumpifbyte 0, 0x2024d23, 0, BattleScript_1D95D3
+	jumpifbyte 0, gUnknown_02024D1F + 0x4, 0, BattleScript_1D95D3
 
 BattleScript_1D95AC: @ 81D95AC
 	atk76 USER, 0
@@ -3846,7 +3846,7 @@ BattleScript_1D95AC: @ 81D95AC
 	missmessage
 	atk5c USER
 	waitstateatk
-	orword 0x2024c6c, 0x100100
+	orword gHitMarker, 0x100100
 	graphicalhpupdate USER
 	datahpupdate USER
 	faintpokemon USER, 0, 0x0
@@ -3866,7 +3866,7 @@ gUnknown_081D95DB:: @ 81D95DB
 	return
 
 BattleScript_WrapTurnDmg:: @ 81D95E2
-	playanimation USER, 6, 0x20160a4
+	playanimation USER, 6, gSharedMem + 0x160A4
 	printstring BATTLE_TEXT_HurtBy
 	waitmessage 64
 	jump BattleScript_1D9520
@@ -3976,11 +3976,11 @@ BattleScript_1D96BA:: @ 81D96BA
 	return
 
 BattleScript_1D96C8:: @ 81D96C8
-	jumpifhalfword 0, 0x2024be6, 165, BattleScript_1D96DB
+	jumpifhalfword 0, gCurrentMove, 165, BattleScript_1D96DB
 	jumpifability USER, ABILITY_ROCK_HEAD, BattleScript_1D96F5
 
 BattleScript_1D96DB: @ 81D96DB
-	orword 0x2024c6c, 0x100100
+	orword gHitMarker, 0x100100
 	graphicalhpupdate USER
 	datahpupdate USER
 	printstring BATTLE_TEXT_HitRecoil
@@ -4005,7 +4005,7 @@ BattleScript_DrizzleActivates:: @ 81D9704
 	end3
 
 BattleScript_SpeedBoostActivates:: @ 81D9718
-	playanimation USER, 1, 0x20160a4
+	playanimation USER, 1, gSharedMem + 0x160A4
 	printstring BATTLE_TEXT_SpeedRisen
 	waitmessage 64
 	end3
@@ -4019,7 +4019,7 @@ BattleScript_TraceActivates:: @ 81D9726
 BattleScript_RainDishActivates:: @ 81D9730
 	printstring BATTLE_TEXT_RestoredHPByItem
 	waitmessage 64
-	orword 0x2024c6c, 0x100
+	orword gHitMarker, 0x100
 	graphicalhpupdate USER
 	datahpupdate USER
 	end3
@@ -4039,12 +4039,12 @@ BattleScript_ShedSkinActivates:: @ 81D9758
 	end3
 
 BattleScript_1D9761: @ 81D9761
-	setbyte 0x2016003, 0
+	setbyte gSharedMem + 0x16003, 0
 
 BattleScript_1D9767: @ 81D9767
 	castformswitch
-	addbyte 0x2016003, 1
-	jumpifarraynotequal 0x2016003, 0x2024a68, 1, BattleScript_1D9767
+	addbyte gSharedMem + 0x16003, 1
+	jumpifarraynotequal gSharedMem + 0x16003, gNoOfAllBanks, 1, BattleScript_1D9767
 	return
 
 BattleScript_CastformChange:: @ 81D977D
@@ -4066,8 +4066,8 @@ BattleScript_1D9792: @ 81D9792
 	pause 32
 
 gUnknown_081D9795:: @ 81D9795
-	setbyte 0x2024c08, 0
-	setbyte 0x201601e, 145
+	setbyte gBankTarget, 0
+	setbyte gSharedMem + 0x1601E, 145
 
 BattleScript_1D97A1: @ 81D97A1
 	atke1 BattleScript_1D97EF
@@ -4076,14 +4076,14 @@ BattleScript_1D97A1: @ 81D97A1
 	jumpifability TARGET, ABILITY_HYPER_CUTTER, BattleScript_1D97F0
 	jumpifability TARGET, ABILITY_WHITE_SMOKE, BattleScript_1D97F0
 	statbuffchange 33, BattleScript_1D97E4
-	jumpifbyte 2, 0x2024d23, 1, BattleScript_1D97E4
+	jumpifbyte 2, gUnknown_02024D1F + 0x4, 1, BattleScript_1D97E4
 	atk47
-	playanimation TARGET, 1, 0x20160a4
+	playanimation TARGET, 1, gSharedMem + 0x160A4
 	printstring BATTLE_TEXT_CutsAttack
 	waitmessage 64
 
 BattleScript_1D97E4: @ 81D97E4
-	addbyte 0x2024c08, 1
+	addbyte gBankTarget, 1
 	jump BattleScript_1D97A1
 
 BattleScript_1D97EF: @ 81D97EF
@@ -4108,7 +4108,7 @@ BattleScript_TookAttack:: @ 81D9812
 	pause 32
 	printstring BATTLE_TEXT_TookAttack2
 	waitmessage 64
-	orword 0x2024c6c, 0x400
+	orword gHitMarker, 0x400
 	return
 
 gUnknown_081D9826:: @ 81D9826
@@ -4129,12 +4129,12 @@ BattleScript_MoveHPDrain_PPLoss:: @ 81D9842
 BattleScript_MoveHPDrain:: @ 81D9843
 	attackstring
 	pause 32
-	orword 0x2024c6c, 0x100
+	orword gHitMarker, 0x100
 	graphicalhpupdate TARGET
 	datahpupdate TARGET
 	printstring BATTLE_TEXT_HPRestoredUsing
 	waitmessage 64
-	orbyte 0x2024c68, 8
+	orbyte gBattleMoveFlags, 8
 	jump BattleScript_EndTurn
 
 BattleScript_MoveHPDrain_FullHP_PPLoss:: @ 81D9865
@@ -4145,7 +4145,7 @@ BattleScript_MoveHPDrain_FullHP:: @ 81D9866
 	pause 32
 	printstring BATTLE_TEXT_MadeUseless
 	waitmessage 64
-	orbyte 0x2024c68, 8
+	orbyte gBattleMoveFlags, 8
 	jump BattleScript_EndTurn
 
 BattleScript_FlashFireBoost_PPLoss:: @ 81D987B
@@ -4218,7 +4218,7 @@ BattleScript_AbilityNoSpecificStatLoss:: @ 81D9903
 	pause 32
 	printstring BATTLE_TEXT_PreventedLoss
 	waitmessage 64
-	setbyte 0x2024d23, 3
+	setbyte gUnknown_02024D1F + 0x4, 3
 	return
 
 BattleScript_NoItemSteal:: @ 81D9913
@@ -4233,7 +4233,7 @@ BattleScript_ColorChangeActivates:: @ 81D9921
 	return
 
 BattleScript_RoughSkinActivates:: @ 81D9928
-	orword 0x2024c6c, 0x100100
+	orword gHitMarker, 0x100100
 	graphicalhpupdate USER
 	datahpupdate USER
 	printstring BATTLE_TEXT_HurtOther
@@ -4266,7 +4266,7 @@ gUnknown_081D9956:: @ 81D9956
 gUnknown_081D995F:: @ 81D995F
 	printstring BATTLE_TEXT_IgnoredOrdersSLP
 	waitmessage 64
-	setbyte 0x201600c, 0
+	setbyte gSharedMem + 0x1600C, 0
 	atk49 2, 16
 	end
 
@@ -4278,16 +4278,16 @@ gUnknown_081D996F:: @ 81D996F
 BattleScript_MoveUsedLoafingAround:: @ 81D9977
 	printfromtable BattleTextList_40160E
 	waitmessage 64
-	setbyte 0x201600c, 0
+	setbyte gSharedMem + 0x1600C, 0
 	atk49 2, 16
 	end
 
 gUnknown_081D9989:: @ 81D9989
 	printstring BATTLE_TEXT_BeganNap
 	waitmessage 64
-	setbyte 0x2024d21, 65
+	setbyte gUnknown_02024D1F + 0x2, 65
 	seteffecttarget
-	setbyte 0x201600c, 0
+	setbyte gSharedMem + 0x1600C, 0
 	atk49 2, 16
 	end
 
@@ -4399,7 +4399,7 @@ BattleScript_ItemHealHP_RemoveItem:: @ 81D9A74
 	playanimation USER, 7, 0x0
 	printstring BATTLE_TEXT_RestoredHealth
 	waitmessage 64
-	orword 0x2024c6c, 0x100
+	orword gHitMarker, 0x100
 	graphicalhpupdate USER
 	datahpupdate USER
 	removeitem USER
@@ -4420,7 +4420,7 @@ BattleScript_ItemHealHP_Ret:: @ 81D9AA7
 	playanimation USER, 7, 0x0
 	printstring BATTLE_TEXT_RestoredHPLittle
 	waitmessage 64
-	orword 0x2024c6c, 0x100
+	orword gHitMarker, 0x100
 	graphicalhpupdate USER
 	datahpupdate USER
 	return
@@ -4439,12 +4439,12 @@ BattleScript_BerryConfuseHealEnd2:: @ 81D9AD4
 	playanimation USER, 7, 0x0
 	printstring BATTLE_TEXT_RestoredHealth
 	waitmessage 64
-	orword 0x2024c6c, 0x100
+	orword gHitMarker, 0x100
 	graphicalhpupdate USER
 	datahpupdate USER
 	printstring BATTLE_TEXT_UnknownString2
 	waitmessage 64
-	setbyte 0x2024d21, 71
+	setbyte gUnknown_02024D1F + 0x2, 71
 	seteffecttarget
 	removeitem USER
 	end2
@@ -4454,7 +4454,7 @@ BattleScript_BerryStatRaiseEnd2:: @ 81D9AFE
 	statbuffchange 65, BattleScript_1D9B0B
 
 BattleScript_1D9B0B: @ 81D9B0B
-	setbyte 0x2024d23, 4
+	setbyte gUnknown_02024D1F + 0x4, 4
 	callatk BattleScript_StatUp
 	removeitem USER
 	end2

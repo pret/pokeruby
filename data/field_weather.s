@@ -35,7 +35,7 @@ gUnknown_08396FA8:: @ 8396FA8
 	.4byte DroughtPaletteData_3
 	.4byte DroughtPaletteData_4
 	.4byte DroughtPaletteData_5
-	.4byte 0x2000000
+	.4byte gSharedMem
 
 	.align 2
 gUnknown_08396FC4:: @ 8396FC4
