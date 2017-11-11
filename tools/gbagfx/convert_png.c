@@ -1,212 +1,131 @@
 // Copyright (c) 2015 YamaArashi
 
 #include <stdio.h>
-#include <setjmp.h>
-#include <png.h>
+#include "lodepng.h"
 #include "global.h"
 #include "convert_png.h"
 #include "gfx.h"
-
-static FILE *PngReadOpen(char *path, png_structp *pngStruct, png_infop *pngInfo)
-{
-    FILE *fp = fopen(path, "rb");
-
-    if (fp == NULL)
-        FATAL_ERROR("Failed to open \"%s\" for reading.\n", path);
-
-    unsigned char sig[8];
-
-    if (fread(sig, 8, 1, fp) != 1)
-        FATAL_ERROR("Failed to read PNG signature from \"%s\".\n", path);
-
-    if (png_sig_cmp(sig, 0, 8))
-        FATAL_ERROR("\"%s\" does not have a valid PNG signature.\n", path);
-
-    png_structp png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
-
-    if (!png_ptr)
-        FATAL_ERROR("Failed to create PNG read struct.\n");
-
-    png_infop info_ptr = png_create_info_struct(png_ptr);
-
-    if (!info_ptr)
-        FATAL_ERROR("Failed to create PNG info struct.\n");
-
-    if (setjmp(png_jmpbuf(png_ptr)))
-        FATAL_ERROR("Failed to init I/O for reading \"%s\".\n", path);
-
-    png_init_io(png_ptr, fp);
-    png_set_sig_bytes(png_ptr, 8);
-    png_read_info(png_ptr, info_ptr);
-
-    *pngStruct = png_ptr;
-    *pngInfo = info_ptr;
-
-    return fp;
-}
+#include "util.h"
 
 void ReadPng(char *path, struct Image *image)
 {
-    png_structp png_ptr;
-    png_infop info_ptr;
+    LodePNGState state;
+    unsigned int error;
+    int filesize;
+    unsigned int width, height;
+    unsigned int color_type;
+    int bit_depth;
+    unsigned char *buffer = ReadWholeFile(path, &filesize);
 
-    FILE *fp = PngReadOpen(path, &png_ptr, &info_ptr);
+    lodepng_state_init(&state);
 
-    int bit_depth = png_get_bit_depth(png_ptr, info_ptr);
+    state.decoder.color_convert = 0;
+
+    error = lodepng_decode(&image->pixels, &width, &height, &state, buffer, filesize);
+    if (error)
+        FATAL_ERROR("Failed to decode image \"%s\": %s\n", path, lodepng_error_text(error));
+
+    bit_depth = lodepng_get_bpp(&state.info_png.color);
+    color_type = state.info_png.color.colortype;
 
     if (bit_depth != image->bitDepth)
         FATAL_ERROR("\"%s\" has a bit depth of %d, but the expected bit depth is %d.\n", path, bit_depth, image->bitDepth);
-
-    int color_type = png_get_color_type(png_ptr, info_ptr);
-
-    if (color_type != PNG_COLOR_TYPE_GRAY && color_type != PNG_COLOR_TYPE_PALETTE)
+    if (color_type != LCT_GREY && color_type != LCT_PALETTE)
         FATAL_ERROR("\"%s\" has an unsupported color type.\n", path);
 
-    // Check if the image has a palette so that we can tell if the colors need to be inverted later.
-    // Don't read the palette because it's not needed for now.
-    image->hasPalette = (color_type == PNG_COLOR_TYPE_PALETTE);
+	// Check if the image has a palette so that we can tell if the colors need to be inverted later.
+	// Don't read the palette because it's not needed for now.
+    image->hasPalette = (color_type == LCT_PALETTE);
 
-    image->width = png_get_image_width(png_ptr, info_ptr);
-    image->height = png_get_image_height(png_ptr, info_ptr);
+    image->width = width;
+    image->height = height;
 
-    int rowbytes = png_get_rowbytes(png_ptr, info_ptr);
-
-    image->pixels = malloc(image->height * rowbytes);
-
-    if (image->pixels == NULL)
-        FATAL_ERROR("Failed to allocate pixel buffer.\n");
-
-    png_bytepp row_pointers = malloc(image->height * sizeof(png_bytep));
-
-    if (row_pointers == NULL)
-        FATAL_ERROR("Failed to allocate row pointers.\n");
-
-    for (int i = 0; i < image->height; i++)
-        row_pointers[i] = (png_bytep)(image->pixels + (i * rowbytes));
-
-    if (setjmp(png_jmpbuf(png_ptr)))
-        FATAL_ERROR("Error reading from \"%s\".\n", path);
-
-    png_read_image(png_ptr, row_pointers);
-
-    png_destroy_read_struct(&png_ptr, &info_ptr, NULL);
-
-    free(row_pointers);
-    fclose(fp);
+    free(buffer);
 }
 
 void ReadPngPalette(char *path, struct Palette *palette)
 {
-    png_structp png_ptr;
-    png_infop info_ptr;
-    png_colorp colors;
-    int numColors;
+    // LodePNG doesn't seem to provide a method to read the palette without
+    // decoding the whole file.
+    LodePNGState state;
+    unsigned int error;
+    int filesize;
+    unsigned char *buffer = ReadWholeFile(path, &filesize);
+    unsigned char *dummy;
+    unsigned int dummy_w, dummy_h;
 
-    FILE *fp = PngReadOpen(path, &png_ptr, &info_ptr);
+    lodepng_state_init(&state);
 
-    if (png_get_color_type(png_ptr, info_ptr) != PNG_COLOR_TYPE_PALETTE)
+    state.decoder.color_convert = 0;
+
+    error = lodepng_decode(&dummy, &dummy_w, &dummy_h, &state, buffer, filesize);
+    if (error)
+        FATAL_ERROR("Failed to decode image \"%s\": %s\n", path, lodepng_error_text(error));
+
+    if (state.info_png.color.colortype != LCT_PALETTE)
         FATAL_ERROR("The image \"%s\" does not contain a palette.\n", path);
 
-    if (png_get_PLTE(png_ptr, info_ptr, &colors, &numColors) != PNG_INFO_PLTE)
-        FATAL_ERROR("Failed to retrieve palette from \"%s\".\n", path);
-
-    if (numColors > 256)
+    if (state.info_png.color.palettesize > 256)
         FATAL_ERROR("Images with more than 256 colors are not supported.\n");
 
-    palette->numColors = numColors;
-    for (int i = 0; i < numColors; i++) {
-        palette->colors[i].red = colors[i].red;
-        palette->colors[i].green = colors[i].green;
-        palette->colors[i].blue = colors[i].blue;
+    palette->numColors = state.info_png.color.palettesize;
+
+    // TODO: Why is LodePNG getting the palette size wrong?
+    if (state.info_png.color.bitdepth == 4 && palette->numColors > 16)
+        palette->numColors = 16;
+
+    for (int i = 0; i < palette->numColors; i++)
+    {
+        palette->colors[i].red   = state.info_png.color.palette[i * 4 + 0];
+        palette->colors[i].green = state.info_png.color.palette[i * 4 + 1];
+        palette->colors[i].blue  = state.info_png.color.palette[i * 4 + 2];
     }
 
-    png_destroy_read_struct(&png_ptr, &info_ptr, NULL);
-
-    fclose(fp);
+    free(dummy);
 }
 
-void SetPngPalette(png_structp png_ptr, png_infop info_ptr, struct Palette *palette)
+static void SetPngPalette(LodePNGState *state, struct Palette *palette, int hasTransparency)
 {
-    png_colorp colors = malloc(palette->numColors * sizeof(png_color));
+    unsigned char *colors = malloc(palette->numColors * 4);
 
     if (colors == NULL)
         FATAL_ERROR("Failed to allocate PNG palette.\n");
 
-    for (int i = 0; i < palette->numColors; i++) {
-        colors[i].red = palette->colors[i].red;
-        colors[i].green = palette->colors[i].green;
-        colors[i].blue = palette->colors[i].blue;
+    for (int i = 0; i < palette->numColors; i++)
+    {
+        colors[i * 4 + 0] = palette->colors[i].red;
+        colors[i * 4 + 1] = palette->colors[i].green;
+        colors[i * 4 + 2] = palette->colors[i].blue;
+        colors[i * 4 + 3] = 255;
     }
 
-    png_set_PLTE(png_ptr, info_ptr, colors, palette->numColors);
+    // Make the first color transparent
+    if (hasTransparency)
+        colors[0 * 4 + 3] = 0;
 
-    free(colors);
+    state->info_png.color.palette = colors;
+    state->info_png.color.palettesize = palette->numColors;
 }
 
 void WritePng(char *path, struct Image *image)
 {
-    FILE *fp = fopen(path, "wb");
+    LodePNGState state;
+    unsigned int error;
+    unsigned char *buffer;
+    size_t filesize;
 
-    if (fp == NULL)
-        FATAL_ERROR("Failed to open \"%s\" for writing.\n", path);
+    lodepng_state_init(&state);
 
-    png_structp png_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
+    state.encoder.auto_convert = 0;
+    state.info_png.color.colortype = image->hasPalette ? LCT_PALETTE : LCT_GREY;
+    state.info_png.color.bitdepth = image->bitDepth;
 
-    if (!png_ptr)
-        FATAL_ERROR("Failed to create PNG write struct.\n");
+    if (image->hasPalette)
+        SetPngPalette(&state, &image->palette, image->hasTransparency);
 
-    png_infop info_ptr = png_create_info_struct(png_ptr);
+    error = lodepng_encode(&buffer, &filesize, image->pixels, image->width, image->height, &state);
+    if (error)
+        FATAL_ERROR("Failed to encode PNG\n");
 
-    if (!info_ptr)
-        FATAL_ERROR("Failed to create PNG info struct.\n");
-
-    if (setjmp(png_jmpbuf(png_ptr)))
-        FATAL_ERROR("Failed to init I/O for writing \"%s\".\n", path);
-
-    png_init_io(png_ptr, fp);
-
-    if (setjmp(png_jmpbuf(png_ptr)))
-        FATAL_ERROR("Error writing header for \"%s\".\n", path);
-
-    int color_type = image->hasPalette ? PNG_COLOR_TYPE_PALETTE : PNG_COLOR_TYPE_GRAY;
-
-    png_set_IHDR(png_ptr, info_ptr, image->width, image->height,
-        image->bitDepth, color_type, PNG_INTERLACE_NONE,
-        PNG_COMPRESSION_TYPE_BASE, PNG_FILTER_TYPE_BASE);
-
-    if (image->hasPalette) {
-        SetPngPalette(png_ptr, info_ptr, &image->palette);
-
-        if (image->hasTransparency) {
-            png_byte trans = 0;
-            png_set_tRNS(png_ptr, info_ptr, &trans, 1, 0);
-        }
-    }
-
-    png_write_info(png_ptr, info_ptr);
-
-    png_bytepp row_pointers = malloc(image->height * sizeof(png_bytep));
-
-    if (row_pointers == NULL)
-        FATAL_ERROR("Failed to allocate row pointers.\n");
-
-    int rowbytes = png_get_rowbytes(png_ptr, info_ptr);
-
-    for (int i = 0; i < image->height; i++)
-        row_pointers[i] = (png_bytep)(image->pixels + (i * rowbytes));
-
-    if (setjmp(png_jmpbuf(png_ptr)))
-        FATAL_ERROR("Error writing \"%s\".\n", path);
-
-    png_write_image(png_ptr, row_pointers);
-
-    if (setjmp(png_jmpbuf(png_ptr)))
-        FATAL_ERROR("Error ending write of \"%s\".\n", path);
-
-    png_write_end(png_ptr, NULL);
-
-    fclose(fp);
-
-    png_destroy_write_struct(&png_ptr, &info_ptr);
-    free(row_pointers);
+    WriteWholeFile(path, buffer, filesize);
 }

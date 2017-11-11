@@ -1,15 +1,13 @@
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -std=c11 -O2 -s -DPNG_SKIP_SETJMP_CHECK
+CFLAGS = -Wall -Wextra -Werror -std=c11 -O2 -s
 
-LIBS = -lpng -lz
-
-SRCS = main.c convert_png.c util.c font.c
+SRCS = main.c convert_png.c util.c font.c lodepng.c
 
 .PHONY: clean
 
-rsfont: $(SRCS) convert_png.h gfx.h global.h util.h font.h
-	$(CC) $(CFLAGS) $(SRCS) -o $@ $(LDFLAGS) $(LIBS)
+rsfont: $(SRCS) convert_png.h gfx.h global.h util.h font.h lodepng.h
+	$(CC) $(CFLAGS) $(SRCS) -o $@ $(LDFLAGS)
 
 clean:
 	$(RM) rsfont rsfont.exe
