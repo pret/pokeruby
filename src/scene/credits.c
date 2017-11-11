@@ -160,7 +160,7 @@ struct Unk201C000
 struct CreditsEntry
 {
     u8 var_0;
-    u8 *text;
+    const u8 *text;
 };
 
 extern u8 unk_201e800[0x800];
@@ -185,18 +185,208 @@ extern void *gUnknown_0840B5A0[];
 // data/credits
 const u16 gUnknown_0840B7BC[] = INCBIN_U16("graphics/credits/palette_1.gbapal");
 const u8 gUnknown_0840B7FC[] = INCBIN_U8("graphics/credits/ampersand.4bpp");
-extern u8 gUnknown_0840B83C[];
-extern u8 gUnknown_0840B84B[];
-extern u8 gUnknown_0840B85A[];
-extern u8 gUnknown_0840B869[];
-extern u8 gUnknown_0840B878[];
-extern struct CreditsEntry *gCreditsEntryPointerTable[][5];
-extern u8 gUnknown_0840CA00[][2];
-extern struct SpriteSheet gUnknown_0840CAA0;
-extern struct SpritePalette gUnknown_0840CAB0;
-extern const union AnimCmd *const gSpriteAnimTable_0840CA54[];
-extern const union AnimCmd *const gSpriteAnimTable_0840CA94[];
-extern struct SpriteTemplate gSpriteTemplate_840CAEC;
+
+void spritecb_814580C(struct Sprite *sprite);
+
+const u8 gUnknown_0840B83C[] =
+{
+    0,    1, 0,
+    0xFF, 1, 0xFF,
+    0xFF, 1, 0xFF,
+    0xFF, 1, 0xFF,
+    0xFF, 1, 0xFF,
+};
+
+const u8 gUnknown_0840B84B[] =
+{
+    1, 0xFF, 1,
+    1, 0xFF, 1,
+    1, 2,    1,
+    1, 0xFF, 1,
+    1, 0xFF, 1,
+};
+
+const u8 gUnknown_0840B85A[] =
+{
+    1, 0, 0,
+    1, 0xFF, 0xFF,
+    1, 2,    2,
+    1, 0xFF, 0xFF,
+    1, 0x80, 0x80,
+};
+
+const u8 gUnknown_0840B869[] =
+{
+    1, 3, 1,
+    1, 4, 1,
+    1, 5, 1,
+    1, 0xC4, 1,
+    1, 0xC3, 1,
+};
+
+const u8 gUnknown_0840B878[] =
+{
+    1, 6, 7,
+    1, 8, 9,
+    1, 0xFF, 1,
+    1, 0x88, 0x89,
+    1, 0x86, 0x87,
+#ifdef GERMAN
+    1, 0, 0,
+    1, 0xFF, 0xFF,
+    1, 0x80, 0x8A,
+    1, 0xFF, 0xFF,
+    1, 0xFF, 0xFF,
+    0, 1, 0,
+    0xFF, 1, 0xFF,
+    0xFF, 1, 0xFF,
+    0xFF, 1, 0xFF,
+    0x80, 1, 0x80,
+#endif
+};
+
+#ifdef GERMAN
+#include "../data/credits_en.h" // TODO, german credits
+#else
+#include "../data/credits_en.h"
+#endif
+
+const u8 gUnknown_0840CA00[][2] =
+{
+    {104, 36},
+    {120, 36},
+    {136, 36},
+};
+
+static const union AnimCmd gSpriteAnim_840CA08[] =
+{
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(64, 8),
+    ANIMCMD_FRAME(128, 8),
+    ANIMCMD_FRAME(192, 8),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd gSpriteAnim_840CA1C[] =
+{
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(64, 4),
+    ANIMCMD_FRAME(128, 4),
+    ANIMCMD_FRAME(192, 4),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd gSpriteAnim_840CA30[] =
+{
+    ANIMCMD_FRAME(256, 4),
+    ANIMCMD_FRAME(320, 4),
+    ANIMCMD_FRAME(384, 4),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd gSpriteAnim_840CA40[] =
+{
+    ANIMCMD_FRAME(384, 30),
+    ANIMCMD_FRAME(320, 30),
+    ANIMCMD_FRAME(256, 30),
+    ANIMCMD_FRAME(256, 30),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd *const gSpriteAnimTable_0840CA54[] =
+{
+    gSpriteAnim_840CA08,
+    gSpriteAnim_840CA1C,
+    gSpriteAnim_840CA30,
+    gSpriteAnim_840CA40,
+};
+
+static const union AnimCmd gSpriteAnim_840CA64[] =
+{
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(64, 8),
+    ANIMCMD_FRAME(128, 8),
+    ANIMCMD_FRAME(192, 8),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd gSpriteAnim_840CA78[] =
+{
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(64, 4),
+    ANIMCMD_FRAME(128, 4),
+    ANIMCMD_FRAME(192, 4),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd gSpriteAnim_840CA8C[] =
+{
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd *const gSpriteAnimTable_0840CA94[] =
+{
+    gSpriteAnim_840CA64,
+    gSpriteAnim_840CA78,
+    gSpriteAnim_840CA8C,
+};
+
+static const struct SpriteSheet gUnknown_0840CAA0[] = {{ewram1E000_2, 6144, 1001}, {0}};
+static const struct SpritePalette gUnknown_0840CAB0[] = {{ewram_1F800_2, 1001}, {0}};
+
+static const struct OamData gOamData_840CAC0 =
+{
+    .y = 160,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd gSpriteAnim_840CAC8[] =
+{
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd gSpriteAnim_840CAD0[] =
+{
+    ANIMCMD_FRAME(64, 8),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd gSpriteAnim_840CAD8[] =
+{
+    ANIMCMD_FRAME(128, 8),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd *const gSpriteAnimTable_840CAE0[] =
+{
+    gSpriteAnim_840CAC8,
+    gSpriteAnim_840CAD0,
+    gSpriteAnim_840CAD8,
+};
+
+static const struct SpriteTemplate gSpriteTemplate_840CAEC =
+{
+    .tileTag = 1001,
+    .paletteTag = 1001,
+    .oam = &gOamData_840CAC0,
+    .anims = gSpriteAnimTable_840CAE0,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = spritecb_814580C,
+};
 
 // graphics
 extern u8 gCreditsCopyrightEnd_Gfx[];
@@ -432,8 +622,8 @@ void task_a_8143D04(u8 taskIdA)
         EWRAM_1F800[2] = 0x529F; // light red
         EWRAM_1F800[3] = 0x7E94; // light blue
 
-        LoadSpriteSheet(&gUnknown_0840CAA0);
-        LoadSpritePalette(&gUnknown_0840CAB0);
+        LoadSpriteSheet(gUnknown_0840CAA0);
+        LoadSpritePalette(gUnknown_0840CAB0);
 
         gMain.state += 1;
         break;
@@ -1151,7 +1341,7 @@ u16 sub_8145208(u8 arg0)
     return out;
 }
 
-void sub_814524C(u8 arg0[], u8 baseX, u8 baseY, u16 arg3, u16 palette)
+void sub_814524C(const u8 arg0[], u8 baseX, u8 baseY, u16 arg3, u16 palette)
 {
     u8 y, x;
     const u16 tileOffset = (palette / 16) << 12;
