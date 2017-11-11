@@ -26,6 +26,8 @@ extern u8 gSharedMem[];
 #define eVoidSharedArr2                 (u32)(ewram_addr) // ew(ram)
 #define ewram0_8                        ((struct UnkStruct2000000 *)(gSharedMem + 0x0))
 #define ewram0_9(i)                     (u8 *)(ewram_addr + (i * 0x20))
+#define ewram0_10                       (*(struct UnknownPokenav0*)(gSharedMem + 0))
+#define ewram0_11                       (*(struct UnknownPokenav0_1*)(gSharedMem + 0))
 #define ewram4                          (*(struct UnknownStruct8 *)(gSharedMem + 0x4))
 #define ewram520                        ((struct UnknownStruct7 *)(gSharedMem + 0x00520))
 #define ewram520_2                      (u8 *)(ewram_addr + 0x520)

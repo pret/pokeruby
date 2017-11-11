@@ -168,8 +168,9 @@ SECTIONS {
         src/field/bike.o(.text);
         asm/easy_chat.o(.text);
         src/field/easy_chat.o(.text);
+        src/pokenav_before.o(.text);
         asm/pokenav.o(.text);
-        src/field/pokenav.o(.text);
+        src/pokenav_after.o(.text);
         asm/pokenav.o(.text_80F708C);
         src/pokemon/mon_markings.o(.text);
         src/field/mauville_man.o(.text);

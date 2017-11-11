@@ -38,5 +38,3 @@ void sub_80F700C(u8 *arg0, u16 arg1) {
     ptr[2] = 0x80;
     ptr[3] = 0xFF;
 }
-
-IWRAM_DATA MainCallback gUnknown_03000744;
