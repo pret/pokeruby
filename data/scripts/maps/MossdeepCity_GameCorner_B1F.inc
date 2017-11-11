@@ -16,7 +16,7 @@ MossdeepCity_GameCorner_B1F_EventScript_15AE6E:: @ 815AE6E
 	applymovement 255, MossdeepCity_GameCorner_B1F_Movement_15AEF9
 	waitmovement 0
 	special PrintEReaderTrainerGreeting
-	msgbox 0x20234cc, 4
+	msgbox gStringVar4, 4
 	closemessage
 	setvar 0x8004, 2
 	setvar 0x8005, 0

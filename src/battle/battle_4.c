@@ -265,7 +265,7 @@ extern u8 gUnknown_081D9468[];
 
 #define TARGET_TURN_DAMAGED (((gSpecialStatuses[gBankTarget].moveturnLostHP_physical || gSpecialStatuses[gBankTarget].moveturnLostHP_physical.moveturnLostHP_special)))
 
-#define HP_ON_SWITCHOUT (((u16*)(0x020160bc)))
+#define HP_ON_SWITCHOUT (((u16*)(ewram_addr + 0x160BC)))
 
 static void atk00_attackcanceler(void);
 static void atk01_accuracycheck(void);
@@ -2773,21 +2773,21 @@ void SetMoveEffect(bool8 primary, u8 certainArg)
     ands r0, r3\n\
     strb r0, [r7, 0x3]\n\
     movs r6, 0x40\n\
-    ldr r0, _0801E43C @ =0x02000000\n\
+    ldr r0, _0801E43C @ =gSharedMem\n\
     ldr r1, _0801E440 @ =gBankTarget\n\
     b _0801E450\n\
     .align 2, 0\n\
 _0801E430: .4byte gBattleCommunication\n\
 _0801E434: .4byte gEffectBank\n\
 _0801E438: .4byte gBankAttacker\n\
-_0801E43C: .4byte 0x02000000\n\
+_0801E43C: .4byte gSharedMem\n\
 _0801E440: .4byte gBankTarget\n\
 _0801E444:\n\
     ldr r2, _0801E538 @ =gEffectBank\n\
     ldr r0, _0801E53C @ =gBankTarget\n\
     ldrb r0, [r0]\n\
     strb r0, [r2]\n\
-    ldr r0, _0801E540 @ =0x02000000\n\
+    ldr r0, _0801E540 @ =gSharedMem\n\
     ldr r1, _0801E544 @ =gBankAttacker\n\
 _0801E450:\n\
     ldrb r1, [r1]\n\
@@ -2911,7 +2911,7 @@ _0801E536:\n\
     .align 2, 0\n\
 _0801E538: .4byte gEffectBank\n\
 _0801E53C: .4byte gBankTarget\n\
-_0801E540: .4byte 0x02000000\n\
+_0801E540: .4byte gSharedMem\n\
 _0801E544: .4byte gBankAttacker\n\
 _0801E548: .4byte 0x00016003\n\
 _0801E54C: .4byte gBattleMons\n\
@@ -3654,7 +3654,7 @@ _0801EAFA:\n\
     beq _0801EB14\n\
     bl _0801F5FA\n\
 _0801EB14:\n\
-    ldr r0, _0801EB30 @ =0x02000000\n\
+    ldr r0, _0801EB30 @ =gSharedMem\n\
     ldrb r1, [r7, 0x3]\n\
     ldr r2, _0801EB34 @ =0x000160ca\n\
     adds r0, r2\n\
@@ -3666,7 +3666,7 @@ _0801EB14:\n\
     bl _0801F4F2\n\
     .align 2, 0\n\
 _0801EB2C: .4byte gBattleCommunication\n\
-_0801EB30: .4byte 0x02000000\n\
+_0801EB30: .4byte gSharedMem\n\
 _0801EB34: .4byte 0x000160ca\n\
 _0801EB38: .4byte gHitMarker\n\
 _0801EB3C:\n\
@@ -4075,7 +4075,7 @@ _0801EEE8:\n\
     ldr r0, [r2]\n\
     orrs r0, r1\n\
     str r0, [r2]\n\
-    ldr r2, _0801EF80 @ =0x02000000\n\
+    ldr r2, _0801EF80 @ =gSharedMem\n\
     mov r3, r8\n\
     ldrb r0, [r3]\n\
     lsls r0, 1\n\
@@ -4140,7 +4140,7 @@ _0801EF70:\n\
     bne _0801EF60\n\
     b _0801F5FA\n\
     .align 2, 0\n\
-_0801EF80: .4byte 0x02000000\n\
+_0801EF80: .4byte gSharedMem\n\
 _0801EF84: .4byte 0x00016004\n\
 _0801EF88: .4byte gCurrentMove\n\
 _0801EF8C: .4byte 0x00016005\n\
@@ -4197,7 +4197,7 @@ _0801EFEC:\n\
     beq _0801F008\n\
     b _0801F5DC\n\
 _0801F008:\n\
-    ldr r2, _0801F02C @ =0x02000000\n\
+    ldr r2, _0801F02C @ =gSharedMem\n\
     ldrb r1, [r7, 0x3]\n\
     movs r0, 0x3F\n\
     ands r0, r1\n\
@@ -4214,7 +4214,7 @@ _0801F008:\n\
     ldr r0, _0801F03C @ =BattleScript_StatUp\n\
     b _0801F5F8\n\
     .align 2, 0\n\
-_0801F02C: .4byte 0x02000000\n\
+_0801F02C: .4byte gSharedMem\n\
 _0801F030: .4byte 0x000160a4\n\
 _0801F034: .4byte 0x000160a5\n\
 _0801F038: .4byte gBattlescriptCurrInstr\n\
@@ -4235,7 +4235,7 @@ _0801F040:\n\
     beq _0801F05E\n\
     b _0801F5DC\n\
 _0801F05E:\n\
-    ldr r2, _0801F080 @ =0x02000000\n\
+    ldr r2, _0801F080 @ =gSharedMem\n\
     ldrb r1, [r7, 0x3]\n\
     movs r0, 0x3F\n\
     ands r0, r1\n\
@@ -4252,7 +4252,7 @@ _0801F05E:\n\
     ldr r0, _0801F090 @ =BattleScript_StatDown\n\
     b _0801F5F8\n\
     .align 2, 0\n\
-_0801F080: .4byte 0x02000000\n\
+_0801F080: .4byte gSharedMem\n\
 _0801F084: .4byte 0x000160a4\n\
 _0801F088: .4byte 0x000160a5\n\
 _0801F08C: .4byte gBattlescriptCurrInstr\n\
@@ -4272,7 +4272,7 @@ _0801F094:\n\
     beq _0801F0B0\n\
     b _0801F5DC\n\
 _0801F0B0:\n\
-    ldr r2, _0801F0D4 @ =0x02000000\n\
+    ldr r2, _0801F0D4 @ =gSharedMem\n\
     ldrb r1, [r7, 0x3]\n\
     movs r0, 0x3F\n\
     ands r0, r1\n\
@@ -4289,7 +4289,7 @@ _0801F0B0:\n\
     ldr r0, _0801F0E4 @ =BattleScript_StatUp\n\
     b _0801F5F8\n\
     .align 2, 0\n\
-_0801F0D4: .4byte 0x02000000\n\
+_0801F0D4: .4byte gSharedMem\n\
 _0801F0D8: .4byte 0x000160a4\n\
 _0801F0DC: .4byte 0x000160a5\n\
 _0801F0E0: .4byte gBattlescriptCurrInstr\n\
@@ -4310,7 +4310,7 @@ _0801F0E8:\n\
     beq _0801F106\n\
     b _0801F5DC\n\
 _0801F106:\n\
-    ldr r2, _0801F128 @ =0x02000000\n\
+    ldr r2, _0801F128 @ =gSharedMem\n\
     ldrb r1, [r7, 0x3]\n\
     movs r0, 0x3F\n\
     ands r0, r1\n\
@@ -4327,7 +4327,7 @@ _0801F106:\n\
     ldr r0, _0801F138 @ =BattleScript_StatDown\n\
     b _0801F5F8\n\
     .align 2, 0\n\
-_0801F128: .4byte 0x02000000\n\
+_0801F128: .4byte gSharedMem\n\
 _0801F12C: .4byte 0x000160a4\n\
 _0801F130: .4byte 0x000160a5\n\
 _0801F134: .4byte gBattlescriptCurrInstr\n\
@@ -4515,7 +4515,7 @@ _0801F2B0:\n\
     b _0801F5DC\n\
 _0801F2B6:\n\
     lsls r0, r1, 1\n\
-    ldr r5, _0801F344 @ =0x020160f0\n\
+    ldr r5, _0801F344 @ =gSharedMem + 0x160F0\n\
     adds r0, r5\n\
     ldr r1, _0801F348 @ =gLastUsedItem\n\
     strh r2, [r0]\n\
@@ -4580,7 +4580,7 @@ _0801F2B6:\n\
     b _0801F5FA\n\
     .align 2, 0\n\
 _0801F340: .4byte gBankAttacker\n\
-_0801F344: .4byte 0x020160f0\n\
+_0801F344: .4byte gSharedMem + 0x160F0\n\
 _0801F348: .4byte gLastUsedItem\n\
 _0801F34C: .4byte gActiveBank\n\
 _0801F350: .4byte gBattlescriptCurrInstr\n\
@@ -4851,7 +4851,7 @@ _0801F540:\n\
     bl b_movescr_stack_push\n\
     ldr r0, _0801F5CC @ =BattleScript_KnockedOff\n\
     str r0, [r4]\n\
-    ldr r1, _0801F5D0 @ =0x02000000\n\
+    ldr r1, _0801F5D0 @ =gSharedMem\n\
     mov r2, r8\n\
     ldrb r0, [r2]\n\
     lsls r0, 1\n\
@@ -4873,7 +4873,7 @@ _0801F5C0: .4byte gBitTable\n\
 _0801F5C4: .4byte gBattlePartyID\n\
 _0801F5C8: .4byte gBattlescriptCurrInstr\n\
 _0801F5CC: .4byte BattleScript_KnockedOff\n\
-_0801F5D0: .4byte 0x02000000\n\
+_0801F5D0: .4byte gSharedMem\n\
 _0801F5D4: .4byte 0x000160e8\n\
 _0801F5D8: .4byte 0x000160e9\n\
 _0801F5DC:\n\
@@ -5540,7 +5540,7 @@ static void atk23_getexp(void)
     mov r5, r8\n\
     push {r5-r7}\n\
     movs r6, 0\n\
-    ldr r0, _0802004C @ =0x0201605c\n\
+    ldr r0, _0802004C @ =gSharedMem + 0x1605C\n\
     mov r10, r0\n\
     ldr r0, _08020050 @ =gBattlescriptCurrInstr\n\
     ldr r0, [r0]\n\
@@ -5569,7 +5569,7 @@ _08020040:\n\
     ldr r0, [r0]\n\
     mov pc, r0\n\
     .align 2, 0\n\
-_0802004C: .4byte 0x0201605c\n\
+_0802004C: .4byte gSharedMem + 0x1605C\n\
 _08020050: .4byte gBattlescriptCurrInstr\n\
 _08020054: .4byte gBank1\n\
 _08020058: .4byte gSentPokesToOpponent\n\
@@ -5598,7 +5598,7 @@ _0802007C:\n\
     cmp r0, 0\n\
     beq _080200BC\n\
 _08020098:\n\
-    ldr r0, _080200B4 @ =0x02000000\n\
+    ldr r0, _080200B4 @ =gSharedMem\n\
     ldr r1, _080200B8 @ =0x0001600f\n\
     adds r0, r1\n\
     movs r1, 0x6\n\
@@ -5608,10 +5608,10 @@ _08020098:\n\
 _080200A8: .4byte gBank1\n\
 _080200AC: .4byte gBattleTypeFlags\n\
 _080200B0: .4byte 0x00000982\n\
-_080200B4: .4byte 0x02000000\n\
+_080200B4: .4byte gSharedMem\n\
 _080200B8: .4byte 0x0001600f\n\
 _080200BC:\n\
-    ldr r2, _080200E8 @ =0x02000000\n\
+    ldr r2, _080200E8 @ =gSharedMem\n\
     ldr r3, _080200EC @ =0x0001600f\n\
     adds r1, r2, r3\n\
     ldrb r0, [r1]\n\
@@ -5633,7 +5633,7 @@ _080200BC:\n\
     strb r0, [r2]\n\
     bl _08020996\n\
     .align 2, 0\n\
-_080200E8: .4byte 0x02000000\n\
+_080200E8: .4byte gSharedMem\n\
 _080200EC: .4byte 0x0001600f\n\
 _080200F0: .4byte 0x00016113\n\
 _080200F4: .4byte gBitTable\n\
@@ -5760,7 +5760,7 @@ _080201F6:\n\
     ldr r0, _08020248 @ =gExpShareExp\n\
     strh r6, [r0]\n\
 _080201FA:\n\
-    ldr r1, _0802024C @ =0x02000000\n\
+    ldr r1, _0802024C @ =gSharedMem\n\
     ldr r3, _08020250 @ =0x0001600f\n\
     adds r2, r1, r3\n\
     ldrb r0, [r2]\n\
@@ -5781,7 +5781,7 @@ _08020216:\n\
     beq _08020220\n\
     b _08020996\n\
 _08020220:\n\
-    ldr r0, _0802024C @ =0x02000000\n\
+    ldr r0, _0802024C @ =gSharedMem\n\
     ldr r1, _08020254 @ =0x00016018\n\
     adds r0, r1\n\
     ldrb r1, [r0]\n\
@@ -5802,7 +5802,7 @@ _08020220:\n\
     b _08020274\n\
     .align 2, 0\n\
 _08020248: .4byte gExpShareExp\n\
-_0802024C: .4byte 0x02000000\n\
+_0802024C: .4byte gSharedMem\n\
 _08020250: .4byte 0x0001600f\n\
 _08020254: .4byte 0x00016018\n\
 _08020258: .4byte 0x0001605f\n\
@@ -5815,7 +5815,7 @@ _0802026C:\n\
     lsls r0, 24\n\
     lsrs r4, r0, 24\n\
 _08020274:\n\
-    ldr r5, _08020294 @ =0x02000000\n\
+    ldr r5, _08020294 @ =gSharedMem\n\
     cmp r4, 0x19\n\
     beq _080202A0\n\
     ldr r3, _08020298 @ =0x0001605f\n\
@@ -5831,7 +5831,7 @@ _08020274:\n\
     adds r1, r5, r0\n\
     b _080202C8\n\
     .align 2, 0\n\
-_08020294: .4byte 0x02000000\n\
+_08020294: .4byte gSharedMem\n\
 _08020298: .4byte 0x0001605f\n\
 _0802029C: .4byte 0x0001600f\n\
 _080202A0:\n\
@@ -5889,7 +5889,7 @@ _080202E8:\n\
     adds r0, 0x1\n\
     strb r0, [r5]\n\
 _08020316:\n\
-    ldr r5, _0802035C @ =0x02000000\n\
+    ldr r5, _0802035C @ =gSharedMem\n\
     ldr r1, _08020360 @ =0x00016018\n\
     adds r0, r5, r1\n\
     ldrb r1, [r0]\n\
@@ -5921,7 +5921,7 @@ _0802034C: .4byte gBattleTypeFlags\n\
 _08020350: .4byte gBattleMons\n\
 _08020354: .4byte 0x0001601b\n\
 _08020358: .4byte 0x00000161\n\
-_0802035C: .4byte 0x02000000\n\
+_0802035C: .4byte gSharedMem\n\
 _08020360: .4byte 0x00016018\n\
 _08020364: .4byte gPlayerParty\n\
 _08020368: .4byte 0x0001605f\n\
@@ -5965,7 +5965,7 @@ _0802039C:\n\
     bl __divsi3\n\
     str r0, [r4]\n\
 _080203B8:\n\
-    ldr r0, _080203F8 @ =0x02000000\n\
+    ldr r0, _080203F8 @ =gSharedMem\n\
     ldr r2, _080203FC @ =0x00016018\n\
     adds r0, r2\n\
     ldrb r1, [r0]\n\
@@ -5992,7 +5992,7 @@ _080203B8:\n\
 _080203EC: .4byte gBattleMoveDamage\n\
 _080203F0: .4byte gExpShareExp\n\
 _080203F4: .4byte gBattleTypeFlags\n\
-_080203F8: .4byte 0x02000000\n\
+_080203F8: .4byte gSharedMem\n\
 _080203FC: .4byte 0x00016018\n\
 _08020400: .4byte gPlayerParty\n\
 _08020404:\n\
@@ -6007,7 +6007,7 @@ _0802040A:\n\
     cmp r1, 0\n\
     beq _08020488\n\
     ldr r1, _08020448 @ =gBattlePartyID\n\
-    ldr r0, _0802044C @ =0x02000000\n\
+    ldr r0, _0802044C @ =gSharedMem\n\
     ldr r3, _08020450 @ =0x00016018\n\
     adds r2, r0, r3\n\
     ldrh r1, [r1, 0x4]\n\
@@ -6030,7 +6030,7 @@ _0802043C: .4byte 0x00000149\n\
 _08020440: .4byte gBattleMoveDamage\n\
 _08020444: .4byte gBattleTypeFlags\n\
 _08020448: .4byte gBattlePartyID\n\
-_0802044C: .4byte 0x02000000\n\
+_0802044C: .4byte gSharedMem\n\
 _08020450: .4byte 0x00016018\n\
 _08020454: .4byte gBitTable\n\
 _08020458: .4byte gAbsentBankFlags\n\
@@ -6057,7 +6057,7 @@ _0802047C:\n\
     .align 2, 0\n\
 _08020484: .4byte 0x000160a2\n\
 _08020488:\n\
-    ldr r0, _08020530 @ =0x02000000\n\
+    ldr r0, _08020530 @ =gSharedMem\n\
     ldr r3, _08020534 @ =0x000160a2\n\
     adds r0, r3\n\
     strb r1, [r0]\n\
@@ -6068,7 +6068,7 @@ _08020490:\n\
     strb r2, [r1]\n\
     movs r5, 0x4\n\
     strb r5, [r1, 0x1]\n\
-    ldr r4, _08020530 @ =0x02000000\n\
+    ldr r4, _08020530 @ =gSharedMem\n\
     ldr r0, _08020534 @ =0x000160a2\n\
     adds r6, r4, r0\n\
     ldrb r0, [r6]\n\
@@ -6132,7 +6132,7 @@ _08020490:\n\
     ldrh r1, [r1]\n\
     bl MonGainEVs\n\
 _0802051E:\n\
-    ldr r1, _08020530 @ =0x02000000\n\
+    ldr r1, _08020530 @ =gSharedMem\n\
     ldr r3, _08020554 @ =0x0001605f\n\
     adds r2, r1, r3\n\
     ldrb r0, [r2]\n\
@@ -6142,7 +6142,7 @@ _0802051E:\n\
     adds r1, r0\n\
     b _08020618\n\
     .align 2, 0\n\
-_08020530: .4byte 0x02000000\n\
+_08020530: .4byte gSharedMem\n\
 _08020534: .4byte 0x000160a2\n\
 _08020538: .4byte gBattleTextBuff1\n\
 _0802053C: .4byte 0x00016018\n\
@@ -6161,7 +6161,7 @@ _0802055C:\n\
     b _08020996\n\
 _08020566:\n\
     ldr r1, _08020624 @ =gBattleBufferB\n\
-    ldr r4, _08020628 @ =0x02000000\n\
+    ldr r4, _08020628 @ =gSharedMem\n\
     ldr r3, _0802062C @ =0x000160a2\n\
     adds r3, r4\n\
     mov r8, r3\n\
@@ -6237,7 +6237,7 @@ _08020566:\n\
     ldrb r0, [r4]\n\
     bl MarkBufferBankForExecution\n\
 _08020612:\n\
-    ldr r1, _08020628 @ =0x02000000\n\
+    ldr r1, _08020628 @ =gSharedMem\n\
     ldr r3, _08020644 @ =0x0001600f\n\
     adds r1, r3\n\
 _08020618:\n\
@@ -6248,7 +6248,7 @@ _08020618:\n\
     .align 2, 0\n\
 _08020620: .4byte gBattleExecBuffer\n\
 _08020624: .4byte gBattleBufferB\n\
-_08020628: .4byte 0x02000000\n\
+_08020628: .4byte gSharedMem\n\
 _0802062C: .4byte 0x000160a2\n\
 _08020630: .4byte 0x00016018\n\
 _08020634: .4byte gPlayerParty\n\
@@ -6264,7 +6264,7 @@ _08020648:\n\
     b _08020996\n\
 _08020652:\n\
     ldr r1, _080208B0 @ =gActiveBank\n\
-    ldr r4, _080208B4 @ =0x02000000\n\
+    ldr r4, _080208B4 @ =gSharedMem\n\
     ldr r2, _080208B8 @ =0x000160a2\n\
     adds r0, r4, r2\n\
     ldrb r0, [r0]\n\
@@ -6316,7 +6316,7 @@ _080206A8:\n\
     ldr r5, _080208B0 @ =gActiveBank\n\
     ldrb r0, [r5]\n\
     strb r0, [r1, 0x2]\n\
-    ldr r0, _080208B4 @ =0x02000000\n\
+    ldr r0, _080208B4 @ =gSharedMem\n\
     ldr r3, _080208C8 @ =0x00016018\n\
     adds r6, r0, r3\n\
     ldrb r0, [r6]\n\
@@ -6460,7 +6460,7 @@ _080206A8:\n\
     strh r0, [r4, 0xA]\n\
 _080207EC:\n\
     ldr r0, _080208C4 @ =gBattlePartyID\n\
-    ldr r1, _080208B4 @ =0x02000000\n\
+    ldr r1, _080208B4 @ =gSharedMem\n\
     ldr r3, _080208C8 @ =0x00016018\n\
     adds r7, r1, r3\n\
     ldrb r2, [r7]\n\
@@ -6549,7 +6549,7 @@ _080207EC:\n\
     .align 2, 0\n\
 _080208AC: .4byte gBattleExecBuffer\n\
 _080208B0: .4byte gActiveBank\n\
-_080208B4: .4byte 0x02000000\n\
+_080208B4: .4byte gSharedMem\n\
 _080208B8: .4byte 0x000160a2\n\
 _080208BC: .4byte gBattleBufferB\n\
 _080208C0: .4byte gBattleTypeFlags\n\
@@ -6569,7 +6569,7 @@ _080208F0:\n\
     movs r0, 0\n\
     str r0, [r1]\n\
 _080208F6:\n\
-    ldr r0, _08020908 @ =0x02000000\n\
+    ldr r0, _08020908 @ =gSharedMem\n\
     ldr r1, _0802090C @ =0x0001600f\n\
     adds r0, r1\n\
     movs r1, 0x5\n\
@@ -6577,14 +6577,14 @@ _080208F6:\n\
     b _08020996\n\
     .align 2, 0\n\
 _08020904: .4byte gBattleMoveDamage\n\
-_08020908: .4byte 0x02000000\n\
+_08020908: .4byte gSharedMem\n\
 _0802090C: .4byte 0x0001600f\n\
 _08020910:\n\
     ldr r0, _08020924 @ =gBattleMoveDamage\n\
     ldr r0, [r0]\n\
     cmp r0, 0\n\
     beq _08020930\n\
-    ldr r0, _08020928 @ =0x02000000\n\
+    ldr r0, _08020928 @ =gSharedMem\n\
     ldr r2, _0802092C @ =0x0001600f\n\
     adds r0, r2\n\
     movs r1, 0x3\n\
@@ -6592,10 +6592,10 @@ _08020910:\n\
     b _08020996\n\
     .align 2, 0\n\
 _08020924: .4byte gBattleMoveDamage\n\
-_08020928: .4byte 0x02000000\n\
+_08020928: .4byte gSharedMem\n\
 _0802092C: .4byte 0x0001600f\n\
 _08020930:\n\
-    ldr r2, _08020950 @ =0x02000000\n\
+    ldr r2, _08020950 @ =gSharedMem\n\
     ldr r3, _08020954 @ =0x00016018\n\
     adds r1, r2, r3\n\
     ldrb r0, [r1]\n\
@@ -6611,7 +6611,7 @@ _08020930:\n\
     strb r0, [r1]\n\
     b _08020996\n\
     .align 2, 0\n\
-_08020950: .4byte 0x02000000\n\
+_08020950: .4byte gSharedMem\n\
 _08020954: .4byte 0x00016018\n\
 _08020958: .4byte 0x0001600f\n\
 _0802095C:\n\
@@ -7919,7 +7919,7 @@ _0802178C: .4byte gUnknown_02024A98\n\
 _08021790:\n\
     cmp r3, 0\n\
     beq _080217E0\n\
-    ldr r0, _080217D0 @ =0x02000000\n\
+    ldr r0, _080217D0 @ =gSharedMem\n\
     ldr r1, _080217D4 @ =0x000160dc\n\
     adds r4, r0, r1\n\
     ldrb r0, [r4]\n\
@@ -7949,7 +7949,7 @@ _080217CC:\n\
     ldr r1, _080217DC @ =gBattlescriptCurrInstr\n\
     b _080217E2\n\
     .align 2, 0\n\
-_080217D0: .4byte 0x02000000\n\
+_080217D0: .4byte gSharedMem\n\
 _080217D4: .4byte 0x000160dc\n\
 _080217D8: .4byte gActiveBank\n\
 _080217DC: .4byte gBattlescriptCurrInstr\n\
@@ -7990,7 +7990,7 @@ static void atk49_moveendturn(void)
     else
         hold_effect_atk = ItemId_GetHoldEffect(gBattleMons[gBankTarget].item);
 
-    choiced_move_atk = (u16*)(gBankAttacker * 0x020160e8);
+    choiced_move_atk = (u16*)(gBankAttacker * (ewram_addr + 0x160E8));
     if (BATTLE_STRUCT->dynamicMoveType)
         move_type = BATTLE_STRUCT->dynamicMoveType & 0x3F;
     else
@@ -8066,7 +8066,7 @@ static void atk49_moveendturn(void)
         case 7: //changed held items
             for (i = 0; i < gNoOfAllBanks; i++)
             {
-                #define CHANGED_ITEM (((*u16)(0x020160f0)))
+                #define CHANGED_ITEM (((*u16)(gSharedMem + 0x160F0)))
                 if (CHANGED_ITEM(i))
                     gBattleMons[i].item = CHANGED_ITEM(i);
             }
@@ -8162,7 +8162,7 @@ _0802184E:\n\
     ldr r0, _0802186C @ =gBankAttacker\n\
     ldrb r1, [r0]\n\
     lsls r1, 1\n\
-    ldr r0, _08021870 @ =0x020160e8\n\
+    ldr r0, _08021870 @ =gSharedMem + 0x160E8\n\
     adds r1, r0\n\
     str r1, [sp, 0xC]\n\
     subs r0, 0xCC\n\
@@ -8175,13 +8175,13 @@ _0802184E:\n\
     b _080218D2\n\
     .align 2, 0\n\
 _0802186C: .4byte gBankAttacker\n\
-_08021870: .4byte 0x020160e8\n\
+_08021870: .4byte gSharedMem + 0x160E8\n\
 _08021874:\n\
     strb r2, [r7]\n\
     ldr r0, [r5]\n\
     orrs r0, r6\n\
     str r0, [r5]\n\
-    ldr r0, _080218AC @ =0x02000000\n\
+    ldr r0, _080218AC @ =gSharedMem\n\
     ldr r3, _080218B0 @ =0x0001600c\n\
     adds r0, r3\n\
     strb r4, [r0]\n\
@@ -8202,7 +8202,7 @@ _08021874:\n\
     ldr r0, _080218BC @ =gUnknown_081D9B2D\n\
     bl _0802229C\n\
     .align 2, 0\n\
-_080218AC: .4byte 0x02000000\n\
+_080218AC: .4byte gSharedMem\n\
 _080218B0: .4byte 0x0001600c\n\
 _080218B4: .4byte gBattleScriptsEffectsTable\n\
 _080218B8: .4byte gBattlescriptCurrInstr\n\
@@ -8218,13 +8218,13 @@ _080218C0:\n\
     ldrb r0, [r0, 0x2]\n\
     str r0, [sp, 0x4]\n\
 _080218D2:\n\
-    ldr r5, _080218E0 @ =0x02000000\n\
+    ldr r5, _080218E0 @ =gSharedMem\n\
     mov r12, r5\n\
     b _080218EE\n\
     .align 2, 0\n\
 _080218D8: .4byte gBattleMoves\n\
 _080218DC: .4byte gCurrentMove\n\
-_080218E0: .4byte 0x02000000\n\
+_080218E0: .4byte gSharedMem\n\
 _080218E4:\n\
     mov r0, r10\n\
     cmp r0, 0\n\
@@ -8349,7 +8349,7 @@ _080219C8:\n\
     movs r5, 0x1\n\
     mov r10, r5\n\
 _080219FE:\n\
-    ldr r2, _08021A2C @ =0x02000000\n\
+    ldr r2, _08021A2C @ =gSharedMem\n\
     ldr r0, _08021A30 @ =0x0001600c\n\
     adds r1, r2, r0\n\
     b _08021E00\n\
@@ -8363,7 +8363,7 @@ _08021A1C: .4byte gBattleMoves\n\
 _08021A20: .4byte gCurrentMove\n\
 _08021A24: .4byte gBattlescriptCurrInstr\n\
 _08021A28: .4byte gUnknown_081D9132\n\
-_08021A2C: .4byte 0x02000000\n\
+_08021A2C: .4byte gSharedMem\n\
 _08021A30: .4byte 0x0001600c\n\
 _08021A34:\n\
     ldr r2, _08021AD0 @ =gBattleMons\n\
@@ -8471,13 +8471,13 @@ _08021AF0:\n\
     movs r4, 0x1\n\
     mov r10, r4\n\
 _08021B0C:\n\
-    ldr r2, _08021B18 @ =0x02000000\n\
+    ldr r2, _08021B18 @ =gSharedMem\n\
     ldr r5, _08021B1C @ =0x0001600c\n\
     adds r1, r2, r5\n\
     b _08021E00\n\
     .align 2, 0\n\
 _08021B14: .4byte gBankTarget\n\
-_08021B18: .4byte 0x02000000\n\
+_08021B18: .4byte gSharedMem\n\
 _08021B1C: .4byte 0x0001600c\n\
 _08021B20:\n\
     ldr r0, _08021B40 @ =gBankTarget\n\
@@ -8511,18 +8511,18 @@ _08021B44:\n\
     beq _08021B68\n\
     movs r4, 0x1\n\
     mov r10, r4\n\
-    ldr r5, _08021B64 @ =0x02000000\n\
+    ldr r5, _08021B64 @ =gSharedMem\n\
     mov r12, r5\n\
     b _0802224E\n\
     .align 2, 0\n\
-_08021B64: .4byte 0x02000000\n\
+_08021B64: .4byte gSharedMem\n\
 _08021B68:\n\
-    ldr r2, _08021B70 @ =0x02000000\n\
+    ldr r2, _08021B70 @ =gSharedMem\n\
     ldr r0, _08021B74 @ =0x0001600c\n\
     adds r1, r2, r0\n\
     b _08021E00\n\
     .align 2, 0\n\
-_08021B70: .4byte 0x02000000\n\
+_08021B70: .4byte gSharedMem\n\
 _08021B74: .4byte 0x0001600c\n\
 _08021B78:\n\
     ldr r0, _08021B98 @ =gBankAttacker\n\
@@ -8636,7 +8636,7 @@ _08021C40:\n\
     b _08022244\n\
 _08021C4C:\n\
     movs r5, 0\n\
-    ldr r2, _08021C70 @ =0x020160f0\n\
+    ldr r2, _08021C70 @ =gSharedMem + 0x160F0\n\
     ldr r3, _08021C74 @ =gBattleMons\n\
 _08021C52:\n\
     ldrh r1, [r2]\n\
@@ -8654,7 +8654,7 @@ _08021C5C:\n\
     b _08022244\n\
     .align 2, 0\n\
 _08021C6C: .4byte gNoOfAllBanks\n\
-_08021C70: .4byte 0x020160f0\n\
+_08021C70: .4byte gSharedMem + 0x160F0\n\
 _08021C74: .4byte gBattleMons\n\
 _08021C78:\n\
     movs r0, 0x3\n\
@@ -8666,18 +8666,18 @@ _08021C78:\n\
     beq _08021C98\n\
     movs r2, 0x1\n\
     mov r10, r2\n\
-    ldr r3, _08021C94 @ =0x02000000\n\
+    ldr r3, _08021C94 @ =gSharedMem\n\
     mov r12, r3\n\
     b _0802224E\n\
     .align 2, 0\n\
-_08021C94: .4byte 0x02000000\n\
+_08021C94: .4byte gSharedMem\n\
 _08021C98:\n\
-    ldr r2, _08021CA0 @ =0x02000000\n\
+    ldr r2, _08021CA0 @ =gSharedMem\n\
     ldr r4, _08021CA4 @ =0x0001600c\n\
     adds r1, r2, r4\n\
     b _08021E00\n\
     .align 2, 0\n\
-_08021CA0: .4byte 0x02000000\n\
+_08021CA0: .4byte gSharedMem\n\
 _08021CA4: .4byte 0x0001600c\n\
 _08021CA8:\n\
     movs r0, 0x4\n\
@@ -8690,12 +8690,12 @@ _08021CA8:\n\
     movs r5, 0x1\n\
     mov r10, r5\n\
 _08021CBC:\n\
-    ldr r2, _08021CC4 @ =0x02000000\n\
+    ldr r2, _08021CC4 @ =gSharedMem\n\
     ldr r0, _08021CC8 @ =0x0001600c\n\
     adds r1, r2, r0\n\
     b _08021E00\n\
     .align 2, 0\n\
-_08021CC4: .4byte 0x02000000\n\
+_08021CC4: .4byte gSharedMem\n\
 _08021CC8: .4byte 0x0001600c\n\
 _08021CCC:\n\
     ldr r1, _08021D04 @ =gStatuses3\n\
@@ -8783,7 +8783,7 @@ _08021D44:\n\
     orrs r1, r2\n\
     strb r1, [r0]\n\
 _08021D7E:\n\
-    ldr r2, _08021DA4 @ =0x02000000\n\
+    ldr r2, _08021DA4 @ =gSharedMem\n\
     ldr r4, _08021DA8 @ =0x0001600c\n\
     adds r1, r2, r4\n\
     b _08021E00\n\
@@ -8795,7 +8795,7 @@ _08021D94: .4byte 0x000400c0\n\
 _08021D98: .4byte gActiveBank\n\
 _08021D9C: .4byte 0xfffbff3f\n\
 _08021DA0: .4byte gSpecialStatuses\n\
-_08021DA4: .4byte 0x02000000\n\
+_08021DA4: .4byte gSharedMem\n\
 _08021DA8: .4byte 0x0001600c\n\
 _08021DAC:\n\
     ldr r2, _08021E0C @ =gSpecialStatuses\n\
@@ -8836,7 +8836,7 @@ _08021DAC:\n\
     ands r0, r1\n\
     str r0, [r2]\n\
 _08021DFA:\n\
-    ldr r2, _08021E28 @ =0x02000000\n\
+    ldr r2, _08021E28 @ =gSharedMem\n\
     ldr r3, _08021E2C @ =0x0001600c\n\
     adds r1, r2, r3\n\
 _08021E00:\n\
@@ -8853,7 +8853,7 @@ _08021E18: .4byte gStatuses3\n\
 _08021E1C: .4byte 0x000400c0\n\
 _08021E20: .4byte gActiveBank\n\
 _08021E24: .4byte 0xfffbff3f\n\
-_08021E28: .4byte 0x02000000\n\
+_08021E28: .4byte gSharedMem\n\
 _08021E2C: .4byte 0x0001600c\n\
 _08021E30:\n\
     movs r4, 0\n\
@@ -9347,7 +9347,7 @@ _0802223A:\n\
     ldr r0, [r5]\n\
     orrs r0, r6\n\
     str r0, [r5]\n\
-    ldr r2, _080222D0 @ =0x02000000\n\
+    ldr r2, _080222D0 @ =gSharedMem\n\
     mov r12, r2\n\
 _08022244:\n\
     ldr r1, _080222D4 @ =0x0001600c\n\
@@ -9417,7 +9417,7 @@ _080222C0: .4byte gBattleMoves\n\
 _080222C4: .4byte gCurrentMove\n\
 _080222C8: .4byte gBankTarget\n\
 _080222CC: .4byte gBattleMons\n\
-_080222D0: .4byte 0x02000000\n\
+_080222D0: .4byte gSharedMem\n\
 _080222D4: .4byte 0x0001600c\n\
 _080222D8: .4byte gBattlescriptCurrInstr\n\
         .syntax divided"
@@ -9930,7 +9930,7 @@ _08022C2C:\n\
     lsls r0, 25\n\
     cmp r0, 0\n\
     blt _08022C6C\n\
-    ldr r0, _08022C64 @ =0x02000000\n\
+    ldr r0, _08022C64 @ =gSharedMem\n\
     ldr r1, _08022C68 @ =0x0001606a\n\
     adds r0, r1\n\
     ldrb r0, [r0]\n\
@@ -9947,7 +9947,7 @@ _08022C2C:\n\
     b _08022C7E\n\
     .align 2, 0\n\
 _08022C60: .4byte gSpecialStatuses\n\
-_08022C64: .4byte 0x02000000\n\
+_08022C64: .4byte gSharedMem\n\
 _08022C68: .4byte 0x0001606a\n\
 _08022C6C:\n\
     movs r0, 0\n\
@@ -10015,7 +10015,7 @@ _08022CE8:\n\
     lsls r0, 25\n\
     cmp r0, 0\n\
     blt _08022D28\n\
-    ldr r0, _08022D20 @ =0x02000000\n\
+    ldr r0, _08022D20 @ =gSharedMem\n\
     ldr r1, _08022D24 @ =0x00016068\n\
     adds r0, r1\n\
     ldrb r0, [r0]\n\
@@ -10032,7 +10032,7 @@ _08022CE8:\n\
     b _08022D40\n\
     .align 2, 0\n\
 _08022D1C: .4byte gSpecialStatuses\n\
-_08022D20: .4byte 0x02000000\n\
+_08022D20: .4byte gSharedMem\n\
 _08022D24: .4byte 0x00016068\n\
 _08022D28:\n\
     movs r0, 0x1\n\
@@ -10099,7 +10099,7 @@ _08022DA0:\n\
     lsls r0, 25\n\
     cmp r0, 0\n\
     blt _08022DE0\n\
-    ldr r0, _08022DD8 @ =0x02000000\n\
+    ldr r0, _08022DD8 @ =gSharedMem\n\
     ldr r1, _08022DDC @ =0x0001606b\n\
     adds r0, r1\n\
     ldrb r0, [r0]\n\
@@ -10116,7 +10116,7 @@ _08022DA0:\n\
     b _08022DF6\n\
     .align 2, 0\n\
 _08022DD4: .4byte gSpecialStatuses\n\
-_08022DD8: .4byte 0x02000000\n\
+_08022DD8: .4byte gSharedMem\n\
 _08022DDC: .4byte 0x0001606b\n\
 _08022DE0:\n\
     movs r0, 0\n\
@@ -10186,7 +10186,7 @@ _08022E60:\n\
     lsls r0, 25\n\
     cmp r0, 0\n\
     blt _08022EA0\n\
-    ldr r0, _08022E98 @ =0x02000000\n\
+    ldr r0, _08022E98 @ =gSharedMem\n\
     ldr r1, _08022E9C @ =0x00016069\n\
     adds r0, r1\n\
     ldrb r0, [r0]\n\
@@ -10203,7 +10203,7 @@ _08022E60:\n\
     b _08022EB8\n\
     .align 2, 0\n\
 _08022E94: .4byte gSpecialStatuses\n\
-_08022E98: .4byte 0x02000000\n\
+_08022E98: .4byte gSharedMem\n\
 _08022E9C: .4byte 0x00016069\n\
 _08022EA0:\n\
     movs r0, 0x2\n\
@@ -10386,7 +10386,7 @@ _08023008:\n\
     lsls r0, 25\n\
     cmp r0, 0\n\
     blt _0802303A\n\
-    ldr r0, _0802309C @ =0x02000000\n\
+    ldr r0, _0802309C @ =gSharedMem\n\
     ldr r1, _080230A0 @ =0x00016068\n\
     adds r0, r1\n\
     ldrb r0, [r0]\n\
@@ -10447,7 +10447,7 @@ _0802303A:\n\
     b _080230EE\n\
     .align 2, 0\n\
 _08023098: .4byte gSpecialStatuses\n\
-_0802309C: .4byte 0x02000000\n\
+_0802309C: .4byte gSharedMem\n\
 _080230A0: .4byte 0x00016068\n\
 _080230A4: .4byte gBitTable\n\
 _080230A8: .4byte gActiveBank\n\
@@ -10466,7 +10466,7 @@ _080230BC:\n\
     lsls r0, 25\n\
     cmp r0, 0\n\
     blt _080230EE\n\
-    ldr r0, _08023100 @ =0x02000000\n\
+    ldr r0, _08023100 @ =gSharedMem\n\
     ldr r1, _08023104 @ =0x00016069\n\
     adds r0, r1\n\
     ldrb r0, [r0]\n\
@@ -10489,7 +10489,7 @@ _080230EE:\n\
     b _08023110\n\
     .align 2, 0\n\
 _080230FC: .4byte gSpecialStatuses\n\
-_08023100: .4byte 0x02000000\n\
+_08023100: .4byte gSharedMem\n\
 _08023104: .4byte 0x00016069\n\
 _08023108: .4byte gBattlescriptCurrInstr\n\
 _0802310C:\n\
@@ -10610,7 +10610,7 @@ _080231F4: .4byte gHitMarker\n\
 _080231F8:\n\
     ldr r4, _080232A0 @ =gActiveBank\n\
     strb r7, [r4]\n\
-    ldr r3, _080232A4 @ =0x02000000\n\
+    ldr r3, _080232A4 @ =gSharedMem\n\
     ldrb r0, [r4]\n\
     ldr r2, _080232A8 @ =0x00016064\n\
     adds r1, r0, r2\n\
@@ -10691,7 +10691,7 @@ _0802328A:\n\
     b _08023302\n\
     .align 2, 0\n\
 _080232A0: .4byte gActiveBank\n\
-_080232A4: .4byte 0x02000000\n\
+_080232A4: .4byte gSharedMem\n\
 _080232A8: .4byte 0x00016064\n\
 _080232AC: .4byte gBattlePartyID\n\
 _080232B0: .4byte 0x00016068\n\
@@ -11134,7 +11134,7 @@ static void atk5C_hitanimation(void)
         gBattlescriptCurrInstr += 2;
 }
 
-#define MONEY_UNKNOWN ((*(u8*)(0x02017000 + 0x94)))
+#define MONEY_UNKNOWN ((*(u8*)(ewram_addr + 0x17000 + 0x94)))
 
 #ifdef NONMATCHING
 static void atk5D_getmoneyreward(void)
@@ -11208,7 +11208,7 @@ static void atk5D_getmoneyreward(void)
     lsls r1, 3\n\
     cmp r2, r1\n\
     bne _08024058\n\
-    ldr r0, _0802404C @ =0x02017000\n\
+    ldr r0, _0802404C @ =gSharedMem + 0x17000\n\
     adds r1, r0, 0\n\
     adds r1, 0x94\n\
     ldrb r2, [r1]\n\
@@ -11225,7 +11225,7 @@ static void atk5D_getmoneyreward(void)
     b _08024140\n\
     .align 2, 0\n\
 _08024048: .4byte gTrainerBattleOpponent\n\
-_0802404C: .4byte 0x02017000\n\
+_0802404C: .4byte gSharedMem + 0x17000\n\
 _08024050: .4byte 0xfffff056\n\
 _08024054: .4byte gSaveBlock1 + 0x490\n\
 _08024058:\n\
@@ -11295,7 +11295,7 @@ _080240C4:\n\
     ldrb r1, [r3]\n\
     mov r12, r0\n\
     lsls r4, r5, 2\n\
-    ldr r5, _08024124 @ =0x02000000\n\
+    ldr r5, _08024124 @ =gSharedMem\n\
     ldr r7, _08024128 @ =gBattleTypeFlags\n\
     ldr r0, _0802412C @ =gSaveBlock1 + 0x490\n\
     mov r8, r0\n\
@@ -11339,7 +11339,7 @@ _080240FE:\n\
     b _08024140\n\
     .align 2, 0\n\
 _08024120: .4byte gTrainerMoney\n\
-_08024124: .4byte 0x02000000\n\
+_08024124: .4byte gSharedMem\n\
 _08024128: .4byte gBattleTypeFlags\n\
 _0802412C: .4byte gSaveBlock1 + 0x490\n\
 _08024130: .4byte gTrainers\n\
@@ -11678,7 +11678,7 @@ static void atk6C_lvlbox_display(void)
     sub sp, 0x4\n\
     movs r1, 0\n\
     movs r7, 0\n\
-    ldr r0, _08024928 @ =0x02000000\n\
+    ldr r0, _08024928 @ =gSharedMem\n\
     mov r10, r0\n\
     ldr r4, _0802492C @ =0x0001609c\n\
     add r4, r10\n\
@@ -11693,7 +11693,7 @@ _0802491C:\n\
     beq _0802493E\n\
     b _08024C38\n\
     .align 2, 0\n\
-_08024928: .4byte 0x02000000\n\
+_08024928: .4byte gSharedMem\n\
 _0802492C: .4byte 0x0001609c\n\
 _08024930:\n\
     cmp r0, 0x2\n\
@@ -11729,7 +11729,7 @@ _0802495A:\n\
     adds r0, r5, 0\n\
     bl StringAppend\n\
     adds r5, r0, 0\n\
-    ldr r0, _080249A8 @ =0x02000000\n\
+    ldr r0, _080249A8 @ =gSharedMem\n\
     ldr r2, _080249AC @ =0x00016018\n\
     adds r0, r2\n\
     ldrb r1, [r0]\n\
@@ -11754,7 +11754,7 @@ _0802495A:\n\
 _0802499C: .4byte gStringVar4\n\
 _080249A0: .4byte gUnknown_08400D9F\n\
 _080249A4: .4byte gUnknown_0840165C\n\
-_080249A8: .4byte 0x02000000\n\
+_080249A8: .4byte gSharedMem\n\
 _080249AC: .4byte 0x00016018\n\
 _080249B0: .4byte gPlayerParty\n\
 _080249B4: .4byte gLevelUpStatBoxStats\n\
@@ -11768,37 +11768,37 @@ _080249BC:\n\
     .4byte _08024A04\n\
     .4byte _08024A10\n\
 _080249D4:\n\
-    ldr r0, _080249DC @ =0x02017180\n\
+    ldr r0, _080249DC @ =gSharedMem + 0x17180\n\
     ldrh r0, [r0]\n\
     b _08024A14\n\
     .align 2, 0\n\
-_080249DC: .4byte 0x02017180\n\
+_080249DC: .4byte gSharedMem + 0x17180\n\
 _080249E0:\n\
-    ldr r0, _080249E8 @ =0x02017180\n\
+    ldr r0, _080249E8 @ =gSharedMem + 0x17180\n\
     ldrh r0, [r0, 0x8]\n\
     b _08024A14\n\
     .align 2, 0\n\
-_080249E8: .4byte 0x02017180\n\
+_080249E8: .4byte gSharedMem + 0x17180\n\
 _080249EC:\n\
-    ldr r0, _080249F4 @ =0x02017180\n\
+    ldr r0, _080249F4 @ =gSharedMem + 0x17180\n\
     ldrh r0, [r0, 0x2]\n\
     b _08024A14\n\
     .align 2, 0\n\
-_080249F4: .4byte 0x02017180\n\
+_080249F4: .4byte gSharedMem + 0x17180\n\
 _080249F8:\n\
-    ldr r0, _08024A00 @ =0x02017180\n\
+    ldr r0, _08024A00 @ =gSharedMem + 0x17180\n\
     ldrh r0, [r0, 0xA]\n\
     b _08024A14\n\
     .align 2, 0\n\
-_08024A00: .4byte 0x02017180\n\
+_08024A00: .4byte gSharedMem + 0x17180\n\
 _08024A04:\n\
-    ldr r0, _08024A0C @ =0x02017180\n\
+    ldr r0, _08024A0C @ =gSharedMem + 0x17180\n\
     ldrh r0, [r0, 0x4]\n\
     b _08024A14\n\
     .align 2, 0\n\
-_08024A0C: .4byte 0x02017180\n\
+_08024A0C: .4byte gSharedMem + 0x17180\n\
 _08024A10:\n\
-    ldr r0, _08024A54 @ =0x02017180\n\
+    ldr r0, _08024A54 @ =gSharedMem + 0x17180\n\
     ldrh r0, [r0, 0x6]\n\
 _08024A14:\n\
     subs r0, r1, r0\n\
@@ -11835,7 +11835,7 @@ _08024A2C:\n\
     ldr r1, _08024A58 @ =gUnknown_08400DAC\n\
     b _08024A5E\n\
     .align 2, 0\n\
-_08024A54: .4byte 0x02017180\n\
+_08024A54: .4byte gSharedMem + 0x17180\n\
 _08024A58: .4byte gUnknown_08400DAC\n\
 _08024A5C:\n\
     ldr r1, _08024AA4 @ =gUnknown_08400DAA\n\
@@ -11902,14 +11902,14 @@ _08024AC4:\n\
     bl InitWindow\n\
     adds r0, r4, 0\n\
     bl sub_8002F44\n\
-    ldr r1, _08024AEC @ =0x02000000\n\
+    ldr r1, _08024AEC @ =gSharedMem\n\
     ldr r2, _08024AF0 @ =0x0001609c\n\
     adds r1, r2\n\
     b _08024BEA\n\
     .align 2, 0\n\
 _08024AE4: .4byte gUnknown_03004210\n\
 _08024AE8: .4byte gStringVar4\n\
-_08024AEC: .4byte 0x02000000\n\
+_08024AEC: .4byte gSharedMem\n\
 _08024AF0: .4byte 0x0001609c\n\
 _08024AF4:\n\
     ldr r0, _08024B94 @ =gMain\n\
@@ -12023,7 +12023,7 @@ _08024BC0:\n\
     bl InitWindow\n\
     adds r0, r4, 0\n\
     bl sub_8002F44\n\
-    ldr r1, _08024BFC @ =0x02000000\n\
+    ldr r1, _08024BFC @ =gSharedMem\n\
     ldr r0, _08024C00 @ =0x0001609c\n\
     adds r1, r0\n\
 _08024BEA:\n\
@@ -12034,7 +12034,7 @@ _08024BEA:\n\
     .align 2, 0\n\
 _08024BF4: .4byte gUnknown_03004210\n\
 _08024BF8: .4byte gStringVar4\n\
-_08024BFC: .4byte 0x02000000\n\
+_08024BFC: .4byte gSharedMem\n\
 _08024C00: .4byte 0x0001609c\n\
 _08024C04:\n\
     ldr r0, _08024C2C @ =gMain\n\
@@ -12954,7 +12954,7 @@ _08025F10: .4byte gBattlescriptCurrInstr\n\
 _08025F14:\n\
     mov r0, r8\n\
     bl b_movescr_stack_push\n\
-    ldr r0, _08025F40 @ =0x02000000\n\
+    ldr r0, _08025F40 @ =gSharedMem\n\
     ldr r6, _08025F44 @ =gActiveBank\n\
     ldrb r1, [r6]\n\
     ldr r2, _08025F48 @ =0x00016003\n\
@@ -12974,7 +12974,7 @@ _08025F14:\n\
     strb r1, [r0]\n\
     b _08025F74\n\
     .align 2, 0\n\
-_08025F40: .4byte 0x02000000\n\
+_08025F40: .4byte gSharedMem\n\
 _08025F44: .4byte gActiveBank\n\
 _08025F48: .4byte 0x00016003\n\
 _08025F4C: .4byte gBattlescriptCurrInstr\n\
@@ -13049,7 +13049,7 @@ _08025FDC: .4byte gBattlescriptCurrInstr\n\
 _08025FE0:\n\
     mov r0, r8\n\
     bl b_movescr_stack_push\n\
-    ldr r0, _08026028 @ =0x02000000\n\
+    ldr r0, _08026028 @ =gSharedMem\n\
     ldr r2, _0802602C @ =gActiveBank\n\
     ldrb r1, [r2]\n\
     ldr r3, _08026030 @ =0x00016003\n\
@@ -13081,7 +13081,7 @@ _08025FE0:\n\
     strb r1, [r0]\n\
     b _08025F74\n\
     .align 2, 0\n\
-_08026028: .4byte 0x02000000\n\
+_08026028: .4byte gSharedMem\n\
 _0802602C: .4byte gActiveBank\n\
 _08026030: .4byte 0x00016003\n\
 _08026034: .4byte gBattlescriptCurrInstr\n\
@@ -13106,7 +13106,7 @@ _08026040:\n\
     bne _08025F74\n\
     mov r0, r8\n\
     bl b_movescr_stack_push\n\
-    ldr r0, _08026094 @ =0x02000000\n\
+    ldr r0, _08026094 @ =gSharedMem\n\
     ldr r3, _08026090 @ =gActiveBank\n\
     ldrb r1, [r3]\n\
     ldr r6, _08026098 @ =0x00016003\n\
@@ -13128,7 +13128,7 @@ _08026040:\n\
     b _08025F74\n\
     .align 2, 0\n\
 _08026090: .4byte gActiveBank\n\
-_08026094: .4byte 0x02000000\n\
+_08026094: .4byte gSharedMem\n\
 _08026098: .4byte 0x00016003\n\
 _0802609C: .4byte gBattlescriptCurrInstr\n\
 _080260A0: .4byte BattleScript_AbilityNoSpecificStatLoss\n\
@@ -13154,7 +13154,7 @@ _080260A8:\n\
 _080260CA:\n\
     mov r0, r8\n\
     bl b_movescr_stack_push\n\
-    ldr r0, _08026100 @ =0x02000000\n\
+    ldr r0, _08026100 @ =gSharedMem\n\
     ldr r3, _080260FC @ =gActiveBank\n\
     ldrb r1, [r3]\n\
     ldr r6, _08026104 @ =0x00016003\n\
@@ -13176,7 +13176,7 @@ _080260CA:\n\
     b _08025F74\n\
     .align 2, 0\n\
 _080260FC: .4byte gActiveBank\n\
-_08026100: .4byte 0x02000000\n\
+_08026100: .4byte gSharedMem\n\
 _08026104: .4byte 0x00016003\n\
 _08026108: .4byte gBattlescriptCurrInstr\n\
 _0802610C: .4byte BattleScript_AbilityNoSpecificStatLoss\n\
@@ -15656,7 +15656,7 @@ push {r4-r7,lr}\n\
     bl __divsi3\n\
     adds r0, 0x1E\n\
     strh r0, [r5]\n\
-    ldr r5, _080298A0 @ =0x02000000\n\
+    ldr r5, _080298A0 @ =gSharedMem\n\
     lsls r0, r4, 4\n\
     subs r0, r4\n\
     movs r1, 0x3F\n\
@@ -15691,7 +15691,7 @@ _08029876:\n\
 _08029894: .4byte gBattleMons\n\
 _08029898: .4byte gBankAttacker\n\
 _0802989C: .4byte gDynamicBasePower\n\
-_080298A0: .4byte 0x02000000\n\
+_080298A0: .4byte gSharedMem\n\
 _080298A4: .4byte 0x0001601c\n\
 _080298A8: .4byte gBattlescriptCurrInstr\n\
         .syntax divided");
@@ -16372,7 +16372,7 @@ _0802A364: .4byte BattleScript_NoItemSteal\n\
 _0802A368: .4byte gLastUsedAbility\n\
 _0802A36C:\n\
     lsls r0, r4, 1\n\
-    ldr r4, _0802A458 @ =0x020160f0\n\
+    ldr r4, _0802A458 @ =gSharedMem + 0x160F0\n\
     adds r6, r0, r4\n\
     ldrh r5, [r5, 0x2E]\n\
     mov r10, r5\n\
@@ -16486,7 +16486,7 @@ _0802A36C:\n\
     movs r0, 0x2\n\
     b _0802A498\n\
     .align 2, 0\n\
-_0802A458: .4byte 0x020160f0\n\
+_0802A458: .4byte gSharedMem + 0x160F0\n\
 _0802A45C: .4byte gBankAttacker\n\
 _0802A460: .4byte gActiveBank\n\
 _0802A464: .4byte 0xfffe9f10\n\
@@ -16820,7 +16820,7 @@ _0802AAAE:\n\
     mov r9, r6\n\
     mov r1, r10\n\
     lsls r0, r1, 1\n\
-    ldr r1, _0802ABB0 @ =0x02016024\n\
+    ldr r1, _0802ABB0 @ =gSharedMem + 0x16024\n\
     adds r6, r0, r1\n\
 _0802AAF8:\n\
     movs r7, 0\n\
@@ -16891,7 +16891,7 @@ _0802AB54:\n\
     muls r0, r1\n\
     asrs r0, 8\n\
     lsls r0, 1\n\
-    ldr r1, _0802ABB0 @ =0x02016024\n\
+    ldr r1, _0802ABB0 @ =gSharedMem + 0x16024\n\
     adds r0, r1\n\
     ldrh r0, [r0]\n\
     strh r0, [r4]\n\
@@ -16911,7 +16911,7 @@ _0802ABA0: .4byte gPlayerParty\n\
 _0802ABA4: .4byte gEnemyParty\n\
 _0802ABA8: .4byte gBattlePartyID\n\
 _0802ABAC: .4byte 0x0000ffff\n\
-_0802ABB0: .4byte 0x02016024\n\
+_0802ABB0: .4byte gSharedMem + 0x16024\n\
 _0802ABB4: .4byte sUnknown_081FACFE\n\
 _0802ABB8: .4byte gHitMarker\n\
 _0802ABBC: .4byte 0xfffffbff\n\

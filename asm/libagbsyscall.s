@@ -69,7 +69,7 @@ SoftReset: @ 81E0814
 	ldr r3, =0x04000208
 	movs r2, 0
 	strb r2, [r3]
-	ldr r1, =0x03007f00
+	ldr r1, =0x03007f00 @ User Stack
 	mov sp, r1
 	swi 0x1
 	swi 0

@@ -20,6 +20,7 @@
 #include "title_screen.h"
 #include "trig.h"
 #include "unknown_task.h"
+#include "ewram.h"
 
 extern struct SpriteTemplate gUnknown_02024E8C;
 extern u16 gUnknown_02039358;
@@ -765,7 +766,11 @@ const struct SpritePalette gIntro3MiscPal_Table[] =
     {gIntro3Misc2Palette, 2004},
     {NULL},
 };
-const u32 unusedData = 0x02000000;
+
+// Game Freak probably used the raw address here.
+// Treating this like a u8 * causes the compiler
+// to remove it at link time.
+const u32 unusedSharedMemPtr = (u32)gSharedMem;
 
 static void MainCB2_EndIntro(void);
 void Task_IntroLoadPart1Graphics(u8);
@@ -1207,8 +1212,7 @@ static void Task_IntroWaitToSetupPart3DoubleFight(u8 taskId)
         gTasks[taskId].func = Task_IntroLoadPart3Streaks;
 }
 
-// TODO: use ewram define instead
-extern u8 gSharedMem[][32];
+//extern u8 gSharedMem[][32];
 
 static void Task_IntroLoadPart3Streaks(u8 taskId)
 {
@@ -1218,9 +1222,9 @@ static void Task_IntroLoadPart3Streaks(u8 taskId)
     intro_reset_and_hide_bgs();
     for (i = 0; i < 32; i++)
     {
-        gSharedMem[0][i] = 0;
-        gSharedMem[1][i] = 17;
-        gSharedMem[2][i] = 34;
+        ewram0arr[0][i] = 0;
+        ewram0arr[1][i] = 17;
+        ewram0arr[2][i] = 34;
     }
     vram = (void *)VRAM;
     DmaCopy16(3, gSharedMem, vram, 0x60);

@@ -450,7 +450,6 @@ SECTIONS {
         data/battle_anim_813F0F4.o(.rodata);
         src/scene/hall_of_fame.o(.rodata);
         src/scene/credits.o(.rodata);
-        data/credits.o(.rodata);
         src/field/lottery_corner.o(.rodata);
         src/field/diploma.o(.rodata);
         src/strings.o(.rodata);

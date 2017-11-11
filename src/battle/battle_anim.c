@@ -801,7 +801,7 @@ _08075FDC:\n\
     cmp r0, 0\n\
     bne _0807601C\n\
     lsls r0, r5, 2\n\
-    ldr r1, _08076020 @ =0x02017800\n\
+    ldr r1, _08076020 @ =gSharedMem + 0x17800\n\
     adds r0, r1\n\
     ldrb r1, [r0]\n\
     movs r0, 0x1\n\
@@ -825,7 +825,7 @@ _0807601C:\n\
     movs r0, 0x1\n\
     b _0807602E\n\
     .align 2, 0\n\
-_08076020: .4byte 0x02017800\n\
+_08076020: .4byte gSharedMem + 0x17800\n\
 _08076024: .4byte gSprites\n\
 _08076028: .4byte gObjectBankIDs\n\
 _0807602C:\n\
@@ -1533,7 +1533,7 @@ s8 sub_8076F98(s8 a)
     lsls r0, r2, 1\n\
     adds r0, r2\n\
     lsls r0, 2\n\
-    ldr r1, _08076FD8 @ =0x02017810\n\
+    ldr r1, _08076FD8 @ =gSharedMem + 0x17810\n\
     adds r0, r1\n\
     ldrb r1, [r0]\n\
     movs r0, 0x10\n\
@@ -1550,7 +1550,7 @@ s8 sub_8076F98(s8 a)
     b _0807706E\n\
     .align 2, 0\n\
 _08076FD4: .4byte gBattleAnimBankAttacker\n\
-_08076FD8: .4byte 0x02017810\n\
+_08076FD8: .4byte gSharedMem + 0x17810\n\
 _08076FDC:\n\
     bl NotInBattle\n\
     lsls r0, 24\n\

@@ -284,7 +284,7 @@ void BattleLoadOpponentMonSprite(struct Pokemon *pkmn, u8 b)
       &gMonFrontPicTable[species],
       gMonFrontPicCoords[species].coords,
       gMonFrontPicCoords[species].y_offset,
-      0x02000000,
+      eVoidSharedArr2,
       gUnknown_081FAF4C[var],
       species,
       r7);
@@ -336,7 +336,7 @@ void BattleLoadPlayerMonSprite(struct Pokemon *pkmn, u8 b)
       &gMonBackPicTable[species],
       gMonBackPicCoords[species].coords,
       gMonBackPicCoords[species].y_offset,
-      0x02000000,
+      eVoidSharedArr2,
       gUnknown_081FAF4C[var],
       species,
       r7);
@@ -379,7 +379,7 @@ void sub_8031A6C(u16 a, u8 b)
       &gTrainerFrontPicTable[a],
       gTrainerFrontPicCoords[a].coords,
       gTrainerFrontPicCoords[a].y_offset,
-      (void *)0x02000000,
+      eVoidSharedArr,
       gUnknown_081FAF4C[status],
       0);
     spriteSheet.data = gUnknown_081FAF4C[status];
@@ -398,7 +398,7 @@ void LoadPlayerTrainerBankSprite(u16 a, u8 b)
       &gTrainerBackPicTable[a],
       gTrainerBackPicCoords[a].coords,
       gTrainerBackPicCoords[a].y_offset,
-      (void *)0x02000000,
+      eVoidSharedArr,
       gUnknown_081FAF4C[status],
       0);
     LoadCompressedPalette(gTrainerBackPicPaletteTable[a].data, 0x100 + b * 16, 32);
@@ -495,7 +495,7 @@ bool8 sub_8031C30(u8 a)
 
 void load_gfxc_health_bar(void)
 {
-    LZDecompressWram(gUnknown_08D09C48, (void *)0x02000000);
+    LZDecompressWram(gUnknown_08D09C48, eVoidSharedArr);
 }
 
 u8 battle_load_something(u8 *pState, u8 *b)
@@ -636,7 +636,7 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
               &gMonBackPicTable[species],
               gMonBackPicCoords[species].coords,
               gMonBackPicCoords[species].y_offset,
-              0x02000000,
+              eVoidSharedArr2,
               gUnknown_081FAF4C[0],
               species,
               ewram19348.unk10);
@@ -656,7 +656,7 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
                   &gMonBackPicTable[species],
                   gMonBackPicCoords[species].coords,
                   gMonBackPicCoords[species].y_offset,
-                  0x02000000,
+                  eVoidSharedArr2,
                   gUnknown_081FAF4C[r10],
                   species,
                   gPID_perBank[a]);
@@ -669,7 +669,7 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
                   &gMonFrontPicTable[species],
                   gMonFrontPicCoords[species].coords,
                   gMonFrontPicCoords[species].y_offset,
-                  0x02000000,
+                  eVoidSharedArr2,
                   gUnknown_081FAF4C[r10],
                   species,
                   gPID_perBank[a]);

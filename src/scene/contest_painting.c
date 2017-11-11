@@ -109,7 +109,7 @@ void sub_8106630(u32 arg0)
 {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\
-    ldr r2, _0810665C @ =0x02015de0\n\
+    ldr r2, _0810665C @ =gSharedMem + 0x15DE0\n\
     subs r4, r2, 0x2\n\
     subs r5, r2, 0x1\n\
     ldr r3, _08106660 @ =gSaveBlock1\n\
@@ -131,7 +131,7 @@ void sub_8106630(u32 arg0)
     pop {r0}\n\
     bx r0\n\
     .align 2, 0\n\
-_0810665C: .4byte 0x02015de0\n\
+_0810665C: .4byte gSharedMem + 0x15DE0\n\
 _08106660: .4byte gSaveBlock1\n\
 _08106664: .4byte 0x00002dfc\n\
     .syntax divided\n");

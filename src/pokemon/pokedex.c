@@ -24,6 +24,7 @@
 #include "task.h"
 #include "trig.h"
 #include "unknown_task.h"
+#include "ewram.h"
 
 #define NATIONAL_DEX_COUNT 386
 
@@ -954,86 +955,86 @@ static const struct OamData gOamData_83B557C =
 };
 static void *const gUnknown_083B5584[] =
 {
-    (void *)0x02008000,
-    (void *)0x0200C000,
-    (void *)0x02010000,
-    (void *)0x02014000,
+    ePokedexPalAddr1,
+    ePokedexPalAddr2,
+    ePokedexPalAddr3,
+    ePokedexPalAddr4,
 };
 static const struct SpriteFrameImage gSpriteImageTable_83B5594[] =
 {
-    {(u8 *)0x02008000, 0x800},
-    {(u8 *)0x02008800, 0x800},
-    {(u8 *)0x02009000, 0x800},
-    {(u8 *)0x02009800, 0x800},
-    {(u8 *)0x0200A000, 0x800},
-    {(u8 *)0x0200A800, 0x800},
-    {(u8 *)0x0200B000, 0x800},
-    {(u8 *)0x0200B800, 0x800},
-    {(u8 *)0x0200C000, 0x800},
-    {(u8 *)0x0200C800, 0x800},
-    {(u8 *)0x0200D000, 0x800},
-    {(u8 *)0x0200D800, 0x800},
-    {(u8 *)0x0200E000, 0x800},
-    {(u8 *)0x0200E800, 0x800},
-    {(u8 *)0x0200F000, 0x800},
-    {(u8 *)0x0200F800, 0x800},
+    {ewram8000, 0x800},
+    {ewram8800, 0x800},
+    {ewram9000, 0x800},
+    {ewram9800, 0x800},
+    {ewramA000, 0x800},
+    {ewramA800, 0x800},
+    {ewramB000, 0x800},
+    {ewramB800, 0x800},
+    {ewramC000, 0x800},
+    {ewramC800, 0x800},
+    {ewramD000, 0x800},
+    {ewramD800, 0x800},
+    {ewramE000, 0x800},
+    {ewramE800, 0x800},
+    {ewramF000, 0x800},
+    {ewramF800, 0x800},
 };
 static const struct SpriteFrameImage gSpriteImageTable_83B5614[] =
 {
-    {(u8 *)0x0200C000, 0x800},
-    {(u8 *)0x0200C800, 0x800},
-    {(u8 *)0x0200D000, 0x800},
-    {(u8 *)0x0200D800, 0x800},
-    {(u8 *)0x0200E000, 0x800},
-    {(u8 *)0x0200E800, 0x800},
-    {(u8 *)0x0200F000, 0x800},
-    {(u8 *)0x0200F800, 0x800},
-    {(u8 *)0x02010000, 0x800},
-    {(u8 *)0x02010800, 0x800},
-    {(u8 *)0x02011000, 0x800},
-    {(u8 *)0x02011800, 0x800},
-    {(u8 *)0x02012000, 0x800},
-    {(u8 *)0x02012800, 0x800},
-    {(u8 *)0x02013000, 0x800},
-    {(u8 *)0x02013800, 0x800},
+    {ewramC000, 0x800},
+    {ewramC800, 0x800},
+    {ewramD000, 0x800},
+    {ewramD800, 0x800},
+    {ewramE000, 0x800},
+    {ewramE800, 0x800},
+    {ewramF000, 0x800},
+    {ewramF800, 0x800},
+    {ewram10000, 0x800},
+    {ewram10800, 0x800},
+    {ewram11000, 0x800},
+    {ewram11800, 0x800},
+    {ewram12000, 0x800},
+    {ewram12800, 0x800},
+    {ewram13000, 0x800},
+    {ewram13800, 0x800},
 };
 static const struct SpriteFrameImage gSpriteImageTable_83B5694[] =
 {
-    {(u8 *)0x02010000, 0x800},
-    {(u8 *)0x02010800, 0x800},
-    {(u8 *)0x02011000, 0x800},
-    {(u8 *)0x02011800, 0x800},
-    {(u8 *)0x02012000, 0x800},
-    {(u8 *)0x02012800, 0x800},
-    {(u8 *)0x02013000, 0x800},
-    {(u8 *)0x02013800, 0x800},
-    {(u8 *)0x02014000, 0x800},
-    {(u8 *)0x02014800, 0x800},
-    {(u8 *)0x02015000, 0x800},
-    {(u8 *)0x02015800, 0x800},
-    {(u8 *)0x02016000, 0x800},
-    {(u8 *)0x02016800, 0x800},
-    {(u8 *)0x02017000, 0x800},
-    {(u8 *)0x02017800, 0x800},
+    {ewram10000, 0x800},
+    {ewram10800, 0x800},
+    {ewram11000, 0x800},
+    {ewram11800, 0x800},
+    {ewram12000, 0x800},
+    {ewram12800, 0x800},
+    {ewram13000, 0x800},
+    {ewram13800, 0x800},
+    {ewram14000, 0x800},
+    {ewram14800, 0x800},
+    {ewram15000, 0x800},
+    {ewram15800, 0x800},
+    {ewram16000_2, 0x800},
+    {ewram16800, 0x800},
+    {ewram17000, 0x800},
+    {ewram17800_2, 0x800},
 };
 static const struct SpriteFrameImage gSpriteImageTable_83B5714[] =
 {
-    {(u8 *)0x02014000, 0x800},
-    {(u8 *)0x02014800, 0x800},
-    {(u8 *)0x02015000, 0x800},
-    {(u8 *)0x02015800, 0x800},
-    {(u8 *)0x02016000, 0x800},
-    {(u8 *)0x02016800, 0x800},
-    {(u8 *)0x02017000, 0x800},
-    {(u8 *)0x02017800, 0x800},
-    {(u8 *)0x02018000, 0x800},
-    {(u8 *)0x02018800, 0x800},
-    {(u8 *)0x02019000, 0x800},
-    {(u8 *)0x02019800, 0x800},
-    {(u8 *)0x0201A000, 0x800},
-    {(u8 *)0x0201A800, 0x800},
-    {(u8 *)0x0201B000, 0x800},
-    {(u8 *)0x0201B800, 0x800},
+    {ewram14000, 0x800},
+    {ewram14800, 0x800},
+    {ewram15000, 0x800},
+    {ewram15800, 0x800},
+    {ewram16000_2, 0x800},
+    {ewram16800, 0x800},
+    {ewram17000, 0x800},
+    {ewram17800_2, 0x800},
+    {ewram18000_2, 0x800},
+    {ewram18800, 0x800},
+    {ewram19000, 0x800},
+    {ewram19800, 0x800},
+    {ewram1A000, 0x800},
+    {ewram1A800, 0x800},
+    {ewram1B000_2, 0x800},
+    {ewram1B800, 0x800},
 };
 static const struct SpriteFrameImage *const gUnknown_083B5794[] =
 {
@@ -1275,8 +1276,8 @@ static void sub_8091564(u16 weight, u8 i, u8 i1);
 static void sub_8091738(u16, u16, u16);
 static void sub_80917CC(u16 i, u16 i1);
 static u16 sub_8091818(u8, u16, u16, u16);
-static u16 sub_80918EC(u16 a, s16 b, s16 c, u16 d);
-static u8 sub_8091A4C(u16 gender, s16, s16, u16);
+u16 sub_80918EC(u16 a, s16 b, s16 c, u16 d);
+u8 sub_8091A4C(u16 gender, s16, s16, u16);
 static void sub_8091E54(u8);
 static void sub_809204C(u8);
 static void sub_809207C(u8);
@@ -1433,16 +1434,16 @@ void CB2_InitPokedex(void)
         {
         case 0:
         default:
-            gPokedexView = (struct PokedexView *)0x02018000;
+            gPokedexView = ePokedexView1;
             break;
         case 1:
-            gPokedexView = (struct PokedexView *)0x02018800;
+            gPokedexView = ePokedexView2;
             break;
         case 2:
-            gPokedexView = (struct PokedexView *)0x02019000;
+            gPokedexView = ePokedexView3;
             break;
         case 3:
-            gPokedexView = (struct PokedexView *)0x02019800;
+            gPokedexView = ePokedexView4;
             break;
         }
         ClearPokedexView(gPokedexView);
@@ -4557,7 +4558,7 @@ u16 sub_80918EC(u16 num, s16 x, s16 y, u16 paletteNum)
           &gMonFrontPicTable[num],
           gMonFrontPicCoords[num].coords,
           gMonFrontPicCoords[num].y_offset,
-          (void *)0x02000000,
+          (void*)ewram_addr,
           gUnknown_083B5584[paletteNum],
           num);
         break;
@@ -4566,7 +4567,7 @@ u16 sub_80918EC(u16 num, s16 x, s16 y, u16 paletteNum)
           &gMonFrontPicTable[num],
           gMonFrontPicCoords[num].coords,
           gMonFrontPicCoords[num].y_offset,
-          0x02000000,
+          ewram_addr,
           gUnknown_083B5584[paletteNum],
           num,
           gSaveBlock2.pokedex.spindaPersonality,
@@ -4577,7 +4578,7 @@ u16 sub_80918EC(u16 num, s16 x, s16 y, u16 paletteNum)
           &gMonFrontPicTable[num],
           gMonFrontPicCoords[num].coords,
           gMonFrontPicCoords[num].y_offset,
-          0x02000000,
+          ewram_addr,
           gUnknown_083B5584[paletteNum],
           num,
           gSaveBlock2.pokedex.unownPersonality,
@@ -4591,7 +4592,7 @@ u16 sub_80918EC(u16 num, s16 x, s16 y, u16 paletteNum)
     return spriteId;
 }
 
-static u8 sub_8091A4C(u16 gender, s16 x, s16 y, u16 paletteNum)
+u8 sub_8091A4C(u16 gender, s16 x, s16 y, u16 paletteNum)
 {
     u8 spriteId;
 
@@ -4599,7 +4600,7 @@ static u8 sub_8091A4C(u16 gender, s16 x, s16 y, u16 paletteNum)
       &gTrainerFrontPicTable[gender],
       gTrainerFrontPicCoords[gender].coords,
       gTrainerFrontPicCoords[gender].y_offset,
-      (void *)0x02000000,
+      (void*)ewram_addr,
       gUnknown_083B5584[0],
       gender);
     sub_80918B0(gender, 0);

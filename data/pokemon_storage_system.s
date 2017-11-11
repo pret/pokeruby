@@ -126,7 +126,7 @@ gUnknown_083B6D94:: @ 83B6D94
 
 	.align 2
 gUnknown_083B6DB4:: @ 83B6DB4
-	.4byte 0x02000000
+	.4byte gSharedMem
 
 	.align 2
 gUnknown_083B6DB8:: @ 83B6DB8
@@ -142,11 +142,11 @@ gWaveformSpriteSheet:: @ 83B6DC4
 
 	.align 2
 gUnknown_083B6DCC:: @ 83B6DCC
-	obj_tiles 0x02002784, 0x800, 2
+	obj_tiles gSharedMem + 0x2784, 0x800, 2
 
 	.align 2
 gUnknown_083B6DD4:: @ 83B6DD4
-	obj_pal 0x02002704, 56007
+	obj_pal gSharedMem + 0x2704, 56007
 
 	.align 2
 gSpriteTemplate_83B6DDC:: @ 83B6DDC

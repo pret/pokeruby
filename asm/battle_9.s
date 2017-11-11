@@ -30,7 +30,7 @@ AI_SwitchIfPerishSong: @ 8035FEC
 	bne _0803604C
 	adds r0, r2, 0
 	bl GetBankIdentity
-	ldr r1, _08036044 @ =0x02000000
+	ldr r1, _08036044 @ =gSharedMem
 	lsls r0, 24
 	lsrs r0, 25
 	ldr r2, _08036048 @ =0x000160c8
@@ -48,7 +48,7 @@ AI_SwitchIfPerishSong: @ 8035FEC
 _08036038: .4byte gStatuses3
 _0803603C: .4byte gActiveBank
 _08036040: .4byte gDisableStructs
-_08036044: .4byte 0x02000000
+_08036044: .4byte gSharedMem
 _08036048: .4byte 0x000160c8
 _0803604C:
 	movs r0, 0
@@ -76,7 +76,7 @@ _08036070:
 	ldr r0, _08036094 @ =gActiveBank
 	ldrb r0, [r0]
 	bl GetBankIdentity
-	ldr r1, _08036098 @ =0x02000000
+	ldr r1, _08036098 @ =gSharedMem
 	lsls r0, 24
 	lsrs r0, 25
 	ldr r2, _0803609C @ =0x000160c8
@@ -91,7 +91,7 @@ _08036070:
 	b _080361CA
 	.align 2, 0
 _08036094: .4byte gActiveBank
-_08036098: .4byte 0x02000000
+_08036098: .4byte gSharedMem
 _0803609C: .4byte 0x000160c8
 _080360A0:
 	ldr r4, _080361D8 @ =gBattleMons
@@ -400,7 +400,7 @@ _0803630C:
 	ldr r0, _08036330 @ =gActiveBank
 	ldrb r0, [r0]
 	bl GetBankIdentity
-	ldr r1, _08036334 @ =0x02000000
+	ldr r1, _08036334 @ =gSharedMem
 	lsls r0, 24
 	lsrs r0, 25
 	ldr r2, _08036338 @ =0x000160c8
@@ -415,7 +415,7 @@ _0803630C:
 	b _08036402
 	.align 2, 0
 _08036330: .4byte gActiveBank
-_08036334: .4byte 0x02000000
+_08036334: .4byte gSharedMem
 _08036338: .4byte 0x000160c8
 _0803633C:
 	movs r6, 0
@@ -456,7 +456,7 @@ _08036342:
 	ldrh r0, [r0]
 	cmp r6, r0
 	beq _080363FA
-	ldr r1, _080363D8 @ =0x02000000
+	ldr r1, _080363D8 @ =gSharedMem
 	ldr r0, _080363DC @ =0x00016068
 	add r0, r8
 	adds r0, r1
@@ -489,7 +489,7 @@ _08036342:
 _080363CC: .4byte gBaseStats
 _080363D0: .4byte gEnemyParty
 _080363D4: .4byte gBattlePartyID
-_080363D8: .4byte 0x02000000
+_080363D8: .4byte gSharedMem
 _080363DC: .4byte 0x00016068
 _080363E0:
 	lsls r0, r4, 3
@@ -623,7 +623,7 @@ _080364DC:
 	ldrb r0, [r0]
 _080364E0:
 	bl GetBankIdentity
-	ldr r1, _0803650C @ =0x02000000
+	ldr r1, _0803650C @ =gSharedMem
 	lsls r0, 24
 	lsrs r0, 25
 	ldr r2, _08036510 @ =0x000160c8
@@ -643,7 +643,7 @@ _08036500:
 	bx r1
 	.align 2, 0
 _08036508: .4byte gActiveBank
-_0803650C: .4byte 0x02000000
+_0803650C: .4byte gSharedMem
 _08036510: .4byte 0x000160c8
 	thumb_func_end AI_SwitchIfNaturalCure
 
@@ -948,7 +948,7 @@ _08036768:
 	ldr r0, _0803678C @ =gActiveBank
 	ldrb r0, [r0]
 	bl GetBankIdentity
-	ldr r1, _08036790 @ =0x02000000
+	ldr r1, _08036790 @ =gSharedMem
 	lsls r0, 24
 	lsrs r0, 25
 	ldr r2, _08036794 @ =0x000160c8
@@ -963,7 +963,7 @@ _08036768:
 	b _080368DA
 	.align 2, 0
 _0803678C: .4byte gActiveBank
-_08036790: .4byte 0x02000000
+_08036790: .4byte gSharedMem
 _08036794: .4byte 0x000160c8
 _08036798:
 	mov r9, r3
@@ -1010,7 +1010,7 @@ _080367C4:
 	ldrh r0, [r0]
 	cmp r6, r0
 	beq _080368D0
-	ldr r1, _08036838 @ =0x02000000
+	ldr r1, _08036838 @ =gSharedMem
 	ldr r0, _0803683C @ =0x00016068
 	add r0, r9
 	adds r0, r1
@@ -1043,7 +1043,7 @@ _080367C4:
 	.align 2, 0
 _08036830: .4byte gEnemyParty
 _08036834: .4byte gBattlePartyID
-_08036838: .4byte 0x02000000
+_08036838: .4byte gSharedMem
 _0803683C: .4byte 0x00016068
 _08036840: .4byte gBaseStats
 _08036844:
@@ -1310,7 +1310,7 @@ _08036A1A:
 	ldrh r0, [r0]
 	cmp r5, r0
 	beq _08036A7E
-	ldr r1, _08036AF4 @ =0x02000000
+	ldr r1, _08036AF4 @ =gSharedMem
 	ldr r2, _08036AF8 @ =0x00016068
 	adds r0, r7, r2
 	adds r0, r1
@@ -1375,7 +1375,7 @@ _08036AE4:
 _08036AE8: .4byte gActiveBank
 _08036AEC: .4byte gEnemyParty
 _08036AF0: .4byte gBattlePartyID
-_08036AF4: .4byte 0x02000000
+_08036AF4: .4byte gSharedMem
 _08036AF8: .4byte 0x00016068
 _08036AFC:
 	movs r0, 0
@@ -1405,7 +1405,7 @@ _08036B1C:
 	bne _08036B28
 	b _08036C24
 _08036B28:
-	ldr r4, _08036B6C @ =0x02000000
+	ldr r4, _08036B6C @ =gSharedMem
 	ldr r0, _08036B70 @ =gActiveBank
 	ldrb r0, [r0]
 	bl GetBankIdentity
@@ -1435,7 +1435,7 @@ _08036B28:
 	b _08036B8C
 	.align 2, 0
 _08036B68: .4byte gBattleTypeFlags
-_08036B6C: .4byte 0x02000000
+_08036B6C: .4byte gSharedMem
 _08036B70: .4byte gActiveBank
 _08036B74: .4byte 0x000160c8
 _08036B78:
@@ -1469,7 +1469,7 @@ _08036B8E:
 	ldrh r0, [r0]
 	cmp r4, r0
 	beq _08036BCE
-	ldr r1, _08036C14 @ =0x02000000
+	ldr r1, _08036C14 @ =gSharedMem
 	ldr r2, _08036C18 @ =0x00016068
 	adds r0, r6, r2
 	adds r0, r1
@@ -1489,7 +1489,7 @@ _08036BD4:
 	ldr r0, _08036C1C @ =gActiveBank
 	ldrb r0, [r0]
 	bl GetBankIdentity
-	ldr r1, _08036C14 @ =0x02000000
+	ldr r1, _08036C14 @ =gSharedMem
 	lsls r0, 24
 	lsrs r0, 25
 	ldr r3, _08036C20 @ =0x000160c8
@@ -1500,7 +1500,7 @@ _08036BEA:
 	ldr r4, _08036C1C @ =gActiveBank
 	ldrb r0, [r4]
 	bl GetBankIdentity
-	ldr r2, _08036C14 @ =0x02000000
+	ldr r2, _08036C14 @ =gSharedMem
 	ldrb r1, [r4]
 	ldr r3, _08036C18 @ =0x00016068
 	adds r1, r3
@@ -1516,7 +1516,7 @@ _08036BEA:
 	.align 2, 0
 _08036C0C: .4byte gEnemyParty
 _08036C10: .4byte gBattlePartyID
-_08036C14: .4byte 0x02000000
+_08036C14: .4byte gSharedMem
 _08036C18: .4byte 0x00016068
 _08036C1C: .4byte gActiveBank
 _08036C20: .4byte 0x000160c8
@@ -1751,7 +1751,7 @@ _08036DA2:
 	ldrh r0, [r0]
 	cmp r0, r7
 	beq _08036E7C
-	ldr r1, _08036E6C @ =0x02000000
+	ldr r1, _08036E6C @ =gSharedMem
 	ldr r2, _08036E70 @ =0x00016068
 	adds r0, r3, r2
 	adds r0, r1
@@ -1808,7 +1808,7 @@ _08036E5C: .4byte gActiveBank
 _08036E60: .4byte gBitTable
 _08036E64: .4byte gEnemyParty
 _08036E68: .4byte gBattlePartyID
-_08036E6C: .4byte 0x02000000
+_08036E6C: .4byte gSharedMem
 _08036E70: .4byte 0x00016068
 _08036E74: .4byte gBaseStats
 _08036E78: .4byte gBattleMons
@@ -1887,7 +1887,7 @@ _08036F04:
 	ldr r0, _08037000 @ =gDynamicBasePower
 	movs r2, 0
 	strh r2, [r0]
-	ldr r0, _08037004 @ =0x02000000
+	ldr r0, _08037004 @ =gSharedMem
 	ldr r3, _08037008 @ =0x0001601c
 	adds r1, r0, r3
 	strb r2, [r1]
@@ -1936,7 +1936,7 @@ _08036F2C:
 	ldrh r0, [r0]
 	cmp r0, r7
 	beq _08036FE8
-	ldr r1, _08037004 @ =0x02000000
+	ldr r1, _08037004 @ =gSharedMem
 	ldr r3, _08037020 @ =0x00016068
 	adds r0, r4, r3
 	adds r0, r1
@@ -2013,7 +2013,7 @@ _08036FEE:
 	bx r1
 	.align 2, 0
 _08037000: .4byte gDynamicBasePower
-_08037004: .4byte 0x02000000
+_08037004: .4byte gSharedMem
 _08037008: .4byte 0x0001601c
 _0803700C: .4byte 0x0001601f
 _08037010: .4byte gBattleMoveFlags
@@ -2132,7 +2132,7 @@ _080370DC:
 	movs r3, 0
 	mov r9, r3
 _080370EA:
-	ldr r4, _08037174 @ =0x02016a00
+	ldr r4, _08037174 @ =gSharedMem + 0x16A00
 	mov r0, r9
 	cmp r0, 0
 	beq _08037106
@@ -2205,7 +2205,7 @@ _08037166:
 	mov pc, r0
 	.align 2, 0
 _08037170: .4byte gEnemyParty
-_08037174: .4byte 0x02016a00
+_08037174: .4byte gSharedMem + 0x16A00
 _08037178: .4byte gItemEffectTable
 _0803717C: .4byte gSaveBlock1 + 0x3676
 _08037180: .4byte 0xfffe9600
@@ -2283,7 +2283,7 @@ _08037210:
 _08037214: .4byte gBattleMons
 _08037218: .4byte gActiveBank
 _0803721C:
-	ldr r2, _08037378 @ =0x02000000
+	ldr r2, _08037378 @ =gSharedMem
 	ldr r3, _0803737C @ =gActiveBank
 	ldrb r0, [r3]
 	lsrs r0, 1
@@ -2465,12 +2465,12 @@ _08037362:
 	mov r8, r2
 	b _080374AE
 	.align 2, 0
-_08037378: .4byte 0x02000000
+_08037378: .4byte gSharedMem
 _0803737C: .4byte gActiveBank
 _08037380: .4byte 0x000160da
 _08037384: .4byte gBattleMons
 _08037388:
-	ldr r6, _08037458 @ =0x02000000
+	ldr r6, _08037458 @ =gSharedMem
 	ldr r4, _0803745C @ =gActiveBank
 	ldrb r0, [r4]
 	lsrs r0, 1
@@ -2580,7 +2580,7 @@ _08037450:
 	mov r8, r3
 	b _080374AE
 	.align 2, 0
-_08037458: .4byte 0x02000000
+_08037458: .4byte gSharedMem
 _0803745C: .4byte gActiveBank
 _08037460: .4byte 0x000160da
 _08037464: .4byte gDisableStructs
@@ -2624,7 +2624,7 @@ _080374AE:
 	movs r1, 0x1
 	movs r2, 0
 	bl Emitcmd33
-	ldr r1, _080374DC @ =0x02000000
+	ldr r1, _080374DC @ =gSharedMem
 	ldr r0, _080374E0 @ =gActiveBank
 	ldrb r0, [r0]
 	lsrs r0, 1
@@ -2643,7 +2643,7 @@ _080374AE:
 	mov r0, r8
 	b _080374FA
 	.align 2, 0
-_080374DC: .4byte 0x02000000
+_080374DC: .4byte gSharedMem
 _080374E0: .4byte gActiveBank
 _080374E4: .4byte 0x000160d4
 _080374E8: .4byte 0x00016a24

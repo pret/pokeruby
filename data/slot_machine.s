@@ -534,23 +534,23 @@ gOamData_83ED0B8:: @ 83ED0B8
 
 	.align 2
 gSpriteImageTable_83ED0C0:: @ 83ED0C0
-	obj_frame_tiles 0x02013200, 0x800
-	obj_frame_tiles 0x02013A00, 0x800
-	obj_frame_tiles 0x02014200, 0x800
-	obj_frame_tiles 0x02014A00, 0x800
-	obj_frame_tiles 0x02015200, 0x800
+	obj_frame_tiles gSharedMem + 0x13200, 0x800
+	obj_frame_tiles gSharedMem + 0x13A00, 0x800
+	obj_frame_tiles gSharedMem + 0x14200, 0x800
+	obj_frame_tiles gSharedMem + 0x14A00, 0x800
+	obj_frame_tiles gSharedMem + 0x15200, 0x800
 
 	.align 2
 gSpriteImageTable_83ED0E8:: @ 83ED0E8
-	obj_frame_tiles 0x02015A00, 0x300
+	obj_frame_tiles gSharedMem + 0x15A00, 0x300
 
 	.align 2
 gSpriteImageTable_83ED0F0:: @ 83ED0F0
-	obj_frame_tiles 0x02015D00, 0x500
+	obj_frame_tiles gSharedMem + 0x15D00, 0x500
 
 	.align 2
 gSpriteImageTable_83ED0F8:: @ 83ED0F8
-	obj_frame_tiles 0x02016200, 0x600
+	obj_frame_tiles gSharedMem + 0x16200, 0x600
 
 	.align 2
 gSpriteImageTable_83ED100:: @ 83ED100
@@ -593,67 +593,67 @@ gSpriteImageTable_83ED170:: @ 83ED170
 
 	.align 2
 gSpriteImageTable_83ED178:: @ 83ED178
-	obj_frame_tiles 0x02010000, 0x600
+	obj_frame_tiles gSharedMem + 0x10000, 0x600
 
 	.align 2
 gSpriteImageTable_83ED180:: @ 83ED180
-	obj_frame_tiles 0x02010600, 0x200
+	obj_frame_tiles gSharedMem + 0x10600, 0x200
 
 	.align 2
 gSpriteImageTable_83ED188:: @ 83ED188
-	obj_frame_tiles 0x02010800, 0x200
+	obj_frame_tiles gSharedMem + 0x10800, 0x200
 
 	.align 2
 gSpriteImageTable_83ED190:: @ 83ED190
-	obj_frame_tiles 0x02010A00, 0x200
+	obj_frame_tiles gSharedMem + 0x10A00, 0x200
 
 	.align 2
 gSpriteImageTable_83ED198:: @ 83ED198
-	obj_frame_tiles 0x02010C00, 0x300
+	obj_frame_tiles gSharedMem + 0x10C00, 0x300
 
 	.align 2
 gSpriteImageTable_83ED1A0:: @ 83ED1A0
-	obj_frame_tiles 0x02011000, 0x400
+	obj_frame_tiles gSharedMem + 0x11000, 0x400
 
 	.align 2
 gSpriteImageTable_83ED1A8:: @ 83ED1A8
-	obj_frame_tiles 0x02011400, 0x200
+	obj_frame_tiles gSharedMem + 0x11400, 0x200
 
 	.align 2
 gSpriteImageTable_83ED1B0:: @ 83ED1B0
-	obj_frame_tiles 0x02011600, 0x300
+	obj_frame_tiles gSharedMem + 0x11600, 0x300
 
 	.align 2
 gSpriteImageTable_83ED1B8:: @ 83ED1B8
-	obj_frame_tiles 0x02011900, 0x300
+	obj_frame_tiles gSharedMem + 0x11900, 0x300
 
 	.align 2
 gSpriteImageTable_83ED1C0:: @ 83ED1C0
-	obj_frame_tiles 0x02011C00, 0x200
-	obj_frame_tiles 0x02011E00, 0x200
-	obj_frame_tiles 0x02011E00, 0x200
+	obj_frame_tiles gSharedMem + 0x11C00, 0x200
+	obj_frame_tiles gSharedMem + 0x11E00, 0x200
+	obj_frame_tiles gSharedMem + 0x11E00, 0x200 @ is this a typo?
 
 	.align 2
 gSpriteImageTable_83ED1D8:: @ 83ED1D8
-	obj_frame_tiles 0x02012000, 0x280
+	obj_frame_tiles gSharedMem + 0x12000, 0x280
 
 	.align 2
 gSpriteImageTable_83ED1E0:: @ 83ED1E0
-	obj_frame_tiles 0x02012280, 0x80
-	obj_frame_tiles 0x02012300, 0x80
-	obj_frame_tiles 0x02012380, 0x80
-	obj_frame_tiles 0x02012400, 0x80
-	obj_frame_tiles 0x02012480, 0x80
+	obj_frame_tiles gSharedMem + 0x12280, 0x80
+	obj_frame_tiles gSharedMem + 0x12300, 0x80
+	obj_frame_tiles gSharedMem + 0x12380, 0x80
+	obj_frame_tiles gSharedMem + 0x12400, 0x80
+	obj_frame_tiles gSharedMem + 0x12480, 0x80
 
 	.align 2
 gSpriteImageTable_83ED208:: @ 83ED208
-	obj_frame_tiles 0x02012600, 0x480
-	obj_frame_tiles 0x02012A80, 0x480
+	obj_frame_tiles gSharedMem + 0x12600, 0x480
+	obj_frame_tiles gSharedMem + 0x12A80, 0x480
 
 	.align 2
 gSpriteImageTable_83ED218:: @ 83ED218
-	obj_frame_tiles 0x02012F00, 0x180
-	obj_frame_tiles 0x02013080, 0x180
+	obj_frame_tiles gSharedMem + 0x12F00, 0x180
+	obj_frame_tiles gSharedMem + 0x13080, 0x180
 
 	.align 2
 gSpriteImageTable_83ED228:: @ 83ED228
@@ -1402,15 +1402,15 @@ gUnknown_083EDC2C:: @ 83EDC2C
 	obj_tiles gSlotMachineNumber7Tiles, 0x40, 14
 	obj_tiles gSlotMachineNumber8Tiles, 0x40, 15
 	obj_tiles gSlotMachineNumber9Tiles, 0x40, 16
-	obj_tiles 0x2010a00, 0x200, 18
-	obj_tiles 0x2011400, 0x200, 19
-	obj_tiles 0x2011600, 0x300, 20
-	obj_tiles 0x2011900, 0x300, 21
+	obj_tiles gSharedMem + 0x10A00, 0x200, 18
+	obj_tiles gSharedMem + 0x11400, 0x200, 19
+	obj_tiles gSharedMem + 0x11600, 0x300, 20
+	obj_tiles gSharedMem + 0x11900, 0x300, 21
 	null_obj_tiles
 
 	.align 2
 gUnknown_083EDCDC:: @ 83EDCDC
-	obj_tiles 0x02010000, 2048, 0x0011
+	obj_tiles gSharedMem + 0x10000, 2048, 0x0011
 
 	.align 2
 gUnknown_083EDCE4:: @ 83EDCE4
