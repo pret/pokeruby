@@ -10,6 +10,7 @@
 #include "sprite.h"
 #include "task.h"
 #include "trig.h"
+#include "ewram.h"
 
 #define MACRO1(a) ((((a) >> 1) & 0xF) | (((a) >> 2) & 0xF0) | (((a) >> 3) & 0xF00))
 
@@ -20,7 +21,7 @@ struct RGBColor
     u16 b:5;
 };
 
-struct Struct2000000
+struct WeatherPaletteData
 {
     u16 data[0][0x1000];  // unknown length
 };
@@ -107,10 +108,6 @@ struct Weather
     u8 unknown_74E;
 };
 
-extern u8 ewram[];
-
-#define ewram0 (*(struct Struct2000000 *)ewram)
-
 #define gWeather gUnknown_0202F7E8
 extern struct Weather gUnknown_0202F7E8;
 extern u8 gUnknown_0202FF38[];
@@ -151,7 +148,7 @@ const u8 *const gUnknown_08396FA8[] =
     DroughtPaletteData_3,
     DroughtPaletteData_4,
     DroughtPaletteData_5,
-    ewram,
+    gSharedMem,
 };
 
 void sub_807C828(void)
@@ -522,7 +519,7 @@ void sub_807CEBC(u8 a, u8 b, s8 c)
                     for (i = 0; i < 16; i++)
                     {
                         if (gPlttBufferUnfaded[palOffset] != 0x2D9F)
-                            gPlttBufferFaded[palOffset] = ewram0.data[c][MACRO1(gPlttBufferUnfaded[palOffset])];
+                            gPlttBufferFaded[palOffset] = eWeatherPaletteData.data[c][MACRO1(gPlttBufferUnfaded[palOffset])];
                         palOffset++;
                     }
                 }
@@ -530,7 +527,7 @@ void sub_807CEBC(u8 a, u8 b, s8 c)
                 {
                     for (i = 0; i < 16; i++)
                     {
-                        gPlttBufferFaded[palOffset] = ewram0.data[c][MACRO1(gPlttBufferUnfaded[palOffset])];
+                        gPlttBufferFaded[palOffset] = eWeatherPaletteData.data[c][MACRO1(gPlttBufferUnfaded[palOffset])];
                         palOffset++;
                     }
                 }
@@ -630,7 +627,7 @@ void sub_807D304(s8 a, u8 arg2, u16 c)
                 b1 = color1.b;
 
                 offset = ((b1 & 0x1E) << 7) | ((g1 & 0x1E) << 3) | ((r1 & 0x1E) >> 1);
-                color2 = *(struct RGBColor *)&ewram0.data[a][offset];
+                color2 = *(struct RGBColor *)&eWeatherPaletteData.data[a][offset];
                 r2 = color2.r;
                 g2 = color2.g;
                 b2 = color2.b;
@@ -873,17 +870,17 @@ void sub_807D8F0(u8 *a, u8 *b)
     if (r4 < 7)
     {
         r4--;
-        LZ77UnCompWram(gUnknown_08396FA8[r4], ewram0.data[r4]);
+        LZ77UnCompWram(gUnknown_08396FA8[r4], eWeatherPaletteData.data[r4]);
         if (r4 == 0)
         {
-            ewram0.data[r4][0] = 0x421;
+            eWeatherPaletteData.data[r4][0] = 0x421;
             for (i = 1; i < 0x1000; i++)
-                ewram0.data[r4][i] += ewram0.data[r4][i - 1];
+                eWeatherPaletteData.data[r4][i] += eWeatherPaletteData.data[r4][i - 1];
         }
         else
         {
             for (i = 0; i < 0x1000; i++)
-                ewram0.data[r4][i] += ewram0.data[r4 - 1][i];
+                eWeatherPaletteData.data[r4][i] += eWeatherPaletteData.data[r4 - 1][i];
         }
         (*a)++;
         if (*a == 7)
