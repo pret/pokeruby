@@ -268,7 +268,7 @@ _0807D0AC:
 	mov r8, r1
 	adds r4, 0x1
 	mov r12, r4
-	ldr r2, _0807D10C @ =0x02000000
+	ldr r2, _0807D10C @ =gSharedMem
 	mov r10, r2
 	ldr r3, [sp]
 	lsls r0, r3, 24
@@ -313,7 +313,7 @@ _0807D0FA:
 	bls _0807D0C2
 	b _0807D174
 	.align 2, 0
-_0807D10C: .4byte 0x02000000
+_0807D10C: .4byte gSharedMem
 _0807D110: .4byte gPlttBufferUnfaded
 _0807D114: .4byte 0x00002d9f
 _0807D118: .4byte gPlttBufferFaded
@@ -326,7 +326,7 @@ _0807D11C:
 	mov r8, r2
 	adds r4, 0x1
 	mov r12, r4
-	ldr r3, _0807D184 @ =0x02000000
+	ldr r3, _0807D184 @ =gSharedMem
 	mov r10, r3
 	asrs r6, r0, 11
 _0807D132:
@@ -373,7 +373,7 @@ _0807D174:
 _0807D180:
 	b _0807D1A2
 	.align 2, 0
-_0807D184: .4byte 0x02000000
+_0807D184: .4byte gSharedMem
 _0807D188: .4byte gPlttBufferFaded
 _0807D18C: .4byte gPlttBufferUnfaded
 _0807D190:
@@ -653,7 +653,7 @@ _0807D37A:
 	lsls r0, 1
 	orrs r0, r2
 	add r0, r9
-	ldr r1, _0807D41C @ =0x02000000
+	ldr r1, _0807D41C @ =gSharedMem
 	adds r0, r1
 	ldr r1, [r0]
 	lsls r3, r1, 27
@@ -715,7 +715,7 @@ _0807D3FE:
 	bx r0
 	.align 2, 0
 _0807D418: .4byte gPlttBufferUnfaded
-_0807D41C: .4byte 0x02000000
+_0807D41C: .4byte gSharedMem
 _0807D420: .4byte gPlttBufferFaded
 	thumb_func_end sub_807D304
 
@@ -1374,7 +1374,7 @@ sub_807D8F0: @ 807D8F0
 	adds r0, r1
 	ldr r0, [r0]
 	lsls r6, r4, 13
-	ldr r5, _0807D950 @ =0x02000000
+	ldr r5, _0807D950 @ =gSharedMem
 	adds r1, r6, r5
 	bl LZ77UnCompWram
 	subs r0, r4, 0x1
@@ -1406,7 +1406,7 @@ _0807D92A:
 	b _0807D984
 	.align 2, 0
 _0807D94C: .4byte gUnknown_08396FA8
-_0807D950: .4byte 0x02000000
+_0807D950: .4byte gSharedMem
 _0807D954: .4byte 0x00000421
 _0807D958: .4byte 0x00000fff
 _0807D95C:

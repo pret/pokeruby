@@ -246,7 +246,7 @@ const u8 gUnknown_0840B878[] =
 };
 
 #ifdef GERMAN
-#include "../data/credits_de.h" // TODO, german credits
+#include "../data/credits_de.h"
 #else
 #include "../data/credits_en.h"
 #endif
