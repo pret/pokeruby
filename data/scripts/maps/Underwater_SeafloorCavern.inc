@@ -7,7 +7,7 @@ Underwater_SeafloorCavern_MapScripts:: @ 815D99E
 Underwater_SeafloorCavern_MapScript1_15D9AE:: @ 815D9AE
 	setflag 2119
 	checkflag 129
-	jumpeq Underwater_SeafloorCavern_EventScript_15D9BB
+	goto_if_eq Underwater_SeafloorCavern_EventScript_15D9BB
 	end
 
 Underwater_SeafloorCavern_EventScript_15D9BB:: @ 815D9BB
@@ -16,7 +16,7 @@ Underwater_SeafloorCavern_EventScript_15D9BB:: @ 815D9BB
 
 Underwater_SeafloorCavern_MapScript1_15D9BF:: @ 815D9BF
 	checkflag 129
-	callif 1, Underwater_SeafloorCavern_EventScript_15D9C9
+	call_if 1, Underwater_SeafloorCavern_EventScript_15D9C9
 	end
 
 Underwater_SeafloorCavern_EventScript_15D9C9:: @ 815D9C9
@@ -35,7 +35,7 @@ Underwater_SeafloorCavern_EventScript_15D9C9:: @ 815D9C9
 	return
 
 Underwater_SeafloorCavern_MapScript1_15DA36:: @ 815DA36
-	warp4 SeafloorCavern_Entrance, 255, 10, 17
+	setdivewarp SeafloorCavern_Entrance, 255, 10, 17
 	end
 
 Underwater_SeafloorCavern_EventScript_15DA3F:: @ 815DA3F

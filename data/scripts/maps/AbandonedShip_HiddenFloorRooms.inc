@@ -11,11 +11,11 @@ AbandonedShip_HiddenFloorRooms_EventScript_15ED11:: @ 815ED11
 	getplayerxy 0x4002, 0x4003
 	setvar 0x4004, 1
 	compare 0x4002, 21
-	callif 1, AbandonedShip_HiddenFloorRooms_EventScript_15ED89
+	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_15ED89
 	compare 0x4002, 36
-	callif 1, AbandonedShip_HiddenFloorRooms_EventScript_15ED8F
+	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_15ED8F
 	compare 0x4003, 2
-	callif 1, AbandonedShip_HiddenFloorRooms_EventScript_15ED95
+	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_15ED95
 	switch 0x4004
 	case 1, AbandonedShip_HiddenFloorRooms_EventScript_15ED9B
 	case 2, AbandonedShip_HiddenFloorRooms_EventScript_15EDC4
@@ -38,102 +38,102 @@ AbandonedShip_HiddenFloorRooms_EventScript_15ED95:: @ 815ED95
 	return
 
 AbandonedShip_HiddenFloorRooms_EventScript_15ED9B:: @ 815ED9B
-	pause 20
-	setanimation 0, 10
-	setanimation 1, 10
-	setanimation 2, 0
-	doanimation 54
-	specialval RESULT, sub_810F4D4
+	delay 20
+	setfieldeffect 0, 10
+	setfieldeffect 1, 10
+	setfieldeffect 2, 0
+	dofieldeffect 54
+	specialvar RESULT, sub_810F4D4
 	compare RESULT, 0
-	callif 1, AbandonedShip_HiddenFloorRooms_EventScript_15EE8B
-	checkanimation 54
-	pause 10
+	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_15EE8B
+	waitfieldeffect 54
+	delay 10
 	end
 
 AbandonedShip_HiddenFloorRooms_EventScript_15EDC4:: @ 815EDC4
 	end
 
 AbandonedShip_HiddenFloorRooms_EventScript_15EDC5:: @ 815EDC5
-	specialval RESULT, sub_810F488
+	specialvar RESULT, sub_810F488
 	compare RESULT, 1
-	jumpeq AbandonedShip_HiddenFloorRooms_EventScript_15EDEA
-	pause 20
+	goto_if_eq AbandonedShip_HiddenFloorRooms_EventScript_15EDEA
+	delay 20
 	compare RESULT, 0
-	callif 1, AbandonedShip_HiddenFloorRooms_EventScript_15EE6B
-	checkanimation 54
-	pause 10
+	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_15EE6B
+	waitfieldeffect 54
+	delay 10
 	end
 
 AbandonedShip_HiddenFloorRooms_EventScript_15EDEA:: @ 815EDEA
 	end
 
 AbandonedShip_HiddenFloorRooms_EventScript_15EDEB:: @ 815EDEB
-	pause 20
-	setanimation 0, 8
-	setanimation 1, 5
-	setanimation 2, 0
-	doanimation 54
-	setanimation 0, 11
-	setanimation 1, 3
-	setanimation 2, 0
-	doanimation 54
-	specialval RESULT, sub_810F4FC
+	delay 20
+	setfieldeffect 0, 8
+	setfieldeffect 1, 5
+	setfieldeffect 2, 0
+	dofieldeffect 54
+	setfieldeffect 0, 11
+	setfieldeffect 1, 3
+	setfieldeffect 2, 0
+	dofieldeffect 54
+	specialvar RESULT, sub_810F4FC
 	compare RESULT, 0
-	callif 1, AbandonedShip_HiddenFloorRooms_EventScript_15EE9B
-	checkanimation 54
-	pause 10
+	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_15EE9B
+	waitfieldeffect 54
+	delay 10
 	end
 
 AbandonedShip_HiddenFloorRooms_EventScript_15EE23:: @ 815EE23
-	pause 20
-	setanimation 0, 16
-	setanimation 1, 3
-	setanimation 2, 0
-	doanimation 54
-	setanimation 0, 25
-	setanimation 1, 2
-	setanimation 2, 0
-	doanimation 54
-	setanimation 0, 24
-	setanimation 1, 6
-	setanimation 2, 0
-	doanimation 54
-	specialval RESULT, sub_810F4B0
+	delay 20
+	setfieldeffect 0, 16
+	setfieldeffect 1, 3
+	setfieldeffect 2, 0
+	dofieldeffect 54
+	setfieldeffect 0, 25
+	setfieldeffect 1, 2
+	setfieldeffect 2, 0
+	dofieldeffect 54
+	setfieldeffect 0, 24
+	setfieldeffect 1, 6
+	setfieldeffect 2, 0
+	dofieldeffect 54
+	specialvar RESULT, sub_810F4B0
 	compare RESULT, 0
-	callif 1, AbandonedShip_HiddenFloorRooms_EventScript_15EE7B
-	checkanimation 54
-	pause 10
+	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_15EE7B
+	waitfieldeffect 54
+	delay 10
 	end
 
 AbandonedShip_HiddenFloorRooms_EventScript_15EE6A:: @ 815EE6A
 	end
 
 AbandonedShip_HiddenFloorRooms_EventScript_15EE6B:: @ 815EE6B
-	setanimation 0, 42
-	setanimation 1, 10
-	setanimation 2, 0
-	doanimation 54
+	setfieldeffect 0, 42
+	setfieldeffect 1, 10
+	setfieldeffect 2, 0
+	dofieldeffect 54
 	return
 
 AbandonedShip_HiddenFloorRooms_EventScript_15EE7B:: @ 815EE7B
-	setanimation 0, 20
-	setanimation 1, 5
-	setanimation 2, 0
-	doanimation 54
+	setfieldeffect 0, 20
+	setfieldeffect 1, 5
+	setfieldeffect 2, 0
+	dofieldeffect 54
 	return
 
 AbandonedShip_HiddenFloorRooms_EventScript_15EE8B:: @ 815EE8B
-	setanimation 0, 1
-	setanimation 1, 12
-	setanimation 2, 0
-	doanimation 54
+	setfieldeffect 0, 1
+	setfieldeffect 1, 12
+	setfieldeffect 2, 0
+	dofieldeffect 54
 	return
 
 AbandonedShip_HiddenFloorRooms_EventScript_15EE9B:: @ 815EE9B
-	setanimation 0, 1
-	setanimation 1, 2
-	setanimation 2, 0
-	doanimation 54
+	setfieldeffect 0, 1
+	setfieldeffect 1, 2
+	setfieldeffect 2, 0
+	dofieldeffect 54
 	return
 
 AbandonedShip_HiddenFloorRooms_EventScript_15EEAB:: @ 815EEAB

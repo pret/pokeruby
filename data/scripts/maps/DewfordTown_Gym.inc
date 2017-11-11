@@ -8,91 +8,91 @@ DewfordTown_Gym_MapScript1_15306B:: @ 815306B
 
 DewfordTown_Gym_EventScript_153071:: @ 8153071
 	checktrainerflag OPPONENT_BRAWLY
-	jumpeq DewfordTown_Gym_EventScript_1530AA
+	goto_if_eq DewfordTown_Gym_EventScript_1530AA
 	call DewfordTown_Gym_EventScript_153122
 	copyvar 0x8001, 0x8000
 	compare 0x8000, 0
-	jumpeq DewfordTown_Gym_EventScript_1530BA
+	goto_if_eq DewfordTown_Gym_EventScript_1530BA
 	compare 0x8000, 1
-	jumpeq DewfordTown_Gym_EventScript_1530B6
+	goto_if_eq DewfordTown_Gym_EventScript_1530B6
 	compare 0x8000, 2
-	jumpeq DewfordTown_Gym_EventScript_1530B2
-	jump DewfordTown_Gym_EventScript_1530AE
+	goto_if_eq DewfordTown_Gym_EventScript_1530B2
+	goto DewfordTown_Gym_EventScript_1530AE
 
 DewfordTown_Gym_EventScript_1530AA:: @ 81530AA
-	darken 0
+	setdarklevel 0
 	return
 
 DewfordTown_Gym_EventScript_1530AE:: @ 81530AE
-	darken 1
+	setdarklevel 1
 	return
 
 DewfordTown_Gym_EventScript_1530B2:: @ 81530B2
-	darken 2
+	setdarklevel 2
 	return
 
 DewfordTown_Gym_EventScript_1530B6:: @ 81530B6
-	darken 3
+	setdarklevel 3
 	return
 
 DewfordTown_Gym_EventScript_1530BA:: @ 81530BA
-	darken 4
+	setdarklevel 4
 	return
 
 DewfordTown_Gym_EventScript_1530BE:: @ 81530BE
 	call DewfordTown_Gym_EventScript_153122
-	snop1
-	comparevars 0x8000, 0x8001
-	jumpeq DewfordTown_Gym_EventScript_1530F5
+	nop1
+	compare 0x8000, 0x8001
+	goto_if_eq DewfordTown_Gym_EventScript_1530F5
 	copyvar 0x8001, 0x8000
 	compare 0x8000, 1
-	jumpeq DewfordTown_Gym_EventScript_1530F6
+	goto_if_eq DewfordTown_Gym_EventScript_1530F6
 	compare 0x8000, 2
-	jumpeq DewfordTown_Gym_EventScript_153101
+	goto_if_eq DewfordTown_Gym_EventScript_153101
 	compare 0x8000, 3
-	jumpeq DewfordTown_Gym_EventScript_15310C
+	goto_if_eq DewfordTown_Gym_EventScript_15310C
 
 DewfordTown_Gym_EventScript_1530F5:: @ 81530F5
 	return
 
 DewfordTown_Gym_EventScript_1530F6:: @ 81530F6
-	playsfx 35
-	lighten 3
+	playse 35
+	animdarklevel 3
 	call DewfordTown_Gym_EventScript_153071
 	return
 
 DewfordTown_Gym_EventScript_153101:: @ 8153101
-	playsfx 35
-	lighten 2
+	playse 35
+	animdarklevel 2
 	call DewfordTown_Gym_EventScript_153071
 	return
 
 DewfordTown_Gym_EventScript_15310C:: @ 815310C
-	playsfx 35
-	lighten 1
+	playse 35
+	animdarklevel 1
 	call DewfordTown_Gym_EventScript_153071
 	return
 
 DewfordTown_Gym_EventScript_153117:: @ 8153117
-	playsfx 35
-	lighten 0
+	playse 35
+	animdarklevel 0
 	call DewfordTown_Gym_EventScript_153071
 	return
 
 DewfordTown_Gym_EventScript_153122:: @ 8153122
 	setvar 0x8000, 0
 	checktrainerflag OPPONENT_HIDEKI
-	jumpif 0, DewfordTown_Gym_EventScript_153135
+	goto_if 0, DewfordTown_Gym_EventScript_153135
 	addvar 0x8000, 1
 
 DewfordTown_Gym_EventScript_153135:: @ 8153135
 	checktrainerflag OPPONENT_TESSA
-	jumpif 0, DewfordTown_Gym_EventScript_153143
+	goto_if 0, DewfordTown_Gym_EventScript_153143
 	addvar 0x8000, 1
 
 DewfordTown_Gym_EventScript_153143:: @ 8153143
 	checktrainerflag OPPONENT_LAURA
-	jumpif 0, DewfordTown_Gym_EventScript_153151
+	goto_if 0, DewfordTown_Gym_EventScript_153151
 	addvar 0x8000, 1
 
 DewfordTown_Gym_EventScript_153151:: @ 8153151
@@ -101,7 +101,7 @@ DewfordTown_Gym_EventScript_153151:: @ 8153151
 DewfordTown_Gym_EventScript_153152:: @ 8153152
 	trainerbattle 1, OPPONENT_BRAWLY, 0, DewfordTown_Gym_Text_175182, DewfordTown_Gym_Text_175246, DewfordTown_Gym_EventScript_153177
 	checkflag 166
-	jumpif 0, DewfordTown_Gym_EventScript_1531B5
+	goto_if 0, DewfordTown_Gym_EventScript_1531B5
 	msgbox DewfordTown_Gym_Text_175412, 4
 	release
 	end
@@ -109,23 +109,23 @@ DewfordTown_Gym_EventScript_153152:: @ 8153152
 DewfordTown_Gym_EventScript_153177:: @ 8153177
 	call DewfordTown_Gym_EventScript_153117
 	message DewfordTown_Gym_Text_1752BB
-	waittext
+	waitmessage
 	call DewfordTown_Gym_EventScript_1A02C5
 	msgbox DewfordTown_Gym_Text_1752E6, 4
 	setflag 1204
 	setflag 2056
 	addvar 0x4085, 1
 	compare 0x4085, 6
-	callif 1, DewfordTown_Gym_EventScript_1A00FB
+	call_if 1, DewfordTown_Gym_EventScript_1A00FB
 	setvar 0x8008, 2
 	call DewfordTown_Gym_EventScript_1A01C0
-	jump DewfordTown_Gym_EventScript_1531B5
+	goto DewfordTown_Gym_EventScript_1531B5
 	end
 
 DewfordTown_Gym_EventScript_1531B5:: @ 81531B5
 	giveitem ITEM_TM08
 	compare RESULT, 0
-	jumpeq DewfordTown_Gym_EventScript_1A029B
+	goto_if_eq DewfordTown_Gym_EventScript_1A029B
 	msgbox DewfordTown_Gym_Text_1753BF, 4
 	setflag 166
 	release
@@ -165,7 +165,7 @@ DewfordTown_Gym_EventScript_15323F:: @ 815323F
 	lock
 	faceplayer
 	checkflag 1204
-	jumpeq DewfordTown_Gym_EventScript_153254
+	goto_if_eq DewfordTown_Gym_EventScript_153254
 	msgbox DewfordTown_Gym_Text_174D98, 4
 	release
 	end
@@ -178,15 +178,15 @@ DewfordTown_Gym_EventScript_153254:: @ 8153254
 DewfordTown_Gym_EventScript_15325E:: @ 815325E
 	lockall
 	checkflag 2056
-	jumpeq DewfordTown_Gym_EventScript_15327E
-	jump DewfordTown_Gym_EventScript_153288
+	goto_if_eq DewfordTown_Gym_EventScript_15327E
+	goto DewfordTown_Gym_EventScript_153288
 	end
 
 DewfordTown_Gym_EventScript_15326E:: @ 815326E
 	lockall
 	checkflag 2056
-	jumpeq DewfordTown_Gym_EventScript_15327E
-	jump DewfordTown_Gym_EventScript_153288
+	goto_if_eq DewfordTown_Gym_EventScript_15327E
+	goto DewfordTown_Gym_EventScript_153288
 	end
 
 DewfordTown_Gym_EventScript_15327E:: @ 815327E

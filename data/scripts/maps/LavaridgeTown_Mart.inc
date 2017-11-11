@@ -5,7 +5,7 @@ LavaridgeTown_Mart_EventScript_1538CB:: @ 81538CB
 	lock
 	faceplayer
 	message LavaridgeTown_Mart_Text_1A0BE4
-	waittext
+	waitmessage
 	pokemart LavaridgeTown_Mart_Items
 	msgbox LavaridgeTown_Mart_Text_1A0C02, 4
 	release

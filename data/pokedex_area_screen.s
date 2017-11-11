@@ -26,7 +26,7 @@ gUnknown_083F857A:: @ 83F857A
 
 @ XXX: what is this?
 	.align 2
-	.4byte 0x2000000
+	.4byte gSharedMem
 
 	.align 2
 gUnknown_083F858C:: @ 83F858C
@@ -60,7 +60,7 @@ gUnknown_083F865C:: @ 83F865C
 
 	.align 2
 gUnknown_083F8664:: @ 83F8664
-	obj_tiles 0x02000FB4, 0x600, 3
+	obj_tiles gSharedMem + 0xFB4, 0x600, 3
 
 	.align 2
 gOamData_83F866C:: @ 83F866C

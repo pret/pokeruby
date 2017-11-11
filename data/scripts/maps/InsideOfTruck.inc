@@ -16,11 +16,11 @@ InsideOfTruck_MapScript1_15FC26:: @ 815FC26
 InsideOfTruck_EventScript_15FC29:: @ 815FC29
 	lockall
 	setflag 0x4000
-	checkgender
+	checkplayergender
 	compare RESULT, 0
-	jumpeq InsideOfTruck_EventScript_15FC45
+	goto_if_eq InsideOfTruck_EventScript_15FC45
 	compare RESULT, 1
-	jumpeq InsideOfTruck_EventScript_15FC68
+	goto_if_eq InsideOfTruck_EventScript_15FC68
 	end
 
 InsideOfTruck_EventScript_15FC45:: @ 815FC45
@@ -31,7 +31,7 @@ InsideOfTruck_EventScript_15FC45:: @ 815FC45
 	setflag 784
 	setflag 760
 	setvar 0x408c, 1
-	warpplace LittlerootTown, 255, 3, 10
+	setdynamicwarp LittlerootTown, 255, 3, 10
 	releaseall
 	end
 
@@ -43,7 +43,7 @@ InsideOfTruck_EventScript_15FC68:: @ 815FC68
 	setflag 785
 	setflag 722
 	setvar 0x4082, 1
-	warpplace LittlerootTown, 255, 12, 10
+	setdynamicwarp LittlerootTown, 255, 12, 10
 	releaseall
 	end
 

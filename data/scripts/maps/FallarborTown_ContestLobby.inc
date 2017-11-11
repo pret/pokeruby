@@ -20,28 +20,28 @@ FallarborTown_ContestLobby_EventScript_1539CD:: @ 81539CD
 
 FallarborTown_ContestLobby_EventScript_1539F8:: @ 81539F8
 	lockall
-	move 1, FallarborTown_ContestLobby_Movement_153A7C
-	waitmove 0
-	playsfx 71
+	applymovement 1, FallarborTown_ContestLobby_Movement_153A7C
+	waitmovement 0
+	playse 71
 	setmaptile 4, 2, 545, 1
 	setmaptile 4, 3, 609, 1
 	special DrawWholeMapView
-	move 1, FallarborTown_ContestLobby_Movement_153A7F
-	waitmove 0
-	playsfx 71
+	applymovement 1, FallarborTown_ContestLobby_Movement_153A7F
+	waitmovement 0
+	playse 71
 	setmaptile 4, 2, 721, 1
 	setmaptile 4, 3, 729, 1
 	special DrawWholeMapView
-	pause 20
-	move 1, FallarborTown_ContestLobby_Movement_153A8C
-	waitmove 0
-	move 255, FallarborTown_ContestLobby_Movement_153A7A
-	waitmove 0
+	delay 20
+	applymovement 1, FallarborTown_ContestLobby_Movement_153A8C
+	waitmovement 0
+	applymovement 255, FallarborTown_ContestLobby_Movement_153A7A
+	waitmovement 0
 	msgbox FallarborTown_ContestLobby_Text_1A6832, 4
-	closebutton
-	move 1, FallarborTown_ContestLobby_Movement_153A83
-	move 255, FallarborTown_ContestLobby_Movement_153A70
-	waitmove 0
+	closemessage
+	applymovement 1, FallarborTown_ContestLobby_Movement_153A83
+	applymovement 255, FallarborTown_ContestLobby_Movement_153A70
+	waitmovement 0
 	releaseall
 	return
 
@@ -93,7 +93,7 @@ FallarborTown_ContestLobby_EventScript_153A8E:: @ 8153A8E
 
 FallarborTown_ContestLobby_EventScript_153A97:: @ 8153A97
 	checkflag 270
-	jumpeq FallarborTown_ContestLobby_EventScript_153AA9
+	goto_if_eq FallarborTown_ContestLobby_EventScript_153AA9
 	msgbox FallarborTown_ContestLobby_Text_177246, 2
 	end
 
@@ -108,7 +108,7 @@ FallarborTown_ContestLobby_EventScript_153AB2:: @ 8153AB2
 FallarborTown_ContestLobby_EventScript_153ABB:: @ 8153ABB
 	lockall
 	fadescreen 1
-	showcontestwinner 2
+	drawcontestwinner 2
 	releaseall
 	end
 
@@ -116,6 +116,6 @@ FallarborTown_ContestLobby_EventScript_153AC2:: @ 8153AC2
 	lockall
 	special ShowBerryBlenderRecordWindow
 	waitbutton
-	hidebox 0, 0, 29, 19
+	erasebox 0, 0, 29, 19
 	releaseall
 	end

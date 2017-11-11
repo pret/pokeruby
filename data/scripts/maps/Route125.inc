@@ -4,7 +4,7 @@ Route125_MapScripts:: @ 8151F1E
 
 Route125_MapScript1_151F24:: @ 8151F24
 	checkflag 2090
-	callif 1, Route125_EventScript_1A02C1
+	call_if 1, Route125_EventScript_1A02C1
 	end
 
 Route125_EventScript_151F2E:: @ 8151F2E
@@ -29,9 +29,9 @@ Route125_EventScript_151F73:: @ 8151F73
 
 Route125_EventScript_151F8A:: @ 8151F8A
 	trainerbattle 0, OPPONENT_ERNEST_1, 0, Route125_Text_1C11AF, Route125_Text_1C11ED
-	specialval RESULT, sub_8082C68
+	specialvar RESULT, sub_8082C68
 	compare RESULT, 1
-	jumpeq Route125_EventScript_151FB1
+	goto_if_eq Route125_EventScript_151FB1
 	msgbox Route125_Text_1C1208, 6
 	end
 

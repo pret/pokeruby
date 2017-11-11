@@ -3,8 +3,8 @@
 
 struct RegionMap
 {
-    u8 mapSecName[0x14];
-    u16 mapSecId;
+    u8 mapSectionName[20];
+    u16 mapSectionId;
     u8 unk16;
     u8 everGrandeCityArea;
     u8 (*inputCallback)(void);
@@ -62,10 +62,10 @@ void sub_80FAEC4(void);
 u8 sub_80FAFC0(void);
 void UpdateRegionMapVideoRegs(void);
 void sub_80FB2A4(s16, s16);
-u16 sub_80FBA04(u16 mapSecId);
+u16 sub_80FBA04(u16 mapSectionId);
 void CreateRegionMapCursor(u16, u16);
 void CreateRegionMapPlayerIcon(u16, u16);
-const u8 *GetMapSectionName(u8 *dest, u16 mapSecId, u16 length);
+const u8 *GetMapSectionName(u8 *dest, u16 mapSectionId, u16 length);
 const u8 *CopyMapName(u8 *dest, u16 b);
 const u8 *CopyLocationName(u8 *dest, u16 b);
 

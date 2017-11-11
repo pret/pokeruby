@@ -621,10 +621,10 @@ gOamData_83FA328:: @ 83FA328
 
 	.align 2
 gSpriteImageTable_83FA330:: @ 83FA330
-	obj_frame_tiles 0x02017E00, 0x80
-	obj_frame_tiles 0x02017E80, 0x80
-	obj_frame_tiles 0x02017F00, 0x80
-	obj_frame_tiles 0x02017F80, 0x80
+	obj_frame_tiles gSharedMem + 0x17E00, 0x80
+	obj_frame_tiles gSharedMem + 0x17E80, 0x80
+	obj_frame_tiles gSharedMem + 0x17F00, 0x80
+	obj_frame_tiles gSharedMem + 0x17F80, 0x80
 
 	.align 2
 gSpriteAnim_83FA350:: @ 83FA350
@@ -732,13 +732,13 @@ gOamData_83FA454:: @ 83FA454
 
 	.align 2
 gSpriteImageTable_83FA45C:: @ 83FA45C
-	obj_frame_tiles 0x02017000, 0x200
-	obj_frame_tiles 0x02017200, 0x200
-	obj_frame_tiles 0x02017400, 0x200
-	obj_frame_tiles 0x02017600, 0x200
-	obj_frame_tiles 0x02017800, 0x200
-	obj_frame_tiles 0x02017A00, 0x200
-	obj_frame_tiles 0x02017C00, 0x200
+	obj_frame_tiles gSharedMem + 0x17000, 0x200
+	obj_frame_tiles gSharedMem + 0x17200, 0x200
+	obj_frame_tiles gSharedMem + 0x17400, 0x200
+	obj_frame_tiles gSharedMem + 0x17600, 0x200
+	obj_frame_tiles gSharedMem + 0x17800, 0x200
+	obj_frame_tiles gSharedMem + 0x17A00, 0x200
+	obj_frame_tiles gSharedMem + 0x17C00, 0x200
 
 	.align 2
 gSpriteAnim_83FA494:: @ 83FA494
@@ -825,11 +825,11 @@ gOamData_83FA54C:: @ 83FA54C
 
 	.align 2
 gSpriteImageTable_83FA554: @ 83FA554
-	obj_frame_tiles 0x02018000, 0x80
+	obj_frame_tiles gSharedMem + 0x18000, 0x80
 
 	.align 2
 gSpriteImageTable_83FA55C: @ 83FA55C
-	obj_frame_tiles 0x02018080, 0x100
+	obj_frame_tiles gSharedMem + 0x18080, 0x100
 
 	.align 2
 gSpriteAffineAnim_83FA564:: @ 83FA564

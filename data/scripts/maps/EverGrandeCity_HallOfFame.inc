@@ -8,7 +8,7 @@ EverGrandeCity_HallOfFame_MapScript2_15BB8F:: @ 815BB8F
 	.2byte 0
 
 EverGrandeCity_HallOfFame_EventScript_15BB99:: @ 815BB99
-	spriteface 255, 2
+	turnobject 255, 2
 	end
 
 EverGrandeCity_HallOfFame_MapScript2_15BB9E:: @ 815BB9E
@@ -17,37 +17,37 @@ EverGrandeCity_HallOfFame_MapScript2_15BB9E:: @ 815BB9E
 
 EverGrandeCity_HallOfFame_EventScript_15BBA8:: @ 815BBA8
 	lockall
-	move 1, EverGrandeCity_HallOfFame_Movement_15BC59
-	move 255, EverGrandeCity_HallOfFame_Movement_15BC59
-	waitmove 0
-	move 1, EverGrandeCity_HallOfFame_Movement_1A0843
-	move 255, EverGrandeCity_HallOfFame_Movement_1A083F
-	waitmove 0
+	applymovement 1, EverGrandeCity_HallOfFame_Movement_15BC59
+	applymovement 255, EverGrandeCity_HallOfFame_Movement_15BC59
+	waitmovement 0
+	applymovement 1, EverGrandeCity_HallOfFame_Movement_1A0843
+	applymovement 255, EverGrandeCity_HallOfFame_Movement_1A083F
+	waitmovement 0
 	msgbox EverGrandeCity_HallOfFame_Text_191841, 4
-	closebutton
-	move 1, EverGrandeCity_HallOfFame_Movement_15BC60
-	move 255, EverGrandeCity_HallOfFame_Movement_15BC60
-	waitmove 0
-	pause 20
-	move 1, EverGrandeCity_HallOfFame_Movement_1A0843
-	move 255, EverGrandeCity_HallOfFame_Movement_1A083F
-	waitmove 0
+	closemessage
+	applymovement 1, EverGrandeCity_HallOfFame_Movement_15BC60
+	applymovement 255, EverGrandeCity_HallOfFame_Movement_15BC60
+	waitmovement 0
+	delay 20
+	applymovement 1, EverGrandeCity_HallOfFame_Movement_1A0843
+	applymovement 255, EverGrandeCity_HallOfFame_Movement_1A083F
+	waitmovement 0
 	msgbox EverGrandeCity_HallOfFame_Text_1918D7, 4
-	closebutton
-	move 1, EverGrandeCity_HallOfFame_Movement_1A0841
-	move 255, EverGrandeCity_HallOfFame_Movement_1A0841
-	waitmove 0
-	pause 20
-	doanimation 62
-	checkanimation 62
-	pause 40
+	closemessage
+	applymovement 1, EverGrandeCity_HallOfFame_Movement_1A0841
+	applymovement 255, EverGrandeCity_HallOfFame_Movement_1A0841
+	waitmovement 0
+	delay 20
+	dofieldeffect 62
+	waitfieldeffect 62
+	delay 40
 	setvar 0x4001, 1
 	call EverGrandeCity_HallOfFame_EventScript_19FC13
-	checkgender
+	checkplayergender
 	compare RESULT, 0
-	jumpeq EverGrandeCity_HallOfFame_EventScript_15BC41
+	goto_if_eq EverGrandeCity_HallOfFame_EventScript_15BC41
 	compare RESULT, 1
-	jumpeq EverGrandeCity_HallOfFame_EventScript_15BC4D
+	goto_if_eq EverGrandeCity_HallOfFame_EventScript_15BC4D
 	end
 
 EverGrandeCity_HallOfFame_EventScript_15BC41:: @ 815BC41

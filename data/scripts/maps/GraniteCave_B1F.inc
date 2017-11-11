@@ -6,5 +6,5 @@ GraniteCave_B1F_MapScripts:: @ 815CBDD
 
 GraniteCave_B1F_MapScript1_15CBED:: @ 815CBED
 	tileeffect 7
-	warp5 GraniteCave_B2F, 255, 0, 0
+	setholewarp GraniteCave_B2F, 255, 0, 0
 	end

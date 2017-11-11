@@ -70,7 +70,7 @@ ShowPokemonSummaryScreen: @ 809D8BC
 	movs r5, 0x80
 	orrs r4, r5
 	strb r4, [r6, 0x8]
-	ldr r5, _0809D908 @ =0x02018000
+	ldr r5, _0809D908 @ =gSharedMem + 0x18000
 	str r0, [r5]
 	movs r4, 0
 	strb r7, [r5, 0x8]
@@ -99,7 +99,7 @@ ShowPokemonSummaryScreen: @ 809D8BC
 	b _0809D90E
 	.align 2, 0
 _0809D904: .4byte gPaletteFade
-_0809D908: .4byte 0x02018000
+_0809D908: .4byte gSharedMem + 0x18000
 _0809D90C:
 	strb r1, [r5, 0xE]
 _0809D90E:
@@ -231,7 +231,7 @@ sub_809D9F0: @ 809D9F0
 	movs r4, 0x2
 	str r4, [sp]
 	bl ShowPokemonSummaryScreen
-	ldr r0, _0809DA18 @ =0x02018000
+	ldr r0, _0809DA18 @ =gSharedMem + 0x18000
 	adds r0, 0x7C
 	strh r5, [r0]
 	add sp, 0x4
@@ -239,13 +239,13 @@ sub_809D9F0: @ 809D9F0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809DA18: .4byte 0x02018000
+_0809DA18: .4byte gSharedMem + 0x18000
 	thumb_func_end sub_809D9F0
 
 	thumb_func_start sub_809DA1C
 sub_809DA1C: @ 809DA1C
 	push {lr}
-	ldr r0, _0809DA30 @ =0x02018000
+	ldr r0, _0809DA30 @ =gSharedMem + 0x18000
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0x6
 	bhi _0809DA78
@@ -255,7 +255,7 @@ sub_809DA1C: @ 809DA1C
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0809DA30: .4byte 0x02018000
+_0809DA30: .4byte gSharedMem + 0x18000
 _0809DA34: .4byte _0809DA38
 	.align 2, 0
 _0809DA38:
@@ -286,14 +286,14 @@ _0809DA6C:
 _0809DA6E:
 	movs r1, 0
 	bl CreateTask
-	ldr r1, _0809DA80 @ =0x02018000
+	ldr r1, _0809DA80 @ =gSharedMem + 0x18000
 	strb r0, [r1, 0xF]
 _0809DA78:
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0809DA7C: .4byte sub_809E3FC
-_0809DA80: .4byte 0x02018000
+_0809DA80: .4byte gSharedMem + 0x18000
 	thumb_func_end sub_809DA1C
 
 	thumb_func_start sub_809DA84
@@ -456,7 +456,7 @@ _0809DBDC:
 	ldr r1, _0809DC20 @ =0x80000080
 	str r1, [r0, 0x8]
 	ldr r0, [r0, 0x8]
-	ldr r0, _0809DC24 @ =0x02018000
+	ldr r0, _0809DC24 @ =gSharedMem + 0x18000
 	adds r0, 0x74
 	movs r1, 0
 	strb r1, [r0]
@@ -471,7 +471,7 @@ _0809DC14: .4byte 0x800000a0
 _0809DC18: .4byte gSummaryScreenButtonTiles
 _0809DC1C: .4byte 0x0600d140
 _0809DC20: .4byte 0x80000080
-_0809DC24: .4byte 0x02018000
+_0809DC24: .4byte gSharedMem + 0x18000
 _0809DC28: .4byte 0x0000043c
 _0809DC2C:
 	bl sub_809DF00
@@ -480,13 +480,13 @@ _0809DC2C:
 	bne _0809DC38
 	b _0809DE38
 _0809DC38:
-	ldr r0, _0809DC44 @ =0x02018000
+	ldr r0, _0809DC44 @ =gSharedMem + 0x18000
 	adds r0, 0x74
 	movs r1, 0
 	strb r1, [r0]
 	b _0809DDE8
 	.align 2, 0
-_0809DC44: .4byte 0x02018000
+_0809DC44: .4byte gSharedMem + 0x18000
 _0809DC48:
 	bl sub_80A18C4
 	ldr r1, _0809DC54 @ =gMain
@@ -497,7 +497,7 @@ _0809DC48:
 _0809DC54: .4byte gMain
 _0809DC58: .4byte 0x0000043c
 _0809DC5C:
-	ldr r4, _0809DC78 @ =0x02018010
+	ldr r4, _0809DC78 @ =gSharedMem + 0x18010
 	adds r0, r4, 0
 	bl sub_809F678
 	adds r0, r4, 0
@@ -509,30 +509,30 @@ _0809DC5C:
 	bl sub_80A12D0
 	b _0809DC82
 	.align 2, 0
-_0809DC78: .4byte 0x02018010
+_0809DC78: .4byte gSharedMem + 0x18010
 _0809DC7C:
 	movs r0, 0xA
 	bl sub_80A12D0
 _0809DC82:
-	ldr r0, _0809DC8C @ =0x02018010
+	ldr r0, _0809DC8C @ =gSharedMem + 0x18010
 	bl sub_80A0EA4
 	b _0809DDE8
 	.align 2, 0
-_0809DC8C: .4byte 0x02018010
+_0809DC8C: .4byte gSharedMem + 0x18010
 _0809DC90:
 	bl sub_80A1950
-	ldr r0, _0809DCA4 @ =0x02018010
+	ldr r0, _0809DCA4 @ =gSharedMem + 0x18010
 	bl sub_80A1D84
 	ldr r1, _0809DCA8 @ =gMain
 	ldr r2, _0809DCAC @ =0x0000043c
 	adds r1, r2
 	b _0809DDEE
 	.align 2, 0
-_0809DCA4: .4byte 0x02018010
+_0809DCA4: .4byte gSharedMem + 0x18010
 _0809DCA8: .4byte gMain
 _0809DCAC: .4byte 0x0000043c
 _0809DCB0:
-	ldr r4, _0809DCC0 @ =0x02018010
+	ldr r4, _0809DCC0 @ =gSharedMem + 0x18010
 	adds r0, r4, 0
 	bl sub_80A1DE8
 	adds r4, 0x64
@@ -540,9 +540,9 @@ _0809DCB0:
 	strb r0, [r4]
 	b _0809DDE8
 	.align 2, 0
-_0809DCC0: .4byte 0x02018010
+_0809DCC0: .4byte gSharedMem + 0x18010
 _0809DCC4:
-	ldr r4, _0809DCEC @ =0x02018010
+	ldr r4, _0809DCEC @ =gSharedMem + 0x18010
 	adds r5, r4, 0
 	adds r5, 0x64
 	adds r0, r4, 0
@@ -563,7 +563,7 @@ _0809DCE0:
 	adds r1, r2
 	b _0809DDEE
 	.align 2, 0
-_0809DCEC: .4byte 0x02018010
+_0809DCEC: .4byte gSharedMem + 0x18010
 _0809DCF0: .4byte gMain
 _0809DCF4: .4byte 0x0000043c
 _0809DCF8:
@@ -571,7 +571,7 @@ _0809DCF8:
 	bl sub_80A0EE8
 	b _0809DDE8
 _0809DD02:
-	ldr r1, _0809DD20 @ =0x02018000
+	ldr r1, _0809DD20 @ =gSharedMem + 0x18000
 	ldrb r0, [r1, 0xB]
 	cmp r0, 0x1
 	bhi _0809DD18
@@ -587,19 +587,19 @@ _0809DD18:
 	adds r1, r2
 	b _0809DDEE
 	.align 2, 0
-_0809DD20: .4byte 0x02018000
+_0809DD20: .4byte gSharedMem + 0x18000
 _0809DD24: .4byte gUnknown_083C1580
 _0809DD28: .4byte gMain
 _0809DD2C: .4byte 0x0000043c
 _0809DD30:
-	ldr r0, _0809DD38 @ =0x02018010
+	ldr r0, _0809DD38 @ =gSharedMem + 0x18010
 	bl sub_809FAC8
 	b _0809DDE8
 	.align 2, 0
-_0809DD38: .4byte 0x02018010
+_0809DD38: .4byte gSharedMem + 0x18010
 _0809DD3C:
 	ldr r2, _0809DD58 @ =gUnknown_083C1598
-	ldr r0, _0809DD5C @ =0x02018000
+	ldr r0, _0809DD5C @ =gSharedMem + 0x18000
 	ldrb r1, [r0, 0xB]
 	lsls r1, 2
 	adds r1, r2
@@ -612,11 +612,11 @@ _0809DD3C:
 	b _0809DDEE
 	.align 2, 0
 _0809DD58: .4byte gUnknown_083C1598
-_0809DD5C: .4byte 0x02018000
+_0809DD5C: .4byte gSharedMem + 0x18000
 _0809DD60: .4byte gMain
 _0809DD64: .4byte 0x0000043c
 _0809DD68:
-	ldr r0, _0809DD84 @ =0x02018010
+	ldr r0, _0809DD84 @ =gSharedMem + 0x18010
 	movs r1, 0x2D
 	bl GetMonData
 	adds r1, r0, 0
@@ -629,7 +629,7 @@ _0809DD68:
 	strh r0, [r1]
 	b _0809DDE8
 	.align 2, 0
-_0809DD84: .4byte 0x02018010
+_0809DD84: .4byte gSharedMem + 0x18010
 _0809DD88: .4byte gUnknown_030041B0
 _0809DD8C:
 	ldr r0, _0809DD94 @ =gUnknown_030041B0
@@ -639,7 +639,7 @@ _0809DD8C:
 _0809DD94: .4byte gUnknown_030041B0
 _0809DD98:
 	bl sub_809EBC4
-	ldr r0, _0809DDB8 @ =0x02018000
+	ldr r0, _0809DDB8 @ =gSharedMem + 0x18000
 	adds r0, 0x79
 	ldrb r0, [r0]
 	cmp r0, 0
@@ -652,7 +652,7 @@ _0809DD98:
 	bl sub_80A1654
 	b _0809DDCC
 	.align 2, 0
-_0809DDB8: .4byte 0x02018000
+_0809DDB8: .4byte gSharedMem + 0x18000
 _0809DDBC:
 	movs r0, 0xA
 	movs r1, 0
@@ -809,7 +809,7 @@ _0809DEFC: .4byte REG_BG0HOFS
 	thumb_func_start sub_809DF00
 sub_809DF00: @ 809DF00
 	push {lr}
-	ldr r0, _0809DF18 @ =0x02018000
+	ldr r0, _0809DF18 @ =gSharedMem + 0x18000
 	adds r0, 0x74
 	ldrb r0, [r0]
 	cmp r0, 0xC
@@ -822,7 +822,7 @@ _0809DF0E:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0809DF18: .4byte 0x02018000
+_0809DF18: .4byte gSharedMem + 0x18000
 _0809DF1C: .4byte _0809DF20
 	.align 2, 0
 _0809DF20:
@@ -932,7 +932,7 @@ _0809E010:
 	lsls r1, 1
 	movs r2, 0x60
 	bl LoadCompressedPalette
-	ldr r0, _0809E02C @ =0x02018000
+	ldr r0, _0809E02C @ =gSharedMem + 0x18000
 	adds r0, 0x74
 	movs r1, 0
 	strb r1, [r0]
@@ -940,9 +940,9 @@ _0809E010:
 	b _0809E03C
 	.align 2, 0
 _0809E028: .4byte gMoveTypes_Pal
-_0809E02C: .4byte 0x02018000
+_0809E02C: .4byte gSharedMem + 0x18000
 _0809E030:
-	ldr r1, _0809E040 @ =0x02018000
+	ldr r1, _0809E040 @ =gSharedMem + 0x18000
 	adds r1, 0x74
 	ldrb r0, [r1]
 	adds r0, 0x1
@@ -952,7 +952,7 @@ _0809E03C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0809E040: .4byte 0x02018000
+_0809E040: .4byte gSharedMem + 0x18000
 	thumb_func_end sub_809DF00
 
 	thumb_func_start sub_809E044
@@ -1082,7 +1082,7 @@ sub_809E13C: @ 809E13C
 	cmp r0, 0
 	bne _0809E182
 	ldr r1, _0809E18C @ =gUnknown_020384F0
-	ldr r4, _0809E190 @ =0x02018000
+	ldr r4, _0809E190 @ =gSharedMem + 0x18000
 	ldrb r0, [r4, 0x9]
 	strb r0, [r1]
 	bl ResetSpriteData
@@ -1104,7 +1104,7 @@ _0809E182:
 	.align 2, 0
 _0809E188: .4byte gPaletteFade
 _0809E18C: .4byte gUnknown_020384F0
-_0809E190: .4byte 0x02018000
+_0809E190: .4byte gSharedMem + 0x18000
 _0809E194: .4byte gMPlay_BGM
 _0809E198: .4byte 0x0000ffff
 	thumb_func_end sub_809E13C
@@ -1182,7 +1182,7 @@ _0809E222:
 	ands r0, r1
 	cmp r0, 0
 	beq _0809E24C
-	ldr r5, _0809E248 @ =0x02018000
+	ldr r5, _0809E248 @ =gSharedMem + 0x18000
 	ldrb r0, [r5, 0xB]
 	cmp r0, 0x1
 	bls _0809E23A
@@ -1196,7 +1196,7 @@ _0809E23A:
 	bl SummaryScreenExit
 	b _0809E25A
 	.align 2, 0
-_0809E248: .4byte 0x02018000
+_0809E248: .4byte gSharedMem + 0x18000
 _0809E24C:
 	movs r0, 0x2
 	ands r0, r1
@@ -1238,7 +1238,7 @@ _0809E276:
 	movs r1, 0x4
 	strh r1, [r0, 0x8]
 	subs r1, 0x5
-	ldr r2, _0809E2A8 @ =0x02018079
+	ldr r2, _0809E2A8 @ =gSharedMem + 0x18079
 	adds r0, r4, 0
 	bl sub_809E8F0
 	b _0809E3EE
@@ -1246,7 +1246,7 @@ _0809E276:
 _0809E29C: .4byte gPaletteFade
 _0809E2A0: .4byte gMain
 _0809E2A4: .4byte gTasks
-_0809E2A8: .4byte 0x02018079
+_0809E2A8: .4byte gSharedMem + 0x18079
 _0809E2AC:
 	adds r0, r2, 0
 	ands r0, r1
@@ -1259,14 +1259,14 @@ _0809E2AC:
 	adds r0, r1
 	movs r1, 0x4
 	strh r1, [r0, 0x8]
-	ldr r2, _0809E2D4 @ =0x02018079
+	ldr r2, _0809E2D4 @ =gSharedMem + 0x18079
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl sub_809E8F0
 	b _0809E3EE
 	.align 2, 0
 _0809E2D0: .4byte gTasks
-_0809E2D4: .4byte 0x02018079
+_0809E2D4: .4byte gSharedMem + 0x18079
 _0809E2D8:
 	movs r0, 0x20
 	ands r0, r1
@@ -1278,7 +1278,7 @@ _0809E2D8:
 	cmp r0, 0x1
 	bne _0809E324
 _0809E2EC:
-	ldr r1, _0809E320 @ =0x02018000
+	ldr r1, _0809E320 @ =gSharedMem + 0x18000
 	ldrb r0, [r1, 0xB]
 	cmp r0, 0x3
 	bne _0809E314
@@ -1305,7 +1305,7 @@ _0809E314:
 	bl SummaryScreenHandleLeftRightInput
 	b _0809E3EE
 	.align 2, 0
-_0809E320: .4byte 0x02018000
+_0809E320: .4byte gSharedMem + 0x18000
 _0809E324:
 	ldrh r1, [r5, 0x2E]
 	movs r0, 0x10
@@ -1318,7 +1318,7 @@ _0809E324:
 	cmp r0, 0x2
 	bne _0809E37C
 _0809E33A:
-	ldr r1, _0809E378 @ =0x02018000
+	ldr r1, _0809E378 @ =gSharedMem + 0x18000
 	adds r2, r1, 0
 	adds r2, 0x76
 	ldrb r0, [r1, 0xB]
@@ -1349,7 +1349,7 @@ _0809E36C:
 	bl SummaryScreenHandleLeftRightInput
 	b _0809E3EE
 	.align 2, 0
-_0809E378: .4byte 0x02018000
+_0809E378: .4byte gSharedMem + 0x18000
 _0809E37C:
 	ldrh r1, [r5, 0x2E]
 	movs r0, 0x1
@@ -1362,14 +1362,14 @@ _0809E37C:
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0809E3A0
-	ldr r0, _0809E3BC @ =0x02018000
+	ldr r0, _0809E3BC @ =gSharedMem + 0x18000
 	adds r5, r0, 0
 	adds r5, 0x79
 	ldrb r0, [r5]
 	cmp r0, 0x4
 	bne _0809E3C4
 _0809E3A0:
-	ldr r0, _0809E3BC @ =0x02018000
+	ldr r0, _0809E3BC @ =gSharedMem + 0x18000
 	adds r1, r0, 0
 	adds r1, 0x79
 	ldrb r1, [r1]
@@ -1382,7 +1382,7 @@ _0809E3A0:
 	bl SummaryScreenExit
 	b _0809E3EE
 	.align 2, 0
-_0809E3BC: .4byte 0x02018000
+_0809E3BC: .4byte gSharedMem + 0x18000
 _0809E3C0: .4byte gSpecialVar_0x8005
 _0809E3C4:
 	movs r0, 0x20
@@ -1396,7 +1396,7 @@ _0809E3D4:
 	ands r0, r1
 	cmp r0, 0
 	beq _0809E3EE
-	ldr r0, _0809E3F4 @ =0x02018000
+	ldr r0, _0809E3F4 @ =gSharedMem + 0x18000
 	adds r0, 0x7A
 	movs r1, 0x4
 	strb r1, [r0]
@@ -1409,7 +1409,7 @@ _0809E3EE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809E3F4: .4byte 0x02018000
+_0809E3F4: .4byte gSharedMem + 0x18000
 _0809E3F8: .4byte gSpecialVar_0x8005
 	thumb_func_end sub_809E260
 
@@ -1440,7 +1440,7 @@ sub_809E3FC: @ 809E3FC
 	movs r1, 0x4
 	strh r1, [r0, 0x8]
 	subs r1, 0x5
-	ldr r2, _0809E444 @ =0x02018079
+	ldr r2, _0809E444 @ =gSharedMem + 0x18079
 	adds r0, r5, 0
 	bl sub_809E8F0
 	b _0809E502
@@ -1448,7 +1448,7 @@ sub_809E3FC: @ 809E3FC
 _0809E438: .4byte gPaletteFade
 _0809E43C: .4byte gMain
 _0809E440: .4byte gTasks
-_0809E444: .4byte 0x02018079
+_0809E444: .4byte gSharedMem + 0x18079
 _0809E448:
 	adds r0, r2, 0
 	ands r0, r1
@@ -1461,20 +1461,20 @@ _0809E448:
 	adds r0, r1
 	movs r1, 0x4
 	strh r1, [r0, 0x8]
-	ldr r2, _0809E470 @ =0x02018079
+	ldr r2, _0809E470 @ =gSharedMem + 0x18079
 	adds r0, r5, 0
 	movs r1, 0x1
 	bl sub_809E8F0
 	b _0809E502
 	.align 2, 0
 _0809E46C: .4byte gTasks
-_0809E470: .4byte 0x02018079
+_0809E470: .4byte gSharedMem + 0x18079
 _0809E474:
 	movs r0, 0x1
 	ands r0, r1
 	cmp r0, 0
 	beq _0809E4EE
-	ldr r4, _0809E4A8 @ =0x02018000
+	ldr r4, _0809E4A8 @ =gSharedMem + 0x18000
 	adds r6, r4, 0
 	adds r6, 0x79
 	ldrb r0, [r6]
@@ -1495,7 +1495,7 @@ _0809E474:
 	bl PlaySE
 	b _0809E502
 	.align 2, 0
-_0809E4A8: .4byte 0x02018000
+_0809E4A8: .4byte gSharedMem + 0x18000
 _0809E4AC:
 	movs r0, 0x5
 	bl PlaySE
@@ -1586,14 +1586,14 @@ sub_809E534: @ 809E534
 	movs r1, 0x3
 	strh r1, [r0, 0x8]
 	subs r1, 0x4
-	ldr r2, _0809E56C @ =0x0201807a
+	ldr r2, _0809E56C @ =gSharedMem + 0x1807A
 	adds r0, r3, 0
 	bl sub_809E8F0
 	b _0809E5C0
 	.align 2, 0
 _0809E564: .4byte gMain
 _0809E568: .4byte gTasks
-_0809E56C: .4byte 0x0201807a
+_0809E56C: .4byte gSharedMem + 0x1807A
 _0809E570:
 	movs r0, 0x80
 	ands r0, r1
@@ -1606,14 +1606,14 @@ _0809E570:
 	adds r0, r1
 	movs r1, 0x3
 	strh r1, [r0, 0x8]
-	ldr r2, _0809E598 @ =0x0201807a
+	ldr r2, _0809E598 @ =gSharedMem + 0x1807A
 	adds r0, r3, 0
 	movs r1, 0x1
 	bl sub_809E8F0
 	b _0809E5C0
 	.align 2, 0
 _0809E594: .4byte gTasks
-_0809E598: .4byte 0x0201807a
+_0809E598: .4byte gSharedMem + 0x1807A
 _0809E59C:
 	movs r0, 0x1
 	ands r0, r1
@@ -1645,7 +1645,7 @@ sub_809E5C4: @ 809E5C4
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x20
-	ldr r1, _0809E6D0 @ =0x02018000
+	ldr r1, _0809E6D0 @ =gSharedMem + 0x18000
 	ldr r5, [r1]
 	ldrb r2, [r1, 0x9]
 	movs r0, 0x64
@@ -1764,7 +1764,7 @@ sub_809E5C4: @ 809E5C4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809E6D0: .4byte 0x02018000
+_0809E6D0: .4byte gSharedMem + 0x18000
 _0809E6D4: .4byte gUnknown_08208238
 	thumb_func_end sub_809E5C4
 
@@ -1776,7 +1776,7 @@ sub_809E6D8: @ 809E6D8
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x20
-	ldr r2, _0809E7E8 @ =0x02018000
+	ldr r2, _0809E7E8 @ =gSharedMem + 0x18000
 	ldr r5, [r2]
 	ldrb r1, [r2, 0x9]
 	lsls r0, r1, 2
@@ -1896,7 +1896,7 @@ sub_809E6D8: @ 809E6D8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809E7E8: .4byte 0x02018000
+_0809E7E8: .4byte gSharedMem + 0x18000
 _0809E7EC: .4byte gUnknown_08208238
 	thumb_func_end sub_809E6D8
 
@@ -1909,7 +1909,7 @@ sub_809E7F0: @ 809E7F0
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809E828
-	ldr r1, _0809E830 @ =0x02018000
+	ldr r1, _0809E830 @ =gSharedMem + 0x18000
 	adds r2, r1, 0
 	adds r2, 0x74
 	movs r0, 0
@@ -1932,7 +1932,7 @@ _0809E828:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809E830: .4byte 0x02018000
+_0809E830: .4byte gSharedMem + 0x18000
 _0809E834: .4byte gTasks
 _0809E838: .4byte sub_809E3FC
 	thumb_func_end sub_809E7F0
@@ -1953,7 +1953,7 @@ sub_809E83C: @ 809E83C
 	bl sub_80A1B40
 	cmp r4, 0x1
 	bne _0809E8C0
-	ldr r1, _0809E87C @ =0x02018000
+	ldr r1, _0809E87C @ =gSharedMem + 0x18000
 	adds r0, r1, 0
 	adds r0, 0x79
 	adds r2, r1, 0
@@ -1968,11 +1968,11 @@ sub_809E83C: @ 809E83C
 	bl sub_809E5C4
 	b _0809E884
 	.align 2, 0
-_0809E87C: .4byte 0x02018000
+_0809E87C: .4byte gSharedMem + 0x18000
 _0809E880:
 	bl sub_809E6D8
 _0809E884:
-	ldr r4, _0809E8B4 @ =0x02018000
+	ldr r4, _0809E8B4 @ =gSharedMem + 0x18000
 	adds r0, r4, 0
 	adds r0, 0x7A
 	ldrb r0, [r0]
@@ -1995,11 +1995,11 @@ _0809E884:
 	str r1, [r0]
 	b _0809E8DE
 	.align 2, 0
-_0809E8B4: .4byte 0x02018000
+_0809E8B4: .4byte gSharedMem + 0x18000
 _0809E8B8: .4byte gTasks
 _0809E8BC: .4byte sub_809E7F0
 _0809E8C0:
-	ldr r0, _0809E8E4 @ =0x02018010
+	ldr r0, _0809E8E4 @ =gSharedMem + 0x18010
 	adds r1, r0, 0
 	adds r1, 0x69
 	bl sub_80A0428
@@ -2018,7 +2018,7 @@ _0809E8DE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809E8E4: .4byte 0x02018010
+_0809E8E4: .4byte gSharedMem + 0x18010
 _0809E8E8: .4byte gTasks
 _0809E8EC: .4byte sub_809E3FC
 	thumb_func_end sub_809E83C
@@ -2076,7 +2076,7 @@ _0809E948:
 _0809E94E:
 	lsls r4, r6, 24
 	lsrs r1, r4, 24
-	ldr r0, _0809EA10 @ =0x02018010
+	ldr r0, _0809EA10 @ =gSharedMem + 0x18010
 	str r2, [sp, 0x4]
 	bl sub_809F760
 	lsls r0, 16
@@ -2103,7 +2103,7 @@ _0809E97A:
 	asrs r0, r5, 24
 	cmp r0, 0x4
 	beq _0809E996
-	ldr r0, _0809EA14 @ =0x02018000
+	ldr r0, _0809EA14 @ =gSharedMem + 0x18000
 	adds r0, 0x7C
 	ldrh r0, [r0]
 	mov r2, r8
@@ -2147,7 +2147,7 @@ _0809E9D0:
 	asrs r0, r5, 24
 	cmp r0, 0x4
 	bne _0809E9FE
-	ldr r0, _0809EA14 @ =0x02018000
+	ldr r0, _0809EA14 @ =gSharedMem + 0x18000
 	adds r0, 0x7C
 	ldrh r0, [r0]
 	cmp r0, 0
@@ -2164,17 +2164,17 @@ _0809E9D0:
 _0809E9FE:
 	mov r2, r9
 	strb r6, [r2]
-	ldr r0, _0809EA1C @ =0x02018079
+	ldr r0, _0809EA1C @ =gSharedMem + 0x18079
 	cmp r9, r0
 	bne _0809EA20
 	movs r0, 0
 	bl sub_80A1C30
 	b _0809EA26
 	.align 2, 0
-_0809EA10: .4byte 0x02018010
-_0809EA14: .4byte 0x02018000
+_0809EA10: .4byte gSharedMem + 0x18010
+_0809EA14: .4byte gSharedMem + 0x18000
 _0809EA18: .4byte gTasks
-_0809EA1C: .4byte 0x02018079
+_0809EA1C: .4byte gSharedMem + 0x18079
 _0809EA20:
 	movs r0, 0x1
 	bl sub_80A1C30
@@ -2182,7 +2182,7 @@ _0809EA26:
 	ldr r3, [sp]
 	cmp r3, 0
 	beq _0809EA34
-	ldr r0, _0809EA4C @ =0x02018010
+	ldr r0, _0809EA4C @ =gSharedMem + 0x18010
 	mov r1, r9
 	bl sub_80A0428
 _0809EA34:
@@ -2197,7 +2197,7 @@ _0809EA34:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809EA4C: .4byte 0x02018010
+_0809EA4C: .4byte gSharedMem + 0x18010
 	thumb_func_end sub_809E8F0
 
 	thumb_func_start SummaryScreenHandleAButton
@@ -2207,7 +2207,7 @@ SummaryScreenHandleAButton: @ 809EA50
 	lsrs r5, r0, 24
 	movs r0, 0x5
 	bl PlaySE
-	ldr r4, _0809EABC @ =0x02018000
+	ldr r4, _0809EABC @ =gSharedMem + 0x18000
 	adds r1, r4, 0
 	adds r1, 0x79
 	movs r0, 0
@@ -2249,7 +2249,7 @@ _0809EA8C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809EABC: .4byte 0x02018000
+_0809EABC: .4byte gSharedMem + 0x18000
 _0809EAC0: .4byte gTasks
 _0809EAC4: .4byte sub_809E3FC
 	thumb_func_end SummaryScreenHandleAButton
@@ -2259,7 +2259,7 @@ sub_809EAC8: @ 809EAC8
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r6, _0809EB34 @ =0x02018000
+	ldr r6, _0809EB34 @ =gSharedMem + 0x18000
 	adds r0, r6, 0
 	adds r0, 0x79
 	ldrb r0, [r0]
@@ -2304,7 +2304,7 @@ _0809EAEE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809EB34: .4byte 0x02018000
+_0809EB34: .4byte gSharedMem + 0x18000
 _0809EB38: .4byte gTasks
 _0809EB3C: .4byte SummaryScreenHandleKeyInput
 	thumb_func_end sub_809EAC8
@@ -2336,7 +2336,7 @@ sub_809EB40: @ 809EB40
 _0809EB6C: .4byte gTasks
 _0809EB70: .4byte sub_809E260
 _0809EB74:
-	ldr r4, _0809EBBC @ =0x02018000
+	ldr r4, _0809EBBC @ =gSharedMem + 0x18000
 	adds r6, r4, 0
 	adds r6, 0x79
 	strb r0, [r6]
@@ -2371,14 +2371,14 @@ _0809EBB4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809EBBC: .4byte 0x02018000
+_0809EBBC: .4byte gSharedMem + 0x18000
 _0809EBC0: .4byte gTasks
 	thumb_func_end sub_809EB40
 
 	thumb_func_start sub_809EBC4
 sub_809EBC4: @ 809EBC4
 	push {r4,lr}
-	ldr r4, _0809EC28 @ =0x02018000
+	ldr r4, _0809EC28 @ =gSharedMem + 0x18000
 	ldrb r0, [r4, 0xB]
 	cmp r0, 0
 	beq _0809EC22
@@ -2430,7 +2430,7 @@ _0809EC22:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809EC28: .4byte 0x02018000
+_0809EC28: .4byte gSharedMem + 0x18000
 _0809EC2C: .4byte gUnknown_030042C0
 _0809EC30: .4byte REG_BG1CNT
 _0809EC34: .4byte 0x0000e0ff
@@ -2469,7 +2469,7 @@ _0809EC64:
 	.4byte _0809EE1C
 	.4byte _0809EE4C
 _0809EC7C:
-	ldr r1, _0809ECB8 @ =0x02018000
+	ldr r1, _0809ECB8 @ =gSharedMem + 0x18000
 	adds r0, r1, 0
 	adds r0, 0x80
 	ldrb r0, [r0]
@@ -2503,7 +2503,7 @@ _0809ECB4:
 	ldr r2, _0809ECC0 @ =REG_BG2CNT
 	b _0809ECF6
 	.align 2, 0
-_0809ECB8: .4byte 0x02018000
+_0809ECB8: .4byte gSharedMem + 0x18000
 _0809ECBC: .4byte gUnknown_03004288
 _0809ECC0: .4byte REG_BG2CNT
 _0809ECC4: .4byte 0x0000e0ff
@@ -2549,7 +2549,7 @@ _0809ED08: .4byte gUnknown_030042C0
 _0809ED0C: .4byte REG_BG1CNT
 _0809ED10: .4byte 0x0000e0ff
 _0809ED14:
-	ldr r0, _0809ED48 @ =0x02018000
+	ldr r0, _0809ED48 @ =gSharedMem + 0x18000
 	adds r0, 0x80
 	ldrb r0, [r0]
 	cmp r0, 0
@@ -2577,7 +2577,7 @@ _0809ED2E:
 	strh r1, [r2]
 	b _0809EE3A
 	.align 2, 0
-_0809ED48: .4byte 0x02018000
+_0809ED48: .4byte gSharedMem + 0x18000
 _0809ED4C: .4byte gUnknown_030042C0
 _0809ED50: .4byte REG_BG1CNT
 _0809ED54: .4byte 0x0000fffc
@@ -2611,7 +2611,7 @@ _0809ED8C: .4byte REG_BG1CNT
 _0809ED90: .4byte 0x0000fffc
 _0809ED94: .4byte REG_BG2CNT
 _0809ED98:
-	ldr r1, _0809EDD4 @ =0x02018000
+	ldr r1, _0809EDD4 @ =gSharedMem + 0x18000
 	ldrb r3, [r1, 0xB]
 	adds r0, r3, 0x1
 	adds r2, r1, 0
@@ -2639,7 +2639,7 @@ _0809ED98:
 	bl sub_80A00F4
 	b _0809EE3A
 	.align 2, 0
-_0809EDD4: .4byte 0x02018000
+_0809EDD4: .4byte gSharedMem + 0x18000
 _0809EDD8:
 	lsls r0, r3, 24
 	lsrs r0, 24
@@ -2680,7 +2680,7 @@ _0809EE12:
 	b _0809EE3A
 _0809EE1C:
 	ldr r0, _0809EE44 @ =gUnknown_083C1598
-	ldr r4, _0809EE48 @ =0x02018000
+	ldr r4, _0809EE48 @ =gSharedMem + 0x18000
 	ldrb r1, [r4, 0xB]
 	lsls r1, 2
 	adds r1, r0
@@ -2700,7 +2700,7 @@ _0809EE3A:
 	b _0809EE64
 	.align 2, 0
 _0809EE44: .4byte gUnknown_083C1598
-_0809EE48: .4byte 0x02018000
+_0809EE48: .4byte gSharedMem + 0x18000
 _0809EE4C:
 	bl sub_8055870
 	cmp r0, 0x1
@@ -2756,7 +2756,7 @@ _0809EEA0:
 	.4byte _0809F078
 	.4byte _0809F0A8
 _0809EEBC:
-	ldr r0, _0809EECC @ =0x02018000
+	ldr r0, _0809EECC @ =gSharedMem + 0x18000
 	adds r0, 0x80
 	ldrb r1, [r0]
 	cmp r1, 0
@@ -2765,7 +2765,7 @@ _0809EEBC:
 	strh r1, [r0]
 	b _0809F096
 	.align 2, 0
-_0809EECC: .4byte 0x02018000
+_0809EECC: .4byte gSharedMem + 0x18000
 _0809EED0: .4byte gUnknown_03004288
 _0809EED4:
 	ldr r1, _0809EEDC @ =gUnknown_030042C0
@@ -2775,7 +2775,7 @@ _0809EED4:
 	.align 2, 0
 _0809EEDC: .4byte gUnknown_030042C0
 _0809EEE0:
-	ldr r1, _0809EF30 @ =0x02018000
+	ldr r1, _0809EF30 @ =gSharedMem + 0x18000
 	adds r0, r1, 0
 	adds r0, 0x80
 	ldrb r0, [r0]
@@ -2818,7 +2818,7 @@ _0809EF2A:
 	ldr r2, _0809EF48 @ =REG_BG1CNT
 	b _0809EF8C
 	.align 2, 0
-_0809EF30: .4byte 0x02018000
+_0809EF30: .4byte gSharedMem + 0x18000
 _0809EF34: .4byte REG_BG2CNT
 _0809EF38: .4byte 0x0000e0fc
 _0809EF3C: .4byte 0x00000801
@@ -2877,7 +2877,7 @@ _0809EFA8: .4byte 0x00000c01
 _0809EFAC: .4byte REG_BG2CNT
 _0809EFB0: .4byte 0x0000fffc
 _0809EFB4:
-	ldr r0, _0809EFD4 @ =0x02018000
+	ldr r0, _0809EFD4 @ =gSharedMem + 0x18000
 	adds r0, 0x80
 	ldrb r0, [r0]
 	cmp r0, 0
@@ -2893,7 +2893,7 @@ _0809EFB4:
 	bne _0809F0C0
 	b _0809F096
 	.align 2, 0
-_0809EFD4: .4byte 0x02018000
+_0809EFD4: .4byte gSharedMem + 0x18000
 _0809EFD8: .4byte gUnknown_03004288
 _0809EFDC:
 	ldr r0, _0809EFF0 @ =gUnknown_030042C0
@@ -2909,7 +2909,7 @@ _0809EFDC:
 	.align 2, 0
 _0809EFF0: .4byte gUnknown_030042C0
 _0809EFF4:
-	ldr r1, _0809F030 @ =0x02018000
+	ldr r1, _0809F030 @ =gSharedMem + 0x18000
 	ldrb r3, [r1, 0xB]
 	adds r0, r3, 0x1
 	adds r2, r1, 0
@@ -2937,7 +2937,7 @@ _0809EFF4:
 	bl sub_80A00F4
 	b _0809F096
 	.align 2, 0
-_0809F030: .4byte 0x02018000
+_0809F030: .4byte gSharedMem + 0x18000
 _0809F034:
 	lsls r0, r3, 24
 	lsrs r0, 24
@@ -2978,7 +2978,7 @@ _0809F06E:
 	b _0809F096
 _0809F078:
 	ldr r0, _0809F0A0 @ =gUnknown_083C1598
-	ldr r4, _0809F0A4 @ =0x02018000
+	ldr r4, _0809F0A4 @ =gSharedMem + 0x18000
 	ldrb r1, [r4, 0xB]
 	lsls r1, 2
 	adds r1, r0
@@ -2998,7 +2998,7 @@ _0809F096:
 	b _0809F0C0
 	.align 2, 0
 _0809F0A0: .4byte gUnknown_083C1598
-_0809F0A4: .4byte 0x02018000
+_0809F0A4: .4byte gSharedMem + 0x18000
 _0809F0A8:
 	bl sub_8055870
 	cmp r0, 0x1
@@ -3028,7 +3028,7 @@ sub_809F0D0: @ 809F0D0
 	lsrs r7, r0, 24
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r1, _0809F110 @ =0x02018000
+	ldr r1, _0809F110 @ =gSharedMem + 0x18000
 	ldrb r0, [r1, 0xB]
 	adds r0, r4
 	movs r5, 0
@@ -3053,7 +3053,7 @@ sub_809F0D0: @ 809F0D0
 	str r0, [r6]
 	b _0809F12A
 	.align 2, 0
-_0809F110: .4byte 0x02018000
+_0809F110: .4byte gSharedMem + 0x18000
 _0809F114: .4byte gUnknown_03005CF0
 _0809F118: .4byte gTasks
 _0809F11C: .4byte sub_809EC38
@@ -3077,7 +3077,7 @@ SummaryScreenHandleLeftRightInput: @ 809F134
 	lsrs r6, r0, 24
 	lsls r1, 24
 	lsrs r5, r1, 24
-	ldr r4, _0809F1AC @ =0x02018010
+	ldr r4, _0809F1AC @ =gSharedMem + 0x18010
 	adds r0, r4, 0
 	movs r1, 0x2D
 	bl GetMonData
@@ -3131,7 +3131,7 @@ _0809F1A6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809F1AC: .4byte 0x02018010
+_0809F1AC: .4byte gSharedMem + 0x18010
 _0809F1B0: .4byte sub_80A1334
 _0809F1B4: .4byte sub_80A1500
 	thumb_func_end SummaryScreenHandleLeftRightInput
@@ -3143,7 +3143,7 @@ SummaryScreenHandleUpDownInput: @ 809F1B8
 	lsrs r6, r0, 24
 	lsls r1, 24
 	lsrs r4, r1, 24
-	ldr r0, _0809F1E4 @ =0x02018000
+	ldr r0, _0809F1E4 @ =gSharedMem + 0x18000
 	ldrb r1, [r0, 0xE]
 	adds r2, r0, 0
 	cmp r1, 0x1
@@ -3160,7 +3160,7 @@ SummaryScreenHandleUpDownInput: @ 809F1B8
 	lsrs r4, r0, 31
 	b _0809F1F4
 	.align 2, 0
-_0809F1E4: .4byte 0x02018000
+_0809F1E4: .4byte gSharedMem + 0x18000
 _0809F1E8:
 	lsls r0, r4, 24
 	asrs r0, 24
@@ -3205,7 +3205,7 @@ _0809F22C:
 	beq _0809F270
 	movs r0, 0x5
 	bl PlaySE
-	ldr r5, _0809F278 @ =0x02018010
+	ldr r5, _0809F278 @ =gSharedMem + 0x18010
 	adds r0, r5, 0
 	bl GetMonStatusAndPokerus
 	lsls r0, 24
@@ -3232,7 +3232,7 @@ _0809F270:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809F278: .4byte 0x02018010
+_0809F278: .4byte gSharedMem + 0x18010
 _0809F27C: .4byte gTasks
 _0809F280: .4byte sub_809F43C
 	thumb_func_end SummaryScreenHandleUpDownInput
@@ -3242,7 +3242,7 @@ sub_809F284: @ 809F284
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
-	ldr r0, _0809F2C0 @ =0x02018000
+	ldr r0, _0809F2C0 @ =gSharedMem + 0x18000
 	ldr r7, [r0]
 	movs r6, 0
 	ldrb r1, [r0, 0xB]
@@ -3272,7 +3272,7 @@ _0809F2BA:
 	adds r0, r3
 	b _0809F304
 	.align 2, 0
-_0809F2C0: .4byte 0x02018000
+_0809F2C0: .4byte gSharedMem + 0x18000
 _0809F2C4:
 	lsls r5, r3, 24
 _0809F2C6:
@@ -3281,7 +3281,7 @@ _0809F2C6:
 	asrs r1, r5, 24
 	adds r0, r1
 	lsls r0, 24
-	ldr r4, _0809F2EC @ =0x02018000
+	ldr r4, _0809F2EC @ =gSharedMem + 0x18000
 	lsrs r6, r0, 24
 	asrs r0, 24
 	ldrb r2, [r4, 0x9]
@@ -3296,7 +3296,7 @@ _0809F2E4:
 	negs r0, r0
 	b _0809F308
 	.align 2, 0
-_0809F2EC: .4byte 0x02018000
+_0809F2EC: .4byte gSharedMem + 0x18000
 _0809F2F0:
 	movs r0, 0x64
 	muls r0, r1
@@ -3324,7 +3324,7 @@ sub_809F310: @ 809F310
 	bl GetMonData
 	cmp r0, 0
 	beq _0809F33C
-	ldr r0, _0809F338 @ =0x02018000
+	ldr r0, _0809F338 @ =gSharedMem + 0x18000
 	ldrb r0, [r0, 0xB]
 	cmp r0, 0
 	bne _0809F332
@@ -3337,7 +3337,7 @@ _0809F332:
 	movs r0, 0x1
 	b _0809F33E
 	.align 2, 0
-_0809F338: .4byte 0x02018000
+_0809F338: .4byte gSharedMem + 0x18000
 _0809F33C:
 	movs r0, 0
 _0809F33E:
@@ -3430,7 +3430,7 @@ sub_809F3CC: @ 809F3CC
 	movs r2, 0
 	movs r1, 0
 	ldr r3, _0809F41C @ =gUnknown_083C15A8
-	ldr r4, _0809F420 @ =0x02018000
+	ldr r4, _0809F420 @ =gSharedMem + 0x18000
 	ldrb r0, [r3]
 	ldrb r5, [r4, 0x9]
 	cmp r0, r5
@@ -3469,7 +3469,7 @@ _0809F414:
 	b _0809F436
 	.align 2, 0
 _0809F41C: .4byte gUnknown_083C15A8
-_0809F420: .4byte 0x02018000
+_0809F420: .4byte gSharedMem + 0x18000
 _0809F424:
 	adds r0, r2, 0
 	bl sub_809F388
@@ -3524,7 +3524,7 @@ _0809F48C:
 	bl StopCryAndClearCrySongs
 	b _0809F5B2
 _0809F492:
-	ldr r0, _0809F4AC @ =0x02018000
+	ldr r0, _0809F4AC @ =gSharedMem + 0x18000
 	ldrb r1, [r0, 0xC]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -3537,12 +3537,12 @@ _0809F492:
 	adds r1, r0
 	b _0809F5B8
 	.align 2, 0
-_0809F4AC: .4byte 0x02018000
+_0809F4AC: .4byte gSharedMem + 0x18000
 _0809F4B0: .4byte gSprites
 _0809F4B4: .4byte gMain
 _0809F4B8: .4byte 0x0000043c
 _0809F4BC:
-	ldr r0, _0809F4D0 @ =0x02018000
+	ldr r0, _0809F4D0 @ =gSharedMem + 0x18000
 	ldrb r1, [r0, 0xD]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -3552,10 +3552,10 @@ _0809F4BC:
 	bl DestroySpriteAndFreeResources
 	b _0809F5B2
 	.align 2, 0
-_0809F4D0: .4byte 0x02018000
+_0809F4D0: .4byte gSharedMem + 0x18000
 _0809F4D4: .4byte gSprites
 _0809F4D8:
-	ldr r0, _0809F4EC @ =0x02018000
+	ldr r0, _0809F4EC @ =gSharedMem + 0x18000
 	adds r1, r0, 0
 	adds r1, 0x74
 	movs r2, 0
@@ -3566,10 +3566,10 @@ _0809F4D8:
 	adds r1, r3, r0
 	b _0809F5B8
 	.align 2, 0
-_0809F4EC: .4byte 0x02018000
+_0809F4EC: .4byte gSharedMem + 0x18000
 _0809F4F0: .4byte 0x0000043c
 _0809F4F4:
-	ldr r4, _0809F518 @ =0x02018010
+	ldr r4, _0809F518 @ =gSharedMem + 0x18010
 	adds r0, r4, 0
 	bl sub_809F678
 	adds r0, r4, 0
@@ -3584,9 +3584,9 @@ _0809F50E:
 	bl sub_80A0EA4
 	b _0809F5B2
 	.align 2, 0
-_0809F518: .4byte 0x02018010
+_0809F518: .4byte gSharedMem + 0x18010
 _0809F51C:
-	ldr r4, _0809F558 @ =0x02018010
+	ldr r4, _0809F558 @ =gSharedMem + 0x18010
 	adds r5, r4, 0
 	adds r5, 0x64
 	adds r0, r4, 0
@@ -3614,7 +3614,7 @@ _0809F51C:
 	strh r0, [r1]
 	b _0809F564
 	.align 2, 0
-_0809F558: .4byte 0x02018010
+_0809F558: .4byte gSharedMem + 0x18010
 _0809F55C: .4byte gUnknown_030041B0
 _0809F560:
 	ldr r0, _0809F56C @ =gUnknown_030041B0
@@ -3629,20 +3629,20 @@ _0809F56C: .4byte gUnknown_030041B0
 _0809F570: .4byte gMain
 _0809F574: .4byte 0x0000043c
 _0809F578:
-	ldr r0, _0809F580 @ =0x02018010
+	ldr r0, _0809F580 @ =gSharedMem + 0x18010
 	bl sub_80A1DCC
 	b _0809F5B2
 	.align 2, 0
-_0809F580: .4byte 0x02018010
+_0809F580: .4byte gSharedMem + 0x18010
 _0809F584:
-	ldr r0, _0809F594 @ =0x02018010
+	ldr r0, _0809F594 @ =gSharedMem + 0x18010
 	bl sub_80A1DE8
 	ldr r1, _0809F598 @ =gMain
 	ldr r0, _0809F59C @ =0x0000043c
 	adds r1, r0
 	b _0809F5B8
 	.align 2, 0
-_0809F594: .4byte 0x02018010
+_0809F594: .4byte gSharedMem + 0x18010
 _0809F598: .4byte gMain
 _0809F59C: .4byte 0x0000043c
 _0809F5A0:
@@ -3650,7 +3650,7 @@ _0809F5A0:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809F5EA
-	ldr r0, _0809F5C0 @ =0x02018000
+	ldr r0, _0809F5C0 @ =gSharedMem + 0x18000
 	adds r0, 0x74
 	movs r1, 0
 	strb r1, [r0]
@@ -3664,7 +3664,7 @@ _0809F5B8:
 	strb r0, [r1]
 	b _0809F5EA
 	.align 2, 0
-_0809F5C0: .4byte 0x02018000
+_0809F5C0: .4byte gSharedMem + 0x18000
 _0809F5C4: .4byte gMain
 _0809F5C8: .4byte 0x0000043c
 _0809F5CC:
@@ -3678,7 +3678,7 @@ _0809F5CC:
 	adds r1, r4
 	lsls r1, 3
 	adds r1, r0
-	ldr r0, _0809F5F4 @ =0x02018000
+	ldr r0, _0809F5F4 @ =gSharedMem + 0x18000
 	adds r0, 0x84
 	ldr r0, [r0]
 	str r0, [r1]
@@ -3688,13 +3688,13 @@ _0809F5EA:
 	bx r0
 	.align 2, 0
 _0809F5F0: .4byte gTasks
-_0809F5F4: .4byte 0x02018000
+_0809F5F4: .4byte gSharedMem + 0x18000
 	thumb_func_end sub_809F43C
 
 	thumb_func_start sub_809F5F8
 sub_809F5F8: @ 809F5F8
 	push {r4,lr}
-	ldr r2, _0809F61C @ =0x02018000
+	ldr r2, _0809F61C @ =gSharedMem + 0x18000
 	adds r4, r2, 0
 	adds r4, 0x74
 	ldrb r0, [r4]
@@ -3711,7 +3711,7 @@ sub_809F5F8: @ 809F5F8
 	movs r0, 0x1
 	b _0809F634
 	.align 2, 0
-_0809F61C: .4byte 0x02018000
+_0809F61C: .4byte gSharedMem + 0x18000
 _0809F620: .4byte gUnknown_083C1588
 _0809F624:
 	adds r0, r2, 0
@@ -3767,7 +3767,7 @@ sub_809F664: @ 809F664
 sub_809F678: @ 809F678
 	push {lr}
 	adds r3, r0, 0
-	ldr r1, _0809F698 @ =0x02018000
+	ldr r1, _0809F698 @ =gSharedMem + 0x18000
 	ldrb r0, [r1, 0xE]
 	cmp r0, 0
 	bne _0809F69C
@@ -3781,7 +3781,7 @@ sub_809F678: @ 809F678
 	bl memcpy
 	b _0809F6AE
 	.align 2, 0
-_0809F698: .4byte 0x02018000
+_0809F698: .4byte gSharedMem + 0x18000
 _0809F69C:
 	ldr r0, [r1]
 	ldrb r2, [r1, 0x9]
@@ -3859,7 +3859,7 @@ _0809F718:
 	adds r1, r0, 0
 	adds r0, r5, 0
 	adds r2, r6, 0
-	bl sub_80409C8
+	bl GetMonSpritePalStructFromOtIdPersonality
 	adds r4, r0, 0
 	bl LoadCompressedObjectPalette
 	ldrh r0, [r4, 0x4]
@@ -3955,7 +3955,7 @@ sub_809F7D0: @ 809F7D0
 	sub sp, 0x64
 	mov r0, sp
 	bl sub_809F678
-	ldr r4, _0809F804 @ =0x02018000
+	ldr r4, _0809F804 @ =gSharedMem + 0x18000
 	adds r0, r4, 0
 	adds r0, 0x79
 	ldrb r1, [r0]
@@ -3974,7 +3974,7 @@ sub_809F7D0: @ 809F7D0
 	movs r0, 0
 	b _0809F80A
 	.align 2, 0
-_0809F804: .4byte 0x02018000
+_0809F804: .4byte gSharedMem + 0x18000
 _0809F808:
 	movs r0, 0x1
 _0809F80A:
@@ -4023,7 +4023,7 @@ _0809F840:
 	strh r0, [r4]
 	movs r0, 0x1
 	strh r0, [r4, 0x1A]
-	ldr r2, _0809F87C @ =0x02018000
+	ldr r2, _0809F87C @ =gSharedMem + 0x18000
 	ldrh r0, [r4, 0x1E]
 	adds r2, 0x79
 	strb r0, [r2]
@@ -4035,7 +4035,7 @@ _0809F840:
 	.align 2, 0
 _0809F874: .4byte gMain
 _0809F878: .4byte sub_809E260
-_0809F87C: .4byte 0x02018000
+_0809F87C: .4byte gSharedMem + 0x18000
 _0809F880:
 	movs r0, 0x80
 	ands r0, r1
@@ -4050,7 +4050,7 @@ _0809F880:
 	strh r0, [r4]
 	movs r0, 0x1
 	strh r0, [r4, 0x1A]
-	ldr r2, _0809F8B0 @ =0x02018000
+	ldr r2, _0809F8B0 @ =gSharedMem + 0x18000
 	ldrh r0, [r4, 0x1E]
 	adds r2, 0x79
 	strb r0, [r2]
@@ -4060,7 +4060,7 @@ _0809F880:
 	b _0809F9C0
 	.align 2, 0
 _0809F8AC: .4byte sub_809E260
-_0809F8B0: .4byte 0x02018000
+_0809F8B0: .4byte gSharedMem + 0x18000
 _0809F8B4:
 	movs r0, 0x20
 	ands r0, r1
@@ -4072,7 +4072,7 @@ _0809F8B4:
 	cmp r0, 0x1
 	bne _0809F918
 _0809F8C8:
-	ldr r1, _0809F90C @ =0x02018000
+	ldr r1, _0809F90C @ =gSharedMem + 0x18000
 	ldrb r0, [r1, 0xB]
 	cmp r0, 0x2
 	beq _0809F9C0
@@ -4107,7 +4107,7 @@ _0809F8F4:
 	adds r0, r5, 0
 	b _0809F972
 	.align 2, 0
-_0809F90C: .4byte 0x02018000
+_0809F90C: .4byte gSharedMem + 0x18000
 _0809F910: .4byte gTasks
 _0809F914: .4byte sub_809E260
 _0809F918:
@@ -4122,7 +4122,7 @@ _0809F918:
 	cmp r0, 0x2
 	bne _0809F994
 _0809F92E:
-	ldr r1, _0809F988 @ =0x02018000
+	ldr r1, _0809F988 @ =gSharedMem + 0x18000
 	adds r2, r1, 0
 	adds r2, 0x76
 	ldrb r0, [r1, 0xB]
@@ -4167,7 +4167,7 @@ _0809F972:
 	bl sub_80A1654
 	b _0809F9C0
 	.align 2, 0
-_0809F988: .4byte 0x02018000
+_0809F988: .4byte gSharedMem + 0x18000
 _0809F98C: .4byte gTasks
 _0809F990: .4byte sub_809E260
 _0809F994:
@@ -4249,12 +4249,12 @@ _0809FA2C: .4byte sub_809F814
 
 	thumb_func_start sub_809FA30
 sub_809FA30: @ 809FA30
-	ldr r0, _0809FA38 @ =0x02018000
+	ldr r0, _0809FA38 @ =gSharedMem + 0x18000
 	adds r0, 0x7A
 	ldrb r0, [r0]
 	bx lr
 	.align 2, 0
-_0809FA38: .4byte 0x02018000
+_0809FA38: .4byte gSharedMem + 0x18000
 	thumb_func_end sub_809FA30
 
 	thumb_func_start GetStringCenterAlignXOffsetWithLetterSpacing
@@ -5056,7 +5056,7 @@ sub_80A00F4: @ 80A00F4
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
-	ldr r2, _080A012C @ =0x02018000
+	ldr r2, _080A012C @ =gSharedMem + 0x18000
 	adds r0, r2, 0
 	adds r0, 0x7C
 	ldrh r0, [r0]
@@ -5080,7 +5080,7 @@ _080A010A:
 	bl sub_80A1FF8
 	b _080A0150
 	.align 2, 0
-_080A012C: .4byte 0x02018000
+_080A012C: .4byte gSharedMem + 0x18000
 _080A0130: .4byte gOtherText_Power2
 _080A0134: .4byte gOtherText_Accuracy2
 _080A0138:
@@ -5146,7 +5146,7 @@ _080A0168:
 _080A01B0: .4byte gOtherText_OneDash
 _080A01B4: .4byte gOtherText_TwoDashes
 _080A01B8:
-	ldr r0, _080A01E0 @ =0x02018000
+	ldr r0, _080A01E0 @ =gSharedMem + 0x18000
 	ldrb r0, [r0, 0xB]
 	cmp r0, 0x2
 	bne _080A01E8
@@ -5165,7 +5165,7 @@ _080A01B8:
 	bl sub_80A198C
 	b _080A020C
 	.align 2, 0
-_080A01E0: .4byte 0x02018000
+_080A01E0: .4byte gSharedMem + 0x18000
 _080A01E4: .4byte gBattleMoves
 _080A01E8:
 	ldr r1, _080A0290 @ =gContestMoves
@@ -5255,7 +5255,7 @@ _080A0298: .4byte gStringVar1
 	thumb_func_start sub_80A029C
 sub_80A029C: @ 80A029C
 	push {r4,r5,lr}
-	ldr r1, _080A02B8 @ =0x02018000
+	ldr r1, _080A02B8 @ =gSharedMem + 0x18000
 	adds r4, r1, 0
 	adds r4, 0x7C
 	ldrh r0, [r4]
@@ -5268,7 +5268,7 @@ sub_80A029C: @ 80A029C
 	bl sub_80A1FF8
 	b _080A037E
 	.align 2, 0
-_080A02B8: .4byte 0x02018000
+_080A02B8: .4byte gSharedMem + 0x18000
 _080A02BC: .4byte gOtherText_CancelNoTerminator
 _080A02C0:
 	ldrh r5, [r4]
@@ -5305,7 +5305,7 @@ _080A02E4:
 	bl sub_80A198C
 	lsls r4, r5, 1
 _080A0304:
-	ldr r0, _080A0324 @ =0x02018000
+	ldr r0, _080A0324 @ =gSharedMem + 0x18000
 	ldrb r0, [r0, 0xB]
 	cmp r0, 0x2
 	bne _080A032C
@@ -5320,7 +5320,7 @@ _080A0304:
 	b _080A033E
 	.align 2, 0
 _080A0320: .4byte gContestMoves
-_080A0324: .4byte 0x02018000
+_080A0324: .4byte gSharedMem + 0x18000
 _080A0328: .4byte gMoveNames
 _080A032C:
 	movs r0, 0xD
@@ -5407,7 +5407,7 @@ sub_80A03BC: @ 80A03BC
 	lsrs r1, r0, 16
 	b _080A03E0
 _080A03D0:
-	ldr r0, _080A03E8 @ =0x02018000
+	ldr r0, _080A03E8 @ =gSharedMem + 0x18000
 	adds r2, r0, 0
 	adds r2, 0x7C
 	ldrh r0, [r2]
@@ -5420,7 +5420,7 @@ _080A03E0:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080A03E8: .4byte 0x02018000
+_080A03E8: .4byte gSharedMem + 0x18000
 _080A03EC: .4byte 0x0000ffff
 	thumb_func_end sub_80A03BC
 
@@ -5431,7 +5431,7 @@ sub_80A03F0: @ 80A03F0
 	bl sub_80A03BC
 	lsls r0, 16
 	lsrs r1, r0, 16
-	ldr r0, _080A0414 @ =0x02018000
+	ldr r0, _080A0414 @ =gSharedMem + 0x18000
 	ldrb r0, [r0, 0xB]
 	cmp r0, 0x2
 	bne _080A041C
@@ -5441,7 +5441,7 @@ sub_80A03F0: @ 80A03F0
 	bl sub_80A057C
 	b _080A0422
 	.align 2, 0
-_080A0414: .4byte 0x02018000
+_080A0414: .4byte gSharedMem + 0x18000
 _080A0418: .4byte 0x0000ffff
 _080A041C:
 	adds r0, r1, 0
@@ -5465,7 +5465,7 @@ sub_80A0428: @ 80A0428
 	movs r2, 0x1C
 	movs r3, 0x12
 	bl MenuZeroFillWindowRect
-	ldr r0, _080A0454 @ =0x02018000
+	ldr r0, _080A0454 @ =gSharedMem + 0x18000
 	ldrb r0, [r0, 0xB]
 	cmp r0, 0x2
 	bne _080A0458
@@ -5473,7 +5473,7 @@ sub_80A0428: @ 80A0428
 	bl sub_80A046C
 	b _080A045E
 	.align 2, 0
-_080A0454: .4byte 0x02018000
+_080A0454: .4byte gSharedMem + 0x18000
 _080A0458:
 	adds r0, r4, 0
 	bl sub_80A0498
@@ -6075,7 +6075,7 @@ sub_80A0BF4: @ 80A0BF4
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080A0C48
-	ldr r0, _080A0C40 @ =0x02018000
+	ldr r0, _080A0C40 @ =gSharedMem + 0x18000
 	ldrb r0, [r0, 0x9]
 	cmp r0, 0x1
 	beq _080A0C2E
@@ -6092,7 +6092,7 @@ _080A0C2E:
 	bl StringCopy
 	b _080A0C68
 	.align 2, 0
-_080A0C40: .4byte 0x02018000
+_080A0C40: .4byte gSharedMem + 0x18000
 _080A0C44: .4byte gStringVar1
 _080A0C48:
 	cmp r5, 0
@@ -6303,7 +6303,7 @@ sub_80A0DD0: @ 80A0DD0
 	bl sub_80A1E58
 	adds r2, r0, 0
 	ldr r1, _080A0E40 @ =gUnknown_083C1068
-	ldr r4, _080A0E44 @ =0x02018000
+	ldr r4, _080A0E44 @ =gSharedMem + 0x18000
 	adds r0, r4, 0
 	adds r0, 0x7E
 	ldrb r0, [r0]
@@ -6340,7 +6340,7 @@ sub_80A0DD0: @ 80A0DD0
 	.align 2, 0
 _080A0E3C: .4byte gStringVar1
 _080A0E40: .4byte gUnknown_083C1068
-_080A0E44: .4byte 0x02018000
+_080A0E44: .4byte gSharedMem + 0x18000
 _080A0E48:
 	movs r0, 0x17
 	movs r1, 0
@@ -6354,7 +6354,7 @@ _080A0E54:
 	bl sub_80A1E58
 	adds r2, r0, 0
 	ldr r1, _080A0E9C @ =gUnknown_083C1068
-	ldr r0, _080A0EA0 @ =0x02018000
+	ldr r0, _080A0EA0 @ =gSharedMem + 0x18000
 	adds r0, 0x7F
 	ldrb r0, [r0]
 	lsls r0, 2
@@ -6381,7 +6381,7 @@ _080A0E54:
 	.align 2, 0
 _080A0E98: .4byte gStringVar1
 _080A0E9C: .4byte gUnknown_083C1068
-_080A0EA0: .4byte 0x02018000
+_080A0EA0: .4byte gSharedMem + 0x18000
 	thumb_func_end sub_80A0DD0
 
 	thumb_func_start sub_80A0EA4
@@ -6428,7 +6428,7 @@ sub_80A0EE8: @ 80A0EE8
 	push {r5-r7}
 	sub sp, 0x10
 	movs r3, 0
-	ldr r6, _080A0F24 @ =0x02018000
+	ldr r6, _080A0F24 @ =gSharedMem + 0x18000
 	adds r5, r6, 0
 	ldr r1, _080A0F28 @ =0x00004040
 	mov r8, r1
@@ -6452,7 +6452,7 @@ _080A0F02:
 	strh r4, [r0]
 	b _080A0FE2
 	.align 2, 0
-_080A0F24: .4byte 0x02018000
+_080A0F24: .4byte gSharedMem + 0x18000
 _080A0F28: .4byte 0x00004040
 _080A0F2C: .4byte 0x0000404a
 _080A0F30:
@@ -7075,7 +7075,7 @@ _080A1400:
 	cmp r0, 0
 	bge _080A144A
 _080A1410:
-	ldr r4, _080A1480 @ =0x02018000
+	ldr r4, _080A1480 @ =gSharedMem + 0x18000
 	ldrb r0, [r4, 0xB]
 	cmp r0, 0x2
 	bne _080A1444
@@ -7105,7 +7105,7 @@ _080A144A:
 	ldrsh r0, [r7, r1]
 	cmp r0, 0x9
 	ble _080A1470
-	ldr r4, _080A1480 @ =0x02018000
+	ldr r4, _080A1480 @ =gSharedMem + 0x18000
 	ldrb r0, [r4, 0xB]
 	cmp r0, 0x2
 	bne _080A1460
@@ -7128,7 +7128,7 @@ _080A1470:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A1480: .4byte 0x02018000
+_080A1480: .4byte gSharedMem + 0x18000
 _080A1484: .4byte gOtherText_Status
 	thumb_func_end sub_80A1334
 
@@ -7139,7 +7139,7 @@ sub_80A1488: @ 80A1488
 	lsrs r6, r0, 24
 	lsls r1, 24
 	lsrs r7, r1, 24
-	ldr r0, _080A14DC @ =0x02018000
+	ldr r0, _080A14DC @ =gSharedMem + 0x18000
 	ldrb r0, [r0, 0xB]
 	cmp r0, 0x2
 	bne _080A14A6
@@ -7175,7 +7175,7 @@ _080A14C2:
 	movs r0, 0xA
 	b _080A14EA
 	.align 2, 0
-_080A14DC: .4byte 0x02018000
+_080A14DC: .4byte gSharedMem + 0x18000
 _080A14E0: .4byte sub_80A1334
 _080A14E4: .4byte gTasks
 _080A14E8:
@@ -7305,7 +7305,7 @@ _080A15CC:
 	cmp r0, 0
 	bge _080A1616
 _080A15DC:
-	ldr r4, _080A164C @ =0x02018000
+	ldr r4, _080A164C @ =gSharedMem + 0x18000
 	ldrb r0, [r4, 0xB]
 	cmp r0, 0x3
 	bne _080A1610
@@ -7335,7 +7335,7 @@ _080A1616:
 	ldrsh r0, [r7, r1]
 	cmp r0, 0x9
 	ble _080A163C
-	ldr r4, _080A164C @ =0x02018000
+	ldr r4, _080A164C @ =gSharedMem + 0x18000
 	ldrb r0, [r4, 0xB]
 	cmp r0, 0x3
 	bne _080A162C
@@ -7358,7 +7358,7 @@ _080A163C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A164C: .4byte 0x02018000
+_080A164C: .4byte gSharedMem + 0x18000
 _080A1650: .4byte gOtherText_Status
 	thumb_func_end sub_80A1500
 
@@ -7369,7 +7369,7 @@ sub_80A1654: @ 80A1654
 	lsrs r6, r0, 24
 	lsls r1, 24
 	lsrs r7, r1, 24
-	ldr r0, _080A16A8 @ =0x02018000
+	ldr r0, _080A16A8 @ =gSharedMem + 0x18000
 	ldrb r0, [r0, 0xB]
 	cmp r0, 0x3
 	bne _080A1672
@@ -7405,7 +7405,7 @@ _080A168E:
 	movs r0, 0xA
 	b _080A16B6
 	.align 2, 0
-_080A16A8: .4byte 0x02018000
+_080A16A8: .4byte gSharedMem + 0x18000
 _080A16AC: .4byte sub_80A1500
 _080A16B0: .4byte gTasks
 _080A16B4:
@@ -7620,7 +7620,7 @@ sub_80A1808: @ 80A1808
 	ldr r0, _080A1868 @ =sub_80A1888
 	str r0, [r4]
 	adds r0, r6, 0
-	bl sub_8040A3C
+	bl IsPokeSpriteNotFlipped
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A186C
@@ -7664,7 +7664,7 @@ sub_80A1888: @ 80A1888
 	bne _080A18B0
 	ldr r0, _080A18BC @ =SpriteCallbackDummy
 	str r0, [r4, 0x1C]
-	ldr r0, _080A18C0 @ =0x02018010
+	ldr r0, _080A18C0 @ =gSharedMem + 0x18010
 	movs r1, 0x2D
 	bl GetMonData
 	cmp r0, 0
@@ -7679,14 +7679,14 @@ _080A18B0:
 	.align 2, 0
 _080A18B8: .4byte gPaletteFade
 _080A18BC: .4byte SpriteCallbackDummy
-_080A18C0: .4byte 0x02018010
+_080A18C0: .4byte gSharedMem + 0x18010
 	thumb_func_end sub_80A1888
 
 	thumb_func_start sub_80A18C4
 sub_80A18C4: @ 80A18C4
 	push {lr}
 	movs r1, 0
-	ldr r3, _080A18E0 @ =0x0201a000
+	ldr r3, _080A18E0 @ =gSharedMem + 0x1A000
 	movs r2, 0xFF
 _080A18CC:
 	adds r0, r1, r3
@@ -7699,7 +7699,7 @@ _080A18CC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A18E0: .4byte 0x0201a000
+_080A18E0: .4byte gSharedMem + 0x1A000
 	thumb_func_end sub_80A18C4
 
 	thumb_func_start sub_80A18E4
@@ -7707,7 +7707,7 @@ sub_80A18E4: @ 80A18E4
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _080A1910 @ =0x0201a000
+	ldr r1, _080A1910 @ =gSharedMem + 0x1A000
 	adds r4, r0, r1
 	ldrb r0, [r4]
 	cmp r0, 0xFF
@@ -7726,7 +7726,7 @@ _080A1908:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A1910: .4byte 0x0201a000
+_080A1910: .4byte gSharedMem + 0x1A000
 _080A1914: .4byte gSprites
 	thumb_func_end sub_80A18E4
 
@@ -7737,7 +7737,7 @@ sub_80A1918: @ 80A1918
 	lsls r1, 24
 	lsrs r1, 24
 	ldr r3, _080A1948 @ =gSprites
-	ldr r2, _080A194C @ =0x0201a000
+	ldr r2, _080A194C @ =gSharedMem + 0x1A000
 	adds r0, r2
 	ldrb r0, [r0]
 	lsls r2, r0, 4
@@ -7757,7 +7757,7 @@ sub_80A1918: @ 80A1918
 	bx lr
 	.align 2, 0
 _080A1948: .4byte gSprites
-_080A194C: .4byte 0x0201a000
+_080A194C: .4byte gSharedMem + 0x1A000
 	thumb_func_end sub_80A1918
 
 	thumb_func_start sub_80A1950
@@ -7765,7 +7765,7 @@ sub_80A1950: @ 80A1950
 	push {r4,r5,lr}
 	movs r5, 0
 _080A1954:
-	ldr r0, _080A1984 @ =0x0201a000
+	ldr r0, _080A1984 @ =gSharedMem + 0x1A000
 	adds r4, r5, r0
 	ldrb r0, [r4]
 	cmp r0, 0xFF
@@ -7789,7 +7789,7 @@ _080A196C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A1984: .4byte 0x0201a000
+_080A1984: .4byte gSharedMem + 0x1A000
 _080A1988: .4byte gSpriteTemplate_83C11C0
 	thumb_func_end sub_80A1950
 
@@ -7814,7 +7814,7 @@ sub_80A198C: @ 80A198C
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
-	ldr r1, _080A1A24 @ =0x0201a000
+	ldr r1, _080A1A24 @ =gSharedMem + 0x1A000
 	mov r8, r1
 	add r8, r10
 	mov r0, r8
@@ -7869,7 +7869,7 @@ sub_80A198C: @ 80A198C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A1A24: .4byte 0x0201a000
+_080A1A24: .4byte gSharedMem + 0x1A000
 _080A1A28: .4byte gSprites
 _080A1A2C: .4byte gUnknown_083C11D8
 	thumb_func_end sub_80A198C
@@ -7885,7 +7885,7 @@ sub_80A1A30: @ 80A1A30
 	lsrs r4, r0, 24
 	movs r0, 0
 	mov r9, r0
-	ldr r1, _080A1A98 @ =0x02018000
+	ldr r1, _080A1A98 @ =gSharedMem + 0x18000
 	ldrb r0, [r1, 0xB]
 	cmp r0, 0x1
 	bls _080A1B0A
@@ -7928,7 +7928,7 @@ _080A1A60:
 	bl StartSpriteAnim
 	b _080A1AD0
 	.align 2, 0
-_080A1A98: .4byte 0x02018000
+_080A1A98: .4byte gSharedMem + 0x18000
 _080A1A9C: .4byte gSprites
 _080A1AA0: .4byte gSpriteTemplate_83C1280
 _080A1AA4:
@@ -8026,7 +8026,7 @@ sub_80A1B40: @ 80A1B40
 	lsls r1, r7, 1
 	adds r1, r7
 	lsls r1, 24
-	ldr r0, _080A1BB4 @ =0x0201a009
+	ldr r0, _080A1BB4 @ =gSharedMem + 0x1A009
 	ldrb r2, [r0]
 	lsls r0, r2, 4
 	adds r0, r2
@@ -8044,7 +8044,7 @@ sub_80A1B40: @ 80A1B40
 	lsls r0, 24
 	mov r8, r0
 _080A1B74:
-	ldr r6, _080A1BBC @ =0x0201a00a
+	ldr r6, _080A1BBC @ =gSharedMem + 0x1A00A
 	adds r0, r4, r6
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -8075,9 +8075,9 @@ _080A1B74:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A1BB4: .4byte 0x0201a009
+_080A1BB4: .4byte gSharedMem + 0x1A009
 _080A1BB8: .4byte gSprites
-_080A1BBC: .4byte 0x0201a00a
+_080A1BBC: .4byte gSharedMem + 0x1A00A
 	thumb_func_end sub_80A1B40
 
 	thumb_func_start sub_80A1BC0
@@ -8126,13 +8126,13 @@ _080A1C06:
 	ldrsh r0, [r2, r1]
 	cmp r0, 0x9
 	bne _080A1C1C
-	ldr r0, _080A1C18 @ =0x02018000
+	ldr r0, _080A1C18 @ =gSharedMem + 0x18000
 	adds r0, 0x79
 	b _080A1C20
 	.align 2, 0
-_080A1C18: .4byte 0x02018000
+_080A1C18: .4byte gSharedMem + 0x18000
 _080A1C1C:
-	ldr r0, _080A1C2C @ =0x02018000
+	ldr r0, _080A1C2C @ =gSharedMem + 0x18000
 	adds r0, 0x7A
 _080A1C20:
 	ldrb r0, [r0]
@@ -8141,7 +8141,7 @@ _080A1C20:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A1C2C: .4byte 0x02018000
+_080A1C2C: .4byte gSharedMem + 0x18000
 	thumb_func_end sub_80A1BC0
 
 	thumb_func_start sub_80A1C30
@@ -8161,7 +8161,7 @@ sub_80A1C30: @ 80A1C30
 	ldr r5, _080A1C88 @ =gSprites
 	movs r7, 0x5
 	negs r7, r7
-	ldr r6, _080A1C8C @ =0x0201a009
+	ldr r6, _080A1C8C @ =gSharedMem + 0x1A009
 _080A1C50:
 	adds r2, r3, r6
 	ldrb r1, [r2]
@@ -8194,7 +8194,7 @@ _080A1C82:
 	bx r0
 	.align 2, 0
 _080A1C88: .4byte gSprites
-_080A1C8C: .4byte 0x0201a009
+_080A1C8C: .4byte gSharedMem + 0x1A009
 	thumb_func_end sub_80A1C30
 
 	thumb_func_start pokemon_ailments_get_primary
@@ -8292,7 +8292,7 @@ sub_80A1D18: @ 80A1D18
 	subs r0, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r4, _080A1D50 @ =0x0201a01d
+	ldr r4, _080A1D50 @ =gSharedMem + 0x1A01D
 	ldrb r0, [r4]
 	cmp r0, 0xFF
 	bne _080A1D60
@@ -8304,14 +8304,14 @@ sub_80A1D18: @ 80A1D18
 	strb r0, [r4]
 	b _080A1D60
 	.align 2, 0
-_080A1D50: .4byte 0x0201a01d
+_080A1D50: .4byte gSharedMem + 0x1A01D
 _080A1D54: .4byte gSpriteTemplate_83C1304
 _080A1D58:
 	movs r0, 0x1D
 	bl sub_80A18E4
 	b _080A1D74
 _080A1D60:
-	ldr r0, _080A1D7C @ =0x0201a01d
+	ldr r0, _080A1D7C @ =gSharedMem + 0x1A01D
 	ldrb r1, [r0]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -8326,7 +8326,7 @@ _080A1D74:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A1D7C: .4byte 0x0201a01d
+_080A1D7C: .4byte gSharedMem + 0x1A01D
 _080A1D80: .4byte gSprites
 	thumb_func_end sub_80A1D18
 
@@ -8404,7 +8404,7 @@ sub_80A1DE8: @ 80A1DE8
 	movs r2, 0x88
 	movs r3, 0
 	bl CreateSprite
-	ldr r2, _080A1E4C @ =0x02018000
+	ldr r2, _080A1E4C @ =gSharedMem + 0x18000
 	strb r0, [r2, 0xD]
 	ldr r3, _080A1E50 @ =gSprites
 	ldrb r1, [r2, 0xD]
@@ -8430,7 +8430,7 @@ sub_80A1DE8: @ 80A1DE8
 	bx r0
 	.align 2, 0
 _080A1E48: .4byte gBallSpriteTemplates
-_080A1E4C: .4byte 0x02018000
+_080A1E4C: .4byte gSharedMem + 0x18000
 _080A1E50: .4byte gSprites
 _080A1E54: .4byte SpriteCallbackDummy
 	thumb_func_end sub_80A1DE8

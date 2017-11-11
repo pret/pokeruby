@@ -33,6 +33,7 @@ public:
     ~CFile();
     void FindIncbins();
     const std::set<std::string>& GetIncbins() { return m_incbins; }
+    const std::set<std::string>& GetIncludes() { return m_includes; }
 
 private:
     char *m_buffer;
@@ -41,13 +42,16 @@ private:
     int m_lineNum;
     std::string m_path;
     std::set<std::string> m_incbins;
+    std::set<std::string> m_includes;
 
-    void RemoveComments();
     bool ConsumeHorizontalWhitespace();
     bool ConsumeNewline();
+    bool ConsumeComment();
     void SkipWhitespace();
     bool CheckIdentifier(const std::string& ident);
+    void CheckInclude();
     void CheckIncbin();
+    std::string ReadPath();
 };
 
 #endif // C_FILE_H

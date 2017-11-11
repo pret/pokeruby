@@ -1099,7 +1099,7 @@ _0803EA4C:
 	movs r0, 0x1
 	b _0803EA6A
 _0803EA62:
-	ldr r0, _0803EB24 @ =0x02000000
+	ldr r0, _0803EB24 @ =gSharedMem
 	ldr r5, _0803EB28 @ =0x000160fa
 	adds r0, r5
 	ldrb r0, [r0]
@@ -1192,7 +1192,7 @@ _0803EB08:
 	strb r5, [r4]
 	b _0803EB48
 	.align 2, 0
-_0803EB24: .4byte 0x02000000
+_0803EB24: .4byte gSharedMem
 _0803EB28: .4byte 0x000160fa
 _0803EB2C: .4byte gMain
 _0803EB30: .4byte 0x0000043d

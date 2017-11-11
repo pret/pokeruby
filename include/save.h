@@ -3,7 +3,7 @@
 
 struct SaveSectionLocation
 {
-    void *data;
+    u8 *data;
     u16 size;
 };
 

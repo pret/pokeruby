@@ -11,7 +11,7 @@ struct CameraSomething
     s32 unk14;
 };
 
-extern struct Camera gUnknown_0202E844;
+extern struct Camera gCamera;
 
 void move_tilemap_camera_to_upper_left_corner(void);
 void sub_8057A58(void);

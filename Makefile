@@ -40,9 +40,9 @@ VERSIONS := ruby sapphire ruby_rev1 sapphire_rev1 ruby_rev2 sapphire_rev2 ruby_d
 $(VERSIONS) $(VERSIONS:%=compare_%)
 
 
-$(shell mkdir -p build/ $(VERSIONS:%=build/%/{,src,asm,data}))
+$(shell mkdir -p build/ $(VERSIONS:%=build/%/{,asm,data,src{,/battle,/field,/debug,/scene,/pokemon,/engine,/libs}}))
 
-C_SRCS := $(wildcard src/*.c)
+C_SRCS := $(wildcard src/*/*.c) $(wildcard src/*.c)
 ASM_SRCS := $(wildcard asm/*.s)
 DATA_ASM_SRCS := $(wildcard data/*.s)
 
@@ -83,6 +83,7 @@ include override.mk
 %.4bpp: %.png  ; $(GFX) $< $@
 %.8bpp: %.png  ; $(GFX) $< $@
 %.gbapal: %.pal ; $(GFX) $< $@
+%.gbapal: %.png ; $(GFX) $< $@
 %.lz: % ; $(GFX) $< $@
 %.rl: % ; $(GFX) $< $@
 sound/direct_sound_samples/cry_%.bin: sound/direct_sound_samples/cry_%.aif ; $(AIF) $< $@ --compress
@@ -90,17 +91,17 @@ sound/direct_sound_samples/cry_%.bin: sound/direct_sound_samples/cry_%.aif ; $(A
 sound/songs/%.s: sound/songs/%.mid
 	cd $(@D) && ../../$(MID) $(<F)
 
-%src/libc.o: CC1 := tools/agbcc/bin/old_agbcc
-%src/libc.o: CFLAGS := -O2
+%src/libs/libc.o: CC1 := tools/agbcc/bin/old_agbcc
+%src/libs/libc.o: CFLAGS := -O2
 
-%src/siirtc.o: CFLAGS := -mthumb-interwork
+%src/libs/siirtc.o: CFLAGS := -mthumb-interwork
 
-%src/agb_flash.o: CFLAGS := -O -mthumb-interwork
-%src/agb_flash_1m.o: CFLAGS := -O -mthumb-interwork
-%src/agb_flash_mx.o: CFLAGS := -O -mthumb-interwork
+%src/libs/agb_flash.o: CFLAGS := -O -mthumb-interwork
+%src/libs/agb_flash_1m.o: CFLAGS := -O -mthumb-interwork
+%src/libs/agb_flash_mx.o: CFLAGS := -O -mthumb-interwork
 
-%src/m4a_2.o: CC1 := tools/agbcc/bin/old_agbcc
-%src/m4a_4.o: CC1 := tools/agbcc/bin/old_agbcc
+%src/libs/m4a_2.o: CC1 := tools/agbcc/bin/old_agbcc
+%src/libs/m4a_4.o: CC1 := tools/agbcc/bin/old_agbcc
 
 $(SONG_OBJS): %.o: %.s
 	$(AS) $(ASFLAGS) -I sound -o $@ $<
@@ -113,7 +114,8 @@ $1_ASM_OBJS := $$(ASM_SRCS:%.s=build/$1/%.o)
 $1_DATA_ASM_OBJS := $$(DATA_ASM_SRCS:%.s=build/$1/%.o)
 
 ifeq ($$(NODEP),)
-build/$1/src/%.o: c_dep = $$(shell $$(SCANINC) src/$$(*F).c)
+build/$1/src/%.o: c_path = $$(*D)/$$(*F).c
+build/$1/src/%.o: c_dep = $$(shell $$(SCANINC) -I include $$(wildcard $$(c_path:build/$1/=)))
 build/$1/asm/%.o: asm_dep = $$(shell $$(SCANINC) asm/$$(*F).s)
 build/$1/data/%.o: asm_dep = $$(shell $$(SCANINC) data/$$(*F).s)
 endif
@@ -159,7 +161,7 @@ build/$1/ld_script.ld: ld_script.txt build/$1/sym_bss.ld build/$1/sym_common.ld 
 	cd build/$1 && sed -f ../../ld_script.sed ../../ld_script.txt | sed "s#tools/#../../tools/#g" | sed "s#sound/#../../sound/#g" >ld_script.ld
 
 poke$1.elf: build/$1/ld_script.ld $$($1_OBJS)
-	cd build/$1 && $$(LD) -T ld_script.ld -T ../../shared_syms.txt -Map ../../poke$1.map -o ../../$$@ $$($1_OBJS_REL) ../../$$(LIBGCC)
+	cd build/$1 && $$(LD) -T ld_script.ld -Map ../../poke$1.map -o ../../$$@ $$($1_OBJS_REL) ../../$$(LIBGCC)
 
 poke$1.gba: %.gba: %.elf
 	$$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $$< $$@

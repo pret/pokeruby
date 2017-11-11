@@ -10,82 +10,82 @@ SlateportCity_OceanicMuseum_2F_EventScript_155CE6:: @ 8155CE6
 	lock
 	faceplayer
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17ECFD, 4
-	closebutton
-	playmusic BGM_EVIL_TEAM, 1
-	reappear 3
-	move 3, SlateportCity_OceanicMuseum_2F_Movement_155EB4
-	waitmove 0
-	reappear 4
-	move 4, SlateportCity_OceanicMuseum_2F_Movement_155EC3
-	waitmove 0
-	move 3, SlateportCity_OceanicMuseum_2F_Movement_155EB8
-	move 4, SlateportCity_OceanicMuseum_2F_Movement_155EC5
-	waitmove 0
+	closemessage
+	playbgm BGM_EVIL_TEAM, 1
+	addobject 3
+	applymovement 3, SlateportCity_OceanicMuseum_2F_Movement_155EB4
+	waitmovement 0
+	addobject 4
+	applymovement 4, SlateportCity_OceanicMuseum_2F_Movement_155EC3
+	waitmovement 0
+	applymovement 3, SlateportCity_OceanicMuseum_2F_Movement_155EB8
+	applymovement 4, SlateportCity_OceanicMuseum_2F_Movement_155EC5
+	waitmovement 0
 	compare FACING, 1
-	callif 1, SlateportCity_OceanicMuseum_2F_EventScript_155E62
+	call_if 1, SlateportCity_OceanicMuseum_2F_EventScript_155E62
 	compare FACING, 4
-	callif 1, SlateportCity_OceanicMuseum_2F_EventScript_155E62
+	call_if 1, SlateportCity_OceanicMuseum_2F_EventScript_155E62
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17EDAE, 4
 	compare FACING, 4
-	callif 5, SlateportCity_OceanicMuseum_2F_EventScript_155E6D
+	call_if 5, SlateportCity_OceanicMuseum_2F_EventScript_155E6D
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17EDD7, 4
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17EE01, 4
-	closebutton
-	move 4, SlateportCity_OceanicMuseum_2F_Movement_155EB2
-	waitmove 0
+	closemessage
+	applymovement 4, SlateportCity_OceanicMuseum_2F_Movement_155EB2
+	waitmovement 0
 	compare FACING, 1
-	callif 1, SlateportCity_OceanicMuseum_2F_EventScript_155E78
+	call_if 1, SlateportCity_OceanicMuseum_2F_EventScript_155E78
 	compare FACING, 3
-	callif 1, SlateportCity_OceanicMuseum_2F_EventScript_155E83
+	call_if 1, SlateportCity_OceanicMuseum_2F_EventScript_155E83
 	trainerbattle 3, OPPONENT_MUSEUM_2F_GRUNT_1, 0, SlateportCity_OceanicMuseum_2F_Text_17EE4E
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17EE66, 4
-	closebutton
-	move 4, SlateportCity_OceanicMuseum_2F_Movement_155EBF
-	waitmove 0
-	move 3, SlateportCity_OceanicMuseum_2F_Movement_155EB2
-	waitmove 0
+	closemessage
+	applymovement 4, SlateportCity_OceanicMuseum_2F_Movement_155EBF
+	waitmovement 0
+	applymovement 3, SlateportCity_OceanicMuseum_2F_Movement_155EB2
+	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17EEA5, 4
-	playmusicbattle 0
+	savebgm 0
 	trainerbattle 3, OPPONENT_MUSEUM_2F_GRUNT_2, 0, SlateportCity_OceanicMuseum_2F_Text_17EED6
-	move 3, SlateportCity_OceanicMuseum_2F_Movement_155EBF
-	waitmove 0
-	move 3, SlateportCity_OceanicMuseum_2F_Movement_1A0845
-	move 4, SlateportCity_OceanicMuseum_2F_Movement_1A0841
-	waitmove 0
+	applymovement 3, SlateportCity_OceanicMuseum_2F_Movement_155EBF
+	waitmovement 0
+	applymovement 3, SlateportCity_OceanicMuseum_2F_Movement_1A0845
+	applymovement 4, SlateportCity_OceanicMuseum_2F_Movement_1A0841
+	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17EEEA, 4
-	closebutton
-	pause 35
-	reappear 2
-	move 2, SlateportCity_OceanicMuseum_2F_Movement_155EA8
-	move 4, SlateportCity_OceanicMuseum_2F_Movement_155ECE
-	waitmove 0
+	closemessage
+	delay 35
+	addobject 2
+	applymovement 2, SlateportCity_OceanicMuseum_2F_Movement_155EA8
+	applymovement 4, SlateportCity_OceanicMuseum_2F_Movement_155ECE
+	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17EF62, 4
-	move 2, SlateportCity_OceanicMuseum_2F_Movement_155EA6
-	waitmove 0
+	applymovement 2, SlateportCity_OceanicMuseum_2F_Movement_155EA6
+	waitmovement 0
 	.ifdef SAPPHIRE
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17EFC9, 4
 	.else
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17F17E, 4
 	.endif
-	closebutton
+	closemessage
 	fadescreen 1
-	disappear 2
-	disappear 3
-	disappear 4
+	removeobject 2
+	removeobject 3
+	removeobject 4
 	fadescreen 0
-	pause 30
+	delay 30
 	setflag 883
-	move 255, SlateportCity_OceanicMuseum_2F_Movement_1A0843
-	waitmove 0
+	applymovement 255, SlateportCity_OceanicMuseum_2F_Movement_1A0843
+	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17F352, 4
 	setvar 0x8004, 269
 	call SlateportCity_OceanicMuseum_2F_EventScript_1A067F
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17F433, 4
-	closebutton
-	move 1, SlateportCity_OceanicMuseum_2F_Movement_155E98
-	waitmove 0
-	playsfx 9
-	disappear 1
+	closemessage
+	applymovement 1, SlateportCity_OceanicMuseum_2F_Movement_155E98
+	waitmovement 0
+	playse 9
+	removeobject 1
 	setflag 900
 	setflag 149
 	clearflag 947
@@ -94,23 +94,23 @@ SlateportCity_OceanicMuseum_2F_EventScript_155CE6:: @ 8155CE6
 	end
 
 SlateportCity_OceanicMuseum_2F_EventScript_155E62:: @ 8155E62
-	move 255, SlateportCity_OceanicMuseum_2F_Movement_1A083F
-	waitmove 0
+	applymovement 255, SlateportCity_OceanicMuseum_2F_Movement_1A083F
+	waitmovement 0
 	return
 
 SlateportCity_OceanicMuseum_2F_EventScript_155E6D:: @ 8155E6D
-	move 1, SlateportCity_OceanicMuseum_2F_Movement_1A083F
-	waitmove 0
+	applymovement 1, SlateportCity_OceanicMuseum_2F_Movement_1A083F
+	waitmovement 0
 	return
 
 SlateportCity_OceanicMuseum_2F_EventScript_155E78:: @ 8155E78
-	move 255, SlateportCity_OceanicMuseum_2F_Movement_155E8E
-	waitmove 0
+	applymovement 255, SlateportCity_OceanicMuseum_2F_Movement_155E8E
+	waitmovement 0
 	return
 
 SlateportCity_OceanicMuseum_2F_EventScript_155E83:: @ 8155E83
-	move 255, SlateportCity_OceanicMuseum_2F_Movement_155E92
-	waitmove 0
+	applymovement 255, SlateportCity_OceanicMuseum_2F_Movement_155E92
+	waitmovement 0
 	return
 
 SlateportCity_OceanicMuseum_2F_Movement_155E8E:: @ 8155E8E
@@ -265,8 +265,8 @@ SlateportCity_OceanicMuseum_2F_EventScript_155F46:: @ 8155F46
 	lock
 	faceplayer
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17F53B, 4
-	closebutton
-	move LAST_TALKED, SlateportCity_OceanicMuseum_2F_Movement_1A083D
-	waitmove 0
+	closemessage
+	applymovement LAST_TALKED, SlateportCity_OceanicMuseum_2F_Movement_1A083D
+	waitmovement 0
 	release
 	end

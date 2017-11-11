@@ -10,7 +10,7 @@ LavaridgeTown_PokemonCenter_1F_MapScript1_153912:: @ 8153912
 LavaridgeTown_PokemonCenter_1F_EventScript_15391B:: @ 815391B
 	setvar 0x800b, 1
 	call LavaridgeTown_PokemonCenter_1F_EventScript_19FD5B
-	waittext
+	waitmessage
 	waitbutton
 	release
 	end

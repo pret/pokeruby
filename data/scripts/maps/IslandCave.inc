@@ -6,16 +6,16 @@ IslandCave_MapScripts:: @ 815EEB6
 
 IslandCave_MapScript1_15EEC6:: @ 815EEC6
 	checkflag 2145
-	callif 1, IslandCave_EventScript_15EED0
+	call_if 1, IslandCave_EventScript_15EED0
 	end
 
 IslandCave_EventScript_15EED0:: @ 815EED0
-	disappear LAST_TALKED
+	removeobject LAST_TALKED
 	return
 
 IslandCave_MapScript1_15EED4:: @ 815EED4
 	checkflag 2129
-	callif 0, IslandCave_EventScript_15EEDE
+	call_if 0, IslandCave_EventScript_15EEDE
 	end
 
 IslandCave_EventScript_15EEDE:: @ 815EEDE
@@ -31,7 +31,7 @@ IslandCave_MapScript1_15EF15:: @ 815EF15
 	setflag 2133
 	end
 
-gIslandCave_EventScript_OpenRegiiceChamber:: @ 815EF19
+S_OpenRegiceChamber:: @ 815EF19
 	setmaptile 7, 19, 554, 1
 	setmaptile 8, 19, 555, 1
 	setmaptile 9, 19, 556, 1
@@ -39,18 +39,18 @@ gIslandCave_EventScript_OpenRegiiceChamber:: @ 815EF19
 	setmaptile 8, 20, 563, 0
 	setmaptile 9, 20, 564, 1
 	special DrawWholeMapView
-	playsfx SE_BAN
+	playse SE_BAN
 	setflag 2129
 	end
 
 IslandCave_EventScript_15EF59:: @ 815EF59
 	lockall
 	checkflag 2129
-	jumpeq IslandCave_EventScript_15EF72
-	braillemsg IslandCave_Braille_1C54FC
+	goto_if_eq IslandCave_EventScript_15EF72
+	braillemessage IslandCave_Braille_1C54FC
 	special DoBrailleWait
 	waitstate
-	jump IslandCave_EventScript_15EF95
+	goto IslandCave_EventScript_15EF95
 	end
 
 IslandCave_EventScript_15EF72:: @ 815EF72
@@ -60,31 +60,31 @@ IslandCave_EventScript_15EF72:: @ 815EF72
 
 IslandCave_EventScript_15EF7C:: @ 815EF7C
 	lockall
-	braillemsg IslandCave_Braille_1C54FC
+	braillemessage IslandCave_Braille_1C54FC
 	checkflag 2129
-	jumpeq IslandCave_EventScript_15EF95
+	goto_if_eq IslandCave_EventScript_15EF95
 	special DoBrailleWait
 	waitstate
-	jump IslandCave_EventScript_15EF95
+	goto IslandCave_EventScript_15EF95
 	end
 
 IslandCave_EventScript_15EF95:: @ 815EF95
 	waitbutton
-	hidebox 0, 0, 29, 19
+	erasebox 0, 0, 29, 19
 	releaseall
 	end
 
 IslandCave_EventScript_15EF9D:: @ 815EF9D
 	lock
 	faceplayer
-	checksound
-	pokecry SPECIES_REGICE, 2
-	pause 40
+	waitse
+	playpokecry SPECIES_REGICE, 2
+	delay 40
 	waitpokecry
 	setwildbattle SPECIES_REGICE, 40, ITEM_NONE
 	setflag 936
 	setflag 2145
-	special StartBattle_Regi
+	special ScrSpecial_StartRegiBattle
 	waitstate
 	clearflag 2145
 	release
