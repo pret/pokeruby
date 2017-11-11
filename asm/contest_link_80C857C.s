@@ -12,7 +12,7 @@ sub_80C857C: @ 80C857C
 	adds r2, r0, 0
 	lsls r4, r1, 16
 	lsrs r4, 16
-	ldr r5, _080C85A8 @ =0x0201e000
+	ldr r5, _080C85A8 @ =gSharedMem + 0x1E000
 	adds r0, r5, 0
 	adds r1, r2, 0
 	adds r2, r4, 0
@@ -27,7 +27,7 @@ sub_80C857C: @ 80C857C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C85A8: .4byte 0x0201e000
+_080C85A8: .4byte gSharedMem + 0x1E000
 	thumb_func_end sub_80C857C
 
 	thumb_func_start sub_80C85AC
@@ -666,7 +666,7 @@ _080C8A64:
 	lsls r0, r1, 3
 	subs r0, r1
 	lsls r0, 2
-	ldr r1, _080C8A90 @ =0x02019266
+	ldr r1, _080C8A90 @ =gSharedMem + 0x19266
 	adds r0, r1
 	movs r1, 0x2
 	bl sub_80C857C
@@ -676,14 +676,14 @@ _080C8A64:
 	b _080C8AC2
 	.align 2, 0
 _080C8A8C: .4byte gContestPlayerMonIndex
-_080C8A90: .4byte 0x02019266
+_080C8A90: .4byte gSharedMem + 0x19266
 _080C8A94:
 	bl sub_80C85D8
 	lsls r0, 24
 	cmp r0, 0
 	beq _080C8AC2
 	ldr r1, _080C8AC8 @ =gBlockRecvBuffer
-	ldr r3, _080C8ACC @ =0x02019266
+	ldr r3, _080C8ACC @ =gSharedMem + 0x19266
 	movs r4, 0x80
 	lsls r4, 1
 	movs r2, 0x3
@@ -707,7 +707,7 @@ _080C8AC2:
 	bx r0
 	.align 2, 0
 _080C8AC8: .4byte gBlockRecvBuffer
-_080C8ACC: .4byte 0x02019266
+_080C8ACC: .4byte gSharedMem + 0x19266
 	thumb_func_end sub_80C8A38
 
 	thumb_func_start sub_80C8AD0
@@ -954,12 +954,12 @@ _080C8CE0:
 	bne _080C8CEC
 	b _080C8E16
 _080C8CEC:
-	ldr r0, _080C8CF8 @ =0x02019260
+	ldr r0, _080C8CF8 @ =gSharedMem + 0x19260
 	movs r1, 0x70
 	bl sub_80C857C
 	b _080C8DE8
 	.align 2, 0
-_080C8CF8: .4byte 0x02019260
+_080C8CF8: .4byte gSharedMem + 0x19260
 _080C8CFC:
 	bl sub_80C85D8
 	lsls r0, 24
@@ -967,7 +967,7 @@ _080C8CFC:
 	bne _080C8D08
 	b _080C8E16
 _080C8D08:
-	ldr r0, _080C8D18 @ =0x02019260
+	ldr r0, _080C8D18 @ =gSharedMem + 0x19260
 	ldr r1, _080C8D1C @ =gUnknown_0203869B
 	ldrb r1, [r1]
 	lsls r1, 8
@@ -976,7 +976,7 @@ _080C8D08:
 	movs r2, 0x70
 	b _080C8DE4
 	.align 2, 0
-_080C8D18: .4byte 0x02019260
+_080C8D18: .4byte gSharedMem + 0x19260
 _080C8D1C: .4byte gUnknown_0203869B
 _080C8D20: .4byte gBlockRecvBuffer
 _080C8D24:
@@ -1002,18 +1002,18 @@ _080C8D46:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080C8E16
-	ldr r0, _080C8D5C @ =0x020192d0
+	ldr r0, _080C8D5C @ =gSharedMem + 0x192D0
 	movs r1, 0x14
 	bl sub_80C857C
 	b _080C8DE8
 	.align 2, 0
-_080C8D5C: .4byte 0x020192d0
+_080C8D5C: .4byte gSharedMem + 0x192D0
 _080C8D60:
 	bl sub_80C85D8
 	lsls r0, 24
 	cmp r0, 0
 	beq _080C8E16
-	ldr r0, _080C8D7C @ =0x020192d0
+	ldr r0, _080C8D7C @ =gSharedMem + 0x192D0
 	ldr r1, _080C8D80 @ =gUnknown_0203869B
 	ldrb r1, [r1]
 	lsls r1, 8
@@ -1022,7 +1022,7 @@ _080C8D60:
 	movs r2, 0x14
 	b _080C8DE4
 	.align 2, 0
-_080C8D7C: .4byte 0x020192d0
+_080C8D7C: .4byte gSharedMem + 0x192D0
 _080C8D80: .4byte gUnknown_0203869B
 _080C8D84: .4byte gBlockRecvBuffer
 _080C8D88:
@@ -1030,21 +1030,21 @@ _080C8D88:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080C8E16
-	ldr r0, _080C8D9C @ =0x02019328
+	ldr r0, _080C8D9C @ =gSharedMem + 0x19328
 	movs r1, 0x4
 	bl sub_80C857C
 	b _080C8DE8
 	.align 2, 0
-_080C8D9C: .4byte 0x02019328
+_080C8D9C: .4byte gSharedMem + 0x19328
 _080C8DA0:
 	bl sub_80C85D8
 	lsls r0, 24
 	cmp r0, 0
 	beq _080C8E16
-	ldr r0, _080C8DB0 @ =0x02019328
+	ldr r0, _080C8DB0 @ =gSharedMem + 0x19328
 	b _080C8DD8
 	.align 2, 0
-_080C8DB0: .4byte 0x02019328
+_080C8DB0: .4byte gSharedMem + 0x19328
 _080C8DB4:
 	bl sub_8007ECC
 	lsls r0, 24

@@ -15,6 +15,7 @@
 #include "task.h"
 #include "text.h"
 #include "unknown_task.h"
+#include "ewram.h"
 
 extern u8 gUnknown_0203856C;
 extern u8 gUnknown_0203857D[][64];
@@ -45,7 +46,6 @@ extern u8 gUnknown_083C9282[];
 extern const u8 gUnknown_083C928E[][2];
 extern u8 gUnknown_083C9296[];
 extern u8 gUnknown_083C92A8[];
-extern u8 unk_2000000[];
 extern u8 gMatsudaDebugMenu_GoBackText[];
 extern u8 gMatsudaDebugMenu_BattlePointsText[];
 extern u8 gMatsudaDebugMenu_StartText[];
@@ -414,14 +414,14 @@ void sub_80AA280(u8 var) // no?
     u8 i;
 
     FillWindowRect_DefaultPalette(&gMenuWindow, 0, 0, 0, 0x1E, 3);
-    StringCopy(unk_2000000, gMatsudaDebugMenu_StartText);
-    StringAppend(unk_2000000, &gUnknown_0203857D[var][0]);
+    StringCopy(gSharedMem, gMatsudaDebugMenu_StartText);
+    StringAppend(gSharedMem, &gUnknown_0203857D[var][0]);
 
     for (i = 0; i < 4; i++)
     {
         if (var == i)
         {
-            sub_8003460(&gMenuWindow, unk_2000000, (10 * i + 2), gUnknown_083C926E[i][0], gUnknown_083C926E[i][1]);
+            sub_8003460(&gMenuWindow, gSharedMem, (10 * i + 2), gUnknown_083C926E[i][0], gUnknown_083C926E[i][1]);
         }
         else
         {
@@ -433,38 +433,38 @@ void sub_80AA280(u8 var) // no?
 
 static void sub_80AA340(u8 var)
 {
-    ConvertIntToDecimalStringN(unk_2000000, gContestMons[var].cool, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    sub_8003460(&gMenuWindow, unk_2000000, 0x66, gUnknown_083C9282[0], gUnknown_083C9282[1]);
+    ConvertIntToDecimalStringN(gSharedMem, gContestMons[var].cool, STR_CONV_MODE_RIGHT_ALIGN, 3);
+    sub_8003460(&gMenuWindow, gSharedMem, 0x66, gUnknown_083C9282[0], gUnknown_083C9282[1]);
 }
 
 static void sub_80AA388(u8 var)
 {
-    ConvertIntToDecimalStringN(unk_2000000, gContestMons[var].cute, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    sub_8003460(&gMenuWindow, unk_2000000, 0x6C, gUnknown_083C9282[2], gUnknown_083C9282[3]);
+    ConvertIntToDecimalStringN(gSharedMem, gContestMons[var].cute, STR_CONV_MODE_RIGHT_ALIGN, 3);
+    sub_8003460(&gMenuWindow, gSharedMem, 0x6C, gUnknown_083C9282[2], gUnknown_083C9282[3]);
 }
 
 static void sub_80AA3D0(u8 var)
 {
-    ConvertIntToDecimalStringN(unk_2000000, gContestMons[var].beauty, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    sub_8003460(&gMenuWindow, unk_2000000, 0x72, gUnknown_083C9282[4], gUnknown_083C9282[5]);
+    ConvertIntToDecimalStringN(gSharedMem, gContestMons[var].beauty, STR_CONV_MODE_RIGHT_ALIGN, 3);
+    sub_8003460(&gMenuWindow, gSharedMem, 0x72, gUnknown_083C9282[4], gUnknown_083C9282[5]);
 }
 
 static void sub_80AA418(u8 var)
 {
-    ConvertIntToDecimalStringN(unk_2000000, gContestMons[var].smart, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    sub_8003460(&gMenuWindow, unk_2000000, 0x78, gUnknown_083C9282[6], gUnknown_083C9282[7]);
+    ConvertIntToDecimalStringN(gSharedMem, gContestMons[var].smart, STR_CONV_MODE_RIGHT_ALIGN, 3);
+    sub_8003460(&gMenuWindow, gSharedMem, 0x78, gUnknown_083C9282[6], gUnknown_083C9282[7]);
 }
 
 static void sub_80AA460(u8 var)
 {
-    ConvertIntToDecimalStringN(unk_2000000, gContestMons[var].tough, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    sub_8003460(&gMenuWindow, unk_2000000, 0x7E, gUnknown_083C9282[8], gUnknown_083C9282[9]);
+    ConvertIntToDecimalStringN(gSharedMem, gContestMons[var].tough, STR_CONV_MODE_RIGHT_ALIGN, 3);
+    sub_8003460(&gMenuWindow, gSharedMem, 0x7E, gUnknown_083C9282[8], gUnknown_083C9282[9]);
 }
 
 static void sub_80AA4A8(u8 var)
 {
-    ConvertIntToDecimalStringN(unk_2000000, gContestMons[var].sheen, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    sub_8003460(&gMenuWindow, unk_2000000, 0x84, gUnknown_083C9282[10], gUnknown_083C9282[11]);
+    ConvertIntToDecimalStringN(gSharedMem, gContestMons[var].sheen, STR_CONV_MODE_RIGHT_ALIGN, 3);
+    sub_8003460(&gMenuWindow, gSharedMem, 0x84, gUnknown_083C9282[10], gUnknown_083C9282[11]);
 }
 
 static void sub_80AA4F0(u8 var1, u8 var2)
@@ -489,8 +489,8 @@ static void sub_80AA614(u8 var1, u8 var2)
 {
     u16 var = sub_80AE770(var1, var2);
 
-    ConvertIntToDecimalStringN(unk_2000000, var, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    sub_8003460(&gMenuWindow, unk_2000000, 0xE2, 3, 0xC);
+    ConvertIntToDecimalStringN(gSharedMem, var, STR_CONV_MODE_RIGHT_ALIGN, 3);
+    sub_8003460(&gMenuWindow, gSharedMem, 0xE2, 3, 0xC);
 }
 
 void sub_80AA658(u8 var)
@@ -516,10 +516,10 @@ void SetDebugMonForContest(void)
     SetMonData(&gPlayerParty[0], MON_DATA_SMART, &gContestMons[gContestPlayerMonIndex].smart);
     SetMonData(&gPlayerParty[0], MON_DATA_TOUGH, &gContestMons[gContestPlayerMonIndex].tough);
     SetMonData(&gPlayerParty[0], MON_DATA_SHEEN, &gContestMons[gContestPlayerMonIndex].sheen);
-    SetMonData(&gPlayerParty[0], MON_DATA_MOVE1, (const u8 *) &gContestMons[gContestPlayerMonIndex].moves[0]);
-    SetMonData(&gPlayerParty[0], MON_DATA_MOVE2, (const u8 *) &gContestMons[gContestPlayerMonIndex].moves[1]);
-    SetMonData(&gPlayerParty[0], MON_DATA_MOVE3, (const u8 *) &gContestMons[gContestPlayerMonIndex].moves[2]);
-    SetMonData(&gPlayerParty[0], MON_DATA_MOVE4, (const u8 *) &gContestMons[gContestPlayerMonIndex].moves[3]);
+    SetMonData(&gPlayerParty[0], MON_DATA_MOVE1, &gContestMons[gContestPlayerMonIndex].moves[0]);
+    SetMonData(&gPlayerParty[0], MON_DATA_MOVE2, &gContestMons[gContestPlayerMonIndex].moves[1]);
+    SetMonData(&gPlayerParty[0], MON_DATA_MOVE3, &gContestMons[gContestPlayerMonIndex].moves[2]);
+    SetMonData(&gPlayerParty[0], MON_DATA_MOVE4, &gContestMons[gContestPlayerMonIndex].moves[3]);
 }
 
 void sub_80AA754(struct Sprite *sprite)
@@ -739,7 +739,7 @@ void sub_80AACC4(void)
     {
         SetDebugMonForContest();
         if (!(gIsLinkContest & 1))
-            sub_80AE82C(unk_2000000[0]);
+            sub_80AE82C(eMatsudaDebugVar);
         SetMainCallback2(sub_80AB47C);
     }
 }
@@ -748,7 +748,7 @@ void sub_80AAD08(struct Sprite *sprite, s8 var2)
 {
     if (var2 == 1)
     {
-        unk_2000000[0] = sprite->data3;
+        eMatsudaDebugVar = sprite->data3;
         SetMainCallback2(sub_80AACC4);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
     }

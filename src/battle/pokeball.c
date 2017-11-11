@@ -14,6 +14,7 @@
 #include "task.h"
 #include "trig.h"
 #include "util.h"
+#include "ewram.h"
 
 extern struct MusicPlayerInfo gMPlay_BGM;
 extern u16 gBattleTypeFlags;

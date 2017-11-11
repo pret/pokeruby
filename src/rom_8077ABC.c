@@ -12,6 +12,7 @@
 #include "task.h"
 #include "trig.h"
 #include "util.h"
+#include "ewram.h"
 
 #define GET_UNOWN_LETTER(personality) ((\
       (((personality & 0x03000000) >> 24) << 6) \
@@ -94,8 +95,6 @@ extern struct OamData gOamData_837DF9C[];
 extern const union AnimCmd *const gDummySpriteAnimTable[];
 extern const union AffineAnimCmd *const gDummySpriteAffineAnimTable[];
 
-extern struct Struct_unk_2019348 unk_2019348;
-extern struct TransformStatus gTransformStatuses[];
 extern u16 gBattleMonPartyPositions[];
 extern u16 gBattleTypeFlags;
 extern u32 gTransformPersonalities[NUM_BATTLE_SLOTS];
@@ -187,7 +186,7 @@ u8 sub_8077ABC(u8 slot, u8 a2) {
     u16 species;
     struct TransformStatus *transform;
 
-    if (IsContest()) {
+    if (NotInBattle()) {
         if (a2 == 3 && slot == 3) {
             a2 = 1;
         }
@@ -203,22 +202,22 @@ u8 sub_8077ABC(u8 slot, u8 a2) {
     case 3:
     case 4:
     default:
-        if (IsContest()) {
-            if (unk_2019348.field_4 & 1) {
-                species = unk_2019348.field_2;
+        if (NotInBattle()) {
+            if (ewram19348.unk4 & 1) {
+                species = ewram19348.unk2;
             } else {
-                species = unk_2019348.field_0;
+                species = ewram19348.unk0;
             }
         } else {
             if (GetBankSide(slot)) {
-                transform = &gTransformStatuses[slot];
+                transform = &eTransformStatuses[slot];
                 if (!transform->species) {
                     species = GetMonData(&gEnemyParty[gBattleMonPartyPositions[slot]], MON_DATA_SPECIES);
                 } else {
                     species = transform->species;
                 }
             } else {
-                transform = &gTransformStatuses[slot];
+                transform = &eTransformStatuses[slot];
                 if (!transform->species) {
                     species = GetMonData(&gPlayerParty[gBattleMonPartyPositions[slot]], MON_DATA_SPECIES);
                 } else {
@@ -243,16 +242,16 @@ u8 sub_8077BFC(u8 slot, u16 species) {
     u8 ret;
     u16 var;
 
-    if (!GetBankSide(slot) || IsContest()) {
+    if (!GetBankSide(slot) || NotInBattle()) {
         if (species == SPECIES_UNOWN) {
-            if (IsContest()) {
-                if (unk_2019348.field_4 & 1) {
-                    personality = unk_2019348.field_10;
+            if (NotInBattle()) {
+                if (ewram19348.unk4 & 1) {
+                    personality = ewram19348.unk10;
                 } else {
-                    personality = unk_2019348.field_8;
+                    personality = ewram19348.unk8;
                 }
             } else {
-                transform = &gTransformStatuses[slot];
+                transform = &eTransformStatuses[slot];
                 if (!transform->species) {
                     personality = GetMonData(&gPlayerParty[gBattleMonPartyPositions[slot]], MON_DATA_PERSONALITY);
                 } else {
@@ -275,7 +274,7 @@ u8 sub_8077BFC(u8 slot, u16 species) {
         }
     } else {
         if (species == SPECIES_UNOWN) {
-            transform = &gTransformStatuses[slot];
+            transform = &eTransformStatuses[slot];
             if (!transform->species) {
                 personality = GetMonData(&gEnemyParty[gBattleMonPartyPositions[slot]], MON_DATA_PERSONALITY);
             } else {
@@ -302,7 +301,7 @@ u8 sub_8077BFC(u8 slot, u16 species) {
 u8 sub_8077DD8(u8 slot, u16 species) {
     u8 ret = 0;
     if (GetBankSide(slot) == 1) {
-        if (!IsContest()) {
+        if (!NotInBattle()) {
             if (species == SPECIES_CASTFORM) {
                 ret = gCastformElevations[gBattleMonForms[slot]];
             } else if (species > NUM_SPECIES) {
@@ -318,7 +317,7 @@ u8 sub_8077DD8(u8 slot, u16 species) {
 u8 sub_8077E44(u8 slot, u16 species, u8 a3) {
     u16 offset;
     u8 y;
-    if (GetBankSide(slot) == 0 || IsContest()) {
+    if (GetBankSide(slot) == 0 || NotInBattle()) {
         offset = sub_8077BFC(slot, species);
     } else {
         offset = sub_8077BFC(slot, species);
@@ -338,14 +337,14 @@ u8 sub_8077EE4(u8 slot, u8 a2) {
     u16 species;
     struct TransformStatus *transform;
     if (a2 == 3 || a2 == 4) {
-        if (IsContest()) {
-            if (unk_2019348.field_4 & 1) {
-                species = unk_2019348.field_2;
+        if (NotInBattle()) {
+            if (ewram19348.unk4 & 1) {
+                species = ewram19348.unk2;
             } else {
-                species = unk_2019348.field_0;
+                species = ewram19348.unk0;
             }
         } else {
-            transform = &gTransformStatuses[slot];
+            transform = &eTransformStatuses[slot];
             if (!transform->species) {
                 species = gUnknown_0202F7CA[slot];
             } else {
@@ -381,16 +380,16 @@ u8 sub_8077FC0(u8 slot) {
     u8 r6;
     struct TransformStatus *transform;
     r6 = sub_8077ABC(slot, 1);
-    if (!IsContest()) {
+    if (!NotInBattle()) {
         if (GetBankSide(slot)) {
-            transform = &gTransformStatuses[slot];
+            transform = &eTransformStatuses[slot];
             if (!transform->species) {
                 var = GetMonData(&gEnemyParty[gBattleMonPartyPositions[slot]], MON_DATA_SPECIES);
             } else {
                 var = transform->species;
             }
         } else {
-            transform = &gTransformStatuses[slot];
+            transform = &eTransformStatuses[slot];
             if (!transform->species) {
                 var = GetMonData(&gPlayerParty[gBattleMonPartyPositions[slot]], MON_DATA_SPECIES);
             } else {
@@ -752,7 +751,7 @@ u8 GetBankByPlayerAI(u8 slot) {
 }
 
 bool8 AnimBankSpriteExists(u8 slot) {
-    if (IsContest()) {
+    if (NotInBattle()) {
         if (gBattleAnimBankAttacker == slot) {
             return TRUE;
         }
@@ -782,7 +781,7 @@ bool8 IsDoubleBattle() {
 }
 
 void sub_8078914(struct Struct_sub_8078914 *unk) {
-    if (IsContest()) {
+    if (NotInBattle()) {
         unk->field_0 = (u8 *)0x6008000;
         unk->field_4 = (u8 *)0x600f000;
         unk->field_8 = 0xe;
@@ -794,7 +793,7 @@ void sub_8078914(struct Struct_sub_8078914 *unk) {
 }
 
 void sub_8078954(struct Struct_sub_8078914 *unk) {
-    if (IsContest()) {
+    if (NotInBattle()) {
         unk->field_0 = (u8 *)0x6008000;
         unk->field_4 = (u8 *)0x600f000;
         unk->field_8 = 0xe;
@@ -810,7 +809,7 @@ void sub_8078954(struct Struct_sub_8078914 *unk) {
 }
 
 u8 sub_80789BC() {
-    if (IsContest()) {
+    if (NotInBattle()) {
         return 1;
     }
     return 2;
@@ -820,7 +819,7 @@ void sub_80789D4(bool8 a1) {
     if (!a1) {
         BG3CNT.size = 0;
         BG3CNT.overflow = 1;
-    } else if (IsContest()) {
+    } else if (NotInBattle()) {
         BG3CNT.size = 0;
         BG3CNT.overflow = 1;
     } else {
@@ -1025,7 +1024,7 @@ void obj_id_set_rotscale(u8 sprite, s16 xScale, s16 yScale, u16 rotation) {
 }
 
 bool8 sub_8078E38() {
-    if (IsContest()) {
+    if (NotInBattle()) {
         if (gSprites[GetAnimBankSpriteId(0)].data2 == 0xc9 /* XXX SPECIES_UNOWN? */) {
             return FALSE;
         }
@@ -1035,16 +1034,14 @@ bool8 sub_8078E38() {
 }
 
 void sub_8078E70(u8 sprite, u8 a2) {
-    struct Struct_2017810 *unk;
     u8 r7 = gSprites[sprite].data0;
-    if (IsContest() || IsAnimBankSpriteVisible(r7)) {
+    if (NotInBattle() || IsAnimBankSpriteVisible(r7)) {
         gSprites[sprite].invisible = FALSE;
     }
     gSprites[sprite].oam.objMode = a2;
     gSprites[sprite].affineAnimPaused = TRUE;
-    if (!IsContest() && !gSprites[sprite].oam.affineMode) {
-        unk = &unk_2017810[r7];
-        gSprites[sprite].oam.matrixNum = unk->field_6;
+    if (!NotInBattle() && !gSprites[sprite].oam.affineMode) {
+        gSprites[sprite].oam.matrixNum = ewram17810[r7].unk6;
     }
     gSprites[sprite].oam.affineMode = 3;
     CalcCenterToCornerVec(&gSprites[sprite], gSprites[sprite].oam.shape, gSprites[sprite].oam.size, gSprites[sprite].oam.affineMode);
@@ -1135,7 +1132,7 @@ u32 sub_80791A8(u8 a1, u8 a2, u8 a3, u8 a4, u8 a5, u8 a6, u8 a7) {
     u32 var = 0;
     u32 shift;
     if (a1) {
-        if (!IsContest()) {
+        if (!NotInBattle()) {
             var = 0xe;
         } else {
             var = 1 << sub_80789BC();
@@ -1162,14 +1159,14 @@ u32 sub_80791A8(u8 a1, u8 a2, u8 a3, u8 a4, u8 a5, u8 a6, u8 a7) {
         }
     }
     if (a6) {
-        if (!IsContest()) {
+        if (!NotInBattle()) {
             var |= 0x100;
         } else {
             var |= 0x4000;
         }
     }
     if (a7) {
-        if (!IsContest()) {
+        if (!NotInBattle()) {
             var |= 0x200;
         }
     }
@@ -1179,7 +1176,7 @@ u32 sub_80791A8(u8 a1, u8 a2, u8 a3, u8 a4, u8 a5, u8 a6, u8 a7) {
 u32 sub_80792C0(u8 a1, u8 a2, u8 a3, u8 a4) {
     u32 var = 0;
     u32 shift;
-    if (IsContest()) {
+    if (NotInBattle()) {
         if (a1) {
             var |= 1 << 18;
             return var;
@@ -1540,12 +1537,12 @@ u16 sub_8079B10(u8 sprite) {
     u16 i;
     for (i = 0; i < (sizeof(gBattleMonSprites) / sizeof(u8)); i++) {
         if (gBattleMonSprites[i] == sprite) {
-            if (IsContest()) {
-                species = unk_2019348.field_0;
+            if (NotInBattle()) {
+                species = ewram19348.unk0;
                 return gMonBackPicCoords[species].y_offset;
             } else {
                 if (!GetBankSide(i)) {
-                    transform = &gTransformStatuses[slot];
+                    transform = &eTransformStatuses[slot];
                     if (!transform->species) {
                         species = GetMonData(&gPlayerParty[gBattleMonPartyPositions[i]], MON_DATA_SPECIES);
                     } else {
@@ -1553,7 +1550,7 @@ u16 sub_8079B10(u8 sprite) {
                     }
                     return gMonBackPicCoords[species].y_offset;
                 } else {
-                    transform = &gTransformStatuses[slot];
+                    transform = &eTransformStatuses[slot];
                     if (!transform->species) {
                         species = GetMonData(&gEnemyParty[gBattleMonPartyPositions[i]], MON_DATA_SPECIES);
                     } else {
@@ -1653,7 +1650,7 @@ void sub_8079E24() {
 u8 sub_8079E90(u8 slot) {
     u8 status;
     u8 ret;
-    if (IsContest()) {
+    if (NotInBattle()) {
         if (slot == 2) {
             return 30;
         } else {
@@ -1676,7 +1673,7 @@ u8 sub_8079E90(u8 slot) {
 
 u8 sub_8079ED4(u8 slot) {
     u8 status = GetBankIdentity(slot);
-    if (IsContest()) {
+    if (NotInBattle()) {
         return 2;
     }
     if (status == 0 || status == 3) {
@@ -1688,7 +1685,7 @@ u8 sub_8079ED4(u8 slot) {
 
 u8 GetBankIdentity_permutated(u8 slot) {
     u8 status;
-    if (!IsContest()) {
+    if (!NotInBattle()) {
         status = GetBankIdentity(slot);
         if (status == 0 || status == 3) {
             return 2;
@@ -1744,7 +1741,7 @@ u8 sub_8079F44(u16 species, u8 isBackpic, u8 a3, s16 a4, s16 a5, u8 a6, u32 a7, 
     } else {
         sprite = CreateSprite(&gSpriteTemplate_837F5B0[a3], a4, a5 + gMonBackPicCoords[species].y_offset, a6);
     }
-    if (IsContest()) {
+    if (NotInBattle()) {
         gSprites[sprite].affineAnims = &gSpriteAffineAnimTable_81E7C18;
         StartSpriteAffineAnim(&gSprites[sprite], 0);
     }
@@ -1763,13 +1760,13 @@ int sub_807A100(u8 slot, u8 a2) {
     int ret;
     const struct MonCoords *coords;
     struct TransformStatus *transform;
-    if (IsContest()) {
-        if (unk_2019348.field_4 & 1) {
-            species = unk_2019348.field_2;
-            personality = unk_2019348.field_10;
+    if (NotInBattle()) {
+        if (ewram19348.unk4 & 1) {
+            species = ewram19348.unk2;
+            personality = ewram19348.unk10;
         } else {
-            species = unk_2019348.field_0;
-            personality = unk_2019348.field_8;
+            species = ewram19348.unk0;
+            personality = ewram19348.unk8;
         }
         if (species == SPECIES_UNOWN) {
             letter = GET_UNOWN_LETTER(personality);
@@ -1788,7 +1785,7 @@ int sub_807A100(u8 slot, u8 a2) {
         }
     } else {
         if (!GetBankSide(slot)) {
-            transform = &gTransformStatuses[slot];
+            transform = &eTransformStatuses[slot];
             if (!transform->species) {
                 species = GetMonData(&gPlayerParty[gBattleMonPartyPositions[slot]], MON_DATA_SPECIES);
                 personality = GetMonData(&gPlayerParty[gBattleMonPartyPositions[slot]], MON_DATA_PERSONALITY);
@@ -1810,7 +1807,7 @@ int sub_807A100(u8 slot, u8 a2) {
                 coords = &gMonBackPicCoords[species];
             }
         } else {
-            transform = &gTransformStatuses[slot];
+            transform = &eTransformStatuses[slot];
             if (!transform->species) {
                 species = GetMonData(&gEnemyParty[gBattleMonPartyPositions[slot]], MON_DATA_SPECIES);
                 personality = GetMonData(&gEnemyParty[gBattleMonPartyPositions[slot]], MON_DATA_PERSONALITY);
@@ -1870,7 +1867,7 @@ void sub_807A3FC(u8 slot, u8 a2, s16 *a3, s16 *a4) {
     }
     v3 = sub_8077ABC(slot, v1);
     v4 = sub_8077ABC(slot, v2);
-    if (IsDoubleBattle() && !IsContest()) {
+    if (IsDoubleBattle() && !NotInBattle()) {
         v5 = sub_8077ABC(slot ^ 2, v1);
         v6 = sub_8077ABC(slot ^ 2, v2);
     } else {

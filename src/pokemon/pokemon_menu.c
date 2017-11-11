@@ -29,6 +29,7 @@
 #include "fieldmap.h"
 #include "item_menu.h"
 #include "player_pc.h"
+#include "ewram.h"
 
 /*
 Pokemon menu:
@@ -49,7 +50,6 @@ extern u8 gUnknown_0202E8F5;
 extern u8 gUnknown_0202E8F6;
 extern u8 gUnknown_02038561;
 extern u16 gUnknown_0202E8F8;
-extern u8 ewram[];
 extern void (*gUnknown_03004AE4)(u8 taskID, u16 itemID, TaskFunc func);
 extern TaskFunc gUnknown_03005CF0;
 

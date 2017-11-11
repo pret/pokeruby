@@ -8,7 +8,7 @@
 #include "decoration.h"
 #include "decoration_inventory.h"
 
-#define DECOR_INV(ptr) {.items = (u8 *)&ptr, .size = sizeof ptr}
+#define DECOR_INV(ptr) {.items = ptr, .size = sizeof ptr}
 
 struct DecorationInventory const gDecorationInventories[] = {
     DECOR_INV(gSaveBlock1.decorDesk),

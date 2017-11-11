@@ -22,6 +22,7 @@
 #include "string_util.h"
 #include "text.h"
 #include "util.h"
+#include "ewram.h"
 
 extern u8 gPlayerPartyCount;
 extern u8 gEnemyPartyCount;
@@ -68,7 +69,7 @@ bool8 HealStatusConditions(struct Pokemon *mon, u32 unused, u32 healMask, u8 bat
     if (status & healMask)
     {
         status &= ~healMask;
-        SetMonData(mon, MON_DATA_STATUS, (u8 *)&status);
+        SetMonData(mon, MON_DATA_STATUS, &status);
         if (gMain.inBattle && battleId != 4)
             gBattleMons[battleId].status1 &= ~healMask;
         return FALSE;
@@ -203,7 +204,7 @@ void sub_803F324(int stat)
 u8 *sub_803F378(u16 itemId)
 {
     int i;
-    u8 *itemEffect;
+    const u8 *itemEffect;
 
     if (itemId == ITEM_ENIGMA_BERRY)
     {
@@ -218,7 +219,7 @@ u8 *sub_803F378(u16 itemId)
     }
     else
     {
-        itemEffect = (u8 *) gItemEffectTable[itemId - 13];
+        itemEffect = gItemEffectTable[itemId - 13];
     }
 
     gStringBank = gBankInMenu;
@@ -355,7 +356,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
                 if (gEvolutionTable[species].evolutions[i].param == heldItem)
                 {
                     heldItem = 0;
-                    SetMonData(mon, MON_DATA_HELD_ITEM, (u8 *)&heldItem);
+                    SetMonData(mon, MON_DATA_HELD_ITEM, &heldItem);
                     targetSpecies = gEvolutionTable[species].evolutions[i].targetSpecies;
                 }
                 break;
@@ -695,7 +696,7 @@ void AdjustFriendship(struct Pokemon *mon, u8 event)
                 friendship = 0;
             if (friendship > 255)
                 friendship = 255;
-            SetMonData(mon, MON_DATA_FRIENDSHIP, (u8 *)&friendship);
+            SetMonData(mon, MON_DATA_FRIENDSHIP, &friendship);
         }
     }
 }
@@ -1299,16 +1300,16 @@ void SetWildMonHeldItem(void)
         u16 species = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, 0);
         if (gBaseStats[species].item1 == gBaseStats[species].item2)
         {
-            SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, (u8 *)&gBaseStats[species].item1);
+            SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &gBaseStats[species].item1);
             return;
         }
 
         if (rnd > 44)
         {
             if (rnd <= 94)
-                SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, (u8 *)&gBaseStats[species].item1);
+                SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &gBaseStats[species].item1);
             else
-                SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, (u8 *)&gBaseStats[species].item2);
+                SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &gBaseStats[species].item2);
         }
     }
 }

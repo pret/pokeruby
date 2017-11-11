@@ -17,6 +17,7 @@
 #include "text.h"
 #include "trig.h"
 #include "util.h"
+#include "ewram.h"
 
 #ifdef ENGLISH
 #define COLUMN_COUNT 9
@@ -25,10 +26,6 @@
 #endif
 
 extern u16 gKeyRepeatStartDelay;
-
-extern u8 unk_2000000[];
-
-#define namingScreenData (*(struct NamingScreenData *)(unk_2000000))
 
 extern u8 CreateMonIcon(u16 species, void (*callback)(struct Sprite *), s16 x, s16 y, u8 subpriority, u32 personality);
 

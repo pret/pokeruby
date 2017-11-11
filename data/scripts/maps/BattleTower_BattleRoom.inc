@@ -17,7 +17,7 @@ BattleTower_BattleRoom_EventScript_1608FA:: @ 81608FA
 	applymovement 1, BattleTower_BattleRoom_Movement_160AC0
 	waitmovement 0
 	special PrintBattleTowerTrainerGreeting
-	msgbox 0x20234cc, 4
+	msgbox gStringVar4, 4
 	waitmessage
 	closemessage
 	special ScrSpecial_HealPlayerParty

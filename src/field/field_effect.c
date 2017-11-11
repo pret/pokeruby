@@ -37,7 +37,7 @@ const u16 gFieldEffectObjectPalette4[16] = INCBIN_U16("graphics/field_effect_obj
 const u32 gSpriteImage_839E474[] = INCBIN_U32("graphics/misc/pokecenter_monitor/0.4bpp");
 const u32 gSpriteImage_839E534[] = INCBIN_U32("graphics/misc/pokecenter_monitor/1.4bpp");
 const u32 gSpriteImage_839E5F4[] = INCBIN_U32("graphics/misc/big_hof_monitor.4bpp");
-const u32 gSpriteImage_839E7F4[] = INCBIN_U32("graphics/misc/small_hof_monitor.4bpp");
+const u8 gSpriteImage_839E7F4[] = INCBIN_U8("graphics/misc/small_hof_monitor.4bpp");
 const u16 gFieldEffectObjectPalette5[16] = INCBIN_U16("graphics/field_effect_objects/palettes/05.gbapal");
 
 // Graphics for the lights streaking past your Pokemon when it uses a field move.
@@ -110,7 +110,7 @@ const struct SpriteFrameImage gSpriteImageTable_839F170[] = {
 };
 
 const struct SpriteFrameImage gSpriteImageTable_839F178[] = {
-    {.data = (u8 *)gSpriteImage_839E7F4, .size = 0x200} // the macro breaks down here
+    {.data = gSpriteImage_839E7F4, .size = 0x200} // the macro breaks down here
 };
 
 const struct Subsprite Unknown_39F180[] = {

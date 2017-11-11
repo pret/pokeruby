@@ -9,8 +9,6 @@ SECTIONS {
     ewram (NOLOAD) :
     ALIGN(4)
     {
-        . = 0x20000;
-
 <EWRAM>
 
         . = 0x40000;
@@ -362,6 +360,7 @@ SECTIONS {
         src/engine/task.o(.rodata);
         src/battle/battle_anim_807B69C.o(.rodata);
         src/scene/title_screen.o(.rodata);
+        src/field/field_weather.o(.rodata);
         data/field_weather.o(.rodata);
         src/field/field_screen_effect.o(.rodata);
         src/battle/battle_setup.o(.rodata);
@@ -452,7 +451,6 @@ SECTIONS {
         data/battle_anim_813F0F4.o(.rodata);
         src/scene/hall_of_fame.o(.rodata);
         src/scene/credits.o(.rodata);
-        data/credits.o(.rodata);
         src/field/lottery_corner.o(.rodata);
         src/field/diploma.o(.rodata);
         src/strings.o(.rodata);

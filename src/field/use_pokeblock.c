@@ -22,10 +22,10 @@
 
 #ifdef GERMAN
 extern const u16 ConditionUpDownPalette[16];
-extern const u32 ConditionUpDownTiles[0x80];
+extern const u8 ConditionUpDownTiles[0x200];
 #else
 const u16 ConditionUpDownPalette[] = INCBIN_U16("graphics/misc/condition_up_down.gbapal");
-const u32 ConditionUpDownTiles[] = INCBIN_U32("graphics/misc/condition_up_down.4bpp");
+const u8 ConditionUpDownTiles[] = INCBIN_U8("graphics/misc/condition_up_down.4bpp");
 #endif
 
 static const u32 sContestStatsMonData[] = {
@@ -49,7 +49,7 @@ static const u8 *const sContextStatNames[] = {
 };
 
 static const struct SpriteSheet gSpriteSheet_ConditionUpDown = {
-    (u8 *)ConditionUpDownTiles,
+    ConditionUpDownTiles,
     sizeof ConditionUpDownTiles,
     GFX_TAG_CONDITIONUPDOWN
 };

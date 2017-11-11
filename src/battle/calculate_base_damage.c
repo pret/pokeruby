@@ -11,8 +11,8 @@
 #include "species.h"
 #include "moves.h"
 #include "battle_move_effects.h"
+#include "ewram.h"
 
-extern u32 dword_2017100[];
 extern u16 gBattleTypeFlags;
 extern struct BattlePokemon gBattleMons[4];
 extern u16 gCurrentMove;
@@ -301,7 +301,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         }
 
         // flash fire triggered
-        if ((dword_2017100[bankAtk] & 1) && type == TYPE_FIRE)
+        if ((eFlashFireArr.arr[bankAtk] & 1) && type == TYPE_FIRE)
             damage = (15 * damage) / 10;
     }
 

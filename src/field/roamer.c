@@ -173,13 +173,13 @@ void CreateRoamerMonInstance(void)
     struct Pokemon *mon = &gEnemyParty[0];
     struct Roamer *roamer = &gSaveBlock1.roamer;
     CreateMonWithIVsPersonality(mon, roamer->species, roamer->level, roamer->ivs, roamer->personality);
-    SetMonData(mon, MON_DATA_STATUS, (u8 *)&roamer->status);
-    SetMonData(mon, MON_DATA_HP, (u8 *)&roamer->hp);
-    SetMonData(mon, MON_DATA_COOL, (u8 *)&roamer->cool);
-    SetMonData(mon, MON_DATA_BEAUTY, (u8 *)&roamer->beauty);
-    SetMonData(mon, MON_DATA_CUTE, (u8 *)&roamer->cute);
-    SetMonData(mon, MON_DATA_SMART, (u8 *)&roamer->smart);
-    SetMonData(mon, MON_DATA_TOUGH, (u8 *)&roamer->tough);
+    SetMonData(mon, MON_DATA_STATUS, &roamer->status);
+    SetMonData(mon, MON_DATA_HP, &roamer->hp);
+    SetMonData(mon, MON_DATA_COOL, &roamer->cool);
+    SetMonData(mon, MON_DATA_BEAUTY, &roamer->beauty);
+    SetMonData(mon, MON_DATA_CUTE, &roamer->cute);
+    SetMonData(mon, MON_DATA_SMART, &roamer->smart);
+    SetMonData(mon, MON_DATA_TOUGH, &roamer->tough);
 }
 
 bool8 TryStartRoamerEncounter(void)

@@ -7,6 +7,7 @@
 #include "sprite.h"
 #include "task.h"
 #include "trig.h"
+#include "ewram.h"
 
 extern u8 gBattleAnimBankAttacker;
 extern u8 gBattleAnimBankTarget;
@@ -183,7 +184,7 @@ void sub_807B920(u8 taskId)
     s16 y = sub_8077ABC(gBattleAnimBankTarget, 3) - 36;
     u8 spriteId;
 
-    if (IsContest())
+    if (NotInBattle())
         x -= 6;
     REG_BLDCNT = 0x3F40;
     REG_BLDALPHA = 0x1000;

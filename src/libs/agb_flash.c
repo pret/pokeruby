@@ -9,7 +9,7 @@ static u16 sSavedIme;
 u8 gFlashTimeoutFlag;
 u8 (*PollFlashStatus)(u8 *);
 u16 (*WaitForFlashWrite)(u8 phase, u8 *addr, u8 lastData);
-u16 (*ProgramFlashSector)(u16 sectorNum, u8 *src);
+u16 (*ProgramFlashSector)(u16 sectorNum, void *src);
 const struct FlashType *gFlash;
 u16 (*ProgramFlashByte)(u16 sectorNum, u32 offset, u8 data);
 u16 gFlashNumRemainingBytes;
@@ -135,7 +135,7 @@ void ReadFlash_Core(u8 *src, u8 *dest, u32 size)
     }
 }
 
-void ReadFlash(u16 sectorNum, u32 offset, u8 *dest, u32 size)
+void ReadFlash(u16 sectorNum, u32 offset, void *dest, u32 size)
 {
     u8 *src;
     u16 i;
@@ -256,7 +256,7 @@ u32 VerifyFlashSectorNBytes(u16 sectorNum, u8 *src, u32 n)
     return verifyFlashSector_Core(src, tgt, n);
 }
 
-u32 ProgramFlashSectorAndVerify(u16 sectorNum, u8 *src) // 3rd is unused
+u32 ProgramFlashSectorAndVerify(u16 sectorNum, u8 *src)
 {
     u8 i;
     u32 result;
@@ -275,18 +275,18 @@ u32 ProgramFlashSectorAndVerify(u16 sectorNum, u8 *src) // 3rd is unused
     return result; // return 0 if verified and programmed.
 }
 
-u32 ProgramFlashSectorAndVerifyNBytes(u16 sectorNum, u8 *src, u32 n)
+u32 ProgramFlashSectorAndVerifyNBytes(u16 sectorNum, void *dataSrc, u32 n)
 {
     u8 i;
     u32 result;
 
     for (i = 0; i < 3; i++)
     {
-        result = ProgramFlashSector(sectorNum, src);
+        result = ProgramFlashSector(sectorNum, dataSrc);
         if (result != 0)
             continue;
 
-        result = VerifyFlashSectorNBytes(sectorNum, src, n);
+        result = VerifyFlashSectorNBytes(sectorNum, dataSrc, n);
         if (result == 0)
             break;
     }

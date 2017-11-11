@@ -22,6 +22,7 @@
 #include "script_pokemon_80C4.h"
 #include "species.h"
 #include "task.h"
+#include "ewram.h"
 
 #define CONTEST_ENTRY_PIC_LEFT 10
 #define CONTEST_ENTRY_PIC_TOP 3

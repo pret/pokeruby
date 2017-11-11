@@ -928,7 +928,7 @@ _0800DB8E:
 	.align 2, 0
 _0800DBB0: .4byte 0x00006001
 _0800DBB4:
-	ldr r0, _0800DBD0 @ =0x02000000
+	ldr r0, _0800DBD0 @ =gSharedMem
 	ldr r1, _0800DBD4 @ =0x000160cb
 	adds r0, r1
 	ldrb r0, [r0]
@@ -942,7 +942,7 @@ _0800DBB4:
 	ldrh r4, [r0, 0xE]
 	b _0800DBE8
 	.align 2, 0
-_0800DBD0: .4byte 0x02000000
+_0800DBD0: .4byte gSharedMem
 _0800DBD4: .4byte 0x000160cb
 _0800DBD8: .4byte gTasks
 _0800DBDC:
@@ -1075,7 +1075,7 @@ _0800DED4: .4byte gLinkPlayers
 _0800DED8: .4byte gUnknown_081F9680
 _0800DEDC: .4byte gUnknown_081F9680 + 0x8
 _0800DEE0:
-	ldr r0, _0800DF84 @ =0x02000000
+	ldr r0, _0800DF84 @ =gSharedMem
 	ldr r5, _0800DF88 @ =0x000160cb
 	adds r0, r5
 	ldrb r7, [r0]
@@ -1153,7 +1153,7 @@ _0800DF70:
 	strh r0, [r1, 0x8]
 	b _0800E212
 	.align 2, 0
-_0800DF84: .4byte 0x02000000
+_0800DF84: .4byte gSharedMem
 _0800DF88: .4byte 0x000160cb
 _0800DF8C: .4byte gLinkPlayers
 _0800DF90: .4byte gUnknown_081F9680
@@ -1178,7 +1178,7 @@ _0800DF9C:
 	movs r2, 0x50
 	movs r3, 0
 	bl CreateSprite
-	ldr r4, _0800E028 @ =0x02000000
+	ldr r4, _0800E028 @ =gSharedMem
 	ldr r2, _0800E02C @ =0x0001608a
 	adds r7, r4, r2
 	strb r0, [r7]
@@ -1221,7 +1221,7 @@ _0800E018: .4byte 0x0000021e
 _0800E01C: .4byte gPlttBufferFaded
 _0800E020: .4byte 0x00007fff
 _0800E024: .4byte gSpriteTemplate_81F9574
-_0800E028: .4byte 0x02000000
+_0800E028: .4byte gSharedMem
 _0800E02C: .4byte 0x0001608a
 _0800E030: .4byte gSpriteTemplate_81F958C
 _0800E034: .4byte 0x0001608b
@@ -1365,7 +1365,7 @@ _0800E154:
 	mov r0, r9
 	bl DestroyTask
 	ldr r4, _0800E224 @ =gSprites
-	ldr r0, _0800E228 @ =0x02000000
+	ldr r0, _0800E228 @ =gSharedMem
 	mov r8, r0
 	ldr r1, _0800E22C @ =0x0001608a
 	add r1, r8
@@ -1464,7 +1464,7 @@ _0800E212:
 	bx r0
 	.align 2, 0
 _0800E224: .4byte gSprites
-_0800E228: .4byte 0x02000000
+_0800E228: .4byte gSharedMem
 _0800E22C: .4byte 0x0001608a
 _0800E230: .4byte 0x0001608b
 _0800E234: .4byte 0x000003ff

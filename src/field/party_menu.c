@@ -25,7 +25,6 @@
 #include "pokemon_summary_screen.h"
 #include "rom_8077ABC.h"
 #include "rom_8094928.h"
-#include "script_pokemon_80F9.h"
 #include "songs.h"
 #include "sound.h"
 #include "species.h"
@@ -35,6 +34,8 @@
 #include "task.h"
 #include "unknown_task.h"
 #include "util.h"
+#include "script_pokemon_80F9.h"
+#include "ewram.h"
 
 struct Coords8
 {
@@ -482,9 +483,6 @@ struct Unk201FE00
     u8 unkE01;
     u8 unkE02;
 };
-
-#define ewram1C000 (*(struct Unk201C000 *)(ewram + 0x1C000))
-#define ewram1FE00 (*(struct Unk201FE00 *)(ewram + 0x1FE00))
 
 extern u16 gBattleTypeFlags;
 extern u8 gTileBuffer[];
@@ -1111,7 +1109,7 @@ _0806B980:\n\
     movs r3, 0x3\n\
     bl sub_806BA94\n\
 _0806B98C:\n\
-    ldr r0, _0806B99C @ =0x0201b000\n\
+    ldr r0, _0806B99C @ =gSharedMem + 0x1B000\n\
     ldr r1, _0806B9A0 @ =0x00000261\n\
     adds r0, r1\n\
     movs r1, 0x2\n\
@@ -1120,7 +1118,7 @@ _0806B98C:\n\
     pop {r0}\n\
     bx r0\n\
     .align 2, 0\n\
-_0806B99C: .4byte 0x0201b000\n\
+_0806B99C: .4byte gSharedMem + 0x1B000\n\
 _0806B9A0: .4byte 0x00000261\n\
     .syntax divided\n");
 }
@@ -2550,7 +2548,7 @@ void sub_806CF04(void)
 {
     asm(".syntax unified\n\
     push {r4,r5,lr}\n\
-    ldr r4, _0806CF94 @ =0x02001000\n\
+    ldr r4, _0806CF94 @ =gSharedMem + 0x1000\n\
     ldrb r1, [r4, 0x3]\n\
     lsls r0, r1, 4\n\
     adds r0, r1\n\
@@ -2618,7 +2616,7 @@ void sub_806CF04(void)
     pop {r0}\n\
     bx r0\n\
     .align 2, 0\n\
-_0806CF94: .4byte 0x02001000\n\
+_0806CF94: .4byte gSharedMem + 0x1000\n\
 _0806CF98: .4byte gSprites + 0x20\n\
 _0806CF9C: .4byte SpriteCB_sub_806D37C\n\
     .syntax divided\n");
@@ -2855,7 +2853,7 @@ void sub_806D5B8(u8 monIndex)
     ZeroFillWindowRect(&gUnknown_03004210, left, top, right, bottom);
 
     var1 = 0;
-    CpuFastSet(&var1, (void *)(OBJ_VRAM1 + monIndex * 0x400), 0x1000100);
+    CpuFastSet(&var1, OBJ_VRAM1 + monIndex * 0x400, 0x1000100);
 }
 
 void sub_806D668(u8 monIndex)
@@ -2869,7 +2867,7 @@ void sub_806D668(u8 monIndex)
     ZeroFillWindowRect(&gUnknown_03004210, left, top, right, bottom);
 
     var1 = 0;
-    CpuFastSet(&var1, (void *)(OBJ_VRAM1 + 0x300 + monIndex * 0x400), 0x1000040);
+    CpuFastSet(&var1, OBJ_VRAM1 + 0x300 + monIndex * 0x400, 0x1000040);
 }
 
 bool8 LoadPartyMenuGraphics(u8 a)
@@ -3460,7 +3458,7 @@ void PartyMenuDoPrintMonNickname(u8 monIndex, int b, const u8 *nameBuffer)
     u32 var1 = 0;
     CpuFastSet(&var1, gTileBuffer, 0x1000100);
     sub_8004E3C((struct WindowConfig *)&gWindowConfig_81E6CAC, gTileBuffer, nameBuffer);
-    CpuFastSet(gTileBuffer, (void *)(OBJ_VRAM1 + (monIndex * 0x400)), 128);
+    CpuFastSet(gTileBuffer, OBJ_VRAM1 + (monIndex * 0x400), 128);
 }
 
 void PrintPartyMenuMonNickname(u8 monIndex, u8 b, struct Pokemon *pokemon)
@@ -3570,7 +3568,7 @@ void PartyMenuDoPrintLevel(u8 monIndex, u8 menuLayout, u8 level)
     var1 = 0;
     CpuFastSet(&var1, gUnknown_02039460, 0x1000020);
     sub_8004E3C((struct WindowConfig *)&gWindowConfig_81E6CAC, gUnknown_02039460 - 0x100 /*gTileBuffer*/, gStringVar1);
-    CpuFastSet(gUnknown_02039460, (void *)(OBJ_VRAM1 + 0x200 + (monIndex * 0x400)), 32);
+    CpuFastSet(gUnknown_02039460, OBJ_VRAM1 + 0x200 + (monIndex * 0x400), 32);
 }
 
 void PartyMenuPrintLevel(u8 monIndex, u8 menuLayout, struct Pokemon *pokemon)
@@ -3664,7 +3662,7 @@ void PartyMenuDoPrintHP(u8 monIndex, u8 b, u16 currentHP, u16 maxHP)
 
     CpuFastSet(&var, gUnknown_02039460, 0x1000040);
     sub_8004E3C((struct WindowConfig *)&gWindowConfig_81E6CAC, gUnknown_02039460 - 0x100 /*gTileBuffer*/, gStringVar1);
-    CpuFastSet(gUnknown_02039460, (void *)(OBJ_VRAM1 + 0x300 + (monIndex * 0x400)), 64);
+    CpuFastSet(gUnknown_02039460, OBJ_VRAM1 + 0x300 + (monIndex * 0x400), 64);
 }
 
 void PartyMenuPrintHP(u8 monIndex, u8 b, struct Pokemon *pokemon)
@@ -4457,7 +4455,7 @@ void sub_806F8AC(u8 taskId)
         ewram1B000.unk261 = 2;
         sub_806E834(gStringVar4, 1);
         sp14 += sp0.unk4;
-        SetMonData(ewram1C000.pokemon, MON_DATA_HP, (u8 *)&sp14);
+        SetMonData(ewram1C000.pokemon, MON_DATA_HP, &sp14);
         RemoveBagItem(ewram1C000.unk6, 1);
         sub_8032638();
         gTasks[taskId].func = sub_806FB44;
@@ -4478,7 +4476,7 @@ void sub_806FA18(u8 taskId)
         PlaySE(SE_KAIFUKU);
         ewram1C000.unkC = 0;
         gTasks[taskId].data[11] -= gTasks[taskId].data[12];
-        SetMonData(ewram1C000.pokemon, MON_DATA_HP, (u8 *)&gTasks[taskId].data[11]);
+        SetMonData(ewram1C000.pokemon, MON_DATA_HP, &gTasks[taskId].data[11]);
         SetMonIconAnim(GetMonIconSpriteId(ewram1C000.unk4, ewram01000.unk1), ewram1C000.pokemon);
         ewram1C000.unk5 = gSprites[ewram01000.unk2].data0;
         ewram1C000.pokemon = &gPlayerParty[ewram1C000.unk5];
@@ -5035,7 +5033,7 @@ void PrintStatGrowthsInLevelUpWindow(u8 taskId) {
     movs r2, 0x13\n\
     mov r8, r2\n\
 _0807086C:\n\
-    ldr r1, _08070930 @ =0x0201c000\n\
+    ldr r1, _08070930 @ =gSharedMem + 0x1C000\n\
     ldr r0, [r1]\n\
     ldr r1, _08070934 @ =StatDataTypes\n\
     adds r1, r7, r1\n\
@@ -5043,7 +5041,7 @@ _0807086C:\n\
     bl GetMonData\n\
     adds r1, r7, 0x6\n\
     lsls r1, 1\n\
-    ldr r2, _08070938 @ =0x0201b264\n\
+    ldr r2, _08070938 @ =gSharedMem + 0x1B264\n\
     adds r1, r2, r1\n\
     strh r0, [r1]\n\
     lsls r6, r7, 1\n\
@@ -5125,9 +5123,9 @@ _0807086C:\n\
     bx r0\n\
     .align 2, 0\n\
 _0807092C: .4byte gStringVar1\n\
-_08070930: .4byte 0x0201c000\n\
+_08070930: .4byte gSharedMem + 0x1C000\n\
 _08070934: .4byte StatDataTypes\n\
-_08070938: .4byte 0x0201b264\n\
+_08070938: .4byte gSharedMem + 0x1B264\n\
 _0807093C: .4byte StatNames\n\
 _08070940: .4byte gOtherText_TallPlusAndRightArrow\n\
     .syntax divided\n");

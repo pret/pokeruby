@@ -17,10 +17,10 @@
 #include "decompress.h"
 #include "rng.h"
 #include "trig.h"
+#include "ewram.h"
 
 static EWRAM_DATA u32 sUnknown_0203931C = 0;
 
-extern u8 ewram[];
 extern bool8 gUnknown_02039324; // has hall of fame records
 extern void (*gGameContinueCallback)(void);
 extern struct MusicPlayerInfo gMPlay_BGM;
@@ -156,69 +156,69 @@ static const struct OamData sOamData_840B598 =
 
 void* const gUnknown_0840B5A0[] =
 {
-    &ewram[0x08000],
-    &ewram[0x0A000],
-    &ewram[0x0C000],
-    &ewram[0x0E000],
-    &ewram[0x10000],
-    &ewram[0x14000],
-    &ewram[0x18000]
+    ewram8000,
+    ewramA000,
+    ewramC000,
+    ewramE000,
+    ewram10000,
+    ewram14000,
+    ewram18000_2
 };
 
 static const struct SpriteFrameImage sSpriteImageTable_840B5BC[] =
 {
-    {&ewram[0x8000], 0x800},
-    {&ewram[0x8800], 0x800},
-    {&ewram[0x9000], 0x800},
-    {&ewram[0x9800], 0x800}
+    {ewram8000, 0x800},
+    {ewram8800, 0x800},
+    {ewram9000, 0x800},
+    {ewram9800, 0x800}
 };
 
 static const struct SpriteFrameImage sSpriteImageTable_840B5DC[] =
 {
-    {&ewram[0xA000], 0x800},
-    {&ewram[0xA800], 0x800},
-    {&ewram[0xB000], 0x800},
-    {&ewram[0xB800], 0x800}
+    {ewramA000, 0x800},
+    {ewramA800, 0x800},
+    {ewramB000, 0x800},
+    {ewramB800, 0x800}
 };
 
 static const struct SpriteFrameImage sSpriteImageTable_840B5FC[] =
 {
-    {&ewram[0xC000], 0x800},
-    {&ewram[0xC800], 0x800},
-    {&ewram[0xD000], 0x800},
-    {&ewram[0xD800], 0x800}
+    {ewramC000, 0x800},
+    {ewramC800, 0x800},
+    {ewramD000, 0x800},
+    {ewramD800, 0x800}
 };
 
 static const struct SpriteFrameImage sSpriteImageTable_840B61C[] =
 {
-    {&ewram[0xE000], 0x800},
-    {&ewram[0xE800], 0x800},
-    {&ewram[0xF000], 0x800},
-    {&ewram[0xF800], 0x800}
+    {ewramE000, 0x800},
+    {ewramE800, 0x800},
+    {ewramF000, 0x800},
+    {ewramF800, 0x800}
 };
 
 static const struct SpriteFrameImage sSpriteImageTable_840B63C[] =
 {
-    {&ewram[0x10000], 0x800},
-    {&ewram[0x10800], 0x800},
-    {&ewram[0x11000], 0x800},
-    {&ewram[0x11800], 0x800}
+    {ewram10000, 0x800},
+    {ewram10800, 0x800},
+    {ewram11000, 0x800},
+    {ewram11800, 0x800}
 };
 
 static const struct SpriteFrameImage sSpriteImageTable_840B65C[] =
 {
-    {&ewram[0x14000], 0x800},
-    {&ewram[0x14800], 0x800},
-    {&ewram[0x15000], 0x800},
-    {&ewram[0x15800], 0x800}
+    {ewram14000, 0x800},
+    {ewram14800, 0x800},
+    {ewram15000, 0x800},
+    {ewram15800, 0x800}
 };
 
 static const struct SpriteFrameImage sSpriteImageTable_840B67C[] =
 {
-    {&ewram[0x18000], 0x800},
-    {&ewram[0x18800], 0x800},
-    {&ewram[0x19000], 0x800},
-    {&ewram[0x19800], 0x800}
+    {ewram18000_2, 0x800},
+    {ewram18800, 0x800},
+    {ewram19000, 0x800},
+    {ewram19800, 0x800}
 };
 
 static const struct SpriteFrameImage* const sUnknown_0840B69C[7] =
@@ -486,7 +486,7 @@ static void sub_8141FC4(void)
 static void sub_8141FF8(u8 taskID)
 {
     u16 i, j;
-    struct HallofFameMons* fameMons = (struct HallofFameMons*)(&ewram[0x1C000]);
+    struct HallofFameMons* fameMons = eHallOfFameMons1;
 
     gTasks[taskID].tPokesNumber = 0; // valid pokes
     for (i = 0; i < 6; i++)
@@ -530,13 +530,13 @@ static void sub_8141FF8(u8 taskID)
 static void sub_814217C(u8 taskID)
 {
     u16 i;
-    struct HallofFameMons* fameMons = (struct HallofFameMons*)(&ewram[0x1C000]);
-    struct HallofFameMons* lastSavedTeam = (struct HallofFameMons*)(&ewram[0x1E000]);
+    struct HallofFameMons* fameMons = eHallOfFameMons1;
+    struct HallofFameMons* lastSavedTeam = eHallOfFameMons2;
 
     if (gUnknown_02039324 == FALSE)
     {
         for (i = 0; i < 0x2000; i++)
-            ewram[i + 0x1E000] = 0;
+            ewram1E000(i) = 0;
     }
     else
         sub_8125EC8(3);
@@ -548,8 +548,8 @@ static void sub_814217C(u8 taskID)
     }
     if (i >= HALL_OF_FAME_MAX_TEAMS)
     {
-        struct HallofFameMons* r5 = (struct HallofFameMons*)(&ewram[0x1E000]);
-        struct HallofFameMons* r6 = (struct HallofFameMons*)(&ewram[0x1E000]);
+        struct HallofFameMons* r5 = eHallOfFameMons2;
+        struct HallofFameMons* r6 = eHallOfFameMons2;
         r5++;
         for (i = 0; i < HALL_OF_FAME_MAX_TEAMS - 1; i++, r6++, r5++)
         {
@@ -592,7 +592,7 @@ static void sub_8142320(u8 taskID)
     u8 spriteID;
     s16 xPos, yPos, field4, field6;
 
-    struct HallofFameMons* fameMons = (struct HallofFameMons*)(&ewram[0x1C000]);
+    struct HallofFameMons* fameMons = eHallOfFameMons1;
     u16 currPokeID = gTasks[taskID].tDisplayedPoke;
     struct HallofFameMon* currMon = &fameMons->mons[currPokeID];
 
@@ -623,7 +623,7 @@ static void sub_8142320(u8 taskID)
 
 static void sub_8142404(u8 taskID)
 {
-    struct HallofFameMons* fameMons = (struct HallofFameMons*)(&ewram[0x1C000]);
+    struct HallofFameMons* fameMons = eHallOfFameMons1;
     u16 currPokeID = gTasks[taskID].tDisplayedPoke;
     struct HallofFameMon* currMon = &fameMons->mons[currPokeID];
 
@@ -639,7 +639,7 @@ static void sub_8142404(u8 taskID)
 
 static void sub_8142484(u8 taskID)
 {
-    struct HallofFameMons* fameMons = (struct HallofFameMons*)(&ewram[0x1C000]);
+    struct HallofFameMons* fameMons = eHallOfFameMons1;
     u16 currPokeID = gTasks[taskID].tDisplayedPoke;
     struct HallofFameMon* currMon = &fameMons->mons[currPokeID];
 
@@ -808,7 +808,7 @@ void sub_81428CC(void)
             REG_BLDY = 0;
             sub_81435B8();
 
-            fameMons = (struct HallofFameMons*)(&ewram[0x1C000]);
+            fameMons = eHallOfFameMons1;
             fameMons->mons[0] = sDummyFameMon;
 
             sub_80C5CD4(fameMons);
@@ -847,7 +847,7 @@ static void sub_8142A28(u8 taskID)
         u16 *vram1, *vram2;
 
         u16 i;
-        struct HallofFameMons* savedTeams = (struct HallofFameMons*)(&ewram[0x1E000]);
+        struct HallofFameMons* savedTeams = eHallOfFameMons2;
         for (i = 0; i < HALL_OF_FAME_MAX_TEAMS; i++, savedTeams++)
         {
             if (savedTeams->mons[0].species == 0)
@@ -872,7 +872,7 @@ static void sub_8142A28(u8 taskID)
 
 static void sub_8142B04(u8 taskID)
 {
-    struct HallofFameMons* savedTeams = (struct HallofFameMons*)(&ewram[0x1E000]);
+    struct HallofFameMons* savedTeams = eHallOfFameMons2;
     struct HallofFameMon* currMon;
     u16 i;
     u8* stringPtr;
@@ -937,7 +937,7 @@ static void sub_8142B04(u8 taskID)
 
 static void sub_8142CC8(u8 taskID)
 {
-    struct HallofFameMons* savedTeams = (struct HallofFameMons*)(&ewram[0x1E000]);
+    struct HallofFameMons* savedTeams = eHallOfFameMons2;
     struct HallofFameMon* currMon;
     u16 i;
     u16 currMonID;
@@ -1025,7 +1025,7 @@ static void sub_8142F78(u8 taskID)
     struct HallofFameMons* fameMons;
 
     CpuSet(gPlttBufferFaded, gPlttBufferUnfaded, 0x200);
-    fameMons = (struct HallofFameMons*)(&ewram[0x1C000]);
+    fameMons = eHallOfFameMons1;
     fameMons->mons[0] = sDummyFameMon;
     sub_80C5E38(fameMons);
     gTasks[taskID].func = sub_8142FCC;
@@ -1258,7 +1258,7 @@ static void sub_81433E0(void)
         *((u16*)(VRAM + 0x3000) + i) = 2;
     }
 
-    offsetWrite4 = (u32)(&ewram[0]);
+    offsetWrite4 = ewram0_6;
     size4 = 0x4000;
     while (TRUE)
     {

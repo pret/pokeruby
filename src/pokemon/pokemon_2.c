@@ -12,13 +12,11 @@
 #include "strings2.h"
 #include "text.h"
 #include "util.h"
+#include "ewram.h"
 
 extern u8 gPlayerPartyCount;
 extern u8 gEnemyPartyCount;
 
-extern u16 unk_20160BC[];
-extern struct SecretBaseRecord gSecretBaseRecord;
-extern u32 dword_2017100[];
 extern u16 gBattleTypeFlags;
 extern u8 gActiveBank;
 extern struct BattlePokemon gBattleMons[4];
@@ -1062,30 +1060,31 @@ void CreateSecretBaseEnemyParty(struct SecretBaseRecord *secretBaseRecord)
     s32 i, j;
 
     ZeroEnemyPartyMons();
-    memcpy(&gSecretBaseRecord, secretBaseRecord, sizeof(*secretBaseRecord));
+    memcpy(eSecretBaseRecord, secretBaseRecord, sizeof(*secretBaseRecord));
 
     for (i = 0; i < 6; i++)
     {
-        if (gSecretBaseRecord.partySpecies[i])
+        if (eSecretBaseRecord->partySpecies[i])
         {
             CreateMon(&gEnemyParty[i],
-                gSecretBaseRecord.partySpecies[i],
-                gSecretBaseRecord.partyLevels[i],
+                eSecretBaseRecord->partySpecies[i],
+                eSecretBaseRecord->partyLevels[i],
                 15,
                 1,
-                gSecretBaseRecord.partyPersonality[i],
+                eSecretBaseRecord->partyPersonality[i],
                 2,
                 0);
 
-            SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, (u8 *)&gSecretBaseRecord.partyHeldItems[i]);
+            // these two SetMonData calls require the (u8 *) cast since SetMonData is declared in this function.
+            SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, (u8 *)&eSecretBaseRecord->partyHeldItems[i]);
 
             for (j = 0; j < 6; j++)
-                SetMonData(&gEnemyParty[i], MON_DATA_HP_EV + j, &gSecretBaseRecord.partyEVs[i]);
+                SetMonData(&gEnemyParty[i], MON_DATA_HP_EV + j, &eSecretBaseRecord->partyEVs[i]);
 
             for (j = 0; j < 4; j++)
             {
-                SetMonData(&gEnemyParty[i], MON_DATA_MOVE1 + j, (u8 *)&gSecretBaseRecord.partyMoves[i * 4 + j]);
-                SetMonData(&gEnemyParty[i], MON_DATA_PP1 + j, &gBattleMoves[gSecretBaseRecord.partyMoves[i * 4 + j]].pp);
+                SetMonData(&gEnemyParty[i], MON_DATA_MOVE1 + j, (u8 *)&eSecretBaseRecord->partyMoves[i * 4 + j]);
+                SetMonData(&gEnemyParty[i], MON_DATA_PP1 + j, &gBattleMoves[eSecretBaseRecord->partyMoves[i * 4 + j]].pp);
             }
         }
     }
@@ -1096,13 +1095,13 @@ void CreateSecretBaseEnemyParty(struct SecretBaseRecord *secretBaseRecord)
 
 u8 GetSecretBaseTrainerPicIndex(void)
 {
-    u8 trainerClass = gSecretBaseTrainerClasses[gSecretBaseRecord.gender][gSecretBaseRecord.trainerId[0] % 5];
+    u8 trainerClass = gSecretBaseTrainerClasses[eSecretBaseRecord->gender][eSecretBaseRecord->trainerId[0] % 5];
     return gTrainerClassToPicIndex[trainerClass];
 }
 
 u8 GetSecretBaseTrainerNameIndex(void)
 {
-    u8 trainerClass = gSecretBaseTrainerClasses[gSecretBaseRecord.gender][gSecretBaseRecord.trainerId[0] % 5];
+    u8 trainerClass = gSecretBaseTrainerClasses[eSecretBaseRecord->gender][eSecretBaseRecord->trainerId[0] % 5];
     return gTrainerClassToNameIndex[trainerClass];
 }
 
@@ -1207,7 +1206,7 @@ void CopyPlayerPartyMonToBattleData(u8 battleIndex, u8 partyIndex)
     GetMonData(&gPlayerParty[partyIndex], MON_DATA_NICKNAME, nickname);
     StringCopy10(gBattleMons[battleIndex].nickname, nickname);
     GetMonData(&gPlayerParty[partyIndex], MON_DATA_OT_NAME, gBattleMons[battleIndex].otName);
-    *(unk_20160BC + GetBankSide(battleIndex)) = gBattleMons[battleIndex].hp;
+    ewram160BC[GetBankSide(battleIndex)] = gBattleMons[battleIndex].hp;
 
     for (i = 0; i < 8; i++)
         gBattleMons[battleIndex].statStages[i] = 6;

@@ -161,7 +161,7 @@ u16 unref_sub_80EB5E0(u16 arg0)
     {
     case EC_GROUP_POKEMON: // 0
     case EC_GROUP_POKEMON_2: // 21
-        chars = (u8 *) gSpeciesNames[word];
+        chars = gSpeciesNames[word];
         break;
     case EC_GROUP_MOVE_1: // 18
     case EC_GROUP_MOVE_2: // 19

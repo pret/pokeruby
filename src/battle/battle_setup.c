@@ -880,19 +880,20 @@ static void CB2_EndFirstBattle(void)
     SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
 }
 
+// why not just use the macros? maybe its because they didnt want to uncast const every time?
 static u32 TrainerBattleLoadArg32(const u8 *ptr)
 {
-    return ptr[0] | (ptr[1] << 8) | (ptr[2] << 16) | (ptr[3] << 24);
+    return T1_READ_32(ptr);
 }
 
 static u16 TrainerBattleLoadArg16(const u8 *ptr)
 {
-    return ptr[0] | (ptr[1] << 8);
+    return T1_READ_16(ptr);
 }
 
 static u8 TrainerBattleLoadArg8(const u8 *ptr)
 {
-    return ptr[0];
+    return T1_READ_8(ptr);
 }
 
 static u16 CurrentOpponentTrainerFlag(void)
@@ -1123,8 +1124,8 @@ void ScrSpecial_StartTrainerEyeRematch(void)
     ScriptContext1_Stop();
 }
 
-static u8 *GetTrainerIntroSpeech(void);
-static u8 *GetTrainerNonBattlingSpeech(void);
+static const u8 *GetTrainerIntroSpeech(void);
+static const u8 *GetTrainerNonBattlingSpeech(void);
 
 void ScrSpecial_ShowTrainerIntroSpeech(void)
 {
@@ -1207,15 +1208,15 @@ void PlayTrainerEncounterMusic(void)
 }
 
 //Returns an empty string if a null pointer was passed, otherwise returns str
-static u8 *SanitizeString(const u8 *str)
+static const u8 *SanitizeString(const u8 *str)
 {
     if (str)
-        return (u8 *) str;
+        return str;
     else
-        return (u8 *) gOtherText_CancelWithTerminator;
+        return gOtherText_CancelWithTerminator;
 }
 
-static u8 *GetTrainerIntroSpeech(void)
+static const u8 *GetTrainerIntroSpeech(void)
 {
     return SanitizeString(sTrainerIntroSpeech);
 }
@@ -1233,12 +1234,12 @@ u8 *sub_8082830(void)
     return gStringVar4;
 }
 
-u8 *unref_sub_808286C(void)
+const u8 *unref_sub_808286C(void)
 {
     return SanitizeString(sTrainerVictorySpeech);
 }
 
-static u8 *GetTrainerNonBattlingSpeech(void)
+static const u8 *GetTrainerNonBattlingSpeech(void)
 {
     return SanitizeString(sTrainerCannotBattleSpeech);
 }

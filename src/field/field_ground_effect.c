@@ -458,76 +458,52 @@ bool8 AreZCoordsCompatible(u8 a, u8 b)
 
 void GroundEffect_SpawnOnTallGrass(struct MapObject *mapObj, struct Sprite *sprite)
 {
-    u8 *ptr;
-
     gFieldEffectArguments[0] = mapObj->coords2.x;
     gFieldEffectArguments[1] = mapObj->coords2.y;
     gFieldEffectArguments[2] = mapObj->elevation;
     gFieldEffectArguments[3] = 2;
-    gFieldEffectArguments[4] = (mapObj->localId << 8) | mapObj->mapNum;
+    gFieldEffectArguments[4] = mapObj->localId << 8 | mapObj->mapNum;
     gFieldEffectArguments[5] = mapObj->mapGroup;
-
-    ptr = (u8 *)&gSaveBlock1;
-    gFieldEffectArguments[6] = ((u8)gSaveBlock1.location.mapNum << 8)
-                         | (u8)gSaveBlock1.location.mapGroup;
-
+    gFieldEffectArguments[6] = (u8)gSaveBlock1.location.mapNum << 8 | (u8)gSaveBlock1.location.mapGroup;
     gFieldEffectArguments[7] = 1;
     FieldEffectStart(FLDEFF_TALL_GRASS);
 }
 
 void sub_8063E94(struct MapObject *mapObj, struct Sprite *sprite)
 {
-    u8 *ptr;
-
     gFieldEffectArguments[0] = mapObj->coords2.x;
     gFieldEffectArguments[1] = mapObj->coords2.y;
     gFieldEffectArguments[2] = mapObj->elevation;
     gFieldEffectArguments[3] = 2;
-    gFieldEffectArguments[4] = (mapObj->localId << 8) | mapObj->mapNum;
+    gFieldEffectArguments[4] = mapObj->localId << 8 | mapObj->mapNum;
     gFieldEffectArguments[5] = mapObj->mapGroup;
-
-    ptr = (u8 *)&gSaveBlock1;
-    gFieldEffectArguments[6] = ((u8)gSaveBlock1.location.mapNum << 8)
-                         | (u8)gSaveBlock1.location.mapGroup;
-
+    gFieldEffectArguments[6] = (u8)gSaveBlock1.location.mapNum << 8 | (u8)gSaveBlock1.location.mapGroup;
     gFieldEffectArguments[7] = 0;
     FieldEffectStart(FLDEFF_TALL_GRASS);
 }
 
 void sub_8063EE0(struct MapObject *mapObj, struct Sprite *sprite)
 {
-    u8 *ptr;
-
     gFieldEffectArguments[0] = mapObj->coords2.x;
     gFieldEffectArguments[1] = mapObj->coords2.y;
     gFieldEffectArguments[2] = mapObj->elevation;
     gFieldEffectArguments[3] = 2;
-    gFieldEffectArguments[4] = (mapObj->localId << 8) | mapObj->mapNum;
+    gFieldEffectArguments[4] = mapObj->localId << 8 | mapObj->mapNum;
     gFieldEffectArguments[5] = mapObj->mapGroup;
-
-    ptr = (u8 *)&gSaveBlock1;
-    gFieldEffectArguments[6] = ((u8)gSaveBlock1.location.mapNum << 8)
-                         | (u8)gSaveBlock1.location.mapGroup;
-
+    gFieldEffectArguments[6] = (u8)gSaveBlock1.location.mapNum << 8 | (u8)gSaveBlock1.location.mapGroup;
     gFieldEffectArguments[7] = 1;
     FieldEffectStart(FLDEFF_LONG_GRASS);
 }
 
 void sub_8063F2C(struct MapObject *mapObj, struct Sprite *sprite)
 {
-    u8 *ptr;
-
     gFieldEffectArguments[0] = mapObj->coords2.x;
     gFieldEffectArguments[1] = mapObj->coords2.y;
     gFieldEffectArguments[2] = mapObj->elevation;
     gFieldEffectArguments[3] = 2;
     gFieldEffectArguments[4] = (mapObj->localId << 8) | mapObj->mapNum;
     gFieldEffectArguments[5] = mapObj->mapGroup;
-
-    ptr = (u8 *)&gSaveBlock1;
-    gFieldEffectArguments[6] = ((u8)gSaveBlock1.location.mapNum << 8)
-                         | (u8)gSaveBlock1.location.mapGroup;
-
+    gFieldEffectArguments[6] = (u8)gSaveBlock1.location.mapNum << 8 | (u8)gSaveBlock1.location.mapGroup;
     gFieldEffectArguments[7] = 0;
     FieldEffectStart(FLDEFF_LONG_GRASS);
 }

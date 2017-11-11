@@ -34,9 +34,9 @@
 #include "task.h"
 #include "text.h"
 #include "unknown_task.h"
+#include "ewram.h"
 
 // External stuff
-extern u8 ewram[];
 extern void gpu_pal_allocator_reset__manage_upper_four(void);
 extern void sub_80F9020(void);
 extern void sub_80F9988();
@@ -157,12 +157,6 @@ extern u16 gUnknown_030041B4;
 extern struct PocketScrollState gBagPocketScrollStates[];
 extern struct ItemSlot *gCurrentBagPocketItemSlots;  // selected pocket item slots
 extern const u8 Event_NoRegisteredItem[];
-
-#define ewramBerryPic             (ewram + 0)
-#define ewramBerryPicTemp         (ewram + 0x1000)
-#define ewramSavedItemsPocket     ((struct ItemSlot *)(ewram + 0x1E000))  // saved items pocket (for Wally battle)
-#define ewramSavedPokeballsPocket ((struct ItemSlot *)(ewram + 0x1F000))  // saved Pokeballs pocket (for Wally battle)
-#define ewramBagSetupStep         (ewram[0x1FFFF])
 
 extern const struct CompressedSpriteSheet sMaleBagSpriteSheet;
 extern const struct CompressedSpriteSheet sFemaleBagSpriteSheet;

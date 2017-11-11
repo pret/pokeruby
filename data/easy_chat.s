@@ -45,7 +45,7 @@ gBerryMasterWifePhrases:: @ 83DB680
 .endif
 
 gUnknown_083DB694:: @ 83DB694
-	.4byte 0x02001000
+	.4byte gSharedMem + 0x1000
 
 	.align 2
 gUnknown_083DB698:: @ 83DB698
@@ -114,15 +114,15 @@ gUnknown_083DB7C0:: @ 83DB7C0
 	.align 2
 gUnknown_083DB7DC:: @ 83DB7DC
 .ifdef ENGLISH
-	.4byte 0x0200ac80
-	.4byte 0x0200acc9
-	.4byte 0x0200ad12
-	.4byte 0x0200ad5b
+	.4byte gSharedMem + 0xAC80
+	.4byte gSharedMem + 0xACC9
+	.4byte gSharedMem + 0xAD12
+	.4byte gSharedMem + 0xAD5B
 .else
-	.4byte 0x0200AFAC
-	.4byte 0x0200AFF5
-	.4byte 0x0200B03E
-	.4byte 0x0200B087
+	.4byte gSharedMem + 0xAFAC
+	.4byte gSharedMem + 0xAFF5
+	.4byte gSharedMem + 0xB03E
+	.4byte gSharedMem + 0xB087
 .endif
 
 	.align 1

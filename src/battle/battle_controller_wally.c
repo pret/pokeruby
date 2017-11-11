@@ -17,6 +17,7 @@
 #include "task.h"
 #include "text.h"
 #include "util.h"
+#include "ewram.h"
 
 //Possibly PokemonSubstruct1
 struct UnknownStruct3
@@ -239,10 +240,10 @@ void unref_sub_8137220(void)
 void SetBankFuncToWallyBufferRunCommand(void)
 {
     gBattleBankFunc[gActiveBank] = WallyBufferRunCommand;
-    ewram[0x160A8] = 0;
-    ewram[0x160A9] = 0;
-    ewram[0x160AA] = 0;
-    ewram[0x160AB] = 0;
+    ewram160A8 = 0;
+    ewram160A9 = 0;
+    ewram160AA = 0;
+    ewram160AB = 0;
 }
 
 void WallyBufferRunCommand(void)
@@ -260,59 +261,59 @@ void sub_81372BC(void)
 {
     u8 r4;
 
-    switch (ewram[0x160A8])
+    switch (ewram160A8)
     {
     case 0:
-        ewram[0x160AA] = 64;
-        ewram[0x160A8]++;
+        ewram160AA = 64;
+        ewram160A8++;
         // fall through
     case 1:
-        r4 = --ewram[0x160AA];
+        r4 = --ewram160AA;
         if (r4 == 0)
         {
             PlaySE(SE_SELECT);
             Emitcmd33(1, 0, 0);
             WallyBufferExecCompleted();
-            ewram[0x160A8]++;
-            ewram[0x160A9] = r4;
-            ewram[0x160AA] = 64;
+            ewram160A8++;
+            ewram160A9 = r4;
+            ewram160AA = 64;
         }
         break;
     case 2:
-        r4 = --ewram[0x160AA];
+        r4 = --ewram160AA;
         if (r4 == 0)
         {
             PlaySE(SE_SELECT);
             Emitcmd33(1, 0, 0);
             WallyBufferExecCompleted();
-            ewram[0x160A8]++;
-            ewram[0x160A9] = r4;
-            ewram[0x160AA] = 64;
+            ewram160A8++;
+            ewram160A9 = r4;
+            ewram160AA = 64;
         }
         break;
     case 3:
-        r4 = --ewram[0x160AA];
+        r4 = --ewram160AA;
         if (r4 == 0)
         {
             Emitcmd33(1, 9, 0);
             WallyBufferExecCompleted();
-            ewram[0x160A8]++;
-            ewram[0x160A9] = r4;
-            ewram[0x160AA] = 64;
+            ewram160A8++;
+            ewram160A9 = r4;
+            ewram160AA = 64;
         }
         break;
     case 4:
-        if (--ewram[0x160AA] == 0)
+        if (--ewram160AA == 0)
         {
             PlaySE(SE_SELECT);
             nullsub_8(0);
             sub_802E3E4(1, 0);
-            ewram[0x160AA] = 64;
-            ewram[0x160A8]++;
+            ewram160AA = 64;
+            ewram160A8++;
         }
         break;
     case 5:
-        if (--ewram[0x160AA] == 0)
+        if (--ewram160AA == 0)
         {
             PlaySE(SE_SELECT);
             DestroyMenuCursor();
@@ -569,9 +570,7 @@ u32 sub_8137A84(u8 a, u8 *buffer)
         GetMonData(&gPlayerParty[a], MON_DATA_NICKNAME, nickname);
         StringCopy10(battlePokemon.nickname, nickname);
         GetMonData(&gPlayerParty[a], MON_DATA_OT_NAME, battlePokemon.otName);
-        src = (u8 *)&battlePokemon;
-        for (size = 0; size < sizeof(battlePokemon); size++)
-            buffer[size] = src[size];
+        MEMCPY_ALT(&battlePokemon, buffer, sizeof(battlePokemon), size, src);
         break;
     case 1:
         data16 = GetMonData(&gPlayerParty[a], MON_DATA_SPECIES);
@@ -592,9 +591,7 @@ u32 sub_8137A84(u8 a, u8 *buffer)
             moveData.pp[size] = GetMonData(&gPlayerParty[a], MON_DATA_PP1 + size);
         }
         moveData.ppBonuses = GetMonData(&gPlayerParty[a], MON_DATA_PP_BONUSES);
-        src = (u8 *)&moveData;
-        for (size = 0; size < sizeof(moveData); size++)
-            buffer[size] = src[size];
+        MEMCPY_ALT(&moveData, buffer, sizeof(moveData), size, src);
         break;
     case 4:
     case 5:
@@ -868,38 +865,38 @@ void sub_8138294(u8 a)
         {
             u8 iv;
 
-            SetMonData(&gPlayerParty[a], MON_DATA_SPECIES, (u8 *)&battlePokemon->species);
-            SetMonData(&gPlayerParty[a], MON_DATA_HELD_ITEM, (u8 *)&battlePokemon->item);
+            SetMonData(&gPlayerParty[a], MON_DATA_SPECIES, &battlePokemon->species);
+            SetMonData(&gPlayerParty[a], MON_DATA_HELD_ITEM, &battlePokemon->item);
             for (i = 0; i < 4; i++)
             {
-                SetMonData(&gPlayerParty[a], MON_DATA_MOVE1 + i, (u8 *)&battlePokemon->moves[i]);
-                SetMonData(&gPlayerParty[a], MON_DATA_PP1 + i, (u8 *)&battlePokemon->pp[i]);
+                SetMonData(&gPlayerParty[a], MON_DATA_MOVE1 + i, &battlePokemon->moves[i]);
+                SetMonData(&gPlayerParty[a], MON_DATA_PP1 + i, &battlePokemon->pp[i]);
             }
-            SetMonData(&gPlayerParty[a], MON_DATA_PP_BONUSES, (u8 *)&battlePokemon->ppBonuses);
-            SetMonData(&gPlayerParty[a], MON_DATA_FRIENDSHIP, (u8 *)&battlePokemon->friendship);
-            SetMonData(&gPlayerParty[a], MON_DATA_EXP, (u8 *)&battlePokemon->experience);
+            SetMonData(&gPlayerParty[a], MON_DATA_PP_BONUSES, &battlePokemon->ppBonuses);
+            SetMonData(&gPlayerParty[a], MON_DATA_FRIENDSHIP, &battlePokemon->friendship);
+            SetMonData(&gPlayerParty[a], MON_DATA_EXP, &battlePokemon->experience);
             iv = battlePokemon->hpIV;
-            SetMonData(&gPlayerParty[a], MON_DATA_HP_IV, (u8 *)&iv);
+            SetMonData(&gPlayerParty[a], MON_DATA_HP_IV, &iv);
             iv = battlePokemon->attackIV;
-            SetMonData(&gPlayerParty[a], MON_DATA_ATK_IV, (u8 *)&iv);
+            SetMonData(&gPlayerParty[a], MON_DATA_ATK_IV, &iv);
             iv = battlePokemon->defenseIV;
-            SetMonData(&gPlayerParty[a], MON_DATA_DEF_IV, (u8 *)&iv);
+            SetMonData(&gPlayerParty[a], MON_DATA_DEF_IV, &iv);
             iv = battlePokemon->speedIV;
-            SetMonData(&gPlayerParty[a], MON_DATA_SPEED_IV, (u8 *)&iv);
+            SetMonData(&gPlayerParty[a], MON_DATA_SPEED_IV, &iv);
             iv = battlePokemon->spAttackIV;
-            SetMonData(&gPlayerParty[a], MON_DATA_SPATK_IV, (u8 *)&iv);
+            SetMonData(&gPlayerParty[a], MON_DATA_SPATK_IV, &iv);
             iv = battlePokemon->spDefenseIV;
-            SetMonData(&gPlayerParty[a], MON_DATA_SPDEF_IV, (u8 *)&iv);
-            SetMonData(&gPlayerParty[a], MON_DATA_PERSONALITY, (u8 *)&battlePokemon->personality);
-            SetMonData(&gPlayerParty[a], MON_DATA_STATUS, (u8 *)&battlePokemon->status1);
-            SetMonData(&gPlayerParty[a], MON_DATA_LEVEL, (u8 *)&battlePokemon->level);
-            SetMonData(&gPlayerParty[a], MON_DATA_HP, (u8 *)&battlePokemon->hp);
-            SetMonData(&gPlayerParty[a], MON_DATA_MAX_HP, (u8 *)&battlePokemon->maxHP);
-            SetMonData(&gPlayerParty[a], MON_DATA_ATK, (u8 *)&battlePokemon->attack);
-            SetMonData(&gPlayerParty[a], MON_DATA_DEF, (u8 *)&battlePokemon->defense);
-            SetMonData(&gPlayerParty[a], MON_DATA_SPEED, (u8 *)&battlePokemon->speed);
-            SetMonData(&gPlayerParty[a], MON_DATA_SPATK, (u8 *)&battlePokemon->spAttack);
-            SetMonData(&gPlayerParty[a], MON_DATA_SPDEF, (u8 *)&battlePokemon->spDefense);
+            SetMonData(&gPlayerParty[a], MON_DATA_SPDEF_IV, &iv);
+            SetMonData(&gPlayerParty[a], MON_DATA_PERSONALITY, &battlePokemon->personality);
+            SetMonData(&gPlayerParty[a], MON_DATA_STATUS, &battlePokemon->status1);
+            SetMonData(&gPlayerParty[a], MON_DATA_LEVEL, &battlePokemon->level);
+            SetMonData(&gPlayerParty[a], MON_DATA_HP, &battlePokemon->hp);
+            SetMonData(&gPlayerParty[a], MON_DATA_MAX_HP, &battlePokemon->maxHP);
+            SetMonData(&gPlayerParty[a], MON_DATA_ATK, &battlePokemon->attack);
+            SetMonData(&gPlayerParty[a], MON_DATA_DEF, &battlePokemon->defense);
+            SetMonData(&gPlayerParty[a], MON_DATA_SPEED, &battlePokemon->speed);
+            SetMonData(&gPlayerParty[a], MON_DATA_SPATK, &battlePokemon->spAttack);
+            SetMonData(&gPlayerParty[a], MON_DATA_SPDEF, &battlePokemon->spDefense);
         }
         break;
     case 1:
@@ -911,8 +908,8 @@ void sub_8138294(u8 a)
     case 3:
         for (i = 0; i < 4; i++)
         {
-            SetMonData(&gPlayerParty[a], MON_DATA_MOVE1 + i, (u8 *)&moveData->moves[i]);
-            SetMonData(&gPlayerParty[a], MON_DATA_PP1 + i, (u8 *)&moveData->pp[i]);
+            SetMonData(&gPlayerParty[a], MON_DATA_MOVE1 + i, &moveData->moves[i]);
+            SetMonData(&gPlayerParty[a], MON_DATA_PP1 + i, &moveData->pp[i]);
         }
         SetMonData(&gPlayerParty[a], MON_DATA_PP_BONUSES, &moveData->ppBonuses);
         break;
@@ -1294,16 +1291,16 @@ void WallyHandlecmd19(void)
 
 void WallyHandlecmd20(void)
 {
-    switch (ewram[0x160A9])
+    switch (ewram160A9)
     {
     case 0:
         sub_80304A8();
-        ewram[0x160A9]++;
-        ewram[0x160AB] = 80;
+        ewram160A9++;
+        ewram160AB = 80;
         // fall through
     case 1:
-        ewram[0x160AB]--;
-        if (ewram[0x160AB] == 0)
+        ewram160AB--;
+        if (ewram160AB == 0)
         {
             DestroyMenuCursor();
             PlaySE(SE_SELECT);

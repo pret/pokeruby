@@ -24,6 +24,7 @@
 #include "trainer.h"
 #include "tv.h"
 #include "vars.h"
+#include "ewram.h"
 
 #if ENGLISH
 #include "../data/battle_tower/trainers.h"
@@ -277,9 +278,6 @@ extern u8 gSelectedOrderFromParty[];
 extern u8 gBattleOutcome;
 extern struct Pokemon gUnknown_030042FC[];
 extern struct BattlePokemon gBattleMons[];
-
-#define ewram160FB (ewram[0x160FB])
-
 
 void sub_8134548(void)
 {
@@ -1370,7 +1368,7 @@ void FillBattleTowerTrainerParty(void)
 			}
 
 			SetMonData(&gEnemyParty[partyIndex], MON_DATA_FRIENDSHIP, &friendship);
-			SetMonData(&gEnemyParty[partyIndex], MON_DATA_HELD_ITEM, (u8 *)&sBattleTowerHeldItems[battleTowerMons[battleMonIndex].heldItem]);
+			SetMonData(&gEnemyParty[partyIndex], MON_DATA_HELD_ITEM, &sBattleTowerHeldItems[battleTowerMons[battleMonIndex].heldItem]);
 
 			// The pokemon was successfully added to the trainer's party, so it's safe to move on to
 			// the next party slot.
@@ -1589,7 +1587,7 @@ void sub_81354CC(void)
 		for (i = 0; i < PARTY_SIZE; i++)
 		{
 			heldItem = GetMonData(&gSaveBlock1.playerParty[i], MON_DATA_HELD_ITEM);
-			SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, (u8 *)&heldItem);
+			SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
 		}
 		break;
 	case 2:
@@ -1633,7 +1631,7 @@ void sub_813556C(void)
 		for (i = 0; i < PARTY_SIZE; i++)
 		{
 			heldItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
-			SetMonData(&gSaveBlock1.playerParty[i], MON_DATA_HELD_ITEM, (u8 *)&heldItem);
+			SetMonData(&gSaveBlock1.playerParty[i], MON_DATA_HELD_ITEM, &heldItem);
 		}
 
 		CreateTask(sub_8135534, 1);
@@ -2185,7 +2183,7 @@ void AwardBattleTowerRibbons(void)
 			if (!GetMonData(pokemon, ribbonType))
 			{
 				gScriptResult = 1;
-				SetMonData(pokemon, ribbonType, (u8 *)&gScriptResult);
+				SetMonData(pokemon, ribbonType, &gScriptResult);
 			}
 		}
 	}

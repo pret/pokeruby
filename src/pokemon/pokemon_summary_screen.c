@@ -7,14 +7,13 @@
 #include "string_util.h"
 #include "strings2.h"
 #include "tv.h"
-
-extern struct Pokemon *unk_2018000;
+#include "ewram.h"
 
 bool8 PokemonSummaryScreen_CheckOT(struct Pokemon *mon)
 {
     u32 trainerId;
 
-    if (unk_2018000 == gEnemyParty)
+    if (ewram18000_3 == gEnemyParty)
     {
         u8 enemyId = GetMultiplayerId() ^ 1;
         trainerId = gLinkPlayers[enemyId].trainerId & 0xFFFF;
