@@ -4,40 +4,6 @@
 	.section .rodata
 
 	.align 2
-DroughtPaletteData_0: @ 8393FE8
-	.incbin "graphics/weather/drought0.bin.lz"
-
-	.align 2
-DroughtPaletteData_1: @ 839480C
-	.incbin "graphics/weather/drought1.bin.lz"
-
-	.align 2
-DroughtPaletteData_2: @ 8395004
-	.incbin "graphics/weather/drought2.bin.lz"
-
-	.align 2
-DroughtPaletteData_3: @ 83957A0
-	.incbin "graphics/weather/drought3.bin.lz"
-
-	.align 2
-DroughtPaletteData_4: @ 8395FBC
-	.incbin "graphics/weather/drought4.bin.lz"
-
-	.align 2
-DroughtPaletteData_5: @ 8396784
-	.incbin "graphics/weather/drought5.bin.lz"
-
-	.align 2
-gUnknown_08396FA8:: @ 8396FA8
-	.4byte DroughtPaletteData_0
-	.4byte DroughtPaletteData_1
-	.4byte DroughtPaletteData_2
-	.4byte DroughtPaletteData_3
-	.4byte DroughtPaletteData_4
-	.4byte DroughtPaletteData_5
-	.4byte gSharedMem
-
-	.align 2
 gUnknown_08396FC4:: @ 8396FC4
 	.4byte gUnknown_0202F7E8
 

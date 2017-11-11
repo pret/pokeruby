@@ -20,8 +20,9 @@ void nullsub_39(void);
 
 // ASM
 void sub_807CEBC(u8, u8, s8);
-void sub_807D1BC(u8, u8, u8, u8, u16);
-void sub_807D304(int, u8, u16);
+//void sub_807D1BC(u8, u8, u8, u8, u16);
+void sub_807D1BC(u8 a, u8 a2, s8 c, u8 d, u16 e);
+void sub_807D304(s8 a, u8 arg2, u16 c);
 void sub_807D424(u8, u16);
 // ...
 void fade_screen(u8, u8);
@@ -42,7 +43,7 @@ void sub_80806E4(void);
 void DoCurrentWeather(void);
 void sub_8080750();
 
-u8 sub_807D770(void);
+bool8 sub_807D770(void);
 bool8 sub_807DDFC(void);
 void SetWeather(u32);
 void UpdateWeatherPerDay(u16);
