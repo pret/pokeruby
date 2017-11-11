@@ -1109,7 +1109,7 @@ _0806B980:\n\
     movs r3, 0x3\n\
     bl sub_806BA94\n\
 _0806B98C:\n\
-    ldr r0, _0806B99C @ =0x0201b000\n\
+    ldr r0, _0806B99C @ =gSharedMem + 0x1B000\n\
     ldr r1, _0806B9A0 @ =0x00000261\n\
     adds r0, r1\n\
     movs r1, 0x2\n\
@@ -1118,7 +1118,7 @@ _0806B98C:\n\
     pop {r0}\n\
     bx r0\n\
     .align 2, 0\n\
-_0806B99C: .4byte 0x0201b000\n\
+_0806B99C: .4byte gSharedMem + 0x1B000\n\
 _0806B9A0: .4byte 0x00000261\n\
     .syntax divided\n");
 }
@@ -2548,7 +2548,7 @@ void sub_806CF04(void)
 {
     asm(".syntax unified\n\
     push {r4,r5,lr}\n\
-    ldr r4, _0806CF94 @ =0x02001000\n\
+    ldr r4, _0806CF94 @ =gSharedMem + 0x1000\n\
     ldrb r1, [r4, 0x3]\n\
     lsls r0, r1, 4\n\
     adds r0, r1\n\
@@ -2616,7 +2616,7 @@ void sub_806CF04(void)
     pop {r0}\n\
     bx r0\n\
     .align 2, 0\n\
-_0806CF94: .4byte 0x02001000\n\
+_0806CF94: .4byte gSharedMem + 0x1000\n\
 _0806CF98: .4byte gSprites + 0x20\n\
 _0806CF9C: .4byte SpriteCB_sub_806D37C\n\
     .syntax divided\n");
@@ -5033,7 +5033,7 @@ void PrintStatGrowthsInLevelUpWindow(u8 taskId) {
     movs r2, 0x13\n\
     mov r8, r2\n\
 _0807086C:\n\
-    ldr r1, _08070930 @ =0x0201c000\n\
+    ldr r1, _08070930 @ =gSharedMem + 0x1C000\n\
     ldr r0, [r1]\n\
     ldr r1, _08070934 @ =StatDataTypes\n\
     adds r1, r7, r1\n\
@@ -5041,7 +5041,7 @@ _0807086C:\n\
     bl GetMonData\n\
     adds r1, r7, 0x6\n\
     lsls r1, 1\n\
-    ldr r2, _08070938 @ =0x0201b264\n\
+    ldr r2, _08070938 @ =gSharedMem + 0x1B264\n\
     adds r1, r2, r1\n\
     strh r0, [r1]\n\
     lsls r6, r7, 1\n\
@@ -5123,9 +5123,9 @@ _0807086C:\n\
     bx r0\n\
     .align 2, 0\n\
 _0807092C: .4byte gStringVar1\n\
-_08070930: .4byte 0x0201c000\n\
+_08070930: .4byte gSharedMem + 0x1C000\n\
 _08070934: .4byte StatDataTypes\n\
-_08070938: .4byte 0x0201b264\n\
+_08070938: .4byte gSharedMem + 0x1B264\n\
 _0807093C: .4byte StatNames\n\
 _08070940: .4byte gOtherText_TallPlusAndRightArrow\n\
     .syntax divided\n");

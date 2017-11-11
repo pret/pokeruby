@@ -700,11 +700,11 @@ static void sub_8043FC0(u8 a, u8 b)
     *(ptr++) = 0x13;
     *(ptr++) = 0xF;
     *(ptr++) = EOS;
-    sub_80034D4((u8 *)0x02000000, str);
+    sub_80034D4(ewram0_9(0), str);
 
     two = 2;
     for (i = 0; i < two; i++)
-        CpuCopy32((void *)(0x02000020 + i * 64), r7[i] + gSprites[a].oam.tileNum * 32, 32);
+        CpuCopy32((void *)(ewram0_9(1) + i * 64), r7[i] + gSprites[a].oam.tileNum * 32, 32);
 }
 
 #ifdef NONMATCHING
@@ -738,7 +738,7 @@ void sub_80440EC(u8 a, s16 b, u8 c)
         ptr = sub_8003504(ptr, b, 0x13, 1);
         *(ptr++) = 0xBA;
         *(ptr++) = 0xFF;
-        sub_80034D4((u8 *)0x02000000, str);
+        sub_80034D4(ewram0_9(0), str);
     }
     else
     {
@@ -748,14 +748,14 @@ void sub_80440EC(u8 a, s16 b, u8 c)
             r4 = gUnknown_0820A85C;
         c = 2;
         sub_8003504(ptr, b, 0xF, 1);
-        sub_80034D4((u8 *)0x02000000, str);
+        sub_80034D4(ewram0_9(0), str);
     }
     //asm(""::"r"(a));
     //_080441B6
     for (i = 0; i < c; i++)  // _080440BC
     {
         void *temp = r4[i] + gSprites[a].oam.tileNum * 32;
-        CpuCopy32((void *)(0x02000020 + i * 0x40), temp, 0x20);
+        CpuCopy32((void *)(ewram0_9(1) + i * 0x40), temp, 0x20);
     }
 }
 #else
@@ -873,7 +873,7 @@ _080441B6:\n\
     lsls r0, 2\n\
     adds r6, r0, r1\n\
     adds r7, r4, 0\n\
-    ldr r5, _08044208 @ =0x02000020\n\
+    ldr r5, _08044208 @ =gSharedMem + 0x20\n\
     mov r4, r8\n\
 _080441D6:\n\
     ldrh r0, [r6, 0x4]\n\
@@ -899,7 +899,7 @@ _080441F0:\n\
 _080441FC: .4byte gUnknown_0820A85C\n\
 _08044200: .4byte gUnknown_0820A854\n\
 _08044204: .4byte gSprites\n\
-_08044208: .4byte 0x02000020\n\
+_08044208: .4byte gSharedMem + 0x20\n\
 _0804420C: .4byte 0x04000008\n\
     .syntax divided\n");
 }
@@ -939,10 +939,10 @@ static void sub_8044210(u8 a, s16 b, u8 c)
         }
     }
     r4 = gSprites[a].data5;
-    sub_80034D4((u8 *)0x02000000, str);
+    sub_80034D4(ewram0_9(0), str);
     for (i = 0; i < r10; i++)
     {
-        CpuCopy32((void *)(0x02000020 + i * 0x40), r7[i] + gSprites[r4].oam.tileNum * 32, 0x20);
+        CpuCopy32((void *)(ewram0_9(1) + i * 0x40), r7[i] + gSprites[r4].oam.tileNum * 32, 0x20);
     }
 }
 
@@ -999,19 +999,19 @@ void sub_8044338(u8 a, struct Pokemon *pkmn)
     ConvertIntToDecimalStringN(str + 9, ewram16088, 1, 2);
     str[5] = 0;
     str[8] = 0xBA;
-    sub_80034D4((u8 *)0x02000000, str);
+    sub_80034D4(ewram0_9(0), str);
 
     for (r7 = 0; r7 < 5; r7++)
     {
         if (r7 <= 1)
         {
             int foo = (gSprites[r5].oam.tileNum + 2 + r7);
-            CpuCopy32((u8 *)0x02000020 + r7 * 0x40, (u8 *)0x06010000 + foo * 32, 32);
+            CpuCopy32(ewram0_9(1) + r7 * 0x40, (u8 *)0x06010000 + foo * 32, 32);
         }
         else
         {
             int foo = (r7 + gSprites[r5].oam.tileNum);
-            CpuCopy32((u8 *)0x02000020 + r7 * 0x40, (u8 *)0x060100C0 + foo * 32, 32);
+            CpuCopy32(ewram0_9(1) + r7 * 0x40, (u8 *)0x060100C0 + foo * 32, 32);
         }
     }
 }
@@ -1049,7 +1049,7 @@ void sub_8044338(u8 a, struct Pokemon *pkmn)
     lsls r1, r0, 1\n\
     adds r1, r0\n\
     lsls r1, 7\n\
-    ldr r3, _080443D4 @ =0x02000520\n\
+    ldr r3, _080443D4 @ =gSharedMem + 0x520\n\
     adds r6, r1, r3\n\
     movs r0, 0x5\n\
     mov r8, r0\n\
@@ -1094,7 +1094,7 @@ _080443C8:\n\
     .align 2, 0\n\
 _080443CC: .4byte gUnknown_0820A864\n\
 _080443D0: .4byte gSprites\n\
-_080443D4: .4byte 0x02000520\n\
+_080443D4: .4byte gSharedMem + 0x520\n\
 _080443D8: .4byte gNatureNames\n\
 _080443DC:\n\
     adds r0, r1, 0\n\
@@ -1193,7 +1193,7 @@ _08044486:\n\
     ldrh r5, [r0, 0x38]\n\
     lsls r5, 24\n\
     lsrs r5, 24\n\
-    ldr r4, _08044504 @ =0x02000000\n\
+    ldr r4, _08044504 @ =gSharedMem\n\
     ldr r2, _08044508 @ =0x00016089\n\
     adds r0, r4, r2\n\
     ldrb r1, [r0]\n\
@@ -1222,7 +1222,7 @@ _08044486:\n\
     adds r0, r5\n\
     lsls r0, 2\n\
     adds r5, r0, r6\n\
-    ldr r4, _08044510 @ =0x02000020\n\
+    ldr r4, _08044510 @ =gSharedMem + 0x20\n\
 _080444DA:\n\
     cmp r7, 0x1\n\
     bgt _08044514\n\
@@ -1242,10 +1242,10 @@ _080444DA:\n\
 _080444F8: .4byte 0x04000008\n\
 _080444FC: .4byte gSprites\n\
 _08044500: .4byte 0x06010000\n\
-_08044504: .4byte 0x02000000\n\
+_08044504: .4byte gSharedMem\n\
 _08044508: .4byte 0x00016089\n\
 _0804450C: .4byte 0x00016088\n\
-_08044510: .4byte 0x02000020\n\
+_08044510: .4byte gSharedMem + 0x20\n\
 _08044514:\n\
     ldrh r1, [r5, 0x4]\n\
     lsls r1, 22\n\
@@ -2409,7 +2409,7 @@ static void sub_80451A0(u8 a, struct Pokemon *pkmn)
     ptr[1] = 0x13;
     ptr[2] = 0x37;
     ptr[3] = EOS;
-    ptr = (u8 *)0x02000520 + GetBankIdentity(gSprites[a].data6) * 0x180;
+    ptr = ewram520_2 + GetBankIdentity(gSprites[a].data6) * 0x180;
     sub_80034D4(ptr, gDisplayedStringBattle);
 
     i = 0;
@@ -2657,7 +2657,7 @@ static void sub_80458B0(u8 a)
     s32 r7;
     u8 *addr;
 
-    r6 = (u8 *)0x02000520 + GetBankIdentity(gSprites[a].data6) * 0x180;
+    r6 = ewram520_2 + GetBankIdentity(gSprites[a].data6) * 0x180;
     r8 = 7;
     sub_80034D4(r6, BattleText_SafariBalls);
     for (i = 0; i < r8; i++)
@@ -2686,10 +2686,10 @@ static void sub_8045998(u8 a)
     r7 = sub_8003504(r7, gNumSafariBalls, 10, 1);
     StringAppend(r7, BattleText_HighlightRed);
     status = GetBankIdentity(gSprites[a].data6);
-    r7 = (u8 *)0x02000520 + status * 0x180;
+    r7 = ewram520_2 + status * 0x180;
     r6 = 5;
     sub_80034D4(r7, gDisplayedStringBattle);
-    r7 = (u8 *)0x02000520 + status * 0x180 + 32;
+    r7 = ewram520_2 + status * 0x180 + 32;
     for (i = 6; i < 6 + r6; i++)
     {
         CpuCopy32(r7, OBJ_VRAM0 + (gSprites[a].oam.tileNum + 0x18 + MACRO1(i)) * 32, 32);

@@ -3,6 +3,7 @@
 #include "decompress.h"
 #include "palette.h"
 #include "task.h"
+#include "ewram.h"
 
 struct UnkStruct2000000 {
     /*0x00*/ u8 filler00[61];
@@ -14,8 +15,6 @@ struct UnkStruct1 {
     /*0x01*/ u8 unk01;
     /*0x02*/ s16 unk02;
 };
-
-extern struct UnkStruct2000000 gSharedMem;
 
 extern struct UnkStruct1 *gUnknown_083ED048[];
 extern const u16 gPalette_83EDE24[];
@@ -40,7 +39,7 @@ void sub_8104CAC(u8 arg0) {
 
     sub_8104DA4();
 
-    task = &gTasks[gSharedMem.unk3D];
+    task = &gTasks[ewram0_8->unk3D];
     task->data[1] = arg0;
 
     i = 0;
@@ -71,9 +70,9 @@ void sub_8106448(void) {
     u32 offsetRead, offsetWrite;
     u32 size;
 
-    LZDecompressWram(gSlotMachine_Gfx, (void *) 0x02010000);
+    LZDecompressWram(gSlotMachine_Gfx, ewram10000_2);
 
-    offsetRead = 0x02010000;
+    offsetRead = (u32)ewram10000_2;
     offsetWrite = BG_VRAM;
     size = SLOTMACHINE_GFX_TILES * 32;
     while (TRUE)

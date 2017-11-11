@@ -808,7 +808,7 @@ bool8 sub_8093AF0(struct Task *task)
     push {r5-r7}\n\
     sub sp, 0x4\n\
     mov r8, r0\n\
-    ldr r1, _08093BFC @ =0x02000000\n\
+    ldr r1, _08093BFC @ =gSharedMem\n\
     movs r0, 0\n\
     strb r0, [r1, 0x4]\n\
     mov r2, r8\n\
@@ -921,7 +921,7 @@ _08093BBE:\n\
     ble _08093BBE\n\
 _08093BD4:\n\
     movs r0, 0x1\n\
-    ldr r1, _08093BFC @ =0x02000000\n\
+    ldr r1, _08093BFC @ =gSharedMem\n\
     strb r0, [r1, 0x4]\n\
     mov r2, r8\n\
     movs r4, 0xA\n\
@@ -942,7 +942,7 @@ _08093BEA:\n\
     pop {r1}\n\
     bx r1\n\
     .align 2, 0\n\
-_08093BFC: .4byte 0x02000000\n\
+_08093BFC: .4byte gSharedMem\n\
 _08093C00: .4byte 0xffff0000\n\
 _08093C04: .4byte gUnknown_03004DE0\n\
 _08093C08: .4byte 0x0000fffc\n\
@@ -970,7 +970,7 @@ bool8 sub_8093C38(struct Task *task)
     push {r5-r7}\n\
     sub sp, 0x4\n\
     mov r8, r0\n\
-    ldr r1, _08093D40 @ =0x02000000\n\
+    ldr r1, _08093D40 @ =gSharedMem\n\
     movs r2, 0\n\
     strb r2, [r1, 0x4]\n\
     ldrh r0, [r0, 0xA]\n\
@@ -1081,7 +1081,7 @@ _08093D02:\n\
     ble _08093D02\n\
 _08093D18:\n\
     movs r0, 0x1\n\
-    ldr r1, _08093D40 @ =0x02000000\n\
+    ldr r1, _08093D40 @ =gSharedMem\n\
     strb r0, [r1, 0x4]\n\
     mov r2, r8\n\
     movs r3, 0xA\n\
@@ -1102,7 +1102,7 @@ _08093D2E:\n\
     pop {r1}\n\
     bx r1\n\
     .align 2, 0\n\
-_08093D40: .4byte 0x02000000\n\
+_08093D40: .4byte gSharedMem\n\
 _08093D44: .4byte 0xffff0000\n\
 _08093D48: .4byte gUnknown_03004DE0\n\
 _08093D4C: .4byte 0x0000fffc\n\
