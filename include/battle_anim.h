@@ -51,6 +51,7 @@ void move_anim_8072740(struct Sprite *sprite);
 void DestroyAnimVisualTask(u8 task);
 void DestroyAnimVisualTask(u8 task);
 bool8 IsAnimBankSpriteVisible(u8);
-
+s8 sub_8076F98(s8 a);
+void sub_80763FC(u16 a, u16 *b, u32 c, u8 d);
 
 #endif
