@@ -57,8 +57,8 @@ extern struct Window gUnknown_03004210;
 extern u16 gUnknown_030042A0;
 extern u16 gUnknown_030042A4;
 extern u8 gUnknown_0300434C[];
-extern const u8 gUnknown_08400CCC[];
-extern const u8 gUnknown_08400CF3[];
+extern const u8 BattleText_WallyMenu[];
+extern const u8 BattleText_MenuOptions[];
 
 // TODO: include rom3.h when my other PR gets merged
 extern void Emitcmd33(u8, u8, u16);
@@ -1269,13 +1269,13 @@ void WallyHandlecmd18(void)
     FillWindowRect_DefaultPalette(&gUnknown_03004210, 10, 2, 15, 27, 18);
     FillWindowRect_DefaultPalette(&gUnknown_03004210, 10, 2, 35, 16, 36);
     gBattleBankFunc[gActiveBank] = sub_81372BC;
-    InitWindow(&gUnknown_03004210, gUnknown_08400CF3, 400, 18, 35);
+    InitWindow(&gUnknown_03004210, BattleText_MenuOptions, 400, 18, 35);
     sub_8002F44(&gUnknown_03004210);
     sub_814A5C0(0, 0xFFFF, 12, 0x2D9F, 0);
     for (i = 0; i < 4; i++)
         nullsub_8(i);
     sub_802E3E4(0, 0);
-    StrCpyDecodeToDisplayedStringBattle(gUnknown_08400CCC);
+    StrCpyDecodeToDisplayedStringBattle(BattleText_WallyMenu);
 #ifdef ENGLISH
     InitWindow(&gUnknown_03004210, gDisplayedStringBattle, 440, 2, 35);
 #else
