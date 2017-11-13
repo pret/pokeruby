@@ -1,13 +1,35 @@
 #include "global.h"
 #include "pokemon_summary_screen.h"
+#include "data2.h"
+#include "ewram.h"
+#include "item.h"
+#include "items.h"
 #include "link.h"
 #include "menu.h"
+#include "menu_helpers.h"
+#include "party_menu.h"
 #include "pokemon.h"
 #include "region_map.h"
+#include "species.h"
 #include "string_util.h"
+#include "strings.h"
 #include "strings2.h"
 #include "tv.h"
-#include "ewram.h"
+
+struct SummaryScreenStruct
+{
+    /*0x00*/ u8 filler0[9];
+    /*0x09*/ u8 unk9;
+};
+
+#define ewramSS (*(struct SummaryScreenStruct *)(gSharedMem + 0x18000))
+
+extern u8 *sub_80A1E58(u8 *, u8);
+static void sub_80A0A2C(struct Pokemon *, u8, u8);
+extern void sub_80A1FF8(const u8 *, u8, u8, u8);
+
+extern const u8 gUnknown_083C15AE[];
+extern const u8 gUnknown_083C15B4[];
 
 bool8 PokemonSummaryScreen_CheckOT(struct Pokemon *mon)
 {
@@ -178,3 +200,147 @@ void PokemonSummaryScreen_PrintTrainerMemo(struct Pokemon *pokemon, u8 left, u8 
 
     MenuPrint(gStringVar4, left++, top++);
 }
+
+void sub_80A0958(struct Pokemon *pokemon)
+{
+    u16 species;
+    u8 *buffer;
+    u8 level;
+
+    species = GetMonData(pokemon, MON_DATA_SPECIES);
+
+    buffer = gStringVar1;
+    buffer = sub_80A1E58(buffer, 13);
+    buffer[0] = EXT_CTRL_CODE_BEGIN;
+    buffer[1] = 0x11;
+    buffer[2] = 0x7;
+    buffer[3] = CHAR_SLASH;
+    buffer += 4;
+    buffer = StringCopy(buffer, gSpeciesNames[species]);
+
+    buffer[0] = EXT_CTRL_CODE_BEGIN;
+    buffer[1] = 0x13;
+    buffer[2] = 0x50;
+    buffer[3] = EOS;
+
+    MenuPrint(gStringVar1, 0, 14);
+    MenuZeroFillWindowRect(3, 16, 9, 17);
+
+    level = GetMonData(pokemon, MON_DATA_LEVEL);
+
+    buffer = sub_80A1E58(gStringVar1, 13);
+    buffer[0] = 0x34;
+    buffer += 1;
+    buffer = ConvertIntToDecimalString(buffer, level);
+
+    buffer[0] = EXT_CTRL_CODE_BEGIN;
+    buffer[1] = 0x13;
+    buffer[2] = 0x20;
+    buffer[3] = EOS;
+
+    MenuPrint(gStringVar1, 3, 16);
+    sub_80A0A2C(pokemon, 7, 16);
+}
+
+void sub_80A0A2C(struct Pokemon *pokemon, u8 left, u8 top)
+{
+    const u8 *genderSymbol;
+    u8 var1;
+    u8 bottom;
+    u16 species = GetMonData(pokemon, MON_DATA_SPECIES2);
+
+    if (species != SPECIES_NIDORAN_M && species != SPECIES_NIDORAN_F)
+    {
+        u8 gender = GetMonGender(pokemon);
+        switch (gender)
+        {
+        default:
+            bottom = top + 1;
+            MenuZeroFillWindowRect(left, top, left, bottom);
+            return;
+        case MON_MALE:
+            genderSymbol = gOtherText_MaleSymbol2;
+            var1 = 11;
+            break;
+        case MON_FEMALE:
+            genderSymbol = gOtherText_FemaleSymbolAndLv;
+            var1 = 12;
+            break;
+        }
+
+        sub_80A1FF8(genderSymbol, var1, left, top);
+    }
+}
+
+u8 GetNumRibbons(struct Pokemon *pokemon)
+{
+    u8 numRibbons = GetMonData(pokemon, MON_DATA_COOL_RIBBON);
+    numRibbons += GetMonData(pokemon, MON_DATA_BEAUTY_RIBBON);
+    numRibbons += GetMonData(pokemon, MON_DATA_CUTE_RIBBON);
+    numRibbons += GetMonData(pokemon, MON_DATA_SMART_RIBBON);
+    numRibbons += GetMonData(pokemon, MON_DATA_TOUGH_RIBBON);
+    numRibbons += GetMonData(pokemon, MON_DATA_CHAMPION_RIBBON);
+    numRibbons += GetMonData(pokemon, MON_DATA_WINNING_RIBBON);
+    numRibbons += GetMonData(pokemon, MON_DATA_VICTORY_RIBBON);
+    numRibbons += GetMonData(pokemon, MON_DATA_ARTIST_RIBBON);
+    numRibbons += GetMonData(pokemon, MON_DATA_EFFORT_RIBBON);
+    numRibbons += GetMonData(pokemon, MON_DATA_GIFT_RIBBON_1);
+    numRibbons += GetMonData(pokemon, MON_DATA_GIFT_RIBBON_2);
+    numRibbons += GetMonData(pokemon, MON_DATA_GIFT_RIBBON_3);
+    numRibbons += GetMonData(pokemon, MON_DATA_GIFT_RIBBON_4);
+    numRibbons += GetMonData(pokemon, MON_DATA_GIFT_RIBBON_5);
+    numRibbons += GetMonData(pokemon, MON_DATA_GIFT_RIBBON_6);
+    numRibbons += GetMonData(pokemon, MON_DATA_GIFT_RIBBON_7);
+
+    return numRibbons;
+}
+
+void PrintNumRibbons(struct Pokemon *pokemon)
+{
+    u8 numRibbons = GetNumRibbons(pokemon);
+
+    if (numRibbons == 0)
+    {
+        StringCopy(gStringVar1, gOtherText_None);
+    }
+    else
+    {
+        u8 ribbonsStringLength;
+        u8 *text;
+
+        StringCopy(gStringVar1, gOtherText_Ribbons00);
+        ribbonsStringLength = StringLength(gStringVar1);
+
+        text = &gStringVar1[ribbonsStringLength - 2];
+
+        text[0] = EXT_CTRL_CODE_BEGIN;
+        text[1] = 0x14;
+        text[2] = 6;
+        ConvertIntToDecimalStringN(&text[3], numRibbons, 1, 2);
+    }
+
+    MenuPrint(gUnknown_083C15AE, 21, 4);
+}
+
+void PrintHeldItemName(u16 itemId, u8 left, u8 top)
+{
+    if (itemId == ITEM_ENIGMA_BERRY
+        && sub_80F9344() == TRUE
+        && IsLinkDoubleBattle() == TRUE
+        && (ewramSS.unk9 == 1 || ewramSS.unk9 == 4 || ewramSS.unk9 == 5))
+    {
+        StringCopy(gStringVar1, ItemId_GetItem(itemId)->name);
+    }
+    else if (itemId == 0)
+    {
+        StringCopy(gStringVar1, gOtherText_None);
+    }
+    else
+    {
+        CopyItemName(itemId, gStringVar1);
+    }
+
+    MenuPrint(gUnknown_083C15B4, left, top);
+}
+
+
