@@ -52,6 +52,7 @@ void PokemonSummaryScreen_PrintEggTrainerMemo(struct Pokemon *mon, u8 left, u8 t
 
     if (locationMet == 255)
     {
+        // Eggs received from Pokemon Box.
         MenuPrint(gOtherText_EggNicePlace, left, top);
         return;
     }

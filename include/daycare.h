@@ -1,15 +1,17 @@
 #ifndef GUARD_DAYCARE_H
 #define GUARD_DAYCARE_H
 
-u8 Daycare_CountPokemon(struct DayCareData *);
-void sub_8041324(struct BoxPokemon *, struct RecordMixingDayCareMail *);
-void sub_8041790(u16 i);
-u16 sub_8041870(u16);
-void sub_8041940(void);
-void sub_8041950(void);
-void sub_8042044(struct Pokemon *mon, u16, u8);
-u8 sub_80422A0(void);
-u8 daycare_relationship_score_from_savegame(void);
+u8 *GetMonNick(struct Pokemon *, u8 *);
+u8 *GetBoxMonNick(struct BoxPokemon *, u8 *);
+u8 CountPokemonInDaycare(struct DayCare *);
+void InitDaycareMailRecordMixing(struct BoxPokemon *, struct RecordMixingDayCareMail *);
+void Debug_AddDaycareSteps(u16 i);
+u16 GetEggSpecies(u16);
+void TriggerPendingDaycareEgg(void);
+void TriggerPendingDaycareMaleEgg(void);
+void CreateEgg(struct Pokemon *mon, u16, u8);
+u8 ShouldEggHatch(void);
+u8 GetDaycareCompatibilityScoreFromSave(void);
 bool8 NameHasGenderSymbol(const u8 *, u8);
 
 #endif // GUARD_DAYCARE_H

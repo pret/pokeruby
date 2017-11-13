@@ -500,9 +500,9 @@ bool8 sub_8068894(void)
         ScriptContext1_SetupScript(gUnknown_081A14B8);
         return TRUE;
     }
-    if (sub_80422A0())
+    if (ShouldEggHatch())
     {
-        IncrementGameStat(13);
+        IncrementGameStat(GAME_STAT_HATCHED_EGGS);
         ScriptContext1_SetupScript(S_EggHatch);
         return TRUE;
     }

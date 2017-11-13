@@ -1,8 +1,8 @@
 Route117_EventScript_1B222D:: @ 81B222D
 	lock
 	faceplayer
-	special sp0B5_daycare
-	specialvar RESULT, sp0B6_daycare
+	special GetDaycareMonNicknames
+	specialvar RESULT, GetDaycareState
 	compare RESULT, 1
 	goto_if_eq Route117_EventScript_1B2262
 	compare RESULT, 2
@@ -22,7 +22,7 @@ Route117_EventScript_1B2262:: @ 81B2262
 	goto_if_eq Route117_EventScript_1B2298
 	msgbox Route117_Text_1B2745, 4
 	clearflag 134
-	special sub_8041E7C
+	special RejectEggFromDayCare
 	release
 	end
 
@@ -41,7 +41,7 @@ Route117_EventScript_1B22B2:: @ 81B22B2
 	waitmessage
 	waitbutton
 	msgbox Route117_Text_1B27CD, 4
-	special sp0B8_daycare
+	special GiveEggFromDaycare
 	clearflag 134
 	release
 	end
@@ -57,7 +57,7 @@ Route117_EventScript_1B22DE:: @ 81B22DE
 	return
 
 Route117_EventScript_1B22E7:: @ 81B22E7
-	special sp0B5_daycare
+	special GetDaycareMonNicknames
 	msgbox Route117_Text_1B2710, 4
 	setvar 0x8004, 0
 	call Route117_EventScript_1B22CD
@@ -65,9 +65,9 @@ Route117_EventScript_1B22E7:: @ 81B22E7
 	end
 
 Route117_EventScript_1B22FE:: @ 81B22FE
-	special sp0B5_daycare
+	special GetDaycareMonNicknames
 	msgbox Route117_Text_1B2897, 4
-	special sp0B9_daycare_relationship_comment
+	special SetDaycareCompatibilityString
 	special ShowFieldMessageStringVar4
 	waitmessage
 	waitbutton
@@ -81,7 +81,7 @@ Route117_EventScript_1B22FE:: @ 81B22FE
 Route117_PokemonDayCare_EventScript_1B2327:: @ 81B2327
 	lock
 	faceplayer
-	specialvar RESULT, sp0B6_daycare
+	specialvar RESULT, GetDaycareState
 	compare RESULT, 1
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B2407
 	compare RESULT, 2
@@ -108,14 +108,14 @@ Route117_PokemonDayCare_EventScript_1B236C:: @ 81B236C
 	specialvar RESULT, sub_8095C10
 	compare RESULT, 0
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B23FD
-	specialvar 0x8005, sub_8042328
+	specialvar 0x8005, GetSelectedDaycareMonNickname
 	waitse
 	playpokecry 0x8005, 0
 	msgbox Route117_PokemonDayCare_Text_1B296E, 4
 	waitpokecry
-	special Daycare_SendPokemon_Special
+	special StoreSelectedPokemonInDaycare
 	incrementgamestat GAME_STAT_USED_DAYCARE
-	specialvar RESULT, sp0B6_daycare
+	specialvar RESULT, GetDaycareState
 	compare RESULT, 2
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B23DA
 	release
@@ -153,7 +153,7 @@ Route117_PokemonDayCare_EventScript_1B2411:: @ 81B2411
 	return
 
 Route117_PokemonDayCare_EventScript_1B241A:: @ 81B241A
-	specialvar RESULT, sub_80417B8
+	specialvar RESULT, GetNumLevelsGainedFromDaycare
 	compare RESULT, 0
 	call_if 5, Route117_PokemonDayCare_EventScript_1B2411
 	return
@@ -175,7 +175,7 @@ Route117_PokemonDayCare_EventScript_1B2469:: @ 81B2469
 	specialvar RESULT, CalculatePlayerPartyCount
 	compare RESULT, 6
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B2539
-	specialvar RESULT, sp0B6_daycare
+	specialvar RESULT, GetDaycareState
 	setvar 0x8004, 0
 	compare RESULT, 2
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B24A8
@@ -188,7 +188,7 @@ Route117_PokemonDayCare_EventScript_1B2469:: @ 81B2469
 	end
 
 Route117_PokemonDayCare_EventScript_1B24A8:: @ 81B24A8
-	special sub_8041770
+	special GetDaycareCost
 	msgbox Route117_PokemonDayCare_Text_1B2B49, 5
 	compare RESULT, 1
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B24C4
@@ -206,7 +206,7 @@ Route117_PokemonDayCare_EventScript_1B24C4:: @ 81B24C4
 Route117_PokemonDayCare_EventScript_1B24DE:: @ 81B24DE
 	applymovement 1, Route117_PokemonDayCare_Movement_1B2543
 	waitmovement 0
-	specialvar RESULT, sub_8041648
+	specialvar RESULT, TakePokemonFromDaycare
 	special sub_80B7D0C
 	playse 95
 	msgbox Route117_PokemonDayCare_Text_1B2B75, 4
@@ -214,7 +214,7 @@ Route117_PokemonDayCare_EventScript_1B24DE:: @ 81B24DE
 	playpokecry RESULT, 0
 	msgbox Route117_PokemonDayCare_Text_1B2B93, 4
 	waitpokecry
-	specialvar RESULT, sp0B6_daycare
+	specialvar RESULT, GetDaycareState
 	compare RESULT, 2
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B2520
 	goto Route117_PokemonDayCare_EventScript_1B23D0
@@ -276,7 +276,7 @@ Route117_PokemonDayCare_EventScript_1B2558:: @ 81B2558
 	compare RESULT, 2
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B23D0
 	copyvar 0x8004, RESULT
-	specialvar RESULT, sub_8041648
+	specialvar RESULT, TakePokemonFromDaycare
 	msgbox Route117_PokemonDayCare_Text_1B2B75, 4
 	msgbox Route117_PokemonDayCare_Text_1B2A76, 4
 	release

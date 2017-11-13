@@ -50,13 +50,13 @@ u8 MoriDebugMenu_SearchChild(u8 a1, u8 a2, u8 *ptr)
 {
     u8 localPtr[52];
     u16 monData;
-    u16 var;
+    u16 eggSpecies;
 
     monData = GetMonData(gPlayerParty, MON_DATA_SPECIES, ptr);
-    var = sub_8041870(monData);
+    eggSpecies = GetEggSpecies(monData);
     StringCopy(localPtr, gSpeciesNames[monData]);
     StringAppend(localPtr, gUnknown_0839B24D);
-    StringAppend(localPtr, gSpeciesNames[var]);
+    StringAppend(localPtr, gSpeciesNames[eggSpecies]);
     StringAppend(localPtr, gUnknown_0839B255);
     MenuZeroFillScreen();
     MenuDrawTextWindow(0, 14, 30, 19);
@@ -67,8 +67,8 @@ u8 MoriDebugMenu_SearchChild(u8 a1, u8 a2, u8 *ptr)
 
 s8 MoriDebugMenu_Egg(void)
 {
-    if ( Daycare_CountPokemon(&gSaveBlock1.daycareData) == 2 && daycare_relationship_score_from_savegame() )
-        sub_8041940();
+    if (CountPokemonInDaycare(&gSaveBlock1.daycare) == 2 && GetDaycareCompatibilityScoreFromSave() )
+        TriggerPendingDaycareEgg();
     CloseMenu();
 
     return 1;
@@ -76,8 +76,8 @@ s8 MoriDebugMenu_Egg(void)
 
 s8 MoriDebugMenu_MaleEgg(void)
 {
-    if ( Daycare_CountPokemon(&gSaveBlock1.daycareData) == 2 && daycare_relationship_score_from_savegame() )
-        sub_8041950();
+    if (CountPokemonInDaycare(&gSaveBlock1.daycare) == 2 && GetDaycareCompatibilityScoreFromSave() )
+        TriggerPendingDaycareMaleEgg();
     CloseMenu();
 
     return 1;
@@ -85,14 +85,14 @@ s8 MoriDebugMenu_MaleEgg(void)
 
 s8 MoriDebugMenu_1000Steps(void)
 {
-    sub_8041790(1000);
+    Debug_AddDaycareSteps(1000);
     CloseMenu();
     return 1;
 }
 
 s8 MoriDebugMenu_10000Steps(void)
 {
-    sub_8041790(10000);
+    Debug_AddDaycareSteps(10000);
     CloseMenu();
     return 1;
 }
@@ -117,7 +117,7 @@ s8 MoriDebugMenu_BreedEgg(void)
             SetMonData(&gPlayerParty[loopCounter], MON_DATA_FRIENDSHIP, &friendship);
         }
     }
-    gSaveBlock1.daycareData.misc.countersEtc.unk_11a = -3;
+    gSaveBlock1.daycare.misc.countersEtc.eggCycleStepsRemaining = -3;
     CloseMenu();
     return 1;
 }
