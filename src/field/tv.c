@@ -39,6 +39,8 @@
 #include "strings.h"
 #include "text.h"
 #include "ewram.h"
+#include "moves.h"
+#include "region_map_sections.h"
 
 struct UnkTvStruct
 {
@@ -66,26 +68,18 @@ extern struct TVSaleItem gUnknown_02038724[3];
 
 struct UnkTvStruct gUnknown_03005D38;
 
-extern u8 *gTVBravoTrainerTextGroup[];
-extern u8 *gTVBravoTrainerBattleTowerTextGroup[];
-extern u8 *gTVSmartShopperTextGroup[];
-extern u8 *gTVNameRaterTextGroup[];
-extern u8 *gTVPokemonTodayTextGroup[];
-extern u8 *gTVPokemonTodayFailedCaptureTextGroup[];
-extern u8 *gTVFanClubTextGroup[];
-extern u8 *gTVRecentHappeningsTextGroup[];
-extern u8 *gTVFanClubOpinionsTextGroup[];
-extern u8 *gTVPokemonOutbreakTextGroup[];
-extern u8 *gTVGabbyAndTyTextGroup[];
-extern u8 *gTVFishingGuruAdviceTextGroup[];
-extern u8 *gTVWorldOfMastersTextGroup[];
-extern struct OutbreakPokemon gPokeOutbreakSpeciesList[5];
-
-
-
-extern const u8 *gTVNewsTextGroup1[];
-extern const u8 *gTVNewsTextGroup2[];
-extern const u8 *gTVNewsTextGroup3[];
+//extern u8 *gTVBravoTrainerTextGroup[];
+//extern u8 *gTVBravoTrainerBattleTowerTextGroup[];
+//extern u8 *gTVSmartShopperTextGroup[];
+//extern u8 *gTVNameRaterTextGroup[];
+//extern u8 *gTVPokemonTodayTextGroup[];
+//extern u8 *gTVPokemonTodayFailedCaptureTextGroup[];
+//extern u8 *gTVRecentHappeningsTextGroup[];
+//extern u8 *gTVFanClubOpinionsTextGroup[];
+//extern u8 *gTVPokemonOutbreakTextGroup[];
+//extern u8 *gTVGabbyAndTyTextGroup[];
+//extern u8 *gTVFishingGuruAdviceTextGroup[];
+//extern u8 *gTVWorldOfMastersTextGroup[];
 
 extern u16 gScriptLastTalked;
 
@@ -104,6 +98,351 @@ static EWRAM_DATA ALIGNED(4) u8 gUnknown_020387E8 = 0; // why is this aligned to
 static u8 gUnknown_03000720;
 static u8 gUnknown_03000721;
 static s8 gUnknown_03000722;
+
+const struct OutbreakPokemon gPokeOutbreakSpeciesList[5] =
+{
+    {
+        .species = SPECIES_SURSKIT,
+        .moves = {MOVE_BUBBLE, MOVE_QUICK_ATTACK, MOVE_NONE, MOVE_NONE},
+        .level = 3,
+        .location = MAPSEC_Route102,
+    },
+    {
+        .species = SPECIES_SURSKIT,
+        .moves = {MOVE_BUBBLE, MOVE_QUICK_ATTACK, MOVE_NONE, MOVE_NONE},
+        .level = 15,
+        .location = MAPSEC_Route114,
+    },
+    {
+        .species = SPECIES_SURSKIT,
+        .moves = {MOVE_BUBBLE, MOVE_QUICK_ATTACK, MOVE_NONE, MOVE_NONE},
+        .level = 15,
+        .location = MAPSEC_Route117,
+    },
+    {
+        .species = SPECIES_SURSKIT,
+        .moves = {MOVE_BUBBLE, MOVE_QUICK_ATTACK, MOVE_NONE, MOVE_NONE},
+        .level = 28,
+        .location = MAPSEC_Route120,
+    },
+    {
+        .species = SPECIES_SKITTY,
+        .moves = {MOVE_GROWL, MOVE_TACKLE, MOVE_NONE, MOVE_NONE},
+        .level = 15,
+        .location = MAPSEC_Route116,
+    },
+};
+
+extern const u8 gTVNewsText_EnergyGuru1[];
+extern const u8 gTVNewsText_GameCorner1[];
+extern const u8 gTVNewsText_LilycoveDepartment1[];
+extern const u8 gTVNewsText_EnergyGuru2[];
+extern const u8 gTVNewsText_GameCorner2[];
+extern const u8 gTVNewsText_LilycoveDepartment2[];
+extern const u8 gTVNewsText_EnergyGuru3[];
+extern const u8 gTVNewsText_GameCorner3[];
+extern const u8 gTVNewsText_LilycoveDepartment3[];
+extern const u8 gTVFanClubText1[];
+extern const u8 gTVFanClubText2[];
+extern const u8 gTVFanClubText3[];
+extern const u8 gTVFanClubText4[];
+extern const u8 gTVFanClubText5[];
+extern const u8 gTVFanClubText6[];
+extern const u8 gTVFanClubText7[];
+extern const u8 gTVFanClubText8[];
+extern const u8 gTVRecentHappeningsText1[];
+extern const u8 gTVRecentHappeningsText2[];
+extern const u8 gTVRecentHappeningsText3[];
+extern const u8 gTVRecentHappeningsText4[];
+extern const u8 gTVRecentHappeningsText5[];
+extern const u8 gTVRecentHappeningsText6[];
+extern const u8 gTVFanClubOpinionsText1[];
+extern const u8 gTVFanClubOpinionsText2[];
+extern const u8 gTVFanClubOpinionsText3[];
+extern const u8 gTVFanClubOpinionsText4[];
+extern const u8 gTVFanClubOpinionsText5[];
+extern const u8 gTVPokemonOutbreakText[];
+extern const u8 gTVPokemonTodayText1[];
+extern const u8 gTVPokemonTodayText2[];
+extern const u8 gTVPokemonTodayText3[];
+extern const u8 gTVPokemonTodayText4[];
+extern const u8 gTVPokemonTodayText5[];
+extern const u8 gTVPokemonTodayText6[];
+extern const u8 gTVPokemonTodayText7[];
+extern const u8 gTVPokemonTodayText8[];
+extern const u8 gTVPokemonTodayText9[];
+extern const u8 gTVPokemonTodayText10[];
+extern const u8 gTVPokemonTodayText11[];
+extern const u8 gTVPokemonTodayText12[];
+extern const u8 gTVSmartShopperText1[];
+extern const u8 gTVSmartShopperText2[];
+extern const u8 gTVSmartShopperText3[];
+extern const u8 gTVSmartShopperText4[];
+extern const u8 gTVSmartShopperText5[];
+extern const u8 gTVSmartShopperText6[];
+extern const u8 gTVSmartShopperText7[];
+extern const u8 gTVSmartShopperText8[];
+extern const u8 gTVSmartShopperText9[];
+extern const u8 gTVSmartShopperText10[];
+extern const u8 gTVSmartShopperText11[];
+extern const u8 gTVSmartShopperText12[];
+extern const u8 gTVSmartShopperText13[];
+extern const u8 gTVBravoTrainerText1[];
+extern const u8 gTVBravoTrainerText2[];
+extern const u8 gTVBravoTrainerText3[];
+extern const u8 gTVBravoTrainerText4[];
+extern const u8 gTVBravoTrainerText5[];
+extern const u8 gTVBravoTrainerText6[];
+extern const u8 gTVBravoTrainerText7[];
+extern const u8 gTVBravoTrainerText8[];
+extern const u8 gTVBravoTrainerText9[];
+extern const u8 gTVBravoTrainerBattleTowerText1[];
+extern const u8 gTVBravoTrainerBattleTowerText2[];
+extern const u8 gTVBravoTrainerBattleTowerText3[];
+extern const u8 gTVBravoTrainerBattleTowerText4[];
+extern const u8 gTVBravoTrainerBattleTowerText5[];
+extern const u8 gTVBravoTrainerBattleTowerText6[];
+extern const u8 gTVBravoTrainerBattleTowerText7[];
+extern const u8 gTVBravoTrainerBattleTowerText8[];
+extern const u8 gTVBravoTrainerBattleTowerText9[];
+extern const u8 gTVBravoTrainerBattleTowerText10[];
+extern const u8 gTVBravoTrainerBattleTowerText11[];
+extern const u8 gTVBravoTrainerBattleTowerText12[];
+extern const u8 gTVBravoTrainerBattleTowerText13[];
+extern const u8 gTVBravoTrainerBattleTowerText14[];
+extern const u8 gTVBravoTrainerBattleTowerText15[];
+extern const u8 gTVNameRaterText1[];
+extern const u8 gTVNameRaterText2[];
+extern const u8 gTVNameRaterText3[];
+extern const u8 gTVNameRaterText4[];
+extern const u8 gTVNameRaterText5[];
+extern const u8 gTVNameRaterText6[];
+extern const u8 gTVNameRaterText7[];
+extern const u8 gTVNameRaterText8[];
+extern const u8 gTVNameRaterText9[];
+extern const u8 gTVNameRaterText10[];
+extern const u8 gTVNameRaterText11[];
+extern const u8 gTVNameRaterText12[];
+extern const u8 gTVNameRaterText13[];
+extern const u8 gTVNameRaterText14[];
+extern const u8 gTVNameRaterText15[];
+extern const u8 gTVNameRaterText16[];
+extern const u8 gTVNameRaterText17[];
+extern const u8 gTVNameRaterText18[];
+extern const u8 gTVNameRaterText19[];
+extern const u8 gTVPokemonTodayFailedCaptureText1[];
+extern const u8 gTVPokemonTodayFailedCaptureText2[];
+extern const u8 gTVPokemonTodayFailedCaptureText3[];
+extern const u8 gTVPokemonTodayFailedCaptureText4[];
+extern const u8 gTVPokemonTodayFailedCaptureText5[];
+extern const u8 gTVPokemonTodayFailedCaptureText6[];
+extern const u8 gTVPokemonTodayFailedCaptureText7[];
+extern const u8 gTVFishingGuruAdviceText1[];
+extern const u8 gTVFishingGuruAdviceText2[];
+extern const u8 gTVWorldOfMastersText1[];
+extern const u8 gTVWorldOfMastersText2[];
+extern const u8 gTVWorldOfMastersText3[];
+extern const u8 gTVGabbyAndTyText1[];
+extern const u8 gTVGabbyAndTyText2[];
+extern const u8 gTVGabbyAndTyText3[];
+extern const u8 gTVGabbyAndTyText4[];
+extern const u8 gTVGabbyAndTyText5[];
+extern const u8 gTVGabbyAndTyText6[];
+extern const u8 gTVGabbyAndTyText7[];
+extern const u8 gTVGabbyAndTyText8[];
+extern const u8 gTVGabbyAndTyText9[];
+
+const u8 *const gTVNewsTextGroup1[] =
+{
+    NULL,
+    gTVNewsText_EnergyGuru1,
+    gTVNewsText_GameCorner1,
+    gTVNewsText_LilycoveDepartment1,
+};
+
+const u8 *const gTVNewsTextGroup2[] =
+{
+    NULL,
+    gTVNewsText_EnergyGuru2,
+    gTVNewsText_GameCorner2,
+    gTVNewsText_LilycoveDepartment2,
+};
+
+const u8 *const gTVNewsTextGroup3[] =
+{
+    NULL,
+    gTVNewsText_EnergyGuru3,
+    gTVNewsText_GameCorner3,
+    gTVNewsText_LilycoveDepartment3,
+};
+
+u8 *const gUnknown_083D1464[] =
+{
+    gStringVar1,
+    gStringVar2,
+    gStringVar3,
+};
+
+const u8 *const gTVFanClubTextGroup[] =
+{
+    gTVFanClubText1,
+    gTVFanClubText2,
+    gTVFanClubText3,
+    gTVFanClubText4,
+    gTVFanClubText5,
+    gTVFanClubText6,
+    gTVFanClubText7,
+    gTVFanClubText8,
+};
+
+const u8 *const gTVRecentHappeningsTextGroup[] =
+{
+    gTVRecentHappeningsText1,
+    gTVRecentHappeningsText2,
+    gTVRecentHappeningsText3,
+    gTVRecentHappeningsText4,
+    gTVRecentHappeningsText5,
+    gTVRecentHappeningsText6,
+};
+
+const u8 *const gTVFanClubOpinionsTextGroup[] =
+{
+    gTVFanClubOpinionsText1,
+    gTVFanClubOpinionsText2,
+    gTVFanClubOpinionsText3,
+    gTVFanClubOpinionsText4,
+    gTVFanClubOpinionsText5,
+};
+
+const u8 *const gTVPokemonOutbreakTextGroup[] =
+{
+    gTVPokemonOutbreakText,
+};
+
+const u8 *const gTVPokemonTodayTextGroup[] =
+{
+    gTVPokemonTodayText1,
+    gTVPokemonTodayText2,
+    gTVPokemonTodayText3,
+    gTVPokemonTodayText4,
+    gTVPokemonTodayText5,
+    gTVPokemonTodayText6,
+    gTVPokemonTodayText7,
+    gTVPokemonTodayText8,
+    gTVPokemonTodayText9,
+    gTVPokemonTodayText10,
+    gTVPokemonTodayText11,
+    gTVPokemonTodayText12,
+};
+
+const u8 *const gTVSmartShopperTextGroup[] =
+{
+    gTVSmartShopperText1,
+    gTVSmartShopperText2,
+    gTVSmartShopperText3,
+    gTVSmartShopperText4,
+    gTVSmartShopperText5,
+    gTVSmartShopperText6,
+    gTVSmartShopperText7,
+    gTVSmartShopperText8,
+    gTVSmartShopperText9,
+    gTVSmartShopperText10,
+    gTVSmartShopperText11,
+    gTVSmartShopperText12,
+    gTVSmartShopperText13,
+};
+
+const u8 *const gTVBravoTrainerTextGroup[] =
+{
+    gTVBravoTrainerText1,
+    gTVBravoTrainerText2,
+    gTVBravoTrainerText3,
+    gTVBravoTrainerText4,
+    gTVBravoTrainerText5,
+    gTVBravoTrainerText6,
+    gTVBravoTrainerText7,
+    gTVBravoTrainerText8,
+    gTVBravoTrainerText9,
+};
+
+const u8 *const gTVBravoTrainerBattleTowerTextGroup[] =
+{
+    gTVBravoTrainerBattleTowerText1,
+    gTVBravoTrainerBattleTowerText2,
+    gTVBravoTrainerBattleTowerText3,
+    gTVBravoTrainerBattleTowerText4,
+    gTVBravoTrainerBattleTowerText5,
+    gTVBravoTrainerBattleTowerText6,
+    gTVBravoTrainerBattleTowerText7,
+    gTVBravoTrainerBattleTowerText8,
+    gTVBravoTrainerBattleTowerText9,
+    gTVBravoTrainerBattleTowerText10,
+    gTVBravoTrainerBattleTowerText11,
+    gTVBravoTrainerBattleTowerText12,
+    gTVBravoTrainerBattleTowerText13,
+    gTVBravoTrainerBattleTowerText14,
+    gTVBravoTrainerBattleTowerText15,
+};
+
+const u8 *const gTVNameRaterTextGroup[] =
+{
+    gTVNameRaterText1,
+    gTVNameRaterText2,
+    gTVNameRaterText3,
+    gTVNameRaterText4,
+    gTVNameRaterText5,
+    gTVNameRaterText6,
+    gTVNameRaterText7,
+    gTVNameRaterText8,
+    gTVNameRaterText9,
+    gTVNameRaterText10,
+    gTVNameRaterText11,
+    gTVNameRaterText12,
+    gTVNameRaterText13,
+    gTVNameRaterText14,
+    gTVNameRaterText15,
+    gTVNameRaterText16,
+    gTVNameRaterText17,
+    gTVNameRaterText18,
+    gTVNameRaterText19,
+};
+
+const u8 *const gTVPokemonTodayFailedCaptureTextGroup[] =
+{
+    gTVPokemonTodayFailedCaptureText1,
+    gTVPokemonTodayFailedCaptureText2,
+    gTVPokemonTodayFailedCaptureText3,
+    gTVPokemonTodayFailedCaptureText4,
+    gTVPokemonTodayFailedCaptureText5,
+    gTVPokemonTodayFailedCaptureText6,
+    gTVPokemonTodayFailedCaptureText7,
+};
+
+const u8 *const gTVFishingGuruAdviceTextGroup[] =
+{
+    gTVFishingGuruAdviceText1,
+    gTVFishingGuruAdviceText2,
+};
+
+const u8 *const gTVWorldOfMastersTextGroup[] =
+{
+    gTVWorldOfMastersText1,
+    gTVWorldOfMastersText2,
+    gTVWorldOfMastersText3,
+};
+
+const u8 *const gTVGabbyAndTyTextGroup[] =
+{
+    gTVGabbyAndTyText1,
+    gTVGabbyAndTyText2,
+    gTVGabbyAndTyText3,
+    gTVGabbyAndTyText4,
+    gTVGabbyAndTyText5,
+    gTVGabbyAndTyText6,
+    gTVGabbyAndTyText7,
+    gTVGabbyAndTyText8,
+    gTVGabbyAndTyText9,
+};
 
 void ClearTVShowData(void)
 {
