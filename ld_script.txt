@@ -366,8 +366,8 @@ SECTIONS {
         data/field_weather.o(.rodata);
         src/field/field_screen_effect.o(.rodata);
         src/battle/battle_setup.o(.rodata);
-        data/cable_club.o(.rodata);
-        data/mori_debug_menu.o(.rodata);
+        src/engine/cable_club.o(.rodata);
+        src/debug/mori_debug_menu.o(.rodata);
         src/field/trainer_see.o(.rodata);
         data/trainer_see.o(.rodata);
         src/field/wild_encounter.o(.rodata);
