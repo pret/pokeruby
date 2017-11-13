@@ -68,19 +68,6 @@ extern struct TVSaleItem gUnknown_02038724[3];
 
 struct UnkTvStruct gUnknown_03005D38;
 
-//extern u8 *gTVBravoTrainerTextGroup[];
-//extern u8 *gTVBravoTrainerBattleTowerTextGroup[];
-//extern u8 *gTVSmartShopperTextGroup[];
-//extern u8 *gTVNameRaterTextGroup[];
-//extern u8 *gTVPokemonTodayTextGroup[];
-//extern u8 *gTVPokemonTodayFailedCaptureTextGroup[];
-//extern u8 *gTVRecentHappeningsTextGroup[];
-//extern u8 *gTVFanClubOpinionsTextGroup[];
-//extern u8 *gTVPokemonOutbreakTextGroup[];
-//extern u8 *gTVGabbyAndTyTextGroup[];
-//extern u8 *gTVFishingGuruAdviceTextGroup[];
-//extern u8 *gTVWorldOfMastersTextGroup[];
-
 extern u16 gScriptLastTalked;
 
 extern u8 gScriptContestCategory;
