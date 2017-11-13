@@ -19,7 +19,7 @@
 #define BATTLESTRINGS_MAX   BATTLESTRINGS_NO + BATTLESTRING_TO_SUB
 
 #ifdef GERMAN
-#include "../data/battle_strings_en.h" // TODO: German
+#include "../data/battle_strings_de.h" // TODO: German
 #else
 #include "../data/battle_strings_en.h"
 #endif
