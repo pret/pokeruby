@@ -81,7 +81,7 @@ extern u8 gBattleTextBuff3[];
 extern u8 gLeveledUpInBattle;
 extern void (*gBattleMainFunc)(void);
 extern struct Window gUnknown_03004210;
-extern const u8 gUnknown_08400D7A[];
+extern const u8 BattleText_YesNo[];
 extern u8 gPlayerPartyCount;
 extern u16 gMoveToLearn; //move to learn
 extern const u8 gTrainerMoney[];
@@ -10952,7 +10952,7 @@ void atk59_learnmove_inbattle(void)
 void sub_8023A80(void)
 {
     sub_802BBD4(0x18, 8, 0x1D, 0xD, 0);
-    InitWindow(&gUnknown_03004210, gUnknown_08400D7A, 0x100, 0x19, 0x9);
+    InitWindow(&gUnknown_03004210, BattleText_YesNo, 0x100, 0x19, 0x9);
     sub_8002F44(&gUnknown_03004210);
     sub_814A5C0(0, 0xFFFF, 0xC, 0x2D9F, 0x20);
 }
@@ -11660,7 +11660,7 @@ static void atk6C_lvlbox_display(void)
     {
     case 0:
         sub_802BBD4(0xB, 0, 0x1D, 0x7, r1);
-        StringCopy(gStringVar4, gUnknown_08400D9F);
+        StringCopy(gStringVar4, BattleText_Format2);
 
     }
 }
@@ -11670,7 +11670,7 @@ __attribute__((naked))
 static void atk6C_lvlbox_display(void)
 {
     asm(".syntax unified\n\
-            push {r4-r7,lr}\n\
+    push {r4-r7,lr}\n\
     mov r7, r10\n\
     mov r6, r9\n\
     mov r5, r8\n\
@@ -11713,7 +11713,7 @@ _0802493E:\n\
     movs r3, 0x7\n\
     bl sub_802BBD4\n\
     ldr r0, _0802499C @ =gStringVar4\n\
-    ldr r1, _080249A0 @ =gUnknown_08400D9F\n\
+    ldr r1, _080249A0 @ =BattleText_Format2\n\
     bl StringCopy\n\
     adds r5, r0, 0\n\
     movs r1, 0\n\
@@ -11752,7 +11752,7 @@ _0802495A:\n\
     mov pc, r0\n\
     .align 2, 0\n\
 _0802499C: .4byte gStringVar4\n\
-_080249A0: .4byte gUnknown_08400D9F\n\
+_080249A0: .4byte BattleText_Format2\n\
 _080249A4: .4byte gUnknown_0840165C\n\
 _080249A8: .4byte gSharedMem\n\
 _080249AC: .4byte 0x00016018\n\
@@ -11832,13 +11832,13 @@ _08024A2C:\n\
     mov r0, r9\n\
     cmp r0, 0\n\
     beq _08024A5C\n\
-    ldr r1, _08024A58 @ =gUnknown_08400DAC\n\
+    ldr r1, _08024A58 @ =BattleText_Dash\n\
     b _08024A5E\n\
     .align 2, 0\n\
 _08024A54: .4byte gSharedMem + 0x17180\n\
-_08024A58: .4byte gUnknown_08400DAC\n\
+_08024A58: .4byte BattleText_Dash\n\
 _08024A5C:\n\
-    ldr r1, _08024AA4 @ =gUnknown_08400DAA\n\
+    ldr r1, _08024AA4 @ =BattleText_Plus\n\
 _08024A5E:\n\
     adds r0, r5, 0\n\
     bl StringCopy\n\
@@ -11874,7 +11874,7 @@ _08024A5E:\n\
     adds r5, 0x1\n\
     b _08024AB8\n\
     .align 2, 0\n\
-_08024AA4: .4byte gUnknown_08400DAA\n\
+_08024AA4: .4byte BattleText_Plus\n\
 _08024AA8:\n\
     strb r6, [r5]\n\
     movs r0, 0x11\n\
@@ -11921,7 +11921,7 @@ _08024AFE:\n\
     movs r0, 0x5\n\
     bl PlaySE\n\
     ldr r0, _08024B98 @ =gStringVar4\n\
-    ldr r1, _08024B9C @ =gUnknown_08400D9F\n\
+    ldr r1, _08024B9C @ =BattleText_Format2\n\
     bl StringCopy\n\
     adds r5, r0, 0\n\
     movs r0, 0\n\
@@ -11992,7 +11992,7 @@ _08024B1C:\n\
     .align 2, 0\n\
 _08024B94: .4byte gMain\n\
 _08024B98: .4byte gStringVar4\n\
-_08024B9C: .4byte gUnknown_08400D9F\n\
+_08024B9C: .4byte BattleText_Format2\n\
 _08024BA0: .4byte 0x00016018\n\
 _08024BA4: .4byte gUnknown_0840165C\n\
 _08024BA8: .4byte gPlayerParty\n\

@@ -85,9 +85,9 @@ extern u8 gBattleCommunication[];
 #define sEvoCursorPos        gBattleCommunication[1] // when learning a new move
 #define sEvoGraphicsTaskID   gBattleCommunication[2]
 
-extern const u8 gUnknown_08400C4A[];
-extern const u8 gUnknown_08400C60[];
-extern const u8 gUnknown_08400C8D[];
+extern const u8 BattleText_StartEvo[];
+extern const u8 BattleText_FinishEvo[];
+extern const u8 BattleText_StopEvo[];
 extern void * const gUnknown_081FAF4C[];
 extern const u8* const gBattleStringsTable[];
 
@@ -557,7 +557,7 @@ static void Task_EvolutionScene(u8 taskID)
     case 1: // print 'whoa, poke is evolving!!!' msg
         if (!gPaletteFade.active)
         {
-            StringExpandPlaceholders(gStringVar4, gUnknown_08400C4A);
+            StringExpandPlaceholders(gStringVar4, BattleText_StartEvo);
             sub_8002EB0(&gUnknown_03004210, gStringVar4, 144, 2, 15);
             gTasks[taskID].tState++;
         }
@@ -645,7 +645,7 @@ static void Task_EvolutionScene(u8 taskID)
     case 13: // congratulations string and rename prompt
         if (IsCryFinished() && !gPaletteFade.active)
         {
-            StringExpandPlaceholders(gStringVar4, gUnknown_08400C60);
+            StringExpandPlaceholders(gStringVar4, BattleText_FinishEvo);
             sub_8002EB0(&gUnknown_03004210, gStringVar4, 144, 2, 15);
             PlayBGM(BGM_FANFA5);
             gTasks[taskID].tState++;
@@ -714,7 +714,7 @@ static void Task_EvolutionScene(u8 taskID)
     case 18: // after the cry, print the string 'WHOA IT DID NOT EVOLVE!!!'
         if (IsCryFinished())
         {
-            StringExpandPlaceholders(gStringVar4, gUnknown_08400C8D);
+            StringExpandPlaceholders(gStringVar4, BattleText_StopEvo);
             sub_8002EB0(&gUnknown_03004210, gStringVar4, 144, 2, 15);
             gTasks[taskID].tEvoWasStopped = TRUE;
             gTasks[taskID].tState = 14;
@@ -899,7 +899,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
     switch (gTasks[taskID].tState)
     {
     case 0:
-        StringExpandPlaceholders(gStringVar4, gUnknown_08400C4A);
+        StringExpandPlaceholders(gStringVar4, BattleText_StartEvo);
         sub_8002EB0(&gUnknown_03004828->window, gStringVar4, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
         gTasks[taskID].tState++;
         break;
@@ -987,7 +987,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
     case 12:
         if (IsCryFinished() && !gPaletteFade.active)
         {
-            StringExpandPlaceholders(gStringVar4, gUnknown_08400C60);
+            StringExpandPlaceholders(gStringVar4, BattleText_FinishEvo);
             sub_8002EB0(&gUnknown_03004828->window, gStringVar4, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
             PlayFanfare(BGM_FANFA5);
             gTasks[taskID].tState++;

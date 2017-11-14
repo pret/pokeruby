@@ -262,13 +262,13 @@ static void SetEReaderTrainerChecksum(struct BattleTowerEReaderTrainer *ereaderT
 static void SetBattleTowerRecordChecksum(struct BattleTowerRecord *);
 static void ClearBattleTowerRecord(struct BattleTowerRecord *);
 
-extern const u8 gUnknown_08400E23[];
-extern const u8 gUnknown_08400E29[];
-extern const u8 gUnknown_08400E2C[];
-extern const u8 gUnknown_08400E2E[];
-extern const u8 gUnknown_08400E30[];
-extern const u8 gUnknown_08400E32[];
-extern const u8 gUnknown_08400E36[];
+extern const u8 BattleText_Format3[];
+extern const u8 BattleText_Format4[];
+extern const u8 BattleText_Format5[];
+extern const u8 BattleText_Format6[];
+extern const u8 BattleText_Format7[];
+extern const u8 BattleText_Format8[];
+extern const u8 BattleText_Format9[];
 extern u16 gSpecialVar_0x8004;
 extern u8 gTrainerClassToPicIndex[];
 extern u8 gTrainerClassToNameIndex[];
@@ -1409,24 +1409,24 @@ u8 AppendBattleTowerBannedSpeciesName(u16 species, u8 curIndexToAppend, s32 numT
         case 10:
             if (numToAppend == curIndexToAppend)
             {
-                StringAppend(gStringVar1, gUnknown_08400E23);
+                StringAppend(gStringVar1, BattleText_Format3);
             }
             else if (numToAppend > curIndexToAppend)
             {
-                StringAppend(gStringVar1, gUnknown_08400E29);
+                StringAppend(gStringVar1, BattleText_Format4);
             }
             break;
         case 1:
             if (curIndexToAppend == numToAppend)
             {
-                StringAppend(gStringVar1, gUnknown_08400E23);
+                StringAppend(gStringVar1, BattleText_Format3);
             }
             else
             {
-                StringAppend(gStringVar1, gUnknown_08400E29);
+                StringAppend(gStringVar1, BattleText_Format4);
             }
 
-            StringAppend(gStringVar1, gUnknown_08400E30);
+            StringAppend(gStringVar1, BattleText_Format7);
             break;
         case 3:
         case 5:
@@ -1435,14 +1435,14 @@ u8 AppendBattleTowerBannedSpeciesName(u16 species, u8 curIndexToAppend, s32 numT
         default:
             if (curIndexToAppend == numToAppend)
             {
-                StringAppend(gStringVar1, gUnknown_08400E23);
+                StringAppend(gStringVar1, BattleText_Format3);
             }
             else
             {
-                StringAppend(gStringVar1, gUnknown_08400E29);
+                StringAppend(gStringVar1, BattleText_Format4);
             }
 
-            StringAppend(gStringVar1, gUnknown_08400E2E);
+            StringAppend(gStringVar1, BattleText_Format6);
             break;
         }
 
@@ -1533,17 +1533,17 @@ void CheckPartyBattleTowerBanlist(void)
 
         if (counter == 0)
         {
-            StringAppend(gStringVar1, gUnknown_08400E2C);
-            StringAppend(gStringVar1, gUnknown_08400E32);
+            StringAppend(gStringVar1, BattleText_Format5);
+            StringAppend(gStringVar1, BattleText_Format8);
             return;
         }
         
         if (1 & counter)
-            StringAppend(gStringVar1, gUnknown_08400E2E);
+            StringAppend(gStringVar1, BattleText_Format6);
         else
-            StringAppend(gStringVar1, gUnknown_08400E2C);
+            StringAppend(gStringVar1, BattleText_Format5);
 
-        StringAppend(gStringVar1, gUnknown_08400E36);
+        StringAppend(gStringVar1, BattleText_Format9);
     }
     else
     {
