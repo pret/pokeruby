@@ -1,26 +1,27 @@
 #include "global.h"
-#include "pokemon.h"
-#include "items.h"
-#include "decompress.h"
 #include "data2.h"
-#include "task.h"
-#include "script.h"
-#include "palette.h"
-#include "overworld.h"
-#include "main.h"
+#include "daycare.h"
+#include "decompress.h"
 #include "event_data.h"
-#include "sound.h"
-#include "songs.h"
-#include "text.h"
-#include "text_window.h"
-#include "string_util.h"
-#include "strings2.h"
+#include "ewram.h"
+#include "items.h"
+#include "main.h"
 #include "menu.h"
 #include "naming_screen.h"
-#include "trig.h"
+#include "overworld.h"
+#include "palette.h"
+#include "pokemon.h"
 #include "rng.h"
+#include "script.h"
+#include "songs.h"
+#include "sound.h"
+#include "string_util.h"
+#include "strings2.h"
+#include "task.h"
+#include "text.h"
+#include "text_window.h"
+#include "trig.h"
 #include "trade.h"
-#include "ewram.h"
 
 extern struct SpriteTemplate gUnknown_02024E8C;
 
@@ -47,7 +48,6 @@ extern const struct SpriteSheet sUnknown_0820A3B8;
 extern const struct SpritePalette sUnknown_0820A3C0;
 
 bool8 GetSetPokedexFlag(u16 nationalNum, u8 caseID);
-u8* GetMonNick(struct Pokemon* mon, u8* dst);
 u8 sav1_map_get_name(void);
 const struct CompressedSpritePalette* GetMonSpritePalStruct(struct Pokemon* mon); //gets pokemon palette address
 void sub_8080990(void);
@@ -391,7 +391,7 @@ _08042B42:\n\
 
 bool8 sub_8042B4C(void)
 {
-    return sub_8042ABC(&gSaveBlock1.daycareData, gSpecialVar_0x8004);
+    return sub_8042ABC(&gSaveBlock1.daycare, gSpecialVar_0x8004);
 }
 
 static u8 EggHatchCreateMonSprite(u8 a0, u8 switchID, u8 pokeID)

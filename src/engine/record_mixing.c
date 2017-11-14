@@ -71,9 +71,9 @@ void RecordMixing_PrepareExchangePacket(void)
     memcpy(ewram_2018000.filler1004, gUnknown_083D0274, sizeof(ewram_2008000.filler1004));
     memcpy(ewram_2018000.filler1044, gUnknown_083D0278, sizeof(ewram_2008000.filler1044));
     memcpy(ewram_2018000.easyChatPairs, recordMixingEasyChatPairs, sizeof(ewram_2018000.easyChatPairs));
-    gUnknown_02038738.mail[0] = gSaveBlock1.daycareData.misc.mail[0];
-    gUnknown_02038738.mail[1] = gSaveBlock1.daycareData.misc.mail[1];
-    sub_8041324(gSaveBlock1.daycareData.mons, &gUnknown_02038738);
+    gUnknown_02038738.mail[0] = gSaveBlock1.daycare.misc.mail[0];
+    gUnknown_02038738.mail[1] = gSaveBlock1.daycare.misc.mail[1];
+    InitDaycareMailRecordMixing(gSaveBlock1.daycare.mons, &gUnknown_02038738);
     memcpy(&ewram_2018000.filler10AC, gUnknown_083D0280, sizeof(struct RecordMixingDayCareMail));
     memcpy(&ewram_2018000.battleTowerRecord, gBattleTowerPlayerRecord, sizeof(struct BattleTowerRecord));
 
@@ -524,11 +524,11 @@ void sub_80B9C6C(u8 *a, u32 b, u8 c, void *d)
     for (i = 0; i < r8; i++)
     {
         r6 = (struct DayCareMisc *)(a + b * i);
-        if (r6->unk70 != 0)
+        if (r6->numDaycareMons != 0)
         {
-            for (r7 = 0; r7 < r6->unk70; r7++)
+            for (r7 = 0; r7 < r6->numDaycareMons; r7++)
             {
-                if (r6->unk74[r7] == 0)
+                if (r6->itemsHeld[r7] == 0)
                     sp1C[i][r7] = 1;
             }
         }
