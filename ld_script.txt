@@ -342,12 +342,12 @@ SECTIONS {
         src/field/field_map_obj.o(.rodata);
         src/field/field_ground_effect.o(.rodata);
         data/field_map_obj_helpers.o(.rodata);
-        data/text_window.o(.rodata);
+        src/engine/text_window.o(.rodata);
         src/engine/script.o(.rodata);
         src/field/scrcmd.o(.rodata);
         src/field/coord_event_weather.o(.rodata);
         src/field/field_tasks.o(.rodata);
-        data/reset_rtc_screen.o(.rodata);
+        src/engine/reset_rtc_screen.o(.rodata);
         src/field/party_menu.o(.rodata);
         src/field/start_menu.o(.rodata);
         src/engine/menu.o(.rodata);

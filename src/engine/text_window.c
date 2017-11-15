@@ -18,10 +18,88 @@ static void DrawMessageBox(struct Window *win, u8 left, u8 top, u8 width, u8 hei
 static u16 sTextWindowBaseTileNum;
 static u16 sMessageBoxBaseTileNum;
 
-extern const struct FrameGraphics gUnknown_083761F0[20];
+extern const u8 gTextWindowFrame1_Gfx[];
+extern const u8 gTextWindowFrame2_Gfx[];
+extern const u8 gTextWindowFrame3_Gfx[];
+extern const u8 gTextWindowFrame4_Gfx[];
+extern const u8 gTextWindowFrame5_Gfx[];
+extern const u8 gTextWindowFrame6_Gfx[];
+extern const u8 gTextWindowFrame7_Gfx[];
+extern const u8 gTextWindowFrame8_Gfx[];
+extern const u8 gTextWindowFrame9_Gfx[];
+extern const u8 gTextWindowFrame10_Gfx[];
+extern const u8 gTextWindowFrame11_Gfx[];
+extern const u8 gTextWindowFrame12_Gfx[];
+extern const u8 gTextWindowFrame13_Gfx[];
+extern const u8 gTextWindowFrame14_Gfx[];
+extern const u8 gTextWindowFrame15_Gfx[];
+extern const u8 gTextWindowFrame16_Gfx[];
+extern const u8 gTextWindowFrame17_Gfx[];
+extern const u8 gTextWindowFrame18_Gfx[];
+extern const u8 gTextWindowFrame19_Gfx[];
+extern const u8 gTextWindowFrame20_Gfx[];
 
-extern const u16 gMessageBoxTilemap[5][7];
+extern const u16 gTextWindowFrame1_Pal[];
+extern const u16 gTextWindowFrame2_Pal[];
+extern const u16 gTextWindowFrame3_Pal[];
+extern const u16 gTextWindowFrame4_Pal[];
+extern const u16 gTextWindowFrame5_Pal[];
+extern const u16 gTextWindowFrame6_Pal[];
+extern const u16 gTextWindowFrame7_Pal[];
+extern const u16 gTextWindowFrame8_Pal[];
+extern const u16 gTextWindowFrame9_Pal[];
+extern const u16 gTextWindowFrame10_Pal[];
+extern const u16 gTextWindowFrame11_Pal[];
+extern const u16 gTextWindowFrame12_Pal[];
+extern const u16 gTextWindowFrame13_Pal[];
+extern const u16 gTextWindowFrame14_Pal[];
+extern const u16 gTextWindowFrame15_Pal[];
+extern const u16 gTextWindowFrame16_Pal[];
+extern const u16 gTextWindowFrame17_Pal[];
+extern const u16 gTextWindowFrame18_Pal[];
+extern const u16 gTextWindowFrame19_Pal[];
+extern const u16 gTextWindowFrame20_Pal[];
+
 extern const u8 gMessageBox_Gfx[];
+
+static const struct FrameGraphics gUnknown_083761F0[20] =
+{
+    {gTextWindowFrame1_Gfx, gTextWindowFrame1_Pal},
+    {gTextWindowFrame2_Gfx, gTextWindowFrame2_Pal},
+    {gTextWindowFrame3_Gfx, gTextWindowFrame3_Pal},
+    {gTextWindowFrame4_Gfx, gTextWindowFrame4_Pal},
+    {gTextWindowFrame5_Gfx, gTextWindowFrame5_Pal},
+    {gTextWindowFrame6_Gfx, gTextWindowFrame6_Pal},
+    {gTextWindowFrame7_Gfx, gTextWindowFrame7_Pal},
+    {gTextWindowFrame8_Gfx, gTextWindowFrame8_Pal},
+    {gTextWindowFrame9_Gfx, gTextWindowFrame9_Pal},
+    {gTextWindowFrame10_Gfx, gTextWindowFrame10_Pal},
+    {gTextWindowFrame11_Gfx, gTextWindowFrame11_Pal},
+    {gTextWindowFrame12_Gfx, gTextWindowFrame12_Pal},
+    {gTextWindowFrame13_Gfx, gTextWindowFrame13_Pal},
+    {gTextWindowFrame14_Gfx, gTextWindowFrame14_Pal},
+    {gTextWindowFrame15_Gfx, gTextWindowFrame15_Pal},
+    {gTextWindowFrame16_Gfx, gTextWindowFrame16_Pal},
+    {gTextWindowFrame17_Gfx, gTextWindowFrame17_Pal},
+    {gTextWindowFrame18_Gfx, gTextWindowFrame18_Pal},
+    {gTextWindowFrame19_Gfx, gTextWindowFrame19_Pal},
+    {gTextWindowFrame20_Gfx, gTextWindowFrame20_Pal},
+};
+
+//static const u16 gMessageBoxTilemap[5][7] = INCBIN_U16("graphics/text_window/message_box_map.bin");
+// 01 00 03 00 04 00 04 00 05 00 06 00 09 00
+// 0B 00 09 00 09 00 09 00 09 00 0B 04 09 00
+// 07 00 09 00 09 00 09 00 09 00 0A 00 09 00
+// 0B 08 09 00 09 00 09 00 09 00 0B 0C 09 00
+// 01 08 03 08 04 08 04 08 05 08 06 08 09 00
+static const u16 gMessageBoxTilemap[5][7] =
+{
+    {1,      3,      4,      4,      5,      6,      9},
+    {11,     9,      9,      9,      9,      0x040B, 9},
+    {7,      9,      9,      9,      9,      10,     9},
+    {0x080B, 9,      9,      9,      9,      0x0C0B, 9},
+    {0x0801, 0x0803, 0x0804, 0x0804, 0x0805, 0x0806, 9},
+};
 
 u16 SetTextWindowBaseTileNum(u16 baseTileNum)
 {
