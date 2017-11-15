@@ -86,12 +86,6 @@ static const struct FrameGraphics gUnknown_083761F0[20] =
     {gTextWindowFrame20_Gfx, gTextWindowFrame20_Pal},
 };
 
-//static const u16 gMessageBoxTilemap[5][7] = INCBIN_U16("graphics/text_window/message_box_map.bin");
-// 01 00 03 00 04 00 04 00 05 00 06 00 09 00
-// 0B 00 09 00 09 00 09 00 09 00 0B 04 09 00
-// 07 00 09 00 09 00 09 00 09 00 0A 00 09 00
-// 0B 08 09 00 09 00 09 00 09 00 0B 0C 09 00
-// 01 08 03 08 04 08 04 08 05 08 06 08 09 00
 static const u16 gMessageBoxTilemap[5][7] =
 {
     {1,      3,      4,      4,      5,      6,      9},
