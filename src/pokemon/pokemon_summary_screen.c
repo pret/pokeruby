@@ -343,4 +343,71 @@ void PrintHeldItemName(u16 itemId, u8 left, u8 top)
     MenuPrint(gUnknown_083C15B4, left, top);
 }
 
+void DrawExperienceProgressBar(struct Pokemon *pokemon, u8 left, u8 top)
+{
+    u32 curExperience;
+    u8 level;
+    u16 species;
+    u8 i;
+    u16 *vramAddr;
+    u32 expToNextLevel = 0;
+    s64 numExpProgressBarTicks = 0;
 
+    curExperience = GetMonData(pokemon, MON_DATA_EXP);
+    level = GetMonData(pokemon, MON_DATA_LEVEL);
+    species = GetMonData(pokemon, MON_DATA_SPECIES);
+
+    // The experience progress bar is shown as empty when the Pokemon is already level 100.
+    if (level < 100)
+    {
+        u32 nextLevelExp;
+        u32 expSinceLastLevel;
+        u32 expBetweenLevels;
+        u32 curLevelExperience;
+
+        nextLevelExp = gExperienceTables[gBaseStats[species].growthRate][level + 1];
+        expToNextLevel = nextLevelExp - curExperience;
+        curLevelExperience = gExperienceTables[gBaseStats[species].growthRate][level];
+        expBetweenLevels = (nextLevelExp - curLevelExperience);
+        expSinceLastLevel = curExperience - curLevelExperience;
+
+        // Calculate the number of 1-pixel "ticks" to illuminate in the experience progress bar.
+        // There are 8 tiles that make up the bar, and each tile has 8 "ticks". Hence, the numerator
+        // is multiplied by 64.
+        numExpProgressBarTicks = (expSinceLastLevel * 64) / expBetweenLevels;
+        if (numExpProgressBarTicks == 0 && expSinceLastLevel != 0)
+        {
+            // Ensure sure some exp. gain is visible in the progress bar.
+            numExpProgressBarTicks = 1;
+        }
+    }
+
+    ConvertIntToDecimalString(gStringVar1, expToNextLevel);
+    MenuPrint_RightAligned(gStringVar1, left + 6, top);
+
+
+    // Draw each of the 8 tiles that make up the experience progress bar.
+    vramAddr = (u16 *)(VRAM + 0x4CAA);
+    for (i = 0; i < 8; i++)
+    {
+        u16 tile;
+        u16 baseTile = 0x2062;
+
+        if (numExpProgressBarTicks > 7)
+        {
+            tile = 0x206A; // full exp. bar block
+        }
+        else
+        {
+            tile = (numExpProgressBarTicks % 8) + baseTile;
+        }
+
+        vramAddr[i] = tile;
+
+        numExpProgressBarTicks -= 8;
+        if (numExpProgressBarTicks < 0)
+        {
+            numExpProgressBarTicks = 0;
+        }
+    }
+}
