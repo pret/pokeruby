@@ -3960,6 +3960,9 @@ gUnknown_08E94510:: @ 8E94510
 gUnknown_08E94550:: @ 8E94550
 	.incbin "graphics/unknown/unknown_E94550.bin"
 
+gUnknown_08E94590:: @ 8E94590
+	.incbin "graphics/unknown/unknown_E94590.bin"
+
 gUnknown_08E945D0:: @ 8E945D0
 	.incbin "graphics/interface/wordgroup_layout.bin"
 

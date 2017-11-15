@@ -134,7 +134,6 @@ SECTIONS {
         src/pokemon/pokemon_icon.o(.text);
         asm/pokemon_summary_screen.o(.text);
         src/pokemon/pokemon_summary_screen.o(.text);
-        asm/pokemon_summary_screen.o(.text_80A0958);
         src/field/script_movement.o(.text);
         src/field/fldeff_cut.o(.text);
         src/pokemon/mail_data.o(.text);

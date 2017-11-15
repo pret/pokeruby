@@ -612,5 +612,7 @@ bool8 IsPokeSpriteNotFlipped(u16);
 u8 GetLevelUpMovesBySpecies(u16, u16 *);
 u8 TryIncrementMonLevel(struct Pokemon *);
 
+struct Sprite *sub_80F7920(u16, u16, const u16 *);
+
 
 #endif // GUARD_POKEMON_H
