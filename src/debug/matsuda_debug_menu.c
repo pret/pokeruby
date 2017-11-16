@@ -41,31 +41,7 @@ extern u16 gUnknown_030041B8;
 extern struct Window gUnknown_03004210;
 extern u8 (*gCallback_03004AE8)(void);
 
-extern u8 gUnknown_083C926E[][2];
-extern u8 gUnknown_083C9282[];
-extern const u8 gUnknown_083C928E[][2];
-extern u8 gUnknown_083C9296[];
-extern u8 gUnknown_083C92A8[];
-extern u8 gMatsudaDebugMenu_GoBackText[];
-extern u8 gMatsudaDebugMenu_BattlePointsText[];
-extern u8 gMatsudaDebugMenu_StartText[];
-
-extern struct SpritePalette gUnknown_083C92BC;
-extern struct SpriteSheet gUnknown_083C92B4;
-extern struct SpriteTemplate gSpriteTemplate_83C92CC;
-extern void (*gUnknown_083C92E4[][2])(struct Sprite *, s8);
-extern u32 gUnknown_083C9400[2];
-
-
-extern u8 gMatsudaDebugMenu_UnknownByteArray[];
-extern u8* gMatsudaDebugMenuTextList1[];
-extern u8* gMatsudaDebugMenuTextList2[];
-extern u8* gMatsudaDebugMenuTextList3[];
-extern u8 gMatsudaDebugMenuContestTopLeft[][2];
-
 extern bool8 gReceivedRemoteLinkPlayers;
-
-extern struct MenuAction gMatsudaDebugMenuActions[];
 
 static bool8 sub_80A9B78(void);
 static void sub_80A9BE4(u8 taskId);
@@ -84,6 +60,191 @@ static void sub_80AA10C(void);
 static void sub_80AA5BC(u8);
 static void sub_80AA614(u8, u8);
 static void sub_80AAD08(struct Sprite *, s8);
+
+// unused
+const u8 gText_Unused83C9150[] = _("テストです"); // "test"
+const u8 gMatsudaDebugMenu_ActionContestText[] = _("Contest");
+const u8 gMatsudaDebugMenu_ActionContestResultsText[] = _("Contest results");
+// unused
+const u8 gMatsudaDebugMenu_ActionChangePerimeterText[] = _("パラメータへんこう"); // "Change parameter"
+// unused
+const u8 gMatsudaDebugMenu_ActionChangeMoveText[] = _("わざ へんこう"); // "Change move"
+const u8 gMatsudaDebugMenu_ActionContestCommText[] = _("Contest (comm.)");
+const u8 gMatsudaDebugMenu_ActionCommTestText[] = _("Init comm. data");
+const u8 gMatsudaDebugMenu_ActionSetHighScoreText[] = _("Set highest score");
+const u8 gMatsudaDebugMenu_ActionResetHighScoreText[] = _("Reset highest score");
+const u8 gMatsudaDebugMenu_ActionSetAllArtMuseumText[] = _("Set all art museum items");
+
+const struct MenuAction gMatsudaDebugMenuActions[] =
+{
+    {gMatsudaDebugMenu_ActionContestText, MatsudaDebugMenu_Contest},
+    {gMatsudaDebugMenu_ActionContestResultsText, MatsudaDebugMenu_ContestResults},
+    {gMatsudaDebugMenu_ActionContestCommText, MatsudaDebugMenu_ContestComm},
+    {gMatsudaDebugMenu_ActionCommTestText, MatsudaDebugMenu_CommTest},
+    {gMatsudaDebugMenu_ActionSetHighScoreText, MatsudaDebugMenu_SetHighScore},
+    {gMatsudaDebugMenu_ActionResetHighScoreText, MatsudaDebugMenu_ResetHighScore},
+    {gMatsudaDebugMenu_ActionSetAllArtMuseumText, MatsudaDebugMenu_SetArtMuseumItems},
+};
+
+const u8 gMatsudaDebugMenu_UnknownByteArray[] = {0xFC, 0x02, 0x0F, 0x00, 0xFF};
+const u8 Unknown_083C922D[] = INCBIN_U8("graphics/unknown/ball.4bpp");
+const u16 Unknown_083C924E[] = INCBIN_U16("graphics/unknown/ball.gbapal");
+
+const u8 gUnknown_083C926E[][2] =
+{
+    {2,  0},
+    {17, 0},
+    {2,  2},
+    {17, 2},
+};
+
+const u8 gMatsudaDebugMenuContestTopLeft[][2] =
+{
+    {0,   6},
+    {15,  6},
+    {0,   8},
+    {15,  8},
+    {0,  10},
+    {15, 10},
+};
+
+const u8 gUnknown_083C9282[] =
+{
+    // TODO: 2d array?
+    7,   6,
+    22,  6,
+    7,   8,
+    22,  8,
+    7,  10,
+    22, 10,
+};
+
+const u8 gUnknown_083C928E[][2] =
+{
+    {2,  14},
+    {17, 14},
+    {2,  16},
+    {17, 16},
+};
+
+const u8 gUnknown_083C9296[] = {0x08, 0x80, 0x08, 0x80, 0x10, 0x10, 0x30, 0xA8, 0x30, 0xA8, 0x30, 0xA8, 0x08, 0x80, 0x08, 0x80, 0x10, 0x88};
+const u8 gUnknown_083C92A8[] = {0x08, 0x18, 0x28, 0x38, 0x48, 0x58, 0x78, 0x88, 0x98};
+
+const struct SpriteSheet gUnknown_083C92B4[] = {Unknown_083C922D, 32, 0x4B0};
+const struct SpritePalette gUnknown_083C92BC[] = {Unknown_083C924E, 0x4B0};
+
+const struct OamData gOamData_83C92C4 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 0,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+const struct SpriteTemplate gSpriteTemplate_83C92CC =
+{
+    .tileTag = 1200,
+    .paletteTag = 1200,
+    .oam = &gOamData_83C92C4,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80AA754,
+};
+
+static void (* const gUnknown_083C92E4[][2])(struct Sprite *, s8) =
+{
+    {sub_80AA8C8, sub_80AA8D8},
+    {sub_80AA8E8, sub_80AA8F8},
+    {sub_80AAC5C, sub_80AAC5C},
+    {sub_80AA930, sub_80AA974},
+    {sub_80AA9B8, sub_80AA9FC},
+    {sub_80AAA40, sub_80AAA84},
+    {sub_80AAAF0, sub_80AAB30},
+    {sub_80AAB70, sub_80AABB0},
+    {sub_80AABF0, sub_80AAD44},
+};
+
+static const u8 gMatsudaDebugMenu_StartText[] = _("{COLOR CYAN}{HIGHLIGHT RED}");
+static const u8 gMatsudaDebugMenu_StartJapText[] = _("かいし"); // because StartText is only called by StringCopy, this part appears to be unused.
+static const u8 gMatsudaDebugMenu_GoBackText[] = _("もどる");
+
+#ifdef GERMAN
+static const u8 gMatsudaDebugMenu_BattlePointsText[] = _("{COLOR MAGENTA}BP,");
+#else
+static const u8 gMatsudaDebugMenu_BattlePointsText[] = _("{COLOR MAGENTA}BP.");
+#endif
+
+static const u8 MatsudaDebugMenuText_Cool[] = _("かっこよさ"); // cool
+static const u8 MatsudaDebugMenuText_Cute[] = _("かわいさ"); // cute
+static const u8 MatsudaDebugMenuText_Beauty[] = _("うつくしさ"); // beauty
+static const u8 MatsudaDebugMenuText_Smart[] = _("かしこさ"); // smart
+static const u8 MatsudaDebugMenuText_Tough[] = _("たくましさ"); // tough
+static const u8 MatsudaDebugMenuText_Sheen[] = _("けづや"); // sheen
+
+static const u8 *const gMatsudaDebugMenuTextList1[] =
+{
+    MatsudaDebugMenuText_Cool,
+    MatsudaDebugMenuText_Cute,
+    MatsudaDebugMenuText_Beauty,
+    MatsudaDebugMenuText_Smart,
+    MatsudaDebugMenuText_Tough,
+    MatsudaDebugMenuText_Sheen,
+};
+
+static const u8 MatsudaDebugMenuText_CoolContest[] = _("かっこよさコンテスト");
+static const u8 MatsudaDebugMenuText_BeautyContest[] = _("うつくしさコンテスト");
+static const u8 MatsudaDebugMenuText_CuteContest[] = _("かわいさコンテスト　");
+static const u8 MatsudaDebugMenuText_SmartContest[] = _("かしこさコンテスト　");
+static const u8 MatsudaDebugMenuText_ToughContest[] = _("たくましさコンテスト");
+
+static const u8 *const gMatsudaDebugMenuTextList2[] =
+{
+    MatsudaDebugMenuText_CoolContest,
+    MatsudaDebugMenuText_BeautyContest,
+    MatsudaDebugMenuText_CuteContest,
+    MatsudaDebugMenuText_SmartContest,
+    MatsudaDebugMenuText_ToughContest,
+};
+
+static const u8 MatsudaDebugMenuText_Fallarbor[] = _("ハジツゲ/ノーマル"); // Fallarbor / Normal
+static const u8 MatsudaDebugMenuText_Verdanturf[] = _("シダケ/スーパー　"); // Verdanturf / Super
+static const u8 MatsudaDebugMenuText_Slateport[] = _("カイナ/ハイパー　"); // Slateport / Hyper
+static const u8 MatsudaDebugMenuText_Lilycove[] = _("ミナモ/マスター　"); // Lilycove / Master
+
+static const u8 *const gMatsudaDebugMenuTextList3[] =
+{
+    MatsudaDebugMenuText_Fallarbor,
+    MatsudaDebugMenuText_Verdanturf,
+    MatsudaDebugMenuText_Slateport,
+    MatsudaDebugMenuText_Lilycove,
+};
+
+static const struct OamData gUnknown_083C9400 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 1,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 1,
+    .tileNum = 1023,
+    .priority = 0,
+    .paletteNum = 15,
+    .affineParam = 0,
+};
 
 u8 unref_sub_80A9B28(void)
 {
@@ -112,7 +273,7 @@ static bool8 sub_80A9B78(void)
     }
 }
 
-s8 MatsudaDebugMenu_ContestResults(void)
+u8 MatsudaDebugMenu_ContestResults(void)
 {
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
     CreateTask(sub_80A9BE4, 0xFF);
@@ -132,20 +293,20 @@ static void sub_80A9BE4(u8 taskId)
     }
 }
 
-s8 MatsudaDebugMenu_Contest(void)
+u8 MatsudaDebugMenu_Contest(void)
 {
     gIsLinkContest = 0;
     sub_80AA10C();
     return 0;
 }
 
-s8 MatsudaDebugMenu_ContestComm(void)
+u8 MatsudaDebugMenu_ContestComm(void)
 {
     sub_80AA10C();
     return 0;
 }
 
-s8 MatsudaDebugMenu_CommTest(void)
+u8 MatsudaDebugMenu_CommTest(void)
 {
     u8 newTaskId;
     u8 newTaskId2;
@@ -397,8 +558,8 @@ static void sub_80AA10C(void)
     sub_80AA5E8(gScriptContestRank);
     sub_8003460(&gMenuWindow, gMatsudaDebugMenu_GoBackText, 0xD6, 0x12, 0x12);
     sub_8003460(&gMenuWindow, gMatsudaDebugMenu_BattlePointsText, 0xDC, zero, 0xC);
-    LoadSpriteSheet(&gUnknown_083C92B4);
-    LoadSpritePalette(&gUnknown_083C92BC);
+    LoadSpriteSheet(gUnknown_083C92B4);
+    LoadSpritePalette(gUnknown_083C92BC);
     sub_80AA280(3);
     sub_80AA658(3);
     sub_80AA614(3, zero);
@@ -608,7 +769,7 @@ static u8 sub_80AA908(u32 a1, u8 a2, s8 a3) // first param is unused.
     return val;
 }
 
-void sub_80AA930(struct Sprite *sprite, u8 var2)
+void sub_80AA930(struct Sprite *sprite, s8 var2)
 {
     u8 val = sprite->data2;
 
@@ -616,7 +777,7 @@ void sub_80AA930(struct Sprite *sprite, u8 var2)
     sub_80AA340(sprite->data2);
 }
 
-void sub_80AA974(struct Sprite *sprite, u8 var2)
+void sub_80AA974(struct Sprite *sprite, s8 var2)
 {
     u8 val = sprite->data2;
 
@@ -624,7 +785,7 @@ void sub_80AA974(struct Sprite *sprite, u8 var2)
     sub_80AA388(sprite->data2);
 }
 
-void sub_80AA9B8(struct Sprite *sprite, u8 var2)
+void sub_80AA9B8(struct Sprite *sprite, s8 var2)
 {
     u8 val = sprite->data2;
 
@@ -632,7 +793,7 @@ void sub_80AA9B8(struct Sprite *sprite, u8 var2)
     sub_80AA3D0(sprite->data2);
 }
 
-void sub_80AA9FC(struct Sprite *sprite, u8 var2)
+void sub_80AA9FC(struct Sprite *sprite, s8 var2)
 {
     u8 val = sprite->data2;
 
@@ -640,7 +801,7 @@ void sub_80AA9FC(struct Sprite *sprite, u8 var2)
     sub_80AA418(sprite->data2);
 }
 
-void sub_80AAA40(struct Sprite *sprite, u8 var2)
+void sub_80AAA40(struct Sprite *sprite, s8 var2)
 {
     u8 val = sprite->data2;
 
@@ -648,7 +809,7 @@ void sub_80AAA40(struct Sprite *sprite, u8 var2)
     sub_80AA460(sprite->data2);
 }
 
-void sub_80AAA84(struct Sprite *sprite, u8 var2)
+void sub_80AAA84(struct Sprite *sprite, s8 var2)
 {
     u8 val = sprite->data2;
 
@@ -669,7 +830,7 @@ static u16 sub_80AAAC8(u32 a1, u16 a2, s8 a3) // first param is unused.
     return val;
 }
 
-void sub_80AAAF0(struct Sprite *sprite, u8 var2)
+void sub_80AAAF0(struct Sprite *sprite, s8 var2)
 {
     u8 val = sprite->data2;
 
@@ -677,7 +838,7 @@ void sub_80AAAF0(struct Sprite *sprite, u8 var2)
     sub_80AA4F0(sprite->data2, 0);
 }
 
-void sub_80AAB30(struct Sprite *sprite, u8 var2)
+void sub_80AAB30(struct Sprite *sprite, s8 var2)
 {
     u8 val = sprite->data2;
 
@@ -685,7 +846,7 @@ void sub_80AAB30(struct Sprite *sprite, u8 var2)
     sub_80AA4F0(sprite->data2, 1);
 }
 
-void sub_80AAB70(struct Sprite *sprite, u8 var2)
+void sub_80AAB70(struct Sprite *sprite, s8 var2)
 {
     u8 val = sprite->data2;
 
@@ -693,7 +854,7 @@ void sub_80AAB70(struct Sprite *sprite, u8 var2)
     sub_80AA4F0(sprite->data2, 2);
 }
 
-void sub_80AABB0(struct Sprite *sprite, u8 var2)
+void sub_80AABB0(struct Sprite *sprite, s8 var2)
 {
     u8 val = sprite->data2;
 
@@ -1013,16 +1174,14 @@ void sub_80AAF30(void)
     sub_80B2A7C(0xFE);
 }
 
-//Don't know size of return type
-int MatsudaDebugMenu_SetHighScore(void)
+u8 MatsudaDebugMenu_SetHighScore(void)
 {
     sub_80AAF30();
     CloseMenu();
     return 1;
 }
 
-//Don't know size of return type
-int MatsudaDebugMenu_ResetHighScore(void)
+u8 MatsudaDebugMenu_ResetHighScore(void)
 {
     s32 i;
 
@@ -1037,8 +1196,7 @@ int MatsudaDebugMenu_ResetHighScore(void)
     return 1;
 }
 
-//Don't know size of return type
-int MatsudaDebugMenu_SetArtMuseumItems(void)
+u8 MatsudaDebugMenu_SetArtMuseumItems(void)
 {
     s32 i;
 

@@ -351,7 +351,7 @@ SECTIONS {
         src/field/party_menu.o(.rodata);
         src/field/start_menu.o(.rodata);
         src/engine/menu.o(.rodata);
-        data/tileset_anim.o(.rodata);
+        src/engine/tileset_anim.o(.rodata);
         src/engine/palette.o(.rodata);
         src/engine/sound.o(.rodata);
         data/battle_anim.o(.rodata);
@@ -385,7 +385,7 @@ SECTIONS {
         src/field/item_menu.o(.rodata);
         data/battle_anim_80A7E7C.o(.rodata);
         src/field/item.o(.rodata);
-        data/matsuda_debug_menu.o(.rodata);
+        src/debug/matsuda_debug_menu.o(.rodata);
         data/contest.o(.rodata);
         src/field/shop.o(.rodata);
         src/field/berry.o(.rodata);
