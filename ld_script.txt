@@ -392,7 +392,7 @@ SECTIONS {
         src/field/script_menu.o(.rodata);
         src/engine/naming_screen.o(.rodata);
         data/naming_screen.o(.rodata);
-        data/money.o(.rodata);
+        src/field/money.o(.rodata);
         data/contest_effect.o(.rodata);
         src/engine/record_mixing.o(.data);
         src/engine/record_mixing.o(.rodata);
@@ -424,7 +424,7 @@ SECTIONS {
         src/field/starter_choose.o(.rodata);
         src/field/wallclock.o(.rodata);
         src/field/pokeblock.o(.rodata);
-        data/fldeff_flash.o(.rodata);
+        src/field/fldeff_flash.o(.rodata);
         src/engine/time_events.o(.rodata);
         src/field/field_specials.o(.rodata);
         data/pokedex_area_screen.o(.rodata);
