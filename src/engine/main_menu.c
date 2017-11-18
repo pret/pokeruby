@@ -30,8 +30,6 @@ extern struct PaletteFadeControl gPaletteFade;
 
 extern u16 gSaveFileStatus;
 
-extern u16 gMainMenuPalette[];
-
 extern const u8 gBirchSpeech_Welcome[];
 extern const u8 gBirchSpeech_ThisIsPokemon[];
 extern const u8 gBirchSpeech_WorldInhabitedByPokemon[];
@@ -43,15 +41,11 @@ extern u8 gBirchSpeech_AhOkayYouArePlayer[];
 extern u8 gBirchSpeech_AreYouReady[];
 
 extern struct SpriteTemplate gUnknown_02024E8C;
-extern u16 gUnknown_081E795C[];
 extern const struct MenuAction gUnknown_081E79B0[];
 extern const struct MenuAction gMalePresetNames[];
 extern const struct MenuAction gFemalePresetNames[];
 
-extern const u8 gUnknown_081E764C[];
-extern const u8 gBirchIntroShadowGfx[];
 extern const u8 gUnknown_081E7834[];
-extern const u8 gUnknown_081E796C[];
 
 extern const union AffineAnimCmd *const gSpriteAffineAnimTable_81E79AC[];
 
@@ -135,6 +129,53 @@ static s8 GenderMenuProcessInput(void);
 static void CreateNameMenu(u8 left, u8 top);
 static s8 NameMenuProcessInput(void);
 static void SetPresetPlayerName(u8 index);
+
+static const u16 gUnknown_081E764C[][16] =
+{
+    INCBIN_U16("graphics/birch_speech/bg0.gbapal"),
+    INCBIN_U16("graphics/birch_speech/bg1.gbapal"),
+};
+
+static const u8 gBirchIntroShadowGfx[] = INCBIN_U8("graphics/birch_speech/shadow.4bpp.lz");
+static const u8 gUnknown_081E7834[] = INCBIN_U8("graphics/birch_speech/map.bin.lz");
+static const u16 gUnknown_081E795C[] = INCBIN_U16("graphics/birch_speech/bg2.gbapal");
+static const u16 gUnknown_081E796C[] = INCBIN_U16("graphics/birch_speech/blank_pal.gbapal");
+static const u16 gMainMenuPalette[] = INCBIN_U16("graphics/misc/main_menu.gbapal");
+
+static const union AffineAnimCmd gSpriteAffineAnim_81E799C[] =
+{
+    AFFINEANIMCMD_FRAME(0xFFFE, 0xFFFE, 0, 48),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd *const gSpriteAffineAnimTable_81E79AC[] =
+{
+    gSpriteAffineAnim_81E799C,
+};
+
+static const struct MenuAction gUnknown_081E79B0[] =
+{
+    {gBirchText_Boy, NULL},
+    {gBirchText_Girl, NULL},
+};
+
+static const struct MenuAction gMalePresetNames[] =
+{
+    {gBirchText_NewName, NULL},
+    {gDefaultBoyName1, NULL},
+    {gDefaultBoyName2, NULL},
+    {gDefaultBoyName3, NULL},
+    {gDefaultBoyName4, NULL},
+};
+
+static const struct MenuAction gFemalePresetNames[] =
+{
+    {gBirchText_NewName, NULL},
+    {gDefaultGirlName1, NULL},
+    {gDefaultGirlName2, NULL},
+    {gDefaultGirlName3, NULL},
+    {gDefaultGirlName4, NULL},
+};
 
 static void CB2_MainMenu(void)
 {

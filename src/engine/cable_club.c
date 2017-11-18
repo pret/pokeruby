@@ -35,7 +35,6 @@ extern const u8 gUnknown_081A4932[];
 extern const u8 gUnknown_081A4975[];
 extern const u8 gUnknown_081A49B6[];
 extern const u8 gUnknown_081A490C[];
-extern const u8* const gTrainerCardColorNames[];
 extern struct
 {
     u8 field0;
@@ -75,6 +74,26 @@ extern void sub_805559C(void);
 extern void sub_8055574(void);
 extern s32 sub_80554F8(void);
 extern void sub_805465C(void);
+
+#ifdef GERMAN
+const u8 TrainerCardColorName_Bronze[] = _("BRONZE");
+const u8 TrainerCardColorName_Copper[] = _("KUPFER");
+const u8 TrainerCardColorName_Silver[] = _("SILBER");
+const u8 TrainerCardColorName_Gold[] = _("GOLD");
+#else
+const u8 TrainerCardColorName_Bronze[] = _("BRONZE");
+const u8 TrainerCardColorName_Copper[] = _("COPPER");
+const u8 TrainerCardColorName_Silver[] = _("SILVER");
+const u8 TrainerCardColorName_Gold[] = _("GOLD");
+#endif
+
+const u8 *const gTrainerCardColorNames[] =
+{
+    TrainerCardColorName_Bronze,
+    TrainerCardColorName_Copper,
+    TrainerCardColorName_Silver,
+    TrainerCardColorName_Gold,
+};
 
 static void sub_8082CD4(u8 arg0, u8 arg1)
 {

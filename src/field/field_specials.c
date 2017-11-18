@@ -48,6 +48,8 @@ extern u16 gSpecialVar_0x8004;
 extern u16 gSpecialVar_0x8005;
 extern u16 gScriptResult;
 
+extern u8 *const gUnknown_083D1464[3];
+
 EWRAM_DATA bool8 gBikeCyclingChallenge = FALSE;
 EWRAM_DATA u8 gBikeCollisions = 0;
 EWRAM_DATA u32 gBikeCyclingTimer = 0;

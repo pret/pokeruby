@@ -1,39 +1,10 @@
 #include "global.h"
 #include "tileset_anim.h"
 
-extern u8 *gTilesetAnimTable_General_0[];
-extern u8 *gTilesetAnimTable_General_1[];
-extern u8 *gTilesetAnimTable_General_2[];
-extern u8 *gTilesetAnimTable_General_3[];
-extern u8 *gTilesetAnimTable_General_4[];
-extern u8 *gTilesetAnimTable_Lavaridge[];
-extern u8 *gTilesetAnimTable_Pacifidlog_0[];
-extern u8 *gTilesetAnimTable_Underwater[];
-extern u8 *gTilesetAnimTable_Pacifidlog_1[];
-extern u8 *gUnknown_0837BAE4[];
-extern u8 *gUnknown_0837BB04[];
-extern u8 *gTilesetAnimTable_Mauville_0A[];
-extern u8 *gTilesetAnimTable_Mauville_1A[];
-extern u8 *gTilesetAnimTable_Mauville_0B[];
-extern u8 *gTilesetAnimTable_Mauville_1B[];
-extern u8 *gUnknown_0837BFA4[];
-extern u8 *gTilesetAnimTable_Rustboro_0[];
-extern u8 *gTilesetAnimTable_Rustboro_1[];
-extern u8 *gTilesetAnimTable_Cave[];
-extern u8 *gUnknown_0837C93C[];
-extern u8 *gTilesetAnimTable_EverGrande[];
-extern u8 *gTilesetAnimTable_Building[];
-extern u8 *gTilesetAnimTable_SootopolisGym_0[];
-extern u8 *gTilesetAnimTable_SootopolisGym_1[];
-extern u8 *gTilesetAnimTable_EliteFour_0[];
-extern u8 *gTilesetAnimTable_EliteFour_1[];
-extern u8 *gTilesetAnimTable_MauvilleGym[];
-extern u8 *gTilesetAnimTable_BikeShop[];
-
 struct Dma
 {
-    void *src;
-    void *dest;
+    const void *src;
+    const void *dest;
     u16 size;
 };
 
@@ -89,13 +60,403 @@ static void sub_807399C(u16);
 static void sub_8073974(u16);
 static void sub_80739EC(u16);
 
+static const u8 TilesetAnimTiles_General_0_1[] = INCBIN_U8("data/tilesets/primary/general/anim/0/1.4bpp");
+static const u8 TilesetAnimTiles_General_0_0[] = INCBIN_U8("data/tilesets/primary/general/anim/0/0.4bpp");
+static const u8 TilesetAnimTiles_General_0_2[] = INCBIN_U8("data/tilesets/primary/general/anim/0/2.4bpp");
+asm(".space 32");
+
+static const u8 *const gTilesetAnimTable_General_0[] =
+{
+    TilesetAnimTiles_General_0_0,
+    TilesetAnimTiles_General_0_1,
+    TilesetAnimTiles_General_0_0,
+    TilesetAnimTiles_General_0_2,
+};
+
+static const u8 TilesetAnimTiles_General_1_0[] = INCBIN_U8("data/tilesets/primary/general/anim/1/0.4bpp");
+static const u8 TilesetAnimTiles_General_1_1[] = INCBIN_U8("data/tilesets/primary/general/anim/1/1.4bpp");
+static const u8 TilesetAnimTiles_General_1_2[] = INCBIN_U8("data/tilesets/primary/general/anim/1/2.4bpp");
+static const u8 TilesetAnimTiles_General_1_3[] = INCBIN_U8("data/tilesets/primary/general/anim/1/3.4bpp");
+static const u8 TilesetAnimTiles_General_1_4[] = INCBIN_U8("data/tilesets/primary/general/anim/1/4.4bpp");
+static const u8 TilesetAnimTiles_General_1_5[] = INCBIN_U8("data/tilesets/primary/general/anim/1/5.4bpp");
+static const u8 TilesetAnimTiles_General_1_6[] = INCBIN_U8("data/tilesets/primary/general/anim/1/6.4bpp");
+static const u8 TilesetAnimTiles_General_1_7[] = INCBIN_U8("data/tilesets/primary/general/anim/1/7.4bpp");
+
+static const u8 *const gTilesetAnimTable_General_1[] =
+{
+    TilesetAnimTiles_General_1_0,
+    TilesetAnimTiles_General_1_1,
+    TilesetAnimTiles_General_1_2,
+    TilesetAnimTiles_General_1_3,
+    TilesetAnimTiles_General_1_4,
+    TilesetAnimTiles_General_1_5,
+    TilesetAnimTiles_General_1_6,
+    TilesetAnimTiles_General_1_7,
+};
+
+static const u8 TilesetAnimTiles_General_2_0[] = INCBIN_U8("data/tilesets/primary/general/anim/2/0.4bpp");
+static const u8 TilesetAnimTiles_General_2_1[] = INCBIN_U8("data/tilesets/primary/general/anim/2/1.4bpp");
+static const u8 TilesetAnimTiles_General_2_2[] = INCBIN_U8("data/tilesets/primary/general/anim/2/2.4bpp");
+static const u8 TilesetAnimTiles_General_2_3[] = INCBIN_U8("data/tilesets/primary/general/anim/2/3.4bpp");
+static const u8 TilesetAnimTiles_General_2_4[] = INCBIN_U8("data/tilesets/primary/general/anim/2/4.4bpp");
+static const u8 TilesetAnimTiles_General_2_5[] = INCBIN_U8("data/tilesets/primary/general/anim/2/5.4bpp");
+static const u8 TilesetAnimTiles_General_2_6[] = INCBIN_U8("data/tilesets/primary/general/anim/2/6.4bpp");
+
+static const u8 *const gTilesetAnimTable_General_2[] =
+{
+    TilesetAnimTiles_General_2_0,
+    TilesetAnimTiles_General_2_1,
+    TilesetAnimTiles_General_2_2,
+    TilesetAnimTiles_General_2_3,
+    TilesetAnimTiles_General_2_4,
+    TilesetAnimTiles_General_2_5,
+    TilesetAnimTiles_General_2_6,
+    TilesetAnimTiles_General_2_0,
+};
+
+static const u8 TilesetAnimTiles_General_3_0[] = INCBIN_U8("data/tilesets/primary/general/anim/3/0.4bpp");
+static const u8 TilesetAnimTiles_General_3_1[] = INCBIN_U8("data/tilesets/primary/general/anim/3/1.4bpp");
+static const u8 TilesetAnimTiles_General_3_2[] = INCBIN_U8("data/tilesets/primary/general/anim/3/2.4bpp");
+static const u8 TilesetAnimTiles_General_3_3[] = INCBIN_U8("data/tilesets/primary/general/anim/3/3.4bpp");
+
+static const u8 *const gTilesetAnimTable_General_3[] =
+{
+    TilesetAnimTiles_General_3_0,
+    TilesetAnimTiles_General_3_1,
+    TilesetAnimTiles_General_3_2,
+    TilesetAnimTiles_General_3_3,
+};
+
+static const u8 TilesetAnimTiles_General_4_0[] = INCBIN_U8("data/tilesets/primary/general/anim/4/0.4bpp");
+static const u8 TilesetAnimTiles_General_4_1[] = INCBIN_U8("data/tilesets/primary/general/anim/4/1.4bpp");
+static const u8 TilesetAnimTiles_General_4_2[] = INCBIN_U8("data/tilesets/primary/general/anim/4/2.4bpp");
+static const u8 TilesetAnimTiles_General_4_3[] = INCBIN_U8("data/tilesets/primary/general/anim/4/3.4bpp");
+
+static const u8 *const gTilesetAnimTable_General_4[] =
+{
+    TilesetAnimTiles_General_4_0,
+    TilesetAnimTiles_General_4_1,
+    TilesetAnimTiles_General_4_2,
+    TilesetAnimTiles_General_4_3,
+};
+
+static const u8 TilesetAnimTiles_Lavaridge_0[] = INCBIN_U8("data/tilesets/secondary/lavaridge/anim/0.4bpp");
+static const u8 TilesetAnimTiles_Lavaridge_1[] = INCBIN_U8("data/tilesets/secondary/lavaridge/anim/1.4bpp");
+static const u8 TilesetAnimTiles_Lavaridge_2[] = INCBIN_U8("data/tilesets/secondary/lavaridge/anim/2.4bpp");
+static const u8 TilesetAnimTiles_Lavaridge_3[] = INCBIN_U8("data/tilesets/secondary/lavaridge/anim/3.4bpp");
+
+static const u8 *const gTilesetAnimTable_Lavaridge[] =
+{
+    TilesetAnimTiles_Lavaridge_0,
+    TilesetAnimTiles_Lavaridge_1,
+    TilesetAnimTiles_Lavaridge_2,
+    TilesetAnimTiles_Lavaridge_3,
+};
+
+static const u8 TilesetAnimTiles_Pacifidlog_0_0[] = INCBIN_U8("data/tilesets/secondary/pacifidlog/anim/0/0.4bpp");
+static const u8 TilesetAnimTiles_Pacifidlog_0_1[] = INCBIN_U8("data/tilesets/secondary/pacifidlog/anim/0/1.4bpp");
+static const u8 TilesetAnimTiles_Pacifidlog_0_2[] = INCBIN_U8("data/tilesets/secondary/pacifidlog/anim/0/2.4bpp");
+
+static const u8 *const gTilesetAnimTable_Pacifidlog_0[] =
+{
+    TilesetAnimTiles_Pacifidlog_0_0,
+    TilesetAnimTiles_Pacifidlog_0_1,
+    TilesetAnimTiles_Pacifidlog_0_2,
+    TilesetAnimTiles_Pacifidlog_0_1,
+};
+
+static const u8 TilesetAnimTiles_Underwater_0[] = INCBIN_U8("data/tilesets/secondary/underwater/anim/0.4bpp");
+static const u8 TilesetAnimTiles_Underwater_1[] = INCBIN_U8("data/tilesets/secondary/underwater/anim/1.4bpp");
+static const u8 TilesetAnimTiles_Underwater_2[] = INCBIN_U8("data/tilesets/secondary/underwater/anim/2.4bpp");
+static const u8 TilesetAnimTiles_Underwater_3[] = INCBIN_U8("data/tilesets/secondary/underwater/anim/3.4bpp");
+
+static const u8 *const gTilesetAnimTable_Underwater[] =
+{
+    TilesetAnimTiles_Underwater_0,
+    TilesetAnimTiles_Underwater_1,
+    TilesetAnimTiles_Underwater_2,
+    TilesetAnimTiles_Underwater_3,
+};
+
+static const u8 TilesetAnimTiles_Pacifidlog_1_0[] = INCBIN_U8("data/tilesets/secondary/pacifidlog/anim/1/0.4bpp");
+static const u8 TilesetAnimTiles_Pacifidlog_1_1[] = INCBIN_U8("data/tilesets/secondary/pacifidlog/anim/1/1.4bpp");
+static const u8 TilesetAnimTiles_Pacifidlog_1_2[] = INCBIN_U8("data/tilesets/secondary/pacifidlog/anim/1/2.4bpp");
+static const u8 TilesetAnimTiles_Pacifidlog_1_3[] = INCBIN_U8("data/tilesets/secondary/pacifidlog/anim/1/3.4bpp");
+static const u8 TilesetAnimTiles_Pacifidlog_1_4[] = INCBIN_U8("data/tilesets/secondary/pacifidlog/anim/1/4.4bpp");
+static const u8 TilesetAnimTiles_Pacifidlog_1_5[] = INCBIN_U8("data/tilesets/secondary/pacifidlog/anim/1/5.4bpp");
+static const u8 TilesetAnimTiles_Pacifidlog_1_6[] = INCBIN_U8("data/tilesets/secondary/pacifidlog/anim/1/6.4bpp");
+static const u8 TilesetAnimTiles_Pacifidlog_1_7[] = INCBIN_U8("data/tilesets/secondary/pacifidlog/anim/1/7.4bpp");
+
+static const u8 *const gTilesetAnimTable_Pacifidlog_1[] =
+{
+    TilesetAnimTiles_Pacifidlog_1_0,
+    TilesetAnimTiles_Pacifidlog_1_1,
+    TilesetAnimTiles_Pacifidlog_1_2,
+    TilesetAnimTiles_Pacifidlog_1_3,
+    TilesetAnimTiles_Pacifidlog_1_4,
+    TilesetAnimTiles_Pacifidlog_1_5,
+    TilesetAnimTiles_Pacifidlog_1_6,
+    TilesetAnimTiles_Pacifidlog_1_7,
+};
+
+static const u8 TilesetAnimTiles_Mauville_0_0[] = INCBIN_U8("data/tilesets/secondary/mauville/anim/0/0.4bpp");
+static const u8 TilesetAnimTiles_Mauville_0_1[] = INCBIN_U8("data/tilesets/secondary/mauville/anim/0/1.4bpp");
+static const u8 TilesetAnimTiles_Mauville_0_2[] = INCBIN_U8("data/tilesets/secondary/mauville/anim/0/2.4bpp");
+static const u8 TilesetAnimTiles_Mauville_0_3[] = INCBIN_U8("data/tilesets/secondary/mauville/anim/0/3.4bpp");
+static const u8 TilesetAnimTiles_Mauville_0_4[] = INCBIN_U8("data/tilesets/secondary/mauville/anim/0/4.4bpp");
+
+static const u8 TilesetAnimTiles_Mauville_1_0[] = INCBIN_U8("data/tilesets/secondary/mauville/anim/1/0.4bpp");
+static const u8 TilesetAnimTiles_Mauville_1_1[] = INCBIN_U8("data/tilesets/secondary/mauville/anim/1/1.4bpp");
+static const u8 TilesetAnimTiles_Mauville_1_2[] = INCBIN_U8("data/tilesets/secondary/mauville/anim/1/2.4bpp");
+static const u8 TilesetAnimTiles_Mauville_1_3[] = INCBIN_U8("data/tilesets/secondary/mauville/anim/1/3.4bpp");
+static const u8 TilesetAnimTiles_Mauville_1_4[] = INCBIN_U8("data/tilesets/secondary/mauville/anim/1/4.4bpp");
+
+static const void *const gUnknown_0837BAE4[] =
+{
+    (void *)(VRAM + 0x4C00),
+    (void *)(VRAM + 0x4C80),
+    (void *)(VRAM + 0x4D00),
+    (void *)(VRAM + 0x4D80),
+    (void *)(VRAM + 0x4E00),
+    (void *)(VRAM + 0x4E80),
+    (void *)(VRAM + 0x4F00),
+    (void *)(VRAM + 0x4F80),
+};
+
+static const void *const gUnknown_0837BB04[] =
+{
+    (void *)(VRAM + 0x5000),
+    (void *)(VRAM + 0x5080),
+    (void *)(VRAM + 0x5100),
+    (void *)(VRAM + 0x5180),
+    (void *)(VRAM + 0x5200),
+    (void *)(VRAM + 0x5280),
+    (void *)(VRAM + 0x5300),
+    (void *)(VRAM + 0x5380),
+};
+
+static const u8 *const gTilesetAnimTable_Mauville_0A[] =
+{
+    TilesetAnimTiles_Mauville_0_0,
+    TilesetAnimTiles_Mauville_0_0,
+    TilesetAnimTiles_Mauville_0_1,
+    TilesetAnimTiles_Mauville_0_2,
+    TilesetAnimTiles_Mauville_0_3,
+    TilesetAnimTiles_Mauville_0_3,
+    TilesetAnimTiles_Mauville_0_3,
+    TilesetAnimTiles_Mauville_0_3,
+    TilesetAnimTiles_Mauville_0_3,
+    TilesetAnimTiles_Mauville_0_3,
+    TilesetAnimTiles_Mauville_0_2,
+    TilesetAnimTiles_Mauville_0_1,
+};
+
+static const u8 *const gTilesetAnimTable_Mauville_1A[] =
+{
+    TilesetAnimTiles_Mauville_1_0,
+    TilesetAnimTiles_Mauville_1_0,
+    TilesetAnimTiles_Mauville_1_1,
+    TilesetAnimTiles_Mauville_1_2,
+    TilesetAnimTiles_Mauville_1_3,
+    TilesetAnimTiles_Mauville_1_3,
+    TilesetAnimTiles_Mauville_1_3,
+    TilesetAnimTiles_Mauville_1_3,
+    TilesetAnimTiles_Mauville_1_3,
+    TilesetAnimTiles_Mauville_1_3,
+    TilesetAnimTiles_Mauville_1_2,
+    TilesetAnimTiles_Mauville_1_1,
+};
+
+static const u8 *const gTilesetAnimTable_Mauville_0B[] =
+{
+    TilesetAnimTiles_Mauville_0_0,
+    TilesetAnimTiles_Mauville_0_0,
+    TilesetAnimTiles_Mauville_0_4,
+    TilesetAnimTiles_Mauville_0_4,
+};
+
+static const u8 *const gTilesetAnimTable_Mauville_1B[] =
+{
+    TilesetAnimTiles_Mauville_1_0,
+    TilesetAnimTiles_Mauville_1_0,
+    TilesetAnimTiles_Mauville_1_4,
+    TilesetAnimTiles_Mauville_1_4,
+};
+
+static const u8 TilesetAnimTiles_Rustboro_0_0[] = INCBIN_U8("data/tilesets/secondary/rustboro/anim/0/0.4bpp");
+static const u8 TilesetAnimTiles_Rustboro_0_1[] = INCBIN_U8("data/tilesets/secondary/rustboro/anim/0/1.4bpp");
+static const u8 TilesetAnimTiles_Rustboro_0_2[] = INCBIN_U8("data/tilesets/secondary/rustboro/anim/0/2.4bpp");
+static const u8 TilesetAnimTiles_Rustboro_0_3[] = INCBIN_U8("data/tilesets/secondary/rustboro/anim/0/3.4bpp");
+static const u8 TilesetAnimTiles_Rustboro_0_4[] = INCBIN_U8("data/tilesets/secondary/rustboro/anim/0/4.4bpp");
+static const u8 TilesetAnimTiles_Rustboro_0_5[] = INCBIN_U8("data/tilesets/secondary/rustboro/anim/0/5.4bpp");
+static const u8 TilesetAnimTiles_Rustboro_0_6[] = INCBIN_U8("data/tilesets/secondary/rustboro/anim/0/6.4bpp");
+static const u8 TilesetAnimTiles_Rustboro_0_7[] = INCBIN_U8("data/tilesets/secondary/rustboro/anim/0/7.4bpp");
+
+static const void *const gUnknown_0837BFA4[] =
+{
+    (void *)(VRAM + 0x5000),
+    (void *)(VRAM + 0x5080),
+    (void *)(VRAM + 0x5100),
+    (void *)(VRAM + 0x5180),
+    (void *)(VRAM + 0x5200),
+    (void *)(VRAM + 0x5280),
+    (void *)(VRAM + 0x5300),
+    (void *)(VRAM + 0x5380),
+};
+
+static const u8 *const gTilesetAnimTable_Rustboro_0[] =
+{
+    TilesetAnimTiles_Rustboro_0_0,
+    TilesetAnimTiles_Rustboro_0_1,
+    TilesetAnimTiles_Rustboro_0_2,
+    TilesetAnimTiles_Rustboro_0_3,
+    TilesetAnimTiles_Rustboro_0_4,
+    TilesetAnimTiles_Rustboro_0_5,
+    TilesetAnimTiles_Rustboro_0_6,
+    TilesetAnimTiles_Rustboro_0_7,
+};
+
+static const u8 TilesetAnimTiles_Rustboro_1_0[] = INCBIN_U8("data/tilesets/secondary/rustboro/anim/1/0.4bpp");
+static const u8 TilesetAnimTiles_Rustboro_1_1[] = INCBIN_U8("data/tilesets/secondary/rustboro/anim/1/1.4bpp");
+
+static const u8 *const gTilesetAnimTable_Rustboro_1[] =
+{
+    TilesetAnimTiles_Rustboro_1_0,
+    TilesetAnimTiles_Rustboro_1_1,
+};
+
+static const u8 TilesetAnimTiles_Cave_0[] = INCBIN_U8("data/tilesets/secondary/cave/anim/0.4bpp");
+static const u8 TilesetAnimTiles_Cave_1[] = INCBIN_U8("data/tilesets/secondary/cave/anim/1.4bpp");
+static const u8 TilesetAnimTiles_Cave_2[] = INCBIN_U8("data/tilesets/secondary/cave/anim/2.4bpp");
+static const u8 TilesetAnimTiles_Cave_3[] = INCBIN_U8("data/tilesets/secondary/cave/anim/3.4bpp");
+// unused anim tiles for cave
+static const u8 TilesetAnimTiles_Cave_4[] = INCBIN_U8("data/tilesets/secondary/cave/anim/unused/0.4bpp");
+static const u8 TilesetAnimTiles_Cave_5[] = INCBIN_U8("data/tilesets/secondary/cave/anim/unused/1.4bpp");
+static const u8 TilesetAnimTiles_Cave_6[] = INCBIN_U8("data/tilesets/secondary/cave/anim/unused/2.4bpp");
+static const u8 TilesetAnimTiles_Cave_7[] = INCBIN_U8("data/tilesets/secondary/cave/anim/unused/3.4bpp");
+asm(".space 32");
+
+static const u8 *const gTilesetAnimTable_Cave[] =
+{
+    TilesetAnimTiles_Cave_0,
+    TilesetAnimTiles_Cave_1,
+    TilesetAnimTiles_Cave_2,
+    TilesetAnimTiles_Cave_3,
+};
+
+static const u8 TilesetAnimTiles_EverGrande_0[] = INCBIN_U8("data/tilesets/secondary/ever_grande/anim/0.4bpp");
+static const u8 TilesetAnimTiles_EverGrande_1[] = INCBIN_U8("data/tilesets/secondary/ever_grande/anim/1.4bpp");
+static const u8 TilesetAnimTiles_EverGrande_2[] = INCBIN_U8("data/tilesets/secondary/ever_grande/anim/2.4bpp");
+static const u8 TilesetAnimTiles_EverGrande_3[] = INCBIN_U8("data/tilesets/secondary/ever_grande/anim/3.4bpp");
+static const u8 TilesetAnimTiles_EverGrande_4[] = INCBIN_U8("data/tilesets/secondary/ever_grande/anim/4.4bpp");
+static const u8 TilesetAnimTiles_EverGrande_5[] = INCBIN_U8("data/tilesets/secondary/ever_grande/anim/5.4bpp");
+static const u8 TilesetAnimTiles_EverGrande_6[] = INCBIN_U8("data/tilesets/secondary/ever_grande/anim/6.4bpp");
+static const u8 TilesetAnimTiles_EverGrande_7[] = INCBIN_U8("data/tilesets/secondary/ever_grande/anim/7.4bpp");
+asm(".space 32");
+
+static const void *const gUnknown_0837C93C[] =
+{
+    (void *)(VRAM + 0x5C00),
+    (void *)(VRAM + 0x5C80),
+    (void *)(VRAM + 0x5D00),
+    (void *)(VRAM + 0x5D80),
+    (void *)(VRAM + 0x5E00),
+    (void *)(VRAM + 0x5E80),
+    (void *)(VRAM + 0x5F00),
+    (void *)(VRAM + 0x5F80),
+};
+
+static const u8 *const gTilesetAnimTable_EverGrande[] =
+{
+    TilesetAnimTiles_EverGrande_0,
+    TilesetAnimTiles_EverGrande_1,
+    TilesetAnimTiles_EverGrande_2,
+    TilesetAnimTiles_EverGrande_3,
+    TilesetAnimTiles_EverGrande_4,
+    TilesetAnimTiles_EverGrande_5,
+    TilesetAnimTiles_EverGrande_6,
+    TilesetAnimTiles_EverGrande_7,
+};
+
+static const u8 TilesetAnimTiles_Building_0[] = INCBIN_U8("data/tilesets/primary/building/anim/0.4bpp");
+static const u8 TilesetAnimTiles_Building_1[] = INCBIN_U8("data/tilesets/primary/building/anim/1.4bpp");
+
+static const u8 *const gTilesetAnimTable_Building[] =
+{
+    TilesetAnimTiles_Building_0,
+    TilesetAnimTiles_Building_1,
+};
+
+static const u8 TilesetAnimTiles_SootopolisGym_0_0[] = INCBIN_U8("data/tilesets/secondary/sootopolis_gym/anim/0/0.4bpp");
+static const u8 TilesetAnimTiles_SootopolisGym_0_1[] = INCBIN_U8("data/tilesets/secondary/sootopolis_gym/anim/0/1.4bpp");
+static const u8 TilesetAnimTiles_SootopolisGym_0_2[] = INCBIN_U8("data/tilesets/secondary/sootopolis_gym/anim/0/2.4bpp");
+static const u8 TilesetAnimTiles_SootopolisGym_1_0[] = INCBIN_U8("data/tilesets/secondary/sootopolis_gym/anim/1/0.4bpp");
+static const u8 TilesetAnimTiles_SootopolisGym_1_1[] = INCBIN_U8("data/tilesets/secondary/sootopolis_gym/anim/1/1.4bpp");
+static const u8 TilesetAnimTiles_SootopolisGym_1_2[] = INCBIN_U8("data/tilesets/secondary/sootopolis_gym/anim/1/2.4bpp");
+
+static const u8 *const gTilesetAnimTable_SootopolisGym_0[] =
+{
+    TilesetAnimTiles_SootopolisGym_0_0,
+    TilesetAnimTiles_SootopolisGym_0_1,
+    TilesetAnimTiles_SootopolisGym_0_2,
+};
+
+static const u8 *const gTilesetAnimTable_SootopolisGym_1[] =
+{
+    TilesetAnimTiles_SootopolisGym_1_0,
+    TilesetAnimTiles_SootopolisGym_1_1,
+    TilesetAnimTiles_SootopolisGym_1_2,
+};
+
+static const u8 TilesetAnimTiles_EliteFour_1_0[] = INCBIN_U8("data/tilesets/secondary/elite_four/anim/1/0.4bpp");
+static const u8 TilesetAnimTiles_EliteFour_1_1[] = INCBIN_U8("data/tilesets/secondary/elite_four/anim/1/1.4bpp");
+static const u8 TilesetAnimTiles_EliteFour_0_0[] = INCBIN_U8("data/tilesets/secondary/elite_four/anim/0/0.4bpp");
+static const u8 TilesetAnimTiles_EliteFour_0_1[] = INCBIN_U8("data/tilesets/secondary/elite_four/anim/0/1.4bpp");
+static const u8 TilesetAnimTiles_EliteFour_0_2[] = INCBIN_U8("data/tilesets/secondary/elite_four/anim/0/2.4bpp");
+static const u8 TilesetAnimTiles_EliteFour_0_3[] = INCBIN_U8("data/tilesets/secondary/elite_four/anim/0/3.4bpp");
+asm(".space 32");
+
+static const u8 *const gTilesetAnimTable_EliteFour_0[] =
+{
+    TilesetAnimTiles_EliteFour_0_0,
+    TilesetAnimTiles_EliteFour_0_1,
+    TilesetAnimTiles_EliteFour_0_2,
+    TilesetAnimTiles_EliteFour_0_3,
+};
+
+static const u8 *const gTilesetAnimTable_EliteFour_1[] =
+{
+    TilesetAnimTiles_EliteFour_1_0,
+    TilesetAnimTiles_EliteFour_1_1,
+};
+
+static const u8 TilesetAnimTiles_MauvilleGym_0[] = INCBIN_U8("data/tilesets/secondary/mauville_gym/anim/0.4bpp");
+static const u8 TilesetAnimTiles_MauvilleGym_1[] = INCBIN_U8("data/tilesets/secondary/mauville_gym/anim/1.4bpp");
+asm(".space 32");
+
+static const u8 *const gTilesetAnimTable_MauvilleGym[] =
+{
+    TilesetAnimTiles_MauvilleGym_0,
+    TilesetAnimTiles_MauvilleGym_1,
+};
+
+static const u8 TilesetAnimTiles_BikeShop_0[] = INCBIN_U8("data/tilesets/secondary/bike_shop/anim/0.4bpp");
+static const u8 TilesetAnimTiles_BikeShop_1[] = INCBIN_U8("data/tilesets/secondary/bike_shop/anim/1.4bpp");
+asm(".space 32");
+
+static const u8 *const gTilesetAnimTable_BikeShop[] =
+{
+    TilesetAnimTiles_BikeShop_0,
+    TilesetAnimTiles_BikeShop_1,
+};
+
 static void ClearTilesetAnimDmas(void)
 {
     gNumTilesetAnimDmas = 0;
     CpuFill32(0, &gTilesetAnimDmas, sizeof(gTilesetAnimDmas));
 }
 
-static void QueueTilesetAnimDma(void *src, void *dest, u16 size)
+static void QueueTilesetAnimDma(const void *src, const void *dest, u16 size)
 {
     if (gNumTilesetAnimDmas < 20)
     {

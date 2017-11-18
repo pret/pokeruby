@@ -24,8 +24,8 @@ struct PokemonMarkMenu
     /*0x000C*/ struct Sprite *menuWindowSprites[2]; // upper and lower halves of menu window
     /*0x0014*/ struct Sprite *menuMarkingSprites[4];
     /*0x0024*/ struct Sprite *menuTextSprite;
-    /*0x0028*/ u8 *frameTiles;
-    /*0x002C*/ u16 *framePalette;
+    /*0x0028*/ const u8 *frameTiles;
+    /*0x002C*/ const u16 *framePalette;
     /*0x0030*/ u8 menuWindowSpriteTiles[0x1000];
     /*0x1030*/ u8 filler1030[0x80];
     /*0x10B0*/ u8 tileLoadState;

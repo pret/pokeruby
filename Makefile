@@ -7,7 +7,7 @@ CC1             := tools/agbcc/bin/agbcc
 override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Wunused -Werror -O2 -fhex-asm
 
 CPP      := $(DEVKITARM)/bin/arm-none-eabi-cpp
-CPPFLAGS := -I tools/agbcc/include -iquote include -nostdinc -undef -Werror
+CPPFLAGS := -I tools/agbcc/include -iquote include -nostdinc -undef -Werror -Wno-trigraphs
 
 LD      := $(DEVKITARM)/bin/arm-none-eabi-ld
 

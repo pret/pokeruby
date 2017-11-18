@@ -18,6 +18,136 @@
 #define BATTLESTRINGS_NO    351
 #define BATTLESTRINGS_MAX   BATTLESTRINGS_NO + BATTLESTRING_TO_SUB
 
+#ifdef GERMAN
+#include "../data/battle_strings_de.h" // TODO: German
+#else
+#include "../data/battle_strings_en.h"
+#endif
+
+const u16 gUnknown_084016BC[] =
+{
+    MOVE_SWORDS_DANCE,
+    MOVE_STRENGTH,
+    MOVE_GROWTH,
+    MOVE_HARDEN,
+    MOVE_MINIMIZE,
+    MOVE_SMOKESCREEN,
+    MOVE_WITHDRAW,
+    MOVE_DEFENSE_CURL,
+    MOVE_EGG_BOMB,
+    MOVE_SMOG,
+    MOVE_BONE_CLUB,
+    MOVE_FLASH,
+    MOVE_SPLASH,
+    MOVE_ACID_ARMOR,
+    MOVE_BONEMERANG,
+    MOVE_REST,
+    MOVE_SHARPEN,
+    MOVE_SUBSTITUTE,
+    MOVE_MIND_READER,
+    MOVE_SNORE,
+    MOVE_PROTECT,
+    MOVE_SPIKES,
+    MOVE_ENDURE,
+    MOVE_ROLLOUT,
+    MOVE_SWAGGER,
+    MOVE_SLEEP_TALK,
+    MOVE_HIDDEN_POWER,
+    MOVE_PSYCH_UP,
+    MOVE_EXTREME_SPEED,
+    MOVE_FOLLOW_ME,
+    MOVE_TRICK,
+    MOVE_ASSIST,
+    MOVE_INGRAIN,
+    MOVE_KNOCK_OFF,
+    MOVE_CAMOUFLAGE,
+    MOVE_ASTONISH,
+    MOVE_ODOR_SLEUTH,
+    MOVE_GRASS_WHISTLE,
+    MOVE_SHEER_COLD,
+    MOVE_MUDDY_WATER,
+    MOVE_IRON_DEFENSE,
+    MOVE_BOUNCE,
+    MOVE_NONE,
+    MOVE_TELEPORT,
+    MOVE_RECOVER,
+    MOVE_BIDE,
+    MOVE_AMNESIA,
+    MOVE_FLAIL,
+    MOVE_TAUNT,
+    MOVE_BULK_UP,
+    MOVE_NONE,
+    MOVE_MEDITATE,
+    MOVE_AGILITY,
+    MOVE_MIMIC,
+    MOVE_DOUBLE_TEAM,
+    MOVE_BARRAGE,
+    MOVE_TRANSFORM,
+    MOVE_STRUGGLE,
+    MOVE_SCARY_FACE,
+    MOVE_CHARGE,
+    MOVE_WISH,
+    MOVE_BRICK_BREAK,
+    MOVE_YAWN,
+    MOVE_FEATHER_DANCE,
+    MOVE_TEETER_DANCE,
+    MOVE_MUD_SPORT,
+    MOVE_FAKE_TEARS,
+    MOVE_WATER_SPORT,
+    MOVE_CALM_MIND,
+    MOVE_NONE,
+    MOVE_POUND,
+    MOVE_SCRATCH,
+    MOVE_VICE_GRIP,
+    MOVE_WING_ATTACK,
+    MOVE_FLY,
+    MOVE_BIND,
+    MOVE_SLAM,
+    MOVE_HORN_ATTACK,
+    MOVE_WRAP,
+    MOVE_THRASH,
+    MOVE_TAIL_WHIP,
+    MOVE_LEER,
+    MOVE_BITE,
+    MOVE_GROWL,
+    MOVE_ROAR,
+    MOVE_SING,
+    MOVE_PECK,
+    MOVE_ABSORB,
+    MOVE_STRING_SHOT,
+    MOVE_EARTHQUAKE,
+    MOVE_FISSURE,
+    MOVE_DIG,
+    MOVE_TOXIC,
+    MOVE_SCREECH,
+    MOVE_METRONOME,
+    MOVE_LICK,
+    MOVE_CLAMP,
+    MOVE_CONSTRICT,
+    MOVE_POISON_GAS,
+    MOVE_BUBBLE,
+    MOVE_SLASH,
+    MOVE_SPIDER_WEB,
+    MOVE_NIGHTMARE,
+    MOVE_CURSE,
+    MOVE_FORESIGHT,
+    MOVE_CHARM,
+    MOVE_ATTRACT,
+    MOVE_ROCK_SMASH,
+    MOVE_UPROAR,
+    MOVE_SPIT_UP,
+    MOVE_SWALLOW,
+    MOVE_TORMENT,
+    MOVE_FLATTER,
+    MOVE_ROLE_PLAY,
+    MOVE_ENDEAVOR,
+    MOVE_TICKLE,
+    MOVE_COVET,
+    MOVE_NONE,
+};
+
+const u8 gUnknown_084017A8[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}; // empty flags
+
 extern const u8* const gBattleStringsTable[BATTLESTRINGS_NO];
 
 extern u16 gLastUsedItem;
@@ -44,67 +174,6 @@ extern u16 gBattlePartyID[4];
 extern struct BattleEnigmaBerry gEnigmaBerries[4];
 extern u8 gBattleBufferA[4][0x200];
 
-extern const u8 gUnknown_084005DB[];
-extern const u8 gUnknown_084005C7[];
-extern const u8 gUnknown_084005AA[];
-extern const u8 gUnknown_08400568[];
-extern const u8 gUnknown_08400590[];
-extern const u8 gUnknown_0840057B[];
-extern const u8 gUnknown_08400555[];
-extern const u8 gUnknown_084006F1[];
-extern const u8 gUnknown_084006A4[];
-extern const u8 gUnknown_0840069C[];
-extern const u8 gUnknown_0840065C[];
-extern const u8 gUnknown_08400645[];
-extern const u8 gUnknown_08400608[];
-extern const u8 gUnknown_08400635[];
-extern const u8 gUnknown_084005F5[];
-extern const u8 gUnknown_08400709[];
-extern const u8 gUnknown_08400727[];
-extern const u8 gUnknown_08400736[];
-extern const u8 gUnknown_08400749[];
-extern const u8 gUnknown_08400781[];
-extern const u8 gUnknown_08400771[];
-extern const u8 gUnknown_0840075E[];
-extern const u8 gUnknown_084006B3[];
-extern const u8 gUnknown_084006BB[];
-extern const u8 gUnknown_084006C6[];
-extern const u8 gUnknown_084006D5[];
-extern const u8 gUnknown_0840068C[];
-extern const u8 gUnknown_0840067C[];
-extern const u8 gUnknown_08400622[];
-extern const u8 gUnknown_084007BD[];
-extern const u8 gUnknown_083FFEFC[];
-extern const u8 gUnknown_083FFFF7[];
-extern const u8 gUnknown_083FFFEA[];
-extern const u8 gUnknown_083FFF6A[];
-extern const u8 gUnknown_083FFF99[];
-extern const u8 gUnknown_083FFFCB[];
-extern const u8 gUnknown_083FFF56[];
-extern const u8 gUnknown_083FFF81[];
-extern const u8 gUnknown_083FFFB3[];
-extern const u8 gUnknown_08400A78[];
-extern const u8 gUnknown_08400A85[];
-extern const u8 gUnknown_08400797[];
-extern const u8 gUnknown_08400791[];
-extern const u8 gUnknown_084007B7[];
-extern const u8 gUnknown_084007B2[];
-extern const u8 gUnknown_0840079C[];
-extern const u8 gUnknown_084007A1[];
-extern const u8 gUnknown_084007A7[];
-extern const u8 gUnknown_084007AC[];
-extern const u8 gUnknown_084009ED[];
-extern const u8 gUnknown_084009F7[];
-extern const u8 gUnknown_084007C8[];
-extern const u8 gUnknown_084007CA[];
-extern const u8 gUnknown_084007CC[];
-extern const u8 gUnknown_084007CE[];
-extern const u8 gUnknown_084007D0[];
-extern const u8 gUnknown_08400E5E[];
-extern const u8 gUnknown_08400E62[];
-
-extern const u16 gUnknown_084016BC[]; // a table of moves
-
 extern const u8* const gUnknown_08401674[]; // table of pointers to 'a -TYPE' strings
 extern const u8* const gUnknown_08400F58[]; // table of pointers to stat strings
 extern const u8* const gUnknown_08400F78[]; // table of pointers to flavour strings
@@ -116,7 +185,6 @@ struct StatusFlagString
 };
 
 extern const struct StatusFlagString gUnknown_081FA6D4[7]; // status flag/text
-extern const u8 gUnknown_084017A8[8]; // empty flags
 
 extern struct StringInfoBattle* gSelectedOrderFromParty;
 #define gStringInfo gSelectedOrderFromParty
@@ -168,13 +236,13 @@ void BufferStringBattle(u16 stringID)
             if (gBattleTypeFlags & BATTLE_TYPE_LINK)
             {
                 if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
-                    stringPtr = gUnknown_084005DB;
+                    stringPtr = BattleText_DoubleWantToBattle;
                 else
-                    stringPtr = gUnknown_084005C7;
+                    stringPtr = BattleText_SingleWantToBattle2;
             }
             else
             {
-                stringPtr = gUnknown_084005AA;
+                stringPtr = BattleText_SingleWantToBattle1;
 #ifdef GERMAN
                 stringPtr = de_sub_804110C(0xFFFF, stringPtr);
 #endif
@@ -183,13 +251,13 @@ void BufferStringBattle(u16 stringID)
         else
         {
             if (gBattleTypeFlags & BATTLE_TYPE_LEGENDARY)
-                stringPtr = gUnknown_08400568;
+                stringPtr = BattleText_WildAppeared2;
             else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE) // interesting, looks like they had something planned for wild double battles
-                stringPtr = gUnknown_08400590;
+                stringPtr = BattleText_WildDoubleAppeared;
             else if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL)
-                stringPtr = gUnknown_0840057B;
+                stringPtr = BattleText_WildAppeared3;
             else
-                stringPtr = gUnknown_08400555;
+                stringPtr = BattleText_WildAppeared1;
         }
         break;
     case 1: // poke first send-out
@@ -198,34 +266,34 @@ void BufferStringBattle(u16 stringID)
             if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
             {
                 if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
-                    stringPtr = gUnknown_084006F1;
+                    stringPtr = BattleText_SentOutSingle11;
                 else
-                    stringPtr = gUnknown_084006A4;
+                    stringPtr = BattleText_SentOutDouble4;
             }
             else
-                stringPtr = gUnknown_0840069C;
+                stringPtr = BattleText_SentOutSingle6;
         }
         else
         {
             if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
             {
                 if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
-                    stringPtr = gUnknown_0840065C;
+                    stringPtr = BattleText_SentOutDouble3;
                 else if (gBattleTypeFlags & BATTLE_TYPE_LINK)
-                    stringPtr = gUnknown_08400645;
+                    stringPtr = BattleText_SentOutDouble2;
                 else
                 {
-                    stringPtr = gUnknown_08400608;
+                    stringPtr = BattleText_SentOutDouble1;
 #ifdef GERMAN
                     stringPtr = de_sub_804110C(0xFFFF, stringPtr);
 #endif
                 }
             }
             else if (gBattleTypeFlags & BATTLE_TYPE_LINK)
-                stringPtr = gUnknown_08400635;
+                stringPtr = BattleText_SentOutSingle3;
             else
             {
-                stringPtr = gUnknown_084005F5;
+                stringPtr = BattleText_SentOutSingle1;
 #ifdef GERMAN
                 stringPtr = de_sub_804110C(0xFFFF, stringPtr);
 #endif
@@ -236,26 +304,26 @@ void BufferStringBattle(u16 stringID)
         if (GetBankSide(gActiveBank) == 0)
         {
             if (BATTLE_STRUCT->hpScale == 0)
-                stringPtr = gUnknown_08400709;
+                stringPtr = BattleText_ComeBackSingle1;
             else if (BATTLE_STRUCT->hpScale == 1 || gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-                stringPtr = gUnknown_08400727;
+                stringPtr = BattleText_ComeBackSingle2;
             else if (BATTLE_STRUCT->hpScale == 2)
-                stringPtr = gUnknown_08400736;
+                stringPtr = BattleText_ComeBackSingle3;
             else
-                stringPtr = gUnknown_08400749;
+                stringPtr = BattleText_ComeBackSingle4;
         }
         else
         {
             if (gTrainerBattleOpponent == 0x800)
             {
                 if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
-                    stringPtr = gUnknown_08400781;
+                    stringPtr = BattleText_WithdrewPoke3;
                 else
-                    stringPtr = gUnknown_08400771;
+                    stringPtr = BattleText_WithdrewPoke2;
             }
             else
             {
-                stringPtr = gUnknown_0840075E;
+                stringPtr = BattleText_WithdrewPoke1;
 #ifdef GERMAN
                 stringPtr = de_sub_804110C(0xFFFF, stringPtr);
 #endif
@@ -266,26 +334,26 @@ void BufferStringBattle(u16 stringID)
         if (GetBankSide(BATTLE_STRUCT->scriptingActive) == 0)
         {
             if (BATTLE_STRUCT->hpScale == 0 || gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-                stringPtr = gUnknown_084006B3;
+                stringPtr = BattleText_SentOutSingle7;
             else if (BATTLE_STRUCT->hpScale == 1)
-                stringPtr = gUnknown_084006BB;
+                stringPtr = BattleText_SentOutSingle8;
             else if (BATTLE_STRUCT->hpScale == 2)
-                stringPtr = gUnknown_084006C6;
+                stringPtr = BattleText_SentOutSingle9;
             else
-                stringPtr = gUnknown_084006D5;
+                stringPtr = BattleText_SentOutSingle10;
         }
         else
         {
             if (gBattleTypeFlags & BATTLE_TYPE_LINK)
             {
                 if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
-                    stringPtr = gUnknown_0840068C;
+                    stringPtr = BattleText_SentOutSingle5;
                 else
-                    stringPtr = gUnknown_0840067C;
+                    stringPtr = BattleText_SentOutSingle4;
             }
             else
             {
-                stringPtr = gUnknown_08400622;
+                stringPtr = BattleText_SentOutSingle2;
 #ifdef GERMAN
                 stringPtr = de_sub_804110C(0xFFFF, stringPtr);
 #endif
@@ -299,7 +367,7 @@ void BufferStringBattle(u16 stringID)
         else
             StringCopy(gBattleTextBuff2, gMoveNames[gStringInfo->currentMove]);
         sub_8121D74(gBattleTextBuff2);
-        stringPtr = gUnknown_084007BD;
+        stringPtr = BattleText_OpponentUsedMove;
         break;
     case 5: // battle end
         if (gBattleTextBuff1[0] & 0x80)
@@ -308,13 +376,13 @@ void BufferStringBattle(u16 stringID)
             if (GetBankSide(gActiveBank) == 1 && gBattleTextBuff1[0] != 3)
                 gBattleTextBuff1[0] ^= 3;
             if (gBattleTextBuff1[0] == BATTLE_LOST || gBattleTextBuff1[0] == BATTLE_DREW)
-                stringPtr = gUnknown_083FFEFC;
+                stringPtr = BattleText_GotAwaySafely;
             else
             {
                 if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
-                    stringPtr = gUnknown_083FFFF7;
+                    stringPtr = BattleText_FledDouble;
                 else
-                    stringPtr = gUnknown_083FFFEA;
+                    stringPtr = BattleText_FledSingle;
             }
         }
         else
@@ -326,13 +394,13 @@ void BufferStringBattle(u16 stringID)
                 switch (gBattleTextBuff1[0])
                 {
                 case BATTLE_WON:
-                    stringPtr = gUnknown_083FFF6A;
+                    stringPtr = BattleText_PlayerDefeatedTrainers;
                     break;
                 case BATTLE_LOST:
-                    stringPtr = gUnknown_083FFF99;
+                    stringPtr = BattleText_PlayerLostTrainers;
                     break;
                 case BATTLE_DREW:
-                    stringPtr = gUnknown_083FFFCB;
+                    stringPtr = BattleText_PlayerTiedTrainers;
                     break;
                 }
             }
@@ -341,13 +409,13 @@ void BufferStringBattle(u16 stringID)
                 switch (gBattleTextBuff1[0])
                 {
                 case BATTLE_WON:
-                    stringPtr = gUnknown_083FFF56;
+                    stringPtr = BattleText_PlayerDefeatedTrainer;
                     break;
                 case BATTLE_LOST:
-                    stringPtr = gUnknown_083FFF81;
+                    stringPtr = BattleText_PlayerLostTrainer;
                     break;
                 case BATTLE_DREW:
-                    stringPtr = gUnknown_083FFFB3;
+                    stringPtr = BattleText_PlayerTiedTrainer;
                     break;
                 }
             }
@@ -414,9 +482,9 @@ extern u8 *de_sub_8041024(s32, u32);
     if (GetBankSide(bank) != 0)                                         \
     {                                                                   \
         if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)                     \
-            toCpy = gUnknown_08400797;                                  \
+            toCpy = BattleText_Foe;                                  \
         else                                                            \
-            toCpy = gUnknown_08400791;                                  \
+            toCpy = BattleText_Wild;                                  \
         while (*toCpy != EOS)                                           \
         {                                                               \
             dst[dstID] = *toCpy;                                        \
@@ -445,9 +513,9 @@ extern u8 *de_sub_8041024(s32, u32);
             toCpy++;                                                    \
         }                                                               \
         if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)                     \
-            toCpy = gUnknown_08400797;                                  \
+            toCpy = BattleText_Foe;                                  \
         else                                                            \
-            toCpy = gUnknown_08400791;                                  \
+            toCpy = BattleText_Wild;                                  \
     }                                                                   \
     else                                                                \
     {                                                                   \
@@ -590,14 +658,14 @@ u32 StrCpyDecodeBattle(const u8* src, u8* dst)
                         {
                             StringCopy(text, gEnigmaBerries[gStringBank].name);
 #ifdef ENGLISH
-                            StringAppend(text, gUnknown_08400A85);
+                            StringAppend(text, BattleText_Berry);
 #else
-                            de_sub_8073174(text, gUnknown_08400A85);
+                            de_sub_8073174(text, BattleText_Berry);
 #endif
                             toCpy = text;
                         }
                         else
-                            toCpy = gUnknown_08400A78;
+                            toCpy = BattleText_EnigmaBerry;
                     }
                     else
                     {
@@ -694,45 +762,45 @@ u32 StrCpyDecodeBattle(const u8* src, u8* dst)
                 break;
             case 35: // lanette pc
                 if (FlagGet(SYS_PC_LANETTE))
-                    toCpy = gUnknown_084009F7;
+                    toCpy = BattleText_Lanette;
                 else
-                    toCpy = gUnknown_084009ED;
+                    toCpy = BattleText_Someone;
                 break;
             case 38:
                 if (GetBankSide(gBankAttacker) == 0)
-                    toCpy = gUnknown_084007AC;
+                    toCpy = BattleText_Ally2;
                 else
-                    toCpy = gUnknown_084007A7;
+                    toCpy = BattleText_Foe3;
                 break;
             case 39:
                 if (GetBankSide(gBankTarget) == 0)
-                    toCpy = gUnknown_084007AC;
+                    toCpy = BattleText_Ally2;
                 else
-                    toCpy = gUnknown_084007A7;
+                    toCpy = BattleText_Foe3;
                 break;
             case 36:
                 if (GetBankSide(gBankAttacker) == 0)
-                    toCpy = gUnknown_084007A1;
+                    toCpy = BattleText_Ally;
                 else
-                    toCpy = gUnknown_0840079C;
+                    toCpy = BattleText_Foe2;
                 break;
             case 37:
                 if (GetBankSide(gBankTarget) == 0)
-                    toCpy = gUnknown_084007A1;
+                    toCpy = BattleText_Ally;
                 else
-                    toCpy = gUnknown_0840079C;
+                    toCpy = BattleText_Foe2;
                 break;
             case 40:
                 if (GetBankSide(gBankAttacker) == 0)
-                    toCpy = gUnknown_084007B7;
+                    toCpy = BattleText_Ally3;
                 else
-                    toCpy = gUnknown_084007B2;
+                    toCpy = BattleText_Foe4;
                 break;
             case 41:
                 if (GetBankSide(gBankTarget) == 0)
-                    toCpy = gUnknown_084007B7;
+                    toCpy = BattleText_Ally3;
                 else
-                    toCpy = gUnknown_084007B2;
+                    toCpy = BattleText_Foe4;
                 break;
             }
             //if (toCpy != NULL) really GF, why did you forget about this?
@@ -819,9 +887,9 @@ void StrCpyDecodeBattleTextBuff(u8* src, u8* dst)
             else
             {
                 if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-                    StringAppend(dst, gUnknown_08400797);
+                    StringAppend(dst, BattleText_Foe);
                 else
-                    StringAppend(dst, gUnknown_08400791);
+                    StringAppend(dst, BattleText_Wild);
                 GetMonData(&gEnemyParty[src[srcID + 2]], MON_DATA_NICKNAME, text);
             }
             StringGetEnd10(text);
@@ -839,9 +907,9 @@ void StrCpyDecodeBattleTextBuff(u8* src, u8* dst)
                 StringGetEnd10(text);
                 StringAppend(dst, text);
                 if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-                    StringAppend(dst, gUnknown_08400797);
+                    StringAppend(dst, BattleText_Foe);
                 else
-                    StringAppend(dst, gUnknown_08400791);
+                    StringAppend(dst, BattleText_Wild);
             }
 #endif
             srcID += 3;
@@ -881,13 +949,13 @@ void StrCpyDecodeBattleTextBuff(u8* src, u8* dst)
                         {
                             StringCopy(dst, gEnigmaBerries[gStringBank].name);
 #ifdef ENGLISH
-                            StringAppend(dst, gUnknown_08400A85);
+                            StringAppend(dst, BattleText_Berry);
 #else
-                            de_sub_8073174(dst, gUnknown_08400A85);
+                            de_sub_8073174(dst, BattleText_Berry);
 #endif
                         }
                         else
-                            StringAppend(dst, gUnknown_08400A78);
+                            StringAppend(dst, BattleText_EnigmaBerry);
                     }
                     else
                         CopyItemName(hword, dst);
@@ -917,9 +985,9 @@ void sub_8121D1C(u8* textBuff)
     if (counter >= 0)
     {
         if (counter <= 2)
-            StringCopy(textBuff, gUnknown_08400E5E); // is
+            StringCopy(textBuff, BattleText_Format10); // is
         else if (counter <= 4)
-            StringCopy(textBuff, gUnknown_08400E62); // 's
+            StringCopy(textBuff, BattleText_Format11); // 's
     }
 }
 
@@ -942,19 +1010,19 @@ void sub_8121D74(u8* dst)
     switch (counter)
     {
     case 0:
-        StringCopy(dst, gUnknown_084007C8);
+        StringCopy(dst, BattleText_Exclamation2);
         break;
     case 1:
-        StringCopy(dst, gUnknown_084007CA);
+        StringCopy(dst, BattleText_Exclamation3);
         break;
     case 2:
-        StringCopy(dst, gUnknown_084007CC);
+        StringCopy(dst, BattleText_Exclamation4);
         break;
     case 3:
-        StringCopy(dst, gUnknown_084007CE);
+        StringCopy(dst, BattleText_Exclamation5);
         break;
     case 4:
-        StringCopy(dst, gUnknown_084007D0);
+        StringCopy(dst, BattleText_Exclamation);
         break;
     }
 }
