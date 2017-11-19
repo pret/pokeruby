@@ -162,7 +162,7 @@ SECTIONS {
         asm/fldeff_secretpower.o(.text);
         asm/fldeff_pc.o(.text);
         asm/fldeff_decoration.o(.text);
-        asm/fldeff_poison.o(.text);
+        src/field/fldeff_poison.o(.text);
         asm/fldeff_berrytree.o(.text);
         src/field/fldeff_recordmixing.o(.text);
         src/field/field_special_scene.o(.text);
