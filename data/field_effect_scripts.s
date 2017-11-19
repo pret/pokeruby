@@ -318,7 +318,7 @@ gFieldEffectScript_UseFlyAncientTomb: @ 81D9E26
 	end
 
 gFieldEffectScript_PCTurnOn: @ 81D9E2C
-	callnative FldEff_PCTurnOn
+	callnative FldEff_SecretBasePCTurnOn
 	end
 
 gFieldEffectScript_HallOfFameRecord: @ 81D9E32
