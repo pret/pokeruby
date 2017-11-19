@@ -1,7 +1,7 @@
 #include "global.h"
 #include "field_poison.h"
 #include "field_message_box.h"
-#include "fldeff_80C5CD4.h"
+#include "fldeff_poison.h"
 #include "pokemon.h"
 #include "pokemon_summary_screen.h"
 #include "script.h"
