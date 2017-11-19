@@ -19,7 +19,7 @@
 #include "m4a.h"
 #include "rng.h"
 #include "game_stat.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "string_util.h"
 #include "field_fadetransition.h"
 #include "script.h"
@@ -138,6 +138,10 @@ extern const u8 gUnknown_083FA608[0x5];
 extern const struct SpriteSheet gUnknown_083FA42C;
 extern const struct SpriteTemplate gSpriteTemplate_83FA434;
 
+extern void (*gFieldCallback)(void);
+
+extern struct MusicPlayerInfo gMPlay_SE1;
+extern struct MusicPlayerInfo gMPlay_SE2;
 
 void sub_8117434(void);
 
@@ -204,18 +208,18 @@ void sub_8116B40(u8);
 
 void dp01t_12_3_battle_menu(u8);
 
-extern u8 ewram[];
+extern u8 gSharedMem[];
 
-#define ewram17000  ((u16 *)                (ewram + 0x17000)) //money stuff?
-#define ewram17E00  ((u16 *)                (ewram + 0x17E00))
-#define ewram17800  ((u16 *)                (ewram + 0x17800))
-#define ewram18000  ((u16 *)                (ewram + 0x18000))
-#define ewram18800  ((u16 *)                (ewram + 0x18800))
-#define ewram189a0  ((u16 *)                (ewram + 0x189a0))
-#define ewram18a20  ((u16 *)                (ewram + 0x18a20))
-#define ewram18a32  ((u16 *)                (ewram + 0x18A32))
-#define ewram18a80  ((u16 *)                (ewram + 0x18a80))
-#define RDATA       ((struct RData *)       (ewram + 0x19000))
+#define ewram17000  ((u16 *)                (gSharedMem + 0x17000)) //money stuff?
+#define ewram17E00  ((u16 *)                (gSharedMem + 0x17E00))
+#define ewram17800  ((u16 *)                (gSharedMem + 0x17800))
+#define ewram18000  ((u16 *)                (gSharedMem + 0x18000))
+#define ewram18800  ((u16 *)                (gSharedMem + 0x18800))
+#define ewram189a0  ((u16 *)                (gSharedMem + 0x189a0))
+#define ewram18a20  ((u16 *)                (gSharedMem + 0x18a20))
+#define ewram18a32  ((u16 *)                (gSharedMem + 0x18A32))
+#define ewram18a80  ((u16 *)                (gSharedMem + 0x18a80))
+#define RDATA       ((struct RData *)       (gSharedMem + 0x19000))
 
 #define S16TOPOSFLOAT(val)   \
 ({                           \
@@ -597,7 +601,7 @@ void sub_8115384(void)
     case 0x3:
         sub_8115238();
         sub_80F9020();
-        LZ77UnCompWram(&gUnknown_083F88BC, (void *)(ewram + 0x18800));
+        LZ77UnCompWram(&gUnknown_083F88BC, (void *)(ewram18800));
         LZ77UnCompVram(&gUnknown_083F8A60, (void *)(VRAM + 0x3000));
         gMain.state++;
         break;
@@ -2793,8 +2797,8 @@ u8 sub_8117890(const struct SpriteTemplate *r0, u8 r1, u16 *r2)
 {
     u16 temp;
     u8 spriteid = CreateSprite(r0, 0x74, 0x50, r0->oam->y);
-    gSprites[spriteid].data0              = *r2;
-    gSprites[spriteid].data1              = r1;
+    gSprites[spriteid].data[0]            = *r2;
+    gSprites[spriteid].data[1]            = r1;
     gSprites[spriteid].coordOffsetEnabled = TRUE;
     gSprites[spriteid].animPaused         = TRUE;
     gSprites[spriteid].affineAnimPaused   = TRUE;
@@ -2810,13 +2814,13 @@ void sub_8117900(void)
     u8 i, j;
     u8 spriteid;
     struct SpriteSheet s;
-    LZ77UnCompWram(gUnknown_083F9F54.data, ewram);
-    s.data = ewram;
+    LZ77UnCompWram(gUnknown_083F9F54.data, gSharedMem);
+    s.data = gSharedMem;
     s.size = gUnknown_083F9F54.size;
     s.tag  = gUnknown_083F9F54.tag;
     LoadSpriteSheet(&s);
-    LZ77UnCompWram(gUnknown_083F9F5C.data, ewram);
-    s.data = ewram;
+    LZ77UnCompWram(gUnknown_083F9F5C.data, gSharedMem);
+    s.data = gSharedMem;
     s.size = gUnknown_083F9F5C.size;
     s.tag  = gUnknown_083F9F5C.tag;
     LoadSpriteSheet(&s);
@@ -2886,7 +2890,7 @@ void sub_8117BBC(void)
     {
         RDATA->var3C[0x31 + i] = CreateSprite(&gSpriteTemplate_83FA40C, 0x74, 0x14, 0xA);
         gSprites[RDATA->var3C[0x31 + i]].invisible    = TRUE;
-        gSprites[RDATA->var3C[0x31 + i]].data0        = 0x1;
+        gSprites[RDATA->var3C[0x31 + i]].data[0]        = 0x1;
         gSprites[RDATA->var3C[0x31 + i]].callback     = &sub_81184CC;
         gSprites[RDATA->var3C[0x31 + i]].oam.priority = 0x1;
         StartSpriteAnim(&gSprites[RDATA->var3C[0x31 + i]], 0x8);
@@ -2938,8 +2942,8 @@ void sub_8117DF4(void)
     u8 i, j;
     u16 k;
     struct SpriteSheet s;
-    LZ77UnCompWram(gUnknown_083F9EE8.data, ewram);
-    s.data = ewram;
+    LZ77UnCompWram(gUnknown_083F9EE8.data, gSharedMem);
+    s.data = gSharedMem;
     s.size = gUnknown_083F9EE8.size;
     s.tag  = gUnknown_083F9EE8.tag;
     LoadSpriteSheet(&s);
@@ -3069,8 +3073,8 @@ void sub_8117F2C(void)
     for (i = 0x0; i < 0x5; i++)
     {
         struct SpriteSheet s;
-        LZ77UnCompWram(gUnknown_083FA21C[i].data, ewram);
-        s.data = ewram;
+        LZ77UnCompWram(gUnknown_083FA21C[i].data, gSharedMem);
+        s.data = gSharedMem;
         s.size = gUnknown_083FA21C[i].size;
         s.tag  = gUnknown_083FA21C[i].tag;
         LoadSpriteSheet(&s);
@@ -3317,14 +3321,14 @@ void sub_81184D8(void)
 {
     u8 spriteid;
     struct SpriteSheet s;
-    LZ77UnCompWram(gUnknown_083FA42C.data, ewram);
-    s.data = ewram;
+    LZ77UnCompWram(gUnknown_083FA42C.data, gSharedMem);
+    s.data = gSharedMem;
     s.size = gUnknown_083FA42C.size;
     s.tag  = gUnknown_083FA42C.tag;
     LoadSpriteSheet(&s);
     spriteid = CreateSprite(&gSpriteTemplate_83FA434, 0x74, 0x50, 0x51);
-    gSprites[spriteid].data0              = RDATA->var24;
-    gSprites[spriteid].data1              = 0x0;
+    gSprites[spriteid].data[0]            = RDATA->var24;
+    gSprites[spriteid].data[1]            = 0x0;
     gSprites[spriteid].animPaused         = TRUE;
     gSprites[spriteid].affineAnimPaused   = TRUE;
     gSprites[spriteid].coordOffsetEnabled = TRUE;
@@ -3354,7 +3358,7 @@ void sub_811857C(void)
         }
     }
 }
-/*
+
 void sub_81185E8(void)
 {
     u8 t = RDATA->var3C[0x0];
@@ -3366,8 +3370,137 @@ void sub_81185E8(void)
         gSprites[t].callback = &SpriteCallbackDummy;
         StartSpriteAnim(&gSprites[t], 0x0);
         for (j = 0x0; j < 0x8; j++)
-            *(&gSprites[t].data0 + j) = 0x0; // zero allocation not quite right
+            gSprites[t].data[j] = 0x0;
         t++;
     }
 }
-*/
+
+s16 sub_811866C(struct Sprite *sprite)
+{
+    if (RDATA->var24 > sprite->data[0x3])
+    {
+        sprite->data[0x6] = 360 - RDATA->var24 + sprite->data[0x3];
+        if (sprite->data[0x6] > 359)
+            sprite->data[0x6] -=360;
+    }
+    else
+        sprite->data[0x6] = sprite->data[0x3] - RDATA->var24;
+    return sprite->data[0x6];
+}
+
+u8 sub_81186B8(struct Sprite *sprite)
+{
+    RDATA->var7E = (u8)(((float)(s16)sub_811866C(sprite)) / 30.0f);
+    return RDATA->var7E;
+}
+
+s16 sub_81186E8(struct Sprite *sprite)
+{
+    s16 t = sub_811866C(sprite) % 30;
+    u16 z;
+    if (t == 0xE)
+    {
+        z = 0x0;
+        return sprite->data[0x2] = z;
+    }
+    else if (t > 0xD)
+    {
+        z = (u16)(0x2B - t);
+        return sprite->data[0x2] = z;
+    }
+    else
+    {
+        z = (u16)(0xE - t);
+        return sprite->data[0x2] = z;
+    }
+}
+
+void sub_8118724(struct Sprite *sprite)
+{
+    s16 sin, cos;
+    RDATA->var8C += RDATA->var90;
+    RDATA->var88 += RDATA->var8C;
+    if (RDATA->var88 >= 360)
+        RDATA->var88 -= 360.0f;
+    else
+        if (RDATA->var88 < 0.0f)
+            RDATA->var88 += 360.0f;
+    sprite->data[0x3] = RDATA->var88;
+    RDATA->var98 += RDATA->var9C;
+    RDATA->var94 += RDATA->var98;
+    sprite->data[0x4] = RDATA->var94;
+    sin = Sin2(sprite->data[0x3]);
+    cos = Cos2(sprite->data[0x3]);
+    sprite->pos2.x =  sin * sprite->data[0x4] >> 0xC;
+    sprite->pos2.y = -cos * sprite->data[0x4] >> 0xC;
+    if (IsSEPlaying())
+    {
+        m4aMPlayPanpotControl(&gMPlay_SE1, 0xFFFF, sprite->pos2.x);
+        m4aMPlayPanpotControl(&gMPlay_SE2, 0xFFFF, sprite->pos2.x);
+    }
+}
+
+void sub_8118834(struct Sprite *sprite)
+{
+    s16 sin, cos;
+    sprite->data[0x3] = RDATA->var24 + sprite->data[0x6];
+    if (sprite->data[0x3] > 359)
+        sprite->data[0x3] -= 360;
+    sin = Sin2(sprite->data[0x3]);
+    cos = Cos2(sprite->data[0x3]);
+    sprite->pos2.x =  sin * sprite->data[0x4] >> 0xC;
+    sprite->pos2.y = -cos * sprite->data[0x4] >> 0xC;
+    sprite->pos2.y += gSpriteCoordOffsetY;
+}
+
+void sub_811889C(struct Sprite *sprite)
+{
+    sub_8118724(sprite);
+    sprite->data[0x2]++;
+    if ((u16)(sprite->data[0x4] + 0x84) > 0xD4)
+        sprite->invisible = TRUE;
+    else
+        sprite->invisible = FALSE;
+    if (!(sprite->data[0x2] < 30))
+    {
+        if (!sprite->data[0x0])
+        {
+            if (RDATA->var94 <= RDATA->varA0 - 2.0f)
+            {
+                RDATA->var7D = 0xFF;
+                RDATA->var03_7 = 0x0;
+                StartSpriteAnim(sprite, sprite->animCmdIndex + 0x3);
+                sub_81186B8(sprite);
+                sprite->data[0x4] = 30;
+                sub_811866C(sprite);
+                sprite->data[0x6] = (sprite->data[0x6] / 30) * 30 + 0xF;
+                sprite->callback = &sub_8118834;
+                m4aSongNumStartOrChange(0x47);
+                RDATA->var9C = RDATA->var98 = 0.0f;
+                RDATA->var8C = -1.0f;
+            }
+        }
+        else
+        {
+            if (RDATA->var94 >= RDATA->varA0 - 2.0f)
+            {
+                RDATA->var7D = 0xFF;
+                RDATA->var03_7 = 0x0;
+                StartSpriteAnim(sprite, sprite->animCmdIndex + 0x3);
+                sub_81186B8(sprite);
+                sprite->data[0x4] = 30;
+                sub_811866C(sprite);
+                sprite->data[0x6] = (sprite->data[0x6] / 30) * 30 + 0xF;
+                sprite->callback = &sub_8118834;
+                m4aSongNumStartOrChange(0x47);
+                RDATA->var9C = RDATA->var98 = 0.0f;
+                RDATA->var8C = -1.0f;
+            }
+        }
+    }
+}
+
+void sub_81189A8(struct Sprite *sprite)
+{
+
+}

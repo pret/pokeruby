@@ -6614,7 +6614,7 @@ _081185DC: .4byte gSharedMem + 0x1903C
 _081185E0: .4byte gSprites
 _081185E4: .4byte gSpriteTemplate_83FA40C
 	thumb_func_end sub_811857C
-*/
+
 	thumb_func_start sub_81185E8
 sub_81185E8: @ 81185E8
 	push {r4-r7,lr}
@@ -7084,7 +7084,7 @@ _0811899C: .4byte sub_8118834
 _081189A0: .4byte 0x00000000
 _081189A4: .4byte 0xbf800000
 	thumb_func_end sub_811889C
-
+*/
 	thumb_func_start sub_81189A8
 sub_81189A8: @ 81189A8
 	push {r4-r7,lr}
