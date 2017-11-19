@@ -1,4 +1,5 @@
 #include "global.h"
+#include "fldeff_poison.h"
 #include "task.h"
 #include "songs.h"
 #include "sound.h"

@@ -1,5 +1,6 @@
 #include "global.h"
 #include "field_map_obj.h"
+#include "fldeff_recordmixing.h"
 #include "sprite.h"
 
 extern const struct OamData gFieldOamData_32x8;
