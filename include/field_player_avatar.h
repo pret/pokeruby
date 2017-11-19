@@ -64,7 +64,7 @@ u8 player_get_direction_lower_nybble(void);
 u8 player_get_direction_upper_nybble(void);
 u8 PlayerGetZCoord(void);
 u8 TestPlayerAvatarFlags(u8);
-// sub_80597D0
+u8 sub_80597D0(void);
 u8 GetPlayerAvatarObjectId(void);
 void sub_80597E8(void);
 void sub_80597F4(void);
@@ -83,7 +83,7 @@ void sub_8059B88(u8);
 void sub_8059BF4(void);
 // sub_8059C3C
 void sub_8059C94(u8);
-// sub_8059D08
+void sub_8059D08(u8);
 u8 sub_8059E84(struct Task *task, struct MapObject *b, struct MapObject *c);
 u8 sub_8059EA4(struct Task *task, struct MapObject *b, struct MapObject *c);
 u8 sub_8059F40(struct Task *task, struct MapObject *b, struct MapObject *c);
