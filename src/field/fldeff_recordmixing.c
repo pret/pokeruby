@@ -69,7 +69,7 @@ u8 CreateRecordMixingSprite(void)
 
 void DestroyRecordMixingSprite(void)
 {
-    int i;
+    s32 i;
 
     for (i = 0; i < MAX_SPRITES; i++)
     {
