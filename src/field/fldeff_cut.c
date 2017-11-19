@@ -23,8 +23,6 @@ extern void (*gUnknown_03005CE4)(void);
 
 extern struct SpriteTemplate gSpriteTemplate_CutGrass;
 
-extern struct MapPosition gUnknown_0203923C;
-
 extern u8 gLastFieldPokeMenuOpened;
 
 extern u8 S_UseCut[];
