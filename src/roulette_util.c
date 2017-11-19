@@ -1,5 +1,6 @@
 #include "global.h"
 #include "roulette_util.h"
+#include "roulette.h"
 
 static u8 sub_81249E4(struct UnkStruct3 *);
 static u8 sub_8124BEC(struct UnkStruct3 *);
@@ -17,47 +18,38 @@ void sub_8124918(struct UnkStruct0 *r0)
 u8 sub_812492C(struct UnkStruct0 *r0, u8 r1, struct UnkStruct1 *r2)
 {
 	if (!(r1 < 0x10) || (r0->val3[r1].field1))
-	{
-			return 0xFF;
-	}
+		return 0xFF;
+
+	r0->val3[r1].val4.val0 = r2->val0;
+	r0->val3[r1].val4.val1 = r2->val1;
+	r0->val3[r1].val4.val2 = r2->val2;
+	r0->val3[r1].val4.val3 = r2->val3;
+	r0->val3[r1].val4.val4 = r2->val4;
+	r0->val3[r1].val4.field0 = r2->field0;
+	r0->val3[r1].val4.field1 = r2->field1;
+	r0->val3[r1].val4.field2 = r2->field2;
+
+    //Why not r0->val3[r1].val4 = *r2; ?
+
+	r0->val3[r1].field0 = 0x0;
+	r0->val3[r1].field1 = 0x1;
+
+	r0->val3[r1].val2 = 0x0;
+	r0->val3[r1].val1 = 0x0;
+	if (r0->val3[r1].val4.field2 < 0)
+		r0->val3[r1].val3 = 0xFF;
 	else
-	{
-		r0->val3[r1].val4 = r2->val0;
-		r0->val3[r1].val5 = r2->val1;
-		r0->val3[r1].val6 = r2->val2;
-		r0->val3[r1].val7 = r2->val3;
-		r0->val3[r1].val8 = r2->val4;
-
-		r0->val3[r1].field2 = r2->field0;
-		r0->val3[r1].field3 = r2->field1;
-		r0->val3[r1].field4 = r2->field2;
-
-		r0->val3[r1].field0 = 0x0;
-		r0->val3[r1].field1 = 0x1;
-
-		r0->val3[r1].val2 = 0x0;
-		r0->val3[r1].val1 = 0x0;
-		if (r0->val3[r1].field4 < 0)
-			r0->val3[r1].val3 = 0xFF;
-		else
-			r0->val3[r1].val3 = 0x1;
-		return r1;
-	}
+		r0->val3[r1].val3 = 0x1;
+	return r1;
 }
 
 #ifdef NONMATCHING
- //Functionally equivalent
 u8 unref_sub_81249B0(struct UnkStruct0 *r0, u8 r1)
 {
 	if (!(r1 < 0x10) || (r0->val3[r1].field1))
-	{
-			return 0xFF;
-	}
-	else
-	{
-		memset(&(r0->val3[r1]), 0, 0xC);
-		return r1;
-	}
+		return 0xFF;
+    r0->val3[r1] = (struct UnkStruct3){0};
+	return r1;
 }
 #else
 __attribute__((naked))
@@ -99,9 +91,9 @@ u8 sub_81249E4(struct UnkStruct3 *r0)
 {
 	u8 i;
 	u8 returnval;
-	for (i = 0; i < r0->val6; i++)
+	for (i = 0; i < r0->val4.val2; i++)
 	{
-		u32 offset = r0->val5 + i;
+		u32 offset = r0->val4.val1 + i;
 		struct PlttData *faded =   (struct PlttData *)&gPlttBufferFaded[offset];
 		struct PlttData *unfaded = (struct PlttData *)&gPlttBufferUnfaded[offset];
 		switch(r0->field0)
@@ -136,7 +128,7 @@ u8 sub_81249E4(struct UnkStruct3 *r0)
 		break;
 		}
 	}
-	if (((u32)r0->val2++) != r0->field2)
+	if (((u32)r0->val2++) != r0->val4.field0)
 	{
 		returnval = 0x0;
 	}
@@ -159,13 +151,13 @@ u8 sub_8124BEC(struct UnkStruct3 *r0)
 	switch (r0->field0)
 	{
 		case 0x1:
-		for (rg2 = 0; rg2 < r0->val6; rg2++)
-			gPlttBufferFaded[r0->val5 + rg2] = r0->val4;
+		for (rg2 = 0; rg2 < r0->val4.val2; rg2++)
+			gPlttBufferFaded[r0->val4.val1 + rg2] = r0->val4.val0;
 		r0->field0++;
 		break;
 		case 0x2:
-		for (rg2 = 0; rg2 < r0->val6; rg2++)
-			gPlttBufferFaded[r0->val5 + rg2] = gPlttBufferUnfaded[r0->val5 + rg2];
+		for (rg2 = 0; rg2 < r0->val4.val2; rg2++)
+			gPlttBufferFaded[r0->val4.val1 + rg2] = gPlttBufferUnfaded[r0->val4.val1 + rg2];
 		r0->field0--;
 		break;
 	}
@@ -183,11 +175,11 @@ void task_tutorial_controls_fadein(struct UnkStruct0 *r0)
 			{
 				if (((u8)--r0->val3[i].val1) == 0xFF) // if underflow ?
 				{
-					if (r0->val3[i].val4 & (0x80 << 8)) // PlttData->unused_15 ?
+					if (r0->val3[i].val4.val0 & (0x80 << 8)) // PlttData->unused_15 ?
 						sub_81249E4(&r0->val3[i]);
 					else
 						sub_8124BEC(&r0->val3[i]);
-					r0->val3[i].val1 = r0->val3[i].val7;
+					r0->val3[i].val1 = r0->val3[i].val4.val3;
 				}
 			}
 		}
@@ -222,14 +214,14 @@ void sub_8124D3C(struct UnkStruct0 *r0, u16 r1)
 			{
 				if ((r1 >> i) & 0x1)
 				{
-					u32 offset = r0->val3[i].val5;
+					u32 offset = r0->val3[i].val4.val1;
 					u16 *faded = &gPlttBufferFaded[offset];
 					u16 *unfaded = &gPlttBufferUnfaded[offset];
-					memcpy(faded, unfaded, r0->val3[i].val6 * 2);
+					memcpy(faded, unfaded, r0->val3[i].val4.val2 * 2);
 					r0->val3[i].field0 = 0x0;
 					r0->val3[i].val2 = 0x0;
 					r0->val3[i].val1 = 0x0;
-					if (r0->val3[i].field4 < 0)
+					if (r0->val3[i].val4.field2 < 0)
 						r0->val3[i].val3 = 0xFF;
 					else
 						r0->val3[i].val3 = 0x1;

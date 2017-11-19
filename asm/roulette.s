@@ -3693,7 +3693,7 @@ _08116EF2:
 	pop {r1}
 	bx r1
 	thumb_func_end sub_8116E5C
-*/
+
 	thumb_func_start sub_8116EF8
 sub_8116EF8: @ 8116EF8
 	push {r4-r7,lr}
@@ -6614,7 +6614,7 @@ _081185DC: .4byte gSharedMem + 0x1903C
 _081185E0: .4byte gSprites
 _081185E4: .4byte gSpriteTemplate_83FA40C
 	thumb_func_end sub_811857C
-
+*/
 	thumb_func_start sub_81185E8
 sub_81185E8: @ 81185E8
 	push {r4-r7,lr}

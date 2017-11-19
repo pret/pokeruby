@@ -20,6 +20,7 @@ struct UnkStruct3
 	u8 val1;
 	s8 val2;
 	s8 val3;
+    /*
 	u16 val4;
 	u16 val5;
 	u8 val6;
@@ -28,6 +29,8 @@ struct UnkStruct3
 	s8 field2:5;
 	s8 field3:2;
 	s8 field4:1;
+    */
+    struct UnkStruct1 val4;
 };
 
 struct UnkStruct0
