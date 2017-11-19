@@ -102,7 +102,7 @@ extern u8 GetBankSide(u8);
 extern void sub_80E43C0();
 extern void oamt_add_pos2_onto_pos1();
 extern void sub_8078B34(struct Sprite *);
-extern void StoreSpriteCallbackInData6();
+extern void StoreSpriteCallbackInData();
 extern void BattleLoadPlayerMonSprite();
 extern bool8 IsDoubleBattle(void);
 extern void sub_802D500(void);
@@ -1537,18 +1537,18 @@ void bx_blink_t1(void)
 {
     u8 spriteId = gObjectBankIDs[gActiveBank];
 
-    if (gSprites[spriteId].data1 == 32)
+    if (gSprites[spriteId].data[1] == 32)
     {
-        gSprites[spriteId].data1 = 0;
+        gSprites[spriteId].data[1] = 0;
         gSprites[spriteId].invisible = FALSE;
         gDoingBattleAnim = 0;
         PlayerBufferExecCompleted();
     }
     else
     {
-        if (((u16)gSprites[spriteId].data1 % 4) == 0)
+        if (((u16)gSprites[spriteId].data[1] % 4) == 0)
             gSprites[spriteId].invisible ^= 1;
-        gSprites[spriteId].data1++;
+        gSprites[spriteId].data[1]++;
     }
 }
 
@@ -2324,14 +2324,14 @@ void sub_802F934(u8 bank, u8 b)
       sub_8077ABC(bank, 2),
       sub_8077F68(bank),
       sub_8079E90(bank));
-    gSprites[gUnknown_0300434C[bank]].data1 = gObjectBankIDs[bank];
-    gSprites[gObjectBankIDs[bank]].data0 = bank;
-    gSprites[gObjectBankIDs[bank]].data2 = species;
+    gSprites[gUnknown_0300434C[bank]].data[1] = gObjectBankIDs[bank];
+    gSprites[gObjectBankIDs[bank]].data[0] = bank;
+    gSprites[gObjectBankIDs[bank]].data[2] = species;
     gSprites[gObjectBankIDs[bank]].oam.paletteNum = bank;
     StartSpriteAnim(&gSprites[gObjectBankIDs[bank]], gBattleMonForms[bank]);
     gSprites[gObjectBankIDs[bank]].invisible = TRUE;
     gSprites[gObjectBankIDs[bank]].callback = SpriteCallbackDummy;
-    gSprites[gUnknown_0300434C[bank]].data0 = sub_8046400(0, 0xFF);
+    gSprites[gUnknown_0300434C[bank]].data[0] = sub_8046400(0, 0xFF);
 }
 
 void PlayerHandleReturnPokeToBall(void)
@@ -2393,7 +2393,7 @@ void PlayerHandleTrainerThrow(void)
       sub_8079E90(gActiveBank));
     gSprites[gObjectBankIDs[gActiveBank]].oam.paletteNum = gActiveBank;
     gSprites[gObjectBankIDs[gActiveBank]].pos2.x = 240;
-    gSprites[gObjectBankIDs[gActiveBank]].data0 = -2;
+    gSprites[gObjectBankIDs[gActiveBank]].data[0] = -2;
     gSprites[gObjectBankIDs[gActiveBank]].callback = sub_80313A0;
     gBattleBankFunc[gActiveBank] = sub_802D204;
 }
@@ -2409,7 +2409,7 @@ void PlayerHandleTrainerSlide(void)
       30);
     gSprites[gObjectBankIDs[gActiveBank]].oam.paletteNum = gActiveBank;
     gSprites[gObjectBankIDs[gActiveBank]].pos2.x = -96;
-    gSprites[gObjectBankIDs[gActiveBank]].data0 = 2;
+    gSprites[gObjectBankIDs[gActiveBank]].data[0] = 2;
     gSprites[gObjectBankIDs[gActiveBank]].callback = sub_80313A0;
     gBattleBankFunc[gActiveBank] = sub_802D23C;
 }
@@ -2417,11 +2417,11 @@ void PlayerHandleTrainerSlide(void)
 void PlayerHandleTrainerSlideBack(void)
 {
     oamt_add_pos2_onto_pos1(&gSprites[gObjectBankIDs[gActiveBank]]);
-    gSprites[gObjectBankIDs[gActiveBank]].data0 = 50;
-    gSprites[gObjectBankIDs[gActiveBank]].data2 = -40;
-    gSprites[gObjectBankIDs[gActiveBank]].data4 = gSprites[gObjectBankIDs[gActiveBank]].pos1.y;
+    gSprites[gObjectBankIDs[gActiveBank]].data[0] = 50;
+    gSprites[gObjectBankIDs[gActiveBank]].data[2] = -40;
+    gSprites[gObjectBankIDs[gActiveBank]].data[4] = gSprites[gObjectBankIDs[gActiveBank]].pos1.y;
     gSprites[gObjectBankIDs[gActiveBank]].callback = sub_8078B34;
-    StoreSpriteCallbackInData6(&gSprites[gObjectBankIDs[gActiveBank]], SpriteCallbackDummy);
+    StoreSpriteCallbackInData(&gSprites[gObjectBankIDs[gActiveBank]], SpriteCallbackDummy);
     StartSpriteAnim(&gSprites[gObjectBankIDs[gActiveBank]], 1);
     gBattleBankFunc[gActiveBank] = sub_802D274;
 }
@@ -2441,8 +2441,8 @@ void PlayerHandlecmd10(void)
             ewram17810[gActiveBank].unk4 = 0;
             sub_80324F8(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
             PlaySE12WithPanning(SE_POKE_DEAD, -64);
-            gSprites[gObjectBankIDs[gActiveBank]].data1 = 0;
-            gSprites[gObjectBankIDs[gActiveBank]].data2 = 5;
+            gSprites[gObjectBankIDs[gActiveBank]].data[1] = 0;
+            gSprites[gObjectBankIDs[gActiveBank]].data[2] = 5;
             gSprites[gObjectBankIDs[gActiveBank]].callback = sub_80105EC;
             gBattleBankFunc[gActiveBank] = sub_802DE10;
         }
@@ -2837,7 +2837,7 @@ void PlayerHandleHitAnimation(void)
     else
     {
         gDoingBattleAnim = 1;
-        gSprites[gObjectBankIDs[gActiveBank]].data1 = 0;
+        gSprites[gObjectBankIDs[gActiveBank]].data[1] = 0;
         sub_8047858(gActiveBank);
         gBattleBankFunc[gActiveBank] = bx_blink_t1;
     }
@@ -2887,12 +2887,12 @@ void PlayerHandleTrainerBallThrow(void)
     u8 taskId;
 
     oamt_add_pos2_onto_pos1(&gSprites[gObjectBankIDs[gActiveBank]]);
-    gSprites[gObjectBankIDs[gActiveBank]].data0 = 50;
-    gSprites[gObjectBankIDs[gActiveBank]].data2 = -40;
-    gSprites[gObjectBankIDs[gActiveBank]].data4 = gSprites[gObjectBankIDs[gActiveBank]].pos1.y;
+    gSprites[gObjectBankIDs[gActiveBank]].data[0] = 50;
+    gSprites[gObjectBankIDs[gActiveBank]].data[2] = -40;
+    gSprites[gObjectBankIDs[gActiveBank]].data[4] = gSprites[gObjectBankIDs[gActiveBank]].pos1.y;
     gSprites[gObjectBankIDs[gActiveBank]].callback = sub_8078B34;
-    gSprites[gObjectBankIDs[gActiveBank]].data5 = gActiveBank;
-    StoreSpriteCallbackInData6(&gSprites[gObjectBankIDs[gActiveBank]], sub_8030E38);
+    gSprites[gObjectBankIDs[gActiveBank]].data[5] = gActiveBank;
+    StoreSpriteCallbackInData(&gSprites[gObjectBankIDs[gActiveBank]], sub_8030E38);
     StartSpriteAnim(&gSprites[gObjectBankIDs[gActiveBank]], 1);
     paletteNum = AllocSpritePalette(0xD6F8);
     LoadCompressedPalette(gTrainerBackPicPaletteTable[gSaveBlock2.playerGender].data, 0x100 + paletteNum * 16, 32);
@@ -2907,7 +2907,7 @@ void PlayerHandleTrainerBallThrow(void)
 
 void sub_8030E38(struct Sprite *sprite)
 {
-    u8 r4 = sprite->data5;
+    u8 r4 = sprite->data[5];
 
     FreeSpriteOamMatrix(sprite);
     FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(sprite->oam.paletteNum));

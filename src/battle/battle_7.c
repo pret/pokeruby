@@ -86,7 +86,7 @@ void sub_80328A4(struct Sprite *);
 
 void sub_80312F0(struct Sprite *sprite)
 {
-    u8 spriteId = sprite->data1;
+    u8 spriteId = sprite->data[1];
 
     if (gSprites[spriteId].affineAnimEnded && !gSprites[spriteId].invisible)
     {
@@ -116,7 +116,7 @@ void sub_80313A0(struct Sprite *sprite)
 {
     if (!(gUnknown_02024DE8 & 1))
     {
-        sprite->pos2.x += sprite->data0;
+        sprite->pos2.x += sprite->data[0];
         if (sprite->pos2.x == 0)
             sprite->callback = SpriteCallbackDummy;
     }
@@ -858,19 +858,19 @@ void sub_80327CC(void)
     LoadCompressedObjectPic(&gUnknown_081FAF24);
     r5 = GetBankByPlayerAI(1);
     ewram17810[r5].unk7 = CreateSprite(&gSpriteTemplate_81FAF34, sub_8077ABC(r5, 0), sub_8077ABC(r5, 1) + 32, 0xC8);
-    gSprites[ewram17810[r5].unk7].data0 = r5;
+    gSprites[ewram17810[r5].unk7].data[0] = r5;
     if (IsDoubleBattle())
     {
         r5 = GetBankByPlayerAI(3);
         ewram17810[r5].unk7 = CreateSprite(&gSpriteTemplate_81FAF34, sub_8077ABC(r5, 0), sub_8077ABC(r5, 1) + 32, 0xC8);
-        gSprites[ewram17810[r5].unk7].data0 = r5;
+        gSprites[ewram17810[r5].unk7].data[0] = r5;
     }
 }
 
 void sub_80328A4(struct Sprite *sprite)
 {
     bool8 invisible = FALSE;
-    u8 r4 = sprite->data0;
+    u8 r4 = sprite->data[0];
     struct Sprite *r7 = &gSprites[gObjectBankIDs[r4]];
 
     if (!r7->inUse || AnimBankSpriteExists(r4) == 0)

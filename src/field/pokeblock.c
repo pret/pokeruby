@@ -971,25 +971,25 @@ static void sub_810C854(u8 taskId)
 
 static void sub_810C8D4(struct Sprite *sprite)
 {
-    if (sprite->data0 > 1)
+    if (sprite->data[0] > 1)
     {
-        sprite->data0 = 0;
+        sprite->data[0] = 0;
     }
-    switch (sprite->data0)
+    switch (sprite->data[0])
     {
         case 0:
             sprite->oam.affineMode = 1;
             sprite->affineAnims = gSpriteAffineAnimTable_83F7F70;
             InitSpriteAffineAnim(sprite);
-            sprite->data0 = 1;
-            sprite->data1 = 0;
+            sprite->data[0] = 1;
+            sprite->data[1] = 0;
             break;
         case 1:
-            if (++sprite->data1 > 11)
+            if (++sprite->data[1] > 11)
             {
                 sprite->oam.affineMode = 0;
-                sprite->data0 = 0;
-                sprite->data1 = 0;
+                sprite->data[0] = 0;
+                sprite->data[1] = 0;
                 FreeOamMatrix(sprite->oam.matrixNum);
                 sprite->callback = SpriteCallbackDummy;
             }

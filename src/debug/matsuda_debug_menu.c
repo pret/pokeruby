@@ -564,10 +564,10 @@ static void sub_80AA10C(void)
     sub_80AA658(3);
     sub_80AA614(3, zero);
     spriteId = CreateSprite(&gSpriteTemplate_83C92CC, gUnknown_083C9296[3], gUnknown_083C92A8[1], 5);
-    gSprites[spriteId].data0 = 1;
-    gSprites[spriteId].data1 = 1;
-    gSprites[spriteId].data2 = 3;
-    gSprites[spriteId].data3 = zero; // only this assignment of zero is necessary. other replacements of 0 with zero do not change the asm, compiler will treat it the same.
+    gSprites[spriteId].data[0] = 1;
+    gSprites[spriteId].data[1] = 1;
+    gSprites[spriteId].data[2] = 3;
+    gSprites[spriteId].data[3] = zero; // only this assignment of zero is necessary. other replacements of 0 with zero do not change the asm, compiler will treat it the same.
 }
 
 void sub_80AA280(u8 var) // no?
@@ -689,51 +689,51 @@ void sub_80AA754(struct Sprite *sprite)
     {
     case DPAD_RIGHT:
     case DPAD_LEFT:
-        sprite->data0 ^= 1;
+        sprite->data[0] ^= 1;
         break;
     case DPAD_UP:
-        if (sprite->data1 == 0)
-            sprite->data1 = 8;
+        if (sprite->data[1] == 0)
+            sprite->data[1] = 8;
         else
-            sprite->data1--;
+            sprite->data[1]--;
         break;
     case DPAD_DOWN:
-        if (sprite->data1 == 8)
-            sprite->data1 = 0;
+        if (sprite->data[1] == 8)
+            sprite->data[1] = 0;
         else
-            sprite->data1++;
+            sprite->data[1]++;
         break;
     case A_BUTTON:
-        gUnknown_083C92E4[sprite->data1][sprite->data0](sprite, 1);
-        sub_80AA614(sprite->data2, sprite->data3);
+        gUnknown_083C92E4[sprite->data[1]][sprite->data[0]](sprite, 1);
+        sub_80AA614(sprite->data[2], sprite->data[3]);
         break;
     case B_BUTTON:
-        gUnknown_083C92E4[sprite->data1][sprite->data0](sprite, -1);
-        sub_80AA614(sprite->data2, sprite->data3);
+        gUnknown_083C92E4[sprite->data[1]][sprite->data[0]](sprite, -1);
+        sub_80AA614(sprite->data[2], sprite->data[3]);
         break;
     case R_BUTTON:
-        gUnknown_083C92E4[sprite->data1][sprite->data0](sprite, 10);
-        sub_80AA614(sprite->data2, sprite->data3);
+        gUnknown_083C92E4[sprite->data[1]][sprite->data[0]](sprite, 10);
+        sub_80AA614(sprite->data[2], sprite->data[3]);
         break;
     case L_BUTTON:
-        gUnknown_083C92E4[sprite->data1][sprite->data0](sprite, -10);
-        sub_80AA614(sprite->data2, sprite->data3);
+        gUnknown_083C92E4[sprite->data[1]][sprite->data[0]](sprite, -10);
+        sub_80AA614(sprite->data[2], sprite->data[3]);
         break;
     case START_BUTTON:
         sub_80AAD08(sprite, 1);
         break;
     }
-    sprite->pos1.x = gUnknown_083C9296[sprite->data0 + sprite->data1 * 2];
-    sprite->pos1.y = gUnknown_083C92A8[sprite->data1];
+    sprite->pos1.x = gUnknown_083C9296[sprite->data[0] + sprite->data[1] * 2];
+    sprite->pos1.y = gUnknown_083C92A8[sprite->data[1]];
 }
 
 static void sub_80AA8A0(struct Sprite *sprite, s8 var1, u8 var2)
 {
     if (var1 == 1)
     {
-        sprite->data2 = var2;
+        sprite->data[2] = var2;
         sub_80AA280(var2);
-        sub_80AA658(sprite->data2);
+        sub_80AA658(sprite->data[2]);
     }
 }
 
@@ -771,50 +771,50 @@ static u8 sub_80AA908(u32 a1, u8 a2, s8 a3) // first param is unused.
 
 void sub_80AA930(struct Sprite *sprite, s8 var2)
 {
-    u8 val = sprite->data2;
+    u8 val = sprite->data[2];
 
-    gContestMons[sprite->data2].cool = sub_80AA908(val, gContestMons[sprite->data2].cool, var2);
-    sub_80AA340(sprite->data2);
+    gContestMons[sprite->data[2]].cool = sub_80AA908(val, gContestMons[sprite->data[2]].cool, var2);
+    sub_80AA340(sprite->data[2]);
 }
 
 void sub_80AA974(struct Sprite *sprite, s8 var2)
 {
-    u8 val = sprite->data2;
+    u8 val = sprite->data[2];
 
-    gContestMons[sprite->data2].cute = sub_80AA908(val, gContestMons[sprite->data2].cute, var2);
-    sub_80AA388(sprite->data2);
+    gContestMons[sprite->data[2]].cute = sub_80AA908(val, gContestMons[sprite->data[2]].cute, var2);
+    sub_80AA388(sprite->data[2]);
 }
 
 void sub_80AA9B8(struct Sprite *sprite, s8 var2)
 {
-    u8 val = sprite->data2;
+    u8 val = sprite->data[2];
 
-    gContestMons[sprite->data2].beauty = sub_80AA908(val, gContestMons[sprite->data2].beauty, var2);
-    sub_80AA3D0(sprite->data2);
+    gContestMons[sprite->data[2]].beauty = sub_80AA908(val, gContestMons[sprite->data[2]].beauty, var2);
+    sub_80AA3D0(sprite->data[2]);
 }
 
 void sub_80AA9FC(struct Sprite *sprite, s8 var2)
 {
-    u8 val = sprite->data2;
+    u8 val = sprite->data[2];
 
-    gContestMons[sprite->data2].smart = sub_80AA908(val, gContestMons[sprite->data2].smart, var2);
-    sub_80AA418(sprite->data2);
+    gContestMons[sprite->data[2]].smart = sub_80AA908(val, gContestMons[sprite->data[2]].smart, var2);
+    sub_80AA418(sprite->data[2]);
 }
 
 void sub_80AAA40(struct Sprite *sprite, s8 var2)
 {
-    u8 val = sprite->data2;
+    u8 val = sprite->data[2];
 
-    gContestMons[sprite->data2].tough = sub_80AA908(val, gContestMons[sprite->data2].tough, var2);
-    sub_80AA460(sprite->data2);
+    gContestMons[sprite->data[2]].tough = sub_80AA908(val, gContestMons[sprite->data[2]].tough, var2);
+    sub_80AA460(sprite->data[2]);
 }
 
 void sub_80AAA84(struct Sprite *sprite, s8 var2)
 {
-    u8 val = sprite->data2;
+    u8 val = sprite->data[2];
 
-    gContestMons[sprite->data2].sheen = sub_80AA908(val, gContestMons[sprite->data2].sheen, var2);
-    sub_80AA4A8(sprite->data2);
+    gContestMons[sprite->data[2]].sheen = sub_80AA908(val, gContestMons[sprite->data[2]].sheen, var2);
+    sub_80AA4A8(sprite->data[2]);
 }
 
 // a similar function is at 0x80AA908, however, it apparently returns the wrong type (u8 vs u16).
@@ -832,51 +832,51 @@ static u16 sub_80AAAC8(u32 a1, u16 a2, s8 a3) // first param is unused.
 
 void sub_80AAAF0(struct Sprite *sprite, s8 var2)
 {
-    u8 val = sprite->data2;
+    u8 val = sprite->data[2];
 
-    gContestMons[sprite->data2].moves[0] = sub_80AAAC8(val, gContestMons[sprite->data2].moves[0], var2);
-    sub_80AA4F0(sprite->data2, 0);
+    gContestMons[sprite->data[2]].moves[0] = sub_80AAAC8(val, gContestMons[sprite->data[2]].moves[0], var2);
+    sub_80AA4F0(sprite->data[2], 0);
 }
 
 void sub_80AAB30(struct Sprite *sprite, s8 var2)
 {
-    u8 val = sprite->data2;
+    u8 val = sprite->data[2];
 
-    gContestMons[sprite->data2].moves[1] = sub_80AAAC8(val, gContestMons[sprite->data2].moves[1], var2);
-    sub_80AA4F0(sprite->data2, 1);
+    gContestMons[sprite->data[2]].moves[1] = sub_80AAAC8(val, gContestMons[sprite->data[2]].moves[1], var2);
+    sub_80AA4F0(sprite->data[2], 1);
 }
 
 void sub_80AAB70(struct Sprite *sprite, s8 var2)
 {
-    u8 val = sprite->data2;
+    u8 val = sprite->data[2];
 
-    gContestMons[sprite->data2].moves[2] = sub_80AAAC8(val, gContestMons[sprite->data2].moves[2], var2);
-    sub_80AA4F0(sprite->data2, 2);
+    gContestMons[sprite->data[2]].moves[2] = sub_80AAAC8(val, gContestMons[sprite->data[2]].moves[2], var2);
+    sub_80AA4F0(sprite->data[2], 2);
 }
 
 void sub_80AABB0(struct Sprite *sprite, s8 var2)
 {
-    u8 val = sprite->data2;
+    u8 val = sprite->data[2];
 
-    gContestMons[sprite->data2].moves[3] = sub_80AAAC8(val, gContestMons[sprite->data2].moves[3], var2);
-    sub_80AA4F0(sprite->data2, 3);
+    gContestMons[sprite->data[2]].moves[3] = sub_80AAAC8(val, gContestMons[sprite->data[2]].moves[3], var2);
+    sub_80AA4F0(sprite->data[2], 3);
 }
 
 void sub_80AABF0(struct Sprite *sprite, s8 var2)
 {
     s8 a = (var2 > 0) ? 1 : -1;
-    s8 r4 = sprite->data3 + a;
+    s8 r4 = sprite->data[3] + a;
 
     if (r4 < 0)
         r4 = 0;
     else if (r4 > 4)
         r4 = 4;
     sub_80AA5BC(r4);
-    sprite->data3 = r4;
-    gScriptContestCategory = sprite->data3;
-    sub_80AE398(sprite->data3, gScriptContestRank);
-    sub_80AA280(sprite->data2);
-    sub_80AA658(sprite->data2);
+    sprite->data[3] = r4;
+    gScriptContestCategory = sprite->data[3];
+    sub_80AE398(sprite->data[3], gScriptContestRank);
+    sub_80AA280(sprite->data[2]);
+    sub_80AA658(sprite->data[2]);
 }
 
 void sub_80AAC5C(struct Sprite *sprite, s8 var2)
@@ -889,8 +889,8 @@ void sub_80AAC5C(struct Sprite *sprite, s8 var2)
         gScriptContestRank = 3;
     sub_80AA5E8(gScriptContestRank);
     sub_80AE398(gScriptContestCategory, gScriptContestRank);
-    sub_80AA280(sprite->data2);
-    sub_80AA658(sprite->data2);
+    sub_80AA280(sprite->data[2]);
+    sub_80AA658(sprite->data[2]);
 }
 
 void sub_80AACC4(void)
@@ -909,7 +909,7 @@ void sub_80AAD08(struct Sprite *sprite, s8 var2)
 {
     if (var2 == 1)
     {
-        eMatsudaDebugVar = sprite->data3;
+        eMatsudaDebugVar = sprite->data[3];
         SetMainCallback2(sub_80AACC4);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
     }

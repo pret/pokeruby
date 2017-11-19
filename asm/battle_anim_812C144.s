@@ -135,7 +135,7 @@ sub_812C220: @ 812C220
 	strh r0, [r4, 0x30]
 	ldr r1, _0812C25C @ =sub_812C268
 	adds r0, r4, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	ldr r1, _0812C260 @ =REG_BLDCNT
 	movs r2, 0xFD
 	lsls r2, 6
@@ -267,7 +267,7 @@ _0812C31A:
 	str r0, [r5, 0x1C]
 	ldr r1, _0812C354 @ =move_anim_8072740
 	adds r0, r5, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	add sp, 0x4
 	pop {r4-r7}
 	pop {r0}
@@ -862,7 +862,7 @@ sub_812C798: @ 812C798
 	str r0, [r4, 0x1C]
 	ldr r1, _0812C7C4 @ =sub_812C7C8
 	adds r0, r4, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 _0812C7BA:
 	pop {r4}
 	pop {r0}
@@ -929,7 +929,7 @@ sub_812C80C: @ 812C80C
 	str r0, [r4, 0x1C]
 	ldr r1, _0812C844 @ =move_anim_8072740
 	adds r0, r4, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -2350,7 +2350,7 @@ _0812D2F0:
 	bne _0812D33C
 	ldr r1, _0812D344 @ =move_anim_8072740
 	adds r0, r5, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	ldrh r0, [r5, 0x24]
 	ldrh r2, [r5, 0x20]
 	adds r0, r2
@@ -8810,7 +8810,7 @@ sub_813051C: @ 813051C
 	strh r0, [r4, 0x2E]
 	ldr r1, _0813054C @ =move_anim_8072740
 	adds r0, r4, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	ldr r0, _08130550 @ =sub_8078CC0
 	str r0, [r4, 0x1C]
 	pop {r4}

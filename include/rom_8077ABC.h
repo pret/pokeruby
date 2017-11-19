@@ -15,7 +15,7 @@ enum
 u8 sub_8077ABC(u8, u8);
 u8 sub_8077E44(u8 slot, u16 species, u8 a3);
 u8 GetAnimBankSpriteId(u8 side);
-void StoreSpriteCallbackInData6(struct Sprite *sprite, void(*callback)(struct Sprite *));
+void StoreSpriteCallbackInData(struct Sprite *sprite, void(*callback)(struct Sprite *));
 void sub_8078314(struct Sprite *sprite);
 void sub_8078364(struct Sprite *sprite);
 void sub_8078458(struct Sprite *sprite);

@@ -131,7 +131,7 @@ static void CB2_BeginEvolutionScene(void)
 #define tLearnsFirstMove    data[6]
 #define tLearnMoveState     data[8]
 #define tData9              data[9]
-#define tData10             data[10]
+#define tdata10             data[10]
 #define tEvoWasStopped      data[11]
 #define tPartyID            data[12]
 
@@ -763,7 +763,7 @@ static void Task_EvolutionScene(u8 taskID)
                 StrCpyDecodeToDisplayedStringBattle(gBattleStringsTable[6]);
                 sub_8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
                 gTasks[taskID].tData9 = 5;
-                gTasks[taskID].tData10 = 9;
+                gTasks[taskID].tdata10 = 9;
                 gTasks[taskID].tLearnMoveState++;
             }
         case 3:
@@ -797,7 +797,7 @@ static void Task_EvolutionScene(u8 taskID)
                 sub_8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
                 PlaySE(SE_SELECT);
                 if (sEvoCursorPos != 0)
-                    gTasks[taskID].tLearnMoveState = gTasks[taskID].tData10;
+                    gTasks[taskID].tLearnMoveState = gTasks[taskID].tdata10;
                 else
                 {
                     gTasks[taskID].tLearnMoveState = gTasks[taskID].tData9;
@@ -811,7 +811,7 @@ static void Task_EvolutionScene(u8 taskID)
                 StrCpyDecodeToDisplayedStringBattle(gBattleStringsTable[292]);
                 sub_8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
                 PlaySE(SE_SELECT);
-                gTasks[taskID].tLearnMoveState = gTasks[taskID].tData10;
+                gTasks[taskID].tLearnMoveState = gTasks[taskID].tdata10;
             }
             break;
         case 5:
@@ -874,7 +874,7 @@ static void Task_EvolutionScene(u8 taskID)
             StrCpyDecodeToDisplayedStringBattle(gBattleStringsTable[8]);
             sub_8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
             gTasks[taskID].tData9 = 10;
-            gTasks[taskID].tData10 = 0;
+            gTasks[taskID].tdata10 = 0;
             gTasks[taskID].tLearnMoveState = 3;
             break;
         case 10:
@@ -1077,7 +1077,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
                 StrCpyDecodeToDisplayedStringBattle(gBattleStringsTable[6]);
                 sub_8002EB0(&gUnknown_03004828->window, gDisplayedStringBattle, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
                 gTasks[taskID].tData9 = 5;
-                gTasks[taskID].tData10 = 9;
+                gTasks[taskID].tdata10 = 9;
                 gTasks[taskID].tLearnMoveState++;
             }
         case 3:
@@ -1116,7 +1116,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
                 sub_8002EB0(&gUnknown_03004828->window, gDisplayedStringBattle, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
                 PlaySE(SE_SELECT);
                 if (sEvoCursorPos != 0)
-                    gTasks[taskID].tLearnMoveState = gTasks[taskID].tData10;
+                    gTasks[taskID].tLearnMoveState = gTasks[taskID].tdata10;
                 else
                 {
                     gTasks[taskID].tLearnMoveState = gTasks[taskID].tData9;
@@ -1131,7 +1131,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
                 StrCpyDecodeToDisplayedStringBattle(gBattleStringsTable[292]);
                 sub_8002EB0(&gUnknown_03004828->window, gDisplayedStringBattle, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
                 PlaySE(SE_SELECT);
-                gTasks[taskID].tLearnMoveState = gTasks[taskID].tData10;
+                gTasks[taskID].tLearnMoveState = gTasks[taskID].tdata10;
             }
             break;
         case 5:
@@ -1194,7 +1194,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
             StrCpyDecodeToDisplayedStringBattle(gBattleStringsTable[8]);
             sub_8002EB0(&gUnknown_03004828->window, gDisplayedStringBattle, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
             gTasks[taskID].tData9 = 10;
-            gTasks[taskID].tData10 = 0;
+            gTasks[taskID].tdata10 = 0;
             gTasks[taskID].tLearnMoveState = 3;
             break;
         case 10:

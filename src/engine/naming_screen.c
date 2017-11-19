@@ -1012,8 +1012,8 @@ static void CursorInit(void)
     namingScreenData.cursorSpriteId = CreateSprite(&gSpriteTemplate_83CE640, 0, 0, 0);
     gSprites[namingScreenData.cursorSpriteId].oam.priority = 1;
     gSprites[namingScreenData.cursorSpriteId].oam.objMode = 1;
-    gSprites[namingScreenData.cursorSpriteId].data6 = 1;
-    gSprites[namingScreenData.cursorSpriteId].data6 = 2;
+    gSprites[namingScreenData.cursorSpriteId].data[6] = 1;
+    gSprites[namingScreenData.cursorSpriteId].data[6] = 2;
     SetCursorPos(0, 0);
 }
 
@@ -1040,18 +1040,18 @@ static void SetCursorPos(s16 x, s16 y)
 
     cursorSprite->pos1.x = CursorColToKeyboardCol(x) * 8 + 27;
     cursorSprite->pos1.y = y * 16 + 80;
-    cursorSprite->data2 = cursorSprite->data0;
-    cursorSprite->data3 = cursorSprite->data1;
-    cursorSprite->data0 = x;
-    cursorSprite->data1 = y;
+    cursorSprite->data[2] = cursorSprite->data[0];
+    cursorSprite->data[3] = cursorSprite->data[1];
+    cursorSprite->data[0] = x;
+    cursorSprite->data[1] = y;
 }
 
 static void GetCursorPos(s16 *x, s16 *y)
 {
     struct Sprite *cursorSprite = &gSprites[namingScreenData.cursorSpriteId];
 
-    *x = cursorSprite->data0;
-    *y = cursorSprite->data1;
+    *x = cursorSprite->data[0];
+    *y = cursorSprite->data[1];
 }
 
 static void MoveCursorToOKButton(void)
@@ -1061,15 +1061,15 @@ static void MoveCursorToOKButton(void)
 
 static void sub_80B6888(u8 a)
 {
-    gSprites[namingScreenData.cursorSpriteId].data4 &= -256;
-    gSprites[namingScreenData.cursorSpriteId].data4 |= a;
+    gSprites[namingScreenData.cursorSpriteId].data[4] &= -256;
+    gSprites[namingScreenData.cursorSpriteId].data[4] |= a;
     StartSpriteAnim(&gSprites[namingScreenData.cursorSpriteId], 0);
 }
 
 static void sub_80B68D8(u8 a)
 {
-    gSprites[namingScreenData.cursorSpriteId].data4 &= 0xFF;
-    gSprites[namingScreenData.cursorSpriteId].data4 |= a << 8;
+    gSprites[namingScreenData.cursorSpriteId].data[4] &= 0xFF;
+    gSprites[namingScreenData.cursorSpriteId].data[4] |= a << 8;
 }
 
 static void sub_80B6914(void)
@@ -1099,28 +1099,28 @@ void sub_80B6998(struct Sprite *sprite)
 {
     if (sprite->animEnded)
         StartSpriteAnim(sprite, 0);
-    sprite->invisible = (sprite->data4 & 0xFF);
-    if (sprite->data0 == COLUMN_COUNT - 1)
+    sprite->invisible = (sprite->data[4] & 0xFF);
+    if (sprite->data[0] == COLUMN_COUNT - 1)
         sprite->invisible = TRUE;
-    if (sprite->invisible || (sprite->data4 & 0xFF00) == 0
-     || sprite->data0 != sprite->data2 || sprite->data1 != sprite->data3)
+    if (sprite->invisible || (sprite->data[4] & 0xFF00) == 0
+     || sprite->data[0] != sprite->data[2] || sprite->data[1] != sprite->data[3])
     {
-        sprite->data5 = 0;
-        sprite->data6 = 1;
-        sprite->data7 = 2;
+        sprite->data[5] = 0;
+        sprite->data[6] = 1;
+        sprite->data[7] = 2;
     }
-    sprite->data7--;
-    if (sprite->data7 == 0)
+    sprite->data[7]--;
+    if (sprite->data[7] == 0)
     {
-        sprite->data5 += sprite->data6;
-        if (sprite->data5 == 16 || sprite->data5 == 0)
-            sprite->data6 = -sprite->data6;
-        sprite->data7 = 2;
+        sprite->data[5] += sprite->data[6];
+        if (sprite->data[5] == 16 || sprite->data[5] == 0)
+            sprite->data[6] = -sprite->data[6];
+        sprite->data[7] = 2;
     }
-    if ((sprite->data4 & 0xFF00) != 0)
+    if ((sprite->data[4] & 0xFF00) != 0)
     {
-        s8 gb = sprite->data5;
-        s8 r = sprite->data5 >> 1;
+        s8 gb = sprite->data[5];
+        s8 r = sprite->data[5] >> 1;
         u16 index = IndexOfSpritePaletteTag(5) * 16 + 0x0101;
 
         MultiplyInvertedPaletteRGBComponents(index, r, gb, gb);
@@ -1138,20 +1138,20 @@ static void sub_80B6A80(void)
     SetSubspriteTables(&gSprites[spriteId1], gSubspriteTables_83CE558);
 
     spriteId2 = CreateSprite(&gSpriteTemplate_83CE5F8, 0xCC, 0x4C, 1);
-    gSprites[spriteId1].data6 = spriteId2;
+    gSprites[spriteId1].data[6] = spriteId2;
     SetSubspriteTables(&gSprites[spriteId2], gSubspriteTables_83CE560);
 
     spriteId3 = CreateSprite(&gSpriteTemplate_83CE5E0, 0xCC, 0x4B, 2);
     gSprites[spriteId3].oam.priority = 1;
-    gSprites[spriteId1].data7 = spriteId3;
+    gSprites[spriteId1].data[7] = spriteId3;
 }
 
 static void sub_80B6B14(void)
 {
     struct Sprite *sprite = &gSprites[namingScreenData.unk10];
 
-    sprite->data0 = 2;
-    sprite->data1 = namingScreenData.currentPage;
+    sprite->data[0] = 2;
+    sprite->data[1] = namingScreenData.currentPage;
 }
 
 static u8 sub_80B6B5C(struct Sprite *);
@@ -1169,17 +1169,17 @@ static u8 (*const gUnknown_083CE2B4[])(struct Sprite *) =
 
 void sub_80B6B34(struct Sprite *sprite)
 {
-    while (gUnknown_083CE2B4[sprite->data0](sprite) != 0)
+    while (gUnknown_083CE2B4[sprite->data[0]](sprite) != 0)
         ;
 }
 
 static u8 sub_80B6B5C(struct Sprite *sprite)
 {
-    struct Sprite *sprite1 = &gSprites[sprite->data6];
-    struct Sprite *sprite2 = &gSprites[sprite->data7];
+    struct Sprite *sprite1 = &gSprites[sprite->data[6]];
+    struct Sprite *sprite2 = &gSprites[sprite->data[7]];
 
     sub_80B6C48(namingScreenData.currentPage, sprite1, sprite2);
-    sprite->data0++;
+    sprite->data[0]++;
     return 0;
 }
 
@@ -1190,30 +1190,30 @@ static u8 sub_80B6B98(struct Sprite *sprite)
 
 static u8 sub_80B6B9C(struct Sprite *sprite)
 {
-    struct Sprite *r4 = &gSprites[sprite->data6];
-    struct Sprite *r5 = &gSprites[sprite->data7];
+    struct Sprite *r4 = &gSprites[sprite->data[6]];
+    struct Sprite *r5 = &gSprites[sprite->data[7]];
 
     r4->pos2.y++;
     if (r4->pos2.y > 7)
     {
-        sprite->data0++;
+        sprite->data[0]++;
         r4->pos2.y = -4;
         r4->invisible = TRUE;
-        sub_80B6C48(((u8)sprite->data1 + 1) % 3, r4, r5);
+        sub_80B6C48(((u8)sprite->data[1] + 1) % 3, r4, r5);
     }
     return 0;
 }
 
 static u8 sub_80B6C08(struct Sprite *sprite)
 {
-    struct Sprite *r2 = &gSprites[sprite->data6];
+    struct Sprite *r2 = &gSprites[sprite->data[6]];
 
     r2->invisible = FALSE;
     r2->pos2.y++;
     if (r2->pos2.y >= 0)
     {
         r2->pos2.y = 0;
-        sprite->data0 = 1;
+        sprite->data[0] = 1;
     }
     return 0;
 }
@@ -1255,7 +1255,7 @@ static void sub_80B6D04(void)
     {
         spriteId = CreateSprite(&gSpriteTemplate_83CE670, r1, 0x2C, 0);
         gSprites[spriteId].oam.priority = 3;
-        gSprites[spriteId].data0 = i;
+        gSprites[spriteId].data[0] = i;
     }
 }
 
@@ -1263,12 +1263,12 @@ void sub_80B6D9C(struct Sprite *sprite)
 {
     const s16 arr[] = {0, -4, -2, -1};
 
-    if (sprite->data0 == 0 || --sprite->data0 == 0)
+    if (sprite->data[0] == 0 || --sprite->data[0] == 0)
     {
-        sprite->data0 = 8;
-        sprite->data1 = (sprite->data1 + 1) & 3;
+        sprite->data[0] = 8;
+        sprite->data[1] = (sprite->data[1] + 1) & 3;
     }
-    sprite->pos2.x = arr[sprite->data1];
+    sprite->pos2.x = arr[sprite->data[1]];
 }
 
 void sub_80B6DE8(struct Sprite *sprite)
@@ -1277,20 +1277,20 @@ void sub_80B6DE8(struct Sprite *sprite)
     u8 var;
 
     var = GetTextCaretPosition();
-    if (var != (u8)sprite->data0)
+    if (var != (u8)sprite->data[0])
     {
         sprite->pos2.y = 0;
-        sprite->data1 = 0;
-        sprite->data2 = 0;
+        sprite->data[1] = 0;
+        sprite->data[2] = 0;
     }
     else
     {
-        sprite->pos2.y = arr[sprite->data1];
-        sprite->data2++;
-        if (sprite->data2 > 8)
+        sprite->pos2.y = arr[sprite->data[1]];
+        sprite->data[2]++;
+        if (sprite->data[2] > 8)
         {
-            sprite->data1 = (sprite->data1 + 1) & 3;
-            sprite->data2 = 0;
+            sprite->data[1] = (sprite->data[1] + 1) & 3;
+            sprite->data[2] = 0;
         }
     }
 }

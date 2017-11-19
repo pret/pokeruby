@@ -2458,10 +2458,10 @@ static void sub_8049ED4(u8 a0)
                 gSprites[gUnknown_03004824->partyIcons[whichParty][i]].invisible = TRUE;
             }
             gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]].invisible = FALSE;
-            gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]].data0 = 20;
-            gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]].data2 = (gTradeMonSpriteCoords[6 * whichParty + whichPokemon][0] + gTradeMonSpriteCoords[6 * whichParty + whichPokemon + 1][0]) / 2 * 8 + 14;
-            gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]].data4 = gTradeMonSpriteCoords[6 * whichParty + whichPokemon][1] * 8 - 12;
-            StoreSpriteCallbackInData6(&gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]], sub_809D62C);
+            gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]].data[0] = 20;
+            gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]].data[2] = (gTradeMonSpriteCoords[6 * whichParty + whichPokemon][0] + gTradeMonSpriteCoords[6 * whichParty + whichPokemon + 1][0]) / 2 * 8 + 14;
+            gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]].data[4] = gTradeMonSpriteCoords[6 * whichParty + whichPokemon][1] * 8 - 12;
+            StoreSpriteCallbackInData(&gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]], sub_809D62C);
             gUnknown_03004824->unk_0080[a0] ++;
             sub_8078A34(&gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]]);
             HandleDestroyMenuCursors();
@@ -2675,7 +2675,7 @@ static void sub_8049ED4(u8 a0)
                     "\tlsls r0, 2\n"
                     "\tadds r0, r7\n"
                     "\tldr r1, _0804A0A0 @ =sub_809D62C\n"
-                    "\tbl StoreSpriteCallbackInData6\n"
+                    "\tbl StoreSpriteCallbackInData\n"
                     "\tldr r2, _0804A09C @ =gUnknown_03004824\n"
                     "\tldr r1, [r2]\n"
                     "\tadds r1, 0x80\n"
@@ -3816,45 +3816,45 @@ static void sub_804AFB8(const struct WindowConfig *windowConfig, u8 *dest, const
 
 static void sub_804B058(struct Sprite *sprite)
 {
-    if (++ sprite->data0 == 10)
+    if (++ sprite->data[0] == 10)
     {
         PlaySE(SE_BOWA);
-        sprite->data0 = 0;
+        sprite->data[0] = 0;
     }
 }
 
 static void sub_804B07C(struct Sprite *sprite)
 {
-    if (sprite->data1 == 0)
+    if (sprite->data[1] == 0)
     {
-        if (++ sprite->data0 == 12)
-            sprite->data0 = 0;
-        LoadPalette(&gTradeGlow2PaletteAnimTable[sprite->data0], 16 * (sprite->oam.paletteNum + 16) + 4, 2);
+        if (++ sprite->data[0] == 12)
+            sprite->data[0] = 0;
+        LoadPalette(&gTradeGlow2PaletteAnimTable[sprite->data[0]], 16 * (sprite->oam.paletteNum + 16) + 4, 2);
     }
 }
 
 static void sub_804B0BC(struct Sprite *sprite)
 {
-    sprite->data0 ++;
+    sprite->data[0] ++;
     sprite->pos2.y ++;
-    if (sprite->data0 == 10)
+    if (sprite->data[0] == 10)
         DestroySprite(sprite);
 }
 
 static void sub_804B0E0(struct Sprite *sprite)
 {
-    sprite->data0 ++;
+    sprite->data[0] ++;
     sprite->pos2.y --;
-    if (sprite->data0 == 10)
+    if (sprite->data[0] == 10)
         DestroySprite(sprite);
 }
 
 static void sub_804B104(struct Sprite *sprite)
 {
-    if (++ sprite->data0 == 15)
+    if (++ sprite->data[0] == 15)
     {
         PlaySE(SE_W107);
-        sprite->data0 = 0;
+        sprite->data[0] = 0;
     }
 }
 
@@ -4989,8 +4989,8 @@ static bool8 sub_804C29C(void)
             gSprites[gUnknown_03004828->unk_00bb].pos2.y += 3;
             if (gSprites[gUnknown_03004828->unk_00ba].pos2.y <= -0x5a)
             {
-                gSprites[gUnknown_03004828->unk_00ba].data1 = 1;
-                gSprites[gUnknown_03004828->unk_00bb].data1 = 1;
+                gSprites[gUnknown_03004828->unk_00ba].data[1] = 1;
+                gSprites[gUnknown_03004828->unk_00bb].data[1] = 1;
                 gUnknown_03004828->unk_00c4 ++;
             }
             break;
@@ -5036,8 +5036,8 @@ static bool8 sub_804C29C(void)
             }
             if (gSprites[gUnknown_03004828->pokePicSpriteIdxs[0]].pos2.y < -0xde)
             {
-                gSprites[gUnknown_03004828->unk_00ba].data1 = 0;
-                gSprites[gUnknown_03004828->unk_00bb].data1 = 0;
+                gSprites[gUnknown_03004828->unk_00ba].data[1] = 0;
+                gSprites[gUnknown_03004828->unk_00bb].data[1] = 0;
                 gUnknown_03004828->unk_00c4 ++;
                 gSprites[gUnknown_03004828->pokePicSpriteIdxs[0]].invisible = TRUE;
                 gSprites[gUnknown_03004828->pokePicSpriteIdxs[1]].invisible = TRUE;
@@ -5169,7 +5169,7 @@ static bool8 sub_804C29C(void)
             break;
         case 63:
             gUnknown_03004828->unk_0103 = CreateSprite(&gSpriteTemplate_821595C, 0x78, -0x8, 0);
-            gSprites[gUnknown_03004828->unk_0103].data3 = 0x4a;
+            gSprites[gUnknown_03004828->unk_0103].data[3] = 0x4a;
             gSprites[gUnknown_03004828->unk_0103].callback = sub_804D80C;
             StartSpriteAnim(&gSprites[gUnknown_03004828->unk_0103], 1);
             StartSpriteAffineAnim(&gSprites[gUnknown_03004828->unk_0103], 2);
@@ -5318,47 +5318,47 @@ static void sub_804D63C(void)
 
 static void sub_804D6BC(struct Sprite *sprite)
 {
-    sprite->pos1.y += sprite->data0 / 10;
-    sprite->data5 += sprite->data1;
-    sprite->pos1.x = sprite->data5 / 10;
+    sprite->pos1.y += sprite->data[0] / 10;
+    sprite->data[5] += sprite->data[1];
+    sprite->pos1.x = sprite->data[5] / 10;
     if (sprite->pos1.y > 0x4c)
     {
         sprite->pos1.y = 0x4c;
-        sprite->data0 = -(sprite->data0 * sprite->data2) / 100;
-        sprite->data3 ++;
+        sprite->data[0] = -(sprite->data[0] * sprite->data[2]) / 100;
+        sprite->data[3] ++;
     }
     if (sprite->pos1.x == 0x78)
-        sprite->data1 = 0;
-    sprite->data0 += sprite->data4;
-    if (sprite->data3 == 4)
+        sprite->data[1] = 0;
+    sprite->data[0] += sprite->data[4];
+    if (sprite->data[3] == 4)
     {
-        sprite->data7 = 1;
+        sprite->data[7] = 1;
         sprite->callback = SpriteCallbackDummy;
     }
 }
 
 static void sub_804D738(struct Sprite *sprite)
 {
-    sprite->pos2.y += gTradeBallVerticalVelocityTable[sprite->data0];
-    if (sprite->data0 == 22)
+    sprite->pos2.y += gTradeBallVerticalVelocityTable[sprite->data[0]];
+    if (sprite->data[0] == 22)
         PlaySE(SE_KON);
-    if (++ sprite->data0 == 44)
+    if (++ sprite->data[0] == 44)
     {
         PlaySE(SE_W025);
         sprite->callback = sub_804D7AC;
-        sprite->data0 = 0;
+        sprite->data[0] = 0;
         BeginNormalPaletteFade(1 << (16 + sprite->oam.paletteNum), -1, 0, 16, -1);
     }
 }
 
 static void sub_804D7AC(struct Sprite *sprite)
 {
-    if (sprite->data1 == 20)
+    if (sprite->data[1] == 20)
         StartSpriteAffineAnim(sprite, 1);
-    if (++ sprite->data1 > 20)
+    if (++ sprite->data[1] > 20)
     {
-        sprite->pos2.y -= gTradeBallVerticalVelocityTable[sprite->data0];
-        if (++ sprite->data0 == 23)
+        sprite->pos2.y -= gTradeBallVerticalVelocityTable[sprite->data[0]];
+        if (++ sprite->data[0] == 23)
         {
             DestroySprite(sprite);
             gUnknown_03004828->unk_00c4 = 14; // Resume the master trade animation
@@ -5368,25 +5368,25 @@ static void sub_804D7AC(struct Sprite *sprite)
 
 static void sub_804D80C(struct Sprite *sprite)
 {
-    if (sprite->data2 == 0)
+    if (sprite->data[2] == 0)
     {
-        if ((sprite->pos1.y += 4) > sprite->data3)
+        if ((sprite->pos1.y += 4) > sprite->data[3])
         {
-            sprite->data2 ++;
-            sprite->data0 = 0x16;
+            sprite->data[2] ++;
+            sprite->data[0] = 0x16;
             PlaySE(SE_KON);
         }
     }
     else
     {
-        if (sprite->data0 == 0x42)
+        if (sprite->data[0] == 0x42)
             PlaySE(SE_KON2);
-        if (sprite->data0 == 0x5c)
+        if (sprite->data[0] == 0x5c)
             PlaySE(SE_KON3);
-        if (sprite->data0 == 0x6b)
+        if (sprite->data[0] == 0x6b)
             PlaySE(SE_KON4);
-        sprite->pos2.y += gTradeBallVerticalVelocityTable[sprite->data0];
-        if (++sprite->data0 == 0x6c)
+        sprite->pos2.y += gTradeBallVerticalVelocityTable[sprite->data[0]];
+        if (++sprite->data[0] == 0x6c)
             sprite->callback = SpriteCallbackDummy;
     }
 }

@@ -9,18 +9,18 @@ extern const u8 gUnknown_0830FD14[];
 static u8 callback(struct MapObject *, struct Sprite *);\
 void setup(struct Sprite *sprite)\
 {\
-    meta_step(&gMapObjects[sprite->data0], sprite, callback);\
+    meta_step(&gMapObjects[sprite->data[0]], sprite, callback);\
 }\
 static u8 callback(struct MapObject *mapObject, struct Sprite *sprite)\
 {\
-    return table[sprite->data1](mapObject, sprite);\
+    return table[sprite->data[1]](mapObject, sprite);\
 }
 
 #define fieldmap_object_null_cb(setup, callback) \
 static u8 callback(struct MapObject *, struct Sprite *);\
 void setup(struct Sprite *sprite)\
 {\
-    meta_step(&gMapObjects[sprite->data0], sprite, callback);\
+    meta_step(&gMapObjects[sprite->data[0]], sprite, callback);\
 }\
 static u8 callback(struct MapObject *mapObject, struct Sprite *sprite)\
 {\

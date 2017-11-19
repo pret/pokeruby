@@ -288,22 +288,22 @@ void CB2_StartWallClock(void)
     gTasks[taskId].tHourHandAngle = 300;
 
     spriteId = CreateSprite(&gSpriteTemplate_83F7AD8, DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2, 1);
-    gSprites[spriteId].data0 = taskId;
+    gSprites[spriteId].data[0] = taskId;
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].oam.matrixNum = 0;
 
     spriteId = CreateSprite(&gSpriteTemplate_83F7AF0, DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2, 0);
-    gSprites[spriteId].data0 = taskId;
+    gSprites[spriteId].data[0] = taskId;
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].oam.matrixNum = 1;
 
     spriteId = CreateSprite(&gSpriteTemplate_83F7B28, DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2, 2);
-    gSprites[spriteId].data0 = taskId;
-    gSprites[spriteId].data1 = 45;
+    gSprites[spriteId].data[0] = taskId;
+    gSprites[spriteId].data[1] = 45;
 
     spriteId = CreateSprite(&gSpriteTemplate_83F7B40, DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2, 2);
-    gSprites[spriteId].data0 = taskId;
-    gSprites[spriteId].data1 = 90;
+    gSprites[spriteId].data[0] = taskId;
+    gSprites[spriteId].data[1] = 90;
 
     WallClockInit();
 }
@@ -333,22 +333,22 @@ void CB2_ViewWallClock(void)
     }
 
     spriteId = CreateSprite(&gSpriteTemplate_83F7AD8, 120, 80, 1);
-    gSprites[spriteId].data0 = taskId;
+    gSprites[spriteId].data[0] = taskId;
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].oam.matrixNum = 0;
 
     spriteId = CreateSprite(&gSpriteTemplate_83F7AF0, 120, 80, 0);
-    gSprites[spriteId].data0 = taskId;
+    gSprites[spriteId].data[0] = taskId;
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].oam.matrixNum = 1;
 
     spriteId = CreateSprite(&gSpriteTemplate_83F7B28, 120, 80, 2);
-    gSprites[spriteId].data0 = taskId;
-    gSprites[spriteId].data1 = angle1;
+    gSprites[spriteId].data[0] = taskId;
+    gSprites[spriteId].data[1] = angle1;
 
     spriteId = CreateSprite(&gSpriteTemplate_83F7B40, 120, 80, 2);
-    gSprites[spriteId].data0 = taskId;
-    gSprites[spriteId].data1 = angle2;
+    gSprites[spriteId].data[0] = taskId;
+    gSprites[spriteId].data[1] = angle2;
 
     WallClockInit();
 }
@@ -968,7 +968,7 @@ static void sub_810B05C(struct Sprite *sprite)
     u16 x;
     u16 y;
 
-    angle = gTasks[sprite->data0].tMinuteHandAngle;
+    angle = gTasks[sprite->data[0]].tMinuteHandAngle;
     sin = Sin2(angle) / 16;
     cos = Cos2(angle) / 16;
     SetOamMatrix(0, cos, sin, -sin, cos);
@@ -993,7 +993,7 @@ static void sub_810B0F4(struct Sprite *sprite)
     u16 x;
     u16 y;
 
-    angle = gTasks[sprite->data0].tHourHandAngle;
+    angle = gTasks[sprite->data[0]].tHourHandAngle;
     sin = Sin2(angle) / 16;
     cos = Cos2(angle) / 16;
     SetOamMatrix(1, cos, sin, -sin, cos);
@@ -1015,23 +1015,23 @@ static void sub_810B18C(struct Sprite *sprite)
     s16 sin;
     s16 cos;
 
-    if (gTasks[sprite->data0].tPeriod != PERIOD_AM)
+    if (gTasks[sprite->data[0]].tPeriod != PERIOD_AM)
     {
-        if (sprite->data1 >= 60 && sprite->data1 < 90)
-            sprite->data1 += 5;
-        if (sprite->data1 < 60)
-            sprite->data1++;
+        if (sprite->data[1] >= 60 && sprite->data[1] < 90)
+            sprite->data[1] += 5;
+        if (sprite->data[1] < 60)
+            sprite->data[1]++;
     }
     else
     {
-        if (sprite->data1 > 45 && sprite->data1 <= 75)
-            sprite->data1 -= 5;
-        if (sprite->data1 > 75)
-            sprite->data1--;
+        if (sprite->data[1] > 45 && sprite->data[1] <= 75)
+            sprite->data[1] -= 5;
+        if (sprite->data[1] > 75)
+            sprite->data[1]--;
     }
-    cos = Cos2((u16)sprite->data1);
+    cos = Cos2((u16)sprite->data[1]);
     sprite->pos2.x =  cos * 30 / 4096;
-    sin = Sin2((u16)sprite->data1);
+    sin = Sin2((u16)sprite->data[1]);
     sprite->pos2.y = sin * 30 / 4096;
 }
 
@@ -1040,22 +1040,22 @@ static void sub_810B230(struct Sprite *sprite)
     s16 sin;
     s16 cos;
 
-    if (gTasks[sprite->data0].tPeriod != PERIOD_AM)
+    if (gTasks[sprite->data[0]].tPeriod != PERIOD_AM)
     {
-        if (sprite->data1 >= 105 && sprite->data1 < 135)
-            sprite->data1 += 5;
-        if (sprite->data1 < 105)
-            sprite->data1++;
+        if (sprite->data[1] >= 105 && sprite->data[1] < 135)
+            sprite->data[1] += 5;
+        if (sprite->data[1] < 105)
+            sprite->data[1]++;
     }
     else
     {
-        if (sprite->data1 > 90 && sprite->data1 <= 120)
-            sprite->data1 -= 5;
-        if (sprite->data1 > 120)
-            sprite->data1--;
+        if (sprite->data[1] > 90 && sprite->data[1] <= 120)
+            sprite->data[1] -= 5;
+        if (sprite->data[1] > 120)
+            sprite->data[1]--;
     }
-    cos = Cos2((u16)sprite->data1);
+    cos = Cos2((u16)sprite->data[1]);
     sprite->pos2.x =  cos * 30 / 4096;
-    sin = Sin2((u16)sprite->data1);
+    sin = Sin2((u16)sprite->data[1]);
     sprite->pos2.y = sin * 30 / 4096;
 }

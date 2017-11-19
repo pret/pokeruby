@@ -418,11 +418,11 @@ void sub_814910C(struct Sprite *sprite)
     }
     else
     {
-        s32 var = ((sprite->pos1.x << 16) | (u16)sprite->data2) + (u16)sprite->data1;
+        s32 var = ((sprite->pos1.x << 16) | (u16)sprite->data[2]) + (u16)sprite->data[1];
         sprite->pos1.x = var >> 16;
-        sprite->data2 = var;
+        sprite->data[2] = var;
         if (sprite->pos1.x > 255) sprite->pos1.x = 0xFFE0;
-        if (sprite->data0)
+        if (sprite->data[0])
         {
             sprite->pos2.y = -(gUnknown_02039358 + gUnknown_0203935A);
         }
@@ -447,9 +447,9 @@ void sub_8149174(u8 a, struct UnknownStruct1 *b, const union AnimCmd *const *c, 
         gSprites[sprite].oam.paletteNum = 0;
         gSprites[sprite].anims = c;
         StartSpriteAnim(&gSprites[sprite], b[i].var0_0);
-        gSprites[sprite].data0 = a;
-        gSprites[sprite].data1 = b[i].var4;
-        gSprites[sprite].data2 = 0;
+        gSprites[sprite].data[0] = a;
+        gSprites[sprite].data[1] = b[i].var4;
+        gSprites[sprite].data[2] = 0;
     }
 }
 
@@ -474,11 +474,11 @@ void nullsub_82()
 
 void sub_81492A0(struct Sprite* sprite)
 {
-    sprite->invisible = gSprites[sprite->data0].invisible;
-    sprite->pos1.x = gSprites[sprite->data0].pos1.x;
-    sprite->pos1.y = gSprites[sprite->data0].pos1.y + 8;
-    sprite->pos2.x = gSprites[sprite->data0].pos2.x;
-    sprite->pos2.y = gSprites[sprite->data0].pos2.y;
+    sprite->invisible = gSprites[sprite->data[0]].invisible;
+    sprite->pos1.x = gSprites[sprite->data[0]].pos1.x;
+    sprite->pos1.y = gSprites[sprite->data[0]].pos1.y + 8;
+    sprite->pos2.x = gSprites[sprite->data[0]].pos2.x;
+    sprite->pos2.y = gSprites[sprite->data[0]].pos2.y;
 }
 
 
@@ -487,7 +487,7 @@ u8 intro_create_brendan_sprite(s16 a, s16 b)
 {
     u8 sprite = CreateSprite(&gSpriteTemplate_8416CDC, a, b, 0);
     u8 brendan = CreateSprite(&gSpriteTemplate_Brendan, a, b + 8, 1);
-    gSprites[brendan].data0 = sprite;
+    gSprites[brendan].data[0] = sprite;
     return sprite;
 }
 
@@ -495,7 +495,7 @@ u8 intro_create_may_sprite(s16 a, s16 b)
 {
     u8 sprite = CreateSprite(&gSpriteTemplate_8416CF4, a, b, 0);
     u8 may = CreateSprite(&gSpriteTemplate_May, a, b + 8, 1);
-    gSprites[may].data0 = sprite;
+    gSprites[may].data[0] = sprite;
     return sprite;
 }
 
@@ -505,17 +505,17 @@ void nullsub_83()
 
 void sub_81493C4(struct Sprite* sprite)
 {
-    sprite->invisible = gSprites[sprite->data0].invisible;
-    sprite->pos1.y = gSprites[sprite->data0].pos1.y;
-    sprite->pos2.x = gSprites[sprite->data0].pos2.x;
-    sprite->pos2.y = gSprites[sprite->data0].pos2.y;
+    sprite->invisible = gSprites[sprite->data[0]].invisible;
+    sprite->pos1.y = gSprites[sprite->data[0]].pos1.y;
+    sprite->pos2.x = gSprites[sprite->data[0]].pos2.x;
+    sprite->pos2.y = gSprites[sprite->data[0]].pos2.y;
 }
 
 u8 intro_create_latios_sprite(s16 a, s16 b)
 {
     u8 sprite = CreateSprite(&gSpriteTemplate_8416D7C, a - 32, b, 2);
     u8 latios = CreateSprite(&gSpriteTemplate_8416D7C, a + 32, b, 2);
-    gSprites[latios].data0 = sprite;
+    gSprites[latios].data[0] = sprite;
     StartSpriteAnim(&gSprites[latios], 1);
     gSprites[latios].callback = &sub_81493C4;
     return sprite;
@@ -525,7 +525,7 @@ u8 intro_create_latias_sprite(s16 a, s16 b)
 {
     u8 sprite = CreateSprite(&gSpriteTemplate_8416D94, a - 32, b, 2);
     u8 latios = CreateSprite(&gSpriteTemplate_8416D94, a + 32, b, 2);
-    gSprites[latios].data0 = sprite;
+    gSprites[latios].data[0] = sprite;
     StartSpriteAnim(&gSprites[latios], 1);
     gSprites[latios].callback = &sub_81493C4;
     return sprite;

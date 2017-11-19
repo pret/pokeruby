@@ -1248,8 +1248,8 @@ void sub_807E0A0(void)
 
 void sub_807E0F4(struct Sprite *sprite)
 {
-    sprite->data0 = (sprite->data0 + 1) & 1;
-    if (sprite->data0 != 0)
+    sprite->data[0] = (sprite->data[0] + 1) & 1;
+    if (sprite->data[0] != 0)
         sprite->pos1.x--;
 }
 
@@ -1468,55 +1468,55 @@ void sub_807E4EC(struct Sprite *sprite)
     s32 r4;
     s32 r0;
 
-    if (sprite->data1 == 0)
-        sprite->data1 = 361;
-    randVal = sprite->data1 * 1103515245 + 12345;
-    sprite->data1 = ((randVal & 0x7FFF0000) >> 16) % 600;
+    if (sprite->data[1] == 0)
+        sprite->data[1] = 361;
+    randVal = sprite->data[1] * 1103515245 + 12345;
+    sprite->data[1] = ((randVal & 0x7FFF0000) >> 16) % 600;
 
     r6 = gUnknown_0839AAC4[gUnknown_08396FC4->unknown_6DC][0];
 
-    r4 = sprite->data1 % 30;
-    sprite->data2 = r4 * 8;  // useless assignment
+    r4 = sprite->data[1] % 30;
+    sprite->data[2] = r4 * 8;  // useless assignment
 
-    r0 = sprite->data1 / 30;
-    sprite->data3 = r0 * 8;  // useless assignment
+    r0 = sprite->data[1] / 30;
+    sprite->data[3] = r0 * 8;  // useless assignment
 
-    sprite->data2 = r4;
-    sprite->data2 <<= 7;
+    sprite->data[2] = r4;
+    sprite->data[2] <<= 7;
 
-    sprite->data3 = r0;
-    sprite->data3 <<= 7;
+    sprite->data[3] = r0;
+    sprite->data[3] <<= 7;
 
-    sprite->data2 -= gUnknown_0839AABC[gUnknown_08396FC4->unknown_6DC][0] * r6;
-    sprite->data3 -= gUnknown_0839AABC[gUnknown_08396FC4->unknown_6DC][1] * r6;
+    sprite->data[2] -= gUnknown_0839AABC[gUnknown_08396FC4->unknown_6DC][0] * r6;
+    sprite->data[3] -= gUnknown_0839AABC[gUnknown_08396FC4->unknown_6DC][1] * r6;
 
     StartSpriteAnim(sprite, 0);
-    sprite->data4 = 0;
+    sprite->data[4] = 0;
     sprite->coordOffsetEnabled = FALSE;
-    sprite->data0 = r6;
+    sprite->data[0] = r6;
 }
 
 void sub_807E5C0(struct Sprite *sprite)
 {
-    if (sprite->data4 == 0)
+    if (sprite->data[4] == 0)
     {
-        sprite->data2 += gUnknown_0839AABC[gUnknown_08396FC4->unknown_6DC][0];
-        sprite->data3 += gUnknown_0839AABC[gUnknown_08396FC4->unknown_6DC][1];
-        sprite->pos1.x = sprite->data2 >> 4;
-        sprite->pos1.y = sprite->data3 >> 4;
+        sprite->data[2] += gUnknown_0839AABC[gUnknown_08396FC4->unknown_6DC][0];
+        sprite->data[3] += gUnknown_0839AABC[gUnknown_08396FC4->unknown_6DC][1];
+        sprite->pos1.x = sprite->data[2] >> 4;
+        sprite->pos1.y = sprite->data[3] >> 4;
 
-        if (sprite->data5 != 0
+        if (sprite->data[5] != 0
          && (sprite->pos1.x >= -8 && sprite->pos1.x <= 248)
          && sprite->pos1.y >= -16 && sprite->pos1.y <= 176)
             sprite->invisible = FALSE;
         else
             sprite->invisible = TRUE;
 
-        sprite->data0--;
-        if (sprite->data0 == 0)
+        sprite->data[0]--;
+        if (sprite->data[0] == 0)
         {
             StartSpriteAnim(sprite, gUnknown_08396FC4->unknown_6DC + 1);
-            sprite->data4 = 1;
+            sprite->data[4] = 1;
             sprite->pos1.x -= gSpriteCoordOffsetX;
             sprite->pos1.y -= gSpriteCoordOffsetY;
             sprite->coordOffsetEnabled = TRUE;
@@ -1531,14 +1531,14 @@ void sub_807E5C0(struct Sprite *sprite)
 
 void sub_807E6C4(struct Sprite *sprite)
 {
-    if (sprite->data0 == 0)
+    if (sprite->data[0] == 0)
     {
         sub_807E4EC(sprite);
         sprite->callback = sub_807E5C0;
     }
     else
     {
-        sprite->data0--;
+        sprite->data[0]--;
     }
 }
 
@@ -1554,13 +1554,13 @@ void sub_807E6F0(struct Sprite *sprite, u16 b)
     {
         while (--r4 != 0xFFFF)
             sub_807E5C0(sprite);
-        sprite->data6 = 0;
+        sprite->data[6] = 0;
     }
     else
     {
-        sprite->data0 = r4 - r8;
+        sprite->data[0] = r4 - r8;
         sprite->invisible = TRUE;
-        sprite->data6 = 1;
+        sprite->data[6] = 1;
     }
 }
 
@@ -1584,10 +1584,10 @@ bool8 sub_807E7B4(void)
       gUnknown_0839AA08[r7].x, gUnknown_0839AA08[r7].y, 78);
     if (spriteId != 64)
     {
-        gSprites[spriteId].data5 = 0;
-        gSprites[spriteId].data1 = r7 * 145;
-        while (gSprites[spriteId].data1 >= 600)
-            gSprites[spriteId].data1 -= 600;
+        gSprites[spriteId].data[5] = 0;
+        gSprites[spriteId].data[1] = r7 * 145;
+        while (gSprites[spriteId].data[1] >= 600)
+            gSprites[spriteId].data[1] -= 600;
         sub_807E4EC(&gSprites[spriteId]);
         sub_807E6F0(&gSprites[spriteId], r7 * 9);
         gSprites[spriteId].invisible = TRUE;
@@ -1606,7 +1606,7 @@ bool8 sub_807E7B4(void)
         {
             if (gUnknown_08396FC4->unknown_0[i] != NULL)
             {
-                if (gUnknown_08396FC4->unknown_0[i]->data6 == 0)
+                if (gUnknown_08396FC4->unknown_0[i]->data[6] == 0)
                     gUnknown_08396FC4->unknown_0[i]->callback = sub_807E5C0;
                 else
                     gUnknown_08396FC4->unknown_0[i]->callback = sub_807E6C4;
@@ -1627,12 +1627,12 @@ bool8 sub_807E8E8(void)
         gUnknown_08396FC4->unknown_6D6 = 0;
         if (gUnknown_08396FC4->unknown_6D8 < gUnknown_08396FC4->unknown_6D9)
         {
-            gUnknown_08396FC4->unknown_0[gUnknown_08396FC4->unknown_6D8++]->data5 = 1;
+            gUnknown_08396FC4->unknown_0[gUnknown_08396FC4->unknown_6D8++]->data[5] = 1;
         }
         else
         {
             gUnknown_08396FC4->unknown_6D8--;
-            gUnknown_08396FC4->unknown_0[gUnknown_08396FC4->unknown_6D8]->data5 = 0;
+            gUnknown_08396FC4->unknown_0[gUnknown_08396FC4->unknown_6D8]->data[5] = 0;
             gUnknown_08396FC4->unknown_0[gUnknown_08396FC4->unknown_6D8]->invisible = TRUE;
         }
     }
@@ -1739,7 +1739,7 @@ bool8 snowflake_add(void)
 
     if (spriteId == 64)
         return FALSE;
-    gSprites[spriteId].data4 = gUnknown_08396FC4->unknown_6E4;
+    gSprites[spriteId].data[4] = gUnknown_08396FC4->unknown_6E4;
     sub_807EC40(&gSprites[spriteId]);
     gSprites[spriteId].coordOffsetEnabled = TRUE;
     gUnknown_08396FC4->unknown_60[gUnknown_08396FC4->unknown_6E4++] = &gSprites[spriteId];
@@ -1758,21 +1758,21 @@ bool8 snowflake_remove(void)
 
 void sub_807EC40(struct Sprite *sprite)
 {
-    u16 r4 = ((sprite->data4 * 5) & 7) * 30 + (Random() % 30);
+    u16 r4 = ((sprite->data[4] * 5) & 7) * 30 + (Random() % 30);
     u16 r6;
 
     sprite->pos1.y = -3 - (gSpriteCoordOffsetY + sprite->centerToCornerVecY);
     sprite->pos1.x = r4 - (gSpriteCoordOffsetX + sprite->centerToCornerVecX);
-    sprite->data0 = sprite->pos1.y * 128;
+    sprite->data[0] = sprite->pos1.y * 128;
     sprite->pos2.x = 0;
     r6 = Random();
-    sprite->data1 = (r6 & 3) * 5 + 64;
-    sprite->data7 = (r6 & 3) * 5 + 64;
+    sprite->data[1] = (r6 & 3) * 5 + 64;
+    sprite->data[7] = (r6 & 3) * 5 + 64;
     StartSpriteAnim(sprite, (r6 & 1) ? 0 : 1);
-    sprite->data3 = 0;
-    sprite->data2 = ((r6 & 3) == 0) ? 2 : 1;
-    sprite->data6 = (r6 & 0x1F) + 210;
-    sprite->data5 = 0;
+    sprite->data[3] = 0;
+    sprite->data[2] = ((r6 & 3) == 0) ? 2 : 1;
+    sprite->data[6] = (r6 & 0x1F) + 210;
+    sprite->data[5] = 0;
 }
 
 void sub_807ECEC(struct Sprite *sprite)
@@ -1782,7 +1782,7 @@ void sub_807ECEC(struct Sprite *sprite)
         sprite->invisible = FALSE;
         sprite->callback = sub_807ED48;
         sprite->pos1.y = 0xFA - (gSpriteCoordOffsetY + sprite->centerToCornerVecY);
-        sprite->data0 = sprite->pos1.y * 128;
+        sprite->data[0] = sprite->pos1.y * 128;
         gUnknown_08396FC4->unknown_6E2 = 0;
     }
 }
@@ -1792,10 +1792,10 @@ void sub_807ED48(struct Sprite *sprite)
     s16 r3;
     s16 r2;
 
-    sprite->data0 += sprite->data1;
-    sprite->pos1.y = sprite->data0 >> 7;
-    sprite->data3 = (sprite->data3 + sprite->data2) & 0xFF;
-    sprite->pos2.x = gSineTable[sprite->data3] / 64;
+    sprite->data[0] += sprite->data[1];
+    sprite->pos1.y = sprite->data[0] >> 7;
+    sprite->data[3] = (sprite->data[3] + sprite->data[2]) & 0xFF;
+    sprite->pos2.x = gSineTable[sprite->data[3]] / 64;
 
     r3 = (sprite->pos1.x + sprite->centerToCornerVecX + gSpriteCoordOffsetX) & 0x1FF;
     if (r3 & 0x100)
@@ -1809,22 +1809,22 @@ void sub_807ED48(struct Sprite *sprite)
     if (r2 > 163 && r2 < 171)
     {
         sprite->pos1.y = 250 - (gSpriteCoordOffsetY + sprite->centerToCornerVecY);
-        sprite->data0 = sprite->pos1.y * 128;
-        sprite->data5 = 0;
-        sprite->data6 = 220;
+        sprite->data[0] = sprite->pos1.y * 128;
+        sprite->data[5] = 0;
+        sprite->data[6] = 220;
     }
     else if (r2 > 242 && r2 < 250)
     {
         sprite->pos1.y = 163;
-        sprite->data0 = sprite->pos1.y * 128;
-        sprite->data5 = 0;
-        sprite->data6 = 220;
+        sprite->data[0] = sprite->pos1.y * 128;
+        sprite->data[5] = 0;
+        sprite->data[6] = 220;
         sprite->invisible = TRUE;
         sprite->callback = sub_807ECEC;
     }
 
-    sprite->data5++;
-    if (sprite->data5 == sprite->data6)
+    sprite->data[5]++;
+    if (sprite->data[5] == sprite->data[6])
     {
         sub_807EC40(sprite);
         sprite->pos1.y = 250;
@@ -2135,10 +2135,10 @@ bool8 sub_807F5EC(void)
 void sub_807F688(struct Sprite *sprite)
 {
     sprite->pos2.y = (u8)gSpriteCoordOffsetY;
-    sprite->pos1.x = gUnknown_08396FC4->unknown_6EE + 32 + sprite->data0 * 64;
+    sprite->pos1.x = gUnknown_08396FC4->unknown_6EE + 32 + sprite->data[0] * 64;
     if (sprite->pos1.x > 0x10F)
     {
-        sprite->pos1.x = 480 + gUnknown_08396FC4->unknown_6EE - (4 - sprite->data0) * 64;
+        sprite->pos1.x = 480 + gUnknown_08396FC4->unknown_6EE - (4 - sprite->data[0]) * 64;
         sprite->pos1.x &= 0x1FF;
     }
 }

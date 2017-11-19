@@ -765,20 +765,20 @@ void ClearLearnMoveVars(void)
 
 void sub_8133300(struct Sprite *sprite)
 {
-    s16 var = (sprite->data1 * 10) & 0xFF;
+    s16 var = (sprite->data[1] * 10) & 0xFF;
 
-    switch (sprite->data0)
+    switch (sprite->data[0])
     {
     case 0:
         break;
     case 1:
-        sprite->pos2.x = Sin(var, 3) * sprite->data2;
+        sprite->pos2.x = Sin(var, 3) * sprite->data[2];
         break;
     case 2:
-        sprite->pos2.y = Sin(var, 1) * sprite->data2;
+        sprite->pos2.y = Sin(var, 1) * sprite->data[2];
         break;
     }
-    sprite->data1++;
+    sprite->data[1]++;
 }
 
 void sub_8133358(void)
@@ -786,22 +786,22 @@ void sub_8133358(void)
     s32 i;
 
     sLearnMoveStruct->spriteIDs[0] = CreateSprite(&gSpriteTemplate_8402D90, 8, 16, 0);
-    gSprites[sLearnMoveStruct->spriteIDs[0]].data0 = 1;
-    gSprites[sLearnMoveStruct->spriteIDs[0]].data2 = -1;
+    gSprites[sLearnMoveStruct->spriteIDs[0]].data[0] = 1;
+    gSprites[sLearnMoveStruct->spriteIDs[0]].data[2] = -1;
 
     sLearnMoveStruct->spriteIDs[1] = CreateSprite(&gSpriteTemplate_8402D90, 72, 16, 0);
     StartSpriteAnim(&gSprites[sLearnMoveStruct->spriteIDs[1]], 1);
-    gSprites[sLearnMoveStruct->spriteIDs[1]].data0 = 1;
-    gSprites[sLearnMoveStruct->spriteIDs[1]].data2 = 1;
+    gSprites[sLearnMoveStruct->spriteIDs[1]].data[0] = 1;
+    gSprites[sLearnMoveStruct->spriteIDs[1]].data[2] = 1;
 
     sLearnMoveStruct->spriteIDs[2] = CreateSprite(&gSpriteTemplate_8402DC0, 160, 4, 0);
     StartSpriteAnim(&gSprites[sLearnMoveStruct->spriteIDs[2]], 1);
-    gSprites[sLearnMoveStruct->spriteIDs[2]].data0 = 2;
-    gSprites[sLearnMoveStruct->spriteIDs[2]].data2 = -1;
+    gSprites[sLearnMoveStruct->spriteIDs[2]].data[0] = 2;
+    gSprites[sLearnMoveStruct->spriteIDs[2]].data[2] = -1;
 
     sLearnMoveStruct->spriteIDs[3] = CreateSprite(&gSpriteTemplate_8402DC0, 160, 60, 0);
-    gSprites[sLearnMoveStruct->spriteIDs[3]].data0 = 2;
-    gSprites[sLearnMoveStruct->spriteIDs[3]].data2 = 1;
+    gSprites[sLearnMoveStruct->spriteIDs[3]].data[0] = 2;
+    gSprites[sLearnMoveStruct->spriteIDs[3]].data[2] = 1;
 
     for (i = 0; i < 8; i++)
     {

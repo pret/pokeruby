@@ -86,11 +86,11 @@ u8 unref_sub_807B69C(u8 a, u8 b)
         for (i = 0; i < 10; i++)
         {
             spriteId2 = CreateSprite(&gSpriteTemplate_83931F8, gSprites[spriteId1].pos1.x, gSprites[spriteId1].pos1.y + 32, 0);
-            gSprites[spriteId2].data0 = i * 51;
-            gSprites[spriteId2].data1 = -256;
+            gSprites[spriteId2].data[0] = i * 51;
+            gSprites[spriteId2].data[1] = -256;
             gSprites[spriteId2].invisible = TRUE;
             if (i > 4)
-                gSprites[spriteId2].data6 = 21;
+                gSprites[spriteId2].data[6] = 21;
         }
     }
     else
@@ -99,14 +99,14 @@ u8 unref_sub_807B69C(u8 a, u8 b)
         for (i = 0; i < 10; i++)
         {
             spriteId2 = CreateSprite(&gSpriteTemplate_83931F8, gSprites[spriteId1].pos1.x, gSprites[spriteId1].pos1.y - 32, 0);
-            gSprites[spriteId2].data0 = i * 51;
-            gSprites[spriteId2].data1 = 256;
+            gSprites[spriteId2].data[0] = i * 51;
+            gSprites[spriteId2].data[1] = 256;
             gSprites[spriteId2].invisible = TRUE;
             if (i > 4)
-                gSprites[spriteId2].data6 = 21;
+                gSprites[spriteId2].data[6] = 21;
         }
     }
-    gSprites[spriteId2].data7 = 1;
+    gSprites[spriteId2].data[7] = 1;
     return taskId;
 }
 
@@ -145,7 +145,7 @@ static void sub_807B7E0(u8 taskId)
 
 static void sub_807B870(struct Sprite *sprite)
 {
-    if (sprite->data6 == 0)
+    if (sprite->data[6] == 0)
     {
         sprite->invisible = FALSE;
         sprite->callback = sub_807B8A4;
@@ -153,25 +153,25 @@ static void sub_807B870(struct Sprite *sprite)
     }
     else
     {
-        sprite->data6 --;
+        sprite->data[6] --;
     }
 }
 
 static void sub_807B8A4(struct Sprite *sprite)
 {
-    sprite->pos2.x = Cos(sprite->data0, 32);
-    sprite->pos2.y = Sin(sprite->data0, 8);
-    if (sprite->data0 < 128)
+    sprite->pos2.x = Cos(sprite->data[0], 32);
+    sprite->pos2.y = Sin(sprite->data[0], 8);
+    if (sprite->data[0] < 128)
         sprite->subpriority = 29;
     else
         sprite->subpriority = 31;
-    sprite->data0 = (sprite->data0 + 8) & 0xFF;
-    sprite->data5 += sprite->data1;
-    sprite->pos2.y += sprite->data5 >> 8;
-    sprite->data2++;
-    if (sprite->data2 == 52)
+    sprite->data[0] = (sprite->data[0] + 8) & 0xFF;
+    sprite->data[5] += sprite->data[1];
+    sprite->pos2.y += sprite->data[5] >> 8;
+    sprite->data[2]++;
+    if (sprite->data[2] == 52)
     {
-        if (sprite->data7 != 0)
+        if (sprite->data[7] != 0)
             DestroySpriteAndFreeResources(sprite);
         else
             DestroySprite(sprite);

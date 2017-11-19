@@ -844,7 +844,7 @@ static void Task_NewGameSpeech6(u8 taskId)
     gSprites[spriteId].pos1.x = 104;
     gSprites[spriteId].pos1.y = 72;
     gSprites[spriteId].invisible = 0;
-    gSprites[spriteId].data0 = 0;
+    gSprites[spriteId].data[0] = 0;
     CreatePokeballSprite(spriteId, gSprites[spriteId].oam.paletteNum, 0x70, 0x3A, 0, 0, 0x20, 0x0000FFFF);
     gTasks[taskId].func = Task_NewGameSpeech7;
     gTasks[taskId].tFrameCounter = 0;
@@ -1423,9 +1423,9 @@ void nullsub_34(struct Sprite *sprite)
 
 void ShrinkPlayerSprite(struct Sprite *sprite)
 {
-    u32 y = (sprite->pos1.y << 16) + sprite->data0 + 0xC000;
+    u32 y = (sprite->pos1.y << 16) + sprite->data[0] + 0xC000;
     sprite->pos1.y = y >> 16;
-    sprite->data0 = y;
+    sprite->data[0] = y;
 }
 
 u8 CreateAzurillSprite(u8 x, u8 y)
