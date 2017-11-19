@@ -14,8 +14,8 @@ static const u16 sPalette_3D2840[] = INCBIN_U16("graphics/unknown/unknown_3D2840
 static const struct SpriteFrameImage sSpriteImageTable_83FD950[] =
 {
     { sSpriteImage_83D26C0, sizeof(sSpriteImage_83D26C0) },
-    { sSpriteImage_83D2740, sizeof(sSpriteImage_83D26C0) },
-    { sSpriteImage_83D27C0, sizeof(sSpriteImage_83D26C0) },
+    { sSpriteImage_83D2740, sizeof(sSpriteImage_83D2740) },
+    { sSpriteImage_83D27C0, sizeof(sSpriteImage_83D27C0) },
 };
 
 static const struct SpritePalette sUnknown_083D2878 = { sPalette_3D2840, 0x1000 };
