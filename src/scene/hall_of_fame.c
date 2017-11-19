@@ -612,9 +612,9 @@ static void sub_8142320(u8 taskID)
     }
 
     spriteID = HallOfFame_LoadPokemonPic(currMon->species, xPos, yPos, currPokeID, currMon->tid, currMon->personality);
-    gSprites[spriteID].data1 = field4;
-    gSprites[spriteID].data2 = field6;
-    gSprites[spriteID].data0 = 0;
+    gSprites[spriteID].data[1] = field4;
+    gSprites[spriteID].data[2] = field6;
+    gSprites[spriteID].data[0] = 0;
     gSprites[spriteID].callback = sub_81435DC;
     gTasks[taskID].tMonSpriteID(currPokeID) = spriteID;
     MenuZeroFillWindowRect(0, 14, 29, 19);
@@ -627,7 +627,7 @@ static void sub_8142404(u8 taskID)
     u16 currPokeID = gTasks[taskID].tDisplayedPoke;
     struct HallofFameMon* currMon = &fameMons->mons[currPokeID];
 
-    if (gSprites[gTasks[taskID].tMonSpriteID(currPokeID)].data0 != 0)
+    if (gSprites[gTasks[taskID].tMonSpriteID(currPokeID)].data[0] != 0)
     {
         if (currMon->species != SPECIES_EGG)
             PlayCry1(currMon->species, 0);
@@ -1299,22 +1299,22 @@ static void sub_81435B8(void)
 static void sub_81435DC(struct Sprite* sprite)
 {
     u32 spritePos = *(u32*)(&sprite->pos1);
-    u32 dataPos = *(u32*)(&sprite->data1);
+    u32 dataPos = *(u32*)(&sprite->data[1]);
     if (spritePos != dataPos)
     {
-        if (sprite->pos1.x < sprite->data1)
+        if (sprite->pos1.x < sprite->data[1])
             sprite->pos1.x += 15;
-        if (sprite->pos1.x > sprite->data1)
+        if (sprite->pos1.x > sprite->data[1])
             sprite->pos1.x -= 15;
 
-        if (sprite->pos1.y < sprite->data2)
+        if (sprite->pos1.y < sprite->data[2])
             sprite->pos1.y += 10;
-        if (sprite->pos1.y > sprite->data2)
+        if (sprite->pos1.y > sprite->data[2])
             sprite->pos1.y -= 10;
     }
     else
     {
-        sprite->data0 = 1;
+        sprite->data[0] = 1;
         sprite->callback = SpriteCB_HallOfFame_Dummy;
     }
 }
@@ -1381,13 +1381,13 @@ static void sub_814386C(struct Sprite* sprite)
         u8 tableID;
 
         sprite->pos2.y++;
-        sprite->pos2.y += sprite->data1;
+        sprite->pos2.y += sprite->data[1];
 
-        tableID = sprite->data0;
+        tableID = sprite->data[0];
         rand = (Random() % 4) + 8;
         sprite->pos2.x = rand * gSineTable[tableID] / 256;
 
-        sprite->data0 += 4;
+        sprite->data[0] += 4;
     }
 }
 
@@ -1405,9 +1405,9 @@ static bool8 sub_81438C4(void)
     StartSpriteAnim(sprite, Random() % 17);
 
     if (Random() & 3)
-        sprite->data1 = 0;
+        sprite->data[1] = 0;
     else
-        sprite->data1 = 1;
+        sprite->data[1] = 1;
 
     return 0;
 }

@@ -284,7 +284,7 @@ void sub_80F761C(s16 x, s16 y, u16 baseTileTag, u16 basePaletteTag)
         if (spriteId != 64)
         {
             sMenu->menuMarkingSprites[i] = &gSprites[spriteId];
-            gSprites[spriteId].data0 = i;
+            gSprites[spriteId].data[0] = i;
         }
         else
         {
@@ -324,10 +324,10 @@ void nullsub_65(struct Sprite *sprite)
 
 void sub_80F78CC(struct Sprite *sprite)
 {
-    if (sMenu->markingsArray[sprite->data0])
-        StartSpriteAnim(sprite, 2 * sprite->data0 + 1);
+    if (sMenu->markingsArray[sprite->data[0]])
+        StartSpriteAnim(sprite, 2 * sprite->data[0] + 1);
     else
-        StartSpriteAnim(sprite, 2 * sprite->data0);
+        StartSpriteAnim(sprite, 2 * sprite->data[0]);
 }
 
 void sub_80F7908(struct Sprite *sprite)

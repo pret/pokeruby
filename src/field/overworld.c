@@ -2648,14 +2648,14 @@ void CreateLinkPlayerSprite(u8 linkPlayerId)
         mapObj->spriteId = AddPseudoFieldObject(val, SpriteCB_LinkPlayer, 0, 0, 0);
         sprite = &gSprites[mapObj->spriteId];
         sprite->coordOffsetEnabled = TRUE;
-        sprite->data0 = linkPlayerId;
+        sprite->data[0] = linkPlayerId;
         mapObj->mapobj_bit_2 = 0;
     }
 }
 
 void SpriteCB_LinkPlayer(struct Sprite *sprite)
 {
-    struct LinkPlayerMapObject *linkPlayerMapObj = &gLinkPlayerMapObjects[sprite->data0];
+    struct LinkPlayerMapObject *linkPlayerMapObj = &gLinkPlayerMapObjects[sprite->data[0]];
     struct MapObject *mapObj = &gMapObjects[linkPlayerMapObj->mapObjId];
     sprite->pos1.x = mapObj->coords1.x;
     sprite->pos1.y = mapObj->coords1.y;
@@ -2668,7 +2668,7 @@ void SpriteCB_LinkPlayer(struct Sprite *sprite)
     sub_806487C(sprite, 0);
     if (mapObj->mapobj_bit_2)
     {
-        sprite->invisible = ((sprite->data7 & 4) >> 2);
-        sprite->data7++;
+        sprite->invisible = ((sprite->data[7] & 4) >> 2);
+        sprite->data[7]++;
     }
 }

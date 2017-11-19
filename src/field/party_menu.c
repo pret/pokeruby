@@ -1422,7 +1422,7 @@ u16 HandleDefaultPartyMenuInput(u8 taskId)
 
         if (menuDirectionPressed == 0)
         {
-            if ((gMain.newKeys & A_BUTTON) && gSprites[sub_806CA00(taskId)].data0 == 7)
+            if ((gMain.newKeys & A_BUTTON) && gSprites[sub_806CA00(taskId)].data[0] == 7)
             {
                 // Selected "CANCEL"
                 return B_BUTTON;
@@ -1595,7 +1595,7 @@ u16 HandleBattleTowerPartyMenuInput(u8 taskId)
         {
             if (gMain.newKeys & A_BUTTON)
             {
-                if (gSprites[sub_806CA00(taskId)].data0 == 7)
+                if (gSprites[sub_806CA00(taskId)].data[0] == 7)
                 {
                     return B_BUTTON;
                 }
@@ -1629,7 +1629,7 @@ void ChangePartyMenuSelection(u8 taskId, s8 directionPressed)
 {
     bool8 isLinkDoubleBattle;
     u8 spriteId = sub_806CA00(taskId);
-    u8 menuIndex = gSprites[spriteId].data0;
+    u8 menuIndex = gSprites[spriteId].data[0];
 
     UpdateMonIconFrame_806DA44(taskId, menuIndex, 0);
     
@@ -1645,17 +1645,17 @@ void ChangePartyMenuSelection(u8 taskId, s8 directionPressed)
 
         ChangeLinkDoubleBattlePartyMenuSelection(spriteId, menuIndex, directionPressed);
 
-        if (gSprites[spriteId].data0 == 0 || gSprites[spriteId].data0 == 2 || gSprites[spriteId].data0 == 3)
-            sub_806BF24(&gUnknown_083769C0[gSprites[spriteId].data0 * 2], gSprites[spriteId].data0, 3, 1);
-        if (gSprites[spriteId].data0 == 1 || gSprites[spriteId].data0 == 4 || gSprites[spriteId].data0 == 5)
-                sub_806BF24(&gUnknown_083769C0[gSprites[spriteId].data0 * 2], gSprites[spriteId].data0, 4, 1);
-        if (gSprites[spriteId].data0 == 7)
+        if (gSprites[spriteId].data[0] == 0 || gSprites[spriteId].data[0] == 2 || gSprites[spriteId].data[0] == 3)
+            sub_806BF24(&gUnknown_083769C0[gSprites[spriteId].data[0] * 2], gSprites[spriteId].data[0], 3, 1);
+        if (gSprites[spriteId].data[0] == 1 || gSprites[spriteId].data[0] == 4 || gSprites[spriteId].data[0] == 5)
+                sub_806BF24(&gUnknown_083769C0[gSprites[spriteId].data[0] * 2], gSprites[spriteId].data[0], 4, 1);
+        if (gSprites[spriteId].data[0] == 7)
             sub_806BBEC(2);
 
         ewram1B000.unk261 = 2;
 
-        gSprites[spriteId].pos1.x = gUnknown_083768B8[PARTY_MENU_LAYOUT_LINK_DOUBLE_BATTLE][gSprites[spriteId].data0].x;
-        gSprites[spriteId].pos1.y = gUnknown_083768B8[PARTY_MENU_LAYOUT_LINK_DOUBLE_BATTLE][gSprites[spriteId].data0].y;
+        gSprites[spriteId].pos1.x = gUnknown_083768B8[PARTY_MENU_LAYOUT_LINK_DOUBLE_BATTLE][gSprites[spriteId].data[0]].x;
+        gSprites[spriteId].pos1.y = gUnknown_083768B8[PARTY_MENU_LAYOUT_LINK_DOUBLE_BATTLE][gSprites[spriteId].data[0]].y;
     }
     else
     {
@@ -1679,9 +1679,9 @@ void ChangePartyMenuSelection(u8 taskId, s8 directionPressed)
             ChangeDoubleBattlePartyMenuSelection(spriteId, menuIndex, directionPressed);
         }
 
-        if (gSprites[spriteId].data0 < PARTY_SIZE)
+        if (gSprites[spriteId].data[0] < PARTY_SIZE)
         {
-            sub_806BF24(&gUnknown_083769A8[isDoubleBattle * 12 + gSprites[spriteId].data0 * 2], gSprites[spriteId].data0, 3, 1);
+            sub_806BF24(&gUnknown_083769A8[isDoubleBattle * 12 + gSprites[spriteId].data[0] * 2], gSprites[spriteId].data[0], 3, 1);
         }
         else
         {
@@ -1690,13 +1690,13 @@ void ChangePartyMenuSelection(u8 taskId, s8 directionPressed)
 
         ewram1B000.unk261 = 2;
 
-        gSprites[spriteId].pos1.x = gUnknown_083768B8[isDoubleBattle][gSprites[spriteId].data0].x;
-        gSprites[spriteId].pos1.y = gUnknown_083768B8[isDoubleBattle][gSprites[spriteId].data0].y;
+        gSprites[spriteId].pos1.x = gUnknown_083768B8[isDoubleBattle][gSprites[spriteId].data[0]].x;
+        gSprites[spriteId].pos1.y = gUnknown_083768B8[isDoubleBattle][gSprites[spriteId].data[0]].y;
     }
 
-    UpdateMonIconFrame_806DA44(taskId, gSprites[spriteId].data0, 1);
+    UpdateMonIconFrame_806DA44(taskId, gSprites[spriteId].data[0], 1);
 
-    if (menuIndex != gSprites[spriteId].data0)
+    if (menuIndex != gSprites[spriteId].data[0])
     {
         PlaySE(5);
     }
@@ -1710,47 +1710,47 @@ void ChangeDefaultPartyMenuSelection(u8 spriteId, u8 menuIndex, s8 directionPres
     switch (menuMovement)
     {
     case 2: // no movement
-        gSprites[spriteId].data1 = 0;
+        gSprites[spriteId].data[1] = 0;
         break;
     case 1: // moving up
         if (menuIndex == 0) {
-            gSprites[spriteId].data0 = 7;
+            gSprites[spriteId].data[0] = 7;
         } else if (menuIndex == 7) {
-            gSprites[spriteId].data0 = gPlayerPartyCount - 1;
+            gSprites[spriteId].data[0] = gPlayerPartyCount - 1;
         } else {
             s8 diff = directionPressed;
-            gSprites[spriteId].data0 += diff;
+            gSprites[spriteId].data[0] += diff;
         }
 
-        gSprites[spriteId].data1 = 0;
+        gSprites[spriteId].data[1] = 0;
         break;
     case 3: // moving down
         if (menuIndex == gPlayerPartyCount - 1) {
-            gSprites[spriteId].data0 = 7;
+            gSprites[spriteId].data[0] = 7;
         } else if (menuIndex == 7) {
-            gSprites[spriteId].data0 = 0;
+            gSprites[spriteId].data[0] = 0;
         } else {
             s8 diff = directionPressed;
-            gSprites[spriteId].data0 += diff;
+            gSprites[spriteId].data[0] += diff;
         }
 
-        gSprites[spriteId].data1 = 0;
+        gSprites[spriteId].data[1] = 0;
         break;
     case 4: // moving right
         if (gPlayerPartyCount > 1 && menuIndex == 0)
         {
-            if (gSprites[spriteId].data1 == 0)
-                gSprites[spriteId].data1 = 1;
+            if (gSprites[spriteId].data[1] == 0)
+                gSprites[spriteId].data[1] = 1;
 
-            gSprites[spriteId].data0 = gSprites[spriteId].data1;
+            gSprites[spriteId].data[0] = gSprites[spriteId].data[1];
         }
         break;
     case 0: // moving left
         // Only move the selection to the left side if one of the mons in the right-hand column are currently selected
         nextIndex = menuIndex - 1;
         if (nextIndex <= 4) {
-            gSprites[spriteId].data0 = 0;
-            gSprites[spriteId].data1 = menuIndex;
+            gSprites[spriteId].data[0] = 0;
+            gSprites[spriteId].data[1] = menuIndex;
         }
         break;
     }
@@ -1764,62 +1764,62 @@ void ChangeDoubleBattlePartyMenuSelection(u8 spriteId, u8 menuIndex, s8 directio
     switch(menuMovement)
     {
     case 2: // no movement
-        gSprites[spriteId].data1 = 0;
+        gSprites[spriteId].data[1] = 0;
         break;
     case 3: // moving down
         if (menuIndex == 7) {
-            gSprites[spriteId].data0 = 0;
+            gSprites[spriteId].data[0] = 0;
         } else if (menuIndex == gPlayerPartyCount - 1) {
-            gSprites[spriteId].data0 = 7;
+            gSprites[spriteId].data[0] = 7;
         } else {
             s8 diff = directionPressed;
-            gSprites[spriteId].data0 += diff;
+            gSprites[spriteId].data[0] += diff;
         }
 
-        gSprites[spriteId].data1 = 0;
+        gSprites[spriteId].data[1] = 0;
         break;
     case 1: // moving up
         if (menuIndex == 0) {
-            gSprites[spriteId].data0 = 7;
+            gSprites[spriteId].data[0] = 7;
         } else if (menuIndex == 7) {
-            gSprites[spriteId].data0 = gPlayerPartyCount - 1;
+            gSprites[spriteId].data[0] = gPlayerPartyCount - 1;
         } else {
             s8 diff = directionPressed;
-            gSprites[spriteId].data0 += diff;
+            gSprites[spriteId].data[0] += diff;
         }
 
-        gSprites[spriteId].data1 = 0;
+        gSprites[spriteId].data[1] = 0;
         break;
     case 4: // moving right
         if (menuIndex == 0) {
             if (gPlayerPartyCount > 2) {
-                u16 var1 = gSprites[spriteId].data1 - 2;
+                u16 var1 = gSprites[spriteId].data[1] - 2;
                 if (var1 > 1)
-                    gSprites[spriteId].data0 = 2;
+                    gSprites[spriteId].data[0] = 2;
                 else
-                    gSprites[spriteId].data0 = gSprites[spriteId].data1;
+                    gSprites[spriteId].data[0] = gSprites[spriteId].data[1];
             }
         }
         else if (menuIndex == 1) {
             if (gPlayerPartyCount > 4) {
-                u16 var1 = gSprites[spriteId].data1 - 4;
+                u16 var1 = gSprites[spriteId].data[1] - 4;
                 if (var1 <= 1)
-                    gSprites[spriteId].data0 = gSprites[spriteId].data1;
+                    gSprites[spriteId].data[0] = gSprites[spriteId].data[1];
                 else
-                    gSprites[spriteId].data0 = 4;
+                    gSprites[spriteId].data[0] = 4;
             }
         }
         break;
     case 0: // moving left
         var1 = menuIndex - 2;
         if (var1 <= 1) {
-            gSprites[spriteId].data0 = 0;
-            gSprites[spriteId].data1 = menuIndex;
+            gSprites[spriteId].data[0] = 0;
+            gSprites[spriteId].data[1] = menuIndex;
         } else {
             u8 var2 = menuIndex - 4;
             if (var2 <= 1) {
-                gSprites[spriteId].data0 = 1;
-                gSprites[spriteId].data1 = menuIndex;
+                gSprites[spriteId].data[0] = 1;
+                gSprites[spriteId].data[1] = menuIndex;
             }
         }
         break;
@@ -1837,62 +1837,62 @@ void ChangeLinkDoubleBattlePartyMenuSelection(u8 spriteId, u8 menuIndex, s8 dire
     switch (menuMovement)
     {
     case 2: // no movement
-        gSprites[spriteId].data1 = 0;
+        gSprites[spriteId].data[1] = 0;
         break;
     case 3: // moving down
         if (menuIndex == 7) {
-            gSprites[spriteId].data0 = 0;
+            gSprites[spriteId].data[0] = 0;
         } else {
             while (menuIndex != PARTY_SIZE - 1) {
                 menuIndex++;
                 if (GetMonData(&gPlayerParty[menuIndex], MON_DATA_SPECIES))
                 {
-                    gSprites[spriteId].data0 = menuIndex;
-                    gSprites[spriteId].data1 = 0;
+                    gSprites[spriteId].data[0] = menuIndex;
+                    gSprites[spriteId].data[1] = 0;
                     return;
                 }
             }
 
-            gSprites[spriteId].data0 = 7;
+            gSprites[spriteId].data[0] = 7;
         }
 
-        gSprites[spriteId].data1 = 0;
+        gSprites[spriteId].data[1] = 0;
         break;
     case 1: // moving up
         while (menuIndex != 0) {
             menuIndex--;
             if (menuIndex != PARTY_SIZE && GetMonData(gPlayerParty[menuIndex], MON_DATA_SPECIES))
             {
-                gSprites[spriteId].data0 = menuIndex;
-                gSprites[spriteId].data1 = 0;
+                gSprites[spriteId].data[0] = menuIndex;
+                gSprites[spriteId].data[1] = 0;
                 return;
             }
         }
 
-        gSprites[spriteId].data0 = 7;
-        gSprites[spriteId].data1 = 0;
+        gSprites[spriteId].data[0] = 7;
+        gSprites[spriteId].data[1] = 0;
         break;
     case 4: // moving right
         if (menuIndex == 0) {
-            var1 = gSprites[spriteId].data1 - 2;
+            var1 = gSprites[spriteId].data[1] - 2;
             if (var1 > 1) {
                 if (GetMonData(&gPlayerParty[2], MON_DATA_SPECIES)) {
-                    gSprites[spriteId].data0 = 2;
+                    gSprites[spriteId].data[0] = 2;
                 } else if (GetMonData(&gPlayerParty[3], MON_DATA_SPECIES)) {
-                    gSprites[spriteId].data0 = 3;
+                    gSprites[spriteId].data[0] = 3;
                 }
             } else {
-                gSprites[spriteId].data0 = 1;
+                gSprites[spriteId].data[0] = 1;
             }
         } else if (menuIndex == 1) {
-            var1 = gSprites[spriteId].data1 - 4;
+            var1 = gSprites[spriteId].data[1] - 4;
             if (var1 <= 1) {
-                gSprites[spriteId].data0 = gSprites[spriteId].data1;
+                gSprites[spriteId].data[0] = gSprites[spriteId].data[1];
             } else {
                 if (GetMonData(&gPlayerParty[4], MON_DATA_SPECIES)) {
-                    gSprites[spriteId].data0 = 4;
+                    gSprites[spriteId].data[0] = 4;
                 } else if (GetMonData(&gPlayerParty[5], MON_DATA_SPECIES)) {
-                    gSprites[spriteId].data0 = 5;
+                    gSprites[spriteId].data[0] = 5;
                 }
             }
         }
@@ -1900,13 +1900,13 @@ void ChangeLinkDoubleBattlePartyMenuSelection(u8 spriteId, u8 menuIndex, s8 dire
     case 0: // moving left
         var2 = menuIndex - 2;
         if (var2 <= 1) {
-            gSprites[spriteId].data0 = 0;
-            gSprites[spriteId].data1 = menuIndex;
+            gSprites[spriteId].data[0] = 0;
+            gSprites[spriteId].data[1] = menuIndex;
         } else {
             var2 = menuIndex - 4;
             if (var2 <= 1) {
-                gSprites[spriteId].data0 = 1;
-                gSprites[spriteId].data1 = menuIndex;
+                gSprites[spriteId].data[0] = 1;
+                gSprites[spriteId].data[1] = menuIndex;
             }
         }
 
@@ -2165,7 +2165,7 @@ void ChangeBattleTowerPartyMenuSelection(u8 taskId, s8 directionPressed)
     u8 newMenuIndex3;
     s8 menuMovement;
     u8 spriteId = sub_806CA00(taskId);
-    u8 menuIndex = gSprites[spriteId].data0;
+    u8 menuIndex = gSprites[spriteId].data[0];
 
     UpdateMonIconFrame_806DA44(taskId, menuIndex, 0);
 
@@ -2187,60 +2187,60 @@ void ChangeBattleTowerPartyMenuSelection(u8 taskId, s8 directionPressed)
     switch (menuMovement)
     {
     case 2: // no movement
-        gSprites[spriteId].data1 = 0;
+        gSprites[spriteId].data[1] = 0;
         break;
     case 1: // moving up
         if (menuIndex == 0) {
-            gSprites[spriteId].data0 = 7;
+            gSprites[spriteId].data[0] = 7;
         } else if (menuIndex == PARTY_SIZE) {
-            gSprites[spriteId].data0 = gPlayerPartyCount - 1;
+            gSprites[spriteId].data[0] = gPlayerPartyCount - 1;
         } else {
-            gSprites[spriteId].data0 += directionPressed;
+            gSprites[spriteId].data[0] += directionPressed;
         }
 
-        gSprites[spriteId].data1 = 0;
+        gSprites[spriteId].data[1] = 0;
         break;
     case 3: // moving down
         if (menuIndex == gPlayerPartyCount - 1) {
-            gSprites[spriteId].data0 = 6;
+            gSprites[spriteId].data[0] = 6;
         } else if (menuIndex == 7) {
-            gSprites[spriteId].data0 = 0;
+            gSprites[spriteId].data[0] = 0;
         } else {
-            gSprites[spriteId].data0 += directionPressed;
+            gSprites[spriteId].data[0] += directionPressed;
         }
 
-        gSprites[spriteId].data1 = 0;
+        gSprites[spriteId].data[1] = 0;
         break;
     case 4: // moving right
         if (gPlayerPartyCount > 1 && menuIndex == 0)
         {
-            if (gSprites[spriteId].data1 == 0) {
-                gSprites[spriteId].data1 = 1;
+            if (gSprites[spriteId].data[1] == 0) {
+                gSprites[spriteId].data[1] = 1;
             }
 
-            gSprites[spriteId].data0 = gSprites[spriteId].data1;
+            gSprites[spriteId].data[0] = gSprites[spriteId].data[1];
         }
         break;
     case 0: // moving left
         newMenuIndex3 = menuIndex - 1;
         if (newMenuIndex3 <= 4)
         {
-            gSprites[spriteId].data0 = 0;
-            gSprites[spriteId].data1 = menuIndex;
+            gSprites[spriteId].data[0] = 0;
+            gSprites[spriteId].data[1] = menuIndex;
         }
         break;
     }
     
-    gSprites[spriteId].pos1.x = gUnknown_083768B8[PARTY_MENU_LAYOUT_STANDARD][gSprites[spriteId].data0].x;
-    gSprites[spriteId].pos1.y = gUnknown_083768B8[PARTY_MENU_LAYOUT_STANDARD][gSprites[spriteId].data0].y;
+    gSprites[spriteId].pos1.x = gUnknown_083768B8[PARTY_MENU_LAYOUT_STANDARD][gSprites[spriteId].data[0]].x;
+    gSprites[spriteId].pos1.y = gUnknown_083768B8[PARTY_MENU_LAYOUT_STANDARD][gSprites[spriteId].data[0]].y;
 
 
-    newMenuIndex = gSprites[spriteId].data0;
-    if (gSprites[spriteId].data0 < PARTY_SIZE)
+    newMenuIndex = gSprites[spriteId].data[0];
+    if (gSprites[spriteId].data[0] < PARTY_SIZE)
     {
-        sub_806BF24(&gUnknown_083769A8[gSprites[spriteId].data0 * 2], newMenuIndex, 3, 1);
+        sub_806BF24(&gUnknown_083769A8[gSprites[spriteId].data[0] * 2], newMenuIndex, 3, 1);
     }
-    else if (gSprites[spriteId].data0 == PARTY_SIZE)
+    else if (gSprites[spriteId].data[0] == PARTY_SIZE)
     {
         sub_806BB9C(2);
     }
@@ -2251,10 +2251,10 @@ void ChangeBattleTowerPartyMenuSelection(u8 taskId, s8 directionPressed)
 
     ewram1B000.unk261 = 2;
 
-    newMenuIndex2 = gSprites[spriteId].data0;
+    newMenuIndex2 = gSprites[spriteId].data[0];
     UpdateMonIconFrame_806DA44(taskId, newMenuIndex2, 1);
 
-    if (menuIndex != gSprites[spriteId].data0)
+    if (menuIndex != gSprites[spriteId].data[0])
     {
         PlaySE(5);
     }
@@ -2265,7 +2265,7 @@ void SelectBattleTowerOKButton(u8 taskId)
 {
     u8 spriteId = sub_806CA00(taskId);
 
-    u8 menuIndex = gSprites[spriteId].data0;
+    u8 menuIndex = gSprites[spriteId].data[0];
     if (menuIndex != 6)
     {
         UpdateMonIconFrame_806DA44(taskId, menuIndex, 0);
@@ -2279,8 +2279,8 @@ void SelectBattleTowerOKButton(u8 taskId)
             sub_806BBEC(1);
         }
 
-        gSprites[spriteId].data1 = 0;
-        gSprites[spriteId].data0 = 6;
+        gSprites[spriteId].data[1] = 0;
+        gSprites[spriteId].data[0] = 6;
         gSprites[spriteId].pos1.x = gUnknown_083768B8[PARTY_MENU_LAYOUT_STANDARD][6].x;
         gSprites[spriteId].pos1.y = gUnknown_083768B8[PARTY_MENU_LAYOUT_STANDARD][6].y;
 
@@ -2293,8 +2293,8 @@ void SelectBattleTowerOKButton(u8 taskId)
 
 void sub_806C92C(u8 spriteId)
 {
-    u8 menuIndex1 = gSprites[spriteId].data0;
-    u8 menuIndex2 = gSprites[spriteId].data1;
+    u8 menuIndex1 = gSprites[spriteId].data[0];
+    u8 menuIndex2 = gSprites[spriteId].data[1];
 
     if (!IsDoubleBattle())
     {
@@ -2319,14 +2319,14 @@ void sub_806C92C(u8 spriteId)
         }
     }
 
-    gSprites[spriteId].data1 = menuIndex2;
+    gSprites[spriteId].data[1] = menuIndex2;
 }
 
 void sub_806C994(u8 taskId, u8 b)
 {
     u8 spriteId = sub_806CA00(taskId);
 
-    gSprites[spriteId].data0 = b;
+    gSprites[spriteId].data[0] = b;
     sub_806C92C(spriteId);
 }
 
@@ -2336,7 +2336,7 @@ void sub_806C9C4(u8 taskId, u8 spriteId)
 
     gSprites[spriteId].pos1.x = gSprites[spriteId2].pos1.x;
     gSprites[spriteId].pos1.y = gSprites[spriteId2].pos1.y;
-    gSprites[spriteId].data0 = gSprites[spriteId2].data0;
+    gSprites[spriteId].data[0] = gSprites[spriteId2].data[0];
 }
 
 u8 sub_806CA00(u8 taskId)
@@ -2353,7 +2353,7 @@ void sub_806CA18(u8 taskId, u8 b)
 u8 sub_806CA38(u8 taskId)
 {
     u8 spriteId = sub_806CA00(taskId);
-    return gSprites[spriteId].data0;
+    return gSprites[spriteId].data[0];
 }
 
 void SetupDefaultPartyMenuSwitchPokemon(u8 taskId)
@@ -2369,7 +2369,7 @@ void SetupDefaultPartyMenuSwitchPokemon(u8 taskId)
 
     PrintPartyMenuPromptText(ewram1B000_alt.unk272, 0);
 
-    sub_806BF24(&gUnknown_083769A8[gSprites[ewram01000.unk1].data0 * 2], gSprites[ewram01000.unk1].data0, 6, 0);
+    sub_806BF24(&gUnknown_083769A8[gSprites[ewram01000.unk1].data[0] * 2], gSprites[ewram01000.unk1].data[0], 6, 0);
     ewram1B000.unk261 = 2;
 }
 
@@ -2381,13 +2381,13 @@ void ChangePartyMenuSwitchPokemonSelection(u8 taskId, s16 menuDirectionPressed)
 
     ChangePartyMenuSelection(taskId, menuDirectionPressed);
 
-    if (sprite1->data0 != sprite2->data0)
+    if (sprite1->data[0] != sprite2->data[0])
     {
-        sub_806BF24(&gUnknown_083769A8[sprite1->data0 * 2], sprite1->data0, 6, 1);
+        sub_806BF24(&gUnknown_083769A8[sprite1->data[0] * 2], sprite1->data[0], 6, 1);
     }
     else
     {
-        sub_806BF24(&gUnknown_083769A8[sprite1->data0 * 2], sprite1->data0, 6, 0);
+        sub_806BF24(&gUnknown_083769A8[sprite1->data[0] * 2], sprite1->data[0], 6, 0);
     }
 }
 
@@ -2434,15 +2434,15 @@ void sub_806CC2C(u8 taskId)
 
 void sub_806CC74(u8 taskId)
 {
-    sub_806BF24(&gUnknown_083769A8[gSprites[ewram01000.unk2].data0 * 2], gSprites[ewram01000.unk2].data0, 3, 1);
-    sub_806BF24(&gUnknown_083769A8[gSprites[ewram01000.unk1].data0 * 2], gSprites[ewram01000.unk1].data0, 3, 0);
+    sub_806BF24(&gUnknown_083769A8[gSprites[ewram01000.unk2].data[0] * 2], gSprites[ewram01000.unk2].data[0], 3, 1);
+    sub_806BF24(&gUnknown_083769A8[gSprites[ewram01000.unk1].data[0] * 2], gSprites[ewram01000.unk1].data[0], 3, 0);
     sub_806CC2C(taskId);
 }
 
 void sub_806CCE4()
 {
-    u8 monIndex1 = gSprites[ewram01000.unk1].data0;
-    u8 monIndex2 = gSprites[ewram01000.unk2].data0;
+    u8 monIndex1 = gSprites[ewram01000.unk1].data[0];
+    u8 monIndex2 = gSprites[ewram01000.unk2].data[0];
 
     if (monIndex1 <= 5)
     {
@@ -2463,8 +2463,8 @@ void sub_806CD44(u8 taskId)
 
 void sub_806CD5C(u8 taskId)
 {
-    u8 monIndex1 = gSprites[ewram01000.unk1].data0;
-    u8 monIndex2 = gSprites[ewram01000.unk2].data0;
+    u8 monIndex1 = gSprites[ewram01000.unk1].data[0];
+    u8 monIndex2 = gSprites[ewram01000.unk2].data[0];
 
     if (monIndex1 == monIndex2 || monIndex1 == 7 || monIndex2 == 7)
     {
@@ -2494,8 +2494,8 @@ void sub_806CD5C(u8 taskId)
         var1 = ewram01000.unk5;
         if (!var1)
         {
-            gSprites[ewram01000.unk3].data0 = -8;
-            gSprites[ewram01000.unk3].data2 = -0xA8;
+            gSprites[ewram01000.unk3].data[0] = -8;
+            gSprites[ewram01000.unk3].data[2] = -0xA8;
             ewram01000.unk8 = var1;
             ewram01000.unkA = 11;
 
@@ -2504,8 +2504,8 @@ void sub_806CD5C(u8 taskId)
         }
         else
         {
-            gSprites[ewram01000.unk3].data0 = 8;
-            gSprites[ewram01000.unk3].data2 = 0xA8;
+            gSprites[ewram01000.unk3].data[0] = 8;
+            gSprites[ewram01000.unk3].data[2] = 0xA8;
             ewram01000.unk8 = 11;
             ewram01000.unkA = 11;
 
@@ -2515,8 +2515,8 @@ void sub_806CD5C(u8 taskId)
 
         gSprites[ewram01000.unk3].callback = SpriteCB_sub_806D37C;
 
-        gSprites[ewram01000.unk4].data0 = 8;
-        gSprites[ewram01000.unk4].data2 = 0xA8;
+        gSprites[ewram01000.unk4].data[0] = 8;
+        gSprites[ewram01000.unk4].data[2] = 0xA8;
         gSprites[ewram01000.unk4].callback = SpriteCB_sub_806D37C;
 
         gSprites[ewram01000.unk3].callback(&gSprites[ewram01000.unk3]);
@@ -2537,7 +2537,7 @@ void sub_806CF04(void)
     SwapValues_s16(&gSprites[ewram01000.unk3].pos1.x, &gSprites[ewram01000.unk4].pos1.x);
     SwapValues_s16(&gSprites[ewram01000.unk3].pos1.y, &gSprites[ewram01000.unk4].pos1.y);
     SwapValues_s16(&gSprites[ewram01000.unk3].pos2.x, &gSprites[ewram01000.unk4].pos2.x);
-    SwapValues_s16(&gSprites[ewram01000.unk3].data0, &gSprites[ewram01000.unk4].data0);
+    SwapValues_s16(&gSprites[ewram01000.unk3].data[0], &gSprites[ewram01000.unk4].data[0]);
 
     gSprites[ewram01000.unk3].callback = SpriteCB_sub_806D37C;
     gSprites[ewram01000.unk4].callback = SpriteCB_sub_806D37C;
@@ -2729,7 +2729,7 @@ void sub_806D198(u8 taskId)
     gSprites[ewram01000.unk4].pos2.y = 0;
     gSprites[ewram01000.unk4].callback = UpdateMonIconFrame_806DA38;
 
-    spriteId = GetMonIconSpriteId(ewram01000.unk0, gSprites[ewram01000.unk2].data0);
+    spriteId = GetMonIconSpriteId(ewram01000.unk0, gSprites[ewram01000.unk2].data[0]);
     gSprites[spriteId].callback = UpdateMonIconFrame_806DA0C;
 
     SwapPokemon(&gPlayerParty[ewram01000.unk5], &gPlayerParty[ewram01000.unk6]);
@@ -2752,15 +2752,15 @@ void SpriteCB_sub_806D37C(struct Sprite *sprite)
 {
     UpdateMonIconFrame(sprite);
 
-    if (sprite->pos2.x == sprite->data2)
+    if (sprite->pos2.x == sprite->data[2])
     {
-        sprite->data0 *= -1;
-        sprite->data2 = 0;
+        sprite->data[0] *= -1;
+        sprite->data[2] = 0;
         sprite->callback = UpdateMonIconFrame_806DA38;
     }
     else
     {
-        sprite->pos2.x += sprite->data0;
+        sprite->pos2.x += sprite->data[0];
     }
 }
 
@@ -2802,8 +2802,8 @@ void sub_806D4AC(u8 taskId, u16 species, u8 c)
         u8 monIndex = c + 3;
         u8 spriteId = GetMonIconSpriteId(taskId, monIndex);
 
-        gSprites[spriteId].data0 = -8;
-        gSprites[spriteId].data2 = gTasks[taskId].data[0] * -8;
+        gSprites[spriteId].data[0] = -8;
+        gSprites[spriteId].data[2] = gTasks[taskId].data[0] * -8;
         gSprites[spriteId].callback = SpriteCB_sub_806D37C;
     }
 }
@@ -3035,7 +3035,7 @@ void UpdateMonIconFrame_806DA44(u8 taskId, u8 monIndex, u8 c)
     {
         spriteId = GetMonIconSpriteId(taskId, monIndex);
         gSprites[spriteId].pos2.y = 0;
-        gSprites[spriteId].data0 = 0;
+        gSprites[spriteId].data[0] = 0;
 
         if (!c)
         {
@@ -3057,7 +3057,7 @@ void LoadHeldItemIconGraphics(void)
 void SpriteCB_HeldItemIcon(struct Sprite *sprite)
 {
 
-    u8 data7 = sprite->data7;
+    u8 data7 = sprite->data[7];
     if (gSprites[data7].invisible)
     {
         sprite->invisible = 1;
@@ -3081,7 +3081,7 @@ void CreateHeldItemIcon(u8 a, u8 b)
     gSprites[spriteId].pos2.x = 4;
     gSprites[spriteId].pos2.y = 10;
     gSprites[spriteId].callback = SpriteCB_HeldItemIcon;
-    gSprites[spriteId].data7 = a;
+    gSprites[spriteId].data[7] = a;
 
     StartSpriteAnim(&gSprites[spriteId], b);
     gSprites[spriteId].callback(&gSprites[spriteId]);
@@ -3138,8 +3138,8 @@ void CreateHeldItemIcons_806DC34(u8 taskId)
 
             gSprites[heldItemSpriteId].pos2.x = 4;
             gSprites[heldItemSpriteId].pos2.y = 10;
-            gSprites[heldItemSpriteId].data7 = monIconSpriteId;
-            gSprites[monIconSpriteId].data7 = heldItemSpriteId;
+            gSprites[heldItemSpriteId].data[7] = monIconSpriteId;
+            gSprites[monIconSpriteId].data[7] = heldItemSpriteId;
 
             SetHeldItemIconVisibility(taskId, i);
             gSprites[heldItemSpriteId].callback(&gSprites[heldItemSpriteId]);
@@ -3158,8 +3158,8 @@ void CreateHeldItemIcon_806DCD4(u8 taskId, u8 monIndex, u16 item)
 
     gSprites[heldItemSpriteId].pos2.x = 4;
     gSprites[heldItemSpriteId].pos2.y = 10;
-    gSprites[heldItemSpriteId].data7 = monIconSpriteId;
-    gSprites[monIconSpriteId].data7 = heldItemSpriteId;
+    gSprites[heldItemSpriteId].data[7] = monIconSpriteId;
+    gSprites[monIconSpriteId].data[7] = heldItemSpriteId;
 
     if (!item)
     {
@@ -3274,7 +3274,7 @@ _0806DD78: .4byte gSprites\n\
 
 void SpriteCB_UpdateHeldItemIconPosition(struct Sprite *sprite)
 {
-    u8 spriteId = sprite->data7;
+    u8 spriteId = sprite->data[7];
 
     sprite->pos1.x = gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x;
     sprite->pos1.y = gSprites[spriteId].pos1.y;
@@ -3334,7 +3334,7 @@ void SetMonIconSpriteId(u8 taskId, u8 monIndex, u8 spriteId)
 u16 GetMonHeldItemIconSpriteId(u8 taskId, u8 monIndex)
 {
     u8 spriteId = GetMonIconSpriteId(taskId, monIndex);
-    u8 retVal = gSprites[spriteId].data7;
+    u8 retVal = gSprites[spriteId].data[7];
     return retVal;
 }
 
@@ -4478,7 +4478,7 @@ void sub_806FA18(u8 taskId)
         gTasks[taskId].data[11] -= gTasks[taskId].data[12];
         SetMonData(ewram1C000.pokemon, MON_DATA_HP, &gTasks[taskId].data[11]);
         SetMonIconAnim(GetMonIconSpriteId(ewram1C000.unk4, ewram01000.unk1), ewram1C000.pokemon);
-        ewram1C000.unk5 = gSprites[ewram01000.unk2].data0;
+        ewram1C000.unk5 = gSprites[ewram01000.unk2].data[0];
         ewram1C000.pokemon = &gPlayerParty[ewram1C000.unk5];
         gTasks[taskId].data[10] = GetMonData(ewram1C000.pokemon, MON_DATA_MAX_HP);
         gTasks[taskId].data[11] = GetMonData(ewram1C000.pokemon, MON_DATA_HP);

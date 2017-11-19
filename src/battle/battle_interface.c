@@ -439,7 +439,7 @@ u8 battle_make_oam_normal_battle(u8 a)
         //_080439F2
 
         gSprites[spriteId1].oam.affineParam = spriteId2;
-        gSprites[spriteId2].data5 = spriteId1;
+        gSprites[spriteId2].data[5] = spriteId1;
         gSprites[spriteId2].callback = sub_8043D5C;
     }
     //_08043A28
@@ -451,7 +451,7 @@ u8 battle_make_oam_normal_battle(u8 a)
             spriteId2 = CreateSpriteAtEnd(&gSpriteTemplate_820A4EC[GetBankIdentity(a) / 2], 240, 160, 1);
 
             gSprites[spriteId1].oam.affineParam = spriteId2;
-            gSprites[spriteId2].data5 = spriteId1;
+            gSprites[spriteId2].data[5] = spriteId1;
             gSprites[spriteId2].oam.tileNum += 32;
             gSprites[spriteId2].callback = sub_8043D5C;
             sp0 = 1;
@@ -463,7 +463,7 @@ u8 battle_make_oam_normal_battle(u8 a)
             spriteId2 = CreateSpriteAtEnd(&gSpriteTemplate_820A51C[GetBankIdentity(a) / 2], 240, 160, 1);
 
             gSprites[spriteId1].oam.affineParam = spriteId2;
-            gSprites[spriteId2].data5 = spriteId1;
+            gSprites[spriteId2].data[5] = spriteId1;
             gSprites[spriteId2].oam.tileNum += 32;
             gSprites[spriteId2].callback = sub_8043D5C;
             sp0 = 2;
@@ -479,12 +479,12 @@ u8 battle_make_oam_normal_battle(u8 a)
     sprite->oam.priority = 1;
     CpuCopy32(sub_8043CDC(1), OBJ_VRAM0 + sprite->oam.tileNum * 32, 64);
 
-    gSprites[spriteId1].data5 = spriteId3;
-    gSprites[spriteId1].data6 = a;
+    gSprites[spriteId1].data[5] = spriteId3;
+    gSprites[spriteId1].data[6] = a;
     gSprites[spriteId1].invisible = TRUE;
     gSprites[spriteId2].invisible = TRUE;
-    sprite->data5 = spriteId1;
-    sprite->data6 = sp0;
+    sprite->data[5] = spriteId1;
+    sprite->data[6] = sp0;
     sprite->invisible = TRUE;
 
     return spriteId1;
@@ -499,7 +499,7 @@ u8 battle_make_oam_safari_battle(void)
     gSprites[spriteId2].oam.shape = 0;
     gSprites[spriteId2].oam.tileNum += 0x40;
     gSprites[spriteId1].oam.affineParam = spriteId2;
-    gSprites[spriteId2].data5 = spriteId1;
+    gSprites[spriteId2].data[5] = spriteId1;
     gSprites[spriteId2].callback = sub_8043D5C;
     return spriteId1;
 }
@@ -511,9 +511,9 @@ static const void *sub_8043CDC(u8 a)
 
 void sub_8043CEC(struct Sprite *sprite)
 {
-    u8 r5 = sprite->data5;
+    u8 r5 = sprite->data[5];
 
-    switch (sprite->data6)
+    switch (sprite->data[6])
     {
     case 0:
         sprite->pos1.x = gSprites[r5].pos1.x + 16;
@@ -535,7 +535,7 @@ void sub_8043CEC(struct Sprite *sprite)
 
 static void sub_8043D5C(struct Sprite *sprite)
 {
-    u8 data5 = sprite->data5;
+    u8 data5 = sprite->data[5];
 
     sprite->pos1.x = gSprites[data5].pos1.x + 64;
     sprite->pos1.y = gSprites[data5].pos1.y;
@@ -555,14 +555,14 @@ void sub_8043D84(u8 a, u8 b, u32 c, u32 d, u32 e)
 void sub_8043DB0(u8 a)
 {
     gSprites[a].invisible = TRUE;
-    gSprites[gSprites[a].data5].invisible = TRUE;
+    gSprites[gSprites[a].data[5]].invisible = TRUE;
     gSprites[gSprites[a].oam.affineParam].invisible = TRUE;
 }
 
 void sub_8043DFC(u8 a)
 {
     gSprites[a].invisible = FALSE;
-    gSprites[gSprites[a].data5].invisible = FALSE;
+    gSprites[gSprites[a].data[5]].invisible = FALSE;
     gSprites[gSprites[a].oam.affineParam].invisible = FALSE;
 }
 
@@ -575,7 +575,7 @@ static void sub_8043E50(u8 spriteId, s16 x, s16 y)
 void unref_sub_8043E70(u8 a)
 {
     DestroySprite(&gSprites[gSprites[a].oam.affineParam]);
-    DestroySprite(&gSprites[gSprites[a].data5]);
+    DestroySprite(&gSprites[gSprites[a].data[5]]);
     DestroySprite(&gSprites[a]);
 }
 
@@ -595,7 +595,7 @@ void sub_8043EB4(u8 priority)
 
         spriteId1 = gHealthboxIDs[i];
         spriteId2 = gSprites[spriteId1].oam.affineParam;
-        spriteId3 = gSprites[spriteId1].data5;
+        spriteId3 = gSprites[spriteId1].data[5];
         gSprites[spriteId1].oam.priority = priority;
         gSprites[spriteId2].oam.priority = priority;
         gSprites[spriteId3].oam.priority = priority;
@@ -663,14 +663,14 @@ static void sub_8043FC0(u8 a, u8 b)
     memcpy(str, gUnknown_0820A81C, sizeof(str));
     if (!IsDoubleBattle())
     {
-        if (GetBankSide(gSprites[a].data6) == 0)
+        if (GetBankSide(gSprites[a].data[6]) == 0)
             r7 = gUnknown_0820A804;
         else
             r7 = gUnknown_0820A80C;
     }
     else
     {
-        if (GetBankSide(gSprites[a].data6) == 0)
+        if (GetBankSide(gSprites[a].data[6]) == 0)
             r7 = gUnknown_0820A814;
         else
             r7 = gUnknown_0820A80C;
@@ -718,7 +718,7 @@ void sub_80440EC(u8 a, s16 b, u8 c)
 
     // TODO: make this a local variable
     memcpy(str, gUnknown_0820A864, sizeof(str));
-    foo = gSprites[a].data6;
+    foo = gSprites[a].data[6];
 
     if (IsDoubleBattle() == TRUE || GetBankSide(foo) == 1)
     {
@@ -730,7 +730,7 @@ void sub_80440EC(u8 a, s16 b, u8 c)
     ptr = str + 6;
     if (c == 0)
     {
-        if (GetBankSide(gSprites[a].data6) == 0)
+        if (GetBankSide(gSprites[a].data[6]) == 0)
             r4 = gUnknown_0820A83C;
         else
             r4 = gUnknown_0820A848;
@@ -742,7 +742,7 @@ void sub_80440EC(u8 a, s16 b, u8 c)
     }
     else
     {
-        if (GetBankSide(gSprites[a].data6) == 0)
+        if (GetBankSide(gSprites[a].data[6]) == 0)
             r4 = gUnknown_0820A854;
         else
             r4 = gUnknown_0820A85C;
@@ -916,7 +916,7 @@ static void sub_8044210(u8 a, s16 b, u8 c)
 
     // TODO: make this a local variable
     memcpy(str, gUnknown_0820A89C, sizeof(str));
-    r4 = gSprites[a].data6;
+    r4 = gSprites[a].data[6];
     if ((ewram17800[r4].unk0_4) == 0)
         return;
     ptr = str + 6;
@@ -938,7 +938,7 @@ static void sub_8044210(u8 a, s16 b, u8 c)
             CpuCopy32(sub_8043CDC(0x74), OBJ_VRAM0 + (gSprites[a].oam.tileNum + 0x34) * 32, 32);
         }
     }
-    r4 = gSprites[a].data5;
+    r4 = gSprites[a].data[5];
     sub_80034D4(ewram0_9(0), str);
     for (i = 0; i < r10; i++)
     {
@@ -959,7 +959,7 @@ void sub_8044338(u8 a, struct Pokemon *pkmn)
 
     // TODO: make this a local variable
     memcpy(str, gUnknown_0820A864, sizeof(str));
-    r6 = ewram520[GetBankIdentity(gSprites[a].data6)].filler0;
+    r6 = ewram520[GetBankIdentity(gSprites[a].data[6])].filler0;
     r8 = 5;
     nature = GetNature(pkmn);
     StringCopy(str + 6, gNatureNames[nature]);
@@ -994,7 +994,7 @@ void sub_8044338(u8 a, struct Pokemon *pkmn)
         r6 += 32;
     }
     //_08044486
-    r5 = gSprites[a].data5;
+    r5 = gSprites[a].data[5];
     ConvertIntToDecimalStringN(str + 6, ewram16089, 1, 2);
     ConvertIntToDecimalStringN(str + 9, ewram16088, 1, 2);
     str[5] = 0;
@@ -1302,7 +1302,7 @@ void sub_804454C(void)
 
                 if (r6 == 1)
                 {
-                    spriteId = gSprites[gHealthboxIDs[i]].data5;
+                    spriteId = gSprites[gHealthboxIDs[i]].data[5];
 
                     CpuFill32(0, OBJ_VRAM0 + gSprites[spriteId].oam.tileNum * 32, 0x100);
                     sub_8044210(gHealthboxIDs[i], GetMonData(&gPlayerParty[gBattlePartyID[i]], MON_DATA_HP), 0);
@@ -1325,7 +1325,7 @@ void sub_804454C(void)
                     }
                     else
                     {
-                        spriteId = gSprites[gHealthboxIDs[i]].data5;
+                        spriteId = gSprites[gHealthboxIDs[i]].data[5];
 
                         CpuFill32(0, OBJ_VRAM0 + gSprites[spriteId].oam.tileNum * 32, 0x100);
                         sub_8044210(gHealthboxIDs[i], GetMonData(&gEnemyParty[gBattlePartyID[i]], MON_DATA_HP), 0);
@@ -1340,7 +1340,7 @@ void sub_804454C(void)
                         sub_8045A5C(gHealthboxIDs[i], &gEnemyParty[gBattlePartyID[i]], 4);
                 }
             }
-            gSprites[gHealthboxIDs[i]].data7 ^= 1;
+            gSprites[gHealthboxIDs[i]].data[7] ^= 1;
         }
     }
 }
@@ -1413,7 +1413,7 @@ u8 sub_8044804(u8 a, const struct BattleInterfaceStruct2 *b, u8 c, u8 d)
     sp18 = CreateSprite(&gSpriteTemplate_820A7A4[r7], x, y, 10);
     SetSubspriteTables(&gSprites[sp18], gSubspriteTables_820A6E4);
     gSprites[sp18].pos2.x = r8;
-    gSprites[sp18].data0 = r5;
+    gSprites[sp18].data[0] = r5;
     if (r7 != 0)
     {
         gSprites[sp18].pos1.x -= 96;
@@ -1438,22 +1438,22 @@ u8 sub_8044804(u8 a, const struct BattleInterfaceStruct2 *b, u8 c, u8 d)
             gSprites[sp[i]].pos2.y = 0;
         }
         //_080449BE
-        gSprites[sp[i]].data0 = sp18;
+        gSprites[sp[i]].data[0] = sp18;
         if (r7 == 0)
         {
             gSprites[sp[i]].pos1.x += 10 * i + 24;
-            gSprites[sp[i]].data1 = i * 7 + 10;
+            gSprites[sp[i]].data[1] = i * 7 + 10;
             gSprites[sp[i]].pos2.x = 120;
         }
         //_08044A18
         else
         {
             gSprites[sp[i]].pos1.x -= 10 * (5 - i) + 24;
-            gSprites[sp[i]].data1 = (6 - i) * 7 + 10;
+            gSprites[sp[i]].data[1] = (6 - i) * 7 + 10;
             gSprites[sp[i]].pos2.x = -120;
         }
         //_08044A56
-        gSprites[sp[i]].data2 = r7;
+        gSprites[sp[i]].data[2] = r7;
     }
     //_08044A76
     if (GetBankSide(a) == 0)
@@ -1466,7 +1466,7 @@ u8 sub_8044804(u8 a, const struct BattleInterfaceStruct2 *b, u8 c, u8 d)
                 {
                     //_08044AE6
                     gSprites[sp[i]].oam.tileNum += 1;
-                    gSprites[sp[i]].data7 = 1;
+                    gSprites[sp[i]].data[7] = 1;
                     // to _08044B52
                 }
                 else if (b[i].unk0 == 0)
@@ -1486,7 +1486,7 @@ u8 sub_8044804(u8 a, const struct BattleInterfaceStruct2 *b, u8 c, u8 d)
                 {
                     //_08044AE6
                     gSprites[sp[i]].oam.tileNum += 1;
-                    gSprites[sp[i]].data7 = 1;
+                    gSprites[sp[i]].data[7] = 1;
                     // to _08044B52
                 }
                 else if (b[i].unk0 == 0)
@@ -1513,7 +1513,7 @@ u8 sub_8044804(u8 a, const struct BattleInterfaceStruct2 *b, u8 c, u8 d)
                 if (b[i].unk0 == 0xFFFF)
                 {
                     gSprites[sp[5 - i]].oam.tileNum += 1;
-                    gSprites[sp[5 - i]].data7 = 1;
+                    gSprites[sp[5 - i]].data[7] = 1;
                 }
                 else if (b[i].unk0 == 0)
                 {
@@ -1529,7 +1529,7 @@ u8 sub_8044804(u8 a, const struct BattleInterfaceStruct2 *b, u8 c, u8 d)
                 if (i >= sp14)
                 {
                     gSprites[sp[5 - i]].oam.tileNum += 1;
-                    gSprites[sp[5 - i]].data7 = 1;
+                    gSprites[sp[5 - i]].data[7] = 1;
                 }
                 else if (b[i].unk0 == 0)
                 {
@@ -2174,21 +2174,21 @@ void sub_8044CA0(u8 taskId)
         {
             if (GetBankSide(sp8) != 0)
             {
-                gSprites[sp[5 - i]].data1 = 7 * i;
-                gSprites[sp[5 - i]].data3 = 0;
-                gSprites[sp[5 - i]].data4 = 0;
+                gSprites[sp[5 - i]].data[1] = 7 * i;
+                gSprites[sp[5 - i]].data[3] = 0;
+                gSprites[sp[5 - i]].data[4] = 0;
                 gSprites[sp[5 - i]].callback = sub_8045110;
             }
             else
             {
-                gSprites[sp[i]].data1 = 7 * i;
-                gSprites[sp[i]].data3 = 0;
-                gSprites[sp[i]].data4 = 0;
+                gSprites[sp[i]].data[1] = 7 * i;
+                gSprites[sp[i]].data[3] = 0;
+                gSprites[sp[i]].data[4] = 0;
                 gSprites[sp[i]].callback = sub_8045110;
             }
         }
-        gSprites[r10].data0 /= 2;
-        gSprites[r10].data1 = 0;
+        gSprites[r10].data[0] /= 2;
+        gSprites[r10].data[1] = 0;
         gSprites[r10].callback = sub_8045048;
         SetSubspriteTables(&gSprites[r10], gSubspriteTables_820A6EC);
         gTasks[taskId].func = sub_8044E74;
@@ -2272,17 +2272,17 @@ static void sub_8044F70(u8 taskId)
 void sub_8045030(struct Sprite *sprite)
 {
     if (sprite->pos2.x != 0)
-        sprite->pos2.x += sprite->data0;
+        sprite->pos2.x += sprite->data[0];
 }
 
 static void sub_8045048(struct Sprite *sprite)
 {
-    sprite->data1 += 32;
-    if (sprite->data0 > 0)
-        sprite->pos2.x += sprite->data1 >> 4;
+    sprite->data[1] += 32;
+    if (sprite->data[0] > 0)
+        sprite->pos2.x += sprite->data[1] >> 4;
     else
-        sprite->pos2.x -= sprite->data1 >> 4;
-    sprite->data1 &= 0xF;
+        sprite->pos2.x -= sprite->data[1] >> 4;
+    sprite->data[1] &= 0xF;
 }
 
 void sub_804507C(struct Sprite *sprite)
@@ -2291,15 +2291,15 @@ void sub_804507C(struct Sprite *sprite)
     u16 r2;
     s8 pan;
 
-    if (sprite->data1 > 0)
+    if (sprite->data[1] > 0)
     {
-        sprite->data1--;
+        sprite->data[1]--;
         return;
     }
-    r3 = sprite->data2;
-    r2 = sprite->data3;
+    r3 = sprite->data[2];
+    r2 = sprite->data[3];
     r2 += 56;
-    sprite->data3 = r2 & 0xFFF0;
+    sprite->data[3] = r2 & 0xFFF0;
     if (r3 != 0)
     {
         sprite->pos2.x += r2 >> 4;
@@ -2317,7 +2317,7 @@ void sub_804507C(struct Sprite *sprite)
         pan = 63;
         if (r3 != 0)
             pan = -64;
-        if (sprite->data7 != 0)
+        if (sprite->data[7] != 0)
             PlaySE2WithPanning(SE_TB_KARA, pan);
         else
             PlaySE1WithPanning(SE_TB_KON, pan);
@@ -2330,15 +2330,15 @@ static void sub_8045110(struct Sprite *sprite)
     u8 r0;
     u16 r2;
 
-    if (sprite->data1 > 0)
+    if (sprite->data[1] > 0)
     {
-        sprite->data1--;
+        sprite->data[1]--;
         return;
     }
-    r0 = sprite->data2;
-    r2 = sprite->data3;
+    r0 = sprite->data[2];
+    r2 = sprite->data[3];
     r2 += 56;
-    sprite->data3 = r2 & 0xFFF0;
+    sprite->data[3] = r2 & 0xFFF0;
     if (r0 != 0)
         sprite->pos2.x += r2 >> 4;
     else
@@ -2353,7 +2353,7 @@ static void sub_8045110(struct Sprite *sprite)
 
 void sub_8045180(struct Sprite *sprite)
 {
-    u8 spriteId = sprite->data0;
+    u8 spriteId = sprite->data[0];
 
     sprite->pos2.x = gSprites[spriteId].pos2.x;
     sprite->pos2.y = gSprites[spriteId].pos2.y;
@@ -2409,7 +2409,7 @@ static void sub_80451A0(u8 a, struct Pokemon *pkmn)
     ptr[1] = 0x13;
     ptr[2] = 0x37;
     ptr[3] = EOS;
-    ptr = ewram520_2 + GetBankIdentity(gSprites[a].data6) * 0x180;
+    ptr = ewram520_2 + GetBankIdentity(gSprites[a].data[6]) * 0x180;
     sub_80034D4(ptr, gDisplayedStringBattle);
 
     i = 0;
@@ -2446,7 +2446,7 @@ static void sub_80451A0(u8 a, struct Pokemon *pkmn)
     for (; i < _7; i++)
         CpuCopy32(sub_8043CDC(0x2B), ptr + 64 * i, 32);
 
-    if (GetBankSide(gSprites[a].data6) == 0 && !IsDoubleBattle())
+    if (GetBankSide(gSprites[a].data[6]) == 0 && !IsDoubleBattle())
     {
         r1 = (u8 *const *)gUnknown_0820A8B4;
         for (i = 0; i < _7; i++)
@@ -2464,7 +2464,7 @@ static void sub_80451A0(u8 a, struct Pokemon *pkmn)
     }
     else
     {
-        if (GetBankSide(gSprites[a].data6) == 0)
+        if (GetBankSide(gSprites[a].data[6]) == 0)
             r1 = (u8 *const *)gUnknown_0820A904;
         else
             r1 = (u8 *const *)gUnknown_0820A8DC;
@@ -2492,13 +2492,13 @@ static void sub_8045458(u8 a, u8 b)
     if (gBattleTypeFlags & 8)
         return;
 
-    r4 = gSprites[a].data6;
+    r4 = gSprites[a].data[6];
     if (GetBankSide(r4) != 0)
     {
         u16 species = GetMonData(&gEnemyParty[gBattlePartyID[r4]], MON_DATA_SPECIES);
         if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), 1) != 0)
         {
-            r4 = gSprites[a].data5;
+            r4 = gSprites[a].data[5];
             if (b != 0)
                 CpuCopy32(sub_8043CDC(0x46), OBJ_VRAM0 + (gSprites[r4].oam.tileNum + 8) * 32, 32);
             else
@@ -2518,8 +2518,8 @@ static void draw_status_ailment_maybe(u8 a)
     u8 r0;
     s32 i;
 
-    r7 = gSprites[a].data6;
-    r10 = gSprites[a].data5;
+    r7 = gSprites[a].data[6];
+    r10 = gSprites[a].data[5];
     if (GetBankSide(r7) == 0)
     {
         r4 = GetMonData(&gPlayerParty[gBattlePartyID[r7]], MON_DATA_STATUS);
@@ -2657,7 +2657,7 @@ static void sub_80458B0(u8 a)
     s32 r7;
     u8 *addr;
 
-    r6 = ewram520_2 + GetBankIdentity(gSprites[a].data6) * 0x180;
+    r6 = ewram520_2 + GetBankIdentity(gSprites[a].data[6]) * 0x180;
     r8 = 7;
     sub_80034D4(r6, BattleText_SafariBalls);
     for (i = 0; i < r8; i++)
@@ -2685,7 +2685,7 @@ static void sub_8045998(u8 a)
     r7 = StringCopy(gDisplayedStringBattle, BattleText_SafariBallsLeft);
     r7 = sub_8003504(r7, gNumSafariBalls, 10, 1);
     StringAppend(r7, BattleText_HighlightRed);
-    status = GetBankIdentity(gSprites[a].data6);
+    status = GetBankIdentity(gSprites[a].data[6]);
     r7 = ewram520_2 + status * 0x180;
     r6 = 5;
     sub_80034D4(r7, gDisplayedStringBattle);
@@ -2703,7 +2703,7 @@ void sub_8045A5C(u8 a, struct Pokemon *pkmn, u8 c)
     u32 maxhp;
     u32 currhp;
 
-    r10 = gSprites[a].data6;
+    r10 = gSprites[a].data[6];
     if (GetBankSide(r10) == 0)
     {
         if (c == 3 || c == 0)
@@ -2814,7 +2814,7 @@ static void sub_8045D58(u8 a, u8 b)
         }
         for (i = 0; i < 6; i++)
         {
-            u8 r4 = gSprites[ewram17850[a].unk0].data5;
+            u8 r4 = gSprites[ewram17850[a].unk0].data[5];
             if (i < 2)
                 CpuCopy32(sub_8043CDC(r8) + sp8[i] * 32, OBJ_VRAM0 + (gSprites[r4].oam.tileNum + 2 + i) * 32, 32);
             else

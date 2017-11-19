@@ -149,10 +149,10 @@ const u8 gUnknown_08376500[] = _(" : ");
 
 void SpriteCB_ResetRtcCusor0(struct Sprite *sprite)
 {
-    int state = gTasks[sprite->data0].data[2];
-    if (state != sprite->data1)
+    int state = gTasks[sprite->data[0]].data[2];
+    if (state != sprite->data[1])
     {
-        sprite->data1 = state;
+        sprite->data[1] = state;
         switch (state)
         {
         case 1:
@@ -199,10 +199,10 @@ void SpriteCB_ResetRtcCusor0(struct Sprite *sprite)
 
 void SpriteCB_ResetRtcCusor1(struct Sprite *sprite)
 {
-    int state = gTasks[sprite->data0].data[2];
-    if (state != sprite->data1)
+    int state = gTasks[sprite->data[0]].data[2];
+    if (state != sprite->data[1])
     {
-        sprite->data1 = state;
+        sprite->data[1] = state;
         switch (state)
         {
         case 1:
@@ -251,13 +251,13 @@ void ResetRtcScreen_CreateCursor(u8 taskId)
 
     spriteId = CreateSpriteAtEnd(&gSpriteTemplate_83764E8, 53, 68, 0);
     gSprites[spriteId].callback = SpriteCB_ResetRtcCusor0;
-    gSprites[spriteId].data0 = taskId;
-    gSprites[spriteId].data1 = -1;
+    gSprites[spriteId].data[0] = taskId;
+    gSprites[spriteId].data[1] = -1;
 
     spriteId = CreateSpriteAtEnd(&gSpriteTemplate_83764E8, 53, 68, 0);
     gSprites[spriteId].callback = SpriteCB_ResetRtcCusor1;
-    gSprites[spriteId].data0 = taskId;
-    gSprites[spriteId].data1 = -1;
+    gSprites[spriteId].data[0] = taskId;
+    gSprites[spriteId].data[1] = -1;
 }
 
 void ResetRtcScreen_FreeCursorPalette(void)

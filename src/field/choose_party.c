@@ -430,7 +430,7 @@ static void sub_81225D4(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        u8 r4 = gSprites[gTasks[taskId].data[3] >> 8].data0;
+        u8 r4 = gSprites[gTasks[taskId].data[3] >> 8].data[0];
 
         DestroyTask(taskId);
         ewram1B000.unk262 = 1;
@@ -880,7 +880,7 @@ static void sub_8123034(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        u8 r4 = gSprites[gTasks[taskId].data[3] >> 8].data0;
+        u8 r4 = gSprites[gTasks[taskId].data[3] >> 8].data[0];
 
         DestroyTask(taskId);
         ewram1B000.unk262 = 1;

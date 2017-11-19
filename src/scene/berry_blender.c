@@ -1019,34 +1019,34 @@ static void sub_804E56C(void)
 
 void sub_804E738(struct Sprite* sprite)
 {
-    sprite->data1 += sprite->data6;
-    sprite->data2 -= sprite->data4;
-    sprite->data2 += sprite->data7;
-    sprite->data0 += sprite->data7;
-    sprite->data4--;
+    sprite->data[1] += sprite->data[6];
+    sprite->data[2] -= sprite->data[4];
+    sprite->data[2] += sprite->data[7];
+    sprite->data[0] += sprite->data[7];
+    sprite->data[4]--;
 
-    if (sprite->data0 < sprite->data2)
+    if (sprite->data[0] < sprite->data[2])
     {
-        sprite->data3 = sprite->data4 = sprite->data3 - 1;
-        if (++sprite->data5 > 3)
+        sprite->data[3] = sprite->data[4] = sprite->data[3] - 1;
+        if (++sprite->data[5] > 3)
             DestroySprite(sprite);
         else
             PlaySE(SE_TB_KARA);
     }
-    sprite->pos1.x = sprite->data1;
-    sprite->pos1.y = sprite->data2;
+    sprite->pos1.x = sprite->data[1];
+    sprite->pos1.y = sprite->data[2];
 }
 
 void sub_804E794(struct Sprite* sprite, s16 a2, s16 a3, s16 a4, s16 a5, s16 a6)
 {
-    sprite->data0 = a3;
-    sprite->data1 = a2;
-    sprite->data2 = a3;
-    sprite->data3 = a4;
-    sprite->data4 = 10;
-    sprite->data5 = 0;
-    sprite->data6 = a5;
-    sprite->data7 = a6;
+    sprite->data[0] = a3;
+    sprite->data[1] = a2;
+    sprite->data[2] = a3;
+    sprite->data[3] = a4;
+    sprite->data[4] = 10;
+    sprite->data[5] = 0;
+    sprite->data[6] = a5;
+    sprite->data[7] = a6;
     sprite->callback = sub_804E738;
 }
 
@@ -3012,10 +3012,10 @@ static void sub_80514F0(void)
 
 void sub_8051524(struct Sprite* sprite)
 {
-    sprite->data2 += sprite->data0;
-    sprite->data3 += sprite->data1;
-    sprite->pos2.x = sprite->data2 / 8;
-    sprite->pos2.y = sprite->data3 / 8;
+    sprite->data[2] += sprite->data[0];
+    sprite->data[3] += sprite->data[1];
+    sprite->pos2.x = sprite->data[2] / 8;
+    sprite->pos2.y = sprite->data[3] / 8;
     if (sprite->animEnded)
         DestroySprite(sprite);
 }
@@ -3037,8 +3037,8 @@ static void sub_805156C(void)
         y = gSineTable[(rand & 0xFF)] / 4;
 
         spriteID = CreateSprite(&sSpriteTemplate_82164FC, x + 120, y + 80, 1);
-        gSprites[spriteID].data0 = 16 - (Random() % 32);
-        gSprites[spriteID].data1 = 16 - (Random() % 32);
+        gSprites[spriteID].data[0] = 16 - (Random() % 32);
+        gSprites[spriteID].data[1] = 16 - (Random() % 32);
 
         gSprites[spriteID].callback = sub_8051524;
     }
@@ -3046,16 +3046,16 @@ static void sub_805156C(void)
 
 static void sub_8051650(struct Sprite* sprite)
 {
-    sprite->data0++;
-    sprite->pos2.y = -(sprite->data0 / 3);
+    sprite->data[0]++;
+    sprite->pos2.y = -(sprite->data[0] / 3);
     if (sprite->animEnded)
         DestroySprite(sprite);
 }
 
 void sub_8051684(struct Sprite* sprite)
 {
-    sprite->data0++;
-    sprite->pos2.y = -(sprite->data0 * 2);
+    sprite->data[0]++;
+    sprite->pos2.y = -(sprite->data[0] * 2);
     if (sprite->pos2.y < -12)
         sprite->pos2.y = -12;
     if (sprite->animEnded)
@@ -3110,74 +3110,74 @@ void unref_sub_80516F8(u8 taskID)
 
 static void sub_805181C(struct Sprite* sprite)
 {
-    switch (sprite->data0)
+    switch (sprite->data[0])
     {
     case 0:
-        sprite->data1 += 8;
-        if (sprite->data1 > 88)
+        sprite->data[1] += 8;
+        if (sprite->data[1] > 88)
         {
-            sprite->data1 = 88;
-            sprite->data0++;
+            sprite->data[1] = 88;
+            sprite->data[0]++;
             PlaySE(SE_KON);
         }
         break;
     case 1:
-        sprite->data2 += 1;
-        if (sprite->data2 > 20)
+        sprite->data[2] += 1;
+        if (sprite->data[2] > 20)
         {
-            sprite->data0++;
-            sprite->data2 = 0;
+            sprite->data[0]++;
+            sprite->data[2] = 0;
         }
         break;
     case 2:
-        sprite->data1 += 4;
-        if (sprite->data1 > 176)
+        sprite->data[1] += 4;
+        if (sprite->data[1] > 176)
         {
-            if (++sprite->data3 == 3)
+            if (++sprite->data[3] == 3)
             {
                 DestroySprite(sprite);
                 CreateSprite(&sSpriteTemplate_821657C, 120, -20, 2);
             }
             else
             {
-                sprite->data0 = 0;
-                sprite->data1 = -16;
-                StartSpriteAnim(sprite, sprite->data3);
+                sprite->data[0] = 0;
+                sprite->data[1] = -16;
+                StartSpriteAnim(sprite, sprite->data[3]);
             }
         }
         break;
     }
-    sprite->pos2.y = sprite->data1;
+    sprite->pos2.y = sprite->data[1];
 }
 
 static void sub_80518CC(struct Sprite* sprite)
 {
-    switch (sprite->data0)
+    switch (sprite->data[0])
     {
     case 0:
-        sprite->data1 += 8;
-        if (sprite->data1 > 92)
+        sprite->data[1] += 8;
+        if (sprite->data[1] > 92)
         {
-            sprite->data1 = 92;
-            sprite->data0++;
+            sprite->data[1] = 92;
+            sprite->data[0]++;
             PlaySE(SE_PIN);
         }
         break;
     case 1:
-        sprite->data2 += 1;
-        if (sprite->data2 > 20)
-            sprite->data0++;
+        sprite->data[2] += 1;
+        if (sprite->data[2] > 20)
+            sprite->data[0]++;
         break;
     case 2:
-        sprite->data1 += 4;
-        if (sprite->data1 > 176)
+        sprite->data[1] += 4;
+        if (sprite->data[1] > 176)
         {
             gBerryBlenderData->field_0++;
             DestroySprite(sprite);
         }
         break;
     }
-    sprite->pos2.y = sprite->data1;
+    sprite->pos2.y = sprite->data[1];
 }
 
 static void sub_805194C(u16 a0, u16 a1)

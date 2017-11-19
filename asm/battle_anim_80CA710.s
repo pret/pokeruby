@@ -781,7 +781,7 @@ _080D3080:
 	str r0, [r5, 0x1C]
 	ldr r1, _080D30A8 @ =move_anim_8072740
 	adds r0, r5, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -1156,7 +1156,7 @@ sub_80D3370: @ 80D3370
 	ldr r1, _080D3390 @ =sub_8078600
 	str r1, [r0, 0x1C]
 	ldr r1, _080D3394 @ =sub_80D3398
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1172,7 +1172,7 @@ sub_80D3398: @ 80D3398
 	ldr r1, _080D33AC @ =sub_80782D8
 	str r1, [r0, 0x1C]
 	ldr r1, _080D33B0 @ =move_anim_8074EE0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1719,7 +1719,7 @@ _080D37AA:
 	str r0, [r6, 0x1C]
 	ldr r1, _080D37F8 @ =move_anim_8072740
 	adds r0, r6, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -1751,7 +1751,7 @@ sub_80D37FC: @ 80D37FC
 	str r0, [r4, 0x1C]
 	ldr r1, _080D3834 @ =move_anim_8072740
 	adds r0, r4, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -4694,7 +4694,7 @@ sub_80D4ED8: @ 80D4ED8
 	strh r0, [r4, 0x36]
 	ldr r1, _080D4F10 @ =move_anim_8072740
 	adds r0, r4, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	ldr r1, _080D4F14 @ =sub_8078174
 	str r1, [r4, 0x1C]
 	adds r0, r4, 0
@@ -4731,7 +4731,7 @@ sub_80D4F18: @ 80D4F18
 	str r0, [r4, 0x1C]
 	ldr r1, _080D4F58 @ =move_anim_8072740
 	adds r0, r4, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -5041,7 +5041,7 @@ sub_80D517C: @ 80D517C
 	ldr r1, _080D51A0 @ =sub_8078B34
 	str r1, [r0, 0x1C]
 	ldr r1, _080D51A4 @ =move_anim_8072740
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -5304,7 +5304,7 @@ sub_80D5374: @ 80D5374
 	strh r0, [r4, 0x32]
 	ldr r1, _080D53AC @ =move_anim_8072740
 	adds r0, r4, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	ldr r0, _080D53B0 @ =sub_8078364
 	str r0, [r4, 0x1C]
 	pop {r4}
@@ -5337,7 +5337,7 @@ sub_80D53B4: @ 80D53B4
 	str r0, [r4, 0x1C]
 	ldr r1, _080D53F0 @ =sub_80D53F4
 	adds r0, r4, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -7344,7 +7344,7 @@ _080D62F8:
 	strh r0, [r5, 0x34]
 	ldr r1, _080D6320 @ =move_anim_8074EE0
 	adds r0, r5, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	ldr r0, _080D6324 @ =sub_8078114
 	str r0, [r5, 0x1C]
 	pop {r4,r5}
@@ -7973,7 +7973,7 @@ _080D67F6:
 	str r0, [r4, 0x1C]
 	ldr r1, _080D6818 @ =move_anim_8072740
 	adds r0, r4, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -8528,7 +8528,7 @@ sub_80D6BB8: @ 80D6BB8
 	bl obj_translate_based_on_private_1_2_3_4
 	ldr r1, _080D6CB0 @ =sub_80D6D00
 	adds r0, r4, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	ldr r0, _080D6CB4 @ =sub_8078600
 	str r0, [r4, 0x1C]
 	ldrh r0, [r5, 0x1A]
@@ -8659,7 +8659,7 @@ _080D6D36:
 	strh r0, [r5, 0x22]
 	ldr r1, _080D6D68 @ =move_anim_8074EE0
 	adds r0, r5, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	ldr r0, _080D6D6C @ =sub_80785E4
 	str r0, [r5, 0x1C]
 	pop {r4,r5}
@@ -8707,7 +8707,7 @@ _080D6D8E:
 	strh r0, [r5, 0x26]
 	ldr r1, _080D6DD0 @ =move_anim_8072740
 	adds r0, r5, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	ldr r0, _080D6DD4 @ =sub_8078600
 	str r0, [r5, 0x1C]
 	pop {r4,r5}
@@ -10212,7 +10212,7 @@ sub_80D78EC: @ 80D78EC
 	strh r0, [r4, 0x36]
 	ldr r1, _080D7924 @ =move_anim_8072740
 	adds r0, r4, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	ldr r1, _080D7928 @ =sub_8078174
 	str r1, [r4, 0x1C]
 	adds r0, r4, 0
@@ -10276,7 +10276,7 @@ _080D7976:
 	strh r0, [r4, 0x2E]
 	ldr r1, _080D79AC @ =move_anim_8072740
 	adds r0, r4, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	ldr r0, _080D79B0 @ =sub_8078B34
 	str r0, [r4, 0x1C]
 	pop {r4}
@@ -10334,7 +10334,7 @@ _080D79F6:
 _080D7A06:
 	ldr r1, _080D7A20 @ =sub_80D7A28
 	adds r0, r4, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	ldr r0, _080D7A24 @ =sub_80785E4
 	str r0, [r4, 0x1C]
 	pop {r4,r5}
@@ -10525,7 +10525,7 @@ _080D7B76:
 	bge _080D7B76
 	str r6, [r5, 0x1C]
 	adds r0, r5, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	add sp, 0x10
 	pop {r4-r7}
 	pop {r0}
@@ -12995,7 +12995,7 @@ sub_80D8EE0: @ 80D8EE0
 	str r0, [r4, 0x1C]
 	ldr r1, _080D8F0C @ =move_anim_8072740
 	adds r0, r4, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 _080D8F02:
 	pop {r4}
 	pop {r0}
@@ -13143,7 +13143,7 @@ unc_080B08A0: @ 80D8FF0
 	str r0, [r4, 0x1C]
 	ldr r1, _080D9028 @ =move_anim_8072740
 	adds r0, r4, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -13245,7 +13245,7 @@ _080D90D0:
 	str r0, [r5, 0x1C]
 	ldr r1, _080D90F0 @ =move_anim_8072740
 	adds r0, r5, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -13522,7 +13522,7 @@ _080D9306:
 	str r0, [r4, 0x1C]
 	ldr r1, _080D9324 @ =sub_80D9328
 	adds r0, r4, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -13563,7 +13563,7 @@ sub_80D9328: @ 80D9328
 	str r0, [r5, 0x1C]
 	ldr r1, _080D9374 @ =move_anim_8072740
 	adds r0, r5, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 _080D9368:
 	pop {r4-r6}
 	pop {r0}
@@ -13689,7 +13689,7 @@ sub_80D943C: @ 80D943C
 	str r0, [r4, 0x1C]
 	ldr r1, _080D9470 @ =sub_80D9474
 	adds r0, r4, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -13717,7 +13717,7 @@ sub_80D9474: @ 80D9474
 	str r0, [r4, 0x1C]
 	ldr r1, _080D94A4 @ =move_anim_8072740
 	adds r0, r4, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -13777,7 +13777,7 @@ sub_80D94CC: @ 80D94CC
 	str r0, [r5, 0x1C]
 	ldr r1, _080D9520 @ =sub_80D9524
 	adds r0, r5, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 _080D9510:
 	pop {r4,r5}
 	pop {r0}
@@ -13796,7 +13796,7 @@ sub_80D9524: @ 80D9524
 	ldr r1, _080D9538 @ =sub_80782D8
 	str r1, [r0, 0x1C]
 	ldr r1, _080D953C @ =move_anim_8072740
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -14262,7 +14262,7 @@ sub_80D986C: @ 80D986C
 	bl obj_translate_based_on_private_1_2_3_4
 	ldr r1, _080D98D0 @ =move_anim_8074EE0
 	adds r0, r4, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	ldr r0, _080D98D4 @ =sub_8078BB8
 	str r0, [r4, 0x1C]
 _080D98C6:
@@ -14554,7 +14554,7 @@ _080D9ADC:
 	bl obj_translate_based_on_private_1_2_3_4
 	ldr r1, _080D9B1C @ =move_anim_8072740
 	adds r0, r5, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	ldr r0, _080D9B20 @ =sub_8078BB8
 	str r0, [r5, 0x1C]
 	pop {r4,r5}
@@ -14698,7 +14698,7 @@ _080D9C22:
 	str r0, [r4, 0x1C]
 	ldr r1, _080D9C3C @ =move_anim_8072740
 	adds r0, r4, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -15115,7 +15115,7 @@ _080D9F40:
 	str r0, [r4, 0x1C]
 	ldr r1, _080D9F84 @ =move_anim_8072740
 	adds r0, r4, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -15426,7 +15426,7 @@ _080DA18C:
 	str r0, [r6, 0x1C]
 	ldr r1, _080DA1E8 @ =sub_80DA1EC
 	adds r0, r6, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -15556,7 +15556,7 @@ _080DA2C2:
 	str r0, [r5, 0x1C]
 	ldr r1, _080DA2FC @ =move_anim_8072740
 	adds r0, r5, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	ldrb r1, [r4, 0xA]
 	adds r0, r5, 0
 	bl SeekSpriteAnim
@@ -18781,7 +18781,7 @@ _080DBB52:
 	strh r0, [r5, 0x30]
 	ldr r1, _080DBB68 @ =move_anim_8072740
 	adds r0, r5, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	ldr r0, _080DBB6C @ =sub_8078600
 	str r0, [r5, 0x1C]
 	pop {r4,r5}
@@ -18850,7 +18850,7 @@ _080DBBB6:
 _080DBBE2:
 	ldr r1, _080DBBF8 @ =sub_80DBC00
 	adds r0, r5, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	ldr r0, _080DBBFC @ =sub_8078600
 	str r0, [r5, 0x1C]
 	pop {r4-r7}
@@ -20522,7 +20522,7 @@ _080DC880:
 	str r0, [r6, 0x1C]
 	ldr r1, _080DC8F0 @ =move_anim_8072740
 	adds r0, r6, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -20602,7 +20602,7 @@ _080DC934:
 	str r0, [r6, 0x1C]
 	ldr r1, _080DC99C @ =move_anim_8072740
 	adds r0, r6, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -21033,7 +21033,7 @@ _080DCC5E:
 	str r0, [r7, 0x1C]
 	ldr r1, _080DCCF8 @ =move_anim_8072740
 	adds r0, r7, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	add sp, 0x4
 	pop {r4-r7}
 	pop {r0}
@@ -21240,7 +21240,7 @@ _080DCE5E:
 	strh r0, [r5, 0x22]
 	ldr r1, _080DCE94 @ =move_anim_8074EE0
 	adds r0, r5, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	ldr r0, _080DCE98 @ =sub_80785E4
 	str r0, [r5, 0x1C]
 	pop {r4,r5}
@@ -21295,7 +21295,7 @@ _080DCEBC:
 	strh r0, [r5, 0x38]
 	ldr r1, _080DCF14 @ =sub_80DCF1C
 	adds r0, r5, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	ldr r1, _080DCF18 @ =sub_8078278
 	str r1, [r5, 0x1C]
 	adds r0, r5, 0
@@ -21330,7 +21330,7 @@ sub_80DCF1C: @ 80DCF1C
 	strh r0, [r4, 0x36]
 	ldr r1, _080DCF58 @ =move_anim_8074EE0
 	adds r0, r4, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	ldr r1, _080DCF5C @ =sub_8078278
 	str r1, [r4, 0x1C]
 	adds r0, r4, 0
@@ -21397,7 +21397,7 @@ _080DCF96:
 	str r0, [r5, 0x1C]
 	ldr r1, _080DCFE0 @ =move_anim_8074EE0
 	adds r0, r5, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -22016,7 +22016,7 @@ sub_80DD490: @ 80DD490
 	str r0, [r4, 0x1C]
 	ldr r1, _080DD4D0 @ =move_anim_8072740
 	adds r0, r4, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -23833,7 +23833,7 @@ _080DE276:
 	lsls r0, 2
 	adds r0, r4
 	ldr r1, _080DE2D0 @ =SpriteCallbackDummy
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	movs r0, 0x8
 	ldrsh r1, [r5, r0]
 	lsls r0, r1, 4
@@ -25509,7 +25509,7 @@ _080DEFAA:
 	str r0, [r3, 0x1C]
 	ldr r1, _080DF008 @ =sub_80DF018
 	adds r0, r3, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	b _080DF010
 	.align 2, 0
 _080DEFFC: .4byte 0x000003ff
@@ -26323,7 +26323,7 @@ _080DF5FA:
 	strb r0, [r2]
 	ldr r1, _080DF634 @ =move_anim_8074EE0
 	adds r0, r5, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	ldr r0, _080DF638 @ =sub_8078504
 	str r0, [r5, 0x1C]
 	pop {r4,r5}
@@ -26409,7 +26409,7 @@ _080DF6CA:
 	str r0, [r5, 0x1C]
 	ldr r1, _080DF6EC @ =move_anim_8074EE0
 	adds r0, r5, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -26461,7 +26461,7 @@ _080DF70E:
 	str r0, [r5, 0x1C]
 	ldr r1, _080DF75C @ =move_anim_8074EE0
 	adds r0, r5, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -28879,7 +28879,7 @@ sub_80E0A10: @ 80E0A10
 	str r0, [r4, 0x1C]
 	ldr r1, _080E0A48 @ =move_anim_8072740
 	adds r0, r4, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -29619,7 +29619,7 @@ _080E1024:
 	str r0, [r6, 0x1C]
 	ldr r1, _080E1074 @ =move_anim_8072740
 	adds r0, r6, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -29686,7 +29686,7 @@ _080E10D0:
 	str r0, [r6, 0x1C]
 	ldr r1, _080E1104 @ =move_anim_8074EE0
 	adds r0, r6, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	pop {r3}
 	mov r8, r3
 	pop {r4-r7}
@@ -30643,7 +30643,7 @@ _080E17EA:
 	strh r0, [r6, 0x4]
 	ldr r1, _080E185C @ =move_anim_8072740
 	adds r0, r6, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	ldrh r0, [r4, 0x4]
 	strh r0, [r6, 0x2E]
 	ldr r0, _080E1860 @ =sub_80782D8
@@ -31610,7 +31610,7 @@ sub_80E1F3C: @ 80E1F3C
 	strh r2, [r4, 0x38]
 	ldr r1, _080E1F84 @ =move_anim_8074EE0
 	adds r0, r4, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	ldr r1, _080E1F88 @ =sub_8078174
 	str r1, [r4, 0x1C]
 	adds r0, r4, 0
@@ -32353,14 +32353,14 @@ _080E2508:
 	ldr r1, _080E2514 @ =gSpriteCoordOffsetX
 _080E250A:
 	adds r0, r4, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	b _080E2520
 	.align 2, 0
 _080E2514: .4byte gSpriteCoordOffsetX
 _080E2518:
 	ldr r1, _080E2550 @ =gSpriteCoordOffsetY
 	adds r0, r4, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 _080E2520:
 	movs r0, 0x3A
 	ldrsh r1, [r4, r0]
@@ -32721,7 +32721,7 @@ _080E27CC:
 	str r0, [r5, 0x1C]
 	ldr r1, _080E27E4 @ =move_anim_8072740
 	adds r0, r5, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -32759,7 +32759,7 @@ _080E2814:
 	str r0, [r5, 0x1C]
 	ldr r1, _080E2834 @ =sub_80DA48C
 	adds r0, r5, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -32854,7 +32854,7 @@ _080E28B4:
 	strh r0, [r4, 0x26]
 	ldr r1, _080E2900 @ =move_anim_8074EE0
 	adds r0, r4, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	ldr r0, _080E2904 @ =sub_80785E4
 	str r0, [r4, 0x1C]
 	pop {r4,r5}
@@ -32907,7 +32907,7 @@ sub_80E2908: @ 80E2908
 	bl StartSpriteAffineAnim
 	ldr r1, _080E2970 @ =move_anim_8074EE0
 	adds r0, r4, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	ldr r0, _080E2974 @ =sub_80785E4
 	str r0, [r4, 0x1C]
 	pop {r4,r5}
@@ -32945,7 +32945,7 @@ _080E299C:
 	strh r0, [r4, 0x2E]
 	ldr r1, _080E29B8 @ =move_anim_8072740
 	adds r0, r4, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	ldr r0, _080E29BC @ =sub_80782D8
 	str r0, [r4, 0x1C]
 	pop {r4}

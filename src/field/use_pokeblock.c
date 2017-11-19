@@ -893,11 +893,11 @@ static void sub_8137138(void)
 
 static void sub_81371DC(struct Sprite *sprite)
 {
-    if (sprite->data0 <= 5)
+    if (sprite->data[0] <= 5)
         sprite->pos2.y -= 2;
-    else if (sprite->data0 <= 11)
+    else if (sprite->data[0] <= 11)
         sprite->pos2.y += 2;
-    if ((++sprite->data0) > 60)
+    if ((++sprite->data[0]) > 60)
     {
         DestroySprite(sprite);
         gUnknown_02039304->unk54--;

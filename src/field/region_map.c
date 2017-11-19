@@ -1121,9 +1121,9 @@ void CreateRegionMapCursor(u16 tileTag, u16 paletteTag)
             gRegionMap->cursorSprite->pos1.x = gRegionMap->cursorPosX * 8 + 4;
             gRegionMap->cursorSprite->pos1.y = gRegionMap->cursorPosY * 8 + 4;
         }
-        gRegionMap->cursorSprite->data1 = 2;
-        gRegionMap->cursorSprite->data2 = IndexOfSpritePaletteTag(paletteTag) * 16 + 0x0101;
-        gRegionMap->cursorSprite->data3 = 1;
+        gRegionMap->cursorSprite->data[1] = 2;
+        gRegionMap->cursorSprite->data[2] = IndexOfSpritePaletteTag(paletteTag) * 16 + 0x0101;
+        gRegionMap->cursorSprite->data[3] = 1;
     }
 }
 
@@ -1139,12 +1139,12 @@ static void sub_80FBCA0(void)
 
 void unref_sub_80FBCD0(void)
 {
-    gRegionMap->cursorSprite->data3 = 1;
+    gRegionMap->cursorSprite->data[3] = 1;
 }
 
 void unref_sub_80FBCE0(void)
 {
-    gRegionMap->cursorSprite->data3 = 0;
+    gRegionMap->cursorSprite->data[3] = 0;
 }
 
 static const struct OamData sPlayerIconOamData =
@@ -1259,16 +1259,16 @@ static void SpriteCB_PlayerIconZoomedIn(struct Sprite *sprite)
 {
     sprite->pos2.x = -(gRegionMap->scrollX * 2);
     sprite->pos2.y = -(gRegionMap->scrollY * 2);
-    sprite->data0 = sprite->pos1.y + sprite->pos2.y + sprite->centerToCornerVecY;
-    sprite->data1 = sprite->pos1.x + sprite->pos2.x + sprite->centerToCornerVecX;
+    sprite->data[0] = sprite->pos1.y + sprite->pos2.y + sprite->centerToCornerVecY;
+    sprite->data[1] = sprite->pos1.x + sprite->pos2.x + sprite->centerToCornerVecX;
 
     // Determine if sprite is on screen
-    if (sprite->data0 < -8 || sprite->data0 > 0xA8 || sprite->data1 < -8 || sprite->data1 > 0xF8)
-        sprite->data2 = FALSE;
+    if (sprite->data[0] < -8 || sprite->data[0] > 0xA8 || sprite->data[1] < -8 || sprite->data[1] > 0xF8)
+        sprite->data[2] = FALSE;
     else
-        sprite->data2 = TRUE;
+        sprite->data[2] = TRUE;
 
-    if (sprite->data2 == TRUE)
+    if (sprite->data[2] == TRUE)
         UpdateIconBlink(sprite);
     else
         sprite->invisible = TRUE;
@@ -1284,10 +1284,10 @@ static void UpdateIconBlink(struct Sprite *sprite)
     if (gRegionMap->blinkPlayerIcon)
     {
         // Toggle visibility every 16 frames
-        sprite->data7++;
-        if (sprite->data7 > 16)
+        sprite->data[7]++;
+        if (sprite->data[7] > 16)
         {
-            sprite->data7 = 0;
+            sprite->data[7] = 0;
             sprite->invisible = !sprite->invisible;
         }
     }
@@ -1691,7 +1691,7 @@ static void CreateCityTownFlyTargetIcons(void)
             else
                 r7 += 3;
             StartSpriteAnim(&gSprites[spriteId], r7);
-            gSprites[spriteId].data0 = i;
+            gSprites[spriteId].data[0] = i;
         }
         canFlyFlag++;
     }
@@ -1724,7 +1724,7 @@ static void CreateSpecialAreaFlyTargetIcons(void)
                 gSprites[spriteId].oam.size = 1;
                 gSprites[spriteId].callback = SpriteCB_FlyTargetIcons;
                 StartSpriteAnim(&gSprites[spriteId], 6);
-                gSprites[spriteId].data0 = mapSectionId;
+                gSprites[spriteId].data[0] = mapSectionId;
             }
         }
     }
@@ -1733,19 +1733,19 @@ static void CreateSpecialAreaFlyTargetIcons(void)
 static void SpriteCB_FlyTargetIcons(struct Sprite *sprite)
 {
     // Blink if our mapSectionId is the one selected on the map
-    if (ewram0_3.regionMap.mapSectionId == sprite->data0)
+    if (ewram0_3.regionMap.mapSectionId == sprite->data[0])
     {
         // Toggle visibility every 16 frames
-        sprite->data1++;
-        if (sprite->data1 > 16)
+        sprite->data[1]++;
+        if (sprite->data[1] > 16)
         {
-            sprite->data1 = 0;
+            sprite->data[1] = 0;
             sprite->invisible = !sprite->invisible;
         }
     }
     else
     {
-        sprite->data1 = 16;
+        sprite->data[1] = 16;
         sprite->invisible = FALSE;
     }
 }

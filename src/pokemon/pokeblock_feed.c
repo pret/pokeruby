@@ -763,7 +763,7 @@ static u8 PokeblockFeed_CreatePokeSprite(struct Pokemon* mon)
     gPokeblockFeedMonSpecies = species;
     gPokeblockFeedMonSpriteID = spriteID;
     gPokeblockFeedMonNature = GetNature(mon);
-    gSprites[spriteID].data2 = species;
+    gSprites[spriteID].data[2] = species;
     gSprites[spriteID].callback = SpriteCallbackDummy;
     gPokeblockMonNotFlipped = 1;
     if (!IsPokeSpriteNotFlipped(species))
@@ -780,19 +780,19 @@ static void sub_8148044(u8 spriteID)
 {
     gSprites[spriteID].pos1.x = 48;
     gSprites[spriteID].pos1.y = 80;
-    gSprites[spriteID].data0 = -8;
-    gSprites[spriteID].data1 = 1;
+    gSprites[spriteID].data[0] = -8;
+    gSprites[spriteID].data[1] = 1;
     gSprites[spriteID].callback = sub_8148078;
 }
 
 static void sub_8148078(struct Sprite* sprite)
 {
     sprite->pos1.x += 4;
-    sprite->pos1.y += sprite->data0;
-    sprite->data0 += sprite->data1;
-    if (sprite->data0 == 0)
-        PlayCry1(sprite->data2, 0);
-    if (sprite->data0 == 9)
+    sprite->pos1.y += sprite->data[0];
+    sprite->data[0] += sprite->data[1];
+    if (sprite->data[0] == 0)
+        PlayCry1(sprite->data[2], 0);
+    if (sprite->data[0] == 9)
         sprite->callback = SpriteCallbackDummy;
 }
 
@@ -820,17 +820,17 @@ static void sub_8148108(u8 spriteID, bool8 a1)
 static u8 CreatePokeblockSprite(void)
 {
     u8 spriteID = CreateSprite(&sThrownPokeblockSpriteTemplate, 174, 84, 1);
-    gSprites[spriteID].data0 = -12;
-    gSprites[spriteID].data1 = 1;
+    gSprites[spriteID].data[0] = -12;
+    gSprites[spriteID].data[1] = 1;
     return spriteID;
 }
 
 static void SpriteCB_ThrownPokeblock(struct Sprite* sprite)
 {
     sprite->pos1.x -= 4;
-    sprite->pos1.y += sprite->data0;
-    sprite->data0 += sprite->data1;
-    if (sprite->data0 == 10)
+    sprite->pos1.y += sprite->data[0];
+    sprite->data[0] += sprite->data[1];
+    if (sprite->data[0] == 10)
         DestroySprite(sprite);
 }
 

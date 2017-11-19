@@ -82,8 +82,8 @@ static void sub_8133D50(u8 taskId) {
     struct Sprite *sprites = gSprites;
 
 
-    unk1 = sprites[EWRAM_1000.unk1].data0;
-    unk2 = sprites[EWRAM_1000.unk2].data0;
+    unk1 = sprites[EWRAM_1000.unk1].data[0];
+    unk2 = sprites[EWRAM_1000.unk2].data[0];
 
     if (unk1 > 5 || unk2 > 5)
     {
@@ -91,7 +91,7 @@ static void sub_8133D50(u8 taskId) {
         return;
     }
 
-    EWRAM_1C000.unk0 = &gPlayerParty[sprites[EWRAM_1000.unk2].data0];
+    EWRAM_1C000.unk0 = &gPlayerParty[sprites[EWRAM_1000.unk2].data[0]];
     hp = GetMonData(EWRAM_1C000.unk0, MON_DATA_HP);
 
     if (hp == 0 || unk1 == unk2 || GetMonData(EWRAM_1C000.unk0, MON_DATA_MAX_HP) == hp)
@@ -102,7 +102,7 @@ static void sub_8133D50(u8 taskId) {
 
     PlaySE(SE_KAIFUKU);
 
-    EWRAM_1C000.unk5 = gSprites[EWRAM_1000.unk1].data0;
+    EWRAM_1C000.unk5 = gSprites[EWRAM_1000.unk1].data[0];
 
     pokemon = &gPlayerParty[EWRAM_1C000.unk5];
     EWRAM_1C000.unk0 = pokemon;

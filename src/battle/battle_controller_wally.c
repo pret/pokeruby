@@ -90,7 +90,7 @@ extern void sub_80E43C0();
 extern void oamt_add_pos2_onto_pos1();
 extern void sub_8078B34(struct Sprite *);
 extern void sub_8030E38(struct Sprite *);
-extern void StoreSpriteCallbackInData6();
+extern void StoreSpriteCallbackInData();
 extern u8 sub_8046400();
 extern u8 sub_8077ABC();
 extern u8 sub_8077F68();
@@ -439,18 +439,18 @@ void bx_blink_t5(void)
 {
     u8 spriteId = gObjectBankIDs[gActiveBank];
 
-    if (gSprites[spriteId].data1 == 32)
+    if (gSprites[spriteId].data[1] == 32)
     {
-        gSprites[spriteId].data1 = 0;
+        gSprites[spriteId].data[1] = 0;
         gSprites[spriteId].invisible = FALSE;
         gDoingBattleAnim = FALSE;
         WallyBufferExecCompleted();
     }
     else
     {
-        if (((u16)gSprites[spriteId].data1 % 4) == 0)
+        if (((u16)gSprites[spriteId].data[1] % 4) == 0)
             gSprites[spriteId].invisible ^= 1;
-        gSprites[spriteId].data1++;
+        gSprites[spriteId].data[1]++;
     }
 }
 
@@ -1111,7 +1111,7 @@ void WallyHandleTrainerThrow(void)
       30);
     gSprites[gObjectBankIDs[gActiveBank]].oam.paletteNum = gActiveBank;
     gSprites[gObjectBankIDs[gActiveBank]].pos2.x = 240;
-    gSprites[gObjectBankIDs[gActiveBank]].data0 = -2;
+    gSprites[gObjectBankIDs[gActiveBank]].data[0] = -2;
     gSprites[gObjectBankIDs[gActiveBank]].callback = sub_80313A0;
     gBattleBankFunc[gActiveBank] = sub_813741C;
 }
@@ -1126,7 +1126,7 @@ void WallyHandleTrainerSlide(void)
       30);
     gSprites[gObjectBankIDs[gActiveBank]].oam.paletteNum = gActiveBank;
     gSprites[gObjectBankIDs[gActiveBank]].pos2.x = -96;
-    gSprites[gObjectBankIDs[gActiveBank]].data0 = 2;
+    gSprites[gObjectBankIDs[gActiveBank]].data[0] = 2;
     gSprites[gObjectBankIDs[gActiveBank]].callback = sub_80313A0;
     gBattleBankFunc[gActiveBank] = sub_8137908;
 }
@@ -1440,7 +1440,7 @@ void WallyHandleHitAnimation(void)
     else
     {
         gDoingBattleAnim = 1;
-        gSprites[gObjectBankIDs[gActiveBank]].data1 = 0;
+        gSprites[gObjectBankIDs[gActiveBank]].data[1] = 0;
         sub_8047858(gActiveBank);
         gBattleBankFunc[gActiveBank] = bx_blink_t5;
     }
@@ -1482,12 +1482,12 @@ void WallyHandleTrainerBallThrow(void)
     u8 taskId;
 
     oamt_add_pos2_onto_pos1(&gSprites[gObjectBankIDs[gActiveBank]]);
-    gSprites[gObjectBankIDs[gActiveBank]].data0 = 50;
-    gSprites[gObjectBankIDs[gActiveBank]].data2 = -40;
-    gSprites[gObjectBankIDs[gActiveBank]].data4 = gSprites[gObjectBankIDs[gActiveBank]].pos1.y;
+    gSprites[gObjectBankIDs[gActiveBank]].data[0] = 50;
+    gSprites[gObjectBankIDs[gActiveBank]].data[2] = -40;
+    gSprites[gObjectBankIDs[gActiveBank]].data[4] = gSprites[gObjectBankIDs[gActiveBank]].pos1.y;
     gSprites[gObjectBankIDs[gActiveBank]].callback = sub_8078B34;
-    gSprites[gObjectBankIDs[gActiveBank]].data5 = gActiveBank;
-    StoreSpriteCallbackInData6(&gSprites[gObjectBankIDs[gActiveBank]], sub_8030E38);
+    gSprites[gObjectBankIDs[gActiveBank]].data[5] = gActiveBank;
+    StoreSpriteCallbackInData(&gSprites[gObjectBankIDs[gActiveBank]], sub_8030E38);
     StartSpriteAnim(&gSprites[gObjectBankIDs[gActiveBank]], 1);
     paletteNum = AllocSpritePalette(0xD6F8);
     LoadCompressedPalette(gTrainerBackPicPaletteTable[2].data, 0x100 + paletteNum * 16, 32);
@@ -1514,14 +1514,14 @@ void sub_81398BC(u8 bank)
       sub_8077ABC(bank, 2),
       sub_8077F68(bank),
       sub_8079E90(bank));
-    gSprites[gUnknown_0300434C[bank]].data1 = gObjectBankIDs[bank];
-    gSprites[gObjectBankIDs[bank]].data0 = bank;
-    gSprites[gObjectBankIDs[bank]].data2 = species;
+    gSprites[gUnknown_0300434C[bank]].data[1] = gObjectBankIDs[bank];
+    gSprites[gObjectBankIDs[bank]].data[0] = bank;
+    gSprites[gObjectBankIDs[bank]].data[2] = species;
     gSprites[gObjectBankIDs[bank]].oam.paletteNum = bank;
     StartSpriteAnim(&gSprites[gObjectBankIDs[bank]], gBattleMonForms[bank]);
     gSprites[gObjectBankIDs[bank]].invisible = TRUE;
     gSprites[gObjectBankIDs[bank]].callback = SpriteCallbackDummy;
-    gSprites[gUnknown_0300434C[bank]].data0 = sub_8046400(0, 0xFF);
+    gSprites[gUnknown_0300434C[bank]].data[0] = sub_8046400(0, 0xFF);
 }
 
 void sub_8139A2C(u8 taskId)

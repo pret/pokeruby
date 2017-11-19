@@ -347,7 +347,7 @@ static void sub_8089F44(u8 taskID)
 {
     if (!gPaletteFade.active)
     {
-        u8 spriteID = gSprites[gTasks[taskID].data[3] >> 8].data0;
+        u8 spriteID = gSprites[gTasks[taskID].data[3] >> 8].data[0];
         DestroyTask(taskID);
         ewram1B000_alt.unk262 = 1;
         ShowPokemonSummaryScreen(gPlayerParty, spriteID, gPlayerPartyCount - 1, sub_8089F14, 0);

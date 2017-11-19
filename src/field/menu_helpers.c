@@ -405,15 +405,15 @@ void CreateVerticalScrollIndicators(u8 id, u16 x, u16 y)
         if (gUnknown_020388C0[0] == 0xFF)
         {
             gUnknown_020388C0[0] = CreateSprite(&gSpriteTemplate_83E59D0, x, y, 0);
-            gSprites[gUnknown_020388C0[0]].data2 = -1;
+            gSprites[gUnknown_020388C0[0]].data[2] = -1;
             if (gUnknown_020388C0[1] != 0xFF)
             {
                 gSprites[gUnknown_020388C0[0]].pos2.y = gSprites[gUnknown_020388C0[1]].pos2.y * -1;
-                gSprites[gUnknown_020388C0[0]].data3 = gSprites[gUnknown_020388C0[1]].data3;
+                gSprites[gUnknown_020388C0[0]].data[3] = gSprites[gUnknown_020388C0[1]].data[3];
             }
             else
             {
-                gSprites[gUnknown_020388C0[0]].data3 = 0;
+                gSprites[gUnknown_020388C0[0]].data[3] = 0;
             }
         }
         break;
@@ -422,15 +422,15 @@ void CreateVerticalScrollIndicators(u8 id, u16 x, u16 y)
         if (gUnknown_020388C0[1] == 0xFF)
         {
             gUnknown_020388C0[1] = CreateSprite(&gSpriteTemplate_83E59D0, x, y, 0);
-            gSprites[gUnknown_020388C0[1]].data2 = 1;
+            gSprites[gUnknown_020388C0[1]].data[2] = 1;
             if (gUnknown_020388C0[0] != 0xFF)
             {
                 gSprites[gUnknown_020388C0[1]].pos2.y = gSprites[gUnknown_020388C0[0]].pos2.y * -1;
-                gSprites[gUnknown_020388C0[1]].data3 = gSprites[gUnknown_020388C0[0]].data3;
+                gSprites[gUnknown_020388C0[1]].data[3] = gSprites[gUnknown_020388C0[0]].data[3];
             }
             else
             {
-                gSprites[gUnknown_020388C0[1]].data3 = 0;
+                gSprites[gUnknown_020388C0[1]].data[3] = 0;
             }
         }
         break;
@@ -439,15 +439,15 @@ void CreateVerticalScrollIndicators(u8 id, u16 x, u16 y)
         if (gUnknown_020388C0[2] == 0xFF)
         {
             gUnknown_020388C0[2] = CreateSprite(&gSpriteTemplate_83E59E8, x, y, 0);
-            gSprites[gUnknown_020388C0[2]].data0 = -1;
+            gSprites[gUnknown_020388C0[2]].data[0] = -1;
             if (gUnknown_020388C0[3] != 0xFF)
             {
                 gSprites[gUnknown_020388C0[2]].pos2.x = gSprites[gUnknown_020388C0[3]].pos2.x * -1;
-                gSprites[gUnknown_020388C0[2]].data1 = gSprites[gUnknown_020388C0[3]].data1;
+                gSprites[gUnknown_020388C0[2]].data[1] = gSprites[gUnknown_020388C0[3]].data[1];
             }
             else
             {
-                gSprites[gUnknown_020388C0[2]].data1 = 0;
+                gSprites[gUnknown_020388C0[2]].data[1] = 0;
             }
         }
         break;
@@ -456,15 +456,15 @@ void CreateVerticalScrollIndicators(u8 id, u16 x, u16 y)
         if (gUnknown_020388C0[3] == 0xFF)
         {
             gUnknown_020388C0[3] = CreateSprite(&gSpriteTemplate_83E59E8, x, y, 0);
-            gSprites[gUnknown_020388C0[3]].data0 = 1;
+            gSprites[gUnknown_020388C0[3]].data[0] = 1;
             if (gUnknown_020388C0[2] != 0xFF)
             {
                 gSprites[gUnknown_020388C0[3]].pos2.x = gSprites[gUnknown_020388C0[2]].pos2.x * -1;
-                gSprites[gUnknown_020388C0[3]].data1 = gSprites[gUnknown_020388C0[2]].data1;
+                gSprites[gUnknown_020388C0[3]].data[1] = gSprites[gUnknown_020388C0[2]].data[1];
             }
             else
             {
-                gSprites[gUnknown_020388C0[3]].data1 = 0;
+                gSprites[gUnknown_020388C0[3]].data[1] = 0;
             }
         }
         break;
@@ -502,23 +502,23 @@ void BuyMenuFreeMemory(void)
 
 static void sub_80F9834(struct Sprite *sprite)
 {
-    if (sprite->data1 == 0)
+    if (sprite->data[1] == 0)
     {
-        sprite->pos2.x += sprite->data0;
+        sprite->pos2.x += sprite->data[0];
     }
-    if (sprite->data3 == 0)
+    if (sprite->data[3] == 0)
     {
-        sprite->pos2.y += sprite->data2;
+        sprite->pos2.y += sprite->data[2];
     }
-    sprite->data1++;
-    sprite->data3++;
-    if (sprite->data1 > 2)
+    sprite->data[1]++;
+    sprite->data[3]++;
+    if (sprite->data[1] > 2)
     {
-        sprite->data1 = 0;
+        sprite->data[1] = 0;
     }
-    if (sprite->data3 > 2)
+    if (sprite->data[3] > 2)
     {
-        sprite->data3 = 0;
+        sprite->data[3] = 0;
     }
     if (sprite->pos2.x == 8 || sprite->pos2.x == -8)
     {
@@ -552,8 +552,8 @@ static void sub_80F9914(u8 id)
     {
         gSprites[gUnknown_020388C0[id]].pos2.x = 0;
         gSprites[gUnknown_020388C0[id]].pos2.y = 0;
-        gSprites[gUnknown_020388C0[id]].data1 = 0;
-        gSprites[gUnknown_020388C0[id]].data3 = 0;
+        gSprites[gUnknown_020388C0[id]].data[1] = 0;
+        gSprites[gUnknown_020388C0[id]].data[3] = 0;
     }
 }
 

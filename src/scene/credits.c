@@ -520,7 +520,7 @@ static void task_a_8143B38(u8 taskIdA)
 
 static void task_a_8143B68(u8 taskIdA)
 {
-    u16 data11;
+    u16 data1;
 
     if (gTasks[taskIdA].data[TDA_4])
     {
@@ -535,18 +535,18 @@ static void task_a_8143B68(u8 taskIdA)
     }
 
     gUnknown_02039320 = 0;
-    data11 = gTasks[taskIdA].data[TDA_11];
+    data1 = gTasks[taskIdA].data[TDA_11];
 
     if (gTasks[taskIdA].data[TDA_11] == 1)
     {
-        gTasks[taskIdA].data[TDA_13] = data11;
+        gTasks[taskIdA].data[TDA_13] = data1;
         gTasks[taskIdA].data[TDA_11] = 0;
         BeginNormalPaletteFade(-1, 0, 0, 16, 0);
         gTasks[taskIdA].func = task_a_8143BFC;
     }
     else if (gTasks[taskIdA].data[TDA_11] == 2)
     {
-        gTasks[taskIdA].data[TDA_13] = data11;
+        gTasks[taskIdA].data[TDA_13] = data1;
         gTasks[taskIdA].data[TDA_11] = 0;
         BeginNormalPaletteFade(-1, 0, 0, 16, 0);
         gTasks[taskIdA].func = task_a_8143CC0;
@@ -956,12 +956,12 @@ static void task_d_8144514(u8 taskIdD)
         if (r6->unk8C < r6->unk8E - 1)
         {
             r6->unk8C++;
-            gSprites[r2].data3 = 50;
+            gSprites[r2].data[3] = 50;
         }
         else
         {
             r6->unk8C = 0;
-            gSprites[r2].data3 = 512;
+            gSprites[r2].data[3] = 512;
         }
         r6->unk88++;
         if (r6->unk8A == 2)
@@ -996,7 +996,7 @@ void task_c_8144664(u8 taskIdC)
         }
         else
         {
-            gSprites[gTasks[taskIdC].data[TDC_2]].data0 = 2;
+            gSprites[gTasks[taskIdC].data[TDC_2]].data[0] = 2;
             gTasks[taskIdC].data[TDC_5] = 0;
             gTasks[taskIdC].data[TDC_0]++;
         }
@@ -1013,8 +1013,8 @@ void task_c_8144664(u8 taskIdC)
         }
         break;
     case 3:
-        gSprites[gTasks[taskIdC].data[TDC_2]].data0 = 3;
-        gSprites[gTasks[taskIdC].data[TDC_3]].data0 = 1;
+        gSprites[gTasks[taskIdC].data[TDC_2]].data[0] = 3;
+        gSprites[gTasks[taskIdC].data[TDC_3]].data[0] = 1;
         gTasks[taskIdC].data[TDC_4] = 120;
         gTasks[taskIdC].data[TDC_0]++;
         break;
@@ -1037,7 +1037,7 @@ void task_c_8144664(u8 taskIdC)
         }
         else
         {
-            gSprites[gTasks[taskIdC].data[TDC_2]].data0 = 1;
+            gSprites[gTasks[taskIdC].data[TDC_2]].data[0] = 1;
             gTasks[taskIdC].data[TDC_0]++;
         }
         break;
@@ -1045,16 +1045,16 @@ void task_c_8144664(u8 taskIdC)
         gTasks[taskIdC].data[TDC_0] = 50;
         break;
     case 10:
-        gSprites[gTasks[taskIdC].data[TDC_3]].data0 = 2;
+        gSprites[gTasks[taskIdC].data[TDC_3]].data[0] = 2;
         gTasks[taskIdC].data[TDC_0] = 50;
         break;
     case 20:
-        gSprites[gTasks[taskIdC].data[TDC_2]].data0 = 4;
+        gSprites[gTasks[taskIdC].data[TDC_2]].data[0] = 4;
         gTasks[taskIdC].data[TDC_0] = 50;
         break;
     case 30:
-        gSprites[gTasks[taskIdC].data[TDC_2]].data0 = 5;
-        gSprites[gTasks[taskIdC].data[TDC_3]].data0 = 3;
+        gSprites[gTasks[taskIdC].data[TDC_2]].data[0] = 5;
+        gSprites[gTasks[taskIdC].data[TDC_3]].data[0] = 3;
         gTasks[taskIdC].data[TDC_0] = 50;
         break;
     case 50:
@@ -1132,8 +1132,8 @@ static void sub_8144A68(u8 data, u8 taskIdA)
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.x = 272;
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].pos1.y = 46;
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.y = 46;
-        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].data0 = 0;
-        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].data0 = 0;
+        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].data[0] = 0;
+        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].data[0] = 0;
         gTasks[taskIdA].data[TDA_0] = sub_8148EC0(0, 0x2000, 0x20, 8);
         break;
     case 1:
@@ -1143,8 +1143,8 @@ static void sub_8144A68(u8 data, u8 taskIdA)
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.x = 272;
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].pos1.y = 46;
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.y = 46;
-        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].data0 = 0;
-        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].data0 = 0;
+        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].data[0] = 0;
+        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].data[0] = 0;
         gTasks[taskIdA].data[TDA_0] = sub_8148EC0(0, 0x2000, 0x20, 8);
         break;
     case 2:
@@ -1154,8 +1154,8 @@ static void sub_8144A68(u8 data, u8 taskIdA)
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.x = 272;
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].pos1.y = 46;
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.y = 46;
-        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].data0 = 0;
-        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].data0 = 0;
+        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].data[0] = 0;
+        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].data[0] = 0;
         gTasks[taskIdA].data[TDA_0] = sub_8148EC0(1, 0x2000, 0x200, 8);
         break;
     case 3:
@@ -1165,8 +1165,8 @@ static void sub_8144A68(u8 data, u8 taskIdA)
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.x = -32;
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].pos1.y = 46;
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.y = 46;
-        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].data0 = 0;
-        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].data0 = 0;
+        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].data[0] = 0;
+        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].data[0] = 0;
         gTasks[taskIdA].data[TDA_0] = sub_8148EC0(1, 0x2000, 0x200, 8);
         break;
     case 4:
@@ -1176,8 +1176,8 @@ static void sub_8144A68(u8 data, u8 taskIdA)
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.x = 152;
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].pos1.y = 46;
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.y = 46;
-        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].data0 = 0;
-        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].data0 = 0;
+        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].data[0] = 0;
+        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].data[0] = 0;
         gTasks[taskIdA].data[TDA_0] = sub_8148EC0(2, 0x2000, 0x200, 8);
         break;
     }
@@ -1384,7 +1384,7 @@ static void spritecb_player_8145378(struct Sprite *sprite)
         return;
     }
 
-    switch (sprite->data0)
+    switch (sprite->data[0])
     {
     case 0:
         StartSpriteAnimIfDifferent(sprite, 0);
@@ -1421,7 +1421,7 @@ static void spritecb_rival_8145420(struct Sprite *sprite)
         return;
     }
 
-    switch (sprite->data0)
+    switch (sprite->data[0])
     {
     case 0:
         sprite->pos2.y = 0;
@@ -1437,9 +1437,9 @@ static void spritecb_rival_8145420(struct Sprite *sprite)
         sprite->pos2.y = -gUnknown_0203935A;
         break;
     case 2:
-        sprite->data7 += 1;
+        sprite->data[7] += 1;
         StartSpriteAnimIfDifferent(sprite, 0);
-        if ((sprite->data7 & 3) == 0)
+        if ((sprite->data[7] & 3) == 0)
             sprite->pos1.x += 1;
         break;
     case 3:
@@ -1458,74 +1458,74 @@ void spritecb_81454E0(struct Sprite *sprite)
         return;
     }
 
-    sprite->data7 += 1;
-    switch (sprite->data0)
+    sprite->data[7] += 1;
+    switch (sprite->data[0])
     {
     case 0:
     default:
         sprite->oam.affineMode = 1;
-        sprite->oam.matrixNum = sprite->data1;
-        sprite->data2 = 16;
-        SetOamMatrix(sprite->data1, 0x10000 / sprite->data2, 0, 0, 0x10000 / sprite->data2);
+        sprite->oam.matrixNum = sprite->data[1];
+        sprite->data[2] = 16;
+        SetOamMatrix(sprite->data[1], 0x10000 / sprite->data[2], 0, 0, 0x10000 / sprite->data[2]);
         sprite->invisible = FALSE;
-        sprite->data0 = 1;
+        sprite->data[0] = 1;
         break;
     case 1:
-        if (sprite->data2 < 256)
+        if (sprite->data[2] < 256)
         {
-            sprite->data2 += 8;
-            SetOamMatrix(sprite->data1, 0x10000 / sprite->data2, 0, 0, 0x10000 / sprite->data2);
+            sprite->data[2] += 8;
+            SetOamMatrix(sprite->data[1], 0x10000 / sprite->data[2], 0, 0, 0x10000 / sprite->data[2]);
         }
         else
         {
-            sprite->data0 += 1;
+            sprite->data[0] += 1;
         }
-        switch (sprite->data1)
+        switch (sprite->data[1])
         {
         case 1:
-            if ((sprite->data7 & 3) == 0)
+            if ((sprite->data[7] & 3) == 0)
                 sprite->pos1.y += 1;
             sprite->pos1.x -= 2;
             break;
         case 2:
             break;
         case 3:
-            if ((sprite->data7 & 3) == 0)
+            if ((sprite->data[7] & 3) == 0)
                 sprite->pos1.y += 1;
             sprite->pos1.x += 2;
             break;
         }
         break;
     case 2:
-        if (sprite->data3 != 0)
+        if (sprite->data[3] != 0)
         {
-            sprite->data3 -= 1;
+            sprite->data[3] -= 1;
         }
         else
         {
             REG_BLDCNT = 0xF40;
             REG_BLDALPHA = 0x10;
             sprite->oam.objMode = 1;
-            sprite->data3 = 16;
-            sprite->data0 += 1;
+            sprite->data[3] = 16;
+            sprite->data[0] += 1;
         }
         break;
     case 3:
-        if (sprite->data3 != 0)
+        if (sprite->data[3] != 0)
         {
             int data3;
             vu16 *reg;
 
-            sprite->data3 -= 1;
+            sprite->data[3] -= 1;
 
             reg = &REG_BLDALPHA;
-            data3 = 16 - sprite->data3;
-            *reg = (data3 << 8) + sprite->data3;
+            data3 = 16 - sprite->data[3];
+            *reg = (data3 << 8) + sprite->data[3];
         }
         else
         {
             sprite->invisible = TRUE;
-            sprite->data0 = 10;
+            sprite->data[0] = 10;
         }
         break;
     case 10:
@@ -1575,12 +1575,12 @@ static u8 sub_81456B4(u16 species, u16 x, u16 y, u16 position)
     spriteId = CreateSprite(&gUnknown_02024E8C, x, y, 0);
     gSprites[spriteId].oam.paletteNum = position;
     gSprites[spriteId].oam.priority = 1;
-    gSprites[spriteId].data1 = position + 1;
+    gSprites[spriteId].data[1] = position + 1;
     gSprites[spriteId].invisible = TRUE;
     gSprites[spriteId].callback = spritecb_81454E0;
 
     spriteId2 = CreateSprite(&gSpriteTemplate_840CAEC, gSprites[spriteId].pos1.x, gSprites[spriteId].pos1.y, 1);
-    gSprites[spriteId2].data0 = spriteId;
+    gSprites[spriteId2].data[0] = spriteId;
 
     StartSpriteAnimIfDifferent(&gSprites[spriteId2], position);
 
@@ -1589,18 +1589,18 @@ static u8 sub_81456B4(u16 species, u16 x, u16 y, u16 position)
 
 void spritecb_814580C(struct Sprite *sprite)
 {
-    if (gSprites[sprite->data0].data0 == 10 || gUnknown_0203935C)
+    if (gSprites[sprite->data[0]].data[0] == 10 || gUnknown_0203935C)
     {
         DestroySprite(sprite);
         return;
     }
 
-    sprite->invisible = gSprites[sprite->data0].invisible;
-    sprite->oam.objMode = gSprites[sprite->data0].oam.objMode;
-    sprite->oam.affineMode = gSprites[sprite->data0].oam.affineMode;
-    sprite->oam.matrixNum = gSprites[sprite->data0].oam.matrixNum;
-    sprite->pos1.x = gSprites[sprite->data0].pos1.x;
-    sprite->pos1.y = gSprites[sprite->data0].pos1.y;
+    sprite->invisible = gSprites[sprite->data[0]].invisible;
+    sprite->oam.objMode = gSprites[sprite->data[0]].oam.objMode;
+    sprite->oam.affineMode = gSprites[sprite->data[0]].oam.affineMode;
+    sprite->oam.matrixNum = gSprites[sprite->data[0]].oam.matrixNum;
+    sprite->pos1.x = gSprites[sprite->data[0]].pos1.x;
+    sprite->pos1.y = gSprites[sprite->data[0]].pos1.y;
 }
 
 static void sub_81458DC(void)

@@ -2343,7 +2343,7 @@ u8 sub_805AFCC(struct MapObjectTemplate *mapObjTemplate, struct SpriteTemplate *
     sprite->pos1.y += 16 + sprite->centerToCornerVecY;
     sprite->oam.paletteNum = gfxInfo->paletteSlot;
     sprite->coordOffsetEnabled = TRUE;
-    sprite->data0 = mapObjectId;
+    sprite->data[0] = mapObjectId;
     mapObject->spriteId = spriteId;
     mapObject->mapobj_bit_12 = gfxInfo->inanimate;
     if (!mapObject->mapobj_bit_12)
@@ -2489,8 +2489,8 @@ u8 sub_805B410(u8 graphicsId, u8 b, s16 x, s16 y, u8 elevation, u8 direction)
         sprite->pos1.y += sprite->centerToCornerVecY;
         sprite->oam.paletteNum = gfxInfo->paletteSlot;
         sprite->coordOffsetEnabled = TRUE;
-        sprite->data0 = b;
-        sprite->data1 = elevation;
+        sprite->data[0] = b;
+        sprite->data[1] = elevation;
         if (gfxInfo->paletteSlot == 10)
             npc_load_two_palettes__and_record(gfxInfo->paletteTag1, gfxInfo->paletteSlot);
         if (subspriteTables != NULL)
@@ -2640,7 +2640,7 @@ void sub_805B75C(u8 a, s16 b, s16 c)
             SetSubspriteTables(sprite, subspriteTables);
         sprite->oam.paletteNum = gfxInfo->paletteSlot;
         sprite->coordOffsetEnabled = TRUE;
-        sprite->data0 = a;
+        sprite->data[0] = a;
         mapObject->spriteId = spriteId;
         if (!mapObject->mapobj_bit_12 && mapObject->animPattern != 11)
             StartSpriteAnim(sprite, FieldObjectDirectionToImageAnimId(mapObject->mapobj_unk_18));
@@ -3042,7 +3042,7 @@ u8 AddCameraObject(u8 a)
     u8 spriteId = CreateSprite(&gSpriteTemplate_830FD24, 0, 0, 4);
 
     gSprites[spriteId].invisible = TRUE;
-    gSprites[spriteId].data0 = a;
+    gSprites[spriteId].data[0] = a;
     return spriteId;
 }
 
@@ -3050,35 +3050,35 @@ void ObjectCB_CameraObject(struct Sprite *sprite)
 {
     void (*cameraObjectFuncs[3])(struct Sprite *);
     memcpy(cameraObjectFuncs, gCameraObjectFuncs, sizeof gCameraObjectFuncs);
-    cameraObjectFuncs[sprite->data1](sprite);
+    cameraObjectFuncs[sprite->data[1]](sprite);
 }
 
 void CameraObject_0(struct Sprite *sprite)
 {
-    sprite->pos1.x = gSprites[sprite->data0].pos1.x;
-    sprite->pos1.y = gSprites[sprite->data0].pos1.y;
+    sprite->pos1.x = gSprites[sprite->data[0]].pos1.x;
+    sprite->pos1.y = gSprites[sprite->data[0]].pos1.y;
     sprite->invisible = TRUE;
-    sprite->data1 = 1;
+    sprite->data[1] = 1;
     CameraObject_1(sprite);
 }
 
 void CameraObject_1(struct Sprite *sprite)
 {
-    s16 x = gSprites[sprite->data0].pos1.x;
-    s16 y = gSprites[sprite->data0].pos1.y;
+    s16 x = gSprites[sprite->data[0]].pos1.x;
+    s16 y = gSprites[sprite->data[0]].pos1.y;
 
-    sprite->data2 = x - sprite->pos1.x;
-    sprite->data3 = y - sprite->pos1.y;
+    sprite->data[2] = x - sprite->pos1.x;
+    sprite->data[3] = y - sprite->pos1.y;
     sprite->pos1.x = x;
     sprite->pos1.y = y;
 }
 
 void CameraObject_2(struct Sprite *sprite)
 {
-    sprite->pos1.x = gSprites[sprite->data0].pos1.x;
-    sprite->pos1.y = gSprites[sprite->data0].pos1.y;
-    sprite->data2 = 0;
-    sprite->data3 = 0;
+    sprite->pos1.x = gSprites[sprite->data[0]].pos1.x;
+    sprite->pos1.y = gSprites[sprite->data[0]].pos1.y;
+    sprite->data[2] = 0;
+    sprite->data[3] = 0;
 }
 
 struct Sprite *FindCameraObject(void)
@@ -3099,7 +3099,7 @@ void CameraObjectReset1(void)
 
     if (cameraSprite != NULL)
     {
-        cameraSprite->data1 = 0;
+        cameraSprite->data[1] = 0;
         cameraSprite->callback(cameraSprite);
     }
 }
@@ -3110,7 +3110,7 @@ void CameraObjectSetFollowedObjectId(u8 spriteId)
 
     if (cameraSprite != NULL)
     {
-        cameraSprite->data0 = spriteId;
+        cameraSprite->data[0] = spriteId;
         CameraObjectReset1();
     }
 }
@@ -3122,14 +3122,14 @@ u8 CameraObjectGetFollowedObjectId(void)
     if (cameraSprite == NULL)
         return 64;
     else
-        return cameraSprite->data0;
+        return cameraSprite->data[0];
 }
 
 void CameraObjectReset2(void)
 {
     struct Sprite *cameraSprite = FindCameraObject();
 
-    cameraSprite->data1 = 2;
+    cameraSprite->data[1] = 2;
 }
 
 u8 unref_sub_805C43C(struct Sprite *src, s16 x, s16 y, u8 subpriority)
@@ -3333,7 +3333,7 @@ fieldmap_object_cb(sub_805C8AC, sub_805C8D0, gUnknown_08375224);
 u8 sub_805C8F0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
-    sprite->data1 = 1;
+    sprite->data[1] = 1;
     return 1;
 }
 
@@ -3342,7 +3342,7 @@ extern void FieldObjectSetRegularAnim(struct MapObject *, struct Sprite *, u8);
 u8 sub_805C904(struct MapObject *mapObject, struct Sprite *sprite)
 {
     FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
-    sprite->data1 = 2;
+    sprite->data[1] = 2;
     return 1;
 }
 
@@ -3356,7 +3356,7 @@ u8 sub_805C930(struct MapObject *mapObject, struct Sprite *sprite)
         return 0;
     }
     sub_8064820(sprite, gUnknown_0837520C[Random() & 3]);
-    sprite->data1 = 3;
+    sprite->data[1] = 3;
     return 1;
 }
 
@@ -3366,7 +3366,7 @@ u8 sub_805C96C(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8064824(sprite) != 0)
     {
-        sprite->data1 = 4;
+        sprite->data[1] = 4;
         return 1;
     }
     return 0;
@@ -3381,10 +3381,10 @@ u8 sub_805C98C(struct MapObject *mapObject, struct Sprite *sprite)
     memcpy(directions, gUnknown_08375240, 4);
     direction = directions[Random() & 3];
     FieldObjectSetDirection(mapObject, direction);
-    sprite->data1 = 5;
+    sprite->data[1] = 5;
     if (sub_805FF20(mapObject, direction) != 0)
     {
-        sprite->data1 = 1;
+        sprite->data[1] = 1;
     }
     return 1;
 }
@@ -3393,7 +3393,7 @@ u8 sub_805C9D8(struct MapObject *mapObject, struct Sprite *sprite)
 {
     FieldObjectSetRegularAnim(mapObject, sprite, GetGoSpeed0AnimId(mapObject->placeholder18));
     mapObject->mapobj_bit_1 = 1;
-    sprite->data1 = 6;
+    sprite->data[1] = 6;
     return 1;
 }
 
@@ -3402,7 +3402,7 @@ u8 sub_805CA08(struct MapObject *mapObject, struct Sprite *sprite)
     if (FieldObjectExecRegularAnim(mapObject, sprite) != 0)
     {
         mapObject->mapobj_bit_1 = 0;
-        sprite->data1 = 1;
+        sprite->data[1] = 1;
     }
     return 0;
 }
@@ -3649,14 +3649,14 @@ fieldmap_object_cb(sub_805CDE8, sub_805CE0c, gUnknown_08375270);
 u8 sub_805CE2C(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
-    sprite->data1 = 1;
+    sprite->data[1] = 1;
     return 1;
 }
 
 u8 sub_805CE40(struct MapObject *mapObject, struct Sprite *sprite)
 {
     FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
-    sprite->data1 = 2;
+    sprite->data[1] = 2;
     return 1;
 }
 
@@ -3666,7 +3666,7 @@ u8 sub_805CE6C(struct MapObject *mapObject, struct Sprite *sprite)
     {
         sub_8064820(sprite, gUnknown_0837520C[Random() & 3]);
         mapObject->mapobj_bit_1 = 0;
-        sprite->data1 = 3;
+        sprite->data[1] = 3;
     }
     return 0;
 }
@@ -3675,7 +3675,7 @@ u8 sub_805CEB0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8064824(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
     {
-        sprite->data1 = 4;
+        sprite->data[1] = 4;
         return 1;
     }
     return 0;
@@ -3692,7 +3692,7 @@ u8 sub_805CEE0(struct MapObject *mapObject, struct Sprite *sprite)
         direction = directions[Random() & 3];
     }
     FieldObjectSetDirection(mapObject, direction);
-    sprite->data1 = 1;
+    sprite->data[1] = 1;
     return 1;
 }
 
@@ -3701,14 +3701,14 @@ fieldmap_object_cb(sub_805CF28, sub_805CF4C, gUnknown_08375284);
 u8 sub_805CF6C(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
-    sprite->data1 = 1;
+    sprite->data[1] = 1;
     return 1;
 }
 
 u8 sub_805CF80(struct MapObject *mapObject, struct Sprite *sprite)
 {
     FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
-    sprite->data1 = 2;
+    sprite->data[1] = 2;
     return 1;
 }
 
@@ -3719,7 +3719,7 @@ u8 sub_805CFAC(struct MapObject *mapObject, struct Sprite *sprite)
         return 0;
     }
     sub_8064820(sprite, gUnknown_0837520C[Random() & 3]);
-    sprite->data1 = 3;
+    sprite->data[1] = 3;
     return 1;
 }
 
@@ -3727,7 +3727,7 @@ u8 sub_805CFE8(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8064824(sprite) != 0)
     {
-        sprite->data1 = 4;
+        sprite->data[1] = 4;
         return 1;
     }
     return 0;
@@ -3740,10 +3740,10 @@ u8 sub_805D008(struct MapObject *mapObject, struct Sprite *sprite)
     memcpy(directions, gUnknown_083752A0, 2);
     direction = directions[Random() & 1];
     FieldObjectSetDirection(mapObject, direction);
-    sprite->data1 = 5;
+    sprite->data[1] = 5;
     if (sub_805FF20(mapObject, direction) != 0)
     {
-        sprite->data1 = 1;
+        sprite->data[1] = 1;
     }
     return 1;
 }
@@ -3752,7 +3752,7 @@ u8 sub_805D054(struct MapObject *mapObject, struct Sprite *sprite)
 {
     FieldObjectSetRegularAnim(mapObject, sprite, GetGoSpeed0AnimId(mapObject->placeholder18));
     mapObject->mapobj_bit_1 = 1;
-    sprite->data1 = 6;
+    sprite->data[1] = 6;
     return 1;
 }
 
@@ -3761,7 +3761,7 @@ u8 sub_805D084(struct MapObject *mapObject, struct Sprite *sprite)
     if (FieldObjectExecRegularAnim(mapObject, sprite) != 0)
     {
         mapObject->mapobj_bit_1 = 0;
-        sprite->data1 = 1;
+        sprite->data[1] = 1;
     }
     return 0;
 }
@@ -3771,14 +3771,14 @@ fieldmap_object_cb(sub_805D0AC, sub_805D0D0, gUnknown_083752A4);
 u8 sub_805D0F0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
-    sprite->data1 = 1;
+    sprite->data[1] = 1;
     return 1;
 }
 
 u8 sub_805D104(struct MapObject *mapObject, struct Sprite *sprite)
 {
     FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
-    sprite->data1 = 2;
+    sprite->data[1] = 2;
     return 1;
 }
 
@@ -3789,7 +3789,7 @@ u8 sub_805D130(struct MapObject *mapObject, struct Sprite *sprite)
         return 0;
     }
     sub_8064820(sprite, gUnknown_0837520C[Random() & 3]);
-    sprite->data1 = 3;
+    sprite->data[1] = 3;
     return 1;
 }
 
@@ -3797,7 +3797,7 @@ u8 sub_805D16C(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8064824(sprite) != 0)
     {
-        sprite->data1 = 4;
+        sprite->data[1] = 4;
         return 1;
     }
     return 0;
@@ -3810,10 +3810,10 @@ u8 sub_805D18C(struct MapObject *mapObject, struct Sprite *sprite)
     memcpy(directions, gUnknown_083752C0, 2);
     direction = directions[Random() & 1];
     FieldObjectSetDirection(mapObject, direction);
-    sprite->data1 = 5;
+    sprite->data[1] = 5;
     if (sub_805FF20(mapObject, direction) != 0)
     {
-        sprite->data1 = 1;
+        sprite->data[1] = 1;
     }
     return 1;
 }
@@ -3822,7 +3822,7 @@ u8 sub_805D1D8(struct MapObject *mapObject, struct Sprite *sprite)
 {
     FieldObjectSetRegularAnim(mapObject, sprite, GetGoSpeed0AnimId(mapObject->placeholder18));
     mapObject->mapobj_bit_1 = 1;
-    sprite->data1 = 6;
+    sprite->data[1] = 6;
     return 1;
 }
 
@@ -3831,7 +3831,7 @@ u8 sub_805D208(struct MapObject *mapObject, struct Sprite *sprite)
     if (FieldObjectExecRegularAnim(mapObject, sprite) != 0)
     {
         mapObject->mapobj_bit_1 = 0;
-        sprite->data1 = 1;
+        sprite->data[1] = 1;
     }
     return 0;
 }
@@ -3842,7 +3842,7 @@ u8 sub_805D274(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
     FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
-    sprite->data1 = 1;
+    sprite->data[1] = 1;
     return 1;
 }
 
@@ -3850,7 +3850,7 @@ u8 sub_805D2A0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecRegularAnim(mapObject, sprite) != 0)
     {
-        sprite->data1 = 2;
+        sprite->data[1] = 2;
         return 1;
     }
     return 0;
@@ -3867,18 +3867,18 @@ u8 sub_805D314(struct MapObject *mapObject, struct Sprite *sprite);
 void FieldObjectCB_BerryTree(struct Sprite *sprite)
 {
     struct MapObject *mapObject;
-    mapObject = &gMapObjects[sprite->data0];
-    if (!(sprite->data7 & 1))
+    mapObject = &gMapObjects[sprite->data[0]];
+    if (!(sprite->data[7] & 1))
     {
         get_berry_tree_graphics(mapObject, sprite);
-        sprite->data7 |= 1;
+        sprite->data[7] |= 1;
     }
     meta_step(mapObject, sprite, sub_805D314);
 }
 
 u8 sub_805D314(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    return gUnknown_083752D0[sprite->data1](mapObject, sprite);
+    return gUnknown_083752D0[sprite->data[1]](mapObject, sprite);
 }
 
 u8 do_berry_tree_growth_sparkle_1(struct MapObject *mapObject, struct Sprite *sprite)
@@ -3890,7 +3890,7 @@ u8 do_berry_tree_growth_sparkle_1(struct MapObject *mapObject, struct Sprite *sp
     berryTreeStage = GetStageByBerryTreeId(mapObject->trainerRange_berryTreeId);
     if (!berryTreeStage)
     {
-        if (!(sprite->data7 & 4) && sprite->animNum == 4)
+        if (!(sprite->data[7] & 4) && sprite->animNum == 4)
         {
             gFieldEffectArguments[0] = mapObject->coords2.x;
             gFieldEffectArguments[1] = mapObject->coords2.y;
@@ -3906,12 +3906,12 @@ u8 do_berry_tree_growth_sparkle_1(struct MapObject *mapObject, struct Sprite *sp
     berryTreeStage--;
     if (sprite->animNum != berryTreeStage)
     {
-        sprite->data1 = 2;
+        sprite->data[1] = 2;
         return 1;
     }
     get_berry_tree_graphics(mapObject, sprite);
     FieldObjectSetRegularAnim(mapObject, sprite, 0x39);
-    sprite->data1 = 1;
+    sprite->data[1] = 1;
     return 1;
 }
 
@@ -3919,7 +3919,7 @@ u8 sub_805D3EC(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecRegularAnim(mapObject, sprite))
     {
-        sprite->data1 = 0;
+        sprite->data[1] = 0;
         return 1;
     }
     return 0;
@@ -3928,9 +3928,9 @@ u8 sub_805D3EC(struct MapObject *mapObject, struct Sprite *sprite)
 u8 do_berry_tree_growth_sparkle_2(struct MapObject *mapObject, struct Sprite *sprite)
 {
     mapObject->mapobj_bit_1 = 1;
-    sprite->data1 = 3;
-    sprite->data2 = 0;
-    sprite->data7 |= 2;
+    sprite->data[1] = 3;
+    sprite->data[2] = 0;
+    sprite->data[7] |= 2;
     gFieldEffectArguments[0] = mapObject->coords2.x;
     gFieldEffectArguments[1] = mapObject->coords2.y;
     gFieldEffectArguments[2] = sprite->subpriority - 1;
@@ -3941,14 +3941,14 @@ u8 do_berry_tree_growth_sparkle_2(struct MapObject *mapObject, struct Sprite *sp
 
 u8 sub_805D458(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    sprite->data2++;
-    mapObject->mapobj_bit_13 = ((sprite->data2 & 0x2) >> 1);
+    sprite->data[2]++;
+    mapObject->mapobj_bit_13 = ((sprite->data[2] & 0x2) >> 1);
     sprite->animPaused = 1;
-    if (sprite->data2 > 64)
+    if (sprite->data[2] > 64)
     {
         get_berry_tree_graphics(mapObject, sprite);
-        sprite->data1 = 4;
-        sprite->data2 = 0;
+        sprite->data[1] = 4;
+        sprite->data[2] = 0;
         return 1;
     }
     return 0;
@@ -3956,13 +3956,13 @@ u8 sub_805D458(struct MapObject *mapObject, struct Sprite *sprite)
 
 u8 sub_805D4A8(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    sprite->data2++;
-    mapObject->mapobj_bit_13 = ((sprite->data2 & 0x2) >> 1);
+    sprite->data[2]++;
+    mapObject->mapobj_bit_13 = ((sprite->data[2] & 0x2) >> 1);
     sprite->animPaused = 1;
-    if (sprite->data2 > 64)
+    if (sprite->data[2] > 64)
     {
-        sprite->data1 = 0;
-        sprite->data7 &= (-3);
+        sprite->data[1] = 0;
+        sprite->data[7] &= (-3);
         return 1;
     }
     return 0;
@@ -3973,14 +3973,14 @@ fieldmap_object_cb(sub_805D4F4, sub_805D518, gUnknown_083752E4);
 u8 sub_805D538(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
-    sprite->data1 = 1;
+    sprite->data[1] = 1;
     return 1;
 }
 
 u8 sub_805D54C(struct MapObject *mapObject, struct Sprite *sprite)
 {
     FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
-    sprite->data1 = 2;
+    sprite->data[1] = 2;
     return 1;
 }
 
@@ -3990,7 +3990,7 @@ u8 sub_805D578(struct MapObject *mapObject, struct Sprite *sprite)
     {
         sub_8064820(sprite, gUnknown_0837520C[Random() & 3]);
         mapObject->mapobj_bit_1 = 0;
-        sprite->data1 = 3;
+        sprite->data[1] = 3;
     }
     return 0;
 }
@@ -3999,7 +3999,7 @@ u8 sub_805D5BC(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8064824(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
     {
-        sprite->data1 = 4;
+        sprite->data[1] = 4;
         return 1;
     }
     return 0;
@@ -4016,7 +4016,7 @@ u8 sub_805D5EC(struct MapObject *mapObject, struct Sprite *sprite)
         direction = directions[Random() & 1];
     }
     FieldObjectSetDirection(mapObject, direction);
-    sprite->data1 = 1;
+    sprite->data[1] = 1;
     return 1;
 }
 
@@ -4025,14 +4025,14 @@ fieldmap_object_cb(sub_805D634, sub_805D658, gUnknown_083752F8);
 u8 sub_805D678(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
-    sprite->data1 = 1;
+    sprite->data[1] = 1;
     return 1;
 }
 
 u8 sub_805D68C(struct MapObject *mapObject, struct Sprite *sprite)
 {
     FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
-    sprite->data1 = 2;
+    sprite->data[1] = 2;
     return 1;
 }
 
@@ -4042,7 +4042,7 @@ u8 sub_805D6B8(struct MapObject *mapObject, struct Sprite *sprite)
     {
         sub_8064820(sprite, gUnknown_0837520C[Random() & 3]);
         mapObject->mapobj_bit_1 = 0;
-        sprite->data1 = 3;
+        sprite->data[1] = 3;
     }
     return 0;
 }
@@ -4051,7 +4051,7 @@ u8 sub_805D6FC(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8064824(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
     {
-        sprite->data1 = 4;
+        sprite->data[1] = 4;
         return 1;
     }
     return 0;
@@ -4068,7 +4068,7 @@ u8 sub_805D72C(struct MapObject *mapObject, struct Sprite *sprite)
         direction = directions[Random() & 1];
     }
     FieldObjectSetDirection(mapObject, direction);
-    sprite->data1 = 1;
+    sprite->data[1] = 1;
     return 1;
 }
 
@@ -4077,14 +4077,14 @@ fieldmap_object_cb(sub_805D774, sub_805D798, gUnknown_0837530C);
 u8 sub_805D7B8(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
-    sprite->data1 = 1;
+    sprite->data[1] = 1;
     return 1;
 }
 
 u8 sub_805D7CC(struct MapObject *mapObject, struct Sprite *sprite)
 {
     FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
-    sprite->data1 = 2;
+    sprite->data[1] = 2;
     return 1;
 }
 
@@ -4094,7 +4094,7 @@ u8 sub_805D7F8(struct MapObject *mapObject, struct Sprite *sprite)
     {
         sub_8064820(sprite, gUnknown_0837521C[Random() & 3]);
         mapObject->mapobj_bit_1 = 0;
-        sprite->data1 = 3;
+        sprite->data[1] = 3;
     }
     return 0;
 }
@@ -4103,7 +4103,7 @@ u8 sub_805D83C(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8064824(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
     {
-        sprite->data1 = 4;
+        sprite->data[1] = 4;
         return 1;
     }
     return 0;
@@ -4120,7 +4120,7 @@ u8 sub_805D86C(struct MapObject *mapObject, struct Sprite *sprite)
         direction = directions[Random() & 1];
     }
     FieldObjectSetDirection(mapObject, direction);
-    sprite->data1 = 1;
+    sprite->data[1] = 1;
     return 1;
 }
 
@@ -4129,14 +4129,14 @@ fieldmap_object_cb(sub_805D8B4, sub_805D8D8, gUnknown_08375324);
 u8 sub_805D8F8(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
-    sprite->data1 = 1;
+    sprite->data[1] = 1;
     return 1;
 }
 
 u8 sub_805D90C(struct MapObject *mapObject, struct Sprite *sprite)
 {
     FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
-    sprite->data1 = 2;
+    sprite->data[1] = 2;
     return 1;
 }
 
@@ -4146,7 +4146,7 @@ u8 sub_805D938(struct MapObject *mapObject, struct Sprite *sprite)
     {
         sub_8064820(sprite, gUnknown_0837521C[Random() & 3]);
         mapObject->mapobj_bit_1 = 0;
-        sprite->data1 = 3;
+        sprite->data[1] = 3;
     }
     return 0;
 }
@@ -4155,7 +4155,7 @@ u8 sub_805D97C(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8064824(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
     {
-        sprite->data1 = 4;
+        sprite->data[1] = 4;
         return 1;
     }
     return 0;
@@ -4172,7 +4172,7 @@ u8 sub_805D9AC(struct MapObject *mapObject, struct Sprite *sprite)
         direction = directions[Random() & 1];
     }
     FieldObjectSetDirection(mapObject, direction);
-    sprite->data1 = 1;
+    sprite->data[1] = 1;
     return 1;
 }
 
@@ -4181,14 +4181,14 @@ fieldmap_object_cb(sub_805D9F4, sub_805DA18, gUnknown_0837533C);
 u8 sub_805DA38(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
-    sprite->data1 = 1;
+    sprite->data[1] = 1;
     return 1;
 }
 
 u8 sub_805DA4C(struct MapObject *mapObject, struct Sprite *sprite)
 {
     FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
-    sprite->data1 = 2;
+    sprite->data[1] = 2;
     return 1;
 }
 
@@ -4198,7 +4198,7 @@ u8 sub_805DA78(struct MapObject *mapObject, struct Sprite *sprite)
     {
         sub_8064820(sprite, gUnknown_0837521C[Random() & 3]);
         mapObject->mapobj_bit_1 = 0;
-        sprite->data1 = 3;
+        sprite->data[1] = 3;
     }
     return 0;
 }
@@ -4207,7 +4207,7 @@ u8 sub_805DABC(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8064824(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
     {
-        sprite->data1 = 4;
+        sprite->data[1] = 4;
         return 1;
     }
     return 0;
@@ -4224,7 +4224,7 @@ u8 sub_805DAEC(struct MapObject *mapObject, struct Sprite *sprite)
         direction = directions[Random() & 1];
     }
     FieldObjectSetDirection(mapObject, direction);
-    sprite->data1 = 1;
+    sprite->data[1] = 1;
     return 1;
 }
 
@@ -4233,14 +4233,14 @@ fieldmap_object_cb(sub_805DB34, sub_805DB58, gUnknown_08375354);
 u8 sub_805DB78(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
-    sprite->data1 = 1;
+    sprite->data[1] = 1;
     return 1;
 }
 
 u8 sub_805DB8C(struct MapObject *mapObject, struct Sprite *sprite)
 {
     FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
-    sprite->data1 = 2;
+    sprite->data[1] = 2;
     return 1;
 }
 
@@ -4250,7 +4250,7 @@ u8 sub_805DBB8(struct MapObject *mapObject, struct Sprite *sprite)
     {
         sub_8064820(sprite, gUnknown_0837521C[Random() & 3]);
         mapObject->mapobj_bit_1 = 0;
-        sprite->data1 = 3;
+        sprite->data[1] = 3;
     }
     return 0;
 }
@@ -4259,7 +4259,7 @@ u8 sub_805DBFC(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8064824(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
     {
-        sprite->data1 = 4;
+        sprite->data[1] = 4;
         return 1;
     }
     return 0;
@@ -4276,7 +4276,7 @@ u8 sub_805DC2C(struct MapObject *mapObject, struct Sprite *sprite)
         direction = directions[Random() & 1];
     }
     FieldObjectSetDirection(mapObject, direction);
-    sprite->data1 = 1;
+    sprite->data[1] = 1;
     return 1;
 }
 
@@ -4285,14 +4285,14 @@ fieldmap_object_cb(sub_805DC74, sub_805DC98, gUnknown_0837536C);
 u8 sub_805DCB8(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
-    sprite->data1 = 1;
+    sprite->data[1] = 1;
     return 1;
 }
 
 u8 sub_805DCCC(struct MapObject *mapObject, struct Sprite *sprite)
 {
     FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
-    sprite->data1 = 2;
+    sprite->data[1] = 2;
     return 1;
 }
 
@@ -4302,7 +4302,7 @@ u8 sub_805DCF8(struct MapObject *mapObject, struct Sprite *sprite)
     {
         sub_8064820(sprite, gUnknown_0837521C[Random() & 3]);
         mapObject->mapobj_bit_1 = 0;
-        sprite->data1 = 3;
+        sprite->data[1] = 3;
     }
     return 0;
 }
@@ -4311,7 +4311,7 @@ u8 sub_805DD3C(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8064824(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
     {
-        sprite->data1 = 4;
+        sprite->data[1] = 4;
         return 1;
     }
     return 0;
@@ -4328,7 +4328,7 @@ u8 sub_805DD6C(struct MapObject *mapObject, struct Sprite *sprite)
         direction = directions[Random() & 3];
     }
     FieldObjectSetDirection(mapObject, direction);
-    sprite->data1 = 1;
+    sprite->data[1] = 1;
     return 1;
 }
 
@@ -4337,14 +4337,14 @@ fieldmap_object_cb(sub_805DDB4, sub_805DDD8, gUnknown_08375384);
 u8 sub_805DDF8(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
-    sprite->data1 = 1;
+    sprite->data[1] = 1;
     return 1;
 }
 
 u8 sub_805DE0C(struct MapObject *mapObject, struct Sprite *sprite)
 {
     FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
-    sprite->data1 = 2;
+    sprite->data[1] = 2;
     return 1;
 }
 
@@ -4354,7 +4354,7 @@ u8 sub_805DE38(struct MapObject *mapObject, struct Sprite *sprite)
     {
         sub_8064820(sprite, gUnknown_0837521C[Random() & 3]);
         mapObject->mapobj_bit_1 = 0;
-        sprite->data1 = 3;
+        sprite->data[1] = 3;
     }
     return 0;
 }
@@ -4363,7 +4363,7 @@ u8 sub_805DE7C(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8064824(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
     {
-        sprite->data1 = 4;
+        sprite->data[1] = 4;
         return 1;
     }
     return 0;
@@ -4380,7 +4380,7 @@ u8 sub_805DEAC(struct MapObject *mapObject, struct Sprite *sprite)
         direction = directions[Random() & 3];
     }
     FieldObjectSetDirection(mapObject, direction);
-    sprite->data1 = 1;
+    sprite->data[1] = 1;
     return 1;
 }
 
@@ -4389,14 +4389,14 @@ fieldmap_object_cb(sub_805DEF4, sub_805DF18, gUnknown_0837539C);
 u8 sub_805DF38(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
-    sprite->data1 = 1;
+    sprite->data[1] = 1;
     return 1;
 }
 
 u8 sub_805DF4C(struct MapObject *mapObject, struct Sprite *sprite)
 {
     FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
-    sprite->data1 = 2;
+    sprite->data[1] = 2;
     return 1;
 }
 
@@ -4406,7 +4406,7 @@ u8 sub_805DF78(struct MapObject *mapObject, struct Sprite *sprite)
     {
         sub_8064820(sprite, gUnknown_0837521C[Random() & 3]);
         mapObject->mapobj_bit_1 = 0;
-        sprite->data1 = 3;
+        sprite->data[1] = 3;
     }
     return 0;
 }
@@ -4415,7 +4415,7 @@ u8 sub_805DFBC(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8064824(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
     {
-        sprite->data1 = 4;
+        sprite->data[1] = 4;
         return 1;
     }
     return 0;
@@ -4432,7 +4432,7 @@ u8 sub_805DFEC(struct MapObject *mapObject, struct Sprite *sprite)
         direction = directions[Random() & 3];
     }
     FieldObjectSetDirection(mapObject, direction);
-    sprite->data1 = 1;
+    sprite->data[1] = 1;
     return 1;
 }
 
@@ -4441,14 +4441,14 @@ fieldmap_object_cb(sub_805E034, sub_805E058, gUnknown_083753B4);
 u8 sub_805E078(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
-    sprite->data1 = 1;
+    sprite->data[1] = 1;
     return 1;
 }
 
 u8 sub_805E08C(struct MapObject *mapObject, struct Sprite *sprite)
 {
     FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
-    sprite->data1 = 2;
+    sprite->data[1] = 2;
     return 1;
 }
 
@@ -4458,7 +4458,7 @@ u8 sub_805E0B8(struct MapObject *mapObject, struct Sprite *sprite)
     {
         sub_8064820(sprite, gUnknown_0837521C[Random() & 3]);
         mapObject->mapobj_bit_1 = 0;
-        sprite->data1 = 3;
+        sprite->data[1] = 3;
     }
     return 0;
 }
@@ -4467,7 +4467,7 @@ u8 sub_805E0FC(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8064824(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
     {
-        sprite->data1 = 4;
+        sprite->data[1] = 4;
         return 1;
     }
     return 0;
@@ -4484,7 +4484,7 @@ u8 sub_805E12C(struct MapObject *mapObject, struct Sprite *sprite)
         direction = directions[Random() & 3];
     }
     FieldObjectSetDirection(mapObject, direction);
-    sprite->data1 = 1;
+    sprite->data[1] = 1;
     return 1;
 }
 
@@ -4494,7 +4494,7 @@ u8 sub_805E1B8(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
     FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
-    sprite->data1 = 1;
+    sprite->data[1] = 1;
     return 1;
 }
 
@@ -4503,7 +4503,7 @@ u8 sub_805E1E4(struct MapObject *mapObject, struct Sprite *sprite)
     if (FieldObjectExecRegularAnim(mapObject, sprite))
     {
         sub_8064820(sprite, 0x30);
-        sprite->data1 = 2;
+        sprite->data[1] = 2;
     }
     return 0;
 }
@@ -4512,7 +4512,7 @@ u8 sub_805E208(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8064824(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
     {
-        sprite->data1 = 3;
+        sprite->data[1] = 3;
     }
     return 0;
 }
@@ -4528,7 +4528,7 @@ u8 sub_805E234(struct MapObject *mapObject, struct Sprite *sprite)
         direction = directions[mapObject->mapobj_unk_18];
     }
     FieldObjectSetDirection(mapObject, direction);
-    sprite->data1 = 0;
+    sprite->data[1] = 0;
     return 1;
 }
 
@@ -4538,7 +4538,7 @@ u8 sub_805E2BC(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
     FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
-    sprite->data1 = 1;
+    sprite->data[1] = 1;
     return 1;
 }
 
@@ -4547,7 +4547,7 @@ u8 sub_805E2E8(struct MapObject *mapObject, struct Sprite *sprite)
     if (FieldObjectExecRegularAnim(mapObject, sprite))
     {
         sub_8064820(sprite, 0x30);
-        sprite->data1 = 2;
+        sprite->data[1] = 2;
     }
     return 0;
 }
@@ -4556,7 +4556,7 @@ u8 sub_805E30C(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8064824(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
     {
-        sprite->data1 = 3;
+        sprite->data[1] = 3;
     }
     return 0;
 }
@@ -4572,7 +4572,7 @@ u8 sub_805E338(struct MapObject *mapObject, struct Sprite *sprite)
         direction = directions[mapObject->mapobj_unk_18];
     }
     FieldObjectSetDirection(mapObject, direction);
-    sprite->data1 = 0;
+    sprite->data[1] = 0;
     return 1;
 }
 
@@ -4581,7 +4581,7 @@ fieldmap_object_cb(sub_805E37C, sub_805E3A0, gUnknown_083753FC);
 u8 sub_805E3C0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
-    sprite->data1 = 1;
+    sprite->data[1] = 1;
     return 1;
 }
 
@@ -4594,7 +4594,7 @@ u8 sub_805E3D4(struct MapObject *mapObject, struct Sprite *sprite)
         direction = GetOppositeDirection(direction);
     }
     FieldObjectSetDirection(mapObject, direction);
-    sprite->data1 = 2;
+    sprite->data[1] = 2;
     return 1;
 }
 
@@ -4622,7 +4622,7 @@ u8 sub_805E40C(struct MapObject *mapObject, struct Sprite *sprite)
     }
     FieldObjectSetRegularAnim(mapObject, sprite, goSpeed0AnimId);
     mapObject->mapobj_bit_1 = 1;
-    sprite->data1 = 3;
+    sprite->data[1] = 3;
     return 1;
 }
 
@@ -4631,7 +4631,7 @@ u8 sub_805E4C4(struct MapObject *mapObject, struct Sprite *sprite)
     if (FieldObjectExecRegularAnim(mapObject, sprite))
     {
         mapObject->mapobj_bit_1 = 0;
-        sprite->data1 = 1;
+        sprite->data[1] = 1;
     }
     return 0;
 }
@@ -4639,7 +4639,7 @@ u8 sub_805E4C4(struct MapObject *mapObject, struct Sprite *sprite)
 u8 sub_805E4EC(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
-    sprite->data1 = 1;
+    sprite->data[1] = 1;
     return 1;
 }
 
@@ -4667,7 +4667,7 @@ u8 MoveFieldObjectInNextDirectionInSequence(struct MapObject *mapObject, struct 
     }
     FieldObjectSetRegularAnim(mapObject, sprite, goSpeed0AnimId);
     mapObject->mapobj_bit_1 = 1;
-    sprite->data1 = 2;
+    sprite->data[1] = 2;
     return 1;
 }
 
@@ -4676,7 +4676,7 @@ u8 sub_805E5B4(struct MapObject *mapObject, struct Sprite *sprite)
     if (FieldObjectExecRegularAnim(mapObject, sprite))
     {
         mapObject->mapobj_bit_1 = 0;
-        sprite->data1 = 1;
+        sprite->data[1] = 1;
     }
     return 0;
 }
@@ -5004,7 +5004,7 @@ u8 mss_npc_reset_oampriv3_1_unk2_unk3(struct MapObject *mapObject, struct Sprite
     {
         mapObject->mapobj_unk_21 = player_get_direction_lower_nybble();
     }
-    sprite->data1 = 1;
+    sprite->data[1] = 1;
     return 1;
 }
 
@@ -5022,7 +5022,7 @@ u8 sub_805F3C4(struct MapObject *mapObject, struct Sprite *sprite)
     if (FieldObjectExecRegularAnim(mapObject, sprite))
     {
         mapObject->mapobj_bit_1 = 0;
-        sprite->data1 = 1;
+        sprite->data[1] = 1;
     }
     return 0;
 }
@@ -5036,7 +5036,7 @@ bool8 sub_805F3F0(struct MapObject *mapObject, struct Sprite *sprite, u8 a2, boo
 {
     FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(state_to_direction(gUnknown_0836DC09[mapObject->animPattern], mapObject->mapobj_unk_21, a2)));
     mapObject->mapobj_bit_1 = 1;
-    sprite->data1 = 2;
+    sprite->data[1] = 2;
     return 1;
 }
 
@@ -5055,7 +5055,7 @@ bool8 sub_805F438(struct MapObject *mapObject, struct Sprite *sprite, u8 a2, boo
         FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(direction));
     }
     mapObject->mapobj_bit_1 = 1;
-    sprite->data1 = 2;
+    sprite->data[1] = 2;
     return 1;
 }
 
@@ -5074,7 +5074,7 @@ bool8 sub_805F4F0(struct MapObject *mapObject, struct Sprite *sprite, u8 playerD
         FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(direction));
     }
     mapObject->mapobj_bit_1 = TRUE;
-    sprite->data1 = 2;
+    sprite->data[1] = 2;
     return TRUE;
 }
 
@@ -5093,7 +5093,7 @@ bool8 sub_805F5A8(struct MapObject *mapObject, struct Sprite *sprite, u8 playerD
         FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(direction));
     }
     mapObject->mapobj_bit_1 = TRUE;
-    sprite->data1 = 2;
+    sprite->data[1] = 2;
     return TRUE;
 }
 
@@ -5112,7 +5112,7 @@ bool8 sub_805F660(struct MapObject *mapObject, struct Sprite *sprite, u8 playerD
         FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(direction));
     }
     mapObject->mapobj_bit_1 = TRUE;
-    sprite->data1 = 2;
+    sprite->data[1] = 2;
     return TRUE;
 }
 
@@ -5124,7 +5124,7 @@ bool8 cph_IM_DIFFERENT(struct MapObject *mapObject, struct Sprite *sprite, u8 pl
     direction = state_to_direction(gUnknown_0836DC09[mapObject->animPattern], mapObject->mapobj_unk_21, direction);
     FieldObjectSetRegularAnim(mapObject, sprite, sub_806084C(direction));
     mapObject->mapobj_bit_1 = TRUE;
-    sprite->data1 = 2;
+    sprite->data[1] = 2;
     return TRUE;
 }
 
@@ -5143,7 +5143,7 @@ bool8 sub_805F760(struct MapObject *mapObject, struct Sprite *sprite, u8 playerD
         FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(direction));
     }
     mapObject->mapobj_bit_1 = TRUE;
-    sprite->data1 = 2;
+    sprite->data[1] = 2;
     return TRUE;
 }
 
@@ -5164,7 +5164,7 @@ bool8 oac_hopping(struct MapObject *mapObject, struct Sprite *sprite, u8 playerD
         FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(direction));
     }
     mapObject->mapobj_bit_1 = TRUE;
-    sprite->data1 = 2;
+    sprite->data[1] = 2;
     return TRUE;
 }
 
@@ -5184,15 +5184,15 @@ u8 sub_805F9F8(struct MapObject *, struct Sprite *);
 void FieldObjectCB_TreeDisguise(struct Sprite *sprite)
 {
     struct MapObject *mapObject;
-    mapObject = &gMapObjects[sprite->data0];
-    if (mapObject->mapobj_unk_21 == 0 || (mapObject->mapobj_unk_21 == 1 && sprite->data7 == 0))
+    mapObject = &gMapObjects[sprite->data[0]];
+    if (mapObject->mapobj_unk_21 == 0 || (mapObject->mapobj_unk_21 == 1 && sprite->data[7] == 0))
     {
         FieldObjectGetLocalIdAndMap(mapObject, &gFieldEffectArguments[0], &gFieldEffectArguments[1], &gFieldEffectArguments[2]);
         mapObject->mapobj_unk_1A = FieldEffectStart(FLDEFF_TREE_DISGUISE);
         mapObject->mapobj_unk_21 = 1;
-        sprite->data7 ++;
+        sprite->data[7] ++;
     }
-    meta_step(&gMapObjects[sprite->data0], sprite, sub_805F9F8);
+    meta_step(&gMapObjects[sprite->data[0]], sprite, sub_805F9F8);
 }
 
 u8 sub_805F9F8(struct MapObject *mapObject, struct Sprite *sprite)
@@ -5204,34 +5204,34 @@ u8 sub_805F9F8(struct MapObject *mapObject, struct Sprite *sprite)
 void FieldObjectCB_MountainDisguise(struct Sprite *sprite)
 {
     struct MapObject *mapObject;
-    mapObject = &gMapObjects[sprite->data0];
-    if (mapObject->mapobj_unk_21 == 0 || (mapObject->mapobj_unk_21 == 1 && sprite->data7 == 0))
+    mapObject = &gMapObjects[sprite->data[0]];
+    if (mapObject->mapobj_unk_21 == 0 || (mapObject->mapobj_unk_21 == 1 && sprite->data[7] == 0))
     {
         FieldObjectGetLocalIdAndMap(mapObject, &gFieldEffectArguments[0], &gFieldEffectArguments[1], &gFieldEffectArguments[2]);
         mapObject->mapobj_unk_1A = FieldEffectStart(FLDEFF_MOUNTAIN_DISGUISE);
         mapObject->mapobj_unk_21 = 1;
-        sprite->data7 ++;
+        sprite->data[7] ++;
     }
-    meta_step(&gMapObjects[sprite->data0], sprite, sub_805F9F8);
+    meta_step(&gMapObjects[sprite->data[0]], sprite, sub_805F9F8);
 }
 
 u8 sub_805FAD8(struct MapObject *mapObject, struct Sprite *sprite);
 
 void FieldObjectCB_Hidden1(struct Sprite *sprite)
 {
-    if (sprite->data7 == 0)
+    if (sprite->data[7] == 0)
     {
-        gMapObjects[sprite->data0].mapobj_bit_26 = 1;
+        gMapObjects[sprite->data[0]].mapobj_bit_26 = 1;
         sprite->subspriteMode = 2;
         sprite->oam.priority = 3;
-        sprite->data7 ++;
+        sprite->data[7] ++;
     }
-    meta_step(&gMapObjects[sprite->data0], sprite, sub_805FAD8);
+    meta_step(&gMapObjects[sprite->data[0]], sprite, sub_805FAD8);
 }
 
 u8 sub_805FAD8(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    return gUnknown_083755CC[sprite->data1](mapObject, sprite);
+    return gUnknown_083755CC[sprite->data[1]](mapObject, sprite);
 }
 
 u8 sub_805FAF8(struct MapObject *mapObject, struct Sprite *sprite)
@@ -5244,7 +5244,7 @@ u8 sub_805FB04(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecRegularAnim(mapObject, sprite))
     {
-        sprite->data1 = 0;
+        sprite->data[1] = 0;
     }
     return 0;
 }
@@ -5255,7 +5255,7 @@ u8 sub_805FB64(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
     FieldObjectSetRegularAnim(mapObject, sprite, GetStepInPlaceDelay16AnimId(mapObject->mapobj_unk_18));
-    sprite->data1 = 1;
+    sprite->data[1] = 1;
     return 1;
 }
 
@@ -5265,7 +5265,7 @@ u8 sub_805FBD4(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
     FieldObjectSetRegularAnim(mapObject, sprite, GetStepInPlaceDelay8AnimId(mapObject->mapobj_unk_18));
-    sprite->data1 = 1;
+    sprite->data[1] = 1;
     return 1;
 }
 
@@ -5275,7 +5275,7 @@ u8 sub_805FC44(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
     FieldObjectSetRegularAnim(mapObject, sprite, GetStepInPlaceDelay4AnimId(mapObject->mapobj_unk_18));
-    sprite->data1 = 1;
+    sprite->data[1] = 1;
     return 1;
 }
 
@@ -5286,7 +5286,7 @@ u8 sub_805FCB4(struct MapObject *mapObject, struct Sprite *sprite)
     npc_reset(mapObject, sprite);
     FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
     mapObject->mapobj_bit_13 = 1;
-    sprite->data1 = 1;
+    sprite->data[1] = 1;
     return 1;
 }
 
@@ -5294,7 +5294,7 @@ u8 sub_805FCE8(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecRegularAnim(mapObject, sprite))
     {
-        sprite->data1 = 2;
+        sprite->data[1] = 2;
         return 1;
     }
     return 0;
@@ -5314,7 +5314,7 @@ void npc_reset(struct MapObject *mapObject, struct Sprite *sprite)
     mapObject->mapobj_bit_6 = 0;
     mapObject->mapobj_bit_7 = 0;
     mapObject->mapobj_unk_1C = 0xff;
-    sprite->data1 = 0;
+    sprite->data[1] = 0;
 }
 
 u8 FieldObjectDirectionToImageAnimId(u8 direction)
@@ -5446,7 +5446,7 @@ void npc_set_running_behaviour_etc(struct MapObject *mapObject, u8 animPattern)
     mapObject->mapobj_unk_21 = 0;
     mapObject->animId = 0;
     gSprites[mapObject->spriteId].callback = gUnknown_0836DA88[animPattern];
-    gSprites[mapObject->spriteId].data1 = 0;
+    gSprites[mapObject->spriteId].data[1] = 0;
 }
 
 u8 npc_running_behaviour_by_direction(u8 direction)
@@ -5555,7 +5555,7 @@ bool8 IsBerryTreeSparkling(u8 localId, u8 mapNum, u8 mapGroup)
     u8 mapObjectId;
 
     if (!TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjectId))
-        if (gSprites[gMapObjects[mapObjectId].spriteId].data7 & 2)
+        if (gSprites[gMapObjects[mapObjectId].spriteId].data[7] & 2)
             return TRUE;
 
     return FALSE;
@@ -5566,7 +5566,7 @@ void sub_8060288(u8 localId, u8 mapNum, u8 mapGroup)
     u8 mapObjectId;
     if (!TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjectId))
     {
-        gSprites[gMapObjects[mapObjectId].spriteId].data7 |= 4;
+        gSprites[gMapObjects[mapObjectId].spriteId].data[7] |= 4;
     }
 }
 
@@ -5704,7 +5704,7 @@ bool8 FieldObjectSetSpecialAnim(struct MapObject *mapObject, u8 specialAnimId)
     mapObject->mapobj_unk_1C = specialAnimId;
     mapObject->mapobj_bit_6 = 1;
     mapObject->mapobj_bit_7 = 0;
-    gSprites[mapObject->spriteId].data2 = 0;
+    gSprites[mapObject->spriteId].data[2] = 0;
     return FALSE;
 }
 
@@ -5727,8 +5727,8 @@ void FieldObjectClearAnim(struct MapObject *mapObject)
     mapObject->mapobj_unk_1C = 0xFF;
     mapObject->mapobj_bit_6 = 0;
     mapObject->mapobj_bit_7 = 0;
-    gSprites[mapObject->spriteId].data1 = 0;
-    gSprites[mapObject->spriteId].data2 = 0;
+    gSprites[mapObject->spriteId].data[1] = 0;
+    gSprites[mapObject->spriteId].data[2] = 0;
 }
 
 bool8 FieldObjectCheckIfSpecialAnimFinishedOrInactive(struct MapObject *mapObject)
@@ -5962,7 +5962,7 @@ u32 state_to_direction(u8 a0, u32 a1, u32 a2)
 
 void FieldObjectExecSpecialAnim(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    if (gUnknown_08375778[mapObject->mapobj_unk_1C][sprite->data2](mapObject, sprite))
+    if (gUnknown_08375778[mapObject->mapobj_unk_1C][sprite->data[2]](mapObject, sprite))
     {
         mapObject->mapobj_bit_7 = 1;
     }
@@ -5970,10 +5970,10 @@ void FieldObjectExecSpecialAnim(struct MapObject *mapObject, struct Sprite *spri
 
 bool8 FieldObjectExecRegularAnim(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    if (gUnknown_08375778[mapObject->mapobj_unk_1C][sprite->data2](mapObject, sprite))
+    if (gUnknown_08375778[mapObject->mapobj_unk_1C][sprite->data[2]](mapObject, sprite))
     {
         mapObject->mapobj_unk_1C = 0xFF;
-        sprite->data2 = 0;
+        sprite->data[2] = 0;
         return 1;
     }
     return 0;
@@ -5982,7 +5982,7 @@ bool8 FieldObjectExecRegularAnim(struct MapObject *mapObject, struct Sprite *spr
 void FieldObjectSetRegularAnim(struct MapObject *mapObject, struct Sprite *sprite, u8 animId)
 {
     mapObject->mapobj_unk_1C = animId;
-    sprite->data2 = 0;
+    sprite->data[2] = 0;
 }
 
 void an_look_any(struct MapObject *mapObject, struct Sprite *sprite, u8 direction)
@@ -5991,7 +5991,7 @@ void an_look_any(struct MapObject *mapObject, struct Sprite *sprite, u8 directio
     npc_coords_shift_still(mapObject);
     sub_805FE64(mapObject, sprite, get_go_image_anim_num(mapObject->mapobj_unk_18));
     sprite->animPaused = 1;
-    sprite->data2 = 1;
+    sprite->data[2] = 1;
 }
 
 u8 sub_8060CE0(struct MapObject *mapObject, struct Sprite *sprite)
@@ -6030,7 +6030,7 @@ void sub_8060D20(struct MapObject *mapObject, struct Sprite *sprite, u8 directio
     oamt_npc_ministep_reset(sprite, direction, a3);
     sprite->animPaused = 0;
     mapObject->mapobj_bit_2 = 1;
-    sprite->data2 = 1;
+    sprite->data[2] = 1;
 }
 
 extern u8 (*const gUnknown_083759C0[5])(u8);
@@ -6075,7 +6075,7 @@ void sub_8060E68(struct MapObject *mapObject, struct Sprite *sprite, u8 directio
     sub_806467C(sprite, direction);
     sprite->animPaused = 0;
     mapObject->mapobj_bit_2 = 1;
-    sprite->data2 = 1;
+    sprite->data[2] = 1;
 }
 
 void sub_8060ED8(struct MapObject *mapObject, struct Sprite *sprite, u8 direction)
@@ -6108,7 +6108,7 @@ bool8 sub_8060F5C(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (an_walk_any_2(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -6126,7 +6126,7 @@ bool8 sub_8060F9C(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (an_walk_any_2(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -6144,7 +6144,7 @@ bool8 sub_8060FDC(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (an_walk_any_2(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -6162,7 +6162,7 @@ bool8 sub_806101C(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (an_walk_any_2(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -6180,7 +6180,7 @@ bool8 sub_806105C(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -6198,7 +6198,7 @@ bool8 sub_806109C(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -6216,7 +6216,7 @@ bool8 sub_80610DC(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -6234,7 +6234,7 @@ bool8 sub_806111C(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -6252,7 +6252,7 @@ void sub_806113C(struct MapObject *mapObject, struct Sprite *sprite, u8 directio
     sub_8060320(direction, &x, &y, vSPp4[a4], vSPp4[a4]);
     npc_coords_shift(mapObject, mapObject->coords2.x + x, mapObject->coords2.y + y);
     sub_80646E4(sprite, direction, a4, a5);
-    sprite->data2 = 1;
+    sprite->data[2] = 1;
     sprite->animPaused = 0;
     mapObject->mapobj_bit_2 = 1;
     mapObject->mapobj_bit_4 = 1;
@@ -6273,11 +6273,11 @@ u8 sub_806123C(struct MapObject *mapObject, struct Sprite *sprite, u8 (*const ca
     u8 retval;
     memcpy(vSPp4, gUnknown_08375A3A, sizeof gUnknown_08375A3A);
     retval = callback(sprite);
-    if (retval == 1 && vSPp4[sprite->data4] != 0)
+    if (retval == 1 && vSPp4[sprite->data[4]] != 0)
     {
         x = 0;
         y = 0;
-        sub_8060320(mapObject->placeholder18, &x, &y, vSPp4[sprite->data4], vSPp4[sprite->data4]);
+        sub_8060320(mapObject->placeholder18, &x, &y, vSPp4[sprite->data[4]], vSPp4[sprite->data[4]]);
         npc_coords_shift(mapObject, mapObject->coords2.x + x, mapObject->coords2.y + y);
         mapObject->mapobj_bit_2 = 1;
         mapObject->mapobj_bit_4 = 1;
@@ -6353,7 +6353,7 @@ bool8 sub_80613D4(struct MapObject *mapObject, struct Sprite *sprite)
     if (sub_8061328(mapObject, sprite))
     {
         mapObject->mapobj_bit_22 = 0;
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -6370,7 +6370,7 @@ bool8 sub_806142C(struct MapObject *mapObject, struct Sprite *sprite)
     if (sub_8061328(mapObject, sprite))
     {
         mapObject->mapobj_bit_22 = 0;
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -6387,7 +6387,7 @@ bool8 sub_8061484(struct MapObject *mapObject, struct Sprite *sprite)
     if (sub_8061328(mapObject, sprite))
     {
         mapObject->mapobj_bit_22 = 0;
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -6404,7 +6404,7 @@ bool8 sub_80614DC(struct MapObject *mapObject, struct Sprite *sprite)
     if (sub_8061328(mapObject, sprite))
     {
         mapObject->mapobj_bit_22 = 0;
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -6412,16 +6412,16 @@ bool8 sub_80614DC(struct MapObject *mapObject, struct Sprite *sprite)
 
 void sub_8061508(struct Sprite *sprite, u16 duration)
 {
-    sprite->data2 = 1;
-    sprite->data3 = duration;
+    sprite->data[2] = 1;
+    sprite->data[3] = duration;
 }
 
 bool8 sub_8061510(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    sprite->data3--;
-    if (!sprite->data3)
+    sprite->data[3]--;
+    if (!sprite->data[3])
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -6472,7 +6472,7 @@ bool8 sub_80615EC(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -6487,7 +6487,7 @@ bool8 sub_806162C(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -6502,7 +6502,7 @@ bool8 sub_806166C(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -6517,7 +6517,7 @@ bool8 sub_80616AC(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -6528,16 +6528,16 @@ void sub_80616CC(struct MapObject *mapObject, struct Sprite *sprite, u8 directio
     FieldObjectSetDirection(mapObject, direction);
     sub_805FE28(mapObject, sprite, animId);
     sprite->animPaused = 0;
-    sprite->data2 = 1;
-    sprite->data3 = duration;
+    sprite->data[2] = 1;
+    sprite->data[3] = duration;
 }
 
 bool8 sub_8061714(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    sprite->data3--;
-    if (sprite->data3 == 0)
+    sprite->data[3]--;
+    if (sprite->data[3] == 0)
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         sprite->animPaused = 1;
         return TRUE;
     }
@@ -6546,7 +6546,7 @@ bool8 sub_8061714(struct MapObject *mapObject, struct Sprite *sprite)
 
 bool8 sub_806173C(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    if (sprite->data3 & 1)
+    if (sprite->data[3] & 1)
     {
         sprite->animDelayCounter++;
     }
@@ -6661,7 +6661,7 @@ bool8 sub_8061B18(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -6680,7 +6680,7 @@ bool8 sub_8061B58(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -6699,7 +6699,7 @@ bool8 sub_8061B98(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -6718,7 +6718,7 @@ bool8 sub_8061BD8(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -6736,7 +6736,7 @@ bool8 sub_8061C18(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -6754,7 +6754,7 @@ bool8 sub_8061C58(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -6773,7 +6773,7 @@ bool8 sub_8061C98(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -6792,7 +6792,7 @@ bool8 sub_8061CD8(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -6810,7 +6810,7 @@ bool8 sub_8061D18(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -6828,7 +6828,7 @@ bool8 sub_8061D58(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -6847,7 +6847,7 @@ bool8 sub_8061D98(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -6866,7 +6866,7 @@ bool8 sub_8061DD8(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -6884,7 +6884,7 @@ bool8 sub_8061E18(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -6902,7 +6902,7 @@ bool8 sub_8061E58(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -6920,7 +6920,7 @@ bool8 sub_8061E98(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -6938,7 +6938,7 @@ bool8 sub_8061ED8(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -6948,7 +6948,7 @@ void npc_set_direction_and_anim__an_proceed(struct MapObject *mapObject, struct 
 {
     obj_anim_image_set_and_seek(sprite, animNum, 0);
     FieldObjectSetDirection(mapObject, direction);
-    sprite->data2 = 1;
+    sprite->data[2] = 1;
 }
 
 bool8 sub_8061F24(struct MapObject *mapObject, struct Sprite *sprite)
@@ -6963,7 +6963,7 @@ bool8 sub_8061F3C(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8064864(sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -6987,7 +6987,7 @@ bool8 sub_8061FB0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8061340(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         mapObject->mapobj_bit_5 = 0;
         return TRUE;
     }
@@ -7006,7 +7006,7 @@ bool8 sub_8061FF8(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8061340(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         mapObject->mapobj_bit_5 = 0;
         return TRUE;
     }
@@ -7025,7 +7025,7 @@ bool8 sub_8062040(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8061340(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         mapObject->mapobj_bit_5 = 0;
         return TRUE;
     }
@@ -7044,7 +7044,7 @@ bool8 sub_8062088(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8061340(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         mapObject->mapobj_bit_5 = 0;
         return TRUE;
     }
@@ -7058,7 +7058,7 @@ bool8 sub_80620B0(struct MapObject *mapObject, struct Sprite *sprite)
     {
         an_look_any(mapObject, sprite, sub_805FE90(mapObject->coords2.x, mapObject->coords2.y, gMapObjects[objectId].coords2.x, gMapObjects[objectId].coords2.y));
     }
-    sprite->data2 = 1;
+    sprite->data[2] = 1;
     return TRUE;
 }
 
@@ -7069,21 +7069,21 @@ bool8 sub_806210C(struct MapObject *mapObject, struct Sprite *sprite)
     {
         an_look_any(mapObject, sprite, GetOppositeDirection(sub_805FE90(mapObject->coords2.x, mapObject->coords2.y, gMapObjects[objectId].coords2.x, gMapObjects[objectId].coords2.y)));
     }
-    sprite->data2 = 1;
+    sprite->data[2] = 1;
     return TRUE;
 }
 
 bool8 sub_8062170(struct MapObject *mapObject, struct Sprite *sprite)
 {
     mapObject->mapobj_bit_9 = 1;
-    sprite->data2 = 1;
+    sprite->data[2] = 1;
     return TRUE;
 }
 
 bool8 sub_8062180(struct MapObject *mapObject, struct Sprite *sprite)
 {
     mapObject->mapobj_bit_9 = 0;
-    sprite->data2 = 1;
+    sprite->data[2] = 1;
     return TRUE;
 }
 
@@ -7100,7 +7100,7 @@ bool8 sub_80621BC(struct MapObject *mapObject, struct Sprite *sprite)
     if (sub_8061328(mapObject, sprite))
     {
         mapObject->mapobj_bit_22 = 0;
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -7119,7 +7119,7 @@ bool8 sub_8062214(struct MapObject *mapObject, struct Sprite *sprite)
     if (sub_8061328(mapObject, sprite))
     {
         mapObject->mapobj_bit_22 = 0;
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -7138,7 +7138,7 @@ bool8 sub_806226C(struct MapObject *mapObject, struct Sprite *sprite)
     if (sub_8061328(mapObject, sprite))
     {
         mapObject->mapobj_bit_22 = 0;
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -7157,7 +7157,7 @@ bool8 sub_80622C4(struct MapObject *mapObject, struct Sprite *sprite)
     if (sub_8061328(mapObject, sprite))
     {
         mapObject->mapobj_bit_22 = 0;
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -7176,7 +7176,7 @@ bool8 sub_806231C(struct MapObject *mapObject, struct Sprite *sprite)
     if (sub_8061328(mapObject, sprite))
     {
         mapObject->mapobj_bit_22 = 0;
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -7195,7 +7195,7 @@ bool8 sub_8062374(struct MapObject *mapObject, struct Sprite *sprite)
     if (sub_8061328(mapObject, sprite))
     {
         mapObject->mapobj_bit_22 = 0;
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -7214,7 +7214,7 @@ bool8 sub_80623CC(struct MapObject *mapObject, struct Sprite *sprite)
     if (sub_8061328(mapObject, sprite))
     {
         mapObject->mapobj_bit_22 = 0;
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -7233,7 +7233,7 @@ bool8 sub_8062424(struct MapObject *mapObject, struct Sprite *sprite)
     if (sub_8061328(mapObject, sprite))
     {
         mapObject->mapobj_bit_22 = 0;
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -7252,7 +7252,7 @@ bool8 sub_806247C(struct MapObject *mapObject, struct Sprite *sprite)
     if (sub_8061358(mapObject, sprite))
     {
         mapObject->mapobj_bit_22 = 0;
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -7271,7 +7271,7 @@ bool8 sub_80624D4(struct MapObject *mapObject, struct Sprite *sprite)
     if (sub_8061358(mapObject, sprite))
     {
         mapObject->mapobj_bit_22 = 0;
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -7290,7 +7290,7 @@ bool8 sub_806252C(struct MapObject *mapObject, struct Sprite *sprite)
     if (sub_8061358(mapObject, sprite))
     {
         mapObject->mapobj_bit_22 = 0;
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -7309,7 +7309,7 @@ bool8 sub_8062584(struct MapObject *mapObject, struct Sprite *sprite)
     if (sub_8061358(mapObject, sprite))
     {
         mapObject->mapobj_bit_22 = 0;
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -7330,42 +7330,42 @@ bool8 sub_80625C8(struct MapObject *mapObject, struct Sprite *sprite)
 bool8 sub_80625D8(struct MapObject *mapObject, struct Sprite *sprite)
 {
     mapObject->mapobj_bit_25 = 0;
-    sprite->data2 = 1;
+    sprite->data[2] = 1;
     return TRUE;
 }
 
 bool8 sub_80625E8(struct MapObject *mapObject, struct Sprite *sprite)
 {
     mapObject->mapobj_bit_25 = 1;
-    sprite->data2 = 1;
+    sprite->data[2] = 1;
     return TRUE;
 }
 
 bool8 sub_80625F8(struct MapObject *mapObject, struct Sprite *sprite)
 {
     mapObject->mapobj_bit_12 = 1;
-    sprite->data2 = 1;
+    sprite->data[2] = 1;
     return TRUE;
 }
 
 bool8 sub_8062608(struct MapObject *mapObject, struct Sprite *sprite)
 {
     mapObject->mapobj_bit_12 = GetFieldObjectGraphicsInfo(mapObject->graphicsId)->inanimate;
-    sprite->data2 = 1;
+    sprite->data[2] = 1;
     return TRUE;
 }
 
 bool8 sub_8062634(struct MapObject *mapObject, struct Sprite *sprite)
 {
     mapObject->mapobj_bit_13 = 1;
-    sprite->data2 = 1;
+    sprite->data[2] = 1;
     return TRUE;
 }
 
 bool8 sub_8062644(struct MapObject *mapObject, struct Sprite *sprite)
 {
     mapObject->mapobj_bit_13 = 0;
-    sprite->data2 = 1;
+    sprite->data[2] = 1;
     return TRUE;
 }
 
@@ -7373,7 +7373,7 @@ bool8 do_exclamation_mark_bubble_1(struct MapObject *mapObject, struct Sprite *s
 {
     FieldObjectGetLocalIdAndMap(mapObject, &gFieldEffectArguments[0], &gFieldEffectArguments[1], &gFieldEffectArguments[2]);
     FieldEffectStart(FLDEFF_EXCLAMATION_MARK_ICON_1);
-    sprite->data2 = 1;
+    sprite->data[2] = 1;
     return TRUE;
 }
 
@@ -7381,7 +7381,7 @@ bool8 do_exclamation_mark_bubble_2(struct MapObject *mapObject, struct Sprite *s
 {
     FieldObjectGetLocalIdAndMap(mapObject, &gFieldEffectArguments[0], &gFieldEffectArguments[1], &gFieldEffectArguments[2]);
     FieldEffectStart(FLDEFF_EXCLAMATION_MARK_ICON_2);
-    sprite->data2 = 1;
+    sprite->data[2] = 1;
     return TRUE;
 }
 
@@ -7389,7 +7389,7 @@ bool8 do_heart_bubble(struct MapObject *mapObject, struct Sprite *sprite)
 {
     FieldObjectGetLocalIdAndMap(mapObject, &gFieldEffectArguments[0], &gFieldEffectArguments[1], &gFieldEffectArguments[2]);
     FieldEffectStart(FLDEFF_HEART_ICON);
-    sprite->data2 = 1;
+    sprite->data[2] = 1;
     return TRUE;
 }
 
@@ -7404,13 +7404,13 @@ bool8 sub_80626C0(struct MapObject *mapObject, struct Sprite *sprite)
     }
     else if (mapObject->animPattern != 0x39 && mapObject->animPattern != 0x3A)
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     else
     {
         sub_812869C(mapObject);
-        sprite->data2 = 1;
+        sprite->data[2] = 1;
         return sub_8062704(mapObject, sprite);
     }
 }
@@ -7419,7 +7419,7 @@ bool8 sub_8062704(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_81286C4(mapObject))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -7428,7 +7428,7 @@ bool8 sub_8062704(struct MapObject *mapObject, struct Sprite *sprite)
 bool8 sub_8062724(struct MapObject *mapObject, struct Sprite *sprite)
 {
     obj_anim_image_set_and_seek(sprite, 1, 0);
-    sprite->data2 = 1;
+    sprite->data[2] = 1;
     return FALSE;
 }
 
@@ -7437,7 +7437,7 @@ bool8 sub_8062740(struct MapObject *mapObject, struct Sprite *sprite)
     if (sub_8064864(sprite))
     {
         sub_8064820(sprite, 0x20);
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
     }
     return FALSE;
 }
@@ -7448,7 +7448,7 @@ bool8 sub_8062764(struct MapObject *mapObject, struct Sprite *sprite)
     if (sub_8064824(sprite))
     {
         mapObject->mapobj_bit_13 = 1;
-        sprite->data2 = 3;
+        sprite->data[2] = 3;
     }
     return FALSE;
 }
@@ -7456,7 +7456,7 @@ bool8 sub_8062764(struct MapObject *mapObject, struct Sprite *sprite)
 bool8 sub_80627A0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     obj_anim_image_set_and_seek(sprite, 1, 0);
-    sprite->data2 = 1;
+    sprite->data[2] = 1;
     return FALSE;
 }
 
@@ -7465,7 +7465,7 @@ bool8 sub_80627BC(struct MapObject *mapObject, struct Sprite *sprite)
     if (sub_8064864(sprite))
     {
         sub_8064820(sprite, 0x20);
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
     }
     return FALSE;
 }
@@ -7476,7 +7476,7 @@ bool8 sub_80627E0(struct MapObject *mapObject, struct Sprite *sprite)
     if (sub_8064824(sprite))
     {
         mapObject->mapobj_bit_13 = 1;
-        sprite->data2 = 3;
+        sprite->data[2] = 3;
     }
     return FALSE;
 }
@@ -7484,14 +7484,14 @@ bool8 sub_80627E0(struct MapObject *mapObject, struct Sprite *sprite)
 bool8 sub_806281C(struct MapObject *mapObject, struct Sprite *sprite)
 {
     mapObject->mapobj_bit_26 = 1;
-    sprite->data2 = 1;
+    sprite->data[2] = 1;
     return TRUE;
 }
 
 bool8 sub_806282C(struct MapObject *mapObject, struct Sprite *sprite)
 {
     mapObject->mapobj_bit_26 = 0;
-    sprite->data2 = 1;
+    sprite->data[2] = 1;
     return TRUE;
 }
 
@@ -7527,7 +7527,7 @@ bool8 sub_80628D0(struct MapObject *mapObject, struct Sprite *sprite)
     if (an_walk_any_2(mapObject, sprite))
     {
         sprite->affineAnimPaused = 1;
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -7548,7 +7548,7 @@ bool8 sub_8062930(struct MapObject *mapObject, struct Sprite *sprite)
     if (an_walk_any_2(mapObject, sprite))
     {
         sprite->affineAnimPaused = 1;
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -7560,7 +7560,7 @@ void sub_806295C(struct MapObject *mapObject, struct Sprite *sprite, u8 directio
     npc_coords_shift_still(mapObject);
     sub_805FE64(mapObject, sprite, sub_805FDD8(direction));
     sprite->animPaused = 1;
-    sprite->data2 = 1;
+    sprite->data[2] = 1;
 }
 
 bool8 sub_806299C(struct MapObject *mapObject, struct Sprite *sprite)
@@ -7679,7 +7679,7 @@ bool8 sub_8062BFC(struct MapObject *mapObject, struct Sprite *sprite)
     if (sub_8061328(mapObject, sprite))
     {
         mapObject->mapobj_bit_22 = 0;
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -7698,7 +7698,7 @@ bool8 sub_8062C54(struct MapObject *mapObject, struct Sprite *sprite)
     if (sub_8061328(mapObject, sprite))
     {
         mapObject->mapobj_bit_22 = 0;
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -7717,7 +7717,7 @@ bool8 sub_8062CAC(struct MapObject *mapObject, struct Sprite *sprite)
     if (sub_8061328(mapObject, sprite))
     {
         mapObject->mapobj_bit_22 = 0;
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -7736,7 +7736,7 @@ bool8 sub_8062D04(struct MapObject *mapObject, struct Sprite *sprite)
     if (sub_8061328(mapObject, sprite))
     {
         mapObject->mapobj_bit_22 = 0;
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -7755,7 +7755,7 @@ bool8 sub_8062D5C(struct MapObject *mapObject, struct Sprite *sprite)
     if (sub_8061328(mapObject, sprite))
     {
         mapObject->mapobj_bit_22 = 0;
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -7774,7 +7774,7 @@ bool8 sub_8062DB4(struct MapObject *mapObject, struct Sprite *sprite)
     if (sub_8061328(mapObject, sprite))
     {
         mapObject->mapobj_bit_22 = 0;
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -7793,7 +7793,7 @@ bool8 sub_8062E0C(struct MapObject *mapObject, struct Sprite *sprite)
     if (sub_8061328(mapObject, sprite))
     {
         mapObject->mapobj_bit_22 = 0;
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -7812,7 +7812,7 @@ bool8 sub_8062E64(struct MapObject *mapObject, struct Sprite *sprite)
     if (sub_8061328(mapObject, sprite))
     {
         mapObject->mapobj_bit_22 = 0;
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -7831,7 +7831,7 @@ bool8 sub_8062EBC(struct MapObject *mapObject, struct Sprite *sprite)
     if (sub_8061328(mapObject, sprite))
     {
         mapObject->mapobj_bit_22 = 0;
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -7850,7 +7850,7 @@ bool8 sub_8062F14(struct MapObject *mapObject, struct Sprite *sprite)
     if (sub_8061328(mapObject, sprite))
     {
         mapObject->mapobj_bit_22 = 0;
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -7869,7 +7869,7 @@ bool8 sub_8062F6C(struct MapObject *mapObject, struct Sprite *sprite)
     if (sub_8061328(mapObject, sprite))
     {
         mapObject->mapobj_bit_22 = 0;
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -7888,7 +7888,7 @@ bool8 sub_8062FC4(struct MapObject *mapObject, struct Sprite *sprite)
     if (sub_8061328(mapObject, sprite))
     {
         mapObject->mapobj_bit_22 = 0;
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -7937,7 +7937,7 @@ bool8 sub_8063128(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -7955,7 +7955,7 @@ bool8 sub_8063168(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -7973,7 +7973,7 @@ bool8 sub_80631A8(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -7991,7 +7991,7 @@ bool8 sub_80631E8(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -8015,7 +8015,7 @@ bool8 sub_8063258(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -8033,7 +8033,7 @@ bool8 sub_8063298(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -8051,7 +8051,7 @@ bool8 sub_80632D8(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -8069,7 +8069,7 @@ bool8 sub_8063318(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -8094,7 +8094,7 @@ bool8 sub_8063390(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -8112,7 +8112,7 @@ bool8 sub_80633D0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -8130,7 +8130,7 @@ bool8 sub_8063410(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;
@@ -8148,7 +8148,7 @@ bool8 sub_8063450(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
-        sprite->data2 = 2;
+        sprite->data[2] = 2;
         return TRUE;
     }
     return FALSE;

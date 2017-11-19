@@ -394,7 +394,7 @@ void SafariHandleTrainerThrow(void)
       30);
     gSprites[gObjectBankIDs[gActiveBank]].oam.paletteNum = gActiveBank;
     gSprites[gObjectBankIDs[gActiveBank]].pos2.x = 240;
-    gSprites[gObjectBankIDs[gActiveBank]].data0 = -2;
+    gSprites[gObjectBankIDs[gActiveBank]].data[0] = -2;
     gSprites[gObjectBankIDs[gActiveBank]].callback = sub_80313A0;
     gBattleBankFunc[gActiveBank] = sub_812B65C;
 }
