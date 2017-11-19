@@ -161,7 +161,7 @@ SECTIONS {
         asm/pc_screen_effect.o(.text);
         src/field/fldeff_secretpower.o(.text);
         src/field/fldeff_secret_base_pc.o(.text);
-        asm/fldeff_decoration.o(.text);
+        src/field/fldeff_decoration.o(.text);
         src/field/fldeff_poison.o(.text);
         src/field/fldeff_berrytree.o(.text);
         src/field/fldeff_recordmixing.o(.text);
