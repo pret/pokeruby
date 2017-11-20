@@ -221,6 +221,16 @@ extern u8 gUnknown_081D8C65[];
 extern u8 gUnknown_081D9156[];
 extern u8 gUnknown_081D9468[];
 
+// read via orr
+#define BSScriptRead32(ptr) ((ptr)[0] | (ptr)[1] << 8 | (ptr)[2] << 16 | (ptr)[3] << 24)
+#define BSScriptRead16(ptr) ((ptr)[0] | ((ptr)[1] << 8))
+#define BSScriptReadPtr(ptr) ((void *)BSScriptRead32(ptr))
+
+// read via add
+#define BS2ScriptRead32(ptr) ((ptr)[0] + ((ptr)[1] << 8) + ((ptr)[2] << 16) + ((ptr)[3] << 24))
+#define BS2ScriptRead16(ptr) ((ptr)[0] + ((ptr)[1] << 8))
+#define BS2ScriptReadPtr(ptr) ((void *)BS2ScriptRead32(ptr))
+
 #define TargetProtectAffected ((gProtectStructs[gBankTarget].protected && gBattleMoves[gCurrentMove].flags & FLAG_PROTECT_AFFECTED))
 
 //array entries for battle communication
@@ -7327,276 +7337,88 @@ static void atk44(void)
     ewram16060(gBankAttacker) = 1;
 }
 
-#ifdef NONMATCHING
 static void atk45_playanimation(void)
 {
-    #define ANIMATION_ID T2_READ_8(gBattlescriptCurrInstr + 2)
-    #define ARGUMENT (u16*) T2_READ_PTR(gBattlescriptCurrInstr + 3)
-    gActiveBank = GetBattleBank(T2_READ_8(gBattlescriptCurrInstr + 1));
+    const u16* argumentPtr;
 
-    if ( ANIMATION_ID == 1 || ANIMATION_ID == 0x11 || ANIMATION_ID == 2) {
-        EmitBattleAnimation(0, ANIMATION_ID, *argument);
+    gActiveBank = GetBattleBank(gBattlescriptCurrInstr[1]);
+    argumentPtr = BS2ScriptReadPtr(gBattlescriptCurrInstr + 3);
+
+    if (gBattlescriptCurrInstr[2] == B_ANIM_STATS_CHANGE
+        || gBattlescriptCurrInstr[2] == B_ANIM_SNATCH_MOVE
+        || gBattlescriptCurrInstr[2] == B_ANIM_SUBSTITUTE_FADE)
+    {
+        EmitBattleAnimation(0, gBattlescriptCurrInstr[2], *argumentPtr);
         MarkBufferBankForExecution(gActiveBank);
         gBattlescriptCurrInstr += 7;
-    } else if (gHitMarker & HITMARKER_NO_ANIMATIONS) {
+    }
+    else if (gHitMarker & HITMARKER_NO_ANIMATIONS)
+    {
         b_movescr_stack_push(gBattlescriptCurrInstr + 7);
         gBattlescriptCurrInstr = BattleScript_Pausex20;
-    } else {
-        if (((ANIMATION_ID - 10) > 3 && gStatuses3[gActiveBank] & (STATUS3_SEMI_INVULNERABLE))) {
-            gBattlescriptCurrInstr += 7;
-        } else {
-            EmitBattleAnimation(0, ANIMATION_ID, *argument);
-            MarkBufferBankForExecution(gActiveBank);
-            gBattlescriptCurrInstr += 7;
-        }
+    }
+    else if (gBattlescriptCurrInstr[2] == B_ANIM_RAIN_CONTINUES
+             || gBattlescriptCurrInstr[2] == B_ANIM_SUN_CONTINUES
+             || gBattlescriptCurrInstr[2] == B_ANIM_SANDSTORM_CONTINUES
+             || gBattlescriptCurrInstr[2] == B_ANIM_HAIL_CONTINUES)
+    {
+        EmitBattleAnimation(0, gBattlescriptCurrInstr[2], *argumentPtr);
+        MarkBufferBankForExecution(gActiveBank);
+        gBattlescriptCurrInstr += 7;
+    }
+    else if (gStatuses3[gActiveBank] & STATUS3_SEMI_INVULNERABLE)
+    {
+        gBattlescriptCurrInstr += 7;
+    }
+    else
+    {
+        EmitBattleAnimation(0, gBattlescriptCurrInstr[2], *argumentPtr);
+        MarkBufferBankForExecution(gActiveBank);
+        gBattlescriptCurrInstr += 7;
     }
 }
 
-#else
-__attribute__((naked))
-static void atk45_playanimation(void)
+static void atk46_playanimation2(void) // animation Id is stored in the first pointer
 {
-    asm(".syntax unified\n\
-        push {r4-r6,lr}\n\
-    ldr r5, _08021444 @ =gBattlescriptCurrInstr\n\
-    ldr r0, [r5]\n\
-    ldrb r0, [r0, 0x1]\n\
-    bl GetBattleBank\n\
-    ldr r6, _08021448 @ =gActiveBank\n\
-    strb r0, [r6]\n\
-    ldr r2, [r5]\n\
-    ldrb r1, [r2, 0x3]\n\
-    ldrb r0, [r2, 0x4]\n\
-    lsls r0, 8\n\
-    adds r1, r0\n\
-    ldrb r0, [r2, 0x5]\n\
-    lsls r0, 16\n\
-    adds r1, r0\n\
-    ldrb r0, [r2, 0x6]\n\
-    lsls r0, 24\n\
-    adds r3, r1, r0\n\
-    ldrb r4, [r2, 0x2]\n\
-    adds r0, r4, 0\n\
-    cmp r0, 0x1\n\
-    beq _08021426\n\
-    cmp r0, 0x11\n\
-    beq _08021426\n\
-    cmp r0, 0x2\n\
-    bne _0802144C\n\
-_08021426:\n\
-    ldr r4, _08021444 @ =gBattlescriptCurrInstr\n\
-    ldr r0, [r4]\n\
-    ldrb r1, [r0, 0x2]\n\
-    ldrh r2, [r3]\n\
-    movs r0, 0\n\
-    bl EmitBattleAnimation\n\
-    ldr r0, _08021448 @ =gActiveBank\n\
-    ldrb r0, [r0]\n\
-    bl MarkBufferBankForExecution\n\
-    ldr r0, [r4]\n\
-    adds r0, 0x7\n\
-    str r0, [r4]\n\
-    b _080214AE\n\
-    .align 2, 0\n\
-_08021444: .4byte gBattlescriptCurrInstr\n\
-_08021448: .4byte gActiveBank\n\
-_0802144C:\n\
-    ldr r0, _08021464 @ =gHitMarker\n\
-    ldr r0, [r0]\n\
-    movs r1, 0x80\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _0802146C\n\
-    adds r0, r2, 0x7\n\
-    bl b_movescr_stack_push\n\
-    ldr r0, _08021468 @ =BattleScript_Pausex20\n\
-    b _080214AC\n\
-    .align 2, 0\n\
-_08021464: .4byte gHitMarker\n\
-_08021468: .4byte BattleScript_Pausex20\n\
-_0802146C:\n\
-    adds r0, r4, 0\n\
-    subs r0, 0xA\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x3\n\
-    bls _08021498\n\
-    ldr r1, _08021490 @ =gStatuses3\n\
-    ldrb r0, [r6]\n\
-    lsls r0, 2\n\
-    adds r0, r1\n\
-    ldr r0, [r0]\n\
-    ldr r1, _08021494 @ =0x000400c0\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _08021498\n\
-    adds r0, r2, 0x7\n\
-    b _080214AC\n\
-    .align 2, 0\n\
-_08021490: .4byte gStatuses3\n\
-_08021494: .4byte 0x000400c0\n\
-_08021498:\n\
-    ldrb r1, [r2, 0x2]\n\
-    ldrh r2, [r3]\n\
-    movs r0, 0\n\
-    bl EmitBattleAnimation\n\
-    ldrb r0, [r6]\n\
-    bl MarkBufferBankForExecution\n\
-    ldr r0, [r5]\n\
-    adds r0, 0x7\n\
-_080214AC:\n\
-    str r0, [r5]\n\
-_080214AE:\n\
-    pop {r4-r6}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .syntax divided");
-}
-#endif // NONMATCHING
+    const u16* argumentPtr;
+    const u8* animationIdPtr;
 
-#ifdef NONMATCHING
-static void atk46_playanimation2(void)
-{
-	u8 arg1;
-	u8* arg2;
-	u16* arg3;
-	u32 something;
-	
-	arg1 = T2_READ_8(gBattlescriptCurrInstr + 1);
-	gActiveBank = GetBattleBank(arg1);
-	arg2 = T2_READ_PTR(gBattlescriptCurrInstr + 2);
-	arg3 = T2_READ_PTR(gBattlescriptCurrInstr + 6);
-	
-	if (*arg2 == 1 || *arg2 == 0x11 || *arg2 == 2)
-	{
-		EmitBattleAnimation(0, *arg2, *arg3);
-		MarkBufferBankForExecution(gActiveBank);
-		gBattlescriptCurrInstr += 10;
-		return;
-	}
-	if ((gHitMarker & 0x80))
-	{
-		something = (u32)(gBattlescriptCurrInstr + 10);
-	}
-	else
-	{
-		u8 yeah = *arg2 - 10;
-		if (yeah < 4 || (gStatuses3[gActiveBank] & 0x000400C0) == 0)
-		{
-			EmitBattleAnimation(0, *arg2, *arg3);
-			MarkBufferBankForExecution(gActiveBank);
-		}
-		something = (u32)(gBattlescriptCurrInstr + 10);
-	}
-	gBattlescriptCurrInstr = (u8*)something;
+    gActiveBank = GetBattleBank(gBattlescriptCurrInstr[1]);
+    animationIdPtr = BS2ScriptReadPtr(gBattlescriptCurrInstr + 2);
+    argumentPtr = BS2ScriptReadPtr(gBattlescriptCurrInstr + 6);
+
+    if (*animationIdPtr == B_ANIM_STATS_CHANGE
+        || *animationIdPtr == B_ANIM_SNATCH_MOVE
+        || *animationIdPtr == B_ANIM_SUBSTITUTE_FADE)
+    {
+        EmitBattleAnimation(0, *animationIdPtr, *argumentPtr);
+        MarkBufferBankForExecution(gActiveBank);
+        gBattlescriptCurrInstr += 10;
+    }
+    else if (gHitMarker & HITMARKER_NO_ANIMATIONS)
+    {
+        gBattlescriptCurrInstr += 10;
+    }
+    else if (*animationIdPtr == B_ANIM_RAIN_CONTINUES
+             || *animationIdPtr == B_ANIM_SUN_CONTINUES
+             || *animationIdPtr == B_ANIM_SANDSTORM_CONTINUES
+             || *animationIdPtr == B_ANIM_HAIL_CONTINUES)
+    {
+        EmitBattleAnimation(0, *animationIdPtr, *argumentPtr);
+        MarkBufferBankForExecution(gActiveBank);
+        gBattlescriptCurrInstr += 10;
+    }
+    else if (gStatuses3[gActiveBank] & STATUS3_SEMI_INVULNERABLE)
+    {
+        gBattlescriptCurrInstr += 10;
+    }
+    else
+    {
+        EmitBattleAnimation(0, *animationIdPtr, *argumentPtr);
+        MarkBufferBankForExecution(gActiveBank);
+        gBattlescriptCurrInstr += 10;
+    }
 }
-#else
-__attribute__((naked))
-static void atk46_playanimation2(void)
-{
-    asm(".syntax unified\n\
-        push {r4-r7,lr}\n\
-    ldr r6, _0802151C @ =gBattlescriptCurrInstr\n\
-    ldr r0, [r6]\n\
-    ldrb r0, [r0, 0x1]\n\
-    bl GetBattleBank\n\
-    ldr r7, _08021520 @ =gActiveBank\n\
-    strb r0, [r7]\n\
-    ldr r2, [r6]\n\
-    ldrb r1, [r2, 0x2]\n\
-    ldrb r0, [r2, 0x3]\n\
-    lsls r0, 8\n\
-    adds r1, r0\n\
-    ldrb r0, [r2, 0x4]\n\
-    lsls r0, 16\n\
-    adds r1, r0\n\
-    ldrb r0, [r2, 0x5]\n\
-    lsls r0, 24\n\
-    adds r3, r1, r0\n\
-    ldrb r1, [r2, 0x6]\n\
-    ldrb r0, [r2, 0x7]\n\
-    lsls r0, 8\n\
-    adds r1, r0\n\
-    ldrb r0, [r2, 0x8]\n\
-    lsls r0, 16\n\
-    adds r1, r0\n\
-    ldrb r0, [r2, 0x9]\n\
-    lsls r0, 24\n\
-    adds r4, r1, r0\n\
-    ldrb r5, [r3]\n\
-    adds r0, r5, 0\n\
-    cmp r0, 0x1\n\
-    beq _080214FE\n\
-    cmp r0, 0x11\n\
-    beq _080214FE\n\
-    cmp r0, 0x2\n\
-    bne _08021524\n\
-_080214FE:\n\
-    ldrb r1, [r3]\n\
-    ldrh r2, [r4]\n\
-    movs r0, 0\n\
-    bl EmitBattleAnimation\n\
-    ldr r0, _08021520 @ =gActiveBank\n\
-    ldrb r0, [r0]\n\
-    bl MarkBufferBankForExecution\n\
-    ldr r1, _0802151C @ =gBattlescriptCurrInstr\n\
-    ldr r0, [r1]\n\
-    adds r0, 0xA\n\
-    str r0, [r1]\n\
-    b _0802157A\n\
-    .align 2, 0\n\
-_0802151C: .4byte gBattlescriptCurrInstr\n\
-_08021520: .4byte gActiveBank\n\
-_08021524:\n\
-    ldr r0, _08021534 @ =gHitMarker\n\
-    ldr r0, [r0]\n\
-    movs r1, 0x80\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _08021538\n\
-    adds r0, r2, 0\n\
-    b _08021576\n\
-    .align 2, 0\n\
-_08021534: .4byte gHitMarker\n\
-_08021538:\n\
-    adds r0, r5, 0\n\
-    subs r0, 0xA\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x3\n\
-    bls _08021564\n\
-    ldr r1, _0802155C @ =gStatuses3\n\
-    ldrb r0, [r7]\n\
-    lsls r0, 2\n\
-    adds r0, r1\n\
-    ldr r0, [r0]\n\
-    ldr r1, _08021560 @ =0x000400c0\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _08021564\n\
-    adds r0, r2, 0\n\
-    b _08021576\n\
-    .align 2, 0\n\
-_0802155C: .4byte gStatuses3\n\
-_08021560: .4byte 0x000400c0\n\
-_08021564:\n\
-    ldrb r1, [r3]\n\
-    ldrh r2, [r4]\n\
-    movs r0, 0\n\
-    bl EmitBattleAnimation\n\
-    ldrb r0, [r7]\n\
-    bl MarkBufferBankForExecution\n\
-    ldr r0, [r6]\n\
-_08021576:\n\
-    adds r0, 0xA\n\
-    str r0, [r6]\n\
-_0802157A:\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .syntax divided    ");
-}
-#endif // NONMATCHING
 
 static void atk47_setgraphicalstatchangevalues(void)
 {
@@ -17089,7 +16911,7 @@ static void atkE6_castform_change_animation(void)
     gActiveBank = BATTLE_STRUCT->scriptingActive;
     if (gBattleMons[gActiveBank].status2 & STATUS2_SUBSTITUTE)
         BATTLE_STRUCT->castformToChangeInto |= 0x80;
-    EmitBattleAnimation(0, 0, BATTLE_STRUCT->castformToChangeInto);
+    EmitBattleAnimation(0, B_ANIM_CASTFORM_CHANGE, BATTLE_STRUCT->castformToChangeInto);
     MarkBufferBankForExecution(gActiveBank);
     gBattlescriptCurrInstr++;
 }

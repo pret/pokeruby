@@ -2591,7 +2591,7 @@ _080137FA:
 	lsls r0, 29
 	cmp r0, 0
 	blt _0801387C
-	ldr r0, _08013878 @ =gUnknown_081D94DA
+	ldr r0, _08013878 @ =BattleScript_FocusPunchSetUp
 	bl b_call_bc_move_exec
 	b _080138BE
 	.align 2, 0
@@ -2605,7 +2605,7 @@ _08013868: .4byte gChosenMovesByBanks
 _0801386C: .4byte gBattleMons
 _08013870: .4byte gDisableStructs
 _08013874: .4byte gProtectStructs
-_08013878: .4byte gUnknown_081D94DA
+_08013878: .4byte BattleScript_FocusPunchSetUp
 _0801387C:
 	ldrb r0, [r4]
 	ldrb r2, [r7]
@@ -4414,7 +4414,7 @@ sub_80147A0: @ 80147A0
 	cmp r3, 0xC
 	bhi _08014830
 	ldr r2, _08014828 @ =gBattlescriptCurrInstr
-	ldr r1, _0801482C @ =gUnknown_081D9E48
+	ldr r1, _0801482C @ =gBattlescriptsForBallThrow
 	ldrh r0, [r5]
 	lsls r0, 2
 	adds r0, r1
@@ -4432,7 +4432,7 @@ _0801481C: .4byte gDisableStructs
 _08014820: .4byte gLastUsedItem
 _08014824: .4byte gBattleBufferB
 _08014828: .4byte gBattlescriptCurrInstr
-_0801482C: .4byte gUnknown_081D9E48
+_0801482C: .4byte gBattlescriptsForBallThrow
 _08014830:
 	adds r0, r3, 0
 	subs r0, 0x50
@@ -4441,11 +4441,11 @@ _08014830:
 	cmp r0, 0x1
 	bhi _0801484C
 	ldr r0, _08014844 @ =gBattlescriptCurrInstr
-	ldr r1, _08014848 @ =gUnknown_081D9E94
+	ldr r1, _08014848 @ =gBattlescriptsForRunningByItem
 	b _0801485C
 	.align 2, 0
 _08014844: .4byte gBattlescriptCurrInstr
-_08014848: .4byte gUnknown_081D9E94
+_08014848: .4byte gBattlescriptsForRunningByItem
 _0801484C:
 	ldrb r0, [r4]
 	bl GetBankSide
@@ -5071,7 +5071,7 @@ sub_8014D50: @ 8014D50
 	ldr r0, _08014D88 @ =gUnknown_030042A0
 	strh r1, [r0]
 	ldr r1, _08014D8C @ =gBattlescriptCurrInstr
-	ldr r0, _08014D90 @ =gUnknown_081D9E98
+	ldr r0, _08014D90 @ =gBattlescriptsForSafariActions
 	ldr r0, [r0]
 	str r0, [r1]
 	ldr r1, _08014D94 @ =gFightStateTracker
@@ -5085,7 +5085,7 @@ _08014D80: .4byte gCurrentMoveTurn
 _08014D84: .4byte gUnknown_030042A4
 _08014D88: .4byte gUnknown_030042A0
 _08014D8C: .4byte gBattlescriptCurrInstr
-_08014D90: .4byte gUnknown_081D9E98
+_08014D90: .4byte gBattlescriptsForSafariActions
 _08014D94: .4byte gFightStateTracker
 	thumb_func_end sub_8014D50
 
@@ -5111,7 +5111,7 @@ sub_8014D98: @ 8014D98
 	movs r0, 0x5
 	strh r0, [r1]
 	ldr r1, _08014DEC @ =gBattlescriptCurrInstr
-	ldr r0, _08014DF0 @ =gUnknown_081D9E48
+	ldr r0, _08014DF0 @ =gBattlescriptsForBallThrow
 	ldr r0, [r0, 0x14]
 	str r0, [r1]
 	ldr r1, _08014DF4 @ =gFightStateTracker
@@ -5127,7 +5127,7 @@ _08014DE0: .4byte gUnknown_030042A0
 _08014DE4: .4byte gNumSafariBalls
 _08014DE8: .4byte gLastUsedItem
 _08014DEC: .4byte gBattlescriptCurrInstr
-_08014DF0: .4byte gUnknown_081D9E48
+_08014DF0: .4byte gBattlescriptsForBallThrow
 _08014DF4: .4byte gFightStateTracker
 	thumb_func_end sub_8014D98
 
@@ -5208,7 +5208,7 @@ _08014E9A:
 	strb r0, [r4]
 _08014E9C:
 	ldr r1, _08014EB0 @ =gBattlescriptCurrInstr
-	ldr r0, _08014EB4 @ =gUnknown_081D9E98
+	ldr r0, _08014EB4 @ =gBattlescriptsForSafariActions
 	ldr r0, [r0, 0x8]
 	str r0, [r1]
 	ldr r1, _08014EB8 @ =gFightStateTracker
@@ -5219,7 +5219,7 @@ _08014E9C:
 	bx r0
 	.align 2, 0
 _08014EB0: .4byte gBattlescriptCurrInstr
-_08014EB4: .4byte gUnknown_081D9E98
+_08014EB4: .4byte gBattlescriptsForSafariActions
 _08014EB8: .4byte gFightStateTracker
 	thumb_func_end sub_8014DF8
 
@@ -5299,7 +5299,7 @@ _08014F54:
 	strb r0, [r1, 0x5]
 _08014F5A:
 	ldr r1, _08014F74 @ =gBattlescriptCurrInstr
-	ldr r0, _08014F78 @ =gUnknown_081D9E98
+	ldr r0, _08014F78 @ =gBattlescriptsForSafariActions
 	ldr r0, [r0, 0x4]
 	str r0, [r1]
 	ldr r1, _08014F7C @ =gFightStateTracker
@@ -5311,7 +5311,7 @@ _08014F5A:
 	.align 2, 0
 _08014F70: .4byte gBattleCommunication
 _08014F74: .4byte gBattlescriptCurrInstr
-_08014F78: .4byte gUnknown_081D9E98
+_08014F78: .4byte gBattlescriptsForSafariActions
 _08014F7C: .4byte gFightStateTracker
 	thumb_func_end sub_8014EBC
 
@@ -5373,7 +5373,7 @@ sub_8014FBC: @ 8014FBC
 	movs r0, 0xFF
 	strb r0, [r1, 0x4]
 	ldr r1, _08015024 @ =gBattlescriptCurrInstr
-	ldr r0, _08015028 @ =gUnknown_081D9E98
+	ldr r0, _08015028 @ =gBattlescriptsForSafariActions
 	ldr r0, [r0, 0xC]
 	str r0, [r1]
 	ldr r1, _0801502C @ =gFightStateTracker
@@ -5392,7 +5392,7 @@ _08015018: .4byte gUnknown_030042A0
 _0801501C: .4byte gBattleTextBuff1
 _08015020: .4byte gBattlePartyID
 _08015024: .4byte gBattlescriptCurrInstr
-_08015028: .4byte gUnknown_081D9E98
+_08015028: .4byte gBattlescriptsForSafariActions
 _0801502C: .4byte gFightStateTracker
 _08015030: .4byte gUnknown_02024A76
 	thumb_func_end sub_8014FBC

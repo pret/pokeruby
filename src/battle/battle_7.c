@@ -43,7 +43,7 @@ extern u8 gBattleAnimBankAttacker;
 extern u8 gBattleAnimBankTarget;
 extern void (*gAnimScriptCallback)(void);
 extern u8 gAnimScriptActive;
-extern const u8 *const gBattleAnims_Unknown1[];
+extern const u8 *const gBattleAnims_General[];
 extern const u8 *const gBattleAnims_Unknown2[];
 extern const struct CompressedSpriteSheet gTrainerFrontPicTable[];
 extern const struct MonCoords gTrainerFrontPicCoords[];
@@ -177,7 +177,7 @@ bool8 move_anim_start_t3(u8 a, u8 b, u8 c, u8 d, u16 e)
     gBattleAnimBankAttacker = b;
     gBattleAnimBankTarget = c;
     ewram17840.unk0 = e;
-    DoMoveAnim(gBattleAnims_Unknown1, d, 0);
+    DoMoveAnim(gBattleAnims_General, d, 0);
     taskId = CreateTask(sub_80315E8, 10);
     gTasks[taskId].data[0] = a;
     ewram17810[gTasks[taskId].data[0]].unk0_5 = 1;

@@ -382,40 +382,40 @@ gBattleAnims_StatusConditions:: @ 81C76F8
 	.4byte StatusCondition_Nightmare
 
 	.align 2
-gBattleAnims_Unknown1:: @ 81C771C
-	.4byte Unknown_81D63B4
-	.4byte Unknown_81D63EA
-	.4byte Unknown_81D63F3
-	.4byte Unknown_81D6430
-	.4byte Unknown_81D6438
-	.4byte Unknown_81D647E
-	.4byte Unknown_81D6489
-	.4byte Unknown_81D661C
-	.4byte Unknown_81D6690
-	.4byte Unknown_81D676E
-	.4byte Unknown_Weather_Rain
-	.4byte Unknown_Weather_HarshSunlight
-	.4byte Unknown_Weather_Sandstorm
-	.4byte Unknown_Weather_Hail
-	.4byte Unknown_81D6813
-	.4byte Unknown_81D6821
-	.4byte Unknown_81D6852
-	.4byte Unknown_81D6877
-	.4byte Unknown_81D68D5
-	.4byte Unknown_81D6934
-	.4byte Unknown_81D69F9
-	.4byte Unknown_81D6A39
-	.4byte Unknown_81D6A7C
+gBattleAnims_General:: @ 81C771C
+	.4byte General_CastformChange
+	.4byte General_StatsChange
+	.4byte General_SubstituteFade
+	.4byte General_SubstituteAppear
+	.4byte General_PokeblockThrow
+	.4byte General_ItemKnockoff
+	.4byte General_TurnTrap
+	.4byte General_ItemEffect
+	.4byte General_SmokeballEscape
+	.4byte General_HangedOn
+	.4byte General_Rain
+	.4byte General_Sun
+	.4byte General_Sandstorm
+	.4byte General_Hail
+	.4byte General_LeechSeedDrain
+	.4byte General_MonHit
+	.4byte General_ItemSteal
+	.4byte General_SnatchMove
+	.4byte General_FutureSightHit
+	.4byte General_DoomDesireHit
+	.4byte General_FocusPunchSetUp
+	.4byte General_IngrainHeal
+	.4byte General_WishHeal
 
 	.align 2
 gBattleAnims_Unknown2:: @ 81C7778
-	.4byte Unknown_81D6AF6
-	.4byte Unknown_81D6B17
-	.4byte Unknown_81D6B28
-	.4byte Unknown_81D6B39
-	.4byte Unknown_81D6B8D
-	.4byte Unknown_81D6BA6
-	.4byte Unknown_81D6BB0
+	.4byte Special_LevelUp
+	.4byte Special_SwitchOutPlayerMon
+	.4byte Special_SwitchOutOpponentMon
+	.4byte Special_BallThrow
+	.4byte Special_SafariBallThrow
+	.4byte Special_SubstituteToMon
+	.4byte Special_MonToSubstitute
 
 Move_POUND: @ 81C7794
 	loadsprite 10135
@@ -3182,25 +3182,26 @@ Move_DESTINY_BOND: @ 81CBA2C
 Move_ENDURE: @ 81CBA87
 	loadsprite 10184
 	panse_19 SE_W082, 192
-	call _81CBAC7
+	call EndureFlamesAnim
 	pause 8
 	createtask sub_80E1F8C, 2, 2, 2, 2, 0, 11, 31
 	createtask sub_80A7FA0, 2, 0, 1, 0, 32, 1
-	call _81CBAC7
+	call EndureFlamesAnim
 	pause 8
-	call _81CBAC7
+	call EndureFlamesAnim
 	wait
 	end
-_81CBAC7:
-	sprite gBattleAnimSpriteTemplate_83D6E98, 2, 0, -24, 26, 2
+
+EndureFlamesAnim:
+	sprite gBattleAnimSpriteTemplate_EndureFlame, 2, 0, -24, 26, 2
 	pause 4
-	sprite gBattleAnimSpriteTemplate_83D6E98, 2, 0, 14, 28, 1
+	sprite gBattleAnimSpriteTemplate_EndureFlame, 2, 0, 14, 28, 1
 	pause 4
-	sprite gBattleAnimSpriteTemplate_83D6E98, 2, 0, -5, 10, 2
+	sprite gBattleAnimSpriteTemplate_EndureFlame, 2, 0, -5, 10, 2
 	pause 4
-	sprite gBattleAnimSpriteTemplate_83D6E98, 2, 0, 28, 26, 3
+	sprite gBattleAnimSpriteTemplate_EndureFlame, 2, 0, 28, 26, 3
 	pause 4
-	sprite gBattleAnimSpriteTemplate_83D6E98, 2, 0, -12, 0, 1
+	sprite gBattleAnimSpriteTemplate_EndureFlame, 2, 0, -12, 0, 1
 	ret
 
 Move_CHARM: @ 81CBB1B
@@ -7348,13 +7349,13 @@ Move_LICK: @ 81D1B32
 Move_FOCUS_ENERGY: @ 81D1B59
 	loadsprite 10184
 	panse_19 SE_W082, 192
-	call _81CBAC7
+	call EndureFlamesAnim
 	pause 8
 	createtask sub_80E1F8C, 2, 2, 2, 2, 0, 11, 32767
 	createtask sub_80A7FA0, 2, 0, 1, 0, 32, 1
-	call _81CBAC7
+	call EndureFlamesAnim
 	pause 8
-	call _81CBAC7
+	call EndureFlamesAnim
 	wait
 	end
 
@@ -10287,7 +10288,7 @@ StatusCondition_Nightmare: @ 81D638F
 	clearmonbg 3
 	end
 
-Unknown_81D63B4: @ 81D63B4
+General_CastformChange: @ 81D63B4
 	createtask c3_80DFBE4, 2
 	jumpvareq 7, 1, _81D63E0
 	jump _81D63C8
@@ -10303,12 +10304,12 @@ _81D63E0:
 	createtask sub_812DB58, 2, 1
 	end
 
-Unknown_81D63EA: @ 81D63EA
+General_StatsChange: @ 81D63EA
 	createtask sub_807BB88, 5
 	wait
 	end
 
-Unknown_81D63F3: @ 81D63F3
+General_SubstituteFade: @ 81D63F3
 	monbg 0
 	createtask sub_81416C4, 5
 	createtask sub_80E2A38, 10, 2, 0, 0, 16, 32767
@@ -10321,11 +10322,11 @@ Unknown_81D63F3: @ 81D63F3
 	createtask sub_814151C, 2, 1
 	end
 
-Unknown_81D6430: @ 81D6430
+General_SubstituteAppear: @ 81D6430
 	createtask sub_81312E4, 2
 	end
 
-Unknown_81D6438: @ 81D6438
+General_PokeblockThrow: @ 81D6438
 	createtask sub_8141D7C, 2
 	createtask sub_8141BD4, 2
 	pause 0
@@ -10338,12 +10339,12 @@ Unknown_81D6438: @ 81D6438
 	createtask sub_8141C08, 2
 	end
 
-Unknown_81D647E: @ 81D647E
+General_ItemKnockoff: @ 81D647E
 	loadsprite 10224
 	sprite gBattleAnimSpriteTemplate_83D6734, 130
 	end
 
-Unknown_81D6489: @ 81D6489
+General_TurnTrap: @ 81D6489
 	createtask sub_8141DAC, 5
 	jumpvareq 0, 1, _81D64FD
 	jumpvareq 0, 2, _81D6522
@@ -10418,7 +10419,7 @@ _81D65D3:
 	stopsound
 	end
 
-Unknown_81D661C: @ 81D661C
+General_ItemEffect: @ 81D661C
 	loadsprite 10203
 	loadsprite 10049
 	pause 0
@@ -10440,7 +10441,7 @@ Unknown_81D661C: @ 81D661C
 	wait
 	end
 
-Unknown_81D6690: @ 81D6690
+General_SmokeballEscape: @ 81D6690
 	loadsprite 10242
 	monbg 0
 	setalpha 12, 4
@@ -10479,7 +10480,7 @@ Unknown_81D6690: @ 81D6690
 	blendoff
 	end
 
-Unknown_81D676E: @ 81D676E
+General_HangedOn: @ 81D676E
 	sprite gBattleAnimSpriteTemplate_83DB3C4, 0, 2, 7, 0, 9, 31
 	panse_19 SE_W082, 192
 	createtask sub_812FC68, 5, 30, 128, 0, 1, 2, 0, 1
@@ -10490,7 +10491,7 @@ Unknown_81D676E: @ 81D676E
 	sprite gBattleAnimSpriteTemplate_83C1FE0, 0, 0, 0, 15
 	end
 
-Unknown_Weather_Rain: @ 81D67BB
+General_Rain: @ 81D67BB
 	loadsprite 10115
 	panse_19 SE_W240, 192
 	createtask sub_80E2A38, 10, 1921, 2, 0, 4, 0
@@ -10503,21 +10504,21 @@ Unknown_Weather_Rain: @ 81D67BB
 	wait
 	end
 
-Unknown_Weather_HarshSunlight: @ 81D6804
+General_Sun: @ 81D6804
 	jump Move_SUNNY_DAY
 
-Unknown_Weather_Sandstorm: @ 81D6809
+General_Sandstorm: @ 81D6809
 	jump Move_SANDSTORM
 
-Unknown_Weather_Hail: @ 81D680E
+General_Hail: @ 81D680E
 	jump Move_HAIL
 
-Unknown_81D6813: @ 81D6813
+General_LeechSeedDrain: @ 81D6813
 	createtask sub_8141E10, 5
 	pause 0
 	jump Move_ABSORB
 
-Unknown_81D6821: @ 81D6821
+General_MonHit: @ 81D6821
 	loadsprite 10135
 	monbg 1
 	setalpha 12, 8
@@ -10529,7 +10530,7 @@ Unknown_81D6821: @ 81D6821
 	blendoff
 	end
 
-Unknown_81D6852: @ 81D6852
+General_ItemSteal: @ 81D6852
 	loadsprite 10224
 	createtask sub_80E42D0, 2
 	createtask sub_8141808, 2
@@ -10537,7 +10538,7 @@ Unknown_81D6852: @ 81D6852
 	sprite gBattleAnimSpriteTemplate_83D677C, 2, 0, -5, 10, 2, -1
 	end
 
-Unknown_81D6877: @ 81D6877
+General_SnatchMove: @ 81D6877
 	loadsprite 10224
 	createtask sub_80E4234, 2
 	call Unknown_81D6AB6
@@ -10560,7 +10561,7 @@ _81D68C5:
 	createtask sub_8131FFC, 2
 	jump _81D68AE
 
-Unknown_81D68D5: @ 81D68D5
+General_FutureSightHit: @ 81D68D5
 	createtask sub_80E42B0, 2
 	monbg 3
 	panse_19 SE_W060, 192
@@ -10580,7 +10581,7 @@ Unknown_81D68D5: @ 81D68D5
 	call Unknown_81D61F3
 	end
 
-Unknown_81D6934: @ 81D6934
+General_DoomDesireHit: @ 81D6934
 	createtask sub_80E42B0, 2
 	loadsprite 10198
 	sprite gBattleAnimSpriteTemplate_83DB3C4, 2, 1, 3, 0, 16, 32767
@@ -10614,20 +10615,20 @@ Unknown_81D6934: @ 81D6934
 	wait
 	end
 
-Unknown_81D69F9: @ 81D69F9
+General_FocusPunchSetUp: @ 81D69F9
 	loadsprite 10184
 	panse_19 SE_W082, 192
-	call _81CBAC7
+	call EndureFlamesAnim
 	pause 8
 	createtask sub_80E1F8C, 2, 2, 2, 2, 0, 11, 31
 	createtask sub_80A7FA0, 2, 0, 1, 0, 32, 1
-	call _81CBAC7
+	call EndureFlamesAnim
 	pause 8
-	call _81CBAC7
+	call EndureFlamesAnim
 	wait
 	end
 
-Unknown_81D6A39: @ 81D6A39
+General_IngrainHeal: @ 81D6A39
 	loadsprite 10147
 	loadsprite 10031
 	monbg 3
@@ -10646,7 +10647,7 @@ Unknown_81D6A39: @ 81D6A39
 	blendoff
 	end
 
-Unknown_81D6A7C: @ 81D6A7C
+General_WishHeal: @ 81D6A7C
 	loadsprite 10031
 	loadsprite 10049
 	sprite gBattleAnimSpriteTemplate_83DB3C4, 2, 1, 3, 0, 10, 0
@@ -10681,7 +10682,7 @@ _81D6AE7:
 	wait
 	jump _81D6AE5
 
-Unknown_81D6AF6: @ 81D6AF6
+Special_LevelUp: @ 81D6AF6
 	panse_19 SE_EXPMAX, 0
 	createtask sub_813F4EC, 2
 	pause 0
@@ -10690,19 +10691,19 @@ Unknown_81D6AF6: @ 81D6AF6
 	createtask sub_813F5E8, 2
 	end
 
-Unknown_81D6B17: @ 81D6B17
+Special_SwitchOutPlayerMon: @ 81D6B17
 	createtask sub_813F844, 2
 	pause 10
 	createtask sub_813F798, 2
 	end
 
-Unknown_81D6B28: @ 81D6B28
+Special_SwitchOutOpponentMon: @ 81D6B28
 	createtask sub_813F844, 2
 	pause 10
 	createtask sub_813F798, 2
 	end
 
-Unknown_81D6B39: @ 81D6B39
+Special_BallThrow: @ 81D6B39
 	createtask sub_813F990, 2
 	pause 0
 	panse_19 SE_NAGERU, 0
@@ -10726,7 +10727,7 @@ _81D6B65:
 	blendoff
 	jump _81D6B5C
 
-Unknown_81D6B8D: @ 81D6B8D
+Special_SafariBallThrow: @ 81D6B8D
 	createtask sub_813F990, 2
 	pause 0
 	createtask sub_813FBB8, 2
@@ -10734,10 +10735,10 @@ Unknown_81D6B8D: @ 81D6B8D
 	createtask sub_813F9B8, 2
 	end
 
-Unknown_81D6BA6: @ 81D6BA6
+Special_SubstituteToMon: @ 81D6BA6
 	createtask sub_814151C, 2, 1
 	end
 
-Unknown_81D6BB0: @ 81D6BB0
+Special_MonToSubstitute: @ 81D6BB0
 	createtask sub_814151C, 2, 0
 	end
