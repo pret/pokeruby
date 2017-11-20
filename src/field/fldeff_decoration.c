@@ -109,11 +109,11 @@ static void sub_80C6A14(u8 taskId)
 void sub_80C6A54(s16 x, s16 y)
 {
     u8 dir = player_get_direction_lower_nybble();
-    if (dir == 1)
+    if (dir == DIR_SOUTH)
     {
         sub_80C69C4(x, y);
     }
-    else if (dir == 2)
+    else if (dir == DIR_NORTH)
     {
         u8 taskId = CreateTask(sub_80C6A14, 5);
         gTasks[taskId].data[0] = 0;
@@ -207,28 +207,28 @@ bool8 FldEff_SandPillar(void)
 
     switch (player_get_direction_lower_nybble())
     {
-    case 1:
+    case DIR_SOUTH:
         CreateSprite(
             &gSpriteTemplate_83D26A0,
             gSprites[gPlayerAvatar.spriteId].oam.x + 8,
             gSprites[gPlayerAvatar.spriteId].oam.y + 32,
             0);
         break;
-    case 2:
+    case DIR_NORTH:
         CreateSprite(
             &gSpriteTemplate_83D26A0,
             gSprites[gPlayerAvatar.spriteId].oam.x + 8,
             gSprites[gPlayerAvatar.spriteId].oam.y,
             148);
         break;
-    case 3:
+    case DIR_WEST:
         CreateSprite(
             &gSpriteTemplate_83D26A0,
             gSprites[gPlayerAvatar.spriteId].oam.x - 8,
             gSprites[gPlayerAvatar.spriteId].oam.y + 16,
             148);
         break;
-    case 4:
+    case DIR_EAST:
         CreateSprite(
             &gSpriteTemplate_83D26A0,
             gSprites[gPlayerAvatar.spriteId].oam.x + 24,

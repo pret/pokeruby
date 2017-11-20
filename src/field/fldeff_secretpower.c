@@ -69,7 +69,7 @@ bool8 SetUpFieldMove_SecretPower(void)
 
     sub_80BB63C();
 
-    if (gScriptResult == 1 || player_get_direction_lower_nybble() != 2)
+    if (gScriptResult == 1 || player_get_direction_lower_nybble() != DIR_NORTH)
         return FALSE;
 
     GetXYCoordsOneStepInFrontOfPlayer(&gUnknown_0203923C.x, &gUnknown_0203923C.y);
