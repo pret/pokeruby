@@ -9,6 +9,24 @@ struct UnknownTaskStruct
     u8 unk9;
 };
 
+struct UnknownTaskStruct2
+{
+    void *src[2];
+    volatile void *dest;
+    u32 unkC;
+    void (*unk10)(void);
+    u8 srcBank;
+    u8 unk15;
+    u8 unk16;
+    u8 unk17;
+    u8 taskId;
+    u8 filler19[0x7];
+};
+
+extern struct UnknownTaskStruct2 gUnknown_03004DC0;
+
+extern u16 gUnknown_03004DE0[][0x3C0];
+
 void remove_some_task(void);
 void remove_some_task(void);
 void dp12_8087EA4(void);
