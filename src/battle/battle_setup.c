@@ -11,7 +11,7 @@
 #include "field_player_avatar.h"
 #include "field_weather.h"
 #include "fieldmap.h"
-#include "fldeff_80C5CD4.h"
+#include "fldeff_poison.h"
 #include "main.h"
 #include "map_constants.h"
 #include "metatile_behavior.h"

@@ -12,6 +12,7 @@
 #include "field_specials.h"
 #include "field_weather.h"
 #include "fieldmap.h"
+#include "fldeff_decoration.h"
 #include "link.h"
 #include "main.h"
 #include "sound.h"
@@ -46,11 +47,6 @@ static void sub_80BCBC0(u8);
 static void sub_80BCBF8(u8 taskId);
 static void sub_80BCC54(u8 taskId);
 static void Task_SecretBasePC_Registry(u8 taskId);
-
-extern void DoDecorationSoundEffect(s16 metatileId);
-extern void sub_80C6A54(s16 x, s16 y);
-extern void sub_80C68A4(s16 metatileId, s16 x, s16 y);
-extern void DoYellowCave4Sparkle(void);
 
 extern u8 gUnknown_0815F399[];
 extern u8 gUnknown_0815F49A[];

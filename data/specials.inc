@@ -33,7 +33,7 @@ gSpecials::
 	def_special sub_8100A7C
 	def_special sub_80BBC78
 	def_special sub_80BCE4C
-	def_special sub_80C683C
+	def_special DoSecretBasePCTurnOffEffect
 	def_special sub_80B929C
 	def_special sub_808347C
 	def_special sub_80834E4

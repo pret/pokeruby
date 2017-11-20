@@ -159,12 +159,12 @@ SECTIONS {
         src/field/field_poison.o(.text);
         src/pokemon/pokemon_size_record.o(.text);
         asm/pc_screen_effect.o(.text);
-        asm/fldeff_secretpower.o(.text);
-        asm/fldeff_pc.o(.text);
-        asm/fldeff_decoration.o(.text);
-        asm/fldeff_poison.o(.text);
-        asm/fldeff_berrytree.o(.text);
-        asm/fldeff_recordmixing.o(.text);
+        src/field/fldeff_secretpower.o(.text);
+        src/field/fldeff_secret_base_pc.o(.text);
+        src/field/fldeff_decoration.o(.text);
+        src/field/fldeff_poison.o(.text);
+        src/field/fldeff_berrytree.o(.text);
+        src/field/fldeff_recordmixing.o(.text);
         src/field/field_special_scene.o(.text);
         src/field/rotating_gate.o(.text);
         src/field/safari_zone.o(.text);
@@ -410,7 +410,7 @@ SECTIONS {
         data/pc_screen_effect.o(.rodata);
         data/fldeff_secretpower.o(.rodata);
         data/fldeff_decoration.o(.rodata);
-        data/fldeff_recordmixing.o(.rodata);
+        src/field/fldeff_recordmixing.o(.rodata);
         src/field/field_special_scene.o(.rodata);
         src/field/rotating_gate.o(.rodata);
         src/field/item_use.o(.rodata);

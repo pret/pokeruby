@@ -28,7 +28,7 @@
 
 #define subsprite_table(ptr) {.subsprites = ptr, .subspriteCount = (sizeof ptr) / (sizeof(struct Subsprite))}
 
-EWRAM_DATA u32 gFieldEffectArguments[8] = {0};
+EWRAM_DATA s32 gFieldEffectArguments[8] = {0};
 
 const u32 gSpriteImage_839DC14[] = INCBIN_U32("graphics/birch_speech/birch.4bpp");
 const u16 gBirchPalette[16] = INCBIN_U16("graphics/birch_speech/birch.gbapal");

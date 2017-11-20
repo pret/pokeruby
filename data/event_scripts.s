@@ -486,7 +486,7 @@ EventScript_15F4A1:
 	goto_if_eq EventScript_15F452
 	msgbox UnknownString_81A3A22, 3
 	special sub_80BC5BC
-	special sub_80C683C
+	special DoSecretBasePCTurnOffEffect
 	releaseall
 	end
 
@@ -496,13 +496,13 @@ EventScript_15F4E0:
 	goto_if_eq EventScript_15F452
 	msgbox UnknownString_81A3A3A, 3
 	special sub_80BC5BC
-	special sub_80C683C
+	special DoSecretBasePCTurnOffEffect
 	releaseall
 	end
 
 EventScript_15F503:
 	msgbox UnknownString_81A39C0, 3
-	special sub_80C683C
+	special DoSecretBasePCTurnOffEffect
 	closemessage
 	releaseall
 	end
@@ -514,7 +514,7 @@ EventScript_15F511:
 	end
 
 EventScript_15F51D:
-	special sub_80C683C
+	special DoSecretBasePCTurnOffEffect
 	closemessage
 	releaseall
 	end
