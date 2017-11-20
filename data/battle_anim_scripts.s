@@ -408,7 +408,7 @@ gBattleAnims_General:: @ 81C771C
 	.4byte General_WishHeal
 
 	.align 2
-gBattleAnims_Unknown2:: @ 81C7778
+gBattleAnims_Special:: @ 81C7778
 	.4byte Special_LevelUp
 	.4byte Special_SwitchOutPlayerMon
 	.4byte Special_SwitchOutOpponentMon
