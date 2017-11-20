@@ -7084,7 +7084,7 @@ _0811899C: .4byte sub_8118834
 _081189A0: .4byte 0x00000000
 _081189A4: .4byte 0xbf800000
 	thumb_func_end sub_811889C
-*/
+
 	thumb_func_start sub_81189A8
 sub_81189A8: @ 81189A8
 	push {r4-r7,lr}
@@ -7261,7 +7261,7 @@ _08118B24: .4byte 0x40000000
 _08118B28: .4byte 0x00000000
 _08118B2C: .4byte sub_811889C
 	thumb_func_end sub_81189A8
-
+*/
 	thumb_func_start sub_8118B30
 sub_8118B30: @ 8118B30
 	push {r4,r5,lr}

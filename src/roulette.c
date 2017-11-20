@@ -244,7 +244,9 @@ struct Unkg083F8DF4
     u8 var02;
     u8 var03;
     u8 var04;
-    u8 v[0x13];
+    u8 v[0x8];
+    u16 var0C;
+    u8 v1[0x9];
     s16 var18;
     s16 var1A; //is this signed or not ?
     u8 v2[0x4];
@@ -3502,5 +3504,34 @@ void sub_811889C(struct Sprite *sprite)
 
 void sub_81189A8(struct Sprite *sprite)
 {
-
+    float f0, f1, f2;
+    sub_8118724(sprite);
+    switch(sprite->data[0x3])
+    {
+    case 0:
+        if (sprite->data[0x0])
+            return;
+        f0 = ((float)sprite->data[0x8]);
+        f1 = ((f0 * (float)(gUnknown_083F8DF4[RDATA->var04_0].var01)) + (float)(gUnknown_083F8DF4[RDATA->var04_0].var02 - 0x1));
+        f2 = ((float)gUnknown_083F8DF4[RDATA->var04_0].var0C) / f0;
+        break;
+    case 180:
+        if (!sprite->data[0x0])
+            return;
+        f0 = ((float)sprite->data[0x8]);
+        f1 = ((f0 * (float)(gUnknown_083F8DF4[RDATA->var04_0].var01)) + (float)(gUnknown_083F8DF4[RDATA->var04_0].var02 - 0x1));
+        f2 = ((float)gUnknown_083F8DF4[RDATA->var04_0].var0C) / f0;        
+        break;
+        default: return;
+    }
+    RDATA->varA0 = RDATA->var94;
+    RDATA->var98 = f2;
+    RDATA->var9C = -((f2 + f2) / f1 + (2.0f / (f1 * f1)));
+    RDATA->var8C = 0.0f;
+    sprite->animPaused    = FALSE;
+    sprite->animNum       = 0x0;
+    sprite->animBeginning = TRUE;
+    sprite->animEnded     = FALSE;
+    sprite->callback      = &sub_811889C;
+    sprite->data[0x2]     = 0x0;
 }
