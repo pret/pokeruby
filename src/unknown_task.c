@@ -4,20 +4,6 @@
 #include "trig.h"
 #include "unknown_task.h"
 
-struct UnknownStruct1
-{
-    void *src[2];
-    volatile void *dest;
-    u32 unkC;
-    void (*unk10)(void);
-    u8 srcBank;
-    u8 unk15;
-    u8 unk16;
-    u8 unk17;
-    u8 taskId;
-    u8 filler19[0x7];
-};
-
 static void sub_80896F4(void);
 static void sub_8089714(void);
 
@@ -32,7 +18,7 @@ extern u16 gUnknown_030042C0;
 
 extern u8 gUnknown_0202FFA4;
 
-extern struct UnknownStruct1 gUnknown_03004DC0;
+extern struct UnknownTaskStruct2 gUnknown_03004DC0;
 
 extern u16 gUnknown_03004DE0[][0x3C0];
 

@@ -17,13 +17,6 @@
 #include "trig.h"
 #include "unknown_task.h"
 
-struct UnknownStruct6
-{
-    u16 unk0[0xA0];
-    u8 fillerA0[0x640];
-    u16 unk780[0xA0];
-};
-
 struct Struct_sub_8078914
 {
     u8 *field_0;
@@ -72,8 +65,6 @@ extern u16 gUnknown_03004240;
 extern u16 gUnknown_030041B4;
 extern s8 gUnknown_083D7A00[4][2];
 extern u16 gUnknown_083D7A5C[5];
-extern struct UnknownStruct6 gUnknown_03004DE0;
-extern struct UnknownStruct_1 gUnknown_03004DC0;
 
 static void sub_80CA768(struct Sprite* sprite);
 static void sub_80CA8B4(struct Sprite* sprite);
@@ -4908,8 +4899,8 @@ void sub_80D0C88(u8 taskId)
     {
         if (i >= 0)
         {
-            gUnknown_03004DE0.unk0[i] = task->data[6] + 0xF0;
-            gUnknown_03004DE0.unk780[i] = task->data[6] + 0xF0;
+            gUnknown_03004DE0[0][i] = task->data[6] + 0xF0;
+            gUnknown_03004DE0[1][i] = task->data[6] + 0xF0;
         }
     }
 
@@ -4954,8 +4945,8 @@ void sub_80D0D68(u8 taskId)
 
             if (task->data[5] >= 0)
             {
-                gUnknown_03004DE0.unk0[task->data[5]] = task->data[6];
-                gUnknown_03004DE0.unk780[task->data[5]] = task->data[6];
+                gUnknown_03004DE0[0][task->data[5]] = task->data[6];
+                gUnknown_03004DE0[1][task->data[5]] = task->data[6];
             }
 
             if (++task->data[3] >= task->data[15])

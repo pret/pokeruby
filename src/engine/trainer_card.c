@@ -52,13 +52,6 @@ extern struct LinkPlayerMapObject gLinkPlayerMapObjects[];
 
 EWRAM_DATA struct TrainerCard gTrainerCards[4] = {0};
 
-struct UnknownStruct1
-{
-    u16 filler0[0x3C0];
-    u16 unk780[160];
-};
-extern struct UnknownStruct1 gUnknown_03004DE0;
-
 extern const u8 gBadgesTiles[];
 extern const u16 gUnknown_083B5F0C[];
 extern const u16 gBadgesPalette[];
@@ -263,7 +256,7 @@ static void sub_8093254(void)
         ewram0_2.var_5 ^= 1;
     }
     if (ewram0_2.var_4)
-        DmaCopy16(3, gUnknown_03004DE0.filler0, gUnknown_03004DE0.unk780, sizeof(gUnknown_03004DE0.unk780));
+        DmaCopy16(3, &gUnknown_03004DE0[0], &gUnknown_03004DE0[1], 0x140);
 }
 
 static void sub_80932AC(Callback callBack)
@@ -737,12 +730,12 @@ static void sub_8093A68(u8 taskId)
 
 bool8 sub_8093AA0(struct Task *task)
 {
-    s32 i;
+    u32 i;
 
     ewram0_2.var_4 = FALSE;
     dp12_8087EA4();
-    for (i = 0; i < ARRAY_COUNT(gUnknown_03004DE0.unk780); i++)
-        gUnknown_03004DE0.unk780[i] = -4;
+    for (i = 0; i < 0xA0; i++)
+        gUnknown_03004DE0[1][i] = -4;
     SetHBlankCallback(sub_8093D7C);
     ewram0_2.var_4 = TRUE;
     task->data[0]++;
@@ -1123,7 +1116,7 @@ bool8 sub_8093D50(struct Task *task)
 
 void sub_8093D7C(void)
 {
-    u16 bgVOffset = gUnknown_03004DE0.unk780[REG_VCOUNT & 0xFF];
+    u16 bgVOffset = gUnknown_03004DE0[1][REG_VCOUNT & 0xFF];
 
     REG_BG0VOFS = bgVOffset;
     REG_BG1VOFS = bgVOffset;

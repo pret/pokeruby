@@ -31,13 +31,6 @@
 #include "battle_move_effects.h"
 #include "ewram.h"
 
-struct UnknownStruct6
-{
-    u16 unk0[0xA0];
-    u8 fillerA0[0x640];
-    u16 unk780[0xA0];
-};
-
 struct UnknownStruct7
 {
     u8 unk0;
@@ -123,8 +116,6 @@ extern void (*gBattleMainFunc)(void);
 extern u8 gLeveledUpInBattle;
 extern void (*gBattleBankFunc[])(void);
 extern u8 gHealthboxIDs[];
-extern struct UnknownStruct6 gUnknown_03004DE0;
-//extern u16 gUnknown_03004DE0[][0xA0];  // possibly?
 extern u16 gBattleTypeFlags;
 extern s8 gBattleTerrain;  // I'm not sure if this is supposed to be s8 or u8. Regardless, it must have the same type as the return value of BattleSetup_GetTerrain.
 extern u8 gReservedSpritePaletteCount;
@@ -175,14 +166,14 @@ void InitBattle(void)
 
     for (i = 0; i < 80; i++)
     {
-        gUnknown_03004DE0.unk0[i] = 0xF0;
-        gUnknown_03004DE0.unk780[i] = 0xF0;
+        gUnknown_03004DE0[0][i] = 0xF0;
+        gUnknown_03004DE0[1][i] = 0xF0;
     }
     for (i = 80; i < 160; i++)
     {
         asm(""::"r"(i));  // Needed to stop the compiler from optimizing out the loop counter
-        gUnknown_03004DE0.unk0[i] = 0xFF10;
-        gUnknown_03004DE0.unk780[i] = 0xFF10;
+        gUnknown_03004DE0[0][i] = 0xFF10;
+        gUnknown_03004DE0[1][i] = 0xFF10;
     }
     //sub_80895F8(gUnknown_081F9674.unk0, gUnknown_081F9674.unk4, gUnknown_081F9674.unk8);
     sub_80895F8(gUnknown_081F9674);
@@ -1153,14 +1144,14 @@ void c2_8011A1C(void)
 
     for (i = 0; i < 80; i++)
     {
-        gUnknown_03004DE0.unk0[i] = 0xF0;
-        gUnknown_03004DE0.unk780[i] = 0xF0;
+        gUnknown_03004DE0[0][i] = 0xF0;
+        gUnknown_03004DE0[1][i] = 0xF0;
     }
     for (i = 80; i < 160; i++)
     {
         asm(""::"r"(i));  // Needed to stop the compiler from optimizing out the loop counter
-        gUnknown_03004DE0.unk0[i] = 0xFF10;
-        gUnknown_03004DE0.unk780[i] = 0xFF10;
+        gUnknown_03004DE0[0][i] = 0xFF10;
+        gUnknown_03004DE0[1][i] = 0xFF10;
     }
     SetUpWindowConfig(&gWindowConfig_81E6C58);
     ResetPaletteFade();

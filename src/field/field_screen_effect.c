@@ -9,16 +9,6 @@
 #include "text.h"
 #include "unknown_task.h"
 
-struct UnknownStruct1
-{
-    u8 filler0[0x14];
-    u8 unk14;
-    u8 filler15[0xB];
-};
-extern struct UnknownStruct1 gUnknown_03004DC0;
-
-extern u16 gUnknown_03004DE0[][0x3C0];
-
 const static u16 gUnknown_0839ACDC[] = { 0xC8, 0x48, 0x38, 0x28, 0x18, 0x0 };
 
 const s32 gMaxFlashLevel = 4;
@@ -74,11 +64,11 @@ static void sub_8081424(u8 taskId)
     switch (data[0])
     {
     case 0:
-        sub_8081398(&gUnknown_03004DE0[gUnknown_03004DC0.unk14][0], data[1], data[2], data[3]);
+        sub_8081398(&gUnknown_03004DE0[gUnknown_03004DC0.srcBank][0], data[1], data[2], data[3]);
         data[0] = 1;
         break;
     case 1:
-        sub_8081398(&gUnknown_03004DE0[gUnknown_03004DC0.unk14][0], data[1], data[2], data[3]);
+        sub_8081398(&gUnknown_03004DE0[gUnknown_03004DC0.srcBank][0], data[1], data[2], data[3]);
         data[0] = 0;
         data[3] += data[5];
         if (data[3] > data[4])
