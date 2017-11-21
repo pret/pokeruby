@@ -158,6 +158,7 @@ SECTIONS {
         src/script_pokemon_util_80C4BF0.o(.text);
         src/field/field_poison.o(.text);
         src/pokemon/pokemon_size_record.o(.text);
+        src/field/pc_screen_effect.o(.text);
         asm/pc_screen_effect.o(.text);
         src/field/fldeff_secretpower.o(.text);
         src/field/fldeff_secret_base_pc.o(.text);
@@ -407,6 +408,7 @@ SECTIONS {
         src/field/tv.o(.rodata);
         data/contest_link_80C2020.o(.rodata);
         src/pokemon/pokemon_size_record.o(.rodata);
+        src/field/pc_screen_effect.o(.rodata);
         data/pc_screen_effect.o(.rodata);
         data/fldeff_secretpower.o(.rodata);
         data/fldeff_decoration.o(.rodata);
