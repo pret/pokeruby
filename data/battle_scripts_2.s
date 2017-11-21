@@ -5,7 +5,7 @@
 	.section script_data, "aw", %progbits
 
 	.align 2
-gUnknown_081D9E48:: @ 81D9E48
+gBattlescriptsForBallThrow:: @ 81D9E48
 	.4byte BattleScript_1D9EA8
 	.4byte BattleScript_1D9EA8
 	.4byte BattleScript_1D9EA8
@@ -28,10 +28,10 @@ gUnknown_081D9E7C:: @ 81D9E7C
 	.4byte BattleScript_1D9F9C
 	.4byte BattleScript_1D9FBB
 
-gUnknown_081D9E94:: @ 81D9E94
+gBattlescriptsForRunningByItem:: @ 81D9E94
 	.4byte BattleScript_1D9FDA
 
-gUnknown_081D9E98:: @ 81D9E98
+gBattlescriptsForSafariActions:: @ 81D9E98
 	.4byte BattleScript_1D9FE4
 	.4byte BattleScript_1D9FEB
 	.4byte BattleScript_1D9FF4
@@ -177,7 +177,7 @@ BattleScript_1D9FEB: @ 81D9FEB
 BattleScript_1D9FF4: @ 81D9FF4
 	printstring BATTLE_TEXT_ThrewBlock
 	waitmessage 64
-	playanimation USER, 4, 0x0
+	playanimation USER, B_ANIM_POKEBLOCK_THROW, 0x0
 	printfromtable BattleTextList_40161A
 	waitmessage 64
 	end2
