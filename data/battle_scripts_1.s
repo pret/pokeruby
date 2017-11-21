@@ -535,7 +535,7 @@ BattleScript_1D71CE: @ 81D71CE
 
 BattleScript_1D71D0: @ 81D71D0
 	atk47
-	playanimation USER, 1, gSharedMem + 0x160A4
+	playanimation USER, B_ANIM_STATS_CHANGE, gSharedMem + 0x160A4
 
 BattleScript_1D71D8: @ 81D71D8
 	printfromtable BattleTextList_401570
@@ -545,7 +545,7 @@ BattleScript_1D71E0: @ 81D71E0
 	jump BattleScript_EndTurn
 
 BattleScript_StatUp:: @ 81D71E5
-	playanimation 2, 1, gSharedMem + 0x160A4
+	playanimation 2, B_ANIM_STATS_CHANGE, gSharedMem + 0x160A4
 	printfromtable BattleTextList_401570
 	waitmessage 64
 	return
@@ -585,7 +585,7 @@ BattleScript_1D725F: @ 81D725F
 	attackanimation
 	waitanimation
 	atk47
-	playanimation TARGET, 1, gSharedMem + 0x160A4
+	playanimation TARGET, B_ANIM_STATS_CHANGE, gSharedMem + 0x160A4
 
 BattleScript_1D7269: @ 81D7269
 	printfromtable BattleTextList_40157C
@@ -595,7 +595,7 @@ BattleScript_1D7271: @ 81D7271
 	jump BattleScript_EndTurn
 
 BattleScript_StatDown:: @ 81D7276
-	playanimation 2, 1, gSharedMem + 0x160A4
+	playanimation 2, B_ANIM_STATS_CHANGE, gSharedMem + 0x160A4
 	printfromtable BattleTextList_40157C
 	waitmessage 64
 	return
@@ -1694,7 +1694,7 @@ MoveEffect_Swagger: @ 81D7EA2
 	statbuffchange 1, BattleScript_1D7EE5
 	jumpifbyte 0, gUnknown_02024D1F + 0x4, 2, BattleScript_1D7EE5
 	atk47
-	playanimation TARGET, 1, gSharedMem + 0x160A4
+	playanimation TARGET, B_ANIM_STATS_CHANGE, gSharedMem + 0x160A4
 	printfromtable BattleTextList_401570
 	waitmessage 64
 
@@ -1898,7 +1898,7 @@ MoveEffect_SkullBash: @ 81D8085
 	statbuffchange 65, BattleScript_1D80CF
 	jumpifbyte 0, gUnknown_02024D1F + 0x4, 2, BattleScript_1D80CF
 	atk47
-	playanimation USER, 1, gSharedMem + 0x160A4
+	playanimation USER, B_ANIM_STATS_CHANGE, gSharedMem + 0x160A4
 	printfromtable BattleTextList_401570
 	waitmessage 64
 
@@ -2264,7 +2264,7 @@ MoveEffect_Flatter: @ 81D84B1
 	statbuffchange 1, BattleScript_1D84F4
 	jumpifbyte 0, gUnknown_02024D1F + 0x4, 2, BattleScript_1D84F4
 	atk47
-	playanimation TARGET, 1, gSharedMem + 0x160A4
+	playanimation TARGET, B_ANIM_STATS_CHANGE, gSharedMem + 0x160A4
 	printfromtable BattleTextList_401570
 	waitmessage 64
 
@@ -3081,7 +3081,7 @@ gUnknown_081D8E0D:: @ 81D8E0D
 	end2
 
 gUnknown_081D8E14:: @ 81D8E14
-	playanimation USER, 8, 0x0
+	playanimation USER, B_ANIM_SMOKEBALL_ESCAPE, 0x0
 	printstring BATTLE_TEXT_FledUsingItem
 	waitmessage 64
 	end2
@@ -3238,7 +3238,7 @@ gUnknown_081D8F62:: @ 81D8F62
 	printfromtable BattleTextList_401534
 	waitmessage 64
 	jumpifbyte 0, gUnknown_02024D1F + 0x4, 2, BattleScript_1D8F7C
-	playanimation USER, 10, 0x0
+	playanimation USER, B_ANIM_RAIN_CONTINUES, 0x0
 
 BattleScript_1D8F7C: @ 81D8F7C
 	end2
@@ -3280,7 +3280,7 @@ gUnknown_081D8FFF:: @ 81D8FFF
 gUnknown_081D9008:: @ 81D9008
 	printstring BATTLE_TEXT_SunStrong
 	waitmessage 64
-	playanimation USER, 11, 0x0
+	playanimation USER, B_ANIM_SUN_CONTINUES, 0x0
 	end2
 
 gUnknown_081D9016:: @ 81D9016
@@ -3312,7 +3312,7 @@ gUnknown_081D9041:: @ 81D9041
 	end2
 
 BattleScript_LeechSeedTurnDrain:: @ 81D904B
-	playanimation USER, 14, gSharedMem + 0x160A4
+	playanimation USER, B_ANIM_LEECH_SEED_DRAIN, gSharedMem + 0x160A4
 	orword gHitMarker, 0x100100
 	graphicalhpupdate USER
 	datahpupdate USER
@@ -3559,11 +3559,11 @@ BattleScript_1D92F4: @ 81D92F4
 BattleScript_1D92FB: @ 81D92FB
 	atk8
 	jumpifbyte 1, gUnknown_02024D1F + 0x4, 0, BattleScript_1D9313
-	playanimation USER, 18, 0x0
+	playanimation USER, B_ANIM_FUTURE_SIGHT_HIT, 0x0
 	jump BattleScript_1D931A
 
 BattleScript_1D9313: @ 81D9313
-	playanimation USER, 19, 0x0
+	playanimation USER, B_ANIM_DOOM_DESIRE_HIT, 0x0
 
 BattleScript_1D931A: @ 81D931A
 	missmessage
@@ -3626,7 +3626,7 @@ BattleScript_MoveUsedIsTaunted:: @ 81D938F
 
 BattleScript_WishComesTrue:: @ 81D939A
 	atkd4 1, BattleScript_1D93C1
-	playanimation TARGET, 22, 0x0
+	playanimation TARGET, B_ANIM_WISH_HEAL, 0x0
 	printstring BATTLE_TEXT_WishTrue
 	waitmessage 64
 	orword gHitMarker, 0x100
@@ -3645,7 +3645,7 @@ BattleScript_1D93C1: @ 81D93C1
 	end2
 
 BattleScript_IngrainTurnHeal:: @ 81D93D1
-	playanimation USER, 21, 0x0
+	playanimation USER, B_ANIM_INGRAIN_HEAL, 0x0
 	printstring BATTLE_TEXT_AbsorbNutrients
 	waitmessage 64
 	orword gHitMarker, 0x100
@@ -3681,7 +3681,7 @@ BattleScript_1D944A: @ 81D944A
 	return
 
 BattleScript_KnockedOff:: @ 81D944B
-	playanimation TARGET, 5, 0x0
+	playanimation TARGET, B_ANIM_ITEM_KNOCKOFF, 0x0
 	printstring BATTLE_TEXT_KnockedOffItem
 	waitmessage 64
 	return
@@ -3714,7 +3714,7 @@ BattleScript_SnatchedMove:: @ 81D9487
 	attackstring
 	ppreduce
 	snatchmove
-	playanimation TARGET, 17, 0x0
+	playanimation TARGET, B_ANIM_SNATCH_MOVE, 0x0
 	printstring BATTLE_TEXT_SnatchedMove
 	waitmessage 64
 	orword gHitMarker, 0x800c00
@@ -3743,10 +3743,10 @@ BattleScript_SAtkDown2:: @ 81D94B0
 BattleScript_1D94D9: @ 81D94D9
 	return
 
-gUnknown_081D94DA:: @ 81D94DA
+BattleScript_FocusPunchSetUp:: @ 81D94DA
 	printstring BATTLE_TEXT_Terminator2
 	waitmessage 1
-	playanimation USER, 20, 0x0
+	playanimation USER, B_ANIM_FOCUS_PUNCH_SET_UP, 0x0
 	printstring BATTLE_TEXT_TightenFocus
 	waitmessage 64
 	end2
@@ -3866,7 +3866,7 @@ gUnknown_081D95DB:: @ 81D95DB
 	return
 
 BattleScript_WrapTurnDmg:: @ 81D95E2
-	playanimation USER, 6, gSharedMem + 0x160A4
+	playanimation USER, B_ANIM_TURN_TRAP, gSharedMem + 0x160A4
 	printstring BATTLE_TEXT_HurtBy
 	waitmessage 64
 	jump BattleScript_1D9520
@@ -3991,7 +3991,7 @@ BattleScript_1D96F5: @ 81D96F5
 	return
 
 BattleScript_ItemSteal:: @ 81D96F6
-	playanimation TARGET, 16, 0x0
+	playanimation TARGET, B_ANIM_ITEM_STEAL, 0x0
 	printstring BATTLE_TEXT_StoleSomething
 	waitmessage 64
 	return
@@ -4000,12 +4000,12 @@ BattleScript_DrizzleActivates:: @ 81D9704
 	pause 32
 	printstring BATTLE_TEXT_RainMade
 	waitstateatk
-	playanimation 7, 10, 0x0
+	playanimation 7, B_ANIM_RAIN_CONTINUES, 0x0
 	callatk BattleScript_1D9761
 	end3
 
 BattleScript_SpeedBoostActivates:: @ 81D9718
-	playanimation USER, 1, gSharedMem + 0x160A4
+	playanimation USER, B_ANIM_STATS_CHANGE, gSharedMem + 0x160A4
 	printstring BATTLE_TEXT_SpeedRisen
 	waitmessage 64
 	end3
@@ -4028,7 +4028,7 @@ BattleScript_SandstreamActivates:: @ 81D9744
 	pause 32
 	printstring BATTLE_TEXT_WhipSandstorm
 	waitstateatk
-	playanimation 7, 12, 0x0
+	playanimation 7, B_ANIM_SANDSTORM_CONTINUES, 0x0
 	callatk BattleScript_1D9761
 	end3
 
@@ -4078,7 +4078,7 @@ BattleScript_1D97A1: @ 81D97A1
 	statbuffchange 33, BattleScript_1D97E4
 	jumpifbyte 2, gUnknown_02024D1F + 0x4, 1, BattleScript_1D97E4
 	atk47
-	playanimation TARGET, 1, gSharedMem + 0x160A4
+	playanimation TARGET, B_ANIM_STATS_CHANGE, gSharedMem + 0x160A4
 	printstring BATTLE_TEXT_CutsAttack
 	waitmessage 64
 
@@ -4099,7 +4099,7 @@ BattleScript_DroughtActivates:: @ 81D97FE
 	pause 32
 	printstring BATTLE_TEXT_SunIntensified
 	waitstateatk
-	playanimation 7, 11, 0x0
+	playanimation 7, B_ANIM_SUN_CONTINUES, 0x0
 	callatk BattleScript_1D9761
 	end3
 
@@ -4297,7 +4297,7 @@ gUnknown_081D99A0:: @ 81D99A0
 	jump BattleScript_1D95AC
 
 BattleScript_SubstituteFade:: @ 81D99AB
-	playanimation TARGET, 2, 0x0
+	playanimation TARGET, B_ANIM_SUBSTITUTE_FADE, 0x0
 	printstring BATTLE_TEXT_SubFaded
 	return
 
@@ -4306,7 +4306,7 @@ BattleScript_BerryCurePrlzEnd2:: @ 81D99B6
 	end2
 
 BattleScript_BerryCureParRet:: @ 81D99BC
-	playanimation 10, 7, 0x0
+	playanimation 10, B_ANIM_ITEM_EFFECT, 0x0
 	printstring BATTLE_TEXT_CuredParalysis
 	waitmessage 64
 	atk98 10
@@ -4318,7 +4318,7 @@ BattleScript_BerryCurePsnEnd2:: @ 81D99CE
 	end2
 
 BattleScript_BerryCurePsnRet:: @ 81D99D4
-	playanimation 10, 7, 0x0
+	playanimation 10, B_ANIM_ITEM_EFFECT, 0x0
 	printstring BATTLE_TEXT_CuredPoison
 	waitmessage 64
 	atk98 10
@@ -4330,7 +4330,7 @@ BattleScript_BerryCureBrnEnd2:: @ 81D99E6
 	end2
 
 BattleScript_BerryCureBrnRet:: @ 81D99EC
-	playanimation 10, 7, 0x0
+	playanimation 10, B_ANIM_ITEM_EFFECT, 0x0
 	printstring BATTLE_TEXT_CuredBurn
 	waitmessage 64
 	atk98 10
@@ -4342,7 +4342,7 @@ BattleScript_BerryCureFrzEnd2:: @ 81D99FE
 	end2
 
 BattleScript_BerryCureFrzRet:: @ 81D9A04
-	playanimation 10, 7, 0x0
+	playanimation 10, B_ANIM_ITEM_EFFECT, 0x0
 	printstring BATTLE_TEXT_CuredFreeze
 	waitmessage 64
 	atk98 10
@@ -4354,7 +4354,7 @@ BattleScript_BerryCureSlpEnd2:: @ 81D9A16
 	end2
 
 BattleScript_BerryCureSlpRet:: @ 81D9A1C
-	playanimation 10, 7, 0x0
+	playanimation 10, B_ANIM_ITEM_EFFECT, 0x0
 	printstring BATTLE_TEXT_CuredSleep
 	waitmessage 64
 	atk98 10
@@ -4366,7 +4366,7 @@ BattleScript_BerryCureConfusionEnd2:: @ 81D9A2E
 	end2
 
 BattleScript_BerryCureConfusionRet:: @ 81D9A34
-	playanimation 10, 7, 0x0
+	playanimation 10, B_ANIM_ITEM_EFFECT, 0x0
 	printstring BATTLE_TEXT_CuredConfusion
 	waitmessage 64
 	removeitem 10
@@ -4377,7 +4377,7 @@ gUnknown_081D9A44:: @ 81D9A44
 	end2
 
 gUnknown_081D9A4A:: @ 81D9A4A
-	playanimation 10, 7, 0x0
+	playanimation 10, B_ANIM_ITEM_EFFECT, 0x0
 	printfromtable BattleTextList_40162C
 	waitmessage 64
 	atk98 10
@@ -4389,14 +4389,14 @@ BattleScript_WhiteHerbEnd2:: @ 81D9A5E
 	end2
 
 BattleScript_WhiteHerbRet:: @ 81D9A64
-	playanimation 10, 7, 0x0
+	playanimation 10, B_ANIM_ITEM_EFFECT, 0x0
 	printstring BATTLE_TEXT_RestoredStatus
 	waitmessage 64
 	removeitem 10
 	return
 
 BattleScript_ItemHealHP_RemoveItem:: @ 81D9A74
-	playanimation USER, 7, 0x0
+	playanimation USER, B_ANIM_ITEM_EFFECT, 0x0
 	printstring BATTLE_TEXT_RestoredHealth
 	waitmessage 64
 	orword gHitMarker, 0x100
@@ -4406,7 +4406,7 @@ BattleScript_ItemHealHP_RemoveItem:: @ 81D9A74
 	end2
 
 BattleScript_BerryPPHealEnd2:: @ 81D9A91
-	playanimation USER, 7, 0x0
+	playanimation USER, B_ANIM_ITEM_EFFECT, 0x0
 	printstring BATTLE_TEXT_RestoredPP
 	waitmessage 64
 	removeitem USER
@@ -4417,7 +4417,7 @@ BattleScript_ItemHealHP_End2:: @ 81D9AA1
 	end2
 
 BattleScript_ItemHealHP_Ret:: @ 81D9AA7
-	playanimation USER, 7, 0x0
+	playanimation USER, B_ANIM_ITEM_EFFECT, 0x0
 	printstring BATTLE_TEXT_RestoredHPLittle
 	waitmessage 64
 	orword gHitMarker, 0x100
@@ -4430,13 +4430,13 @@ BattleScript_MoveSelectionChoiceBanded:: @ 81D9AC2
 	atk44
 
 BattleScript_HangedOnMsg:: @ 81D9AC6
-	playanimation TARGET, 9, 0x0
+	playanimation TARGET, B_ANIM_HANGED_ON, 0x0
 	printstring BATTLE_TEXT_FocusSash
 	waitmessage 64
 	return
 
 BattleScript_BerryConfuseHealEnd2:: @ 81D9AD4
-	playanimation USER, 7, 0x0
+	playanimation USER, B_ANIM_ITEM_EFFECT, 0x0
 	printstring BATTLE_TEXT_RestoredHealth
 	waitmessage 64
 	orword gHitMarker, 0x100
@@ -4450,7 +4450,7 @@ BattleScript_BerryConfuseHealEnd2:: @ 81D9AD4
 	end2
 
 BattleScript_BerryStatRaiseEnd2:: @ 81D9AFE
-	playanimation USER, 7, 0x0
+	playanimation USER, B_ANIM_ITEM_EFFECT, 0x0
 	statbuffchange 65, BattleScript_1D9B0B
 
 BattleScript_1D9B0B: @ 81D9B0B
@@ -4460,7 +4460,7 @@ BattleScript_1D9B0B: @ 81D9B0B
 	end2
 
 BattleScript_BerryFocusEnergyEnd2:: @ 81D9B19
-	playanimation USER, 7, 0x0
+	playanimation USER, B_ANIM_ITEM_EFFECT, 0x0
 	printstring BATTLE_TEXT_HustleUse
 	waitmessage 64
 	removeitem USER

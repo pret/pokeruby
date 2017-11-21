@@ -53,3 +53,49 @@
 	enum SP_DEFENSE
 	enum ACCURACY
 	enum EVASION
+
+@ status animation table
+.equiv B_ANIM_STATUS_PSN,              0x0
+.equiv B_ANIM_STATUS_CONFUSION,        0x1
+.equiv B_ANIM_STATUS_BRN,              0x2
+.equiv B_ANIM_STATUS_INFATUATION,      0x3
+.equiv B_ANIM_STATUS_SLP,              0x4
+.equiv B_ANIM_STATUS_PRZ,              0x5
+.equiv B_ANIM_STATUS_FRZ,              0x6
+.equiv B_ANIM_STATUS_CURSED,           0x7
+.equiv B_ANIM_STATUS_NIGHTMARE,        0x8
+.equiv B_ANIM_STATUS_WRAPPED,          0x9
+
+@ general animation table
+.equiv B_ANIM_CASTFORM_CHANGE,         0x0
+.equiv B_ANIM_STATS_CHANGE,            0x1
+.equiv B_ANIM_SUBSTITUTE_FADE,         0x2
+.equiv B_ANIM_SUBSTITUTE_APPEAR,       0x3
+.equiv B_ANIM_POKEBLOCK_THROW,         0x4
+.equiv B_ANIM_ITEM_KNOCKOFF,           0x5
+.equiv B_ANIM_TURN_TRAP,               0x6
+.equiv B_ANIM_ITEM_EFFECT,             0x7
+.equiv B_ANIM_SMOKEBALL_ESCAPE,        0x8
+.equiv B_ANIM_HANGED_ON,               0x9
+.equiv B_ANIM_RAIN_CONTINUES,          0xA
+.equiv B_ANIM_SUN_CONTINUES,           0xB
+.equiv B_ANIM_SANDSTORM_CONTINUES,     0xC
+.equiv B_ANIM_HAIL_CONTINUES,          0xD
+.equiv B_ANIM_LEECH_SEED_DRAIN,        0xE
+.equiv B_ANIM_MON_HIT,                 0xF
+.equiv B_ANIM_ITEM_STEAL,              0x10
+.equiv B_ANIM_SNATCH_MOVE,             0x11
+.equiv B_ANIM_FUTURE_SIGHT_HIT,        0x12
+.equiv B_ANIM_DOOM_DESIRE_HIT,         0x13
+.equiv B_ANIM_FOCUS_PUNCH_SET_UP,      0x14
+.equiv B_ANIM_INGRAIN_HEAL,            0x15
+.equiv B_ANIM_WISH_HEAL,               0x16
+
+@ special animation table
+.equiv B_ANIM_LVL_UP,                  0x0
+.equiv B_ANIM_SWITCH_OUT_PLAYER_MON,   0x1
+.equiv B_ANIM_SWITCH_OUT_OPPONENT_MON, 0x2
+.equiv B_ANIM_BALL_THROW,              0x3
+.equiv B_ANIM_SAFARI_BALL_THROW,       0x4
+.equiv B_ANIM_SUBSTITUTE_TO_MON,       0x5
+.equiv B_ANIM_MON_TO_SUBSTITUTE,       0x6

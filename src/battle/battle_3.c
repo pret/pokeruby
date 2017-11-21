@@ -546,7 +546,7 @@ u8 UpdateTurnCounters(void)
                 else
                     gBattlescriptCurrInstr = gUnknown_081D8F7D;
 
-                BATTLE_STRUCT->animArg1 = 0xC;
+                BATTLE_STRUCT->animArg1 = B_ANIM_SANDSTORM_CONTINUES;
                 gBattleCommunication[MULTISTRING_CHOOSER] = 0;
                 b_call_bc_move_exec(gBattlescriptCurrInstr);
                 effect++;
@@ -580,7 +580,7 @@ u8 UpdateTurnCounters(void)
                 else
                     gBattlescriptCurrInstr = gUnknown_081D8F7D;
 
-                BATTLE_STRUCT->animArg1 = 0xD;
+                BATTLE_STRUCT->animArg1 = B_ANIM_HAIL_CONTINUES;
                 gBattleCommunication[MULTISTRING_CHOOSER] = 1;
                 b_call_bc_move_exec(gBattlescriptCurrInstr);
                 effect++;
@@ -1505,7 +1505,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                     if (!(gBattleWeather & WEATHER_RAIN_ANY))
                     {
                         gBattleWeather = (WEATHER_RAIN_TEMPORARY | WEATHER_RAIN_PERMANENT);
-                        BATTLE_STRUCT->animArg1 = 0xA;
+                        BATTLE_STRUCT->animArg1 = B_ANIM_RAIN_CONTINUES;
                         BATTLE_STRUCT->scriptingActive = bank;
                         effect++;
                     }
@@ -1514,7 +1514,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                     if (!(gBattleWeather & WEATHER_SANDSTORM_ANY))
                     {
                         gBattleWeather = (WEATHER_SANDSTORM_PERMANENT | WEATHER_SANDSTORM_TEMPORARY);
-                        BATTLE_STRUCT->animArg1 = 0xC;
+                        BATTLE_STRUCT->animArg1 = B_ANIM_SANDSTORM_CONTINUES;
                         BATTLE_STRUCT->scriptingActive = bank;
                         effect++;
                     }
@@ -1523,7 +1523,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                     if (!(gBattleWeather & WEATHER_SUN_ANY))
                     {
                         gBattleWeather = (WEATHER_SUN_PERMANENT | WEATHER_SUN_TEMPORARY);
-                        BATTLE_STRUCT->animArg1 = 0xB;
+                        BATTLE_STRUCT->animArg1 = B_ANIM_SUN_CONTINUES;
                         BATTLE_STRUCT->scriptingActive = bank;
                         effect++;
                     }
