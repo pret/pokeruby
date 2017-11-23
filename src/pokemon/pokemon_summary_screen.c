@@ -1,10 +1,14 @@
 #include "global.h"
+#include "battle.h"
 #include "pokemon_summary_screen.h"
 #include "data2.h"
+#include "decompress.h"
 #include "ewram.h"
 #include "item.h"
 #include "items.h"
+#include "learn_move.h"
 #include "link.h"
+#include "main.h"
 #include "menu.h"
 #include "menu_helpers.h"
 #include "overworld.h"
@@ -24,7 +28,8 @@
 
 struct SummaryScreenStruct
 {
-    /*0x00*/ u8 filler0[9];
+    /*0x00*/ u8 filler0[8];
+    /*0x08*/ u8 unk8;
     /*0x09*/ u8 unk9;
     /*0x0A*/ u8 fillerA;
     /*0x0B*/ u8 unkB;
@@ -38,26 +43,66 @@ struct SummaryScreenStruct
     /*0x77*/ u8 filler77[0x2];
     /*0x79*/ u8 unk79;
     /*0x7A*/ u8 unk7A;
-    /*0x7B*/ u8 filler7B[0x3];
+    /*0x7B*/ u8 filler7B;
+    /*0x7C*/ u16 unk7C;
     /*0x7E*/ u8 unk7E;
     /*0x7F*/ u8 unk7F;
 };
 
 #define ewramSS (*(struct SummaryScreenStruct *)(gSharedMem + 0x18000))
 
+extern u8 sub_80A1808(struct Pokemon *);
+extern void sub_80A1F98(s32, u8, u8, u8, u8, u16, s32);
+static void sub_80A0958(struct Pokemon *);
+static void PokemonSummaryScreen_PrintTrainerMemo(struct Pokemon *, u8, u8);
+static void PokemonSummaryScreen_PrintEggTrainerMemo(struct Pokemon *, u8, u8);
+static void sub_80A1EF8(const u8 *, u8, u8, u16, s32);
+static void sub_80A1F48(const u8 *, u8, u8, u8, u16);
+static void PrintHeldItemName(u16, u8, u8);
+static void PrintNumRibbons(struct Pokemon *);
+static void DrawExperienceProgressBar(struct Pokemon *, u8, u8);
+
+extern void SummaryScreenHandleLeftRightInput(u8, s8);
+extern void sub_809E8F0(u8, s8);
+extern void sub_809E260(u8);
+extern void sub_809F814(u8);
+extern void sub_80A1654(s8, u8);
+extern void sub_80A1488(s8, u8);
+extern void GetStringCenterAlignXOffsetWithLetterSpacing(u8, u8, u8, u8);
+extern bool8 sub_809FA94(struct Pokemon *);
+extern void sub_809FC34(struct Pokemon *);
+extern void sub_809FC0C(void);
+extern void sub_809FF64(struct Pokemon *);
+extern void sub_809FEB8(void);
+extern void sub_80A1918(u8, u8);
+extern void sub_80A198C(u8, u8, u8, u8);
+extern u16 GetMonMove(struct Pokemon *, u8);
+extern void sub_80A04CC(u16);
+extern void sub_80A057C(u16);
+extern void sub_80A0498(u16);
+extern void sub_80A046C(u16);
+extern void sub_80A03F0(struct Pokemon *, u8 *);
+extern u16 sub_80A03BC(struct Pokemon *, u8);
 extern void sub_80A20A8(u8);
 extern u8 ball_number_to_ball_processing_index(u16);
 extern void sub_809F678(struct Pokemon *);
 extern void sub_80A1BC0(struct Sprite *sprite);
 extern void sub_80A1888(struct Sprite *);
-extern void sub_80A00F4(s16);
-extern void sub_80A0428(struct Pokemon *, s16*);
+extern void sub_80A0428(struct Pokemon *, u8 *);
 extern void sub_80A18E4(u8);
 extern void GetStringCenterAlignXOffset(u8, u8, u8);
 extern u8 *sub_80A1E58(u8 *, u8);
 static void sub_80A0A2C(struct Pokemon *, u8, u8);
 extern void sub_80A1FF8(const u8 *, u8, u8, u8);
 
+extern const u16 gUnknown_083C157E[];
+extern const u16 gUnknown_083C157C[];
+extern const u8 gAbilityNames[][13];
+extern const u8 * const gAbilityDescriptions[];
+extern const u8 * const gMoveDescriptions[];
+extern const u8 * const gContestEffectStrings[];
+extern const struct ContestMove gContestMoves[];
+extern const struct ContestEffect gContestEffects[];
 extern TaskFunc gUnknown_03005CF0;
 extern const u8 gUnknown_083C15BC[];
 extern struct Sprite *gUnknown_020384F4;
@@ -74,6 +119,1093 @@ extern const u8 gUnknown_08E73E88[];
 extern const u8 gUnknown_083C15AE[];
 extern const u8 gUnknown_083C15B4[];
 extern const u8 *const gUnknown_083C1068[];
+
+
+u8 sub_809F6B4(struct Pokemon *mon, u8 *b)
+{
+    u16 species;
+    u32 personality;
+    u32 otId;
+    const struct CompressedSpritePalette *palette;
+
+    switch (*b)
+    {
+    default:
+        return sub_80A1808(mon);
+    case 0:
+        species = GetMonData(mon, MON_DATA_SPECIES2);
+        personality = GetMonData(mon, MON_DATA_PERSONALITY);
+
+        HandleLoadSpecialPokePic(
+            &gMonFrontPicTable[species],
+            gMonFrontPicCoords[species].coords,
+            gMonFrontPicCoords[species].y_offset,
+            ewram_addr,
+            gUnknown_081FAF4C[1],
+            species,
+            personality);
+        *b += 1;
+        return 0xFF;
+    case 1:
+        species = GetMonData(mon, MON_DATA_SPECIES2);
+        personality = GetMonData(mon, MON_DATA_PERSONALITY);
+        otId = GetMonData(mon, MON_DATA_OT_ID);
+
+        palette = GetMonSpritePalStructFromOtIdPersonality(species, otId, personality);
+        LoadCompressedObjectPalette(palette);
+        GetMonSpriteTemplate_803C56C(palette->tag, 1);
+        *b += 1;
+        return 0xFF;
+    }
+}
+
+u16 GetMonMove(struct Pokemon *mon, u8 moveId)
+{
+    switch (moveId)
+    {
+    case 0:
+        return GetMonData(mon, MON_DATA_MOVE1);
+    case 1:
+        return GetMonData(mon, MON_DATA_MOVE2);
+    case 2:
+        return GetMonData(mon, MON_DATA_MOVE3);
+    default:
+        return GetMonData(mon, MON_DATA_MOVE4);
+    }
+}
+
+static u16 GetMonMovePP(struct Pokemon *mon, u8 moveId)
+{
+    switch (moveId)
+    {
+    case 0:
+        return GetMonData(mon, MON_DATA_PP1);
+    case 1:
+        return GetMonData(mon, MON_DATA_PP2);
+    case 2:
+        return GetMonData(mon, MON_DATA_PP3);
+    default:
+        return GetMonData(mon, MON_DATA_PP4);
+    }
+}
+
+bool8 sub_809F7D0()
+{
+    struct Pokemon mon;
+    u16 move;
+
+    sub_809F678(&mon);
+    move = GetMonMove(&mon, ewramSS.unk79);    
+    if (IsHMMove(move) == TRUE && ewramSS.unk8 != 3)
+    {
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+#ifdef NONMATCHING // The two "ewramSS.unk79 = taskData[15];" lines have small register differences.
+void sub_809F814(u8 taskId)
+{
+    u16 var1;
+
+    s16 *taskData = gTasks[taskId].data;
+
+    var1 = taskData[14];
+    if (taskData[14] < 4)
+    {
+        taskData[14] = var1 + 1;
+    }
+    else if (gMain.newKeys & DPAD_UP)
+    {
+        gTasks[taskId].func = sub_809E260;
+        taskData[0] = 4;
+        taskData[13] = 1;
+        ewramSS.unk79 = taskData[15];
+        sub_809E8F0(taskId, -1);
+    }
+    else if (gMain.newKeys & DPAD_DOWN)
+    {
+        gTasks[taskId].func = sub_809E260;
+        taskData[0] = 4;
+        taskData[13] = 1;
+        ewramSS.unk79 = taskData[15];
+        sub_809E8F0(taskId, 1);
+    }
+    else if ((gMain.newKeys & DPAD_LEFT) || sub_80F9284() == 1)
+    {
+        if (ewramSS.unkB != 2)
+        {
+            if (ewramSS.unkB == 3 && (ewramSS.unk79 != 4 || ewramSS.unk7C != 0))
+            {
+                MenuZeroFillWindowRect(0, 14, 9, 18);
+            }
+
+            gTasks[taskId].func = sub_809E260;
+
+            SummaryScreenHandleLeftRightInput(taskId, -1);
+            sub_80A1488(1, taskData[15]);
+            sub_80A1654(1, taskData[15]);
+        }
+    }
+    else if ((gMain.newKeys & DPAD_RIGHT) || sub_80F9284() == 2)
+    {
+        if (ewramSS.unkB != ewramSS.unk76)
+        {
+            if (ewramSS.unkB == 2 && (ewramSS.unk79 != 4 || ewramSS.unk7C != 0))
+            {
+                MenuZeroFillWindowRect(0, 14, 9, 18);
+            }
+
+            gTasks[taskId].func = sub_809E260;
+
+            SummaryScreenHandleLeftRightInput(taskId, 1);
+            sub_80A1488(1, taskData[15]);
+            sub_80A1654(1, taskData[15]);
+        }
+    }
+    else if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON))
+    {
+        sub_80A1488(2, taskData[15]);
+        sub_80A1654(2, taskData[15]);
+
+        gTasks[taskId].func = sub_809E260;
+    }
+}
+#else
+__attribute__((naked))
+void sub_809F814(u8 taskId)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+    mov r7, r8\n\
+    push {r7}\n\
+    lsls r0, 24\n\
+    lsrs r5, r0, 24\n\
+    lsls r0, r5, 2\n\
+    adds r0, r5\n\
+    lsls r6, r0, 3\n\
+    ldr r0, _0809F83C @ =gTasks + 0x8\n\
+    mov r8, r0\n\
+    adds r4, r6, r0\n\
+    ldrh r1, [r4, 0x1C]\n\
+    movs r2, 0x1C\n\
+    ldrsh r0, [r4, r2]\n\
+    cmp r0, 0x3\n\
+    bgt _0809F840\n\
+    adds r0, r1, 0x1\n\
+    strh r0, [r4, 0x1C]\n\
+    b _0809F9C0\n\
+    .align 2, 0\n\
+_0809F83C: .4byte gTasks + 0x8\n\
+_0809F840:\n\
+    ldr r7, _0809F874 @ =gMain\n\
+    ldrh r1, [r7, 0x2E]\n\
+    movs r0, 0x40\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _0809F880\n\
+    mov r0, r8\n\
+    subs r0, 0x8\n\
+    adds r0, r6, r0\n\
+    ldr r1, _0809F878 @ =sub_809E260\n\
+    str r1, [r0]\n\
+    movs r0, 0x4\n\
+    strh r0, [r4]\n\
+    movs r0, 0x1\n\
+    strh r0, [r4, 0x1A]\n\
+    ldr r2, _0809F87C @ =gSharedMem + 0x18000\n\
+    ldrh r0, [r4, 0x1E]\n\
+    adds r2, 0x79\n\
+    strb r0, [r2]\n\
+    movs r1, 0x1\n\
+    negs r1, r1\n\
+    adds r0, r5, 0\n\
+    bl sub_809E8F0\n\
+    b _0809F9C0\n\
+    .align 2, 0\n\
+_0809F874: .4byte gMain\n\
+_0809F878: .4byte sub_809E260\n\
+_0809F87C: .4byte gSharedMem + 0x18000\n\
+_0809F880:\n\
+    movs r0, 0x80\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _0809F8B4\n\
+    mov r0, r8\n\
+    subs r0, 0x8\n\
+    adds r0, r6, r0\n\
+    ldr r1, _0809F8AC @ =sub_809E260\n\
+    str r1, [r0]\n\
+    movs r0, 0x4\n\
+    strh r0, [r4]\n\
+    movs r0, 0x1\n\
+    strh r0, [r4, 0x1A]\n\
+    ldr r2, _0809F8B0 @ =gSharedMem + 0x18000\n\
+    ldrh r0, [r4, 0x1E]\n\
+    adds r2, 0x79\n\
+    strb r0, [r2]\n\
+    adds r0, r5, 0\n\
+    movs r1, 0x1\n\
+    bl sub_809E8F0\n\
+    b _0809F9C0\n\
+    .align 2, 0\n\
+_0809F8AC: .4byte sub_809E260\n\
+_0809F8B0: .4byte gSharedMem + 0x18000\n\
+_0809F8B4:\n\
+    movs r0, 0x20\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    bne _0809F8C8\n\
+    bl sub_80F9284\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    cmp r0, 0x1\n\
+    bne _0809F918\n\
+_0809F8C8:\n\
+    ldr r1, _0809F90C @ =gSharedMem + 0x18000\n\
+    ldrb r0, [r1, 0xB]\n\
+    cmp r0, 0x2\n\
+    beq _0809F9C0\n\
+    cmp r0, 0x3\n\
+    bne _0809F8F4\n\
+    adds r0, r1, 0\n\
+    adds r0, 0x79\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0x4\n\
+    bne _0809F8E8\n\
+    adds r0, r1, 0\n\
+    adds r0, 0x7C\n\
+    ldrh r0, [r0]\n\
+    cmp r0, 0\n\
+    beq _0809F8F4\n\
+_0809F8E8:\n\
+    movs r0, 0\n\
+    movs r1, 0xE\n\
+    movs r2, 0x9\n\
+    movs r3, 0x12\n\
+    bl MenuZeroFillWindowRect\n\
+_0809F8F4:\n\
+    ldr r1, _0809F910 @ =gTasks\n\
+    lsls r0, r5, 2\n\
+    adds r0, r5\n\
+    lsls r0, 3\n\
+    adds r0, r1\n\
+    ldr r1, _0809F914 @ =sub_809E260\n\
+    str r1, [r0]\n\
+    movs r1, 0x1\n\
+    negs r1, r1\n\
+    adds r0, r5, 0\n\
+    b _0809F972\n\
+    .align 2, 0\n\
+_0809F90C: .4byte gSharedMem + 0x18000\n\
+_0809F910: .4byte gTasks\n\
+_0809F914: .4byte sub_809E260\n\
+_0809F918:\n\
+    ldrh r1, [r7, 0x2E]\n\
+    movs r0, 0x10\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    bne _0809F92E\n\
+    bl sub_80F9284\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    cmp r0, 0x2\n\
+    bne _0809F994\n\
+_0809F92E:\n\
+    ldr r1, _0809F988 @ =gSharedMem + 0x18000\n\
+    adds r2, r1, 0\n\
+    adds r2, 0x76\n\
+    ldrb r0, [r1, 0xB]\n\
+    ldrb r2, [r2]\n\
+    cmp r0, r2\n\
+    beq _0809F9C0\n\
+    cmp r0, 0x2\n\
+    bne _0809F960\n\
+    adds r0, r1, 0\n\
+    adds r0, 0x79\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0x4\n\
+    bne _0809F954\n\
+    adds r0, r1, 0\n\
+    adds r0, 0x7C\n\
+    ldrh r0, [r0]\n\
+    cmp r0, 0\n\
+    beq _0809F960\n\
+_0809F954:\n\
+    movs r0, 0\n\
+    movs r1, 0xE\n\
+    movs r2, 0x9\n\
+    movs r3, 0x12\n\
+    bl MenuZeroFillWindowRect\n\
+_0809F960:\n\
+    ldr r1, _0809F98C @ =gTasks\n\
+    lsls r0, r5, 2\n\
+    adds r0, r5\n\
+    lsls r0, 3\n\
+    adds r0, r1\n\
+    ldr r1, _0809F990 @ =sub_809E260\n\
+    str r1, [r0]\n\
+    adds r0, r5, 0\n\
+    movs r1, 0x1\n\
+_0809F972:\n\
+    bl SummaryScreenHandleLeftRightInput\n\
+    ldrb r1, [r4, 0x1E]\n\
+    movs r0, 0x1\n\
+    bl sub_80A1488\n\
+    ldrb r1, [r4, 0x1E]\n\
+    movs r0, 0x1\n\
+    bl sub_80A1654\n\
+    b _0809F9C0\n\
+    .align 2, 0\n\
+_0809F988: .4byte gSharedMem + 0x18000\n\
+_0809F98C: .4byte gTasks\n\
+_0809F990: .4byte sub_809E260\n\
+_0809F994:\n\
+    ldrh r1, [r7, 0x2E]\n\
+    movs r0, 0x1\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    bne _0809F9A6\n\
+    movs r0, 0x2\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _0809F9C0\n\
+_0809F9A6:\n\
+    ldrb r1, [r4, 0x1E]\n\
+    movs r0, 0x2\n\
+    bl sub_80A1488\n\
+    ldrb r1, [r4, 0x1E]\n\
+    movs r0, 0x2\n\
+    bl sub_80A1654\n\
+    mov r0, r8\n\
+    subs r0, 0x8\n\
+    adds r0, r6, r0\n\
+    ldr r1, _0809F9CC @ =sub_809E260\n\
+    str r1, [r0]\n\
+_0809F9C0:\n\
+    pop {r3}\n\
+    mov r8, r3\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
+_0809F9CC: .4byte sub_809E260\n\
+    .syntax divided\n");
+}
+#endif // NONMATCHING
+
+void sub_809F9D0(u8 taskId, u8 b)
+{
+    s16 *taskData = gTasks[taskId].data;
+    taskData[14] = 0;
+    taskData[15] = b;
+
+    sub_80A1488(-2, 4);
+    sub_80A1654(-2, 4);
+    MenuZeroFillWindowRect(11, 15, 28, 18);
+    MenuPrint(gOtherText_CantForgetHMs, 11, 15);
+
+    gTasks[taskId].func = sub_809F814;
+}
+
+u8 sub_809FA30(void)
+{
+    return ewramSS.unk7A;
+}
+
+// void GetStringCenterAlignXOffsetWithLetterSpacing(u8 a, u8 b, u8 c, u8 d)
+// {
+//     u16 *vramAddr = (u16 *)(VRAM + 0xF000);
+
+//     vramAddr[(d * 32) + c] = (b * 0x1000) + (a * 2) + 0x200 + 0x80;
+//     vramAddr[(d * 32) + c + 32] = (b * 0x1000) + (a * 2) + 0x200 + 0x81;
+// }
+__attribute__((naked))
+void GetStringCenterAlignXOffsetWithLetterSpacing(u8 a, u8 b, u8 c, u8 d)
+{
+    asm(".syntax unified\n\
+    push {r4,lr}\n\
+    lsls r0, 24\n\
+    lsls r1, 24\n\
+    lsls r2, 24\n\
+    lsls r3, 24\n\
+    lsrs r2, 23\n\
+    lsrs r3, 18\n\
+    ldr r4, _0809FA70 @ =0x0600f000\n\
+    adds r3, r4\n\
+    adds r2, r3\n\
+    lsrs r1, 12\n\
+    lsrs r0, 23\n\
+    movs r4, 0x80\n\
+    lsls r4, 2\n\
+    adds r3, r4, 0\n\
+    adds r0, r3\n\
+    adds r1, r0\n\
+    adds r0, r1, 0\n\
+    adds r0, 0x80\n\
+    strh r0, [r2]\n\
+    adds r2, 0x40\n\
+    adds r1, 0x81\n\
+    strh r1, [r2]\n\
+    pop {r4}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
+_0809FA70: .4byte 0x0600f000\n\
+    .syntax divided\n");
+}
+
+void GetStringCenterAlignXOffset(u8 a, u8 b, u8 c)
+{
+    GetStringCenterAlignXOffsetWithLetterSpacing(a, 15, b, c);
+}
+
+bool8 sub_809FA94(struct Pokemon *mon)
+{
+    if (!IsShiny(mon))
+    {
+        LoadPalette(gUnknown_083C157C, 4, 2);
+        return FALSE;
+    }
+    else
+    {
+        LoadPalette(gUnknown_083C157E, 4, 2);
+        return TRUE;
+    }
+}
+
+void sub_809FAC8(struct Pokemon *mon)
+{
+    bool8 shinyDexNum;
+    u16 dexNum;
+    u8 *buffer;
+
+    if (GetMonData(mon, MON_DATA_IS_EGG))
+    {
+        MenuZeroFillWindowRect(1, 2, 4, 3);
+        MenuZeroFillWindowRect(3, 16, 9, 17);
+        MenuZeroFillWindowRect(0, 12, 11, 15);
+        GetMonNickname(mon, gStringVar1);
+        sub_80A1FF8(gStringVar1, 13, 3, 16);
+        LoadPalette(gUnknown_083C157C, 4, 2);
+    }
+    else
+    {
+        shinyDexNum = sub_809FA94(mon);
+        dexNum = SpeciesToPokedexNum(GetMonData(mon, MON_DATA_SPECIES));
+        if (dexNum != 0xFFFF)
+        {
+            if (!shinyDexNum)
+            {
+                GetStringCenterAlignXOffset(2, 1, 2);
+                sub_80A1F98(dexNum, 13, 3, 2, 17, 16, 1);
+            }
+            else
+            {
+                GetStringCenterAlignXOffsetWithLetterSpacing(2, 8, 1, 2);
+                sub_80A1F98(dexNum, 8, 3, 2, 17, 16, 1);
+            }
+        }
+        else
+        {
+            MenuZeroFillWindowRect(1, 2, 4, 3);
+        }
+
+        buffer = gStringVar1;
+        buffer = sub_80A1E58(buffer, 13);
+        buffer = GetMonNickname(mon, buffer);
+        buffer[0] = EXT_CTRL_CODE_BEGIN;
+        buffer[1] = 0x13;
+        buffer[2] = 0x3C;
+        buffer[3] = EOS;
+        MenuPrint(gStringVar1, 1, 12);
+
+        sub_80A0958(mon);
+    }
+}
+
+void sub_809FBE4()
+{
+    u8 i;
+
+    for (i = 0; i < 28; i++)
+    {
+        sub_80A1918(i, 1);
+    }
+
+    MenuZeroFillWindowRect(11, 4, 29, 18);
+}
+
+void sub_809FC0C(void)
+{
+    MenuPrint(gOtherText_Type2, 11, 6);
+    GetStringCenterAlignXOffset(0, 22, 4);
+    GetStringCenterAlignXOffset(2, 23, 4);
+}
+
+void sub_809FC34(struct Pokemon *mon)
+{
+    u8 i;
+    u8 *buffer;
+    u16 friendship;
+    u8 language;
+    u16 species;
+    u8 ability;
+
+    for (i = 0; i < 5; i++)
+    {
+        sub_80A1918(i, 1);
+    }
+
+    MenuZeroFillWindowRect(11, 9, 28, 12);
+    if (GetMonData(mon, MON_DATA_IS_EGG))
+    {
+        buffer = gStringVar1;
+        buffer = sub_80A1E58(buffer, 13);
+        buffer = StringCopy(buffer, gOtherText_OriginalTrainer);
+        buffer = StringCopy(buffer, gOtherText_FiveQuestionsAndSlash);
+        buffer[0] = EXT_CTRL_CODE_BEGIN;
+        buffer[1] = 0x13;
+        buffer[2] = 0x4E;
+        buffer[3] = EOS;
+        MenuPrint(gStringVar1, 11, 4);
+
+        sub_80A1EF8(gOtherText_FiveQuestionsAndSlash, 13, 193, 32, 1);
+        sub_80A198C(9, 120, 48, 0);
+
+        friendship = GetMonData(mon, MON_DATA_FRIENDSHIP);
+        if (friendship < 6)
+        {
+            MenuPrint(gOtherText_EggAbout, 11, 9);
+        }
+        else if (friendship < 11)
+        {
+            MenuPrint(gOtherText_EggSoon, 11, 9);
+        }
+        else if (friendship < 41)
+        {
+            MenuPrint(gOtherText_EggSomeTime, 11, 9);
+        }
+        else
+        {
+            MenuPrint(gOtherText_EggLongTime, 11, 9);
+        }
+
+        PokemonSummaryScreen_PrintEggTrainerMemo(mon, 11, 14);
+    }
+    else
+    {
+        GetMonData(mon, MON_DATA_OT_NAME, gStringVar2);
+        language = GetMonData(mon, MON_DATA_LANGUAGE);
+        ConvertInternationalString(gStringVar2, language);
+
+        buffer = gStringVar1;
+        buffer = sub_80A1E58(buffer, 13);
+        buffer = StringCopy(buffer, gOtherText_OriginalTrainer);
+
+        if (GetMonData(mon, MON_DATA_OT_GENDER) == MALE)
+        {
+            buffer = sub_80A1E58(buffer, 9);
+        }
+        else
+        {
+            buffer = sub_80A1E58(buffer, 10);
+        }
+
+        buffer = StringCopy(buffer, gStringVar2);
+        buffer[0] = EXT_CTRL_CODE_BEGIN;
+        buffer[1] = 0x13;
+        buffer[2] = 0x4E;
+        buffer[3] = EOS;
+        MenuPrint(gStringVar1, 11, 4);
+
+        sub_80A1F98(GetMonData(mon, MON_DATA_OT_ID) & 0xFFFF, 13, 5, 2, 193, 32, 1);
+
+        species = GetMonData(mon, MON_DATA_SPECIES);
+        sub_80A198C(gBaseStats[species].type1, 120, 48, 0);
+        if (gBaseStats[species].type1 != gBaseStats[species].type2)
+        {
+            sub_80A198C(gBaseStats[species].type2, 160, 48, 1);
+        }
+
+        ability = GetAbilityBySpecies(GetMonData(mon, MON_DATA_SPECIES), GetMonData(mon, MON_DATA_ALT_ABILITY));
+        sub_80A1FF8(gAbilityNames[ability], 13, 11, 9);
+        MenuPrint(gAbilityDescriptions[ability], 11, 11);
+
+        PokemonSummaryScreen_PrintTrainerMemo(mon, 11, 14);
+    }
+}
+
+void sub_809FE6C(struct Pokemon *mon)
+{
+    sub_809FC0C();
+    sub_809FC34(mon);
+}
+
+void sub_809FE80(void)
+{
+    MenuZeroFillWindowRect(14, 4, 18, 5);
+    MenuZeroFillWindowRect(25, 4, 30, 5);
+    MenuZeroFillWindowRect(11, 9, 28, 12);
+    MenuZeroFillWindowRect(11, 14, 28, 17);
+}
+
+void sub_809FEB8(void)
+{
+    sub_80A1FF8(gOtherText_ExpPoints, 13, 11, 14);
+    sub_80A1FF8(gOtherText_NextLv, 13, 11, 16);
+    MenuPrint(gOtherText_Terminator18, 21, 16);
+
+    sub_80A1F48(gOtherText_HP, 13, 11, 7, 42);
+    sub_80A1F48(gOtherText_Attack, 13, 11, 9, 42);
+    sub_80A1F48(gOtherText_Defense, 13, 11, 11, 42);
+    sub_80A1F48(gOtherText_SpAtk, 13, 22, 7, 36);
+    sub_80A1F48(gOtherText_SpDef, 13, 22, 9, 36);
+    sub_80A1F48(gOtherText_Speed, 13, 22, 11, 36);
+}
+
+void sub_809FF64(struct Pokemon *mon)
+{
+    u8 i;
+    u16 heldItem;
+    u8 *buffer;
+
+    for (i = 0; i < 5; i++)
+    {
+        sub_80A1918(i, 1);
+    }
+
+    heldItem = GetMonData(mon, MON_DATA_HELD_ITEM);
+    PrintHeldItemName(heldItem, 11, 4);
+    PrintNumRibbons(mon);
+
+    buffer = gStringVar1;
+
+    ConvertIntToDecimalString(buffer, GetMonData(mon, MON_DATA_EXP));
+    MenuPrint_RightAligned(buffer, 29, 14);
+    DrawExperienceProgressBar(mon, 23, 16);
+
+    ConvertIntToDecimalString(buffer, GetMonData(mon, MON_DATA_ATK));
+    sub_8072BD8(buffer, 16, 9, 50);
+
+    ConvertIntToDecimalString(buffer, GetMonData(mon, MON_DATA_DEF));
+    sub_8072BD8(buffer, 16, 11, 50);
+
+    ConvertIntToDecimalString(buffer, GetMonData(mon, MON_DATA_SPATK));
+    sub_8072BD8(buffer, 27, 7, 18);
+
+    ConvertIntToDecimalString(buffer, GetMonData(mon, MON_DATA_SPDEF));
+    sub_8072BD8(buffer, 27, 9, 18);
+
+    ConvertIntToDecimalString(buffer, GetMonData(mon, MON_DATA_SPEED));
+    sub_8072BD8(buffer, 27, 11, 18);
+
+    buffer = sub_8072C14(buffer, GetMonData(mon, MON_DATA_HP), 24, 1);
+    *buffer++ = CHAR_SLASH;
+    buffer = sub_8072C14(buffer, GetMonData(mon, MON_DATA_MAX_HP), 48, 1);
+
+    MenuPrint_PixelCoords(gStringVar1, 126, 56, 1);
+}
+
+void sub_80A0090(struct Pokemon *mon)
+{
+    sub_809FEB8();
+    sub_809FF64(mon);
+}
+
+void sub_80A00A4(void)
+{
+    MenuZeroFillWindowRect(11, 4, 19, 5);
+    MenuZeroFillWindowRect(16, 7, 21, 8);
+    MenuZeroFillWindowRect(17, 9, 21, 12);
+    MenuZeroFillWindowRect(27, 7, 29, 12);
+    MenuZeroFillWindowRect(22, 14, 28, 15);
+    MenuZeroFillWindowRect(23, 16, 28, 17);
+}
+
+void sub_80A00F4(u8 a)
+{
+    if (ewramSS.unk7C != 0 || a != 4)
+    {
+        if (ewramSS.unkB == 2)
+        {
+            sub_80A1FF8(gOtherText_Power2, 13, 1, 15);
+            sub_80A1FF8(gOtherText_Accuracy2, 13, 1, 17);
+        }
+        else
+        {
+            sub_80A1FF8(gOtherText_Appeal2, 13, 1, 15);
+            sub_80A1FF8(gOtherText_Jam2, 13, 1, 17);
+        }
+    }
+}
+
+void sub_80A015C(struct Pokemon *mon)
+{
+    u8 i;
+    u16 move;
+    u16 curPP;
+    u8 ppBonuses;
+    u8 maxPP;
+    u8 *buffer;
+
+    for (i = 0; i < 4; i++)
+    {
+        move = GetMonMove(mon, i);
+        curPP = GetMonMovePP(mon, i);
+
+        if (move == 0)
+        {
+            sub_80A1918(i, 1);
+            sub_80A1FF8(gOtherText_OneDash, 13, 15, (2 * i) + 4);
+            MenuPrint(gOtherText_TwoDashes, 26, (2 * i) + 4);
+        }
+        else
+        {
+            if (ewramSS.unkB == 2)
+            {
+                sub_80A198C(gBattleMoves[move].type, 87, ((2 * i) + 4) * 8, i);
+            }
+            else
+            {
+                sub_80A198C(gContestMoves[move].contestCategory + 18, 87, ((2 * i) + 4) * 8, i);
+            }
+
+            sub_80A1FF8(gMoveNames[move], 13, 15, (2 * i) + 4);
+            GetStringCenterAlignXOffset(1, 24, (2 * i) + 4);
+            
+            ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
+            maxPP = CalculatePPWithBonus(move, ppBonuses, i);
+
+            buffer = gStringVar1;
+            buffer = sub_8072C14(buffer, curPP, 14, 1);
+            *buffer++ = CHAR_SLASH;
+            sub_8072C14(buffer, maxPP, 32, 1);
+            MenuPrint(gStringVar1, 25, (2 * i) + 4);
+        }
+    }
+}
+
+void sub_80A029C(void)
+{
+    u8 *buffer;
+    u16 move;
+    u8 pp;
+
+    if (ewramSS.unk7C == 0)
+    {
+        sub_80A1FF8(gOtherText_CancelNoTerminator, 13, 15, 12);
+        return;
+    }
+
+    move = ewramSS.unk7C;
+
+    if (ewramSS.unkB == 2)
+        sub_80A198C(gBattleMoves[move].type, 87, 96, 4);
+    else
+        sub_80A198C(gContestMoves[move].contestCategory + 18, 87, 96, 4);
+
+    if (ewramSS.unkB == 2)
+        sub_80A1FF8(gMoveNames[move], 10, 15, 12);
+    else
+        sub_80A1FF8(gMoveNames[move], 9, 15, 12);
+
+    GetStringCenterAlignXOffset(1, 24, 12);
+
+    buffer = gStringVar1;
+    pp = gBattleMoves[move].pp;
+    buffer = sub_8072C14(buffer, pp, 14, 1);
+    *buffer++ = CHAR_SLASH;
+    buffer = sub_8072C14(buffer, pp, 32, 1);
+    MenuPrint(gStringVar1, 25, 12);
+}
+
+void sub_80A0390(void)
+{
+    u8 i;
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        MenuZeroFillWindowRect(15, (i * 2) + 4, 28, (i * 2) + 5);
+    }
+}
+
+u16 sub_80A03BC(struct Pokemon *mon, u8 selectedMoveIndex)
+{
+    u16 move;
+
+    if (selectedMoveIndex != MAX_MON_MOVES)
+    {
+        move = GetMonMove(mon, selectedMoveIndex);
+    }
+    else
+    {
+        if (ewramSS.unk7C != 0)
+        {
+            move = ewramSS.unk7C;
+        }
+        else
+        {
+            move = 0xFFFF;
+        }
+    }
+
+    return move;
+}
+
+void sub_80A03F0(struct Pokemon *mon, u8 *selectedMoveIndex)
+{
+    u16 move = sub_80A03BC(mon, *selectedMoveIndex);
+
+    if (ewramSS.unkB == 2)
+    {
+        sub_80A04CC(move);
+        sub_80A057C(0xFFFF);
+    }
+    else
+    {
+        sub_80A057C(move);
+    }
+}
+
+void sub_80A0428(struct Pokemon *mon, u8 *selectedMoveIndex)
+{
+    u16 move = sub_80A03BC(mon, *selectedMoveIndex);
+    MenuZeroFillWindowRect(11, 15, 28, 18);
+
+    if (ewramSS.unkB == 2)
+    {
+        sub_80A046C(move);
+    }
+    else
+    {
+        sub_80A0498(move);
+    }
+
+    sub_80A03F0(mon, selectedMoveIndex);
+}
+
+void sub_80A046C(u16 move)
+{
+    if (move == 0xFFFF) return;
+
+    MenuPrint(gMoveDescriptions[move - 1], 11, 15);
+}
+
+void sub_80A0498(u16 move)
+{
+    if (move == 0xFFFF) return;
+
+    MenuPrint(gContestEffectStrings[gContestMoves[move].effect], 11, 15);
+}
+
+void sub_80A04CC(u16 move)
+{
+    u8 *buffer;
+
+    if (move == 0xFFFF) return;
+
+    if (gBattleMoves[move].power <= 1)
+    {
+        buffer = gStringVar1;
+        buffer = sub_8072C74(buffer, gOtherText_ThreeDashes2, 21, 1);
+        MenuPrint(gStringVar1, 7, 15);
+    }
+    else
+    {
+        buffer = gStringVar1;
+        buffer = sub_8072C14(buffer, gBattleMoves[move].power, 21, 1);
+        MenuPrint(gStringVar1, 7, 15);
+    }
+
+    if (gBattleMoves[move].accuracy == 0)
+    {
+        buffer = gStringVar1;
+        buffer = sub_8072C74(buffer, gOtherText_ThreeDashes2, 21, 1);
+        MenuPrint(gStringVar1, 7, 17);
+    }
+    else
+    {
+        buffer = gStringVar1;
+        buffer = sub_8072C14(buffer, gBattleMoves[move].accuracy, 21, 1);
+        MenuPrint(gStringVar1, 7, 17);
+    }
+}
+
+#ifdef NONMATCHING // The two vramAddr lines are non-matching.
+void sub_80A057C(u16 move)
+{
+    u8 appeal;
+    u8 jam;
+    u8 i;
+    u16 *vramAddr = (u16 *)(VRAM + 0x6800);
+
+    if (move == 0xFFFF) return;
+
+    appeal = gContestEffects[gContestMoves[move].effect].appeal;
+    if (appeal != 0xFF)
+    {
+        appeal = appeal / 10;
+    }
+
+    for (i = 0; i < 8; i++)
+    {
+        u16 tile = 0x1039;
+        int and = 3;
+        int offset = 0x3CC / 2;
+        if (appeal != 0xFF && i < appeal)
+        {
+            tile = 0x103A;
+        }
+
+        *(&vramAddr[(i >> 2 << 5) + (i & and)] + offset) = tile;
+    }
+
+    if (move == 0xFFFF) return;
+
+    jam = gContestEffects[gContestMoves[move].effect].jam;
+    if (jam != 0xFF)
+    {
+        jam = jam / 10;
+    }
+
+    for (i = 0; i < 8; i++)
+    {
+        u16 tile = 0x103D;
+        int and = 3;
+        int offset = 0x226;
+        if (jam != 0xFF && i < jam)
+        {
+            tile = 0x103C;
+        }
+
+        *(&vramAddr[(i >> 2 << 5) + (i & and)] + offset) = tile;
+    }
+}
+#else
+__attribute__((naked))
+void sub_80A057C(u16 move)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    lsls r0, 16\n\
+    lsrs r5, r0, 16\n\
+    ldr r0, _080A0648 @ =0x06006800\n\
+    mov r8, r0\n\
+    ldr r0, _080A064C @ =0x0000ffff\n\
+    cmp r5, r0\n\
+    beq _080A063A\n\
+    ldr r1, _080A0650 @ =gContestEffects\n\
+    ldr r2, _080A0654 @ =gContestMoves\n\
+    lsls r3, r5, 3\n\
+    adds r0, r3, r2\n\
+    ldrb r0, [r0]\n\
+    lsls r0, 2\n\
+    adds r0, r1\n\
+    ldrb r4, [r0, 0x1]\n\
+    mov r10, r2\n\
+    mov r9, r3\n\
+    cmp r4, 0xFF\n\
+    beq _080A05B8\n\
+    adds r0, r4, 0\n\
+    movs r1, 0xA\n\
+    bl __udivsi3\n\
+    lsls r0, 24\n\
+    lsrs r4, r0, 24\n\
+_080A05B8:\n\
+    movs r2, 0\n\
+    movs r7, 0x3\n\
+    movs r6, 0xF3\n\
+    lsls r6, 2\n\
+_080A05C0:\n\
+    ldr r3, _080A0658 @ =0x00001039\n\
+    cmp r4, 0xFF\n\
+    beq _080A05CC\n\
+    cmp r2, r4\n\
+    bcs _080A05CC\n\
+    adds r3, 0x1\n\
+_080A05CC:\n\
+    lsrs r0, r2, 2\n\
+    lsls r0, 5\n\
+    adds r1, r2, 0\n\
+    ands r1, r7\n\
+    adds r1, r0\n\
+    lsls r1, 1\n\
+    add r1, r8\n\
+    adds r1, r6\n\
+    strh r3, [r1]\n\
+    adds r0, r2, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r2, r0, 24\n\
+    cmp r2, 0x7\n\
+    bls _080A05C0\n\
+    ldr r0, _080A064C @ =0x0000ffff\n\
+    cmp r5, r0\n\
+    beq _080A063A\n\
+    mov r0, r9\n\
+    add r0, r10\n\
+    ldrb r0, [r0]\n\
+    lsls r0, 2\n\
+    ldr r1, _080A0650 @ =gContestEffects\n\
+    adds r0, r1\n\
+    ldrb r4, [r0, 0x2]\n\
+    cmp r4, 0xFF\n\
+    beq _080A060C\n\
+    adds r0, r4, 0\n\
+    movs r1, 0xA\n\
+    bl __udivsi3\n\
+    lsls r0, 24\n\
+    lsrs r4, r0, 24\n\
+_080A060C:\n\
+    movs r2, 0\n\
+    movs r6, 0x3\n\
+    ldr r5, _080A065C @ =0x0000044c\n\
+_080A0612:\n\
+    ldr r3, _080A0660 @ =0x0000103d\n\
+    cmp r4, 0xFF\n\
+    beq _080A061E\n\
+    cmp r2, r4\n\
+    bcs _080A061E\n\
+    subs r3, 0x1\n\
+_080A061E:\n\
+    lsrs r0, r2, 2\n\
+    lsls r0, 5\n\
+    adds r1, r2, 0\n\
+    ands r1, r6\n\
+    adds r1, r0\n\
+    lsls r1, 1\n\
+    add r1, r8\n\
+    adds r1, r5\n\
+    strh r3, [r1]\n\
+    adds r0, r2, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r2, r0, 24\n\
+    cmp r2, 0x7\n\
+    bls _080A0612\n\
+_080A063A:\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
+_080A0648: .4byte 0x06006800\n\
+_080A064C: .4byte 0x0000ffff\n\
+_080A0650: .4byte gContestEffects\n\
+_080A0654: .4byte gContestMoves\n\
+_080A0658: .4byte 0x00001039\n\
+_080A065C: .4byte 0x0000044c\n\
+_080A0660: .4byte 0x0000103d\n\
+    .syntax divided\n");
+}
+#endif // NONMATCHING
 
 bool8 PokemonSummaryScreen_CheckOT(struct Pokemon *mon)
 {
@@ -1355,7 +2487,7 @@ _080A1484: .4byte gOtherText_Status\n\
 
 // Related to re-drawing the summary area underneath the pokemon's picture
 // in all of the summary screen tabs.
-void sub_80A1488(u8 a, u8 b)
+void sub_80A1488(s8 a, u8 b)
 {
     u8 taskId;
 
@@ -1557,7 +2689,7 @@ _080A1650: .4byte gOtherText_Status\n\
     .syntax divided\n");
 }
 
-void sub_80A1654(u8 a, u8 b)
+void sub_80A1654(s8 a, u8 b)
 {
     u8 taskId;
 
