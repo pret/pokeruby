@@ -205,6 +205,11 @@ void sub_81157AC(u8);
 
 void sub_8116B40(u8);
 
+void sub_8119224(struct Sprite *);
+void sub_81193D4(struct Sprite *);
+void sub_811952C(struct Sprite *);
+
+
 
 void dp01t_12_3_battle_menu(u8);
 
@@ -221,14 +226,6 @@ extern u8 gSharedMem[];
 #define ewram18a80  ((u16 *)                (gSharedMem + 0x18a80))
 #define RDATA       ((struct RData *)       (gSharedMem + 0x19000))
 
-#define S16TOPOSFLOAT(val)   \
-({                           \
-    s16 v = (val);           \
-    float f = (float)v;      \
-    if(v < 0) f += 65536.0f; \
-    f;                       \
-})
-
 struct OamMatrix
 {
     s16 a;
@@ -244,12 +241,12 @@ struct Unkg083F8DF4
     u8 var02;
     u8 var03;
     u8 var04;
-    u8 v[0x8];
+    u8 v[0x7];
     u16 var0C;
-    u8 v1[0x9];
-    s16 var18;
-    s16 var1A; //is this signed or not ?
-    u8 v2[0x4];
+    u8 v1[0xA];
+    u16 var18;
+    u16 var1A; //is this signed or not ?
+    float var1C;
 };
 
 struct RData /* ewram + 0x19000 */
@@ -1035,15 +1032,12 @@ u8 sub_8115F58(u16 r0, u16 r1)
 void sub_8116100(u8 taskid)
 {
     u8 randf;
-    u16 floatr;
-    float tempf;
-    u32 zzz;
     s8 randfinal;
     s8 r5;
     u16 g;
     u16 rand;
     u16 randmod;
-    s16 angles[0x4]; // angles in 90 degree steps
+    u16 angles[0x4]; // angles in 90 degree steps
     u8 zero = 0x0;
     memcpy(angles, &gUnknown_083F8ECE, 0x8);
     rand = Random();
@@ -1064,20 +1058,18 @@ void sub_8116100(u8 taskid)
         r5 = (1 - r5) * 2;
     g = (&gUnknown_083F8DF4[RDATA->var04_0])->var1A;
     RDATA->var80 = (g + randfinal);
-    tempf = S16TOPOSFLOAT(g + randfinal);
-    // some register differences here
-    floatr = tempf / 5.0f;
-    zzz = floatr * 3;
-    RDATA->var82 = floatr * 3;
-    RDATA->var84 = floatr;
-    RDATA->var86 = floatr;
     //
-    RDATA->var88 = S16TOPOSFLOAT(angles[(rand & 0x1) + r5]);
-    RDATA->var8C = S16TOPOSFLOAT((&gUnknown_083F8DF4[RDATA->var04_0])->var18);
-    RDATA->var90 = ((RDATA->var8C * 0.5f) - RDATA->var8C) / S16TOPOSFLOAT(zzz);
+    g = ((float)(u16)(g + randfinal)) / 5.0f;
+    RDATA->var82 = g * 3;
+    RDATA->var84 = g;
+    RDATA->var86 = g;
+    //
+    RDATA->var88 = (float)(angles[(rand & 0x1) + r5]);
+    RDATA->var8C = (float)((&gUnknown_083F8DF4[RDATA->var04_0])->var18);
+    RDATA->var90 = ((RDATA->var8C * 0.5f) - RDATA->var8C) / (float)(u16)(g * 3);
     RDATA->var94 = 68.0f;
     RDATA->var9C = 0.0f;
-    RDATA->var98 = -(8.0f / S16TOPOSFLOAT(zzz));
+    RDATA->var98 = -(8.0f / (float)(u16)(g * 3));
     RDATA->varA0 = 36.0f;
     gTasks[taskid].func = &sub_8116308;
 }
@@ -3505,22 +3497,35 @@ void sub_811889C(struct Sprite *sprite)
 void sub_81189A8(struct Sprite *sprite)
 {
     float f0, f1, f2;
+    struct Unkg083F8DF4 *p;
     sub_8118724(sprite);
     switch(sprite->data[0x3])
     {
     case 0:
-        if (sprite->data[0x0])
+        if (sprite->data[0x0] != 0x1)
+        {
+            f0 = ((float)sprite->data[0x7]);
+            p = &gUnknown_083F8DF4[0];
+            f1 = (f0 * ((float)(s32)p[RDATA->var04_0].var01) + (float)((s32)p[RDATA->var04_0].var02 - 0x1));
+            f2 = (f0 / ((float)(s32)p[RDATA->var04_0].var0C));
+        }
+        else
+        {
             return;
-        f0 = ((float)sprite->data[0x8]);
-        f1 = ((f0 * (float)(gUnknown_083F8DF4[RDATA->var04_0].var01)) + (float)(gUnknown_083F8DF4[RDATA->var04_0].var02 - 0x1));
-        f2 = ((float)gUnknown_083F8DF4[RDATA->var04_0].var0C) / f0;
+        }
         break;
     case 180:
-        if (!sprite->data[0x0])
+        if (sprite->data[0x0] != 0x0)
+        {
+            f0 = ((float)sprite->data[0x7]);
+            p = &gUnknown_083F8DF4[0];
+            f1 = (f0 * ((float)(s32)p[RDATA->var04_0].var01) + (float)((s32)p[RDATA->var04_0].var02 - 0x1));
+            f2 = -(f0 / ((float)(s32)p[RDATA->var04_0].var0C));
+        }
+        else
+        {
             return;
-        f0 = ((float)sprite->data[0x8]);
-        f1 = ((f0 * (float)(gUnknown_083F8DF4[RDATA->var04_0].var01)) + (float)(gUnknown_083F8DF4[RDATA->var04_0].var02 - 0x1));
-        f2 = ((float)gUnknown_083F8DF4[RDATA->var04_0].var0C) / f0;        
+        }
         break;
         default: return;
     }
@@ -3534,4 +3539,191 @@ void sub_81189A8(struct Sprite *sprite)
     sprite->animEnded     = FALSE;
     sprite->callback      = &sub_811889C;
     sprite->data[0x2]     = 0x0;
+}
+
+void sub_8118B30(struct Sprite *sprite)
+{
+    sprite->pos2.y = (s32)(((float)sprite->data[0x2]) * 0.05f * ((float)sprite->data[0x2])) - 45;
+    sprite->data[0x2]++;
+    if (sprite->data[0x2] > 29 && sprite->pos2.y >= 0)
+    {
+        RDATA->var7D   = 0xFF;
+        RDATA->var03_7 = FALSE;
+        StartSpriteAnim(sprite, sprite->animCmdIndex + 0x3);
+        sub_81186B8(sprite);
+        sprite->data[0x4] = 30;
+        sub_811866C(sprite);
+        sprite->data[0x6] = (sprite->data[0x6] / 30) * 30 + 0xF;
+        sprite->callback  = &sub_8118834;
+        m4aSongNumStartOrChange(0x47);
+        RDATA->var03_6 = TRUE;
+    }
+}
+
+void sub_8118BD8(struct Sprite *sprite)
+{
+    if (sprite->data[0x2]++ < 45)
+    {
+        sprite->pos2.y--;
+        if(sprite->data[0x2] == 45)
+        {
+            if (gSprites[RDATA->var3C[0x37]].animCmdIndex == 0x1)
+                sprite->pos2.y++;
+        }
+    }
+    else
+    {
+        if (sprite->data[0x2] < sprite->data[0x7])
+        {
+            if (gSprites[RDATA->var3C[0x37]].animDelayCounter == 0x0)
+            {
+                if (gSprites[RDATA->var3C[0x37]].animCmdIndex == 0x1)
+                    sprite->pos2.y++;
+                else
+                    sprite->pos2.y--;
+            }
+        }
+        else
+        {
+            sprite->animPaused    = FALSE;
+            sprite->animNum       = 0x1;
+            sprite->animBeginning = TRUE;
+            sprite->animEnded     = FALSE;
+            sprite->data[0x2]     = 0x0;
+            sprite->callback      = &sub_8118B30;
+            m4aSongNumStart(0x3D);
+        }
+    }
+}
+
+void sub_8118CAC(struct Sprite *sprite)
+{
+    sub_8118724(sprite);
+    switch(sprite->data[0x3])
+    {
+    case 90:
+        if (sprite->data[0x0] != 0x1)
+        {
+            sprite->callback  = &sub_8118BD8;
+            sprite->data[0x2] = 0x0;
+        }
+        break;
+    case 270:
+        if (sprite->data[0x0] != 0x0)
+        {
+            sprite->callback  = &sub_8118BD8;
+            sprite->data[0x2] = 0x0;
+        }
+        break;
+    }
+}
+
+void sub_8118CEC(struct Sprite *sprite)
+{
+    sub_8118724(sprite);
+    switch(RDATA->var03_0)
+    {
+    default:
+    case 0x0:
+        sub_8119224(sprite);
+        sprite->callback = &sub_81189A8;
+        break;
+    case 0x1:
+        sub_81193D4(sprite);
+        sprite->callback = &sub_8118CAC;
+        break;
+    }
+}
+
+void sub_8118D2C(struct Sprite *sprite)
+{
+    sub_8118724(sprite);
+    if (sprite->data[0x2]-- == 0x10)
+        RDATA->var98 *= -1.0f;
+    if (sprite->data[0x2] == 0x0)
+    {
+        if (!sprite->data[0x0])
+        {
+            RDATA->var7D   = 0xFF;
+            RDATA->var03_7 = 0x0;
+            StartSpriteAnim(sprite, sprite->animCmdIndex + 0x3);
+            sub_81186B8(sprite);
+            sprite->data[0x4] = 30;
+            sub_811866C(sprite);
+            sprite->data[0x6] = (sprite->data[0x6] / 30) * 30 + 15;
+            sprite->callback  = &sub_8118834;
+            m4aSongNumStartOrChange(0x47);
+        }
+        else
+        {
+            sprite->animPaused = TRUE;
+            m4aSongNumStart(0x38);
+            sub_811952C(sprite);
+        }
+    }
+}
+
+void sub_8118DE4(struct Sprite *sprite)
+{
+    sub_8118724(sprite);
+    sprite->data[0x2] = 0x0;
+    sub_81186B8(sprite);
+    if (!(gUnknown_083F8D90[RDATA->var7E].var04 & RDATA->var08))
+    {
+        RDATA->var7D   = 0xFF;
+        RDATA->var03_7 = 0x0;
+        StartSpriteAnim(sprite, sprite->animCmdIndex + 0x3);
+        sub_81186B8(sprite);
+        sprite->data[0x4] = 30;
+        sub_811866C(sprite);
+        sprite->data[0x6] = (sprite->data[0x6] / 30) * 30 + 15;
+        sprite->callback  = &sub_8118834;
+        m4aSongNumStartOrChange(0x47);
+    }
+    else
+    {
+        u8 t;
+        u32 z;
+        m4aSongNumStart(0x38);
+        if ((z = (Random() & 0x1)))
+        {
+            RDATA->var8C = 0.0f;
+            t = (RDATA->var7E + 0x1) % 0xC;
+            RDATA->var7F = t;
+        }
+        else
+        {
+            RDATA->var8C = gUnknown_083F8DF4[RDATA->var04_0].var1C * 2;
+            t = (RDATA->var7E + 0xB) % 0xC;
+            RDATA->var7F = t;
+        }
+        if (gUnknown_083F8D90[t].var04 & RDATA->var08)
+        {
+            sprite->data[0x0] = 0x1;
+            sprite->data[0x2] = gUnknown_083F8DF4[RDATA->var04_0].var02;
+        }
+        else
+        {
+            sprite->data[0x0] = gUnknown_083F8D90[t].var04 & RDATA->var08;
+            if (RDATA->var04_0)
+            {
+                sprite->data[0x2] = gUnknown_083F8DF4[RDATA->var04_0].var01;
+            }
+            else
+            {
+                sprite->data[0x2] = gUnknown_083F8DF4[RDATA->var04_0].var02;
+                if (z)
+                {
+                    RDATA->var8C = 1.5f;
+                }
+                else
+                {
+                    RDATA->var8C = -1.5f;
+                }
+            }
+        }
+        RDATA->var98 = 0.085000000894069671630859375f;
+        sprite->callback = &sub_8118D2C;
+        sprite->data[0x1] = 0x5;
+    }
 }
