@@ -70,9 +70,9 @@ void ReadPngPalette(char *path, struct Palette *palette)
 
     palette->numColors = state.info_png.color.palettesize;
 
-    // TODO: Why is LodePNG getting the palette size wrong?
-    if (state.info_png.color.bitdepth == 4 && palette->numColors > 16)
-        palette->numColors = 16;
+    if (1 << state.info_png.color.bitdepth < palette->numColors)
+        FATAL_ERROR("Palette size of %i colors is larger than bit depth %ibpp can support.\n",
+          palette->numColors, state.info_png.color.bitdepth);
 
     for (int i = 0; i < palette->numColors; i++)
     {
