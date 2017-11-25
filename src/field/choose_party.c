@@ -32,7 +32,6 @@ EWRAM_DATA u8 gSelectedOrderFromParty[3] = {0};
 extern u8 sub_806BD58(u8, u8);
 extern void PartyMenuPrintMonsLevelOrStatus(void);
 extern void sub_806BC3C(u8, u8);
-extern void ShowPokemonSummaryScreen(struct Pokemon *, u8, u8, void (*)(void), int);
 extern u8 GetMonStatusAndPokerus();
 extern void PartyMenuPrintHP();
 extern bool8 sub_80F9344(void); 

@@ -1,13 +1,14 @@
 #include "global.h"
 #include "battle.h"
-#include "pokemon_summary_screen.h"
 #include "data2.h"
 #include "decompress.h"
+#include "event_data.h"
 #include "ewram.h"
 #include "item.h"
 #include "items.h"
 #include "learn_move.h"
 #include "link.h"
+#include "m4a.h"
 #include "main.h"
 #include "menu.h"
 #include "menu_helpers.h"
@@ -16,6 +17,7 @@
 #include "party_menu.h"
 #include "pokeball.h"
 #include "pokemon.h"
+#include "pokemon_summary_screen.h"
 #include "region_map.h"
 #include "sound.h"
 #include "species.h"
@@ -25,32 +27,24 @@
 #include "strings2.h"
 #include "task.h"
 #include "tv.h"
-
-struct SummaryScreenStruct
-{
-    /*0x00*/ u8 filler0[8];
-    /*0x08*/ u8 unk8;
-    /*0x09*/ u8 unk9;
-    /*0x0A*/ u8 fillerA;
-    /*0x0B*/ u8 unkB;
-    /*0x0C*/ u8 fillerC;
-    /*0x0D*/ u8 unkD;
-    /*0x0E*/ u8 fillerE[0x2];
-    /*0x10*/ struct Pokemon unk10;
-    /*0x74*/ u8 filler74;
-    /*0x75*/ u8 unk75;
-    /*0x76*/ u8 unk76;
-    /*0x77*/ u8 filler77[0x2];
-    /*0x79*/ u8 unk79;
-    /*0x7A*/ u8 unk7A;
-    /*0x7B*/ u8 filler7B;
-    /*0x7C*/ u16 unk7C;
-    /*0x7E*/ u8 unk7E;
-    /*0x7F*/ u8 unk7F;
-};
+#include "unknown_task.h"
 
 #define ewramSS (*(struct SummaryScreenStruct *)(gSharedMem + 0x18000))
 
+static void sub_809DE44(void);
+static void sub_809EB40(u8);
+static void sub_809EBC4(void);
+static void sub_809E044(void);
+static void sub_80A1D84(struct Pokemon *);
+static void sub_80A18C4(void);
+static bool8 LoadPokemonSummaryScreenGraphics(void);
+static bool8 MonKnowsMultipleMoves(struct Pokemon *);
+extern void PrintSummaryWindowHeaderText(void);
+static void sub_80A1DCC(struct Pokemon *);
+static void sub_809FE80(void);
+static void sub_80A00A4(void);
+static void sub_80A0390(void);
+extern void sub_80A015C(struct Pokemon *);
 extern u8 sub_80A1808(struct Pokemon *);
 extern void sub_80A1F98(s32, u8, u8, u8, u8, u16, s32);
 static void sub_80A0958(struct Pokemon *);
@@ -61,18 +55,64 @@ static void sub_80A1F48(const u8 *, u8, u8, u8, u16);
 static void PrintHeldItemName(u16, u8, u8);
 static void PrintNumRibbons(struct Pokemon *);
 static void DrawExperienceProgressBar(struct Pokemon *, u8, u8);
+static void sub_809E13C(u8 taskId);
+static void sub_80A1950(void);
+static void sub_809DA1C(void);
+static void sub_809D844(void);
 
+extern void sub_809D85C(void);
+extern void sub_809DE64(void);
+extern bool8 sub_809DA84(void);
+extern void SummaryScreenHandleAButton(u8);
+extern void SummaryScreenHandleUpDownInput(u8, s8);
+extern bool8 sub_809F7D0(u8);
+extern void sub_809F9D0(u8, u8);
+extern void sub_809EAC8(u8);
+extern void sub_809E534(u8);
+extern void sub_809E83C(u8, s8);
+extern void sub_809E7F0(u8);
+extern void sub_809E6D8(void);
+extern void sub_809E5C4(void);
+extern void sub_80A1B40(u8);
+extern void sub_80A2078(int);
+extern void sub_809E3FC(u8);
+extern void SummaryScreenHandleKeyInput(u8);
+extern void sub_80A1B1C(u8);
+extern void sub_80A16CC(u8);
+extern void sub_80A1A30(u8);
+extern void DrawSummaryScreenNavigationDots(void);
+extern void sub_80A00F4(u8);
+extern void sub_80A029C(struct Pokemon *);
+extern void sub_809EE74(u8);
+extern void sub_809EC38(u8);
+extern void sub_809FBE4(void);
+extern void sub_809F0D0(u8, s8);
+extern void sub_80A1500(u8);
+extern void sub_80A1334(u8);
+extern u8 StorageSystemGetNextMonIndex(struct BoxPokemon *, u8, u8, u8);
+extern void sub_809F43C(u8);
+extern s8 sub_809F284(s8);
+extern s8 sub_809F3CC(s8);
+extern bool8 sub_809F310(struct Pokemon *);
+extern s8 sub_809F344(u8);
+extern s8 sub_809F388(u8);
+extern bool8 sub_809F5F8(void);
+extern void sub_80A1DE8(struct Pokemon *);
+extern u8 sub_809F6B4(struct Pokemon *, u8 *);
+extern void DrawPokerusSurvivorDot(struct Pokemon *);
+extern void sub_80A12D0(s8);
+extern void sub_809FAC8(struct Pokemon *);
 extern void SummaryScreenHandleLeftRightInput(u8, s8);
-extern void sub_809E8F0(u8, s8);
+extern void sub_809E8F0(u8, s8, u8*);
 extern void sub_809E260(u8);
 extern void sub_809F814(u8);
 extern void sub_80A1654(s8, u8);
 extern void sub_80A1488(s8, u8);
 extern void GetStringCenterAlignXOffsetWithLetterSpacing(u8, u8, u8, u8);
 extern bool8 sub_809FA94(struct Pokemon *);
-extern void sub_809FC34(struct Pokemon *);
+static void sub_809FC34(struct Pokemon *);
 extern void sub_809FC0C(void);
-extern void sub_809FF64(struct Pokemon *);
+static void sub_809FF64(struct Pokemon *);
 extern void sub_809FEB8(void);
 extern void sub_80A1918(u8, u8);
 extern void sub_80A198C(u8, u8, u8, u8);
@@ -95,6 +135,36 @@ extern u8 *sub_80A1E58(u8 *, u8);
 static void sub_80A0A2C(struct Pokemon *, u8, u8);
 extern void sub_80A1FF8(const u8 *, u8, u8, u8);
 
+extern struct MusicPlayerInfo gMPlay_BGM;
+extern u8 gUnknown_020384F0;
+extern u8 gUnknown_08208238[];
+extern u16 gUnknown_030041B8;
+extern u16 gUnknown_03004280;
+extern u16 gUnknown_030041B4;
+extern u16 gUnknown_030042C0;
+extern u16 gUnknown_03004288;
+extern u16 gUnknown_030041B0;
+extern const u16 gSummaryScreenTextTiles[];
+extern const u16 gSummaryScreenButtonTiles[];
+extern const u8 gMoveTypes_Pal[];
+extern const u8 gStatusScreen_Pal[];
+extern const u8 gStatusScreen_Tilemap[];
+extern const struct CompressedSpritePalette gUnknown_083C1278;
+extern const struct CompressedSpritePalette gUnknown_083C12FC;
+extern const struct CompressedSpriteSheet gUnknown_083C12F4;
+extern const struct CompressedSpriteSheet gUnknown_083C1270;
+extern const struct CompressedSpriteSheet gUnknown_083C11B8;
+extern const u8 gUnknown_08E74688[];
+extern const u8 gUnknown_08E73E88[];
+extern const u8 gUnknown_08E74E88[];
+extern const u8 gUnknown_08E73508[];
+extern const u8 gStatusScreen_Gfx[];
+extern const u8 gFontDefaultPalette[];
+extern const u8 gUnknownPalette_81E6692[];
+extern const u8 gUnknown_083C15A8[];
+extern const void (*gUnknown_083C1580[])(void);
+extern const void (*gUnknown_083C1598[])(struct Pokemon *);
+extern const void (*gUnknown_083C1588[])(struct Pokemon *);
 extern const u16 gUnknown_083C157E[];
 extern const u16 gUnknown_083C157C[];
 extern const u8 gAbilityNames[][13];
@@ -120,6 +190,1979 @@ extern const u8 gUnknown_083C15AE[];
 extern const u8 gUnknown_083C15B4[];
 extern const u8 *const gUnknown_083C1068[];
 
+
+void sub_809D844(void)
+{
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+}
+
+void sub_809D85C(void)
+{
+    REG_BG1HOFS = gUnknown_030042C0;
+    REG_BG1VOFS = gUnknown_030041B4;
+    REG_BG2HOFS = gUnknown_03004288;
+    REG_BG2VOFS = gUnknown_03004280;
+    REG_BG3HOFS = gUnknown_030041B0;
+    REG_BG3VOFS = gUnknown_030041B8;
+
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    TransferPlttBuffer();
+}
+
+void ShowPokemonSummaryScreen(struct Pokemon *party, u8 partyIndex, u8 partyCount, MainCallback func, u8 e)
+{
+    gPaletteFade.bufferTransferDisabled = 1;
+
+    ewramSS.unk0.partyMons = party;
+    ewramSS.unk8 = e;
+    ewramSS.unk9 = partyIndex;
+    ewramSS.unkA = partyCount;
+    ewramSS.unk4 = func;
+    ewramSS.unk74 = 0;
+    ewramSS.unk79 = 4;
+    ewramSS.unk7C = 0;
+    ewramSS.unk80 = 0;
+    ewramSS.unk7B = 0;
+
+    if (e > 4)
+    {
+        ewramSS.unkE = 1;
+    }
+    else
+    {
+        ewramSS.unkE = 0;
+    }
+
+    switch (e)
+    {
+    case 0:
+    case 5:
+        ewramSS.unk75 = 0;
+        ewramSS.unk76 = 3;
+        ewramSS.unk77 = 0;
+        ewramSS.unk78 = 0;
+        ewramSS.unk7E = 1;
+        ewramSS.unk7F = 7;
+        break;
+    case 4:
+        ewramSS.unk75 = 0;
+        ewramSS.unk76 = 3;
+        ewramSS.unk77 = 0;
+        ewramSS.unk78 = 0;
+        ewramSS.unk7E = 1;
+        ewramSS.unk7F = 7;
+        ewramSS.unk7B = 1;
+        break;
+    case 2:
+        ewramSS.unk75 = 2;
+        ewramSS.unk76 = 3;
+        ewramSS.unk77 = 1;
+        ewramSS.unk78 = 1;
+        ewramSS.unk7E = 3;
+        ewramSS.unk7F = 0;
+        ewramSS.unk79 = 0;
+        break;
+    case 1:
+    case 6:
+        ewramSS.unk75 = 2;
+        ewramSS.unk76 = 3;
+        ewramSS.unk77 = 1;
+        ewramSS.unk78 = 1;
+        break;
+    }
+
+    ewramSS.unkB = ewramSS.unk75;
+    SetMainCallback2(sub_809DE44);
+}
+
+void sub_809D9F0(struct Pokemon *party, u8 partyIndex, u8 partyCount, MainCallback func, u16 e)
+{
+    ShowPokemonSummaryScreen(party, partyIndex, partyCount, func, 2);
+    ewramSS.unk7C = e;
+}
+
+void sub_809DA1C(void)
+{
+    switch (ewramSS.unk8)
+    {
+    case 0:
+    case 5:
+        ewramSS.unkF = CreateTask(SummaryScreenHandleKeyInput, 0);
+        break;
+    case 4:
+        ewramSS.unkF = CreateTask(SummaryScreenHandleKeyInput, 0);
+        break;
+    case 2:
+    case 3:
+        ewramSS.unkF = CreateTask(sub_809EB40, 0);
+        break;
+    case 1:
+    case 6:
+        ewramSS.unkF = CreateTask(sub_809E3FC, 0);
+        break;
+    }
+}
+
+bool8 sub_809DA84(void)
+{
+    const u16 *src;
+    void *dest;
+
+    switch (gMain.state)
+    {
+    case 0:
+        SetVBlankCallback(NULL);
+        ResetSpriteData();
+        gMain.state++;
+        break;
+    case 1:
+        remove_some_task();
+        gMain.state++;
+        break;
+    case 2:
+        FreeAllSpritePalettes();
+        gMain.state++;
+        break;
+    case 3:
+        dest = (void *)VRAM;
+        DmaClearLarge(3, dest, 0x10000, 0x1000, 32);
+        gMain.state++;
+        break;
+    case 4:
+        sub_809DE64();
+        gMain.state++;
+        break;
+    case 5:
+        SetUpWindowConfig(&gWindowConfig_81E6E6C);
+        gMain.state++;
+        break;
+    case 6:
+        MultistepInitMenuWindowBegin(&gWindowConfig_81E6E6C);
+        gMain.state++;
+        break;
+    case 7:
+        if (MultistepInitMenuWindowContinue())
+        {
+            gMain.state++;
+        }
+        break;
+    case 8:
+        sub_809DA1C();
+        gMain.state++;
+        break;
+    case 9:
+        src = gSummaryScreenTextTiles;
+        dest = (void *)VRAM + 0xD000;
+        DmaCopy16(3, src, dest, 320);
+
+        src = gSummaryScreenButtonTiles;
+        dest = (void *)VRAM + 0xD140;
+        DmaCopy16(3, src, dest, 256);
+
+        ewramSS.unk74 = 0;
+        gMain.state++;
+        break;
+    case 10:
+        if (LoadPokemonSummaryScreenGraphics())
+        {
+            ewramSS.unk74 = 0;
+            gMain.state++;
+        }
+        break;
+    case 11:
+        sub_80A18C4();
+        gMain.state++;
+        break;
+    case 12:
+        sub_809F678(&ewramSS.unk10);
+        if (!GetMonStatusAndPokerus(&ewramSS.unk10))
+        {
+            sub_80A12D0(0);
+        }
+        else
+        {
+            sub_80A12D0(10);
+        }
+
+        DrawPokerusSurvivorDot(&ewramSS.unk10);
+        gMain.state++;
+        break;
+    case 13:
+        sub_80A1950();
+        sub_80A1D84(&ewramSS.unk10);
+        gMain.state++;
+        break;
+    case 14:
+        sub_80A1DE8(&ewramSS.unk10);
+        ewramSS.unk74 = 0;
+        gMain.state++;
+        break;
+    case 15:
+        if ((ewramSS.unkC = sub_809F6B4(&ewramSS.unk10, &ewramSS.unk74)) != 0xFF)
+        {
+            ewramSS.unk74 = 0;
+            gMain.state++;
+        }
+        break;
+    case 16:
+        sub_809E044();
+        DrawSummaryScreenNavigationDots();
+        gMain.state++;
+        break;
+    case 17:
+        if (ewramSS.unkB < 2)
+        {
+            gUnknown_083C1580[ewramSS.unkB]();
+        }
+
+        gMain.state++;
+        break;
+    case 18:
+        sub_809FAC8(&ewramSS.unk10);
+        gMain.state++;
+        break;
+    case 19:
+        gUnknown_083C1598[ewramSS.unkB](&ewramSS.unk10);
+        gMain.state++;
+        break;
+    case 20:
+        if (GetMonData(&ewramSS.unk10, MON_DATA_IS_EGG))
+        {
+            gUnknown_030041B0 = 256;
+        }
+        else
+        {
+            gUnknown_030041B0 = 0;
+        }
+
+        gMain.state++;
+        break;
+    case 21:
+        sub_809EBC4();
+        if (ewramSS.unk79 != 0)
+        {
+            sub_80A1488(0, 0);
+            sub_80A1654(0, 0);
+        }
+        else
+        {
+            sub_80A1488(10, 0);
+            sub_80A1654(10, 0);
+        }
+
+        PrintSummaryWindowHeaderText();
+        gMain.state++;
+        break;
+    case 22:
+        if (sub_8055870() != TRUE)
+        {
+            gMain.state++;
+        }
+        break;
+    default:
+        SetVBlankCallback(sub_809D85C);
+        BeginHardwarePaletteFade(0xFF, 0, 16, 0, 1);
+        SetMainCallback2(sub_809D844);
+        gPaletteFade.bufferTransferDisabled = 0;
+        return TRUE;
+        break;
+    }
+
+    return FALSE;
+}
+
+void sub_809DE44(void)
+{
+    while (sub_809DA84() != TRUE && sub_80F9344() != TRUE);
+}
+
+void sub_809DE64(void)
+{
+    REG_BG0CNT = 0x1E08;
+    REG_BG1CNT = 0x4801;
+    REG_BG2CNT = 0x4A02;
+    REG_BG3CNT = 0x5C03;
+
+    gUnknown_030042C0 = 0;
+    gUnknown_030041B4 = 0;
+    gUnknown_03004288 = 0;
+    gUnknown_03004280 = 0;
+    gUnknown_030041B0 = 0;
+    gUnknown_030041B8 = 0;
+
+    REG_BG0HOFS = 0;
+    REG_BG0VOFS = 0;
+    REG_BG1HOFS = 0;
+    REG_BG1VOFS = 0;
+    REG_BG2HOFS = 0;
+    REG_BG2VOFS = 0;
+    REG_BG3HOFS = 0;
+    REG_BG3VOFS = 0;
+
+    REG_BLDCNT = 0;
+    REG_DISPCNT = 0x1F40;
+}
+
+bool8 LoadPokemonSummaryScreenGraphics(void)
+{
+    switch (ewramSS.unk74)
+    {
+    case 0:
+        LZDecompressVram(gStatusScreen_Gfx, (void *)VRAM + 0);
+        break;
+    case 1:
+        CpuSet(gUnknown_08E73508, (void *)VRAM + 0xE000, 0x400);
+        break;
+    case 2:
+        LZDecompressVram(gUnknown_08E74E88, (void *)VRAM + 0xE800);
+        break;
+    case 3:
+        LZDecompressVram(gStatusScreen_Tilemap, (void *)VRAM + 0x4800);
+        break;
+    case 4:
+        CpuSet(gUnknown_08E73E88, (void *)VRAM + 0x5800, 0x400);
+        break;
+    case 5:
+        CpuSet(gUnknown_08E74688, (void *)VRAM + 0x6800, 0x400);
+        break;
+    case 6:
+        LoadCompressedPalette(gStatusScreen_Pal, 0, 160);
+        break;
+    case 7:
+        LoadCompressedObjectPic(&gUnknown_083C11B8);
+        break;
+    case 8:
+        LoadCompressedObjectPic(&gUnknown_083C1270);
+        break;
+    case 9:
+        LoadCompressedObjectPic(&gUnknown_083C12F4);
+        break;
+    case 10:
+        LoadCompressedObjectPalette(&gUnknown_083C12FC);
+        break;
+    case 11:
+        LoadCompressedObjectPalette(&gUnknown_083C1278);
+        break;
+    case 12:
+        LoadCompressedPalette(gMoveTypes_Pal, 464, 96);
+        ewramSS.unk74 = 0;
+        return TRUE;
+    }
+
+    ewramSS.unk74++;
+    return FALSE;
+}
+
+void sub_809E044(void)
+{
+    LoadPalette(&gUnknownPalette_81E6692[28], 129, 2);
+    LoadPalette(&gUnknownPalette_81E6692[30], 136, 2);
+    LoadPalette(&gUnknownPalette_81E6692[28], 143, 2);
+    LoadPalette(&gUnknownPalette_81E6692[30], 137, 2);
+    LoadPalette(&gUnknownPalette_81E6692[12], 209, 4);
+    LoadPalette(&gUnknownPalette_81E6692[20], 211, 4);
+    LoadPalette(&gUnknownPalette_81E6692[28], 213, 4);
+    LoadPalette(&gUnknownPalette_81E6692[12], 215, 4);
+    LoadPalette(&gUnknownPalette_81E6692[8],  217, 4);
+    LoadPalette(&gUnknownPalette_81E6692[16], 219, 4);
+    LoadPalette(&gUnknownPalette_81E6692[4],  221, 2);
+    LoadPalette(&gUnknownPalette_81E6692[6], 222, 2);
+    LoadPalette(&gUnknownPalette_81E6692[2],  223, 2);
+    LoadPalette(gFontDefaultPalette,          240, 32);
+    LoadPalette(&gUnknownPalette_81E6692[6], 249, 2);
+}
+
+void SummaryScreenExit(u8 taskId)
+{
+    PlaySE(5);
+    BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+    gTasks[taskId].func = sub_809E13C;
+}
+
+void sub_809E13C(u8 taskId)
+{
+    if (sub_8055870() != TRUE && !gPaletteFade.active)
+    {
+        gUnknown_020384F0 = ewramSS.unk9;
+
+        ResetSpriteData();
+        FreeAllSpritePalettes();
+        StopCryAndClearCrySongs();
+        m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 0x100);
+        SetMainCallback2(ewramSS.unk4);
+        DestroyTask(taskId);
+    }
+}
+
+void SummaryScreenHandleKeyInput(u8 taskId)
+{
+    if (gPaletteFade.active)
+        return;
+
+    if (gMain.newKeys & DPAD_UP)
+    {
+        SummaryScreenHandleUpDownInput(taskId, -1);
+    }
+    else if (gMain.newKeys & DPAD_DOWN)
+    {
+        SummaryScreenHandleUpDownInput(taskId, 1);
+    }
+    else if ((gMain.newKeys & DPAD_LEFT) || sub_80F9284() == 1)
+    {
+        SummaryScreenHandleLeftRightInput(taskId, -1);
+    }
+    else if ((gMain.newKeys & DPAD_RIGHT) || sub_80F9284() == 2)
+    {
+        SummaryScreenHandleLeftRightInput(taskId, 1);
+    }
+    else if (gMain.newKeys & A_BUTTON)
+    {
+        if (ewramSS.unkB > 1)
+        {
+            SummaryScreenHandleAButton(taskId);
+        }
+
+        if (ewramSS.unkB == 0)
+        {
+            SummaryScreenExit(taskId);
+        }
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        SummaryScreenExit(taskId);
+    }
+}
+
+void sub_809E260(u8 taskId)
+{
+    if (gPaletteFade.active)
+        return;
+
+    if (gMain.newKeys & DPAD_UP)
+    {
+        gTasks[taskId].data[0] = 4;
+        sub_809E8F0(taskId, -1, &ewramSS.unk79);
+    }
+    else if (gMain.newKeys & DPAD_DOWN)
+    {
+        gTasks[taskId].data[0] = 4;
+        sub_809E8F0(taskId, 1, &ewramSS.unk79);
+    }
+    else if ((gMain.newKeys & DPAD_LEFT) || sub_80F9284() == 1)
+    {
+        if (ewramSS.unkB == 3 && (ewramSS.unk79 != 4 || ewramSS.unk7C != 0))
+        {
+            MenuZeroFillWindowRect(0, 14, 9, 18);
+        }
+
+        SummaryScreenHandleLeftRightInput(taskId, -1);
+    }
+    else if ((gMain.newKeys & DPAD_RIGHT) || sub_80F9284() == 2)
+    {
+        if (ewramSS.unkB != ewramSS.unk76)
+        {
+            if (ewramSS.unkB == 2 && (ewramSS.unk79 != 4 || ewramSS.unk7C != 0))
+            {
+                MenuZeroFillWindowRect(0, 14, 9, 18);
+            }
+
+            SummaryScreenHandleLeftRightInput(taskId, 1);
+        }
+    }
+    else if (gMain.newKeys & A_BUTTON)
+    {
+        if (sub_809F7D0(taskId) == 1 || ewramSS.unk79 == 4)
+        {
+            ewramSS.unk7A = ewramSS.unk79;
+            gSpecialVar_0x8005 = ewramSS.unk7A;
+            SummaryScreenExit(taskId);
+        }
+        else
+        {
+            PlaySE(32);
+            sub_809F9D0(taskId, ewramSS.unk79);
+        }
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        ewramSS.unk7A = 4;
+        gSpecialVar_0x8005 = 4;
+        SummaryScreenExit(taskId);
+    }
+}
+
+void sub_809E3FC(u8 taskId)
+{
+    if (gPaletteFade.active)
+        return;
+
+    if (gMain.newKeys & DPAD_UP)
+    {
+        gTasks[taskId].data[0] = 4;
+        sub_809E8F0(taskId, -1, &ewramSS.unk79);
+    }
+    else if (gMain.newKeys & DPAD_DOWN)
+    {
+        gTasks[taskId].data[0] = 4;
+        sub_809E8F0(taskId, 1, &ewramSS.unk79);
+    }
+    else if (gMain.newKeys & A_BUTTON)
+    {
+        if (ewramSS.unk79 != 4 && ewramSS.unk7B == 0)
+        {
+            if (!MonKnowsMultipleMoves(&ewramSS.unk10))
+            {
+                PlaySE(32);
+            }
+            else
+            {
+                PlaySE(5);
+
+                ewramSS.unk7A = ewramSS.unk79;
+                sub_80A1B40(1);
+                sub_80A1A30(19);
+
+                gTasks[taskId].func = sub_809E534;
+            }
+        }
+        else
+        {
+            PlaySE(5);
+            sub_809EAC8(taskId);
+        }
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        PlaySE(5);
+        sub_809EAC8(taskId);
+    }
+
+}
+
+bool8 MonKnowsMultipleMoves(struct Pokemon *mon)
+{
+    u8 i;
+
+    for (i = 1; i < 4; i++)
+    {
+        if (GetMonMove(mon, i))
+        {
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+void sub_809E534(u8 taskId)
+{
+    if (gMain.newKeys & DPAD_UP)
+    {
+        gTasks[taskId].data[0] = 3;
+        sub_809E8F0(taskId, -1, &ewramSS.unk7A);
+    }
+    else if (gMain.newKeys & DPAD_DOWN)
+    {
+        gTasks[taskId].data[0] = 3;
+        sub_809E8F0(taskId, 1, &ewramSS.unk7A);
+    }
+    else if (gMain.newKeys & A_BUTTON)
+    {
+        sub_809E83C(taskId, 1);
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        sub_809E83C(taskId, -1);
+    }
+}
+
+__attribute__((naked))
+void sub_809E5C4(void)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    sub sp, 0x20\n\
+    ldr r1, _0809E6D0 @ =gSharedMem + 0x18000\n\
+    ldr r5, [r1]\n\
+    ldrb r2, [r1, 0x9]\n\
+    movs r0, 0x64\n\
+    muls r0, r2\n\
+    adds r5, r0\n\
+    adds r0, r1, 0\n\
+    adds r0, 0x79\n\
+    ldrb r0, [r0]\n\
+    mov r8, r0\n\
+    adds r1, 0x7A\n\
+    ldrb r6, [r1]\n\
+    adds r0, 0xD\n\
+    str r0, [sp, 0x8]\n\
+    adds r0, r5, 0\n\
+    ldr r1, [sp, 0x8]\n\
+    bl GetMonData\n\
+    mov r1, sp\n\
+    adds r1, 0x2\n\
+    str r1, [sp, 0x14]\n\
+    strh r0, [r1]\n\
+    adds r2, r6, 0\n\
+    adds r2, 0xD\n\
+    str r2, [sp, 0xC]\n\
+    adds r0, r5, 0\n\
+    adds r1, r2, 0\n\
+    bl GetMonData\n\
+    mov r1, sp\n\
+    strh r0, [r1]\n\
+    mov r3, r8\n\
+    adds r3, 0x11\n\
+    str r3, [sp, 0x10]\n\
+    adds r0, r5, 0\n\
+    adds r1, r3, 0\n\
+    bl GetMonData\n\
+    mov r7, sp\n\
+    adds r7, 0x5\n\
+    str r7, [sp, 0x18]\n\
+    strb r0, [r7]\n\
+    adds r0, r6, 0\n\
+    adds r0, 0x11\n\
+    str r0, [sp, 0x1C]\n\
+    adds r0, r5, 0\n\
+    ldr r1, [sp, 0x1C]\n\
+    bl GetMonData\n\
+    add r1, sp, 0x4\n\
+    mov r10, r1\n\
+    strb r0, [r1]\n\
+    adds r0, r5, 0\n\
+    movs r1, 0x15\n\
+    bl GetMonData\n\
+    mov r4, sp\n\
+    adds r4, 0x6\n\
+    strb r0, [r4]\n\
+    ldr r1, _0809E6D4 @ =gUnknown_08208238\n\
+    mov r2, r8\n\
+    adds r0, r2, r1\n\
+    ldrb r0, [r0]\n\
+    mov r9, r0\n\
+    ldrb r0, [r4]\n\
+    adds r2, r0, 0\n\
+    mov r3, r9\n\
+    ands r2, r3\n\
+    mov r7, r8\n\
+    lsls r7, 1\n\
+    mov r8, r7\n\
+    asrs r2, r7\n\
+    lsls r2, 24\n\
+    lsrs r2, 24\n\
+    adds r1, r6, r1\n\
+    ldrb r3, [r1]\n\
+    adds r1, r0, 0\n\
+    ands r1, r3\n\
+    lsls r6, 1\n\
+    asrs r1, r6\n\
+    lsls r1, 24\n\
+    lsrs r1, 24\n\
+    mov r7, r9\n\
+    bics r0, r7\n\
+    strb r0, [r4]\n\
+    ldrb r0, [r4]\n\
+    bics r0, r3\n\
+    strb r0, [r4]\n\
+    lsls r2, r6\n\
+    mov r0, r8\n\
+    lsls r1, r0\n\
+    adds r2, r1\n\
+    ldrb r0, [r4]\n\
+    orrs r0, r2\n\
+    strb r0, [r4]\n\
+    adds r0, r5, 0\n\
+    ldr r1, [sp, 0x8]\n\
+    mov r2, sp\n\
+    bl SetMonData\n\
+    adds r0, r5, 0\n\
+    ldr r1, [sp, 0xC]\n\
+    ldr r2, [sp, 0x14]\n\
+    bl SetMonData\n\
+    adds r0, r5, 0\n\
+    ldr r1, [sp, 0x10]\n\
+    mov r2, r10\n\
+    bl SetMonData\n\
+    adds r0, r5, 0\n\
+    ldr r1, [sp, 0x1C]\n\
+    ldr r2, [sp, 0x18]\n\
+    bl SetMonData\n\
+    adds r0, r5, 0\n\
+    movs r1, 0x15\n\
+    adds r2, r4, 0\n\
+    bl SetMonData\n\
+    add sp, 0x20\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
+_0809E6D0: .4byte gSharedMem + 0x18000\n\
+_0809E6D4: .4byte gUnknown_08208238\n\
+    .syntax divided\n");
+}
+
+__attribute__((naked))
+void sub_809E6D8(void)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    sub sp, 0x20\n\
+    ldr r2, _0809E7E8 @ =gSharedMem + 0x18000\n\
+    ldr r5, [r2]\n\
+    ldrb r1, [r2, 0x9]\n\
+    lsls r0, r1, 2\n\
+    adds r0, r1\n\
+    lsls r0, 4\n\
+    adds r5, r0\n\
+    adds r0, r2, 0\n\
+    adds r0, 0x79\n\
+    ldrb r0, [r0]\n\
+    mov r8, r0\n\
+    adds r2, 0x7A\n\
+    ldrb r6, [r2]\n\
+    adds r0, 0xD\n\
+    str r0, [sp, 0x8]\n\
+    adds r0, r5, 0\n\
+    ldr r1, [sp, 0x8]\n\
+    bl GetBoxMonData\n\
+    mov r1, sp\n\
+    adds r1, 0x2\n\
+    str r1, [sp, 0x14]\n\
+    strh r0, [r1]\n\
+    adds r2, r6, 0\n\
+    adds r2, 0xD\n\
+    str r2, [sp, 0xC]\n\
+    adds r0, r5, 0\n\
+    adds r1, r2, 0\n\
+    bl GetBoxMonData\n\
+    mov r1, sp\n\
+    strh r0, [r1]\n\
+    mov r3, r8\n\
+    adds r3, 0x11\n\
+    str r3, [sp, 0x10]\n\
+    adds r0, r5, 0\n\
+    adds r1, r3, 0\n\
+    bl GetBoxMonData\n\
+    mov r7, sp\n\
+    adds r7, 0x5\n\
+    str r7, [sp, 0x18]\n\
+    strb r0, [r7]\n\
+    adds r0, r6, 0\n\
+    adds r0, 0x11\n\
+    str r0, [sp, 0x1C]\n\
+    adds r0, r5, 0\n\
+    ldr r1, [sp, 0x1C]\n\
+    bl GetBoxMonData\n\
+    add r1, sp, 0x4\n\
+    mov r10, r1\n\
+    strb r0, [r1]\n\
+    adds r0, r5, 0\n\
+    movs r1, 0x15\n\
+    bl GetBoxMonData\n\
+    mov r4, sp\n\
+    adds r4, 0x6\n\
+    strb r0, [r4]\n\
+    ldr r1, _0809E7EC @ =gUnknown_08208238\n\
+    mov r2, r8\n\
+    adds r0, r2, r1\n\
+    ldrb r0, [r0]\n\
+    mov r9, r0\n\
+    ldrb r0, [r4]\n\
+    adds r2, r0, 0\n\
+    mov r3, r9\n\
+    ands r2, r3\n\
+    mov r7, r8\n\
+    lsls r7, 1\n\
+    mov r8, r7\n\
+    asrs r2, r7\n\
+    lsls r2, 24\n\
+    lsrs r2, 24\n\
+    adds r1, r6, r1\n\
+    ldrb r3, [r1]\n\
+    adds r1, r0, 0\n\
+    ands r1, r3\n\
+    lsls r6, 1\n\
+    asrs r1, r6\n\
+    lsls r1, 24\n\
+    lsrs r1, 24\n\
+    mov r7, r9\n\
+    bics r0, r7\n\
+    strb r0, [r4]\n\
+    ldrb r0, [r4]\n\
+    bics r0, r3\n\
+    strb r0, [r4]\n\
+    lsls r2, r6\n\
+    mov r0, r8\n\
+    lsls r1, r0\n\
+    adds r2, r1\n\
+    ldrb r0, [r4]\n\
+    orrs r0, r2\n\
+    strb r0, [r4]\n\
+    adds r0, r5, 0\n\
+    ldr r1, [sp, 0x8]\n\
+    mov r2, sp\n\
+    bl SetBoxMonData\n\
+    adds r0, r5, 0\n\
+    ldr r1, [sp, 0xC]\n\
+    ldr r2, [sp, 0x14]\n\
+    bl SetBoxMonData\n\
+    adds r0, r5, 0\n\
+    ldr r1, [sp, 0x10]\n\
+    mov r2, r10\n\
+    bl SetBoxMonData\n\
+    adds r0, r5, 0\n\
+    ldr r1, [sp, 0x1C]\n\
+    ldr r2, [sp, 0x18]\n\
+    bl SetBoxMonData\n\
+    adds r0, r5, 0\n\
+    movs r1, 0x15\n\
+    adds r2, r4, 0\n\
+    bl SetBoxMonData\n\
+    add sp, 0x20\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
+_0809E7E8: .4byte gSharedMem + 0x18000\n\
+_0809E7EC: .4byte gUnknown_08208238\n\
+    .syntax divided\n");
+}
+
+void sub_809E7F0(u8 taskId)
+{
+    if (sub_809F5F8())
+    {
+        ewramSS.unk74 = 0;
+        sub_80A0428(&ewramSS.unk10, &ewramSS.unk79);
+        gTasks[taskId].func = sub_809E3FC;
+        sub_80A2078(taskId);
+    }
+}
+
+void sub_809E83C(u8 taskId, s8 b)
+{
+    PlaySE(5);
+
+    sub_80A1B1C(19);
+    sub_80A1B40(0);
+
+    if (b == 1)
+    {
+        if (ewramSS.unk79 != ewramSS.unk7A)
+        {
+            if (ewramSS.unkE == 0)
+            {
+                sub_809E5C4();
+            }
+            else
+            {
+                sub_809E6D8();
+            }
+
+            ewramSS.unk79 = ewramSS.unk7A;
+            sub_809F678(&ewramSS.unk10);
+            ewramSS.unk74 = 1;
+
+            gTasks[taskId].func = sub_809E7F0;
+            return;
+        }
+    }
+    else
+    {
+        sub_80A0428(&ewramSS.unk10, &ewramSS.unk79);
+    }
+
+    gTasks[taskId].func = sub_809E3FC;
+    sub_80A2078(taskId);
+}
+
+__attribute__((naked))
+void sub_809E8F0(u8 taskId, s8 direction, u8 *c)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    sub sp, 0x8\n\
+    adds r4, r1, 0\n\
+    mov r9, r2\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    mov r8, r0\n\
+    lsls r4, 24\n\
+    lsrs r4, 24\n\
+    movs r0, 0x1\n\
+    str r0, [sp]\n\
+    movs r0, 0x5\n\
+    bl PlaySE\n\
+    mov r1, r9\n\
+    ldrb r6, [r1]\n\
+    ldr r1, _0809E944 @ =gTasks\n\
+    mov r2, r8\n\
+    lsls r0, r2, 2\n\
+    add r0, r8\n\
+    lsls r0, 3\n\
+    adds r0, r1\n\
+    ldrb r0, [r0, 0x8]\n\
+    movs r2, 0\n\
+    lsls r4, 24\n\
+    asrs r4, 24\n\
+    mov r10, r4\n\
+    lsls r7, r0, 24\n\
+_0809E930:\n\
+    lsls r0, r6, 24\n\
+    asrs r0, 24\n\
+    add r0, r10\n\
+    lsls r0, 24\n\
+    lsrs r6, r0, 24\n\
+    asrs r1, r0, 24\n\
+    cmp r0, r7\n\
+    ble _0809E948\n\
+    movs r6, 0\n\
+    b _0809E94E\n\
+    .align 2, 0\n\
+_0809E944: .4byte gTasks\n\
+_0809E948:\n\
+    cmp r1, 0\n\
+    bge _0809E94E\n\
+    lsrs r6, r7, 24\n\
+_0809E94E:\n\
+    lsls r4, r6, 24\n\
+    lsrs r1, r4, 24\n\
+    ldr r0, _0809EA10 @ =gSharedMem + 0x18010\n\
+    str r2, [sp, 0x4]\n\
+    bl GetMonMove\n\
+    lsls r0, 16\n\
+    adds r5, r4, 0\n\
+    ldr r2, [sp, 0x4]\n\
+    cmp r0, 0\n\
+    bne _0809E97A\n\
+    asrs r0, r5, 24\n\
+    cmp r0, 0x4\n\
+    beq _0809E97A\n\
+    lsls r0, r2, 24\n\
+    movs r3, 0x80\n\
+    lsls r3, 17\n\
+    adds r0, r3\n\
+    lsrs r2, r0, 24\n\
+    asrs r0, 24\n\
+    cmp r0, 0x3\n\
+    ble _0809E930\n\
+_0809E97A:\n\
+    mov r1, r9\n\
+    ldrb r0, [r1]\n\
+    cmp r0, 0x4\n\
+    bne _0809E996\n\
+    asrs r0, r5, 24\n\
+    cmp r0, 0x4\n\
+    beq _0809E996\n\
+    ldr r0, _0809EA14 @ =gSharedMem + 0x18000\n\
+    adds r0, 0x7C\n\
+    ldrh r0, [r0]\n\
+    mov r2, r8\n\
+    lsls r7, r2, 2\n\
+    cmp r0, 0\n\
+    beq _0809E9AC\n\
+_0809E996:\n\
+    ldr r2, _0809EA18 @ =gTasks\n\
+    mov r3, r8\n\
+    lsls r1, r3, 2\n\
+    adds r0, r1, r3\n\
+    lsls r0, 3\n\
+    adds r0, r2\n\
+    movs r2, 0x22\n\
+    ldrsh r0, [r0, r2]\n\
+    adds r7, r1, 0\n\
+    cmp r0, 0x1\n\
+    bne _0809E9D0\n\
+_0809E9AC:\n\
+    lsrs r4, r5, 24\n\
+    movs r0, 0x2\n\
+    adds r1, r4, 0\n\
+    bl sub_80A1488\n\
+    movs r0, 0x2\n\
+    adds r1, r4, 0\n\
+    bl sub_80A1654\n\
+    ldr r1, _0809EA18 @ =gTasks\n\
+    mov r3, r8\n\
+    adds r0, r7, r3\n\
+    lsls r0, 3\n\
+    adds r0, r1\n\
+    movs r1, 0\n\
+    strh r1, [r0, 0x22]\n\
+    movs r0, 0\n\
+    str r0, [sp]\n\
+_0809E9D0:\n\
+    mov r1, r9\n\
+    ldrb r0, [r1]\n\
+    cmp r0, 0x4\n\
+    beq _0809E9FE\n\
+    asrs r0, r5, 24\n\
+    cmp r0, 0x4\n\
+    bne _0809E9FE\n\
+    ldr r0, _0809EA14 @ =gSharedMem + 0x18000\n\
+    adds r0, 0x7C\n\
+    ldrh r0, [r0]\n\
+    cmp r0, 0\n\
+    bne _0809E9FE\n\
+    movs r4, 0x2\n\
+    negs r4, r4\n\
+    lsrs r5, 24\n\
+    adds r0, r4, 0\n\
+    adds r1, r5, 0\n\
+    bl sub_80A1488\n\
+    adds r0, r4, 0\n\
+    adds r1, r5, 0\n\
+    bl sub_80A1654\n\
+_0809E9FE:\n\
+    mov r2, r9\n\
+    strb r6, [r2]\n\
+    ldr r0, _0809EA1C @ =gSharedMem + 0x18079\n\
+    cmp r9, r0\n\
+    bne _0809EA20\n\
+    movs r0, 0\n\
+    bl sub_80A1C30\n\
+    b _0809EA26\n\
+    .align 2, 0\n\
+_0809EA10: .4byte gSharedMem + 0x18010\n\
+_0809EA14: .4byte gSharedMem + 0x18000\n\
+_0809EA18: .4byte gTasks\n\
+_0809EA1C: .4byte gSharedMem + 0x18079\n\
+_0809EA20:\n\
+    movs r0, 0x1\n\
+    bl sub_80A1C30\n\
+_0809EA26:\n\
+    ldr r3, [sp]\n\
+    cmp r3, 0\n\
+    beq _0809EA34\n\
+    ldr r0, _0809EA4C @ =gSharedMem + 0x18010\n\
+    mov r1, r9\n\
+    bl sub_80A0428\n\
+_0809EA34:\n\
+    mov r0, r8\n\
+    bl sub_80A2078\n\
+    add sp, 0x8\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
+_0809EA4C: .4byte gSharedMem + 0x18010\n\
+    .syntax divided\n");
+}
+
+void SummaryScreenHandleAButton(u8 taskId)
+{
+    PlaySE(5);
+
+    ewramSS.unk79 = 0;
+    sub_80A1488(2, 0);
+    sub_80A1654(2, 0);
+
+    if (ewramSS.unk7B == 0)
+    {
+        ewramSS.unk7F = 5;
+        PrintSummaryWindowHeaderText();
+    }
+
+    sub_80A16CC(0);
+    sub_80A029C(&ewramSS.unk10);
+    sub_80A1A30(9);
+
+    gTasks[taskId].func = sub_809E3FC;
+    sub_80A2078(taskId);
+}
+
+void sub_809EAC8(u8 taskId)
+{
+    if (ewramSS.unk79 != 4)
+    {
+        sub_80A1488(-2, 0);
+        sub_80A1654(-2, 0);
+    }
+
+    sub_80A1B1C(9);
+    sub_80A16CC(1);
+
+    MenuZeroFillWindowRect(15, 12, 28, 13);
+    MenuZeroFillWindowRect(11, 15, 28, 18);
+
+    ewramSS.unk7F = 6;
+    PrintSummaryWindowHeaderText();
+
+    gTasks[taskId].func = SummaryScreenHandleKeyInput;
+}
+
+void sub_809EB40(u8 taskId)
+{
+    switch (gTasks[taskId].data[0])
+    {
+    case 5:
+        sub_80A1A30(9);
+        gTasks[taskId].data[0] = 0;
+        gTasks[taskId].func = sub_809E260;
+        break;
+    case 0:
+        ewramSS.unk79 = 0;
+        if (ewramSS.unk7C != 0)
+        {
+            sub_80A1488(10, 0);
+            sub_80A1654(10, ewramSS.unk79);
+        }
+
+        sub_80A16CC(0);
+        sub_80A029C(&ewramSS.unk10);
+        // fall through
+    default:
+        gTasks[taskId].data[0]++;
+        break;
+    }
+}
+
+void sub_809EBC4(void)
+{
+    if (ewramSS.unkB != 0)
+    {
+        DrawSummaryScreenNavigationDots();
+        gUnknown_030042C0 = 0x100;
+
+        if (ewramSS.unkB == 1)
+            REG_BG1CNT = (REG_BG1CNT & 0xE0FF) + 0x800;
+
+        if (ewramSS.unkB == 2)
+            REG_BG1CNT = (REG_BG1CNT & 0xE0FF) + 0xA00;
+
+        if (ewramSS.unkB == 3)
+            REG_BG1CNT = (REG_BG1CNT & 0xE0FF) + 0xC00;
+    }
+}
+
+void sub_809EC38(u8 taskId)
+{
+    u8 minus2;
+    s16 *taskData = gTasks[taskId].data;
+
+    switch (taskData[0])
+    {
+    case 0:
+        if (ewramSS.unk80 == 0)
+        {
+            if (ewramSS.unkB != 0)
+            {
+                gUnknown_03004288 = 0x100;
+            }
+
+            if (ewramSS.unkB == 1)
+            {
+                REG_BG2CNT = (REG_BG2CNT & 0xE0FF) + 0x800;
+            }
+
+            if (ewramSS.unkB == 2)
+            {
+                REG_BG2CNT = (REG_BG2CNT & 0xE0FF) + 0xA00;
+            }
+        }
+        else
+        {
+            if (ewramSS.unkB != 0)
+            {
+                gUnknown_030042C0 = 0x100;
+            }
+
+            if (ewramSS.unkB == 1)
+            {
+                REG_BG1CNT = (REG_BG1CNT & 0xE0FF) + 0x800;
+            }
+
+            if (ewramSS.unkB == 2)
+            {
+                REG_BG1CNT = (REG_BG1CNT & 0xE0FF) + 0xA00;
+            }
+        }
+
+        taskData[0]++;
+        break;
+    case 1:
+        if (ewramSS.unk80 == 0)
+        {
+            int var2 = gUnknown_030042C0 - 0x20;
+            gUnknown_030042C0 = var2;
+            if (var2 << 16 == 0)
+            {
+                REG_BG1CNT = (REG_BG1CNT & 0xFFFC) + 2;
+                REG_BG2CNT = (REG_BG2CNT & 0xFFFC) + 1;
+                taskData[0]++;
+            }
+        }
+        else
+        {
+            int var2 = gUnknown_03004288 - 0x20;
+            gUnknown_03004288 = var2;
+            if (var2 << 16 == 0)
+            {
+                REG_BG1CNT = (REG_BG1CNT & 0xFFFC) + 1;
+                REG_BG2CNT = (REG_BG2CNT & 0xFFFC) + 2;
+                taskData[0]++;
+            }
+        }
+        break;
+    case 2:
+        ewramSS.unk7E = ewramSS.unkB + 1;
+        minus2 = ewramSS.unk8 - 2;
+        if (minus2 < 2)
+        {
+            ewramSS.unk7F = 0;
+            sub_80A029C(&ewramSS.unk10);
+            sub_80A0428(&ewramSS.unk10, &ewramSS.unk79);
+            sub_80A00F4(ewramSS.unk79);
+        }
+        else
+        {
+            if (ewramSS.unkB > 1 && (ewramSS.unk7B == 0 || ewramSS.unk8 == 4))
+            {
+                ewramSS.unk7F = 6;
+            }
+            else if (ewramSS.unkB == 0)
+            {
+                ewramSS.unk7F = 7;
+            }
+            else
+            {
+                ewramSS.unk7F = 0;
+            }
+        }
+
+        taskData[0]++;
+        break;
+    case 3:
+        DrawSummaryScreenNavigationDots();
+        PrintSummaryWindowHeaderText();
+        taskData[0]++;
+        break;
+    case 4:
+        gUnknown_083C1598[ewramSS.unkB](&ewramSS.unk10);
+        ewramSS.unk80 ^= 1;
+        taskData[0]++;
+        break;
+    case 5:
+        if (sub_8055870() != TRUE)
+        {
+            gTasks[taskId].func = gUnknown_03005CF0;
+        }
+        break;
+    }
+}
+
+void sub_809EE74(u8 taskId)
+{
+    int var1;
+    u8 minus2;
+    s16 *taskData = gTasks[taskId].data;
+
+    switch (taskData[0])
+    {
+    case 0:
+        var1 = ewramSS.unk80;
+        if (var1 == 0)
+        {
+            gUnknown_03004288 = ewramSS.unk80;
+            taskData[0]++;
+        }
+        else
+        {
+            gUnknown_030042C0 = 0;
+            taskData[0]++;
+        }
+        break;
+    case 1:
+        if (ewramSS.unk80 == 0)
+        {
+            if (ewramSS.unkB == 1)
+                REG_BG2CNT = (REG_BG2CNT & 0xE0FC) + 0x801;
+
+            if (ewramSS.unkB == 2)
+                REG_BG2CNT = (REG_BG2CNT & 0xE0FC) + 0xA01;
+
+            if (ewramSS.unkB == 3)
+                REG_BG2CNT = (REG_BG2CNT & 0xE0FC) + 0xC01;
+
+            REG_BG1CNT = (REG_BG1CNT & 0xFFFC) + 2;
+        }
+        else
+        {
+            if (ewramSS.unkB == 1)
+                REG_BG1CNT = (REG_BG1CNT & 0xE0FC) + 0x801;
+
+            if (ewramSS.unkB == 2)
+                REG_BG1CNT = (REG_BG1CNT & 0xE0FC) + 0xA01;
+
+            if (ewramSS.unkB == 3)
+                REG_BG1CNT = (REG_BG1CNT & 0xE0FC) + 0xC01;
+
+            REG_BG2CNT = (REG_BG2CNT & 0xFFFC) + 2;
+        }
+
+        taskData[0]++;
+        break;
+    case 2:
+        if (ewramSS.unk80 == 0)
+        {
+            int var2 = gUnknown_03004288 + 0x20;
+            gUnknown_03004288 = var2;
+            if ((var2 << 16) == 0x1000000)
+            {
+                taskData[0]++;
+            }
+        }
+        else
+        {
+            int var2 = gUnknown_030042C0 + 0x20;
+            gUnknown_030042C0 = var2;
+            if ((var2 << 16) == 0x1000000)
+            {
+                taskData[0]++;
+            }
+        }
+        break;
+    case 3:
+        ewramSS.unk7E = ewramSS.unkB + 1;
+        minus2 = ewramSS.unk8 - 2;
+        if (minus2 < 2)
+        {
+            ewramSS.unk7F = 0;
+            sub_80A029C(&ewramSS.unk10);
+            sub_80A0428(&ewramSS.unk10, &ewramSS.unk79);
+            sub_80A00F4(ewramSS.unk79);
+        }
+        else
+        {
+            if (ewramSS.unkB > 1 && (ewramSS.unk7B == 0 || ewramSS.unk8 == 4))
+            {
+                ewramSS.unk7F = 6;
+            }
+            else if (ewramSS.unkB == 0)
+            {
+                ewramSS.unk7F = 7;
+            }
+            else
+            {
+                ewramSS.unk7F = 0;
+            }
+        }
+
+        taskData[0]++;
+        break;
+    case 4:
+        DrawSummaryScreenNavigationDots();
+        PrintSummaryWindowHeaderText();
+        taskData[0]++;
+        break;
+    case 5:
+        gUnknown_083C1598[ewramSS.unkB](&ewramSS.unk10);
+        ewramSS.unk80 ^= 1;
+        taskData[0]++;
+        break;
+    case 6:
+        if (sub_8055870() != TRUE)
+        {
+            gTasks[taskId].func = gUnknown_03005CF0;
+        }
+        break;
+    }
+}
+
+void sub_809F0D0(u8 taskId, s8 direction)
+{
+    ewramSS.unkB += direction;
+    gUnknown_03005CF0 = gTasks[taskId].func;
+    sub_809FBE4();
+    gTasks[taskId].data[0] = 0;
+
+    if (direction == -1)
+    {
+        gTasks[taskId].func = sub_809EC38;
+    }
+    else
+    {
+        gTasks[taskId].func = sub_809EE74;
+        gTasks[taskId].func(taskId);
+    }
+}
+
+void SummaryScreenHandleLeftRightInput(u8 taskId, s8 direction)
+{
+    if (!GetMonData(&ewramSS.unk10, MON_DATA_IS_EGG))
+    {
+        if (direction == -1 && ewramSS.unkB == ewramSS.unk75) return;
+        if (direction ==  1 && ewramSS.unkB == ewramSS.unk76) return;
+
+        if (FindTaskIdByFunc(sub_80A1334) == 0xFF && FindTaskIdByFunc(sub_80A1500) == 0xFF)
+        {
+            PlaySE(5);
+            sub_809F0D0(taskId, direction);
+        }
+    }
+}
+
+#ifdef NONMATCHING
+void SummaryScreenHandleUpDownInput(u8 taskId, s8 direction)
+{
+    s8 var3;
+    u8 var1 = direction;
+
+    if (ewramSS.unkE == 1)
+    {
+        if (ewramSS.unkB != 0)
+        {
+            var1 = (direction == 1) ? 0 : 1;
+        }
+        else
+        {
+            var1 = (direction == 1) ? 2 : 3;
+        }
+
+        var3 = StorageSystemGetNextMonIndex(ewramSS.unk0.boxMons, ewramSS.unk9, ewramSS.unkA, var1);
+    }
+    else
+    {
+        if (sub_80F9344() == TRUE && IsLinkDoubleBattle() == TRUE)
+        {
+            var3 = sub_809F3CC(var1);
+        }
+        else
+        {
+            var3 = sub_809F284(var1);
+        }
+    }
+
+    if (var3 != -1)
+    {
+        PlaySE(5);
+        if (GetMonStatusAndPokerus(&ewramSS.unk10))
+        {
+            sub_80A12D0(-2);
+        }
+
+        ewramSS.unk9 = var3;
+        ewramSS.unk84 = gTasks[taskId].func;
+        gTasks[taskId].func = sub_809F43C;
+    }
+}
+#else
+__attribute__((naked))
+void SummaryScreenHandleUpDownInput(u8 taskId, s8 direction)
+{
+    asm(".syntax unified\n\
+    push {r4-r6,lr}\n\
+    lsls r0, 24\n\
+    lsrs r6, r0, 24\n\
+    lsls r1, 24\n\
+    lsrs r4, r1, 24\n\
+    ldr r0, _0809F1E4 @ =gSharedMem + 0x18000\n\
+    ldrb r1, [r0, 0xE]\n\
+    adds r2, r0, 0\n\
+    cmp r1, 0x1\n\
+    bne _0809F202\n\
+    ldrb r0, [r2, 0xB]\n\
+    cmp r0, 0\n\
+    beq _0809F1E8\n\
+    lsls r1, r4, 24\n\
+    asrs r1, 24\n\
+    movs r4, 0x1\n\
+    eors r1, r4\n\
+    negs r0, r1\n\
+    orrs r0, r1\n\
+    lsrs r4, r0, 31\n\
+    b _0809F1F4\n\
+    .align 2, 0\n\
+_0809F1E4: .4byte gSharedMem + 0x18000\n\
+_0809F1E8:\n\
+    lsls r0, r4, 24\n\
+    asrs r0, 24\n\
+    movs r4, 0x3\n\
+    cmp r0, 0x1\n\
+    bne _0809F1F4\n\
+    movs r4, 0x2\n\
+_0809F1F4:\n\
+    ldr r0, [r2]\n\
+    ldrb r1, [r2, 0x9]\n\
+    ldrb r2, [r2, 0xA]\n\
+    adds r3, r4, 0\n\
+    bl StorageSystemGetNextMonIndex\n\
+    b _0809F22C\n\
+_0809F202:\n\
+    bl sub_80F9344\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    cmp r0, 0x1\n\
+    bne _0809F224\n\
+    bl IsLinkDoubleBattle\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    cmp r0, 0x1\n\
+    bne _0809F224\n\
+    lsls r0, r4, 24\n\
+    asrs r0, 24\n\
+    bl sub_809F3CC\n\
+    b _0809F22C\n\
+_0809F224:\n\
+    lsls r0, r4, 24\n\
+    asrs r0, 24\n\
+    bl sub_809F284\n\
+_0809F22C:\n\
+    lsls r0, 24\n\
+    lsrs r4, r0, 24\n\
+    lsls r0, r4, 24\n\
+    asrs r0, 24\n\
+    movs r1, 0x1\n\
+    negs r1, r1\n\
+    cmp r0, r1\n\
+    beq _0809F270\n\
+    movs r0, 0x5\n\
+    bl PlaySE\n\
+    ldr r5, _0809F278 @ =gSharedMem + 0x18010\n\
+    adds r0, r5, 0\n\
+    bl GetMonStatusAndPokerus\n\
+    lsls r0, 24\n\
+    cmp r0, 0\n\
+    beq _0809F258\n\
+    movs r0, 0x2\n\
+    negs r0, r0\n\
+    bl sub_80A12D0\n\
+_0809F258:\n\
+    adds r0, r5, 0\n\
+    subs r0, 0x10\n\
+    strb r4, [r0, 0x9]\n\
+    ldr r1, _0809F27C @ =gTasks\n\
+    lsls r0, r6, 2\n\
+    adds r0, r6\n\
+    lsls r0, 3\n\
+    adds r0, r1\n\
+    ldr r1, [r0]\n\
+    str r1, [r5, 0x74]\n\
+    ldr r1, _0809F280 @ =sub_809F43C\n\
+    str r1, [r0]\n\
+_0809F270:\n\
+    pop {r4-r6}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
+_0809F278: .4byte gSharedMem + 0x18010\n\
+_0809F27C: .4byte gTasks\n\
+_0809F280: .4byte sub_809F43C\n\
+    .syntax divided\n");
+}
+#endif // NONMATCHING
+
+// s8 sub_809F284(s8 a)
+// {
+//     struct Pokemon *mons = ewramSS.unk0.partyMons;
+//     u8 var1 = 0;
+
+//     if (ewramSS.unkB == 0)
+//     {
+//         if ((s8)a == -1 || ewramSS.unk9 != 0)
+//         {
+//             if ((s8)a == 1 || ewramSS.unk9 < ewramSS.unkA)
+//             {
+//                 return ewramSS.unk9 + a;
+//             }
+//         }
+
+//         return -1;
+//     }
+//     else
+//     {
+//         while (1)
+//         {
+//             var1 += a;
+
+//             if (ewramSS.unk9 + var1 >= 0 || ewramSS.unk9 + var1 > ewramSS.unkA)
+//             {
+//                 return -1;
+//             }
+
+//             if (!GetMonData(&mons[ewramSS.unk9 + var1], MON_DATA_IS_EGG))
+//             {
+//                 break;
+//             }
+//         }
+
+//         return ewramSS.unk9 + var1;
+//     }
+
+// }
+__attribute__((naked))
+s8 sub_809F284(s8 a)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+    lsls r0, 24\n\
+    lsrs r3, r0, 24\n\
+    ldr r0, _0809F2C0 @ =gSharedMem + 0x18000\n\
+    ldr r7, [r0]\n\
+    movs r6, 0\n\
+    ldrb r1, [r0, 0xB]\n\
+    adds r4, r0, 0\n\
+    cmp r1, 0\n\
+    bne _0809F2C4\n\
+    lsls r0, r3, 24\n\
+    asrs r2, r0, 24\n\
+    movs r1, 0x1\n\
+    negs r1, r1\n\
+    adds r5, r0, 0\n\
+    cmp r2, r1\n\
+    bne _0809F2AC\n\
+    ldrb r0, [r4, 0x9]\n\
+    cmp r0, 0\n\
+    beq _0809F2E4\n\
+_0809F2AC:\n\
+    asrs r0, r5, 24\n\
+    cmp r0, 0x1\n\
+    bne _0809F2BA\n\
+    ldrb r0, [r4, 0x9]\n\
+    ldrb r1, [r4, 0xA]\n\
+    cmp r0, r1\n\
+    bcs _0809F2E4\n\
+_0809F2BA:\n\
+    ldrb r0, [r4, 0x9]\n\
+    adds r0, r3\n\
+    b _0809F304\n\
+    .align 2, 0\n\
+_0809F2C0: .4byte gSharedMem + 0x18000\n\
+_0809F2C4:\n\
+    lsls r5, r3, 24\n\
+_0809F2C6:\n\
+    lsls r0, r6, 24\n\
+    asrs r0, 24\n\
+    asrs r1, r5, 24\n\
+    adds r0, r1\n\
+    lsls r0, 24\n\
+    ldr r4, _0809F2EC @ =gSharedMem + 0x18000\n\
+    lsrs r6, r0, 24\n\
+    asrs r0, 24\n\
+    ldrb r2, [r4, 0x9]\n\
+    adds r1, r0, r2\n\
+    cmp r1, 0\n\
+    blt _0809F2E4\n\
+    ldrb r0, [r4, 0xA]\n\
+    cmp r1, r0\n\
+    ble _0809F2F0\n\
+_0809F2E4:\n\
+    movs r0, 0x1\n\
+    negs r0, r0\n\
+    b _0809F308\n\
+    .align 2, 0\n\
+_0809F2EC: .4byte gSharedMem + 0x18000\n\
+_0809F2F0:\n\
+    movs r0, 0x64\n\
+    muls r0, r1\n\
+    adds r0, r7, r0\n\
+    movs r1, 0x2D\n\
+    bl GetMonData\n\
+    cmp r0, 0\n\
+    bne _0809F2C6\n\
+    ldrb r0, [r4, 0x9]\n\
+    adds r0, r6\n\
+_0809F304:\n\
+    lsls r0, 24\n\
+    asrs r0, 24\n\
+_0809F308:\n\
+    pop {r4-r7}\n\
+    pop {r1}\n\
+    bx r1\n\
+    .syntax divided\n");
+}
+
+bool8 sub_809F310(struct Pokemon *mon)
+{
+    if (GetMonData(mon, MON_DATA_SPECIES))
+    {
+        if (ewramSS.unkB != 0 || !GetMonData(mon, MON_DATA_IS_EGG))
+        {
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+s8 sub_809F344(u8 partyIndex)
+{
+    while (1)
+    {
+        partyIndex++;    
+        if (partyIndex == PARTY_SIZE)
+        {
+            return -1;
+        }
+
+        if (sub_809F310(&gPlayerParty[gUnknown_083C15A8[partyIndex]]) == TRUE)
+        {
+            return gUnknown_083C15A8[partyIndex];
+        }
+    }
+}
+
+s8 sub_809F388(u8 partyIndex)
+{
+    while (1)
+    {
+        if (partyIndex == 0)
+        {
+            return -1;
+        }
+
+        partyIndex--;    
+        if (sub_809F310(&gPlayerParty[gUnknown_083C15A8[partyIndex]]) == TRUE)
+        {
+            return gUnknown_083C15A8[partyIndex];
+        }
+    }
+}
+
+#ifdef NONMATCHING // The nested if statements at the end are not matching.
+s8 sub_809F3CC(s8 a)
+{
+    u8 var1 = 0;
+    u8 i = 0;
+
+    for (i = 0; i < 6; i++)
+    {
+        if (gUnknown_083C15A8[i] == ewramSS.unk9)
+        {
+            var1 = i;
+            break;
+        }
+    }
+
+    if ((s8)a != -1 || var1 != 0)
+    {
+        if ((s8)a != 1)
+        {
+            return sub_809F388(var1);
+        }
+        else if (var1 != 5)
+        {
+            return sub_809F344(var1);
+        }
+    }
+
+    return -1;
+}
+#else
+__attribute__((naked))
+s8 sub_809F3CC(s8 a)
+{
+    asm(".syntax unified\n\
+    push {r4-r6,lr}\n\
+    lsls r0, 24\n\
+    lsrs r6, r0, 24\n\
+    movs r2, 0\n\
+    movs r1, 0\n\
+    ldr r3, _0809F41C @ =gUnknown_083C15A8\n\
+    ldr r4, _0809F420 @ =gSharedMem + 0x18000\n\
+    ldrb r0, [r3]\n\
+    ldrb r5, [r4, 0x9]\n\
+    cmp r0, r5\n\
+    beq _0809F3FC\n\
+    adds r5, r3, 0\n\
+    adds r3, r4, 0\n\
+_0809F3E6:\n\
+    adds r0, r1, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r1, r0, 24\n\
+    cmp r1, 0x5\n\
+    bhi _0809F3FC\n\
+    adds r0, r1, r5\n\
+    ldrb r0, [r0]\n\
+    ldrb r4, [r3, 0x9]\n\
+    cmp r0, r4\n\
+    bne _0809F3E6\n\
+    adds r2, r1, 0\n\
+_0809F3FC:\n\
+    lsls r0, r6, 24\n\
+    asrs r1, r0, 24\n\
+    movs r0, 0x1\n\
+    negs r0, r0\n\
+    cmp r1, r0\n\
+    bne _0809F40C\n\
+    cmp r2, 0\n\
+    beq _0809F414\n\
+_0809F40C:\n\
+    cmp r1, 0x1\n\
+    bne _0809F424\n\
+    cmp r2, 0x5\n\
+    bne _0809F42C\n\
+_0809F414:\n\
+    movs r0, 0x1\n\
+    negs r0, r0\n\
+    b _0809F436\n\
+    .align 2, 0\n\
+_0809F41C: .4byte gUnknown_083C15A8\n\
+_0809F420: .4byte gSharedMem + 0x18000\n\
+_0809F424:\n\
+    adds r0, r2, 0\n\
+    bl sub_809F388\n\
+    b _0809F432\n\
+_0809F42C:\n\
+    adds r0, r2, 0\n\
+    bl sub_809F344\n\
+_0809F432:\n\
+    lsls r0, 24\n\
+    asrs r0, 24\n\
+_0809F436:\n\
+    pop {r4-r6}\n\
+    pop {r1}\n\
+    bx r1\n\
+    .syntax divided\n");
+}
+#endif // NONMATCHING
+
+void sub_809F43C(u8 taskId)
+{
+    switch (gMain.state)
+    {
+    case 0:
+        StopCryAndClearCrySongs();
+        gMain.state++;
+        break;
+    case 1:
+        DestroySpriteAndFreeResources(&gSprites[ewramSS.unkC]);
+        gMain.state++;
+        break;
+    case 2:
+        DestroySpriteAndFreeResources(&gSprites[ewramSS.unkD]);
+        gMain.state++;
+        break;
+    case 3:
+        ewramSS.unk74 = 0;
+        ewramSS.unk79 = 0;
+        gMain.state++;
+        break;
+    case 4:
+        sub_809F678(&ewramSS.unk10);
+        if (GetMonStatusAndPokerus(&ewramSS.unk10))
+        {
+            sub_80A12D0(2);
+        }
+
+        DrawPokerusSurvivorDot(&ewramSS.unk10);
+        gMain.state++;
+        break;
+    case 5:
+        if ((ewramSS.unkC = sub_809F6B4(&ewramSS.unk10, &ewramSS.unk74)) != 0xFF)
+        {
+            ewramSS.unk74 = 0;
+            if (GetMonData(&ewramSS.unk10, MON_DATA_IS_EGG))
+            {
+                gUnknown_030041B0 = 256;
+            }
+            else
+            {
+                gUnknown_030041B0 = 0;
+            }
+
+            gMain.state++;
+        }
+        break;
+    case 6:
+        sub_80A1DCC(&ewramSS.unk10);
+        gMain.state++;
+        break;
+    case 7:
+        sub_80A1DE8(&ewramSS.unk10);
+        gMain.state++;
+        break;
+    case 8:
+        if (sub_809F5F8())
+        {
+            ewramSS.unk74 = 0;
+            gMain.state++;
+        }
+        break;
+    default:
+        if (sub_8055870() != TRUE)
+        {
+            gMain.state = 0;
+            gTasks[taskId].func = ewramSS.unk84;
+        }
+        break;
+    }
+}
+
+bool8 sub_809F5F8(void)
+{
+    if (ewramSS.unk74 == 0)
+    {
+        sub_809FAC8(&ewramSS.unk10);
+        ewramSS.unk74++;
+        return FALSE;
+    }
+    else
+    {
+        gUnknown_083C1588[ewramSS.unkB](&ewramSS.unk10);
+        return TRUE;
+    }
+}
+
+void sub_809F63C(struct Pokemon *mon)
+{
+    sub_809FE80();
+    sub_809FC34(mon);
+}
+
+void sub_809F650(struct Pokemon *mon)
+{
+    sub_80A00A4();
+    sub_809FF64(mon);
+}
+
+void sub_809F664(struct Pokemon *mon)
+{
+    sub_80A0390();
+    sub_80A015C(mon);
+}
+
+void sub_809F678(struct Pokemon *mon)
+{
+    if (ewramSS.unkE == 0)
+    {
+        struct Pokemon *mons = ewramSS.unk0.partyMons;
+        *mon = mons[ewramSS.unk9];
+    }
+    else
+    {
+        struct BoxPokemon *mons = ewramSS.unk0.boxMons;
+        sub_803B4B4(&mons[ewramSS.unk9], mon);
+    }
+}
 
 u8 sub_809F6B4(struct Pokemon *mon, u8 *b)
 {
@@ -189,7 +2232,7 @@ static u16 GetMonMovePP(struct Pokemon *mon, u8 moveId)
     }
 }
 
-bool8 sub_809F7D0()
+bool8 sub_809F7D0(u8 taskId)
 {
     struct Pokemon mon;
     u16 move;
@@ -222,7 +2265,7 @@ void sub_809F814(u8 taskId)
         taskData[0] = 4;
         taskData[13] = 1;
         ewramSS.unk79 = taskData[15];
-        sub_809E8F0(taskId, -1);
+        sub_809E8F0(taskId, -1, NULL);
     }
     else if (gMain.newKeys & DPAD_DOWN)
     {
@@ -230,7 +2273,7 @@ void sub_809F814(u8 taskId)
         taskData[0] = 4;
         taskData[13] = 1;
         ewramSS.unk79 = taskData[15];
-        sub_809E8F0(taskId, 1);
+        sub_809E8F0(taskId, 1, NULL);
     }
     else if ((gMain.newKeys & DPAD_LEFT) || sub_80F9284() == 1)
     {
@@ -625,7 +2668,7 @@ void sub_809FAC8(struct Pokemon *mon)
     }
 }
 
-void sub_809FBE4()
+void sub_809FBE4(void)
 {
     u8 i;
 
@@ -887,7 +2930,7 @@ void sub_80A015C(struct Pokemon *mon)
     }
 }
 
-void sub_80A029C(void)
+void sub_80A029C(struct Pokemon *mon)
 {
     u8 *buffer;
     u16 move;
@@ -2223,7 +4266,7 @@ _080A12CC: .4byte gOtherText_Status\n\
     .syntax divided\n");
 }
 
-void sub_80A12D0(u8 taskId)
+void sub_80A12D0(s8 a)
 {
     u8 newTaskId;
 
@@ -2231,9 +4274,9 @@ void sub_80A12D0(u8 taskId)
     sub_80A18E4(29);
 
     newTaskId = CreateTask(sub_80A1048, 0);
-    gTasks[newTaskId].data[0] = (s8)taskId;
+    gTasks[newTaskId].data[0] = a;
 
-    if ((s8)taskId < 0)
+    if (a < 0)
     {
         gTasks[newTaskId].data[1] = 10;
     }
@@ -3493,7 +5536,7 @@ u8 *PokemonSummaryScreen_CopyPokemonLevel(u8 *dest, u8 level)
     return dest;
 }
 
-void sub_80A2078(u32 taskId)
+void sub_80A2078(int taskId)
 {
     gUnknown_03005CF0 = gTasks[taskId].func;
     gTasks[taskId].func = sub_80A20A8;

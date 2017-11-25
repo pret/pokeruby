@@ -132,7 +132,6 @@ SECTIONS {
         src/pokemon/pokemon_storage_system.o(.text);
         asm/pokemon_storage_system.o(.text_8098A38);
         src/pokemon/pokemon_icon.o(.text);
-        asm/pokemon_summary_screen.o(.text);
         src/pokemon/pokemon_summary_screen.o(.text);
         src/field/script_movement.o(.text);
         src/field/fldeff_cut.o(.text);
