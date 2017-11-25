@@ -26,13 +26,10 @@
 #include "overworld.h"
 #include "decoration_inventory.h"
 #include "field_camera.h"
-
-#define ewram18000 ((u16 *)(ewram + 0x18000))
-#define ewram18300 ((u16 *)(ewram + 0x18300))
+#include "ewram.h"
 
 extern bool8 sub_80A52C4(u8, u8);
 
-extern u8 ewram[];
 extern u8 gBuyMenuFrame_Gfx[];
 extern u16 gBuyMenuFrame_Tilemap[];
 extern u16 gMenuMoneyPal[16];
@@ -54,7 +51,7 @@ static struct MartInfo gMartInfo;
 
 // ewram
 EWRAM_DATA u32 gMartTotalCost = 0;
-EWRAM_DATA s16 gUnknown_020386A4[16][4] = {0}; // game freak barely uses 2d arrays wtf?
+EWRAM_DATA s16 gUnknown_020386A4[16][4] = {0};
 EWRAM_DATA struct ItemSlot gUnknown_02038724[3] = {0}; // tv.c uses this, so it cant be static
 EWRAM_DATA u8 gUnknown_02038730 = 0;
 EWRAM_DATA u8 gUnknown_02038731 = 0;
@@ -282,7 +279,7 @@ void BuyMenuDrawGraphics(void)
     register const u32 zero asm("r6") = 0;
     DmaFill32(3, zero, addr, OAM_SIZE);
     LZDecompressVram(gBuyMenuFrame_Gfx, (void*)(VRAM + 0x7C00));
-    LZDecompressWram(gBuyMenuFrame_Tilemap, (void *)0x02018000);
+    LZDecompressWram(gBuyMenuFrame_Tilemap, ewram18000_2);
     LoadCompressedPalette(gMenuMoneyPal, 0xC0, sizeof(gMenuMoneyPal));
     FreeAllSpritePalettes();
     ResetPaletteFade();

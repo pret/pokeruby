@@ -22,6 +22,7 @@
 #include "string_util.h"
 #include "text.h"
 #include "util.h"
+#include "ewram.h"
 
 extern u8 gPlayerPartyCount;
 extern u8 gEnemyPartyCount;
@@ -55,10 +56,10 @@ extern u16 gBattlePartyID[];
 extern u8 gJapaneseNidoranNames[][11];
 
 extern u8 gUnknown_082082F8[];
-extern u8 gUnknown_083FFDB3[];
-extern u8 gUnknown_083FFDD3[];
-extern u8 gUnknown_083FEE5D[];
-extern u8 gUnknown_083FEE92[];
+extern u8 BattleText_Rose[];
+extern u8 BattleText_UnknownString3[];
+extern u8 BattleText_MistShroud[];
+extern u8 BattleText_GetPumped[];
 extern u8 *gUnknown_08400F58[];
 
 bool8 HealStatusConditions(struct Pokemon *mon, u32 unused, u32 healMask, u8 battleId)
@@ -196,8 +197,8 @@ void sub_803F324(int stat)
 {
     gBankTarget = gBankInMenu;
     StringCopy(gBattleTextBuff1, gUnknown_08400F58[gUnknown_082082F8[stat]]);
-    StringCopy(gBattleTextBuff2, gUnknown_083FFDB3);
-    StrCpyDecodeToDisplayedStringBattle(gUnknown_083FFDD3);
+    StringCopy(gBattleTextBuff2, BattleText_Rose);
+    StrCpyDecodeToDisplayedStringBattle(BattleText_UnknownString3);
 }
 
 u8 *sub_803F378(u16 itemId)
@@ -236,7 +237,7 @@ u8 *sub_803F378(u16 itemId)
             else
             {
                 gBankAttacker = gBankInMenu;
-                StrCpyDecodeToDisplayedStringBattle(gUnknown_083FEE92);
+                StrCpyDecodeToDisplayedStringBattle(BattleText_GetPumped);
             }
         }
     }
@@ -244,7 +245,7 @@ u8 *sub_803F378(u16 itemId)
     if (itemEffect[3] & 0x80)
     {
         gBankAttacker = gBankInMenu;
-        StrCpyDecodeToDisplayedStringBattle(gUnknown_083FEE5D);
+        StrCpyDecodeToDisplayedStringBattle(BattleText_MistShroud);
     }
 
     return gDisplayedStringBattle;

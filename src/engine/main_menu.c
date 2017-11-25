@@ -22,14 +22,13 @@
 #include "text.h"
 #include "title_screen.h"
 #include "unknown_task.h"
+#include "ewram.h"
 
 #define BirchSpeechUpdateWindowText() ((u8)MenuUpdateWindowText_OverrideLineLength(24))
 
 extern struct PaletteFadeControl gPaletteFade;
 
 extern u16 gSaveFileStatus;
-
-extern u16 gMainMenuPalette[];
 
 extern const u8 gBirchSpeech_Welcome[];
 extern const u8 gBirchSpeech_ThisIsPokemon[];
@@ -42,19 +41,13 @@ extern u8 gBirchSpeech_AhOkayYouArePlayer[];
 extern u8 gBirchSpeech_AreYouReady[];
 
 extern struct SpriteTemplate gUnknown_02024E8C;
-extern u16 gUnknown_081E795C[];
 extern const struct MenuAction gUnknown_081E79B0[];
 extern const struct MenuAction gMalePresetNames[];
 extern const struct MenuAction gFemalePresetNames[];
 
-extern const u8 gUnknown_081E764C[];
-extern const u8 gBirchIntroShadowGfx[];
 extern const u8 gUnknown_081E7834[];
-extern const u8 gUnknown_081E796C[];
 
 extern const union AffineAnimCmd *const gSpriteAffineAnimTable_81E79AC[];
-
-extern u8 unk_2000000[];
 
 //Menu layouts
 enum
@@ -136,6 +129,53 @@ static s8 GenderMenuProcessInput(void);
 static void CreateNameMenu(u8 left, u8 top);
 static s8 NameMenuProcessInput(void);
 static void SetPresetPlayerName(u8 index);
+
+static const u16 gUnknown_081E764C[][16] =
+{
+    INCBIN_U16("graphics/birch_speech/bg0.gbapal"),
+    INCBIN_U16("graphics/birch_speech/bg1.gbapal"),
+};
+
+static const u8 gBirchIntroShadowGfx[] = INCBIN_U8("graphics/birch_speech/shadow.4bpp.lz");
+static const u8 gUnknown_081E7834[] = INCBIN_U8("graphics/birch_speech/map.bin.lz");
+static const u16 gUnknown_081E795C[] = INCBIN_U16("graphics/birch_speech/bg2.gbapal");
+static const u16 gUnknown_081E796C[] = INCBIN_U16("graphics/birch_speech/blank_pal.gbapal");
+static const u16 gMainMenuPalette[] = INCBIN_U16("graphics/misc/main_menu.gbapal");
+
+static const union AffineAnimCmd gSpriteAffineAnim_81E799C[] =
+{
+    AFFINEANIMCMD_FRAME(0xFFFE, 0xFFFE, 0, 48),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd *const gSpriteAffineAnimTable_81E79AC[] =
+{
+    gSpriteAffineAnim_81E799C,
+};
+
+static const struct MenuAction gUnknown_081E79B0[] =
+{
+    {gBirchText_Boy, NULL},
+    {gBirchText_Girl, NULL},
+};
+
+static const struct MenuAction gMalePresetNames[] =
+{
+    {gBirchText_NewName, NULL},
+    {gDefaultBoyName1, NULL},
+    {gDefaultBoyName2, NULL},
+    {gDefaultBoyName3, NULL},
+    {gDefaultBoyName4, NULL},
+};
+
+static const struct MenuAction gFemalePresetNames[] =
+{
+    {gBirchText_NewName, NULL},
+    {gDefaultGirlName1, NULL},
+    {gDefaultGirlName2, NULL},
+    {gDefaultGirlName3, NULL},
+    {gDefaultGirlName4, NULL},
+};
 
 static void CB2_MainMenu(void)
 {
@@ -804,7 +844,7 @@ static void Task_NewGameSpeech6(u8 taskId)
     gSprites[spriteId].pos1.x = 104;
     gSprites[spriteId].pos1.y = 72;
     gSprites[spriteId].invisible = 0;
-    gSprites[spriteId].data0 = 0;
+    gSprites[spriteId].data[0] = 0;
     CreatePokeballSprite(spriteId, gSprites[spriteId].oam.paletteNum, 0x70, 0x3A, 0, 0, 0x20, 0x0000FFFF);
     gTasks[taskId].func = Task_NewGameSpeech7;
     gTasks[taskId].tFrameCounter = 0;
@@ -1383,9 +1423,9 @@ void nullsub_34(struct Sprite *sprite)
 
 void ShrinkPlayerSprite(struct Sprite *sprite)
 {
-    u32 y = (sprite->pos1.y << 16) + sprite->data0 + 0xC000;
+    u32 y = (sprite->pos1.y << 16) + sprite->data[0] + 0xC000;
     sprite->pos1.y = y >> 16;
-    sprite->data0 = y;
+    sprite->data[0] = y;
 }
 
 u8 CreateAzurillSprite(u8 x, u8 y)
@@ -1419,14 +1459,14 @@ void AddBirchSpeechObjects(u8 taskId)
     gTasks[taskId].tAzurillSpriteId = spriteId;
 
     //Create Brendan sprite
-    spriteId = CreateTrainerSprite(0, 120, 60, 0, unk_2000000);
+    spriteId = CreateTrainerSprite(0, 120, 60, 0, eBrendanSprite);
     gSprites[spriteId].callback = nullsub_34;
     gSprites[spriteId].invisible = 1;
     gSprites[spriteId].oam.priority = 0;
     gTasks[taskId].tBrendanSpriteId = spriteId;
 
     //Create May sprite
-    spriteId = CreateTrainerSprite(1, 120, 60, 0, unk_2000000 + 0x800);
+    spriteId = CreateTrainerSprite(1, 120, 60, 0, eMaySprite);
     gSprites[spriteId].callback = nullsub_34;
     gSprites[spriteId].invisible = 1;
     gSprites[spriteId].oam.priority = 0;

@@ -22,6 +22,7 @@
 #include "script_pokemon_80C4.h"
 #include "species.h"
 #include "task.h"
+#include "ewram.h"
 
 #define CONTEST_ENTRY_PIC_LEFT 10
 #define CONTEST_ENTRY_PIC_TOP 3
@@ -572,7 +573,7 @@ u8 ScriptGiveEgg(u16 species)
     struct Pokemon mon;
     u8 isEgg;
 
-    sub_8042044(&mon, species, 1);
+    CreateEgg(&mon, species, TRUE);
     isEgg = TRUE;
     SetMonData(&mon, MON_DATA_IS_EGG, &isEgg);
 

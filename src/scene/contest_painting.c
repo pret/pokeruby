@@ -12,8 +12,7 @@
 #include "strings.h"
 #include "text.h"
 #include "unknown_task.h"
-
-extern u8 unk_2000000[];
+#include "ewram.h"
 
 static u8 gUnknown_03000750;
 static u16 gUnknown_03000752;
@@ -25,9 +24,6 @@ struct Unk03005E20 gUnknown_03005E20;
 u8 gUnknown_03005E40[0x4C];
 struct ContestEntry *gUnknown_03005E8C;
 u16 (*gUnknown_03005E90)[];
-
-extern struct ContestEntry unk_2015de0;
-extern struct Unk2015E00 unk_2015e00;
 
 static const u16 gPictureFramePalettes[][16] =
 {
@@ -113,7 +109,7 @@ void sub_8106630(u32 arg0)
 {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\
-    ldr r2, _0810665C @ =0x02015de0\n\
+    ldr r2, _0810665C @ =gSharedMem + 0x15DE0\n\
     subs r4, r2, 0x2\n\
     subs r5, r2, 0x1\n\
     ldr r3, _08106660 @ =gSaveBlock1\n\
@@ -135,7 +131,7 @@ void sub_8106630(u32 arg0)
     pop {r0}\n\
     bx r0\n\
     .align 2, 0\n\
-_0810665C: .4byte 0x02015de0\n\
+_0810665C: .4byte gSharedMem + 0x15DE0\n\
 _08106660: .4byte gSaveBlock1\n\
 _08106664: .4byte 0x00002dfc\n\
     .syntax divided\n");
@@ -153,7 +149,7 @@ static void ShowContestPainting(void)
     case 0:
         remove_some_task();
         SetVBlankCallback(NULL);
-        gUnknown_03005E8C = &unk_2015de0;
+        gUnknown_03005E8C = &ewram15DE0;
         ContestPaintingInitVars(TRUE);
         ContestPaintingInitBG();
         gMain.state++;
@@ -184,15 +180,15 @@ static void ShowContestPainting(void)
     case 2:
         SeedRng(gMain.vblankCounter1);
         InitKeys();
-        ContestPaintingInitWindow(unk_2000000[0x15DDF]);
+        ContestPaintingInitWindow(ewram15DDF);
         gMain.state++;
         break;
     case 3:
-        sub_8107090(unk_2000000[0x15DDE], unk_2000000[0x15DDF]);
+        sub_8107090(ewram15DDE, ewram15DDF);
         gMain.state++;
         break;
     case 4:
-        ContestPaintingPrintCaption(unk_2000000[0x15DDE], unk_2000000[0x15DDF]);
+        ContestPaintingPrintCaption(ewram15DDE, ewram15DDF);
         LoadPalette(gUnknown_083F6140, 0, 1 * 2);
         DmaClear32(3, PLTT, 0x400);
         BeginFastPaletteFade(2);
@@ -753,8 +749,8 @@ static u8 sub_8106EE0(u8 arg0)
 
 static void sub_8106F4C(void)
 {
-    gUnknown_03005E90 = &unk_2015e00.unk2017e00;
-    gUnknown_03005E10 = &unk_2015e00.unk2015e00;
+    gUnknown_03005E90 = &ewram15E00.unk2017e00;
+    gUnknown_03005E10 = &ewram15E00.unk2015e00;
 }
 
 static void sub_8106F6C(u8 arg0)

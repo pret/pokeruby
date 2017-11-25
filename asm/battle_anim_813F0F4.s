@@ -1105,7 +1105,7 @@ sub_813F9E0: @ 813F9E0
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, _0813F9F4 @ =0x02017840
+	ldr r0, _0813F9F4 @ =gSharedMem + 0x17840
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0x5
 	bne _0813FA00
@@ -1113,7 +1113,7 @@ sub_813F9E0: @ 813F9E0
 	ldr r0, _0813F9FC @ =0x0000ffff
 	b _0813FA04
 	.align 2, 0
-_0813F9F4: .4byte 0x02017840
+_0813F9F4: .4byte gSharedMem + 0x17840
 _0813F9F8: .4byte gBattleAnimArgs
 _0813F9FC: .4byte 0x0000ffff
 _0813FA00:
@@ -1256,7 +1256,7 @@ sub_813FA94: @ 813FA94
 	adds r4, r0
 	ldr r0, _0813FB68 @ =sub_813FD90
 	str r0, [r4]
-	ldr r3, _0813FB6C @ =0x02017840
+	ldr r3, _0813FB6C @ =gSharedMem + 0x17840
 	ldr r1, _0813FB70 @ =gObjectBankIDs
 	mov r2, r8
 	ldrb r0, [r2]
@@ -1299,7 +1299,7 @@ _0813FB5C: .4byte gBallSpriteTemplates
 _0813FB60: .4byte gSprites
 _0813FB64: .4byte gBattleAnimBankTarget
 _0813FB68: .4byte sub_813FD90
-_0813FB6C: .4byte 0x02017840
+_0813FB6C: .4byte gSharedMem + 0x17840
 _0813FB70: .4byte gObjectBankIDs
 _0813FB74: .4byte gTasks
 _0813FB78: .4byte sub_813FB7C
@@ -1593,7 +1593,7 @@ sub_813FDC0: @ 813FDC0
 	lsls r0, 24
 	cmp r0, 0
 	beq _0813FE5A
-	ldr r0, _0813FDE0 @ =0x02017840
+	ldr r0, _0813FDE0 @ =gSharedMem + 0x17840
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0x5
 	bne _0813FDE8
@@ -1601,7 +1601,7 @@ sub_813FDC0: @ 813FDC0
 	str r0, [r4, 0x1C]
 	b _0813FE5A
 	.align 2, 0
-_0813FDE0: .4byte 0x02017840
+_0813FDE0: .4byte gSharedMem + 0x17840
 _0813FDE4: .4byte sub_81407B8
 _0813FDE8:
 	adds r0, r4, 0
@@ -2018,7 +2018,7 @@ _0814010E:
 	adds r0, r1
 	strh r0, [r4, 0x22]
 	strh r5, [r4, 0x26]
-	ldr r0, _0814013C @ =0x02017840
+	ldr r0, _0814013C @ =gSharedMem + 0x17840
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0
 	bne _08140144
@@ -2028,7 +2028,7 @@ _0814010E:
 	b _0814014E
 	.align 2, 0
 _08140138: .4byte 0xffffff00
-_0814013C: .4byte 0x02017840
+_0814013C: .4byte gSharedMem + 0x17840
 _08140140: .4byte sub_8140410
 _08140144:
 	ldr r0, _08140154 @ =sub_8140158
@@ -2066,7 +2066,7 @@ sub_8140158: @ 8140158
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl StartSpriteAffineAnim
-	ldr r0, _08140198 @ =0x02017840
+	ldr r0, _08140198 @ =gSharedMem + 0x17840
 	strh r5, [r0, 0xC]
 	ldr r0, _0814019C @ =sub_81401A0
 	str r0, [r4, 0x1C]
@@ -2077,7 +2077,7 @@ _08140190:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08140198: .4byte 0x02017840
+_08140198: .4byte gSharedMem + 0x17840
 _0814019C: .4byte sub_81401A0
 	thumb_func_end sub_8140158
 
@@ -2109,7 +2109,7 @@ _081401C0:
 	.4byte _08140368
 	.4byte _081403C4
 _081401DC:
-	ldr r0, _081401F8 @ =0x02017840
+	ldr r0, _081401F8 @ =gSharedMem + 0x17840
 	ldrh r2, [r0, 0xC]
 	movs r3, 0xC
 	ldrsh r1, [r0, r3]
@@ -2124,7 +2124,7 @@ _081401DC:
 	ands r0, r2
 	b _08140200
 	.align 2, 0
-_081401F8: .4byte 0x02017840
+_081401F8: .4byte gSharedMem + 0x17840
 _081401FC:
 	adds r0, r2, 0
 	adds r0, 0xB0
@@ -2185,7 +2185,7 @@ _08140262:
 	bl ChangeSpriteAffineAnim
 	b _0814040A
 _0814026C:
-	ldr r0, _08140288 @ =0x02017840
+	ldr r0, _08140288 @ =gSharedMem + 0x17840
 	ldrh r2, [r0, 0xC]
 	movs r3, 0xC
 	ldrsh r1, [r0, r3]
@@ -2200,7 +2200,7 @@ _0814026C:
 	ands r0, r2
 	b _08140290
 	.align 2, 0
-_08140288: .4byte 0x02017840
+_08140288: .4byte gSharedMem + 0x17840
 _0814028C:
 	adds r0, r2, 0
 	adds r0, 0xB0
@@ -2273,7 +2273,7 @@ _08140308:
 	movs r1, 0x1
 	bl ChangeSpriteAffineAnim
 _08140310:
-	ldr r0, _0814032C @ =0x02017840
+	ldr r0, _0814032C @ =gSharedMem + 0x17840
 	ldrh r2, [r0, 0xC]
 	movs r3, 0xC
 	ldrsh r1, [r0, r3]
@@ -2288,7 +2288,7 @@ _08140310:
 	ands r0, r2
 	b _08140334
 	.align 2, 0
-_0814032C: .4byte 0x02017840
+_0814032C: .4byte gSharedMem + 0x17840
 _08140330:
 	adds r0, r2, 0
 	adds r0, 0xB0
@@ -2328,7 +2328,7 @@ _08140368:
 	strh r0, [r4, 0x34]
 	lsls r0, 16
 	asrs r1, r0, 24
-	ldr r0, _08140394 @ =0x02017840
+	ldr r0, _08140394 @ =gSharedMem + 0x17840
 	ldrb r0, [r0, 0x8]
 	cmp r1, r0
 	bne _0814039C
@@ -2342,7 +2342,7 @@ _08140368:
 	str r0, [r4, 0x1C]
 	b _0814040A
 	.align 2, 0
-_08140394: .4byte 0x02017840
+_08140394: .4byte gSharedMem + 0x17840
 _08140398: .4byte sub_8140410
 _0814039C:
 	cmp r0, 0x4
@@ -2842,7 +2842,7 @@ _08140734:
 	adds r2, r0
 	lsls r2, 2
 	adds r2, r4
-	ldr r0, _081407AC @ =0x02017840
+	ldr r0, _081407AC @ =gSharedMem + 0x17840
 	ldrb r1, [r0, 0x9]
 	lsls r1, 30
 	adds r2, 0x3E
@@ -2870,7 +2870,7 @@ _0814079C: .4byte 0xfffffee0
 _081407A0: .4byte gSprites
 _081407A4: .4byte gObjectBankIDs
 _081407A8: .4byte gBattleAnimBankTarget
-_081407AC: .4byte 0x02017840
+_081407AC: .4byte gSharedMem + 0x17840
 _081407B0: .4byte sub_81405C8
 _081407B4: .4byte gDoingBattleAnim
 	thumb_func_end sub_81406BC
@@ -3041,7 +3041,7 @@ _081408B6:
 	ands r0, r1
 	cmp r0, 0
 	beq _08140900
-	ldr r1, _0814092C @ =0x02017840
+	ldr r1, _0814092C @ =gSharedMem + 0x17840
 	ldrb r0, [r1, 0xA]
 	adds r0, 0x1
 	strb r0, [r1, 0xA]
@@ -3062,7 +3062,7 @@ _0814091C: .4byte gUnknown_0840B384
 _08140920: .4byte gTasks
 _08140924: .4byte gMain
 _08140928: .4byte 0x0000043d
-_0814092C: .4byte 0x02017840
+_0814092C: .4byte gSharedMem + 0x17840
 	thumb_func_end sub_814086C
 
 	thumb_func_start sub_8140930
@@ -4275,7 +4275,7 @@ _081412C0:
 	ldrsh r0, [r5, r1]
 	cmp r0, 0x1
 	bne _08141308
-	ldr r1, _081412FC @ =0x02017840
+	ldr r1, _081412FC @ =gSharedMem + 0x17840
 	ldrb r0, [r1, 0xA]
 	subs r0, 0x1
 	strb r0, [r1, 0xA]
@@ -4300,7 +4300,7 @@ _081412F2:
 	bl DestroySprite
 	b _0814130E
 	.align 2, 0
-_081412FC: .4byte 0x02017840
+_081412FC: .4byte gSharedMem + 0x17840
 _08141300: .4byte gUnknown_0840B258
 _08141304: .4byte gUnknown_0840B2B8
 _08141308:
@@ -4934,7 +4934,7 @@ sub_81417D8: @ 81417D8
 	ldr r1, _08141800 @ =gBattleAnimBankAttacker
 	ldrb r1, [r1]
 	lsls r1, 2
-	ldr r2, _08141804 @ =0x02017800
+	ldr r2, _08141804 @ =gSharedMem + 0x17800
 	adds r1, r2
 	ldr r1, [r1]
 	lsls r1, 29
@@ -4946,7 +4946,7 @@ sub_81417D8: @ 81417D8
 	.align 2, 0
 _081417FC: .4byte gBattleAnimArgs
 _08141800: .4byte gBattleAnimBankAttacker
-_08141804: .4byte 0x02017800
+_08141804: .4byte gSharedMem + 0x17800
 	thumb_func_end sub_81417D8
 
 	thumb_func_start sub_8141808
@@ -4979,7 +4979,7 @@ sub_8141828: @ 8141828
 	lsls r0, r6, 1
 	adds r0, r6
 	lsls r0, 2
-	ldr r1, _081418E0 @ =0x02017810
+	ldr r1, _081418E0 @ =gSharedMem + 0x17810
 	adds r0, r1
 	ldrb r1, [r0]
 	movs r2, 0x80
@@ -5054,7 +5054,7 @@ _081418A2:
 	strh r0, [r1, 0xA]
 	b _0814190E
 	.align 2, 0
-_081418E0: .4byte 0x02017810
+_081418E0: .4byte gSharedMem + 0x17810
 _081418E4: .4byte 0x0000ffff
 _081418E8: .4byte 0x000027f9
 _081418EC: .4byte gBattleAnimPicTable + (233 * 8)
@@ -5065,7 +5065,7 @@ _081418FC:
 	lsls r0, r6, 1
 	adds r0, r6
 	lsls r0, 2
-	ldr r1, _08141918 @ =0x02017810
+	ldr r1, _08141918 @ =gSharedMem + 0x17810
 	adds r0, r1
 	ldrb r1, [r0, 0x1]
 	movs r2, 0x1
@@ -5078,7 +5078,7 @@ _0814190E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08141918: .4byte 0x02017810
+_08141918: .4byte gSharedMem + 0x17810
 	thumb_func_end sub_8141828
 
 	thumb_func_start sub_814191C
@@ -5105,7 +5105,7 @@ sub_814191C: @ 814191C
 	.align 2, 0
 _08141944: .4byte gTasks
 _08141948:
-	ldr r0, _08141998 @ =0x02017840
+	ldr r0, _08141998 @ =gSharedMem + 0x17840
 	ldrb r0, [r0, 0xA]
 	cmp r0, 0
 	beq _08141952
@@ -5145,7 +5145,7 @@ _08141966:
 	lsrs r5, r0, 24
 	b _08141A02
 	.align 2, 0
-_08141998: .4byte 0x02017840
+_08141998: .4byte gSharedMem + 0x17840
 _0814199C: .4byte gBattleAnimSpriteTemplate_84024E8
 _081419A0:
 	cmp r0, 0
@@ -5320,7 +5320,7 @@ sub_8141AD8: @ 8141AD8
 	lsls r0, r1, 1
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08141B1C @ =0x02017810
+	ldr r1, _08141B1C @ =gSharedMem + 0x17810
 	adds r0, r1
 	ldrb r1, [r0, 0x1]
 	movs r2, 0x1
@@ -5334,7 +5334,7 @@ _08141B14:
 	bx r0
 	.align 2, 0
 _08141B18: .4byte gTasks
-_08141B1C: .4byte 0x02017810
+_08141B1C: .4byte gSharedMem + 0x17810
 	thumb_func_end sub_8141AD8
 
 	thumb_func_start sub_8141B20
@@ -5667,7 +5667,7 @@ sub_8141DAC: @ 8141DAC
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, _08141DC0 @ =0x02017840
+	ldr r0, _08141DC0 @ =gSharedMem + 0x17840
 	ldrh r1, [r0]
 	cmp r1, 0x53
 	bne _08141DC8
@@ -5675,7 +5675,7 @@ sub_8141DAC: @ 8141DAC
 	movs r0, 0x1
 	b _08141E00
 	.align 2, 0
-_08141DC0: .4byte 0x02017840
+_08141DC0: .4byte gSharedMem + 0x17840
 _08141DC4: .4byte gBattleAnimArgs
 _08141DC8:
 	cmp r1, 0xFA
@@ -5722,7 +5722,7 @@ sub_8141E10: @ 8141E10
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _08141E2C @ =gBattleAnimBankAttacker
-	ldr r1, _08141E30 @ =0x02017840
+	ldr r1, _08141E30 @ =gSharedMem + 0x17840
 	ldrh r1, [r1]
 	strb r1, [r2]
 	ldr r2, _08141E34 @ =gBattleAnimBankTarget
@@ -5733,7 +5733,7 @@ sub_8141E10: @ 8141E10
 	bx r0
 	.align 2, 0
 _08141E2C: .4byte gBattleAnimBankAttacker
-_08141E30: .4byte 0x02017840
+_08141E30: .4byte gSharedMem + 0x17840
 _08141E34: .4byte gBattleAnimBankTarget
 	thumb_func_end sub_8141E10
 

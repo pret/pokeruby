@@ -16,13 +16,50 @@ extern u8 (*gCallback_03004AE8)(void);
 
 u8 gUnknown_03004DA0[0x20];
 
-extern u8 gUnknown_0839B22C[][3];
-extern u8 gUnknown_0839B24A[];
-extern u8 gUnknown_0839B24D[];
-extern u8 gUnknown_0839B255[];
-extern u8 gUnknown_0839B257[];
+const u8 gUnknown_0839B22C[][3] =
+{
+	_(" A"),
+	_(" B"),
+	_("SL"),
+	_("ST"),
+	_("RK"),
+	_("LK"),
+	_("UK"),
+	_("DK"),
+	_("RT"),
+	_("LT"),
+};
 
-extern const struct MenuAction gMoriDebugMenuActions[];
+const u8 gUnknown_0839B24A[] = _("ND");
+const u8 gUnknown_0839B24D[] = _("の　こどもは\n"); // "'s child <topic-particle>"=
+const u8 gUnknown_0839B255[] = _(" ");
+const u8 gUnknown_0839B257[] = _("ながいなまえぽけもん"); // "long name pokemon" (used as test name)
+const u8 Text_39B262[] = _("Search a child");
+const u8 Text_39B271[] = _("Egg");
+const u8 Text_39B275[] = _("Egg (male)");
+const u8 Text_39B280[] = _("1000 steps");
+const u8 Text_39B28B[] = _("10000 steps");
+const u8 Text_39B297[] = _("MOVE TUTOR");
+const u8 Text_39B2A2[] = _("Breed an egg");
+const u8 Text_39B2AF[] = _("Long name");
+#ifdef GERMAN
+const u8 Text_39B2B9[] = _("Delete {POKEBLOCK}");
+#else
+const u8 Text_39B2B9[] = _("ポロックけす");
+#endif
+
+const struct MenuAction gMoriDebugMenuActions[] =
+{
+    {Text_39B262, (u8 (*) (void))MoriDebugMenu_SearchChild}, // ugly cast needed to stop complaints of u8 (*func)() not being compatible with this declaration (TODO: Make MenuAction a Callback union to allow a new definition.)
+    {Text_39B271, MoriDebugMenu_Egg},
+    {Text_39B275, MoriDebugMenu_MaleEgg},
+    {Text_39B280, MoriDebugMenu_1000Steps},
+    {Text_39B28B, MoriDebugMenu_10000Steps},
+    {Text_39B297, MoriDebugMenu_MoveTutor},
+    {Text_39B2A2, MoriDebugMenu_BreedEgg},
+    {Text_39B2AF, MoriDebugMenu_LongName},
+    {Text_39B2B9, MoriDebugMenu_PokeblockCase},
+};
 
 void unref_sub_8083CF0(void)
 {
@@ -50,13 +87,13 @@ u8 MoriDebugMenu_SearchChild(u8 a1, u8 a2, u8 *ptr)
 {
     u8 localPtr[52];
     u16 monData;
-    u16 var;
+    u16 eggSpecies;
 
     monData = GetMonData(gPlayerParty, MON_DATA_SPECIES, ptr);
-    var = sub_8041870(monData);
+    eggSpecies = GetEggSpecies(monData);
     StringCopy(localPtr, gSpeciesNames[monData]);
     StringAppend(localPtr, gUnknown_0839B24D);
-    StringAppend(localPtr, gSpeciesNames[var]);
+    StringAppend(localPtr, gSpeciesNames[eggSpecies]);
     StringAppend(localPtr, gUnknown_0839B255);
     MenuZeroFillScreen();
     MenuDrawTextWindow(0, 14, 30, 19);
@@ -65,46 +102,46 @@ u8 MoriDebugMenu_SearchChild(u8 a1, u8 a2, u8 *ptr)
     return 0;
 }
 
-s8 MoriDebugMenu_Egg(void)
+u8 MoriDebugMenu_Egg(void)
 {
-    if ( Daycare_CountPokemon(&gSaveBlock1.daycareData) == 2 && daycare_relationship_score_from_savegame() )
-        sub_8041940();
+    if (CountPokemonInDaycare(&gSaveBlock1.daycare) == 2 && GetDaycareCompatibilityScoreFromSave() )
+        TriggerPendingDaycareEgg();
     CloseMenu();
 
     return 1;
 }
 
-s8 MoriDebugMenu_MaleEgg(void)
+u8 MoriDebugMenu_MaleEgg(void)
 {
-    if ( Daycare_CountPokemon(&gSaveBlock1.daycareData) == 2 && daycare_relationship_score_from_savegame() )
-        sub_8041950();
+    if (CountPokemonInDaycare(&gSaveBlock1.daycare) == 2 && GetDaycareCompatibilityScoreFromSave() )
+        TriggerPendingDaycareMaleEgg();
     CloseMenu();
 
     return 1;
 }
 
-s8 MoriDebugMenu_1000Steps(void)
+u8 MoriDebugMenu_1000Steps(void)
 {
-    sub_8041790(1000);
+    Debug_AddDaycareSteps(1000);
     CloseMenu();
     return 1;
 }
 
-s8 MoriDebugMenu_10000Steps(void)
+u8 MoriDebugMenu_10000Steps(void)
 {
-    sub_8041790(10000);
+    Debug_AddDaycareSteps(10000);
     CloseMenu();
     return 1;
 }
 
-s8 MoriDebugMenu_MoveTutor(void)
+u8 MoriDebugMenu_MoveTutor(void)
 {
     sub_8132670();
     CloseMenu();
     return 1;
 }
 
-s8 MoriDebugMenu_BreedEgg(void)
+u8 MoriDebugMenu_BreedEgg(void)
 {
     u8 loopCounter;
 
@@ -117,19 +154,19 @@ s8 MoriDebugMenu_BreedEgg(void)
             SetMonData(&gPlayerParty[loopCounter], MON_DATA_FRIENDSHIP, &friendship);
         }
     }
-    gSaveBlock1.daycareData.misc.countersEtc.unk_11a = -3;
+    gSaveBlock1.daycare.misc.countersEtc.eggCycleStepsRemaining = -3;
     CloseMenu();
     return 1;
 }
 
-s8 MoriDebugMenu_LongName(void)
+u8 MoriDebugMenu_LongName(void)
 {
     SetMonData(gPlayerParty, MON_DATA_NICKNAME, gUnknown_0839B257);
     CloseMenu();
     return 1;
 }
 
-s8 MoriDebugMenu_PokeblockCase(void)
+u8 MoriDebugMenu_PokeblockCase(void)
 {
     s32 loopCounter;
 

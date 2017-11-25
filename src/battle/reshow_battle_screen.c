@@ -7,6 +7,7 @@
 #include "text.h"
 #include "rom_8077ABC.h"
 #include "data2.h"
+#include "ewram.h"
 
 extern struct SpriteTemplate gUnknown_02024E8C;
 extern struct Window gUnknown_03004210;
@@ -54,9 +55,6 @@ static bool8 LoadAppropiateBankSprite(u8 bank);
 static void sub_807B184(u8 bank);
 static void sub_807B508(u8 bank);
 static void sub_807B06C(void);
-
-#define gReshowState ewram[0x1FFFF]
-#define gHelperState ewram[0x1FFFE]
 
 void nullsub_14(void)
 {
@@ -254,8 +252,8 @@ static void sub_807B184(u8 bank)
             gObjectBankIDs[bank] = CreateSprite(&gUnknown_02024E8C, sub_8077ABC(bank, 2), posY, sub_8079E90(bank));
             gSprites[gObjectBankIDs[bank]].oam.paletteNum = bank;
             gSprites[gObjectBankIDs[bank]].callback = SpriteCallbackDummy;
-            gSprites[gObjectBankIDs[bank]].data0 = bank;
-            gSprites[gObjectBankIDs[bank]].data2 = GetMonData(&gEnemyParty[gBattlePartyID[bank]], MON_DATA_SPECIES);
+            gSprites[gObjectBankIDs[bank]].data[0] = bank;
+            gSprites[gObjectBankIDs[bank]].data[2] = GetMonData(&gEnemyParty[gBattlePartyID[bank]], MON_DATA_SPECIES);
             StartSpriteAnim(&gSprites[gObjectBankIDs[bank]], gBattleMonForms[bank]);
         }
         else if (gBattleTypeFlags & BATTLE_TYPE_SAFARI && bank == 0)
@@ -266,7 +264,7 @@ static void sub_807B184(u8 bank)
                                                  sub_8079E90(0));
             gSprites[gObjectBankIDs[bank]].oam.paletteNum = bank;
             gSprites[gObjectBankIDs[bank]].callback = SpriteCallbackDummy;
-            gSprites[gObjectBankIDs[bank]].data0 = bank;
+            gSprites[gObjectBankIDs[bank]].data[0] = bank;
         }
         else if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL && bank == 0)
         {
@@ -276,7 +274,7 @@ static void sub_807B184(u8 bank)
                                                  sub_8079E90(0));
             gSprites[gObjectBankIDs[bank]].oam.paletteNum = bank;
             gSprites[gObjectBankIDs[bank]].callback = SpriteCallbackDummy;
-            gSprites[gObjectBankIDs[bank]].data0 = bank;
+            gSprites[gObjectBankIDs[bank]].data[0] = bank;
         }
         else
         {
@@ -286,8 +284,8 @@ static void sub_807B184(u8 bank)
             gObjectBankIDs[bank] = CreateSprite(&gUnknown_02024E8C, sub_8077ABC(bank, 2), posY, sub_8079E90(bank));
             gSprites[gObjectBankIDs[bank]].oam.paletteNum = bank;
             gSprites[gObjectBankIDs[bank]].callback = SpriteCallbackDummy;
-            gSprites[gObjectBankIDs[bank]].data0 = bank;
-            gSprites[gObjectBankIDs[bank]].data2 = GetMonData(&gPlayerParty[gBattlePartyID[bank]], MON_DATA_SPECIES);
+            gSprites[gObjectBankIDs[bank]].data[0] = bank;
+            gSprites[gObjectBankIDs[bank]].data[2] = GetMonData(&gPlayerParty[gBattlePartyID[bank]], MON_DATA_SPECIES);
             StartSpriteAnim(&gSprites[gObjectBankIDs[bank]], gBattleMonForms[bank]);
         }
         gSprites[gObjectBankIDs[bank]].invisible = ewram17800[bank].invisible;

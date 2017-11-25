@@ -322,8 +322,8 @@ static void CameraUpdateCallback(struct CameraSomething *a)
 {
     if (a->unk4 != 0)
     {
-        a->unk8 = gSprites[a->unk4].data2;
-        a->unkC = gSprites[a->unk4].data3;
+        a->unk8 = gSprites[a->unk4].data[2];
+        a->unkC = gSprites[a->unk4].data[3];
     }
 }
 

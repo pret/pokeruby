@@ -24,6 +24,7 @@
 #include "pokemon_summary_screen.h"
 #include "menu_cursor.h"
 #include "strings2.h"
+#include "ewram.h"
 
 struct EvoInfo
 {
@@ -55,8 +56,6 @@ struct EvoInfo
     u8 unkA0C4; // 0x201E8C4
 };
 
-#define sEvoInfo ((*(struct EvoInfo*)(ewram + 0x14800)))
-
 void EvolutionRenameMon(struct Pokemon *mon, u16 oldSpecies, u16 newSpecies);
 void sub_8024CEC(void);
 void sub_8023A80(void);
@@ -78,7 +77,6 @@ extern u8 gBattleTerrain;
 extern u8 gReservedSpritePaletteCount;
 extern u16 gMoveToLearn;
 extern struct SpriteTemplate gUnknown_02024E8C;
-extern u8 gUnk_2009000[]; // won't match if I 'ewram' it
 extern bool8 gAffineAnimsDisabled;
 extern u8 gDisplayedStringBattle[];
 extern u8 gBattleTextBuff2[];
@@ -87,9 +85,9 @@ extern u8 gBattleCommunication[];
 #define sEvoCursorPos        gBattleCommunication[1] // when learning a new move
 #define sEvoGraphicsTaskID   gBattleCommunication[2]
 
-extern const u8 gUnknown_08400C4A[];
-extern const u8 gUnknown_08400C60[];
-extern const u8 gUnknown_08400C8D[];
+extern const u8 BattleText_StartEvo[];
+extern const u8 BattleText_FinishEvo[];
+extern const u8 BattleText_StopEvo[];
 extern void * const gUnknown_081FAF4C[];
 extern const u8* const gBattleStringsTable[];
 
@@ -133,7 +131,7 @@ static void CB2_BeginEvolutionScene(void)
 #define tLearnsFirstMove    data[6]
 #define tLearnMoveState     data[8]
 #define tData9              data[9]
-#define tData10             data[10]
+#define tdata10             data[10]
 #define tEvoWasStopped      data[11]
 #define tPartyID            data[12]
 
@@ -276,7 +274,7 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
     gTasks[ID].tEvoWasStopped = FALSE;
     gTasks[ID].tPartyID = partyID;
 
-    memcpy(gUnk_2009000, &gPlttBufferUnfaded[0x20], 0x60);
+    memcpy(ewram9000_hack, &gPlttBufferUnfaded[0x20], 0x60);
 
     REG_DISPCNT = DISPCNT_OBJ_ON | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_1D_MAP;
     SetHBlankCallback(EvoDummyFunc);
@@ -559,7 +557,7 @@ static void Task_EvolutionScene(u8 taskID)
     case 1: // print 'whoa, poke is evolving!!!' msg
         if (!gPaletteFade.active)
         {
-            StringExpandPlaceholders(gStringVar4, gUnknown_08400C4A);
+            StringExpandPlaceholders(gStringVar4, BattleText_StartEvo);
             sub_8002EB0(&gUnknown_03004210, gStringVar4, 144, 2, 15);
             gTasks[taskID].tState++;
         }
@@ -639,7 +637,7 @@ static void Task_EvolutionScene(u8 taskID)
         {
             m4aMPlayAllStop();
             PlayCry1(gTasks[taskID].tPostEvoSpecies, 0);
-            memcpy(&gPlttBufferUnfaded[0x20], gUnk_2009000, 0x60);
+            memcpy(&gPlttBufferUnfaded[0x20], ewram9000_hack, 0x60);
             BeginNormalPaletteFade(0x1C, 0, 0x10, 0, 0);
             gTasks[taskID].tState++;
         }
@@ -647,7 +645,7 @@ static void Task_EvolutionScene(u8 taskID)
     case 13: // congratulations string and rename prompt
         if (IsCryFinished() && !gPaletteFade.active)
         {
-            StringExpandPlaceholders(gStringVar4, gUnknown_08400C60);
+            StringExpandPlaceholders(gStringVar4, BattleText_FinishEvo);
             sub_8002EB0(&gUnknown_03004210, gStringVar4, 144, 2, 15);
             PlayBGM(BGM_FANFA5);
             gTasks[taskID].tState++;
@@ -716,7 +714,7 @@ static void Task_EvolutionScene(u8 taskID)
     case 18: // after the cry, print the string 'WHOA IT DID NOT EVOLVE!!!'
         if (IsCryFinished())
         {
-            StringExpandPlaceholders(gStringVar4, gUnknown_08400C8D);
+            StringExpandPlaceholders(gStringVar4, BattleText_StopEvo);
             sub_8002EB0(&gUnknown_03004210, gStringVar4, 144, 2, 15);
             gTasks[taskID].tEvoWasStopped = TRUE;
             gTasks[taskID].tState = 14;
@@ -765,7 +763,7 @@ static void Task_EvolutionScene(u8 taskID)
                 StrCpyDecodeToDisplayedStringBattle(gBattleStringsTable[6]);
                 sub_8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
                 gTasks[taskID].tData9 = 5;
-                gTasks[taskID].tData10 = 9;
+                gTasks[taskID].tdata10 = 9;
                 gTasks[taskID].tLearnMoveState++;
             }
         case 3:
@@ -799,7 +797,7 @@ static void Task_EvolutionScene(u8 taskID)
                 sub_8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
                 PlaySE(SE_SELECT);
                 if (sEvoCursorPos != 0)
-                    gTasks[taskID].tLearnMoveState = gTasks[taskID].tData10;
+                    gTasks[taskID].tLearnMoveState = gTasks[taskID].tdata10;
                 else
                 {
                     gTasks[taskID].tLearnMoveState = gTasks[taskID].tData9;
@@ -813,7 +811,7 @@ static void Task_EvolutionScene(u8 taskID)
                 StrCpyDecodeToDisplayedStringBattle(gBattleStringsTable[292]);
                 sub_8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
                 PlaySE(SE_SELECT);
-                gTasks[taskID].tLearnMoveState = gTasks[taskID].tData10;
+                gTasks[taskID].tLearnMoveState = gTasks[taskID].tdata10;
             }
             break;
         case 5:
@@ -876,7 +874,7 @@ static void Task_EvolutionScene(u8 taskID)
             StrCpyDecodeToDisplayedStringBattle(gBattleStringsTable[8]);
             sub_8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
             gTasks[taskID].tData9 = 10;
-            gTasks[taskID].tData10 = 0;
+            gTasks[taskID].tdata10 = 0;
             gTasks[taskID].tLearnMoveState = 3;
             break;
         case 10:
@@ -901,7 +899,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
     switch (gTasks[taskID].tState)
     {
     case 0:
-        StringExpandPlaceholders(gStringVar4, gUnknown_08400C4A);
+        StringExpandPlaceholders(gStringVar4, BattleText_StartEvo);
         sub_8002EB0(&gUnknown_03004828->window, gStringVar4, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
         gTasks[taskID].tState++;
         break;
@@ -981,7 +979,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
         if (IsSEPlaying())
         {
             PlayCry1(gTasks[taskID].tPostEvoSpecies, 0);
-            memcpy(&gPlttBufferUnfaded[0x20], gUnk_2009000, 0x60);
+            memcpy(&gPlttBufferUnfaded[0x20], ewram9000_hack, 0x60);
             BeginNormalPaletteFade(1, 0, 0x10, 0, 0);
             gTasks[taskID].tState++;
         }
@@ -989,7 +987,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
     case 12:
         if (IsCryFinished() && !gPaletteFade.active)
         {
-            StringExpandPlaceholders(gStringVar4, gUnknown_08400C60);
+            StringExpandPlaceholders(gStringVar4, BattleText_FinishEvo);
             sub_8002EB0(&gUnknown_03004828->window, gStringVar4, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
             PlayFanfare(BGM_FANFA5);
             gTasks[taskID].tState++;
@@ -1079,7 +1077,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
                 StrCpyDecodeToDisplayedStringBattle(gBattleStringsTable[6]);
                 sub_8002EB0(&gUnknown_03004828->window, gDisplayedStringBattle, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
                 gTasks[taskID].tData9 = 5;
-                gTasks[taskID].tData10 = 9;
+                gTasks[taskID].tdata10 = 9;
                 gTasks[taskID].tLearnMoveState++;
             }
         case 3:
@@ -1118,7 +1116,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
                 sub_8002EB0(&gUnknown_03004828->window, gDisplayedStringBattle, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
                 PlaySE(SE_SELECT);
                 if (sEvoCursorPos != 0)
-                    gTasks[taskID].tLearnMoveState = gTasks[taskID].tData10;
+                    gTasks[taskID].tLearnMoveState = gTasks[taskID].tdata10;
                 else
                 {
                     gTasks[taskID].tLearnMoveState = gTasks[taskID].tData9;
@@ -1133,7 +1131,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
                 StrCpyDecodeToDisplayedStringBattle(gBattleStringsTable[292]);
                 sub_8002EB0(&gUnknown_03004828->window, gDisplayedStringBattle, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
                 PlaySE(SE_SELECT);
-                gTasks[taskID].tLearnMoveState = gTasks[taskID].tData10;
+                gTasks[taskID].tLearnMoveState = gTasks[taskID].tdata10;
             }
             break;
         case 5:
@@ -1196,7 +1194,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
             StrCpyDecodeToDisplayedStringBattle(gBattleStringsTable[8]);
             sub_8002EB0(&gUnknown_03004828->window, gDisplayedStringBattle, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
             gTasks[taskID].tData9 = 10;
-            gTasks[taskID].tData10 = 0;
+            gTasks[taskID].tdata10 = 0;
             gTasks[taskID].tLearnMoveState = 3;
             break;
         case 10:
@@ -1522,7 +1520,7 @@ __attribute__((naked))
 void unref_sub_8113B50()
 {
     asm(".syntax unified\n\
-        push {r4-r7,lr}\n\
+    push {r4-r7,lr}\n\
     mov r7, r10\n\
     mov r6, r9\n\
     mov r5, r8\n\
@@ -1536,7 +1534,7 @@ void unref_sub_8113B50()
     str r1, [sp, 0x10]\n\
     movs r2, 0\n\
     str r2, [sp, 0x8]\n\
-    ldr r3, _08113C60 @ =0x02014800\n\
+    ldr r3, _08113C60 @ =gSharedMem + 0x14800\n\
     mov r12, r3\n\
     ldr r4, _08113C64 @ =0x000018c4\n\
     add r4, r12\n\
@@ -1553,7 +1551,7 @@ _08113B7C:\n\
     adds r0, r3, 0x4\n\
     adds r0, r1, r0\n\
     strb r2, [r0]\n\
-    ldr r4, _08113C6C @ =0x02014844\n\
+    ldr r4, _08113C6C @ =gSharedMem + 0x14844\n\
     adds r0, r1, r4\n\
     strb r2, [r0]\n\
     movs r6, 0\n\
@@ -1564,7 +1562,7 @@ _08113B7C:\n\
 _08113B9C:\n\
     mov r0, r9\n\
     adds r1, r6, r0\n\
-    ldr r5, _08113C70 @ =0x020158c4\n\
+    ldr r5, _08113C70 @ =gSharedMem + 0x158C4\n\
     adds r0, r1, r5\n\
     strb r2, [r0]\n\
     mov r5, r10\n\
@@ -1573,7 +1571,7 @@ _08113B9C:\n\
     mov r5, r8\n\
     adds r0, r1, r5\n\
     strb r2, [r0]\n\
-    ldr r5, _08113C74 @ =0x020170c4\n\
+    ldr r5, _08113C74 @ =gSharedMem + 0x170C4\n\
     adds r0, r1, r5\n\
     strb r2, [r0]\n\
     adds r7, r3, 0\n\
@@ -1654,7 +1652,7 @@ _08113C4A:\n\
     asrs r0, r6, 1\n\
     lsls r0, 2\n\
     add r0, r10\n\
-    ldr r1, _08113C98 @ =0x020188c4\n\
+    ldr r1, _08113C98 @ =gSharedMem + 0x188C4\n\
     adds r0, r1\n\
     str r2, [r0]\n\
     cmp r3, 0\n\
@@ -1663,12 +1661,12 @@ _08113C4A:\n\
     beq _08113CC6\n\
     b _08113CF4\n\
     .align 2, 0\n\
-_08113C60: .4byte 0x02014800\n\
+_08113C60: .4byte gSharedMem + 0x14800\n\
 _08113C64: .4byte 0x000018c4\n\
 _08113C68: .4byte 0x000020c4\n\
-_08113C6C: .4byte 0x02014844\n\
-_08113C70: .4byte 0x020158c4\n\
-_08113C74: .4byte 0x020170c4\n\
+_08113C6C: .4byte gSharedMem + 0x14844\n\
+_08113C70: .4byte gSharedMem + 0x158C4\n\
+_08113C74: .4byte gSharedMem + 0x170C4\n\
 _08113C78: .4byte 0x000008c4\n\
 _08113C7C: .4byte 0x000030c4\n\
 _08113C80: .4byte 0x000038c4\n\
@@ -1677,7 +1675,7 @@ _08113C88: .4byte 0x000070c4\n\
 _08113C8C: .4byte 0x000080c4\n\
 _08113C90: .4byte 0x000090c4\n\
 _08113C94: .4byte 0x0000a0c4\n\
-_08113C98: .4byte 0x020188c4\n\
+_08113C98: .4byte gSharedMem + 0x188C4\n\
 _08113C9C:\n\
     movs r0, 0x1\n\
     ands r0, r6\n\
@@ -1784,7 +1782,7 @@ _08113D4A:\n\
     mov r8, r2\n\
     movs r3, 0\n\
     str r3, [sp, 0x8]\n\
-    ldr r0, _08113D84 @ =0x02014844\n\
+    ldr r0, _08113D84 @ =gSharedMem + 0x14844\n\
     movs r4, 0x82\n\
     lsls r4, 6\n\
     adds r4, r0\n\
@@ -1811,7 +1809,7 @@ _08113D78:\n\
     beq _08113DB4\n\
     b _08113DE4\n\
     .align 2, 0\n\
-_08113D84: .4byte 0x02014844\n\
+_08113D84: .4byte gSharedMem + 0x14844\n\
 _08113D88:\n\
     adds r0, r6, 0\n\
     mov r1, r9\n\
@@ -1917,9 +1915,9 @@ _08113E28:\n\
     str r1, [sp, 0x8]\n\
 _08113E3A:\n\
     ldr r3, [sp, 0x8]\n\
-    ldr r4, _08113EBC @ =0x02014804\n\
+    ldr r4, _08113EBC @ =gSharedMem + 0x14804\n\
     adds r2, r3, r4\n\
-    ldr r5, _08113EC0 @ =0x02014844\n\
+    ldr r5, _08113EC0 @ =gSharedMem + 0x14844\n\
     adds r1, r3, r5\n\
     ldrb r0, [r2]\n\
     adds r3, 0x1\n\
@@ -1934,7 +1932,7 @@ _08113E52:\n\
     ldrb r2, [r2]\n\
     cmp r0, r2\n\
     bge _08113F54\n\
-    ldr r0, _08113EC4 @ =0x02014800\n\
+    ldr r0, _08113EC4 @ =gSharedMem + 0x14800\n\
     adds r0, 0x4\n\
     ldr r1, [sp, 0x8]\n\
     adds r0, r1, r0\n\
@@ -1945,7 +1943,7 @@ _08113E66:\n\
     str r2, [sp, 0x14]\n\
     movs r6, 0\n\
     ldr r3, [sp, 0x8]\n\
-    ldr r4, _08113EC0 @ =0x02014844\n\
+    ldr r4, _08113EC0 @ =gSharedMem + 0x14844\n\
     adds r0, r3, r4\n\
     ldr r5, [sp, 0xC]\n\
     adds r5, 0x1\n\
@@ -1953,18 +1951,18 @@ _08113E66:\n\
     ldrb r0, [r0]\n\
     cmp r6, r0\n\
     bge _08113F3E\n\
-    ldr r0, _08113EC4 @ =0x02014800\n\
+    ldr r0, _08113EC4 @ =gSharedMem + 0x14800\n\
     mov r10, r0\n\
     lsls r0, r3, 5\n\
     ldr r2, [sp, 0xC]\n\
     adds r1, r2, r0\n\
     mov r9, r0\n\
-    ldr r0, _08113EC4 @ =0x02014800\n\
+    ldr r0, _08113EC4 @ =gSharedMem + 0x14800\n\
     adds r0, 0xC4\n\
     mov r3, r9\n\
     adds r7, r3, r0\n\
     mov r5, r9\n\
-    ldr r4, _08113EC4 @ =0x02014800\n\
+    ldr r4, _08113EC4 @ =gSharedMem + 0x14800\n\
     ldr r2, _08113EC8 @ =0x000010c4\n\
     adds r0, r4, r2\n\
     adds r1, r0\n\
@@ -1984,9 +1982,9 @@ _08113EA4:\n\
     ldrb r0, [r0]\n\
     b _08113ED6\n\
     .align 2, 0\n\
-_08113EBC: .4byte 0x02014804\n\
-_08113EC0: .4byte 0x02014844\n\
-_08113EC4: .4byte 0x02014800\n\
+_08113EBC: .4byte gSharedMem + 0x14804\n\
+_08113EC0: .4byte gSharedMem + 0x14844\n\
+_08113EC4: .4byte gSharedMem + 0x14800\n\
 _08113EC8: .4byte 0x000010c4\n\
 _08113ECC: .4byte 0x000020c4\n\
 _08113ED0:\n\
@@ -2004,7 +2002,7 @@ _08113ED6:\n\
     add r0, r10\n\
     adds r2, r5, r0\n\
     ldrb r0, [r4]\n\
-    ldr r1, _08113F04 @ =0x02014800\n\
+    ldr r1, _08113F04 @ =gSharedMem + 0x14800\n\
     mov r12, r1\n\
     ldrb r1, [r2]\n\
     cmp r0, r1\n\
@@ -2015,7 +2013,7 @@ _08113ED6:\n\
     .align 2, 0\n\
 _08113EFC: .4byte 0x000018c4\n\
 _08113F00: .4byte 0x000028c4\n\
-_08113F04: .4byte 0x02014800\n\
+_08113F04: .4byte gSharedMem + 0x14800\n\
 _08113F08:\n\
     ldrb r1, [r2]\n\
     ldrb r0, [r4]\n\
@@ -2041,7 +2039,7 @@ _08113F2C:\n\
     adds r5, 0x1\n\
     adds r6, 0x1\n\
     ldr r3, [sp, 0x8]\n\
-    ldr r4, _08114054 @ =0x02014844\n\
+    ldr r4, _08114054 @ =gSharedMem + 0x14844\n\
     adds r0, r3, r4\n\
     ldrb r0, [r0]\n\
     cmp r6, r0\n\
@@ -2059,9 +2057,9 @@ _08113F3E:\n\
     blt _08113E66\n\
 _08113F54:\n\
     movs r6, 0\n\
-    ldr r2, _08114058 @ =0x02014800\n\
+    ldr r2, _08114058 @ =gSharedMem + 0x14800\n\
     ldr r1, [sp, 0x8]\n\
-    ldr r3, _08114054 @ =0x02014844\n\
+    ldr r3, _08114054 @ =gSharedMem + 0x14844\n\
     adds r0, r1, r3\n\
     adds r4, r2, 0\n\
     mov r12, r4\n\
@@ -2092,15 +2090,15 @@ _08113F6E:\n\
     bl sub_811430C\n\
 _08113F94:\n\
     adds r6, 0x1\n\
-    ldr r2, _08114058 @ =0x02014800\n\
+    ldr r2, _08114058 @ =gSharedMem + 0x14800\n\
     ldrb r5, [r4]\n\
     cmp r6, r5\n\
     blt _08113F6E\n\
 _08113F9E:\n\
     ldr r0, [sp, 0x8]\n\
-    ldr r1, _0811405C @ =0x02014804\n\
+    ldr r1, _0811405C @ =gSharedMem + 0x14804\n\
     adds r2, r0, r1\n\
-    ldr r3, _08114054 @ =0x02014844\n\
+    ldr r3, _08114054 @ =gSharedMem + 0x14844\n\
     adds r1, r0, r3\n\
     ldrb r0, [r2]\n\
     ldrb r1, [r1]\n\
@@ -2122,12 +2120,12 @@ _08113FBA:\n\
     blt _08113FBA\n\
 _08113FCC:\n\
     ldr r0, [sp, 0x8]\n\
-    ldr r1, _0811405C @ =0x02014804\n\
+    ldr r1, _0811405C @ =gSharedMem + 0x14804\n\
     adds r2, r0, r1\n\
-    ldr r3, _08114054 @ =0x02014844\n\
+    ldr r3, _08114054 @ =gSharedMem + 0x14844\n\
     adds r1, r0, r3\n\
     ldrb r0, [r2]\n\
-    ldr r4, _08114058 @ =0x02014800\n\
+    ldr r4, _08114058 @ =gSharedMem + 0x14800\n\
     ldrb r5, [r1]\n\
     cmp r0, r5\n\
     bhi _08113FE2\n\
@@ -2167,16 +2165,16 @@ _08114004:\n\
     ldr r2, [sp, 0x24]\n\
     adds r1, r2\n\
     mov r10, r1\n\
-    ldr r0, _08114058 @ =0x02014800\n\
+    ldr r0, _08114058 @ =gSharedMem + 0x14800\n\
     adds r0, 0xC4\n\
     adds r2, r0\n\
     mov r8, r2\n\
     ldr r7, [sp, 0x24]\n\
-    ldr r3, _08114058 @ =0x02014800\n\
+    ldr r3, _08114058 @ =gSharedMem + 0x14800\n\
     ldr r4, _08114060 @ =0x000010c4\n\
     adds r0, r3, r4\n\
     adds r5, r7, r0\n\
-    ldr r0, _08114064 @ =0x020168c4\n\
+    ldr r0, _08114064 @ =gSharedMem + 0x168C4\n\
     add r0, r10\n\
     mov r12, r0\n\
     ldrb r1, [r0]\n\
@@ -2192,22 +2190,22 @@ _0811403E:\n\
     b _0811406E\n\
     .align 2, 0\n\
 _08114050: .4byte 0x000008c4\n\
-_08114054: .4byte 0x02014844\n\
-_08114058: .4byte 0x02014800\n\
-_0811405C: .4byte 0x02014804\n\
+_08114054: .4byte gSharedMem + 0x14844\n\
+_08114058: .4byte gSharedMem + 0x14800\n\
+_0811405C: .4byte gSharedMem + 0x14804\n\
 _08114060: .4byte 0x000010c4\n\
-_08114064: .4byte 0x020168c4\n\
+_08114064: .4byte gSharedMem + 0x168C4\n\
 _08114068:\n\
     mov r4, r12\n\
     ldrb r1, [r4]\n\
     ldrb r0, [r5]\n\
 _0811406E:\n\
     subs r3, r1, r0\n\
-    ldr r1, _0811408C @ =0x02014800\n\
+    ldr r1, _0811408C @ =gSharedMem + 0x14800\n\
     ldr r2, _08114090 @ =0x000018c4\n\
     adds r0, r1, r2\n\
     adds r4, r7, r0\n\
-    ldr r2, _08114094 @ =0x020170c4\n\
+    ldr r2, _08114094 @ =gSharedMem + 0x170C4\n\
     add r2, r10\n\
     ldrb r0, [r4]\n\
     ldrb r1, [r2]\n\
@@ -2217,9 +2215,9 @@ _0811406E:\n\
     ldrb r0, [r2]\n\
     b _0811409C\n\
     .align 2, 0\n\
-_0811408C: .4byte 0x02014800\n\
+_0811408C: .4byte gSharedMem + 0x14800\n\
 _08114090: .4byte 0x000018c4\n\
-_08114094: .4byte 0x020170c4\n\
+_08114094: .4byte gSharedMem + 0x170C4\n\
 _08114098:\n\
     ldrb r1, [r2]\n\
     ldrb r0, [r4]\n\
@@ -2248,25 +2246,25 @@ _081140B2:\n\
 _081140C4:\n\
     ldr r3, [sp, 0xC]\n\
     add r3, r9\n\
-    ldr r2, _08114164 @ =0x02014800\n\
+    ldr r2, _08114164 @ =gSharedMem + 0x14800\n\
     ldr r4, _08114168 @ =0x000030c4\n\
     adds r1, r2, r4\n\
     adds r1, r3, r1\n\
     ldr r2, [sp, 0x10]\n\
     add r2, r9\n\
-    ldr r5, _0811416C @ =0x020168c4\n\
+    ldr r5, _0811416C @ =gSharedMem + 0x168C4\n\
     adds r0, r2, r5\n\
     ldrb r0, [r0]\n\
     strb r0, [r1]\n\
-    ldr r0, _08114164 @ =0x02014800\n\
+    ldr r0, _08114164 @ =gSharedMem + 0x14800\n\
     ldr r4, _08114170 @ =0x000038c4\n\
     adds r1, r0, r4\n\
     adds r1, r3, r1\n\
-    ldr r5, _08114174 @ =0x020170c4\n\
+    ldr r5, _08114174 @ =gSharedMem + 0x170C4\n\
     adds r2, r5\n\
     ldrb r0, [r2]\n\
     strb r0, [r1]\n\
-    ldr r0, _08114164 @ =0x02014800\n\
+    ldr r0, _08114164 @ =gSharedMem + 0x14800\n\
     adds r0, 0xC4\n\
     adds r3, r0\n\
     movs r0, 0x1\n\
@@ -2280,9 +2278,9 @@ _081140C4:\n\
     b _08114004\n\
 _08114104:\n\
     movs r6, 0\n\
-    ldr r4, _08114164 @ =0x02014800\n\
+    ldr r4, _08114164 @ =gSharedMem + 0x14800\n\
     ldr r2, [sp, 0x8]\n\
-    ldr r3, _08114178 @ =0x02014804\n\
+    ldr r3, _08114178 @ =gSharedMem + 0x14804\n\
     adds r0, r2, r3\n\
     ldrb r0, [r0]\n\
     cmp r6, r0\n\
@@ -2327,12 +2325,12 @@ _0811411E:\n\
     bl sub_81141F0\n\
     b _081141B4\n\
     .align 2, 0\n\
-_08114164: .4byte 0x02014800\n\
+_08114164: .4byte gSharedMem + 0x14800\n\
 _08114168: .4byte 0x000030c4\n\
-_0811416C: .4byte 0x020168c4\n\
+_0811416C: .4byte gSharedMem + 0x168C4\n\
 _08114170: .4byte 0x000038c4\n\
-_08114174: .4byte 0x020170c4\n\
-_08114178: .4byte 0x02014804\n\
+_08114174: .4byte gSharedMem + 0x170C4\n\
+_08114178: .4byte gSharedMem + 0x14804\n\
 _0811417C: .4byte 0x000020c4\n\
 _08114180: .4byte 0x000028c4\n\
 _08114184:\n\
@@ -2361,9 +2359,9 @@ _08114184:\n\
     bl sub_81141F0\n\
 _081141B4:\n\
     adds r6, 0x1\n\
-    ldr r4, _081141E8 @ =0x02014800\n\
+    ldr r4, _081141E8 @ =gSharedMem + 0x14800\n\
     ldr r1, [sp, 0x8]\n\
-    ldr r2, _081141EC @ =0x02014804\n\
+    ldr r2, _081141EC @ =gSharedMem + 0x14804\n\
     adds r0, r1, r2\n\
     ldrb r0, [r0]\n\
     cmp r6, r0\n\
@@ -2386,8 +2384,8 @@ _081141CE:\n\
     .align 2, 0\n\
 _081141E0: .4byte 0x000010c4\n\
 _081141E4: .4byte 0x000018c4\n\
-_081141E8: .4byte 0x02014800\n\
-_081141EC: .4byte 0x02014804\n\
+_081141E8: .4byte gSharedMem + 0x14800\n\
+_081141EC: .4byte gSharedMem + 0x14804\n\
         .syntax divided");
 }
 
@@ -2455,7 +2453,7 @@ void unref_sub_81143CC()
     sub sp, 0x14\n\
     movs r0, 0x1\n\
     str r0, [sp, 0x4]\n\
-    ldr r0, _08114408 @ =0x02014800\n\
+    ldr r0, _08114408 @ =gSharedMem + 0x14800\n\
     ldr r2, _0811440C @ =0x0000a0c4\n\
     adds r1, r0, r2\n\
     ldrb r3, [r1]\n\
@@ -2478,7 +2476,7 @@ _081143F2:\n\
     str r1, [sp, 0x8]\n\
     bl _08114D84\n\
     .align 2, 0\n\
-_08114408: .4byte 0x02014800\n\
+_08114408: .4byte gSharedMem + 0x14800\n\
 _0811440C: .4byte 0x0000a0c4\n\
 _08114410:\n\
     ldr r5, [sp]\n\
@@ -2585,7 +2583,7 @@ _081144EC: .4byte 0x000020c4\n\
 _081144F0:\n\
     movs r2, 0\n\
     str r2, [sp, 0x4]\n\
-    ldr r4, _08114568 @ =0x02014800\n\
+    ldr r4, _08114568 @ =gSharedMem + 0x14800\n\
     lsls r0, r3, 1\n\
     ldr r5, [sp]\n\
     lsls r1, r5, 6\n\
@@ -2645,7 +2643,7 @@ _08114548:\n\
     blt _0811453E\n\
     b _081148D2\n\
     .align 2, 0\n\
-_08114568: .4byte 0x02014800\n\
+_08114568: .4byte gSharedMem + 0x14800\n\
 _0811456C: .4byte 0x000060c4\n\
 _08114570: .4byte 0x000080c4\n\
 _08114574: .4byte 0x000030c4\n\
@@ -2719,7 +2717,7 @@ _081145FC: .4byte 0x000020c4\n\
 _08114600:\n\
     movs r2, 0\n\
     str r2, [sp, 0x4]\n\
-    ldr r4, _08114678 @ =0x02014800\n\
+    ldr r4, _08114678 @ =gSharedMem + 0x14800\n\
     lsls r0, r3, 1\n\
     ldr r5, [sp]\n\
     lsls r1, r5, 6\n\
@@ -2779,7 +2777,7 @@ _08114658:\n\
     blt _0811464E\n\
     b _081148D2\n\
     .align 2, 0\n\
-_08114678: .4byte 0x02014800\n\
+_08114678: .4byte gSharedMem + 0x14800\n\
 _0811467C: .4byte 0x000060c4\n\
 _08114680: .4byte 0x000080c4\n\
 _08114684: .4byte 0x000030c4\n\
@@ -2787,7 +2785,7 @@ _08114688: .4byte 0x000020c4\n\
 _0811468C:\n\
     movs r2, 0\n\
     str r2, [sp, 0x4]\n\
-    ldr r5, _081146C0 @ =0x02014800\n\
+    ldr r5, _081146C0 @ =gSharedMem + 0x14800\n\
     mov r0, r8\n\
     adds r4, r3, r0\n\
     ldr r1, _081146C4 @ =0x000030c4\n\
@@ -2812,12 +2810,12 @@ _081146B4:\n\
     strb r1, [r0]\n\
     b _081148D2\n\
     .align 2, 0\n\
-_081146C0: .4byte 0x02014800\n\
+_081146C0: .4byte gSharedMem + 0x14800\n\
 _081146C4: .4byte 0x000030c4\n\
 _081146C8:\n\
     movs r4, 0\n\
     str r4, [sp, 0x4]\n\
-    ldr r5, _081146FC @ =0x02014800\n\
+    ldr r5, _081146FC @ =gSharedMem + 0x14800\n\
     mov r0, r8\n\
     adds r4, r3, r0\n\
     ldr r1, _08114700 @ =0x000030c4\n\
@@ -2842,12 +2840,12 @@ _081146F0:\n\
     strb r1, [r0]\n\
     b _081148D2\n\
     .align 2, 0\n\
-_081146FC: .4byte 0x02014800\n\
+_081146FC: .4byte gSharedMem + 0x14800\n\
 _08114700: .4byte 0x000030c4\n\
 _08114704:\n\
     movs r4, 0\n\
     str r4, [sp, 0x4]\n\
-    ldr r5, _08114738 @ =0x02014800\n\
+    ldr r5, _08114738 @ =gSharedMem + 0x14800\n\
     mov r0, r8\n\
     adds r4, r3, r0\n\
     ldr r1, _0811473C @ =0x000030c4\n\
@@ -2872,12 +2870,12 @@ _0811472C:\n\
     strb r1, [r0]\n\
     b _081148D2\n\
     .align 2, 0\n\
-_08114738: .4byte 0x02014800\n\
+_08114738: .4byte gSharedMem + 0x14800\n\
 _0811473C: .4byte 0x000030c4\n\
 _08114740:\n\
     movs r4, 0\n\
     str r4, [sp, 0x4]\n\
-    ldr r5, _08114774 @ =0x02014800\n\
+    ldr r5, _08114774 @ =gSharedMem + 0x14800\n\
     mov r0, r8\n\
     adds r4, r3, r0\n\
     ldr r1, _08114778 @ =0x000030c4\n\
@@ -2902,12 +2900,12 @@ _08114768:\n\
     strb r1, [r0]\n\
     b _081148D2\n\
     .align 2, 0\n\
-_08114774: .4byte 0x02014800\n\
+_08114774: .4byte gSharedMem + 0x14800\n\
 _08114778: .4byte 0x000030c4\n\
 _0811477C:\n\
     movs r4, 0\n\
     str r4, [sp, 0x4]\n\
-    ldr r6, _081147B4 @ =0x02014800\n\
+    ldr r6, _081147B4 @ =gSharedMem + 0x14800\n\
     mov r0, r8\n\
     adds r5, r3, r0\n\
     ldr r1, _081147B8 @ =0x000030c4\n\
@@ -2933,7 +2931,7 @@ _0811477C:\n\
     strb r4, [r0]\n\
     b _08114844\n\
     .align 2, 0\n\
-_081147B4: .4byte 0x02014800\n\
+_081147B4: .4byte gSharedMem + 0x14800\n\
 _081147B8: .4byte 0x000030c4\n\
 _081147BC: .4byte 0x000020c4\n\
 _081147C0:\n\
@@ -2948,7 +2946,7 @@ _081147C0:\n\
 _081147D0:\n\
     movs r1, 0\n\
     str r1, [sp, 0x4]\n\
-    ldr r6, _08114804 @ =0x02014800\n\
+    ldr r6, _08114804 @ =gSharedMem + 0x14800\n\
     mov r2, r8\n\
     adds r5, r3, r2\n\
     ldr r0, _08114808 @ =0x000030c4\n\
@@ -2972,13 +2970,13 @@ _081147D0:\n\
     movs r1, 0x2\n\
     b _08114842\n\
     .align 2, 0\n\
-_08114804: .4byte 0x02014800\n\
+_08114804: .4byte gSharedMem + 0x14800\n\
 _08114808: .4byte 0x000030c4\n\
 _0811480C: .4byte 0x000020c4\n\
 _08114810:\n\
     movs r0, 0\n\
     str r0, [sp, 0x4]\n\
-    ldr r6, _0811484C @ =0x02014800\n\
+    ldr r6, _0811484C @ =gSharedMem + 0x14800\n\
     mov r1, r8\n\
     adds r5, r3, r1\n\
     ldr r2, _08114850 @ =0x000030c4\n\
@@ -3007,13 +3005,13 @@ _08114844:\n\
     mov r10, r5\n\
     b _081148D2\n\
     .align 2, 0\n\
-_0811484C: .4byte 0x02014800\n\
+_0811484C: .4byte gSharedMem + 0x14800\n\
 _08114850: .4byte 0x000030c4\n\
 _08114854: .4byte 0x000020c4\n\
 _08114858:\n\
     movs r0, 0\n\
     str r0, [sp, 0x4]\n\
-    ldr r6, _08114894 @ =0x02014800\n\
+    ldr r6, _08114894 @ =gSharedMem + 0x14800\n\
     mov r1, r8\n\
     adds r5, r3, r1\n\
     ldr r2, _08114898 @ =0x000030c4\n\
@@ -3042,7 +3040,7 @@ _08114882:\n\
     mov r10, r4\n\
     b _081148D2\n\
     .align 2, 0\n\
-_08114894: .4byte 0x02014800\n\
+_08114894: .4byte gSharedMem + 0x14800\n\
 _08114898: .4byte 0x000030c4\n\
 _0811489C: .4byte 0x000020c4\n\
 _081148A0:\n\
@@ -3075,7 +3073,7 @@ _081148C4:\n\
     adds r2, r3, 0x1\n\
     mov r10, r2\n\
 _081148D2:\n\
-    ldr r0, _081148F4 @ =0x02014800\n\
+    ldr r0, _081148F4 @ =gSharedMem + 0x14800\n\
     mov r4, r8\n\
     adds r1, r3, r4\n\
     ldr r5, _081148F8 @ =0x000008c4\n\
@@ -3093,7 +3091,7 @@ _081148E8:\n\
     ldr r0, [r0]\n\
     mov pc, r0\n\
     .align 2, 0\n\
-_081148F4: .4byte 0x02014800\n\
+_081148F4: .4byte gSharedMem + 0x14800\n\
 _081148F8: .4byte 0x000008c4\n\
 _081148FC: .4byte _08114900\n\
     .align 2, 0\n\
@@ -3179,7 +3177,7 @@ _081149B4: .4byte 0x000028c4\n\
 _081149B8:\n\
     movs r2, 0\n\
     str r2, [sp, 0x4]\n\
-    ldr r4, _08114A28 @ =0x02014800\n\
+    ldr r4, _08114A28 @ =gSharedMem + 0x14800\n\
     lsls r0, r3, 1\n\
     ldr r5, [sp]\n\
     lsls r1, r5, 6\n\
@@ -3235,7 +3233,7 @@ _08114A0C:\n\
     blt _08114A02\n\
     b _08114D76\n\
     .align 2, 0\n\
-_08114A28: .4byte 0x02014800\n\
+_08114A28: .4byte gSharedMem + 0x14800\n\
 _08114A2C: .4byte 0x000070c4\n\
 _08114A30: .4byte 0x000090c4\n\
 _08114A34: .4byte 0x000038c4\n\
@@ -3308,7 +3306,7 @@ _08114ABC: .4byte 0x000028c4\n\
 _08114AC0:\n\
     movs r2, 0\n\
     str r2, [sp, 0x4]\n\
-    ldr r4, _08114B30 @ =0x02014800\n\
+    ldr r4, _08114B30 @ =gSharedMem + 0x14800\n\
     lsls r0, r3, 1\n\
     ldr r5, [sp]\n\
     lsls r1, r5, 6\n\
@@ -3364,7 +3362,7 @@ _08114B14:\n\
     blt _08114B0A\n\
     b _08114D76\n\
     .align 2, 0\n\
-_08114B30: .4byte 0x02014800\n\
+_08114B30: .4byte gSharedMem + 0x14800\n\
 _08114B34: .4byte 0x000070c4\n\
 _08114B38: .4byte 0x000090c4\n\
 _08114B3C: .4byte 0x000038c4\n\
@@ -3372,7 +3370,7 @@ _08114B40: .4byte 0x000028c4\n\
 _08114B44:\n\
     movs r2, 0\n\
     str r2, [sp, 0x4]\n\
-    ldr r5, _08114B70 @ =0x02014800\n\
+    ldr r5, _08114B70 @ =gSharedMem + 0x14800\n\
     mov r0, r8\n\
     adds r4, r3, r0\n\
     ldr r1, _08114B74 @ =0x000038c4\n\
@@ -3392,13 +3390,13 @@ _08114B64:\n\
     movs r1, 0x9\n\
     b _08114D74\n\
     .align 2, 0\n\
-_08114B70: .4byte 0x02014800\n\
+_08114B70: .4byte gSharedMem + 0x14800\n\
 _08114B74: .4byte 0x000038c4\n\
 _08114B78: .4byte 0x000008c4\n\
 _08114B7C:\n\
     movs r4, 0\n\
     str r4, [sp, 0x4]\n\
-    ldr r5, _08114BA8 @ =0x02014800\n\
+    ldr r5, _08114BA8 @ =gSharedMem + 0x14800\n\
     mov r0, r8\n\
     adds r4, r3, r0\n\
     ldr r1, _08114BAC @ =0x000038c4\n\
@@ -3418,13 +3416,13 @@ _08114B9C:\n\
     movs r1, 0xA\n\
     b _08114D74\n\
     .align 2, 0\n\
-_08114BA8: .4byte 0x02014800\n\
+_08114BA8: .4byte gSharedMem + 0x14800\n\
 _08114BAC: .4byte 0x000038c4\n\
 _08114BB0: .4byte 0x000008c4\n\
 _08114BB4:\n\
     movs r4, 0\n\
     str r4, [sp, 0x4]\n\
-    ldr r5, _08114BE0 @ =0x02014800\n\
+    ldr r5, _08114BE0 @ =gSharedMem + 0x14800\n\
     mov r0, r8\n\
     adds r4, r3, r0\n\
     ldr r1, _08114BE4 @ =0x000038c4\n\
@@ -3444,13 +3442,13 @@ _08114BD4:\n\
     movs r1, 0xB\n\
     b _08114D74\n\
     .align 2, 0\n\
-_08114BE0: .4byte 0x02014800\n\
+_08114BE0: .4byte gSharedMem + 0x14800\n\
 _08114BE4: .4byte 0x000038c4\n\
 _08114BE8: .4byte 0x000008c4\n\
 _08114BEC:\n\
     movs r4, 0\n\
     str r4, [sp, 0x4]\n\
-    ldr r5, _08114C18 @ =0x02014800\n\
+    ldr r5, _08114C18 @ =gSharedMem + 0x14800\n\
     mov r0, r8\n\
     adds r4, r3, r0\n\
     ldr r1, _08114C1C @ =0x000038c4\n\
@@ -3470,13 +3468,13 @@ _08114C0C:\n\
     movs r1, 0xC\n\
     b _08114D74\n\
     .align 2, 0\n\
-_08114C18: .4byte 0x02014800\n\
+_08114C18: .4byte gSharedMem + 0x14800\n\
 _08114C1C: .4byte 0x000038c4\n\
 _08114C20: .4byte 0x000008c4\n\
 _08114C24:\n\
     movs r4, 0\n\
     str r4, [sp, 0x4]\n\
-    ldr r6, _08114C58 @ =0x02014800\n\
+    ldr r6, _08114C58 @ =gSharedMem + 0x14800\n\
     mov r0, r8\n\
     adds r5, r3, r0\n\
     ldr r1, _08114C5C @ =0x000038c4\n\
@@ -3500,7 +3498,7 @@ _08114C24:\n\
     strb r5, [r0]\n\
     b _08114D76\n\
     .align 2, 0\n\
-_08114C58: .4byte 0x02014800\n\
+_08114C58: .4byte gSharedMem + 0x14800\n\
 _08114C5C: .4byte 0x000038c4\n\
 _08114C60: .4byte 0x000028c4\n\
 _08114C64: .4byte 0x000008c4\n\
@@ -3515,7 +3513,7 @@ _08114C74: .4byte 0x000008c4\n\
 _08114C78:\n\
     movs r2, 0\n\
     str r2, [sp, 0x4]\n\
-    ldr r6, _08114CA8 @ =0x02014800\n\
+    ldr r6, _08114CA8 @ =gSharedMem + 0x14800\n\
     mov r4, r8\n\
     adds r5, r3, r4\n\
     ldr r0, _08114CAC @ =0x000038c4\n\
@@ -3537,14 +3535,14 @@ _08114C78:\n\
     movs r1, 0x2\n\
     b _08114D74\n\
     .align 2, 0\n\
-_08114CA8: .4byte 0x02014800\n\
+_08114CA8: .4byte gSharedMem + 0x14800\n\
 _08114CAC: .4byte 0x000038c4\n\
 _08114CB0: .4byte 0x000028c4\n\
 _08114CB4: .4byte 0x000008c4\n\
 _08114CB8:\n\
     movs r2, 0\n\
     str r2, [sp, 0x4]\n\
-    ldr r6, _08114CE8 @ =0x02014800\n\
+    ldr r6, _08114CE8 @ =gSharedMem + 0x14800\n\
     mov r4, r8\n\
     adds r5, r3, r4\n\
     ldr r0, _08114CEC @ =0x000038c4\n\
@@ -3566,14 +3564,14 @@ _08114CB8:\n\
     movs r1, 0x3\n\
     b _08114D74\n\
     .align 2, 0\n\
-_08114CE8: .4byte 0x02014800\n\
+_08114CE8: .4byte gSharedMem + 0x14800\n\
 _08114CEC: .4byte 0x000038c4\n\
 _08114CF0: .4byte 0x000028c4\n\
 _08114CF4: .4byte 0x000008c4\n\
 _08114CF8:\n\
     movs r2, 0\n\
     str r2, [sp, 0x4]\n\
-    ldr r6, _08114D2C @ =0x02014800\n\
+    ldr r6, _08114D2C @ =gSharedMem + 0x14800\n\
     mov r4, r8\n\
     adds r5, r3, r4\n\
     ldr r0, _08114D30 @ =0x000038c4\n\
@@ -3598,7 +3596,7 @@ _08114D1E:\n\
     strb r4, [r0]\n\
     b _08114D76\n\
     .align 2, 0\n\
-_08114D2C: .4byte 0x02014800\n\
+_08114D2C: .4byte gSharedMem + 0x14800\n\
 _08114D30: .4byte 0x000038c4\n\
 _08114D34: .4byte 0x000028c4\n\
 _08114D38: .4byte 0x000008c4\n\
@@ -3635,7 +3633,7 @@ _08114D74:\n\
     strb r1, [r0]\n\
 _08114D76:\n\
     mov r3, r10\n\
-    ldr r2, _08114DB0 @ =0x02014800\n\
+    ldr r2, _08114DB0 @ =gSharedMem + 0x14800\n\
     adds r0, r2, 0\n\
     adds r0, 0x84\n\
     ldr r4, [sp]\n\
@@ -3664,7 +3662,7 @@ _08114D9A:\n\
     bx r1\n\
     .align 2, 0\n\
 _08114DAC: .4byte 0x000008c4\n\
-_08114DB0: .4byte 0x02014800\n\
+_08114DB0: .4byte gSharedMem + 0x14800\n\
         .syntax divided");
 }
 
@@ -3703,7 +3701,7 @@ void sub_8114E48()
     adds r4, r0, 0\n\
     lsls r1, 24\n\
     lsrs r6, r1, 24\n\
-    ldr r1, _08114E6C @ =0x02014800\n\
+    ldr r1, _08114E6C @ =gSharedMem + 0x14800\n\
     ldr r2, _08114E70 @ =0x0000a0c4\n\
     adds r0, r1, r2\n\
     ldrb r0, [r0]\n\
@@ -3719,7 +3717,7 @@ _08114E60:\n\
     movs r1, 0x1\n\
     b _08114EA6\n\
     .align 2, 0\n\
-_08114E6C: .4byte 0x02014800\n\
+_08114E6C: .4byte gSharedMem + 0x14800\n\
 _08114E70: .4byte 0x0000a0c4\n\
 _08114E74:\n\
     subs r0, r4, 0x1\n\
@@ -3831,7 +3829,7 @@ _08114F26:\n\
     beq _08114F7C\n\
     subs r0, r4, 0x1\n\
     lsls r5, r0, 7\n\
-    ldr r0, _08114F68 @ =0x020188c4\n\
+    ldr r0, _08114F68 @ =gSharedMem + 0x188C4\n\
     mov r12, r0\n\
 _08114F42:\n\
     asrs r0, r3, 1\n\
@@ -3854,7 +3852,7 @@ _08114F5E:\n\
     b _08114FCA\n\
     .align 2, 0\n\
 _08114F64: .4byte 0x000008c4\n\
-_08114F68: .4byte 0x020188c4\n\
+_08114F68: .4byte gSharedMem + 0x188C4\n\
 _08114F6C:\n\
     ldrb r1, [r1]\n\
     movs r0, 0xF\n\
@@ -3874,7 +3872,7 @@ _08114F7C:\n\
     beq _08114FC8\n\
     adds r0, r4, 0x1\n\
     lsls r5, r0, 7\n\
-    ldr r6, _08114FB0 @ =0x020188c4\n\
+    ldr r6, _08114FB0 @ =gSharedMem + 0x188C4\n\
     adds r2, r1, 0\n\
 _08114F90:\n\
     asrs r0, r3, 1\n\
@@ -3893,7 +3891,7 @@ _08114F90:\n\
     beq _08114FBE\n\
     b _08114F5E\n\
     .align 2, 0\n\
-_08114FB0: .4byte 0x020188c4\n\
+_08114FB0: .4byte gSharedMem + 0x188C4\n\
 _08114FB4:\n\
     ldrb r1, [r1]\n\
     movs r0, 0xF\n\

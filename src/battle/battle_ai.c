@@ -11,6 +11,7 @@
 #include "rom_8077ABC.h"
 #include "species.h"
 #include "util.h"
+#include "ewram.h"
 
 extern u16 gBattleTypeFlags;
 extern u16 gBattleWeather;
@@ -952,8 +953,8 @@ static void BattleAICmd_is_most_powerful_move(void)
      && sDiscouragedPowerfulMoveEffects[i] == 0xFFFF)
     {
         gDynamicBasePower = 0;
-        ewram[0x1601C] = 0; // why is this a manual array?
-        ewram[0x1601F] = 1;
+        eDynamicMoveType = 0;
+        eDmgMultiplier = 1;
         gBattleMoveFlags = 0;
         gCritMultiplier = 1;
 
@@ -1016,7 +1017,7 @@ static void BattleAICmd_is_most_powerful_move(void)
     ldrh r1, [r0]\n\
     ldr r4, _0810832C @ =0x0000ffff\n\
     ldr r6, _08108330 @ =gBattleMoves\n\
-    ldr r5, _08108334 @ =0x02016800\n\
+    ldr r5, _08108334 @ =gSharedMem + 0x16800\n\
     cmp r1, r4\n\
     beq _0810822E\n\
     ldrh r1, [r5, 0x2]\n\
@@ -1149,7 +1150,7 @@ _081082BA:\n\
     mov r4, sp\n\
     add r4, r8\n\
     ldr r2, _08108358 @ =gBattleMoveDamage\n\
-    ldr r0, _08108334 @ =0x02016800\n\
+    ldr r0, _08108334 @ =gSharedMem + 0x16800\n\
     adds r0, 0x18\n\
     adds r0, r6, r0\n\
     ldrb r1, [r0]\n\
@@ -1167,7 +1168,7 @@ _081082BA:\n\
 _08108328: .4byte sDiscouragedPowerfulMoveEffects\n\
 _0810832C: .4byte 0x0000ffff\n\
 _08108330: .4byte gBattleMoves\n\
-_08108334: .4byte 0x02016800\n\
+_08108334: .4byte gSharedMem + 0x16800\n\
 _08108338: .4byte gDynamicBasePower\n\
 _0810833C: .4byte 0xfffff81c\n\
 _08108340: .4byte gBattleMoveFlags\n\
@@ -1187,7 +1188,7 @@ _08108364:\n\
     cmp r6, 0x3\n\
     ble _08108276\n\
     movs r6, 0\n\
-    ldr r1, _081083A4 @ =0x02016800\n\
+    ldr r1, _081083A4 @ =gSharedMem + 0x16800\n\
     ldrb r0, [r1, 0x1]\n\
     lsls r0, 2\n\
     add r0, sp\n\
@@ -1218,7 +1219,7 @@ _0810839A:\n\
     str r0, [r5, 0x8]\n\
     b _081083B8\n\
     .align 2, 0\n\
-_081083A4: .4byte 0x02016800\n\
+_081083A4: .4byte gSharedMem + 0x16800\n\
 _081083A8: .4byte gAIScriptPtr\n\
 _081083AC:\n\
     movs r0, 0x1\n\
@@ -1998,8 +1999,7 @@ static void BattleAICmd_get_used_item(void)
     else
         index = gBankTarget;
 
-    // this hack and a half matches. whatever. i dont care. someone else fix this mess later. PS: still cant fix this.
-    AI_THINKING_STRUCT->funcResult = ewram[MULTI_DIM_ARR(index, B_16, 0x160CC)];
+    AI_THINKING_STRUCT->funcResult = AI_ARRAY_160CC(index);
 
     gAIScriptPtr += 2;
 }

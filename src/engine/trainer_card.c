@@ -20,6 +20,7 @@
 #include "task.h"
 #include "unknown_task.h"
 #include "util.h"
+#include "ewram.h"
 
 typedef void (*Callback)(void);
 
@@ -47,19 +48,9 @@ struct Struct2000000
     /*0x9C*/ u8 language; // 0x9C
 };
 
-extern u8 ewram[];
-#define ewram0 (*(struct Struct2000000 *)(ewram))
-
 extern struct LinkPlayerMapObject gLinkPlayerMapObjects[];
 
 EWRAM_DATA struct TrainerCard gTrainerCards[4] = {0};
-
-struct UnknownStruct1
-{
-    u16 filler0[0x3C0];
-    u16 unk780[160];
-};
-extern struct UnknownStruct1 gUnknown_03004DE0;
 
 extern const u8 gBadgesTiles[];
 extern const u16 gUnknown_083B5F0C[];
@@ -70,7 +61,7 @@ extern const u16 gUnknown_083B5F8C[][4];
 
 const u8 gBadgesTiles[] = INCBIN_U8("graphics/trainer_card/badges.4bpp");
 // XXX: what is this?
-u8 *const ewram_ = ewram;
+u8 *const ewram_ = gSharedMem;
 
 bool8 sub_8093864(struct Task *);
 bool8 sub_80938A8(struct Task *);
@@ -189,14 +180,14 @@ void sub_8093110(Callback arg1)
 {
     sub_80932AC(arg1);
     SetMainCallback2(sub_8093174);
-    ewram0.language = GAME_LANGUAGE;
+    ewram0_2.language = GAME_LANGUAGE;
 }
 
 void sub_8093130(u8 playerIndex, Callback arg2)
 {
     sub_80932E4(playerIndex, arg2);
     SetMainCallback2(sub_8093174);
-    ewram0.language = gLinkPlayers[gLinkPlayerMapObjects[playerIndex].linkPlayerId].language;
+    ewram0_2.language = gLinkPlayers[gLinkPlayerMapObjects[playerIndex].linkPlayerId].language;
 }
 
 static void sub_8093174(void)
@@ -258,14 +249,14 @@ static void sub_8093254(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
-    ewram0.var_6++;
-    if (ewram0.var_6 >= 60)
+    ewram0_2.var_6++;
+    if (ewram0_2.var_6 >= 60)
     {
-        ewram0.var_6 = 0;
-        ewram0.var_5 ^= 1;
+        ewram0_2.var_6 = 0;
+        ewram0_2.var_5 ^= 1;
     }
-    if (ewram0.var_4)
-        DmaCopy16(3, gUnknown_03004DE0.filler0, gUnknown_03004DE0.unk780, sizeof(gUnknown_03004DE0.unk780));
+    if (ewram0_2.var_4)
+        DmaCopy16(3, &gUnknown_03004DE0[0], &gUnknown_03004DE0[1], 0x140);
 }
 
 static void sub_80932AC(Callback callBack)
@@ -290,20 +281,20 @@ void sub_8093324(void)
 {
     u8 taskId = FindTaskIdByFunc(nullsub_60);
     struct Task *task = &gTasks[taskId];
-    ewram0.var_1 = task->data[TD_0];
+    ewram0_2.var_1 = task->data[TD_0];
 
-    LoadWordFromTwoHalfwords((u16 *)&task->data[TD_CALLBACK], (u32 *)&ewram0.var_60);
+    LoadWordFromTwoHalfwords((u16 *)&task->data[TD_CALLBACK], (u32 *)&ewram0_2.var_60);
 
-    if (ewram0.var_1)
+    if (ewram0_2.var_1)
     {
         struct TrainerCard(*trainerCards)[4] = &gTrainerCards;
         s16 var = task->data[TD_1];
         struct TrainerCard *dest = &(*trainerCards)[var];
-        memcpy(&ewram0.var_64, dest, sizeof(struct TrainerCard));
+        memcpy(&ewram0_2.var_64, dest, sizeof(struct TrainerCard));
     }
     else
     {
-        sub_8093390(&ewram0.var_64);
+        sub_8093390(&ewram0_2.var_64);
     }
 }
 
@@ -502,52 +493,52 @@ static void sub_8093688(void)
     u8 i;
 
     sub_8093324();
-    ewram0.var_0 = 0;
-    ewram0.var_3 = 0;
-    ewram0.var_4 = FALSE;
-    ewram0.var_2 = ewram0.var_64.stars;
-    ewram0.var_5 = 0;
-    ewram0.var_6 = 0;
+    ewram0_2.var_0 = 0;
+    ewram0_2.var_3 = 0;
+    ewram0_2.var_4 = FALSE;
+    ewram0_2.var_2 = ewram0_2.var_64.stars;
+    ewram0_2.var_5 = 0;
+    ewram0_2.var_6 = 0;
     for (i = 0; i < 4; i++)
-        EasyChat_GetWordText(ewram0.var_20[i], ewram0.var_64.var_28[i]);
+        EasyChat_GetWordText(ewram0_2.var_20[i], ewram0_2.var_64.var_28[i]);
     sub_80936D4();
 }
 
 void sub_80936D4(void)
 {
-    ewram0.var_7 = 0;
-    ewram0.var_8 = 0;
-    ewram0.var_9 = 0;
-    ewram0.var_a = 0;
-    ewram0.var_b = 0;
-    ewram0.var_c = 0;
-    ewram0.var_d = 0;
-    memset(ewram0.var_e, 0, sizeof(ewram0.var_e));
+    ewram0_2.var_7 = 0;
+    ewram0_2.var_8 = 0;
+    ewram0_2.var_9 = 0;
+    ewram0_2.var_a = 0;
+    ewram0_2.var_b = 0;
+    ewram0_2.var_c = 0;
+    ewram0_2.var_d = 0;
+    memset(ewram0_2.var_e, 0, sizeof(ewram0_2.var_e));
 
-    if (ewram0.var_64.hasPokedex)
-        ewram0.var_7++;
+    if (ewram0_2.var_64.hasPokedex)
+        ewram0_2.var_7++;
 
-    if (ewram0.var_64.firstHallOfFameA != 0
-     || ewram0.var_64.firstHallOfFameB != 0
-     || ewram0.var_64.firstHallOfFameC != 0)
-        ewram0.var_8++;
+    if (ewram0_2.var_64.firstHallOfFameA != 0
+     || ewram0_2.var_64.firstHallOfFameB != 0
+     || ewram0_2.var_64.firstHallOfFameC != 0)
+        ewram0_2.var_8++;
 
-    if (ewram0.var_64.linkBattleWins != 0 || ewram0.var_64.linkBattleLosses != 0)
-        ewram0.var_9++;
+    if (ewram0_2.var_64.linkBattleWins != 0 || ewram0_2.var_64.linkBattleLosses != 0)
+        ewram0_2.var_9++;
 
-    if (ewram0.var_64.battleTowerWins != 0 || ewram0.var_64.battleTowerLosses != 0)
-        ewram0.var_a++;
+    if (ewram0_2.var_64.battleTowerWins != 0 || ewram0_2.var_64.battleTowerLosses != 0)
+        ewram0_2.var_a++;
 
-    if (ewram0.var_64.contestsWithFriends != 0)
-        ewram0.var_b++;
+    if (ewram0_2.var_64.contestsWithFriends != 0)
+        ewram0_2.var_b++;
 
-    if (ewram0.var_64.pokeblocksWithFriends != 0)
-        ewram0.var_c++;
+    if (ewram0_2.var_64.pokeblocksWithFriends != 0)
+        ewram0_2.var_c++;
 
-    if (ewram0.var_64.pokemonTrades != 0)
-        ewram0.var_d++;
+    if (ewram0_2.var_64.pokemonTrades != 0)
+        ewram0_2.var_d++;
 
-    if (!ewram0.var_1)
+    if (!ewram0_2.var_1)
     {
         u32 badgeFlag;
         int i = 0;
@@ -556,7 +547,7 @@ void sub_80936D4(void)
         while (1)
         {
             if (FlagGet(badgeFlag))
-                ewram0.var_e[i]++;
+                ewram0_2.var_e[i]++;
             badgeFlag++;
             i++;
             if (badgeFlag > BADGE08_GET)
@@ -613,24 +604,24 @@ static void sub_809380C()
 
 static void sub_809382C(u8 taskId)
 {
-    while (gUnknown_083B5EBC[ewram0.var_0](&gTasks[taskId]) != 0)
+    while (gUnknown_083B5EBC[ewram0_2.var_0](&gTasks[taskId]) != 0)
         ;
 }
 
 bool8 sub_8093864(struct Task *task)
 {
-    ewram0.var_5 = gSaveBlock2.playTimeSeconds & 1;
-    ewram0.var_6 = gSaveBlock2.playTimeVBlanks;
+    ewram0_2.var_5 = gSaveBlock2.playTimeSeconds & 1;
+    ewram0_2.var_6 = gSaveBlock2.playTimeVBlanks;
     sub_80939A4();
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
-    ewram0.var_0++;
+    ewram0_2.var_0++;
     return FALSE;
 }
 
 bool8 sub_80938A8(struct Task *task)
 {
     if (!gPaletteFade.active)
-        ewram0.var_0++;
+        ewram0_2.var_0++;
     return FALSE;
 }
 
@@ -638,19 +629,19 @@ bool8 sub_80938CC(struct Task *task)
 {
     if (gMain.newKeys & B_BUTTON)
     {
-        ewram0.var_0 = 5;
+        ewram0_2.var_0 = 5;
         return TRUE;
     }
     else if (gMain.newKeys & A_BUTTON)
     {
-        if (ewram0.var_3 != 0)
+        if (ewram0_2.var_3 != 0)
         {
-            ewram0.var_0 = 5;
+            ewram0_2.var_0 = 5;
         }
         else
         {
-            ewram0.var_3 ^= 1;
-            ewram0.var_0 = 3;
+            ewram0_2.var_3 ^= 1;
+            ewram0_2.var_0 = 3;
         }
         return TRUE;
     }
@@ -661,14 +652,14 @@ bool8 sub_8093918(struct Task *task)
 {
     sub_8093A28();
     PlaySE(SE_CARD);
-    ewram0.var_0++;
+    ewram0_2.var_0++;
     return FALSE;
 }
 
 bool8 sub_8093938(struct Task *task)
 {
     if (sub_8093A48())
-        ewram0.var_0 = 2;
+        ewram0_2.var_0 = 2;
     return FALSE;
 }
 
@@ -676,14 +667,14 @@ bool8 sub_8093954(struct Task *task)
 {
     sub_80939C0();
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
-    ewram0.var_0++;
+    ewram0_2.var_0++;
     return FALSE;
 }
 
 bool8 sub_8093980(struct Task *task)
 {
     if (!gPaletteFade.active)
-        SetMainCallback2((MainCallback)ewram0.var_60);
+        SetMainCallback2((MainCallback)ewram0_2.var_60);
     return FALSE;
 }
 
@@ -706,9 +697,9 @@ static void sub_80939DC(u8 taskId)
     u8 buffer[32];
     struct Task *task = &gTasks[taskId];
 
-    if (ewram0.var_5 != task->data[TD_1])
+    if (ewram0_2.var_5 != task->data[TD_1])
     {
-        task->data[TD_1] = ewram0.var_5;
+        task->data[TD_1] = ewram0_2.var_5;
         task->data[TD_0] ^= TRUE;
     }
     TrainerCard_Front_PrintPlayTime(buffer, task->data[TD_0]);
@@ -739,14 +730,14 @@ static void sub_8093A68(u8 taskId)
 
 bool8 sub_8093AA0(struct Task *task)
 {
-    s32 i;
+    u32 i;
 
-    ewram0.var_4 = FALSE;
+    ewram0_2.var_4 = FALSE;
     dp12_8087EA4();
-    for (i = 0; i < ARRAY_COUNT(gUnknown_03004DE0.unk780); i++)
-        gUnknown_03004DE0.unk780[i] = -4;
+    for (i = 0; i < 0xA0; i++)
+        gUnknown_03004DE0[1][i] = -4;
     SetHBlankCallback(sub_8093D7C);
-    ewram0.var_4 = TRUE;
+    ewram0_2.var_4 = TRUE;
     task->data[0]++;
     return FALSE;
 }
@@ -763,7 +754,7 @@ bool8 sub_8093AF0(struct Task *task)
     u32 sp0;
     s16 i;
 
-    ewram0.var_4 = 0;
+    ewram0_2.var_4 = 0;
     task->data[1] += 3;
     if (task->data[1] > 79)
         task->data[1] = 79;
@@ -792,7 +783,7 @@ bool8 sub_8093AF0(struct Task *task)
     }
     for (; i < 160; i++)
         gUnknown_03004DE0.filler0[i] = -4 + (u16)(r10 >> 16);
-    ewram0.var_4 = 1;
+    ewram0_2.var_4 = 1;
     if (task->data[1] > 0x4A)
         task->data[0]++;
     return FALSE;
@@ -810,7 +801,7 @@ bool8 sub_8093AF0(struct Task *task)
     push {r5-r7}\n\
     sub sp, 0x4\n\
     mov r8, r0\n\
-    ldr r1, _08093BFC @ =0x02000000\n\
+    ldr r1, _08093BFC @ =gSharedMem\n\
     movs r0, 0\n\
     strb r0, [r1, 0x4]\n\
     mov r2, r8\n\
@@ -923,7 +914,7 @@ _08093BBE:\n\
     ble _08093BBE\n\
 _08093BD4:\n\
     movs r0, 0x1\n\
-    ldr r1, _08093BFC @ =0x02000000\n\
+    ldr r1, _08093BFC @ =gSharedMem\n\
     strb r0, [r1, 0x4]\n\
     mov r2, r8\n\
     movs r4, 0xA\n\
@@ -944,7 +935,7 @@ _08093BEA:\n\
     pop {r1}\n\
     bx r1\n\
     .align 2, 0\n\
-_08093BFC: .4byte 0x02000000\n\
+_08093BFC: .4byte gSharedMem\n\
 _08093C00: .4byte 0xffff0000\n\
 _08093C04: .4byte gUnknown_03004DE0\n\
 _08093C08: .4byte 0x0000fffc\n\
@@ -955,7 +946,7 @@ bool8 sub_8093C0C(struct Task *task)
 {
     sub_80939C0();
     sub_8093DAC();
-    if (!ewram0.var_3)
+    if (!ewram0_2.var_3)
         sub_80939A4();
     task->data[0]++;
     return TRUE;
@@ -972,7 +963,7 @@ bool8 sub_8093C38(struct Task *task)
     push {r5-r7}\n\
     sub sp, 0x4\n\
     mov r8, r0\n\
-    ldr r1, _08093D40 @ =0x02000000\n\
+    ldr r1, _08093D40 @ =gSharedMem\n\
     movs r2, 0\n\
     strb r2, [r1, 0x4]\n\
     ldrh r0, [r0, 0xA]\n\
@@ -1083,7 +1074,7 @@ _08093D02:\n\
     ble _08093D02\n\
 _08093D18:\n\
     movs r0, 0x1\n\
-    ldr r1, _08093D40 @ =0x02000000\n\
+    ldr r1, _08093D40 @ =gSharedMem\n\
     strb r0, [r1, 0x4]\n\
     mov r2, r8\n\
     movs r3, 0xA\n\
@@ -1104,7 +1095,7 @@ _08093D2E:\n\
     pop {r1}\n\
     bx r1\n\
     .align 2, 0\n\
-_08093D40: .4byte 0x02000000\n\
+_08093D40: .4byte gSharedMem\n\
 _08093D44: .4byte 0xffff0000\n\
 _08093D48: .4byte gUnknown_03004DE0\n\
 _08093D4C: .4byte 0x0000fffc\n\
@@ -1115,7 +1106,7 @@ bool8 sub_8093D50(struct Task *task)
 {
     u8 taskId;
 
-    ewram0.var_4 = FALSE;
+    ewram0_2.var_4 = FALSE;
     SetHBlankCallback(NULL);
     sub_8093E04();
     taskId = FindTaskIdByFunc(sub_8093A68);
@@ -1125,7 +1116,7 @@ bool8 sub_8093D50(struct Task *task)
 
 void sub_8093D7C(void)
 {
-    u16 bgVOffset = gUnknown_03004DE0.unk780[REG_VCOUNT & 0xFF];
+    u16 bgVOffset = gUnknown_03004DE0[1][REG_VCOUNT & 0xFF];
 
     REG_BG0VOFS = bgVOffset;
     REG_BG1VOFS = bgVOffset;
@@ -1134,7 +1125,7 @@ void sub_8093D7C(void)
 
 static void sub_8093DAC(void)
 {
-    if (ewram0.var_3)
+    if (ewram0_2.var_3)
         sub_8093DEC();
     else
         sub_8093DC8();
@@ -1203,23 +1194,23 @@ extern const u16 *const gUnknown_083B5EF8[];
 
 void sub_8093EA0(void)
 {
-    LoadPalette(gUnknown_083B5EF8[ewram0.var_2], 0, 48 * 2);
+    LoadPalette(gUnknown_083B5EF8[ewram0_2.var_2], 0, 48 * 2);
     LoadPalette(gBadgesPalette, 48, 16 * 2);
     LoadPalette(gUnknown_083B5F4C, 64, 16 * 2);
-    if (ewram0.var_64.gender != MALE)
+    if (ewram0_2.var_64.gender != MALE)
         LoadPalette(gUnknown_083B5F0C, 16, 16 * 2);
 }
 
 static void sub_8093EF8(void)
 {
-    LoadTrainerGfx_TrainerCard(ewram0.var_64.gender, 80, (void *)(VRAM + 0x1880));
+    LoadTrainerGfx_TrainerCard(ewram0_2.var_64.gender, 80, (void *)(VRAM + 0x1880));
 }
 
 static void sub_8093F14(void)
 {
     const void *arr[] = {gUnknown_08E8CAC0, gUnknown_08E8D4C0};
 
-    CpuFastSet(arr[ewram0.var_1], (void *)(VRAM + 0x4800), 0x140);
+    CpuFastSet(arr[ewram0_2.var_1], (void *)(VRAM + 0x4800), 0x140);
 }
 
 // I don't really know where to put the data. It's in such a weird order.
@@ -1269,7 +1260,7 @@ static void sub_8093FD0(void)
 {
     u16 *ptr = (u16 *)(VRAM + 0x4000);
     s16 i = 15;
-    s16 var = 15 + ewram0.var_2;
+    s16 var = 15 + ewram0_2.var_2;
 
     while (i < var)
     {
@@ -1285,7 +1276,7 @@ static void sub_8093FD0(void)
 
 static void sub_8094038(void)
 {
-    if (ewram0.var_1 == 0)
+    if (ewram0_2.var_1 == 0)
     {
         u16 *ptr = (u16 *)(VRAM + 0x4000);
         s16 i;
@@ -1293,7 +1284,7 @@ static void sub_8094038(void)
 
         for (i = 0, r2 = 4; i < 8; i++, r2 += 3)
         {
-            if (ewram0.var_e[i] != 0)
+            if (ewram0_2.var_e[i] != 0)
             {
                 ptr[15 * 32 + r2 + 0] = gUnknown_083B5F8C[i][0] | 0x3000;
                 ptr[15 * 32 + r2 + 1] = gUnknown_083B5F8C[i][1] | 0x3000;
@@ -1332,8 +1323,8 @@ static void sub_8094140(void)
     BasicInitMenuWindow(&WindowConfig_TrainerCard_Back_Values);
 
     buffer = gStringVar1;
-    StringCopy(buffer, ewram0.var_64.playerName);
-    ConvertInternationalString(buffer, ewram0.language);
+    StringCopy(buffer, ewram0_2.var_64.playerName);
+    ConvertInternationalString(buffer, ewram0_2.language);
     MenuPrint(buffer, 7, 5);
 
     TrainerCard_Front_PrintTrainerID();
@@ -1366,26 +1357,26 @@ static void TrainerCard_Front_PrintTrainerID(void)
 {
     u8 buffer[8];
 
-    ConvertIntToDecimalStringN(buffer, ewram0.var_64.trainerId, STR_CONV_MODE_LEADING_ZEROS, 5);
+    ConvertIntToDecimalStringN(buffer, ewram0_2.var_64.trainerId, STR_CONV_MODE_LEADING_ZEROS, 5);
     MenuPrint(buffer, 20, 2);
 }
 
 static void TrainerCard_Front_PrintMoney(void)
 {
-    sub_80B7AEC(ewram0.var_64.money, 16, 8);
+    sub_80B7AEC(ewram0_2.var_64.money, 16, 8);
 }
 
 static void TrainerCard_Front_PrintPokedexCount(void)
 {
     u8 buffer[16];
 
-    if (ewram0.var_7 == FALSE)
+    if (ewram0_2.var_7 == FALSE)
     {
         sub_8094110();
     }
     else
     {
-        ConvertIntToDecimalStringN(buffer, ewram0.var_64.pokedexSeen, STR_CONV_MODE_LEFT_ALIGN, 3);
+        ConvertIntToDecimalStringN(buffer, ewram0_2.var_64.pokedexSeen, STR_CONV_MODE_LEFT_ALIGN, 3);
         MenuPrint_RightAligned(buffer, 16, 10);
     }
 }
@@ -1398,10 +1389,10 @@ static void TrainerCard_Front_PrintPlayTime(u8 *arg1, s16 colon)
 
     playTimeHours = gSaveBlock2.playTimeHours;
     playTimeMinutes = gSaveBlock2.playTimeMinutes;
-    if (ewram0.var_1 != 0)
+    if (ewram0_2.var_1 != 0)
     {
-        playTimeHours = ewram0.var_64.playTimeHours;
-        playTimeMinutes = ewram0.var_64.playTimeMinutes;
+        playTimeHours = ewram0_2.var_64.playTimeHours;
+        playTimeMinutes = ewram0_2.var_64.playTimeMinutes;
     }
     FormatPlayTime(buffer, playTimeHours, playTimeMinutes, colon);
     sub_8072C74(arg1, buffer, 48, 1);
@@ -1411,20 +1402,20 @@ static void sub_809429C(void)
 {
     u8 *str;
 
-    if (ewram0.var_1 != 0)
+    if (ewram0_2.var_1 != 0)
     {
         str = gStringVar1;
-        str = StringCopy(str, ewram0.var_20[0]);
+        str = StringCopy(str, ewram0_2.var_20[0]);
         str[0] = 00;
         str++;
-        str = StringCopy(str, ewram0.var_20[1]);
+        str = StringCopy(str, ewram0_2.var_20[1]);
         MenuPrint(gStringVar1, 2, 14);
 
         str = gStringVar1;
-        str = StringCopy(str, ewram0.var_20[2]);
+        str = StringCopy(str, ewram0_2.var_20[2]);
         str[0] = 00;
         str++;
-        str = StringCopy(str, ewram0.var_20[3]);
+        str = StringCopy(str, ewram0_2.var_20[3]);
         MenuPrint(gStringVar1, 2, 16);
     }
 }
@@ -1434,8 +1425,8 @@ static void TrainerCard_Back_PrintName(void)
     u8 *str;
 
     str = gStringVar1;
-    StringCopy(str, ewram0.var_64.playerName);
-    ConvertInternationalString(str, ewram0.language);
+    StringCopy(str, ewram0_2.var_64.playerName);
+    ConvertInternationalString(str, ewram0_2.language);
 
 #if ENGLISH
     StringAppend(str, gOtherText_TrainersTrainerCard);
@@ -1448,7 +1439,7 @@ static void TrainerCard_Back_PrintName(void)
 
 static void TrainerCard_Back_PrintHallOfFameTime_Label(void)
 {
-    if (ewram0.var_8 != 0)
+    if (ewram0_2.var_8 != 0)
         MenuPrint(gOtherText_FirstHOF, 3, 5);
 }
 
@@ -1456,21 +1447,21 @@ static void TrainerCard_Back_PrintHallOfFameTime(void)
 {
     u8 *str;
 
-    if (ewram0.var_8 != 0)
+    if (ewram0_2.var_8 != 0)
     {
         str = gStringVar1;
-        str = ConvertIntToDecimalStringN(str, ewram0.var_64.firstHallOfFameA, STR_CONV_MODE_RIGHT_ALIGN, 3);
+        str = ConvertIntToDecimalStringN(str, ewram0_2.var_64.firstHallOfFameA, STR_CONV_MODE_RIGHT_ALIGN, 3);
         str = StringCopy(str, gUnknown_083B5EF4);
-        str = ConvertIntToDecimalStringN(str, ewram0.var_64.firstHallOfFameB, STR_CONV_MODE_LEADING_ZEROS, 2);
+        str = ConvertIntToDecimalStringN(str, ewram0_2.var_64.firstHallOfFameB, STR_CONV_MODE_LEADING_ZEROS, 2);
         str = StringCopy(str, gUnknown_083B5EF4);
-        str = ConvertIntToDecimalStringN(str, ewram0.var_64.firstHallOfFameC, STR_CONV_MODE_LEADING_ZEROS, 2);
+        str = ConvertIntToDecimalStringN(str, ewram0_2.var_64.firstHallOfFameC, STR_CONV_MODE_LEADING_ZEROS, 2);
         MenuPrint_RightAligned(gStringVar1, 28, 5);
     }
 }
 
 static void TrainerCard_Back_PrintLinkBattlesLabel(void)
 {
-    if (ewram0.var_9 != 0)
+    if (ewram0_2.var_9 != 0)
         MenuPrint(gOtherText_LinkCableBattles, 3, 7);
 }
 
@@ -1478,19 +1469,19 @@ static void TrainerCard_Back_PrintLinkBattles(void)
 {
     u8 buffer[16];
 
-    if (ewram0.var_9 != 0)
+    if (ewram0_2.var_9 != 0)
     {
-        ConvertIntToDecimalString(buffer, ewram0.var_64.linkBattleWins);
+        ConvertIntToDecimalString(buffer, ewram0_2.var_64.linkBattleWins);
         MenuPrint_RightAligned(buffer, 22, 7);
 
-        ConvertIntToDecimalString(buffer, ewram0.var_64.linkBattleLosses);
+        ConvertIntToDecimalString(buffer, ewram0_2.var_64.linkBattleLosses);
         MenuPrint_RightAligned(buffer, 28, 7);
     }
 }
 
 static void TrainerCard_Back_PrintBattleTower_Label(void)
 {
-    if (ewram0.var_a != 0)
+    if (ewram0_2.var_a != 0)
         MenuPrint(gOtherText_BattleTowerWinRecord, 3, 15);
 }
 
@@ -1498,19 +1489,19 @@ static void TrainerCard_Back_PrintBattleTower(void)
 {
     u8 buffer[16];
 
-    if (ewram0.var_a != 0)
+    if (ewram0_2.var_a != 0)
     {
-        sub_8072C44(buffer, ewram0.var_64.battleTowerWins, 24, 1);
+        sub_8072C44(buffer, ewram0_2.var_64.battleTowerWins, 24, 1);
         MenuPrint_PixelCoords(buffer, 112, 120, 0);
 
-        sub_8072C44(buffer, ewram0.var_64.battleTowerLosses, 24, 1);
+        sub_8072C44(buffer, ewram0_2.var_64.battleTowerLosses, 24, 1);
         MenuPrint_PixelCoords(buffer, 149, 120, 0);
     }
 }
 
 static void TrainerCard_Back_PrintLinkContests_Label(void)
 {
-    if (ewram0.var_b != 0)
+    if (ewram0_2.var_b != 0)
         MenuPrint(gOtherText_ContestRecord, 3, 13);
 }
 
@@ -1518,16 +1509,16 @@ static void TrainerCard_Back_PrintLinkContests(void)
 {
     u8 buffer[8];
 
-    if (ewram0.var_b != 0)
+    if (ewram0_2.var_b != 0)
     {
-        ConvertIntToDecimalStringN(buffer, ewram0.var_64.contestsWithFriends, STR_CONV_MODE_RIGHT_ALIGN, 3);
+        ConvertIntToDecimalStringN(buffer, ewram0_2.var_64.contestsWithFriends, STR_CONV_MODE_RIGHT_ALIGN, 3);
         MenuPrint_RightAligned(buffer, 28, 13);
     }
 }
 
 static void TrainerCard_Back_PrintLinkPokeblocks_Label(void)
 {
-    if (ewram0.var_c != 0)
+    if (ewram0_2.var_c != 0)
         MenuPrint(gOtherText_MixingRecord, 3, 11);
 }
 
@@ -1535,16 +1526,16 @@ static void TrainerCard_Back_PrintLinkPokeblocks(void)
 {
     u8 buffer[8];
 
-    if (ewram0.var_c != 0)
+    if (ewram0_2.var_c != 0)
     {
-        ConvertIntToDecimalStringN(buffer, ewram0.var_64.pokeblocksWithFriends, STR_CONV_MODE_RIGHT_ALIGN, 5);
+        ConvertIntToDecimalStringN(buffer, ewram0_2.var_64.pokeblocksWithFriends, STR_CONV_MODE_RIGHT_ALIGN, 5);
         MenuPrint_RightAligned(buffer, 28, 11);
     }
 }
 
 static void TrainerCard_Back_PrintPokemonTrades_Label(void)
 {
-    if (ewram0.var_d != 0)
+    if (ewram0_2.var_d != 0)
         MenuPrint(gOtherText_TradeRecord, 3, 9);
 }
 
@@ -1552,9 +1543,9 @@ static void TrainerCard_Back_PrintPokemonTrades(void)
 {
     u8 buffer[8];
 
-    if (ewram0.var_d != 0)
+    if (ewram0_2.var_d != 0)
     {
-        ConvertIntToDecimalStringN(buffer, ewram0.var_64.pokemonTrades, STR_CONV_MODE_RIGHT_ALIGN, 5);
+        ConvertIntToDecimalStringN(buffer, ewram0_2.var_64.pokemonTrades, STR_CONV_MODE_RIGHT_ALIGN, 5);
         MenuPrint_RightAligned(buffer, 28, 9);
     }
 }

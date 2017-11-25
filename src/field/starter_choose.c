@@ -324,24 +324,24 @@ void CB2_ChooseStarter(void)
 
     //Create hand sprite
     spriteId = CreateSprite(&gSpriteTemplate_83F77CC, 120, 56, 2);
-    gSprites[spriteId].data0 = taskId;
+    gSprites[spriteId].data[0] = taskId;
 
     //Create three Pokeball sprites
     spriteId = CreateSprite(
       &gSpriteTemplate_83F77E4,
       gStarterChoose_PokeballCoords[0][0], gStarterChoose_PokeballCoords[0][1], 2);
-    gSprites[spriteId].data0 = taskId;
-    gSprites[spriteId].data1 = 0;
+    gSprites[spriteId].data[0] = taskId;
+    gSprites[spriteId].data[1] = 0;
     spriteId = CreateSprite(
       &gSpriteTemplate_83F77E4,
       gStarterChoose_PokeballCoords[1][0], gStarterChoose_PokeballCoords[1][1], 2);
-    gSprites[spriteId].data0 = taskId;
-    gSprites[spriteId].data1 = 1;
+    gSprites[spriteId].data[0] = taskId;
+    gSprites[spriteId].data[1] = 1;
     spriteId = CreateSprite(
       &gSpriteTemplate_83F77E4,
       gStarterChoose_PokeballCoords[2][0], gStarterChoose_PokeballCoords[2][1], 2);
-    gSprites[spriteId].data0 = taskId;
-    gSprites[spriteId].data1 = 2;
+    gSprites[spriteId].data[0] = taskId;
+    gSprites[spriteId].data[1] = 2;
 }
 
 static void MainCallback2(void)
@@ -727,16 +727,16 @@ static u8 CreatePokemonFrontSprite(u16 species, u8 x, u8 y)
 //Sprite callback
 static void sub_810A62C(struct Sprite *sprite)
 {
-    sprite->pos1.x = gUnknown_083F76E4[gTasks[sprite->data0].tStarterSelection][0];
-    sprite->pos1.y = gUnknown_083F76E4[gTasks[sprite->data0].tStarterSelection][1];
-    sprite->pos2.y = Sin(sprite->data1, 8);
-    sprite->data1 = (u8)sprite->data1 + 4;
+    sprite->pos1.x = gUnknown_083F76E4[gTasks[sprite->data[0]].tStarterSelection][0];
+    sprite->pos1.y = gUnknown_083F76E4[gTasks[sprite->data[0]].tStarterSelection][1];
+    sprite->pos2.y = Sin(sprite->data[1], 8);
+    sprite->data[1] = (u8)sprite->data[1] + 4;
 }
 
 //Sprite callback
 static void sub_810A68C(struct Sprite *sprite)
 {
-    if (gTasks[sprite->data0].tStarterSelection == sprite->data1)
+    if (gTasks[sprite->data[0]].tStarterSelection == sprite->data[1])
         StartSpriteAnimIfDifferent(sprite, 1);
     else
         StartSpriteAnimIfDifferent(sprite, 0);

@@ -1000,7 +1000,7 @@ gSpriteAnimTable_83D6E94:: @ 83D6E94
 	.4byte gSpriteAnim_83D6E80
 
 	.align 2
-gBattleAnimSpriteTemplate_83D6E98:: @ 83D6E98
+gBattleAnimSpriteTemplate_EndureFlame:: @ 83D6E98
 	spr_template 10184, 10184, gOamData_837DF74, gSpriteAnimTable_83D6E94, NULL, gDummySpriteAffineAnimTable, sub_80CDF0C
 
 	.align 2

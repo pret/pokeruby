@@ -587,15 +587,15 @@ struct DayCareMail
 
 struct DayCareStepCountersEtc {
     u32 steps[2];
-    u16 personalityLo;
-    u8 unk_11a;
+    u16 pendingEggPersonality;
+    u8 eggCycleStepsRemaining;
 };
 
 struct RecordMixingDayCareMail
 {
     struct DayCareMail mail[2];
-    u32 unk70;
-    u16 unk74[2];
+    u32 numDaycareMons;
+    u16 itemsHeld[2]; // marks whether or not each daycare mon is currently holding an item.
 };
 
 struct DayCareMisc
@@ -604,7 +604,7 @@ struct DayCareMisc
     struct DayCareStepCountersEtc countersEtc;
 };
 
-struct DayCareData {
+struct DayCare {
     struct BoxPokemon mons[2];
     struct DayCareMisc misc;
 };
@@ -712,7 +712,7 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x2DD4*/ struct EasyChatPair easyChatPairs[5]; //Dewford trend [0] and some other stuff
     /*0x2DFC*/ u8 filler_2DFC[0x8];
     /*0x2E04*/ SB_Struct sbStruct;
-    /*0x2F9C*/ struct DayCareData daycareData;
+    /*0x2F9C*/ struct DayCare daycare;
     /*0x30B8*/ struct LinkBattleRecord linkBattleRecords[5];
     /*0x3108*/ u8 filler_3108[8];
     /*0x3110*/ u8 giftRibbons[11];

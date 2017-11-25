@@ -5,7 +5,7 @@
 #include "daycare.h"
 #include "dewford_trend.h"
 #include "event_data.h"
-#include "fldeff_80C5CD4.h"
+#include "fldeff_recordmixing.h"
 #include "item.h"
 #include "items.h"
 #include "load_save.h"
@@ -24,10 +24,7 @@
 #include "strings2.h"
 #include "task.h"
 #include "tv.h"
-
-extern u8 ewram[];
-#define unk_2018000 (*(struct PlayerRecords *)(ewram + 0x18000))
-#define unk_2008000 (*(struct PlayerRecords *)(ewram + 0x08000))
+#include "ewram.h"
 
 extern struct RecordMixingDayCareMail gUnknown_02038738;
 extern u16 gSpecialVar_0x8005;
@@ -69,31 +66,31 @@ void RecordMixing_PrepareExchangePacket(void)
     sub_80BC300();
     sub_80C045C();
 
-    memcpy(unk_2018000.secretBases, recordMixingSecretBases, sizeof(unk_2018000.secretBases));
-    memcpy(unk_2018000.tvShows, recordMixingTvShows, sizeof(unk_2018000.tvShows));
-    memcpy(unk_2018000.filler1004, gUnknown_083D0274, sizeof(unk_2008000.filler1004));
-    memcpy(unk_2018000.filler1044, gUnknown_083D0278, sizeof(unk_2008000.filler1044));
-    memcpy(unk_2018000.easyChatPairs, recordMixingEasyChatPairs, sizeof(unk_2018000.easyChatPairs));
-    gUnknown_02038738.mail[0] = gSaveBlock1.daycareData.misc.mail[0];
-    gUnknown_02038738.mail[1] = gSaveBlock1.daycareData.misc.mail[1];
-    sub_8041324(gSaveBlock1.daycareData.mons, &gUnknown_02038738);
-    memcpy(&unk_2018000.filler10AC, gUnknown_083D0280, sizeof(struct RecordMixingDayCareMail));
-    memcpy(&unk_2018000.battleTowerRecord, gBattleTowerPlayerRecord, sizeof(struct BattleTowerRecord));
+    memcpy(ewram_2018000.secretBases, recordMixingSecretBases, sizeof(ewram_2018000.secretBases));
+    memcpy(ewram_2018000.tvShows, recordMixingTvShows, sizeof(ewram_2018000.tvShows));
+    memcpy(ewram_2018000.filler1004, gUnknown_083D0274, sizeof(ewram_2008000.filler1004));
+    memcpy(ewram_2018000.filler1044, gUnknown_083D0278, sizeof(ewram_2008000.filler1044));
+    memcpy(ewram_2018000.easyChatPairs, recordMixingEasyChatPairs, sizeof(ewram_2018000.easyChatPairs));
+    gUnknown_02038738.mail[0] = gSaveBlock1.daycare.misc.mail[0];
+    gUnknown_02038738.mail[1] = gSaveBlock1.daycare.misc.mail[1];
+    InitDaycareMailRecordMixing(gSaveBlock1.daycare.mons, &gUnknown_02038738);
+    memcpy(&ewram_2018000.filler10AC, gUnknown_083D0280, sizeof(struct RecordMixingDayCareMail));
+    memcpy(&ewram_2018000.battleTowerRecord, gBattleTowerPlayerRecord, sizeof(struct BattleTowerRecord));
 
     if (GetMultiplayerId() == 0)
-        unk_2018000.filler11C8[0] = GetRecordMixingGift();
+        ewram_2018000.filler11C8[0] = GetRecordMixingGift();
 }
 
 void RecordMixing_ReceiveExchangePacket(u32 a)
 {
-    sub_80BD674(unk_2008000.secretBases, sizeof(struct PlayerRecords), a);
-    sub_80BFD44((u8 *)unk_2008000.tvShows, sizeof(struct PlayerRecords), a);
-    sub_80C0514(unk_2008000.filler1004, sizeof(struct PlayerRecords), a);
-    sub_80B9B1C(unk_2008000.filler1044, sizeof(struct PlayerRecords), a);
-    sub_80FA4E4(unk_2008000.easyChatPairs, sizeof(struct PlayerRecords), a);
-    sub_80B9C6C((u8 *)&unk_2008000.filler10AC, sizeof(struct PlayerRecords), a, unk_2008000.tvShows);
-    sub_80B9B70(&unk_2008000.battleTowerRecord, sizeof(struct PlayerRecords), a);
-    sub_80B9F3C(unk_2008000.filler11C8, a);
+    sub_80BD674(ewram_2008000.secretBases, sizeof(struct PlayerRecords), a);
+    sub_80BFD44((u8 *)ewram_2008000.tvShows, sizeof(struct PlayerRecords), a);
+    sub_80C0514(ewram_2008000.filler1004, sizeof(struct PlayerRecords), a);
+    sub_80B9B1C(ewram_2008000.filler1044, sizeof(struct PlayerRecords), a);
+    sub_80FA4E4(ewram_2008000.easyChatPairs, sizeof(struct PlayerRecords), a);
+    sub_80B9C6C((u8 *)&ewram_2008000.filler10AC, sizeof(struct PlayerRecords), a, ewram_2008000.tvShows);
+    sub_80B9B70(&ewram_2008000.battleTowerRecord, sizeof(struct PlayerRecords), a);
+    sub_80B9F3C(ewram_2008000.filler11C8, a);
 }
 
 #define tCounter data[0]
@@ -250,11 +247,11 @@ void sub_80B95F0(u8 taskId)
             task->tState = 0;
             task->data[5] = GetMultiplayerId_();
             task->func = Task_RecordMixing_SendPacket;
-            StorePtrInTaskData(&unk_2018000, &task->data[2]);
+            StorePtrInTaskData(&ewram_2018000, &task->data[2]);
             subTaskId = CreateTask(Task_RecordMixing_CopyReceiveBuffer, 0x50);
             task->data[10] = subTaskId;
             gTasks[subTaskId].data[0] = taskId;
-            StorePtrInTaskData((u8 *)&unk_2008000, &gTasks[subTaskId].data[5]);
+            StorePtrInTaskData((u8 *)&ewram_2008000, &gTasks[subTaskId].data[5]);
         }
         break;
     case 5:        // wait 60 frames
@@ -527,11 +524,11 @@ void sub_80B9C6C(u8 *a, u32 b, u8 c, void *d)
     for (i = 0; i < r8; i++)
     {
         r6 = (struct DayCareMisc *)(a + b * i);
-        if (r6->unk70 != 0)
+        if (r6->numDaycareMons != 0)
         {
-            for (r7 = 0; r7 < r6->unk70; r7++)
+            for (r7 = 0; r7 < r6->numDaycareMons; r7++)
             {
-                if (r6->unk74[r7] == 0)
+                if (r6->itemsHeld[r7] == 0)
                     sp1C[i][r7] = 1;
             }
         }

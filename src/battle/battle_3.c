@@ -13,6 +13,7 @@
 #include "battle_move_effects.h"
 #include "string_util.h"
 #include "flags.h"
+#include "ewram.h"
 
 extern u8* gBattlescriptCurrInstr;
 extern u8 gActiveBank;
@@ -197,8 +198,6 @@ extern u8 gUnknown_081D995F[]; //disobedient while asleep
 extern u8 gUnknown_081D996F[]; //disobedient, uses a random move
 extern u8 gUnknown_081D9989[]; //disobedient, went to sleep
 extern u8 gUnknown_081D99A0[]; //disobedient, hits itself
-
-#define CHOICED_MOVE(bank)(((u16*)(&ewram[bank * 2 + 0x160e8])))
 
 //array entries for battle communication
 #define MOVE_EFFECT_BYTE    0x3
@@ -547,7 +546,7 @@ u8 UpdateTurnCounters(void)
                 else
                     gBattlescriptCurrInstr = gUnknown_081D8F7D;
 
-                BATTLE_STRUCT->animArg1 = 0xC;
+                BATTLE_STRUCT->animArg1 = B_ANIM_SANDSTORM_CONTINUES;
                 gBattleCommunication[MULTISTRING_CHOOSER] = 0;
                 b_call_bc_move_exec(gBattlescriptCurrInstr);
                 effect++;
@@ -581,7 +580,7 @@ u8 UpdateTurnCounters(void)
                 else
                     gBattlescriptCurrInstr = gUnknown_081D8F7D;
 
-                BATTLE_STRUCT->animArg1 = 0xD;
+                BATTLE_STRUCT->animArg1 = B_ANIM_HAIL_CONTINUES;
                 gBattleCommunication[MULTISTRING_CHOOSER] = 1;
                 b_call_bc_move_exec(gBattlescriptCurrInstr);
                 effect++;
@@ -722,12 +721,12 @@ u8 TurnBasedEffects(void)
                     gBattleMons[gActiveBank].status2 -= 0x2000;
                     if (gBattleMons[gActiveBank].status2 & STATUS2_WRAPPED)  // damaged by wrap
                     {
-                        BATTLE_STRUCT->animArg1 = ewram[gActiveBank * 2 + 0x16004];
-                        BATTLE_STRUCT->animArg2 = ewram[gActiveBank * 2 + 0x16005];
+                        BATTLE_STRUCT->animArg1 = ewram16004arr(0, gActiveBank);
+                        BATTLE_STRUCT->animArg2 = ewram16004arr(1, gActiveBank);
                         gBattleTextBuff1[0] = 0xFD;
                         gBattleTextBuff1[1] = 2;
-                        gBattleTextBuff1[2] = ewram[gActiveBank * 2 + 0x16004];
-                        gBattleTextBuff1[3] = ewram[gActiveBank * 2 + 0x16005];
+                        gBattleTextBuff1[2] = ewram16004arr(0, gActiveBank);
+                        gBattleTextBuff1[3] = ewram16004arr(1, gActiveBank);
                         gBattleTextBuff1[4] = EOS;
                         gBattlescriptCurrInstr = BattleScript_WrapTurnDmg;
                         gBattleMoveDamage = gBattleMons[gActiveBank].maxHP / 16;
@@ -738,8 +737,8 @@ u8 TurnBasedEffects(void)
                     {
                         gBattleTextBuff1[0] = 0xFD;
                         gBattleTextBuff1[1] = 2;
-                        gBattleTextBuff1[2] = ewram[gActiveBank * 2 + 0x16004];
-                        gBattleTextBuff1[3] = ewram[gActiveBank * 2 + 0x16005];
+                        gBattleTextBuff1[2] = ewram16004arr(0, gActiveBank);
+                        gBattleTextBuff1[3] = ewram16004arr(1, gActiveBank);
                         gBattleTextBuff1[4] = EOS;
                         gBattlescriptCurrInstr = BattleScript_WrapEnds;
                     }
@@ -1378,7 +1377,7 @@ bool8 sub_8018018(u8 bank, u8 r1, u8 r2)
             r2 = gBattlePartyID[r6];
         for (i = 0; i < 6; i++)
         {
-            if (GetMonData(&party[i], MON_DATA_HP) && GetMonData(&party[i], MON_DATA_SPECIES2) && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_EGG && i != r1 && i != r2 && i != ewram[r7 + 0x16068] && i != ewram[r6 + 0x16068])
+            if (GetMonData(&party[i], MON_DATA_HP) && GetMonData(&party[i], MON_DATA_SPECIES2) && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_EGG && i != r1 && i != r2 && i != ewram16068arr(r7) && i != ewram16068arr(r6))
                 break;
         }
         return (i == 6);
@@ -1433,13 +1432,6 @@ u8 CastformDataTypeChange(u8 bank)
     }
     return formChange;
 }
-
-struct Struct2017100
-{
-    u32 arr[4];
-};
-
-#define ewram17100 (*(struct Struct2017100 *)(ewram + 0x17100))
 
 u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 {
@@ -1513,7 +1505,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                     if (!(gBattleWeather & WEATHER_RAIN_ANY))
                     {
                         gBattleWeather = (WEATHER_RAIN_TEMPORARY | WEATHER_RAIN_PERMANENT);
-                        BATTLE_STRUCT->animArg1 = 0xA;
+                        BATTLE_STRUCT->animArg1 = B_ANIM_RAIN_CONTINUES;
                         BATTLE_STRUCT->scriptingActive = bank;
                         effect++;
                     }
@@ -1522,7 +1514,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                     if (!(gBattleWeather & WEATHER_SANDSTORM_ANY))
                     {
                         gBattleWeather = (WEATHER_SANDSTORM_PERMANENT | WEATHER_SANDSTORM_TEMPORARY);
-                        BATTLE_STRUCT->animArg1 = 0xC;
+                        BATTLE_STRUCT->animArg1 = B_ANIM_SANDSTORM_CONTINUES;
                         BATTLE_STRUCT->scriptingActive = bank;
                         effect++;
                     }
@@ -1531,7 +1523,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                     if (!(gBattleWeather & WEATHER_SUN_ANY))
                     {
                         gBattleWeather = (WEATHER_SUN_PERMANENT | WEATHER_SUN_TEMPORARY);
-                        BATTLE_STRUCT->animArg1 = 0xB;
+                        BATTLE_STRUCT->animArg1 = B_ANIM_SUN_CONTINUES;
                         BATTLE_STRUCT->scriptingActive = bank;
                         effect++;
                     }
@@ -1726,14 +1718,14 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                 case ABILITY_FLASH_FIRE:
                     if (moveType == TYPE_FIRE && !(gBattleMons[bank].status1 & STATUS_FREEZE))
                     {
-                        if (!(ewram17100.arr[bank] & 1))
+                        if (!(eFlashFireArr.arr[bank] & 1))
                         {
                             gBattleCommunication[MULTISTRING_CHOOSER] = 0;
                             if (gProtectStructs[gBankAttacker].notFirstStrike)
                                 gBattlescriptCurrInstr = BattleScript_FlashFireBoost;
                             else
                                 gBattlescriptCurrInstr = BattleScript_FlashFireBoost_PPLoss;
-                            ewram17100.arr[bank] |= 1;
+                            eFlashFireArr.arr[bank] |= 1;
                             effect = 2;
                         }
                         else
@@ -3131,7 +3123,7 @@ u8 GetMoveTarget(u16 move, u8 useMoveTarget) //get move target
         targetBank = gBankAttacker;
         break;
     }
-    ewram[gBankAttacker + 0x16010] = targetBank;
+    ewram16010arr(gBankAttacker) = targetBank;
     return targetBank;
 }
 

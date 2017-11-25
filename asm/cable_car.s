@@ -154,7 +154,7 @@ _081232C0:
 	str r3, [r2, 0x8]
 	ldr r0, [r2, 0x8]
 	ldr r1, _08123370 @ =gUnknown_02039274
-	ldr r0, _08123374 @ =0x02017000
+	ldr r0, _08123374 @ =gSharedMem + 0x17000
 	str r0, [r1]
 	adds r3, r0, 0
 	ldr r5, _08123378 @ =0x000010fc
@@ -195,7 +195,7 @@ _08123338:
 _08123368: .4byte 0x040000d4
 _0812336C: .4byte 0x81000800
 _08123370: .4byte gUnknown_02039274
-_08123374: .4byte 0x02017000
+_08123374: .4byte gSharedMem + 0x17000
 _08123378: .4byte 0x000010fc
 _0812337C: .4byte gMain
 _08123380: .4byte 0x0000043c
@@ -206,7 +206,7 @@ _08123384:
 	bl ResetPaletteFade
 	bl sub_807C828
 	movs r4, 0
-	ldr r0, _081233D4 @ =gUnknown_08396FC4
+	ldr r0, _081233D4 @ =gWeatherPtr
 	ldr r0, [r0]
 	adds r1, r0, 0
 	adds r1, 0xF0
@@ -234,7 +234,7 @@ _081233A4:
 	adds r0, 0x1
 	b _0812370C
 	.align 2, 0
-_081233D4: .4byte gUnknown_08396FC4
+_081233D4: .4byte gWeatherPtr
 _081233D8: .4byte gSpriteCoordOffsetX
 _081233DC: .4byte gSpriteCoordOffsetY
 _081233E0: .4byte gMain
@@ -254,7 +254,7 @@ _081233EC:
 	ldr r0, _08123458 @ =gUnknown_08401D18
 	bl LoadSpritePalettes
 	ldr r0, _0812345C @ =gCableCarMtChimneyTilemap
-	ldr r4, _08123460 @ =0x02019000
+	ldr r4, _08123460 @ =gSharedMem + 0x19000
 	adds r1, r4, 0
 	bl LZDecompressWram
 	ldr r0, _08123464 @ =gCableCarTreeTilemap
@@ -290,7 +290,7 @@ _081233EC:
 _08123454: .4byte gUnknown_08401CF8
 _08123458: .4byte gUnknown_08401D18
 _0812345C: .4byte gCableCarMtChimneyTilemap
-_08123460: .4byte 0x02019000
+_08123460: .4byte gSharedMem + 0x19000
 _08123464: .4byte gCableCarTreeTilemap
 _08123468: .4byte gCableCarMountainTilemap
 _0812346C: .4byte gCableCarPylonStemTilemap
@@ -326,7 +326,7 @@ _081234A0:
 _081234B4: .4byte gUnknown_02039274
 _081234B8: .4byte 0x0000043c
 _081234BC:
-	ldr r0, _081234FC @ =gUnknown_08396FC4
+	ldr r0, _081234FC @ =gWeatherPtr
 	ldr r0, [r0]
 	adds r1, r0, 0
 	adds r1, 0xF0
@@ -361,11 +361,11 @@ _081234E6:
 	adds r0, 0x1
 	b _0812370C
 	.align 2, 0
-_081234FC: .4byte gUnknown_08396FC4
+_081234FC: .4byte gWeatherPtr
 _08123500: .4byte 0x0000043c
 _08123504:
 	ldr r0, _08123578 @ =0x0600e800
-	ldr r5, _0812357C @ =0x02019168
+	ldr r5, _0812357C @ =gSharedMem + 0x19168
 	movs r1, 0x20
 	str r1, [sp]
 	movs r1, 0xF
@@ -420,7 +420,7 @@ _08123504:
 	b _0812370C
 	.align 2, 0
 _08123578: .4byte 0x0600e800
-_0812357C: .4byte 0x02019168
+_0812357C: .4byte gSharedMem + 0x19168
 _08123580: .4byte 0x0600f000
 _08123584: .4byte gUnknown_02039274
 _08123588: .4byte 0x000008fc
@@ -435,7 +435,7 @@ _08123598:
 	mov r8, r0
 	ldr r0, [r0]
 	adds r0, 0xFC
-	ldr r4, _0812366C @ =0x02019090
+	ldr r4, _0812366C @ =gSharedMem + 0x19090
 	movs r6, 0xC
 	str r6, [sp]
 	movs r5, 0x3
@@ -523,7 +523,7 @@ _08123598:
 	.align 2, 0
 _08123664: .4byte gSpecialVar_0x8004
 _08123668: .4byte gUnknown_02039274
-_0812366C: .4byte 0x02019090
+_0812366C: .4byte gSharedMem + 0x19090
 _08123670: .4byte gMain
 _08123674: .4byte 0x0000043c
 _08123678:
@@ -630,7 +630,7 @@ sub_8123740: @ 8123740
 	movs r0, 0
 	bl sub_807C9B4
 	add r7, sp, 0x4
-	ldr r0, _08123858 @ =gUnknown_08396FC4
+	ldr r0, _08123858 @ =gWeatherPtr
 	ldr r0, [r0]
 	adds r1, r0, 0
 	adds r1, 0xF0
@@ -647,7 +647,7 @@ _08123766:
 	bl ResetTasks
 	bl ResetSpriteData
 	bl ResetPaletteFade
-	ldr r2, _0812385C @ =0x02000000
+	ldr r2, _0812385C @ =gSharedMem
 	movs r3, 0x80
 	lsls r3, 10
 	movs r5, 0
@@ -754,8 +754,8 @@ _081237E0:
 	bx r0
 	.align 2, 0
 _08123854: .4byte gSpriteCoordOffsetX
-_08123858: .4byte gUnknown_08396FC4
-_0812385C: .4byte 0x02000000
+_08123858: .4byte gWeatherPtr
+_0812385C: .4byte gSharedMem
 _08123860: .4byte 0x040000d4
 _08123864: .4byte 0x85000400
 _08123868: .4byte gUnknown_02039274
@@ -821,7 +821,7 @@ _081238D0:
 	beq _081238DC
 	b _081239D6
 _081238DC:
-	ldr r0, _08123920 @ =gUnknown_08396FC4
+	ldr r0, _08123920 @ =gWeatherPtr
 	ldr r0, [r0]
 	adds r2, r0, 0
 	adds r2, 0xF0
@@ -857,9 +857,9 @@ _0812390C:
 	strb r0, [r1, 0x1]
 	b _081239D6
 	.align 2, 0
-_08123920: .4byte gUnknown_08396FC4
+_08123920: .4byte gWeatherPtr
 _08123924:
-	ldr r0, _08123938 @ =gUnknown_08396FC4
+	ldr r0, _08123938 @ =gWeatherPtr
 	ldr r2, [r0]
 	movs r1, 0xDA
 	lsls r1, 3
@@ -870,7 +870,7 @@ _08123924:
 	strb r0, [r3, 0x1]
 	b _081239D6
 	.align 2, 0
-_08123938: .4byte gUnknown_08396FC4
+_08123938: .4byte gWeatherPtr
 _0812393C:
 	ldrh r1, [r3, 0x6]
 	ldrh r0, [r3, 0x4]
@@ -1059,7 +1059,7 @@ _08123A90:
 	bl sub_8124F08
 	ldr r0, [r6]
 	adds r0, r5
-	ldr r1, _08123AF0 @ =0x020199d8
+	ldr r1, _08123AF0 @ =gSharedMem + 0x199D8
 	str r4, [sp]
 	movs r2, 0x1E
 	str r2, [sp, 0x4]
@@ -1092,7 +1092,7 @@ _08123AD6:
 	.align 2, 0
 _08123AE8: .4byte 0x000008fc
 _08123AEC: .4byte gCableCarPylonHookTilemapEntries
-_08123AF0: .4byte 0x020199d8
+_08123AF0: .4byte gSharedMem + 0x199D8
 _08123AF4: .4byte gSpriteCoordOffsetX
 	thumb_func_end sub_81239E4
 
@@ -1150,7 +1150,7 @@ _08123B50:
 	bne _08123BEE
 	ldr r1, _08123B70 @ =0x000008fc
 	adds r0, r3, r1
-	ldr r1, _08123B74 @ =0x020199d8
+	ldr r1, _08123B74 @ =gSharedMem + 0x199D8
 	movs r2, 0x2
 	str r2, [sp]
 	movs r2, 0x1E
@@ -1161,7 +1161,7 @@ _08123B50:
 	b _08123BEE
 	.align 2, 0
 _08123B70: .4byte 0x000008fc
-_08123B74: .4byte 0x020199d8
+_08123B74: .4byte gSharedMem + 0x199D8
 _08123B78:
 	ldr r5, _08123BAC @ =0x000008fc
 	adds r0, r3, r5
@@ -1239,7 +1239,7 @@ _08123C10: .4byte 0x00000944
 _08123C14: .4byte gUnknown_02039274
 _08123C18: .4byte gSpriteCoordOffsetX
 _08123C1C:
-	ldr r0, _08123C38 @ =gUnknown_08396FC4
+	ldr r0, _08123C38 @ =gWeatherPtr
 	ldr r4, [r0]
 	ldr r2, _08123C3C @ =0x000006fc
 	adds r4, r2
@@ -1254,7 +1254,7 @@ _08123C26:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08123C38: .4byte gUnknown_08396FC4
+_08123C38: .4byte gWeatherPtr
 _08123C3C: .4byte 0x000006fc
 	thumb_func_end sub_8123AF8
 
@@ -2014,7 +2014,7 @@ _08124258:
 	ldr r7, _081243EC @ =gUnknown_02039274
 	ldr r0, [r7]
 	adds r0, 0xFC
-	ldr r1, _081243F0 @ =0x02019048
+	ldr r1, _081243F0 @ =gSharedMem + 0x19048
 	movs r2, 0xC
 	str r2, [sp]
 	movs r2, 0x3
@@ -2210,7 +2210,7 @@ _08124322:
 	b _08124428
 	.align 2, 0
 _081243EC: .4byte gUnknown_02039274
-_081243F0: .4byte 0x02019048
+_081243F0: .4byte gSharedMem + 0x19048
 _081243F4: .4byte gSaveBlock2
 _081243F8: .4byte sub_8123D98
 _081243FC: .4byte gSprites
@@ -2322,7 +2322,7 @@ _081244B0:
 	lsrs r0, 24
 	mov r12, r0
 	lsls r1, 1
-	ldr r7, _08124534 @ =0x02019000
+	ldr r7, _08124534 @ =gSharedMem + 0x19000
 	adds r1, r7
 	ldrh r0, [r1]
 	strh r0, [r2]
@@ -2331,14 +2331,14 @@ _081244B0:
 	adds r1, r4, r1
 	mov r7, r9
 	lsls r2, r7, 1
-	ldr r7, _08124534 @ =0x02019000
+	ldr r7, _08124534 @ =gSharedMem + 0x19000
 	adds r0, r2, r7
 	ldrh r0, [r0]
 	strh r0, [r1]
 	ldr r0, [sp, 0x4]
 	adds r3, r0
 	adds r4, r3
-	ldr r1, _08124538 @ =0x02019048
+	ldr r1, _08124538 @ =gSharedMem + 0x19048
 	adds r2, r1
 	ldrh r0, [r2]
 	strh r0, [r4]
@@ -2372,8 +2372,8 @@ _081244B0:
 	bx r0
 	.align 2, 0
 _08124530: .4byte gUnknown_02039274
-_08124534: .4byte 0x02019000
-_08124538: .4byte 0x02019048
+_08124534: .4byte gSharedMem + 0x19000
+_08124538: .4byte gSharedMem + 0x19048
 	thumb_func_end sub_812446C
 
 	thumb_func_start sub_812453C

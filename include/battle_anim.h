@@ -7,12 +7,6 @@
 #define REG_BG1CNT_BITFIELD REG_BGnCNT_BITFIELD(1)
 #define REG_BG2CNT_BITFIELD REG_BGnCNT_BITFIELD(2)
 
-#define EWRAM_14800 ((u16 *)(unk_2000000 + 0x14800))
-#define EWRAM_17800 ((struct UnknownStruct1 *)(unk_2000000 + 0x17800))
-#define EWRAM_17810 ((struct UnknownStruct3 *)(unk_2000000 + 0x17810))
-#define EWRAM_18000 ((u16 *)(unk_2000000 + 0x18000))
-#define EWRAM_19348 (*(u16 *)(unk_2000000 + 0x19348))
-
 struct BGCntrlBitfield
 {
     volatile u16 priority:2;
@@ -57,6 +51,7 @@ void move_anim_8072740(struct Sprite *sprite);
 void DestroyAnimVisualTask(u8 task);
 void DestroyAnimVisualTask(u8 task);
 bool8 IsAnimBankSpriteVisible(u8);
-
+s8 sub_8076F98(s8 a);
+void sub_80763FC(u16 a, u16 *b, u32 c, u8 d);
 
 #endif

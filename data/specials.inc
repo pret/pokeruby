@@ -33,7 +33,7 @@ gSpecials::
 	def_special sub_8100A7C
 	def_special sub_80BBC78
 	def_special sub_80BCE4C
-	def_special sub_80C683C
+	def_special DoSecretBasePCTurnOffEffect
 	def_special sub_80B929C
 	def_special sub_808347C
 	def_special sub_80834E4
@@ -188,18 +188,18 @@ gSpecials::
 	def_special sub_80BDD18
 	def_special GabbyAndTySetScriptVarsToFieldObjectLocalIds
 	def_special sub_810E300
-	def_special sp0B5_daycare
-	def_special sp0B6_daycare
-	def_special sub_8041E7C
-	def_special sp0B8_daycare
-	def_special sp0B9_daycare_relationship_comment
-	def_special sub_8042328
-	def_special Daycare_SendPokemon_Special
+	def_special GetDaycareMonNicknames
+	def_special GetDaycareState
+	def_special RejectEggFromDayCare
+	def_special GiveEggFromDaycare
+	def_special SetDaycareCompatibilityString
+	def_special GetSelectedDaycareMonNickname
+	def_special StoreSelectedPokemonInDaycare
 	def_special ChooseSendDaycareMon
 	def_special ShowDaycareLevelMenu
-	def_special sub_80417B8
-	def_special sub_8041770
-	def_special sub_8041648
+	def_special GetNumLevelsGainedFromDaycare
+	def_special GetDaycareCost
+	def_special TakePokemonFromDaycare
 	def_special ScriptHatchMon
 	def_special EggHatch
 	def_special sub_8042B4C

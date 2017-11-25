@@ -20,6 +20,7 @@
 #include "menu_cursor.h"
 #include "trig.h"
 #include "pokeblock.h"
+#include "ewram.h"
 
 //needed to match Blender_ControlHitPitch
 struct MusicPlayerInfo
@@ -207,7 +208,6 @@ extern void de_sub_8073110();
 
 extern struct MusicPlayerInfo gMPlay_SE2;
 extern struct MusicPlayerInfo gMPlay_BGM;
-extern u8 ewram[];
 extern u16 gScriptItemId;
 extern u8 gUnknown_020297ED;
 extern u8 byte_3002A68;
@@ -828,7 +828,7 @@ static bool8 sub_804E2EC(void)
     switch (gBerryBlenderData->field_1)
     {
     case 0:
-        LZDecompressWram(gUnknown_08E6C100, &ewram[0x10000]);
+        LZDecompressWram(gUnknown_08E6C100, ewram10000);
         gBerryBlenderData->field_1++;
         break;
     case 1:
@@ -843,7 +843,7 @@ static bool8 sub_804E2EC(void)
         break;
     case 2:
         {
-            void* offsetRead = &ewram[0x10000];
+            void* offsetRead = ewram10000;
             void* offsetWrite = (void*)(VRAM);
             u32 size = 0x2000;
             while (TRUE)
@@ -862,16 +862,16 @@ static bool8 sub_804E2EC(void)
         }
         break;
     case 3:
-        LZDecompressWram(gUnknown_08E6C920, &ewram[0x10000]);
+        LZDecompressWram(gUnknown_08E6C920, ewram10000);
         gBerryBlenderData->field_1++;
         break;
     case 4:
-        LZDecompressWram(gUnknown_08E6D354, &ewram[0x13000]);
+        LZDecompressWram(gUnknown_08E6D354, ewram13000);
         gBerryBlenderData->field_1++;
         break;
     case 5:
         {
-            void* offsetRead = &ewram[0x10000];
+            void* offsetRead = ewram10000;
             void* offsetWrite = (void*)(VRAM + 0xE000);
 
             DmaCopy16(3, offsetRead, offsetWrite, 0x1000);
@@ -880,7 +880,7 @@ static bool8 sub_804E2EC(void)
         break;
     case 6:
         {
-            void* offsetRead = &ewram[0x11000];
+            void* offsetRead = ewram11000;
             void* offsetWrite = (void*)(VRAM + 0xF000);
 
             DmaCopy16(3, offsetRead, offsetWrite, 0x1000);
@@ -890,7 +890,7 @@ static bool8 sub_804E2EC(void)
     case 7:
         {
             u16 i;
-            u16* palStore = (u16*)(&ewram[0x13000]);
+            u16* palStore = (u16*)(ewram13000);
             void* offsetRead;
             void* offsetWrite;
 
@@ -898,7 +898,7 @@ static bool8 sub_804E2EC(void)
             {
                 *(palStore + i) |= 0x100;
             }
-            offsetRead = &ewram[0x13000];
+            offsetRead = ewram13000;
             offsetWrite = (void*)(VRAM + 0x6000);
             DmaCopy16(3, offsetRead, offsetWrite, 0x500);
             LoadPalette(sBlenderOuterPal, 0x80, 0x20);
@@ -937,7 +937,7 @@ void sub_804E538(void)
 {
     u8* field6F; //this temp value is needed to match
 
-    gBerryBlenderData = (struct BerryBlenderData*)(&ewram[0x18000]);
+    gBerryBlenderData = eBerryBlenderData;
 
     field6F = &gBerryBlenderData->field_6F;
     gBerryBlenderData->field_0 = 0;
@@ -1019,34 +1019,34 @@ static void sub_804E56C(void)
 
 void sub_804E738(struct Sprite* sprite)
 {
-    sprite->data1 += sprite->data6;
-    sprite->data2 -= sprite->data4;
-    sprite->data2 += sprite->data7;
-    sprite->data0 += sprite->data7;
-    sprite->data4--;
+    sprite->data[1] += sprite->data[6];
+    sprite->data[2] -= sprite->data[4];
+    sprite->data[2] += sprite->data[7];
+    sprite->data[0] += sprite->data[7];
+    sprite->data[4]--;
 
-    if (sprite->data0 < sprite->data2)
+    if (sprite->data[0] < sprite->data[2])
     {
-        sprite->data3 = sprite->data4 = sprite->data3 - 1;
-        if (++sprite->data5 > 3)
+        sprite->data[3] = sprite->data[4] = sprite->data[3] - 1;
+        if (++sprite->data[5] > 3)
             DestroySprite(sprite);
         else
             PlaySE(SE_TB_KARA);
     }
-    sprite->pos1.x = sprite->data1;
-    sprite->pos1.y = sprite->data2;
+    sprite->pos1.x = sprite->data[1];
+    sprite->pos1.y = sprite->data[2];
 }
 
 void sub_804E794(struct Sprite* sprite, s16 a2, s16 a3, s16 a4, s16 a5, s16 a6)
 {
-    sprite->data0 = a3;
-    sprite->data1 = a2;
-    sprite->data2 = a3;
-    sprite->data3 = a4;
-    sprite->data4 = 10;
-    sprite->data5 = 0;
-    sprite->data6 = a5;
-    sprite->data7 = a6;
+    sprite->data[0] = a3;
+    sprite->data[1] = a2;
+    sprite->data[2] = a3;
+    sprite->data[3] = a4;
+    sprite->data[4] = 10;
+    sprite->data[5] = 0;
+    sprite->data[6] = a5;
+    sprite->data[7] = a6;
     sprite->callback = sub_804E738;
 }
 
@@ -1111,7 +1111,7 @@ void sub_804E990(void)
     s32 i;
 
     REG_DISPCNT = 0;
-    gBerryBlenderData = (struct BerryBlenderData*)(&ewram[0x18000]);
+    gBerryBlenderData = eBerryBlenderData;
     gBerryBlenderData->field_0 = 0;
     gBerryBlenderData->field_134 = 0;
     for (i = 0; i < BLENDER_MAX_PLAYERS; i++)
@@ -3012,10 +3012,10 @@ static void sub_80514F0(void)
 
 void sub_8051524(struct Sprite* sprite)
 {
-    sprite->data2 += sprite->data0;
-    sprite->data3 += sprite->data1;
-    sprite->pos2.x = sprite->data2 / 8;
-    sprite->pos2.y = sprite->data3 / 8;
+    sprite->data[2] += sprite->data[0];
+    sprite->data[3] += sprite->data[1];
+    sprite->pos2.x = sprite->data[2] / 8;
+    sprite->pos2.y = sprite->data[3] / 8;
     if (sprite->animEnded)
         DestroySprite(sprite);
 }
@@ -3037,8 +3037,8 @@ static void sub_805156C(void)
         y = gSineTable[(rand & 0xFF)] / 4;
 
         spriteID = CreateSprite(&sSpriteTemplate_82164FC, x + 120, y + 80, 1);
-        gSprites[spriteID].data0 = 16 - (Random() % 32);
-        gSprites[spriteID].data1 = 16 - (Random() % 32);
+        gSprites[spriteID].data[0] = 16 - (Random() % 32);
+        gSprites[spriteID].data[1] = 16 - (Random() % 32);
 
         gSprites[spriteID].callback = sub_8051524;
     }
@@ -3046,16 +3046,16 @@ static void sub_805156C(void)
 
 static void sub_8051650(struct Sprite* sprite)
 {
-    sprite->data0++;
-    sprite->pos2.y = -(sprite->data0 / 3);
+    sprite->data[0]++;
+    sprite->pos2.y = -(sprite->data[0] / 3);
     if (sprite->animEnded)
         DestroySprite(sprite);
 }
 
 void sub_8051684(struct Sprite* sprite)
 {
-    sprite->data0++;
-    sprite->pos2.y = -(sprite->data0 * 2);
+    sprite->data[0]++;
+    sprite->pos2.y = -(sprite->data[0] * 2);
     if (sprite->pos2.y < -12)
         sprite->pos2.y = -12;
     if (sprite->animEnded)
@@ -3110,74 +3110,74 @@ void unref_sub_80516F8(u8 taskID)
 
 static void sub_805181C(struct Sprite* sprite)
 {
-    switch (sprite->data0)
+    switch (sprite->data[0])
     {
     case 0:
-        sprite->data1 += 8;
-        if (sprite->data1 > 88)
+        sprite->data[1] += 8;
+        if (sprite->data[1] > 88)
         {
-            sprite->data1 = 88;
-            sprite->data0++;
+            sprite->data[1] = 88;
+            sprite->data[0]++;
             PlaySE(SE_KON);
         }
         break;
     case 1:
-        sprite->data2 += 1;
-        if (sprite->data2 > 20)
+        sprite->data[2] += 1;
+        if (sprite->data[2] > 20)
         {
-            sprite->data0++;
-            sprite->data2 = 0;
+            sprite->data[0]++;
+            sprite->data[2] = 0;
         }
         break;
     case 2:
-        sprite->data1 += 4;
-        if (sprite->data1 > 176)
+        sprite->data[1] += 4;
+        if (sprite->data[1] > 176)
         {
-            if (++sprite->data3 == 3)
+            if (++sprite->data[3] == 3)
             {
                 DestroySprite(sprite);
                 CreateSprite(&sSpriteTemplate_821657C, 120, -20, 2);
             }
             else
             {
-                sprite->data0 = 0;
-                sprite->data1 = -16;
-                StartSpriteAnim(sprite, sprite->data3);
+                sprite->data[0] = 0;
+                sprite->data[1] = -16;
+                StartSpriteAnim(sprite, sprite->data[3]);
             }
         }
         break;
     }
-    sprite->pos2.y = sprite->data1;
+    sprite->pos2.y = sprite->data[1];
 }
 
 static void sub_80518CC(struct Sprite* sprite)
 {
-    switch (sprite->data0)
+    switch (sprite->data[0])
     {
     case 0:
-        sprite->data1 += 8;
-        if (sprite->data1 > 92)
+        sprite->data[1] += 8;
+        if (sprite->data[1] > 92)
         {
-            sprite->data1 = 92;
-            sprite->data0++;
+            sprite->data[1] = 92;
+            sprite->data[0]++;
             PlaySE(SE_PIN);
         }
         break;
     case 1:
-        sprite->data2 += 1;
-        if (sprite->data2 > 20)
-            sprite->data0++;
+        sprite->data[2] += 1;
+        if (sprite->data[2] > 20)
+            sprite->data[0]++;
         break;
     case 2:
-        sprite->data1 += 4;
-        if (sprite->data1 > 176)
+        sprite->data[1] += 4;
+        if (sprite->data[1] > 176)
         {
             gBerryBlenderData->field_0++;
             DestroySprite(sprite);
         }
         break;
     }
-    sprite->pos2.y = sprite->data1;
+    sprite->pos2.y = sprite->data[1];
 }
 
 static void sub_805194C(u16 a0, u16 a1)
@@ -3710,7 +3710,7 @@ static void sub_80527BC(void)
         gUnknown_020297E0 = 0;
         gUnknown_020297DC = 2;
         for (i = 0; i < 200; i++)
-            ewram[i] = 0;
+            gSharedMem[i] = 0;
         gUnknown_020297E8 = 0;
     }
     for (i = 0; i < 100; i++)
@@ -3719,7 +3719,7 @@ static void sub_80527BC(void)
             gUnknown_020297E0++;
         else
         {
-            u16* ewramPtr = ((u16*)(ewram));
+            u16* ewramPtr = ((u16*)(gSharedMem));
             ewramPtr[gUnknown_020297E4] = gUnknown_020297E0;
             gUnknown_020297E4++;
             gUnknown_020297E0 = 0;

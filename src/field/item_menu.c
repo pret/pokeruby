@@ -34,9 +34,9 @@
 #include "task.h"
 #include "text.h"
 #include "unknown_task.h"
+#include "ewram.h"
 
 // External stuff
-extern u8 ewram[];
 extern void gpu_pal_allocator_reset__manage_upper_four(void);
 extern void sub_80F9020(void);
 extern void sub_80F9988();
@@ -157,12 +157,6 @@ extern u16 gUnknown_030041B4;
 extern struct PocketScrollState gBagPocketScrollStates[];
 extern struct ItemSlot *gCurrentBagPocketItemSlots;  // selected pocket item slots
 extern const u8 Event_NoRegisteredItem[];
-
-#define ewramBerryPic             (ewram + 0)
-#define ewramBerryPicTemp         (ewram + 0x1000)
-#define ewramSavedItemsPocket     ((struct ItemSlot *)(ewram + 0x1E000))  // saved items pocket (for Wally battle)
-#define ewramSavedPokeballsPocket ((struct ItemSlot *)(ewram + 0x1F000))  // saved Pokeballs pocket (for Wally battle)
-#define ewramBagSetupStep         (ewram[0x1FFFF])
 
 extern const struct CompressedSpriteSheet sMaleBagSpriteSheet;
 extern const struct CompressedSpriteSheet sFemaleBagSpriteSheet;
@@ -4086,11 +4080,11 @@ static const struct CompressedSpritePalette sBagSpritePalette = {gBagPalette, 30
 static void sub_80A7998(struct Sprite *sprite)
 {
     sprite->animNum = 0;
-    sprite->data0 = 0;
-    sprite->data1 = 0;
-    sprite->data2 = 0;
-    sprite->data3 = 0;
-    sprite->data4 = 0;
+    sprite->data[0] = 0;
+    sprite->data[1] = 0;
+    sprite->data[2] = 0;
+    sprite->data[3] = 0;
+    sprite->data[4] = 0;
     sprite->callback = sub_80A79B4;
 }
 
@@ -4104,7 +4098,7 @@ static void sub_80A79B4(struct Sprite *sprite)
 
 static void sub_80A79EC(struct Sprite *sprite)
 {
-    switch (sprite->data3)
+    switch (sprite->data[3])
     {
     case 0:
         if (gUnknown_0203855B != 6)
@@ -4118,26 +4112,26 @@ static void sub_80A79EC(struct Sprite *sprite)
             sprite->animBeginning = TRUE;
             sprite->animNum = 0;
             sprite->pos1.y -= 4;
-            sprite->data0 = 4;
-            sprite->data3 = 1;
+            sprite->data[0] = 4;
+            sprite->data[3] = 1;
             sub_80A7AE4(sprite);
         }
         break;
     case 1:
-        if (sprite->data0 != 0)
+        if (sprite->data[0] != 0)
         {
-            if (sprite->data1 != 0)
+            if (sprite->data[1] != 0)
             {
                 sprite->pos1.y++;
-                sprite->data0--;
+                sprite->data[0]--;
             }
-            sprite->data1 = (sprite->data1 + 1) & 1;
+            sprite->data[1] = (sprite->data[1] + 1) & 1;
         }
         else
         {
             gUnknown_0203855B = -1;
-            sprite->data1 = 0;
-            sprite->data3 = 0;
+            sprite->data[1] = 0;
+            sprite->data[3] = 0;
         }
         break;
     }
@@ -4145,17 +4139,17 @@ static void sub_80A79EC(struct Sprite *sprite)
 
 static void sub_80A7A94(struct Sprite *sprite)
 {
-    switch (sprite->data4)
+    switch (sprite->data[4])
     {
     case 0:
         sprite->oam.affineMode = 1;
         sprite->affineAnims = sBagSpriteAffineAnimTable;
         InitSpriteAffineAnim(sprite);
-        sprite->data4 = 1;
+        sprite->data[4] = 1;
         break;
     case 1:
-        sprite->data2++;
-        if (sprite->data2 == 12)
+        sprite->data[2]++;
+        if (sprite->data[2] == 12)
             sub_80A7AE4(sprite);
         break;
     }
@@ -4165,8 +4159,8 @@ static void sub_80A7AE4(struct Sprite *sprite)
 {
     gUnknown_0203855C = 0;
     sprite->oam.affineMode = 0;
-    sprite->data2 = 0;
-    sprite->data4 = 0;
+    sprite->data[2] = 0;
+    sprite->data[4] = 0;
     FreeOamMatrix(sprite->oam.matrixNum);
 }
 
@@ -4234,45 +4228,45 @@ static const struct SpritePalette sPokeballSpritePalette = {gPalette_83C170C, 8}
 
 static void sub_80A7B28(struct Sprite *sprite)
 {
-    sprite->data3 = 0;
-    sprite->data0 = 0;
+    sprite->data[3] = 0;
+    sprite->data[0] = 0;
     sub_80A7B6C(sprite);
     sprite->callback = sub_80A7B6C;
 }
 
 static void sub_80A7B48(struct Sprite *sprite)
 {
-    sprite->centerToCornerVecX = sprite->data5 - ((sprite->data0 + 1) & 1);
-    sprite->centerToCornerVecY = sprite->data6 - ((sprite->data0 + 1) & 1);
+    sprite->centerToCornerVecX = sprite->data[5] - ((sprite->data[0] + 1) & 1);
+    sprite->centerToCornerVecY = sprite->data[6] - ((sprite->data[0] + 1) & 1);
 }
 
 static void sub_80A7B6C(struct Sprite *sprite)
 {
-    if (sprite->data7 != 0)
+    if (sprite->data[7] != 0)
     {
-        switch (sprite->data3)
+        switch (sprite->data[3])
         {
         case 0:
             sprite->oam.affineMode = 1;
-            if (sprite->data7 == 1)
+            if (sprite->data[7] == 1)
                 sprite->affineAnims = gSpriteAffineAnimTable_83C1D20;
             else
                 sprite->affineAnims = gSpriteAffineAnimTable_83C1D20 + 1;
             InitSpriteAffineAnim(sprite);
-            sprite->data3 = 1;
-            sprite->data5 = sprite->centerToCornerVecX;
-            sprite->data6 = sprite->centerToCornerVecY;
+            sprite->data[3] = 1;
+            sprite->data[5] = sprite->centerToCornerVecX;
+            sprite->data[6] = sprite->centerToCornerVecY;
             sub_80A7B48(sprite);
             break;
         case 1:
-            sprite->data0++;
+            sprite->data[0]++;
             sub_80A7B48(sprite);
-            if (sprite->data0 == 32)
+            if (sprite->data[0] == 32)
             {
-                sprite->data0 = 0;
-                sprite->data3 = 0;
-                sprite->centerToCornerVecX = sprite->data5;
-                sprite->centerToCornerVecY = sprite->data6;
+                sprite->data[0] = 0;
+                sprite->data[3] = 0;
+                sprite->centerToCornerVecX = sprite->data[5];
+                sprite->centerToCornerVecY = sprite->data[6];
                 FreeOamMatrix(sprite->oam.matrixNum);
                 sprite->oam.affineMode = 0;
                 sprite->callback = SpriteCallbackDummy;
@@ -4297,7 +4291,7 @@ static void CreateBagPokeballSprite(u8 a)
 {
     LoadSpritePalette(&sPokeballSpritePalette);
     sPokeballSpriteId = CreateSprite(&sPokeballSpriteTemplate, 16, 88, 0);
-    gSprites[sPokeballSpriteId].data7 = a;
+    gSprites[sPokeballSpriteId].data[7] = a;
 }
 
 static void sub_80A7C64(void)

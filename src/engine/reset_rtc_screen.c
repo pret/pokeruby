@@ -27,21 +27,132 @@ struct ResetRtcStruct
 
 extern u16 gSaveFileStatus;
 
-extern struct ResetRtcStruct gUnknown_08376420[];
-extern struct SpritePalette gUnknown_083764BC;
-extern struct SpriteTemplate gSpriteTemplate_83764E8;
-extern u8 gUnknown_08376500[];
-
 void CB2_ResetRtcScreen(void);
 void VBlankCB_ResetRtcScreen(void);
 void Task_ResetRtcScreen(u8);
 
+static const struct ResetRtcStruct gUnknown_08376420[5] =
+{
+    {
+        .dataIndex = 3,
+        .minVal = 1,
+        .maxVal = 9999,
+        .left = 0,
+        .right = 2,
+        .unk8 = 0,
+    },
+    {
+        .dataIndex = 4,
+        .minVal = 0,
+        .maxVal = 23,
+        .left = 1,
+        .right = 3,
+        .unk8 = 0,
+    },
+    {
+        .dataIndex = 5,
+        .minVal = 0,
+        .maxVal = 59,
+        .left = 2,
+        .right = 4,
+        .unk8 = 0,
+    },
+    {
+        .dataIndex = 6,
+        .minVal = 0,
+        .maxVal = 59,
+        .left = 3,
+        .right = 5,
+        .unk8 = 0,
+    },
+    {
+        .dataIndex = 7,
+        .minVal = 0,
+        .maxVal = 0,
+        .left = 4,
+        .right = 0,
+        .unk8 = 6,
+    },
+};
+
+const struct OamData gOamData_837645C =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 0,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+const u8 gSpriteImage_8376464[] = INCBIN_U8("graphics/unknown_sprites/83764AC/0.4bpp");
+const u8 gSpriteImage_8376484[] = INCBIN_U8("graphics/unknown_sprites/83764AC/1.4bpp");
+
+const u16 Palette_3764A4[] = INCBIN_U16("graphics/unknown/83764A4.gbapal");
+
+const struct SpriteFrameImage gSpriteImageTable_83764AC[] =
+{
+    { gSpriteImage_8376464, 0x20 },
+    { gSpriteImage_8376484, 0x20 },
+};
+
+const struct SpritePalette gUnknown_083764BC =
+{
+    .data = Palette_3764A4,
+    .tag = 0x1000,
+};
+
+const union AnimCmd gSpriteAnim_83764C4[] =
+{
+    ANIMCMD_FRAME(0, 30),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gSpriteAnim_83764CC[] =
+{
+    ANIMCMD_FRAME(0, 158, .vFlip = TRUE),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gSpriteAnim_83764D4[] =
+{
+    ANIMCMD_FRAME(1, 30),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd *const gSpriteAnimTable_83764DC[] =
+{
+    gSpriteAnim_83764C4,
+    gSpriteAnim_83764CC,
+    gSpriteAnim_83764D4,
+};
+
+const struct SpriteTemplate gSpriteTemplate_83764E8 =
+{
+    .tileTag = 0xFFFF,
+    .paletteTag = 0x1000,
+    .oam = &gOamData_837645C,
+    .anims = gSpriteAnimTable_83764DC,
+    .images = gSpriteImageTable_83764AC,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
+
+const u8 gUnknown_08376500[] = _(" : ");
+
 void SpriteCB_ResetRtcCusor0(struct Sprite *sprite)
 {
-    int state = gTasks[sprite->data0].data[2];
-    if (state != sprite->data1)
+    int state = gTasks[sprite->data[0]].data[2];
+    if (state != sprite->data[1])
     {
-        sprite->data1 = state;
+        sprite->data[1] = state;
         switch (state)
         {
         case 1:
@@ -88,10 +199,10 @@ void SpriteCB_ResetRtcCusor0(struct Sprite *sprite)
 
 void SpriteCB_ResetRtcCusor1(struct Sprite *sprite)
 {
-    int state = gTasks[sprite->data0].data[2];
-    if (state != sprite->data1)
+    int state = gTasks[sprite->data[0]].data[2];
+    if (state != sprite->data[1])
     {
-        sprite->data1 = state;
+        sprite->data[1] = state;
         switch (state)
         {
         case 1:
@@ -140,13 +251,13 @@ void ResetRtcScreen_CreateCursor(u8 taskId)
 
     spriteId = CreateSpriteAtEnd(&gSpriteTemplate_83764E8, 53, 68, 0);
     gSprites[spriteId].callback = SpriteCB_ResetRtcCusor0;
-    gSprites[spriteId].data0 = taskId;
-    gSprites[spriteId].data1 = -1;
+    gSprites[spriteId].data[0] = taskId;
+    gSprites[spriteId].data[1] = -1;
 
     spriteId = CreateSpriteAtEnd(&gSpriteTemplate_83764E8, 53, 68, 0);
     gSprites[spriteId].callback = SpriteCB_ResetRtcCusor1;
-    gSprites[spriteId].data0 = taskId;
-    gSprites[spriteId].data1 = -1;
+    gSprites[spriteId].data[0] = taskId;
+    gSprites[spriteId].data[1] = -1;
 }
 
 void ResetRtcScreen_FreeCursorPalette(void)
@@ -235,7 +346,7 @@ void Task_ResetRtc_1(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     u8 selection = data[2];
-    struct ResetRtcStruct *selectionInfo = &gUnknown_08376420[selection - 1];
+    const struct ResetRtcStruct *selectionInfo = &gUnknown_08376420[selection - 1];
 
     if (gMain.newKeys & B_BUTTON)
     {

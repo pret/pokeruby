@@ -1,6 +1,9 @@
 #ifndef GUARD_FLAGS_H
 #define GUARD_FLAGS_H
 
+// scripts
+#define FLAG_PENDING_DAYCARE_EGG 0x86
+
 #define TRAINER_FLAG_START 0x500
 
 // SYSTEM FLAGS

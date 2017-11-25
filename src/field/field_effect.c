@@ -28,7 +28,7 @@
 
 #define subsprite_table(ptr) {.subsprites = ptr, .subspriteCount = (sizeof ptr) / (sizeof(struct Subsprite))}
 
-EWRAM_DATA u32 gFieldEffectArguments[8] = {0};
+EWRAM_DATA s32 gFieldEffectArguments[8] = {0};
 
 const u32 gSpriteImage_839DC14[] = INCBIN_U32("graphics/birch_speech/birch.4bpp");
 const u16 gBirchPalette[16] = INCBIN_U16("graphics/birch_speech/birch.gbapal");
@@ -886,16 +886,16 @@ void PokecenterHealEffect_0(struct Task *task)
 
 void PokecenterHealEffect_1(struct Task *task)
 {
-    if (gSprites[task->data[6]].data0 > 1)
+    if (gSprites[task->data[6]].data[0] > 1)
     {
-        gSprites[task->data[7]].data0++;
+        gSprites[task->data[7]].data[0]++;
         task->data[0]++;
     }
 }
 
 void PokecenterHealEffect_2(struct Task *task)
 {
-    if (gSprites[task->data[6]].data0 > 4)
+    if (gSprites[task->data[6]].data[0] > 4)
     {
         task->data[0]++;
     }
@@ -903,7 +903,7 @@ void PokecenterHealEffect_2(struct Task *task)
 
 void PokecenterHealEffect_3(struct Task *task)
 {
-    if (gSprites[task->data[6]].data0 > 6)
+    if (gSprites[task->data[6]].data[0] > 6)
     {
         DestroySprite(&gSprites[task->data[6]]);
         FieldEffectActiveListRemove(FLDEFF_POKECENTER_HEAL);
@@ -949,7 +949,7 @@ void HallOfFameRecordEffect_0(struct Task *task)
 
 void HallOfFameRecordEffect_1(struct Task *task)
 {
-    if (gSprites[task->data[6]].data0 > 1)
+    if (gSprites[task->data[6]].data[0] > 1)
     {
         task->data[15]++; // was this ever initialized? is this ever used?
         task->data[0]++;
@@ -958,7 +958,7 @@ void HallOfFameRecordEffect_1(struct Task *task)
 
 void HallOfFameRecordEffect_2(struct Task *task)
 {
-    if (gSprites[task->data[6]].data0 > 4)
+    if (gSprites[task->data[6]].data[0] > 4)
     {
         task->data[0]++;
     }
@@ -966,7 +966,7 @@ void HallOfFameRecordEffect_2(struct Task *task)
 
 void HallOfFameRecordEffect_3(struct Task *task)
 {
-    if (gSprites[task->data[6]].data0 > 6)
+    if (gSprites[task->data[6]].data[0] > 6)
     {
         DestroySprite(&gSprites[task->data[6]]);
         FieldEffectActiveListRemove(FLDEFF_HALL_OF_FAME_RECORD);
@@ -984,46 +984,46 @@ u8 CreatePokeballGlowSprite(s16 data6, s16 x, s16 y, u16 data5)
     sprite = &gSprites[spriteId];
     sprite->pos2.x = x;
     sprite->pos2.y = y;
-    sprite->data5 = data5;
-    sprite->data6 = data6;
-    sprite->data7 = spriteId;
+    sprite->data[5] = data5;
+    sprite->data[6] = data6;
+    sprite->data[7] = spriteId;
     return spriteId;
 }
 
 void SpriteCB_PokeballGlowEffect(struct Sprite *sprite)
 {
-    gUnknown_0839F288[sprite->data0](sprite);
+    gUnknown_0839F288[sprite->data[0]](sprite);
 }
 
 void PokeballGlowEffect_0(struct Sprite *sprite)
 {
     u8 endSpriteId;
-    if (sprite->data1 == 0 || (--sprite->data1) == 0)
+    if (sprite->data[1] == 0 || (--sprite->data[1]) == 0)
     {
-        sprite->data1 = 25;
-        endSpriteId = CreateSpriteAtEnd(&gSpriteTemplate_839F208, gUnknown_0839F2A8[sprite->data2].x + sprite->pos2.x, gUnknown_0839F2A8[sprite->data2].y + sprite->pos2.y, 0);
+        sprite->data[1] = 25;
+        endSpriteId = CreateSpriteAtEnd(&gSpriteTemplate_839F208, gUnknown_0839F2A8[sprite->data[2]].x + sprite->pos2.x, gUnknown_0839F2A8[sprite->data[2]].y + sprite->pos2.y, 0);
         gSprites[endSpriteId].oam.priority = 2;
-        gSprites[endSpriteId].data0 = sprite->data7;
-        sprite->data2++;
-        sprite->data6--;
+        gSprites[endSpriteId].data[0] = sprite->data[7];
+        sprite->data[2]++;
+        sprite->data[6]--;
         PlaySE(SE_BOWA);
     }
-    if (sprite->data6 == 0)
+    if (sprite->data[6] == 0)
     {
-        sprite->data1 = 32;
-        sprite->data0++;
+        sprite->data[1] = 32;
+        sprite->data[0]++;
     }
 }
 
 void PokeballGlowEffect_1(struct Sprite *sprite)
 {
-    if ((--sprite->data1) == 0)
+    if ((--sprite->data[1]) == 0)
     {
-        sprite->data0++;
-        sprite->data1 = 8;
-        sprite->data2 = 0;
-        sprite->data3 = 0;
-        if (sprite->data5)
+        sprite->data[0]++;
+        sprite->data[1] = 8;
+        sprite->data[2] = 0;
+        sprite->data[3] = 0;
+        if (sprite->data[5])
         {
             PlayFanfare(BGM_ME_ASA);
         }
@@ -1033,48 +1033,48 @@ void PokeballGlowEffect_1(struct Sprite *sprite)
 void PokeballGlowEffect_2(struct Sprite *sprite)
 {
     u8 phase;
-    if ((--sprite->data1) == 0)
+    if ((--sprite->data[1]) == 0)
     {
-        sprite->data1 = 8;
-        sprite->data2++;
-        sprite->data2 &= 3;
-        if (sprite->data2 == 0)
+        sprite->data[1] = 8;
+        sprite->data[2]++;
+        sprite->data[2] &= 3;
+        if (sprite->data[2] == 0)
         {
-            sprite->data3++;
+            sprite->data[3]++;
         }
     }
-    phase = (sprite->data2 + 3) & 3;
+    phase = (sprite->data[2] + 3) & 3;
     MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(0x1007) << 4) + 0x108, gUnknown_0839F2C0[phase], gUnknown_0839F2C4[phase], gUnknown_0839F2C8[phase]);
-    phase = (sprite->data2 + 2) & 3;
+    phase = (sprite->data[2] + 2) & 3;
     MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(0x1007) << 4) + 0x106, gUnknown_0839F2C0[phase], gUnknown_0839F2C4[phase], gUnknown_0839F2C8[phase]);
-    phase = (sprite->data2 + 1) & 3;
+    phase = (sprite->data[2] + 1) & 3;
     MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(0x1007) << 4) + 0x102, gUnknown_0839F2C0[phase], gUnknown_0839F2C4[phase], gUnknown_0839F2C8[phase]);
-    phase = sprite->data2;
+    phase = sprite->data[2];
     MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(0x1007) << 4) + 0x105, gUnknown_0839F2C0[phase], gUnknown_0839F2C4[phase], gUnknown_0839F2C8[phase]);
     MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(0x1007) << 4) + 0x103, gUnknown_0839F2C0[phase], gUnknown_0839F2C4[phase], gUnknown_0839F2C8[phase]);
-    if (sprite->data3 > 2)
+    if (sprite->data[3] > 2)
     {
-        sprite->data0++;
-        sprite->data1 = 8;
-        sprite->data2 = 0;
+        sprite->data[0]++;
+        sprite->data[1] = 8;
+        sprite->data[2] = 0;
     }
 }
 
 void PokeballGlowEffect_3(struct Sprite *sprite)
 {
     u8 phase;
-    if ((--sprite->data1) == 0)
+    if ((--sprite->data[1]) == 0)
     {
-        sprite->data1 = 8;
-        sprite->data2++;
-        sprite->data2 &= 3;
-        if (sprite->data2 == 3)
+        sprite->data[1] = 8;
+        sprite->data[2]++;
+        sprite->data[2] &= 3;
+        if (sprite->data[2] == 3)
         {
-            sprite->data0++;
-            sprite->data1 = 30;
+            sprite->data[0]++;
+            sprite->data[1] = 30;
         }
     }
-    phase = sprite->data2;
+    phase = sprite->data[2];
     MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(0x1007) << 4) + 0x108, gUnknown_0839F2C0[phase], gUnknown_0839F2C4[phase], gUnknown_0839F2C8[phase]);
     MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(0x1007) << 4) + 0x106, gUnknown_0839F2C0[phase], gUnknown_0839F2C4[phase], gUnknown_0839F2C8[phase]);
     MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(0x1007) << 4) + 0x102, gUnknown_0839F2C0[phase], gUnknown_0839F2C4[phase], gUnknown_0839F2C8[phase]);
@@ -1084,22 +1084,22 @@ void PokeballGlowEffect_3(struct Sprite *sprite)
 
 void PokeballGlowEffect_4(struct Sprite *sprite)
 {
-    if ((--sprite->data1) == 0)
+    if ((--sprite->data[1]) == 0)
     {
-        sprite->data0++;
+        sprite->data[0]++;
     }
 }
 
 void PokeballGlowEffect_5(struct Sprite *sprite)
 {
-    sprite->data0++;
+    sprite->data[0]++;
 }
 
 void PokeballGlowEffect_6(struct Sprite *sprite)
 {
-    if (sprite->data5 == 0 || IsFanfareTaskInactive())
+    if (sprite->data[5] == 0 || IsFanfareTaskInactive())
     {
-        sprite->data0++;
+        sprite->data[0]++;
     }
 }
 
@@ -1109,7 +1109,7 @@ void PokeballGlowEffect_7(struct Sprite *sprite)
 
 void SpriteCB_PokeballGlow(struct Sprite *sprite)
 {
-    if (gSprites[sprite->data0].data0 > 4)
+    if (gSprites[sprite->data[0]].data[0] > 4)
     {
         FieldEffectFreeGraphicsResources(sprite);
     }
@@ -1129,9 +1129,9 @@ u8 PokecenterHealEffectHelper(s16 x, s16 y)
 
 void SpriteCB_PokecenterMonitor(struct Sprite *sprite)
 {
-    if (sprite->data0 != 0)
+    if (sprite->data[0] != 0)
     {
-        sprite->data0 = 0;
+        sprite->data[0] = 0;
         sprite->invisible = 0;
         StartSpriteAnim(sprite, 1);
     }
@@ -1153,21 +1153,21 @@ void HallOfFameRecordEffectHelper(s16 a0, s16 a1, s16 a2, u8 a3)
         spriteIdAtEnd = CreateSpriteAtEnd(&gSpriteTemplate_839F250, a1, a2, 0);
     }
     gSprites[spriteIdAtEnd].invisible = 1;
-    gSprites[spriteIdAtEnd].data0 = a0;
+    gSprites[spriteIdAtEnd].data[0] = a0;
 }
 
 void SpriteCB_HallOfFameMonitor(struct Sprite *sprite)
 {
-    if (gTasks[sprite->data0].data[15])
+    if (gTasks[sprite->data[0]].data[15])
     {
-        if (sprite->data1 == 0 || (--sprite->data1) == 0)
+        if (sprite->data[1] == 0 || (--sprite->data[1]) == 0)
         {
-            sprite->data1 = 16;
+            sprite->data[1] = 16;
             sprite->invisible ^= 1;
         }
-        sprite->data2++;
+        sprite->data[2]++;
     }
-    if (sprite->data2 > 127)
+    if (sprite->data[2] > 127)
     {
         FieldEffectFreeGraphicsResources(sprite);
     }
@@ -2480,7 +2480,7 @@ void sub_8088228(struct Task *task)
 void sub_80882B4(struct Task *task)
 {
     task->data[5] -= 16;
-    if (gSprites[task->data[15]].data7)
+    if (gSprites[task->data[15]].data[7])
     {
         task->data[0]++;
     }
@@ -2607,7 +2607,7 @@ void sub_8088554(struct Task *task)
 void sub_80885A8(struct Task *task)
 {
     sub_80886F8(task);
-    if (gSprites[task->data[15]].data7)
+    if (gSprites[task->data[15]].data[7])
     {
         task->data[0]++;
     }
@@ -2827,8 +2827,8 @@ u8 sub_8088830(u32 a0, u32 a1, u32 a2)
     sprite = &gSprites[monSprite];
     sprite->callback = SpriteCallbackDummy;
     sprite->oam.priority = 0;
-    sprite->data0 = a0;
-    sprite->data6 = v0;
+    sprite->data[0] = a0;
+    sprite->data[6] = v0;
     return monSprite;
 }
 
@@ -2839,14 +2839,14 @@ void sub_8088890(struct Sprite *sprite)
     if ((sprite->pos1.x -= 20) <= 0x78)
     {
         sprite->pos1.x = 0x78;
-        sprite->data1 = 30;
+        sprite->data[1] = 30;
         sprite->callback = sub_80888D4;
-        if (sprite->data6)
+        if (sprite->data[6])
         {
-            PlayCry2(sprite->data0, 0, 0x7d, 0xa);
+            PlayCry2(sprite->data[0], 0, 0x7d, 0xa);
         } else
         {
-            PlayCry1(sprite->data0, 0);
+            PlayCry1(sprite->data[0], 0);
         }
     }
 }
@@ -2855,7 +2855,7 @@ void sub_80888F0(struct Sprite *);
 
 void sub_80888D4(struct Sprite *sprite)
 {
-    if ((--sprite->data1) == 0)
+    if ((--sprite->data[1]) == 0)
     {
         sprite->callback = sub_80888F0;
     }
@@ -2865,7 +2865,7 @@ void sub_80888F0(struct Sprite *sprite)
 {
     if (sprite->pos1.x < -0x40)
     {
-        sprite->data7 = 1;
+        sprite->data[7] = 1;
     } else
     {
         sprite->pos1.x -= 20;
@@ -2969,7 +2969,7 @@ u8 FldEff_NPCFlyOut(void)
     sprite->oam.paletteNum = 0;
     sprite->oam.priority = 1;
     sprite->callback = sub_8088BC4;
-    sprite->data1 = gFieldEffectArguments[0];
+    sprite->data[1] = gFieldEffectArguments[0];
     PlaySE(SE_W019);
     return spriteId;
 }
@@ -2977,19 +2977,19 @@ u8 FldEff_NPCFlyOut(void)
 void sub_8088BC4(struct Sprite *sprite)
 {
     struct Sprite *npcSprite;
-    sprite->pos2.x = Cos(sprite->data2, 0x8c);
-    sprite->pos2.y = Sin(sprite->data2, 0x48);
-    sprite->data2 = (sprite->data2 + 4) & 0xff;
-    if (sprite->data0)
+    sprite->pos2.x = Cos(sprite->data[2], 0x8c);
+    sprite->pos2.y = Sin(sprite->data[2], 0x48);
+    sprite->data[2] = (sprite->data[2] + 4) & 0xff;
+    if (sprite->data[0])
     {
-        npcSprite = &gSprites[sprite->data1];
+        npcSprite = &gSprites[sprite->data[1]];
         npcSprite->coordOffsetEnabled = 0;
         npcSprite->pos1.x = sprite->pos1.x + sprite->pos2.x;
         npcSprite->pos1.y = sprite->pos1.y + sprite->pos2.y - 8;
         npcSprite->pos2.x = 0;
         npcSprite->pos2.y = 0;
     }
-    if (sprite->data2 >= 0x80)
+    if (sprite->data[2] >= 0x80)
     {
         FieldEffectStop(sprite, FLDEFF_NPCFLY_OUT);
     }
@@ -3149,7 +3149,7 @@ u8 sub_8088F60(void)
 
 u8 sub_8088FA4(u8 spriteId)
 {
-    return gSprites[spriteId].data7;
+    return gSprites[spriteId].data[7];
 }
 
 void sub_8088FC0(u8 spriteId)
@@ -3161,20 +3161,20 @@ void sub_8088FC0(u8 spriteId)
     sprite->pos1.y = 0x00;
     sprite->pos2.x = 0;
     sprite->pos2.y = 0;
-    memset(&sprite->data0, 0, 8 * sizeof(u16) /* zero all data cells */);
-    sprite->data6 = 0x40;
+    memset(&sprite->data[0], 0, 8 * sizeof(u16) /* zero all data cells */);
+    sprite->data[6] = 0x40;
 }
 
 void sub_8088FFC(u8 a0, u8 a1)
 {
-    gSprites[a0].data6 = a1;
+    gSprites[a0].data[6] = a1;
 }
 
 void sub_8089018(struct Sprite *sprite)
 {
-    if (sprite->data7 == 0)
+    if (sprite->data[7] == 0)
     {
-        if (sprite->data0 == 0)
+        if (sprite->data[0] == 0)
         {
             sprite->oam.affineMode = 3;
             sprite->affineAnims = gSpriteAffineAnimTable_0839F44C;
@@ -3182,20 +3182,20 @@ void sub_8089018(struct Sprite *sprite)
             StartSpriteAffineAnim(sprite, 0);
             sprite->pos1.x = 0x76;
             sprite->pos1.y = -0x30;
-            sprite->data0++;
-            sprite->data1 = 0x40;
-            sprite->data2 = 0x100;
+            sprite->data[0]++;
+            sprite->data[1] = 0x40;
+            sprite->data[2] = 0x100;
         }
-        sprite->data1 += (sprite->data2 >> 8);
-        sprite->pos2.x = Cos(sprite->data1, 0x78);
-        sprite->pos2.y = Sin(sprite->data1, 0x78);
-        if (sprite->data2 < 0x800)
+        sprite->data[1] += (sprite->data[2] >> 8);
+        sprite->pos2.x = Cos(sprite->data[1], 0x78);
+        sprite->pos2.y = Sin(sprite->data[1], 0x78);
+        if (sprite->data[2] < 0x800)
         {
-            sprite->data2 += 0x60;
+            sprite->data[2] += 0x60;
         }
-        if (sprite->data1 > 0x81)
+        if (sprite->data[1] > 0x81)
         {
-            sprite->data7++;
+            sprite->data[7]++;
             sprite->oam.affineMode = 0;
             FreeOamMatrix(sprite->oam.matrixNum);
             CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, 0);
@@ -3206,29 +3206,29 @@ void sub_8089018(struct Sprite *sprite)
 void sub_80890D8(struct Sprite *sprite)
 {
     struct Sprite *sprite1;
-    sprite->pos2.x = Cos(sprite->data2, 0x8c);
-    sprite->pos2.y = Sin(sprite->data2, 0x48);
-    sprite->data2 = (sprite->data2 + 4) & 0xff;
-    if (sprite->data6 != 0x40)
+    sprite->pos2.x = Cos(sprite->data[2], 0x8c);
+    sprite->pos2.y = Sin(sprite->data[2], 0x48);
+    sprite->data[2] = (sprite->data[2] + 4) & 0xff;
+    if (sprite->data[6] != 0x40)
     {
-        sprite1 = &gSprites[sprite->data6];
+        sprite1 = &gSprites[sprite->data[6]];
         sprite1->coordOffsetEnabled = 0;
         sprite1->pos1.x = sprite->pos1.x + sprite->pos2.x;
         sprite1->pos1.y = sprite->pos1.y + sprite->pos2.y - 8;
         sprite1->pos2.x = 0;
         sprite1->pos2.y = 0;
     }
-    if (sprite->data2 >= 0x80)
+    if (sprite->data[2] >= 0x80)
     {
-        sprite->data7 = 1;
+        sprite->data[7] = 1;
     }
 }
 
 void sub_808914C(struct Sprite *sprite)
 {
-    if (sprite->data7 == 0)
+    if (sprite->data[7] == 0)
     {
-        if (sprite->data0 == 0)
+        if (sprite->data[0] == 0)
         {
             sprite->oam.affineMode = 3;
             sprite->affineAnims = gSpriteAffineAnimTable_0839F44C;
@@ -3236,31 +3236,31 @@ void sub_808914C(struct Sprite *sprite)
             StartSpriteAffineAnim(sprite, 1);
             sprite->pos1.x = 0x5e;
             sprite->pos1.y = -0x20;
-            sprite->data0++;
-            sprite->data1 = 0xf0;
-            sprite->data2 = 0x800;
-            sprite->data4 = 0x80;
+            sprite->data[0]++;
+            sprite->data[1] = 0xf0;
+            sprite->data[2] = 0x800;
+            sprite->data[4] = 0x80;
         }
-        sprite->data1 += sprite->data2 >> 8;
-        sprite->data3 += sprite->data2 >> 8;
-        sprite->data1 &= 0xff;
-        sprite->pos2.x = Cos(sprite->data1, 0x20);
-        sprite->pos2.y = Sin(sprite->data1, 0x78);
-        if (sprite->data2 > 0x100)
+        sprite->data[1] += sprite->data[2] >> 8;
+        sprite->data[3] += sprite->data[2] >> 8;
+        sprite->data[1] &= 0xff;
+        sprite->pos2.x = Cos(sprite->data[1], 0x20);
+        sprite->pos2.y = Sin(sprite->data[1], 0x78);
+        if (sprite->data[2] > 0x100)
         {
-            sprite->data2 -= sprite->data4;
+            sprite->data[2] -= sprite->data[4];
         }
-        if (sprite->data4 < 0x100)
+        if (sprite->data[4] < 0x100)
         {
-            sprite->data4 += 24;
+            sprite->data[4] += 24;
         }
-        if (sprite->data2 < 0x100)
+        if (sprite->data[2] < 0x100)
         {
-            sprite->data2 = 0x100;
+            sprite->data[2] = 0x100;
         }
-        if (sprite->data3 >= 60)
+        if (sprite->data[3] >= 60)
         {
-            sprite->data7++;
+            sprite->data[7]++;
             sprite->oam.affineMode = 0;
             FreeOamMatrix(sprite->oam.matrixNum);
             sprite->invisible = 1;
