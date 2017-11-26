@@ -707,9 +707,9 @@ static void InitializeCursorPosition(void)
     u16 r9;
 
     if (gSaveBlock1.location.mapGroup == 25
-     && (gSaveBlock1.location.mapNum == MAP_NUM(MAP_SS_TIDAL_CORRIDOR)
-      || gSaveBlock1.location.mapNum == MAP_NUM(MAP_SS_TIDAL_LOWER_DECK)
-      || gSaveBlock1.location.mapNum == MAP_NUM(MAP_SS_TIDAL_ROOMS)))
+     && (gSaveBlock1.location.mapNum == MAP_NUM(SS_TIDAL_CORRIDOR)
+      || gSaveBlock1.location.mapNum == MAP_NUM(SS_TIDAL_LOWER_DECK)
+      || gSaveBlock1.location.mapNum == MAP_NUM(SS_TIDAL_ROOMS)))
     {
         sub_80FB600();
         return;

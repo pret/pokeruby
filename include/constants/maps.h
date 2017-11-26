@@ -464,7 +464,7 @@
 #define MAP_ROUTE124_DIVING_TREASURE_HUNTERS_HOUSE (0 | (33 << 8))
 
 
-#define MAP_GROUP(map) (map >> 8)
-#define MAP_NUM(map) (map & 0xFF)
+#define MAP_GROUP(map) (MAP_##map >> 8)
+#define MAP_NUM(map) (MAP_##map & 0xFF)
 
 #endif  // GUARD_CONSTANTS_MAPS_H

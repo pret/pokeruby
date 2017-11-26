@@ -551,8 +551,8 @@ void UpdateTVScreensOnMap(int width, int height)
     case 2:
         break;
     default:
-        if (gSaveBlock1.location.mapGroup == MAP_GROUP(MAP_LILYCOVE_CITY_COVE_LILY_MOTEL_1F)
-         && gSaveBlock1.location.mapNum == MAP_NUM(MAP_LILYCOVE_CITY_COVE_LILY_MOTEL_1F))
+        if (gSaveBlock1.location.mapGroup == MAP_GROUP(LILYCOVE_CITY_COVE_LILY_MOTEL_1F)
+         && gSaveBlock1.location.mapNum == MAP_NUM(LILYCOVE_CITY_COVE_LILY_MOTEL_1F))
         {
             SetTVMetatilesOnMap(width, height, 0x3);
         }
@@ -1460,16 +1460,16 @@ bool8 IsPriceDiscounted(u8 arg0)
     switch (arg0)
     {
     case 1:
-        if (gSaveBlock1.location.mapGroup == MAP_GROUP(MAP_SLATEPORT_CITY)
-         && gSaveBlock1.location.mapNum == MAP_NUM(MAP_SLATEPORT_CITY)
+        if (gSaveBlock1.location.mapGroup == MAP_GROUP(SLATEPORT_CITY)
+         && gSaveBlock1.location.mapNum == MAP_NUM(SLATEPORT_CITY)
          && gScriptLastTalked == 0x1a)
             return TRUE;
         else
             return FALSE;
         break;
     case 3:
-        if (gSaveBlock1.location.mapGroup == MAP_GROUP(MAP_LILYCOVE_CITY_DEPARTMENT_STORE_ROOFTOP)
-         && gSaveBlock1.location.mapNum == MAP_NUM(MAP_LILYCOVE_CITY_DEPARTMENT_STORE_ROOFTOP))
+        if (gSaveBlock1.location.mapGroup == MAP_GROUP(LILYCOVE_CITY_DEPARTMENT_STORE_ROOFTOP)
+         && gSaveBlock1.location.mapNum == MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_ROOFTOP))
             return TRUE;
         else
             return FALSE;
@@ -2121,16 +2121,16 @@ u32 GetPlayerTrainerId(void)
 
 u8 CheckForBigMovieOrEmergencyNewsOnTV(void)
 {
-    if (gSaveBlock1.location.mapGroup != MAP_GROUP(MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F))
+    if (gSaveBlock1.location.mapGroup != MAP_GROUP(LITTLEROOT_TOWN_BRENDANS_HOUSE_1F))
         return 0;
     if (gSaveBlock2.playerGender == MALE)
     {
-        if (gSaveBlock1.location.mapNum != MAP_NUM(MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F))
+        if (gSaveBlock1.location.mapNum != MAP_NUM(LITTLEROOT_TOWN_BRENDANS_HOUSE_1F))
             return 0;
     }
     else
     {
-        if (gSaveBlock1.location.mapNum != MAP_NUM(MAP_LITTLEROOT_TOWN_MAYS_HOUSE_1F))
+        if (gSaveBlock1.location.mapNum != MAP_NUM(LITTLEROOT_TOWN_MAYS_HOUSE_1F))
             return 0;
     }
     if (FlagGet(SYS_TV_LATI) == 1)
@@ -2142,11 +2142,11 @@ u8 CheckForBigMovieOrEmergencyNewsOnTV(void)
 
 void GetMomOrDadStringForTVMessage(void)
 {
-    if (gSaveBlock1.location.mapGroup == MAP_GROUP(MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F))
+    if (gSaveBlock1.location.mapGroup == MAP_GROUP(LITTLEROOT_TOWN_BRENDANS_HOUSE_1F))
     {
         if (gSaveBlock2.playerGender == MALE)
         {
-            if (gSaveBlock1.location.mapNum == MAP_NUM(MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F))
+            if (gSaveBlock1.location.mapNum == MAP_NUM(LITTLEROOT_TOWN_BRENDANS_HOUSE_1F))
             {
                 StringCopy(gStringVar1, gOtherText_Mom);
                 VarSet(VAR_0x4003, 1);
@@ -2154,7 +2154,7 @@ void GetMomOrDadStringForTVMessage(void)
         }
         else
         {
-            if (gSaveBlock1.location.mapNum == MAP_NUM(MAP_LITTLEROOT_TOWN_MAYS_HOUSE_1F))
+            if (gSaveBlock1.location.mapNum == MAP_NUM(LITTLEROOT_TOWN_MAYS_HOUSE_1F))
             {
                 StringCopy(gStringVar1, gOtherText_Mom);
                 VarSet(VAR_0x4003, 1);
