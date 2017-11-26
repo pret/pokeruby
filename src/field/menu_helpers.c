@@ -4,7 +4,7 @@
 #include "link.h"
 #include "mail_data.h"
 #include "main.h"
-#include "map_constants.h"
+#include "constants/maps.h"
 #include "menu.h"
 #include "menu_helpers.h"
 #include "overworld.h"
@@ -261,7 +261,7 @@ bool8 sub_80F92F4(u16 itemId)
         return TRUE;
     }
 
-    if (!(gSaveBlock1.location.mapGroup == MAP_GROUP_TRADE_CENTER && gSaveBlock1.location.mapNum == MAP_ID_TRADE_CENTER))
+    if (!(gSaveBlock1.location.mapGroup == MAP_GROUP(MAP_TRADE_CENTER) && gSaveBlock1.location.mapNum == MAP_NUM(MAP_TRADE_CENTER)))
     {
         return TRUE;
     }

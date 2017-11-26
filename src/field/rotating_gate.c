@@ -3,7 +3,7 @@
 #include "event_data.h"
 #include "field_map_obj.h"
 #include "fieldmap.h"
-#include "map_constants.h"
+#include "constants/maps.h"
 #include "constants/songs.h"
 #include "sound.h"
 #include "sprite.h"
@@ -622,14 +622,14 @@ static EWRAM_DATA u8 gRotatingGate_PuzzleCount = 0;
 
 static int GetCurrentMapRotatingGatePuzzleType(void)
 {
-    if (gSaveBlock1.location.mapGroup == MAP_GROUP_FORTREE_CITY_GYM &&
-        gSaveBlock1.location.mapNum == MAP_ID_FORTREE_CITY_GYM)
+    if (gSaveBlock1.location.mapGroup == MAP_GROUP(MAP_FORTREE_CITY_GYM) &&
+        gSaveBlock1.location.mapNum == MAP_NUM(MAP_FORTREE_CITY_GYM))
     {
         return PUZZLE_FORTREE_CITY_GYM;
     }
 
-    if (gSaveBlock1.location.mapGroup == MAP_GROUP_ROUTE110_TRICK_HOUSE_PUZZLE6 &&
-        gSaveBlock1.location.mapNum == MAP_ID_ROUTE110_TRICK_HOUSE_PUZZLE6)
+    if (gSaveBlock1.location.mapGroup == MAP_GROUP(MAP_ROUTE110_TRICK_HOUSE_PUZZLE6) &&
+        gSaveBlock1.location.mapNum == MAP_NUM(MAP_ROUTE110_TRICK_HOUSE_PUZZLE6))
     {
         return PUZZLE_ROUTE110_TRICK_HOUSE_PUZZLE6;
     }

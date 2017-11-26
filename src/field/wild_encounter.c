@@ -5,7 +5,7 @@
 #include "event_data.h"
 #include "field_player_avatar.h"
 #include "fieldmap.h"
-#include "map_constants.h"
+#include "constants/maps.h"
 #include "metatile_behavior.h"
 #include "pokeblock.h"
 #include "random.h"
@@ -2953,8 +2953,8 @@ static bool8 CheckFeebas(void)
     u8 route119section = 0;
     u16 waterTileNum;
 
-    if (gSaveBlock1.location.mapGroup == MAP_GROUP_ROUTE119
-     && gSaveBlock1.location.mapNum == MAP_ID_ROUTE119)
+    if (gSaveBlock1.location.mapGroup == MAP_GROUP(MAP_ROUTE119)
+     && gSaveBlock1.location.mapNum == MAP_NUM(MAP_ROUTE119))
     {
         GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
         x -= 7;

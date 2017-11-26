@@ -6,7 +6,7 @@
 #include "fieldmap.h"
 #include "constants/flags.h"
 #include "main.h"
-#include "map_constants.h"
+#include "constants/maps.h"
 #include "map_obj_lock.h"
 #include "menu.h"
 #include "rom6.h"
@@ -25,8 +25,8 @@ extern u8 S_OpenRegiceChamber[]; // regiice event script
 bool8 ShouldDoBrailleDigEffect(void)
 {
     if (!FlagGet(SYS_BRAILLE_DIG)
-     && (gSaveBlock1.location.mapGroup == MAP_GROUP_SEALED_CHAMBER_OUTER_ROOM
-     && gSaveBlock1.location.mapNum == MAP_ID_SEALED_CHAMBER_OUTER_ROOM))
+     && (gSaveBlock1.location.mapGroup == MAP_GROUP(MAP_SEALED_CHAMBER_OUTER_ROOM)
+     && gSaveBlock1.location.mapNum == MAP_NUM(MAP_SEALED_CHAMBER_OUTER_ROOM)))
     {
         if (gSaveBlock1.pos.x == 10 && gSaveBlock1.pos.y == 3)
             return TRUE;
@@ -68,7 +68,7 @@ bool8 CheckRelicanthWailord(void)
 
 bool8 ShouldDoBrailleStrengthEffect(void)
 {
-    if (!FlagGet(SYS_BRAILLE_STRENGTH) && (gSaveBlock1.location.mapGroup == MAP_GROUP_DESERT_RUINS && gSaveBlock1.location.mapNum == MAP_ID_DESERT_RUINS))
+    if (!FlagGet(SYS_BRAILLE_STRENGTH) && (gSaveBlock1.location.mapGroup == MAP_GROUP(MAP_DESERT_RUINS) && gSaveBlock1.location.mapNum == MAP_NUM(MAP_DESERT_RUINS)))
     {
         if (gSaveBlock1.pos.x == 10 && gSaveBlock1.pos.y == 23)
             return TRUE;
@@ -98,7 +98,7 @@ void DoBrailleStrengthEffect(void)
 
 bool8 ShouldDoBrailleFlyEffect(void)
 {
-    if (!FlagGet(SYS_BRAILLE_FLY) && (gSaveBlock1.location.mapGroup == MAP_GROUP_ANCIENT_TOMB && gSaveBlock1.location.mapNum == MAP_ID_ANCIENT_TOMB))
+    if (!FlagGet(SYS_BRAILLE_FLY) && (gSaveBlock1.location.mapGroup == MAP_GROUP(MAP_ANCIENT_TOMB) && gSaveBlock1.location.mapNum == MAP_NUM(MAP_ANCIENT_TOMB)))
     {
         if (gSaveBlock1.pos.x == 8 && gSaveBlock1.pos.y == 25)
             return TRUE;
