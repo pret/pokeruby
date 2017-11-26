@@ -3,7 +3,7 @@
 #include "event_data.h"
 #include "field_weather.h"
 #include "pokemon.h"
-#include "rng.h"
+#include "random.h"
 #include "overworld.h"
 #include "rtc.h"
 #include "script.h"

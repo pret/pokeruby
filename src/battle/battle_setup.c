@@ -17,7 +17,7 @@
 #include "metatile_behavior.h"
 #include "opponent_constants.h"
 #include "palette.h"
-#include "rng.h"
+#include "random.h"
 #include "overworld.h"
 #include "safari_zone.h"
 #include "script.h"

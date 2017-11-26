@@ -65,7 +65,7 @@ SECTIONS {
         src/pokemon/pokemon_3.o(.text);
         src/de_rom_8040FE0.o(.text);
         src/engine/trig.o(.text);
-        src/engine/rng.o(.text);
+        src/engine/random.o(.text);
         src/engine/util.o(.text);
         src/engine/blend_palette.o(.text);
         src/field/daycare.o(.text);

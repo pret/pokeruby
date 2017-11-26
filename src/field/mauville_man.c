@@ -7,7 +7,7 @@
 #include "m4a.h"
 #include "menu.h"
 #include "overworld.h"
-#include "rng.h"
+#include "random.h"
 #include "script.h"
 #include "songs.h"
 #include "sound.h"

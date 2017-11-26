@@ -2,7 +2,7 @@
 #include "field_map_obj.h"
 #include "field_weather.h"
 #include "overworld.h"
-#include "rng.h"
+#include "random.h"
 #include "script.h"
 #include "songs.h"
 #include "sound.h"

@@ -15,7 +15,7 @@
 #include "m4a.h"
 #include "data2.h"
 #include "decompress.h"
-#include "rng.h"
+#include "random.h"
 #include "trig.h"
 #include "ewram.h"
 

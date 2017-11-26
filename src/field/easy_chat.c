@@ -4,7 +4,7 @@
 #include "event_data.h"
 #include "field_message_box.h"
 #include "pokedex.h"
-#include "rng.h"
+#include "random.h"
 #include "string_util.h"
 #include "strings.h"
 #include "strings2.h"

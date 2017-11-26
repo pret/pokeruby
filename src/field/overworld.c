@@ -32,7 +32,7 @@
 #include "new_game.h"
 #include "palette.h"
 #include "play_time.h"
-#include "rng.h"
+#include "random.h"
 #include "roamer.h"
 #include "rotating_gate.h"
 #include "safari_zone.h"

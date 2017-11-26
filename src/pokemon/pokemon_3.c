@@ -10,7 +10,7 @@
 #include "m4a.h"
 #include "main.h"
 #include "pokemon.h"
-#include "rng.h"
+#include "random.h"
 #include "overworld.h"
 #include "rom_8077ABC.h"
 #include "rom_8094928.h"

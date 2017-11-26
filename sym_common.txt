@@ -105,7 +105,7 @@ gUnknown_0300434C: @ 300434C
 	.space 0x4
 
 	.include "pokemon/pokemon_1.o"
-	.include "engine/rng.o"
+	.include "engine/random.o"
 	.include "scene/egg_hatch.o"
 	.include "engine/load_save.o"
 

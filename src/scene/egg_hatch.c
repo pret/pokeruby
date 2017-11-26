@@ -11,7 +11,7 @@
 #include "overworld.h"
 #include "palette.h"
 #include "pokemon.h"
-#include "rng.h"
+#include "random.h"
 #include "script.h"
 #include "songs.h"
 #include "sound.h"

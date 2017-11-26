@@ -15,7 +15,7 @@
 #include "overworld.h"
 #include "item.h"
 #include "items.h"
-#include "rng.h"
+#include "random.h"
 #include "save.h"
 #include "menu_cursor.h"
 #include "trig.h"

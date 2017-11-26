@@ -30,7 +30,7 @@
 #include "palette.h"
 #include "party_menu.h"
 #include "pokemon.h"
-#include "rng.h"
+#include "random.h"
 #include "overworld.h"
 #include "rtc.h"
 #include "script.h"

@@ -8,7 +8,7 @@
 #include "species.h"
 #include "pokemon.h"
 #include "data2.h"
-#include "rng.h"
+#include "random.h"
 #include "text.h"
 #include "battle_move_effects.h"
 #include "string_util.h"

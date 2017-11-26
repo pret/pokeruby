@@ -34,7 +34,7 @@
 #include "battle_tower.h"
 #include "field_weather.h"
 #include "pokemon_summary_screen.h"
-#include "rng.h"
+#include "random.h"
 
 #if ENGLISH
 #define CHAR_DECIMAL_SEPARATOR CHAR_PERIOD

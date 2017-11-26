@@ -7,7 +7,7 @@
 #include "load_save.h"
 #include "m4a.h"
 #include "play_time.h"
-#include "rng.h"
+#include "random.h"
 #include "rom3.h"
 #include "overworld.h"
 #include "rtc.h"

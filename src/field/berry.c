@@ -8,7 +8,7 @@
 #include "item_use.h"
 #include "items.h"
 #include "main.h"
-#include "rng.h"
+#include "random.h"
 #include "text.h"
 
 #define BERRY_NAME_LENGTH 6

@@ -11,7 +11,7 @@
 #include "main.h"
 #include "new_game.h"
 #include "palette.h"
-#include "rng.h"
+#include "random.h"
 #include "save.h"
 #include "songs.h"
 #include "sound.h"
