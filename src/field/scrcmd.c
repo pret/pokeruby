@@ -692,7 +692,7 @@ bool8 ScrCmd_setweather(struct ScriptContext *ctx)
 
 bool8 ScrCmd_resetweather(struct ScriptContext *ctx)
 {
-    sub_80806E4();
+    SetSav1WeatherFromCurrMapHeader();
     return FALSE;
 }
 

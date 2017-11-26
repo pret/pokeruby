@@ -204,7 +204,7 @@ _08123384:
 	bl ResetTasks
 	bl FreeAllSpritePalettes
 	bl ResetPaletteFade
-	bl sub_807C828
+	bl StartWeather
 	movs r4, 0
 	ldr r0, _081233D4 @ =gWeatherPtr
 	ldr r0, [r0]
