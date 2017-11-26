@@ -207,6 +207,7 @@ extern u8 gSharedMem[];
 #define eEggHatchData                   (struct EggHatchData*)(&gSharedMem[0x18000])
 #define ePokedexView1                   (struct PokedexView *)(gSharedMem + 0x18000)
 #define UNK_2018000_STRUCT              (*(struct UnknownStruct2018000 *)(gSharedMem + 0x18000))
+#define pssData                         (*(struct PokemonSummaryScreenStruct *)(gSharedMem + 0x18000))
 #define ewram18300                      ((u16 *)(gSharedMem + 0x18300))
 #define ewram18800                      (&gSharedMem[0x18800])
 #define ePokedexView2                   (struct PokedexView *)(gSharedMem + 0x18800)

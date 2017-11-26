@@ -7,6 +7,7 @@
 #include "learn_move.h"
 #include "palette.h"
 #include "pokemon.h"
+#include "pokemon_summary_screen.h"
 #include "overworld.h"
 #include "script.h"
 #include "songs.h"
@@ -36,7 +37,6 @@ extern const u8 *const gUnknown_083CAF70[];
 extern const u8 deuOtherText_ForgotAndLearned[];
 #endif
 
-extern void sub_809D9F0(struct Pokemon *, u8, u8, void *, u32);
 
 struct LearnMoveStruct
 {
@@ -543,7 +543,7 @@ void LearnMoveMain(void)
     case 20:
         if (!gPaletteFade.active)
         {
-            sub_809D9F0(gPlayerParty, sLearnMoveStruct->partyMon, gPlayerPartyCount - 1, sub_81327A4, sLearnMoveStruct->movesToLearn[sLearnMoveStruct->menuSelection]);
+            ShowSelectMovePokemonSummaryScreen(gPlayerParty, sLearnMoveStruct->partyMon, gPlayerPartyCount - 1, sub_81327A4, sLearnMoveStruct->movesToLearn[sLearnMoveStruct->menuSelection]);
             sLearnMoveStruct->state = 28;
         }
         break;

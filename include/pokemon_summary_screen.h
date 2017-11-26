@@ -59,7 +59,7 @@ struct PokemonSummaryScreenStruct
 };
 
 void ShowPokemonSummaryScreen(struct Pokemon *, u8, u8, MainCallback, u8);
-void sub_809D9F0(struct Pokemon *, u8, u8, MainCallback, u16);
+void ShowSelectMovePokemonSummaryScreen(struct Pokemon *, u8, u8, MainCallback, u16);
 u8 sub_809FA30(void);
 u8 pokemon_ailments_get_primary(u32);
 u8 GetMonStatusAndPokerus();
