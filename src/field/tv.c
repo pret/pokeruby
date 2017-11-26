@@ -20,7 +20,7 @@
 #include "strings.h"
 #include "battle.h"
 #include "link.h"
-#include "easy_chat.h"
+#include "constants/easy_chat.h"
 #include "field_map_obj.h"
 #include "field_specials.h"
 #include "item.h"

@@ -5,6 +5,7 @@
 #include "battle_transition.h"
 #include "data2.h"
 #include "easy_chat.h"
+#include "constants/easy_chat.h"
 #include "event_data.h"
 #include "item.h"
 #include "items.h"

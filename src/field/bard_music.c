@@ -1,6 +1,6 @@
 #include "global.h"
 #include "bard_music.h"
-#include "easy_chat.h"
+#include "constants/easy_chat.h"
 
 struct BardSound
 {

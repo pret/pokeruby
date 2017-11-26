@@ -1,4 +1,5 @@
 #include "constants/abilities.h"
+#include "constants/moves.h"
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
 	.include "asm/macros/battle_ai_script.inc"

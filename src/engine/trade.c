@@ -6,7 +6,7 @@
 #include "constants/species.h"
 #include "items.h"
 #include "moves.h"
-#include "easy_chat.h"
+#include "constants/easy_chat.h"
 #include "link.h"
 #include "strings2.h"
 #include "graphics.h"
