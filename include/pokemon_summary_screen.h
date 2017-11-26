@@ -52,8 +52,8 @@ struct PokemonSummaryScreenStruct
     /*0x7A*/ u8 switchMoveIndex;
     /*0x7B*/ bool8 disableMoveOrderEditing;
     /*0x7C*/ u16 moveToLearn;
-    /*0x7E*/ u8 headerTextId; // used as index into gUnknown_083C1068
-    /*0x7F*/ u8 headerActionTextId; // used as index into gUnknown_083C1068
+    /*0x7E*/ u8 headerTextId; // used as index into sPageHeaderTexts
+    /*0x7F*/ u8 headerActionTextId; // used as index into sPageHeaderTexts
     /*0x80*/ u8 bgToggle;
     /*0x84*/ TaskFunc unk84;
 };
