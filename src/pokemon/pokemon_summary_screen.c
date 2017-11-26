@@ -39,7 +39,7 @@ static void sub_80A1D84(struct Pokemon *);
 static void sub_80A18C4(void);
 static bool8 LoadPokemonSummaryScreenGraphics(void);
 static bool8 MonKnowsMultipleMoves(struct Pokemon *);
-extern void PrintSummaryWindowHeaderText(void);
+static void PrintSummaryWindowHeaderText(void);
 static void sub_80A1DCC(struct Pokemon *);
 static void sub_809FE80(void);
 static void sub_80A00A4(void);
@@ -59,81 +59,63 @@ static void sub_809E13C(u8 taskId);
 static void sub_80A1950(void);
 static void sub_809DA1C(void);
 static void sub_809D844(void);
-
-extern void sub_809D85C(void);
-extern void sub_809DE64(void);
-extern bool8 sub_809DA84(void);
-extern void SummaryScreenHandleAButton(u8);
-extern void SummaryScreenHandleUpDownInput(u8, s8);
-extern bool8 sub_809F7D0(u8);
-extern void sub_809F9D0(u8, u8);
-extern void sub_809EAC8(u8);
-extern void sub_809E534(u8);
-extern void sub_809E83C(u8, s8);
-extern void sub_809E7F0(u8);
-extern void sub_809E6D8(void);
-extern void sub_809E5C4(void);
-extern void sub_80A1B40(u8);
-extern void sub_80A2078(int);
-extern void sub_809E3FC(u8);
-extern void SummaryScreenHandleKeyInput(u8);
-extern void sub_80A1B1C(u8);
-extern void sub_80A16CC(u8);
-extern void sub_80A1A30(u8);
-extern void DrawSummaryScreenNavigationDots(void);
-extern void sub_80A00F4(u8);
-extern void sub_80A029C(struct Pokemon *);
-extern void sub_809EE74(u8);
-extern void sub_809EC38(u8);
-extern void sub_809FBE4(void);
-extern void sub_809F0D0(u8, s8);
-extern void sub_80A1500(u8);
-extern void sub_80A1334(u8);
-extern u8 StorageSystemGetNextMonIndex(struct BoxPokemon *, u8, u8, u8);
+static void sub_809D85C(void);
+static void sub_809DE64(void);
+static void SummaryScreenHandleAButton(u8);
+static void SummaryScreenHandleUpDownInput(u8, s8);
+static bool8 sub_809F7D0(u8);
+static void sub_809F9D0(u8, u8);
+static void sub_809EAC8(u8);
+static void sub_809E534(u8);
+static void sub_809E83C(u8, s8);
+static void sub_809E5C4(void);
+static void sub_80A1B40(u8);
+static void sub_80A2078(int);
+static void sub_809E3FC(u8);
+static void SummaryScreenHandleKeyInput(u8);
+static void sub_80A1B1C(u8);
+static void sub_80A16CC(u8);
+static void sub_80A1A30(u8);
+static void DrawSummaryScreenNavigationDots(void);
+static void sub_80A00F4(u8);
+static void sub_80A029C(struct Pokemon *);
+static void sub_809FBE4(void);
+static void sub_80A1500(u8);
+static void sub_80A1334(u8);
 extern void sub_809F43C(u8);
 extern s8 sub_809F284(s8);
 extern s8 sub_809F3CC(s8);
-extern bool8 sub_809F310(struct Pokemon *);
-extern s8 sub_809F344(u8);
-extern s8 sub_809F388(u8);
-extern bool8 sub_809F5F8(void);
-extern void sub_80A1DE8(struct Pokemon *);
-extern u8 sub_809F6B4(struct Pokemon *, u8 *);
-extern void DrawPokerusSurvivorDot(struct Pokemon *);
-extern void sub_80A12D0(s8);
-extern void sub_809FAC8(struct Pokemon *);
-extern void SummaryScreenHandleLeftRightInput(u8, s8);
-extern void sub_809E8F0(u8, s8, u8*);
-extern void sub_809E260(u8);
-extern void sub_809F814(u8);
-extern void sub_80A1654(s8, u8);
-extern void sub_80A1488(s8, u8);
-extern void GetStringCenterAlignXOffsetWithLetterSpacing(u8, u8, u8, u8);
-extern bool8 sub_809FA94(struct Pokemon *);
+static bool8 sub_809F5F8(void);
+static void sub_80A1DE8(struct Pokemon *);
+static u8 sub_809F6B4(struct Pokemon *, u8 *);
+static void DrawPokerusSurvivorDot(struct Pokemon *);
+static void sub_80A12D0(s8);
+static void sub_809FAC8(struct Pokemon *);
+static void SummaryScreenHandleLeftRightInput(u8, s8);
+static void sub_809E8F0();
+static void sub_80A1654(s8, u8);
+static void sub_80A1488(s8, u8);
 static void sub_809FC34(struct Pokemon *);
-extern void sub_809FC0C(void);
 static void sub_809FF64(struct Pokemon *);
-extern void sub_809FEB8(void);
-extern void sub_80A1918(u8, u8);
-extern void sub_80A198C(u8, u8, u8, u8);
-extern u16 GetMonMove(struct Pokemon *, u8);
-extern void sub_80A04CC(u16);
-extern void sub_80A057C(u16);
-extern void sub_80A0498(u16);
-extern void sub_80A046C(u16);
-extern void sub_80A03F0(struct Pokemon *, u8 *);
-extern u16 sub_80A03BC(struct Pokemon *, u8);
-extern void sub_80A20A8(u8);
-extern u8 ball_number_to_ball_processing_index(u16);
-extern void sub_809F678(struct Pokemon *);
-extern void sub_80A1BC0(struct Sprite *sprite);
-extern void sub_80A1888(struct Sprite *);
-extern void sub_80A0428(struct Pokemon *, u8 *);
-extern void sub_80A18E4(u8);
-extern void GetStringCenterAlignXOffset(u8, u8, u8);
-extern u8 *sub_80A1E58(u8 *, u8);
+static void sub_80A1918(u8, u8);
+static void sub_80A198C(u8, u8, u8, u8);
+static u16 GetMonMove(struct Pokemon *, u8);
+static void sub_80A04CC(u16);
+static void sub_80A057C(u16);
+static void sub_80A0498(u16);
+static void sub_80A046C(u16);
+static void sub_80A20A8(u8);
+static void sub_809F678(struct Pokemon *);
+static void sub_80A1BC0(struct Sprite *sprite);
+static void sub_80A1888(struct Sprite *);
+static void sub_80A0428(struct Pokemon *, u8 *);
+static void sub_80A18E4(u8);
+static u8 *sub_80A1E58(u8 *, u8);
 static void sub_80A0A2C(struct Pokemon *, u8, u8);
-extern void sub_80A1FF8(const u8 *, u8, u8, u8);
+static void sub_80A1FF8(const u8 *, u8, u8, u8);
+
+extern u8 ball_number_to_ball_processing_index(u16);
+extern u8 StorageSystemGetNextMonIndex(struct BoxPokemon *, u8, u8, u8);
 
 extern struct MusicPlayerInfo gMPlay_BGM;
 extern u8 gUnknown_020384F0;
@@ -144,6 +126,13 @@ extern u16 gUnknown_030041B4;
 extern u16 gUnknown_030042C0;
 extern u16 gUnknown_03004288;
 extern u16 gUnknown_030041B0;
+extern TaskFunc gUnknown_03005CF0;
+extern struct Sprite *gUnknown_020384F4;
+extern struct SpriteTemplate gSpriteTemplate_83C1304;
+extern struct SpriteTemplate gSpriteTemplate_83C1280;
+extern struct SpriteTemplate gSpriteTemplate_83C11C0;
+extern struct SpriteTemplate gUnknown_02024E8C;
+
 extern const u16 gSummaryScreenTextTiles[];
 extern const u16 gSummaryScreenButtonTiles[];
 extern const u8 gMoveTypes_Pal[];
@@ -161,7 +150,7 @@ extern const u8 gUnknown_08E73508[];
 extern const u8 gStatusScreen_Gfx[];
 extern const u8 gFontDefaultPalette[];
 extern const u8 gUnknownPalette_81E6692[];
-extern const u8 gUnknown_083C15A8[];
+extern const u8 gDoubleBattlePartyOrder[];
 extern const void (*gUnknown_083C1580[])(void);
 extern const void (*gUnknown_083C1598[])(struct Pokemon *);
 extern const void (*gUnknown_083C1588[])(struct Pokemon *);
@@ -173,15 +162,9 @@ extern const u8 * const gMoveDescriptions[];
 extern const u8 * const gContestEffectStrings[];
 extern const struct ContestMove gContestMoves[];
 extern const struct ContestEffect gContestEffects[];
-extern TaskFunc gUnknown_03005CF0;
 extern const u8 gUnknown_083C15BC[];
-extern struct Sprite *gUnknown_020384F4;
 extern const u16 gSummaryScreenMonMarkingsPalette[];
-extern struct SpriteTemplate gSpriteTemplate_83C1304;
-extern struct SpriteTemplate gSpriteTemplate_83C1280;
 extern const u8 gUnknown_083C11D8[];
-extern struct SpriteTemplate gSpriteTemplate_83C11C0;
-extern struct SpriteTemplate gUnknown_02024E8C;
 extern const u16 gUnknown_08E94510[];
 extern const u16 gUnknown_08E94550[];
 extern const u16 gUnknown_08E94590[];
@@ -1098,7 +1081,7 @@ void sub_809E83C(u8 taskId, s8 b)
 }
 
 __attribute__((naked))
-void sub_809E8F0(u8 taskId, s8 direction, u8 *c)
+void sub_809E8F0(/*u8 taskId, s8 direction, u8 *c*/)
 {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\
@@ -1923,9 +1906,9 @@ s8 sub_809F344(u8 partyIndex)
             return -1;
         }
 
-        if (sub_809F310(&gPlayerParty[gUnknown_083C15A8[partyIndex]]) == TRUE)
+        if (sub_809F310(&gPlayerParty[gDoubleBattlePartyOrder[partyIndex]]) == TRUE)
         {
-            return gUnknown_083C15A8[partyIndex];
+            return gDoubleBattlePartyOrder[partyIndex];
         }
     }
 }
@@ -1940,110 +1923,43 @@ s8 sub_809F388(u8 partyIndex)
         }
 
         partyIndex--;    
-        if (sub_809F310(&gPlayerParty[gUnknown_083C15A8[partyIndex]]) == TRUE)
+        if (sub_809F310(&gPlayerParty[gDoubleBattlePartyOrder[partyIndex]]) == TRUE)
         {
-            return gUnknown_083C15A8[partyIndex];
+            return gDoubleBattlePartyOrder[partyIndex];
         }
     }
 }
 
-#ifdef NONMATCHING // The nested if statements at the end are not matching.
-s8 sub_809F3CC(s8 a)
+s8 sub_809F3CC(s8 direction)
 {
-    u8 var1 = 0;
-    u8 i = 0;
+    u8 i;
+    u8 monIndex = 0;
 
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < PARTY_SIZE; i++)
     {
-        if (gUnknown_083C15A8[i] == ewramSS.monIndex)
+        if (gDoubleBattlePartyOrder[i] == ewramSS.monIndex)
         {
-            var1 = i;
+            monIndex = i;
             break;
         }
     }
 
-    if ((s8)a != -1 || var1 != 0)
+    if ((direction == -1 && monIndex == 0) || (direction == 1 && monIndex == 5))
     {
-        if ((s8)a != 1)
-        {
-            return sub_809F388(var1);
-        }
-        else if (var1 != 5)
-        {
-            return sub_809F344(var1);
-        }
+        return -1;
+    }
+
+    if (direction != 1)
+    {
+        return sub_809F388(monIndex);
+    }
+    else if (monIndex != 5)
+    {
+        return sub_809F344(monIndex);
     }
 
     return -1;
 }
-#else
-__attribute__((naked))
-s8 sub_809F3CC(s8 a)
-{
-    asm(".syntax unified\n\
-    push {r4-r6,lr}\n\
-    lsls r0, 24\n\
-    lsrs r6, r0, 24\n\
-    movs r2, 0\n\
-    movs r1, 0\n\
-    ldr r3, _0809F41C @ =gUnknown_083C15A8\n\
-    ldr r4, _0809F420 @ =gSharedMem + 0x18000\n\
-    ldrb r0, [r3]\n\
-    ldrb r5, [r4, 0x9]\n\
-    cmp r0, r5\n\
-    beq _0809F3FC\n\
-    adds r5, r3, 0\n\
-    adds r3, r4, 0\n\
-_0809F3E6:\n\
-    adds r0, r1, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r1, r0, 24\n\
-    cmp r1, 0x5\n\
-    bhi _0809F3FC\n\
-    adds r0, r1, r5\n\
-    ldrb r0, [r0]\n\
-    ldrb r4, [r3, 0x9]\n\
-    cmp r0, r4\n\
-    bne _0809F3E6\n\
-    adds r2, r1, 0\n\
-_0809F3FC:\n\
-    lsls r0, r6, 24\n\
-    asrs r1, r0, 24\n\
-    movs r0, 0x1\n\
-    negs r0, r0\n\
-    cmp r1, r0\n\
-    bne _0809F40C\n\
-    cmp r2, 0\n\
-    beq _0809F414\n\
-_0809F40C:\n\
-    cmp r1, 0x1\n\
-    bne _0809F424\n\
-    cmp r2, 0x5\n\
-    bne _0809F42C\n\
-_0809F414:\n\
-    movs r0, 0x1\n\
-    negs r0, r0\n\
-    b _0809F436\n\
-    .align 2, 0\n\
-_0809F41C: .4byte gUnknown_083C15A8\n\
-_0809F420: .4byte gSharedMem + 0x18000\n\
-_0809F424:\n\
-    adds r0, r2, 0\n\
-    bl sub_809F388\n\
-    b _0809F432\n\
-_0809F42C:\n\
-    adds r0, r2, 0\n\
-    bl sub_809F344\n\
-_0809F432:\n\
-    lsls r0, 24\n\
-    asrs r0, 24\n\
-_0809F436:\n\
-    pop {r4-r6}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .syntax divided\n");
-}
-#endif // NONMATCHING
 
 void sub_809F43C(u8 taskId)
 {
@@ -2265,7 +2181,7 @@ void sub_809F814(u8 taskId)
         taskData[0] = 4;
         taskData[13] = 1;
         ewramSS.selectedMoveIndex = taskData[15];
-        sub_809E8F0(taskId, -1, NULL);
+        sub_809E8F0(taskId, -1);
     }
     else if (gMain.newKeys & DPAD_DOWN)
     {
@@ -2273,7 +2189,7 @@ void sub_809F814(u8 taskId)
         taskData[0] = 4;
         taskData[13] = 1;
         ewramSS.selectedMoveIndex = taskData[15];
-        sub_809E8F0(taskId, 1, NULL);
+        sub_809E8F0(taskId, 1);
     }
     else if ((gMain.newKeys & DPAD_LEFT) || sub_80F9284() == 1)
     {
@@ -2315,6 +2231,7 @@ void sub_809F814(u8 taskId)
         gTasks[taskId].func = sub_809E260;
     }
 }
+
 #else
 __attribute__((naked))
 void sub_809F814(u8 taskId)
@@ -5116,89 +5033,20 @@ void sub_80A1B1C(u8 a)
     }
 }
 
-#ifdef NONMATCHING
 void sub_80A1B40(u8 a)
 {
     u8 i;
-    u8 var1 = a * 3;
+    a *= 3;
 
-    StartSpriteAnim(&gSprites[ewram1A000[9]], var1 + 4);
+    StartSpriteAnim(&gSprites[ewram1A000[9]], a + 4);
 
     for (i = 0; i < 8; i++)
     {
-        StartSpriteAnim(&gSprites[ewram1A000[10 + i]], var1 + 6);
+        StartSpriteAnim(&gSprites[ewram1A000[10 + i]], a + 6);
     }
 
-    StartSpriteAnim(&gSprites[ewram1A000[18]], var1 + 5);
+    StartSpriteAnim(&gSprites[ewram1A000[18]], a + 5);
 }
-#else
-__attribute__((naked))
-void sub_80A1B40(u8 a)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r8\n\
-    push {r7}\n\
-    lsls r0, 24\n\
-    lsrs r7, r0, 24\n\
-    lsls r1, r7, 1\n\
-    adds r1, r7\n\
-    lsls r1, 24\n\
-    ldr r0, _080A1BB4 @ =gSharedMem + 0x1A009\n\
-    ldrb r2, [r0]\n\
-    lsls r0, r2, 4\n\
-    adds r0, r2\n\
-    lsls r0, 2\n\
-    ldr r2, _080A1BB8 @ =gSprites\n\
-    adds r0, r2\n\
-    lsrs r7, r1, 24\n\
-    movs r2, 0x80\n\
-    lsls r2, 19\n\
-    adds r1, r2\n\
-    lsrs r1, 24\n\
-    bl StartSpriteAnim\n\
-    movs r4, 0\n\
-    adds r0, r7, 0x6\n\
-    lsls r0, 24\n\
-    mov r8, r0\n\
-_080A1B74:\n\
-    ldr r6, _080A1BBC @ =gSharedMem + 0x1A00A\n\
-    adds r0, r4, r6\n\
-    ldrb r1, [r0]\n\
-    lsls r0, r1, 4\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    ldr r5, _080A1BB8 @ =gSprites\n\
-    adds r0, r5\n\
-    mov r2, r8\n\
-    lsrs r1, r2, 24\n\
-    bl StartSpriteAnim\n\
-    adds r0, r4, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r4, r0, 24\n\
-    cmp r4, 0x7\n\
-    bls _080A1B74\n\
-    ldrb r1, [r6, 0x8]\n\
-    lsls r0, r1, 4\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    adds r0, r5\n\
-    adds r1, r7, 0x5\n\
-    lsls r1, 24\n\
-    lsrs r1, 24\n\
-    bl StartSpriteAnim\n\
-    pop {r3}\n\
-    mov r8, r3\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_080A1BB4: .4byte gSharedMem + 0x1A009\n\
-_080A1BB8: .4byte gSprites\n\
-_080A1BBC: .4byte gSharedMem + 0x1A00A\n\
-    .syntax divided\n");
-}
-#endif // NONMATCHING
 
 void sub_80A1BC0(struct Sprite *sprite)
 {

@@ -372,7 +372,7 @@ gUnknown_083C1598:: @ 83C1598
 	.4byte sub_80A015C
 	.4byte sub_80A015C
 
-gUnknown_083C15A8:: @ 83C15A8
+gDoubleBattlePartyOrder:: @ 83C15A8
 	.byte 0, 2, 3, 1, 4, 5
 
 gUnknown_083C15AE:: @ 83C15AE
