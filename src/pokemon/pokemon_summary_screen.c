@@ -29,7 +29,7 @@
 #include "tv.h"
 #include "unknown_task.h"
 
-#define ewramSS (*(struct SummaryScreenStruct *)(gSharedMem + 0x18000))
+#define ewramSS (*(struct PokemonSummaryScreenStruct *)(gSharedMem + 0x18000))
 
 static void sub_809DE44(void);
 static void sub_809EB40(u8);
@@ -213,96 +213,96 @@ void sub_809D85C(void)
     TransferPlttBuffer();
 }
 
-void ShowPokemonSummaryScreen(struct Pokemon *party, u8 partyIndex, u8 partyCount, MainCallback func, u8 e)
+void ShowPokemonSummaryScreen(struct Pokemon *party, u8 monIndex, u8 maxMonIndex, MainCallback callback, u8 mode)
 {
     gPaletteFade.bufferTransferDisabled = 1;
 
-    ewramSS.unk0.partyMons = party;
-    ewramSS.unk8 = e;
-    ewramSS.unk9 = partyIndex;
-    ewramSS.unkA = partyCount;
-    ewramSS.unk4 = func;
-    ewramSS.unk74 = 0;
-    ewramSS.unk79 = 4;
-    ewramSS.unk7C = 0;
-    ewramSS.unk80 = 0;
-    ewramSS.unk7B = 0;
+    ewramSS.monList.partyMons = party;
+    ewramSS.mode = mode;
+    ewramSS.monIndex = monIndex;
+    ewramSS.maxMonIndex = maxMonIndex;
+    ewramSS.callback = callback;
+    ewramSS.loadGfxState = 0;
+    ewramSS.selectedMoveIndex = 4;
+    ewramSS.moveToLearn = 0;
+    ewramSS.bgToggle = 0;
+    ewramSS.disableMoveOrderEditing = FALSE;
 
-    if (e > 4)
+    if (mode >= PSS_MODE_PC_NORMAL)
     {
-        ewramSS.unkE = 1;
+        ewramSS.usingPC = TRUE;
     }
     else
     {
-        ewramSS.unkE = 0;
+        ewramSS.usingPC = FALSE;
     }
 
-    switch (e)
+    switch (mode)
     {
-    case 0:
-    case 5:
-        ewramSS.unk75 = 0;
-        ewramSS.unk76 = 3;
+    case PSS_MODE_NORMAL:
+    case PSS_MODE_PC_NORMAL:
+        ewramSS.firstPage = PSS_PAGE_INFO;
+        ewramSS.lastPage = PSS_PAGE_CONTEST_MOVES;
         ewramSS.unk77 = 0;
         ewramSS.unk78 = 0;
-        ewramSS.unk7E = 1;
-        ewramSS.unk7F = 7;
+        ewramSS.headerTextId = 1;
+        ewramSS.headerActionTextId = 7;
         break;
-    case 4:
-        ewramSS.unk75 = 0;
-        ewramSS.unk76 = 3;
+    case PSS_MODE_NO_MOVE_ORDER_EDIT:
+        ewramSS.firstPage = PSS_PAGE_INFO;
+        ewramSS.lastPage = PSS_PAGE_CONTEST_MOVES;
         ewramSS.unk77 = 0;
         ewramSS.unk78 = 0;
-        ewramSS.unk7E = 1;
-        ewramSS.unk7F = 7;
-        ewramSS.unk7B = 1;
+        ewramSS.headerTextId = 1;
+        ewramSS.headerActionTextId = 7;
+        ewramSS.disableMoveOrderEditing = TRUE;
         break;
-    case 2:
-        ewramSS.unk75 = 2;
-        ewramSS.unk76 = 3;
+    case PSS_MODE_SELECT_MOVE:
+        ewramSS.firstPage = PSS_PAGE_BATTLE_MOVES;
+        ewramSS.lastPage = PSS_PAGE_CONTEST_MOVES;
         ewramSS.unk77 = 1;
         ewramSS.unk78 = 1;
-        ewramSS.unk7E = 3;
-        ewramSS.unk7F = 0;
-        ewramSS.unk79 = 0;
+        ewramSS.headerTextId = 3;
+        ewramSS.headerActionTextId = 0;
+        ewramSS.selectedMoveIndex = 0;
         break;
-    case 1:
-    case 6:
-        ewramSS.unk75 = 2;
-        ewramSS.unk76 = 3;
+    case PSS_MODE_MOVES_ONLY:
+    case PSS_MODE_PC_MOVES_ONLY:
+        ewramSS.firstPage = PSS_PAGE_BATTLE_MOVES;
+        ewramSS.lastPage = PSS_PAGE_CONTEST_MOVES;
         ewramSS.unk77 = 1;
         ewramSS.unk78 = 1;
         break;
     }
 
-    ewramSS.unkB = ewramSS.unk75;
+    ewramSS.page = ewramSS.firstPage;
     SetMainCallback2(sub_809DE44);
 }
 
-void sub_809D9F0(struct Pokemon *party, u8 partyIndex, u8 partyCount, MainCallback func, u16 e)
+void sub_809D9F0(struct Pokemon *party, u8 monIndex, u8 maxMonIndex, MainCallback callback, u16 move)
 {
-    ShowPokemonSummaryScreen(party, partyIndex, partyCount, func, 2);
-    ewramSS.unk7C = e;
+    ShowPokemonSummaryScreen(party, monIndex, maxMonIndex, callback, PSS_MODE_SELECT_MOVE);
+    ewramSS.moveToLearn = move;
 }
 
 void sub_809DA1C(void)
 {
-    switch (ewramSS.unk8)
+    switch (ewramSS.mode)
     {
-    case 0:
-    case 5:
-        ewramSS.unkF = CreateTask(SummaryScreenHandleKeyInput, 0);
+    case PSS_MODE_NORMAL:
+    case PSS_MODE_PC_NORMAL:
+        ewramSS.inputHandlingTaskId = CreateTask(SummaryScreenHandleKeyInput, 0);
         break;
-    case 4:
-        ewramSS.unkF = CreateTask(SummaryScreenHandleKeyInput, 0);
+    case PSS_MODE_NO_MOVE_ORDER_EDIT:
+        ewramSS.inputHandlingTaskId = CreateTask(SummaryScreenHandleKeyInput, 0);
         break;
-    case 2:
-    case 3:
-        ewramSS.unkF = CreateTask(sub_809EB40, 0);
+    case PSS_MODE_SELECT_MOVE:
+    case PSS_MODE_UNKNOWN:
+        ewramSS.inputHandlingTaskId = CreateTask(sub_809EB40, 0);
         break;
-    case 1:
-    case 6:
-        ewramSS.unkF = CreateTask(sub_809E3FC, 0);
+    case PSS_MODE_MOVES_ONLY:
+    case PSS_MODE_PC_MOVES_ONLY:
+        ewramSS.inputHandlingTaskId = CreateTask(sub_809E3FC, 0);
         break;
     }
 }
@@ -363,13 +363,13 @@ bool8 sub_809DA84(void)
         dest = (void *)VRAM + 0xD140;
         DmaCopy16(3, src, dest, 256);
 
-        ewramSS.unk74 = 0;
+        ewramSS.loadGfxState = 0;
         gMain.state++;
         break;
     case 10:
         if (LoadPokemonSummaryScreenGraphics())
         {
-            ewramSS.unk74 = 0;
+            ewramSS.loadGfxState = 0;
             gMain.state++;
         }
         break;
@@ -378,8 +378,8 @@ bool8 sub_809DA84(void)
         gMain.state++;
         break;
     case 12:
-        sub_809F678(&ewramSS.unk10);
-        if (!GetMonStatusAndPokerus(&ewramSS.unk10))
+        sub_809F678(&ewramSS.loadedMon);
+        if (!GetMonStatusAndPokerus(&ewramSS.loadedMon))
         {
             sub_80A12D0(0);
         }
@@ -388,23 +388,23 @@ bool8 sub_809DA84(void)
             sub_80A12D0(10);
         }
 
-        DrawPokerusSurvivorDot(&ewramSS.unk10);
+        DrawPokerusSurvivorDot(&ewramSS.loadedMon);
         gMain.state++;
         break;
     case 13:
         sub_80A1950();
-        sub_80A1D84(&ewramSS.unk10);
+        sub_80A1D84(&ewramSS.loadedMon);
         gMain.state++;
         break;
     case 14:
-        sub_80A1DE8(&ewramSS.unk10);
-        ewramSS.unk74 = 0;
+        sub_80A1DE8(&ewramSS.loadedMon);
+        ewramSS.loadGfxState = 0;
         gMain.state++;
         break;
     case 15:
-        if ((ewramSS.unkC = sub_809F6B4(&ewramSS.unk10, &ewramSS.unk74)) != 0xFF)
+        if ((ewramSS.monSpriteId = sub_809F6B4(&ewramSS.loadedMon, &ewramSS.loadGfxState)) != 0xFF)
         {
-            ewramSS.unk74 = 0;
+            ewramSS.loadGfxState = 0;
             gMain.state++;
         }
         break;
@@ -414,23 +414,23 @@ bool8 sub_809DA84(void)
         gMain.state++;
         break;
     case 17:
-        if (ewramSS.unkB < 2)
+        if (ewramSS.page <= PSS_PAGE_SKILLS)
         {
-            gUnknown_083C1580[ewramSS.unkB]();
+            gUnknown_083C1580[ewramSS.page]();
         }
 
         gMain.state++;
         break;
     case 18:
-        sub_809FAC8(&ewramSS.unk10);
+        sub_809FAC8(&ewramSS.loadedMon);
         gMain.state++;
         break;
     case 19:
-        gUnknown_083C1598[ewramSS.unkB](&ewramSS.unk10);
+        gUnknown_083C1598[ewramSS.page](&ewramSS.loadedMon);
         gMain.state++;
         break;
     case 20:
-        if (GetMonData(&ewramSS.unk10, MON_DATA_IS_EGG))
+        if (GetMonData(&ewramSS.loadedMon, MON_DATA_IS_EGG))
         {
             gUnknown_030041B0 = 256;
         }
@@ -443,7 +443,7 @@ bool8 sub_809DA84(void)
         break;
     case 21:
         sub_809EBC4();
-        if (ewramSS.unk79 != 0)
+        if (ewramSS.selectedMoveIndex != 0)
         {
             sub_80A1488(0, 0);
             sub_80A1654(0, 0);
@@ -509,7 +509,7 @@ void sub_809DE64(void)
 
 bool8 LoadPokemonSummaryScreenGraphics(void)
 {
-    switch (ewramSS.unk74)
+    switch (ewramSS.loadGfxState)
     {
     case 0:
         LZDecompressVram(gStatusScreen_Gfx, (void *)VRAM + 0);
@@ -549,11 +549,11 @@ bool8 LoadPokemonSummaryScreenGraphics(void)
         break;
     case 12:
         LoadCompressedPalette(gMoveTypes_Pal, 464, 96);
-        ewramSS.unk74 = 0;
+        ewramSS.loadGfxState = 0;
         return TRUE;
     }
 
-    ewramSS.unk74++;
+    ewramSS.loadGfxState++;
     return FALSE;
 }
 
@@ -587,13 +587,13 @@ void sub_809E13C(u8 taskId)
 {
     if (sub_8055870() != TRUE && !gPaletteFade.active)
     {
-        gUnknown_020384F0 = ewramSS.unk9;
+        gUnknown_020384F0 = ewramSS.monIndex;
 
         ResetSpriteData();
         FreeAllSpritePalettes();
         StopCryAndClearCrySongs();
         m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 0x100);
-        SetMainCallback2(ewramSS.unk4);
+        SetMainCallback2(ewramSS.callback);
         DestroyTask(taskId);
     }
 }
@@ -621,12 +621,12 @@ void SummaryScreenHandleKeyInput(u8 taskId)
     }
     else if (gMain.newKeys & A_BUTTON)
     {
-        if (ewramSS.unkB > 1)
+        if (ewramSS.page >= PSS_PAGE_BATTLE_MOVES)
         {
             SummaryScreenHandleAButton(taskId);
         }
 
-        if (ewramSS.unkB == 0)
+        if (ewramSS.page == PSS_PAGE_INFO)
         {
             SummaryScreenExit(taskId);
         }
@@ -645,16 +645,16 @@ void sub_809E260(u8 taskId)
     if (gMain.newKeys & DPAD_UP)
     {
         gTasks[taskId].data[0] = 4;
-        sub_809E8F0(taskId, -1, &ewramSS.unk79);
+        sub_809E8F0(taskId, -1, &ewramSS.selectedMoveIndex);
     }
     else if (gMain.newKeys & DPAD_DOWN)
     {
         gTasks[taskId].data[0] = 4;
-        sub_809E8F0(taskId, 1, &ewramSS.unk79);
+        sub_809E8F0(taskId, 1, &ewramSS.selectedMoveIndex);
     }
     else if ((gMain.newKeys & DPAD_LEFT) || sub_80F9284() == 1)
     {
-        if (ewramSS.unkB == 3 && (ewramSS.unk79 != 4 || ewramSS.unk7C != 0))
+        if (ewramSS.page == PSS_PAGE_CONTEST_MOVES && (ewramSS.selectedMoveIndex != 4 || ewramSS.moveToLearn != 0))
         {
             MenuZeroFillWindowRect(0, 14, 9, 18);
         }
@@ -663,9 +663,9 @@ void sub_809E260(u8 taskId)
     }
     else if ((gMain.newKeys & DPAD_RIGHT) || sub_80F9284() == 2)
     {
-        if (ewramSS.unkB != ewramSS.unk76)
+        if (ewramSS.page != ewramSS.lastPage)
         {
-            if (ewramSS.unkB == 2 && (ewramSS.unk79 != 4 || ewramSS.unk7C != 0))
+            if (ewramSS.page == PSS_PAGE_BATTLE_MOVES && (ewramSS.selectedMoveIndex != 4 || ewramSS.moveToLearn != 0))
             {
                 MenuZeroFillWindowRect(0, 14, 9, 18);
             }
@@ -675,21 +675,21 @@ void sub_809E260(u8 taskId)
     }
     else if (gMain.newKeys & A_BUTTON)
     {
-        if (sub_809F7D0(taskId) == 1 || ewramSS.unk79 == 4)
+        if (sub_809F7D0(taskId) == TRUE || ewramSS.selectedMoveIndex == 4)
         {
-            ewramSS.unk7A = ewramSS.unk79;
-            gSpecialVar_0x8005 = ewramSS.unk7A;
+            ewramSS.switchMoveIndex = ewramSS.selectedMoveIndex;
+            gSpecialVar_0x8005 = ewramSS.switchMoveIndex;
             SummaryScreenExit(taskId);
         }
         else
         {
             PlaySE(32);
-            sub_809F9D0(taskId, ewramSS.unk79);
+            sub_809F9D0(taskId, ewramSS.selectedMoveIndex);
         }
     }
     else if (gMain.newKeys & B_BUTTON)
     {
-        ewramSS.unk7A = 4;
+        ewramSS.switchMoveIndex = 4;
         gSpecialVar_0x8005 = 4;
         SummaryScreenExit(taskId);
     }
@@ -703,18 +703,18 @@ void sub_809E3FC(u8 taskId)
     if (gMain.newKeys & DPAD_UP)
     {
         gTasks[taskId].data[0] = 4;
-        sub_809E8F0(taskId, -1, &ewramSS.unk79);
+        sub_809E8F0(taskId, -1, &ewramSS.selectedMoveIndex);
     }
     else if (gMain.newKeys & DPAD_DOWN)
     {
         gTasks[taskId].data[0] = 4;
-        sub_809E8F0(taskId, 1, &ewramSS.unk79);
+        sub_809E8F0(taskId, 1, &ewramSS.selectedMoveIndex);
     }
     else if (gMain.newKeys & A_BUTTON)
     {
-        if (ewramSS.unk79 != 4 && ewramSS.unk7B == 0)
+        if (ewramSS.selectedMoveIndex != 4 && !ewramSS.disableMoveOrderEditing)
         {
-            if (!MonKnowsMultipleMoves(&ewramSS.unk10))
+            if (!MonKnowsMultipleMoves(&ewramSS.loadedMon))
             {
                 PlaySE(32);
             }
@@ -722,7 +722,7 @@ void sub_809E3FC(u8 taskId)
             {
                 PlaySE(5);
 
-                ewramSS.unk7A = ewramSS.unk79;
+                ewramSS.switchMoveIndex = ewramSS.selectedMoveIndex;
                 sub_80A1B40(1);
                 sub_80A1A30(19);
 
@@ -763,12 +763,12 @@ void sub_809E534(u8 taskId)
     if (gMain.newKeys & DPAD_UP)
     {
         gTasks[taskId].data[0] = 3;
-        sub_809E8F0(taskId, -1, &ewramSS.unk7A);
+        sub_809E8F0(taskId, -1, &ewramSS.switchMoveIndex);
     }
     else if (gMain.newKeys & DPAD_DOWN)
     {
         gTasks[taskId].data[0] = 3;
-        sub_809E8F0(taskId, 1, &ewramSS.unk7A);
+        sub_809E8F0(taskId, 1, &ewramSS.switchMoveIndex);
     }
     else if (gMain.newKeys & A_BUTTON)
     {
@@ -1053,8 +1053,8 @@ void sub_809E7F0(u8 taskId)
 {
     if (sub_809F5F8())
     {
-        ewramSS.unk74 = 0;
-        sub_80A0428(&ewramSS.unk10, &ewramSS.unk79);
+        ewramSS.loadGfxState = 0;
+        sub_80A0428(&ewramSS.loadedMon, &ewramSS.selectedMoveIndex);
         gTasks[taskId].func = sub_809E3FC;
         sub_80A2078(taskId);
     }
@@ -1069,9 +1069,9 @@ void sub_809E83C(u8 taskId, s8 b)
 
     if (b == 1)
     {
-        if (ewramSS.unk79 != ewramSS.unk7A)
+        if (ewramSS.selectedMoveIndex != ewramSS.switchMoveIndex)
         {
-            if (ewramSS.unkE == 0)
+            if (ewramSS.usingPC == FALSE)
             {
                 sub_809E5C4();
             }
@@ -1080,9 +1080,9 @@ void sub_809E83C(u8 taskId, s8 b)
                 sub_809E6D8();
             }
 
-            ewramSS.unk79 = ewramSS.unk7A;
-            sub_809F678(&ewramSS.unk10);
-            ewramSS.unk74 = 1;
+            ewramSS.selectedMoveIndex = ewramSS.switchMoveIndex;
+            sub_809F678(&ewramSS.loadedMon);
+            ewramSS.loadGfxState = 1;
 
             gTasks[taskId].func = sub_809E7F0;
             return;
@@ -1090,7 +1090,7 @@ void sub_809E83C(u8 taskId, s8 b)
     }
     else
     {
-        sub_80A0428(&ewramSS.unk10, &ewramSS.unk79);
+        sub_80A0428(&ewramSS.loadedMon, &ewramSS.selectedMoveIndex);
     }
 
     gTasks[taskId].func = sub_809E3FC;
@@ -1281,18 +1281,18 @@ void SummaryScreenHandleAButton(u8 taskId)
 {
     PlaySE(5);
 
-    ewramSS.unk79 = 0;
+    ewramSS.selectedMoveIndex = 0;
     sub_80A1488(2, 0);
     sub_80A1654(2, 0);
 
-    if (ewramSS.unk7B == 0)
+    if (!ewramSS.disableMoveOrderEditing)
     {
-        ewramSS.unk7F = 5;
+        ewramSS.headerActionTextId = 5;
         PrintSummaryWindowHeaderText();
     }
 
     sub_80A16CC(0);
-    sub_80A029C(&ewramSS.unk10);
+    sub_80A029C(&ewramSS.loadedMon);
     sub_80A1A30(9);
 
     gTasks[taskId].func = sub_809E3FC;
@@ -1301,7 +1301,7 @@ void SummaryScreenHandleAButton(u8 taskId)
 
 void sub_809EAC8(u8 taskId)
 {
-    if (ewramSS.unk79 != 4)
+    if (ewramSS.selectedMoveIndex != 4)
     {
         sub_80A1488(-2, 0);
         sub_80A1654(-2, 0);
@@ -1313,7 +1313,7 @@ void sub_809EAC8(u8 taskId)
     MenuZeroFillWindowRect(15, 12, 28, 13);
     MenuZeroFillWindowRect(11, 15, 28, 18);
 
-    ewramSS.unk7F = 6;
+    ewramSS.headerActionTextId = 6;
     PrintSummaryWindowHeaderText();
 
     gTasks[taskId].func = SummaryScreenHandleKeyInput;
@@ -1329,15 +1329,15 @@ void sub_809EB40(u8 taskId)
         gTasks[taskId].func = sub_809E260;
         break;
     case 0:
-        ewramSS.unk79 = 0;
-        if (ewramSS.unk7C != 0)
+        ewramSS.selectedMoveIndex = 0;
+        if (ewramSS.moveToLearn != 0)
         {
             sub_80A1488(10, 0);
-            sub_80A1654(10, ewramSS.unk79);
+            sub_80A1654(10, ewramSS.selectedMoveIndex);
         }
 
         sub_80A16CC(0);
-        sub_80A029C(&ewramSS.unk10);
+        sub_80A029C(&ewramSS.loadedMon);
         // fall through
     default:
         gTasks[taskId].data[0]++;
@@ -1347,18 +1347,18 @@ void sub_809EB40(u8 taskId)
 
 void sub_809EBC4(void)
 {
-    if (ewramSS.unkB != 0)
+    if (ewramSS.page != PSS_PAGE_INFO)
     {
         DrawSummaryScreenNavigationDots();
         gUnknown_030042C0 = 0x100;
 
-        if (ewramSS.unkB == 1)
+        if (ewramSS.page == PSS_PAGE_SKILLS)
             REG_BG1CNT = (REG_BG1CNT & 0xE0FF) + 0x800;
 
-        if (ewramSS.unkB == 2)
+        if (ewramSS.page == PSS_PAGE_BATTLE_MOVES)
             REG_BG1CNT = (REG_BG1CNT & 0xE0FF) + 0xA00;
 
-        if (ewramSS.unkB == 3)
+        if (ewramSS.page == PSS_PAGE_CONTEST_MOVES)
             REG_BG1CNT = (REG_BG1CNT & 0xE0FF) + 0xC00;
     }
 }
@@ -1371,36 +1371,36 @@ void sub_809EC38(u8 taskId)
     switch (taskData[0])
     {
     case 0:
-        if (ewramSS.unk80 == 0)
+        if (ewramSS.bgToggle == 0)
         {
-            if (ewramSS.unkB != 0)
+            if (ewramSS.page != PSS_PAGE_INFO)
             {
                 gUnknown_03004288 = 0x100;
             }
 
-            if (ewramSS.unkB == 1)
+            if (ewramSS.page == PSS_PAGE_SKILLS)
             {
                 REG_BG2CNT = (REG_BG2CNT & 0xE0FF) + 0x800;
             }
 
-            if (ewramSS.unkB == 2)
+            if (ewramSS.page == PSS_PAGE_BATTLE_MOVES)
             {
                 REG_BG2CNT = (REG_BG2CNT & 0xE0FF) + 0xA00;
             }
         }
         else
         {
-            if (ewramSS.unkB != 0)
+            if (ewramSS.page != PSS_PAGE_INFO)
             {
                 gUnknown_030042C0 = 0x100;
             }
 
-            if (ewramSS.unkB == 1)
+            if (ewramSS.page == PSS_PAGE_SKILLS)
             {
                 REG_BG1CNT = (REG_BG1CNT & 0xE0FF) + 0x800;
             }
 
-            if (ewramSS.unkB == 2)
+            if (ewramSS.page == PSS_PAGE_BATTLE_MOVES)
             {
                 REG_BG1CNT = (REG_BG1CNT & 0xE0FF) + 0xA00;
             }
@@ -1409,7 +1409,7 @@ void sub_809EC38(u8 taskId)
         taskData[0]++;
         break;
     case 1:
-        if (ewramSS.unk80 == 0)
+        if (ewramSS.bgToggle == 0)
         {
             int var2 = gUnknown_030042C0 - 0x20;
             gUnknown_030042C0 = var2;
@@ -1433,28 +1433,28 @@ void sub_809EC38(u8 taskId)
         }
         break;
     case 2:
-        ewramSS.unk7E = ewramSS.unkB + 1;
-        minus2 = ewramSS.unk8 - 2;
+        ewramSS.headerTextId = ewramSS.page + 1;
+        minus2 = ewramSS.mode - 2;
         if (minus2 < 2)
         {
-            ewramSS.unk7F = 0;
-            sub_80A029C(&ewramSS.unk10);
-            sub_80A0428(&ewramSS.unk10, &ewramSS.unk79);
-            sub_80A00F4(ewramSS.unk79);
+            ewramSS.headerActionTextId = 0;
+            sub_80A029C(&ewramSS.loadedMon);
+            sub_80A0428(&ewramSS.loadedMon, &ewramSS.selectedMoveIndex);
+            sub_80A00F4(ewramSS.selectedMoveIndex);
         }
         else
         {
-            if (ewramSS.unkB > 1 && (ewramSS.unk7B == 0 || ewramSS.unk8 == 4))
+            if (ewramSS.page >= PSS_PAGE_BATTLE_MOVES && (!ewramSS.disableMoveOrderEditing || ewramSS.mode == PSS_MODE_NO_MOVE_ORDER_EDIT))
             {
-                ewramSS.unk7F = 6;
+                ewramSS.headerActionTextId = 6;
             }
-            else if (ewramSS.unkB == 0)
+            else if (ewramSS.page == PSS_PAGE_INFO)
             {
-                ewramSS.unk7F = 7;
+                ewramSS.headerActionTextId = 7;
             }
             else
             {
-                ewramSS.unk7F = 0;
+                ewramSS.headerActionTextId = 0;
             }
         }
 
@@ -1466,8 +1466,8 @@ void sub_809EC38(u8 taskId)
         taskData[0]++;
         break;
     case 4:
-        gUnknown_083C1598[ewramSS.unkB](&ewramSS.unk10);
-        ewramSS.unk80 ^= 1;
+        gUnknown_083C1598[ewramSS.page](&ewramSS.loadedMon);
+        ewramSS.bgToggle ^= 1;
         taskData[0]++;
         break;
     case 5:
@@ -1488,10 +1488,10 @@ void sub_809EE74(u8 taskId)
     switch (taskData[0])
     {
     case 0:
-        var1 = ewramSS.unk80;
+        var1 = ewramSS.bgToggle;
         if (var1 == 0)
         {
-            gUnknown_03004288 = ewramSS.unk80;
+            gUnknown_03004288 = ewramSS.bgToggle;
             taskData[0]++;
         }
         else
@@ -1501,28 +1501,28 @@ void sub_809EE74(u8 taskId)
         }
         break;
     case 1:
-        if (ewramSS.unk80 == 0)
+        if (ewramSS.bgToggle == 0)
         {
-            if (ewramSS.unkB == 1)
+            if (ewramSS.page == PSS_PAGE_SKILLS)
                 REG_BG2CNT = (REG_BG2CNT & 0xE0FC) + 0x801;
 
-            if (ewramSS.unkB == 2)
+            if (ewramSS.page == PSS_PAGE_BATTLE_MOVES)
                 REG_BG2CNT = (REG_BG2CNT & 0xE0FC) + 0xA01;
 
-            if (ewramSS.unkB == 3)
+            if (ewramSS.page == PSS_PAGE_CONTEST_MOVES)
                 REG_BG2CNT = (REG_BG2CNT & 0xE0FC) + 0xC01;
 
             REG_BG1CNT = (REG_BG1CNT & 0xFFFC) + 2;
         }
         else
         {
-            if (ewramSS.unkB == 1)
+            if (ewramSS.page == PSS_PAGE_SKILLS)
                 REG_BG1CNT = (REG_BG1CNT & 0xE0FC) + 0x801;
 
-            if (ewramSS.unkB == 2)
+            if (ewramSS.page == PSS_PAGE_BATTLE_MOVES)
                 REG_BG1CNT = (REG_BG1CNT & 0xE0FC) + 0xA01;
 
-            if (ewramSS.unkB == 3)
+            if (ewramSS.page == PSS_PAGE_CONTEST_MOVES)
                 REG_BG1CNT = (REG_BG1CNT & 0xE0FC) + 0xC01;
 
             REG_BG2CNT = (REG_BG2CNT & 0xFFFC) + 2;
@@ -1531,7 +1531,7 @@ void sub_809EE74(u8 taskId)
         taskData[0]++;
         break;
     case 2:
-        if (ewramSS.unk80 == 0)
+        if (ewramSS.bgToggle == 0)
         {
             int var2 = gUnknown_03004288 + 0x20;
             gUnknown_03004288 = var2;
@@ -1551,28 +1551,28 @@ void sub_809EE74(u8 taskId)
         }
         break;
     case 3:
-        ewramSS.unk7E = ewramSS.unkB + 1;
-        minus2 = ewramSS.unk8 - 2;
+        ewramSS.headerTextId = ewramSS.page + 1;
+        minus2 = ewramSS.mode - 2;
         if (minus2 < 2)
         {
-            ewramSS.unk7F = 0;
-            sub_80A029C(&ewramSS.unk10);
-            sub_80A0428(&ewramSS.unk10, &ewramSS.unk79);
-            sub_80A00F4(ewramSS.unk79);
+            ewramSS.headerActionTextId = 0;
+            sub_80A029C(&ewramSS.loadedMon);
+            sub_80A0428(&ewramSS.loadedMon, &ewramSS.selectedMoveIndex);
+            sub_80A00F4(ewramSS.selectedMoveIndex);
         }
         else
         {
-            if (ewramSS.unkB > 1 && (ewramSS.unk7B == 0 || ewramSS.unk8 == 4))
+            if (ewramSS.page >= PSS_PAGE_BATTLE_MOVES && (!ewramSS.disableMoveOrderEditing || ewramSS.mode == PSS_MODE_NO_MOVE_ORDER_EDIT))
             {
-                ewramSS.unk7F = 6;
+                ewramSS.headerActionTextId = 6;
             }
-            else if (ewramSS.unkB == 0)
+            else if (ewramSS.page == PSS_PAGE_INFO)
             {
-                ewramSS.unk7F = 7;
+                ewramSS.headerActionTextId = 7;
             }
             else
             {
-                ewramSS.unk7F = 0;
+                ewramSS.headerActionTextId = 0;
             }
         }
 
@@ -1584,8 +1584,8 @@ void sub_809EE74(u8 taskId)
         taskData[0]++;
         break;
     case 5:
-        gUnknown_083C1598[ewramSS.unkB](&ewramSS.unk10);
-        ewramSS.unk80 ^= 1;
+        gUnknown_083C1598[ewramSS.page](&ewramSS.loadedMon);
+        ewramSS.bgToggle ^= 1;
         taskData[0]++;
         break;
     case 6:
@@ -1599,7 +1599,7 @@ void sub_809EE74(u8 taskId)
 
 void sub_809F0D0(u8 taskId, s8 direction)
 {
-    ewramSS.unkB += direction;
+    ewramSS.page += direction;
     gUnknown_03005CF0 = gTasks[taskId].func;
     sub_809FBE4();
     gTasks[taskId].data[0] = 0;
@@ -1617,10 +1617,10 @@ void sub_809F0D0(u8 taskId, s8 direction)
 
 void SummaryScreenHandleLeftRightInput(u8 taskId, s8 direction)
 {
-    if (!GetMonData(&ewramSS.unk10, MON_DATA_IS_EGG))
+    if (!GetMonData(&ewramSS.loadedMon, MON_DATA_IS_EGG))
     {
-        if (direction == -1 && ewramSS.unkB == ewramSS.unk75) return;
-        if (direction ==  1 && ewramSS.unkB == ewramSS.unk76) return;
+        if (direction == -1 && ewramSS.page == ewramSS.firstPage) return;
+        if (direction ==  1 && ewramSS.page == ewramSS.lastPage) return;
 
         if (FindTaskIdByFunc(sub_80A1334) == 0xFF && FindTaskIdByFunc(sub_80A1500) == 0xFF)
         {
@@ -1636,9 +1636,9 @@ void SummaryScreenHandleUpDownInput(u8 taskId, s8 direction)
     s8 var3;
     u8 var1 = direction;
 
-    if (ewramSS.unkE == 1)
+    if (ewramSS.usingPC == TRUE)
     {
-        if (ewramSS.unkB != 0)
+        if (ewramSS.page != PSS_PAGE_INFO)
         {
             var1 = (direction == 1) ? 0 : 1;
         }
@@ -1647,7 +1647,7 @@ void SummaryScreenHandleUpDownInput(u8 taskId, s8 direction)
             var1 = (direction == 1) ? 2 : 3;
         }
 
-        var3 = StorageSystemGetNextMonIndex(ewramSS.unk0.boxMons, ewramSS.unk9, ewramSS.unkA, var1);
+        var3 = StorageSystemGetNextMonIndex(ewramSS.monList.boxMons, ewramSS.monIndex, ewramSS.maxMonIndex, var1);
     }
     else
     {
@@ -1664,12 +1664,12 @@ void SummaryScreenHandleUpDownInput(u8 taskId, s8 direction)
     if (var3 != -1)
     {
         PlaySE(5);
-        if (GetMonStatusAndPokerus(&ewramSS.unk10))
+        if (GetMonStatusAndPokerus(&ewramSS.loadedMon))
         {
             sub_80A12D0(-2);
         }
 
-        ewramSS.unk9 = var3;
+        ewramSS.monIndex = var3;
         ewramSS.unk84 = gTasks[taskId].func;
         gTasks[taskId].func = sub_809F43C;
     }
@@ -1782,16 +1782,16 @@ _0809F280: .4byte sub_809F43C\n\
 
 // s8 sub_809F284(s8 a)
 // {
-//     struct Pokemon *mons = ewramSS.unk0.partyMons;
+//     struct Pokemon *mons = ewramSS.monList.partyMons;
 //     u8 var1 = 0;
 
-//     if (ewramSS.unkB == 0)
+//     if (ewramSS.page == PSS_PAGE_INFO)
 //     {
-//         if ((s8)a == -1 || ewramSS.unk9 != 0)
+//         if ((s8)a == -1 || ewramSS.monIndex != 0)
 //         {
-//             if ((s8)a == 1 || ewramSS.unk9 < ewramSS.unkA)
+//             if ((s8)a == 1 || ewramSS.monIndex < ewramSS.maxMonIndex)
 //             {
-//                 return ewramSS.unk9 + a;
+//                 return ewramSS.monIndex + a;
 //             }
 //         }
 
@@ -1803,18 +1803,18 @@ _0809F280: .4byte sub_809F43C\n\
 //         {
 //             var1 += a;
 
-//             if (ewramSS.unk9 + var1 >= 0 || ewramSS.unk9 + var1 > ewramSS.unkA)
+//             if (ewramSS.monIndex + var1 >= 0 || ewramSS.monIndex + var1 > ewramSS.maxMonIndex)
 //             {
 //                 return -1;
 //             }
 
-//             if (!GetMonData(&mons[ewramSS.unk9 + var1], MON_DATA_IS_EGG))
+//             if (!GetMonData(&mons[ewramSS.monIndex + var1], MON_DATA_IS_EGG))
 //             {
 //                 break;
 //             }
 //         }
 
-//         return ewramSS.unk9 + var1;
+//         return ewramSS.monIndex + var1;
 //     }
 
 // }
@@ -1904,7 +1904,7 @@ bool8 sub_809F310(struct Pokemon *mon)
 {
     if (GetMonData(mon, MON_DATA_SPECIES))
     {
-        if (ewramSS.unkB != 0 || !GetMonData(mon, MON_DATA_IS_EGG))
+        if (ewramSS.page != PSS_PAGE_INFO || !GetMonData(mon, MON_DATA_IS_EGG))
         {
             return TRUE;
         }
@@ -1955,7 +1955,7 @@ s8 sub_809F3CC(s8 a)
 
     for (i = 0; i < 6; i++)
     {
-        if (gUnknown_083C15A8[i] == ewramSS.unk9)
+        if (gUnknown_083C15A8[i] == ewramSS.monIndex)
         {
             var1 = i;
             break;
@@ -2054,33 +2054,33 @@ void sub_809F43C(u8 taskId)
         gMain.state++;
         break;
     case 1:
-        DestroySpriteAndFreeResources(&gSprites[ewramSS.unkC]);
+        DestroySpriteAndFreeResources(&gSprites[ewramSS.monSpriteId]);
         gMain.state++;
         break;
     case 2:
-        DestroySpriteAndFreeResources(&gSprites[ewramSS.unkD]);
+        DestroySpriteAndFreeResources(&gSprites[ewramSS.ballSpriteId]);
         gMain.state++;
         break;
     case 3:
-        ewramSS.unk74 = 0;
-        ewramSS.unk79 = 0;
+        ewramSS.loadGfxState = 0;
+        ewramSS.selectedMoveIndex = 0;
         gMain.state++;
         break;
     case 4:
-        sub_809F678(&ewramSS.unk10);
-        if (GetMonStatusAndPokerus(&ewramSS.unk10))
+        sub_809F678(&ewramSS.loadedMon);
+        if (GetMonStatusAndPokerus(&ewramSS.loadedMon))
         {
             sub_80A12D0(2);
         }
 
-        DrawPokerusSurvivorDot(&ewramSS.unk10);
+        DrawPokerusSurvivorDot(&ewramSS.loadedMon);
         gMain.state++;
         break;
     case 5:
-        if ((ewramSS.unkC = sub_809F6B4(&ewramSS.unk10, &ewramSS.unk74)) != 0xFF)
+        if ((ewramSS.monSpriteId = sub_809F6B4(&ewramSS.loadedMon, &ewramSS.loadGfxState)) != 0xFF)
         {
-            ewramSS.unk74 = 0;
-            if (GetMonData(&ewramSS.unk10, MON_DATA_IS_EGG))
+            ewramSS.loadGfxState = 0;
+            if (GetMonData(&ewramSS.loadedMon, MON_DATA_IS_EGG))
             {
                 gUnknown_030041B0 = 256;
             }
@@ -2093,17 +2093,17 @@ void sub_809F43C(u8 taskId)
         }
         break;
     case 6:
-        sub_80A1DCC(&ewramSS.unk10);
+        sub_80A1DCC(&ewramSS.loadedMon);
         gMain.state++;
         break;
     case 7:
-        sub_80A1DE8(&ewramSS.unk10);
+        sub_80A1DE8(&ewramSS.loadedMon);
         gMain.state++;
         break;
     case 8:
         if (sub_809F5F8())
         {
-            ewramSS.unk74 = 0;
+            ewramSS.loadGfxState = 0;
             gMain.state++;
         }
         break;
@@ -2119,15 +2119,15 @@ void sub_809F43C(u8 taskId)
 
 bool8 sub_809F5F8(void)
 {
-    if (ewramSS.unk74 == 0)
+    if (ewramSS.loadGfxState == 0)
     {
-        sub_809FAC8(&ewramSS.unk10);
-        ewramSS.unk74++;
+        sub_809FAC8(&ewramSS.loadedMon);
+        ewramSS.loadGfxState++;
         return FALSE;
     }
     else
     {
-        gUnknown_083C1588[ewramSS.unkB](&ewramSS.unk10);
+        gUnknown_083C1588[ewramSS.page](&ewramSS.loadedMon);
         return TRUE;
     }
 }
@@ -2152,15 +2152,15 @@ void sub_809F664(struct Pokemon *mon)
 
 void sub_809F678(struct Pokemon *mon)
 {
-    if (ewramSS.unkE == 0)
+    if (ewramSS.usingPC == FALSE)
     {
-        struct Pokemon *mons = ewramSS.unk0.partyMons;
-        *mon = mons[ewramSS.unk9];
+        struct Pokemon *mons = ewramSS.monList.partyMons;
+        *mon = mons[ewramSS.monIndex];
     }
     else
     {
-        struct BoxPokemon *mons = ewramSS.unk0.boxMons;
-        sub_803B4B4(&mons[ewramSS.unk9], mon);
+        struct BoxPokemon *mons = ewramSS.monList.boxMons;
+        sub_803B4B4(&mons[ewramSS.monIndex], mon);
     }
 }
 
@@ -2238,8 +2238,8 @@ bool8 sub_809F7D0(u8 taskId)
     u16 move;
 
     sub_809F678(&mon);
-    move = GetMonMove(&mon, ewramSS.unk79);    
-    if (IsHMMove(move) == TRUE && ewramSS.unk8 != 3)
+    move = GetMonMove(&mon, ewramSS.selectedMoveIndex);    
+    if (IsHMMove(move) == TRUE && ewramSS.mode != PSS_MODE_UNKNOWN)
     {
         return FALSE;
     }
@@ -2247,7 +2247,7 @@ bool8 sub_809F7D0(u8 taskId)
     return TRUE;
 }
 
-#ifdef NONMATCHING // The two "ewramSS.unk79 = taskData[15];" lines have small register differences.
+#ifdef NONMATCHING // The two "ewramSS.selectedMoveIndex = taskData[15];" lines have small register differences.
 void sub_809F814(u8 taskId)
 {
     u16 var1;
@@ -2264,7 +2264,7 @@ void sub_809F814(u8 taskId)
         gTasks[taskId].func = sub_809E260;
         taskData[0] = 4;
         taskData[13] = 1;
-        ewramSS.unk79 = taskData[15];
+        ewramSS.selectedMoveIndex = taskData[15];
         sub_809E8F0(taskId, -1, NULL);
     }
     else if (gMain.newKeys & DPAD_DOWN)
@@ -2272,14 +2272,14 @@ void sub_809F814(u8 taskId)
         gTasks[taskId].func = sub_809E260;
         taskData[0] = 4;
         taskData[13] = 1;
-        ewramSS.unk79 = taskData[15];
+        ewramSS.selectedMoveIndex = taskData[15];
         sub_809E8F0(taskId, 1, NULL);
     }
     else if ((gMain.newKeys & DPAD_LEFT) || sub_80F9284() == 1)
     {
-        if (ewramSS.unkB != 2)
+        if (ewramSS.page != PSS_PAGE_BATTLE_MOVES)
         {
-            if (ewramSS.unkB == 3 && (ewramSS.unk79 != 4 || ewramSS.unk7C != 0))
+            if (ewramSS.page == PSS_PAGE_CONTEST_MOVES && (ewramSS.selectedMoveIndex != 4 || ewramSS.moveToLearn != 0))
             {
                 MenuZeroFillWindowRect(0, 14, 9, 18);
             }
@@ -2293,9 +2293,9 @@ void sub_809F814(u8 taskId)
     }
     else if ((gMain.newKeys & DPAD_RIGHT) || sub_80F9284() == 2)
     {
-        if (ewramSS.unkB != ewramSS.unk76)
+        if (ewramSS.page != ewramSS.lastPage)
         {
-            if (ewramSS.unkB == 2 && (ewramSS.unk79 != 4 || ewramSS.unk7C != 0))
+            if (ewramSS.page == PSS_PAGE_BATTLE_MOVES && (ewramSS.selectedMoveIndex != 4 || ewramSS.moveToLearn != 0))
             {
                 MenuZeroFillWindowRect(0, 14, 9, 18);
             }
@@ -2554,7 +2554,7 @@ void sub_809F9D0(u8 taskId, u8 b)
 
 u8 sub_809FA30(void)
 {
-    return ewramSS.unk7A;
+    return ewramSS.switchMoveIndex;
 }
 
 // void GetStringCenterAlignXOffsetWithLetterSpacing(u8 a, u8 b, u8 c, u8 d)
@@ -2869,9 +2869,9 @@ void sub_80A00A4(void)
 
 void sub_80A00F4(u8 a)
 {
-    if (ewramSS.unk7C != 0 || a != 4)
+    if (ewramSS.moveToLearn != 0 || a != 4)
     {
-        if (ewramSS.unkB == 2)
+        if (ewramSS.page == PSS_PAGE_BATTLE_MOVES)
         {
             sub_80A1FF8(gOtherText_Power2, 13, 1, 15);
             sub_80A1FF8(gOtherText_Accuracy2, 13, 1, 17);
@@ -2906,7 +2906,7 @@ void sub_80A015C(struct Pokemon *mon)
         }
         else
         {
-            if (ewramSS.unkB == 2)
+            if (ewramSS.page == PSS_PAGE_BATTLE_MOVES)
             {
                 sub_80A198C(gBattleMoves[move].type, 87, ((2 * i) + 4) * 8, i);
             }
@@ -2936,20 +2936,20 @@ void sub_80A029C(struct Pokemon *mon)
     u16 move;
     u8 pp;
 
-    if (ewramSS.unk7C == 0)
+    if (ewramSS.moveToLearn == 0)
     {
         sub_80A1FF8(gOtherText_CancelNoTerminator, 13, 15, 12);
         return;
     }
 
-    move = ewramSS.unk7C;
+    move = ewramSS.moveToLearn;
 
-    if (ewramSS.unkB == 2)
+    if (ewramSS.page == PSS_PAGE_BATTLE_MOVES)
         sub_80A198C(gBattleMoves[move].type, 87, 96, 4);
     else
         sub_80A198C(gContestMoves[move].contestCategory + 18, 87, 96, 4);
 
-    if (ewramSS.unkB == 2)
+    if (ewramSS.page == PSS_PAGE_BATTLE_MOVES)
         sub_80A1FF8(gMoveNames[move], 10, 15, 12);
     else
         sub_80A1FF8(gMoveNames[move], 9, 15, 12);
@@ -2984,9 +2984,9 @@ u16 sub_80A03BC(struct Pokemon *mon, u8 selectedMoveIndex)
     }
     else
     {
-        if (ewramSS.unk7C != 0)
+        if (ewramSS.moveToLearn != 0)
         {
-            move = ewramSS.unk7C;
+            move = ewramSS.moveToLearn;
         }
         else
         {
@@ -3001,7 +3001,7 @@ void sub_80A03F0(struct Pokemon *mon, u8 *selectedMoveIndex)
 {
     u16 move = sub_80A03BC(mon, *selectedMoveIndex);
 
-    if (ewramSS.unkB == 2)
+    if (ewramSS.page == PSS_PAGE_BATTLE_MOVES)
     {
         sub_80A04CC(move);
         sub_80A057C(0xFFFF);
@@ -3017,7 +3017,7 @@ void sub_80A0428(struct Pokemon *mon, u8 *selectedMoveIndex)
     u16 move = sub_80A03BC(mon, *selectedMoveIndex);
     MenuZeroFillWindowRect(11, 15, 28, 18);
 
-    if (ewramSS.unkB == 2)
+    if (ewramSS.page == PSS_PAGE_BATTLE_MOVES)
     {
         sub_80A046C(move);
     }
@@ -3546,7 +3546,7 @@ void PrintHeldItemName(u16 itemId, u8 left, u8 top)
     if (itemId == ITEM_ENIGMA_BERRY
         && sub_80F9344() == TRUE
         && IsLinkDoubleBattle() == TRUE
-        && (ewramSS.unk9 == 1 || ewramSS.unk9 == 4 || ewramSS.unk9 == 5))
+        && (ewramSS.monIndex == 1 || ewramSS.monIndex == 4 || ewramSS.monIndex == 5))
     {
         StringCopy(gStringVar1, ItemId_GetItem(itemId)->name);
     }
@@ -3643,7 +3643,7 @@ void PrintSummaryWindowHeaderText(void)
 
     buffer += 3;
     buffer = sub_80A1E58(buffer, 13);
-    buffer = StringCopy(buffer, gUnknown_083C1068[ewramSS.unk7E]);
+    buffer = StringCopy(buffer, gUnknown_083C1068[ewramSS.headerTextId]);
 
     buffer[0] = EXT_CTRL_CODE_BEGIN;
     buffer[1] = 0x13;
@@ -3652,7 +3652,7 @@ void PrintSummaryWindowHeaderText(void)
 
     MenuPrint(gStringVar1, 0, 0);
 
-    if (ewramSS.unk7F != 0)
+    if (ewramSS.headerActionTextId != 0)
     {
         GetStringCenterAlignXOffset(5, 23, 0);
         GetStringCenterAlignXOffset(6, 24, 0);
@@ -3664,7 +3664,7 @@ void PrintSummaryWindowHeaderText(void)
 
     buffer = gStringVar1;
     buffer = sub_80A1E58(buffer, 13);
-    buffer = StringCopy(buffer, gUnknown_083C1068[ewramSS.unk7F]);
+    buffer = StringCopy(buffer, gUnknown_083C1068[ewramSS.headerActionTextId]);
 
     buffer[0] = EXT_CTRL_CODE_BEGIN;
     buffer[1] = 0x13;
@@ -3700,7 +3700,7 @@ void DrawSummaryScreenNavigationDots(void)
     void *dest;
     u16 arr[8];
     u8 i = 0;
-    struct SummaryScreenStruct *SS = (struct SummaryScreenStruct *)(gSharedMem + 0x18000);
+    struct PokemonSummaryScreenStruct *SS = (struct PokemonSummaryScreenStruct *)(gSharedMem + 0x18000);
     u16 var1 = 0x4040;
     u16 var2 = 0x404A;
 
@@ -4331,12 +4331,12 @@ void sub_80A12D0(s8 a)
 
 //     if (gTasks[taskId].data[0] == 0 || gTasks[taskId].data[1] < 0)
 //     {
-//         if (ewramSS.unkB == 2)
+//         if (ewramSS.page == PSS_PAGE_BATTLE_MOVES)
 //         {
 //             MenuZeroFillWindowRect(0, 14, 9, 18);
-//             sub_80A0958(ewramSS.unk10);
+//             sub_80A0958(ewramSS.loadedMon);
 
-//             if (GetMonStatusAndPokerus(ewramSS.unk10))
+//             if (GetMonStatusAndPokerus(ewramSS.loadedMon))
 //             {
 //                 sub_80A1FF8(gOtherText_Status, 13, 1, 18);
 //             }
@@ -4347,12 +4347,12 @@ void sub_80A12D0(s8 a)
 
 //     if (gTasks[taskId].data[1] > 9)
 //     {
-//         if (ewramSS.unkB == 2)
+//         if (ewramSS.page == PSS_PAGE_BATTLE_MOVES)
 //         {
 //             sub_80A00F4(gTasks[taskId].data[3]);
 //         }
 
-//         sub_80A0428(ewramSS.unk10, &gTasks[taskId].data[3]);
+//         sub_80A0428(ewramSS.loadedMon, &gTasks[taskId].data[3]);
 //         DestroyTask(taskId);
 //     }
 // }
@@ -4534,7 +4534,7 @@ void sub_80A1488(s8 a, u8 b)
 {
     u8 taskId;
 
-    if (ewramSS.unkB == 2)
+    if (ewramSS.page == PSS_PAGE_BATTLE_MOVES)
     {
         MenuZeroFillWindowRect(0, 14, 9, 19);
     }
@@ -4736,7 +4736,7 @@ void sub_80A1654(s8 a, u8 b)
 {
     u8 taskId;
 
-    if (ewramSS.unkB == 3)
+    if (ewramSS.page == PSS_PAGE_CONTEST_MOVES)
     {
         MenuZeroFillWindowRect(0, 14, 9, 19);
     }
@@ -5011,7 +5011,7 @@ void sub_80A1888(struct Sprite *sprite)
     {
         sprite->callback = SpriteCallbackDummy;
 
-        if (!GetMonData(&ewramSS.unk10, MON_DATA_IS_EGG))
+        if (!GetMonData(&ewramSS.loadedMon, MON_DATA_IS_EGG))
         {
             PlayCry1(sprite->data0, 0);
         }
@@ -5074,7 +5074,7 @@ void sub_80A1A30(u8 a)
     s16 x;
     u8 subPriority = 0;
 
-    if (ewramSS.unkB > 1)
+    if (ewramSS.page >= PSS_PAGE_BATTLE_MOVES)
     {
         if (a == 9)
         {
@@ -5224,11 +5224,11 @@ void sub_80A1BC0(struct Sprite *sprite)
 
     if (sprite->data0 == 9)
     {
-        sprite->pos2.y = ewramSS.unk79 * 16;
+        sprite->pos2.y = ewramSS.selectedMoveIndex * 16;
     }
     else
     {
-        sprite->pos2.y = ewramSS.unk7A * 16;
+        sprite->pos2.y = ewramSS.switchMoveIndex * 16;
     }
 }
 
@@ -5442,9 +5442,9 @@ void sub_80A1DE8(struct Pokemon *mon)
     u8 ball = ball_number_to_ball_processing_index(GetMonData(mon, MON_DATA_POKEBALL));
     sub_80478DC(ball);
 
-    ewramSS.unkD = CreateSprite(&gBallSpriteTemplates[ball], 6, 136, 0);
-    gSprites[ewramSS.unkD].callback = SpriteCallbackDummy;
-    gSprites[ewramSS.unkD].oam.priority = 3;
+    ewramSS.ballSpriteId = CreateSprite(&gBallSpriteTemplates[ball], 6, 136, 0);
+    gSprites[ewramSS.ballSpriteId].callback = SpriteCallbackDummy;
+    gSprites[ewramSS.ballSpriteId].oam.priority = 3;
 }
 
 u8 *sub_80A1E58(u8 *text, u8 id)

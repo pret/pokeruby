@@ -6,35 +6,55 @@
 
 extern const u8 *const gNatureNames[];
 
-struct SummaryScreenStruct
+// The Pokemon Summary Screen can operate in different modes. Certain features,
+// such as move re-ordering, are available in the different modes.
+enum PokemonSummaryScreenMode
+{
+    PSS_MODE_NORMAL,
+    PSS_MODE_MOVES_ONLY,
+    PSS_MODE_SELECT_MOVE,
+    PSS_MODE_UNKNOWN, // TODO: this mode might be used by pokemon_storage_system
+    PSS_MODE_NO_MOVE_ORDER_EDIT,
+    PSS_MODE_PC_NORMAL,
+    PSS_MODE_PC_MOVES_ONLY,
+};
+
+enum PokemonSummaryScreenPage
+{
+	PSS_PAGE_INFO,
+	PSS_PAGE_SKILLS,
+	PSS_PAGE_BATTLE_MOVES,
+	PSS_PAGE_CONTEST_MOVES,
+};
+
+struct PokemonSummaryScreenStruct
 {
     /*0x00*/ union {
         struct Pokemon *partyMons;
         struct BoxPokemon *boxMons;
-    } unk0;
-    /*0x04*/ MainCallback unk4;
-    /*0x08*/ u8 unk8;
-    /*0x09*/ u8 unk9;
-    /*0x0A*/ u8 unkA;
-    /*0x0B*/ u8 unkB;
-    /*0x0C*/ u8 unkC;
-    /*0x0D*/ u8 unkD;
-    /*0x0E*/ u8 unkE;
-    /*0x0F*/ u8 unkF;
-    /*0x10*/ struct Pokemon unk10;
-    /*0x74*/ u8 unk74;
-    /*0x75*/ u8 unk75;
-    /*0x76*/ u8 unk76;
+    } monList;
+    /*0x04*/ MainCallback callback;
+    /*0x08*/ u8 mode; // see enum PokemonSummaryScreenMode
+    /*0x09*/ u8 monIndex;
+    /*0x0A*/ u8 maxMonIndex;
+    /*0x0B*/ u8 page; // enum PokemonSummaryScreenPage
+    /*0x0C*/ u8 monSpriteId;
+    /*0x0D*/ u8 ballSpriteId;
+    /*0x0E*/ bool8 usingPC;
+    /*0x0F*/ u8 inputHandlingTaskId;
+    /*0x10*/ struct Pokemon loadedMon;
+    /*0x74*/ u8 loadGfxState;
+    /*0x75*/ u8 firstPage;
+    /*0x76*/ u8 lastPage;
     /*0x77*/ u8 unk77;
     /*0x78*/ u8 unk78;
-    /*0x79*/ u8 unk79;
-    /*0x7A*/ u8 unk7A;
-    /*0x7B*/ u8 unk7B;
-    /*0x7C*/ u16 unk7C;
-    /*0x7E*/ u8 unk7E;
-    /*0x7F*/ u8 unk7F;
-    /*0x80*/ u8 unk80;
-    /*0x81*/ u8 filler81;
+    /*0x79*/ u8 selectedMoveIndex;
+    /*0x7A*/ u8 switchMoveIndex;
+    /*0x7B*/ bool8 disableMoveOrderEditing;
+    /*0x7C*/ u16 moveToLearn;
+    /*0x7E*/ u8 headerTextId; // used as index into gUnknown_083C1068
+    /*0x7F*/ u8 headerActionTextId; // used as index into gUnknown_083C1068
+    /*0x80*/ u8 bgToggle;
     /*0x84*/ TaskFunc unk84;
 };
 

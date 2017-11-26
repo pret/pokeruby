@@ -433,7 +433,7 @@ static void sub_81225D4(u8 taskId)
 
         DestroyTask(taskId);
         ewram1B000.unk262 = 1;
-        ShowPokemonSummaryScreen(gPlayerParty, r4, gPlayerPartyCount - 1, sub_81225A4, 0);
+        ShowPokemonSummaryScreen(gPlayerParty, r4, gPlayerPartyCount - 1, sub_81225A4, PSS_MODE_NORMAL);
     }
 }
 
@@ -883,7 +883,7 @@ static void sub_8123034(u8 taskId)
 
         DestroyTask(taskId);
         ewram1B000.unk262 = 1;
-        ShowPokemonSummaryScreen(gPlayerParty, r4, gPlayerPartyCount - 1, sub_8123004, 0);
+        ShowPokemonSummaryScreen(gPlayerParty, r4, gPlayerPartyCount - 1, sub_8123004, PSS_MODE_NORMAL);
     }
 }
 
