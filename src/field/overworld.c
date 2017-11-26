@@ -602,7 +602,7 @@ void sub_80538F0(u8 mapGroup, u8 mapNum)
     prev_quest_postbuffer_cursor_backup_reset();
     sub_8082BD0(mapGroup, mapNum);
     DoTimeBasedEvents();
-    sub_80806E4();
+    SetSav1WeatherFromCurrMapHeader();
     ChooseAmbientCrySpecies();
     SetDefaultFlashLevel();
     Overworld_ClearSavedMusic();
@@ -638,7 +638,7 @@ void sub_8053994(u32 a1)
     sub_8082BD0(gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum);
     if (a1 != 1)
         DoTimeBasedEvents();
-    sub_80806E4();
+    SetSav1WeatherFromCurrMapHeader();
     ChooseAmbientCrySpecies();
     if (v2)
         FlagClear(SYS_USE_FLASH);

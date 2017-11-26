@@ -112,7 +112,6 @@ SECTIONS {
         src/scene/title_screen.o(.text);
         src/field/field_weather.o(.text);
         src/field/field_weather_2.o(.text);
-        asm/field_weather.o(.text);
         src/field/field_fadetransition.o(.text);
         src/field/field_screen_effect.o(.text);
         src/battle/battle_setup.o(.text);
@@ -372,7 +371,6 @@ SECTIONS {
         src/scene/title_screen.o(.rodata);
         src/field/field_weather.o(.rodata);
         src/field/field_weather_2.o(.rodata);
-        data/field_weather.o(.rodata);
         src/field/field_screen_effect.o(.rodata);
         src/battle/battle_setup.o(.rodata);
         src/engine/cable_club.o(.rodata);

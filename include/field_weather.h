@@ -16,8 +16,12 @@ struct Sprite;
 // TODO: This might be a union
 struct Weather2
 {
-    /*0x00*/ u8 filler0[0xA0];
-    /*0xA0*/ struct Sprite *fogSprites[20];
+    /*0x000*/ u8 filler0[0xA0];
+    /*0x0A0*/ struct Sprite *fogSprites[20];
+    /*0x0F0*/ struct Sprite *fog1Sprites[20];
+    /*0x140*/ struct Sprite *unknown_140[20];
+    /*0x190*/ struct Sprite *unknown_190[20];
+    /*0x1E0*/ struct Sprite *unknown_1E0[5];
 };
 
 struct Weather
@@ -78,12 +82,28 @@ struct Weather
     u16 unknown_6FC;
     u16 unknown_6FE;
     u8 unknown_700;
-    u8 filler_701[0x15];
+    u8 filler_701[3];
+    u32 unknown_704;
+    u32 unknown_708;
+    u8 filler_70C[2];
+    u16 unknown_70E;
+    u16 unknown_710;
+    u16 unknown_712;
+    u16 unknown_714;
     u8 unknown_716;
     u8 unknown_717;
-    u8 filler_718[0xc];
+    u16 unknown_718;
+    u16 unknown_71A;
+    u16 unknown_71C;
+    u16 unknown_71E;
+    u16 unknown_720;
+    u16 unknown_722;
     u8 unknown_724;
-    u8 filler_725[9];
+    u8 filler_725[1];
+    u16 unknown_726;
+    u16 unknown_728;
+    u16 unknown_72A;
+    u16 unknown_72C;
     u8 unknown_72E;
     u8 filler_72F;
     u16 currBlendEVA;
@@ -139,7 +159,7 @@ void PlayRainSoundEffect(void);
 // ...
 void SetSav1Weather(u32);
 u8 GetSav1Weather(void);
-void sub_80806E4(void);
+void SetSav1WeatherFromCurrMapHeader(void);
 // ...
 void DoCurrentWeather(void);
 void sub_8080750();
