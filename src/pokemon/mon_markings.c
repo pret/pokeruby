@@ -2,7 +2,7 @@
 #include "main.h"
 #include "menu_cursor.h"
 #include "text_window.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "sprite.h"
 

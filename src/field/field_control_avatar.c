@@ -17,7 +17,7 @@
 #include "safari_zone.h"
 #include "script.h"
 #include "secret_base.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "start_menu.h"
 #include "trainer_see.h"

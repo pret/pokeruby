@@ -4,7 +4,7 @@
 #include "menu.h"
 #include "palette.h"
 #include "save.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "sprite.h"
 #include "strings2.h"

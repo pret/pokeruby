@@ -11,9 +11,9 @@
 #include "menu.h"
 #include "rom6.h"
 #include "script.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
-#include "species.h"
+#include "constants/species.h"
 #include "task.h"
 #include "text.h"
 

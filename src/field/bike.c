@@ -7,7 +7,7 @@
 #include "global.fieldmap.h"
 #include "metatile_behavior.h"
 #include "overworld.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 
 extern bool8 gBikeCyclingChallenge;

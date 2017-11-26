@@ -7,7 +7,7 @@
 #include "decompress.h"
 #include "palette.h"
 #include "pokemon_icon.h"
-#include "species.h"
+#include "constants/species.h"
 #include "sprite.h"
 #include "task.h"
 #include "trig.h"

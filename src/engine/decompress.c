@@ -1,7 +1,7 @@
 #include "global.h"
 #include "decompress.h"
 #include "data2.h"
-#include "species.h"
+#include "constants/species.h"
 #include "text.h"
 #include "ewram.h"
 

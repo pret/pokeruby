@@ -3,7 +3,7 @@
 #include "data2.h"
 #include "event_data.h"
 #include "pokedex.h"
-#include "species.h"
+#include "constants/species.h"
 #include "string_util.h"
 #include "strings2.h"
 #include "text.h"

@@ -7,7 +7,7 @@
 #include "menu.h"
 #include "strings2.h"
 #include "sound.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "berry.h"
 #include "string_util.h"
 #include "link.h"

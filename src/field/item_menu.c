@@ -25,7 +25,7 @@
 #include "pokemon_menu.h"
 #include "overworld.h"
 #include "script.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "sprite.h"
 #include "strings.h"

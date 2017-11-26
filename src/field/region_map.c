@@ -11,7 +11,7 @@
 #include "region_map.h"
 #include "overworld.h"
 #include "secret_base.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sprite.h"
 #include "strings.h"
 #include "string_util.h"

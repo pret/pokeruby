@@ -4,7 +4,7 @@
 #include "name_string_util.h"
 #include "pokemon.h"
 #include "pokemon_icon.h"
-#include "species.h"
+#include "constants/species.h"
 #include "text.h"
 
 void ClearMailData(void)

@@ -10,7 +10,7 @@
 #include "palette.h"
 #include "random.h"
 #include "rom_8077ABC.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"

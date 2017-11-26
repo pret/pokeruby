@@ -22,7 +22,7 @@
 #include "item.h"
 #include "decoration.h"
 #include "items.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "overworld.h"
 #include "decoration_inventory.h"
 #include "field_camera.h"

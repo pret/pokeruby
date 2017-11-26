@@ -13,7 +13,7 @@
 #include "palette.h"
 #include "pokemon.h"
 #include "rom3.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "string_util.h"
 #include "task.h"

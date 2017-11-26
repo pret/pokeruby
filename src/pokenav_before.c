@@ -12,7 +12,7 @@
 #include "overworld.h"
 #include "palette.h"
 #include "region_map.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "string_util.h"
 #include "sound.h"
 #include "task.h"

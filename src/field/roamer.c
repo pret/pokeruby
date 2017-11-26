@@ -2,7 +2,7 @@
 #include "roamer.h"
 #include "pokemon.h"
 #include "random.h"
-#include "species.h"
+#include "constants/species.h"
 
 #ifdef SAPPHIRE
 #define ROAMER_SPECIES SPECIES_LATIAS

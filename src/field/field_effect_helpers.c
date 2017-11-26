@@ -2,7 +2,7 @@
 #include "sprite.h"
 #include "fieldmap.h"
 #include "metatile_behavior.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "field_map_obj.h"
 #include "field_camera.h"

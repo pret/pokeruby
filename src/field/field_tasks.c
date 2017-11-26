@@ -16,7 +16,7 @@
 #include "fieldmap.h"
 #include "field_player_avatar.h"
 #include "field_camera.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "field_tasks.h"
 

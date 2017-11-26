@@ -29,7 +29,7 @@
 #include "overworld.h"
 #include "rom_8094928.h"
 #include "script.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "string_util.h"
 #include "strings.h"

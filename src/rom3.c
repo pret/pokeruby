@@ -11,7 +11,7 @@
 #include "pokemon.h"
 #include "rom3.h"
 #include "rom_8094928.h"
-#include "species.h"
+#include "constants/species.h"
 #include "task.h"
 #include "util.h"
 #include "battle_message.h"

@@ -15,7 +15,7 @@
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "name_string_util.h"
 #include "mail.h"
 #include "overworld.h"

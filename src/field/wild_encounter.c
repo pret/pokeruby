@@ -1,6 +1,6 @@
 #include "global.h"
 #include "wild_encounter.h"
-#include "abilities.h"
+#include "constants/abilities.h"
 #include "battle_setup.h"
 #include "event_data.h"
 #include "field_player_avatar.h"
@@ -13,7 +13,7 @@
 #include "overworld.h"
 #include "safari_zone.h"
 #include "script.h"
-#include "species.h"
+#include "constants/species.h"
 #include "tv.h"
 
 const struct WildPokemon PetalburgCity_WaterMons [] =

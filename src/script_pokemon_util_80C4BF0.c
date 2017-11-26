@@ -20,7 +20,7 @@
 #include "random.h"
 #include "overworld.h"
 #include "script_pokemon_80C4.h"
-#include "species.h"
+#include "constants/species.h"
 #include "task.h"
 #include "ewram.h"
 

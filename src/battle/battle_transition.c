@@ -9,7 +9,7 @@
 #include "random.h"
 #include "sprite.h"
 #include "sound.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "trainer.h"
 #include "field_camera.h"
 #include "ewram.h"

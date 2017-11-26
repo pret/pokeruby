@@ -8,7 +8,7 @@
 #include "menu_cursor.h"
 #include "palette.h"
 #include "rom3.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "text.h"
 #include "util.h"

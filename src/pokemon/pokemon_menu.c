@@ -5,7 +5,7 @@
 #include "palette.h"
 #include "menu.h"
 #include "mail_data.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "main.h"
 #include "overworld.h"

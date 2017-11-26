@@ -4,7 +4,7 @@
 #include "field_map_obj.h"
 #include "fieldmap.h"
 #include "map_constants.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "sprite.h"
 

@@ -23,7 +23,7 @@
 #include "item.h"
 #include "items.h"
 #include "sound.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "safari_zone.h"
 #include "event_data.h"
 #include "pokeblock.h"

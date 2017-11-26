@@ -1,6 +1,6 @@
 #include "global.h"
 #include "battle_ai.h"
-#include "abilities.h"
+#include "constants/abilities.h"
 #include "battle.h"
 #include "battle_move_effects.h"
 #include "data2.h"
@@ -9,7 +9,7 @@
 #include "pokemon.h"
 #include "random.h"
 #include "rom_8077ABC.h"
-#include "species.h"
+#include "constants/species.h"
 #include "util.h"
 #include "ewram.h"
 

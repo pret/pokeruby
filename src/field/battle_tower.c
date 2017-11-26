@@ -17,7 +17,7 @@
 #include "random.h"
 #include "save.h"
 #include "script_pokemon_80C4.h"
-#include "species.h"
+#include "constants/species.h"
 #include "string_util.h"
 #include "task.h"
 #include "text.h"

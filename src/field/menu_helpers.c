@@ -8,7 +8,7 @@
 #include "menu.h"
 #include "menu_helpers.h"
 #include "overworld.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
