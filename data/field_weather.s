@@ -24,7 +24,7 @@ gUnknown_0839AC68:: @ 839AC68
 
 	.align 2
 gWeatherBubbleSpriteSheet:: @ 839AC70
-	obj_tiles WeatherBubbleTiles, 0x40, 0x1205
+	obj_tiles gWeatherBubbleTiles, 0x40, 0x1205
 
 	.align 1
 gUnknown_0839AC78:: @ 839AC78

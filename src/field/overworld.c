@@ -1737,7 +1737,7 @@ void sub_8054D4C(u32 a1)
     sub_805C7C4(0);
     FieldEffectActiveListClear();
     InitFieldMessageBox();
-    sub_807C828();
+    StartWeather();
     sub_8080750();
     if (!a1)
         SetUpFieldTasks();

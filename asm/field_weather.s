@@ -5,373 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_807F6E8
-sub_807F6E8: @ 807F6E8
-	push {r4,r5,lr}
-	sub sp, 0x8
-	ldr r0, _0807F75C @ =gWeatherPtr
-	ldr r0, [r0]
-	ldr r1, _0807F760 @ =0x000006fb
-	adds r0, r1
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _0807F792
-	ldr r0, _0807F764 @ =gWeatherFog1SpriteSheet
-	ldr r1, [r0, 0x4]
-	ldr r0, [r0]
-	str r0, [sp]
-	str r1, [sp, 0x4]
-	mov r0, sp
-	bl LoadSpriteSheet
-	movs r5, 0
-_0807F70C:
-	ldr r0, _0807F768 @ =gSpriteTemplate_839AB90
-	movs r1, 0
-	movs r2, 0
-	movs r3, 0xFF
-	bl CreateSpriteAtEnd
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x40
-	beq _0807F770
-	lsls r4, r0, 4
-	adds r4, r0
-	lsls r4, 2
-	ldr r0, _0807F76C @ =gSprites
-	adds r4, r0
-	adds r0, r5, 0
-	movs r1, 0x5
-	bl __umodsi3
-	strh r0, [r4, 0x2E]
-	lsls r0, 16
-	lsrs r0, 10
-	adds r0, 0x20
-	strh r0, [r4, 0x20]
-	adds r0, r5, 0
-	movs r1, 0x5
-	bl __udivsi3
-	lsls r0, 16
-	lsrs r0, 10
-	adds r0, 0x20
-	strh r0, [r4, 0x22]
-	ldr r2, _0807F75C @ =gWeatherPtr
-	ldr r0, [r2]
-	lsls r1, r5, 2
-	adds r0, 0xA0
-	adds r0, r1
-	str r4, [r0]
-	b _0807F77E
-	.align 2, 0
-_0807F75C: .4byte gWeatherPtr
-_0807F760: .4byte 0x000006fb
-_0807F764: .4byte gWeatherFog1SpriteSheet
-_0807F768: .4byte gSpriteTemplate_839AB90
-_0807F76C: .4byte gSprites
-_0807F770:
-	ldr r2, _0807F79C @ =gWeatherPtr
-	ldr r1, [r2]
-	lsls r0, r5, 2
-	adds r1, 0xA0
-	adds r1, r0
-	movs r0, 0
-	str r0, [r1]
-_0807F77E:
-	adds r0, r5, 0x1
-	lsls r0, 16
-	lsrs r5, r0, 16
-	cmp r5, 0x13
-	bls _0807F70C
-	ldr r0, [r2]
-	ldr r1, _0807F7A0 @ =0x000006fb
-	adds r0, r1
-	movs r1, 0x1
-	strb r1, [r0]
-_0807F792:
-	add sp, 0x8
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0807F79C: .4byte gWeatherPtr
-_0807F7A0: .4byte 0x000006fb
-	thumb_func_end sub_807F6E8
-
-	thumb_func_start sub_807F7A4
-sub_807F7A4: @ 807F7A4
-	push {r4,r5,lr}
-	ldr r0, _0807F7EC @ =gWeatherPtr
-	ldr r1, [r0]
-	ldr r2, _0807F7F0 @ =0x000006fb
-	adds r0, r1, r2
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _0807F7E4
-	movs r4, 0
-	adds r5, r1, 0
-	adds r5, 0xA0
-_0807F7BA:
-	lsls r0, r4, 2
-	adds r0, r5, r0
-	ldr r0, [r0]
-	cmp r0, 0
-	beq _0807F7C8
-	bl DestroySprite
-_0807F7C8:
-	adds r0, r4, 0x1
-	lsls r0, 16
-	lsrs r4, r0, 16
-	cmp r4, 0x13
-	bls _0807F7BA
-	ldr r0, _0807F7F4 @ =0x00001201
-	bl FreeSpriteTilesByTag
-	ldr r0, _0807F7EC @ =gWeatherPtr
-	ldr r0, [r0]
-	ldr r1, _0807F7F0 @ =0x000006fb
-	adds r0, r1
-	movs r1, 0
-	strb r1, [r0]
-_0807F7E4:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0807F7EC: .4byte gWeatherPtr
-_0807F7F0: .4byte 0x000006fb
-_0807F7F4: .4byte 0x00001201
-	thumb_func_end sub_807F7A4
-
-	thumb_func_start sub_807F7F8
-sub_807F7F8: @ 807F7F8
-	push {lr}
-	ldr r0, _0807F844 @ =gWeatherPtr
-	ldr r1, [r0]
-	ldr r0, _0807F848 @ =0x000006cc
-	adds r2, r1, r0
-	movs r3, 0
-	movs r0, 0
-	strh r0, [r2]
-	ldr r2, _0807F84C @ =0x000006d2
-	adds r0, r1, r2
-	strb r3, [r0]
-	subs r2, 0x11
-	adds r0, r1, r2
-	strb r3, [r0]
-	ldr r3, _0807F850 @ =0x000006c2
-	adds r0, r1, r3
-	movs r2, 0x14
-	strb r2, [r0]
-	adds r3, 0x3C
-	adds r0, r1, r3
-	strh r2, [r0]
-	movs r0, 0xE0
-	lsls r0, 3
-	adds r1, r0
-	ldrb r0, [r1]
-	cmp r0, 0
-	bne _0807F840
-	movs r0, 0
-	movs r1, 0x10
-	bl sub_807DB64
-	ldr r1, _0807F854 @ =REG_BLDALPHA
-	movs r2, 0xFD
-	lsls r2, 6
-	adds r0, r2, 0
-	strh r0, [r1]
-_0807F840:
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0807F844: .4byte gWeatherPtr
-_0807F848: .4byte 0x000006cc
-_0807F84C: .4byte 0x000006d2
-_0807F850: .4byte 0x000006c2
-_0807F854: .4byte REG_BLDALPHA
-	thumb_func_end sub_807F7F8
-
-	thumb_func_start sub_807F858
-sub_807F858: @ 807F858
-	push {r4,lr}
-	bl sub_807F7F8
-	ldr r0, _0807F880 @ =gWeatherPtr
-	ldr r1, [r0]
-	ldr r2, _0807F884 @ =0x000006d2
-	adds r0, r1, r2
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _0807F878
-	adds r4, r1, r2
-_0807F86E:
-	bl sub_807F888
-	ldrb r0, [r4]
-	cmp r0, 0
-	beq _0807F86E
-_0807F878:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0807F880: .4byte gWeatherPtr
-_0807F884: .4byte 0x000006d2
-	thumb_func_end sub_807F858
-
-	thumb_func_start sub_807F888
-sub_807F888: @ 807F888
-	push {r4,r5,lr}
-	ldr r2, _0807F8CC @ =gWeatherPtr
-	ldr r1, [r2]
-	ldr r0, _0807F8D0 @ =gSpriteCoordOffsetX
-	ldrh r0, [r0]
-	ldr r3, _0807F8D4 @ =0x000001ff
-	ands r3, r0
-	ldr r0, _0807F8D8 @ =0x000006fc
-	adds r1, r0
-	strh r3, [r1]
-	cmp r3, 0xEF
-	bls _0807F8B4
-	adds r4, r1, 0
-	adds r1, r3, 0
-_0807F8A4:
-	adds r3, r1, 0
-	subs r3, 0xF0
-	adds r1, r3, 0
-	lsls r0, r3, 16
-	lsrs r0, 16
-	cmp r0, 0xEF
-	bhi _0807F8A4
-	strh r3, [r4]
-_0807F8B4:
-	ldr r5, [r2]
-	ldr r1, _0807F8DC @ =0x000006cc
-	adds r4, r5, r1
-	ldrh r0, [r4]
-	cmp r0, 0x1
-	beq _0807F8EC
-	cmp r0, 0x1
-	bgt _0807F8E0
-	cmp r0, 0
-	beq _0807F8E6
-	b _0807F928
-	.align 2, 0
-_0807F8CC: .4byte gWeatherPtr
-_0807F8D0: .4byte gSpriteCoordOffsetX
-_0807F8D4: .4byte 0x000001ff
-_0807F8D8: .4byte 0x000006fc
-_0807F8DC: .4byte 0x000006cc
-_0807F8E0:
-	cmp r0, 0x2
-	beq _0807F908
-	b _0807F928
-_0807F8E6:
-	bl sub_807F99C
-	b _0807F91A
-_0807F8EC:
-	movs r1, 0xE0
-	lsls r1, 3
-	adds r0, r5, r1
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _0807F8FC
-	bl sub_807F9AC
-_0807F8FC:
-	movs r0, 0x10
-	movs r1, 0
-	movs r2, 0x1
-	bl sub_807DBA4
-	b _0807F91A
-_0807F908:
-	bl sub_807DBE8
-	lsls r0, 24
-	cmp r0, 0
-	beq _0807F92C
-	ldr r0, _0807F924 @ =0x000006d2
-	adds r1, r5, r0
-	movs r0, 0x1
-	strb r0, [r1]
-_0807F91A:
-	ldrh r0, [r4]
-	adds r0, 0x1
-	strh r0, [r4]
-	b _0807F92C
-	.align 2, 0
-_0807F924: .4byte 0x000006d2
-_0807F928:
-	bl sub_807DBE8
-_0807F92C:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_807F888
-
-	thumb_func_start sub_807F934
-sub_807F934: @ 807F934
-	push {r4,lr}
-	ldr r0, _0807F950 @ =gWeatherPtr
-	ldr r0, [r0]
-	ldr r1, _0807F954 @ =0x000006ce
-	adds r4, r0, r1
-	ldrh r0, [r4]
-	cmp r0, 0x1
-	beq _0807F96A
-	cmp r0, 0x1
-	bgt _0807F958
-	cmp r0, 0
-	beq _0807F95E
-	b _0807F98C
-	.align 2, 0
-_0807F950: .4byte gWeatherPtr
-_0807F954: .4byte 0x000006ce
-_0807F958:
-	cmp r0, 0x2
-	beq _0807F980
-	b _0807F98C
-_0807F95E:
-	movs r0, 0
-	movs r1, 0x10
-	movs r2, 0x1
-	bl sub_807DBA4
-	b _0807F978
-_0807F96A:
-	bl sub_807DBE8
-	lsls r0, 24
-	cmp r0, 0
-	beq _0807F994
-	bl sub_807FA54
-_0807F978:
-	ldrh r0, [r4]
-	adds r0, 0x1
-	strh r0, [r4]
-	b _0807F994
-_0807F980:
-	ldr r1, _0807F990 @ =REG_BLDALPHA
-	movs r0, 0
-	strh r0, [r1]
-	ldrh r0, [r4]
-	adds r0, 0x1
-	strh r0, [r4]
-_0807F98C:
-	movs r0, 0
-	b _0807F996
-	.align 2, 0
-_0807F990: .4byte REG_BLDALPHA
-_0807F994:
-	movs r0, 0x1
-_0807F996:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_807F934
-
-	thumb_func_start sub_807F99C
-sub_807F99C: @ 807F99C
-	push {lr}
-	ldr r0, _0807F9A8 @ =gWeatherAshSpriteSheet
-	bl LoadSpriteSheet
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0807F9A8: .4byte gWeatherAshSpriteSheet
-	thumb_func_end sub_807F99C
-
 	thumb_func_start sub_807F9AC
 sub_807F9AC: @ 807F9AC
 	push {r4,r5,lr}
@@ -618,7 +251,7 @@ sub_807FB24: @ 807FB24
 	strh r2, [r0]
 	movs r0, 0
 	movs r1, 0x10
-	bl sub_807DB64
+	bl Weather_SetBlendCoeffs
 _0807FB8E:
 	pop {r4}
 	pop {r0}
@@ -687,10 +320,10 @@ _0807FC0C:
 	movs r0, 0xC
 	movs r1, 0x8
 	movs r2, 0x8
-	bl sub_807DBA4
+	bl Weather_SetTargetBlendCoeffs
 	b _0807FC2A
 _0807FC18:
-	bl sub_807DBE8
+	bl Weather_UpdateBlend
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807FC30
@@ -737,10 +370,10 @@ _0807FC6A:
 	movs r0, 0
 	movs r1, 0x10
 	movs r2, 0x1
-	bl sub_807DBA4
+	bl Weather_SetTargetBlendCoeffs
 	b _0807FC86
 _0807FC76:
-	bl sub_807DBE8
+	bl Weather_UpdateBlend
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807FC92
@@ -848,7 +481,7 @@ sub_807FD30: @ 807FD30
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0807FDD6
-	ldr r0, _0807FDA4 @ =gWeatherFog0SpriteSheet
+	ldr r0, _0807FDA4 @ =gWeatherFog1SpriteSheet
 	ldr r1, [r0, 0x4]
 	ldr r0, [r0]
 	str r0, [sp]
@@ -893,7 +526,7 @@ _0807FD54:
 	.align 2, 0
 _0807FD9C: .4byte gWeatherPtr
 _0807FDA0: .4byte 0x00000724
-_0807FDA4: .4byte gWeatherFog0SpriteSheet
+_0807FDA4: .4byte gWeatherFog1SpriteSheet
 _0807FDA8: .4byte gSpriteTemplate_839AC04
 _0807FDAC: .4byte gSprites
 _0807FDB0:
@@ -1068,7 +701,7 @@ sub_807FE9C: @ 807FE9C
 _0807FEF0:
 	movs r0, 0
 	movs r1, 0x10
-	bl sub_807DB64
+	bl Weather_SetBlendCoeffs
 _0807FEF8:
 	pop {r4}
 	pop {r0}
@@ -1150,10 +783,10 @@ _0807FF98:
 	movs r0, 0x10
 	movs r1, 0
 	movs r2, 0
-	bl sub_807DBA4
+	bl Weather_SetTargetBlendCoeffs
 	b _0807FFB6
 _0807FFA4:
-	bl sub_807DBE8
+	bl Weather_UpdateBlend
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807FFBC
@@ -1201,10 +834,10 @@ _0807FFFA:
 	movs r0, 0
 	movs r1, 0x10
 	movs r2, 0
-	bl sub_807DBA4
+	bl Weather_SetTargetBlendCoeffs
 	b _08080016
 _08080006:
-	bl sub_807DBE8
+	bl Weather_UpdateBlend
 	lsls r0, 24
 	cmp r0, 0
 	beq _08080022
@@ -1793,7 +1426,7 @@ sub_8080470: @ 8080470
 	thumb_func_start sub_8080474
 sub_8080474: @ 8080474
 	push {r4,r5,lr}
-	bl sub_807F49C
+	bl Fog2_InitVars
 	ldr r0, _080804B4 @ =gWeatherPtr
 	ldr r4, [r0]
 	ldr r1, _080804B8 @ =0x0000072e
@@ -1859,7 +1492,7 @@ _080804F4: .4byte 0x000006d2
 	thumb_func_start sub_80804F8
 sub_80804F8: @ 80804F8
 	push {r4-r7,lr}
-	bl sub_807F52C
+	bl Fog2_Main
 	ldr r0, _08080558 @ =gWeatherPtr
 	ldr r5, [r0]
 	ldr r0, _0808055C @ =0x00000726
@@ -1916,7 +1549,7 @@ _08080568: .4byte 0x0000072a
 	thumb_func_start sub_808056C
 sub_808056C: @ 808056C
 	push {lr}
-	bl sub_807F5EC
+	bl Fog2_Finish
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808057C
