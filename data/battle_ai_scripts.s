@@ -1,4 +1,5 @@
 #include "constants/abilities.h"
+#include "constants/items.h"
 #include "constants/moves.h"
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"

@@ -3,9 +3,9 @@
 #include "constants/species.h"
 #include "trainer.h"
 #include "constants/abilities.h"
-#include "moves.h"
+#include "constants/moves.h"
 #include "hold_effects.h"
-#include "items.h"
+#include "constants/items.h"
 #include "sprite.h"
 #include "data2.h"
 

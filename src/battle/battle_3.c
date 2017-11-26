@@ -1,9 +1,10 @@
 #include "global.h"
 #include "constants/abilities.h"
 #include "battle.h"
-#include "moves.h"
+#include "constants/moves.h"
 #include "item.h"
-#include "items.h"
+#include "constants/items.h"
+#include "event_data.h"
 #include "hold_effects.h"
 #include "constants/species.h"
 #include "pokemon.h"
@@ -12,7 +13,7 @@
 #include "text.h"
 #include "battle_move_effects.h"
 #include "string_util.h"
-#include "flags.h"
+#include "constants/flags.h"
 #include "ewram.h"
 
 extern u8* gBattlescriptCurrInstr;

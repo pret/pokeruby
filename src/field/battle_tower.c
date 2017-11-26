@@ -8,10 +8,10 @@
 #include "constants/easy_chat.h"
 #include "event_data.h"
 #include "item.h"
-#include "items.h"
+#include "constants/items.h"
 #include "main.h"
 #include "map_object_constants.h"
-#include "moves.h"
+#include "constants/moves.h"
 #include "new_game.h"
 #include "overworld.h"
 #include "pokedex.h"
@@ -24,7 +24,7 @@
 #include "text.h"
 #include "trainer.h"
 #include "tv.h"
-#include "vars.h"
+#include "constants/vars.h"
 #include "ewram.h"
 
 #if ENGLISH

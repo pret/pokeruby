@@ -4,7 +4,7 @@
 #include "field_camera.h"
 #include "field_effect.h"
 #include "fieldmap.h"
-#include "flags.h"
+#include "constants/flags.h"
 #include "main.h"
 #include "map_constants.h"
 #include "map_obj_lock.h"

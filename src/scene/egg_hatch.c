@@ -4,7 +4,7 @@
 #include "decompress.h"
 #include "event_data.h"
 #include "ewram.h"
-#include "items.h"
+#include "constants/items.h"
 #include "main.h"
 #include "menu.h"
 #include "naming_screen.h"

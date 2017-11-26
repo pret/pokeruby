@@ -1,6 +1,6 @@
 #include "global.h"
 #include "data2.h"
-#include "items.h"
+#include "constants/items.h"
 #include "main.h"
 #include "pokemon.h"
 #include "random.h"

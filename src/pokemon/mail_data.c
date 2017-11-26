@@ -1,6 +1,6 @@
 #include "global.h"
 #include "mail_data.h"
-#include "items.h"
+#include "constants/items.h"
 #include "name_string_util.h"
 #include "pokemon.h"
 #include "pokemon_icon.h"

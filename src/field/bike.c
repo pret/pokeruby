@@ -3,7 +3,7 @@
 #include "field_map_obj.h"
 #include "field_player_avatar.h"
 #include "fieldmap.h"
-#include "flags.h"
+#include "constants/flags.h"
 #include "global.fieldmap.h"
 #include "metatile_behavior.h"
 #include "overworld.h"

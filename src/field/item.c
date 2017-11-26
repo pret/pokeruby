@@ -1,7 +1,7 @@
 #include "global.h"
 #include "hold_effects.h"
 #include "item.h"
-#include "items.h"
+#include "constants/items.h"
 #include "item_use.h"
 #include "berry.h"
 #include "string_util.h"

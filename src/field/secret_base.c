@@ -2,8 +2,8 @@
 #include "secret_base.h"
 #include "decoration.h"
 #include "constants/species.h"
-#include "items.h"
-#include "moves.h"
+#include "constants/items.h"
+#include "constants/moves.h"
 #include "event_data.h"
 #include "field_camera.h"
 #include "field_effect.h"
@@ -32,7 +32,7 @@
 #include "strings.h"
 #include "task.h"
 #include "text.h"
-#include "vars.h"
+#include "constants/vars.h"
 
 
 static void sub_80BC7D8(u8 taskId);

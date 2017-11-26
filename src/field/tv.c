@@ -8,7 +8,7 @@
 #include "fieldmap.h"
 #include "field_message_box.h"
 #include "field_camera.h"
-#include "flags.h"
+#include "constants/flags.h"
 #include "random.h"
 #include "string_util.h"
 #include "text.h"
@@ -24,7 +24,7 @@
 #include "field_map_obj.h"
 #include "field_specials.h"
 #include "item.h"
-#include "items.h"
+#include "constants/items.h"
 #include "link.h"
 #include "map_constants.h"
 #include "naming_screen.h"
@@ -39,7 +39,7 @@
 #include "strings.h"
 #include "text.h"
 #include "ewram.h"
-#include "moves.h"
+#include "constants/moves.h"
 #include "region_map_sections.h"
 
 struct UnkTvStruct

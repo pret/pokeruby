@@ -14,7 +14,7 @@
 #include "fieldmap.h"
 #include "item.h"
 #include "item_menu.h"
-#include "items.h"
+#include "constants/items.h"
 #include "mail.h"
 #include "main.h"
 #include "map_obj_lock.h"
@@ -34,7 +34,7 @@
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
-#include "vars.h"
+#include "constants/vars.h"
 
 extern void (*gFieldItemUseCallback)(u8);
 extern void (*gFieldCallback)(void);

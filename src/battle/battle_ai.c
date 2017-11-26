@@ -5,7 +5,7 @@
 #include "battle_move_effects.h"
 #include "data2.h"
 #include "item.h"
-#include "moves.h"
+#include "constants/moves.h"
 #include "pokemon.h"
 #include "random.h"
 #include "rom_8077ABC.h"

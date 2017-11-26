@@ -4,7 +4,7 @@
 #include "decompress.h"
 #include "field_map_obj.h"
 #include "item_menu.h"
-#include "items.h"
+#include "constants/items.h"
 #include "item_use.h"
 #include "main.h"
 #include "menu.h"

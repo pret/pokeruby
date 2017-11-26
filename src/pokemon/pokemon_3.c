@@ -5,7 +5,7 @@
 #include "event_data.h"
 #include "hold_effects.h"
 #include "item.h"
-#include "items.h"
+#include "constants/items.h"
 #include "link.h"
 #include "m4a.h"
 #include "main.h"

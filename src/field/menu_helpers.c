@@ -1,6 +1,6 @@
 #include "global.h"
 #include "item_menu.h"
-#include "items.h"
+#include "constants/items.h"
 #include "link.h"
 #include "mail_data.h"
 #include "main.h"

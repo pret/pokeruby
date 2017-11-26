@@ -6,7 +6,7 @@
 #include "battle_anim_81258BC.h"
 #include "battle_anim_8137220.h"
 #include "cable_club.h"
-#include "items.h"
+#include "constants/items.h"
 #include "link.h"
 #include "pokemon.h"
 #include "rom3.h"

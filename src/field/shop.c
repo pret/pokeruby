@@ -21,7 +21,7 @@
 #include "fieldmap.h"
 #include "item.h"
 #include "decoration.h"
-#include "items.h"
+#include "constants/items.h"
 #include "constants/songs.h"
 #include "overworld.h"
 #include "decoration_inventory.h"

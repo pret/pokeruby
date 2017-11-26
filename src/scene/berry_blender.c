@@ -14,7 +14,7 @@
 #include "task.h"
 #include "overworld.h"
 #include "item.h"
-#include "items.h"
+#include "constants/items.h"
 #include "random.h"
 #include "save.h"
 #include "menu_cursor.h"

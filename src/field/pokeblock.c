@@ -21,7 +21,7 @@
 #include "item_menu.h"
 #include "item_use.h"
 #include "item.h"
-#include "items.h"
+#include "constants/items.h"
 #include "sound.h"
 #include "constants/songs.h"
 #include "safari_zone.h"

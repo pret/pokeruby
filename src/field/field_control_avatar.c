@@ -10,7 +10,7 @@
 #include "field_poison.h"
 #include "field_specials.h"
 #include "fieldmap.h"
-#include "flags.h"
+#include "constants/flags.h"
 #include "item_menu.h"
 #include "metatile_behavior.h"
 #include "overworld.h"
@@ -21,7 +21,7 @@
 #include "sound.h"
 #include "start_menu.h"
 #include "trainer_see.h"
-#include "vars.h"
+#include "constants/vars.h"
 #include "wild_encounter.h"
 
 struct Coords32

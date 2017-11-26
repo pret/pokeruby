@@ -7,7 +7,7 @@
 #include "event_data.h"
 #include "fldeff_recordmixing.h"
 #include "item.h"
-#include "items.h"
+#include "constants/items.h"
 #include "load_save.h"
 #include "link.h"
 #include "mauville_man.h"

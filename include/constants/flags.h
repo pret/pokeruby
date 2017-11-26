@@ -1,5 +1,5 @@
-#ifndef GUARD_FLAGS_H
-#define GUARD_FLAGS_H
+#ifndef GUARD_CONSTANTS_FLAGS_H
+#define GUARD_CONSTANTS_FLAGS_H
 
 // scripts
 #define FLAG_PENDING_DAYCARE_EGG 0x86
@@ -89,6 +89,4 @@
 
 #define SPECIAL_FLAG_1 0x4001
 
-#endif // GUARD_FLAGS_H
-
-bool8 FlagGet(u16 flag);
+#endif // GUARD_CONSTANTS_FLAGS_H

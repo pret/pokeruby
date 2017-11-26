@@ -10,7 +10,7 @@
 #include "debug.h"
 #include "decompress.h"
 #include "event_data.h"
-#include "items.h"
+#include "constants/items.h"
 #include "link.h"
 #include "load_save.h"
 #include "main.h"

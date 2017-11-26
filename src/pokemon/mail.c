@@ -1,7 +1,7 @@
 #include "global.h"
 #include "mail.h"
 #include "easy_chat.h"
-#include "items.h"
+#include "constants/items.h"
 #include "mail_data.h"
 #include "menu.h"
 #include "menu_helpers.h"

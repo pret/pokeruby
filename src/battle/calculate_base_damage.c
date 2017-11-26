@@ -6,10 +6,10 @@
 #include "event_data.h"
 #include "hold_effects.h"
 #include "item.h"
-#include "items.h"
+#include "constants/items.h"
 #include "pokemon.h"
 #include "constants/species.h"
-#include "moves.h"
+#include "constants/moves.h"
 #include "battle_move_effects.h"
 #include "ewram.h"
 

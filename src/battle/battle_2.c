@@ -26,7 +26,7 @@
 #include "trig.h"
 #include "unknown_task.h"
 #include "util.h"
-#include "items.h"
+#include "constants/items.h"
 #include "hold_effects.h"
 #include "battle_move_effects.h"
 #include "ewram.h"

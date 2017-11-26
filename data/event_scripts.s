@@ -1,3 +1,4 @@
+#include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
 #include "constants/species.h"

@@ -20,7 +20,7 @@
 #include "pokeblock.h"
 #include "constants/species.h"
 #include "constants/abilities.h"
-#include "moves.h"
+#include "constants/moves.h"
 #include "text.h"
 #include "wallclock.h"
 #include "tv.h"
