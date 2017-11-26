@@ -72,10 +72,10 @@ void Clouds_InitVars(void);
 void Clouds_Main(void);
 void Clouds_InitAll(void);
 bool8 Clouds_Finish(void);
-void sub_807DF9C(void);
-void nullsub_55(void);
-void sub_807DFC0(void);
-bool8 sub_807DFD0(void);
+void Weather2_InitVars(void);
+void Weather2_Main(void);
+void Weather2_InitAll(void);
+bool8 Weather2_Finish(void);
 void LightRain_InitVars(void);
 void LightRain_Main(void);
 void LightRain_InitAll(void);
@@ -88,60 +88,60 @@ void MedRain_InitVars(void);
 void Rain_Main(void);
 void MedRain_InitAll(void);
 bool8 Rain_Finish(void);
+void Fog1_InitVars(void);
+void Fog1_Main(void);
+void Fog1_InitAll(void);
+bool8 Fog1_Finish(void);
+void Ash_InitVars(void);
+void Ash_Main(void);
+void Ash_InitAll(void);
+bool8 Ash_Finish(void);
+void Sandstorm_InitVars(void);
+void Sandstorm_Main(void);
+void Sandstorm_InitAll(void);
+bool8 Sandstorm_Finish(void);
 void Fog2_InitVars(void);
 void Fog2_Main(void);
 void Fog2_InitAll(void);
 bool8 Fog2_Finish(void);
 void Fog1_InitVars(void);
-void sub_807F888(void);
-void sub_807F858(void);
-bool8 sub_807F934(void);
-void sub_807FE9C(void);
-void sub_807FF4C(void);
-void sub_807FF1C(void);
-bool8 sub_807FFC8(void);
-void sub_807FB24(void);
-void sub_807FBD8(void);
-void sub_807FBA8(void);
-bool8 sub_807FC3C(void);
-void Fog2_InitVars(void);
-void Fog2_Main(void);
-void Fog2_InitAll(void);
-bool8 Fog2_Finish(void);
-void sub_8080430(void);
-void nullsub_56(void);
-void sub_8080460(void);
-bool8 sub_8080470(void);
-void sub_807E110(void);
-void sub_807E174(void);
-void sub_807E144(void);
-bool8 sub_807E258(void);
+void Fog1_Main(void);
+void Fog1_InitAll(void);
+bool8 Fog1_Finish(void);
+void Weather11_InitVars(void);
+void Weather11_Main(void);
+void Weather11_InitAll(void);
+bool8 Weather11_Finish(void);
+void Drought_InitVars(void);
+void Drought_Main(void);
+void Drought_InitAll(void);
+bool8 Drought_Finish(void);
 void HeavyRain_InitVars(void);
 void Rain_Main(void);
 void HeavyRain_InitAll(void);
 bool8 Rain_Finish(void);
-void sub_8080474(void);
-void sub_80804F8(void);
-void sub_80804C8(void);
-bool8 sub_808056C(void);
+void Bubbles_InitVars(void);
+void Bubbles_Main(void);
+void Bubbles_InitAll(void);
+bool8 Bubbles_Finish(void);
 
 static const struct WeatherCallbacks sWeatherFuncs[] =
 {
     {None_Init,          None_Main,      None_Init,         None_Finish},
     {Clouds_InitVars,    Clouds_Main,    Clouds_InitAll,    Clouds_Finish},
-    {sub_807DF9C,        nullsub_55,     sub_807DFC0,       sub_807DFD0},
+    {Weather2_InitVars,  Weather2_Main,  Weather2_InitAll,  Weather2_Finish},
     {LightRain_InitVars, LightRain_Main, LightRain_InitAll, LightRain_Finish},           // light rain
-    {Snow_InitVars,      Snow_Main,      Snow_InitAll,      Snow_Finish},  // snow
+    {Snow_InitVars,      Snow_Main,      Snow_InitAll,      Snow_Finish},
     {MedRain_InitVars,   Rain_Main,      MedRain_InitAll,   Rain_Finish},
+    {Fog1_InitVars,      Fog1_Main,      Fog1_InitAll,      Fog1_Finish},
+    {Ash_InitVars,       Ash_Main,       Ash_InitAll,       Ash_Finish},
+    {Sandstorm_InitVars, Sandstorm_Main, Sandstorm_InitAll, Sandstorm_Finish},
     {Fog2_InitVars,      Fog2_Main,      Fog2_InitAll,      Fog2_Finish},
-    {Fog1_InitVars,      sub_807F888,    sub_807F858,       sub_807F934},       // fog 1
-    {sub_807FE9C,        sub_807FF4C,    sub_807FF1C,       sub_807FFC8},
-    {sub_807FB24,        sub_807FBD8,    sub_807FBA8,       sub_807FC3C},
-    {Fog2_InitVars,      Fog2_Main,      Fog2_InitAll,      Fog2_Finish},
-    {sub_8080430,        nullsub_56,     sub_8080460,       sub_8080470},
-    {sub_807E110,        sub_807E174,    sub_807E144,       sub_807E258},
+    {Fog1_InitVars,      Fog1_Main,      Fog1_InitAll,      Fog1_Finish},
+    {Weather11_InitVars, Weather11_Main, Weather11_InitAll, Weather11_Finish},
+    {Drought_InitVars,   Drought_Main,   Drought_InitAll,   Drought_Finish},
     {HeavyRain_InitVars, Rain_Main,      HeavyRain_InitAll, Rain_Finish},
-    {sub_8080474,        sub_80804F8,    sub_80804C8,       sub_808056C},
+    {Bubbles_InitVars,   Bubbles_Main,   Bubbles_InitAll,   Bubbles_Finish},
 };
 
 void (*const gUnknown_083970B8[])(void) =
@@ -200,15 +200,15 @@ void StartWeather(void)
         sub_807CB10();
         gWeatherPtr->unknown_6D5 = index;
         gWeatherPtr->unknown_6D4 = AllocSpritePalette(0x1201);
-        gWeatherPtr->unknown_6DA = 0;
+        gWeatherPtr->rainSpriteCount = 0;
         gWeatherPtr->unknown_6D8 = 0;
-        gWeatherPtr->cloudsActive = 0;
+        gWeatherPtr->cloudSpritesCreated = 0;
         gWeatherPtr->snowflakeSpriteCount = 0;
-        gWeatherPtr->unknown_700 = 0;
-        gWeatherPtr->unknown_6FB = 0;
-        gWeatherPtr->unknown_724 = 0;
-        gWeatherPtr->unknown_716 = 0;
-        gWeatherPtr->unknown_717 = 0;
+        gWeatherPtr->ashSpritesCreated = 0;
+        gWeatherPtr->fog1SpritesCreated = 0;
+        gWeatherPtr->fog2SpritesCreated = 0;
+        gWeatherPtr->sandstormSprites1Created = 0;
+        gWeatherPtr->sandstormSprites2Created = 0;
         gWeatherPtr->unknown_72E = 0;
         gWeatherPtr->unknown_6FA = 0;
         Weather_SetBlendCoeffs(16, 0);
@@ -232,7 +232,7 @@ void DoWeatherEffect(u8 effect)
     }
     gWeatherPtr->unknown_6D3 = 0;
     gWeatherPtr->nextWeather = effect;
-    gWeatherPtr->unknown_6CE = 0;
+    gWeatherPtr->finishStep = 0;
 }
 
 void sub_807C988(u8 effect)

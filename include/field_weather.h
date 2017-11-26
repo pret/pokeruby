@@ -6,29 +6,35 @@
 #define WEATHER_RAIN_LIGHT 3
 #define WEATHER_SNOW 4
 #define WEATHER_RAIN_MED 5
-#define WEATHER_FOG_2 6
-#define WEATHER_FOG_1 7
+#define WEATHER_FOG_1 6
+#define WEATHER_ASH 7
+#define WEATHER_FOG_2 9
 #define WEATHER_DROUGHT 12
 #define WEATHER_RAIN_HEAVY 13
+#define WEATHER_BUBBLES 14
 
 struct Sprite;
 
-// TODO: This might be a union
-struct Weather2
-{
-    /*0x000*/ u8 filler0[0xA0];
-    /*0x0A0*/ struct Sprite *fogSprites[20];
-    /*0x0F0*/ struct Sprite *fog1Sprites[20];
-    /*0x140*/ struct Sprite *unknown_140[20];
-    /*0x190*/ struct Sprite *unknown_190[20];
-    /*0x1E0*/ struct Sprite *unknown_1E0[5];
-};
-
 struct Weather
 {
-    /*0x000*/ struct Sprite *rainSprites[24];
-    /*0x060*/ struct Sprite *snowflakeSprites[0x65];  // snowflakes?
-    /*0x1F4*/ struct Sprite *cloudSprites[3];
+    union
+    {
+        struct
+        {
+            struct Sprite *rainSprites[24];
+            struct Sprite *snowflakeSprites[101];
+            struct Sprite *cloudSprites[3];
+        } s1;
+        struct
+        {
+            u8 filler0[0xA0];
+            struct Sprite *fog1Sprites[20];
+            struct Sprite *ashSprites[20];
+            struct Sprite *fog2Sprites[20];
+            struct Sprite *sandstormSprites1[20];
+            struct Sprite *sandstormSprites2[5];
+        } s2;
+    } sprites;
     u8 unknown_200[2][32];
     u8 filler_240[0x460-0x240];
     u8 unk460[2][32];
@@ -47,7 +53,7 @@ struct Weather
     u8 unknown_6CA;
     u8 unknown_6CB;
     u16 initStep;
-    u16 unknown_6CE;
+    u16 finishStep;
     u8 currWeather;
     u8 nextWeather;
     u8 weatherGfxLoaded;
@@ -57,11 +63,11 @@ struct Weather
     u16 unknown_6D6;
     u8 unknown_6D8;
     u8 unknown_6D9;
-    u8 unknown_6DA;
+    u8 rainSpriteCount;
     u8 unknown_6DB;
     u8 unknown_6DC;
     u8 rainStrength;
-    /*0x6DE*/ u8 cloudsActive;
+    /*0x6DE*/ u8 cloudSpritesCreated;
     u8 filler_6DF[1];
     u16 unknown_6E0;
     u16 unknown_6E2;
@@ -73,15 +79,15 @@ struct Weather
     u8 unknown_6EB;
     u8 unknown_6EC;
     u8 unknown_6ED;
-    u16 fog2ScrollPosX;
+    u16 fog1ScrollPosX;
     u16 unknown_6F0;
     u16 unknown_6F2;
     u8 unknown_6F4[6];
     u8 unknown_6FA;
-    u8 unknown_6FB;     // fogActive
+    u8 fog1SpritesCreated;
     u16 unknown_6FC;
     u16 unknown_6FE;
-    u8 unknown_700;
+    u8 ashSpritesCreated;
     u8 filler_701[3];
     u32 unknown_704;
     u32 unknown_708;
@@ -90,15 +96,15 @@ struct Weather
     u16 unknown_710;
     u16 unknown_712;
     u16 unknown_714;
-    u8 unknown_716;
-    u8 unknown_717;
+    u8 sandstormSprites1Created;
+    u8 sandstormSprites2Created;
     u16 unknown_718;
     u16 unknown_71A;
     u16 unknown_71C;
     u16 unknown_71E;
     u16 unknown_720;
     u16 unknown_722;
-    u8 unknown_724;
+    u8 fog2SpritesCreated;
     u8 filler_725[1];
     u16 unknown_726;
     u16 unknown_728;

@@ -11280,7 +11280,7 @@ _080D812A:
 	ldr r2, _080D81C4 @ =0x85000400
 	str r2, [r0, 0x8]
 	ldr r2, [r0, 0x8]
-	ldr r2, _080D81C8 @ =gWeatherFog2Tiles
+	ldr r2, _080D81C8 @ =gWeatherFog1Tiles
 	ldr r3, [sp]
 	str r2, [r0]
 	str r3, [r0, 0x4]
@@ -11326,7 +11326,7 @@ _080D81B8: .4byte gUnknown_030041B4
 _080D81BC: .4byte REG_BG1HOFS
 _080D81C0: .4byte 0x040000d4
 _080D81C4: .4byte 0x85000400
-_080D81C8: .4byte gWeatherFog2Tiles
+_080D81C8: .4byte gWeatherFog1Tiles
 _080D81CC: .4byte 0x80000400
 _080D81D0: .4byte gBattleAnimFogTilemap
 _080D81D4: .4byte gUnknown_083970E8
@@ -11672,7 +11672,7 @@ _080D845E:
 	ldr r2, _080D84FC @ =0x85000400
 	str r2, [r0, 0x8]
 	ldr r2, [r0, 0x8]
-	ldr r2, _080D8500 @ =gWeatherFog2Tiles
+	ldr r2, _080D8500 @ =gWeatherFog1Tiles
 	ldr r3, [sp]
 	str r2, [r0]
 	str r3, [r0, 0x4]
@@ -11720,7 +11720,7 @@ _080D84F0: .4byte gUnknown_030041B4
 _080D84F4: .4byte REG_BG1HOFS
 _080D84F8: .4byte 0x040000d4
 _080D84FC: .4byte 0x85000400
-_080D8500: .4byte gWeatherFog2Tiles
+_080D8500: .4byte gWeatherFog1Tiles
 _080D8504: .4byte 0x80000400
 _080D8508: .4byte gBattleAnimFogTilemap
 _080D850C: .4byte gUnknown_083970E8
