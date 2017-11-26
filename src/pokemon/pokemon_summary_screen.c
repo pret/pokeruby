@@ -5310,7 +5310,7 @@ u8 sub_80A1808(struct Pokemon *pokemon)
 
     FreeSpriteOamMatrix(&gSprites[spriteId]);
 
-    gSprites[spriteId].data0 = species;
+    gSprites[spriteId].data[0] = species;
     gSprites[spriteId].callback = sub_80A1888;
 
     if (!IsPokeSpriteNotFlipped(species))
@@ -5333,7 +5333,7 @@ void sub_80A1888(struct Sprite *sprite)
 
         if (!GetMonData(&ewramSS.loadedMon, MON_DATA_IS_EGG))
         {
-            PlayCry1(sprite->data0, 0);
+            PlayCry1(sprite->data[0], 0);
         }
     }
 }
@@ -5420,8 +5420,8 @@ void sub_80A1A30(u8 a)
             }
 
             gSprites[ewram1A000[a + i]].callback = sub_80A1BC0;
-            gSprites[ewram1A000[a + i]].data0 = a;
-            gSprites[ewram1A000[a + i]].data1 = 0;
+            gSprites[ewram1A000[a + i]].data[0] = a;
+            gSprites[ewram1A000[a + i]].data[1] = 0;
         }
     }
 }
@@ -5456,9 +5456,9 @@ void sub_80A1BC0(struct Sprite *sprite)
     u8 animNum = sprite->animNum - 4;
     if (animNum < 3)
     {
-        sprite->data1 = (sprite->data1 + 1) & 0x1F;
+        sprite->data[1] = (sprite->data[1] + 1) & 0x1F;
 
-        if (sprite->data1 > 24)
+        if (sprite->data[1] > 24)
         {
             sprite->invisible = 1;
         }
@@ -5469,11 +5469,11 @@ void sub_80A1BC0(struct Sprite *sprite)
     }
     else
     {
-        sprite->data1 = 0;
+        sprite->data[1] = 0;
         sprite->invisible = 0;
     }
 
-    if (sprite->data0 == 9)
+    if (sprite->data[0] == 9)
     {
         sprite->pos2.y = ewramSS.selectedMoveIndex * 16;
     }
