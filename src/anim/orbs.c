@@ -2,7 +2,7 @@
 #include "rom_8077ABC.h"
 #include "trig.h"
 #include "battle_anim.h"
-#include "rng.h"
+#include "random.h"
 
 extern s16 gBattleAnimArgs[];
 extern u8 gBattleAnimBankAttacker;

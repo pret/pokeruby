@@ -1382,7 +1382,7 @@ _080D812A:
 	ldr r2, _080D81CC @ =0x80000400
 	str r2, [r0, 0x8]
 	ldr r0, [r0, 0x8]
-	ldr r0, _080D81D0 @ =gWeatherFog1Tilemap
+	ldr r0, _080D81D0 @ =gBattleAnimFogTilemap
 	bl LZDecompressVram
 	ldr r0, _080D81D4 @ =gUnknown_083970E8
 	mov r1, sp
@@ -1423,7 +1423,7 @@ _080D81C0: .4byte 0x040000d4
 _080D81C4: .4byte 0x85000400
 _080D81C8: .4byte gWeatherFog1Tiles
 _080D81CC: .4byte 0x80000400
-_080D81D0: .4byte gWeatherFog1Tilemap
+_080D81D0: .4byte gBattleAnimFogTilemap
 _080D81D4: .4byte gUnknown_083970E8
 _080D81D8: .4byte gTasks
 _080D81DC: .4byte sub_80D81E0
@@ -1774,7 +1774,7 @@ _080D845E:
 	ldr r2, _080D8504 @ =0x80000400
 	str r2, [r0, 0x8]
 	ldr r0, [r0, 0x8]
-	ldr r0, _080D8508 @ =gWeatherFog1Tilemap
+	ldr r0, _080D8508 @ =gBattleAnimFogTilemap
 	bl LZDecompressVram
 	ldr r0, _080D850C @ =gUnknown_083970E8
 	mov r1, sp
@@ -1817,7 +1817,7 @@ _080D84F8: .4byte 0x040000d4
 _080D84FC: .4byte 0x85000400
 _080D8500: .4byte gWeatherFog1Tiles
 _080D8504: .4byte 0x80000400
-_080D8508: .4byte gWeatherFog1Tilemap
+_080D8508: .4byte gBattleAnimFogTilemap
 _080D850C: .4byte gUnknown_083970E8
 _080D8510: .4byte gTasks
 _080D8514: .4byte 0x0000ffff

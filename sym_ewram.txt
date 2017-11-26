@@ -350,7 +350,7 @@ gPartyMenuType: @ 202E8FA
 @ field_weather
 
 	.align 2
-gUnknown_0202F7E8: @ 202F7E8
+gWeather: @ 202F7E8
 	.space 0x200
 
 gUnknown_0202F9E8: @ 202F9E8

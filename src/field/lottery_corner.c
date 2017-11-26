@@ -2,7 +2,7 @@
 #include "lottery_corner.h"
 #include "event_data.h"
 #include "items.h"
-#include "rng.h"
+#include "random.h"
 #include "species.h"
 #include "string_util.h"
 #include "text.h"

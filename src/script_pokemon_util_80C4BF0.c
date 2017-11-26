@@ -17,7 +17,7 @@
 #include "menu.h"
 #include "pokedex.h"
 #include "pokemon.h"
-#include "rng.h"
+#include "random.h"
 #include "overworld.h"
 #include "script_pokemon_80C4.h"
 #include "species.h"

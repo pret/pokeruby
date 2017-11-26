@@ -65,7 +65,7 @@ SECTIONS {
         src/pokemon/pokemon_3.o(.text);
         src/de_rom_8040FE0.o(.text);
         src/engine/trig.o(.text);
-        src/engine/rng.o(.text);
+        src/engine/random.o(.text);
         src/engine/util.o(.text);
         src/engine/blend_palette.o(.text);
         src/field/daycare.o(.text);
@@ -111,7 +111,7 @@ SECTIONS {
         src/battle/battle_anim_807B69C.o(.text);
         src/scene/title_screen.o(.text);
         src/field/field_weather.o(.text);
-        asm/field_weather.o(.text);
+        src/field/field_weather_effects.o(.text);
         src/field/field_fadetransition.o(.text);
         src/field/field_screen_effect.o(.text);
         src/battle/battle_setup.o(.text);
@@ -158,6 +158,7 @@ SECTIONS {
         src/script_pokemon_util_80C4BF0.o(.text);
         src/field/field_poison.o(.text);
         src/pokemon/pokemon_size_record.o(.text);
+        src/field/pc_screen_effect.o(.text);
         asm/pc_screen_effect.o(.text);
         src/field/fldeff_secretpower.o(.text);
         src/field/fldeff_secret_base_pc.o(.text);
@@ -497,7 +498,7 @@ SECTIONS {
         src/battle/battle_anim_807B69C.o(.rodata);
         src/scene/title_screen.o(.rodata);
         src/field/field_weather.o(.rodata);
-        data/field_weather.o(.rodata);
+        src/field/field_weather_effects.o(.rodata);
         src/field/field_screen_effect.o(.rodata);
         src/battle/battle_setup.o(.rodata);
         src/engine/cable_club.o(.rodata);
@@ -535,6 +536,7 @@ SECTIONS {
         src/field/tv.o(.rodata);
         data/contest_link_80C2020.o(.rodata);
         src/pokemon/pokemon_size_record.o(.rodata);
+        src/field/pc_screen_effect.o(.rodata);
         data/pc_screen_effect.o(.rodata);
         data/fldeff_secretpower.o(.rodata);
         data/fldeff_decoration.o(.rodata);

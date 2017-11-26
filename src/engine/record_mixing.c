@@ -13,7 +13,7 @@
 #include "mauville_man.h"
 #include "menu.h"
 #include "mystery_event_script.h"
-#include "rng.h"
+#include "random.h"
 #include "overworld.h"
 #include "save.h"
 #include "script.h"

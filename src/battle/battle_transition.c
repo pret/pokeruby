@@ -6,7 +6,7 @@
 #include "palette.h"
 #include "trig.h"
 #include "field_effect.h"
-#include "rng.h"
+#include "random.h"
 #include "sprite.h"
 #include "sound.h"
 #include "songs.h"

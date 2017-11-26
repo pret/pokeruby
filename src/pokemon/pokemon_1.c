@@ -3,7 +3,7 @@
 #include "items.h"
 #include "main.h"
 #include "pokemon.h"
-#include "rng.h"
+#include "random.h"
 #include "overworld.h"
 #include "species.h"
 #include "sprite.h"

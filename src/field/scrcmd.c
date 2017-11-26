@@ -30,7 +30,7 @@
 #include "palette.h"
 #include "party_menu.h"
 #include "pokemon.h"
-#include "rng.h"
+#include "random.h"
 #include "overworld.h"
 #include "rtc.h"
 #include "script.h"
@@ -692,7 +692,7 @@ bool8 ScrCmd_setweather(struct ScriptContext *ctx)
 
 bool8 ScrCmd_resetweather(struct ScriptContext *ctx)
 {
-    sub_80806E4();
+    SetSav1WeatherFromCurrMapHeader();
     return FALSE;
 }
 

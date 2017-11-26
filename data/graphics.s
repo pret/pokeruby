@@ -2997,8 +2997,8 @@ gBattleAnimSpriteSheet_277:: @ 8E6DA54
 	.incbin "graphics/battle_anims/sprites/277.4bpp.lz"
 
 	.align 2
-gWeatherFog1Tilemap:: @ 8E6DE48
-	.incbin "graphics/weather/fog1.bin.lz"
+gBattleAnimFogTilemap:: @ 8E6DE48
+	.incbin "graphics/battle_anims/backgrounds/fog.bin.lz"
 
 	.align 2
 gBattleAnimSpritePalette_283:: @ 8E6DFC0

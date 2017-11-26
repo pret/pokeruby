@@ -10,7 +10,7 @@
 #include "field_player_avatar.h"
 #include "fieldmap.h"
 #include "palette.h"
-#include "rng.h"
+#include "random.h"
 #include "overworld.h"
 #include "sprite.h"
 #include "metatile_behavior.h"

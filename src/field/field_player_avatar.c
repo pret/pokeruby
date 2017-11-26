@@ -13,7 +13,7 @@
 #include "menu.h"
 #include "metatile_behavior.h"
 #include "party_menu.h"
-#include "rng.h"
+#include "random.h"
 #include "overworld.h"
 #include "rotating_gate.h"
 #include "script.h"

@@ -6,7 +6,7 @@
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
-#include "rng.h"
+#include "random.h"
 #include "sprite.h"
 #include "string_util.h"
 #include "strings.h"

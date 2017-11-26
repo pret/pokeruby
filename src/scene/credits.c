@@ -9,7 +9,7 @@
 #include "menu.h"
 #include "palette.h"
 #include "pokedex.h"
-#include "rng.h"
+#include "random.h"
 #include "songs.h"
 #include "sound.h"
 #include "species.h"

@@ -7,7 +7,7 @@
 #include "item.h"
 #include "moves.h"
 #include "pokemon.h"
-#include "rng.h"
+#include "random.h"
 #include "rom_8077ABC.h"
 #include "species.h"
 #include "util.h"

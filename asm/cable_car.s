@@ -204,9 +204,9 @@ _08123384:
 	bl ResetTasks
 	bl FreeAllSpritePalettes
 	bl ResetPaletteFade
-	bl sub_807C828
+	bl StartWeather
 	movs r4, 0
-	ldr r0, _081233D4 @ =gUnknown_08396FC4
+	ldr r0, _081233D4 @ =gWeatherPtr
 	ldr r0, [r0]
 	adds r1, r0, 0
 	adds r1, 0xF0
@@ -234,7 +234,7 @@ _081233A4:
 	adds r0, 0x1
 	b _0812370C
 	.align 2, 0
-_081233D4: .4byte gUnknown_08396FC4
+_081233D4: .4byte gWeatherPtr
 _081233D8: .4byte gSpriteCoordOffsetX
 _081233DC: .4byte gSpriteCoordOffsetY
 _081233E0: .4byte gMain
@@ -326,7 +326,7 @@ _081234A0:
 _081234B4: .4byte gUnknown_02039274
 _081234B8: .4byte 0x0000043c
 _081234BC:
-	ldr r0, _081234FC @ =gUnknown_08396FC4
+	ldr r0, _081234FC @ =gWeatherPtr
 	ldr r0, [r0]
 	adds r1, r0, 0
 	adds r1, 0xF0
@@ -361,7 +361,7 @@ _081234E6:
 	adds r0, 0x1
 	b _0812370C
 	.align 2, 0
-_081234FC: .4byte gUnknown_08396FC4
+_081234FC: .4byte gWeatherPtr
 _08123500: .4byte 0x0000043c
 _08123504:
 	ldr r0, _08123578 @ =0x0600e800
@@ -630,7 +630,7 @@ sub_8123740: @ 8123740
 	movs r0, 0
 	bl sub_807C9B4
 	add r7, sp, 0x4
-	ldr r0, _08123858 @ =gUnknown_08396FC4
+	ldr r0, _08123858 @ =gWeatherPtr
 	ldr r0, [r0]
 	adds r1, r0, 0
 	adds r1, 0xF0
@@ -754,7 +754,7 @@ _081237E0:
 	bx r0
 	.align 2, 0
 _08123854: .4byte gSpriteCoordOffsetX
-_08123858: .4byte gUnknown_08396FC4
+_08123858: .4byte gWeatherPtr
 _0812385C: .4byte gSharedMem
 _08123860: .4byte 0x040000d4
 _08123864: .4byte 0x85000400
@@ -821,7 +821,7 @@ _081238D0:
 	beq _081238DC
 	b _081239D6
 _081238DC:
-	ldr r0, _08123920 @ =gUnknown_08396FC4
+	ldr r0, _08123920 @ =gWeatherPtr
 	ldr r0, [r0]
 	adds r2, r0, 0
 	adds r2, 0xF0
@@ -857,9 +857,9 @@ _0812390C:
 	strb r0, [r1, 0x1]
 	b _081239D6
 	.align 2, 0
-_08123920: .4byte gUnknown_08396FC4
+_08123920: .4byte gWeatherPtr
 _08123924:
-	ldr r0, _08123938 @ =gUnknown_08396FC4
+	ldr r0, _08123938 @ =gWeatherPtr
 	ldr r2, [r0]
 	movs r1, 0xDA
 	lsls r1, 3
@@ -870,7 +870,7 @@ _08123924:
 	strb r0, [r3, 0x1]
 	b _081239D6
 	.align 2, 0
-_08123938: .4byte gUnknown_08396FC4
+_08123938: .4byte gWeatherPtr
 _0812393C:
 	ldrh r1, [r3, 0x6]
 	ldrh r0, [r3, 0x4]
@@ -1239,7 +1239,7 @@ _08123C10: .4byte 0x00000944
 _08123C14: .4byte gUnknown_02039274
 _08123C18: .4byte gSpriteCoordOffsetX
 _08123C1C:
-	ldr r0, _08123C38 @ =gUnknown_08396FC4
+	ldr r0, _08123C38 @ =gWeatherPtr
 	ldr r4, [r0]
 	ldr r2, _08123C3C @ =0x000006fc
 	adds r4, r2
@@ -1254,7 +1254,7 @@ _08123C26:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08123C38: .4byte gUnknown_08396FC4
+_08123C38: .4byte gWeatherPtr
 _08123C3C: .4byte 0x000006fc
 	thumb_func_end sub_8123AF8
 
