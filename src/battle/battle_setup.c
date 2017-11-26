@@ -15,7 +15,7 @@
 #include "main.h"
 #include "constants/maps.h"
 #include "metatile_behavior.h"
-#include "opponent_constants.h"
+#include "constants/opponents.h"
 #include "palette.h"
 #include "random.h"
 #include "overworld.h"

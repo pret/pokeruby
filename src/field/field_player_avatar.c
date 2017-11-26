@@ -9,7 +9,7 @@
 #include "field_map_obj_helpers.h"
 #include "fieldmap.h"
 #include "main.h"
-#include "map_object_constants.h"
+#include "constants/map_objects.h"
 #include "menu.h"
 #include "metatile_behavior.h"
 #include "party_menu.h"

@@ -2,7 +2,7 @@
 #include "battle_ai.h"
 #include "constants/abilities.h"
 #include "battle.h"
-#include "battle_move_effects.h"
+#include "constants/battle_move_effects.h"
 #include "data2.h"
 #include "item.h"
 #include "constants/moves.h"

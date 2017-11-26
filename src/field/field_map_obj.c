@@ -15,7 +15,7 @@
 #include "sprite.h"
 #include "metatile_behavior.h"
 #include "constants/maps.h"
-#include "map_object_constants.h"
+#include "constants/map_objects.h"
 #include "trainer_see.h"
 
 // rodata

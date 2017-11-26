@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/decorations.h"
 #include "secret_base.h"
 #include "decoration.h"
 #include "constants/species.h"

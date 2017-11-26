@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/decorations.h"
 #include "decoration.h"
 #include "decoration_inventory.h"
 #include "event_data.h"

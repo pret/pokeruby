@@ -168,7 +168,7 @@ struct SecretBaseRecord
     /*0x1AA2*/ u8 partyEVs[6];
 };
 
-#include "game_stat.h"
+#include "constants/game_stat.h"
 #include "global.fieldmap.h"
 #include "global.berry.h"
 #include "pokemon.h"

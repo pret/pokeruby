@@ -1,6 +1,7 @@
 #include "global.h"
+#include "constants/decorations.h"
 #include "main.h"
-#include "map_object_constants.h"
+#include "constants/map_objects.h"
 #include "overworld.h"
 #include "sound.h"
 #include "constants/songs.h"

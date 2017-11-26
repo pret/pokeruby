@@ -3,7 +3,7 @@
 #include "battle_message.h"
 #include "data2.h"
 #include "event_data.h"
-#include "hold_effects.h"
+#include "constants/hold_effects.h"
 #include "item.h"
 #include "constants/items.h"
 #include "link.h"

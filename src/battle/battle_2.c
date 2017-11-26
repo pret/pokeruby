@@ -27,8 +27,8 @@
 #include "unknown_task.h"
 #include "util.h"
 #include "constants/items.h"
-#include "hold_effects.h"
-#include "battle_move_effects.h"
+#include "constants/hold_effects.h"
+#include "constants/battle_move_effects.h"
 #include "ewram.h"
 
 struct UnknownStruct7

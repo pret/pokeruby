@@ -4,13 +4,13 @@
 #include "berry.h"
 #include "data2.h"
 #include "event_data.h"
-#include "hold_effects.h"
+#include "constants/hold_effects.h"
 #include "item.h"
 #include "constants/items.h"
 #include "pokemon.h"
 #include "constants/species.h"
 #include "constants/moves.h"
-#include "battle_move_effects.h"
+#include "constants/battle_move_effects.h"
 #include "ewram.h"
 
 extern u16 gBattleTypeFlags;

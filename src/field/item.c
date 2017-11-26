@@ -1,5 +1,5 @@
 #include "global.h"
-#include "hold_effects.h"
+#include "constants/hold_effects.h"
 #include "item.h"
 #include "constants/items.h"
 #include "item_use.h"
