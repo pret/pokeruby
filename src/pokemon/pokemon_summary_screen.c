@@ -174,8 +174,10 @@ extern const u8 *const gUnknown_083C1068[];
 
 #if ENGLISH
 #include "../data/text/move_descriptions_en.h"
+#include "../data/text/nature_names_en.h"
 #elif GERMAN
 #include "../data/text/move_descriptions_de.h"
+#include "../data/text/nature_names_de.h"
 #endif
 
 

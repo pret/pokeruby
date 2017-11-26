@@ -3,9 +3,6 @@
 
 	.section .rodata
 
-@ 83C0F60
-	.include "data/text/nature_names.inc"
-
 	.align 2
 gUnknown_083C1068:: @ 83C1068
 	.4byte gEmptyString_81E72B0
