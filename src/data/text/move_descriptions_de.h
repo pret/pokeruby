@@ -95,7 +95,9 @@ static const u8 MoveDescription_DoubleKick[] = _(
     "wird zweimal getroffen.");
 
 static const u8 MoveDescription_MegaKick[] = _(
-    "Ein extrem heftiger Tritt.$"static const u8 MoveDescription_JumpKick[] = ();
+    "Ein extrem heftiger Tritt.");
+
+static const u8 MoveDescription_JumpKick[] = _(
     "Sprung-Tritt. Selbstschä-\n"
     "digung bei Misserfolg.");
 
@@ -1411,7 +1413,7 @@ static const u8 MoveDescription_PsychoBoost[] = _(
     "Angriff mit voller Kraft.\n"
     "SPEZ. ANGR. sinkt deutlich.");
 
-const u8 * const MoveDescriptions[] = {
+const u8 * const gMoveDescriptions[] = {
     MoveDescription_Pound,
     MoveDescription_KarateChop,
     MoveDescription_DoubleSlap,
@@ -1766,4 +1768,4 @@ const u8 * const MoveDescriptions[] = {
     MoveDescription_WaterPulse,
     MoveDescription_DoomDesire,
     MoveDescription_PsychoBoost,
-];
+};

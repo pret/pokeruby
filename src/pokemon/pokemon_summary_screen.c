@@ -523,7 +523,9 @@ static const struct SpriteTemplate sSpriteTemplate_83C1304 = {
 static const u16 sSummaryScreenMonMarkingsPalette[] = INCBIN_U16("graphics/summary_screen/mon_markings.gbapal");
 
 #if ENGLISH
-static const u16 sSummaryScreenTextTiles[] = INCBIN_U16("graphics/summary_screen/text.4bpp");
+static const u16 gSummaryScreenTextTiles[] = INCBIN_U16("graphics/summary_screen/text.4bpp");
+#elif GERMAN
+extern const u16 gSummaryScreenTextTiles[];
 #endif
 
 static const u16 sSummaryScreenButtonTiles[] = INCBIN_U16("graphics/summary_screen/buttons.4bpp");
@@ -732,7 +734,7 @@ bool8 sub_809DA84(void)
         gMain.state++;
         break;
     case 9:
-        src = sSummaryScreenTextTiles;
+        src = gSummaryScreenTextTiles;
         dest = (void *)VRAM + 0xD000;
         DmaCopy16(3, src, dest, 320);
 
