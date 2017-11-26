@@ -3,9 +3,6 @@
 
 	.section .rodata
 
-@ 83BC680
-	.include "data/text/move_descriptions.inc"
-
 @ 83C0F60
 	.include "data/text/nature_names.inc"
 

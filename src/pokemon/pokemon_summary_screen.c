@@ -158,7 +158,6 @@ extern const u16 gUnknown_083C157E[];
 extern const u16 gUnknown_083C157C[];
 extern const u8 gAbilityNames[][13];
 extern const u8 * const gAbilityDescriptions[];
-extern const u8 * const gMoveDescriptions[];
 extern const u8 * const gContestEffectStrings[];
 extern const struct ContestMove gContestMoves[];
 extern const struct ContestEffect gContestEffects[];
@@ -172,6 +171,12 @@ extern const u8 gUnknown_08E73E88[];
 extern const u8 gUnknown_083C15AE[];
 extern const u8 gUnknown_083C15B4[];
 extern const u8 *const gUnknown_083C1068[];
+
+#if ENGLISH
+#include "../data/text/move_descriptions_en.h"
+#elif GERMAN
+#include "../data/text/move_descriptions_de.h"
+#endif
 
 
 void sub_809D844(void)
