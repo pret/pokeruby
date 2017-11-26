@@ -1,5 +1,5 @@
-#ifndef GUARD_RNG_H
-#define GUARD_RNG_H
+#ifndef GUARD_RANDOM_H
+#define GUARD_RANDOM_H
 
 extern u32 gRngValue;
 
@@ -12,4 +12,5 @@ u16 Random(void);
 //Sets the initial seed value of the pseudorandom number generator
 void SeedRng(u16 seed);
 
-#endif // GUARD_RNG_H
+#endif // GUARD_RANDOM_H
+

@@ -8,7 +8,7 @@
 #include "ewram.h"
 #include "main.h"
 #include "palette.h"
-#include "rng.h"
+#include "random.h"
 #include "rom_8077ABC.h"
 #include "songs.h"
 #include "sound.h"

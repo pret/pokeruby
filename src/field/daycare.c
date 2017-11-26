@@ -12,7 +12,7 @@
 #include "party_menu.h"
 #include "pokemon.h"
 #include "pokemon_storage_system.h"
-#include "rng.h"
+#include "random.h"
 #include "script.h"
 #include "songs.h"
 #include "sound.h"

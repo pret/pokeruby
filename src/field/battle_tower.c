@@ -14,7 +14,7 @@
 #include "new_game.h"
 #include "overworld.h"
 #include "pokedex.h"
-#include "rng.h"
+#include "random.h"
 #include "save.h"
 #include "script_pokemon_80C4.h"
 #include "species.h"

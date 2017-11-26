@@ -7,7 +7,7 @@
 #include "items.h"
 #include "data2.h"
 #include "hold_effects.h"
-#include "rng.h"
+#include "random.h"
 #include "rom3.h"
 #include "species.h"
 #include "pokemon.h"

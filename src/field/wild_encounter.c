@@ -8,7 +8,7 @@
 #include "map_constants.h"
 #include "metatile_behavior.h"
 #include "pokeblock.h"
-#include "rng.h"
+#include "random.h"
 #include "roamer.h"
 #include "overworld.h"
 #include "safari_zone.h"

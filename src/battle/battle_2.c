@@ -13,7 +13,7 @@
 #include "pokeball.h"
 #include "pokedex.h"
 #include "pokemon.h"
-#include "rng.h"
+#include "random.h"
 #include "rom3.h"
 #include "rom_8077ABC.h"
 #include "rom_8094928.h"

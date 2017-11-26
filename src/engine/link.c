@@ -7,7 +7,7 @@
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
-#include "rng.h"
+#include "random.h"
 #include "save.h"
 #include "songs.h"
 #include "sound.h"
