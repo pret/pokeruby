@@ -18,6 +18,7 @@
 #include "sound.h"
 #include "task.h"
 #include "decompress.h"
+#include "pokemon_summary_screen.h"
 #include "naming_screen.h"
 #include "ewram.h"
 
@@ -139,7 +140,6 @@ u16 GetPokedexHeightWeight(u16 national_num, u8 heightweight);
 u8 sub_814A5C0(u8 a1, u16 a2, u8 a3, u16 a4, u8 a5);
 void DestroyMenuCursor(void);
 void sub_802BC6C(void);
-void sub_809D9F0(struct Pokemon *party, u8, u8, void *, u32);
 u8 sub_809FA30(void);
 bool32 IsHMMove2(u16 move);
 void sub_802BBD4(u8 r0, u8 r1, u8 r2, u8 r3, u8 sp0);
@@ -10833,7 +10833,7 @@ static void atk5A(void)
     case 2:
         if (!gPaletteFade.active)
         {
-            sub_809D9F0(gPlayerParty, BATTLE_STRUCT->expGetterID, gPlayerPartyCount - 1, ReshowBattleScreenAfterMenu, gMoveToLearn);
+            ShowSelectMovePokemonSummaryScreen(gPlayerParty, BATTLE_STRUCT->expGetterID, gPlayerPartyCount - 1, ReshowBattleScreenAfterMenu, gMoveToLearn);
             BATTLE_STRUCT->atk5A_StateTracker++;
         }
         break;

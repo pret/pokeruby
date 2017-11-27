@@ -7156,7 +7156,7 @@ _080AEC34:
 	ldr r6, _080AEC78 @ =gContestMoves
 	lsls r5, r4, 3
 	ldr r7, _080AEC80 @ =gContestEffects
-	ldr r0, _080AEC84 @ =gUnknown_083CADD4
+	ldr r0, _080AEC84 @ =gContestEffectStrings
 	mov r9, r0
 	ldr r4, _080AEC88 @ =0x0600c816
 	ldr r3, _080AEC8C @ =0x0600c7d6
@@ -7188,7 +7188,7 @@ _080AEC74: .4byte gUnknown_03004210
 _080AEC78: .4byte gContestMoves
 _080AEC7C: .4byte 0x00004040
 _080AEC80: .4byte gContestEffects
-_080AEC84: .4byte gUnknown_083CADD4
+_080AEC84: .4byte gContestEffectStrings
 _080AEC88: .4byte 0x0600c816
 _080AEC8C: .4byte 0x0600c7d6
 _080AEC90:

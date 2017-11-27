@@ -45,11 +45,11 @@ extern const union AnimCmd *const gSpriteAnimTable_83E533C[];
 
 static EWRAM_DATA struct PokemonMarkMenu *sMenu = NULL;
 
-void sub_80F761C(s16, s16, u16, u16);
-void nullsub_65(struct Sprite *);
-void sub_80F78CC(struct Sprite *);
-void sub_80F7908(struct Sprite *);
-struct Sprite *sub_80F7960(u16, u16, u16 *, u16);
+static void sub_80F761C(s16, s16, u16, u16);
+static void nullsub_65(struct Sprite *);
+static void sub_80F78CC(struct Sprite *);
+static void sub_80F7908(struct Sprite *);
+static struct Sprite *sub_80F7960(u16, u16, const u16 *, u16);
 
 void sub_80F727C(struct PokemonMarkMenu *ptr)
 {
@@ -335,21 +335,21 @@ void sub_80F7908(struct Sprite *sprite)
     sprite->pos1.y = 16 * sMenu->cursorPos + sMenu->cursorBaseY;
 }
 
-struct Sprite *sub_80F7920(u16 tileTag, u16 paletteTag, u16 *palette)
+struct Sprite *sub_80F7920(u16 tileTag, u16 paletteTag, const u16 *palette)
 {
     if (!palette)
         palette = gUnknown_083E49F4;
     return sub_80F7960(tileTag, paletteTag, palette, 16);
 }
 
-struct Sprite *sub_80F7940(u16 tileTag, u16 paletteTag, u16 *palette)
+struct Sprite *sub_80F7940(u16 tileTag, u16 paletteTag, const u16 *palette)
 {
     if (!palette)
         palette = gUnknown_083E49F4;
     return sub_80F7960(tileTag, paletteTag, palette, 1);
 }
 
-struct Sprite *sub_80F7960(u16 tileTag, u16 paletteTag, u16 *palette, u16 size)
+struct Sprite *sub_80F7960(u16 tileTag, u16 paletteTag, const u16 *palette, u16 size)
 {
     u8 spriteId;
     struct SpriteTemplate sprTemplate;
