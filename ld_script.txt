@@ -504,7 +504,6 @@ SECTIONS {
         src/field/trainer_see.o(.rodata);
         data/trainer_see.o(.rodata);
         src/field/wild_encounter.o(.rodata);
-        data/wild_encounter.o(.rodata);
         src/field/field_effect.o(.rodata);
         src/pokemon/pokemon_menu.o(.rodata);
         src/engine/option_menu.o(.rodata);
