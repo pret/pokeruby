@@ -18,8 +18,8 @@ Makefile text eol=lf
 *.inc linguist-language=Assembly
 docs/* linguist-vendored
 # most of the assembly count comes from huge amounts of script include files: it is not fair to count these as assembly. as such, we will instead vendor these. Note that they do take up the majority of the repository.
-data/maps/** linguist-vendored
-data/scripts/** linguist-vendored
+data/maps/ linguist-vendored
+data/scripts/ linguist-vendored
 data/battle_ai_scripts.s linguist-vendored
 data/battle_anim_scripts.s linguist-vendored
 data/battle_scripts_1.s linguist-vendored
@@ -28,7 +28,7 @@ data/contest_ai_scripts.s linguist-vendored
 data/field_move_scripts.inc linguist-vendored
 data/field_effect_scripts.s linguist-vendored
 data/event_scripts.s linguist-vendored
-data-de/maps/** linguist-vendored
+data-de/maps/ linguist-vendored
 data-de/event_scripts.s linguist-vendored
 data-de/field_move_scripts.s linguist-vendored
 # sound data
