@@ -1,6 +1,6 @@
 #include "global.h"
 #include "battle_records.h"
-#include "game_stat.h"
+#include "constants/game_stat.h"
 #include "link.h"
 #include "menu.h"
 #include "overworld.h"

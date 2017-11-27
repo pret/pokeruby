@@ -1,5 +1,5 @@
-#ifndef GUARD_VARS_H
-#define GUARD_VARS_H
+#ifndef GUARD_CONSTANTS_VARS_H
+#define GUARD_CONSTANTS_VARS_H
 
 #define VAR_0x3F20                 0x3F20
 
@@ -53,4 +53,4 @@
 #define VAR_0x40BC                 0x40BC
 #define VAR_0x40C2                 0x40C2
 
-#endif // GUARD_VARS_H
+#endif // GUARD_CONSTANTS_VARS_H

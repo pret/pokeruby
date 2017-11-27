@@ -1,11 +1,11 @@
 #include "global.h"
 #include "wild_encounter.h"
-#include "abilities.h"
+#include "constants/abilities.h"
 #include "battle_setup.h"
 #include "event_data.h"
 #include "field_player_avatar.h"
 #include "fieldmap.h"
-#include "map_constants.h"
+#include "constants/maps.h"
 #include "metatile_behavior.h"
 #include "pokeblock.h"
 #include "random.h"
@@ -13,7 +13,7 @@
 #include "overworld.h"
 #include "safari_zone.h"
 #include "script.h"
-#include "species.h"
+#include "constants/species.h"
 #include "tv.h"
 
 const struct WildPokemon PetalburgCity_WaterMons [] =
@@ -2953,8 +2953,8 @@ static bool8 CheckFeebas(void)
     u8 route119section = 0;
     u16 waterTileNum;
 
-    if (gSaveBlock1.location.mapGroup == MAP_GROUP_ROUTE119
-     && gSaveBlock1.location.mapNum == MAP_ID_ROUTE119)
+    if (gSaveBlock1.location.mapGroup == MAP_GROUP(ROUTE119)
+     && gSaveBlock1.location.mapNum == MAP_NUM(ROUTE119))
     {
         GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
         x -= 7;

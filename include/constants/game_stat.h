@@ -1,5 +1,5 @@
-#ifndef GUARD_GAME_STAT_H
-#define GUARD_GAME_STAT_H
+#ifndef GUARD_CONSTANTS_GAME_STAT_H
+#define GUARD_CONSTANTS_GAME_STAT_H
 
 #define GAME_STAT_SAVED_GAME                 0
 #define GAME_STAT_FIRST_HOF_PLAY_TIME        1
@@ -53,4 +53,4 @@
 #define GAME_STAT_ENTERED_HOT_SPRINGS       49
 #define NUM_GAME_STATS                      50
 
-#endif // GUARD_GAME_STAT_H
+#endif // GUARD_CONSTANTS_GAME_STAT_H

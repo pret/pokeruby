@@ -15,7 +15,7 @@
 #include "text.h"
 #include "menu.h"
 #include "sound.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "pokeblock.h"
 
 #define GFX_TAG_CONDITIONUPDOWN 0

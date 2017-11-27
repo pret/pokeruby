@@ -1,11 +1,4 @@
-@ From mauville_old_man.h
-@ TODO: Put these in a header
-
-MAUVILLE_MAN_BARD        = 0
-MAUVILLE_MAN_HIPSTER     = 1
-MAUVILLE_MAN_TRADER      = 2
-MAUVILLE_MAN_STORYTELLER = 3
-MAUVILLE_MAN_GIDDY       = 4
+#include "constants/mauville_man.h"
 
 MauvilleCity_PokemonCenter_1F_EventScript_1AE744:: @ 81AE744
 	special ScrSpecial_GetCurrentMauvilleMan

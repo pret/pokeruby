@@ -12,7 +12,7 @@
 #include "pokemon_summary_screen.h"
 #include "rom_8077ABC.h"
 #include "rom_8094928.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "string_util.h"
 #include "strings.h"

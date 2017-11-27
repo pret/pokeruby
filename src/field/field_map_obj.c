@@ -14,8 +14,8 @@
 #include "overworld.h"
 #include "sprite.h"
 #include "metatile_behavior.h"
-#include "map_constants.h"
-#include "map_object_constants.h"
+#include "constants/maps.h"
+#include "constants/map_objects.h"
 #include "trainer_see.h"
 
 // rodata
@@ -7054,7 +7054,7 @@ bool8 sub_8062088(struct MapObject *mapObject, struct Sprite *sprite)
 bool8 sub_80620B0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 objectId;
-    if (!TryGetFieldObjectIdByLocalIdAndMap(0xFF, MAP_GROUP_PETALBURG_CITY, MAP_ID_PETALBURG_CITY, &objectId))
+    if (!TryGetFieldObjectIdByLocalIdAndMap(0xFF, MAP_GROUP(PETALBURG_CITY), MAP_NUM(PETALBURG_CITY), &objectId))
     {
         an_look_any(mapObject, sprite, sub_805FE90(mapObject->coords2.x, mapObject->coords2.y, gMapObjects[objectId].coords2.x, gMapObjects[objectId].coords2.y));
     }
@@ -7065,7 +7065,7 @@ bool8 sub_80620B0(struct MapObject *mapObject, struct Sprite *sprite)
 bool8 sub_806210C(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 objectId;
-    if (!TryGetFieldObjectIdByLocalIdAndMap(0xFF, MAP_GROUP_PETALBURG_CITY, MAP_ID_PETALBURG_CITY, &objectId))
+    if (!TryGetFieldObjectIdByLocalIdAndMap(0xFF, MAP_GROUP(PETALBURG_CITY), MAP_NUM(PETALBURG_CITY), &objectId))
     {
         an_look_any(mapObject, sprite, GetOppositeDirection(sub_805FE90(mapObject->coords2.x, mapObject->coords2.y, gMapObjects[objectId].coords2.x, gMapObjects[objectId].coords2.y)));
     }

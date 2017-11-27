@@ -1,3 +1,5 @@
+#include "constants/items.h"
+#include "constants/map_objects.h"
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
 

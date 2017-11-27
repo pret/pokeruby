@@ -3,7 +3,8 @@
 #include "battle_message.h"
 #include "battle_tower.h"
 #include "item.h"
-#include "items.h"
+#include "event_data.h"
+#include "constants/items.h"
 #include "pokemon.h"
 #include "data2.h"
 #include "text.h"
@@ -11,7 +12,7 @@
 #include "link.h"
 #include "battle_setup.h"
 #include "battle_tower.h"
-#include "flags.h"
+#include "constants/flags.h"
 #include "ewram.h"
 
 #define BATTLESTRING_TO_SUB 12

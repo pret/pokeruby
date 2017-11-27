@@ -1,7 +1,7 @@
 #include "global.h"
 #include "fldeff_poison.h"
 #include "task.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 
 static void Task_FieldPoisonEffect(u8 taskId)

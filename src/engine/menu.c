@@ -4,7 +4,7 @@
 #include "map_obj_lock.h"
 #include "menu_cursor.h"
 #include "script.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "strings.h"
 #include "text.h"

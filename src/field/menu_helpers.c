@@ -1,14 +1,14 @@
 #include "global.h"
 #include "item_menu.h"
-#include "items.h"
+#include "constants/items.h"
 #include "link.h"
 #include "mail_data.h"
 #include "main.h"
-#include "map_constants.h"
+#include "constants/maps.h"
 #include "menu.h"
 #include "menu_helpers.h"
 #include "overworld.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
@@ -261,7 +261,7 @@ bool8 sub_80F92F4(u16 itemId)
         return TRUE;
     }
 
-    if (!(gSaveBlock1.location.mapGroup == MAP_GROUP_TRADE_CENTER && gSaveBlock1.location.mapNum == MAP_ID_TRADE_CENTER))
+    if (!(gSaveBlock1.location.mapGroup == MAP_GROUP(TRADE_CENTER) && gSaveBlock1.location.mapNum == MAP_NUM(TRADE_CENTER)))
     {
         return TRUE;
     }

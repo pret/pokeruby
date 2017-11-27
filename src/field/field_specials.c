@@ -11,22 +11,22 @@
 #include "field_camera.h"
 #include "field_player_avatar.h"
 #include "main.h"
-#include "map_constants.h"
+#include "constants/maps.h"
 #include "overworld.h"
 #include "script.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "string_util.h"
 #include "strings.h"
 #include "pokeblock.h"
-#include "species.h"
-#include "abilities.h"
-#include "moves.h"
+#include "constants/species.h"
+#include "constants/abilities.h"
+#include "constants/moves.h"
 #include "text.h"
 #include "wallclock.h"
 #include "tv.h"
 #include "rtc.h"
 #include "link.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "menu.h"
 #include "starter_choose.h"
@@ -207,7 +207,7 @@ u16 GetRecordedCyclingRoadResults(void) {
 }
 
 void UpdateCyclingRoadState(void) {
-    if (gUnknown_020297F0.mapNum == MAP_ID_ROUTE110_SEASIDE_CYCLING_ROAD_NORTH_ENTRANCE && gUnknown_020297F0.mapGroup == MAP_GROUP_ROUTE110_SEASIDE_CYCLING_ROAD_NORTH_ENTRANCE)
+    if (gUnknown_020297F0.mapNum == MAP_NUM(ROUTE110_SEASIDE_CYCLING_ROAD_NORTH_ENTRANCE) && gUnknown_020297F0.mapGroup == MAP_GROUP(ROUTE110_SEASIDE_CYCLING_ROAD_NORTH_ENTRANCE))
     {
         return;
     }
@@ -259,38 +259,38 @@ u8 GetSSTidalLocation(s8 *mapGroup, s8 *mapNum, s16 *x, s16 *y)
         case 2:
             if (*varCruiseStepCount < 60)
             {
-                *mapNum = MAP_ID_ROUTE134;
+                *mapNum = MAP_NUM(ROUTE134);
                 *x = *varCruiseStepCount + 19;
             }
             else if (*varCruiseStepCount < 140)
             {
-                *mapNum = MAP_ID_ROUTE133;
+                *mapNum = MAP_NUM(ROUTE133);
                 *x = *varCruiseStepCount - 60;
             }
             else
             {
-                *mapNum = MAP_ID_ROUTE132;
+                *mapNum = MAP_NUM(ROUTE132);
                 *x = *varCruiseStepCount - 140;
             }
             break;
         case 7:
             if (*varCruiseStepCount < 66)
             {
-                *mapNum = MAP_ID_ROUTE132;
+                *mapNum = MAP_NUM(ROUTE132);
                 *x = 65 - *varCruiseStepCount;
             }
             else if (*varCruiseStepCount < 146) {
-                *mapNum = MAP_ID_ROUTE133;
+                *mapNum = MAP_NUM(ROUTE133);
                 *x = 145 - *varCruiseStepCount;
             }
             else
             {
-                *mapNum = MAP_ID_ROUTE134;
+                *mapNum = MAP_NUM(ROUTE134);
                 *x = 224 - *varCruiseStepCount;
             }
             break;
     }
-    *mapGroup = MAP_GROUP_ROUTE132;
+    *mapGroup = MAP_GROUP(ROUTE132);
     *y = 20;
     return 0;
 }
@@ -702,11 +702,11 @@ void CableCarWarp(void)
 {
     if (gSpecialVar_0x8004 != 0)
     {
-        Overworld_SetWarpDestination(MAP_GROUP_ROUTE112_CABLE_CAR_STATION, MAP_ID_ROUTE112_CABLE_CAR_STATION, -1, 6, 4);
+        Overworld_SetWarpDestination(MAP_GROUP(ROUTE112_CABLE_CAR_STATION), MAP_NUM(ROUTE112_CABLE_CAR_STATION), -1, 6, 4);
     }
     else
     {
-        Overworld_SetWarpDestination(MAP_GROUP_MT_CHIMNEY_CABLE_CAR_STATION, MAP_ID_MT_CHIMNEY_CABLE_CAR_STATION, -1, 6, 4);
+        Overworld_SetWarpDestination(MAP_GROUP(MT_CHIMNEY_CABLE_CAR_STATION), MAP_NUM(MT_CHIMNEY_CABLE_CAR_STATION), -1, 6, 4);
     }
 }
 
@@ -1001,22 +1001,22 @@ void SetDepartmentStoreFloorVar(void)
     u8 deptStoreFloor;
     switch (gSaveBlock1.warp2.mapNum)
     {
-        case MAP_ID_LILYCOVE_CITY_DEPARTMENT_STORE_1F:
+        case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_1F):
             deptStoreFloor = 0;
             break;
-        case MAP_ID_LILYCOVE_CITY_DEPARTMENT_STORE_2F:
+        case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_2F):
             deptStoreFloor = 1;
             break;
-        case MAP_ID_LILYCOVE_CITY_DEPARTMENT_STORE_3F:
+        case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_3F):
             deptStoreFloor = 2;
             break;
-        case MAP_ID_LILYCOVE_CITY_DEPARTMENT_STORE_4F:
+        case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_4F):
             deptStoreFloor = 3;
             break;
-        case MAP_ID_LILYCOVE_CITY_DEPARTMENT_STORE_5F:
+        case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_5F):
             deptStoreFloor = 4;
             break;
-        case MAP_ID_LILYCOVE_CITY_DEPARTMENT_STORE_ROOFTOP:
+        case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_ROOFTOP):
             deptStoreFloor = 15;
             break;
         default:
@@ -1881,7 +1881,7 @@ bool8 ScrSpecial_AreLeadMonEVsMaxedOut(void)
 
 u8 sub_810F5BC(void)
 {
-    if (!FlagGet(0xc7) && gSaveBlock1.location.mapGroup == MAP_GROUP_RUSTURF_TUNNEL && gSaveBlock1.location.mapNum == MAP_ID_RUSTURF_TUNNEL)
+    if (!FlagGet(0xc7) && gSaveBlock1.location.mapGroup == MAP_GROUP(RUSTURF_TUNNEL) && gSaveBlock1.location.mapNum == MAP_NUM(RUSTURF_TUNNEL))
     {
         if (FlagGet(0x3a3))
         {

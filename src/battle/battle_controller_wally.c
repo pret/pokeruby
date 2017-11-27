@@ -9,7 +9,7 @@
 #include "palette.h"
 #include "pokemon.h"
 #include "rom3.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "sprite.h"
 #include "item_use.h"

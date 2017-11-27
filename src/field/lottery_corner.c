@@ -1,9 +1,9 @@
 #include "global.h"
 #include "lottery_corner.h"
 #include "event_data.h"
-#include "items.h"
+#include "constants/items.h"
 #include "random.h"
-#include "species.h"
+#include "constants/species.h"
 #include "string_util.h"
 #include "text.h"
 

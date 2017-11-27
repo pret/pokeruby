@@ -1,3 +1,4 @@
+#include "constants/battle_move_effects.h"
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
 

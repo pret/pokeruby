@@ -10,7 +10,7 @@
 #include "rom6.h"
 #include "script.h"
 #include "secret_base.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 
 extern u8 gUnknown_081A2CE6[];

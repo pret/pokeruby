@@ -12,7 +12,7 @@
 #include "overworld.h"
 #include "task.h"
 #include "sound.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "decoration.h"
 #include "field_player_avatar.h"
 #include "field_map_obj_helpers.h"

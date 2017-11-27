@@ -6,7 +6,7 @@
 #include "pokemon.h"
 #include "random.h"
 #include "rom_8077ABC.h"
-#include "species.h"
+#include "constants/species.h"
 #include "sprite.h"
 #include "string_util.h"
 #include "strings2.h"

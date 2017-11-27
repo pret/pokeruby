@@ -12,7 +12,7 @@
 #include "overworld.h"
 #include "script.h"
 #include "script_pokemon_80F9.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "string_util.h"
 #include "task.h"

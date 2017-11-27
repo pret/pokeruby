@@ -6,7 +6,7 @@
 #include "rtc.h"
 #include "save.h"
 #include "sprite.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "string_util.h"
 #include "strings.h"

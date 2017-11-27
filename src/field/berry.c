@@ -6,7 +6,7 @@
 #include "item.h"
 #include "item_menu.h"
 #include "item_use.h"
-#include "items.h"
+#include "constants/items.h"
 #include "main.h"
 #include "random.h"
 #include "text.h"

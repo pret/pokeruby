@@ -1,5 +1,6 @@
 #include "global.h"
 #include "easy_chat.h"
+#include "constants/easy_chat.h"
 #include "data2.h"
 #include "event_data.h"
 #include "field_message_box.h"

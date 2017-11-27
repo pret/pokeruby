@@ -13,7 +13,7 @@
 #include "rom3.h"
 #include "rom_8077ABC.h"
 #include "sound.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sprite.h"
 #include "string_util.h"
 #include "task.h"

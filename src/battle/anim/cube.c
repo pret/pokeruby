@@ -3,7 +3,7 @@
 #include "trig.h"
 #include "battle_anim.h"
 #include "sound.h"
-#include "songs.h"
+#include "constants/songs.h"
 
 extern s16 gBattleAnimArgs[];
 extern u8 gBattleAnimBankAttacker;

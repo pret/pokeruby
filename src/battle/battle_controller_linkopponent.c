@@ -8,7 +8,7 @@
 #include "palette.h"
 #include "rom_8077ABC.h"
 #include "rom3.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "sprite.h"
 #include "string_util.h"

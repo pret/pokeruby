@@ -7,7 +7,7 @@
 #include "pokemon.h"
 #include "rom_8077ABC.h"
 #include "safari_zone.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "sprite.h"
 #include "string_util.h"

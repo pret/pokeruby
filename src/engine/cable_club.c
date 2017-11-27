@@ -14,7 +14,7 @@
 #include "overworld.h"
 #include "script.h"
 #include "script_pokemon_80C4.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "start_menu.h"
 #include "string_util.h"

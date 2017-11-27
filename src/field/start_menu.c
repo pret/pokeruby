@@ -20,7 +20,7 @@
 #include "save.h"
 #include "save_menu_util.h"
 #include "script.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "sprite.h"
 #include "string_util.h"

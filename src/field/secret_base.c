@@ -1,9 +1,10 @@
 #include "global.h"
+#include "constants/decorations.h"
 #include "secret_base.h"
 #include "decoration.h"
-#include "species.h"
-#include "items.h"
-#include "moves.h"
+#include "constants/species.h"
+#include "constants/items.h"
+#include "constants/moves.h"
 #include "event_data.h"
 #include "field_camera.h"
 #include "field_effect.h"
@@ -16,8 +17,8 @@
 #include "link.h"
 #include "main.h"
 #include "sound.h"
-#include "songs.h"
-#include "map_constants.h"
+#include "constants/songs.h"
+#include "constants/maps.h"
 #include "map_name_popup.h"
 #include "menu.h"
 #include "menu_helpers.h"
@@ -27,12 +28,12 @@
 #include "overworld.h"
 #include "script.h"
 #include "sound.h"
-#include "species.h"
+#include "constants/species.h"
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
 #include "text.h"
-#include "vars.h"
+#include "constants/vars.h"
 
 
 static void sub_80BC7D8(u8 taskId);
@@ -68,30 +69,30 @@ const struct
 
 
 const u8 gUnknown_083D1374[] = {
-    MAP_ID_SECRET_BASE_RED_CAVE1,     0,  1,  3,
-    MAP_ID_SECRET_BASE_RED_CAVE2,     0,  5,  9,
-    MAP_ID_SECRET_BASE_RED_CAVE3,     0,  1,  3,
-    MAP_ID_SECRET_BASE_RED_CAVE4,     0,  7, 13,
-    MAP_ID_SECRET_BASE_BROWN_CAVE1,   0,  2,  3,
-    MAP_ID_SECRET_BASE_BROWN_CAVE2,   0,  9,  2,
-    MAP_ID_SECRET_BASE_BROWN_CAVE3,   0, 13,  4,
-    MAP_ID_SECRET_BASE_BROWN_CAVE4,   0,  1,  2,
-    MAP_ID_SECRET_BASE_BLUE_CAVE1,    0,  1,  3,
-    MAP_ID_SECRET_BASE_BLUE_CAVE2,    0,  1,  2,
-    MAP_ID_SECRET_BASE_BLUE_CAVE3,    0,  3, 15,
-    MAP_ID_SECRET_BASE_BLUE_CAVE4,    0,  3, 14,
-    MAP_ID_SECRET_BASE_YELLOW_CAVE1,  0,  9,  3,
-    MAP_ID_SECRET_BASE_YELLOW_CAVE2,  0,  8,  7,
-    MAP_ID_SECRET_BASE_YELLOW_CAVE3,  0,  3,  6,
-    MAP_ID_SECRET_BASE_YELLOW_CAVE4,  0,  5,  9,
-    MAP_ID_SECRET_BASE_TREE1,         0,  2,  3,
-    MAP_ID_SECRET_BASE_TREE2,         0,  5,  6,
-    MAP_ID_SECRET_BASE_TREE3,         0, 15,  3,
-    MAP_ID_SECRET_BASE_TREE4,         0,  4, 10,
-    MAP_ID_SECRET_BASE_SHRUB1,        0,  3,  3,
-    MAP_ID_SECRET_BASE_SHRUB2,        0,  1,  2,
-    MAP_ID_SECRET_BASE_SHRUB3,        0,  7,  8,
-    MAP_ID_SECRET_BASE_SHRUB4,        0,  9,  6
+    MAP_NUM(SECRET_BASE_RED_CAVE1),     0,  1,  3,
+    MAP_NUM(SECRET_BASE_RED_CAVE2),     0,  5,  9,
+    MAP_NUM(SECRET_BASE_RED_CAVE3),     0,  1,  3,
+    MAP_NUM(SECRET_BASE_RED_CAVE4),     0,  7, 13,
+    MAP_NUM(SECRET_BASE_BROWN_CAVE1),   0,  2,  3,
+    MAP_NUM(SECRET_BASE_BROWN_CAVE2),   0,  9,  2,
+    MAP_NUM(SECRET_BASE_BROWN_CAVE3),   0, 13,  4,
+    MAP_NUM(SECRET_BASE_BROWN_CAVE4),   0,  1,  2,
+    MAP_NUM(SECRET_BASE_BLUE_CAVE1),    0,  1,  3,
+    MAP_NUM(SECRET_BASE_BLUE_CAVE2),    0,  1,  2,
+    MAP_NUM(SECRET_BASE_BLUE_CAVE3),    0,  3, 15,
+    MAP_NUM(SECRET_BASE_BLUE_CAVE4),    0,  3, 14,
+    MAP_NUM(SECRET_BASE_YELLOW_CAVE1),  0,  9,  3,
+    MAP_NUM(SECRET_BASE_YELLOW_CAVE2),  0,  8,  7,
+    MAP_NUM(SECRET_BASE_YELLOW_CAVE3),  0,  3,  6,
+    MAP_NUM(SECRET_BASE_YELLOW_CAVE4),  0,  5,  9,
+    MAP_NUM(SECRET_BASE_TREE1),         0,  2,  3,
+    MAP_NUM(SECRET_BASE_TREE2),         0,  5,  6,
+    MAP_NUM(SECRET_BASE_TREE3),         0, 15,  3,
+    MAP_NUM(SECRET_BASE_TREE4),         0,  4, 10,
+    MAP_NUM(SECRET_BASE_SHRUB1),        0,  3,  3,
+    MAP_NUM(SECRET_BASE_SHRUB2),        0,  1,  2,
+    MAP_NUM(SECRET_BASE_SHRUB3),        0,  7,  8,
+    MAP_NUM(SECRET_BASE_SHRUB4),        0,  9,  6
 };
 
 const struct MenuAction2 gUnknown_083D13D4[] = {
@@ -316,7 +317,7 @@ void sub_80BB970(struct MapEvents *events)
 void sub_80BBA14(void)
 {
     s8 idx = 4 * (gUnknown_020387DC / 10);
-    warp1_set_2(MAP_GROUP_SECRET_BASE_RED_CAVE1, gUnknown_083D1374[idx], gUnknown_083D1374[idx + 1]);
+    warp1_set_2(MAP_GROUP(SECRET_BASE_RED_CAVE1), gUnknown_083D1374[idx], gUnknown_083D1374[idx + 1]);
 }
 
 void sub_80BBA48(u8 taskid)
@@ -401,7 +402,7 @@ void sub_80BBC78(void)
 
 bool8 CurrentMapIsSecretBase(void)
 {
-    if (gSaveBlock1.location.mapGroup == MAP_GROUP_SECRET_BASE_SHRUB4 && (u8)(gSaveBlock1.location.mapNum) <= MAP_ID_SECRET_BASE_SHRUB4)
+    if (gSaveBlock1.location.mapGroup == MAP_GROUP(SECRET_BASE_SHRUB4) && (u8)(gSaveBlock1.location.mapNum) <= MAP_NUM(SECRET_BASE_SHRUB4))
         return TRUE;
     return FALSE;
 }
