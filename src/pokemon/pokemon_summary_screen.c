@@ -1160,273 +1160,64 @@ static void sub_809E534(u8 taskId)
     }
 }
 
-__attribute__((naked))
 static void sub_809E5C4(void)
 {
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x20\n\
-    ldr r1, _0809E6D0 @ =gSharedMem + 0x18000\n\
-    ldr r5, [r1]\n\
-    ldrb r2, [r1, 0x9]\n\
-    movs r0, 0x64\n\
-    muls r0, r2\n\
-    adds r5, r0\n\
-    adds r0, r1, 0\n\
-    adds r0, 0x79\n\
-    ldrb r0, [r0]\n\
-    mov r8, r0\n\
-    adds r1, 0x7A\n\
-    ldrb r6, [r1]\n\
-    adds r0, 0xD\n\
-    str r0, [sp, 0x8]\n\
-    adds r0, r5, 0\n\
-    ldr r1, [sp, 0x8]\n\
-    bl GetMonData\n\
-    mov r1, sp\n\
-    adds r1, 0x2\n\
-    str r1, [sp, 0x14]\n\
-    strh r0, [r1]\n\
-    adds r2, r6, 0\n\
-    adds r2, 0xD\n\
-    str r2, [sp, 0xC]\n\
-    adds r0, r5, 0\n\
-    adds r1, r2, 0\n\
-    bl GetMonData\n\
-    mov r1, sp\n\
-    strh r0, [r1]\n\
-    mov r3, r8\n\
-    adds r3, 0x11\n\
-    str r3, [sp, 0x10]\n\
-    adds r0, r5, 0\n\
-    adds r1, r3, 0\n\
-    bl GetMonData\n\
-    mov r7, sp\n\
-    adds r7, 0x5\n\
-    str r7, [sp, 0x18]\n\
-    strb r0, [r7]\n\
-    adds r0, r6, 0\n\
-    adds r0, 0x11\n\
-    str r0, [sp, 0x1C]\n\
-    adds r0, r5, 0\n\
-    ldr r1, [sp, 0x1C]\n\
-    bl GetMonData\n\
-    add r1, sp, 0x4\n\
-    mov r10, r1\n\
-    strb r0, [r1]\n\
-    adds r0, r5, 0\n\
-    movs r1, 0x15\n\
-    bl GetMonData\n\
-    mov r4, sp\n\
-    adds r4, 0x6\n\
-    strb r0, [r4]\n\
-    ldr r1, _0809E6D4 @ =gUnknown_08208238\n\
-    mov r2, r8\n\
-    adds r0, r2, r1\n\
-    ldrb r0, [r0]\n\
-    mov r9, r0\n\
-    ldrb r0, [r4]\n\
-    adds r2, r0, 0\n\
-    mov r3, r9\n\
-    ands r2, r3\n\
-    mov r7, r8\n\
-    lsls r7, 1\n\
-    mov r8, r7\n\
-    asrs r2, r7\n\
-    lsls r2, 24\n\
-    lsrs r2, 24\n\
-    adds r1, r6, r1\n\
-    ldrb r3, [r1]\n\
-    adds r1, r0, 0\n\
-    ands r1, r3\n\
-    lsls r6, 1\n\
-    asrs r1, r6\n\
-    lsls r1, 24\n\
-    lsrs r1, 24\n\
-    mov r7, r9\n\
-    bics r0, r7\n\
-    strb r0, [r4]\n\
-    ldrb r0, [r4]\n\
-    bics r0, r3\n\
-    strb r0, [r4]\n\
-    lsls r2, r6\n\
-    mov r0, r8\n\
-    lsls r1, r0\n\
-    adds r2, r1\n\
-    ldrb r0, [r4]\n\
-    orrs r0, r2\n\
-    strb r0, [r4]\n\
-    adds r0, r5, 0\n\
-    ldr r1, [sp, 0x8]\n\
-    mov r2, sp\n\
-    bl SetMonData\n\
-    adds r0, r5, 0\n\
-    ldr r1, [sp, 0xC]\n\
-    ldr r2, [sp, 0x14]\n\
-    bl SetMonData\n\
-    adds r0, r5, 0\n\
-    ldr r1, [sp, 0x10]\n\
-    mov r2, r10\n\
-    bl SetMonData\n\
-    adds r0, r5, 0\n\
-    ldr r1, [sp, 0x1C]\n\
-    ldr r2, [sp, 0x18]\n\
-    bl SetMonData\n\
-    adds r0, r5, 0\n\
-    movs r1, 0x15\n\
-    adds r2, r4, 0\n\
-    bl SetMonData\n\
-    add sp, 0x20\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_0809E6D0: .4byte gSharedMem + 0x18000\n\
-_0809E6D4: .4byte gUnknown_08208238\n\
-    .syntax divided\n");
+    struct Pokemon *party = pssData.monList.partyMons;
+    struct Pokemon *pkmn = &party[pssData.monIndex];
+    u8 moveIndex1 = pssData.selectedMoveIndex;
+    u8 moveIndex2 = pssData.switchMoveIndex;
+    
+    u16 move1 = GetMonData(pkmn, MON_DATA_MOVE1 + moveIndex1);
+    u16 move2 = GetMonData(pkmn, MON_DATA_MOVE1 + moveIndex2);
+    u8 move1pp = GetMonData(pkmn, MON_DATA_PP1 + moveIndex1);
+    u8 move2pp = GetMonData(pkmn, MON_DATA_PP1 + moveIndex2);
+    u8 ppBonuses = GetMonData(pkmn, MON_DATA_PP_BONUSES);
+    
+    // Calculate PP bonuses
+    u8 r9 = gUnknown_08208238[moveIndex1];
+    u8 r2 = (ppBonuses & r9) >> (moveIndex1 * 2);
+    u8 r3 = gUnknown_08208238[moveIndex2];
+    u8 r1 = (ppBonuses & r3) >> (moveIndex2 * 2);
+    ppBonuses &= ~r9;
+    ppBonuses &= ~r3;
+    ppBonuses |= (r2 << (moveIndex2 * 2)) + (r1 << (moveIndex1 * 2));
+    
+    // Swap the moves
+    SetMonData(pkmn, MON_DATA_MOVE1 + moveIndex1, &move2);
+    SetMonData(pkmn, MON_DATA_MOVE1 + moveIndex2, &move1);
+    SetMonData(pkmn, MON_DATA_PP1 + moveIndex1, &move2pp);
+    SetMonData(pkmn, MON_DATA_PP1 + moveIndex2, &move1pp);
+    SetMonData(pkmn, MON_DATA_PP_BONUSES, &ppBonuses);
 }
 
-__attribute__((naked))
-void sub_809E6D8(void)
+static void sub_809E6D8(void)
 {
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x20\n\
-    ldr r2, _0809E7E8 @ =gSharedMem + 0x18000\n\
-    ldr r5, [r2]\n\
-    ldrb r1, [r2, 0x9]\n\
-    lsls r0, r1, 2\n\
-    adds r0, r1\n\
-    lsls r0, 4\n\
-    adds r5, r0\n\
-    adds r0, r2, 0\n\
-    adds r0, 0x79\n\
-    ldrb r0, [r0]\n\
-    mov r8, r0\n\
-    adds r2, 0x7A\n\
-    ldrb r6, [r2]\n\
-    adds r0, 0xD\n\
-    str r0, [sp, 0x8]\n\
-    adds r0, r5, 0\n\
-    ldr r1, [sp, 0x8]\n\
-    bl GetBoxMonData\n\
-    mov r1, sp\n\
-    adds r1, 0x2\n\
-    str r1, [sp, 0x14]\n\
-    strh r0, [r1]\n\
-    adds r2, r6, 0\n\
-    adds r2, 0xD\n\
-    str r2, [sp, 0xC]\n\
-    adds r0, r5, 0\n\
-    adds r1, r2, 0\n\
-    bl GetBoxMonData\n\
-    mov r1, sp\n\
-    strh r0, [r1]\n\
-    mov r3, r8\n\
-    adds r3, 0x11\n\
-    str r3, [sp, 0x10]\n\
-    adds r0, r5, 0\n\
-    adds r1, r3, 0\n\
-    bl GetBoxMonData\n\
-    mov r7, sp\n\
-    adds r7, 0x5\n\
-    str r7, [sp, 0x18]\n\
-    strb r0, [r7]\n\
-    adds r0, r6, 0\n\
-    adds r0, 0x11\n\
-    str r0, [sp, 0x1C]\n\
-    adds r0, r5, 0\n\
-    ldr r1, [sp, 0x1C]\n\
-    bl GetBoxMonData\n\
-    add r1, sp, 0x4\n\
-    mov r10, r1\n\
-    strb r0, [r1]\n\
-    adds r0, r5, 0\n\
-    movs r1, 0x15\n\
-    bl GetBoxMonData\n\
-    mov r4, sp\n\
-    adds r4, 0x6\n\
-    strb r0, [r4]\n\
-    ldr r1, _0809E7EC @ =gUnknown_08208238\n\
-    mov r2, r8\n\
-    adds r0, r2, r1\n\
-    ldrb r0, [r0]\n\
-    mov r9, r0\n\
-    ldrb r0, [r4]\n\
-    adds r2, r0, 0\n\
-    mov r3, r9\n\
-    ands r2, r3\n\
-    mov r7, r8\n\
-    lsls r7, 1\n\
-    mov r8, r7\n\
-    asrs r2, r7\n\
-    lsls r2, 24\n\
-    lsrs r2, 24\n\
-    adds r1, r6, r1\n\
-    ldrb r3, [r1]\n\
-    adds r1, r0, 0\n\
-    ands r1, r3\n\
-    lsls r6, 1\n\
-    asrs r1, r6\n\
-    lsls r1, 24\n\
-    lsrs r1, 24\n\
-    mov r7, r9\n\
-    bics r0, r7\n\
-    strb r0, [r4]\n\
-    ldrb r0, [r4]\n\
-    bics r0, r3\n\
-    strb r0, [r4]\n\
-    lsls r2, r6\n\
-    mov r0, r8\n\
-    lsls r1, r0\n\
-    adds r2, r1\n\
-    ldrb r0, [r4]\n\
-    orrs r0, r2\n\
-    strb r0, [r4]\n\
-    adds r0, r5, 0\n\
-    ldr r1, [sp, 0x8]\n\
-    mov r2, sp\n\
-    bl SetBoxMonData\n\
-    adds r0, r5, 0\n\
-    ldr r1, [sp, 0xC]\n\
-    ldr r2, [sp, 0x14]\n\
-    bl SetBoxMonData\n\
-    adds r0, r5, 0\n\
-    ldr r1, [sp, 0x10]\n\
-    mov r2, r10\n\
-    bl SetBoxMonData\n\
-    adds r0, r5, 0\n\
-    ldr r1, [sp, 0x1C]\n\
-    ldr r2, [sp, 0x18]\n\
-    bl SetBoxMonData\n\
-    adds r0, r5, 0\n\
-    movs r1, 0x15\n\
-    adds r2, r4, 0\n\
-    bl SetBoxMonData\n\
-    add sp, 0x20\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_0809E7E8: .4byte gSharedMem + 0x18000\n\
-_0809E7EC: .4byte gUnknown_08208238\n\
-    .syntax divided\n");
+    struct BoxPokemon *boxMons = pssData.monList.boxMons;
+    struct BoxPokemon *pkmn = &boxMons[pssData.monIndex];
+    u8 moveIndex1 = pssData.selectedMoveIndex;
+    u8 moveIndex2 = pssData.switchMoveIndex;
+    
+    u16 move1 = GetBoxMonData(pkmn, MON_DATA_MOVE1 + moveIndex1);
+    u16 move2 = GetBoxMonData(pkmn, MON_DATA_MOVE1 + moveIndex2);
+    u8 move1pp = GetBoxMonData(pkmn, MON_DATA_PP1 + moveIndex1);
+    u8 move2pp = GetBoxMonData(pkmn, MON_DATA_PP1 + moveIndex2);
+    u8 ppBonuses = GetBoxMonData(pkmn, MON_DATA_PP_BONUSES);
+    
+    // Calculate PP bonuses
+    u8 r9 = gUnknown_08208238[moveIndex1];
+    u8 r2 = (ppBonuses & r9) >> (moveIndex1 * 2);
+    u8 r3 = gUnknown_08208238[moveIndex2];
+    u8 r1 = (ppBonuses & r3) >> (moveIndex2 * 2);
+    ppBonuses &= ~r9;
+    ppBonuses &= ~r3;
+    ppBonuses |= (r2 << (moveIndex2 * 2)) + (r1 << (moveIndex1 * 2));
+    
+    // Swap the moves
+    SetBoxMonData(pkmn, MON_DATA_MOVE1 + moveIndex1, &move2);
+    SetBoxMonData(pkmn, MON_DATA_MOVE1 + moveIndex2, &move1);
+    SetBoxMonData(pkmn, MON_DATA_PP1 + moveIndex1, &move2pp);
+    SetBoxMonData(pkmn, MON_DATA_PP1 + moveIndex2, &move1pp);
+    SetBoxMonData(pkmn, MON_DATA_PP_BONUSES, &ppBonuses);
 }
 
 void sub_809E7F0(u8 taskId)
@@ -2160,44 +1951,32 @@ _0809F280: .4byte sub_809F43C\n\
 }
 #endif // NONMATCHING
 
-// s8 sub_809F284(s8 a)
-// {
-//     struct Pokemon *mons = pssData.monList.partyMons;
-//     u8 var1 = 0;
+#ifdef NONMATCHING
+s8 sub_809F284(s8 a)
+{
+    struct Pokemon *mons = pssData.monList.partyMons;
+    s8 r6 = 0;
 
-//     if (pssData.page == PSS_PAGE_INFO)
-//     {
-//         if ((s8)a == -1 || pssData.monIndex != 0)
-//         {
-//             if ((s8)a == 1 || pssData.monIndex < pssData.maxMonIndex)
-//             {
-//                 return pssData.monIndex + a;
-//             }
-//         }
-
-//         return -1;
-//     }
-//     else
-//     {
-//         while (1)
-//         {
-//             var1 += a;
-
-//             if (pssData.monIndex + var1 >= 0 || pssData.monIndex + var1 > pssData.maxMonIndex)
-//             {
-//                 return -1;
-//             }
-
-//             if (!GetMonData(&mons[pssData.monIndex + var1], MON_DATA_IS_EGG))
-//             {
-//                 break;
-//             }
-//         }
-
-//         return pssData.monIndex + var1;
-//     }
-
-// }
+    if (pssData.page == PSS_PAGE_INFO)
+    {
+        if (a == -1 && pssData.monIndex == 0)
+            return -1;
+        if (a == 1 && pssData.monIndex >= pssData.maxMonIndex)
+            return -1;
+        return pssData.monIndex + a;
+    }
+    else
+    {
+        do
+        {
+            r6 += a;
+            if (pssData.monIndex + r6 < 0 || pssData.monIndex + r6 > pssData.maxMonIndex)
+                return -1;
+        } while (GetMonData(&mons[pssData.monIndex + r6], MON_DATA_IS_EGG) != 0);
+        return pssData.monIndex + r6;
+    }
+}
+#else
 __attribute__((naked))
 s8 sub_809F284(s8 a)
 {
@@ -2279,6 +2058,7 @@ _0809F308:\n\
     bx r1\n\
     .syntax divided\n");
 }
+#endif // NONMATCHING
 
 bool8 sub_809F310(struct Pokemon *mon)
 {
