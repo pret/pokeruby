@@ -8,7 +8,6 @@
 	.include "constants/map_constants.inc"
 	.include "constants/berry_constants.inc"
 	.include "constants/version.inc"
-	.include "constants/region_map_sections.inc"
 	.include "constants/battle.inc"
 	.include "constants/battle_text.inc"
 	.include "constants/contest_move_effects.inc"

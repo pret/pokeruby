@@ -53,8 +53,8 @@ enum
     MAPSEC_Route132,       // 0x2F
     MAPSEC_Route133,       // 0x30
     MAPSEC_Route134,       // 0x31
-    MAPSEC_MtChimney,      // 0x38
-    MAPSEC_Nothing,        // 0x58
+    MAPSEC_MtChimney = 0x38,      // 0x38
+    MAPSEC_Nothing = 0x58,        // 0x58
 };
 
 #endif // GUARD_REGIONMAPSEC_H
