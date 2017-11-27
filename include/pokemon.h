@@ -578,6 +578,7 @@ void MonRestorePP(struct Pokemon *);
 
 u8 *sub_803F378(u16 itemId);
 
+u16 SpeciesToPokedexNum(u16 species);
 u16 NationalPokedexNumToSpecies(u16 nationalNum);
 u16 NationalToHoennOrder(u16);
 u16 SpeciesToNationalPokedexNum(u16);
@@ -611,6 +612,9 @@ const struct CompressedSpritePalette *GetMonSpritePalStruct(struct Pokemon *);
 bool8 IsPokeSpriteNotFlipped(u16);
 u8 GetLevelUpMovesBySpecies(u16, u16 *);
 u8 TryIncrementMonLevel(struct Pokemon *);
+bool8 IsShiny(struct Pokemon *mon);
+
+struct Sprite *sub_80F7920(u16, u16, const u16 *);
 
 
 #endif // GUARD_POKEMON_H

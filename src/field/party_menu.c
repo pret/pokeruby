@@ -4292,7 +4292,7 @@ void sub_806F3FC(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        sub_809D9F0(gPlayerParty, ewram1C000.unk5, gPlayerPartyCount - 1, sub_808B564, ewram1C000.unk8);
+        ShowSelectMovePokemonSummaryScreen(gPlayerParty, ewram1C000.unk5, gPlayerPartyCount - 1, sub_808B564, ewram1C000.unk8);
         DestroyTask(taskId);
     }
 }

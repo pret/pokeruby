@@ -2186,11 +2186,11 @@ static void sub_804997C(void)
     {
         if (gUnknown_03004824->tradeMenuCursorPosition < PARTY_SIZE)
         {
-            ShowPokemonSummaryScreen(gPlayerParty, gUnknown_03004824->tradeMenuCursorPosition, gUnknown_03004824->partyCounts[0] - 1, sub_80484F4, 4);
+            ShowPokemonSummaryScreen(gPlayerParty, gUnknown_03004824->tradeMenuCursorPosition, gUnknown_03004824->partyCounts[0] - 1, sub_80484F4, PSS_MODE_NO_MOVE_ORDER_EDIT);
         }
         else
         {
-            ShowPokemonSummaryScreen(gEnemyParty, gUnknown_03004824->tradeMenuCursorPosition - 6, gUnknown_03004824->partyCounts[1] - 1, sub_80484F4, 4);
+            ShowPokemonSummaryScreen(gEnemyParty, gUnknown_03004824->tradeMenuCursorPosition - 6, gUnknown_03004824->partyCounts[1] - 1, sub_80484F4, PSS_MODE_NO_MOVE_ORDER_EDIT);
         }
     }
 }

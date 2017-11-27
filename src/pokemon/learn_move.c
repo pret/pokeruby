@@ -4,8 +4,10 @@
 #include "main.h"
 #include "menu.h"
 #include "menu_cursor.h"
+#include "learn_move.h"
 #include "palette.h"
 #include "pokemon.h"
+#include "pokemon_summary_screen.h"
 #include "overworld.h"
 #include "script.h"
 #include "songs.h"
@@ -22,26 +24,11 @@ extern u16 gSpecialVar_0x8004;
 extern u16 gSpecialVar_0x8005;
 extern u8 gTileBuffer[];
 
-struct ContestMove
-{
-    u8 effect;
-    u8 contestCategory:3;
-    u8 comboStarterId;
-    u8 comboMoves[4];
-};
-
-struct ContestEffect
-{
-    u8 effectType;
-    u8 appeal;
-    u8 jam;
-};
-
 extern const struct ContestMove gContestMoves[];
 extern const struct ContestEffect gContestEffects[];
 extern const struct WindowConfig gWindowConfig_81E6CE4;
 extern const struct WindowConfig gWindowConfig_81E7240;
-extern const u8 *const gUnknown_083CADD4[];
+extern const u8 *const gContestEffectStrings[];
 extern const u8 *const gMoveDescriptions[];
 extern const u8 gTypeNames[][7];
 extern const u8 *const gUnknown_083CAF70[];
@@ -50,7 +37,6 @@ extern const u8 *const gUnknown_083CAF70[];
 extern const u8 deuOtherText_ForgotAndLearned[];
 #endif
 
-extern void sub_809D9F0(struct Pokemon *, u8, u8, void *, u32);
 
 struct LearnMoveStruct
 {
@@ -557,7 +543,7 @@ void LearnMoveMain(void)
     case 20:
         if (!gPaletteFade.active)
         {
-            sub_809D9F0(gPlayerParty, sLearnMoveStruct->partyMon, gPlayerPartyCount - 1, sub_81327A4, sLearnMoveStruct->movesToLearn[sLearnMoveStruct->menuSelection]);
+            ShowSelectMovePokemonSummaryScreen(gPlayerParty, sLearnMoveStruct->partyMon, gPlayerPartyCount - 1, sub_81327A4, sLearnMoveStruct->movesToLearn[sLearnMoveStruct->menuSelection]);
             sLearnMoveStruct->state = 28;
         }
         break;
@@ -1039,7 +1025,7 @@ void sub_8133AEC(bool8 contestInfo, int unused)
                 gSprites[sLearnMoveStruct->spriteIDs[i + 4]].invisible = FALSE;
             for (i = 0; i < 3; i++)
                 PrintMoveInfo(moveId, gUnknown_08402E24[gUnknown_08402E3D[i]]);
-            sub_8072AB0(gUnknown_083CADD4[gContestMoves[moveId].effect], 0x58, 0x48, 0x90, 32, 1);
+            sub_8072AB0(gContestEffectStrings[gContestMoves[moveId].effect], 0x58, 0x48, 0x90, 32, 1);
         }
         else
         {
