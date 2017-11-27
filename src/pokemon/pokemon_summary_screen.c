@@ -19,6 +19,7 @@
 #include "pokemon.h"
 #include "pokemon_summary_screen.h"
 #include "region_map.h"
+#include "songs.h"
 #include "sound.h"
 #include "species.h"
 #include "sprite.h"
@@ -957,7 +958,7 @@ static void sub_809E044(void)
 
 static void SummaryScreenExit(u8 taskId)
 {
-    PlaySE(5);
+    PlaySE(SE_SELECT);
     BeginNormalPaletteFade(-1, 0, 0, 16, 0);
     gTasks[taskId].func = sub_809E13C;
 }
@@ -1062,7 +1063,7 @@ static void sub_809E260(u8 taskId)
         }
         else
         {
-            PlaySE(32);
+            PlaySE(SE_HAZURE);
             sub_809F9D0(taskId, pssData.selectedMoveIndex);
         }
     }
@@ -1095,11 +1096,11 @@ static void sub_809E3FC(u8 taskId)
         {
             if (!MonKnowsMultipleMoves(&pssData.loadedMon))
             {
-                PlaySE(32);
+                PlaySE(SE_HAZURE);
             }
             else
             {
-                PlaySE(5);
+                PlaySE(SE_SELECT);
 
                 pssData.switchMoveIndex = pssData.selectedMoveIndex;
                 sub_80A1B40(1);
@@ -1110,13 +1111,13 @@ static void sub_809E3FC(u8 taskId)
         }
         else
         {
-            PlaySE(5);
+            PlaySE(SE_SELECT);
             sub_809EAC8(taskId);
         }
     }
     else if (gMain.newKeys & B_BUTTON)
     {
-        PlaySE(5);
+        PlaySE(SE_SELECT);
         sub_809EAC8(taskId);
     }
 
@@ -1441,7 +1442,7 @@ void sub_809E7F0(u8 taskId)
 
 static void sub_809E83C(u8 taskId, s8 b)
 {
-    PlaySE(5);
+    PlaySE(SE_SELECT);
 
     sub_80A1B1C(19);
     sub_80A1B40(0);
@@ -1658,7 +1659,7 @@ _0809EA4C: .4byte gSharedMem + 0x18010\n\
 
 static void SummaryScreenHandleAButton(u8 taskId)
 {
-    PlaySE(5);
+    PlaySE(SE_SELECT);
 
     pssData.selectedMoveIndex = 0;
     sub_80A1488(2, 0);
@@ -2003,7 +2004,7 @@ static void SummaryScreenHandleLeftRightInput(u8 taskId, s8 direction)
 
         if (FindTaskIdByFunc(sub_80A1334) == 0xFF && FindTaskIdByFunc(sub_80A1500) == 0xFF)
         {
-            PlaySE(5);
+            PlaySE(SE_SELECT);
             sub_809F0D0(taskId, direction);
         }
     }
@@ -2042,7 +2043,7 @@ static void SummaryScreenHandleUpDownInput(u8 taskId, s8 direction)
 
     if (var3 != -1)
     {
-        PlaySE(5);
+        PlaySE(SE_SELECT);
         if (GetMonStatusAndPokerus(&pssData.loadedMon))
         {
             sub_80A12D0(-2);
@@ -3628,12 +3629,12 @@ static void PokemonSummaryScreen_PrintEggTrainerMemo(struct Pokemon *mon, u8 lef
     MenuPrint(gOtherText_EggDayCare, left, top);
 }
 
-static void PokemonSummaryScreen_PrintTrainerMemo(struct Pokemon *pokemon, u8 left, u8 top)
+static void PokemonSummaryScreen_PrintTrainerMemo(struct Pokemon *mon, u8 left, u8 top)
 {
     u8 locationMet;
     u8 gameMet;
     u8 *ptr = gStringVar4;
-    u8 nature = GetNature(pokemon);
+    u8 nature = GetNature(mon);
 
 #if ENGLISH
     ptr = sub_80A1E9C(ptr, gNatureNames[nature], 14);
@@ -3650,11 +3651,11 @@ static void PokemonSummaryScreen_PrintTrainerMemo(struct Pokemon *pokemon, u8 le
     ptr = StringCopy(ptr, gOtherText_Terminator4);
 #endif
 
-    if (PokemonSummaryScreen_CheckOT(pokemon) == TRUE)
+    if (PokemonSummaryScreen_CheckOT(mon) == TRUE)
     {
-        locationMet = GetMonData(pokemon, MON_DATA_MET_LOCATION);
+        locationMet = GetMonData(mon, MON_DATA_MET_LOCATION);
 
-        if (GetMonData(pokemon, MON_DATA_MET_LEVEL) == 0)
+        if (GetMonData(mon, MON_DATA_MET_LEVEL) == 0)
         {
             ptr = PokemonSummaryScreen_CopyPokemonLevel(ptr, 5);
             *ptr = CHAR_NEWLINE;
@@ -3673,7 +3674,7 @@ static void PokemonSummaryScreen_PrintTrainerMemo(struct Pokemon *pokemon, u8 le
         }
         else
         {
-            u8 levelMet = GetMonData(pokemon, MON_DATA_MET_LEVEL);
+            u8 levelMet = GetMonData(mon, MON_DATA_MET_LEVEL);
 
             ptr = PokemonSummaryScreen_CopyPokemonLevel(ptr, levelMet);
             *ptr = CHAR_NEWLINE;
@@ -3686,7 +3687,7 @@ static void PokemonSummaryScreen_PrintTrainerMemo(struct Pokemon *pokemon, u8 le
     }
     else
     {
-        gameMet = GetMonData(pokemon, MON_DATA_MET_GAME);
+        gameMet = GetMonData(mon, MON_DATA_MET_GAME);
 
         if (!(gameMet == VERSION_RUBY || gameMet == VERSION_SAPPHIRE || gameMet == VERSION_EMERALD))
         {
@@ -3697,10 +3698,10 @@ static void PokemonSummaryScreen_PrintTrainerMemo(struct Pokemon *pokemon, u8 le
         }
         else
         {
-            locationMet = GetMonData(pokemon, MON_DATA_MET_LOCATION);
+            locationMet = GetMonData(mon, MON_DATA_MET_LOCATION);
             if (locationMet == 0xFF)
             {
-                u8 levelMet = GetMonData(pokemon, MON_DATA_MET_LEVEL);
+                u8 levelMet = GetMonData(mon, MON_DATA_MET_LEVEL);
 
                 ptr = PokemonSummaryScreen_CopyPokemonLevel(ptr, levelMet);
                 *ptr = CHAR_NEWLINE;
@@ -3717,7 +3718,7 @@ static void PokemonSummaryScreen_PrintTrainerMemo(struct Pokemon *pokemon, u8 le
             }
             else
             {
-                u8 levelMet = GetMonData(pokemon, MON_DATA_MET_LEVEL);
+                u8 levelMet = GetMonData(mon, MON_DATA_MET_LEVEL);
 
                 ptr = PokemonSummaryScreen_CopyPokemonLevel(ptr, levelMet);
                 *ptr = CHAR_NEWLINE;
@@ -3733,13 +3734,13 @@ static void PokemonSummaryScreen_PrintTrainerMemo(struct Pokemon *pokemon, u8 le
     MenuPrint(gStringVar4, left++, top++);
 }
 
-static void sub_80A0958(struct Pokemon *pokemon)
+static void sub_80A0958(struct Pokemon *mon)
 {
     u16 species;
     u8 *buffer;
     u8 level;
 
-    species = GetMonData(pokemon, MON_DATA_SPECIES);
+    species = GetMonData(mon, MON_DATA_SPECIES);
 
     buffer = gStringVar1;
     buffer = sub_80A1E58(buffer, 13);
@@ -3758,7 +3759,7 @@ static void sub_80A0958(struct Pokemon *pokemon)
     MenuPrint(gStringVar1, 0, 14);
     MenuZeroFillWindowRect(3, 16, 9, 17);
 
-    level = GetMonData(pokemon, MON_DATA_LEVEL);
+    level = GetMonData(mon, MON_DATA_LEVEL);
 
     buffer = sub_80A1E58(gStringVar1, 13);
     buffer[0] = 0x34;
@@ -3771,19 +3772,19 @@ static void sub_80A0958(struct Pokemon *pokemon)
     buffer[3] = EOS;
 
     MenuPrint(gStringVar1, 3, 16);
-    sub_80A0A2C(pokemon, 7, 16);
+    sub_80A0A2C(mon, 7, 16);
 }
 
-static void sub_80A0A2C(struct Pokemon *pokemon, u8 left, u8 top)
+static void sub_80A0A2C(struct Pokemon *mon, u8 left, u8 top)
 {
     const u8 *genderSymbol;
     u8 var1;
     u8 bottom;
-    u16 species = GetMonData(pokemon, MON_DATA_SPECIES2);
+    u16 species = GetMonData(mon, MON_DATA_SPECIES2);
 
     if (species != SPECIES_NIDORAN_M && species != SPECIES_NIDORAN_F)
     {
-        u8 gender = GetMonGender(pokemon);
+        u8 gender = GetMonGender(mon);
         switch (gender)
         {
         default:
@@ -3804,32 +3805,32 @@ static void sub_80A0A2C(struct Pokemon *pokemon, u8 left, u8 top)
     }
 }
 
-u8 GetNumRibbons(struct Pokemon *pokemon)
+u8 GetNumRibbons(struct Pokemon *mon)
 {
-    u8 numRibbons = GetMonData(pokemon, MON_DATA_COOL_RIBBON);
-    numRibbons += GetMonData(pokemon, MON_DATA_BEAUTY_RIBBON);
-    numRibbons += GetMonData(pokemon, MON_DATA_CUTE_RIBBON);
-    numRibbons += GetMonData(pokemon, MON_DATA_SMART_RIBBON);
-    numRibbons += GetMonData(pokemon, MON_DATA_TOUGH_RIBBON);
-    numRibbons += GetMonData(pokemon, MON_DATA_CHAMPION_RIBBON);
-    numRibbons += GetMonData(pokemon, MON_DATA_WINNING_RIBBON);
-    numRibbons += GetMonData(pokemon, MON_DATA_VICTORY_RIBBON);
-    numRibbons += GetMonData(pokemon, MON_DATA_ARTIST_RIBBON);
-    numRibbons += GetMonData(pokemon, MON_DATA_EFFORT_RIBBON);
-    numRibbons += GetMonData(pokemon, MON_DATA_GIFT_RIBBON_1);
-    numRibbons += GetMonData(pokemon, MON_DATA_GIFT_RIBBON_2);
-    numRibbons += GetMonData(pokemon, MON_DATA_GIFT_RIBBON_3);
-    numRibbons += GetMonData(pokemon, MON_DATA_GIFT_RIBBON_4);
-    numRibbons += GetMonData(pokemon, MON_DATA_GIFT_RIBBON_5);
-    numRibbons += GetMonData(pokemon, MON_DATA_GIFT_RIBBON_6);
-    numRibbons += GetMonData(pokemon, MON_DATA_GIFT_RIBBON_7);
+    u8 numRibbons = GetMonData(mon, MON_DATA_COOL_RIBBON);
+    numRibbons += GetMonData(mon, MON_DATA_BEAUTY_RIBBON);
+    numRibbons += GetMonData(mon, MON_DATA_CUTE_RIBBON);
+    numRibbons += GetMonData(mon, MON_DATA_SMART_RIBBON);
+    numRibbons += GetMonData(mon, MON_DATA_TOUGH_RIBBON);
+    numRibbons += GetMonData(mon, MON_DATA_CHAMPION_RIBBON);
+    numRibbons += GetMonData(mon, MON_DATA_WINNING_RIBBON);
+    numRibbons += GetMonData(mon, MON_DATA_VICTORY_RIBBON);
+    numRibbons += GetMonData(mon, MON_DATA_ARTIST_RIBBON);
+    numRibbons += GetMonData(mon, MON_DATA_EFFORT_RIBBON);
+    numRibbons += GetMonData(mon, MON_DATA_GIFT_RIBBON_1);
+    numRibbons += GetMonData(mon, MON_DATA_GIFT_RIBBON_2);
+    numRibbons += GetMonData(mon, MON_DATA_GIFT_RIBBON_3);
+    numRibbons += GetMonData(mon, MON_DATA_GIFT_RIBBON_4);
+    numRibbons += GetMonData(mon, MON_DATA_GIFT_RIBBON_5);
+    numRibbons += GetMonData(mon, MON_DATA_GIFT_RIBBON_6);
+    numRibbons += GetMonData(mon, MON_DATA_GIFT_RIBBON_7);
 
     return numRibbons;
 }
 
-static void PrintNumRibbons(struct Pokemon *pokemon)
+static void PrintNumRibbons(struct Pokemon *mon)
 {
-    u8 numRibbons = GetNumRibbons(pokemon);
+    u8 numRibbons = GetNumRibbons(mon);
 
     if (numRibbons == 0)
     {
@@ -3875,7 +3876,7 @@ static void PrintHeldItemName(u16 itemId, u8 left, u8 top)
     MenuPrint(sUnknown_083C15B4, left, top);
 }
 
-static void DrawExperienceProgressBar(struct Pokemon *pokemon, u8 left, u8 top)
+static void DrawExperienceProgressBar(struct Pokemon *mon, u8 left, u8 top)
 {
     u32 curExperience;
     u8 level;
@@ -3885,9 +3886,9 @@ static void DrawExperienceProgressBar(struct Pokemon *pokemon, u8 left, u8 top)
     u32 expToNextLevel = 0;
     s64 numExpProgressBarTicks = 0;
 
-    curExperience = GetMonData(pokemon, MON_DATA_EXP);
-    level = GetMonData(pokemon, MON_DATA_LEVEL);
-    species = GetMonData(pokemon, MON_DATA_SPECIES);
+    curExperience = GetMonData(mon, MON_DATA_EXP);
+    level = GetMonData(mon, MON_DATA_LEVEL);
+    species = GetMonData(mon, MON_DATA_SPECIES);
 
     // The experience progress bar is shown as empty when the Pokemon is already level 100.
     if (level < 100)
@@ -3989,12 +3990,12 @@ static void PrintSummaryWindowHeaderText(void)
 
 // If the given pokemon previously had the pokerus virus, a small
 // dot will be drawn in between the pokeball and the mon's level.
-static void DrawPokerusSurvivorDot(struct Pokemon *pokemon)
+static void DrawPokerusSurvivorDot(struct Pokemon *mon)
 {
     u16 *vram1 = (u16 *)(VRAM + 0xE444);
     u16 *vram2 = (u16 *)(VRAM + 0xEC44);
 
-    if (!CheckPartyPokerus(pokemon, 0) && CheckPartyHasHadPokerus(pokemon, 0))
+    if (!CheckPartyPokerus(mon, 0) && CheckPartyHasHadPokerus(mon, 0))
     {
         *vram1 = 0x2C;
         *vram2 = 0x2C;
@@ -5293,12 +5294,12 @@ _080A1804: .4byte gUnknown_08E94550\n\
 }
 #endif // NONMATCHING
 
-u8 sub_80A1808(struct Pokemon *pokemon)
+u8 sub_80A1808(struct Pokemon *mon)
 {
     u16 species;
     u8 spriteId;
 
-    species = GetMonData(pokemon, MON_DATA_SPECIES2);
+    species = GetMonData(mon, MON_DATA_SPECIES2);
     spriteId = CreateSprite(&gUnknown_02024E8C, 40, 64, 5);
 
     FreeSpriteOamMatrix(&gSprites[spriteId]);
