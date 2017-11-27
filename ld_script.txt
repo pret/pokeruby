@@ -568,7 +568,7 @@ SECTIONS {
         src/scene/evolution_scene.o(.rodata);
         data/roulette.o(.rodata);
         data/pokedex_cry_screen.o(.rodata);
-        data/landmark.o(.rodata);
+        src/field/landmark.o(.rodata);
         src/battle/battle_transition.o(.rodata);
         src/battle/battle_controller_linkpartner.o(.rodata);
         src/battle/battle_message.o(.rodata);
