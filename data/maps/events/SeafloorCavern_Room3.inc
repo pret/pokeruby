@@ -11,9 +11,9 @@ SeafloorCavern_Room3_MapObjects:: @ 838D268
 	object_event 10, 242, 0, 10, 0, 5, 0, 3, 8, 17, 0, 1, 0, 3, 0, SeafloorCavern_Room3_EventScript_15DAA8, 946, 0, 0
 
 SeafloorCavern_Room3_MapWarps:: @ 838D358
-	warp_def 8, 1, 3, 1, SeafloorCavern_Room8
-	warp_def 10, 13, 3, 1, SeafloorCavern_Room7
-	warp_def 4, 15, 3, 1, SeafloorCavern_Room6
+	warp_def 8, 1, 3, 1, MAP_SEAFLOOR_CAVERN_ROOM8
+	warp_def 10, 13, 3, 1, MAP_SEAFLOOR_CAVERN_ROOM7
+	warp_def 4, 15, 3, 1, MAP_SEAFLOOR_CAVERN_ROOM6
 
 SeafloorCavern_Room3_MapEvents:: @ 838D370
 	map_events SeafloorCavern_Room3_MapObjects, SeafloorCavern_Room3_MapWarps, 0x0, 0x0

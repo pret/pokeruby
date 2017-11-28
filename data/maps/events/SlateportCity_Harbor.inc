@@ -9,10 +9,10 @@ SlateportCity_Harbor_MapObjects:: @ 8387F30
 	object_event 8, MAP_OBJ_GFX_SUBMARINE_SHADOW, 0, 7, 0, 9, 0, 1, 10, 0, 0, 0, 0, 0, 0, 0x0, 848, 0, 0
 
 SlateportCity_Harbor_MapWarps:: @ 8387FF0
-	warp_def 11, 14, 0, 8, SlateportCity
-	warp_def 12, 14, 0, 8, SlateportCity
-	warp_def 19, 15, 0, 9, SlateportCity
-	warp_def 20, 15, 0, 9, SlateportCity
+	warp_def 11, 14, 0, 8, MAP_SLATEPORT_CITY
+	warp_def 12, 14, 0, 8, MAP_SLATEPORT_CITY
+	warp_def 19, 15, 0, 9, MAP_SLATEPORT_CITY
+	warp_def 20, 15, 0, 9, MAP_SLATEPORT_CITY
 
 SlateportCity_Harbor_MapCoordEvents:: @ 8388010
 	coord_event 8, 11, 3, 0, 0x40a0, 1, 0, SlateportCity_Harbor_EventScript_155F9B

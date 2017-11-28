@@ -9,7 +9,7 @@ SootopolisCity_Gym_B1F_MapObjects:: @ 838AD64
 	object_event 8, MAP_OBJ_GFX_BEAUTY, 0, 12, 0, 7, 0, 3, 9, 0, 0, 1, 0, 3, 0, SootopolisCity_Gym_B1F_EventScript_15B14B, 0, 0, 0
 
 SootopolisCity_Gym_B1F_MapWarps:: @ 838AE24
-	warp_def 11, 22, 3, 2, SootopolisCity_Gym_1F
+	warp_def 11, 22, 3, 2, MAP_SOOTOPOLIS_CITY_GYM_1F
 
 SootopolisCity_Gym_B1F_MapEvents:: @ 838AE2C
 	map_events SootopolisCity_Gym_B1F_MapObjects, SootopolisCity_Gym_B1F_MapWarps, 0x0, 0x0

@@ -266,7 +266,7 @@ Route110_TrickHouseEntrance_EventScript_16124D:: @ 816124D
 	call_if 1, Route110_TrickHouseEntrance_EventScript_16130C
 	closemessage
 	setvar 0x40a6, 1
-	warp Route110_TrickHouseEntrance, 255, 6, 2
+	warp MAP_ROUTE110_TRICK_HOUSE_ENTRANCE, 255, 6, 2
 	waitstate
 	releaseall
 	end
@@ -524,49 +524,49 @@ Route110_TrickHouseEntrance_Movement_16165E:: @ 816165E
 	step_end
 
 Route110_TrickHouseEntrance_EventScript_161660:: @ 8161660
-	warp Route110_TrickHousePuzzle1, 255, 0, 21
+	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE1, 255, 0, 21
 	waitstate
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_16166B:: @ 816166B
-	warp Route110_TrickHousePuzzle2, 255, 0, 21
+	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE2, 255, 0, 21
 	waitstate
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_161676:: @ 8161676
-	warp Route110_TrickHousePuzzle3, 255, 0, 21
+	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE3, 255, 0, 21
 	waitstate
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_161681:: @ 8161681
-	warp Route110_TrickHousePuzzle4, 255, 0, 21
+	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE4, 255, 0, 21
 	waitstate
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_16168C:: @ 816168C
-	warp Route110_TrickHousePuzzle5, 255, 0, 21
+	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE5, 255, 0, 21
 	waitstate
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_161697:: @ 8161697
-	warp Route110_TrickHousePuzzle6, 255, 0, 21
+	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE6, 255, 0, 21
 	waitstate
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_1616A2:: @ 81616A2
-	warp Route110_TrickHousePuzzle7, 255, 0, 21
+	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE7, 255, 0, 21
 	waitstate
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_1616AD:: @ 81616AD
-	warp Route110_TrickHousePuzzle8, 255, 0, 21
+	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE8, 255, 0, 21
 	waitstate
 	releaseall
 	end

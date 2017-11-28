@@ -7,9 +7,9 @@ LittlerootTown_MapObjects:: @ 83808FC
 	object_event 6, MAP_OBJ_GFX_TRUCK, 0, 11, 0, 10, 0, 4, 10, 0, 0, 0, 0, 0, 0, 0x0, 762, 0, 0
 
 LittlerootTown_MapWarps:: @ 838098C
-	warp_def 14, 8, 0, 1, LittlerootTown_MaysHouse_1F
-	warp_def 5, 8, 0, 1, LittlerootTown_BrendansHouse_1F
-	warp_def 7, 16, 0, 0, LittlerootTown_ProfessorBirchsLab
+	warp_def 14, 8, 0, 1, MAP_LITTLEROOT_TOWN_MAYS_HOUSE_1F
+	warp_def 5, 8, 0, 1, MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F
+	warp_def 7, 16, 0, 0, MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB
 
 LittlerootTown_MapCoordEvents:: @ 83809A4
 	coord_event 10, 1, 3, 0, 0x4050, 0, 0, LittlerootTown_EventScript_14D739

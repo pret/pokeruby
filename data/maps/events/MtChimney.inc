@@ -29,10 +29,10 @@ MtChimney_MapObjects:: @ 838C330
 	object_event 28, MAP_OBJ_GFX_BEAUTY, 0, 27, 0, 17, 0, 3, 16, 17, 0, 1, 0, 3, 0, MtChimney_EventScript_15D24F, 877, 0, 0
 
 MtChimney_MapWarps:: @ 838C5D0
-	warp_def 17, 36, 0, 0, MtChimney_CableCarStation
-	warp_def 18, 36, 0, 1, MtChimney_CableCarStation
-	warp_def 20, 41, 3, 2, JaggedPass
-	warp_def 21, 41, 3, 3, JaggedPass
+	warp_def 17, 36, 0, 0, MAP_MT_CHIMNEY_CABLE_CAR_STATION
+	warp_def 18, 36, 0, 1, MAP_MT_CHIMNEY_CABLE_CAR_STATION
+	warp_def 20, 41, 3, 2, MAP_JAGGED_PASS
+	warp_def 21, 41, 3, 3, MAP_JAGGED_PASS
 
 MtChimney_MapBGEvents:: @ 838C5F0
 	bg_event 14, 6, 0, 0, 0, MtChimney_EventScript_15D17D

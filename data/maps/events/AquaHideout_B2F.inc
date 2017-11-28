@@ -6,16 +6,16 @@ AquaHideout_B2F_MapObjects:: @ 838CF1C
 	object_event 5, 242, 0, 10, 0, 6, 0, 3, 7, 17, 0, 1, 0, 4, 0, AquaHideout_B2F_EventScript_15D987, 924, 0, 0
 
 AquaHideout_B2F_MapWarps:: @ 838CF94
-	warp_def 18, 1, 3, 1, AquaHideout_B1F
-	warp_def 12, 1, 3, 2, AquaHideout_B1F
-	warp_def 3, 3, 3, 3, AquaHideout_B1F
-	warp_def 31, 8, 3, 5, AquaHideout_B2F
-	warp_def 8, 8, 3, 8, AquaHideout_B2F
-	warp_def 5, 8, 3, 3, AquaHideout_B2F
-	warp_def 18, 13, 3, 7, AquaHideout_B2F
-	warp_def 12, 13, 3, 6, AquaHideout_B2F
-	warp_def 31, 17, 3, 4, AquaHideout_B2F
-	warp_def 32, 20, 3, 4, AquaHideout_B1F
+	warp_def 18, 1, 3, 1, MAP_AQUA_HIDEOUT_B1F
+	warp_def 12, 1, 3, 2, MAP_AQUA_HIDEOUT_B1F
+	warp_def 3, 3, 3, 3, MAP_AQUA_HIDEOUT_B1F
+	warp_def 31, 8, 3, 5, MAP_AQUA_HIDEOUT_B2F
+	warp_def 8, 8, 3, 8, MAP_AQUA_HIDEOUT_B2F
+	warp_def 5, 8, 3, 3, MAP_AQUA_HIDEOUT_B2F
+	warp_def 18, 13, 3, 7, MAP_AQUA_HIDEOUT_B2F
+	warp_def 12, 13, 3, 6, MAP_AQUA_HIDEOUT_B2F
+	warp_def 31, 17, 3, 4, MAP_AQUA_HIDEOUT_B2F
+	warp_def 32, 20, 3, 4, MAP_AQUA_HIDEOUT_B1F
 
 AquaHideout_B2F_MapCoordEvents:: @ 838CFE4
 	coord_event 28, 17, 3, 0, 0x4001, 0, 0, AquaHideout_B2F_EventScript_15D8BD

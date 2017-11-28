@@ -38,8 +38,8 @@ Route119_MapObjects:: @ 8383914
 	object_event 37, MAP_OBJ_GFX_FISHERMAN, 0, 13, 0, 104, 0, 3, 10, 17, 0, 1, 0, 0, 0, Route119_EventScript_1515AE, 0, 0, 0
 
 Route119_MapWarps:: @ 8383C8C
-	warp_def 6, 32, 0, 0, Route119_WeatherInstitute_1F
-	warp_def 33, 109, 0, 0, Route119_House
+	warp_def 6, 32, 0, 0, MAP_ROUTE119_WEATHER_INSTITUTE_1F
+	warp_def 33, 109, 0, 0, MAP_ROUTE119_HOUSE
 
 Route119_MapCoordEvents:: @ 8383C9C
 	coord_event 25, 31, 0, 0, 0x4072, 0, 0, Route119_EventScript_1511C5

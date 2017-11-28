@@ -4,7 +4,7 @@ AbandonedShip_HiddenFloorCorridors_MapScripts:: @ 815EB46
 	.byte 0
 
 AbandonedShip_HiddenFloorCorridors_MapScript1_15EB51:: @ 815EB51
-	setdivewarp AbandonedShip_Underwater1, 255, 5, 4
+	setdivewarp MAP_ABANDONED_SHIP_UNDERWATER1, 255, 5, 4
 	end
 
 AbandonedShip_HiddenFloorCorridors_MapScript1_15EB5A:: @ 815EB5A

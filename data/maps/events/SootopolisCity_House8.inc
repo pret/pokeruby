@@ -3,8 +3,8 @@ SootopolisCity_House8_MapObjects:: @ 838B1D8
 	object_event 2, MAP_OBJ_GFX_HIKER, 0, 5, 0, 4, 0, 3, 9, 0, 0, 0, 0, 0, 0, SootopolisCity_House8_EventScript_15B401, 0, 0, 0
 
 SootopolisCity_House8_MapWarps:: @ 838B208
-	warp_def 3, 6, 0, 11, SootopolisCity
-	warp_def 4, 6, 0, 11, SootopolisCity
+	warp_def 3, 6, 0, 11, MAP_SOOTOPOLIS_CITY
+	warp_def 4, 6, 0, 11, MAP_SOOTOPOLIS_CITY
 
 SootopolisCity_House8_MapBGEvents:: @ 838B218
 	bg_event 5, 1, 0, 0, 0, SootopolisCity_House8_EventScript_15B523

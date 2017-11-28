@@ -4,8 +4,8 @@ LavaridgeTown_Mart_MapObjects:: @ 83864E8
 	object_event 3, MAP_OBJ_GFX_OLD_WOMAN_2, 0, 9, 0, 5, 0, 3, 10, 0, 0, 0, 0, 0, 0, LavaridgeTown_Mart_EventScript_153903, 0, 0, 0
 
 LavaridgeTown_Mart_MapWarps:: @ 8386530
-	warp_def 3, 7, 0, 2, LavaridgeTown
-	warp_def 4, 7, 0, 2, LavaridgeTown
+	warp_def 3, 7, 0, 2, MAP_LAVARIDGE_TOWN
+	warp_def 4, 7, 0, 2, MAP_LAVARIDGE_TOWN
 
 LavaridgeTown_Mart_MapEvents:: @ 8386540
 	map_events LavaridgeTown_Mart_MapObjects, LavaridgeTown_Mart_MapWarps, 0x0, 0x0

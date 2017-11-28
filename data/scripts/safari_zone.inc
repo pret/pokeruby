@@ -1,13 +1,13 @@
 gUnknown_081C340A:: @ 81C340A
 	setvar 0x40a4, 1
 	special ExitSafariMode
-	setwarp Route121_SafariZoneEntrance, 255, 2, 5
+	setwarp MAP_ROUTE121_SAFARI_ZONE_ENTRANCE, 255, 2, 5
 	end
 
 EventScript_1C341B: @ 81C341B
 	setvar 0x40a4, 1
 	special ExitSafariMode
-	warp Route121_SafariZoneEntrance, 255, 2, 5
+	warp MAP_ROUTE121_SAFARI_ZONE_ENTRANCE, 255, 2, 5
 	waitstate
 	end
 

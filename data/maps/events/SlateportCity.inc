@@ -32,17 +32,17 @@ SlateportCity_MapObjects:: @ 837F7AC
 	object_event 31, 241, 0, 20, 0, 26, 0, 3, 10, 17, 0, 0, 0, 0, 0, SlateportCity_EventScript_14BDDB, 882, 0, 0
 
 SlateportCity_MapWarps:: @ 837FA94
-	warp_def 19, 19, 0, 0, SlateportCity_PokemonCenter_1F
-	warp_def 13, 26, 0, 0, SlateportCity_Mart
-	warp_def 26, 38, 0, 0, SlateportCity_SternsShipyard_1F
-	warp_def 10, 12, 0, 0, SlateportCity_ContestLobby
-	warp_def 4, 26, 0, 0, SlateportCity_PokemonFanClub
-	warp_def 30, 26, 0, 0, SlateportCity_OceanicMuseum_1F
-	warp_def 5, 19, 0, 0, SlateportCity_House1
-	warp_def 31, 26, 0, 1, SlateportCity_OceanicMuseum_1F
-	warp_def 28, 12, 0, 0, SlateportCity_Harbor
-	warp_def 40, 7, 0, 2, SlateportCity_Harbor
-	warp_def 21, 44, 0, 0, SlateportCity_House2
+	warp_def 19, 19, 0, 0, MAP_SLATEPORT_CITY_POKEMON_CENTER_1F
+	warp_def 13, 26, 0, 0, MAP_SLATEPORT_CITY_MART
+	warp_def 26, 38, 0, 0, MAP_SLATEPORT_CITY_STERNS_SHIPYARD_1F
+	warp_def 10, 12, 0, 0, MAP_SLATEPORT_CITY_CONTEST_LOBBY
+	warp_def 4, 26, 0, 0, MAP_SLATEPORT_CITY_POKEMON_FAN_CLUB
+	warp_def 30, 26, 0, 0, MAP_SLATEPORT_CITY_OCEANIC_MUSEUM_1F
+	warp_def 5, 19, 0, 0, MAP_SLATEPORT_CITY_HOUSE1
+	warp_def 31, 26, 0, 1, MAP_SLATEPORT_CITY_OCEANIC_MUSEUM_1F
+	warp_def 28, 12, 0, 0, MAP_SLATEPORT_CITY_HARBOR
+	warp_def 40, 7, 0, 2, MAP_SLATEPORT_CITY_HARBOR
+	warp_def 21, 44, 0, 0, MAP_SLATEPORT_CITY_HOUSE2
 
 SlateportCity_MapBGEvents:: @ 837FAEC
 	bg_event 8, 19, 0, 0, 0, SlateportCity_EventScript_14BCAF

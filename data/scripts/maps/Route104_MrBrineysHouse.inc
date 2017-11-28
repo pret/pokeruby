@@ -83,7 +83,7 @@ Route104_MrBrineysHouse_EventScript_15BDAB:: @ 815BDAB
 	clearflag 738
 	setflag 739
 	setflag 881
-	warp Route104, 255, 13, 51
+	warp MAP_ROUTE104, 255, 13, 51
 	waitstate
 	releaseall
 	end

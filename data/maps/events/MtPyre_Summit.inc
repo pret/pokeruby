@@ -7,9 +7,9 @@ MtPyre_Summit_MapObjects:: @ 838CBD8
 	object_event 6, 241, 0, 21, 0, 11, 0, 3, 10, 0, 0, 1, 0, 3, 0, MtPyre_Summit_EventScript_1B2DD7, 917, 0, 0
 
 MtPyre_Summit_MapWarps:: @ 838CC68
-	warp_def 22, 31, 3, 1, MtPyre_Exterior
-	warp_def 23, 31, 3, 1, MtPyre_Exterior
-	warp_def 24, 31, 3, 1, MtPyre_Exterior
+	warp_def 22, 31, 3, 1, MAP_MT_PYRE_EXTERIOR
+	warp_def 23, 31, 3, 1, MAP_MT_PYRE_EXTERIOR
+	warp_def 24, 31, 3, 1, MAP_MT_PYRE_EXTERIOR
 
 MtPyre_Summit_MapCoordEvents:: @ 838CC80
 	coord_event 22, 7, 3, 0, 0x40b9, 0, 0, MtPyre_Summit_EventScript_15D4BD

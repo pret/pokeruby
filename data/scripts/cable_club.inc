@@ -240,14 +240,14 @@ OldaleTown_PokemonCenter_2F_EventScript_1A3F5E:: @ 81A3F5E
 	compare 0x8004, 5
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A3FCD
 	special SetCableClubWarp
-	warp SingleBattleColosseum, 255, 6, 8
+	warp MAP_SINGLE_BATTLE_COLOSSEUM, 255, 6, 8
 	special DoCableClubWarp
 	waitstate
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_1A3FCD:: @ 81A3FCD
 	special SetCableClubWarp
-	warp DoubleBattleColosseum, 255, 5, 8
+	warp MAP_DOUBLE_BATTLE_COLOSSEUM, 255, 5, 8
 	special DoCableClubWarp
 	waitstate
 	end

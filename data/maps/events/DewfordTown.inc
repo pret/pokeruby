@@ -6,11 +6,11 @@ DewfordTown_MapObjects:: @ 8380B88
 	object_event 5, MAP_OBJ_GFX_BOY_1, 0, 1, 0, 6, 0, 3, 1, 0, 0, 0, 0, 0, 0, DewfordTown_EventScript_14E413, 0, 0, 0
 
 DewfordTown_MapWarps:: @ 8380C00
-	warp_def 3, 3, 0, 0, DewfordTown_Hall
-	warp_def 2, 10, 0, 0, DewfordTown_PokemonCenter_1F
-	warp_def 8, 17, 0, 0, DewfordTown_Gym
-	warp_def 17, 14, 0, 0, DewfordTown_House1
-	warp_def 8, 8, 0, 0, DewfordTown_House2
+	warp_def 3, 3, 0, 0, MAP_DEWFORD_TOWN_HALL
+	warp_def 2, 10, 0, 0, MAP_DEWFORD_TOWN_POKEMON_CENTER_1F
+	warp_def 8, 17, 0, 0, MAP_DEWFORD_TOWN_GYM
+	warp_def 17, 14, 0, 0, MAP_DEWFORD_TOWN_HOUSE1
+	warp_def 8, 8, 0, 0, MAP_DEWFORD_TOWN_HOUSE2
 
 DewfordTown_MapBGEvents:: @ 8380C28
 	bg_event 10, 10, 0, 0, 0, DewfordTown_EventScript_14E0AB

@@ -35,7 +35,7 @@ BattleTower_BattleRoom_EventScript_1608FA:: @ 81608FA
 	special sub_8135668
 	setvar 0x8004, 3
 	special sub_810FF60
-	warp BattleTower_Lobby, 255, 6, 6
+	warp MAP_BATTLE_TOWER_LOBBY, 255, 6, 6
 	waitstate
 
 BattleTower_BattleRoom_EventScript_160961:: @ 8160961
@@ -101,7 +101,7 @@ BattleTower_BattleRoom_EventScript_160A56:: @ 8160A56
 	special sub_8135668
 	setvar 0x8004, 3
 	special sub_810FF60
-	warp BattleTower_Lobby, 255, 6, 6
+	warp MAP_BATTLE_TOWER_LOBBY, 255, 6, 6
 	waitstate
 
 BattleTower_BattleRoom_EventScript_160A94:: @ 8160A94

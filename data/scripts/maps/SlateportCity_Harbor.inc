@@ -3,7 +3,7 @@ SlateportCity_Harbor_MapScripts:: @ 8155F5D
 	.byte 0
 
 SlateportCity_Harbor_MapScript1_155F63:: @ 8155F63
-	setescapewarp SlateportCity, 255, 28, 13
+	setescapewarp MAP_SLATEPORT_CITY, 255, 28, 13
 	setvar 0x4001, 0
 	compare 0x40a0, 1
 	call_if 1, SlateportCity_Harbor_EventScript_155F89
@@ -195,7 +195,7 @@ SlateportCity_Harbor_EventScript_15613F:: @ 815613F
 	goto_if_eq SlateportCity_Harbor_EventScript_15618A
 	setvar 0x40b4, 1
 	call SlateportCity_Harbor_EventScript_156196
-	warp SSTidalCorridor, 255, 1, 10
+	warp MAP_SS_TIDAL_CORRIDOR, 255, 1, 10
 	waitstate
 	release
 	end
@@ -205,7 +205,7 @@ SlateportCity_Harbor_EventScript_156167:: @ 8156167
 	compare RESULT, 0
 	goto_if_eq SlateportCity_Harbor_EventScript_15618A
 	call SlateportCity_Harbor_EventScript_156196
-	warp BattleTower_Outside, 255, 19, 23
+	warp MAP_BATTLE_TOWER_OUTSIDE, 255, 19, 23
 	waitstate
 	release
 	end

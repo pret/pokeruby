@@ -21,7 +21,7 @@ Route109_MapObjects:: @ 8381AFC
 	object_event 20, MAP_OBJ_GFX_ZIGZAGOON, 0, 32, 0, 6, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route109_EventScript_14F788, 0, 0, 0
 
 Route109_MapWarps:: @ 8381CDC
-	warp_def 12, 5, 0, 0, Route109_SeashoreHouse
+	warp_def 12, 5, 0, 0, MAP_ROUTE109_SEASHORE_HOUSE
 
 Route109_MapBGEvents:: @ 8381CE4
 	bg_event 15, 5, 0, 0, 0, Route109_EventScript_14F79B

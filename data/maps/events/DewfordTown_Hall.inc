@@ -10,8 +10,8 @@ DewfordTown_Hall_MapObjects:: @ 8386088
 	object_event 9, MAP_OBJ_GFX_MANIAC, 0, 8, 0, 6, 0, 3, 5, 1, 0, 0, 0, 0, 0, DewfordTown_Hall_EventScript_15359D, 940, 0, 0
 
 DewfordTown_Hall_MapWarps:: @ 8386160
-	warp_def 5, 8, 0, 0, DewfordTown
-	warp_def 6, 8, 0, 0, DewfordTown
+	warp_def 5, 8, 0, 0, MAP_DEWFORD_TOWN
+	warp_def 6, 8, 0, 0, MAP_DEWFORD_TOWN
 
 DewfordTown_Hall_MapBGEvents:: @ 8386170
 	bg_event 0, 1, 3, 0, 0, DewfordTown_Hall_EventScript_153353

@@ -12,18 +12,18 @@ SootopolisCity_MapObjects:: @ 8380608
 	object_event 11, MAP_OBJ_GFX_WOMAN_7, 0, 49, 0, 34, 0, 3, 3, 17, 0, 0, 0, 0, 0, SootopolisCity_EventScript_14D2A6, 854, 0, 0
 
 SootopolisCity_MapWarps:: @ 8380710
-	warp_def 43, 31, 0, 0, SootopolisCity_PokemonCenter_1F
-	warp_def 17, 29, 0, 0, SootopolisCity_Mart
-	warp_def 31, 32, 0, 0, SootopolisCity_Gym_1F
-	warp_def 31, 16, 3, 0, CaveOfOrigin_Entrance
-	warp_def 9, 6, 0, 0, SootopolisCity_House1
-	warp_def 45, 6, 0, 0, SootopolisCity_House2
-	warp_def 9, 17, 0, 0, SootopolisCity_House3
-	warp_def 44, 17, 0, 0, SootopolisCity_House4
-	warp_def 9, 26, 0, 0, SootopolisCity_House5
-	warp_def 53, 28, 0, 0, SootopolisCity_House6
-	warp_def 8, 35, 0, 0, SootopolisCity_House7
-	warp_def 48, 25, 0, 0, SootopolisCity_House8
+	warp_def 43, 31, 0, 0, MAP_SOOTOPOLIS_CITY_POKEMON_CENTER_1F
+	warp_def 17, 29, 0, 0, MAP_SOOTOPOLIS_CITY_MART
+	warp_def 31, 32, 0, 0, MAP_SOOTOPOLIS_CITY_GYM_1F
+	warp_def 31, 16, 3, 0, MAP_CAVE_OF_ORIGIN_ENTRANCE
+	warp_def 9, 6, 0, 0, MAP_SOOTOPOLIS_CITY_HOUSE1
+	warp_def 45, 6, 0, 0, MAP_SOOTOPOLIS_CITY_HOUSE2
+	warp_def 9, 17, 0, 0, MAP_SOOTOPOLIS_CITY_HOUSE3
+	warp_def 44, 17, 0, 0, MAP_SOOTOPOLIS_CITY_HOUSE4
+	warp_def 9, 26, 0, 0, MAP_SOOTOPOLIS_CITY_HOUSE5
+	warp_def 53, 28, 0, 0, MAP_SOOTOPOLIS_CITY_HOUSE6
+	warp_def 8, 35, 0, 0, MAP_SOOTOPOLIS_CITY_HOUSE7
+	warp_def 48, 25, 0, 0, MAP_SOOTOPOLIS_CITY_HOUSE8
 
 SootopolisCity_MapCoordEvents:: @ 8380770
 	coord_event 25, 6, 3, 0, 0x405e, 1, 0, SootopolisCity_EventScript_14D308

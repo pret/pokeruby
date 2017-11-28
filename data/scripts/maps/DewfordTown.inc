@@ -142,7 +142,7 @@ DewfordTown_EventScript_14E151:: @ 814E151
 	hideobject 4, 0, 11
 	setvar 0x408e, 2
 	resetobjectpriority 255, 0, 11
-	warp Route104_MrBrineysHouse, 255, 5, 4
+	warp MAP_ROUTE104_MR_BRINEYS_HOUSE, 255, 5, 4
 	copyvar 0x4096, 0x8008
 	waitstate
 	release

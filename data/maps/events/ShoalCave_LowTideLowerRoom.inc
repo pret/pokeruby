@@ -3,10 +3,10 @@ ShoalCave_LowTideLowerRoom_MapObjects:: @ 838DE3C
 	object_event 2, MAP_OBJ_GFX_BLACK_BELT, 0, 11, 0, 4, 0, 3, 2, 17, 0, 0, 0, 0, 0, ShoalCave_LowTideLowerRoom_EventScript_15E44F, 0, 0, 0
 
 ShoalCave_LowTideLowerRoom_MapWarps:: @ 838DE6C
-	warp_def 7, 2, 3, 3, ShoalCave_LowTideInnerRoom
-	warp_def 2, 6, 3, 4, ShoalCave_LowTideInnerRoom
-	warp_def 19, 11, 3, 5, ShoalCave_LowTideInnerRoom
-	warp_def 28, 11, 3, 0, ShoalCave_LowTideIceRoom
+	warp_def 7, 2, 3, 3, MAP_SHOAL_CAVE_LOW_TIDE_INNER_ROOM
+	warp_def 2, 6, 3, 4, MAP_SHOAL_CAVE_LOW_TIDE_INNER_ROOM
+	warp_def 19, 11, 3, 5, MAP_SHOAL_CAVE_LOW_TIDE_INNER_ROOM
+	warp_def 28, 11, 3, 0, MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM
 
 ShoalCave_LowTideLowerRoom_MapBGEvents:: @ 838DE8C
 	bg_event 18, 2, 3, 0, 0, ShoalCave_LowTideLowerRoom_EventScript_15E413

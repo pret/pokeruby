@@ -3,8 +3,8 @@ SouthernIsland_Interior_MapObjects:: @ 8391E60
 	object_event 2, 241, 0, 13, 0, 2, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0x0, 911, 0, 0
 
 SouthernIsland_Interior_MapWarps:: @ 8391E90
-	warp_def 13, 18, 3, 0, SouthernIsland_Exterior
-	warp_def 14, 18, 3, 1, SouthernIsland_Exterior
+	warp_def 13, 18, 3, 0, MAP_SOUTHERN_ISLAND_EXTERIOR
+	warp_def 14, 18, 3, 1, MAP_SOUTHERN_ISLAND_EXTERIOR
 
 SouthernIsland_Interior_MapBGEvents:: @ 8391EA0
 	bg_event 13, 11, 3, 1, 0, SouthernIsland_Interior_EventScript_160B9B

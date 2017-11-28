@@ -62,7 +62,7 @@ SootopolisCity_EventScript_14D159:: @ 814D159
 	return
 
 SootopolisCity_MapScript1_14D165:: @ 814D165
-	setdivewarp Underwater_SootopolisCity, 255, 9, 6
+	setdivewarp MAP_UNDERWATER_SOOTOPOLIS_CITY, 255, 9, 6
 	end
 
 SootopolisCity_EventScript_14D16E:: @ 814D16E

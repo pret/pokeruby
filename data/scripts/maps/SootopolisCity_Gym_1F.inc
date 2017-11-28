@@ -77,7 +77,7 @@ SootopolisCity_Gym_1F_EventScript_15AFE4:: @ 815AFE4
 	waitmovement 0
 	playse 43
 	delay 60
-	warphole SootopolisCity_Gym_B1F
+	warphole MAP_SOOTOPOLIS_CITY_GYM_B1F
 	waitstate
 	end
 

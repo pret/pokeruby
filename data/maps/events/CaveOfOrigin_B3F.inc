@@ -2,8 +2,8 @@ CaveOfOrigin_B3F_MapObjects:: @ 838D814
 	object_event 1, MAP_OBJ_GFX_ITEM_BALL, 0, 6, 0, 5, 0, 3, 1, 0, 0, 0, 0, 0, 0, CaveOfOrigin_B3F_EventScript_1B1A44, 1059, 0, 0
 
 CaveOfOrigin_B3F_MapWarps:: @ 838D82C
-	warp_def 7, 14, 3, 1, CaveOfOrigin_B2F
-	warp_def 12, 6, 3, 0, CaveOfOrigin_B4F
+	warp_def 7, 14, 3, 1, MAP_CAVE_OF_ORIGIN_B2F
+	warp_def 12, 6, 3, 0, MAP_CAVE_OF_ORIGIN_B4F
 
 CaveOfOrigin_B3F_MapCoordEvents:: @ 838D83C
 	coord_event 5, 11, 3, 0, 0x4001, 0, 0, CaveOfOrigin_B3F_EventScript_1A04AF

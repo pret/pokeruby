@@ -33,14 +33,14 @@ Route104_MapObjects:: @ 8381488
 	object_event 32, MAP_OBJ_GFX_BOY_2, 0, 5, 0, 26, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route104_EventScript_14EF93, 0, 0, 0
 
 Route104_MapWarps:: @ 8381788
-	warp_def 17, 50, 0, 0, Route104_MrBrineysHouse
-	warp_def 5, 18, 0, 0, Route104_PrettyPetalFlowerShop
-	warp_def 10, 30, 3, 0, PetalburgWoods
-	warp_def 11, 30, 3, 1, PetalburgWoods
-	warp_def 10, 38, 3, 2, PetalburgWoods
-	warp_def 11, 38, 3, 3, PetalburgWoods
-	warp_def 32, 42, 3, 4, PetalburgWoods
-	warp_def 33, 42, 3, 5, PetalburgWoods
+	warp_def 17, 50, 0, 0, MAP_ROUTE104_MR_BRINEYS_HOUSE
+	warp_def 5, 18, 0, 0, MAP_ROUTE104_PRETTY_PETAL_FLOWER_SHOP
+	warp_def 10, 30, 3, 0, MAP_PETALBURG_WOODS
+	warp_def 11, 30, 3, 1, MAP_PETALBURG_WOODS
+	warp_def 10, 38, 3, 2, MAP_PETALBURG_WOODS
+	warp_def 11, 38, 3, 3, MAP_PETALBURG_WOODS
+	warp_def 32, 42, 3, 4, MAP_PETALBURG_WOODS
+	warp_def 33, 42, 3, 5, MAP_PETALBURG_WOODS
 
 Route104_MapBGEvents:: @ 83817C8
 	bg_event 20, 50, 0, 0, 0, Route104_EventScript_14EF54

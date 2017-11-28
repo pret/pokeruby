@@ -17,7 +17,7 @@ Route115_MapObjects:: @ 8382F2C
 	object_event 16, MAP_OBJ_GFX_ITEM_BALL, 0, 31, 0, 56, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route115_EventScript_1B1557, 1118, 0, 0
 
 Route115_MapWarps:: @ 83830AC
-	warp_def 27, 37, 0, 1, MeteorFalls_1F_1R
+	warp_def 27, 37, 0, 1, MAP_METEOR_FALLS_1F_1R
 
 Route115_MapBGEvents:: @ 83830B4
 	bg_event 32, 6, 0, 8, 0, 72, 0, 0

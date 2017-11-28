@@ -4,7 +4,7 @@ Route112_CableCarStation_MapScripts:: @ 815C033
 	.byte 0
 
 Route112_CableCarStation_MapScript1_15C03E:: @ 815C03E
-	setescapewarp Route112, 255, 28, 28
+	setescapewarp MAP_ROUTE112, 255, 28, 28
 	compare 0x40a3, 2
 	call_if 1, Route112_CableCarStation_EventScript_15C052
 	end

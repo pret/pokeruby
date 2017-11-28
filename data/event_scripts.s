@@ -2,6 +2,7 @@
 #include "constants/game_stat.h"
 #include "constants/items.h"
 #include "constants/map_objects.h"
+#include "constants/maps.h"
 #include "constants/moves.h"
 #include "constants/opponents.h"
 #include "constants/songs.h"
@@ -4883,7 +4884,7 @@ S_FallDownHole:: @ 81C6BC5
 	waitmovement 0
 	playse 43
 	delay 60
-	warphole Undefined
+	warphole MAP_UNDEFINED
 	waitstate
 	end
 

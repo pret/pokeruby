@@ -35,7 +35,7 @@ Underwater_SeafloorCavern_EventScript_15D9C9:: @ 815D9C9
 	return
 
 Underwater_SeafloorCavern_MapScript1_15DA36:: @ 815DA36
-	setdivewarp SeafloorCavern_Entrance, 255, 10, 17
+	setdivewarp MAP_SEAFLOOR_CAVERN_ENTRANCE, 255, 10, 17
 	end
 
 Underwater_SeafloorCavern_EventScript_15DA3F:: @ 815DA3F

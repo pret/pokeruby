@@ -16,7 +16,7 @@ LittlerootTown_MaysHouse_2F_MapObjects:: @ 8385978
 	object_event 15, MAP_OBJ_GFX_PICHU_DOLL, 0, 3, 0, 4, 0, 4, 8, 17, 0, 0, 0, 0, 0, 0x0, 849, 0, 0
 
 LittlerootTown_MaysHouse_2F_MapWarps:: @ 8385AE0
-	warp_def 1, 1, 0, 2, LittlerootTown_MaysHouse_1F
+	warp_def 1, 1, 0, 2, MAP_LITTLEROOT_TOWN_MAYS_HOUSE_1F
 
 LittlerootTown_MaysHouse_2F_MapBGEvents:: @ 8385AE8
 	bg_event 5, 1, 0, 0, 0, LittlerootTown_MaysHouse_2F_EventScript_152870

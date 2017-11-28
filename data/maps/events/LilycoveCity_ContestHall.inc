@@ -33,10 +33,10 @@ LilycoveCity_ContestHall_MapObjects:: @ 8389A18
 	object_event 32, MAP_OBJ_GFX_SAILOR, 0, 23, 0, 26, 0, 3, 2, 17, 0, 0, 0, 0, 0, LilycoveCity_ContestHall_EventScript_1590B6, 0, 0, 0
 
 LilycoveCity_ContestHall_MapWarps:: @ 8389D18
-	warp_def 19, 32, 0, 2, LilycoveCity_ContestLobby
-	warp_def 30, 32, 0, 3, LilycoveCity_ContestLobby
-	warp_def 20, 32, 0, 2, LilycoveCity_ContestLobby
-	warp_def 31, 32, 0, 3, LilycoveCity_ContestLobby
+	warp_def 19, 32, 0, 2, MAP_LILYCOVE_CITY_CONTEST_LOBBY
+	warp_def 30, 32, 0, 3, MAP_LILYCOVE_CITY_CONTEST_LOBBY
+	warp_def 20, 32, 0, 2, MAP_LILYCOVE_CITY_CONTEST_LOBBY
+	warp_def 31, 32, 0, 3, MAP_LILYCOVE_CITY_CONTEST_LOBBY
 
 LilycoveCity_ContestHall_MapBGEvents:: @ 8389D38
 	bg_event 27, 16, 0, 0, 0, LilycoveCity_ContestHall_EventScript_15930C

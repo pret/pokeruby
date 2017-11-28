@@ -7,8 +7,8 @@ MauvilleCity_Gym_MapObjects:: @ 838821C
 	object_event 6, MAP_OBJ_GFX_MAN_2, 0, 7, 0, 20, 0, 3, 9, 0, 0, 0, 0, 0, 0, MauvilleCity_Gym_EventScript_156742, 0, 0, 0
 
 MauvilleCity_Gym_MapWarps:: @ 83882AC
-	warp_def 4, 20, 0, 0, MauvilleCity
-	warp_def 5, 20, 0, 0, MauvilleCity
+	warp_def 4, 20, 0, 0, MAP_MAUVILLE_CITY
+	warp_def 5, 20, 0, 0, MAP_MAUVILLE_CITY
 
 MauvilleCity_Gym_MapCoordEvents:: @ 83882BC
 	coord_event 0, 9, 3, 0, 0x4000, 0, 0, MauvilleCity_Gym_EventScript_15664B

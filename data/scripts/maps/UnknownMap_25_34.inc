@@ -382,30 +382,30 @@ LinkContestRoom1_EventScript_15FB64:: @ 815FB64
 
 LinkContestRoom1_EventScript_15FBA1:: @ 815FBA1
 	incrementgamestat GAME_STAT_ENTERED_CONTEST
-	warp VerdanturfTown_ContestLobby, 255, 5, 4
+	warp MAP_VERDANTURF_TOWN_CONTEST_LOBBY, 255, 5, 4
 	waitstate
 	end
 
 LinkContestRoom1_EventScript_15FBAD:: @ 815FBAD
 	incrementgamestat GAME_STAT_ENTERED_CONTEST
-	warp FallarborTown_ContestLobby, 255, 5, 4
+	warp MAP_FALLARBOR_TOWN_CONTEST_LOBBY, 255, 5, 4
 	waitstate
 	end
 
 LinkContestRoom1_EventScript_15FBB9:: @ 815FBB9
 	incrementgamestat GAME_STAT_ENTERED_CONTEST
-	warp SlateportCity_ContestLobby, 255, 5, 4
+	warp MAP_SLATEPORT_CITY_CONTEST_LOBBY, 255, 5, 4
 	waitstate
 	end
 
 LinkContestRoom1_EventScript_15FBC5:: @ 815FBC5
 	incrementgamestat GAME_STAT_ENTERED_CONTEST
-	warp LilycoveCity_ContestLobby, 255, 6, 4
+	warp MAP_LILYCOVE_CITY_CONTEST_LOBBY, 255, 6, 4
 	waitstate
 	end
 
 LinkContestRoom1_EventScript_15FBD1:: @ 815FBD1
-	warp LilycoveCity_ContestLobby, 255, 7, 4
+	warp MAP_LILYCOVE_CITY_CONTEST_LOBBY, 255, 7, 4
 	waitstate
 	end
 

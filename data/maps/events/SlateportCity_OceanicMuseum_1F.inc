@@ -15,9 +15,9 @@ SlateportCity_OceanicMuseum_1F_MapObjects:: @ 8387B38
 	object_event 14, MAP_OBJ_GFX_REPORTER_M, 0, 7, 0, 4, 0, 3, 1, 17, 0, 0, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_1ADEE0, 961, 0, 0
 
 SlateportCity_OceanicMuseum_1F_MapWarps:: @ 8387C88
-	warp_def 9, 8, 0, 5, SlateportCity
-	warp_def 10, 8, 0, 7, SlateportCity
-	warp_def 6, 1, 0, 0, SlateportCity_OceanicMuseum_2F
+	warp_def 9, 8, 0, 5, MAP_SLATEPORT_CITY
+	warp_def 10, 8, 0, 7, MAP_SLATEPORT_CITY
+	warp_def 6, 1, 0, 0, MAP_SLATEPORT_CITY_OCEANIC_MUSEUM_2F
 
 SlateportCity_OceanicMuseum_1F_MapCoordEvents:: @ 8387CA0
 	coord_event 9, 7, 3, 0, 0x40aa, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_155AE4

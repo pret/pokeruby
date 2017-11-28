@@ -6,8 +6,8 @@ VerdanturfTown_WandasHouse_MapObjects:: @ 8386CEC
 	object_event 5, MAP_OBJ_GFX_WOMAN_3, 0, 5, 0, 5, 0, 3, 9, 0, 0, 0, 0, 0, 0, VerdanturfTown_WandasHouse_EventScript_153FB8, 984, 0, 0
 
 VerdanturfTown_WandasHouse_MapWarps:: @ 8386D64
-	warp_def 7, 7, 0, 3, VerdanturfTown
-	warp_def 8, 7, 0, 3, VerdanturfTown
+	warp_def 7, 7, 0, 3, MAP_VERDANTURF_TOWN
+	warp_def 8, 7, 0, 3, MAP_VERDANTURF_TOWN
 
 VerdanturfTown_WandasHouse_MapEvents:: @ 8386D74
 	map_events VerdanturfTown_WandasHouse_MapObjects, VerdanturfTown_WandasHouse_MapWarps, 0x0, 0x0

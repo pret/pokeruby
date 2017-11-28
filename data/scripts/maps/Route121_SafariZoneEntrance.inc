@@ -82,7 +82,7 @@ Route121_SafariZoneEntrance_EventScript_15C3B3:: @ 815C3B3
 	waitmovement 0
 	special EnterSafariMode
 	setvar 0x40a4, 2
-	warp SafariZone_Southeast, 255, 32, 33
+	warp MAP_SAFARI_ZONE_SOUTHEAST, 255, 32, 33
 	waitstate
 	end
 

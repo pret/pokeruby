@@ -9,9 +9,9 @@ SlateportCity_ContestLobby_MapObjects:: @ 8387788
 	object_event 8, MAP_OBJ_GFX_WOMAN_3, 0, 12, 0, 2, 0, 3, 8, 0, 0, 0, 0, 0, 0, SlateportCity_ContestLobby_EventScript_1554F0, 0, 0, 0
 
 SlateportCity_ContestLobby_MapWarps:: @ 8387848
-	warp_def 5, 6, 0, 3, SlateportCity
-	warp_def 6, 6, 0, 3, SlateportCity
-	warp_def 1, 1, 0, 0, SlateportCity_ContestHall
+	warp_def 5, 6, 0, 3, MAP_SLATEPORT_CITY
+	warp_def 6, 6, 0, 3, MAP_SLATEPORT_CITY
+	warp_def 1, 1, 0, 0, MAP_SLATEPORT_CITY_CONTEST_HALL
 
 SlateportCity_ContestLobby_MapBGEvents:: @ 8387860
 	bg_event 10, 3, 0, 0, 0, SlateportCity_ContestLobby_EventScript_1B7829

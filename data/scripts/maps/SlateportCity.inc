@@ -538,7 +538,7 @@ SlateportCity_EventScript_14BEBC:: @ 814BEBC
 	clearflag 845
 	clearflag 846
 	setvar 0x4058, 2
-	warp SlateportCity_Harbor, 255, 11, 14
+	warp MAP_SLATEPORT_CITY_HARBOR, 255, 11, 14
 	waitstate
 	releaseall
 	end

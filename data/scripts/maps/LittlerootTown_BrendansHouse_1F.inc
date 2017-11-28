@@ -65,7 +65,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1526FA:: @ 81526FA
 	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_152720
 	applymovement 1, LittlerootTown_BrendansHouse_1F_Movement_152720
 	waitmovement 0
-	warp LittlerootTown_BrendansHouse_2F, 255, 7, 1
+	warp MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F, 255, 7, 1
 	waitstate
 	releaseall
 	end

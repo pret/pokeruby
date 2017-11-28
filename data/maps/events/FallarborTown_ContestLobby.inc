@@ -7,9 +7,9 @@ FallarborTown_ContestLobby_MapObjects:: @ 83866F0
 	object_event 6, MAP_OBJ_GFX_ARTIST, 0, 12, 0, 2, 0, 3, 8, 0, 0, 0, 0, 0, 0, FallarborTown_ContestLobby_EventScript_153A97, 0, 0, 0
 
 FallarborTown_ContestLobby_MapWarps:: @ 8386780
-	warp_def 5, 6, 0, 1, FallarborTown
-	warp_def 6, 6, 0, 1, FallarborTown
-	warp_def 1, 1, 0, 0, FallarborTown_ContestHall
+	warp_def 5, 6, 0, 1, MAP_FALLARBOR_TOWN
+	warp_def 6, 6, 0, 1, MAP_FALLARBOR_TOWN
+	warp_def 1, 1, 0, 0, MAP_FALLARBOR_TOWN_CONTEST_HALL
 
 FallarborTown_ContestLobby_MapBGEvents:: @ 8386798
 	bg_event 10, 3, 0, 0, 0, FallarborTown_ContestLobby_EventScript_1B7823

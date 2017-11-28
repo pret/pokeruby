@@ -16,7 +16,7 @@ SecretBase_Tree2_MapObjects:: @ 838FDAC
 	object_event 15, 253, 0, 1, 0, 6, 0, 3, 8, 0, 0, 0, 0, 0, 0, 0x0, 187, 0, 0
 
 SecretBase_Tree2_MapWarps:: @ 838FF14
-	warp_def 3, 14, 0, 126, None
+	warp_def 3, 14, 0, 126, MAP_NONE
 
 SecretBase_Tree2_MapEvents:: @ 838FF1C
 	map_events SecretBase_Tree2_MapObjects, SecretBase_Tree2_MapWarps, 0x0, 0x0

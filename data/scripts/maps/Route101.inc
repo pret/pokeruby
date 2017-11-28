@@ -236,7 +236,7 @@ Route101_EventScript_14EA7F:: @ 814EA7F
 	setvar 0x4084, 2
 	setvar 0x4060, 3
 	clearflag 0x4000
-	warp LittlerootTown_ProfessorBirchsLab, 255, 6, 5
+	warp MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB, 255, 6, 5
 	waitstate
 	release
 	end

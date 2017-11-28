@@ -13,7 +13,7 @@ Route104_Prototype_MapObjects:: @ 8391F2C
 	object_event 12, MAP_OBJ_GFX_MAN_3, 0, 11, 0, 28, 0, 3, 2, 17, 0, 0, 0, 0, 0, Route104_Prototype_EventScript_160D0A, 0, 0, 0
 
 Route104_Prototype_MapWarps:: @ 839204C
-	warp_def 5, 24, 0, 0, Route104_PrototypePrettyPetalFlowerShop
+	warp_def 5, 24, 0, 0, MAP_ROUTE104_PROTOTYPE_PRETTY_PETAL_FLOWER_SHOP
 
 Route104_Prototype_MapBGEvents:: @ 8392054
 	bg_event 7, 26, 0, 0, 0, Route104_Prototype_EventScript_160D1C

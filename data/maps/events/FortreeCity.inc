@@ -8,15 +8,15 @@ FortreeCity_MapObjects:: @ 8380020
 	object_event 7, MAP_OBJ_GFX_KECLEON_1, 0, 25, 0, 8, 0, 3, 76, 17, 0, 0, 0, 0, 0, FortreeCity_EventScript_14C9B3, 969, 0, 0
 
 FortreeCity_MapWarps:: @ 83800C8
-	warp_def 5, 6, 0, 0, FortreeCity_PokemonCenter_1F
-	warp_def 10, 3, 0, 0, FortreeCity_House1
-	warp_def 22, 11, 0, 0, FortreeCity_Gym
-	warp_def 4, 14, 0, 0, FortreeCity_Mart
-	warp_def 17, 3, 0, 0, FortreeCity_House2
-	warp_def 25, 3, 0, 0, FortreeCity_House3
-	warp_def 32, 2, 0, 0, FortreeCity_House4
-	warp_def 12, 13, 0, 0, FortreeCity_House5
-	warp_def 37, 13, 0, 0, FortreeCity_DecorationShop
+	warp_def 5, 6, 0, 0, MAP_FORTREE_CITY_POKEMON_CENTER_1F
+	warp_def 10, 3, 0, 0, MAP_FORTREE_CITY_HOUSE1
+	warp_def 22, 11, 0, 0, MAP_FORTREE_CITY_GYM
+	warp_def 4, 14, 0, 0, MAP_FORTREE_CITY_MART
+	warp_def 17, 3, 0, 0, MAP_FORTREE_CITY_HOUSE2
+	warp_def 25, 3, 0, 0, MAP_FORTREE_CITY_HOUSE3
+	warp_def 32, 2, 0, 0, MAP_FORTREE_CITY_HOUSE4
+	warp_def 12, 13, 0, 0, MAP_FORTREE_CITY_HOUSE5
+	warp_def 37, 13, 0, 0, MAP_FORTREE_CITY_DECORATION_SHOP
 
 FortreeCity_MapBGEvents:: @ 8380110
 	bg_event 6, 9, 0, 0, 0, FortreeCity_EventScript_14C9A1

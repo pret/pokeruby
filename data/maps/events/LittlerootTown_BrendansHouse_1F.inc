@@ -6,9 +6,9 @@ LittlerootTown_BrendansHouse_1F_MapObjects:: @ 8385674
 	object_event 5, MAP_OBJ_GFX_NORMAN, 0, 5, 0, 6, 0, 3, 9, 17, 0, 0, 0, 0, 0, 0x0, 734, 0, 0
 
 LittlerootTown_BrendansHouse_1F_MapWarps:: @ 83856EC
-	warp_def 9, 8, 0, 1, LittlerootTown
-	warp_def 8, 8, 0, 1, LittlerootTown
-	warp_def 8, 2, 0, 0, LittlerootTown_BrendansHouse_2F
+	warp_def 9, 8, 0, 1, MAP_LITTLEROOT_TOWN
+	warp_def 8, 8, 0, 1, MAP_LITTLEROOT_TOWN
+	warp_def 8, 2, 0, 0, MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F
 
 LittlerootTown_BrendansHouse_1F_MapCoordEvents:: @ 8385704
 	coord_event 8, 8, 0, 0, 0x4092, 4, 0, LittlerootTown_BrendansHouse_1F_EventScript_152789

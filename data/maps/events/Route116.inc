@@ -23,9 +23,9 @@ Route116_MapObjects:: @ 8383170
 	object_event 22, MAP_OBJ_GFX_MANIAC, 0, 74, 0, 13, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route116_EventScript_150B8F, 813, 0, 0
 
 Route116_MapWarps:: @ 8383380
-	warp_def 47, 8, 0, 0, RusturfTunnel
-	warp_def 38, 8, 0, 0, Route116_TunnelersRestHouse
-	warp_def 65, 10, 0, 2, RusturfTunnel
+	warp_def 47, 8, 0, 0, MAP_RUSTURF_TUNNEL
+	warp_def 38, 8, 0, 0, MAP_ROUTE116_TUNNELERS_REST_HOUSE
+	warp_def 65, 10, 0, 2, MAP_RUSTURF_TUNNEL
 
 Route116_MapCoordEvents:: @ 8383398
 	coord_event 47, 9, 3, 0, 0x406f, 1, 0, Route116_EventScript_150B6E

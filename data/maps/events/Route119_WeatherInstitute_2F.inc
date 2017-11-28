@@ -7,7 +7,7 @@ Route119_WeatherInstitute_2F_MapObjects:: @ 8392E94
 	object_event 6, MAP_OBJ_GFX_MAN_5, 0, 1, 0, 7, 0, 3, 10, 0, 0, 0, 0, 0, 0, 0x0, 893, 0, 0
 
 Route119_WeatherInstitute_2F_MapWarps:: @ 8392F24
-	warp_def 17, 1, 0, 2, Route119_WeatherInstitute_1F
+	warp_def 17, 1, 0, 2, MAP_ROUTE119_WEATHER_INSTITUTE_1F
 
 Route119_WeatherInstitute_2F_MapEvents:: @ 8392F2C
 	map_events Route119_WeatherInstitute_2F_MapObjects, Route119_WeatherInstitute_2F_MapWarps, 0x0, 0x0

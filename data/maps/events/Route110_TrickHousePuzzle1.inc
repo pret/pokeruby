@@ -20,9 +20,9 @@ Route110_TrickHousePuzzle1_MapObjects:: @ 839225C
 	object_event 19, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 14, 0, 14, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_CuttableTree, 31, 0, 0
 
 Route110_TrickHousePuzzle1_MapWarps:: @ 8392424
-	warp_def 0, 21, 3, 2, Route110_TrickHouseEntrance
-	warp_def 1, 21, 3, 2, Route110_TrickHouseEntrance
-	warp_def 13, 1, 3, 0, Route110_TrickHouseEnd
+	warp_def 0, 21, 3, 2, MAP_ROUTE110_TRICK_HOUSE_ENTRANCE
+	warp_def 1, 21, 3, 2, MAP_ROUTE110_TRICK_HOUSE_ENTRANCE
+	warp_def 13, 1, 3, 0, MAP_ROUTE110_TRICK_HOUSE_END
 
 Route110_TrickHousePuzzle1_MapBGEvents:: @ 839243C
 	bg_event 14, 8, 0, 0, 0, Route110_TrickHousePuzzle1_EventScript_161D14

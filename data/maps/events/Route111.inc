@@ -37,9 +37,9 @@ Route111_MapObjects:: @ 83821A0
 	object_event 36, MAP_OBJ_GFX_MAN_5, 0, 20, 0, 114, 0, 3, 2, 17, 0, 0, 0, 0, 0, Route111_EventScript_15039E, 0, 0, 0
 
 Route111_MapWarps:: @ 8382500
-	warp_def 13, 113, 0, 0, Route111_WinstrateFamilysHouse
-	warp_def 29, 87, 0, 0, DesertRuins
-	warp_def 26, 18, 0, 0, Route111_OldLadysRestStop
+	warp_def 13, 113, 0, 0, MAP_ROUTE111_WINSTRATE_FAMILYS_HOUSE
+	warp_def 29, 87, 0, 0, MAP_DESERT_RUINS
+	warp_def 26, 18, 0, 0, MAP_ROUTE111_OLD_LADYS_REST_STOP
 
 Route111_MapCoordEvents:: @ 8382518
 	coord_event 12, 62, 3, 0, 0, 0, 0, Route111_EventScript_1501C9

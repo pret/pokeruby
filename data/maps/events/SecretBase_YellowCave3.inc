@@ -16,7 +16,7 @@ SecretBase_YellowCave3_MapObjects:: @ 8390540
 	object_event 15, 253, 0, 1, 0, 6, 0, 3, 8, 0, 0, 0, 0, 0, 0, 0x0, 187, 0, 0
 
 SecretBase_YellowCave3_MapWarps:: @ 83906A8
-	warp_def 5, 9, 0, 126, None
+	warp_def 5, 9, 0, 126, MAP_NONE
 
 SecretBase_YellowCave3_MapEvents:: @ 83906B0
 	map_events SecretBase_YellowCave3_MapObjects, SecretBase_YellowCave3_MapWarps, 0x0, 0x0

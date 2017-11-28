@@ -10,12 +10,12 @@ LavaridgeTown_MapObjects:: @ 8380C78
 	object_event 9, MAP_OBJ_GFX_OLD_WOMAN_1, 0, 4, 0, 7, 0, 3, 8, 17, 0, 0, 0, 0, 0, LavaridgeTown_EventScript_14E75A, 0, 0, 0
 
 LavaridgeTown_MapWarps:: @ 8380D50
-	warp_def 12, 15, 0, 0, LavaridgeTown_HerbShop
-	warp_def 5, 15, 0, 0, LavaridgeTown_Gym_1F
-	warp_def 15, 5, 0, 0, LavaridgeTown_Mart
-	warp_def 9, 6, 0, 0, LavaridgeTown_PokemonCenter_1F
-	warp_def 16, 15, 0, 0, LavaridgeTown_House
-	warp_def 9, 2, 3, 3, LavaridgeTown_PokemonCenter_1F
+	warp_def 12, 15, 0, 0, MAP_LAVARIDGE_TOWN_HERB_SHOP
+	warp_def 5, 15, 0, 0, MAP_LAVARIDGE_TOWN_GYM_1F
+	warp_def 15, 5, 0, 0, MAP_LAVARIDGE_TOWN_MART
+	warp_def 9, 6, 0, 0, MAP_LAVARIDGE_TOWN_POKEMON_CENTER_1F
+	warp_def 16, 15, 0, 0, MAP_LAVARIDGE_TOWN_HOUSE
+	warp_def 9, 2, 3, 3, MAP_LAVARIDGE_TOWN_POKEMON_CENTER_1F
 
 LavaridgeTown_MapCoordEvents:: @ 8380D80
 	coord_event 6, 3, 3, 0, 0, 0, 0, LavaridgeTown_EventScript_14E710
