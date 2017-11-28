@@ -13,14 +13,69 @@
 #include "task.h"
 #include "text.h"
 
-extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[36];
-extern const struct SpriteTemplate gSpriteTemplate_83D26A0;
+extern const u8 gSpriteImage_83D21EC[];
+extern const u8 gSpriteImage_83D22EC[];
+extern const u8 gSpriteImage_83D23EC[];
+extern const u16 gTilesetPalettes_SecretBase[][16];
 
-static void sub_80C68EC(u8);
-static void DoBalloonSoundEffect(s16);
+const struct OamData gOamData_83D266C =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 2,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 2,
+    .tileNum = 0,
+    .priority = 2,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+const union AnimCmd gSpriteAnim_83D2674[] =
+{
+    ANIMCMD_FRAME(0, 6),
+    ANIMCMD_FRAME(1, 6),
+    ANIMCMD_FRAME(2, 6),
+    ANIMCMD_END,
+};
+
+const union AnimCmd *const gSpriteAnimTable_83D2684[] =
+{
+    gSpriteAnim_83D2674,
+};
+
+const struct SpriteFrameImage gSpriteImageTable_83D2688[] =
+{
+    {gSpriteImage_83D21EC, 0x100},
+    {gSpriteImage_83D22EC, 0x100},
+    {gSpriteImage_83D23EC, 0x100},
+};
+
 void SpriteCB_SandPillar_0(struct Sprite *);
 void SpriteCB_SandPillar_1(struct Sprite *);
 void SpriteCB_SandPillar_2(struct Sprite *);
+const struct SpriteTemplate gSpriteTemplate_83D26A0 =
+{
+    .tileTag = 0xFFFF,
+    .paletteTag = 4110,
+    .oam = &gOamData_83D266C,
+    .anims = gSpriteAnimTable_83D2684,
+    .images = gSpriteImageTable_83D2688,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_SandPillar_0,
+};
+
+// This uses one of the secret base palettes, so there is no "09.pal" file.
+const struct SpritePalette gFieldEffectObjectPaletteInfo9 = {gTilesetPalettes_SecretBase[5], 0x100E};
+
+extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[36];
+
+static void sub_80C68EC(u8);
+static void DoBalloonSoundEffect(s16);
 
 void sub_80C68A4(s16 metatileId, s16 x, s16 y)
 {

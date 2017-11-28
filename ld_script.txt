@@ -535,8 +535,8 @@ SECTIONS {
         src/pokemon/pokemon_size_record.o(.rodata);
         src/field/pc_screen_effect.o(.rodata);
         data/pc_screen_effect.o(.rodata);
-        data/fldeff_secretpower.o(.rodata);
-        data/fldeff_decoration.o(.rodata);
+        src/field/fldeff_secretpower.o(.rodata);
+        src/field/fldeff_decoration.o(.rodata);
         src/field/fldeff_recordmixing.o(.rodata);
         src/field/field_special_scene.o(.rodata);
         src/field/rotating_gate.o(.rodata);
