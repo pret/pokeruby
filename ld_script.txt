@@ -513,7 +513,7 @@ SECTIONS {
         data/pokemon_storage_system.o(.rodata);
         src/pokemon/pokemon_icon.o(.rodata);
         src/pokemon/pokemon_summary_screen.o(.rodata);
-        data/fldeff_cut.o(.rodata);
+        src/field/fldeff_cut.o(.rodata);
         src/field/item_menu.o(.rodata);
         data/battle_anim_80A7E7C.o(.rodata);
         src/field/item.o(.rodata);
@@ -535,8 +535,8 @@ SECTIONS {
         src/pokemon/pokemon_size_record.o(.rodata);
         src/field/pc_screen_effect.o(.rodata);
         data/pc_screen_effect.o(.rodata);
-        data/fldeff_secretpower.o(.rodata);
-        data/fldeff_decoration.o(.rodata);
+        src/field/fldeff_secretpower.o(.rodata);
+        src/field/fldeff_decoration.o(.rodata);
         src/field/fldeff_recordmixing.o(.rodata);
         src/field/field_special_scene.o(.rodata);
         src/field/rotating_gate.o(.rodata);
