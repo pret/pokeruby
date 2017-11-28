@@ -547,7 +547,7 @@ SECTIONS {
         data/pokenav.o(.rodata);
         data/mon_markings.o(.rodata);
         src/field/mauville_man.o(.rodata);
-        data/mail.o(.rodata);
+        src/pokemon/mail.o(.rodata);
         src/field/menu_helpers.o(.rodata);
         src/field/heal_location.o(.rodata);
         src/field/region_map.o(.rodata);
