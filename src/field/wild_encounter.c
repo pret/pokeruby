@@ -2898,10 +2898,804 @@ const struct WildPokemon Underwater2_WaterMons [] =
 };
 const struct WildPokemonInfo Underwater2_WaterMonsInfo = {4, Underwater2_WaterMons};
 
+const struct WildPokemonHeader gWildMonHeaders[] =
+{
+    {
+        .mapGroup = MAP_GROUP(PETALBURG_CITY),
+        .mapNum = MAP_NUM(PETALBURG_CITY),
+        .landMonsInfo = NULL,
+        .waterMonsInfo = &PetalburgCity_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &PetalburgCity_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(SLATEPORT_CITY),
+        .mapNum = MAP_NUM(SLATEPORT_CITY),
+        .landMonsInfo = NULL,
+        .waterMonsInfo = &SlateportCity_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &SlateportCity_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(LILYCOVE_CITY),
+        .mapNum = MAP_NUM(LILYCOVE_CITY),
+        .landMonsInfo = NULL,
+        .waterMonsInfo = &LilycoveCity_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &LilycoveCity_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(MOSSDEEP_CITY),
+        .mapNum = MAP_NUM(MOSSDEEP_CITY),
+        .landMonsInfo = NULL,
+        .waterMonsInfo = &MossdeepCity_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &MossdeepCity_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(SOOTOPOLIS_CITY),
+        .mapNum = MAP_NUM(SOOTOPOLIS_CITY),
+        .landMonsInfo = NULL,
+        .waterMonsInfo = &SootopolisCity_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &SootopolisCity_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(EVER_GRANDE_CITY),
+        .mapNum = MAP_NUM(EVER_GRANDE_CITY),
+        .landMonsInfo = NULL,
+        .waterMonsInfo = &EverGrandeCity_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &EverGrandeCity_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(METEOR_FALLS_1F_1R),
+        .mapNum = MAP_NUM(METEOR_FALLS_1F_1R),
+        .landMonsInfo = &MeteorFalls_1F_1R_LandMonsInfo,
+        .waterMonsInfo = &MeteorFalls_1F_1R_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &MeteorFalls_1F_1R_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(METEOR_FALLS_1F_2R),
+        .mapNum = MAP_NUM(METEOR_FALLS_1F_2R),
+        .landMonsInfo = &MeteorFalls_1F_2R_LandMonsInfo,
+        .waterMonsInfo = &MeteorFalls_1F_2R_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &MeteorFalls_1F_2R_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(METEOR_FALLS_B1F_1R),
+        .mapNum = MAP_NUM(METEOR_FALLS_B1F_1R),
+        .landMonsInfo = &MeteorFalls_B1F_1R_LandMonsInfo,
+        .waterMonsInfo = &MeteorFalls_B1F_1R_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &MeteorFalls_B1F_1R_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(METEOR_FALLS_B1F_2R),
+        .mapNum = MAP_NUM(METEOR_FALLS_B1F_2R),
+        .landMonsInfo = &MeteorFalls_B1F_2R_LandMonsInfo,
+        .waterMonsInfo = &MeteorFalls_B1F_2R_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &MeteorFalls_B1F_2R_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(RUSTURF_TUNNEL),
+        .mapNum = MAP_NUM(RUSTURF_TUNNEL),
+        .landMonsInfo = &RusturfTunnel_LandMonsInfo,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(GRANITE_CAVE_1F),
+        .mapNum = MAP_NUM(GRANITE_CAVE_1F),
+        .landMonsInfo = &GraniteCave_1F_LandMonsInfo,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(GRANITE_CAVE_B1F),
+        .mapNum = MAP_NUM(GRANITE_CAVE_B1F),
+        .landMonsInfo = &GraniteCave_B1F_LandMonsInfo,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(GRANITE_CAVE_B2F),
+        .mapNum = MAP_NUM(GRANITE_CAVE_B2F),
+        .landMonsInfo = &GraniteCave_B2F_LandMonsInfo,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = &GraniteCave_B2F_RockSmashMonsInfo,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(GRANITE_CAVE_STEVENS_ROOM),
+        .mapNum = MAP_NUM(GRANITE_CAVE_STEVENS_ROOM),
+        .landMonsInfo = &GraniteCave_StevensRoom_LandMonsInfo,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(PETALBURG_WOODS),
+        .mapNum = MAP_NUM(PETALBURG_WOODS),
+        .landMonsInfo = &PetalburgWoods_LandMonsInfo,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(JAGGED_PASS),
+        .mapNum = MAP_NUM(JAGGED_PASS),
+        .landMonsInfo = &JaggedPass_LandMonsInfo,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(FIERY_PATH),
+        .mapNum = MAP_NUM(FIERY_PATH),
+        .landMonsInfo = &FieryPath_LandMonsInfo,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(MT_PYRE_1F),
+        .mapNum = MAP_NUM(MT_PYRE_1F),
+        .landMonsInfo = &MtPyre_1F_LandMonsInfo,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(MT_PYRE_2F),
+        .mapNum = MAP_NUM(MT_PYRE_2F),
+        .landMonsInfo = &MtPyre_2F_LandMonsInfo,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(MT_PYRE_3F),
+        .mapNum = MAP_NUM(MT_PYRE_3F),
+        .landMonsInfo = &MtPyre_3F_LandMonsInfo,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(MT_PYRE_4F),
+        .mapNum = MAP_NUM(MT_PYRE_4F),
+        .landMonsInfo = &MtPyre_4F_LandMonsInfo,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(MT_PYRE_5F),
+        .mapNum = MAP_NUM(MT_PYRE_5F),
+        .landMonsInfo = &MtPyre_5F_LandMonsInfo,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(MT_PYRE_6F),
+        .mapNum = MAP_NUM(MT_PYRE_6F),
+        .landMonsInfo = &MtPyre_6F_LandMonsInfo,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(MT_PYRE_EXTERIOR),
+        .mapNum = MAP_NUM(MT_PYRE_EXTERIOR),
+        .landMonsInfo = &MtPyre_Exterior_LandMonsInfo,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(MT_PYRE_SUMMIT),
+        .mapNum = MAP_NUM(MT_PYRE_SUMMIT),
+        .landMonsInfo = &MtPyre_Summit_LandMonsInfo,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(SEAFLOOR_CAVERN_ENTRANCE),
+        .mapNum = MAP_NUM(SEAFLOOR_CAVERN_ENTRANCE),
+        .landMonsInfo = NULL,
+        .waterMonsInfo = &SeafloorCavern_Entrance_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &SeafloorCavern_Entrance_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(SEAFLOOR_CAVERN_ROOM1),
+        .mapNum = MAP_NUM(SEAFLOOR_CAVERN_ROOM1),
+        .landMonsInfo = &SeafloorCavern_Room1_LandMonsInfo,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(SEAFLOOR_CAVERN_ROOM2),
+        .mapNum = MAP_NUM(SEAFLOOR_CAVERN_ROOM2),
+        .landMonsInfo = &SeafloorCavern_Room2_LandMonsInfo,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(SEAFLOOR_CAVERN_ROOM3),
+        .mapNum = MAP_NUM(SEAFLOOR_CAVERN_ROOM3),
+        .landMonsInfo = &SeafloorCavern_Room3_LandMonsInfo,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(SEAFLOOR_CAVERN_ROOM4),
+        .mapNum = MAP_NUM(SEAFLOOR_CAVERN_ROOM4),
+        .landMonsInfo = &SeafloorCavern_Room4_LandMonsInfo,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(SEAFLOOR_CAVERN_ROOM5),
+        .mapNum = MAP_NUM(SEAFLOOR_CAVERN_ROOM5),
+        .landMonsInfo = &SeafloorCavern_Room5_LandMonsInfo,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(SEAFLOOR_CAVERN_ROOM6),
+        .mapNum = MAP_NUM(SEAFLOOR_CAVERN_ROOM6),
+        .landMonsInfo = &SeafloorCavern_Room6_LandMonsInfo,
+        .waterMonsInfo = &SeafloorCavern_Room6_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &SeafloorCavern_Room6_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(SEAFLOOR_CAVERN_ROOM7),
+        .mapNum = MAP_NUM(SEAFLOOR_CAVERN_ROOM7),
+        .landMonsInfo = &SeafloorCavern_Room7_LandMonsInfo,
+        .waterMonsInfo = &SeafloorCavern_Room7_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &SeafloorCavern_Room7_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(SEAFLOOR_CAVERN_ROOM8),
+        .mapNum = MAP_NUM(SEAFLOOR_CAVERN_ROOM8),
+        .landMonsInfo = &SeafloorCavern_Room8_LandMonsInfo,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(CAVE_OF_ORIGIN_ENTRANCE),
+        .mapNum = MAP_NUM(CAVE_OF_ORIGIN_ENTRANCE),
+        .landMonsInfo = &CaveOfOrigin_Entrance_LandMonsInfo,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(CAVE_OF_ORIGIN_1F),
+        .mapNum = MAP_NUM(CAVE_OF_ORIGIN_1F),
+        .landMonsInfo = &CaveOfOrigin_1F_LandMonsInfo,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(CAVE_OF_ORIGIN_B1F),
+        .mapNum = MAP_NUM(CAVE_OF_ORIGIN_B1F),
+        .landMonsInfo = &CaveOfOrigin_B1F_LandMonsInfo,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(CAVE_OF_ORIGIN_B2F),
+        .mapNum = MAP_NUM(CAVE_OF_ORIGIN_B2F),
+        .landMonsInfo = &CaveOfOrigin_B2F_LandMonsInfo,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(CAVE_OF_ORIGIN_B3F),
+        .mapNum = MAP_NUM(CAVE_OF_ORIGIN_B3F),
+        .landMonsInfo = &CaveOfOrigin_B3F_LandMonsInfo,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(VICTORY_ROAD_1F),
+        .mapNum = MAP_NUM(VICTORY_ROAD_1F),
+        .landMonsInfo = &VictoryRoad_1F_LandMonsInfo,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(VICTORY_ROAD_B1F),
+        .mapNum = MAP_NUM(VICTORY_ROAD_B1F),
+        .landMonsInfo = &VictoryRoad_B1F_LandMonsInfo,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = &VictoryRoad_B1F_RockSmashMonsInfo,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(VICTORY_ROAD_B2F),
+        .mapNum = MAP_NUM(VICTORY_ROAD_B2F),
+        .landMonsInfo = &VictoryRoad_B2F_LandMonsInfo,
+        .waterMonsInfo = &VictoryRoad_B2F_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &VictoryRoad_B2F_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(SHOAL_CAVE_LOW_TIDE_ENTRANCE_ROOM),
+        .mapNum = MAP_NUM(SHOAL_CAVE_LOW_TIDE_ENTRANCE_ROOM),
+        .landMonsInfo = &ShoalCave_LowTideEntranceRoom_LandMonsInfo,
+        .waterMonsInfo = &ShoalCave_LowTideEntranceRoom_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &ShoalCave_LowTideEntranceRoom_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(SHOAL_CAVE_LOW_TIDE_INNER_ROOM),
+        .mapNum = MAP_NUM(SHOAL_CAVE_LOW_TIDE_INNER_ROOM),
+        .landMonsInfo = &ShoalCave_LowTideInnerRoom_LandMonsInfo,
+        .waterMonsInfo = &ShoalCave_LowTideInnerRoom_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &ShoalCave_LowTideInnerRoom_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(SHOAL_CAVE_LOW_TIDE_STAIRS_ROOM),
+        .mapNum = MAP_NUM(SHOAL_CAVE_LOW_TIDE_STAIRS_ROOM),
+        .landMonsInfo = &ShoalCave_LowTideStairsRoom_LandMonsInfo,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(SHOAL_CAVE_LOW_TIDE_LOWER_ROOM),
+        .mapNum = MAP_NUM(SHOAL_CAVE_LOW_TIDE_LOWER_ROOM),
+        .landMonsInfo = &ShoalCave_LowTideLowerRoom_LandMonsInfo,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(SHOAL_CAVE_LOW_TIDE_ICE_ROOM),
+        .mapNum = MAP_NUM(SHOAL_CAVE_LOW_TIDE_ICE_ROOM),
+        .landMonsInfo = &ShoalCave_LowTideIceRoom_LandMonsInfo,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(NEW_MAUVILLE_ENTRANCE),
+        .mapNum = MAP_NUM(NEW_MAUVILLE_ENTRANCE),
+        .landMonsInfo = &NewMauville_Entrance_LandMonsInfo,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(NEW_MAUVILLE_INSIDE),
+        .mapNum = MAP_NUM(NEW_MAUVILLE_INSIDE),
+        .landMonsInfo = &NewMauville_Inside_LandMonsInfo,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(ABANDONED_SHIP_ROOMS_B1F),
+        .mapNum = MAP_NUM(ABANDONED_SHIP_ROOMS_B1F),
+        .landMonsInfo = NULL,
+        .waterMonsInfo = &AbandonedShip_Rooms_B1F_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &AbandonedShip_Rooms_B1F_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS),
+        .mapNum = MAP_NUM(ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS),
+        .landMonsInfo = NULL,
+        .waterMonsInfo = &AbandonedShip_HiddenFloorCorridors_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &AbandonedShip_HiddenFloorCorridors_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(SKY_PILLAR_1F),
+        .mapNum = MAP_NUM(SKY_PILLAR_1F),
+        .landMonsInfo = &SkyPillar_1F_LandMonsInfo,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(SKY_PILLAR_3F),
+        .mapNum = MAP_NUM(SKY_PILLAR_3F),
+        .landMonsInfo = &SkyPillar_3F_LandMonsInfo,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(SKY_PILLAR_5F),
+        .mapNum = MAP_NUM(SKY_PILLAR_5F),
+        .landMonsInfo = &SkyPillar_5F_LandMonsInfo,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(ROUTE101),
+        .mapNum = MAP_NUM(ROUTE101),
+        .landMonsInfo = &Route101_LandMonsInfo,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(ROUTE102),
+        .mapNum = MAP_NUM(ROUTE102),
+        .landMonsInfo = &Route102_LandMonsInfo,
+        .waterMonsInfo = &Route102_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &Route102_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(ROUTE103),
+        .mapNum = MAP_NUM(ROUTE103),
+        .landMonsInfo = &Route103_LandMonsInfo,
+        .waterMonsInfo = &Route103_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &Route103_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(ROUTE104),
+        .mapNum = MAP_NUM(ROUTE104),
+        .landMonsInfo = &Route104_LandMonsInfo,
+        .waterMonsInfo = &Route104_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &Route104_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(ROUTE105),
+        .mapNum = MAP_NUM(ROUTE105),
+        .landMonsInfo = NULL,
+        .waterMonsInfo = &Route105_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &Route105_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(ROUTE106),
+        .mapNum = MAP_NUM(ROUTE106),
+        .landMonsInfo = NULL,
+        .waterMonsInfo = &Route106_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &Route106_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(ROUTE107),
+        .mapNum = MAP_NUM(ROUTE107),
+        .landMonsInfo = NULL,
+        .waterMonsInfo = &Route107_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &Route107_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(ROUTE108),
+        .mapNum = MAP_NUM(ROUTE108),
+        .landMonsInfo = NULL,
+        .waterMonsInfo = &Route108_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &Route108_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(ROUTE109),
+        .mapNum = MAP_NUM(ROUTE109),
+        .landMonsInfo = NULL,
+        .waterMonsInfo = &Route109_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &Route109_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(ROUTE110),
+        .mapNum = MAP_NUM(ROUTE110),
+        .landMonsInfo = &Route110_LandMonsInfo,
+        .waterMonsInfo = &Route110_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &Route110_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(ROUTE111),
+        .mapNum = MAP_NUM(ROUTE111),
+        .landMonsInfo = &Route111_LandMonsInfo,
+        .waterMonsInfo = &Route111_WaterMonsInfo,
+        .rockSmashMonsInfo = &Route111_RockSmashMonsInfo,
+        .fishingMonsInfo = &Route111_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(ROUTE112),
+        .mapNum = MAP_NUM(ROUTE112),
+        .landMonsInfo = &Route112_LandMonsInfo,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(ROUTE113),
+        .mapNum = MAP_NUM(ROUTE113),
+        .landMonsInfo = &Route113_LandMonsInfo,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(ROUTE114),
+        .mapNum = MAP_NUM(ROUTE114),
+        .landMonsInfo = &Route114_LandMonsInfo,
+        .waterMonsInfo = &Route114_WaterMonsInfo,
+        .rockSmashMonsInfo = &Route114_RockSmashMonsInfo,
+        .fishingMonsInfo = &Route114_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(ROUTE115),
+        .mapNum = MAP_NUM(ROUTE115),
+        .landMonsInfo = &Route115_LandMonsInfo,
+        .waterMonsInfo = &Route115_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &Route115_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(ROUTE116),
+        .mapNum = MAP_NUM(ROUTE116),
+        .landMonsInfo = &Route116_LandMonsInfo,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(ROUTE117),
+        .mapNum = MAP_NUM(ROUTE117),
+        .landMonsInfo = &Route117_LandMonsInfo,
+        .waterMonsInfo = &Route117_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &Route117_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(ROUTE118),
+        .mapNum = MAP_NUM(ROUTE118),
+        .landMonsInfo = &Route118_LandMonsInfo,
+        .waterMonsInfo = &Route118_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &Route118_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(ROUTE119),
+        .mapNum = MAP_NUM(ROUTE119),
+        .landMonsInfo = &Route119_LandMonsInfo,
+        .waterMonsInfo = &Route119_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &Route119_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(ROUTE120),
+        .mapNum = MAP_NUM(ROUTE120),
+        .landMonsInfo = &Route120_LandMonsInfo,
+        .waterMonsInfo = &Route120_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &Route120_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(ROUTE121),
+        .mapNum = MAP_NUM(ROUTE121),
+        .landMonsInfo = &Route121_LandMonsInfo,
+        .waterMonsInfo = &Route121_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &Route121_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(ROUTE122),
+        .mapNum = MAP_NUM(ROUTE122),
+        .landMonsInfo = NULL,
+        .waterMonsInfo = &Route122_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &Route122_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(ROUTE123),
+        .mapNum = MAP_NUM(ROUTE123),
+        .landMonsInfo = &Route123_LandMonsInfo,
+        .waterMonsInfo = &Route123_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &Route123_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(ROUTE124),
+        .mapNum = MAP_NUM(ROUTE124),
+        .landMonsInfo = NULL,
+        .waterMonsInfo = &Route124_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &Route124_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(ROUTE125),
+        .mapNum = MAP_NUM(ROUTE125),
+        .landMonsInfo = NULL,
+        .waterMonsInfo = &Route125_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &Route125_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(ROUTE126),
+        .mapNum = MAP_NUM(ROUTE126),
+        .landMonsInfo = NULL,
+        .waterMonsInfo = &Route126_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &Route126_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(ROUTE127),
+        .mapNum = MAP_NUM(ROUTE127),
+        .landMonsInfo = NULL,
+        .waterMonsInfo = &Route127_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &Route127_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(ROUTE128),
+        .mapNum = MAP_NUM(ROUTE128),
+        .landMonsInfo = NULL,
+        .waterMonsInfo = &Route128_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &Route128_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(ROUTE129),
+        .mapNum = MAP_NUM(ROUTE129),
+        .landMonsInfo = NULL,
+        .waterMonsInfo = &Route129_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &Route129_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(ROUTE130),
+        .mapNum = MAP_NUM(ROUTE130),
+        .landMonsInfo = &Route130_LandMonsInfo,
+        .waterMonsInfo = &Route130_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &Route130_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(ROUTE131),
+        .mapNum = MAP_NUM(ROUTE131),
+        .landMonsInfo = NULL,
+        .waterMonsInfo = &Route131_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &Route131_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(ROUTE132),
+        .mapNum = MAP_NUM(ROUTE132),
+        .landMonsInfo = NULL,
+        .waterMonsInfo = &Route132_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &Route132_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(ROUTE133),
+        .mapNum = MAP_NUM(ROUTE133),
+        .landMonsInfo = NULL,
+        .waterMonsInfo = &Route133_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &Route133_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(ROUTE134),
+        .mapNum = MAP_NUM(ROUTE134),
+        .landMonsInfo = NULL,
+        .waterMonsInfo = &Route134_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &Route134_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(SAFARI_ZONE_NORTHWEST),
+        .mapNum = MAP_NUM(SAFARI_ZONE_NORTHWEST),
+        .landMonsInfo = &SafariZone_Northwest_LandMonsInfo,
+        .waterMonsInfo = &SafariZone_Northwest_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &SafariZone_Northwest_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(SAFARI_ZONE_NORTHEAST),
+        .mapNum = MAP_NUM(SAFARI_ZONE_NORTHEAST),
+        .landMonsInfo = &SafariZone_Northeast_LandMonsInfo,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = &SafariZone_Northeast_RockSmashMonsInfo,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(SAFARI_ZONE_SOUTHWEST),
+        .mapNum = MAP_NUM(SAFARI_ZONE_SOUTHWEST),
+        .landMonsInfo = &SafariZone_Southwest_LandMonsInfo,
+        .waterMonsInfo = &SafariZone_Southwest_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &SafariZone_Southwest_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(SAFARI_ZONE_SOUTHEAST),
+        .mapNum = MAP_NUM(SAFARI_ZONE_SOUTHEAST),
+        .landMonsInfo = &SafariZone_Southeast_LandMonsInfo,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(DEWFORD_TOWN),
+        .mapNum = MAP_NUM(DEWFORD_TOWN),
+        .landMonsInfo = NULL,
+        .waterMonsInfo = &DewfordTown_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &DewfordTown_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(PACIFIDLOG_TOWN),
+        .mapNum = MAP_NUM(PACIFIDLOG_TOWN),
+        .landMonsInfo = NULL,
+        .waterMonsInfo = &PacifidlogTown_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = &PacifidlogTown_FishingMonsInfo,
+    },
+    {
+        .mapGroup = MAP_GROUP(UNDERWATER1),
+        .mapNum = MAP_NUM(UNDERWATER1),
+        .landMonsInfo = NULL,
+        .waterMonsInfo = &Underwater1_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(UNDERWATER2),
+        .mapNum = MAP_NUM(UNDERWATER2),
+        .landMonsInfo = NULL,
+        .waterMonsInfo = &Underwater2_WaterMonsInfo,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+    {
+        .mapGroup = MAP_GROUP(UNDEFINED),
+        .mapNum = MAP_NUM(UNDEFINED),
+        .landMonsInfo = NULL,
+        .waterMonsInfo = NULL,
+        .rockSmashMonsInfo = NULL,
+        .fishingMonsInfo = NULL,
+    },
+};
 
-extern u16 gRoute119WaterTileData[];
+const struct WildPokemon gWildFeebasRoute119Data = {20, 25, SPECIES_FEEBAS};
+
+const u16 gRoute119WaterTileData[] =
+{
+	0, 0x2D, 0,
+	0x2E, 0x5B, 0x83,
+	0x5C, 0x8B, 0x12A,
+};
+
 extern u16 gScriptResult;
-extern struct WildPokemon gWildFeebasRoute119Data;
 extern u8 S_RepelWoreOff[];
 
 EWRAM_DATA static u8 sWildEncountersDisabled = 0;
@@ -2967,7 +3761,7 @@ static bool8 CheckFeebas(void)
             route119section = 2;
 #else
         {
-            register u16 *arr asm("r0");
+            register const u16 *arr asm("r0");
             if (y >= (arr = gRoute119WaterTileData)[3 * 1 + 0] && y <= arr[3 * 1 + 1])
                 route119section = 1;
             if (y >= arr[3 * 2 + 0] && y <= arr[3 * 2 + 1])
@@ -3177,7 +3971,7 @@ static void CreateWildMon(u16 species, u8 b)
     CreateMonWithNature(&gEnemyParty[0], species, b, 0x20, PickWildMonNature());
 }
 
-static bool8 GenerateWildMon(struct WildPokemonInfo *wildMonInfo, u8 area, bool8 checkRepel)
+static bool8 GenerateWildMon(const struct WildPokemonInfo *wildMonInfo, u8 area, bool8 checkRepel)
 {
     u8 wildMonIndex = 0;
     u8 level;
@@ -3204,7 +3998,7 @@ static bool8 GenerateWildMon(struct WildPokemonInfo *wildMonInfo, u8 area, bool8
     }
 }
 
-static u16 GenerateFishingWildMon(struct WildPokemonInfo *wildMonInfo, u8 rod)
+static u16 GenerateFishingWildMon(const struct WildPokemonInfo *wildMonInfo, u8 rod)
 {
     u8 wildMonIndex = ChooseWildMonIndex_Fishing(rod);
     u8 level = ChooseWildMonLevel(&wildMonInfo->wildPokemon[wildMonIndex]);
@@ -3369,7 +4163,7 @@ void ScrSpecial_RockSmashWildEncounter(void)
 
     if (headerNum != 0xFFFF)
     {
-        struct WildPokemonInfo *wildPokemonInfo = gWildMonHeaders[headerNum].rockSmashMonsInfo;
+        const struct WildPokemonInfo *wildPokemonInfo = gWildMonHeaders[headerNum].rockSmashMonsInfo;
 
         if (wildPokemonInfo == NULL)
         {
@@ -3393,7 +4187,7 @@ bool8 SweetScentWildEncounter(void)
     s16 x;
     s16 y;
     u16 headerNum;
-    struct WildPokemonInfo *wildPokemonInfo;
+    const struct WildPokemonInfo *wildPokemonInfo;
 
     PlayerGetDestCoords(&x, &y);
     if ((headerNum = GetCurrentMapWildMonHeader()) != 0xFFFF)
@@ -3468,8 +4262,8 @@ void FishingWildEncounter(u8 rod)
 u16 GetLocalWildMon(bool8 *isWaterMon)
 {
     u16 headerNum;
-    struct WildPokemonInfo *landMonsInfo;
-    struct WildPokemonInfo *waterMonsInfo;
+    const struct WildPokemonInfo *landMonsInfo;
+    const struct WildPokemonInfo *waterMonsInfo;
 
     *isWaterMon = FALSE;
     headerNum = GetCurrentMapWildMonHeader();
@@ -3505,7 +4299,7 @@ u16 GetLocalWaterMon(void)
 
     if (headerNum != 0xFFFF)
     {
-        struct WildPokemonInfo *waterMonsInfo = gWildMonHeaders[headerNum].waterMonsInfo;
+        const struct WildPokemonInfo *waterMonsInfo = gWildMonHeaders[headerNum].waterMonsInfo;
 
         if (waterMonsInfo)
             return waterMonsInfo->wildPokemon[ChooseWildMonIndex_Water()].species;

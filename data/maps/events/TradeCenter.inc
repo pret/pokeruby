@@ -2,8 +2,8 @@ TradeCenter_MapObjects:: @ 8391340
 	object_event 1, MAP_OBJ_GFX_WOMAN_6, 0, 9, 0, 6, 0, 3, 9, 0, 0, 0, 0, 0, 0, TradeCenter_EventScript_1A44AD, 0, 0, 0
 
 TradeCenter_MapWarps:: @ 8391358
-	warp_def 5, 8, 3, 127, NONE
-	warp_def 6, 8, 3, 127, NONE
+	warp_def 5, 8, 3, 127, None
+	warp_def 6, 8, 3, 127, None
 
 TradeCenter_MapCoordEvents:: @ 8391368
 	coord_event 4, 5, 3, 0, 0x4000, 0, 0, TradeCenter_EventScript_1A43F0

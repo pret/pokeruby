@@ -16,7 +16,7 @@ SecretBase_Shrub4_MapObjects:: @ 8391160
 	object_event 15, 253, 0, 1, 0, 6, 0, 3, 8, 0, 0, 0, 0, 0, 0, 0x0, 187, 0, 0
 
 SecretBase_Shrub4_MapWarps:: @ 83912C8
-	warp_def 11, 8, 0, 126, NONE
+	warp_def 11, 8, 0, 126, None
 
 SecretBase_Shrub4_MapEvents:: @ 83912D0
 	map_events SecretBase_Shrub4_MapObjects, SecretBase_Shrub4_MapWarps, 0x0, 0x0

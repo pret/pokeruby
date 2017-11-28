@@ -16,7 +16,7 @@ SecretBase_Tree3_MapObjects:: @ 83906C4
 	object_event 15, 253, 0, 1, 0, 6, 0, 3, 8, 0, 0, 0, 0, 0, 0, 0x0, 187, 0, 0
 
 SecretBase_Tree3_MapWarps:: @ 839082C
-	warp_def 8, 6, 0, 126, NONE
+	warp_def 8, 6, 0, 126, None
 
 SecretBase_Tree3_MapEvents:: @ 8390834
 	map_events SecretBase_Tree3_MapObjects, SecretBase_Tree3_MapWarps, 0x0, 0x0

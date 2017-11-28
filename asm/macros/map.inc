@@ -27,12 +27,6 @@
 	.space 2
 	.endm
 
-	.equiv GROUP_NONE, 0x7f
-	.equiv MAP_NONE, 0x7f
-
-	.equiv GROUP_UNDEFINED, 0xff
-	.equiv MAP_UNDEFINED, 0xff
-
 	.macro map_script type, address
 	.byte \type
 	.4byte \address

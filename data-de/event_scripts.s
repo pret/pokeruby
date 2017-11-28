@@ -4915,7 +4915,7 @@ S_FallDownHole:: @ 81C6BC5
 	waitmovement 0
 	playse 43
 	delay 60
-	warphole UNDEFINED
+	warphole Undefined
 	waitstate
 	end
 
