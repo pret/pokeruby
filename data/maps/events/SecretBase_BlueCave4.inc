@@ -16,7 +16,7 @@ SecretBase_BlueCave4_MapObjects:: @ 8390CD4
 	object_event 15, 253, 0, 1, 0, 6, 0, 3, 8, 0, 0, 0, 0, 0, 0, 0x0, 187, 0, 0
 
 SecretBase_BlueCave4_MapWarps:: @ 8390E3C
-	warp_def 4, 15, 0, 126, NONE
+	warp_def 4, 15, 0, 126, None
 
 SecretBase_BlueCave4_MapEvents:: @ 8390E44
 	map_events SecretBase_BlueCave4_MapObjects, SecretBase_BlueCave4_MapWarps, 0x0, 0x0

@@ -461,4 +461,9 @@
 
 	new_map_group
 	map_group Route124_DivingTreasureHuntersHouse     @ 33.0
+	
+	.set MAP_None, 0x7F
+	.set GROUP_None, 0x7F
 
+	.set MAP_Undefined, 0xFF
+	.set GROUP_Undefined, 0xFF
