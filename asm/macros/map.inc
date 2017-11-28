@@ -1,11 +1,6 @@
 	.macro map map_id
-	.byte \map_id >> 8		@ map group
-	.byte \map_id & 0xFF	@ map num
-	.endm
-
-	.macro warp_map map_id
-	.byte \map_id & 0xFF	@ map num
-	.byte \map_id >> 8		@ map group
+	.byte \map_id >> 8    @ map group
+	.byte \map_id & 0xFF  @ map num
 	.endm
 
 	.macro map_script type, address
@@ -32,7 +27,8 @@
 	.macro warp_def x, y, byte, warp, map_id
 	.2byte \x, \y
 	.byte \byte, \warp
-	warp_map \map_id
+	.byte \map_id & 0xFF  @ map num
+	.byte \map_id >> 8    @ map group
 	inc _num_warps
 	.endm
 
