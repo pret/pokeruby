@@ -545,7 +545,7 @@ SECTIONS {
         src/field/bike.o(.rodata);
         data/easy_chat.o(.rodata);
         data/pokenav.o(.rodata);
-        data/mon_markings.o(.rodata);
+        src/pokemon/mon_markings.o(.rodata);
         src/field/mauville_man.o(.rodata);
         src/pokemon/mail.o(.rodata);
         src/field/menu_helpers.o(.rodata);
