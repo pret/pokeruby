@@ -5,7 +5,6 @@
 	.include "constants/item_data_constants.inc"
 	.include "constants/battle_move_constants.inc"
 	.include "constants/trainer_constants.inc"
-	.include "constants/map_constants.inc"
 	.include "constants/berry_constants.inc"
 	.include "constants/version.inc"
 	.include "constants/battle.inc"

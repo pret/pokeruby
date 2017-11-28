@@ -12,7 +12,7 @@ Route113_MapObjects:: @ 83829A0
 	object_event 11, MAP_OBJ_GFX_LITTLE_GIRL_1, 0, 46, 0, 6, 0, 3, 8, 17, 0, 1, 0, 0, 0, Route113_EventScript_150717, 0, 0, 0
 
 Route113_MapWarps:: @ 8382AA8
-	warp_def 33, 5, 0, 0, Route113_GlassWorkshop
+	warp_def 33, 5, 0, 0, MAP_ROUTE113_GLASS_WORKSHOP
 
 Route113_MapCoordEvents:: @ 8382AB0
 	coord_event 19, 11, 3, 0, 8, 0, 0, 0x0

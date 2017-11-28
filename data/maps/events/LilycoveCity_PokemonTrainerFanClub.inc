@@ -9,8 +9,8 @@ LilycoveCity_PokemonTrainerFanClub_MapObjects:: @ 8389EB0
 	object_event 8, MAP_OBJ_GFX_OLD_WOMAN_1, 0, 10, 0, 10, 0, 3, 9, 0, 0, 0, 0, 0, 0, LilycoveCity_PokemonTrainerFanClub_EventScript_159831, 789, 0, 0
 
 LilycoveCity_PokemonTrainerFanClub_MapWarps:: @ 8389F70
-	warp_def 6, 13, 0, 5, LilycoveCity
-	warp_def 5, 13, 0, 5, LilycoveCity
+	warp_def 6, 13, 0, 5, MAP_LILYCOVE_CITY
+	warp_def 5, 13, 0, 5, MAP_LILYCOVE_CITY
 
 LilycoveCity_PokemonTrainerFanClub_MapEvents:: @ 8389F80
 	map_events LilycoveCity_PokemonTrainerFanClub_MapObjects, LilycoveCity_PokemonTrainerFanClub_MapWarps, 0x0, 0x0

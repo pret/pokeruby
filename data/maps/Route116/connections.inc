@@ -1,6 +1,6 @@
 Route116_MapConnectionsList:: @ 8308A38
-	connection down, 80, VerdanturfTown
-	connection left, 0, RustboroCity
+	connection down, 80, MAP_VERDANTURF_TOWN
+	connection left, 0, MAP_RUSTBORO_CITY
 
 Route116_MapConnections:: @ 8308A50
 	.4byte 0x2

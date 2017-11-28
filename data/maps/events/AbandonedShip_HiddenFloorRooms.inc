@@ -5,15 +5,15 @@ AbandonedShip_HiddenFloorRooms_MapObjects:: @ 838E540
 	object_event 4, MAP_OBJ_GFX_ITEM_BALL, 0, 31, 0, 11, 0, 3, 1, 17, 0, 0, 0, 0, 0, AbandonedShip_HiddenFloorRooms_EventScript_1B18E5, 1101, 0, 0
 
 AbandonedShip_HiddenFloorRooms_MapWarps:: @ 838E5A0
-	warp_def 6, 14, 3, 0, AbandonedShip_HiddenFloorCorridors
-	warp_def 7, 14, 3, 0, AbandonedShip_HiddenFloorCorridors
-	warp_def 21, 14, 3, 1, AbandonedShip_HiddenFloorCorridors
-	warp_def 22, 14, 3, 1, AbandonedShip_HiddenFloorCorridors
-	warp_def 36, 14, 3, 2, AbandonedShip_HiddenFloorCorridors
-	warp_def 37, 14, 3, 2, AbandonedShip_HiddenFloorCorridors
-	warp_def 6, 1, 3, 3, AbandonedShip_HiddenFloorCorridors
-	warp_def 21, 1, 3, 4, AbandonedShip_HiddenFloorCorridors
-	warp_def 36, 1, 3, 5, AbandonedShip_HiddenFloorCorridors
+	warp_def 6, 14, 3, 0, MAP_ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS
+	warp_def 7, 14, 3, 0, MAP_ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS
+	warp_def 21, 14, 3, 1, MAP_ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS
+	warp_def 22, 14, 3, 1, MAP_ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS
+	warp_def 36, 14, 3, 2, MAP_ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS
+	warp_def 37, 14, 3, 2, MAP_ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS
+	warp_def 6, 1, 3, 3, MAP_ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS
+	warp_def 21, 1, 3, 4, MAP_ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS
+	warp_def 36, 1, 3, 5, MAP_ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS
 
 AbandonedShip_HiddenFloorRooms_MapBGEvents:: @ 838E5E8
 	bg_event 42, 10, 3, 7, 0, ITEM_ROOM_1_KEY, 31, 0

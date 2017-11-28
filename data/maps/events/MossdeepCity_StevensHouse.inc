@@ -5,8 +5,8 @@ MossdeepCity_StevensHouse_MapObjects:: @ 838AA44
 	object_event 4, MAP_OBJ_GFX_LITTLE_BOY_1, 0, 6, 0, 4, 0, 3, 76, 17, 0, 0, 0, 0, 0, MossdeepCity_StevensHouse_EventScript_15AB02, 727, 0, 0
 
 MossdeepCity_StevensHouse_MapWarps:: @ 838AAA4
-	warp_def 3, 7, 0, 6, MossdeepCity
-	warp_def 4, 7, 0, 6, MossdeepCity
+	warp_def 3, 7, 0, 6, MAP_MOSSDEEP_CITY
+	warp_def 4, 7, 0, 6, MAP_MOSSDEEP_CITY
 
 MossdeepCity_StevensHouse_MapBGEvents:: @ 838AAB4
 	bg_event 0, 1, 0, 0, 0, MossdeepCity_StevensHouse_EventScript_15AAF0

@@ -3,7 +3,7 @@ LilycoveCity_Harbor_MapScripts:: @ 8159893
 	.byte 0
 
 LilycoveCity_Harbor_MapScript1_159899:: @ 8159899
-	setescapewarp LilycoveCity, 255, 12, 33
+	setescapewarp MAP_LILYCOVE_CITY, 255, 12, 33
 	end
 
 LilycoveCity_Harbor_EventScript_1598A2:: @ 81598A2
@@ -52,7 +52,7 @@ LilycoveCity_Harbor_EventScript_159933:: @ 8159933
 	goto_if_eq LilycoveCity_Harbor_EventScript_15997E
 	setvar 0x40b4, 5
 	call LilycoveCity_Harbor_EventScript_15998A
-	warp SSTidalCorridor, 255, 1, 10
+	warp MAP_SS_TIDAL_CORRIDOR, 255, 1, 10
 	waitstate
 	release
 	end
@@ -62,7 +62,7 @@ LilycoveCity_Harbor_EventScript_15995B:: @ 815995B
 	compare RESULT, 0
 	goto_if_eq LilycoveCity_Harbor_EventScript_15997E
 	call LilycoveCity_Harbor_EventScript_15998A
-	warp BattleTower_Outside, 255, 19, 23
+	warp MAP_BATTLE_TOWER_OUTSIDE, 255, 19, 23
 	waitstate
 	release
 	end
@@ -138,7 +138,7 @@ LilycoveCity_Harbor_EventScript_1599EE:: @ 81599EE
 	special ScrSpecial_HealPlayerParty
 	setvar 0x8004, 2
 	call LilycoveCity_Harbor_EventScript_1A040E
-	warp SouthernIsland_Exterior, 255, 13, 22
+	warp MAP_SOUTHERN_ISLAND_EXTERIOR, 255, 13, 22
 	waitstate
 	release
 	end

@@ -15,10 +15,10 @@ LilycoveCity_ContestLobby_MapObjects:: @ 838984C
 	object_event 14, MAP_OBJ_GFX_LITTLE_BOY_1, 0, 7, 0, 7, 0, 3, 3, 16, 0, 0, 0, 0, 0, LilycoveCity_ContestLobby_EventScript_15905D, 0, 0, 0
 
 LilycoveCity_ContestLobby_MapWarps:: @ 838999C
-	warp_def 6, 11, 0, 4, LilycoveCity
-	warp_def 7, 11, 0, 4, LilycoveCity
-	warp_def 1, 1, 0, 0, LilycoveCity_ContestHall
-	warp_def 13, 1, 0, 1, LilycoveCity_ContestHall
+	warp_def 6, 11, 0, 4, MAP_LILYCOVE_CITY
+	warp_def 7, 11, 0, 4, MAP_LILYCOVE_CITY
+	warp_def 1, 1, 0, 0, MAP_LILYCOVE_CITY_CONTEST_HALL
+	warp_def 13, 1, 0, 1, MAP_LILYCOVE_CITY_CONTEST_HALL
 
 LilycoveCity_ContestLobby_MapBGEvents:: @ 83899BC
 	bg_event 18, 5, 0, 0, 0, LilycoveCity_ContestLobby_EventScript_1B7835

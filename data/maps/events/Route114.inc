@@ -24,9 +24,9 @@ Route114_MapObjects:: @ 8382C48
 	object_event 23, MAP_OBJ_GFX_LASS, 0, 23, 0, 44, 0, 3, 8, 17, 0, 1, 0, 0, 0, Route114_EventScript_1508F7, 0, 0, 0
 
 Route114_MapWarps:: @ 8382E70
-	warp_def 8, 63, 0, 0, MeteorFalls_1F_1R
-	warp_def 29, 5, 0, 0, Route114_FossilManiacsHouse
-	warp_def 27, 36, 0, 0, Route114_LanettesHouse
+	warp_def 8, 63, 0, 0, MAP_METEOR_FALLS_1F_1R
+	warp_def 29, 5, 0, 0, MAP_ROUTE114_FOSSIL_MANIACS_HOUSE
+	warp_def 27, 36, 0, 0, MAP_ROUTE114_LANETTES_HOUSE
 
 Route114_MapBGEvents:: @ 8382E88
 	bg_event 7, 64, 0, 0, 0, Route114_EventScript_1507D6

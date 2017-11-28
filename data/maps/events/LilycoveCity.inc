@@ -18,21 +18,21 @@ LilycoveCity_MapObjects:: @ 838016C
 	object_event 17, 240, 0, 27, 0, 7, 0, 5, 8, 17, 0, 0, 0, 0, 0, LilycoveCity_EventScript_14CD46, 971, 0, 0
 
 LilycoveCity_MapWarps:: @ 8380304
-	warp_def 27, 6, 0, 0, LilycoveCity_DepartmentStore_1F
-	warp_def 37, 24, 0, 0, LilycoveCity_CoveLilyMotel_1F
-	warp_def 24, 14, 0, 0, LilycoveCity_PokemonCenter_1F
-	warp_def 11, 5, 0, 0, LilycoveCity_LilycoveMuseum_1F
-	warp_def 23, 24, 0, 0, LilycoveCity_ContestLobby
-	warp_def 39, 14, 0, 1, LilycoveCity_PokemonTrainerFanClub
-	warp_def 70, 5, 1, 0, AquaHideout_1F
-	warp_def 36, 6, 0, 0, LilycoveCity_MoveDeletersHouse
-	warp_def 42, 6, 0, 0, LilycoveCity_House1
-	warp_def 55, 15, 0, 0, LilycoveCity_House2
-	warp_def 11, 22, 0, 0, LilycoveCity_House3
-	warp_def 12, 14, 0, 0, LilycoveCity_House4
-	warp_def 12, 32, 0, 0, LilycoveCity_Harbor
-	warp_def 12, 5, 0, 1, LilycoveCity_LilycoveMuseum_1F
-	warp_def 71, 5, 1, 0, MagmaHideout_1F
+	warp_def 27, 6, 0, 0, MAP_LILYCOVE_CITY_DEPARTMENT_STORE_1F
+	warp_def 37, 24, 0, 0, MAP_LILYCOVE_CITY_COVE_LILY_MOTEL_1F
+	warp_def 24, 14, 0, 0, MAP_LILYCOVE_CITY_POKEMON_CENTER_1F
+	warp_def 11, 5, 0, 0, MAP_LILYCOVE_CITY_LILYCOVE_MUSEUM_1F
+	warp_def 23, 24, 0, 0, MAP_LILYCOVE_CITY_CONTEST_LOBBY
+	warp_def 39, 14, 0, 1, MAP_LILYCOVE_CITY_POKEMON_TRAINER_FAN_CLUB
+	warp_def 70, 5, 1, 0, MAP_AQUA_HIDEOUT_1F
+	warp_def 36, 6, 0, 0, MAP_LILYCOVE_CITY_MOVE_DELETERS_HOUSE
+	warp_def 42, 6, 0, 0, MAP_LILYCOVE_CITY_HOUSE1
+	warp_def 55, 15, 0, 0, MAP_LILYCOVE_CITY_HOUSE2
+	warp_def 11, 22, 0, 0, MAP_LILYCOVE_CITY_HOUSE3
+	warp_def 12, 14, 0, 0, MAP_LILYCOVE_CITY_HOUSE4
+	warp_def 12, 32, 0, 0, MAP_LILYCOVE_CITY_HARBOR
+	warp_def 12, 5, 0, 1, MAP_LILYCOVE_CITY_LILYCOVE_MUSEUM_1F
+	warp_def 71, 5, 1, 0, MAP_MAGMA_HIDEOUT_1F
 
 LilycoveCity_MapBGEvents:: @ 838037C
 	bg_event 19, 7, 0, 0, 0, LilycoveCity_EventScript_14CC82

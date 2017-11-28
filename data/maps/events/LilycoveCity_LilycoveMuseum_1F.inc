@@ -11,9 +11,9 @@ LilycoveCity_LilycoveMuseum_1F_MapObjects:: @ 8389564
 	object_event 10, MAP_OBJ_GFX_PSYCHIC_M, 0, 6, 0, 2, 0, 3, 2, 17, 0, 0, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_158585, 778, 0, 0
 
 LilycoveCity_LilycoveMuseum_1F_MapWarps:: @ 8389654
-	warp_def 9, 13, 0, 3, LilycoveCity
-	warp_def 10, 13, 0, 13, LilycoveCity
-	warp_def 16, 1, 0, 0, LilycoveCity_LilycoveMuseum_2F
+	warp_def 9, 13, 0, 3, MAP_LILYCOVE_CITY
+	warp_def 10, 13, 0, 13, MAP_LILYCOVE_CITY
+	warp_def 16, 1, 0, 0, MAP_LILYCOVE_CITY_LILYCOVE_MUSEUM_2F
 
 LilycoveCity_LilycoveMuseum_1F_MapBGEvents:: @ 838966C
 	bg_event 1, 1, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_158510

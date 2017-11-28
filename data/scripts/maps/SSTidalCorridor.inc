@@ -126,7 +126,7 @@ SSTidalCorridor_EventScript_15FDF8:: @ 815FDF8
 	msgbox SSTidalCorridor_Text_1991F4, 4
 	checkflag 260
 	call_if 1, SSTidalCorridor_EventScript_15FE36
-	warp LilycoveCity_Harbor, 255, 8, 11
+	warp MAP_LILYCOVE_CITY_HARBOR, 255, 8, 11
 	waitstate
 	release
 	end
@@ -136,7 +136,7 @@ SSTidalCorridor_EventScript_15FE17:: @ 815FE17
 	msgbox SSTidalCorridor_Text_1991F4, 4
 	checkflag 260
 	call_if 1, SSTidalCorridor_EventScript_15FE36
-	warp SlateportCity_Harbor, 255, 8, 11
+	warp MAP_SLATEPORT_CITY_HARBOR, 255, 8, 11
 	waitstate
 	release
 	end

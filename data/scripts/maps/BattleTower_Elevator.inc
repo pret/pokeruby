@@ -19,7 +19,7 @@ BattleTower_Elevator_EventScript_1607E4:: @ 81607E4
 	applymovement 255, BattleTower_Elevator_Movement_160841
 	waitmovement 0
 	setvar 0x4000, 0
-	warp BattleTower_Corridor, 255, 8, 1
+	warp MAP_BATTLE_TOWER_CORRIDOR, 255, 8, 1
 	waitstate
 	end
 

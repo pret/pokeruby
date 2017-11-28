@@ -7,7 +7,7 @@ Route105_MapObjects:: @ 8381854
 	object_event 6, MAP_OBJ_GFX_HIKER, 0, 12, 0, 51, 0, 3, 13, 0, 0, 1, 0, 3, 0, Route105_EventScript_14F2BB, 0, 0, 0
 
 Route105_MapWarps:: @ 83818E4
-	warp_def 9, 20, 0, 0, IslandCave
+	warp_def 9, 20, 0, 0, MAP_ISLAND_CAVE
 
 Route105_MapBGEvents:: @ 83818EC
 	bg_event 15, 68, 3, 7, 0, ITEM_HEART_SCALE, 89, 0

@@ -35,7 +35,7 @@ Route123_MapObjects:: @ 83847F8
 	object_event 34, MAP_OBJ_GFX_ITEM_BALL, 0, 75, 0, 9, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route123_EventScript_1B1682, 1109, 0, 0
 
 Route123_MapWarps:: @ 8384B28
-	warp_def 22, 6, 0, 0, Route123_BerryMastersHouse
+	warp_def 22, 6, 0, 0, MAP_ROUTE123_BERRY_MASTERS_HOUSE
 
 Route123_MapCoordEvents:: @ 8384B30
 	coord_event 90, 16, 3, 0, 21, 0, 0, 0x0

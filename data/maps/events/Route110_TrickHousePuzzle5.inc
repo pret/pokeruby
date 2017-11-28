@@ -6,9 +6,9 @@ Route110_TrickHousePuzzle5_MapObjects:: @ 839289C
 	object_event 5, MAP_OBJ_GFX_MAN_1, 0, 1, 0, 6, 0, 3, 10, 0, 0, 0, 0, 0, 0, Route110_TrickHousePuzzle5_EventScript_162876, 0, 0, 0
 
 Route110_TrickHousePuzzle5_MapWarps:: @ 8392914
-	warp_def 0, 21, 3, 2, Route110_TrickHouseEntrance
-	warp_def 1, 21, 3, 2, Route110_TrickHouseEntrance
-	warp_def 13, 1, 3, 0, Route110_TrickHouseEnd
+	warp_def 0, 21, 3, 2, MAP_ROUTE110_TRICK_HOUSE_ENTRANCE
+	warp_def 1, 21, 3, 2, MAP_ROUTE110_TRICK_HOUSE_ENTRANCE
+	warp_def 13, 1, 3, 0, MAP_ROUTE110_TRICK_HOUSE_END
 
 Route110_TrickHousePuzzle5_MapCoordEvents:: @ 839292C
 	coord_event 8, 19, 3, 0, 0x4001, 0, 0, Route110_TrickHousePuzzle5_EventScript_162897

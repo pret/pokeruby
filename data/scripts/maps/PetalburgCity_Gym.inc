@@ -212,7 +212,7 @@ PetalburgCity_Gym_EventScript_154669:: @ 8154669
 	clearflag 866
 	setflag 889
 	special InitBirchState
-	warp PetalburgCity, 255, 15, 8
+	warp MAP_PETALBURG_CITY, 255, 15, 8
 	waitstate
 	release
 	end
@@ -606,7 +606,7 @@ PetalburgCity_Gym_EventScript_154B73:: @ 8154B73
 PetalburgCity_Gym_EventScript_154BA8:: @ 8154BA8
 	closemessage
 	delay 30
-	warpdoor PetalburgCity_Gym, 255, 32776, 32777
+	warpdoor MAP_PETALBURG_CITY_GYM, 255, 32776, 32777
 	waitstate
 	releaseall
 	end

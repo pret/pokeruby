@@ -16,9 +16,9 @@ Route110_TrickHousePuzzle4_MapObjects:: @ 83926FC
 	object_event 15, MAP_OBJ_GFX_PUSHABLE_BOULDER, 0, 14, 0, 9, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_PushableBoulder, 27, 0, 0
 
 Route110_TrickHousePuzzle4_MapWarps:: @ 8392864
-	warp_def 0, 21, 3, 2, Route110_TrickHouseEntrance
-	warp_def 1, 21, 3, 2, Route110_TrickHouseEntrance
-	warp_def 13, 1, 3, 0, Route110_TrickHouseEnd
+	warp_def 0, 21, 3, 2, MAP_ROUTE110_TRICK_HOUSE_ENTRANCE
+	warp_def 1, 21, 3, 2, MAP_ROUTE110_TRICK_HOUSE_ENTRANCE
+	warp_def 13, 1, 3, 0, MAP_ROUTE110_TRICK_HOUSE_END
 
 Route110_TrickHousePuzzle4_MapBGEvents:: @ 839287C
 	bg_event 0, 5, 3, 0, 0, Route110_TrickHousePuzzle4_EventScript_16274E

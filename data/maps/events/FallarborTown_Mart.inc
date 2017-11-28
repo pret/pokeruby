@@ -5,8 +5,8 @@ FallarborTown_Mart_MapObjects:: @ 838666C
 	object_event 4, MAP_OBJ_GFX_SKITTY, 0, 2, 0, 5, 0, 3, 1, 17, 0, 0, 0, 0, 0, FallarborTown_Mart_EventScript_1539AE, 0, 0, 0
 
 FallarborTown_Mart_MapWarps:: @ 83866CC
-	warp_def 3, 7, 0, 0, FallarborTown
-	warp_def 4, 7, 0, 0, FallarborTown
+	warp_def 3, 7, 0, 0, MAP_FALLARBOR_TOWN
+	warp_def 4, 7, 0, 0, MAP_FALLARBOR_TOWN
 
 FallarborTown_Mart_MapEvents:: @ 83866DC
 	map_events FallarborTown_Mart_MapObjects, FallarborTown_Mart_MapWarps, 0x0, 0x0

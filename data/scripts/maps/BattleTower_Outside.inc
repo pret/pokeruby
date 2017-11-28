@@ -40,7 +40,7 @@ BattleTower_Outside_EventScript_1601D0:: @ 81601D0
 	goto_if_eq BattleTower_Outside_EventScript_160226
 	msgbox BattleTower_Outside_Text_199E4B, 4
 	call BattleTower_Outside_EventScript_160232
-	warp SlateportCity_Harbor, 255, 8, 11
+	warp MAP_SLATEPORT_CITY_HARBOR, 255, 8, 11
 	waitstate
 	release
 	end
@@ -51,7 +51,7 @@ BattleTower_Outside_EventScript_1601FB:: @ 81601FB
 	goto_if_eq BattleTower_Outside_EventScript_160226
 	msgbox BattleTower_Outside_Text_199E4B, 4
 	call BattleTower_Outside_EventScript_160232
-	warp LilycoveCity_Harbor, 255, 8, 11
+	warp MAP_LILYCOVE_CITY_HARBOR, 255, 8, 11
 	waitstate
 	release
 	end

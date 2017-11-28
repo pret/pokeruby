@@ -11,7 +11,7 @@ Route124_MapObjects:: @ 8384D10
 	object_event 10, MAP_OBJ_GFX_TUBER_M_SWIMMING, 0, 17, 0, 44, 0, 1, 8, 17, 0, 1, 0, 0, 0, Route124_EventScript_151ED8, 0, 0, 0
 
 Route124_MapWarps:: @ 8384E00
-	warp_def 70, 48, 3, 0, Route124_DivingTreasureHuntersHouse
+	warp_def 70, 48, 3, 0, MAP_ROUTE124_DIVING_TREASURE_HUNTERS_HOUSE
 
 Route124_MapBGEvents:: @ 8384E08
 	bg_event 73, 48, 3, 0, 0, Route124_EventScript_151DEF

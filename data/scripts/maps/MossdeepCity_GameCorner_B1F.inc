@@ -34,7 +34,7 @@ MossdeepCity_GameCorner_B1F_EventScript_15AE6E:: @ 815AE6E
 	waitmovement 0
 	special LoadPlayerParty
 	setvar 0x4001, 1
-	warp MossdeepCity_GameCorner_1F, 255, 3, 1
+	warp MAP_MOSSDEEP_CITY_GAME_CORNER_1F, 255, 3, 1
 	waitstate
 	releaseall
 	end

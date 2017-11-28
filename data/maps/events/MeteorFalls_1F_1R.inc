@@ -11,11 +11,11 @@ MeteorFalls_1F_1R_MapObjects:: @ 838BACC
 	object_event 10, MAP_OBJ_GFX_SCIENTIST_1, 0, 13, 0, 23, 0, 3, 21, 0, 0, 0, 0, 0, 0, MeteorFalls_1F_1R_EventScript_15C656, 942, 0, 0
 
 MeteorFalls_1F_1R_MapWarps:: @ 838BBBC
-	warp_def 27, 18, 4, 0, Route114
-	warp_def 6, 39, 3, 0, Route115
-	warp_def 10, 3, 3, 0, MeteorFalls_1F_2R
-	warp_def 5, 4, 3, 4, MeteorFalls_B1F_1R
-	warp_def 26, 28, 3, 5, MeteorFalls_B1F_1R
+	warp_def 27, 18, 4, 0, MAP_ROUTE114
+	warp_def 6, 39, 3, 0, MAP_ROUTE115
+	warp_def 10, 3, 3, 0, MAP_METEOR_FALLS_1F_2R
+	warp_def 5, 4, 3, 4, MAP_METEOR_FALLS_B1F_1R
+	warp_def 26, 28, 3, 5, MAP_METEOR_FALLS_B1F_1R
 
 MeteorFalls_1F_1R_MapCoordEvents:: @ 838BBE4
 	coord_event 14, 18, 4, 0, 0x40bf, 0, 0, MeteorFalls_1F_1R_EventScript_15C49C

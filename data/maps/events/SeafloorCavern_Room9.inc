@@ -8,7 +8,7 @@ SeafloorCavern_Room9_MapObjects:: @ 838D620
 	object_event 7, 249, 0, 17, 0, 38, 0, 3, 8, 17, 0, 0, 0, 0, 0, 0x0, 733, 0, 0
 
 SeafloorCavern_Room9_MapWarps:: @ 838D6C8
-	warp_def 5, 4, 3, 0, SeafloorCavern_Room8
+	warp_def 5, 4, 3, 0, MAP_SEAFLOOR_CAVERN_ROOM8
 
 SeafloorCavern_Room9_MapCoordEvents:: @ 838D6D0
 	coord_event 17, 42, 3, 0, 0x40a2, 0, 0, SeafloorCavern_Room9_EventScript_15DAFA

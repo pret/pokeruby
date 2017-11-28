@@ -172,7 +172,7 @@ MossdeepCity_Gym_EventScript_15A71D:: @ 815A71D
 
 MossdeepCity_Gym_EventScript_15A742:: @ 815A742
 	lockall
-	warpteleport MossdeepCity_Gym, 255, 14, 29
+	warpteleport MAP_MOSSDEEP_CITY_GYM, 255, 14, 29
 	waitstate
 	releaseall
 	end

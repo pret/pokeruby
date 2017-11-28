@@ -22,7 +22,7 @@ Route117_MapObjects:: @ 8383440
 	object_event 21, MAP_OBJ_GFX_GIRL_2, 0, 48, 0, 10, 0, 3, 2, 17, 0, 0, 0, 0, 0, Route117_EventScript_150D69, 0, 0, 0
 
 Route117_MapWarps:: @ 8383638
-	warp_def 51, 5, 0, 0, Route117_PokemonDayCare
+	warp_def 51, 5, 0, 0, MAP_ROUTE117_POKEMON_DAY_CARE
 
 Route117_MapBGEvents:: @ 8383640
 	bg_event 16, 6, 0, 0, 0, Route117_EventScript_150D72

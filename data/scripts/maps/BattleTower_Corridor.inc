@@ -35,7 +35,7 @@ BattleTower_Corridor_EventScript_1608B1:: @ 81608B1
 
 BattleTower_Corridor_EventScript_1608C2:: @ 81608C2
 	setvar 0x4000, 0
-	warp BattleTower_BattleRoom, 255, 4, 8
+	warp MAP_BATTLE_TOWER_BATTLE_ROOM, 255, 4, 8
 	waitstate
 	end
 

@@ -1,7 +1,7 @@
 SlateportCity_MapConnectionsList:: @ 8308704
-	connection up, 0, Route110
-	connection down, 0, Route109
-	connection right, 0, Route134
+	connection up, 0, MAP_ROUTE110
+	connection down, 0, MAP_ROUTE109
+	connection right, 0, MAP_ROUTE134
 
 SlateportCity_MapConnections:: @ 8308728
 	.4byte 0x3

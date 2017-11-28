@@ -42,8 +42,8 @@ Route120_MapObjects:: @ 8383F30
 	object_event 41, MAP_OBJ_GFX_KECLEON_1, 0, 19, 0, 48, 0, 3, 76, 17, 0, 0, 0, 0, 0, Route120_EventScript_1A0560, 987, 0, 0
 
 Route120_MapWarps:: @ 8384308
-	warp_def 7, 55, 0, 0, AncientTomb
-	warp_def 19, 23, 1, 0, ScorchedSlab
+	warp_def 7, 55, 0, 0, MAP_ANCIENT_TOMB
+	warp_def 19, 23, 1, 0, MAP_SCORCHED_SLAB
 
 Route120_MapCoordEvents:: @ 8384318
 	coord_event 7, 15, 0, 0, 3, 0, 0, 0x0

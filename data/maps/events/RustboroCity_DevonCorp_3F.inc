@@ -4,7 +4,7 @@ RustboroCity_DevonCorp_3F_MapObjects:: @ 838891C
 	object_event 3, MAP_OBJ_GFX_GENTLEMAN, 0, 15, 0, 5, 0, 3, 76, 17, 0, 0, 0, 0, 0, RustboroCity_DevonCorp_3F_EventScript_15783B, 0, 0, 0
 
 RustboroCity_DevonCorp_3F_MapWarps:: @ 8388964
-	warp_def 2, 1, 0, 1, RustboroCity_DevonCorp_2F
+	warp_def 2, 1, 0, 1, MAP_RUSTBORO_CITY_DEVON_CORP_2F
 
 RustboroCity_DevonCorp_3F_MapBGEvents:: @ 838896C
 	bg_event 1, 5, 3, 0, 0, RustboroCity_DevonCorp_3F_EventScript_1578CF

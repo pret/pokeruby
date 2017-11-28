@@ -210,7 +210,7 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	setflag 831
 	setflag 859
 	setflag 946
-	warp Route128, 255, 38, 22
+	warp MAP_ROUTE128, 255, 38, 22
 	waitstate
 	releaseall
 	end

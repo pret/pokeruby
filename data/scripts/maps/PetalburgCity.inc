@@ -45,7 +45,7 @@ PetalburgCity_EventScript_14B747:: @ 814B747
 	clearflag 0x4001
 	special LoadPlayerParty
 	setvar 0x4085, 1
-	warp PetalburgCity_Gym, 255, 4, 108
+	warp MAP_PETALBURG_CITY_GYM, 255, 4, 108
 	waitstate
 	releaseall
 	end

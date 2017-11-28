@@ -15,7 +15,7 @@ LittlerootTown_BrendansHouse_2F_MapObjects:: @ 8385728
 	object_event 14, MAP_OBJ_GFX_MOM, 0, 7, 0, 1, 0, 3, 8, 1, 0, 0, 0, 0, 0, 0x0, 757, 0, 0
 
 LittlerootTown_BrendansHouse_2F_MapWarps:: @ 8385878
-	warp_def 7, 1, 0, 2, LittlerootTown_BrendansHouse_1F
+	warp_def 7, 1, 0, 2, MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F
 
 LittlerootTown_BrendansHouse_2F_MapBGEvents:: @ 8385880
 	bg_event 0, 1, 0, 1, 0, LittlerootTown_BrendansHouse_2F_EventScript_15281E

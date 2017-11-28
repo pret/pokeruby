@@ -32,12 +32,12 @@ Route110_MapObjects:: @ 8381D58
 	object_event 31, MAP_OBJ_GFX_WOMAN_2, 0, 11, 0, 73, 0, 3, 9, 0, 0, 1, 0, 4, 0, Route110_EventScript_14FBD2, 0, 0, 0
 
 Route110_MapWarps:: @ 8382040
-	warp_def 35, 24, 3, 0, NewMauville_Entrance
-	warp_def 11, 66, 0, 0, Route110_TrickHouseEntrance
-	warp_def 15, 16, 0, 0, Route110_SeasideCyclingRoadNorthEntrance
-	warp_def 18, 16, 0, 2, Route110_SeasideCyclingRoadNorthEntrance
-	warp_def 16, 88, 0, 0, Route110_SeasideCyclingRoadSouthEntrance
-	warp_def 19, 88, 0, 2, Route110_SeasideCyclingRoadSouthEntrance
+	warp_def 35, 24, 3, 0, MAP_NEW_MAUVILLE_ENTRANCE
+	warp_def 11, 66, 0, 0, MAP_ROUTE110_TRICK_HOUSE_ENTRANCE
+	warp_def 15, 16, 0, 0, MAP_ROUTE110_SEASIDE_CYCLING_ROAD_NORTH_ENTRANCE
+	warp_def 18, 16, 0, 2, MAP_ROUTE110_SEASIDE_CYCLING_ROAD_NORTH_ENTRANCE
+	warp_def 16, 88, 0, 0, MAP_ROUTE110_SEASIDE_CYCLING_ROAD_SOUTH_ENTRANCE
+	warp_def 19, 88, 0, 2, MAP_ROUTE110_SEASIDE_CYCLING_ROAD_SOUTH_ENTRANCE
 
 Route110_MapCoordEvents:: @ 8382070
 	coord_event 28, 92, 3, 0, 0x40a9, 2, 0, Route110_EventScript_14FC27

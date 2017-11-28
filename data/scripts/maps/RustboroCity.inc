@@ -477,7 +477,7 @@ RustboroCity_EventScript_14C77D:: @ 814C77D
 	setflag 732
 	setvar 0x405a, 5
 	delay 30
-	warp RustboroCity_DevonCorp_3F, 255, 2, 2
+	warp MAP_RUSTBORO_CITY_DEVON_CORP_3F, 255, 2, 2
 	waitstate
 	releaseall
 	end

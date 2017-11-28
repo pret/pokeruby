@@ -4,8 +4,8 @@ MossdeepCity_House2_MapObjects:: @ 838A808
 	object_event 3, MAP_OBJ_GFX_WINGULL, 0, 4, 0, 5, 0, 3, 7, 0, 0, 0, 0, 0, 0, MossdeepCity_House2_EventScript_15A87B, 934, 0, 0
 
 MossdeepCity_House2_MapWarps:: @ 838A850
-	warp_def 3, 8, 0, 3, MossdeepCity
-	warp_def 4, 8, 0, 3, MossdeepCity
+	warp_def 3, 8, 0, 3, MAP_MOSSDEEP_CITY
+	warp_def 4, 8, 0, 3, MAP_MOSSDEEP_CITY
 
 MossdeepCity_House2_MapEvents:: @ 838A860
 	map_events MossdeepCity_House2_MapObjects, MossdeepCity_House2_MapWarps, 0x0, 0x0

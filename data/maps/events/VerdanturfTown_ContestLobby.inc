@@ -7,9 +7,9 @@ VerdanturfTown_ContestLobby_MapObjects:: @ 8386A00
 	object_event 6, MAP_OBJ_GFX_BOY_3, 0, 0, 0, 3, 0, 3, 3, 16, 0, 0, 0, 0, 0, VerdanturfTown_ContestLobby_EventScript_153E80, 0, 0, 0
 
 VerdanturfTown_ContestLobby_MapWarps:: @ 8386A90
-	warp_def 5, 6, 0, 0, VerdanturfTown
-	warp_def 6, 6, 0, 0, VerdanturfTown
-	warp_def 1, 1, 0, 1, VerdanturfTown_ContestHall
+	warp_def 5, 6, 0, 0, MAP_VERDANTURF_TOWN
+	warp_def 6, 6, 0, 0, MAP_VERDANTURF_TOWN
+	warp_def 1, 1, 0, 1, MAP_VERDANTURF_TOWN_CONTEST_HALL
 
 VerdanturfTown_ContestLobby_MapBGEvents:: @ 8386AA8
 	bg_event 10, 3, 0, 0, 0, VerdanturfTown_ContestLobby_EventScript_1B782F

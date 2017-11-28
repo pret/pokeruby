@@ -117,7 +117,7 @@ MossdeepCity_GameCorner_1F_EventScript_15AD59:: @ 815AD59
 	call_if 1, MossdeepCity_GameCorner_1F_EventScript_15AE16
 	compare FACING, 3
 	call_if 1, MossdeepCity_GameCorner_1F_EventScript_15AE28
-	warp MossdeepCity_GameCorner_B1F, 255, 3, 1
+	warp MAP_MOSSDEEP_CITY_GAME_CORNER_B1F, 255, 3, 1
 	waitstate
 	release
 	end

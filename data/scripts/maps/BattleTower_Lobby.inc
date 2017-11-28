@@ -177,7 +177,7 @@ BattleTower_Lobby_EventScript_16044B:: @ 816044B
 	msgbox BattleTower_Lobby_Text_19A0A8, 4
 	closemessage
 	call BattleTower_Lobby_EventScript_160664
-	warp BattleTower_Elevator, 255, 1, 6
+	warp MAP_BATTLE_TOWER_ELEVATOR, 255, 1, 6
 	setvar 0x4000, 0
 	waitstate
 
@@ -254,7 +254,7 @@ BattleTower_Lobby_EventScript_160587:: @ 8160587
 	msgbox BattleTower_Lobby_Text_19A0A8, 4
 	closemessage
 	call BattleTower_Lobby_EventScript_160664
-	warp BattleTower_Elevator, 255, 1, 6
+	warp MAP_BATTLE_TOWER_ELEVATOR, 255, 1, 6
 	setvar 0x4000, 0
 	waitstate
 

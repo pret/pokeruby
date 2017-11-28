@@ -65,7 +65,7 @@ LittlerootTown_MaysHouse_1F_EventScript_152938:: @ 8152938
 	applymovement 255, LittlerootTown_MaysHouse_1F_Movement_15295E
 	applymovement 1, LittlerootTown_MaysHouse_1F_Movement_15295E
 	waitmovement 0
-	warp LittlerootTown_MaysHouse_2F, 255, 1, 1
+	warp MAP_LITTLEROOT_TOWN_MAYS_HOUSE_2F, 255, 1, 1
 	waitstate
 	releaseall
 	end

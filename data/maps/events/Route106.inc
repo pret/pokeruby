@@ -6,7 +6,7 @@ Route106_MapObjects:: @ 838190C
 	object_event 5, MAP_OBJ_GFX_ITEM_BALL, 0, 29, 0, 14, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route106_EventScript_1B1494, 1004, 0, 0
 
 Route106_MapWarps:: @ 8381984
-	warp_def 48, 16, 0, 0, GraniteCave_1F
+	warp_def 48, 16, 0, 0, MAP_GRANITE_CAVE_1F
 
 Route106_MapBGEvents:: @ 838198C
 	bg_event 41, 11, 3, 7, 0, ITEM_POKE_BALL, 63, 0

@@ -10,12 +10,12 @@ PetalburgCity_MapObjects:: @ 837F5F0
 	object_event 9, MAP_OBJ_GFX_BOY_2, 0, 12, 0, 15, 0, 3, 1, 0, 0, 0, 0, 0, 0, PetalburgCity_EventScript_14BA2D, 0, 0, 0
 
 PetalburgCity_MapWarps:: @ 837F6C8
-	warp_def 10, 19, 0, 0, PetalburgCity_House1
-	warp_def 7, 5, 0, 0, PetalburgCity_WallysHouse
-	warp_def 15, 8, 0, 0, PetalburgCity_Gym
-	warp_def 20, 16, 0, 0, PetalburgCity_PokemonCenter_1F
-	warp_def 20, 24, 0, 0, PetalburgCity_House2
-	warp_def 25, 12, 0, 0, PetalburgCity_Mart
+	warp_def 10, 19, 0, 0, MAP_PETALBURG_CITY_HOUSE1
+	warp_def 7, 5, 0, 0, MAP_PETALBURG_CITY_WALLYS_HOUSE
+	warp_def 15, 8, 0, 0, MAP_PETALBURG_CITY_GYM
+	warp_def 20, 16, 0, 0, MAP_PETALBURG_CITY_POKEMON_CENTER_1F
+	warp_def 20, 24, 0, 0, MAP_PETALBURG_CITY_HOUSE2
+	warp_def 25, 12, 0, 0, MAP_PETALBURG_CITY_MART
 
 PetalburgCity_MapCoordEvents:: @ 837F6F8
 	coord_event 8, 10, 3, 0, 0x4057, 0, 0, PetalburgCity_EventScript_14B836

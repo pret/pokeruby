@@ -23,7 +23,7 @@ Route121_MapObjects:: @ 8384504
 	object_event 22, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 26, 0, 12, 0, 3, 1, 17, 0, 0, 0, 0, 0, S_CuttableTree, 19, 0, 0
 
 Route121_MapWarps:: @ 8384714
-	warp_def 37, 5, 0, 2, Route121_SafariZoneEntrance
+	warp_def 37, 5, 0, 2, MAP_ROUTE121_SAFARI_ZONE_ENTRANCE
 
 Route121_MapCoordEvents:: @ 838471C
 	coord_event 25, 5, 3, 0, 0x4074, 0, 0, Route121_EventScript_151B25

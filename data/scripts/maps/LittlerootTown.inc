@@ -81,7 +81,7 @@ LittlerootTown_EventScript_14D5EF:: @ 814D5EF
 	setvar 0x8005, 8
 	call LittlerootTown_EventScript_14D62B
 	setflag 761
-	warpsilent LittlerootTown_BrendansHouse_1F, 255, 8, 8
+	warpsilent MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F, 255, 8, 8
 	waitstate
 	releaseall
 	end
@@ -92,7 +92,7 @@ LittlerootTown_EventScript_14D60D:: @ 814D60D
 	setvar 0x8005, 8
 	call LittlerootTown_EventScript_14D62B
 	setflag 762
-	warpsilent LittlerootTown_MaysHouse_1F, 255, 2, 8
+	warpsilent MAP_LITTLEROOT_TOWN_MAYS_HOUSE_1F, 255, 2, 8
 	waitstate
 	releaseall
 	end

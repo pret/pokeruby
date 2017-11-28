@@ -13,12 +13,12 @@ Route112_MapObjects:: @ 8382818
 	object_event 12, MAP_OBJ_GFX_ITEM_BALL, 0, 14, 0, 43, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route112_EventScript_1B14EF, 1011, 0, 0
 
 Route112_MapWarps:: @ 8382938
-	warp_def 28, 27, 0, 0, Route112_CableCarStation
-	warp_def 29, 27, 0, 1, Route112_CableCarStation
-	warp_def 6, 46, 3, 0, JaggedPass
-	warp_def 7, 46, 3, 1, JaggedPass
-	warp_def 11, 36, 0, 0, FieryPath
-	warp_def 22, 10, 0, 1, FieryPath
+	warp_def 28, 27, 0, 0, MAP_ROUTE112_CABLE_CAR_STATION
+	warp_def 29, 27, 0, 1, MAP_ROUTE112_CABLE_CAR_STATION
+	warp_def 6, 46, 3, 0, MAP_JAGGED_PASS
+	warp_def 7, 46, 3, 1, MAP_JAGGED_PASS
+	warp_def 11, 36, 0, 0, MAP_FIERY_PATH
+	warp_def 22, 10, 0, 1, MAP_FIERY_PATH
 
 Route112_MapBGEvents:: @ 8382968
 	bg_event 19, 44, 3, 0, 0, Route112_EventScript_15052E

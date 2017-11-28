@@ -8,7 +8,7 @@ SlateportCity_OceanicMuseum_2F_MapObjects:: @ 8387D70
 	object_event 7, MAP_OBJ_GFX_LITTLE_BOY_1, 0, 1, 0, 3, 0, 3, 10, 17, 0, 0, 0, 0, 0, SlateportCity_OceanicMuseum_2F_EventScript_155F46, 961, 0, 0
 
 SlateportCity_OceanicMuseum_2F_MapWarps:: @ 8387E18
-	warp_def 6, 1, 0, 2, SlateportCity_OceanicMuseum_1F
+	warp_def 6, 1, 0, 2, MAP_SLATEPORT_CITY_OCEANIC_MUSEUM_1F
 
 SlateportCity_OceanicMuseum_2F_MapBGEvents:: @ 8387E20
 	bg_event 18, 4, 0, 0, 0, SlateportCity_OceanicMuseum_2F_EventScript_155EDA

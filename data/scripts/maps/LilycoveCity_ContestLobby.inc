@@ -602,31 +602,31 @@ LilycoveCity_ContestLobby_EventScript_158F08:: @ 8158F08
 	return
 
 LilycoveCity_ContestLobby_EventScript_158F45:: @ 8158F45
-	setwarp LinkContestRoom4, 255, 7, 5
+	setwarp MAP_LINK_CONTEST_ROOM4, 255, 7, 5
 	special sub_8081334
 	waitstate
 	return
 
 LilycoveCity_ContestLobby_EventScript_158F52:: @ 8158F52
-	setwarp LinkContestRoom2, 255, 7, 5
+	setwarp MAP_LINK_CONTEST_ROOM2, 255, 7, 5
 	special sub_8081334
 	waitstate
 	return
 
 LilycoveCity_ContestLobby_EventScript_158F5F:: @ 8158F5F
-	setwarp LinkContestRoom6, 255, 7, 5
+	setwarp MAP_LINK_CONTEST_ROOM6, 255, 7, 5
 	special sub_8081334
 	waitstate
 	return
 
 LilycoveCity_ContestLobby_EventScript_158F6C:: @ 8158F6C
-	setwarp LinkContestRoom5, 255, 7, 5
+	setwarp MAP_LINK_CONTEST_ROOM5, 255, 7, 5
 	special sub_8081334
 	waitstate
 	return
 
 LilycoveCity_ContestLobby_EventScript_158F79:: @ 8158F79
-	setwarp LinkContestRoom3, 255, 7, 5
+	setwarp MAP_LINK_CONTEST_ROOM3, 255, 7, 5
 	special sub_8081334
 	waitstate
 	return

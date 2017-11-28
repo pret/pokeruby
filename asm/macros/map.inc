@@ -1,30 +1,11 @@
-	.macro new_map_group
-	inc cur_map_group
-	.set cur_map_num, 0
+	.macro map map_id
+	.byte \map_id >> 8		@ map group
+	.byte \map_id & 0xFF	@ map num
 	.endm
 
-	.macro map_group map_name
-	.set GROUP_\map_name, cur_map_group
-	.set MAP_\map_name, cur_map_num
-	inc cur_map_num
-	.endm
-
-	.macro map map_name
-	.byte GROUP_\map_name
-	.byte MAP_\map_name
-	.endm
-
-	.macro warp_map map_name
-	.byte MAP_\map_name
-	.byte GROUP_\map_name
-	.endm
-
-	.macro heal_location map_name, x, y
-	.byte GROUP_\map_name
-	.byte MAP_\map_name
-	.2byte \x
-	.2byte \y
-	.space 2
+	.macro warp_map map_id
+	.byte \map_id & 0xFF	@ map num
+	.byte \map_id >> 8		@ map group
 	.endm
 
 	.macro map_script type, address
@@ -48,10 +29,10 @@
 	inc _num_npcs
 	.endm
 
-	.macro warp_def x, y, byte, warp, map
+	.macro warp_def x, y, byte, warp, map_id
 	.2byte \x, \y
 	.byte \byte, \warp
-	warp_map \map
+	warp_map \map_id
 	inc _num_warps
 	.endm
 

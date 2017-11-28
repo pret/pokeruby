@@ -12,9 +12,9 @@ Route110_TrickHousePuzzle3_MapObjects:: @ 839254C
 	object_event 11, MAP_OBJ_GFX_BREAKABLE_ROCK, 0, 2, 0, 21, 0, 3, 1, 17, 0, 0, 0, 0, 0, S_BreakableRock, 22, 0, 0
 
 Route110_TrickHousePuzzle3_MapWarps:: @ 8392654
-	warp_def 0, 21, 3, 2, Route110_TrickHouseEntrance
-	warp_def 1, 21, 3, 2, Route110_TrickHouseEntrance
-	warp_def 13, 1, 3, 0, Route110_TrickHouseEnd
+	warp_def 0, 21, 3, 2, MAP_ROUTE110_TRICK_HOUSE_ENTRANCE
+	warp_def 1, 21, 3, 2, MAP_ROUTE110_TRICK_HOUSE_ENTRANCE
+	warp_def 13, 1, 3, 0, MAP_ROUTE110_TRICK_HOUSE_END
 
 Route110_TrickHousePuzzle3_MapCoordEvents:: @ 839266C
 	coord_event 5, 20, 3, 0, 0x4001, 0, 0, Route110_TrickHousePuzzle3_EventScript_1625AB

@@ -2,9 +2,9 @@ MossdeepCity_GameCorner_1F_MapObjects:: @ 838AC6C
 	object_event 1, MAP_OBJ_GFX_OLD_MAN_1, 0, 4, 0, 4, 0, 3, 10, 0, 0, 0, 0, 0, 0, MossdeepCity_GameCorner_1F_EventScript_15AD42, 0, 0, 0
 
 MossdeepCity_GameCorner_1F_MapWarps:: @ 838AC84
-	warp_def 3, 7, 0, 9, MossdeepCity
-	warp_def 4, 7, 0, 9, MossdeepCity
-	warp_def 3, 1, 0, 0, MossdeepCity_GameCorner_B1F
+	warp_def 3, 7, 0, 9, MAP_MOSSDEEP_CITY
+	warp_def 4, 7, 0, 9, MAP_MOSSDEEP_CITY
+	warp_def 3, 1, 0, 0, MAP_MOSSDEEP_CITY_GAME_CORNER_B1F
 
 MossdeepCity_GameCorner_1F_MapBGEvents:: @ 838AC9C
 	bg_event 3, 1, 0, 0, 0, MossdeepCity_GameCorner_1F_EventScript_15AE4C

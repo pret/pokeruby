@@ -7,9 +7,9 @@ BattleTower_Lobby_MapObjects:: @ 8391C8C
 	object_event 6, MAP_OBJ_GFX_MAN_2, 0, 7, 0, 6, 0, 3, 9, 0, 0, 0, 0, 0, 0, BattleTower_Lobby_EventScript_160733, 941, 0, 0
 
 BattleTower_Lobby_MapWarps:: @ 8391D1C
-	warp_def 6, 8, 0, 0, BattleTower_Outside
-	warp_def 7, 8, 0, 0, BattleTower_Outside
-	warp_def 6, 1, 0, 0, BattleTower_BattleRoom
+	warp_def 6, 8, 0, 0, MAP_BATTLE_TOWER_OUTSIDE
+	warp_def 7, 8, 0, 0, MAP_BATTLE_TOWER_OUTSIDE
+	warp_def 6, 1, 0, 0, MAP_BATTLE_TOWER_BATTLE_ROOM
 
 BattleTower_Lobby_MapBGEvents:: @ 8391D34
 	bg_event 3, 5, 3, 1, 0, BattleTower_Lobby_EventScript_160727

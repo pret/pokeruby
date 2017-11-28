@@ -4,8 +4,8 @@ SootopolisCity_House4_MapObjects:: @ 838B088
 	object_event 3, MAP_OBJ_GFX_AZUMARILL, 0, 2, 0, 3, 0, 3, 1, 17, 0, 0, 0, 0, 0, SootopolisCity_House4_EventScript_15B35F, 0, 0, 0
 
 SootopolisCity_House4_MapWarps:: @ 838B0D0
-	warp_def 3, 6, 0, 7, SootopolisCity
-	warp_def 4, 6, 0, 7, SootopolisCity
+	warp_def 3, 6, 0, 7, MAP_SOOTOPOLIS_CITY
+	warp_def 4, 6, 0, 7, MAP_SOOTOPOLIS_CITY
 
 SootopolisCity_House4_MapEvents:: @ 838B0E0
 	map_events SootopolisCity_House4_MapObjects, SootopolisCity_House4_MapWarps, 0x0, 0x0

@@ -6,8 +6,8 @@ DewfordTown_Gym_MapObjects:: @ 8385FBC
 	object_event 5, MAP_OBJ_GFX_MAN_2, 0, 5, 0, 24, 0, 3, 8, 0, 0, 0, 0, 0, 0, DewfordTown_Gym_EventScript_15323F, 0, 0, 0
 
 DewfordTown_Gym_MapWarps:: @ 8386034
-	warp_def 5, 27, 0, 2, DewfordTown
-	warp_def 6, 27, 0, 2, DewfordTown
+	warp_def 5, 27, 0, 2, MAP_DEWFORD_TOWN
+	warp_def 6, 27, 0, 2, MAP_DEWFORD_TOWN
 
 DewfordTown_Gym_MapBGEvents:: @ 8386044
 	bg_event 7, 21, 0, 1, 0, DewfordTown_Gym_EventScript_15325E

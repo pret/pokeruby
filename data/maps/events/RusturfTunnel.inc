@@ -11,9 +11,9 @@ RusturfTunnel_MapObjects:: @ 838BD2C
 	object_event 10, MAP_OBJ_GFX_WOMAN_3, 0, 25, 0, 4, 0, 3, 9, 17, 0, 0, 0, 0, 0, RusturfTunnel_EventScript_15C782, 983, 0, 0
 
 RusturfTunnel_MapWarps:: @ 838BE1C
-	warp_def 4, 10, 3, 0, Route116
-	warp_def 29, 16, 3, 4, VerdanturfTown
-	warp_def 18, 20, 3, 2, Route116
+	warp_def 4, 10, 3, 0, MAP_ROUTE116
+	warp_def 29, 16, 3, 4, MAP_VERDANTURF_TOWN
+	warp_def 18, 20, 3, 2, MAP_ROUTE116
 
 RusturfTunnel_MapCoordEvents:: @ 838BE34
 	coord_event 23, 4, 3, 0, 0, 0, 0, RusturfTunnel_EventScript_15C999

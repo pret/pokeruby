@@ -20,13 +20,13 @@ VictoryRoad_B1F_MapObjects:: @ 838DA04
 	object_event 19, MAP_OBJ_GFX_ITEM_BALL, 0, 32, 0, 3, 0, 3, 1, 17, 0, 0, 0, 0, 0, VictoryRoad_B1F_EventScript_1B1AED, 1087, 0, 0
 
 VictoryRoad_B1F_MapWarps:: @ 838DBCC
-	warp_def 30, 25, 3, 0, VictoryRoad_B2F
-	warp_def 17, 16, 3, 2, VictoryRoad_B2F
-	warp_def 42, 25, 3, 3, VictoryRoad_1F
-	warp_def 42, 2, 4, 1, VictoryRoad_B2F
-	warp_def 8, 3, 3, 4, VictoryRoad_1F
-	warp_def 20, 21, 3, 2, VictoryRoad_1F
-	warp_def 5, 26, 3, 3, VictoryRoad_B2F
+	warp_def 30, 25, 3, 0, MAP_VICTORY_ROAD_B2F
+	warp_def 17, 16, 3, 2, MAP_VICTORY_ROAD_B2F
+	warp_def 42, 25, 3, 3, MAP_VICTORY_ROAD_1F
+	warp_def 42, 2, 4, 1, MAP_VICTORY_ROAD_B2F
+	warp_def 8, 3, 3, 4, MAP_VICTORY_ROAD_1F
+	warp_def 20, 21, 3, 2, MAP_VICTORY_ROAD_1F
+	warp_def 5, 26, 3, 3, MAP_VICTORY_ROAD_B2F
 
 VictoryRoad_B1F_MapEvents:: @ 838DC04
 	map_events VictoryRoad_B1F_MapObjects, VictoryRoad_B1F_MapWarps, 0x0, 0x0
