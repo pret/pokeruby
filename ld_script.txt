@@ -513,7 +513,7 @@ SECTIONS {
         data/pokemon_storage_system.o(.rodata);
         src/pokemon/pokemon_icon.o(.rodata);
         src/pokemon/pokemon_summary_screen.o(.rodata);
-        data/fldeff_cut.o(.rodata);
+        src/field/fldeff_cut.o(.rodata);
         src/field/item_menu.o(.rodata);
         data/battle_anim_80A7E7C.o(.rodata);
         src/field/item.o(.rodata);
