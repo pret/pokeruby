@@ -38,6 +38,11 @@
 #define FLAG_TEMP_1E  0x1E
 #define FLAG_TEMP_1F  0x1F
 
+// This flag was supposed to be used as a temporary flag (see above), but there
+// was either an oversight or off-by-one error. Therefore, this one rock-smashable
+// rock disappears forever after the player breaks it.
+#define FLAG_VICTORY_ROAD_ROCK  0x20
+
 // scripts
 #define FLAG_PENDING_DAYCARE_EGG 0x86
 
