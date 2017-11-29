@@ -1,3 +1,4 @@
+#include "constants/flags.h"
 #include "constants/items.h"
 #include "constants/map_objects.h"
 #include "constants/maps.h"

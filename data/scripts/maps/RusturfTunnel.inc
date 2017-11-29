@@ -32,9 +32,9 @@ RusturfTunnel_EventScript_15C782:: @ 815C782
 RusturfTunnel_EventScript_15C799:: @ 815C799
 	lock
 	faceplayer
-	checkflag 1
+	checkflag FLAG_TEMP_1
 	goto_if_eq RusturfTunnel_EventScript_15C7BC
-	setflag 1
+	setflag FLAG_TEMP_1
 	msgbox RusturfTunnel_Text_1944C5, 4
 	closemessage
 	applymovement LAST_TALKED, RusturfTunnel_Movement_1A083D

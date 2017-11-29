@@ -18,9 +18,9 @@ FallarborTown_House1_EventScript_153BB5:: @ 8153BB5
 	end
 
 FallarborTown_House1_EventScript_153BDA:: @ 8153BDA
-	checkflag 2
+	checkflag FLAG_TEMP_2
 	call_if 0, FallarborTown_House1_EventScript_153C2D
-	checkflag 2
+	checkflag FLAG_TEMP_2
 	call_if 1, FallarborTown_House1_EventScript_153C3E
 	compare RESULT, 0
 	goto_if_eq FallarborTown_House1_EventScript_153C47
@@ -45,7 +45,7 @@ FallarborTown_House1_EventScript_153C3E:: @ 8153C3E
 	return
 
 FallarborTown_House1_EventScript_153C47:: @ 8153C47
-	setflag 2
+	setflag FLAG_TEMP_2
 	msgbox FallarborTown_House1_Text_17797D, 4
 	release
 	end

@@ -40,9 +40,9 @@ OldaleTown_EventScript_14DDBC:: @ 814DDBC
 	faceplayer
 	checkflag 132
 	goto_if_eq OldaleTown_EventScript_14DE79
-	checkflag 1
+	checkflag FLAG_TEMP_1
 	goto_if_eq OldaleTown_EventScript_14DE79
-	setflag 1
+	setflag FLAG_TEMP_1
 	playbgm 420, 0
 	msgbox OldaleTown_Text_16AEF2, 4
 	closemessage

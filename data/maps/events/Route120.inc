@@ -19,7 +19,7 @@ Route120_MapObjects:: @ 8383F30
 	object_event 18, MAP_OBJ_GFX_REPORTER_F, 0, 36, 0, 5, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route120_EventScript_1AE4A2, 798, 0, 0
 	object_event 19, MAP_OBJ_GFX_REPORTER_F, 0, 36, 0, 5, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route120_EventScript_1AE562, 902, 0, 0
 	object_event 20, MAP_OBJ_GFX_CAMERAMAN, 0, 37, 0, 5, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route120_EventScript_1AE582, 902, 0, 0
-	object_event 21, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 35, 0, 32, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_CuttableTree, 17, 0, 0
+	object_event 21, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 35, 0, 32, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_CuttableTree, FLAG_TEMP_11, 0, 0
 	object_event 22, MAP_OBJ_GFX_ITEM_BALL, 0, 7, 0, 89, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route120_EventScript_1B1627, 1031, 0, 0
 	object_event 23, MAP_OBJ_GFX_BEAUTY, 0, 14, 0, 92, 0, 5, 5, 1, 0, 0, 0, 0, 0, Route120_EventScript_151739, 0, 0, 0
 	object_event 24, MAP_OBJ_GFX_WOMAN_7, 0, 28, 0, 35, 0, 3, 15, 0, 0, 1, 0, 4, 0, Route120_EventScript_151A74, 0, 0, 0
@@ -30,8 +30,8 @@ Route120_MapObjects:: @ 8383F30
 	object_event 29, MAP_OBJ_GFX_ITEM_BALL, 0, 23, 0, 82, 0, 5, 1, 17, 0, 0, 0, 0, 0, Route120_EventScript_1B1634, 1107, 0, 0
 	object_event 30, MAP_OBJ_GFX_KECLEON_1, 0, 12, 0, 16, 0, 4, 76, 17, 0, 0, 0, 0, 0, Route120_EventScript_151998, 970, 0, 0
 	object_event 31, MAP_OBJ_GFX_STEVEN, 0, 13, 0, 15, 0, 4, 8, 17, 0, 0, 0, 0, 0, Route120_EventScript_151853, 972, 0, 0
-	object_event 32, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 20, 0, 1, 0, 3, 1, 17, 0, 0, 0, 0, 0, S_CuttableTree, 20, 0, 0
-	object_event 33, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 15, 0, 1, 0, 3, 1, 17, 0, 0, 0, 0, 0, S_CuttableTree, 18, 0, 0
+	object_event 32, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 20, 0, 1, 0, 3, 1, 17, 0, 0, 0, 0, 0, S_CuttableTree, FLAG_TEMP_14, 0, 0
+	object_event 33, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 15, 0, 1, 0, 3, 1, 17, 0, 0, 0, 0, 0, S_CuttableTree, FLAG_TEMP_12, 0, 0
 	object_event 34, MAP_OBJ_GFX_LITTLE_BOY_1, 0, 10, 0, 72, 0, 3, 58, 17, 0, 1, 0, 3, 0, Route120_EventScript_151AD0, 0, 0, 0
 	object_event 35, MAP_OBJ_GFX_LITTLE_BOY_1, 0, 19, 0, 28, 0, 3, 57, 17, 0, 1, 0, 3, 0, Route120_EventScript_151AE7, 0, 0, 0
 	object_event 36, MAP_OBJ_GFX_KECLEON_2, 0, 12, 0, 16, 0, 3, 8, 17, 0, 0, 0, 0, 0, 0x0, 981, 0, 0

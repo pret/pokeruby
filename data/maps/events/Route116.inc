@@ -2,17 +2,17 @@ Route116_MapObjects:: @ 8383170
 	object_event 1, MAP_OBJ_GFX_BERRY_TREE, 0, 18, 0, 2, 0, 3, 12, 0, 0, 0, 0, 25, 0, S_BerryTree, 0, 0, 0
 	object_event 2, MAP_OBJ_GFX_BERRY_TREE, 0, 19, 0, 2, 0, 3, 12, 0, 0, 0, 0, 26, 0, S_BerryTree, 0, 0, 0
 	object_event 3, MAP_OBJ_GFX_YOUNGSTER, 0, 12, 0, 7, 0, 3, 16, 0, 0, 1, 0, 3, 0, Route116_EventScript_150C62, 0, 0, 0
-	object_event 4, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 21, 0, 6, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_CuttableTree, 17, 0, 0
-	object_event 5, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 33, 0, 8, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_CuttableTree, 18, 0, 0
+	object_event 4, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 21, 0, 6, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_CuttableTree, FLAG_TEMP_11, 0, 0
+	object_event 5, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 33, 0, 8, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_CuttableTree, FLAG_TEMP_12, 0, 0
 	object_event 6, MAP_OBJ_GFX_BUG_CATCHER, 0, 13, 0, 17, 0, 3, 24, 0, 0, 1, 0, 2, 0, Route116_EventScript_150C79, 0, 0, 0
 	object_event 7, MAP_OBJ_GFX_ITEM_BALL, 0, 19, 0, 6, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route116_EventScript_1B1571, 1019, 0, 0
 	object_event 8, MAP_OBJ_GFX_ITEM_BALL, 0, 10, 0, 17, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route116_EventScript_1B157E, 1020, 0, 0
 	object_event 9, MAP_OBJ_GFX_BERRY_TREE, 0, 20, 0, 2, 0, 3, 12, 0, 0, 0, 0, 66, 0, S_BerryTree, 0, 0, 0
 	object_event 10, MAP_OBJ_GFX_BERRY_TREE, 0, 21, 0, 2, 0, 3, 12, 0, 0, 0, 0, 67, 0, S_BerryTree, 0, 0, 0
 	object_event 11, MAP_OBJ_GFX_OLD_MAN_1, 0, 46, 0, 9, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route116_EventScript_150B5D, 891, 0, 0
-	object_event 12, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 30, 0, 6, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_CuttableTree, 19, 0, 0
+	object_event 12, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 30, 0, 6, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_CuttableTree, FLAG_TEMP_13, 0, 0
 	object_event 13, MAP_OBJ_GFX_HIKER, 0, 36, 0, 15, 0, 3, 13, 0, 0, 1, 0, 2, 0, Route116_EventScript_150CCE, 0, 0, 0
-	object_event 14, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 24, 0, 9, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_CuttableTree, 20, 0, 0
+	object_event 14, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 24, 0, 9, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_CuttableTree, FLAG_TEMP_14, 0, 0
 	object_event 15, MAP_OBJ_GFX_ITEM_BALL, 0, 80, 0, 8, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route116_EventScript_1B158B, 1021, 0, 0
 	object_event 16, MAP_OBJ_GFX_LASS, 0, 22, 0, 16, 0, 3, 13, 0, 0, 1, 0, 3, 0, Route116_EventScript_150CE5, 0, 0, 0
 	object_event 17, MAP_OBJ_GFX_GIRL_3, 0, 25, 0, 4, 0, 3, 8, 0, 0, 1, 0, 2, 0, Route116_EventScript_150CFC, 0, 0, 0

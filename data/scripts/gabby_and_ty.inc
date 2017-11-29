@@ -208,7 +208,7 @@ Route111_EventScript_1AE5A2:: @ 81AE5A2
 	call_if 1, Route111_EventScript_1AE5EB
 	compare FACING, 4
 	call_if 1, Route111_EventScript_1AE5FD
-	checkflag 1
+	checkflag FLAG_TEMP_1
 	goto_if_eq Route111_EventScript_1AE73A
 	msgbox Route111_Text_1AC015, 5
 	goto Route111_EventScript_1AE6F3
@@ -242,7 +242,7 @@ Route120_EventScript_1AE60F:: @ 81AE60F
 	call_if 1, Route111_EventScript_1AE5EB
 	compare FACING, 4
 	call_if 1, Route111_EventScript_1AE5FD
-	checkflag 1
+	checkflag FLAG_TEMP_1
 	goto_if_eq Route111_EventScript_1AE73A
 	specialvar RESULT, GabbyAndTyGetLastQuote
 	compare RESULT, 0
@@ -311,13 +311,13 @@ Route111_EventScript_1AE6F3:: @ 81AE6F3
 	goto_if_eq Route111_EventScript_1AE72D
 	msgbox Route111_Text_1AC487, 4
 	special sub_80BDC14
-	setflag 1
+	setflag FLAG_TEMP_1
 	release
 	end
 
 Route111_EventScript_1AE72D:: @ 81AE72D
 	msgbox Route111_Text_1AC553, 4
-	setflag 1
+	setflag FLAG_TEMP_1
 	release
 	end
 

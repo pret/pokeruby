@@ -40,10 +40,10 @@ Route111_WinstrateFamilysHouse_EventScript_15BF95:: @ 815BF95
 	lock
 	faceplayer
 	setvar 0x8008, 4
-	checkflag 4
+	checkflag FLAG_TEMP_4
 	goto_if_eq Route111_WinstrateFamilysHouse_EventScript_15BFB6
 	msgbox Route111_WinstrateFamilysHouse_Text_192219, 4
-	setflag 4
+	setflag FLAG_TEMP_4
 	goto Route111_WinstrateFamilysHouse_EventScript_15BFC4
 	end
 

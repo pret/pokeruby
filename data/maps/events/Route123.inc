@@ -16,9 +16,9 @@ Route123_MapObjects:: @ 83847F8
 	object_event 15, MAP_OBJ_GFX_BERRY_TREE, 0, 18, 0, 3, 0, 3, 12, 0, 0, 0, 0, 14, 0, S_BerryTree, 0, 0, 0
 	object_event 16, MAP_OBJ_GFX_BERRY_TREE, 0, 11, 0, 5, 0, 3, 12, 0, 0, 0, 0, 15, 0, S_BerryTree, 0, 0, 0
 	object_event 17, MAP_OBJ_GFX_BERRY_TREE, 0, 12, 0, 5, 0, 3, 12, 0, 0, 0, 0, 30, 0, S_BerryTree, 0, 0, 0
-	object_event 18, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 101, 0, 13, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_CuttableTree, 17, 0, 0
-	object_event 19, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 129, 0, 14, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_CuttableTree, 18, 0, 0
-	object_event 20, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 92, 0, 9, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_CuttableTree, 19, 0, 0
+	object_event 18, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 101, 0, 13, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_CuttableTree, FLAG_TEMP_11, 0, 0
+	object_event 19, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 129, 0, 14, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_CuttableTree, FLAG_TEMP_12, 0, 0
+	object_event 20, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 92, 0, 9, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_CuttableTree, FLAG_TEMP_13, 0, 0
 	object_event 21, MAP_OBJ_GFX_ITEM_BALL, 0, 31, 0, 8, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route123_EventScript_1B165B, 1032, 0, 0
 	object_event 22, MAP_OBJ_GFX_ITEM_BALL, 0, 139, 0, 18, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route123_EventScript_1B1668, 1033, 0, 0
 	object_event 23, MAP_OBJ_GFX_GIRL_3, 0, 108, 0, 13, 0, 3, 15, 0, 0, 0, 0, 0, 0, Route123_EventScript_151C5D, 0, 0, 0

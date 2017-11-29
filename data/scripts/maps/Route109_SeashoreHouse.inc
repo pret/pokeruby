@@ -13,10 +13,10 @@ Route109_SeashoreHouse_EventScript_160DD4:: @ 8160DD4
 	goto_if_eq Route109_SeashoreHouse_EventScript_160E36
 	checkflag 141
 	goto_if_eq Route109_SeashoreHouse_EventScript_160E08
-	checkflag 2
+	checkflag FLAG_TEMP_2
 	goto_if_eq Route109_SeashoreHouse_EventScript_160DFE
 	msgbox Route109_SeashoreHouse_Text_19B4D9, 4
-	setflag 2
+	setflag FLAG_TEMP_2
 	release
 	end
 

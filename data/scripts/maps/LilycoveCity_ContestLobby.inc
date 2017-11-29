@@ -307,11 +307,11 @@ LilycoveCity_ContestLobby_EventScript_158B85:: @ 8158B85
 	checkitem ITEM_CONTEST_PASS, 1
 	compare RESULT, 0
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158BBA
-	checkflag 2
+	checkflag FLAG_TEMP_2
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158BAE
 	message LilycoveCity_ContestLobby_Text_18848C
 	waitmessage
-	setflag 2
+	setflag FLAG_TEMP_2
 	goto LilycoveCity_ContestLobby_EventScript_158BF0
 	end
 
@@ -334,7 +334,7 @@ LilycoveCity_ContestLobby_EventScript_158BC4:: @ 8158BC4
 	erasebox 0, 0, 15, 9
 	compare RESULT, 0
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158C35
-	setflag 3
+	setflag FLAG_TEMP_3
 	return
 
 LilycoveCity_ContestLobby_EventScript_158BF0:: @ 8158BF0
@@ -354,7 +354,7 @@ LilycoveCity_ContestLobby_EventScript_158C27:: @ 8158C27
 LilycoveCity_ContestLobby_EventScript_158C35:: @ 8158C35
 	msgbox LilycoveCity_ContestLobby_Text_188559, 4
 	releaseall
-	clearflag 3
+	clearflag FLAG_TEMP_3
 	end
 
 LilycoveCity_ContestLobby_EventScript_158C42:: @ 8158C42
@@ -402,7 +402,7 @@ LilycoveCity_ContestLobby_EventScript_158CC0:: @ 8158CC0
 	end
 
 LilycoveCity_ContestLobby_EventScript_158CEA:: @ 8158CEA
-	checkflag 3
+	checkflag FLAG_TEMP_3
 	call_if 0, LilycoveCity_ContestLobby_EventScript_158BC4
 	message LilycoveCity_ContestLobby_Text_1886DC
 	waitmessage
@@ -445,7 +445,7 @@ LilycoveCity_ContestLobby_EventScript_158D90:: @ 8158D90
 	msgbox LilycoveCity_ContestLobby_Text_18878D, 4
 	closemessage
 	releaseall
-	clearflag 3
+	clearflag FLAG_TEMP_3
 	end
 
 LilycoveCity_ContestLobby_EventScript_158DA1:: @ 8158DA1
@@ -453,7 +453,7 @@ LilycoveCity_ContestLobby_EventScript_158DA1:: @ 8158DA1
 	msgbox LilycoveCity_ContestLobby_Text_1887F4, 4
 	closemessage
 	releaseall
-	clearflag 3
+	clearflag FLAG_TEMP_3
 	end
 
 LilycoveCity_ContestLobby_EventScript_158DB2:: @ 8158DB2
@@ -461,7 +461,7 @@ LilycoveCity_ContestLobby_EventScript_158DB2:: @ 8158DB2
 	msgbox LilycoveCity_ContestLobby_Text_18881F, 4
 	closemessage
 	releaseall
-	clearflag 3
+	clearflag FLAG_TEMP_3
 	end
 
 LilycoveCity_ContestLobby_EventScript_158DC3:: @ 8158DC3

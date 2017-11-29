@@ -1,4 +1,5 @@
 #include "constants/decorations.h"
+#include "constants/flags.h"
 #include "constants/game_stat.h"
 #include "constants/items.h"
 #include "constants/map_objects.h"
@@ -4567,7 +4568,7 @@ SlateportCity_ContestLobby_EventScript_1AE0B6:: @ 81AE0B6
 VerdanturfTown_ContestLobby_EventScript_1AE0B6:: @ 81AE0B6
 	lock
 	faceplayer
-	checkflag 2
+	checkflag FLAG_TEMP_2
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1AE17E
 	setvar 0x8005, 6
 	special sub_80BF2C4
@@ -4613,7 +4614,7 @@ FallarborTown_ContestLobby_EventScript_1AE137:: @ 81AE137
 	compare RESULT, 0
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1AE12D
 	msgbox FallarborTown_ContestLobby_Text_1A7153, 4
-	setflag 2
+	setflag FLAG_TEMP_2
 	setvar 0x8005, 6
 	goto FallarborTown_ContestLobby_EventScript_1ADE46
 	end
@@ -4664,7 +4665,7 @@ FallarborTown_ContestLobby_EventScript_1AE1FE:: @ 81AE1FE
 BattleTower_Lobby_EventScript_1AE1FF:: @ 81AE1FF
 	lock
 	faceplayer
-	checkflag 2
+	checkflag FLAG_TEMP_2
 	goto_if_eq BattleTower_Lobby_EventScript_1AE2E3
 	setvar 0x8005, 7
 	special sub_80BF2C4
@@ -4716,7 +4717,7 @@ BattleTower_Lobby_EventScript_1AE2B3:: @ 81AE2B3
 	compare RESULT, 0
 	goto_if_eq BattleTower_Lobby_EventScript_1AE2D9
 	msgbox BattleTower_Lobby_Text_1A7A6E, 4
-	setflag 2
+	setflag FLAG_TEMP_2
 	copyvar 0x8004, 0x8008
 	setvar 0x8005, 7
 	goto BattleTower_Lobby_EventScript_1ADE46
