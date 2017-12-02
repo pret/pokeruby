@@ -29,7 +29,7 @@ SootopolisCity_Mart_Items:: @ 815B234
 SootopolisCity_Mart_EventScript_15B24A:: @ 815B24A
 	lock
 	faceplayer
-	checkflag 113
+	checkflag FLAG_LEGENDARY_BATTLE_COMPLETED
 	goto_if_eq SootopolisCity_Mart_EventScript_15B268
 	checkflag 129
 	goto_if 0, SootopolisCity_Mart_EventScript_15B268
@@ -45,7 +45,7 @@ SootopolisCity_Mart_EventScript_15B268:: @ 815B268
 SootopolisCity_Mart_EventScript_15B272:: @ 815B272
 	lock
 	faceplayer
-	checkflag 113
+	checkflag FLAG_LEGENDARY_BATTLE_COMPLETED
 	goto_if_eq SootopolisCity_Mart_EventScript_15B290
 	checkflag 129
 	goto_if 0, SootopolisCity_Mart_EventScript_15B290

@@ -4439,9 +4439,9 @@ SlateportCity_OceanicMuseum_1F_EventScript_1ADEE0:: @ 81ADEE0
 	compare RESULT, 1
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_1ADF96
 	copyvar 0x8009, 0x8006
-	checkflag 105
+	checkflag FLAG_OCEANIC_MUSEUM_MET_REPORTER
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_1ADF25
-	setflag 105
+	setflag FLAG_OCEANIC_MUSEUM_MET_REPORTER
 	msgbox SlateportCity_OceanicMuseum_1F_Text_1A927F, 5
 	compare RESULT, 1
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_1ADF44

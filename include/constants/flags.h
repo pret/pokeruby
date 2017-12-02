@@ -42,23 +42,45 @@
 #define FLAG_VICTORY_ROAD_ROCK FLAG_TEMP_20
 
 // scripts
-#define FLAG_SET_WALL_CLOCK              0x51
-#define FLAG_RESCUED_BIRCH               0x52
+#define FLAG_SET_WALL_CLOCK                 0x51
+#define FLAG_RESCUED_BIRCH                  0x52
 
-#define FLAG_LINK_CONTEST_ROOM_POKEBALL  0x56
-#define FLAG_MET_RIVAL_MOM               0x57
-#define FLAG_BIRCH_AIDE_MET              0x58
-#define FLAG_DECLINED_BIKE               0x59
-#define FLAG_RECEIVED_BIKE               0x5A
+#define FLAG_LINK_CONTEST_ROOM_POKEBALL     0x56
+#define FLAG_MET_RIVAL_MOM                  0x57
+#define FLAG_BIRCH_AIDE_MET                 0x58
+#define FLAG_DECLINED_BIKE                  0x59
+#define FLAG_RECEIVED_BIKE                  0x5A
 
-#define FLAG_RECEIVED_WAILMER_PAIL       0x5E
-#define FLAG_RECEIVED_POKEBLOCK_CASE     0x5F
-#define FLAG_RECEIVED_SECRET_POWER       0x60
+#define FLAG_RECEIVED_WAILMER_PAIL          0x5E
+#define FLAG_RECEIVED_POKEBLOCK_CASE        0x5F
+#define FLAG_RECEIVED_SECRET_POWER          0x60
 
-#define FLAG_TV_EXPLAINED                0x62
-#define FLAG_MAUVILLE_GYM_BARRIERS_STATE 0x63
+#define FLAG_TV_EXPLAINED                   0x62
+#define FLAG_MAUVILLE_GYM_BARRIERS_STATE    0x63
+#define FLAG_MOSSDEEP_GYM_SWITCH_1          0x64
+#define FLAG_MOSSDEEP_GYM_SWITCH_2          0x65
+#define FLAG_MOSSDEEP_GYM_SWITCH_3          0x66
+#define FLAG_MOSSDEEP_GYM_SWITCH_4          0x67
+
+#define FLAG_OCEANIC_MUSEUM_MET_REPORTER    0x69
+#define FLAG_RECEIVED_HM04                  0x6A
+#define FLAG_RECEIVED_HM06                  0x6B
+
+#define FLAG_RECEIVED_HM05                  0x6D
+#define FLAG_RECEIVED_HM02                  0x6E
+#define FLAG_MT_PYRE_ORB_STOLEN             0x6F
+#define FLAG_EVIL_TEAM_ESCAPED_IN_SUBMARINE 0x70
+#define FLAG_LEGENDARY_BATTLE_COMPLETED     0x71 // defeated or caught Groudon/Kyogre
+
+#define FLAG_RECEIVED_METEORITE             0x73
+#define FLAG_ADVENTURE_STARTED              0x74 // received pokedex and set loose
+
+#define FLAG_MET_HIDDEN_POWER_GIVER         0x76
+
 
 #define FLAG_PENDING_DAYCARE_EGG 0x86
+
+#define FLAG_RECEIVED_TM10       0x108
 
 #define TRAINER_FLAG_START 0x500
 

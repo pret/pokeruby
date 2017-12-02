@@ -272,7 +272,7 @@ SlateportCity_Harbor_EventScript_156211:: @ 8156211
 	goto_if_eq SlateportCity_Harbor_EventScript_15626F
 	checkflag 271
 	goto_if_eq SlateportCity_Harbor_EventScript_156265
-	checkflag 112
+	checkflag FLAG_EVIL_TEAM_ESCAPED_IN_SUBMARINE
 	goto_if_eq SlateportCity_Harbor_EventScript_156258
 	compare 0x40a0, 2
 	goto_if_eq SlateportCity_Harbor_EventScript_15624E

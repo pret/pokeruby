@@ -3,10 +3,10 @@ MossdeepCity_MapScripts:: @ 814CF92
 	.byte 0
 
 MossdeepCity_MapScript1_14CF98:: @ 814CF98
-	clearflag 100
-	clearflag 101
-	clearflag 102
-	clearflag 103
+	clearflag FLAG_MOSSDEEP_GYM_SWITCH_1
+	clearflag FLAG_MOSSDEEP_GYM_SWITCH_2
+	clearflag FLAG_MOSSDEEP_GYM_SWITCH_3
+	clearflag FLAG_MOSSDEEP_GYM_SWITCH_4
 	checkflag 2090
 	call_if 1, MossdeepCity_EventScript_1A02C1
 	end

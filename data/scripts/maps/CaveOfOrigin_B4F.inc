@@ -19,7 +19,7 @@ CaveOfOrigin_B4F_MapScript1_15DDC5:: @ 815DDC5
 	setmaplayoutindex 313
 	.endif
 	call CaveOfOrigin_B4F_EventScript_1A01B5
-	checkflag 113
+	checkflag FLAG_LEGENDARY_BATTLE_COMPLETED
 	call_if 1, CaveOfOrigin_B4F_EventScript_1A04E3
 	end
 
@@ -73,7 +73,7 @@ CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 	setflag 856
 	clearflag 815
 	setvar 0x409b, 1
-	setflag 113
+	setflag FLAG_LEGENDARY_BATTLE_COMPLETED
 	clearflag 854
 	clearflag 2090
 	setvar 0x40b9, 2

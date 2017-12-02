@@ -69,7 +69,7 @@ MtPyre_Summit_EventScript_15D4E1:: @ 815D4E1
 	end
 
 MtPyre_Summit_EventScript_15D57A:: @ 815D57A
-	setflag 111
+	setflag FLAG_MT_PYRE_ORB_STOLEN
 	setvar 0x4058, 1
 	clearflag 840
 	clearflag 835
@@ -171,7 +171,7 @@ MtPyre_Summit_EventScript_15D623:: @ 815D623
 	faceplayer
 	checkflag 259
 	goto_if_eq MtPyre_Summit_EventScript_15D6C4
-	checkflag 113
+	checkflag FLAG_LEGENDARY_BATTLE_COMPLETED
 	goto_if_eq MtPyre_Summit_EventScript_15D64A
 	checkflag 129
 	goto_if_eq MtPyre_Summit_EventScript_15D6BA

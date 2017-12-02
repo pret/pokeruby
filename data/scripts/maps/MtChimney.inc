@@ -408,14 +408,14 @@ MtChimney_EventScript_15D17D:: @ 815D17D
 	lockall
 	checkflag 139
 	goto_if 0, MtChimney_EventScript_15D1D0
-	checkflag 115
+	checkflag FLAG_RECEIVED_METEORITE
 	goto_if_eq MtChimney_EventScript_15D1C6
 	msgbox MtChimney_Text_195870, 5
 	compare RESULT, 0
 	goto_if_eq MtChimney_EventScript_15D1BC
 	msgbox MtChimney_Text_1958C6, 4
 	giveitem ITEM_METEORITE
-	setflag 115
+	setflag FLAG_RECEIVED_METEORITE
 	releaseall
 	end
 

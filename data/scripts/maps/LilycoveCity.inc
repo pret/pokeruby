@@ -28,7 +28,7 @@ LilycoveCity_MapScript1_14CA3F:: @ 814CA3F
 	setmaptile 71, 6, 368, 0
 	setmaptile 72, 6, 445, 0
 	.endif
-	checkflag 112
+	checkflag FLAG_EVIL_TEAM_ESCAPED_IN_SUBMARINE
 	call_if 0, LilycoveCity_EventScript_14CABE
 	checkflag 2061
 	call_if 1, LilycoveCity_EventScript_14CB2B
@@ -107,7 +107,7 @@ LilycoveCity_EventScript_14CBE6:: @ 814CBE6
 LilycoveCity_EventScript_14CBEF:: @ 814CBEF
 	lock
 	faceplayer
-	checkflag 112
+	checkflag FLAG_EVIL_TEAM_ESCAPED_IN_SUBMARINE
 	goto_if_eq LilycoveCity_EventScript_14CC04
 	msgbox LilycoveCity_Text_1688C1, 4
 	release
@@ -121,7 +121,7 @@ LilycoveCity_EventScript_14CC04:: @ 814CC04
 LilycoveCity_EventScript_14CC0E:: @ 814CC0E
 	lock
 	faceplayer
-	checkflag 112
+	checkflag FLAG_EVIL_TEAM_ESCAPED_IN_SUBMARINE
 	goto_if_eq LilycoveCity_EventScript_14CC23
 	msgbox LilycoveCity_Text_1689BF, 4
 	release

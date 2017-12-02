@@ -17,7 +17,7 @@ SootopolisCity_PokemonCenter_1F_MapScript1_15B196:: @ 815B196
 SootopolisCity_PokemonCenter_1F_EventScript_15B1A8:: @ 815B1A8
 	lock
 	faceplayer
-	checkflag 113
+	checkflag FLAG_LEGENDARY_BATTLE_COMPLETED
 	goto_if_eq SootopolisCity_PokemonCenter_1F_EventScript_15B1C6
 	checkflag 129
 	goto_if 0, SootopolisCity_PokemonCenter_1F_EventScript_15B1C6
@@ -33,7 +33,7 @@ SootopolisCity_PokemonCenter_1F_EventScript_15B1C6:: @ 815B1C6
 SootopolisCity_PokemonCenter_1F_EventScript_15B1D0:: @ 815B1D0
 	lock
 	faceplayer
-	checkflag 113
+	checkflag FLAG_LEGENDARY_BATTLE_COMPLETED
 	goto_if_eq SootopolisCity_PokemonCenter_1F_EventScript_15B1EE
 	checkflag 129
 	goto_if 0, SootopolisCity_PokemonCenter_1F_EventScript_15B1EE

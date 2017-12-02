@@ -187,7 +187,7 @@ LittlerootTown_EventScript_14D6D6:: @ 814D6D6
 LittlerootTown_EventScript_14D6DF:: @ 814D6DF
 	lock
 	faceplayer
-	checkflag 116
+	checkflag FLAG_ADVENTURE_STARTED
 	goto_if_eq LittlerootTown_EventScript_14D72F
 	checkflag FLAG_RESCUED_BIRCH
 	goto_if_eq LittlerootTown_EventScript_14D722

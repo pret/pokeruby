@@ -17,7 +17,7 @@ SootopolisCity_EventScript_14D0A0:: @ 814D0A0
 	return
 
 SootopolisCity_EventScript_14D0B1:: @ 814D0B1
-	checkflag 113
+	checkflag FLAG_LEGENDARY_BATTLE_COMPLETED
 	call_if 0, SootopolisCity_EventScript_14D0BB
 	return
 
@@ -35,7 +35,7 @@ SootopolisCity_EventScript_14D0BB:: @ 814D0BB
 
 SootopolisCity_MapScript1_14D10D:: @ 814D10D
 	setflag 2077
-	checkflag 113
+	checkflag FLAG_LEGENDARY_BATTLE_COMPLETED
 	call_if 1, SootopolisCity_EventScript_14D159
 	checkflag 2090
 	call_if 1, SootopolisCity_EventScript_14D123
@@ -68,7 +68,7 @@ SootopolisCity_MapScript1_14D165:: @ 814D165
 SootopolisCity_EventScript_14D16E:: @ 814D16E
 	lock
 	faceplayer
-	checkflag 113
+	checkflag FLAG_LEGENDARY_BATTLE_COMPLETED
 	goto_if_eq SootopolisCity_EventScript_14D183
 	msgbox SootopolisCity_Text_1696A4, 4
 	release
@@ -156,7 +156,7 @@ SootopolisCity_EventScript_14D27D:: @ 814D27D
 SootopolisCity_EventScript_14D287:: @ 814D287
 	lock
 	faceplayer
-	checkflag 113
+	checkflag FLAG_LEGENDARY_BATTLE_COMPLETED
 	goto_if_eq SootopolisCity_EventScript_14D29C
 	msgbox SootopolisCity_Text_169813, 4
 	release
@@ -170,7 +170,7 @@ SootopolisCity_EventScript_14D29C:: @ 814D29C
 SootopolisCity_EventScript_14D2A6:: @ 814D2A6
 	lock
 	faceplayer
-	checkflag 113
+	checkflag FLAG_LEGENDARY_BATTLE_COMPLETED
 	goto_if_eq SootopolisCity_EventScript_14D2BB
 	msgbox SootopolisCity_Text_1698A0, 4
 	release
@@ -184,7 +184,7 @@ SootopolisCity_EventScript_14D2BB:: @ 814D2BB
 SootopolisCity_EventScript_14D2C5:: @ 814D2C5
 	lock
 	faceplayer
-	checkflag 113
+	checkflag FLAG_LEGENDARY_BATTLE_COMPLETED
 	goto_if_eq SootopolisCity_EventScript_14D2DA
 	msgbox SootopolisCity_Text_1697A7, 4
 	release
@@ -445,7 +445,7 @@ SootopolisCity_EventScript_14D48F:: @ 814D48F
 SootopolisCity_EventScript_14D498:: @ 814D498
 	lock
 	faceplayer
-	checkflag 113
+	checkflag FLAG_LEGENDARY_BATTLE_COMPLETED
 	goto_if_eq SootopolisCity_EventScript_14D4AD
 	.ifdef SAPPHIRE
 	msgbox SootopolisCity_Text_169DA6, 4

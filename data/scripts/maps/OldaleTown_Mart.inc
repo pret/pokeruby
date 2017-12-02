@@ -6,7 +6,7 @@ OldaleTown_Mart_EventScript_152F79:: @ 8152F79
 	faceplayer
 	message OldaleTown_Mart_Text_1A0BE4
 	waitmessage
-	checkflag 116
+	checkflag FLAG_ADVENTURE_STARTED
 	goto_if_eq OldaleTown_Mart_EventScript_152FA8
 	pokemart OldaleTown_Mart_Items1
 	msgbox OldaleTown_Mart_Text_1A0C02, 4
@@ -43,7 +43,7 @@ OldaleTown_Mart_Items2:: @ 8152FB8
 OldaleTown_Mart_EventScript_152FC6:: @ 8152FC6
 	lock
 	faceplayer
-	checkflag 116
+	checkflag FLAG_ADVENTURE_STARTED
 	goto_if_eq OldaleTown_Mart_EventScript_152FDB
 	msgbox OldaleTown_Mart_Text_174A8A, 4
 	release

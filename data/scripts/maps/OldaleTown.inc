@@ -5,11 +5,11 @@ OldaleTown_MapScripts:: @ 814DD62
 OldaleTown_MapScript1_14DD68:: @ 814DD68
 	call OldaleTown_EventScript_1A014E
 	setflag 2064
-	checkflag 116
+	checkflag FLAG_ADVENTURE_STARTED
 	call_if 0, OldaleTown_EventScript_14DD92
 	checkflag 132
 	call_if 0, OldaleTown_EventScript_14DD9E
-	checkflag 116
+	checkflag FLAG_ADVENTURE_STARTED
 	call_if 1, OldaleTown_EventScript_14DD8C
 	end
 
@@ -195,7 +195,7 @@ OldaleTown_Movement_14DECB:: @ 814DECB
 OldaleTown_EventScript_14DEDF:: @ 814DEDF
 	lock
 	faceplayer
-	checkflag 116
+	checkflag FLAG_ADVENTURE_STARTED
 	goto_if_eq OldaleTown_EventScript_14DF26
 	msgbox OldaleTown_Text_16B0CC, 4
 	closemessage

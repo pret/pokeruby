@@ -129,7 +129,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152DBA:: @ 8152DBA
 	compare RESULT, 1
 	call_if 1, LittlerootTown_ProfessorBirchsLab_EventScript_152E40
 	setvar 0x4084, 5
-	setflag 116
+	setflag FLAG_ADVENTURE_STARTED
 	setvar 0x4051, 1
 	setvar 0x408d, 4
 	setvar 0x4050, 3
@@ -159,7 +159,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152E6D:: @ 8152E6D
 	message LittlerootTown_ProfessorBirchsLab_Text_17422F
 	waitfanfare
 	waitmessage
-	setflag 2049
+	setflag SYS_POKEDEX_GET
 	return
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152E7B:: @ 8152E7B
