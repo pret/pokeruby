@@ -4,7 +4,7 @@ LittlerootTown_MapScripts:: @ 814D509
 	.byte 0
 
 LittlerootTown_MapScript1_14D514:: @ 814D514
-	setflag 2063
+	setflag FLAG_VISITED_LITTLEROOT_TOWN
 	compare 0x4092, 2
 	call_if 1, LittlerootTown_EventScript_14D57B
 	checkflag FLAG_RESCUED_BIRCH
@@ -861,7 +861,7 @@ LittlerootTown_EventScript_14DCE2:: @ 814DCE2
 
 LittlerootTown_EventScript_14DD2B:: @ 814DD2B
 	removeobject 4
-	setflag 2144
+	setflag SYS_B_DASH
 	setvar 0x4050, 4
 	release
 	end

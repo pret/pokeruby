@@ -11,7 +11,7 @@ Route114_LanettesHouse_EventScript_15C262:: @ 815C262
 	faceplayer
 	checkflag 131
 	goto_if_eq Route114_LanettesHouse_EventScript_15C28F
-	setflag 2123
+	setflag SYS_PC_LANETTE
 	msgbox Route114_LanettesHouse_Text_192A0D, 4
 	.ifdef SAPPHIRE
 	givedecoration 99

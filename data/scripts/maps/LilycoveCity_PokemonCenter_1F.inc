@@ -21,7 +21,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_15933F:: @ 815933F
 LilycoveCity_PokemonCenter_1F_EventScript_159348:: @ 8159348
 	lock
 	faceplayer
-	checkflag 2061
+	checkflag BADGE07_GET
 	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_15935D
 	msgbox LilycoveCity_PokemonCenter_1F_Text_18A048, 4
 	release

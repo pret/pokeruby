@@ -4,7 +4,7 @@ AquaHideout_B1F_MapScripts:: @ 815D831
 	.byte 0
 
 AquaHideout_B1F_MapScript1_15D83C:: @ 815D83C
-	checkflag 2145
+	checkflag SYS_CTRL_OBJ_DELETE
 	call_if 1, AquaHideout_B1F_EventScript_15D846
 	end
 

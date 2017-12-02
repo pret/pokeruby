@@ -1743,7 +1743,7 @@ EventScript_1A00BE:
 	end
 
 EventScript_1A00CB:
-	checkflag 2052
+	checkflag SYS_GAME_CLEAR
 	goto_if 0, EventScript_1A00BE
 	playse 2
 	special AccessHallOfFamePC
@@ -3943,7 +3943,7 @@ SecretBase_YellowCave4_EventScript_1A2FC0:: @ 81A2FC0
 	end
 
 SecretBase_RedCave1_EventScript_1A3032:: @ 81A3032
-	checkflag 2052
+	checkflag SYS_GAME_CLEAR
 	goto_if 0, SecretBase_RedCave1_EventScript_1A3086
 	compare RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A30A5
@@ -3978,7 +3978,7 @@ SecretBase_RedCave1_EventScript_1A30A5:: @ 81A30A5
 	end
 
 SecretBase_RedCave1_EventScript_1A30AE:: @ 81A30AE
-	checkflag 2052
+	checkflag SYS_GAME_CLEAR
 	goto_if 0, SecretBase_RedCave1_EventScript_1A3102
 	compare RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3121
@@ -4013,7 +4013,7 @@ SecretBase_RedCave1_EventScript_1A3121:: @ 81A3121
 	end
 
 SecretBase_RedCave1_EventScript_1A312A:: @ 81A312A
-	checkflag 2052
+	checkflag SYS_GAME_CLEAR
 	goto_if 0, SecretBase_RedCave1_EventScript_1A317E
 	compare RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A319D
@@ -4048,7 +4048,7 @@ SecretBase_RedCave1_EventScript_1A319D:: @ 81A319D
 	end
 
 SecretBase_RedCave1_EventScript_1A31A6:: @ 81A31A6
-	checkflag 2052
+	checkflag SYS_GAME_CLEAR
 	goto_if 0, SecretBase_RedCave1_EventScript_1A31FA
 	compare RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3219
@@ -4083,7 +4083,7 @@ SecretBase_RedCave1_EventScript_1A3219:: @ 81A3219
 	end
 
 SecretBase_RedCave1_EventScript_1A3222:: @ 81A3222
-	checkflag 2052
+	checkflag SYS_GAME_CLEAR
 	goto_if 0, SecretBase_RedCave1_EventScript_1A3276
 	compare RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3295
@@ -4118,7 +4118,7 @@ SecretBase_RedCave1_EventScript_1A3295:: @ 81A3295
 	end
 
 SecretBase_RedCave1_EventScript_1A329E:: @ 81A329E
-	checkflag 2052
+	checkflag SYS_GAME_CLEAR
 	goto_if 0, SecretBase_RedCave1_EventScript_1A32F2
 	compare RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3311
@@ -4153,7 +4153,7 @@ SecretBase_RedCave1_EventScript_1A3311:: @ 81A3311
 	end
 
 SecretBase_RedCave1_EventScript_1A331A:: @ 81A331A
-	checkflag 2052
+	checkflag SYS_GAME_CLEAR
 	goto_if 0, SecretBase_RedCave1_EventScript_1A336E
 	compare RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A338D
@@ -4188,7 +4188,7 @@ SecretBase_RedCave1_EventScript_1A338D:: @ 81A338D
 	end
 
 SecretBase_RedCave1_EventScript_1A3396:: @ 81A3396
-	checkflag 2052
+	checkflag SYS_GAME_CLEAR
 	goto_if 0, SecretBase_RedCave1_EventScript_1A33EA
 	compare RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3409
@@ -4223,7 +4223,7 @@ SecretBase_RedCave1_EventScript_1A3409:: @ 81A3409
 	end
 
 SecretBase_RedCave1_EventScript_1A3412:: @ 81A3412
-	checkflag 2052
+	checkflag SYS_GAME_CLEAR
 	goto_if 0, SecretBase_RedCave1_EventScript_1A3466
 	compare RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3485
@@ -4258,7 +4258,7 @@ SecretBase_RedCave1_EventScript_1A3485:: @ 81A3485
 	end
 
 SecretBase_RedCave1_EventScript_1A348E:: @ 81A348E
-	checkflag 2052
+	checkflag SYS_GAME_CLEAR
 	goto_if 0, SecretBase_RedCave1_EventScript_1A34E2
 	compare RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3501

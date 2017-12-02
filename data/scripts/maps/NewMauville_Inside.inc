@@ -9,7 +9,7 @@ NewMauville_Inside_MapScript1_15E56F:: @ 815E56F
 	call_if 1, NewMauville_Inside_EventScript_15E5DA
 	compare 0x4002, 1
 	call_if 1, NewMauville_Inside_EventScript_15E728
-	checkflag 2145
+	checkflag SYS_CTRL_OBJ_DELETE
 	call_if 1, NewMauville_Inside_EventScript_15E58F
 	end
 
@@ -170,9 +170,9 @@ NewMauville_Inside_EventScript_15E900:: @ 815E900
 	delay 40
 	waitpokecry
 	setflag 974
-	setflag 2145
+	setflag SYS_CTRL_OBJ_DELETE
 	dowildbattle
-	clearflag 2145
+	clearflag SYS_CTRL_OBJ_DELETE
 	release
 	end
 
@@ -185,9 +185,9 @@ NewMauville_Inside_EventScript_15E91E:: @ 815E91E
 	delay 40
 	waitpokecry
 	setflag 975
-	setflag 2145
+	setflag SYS_CTRL_OBJ_DELETE
 	dowildbattle
-	clearflag 2145
+	clearflag SYS_CTRL_OBJ_DELETE
 	release
 	end
 
@@ -200,8 +200,8 @@ NewMauville_Inside_EventScript_15E93C:: @ 815E93C
 	delay 40
 	waitpokecry
 	setflag 976
-	setflag 2145
+	setflag SYS_CTRL_OBJ_DELETE
 	dowildbattle
-	clearflag 2145
+	clearflag SYS_CTRL_OBJ_DELETE
 	release
 	end

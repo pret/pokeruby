@@ -3,9 +3,9 @@ SlateportCity_SternsShipyard_1F_MapScripts:: @ 8155335
 
 SlateportCity_SternsShipyard_1F_EventScript_155336:: @ 8155336
 	lockall
-	checkflag 2052
+	checkflag SYS_GAME_CLEAR
 	goto_if_eq SlateportCity_SternsShipyard_1F_EventScript_155388
-	checkflag 2061
+	checkflag BADGE07_GET
 	goto_if_eq SlateportCity_SternsShipyard_1F_EventScript_15539C
 	checkflag 149
 	goto_if_eq SlateportCity_SternsShipyard_1F_EventScript_1553CF

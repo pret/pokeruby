@@ -4,7 +4,7 @@ ShoalCave_LowTideInnerRoom_MapScripts:: @ 815E192
 	.byte 0
 
 ShoalCave_LowTideInnerRoom_MapScript1_15E19D:: @ 815E19D
-	checkflag 2106
+	checkflag SYS_SHOAL_TIDE
 	goto_if_eq ShoalCave_LowTideInnerRoom_EventScript_15E1AB
 	goto ShoalCave_LowTideInnerRoom_EventScript_15E1AF
 
@@ -23,7 +23,7 @@ ShoalCave_LowTideInnerRoom_MapScript1_15E1B3:: @ 815E1B3
 ShoalCave_LowTideInnerRoom_EventScript_15E1B9:: @ 815E1B9
 	checkflag 952
 	goto_if_eq ShoalCave_LowTideInnerRoom_EventScript_15E1DA
-	checkflag 2106
+	checkflag SYS_SHOAL_TIDE
 	goto_if_eq ShoalCave_LowTideInnerRoom_EventScript_15E1DA
 	setmaptile 31, 8, 856, 1
 	goto ShoalCave_LowTideInnerRoom_EventScript_15E1DA
@@ -32,7 +32,7 @@ ShoalCave_LowTideInnerRoom_EventScript_15E1B9:: @ 815E1B9
 ShoalCave_LowTideInnerRoom_EventScript_15E1DA:: @ 815E1DA
 	checkflag 953
 	goto_if_eq ShoalCave_LowTideInnerRoom_EventScript_15E1FB
-	checkflag 2106
+	checkflag SYS_SHOAL_TIDE
 	goto_if_eq ShoalCave_LowTideInnerRoom_EventScript_15E1FB
 	setmaptile 14, 26, 856, 1
 	goto ShoalCave_LowTideInnerRoom_EventScript_15E1FB

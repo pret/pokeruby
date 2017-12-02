@@ -5,7 +5,7 @@ AncientTomb_MapScripts:: @ 815EFBE
 	.byte 0
 
 AncientTomb_MapScript1_15EFCE:: @ 815EFCE
-	checkflag 2145
+	checkflag SYS_CTRL_OBJ_DELETE
 	call_if 1, AncientTomb_EventScript_15EFD8
 	end
 
@@ -18,7 +18,7 @@ AncientTomb_MapScript1_15EFDC:: @ 815EFDC
 	end
 
 AncientTomb_MapScript1_15EFE0:: @ 815EFE0
-	checkflag 2130
+	checkflag SYS_BRAILLE_FLY
 	call_if 0, AncientTomb_EventScript_15EFEA
 	end
 
@@ -33,7 +33,7 @@ AncientTomb_EventScript_15EFEA:: @ 815EFEA
 
 AncientTomb_EventScript_15F021:: @ 815F021
 	lockall
-	checkflag 2130
+	checkflag SYS_BRAILLE_FLY
 	goto_if_eq AncientTomb_EventScript_15F038
 	braillemessage AncientTomb_Braille_1C552E
 	waitbutton
@@ -63,9 +63,9 @@ AncientTomb_EventScript_15F050:: @ 815F050
 	waitpokecry
 	setwildbattle SPECIES_REGISTEEL, 40, ITEM_NONE
 	setflag 937
-	setflag 2145
+	setflag SYS_CTRL_OBJ_DELETE
 	special ScrSpecial_StartRegiBattle
 	waitstate
-	clearflag 2145
+	clearflag SYS_CTRL_OBJ_DELETE
 	release
 	end

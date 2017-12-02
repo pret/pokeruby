@@ -589,7 +589,7 @@ LilycoveCity_ContestLobby_EventScript_158EE8:: @ 8158EE8
 	setvar 0x800b, 8
 	setvar CONTEST_RANK, 3
 	setvar 0x4099, 1
-	setflag 2107
+	setflag SYS_RIBBON_GET
 	end
 
 LilycoveCity_ContestLobby_EventScript_158F08:: @ 8158F08

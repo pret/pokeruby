@@ -4,10 +4,10 @@ LilycoveCity_MapScripts:: @ 814CA15
 	.byte 0
 
 LilycoveCity_MapScript1_14CA20:: @ 814CA20
-	setflag 2075
+	setflag FLAG_VISITED_LILYCOVE_CITY
 	setvar 0x4086, 0
 	setflag 802
-	checkflag 2090
+	checkflag SYS_WEATHER_CTRL
 	call_if 1, LilycoveCity_EventScript_1A02C1
 	call LilycoveCity_EventScript_1A0196
 	call LilycoveCity_EventScript_1A014E
@@ -30,7 +30,7 @@ LilycoveCity_MapScript1_14CA3F:: @ 814CA3F
 	.endif
 	checkflag FLAG_EVIL_TEAM_ESCAPED_IN_SUBMARINE
 	call_if 0, LilycoveCity_EventScript_14CABE
-	checkflag 2061
+	checkflag BADGE07_GET
 	call_if 1, LilycoveCity_EventScript_14CB2B
 	end
 
@@ -89,7 +89,7 @@ LilycoveCity_EventScript_14CBBE:: @ 814CBBE
 LilycoveCity_EventScript_14CBC7:: @ 814CBC7
 	lock
 	faceplayer
-	checkflag 2061
+	checkflag BADGE07_GET
 	goto_if_eq LilycoveCity_EventScript_14CBDC
 	msgbox LilycoveCity_Text_168750, 4
 	release
@@ -147,7 +147,7 @@ LilycoveCity_EventScript_14CC3F:: @ 814CC3F
 LilycoveCity_EventScript_14CC48:: @ 814CC48
 	lock
 	faceplayer
-	checkflag 2061
+	checkflag BADGE07_GET
 	goto_if_eq LilycoveCity_EventScript_14CC5D
 	msgbox LilycoveCity_Text_168C16, 4
 	release
@@ -186,7 +186,7 @@ LilycoveCity_EventScript_14CCA2:: @ 814CCA2
 
 LilycoveCity_EventScript_14CCAC:: @ 814CCAC
 	lockall
-	checkflag 2052
+	checkflag SYS_GAME_CLEAR
 	goto_if_eq LilycoveCity_EventScript_14CCC0
 	msgbox LilycoveCity_Text_168EDA, 4
 	releaseall
@@ -349,7 +349,7 @@ LilycoveCity_EventScript_14CE96:: @ 814CE96
 LilycoveCity_EventScript_14CEA6:: @ 814CEA6
 	msgbox LilycoveCity_Text_167C6B, 4
 	setvar RESULT, 0
-	checkflag 2060
+	checkflag BADGE06_GET
 	call_if 1, LilycoveCity_EventScript_14CEDE
 	compare RESULT, 0
 	call_if 1, LilycoveCity_EventScript_14CEEE
@@ -361,7 +361,7 @@ LilycoveCity_EventScript_14CEA6:: @ 814CEA6
 	end
 
 LilycoveCity_EventScript_14CEDE:: @ 814CEDE
-	checkflag 2062
+	checkflag BADGE08_GET
 	goto_if_eq LilycoveCity_EventScript_14CEE8
 	return
 
@@ -374,7 +374,7 @@ LilycoveCity_EventScript_14CEEE:: @ 814CEEE
 	return
 
 LilycoveCity_EventScript_14CEF7:: @ 814CEF7
-	checkflag 2052
+	checkflag SYS_GAME_CLEAR
 	goto_if_eq LilycoveCity_EventScript_14CF09
 	msgbox LilycoveCity_Text_167DDD, 4
 	return
@@ -386,7 +386,7 @@ LilycoveCity_EventScript_14CF09:: @ 814CF09
 LilycoveCity_EventScript_14CF12:: @ 814CF12
 	msgbox LilycoveCity_Text_168149, 4
 	setvar RESULT, 0
-	checkflag 2060
+	checkflag BADGE06_GET
 	call_if 1, LilycoveCity_EventScript_14CEDE
 	compare RESULT, 0
 	call_if 1, LilycoveCity_EventScript_14CF47
@@ -401,7 +401,7 @@ LilycoveCity_EventScript_14CF47:: @ 814CF47
 	return
 
 LilycoveCity_EventScript_14CF50:: @ 814CF50
-	checkflag 2052
+	checkflag SYS_GAME_CLEAR
 	goto_if_eq LilycoveCity_EventScript_14CF62
 	msgbox LilycoveCity_Text_168282, 4
 	return

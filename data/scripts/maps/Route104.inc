@@ -19,7 +19,7 @@ Route104_MapScript1_14EEA8:: @ 814EEA8
 Route104_EventScript_14EEAE:: @ 814EEAE
 	checkflag 127
 	goto_if 0, Route104_EventScript_14EEC4
-	checkflag 2057
+	checkflag BADGE03_GET
 	goto_if 0, Route104_EventScript_14EEC4
 	clearflag 906
 	return

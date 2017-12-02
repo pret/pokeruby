@@ -54,7 +54,7 @@ RustboroCity_DevonCorp_3F_EventScript_157752:: @ 8157752
 	message RustboroCity_DevonCorp_3F_Text_183422
 	waitfanfare
 	waitmessage
-	setflag 2050
+	setflag SYS_POKENAV_GET
 	setflag 188
 	msgbox RustboroCity_DevonCorp_3F_Text_183439, 4
 	setflag 894

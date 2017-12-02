@@ -3,7 +3,7 @@ VerdanturfTown_MapScripts:: @ 814E854
 	.byte 0
 
 VerdanturfTown_MapScript1_14E85A:: @ 814E85A
-	setflag 2068
+	setflag FLAG_VISITED_VERDANTURF_TOWN
 	setvar 0x4086, 0
 	setflag 801
 	end

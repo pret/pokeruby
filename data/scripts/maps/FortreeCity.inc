@@ -4,7 +4,7 @@ FortreeCity_MapScripts:: @ 814C943
 	.byte 0
 
 FortreeCity_MapScript1_14C94E:: @ 814C94E
-	setflag 2074
+	setflag FLAG_VISITED_FORTREE_CITY
 	end
 
 FortreeCity_MapScript1_14C952:: @ 814C952

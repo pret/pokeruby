@@ -4,7 +4,7 @@ Route119_MapScripts:: @ 8151167
 	.byte 0
 
 Route119_MapScript1_151172:: @ 8151172
-	checkflag 2145
+	checkflag SYS_CTRL_OBJ_DELETE
 	call_if 1, Route119_EventScript_15117C
 	end
 

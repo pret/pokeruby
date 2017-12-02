@@ -3,7 +3,7 @@ RustboroCity_MapScripts:: @ 814C372
 	.byte 0
 
 RustboroCity_MapScript1_14C378:: @ 814C378
-	setflag 2073
+	setflag FLAG_VISITED_RUSTBORO_CITY
 	call RustboroCity_EventScript_1A0196
 	call RustboroCity_EventScript_1A014E
 	end
@@ -36,7 +36,7 @@ RustboroCity_EventScript_14C3B1:: @ 814C3B1
 RustboroCity_EventScript_14C3BA:: @ 814C3BA
 	lock
 	faceplayer
-	checkflag 2055
+	checkflag BADGE01_GET
 	goto_if_eq RustboroCity_EventScript_14C3CF
 	msgbox RustboroCity_Text_16696D, 4
 	release

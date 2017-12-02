@@ -3,7 +3,7 @@ BattleTower_Outside_MapScripts:: @ 8160156
 	.byte 0
 
 BattleTower_Outside_MapScript1_16015C:: @ 816015C
-	setflag 2120
+	setflag FLAG_UNLOCK_BATTLE_TOWER
 	setvar 0x40bc, 0
 	setflag 918
 	end

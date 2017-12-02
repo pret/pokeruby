@@ -15,7 +15,7 @@ RustboroCity_Gym_EventScript_1578FE:: @ 81578FE
 	call RustboroCity_Gym_EventScript_1A02C5
 	msgbox RustboroCity_Gym_Text_1840D5, 4
 	setflag 1201
-	setflag 2055
+	setflag BADGE01_GET
 	setvar 0x405a, 1
 	addvar 0x4085, 1
 	setvar 0x8008, 1
@@ -60,14 +60,14 @@ RustboroCity_Gym_EventScript_1579A3:: @ 81579A3
 
 RustboroCity_Gym_EventScript_1579AD:: @ 81579AD
 	lockall
-	checkflag 2055
+	checkflag BADGE01_GET
 	goto_if_eq RustboroCity_Gym_EventScript_1579CD
 	goto RustboroCity_Gym_EventScript_1579D7
 	end
 
 RustboroCity_Gym_EventScript_1579BD:: @ 81579BD
 	lockall
-	checkflag 2055
+	checkflag BADGE01_GET
 	goto_if_eq RustboroCity_Gym_EventScript_1579CD
 	goto RustboroCity_Gym_EventScript_1579D7
 	end

@@ -83,7 +83,7 @@ MauvilleCity_Gym_EventScript_1565DB:: @ 81565DB
 	call MauvilleCity_Gym_EventScript_1A02C5
 	msgbox MauvilleCity_Gym_Text_180DDA, 4
 	setflag 1208
-	setflag 2057
+	setflag BADGE03_GET
 	addvar 0x4085, 1
 	compare 0x4085, 6
 	call_if 1, MauvilleCity_Gym_EventScript_1A00FB
@@ -204,14 +204,14 @@ MauvilleCity_Gym_EventScript_156757:: @ 8156757
 
 MauvilleCity_Gym_EventScript_156761:: @ 8156761
 	lockall
-	checkflag 2057
+	checkflag BADGE03_GET
 	goto_if_eq MauvilleCity_Gym_EventScript_156781
 	goto MauvilleCity_Gym_EventScript_15678B
 	end
 
 MauvilleCity_Gym_EventScript_156771:: @ 8156771
 	lockall
-	checkflag 2057
+	checkflag BADGE03_GET
 	goto_if_eq MauvilleCity_Gym_EventScript_156781
 	goto MauvilleCity_Gym_EventScript_15678B
 	end

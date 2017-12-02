@@ -4,7 +4,7 @@ OldaleTown_MapScripts:: @ 814DD62
 
 OldaleTown_MapScript1_14DD68:: @ 814DD68
 	call OldaleTown_EventScript_1A014E
-	setflag 2064
+	setflag FLAG_VISITED_OLDALE_TOWN
 	checkflag FLAG_ADVENTURE_STARTED
 	call_if 0, OldaleTown_EventScript_14DD92
 	checkflag 132

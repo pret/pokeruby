@@ -7,7 +7,7 @@ SlateportCity_Harbor_MapScript1_155F63:: @ 8155F63
 	setvar 0x4001, 0
 	compare 0x40a0, 1
 	call_if 1, SlateportCity_Harbor_EventScript_155F89
-	checkflag 2052
+	checkflag SYS_GAME_CLEAR
 	call_if 1, SlateportCity_Harbor_EventScript_155F85
 	end
 
@@ -159,7 +159,7 @@ SlateportCity_Harbor_Movement_1560C2:: @ 81560C2
 SlateportCity_Harbor_EventScript_1560C4:: @ 81560C4
 	lock
 	faceplayer
-	checkflag 2052
+	checkflag SYS_GAME_CLEAR
 	goto_if_eq SlateportCity_Harbor_EventScript_1560D9
 	msgbox SlateportCity_Harbor_Text_17FA0A, 4
 	release
@@ -268,7 +268,7 @@ SlateportCity_Harbor_EventScript_156208:: @ 8156208
 SlateportCity_Harbor_EventScript_156211:: @ 8156211
 	lock
 	faceplayer
-	checkflag 2061
+	checkflag BADGE07_GET
 	goto_if_eq SlateportCity_Harbor_EventScript_15626F
 	checkflag 271
 	goto_if_eq SlateportCity_Harbor_EventScript_156265
@@ -305,7 +305,7 @@ SlateportCity_Harbor_EventScript_15626F:: @ 815626F
 	checkitem ITEM_SCANNER, 1
 	compare RESULT, 1
 	goto_if_eq SlateportCity_Harbor_EventScript_1562A7
-	checkflag 2052
+	checkflag SYS_GAME_CLEAR
 	goto_if_eq SlateportCity_Harbor_EventScript_15629D
 	msgbox SlateportCity_Harbor_Text_18017B, 4
 	release

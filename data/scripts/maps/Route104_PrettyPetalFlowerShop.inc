@@ -6,7 +6,7 @@ Route104_PrettyPetalFlowerShop_MapScript1_15BDEA:: @ 815BDEA
 	setflag 2108
 	checkflag 127
 	goto_if 0, Route104_PrettyPetalFlowerShop_EventScript_15BE03
-	checkflag 2057
+	checkflag BADGE03_GET
 	goto_if 0, Route104_PrettyPetalFlowerShop_EventScript_15BE03
 	setflag FLAG_TEMP_1
 	end

@@ -3,7 +3,7 @@ SouthernIsland_Exterior_MapScripts:: @ 8160AD6
 	.byte 0
 
 SouthernIsland_Exterior_MapScript1_160ADC:: @ 8160ADC
-	setflag 2121
+	setflag FLAG_UNLOCK_SOUTHERN_ISLAND
 	end
 
 SouthernIsland_Exterior_EventScript_160AE0:: @ 8160AE0

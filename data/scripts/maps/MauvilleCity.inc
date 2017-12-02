@@ -3,9 +3,9 @@ MauvilleCity_MapScripts:: @ 814C032
 	.byte 0
 
 MauvilleCity_MapScript1_14C038:: @ 814C038
-	setflag 2072
+	setflag FLAG_VISITED_MAUVILLE_CITY
 	clearflag 961
-	setflag 2098
+	setflag SYS_TV_START
 	clearflag FLAG_MAUVILLE_GYM_BARRIERS_STATE
 	setvar 0x4093, 0
 	checkflag 209

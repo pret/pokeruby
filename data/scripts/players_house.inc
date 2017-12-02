@@ -222,7 +222,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6BBE:: @ 81B6BBE
 	msgbox LittlerootTown_BrendansHouse_1F_Text_172841, 4
 	fadedefaultbgm
 	special TurnOffTVScreen
-	setflag 2096
+	setflag SYS_TV_HOME
 	delay 35
 	return
 
@@ -256,7 +256,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6BE9:: @ 81B6BE9
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1B6C33
 	compare 0x408c, 4
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1B6C33
-	checkflag 2059
+	checkflag BADGE05_GET
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1B6C3D
 	checkflag FLAG_RESCUED_BIRCH
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1B6C72

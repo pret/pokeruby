@@ -3,7 +3,7 @@ DewfordTown_MapScripts:: @ 814DFF8
 	.byte 0
 
 DewfordTown_MapScript1_14DFFE:: @ 814DFFE
-	setflag 2065
+	setflag FLAG_VISITED_DEWFORD_TOWN
 	end
 
 DewfordTown_EventScript_14E002:: @ 814E002

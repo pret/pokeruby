@@ -199,7 +199,7 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	setvar 0x405e, 1
 	clearflag 944
 	clearflag 945
-	setflag 2090
+	setflag SYS_WEATHER_CTRL
 	setflag 854
 	setflag 129
 	setflag 967

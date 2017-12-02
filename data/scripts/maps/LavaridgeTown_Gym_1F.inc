@@ -82,7 +82,7 @@ LavaridgeTown_Gym_1F_EventScript_153766:: @ 8153766
 	call LavaridgeTown_Gym_1F_EventScript_1A02C5
 	msgbox LavaridgeTown_Gym_1F_Text_176A8C, 4
 	setflag 1213
-	setflag 2058
+	setflag BADGE04_GET
 	addvar 0x4085, 1
 	compare 0x4085, 6
 	call_if 1, LavaridgeTown_Gym_1F_EventScript_1A00FB
@@ -148,14 +148,14 @@ LavaridgeTown_Gym_1F_EventScript_15386E:: @ 815386E
 
 LavaridgeTown_Gym_1F_EventScript_153878:: @ 8153878
 	lockall
-	checkflag 2058
+	checkflag BADGE04_GET
 	goto_if_eq LavaridgeTown_Gym_1F_EventScript_153898
 	goto LavaridgeTown_Gym_1F_EventScript_1538A2
 	end
 
 LavaridgeTown_Gym_1F_EventScript_153888:: @ 8153888
 	lockall
-	checkflag 2058
+	checkflag BADGE04_GET
 	goto_if_eq LavaridgeTown_Gym_1F_EventScript_153898
 	goto LavaridgeTown_Gym_1F_EventScript_1538A2
 	end

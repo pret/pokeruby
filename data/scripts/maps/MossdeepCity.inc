@@ -7,7 +7,7 @@ MossdeepCity_MapScript1_14CF98:: @ 814CF98
 	clearflag FLAG_MOSSDEEP_GYM_SWITCH_2
 	clearflag FLAG_MOSSDEEP_GYM_SWITCH_3
 	clearflag FLAG_MOSSDEEP_GYM_SWITCH_4
-	checkflag 2090
+	checkflag SYS_WEATHER_CTRL
 	call_if 1, MossdeepCity_EventScript_1A02C1
 	end
 
@@ -52,7 +52,7 @@ MossdeepCity_EventScript_14CFFF:: @ 814CFFF
 	end
 
 MossdeepCity_EventScript_14D008:: @ 814D008
-	setflag 2076
+	setflag FLAG_VISITED_MOSSDEEP_CITY
 	setvar 0x4001, 1
 	end
 

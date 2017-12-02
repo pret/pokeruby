@@ -34,10 +34,10 @@ SootopolisCity_EventScript_14D0BB:: @ 814D0BB
 	return
 
 SootopolisCity_MapScript1_14D10D:: @ 814D10D
-	setflag 2077
+	setflag FLAG_VISITED_SOOTOPOLIS_CITY
 	checkflag FLAG_LEGENDARY_BATTLE_COMPLETED
 	call_if 1, SootopolisCity_EventScript_14D159
-	checkflag 2090
+	checkflag SYS_WEATHER_CTRL
 	call_if 1, SootopolisCity_EventScript_14D123
 	end
 

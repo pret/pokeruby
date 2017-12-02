@@ -174,7 +174,7 @@ RustboroCity_PokemonCenter_2F_EventScript_1A3EA6:: @ 81A3EA6
 SlateportCity_PokemonCenter_2F_EventScript_1A3EA6:: @ 81A3EA6
 SootopolisCity_PokemonCenter_2F_EventScript_1A3EA6:: @ 81A3EA6
 VerdanturfTown_PokemonCenter_2F_EventScript_1A3EA6:: @ 81A3EA6
-	checkflag 2049
+	checkflag SYS_POKEDEX_GET
 	goto_if 0, OldaleTown_PokemonCenter_2F_EventScript_1A4342
 	copyvar 0x8007, LAST_TALKED
 	lock
@@ -346,7 +346,7 @@ RustboroCity_PokemonCenter_2F_EventScript_1A40CC:: @ 81A40CC
 SlateportCity_PokemonCenter_2F_EventScript_1A40CC:: @ 81A40CC
 SootopolisCity_PokemonCenter_2F_EventScript_1A40CC:: @ 81A40CC
 VerdanturfTown_PokemonCenter_2F_EventScript_1A40CC:: @ 81A40CC
-	checkflag 2049
+	checkflag SYS_POKEDEX_GET
 	goto_if 0, OldaleTown_PokemonCenter_2F_EventScript_1A4339
 	copyvar 0x8007, LAST_TALKED
 	lock
@@ -443,7 +443,7 @@ RustboroCity_PokemonCenter_2F_EventScript_1A41FB:: @ 81A41FB
 SlateportCity_PokemonCenter_2F_EventScript_1A41FB:: @ 81A41FB
 SootopolisCity_PokemonCenter_2F_EventScript_1A41FB:: @ 81A41FB
 VerdanturfTown_PokemonCenter_2F_EventScript_1A41FB:: @ 81A41FB
-	checkflag 2072
+	checkflag FLAG_VISITED_MAUVILLE_CITY
 	goto_if 0, OldaleTown_PokemonCenter_2F_EventScript_1A434B
 	copyvar 0x8007, LAST_TALKED
 	lock
