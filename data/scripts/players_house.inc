@@ -59,13 +59,13 @@ LittlerootTown_MaysHouse_2F_EventScript_1B69DF:: @ 81B69DF
 
 LittlerootTown_BrendansHouse_2F_EventScript_1B69EB:: @ 81B69EB
 LittlerootTown_MaysHouse_2F_EventScript_1B69EB:: @ 81B69EB
-	checkflag 81
+	checkflag FLAG_SET_WALL_CLOCK
 	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1B6A91
 	msgbox LittlerootTown_BrendansHouse_2F_Text_172E18, 4
 	call LittlerootTown_BrendansHouse_2F_EventScript_1B6A9B
 	delay 30
 	setvar 0x4092, 6
-	setflag 81
+	setflag FLAG_SET_WALL_CLOCK
 	setflag 754
 	setflag 755
 	checkplayergender
@@ -258,7 +258,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6BE9:: @ 81B6BE9
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1B6C33
 	checkflag 2059
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1B6C3D
-	checkflag 82
+	checkflag FLAG_RESCUED_BIRCH
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1B6C72
 	compare 0x4001, 1
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1B6C80

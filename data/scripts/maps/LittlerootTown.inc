@@ -7,7 +7,7 @@ LittlerootTown_MapScript1_14D514:: @ 814D514
 	setflag 2063
 	compare 0x4092, 2
 	call_if 1, LittlerootTown_EventScript_14D57B
-	checkflag 82
+	checkflag FLAG_RESCUED_BIRCH
 	call_if 0, LittlerootTown_EventScript_14D583
 	compare 0x4050, 3
 	call_if 1, LittlerootTown_EventScript_14D5A6
@@ -189,7 +189,7 @@ LittlerootTown_EventScript_14D6DF:: @ 814D6DF
 	faceplayer
 	checkflag 116
 	goto_if_eq LittlerootTown_EventScript_14D72F
-	checkflag 82
+	checkflag FLAG_RESCUED_BIRCH
 	goto_if_eq LittlerootTown_EventScript_14D722
 	compare 0x4050, 0
 	goto_if 5, LittlerootTown_EventScript_14D708

@@ -100,7 +100,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_152744:: @ 8152744
 	waitmovement 0
 	special GetRivalSonDaughterString
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1730C2, 4
-	setflag 87
+	setflag FLAG_MET_RIVAL_MOM
 	setvar 0x4082, 2
 	releaseall
 	end

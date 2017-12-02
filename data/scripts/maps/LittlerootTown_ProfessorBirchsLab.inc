@@ -87,10 +87,10 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152D63:: @ 8152D63
 	faceplayer
 	compare 0x4084, 3
 	goto_if 4, LittlerootTown_ProfessorBirchsLab_EventScript_152D90
-	checkflag 88
+	checkflag FLAG_BIRCH_AIDE_MET
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152D86
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_173B29, 4
-	setflag 88
+	setflag FLAG_BIRCH_AIDE_MET
 	release
 	end
 

@@ -218,7 +218,7 @@ Route101_EventScript_14EA7F:: @ 814EA7F
 	lock
 	faceplayer
 	setflag 2048
-	setflag 82
+	setflag FLAG_RESCUED_BIRCH
 	fadescreen 1
 	removeobject 4
 	setobjectxy 255, 6, 13

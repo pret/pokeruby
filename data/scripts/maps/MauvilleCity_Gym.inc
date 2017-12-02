@@ -13,7 +13,7 @@ MauvilleCity_Gym_MapScript1_156456:: @ 8156456
 	end
 
 MauvilleCity_Gym_EventScript_156491:: @ 8156491
-	checkflag 99
+	checkflag FLAG_MAUVILLE_GYM_BARRIERS_STATE
 	goto_if_eq MauvilleCity_Gym_EventScript_15649B
 	end
 
@@ -147,9 +147,9 @@ MauvilleCity_Gym_EventScript_1566BA:: @ 81566BA
 	special MauvilleGymSpecial1
 	special DrawWholeMapView
 	playse 44
-	checkflag 99
+	checkflag FLAG_MAUVILLE_GYM_BARRIERS_STATE
 	goto_if_eq MauvilleCity_Gym_EventScript_1566E1
-	checkflag 99
+	checkflag FLAG_MAUVILLE_GYM_BARRIERS_STATE
 	goto_if 0, MauvilleCity_Gym_EventScript_1566DC
 	releaseall
 	end
@@ -159,12 +159,12 @@ MauvilleCity_Gym_EventScript_1566DA:: @ 81566DA
 	end
 
 MauvilleCity_Gym_EventScript_1566DC:: @ 81566DC
-	setflag 99
+	setflag FLAG_MAUVILLE_GYM_BARRIERS_STATE
 	releaseall
 	end
 
 MauvilleCity_Gym_EventScript_1566E1:: @ 81566E1
-	clearflag 99
+	clearflag FLAG_MAUVILLE_GYM_BARRIERS_STATE
 	releaseall
 	end
 

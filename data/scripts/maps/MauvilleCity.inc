@@ -6,7 +6,7 @@ MauvilleCity_MapScript1_14C038:: @ 814C038
 	setflag 2072
 	clearflag 961
 	setflag 2098
-	clearflag 99
+	clearflag FLAG_MAUVILLE_GYM_BARRIERS_STATE
 	setvar 0x4093, 0
 	checkflag 209
 	call_if 1, MauvilleCity_EventScript_14C053
@@ -52,10 +52,10 @@ MauvilleCity_EventScript_14C099:: @ 814C099
 MauvilleCity_EventScript_14C0A2:: @ 814C0A2
 	lock
 	faceplayer
-	checkflag 98
+	checkflag FLAG_TV_EXPLAINED
 	goto_if_eq MauvilleCity_EventScript_14C0BA
 	msgbox MauvilleCity_Text_16674A, 4
-	setflag 98
+	setflag FLAG_TV_EXPLAINED
 	release
 	end
 

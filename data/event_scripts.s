@@ -1155,7 +1155,7 @@ Event_ResetBerryTrees: @ 19F940
 	return
 
 gUnknown_0819FA81:: @ 819FA81
-	setflag 86
+	setflag FLAG_LINK_CONTEST_ROOM_POKEBALL
 	setflag 769
 	setflag 770
 	setflag 771
@@ -3747,7 +3747,7 @@ SecretBase_RedCave1_EventScript_1A2DDE:: @ 81A2DDE
 
 SecretBase_RedCave1_EventScript_1A2E08:: @ 81A2E08
 	closemessage
-	setflag 96
+	setflag FLAG_RECEIVED_SECRET_POWER
 	special sub_80BBC78
 	waitstate
 	end

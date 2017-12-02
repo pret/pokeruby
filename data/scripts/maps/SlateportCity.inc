@@ -125,7 +125,7 @@ SlateportCity_EventScript_14BB81:: @ 814BB81
 	faceplayer
 	compare 0x4058, 1
 	call_if 1, SlateportCity_EventScript_14BBA1
-	checkflag 96
+	checkflag FLAG_RECEIVED_SECRET_POWER
 	goto_if_eq SlateportCity_EventScript_14BBAB
 	msgbox SlateportCity_Text_164937, 4
 	release
@@ -410,7 +410,7 @@ SlateportCity_EventScript_14BE16:: @ 814BE16
 SlateportCity_EventScript_14BE20:: @ 814BE20
 	lock
 	faceplayer
-	checkflag 96
+	checkflag FLAG_RECEIVED_SECRET_POWER
 	goto_if 0, SlateportCity_EventScript_14BE16
 	message SlateportCity_Text_1A0BE4
 	waitmessage
@@ -442,7 +442,7 @@ SlateportCity_Decorations2:: @ 814BE40
 @ 814BE60
 	lock
 	faceplayer
-	checkflag 96
+	checkflag FLAG_RECEIVED_SECRET_POWER
 	goto_if 0, SlateportCity_EventScript_14BE16
 	message SlateportCity_Text_1A0BE4
 	waitmessage

@@ -21,7 +21,7 @@ Route130_MapScript1_1523C8:: @ 81523C8
 	setflag FLAG_TEMP_1D
 	setflag FLAG_TEMP_1E
 	setflag FLAG_TEMP_1F
-	setflag 32
+	setflag FLAG_TEMP_20
 	setmaplayoutindex 264
 	end
 

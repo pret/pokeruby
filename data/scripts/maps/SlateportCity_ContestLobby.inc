@@ -101,13 +101,13 @@ SlateportCity_ContestLobby_EventScript_1554F0:: @ 81554F0
 
 SlateportCity_ContestLobby_EventScript_1554F9:: @ 81554F9
 	lockall
-	checkflag 95
+	checkflag FLAG_RECEIVED_POKEBLOCK_CASE
 	goto_if_eq SlateportCity_ContestLobby_EventScript_155526
 	applymovement 7, SlateportCity_ContestLobby_Movement_1A0839
 	waitmovement 0
 	msgbox SlateportCity_ContestLobby_Text_17CA67, 4
 	giveitem ITEM_POKEBLOCK_CASE
-	setflag 95
+	setflag FLAG_RECEIVED_POKEBLOCK_CASE
 	releaseall
 	end
 

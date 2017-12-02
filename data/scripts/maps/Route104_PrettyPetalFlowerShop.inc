@@ -72,7 +72,7 @@ Route104_PrettyPetalFlowerShop_Items:: @ 815BE94
 Route104_PrettyPetalFlowerShop_EventScript_15BEA4:: @ 815BEA4
 	lock
 	faceplayer
-	checkflag 94
+	checkflag FLAG_RECEIVED_WAILMER_PAIL
 	goto_if 0, Route104_PrettyPetalFlowerShop_EventScript_15BEB9
 	msgbox Route104_PrettyPetalFlowerShop_Text_1C61E8, 4
 	release
@@ -82,7 +82,7 @@ Route104_PrettyPetalFlowerShop_EventScript_15BEB9:: @ 815BEB9
 	msgbox Route104_PrettyPetalFlowerShop_Text_1C6158, 4
 	giveitem ITEM_WAILMER_PAIL
 	msgbox Route104_PrettyPetalFlowerShop_Text_1C61E8, 4
-	setflag 94
+	setflag FLAG_RECEIVED_WAILMER_PAIL
 	release
 	end
 

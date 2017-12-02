@@ -1,7 +1,6 @@
 #ifndef GUARD_CONSTANTS_FLAGS_H
 #define GUARD_CONSTANTS_FLAGS_H
 
-
 // temporary flags
 // These temporary are are cleared every time a map is loaded. They are used for
 // things like shortening an NPCs introduction text if the player already spoke
@@ -37,13 +36,28 @@
 #define FLAG_TEMP_1D  0x1D
 #define FLAG_TEMP_1E  0x1E
 #define FLAG_TEMP_1F  0x1F
-
-// This flag was supposed to be used as a temporary flag (see above), but there
-// was either an oversight or off-by-one error. Therefore, this one rock-smashable
-// rock disappears forever after the player breaks it.
-#define FLAG_VICTORY_ROAD_ROCK  0x20
+// FLAG_TEMP_20 was supposed to be used as a temporary flag (see above), but there
+// was either an oversight or off-by-one error.
+#define FLAG_TEMP_20  0x20
+#define FLAG_VICTORY_ROAD_ROCK FLAG_TEMP_20
 
 // scripts
+#define FLAG_SET_WALL_CLOCK              0x51
+#define FLAG_RESCUED_BIRCH               0x52
+
+#define FLAG_LINK_CONTEST_ROOM_POKEBALL  0x56
+#define FLAG_MET_RIVAL_MOM               0x57
+#define FLAG_BIRCH_AIDE_MET              0x58
+#define FLAG_DECLINED_BIKE               0x59
+#define FLAG_RECEIVED_BIKE               0x5A
+
+#define FLAG_RECEIVED_WAILMER_PAIL       0x5E
+#define FLAG_RECEIVED_POKEBLOCK_CASE     0x5F
+#define FLAG_RECEIVED_SECRET_POWER       0x60
+
+#define FLAG_TV_EXPLAINED                0x62
+#define FLAG_MAUVILLE_GYM_BARRIERS_STATE 0x63
+
 #define FLAG_PENDING_DAYCARE_EGG 0x86
 
 #define TRAINER_FLAG_START 0x500

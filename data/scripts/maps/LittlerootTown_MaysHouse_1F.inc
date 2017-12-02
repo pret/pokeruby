@@ -100,7 +100,7 @@ LittlerootTown_MaysHouse_1F_EventScript_152982:: @ 8152982
 	waitmovement 0
 	special GetRivalSonDaughterString
 	msgbox LittlerootTown_MaysHouse_1F_Text_1730C2, 4
-	setflag 87
+	setflag FLAG_MET_RIVAL_MOM
 	setvar 0x408c, 2
 	releaseall
 	end
