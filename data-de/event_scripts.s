@@ -1307,11 +1307,11 @@ EverGrandeCity_HallOfFame_EventScript_19FC13:: @ 819FC13
 	clearflag 860
 	clearflag 861
 	special sub_810FAA0
-	checkflag 291
+	checkflag FLAG_RECEIVED_SS_TICKET
 	call_if 0, EverGrandeCity_HallOfFame_EventScript_19FC62
 	checkflag FLAG_LATIOS_OR_LATIAS_ROAMING
 	call_if 0, EverGrandeCity_HallOfFame_EventScript_19FC70
-	checkflag 298
+	checkflag FLAG_RECEIVED_BELDUM
 	call_if 0, EverGrandeCity_HallOfFame_EventScript_19FC5A
 	checkflag FLAG_RECEIVED_HM08
 	call_if 0, EverGrandeCity_HallOfFame_EventScript_19FC5E
@@ -1808,7 +1808,7 @@ LavaridgeTown_Gym_1F_EventScript_1A00FB:: @ 81A00FB
 MauvilleCity_Gym_EventScript_1A00FB:: @ 81A00FB
 RustboroCity_Gym_EventScript_1A00FB:: @ 81A00FB
 	clearflag 781
-	setflag 296
+	setflag FLAG_PETALBURG_MART_EXPANDED_ITEMS
 	return
 
 DewfordTown_EventScript_1A0102:: @ 81A0102

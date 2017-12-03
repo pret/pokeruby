@@ -340,7 +340,7 @@ SlateportCity_Harbor_EventScript_1562EA:: @ 81562EA
 	goto_if_eq SlateportCity_Harbor_EventScript_1A029B
 	removeitem ITEM_SCANNER, 1
 	msgbox SlateportCity_Harbor_Text_18046B, 4
-	setflag 294
+	setflag FLAG_EXCHANGED_SCANNER
 	goto SlateportCity_Harbor_EventScript_156380
 	end
 
@@ -353,7 +353,7 @@ SlateportCity_Harbor_EventScript_15632A:: @ 815632A
 	goto_if_eq SlateportCity_Harbor_EventScript_1A029B
 	removeitem ITEM_SCANNER, 1
 	msgbox SlateportCity_Harbor_Text_18046B, 4
-	setflag 294
+	setflag FLAG_EXCHANGED_SCANNER
 	goto SlateportCity_Harbor_EventScript_156380
 	end
 

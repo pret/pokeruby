@@ -4,7 +4,7 @@ AbandonedShip_CaptainsOffice_MapScripts:: @ 815EAF4
 AbandonedShip_CaptainsOffice_EventScript_15EAF5:: @ 815EAF5
 	lock
 	faceplayer
-	checkflag 294
+	checkflag FLAG_EXCHANGED_SCANNER
 	goto_if_eq AbandonedShip_CaptainsOffice_EventScript_15EB2D
 	checkitem ITEM_SCANNER, 1
 	compare RESULT, 1

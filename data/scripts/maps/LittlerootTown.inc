@@ -22,7 +22,7 @@ LittlerootTown_MapScript1_14D514:: @ 814D514
 	end
 
 LittlerootTown_EventScript_14D563:: @ 814D563
-	setflag 301
+	setflag FLAG_RIVAL_LEFT_FOR_ROUTE103
 	return
 
 LittlerootTown_EventScript_14D567:: @ 814D567

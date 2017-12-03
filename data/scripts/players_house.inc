@@ -398,7 +398,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6CDE:: @ 81B6CDE
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1B6E0B
 	playse 8
 	removeobject 0x8009
-	setflag 291
+	setflag FLAG_RECEIVED_SS_TICKET
 	setvar 0x4082, 4
 	setvar 0x408c, 4
 	releaseall

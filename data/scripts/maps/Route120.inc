@@ -184,7 +184,7 @@ Route120_EventScript_15184A:: @ 815184A
 Route120_EventScript_151853:: @ 8151853
 	lock
 	faceplayer
-	checkflag 290
+	checkflag FLAG_NOT_READY_FOR_BATTLE_ROUTE120
 	goto_if_eq Route120_EventScript_151884
 	msgbox Route120_Text_171827, 5
 	compare RESULT, 0
@@ -194,7 +194,7 @@ Route120_EventScript_151853:: @ 8151853
 
 Route120_EventScript_151877:: @ 8151877
 	msgbox Route120_Text_17193D, 4
-	setflag 290
+	setflag FLAG_NOT_READY_FOR_BATTLE_ROUTE120
 	release
 	end
 

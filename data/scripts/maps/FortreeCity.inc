@@ -18,7 +18,7 @@ FortreeCity_EventScript_14C955:: @ 814C955
 FortreeCity_EventScript_14C95E:: @ 814C95E
 	lock
 	faceplayer
-	checkflag 295
+	checkflag FLAG_KECLEON_FLED_FORTREE
 	goto_if_eq FortreeCity_EventScript_14C973
 	msgbox FortreeCity_Text_1675C2, 4
 	release
@@ -82,7 +82,7 @@ FortreeCity_EventScript_14C9E4:: @ 814C9E4
 	applymovement LAST_TALKED, FortreeCity_Movement_14CA13
 	waitmovement 0
 	removeobject LAST_TALKED
-	setflag 295
+	setflag FLAG_KECLEON_FLED_FORTREE
 	release
 	end
 

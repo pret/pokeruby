@@ -422,6 +422,6 @@ LilycoveCity_EventScript_14CF6B:: @ 814CF6B
 	waitfieldeffect 30
 	savebgm 0
 	fadedefaultbgm
-	setflag 292
+	setflag FLAG_MET_RIVAL_LILYCOVE
 	release
 	end

@@ -137,7 +137,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1529EB:: @ 81529EB
 	faceplayer
 	checkflag FLAG_DEFEATED_RIVAL_ROUTE103
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_152A21
-	checkflag 301
+	checkflag FLAG_RIVAL_LEFT_FOR_ROUTE103
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_152A17
 	compare 0x408d, 3
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_152A2B

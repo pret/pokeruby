@@ -41,7 +41,7 @@ MossdeepCity_StevensHouse_EventScript_15AA0B:: @ 815AA0B
 	msgbox MossdeepCity_StevensHouse_Text_18DA77, 4
 	giveitem ITEM_HM08
 	setflag FLAG_RECEIVED_HM08
-	setflag 302
+	setflag FLAG_OMIT_DIVE_FROM_STEVEN_LETTER
 	msgbox MossdeepCity_StevensHouse_Text_18DB22, 4
 	closemessage
 	delay 20
@@ -89,7 +89,7 @@ MossdeepCity_StevensHouse_EventScript_15AA7C:: @ 815AA7C
 	compare RESULT, 1
 	call_if 1, MossdeepCity_StevensHouse_EventScript_1A0678
 	setflag 968
-	setflag 298
+	setflag FLAG_RECEIVED_BELDUM
 	releaseall
 	end
 
@@ -113,7 +113,7 @@ MossdeepCity_StevensHouse_EventScript_15AAF9:: @ 815AAF9
 
 MossdeepCity_StevensHouse_EventScript_15AB02:: @ 815AB02
 	lockall
-	checkflag 302
+	checkflag FLAG_OMIT_DIVE_FROM_STEVEN_LETTER
 	goto_if_eq MossdeepCity_StevensHouse_EventScript_15AB16
 	msgbox MossdeepCity_StevensHouse_Text_18DF1A, 4
 	releaseall
