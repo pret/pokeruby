@@ -120,7 +120,7 @@ Route103_EventScript_14ED46:: @ 814ED46
 	setvar 0x4062, 1
 	setvar 0x4084, 4
 	clearflag 889
-	setflag 130
+	setflag FLAG_DEFEATED_RIVAL_ROUTE103
 	setvar 0x40c7, 1
 	clearflag 979
 	savebgm 0

@@ -6,7 +6,7 @@ Route104_MrBrineysHouse_MapScript1_15BCB8:: @ 815BCB8
 	setflag 2109
 	compare 0x4090, 1
 	call_if 1, Route104_MrBrineysHouse_EventScript_15BCD4
-	checkflag 188
+	checkflag FLAG_RECEIVED_POKENAV
 	call_if 1, Route104_MrBrineysHouse_EventScript_15BCD0
 	end
 
@@ -24,17 +24,17 @@ Route104_MrBrineysHouse_EventScript_15BCD4:: @ 815BCD4
 Route104_MrBrineysHouse_EventScript_15BCEB:: @ 815BCEB
 	lock
 	faceplayer
-	checkflag 147
+	checkflag FLAG_MR_BRINEY_SAILING_INTRO
 	call_if 0, Route104_MrBrineysHouse_EventScript_15BD0E
-	checkflag 189
+	checkflag FLAG_DELIVERED_STEVEN_LETTER
 	goto_if 0, Route104_MrBrineysHouse_EventScript_15BD65
-	checkflag 149
+	checkflag FLAG_DELIVERED_DEVON_GOODS
 	goto_if 0, Route104_MrBrineysHouse_EventScript_15BD7E
 	goto Route104_MrBrineysHouse_EventScript_15BD32
 	end
 
 Route104_MrBrineysHouse_EventScript_15BD0E:: @ 815BD0E
-	setflag 147
+	setflag FLAG_MR_BRINEY_SAILING_INTRO
 	msgbox Route104_MrBrineysHouse_Text_191A82, 4
 	msgbox Route104_MrBrineysHouse_Text_191AAD, 5
 	compare RESULT, 0

@@ -4,7 +4,7 @@ Route104_PrettyPetalFlowerShop_MapScripts:: @ 815BDE4
 
 Route104_PrettyPetalFlowerShop_MapScript1_15BDEA:: @ 815BDEA
 	setflag 2108
-	checkflag 127
+	checkflag FLAG_MET_PRETTY_PETAL_SHOP_OWNER
 	goto_if 0, Route104_PrettyPetalFlowerShop_EventScript_15BE03
 	checkflag BADGE03_GET
 	goto_if 0, Route104_PrettyPetalFlowerShop_EventScript_15BE03
@@ -21,9 +21,9 @@ Route104_PrettyPetalFlowerShop_EventScript_15BE0B:: @ 815BE0B
 	checkflag FLAG_TEMP_1
 	goto_if_eq Route104_PrettyPetalFlowerShop_EventScript_15BE7C
 	msgbox Route104_PrettyPetalFlowerShop_Text_1C5EC6, 4
-	checkflag 127
+	checkflag FLAG_MET_PRETTY_PETAL_SHOP_OWNER
 	goto_if_eq Route104_PrettyPetalFlowerShop_EventScript_15BE4A
-	setflag 127
+	setflag FLAG_MET_PRETTY_PETAL_SHOP_OWNER
 	msgbox Route104_PrettyPetalFlowerShop_Text_1C5F48, 5
 	compare RESULT, 1
 	call_if 1, Route104_PrettyPetalFlowerShop_EventScript_15BE6A

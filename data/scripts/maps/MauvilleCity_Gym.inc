@@ -69,7 +69,7 @@ MauvilleCity_Gym_EventScript_1565A7:: @ 81565A7
 
 MauvilleCity_Gym_EventScript_1565AB:: @ 81565AB
 	trainerbattle 1, OPPONENT_WATTSON, 0, MauvilleCity_Gym_Text_180C32, MauvilleCity_Gym_Text_180D64, MauvilleCity_Gym_EventScript_1565DB
-	checkflag 167
+	checkflag FLAG_RECEIVED_TM34
 	goto_if 0, MauvilleCity_Gym_EventScript_15661D
 	compare 0x40ba, 2
 	goto_if_eq MauvilleCity_Gym_EventScript_156641
@@ -100,7 +100,7 @@ MauvilleCity_Gym_EventScript_15661D:: @ 815661D
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_Gym_EventScript_1A029B
 	msgbox MauvilleCity_Gym_Text_180E76, 4
-	setflag 167
+	setflag FLAG_RECEIVED_TM34
 	release
 	end
 

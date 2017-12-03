@@ -9,18 +9,18 @@ Route114_LanettesHouse_MapScript1_15C25E:: @ 815C25E
 Route114_LanettesHouse_EventScript_15C262:: @ 815C262
 	lock
 	faceplayer
-	checkflag 131
+	checkflag FLAG_RECEIVED_DOLL_LANETTE
 	goto_if_eq Route114_LanettesHouse_EventScript_15C28F
 	setflag SYS_PC_LANETTE
 	msgbox Route114_LanettesHouse_Text_192A0D, 4
 	.ifdef SAPPHIRE
-	givedecoration 99
+	givedecoration DECOR_LOTAD_DOLL
 	.else
-	givedecoration 100
+	givedecoration DECOR_SEEDOT_DOLL
 	.endif
 	compare RESULT, 0
 	goto_if_eq Route114_LanettesHouse_EventScript_1A02AE
-	setflag 131
+	setflag FLAG_RECEIVED_DOLL_LANETTE
 	release
 	end
 

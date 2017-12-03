@@ -3,7 +3,7 @@ VictoryRoad_1F_MapScripts:: @ 815DE83
 	.byte 0
 
 VictoryRoad_1F_MapScript1_15DE89:: @ 815DE89
-	checkflag 126
+	checkflag FLAG_DEFEATED_WALLY_VICTORY_ROAD
 	call_if 1, VictoryRoad_1F_EventScript_15DE93
 	end
 
@@ -43,7 +43,7 @@ VictoryRoad_1F_EventScript_15DED3:: @ 815DED3
 	msgbox VictoryRoad_1F_Text_197967, 4
 	clearflag 858
 	moveobjectoffscreen 4
-	setflag 126
+	setflag FLAG_DEFEATED_WALLY_VICTORY_ROAD
 	setvar 0x40c3, 1
 	releaseall
 	end

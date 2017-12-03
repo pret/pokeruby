@@ -17,7 +17,7 @@ Route104_MapScript1_14EEA8:: @ 814EEA8
 	end
 
 Route104_EventScript_14EEAE:: @ 814EEAE
-	checkflag 127
+	checkflag FLAG_MET_PRETTY_PETAL_SHOP_OWNER
 	goto_if 0, Route104_EventScript_14EEC4
 	checkflag BADGE03_GET
 	goto_if 0, Route104_EventScript_14EEC4
@@ -158,9 +158,9 @@ Route104_EventScript_14EFD5:: @ 814EFD5
 	resetobjectpriority 2, 0, 11
 	moveobjectoffscreen 2
 	setvar 0x408e, 0
-	checkflag 189
+	checkflag FLAG_DELIVERED_STEVEN_LETTER
 	goto_if 0, Route104_EventScript_14F08B
-	checkflag 189
+	checkflag FLAG_DELIVERED_STEVEN_LETTER
 	goto_if_eq Route104_EventScript_14F095
 	end
 

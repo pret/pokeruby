@@ -55,7 +55,7 @@ RustboroCity_DevonCorp_3F_EventScript_157752:: @ 8157752
 	waitfanfare
 	waitmessage
 	setflag SYS_POKENAV_GET
-	setflag 188
+	setflag FLAG_RECEIVED_POKENAV
 	msgbox RustboroCity_DevonCorp_3F_Text_183439, 4
 	setflag 894
 	clearflag 807
@@ -148,7 +148,7 @@ RustboroCity_DevonCorp_3F_EventScript_15783B:: @ 815783B
 	faceplayer
 	checkflag 272
 	goto_if_eq RustboroCity_DevonCorp_3F_EventScript_15789B
-	checkflag 189
+	checkflag FLAG_DELIVERED_STEVEN_LETTER
 	goto_if_eq RustboroCity_DevonCorp_3F_EventScript_157864
 	msgbox RustboroCity_DevonCorp_3F_Text_18351E, 4
 	closemessage

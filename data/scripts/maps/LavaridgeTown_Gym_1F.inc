@@ -70,7 +70,7 @@ LavaridgeTown_Gym_1F_EventScript_153740:: @ 8153740
 
 LavaridgeTown_Gym_1F_EventScript_153741:: @ 8153741
 	trainerbattle 1, OPPONENT_FLANNERY, 0, LavaridgeTown_Gym_1F_Text_176801, LavaridgeTown_Gym_1F_Text_176960, LavaridgeTown_Gym_1F_EventScript_153766
-	checkflag 168
+	checkflag FLAG_RECEIVED_TM50
 	goto_if 0, LavaridgeTown_Gym_1F_EventScript_1537A7
 	msgbox LavaridgeTown_Gym_1F_Text_176C4A, 4
 	release
@@ -98,7 +98,7 @@ LavaridgeTown_Gym_1F_EventScript_1537A7:: @ 81537A7
 	compare RESULT, 0
 	goto_if_eq LavaridgeTown_Gym_1F_EventScript_1A029B
 	msgbox LavaridgeTown_Gym_1F_Text_176B8F, 4
-	setflag 168
+	setflag FLAG_RECEIVED_TM50
 	release
 	end
 

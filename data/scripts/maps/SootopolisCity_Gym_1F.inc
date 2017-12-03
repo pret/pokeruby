@@ -87,7 +87,7 @@ SootopolisCity_Gym_1F_Movement_15AFFD:: @ 815AFFD
 
 SootopolisCity_Gym_1F_EventScript_15AFFF:: @ 815AFFF
 	trainerbattle 1, OPPONENT_WALLACE, 0, SootopolisCity_Gym_1F_Text_18F0CA, SootopolisCity_Gym_1F_Text_18F282, SootopolisCity_Gym_1F_EventScript_15B02D
-	checkflag 172
+	checkflag FLAG_RECEIVED_TM03
 	goto_if 0, SootopolisCity_Gym_1F_EventScript_15B056
 	checkflag BADGE06_GET
 	goto_if 0, SootopolisCity_Gym_1F_EventScript_15B07A
@@ -112,7 +112,7 @@ SootopolisCity_Gym_1F_EventScript_15B056:: @ 815B056
 	compare RESULT, 0
 	goto_if_eq SootopolisCity_Gym_1F_EventScript_1A029B
 	msgbox SootopolisCity_Gym_1F_Text_18F466, 4
-	setflag 172
+	setflag FLAG_RECEIVED_TM03
 	release
 	end
 

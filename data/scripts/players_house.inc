@@ -274,14 +274,14 @@ LittlerootTown_BrendansHouse_1F_EventScript_1B6C33:: @ 81B6C33
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_1B6C3D:: @ 81B6C3D
-	checkflag 133
+	checkflag FLAG_RECEIVED_AMULET_COIN
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1B6C72
 	msgbox LittlerootTown_BrendansHouse_1F_Text_172782, 4
 	giveitem ITEM_AMULET_COIN
 	compare RESULT, 0
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1A029B
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1727CD, 4
-	setflag 133
+	setflag FLAG_RECEIVED_AMULET_COIN
 	release
 	end
 

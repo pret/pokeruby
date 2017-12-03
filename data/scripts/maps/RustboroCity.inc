@@ -11,7 +11,7 @@ RustboroCity_MapScript1_14C378:: @ 814C378
 RustboroCity_EventScript_14C386:: @ 814C386
 	lock
 	faceplayer
-	checkflag 142
+	checkflag FLAG_DEVON_GOODS_STOLEN
 	goto_if_eq RustboroCity_EventScript_14C39B
 	msgbox RustboroCity_Text_16689D, 4
 	release
@@ -50,7 +50,7 @@ RustboroCity_EventScript_14C3CF:: @ 814C3CF
 RustboroCity_EventScript_14C3D9:: @ 814C3D9
 	lock
 	faceplayer
-	checkflag 188
+	checkflag FLAG_RECEIVED_POKENAV
 	goto_if_eq RustboroCity_EventScript_14C3EE
 	msgbox RustboroCity_Text_166B86, 4
 	release
@@ -179,7 +179,7 @@ RustboroCity_EventScript_14C4F4:: @ 814C4F4
 	removeobject 9
 	setobjectxyperm 9, 30, 10
 	clearflag 732
-	setflag 142
+	setflag FLAG_DEVON_GOODS_STOLEN
 	setvar 0x405a, 2
 	setvar 0x409a, 2
 	setvar 0x406f, 1
@@ -326,7 +326,7 @@ RustboroCity_Movement_14C5F7:: @ 814C5F7
 RustboroCity_EventScript_14C5FF:: @ 814C5FF
 	lock
 	faceplayer
-	checkflag 143
+	checkflag FLAG_RECOVERED_DEVON_GOODS
 	goto_if_eq RustboroCity_EventScript_14C614
 	msgbox RustboroCity_Text_166F6B, 4
 	release
@@ -371,7 +371,7 @@ RustboroCity_EventScript_14C650:: @ 814C650
 	call_if 1, RustboroCity_EventScript_14C6E9
 	compare 0x4001, 3
 	call_if 1, RustboroCity_EventScript_14C715
-	setflag 159
+	setflag FLAG_UNKNOWN_9F
 	setvar 0x405a, 3
 	moveobjectoffscreen 9
 	msgbox RustboroCity_Text_166EA5, 4
@@ -473,7 +473,7 @@ RustboroCity_EventScript_14C77D:: @ 814C77D
 	call_if 1, RustboroCity_EventScript_14C7F5
 	msgbox RustboroCity_Text_16707F, 4
 	closemessage
-	setflag 144
+	setflag FLAG_RETURNED_DEVON_GOODS
 	setflag 732
 	setvar 0x405a, 5
 	delay 30

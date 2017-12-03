@@ -135,7 +135,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1529EB:: @ 81529EB
 LittlerootTown_MaysHouse_1F_EventScript_1529EB:: @ 81529EB
 	lock
 	faceplayer
-	checkflag 130
+	checkflag FLAG_DEFEATED_RIVAL_ROUTE103
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_152A21
 	checkflag 301
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_152A17

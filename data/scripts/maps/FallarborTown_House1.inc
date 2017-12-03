@@ -60,7 +60,7 @@ FallarborTown_House1_EventScript_153C5E:: @ 8153C5E
 	faceplayer
 	checkflag 229
 	goto_if_eq FallarborTown_House1_EventScript_153C86
-	checkflag 139
+	checkflag FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY
 	goto_if_eq FallarborTown_House1_EventScript_153C7C
 	msgbox FallarborTown_House1_Text_177A2B, 4
 	release

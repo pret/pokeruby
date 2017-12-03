@@ -87,7 +87,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_155CE6:: @ 8155CE6
 	playse 9
 	removeobject 1
 	setflag 900
-	setflag 149
+	setflag FLAG_DELIVERED_DEVON_GOODS
 	clearflag 947
 	setflag 949
 	release

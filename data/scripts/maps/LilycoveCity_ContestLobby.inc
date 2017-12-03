@@ -126,23 +126,23 @@ LilycoveCity_ContestLobby_EventScript_1589EA:: @ 81589EA
 	return
 
 LilycoveCity_ContestLobby_EventScript_158A27:: @ 8158A27
-	setflag 160
+	setflag FLAG_COOL_PAINTING_MADE
 	return
 
 LilycoveCity_ContestLobby_EventScript_158A2B:: @ 8158A2B
-	setflag 161
+	setflag FLAG_BEAUTY_PAINTING_MADE
 	return
 
 LilycoveCity_ContestLobby_EventScript_158A2F:: @ 8158A2F
-	setflag 162
+	setflag FLAG_CUTE_PAINTING_MADE
 	return
 
 LilycoveCity_ContestLobby_EventScript_158A33:: @ 8158A33
-	setflag 163
+	setflag FLAG_SMART_PAINTING_MADE
 	return
 
 LilycoveCity_ContestLobby_EventScript_158A37:: @ 8158A37
-	setflag 164
+	setflag FLAG_TOUGH_PAINTING_MADE
 	return
 
 LilycoveCity_ContestLobby_Movement_158A3B:: @ 8158A3B
@@ -707,7 +707,7 @@ LilycoveCity_ContestLobby_EventScript_15901E:: @ 815901E
 	end
 
 LilycoveCity_ContestLobby_EventScript_159027:: @ 8159027
-	checkflag 150
+	checkflag FLAG_RECEIVED_CONTEST_PASS
 	goto_if 0, LilycoveCity_ContestLobby_EventScript_159039
 	msgbox LilycoveCity_ContestLobby_Text_188DDA, 2
 	end

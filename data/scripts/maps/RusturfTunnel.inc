@@ -341,8 +341,8 @@ RusturfTunnel_EventScript_15C9EA:: @ 815C9EA
 	waitmovement 0
 	removeobject 5
 	removeobject 7
-	clearflag 142
-	setflag 143
+	clearflag FLAG_DEVON_GOODS_STOLEN
+	setflag FLAG_RECOVERED_DEVON_GOODS
 	setvar 0x405a, 4
 	setvar 0x4090, 1
 	setflag 891

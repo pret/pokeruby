@@ -50,7 +50,7 @@ MossdeepCity_Gym_EventScript_15A558:: @ 815A558
 
 MossdeepCity_Gym_EventScript_15A56B:: @ 815A56B
 	trainerbattle 8, OPPONENT_TATE_AND_LIZA, 0, MossdeepCity_Gym_Text_18CF02, MossdeepCity_Gym_Text_18D077, MossdeepCity_Gym_Text_18D324, MossdeepCity_Gym_EventScript_15A594
-	checkflag 171
+	checkflag FLAG_RECEIVED_TM04
 	goto_if 0, MossdeepCity_Gym_EventScript_15A5C6
 	msgbox MossdeepCity_Gym_Text_18D273, 4
 	release
@@ -76,7 +76,7 @@ MossdeepCity_Gym_EventScript_15A5C6:: @ 815A5C6
 	compare RESULT, 0
 	goto_if_eq MossdeepCity_Gym_EventScript_1A029B
 	msgbox MossdeepCity_Gym_Text_18D1CF, 4
-	setflag 171
+	setflag FLAG_RECEIVED_TM04
 	release
 	end
 

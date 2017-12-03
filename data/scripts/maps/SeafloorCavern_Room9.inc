@@ -201,7 +201,7 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	clearflag 945
 	setflag SYS_WEATHER_CTRL
 	setflag 854
-	setflag 129
+	setflag FLAG_LEGEND_ESCAPED_SEAFLOOR_CAVERN
 	setflag 967
 	setvar 0x40c6, 1
 	setvar 0x40a2, 1

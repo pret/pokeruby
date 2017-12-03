@@ -271,7 +271,7 @@ Route109_Movement_14F67D:: @ 814F67D
 Route109_EventScript_14F680:: @ 814F680
 	lock
 	faceplayer
-	checkflag 149
+	checkflag FLAG_DELIVERED_DEVON_GOODS
 	goto_if 0, Route109_EventScript_14F691
 	goto Route109_EventScript_14F6AF
 	end

@@ -7,9 +7,9 @@ SlateportCity_SternsShipyard_1F_EventScript_155336:: @ 8155336
 	goto_if_eq SlateportCity_SternsShipyard_1F_EventScript_155388
 	checkflag BADGE07_GET
 	goto_if_eq SlateportCity_SternsShipyard_1F_EventScript_15539C
-	checkflag 149
+	checkflag FLAG_DELIVERED_DEVON_GOODS
 	goto_if_eq SlateportCity_SternsShipyard_1F_EventScript_1553CF
-	checkflag 148
+	checkflag FLAG_DOCK_REJECTED_DEVON_GOODS
 	goto_if_eq SlateportCity_SternsShipyard_1F_EventScript_1553B0
 	msgbox SlateportCity_SternsShipyard_1F_Text_17C14B, 4
 	applymovement 1, SlateportCity_SternsShipyard_1F_Movement_1A0839
@@ -18,7 +18,7 @@ SlateportCity_SternsShipyard_1F_EventScript_155336:: @ 8155336
 	closemessage
 	applymovement 1, SlateportCity_SternsShipyard_1F_Movement_1A083D
 	waitmovement 0
-	setflag 148
+	setflag FLAG_DOCK_REJECTED_DEVON_GOODS
 	setflag 882
 	releaseall
 	end

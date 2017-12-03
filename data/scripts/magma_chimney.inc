@@ -85,7 +85,7 @@ MtChimney_EventScript_1B2CCB:: @ 81B2CCB
 	call_if 1, MtChimney_EventScript_1B2D9E
 	removeobject 1
 	setflag 927
-	setflag 139
+	setflag FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY
 	clearflag 928
 	setflag 942
 	releaseall

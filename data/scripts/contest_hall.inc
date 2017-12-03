@@ -40,11 +40,11 @@ FallarborTown_ContestLobby_EventScript_1A4EF6:: @ 81A4EF6
 	end
 
 FallarborTown_ContestLobby_EventScript_1A4F13:: @ 81A4F13
-	checkflag 150
+	checkflag FLAG_RECEIVED_CONTEST_PASS
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1A4F44
 	msgbox FallarborTown_ContestLobby_Text_1A6583, 4
 	giveitem ITEM_CONTEST_PASS
-	setflag 150
+	setflag FLAG_RECEIVED_CONTEST_PASS
 	setflag FLAG_TEMP_1
 	msgbox FallarborTown_ContestLobby_Text_1A5E98, 4
 	goto FallarborTown_ContestLobby_EventScript_1A4F8F

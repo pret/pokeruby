@@ -182,7 +182,7 @@ SlateportCity_EventScript_14BC0A:: @ 814BC0A
 SlateportCity_EventScript_14BC14:: @ 814BC14
 	lock
 	faceplayer
-	checkflag 148
+	checkflag FLAG_DOCK_REJECTED_DEVON_GOODS
 	goto_if_eq SlateportCity_EventScript_14BC29
 	msgbox SlateportCity_Text_164BBF, 4
 	release

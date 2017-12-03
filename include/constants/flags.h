@@ -70,15 +70,88 @@
 #define FLAG_RECEIVED_HM02                  0x6E
 #define FLAG_MT_PYRE_ORB_STOLEN             0x6F
 #define FLAG_EVIL_TEAM_ESCAPED_IN_SUBMARINE 0x70
-#define FLAG_LEGENDARY_BATTLE_COMPLETED     0x71 // defeated or caught Groudon/Kyogre
+#define FLAG_LEGENDARY_BATTLE_COMPLETED     0x71 // defeated or caught Groudon/Kyogre in Cave of Origin
 
 #define FLAG_RECEIVED_METEORITE             0x73
 #define FLAG_ADVENTURE_STARTED              0x74 // received pokedex and set loose
 
 #define FLAG_MET_HIDDEN_POWER_GIVER         0x76
 
+#define FLAG_RECEIVED_TM31                  0x79
+#define FLAG_RECEIVED_HM03                  0x7A
+#define FLAG_RECEIVED_HM08                  0x7B
 
-#define FLAG_PENDING_DAYCARE_EGG 0x86
+#define FLAG_DEFEATED_WALLY_VICTORY_ROAD    0x7E
+#define FLAG_MET_PRETTY_PETAL_SHOP_OWNER    0x7F
+
+#define FLAG_LEGEND_ESCAPED_SEAFLOOR_CAVERN 0x81
+#define FLAG_DEFEATED_RIVAL_ROUTE103        0x82
+#define FLAG_RECEIVED_DOLL_LANETTE          0x83
+#define FLAG_RECEIVED_POTION_OLDALE         0x84
+#define FLAG_RECEIVED_AMULET_COIN           0x85
+#define FLAG_PENDING_DAYCARE_EGG            0x86
+#define FLAG_THANKED_FOR_PLAYING_WITH_WALLY 0x87
+
+#define FLAG_RECEIVED_HM01                  0x89
+
+#define FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY  0x8B
+#define FLAG_RECEIVED_6_SODA_POP            0x8C
+#define FLAG_DEFEATED_SEASHORE_HOUSE_TRAINERS 0x8D
+#define FLAG_DEVON_GOODS_STOLEN             0x8E
+#define FLAG_RECOVERED_DEVON_GOODS          0x8F
+#define FLAG_RETURNED_DEVON_GOODS           0x90
+
+#define FLAG_MR_BRINEY_SAILING_INTRO        0x93
+#define FLAG_DOCK_REJECTED_DEVON_GOODS      0x94
+#define FLAG_DELIVERED_DEVON_GOODS          0x95
+#define FLAG_RECEIVED_CONTEST_PASS          0x96
+#define FLAG_RECEIVED_CASTFORM              0x97
+#define FLAG_RECEIVED_SUPER_ROD             0x98
+#define FLAG_RUSTBORO_NPC_TRADE_COMPLETED   0x99
+#define FLAG_PACIFIDLOG_NPC_TRADE_COMPLETED 0x9A
+#define FLAG_FORTREE_NPC_TRADE_COMPLETED    0x9B
+
+#define FLAG_UNKNOWN_9F                     0x9F
+#define FLAG_COOL_PAINTING_MADE             0xA0
+#define FLAG_BEAUTY_PAINTING_MADE           0xA1
+#define FLAG_CUTE_PAINTING_MADE             0xA2
+#define FLAG_SMART_PAINTING_MADE            0xA3
+#define FLAG_TOUGH_PAINTING_MADE            0xA4
+#define FLAG_RECEIVED_TM39                  0xA5
+#define FLAG_RECEIVED_TM08                  0xA6
+#define FLAG_RECEIVED_TM34                  0xA7
+#define FLAG_RECEIVED_TM50                  0xA8
+#define FLAG_RECEIVED_TM42                  0xA9
+#define FLAG_RECEIVED_TM40                  0xAA
+#define FLAG_RECEIVED_TM04                  0xAB
+#define FLAG_RECEIVED_TM03                  0xAC
+#define FLAG_SECRET_BASE_UNKNOWN_1          0xAD
+#define FLAG_SECRET_BASE_UNKNOWN_2          0xAE
+#define FLAG_SECRET_BASE_UNKNOWN_3          0xAF
+#define FLAG_SECRET_BASE_UNKNOWN_4          0xB0
+#define FLAG_SECRET_BASE_UNKNOWN_5          0xB1
+#define FLAG_SECRET_BASE_UNKNOWN_6          0xB2
+#define FLAG_SECRET_BASE_UNKNOWN_7          0xB3
+#define FLAG_SECRET_BASE_UNKNOWN_8          0xB4
+#define FLAG_SECRET_BASE_UNKNOWN_9          0xB5
+#define FLAG_SECRET_BASE_UNKNOWN_10         0xB6
+#define FLAG_SECRET_BASE_UNKNOWN_11         0xB7
+#define FLAG_SECRET_BASE_UNKNOWN_12         0xB8
+#define FLAG_SECRET_BASE_UNKNOWN_13         0xB9
+#define FLAG_SECRET_BASE_UNKNOWN_14         0xBA
+#define FLAG_SECRET_BASE_UNKNOWN_15         0xBB
+#define FLAG_RECEIVED_POKENAV               0xBC
+#define FLAG_DELIVERED_STEVEN_LETTER        0xBD
+#define FLAG_DEFEATED_WALLY_MAUVILLE        0xBE
+
+#define FLAG_RECEIVED_SUN_STONE_MOSSDEEP    0xC0
+#define FLAG_WALLY_SPEECH                   0xC1
+#define FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1  0xC2
+#define FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2  0xC3
+#define FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_3  0xC4
+#define FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_4  0xC5
+#define FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_5  0xC6
+#define FLAG_RUSTURF_TUNNEL_OPENED          0xC7
 
 #define FLAG_RECEIVED_TM10       0x108
 

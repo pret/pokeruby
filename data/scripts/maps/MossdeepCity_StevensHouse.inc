@@ -40,7 +40,7 @@ MossdeepCity_StevensHouse_EventScript_15AA0B:: @ 815AA0B
 	waitmovement 0
 	msgbox MossdeepCity_StevensHouse_Text_18DA77, 4
 	giveitem ITEM_HM08
-	setflag 123
+	setflag FLAG_RECEIVED_HM08
 	setflag 302
 	msgbox MossdeepCity_StevensHouse_Text_18DB22, 4
 	closemessage
@@ -126,5 +126,5 @@ MossdeepCity_StevensHouse_EventScript_15AB16:: @ 815AB16
 
 MossdeepCity_StevensHouse_EventScript_15AB20:: @ 815AB20
 	giveitem ITEM_HM08, 1, 1
-	setflag 123
+	setflag FLAG_RECEIVED_HM08
 	end

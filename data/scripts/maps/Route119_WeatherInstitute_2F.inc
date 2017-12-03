@@ -63,7 +63,7 @@ Route119_WeatherInstitute_2F_EventScript_163D7A:: @ 8163D7A
 	waitfanfare
 	waitmessage
 	givepoke SPECIES_CASTFORM, 25, ITEM_MYSTIC_WATER, 0x0, 0x0, 0
-	setflag 151
+	setflag FLAG_RECEIVED_CASTFORM
 	msgbox Route119_WeatherInstitute_2F_Text_19F27D, 4
 	release
 	end
@@ -87,7 +87,7 @@ Route119_WeatherInstitute_2F_Movement_163DC8:: @ 8163DC8
 Route119_WeatherInstitute_2F_EventScript_163DCC:: @ 8163DCC
 	lock
 	faceplayer
-	checkflag 151
+	checkflag FLAG_RECEIVED_CASTFORM
 	goto_if_eq Route119_WeatherInstitute_2F_EventScript_163DBE
 	goto Route119_WeatherInstitute_2F_EventScript_163D7A
 	end

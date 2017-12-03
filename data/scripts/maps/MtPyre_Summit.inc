@@ -173,7 +173,7 @@ MtPyre_Summit_EventScript_15D623:: @ 815D623
 	goto_if_eq MtPyre_Summit_EventScript_15D6C4
 	checkflag FLAG_LEGENDARY_BATTLE_COMPLETED
 	goto_if_eq MtPyre_Summit_EventScript_15D64A
-	checkflag 129
+	checkflag FLAG_LEGEND_ESCAPED_SEAFLOOR_CAVERN
 	goto_if_eq MtPyre_Summit_EventScript_15D6BA
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B54BE, 4

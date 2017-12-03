@@ -100,7 +100,7 @@ DewfordTown_Gym_EventScript_153151:: @ 8153151
 
 DewfordTown_Gym_EventScript_153152:: @ 8153152
 	trainerbattle 1, OPPONENT_BRAWLY, 0, DewfordTown_Gym_Text_175182, DewfordTown_Gym_Text_175246, DewfordTown_Gym_EventScript_153177
-	checkflag 166
+	checkflag FLAG_RECEIVED_TM08
 	goto_if 0, DewfordTown_Gym_EventScript_1531B5
 	msgbox DewfordTown_Gym_Text_175412, 4
 	release
@@ -127,7 +127,7 @@ DewfordTown_Gym_EventScript_1531B5:: @ 81531B5
 	compare RESULT, 0
 	goto_if_eq DewfordTown_Gym_EventScript_1A029B
 	msgbox DewfordTown_Gym_Text_1753BF, 4
-	setflag 166
+	setflag FLAG_RECEIVED_TM08
 	release
 	end
 

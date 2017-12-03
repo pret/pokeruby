@@ -9,9 +9,9 @@ Route109_SeashoreHouse_MapScript1_160DD0:: @ 8160DD0
 Route109_SeashoreHouse_EventScript_160DD4:: @ 8160DD4
 	lock
 	faceplayer
-	checkflag 140
+	checkflag FLAG_RECEIVED_6_SODA_POP
 	goto_if_eq Route109_SeashoreHouse_EventScript_160E36
-	checkflag 141
+	checkflag FLAG_DEFEATED_SEASHORE_HOUSE_TRAINERS
 	goto_if_eq Route109_SeashoreHouse_EventScript_160E08
 	checkflag FLAG_TEMP_2
 	goto_if_eq Route109_SeashoreHouse_EventScript_160DFE
@@ -30,7 +30,7 @@ Route109_SeashoreHouse_EventScript_160E08:: @ 8160E08
 	giveitem ITEM_SODA_POP, 6
 	compare RESULT, 0
 	goto_if_eq Route109_SeashoreHouse_EventScript_160E2C
-	setflag 140
+	setflag FLAG_RECEIVED_6_SODA_POP
 	release
 	end
 
@@ -100,7 +100,7 @@ Route109_SeashoreHouse_EventScript_160F09:: @ 8160F09
 	goto_if 0, Route109_SeashoreHouse_EventScript_160F29
 	checktrainerflag OPPONENT_SIMON
 	goto_if 0, Route109_SeashoreHouse_EventScript_160F29
-	setflag 141
+	setflag FLAG_DEFEATED_SEASHORE_HOUSE_TRAINERS
 	release
 	end
 

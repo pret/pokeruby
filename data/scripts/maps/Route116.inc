@@ -3,7 +3,7 @@ Route116_MapScripts:: @ 8150A31
 	.byte 0
 
 Route116_MapScript1_150A37:: @ 8150A37
-	checkflag 143
+	checkflag FLAG_RECOVERED_DEVON_GOODS
 	call_if 1, Route116_EventScript_150A41
 	end
 
@@ -14,9 +14,9 @@ Route116_EventScript_150A41:: @ 8150A41
 Route116_EventScript_150A49:: @ 8150A49
 	lock
 	faceplayer
-	checkflag 143
+	checkflag FLAG_RECOVERED_DEVON_GOODS
 	goto_if_eq Route116_EventScript_150A67
-	checkflag 142
+	checkflag FLAG_DEVON_GOODS_STOLEN
 	goto_if_eq Route116_EventScript_150A71
 	msgbox Route116_Text_1703CF, 4
 	release

@@ -354,7 +354,7 @@ PetalburgCity_Gym_EventScript_15493D:: @ 815493D
 	call PetalburgCity_Gym_EventScript_154969
 	compare RESULT, 1
 	goto_if_eq PetalburgCity_Gym_EventScript_1549B8
-	checkflag 169
+	checkflag FLAG_RECEIVED_TM42
 	goto_if 0, PetalburgCity_Gym_EventScript_154A2C
 	checkflag SYS_GAME_CLEAR
 	goto_if_eq PetalburgCity_Gym_EventScript_154B69
@@ -415,7 +415,7 @@ PetalburgCity_Gym_EventScript_154A2C:: @ 8154A2C
 	giveitem ITEM_TM42
 	compare RESULT, 0
 	goto_if_eq PetalburgCity_Gym_EventScript_1A029B
-	setflag 169
+	setflag FLAG_RECEIVED_TM42
 	msgbox PetalburgCity_Gym_Text_17A8CF, 4
 	msgbox PetalburgCity_Gym_Text_17A976, 4
 	closemessage

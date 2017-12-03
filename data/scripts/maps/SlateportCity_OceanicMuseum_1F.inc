@@ -57,7 +57,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_155B2D:: @ 8155B2D
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_155B5A:: @ 8155B5A
-	checkflag 149
+	checkflag FLAG_DELIVERED_DEVON_GOODS
 	goto_if 0, SlateportCity_OceanicMuseum_1F_EventScript_155B7B
 	msgbox SlateportCity_OceanicMuseum_1F_Text_17E1F5, 4
 	closemessage

@@ -17,7 +17,7 @@ FortreeCity_Gym_EventScript_157EEC:: @ 8157EEC
 
 FortreeCity_Gym_EventScript_157EF0:: @ 8157EF0
 	trainerbattle 1, OPPONENT_WINONA, 0, FortreeCity_Gym_Text_185CCB, FortreeCity_Gym_Text_185DBA, FortreeCity_Gym_EventScript_157F15
-	checkflag 170
+	checkflag FLAG_RECEIVED_TM40
 	goto_if 0, FortreeCity_Gym_EventScript_157F3E
 	msgbox FortreeCity_Gym_Text_185F98, 4
 	release
@@ -40,7 +40,7 @@ FortreeCity_Gym_EventScript_157F3E:: @ 8157F3E
 	compare RESULT, 0
 	goto_if_eq FortreeCity_Gym_EventScript_1A029B
 	msgbox FortreeCity_Gym_Text_185F4A, 4
-	setflag 170
+	setflag FLAG_RECEIVED_TM40
 	release
 	end
 

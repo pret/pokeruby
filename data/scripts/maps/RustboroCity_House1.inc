@@ -4,7 +4,7 @@ RustboroCity_House1_MapScripts:: @ 8157C7C
 RustboroCity_House1_EventScript_157C7D:: @ 8157C7D
 	lock
 	faceplayer
-	checkflag 153
+	checkflag FLAG_RUSTBORO_NPC_TRADE_COMPLETED
 	goto_if_eq RustboroCity_House1_EventScript_157D13
 	setvar 0x8008, 0
 	copyvar 0x8004, 0x8008
@@ -29,7 +29,7 @@ RustboroCity_House1_EventScript_157C7D:: @ 8157C7D
 	special sub_804E174
 	waitstate
 	msgbox RustboroCity_House1_Text_184F6B, 4
-	setflag 153
+	setflag FLAG_RUSTBORO_NPC_TRADE_COMPLETED
 	release
 	end
 

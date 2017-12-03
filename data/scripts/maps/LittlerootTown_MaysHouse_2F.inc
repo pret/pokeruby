@@ -4,7 +4,7 @@ LittlerootTown_MaysHouse_2F_MapScripts:: @ 8152A50
 	.byte 0
 
 LittlerootTown_MaysHouse_2F_MapScript1_152A5B:: @ 8152A5B
-	checkflag 130
+	checkflag FLAG_DEFEATED_RIVAL_ROUTE103
 	call_if 0, LittlerootTown_MaysHouse_2F_EventScript_152A7A
 	compare 0x4092, 4
 	call_if 1, LittlerootTown_MaysHouse_2F_EventScript_1B6950

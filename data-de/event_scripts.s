@@ -1313,7 +1313,7 @@ EverGrandeCity_HallOfFame_EventScript_19FC13:: @ 819FC13
 	call_if 0, EverGrandeCity_HallOfFame_EventScript_19FC70
 	checkflag 298
 	call_if 0, EverGrandeCity_HallOfFame_EventScript_19FC5A
-	checkflag 123
+	checkflag FLAG_RECEIVED_HM08
 	call_if 0, EverGrandeCity_HallOfFame_EventScript_19FC5E
 	return
 
@@ -1408,7 +1408,7 @@ PetalburgCity_PokemonCenter_1F_EventScript_19FD1B:: @ 819FD1B
 RustboroCity_PokemonCenter_1F_EventScript_19FD1B:: @ 819FD1B
 SlateportCity_PokemonCenter_1F_EventScript_19FD1B:: @ 819FD1B
 VerdanturfTown_PokemonCenter_1F_EventScript_19FD1B:: @ 819FD1B
-	checkflag 188
+	checkflag FLAG_RECEIVED_POKENAV
 	goto_if 0, OldaleTown_PokemonCenter_1F_EventScript_1A14DC
 	checkflag 1217
 	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_1A14DC
@@ -2275,7 +2275,7 @@ RusturfTunnel_EventScript_1A0442:: @ 81A0442
 	clearflag 808
 	clearflag 984
 	setvar 0x409a, 6
-	setflag 199
+	setflag FLAG_RUSTURF_TUNNEL_OPENED
 	return
 
 EventScript_1A0457: @ unreferenced?
@@ -3744,7 +3744,7 @@ EventScript_1A2DB8:
 	closemessage
 	playse 9
 	setvar 0x4097, 0
-	setflag 173
+	setflag FLAG_SECRET_BASE_UNKNOWN_1
 	special sub_80BB8CC
 	special sub_80BBAF0
 	setvar 0x8004, 0
@@ -3785,14 +3785,14 @@ gUnknown_081A2E14:: @ 81A2E14
 	special sub_80BC114
 	compare RESULT, 0
 	goto_if_eq EventScript_1A2E38
-	clearflag 173
+	clearflag FLAG_SECRET_BASE_UNKNOWN_1
 	special sub_80BBAF0
 	setvar 0x4089, 0
 	waitstate
 	end
 
 EventScript_1A2E38:
-	setflag 173
+	setflag FLAG_SECRET_BASE_UNKNOWN_1
 	special sub_80BBAF0
 	setvar 0x4089, 0
 	waitstate
@@ -3862,20 +3862,20 @@ EventScript_1A2F3A::
 LittlerootTown_BrendansHouse_2F_EventScript_1A2F3D:: @ 81A2F3D
 LittlerootTown_MaysHouse_2F_EventScript_1A2F3D:: @ 81A2F3D
 SecretBase_RedCave1_EventScript_1A2F3D:: @ 81A2F3D
-	setflag 174
-	setflag 175
-	setflag 176
-	setflag 177
-	setflag 178
-	setflag 179
-	setflag 180
-	setflag 181
-	setflag 182
-	setflag 183
-	setflag 184
-	setflag 185
-	setflag 186
-	setflag 187
+	setflag FLAG_SECRET_BASE_UNKNOWN_2
+	setflag FLAG_SECRET_BASE_UNKNOWN_3
+	setflag FLAG_SECRET_BASE_UNKNOWN_4
+	setflag FLAG_SECRET_BASE_UNKNOWN_5
+	setflag FLAG_SECRET_BASE_UNKNOWN_6
+	setflag FLAG_SECRET_BASE_UNKNOWN_7
+	setflag FLAG_SECRET_BASE_UNKNOWN_8
+	setflag FLAG_SECRET_BASE_UNKNOWN_9
+	setflag FLAG_SECRET_BASE_UNKNOWN_10
+	setflag FLAG_SECRET_BASE_UNKNOWN_11
+	setflag FLAG_SECRET_BASE_UNKNOWN_12
+	setflag FLAG_SECRET_BASE_UNKNOWN_13
+	setflag FLAG_SECRET_BASE_UNKNOWN_14
+	setflag FLAG_SECRET_BASE_UNKNOWN_15
 	return
 
 LittlerootTown_BrendansHouse_2F_EventScript_1A2F68:: @ 81A2F68

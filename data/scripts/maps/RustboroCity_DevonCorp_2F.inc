@@ -41,7 +41,7 @@ RustboroCity_DevonCorp_2F_EventScript_157523:: @ 8157523
 	faceplayer
 	compare 0x40c4, 1
 	call_if 1, RustboroCity_DevonCorp_2F_EventScript_1574DC
-	checkflag 188
+	checkflag FLAG_RECEIVED_POKENAV
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_157543
 	msgbox RustboroCity_DevonCorp_2F_Text_182D2A, 4
 	release

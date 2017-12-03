@@ -31,7 +31,7 @@ SootopolisCity_Mart_EventScript_15B24A:: @ 815B24A
 	faceplayer
 	checkflag FLAG_LEGENDARY_BATTLE_COMPLETED
 	goto_if_eq SootopolisCity_Mart_EventScript_15B268
-	checkflag 129
+	checkflag FLAG_LEGEND_ESCAPED_SEAFLOOR_CAVERN
 	goto_if 0, SootopolisCity_Mart_EventScript_15B268
 	msgbox SootopolisCity_Mart_Text_18F8D7, 4
 	release
@@ -47,7 +47,7 @@ SootopolisCity_Mart_EventScript_15B272:: @ 815B272
 	faceplayer
 	checkflag FLAG_LEGENDARY_BATTLE_COMPLETED
 	goto_if_eq SootopolisCity_Mart_EventScript_15B290
-	checkflag 129
+	checkflag FLAG_LEGEND_ESCAPED_SEAFLOOR_CAVERN
 	goto_if 0, SootopolisCity_Mart_EventScript_15B290
 	msgbox SootopolisCity_Mart_Text_18F96B, 4
 	release

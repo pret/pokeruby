@@ -5,9 +5,9 @@ SootopolisCity_MapScripts:: @ 814D07D
 	.byte 0
 
 SootopolisCity_MapScript1_14D08D:: @ 814D08D
-	checkflag 129
+	checkflag FLAG_LEGEND_ESCAPED_SEAFLOOR_CAVERN
 	call_if 0, SootopolisCity_EventScript_14D0A0
-	checkflag 129
+	checkflag FLAG_LEGEND_ESCAPED_SEAFLOOR_CAVERN
 	call_if 1, SootopolisCity_EventScript_14D0B1
 	end
 

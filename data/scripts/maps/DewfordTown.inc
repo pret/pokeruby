@@ -9,7 +9,7 @@ DewfordTown_MapScript1_14DFFE:: @ 814DFFE
 DewfordTown_EventScript_14E002:: @ 814E002
 	lock
 	faceplayer
-	checkflag 189
+	checkflag FLAG_DELIVERED_STEVEN_LETTER
 	goto_if 0, DewfordTown_EventScript_14E076
 	message DewfordTown_Text_16B522
 	waitmessage
@@ -176,9 +176,9 @@ DewfordTown_EventScript_14E1D8:: @ 814E1D8
 	clearflag 744
 	setflag 743
 	hideobject 4, 0, 11
-	checkflag 149
+	checkflag FLAG_DELIVERED_DEVON_GOODS
 	call_if 0, DewfordTown_EventScript_14E281
-	checkflag 149
+	checkflag FLAG_DELIVERED_DEVON_GOODS
 	call_if 1, DewfordTown_EventScript_14E28A
 	closemessage
 	copyvar 0x4096, 0x8008

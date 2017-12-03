@@ -158,7 +158,7 @@ MauvilleCity_EventScript_14C22B:: @ 814C22B
 	removeobject 7
 	clearflag 806
 	clearflag 809
-	setflag 190
+	setflag FLAG_DEFEATED_WALLY_MAUVILLE
 	releaseall
 	end
 

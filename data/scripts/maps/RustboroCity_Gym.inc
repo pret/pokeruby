@@ -3,7 +3,7 @@ RustboroCity_Gym_MapScripts:: @ 81578D8
 
 RustboroCity_Gym_EventScript_1578D9:: @ 81578D9
 	trainerbattle 1, OPPONENT_ROXANNE, 0, RustboroCity_Gym_Text_183EE5, RustboroCity_Gym_Text_183FC4, RustboroCity_Gym_EventScript_1578FE
-	checkflag 165
+	checkflag FLAG_RECEIVED_TM39
 	goto_if 0, RustboroCity_Gym_EventScript_15793C
 	msgbox RustboroCity_Gym_Text_184252, 4
 	release
@@ -29,7 +29,7 @@ RustboroCity_Gym_EventScript_15793C:: @ 815793C
 	giveitem ITEM_TM39
 	compare RESULT, 0
 	goto_if_eq RustboroCity_Gym_EventScript_1A029B
-	setflag 165
+	setflag FLAG_RECEIVED_TM39
 	msgbox RustboroCity_Gym_Text_184170, 4
 	release
 	end
