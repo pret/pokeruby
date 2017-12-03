@@ -1,14 +1,14 @@
 MtChimney_EventScript_1B2C95:: @ 81B2C95
 	lock
 	faceplayer
-	checkflag 219
+	checkflag FLAG_EVIL_LEADER_PLEASE_STOP
 	call_if 0, MtChimney_EventScript_1B2CB9
-	checkflag 219
+	checkflag FLAG_EVIL_LEADER_PLEASE_STOP
 	call_if 1, MtChimney_EventScript_1B2CC2
 	closemessage
 	applymovement 1, MtChimney_Movement_1A083D
 	waitmovement 0
-	setflag 219
+	setflag FLAG_EVIL_LEADER_PLEASE_STOP
 	release
 	end
 

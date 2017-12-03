@@ -50,7 +50,7 @@ EventScript_1A6F0B:
 	.endif
 	special InitRoamer
 	clearflag SYS_TV_LATI
-	setflag 255
+	setflag FLAG_LATIOS_OR_LATIAS_ROAMING
 	special TurnOffTVScreen
 	releaseall
 	end

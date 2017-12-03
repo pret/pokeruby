@@ -86,57 +86,57 @@ Route123_BerryMastersHouse_EventScript_163AF0:: @ 8163AF0
 	end
 
 Route123_BerryMastersHouse_EventScript_163B1E:: @ 8163B1E
-	checkflag 248
+	checkflag FLAG_RECEIVED_SPELON_BERRY
 	goto_if_eq Route123_BerryMastersHouse_EventScript_163AF0
 	msgbox Route123_BerryMastersHouse_Text_1C5DC1, 4
 	giveitem ITEM_SPELON_BERRY
 	compare RESULT, 0
 	goto_if_eq Route123_BerryMastersHouse_EventScript_1A029B
-	setflag 248
+	setflag FLAG_RECEIVED_SPELON_BERRY
 	goto Route123_BerryMastersHouse_EventScript_163C1D
 	end
 
 Route123_BerryMastersHouse_EventScript_163B4F:: @ 8163B4F
-	checkflag 249
+	checkflag FLAG_RECEIVED_PAMTRE_BERRY
 	goto_if_eq Route123_BerryMastersHouse_EventScript_163AF0
 	msgbox Route123_BerryMastersHouse_Text_1C5DC1, 4
 	giveitem ITEM_PAMTRE_BERRY
 	compare RESULT, 0
 	goto_if_eq Route123_BerryMastersHouse_EventScript_1A029B
-	setflag 249
+	setflag FLAG_RECEIVED_PAMTRE_BERRY
 	goto Route123_BerryMastersHouse_EventScript_163C1D
 	end
 
 Route123_BerryMastersHouse_EventScript_163B80:: @ 8163B80
-	checkflag 250
+	checkflag FLAG_RECEIVED_WATMEL_BERRY
 	goto_if_eq Route123_BerryMastersHouse_EventScript_163AF0
 	msgbox Route123_BerryMastersHouse_Text_1C5DC1, 4
 	giveitem ITEM_WATMEL_BERRY
 	compare RESULT, 0
 	goto_if_eq Route123_BerryMastersHouse_EventScript_1A029B
-	setflag 250
+	setflag FLAG_RECEIVED_WATMEL_BERRY
 	goto Route123_BerryMastersHouse_EventScript_163C1D
 	end
 
 Route123_BerryMastersHouse_EventScript_163BB1:: @ 8163BB1
-	checkflag 251
+	checkflag FLAG_RECEIVED_DURIN_BERRY
 	goto_if_eq Route123_BerryMastersHouse_EventScript_163AF0
 	msgbox Route123_BerryMastersHouse_Text_1C5DC1, 4
 	giveitem ITEM_DURIN_BERRY
 	compare RESULT, 0
 	goto_if_eq Route123_BerryMastersHouse_EventScript_1A029B
-	setflag 251
+	setflag FLAG_RECEIVED_DURIN_BERRY
 	goto Route123_BerryMastersHouse_EventScript_163C1D
 	end
 
 Route123_BerryMastersHouse_EventScript_163BE2:: @ 8163BE2
-	checkflag 252
+	checkflag FLAG_RECEIVED_BELUE_BERRY
 	goto_if_eq Route123_BerryMastersHouse_EventScript_163AF0
 	msgbox Route123_BerryMastersHouse_Text_1C5DC1, 4
 	giveitem ITEM_BELUE_BERRY
 	compare RESULT, 0
 	goto_if_eq Route123_BerryMastersHouse_EventScript_1A029B
-	setflag 252
+	setflag FLAG_RECEIVED_BELUE_BERRY
 	goto Route123_BerryMastersHouse_EventScript_163C1D
 	end
 

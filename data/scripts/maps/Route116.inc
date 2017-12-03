@@ -58,7 +58,7 @@ Route116_EventScript_150A94:: @ 8150A94
 	call_if 1, Route116_EventScript_150AF9
 	removeobject LAST_TALKED
 	clearflag 949
-	setflag 256
+	setflag FLAG_RECEIVED_REPEAT_BALL
 	release
 	end
 

@@ -8,7 +8,7 @@ MauvilleCity_MapScript1_14C038:: @ 814C038
 	setflag SYS_TV_START
 	clearflag FLAG_MAUVILLE_GYM_BARRIERS_STATE
 	setvar 0x4093, 0
-	checkflag 209
+	checkflag FLAG_RECEIVED_TM24
 	call_if 1, MauvilleCity_EventScript_14C053
 	end
 
@@ -284,15 +284,15 @@ MauvilleCity_Movement_14C2E8:: @ 814C2E8
 MauvilleCity_EventScript_14C2F2:: @ 814C2F2
 	lock
 	faceplayer
-	checkflag 209
+	checkflag FLAG_RECEIVED_TM24
 	goto_if_eq MauvilleCity_EventScript_14C368
 	compare 0x40ba, 2
 	goto_if_eq MauvilleCity_EventScript_14C33C
-	checkflag 208
+	checkflag FLAG_RECEIVED_BASEMENT_KEY
 	goto_if_eq MauvilleCity_EventScript_14C332
 	msgbox MauvilleCity_Text_1661C1, 4
 	giveitem ITEM_BASEMENT_KEY
-	setflag 208
+	setflag FLAG_RECEIVED_BASEMENT_KEY
 	msgbox MauvilleCity_Text_166331, 4
 	release
 	end
@@ -307,7 +307,7 @@ MauvilleCity_EventScript_14C33C:: @ 814C33C
 	giveitem ITEM_TM24
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_EventScript_1A029B
-	setflag 209
+	setflag FLAG_RECEIVED_TM24
 	msgbox MauvilleCity_Text_166488, 4
 	release
 	end

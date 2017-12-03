@@ -31,13 +31,13 @@ Route104_EventScript_14EEC4:: @ 814EEC4
 Route104_EventScript_14EEC8:: @ 814EEC8
 	lock
 	faceplayer
-	checkflag 246
+	checkflag FLAG_RECEIVED_CHESTO_BERRY_ROUTE104
 	goto_if_eq Route104_EventScript_14EEFF
 	msgbox Route104_Text_1C55B9, 4
 	giveitem ITEM_CHESTO_BERRY
 	compare RESULT, 0
 	goto_if_eq Route104_EventScript_1A029B
-	setflag 246
+	setflag FLAG_RECEIVED_CHESTO_BERRY_ROUTE104
 	msgbox Route104_Text_1C5665, 4
 	release
 	end

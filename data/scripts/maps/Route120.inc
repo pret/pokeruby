@@ -50,7 +50,7 @@ Route120_EventScript_151682:: @ 8151682
 	return
 
 Route120_MapScript1_151686:: @ 8151686
-	checkflag 228
+	checkflag FLAG_REGI_DOORS_OPENED
 	call_if 0, Route120_EventScript_1516A2
 	checkflag 285
 	call_if 1, Route120_EventScript_1516B5

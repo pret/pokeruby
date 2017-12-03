@@ -108,7 +108,7 @@ LilycoveCity_Harbor_EventScript_1599E4:: @ 81599E4
 LilycoveCity_Harbor_EventScript_1599EE:: @ 81599EE
 	checkflag SYS_GAME_CLEAR
 	goto_if 0, LilycoveCity_Harbor_EventScript_1598BA
-	checkflag 206
+	checkflag FLAG_ECOUNTERED_LATIAS_OR_LATIOS
 	goto_if_eq LilycoveCity_Harbor_EventScript_1598BA
 	checkflag SYS_HAS_EON_TICKET
 	goto_if 0, LilycoveCity_Harbor_EventScript_1598BA

@@ -211,7 +211,7 @@ LilycoveCity_EventScript_14CCDC:: @ 814CCDC
 
 LilycoveCity_EventScript_14CCE5:: @ 814CCE5
 	lockall
-	checkflag 218
+	checkflag FLAG_MET_WAILMER_TRAINER
 	goto_if_eq LilycoveCity_EventScript_14CD18
 	msgbox LilycoveCity_Text_16864A, 4
 	applymovement LAST_TALKED, LilycoveCity_Movement_1A0839
@@ -219,7 +219,7 @@ LilycoveCity_EventScript_14CCE5:: @ 814CCE5
 	msgbox LilycoveCity_Text_168675, 4
 	applymovement LAST_TALKED, LilycoveCity_Movement_1A083D
 	waitmovement 0
-	setflag 218
+	setflag FLAG_MET_WAILMER_TRAINER
 	releaseall
 	end
 

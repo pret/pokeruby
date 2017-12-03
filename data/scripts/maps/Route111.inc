@@ -4,7 +4,7 @@ Route111_MapScripts:: @ 814FF91
 	.byte 0
 
 Route111_MapScript1_14FF9C:: @ 814FF9C
-	checkflag 228
+	checkflag FLAG_REGI_DOORS_OPENED
 	call_if 0, Route111_EventScript_14FFA6
 	end
 

@@ -152,6 +152,62 @@
 #define FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_4  0xC5
 #define FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_5  0xC6
 #define FLAG_RUSTURF_TUNNEL_OPENED          0xC7
+#define FLAG_RECEIVED_RED_SCARF             0xC8
+#define FLAG_RECEIVED_BLUE_SCARF            0xC9
+#define FLAG_RECEIVED_PINK_SCARF            0xCA
+#define FLAG_RECEIVED_GREEN_SCARF           0xCB
+#define FLAG_RECEIVED_YELLOW_SCARF          0xCC
+
+#define FLAG_ECOUNTERED_LATIAS_OR_LATIOS    0xCE
+
+#define FLAG_RECEIVED_BASEMENT_KEY          0xD0
+#define FLAG_RECEIVED_TM24                  0xD1
+
+#define FLAG_RECEIVED_RED_OR_BLUE_ORB       0xD4
+#define FLAG_RECEIVED_PREMIER_BALL_RUSTBORO 0xD5
+
+#define FLAG_ROUTE104_PROTOTYPE_COMPLETED_1 0xD7
+#define FLAG_ROUTE104_PROTOTYPE_COMPLETED_2 0xD8
+#define FLAG_MET_DIVING_TREASURE_HUNTER     0xD9
+#define FLAG_MET_WAILMER_TRAINER            0xDA
+#define FLAG_EVIL_LEADER_PLEASE_STOP        0xDB
+
+#define FLAG_RECEIVED_GO_GOGGLES            0xDD
+#define FLAG_WINGULL_SENT_ON_ERRAND         0xDE
+#define FLAG_RECEIVED_MENTAL_HERB           0xDF
+#define FLAG_WINGULL_DELIVERED_MAIL         0xE0
+#define FLAG_RECEIVED_20_COINS              0xE1
+#define FLAG_RECEIVED_STARTER_DOLL          0xE2
+#define FLAG_RECEIVED_GOOD_ROD              0xE3
+#define FLAG_REGI_DOORS_OPENED              0xE4
+#define FLAG_RECEIVED_TM27                  0xE5
+#define FLAG_RECEIVED_TM36                  0xE6
+#define FLAG_RECEIVED_TM05                  0xE7
+#define FLAG_RECEIVED_TM19                  0xE8
+
+#define FLAG_RECEIVED_TM44                  0xEA
+#define FLAG_RECEIVED_TM45                  0xEB
+#define FLAG_RECEIVED_GLASS_ORNAMENT        0xEC
+#define FLAG_RECEIVED_SILVER_SHIELD         0xED
+#define FLAG_RECEIVED_GOLD_SHIELD           0xEE
+#define FLAG_USED_STORAGE_KEY               0xEF
+#define FLAG_USED_ROOM_1_KEY                0xF0
+#define FLAG_USED_ROOM_2_KEY                0xF1
+#define FLAG_USED_ROOM_4_KEY                0xF2
+#define FLAG_USED_ROOM_6_KEY                0xF3
+#define FLAG_MET_PROF_COSMO                 0xF4
+#define FLAG_RECEIVED_WAILMER_DOLL          0xF5
+#define FLAG_RECEIVED_CHESTO_BERRY_ROUTE104 0xF6
+#define FLAG_DEFEATED_SS_TIDAL_TRAINERS     0xF7
+#define FLAG_RECEIVED_SPELON_BERRY          0xF8
+#define FLAG_RECEIVED_PAMTRE_BERRY          0xF9
+#define FLAG_RECEIVED_WATMEL_BERRY          0xFA
+#define FLAG_RECEIVED_DURIN_BERRY           0xFB
+#define FLAG_RECEIVED_BELUE_BERRY           0xFC
+
+#define FLAG_RECEIVED_CHARCOAL              0xFE
+#define FLAG_LATIOS_OR_LATIAS_ROAMING       0xFF
+#define FLAG_RECEIVED_REPEAT_BALL           0x100
 
 #define FLAG_RECEIVED_TM10       0x108
 

@@ -27,13 +27,13 @@ Route114_EventScript_150778:: @ 8150778
 Route114_EventScript_150782:: @ 8150782
 	lock
 	faceplayer
-	checkflag 231
+	checkflag FLAG_RECEIVED_TM05
 	goto_if_eq Route114_EventScript_1507B9
 	msgbox Route114_Text_170154, 4
 	giveitem ITEM_TM05
 	compare RESULT, 0
 	goto_if_eq Route114_EventScript_1A029B
-	setflag 231
+	setflag FLAG_RECEIVED_TM05
 	msgbox Route114_Text_1701C5, 4
 	release
 	end

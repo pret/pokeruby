@@ -9,7 +9,7 @@ Route123_MapScript1_151C59:: @ 8151C59
 Route123_EventScript_151C5D:: @ 8151C5D
 	lock
 	faceplayer
-	checkflag 232
+	checkflag FLAG_RECEIVED_TM19
 	goto_if_eq Route123_EventScript_151CAC
 	msgbox Route123_Text_171D83, 4
 	special IsGrassTypeInParty
@@ -19,7 +19,7 @@ Route123_EventScript_151C5D:: @ 8151C5D
 	giveitem ITEM_TM19
 	compare RESULT, 0
 	goto_if_eq Route123_EventScript_1A029B
-	setflag 232
+	setflag FLAG_RECEIVED_TM19
 	msgbox Route123_Text_171E34, 4
 	release
 	end

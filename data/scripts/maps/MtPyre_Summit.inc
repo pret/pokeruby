@@ -64,7 +64,7 @@ MtPyre_Summit_EventScript_15D4E1:: @ 815D4E1
 	msgbox MtPyre_Summit_Text_1B5FE6, 4
 	.endif
 	giveitem ITEM_RED_OR_BLUE_ORB
-	setflag 212
+	setflag FLAG_RECEIVED_RED_OR_BLUE_ORB
 	releaseall
 	end
 

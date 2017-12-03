@@ -181,7 +181,7 @@ RustboroCity_DevonCorp_3F_EventScript_15789B:: @ 815789B
 RustboroCity_DevonCorp_3F_EventScript_1578B0:: @ 81578B0
 	lock
 	faceplayer
-	checkflag 256
+	checkflag FLAG_RECEIVED_REPEAT_BALL
 	goto_if_eq RustboroCity_DevonCorp_3F_EventScript_1578C5
 	msgbox RustboroCity_DevonCorp_3F_Text_18395C, 4
 	release

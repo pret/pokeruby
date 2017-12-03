@@ -1303,7 +1303,7 @@ EverGrandeCity_HallOfFame_EventScript_19FC13:: @ 819FC13
 	special sub_810FAA0
 	checkflag 291
 	call_if 0, EverGrandeCity_HallOfFame_EventScript_19FC62
-	checkflag 255
+	checkflag FLAG_LATIOS_OR_LATIAS_ROAMING
 	call_if 0, EverGrandeCity_HallOfFame_EventScript_19FC70
 	checkflag 298
 	call_if 0, EverGrandeCity_HallOfFame_EventScript_19FC5A
@@ -1326,7 +1326,7 @@ EverGrandeCity_HallOfFame_EventScript_19FC62:: @ 819FC62
 	return
 
 EverGrandeCity_HallOfFame_EventScript_19FC70:: @ 819FC70
-	setflag 2141
+	setflag SYS_TV_LATI
 	return
 
 S_WhiteOut:: @ 819FC74
@@ -1336,7 +1336,7 @@ S_WhiteOut:: @ 819FC74
 	end
 
 EventScript_19FC84:
-	checkflag 221
+	checkflag FLAG_RECEIVED_GO_GOGGLES
 	goto_if_eq Route101_EventScript_1A14DC
 	checkflag 1213
 	goto_if 0, Route101_EventScript_1A14DC

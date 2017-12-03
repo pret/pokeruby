@@ -163,7 +163,7 @@ SSTidalCorridor_EventScript_15FE5B:: @ 815FE5B
 SSTidalCorridor_EventScript_15FE60:: @ 815FE60
 	lock
 	faceplayer
-	checkflag 247
+	checkflag FLAG_DEFEATED_SS_TIDAL_TRAINERS
 	goto_if_eq SSTidalCorridor_EventScript_15FE7A
 	call SSTidalCorridor_EventScript_15FE84
 	msgbox SSTidalCorridor_Text_199203, 4
@@ -192,7 +192,7 @@ SSTidalCorridor_EventScript_15FE84:: @ 815FE84
 	goto_if 0, SSTidalCorridor_EventScript_15FED5
 	checktrainerflag OPPONENT_ANETTE
 	goto_if 0, SSTidalCorridor_EventScript_15FED5
-	setflag 247
+	setflag FLAG_DEFEATED_SS_TIDAL_TRAINERS
 	goto SSTidalCorridor_EventScript_15FE7A
 	return
 

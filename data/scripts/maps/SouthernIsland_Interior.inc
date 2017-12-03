@@ -44,11 +44,11 @@ SouthernIsland_Interior_EventScript_160B9B:: @ 8160B9B
 	end
 
 SouthernIsland_Interior_EventScript_160BA7:: @ 8160BA7
-	checkflag 206
+	checkflag FLAG_ECOUNTERED_LATIAS_OR_LATIOS
 	goto_if_eq SouthernIsland_Interior_EventScript_160C08
 	checkflag SYS_HAS_EON_TICKET
 	goto_if 0, SouthernIsland_Interior_EventScript_160C08
-	setflag 206
+	setflag FLAG_ECOUNTERED_LATIAS_OR_LATIOS
 	special SpawnCameraDummy
 	applymovement 127, SouthernIsland_Interior_Movement_160C12
 	waitmovement 0

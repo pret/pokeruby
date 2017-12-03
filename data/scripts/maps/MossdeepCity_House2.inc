@@ -17,7 +17,7 @@ MossdeepCity_House2_EventScript_15A87B:: @ 815A87B
 	msgbox MossdeepCity_House2_Text_18D61E, 4
 	waitpokecry
 	closemessage
-	setflag 224
+	setflag FLAG_WINGULL_DELIVERED_MAIL
 	clearflag 933
 	compare FACING, 2
 	call_if 1, MossdeepCity_House2_EventScript_15A8AE
