@@ -256,9 +256,9 @@ LilycoveCity_EventScript_14CD46:: @ 814CD46
 
 LilycoveCity_EventScript_14CD60:: @ 814CD60
 	playbgm 415, 1
-	checkflag 286
+	checkflag FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE
 	call_if 1, LilycoveCity_EventScript_14CDB0
-	checkflag 286
+	checkflag FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE
 	call_if 0, LilycoveCity_EventScript_14CDB9
 	compare RESULT, 0
 	goto_if_eq LilycoveCity_EventScript_14CDC2
@@ -278,7 +278,7 @@ LilycoveCity_EventScript_14CDB9:: @ 814CDB9
 	return
 
 LilycoveCity_EventScript_14CDC2:: @ 814CDC2
-	setflag 286
+	setflag FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE
 	msgbox LilycoveCity_Text_167AEB, 4
 	savebgm 0
 	fadedefaultbgm
@@ -287,9 +287,9 @@ LilycoveCity_EventScript_14CDC2:: @ 814CDC2
 
 LilycoveCity_EventScript_14CDD3:: @ 814CDD3
 	playbgm 421, 1
-	checkflag 286
+	checkflag FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE
 	call_if 1, LilycoveCity_EventScript_14CE23
-	checkflag 286
+	checkflag FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE
 	call_if 0, LilycoveCity_EventScript_14CE2C
 	compare RESULT, 0
 	goto_if_eq LilycoveCity_EventScript_14CE35
@@ -309,7 +309,7 @@ LilycoveCity_EventScript_14CE2C:: @ 814CE2C
 	return
 
 LilycoveCity_EventScript_14CE35:: @ 814CE35
-	setflag 286
+	setflag FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE
 	msgbox LilycoveCity_Text_16802C, 4
 	savebgm 0
 	fadedefaultbgm

@@ -196,7 +196,7 @@ SlateportCity_PokemonFanClub_EventScript_155A0F:: @ 8155A0F
 SlateportCity_PokemonFanClub_EventScript_155A15:: @ 8155A15
 	lock
 	faceplayer
-	checkflag 278
+	checkflag FLAG_RECEIVED_SOOTHE_BELL
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_155A75
 	msgbox SlateportCity_PokemonFanClub_Text_17DE6B, 4
 	specialvar RESULT, GetLeadMonFriendshipScore
@@ -215,7 +215,7 @@ SlateportCity_PokemonFanClub_EventScript_155A3A:: @ 8155A3A
 	giveitem ITEM_SOOTHE_BELL
 	compare RESULT, 0
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_1A029B
-	setflag 278
+	setflag FLAG_RECEIVED_SOOTHE_BELL
 	release
 	end
 

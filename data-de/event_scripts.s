@@ -409,7 +409,7 @@ gUnknown_0815F36C:: @ 815F36C
 EventScript_15F384:
 	message UnknownString_81A3A87
 	waitmessage
-	checkflag 268
+	checkflag FLAG_SECRET_BASE_UNKNOWN_16
 	goto_if_eq EventScript_15F3A0
 	goto EventScript_15F3E2
 	end
@@ -1466,7 +1466,7 @@ OldaleTown_PokemonCenter_1F_EventScript_19FD7C:: @ 819FD7C
 	applymovement 0x800b, OldaleTown_PokemonCenter_1F_Movement_1A0845
 	waitmovement 0
 	special ScrSpecial_HealPlayerParty
-	checkflag 273
+	checkflag FLAG_POKERUS_EXPLAINED
 	goto_if 0, OldaleTown_PokemonCenter_1F_EventScript_19FDCE
 	goto OldaleTown_PokemonCenter_1F_EventScript_19FDB0
 	end
@@ -1496,7 +1496,7 @@ OldaleTown_PokemonCenter_1F_EventScript_19FDCE:: @ 819FDCE
 OldaleTown_PokemonCenter_1F_EventScript_19FDEA:: @ 819FDEA
 	message gText_NurseJoy_Pokerus
 	waitmessage
-	setflag 273
+	setflag FLAG_POKERUS_EXPLAINED
 	return
 
 OldaleTown_PokemonCenter_1F_Movement_19FDF4:: @ 819FDF4

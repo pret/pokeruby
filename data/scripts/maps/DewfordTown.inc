@@ -74,7 +74,7 @@ DewfordTown_EventScript_14E0BD:: @ 814E0BD
 DewfordTown_EventScript_14E0C6:: @ 814E0C6
 	lock
 	faceplayer
-	checkflag 257
+	checkflag FLAG_RECEIVED_OLD_ROD
 	goto_if_eq DewfordTown_EventScript_14E11B
 	msgbox DewfordTown_Text_16B665, 5
 	compare RESULT, 1
@@ -86,7 +86,7 @@ DewfordTown_EventScript_14E0C6:: @ 814E0C6
 DewfordTown_EventScript_14E0F0:: @ 814E0F0
 	msgbox DewfordTown_Text_16B6A8, 4
 	giveitem ITEM_OLD_ROD
-	setflag 257
+	setflag FLAG_RECEIVED_OLD_ROD
 	msgbox DewfordTown_Text_16B6F9, 4
 	release
 	end

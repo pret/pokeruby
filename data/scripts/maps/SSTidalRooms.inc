@@ -4,13 +4,13 @@ SSTidalRooms_MapScripts:: @ 815FF05
 SSTidalRooms_EventScript_15FF06:: @ 815FF06
 	lock
 	faceplayer
-	checkflag 260
+	checkflag FLAG_RECEIVED_TM49
 	goto_if_eq SSTidalRooms_EventScript_15FF3D
 	msgbox SSTidalRooms_Text_199B65, 4
 	giveitem ITEM_TM49
 	compare RESULT, 0
 	goto_if_eq SSTidalRooms_EventScript_1A029B
-	setflag 260
+	setflag FLAG_RECEIVED_TM49
 	msgbox SSTidalRooms_Text_199C1A, 4
 	release
 	end

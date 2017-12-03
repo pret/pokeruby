@@ -272,7 +272,7 @@ LavaridgeTown_EventScript_14E751:: @ 814E751
 LavaridgeTown_EventScript_14E75A:: @ 814E75A
 	lock
 	faceplayer
-	checkflag 266
+	checkflag FLAG_RECEIVED_LAVARIDGE_EGG
 	goto_if_eq LavaridgeTown_EventScript_14E79E
 	msgbox LavaridgeTown_Text_16C174, 5
 	compare RESULT, 0
@@ -281,7 +281,7 @@ LavaridgeTown_EventScript_14E75A:: @ 814E75A
 	compare RESULT, 6
 	goto_if_eq LavaridgeTown_EventScript_14E7A8
 	msgbox LavaridgeTown_Text_16C2B6, 4
-	setflag 266
+	setflag FLAG_RECEIVED_LAVARIDGE_EGG
 	playfanfare 370
 	message LavaridgeTown_Text_16C2EA
 	waitfanfare

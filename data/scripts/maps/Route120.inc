@@ -52,9 +52,9 @@ Route120_EventScript_151682:: @ 8151682
 Route120_MapScript1_151686:: @ 8151686
 	checkflag FLAG_REGI_DOORS_OPENED
 	call_if 0, Route120_EventScript_1516A2
-	checkflag 285
+	checkflag FLAG_RECEIVED_DEVON_SCOPE
 	call_if 1, Route120_EventScript_1516B5
-	checkflag 285
+	checkflag FLAG_RECEIVED_DEVON_SCOPE
 	call_if 0, Route120_EventScript_1516DA
 	end
 
@@ -239,7 +239,7 @@ Route120_EventScript_151908:: @ 8151908
 	waitmovement 0
 	msgbox Route120_Text_171A40, 4
 	giveitem ITEM_DEVON_SCOPE
-	setflag 285
+	setflag FLAG_RECEIVED_DEVON_SCOPE
 	msgbox Route120_Text_171B0E, 4
 	closemessage
 	applymovement 31, Route120_Movement_1A0845

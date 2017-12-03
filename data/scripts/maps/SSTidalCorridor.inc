@@ -124,7 +124,7 @@ SSTidalCorridor_EventScript_15FDD6:: @ 815FDD6
 SSTidalCorridor_EventScript_15FDF8:: @ 815FDF8
 	sethealplace 8
 	msgbox SSTidalCorridor_Text_1991F4, 4
-	checkflag 260
+	checkflag FLAG_RECEIVED_TM49
 	call_if 1, SSTidalCorridor_EventScript_15FE36
 	warp MAP_LILYCOVE_CITY_HARBOR, 255, 8, 11
 	waitstate
@@ -134,7 +134,7 @@ SSTidalCorridor_EventScript_15FDF8:: @ 815FDF8
 SSTidalCorridor_EventScript_15FE17:: @ 815FE17
 	sethealplace 4
 	msgbox SSTidalCorridor_Text_1991F4, 4
-	checkflag 260
+	checkflag FLAG_RECEIVED_TM49
 	call_if 1, SSTidalCorridor_EventScript_15FE36
 	warp MAP_SLATEPORT_CITY_HARBOR, 255, 8, 11
 	waitstate

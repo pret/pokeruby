@@ -36,13 +36,13 @@ ShoalCave_LowTideLowerRoom_EventScript_15E445:: @ 815E445
 ShoalCave_LowTideLowerRoom_EventScript_15E44F:: @ 815E44F
 	lock
 	faceplayer
-	checkflag 283
+	checkflag FLAG_RECEIVED_FOCUS_BAND
 	goto_if_eq ShoalCave_LowTideLowerRoom_EventScript_15E47E
 	msgbox ShoalCave_LowTideLowerRoom_Text_198200, 4
 	giveitem ITEM_FOCUS_BAND
 	compare RESULT, 0
 	goto_if_eq ShoalCave_LowTideLowerRoom_EventScript_1A029B
-	setflag 283
+	setflag FLAG_RECEIVED_FOCUS_BAND
 	release
 	end
 

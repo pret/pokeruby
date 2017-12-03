@@ -208,8 +208,38 @@
 #define FLAG_RECEIVED_CHARCOAL              0xFE
 #define FLAG_LATIOS_OR_LATIAS_ROAMING       0xFF
 #define FLAG_RECEIVED_REPEAT_BALL           0x100
+#define FLAG_RECEIVED_OLD_ROD               0x101
+#define FLAG_RECEIVED_COIN_CASE             0x102
+#define FLAG_RETURNED_RED_OR_BLUE_ORB       0x103
+#define FLAG_RECEIVED_TM49                  0x104
+#define FLAG_RECEIVED_TM28                  0x105
+#define FLAG_RECEIVED_TM09                  0x106
+#define FLAG_ENTERED_ELITE_FOUR             0x107
+#define FLAG_RECEIVED_TM10                  0x108
+#define FLAG_RECEIVED_TM41                  0x109
+#define FLAG_RECEIVED_LAVARIDGE_EGG         0x10A
+#define FLAG_RECEIVED_FOSSIL_MON            0x10B
+#define FLAG_SECRET_BASE_UNKNOWN_16         0x10C
+#define FLAG_RECEIVED_TM46                  0x10D
+#define FLAG_CONTEST_SKETCH_CREATED         0x10E
+#define FLAG_EVIL_TEAM_ESCAPED_STERN_SPOKE  0x10F
+#define FLAG_RECEIVED_EXP_SHARE             0x110
+#define FLAG_POKERUS_EXPLAINED              0x111
+#define FLAG_RECEIVED_RUNNING_SHOES         0x112
+#define FLAG_RECEIVED_QUICK_CLAW            0x113
+#define FLAG_RECEIVED_KINGS_ROCK            0x114
+#define FLAG_RECEIVED_MACHO_BRACE           0x115
+#define FLAG_RECEIVED_SOOTHE_BELL           0x116
+#define FLAG_RECEIVED_WHITE_HERB            0x117
+#define FLAG_RECEIVED_SOFT_SAND             0x118
 
-#define FLAG_RECEIVED_TM10       0x108
+#define FLAG_RECEIVED_CLEANSE_TAG           0x11A
+#define FLAG_RECEIVED_FOCUS_BAND            0x11B
+#define FLAG_DECLINED_WALLY_BATTLE_MAUVILLE 0x11C
+#define FLAG_RECEIVED_DEVON_SCOPE           0x11D
+#define FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE 0x11E
+#define FLAG_MET_DEVON_EMPLOYEE             0x11F
+#define FLAG_MET_RIVAL_RUSTBORO             0x120
 
 #define TRAINER_FLAG_START 0x500
 

@@ -6,7 +6,7 @@ FallarborTown_MapScript1_14E7E6:: @ 814E7E6
 	setflag FLAG_VISITED_FALLARBOR_TOWN
 	setvar 0x4086, 0
 	setflag 800
-	clearflag 270
+	clearflag FLAG_CONTEST_SKETCH_CREATED
 	end
 
 FallarborTown_EventScript_14E7F5:: @ 814E7F5

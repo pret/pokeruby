@@ -7,7 +7,7 @@ LittlerootTown_MaysHouse_1F_MapScripts:: @ 8152879
 LittlerootTown_MaysHouse_1F_MapScript1_152889:: @ 8152889
 	compare 0x4092, 6
 	call_if 0, LittlerootTown_MaysHouse_1F_EventScript_15289E
-	checkflag 274
+	checkflag FLAG_RECEIVED_RUNNING_SHOES
 	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1528B1
 	end
 

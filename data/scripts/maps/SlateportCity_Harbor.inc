@@ -270,7 +270,7 @@ SlateportCity_Harbor_EventScript_156211:: @ 8156211
 	faceplayer
 	checkflag BADGE07_GET
 	goto_if_eq SlateportCity_Harbor_EventScript_15626F
-	checkflag 271
+	checkflag FLAG_EVIL_TEAM_ESCAPED_STERN_SPOKE
 	goto_if_eq SlateportCity_Harbor_EventScript_156265
 	checkflag FLAG_EVIL_TEAM_ESCAPED_IN_SUBMARINE
 	goto_if_eq SlateportCity_Harbor_EventScript_156258
@@ -289,7 +289,7 @@ SlateportCity_Harbor_EventScript_15624E:: @ 815624E
 	end
 
 SlateportCity_Harbor_EventScript_156258:: @ 8156258
-	setflag 271
+	setflag FLAG_EVIL_TEAM_ESCAPED_STERN_SPOKE
 	msgbox SlateportCity_Harbor_Text_17FF35, 4
 	release
 	end

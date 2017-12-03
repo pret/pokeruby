@@ -50,13 +50,13 @@ Route104_EventScript_14EEFF:: @ 814EEFF
 Route104_EventScript_14EF09:: @ 814EF09
 	lock
 	faceplayer
-	checkflag 279
+	checkflag FLAG_RECEIVED_WHITE_HERB
 	goto_if_eq Route104_EventScript_14EF38
 	msgbox Route104_Text_16DD91, 4
 	giveitem ITEM_WHITE_HERB
 	compare RESULT, 0
 	goto_if_eq Route104_EventScript_1A029B
-	setflag 279
+	setflag FLAG_RECEIVED_WHITE_HERB
 	release
 	end
 
@@ -104,13 +104,13 @@ Route104_EventScript_14EF8A:: @ 814EF8A
 Route104_EventScript_14EF93:: @ 814EF93
 	lock
 	faceplayer
-	checkflag 262
+	checkflag FLAG_RECEIVED_TM09
 	goto_if_eq Route104_EventScript_14EFC2
 	msgbox Route104_Text_16DC5F, 4
 	giveitem ITEM_TM09
 	compare RESULT, 0
 	goto_if_eq Route104_EventScript_1A029B
-	setflag 262
+	setflag FLAG_RECEIVED_TM09
 	release
 	end
 

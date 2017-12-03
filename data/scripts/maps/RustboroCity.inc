@@ -549,7 +549,7 @@ RustboroCity_EventScript_14C8B8:: @ 814C8B8
 RustboroCity_EventScript_14C8DA:: @ 814C8DA
 	lock
 	faceplayer
-	checkflag 288
+	checkflag FLAG_MET_RIVAL_RUSTBORO
 	goto_if_eq RustboroCity_EventScript_14C917
 	checkplayergender
 	compare RESULT, 0
@@ -559,13 +559,13 @@ RustboroCity_EventScript_14C8DA:: @ 814C8DA
 	end
 
 RustboroCity_EventScript_14C8FD:: @ 814C8FD
-	setflag 288
+	setflag FLAG_MET_RIVAL_RUSTBORO
 	msgbox RustboroCity_Text_1670A7, 4
 	release
 	end
 
 RustboroCity_EventScript_14C90A:: @ 814C90A
-	setflag 288
+	setflag FLAG_MET_RIVAL_RUSTBORO
 	msgbox RustboroCity_Text_167213, 4
 	release
 	end

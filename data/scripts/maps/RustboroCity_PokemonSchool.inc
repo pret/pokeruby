@@ -77,7 +77,7 @@ RustboroCity_PokemonSchool_EventScript_157AC5:: @ 8157AC5
 RustboroCity_PokemonSchool_EventScript_157ACE:: @ 8157ACE
 	lock
 	faceplayer
-	checkflag 275
+	checkflag FLAG_RECEIVED_QUICK_CLAW
 	goto_if_eq RustboroCity_PokemonSchool_EventScript_157B34
 	compare FACING, 4
 	call_if 1, RustboroCity_PokemonSchool_EventScript_157B1E
@@ -90,7 +90,7 @@ RustboroCity_PokemonSchool_EventScript_157ACE:: @ 8157ACE
 	closemessage
 	applymovement LAST_TALKED, RustboroCity_PokemonSchool_Movement_1A0845
 	waitmovement 0
-	setflag 275
+	setflag FLAG_RECEIVED_QUICK_CLAW
 	release
 	end
 

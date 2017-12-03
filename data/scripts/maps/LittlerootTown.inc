@@ -872,7 +872,7 @@ LittlerootTown_EventScript_14DD38:: @ 814DD38
 	message LittlerootTown_Text_16AA32
 	waitfanfare
 	waitmessage
-	setflag 274
+	setflag FLAG_RECEIVED_RUNNING_SHOES
 	msgbox LittlerootTown_Text_16AA5C, 4
 	msgbox LittlerootTown_Text_16AB10, 4
 	closemessage

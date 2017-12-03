@@ -1042,7 +1042,7 @@ LinkContestRoom1_EventScript_1A5C41:: @ 81A5C41
 	return
 
 LinkContestRoom1_EventScript_1A5C42:: @ 81A5C42
-	setflag 270
+	setflag FLAG_CONTEST_SKETCH_CREATED
 	return
 
 LinkContestRoom1_EventScript_1A5C46:: @ 81A5C46

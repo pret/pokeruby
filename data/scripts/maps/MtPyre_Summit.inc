@@ -169,7 +169,7 @@ MtPyre_Summit_EventScript_15D61A:: @ 815D61A
 MtPyre_Summit_EventScript_15D623:: @ 815D623
 	lock
 	faceplayer
-	checkflag 259
+	checkflag FLAG_RETURNED_RED_OR_BLUE_ORB
 	goto_if_eq MtPyre_Summit_EventScript_15D6C4
 	checkflag FLAG_LEGENDARY_BATTLE_COMPLETED
 	goto_if_eq MtPyre_Summit_EventScript_15D64A
@@ -210,7 +210,7 @@ MtPyre_Summit_EventScript_15D669:: @ 815D669
 	.else
 	msgbox MtPyre_Summit_Text_1B639C, 4
 	.endif
-	setflag 259
+	setflag FLAG_RETURNED_RED_OR_BLUE_ORB
 	release
 	end
 

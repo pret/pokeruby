@@ -328,7 +328,7 @@ Route109_EventScript_14F725:: @ 814F725
 	lock
 	faceplayer
 	special GetPlayerBigGuyGirlString
-	checkflag 280
+	checkflag FLAG_RECEIVED_SOFT_SAND
 	goto_if_eq Route109_EventScript_14F762
 	msgbox Route109_Text_16E433, 4
 	giveitem ITEM_SOFT_SAND
@@ -337,7 +337,7 @@ Route109_EventScript_14F725:: @ 814F725
 	closemessage
 	applymovement LAST_TALKED, Route109_Movement_1A083D
 	waitmovement 0
-	setflag 280
+	setflag FLAG_RECEIVED_SOFT_SAND
 	release
 	end
 

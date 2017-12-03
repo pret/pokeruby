@@ -67,7 +67,7 @@ MauvilleCity_EventScript_14C0BA:: @ 814C0BA
 MauvilleCity_EventScript_14C0C4:: @ 814C0C4
 	lock
 	faceplayer
-	checkflag 284
+	checkflag FLAG_DECLINED_WALLY_BATTLE_MAUVILLE
 	goto_if_eq MauvilleCity_EventScript_14C0E4
 	msgbox MauvilleCity_Text_165B76, 4
 	closemessage
@@ -86,7 +86,7 @@ MauvilleCity_EventScript_14C0E4:: @ 814C0E4
 
 MauvilleCity_EventScript_14C0F9:: @ 814C0F9
 	lockall
-	checkflag 284
+	checkflag FLAG_DECLINED_WALLY_BATTLE_MAUVILLE
 	goto_if_eq MauvilleCity_EventScript_14C292
 	applymovement 6, MauvilleCity_Movement_1A0843
 	waitmovement 0
@@ -177,7 +177,7 @@ MauvilleCity_EventScript_14C23C:: @ 814C23C
 	return
 
 MauvilleCity_EventScript_14C285:: @ 814C285
-	setflag 284
+	setflag FLAG_DECLINED_WALLY_BATTLE_MAUVILLE
 	msgbox MauvilleCity_Text_165DE8, 4
 	release
 	end

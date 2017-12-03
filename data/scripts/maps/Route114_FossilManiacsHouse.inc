@@ -9,13 +9,13 @@ Route114_FossilManiacsHouse_MapScript1_15C1BF:: @ 815C1BF
 Route114_FossilManiacsHouse_EventScript_15C1C3:: @ 815C1C3
 	lock
 	faceplayer
-	checkflag 261
+	checkflag FLAG_RECEIVED_TM28
 	goto_if_eq Route114_FossilManiacsHouse_EventScript_15C1F2
 	msgbox Route114_FossilManiacsHouse_Text_1925E1, 4
 	giveitem ITEM_TM28
 	compare RESULT, 0
 	goto_if_eq Route114_FossilManiacsHouse_EventScript_1A029B
-	setflag 261
+	setflag FLAG_RECEIVED_TM28
 	release
 	end
 

@@ -146,7 +146,7 @@ RustboroCity_DevonCorp_3F_Movement_157835:: @ 8157835
 RustboroCity_DevonCorp_3F_EventScript_15783B:: @ 815783B
 	lock
 	faceplayer
-	checkflag 272
+	checkflag FLAG_RECEIVED_EXP_SHARE
 	goto_if_eq RustboroCity_DevonCorp_3F_EventScript_15789B
 	checkflag FLAG_DELIVERED_STEVEN_LETTER
 	goto_if_eq RustboroCity_DevonCorp_3F_EventScript_157864
@@ -162,7 +162,7 @@ RustboroCity_DevonCorp_3F_EventScript_157864:: @ 8157864
 	giveitem ITEM_EXP_SHARE
 	compare RESULT, 0
 	goto_if_eq RustboroCity_DevonCorp_3F_EventScript_1A029B
-	setflag 272
+	setflag FLAG_RECEIVED_EXP_SHARE
 	msgbox RustboroCity_DevonCorp_3F_Text_1835B3, 4
 	closemessage
 	applymovement LAST_TALKED, RustboroCity_DevonCorp_3F_Movement_1A083D

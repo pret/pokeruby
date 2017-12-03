@@ -35,14 +35,14 @@ Route116_EventScript_150A71:: @ 8150A71
 Route116_EventScript_150A7B:: @ 8150A7B
 	lock
 	faceplayer
-	checkflag 287
+	checkflag FLAG_MET_DEVON_EMPLOYEE
 	goto_if_eq Route116_EventScript_150B04
 	msgbox Route116_Text_1705AE, 4
 	goto Route116_EventScript_150A94
 	end
 
 Route116_EventScript_150A94:: @ 8150A94
-	setflag 287
+	setflag FLAG_MET_DEVON_EMPLOYEE
 	giveitem ITEM_REPEAT_BALL
 	compare RESULT, 0
 	goto_if_eq Route116_EventScript_150B12
