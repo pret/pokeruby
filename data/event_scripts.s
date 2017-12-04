@@ -409,7 +409,7 @@ gUnknown_0815F36C:: @ 815F36C
 EventScript_15F384:
 	message UnknownString_81A3A87
 	waitmessage
-	checkflag FLAG_SECRET_BASE_UNKNOWN_16
+	checkflag FLAG_DECORATION_16
 	goto_if_eq EventScript_15F3A0
 	goto EventScript_15F3E2
 	end
@@ -3723,7 +3723,7 @@ EventScript_1A2DB8:
 	closemessage
 	playse 9
 	setvar 0x4097, 0
-	setflag FLAG_SECRET_BASE_UNKNOWN_1
+	setflag FLAG_DECORATION_1
 	special sub_80BB8CC
 	special sub_80BBAF0
 	setvar 0x8004, 0
@@ -3764,14 +3764,14 @@ gUnknown_081A2E14:: @ 81A2E14
 	special sub_80BC114
 	compare RESULT, 0
 	goto_if_eq EventScript_1A2E38
-	clearflag FLAG_SECRET_BASE_UNKNOWN_1
+	clearflag FLAG_DECORATION_1
 	special sub_80BBAF0
 	setvar 0x4089, 0
 	waitstate
 	end
 
 EventScript_1A2E38:
-	setflag FLAG_SECRET_BASE_UNKNOWN_1
+	setflag FLAG_DECORATION_1
 	special sub_80BBAF0
 	setvar 0x4089, 0
 	waitstate
@@ -3841,20 +3841,20 @@ EventScript_1A2F3A::
 LittlerootTown_BrendansHouse_2F_EventScript_1A2F3D:: @ 81A2F3D
 LittlerootTown_MaysHouse_2F_EventScript_1A2F3D:: @ 81A2F3D
 SecretBase_RedCave1_EventScript_1A2F3D:: @ 81A2F3D
-	setflag FLAG_SECRET_BASE_UNKNOWN_2
-	setflag FLAG_SECRET_BASE_UNKNOWN_3
-	setflag FLAG_SECRET_BASE_UNKNOWN_4
-	setflag FLAG_SECRET_BASE_UNKNOWN_5
-	setflag FLAG_SECRET_BASE_UNKNOWN_6
-	setflag FLAG_SECRET_BASE_UNKNOWN_7
-	setflag FLAG_SECRET_BASE_UNKNOWN_8
-	setflag FLAG_SECRET_BASE_UNKNOWN_9
-	setflag FLAG_SECRET_BASE_UNKNOWN_10
-	setflag FLAG_SECRET_BASE_UNKNOWN_11
-	setflag FLAG_SECRET_BASE_UNKNOWN_12
-	setflag FLAG_SECRET_BASE_UNKNOWN_13
-	setflag FLAG_SECRET_BASE_UNKNOWN_14
-	setflag FLAG_SECRET_BASE_UNKNOWN_15
+	setflag FLAG_DECORATION_2
+	setflag FLAG_DECORATION_3
+	setflag FLAG_DECORATION_4
+	setflag FLAG_DECORATION_5
+	setflag FLAG_DECORATION_6
+	setflag FLAG_DECORATION_7
+	setflag FLAG_DECORATION_8
+	setflag FLAG_DECORATION_9
+	setflag FLAG_DECORATION_10
+	setflag FLAG_DECORATION_11
+	setflag FLAG_DECORATION_12
+	setflag FLAG_DECORATION_13
+	setflag FLAG_DECORATION_14
+	setflag FLAG_DECORATION_15
 	return
 
 LittlerootTown_BrendansHouse_2F_EventScript_1A2F68:: @ 81A2F68
