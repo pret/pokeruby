@@ -41,7 +41,7 @@ InsideOfTruck_EventScript_15FC68:: @ 815FC68
 	setflag 758
 	setflag 761
 	setflag 785
-	setflag 722
+	setflag FLAG_HIDE_MAY_UPSTAIRS
 	setvar 0x4082, 1
 	setdynamicwarp MAP_LITTLEROOT_TOWN, 255, 12, 10
 	releaseall

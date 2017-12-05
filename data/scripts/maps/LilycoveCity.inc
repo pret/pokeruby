@@ -355,7 +355,7 @@ LilycoveCity_EventScript_14CEA6:: @ 814CEA6
 	call_if 1, LilycoveCity_EventScript_14CEEE
 	compare RESULT, 1
 	call_if 1, LilycoveCity_EventScript_14CEF7
-	clearflag 722
+	clearflag FLAG_HIDE_MAY_UPSTAIRS
 	clearflag 849
 	goto LilycoveCity_EventScript_14CF6B
 	end

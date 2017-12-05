@@ -86,7 +86,7 @@ PetalburgCity_Gym_EventScript_15456C:: @ 815456C
 	waitmovement 0
 	playse 9
 	removeobject 10
-	setflag 726
+	setflag FLAG_HIDE_WALLY_PETALBURG
 	delay 30
 	applymovement 255, PetalburgCity_Gym_Movement_1A0841
 	waitmovement 0
@@ -205,10 +205,10 @@ PetalburgCity_Gym_EventScript_154669:: @ 8154669
 	compare 0x8008, 3
 	call_if 1, PetalburgCity_Gym_EventScript_154872
 	removeobject 10
-	setflag 728
+	setflag FLAG_HIDE_WALLY_MOM_PETALBURG_1
 	setvar 0x4085, 1
 	setvar 0x4057, 2
-	clearflag 726
+	clearflag FLAG_HIDE_WALLY_PETALBURG
 	clearflag 866
 	setflag 889
 	special InitBirchState

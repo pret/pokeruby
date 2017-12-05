@@ -1,6 +1,6 @@
 PetalburgCity_MapObjects:: @ 837F5F0
-	object_event 1, MAP_OBJ_GFX_WOMAN_5, 0, 16, 0, 18, 0, 3, 2, 17, 0, 0, 0, 0, 0, PetalburgCity_EventScript_14B7C3, 728, 0, 0
-	object_event 2, MAP_OBJ_GFX_WALLY, 0, 15, 0, 10, 0, 3, 7, 0, 0, 0, 0, 0, 0, 0x0, 726, 0, 0
+	object_event 1, MAP_OBJ_GFX_WOMAN_5, 0, 16, 0, 18, 0, 3, 2, 17, 0, 0, 0, 0, 0, PetalburgCity_EventScript_14B7C3, FLAG_HIDE_WALLY_MOM_PETALBURG_1, 0, 0
+	object_event 2, MAP_OBJ_GFX_WALLY, 0, 15, 0, 10, 0, 3, 7, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_WALLY_PETALBURG, 0, 0
 	object_event 3, MAP_OBJ_GFX_BOY_1, 0, 8, 0, 22, 0, 3, 8, 0, 0, 0, 0, 0, 0, PetalburgCity_EventScript_14B7AC, 0, 0, 0
 	object_event 4, MAP_OBJ_GFX_GENTLEMAN, 0, 20, 0, 10, 0, 3, 3, 16, 0, 0, 0, 0, 0, PetalburgCity_EventScript_14B824, 0, 0, 0
 	object_event 5, MAP_OBJ_GFX_MAN_1, 0, 15, 0, 11, 0, 3, 7, 0, 0, 0, 0, 0, 0, 0x0, 811, 0, 0

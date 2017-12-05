@@ -1,6 +1,6 @@
 LittlerootTown_ProfessorBirchsLab_MapObjects:: @ 8385B2C
 	object_event 1, MAP_OBJ_GFX_SCIENTIST_1, 0, 9, 0, 8, 0, 3, 2, 17, 0, 0, 0, 0, 0, LittlerootTown_ProfessorBirchsLab_EventScript_152D63, 0, 0, 0
-	object_event 2, MAP_OBJ_GFX_PROF_BIRCH, 0, 6, 0, 4, 0, 3, 8, 0, 0, 0, 0, 0, 0, LittlerootTown_ProfessorBirchsLab_EventScript_152D9A, 721, 0, 0
+	object_event 2, MAP_OBJ_GFX_PROF_BIRCH, 0, 6, 0, 4, 0, 3, 8, 0, 0, 0, 0, 0, 0, LittlerootTown_ProfessorBirchsLab_EventScript_152D9A, FLAG_HIDE_BIRCH_IN_LAB, 0, 0
 	object_event 3, 240, 0, 7, 0, 4, 0, 3, 8, 0, 0, 0, 0, 0, 0, LittlerootTown_ProfessorBirchsLab_EventScript_152EA3, 889, 0, 0
 
 LittlerootTown_ProfessorBirchsLab_MapWarps:: @ 8385B74

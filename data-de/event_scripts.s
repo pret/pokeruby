@@ -1165,12 +1165,12 @@ gUnknown_0819FA81:: @ 819FA81
 	setflag 769
 	setflag 770
 	setflag 771
-	setflag 721
+	setflag FLAG_HIDE_BIRCH_IN_LAB
 	setflag 889
-	setflag 726
+	setflag FLAG_HIDE_WALLY_PETALBURG
 	setflag 867
-	setflag 731
-	setflag 732
+	setflag FLAG_HIDE_GRUNT_RUSTBORO
+	setflag FLAG_HIDE_DEVON_RUSTBORO
 	setflag 814
 	setflag 868
 	setflag 739
@@ -1181,7 +1181,7 @@ gUnknown_0819FA81:: @ 819FA81
 	setflag 743
 	setflag 744
 	setflag 906
-	setflag 737
+	setflag FLAG_UNKNOWN_2E1
 	setflag 747
 	setflag 748
 	setflag 749
@@ -1196,7 +1196,7 @@ gUnknown_0819FA81:: @ 819FA81
 	setflag 781
 	setflag 782
 	setflag 783
-	setflag 734
+	setflag FLAG_HIDE_NORMAN_LITTLEROOT
 	setflag 849
 	setflag 789
 	setflag 790
@@ -1289,7 +1289,7 @@ gUnknown_0819FA81:: @ 819FA81
 	setflag 950
 	setflag 968
 	setflag 1133
-	setflag 727
+	setflag FLAG_HIDE_STEVENS_LETTER
 	setflag 979
 	setflag 751
 	setflag 991
@@ -1301,7 +1301,7 @@ EverGrandeCity_HallOfFame_EventScript_19FC13:: @ 819FC13
 	call EverGrandeCity_HallOfFame_EventScript_19FD09
 	setflag 869
 	clearflag 950
-	clearflag 727
+	clearflag FLAG_HIDE_STEVENS_LETTER
 	setvar 0x40c6, 1
 	clearflag 751
 	clearflag 860
@@ -1328,7 +1328,7 @@ EverGrandeCity_HallOfFame_EventScript_19FC5E:: @ 819FC5E
 EverGrandeCity_HallOfFame_EventScript_19FC62:: @ 819FC62
 	setvar 0x4082, 3
 	setvar 0x408c, 3
-	clearflag 734
+	clearflag FLAG_HIDE_NORMAN_LITTLEROOT
 	return
 
 EverGrandeCity_HallOfFame_EventScript_19FC70:: @ 819FC70
@@ -2173,7 +2173,7 @@ Route103_EventScript_1A02F4:: @ 81A02F4
 	return
 
 Route101_EventScript_1A0358:: @ 81A0358
-	clearflag 721
+	clearflag FLAG_HIDE_BIRCH_IN_LAB
 	clearflag 896
 	setflag 897
 	setflag 898
@@ -2181,7 +2181,7 @@ Route101_EventScript_1A0358:: @ 81A0358
 
 Route101_EventScript_1A0365:: @ 81A0365
 	clearflag 897
-	setflag 721
+	setflag FLAG_HIDE_BIRCH_IN_LAB
 	setflag 896
 	setflag 898
 	return
@@ -2189,7 +2189,7 @@ Route101_EventScript_1A0365:: @ 81A0365
 Route101_EventScript_1A0372:: @ 81A0372
 	clearflag 898
 	setflag 897
-	setflag 721
+	setflag FLAG_HIDE_BIRCH_IN_LAB
 	setflag 896
 	return
 

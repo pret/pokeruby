@@ -178,7 +178,7 @@ RustboroCity_EventScript_14C4F4:: @ 814C4F4
 	waitmovement 0
 	removeobject 9
 	setobjectxyperm 9, 30, 10
-	clearflag 732
+	clearflag FLAG_HIDE_DEVON_RUSTBORO
 	setflag FLAG_DEVON_GOODS_STOLEN
 	setvar 0x405a, 2
 	setvar 0x409a, 2
@@ -474,7 +474,7 @@ RustboroCity_EventScript_14C77D:: @ 814C77D
 	msgbox RustboroCity_Text_16707F, 4
 	closemessage
 	setflag FLAG_RETURNED_DEVON_GOODS
-	setflag 732
+	setflag FLAG_HIDE_DEVON_RUSTBORO
 	setvar 0x405a, 5
 	delay 30
 	warp MAP_RUSTBORO_CITY_DEVON_CORP_3F, 255, 2, 2

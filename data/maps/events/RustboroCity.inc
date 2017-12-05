@@ -7,8 +7,8 @@ RustboroCity_MapObjects:: @ 837FD14
 	object_event 6, MAP_OBJ_GFX_MAN_4, 0, 26, 0, 23, 0, 3, 1, 17, 0, 0, 0, 0, 0, RustboroCity_EventScript_14C3BA, 0, 0, 0
 	object_event 7, MAP_OBJ_GFX_LITTLE_BOY_2, 0, 24, 0, 51, 0, 3, 10, 0, 0, 0, 0, 0, 0, RustboroCity_EventScript_14C449, 0, 0, 0
 	object_event 8, MAP_OBJ_GFX_LITTLE_GIRL_2, 0, 25, 0, 51, 0, 3, 9, 0, 0, 0, 0, 0, 0, RustboroCity_EventScript_14C45F, 0, 0, 0
-	object_event 9, MAP_OBJ_GFX_MAN_2, 0, 30, 0, 10, 0, 3, 10, 17, 0, 0, 0, 0, 0, RustboroCity_EventScript_14C5FF, 732, 0, 0
-	object_event 10, 241, 0, 13, 0, 21, 0, 3, 10, 0, 0, 0, 0, 0, 0, 0x0, 731, 0, 0
+	object_event 9, MAP_OBJ_GFX_MAN_2, 0, 30, 0, 10, 0, 3, 10, 17, 0, 0, 0, 0, 0, RustboroCity_EventScript_14C5FF, FLAG_HIDE_DEVON_RUSTBORO, 0, 0
+	object_event 10, 241, 0, 13, 0, 21, 0, 3, 10, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_GRUNT_RUSTBORO, 0, 0
 	object_event 11, MAP_OBJ_GFX_MAN_7, 0, 13, 0, 34, 0, 3, 2, 17, 0, 0, 0, 0, 0, RustboroCity_EventScript_14C3A5, 0, 0, 0
 	object_event 12, MAP_OBJ_GFX_ITEM_BALL, 0, 36, 0, 51, 0, 3, 1, 0, 0, 0, 0, 0, 0, RustboroCity_EventScript_1B172B, 1041, 0, 0
 	object_event 13, MAP_OBJ_GFX_MAN_5, 0, 19, 0, 27, 0, 3, 8, 16, 0, 0, 0, 0, 0, RustboroCity_EventScript_14C475, 0, 0, 0
