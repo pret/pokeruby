@@ -52,7 +52,7 @@ LittlerootTown_EventScript_14D59A:: @ 814D59A
 	return
 
 LittlerootTown_EventScript_14D5A6:: @ 814D5A6
-	clearflag 752
+	clearflag FLAG_HIDE_MOM_LITTLEROOT
 	setobjectmovementtype 4, 8
 	checkplayergender
 	compare RESULT, 0
@@ -80,7 +80,7 @@ LittlerootTown_EventScript_14D5EF:: @ 814D5EF
 	setvar 0x8004, 5
 	setvar 0x8005, 8
 	call LittlerootTown_EventScript_14D62B
-	setflag 761
+	setflag FLAG_HIDE_MOVING_TRUCK_BRENDAN
 	warpsilent MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F, 255, 8, 8
 	waitstate
 	releaseall
@@ -91,7 +91,7 @@ LittlerootTown_EventScript_14D60D:: @ 814D60D
 	setvar 0x8004, 14
 	setvar 0x8005, 8
 	call LittlerootTown_EventScript_14D62B
-	setflag 762
+	setflag FLAG_HIDE_MOVING_TRUCK_MAY
 	warpsilent MAP_LITTLEROOT_TOWN_MAYS_HOUSE_1F, 255, 2, 8
 	waitstate
 	releaseall
@@ -122,12 +122,12 @@ LittlerootTown_EventScript_14D62B:: @ 814D62B
 	applymovement 4, LittlerootTown_Movement_14D6B5
 	applymovement 255, LittlerootTown_Movement_14D6BD
 	waitmovement 0
-	setflag 752
+	setflag FLAG_HIDE_MOM_LITTLEROOT
 	setvar 0x4092, 3
 	hideobject 255, 0, 0
 	closedoor 0x8004, 0x8005
 	waitdooranim
-	clearflag 868
+	clearflag FLAG_HIDE_FAT_MAN_LITTLEROOT
 	clearflag 0x4000
 	return
 

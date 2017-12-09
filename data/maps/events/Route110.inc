@@ -20,11 +20,11 @@ Route110_MapObjects:: @ 8381D58
 	object_event 19, MAP_OBJ_GFX_ITEM_BALL, 0, 30, 0, 69, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route110_EventScript_1B14BB, 1007, 0, 0
 	object_event 20, MAP_OBJ_GFX_ITEM_BALL, 0, 26, 0, 47, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route110_EventScript_1B14AE, 1006, 0, 0
 	object_event 21, MAP_OBJ_GFX_CYCLING_TRIATHLETE_M, 0, 27, 0, 92, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route110_EventScript_14FA53, 0, 0, 0
-	object_event 22, 241, 0, 7, 0, 83, 0, 3, 7, 0, 0, 0, 0, 0, 0, Route110_EventScript_14F946, 900, 0, 0
-	object_event 23, 241, 0, 8, 0, 83, 0, 3, 7, 0, 0, 0, 0, 0, 0, Route110_EventScript_14F95C, 900, 0, 0
-	object_event 24, 241, 0, 9, 0, 83, 0, 3, 7, 0, 0, 0, 0, 0, 0, Route110_EventScript_14F972, 900, 0, 0
-	object_event 25, 241, 0, 10, 0, 83, 0, 3, 7, 0, 0, 0, 0, 0, 0, Route110_EventScript_14F988, 900, 0, 0
-	object_event 26, 241, 0, 8, 0, 82, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0x0, 900, 0, 0
+	object_event 22, 241, 0, 7, 0, 83, 0, 3, 7, 0, 0, 0, 0, 0, 0, Route110_EventScript_14F946, FLAG_HIDE_EVIL_TEAM_ROUTE110, 0, 0
+	object_event 23, 241, 0, 8, 0, 83, 0, 3, 7, 0, 0, 0, 0, 0, 0, Route110_EventScript_14F95C, FLAG_HIDE_EVIL_TEAM_ROUTE110, 0, 0
+	object_event 24, 241, 0, 9, 0, 83, 0, 3, 7, 0, 0, 0, 0, 0, 0, Route110_EventScript_14F972, FLAG_HIDE_EVIL_TEAM_ROUTE110, 0, 0
+	object_event 25, 241, 0, 10, 0, 83, 0, 3, 7, 0, 0, 0, 0, 0, 0, Route110_EventScript_14F988, FLAG_HIDE_EVIL_TEAM_ROUTE110, 0, 0
+	object_event 26, 241, 0, 8, 0, 82, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_EVIL_TEAM_ROUTE110, 0, 0
 	object_event 27, MAP_OBJ_GFX_CYCLING_TRIATHLETE_M, 0, 21, 0, 78, 0, 4, 51, 23, 0, 1, 0, 2, 0, Route110_EventScript_14FB11, 0, 0, 0
 	object_event 28, 240, 0, 34, 0, 54, 0, 3, 14, 0, 0, 0, 0, 0, 0, 0x0, 919, 0, 0
 	object_event 29, 243, 0, 34, 0, 54, 0, 3, 8, 0, 0, 0, 0, 0, 0, 0x0, 922, 0, 0

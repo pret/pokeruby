@@ -71,8 +71,8 @@ MtPyre_Summit_EventScript_15D4E1:: @ 815D4E1
 MtPyre_Summit_EventScript_15D57A:: @ 815D57A
 	setflag FLAG_MT_PYRE_ORB_STOLEN
 	setvar 0x4058, 1
-	clearflag 840
-	clearflag 835
+	clearflag FLAG_HIDE_STERN_SLATEPORT
+	clearflag FLAG_HIDE_GABBY_AND_TY_SLATEPORT
 	setvar 0x40a0, 1
 	setvar 0x40b9, 1
 	return

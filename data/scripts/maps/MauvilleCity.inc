@@ -156,8 +156,8 @@ MauvilleCity_EventScript_14C1D9:: @ 814C1D9
 MauvilleCity_EventScript_14C22B:: @ 814C22B
 	removeobject 6
 	removeobject 7
-	clearflag 806
-	clearflag 809
+	clearflag FLAG_HIDE_WALLY_WANDAS_HOUSE
+	clearflag FLAG_HIDE_WALLY_FATHER_WANDAS_HOUSE
 	setflag FLAG_DEFEATED_WALLY_MAUVILLE
 	releaseall
 	end

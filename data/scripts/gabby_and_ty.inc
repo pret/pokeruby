@@ -60,43 +60,43 @@ Route111_EventScript_1AE3D7:: @ 81AE3D7
 	return
 
 Route111_EventScript_1AE3E2:: @ 81AE3E2
-	setflag 796
+	setflag FLAG_HIDE_GABBY_AND_TY_ROUTE111_1
 	return
 
 Route111_EventScript_1AE3E6:: @ 81AE3E6
-	clearflag 796
+	clearflag FLAG_HIDE_GABBY_AND_TY_ROUTE111_1
 	return
 
 Route111_EventScript_1AE3EA:: @ 81AE3EA
-	setflag 797
+	setflag FLAG_HIDE_GABBY_AND_TY_ROUTE118_1
 	return
 
 Route111_EventScript_1AE3EE:: @ 81AE3EE
-	clearflag 797
+	clearflag FLAG_HIDE_GABBY_AND_TY_ROUTE118_1
 	return
 
 Route111_EventScript_1AE3F2:: @ 81AE3F2
-	setflag 798
+	setflag FLAG_HIDE_GABBY_AND_TY_ROUTE120
 	return
 
 Route111_EventScript_1AE3F6:: @ 81AE3F6
-	clearflag 798
+	clearflag FLAG_HIDE_GABBY_AND_TY_ROUTE120
 	return
 
 Route111_EventScript_1AE3FA:: @ 81AE3FA
-	setflag 799
+	setflag FLAG_HIDE_GABBY_AND_TY_ROUTE111_2
 	return
 
 Route111_EventScript_1AE3FE:: @ 81AE3FE
-	clearflag 799
+	clearflag FLAG_HIDE_GABBY_AND_TY_ROUTE111_2
 	return
 
 Route111_EventScript_1AE402:: @ 81AE402
-	setflag 901
+	setflag FLAG_HIDE_GABBY_AND_TY_ROUTE118_2
 	return
 
 Route111_EventScript_1AE406:: @ 81AE406
-	clearflag 901
+	clearflag FLAG_HIDE_GABBY_AND_TY_ROUTE118_2
 	return
 
 Route111_EventScript_1AE40A:: @ 81AE40A

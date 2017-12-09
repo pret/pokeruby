@@ -9,7 +9,7 @@ Route103_MapObjects:: @ 8381300
 	object_event 8, MAP_OBJ_GFX_BERRY_TREE, 0, 59, 0, 5, 0, 3, 12, 0, 0, 0, 0, 6, 0, S_BerryTree, 0, 0, 0
 	object_event 9, MAP_OBJ_GFX_BERRY_TREE, 0, 60, 0, 5, 0, 3, 12, 0, 0, 0, 0, 7, 0, S_BerryTree, 0, 0, 0
 	object_event 10, MAP_OBJ_GFX_BOY_1, 0, 20, 0, 10, 0, 3, 2, 33, 0, 0, 0, 0, 0, Route103_EventScript_14ED79, 0, 0, 0
-	object_event 11, MAP_OBJ_GFX_PROF_BIRCH, 0, 7, 0, 3, 0, 3, 2, 17, 0, 0, 0, 0, 0, Route103_EventScript_1A037F, 898, 0, 0
+	object_event 11, MAP_OBJ_GFX_PROF_BIRCH, 0, 7, 0, 3, 0, 3, 2, 17, 0, 0, 0, 0, 0, Route103_EventScript_1A037F, FLAG_HIDE_BIRCH_ROUTE103, 0, 0
 	object_event 12, MAP_OBJ_GFX_MAN_3, 0, 56, 0, 12, 0, 3, 10, 0, 0, 1, 0, 5, 0, Route103_EventScript_14EE4E, 0, 0, 0
 	object_event 13, MAP_OBJ_GFX_ITEM_BALL, 0, 63, 0, 8, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route103_EventScript_1B1446, 1114, 0, 0
 	object_event 14, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 67, 0, 7, 0, 3, 1, 17, 0, 0, 0, 0, 0, S_CuttableTree, FLAG_TEMP_12, 0, 0

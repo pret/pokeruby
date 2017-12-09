@@ -8,12 +8,12 @@ LilycoveCity_MapObjects:: @ 838016C
 	object_event 7, MAP_OBJ_GFX_OLD_MAN_1, 0, 35, 0, 37, 0, 5, 8, 0, 0, 0, 0, 0, 0, LilycoveCity_EventScript_14CC36, 0, 0, 0
 	object_event 8, MAP_OBJ_GFX_OLD_WOMAN_1, 0, 34, 0, 37, 0, 5, 8, 0, 0, 0, 0, 0, 0, LilycoveCity_EventScript_14CC3F, 0, 0, 0
 	object_event 9, MAP_OBJ_GFX_OLD_MAN_1, 0, 57, 0, 17, 0, 3, 1, 0, 0, 0, 0, 0, 0, LilycoveCity_EventScript_14CC48, 0, 0, 0
-	object_event 10, 241, 0, 73, 0, 15, 0, 3, 10, 0, 0, 0, 0, 0, 0, LilycoveCity_EventScript_14CCE5, 852, 0, 0
+	object_event 10, 241, 0, 73, 0, 15, 0, 3, 10, 0, 0, 0, 0, 0, 0, LilycoveCity_EventScript_14CCE5, FLAG_HIDE_GRUNTS_LILYCOVE, 0, 0
 	object_event 11, MAP_OBJ_GFX_ITEM_BALL, 0, 61, 0, 36, 0, 5, 1, 0, 0, 0, 0, 0, 0, LilycoveCity_EventScript_1B1738, 1042, 0, 0
-	object_event 12, 241, 0, 43, 0, 18, 0, 3, 5, 1, 0, 0, 0, 0, 0, LilycoveCity_EventScript_14CD3D, 852, 0, 0
-	object_event 13, 241, 0, 46, 0, 12, 0, 3, 9, 0, 0, 0, 0, 0, 0, LilycoveCity_EventScript_14CD22, 852, 0, 0
-	object_event 14, 241, 0, 45, 0, 12, 0, 3, 10, 0, 0, 0, 0, 0, 0, LilycoveCity_EventScript_14CD2B, 852, 0, 0
-	object_event 15, 241, 0, 38, 0, 9, 0, 5, 9, 0, 0, 0, 0, 0, 0, LilycoveCity_EventScript_14CD34, 852, 0, 0
+	object_event 12, 241, 0, 43, 0, 18, 0, 3, 5, 1, 0, 0, 0, 0, 0, LilycoveCity_EventScript_14CD3D, FLAG_HIDE_GRUNTS_LILYCOVE, 0, 0
+	object_event 13, 241, 0, 46, 0, 12, 0, 3, 9, 0, 0, 0, 0, 0, 0, LilycoveCity_EventScript_14CD22, FLAG_HIDE_GRUNTS_LILYCOVE, 0, 0
+	object_event 14, 241, 0, 45, 0, 12, 0, 3, 10, 0, 0, 0, 0, 0, 0, LilycoveCity_EventScript_14CD2B, FLAG_HIDE_GRUNTS_LILYCOVE, 0, 0
+	object_event 15, 241, 0, 38, 0, 9, 0, 5, 9, 0, 0, 0, 0, 0, 0, LilycoveCity_EventScript_14CD34, FLAG_HIDE_GRUNTS_LILYCOVE, 0, 0
 	object_event 16, MAP_OBJ_GFX_GENTLEMAN, 0, 50, 0, 7, 0, 5, 2, 17, 0, 0, 0, 0, 0, LilycoveCity_EventScript_14CB74, 0, 0, 0
 	object_event 17, 240, 0, 27, 0, 7, 0, 5, 8, 17, 0, 0, 0, 0, 0, LilycoveCity_EventScript_14CD46, 971, 0, 0
 

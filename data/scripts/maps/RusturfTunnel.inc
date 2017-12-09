@@ -345,7 +345,7 @@ RusturfTunnel_EventScript_15C9EA:: @ 815C9EA
 	setflag FLAG_RECOVERED_DEVON_GOODS
 	setvar 0x405a, 4
 	setvar 0x4090, 1
-	setflag 891
+	setflag FLAG_HIDE_BRINEY_ROUTE116
 	release
 	end
 

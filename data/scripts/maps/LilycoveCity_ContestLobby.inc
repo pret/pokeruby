@@ -13,7 +13,7 @@ LilycoveCity_ContestLobby_MapScript2_158877:: @ 8158877
 	.2byte 0
 
 LilycoveCity_ContestLobby_EventScript_158889:: @ 8158889
-	checkflag 775
+	checkflag FLAG_HIDE_LILYCOVE_MUSEUM_CURATOR
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158898
 	setvar 0x4099, 0
 	end
@@ -97,23 +97,23 @@ LilycoveCity_ContestLobby_EventScript_158994:: @ 8158994
 	return
 
 LilycoveCity_ContestLobby_EventScript_1589D6:: @ 81589D6
-	clearflag 776
+	clearflag FLAG_HIDE_LILYCOVE_MUSEUM_PAINTING_LADY
 	return
 
 LilycoveCity_ContestLobby_EventScript_1589DA:: @ 81589DA
-	clearflag 777
+	clearflag FLAG_HIDE_LILYCOVE_MUSEUM_PAINTING_GIRL
 	return
 
 LilycoveCity_ContestLobby_EventScript_1589DE:: @ 81589DE
-	clearflag 778
+	clearflag FLAG_HIDE_LILYCOVE_MUSEUM_PAINTING_MAN
 	return
 
 LilycoveCity_ContestLobby_EventScript_1589E2:: @ 81589E2
-	clearflag 779
+	clearflag FLAG_HIDE_LILYCOVE_MUSEUM_PAINTER
 	return
 
 LilycoveCity_ContestLobby_EventScript_1589E6:: @ 81589E6
-	clearflag 780
+	clearflag FLAG_HIDE_LILYCOVE_MUSEUM_VISITORS
 	return
 
 LilycoveCity_ContestLobby_EventScript_1589EA:: @ 81589EA
@@ -188,7 +188,7 @@ LilycoveCity_ContestLobby_Movement_158A52:: @ 8158A52
 	step_end
 
 LilycoveCity_ContestLobby_EventScript_158A5B:: @ 8158A5B
-	checkflag 775
+	checkflag FLAG_HIDE_LILYCOVE_MUSEUM_CURATOR
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158A6A
 	setvar 0x4099, 0
 	end
@@ -583,7 +583,7 @@ LilycoveCity_ContestLobby_EventScript_158EB0:: @ 8158EB0
 	end
 
 LilycoveCity_ContestLobby_EventScript_158EE8:: @ 8158EE8
-	setflag 775
+	setflag FLAG_HIDE_LILYCOVE_MUSEUM_CURATOR
 	copyvar 0x4094, 0x1
 	additem ITEM_CONTEST_PASS, 1
 	setvar 0x800b, 8

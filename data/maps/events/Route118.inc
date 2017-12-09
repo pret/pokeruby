@@ -3,11 +3,11 @@ Route118_MapObjects:: @ 8383684
 	object_event 2, MAP_OBJ_GFX_BERRY_TREE, 0, 36, 0, 5, 0, 3, 12, 0, 0, 0, 0, 32, 0, S_BerryTree, 0, 0, 0
 	object_event 3, MAP_OBJ_GFX_BERRY_TREE, 0, 37, 0, 5, 0, 3, 12, 0, 0, 0, 0, 33, 0, S_BerryTree, 0, 0, 0
 	object_event 4, MAP_OBJ_GFX_MAN_6, 0, 64, 0, 10, 0, 3, 8, 0, 0, 1, 0, 3, 0, Route118_EventScript_151139, 0, 0, 0
-	object_event 5, MAP_OBJ_GFX_REPORTER_F, 0, 33, 0, 8, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route118_EventScript_1AE462, 797, 0, 0
-	object_event 6, MAP_OBJ_GFX_CAMERAMAN, 0, 34, 0, 8, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route118_EventScript_1AE482, 797, 0, 0
+	object_event 5, MAP_OBJ_GFX_REPORTER_F, 0, 33, 0, 8, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route118_EventScript_1AE462, FLAG_HIDE_GABBY_AND_TY_ROUTE118_1, 0, 0
+	object_event 6, MAP_OBJ_GFX_CAMERAMAN, 0, 34, 0, 8, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route118_EventScript_1AE482, FLAG_HIDE_GABBY_AND_TY_ROUTE118_1, 0, 0
 	object_event 7, MAP_OBJ_GFX_GIRL_2, 0, 12, 0, 8, 0, 3, 2, 17, 0, 0, 0, 0, 0, Route118_EventScript_150F93, 0, 0, 0
-	object_event 8, MAP_OBJ_GFX_REPORTER_F, 0, 33, 0, 8, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route118_EventScript_1AE522, 901, 0, 0
-	object_event 9, MAP_OBJ_GFX_CAMERAMAN, 0, 34, 0, 8, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route118_EventScript_1AE542, 901, 0, 0
+	object_event 8, MAP_OBJ_GFX_REPORTER_F, 0, 33, 0, 8, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route118_EventScript_1AE522, FLAG_HIDE_GABBY_AND_TY_ROUTE118_2, 0, 0
+	object_event 9, MAP_OBJ_GFX_CAMERAMAN, 0, 34, 0, 8, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route118_EventScript_1AE542, FLAG_HIDE_GABBY_AND_TY_ROUTE118_2, 0, 0
 	object_event 10, MAP_OBJ_GFX_REPORTER_F, 0, 33, 0, 8, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route118_EventScript_1AE562, 904, 0, 0
 	object_event 11, MAP_OBJ_GFX_CAMERAMAN, 0, 34, 0, 8, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route118_EventScript_1AE582, 904, 0, 0
 	object_event 12, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 38, 0, 8, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_CuttableTree, FLAG_TEMP_11, 0, 0

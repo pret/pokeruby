@@ -209,8 +209,8 @@ PetalburgCity_Gym_EventScript_154669:: @ 8154669
 	setvar 0x4085, 1
 	setvar 0x4057, 2
 	clearflag FLAG_HIDE_WALLY_PETALBURG
-	clearflag 866
-	setflag 889
+	clearflag FLAG_HIDE_WALLY_PETALBURG_GYM
+	setflag FLAG_HIDE_RIVAL_BIRCH_LAB
 	special InitBirchState
 	warp MAP_PETALBURG_CITY, 255, 15, 8
 	waitstate

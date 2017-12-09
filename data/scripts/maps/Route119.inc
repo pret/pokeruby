@@ -33,8 +33,8 @@ Route119_MapScript1_15119B:: @ 815119B
 	end
 
 Route119_EventScript_1511B9:: @ 81511B9
-	setflag 893
-	clearflag 892
+	setflag FLAG_HIDE_WEATHER_INSTITUTE_WORKERS_2F
+	clearflag FLAG_HIDE_WEATHER_INSTITUTE_WORKERS_1F
 	setvar 0x40b3, 2
 	return
 

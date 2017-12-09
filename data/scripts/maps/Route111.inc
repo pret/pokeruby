@@ -40,10 +40,10 @@ Route111_EventScript_15000C:: @ 815000C
 	return
 
 Route111_EventScript_15000D:: @ 815000D
-	clearflag 768
-	setflag 769
-	setflag 770
-	setflag 771
+	clearflag FLAG_HIDE_VICTOR_WINSTRATE
+	setflag FLAG_HIDE_VICTORIA_WINSTRATE
+	setflag FLAG_HIDE_VIVI_WINSTRATE
+	setflag FLAG_HIDE_VICKI_WINSTRATE
 	cleartrainerflag OPPONENT_VICTOR
 	cleartrainerflag OPPONENT_VICTORIA
 	cleartrainerflag OPPONENT_VIVI

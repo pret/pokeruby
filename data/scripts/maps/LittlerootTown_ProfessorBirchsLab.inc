@@ -107,7 +107,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152D90:: @ 8152D90
 LittlerootTown_ProfessorBirchsLab_EventScript_152D9A:: @ 8152D9A
 	lock
 	faceplayer
-	checkflag 896
+	checkflag FLAG_UNKNOWN_BIRCH_380
 	goto_if 0, LittlerootTown_ProfessorBirchsLab_EventScript_1A037F
 	compare 0x4084, 5
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152E7B

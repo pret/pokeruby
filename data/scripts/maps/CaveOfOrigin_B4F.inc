@@ -68,13 +68,13 @@ CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 	specialvar RESULT, sub_810E300
 	compare RESULT, 1
 	call_if 1, CaveOfOrigin_B4F_EventScript_15DE73
-	setflag 816
-	setflag 855
-	setflag 856
-	clearflag 815
+	setflag FLAG_HIDE_WALLACE_SOOTOPOLIS
+	setflag FLAG_HIDE_CAVE_OF_ORIGIN_ENTRANCE_WOMAN_1
+	setflag FLAG_HIDE_CAVE_OF_ORIGIN_ENTRANCE_WOMAN_2
+	clearflag FLAG_HIDE_WALLACE_SOOTOPOLIS_GYM
 	setvar 0x409b, 1
 	setflag FLAG_LEGENDARY_BATTLE_COMPLETED
-	clearflag 854
+	clearflag FLAG_HIDE_SOOTOPOLIS_RESIDENTS
 	clearflag SYS_WEATHER_CTRL
 	setvar 0x40b9, 2
 	clearflag 916

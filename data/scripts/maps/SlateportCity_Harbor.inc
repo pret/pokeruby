@@ -12,7 +12,7 @@ SlateportCity_Harbor_MapScript1_155F63:: @ 8155F63
 	end
 
 SlateportCity_Harbor_EventScript_155F85:: @ 8155F85
-	clearflag 860
+	clearflag FLAG_HIDE_SS_TIDAL_SLATEPORT_HARBOR
 	return
 
 SlateportCity_Harbor_EventScript_155F89:: @ 8155F89
@@ -73,8 +73,8 @@ SlateportCity_Harbor_EventScript_155FD5:: @ 8155FD5
 	call_if 1, SlateportCity_Harbor_EventScript_156086
 	msgbox SlateportCity_Harbor_Text_17FE60, 4
 	closemessage
-	setflag 821
-	setflag 822
+	setflag FLAG_HIDE_GRUNT_1_BLOCKING_HIDEOUT
+	setflag FLAG_HIDE_GRUNT_2_BLOCKING_HIDEOUT
 	moveobjectoffscreen 4
 	setobjectmovementtype 4, 10
 	releaseall

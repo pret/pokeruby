@@ -1,5 +1,5 @@
 BattleTower_BattleRoom_MapObjects:: @ 8391DAC
-	object_event 1, 240, 0, 5, 0, 1, 0, 3, 8, 0, 0, 0, 0, 0, 0, 0x0, 888, 0, 0
+	object_event 1, 240, 0, 5, 0, 1, 0, 3, 8, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_BATTLE_TOWER_OPPONENT, 0, 0
 	object_event 2, MAP_OBJ_GFX_TEALA, 0, 1, 0, 7, 0, 3, 10, 0, 0, 0, 0, 0, 0, 0x0, 0, 0, 0
 
 BattleTower_BattleRoom_MapWarps:: @ 8391DDC

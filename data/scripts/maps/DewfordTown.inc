@@ -135,10 +135,10 @@ DewfordTown_EventScript_14E151:: @ 814E151
 	applymovement 255, DewfordTown_Movement_14E405
 	waitmovement 0
 	showobject 255, 0, 19
-	clearflag 739
-	clearflag 881
-	clearflag 742
-	setflag 743
+	clearflag FLAG_HIDE_MR_BRINEY_ROUTE104_HOUSE
+	clearflag FLAG_HIDE_PEEKO_BRINEY_HOUSE
+	clearflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE104
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD
 	hideobject 4, 0, 11
 	setvar 0x408e, 2
 	resetobjectpriority 255, 0, 11
@@ -171,10 +171,10 @@ DewfordTown_EventScript_14E1D8:: @ 814E1D8
 	setobjectpriority 2, 0, 24, 0
 	applymovement 2, DewfordTown_Movement_14E410
 	waitmovement 0
-	clearflag 741
+	clearflag FLAG_HIDE_MR_BRINEY_ROUTE109
 	addobject 1
-	clearflag 744
-	setflag 743
+	clearflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE109
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD
 	hideobject 4, 0, 11
 	checkflag FLAG_DELIVERED_DEVON_GOODS
 	call_if 0, DewfordTown_EventScript_14E281

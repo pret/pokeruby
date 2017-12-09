@@ -1156,108 +1156,108 @@ Event_ResetBerryTrees: @ 19F940
 
 gUnknown_0819FA81:: @ 819FA81
 	setflag FLAG_LINK_CONTEST_ROOM_POKEBALL
-	setflag 769
-	setflag 770
-	setflag 771
+	setflag FLAG_HIDE_VICTORIA_WINSTRATE
+	setflag FLAG_HIDE_VIVI_WINSTRATE
+	setflag FLAG_HIDE_VICKI_WINSTRATE
 	setflag FLAG_HIDE_BIRCH_IN_LAB
-	setflag 889
+	setflag FLAG_HIDE_RIVAL_BIRCH_LAB
 	setflag FLAG_HIDE_WALLY_PETALBURG
-	setflag 867
+	setflag FLAG_UNKNOWN_363
 	setflag FLAG_HIDE_GRUNT_RUSTBORO
 	setflag FLAG_HIDE_DEVON_RUSTBORO
-	setflag 814
-	setflag 868
-	setflag 739
-	setflag 881
-	setflag 738
-	setflag 740
-	setflag 741
-	setflag 743
-	setflag 744
+	setflag FLAG_HIDE_RIVAL_RUSTBORO
+	setflag FLAG_HIDE_FAT_MAN_LITTLEROOT
+	setflag FLAG_HIDE_MR_BRINEY_ROUTE104_HOUSE
+	setflag FLAG_HIDE_PEEKO_BRINEY_HOUSE
+	setflag FLAG_HIDE_MR_BRINEY_ROUTE104
+	setflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
+	setflag FLAG_HIDE_MR_BRINEY_ROUTE109
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE109
 	setflag 906
 	setflag FLAG_UNKNOWN_2E1
-	setflag 747
-	setflag 748
-	setflag 749
-	setflag 756
-	setflag 774
-	setflag 895
-	setflag 776
-	setflag 777
-	setflag 778
-	setflag 779
-	setflag 780
-	setflag 781
-	setflag 782
-	setflag 783
+	setflag FLAG_UNKNOWN_2EB
+	setflag FLAG_UNKNOWN_2EC
+	setflag FLAG_UNKNOWN_2ED
+	setflag FLAG_UNKNOWN_2F4
+	setflag FLAG_HIDE_LILYCOVE_CONTEST_ATTENDENT_1
+	setflag FLAG_HIDE_ARTIST_LILCOVE_CONTEST
+	setflag FLAG_HIDE_LILYCOVE_MUSEUM_PAINTING_LADY
+	setflag FLAG_HIDE_LILYCOVE_MUSEUM_PAINTING_GIRL
+	setflag FLAG_HIDE_LILYCOVE_MUSEUM_PAINTING_MAN
+	setflag FLAG_HIDE_LILYCOVE_MUSEUM_PAINTER
+	setflag FLAG_HIDE_LILYCOVE_MUSEUM_VISITORS
+	setflag FLAG_HIDE_PETALBURG_GYM_GUIDE
+	setflag FLAG_UNKNOWN_30E
+	setflag FLAG_UNKNOWN_30F
 	setflag FLAG_HIDE_NORMAN_LITTLEROOT
-	setflag 849
-	setflag 789
-	setflag 790
-	setflag 791
-	setflag 792
-	setflag 797
-	setflag 798
-	setflag 799
-	setflag 901
+	setflag FLAG_HIDE_MAY_PICHU_DOLL
+	setflag FLAG_HIDE_FANCLUB_OLD_LADY
+	setflag FLAG_HIDE_FANCLUB_BOY
+	setflag FLAG_HIDE_FANCLUB_LITTLE_BOY
+	setflag FLAG_HIDE_FANCLUB_LADY
+	setflag FLAG_HIDE_GABBY_AND_TY_ROUTE118_1
+	setflag FLAG_HIDE_GABBY_AND_TY_ROUTE120
+	setflag FLAG_HIDE_GABBY_AND_TY_ROUTE111_2
+	setflag FLAG_HIDE_GABBY_AND_TY_ROUTE118_2
 	setflag 902
 	setflag 903
 	setflag 904
-	setflag 800
-	setflag 801
-	setflag 803
-	setflag 802
-	setflag 806
-	setflag 808
-	setflag 809
+	setflag FLAG_HIDE_CONTEST_REPORTER_FALLARBOR
+	setflag FLAG_HIDE_CONTEST_REPORTER_VERDANTURF
+	setflag FLAG_HIDE_CONTEST_REPORTER_SLATEPORT
+	setflag FLAG_HIDE_CONTEST_REPORTER_LILYCOVE
+	setflag FLAG_HIDE_WALLY_WANDAS_HOUSE
+	setflag FLAG_HIDE_BOYFRIEND_WANDAS_HOUSE
+	setflag FLAG_HIDE_WALLY_FATHER_WANDAS_HOUSE
 	setflag 984
-	setflag 811
-	setflag 812
-	setflag 866
-	setflag 815
-	setflag 816
-	setflag 869
-	setflag 823
-	setflag 828
-	setflag 829
-	setflag 831
-	setflag 859
-	setflag 841
-	setflag 843
-	setflag 844
-	setflag 847
-	setflag 845
-	setflag 846
-	setflag 860
-	setflag 861
-	setflag 835
-	setflag 840
-	setflag 848
-	setflag 851
-	setflag 855
-	setflag 856
+	setflag FLAG_HIDE_WALLY_FATHER_PETALBURG
+	setflag FLAG_HIDE_WALLY_MOTHER_PETALBURG
+	setflag FLAG_HIDE_WALLY_PETALBURG_GYM
+	setflag FLAG_HIDE_WALLACE_SOOTOPOLIS_GYM
+	setflag FLAG_HIDE_WALLACE_SOOTOPOLIS
+	setflag FLAG_HIDE_BRINEY_SLATEPORT_SHIPYARD
+	setflag FLAG_UNKNOWN_337
+	setflag FLAG_HIDE_EVIL_LEADER_SEAFLOOR_CAVERN
+	setflag FLAG_HIDE_OTHER_LEADER_SEAFLOOR_CAVERN
+	setflag FLAG_HIDE_OTHER_TEAM_GRUNTS_SEAFLOOR_CAVERN
+	setflag FLAG_HIDE_AWAKENED_MON_SEAFLOOR_CAVERN
+	setflag FLAG_HIDE_STERN_SLATEPORT_HARBOR
+	setflag FLAG_UNKNOWN_34B
+	setflag FLAG_UNKNOWN_34C
+	setflag FLAG_UNKNOWN_34F
+	setflag FLAG_HIDE_GRUNT_1_SLATEPORT_HARBOR
+	setflag FLAG_HIDE_GRUNT_2_SLATEPORT_HARBOR
+	setflag FLAG_HIDE_SS_TIDAL_SLATEPORT_HARBOR
+	setflag FLAG_HIDE_SS_TIDAL_LILYCOVE_HARBOR
+	setflag FLAG_HIDE_GABBY_AND_TY_SLATEPORT
+	setflag FLAG_HIDE_STERN_SLATEPORT
+	setflag FLAG_HIDE_SUBMARINE_SHADOW_SLATEPORT_HARBOR
+	setflag FLAG_HIDE_RIVAL_ROUTE119
+	setflag FLAG_HIDE_CAVE_OF_ORIGIN_ENTRANCE_WOMAN_1
+	setflag FLAG_HIDE_CAVE_OF_ORIGIN_ENTRANCE_WOMAN_2
 	setflag 973
-	setflag 870
-	setflag 872
-	setflag 877
-	setflag 879
-	setflag 891
-	setflag 880
-	setflag 878
-	setflag 807
+	setflag FLAG_HIDE_LANETTE
+	setflag FLAG_HIDE_TRICKMASTER_ENTRANCE
+	setflag FLAG_HIDE_MT_CHIMNEY_PEOPLE
+	setflag FLAG_HIDE_BRINEY_RUSTURF_TUNNEL
+	setflag FLAG_HIDE_BRINEY_ROUTE116
+	setflag FLAG_HIDE_PEEKO_RUSTURF_TUNNEL
+	setflag FLAG_HIDE_GRUNT_RUSTURF_TUNNEL
+	setflag FLAG_HIDE_BOYFRIEND_RUSTURF_TUNNEL
 	setflag 983
-	setflag 886
-	setflag 884
-	setflag 885
+	setflag FLAG_HIDE_EVIL_TEAM_LEADER_OCEANIC_MUSEUM_2F
+	setflag FLAG_HIDE_GRUNT_1_OCEANIC_MUSEUM_2F
+	setflag FLAG_HIDE_GRUNT_2_OCEANIC_MUSEUM_2F
 	setflag 961
-	setflag 888
+	setflag FLAG_HIDE_BATTLE_TOWER_OPPONENT
 	setflag 941
-	setflag 752
-	setflag 757
-	setflag 892
-	setflag 896
-	setflag 897
-	setflag 898
+	setflag FLAG_HIDE_MOM_LITTLEROOT
+	setflag FLAG_HIDE_MOM_UPSTAIRS
+	setflag FLAG_HIDE_WEATHER_INSTITUTE_WORKERS_1F
+	setflag FLAG_UNKNOWN_BIRCH_380
+	setflag FLAG_HIDE_BIRCH_ROUTE101
+	setflag FLAG_HIDE_BIRCH_ROUTE103
 	setflag 909
 	setflag 910
 	setflag 911
@@ -1274,18 +1274,18 @@ gUnknown_0819FA81:: @ 819FA81
 	setflag 939
 	setflag 940
 	setflag 928
-	setflag 834
+	setflag FLAG_HIDE_STEVEN_ROUTE128
 	setflag 944
 	setflag 945
 	setflag 947
 	setflag 948
-	setflag 858
+	setflag FLAG_HIDE_WALLY_BATTLE_VICTORY_ROAD
 	setflag 950
 	setflag 968
 	setflag 1133
 	setflag FLAG_HIDE_STEVENS_LETTER
 	setflag 979
-	setflag 751
+	setflag FLAG_HIDE_WALLY_DEFEATED_VICTORY_ROAD
 	setflag 991
 	call Event_ResetBerryTrees
 	end
@@ -1293,13 +1293,13 @@ gUnknown_0819FA81:: @ 819FA81
 EverGrandeCity_HallOfFame_EventScript_19FC13:: @ 819FC13
 	clearflag 925
 	call EverGrandeCity_HallOfFame_EventScript_19FD09
-	setflag 869
+	setflag FLAG_HIDE_BRINEY_SLATEPORT_SHIPYARD
 	clearflag 950
 	clearflag FLAG_HIDE_STEVENS_LETTER
 	setvar 0x40c6, 1
-	clearflag 751
-	clearflag 860
-	clearflag 861
+	clearflag FLAG_HIDE_WALLY_DEFEATED_VICTORY_ROAD
+	clearflag FLAG_HIDE_SS_TIDAL_SLATEPORT_HARBOR
+	clearflag FLAG_HIDE_SS_TIDAL_LILYCOVE_HARBOR
 	special sub_810FAA0
 	checkflag FLAG_RECEIVED_SS_TICKET
 	call_if 0, EverGrandeCity_HallOfFame_EventScript_19FC62
@@ -1354,35 +1354,35 @@ gUnknown_0819FC9F:: @ 819FC9F
 	end
 
 EventScript_19FCC1:
-	setflag 740
-	setflag 743
-	setflag 741
-	setflag 744
-	clearflag 742
-	clearflag 739
-	clearflag 881
+	setflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD
+	setflag FLAG_HIDE_MR_BRINEY_ROUTE109
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE109
+	clearflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE104
+	clearflag FLAG_HIDE_MR_BRINEY_ROUTE104_HOUSE
+	clearflag FLAG_HIDE_PEEKO_BRINEY_HOUSE
 	end
 
 EventScript_19FCD7:
-	setflag 741
-	setflag 744
-	setflag 738
-	setflag 742
-	setflag 739
-	setflag 881
-	clearflag 740
-	clearflag 743
+	setflag FLAG_HIDE_MR_BRINEY_ROUTE109
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE109
+	setflag FLAG_HIDE_MR_BRINEY_ROUTE104
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE104
+	setflag FLAG_HIDE_MR_BRINEY_ROUTE104_HOUSE
+	setflag FLAG_HIDE_PEEKO_BRINEY_HOUSE
+	clearflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
+	clearflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD
 	end
 
 EventScript_19FCF0:
-	setflag 738
-	setflag 742
-	setflag 739
-	setflag 881
-	setflag 740
-	setflag 743
-	clearflag 741
-	clearflag 744
+	setflag FLAG_HIDE_MR_BRINEY_ROUTE104
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE104
+	setflag FLAG_HIDE_MR_BRINEY_ROUTE104_HOUSE
+	setflag FLAG_HIDE_PEEKO_BRINEY_HOUSE
+	setflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD
+	clearflag FLAG_HIDE_MR_BRINEY_ROUTE109
+	clearflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE109
 	end
 
 EverGrandeCity_HallOfFame_EventScript_19FD09:: @ 819FD09
@@ -1406,11 +1406,11 @@ VerdanturfTown_PokemonCenter_1F_EventScript_19FD1B:: @ 819FD1B
 	goto_if 0, OldaleTown_PokemonCenter_1F_EventScript_1A14DC
 	checkflag 1217
 	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_1A14DC
-	checkflag 742
+	checkflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE104
 	goto_if 0, OldaleTown_PokemonCenter_1F_EventScript_19FD49
-	checkflag 740
+	checkflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
 	goto_if 0, OldaleTown_PokemonCenter_1F_EventScript_19FD4F
-	checkflag 741
+	checkflag FLAG_HIDE_MR_BRINEY_ROUTE109
 	goto_if 0, OldaleTown_PokemonCenter_1F_EventScript_19FD55
 	return
 
@@ -1801,7 +1801,7 @@ DewfordTown_Gym_EventScript_1A00FB:: @ 81A00FB
 LavaridgeTown_Gym_1F_EventScript_1A00FB:: @ 81A00FB
 MauvilleCity_Gym_EventScript_1A00FB:: @ 81A00FB
 RustboroCity_Gym_EventScript_1A00FB:: @ 81A00FB
-	clearflag 781
+	clearflag FLAG_HIDE_PETALBURG_GYM_GUIDE
 	setflag FLAG_PETALBURG_MART_EXPANDED_ITEMS
 	return
 
@@ -2168,23 +2168,23 @@ Route103_EventScript_1A02F4:: @ 81A02F4
 
 Route101_EventScript_1A0358:: @ 81A0358
 	clearflag FLAG_HIDE_BIRCH_IN_LAB
-	clearflag 896
-	setflag 897
-	setflag 898
+	clearflag FLAG_UNKNOWN_BIRCH_380
+	setflag FLAG_HIDE_BIRCH_ROUTE101
+	setflag FLAG_HIDE_BIRCH_ROUTE103
 	return
 
 Route101_EventScript_1A0365:: @ 81A0365
-	clearflag 897
+	clearflag FLAG_HIDE_BIRCH_ROUTE101
 	setflag FLAG_HIDE_BIRCH_IN_LAB
-	setflag 896
-	setflag 898
+	setflag FLAG_UNKNOWN_BIRCH_380
+	setflag FLAG_HIDE_BIRCH_ROUTE103
 	return
 
 Route101_EventScript_1A0372:: @ 81A0372
-	clearflag 898
-	setflag 897
+	clearflag FLAG_HIDE_BIRCH_ROUTE103
+	setflag FLAG_HIDE_BIRCH_ROUTE101
 	setflag FLAG_HIDE_BIRCH_IN_LAB
-	setflag 896
+	setflag FLAG_UNKNOWN_BIRCH_380
 	return
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1A037F:: @ 81A037F
@@ -2252,21 +2252,21 @@ SlateportCity_Harbor_Movement_1A041C:: @ 81A041C
 	step_end
 
 PetalburgCity_Gym_EventScript_1A0424:: @ 81A0424
-	setflag 740
-	setflag 743
-	setflag 741
-	setflag 744
-	setflag 738
-	setflag 742
-	setflag 739
-	setflag 881
+	setflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD
+	setflag FLAG_HIDE_MR_BRINEY_ROUTE109
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE109
+	setflag FLAG_HIDE_MR_BRINEY_ROUTE104
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE104
+	setflag FLAG_HIDE_MR_BRINEY_ROUTE104_HOUSE
+	setflag FLAG_HIDE_PEEKO_BRINEY_HOUSE
 	setvar 0x4096, 0
 	return
 
 RusturfTunnel_EventScript_1A0442:: @ 81A0442
 	removeobject 1
 	removeobject 10
-	clearflag 808
+	clearflag FLAG_HIDE_BOYFRIEND_WANDAS_HOUSE
 	clearflag 984
 	setvar 0x409a, 6
 	setflag FLAG_RUSTURF_TUNNEL_OPENED
@@ -4644,19 +4644,19 @@ VerdanturfTown_ContestLobby_EventScript_1AE188:: @ 81AE188
 	end
 
 FallarborTown_ContestLobby_EventScript_1AE1EE:: @ 81AE1EE
-	clearflag 800
+	clearflag FLAG_HIDE_CONTEST_REPORTER_FALLARBOR
 	return
 
 FallarborTown_ContestLobby_EventScript_1AE1F2:: @ 81AE1F2
-	clearflag 801
+	clearflag FLAG_HIDE_CONTEST_REPORTER_VERDANTURF
 	return
 
 FallarborTown_ContestLobby_EventScript_1AE1F6:: @ 81AE1F6
-	clearflag 803
+	clearflag FLAG_HIDE_CONTEST_REPORTER_SLATEPORT
 	return
 
 FallarborTown_ContestLobby_EventScript_1AE1FA:: @ 81AE1FA
-	clearflag 802
+	clearflag FLAG_HIDE_CONTEST_REPORTER_LILYCOVE
 	return
 
 FallarborTown_ContestLobby_EventScript_1AE1FE:: @ 81AE1FE

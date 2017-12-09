@@ -6,7 +6,7 @@ LilycoveCity_MapScripts:: @ 814CA15
 LilycoveCity_MapScript1_14CA20:: @ 814CA20
 	setflag FLAG_VISITED_LILYCOVE_CITY
 	setvar 0x4086, 0
-	setflag 802
+	setflag FLAG_HIDE_CONTEST_REPORTER_LILYCOVE
 	checkflag SYS_WEATHER_CTRL
 	call_if 1, LilycoveCity_EventScript_1A02C1
 	call LilycoveCity_EventScript_1A0196
@@ -356,7 +356,7 @@ LilycoveCity_EventScript_14CEA6:: @ 814CEA6
 	compare RESULT, 1
 	call_if 1, LilycoveCity_EventScript_14CEF7
 	clearflag FLAG_HIDE_MAY_UPSTAIRS
-	clearflag 849
+	clearflag FLAG_HIDE_MAY_PICHU_DOLL
 	goto LilycoveCity_EventScript_14CF6B
 	end
 
@@ -392,7 +392,7 @@ LilycoveCity_EventScript_14CF12:: @ 814CF12
 	call_if 1, LilycoveCity_EventScript_14CF47
 	compare RESULT, 1
 	call_if 1, LilycoveCity_EventScript_14CF50
-	clearflag 760
+	clearflag FLAG_HIDE_BRENDAN_UPSTAIRS
 	goto LilycoveCity_EventScript_14CF6B
 	end
 

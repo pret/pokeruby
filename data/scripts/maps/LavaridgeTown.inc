@@ -19,7 +19,7 @@ LavaridgeTown_EventScript_14E4D0:: @ 814E4D0
 	return
 
 LavaridgeTown_EventScript_14E4DF:: @ 814E4DF
-	clearflag 877
+	clearflag FLAG_HIDE_MT_CHIMNEY_PEOPLE
 	return
 
 LavaridgeTown_MapScript2_14E4E3:: @ 814E4E3

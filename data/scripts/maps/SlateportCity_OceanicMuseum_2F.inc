@@ -74,7 +74,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_155CE6:: @ 8155CE6
 	removeobject 4
 	fadescreen 0
 	delay 30
-	setflag 883
+	setflag FLAG_HIDE_EVIL_TEAM_OCEANIC_MUSEUM
 	applymovement 255, SlateportCity_OceanicMuseum_2F_Movement_1A0843
 	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17F352, 4
@@ -86,7 +86,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_155CE6:: @ 8155CE6
 	waitmovement 0
 	playse 9
 	removeobject 1
-	setflag 900
+	setflag FLAG_HIDE_EVIL_TEAM_ROUTE110
 	setflag FLAG_DELIVERED_DEVON_GOODS
 	clearflag 947
 	setflag 949

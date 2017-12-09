@@ -19,7 +19,7 @@ SlateportCity_SternsShipyard_1F_EventScript_155336:: @ 8155336
 	applymovement 1, SlateportCity_SternsShipyard_1F_Movement_1A083D
 	waitmovement 0
 	setflag FLAG_DOCK_REJECTED_DEVON_GOODS
-	setflag 882
+	setflag FLAG_HIDE_EVIL_TEAM_SLATEPORT
 	releaseall
 	end
 

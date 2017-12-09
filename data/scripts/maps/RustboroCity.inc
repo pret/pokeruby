@@ -183,11 +183,11 @@ RustboroCity_EventScript_14C4F4:: @ 814C4F4
 	setvar 0x405a, 2
 	setvar 0x409a, 2
 	setvar 0x406f, 1
-	clearflag 891
-	clearflag 880
-	clearflag 878
-	setflag 739
-	setflag 881
+	clearflag FLAG_HIDE_BRINEY_ROUTE116
+	clearflag FLAG_HIDE_PEEKO_RUSTURF_TUNNEL
+	clearflag FLAG_HIDE_GRUNT_RUSTURF_TUNNEL
+	setflag FLAG_HIDE_MR_BRINEY_ROUTE104_HOUSE
+	setflag FLAG_HIDE_PEEKO_BRINEY_HOUSE
 	releaseall
 	end
 

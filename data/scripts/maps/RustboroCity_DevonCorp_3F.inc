@@ -57,13 +57,13 @@ RustboroCity_DevonCorp_3F_EventScript_157752:: @ 8157752
 	setflag SYS_POKENAV_GET
 	setflag FLAG_RECEIVED_POKENAV
 	msgbox RustboroCity_DevonCorp_3F_Text_183439, 4
-	setflag 894
-	clearflag 807
+	setflag FLAG_HIDE_TUNNER_DIGGER_ROUTE116
+	clearflag FLAG_HIDE_BOYFRIEND_RUSTURF_TUNNEL
 	clearflag 983
-	clearflag 739
-	clearflag 881
+	clearflag FLAG_HIDE_MR_BRINEY_ROUTE104_HOUSE
+	clearflag FLAG_HIDE_PEEKO_BRINEY_HOUSE
 	setvar 0x4096, 1
-	clearflag 814
+	clearflag FLAG_HIDE_RIVAL_RUSTBORO
 	setvar 0x408f, 1
 	releaseall
 	end

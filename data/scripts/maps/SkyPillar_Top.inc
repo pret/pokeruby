@@ -19,7 +19,7 @@ SkyPillar_Top_EventScript_15F316:: @ 815F316
 	playpokecry SPECIES_RAYQUAZA, 2
 	delay 40
 	waitpokecry
-	setflag 773
+	setflag FLAG_HIDE_RAYQUAZA
 	setflag SYS_CTRL_OBJ_DELETE
 	special ScrSpecial_StartRayquazaBattle
 	waitstate

@@ -77,7 +77,7 @@ MeteorFalls_1F_1R_EventScript_15C49C:: @ 815C49C
 	removeobject 7
 	removeobject 8
 	removeobject 9
-	setflag 819
+	setflag FLAG_HIDE_GRUNTS_BLOCKING_CABLE_CAR
 	setvar 0x40bf, 1
 	releaseall
 	end

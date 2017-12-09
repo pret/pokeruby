@@ -12,8 +12,8 @@ LittlerootTown_MaysHouse_2F_MapObjects:: @ 8385978
 	object_event 11, 249, 0, 3, 0, 7, 0, 3, 1, 0, 0, 0, 0, 0, 0, 0x0, FLAG_DECORATION_11, 0, 0
 	object_event 12, 250, 0, 4, 0, 7, 0, 3, 1, 0, 0, 0, 0, 0, 0, 0x0, FLAG_DECORATION_12, 0, 0
 	object_event 13, 251, 0, 5, 0, 7, 0, 3, 1, 0, 0, 0, 0, 0, 0, 0x0, FLAG_DECORATION_13, 0, 0
-	object_event 14, MAP_OBJ_GFX_MOM, 0, 1, 0, 1, 0, 3, 8, 1, 0, 0, 0, 0, 0, 0x0, 757, 0, 0
-	object_event 15, MAP_OBJ_GFX_PICHU_DOLL, 0, 3, 0, 4, 0, 4, 8, 17, 0, 0, 0, 0, 0, 0x0, 849, 0, 0
+	object_event 14, MAP_OBJ_GFX_MOM, 0, 1, 0, 1, 0, 3, 8, 1, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_MOM_UPSTAIRS, 0, 0
+	object_event 15, MAP_OBJ_GFX_PICHU_DOLL, 0, 3, 0, 4, 0, 4, 8, 17, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_MAY_PICHU_DOLL, 0, 0
 
 LittlerootTown_MaysHouse_2F_MapWarps:: @ 8385AE0
 	warp_def 1, 1, 0, 2, MAP_LITTLEROOT_TOWN_MAYS_HOUSE_1F

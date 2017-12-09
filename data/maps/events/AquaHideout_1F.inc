@@ -1,6 +1,6 @@
 AquaHideout_1F_MapObjects:: @ 838CD0C
-	object_event 1, 241, 0, 13, 0, 11, 0, 3, 8, 0, 0, 0, 0, 0, 0, AquaHideout_1F_EventScript_15D7CE, 821, 0, 0
-	object_event 2, 241, 0, 14, 0, 11, 0, 3, 8, 0, 0, 0, 0, 0, 0, AquaHideout_1F_EventScript_15D7ED, 822, 0, 0
+	object_event 1, 241, 0, 13, 0, 11, 0, 3, 8, 0, 0, 0, 0, 0, 0, AquaHideout_1F_EventScript_15D7CE, FLAG_HIDE_GRUNT_1_BLOCKING_HIDEOUT, 0, 0
+	object_event 2, 241, 0, 14, 0, 11, 0, 3, 8, 0, 0, 0, 0, 0, 0, AquaHideout_1F_EventScript_15D7ED, FLAG_HIDE_GRUNT_2_BLOCKING_HIDEOUT, 0, 0
 	object_event 3, 241, 0, 20, 0, 4, 0, 3, 50, 93, 0, 1, 0, 3, 0, AquaHideout_1F_EventScript_15D80C, 924, 0, 0
 
 AquaHideout_1F_MapWarps:: @ 838CD54

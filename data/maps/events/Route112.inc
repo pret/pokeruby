@@ -1,10 +1,10 @@
 Route112_MapObjects:: @ 8382818
-	object_event 1, 241, 0, 26, 0, 30, 0, 3, 8, 17, 0, 0, 0, 0, 0, Route112_EventScript_150513, 819, 0, 0
+	object_event 1, 241, 0, 26, 0, 30, 0, 3, 8, 17, 0, 0, 0, 0, 0, Route112_EventScript_150513, FLAG_HIDE_GRUNTS_BLOCKING_CABLE_CAR, 0, 0
 	object_event 2, MAP_OBJ_GFX_HIKER, 0, 24, 0, 34, 0, 3, 14, 0, 0, 1, 0, 2, 0, Route112_EventScript_150549, 0, 0, 0
 	object_event 3, MAP_OBJ_GFX_CAMPER, 0, 29, 0, 49, 0, 3, 8, 0, 0, 1, 0, 3, 0, Route112_EventScript_15059E, 0, 0, 0
 	object_event 4, MAP_OBJ_GFX_PICNICKER, 0, 22, 0, 46, 0, 3, 23, 0, 0, 1, 0, 3, 0, Route112_EventScript_1505B5, 0, 0, 0
 	object_event 5, MAP_OBJ_GFX_HIKER, 0, 17, 0, 40, 0, 3, 16, 0, 0, 1, 0, 4, 0, Route112_EventScript_150560, 0, 0, 0
-	object_event 6, 241, 0, 27, 0, 30, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route112_EventScript_15051C, 819, 0, 0
+	object_event 6, 241, 0, 27, 0, 30, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route112_EventScript_15051C, FLAG_HIDE_GRUNTS_BLOCKING_CABLE_CAR, 0, 0
 	object_event 7, MAP_OBJ_GFX_BERRY_TREE, 0, 27, 0, 6, 0, 0, 12, 0, 0, 0, 0, 24, 0, S_BerryTree, 0, 0, 0
 	object_event 8, MAP_OBJ_GFX_BERRY_TREE, 0, 28, 0, 6, 0, 0, 12, 0, 0, 0, 0, 23, 0, S_BerryTree, 0, 0, 0
 	object_event 9, MAP_OBJ_GFX_BERRY_TREE, 0, 29, 0, 6, 0, 0, 12, 0, 0, 0, 0, 22, 0, S_BerryTree, 0, 0, 0

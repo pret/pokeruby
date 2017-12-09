@@ -15,8 +15,8 @@ Route120_MapObjects:: @ 8383F30
 	object_event 14, MAP_OBJ_GFX_PICNICKER, 0, 36, 0, 45, 0, 3, 9, 0, 0, 1, 0, 2, 0, Route120_EventScript_151A1F, 0, 0, 0
 	object_event 15, MAP_OBJ_GFX_MANIAC, 0, 19, 0, 80, 0, 5, 15, 0, 0, 1, 0, 3, 0, Route120_EventScript_151A36, 0, 0, 0
 	object_event 16, MAP_OBJ_GFX_ITEM_BALL, 0, 20, 0, 55, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route120_EventScript_1B161A, 1030, 0, 0
-	object_event 17, MAP_OBJ_GFX_CAMERAMAN, 0, 37, 0, 5, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route120_EventScript_1AE4C2, 798, 0, 0
-	object_event 18, MAP_OBJ_GFX_REPORTER_F, 0, 36, 0, 5, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route120_EventScript_1AE4A2, 798, 0, 0
+	object_event 17, MAP_OBJ_GFX_CAMERAMAN, 0, 37, 0, 5, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route120_EventScript_1AE4C2, FLAG_HIDE_GABBY_AND_TY_ROUTE120, 0, 0
+	object_event 18, MAP_OBJ_GFX_REPORTER_F, 0, 36, 0, 5, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route120_EventScript_1AE4A2, FLAG_HIDE_GABBY_AND_TY_ROUTE120, 0, 0
 	object_event 19, MAP_OBJ_GFX_REPORTER_F, 0, 36, 0, 5, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route120_EventScript_1AE562, 902, 0, 0
 	object_event 20, MAP_OBJ_GFX_CAMERAMAN, 0, 37, 0, 5, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route120_EventScript_1AE582, 902, 0, 0
 	object_event 21, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 35, 0, 32, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_CuttableTree, FLAG_TEMP_11, 0, 0

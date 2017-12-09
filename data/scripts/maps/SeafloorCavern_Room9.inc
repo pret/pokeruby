@@ -192,23 +192,23 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	msgbox SeafloorCavern_Room9_Text_1B4ECA, 4
 	.endif
 	setvar 0x407b, 1
-	clearflag 855
-	clearflag 856
-	clearflag 816
+	clearflag FLAG_HIDE_CAVE_OF_ORIGIN_ENTRANCE_WOMAN_1
+	clearflag FLAG_HIDE_CAVE_OF_ORIGIN_ENTRANCE_WOMAN_2
+	clearflag FLAG_HIDE_WALLACE_SOOTOPOLIS
 	clearflag 973
 	setvar 0x405e, 1
 	clearflag 944
 	clearflag 945
 	setflag SYS_WEATHER_CTRL
-	setflag 854
+	setflag FLAG_HIDE_SOOTOPOLIS_RESIDENTS
 	setflag FLAG_LEGEND_ESCAPED_SEAFLOOR_CAVERN
 	setflag 967
 	setvar 0x40c6, 1
 	setvar 0x40a2, 1
-	setflag 828
-	setflag 829
-	setflag 831
-	setflag 859
+	setflag FLAG_HIDE_EVIL_LEADER_SEAFLOOR_CAVERN
+	setflag FLAG_HIDE_OTHER_LEADER_SEAFLOOR_CAVERN
+	setflag FLAG_HIDE_OTHER_TEAM_GRUNTS_SEAFLOOR_CAVERN
+	setflag FLAG_HIDE_AWAKENED_MON_SEAFLOOR_CAVERN
 	setflag 946
 	warp MAP_ROUTE128, 255, 38, 22
 	waitstate

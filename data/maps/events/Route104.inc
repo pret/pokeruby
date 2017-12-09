@@ -5,8 +5,8 @@ Route104_MapObjects:: @ 8381488
 	object_event 4, MAP_OBJ_GFX_BOY_1, 0, 27, 0, 63, 0, 3, 3, 16, 0, 0, 0, 0, 0, Route104_EventScript_14EF81, 0, 0, 0
 	object_event 5, MAP_OBJ_GFX_WOMAN_3, 0, 30, 0, 50, 0, 3, 2, 17, 0, 0, 0, 0, 0, Route104_EventScript_14EF8A, 0, 0, 0
 	object_event 6, MAP_OBJ_GFX_GIRL_3, 0, 28, 0, 74, 0, 3, 7, 0, 0, 0, 0, 0, 0, Route104_EventScript_14EFCC, 0, 0, 0
-	object_event 7, MAP_OBJ_GFX_MR_BRINEYS_BOAT, 0, 12, 0, 54, 0, 1, 7, 0, 0, 0, 0, 0, 0, 0x0, 742, 0, 0
-	object_event 8, MAP_OBJ_GFX_OLD_MAN_1, 0, 12, 0, 51, 0, 4, 10, 0, 0, 0, 0, 0, 0, 0x0, 738, 0, 0
+	object_event 7, MAP_OBJ_GFX_MR_BRINEYS_BOAT, 0, 12, 0, 54, 0, 1, 7, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_MR_BRINEY_BOAT_ROUTE104, 0, 0
+	object_event 8, MAP_OBJ_GFX_OLD_MAN_1, 0, 12, 0, 51, 0, 4, 10, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_MR_BRINEY_ROUTE104, 0, 0
 	object_event 9, MAP_OBJ_GFX_FISHERMAN, 0, 29, 0, 8, 0, 3, 8, 0, 0, 1, 0, 0, 0, Route104_EventScript_14F172, 0, 0, 0
 	object_event 10, MAP_OBJ_GFX_BERRY_TREE, 0, 34, 0, 6, 0, 3, 12, 0, 0, 0, 0, 8, 0, S_BerryTree, 0, 0, 0
 	object_event 11, MAP_OBJ_GFX_BERRY_TREE, 0, 35, 0, 6, 0, 3, 12, 0, 0, 0, 0, 9, 0, S_BerryTree, 0, 0, 0

@@ -88,7 +88,7 @@ LavaridgeTown_Gym_1F_EventScript_153766:: @ 8153766
 	call_if 1, LavaridgeTown_Gym_1F_EventScript_1A00FB
 	setvar 0x8008, 4
 	call LavaridgeTown_Gym_1F_EventScript_1A01C0
-	setflag 806
+	setflag FLAG_HIDE_WALLY_WANDAS_HOUSE
 	setvar 0x4053, 1
 	goto LavaridgeTown_Gym_1F_EventScript_1537A7
 	end

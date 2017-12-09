@@ -39,10 +39,10 @@ Route119_WeatherInstitute_2F_EventScript_163D45:: @ 8163D45
 	msgbox Route119_WeatherInstitute_2F_Text_19F11B, 4
 	closemessage
 	setvar 0x40b3, 1
-	clearflag 893
+	clearflag FLAG_HIDE_WEATHER_INSTITUTE_WORKERS_2F
 	fadedefaultbgm
 	fadescreen 1
-	setflag 890
+	setflag FLAG_HIDE_EVIL_TEAM_WEATHER_INSTITUTE
 	removeobject 1
 	removeobject 2
 	removeobject 3

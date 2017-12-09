@@ -145,13 +145,13 @@ Route104_EventScript_14EFD5:: @ 814EFD5
 	setobjectxyperm 2, 12, 8
 	addobject 2
 	setobjectpriority 2, 0, 11, 0
-	clearflag 740
+	clearflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
 	applymovement 2, Route104_Movement_14F16F
 	waitmovement 0
 	addobject 4
-	clearflag 743
+	clearflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD
 	call Route104_EventScript_1A02EF
-	setflag 742
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE104
 	hideobject 7, 0, 19
 	copyvar 0x4096, 0x8008
 	resetobjectpriority 255, 0, 19

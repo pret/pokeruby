@@ -9,7 +9,7 @@ Route116_MapObjects:: @ 8383170
 	object_event 8, MAP_OBJ_GFX_ITEM_BALL, 0, 10, 0, 17, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route116_EventScript_1B157E, 1020, 0, 0
 	object_event 9, MAP_OBJ_GFX_BERRY_TREE, 0, 20, 0, 2, 0, 3, 12, 0, 0, 0, 0, 66, 0, S_BerryTree, 0, 0, 0
 	object_event 10, MAP_OBJ_GFX_BERRY_TREE, 0, 21, 0, 2, 0, 3, 12, 0, 0, 0, 0, 67, 0, S_BerryTree, 0, 0, 0
-	object_event 11, MAP_OBJ_GFX_OLD_MAN_1, 0, 46, 0, 9, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route116_EventScript_150B5D, 891, 0, 0
+	object_event 11, MAP_OBJ_GFX_OLD_MAN_1, 0, 46, 0, 9, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route116_EventScript_150B5D, FLAG_HIDE_BRINEY_ROUTE116, 0, 0
 	object_event 12, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 30, 0, 6, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_CuttableTree, FLAG_TEMP_13, 0, 0
 	object_event 13, MAP_OBJ_GFX_HIKER, 0, 36, 0, 15, 0, 3, 13, 0, 0, 1, 0, 2, 0, Route116_EventScript_150CCE, 0, 0, 0
 	object_event 14, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 24, 0, 9, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_CuttableTree, FLAG_TEMP_14, 0, 0
@@ -19,8 +19,8 @@ Route116_MapObjects:: @ 8383170
 	object_event 18, MAP_OBJ_GFX_SCHOOL_KID_M, 0, 31, 0, 9, 0, 3, 9, 0, 0, 1, 0, 2, 0, Route116_EventScript_150C90, 0, 0, 0
 	object_event 19, MAP_OBJ_GFX_MAN_2, 0, 46, 0, 11, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route116_EventScript_150A7B, 947, 0, 0
 	object_event 20, MAP_OBJ_GFX_ITEM_BALL, 0, 56, 0, 12, 0, 4, 1, 17, 0, 0, 0, 0, 0, Route116_EventScript_1B1564, 1001, 0, 0
-	object_event 21, MAP_OBJ_GFX_BLACK_BELT, 0, 38, 0, 9, 0, 3, 10, 17, 0, 0, 0, 0, 0, Route116_EventScript_150A49, 894, 0, 0
-	object_event 22, MAP_OBJ_GFX_MANIAC, 0, 74, 0, 13, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route116_EventScript_150B8F, 813, 0, 0
+	object_event 21, MAP_OBJ_GFX_BLACK_BELT, 0, 38, 0, 9, 0, 3, 10, 17, 0, 0, 0, 0, 0, Route116_EventScript_150A49, FLAG_HIDE_TUNNER_DIGGER_ROUTE116, 0, 0
+	object_event 22, MAP_OBJ_GFX_MANIAC, 0, 74, 0, 13, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route116_EventScript_150B8F, FLAG_HIDE_LOST_GLASSES_MAN, 0, 0
 
 Route116_MapWarps:: @ 8383380
 	warp_def 47, 8, 0, 0, MAP_RUSTURF_TUNNEL

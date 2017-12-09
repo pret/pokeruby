@@ -11,7 +11,7 @@ Route104_MrBrineysHouse_MapScript1_15BCB8:: @ 815BCB8
 	end
 
 Route104_MrBrineysHouse_EventScript_15BCD0:: @ 815BCD0
-	setflag 814
+	setflag FLAG_HIDE_RIVAL_RUSTBORO
 	return
 
 Route104_MrBrineysHouse_EventScript_15BCD4:: @ 815BCD4
@@ -80,9 +80,9 @@ Route104_MrBrineysHouse_EventScript_15BDAB:: @ 815BDAB
 	msgbox Route104_MrBrineysHouse_Text_191BFD, 4
 	call Route104_MrBrineysHouse_EventScript_1A010C
 	setvar 0x408e, 1
-	clearflag 738
-	setflag 739
-	setflag 881
+	clearflag FLAG_HIDE_MR_BRINEY_ROUTE104
+	setflag FLAG_HIDE_MR_BRINEY_ROUTE104_HOUSE
+	setflag FLAG_HIDE_PEEKO_BRINEY_HOUSE
 	warp MAP_ROUTE104, 255, 13, 51
 	waitstate
 	releaseall

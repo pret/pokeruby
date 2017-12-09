@@ -19,7 +19,7 @@ SlateportCity_MapScript1_14BA3C:: @ 814BA3C
 SlateportCity_EventScript_14BA5C:: @ 814BA5C
 	setflag FLAG_VISITED_SLATEPORT_CITY
 	setvar 0x4086, 0
-	setflag 803
+	setflag FLAG_HIDE_CONTEST_REPORTER_SLATEPORT
 	return
 
 SlateportCity_EventScript_14BA68:: @ 814BA68
@@ -533,10 +533,10 @@ SlateportCity_EventScript_14BEBC:: @ 814BEBC
 	applymovement 255, SlateportCity_Movement_14C008
 	waitmovement 0
 	removeobject 11
-	clearflag 841
-	clearflag 848
-	clearflag 845
-	clearflag 846
+	clearflag FLAG_HIDE_STERN_SLATEPORT_HARBOR
+	clearflag FLAG_HIDE_SUBMARINE_SHADOW_SLATEPORT_HARBOR
+	clearflag FLAG_HIDE_GRUNT_1_SLATEPORT_HARBOR
+	clearflag FLAG_HIDE_GRUNT_2_SLATEPORT_HARBOR
 	setvar 0x4058, 2
 	warp MAP_SLATEPORT_CITY_HARBOR, 255, 11, 14
 	waitstate

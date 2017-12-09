@@ -66,8 +66,8 @@ LittlerootTown_MaysHouse_2F_EventScript_1B69EB:: @ 81B69EB
 	delay 30
 	setvar 0x4092, 6
 	setflag FLAG_SET_WALL_CLOCK
-	setflag 754
-	setflag 755
+	setflag FLAG_HIDE_MACHOKE_MOVER_1
+	setflag FLAG_HIDE_MACHOKE_MOVER_2
 	checkplayergender
 	compare RESULT, 0
 	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_1B6A31

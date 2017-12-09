@@ -1,6 +1,6 @@
 Route109_MapObjects:: @ 8381AFC
-	object_event 1, MAP_OBJ_GFX_MR_BRINEYS_BOAT, 0, 21, 0, 26, 0, 1, 7, 0, 0, 0, 0, 0, 0, 0x0, 744, 0, 0
-	object_event 2, MAP_OBJ_GFX_OLD_MAN_1, 0, 21, 0, 24, 0, 3, 7, 0, 0, 0, 0, 0, 0, Route109_EventScript_14F680, 741, 0, 0
+	object_event 1, MAP_OBJ_GFX_MR_BRINEYS_BOAT, 0, 21, 0, 26, 0, 1, 7, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_MR_BRINEY_BOAT_ROUTE109, 0, 0
+	object_event 2, MAP_OBJ_GFX_OLD_MAN_1, 0, 21, 0, 24, 0, 3, 7, 0, 0, 0, 0, 0, 0, Route109_EventScript_14F680, FLAG_HIDE_MR_BRINEY_ROUTE109, 0, 0
 	object_event 3, MAP_OBJ_GFX_SWIMMER_M, 0, 12, 0, 36, 0, 3, 10, 0, 0, 1, 0, 5, 0, Route109_EventScript_14F7AD, 0, 0, 0
 	object_event 4, MAP_OBJ_GFX_SWIMMER_F, 0, 25, 0, 42, 0, 3, 15, 0, 0, 1, 0, 5, 0, Route109_EventScript_14F7C4, 0, 0, 0
 	object_event 5, MAP_OBJ_GFX_SAILOR, 0, 19, 0, 19, 0, 3, 10, 0, 0, 1, 0, 4, 0, Route109_EventScript_14F7DB, 0, 0, 0
