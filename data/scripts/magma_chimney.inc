@@ -63,7 +63,7 @@ MtChimney_EventScript_1B2CCB:: @ 81B2CCB
 	removeobject 2
 	removeobject 3
 	removeobject 22
-	setflag 926
+	setflag FLAG_HIDE_EVIL_TEAM_MT_CHIMNEY
 	fadescreen 0
 	setobjectxyperm 1, 10, 12
 	addobject 1
@@ -84,10 +84,10 @@ MtChimney_EventScript_1B2CCB:: @ 81B2CCB
 	compare FACING, 2
 	call_if 1, MtChimney_EventScript_1B2D9E
 	removeobject 1
-	setflag 927
+	setflag FLAG_HIDE_OTEHR_TEAM_MT_CHIMNEY
 	setflag FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY
-	clearflag 928
-	setflag 942
+	clearflag FLAG_HIDE_PROF_COSMO_FALLARBOR
+	setflag FLAG_HIDE_PROF_COSMO_METEOR_FALLS
 	releaseall
 	end
 

@@ -57,7 +57,7 @@ Route116_EventScript_150A94:: @ 8150A94
 	compare FACING, 4
 	call_if 1, Route116_EventScript_150AF9
 	removeobject LAST_TALKED
-	clearflag 949
+	clearflag FLAG_HIDE_EMPLOYEE_DEVON_CORP_3F
 	setflag FLAG_RECEIVED_REPEAT_BALL
 	release
 	end

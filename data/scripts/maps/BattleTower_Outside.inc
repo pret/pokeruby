@@ -5,7 +5,7 @@ BattleTower_Outside_MapScripts:: @ 8160156
 BattleTower_Outside_MapScript1_16015C:: @ 816015C
 	setflag FLAG_UNLOCK_BATTLE_TOWER
 	setvar 0x40bc, 0
-	setflag 918
+	setflag FLAG_HIDE_REPORTER_BATTLE_TOWER
 	end
 
 BattleTower_Outside_EventScript_160168:: @ 8160168

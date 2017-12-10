@@ -8,7 +8,7 @@ SeafloorCavern_Room3_MapObjects:: @ 838D268
 	object_event 7, MAP_OBJ_GFX_PUSHABLE_BOULDER, 0, 5, 0, 9, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_PushableBoulder, FLAG_TEMP_17, 0, 0
 	object_event 8, MAP_OBJ_GFX_PUSHABLE_BOULDER, 0, 7, 0, 9, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_PushableBoulder, FLAG_TEMP_18, 0, 0
 	object_event 9, MAP_OBJ_GFX_PUSHABLE_BOULDER, 0, 9, 0, 9, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_PushableBoulder, FLAG_TEMP_19, 0, 0
-	object_event 10, 242, 0, 10, 0, 5, 0, 3, 8, 17, 0, 1, 0, 3, 0, SeafloorCavern_Room3_EventScript_15DAA8, 946, 0, 0
+	object_event 10, 242, 0, 10, 0, 5, 0, 3, 8, 17, 0, 1, 0, 3, 0, SeafloorCavern_Room3_EventScript_15DAA8, FLAG_HIDE_EVIL_TEAM_GRUNTS_SEAFLOOR_CAVERN, 0, 0
 
 SeafloorCavern_Room3_MapWarps:: @ 838D358
 	warp_def 8, 1, 3, 1, MAP_SEAFLOOR_CAVERN_ROOM8

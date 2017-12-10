@@ -82,7 +82,7 @@ IslandCave_EventScript_15EF9D:: @ 815EF9D
 	delay 40
 	waitpokecry
 	setwildbattle SPECIES_REGICE, 40, ITEM_NONE
-	setflag 936
+	setflag FLAG_HIDE_REGICE
 	setflag SYS_CTRL_OBJ_DELETE
 	special ScrSpecial_StartRegiBattle
 	waitstate

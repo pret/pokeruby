@@ -23,7 +23,7 @@ SlateportCity_MapObjects:: @ 837F7AC
 	object_event 22, MAP_OBJ_GFX_MART_EMPLOYEE, 0, 5, 0, 51, 0, 3, 8, 0, 0, 0, 0, 0, 0, SlateportCity_EventScript_14BDF2, 0, 0, 0
 	object_event 23, MAP_OBJ_GFX_MAN_6, 0, 34, 0, 51, 0, 3, 8, 0, 0, 0, 0, 0, 0, SlateportCity_EventScript_14C029, 0, 0, 0
 	object_event 24, MAP_OBJ_GFX_WOMAN_7, 0, 4, 0, 47, 0, 3, 8, 0, 0, 0, 0, 0, 0, SlateportCity_EventScript_14BAE0, 0, 0, 0
-	object_event 25, MAP_OBJ_GFX_MART_EMPLOYEE, 0, 11, 0, 47, 0, 3, 8, 17, 0, 0, 0, 0, 0, SlateportCity_EventScript_14BE9A, 948, 0, 0
+	object_event 25, MAP_OBJ_GFX_MART_EMPLOYEE, 0, 11, 0, 47, 0, 3, 8, 17, 0, 0, 0, 0, 0, SlateportCity_EventScript_14BE9A, FLAG_HIDE_TM_SALESMAN_SLATEPORT, 0, 0
 	object_event 26, MAP_OBJ_GFX_MAN_3, 0, 5, 0, 47, 0, 3, 8, 17, 0, 0, 0, 0, 0, SlateportCity_EventScript_14BAB6, 0, 0, 0
 	object_event 27, 241, 0, 22, 0, 27, 0, 3, 10, 17, 0, 0, 0, 0, 0, SlateportCity_EventScript_14BD7F, FLAG_HIDE_EVIL_TEAM_SLATEPORT, 0, 0
 	object_event 28, 241, 0, 23, 0, 27, 0, 3, 7, 17, 0, 0, 0, 0, 0, SlateportCity_EventScript_14BD96, FLAG_HIDE_EVIL_TEAM_SLATEPORT, 0, 0

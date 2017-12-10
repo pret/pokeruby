@@ -21,11 +21,11 @@ Route104_EventScript_14EEAE:: @ 814EEAE
 	goto_if 0, Route104_EventScript_14EEC4
 	checkflag BADGE03_GET
 	goto_if 0, Route104_EventScript_14EEC4
-	clearflag 906
+	clearflag FLAG_HIDE_FLOWER_SHOP_WORKER_OUTSIDE
 	return
 
 Route104_EventScript_14EEC4:: @ 814EEC4
-	setflag 906
+	setflag FLAG_HIDE_FLOWER_SHOP_WORKER_OUTSIDE
 	return
 
 Route104_EventScript_14EEC8:: @ 814EEC8

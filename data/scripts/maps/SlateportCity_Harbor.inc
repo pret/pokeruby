@@ -19,7 +19,7 @@ SlateportCity_Harbor_EventScript_155F89:: @ 8155F89
 	savebgm BGM_EVIL_TEAM
 	setobjectxyperm 4, 12, 13
 	setobjectmovementtype 4, 9
-	setflag 905
+	setflag FLAG_HIDE_WORKERS_SLATEPORT_HARBOR
 	return
 
 SlateportCity_Harbor_EventScript_155F9B:: @ 8155F9B

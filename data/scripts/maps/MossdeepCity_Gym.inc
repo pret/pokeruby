@@ -64,10 +64,10 @@ MossdeepCity_Gym_EventScript_15A594:: @ 815A594
 	setflag 1229
 	setflag BADGE07_GET
 	clearflag FLAG_HIDE_BRINEY_SLATEPORT_SHIPYARD
-	clearflag 915
+	clearflag FLAG_UNKNOWN_393
 	setvar 0x8008, 7
 	call MossdeepCity_Gym_EventScript_1A01C0
-	clearflag 905
+	clearflag FLAG_HIDE_WORKERS_SLATEPORT_HARBOR
 	goto MossdeepCity_Gym_EventScript_15A5C6
 	end
 

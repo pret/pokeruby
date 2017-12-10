@@ -1,6 +1,6 @@
 RustboroCity_DevonCorp_3F_MapObjects:: @ 838891C
 	object_event 1, MAP_OBJ_GFX_GENTLEMAN, 0, 17, 0, 5, 0, 3, 9, 0, 0, 0, 0, 0, 0, RustboroCity_DevonCorp_3F_EventScript_15783B, 0, 0, 0
-	object_event 2, MAP_OBJ_GFX_MAN_2, 0, 3, 0, 5, 0, 3, 10, 0, 0, 0, 0, 0, 0, RustboroCity_DevonCorp_3F_EventScript_1578B0, 949, 0, 0
+	object_event 2, MAP_OBJ_GFX_MAN_2, 0, 3, 0, 5, 0, 3, 10, 0, 0, 0, 0, 0, 0, RustboroCity_DevonCorp_3F_EventScript_1578B0, FLAG_HIDE_EMPLOYEE_DEVON_CORP_3F, 0, 0
 	object_event 3, MAP_OBJ_GFX_GENTLEMAN, 0, 15, 0, 5, 0, 3, 76, 17, 0, 0, 0, 0, 0, RustboroCity_DevonCorp_3F_EventScript_15783B, 0, 0, 0
 
 RustboroCity_DevonCorp_3F_MapWarps:: @ 8388964

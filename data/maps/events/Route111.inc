@@ -21,8 +21,8 @@ Route111_MapObjects:: @ 83821A0
 	object_event 20, MAP_OBJ_GFX_BERRY_TREE, 0, 19, 0, 5, 0, 3, 12, 0, 0, 0, 0, 81, 0, S_BerryTree, 0, 0, 0
 	object_event 21, MAP_OBJ_GFX_REPORTER_F, 0, 13, 0, 86, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route111_EventScript_1AE4E2, FLAG_HIDE_GABBY_AND_TY_ROUTE111_2, 0, 0
 	object_event 22, MAP_OBJ_GFX_CAMERAMAN, 0, 14, 0, 86, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route111_EventScript_1AE502, FLAG_HIDE_GABBY_AND_TY_ROUTE111_2, 0, 0
-	object_event 23, MAP_OBJ_GFX_REPORTER_F, 0, 13, 0, 86, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route111_EventScript_1AE562, 903, 0, 0
-	object_event 24, MAP_OBJ_GFX_CAMERAMAN, 0, 14, 0, 86, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route111_EventScript_1AE582, 903, 0, 0
+	object_event 23, MAP_OBJ_GFX_REPORTER_F, 0, 13, 0, 86, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route111_EventScript_1AE562, FLAG_HIDE_GABBY_AND_TY_ROUTE111_3, 0, 0
+	object_event 24, MAP_OBJ_GFX_CAMERAMAN, 0, 14, 0, 86, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route111_EventScript_1AE582, FLAG_HIDE_GABBY_AND_TY_ROUTE111_3, 0, 0
 	object_event 25, MAP_OBJ_GFX_ITEM_BALL, 0, 12, 0, 54, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route111_EventScript_1B14D5, 1009, 0, 0
 	object_event 26, MAP_OBJ_GFX_ITEM_BALL, 0, 3, 0, 114, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route111_EventScript_1B14E2, 1010, 0, 0
 	object_event 27, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 22, 0, 21, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_CuttableTree, FLAG_TEMP_13, 0, 0
@@ -31,9 +31,9 @@ Route111_MapObjects:: @ 83821A0
 	object_event 30, MAP_OBJ_GFX_BLACK_BELT, 0, 32, 0, 29, 0, 3, 28, 1, 0, 1, 0, 2, 0, Route111_EventScript_15046F, 0, 0, 0
 	object_event 31, MAP_OBJ_GFX_WOMAN_7, 0, 11, 0, 12, 0, 3, 7, 4, 0, 1, 0, 4, 0, Route111_EventScript_1504C4, 0, 0, 0
 	object_event 32, MAP_OBJ_GFX_MAN_4, 0, 9, 0, 27, 0, 3, 17, 0, 0, 1, 0, 3, 0, Route111_EventScript_150486, 0, 0, 0
-	object_event 33, MAP_OBJ_GFX_BOY_1, 0, 13, 0, 20, 0, 3, 7, 17, 0, 0, 0, 0, 0, Route111_EventScript_1A3858, 960, 0, 0
-	object_event 34, MAP_OBJ_GFX_FOSSIL, 0, 32, 0, 38, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route111_EventScript_150023, 963, 0, 0
-	object_event 35, MAP_OBJ_GFX_FOSSIL, 0, 33, 0, 38, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route111_EventScript_150069, 964, 0, 0
+	object_event 33, MAP_OBJ_GFX_BOY_1, 0, 13, 0, 20, 0, 3, 7, 17, 0, 0, 0, 0, 0, Route111_EventScript_1A3858, FLAG_HIDE_SECRET_POWER_MAN, 0, 0
+	object_event 34, MAP_OBJ_GFX_FOSSIL, 0, 32, 0, 38, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route111_EventScript_150023, FLAG_HIDE_ROOT_FOSSIL, 0, 0
+	object_event 35, MAP_OBJ_GFX_FOSSIL, 0, 33, 0, 38, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route111_EventScript_150069, FLAG_HIDE_CLAW_FOSSIL, 0, 0
 	object_event 36, MAP_OBJ_GFX_MAN_5, 0, 20, 0, 114, 0, 3, 2, 17, 0, 0, 0, 0, 0, Route111_EventScript_15039E, 0, 0, 0
 
 Route111_MapWarps:: @ 8382500

@@ -47,8 +47,8 @@ MtPyre_Summit_EventScript_15D4E1:: @ 815D4E1
 	removeobject 4
 	removeobject 5
 	removeobject 6
-	setflag 916
-	setflag 917
+	setflag FLAG_HIDE_LEADER_MT_PYRE_SUMMIT
+	setflag FLAG_HIDE_GRUNTS_MT_PYRE_SUMMIT
 	fadescreen 0
 	delay 20
 	call MtPyre_Summit_EventScript_15D57A

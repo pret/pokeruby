@@ -26,8 +26,8 @@ Route110_MapObjects:: @ 8381D58
 	object_event 25, 241, 0, 10, 0, 83, 0, 3, 7, 0, 0, 0, 0, 0, 0, Route110_EventScript_14F988, FLAG_HIDE_EVIL_TEAM_ROUTE110, 0, 0
 	object_event 26, 241, 0, 8, 0, 82, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_EVIL_TEAM_ROUTE110, 0, 0
 	object_event 27, MAP_OBJ_GFX_CYCLING_TRIATHLETE_M, 0, 21, 0, 78, 0, 4, 51, 23, 0, 1, 0, 2, 0, Route110_EventScript_14FB11, 0, 0, 0
-	object_event 28, 240, 0, 34, 0, 54, 0, 3, 14, 0, 0, 0, 0, 0, 0, 0x0, 919, 0, 0
-	object_event 29, 243, 0, 34, 0, 54, 0, 3, 8, 0, 0, 0, 0, 0, 0, 0x0, 922, 0, 0
+	object_event 28, 240, 0, 34, 0, 54, 0, 3, 14, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_RIVAL_ROUTE110, 0, 0
+	object_event 29, 243, 0, 34, 0, 54, 0, 3, 8, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_RIVAL_ON_BIKE_ROUTE110, 0, 0
 	object_event 30, MAP_OBJ_GFX_YOUNGSTER, 0, 33, 0, 69, 0, 3, 14, 0, 0, 1, 0, 3, 0, Route110_EventScript_14FC10, 0, 0, 0
 	object_event 31, MAP_OBJ_GFX_WOMAN_2, 0, 11, 0, 73, 0, 3, 9, 0, 0, 1, 0, 4, 0, Route110_EventScript_14FBD2, 0, 0, 0
 

@@ -23,7 +23,7 @@ Route119_MapObjects:: @ 8383914
 	object_event 22, MAP_OBJ_GFX_ITEM_BALL, 0, 33, 0, 117, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route119_EventScript_1B1600, 1029, 0, 0
 	object_event 23, 241, 0, 13, 0, 33, 0, 4, 10, 0, 0, 0, 0, 0, 0, Route119_EventScript_1515C5, FLAG_HIDE_EVIL_TEAM_WEATHER_INSTITUTE, 0, 0
 	object_event 24, 241, 0, 13, 0, 34, 0, 4, 10, 0, 0, 0, 0, 0, 0, Route119_EventScript_1515DC, FLAG_HIDE_EVIL_TEAM_WEATHER_INSTITUTE, 0, 0
-	object_event 25, 243, 0, 17, 0, 33, 0, 4, 7, 0, 0, 0, 0, 0, 0, 0x0, 923, 0, 0
+	object_event 25, 243, 0, 17, 0, 33, 0, 4, 7, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_RIVAL_ROUTE119_ON_BIKE, 0, 0
 	object_event 26, MAP_OBJ_GFX_BOY_3, 0, 31, 0, 109, 0, 3, 8, 17, 0, 0, 0, 0, 0, Route119_EventScript_1515F3, 0, 0, 0
 	object_event 27, MAP_OBJ_GFX_BERRY_TREE, 0, 8, 0, 23, 0, 3, 12, 0, 0, 0, 0, 83, 0, S_BerryTree, 0, 0, 0
 	object_event 28, MAP_OBJ_GFX_BERRY_TREE, 0, 9, 0, 23, 0, 3, 12, 0, 0, 0, 0, 84, 0, S_BerryTree, 0, 0, 0

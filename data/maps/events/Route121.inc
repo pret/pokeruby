@@ -10,9 +10,9 @@ Route121_MapObjects:: @ 8384504
 	object_event 9, MAP_OBJ_GFX_BERRY_TREE, 0, 67, 0, 14, 0, 3, 12, 0, 0, 0, 0, 54, 0, S_BerryTree, 0, 0, 0
 	object_event 10, MAP_OBJ_GFX_LASS, 0, 39, 0, 9, 0, 3, 8, 0, 0, 1, 0, 0, 0, Route121_EventScript_151BDE, 0, 0, 0
 	object_event 11, MAP_OBJ_GFX_LASS, 0, 40, 0, 9, 0, 3, 8, 0, 0, 1, 0, 0, 0, Route121_EventScript_151BF9, 0, 0, 0
-	object_event 12, 241, 0, 30, 0, 8, 0, 3, 7, 0, 0, 0, 0, 0, 0, 0x0, 914, 0, 0
-	object_event 13, 241, 0, 30, 0, 7, 0, 3, 10, 0, 0, 0, 0, 0, 0, 0x0, 914, 0, 0
-	object_event 14, 241, 0, 31, 0, 7, 0, 3, 9, 0, 0, 0, 0, 0, 0, 0x0, 914, 0, 0
+	object_event 12, 241, 0, 30, 0, 8, 0, 3, 7, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_GRUNTS_ROUTE121, 0, 0
+	object_event 13, 241, 0, 30, 0, 7, 0, 3, 10, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_GRUNTS_ROUTE121, 0, 0
+	object_event 14, 241, 0, 31, 0, 7, 0, 3, 9, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_GRUNTS_ROUTE121, 0, 0
 	object_event 15, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 32, 0, 5, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_CuttableTree, FLAG_TEMP_11, 0, 0
 	object_event 16, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 65, 0, 4, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_CuttableTree, FLAG_TEMP_12, 0, 0
 	object_event 17, MAP_OBJ_GFX_WOMAN_2, 0, 63, 0, 5, 0, 3, 9, 0, 0, 1, 0, 4, 0, Route121_EventScript_151B72, 0, 0, 0

@@ -77,7 +77,7 @@ CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 	clearflag FLAG_HIDE_SOOTOPOLIS_RESIDENTS
 	clearflag SYS_WEATHER_CTRL
 	setvar 0x40b9, 2
-	clearflag 916
+	clearflag FLAG_HIDE_LEADER_MT_PYRE_SUMMIT
 	releaseall
 	end
 

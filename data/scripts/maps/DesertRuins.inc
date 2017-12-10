@@ -62,7 +62,7 @@ DesertRuins_EventScript_15CB85:: @ 815CB85
 	delay 40
 	waitpokecry
 	setwildbattle SPECIES_REGIROCK, 40, ITEM_NONE
-	setflag 935
+	setflag FLAG_HIDE_REGIROCK
 	setflag SYS_CTRL_OBJ_DELETE
 	special ScrSpecial_StartRegiBattle
 	waitstate

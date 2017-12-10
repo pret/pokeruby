@@ -20,7 +20,7 @@ BattleTower_Lobby_EventScript_16029C:: @ 816029C
 	specialvar 0x8007, sub_810F404
 	compare 0x8007, 50
 	goto_if 0, BattleTower_Lobby_EventScript_1602E4
-	clearflag 941
+	clearflag FLAG_HIDE_AWARD_MAN_BATTLE_TOWER
 	special sub_810F8FC
 	return
 
@@ -28,12 +28,12 @@ BattleTower_Lobby_EventScript_1602CD:: @ 81602CD
 	specialvar 0x8007, sub_810F404
 	compare 0x8007, 100
 	goto_if 0, BattleTower_Lobby_EventScript_1602E4
-	clearflag 941
+	clearflag FLAG_HIDE_AWARD_MAN_BATTLE_TOWER
 	special sub_810F8FC
 	return
 
 BattleTower_Lobby_EventScript_1602E4:: @ 81602E4
-	setflag 941
+	setflag FLAG_HIDE_AWARD_MAN_BATTLE_TOWER
 	return
 
 BattleTower_Lobby_MapScript1_1602E8:: @ 81602E8

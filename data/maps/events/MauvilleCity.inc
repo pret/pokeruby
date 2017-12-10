@@ -6,7 +6,7 @@ MauvilleCity_MapObjects:: @ 837FB90
 	object_event 5, MAP_OBJ_GFX_SCHOOL_KID_M, 0, 17, 0, 14, 0, 3, 8, 0, 0, 0, 0, 0, 0, MauvilleCity_EventScript_14C0A2, 0, 0, 0
 	object_event 6, MAP_OBJ_GFX_WALLY, 0, 8, 0, 6, 0, 3, 7, 0, 0, 0, 0, 0, 0, MauvilleCity_EventScript_14C0F9, FLAG_HIDE_WALLY_MAUVILLE, 0, 0
 	object_event 7, MAP_OBJ_GFX_MAN_3, 0, 9, 0, 6, 0, 3, 9, 0, 0, 0, 0, 0, 0, MauvilleCity_EventScript_14C0C4, FLAG_HIDE_WALLY_FATHER_MAUVILLE, 0, 0
-	object_event 8, MAP_OBJ_GFX_WATTSON, 0, 29, 0, 9, 0, 3, 1, 0, 0, 0, 0, 0, 0, MauvilleCity_EventScript_14C2F2, 912, 0, 0
+	object_event 8, MAP_OBJ_GFX_WATTSON, 0, 29, 0, 9, 0, 3, 1, 0, 0, 0, 0, 0, 0, MauvilleCity_EventScript_14C2F2, FLAG_HIDE_WATTSON_MAUVILLE, 0, 0
 	object_event 9, MAP_OBJ_GFX_ITEM_BALL, 0, 28, 0, 19, 0, 3, 1, 17, 0, 0, 0, 0, 0, MauvilleCity_EventScript_1B171E, 1116, 0, 0
 
 MauvilleCity_MapWarps:: @ 837FC68

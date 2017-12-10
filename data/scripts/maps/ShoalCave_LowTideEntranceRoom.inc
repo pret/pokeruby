@@ -90,13 +90,13 @@ ShoalCave_LowTideEntranceRoom_EventScript_15E16C:: @ 815E16C
 	end
 
 ShoalCave_LowTideEntranceRoom_EventScript_15E176:: @ 815E176
-	clearflag 952
-	clearflag 953
-	clearflag 954
-	clearflag 955
-	clearflag 956
-	clearflag 957
-	clearflag 958
-	clearflag 959
+	clearflag FLAG_HIDE_TOOK_SHOAL_SALT_1
+	clearflag FLAG_HIDE_TOOK_SHOAL_SALT_2
+	clearflag FLAG_HIDE_TOOK_SHOAL_SALT_3
+	clearflag FLAG_HIDE_TOOK_SHOAL_SALT_4
+	clearflag FLAG_HIDE_TOOK_SHOAL_SHELL_1
+	clearflag FLAG_HIDE_TOOK_SHOAL_SHELL_2
+	clearflag FLAG_HIDE_TOOK_SHOAL_SHELL_3
+	clearflag FLAG_HIDE_TOOK_SHOAL_SHELL_4
 	clearflag SYS_SHOAL_ITEM
 	return

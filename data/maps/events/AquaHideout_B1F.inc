@@ -1,8 +1,8 @@
 AquaHideout_B1F_MapObjects:: @ 838CD80
-	object_event 1, 241, 0, 27, 0, 18, 0, 3, 24, 0, 0, 1, 0, 3, 0, AquaHideout_B1F_EventScript_15D850, 924, 0, 0
-	object_event 2, 241, 0, 6, 0, 6, 0, 3, 9, 0, 0, 1, 0, 5, 0, AquaHideout_B1F_EventScript_15D875, 924, 0, 0
+	object_event 1, 241, 0, 27, 0, 18, 0, 3, 24, 0, 0, 1, 0, 3, 0, AquaHideout_B1F_EventScript_15D850, FLAG_HIDE_GRUNTS_HIDEOUTS, 0, 0
+	object_event 2, 241, 0, 6, 0, 6, 0, 3, 9, 0, 0, 1, 0, 5, 0, AquaHideout_B1F_EventScript_15D875, FLAG_HIDE_GRUNTS_HIDEOUTS, 0, 0
 	object_event 3, MAP_OBJ_GFX_ITEM_BALL, 0, 29, 0, 12, 0, 3, 1, 0, 0, 0, 0, 0, 0, AquaHideout_B1F_EventScript_1B19A8, 1071, 0, 0
-	object_event 4, 242, 0, 20, 0, 18, 0, 3, 27, 4, 0, 1, 0, 4, 0, AquaHideout_B1F_EventScript_15D89A, 924, 0, 0
+	object_event 4, 242, 0, 20, 0, 18, 0, 3, 27, 4, 0, 1, 0, 4, 0, AquaHideout_B1F_EventScript_15D89A, FLAG_HIDE_GRUNTS_HIDEOUTS, 0, 0
 	object_event 5, MAP_OBJ_GFX_ITEM_BALL, 0, 15, 0, 9, 0, 3, 1, 17, 0, 0, 0, 0, 0, AquaHideout_B1F_EventScript_1B198E, 1124, 0, 0
 	object_event 6, MAP_OBJ_GFX_ITEM_BALL, 0, 16, 0, 9, 0, 3, 1, 17, 0, 0, 0, 0, 0, AquaHideout_B1F_EventScript_1A04FD, 977, 0, 0
 	object_event 7, MAP_OBJ_GFX_ITEM_BALL, 0, 15, 0, 10, 0, 3, 1, 17, 0, 0, 0, 0, 0, AquaHideout_B1F_EventScript_1B199B, 1132, 0, 0

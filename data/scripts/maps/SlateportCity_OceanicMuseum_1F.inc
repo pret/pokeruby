@@ -179,7 +179,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_155C3A:: @ 8155C3A
 SlateportCity_OceanicMuseum_1F_EventScript_155C98:: @ 8155C98
 	applymovement 13, SlateportCity_OceanicMuseum_1F_Movement_155CD3
 	waitmovement 0
-	setflag 965
+	setflag FLAG_HIDE_SCARED_GRUNT_OCEANIC_MUSEUM
 	playse 9
 	removeobject 13
 	release
@@ -188,7 +188,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_155C98:: @ 8155C98
 SlateportCity_OceanicMuseum_1F_EventScript_155CAD:: @ 8155CAD
 	applymovement 13, SlateportCity_OceanicMuseum_1F_Movement_155CCC
 	waitmovement 0
-	setflag 965
+	setflag FLAG_HIDE_SCARED_GRUNT_OCEANIC_MUSEUM
 	playse 9
 	removeobject 13
 	release

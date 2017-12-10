@@ -401,11 +401,11 @@ PetalburgCity_Gym_EventScript_1549D6:: @ 81549D6
 	setvar 0x4085, 7
 	setflag BADGE05_GET
 	call PetalburgCity_Gym_EventScript_1A0424
-	setflag 913
-	clearflag 912
+	setflag FLAG_HIDE_WATTSON_MAUVILLE_GYM
+	clearflag FLAG_HIDE_WATTSON_MAUVILLE
 	setvar 0x8008, 5
 	call PetalburgCity_Gym_EventScript_1A01C0
-	clearflag 940
+	clearflag FLAG_HIDE_SLUDGE_BOMB_MAN_DEWFORD_HALL
 	call PetalburgCity_Gym_EventScript_1544ED
 	special DrawWholeMapView
 	goto PetalburgCity_Gym_EventScript_154A2C

@@ -16,7 +16,7 @@ FortreeCity_House4_EventScript_158188:: @ 8158188
 	msgbox FortreeCity_House4_Text_186835, 4
 	closemessage
 	setflag FLAG_WINGULL_SENT_ON_ERRAND
-	clearflag 934
+	clearflag FLAG_HIDE_WINGULL_MOSSDEEP_HOUSE
 	applymovement 3, FortreeCity_House4_Movement_158218
 	waitmovement 0
 	removeobject 3

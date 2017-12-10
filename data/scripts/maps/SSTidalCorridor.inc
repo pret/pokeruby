@@ -142,7 +142,7 @@ SSTidalCorridor_EventScript_15FE17:: @ 815FE17
 	end
 
 SSTidalCorridor_EventScript_15FE36:: @ 815FE36
-	setflag 951
+	setflag FLAG_HIDE_TM_49_GIVER_SS_TIDAL
 	return
 
 SSTidalCorridor_EventScript_15FE3A:: @ 815FE3A

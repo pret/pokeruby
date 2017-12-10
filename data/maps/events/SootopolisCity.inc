@@ -8,7 +8,7 @@ SootopolisCity_MapObjects:: @ 8380608
 	object_event 7, MAP_OBJ_GFX_LITTLE_BOY_1, 0, 51, 0, 14, 0, 3, 8, 0, 0, 0, 0, 0, 0, SootopolisCity_EventScript_14D2C5, FLAG_HIDE_SOOTOPOLIS_RESIDENTS, 0, 0
 	object_event 8, MAP_OBJ_GFX_BOY_1, 0, 43, 0, 26, 0, 3, 1, 0, 0, 0, 0, 0, 0, SootopolisCity_EventScript_14D2E4, FLAG_HIDE_SOOTOPOLIS_RESIDENTS, 0, 0
 	object_event 9, MAP_OBJ_GFX_MAN_1, 0, 26, 0, 4, 0, 3, 5, 1, 0, 0, 0, 0, 0, SootopolisCity_EventScript_14D287, FLAG_HIDE_SOOTOPOLIS_RESIDENTS, 0, 0
-	object_event 10, MAP_OBJ_GFX_STEVEN, 0, 30, 0, 21, 0, 3, 10, 17, 0, 0, 0, 0, 0, SootopolisCity_EventScript_14D498, 973, 0, 0
+	object_event 10, MAP_OBJ_GFX_STEVEN, 0, 30, 0, 21, 0, 3, 10, 17, 0, 0, 0, 0, 0, SootopolisCity_EventScript_14D498, FLAG_HIDE_STEVEN_SOOTOPOLIS, 0, 0
 	object_event 11, MAP_OBJ_GFX_WOMAN_7, 0, 49, 0, 34, 0, 3, 3, 17, 0, 0, 0, 0, 0, SootopolisCity_EventScript_14D2A6, FLAG_HIDE_SOOTOPOLIS_RESIDENTS, 0, 0
 
 SootopolisCity_MapWarps:: @ 8380710

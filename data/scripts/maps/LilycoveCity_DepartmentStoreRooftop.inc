@@ -11,11 +11,11 @@ LilycoveCity_DepartmentStoreRooftop_MapScript1_15A145:: @ 815A145
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A15F:: @ 815A15F
-	clearflag 962
+	clearflag FLAG_HIDE_ROOFTOP_LADY_LILYCOVE_MART
 	return
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A163:: @ 815A163
-	setflag 962
+	setflag FLAG_HIDE_ROOFTOP_LADY_LILYCOVE_MART
 	return
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A167:: @ 815A167

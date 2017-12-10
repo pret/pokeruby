@@ -62,7 +62,7 @@ AncientTomb_EventScript_15F050:: @ 815F050
 	delay 40
 	waitpokecry
 	setwildbattle SPECIES_REGISTEEL, 40, ITEM_NONE
-	setflag 937
+	setflag FLAG_HIDE_REGISTEEL
 	setflag SYS_CTRL_OBJ_DELETE
 	special ScrSpecial_StartRegiBattle
 	waitstate

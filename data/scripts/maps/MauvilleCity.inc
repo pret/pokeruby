@@ -4,7 +4,7 @@ MauvilleCity_MapScripts:: @ 814C032
 
 MauvilleCity_MapScript1_14C038:: @ 814C038
 	setflag FLAG_VISITED_MAUVILLE_CITY
-	clearflag 961
+	clearflag FLAG_HIDE_OCEANIC_MUSEUM_VISITORS
 	setflag SYS_TV_START
 	clearflag FLAG_MAUVILLE_GYM_BARRIERS_STATE
 	setvar 0x4093, 0
@@ -13,8 +13,8 @@ MauvilleCity_MapScript1_14C038:: @ 814C038
 	end
 
 MauvilleCity_EventScript_14C053:: @ 814C053
-	clearflag 913
-	setflag 912
+	clearflag FLAG_HIDE_WATTSON_MAUVILLE_GYM
+	setflag FLAG_HIDE_WATTSON_MAUVILLE
 	return
 
 MauvilleCity_EventScript_14C05A:: @ 814C05A

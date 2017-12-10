@@ -56,8 +56,8 @@ Route111_EventScript_150023:: @ 8150023
 	goto_if_eq Route111_EventScript_15005F
 	giveitem ITEM_ROOT_FOSSIL
 	closemessage
-	setflag 963
-	setflag 964
+	setflag FLAG_HIDE_ROOT_FOSSIL
+	setflag FLAG_HIDE_CLAW_FOSSIL
 	removeobject 34
 	delay 30
 	applymovement 35, Route111_Movement_1500AF
@@ -78,8 +78,8 @@ Route111_EventScript_150069:: @ 8150069
 	goto_if_eq Route111_EventScript_1500A5
 	giveitem ITEM_CLAW_FOSSIL
 	closemessage
-	setflag 964
-	setflag 963
+	setflag FLAG_HIDE_CLAW_FOSSIL
+	setflag FLAG_HIDE_ROOT_FOSSIL
 	removeobject 35
 	delay 30
 	applymovement 34, Route111_Movement_1500AF

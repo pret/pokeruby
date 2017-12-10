@@ -17,7 +17,7 @@ Route116_MapObjects:: @ 8383170
 	object_event 16, MAP_OBJ_GFX_LASS, 0, 22, 0, 16, 0, 3, 13, 0, 0, 1, 0, 3, 0, Route116_EventScript_150CE5, 0, 0, 0
 	object_event 17, MAP_OBJ_GFX_GIRL_3, 0, 25, 0, 4, 0, 3, 8, 0, 0, 1, 0, 2, 0, Route116_EventScript_150CFC, 0, 0, 0
 	object_event 18, MAP_OBJ_GFX_SCHOOL_KID_M, 0, 31, 0, 9, 0, 3, 9, 0, 0, 1, 0, 2, 0, Route116_EventScript_150C90, 0, 0, 0
-	object_event 19, MAP_OBJ_GFX_MAN_2, 0, 46, 0, 11, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route116_EventScript_150A7B, 947, 0, 0
+	object_event 19, MAP_OBJ_GFX_MAN_2, 0, 46, 0, 11, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route116_EventScript_150A7B, FLAG_HIDE_DEVON_EMPLOYEE_ROUTE116, 0, 0
 	object_event 20, MAP_OBJ_GFX_ITEM_BALL, 0, 56, 0, 12, 0, 4, 1, 17, 0, 0, 0, 0, 0, Route116_EventScript_1B1564, 1001, 0, 0
 	object_event 21, MAP_OBJ_GFX_BLACK_BELT, 0, 38, 0, 9, 0, 3, 10, 17, 0, 0, 0, 0, 0, Route116_EventScript_150A49, FLAG_HIDE_TUNNER_DIGGER_ROUTE116, 0, 0
 	object_event 22, MAP_OBJ_GFX_MANIAC, 0, 74, 0, 13, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route116_EventScript_150B8F, FLAG_HIDE_LOST_GLASSES_MAN, 0, 0
