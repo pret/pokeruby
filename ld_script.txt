@@ -264,7 +264,7 @@ SECTIONS {
         src/battle/anim/perceive.o(.text);
         src/battle/anim/angel.o(.text);
         src/battle/anim/angel_kiss.o(.text);
-        asm/devil.o(.text);
+        src/battle/anim/devil.o(.text);
         asm/swipe.o(.text);
         asm/struggle.o(.text);
         asm/uproar.o(.text);
