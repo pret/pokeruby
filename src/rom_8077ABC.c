@@ -1435,7 +1435,7 @@ void sub_80798AC(u8 task) {
     sub_80797EC(&gTasks[task]);
 }
 
-void sub_80798F4(struct Task *task, u8 a2, void *a3) {
+void sub_80798F4(struct Task *task, u8 a2, const void *a3) {
     task->data[7] = 0;
     task->data[8] = 0;
     task->data[9] = 0;
@@ -1564,7 +1564,7 @@ u16 sub_8079B10(u8 sprite) {
     return 0x40;
 }
 
-void sub_8079BF4(s16 *bottom, s16 *top, void *ptr) {
+void sub_8079BF4(s16 *bottom, s16 *top, const void *ptr) {
     *bottom = ((intptr_t) ptr) & 0xffff;
     *top = (((intptr_t) ptr) >> 16) & 0xffff;
 }
