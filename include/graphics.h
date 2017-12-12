@@ -28,6 +28,21 @@ extern const u8 gInterfaceGfx_PremierBall[];
 extern const u8 gInterfacePal_PremierBall[];
 extern const u8 gUnknown_08D030D0[];
 
+extern const u8 gUnknown_08D17144[];
+extern const u8 gUnknown_08D1725C[];
+extern const u8 gUnknown_08D17424[];
+extern const u8 gUnknown_08D17C3C[];
+extern const u8 gContestMiscGfx[];
+extern const u8 gContestAudienceGfx[];
+extern const u8 gContestJudgeSymbolsGfx[];
+extern const u8 gContest3Pal[];
+extern const u8 gTiles_8D1975C[];
+extern const u8 gUnknown_08D1977C[];
+extern const u8 gUnknown_08D1A250[];
+extern const u8 gUnknown_08D1A364[];
+extern const u8 gUnknown_08D1A490[];
+extern const u8 gUnknown_08D1A618[];
+
 extern const u8 gMonFootprint_QuestionMark[];
 
 // data/graphics/pokemon/graphics.inc

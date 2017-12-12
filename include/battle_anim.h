@@ -4,8 +4,10 @@
 #include "sprite.h"
 
 #define REG_BGnCNT_BITFIELD(n) (*(struct BGCntrlBitfield *)REG_ADDR_BG##n##CNT)
+#define REG_BG0CNT_BITFIELD REG_BGnCNT_BITFIELD(0)
 #define REG_BG1CNT_BITFIELD REG_BGnCNT_BITFIELD(1)
 #define REG_BG2CNT_BITFIELD REG_BGnCNT_BITFIELD(2)
+#define REG_BG3CNT_BITFIELD REG_BGnCNT_BITFIELD(3)
 
 struct BGCntrlBitfield
 {

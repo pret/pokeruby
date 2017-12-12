@@ -141,6 +141,7 @@ SECTIONS {
         src/battle/battle_anim_80A7E7C.o(.text);
         src/field/item.o(.text);
         src/debug/matsuda_debug_menu.o(.text);
+        src/contest.o(.text);
         asm/contest.o(.text);
         src/field/shop.o(.text);
         src/field/berry.o(.text);
