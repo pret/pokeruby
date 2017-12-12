@@ -265,9 +265,9 @@ SECTIONS {
         src/battle/anim/angel.o(.text);
         src/battle/anim/angel_kiss.o(.text);
         src/battle/anim/devil.o(.text);
-        asm/swipe.o(.text);
-        asm/struggle.o(.text);
-        asm/uproar.o(.text);
+        src/battle/anim/swipe.o(.text);
+        src/battle/anim/struggle.o(.text);
+        src/battle/anim/uproar.o(.text);
         asm/noise.o(.text);
         asm/note_spin.o(.text);
         asm/guard.o(.text);
