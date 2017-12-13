@@ -3,32 +3,37 @@
 #include "battle_anim.h"
 #include "contest.h"
 #include "contest_link_80C857C.h"
-#include "ewram.h"
+#include "data2.h"
 #include "decompress.h"
+#include "ewram.h"
 #include "graphics.h"
 #include "link.h"
 #include "main.h"
 #include "menu.h"
+#include "menu_cursor.h"
 #include "palette.h"
 #include "random.h"
 #include "sound.h"
+#include "string_util.h"
 #include "task.h"
 #include "text.h"
 #include "unknown_task.h"
+
+extern bool8 AreMovesContestCombo(u16, u16);
 
 struct Shared18000
 {
     /*0x18000*/ u8 unk18000;
     /*0x18001*/ u8 filler18001[3];
-    ///*0x18004*/ u8 unk18004[0x200];
     /*0x18004*/ u16 unk18004[16][16];
-    /*0x18204*/ u8 filler18204[0xA04-0x204];
+    /*0x18204*/ u8 unk18204[0xA04-0x204];
     /*0x18A04*/ u8 unk18A04[0x800];
 };
 
 struct Shared19204
 {
-    /*0x19204*/ u8 filler0[2];
+    /*0x19204*/ u8 unk19204;
+    /*0x19205*/ u8 unk19205;
     /*0x19206*/ u8 unk19206[4];
     /*0x1920A*/ u8 unk1920A;
     /*0x1920B*/ u8 filler1920B;
@@ -42,12 +47,15 @@ struct Shared19204
 
 struct UnknownContestStruct1
 {
-    u8 filler0[0xB];
+    u8 filler0[8];
+    u16 unk8;
+    u8 fillerA;
     u8 unkB_0:2;
     u8 fillerC[0x13-0xC];
     u8 unk13;
     u8 unk14;
-    u8 filler15[0x19-0x15];
+    u8 unk15;
+    u8 filler16[0x19-0x16];
     u8 unk19;
     u8 filler1A[0x1C-0x1A];
 };
@@ -67,6 +75,7 @@ struct Shared19260
 #define shared19204 (*(struct Shared19204 *)(gSharedMem + 0x19204))
 #define shared19260 (*(struct Shared19260 *)(gSharedMem + 0x19260))
 
+extern u8 gDisplayedStringBattle[];
 extern u16 gBattleTypeFlags;
 extern u8 gBankAttacker;
 extern u8 gBankTarget;
@@ -90,6 +99,12 @@ extern u16 gUnknown_030042C4;
 extern u32 gUnknown_03005D28;
 extern u8 gUnknown_02038696[];
 
+extern const u8 gUnknown_083CAF84[];
+extern const u8 gUnknown_083CAFAE[];
+extern const struct ContestMove gContestMoves[];
+extern const u8 gUnknownText_UnknownFormatting2[];
+extern const u8 gUnknownText_UnknownFormatting3[];
+
 void sub_80AB350(void);
 void sub_80AB5D4(u8);
 void sub_80AB604(u8);
@@ -102,19 +117,32 @@ void sub_80AB9A0(u8);
 void sub_80ABAAC(void);
 void sub_80ABAC4(void);
 void sub_80ABB70(u8);
+void sub_80ABC3C(u8);
+void sub_80ABC70(u8);
+void sub_80ABCDC(u8);
+void sub_80ABEA0(u8);
+void sub_80AC0AC(s8);
+void sub_80AC0C8(u8);
+void sub_80AE020();
 u8 sub_80AE858(void);
 u8 sub_80AE8B4(void);
 void sub_80AEB30(void);
+void sub_80AEBEC(u16);
+void sub_80AF138(void);
+u8 sub_80AF59C(u8);
 void sub_80AF860(void);
 void sub_80AFA5C(void);
 void sub_80AFE30(void);
+void sub_80AFFE0(u8);
 void sub_80B0034(void);
 void sub_80B00C8(void);
 void sub_80B0324(void);
 void sub_80B0518(void);
+void sub_80B0D7C(void);
 void sub_80B1118(void);
 void sub_80B159C(void);
 void sub_80B1B14(void);
+u8 sub_80B214C(u8);
 void sub_80B2184(void);
 void sub_80B2280(void);
 void sub_80B292C(void);
@@ -470,3 +498,359 @@ void sub_80AB9A0(u8 taskId)
         break;
     }
 }
+
+void sub_80ABAAC(void)
+{
+    AnimateSprites();
+    RunTasks();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+}
+
+void sub_80ABAC4(void)
+{
+    REG_BG0HOFS = gUnknown_030042A4;
+    REG_BG0VOFS = gUnknown_030042A0;
+    REG_BG1HOFS = gUnknown_030042C0;
+    REG_BG1VOFS = gUnknown_030041B4;
+    REG_BG2HOFS = gUnknown_03004288;
+    REG_BG2VOFS = gUnknown_03004280;
+    REG_BG3HOFS = gUnknown_030041B0;
+    REG_BG3VOFS = gUnknown_030041B8;
+    REG_WIN0H = gUnknown_030042C4;
+    REG_WIN0V = gUnknown_03004240;
+    REG_WIN1H = gUnknown_03004200;
+    REG_WIN1V = gUnknown_03004244;
+    TransferPlttBuffer();
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    sub_8089668();
+}
+
+void sub_80ABB70(u8 taskId)
+{
+    gUnknown_030042A0 = 0;
+    gUnknown_03004280 = 0;
+    sub_80B0D7C();
+    {
+        void *src = gPlttBufferUnfaded;
+        void *dest = shared18000.unk18204;
+        DmaCopy32(3, src, dest, 0x400);
+    }
+    if (sub_80AF59C(gContestPlayerMonIndex) == 0)
+        StringCopy(gDisplayedStringBattle, gUnknown_083CAF84);
+    else
+        StringCopy(gDisplayedStringBattle, gUnknown_083CAFAE);
+    sub_80AE020(gDisplayedStringBattle, shared19204.unk19205 + 1);
+    sub_80AF138();
+    StringExpandPlaceholders(gStringVar4, gDisplayedStringBattle);
+    sub_8002EB0(&gMenuWindow, gStringVar4, 776, 1, 15);
+    gTasks[taskId].func = sub_80ABC3C;
+}
+
+void sub_80ABC3C(u8 taskId)
+{
+    if (sub_80037A0(&gMenuWindow) == 1)
+        gTasks[taskId].func = sub_80ABC70;
+}
+
+void sub_80ABC70(u8 taskId)
+{
+    if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys == B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        if (sub_80AF59C(gContestPlayerMonIndex) == 0)
+        {
+            sub_80AFFE0(1);
+            gTasks[taskId].func = sub_80ABCDC;
+        }
+        else
+        {
+            gTasks[taskId].func = sub_80AC0C8;
+        }
+    }
+}
+
+
+struct UnknownContestStruct2
+{
+    u16 unk0[4];
+    u8 filler8[56];
+};
+extern struct UnknownContestStruct2 gUnknown_0203858E[];
+
+extern const u8 gUnknown_083CA340[][4];
+/*
+struct UnknownContestStruct3
+{
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+    u8 unk3;
+};
+extern const struct UnknownContestStruct3 gUnknown_083CA340[];
+*/
+
+#ifdef NONMATCHING
+void sub_80ABCDC(u8 taskId)
+{
+    u8 i;
+    u8 sp8[32];
+
+    gUnknown_030042A0 = 0xA0;
+    gUnknown_03004280 = 0xA0;
+    FillWindowRect_DefaultPalette(
+      &gUnknown_03004210,
+      0,
+      gUnknown_083CA340[0][0],
+      gUnknown_083CA340[0][1],
+      gUnknown_083CA340[0][2],
+      gUnknown_083CA340[0][3]);
+
+    for (i = 0; i < 4; i++)
+    {
+        u32 offset = i * 2 + gContestPlayerMonIndex * 64;
+        u16 r4 = *(u16 *)((u8 *)gUnknown_0203858E + offset);
+        u8 *r5 = sp8;
+
+        if (shared19260.unk19260[gContestPlayerMonIndex].unk8 != 0
+         && sub_80B214C(gContestPlayerMonIndex) != 0
+         && AreMovesContestCombo(shared19260.unk19260[gContestPlayerMonIndex].unk8, r4)
+         && shared19260.unk19260[gContestPlayerMonIndex].unk15 & 0x10)
+        {
+            r5 = StringCopy(sp8, gUnknownText_UnknownFormatting2);
+        }
+        //_080ABDA0
+        else if (r4 != 0
+         && shared19260.unk19260[gContestPlayerMonIndex].unk8 == r4
+         && gContestMoves[r4].effect != 3)
+        {
+            r5 = StringCopy(sp8, gUnknownText_UnknownFormatting3);
+        }
+        r5 = StringCopy(r5, gMoveNames[r4]);
+
+        sub_8002E4C(
+          &gUnknown_03004210,
+          sp8,
+          776 + i * 20,
+          gUnknown_083CA340[i][0] * 8 + 4,
+          gUnknown_083CA340[i][1] * 8,
+          1);
+        sub_8002F44(&gUnknown_03004210);
+    }
+
+    sub_814A5C0(0, 0xFFFF, 12, 0x2D9F, 72);
+    sub_80AC0AC(shared19204.unk19204);
+    sub_80AEBEC(gContestMons[gContestPlayerMonIndex].moves[shared19204.unk19204]);
+    gTasks[taskId].func = sub_80ABEA0;
+}
+#else
+__attribute__((naked))
+void sub_80ABCDC(u8 taskId)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+	mov r7, r10\n\
+	mov r6, r9\n\
+	mov r5, r8\n\
+	push {r5-r7}\n\
+	sub sp, 0x2C\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	str r0, [sp, 0x28]\n\
+	ldr r0, _080ABD80 @ =gUnknown_030042A0\n\
+	movs r1, 0xA0\n\
+	strh r1, [r0]\n\
+	ldr r0, _080ABD84 @ =gUnknown_03004280\n\
+	strh r1, [r0]\n\
+	ldr r5, _080ABD88 @ =gUnknown_03004210\n\
+	ldr r4, _080ABD8C @ =gUnknown_083CA340\n\
+	ldrb r2, [r4]\n\
+	ldrb r3, [r4, 0x1]\n\
+	ldrb r0, [r4, 0x2]\n\
+	str r0, [sp]\n\
+	ldrb r0, [r4, 0x3]\n\
+	str r0, [sp, 0x4]\n\
+	adds r0, r5, 0\n\
+	movs r1, 0\n\
+	bl FillWindowRect_DefaultPalette\n\
+	movs r6, 0\n\
+	ldr r0, _080ABD90 @ =gContestPlayerMonIndex\n\
+	mov r8, r0\n\
+	ldr r7, _080ABD94 @ =gSharedMem + 0x19260\n\
+	mov r9, r5\n\
+	mov r10, r4\n\
+_080ABD1C:\n\
+	lsls r1, r6, 1\n\
+	mov r3, r8\n\
+	ldrb r2, [r3]\n\
+	lsls r0, r2, 6\n\
+	adds r1, r0\n\
+	ldr r0, _080ABD98 @ =gUnknown_0203858E\n\
+	adds r1, r0\n\
+	ldrh r4, [r1]\n\
+	add r5, sp, 0x8\n\
+	lsls r0, r2, 3\n\
+	subs r0, r2\n\
+	lsls r0, 2\n\
+	adds r0, r7\n\
+	ldrh r0, [r0, 0x8]\n\
+	cmp r0, 0\n\
+	beq _080ABDA0\n\
+	adds r0, r2, 0\n\
+	bl sub_80B214C\n\
+	lsls r0, 24\n\
+	cmp r0, 0\n\
+	beq _080ABDA0\n\
+	mov r2, r8\n\
+	ldrb r1, [r2]\n\
+	lsls r0, r1, 3\n\
+	subs r0, r1\n\
+	lsls r0, 2\n\
+	adds r0, r7\n\
+	ldrh r0, [r0, 0x8]\n\
+	adds r1, r4, 0\n\
+	bl AreMovesContestCombo\n\
+	lsls r0, 24\n\
+	cmp r0, 0\n\
+	beq _080ABDA0\n\
+	mov r3, r8\n\
+	ldrb r1, [r3]\n\
+	lsls r0, r1, 3\n\
+	subs r0, r1\n\
+	lsls r0, 2\n\
+	adds r0, r7\n\
+	ldrb r1, [r0, 0x15]\n\
+	movs r0, 0x10\n\
+	ands r0, r1\n\
+	cmp r0, 0\n\
+	beq _080ABDA0\n\
+	add r0, sp, 0x8\n\
+	ldr r1, _080ABD9C @ =gUnknownText_UnknownFormatting2\n\
+	b _080ABDC6\n\
+	.align 2, 0\n\
+_080ABD80: .4byte gUnknown_030042A0\n\
+_080ABD84: .4byte gUnknown_03004280\n\
+_080ABD88: .4byte gUnknown_03004210\n\
+_080ABD8C: .4byte gUnknown_083CA340\n\
+_080ABD90: .4byte gContestPlayerMonIndex\n\
+_080ABD94: .4byte gSharedMem + 0x19260\n\
+_080ABD98: .4byte gUnknown_0203858E\n\
+_080ABD9C: .4byte gUnknownText_UnknownFormatting2\n\
+_080ABDA0:\n\
+	cmp r4, 0\n\
+	beq _080ABDCC\n\
+	mov r1, r8\n\
+	ldrb r0, [r1]\n\
+	lsls r1, r0, 3\n\
+	subs r1, r0\n\
+	lsls r1, 2\n\
+	adds r1, r7\n\
+	ldrh r0, [r1, 0x8]\n\
+	cmp r0, r4\n\
+	bne _080ABDCC\n\
+	ldr r0, _080ABE74 @ =gContestMoves\n\
+	lsls r1, r4, 3\n\
+	adds r1, r0\n\
+	ldrb r0, [r1]\n\
+	cmp r0, 0x3\n\
+	beq _080ABDCC\n\
+	add r0, sp, 0x8\n\
+	ldr r1, _080ABE78 @ =gUnknownText_UnknownFormatting3\n\
+_080ABDC6:\n\
+	bl StringCopy\n\
+	adds r5, r0, 0\n\
+_080ABDCC:\n\
+	movs r0, 0xD\n\
+	adds r1, r4, 0\n\
+	muls r1, r0\n\
+	ldr r0, _080ABE7C @ =gMoveNames\n\
+	adds r1, r0\n\
+	adds r0, r5, 0\n\
+	bl StringCopy\n\
+	lsls r1, r6, 2\n\
+	adds r2, r1, r6\n\
+	lsls r2, 18\n\
+	movs r3, 0xC2\n\
+	lsls r3, 18\n\
+	adds r2, r3\n\
+	lsrs r2, 16\n\
+	mov r3, r10\n\
+	adds r0, r1, r3\n\
+	ldrb r3, [r0]\n\
+	lsls r3, 3\n\
+	adds r3, 0x4\n\
+	lsls r3, 24\n\
+	lsrs r3, 24\n\
+	ldr r0, _080ABE80 @ =gUnknown_083CA340 + 0x1\n\
+	adds r1, r0\n\
+	ldrb r0, [r1]\n\
+	lsls r0, 3\n\
+	str r0, [sp]\n\
+	movs r0, 0x1\n\
+	str r0, [sp, 0x4]\n\
+	mov r0, r9\n\
+	add r1, sp, 0x8\n\
+	bl sub_8002E4C\n\
+	mov r0, r9\n\
+	bl sub_8002F44\n\
+	adds r0, r6, 0x1\n\
+	lsls r0, 24\n\
+	lsrs r6, r0, 24\n\
+	cmp r6, 0x3\n\
+	bhi _080ABE20\n\
+	b _080ABD1C\n\
+_080ABE20:\n\
+	ldr r1, _080ABE84 @ =0x0000ffff\n\
+	ldr r3, _080ABE88 @ =0x00002d9f\n\
+	movs r0, 0x48\n\
+	str r0, [sp]\n\
+	movs r0, 0\n\
+	movs r2, 0xC\n\
+	bl sub_814A5C0\n\
+	ldr r4, _080ABE8C @ =gSharedMem + 0x19204\n\
+	movs r0, 0\n\
+	ldrsb r0, [r4, r0]\n\
+	bl sub_80AC0AC\n\
+	ldr r2, _080ABE90 @ =gContestMons\n\
+	ldrb r1, [r4]\n\
+	lsls r1, 1\n\
+	ldr r0, _080ABE94 @ =gContestPlayerMonIndex\n\
+	ldrb r0, [r0]\n\
+	lsls r0, 6\n\
+	adds r1, r0\n\
+	adds r2, 0x1E\n\
+	adds r1, r2\n\
+	ldrh r0, [r1]\n\
+	bl sub_80AEBEC\n\
+	ldr r1, _080ABE98 @ =gTasks\n\
+	ldr r2, [sp, 0x28]\n\
+	lsls r0, r2, 2\n\
+	adds r0, r2\n\
+	lsls r0, 3\n\
+	adds r0, r1\n\
+	ldr r1, _080ABE9C @ =sub_80ABEA0\n\
+	str r1, [r0]\n\
+	add sp, 0x2C\n\
+	pop {r3-r5}\n\
+	mov r8, r3\n\
+	mov r9, r4\n\
+	mov r10, r5\n\
+	pop {r4-r7}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.align 2, 0\n\
+_080ABE74: .4byte gContestMoves\n\
+_080ABE78: .4byte gUnknownText_UnknownFormatting3\n\
+_080ABE7C: .4byte gMoveNames\n\
+_080ABE80: .4byte gUnknown_083CA340 + 0x1\n\
+_080ABE84: .4byte 0x0000ffff\n\
+_080ABE88: .4byte 0x00002d9f\n\
+_080ABE8C: .4byte gSharedMem + 0x19204\n\
+_080ABE90: .4byte gContestMons\n\
+_080ABE94: .4byte gContestPlayerMonIndex\n\
+_080ABE98: .4byte gTasks\n\
+_080ABE9C: .4byte sub_80ABEA0\n\
+    .syntax divided\n");
+}
+#endif

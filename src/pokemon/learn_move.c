@@ -1,4 +1,5 @@
 #include "global.h"
+#include "contest.h"
 #include "data2.h"
 #include "field_fadetransition.h"
 #include "main.h"

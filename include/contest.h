@@ -1,6 +1,21 @@
 #ifndef GUARD_CONTEST_H
 #define GUARD_CONTEST_H
 
+struct ContestMove
+{
+    u8 effect;
+    u8 contestCategory:3;
+    u8 comboStarterId;
+    u8 comboMoves[4];
+};
+
+struct ContestEffect
+{
+    u8 effectType;
+    u8 appeal;
+    u8 jam;
+};
+
 struct ContestPokemon
 {
  /* 0x00 */ u16 species;
