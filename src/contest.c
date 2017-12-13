@@ -20,13 +20,15 @@
 #include "unknown_task.h"
 
 extern bool8 AreMovesContestCombo(u16, u16);
+extern void sub_80C8A38(u8);
 
 struct Shared18000
 {
     /*0x18000*/ u8 unk18000;
     /*0x18001*/ u8 filler18001[3];
     /*0x18004*/ u16 unk18004[16][16];
-    /*0x18204*/ u8 unk18204[0xA04-0x204];
+    /*0x18204*/ u16 unk18204[0x200];
+    /*0x18604*/ u16 unk18604[0x200];
     /*0x18A04*/ u8 unk18A04[0x800];
 };
 
@@ -35,19 +37,26 @@ struct Shared19204
     /*0x19204*/ u8 unk19204;
     /*0x19205*/ u8 unk19205;
     /*0x19206*/ u8 unk19206[4];
-    /*0x1920A*/ u8 unk1920A;
-    /*0x1920B*/ u8 filler1920B;
+    /*0x1920A*/ u16 unk1920A_0:6;
+                u16 unk1920A_6:1;
+                u16 unk1920A_7:2;
+                u16 unk1920B_1:1;
     /*0x1920C*/ u8 unk1920C;
-    /*0x1920D*/ u8 filler1920D[0x16-0xD];
+    /*0x1920D*/ u8 filler1920D[0x14-0xD];
+    /*0x19214*/ u8 unk19214;
+    /*0x19215*/ u8 unk19215;
     /*0x19216*/ u8 unk19216;
     /*0x19217*/ u8 filler19217;
-    /*0x19218*/ u8 unk19218[0x5D-0x18];
+    /*0x19218*/ u8 unk19218[4];
+    /*0x1921C*/ u32 unk1921C;
+                u8 filler19220[0x5D-0x20];
     /*0x1925D*/ u8 unk1925D[3];
 };
 
 struct UnknownContestStruct1
 {
-    u8 filler0[8];
+    u8 filler0[6];
+    u16 unk6;
     u16 unk8;
     u8 fillerA;
     u8 unkB_0:2;
@@ -81,7 +90,7 @@ extern u8 gBankAttacker;
 extern u8 gBankTarget;
 extern u8 gBanksBySide[];
 extern u8 gObjectBankIDs[];
-extern bool8 gIsLinkContest;
+extern u8 gIsLinkContest;
 extern u8 gContestPlayerMonIndex;
 extern u16 gUnknown_030041B0;
 extern s16 gUnknown_030041B4;
@@ -122,13 +131,23 @@ void sub_80ABC70(u8);
 void sub_80ABCDC(u8);
 void sub_80ABEA0(u8);
 void sub_80AC0AC(s8);
+void nullsub_17(s8);
 void sub_80AC0C8(u8);
+void sub_80AC15C(u8);
+void sub_80AC188(u8);
+void sub_80AC204(u8);
+void sub_80AC250(u8);
+void sub_80AC284(u8);
+void sub_80AC2CC(u8);
 void sub_80AE020();
 u8 sub_80AE858(void);
 u8 sub_80AE8B4(void);
 void sub_80AEB30(void);
 void sub_80AEBEC(u16);
+void sub_80AED58(void);
 void sub_80AF138(void);
+u16 sub_80AF15C(u8);
+void sub_80AF1B8(void);
 u8 sub_80AF59C(u8);
 void sub_80AF860(void);
 void sub_80AFA5C(void);
@@ -142,10 +161,13 @@ void sub_80B0D7C(void);
 void sub_80B1118(void);
 void sub_80B159C(void);
 void sub_80B1B14(void);
+void sub_80B1BDC(void);
 u8 sub_80B214C(u8);
 void sub_80B2184(void);
 void sub_80B2280(void);
+void sub_80B25E4();
 void sub_80B292C(void);
+
 
 void nullsub_89(u8 taskId)
 {
@@ -400,8 +422,6 @@ u8 sub_80AB70C(u8 *a)
         break;
     case 4:
         LZDecompressVram(gUnknown_08D17424, (void *)(VRAM + 0xE000));
-        //DmaCopy32(3, (void *)(VRAM + 0xE000), shared18000.unk18A04, 0x800);
-        //asm("");
         {
             void *src = (void *)(VRAM + 0xE000);
             void *dest = shared18000.unk18A04;
@@ -490,7 +510,7 @@ void sub_80AB9A0(u8 taskId)
         break;
     case 4:
     default:
-        if (shared19204.unk1920A & 0x40)
+        if (shared19204.unk1920A_6)
             break;
         gTasks[taskId].data[0] = 0;
         gTasks[taskId].data[1] = 0;
@@ -854,3 +874,171 @@ _080ABE9C: .4byte sub_80ABEA0\n\
     .syntax divided\n");
 }
 #endif
+
+void sub_80ABEA0(u8 taskId)
+{
+    u8 r6 = 0;
+    s32 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        if (gContestMons[gContestPlayerMonIndex].moves[i] != 0)
+            r6++;
+    }
+
+    if (gMain.newKeys & A_BUTTON)
+    {
+        DestroyMenuCursor();
+        PlaySE(SE_SELECT);
+        gTasks[taskId].func = sub_80AC0C8;
+    }
+    else
+    {
+        switch (gMain.newAndRepeatedKeys)
+        {
+        case B_BUTTON:
+            sub_814A904();
+            PlaySE(SE_SELECT);
+            sub_80AFFE0(0);
+            FillWindowRect_DefaultPalette(
+              &gUnknown_03004210,
+              0,
+              gUnknown_083CA340[0][0],
+              gUnknown_083CA340[0][1],
+              gUnknown_083CA340[0][2],
+              gUnknown_083CA340[0][3]);
+            if (sub_80AF59C(gContestPlayerMonIndex) == 0)
+                StringCopy(gDisplayedStringBattle, gUnknown_083CAF84);
+            else
+                StringCopy(gDisplayedStringBattle, gUnknown_083CAFAE);
+            sub_80AE020(gDisplayedStringBattle, shared19204.unk19205 + 1);
+            sub_80AF138();
+            StringExpandPlaceholders(gStringVar4, gDisplayedStringBattle);
+            sub_8003460(&gMenuWindow, gStringVar4, 776, 1, 15);
+            gUnknown_030042A0 = 0;
+            gUnknown_03004280 = 0;
+            gTasks[taskId].func = sub_80ABC70;
+            break;
+        case DPAD_LEFT:
+        case DPAD_RIGHT:
+            break;
+        case DPAD_UP:
+            nullsub_17(shared19204.unk19204);
+            if (shared19204.unk19204 == 0)
+                shared19204.unk19204 = r6 - 1;
+            else
+                shared19204.unk19204--;
+            sub_80AC0AC(shared19204.unk19204);
+            sub_80AED58();
+            sub_80AEBEC(gContestMons[gContestPlayerMonIndex].moves[shared19204.unk19204]);
+            if (r6 > 1)
+                PlaySE(SE_SELECT);
+            break;
+        case DPAD_DOWN:
+            nullsub_17(shared19204.unk19204);
+            if (shared19204.unk19204 == r6 - 1)
+                shared19204.unk19204 = 0;
+            else
+                shared19204.unk19204++;
+            sub_80AC0AC(shared19204.unk19204);
+            sub_80AED58();
+            sub_80AEBEC(gContestMons[gContestPlayerMonIndex].moves[shared19204.unk19204]);
+            if (r6 > 1)
+                PlaySE(SE_SELECT);
+            break;
+        }
+    }
+}
+
+void sub_80AC0AC(s8 a)
+{
+    sub_814A880(4, 88 + a * 16);
+}
+
+void nullsub_17(s8 a)
+{
+}
+
+void sub_80AC0C8(u8 taskId)
+{
+    if (gIsLinkContest & 1)
+    {
+        u16 var = sub_80AF15C(gContestPlayerMonIndex);
+        struct UnknownContestStruct1 *s = &shared19260.unk19260[gContestPlayerMonIndex];
+        u8 taskId2;
+
+        s->unk6 = var;
+        taskId2 = CreateTask(sub_80C8A38, 0);
+        SetTaskFuncWithFollowupFunc(taskId2, sub_80C8A38, sub_80AC15C);
+        gTasks[taskId].func = nullsub_89;
+        sub_80AF860();
+        sub_80AFFE0(0);
+    }
+    else
+    {
+        sub_80AF1B8();
+        gTasks[taskId].func = sub_80AC188;
+    }
+}
+
+void sub_80AC15C(u8 taskId)
+{
+    DestroyTask(taskId);
+    gTasks[shared19204.unk1920C].func = sub_80AC188;
+}
+
+void sub_80AC188(u8 taskId)
+{
+    sub_80AF138();
+    gUnknown_030042A0 = 0;
+    gUnknown_03004280 = 0;
+    sub_80AFFE0(0);
+    {
+        void *src = gPlttBufferFaded;
+        void *dest = shared18000.unk18604;
+        u32 size = 0x400;
+        DmaCopy32(3, src, dest, size);
+    }
+    LoadPalette(shared18000.unk18204, 0, 0x400);
+    gTasks[taskId].data[0] = 0;
+    gTasks[taskId].data[1] = 0;
+    gTasks[taskId].func = sub_80AC204;
+}
+
+void sub_80AC204(u8 taskId)
+{
+    if (++gTasks[taskId].data[0] > 2)
+    {
+        gTasks[taskId].data[0] = 0;
+        if (++gTasks[taskId].data[1] == 2)
+        {
+            sub_80B1BDC();
+            sub_80B25E4(1);
+            gTasks[taskId].func = sub_80AC250;
+        }
+    }
+}
+
+void sub_80AC250(u8 taskId)
+{
+    if (!shared19204.unk1920A_6 && !shared19204.unk1920B_1)
+        gTasks[taskId].func = sub_80AC284;
+}
+
+void sub_80AC284(u8 taskId)
+{
+    if (++gTasks[taskId].data[0] > 19)
+    {
+        shared19204.unk19214 = 0;
+        shared19204.unk1921C = gRngValue;
+        gTasks[taskId].data[0] = 0;
+        gTasks[taskId].func = sub_80AC2CC;
+    }
+}
+
+/*
+void sub_80AC2CC(u8 taskId)
+{
+
+}
+*/
