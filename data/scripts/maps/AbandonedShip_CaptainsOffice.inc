@@ -9,7 +9,7 @@ AbandonedShip_CaptainsOffice_EventScript_15EAF5:: @ 815EAF5
 	checkitem ITEM_SCANNER, 1
 	compare RESULT, 1
 	goto_if_eq AbandonedShip_CaptainsOffice_EventScript_15EB23
-	checkflag 1078
+	checkflag FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOMS_2
 	goto_if_eq AbandonedShip_CaptainsOffice_EventScript_15EB2D
 	msgbox AbandonedShip_CaptainsOffice_Text_198C85, 4
 	release

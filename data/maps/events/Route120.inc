@@ -14,20 +14,20 @@ Route120_MapObjects:: @ 8383F30
 	object_event 13, MAP_OBJ_GFX_CAMPER, 0, 27, 0, 51, 0, 3, 9, 0, 0, 1, 0, 7, 0, Route120_EventScript_151A08, 0, 0, 0
 	object_event 14, MAP_OBJ_GFX_PICNICKER, 0, 36, 0, 45, 0, 3, 9, 0, 0, 1, 0, 2, 0, Route120_EventScript_151A1F, 0, 0, 0
 	object_event 15, MAP_OBJ_GFX_MANIAC, 0, 19, 0, 80, 0, 5, 15, 0, 0, 1, 0, 3, 0, Route120_EventScript_151A36, 0, 0, 0
-	object_event 16, MAP_OBJ_GFX_ITEM_BALL, 0, 20, 0, 55, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route120_EventScript_1B161A, 1030, 0, 0
+	object_event 16, MAP_OBJ_GFX_ITEM_BALL, 0, 20, 0, 55, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route120_EventScript_1B161A, FLAG_ITEM_ROUTE120_1, 0, 0
 	object_event 17, MAP_OBJ_GFX_CAMERAMAN, 0, 37, 0, 5, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route120_EventScript_1AE4C2, FLAG_HIDE_GABBY_AND_TY_ROUTE120_1, 0, 0
 	object_event 18, MAP_OBJ_GFX_REPORTER_F, 0, 36, 0, 5, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route120_EventScript_1AE4A2, FLAG_HIDE_GABBY_AND_TY_ROUTE120_1, 0, 0
 	object_event 19, MAP_OBJ_GFX_REPORTER_F, 0, 36, 0, 5, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route120_EventScript_1AE562, FLAG_HIDE_GABBY_AND_TY_ROUTE120_2, 0, 0
 	object_event 20, MAP_OBJ_GFX_CAMERAMAN, 0, 37, 0, 5, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route120_EventScript_1AE582, FLAG_HIDE_GABBY_AND_TY_ROUTE120_2, 0, 0
 	object_event 21, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 35, 0, 32, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_CuttableTree, FLAG_TEMP_11, 0, 0
-	object_event 22, MAP_OBJ_GFX_ITEM_BALL, 0, 7, 0, 89, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route120_EventScript_1B1627, 1031, 0, 0
+	object_event 22, MAP_OBJ_GFX_ITEM_BALL, 0, 7, 0, 89, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route120_EventScript_1B1627, FLAG_ITEM_ROUTE120_2, 0, 0
 	object_event 23, MAP_OBJ_GFX_BEAUTY, 0, 14, 0, 92, 0, 5, 5, 1, 0, 0, 0, 0, 0, Route120_EventScript_151739, 0, 0, 0
 	object_event 24, MAP_OBJ_GFX_WOMAN_7, 0, 28, 0, 35, 0, 3, 15, 0, 0, 1, 0, 4, 0, Route120_EventScript_151A74, 0, 0, 0
 	object_event 25, MAP_OBJ_GFX_HIKER, 0, 9, 0, 60, 0, 3, 21, 0, 0, 1, 0, 4, 0, Route120_EventScript_151A8B, 0, 0, 0
 	object_event 26, MAP_OBJ_GFX_WOMAN_7, 0, 16, 0, 6, 0, 3, 23, 0, 0, 1, 0, 4, 0, Route120_EventScript_151AA2, 0, 0, 0
 	object_event 27, MAP_OBJ_GFX_WOMAN_7, 0, 18, 0, 34, 0, 3, 17, 0, 0, 1, 0, 3, 0, Route120_EventScript_151AB9, 0, 0, 0
-	object_event 28, MAP_OBJ_GFX_ITEM_BALL, 0, 22, 0, 13, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route120_EventScript_1B1641, 1108, 0, 0
-	object_event 29, MAP_OBJ_GFX_ITEM_BALL, 0, 23, 0, 82, 0, 5, 1, 17, 0, 0, 0, 0, 0, Route120_EventScript_1B1634, 1107, 0, 0
+	object_event 28, MAP_OBJ_GFX_ITEM_BALL, 0, 22, 0, 13, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route120_EventScript_1B1641, FLAG_ITEM_ROUTE120_4, 0, 0
+	object_event 29, MAP_OBJ_GFX_ITEM_BALL, 0, 23, 0, 82, 0, 5, 1, 17, 0, 0, 0, 0, 0, Route120_EventScript_1B1634, FLAG_ITEM_ROUTE120_3, 0, 0
 	object_event 30, MAP_OBJ_GFX_KECLEON_1, 0, 12, 0, 16, 0, 4, 76, 17, 0, 0, 0, 0, 0, Route120_EventScript_151998, FLAG_HIDE_KECLEON_ROUTE120_1, 0, 0
 	object_event 31, MAP_OBJ_GFX_STEVEN, 0, 13, 0, 15, 0, 4, 8, 17, 0, 0, 0, 0, 0, Route120_EventScript_151853, FLAG_HIDE_STEVEN_ROUTE120, 0, 0
 	object_event 32, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 20, 0, 1, 0, 3, 1, 17, 0, 0, 0, 0, 0, S_CuttableTree, FLAG_TEMP_14, 0, 0

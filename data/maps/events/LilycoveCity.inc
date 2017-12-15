@@ -9,7 +9,7 @@ LilycoveCity_MapObjects:: @ 838016C
 	object_event 8, MAP_OBJ_GFX_OLD_WOMAN_1, 0, 34, 0, 37, 0, 5, 8, 0, 0, 0, 0, 0, 0, LilycoveCity_EventScript_14CC3F, 0, 0, 0
 	object_event 9, MAP_OBJ_GFX_OLD_MAN_1, 0, 57, 0, 17, 0, 3, 1, 0, 0, 0, 0, 0, 0, LilycoveCity_EventScript_14CC48, 0, 0, 0
 	object_event 10, 241, 0, 73, 0, 15, 0, 3, 10, 0, 0, 0, 0, 0, 0, LilycoveCity_EventScript_14CCE5, FLAG_HIDE_GRUNTS_LILYCOVE, 0, 0
-	object_event 11, MAP_OBJ_GFX_ITEM_BALL, 0, 61, 0, 36, 0, 5, 1, 0, 0, 0, 0, 0, 0, LilycoveCity_EventScript_1B1738, 1042, 0, 0
+	object_event 11, MAP_OBJ_GFX_ITEM_BALL, 0, 61, 0, 36, 0, 5, 1, 0, 0, 0, 0, 0, 0, LilycoveCity_EventScript_1B1738, FLAG_ITEM_LILYCOVE_1, 0, 0
 	object_event 12, 241, 0, 43, 0, 18, 0, 3, 5, 1, 0, 0, 0, 0, 0, LilycoveCity_EventScript_14CD3D, FLAG_HIDE_GRUNTS_LILYCOVE, 0, 0
 	object_event 13, 241, 0, 46, 0, 12, 0, 3, 9, 0, 0, 0, 0, 0, 0, LilycoveCity_EventScript_14CD22, FLAG_HIDE_GRUNTS_LILYCOVE, 0, 0
 	object_event 14, 241, 0, 45, 0, 12, 0, 3, 10, 0, 0, 0, 0, 0, 0, LilycoveCity_EventScript_14CD2B, FLAG_HIDE_GRUNTS_LILYCOVE, 0, 0

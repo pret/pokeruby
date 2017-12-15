@@ -18,7 +18,7 @@ Route118_MapObjects:: @ 8383684
 	object_event 17, MAP_OBJ_GFX_FISHERMAN, 0, 39, 0, 15, 0, 3, 1, 0, 0, 1, 0, 2, 0, Route118_EventScript_1510CD, 0, 0, 0
 	object_event 18, MAP_OBJ_GFX_MAN_6, 0, 17, 0, 11, 0, 3, 15, 17, 0, 1, 0, 3, 0, Route118_EventScript_1510FB, 0, 0, 0
 	object_event 19, MAP_OBJ_GFX_STEVEN, 0, 44, 0, 7, 0, 3, 8, 17, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_STEVEN_ROUTE118, 0, 0
-	object_event 20, MAP_OBJ_GFX_ITEM_BALL, 0, 69, 0, 7, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route118_EventScript_1B15B2, 1121, 0, 0
+	object_event 20, MAP_OBJ_GFX_ITEM_BALL, 0, 69, 0, 7, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route118_EventScript_1B15B2, FLAG_ITEM_ROUTE118_1, 0, 0
 
 Route118_MapCoordEvents:: @ 8383864
 	coord_event 43, 11, 3, 0, 0x4071, 0, 0, Route118_EventScript_150FAE

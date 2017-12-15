@@ -1,6 +1,6 @@
 GraniteCave_B2F_MapObjects:: @ 838BFEC
-	object_event 1, MAP_OBJ_GFX_ITEM_BALL, 0, 4, 0, 4, 0, 3, 1, 0, 0, 0, 0, 0, 0, GraniteCave_B2F_EventScript_1B17BA, 1053, 0, 0
-	object_event 2, MAP_OBJ_GFX_ITEM_BALL, 0, 29, 0, 4, 0, 3, 1, 0, 0, 0, 0, 0, 0, GraniteCave_B2F_EventScript_1B17C7, 1054, 0, 0
+	object_event 1, MAP_OBJ_GFX_ITEM_BALL, 0, 4, 0, 4, 0, 3, 1, 0, 0, 0, 0, 0, 0, GraniteCave_B2F_EventScript_1B17BA, FLAG_ITEM_GRANITE_CAVE_B2F_1, 0, 0
+	object_event 2, MAP_OBJ_GFX_ITEM_BALL, 0, 29, 0, 4, 0, 3, 1, 0, 0, 0, 0, 0, 0, GraniteCave_B2F_EventScript_1B17C7, FLAG_ITEM_GRANITE_CAVE_B2F_2, 0, 0
 	object_event 3, MAP_OBJ_GFX_BREAKABLE_ROCK, 0, 5, 0, 14, 0, 3, 1, 17, 0, 0, 0, 0, 0, S_BreakableRock, FLAG_TEMP_11, 0, 0
 	object_event 4, MAP_OBJ_GFX_BREAKABLE_ROCK, 0, 3, 0, 14, 0, 3, 1, 17, 0, 0, 0, 0, 0, S_BreakableRock, FLAG_TEMP_12, 0, 0
 	object_event 5, MAP_OBJ_GFX_BREAKABLE_ROCK, 0, 2, 0, 16, 0, 3, 1, 17, 0, 0, 0, 0, 0, S_BreakableRock, FLAG_TEMP_13, 0, 0

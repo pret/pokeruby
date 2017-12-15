@@ -6,8 +6,8 @@ Route110_TrickHousePuzzle3_MapObjects:: @ 839254C
 	object_event 5, MAP_OBJ_GFX_BREAKABLE_ROCK, 0, 1, 0, 3, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_BreakableRock, FLAG_TEMP_12, 0, 0
 	object_event 6, MAP_OBJ_GFX_BREAKABLE_ROCK, 0, 11, 0, 10, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_BreakableRock, FLAG_TEMP_13, 0, 0
 	object_event 7, MAP_OBJ_GFX_BREAKABLE_ROCK, 0, 13, 0, 7, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_BreakableRock, FLAG_TEMP_14, 0, 0
-	object_event 8, MAP_OBJ_GFX_ITEM_BALL, 0, 0, 0, 11, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route110_TrickHousePuzzle3_EventScript_1B1A85, 1064, 0, 0
-	object_event 9, MAP_OBJ_GFX_ITEM_BALL, 0, 7, 0, 2, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route110_TrickHousePuzzle3_EventScript_1B1A78, 1063, 0, 0
+	object_event 8, MAP_OBJ_GFX_ITEM_BALL, 0, 0, 0, 11, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route110_TrickHousePuzzle3_EventScript_1B1A85, FLAG_ITEM_TRICK_HOUSE_PUZZLE_3_2, 0, 0
+	object_event 9, MAP_OBJ_GFX_ITEM_BALL, 0, 7, 0, 2, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route110_TrickHousePuzzle3_EventScript_1B1A78, FLAG_ITEM_TRICK_HOUSE_PUZZLE_3_1, 0, 0
 	object_event 10, MAP_OBJ_GFX_BREAKABLE_ROCK, 0, 1, 0, 20, 0, 3, 1, 17, 0, 0, 0, 0, 0, S_BreakableRock, FLAG_TEMP_15, 0, 0
 	object_event 11, MAP_OBJ_GFX_BREAKABLE_ROCK, 0, 2, 0, 21, 0, 3, 1, 17, 0, 0, 0, 0, 0, S_BreakableRock, FLAG_TEMP_16, 0, 0
 

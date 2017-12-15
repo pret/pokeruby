@@ -4,7 +4,7 @@ SeafloorCavern_Room9_MapObjects:: @ 838D620
 	object_event 3, 247, 0, 9, 0, 42, 0, 3, 10, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_OTHER_LEADER_SEAFLOOR_CAVERN, 0, 0
 	object_event 4, 244, 0, 8, 0, 41, 0, 3, 10, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_OTHER_TEAM_GRUNTS_SEAFLOOR_CAVERN, 0, 0
 	object_event 5, 245, 0, 8, 0, 42, 0, 3, 10, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_OTHER_TEAM_GRUNTS_SEAFLOOR_CAVERN, 0, 0
-	object_event 6, MAP_OBJ_GFX_ITEM_BALL, 0, 14, 0, 5, 0, 3, 1, 17, 0, 0, 0, 0, 0, SeafloorCavern_Room9_EventScript_1B1A37, 1090, 0, 0
+	object_event 6, MAP_OBJ_GFX_ITEM_BALL, 0, 14, 0, 5, 0, 3, 1, 17, 0, 0, 0, 0, 0, SeafloorCavern_Room9_EventScript_1B1A37, FLAG_ITEM_SEAFLOOR_CAVERN_ROOM_9_1, 0, 0
 	object_event 7, 249, 0, 17, 0, 38, 0, 3, 8, 17, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_SLEEPING_MON_SEAFLOOR_CAVERN, 0, 0
 
 SeafloorCavern_Room9_MapWarps:: @ 838D6C8

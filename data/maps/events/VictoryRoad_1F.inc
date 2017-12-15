@@ -3,8 +3,8 @@ VictoryRoad_1F_MapObjects:: @ 838D8E4
 	object_event 2, MAP_OBJ_GFX_WOMAN_7, 0, 6, 0, 15, 0, 4, 9, 0, 0, 1, 0, 4, 0, VictoryRoad_1F_EventScript_15DF9D, 0, 0, 0
 	object_event 3, MAP_OBJ_GFX_MAN_4, 0, 27, 0, 34, 0, 3, 18, 0, 0, 1, 0, 3, 0, VictoryRoad_1F_EventScript_15DF86, 0, 0, 0
 	object_event 4, MAP_OBJ_GFX_WALLY, 0, 31, 0, 12, 0, 3, 7, 17, 0, 0, 0, 0, 0, VictoryRoad_1F_EventScript_15DF28, FLAG_HIDE_WALLY_BATTLE_VICTORY_ROAD, 0, 0
-	object_event 5, MAP_OBJ_GFX_ITEM_BALL, 0, 40, 0, 26, 0, 3, 1, 17, 0, 0, 0, 0, 0, VictoryRoad_1F_EventScript_1B1AC6, 1084, 0, 0
-	object_event 6, MAP_OBJ_GFX_ITEM_BALL, 0, 37, 0, 39, 0, 4, 1, 17, 0, 0, 0, 0, 0, VictoryRoad_1F_EventScript_1B1AD3, 1085, 0, 0
+	object_event 5, MAP_OBJ_GFX_ITEM_BALL, 0, 40, 0, 26, 0, 3, 1, 17, 0, 0, 0, 0, 0, VictoryRoad_1F_EventScript_1B1AC6, FLAG_ITEM_VICTORY_ROAD_1F_1, 0, 0
+	object_event 6, MAP_OBJ_GFX_ITEM_BALL, 0, 37, 0, 39, 0, 4, 1, 17, 0, 0, 0, 0, 0, VictoryRoad_1F_EventScript_1B1AD3, FLAG_ITEM_VICTORY_ROAD_1F_2, 0, 0
 	object_event 7, MAP_OBJ_GFX_WALLY, 0, 31, 0, 9, 0, 3, 1, 17, 0, 0, 0, 0, 0, VictoryRoad_1F_EventScript_15DF31, FLAG_HIDE_WALLY_DEFEATED_VICTORY_ROAD, 0, 0
 
 VictoryRoad_1F_MapWarps:: @ 838D98C

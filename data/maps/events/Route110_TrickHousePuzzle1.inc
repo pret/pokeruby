@@ -16,7 +16,7 @@ Route110_TrickHousePuzzle1_MapObjects:: @ 839225C
 	object_event 15, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 0, 0, 6, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_CuttableTree, FLAG_TEMP_1B, 0, 0
 	object_event 16, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 6, 0, 4, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_CuttableTree, FLAG_TEMP_1D, 0, 0
 	object_event 17, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 11, 0, 4, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_CuttableTree, FLAG_TEMP_1E, 0, 0
-	object_event 18, MAP_OBJ_GFX_ITEM_BALL, 0, 9, 0, 12, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route110_TrickHousePuzzle1_EventScript_1B1A51, 1060, 0, 0
+	object_event 18, MAP_OBJ_GFX_ITEM_BALL, 0, 9, 0, 12, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route110_TrickHousePuzzle1_EventScript_1B1A51, FLAG_ITEM_TRICK_HOUSE_PUZZLE_1_1, 0, 0
 	object_event 19, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 14, 0, 14, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_CuttableTree, FLAG_TEMP_1F, 0, 0
 
 Route110_TrickHousePuzzle1_MapWarps:: @ 8392424

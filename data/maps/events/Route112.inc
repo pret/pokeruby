@@ -10,7 +10,7 @@ Route112_MapObjects:: @ 8382818
 	object_event 9, MAP_OBJ_GFX_BERRY_TREE, 0, 29, 0, 6, 0, 0, 12, 0, 0, 0, 0, 22, 0, S_BerryTree, 0, 0, 0
 	object_event 10, MAP_OBJ_GFX_BERRY_TREE, 0, 30, 0, 6, 0, 3, 12, 0, 0, 0, 0, 21, 0, S_BerryTree, 0, 0, 0
 	object_event 11, MAP_OBJ_GFX_HIKER, 0, 8, 0, 50, 0, 3, 26, 48, 0, 0, 0, 0, 0, Route112_EventScript_150540, 0, 0, 0
-	object_event 12, MAP_OBJ_GFX_ITEM_BALL, 0, 14, 0, 43, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route112_EventScript_1B14EF, 1011, 0, 0
+	object_event 12, MAP_OBJ_GFX_ITEM_BALL, 0, 14, 0, 43, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route112_EventScript_1B14EF, FLAG_ITEM_ROUTE112_1, 0, 0
 
 Route112_MapWarps:: @ 8382938
 	warp_def 28, 27, 0, 0, MAP_ROUTE112_CABLE_CAR_STATION

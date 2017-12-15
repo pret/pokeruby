@@ -19,17 +19,17 @@ Route104_MapObjects:: @ 8381488
 	object_event 18, MAP_OBJ_GFX_BERRY_TREE, 0, 3, 0, 23, 0, 3, 12, 0, 0, 0, 0, 4, 0, S_BerryTree, 0, 0, 0
 	object_event 19, MAP_OBJ_GFX_BERRY_TREE, 0, 3, 0, 24, 0, 3, 12, 0, 0, 0, 0, 75, 0, S_BerryTree, 0, 0, 0
 	object_event 20, MAP_OBJ_GFX_BERRY_TREE, 0, 3, 0, 25, 0, 3, 12, 0, 0, 0, 0, 76, 0, S_BerryTree, 0, 0, 0
-	object_event 21, MAP_OBJ_GFX_ITEM_BALL, 0, 39, 0, 15, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route104_EventScript_1B1453, 1002, 0, 0
+	object_event 21, MAP_OBJ_GFX_ITEM_BALL, 0, 39, 0, 15, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route104_EventScript_1B1453, FLAG_ITEM_ROUTE104_1, 0, 0
 	object_event 22, MAP_OBJ_GFX_WOMAN_7, 0, 8, 0, 19, 0, 3, 5, 1, 0, 0, 0, 0, 0, Route104_EventScript_14EF09, FLAG_HIDE_FLOWER_SHOP_WORKER_OUTSIDE, 0, 0
 	object_event 23, MAP_OBJ_GFX_LITTLE_GIRL_1, 0, 27, 0, 15, 0, 3, 8, 0, 0, 1, 0, 0, 0, Route104_EventScript_14F25A, 0, 0, 0
 	object_event 24, MAP_OBJ_GFX_LITTLE_GIRL_1, 0, 28, 0, 15, 0, 3, 8, 0, 0, 1, 0, 0, 0, Route104_EventScript_14F279, 0, 0, 0
 	object_event 25, MAP_OBJ_GFX_BOY_4, 0, 11, 0, 44, 0, 3, 16, 0, 0, 1, 0, 3, 0, Route104_EventScript_14F1DE, 0, 0, 0
 	object_event 26, MAP_OBJ_GFX_WOMAN_3, 0, 22, 0, 25, 0, 3, 23, 0, 0, 1, 0, 3, 0, Route104_EventScript_14F21C, 0, 0, 0
-	object_event 27, MAP_OBJ_GFX_ITEM_BALL, 0, 29, 0, 53, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route104_EventScript_1B1460, 1057, 0, 0
+	object_event 27, MAP_OBJ_GFX_ITEM_BALL, 0, 29, 0, 53, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route104_EventScript_1B1460, FLAG_ITEM_ROUTE104_2, 0, 0
 	object_event 28, MAP_OBJ_GFX_YOUNGSTER, 0, 18, 0, 67, 0, 3, 46, 101, 0, 1, 0, 2, 0, Route104_EventScript_14F189, 0, 0, 0
-	object_event 29, MAP_OBJ_GFX_ITEM_BALL, 0, 37, 0, 22, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route104_EventScript_1B146D, 1115, 0, 0
+	object_event 29, MAP_OBJ_GFX_ITEM_BALL, 0, 37, 0, 22, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route104_EventScript_1B146D, FLAG_ITEM_ROUTE104_3, 0, 0
 	object_event 30, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 35, 0, 22, 0, 3, 1, 17, 0, 0, 0, 0, 0, S_CuttableTree, FLAG_TEMP_11, 0, 0
-	object_event 31, MAP_OBJ_GFX_ITEM_BALL, 0, 5, 0, 8, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route104_EventScript_1B147A, 1135, 0, 0
+	object_event 31, MAP_OBJ_GFX_ITEM_BALL, 0, 5, 0, 8, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route104_EventScript_1B147A, FLAG_ITEM_ROUTE104_4, 0, 0
 	object_event 32, MAP_OBJ_GFX_BOY_2, 0, 5, 0, 26, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route104_EventScript_14EF93, 0, 0, 0
 
 Route104_MapWarps:: @ 8381788

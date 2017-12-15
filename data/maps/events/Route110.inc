@@ -17,8 +17,8 @@ Route110_MapObjects:: @ 8381D58
 	object_event 16, MAP_OBJ_GFX_BERRY_TREE, 0, 5, 0, 11, 0, 3, 12, 0, 0, 0, 0, 16, 0, S_BerryTree, 0, 0, 0
 	object_event 17, MAP_OBJ_GFX_BERRY_TREE, 0, 6, 0, 11, 0, 3, 12, 0, 0, 0, 0, 17, 0, S_BerryTree, 0, 0, 0
 	object_event 18, MAP_OBJ_GFX_BERRY_TREE, 0, 7, 0, 11, 0, 3, 12, 0, 0, 0, 0, 18, 0, S_BerryTree, 0, 0, 0
-	object_event 19, MAP_OBJ_GFX_ITEM_BALL, 0, 30, 0, 69, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route110_EventScript_1B14BB, 1007, 0, 0
-	object_event 20, MAP_OBJ_GFX_ITEM_BALL, 0, 26, 0, 47, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route110_EventScript_1B14AE, 1006, 0, 0
+	object_event 19, MAP_OBJ_GFX_ITEM_BALL, 0, 30, 0, 69, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route110_EventScript_1B14BB, FLAG_ITEM_ROUTE110_2, 0, 0
+	object_event 20, MAP_OBJ_GFX_ITEM_BALL, 0, 26, 0, 47, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route110_EventScript_1B14AE, FLAG_ITEM_ROUTE110_1, 0, 0
 	object_event 21, MAP_OBJ_GFX_CYCLING_TRIATHLETE_M, 0, 27, 0, 92, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route110_EventScript_14FA53, 0, 0, 0
 	object_event 22, 241, 0, 7, 0, 83, 0, 3, 7, 0, 0, 0, 0, 0, 0, Route110_EventScript_14F946, FLAG_HIDE_EVIL_TEAM_ROUTE110, 0, 0
 	object_event 23, 241, 0, 8, 0, 83, 0, 3, 7, 0, 0, 0, 0, 0, 0, Route110_EventScript_14F95C, FLAG_HIDE_EVIL_TEAM_ROUTE110, 0, 0

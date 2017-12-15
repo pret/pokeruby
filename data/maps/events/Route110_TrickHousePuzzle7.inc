@@ -2,7 +2,7 @@ Route110_TrickHousePuzzle7_MapObjects:: @ 8392AC4
 	object_event 1, MAP_OBJ_GFX_PSYCHIC_M, 0, 0, 0, 3, 0, 3, 10, 0, 0, 1, 0, 2, 0, Route110_TrickHousePuzzle7_EventScript_1633D6, 0, 0, 0
 	object_event 2, MAP_OBJ_GFX_LASS, 0, 14, 0, 3, 0, 3, 7, 0, 0, 1, 0, 1, 0, Route110_TrickHousePuzzle7_EventScript_163404, 0, 0, 0
 	object_event 3, MAP_OBJ_GFX_HEX_MANIAC, 0, 9, 0, 10, 0, 3, 23, 0, 0, 1, 0, 1, 0, Route110_TrickHousePuzzle7_EventScript_1633ED, 0, 0, 0
-	object_event 4, MAP_OBJ_GFX_ITEM_BALL, 0, 11, 0, 10, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route110_TrickHousePuzzle7_EventScript_1B1AAC, 1068, 0, 0
+	object_event 4, MAP_OBJ_GFX_ITEM_BALL, 0, 11, 0, 10, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route110_TrickHousePuzzle7_EventScript_1B1AAC, FLAG_ITEM_TRICK_HOUSE_PUZZLE_7_1, 0, 0
 
 Route110_TrickHousePuzzle7_MapWarps:: @ 8392B24
 	warp_def 0, 21, 3, 2, MAP_ROUTE110_TRICK_HOUSE_ENTRANCE

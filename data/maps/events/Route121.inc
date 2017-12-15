@@ -19,7 +19,7 @@ Route121_MapObjects:: @ 8384504
 	object_event 18, MAP_OBJ_GFX_GENTLEMAN, 0, 55, 0, 8, 0, 3, 17, 0, 0, 1, 0, 3, 0, Route121_EventScript_151B89, 0, 0, 0
 	object_event 19, MAP_OBJ_GFX_HEX_MANIAC, 0, 11, 0, 10, 0, 3, 15, 0, 0, 1, 0, 4, 0, Route121_EventScript_151BC7, 0, 0, 0
 	object_event 20, MAP_OBJ_GFX_BEAUTY, 0, 22, 0, 5, 0, 3, 17, 0, 0, 1, 0, 4, 0, Route121_EventScript_151C14, 0, 0, 0
-	object_event 21, MAP_OBJ_GFX_ITEM_BALL, 0, 55, 0, 10, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route121_EventScript_1B164E, 1103, 0, 0
+	object_event 21, MAP_OBJ_GFX_ITEM_BALL, 0, 55, 0, 10, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route121_EventScript_1B164E, FLAG_ITEM_ROUTE121_1, 0, 0
 	object_event 22, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 26, 0, 12, 0, 3, 1, 17, 0, 0, 0, 0, 0, S_CuttableTree, FLAG_TEMP_13, 0, 0
 
 Route121_MapWarps:: @ 8384714

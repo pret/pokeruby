@@ -1,9 +1,9 @@
 NewMauville_Inside_MapObjects:: @ 838DF08
-	object_event 1, MAP_OBJ_GFX_ITEM_BALL, 0, 32, 0, 25, 0, 3, 1, 0, 0, 0, 0, 0, 0, NewMauville_Inside_EventScript_1B183C, 1075, 0, 0
-	object_event 2, MAP_OBJ_GFX_ITEM_BALL, 0, 16, 0, 22, 0, 3, 1, 0, 0, 0, 0, 0, 0, NewMauville_Inside_EventScript_1B1849, 1076, 0, 0
-	object_event 3, MAP_OBJ_GFX_ITEM_BALL, 0, 39, 0, 4, 0, 3, 1, 17, 0, 0, 0, 0, 0, NewMauville_Inside_EventScript_1B1856, 1110, 0, 0
-	object_event 4, MAP_OBJ_GFX_ITEM_BALL, 0, 17, 0, 10, 0, 3, 1, 17, 0, 0, 0, 0, 0, NewMauville_Inside_EventScript_1B1863, 1122, 0, 0
-	object_event 5, MAP_OBJ_GFX_ITEM_BALL, 0, 2, 0, 11, 0, 3, 1, 17, 0, 0, 0, 0, 0, NewMauville_Inside_EventScript_1B1870, 1123, 0, 0
+	object_event 1, MAP_OBJ_GFX_ITEM_BALL, 0, 32, 0, 25, 0, 3, 1, 0, 0, 0, 0, 0, 0, NewMauville_Inside_EventScript_1B183C, FLAG_ITEM_NEW_MAUVILLE_INSIDE_1, 0, 0
+	object_event 2, MAP_OBJ_GFX_ITEM_BALL, 0, 16, 0, 22, 0, 3, 1, 0, 0, 0, 0, 0, 0, NewMauville_Inside_EventScript_1B1849, FLAG_ITEM_NEW_MAUVILLE_INSIDE_2, 0, 0
+	object_event 3, MAP_OBJ_GFX_ITEM_BALL, 0, 39, 0, 4, 0, 3, 1, 17, 0, 0, 0, 0, 0, NewMauville_Inside_EventScript_1B1856, FLAG_ITEM_NEW_MAUVILLE_INSIDE_3, 0, 0
+	object_event 4, MAP_OBJ_GFX_ITEM_BALL, 0, 17, 0, 10, 0, 3, 1, 17, 0, 0, 0, 0, 0, NewMauville_Inside_EventScript_1B1863, FLAG_ITEM_NEW_MAUVILLE_INSIDE_4, 0, 0
+	object_event 5, MAP_OBJ_GFX_ITEM_BALL, 0, 2, 0, 11, 0, 3, 1, 17, 0, 0, 0, 0, 0, NewMauville_Inside_EventScript_1B1870, FLAG_ITEM_NEW_MAUVILLE_INSIDE_5, 0, 0
 	object_event 6, MAP_OBJ_GFX_ITEM_BALL, 0, 25, 0, 18, 0, 3, 1, 17, 0, 0, 0, 0, 0, NewMauville_Inside_EventScript_15E900, FLAG_HIDE_VOLTORB_1_NEW_MAUVILLE, 0, 0
 	object_event 7, MAP_OBJ_GFX_ITEM_BALL, 0, 6, 0, 11, 0, 3, 1, 17, 0, 0, 0, 0, 0, NewMauville_Inside_EventScript_15E91E, FLAG_HIDE_VOLTORB_2_NEW_MAUVILLE, 0, 0
 	object_event 8, MAP_OBJ_GFX_ITEM_BALL, 0, 13, 0, 10, 0, 3, 1, 17, 0, 0, 0, 0, 0, NewMauville_Inside_EventScript_15E93C, FLAG_HIDE_VOLTORB_3_NEW_MAUVILLE, 0, 0

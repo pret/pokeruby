@@ -8,7 +8,7 @@ Route109_MapObjects:: @ 8381AFC
 	object_event 7, MAP_OBJ_GFX_TUBER_M, 0, 21, 0, 11, 0, 3, 23, 0, 0, 1, 0, 3, 0, Route109_EventScript_14F809, 0, 0, 0
 	object_event 8, MAP_OBJ_GFX_TUBER_F, 0, 28, 0, 8, 0, 3, 10, 0, 0, 1, 0, 4, 0, Route109_EventScript_14F847, 0, 0, 0
 	object_event 9, MAP_OBJ_GFX_LITTLE_GIRL_2, 0, 11, 0, 6, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route109_EventScript_14F705, 0, 0, 0
-	object_event 10, MAP_OBJ_GFX_ITEM_BALL, 0, 27, 0, 48, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route109_EventScript_1B14A1, 1005, 0, 0
+	object_event 10, MAP_OBJ_GFX_ITEM_BALL, 0, 27, 0, 48, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route109_EventScript_1B14A1, FLAG_ITEM_ROUTE109_1, 0, 0
 	object_event 11, MAP_OBJ_GFX_TUBER_F, 0, 29, 0, 32, 0, 3, 13, 0, 0, 1, 0, 3, 0, Route109_EventScript_14F89C, 0, 0, 0
 	object_event 12, MAP_OBJ_GFX_TUBER_F, 0, 28, 0, 31, 0, 3, 17, 0, 0, 1, 0, 3, 0, Route109_EventScript_14F885, 0, 0, 0
 	object_event 13, MAP_OBJ_GFX_FISHERMAN, 0, 15, 0, 52, 0, 3, 10, 0, 0, 1, 0, 0, 0, Route109_EventScript_14F8B3, 0, 0, 0

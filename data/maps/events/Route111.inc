@@ -16,15 +16,15 @@ Route111_MapObjects:: @ 83821A0
 	object_event 15, MAP_OBJ_GFX_BREAKABLE_ROCK, 0, 18, 0, 101, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_BreakableRock, FLAG_TEMP_11, 0, 0
 	object_event 16, MAP_OBJ_GFX_BREAKABLE_ROCK, 0, 19, 0, 100, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_BreakableRock, FLAG_TEMP_12, 0, 0
 	object_event 17, MAP_OBJ_GFX_GIRL_1, 0, 23, 0, 8, 0, 3, 5, 1, 0, 0, 0, 0, 0, Route111_EventScript_1500C5, 0, 0, 0
-	object_event 18, MAP_OBJ_GFX_ITEM_BALL, 0, 32, 0, 105, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route111_EventScript_1B14C8, 1008, 0, 0
+	object_event 18, MAP_OBJ_GFX_ITEM_BALL, 0, 32, 0, 105, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route111_EventScript_1B14C8, FLAG_ITEM_ROUTE111_1, 0, 0
 	object_event 19, MAP_OBJ_GFX_BERRY_TREE, 0, 18, 0, 5, 0, 3, 12, 0, 0, 0, 0, 80, 0, S_BerryTree, 0, 0, 0
 	object_event 20, MAP_OBJ_GFX_BERRY_TREE, 0, 19, 0, 5, 0, 3, 12, 0, 0, 0, 0, 81, 0, S_BerryTree, 0, 0, 0
 	object_event 21, MAP_OBJ_GFX_REPORTER_F, 0, 13, 0, 86, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route111_EventScript_1AE4E2, FLAG_HIDE_GABBY_AND_TY_ROUTE111_2, 0, 0
 	object_event 22, MAP_OBJ_GFX_CAMERAMAN, 0, 14, 0, 86, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route111_EventScript_1AE502, FLAG_HIDE_GABBY_AND_TY_ROUTE111_2, 0, 0
 	object_event 23, MAP_OBJ_GFX_REPORTER_F, 0, 13, 0, 86, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route111_EventScript_1AE562, FLAG_HIDE_GABBY_AND_TY_ROUTE111_3, 0, 0
 	object_event 24, MAP_OBJ_GFX_CAMERAMAN, 0, 14, 0, 86, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route111_EventScript_1AE582, FLAG_HIDE_GABBY_AND_TY_ROUTE111_3, 0, 0
-	object_event 25, MAP_OBJ_GFX_ITEM_BALL, 0, 12, 0, 54, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route111_EventScript_1B14D5, 1009, 0, 0
-	object_event 26, MAP_OBJ_GFX_ITEM_BALL, 0, 3, 0, 114, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route111_EventScript_1B14E2, 1010, 0, 0
+	object_event 25, MAP_OBJ_GFX_ITEM_BALL, 0, 12, 0, 54, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route111_EventScript_1B14D5, FLAG_ITEM_ROUTE111_2, 0, 0
+	object_event 26, MAP_OBJ_GFX_ITEM_BALL, 0, 3, 0, 114, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route111_EventScript_1B14E2, FLAG_ITEM_ROUTE111_3, 0, 0
 	object_event 27, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 22, 0, 21, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_CuttableTree, FLAG_TEMP_13, 0, 0
 	object_event 28, MAP_OBJ_GFX_PICNICKER, 0, 10, 0, 82, 0, 3, 14, 0, 0, 1, 0, 2, 0, Route111_EventScript_150458, 0, 0, 0
 	object_event 29, MAP_OBJ_GFX_CAMPER, 0, 11, 0, 71, 0, 3, 22, 0, 0, 1, 0, 3, 0, Route111_EventScript_150441, 0, 0, 0

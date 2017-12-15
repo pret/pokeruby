@@ -1,5 +1,5 @@
 GraniteCave_B1F_MapObjects:: @ 838BF88
-	object_event 1, MAP_OBJ_GFX_ITEM_BALL, 0, 15, 0, 21, 0, 3, 1, 0, 0, 0, 0, 0, 0, GraniteCave_B1F_EventScript_1B17AD, 1051, 0, 0
+	object_event 1, MAP_OBJ_GFX_ITEM_BALL, 0, 15, 0, 21, 0, 3, 1, 0, 0, 0, 0, 0, 0, GraniteCave_B1F_EventScript_1B17AD, FLAG_ITEM_GRANITE_CAVE_B1F_1, 0, 0
 
 GraniteCave_B1F_MapWarps:: @ 838BFA0
 	warp_def 25, 13, 3, 1, MAP_GRANITE_CAVE_1F

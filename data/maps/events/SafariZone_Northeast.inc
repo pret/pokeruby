@@ -7,7 +7,7 @@ SafariZone_Northeast_MapObjects:: @ 8391A2C
 	object_event 6, MAP_OBJ_GFX_BREAKABLE_ROCK, 0, 23, 0, 6, 0, 3, 1, 17, 0, 0, 0, 0, 0, S_BreakableRock, FLAG_TEMP_14, 0, 0
 	object_event 7, MAP_OBJ_GFX_BREAKABLE_ROCK, 0, 20, 0, 7, 0, 3, 1, 17, 0, 0, 0, 0, 0, S_BreakableRock, FLAG_TEMP_15, 0, 0
 	object_event 8, MAP_OBJ_GFX_BREAKABLE_ROCK, 0, 27, 0, 7, 0, 3, 1, 17, 0, 0, 0, 0, 0, S_BreakableRock, FLAG_TEMP_16, 0, 0
-	object_event 9, MAP_OBJ_GFX_ITEM_BALL, 0, 7, 0, 6, 0, 3, 1, 17, 0, 0, 0, 0, 0, SafariZone_Northeast_EventScript_1B1919, 1119, 0, 0
+	object_event 9, MAP_OBJ_GFX_ITEM_BALL, 0, 7, 0, 6, 0, 3, 1, 17, 0, 0, 0, 0, 0, SafariZone_Northeast_EventScript_1B1919, FLAG_ITEM_SAFARI_ZONE_NORTHEAST_1, 0, 0
 
 SafariZone_Northeast_MapEvents:: @ 8391B04
 	map_events SafariZone_Northeast_MapObjects, 0x0, 0x0, 0x0

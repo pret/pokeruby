@@ -7,8 +7,8 @@ Route114_MapObjects:: @ 8382C48
 	object_event 6, MAP_OBJ_GFX_PICNICKER, 0, 19, 0, 35, 0, 3, 1, 0, 0, 1, 0, 3, 0, Route114_EventScript_150836, 0, 0, 0
 	object_event 7, MAP_OBJ_GFX_MANIAC, 0, 20, 0, 56, 0, 3, 7, 0, 0, 1, 0, 3, 0, Route114_EventScript_15084D, 0, 0, 0
 	object_event 8, MAP_OBJ_GFX_BERRY_TREE, 0, 31, 0, 45, 0, 3, 12, 0, 0, 0, 0, 68, 0, S_BerryTree, 0, 0, 0
-	object_event 9, MAP_OBJ_GFX_ITEM_BALL, 0, 7, 0, 6, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route114_EventScript_1B1516, 1014, 0, 0
-	object_event 10, MAP_OBJ_GFX_ITEM_BALL, 0, 11, 0, 37, 0, 4, 1, 0, 0, 0, 0, 0, 0, Route114_EventScript_1B1523, 1015, 0, 0
+	object_event 9, MAP_OBJ_GFX_ITEM_BALL, 0, 7, 0, 6, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route114_EventScript_1B1516, FLAG_ITEM_ROUTE114_1, 0, 0
+	object_event 10, MAP_OBJ_GFX_ITEM_BALL, 0, 11, 0, 37, 0, 4, 1, 0, 0, 0, 0, 0, 0, Route114_EventScript_1B1523, FLAG_ITEM_ROUTE114_2, 0, 0
 	object_event 11, MAP_OBJ_GFX_BREAKABLE_ROCK, 0, 12, 0, 43, 0, 4, 1, 0, 0, 0, 0, 0, 0, S_BreakableRock, FLAG_TEMP_11, 0, 0
 	object_event 12, MAP_OBJ_GFX_GENTLEMAN, 0, 19, 0, 11, 0, 3, 10, 0, 0, 0, 0, 0, 0, Route114_EventScript_150782, 0, 0, 0
 	object_event 13, MAP_OBJ_GFX_POOCHYENA, 0, 19, 0, 12, 0, 3, 10, 0, 0, 0, 0, 0, 0, Route114_EventScript_1507C3, 0, 0, 0
