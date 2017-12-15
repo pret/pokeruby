@@ -34,12 +34,12 @@ Route120_MapObjects:: @ 8383F30
 	object_event 33, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 15, 0, 1, 0, 3, 1, 17, 0, 0, 0, 0, 0, S_CuttableTree, FLAG_TEMP_12, 0, 0
 	object_event 34, MAP_OBJ_GFX_LITTLE_BOY_1, 0, 10, 0, 72, 0, 3, 58, 17, 0, 1, 0, 3, 0, Route120_EventScript_151AD0, 0, 0, 0
 	object_event 35, MAP_OBJ_GFX_LITTLE_BOY_1, 0, 19, 0, 28, 0, 3, 57, 17, 0, 1, 0, 3, 0, Route120_EventScript_151AE7, 0, 0, 0
-	object_event 36, MAP_OBJ_GFX_KECLEON_2, 0, 12, 0, 16, 0, 3, 8, 17, 0, 0, 0, 0, 0, 0x0, 981, 0, 0
-	object_event 37, MAP_OBJ_GFX_KECLEON_1, 0, 20, 0, 11, 0, 3, 76, 17, 0, 0, 0, 0, 0, Route120_EventScript_1A0539, 982, 0, 0
-	object_event 38, MAP_OBJ_GFX_KECLEON_1, 0, 27, 0, 2, 0, 3, 76, 17, 0, 0, 0, 0, 0, Route120_EventScript_1A0546, 985, 0, 0
-	object_event 39, MAP_OBJ_GFX_KECLEON_1, 0, 4, 0, 77, 0, 3, 76, 17, 0, 0, 0, 0, 0, Route120_EventScript_1A0553, 986, 0, 0
-	object_event 40, MAP_OBJ_GFX_KECLEON_1, 0, 7, 0, 51, 0, 3, 76, 17, 0, 0, 0, 0, 0, Route120_EventScript_1A056D, 988, 0, 0
-	object_event 41, MAP_OBJ_GFX_KECLEON_1, 0, 19, 0, 48, 0, 3, 76, 17, 0, 0, 0, 0, 0, Route120_EventScript_1A0560, 987, 0, 0
+	object_event 36, MAP_OBJ_GFX_KECLEON_2, 0, 12, 0, 16, 0, 3, 8, 17, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_KECLEON_ROUTE120_2, 0, 0
+	object_event 37, MAP_OBJ_GFX_KECLEON_1, 0, 20, 0, 11, 0, 3, 76, 17, 0, 0, 0, 0, 0, Route120_EventScript_1A0539, FLAG_HIDE_KECLEON_ROUTE120_3, 0, 0
+	object_event 38, MAP_OBJ_GFX_KECLEON_1, 0, 27, 0, 2, 0, 3, 76, 17, 0, 0, 0, 0, 0, Route120_EventScript_1A0546, FLAG_HIDE_KECLEON_ROUTE120_4, 0, 0
+	object_event 39, MAP_OBJ_GFX_KECLEON_1, 0, 4, 0, 77, 0, 3, 76, 17, 0, 0, 0, 0, 0, Route120_EventScript_1A0553, FLAG_HIDE_KECLEON_ROUTE120_5, 0, 0
+	object_event 40, MAP_OBJ_GFX_KECLEON_1, 0, 7, 0, 51, 0, 3, 76, 17, 0, 0, 0, 0, 0, Route120_EventScript_1A056D, FLAG_HIDE_KECLEON_ROUTE120_7, 0, 0
+	object_event 41, MAP_OBJ_GFX_KECLEON_1, 0, 19, 0, 48, 0, 3, 76, 17, 0, 0, 0, 0, 0, Route120_EventScript_1A0560, FLAG_HIDE_KECLEON_ROUTE120_6, 0, 0
 
 Route120_MapWarps:: @ 8384308
 	warp_def 7, 55, 0, 0, MAP_ANCIENT_TOMB

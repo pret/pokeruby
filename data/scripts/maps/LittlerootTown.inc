@@ -27,7 +27,7 @@ LittlerootTown_EventScript_14D563:: @ 814D563
 
 LittlerootTown_EventScript_14D567:: @ 814D567
 	setvar 0x40c7, 2
-	setflag 979
+	setflag FLAG_HIDE_RIVAL_OLDALE_TOWN
 	return
 
 LittlerootTown_EventScript_14D570:: @ 814D570

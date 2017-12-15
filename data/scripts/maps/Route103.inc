@@ -122,7 +122,7 @@ Route103_EventScript_14ED46:: @ 814ED46
 	clearflag FLAG_HIDE_RIVAL_BIRCH_LAB
 	setflag FLAG_DEFEATED_RIVAL_ROUTE103
 	setvar 0x40c7, 1
-	clearflag 979
+	clearflag FLAG_HIDE_RIVAL_OLDALE_TOWN
 	savebgm 0
 	fadedefaultbgm
 	releaseall

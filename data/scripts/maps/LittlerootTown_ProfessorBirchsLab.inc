@@ -52,7 +52,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152CFA:: @ 8152CFA
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152D19:: @ 8152D19
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_174015, 4
-	clearflag 991
+	clearflag FLAG_HIDE_BOY_ROUTE101
 	setvar 0x4084, 3
 	releaseall
 	end

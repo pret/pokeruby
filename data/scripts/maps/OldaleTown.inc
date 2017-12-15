@@ -279,7 +279,7 @@ OldaleTown_EventScript_14DFC6:: @ 814DFC6
 	waitmovement 0
 	removeobject 4
 	setvar 0x40c7, 2
-	setflag 979
+	setflag FLAG_HIDE_RIVAL_OLDALE_TOWN
 	releaseall
 	end
 

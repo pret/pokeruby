@@ -59,7 +59,7 @@ RustboroCity_DevonCorp_3F_EventScript_157752:: @ 8157752
 	msgbox RustboroCity_DevonCorp_3F_Text_183439, 4
 	setflag FLAG_HIDE_TUNNER_DIGGER_ROUTE116
 	clearflag FLAG_HIDE_BOYFRIEND_RUSTURF_TUNNEL
-	clearflag 983
+	clearflag FLAG_HIDE_GIRLFRIEND_RUSTURF_TUNNEL
 	clearflag FLAG_HIDE_MR_BRINEY_ROUTE104_HOUSE
 	clearflag FLAG_HIDE_PEEKO_BRINEY_HOUSE
 	setvar 0x4096, 1

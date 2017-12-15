@@ -33,8 +33,8 @@ Route119_MapObjects:: @ 8383914
 	object_event 32, MAP_OBJ_GFX_ITEM_BALL, 0, 3, 0, 56, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route119_EventScript_1B160D, 1106, 0, 0
 	object_event 33, MAP_OBJ_GFX_BOY_2, 0, 35, 0, 93, 0, 4, 2, 17, 0, 0, 0, 0, 0, Route119_EventScript_1515FC, 0, 0, 0
 	object_event 34, MAP_OBJ_GFX_LITTLE_BOY_1, 0, 29, 0, 6, 0, 3, 57, 17, 0, 1, 0, 3, 0, Route119_EventScript_151597, 0, 0, 0
-	object_event 35, MAP_OBJ_GFX_KECLEON_1, 0, 31, 0, 6, 0, 3, 76, 17, 0, 0, 0, 0, 0, Route119_EventScript_1A057A, 989, 0, 0
-	object_event 36, MAP_OBJ_GFX_KECLEON_1, 0, 20, 0, 13, 0, 4, 76, 17, 0, 0, 0, 0, 0, Route119_EventScript_1A0587, 990, 0, 0
+	object_event 35, MAP_OBJ_GFX_KECLEON_1, 0, 31, 0, 6, 0, 3, 76, 17, 0, 0, 0, 0, 0, Route119_EventScript_1A057A, FLAG_HIDE_KECLEON_ROUTE119_1, 0, 0
+	object_event 36, MAP_OBJ_GFX_KECLEON_1, 0, 20, 0, 13, 0, 4, 76, 17, 0, 0, 0, 0, 0, Route119_EventScript_1A0587, FLAG_HIDE_KECLEON_ROUTE119_2, 0, 0
 	object_event 37, MAP_OBJ_GFX_FISHERMAN, 0, 13, 0, 104, 0, 3, 10, 17, 0, 1, 0, 0, 0, Route119_EventScript_1515AE, 0, 0, 0
 
 Route119_MapWarps:: @ 8383C8C

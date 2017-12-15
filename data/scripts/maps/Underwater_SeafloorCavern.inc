@@ -11,7 +11,7 @@ Underwater_SeafloorCavern_MapScript1_15D9AE:: @ 815D9AE
 	end
 
 Underwater_SeafloorCavern_EventScript_15D9BB:: @ 815D9BB
-	setflag 980
+	setflag FLAG_HIDE_UNDERWATER_SUBMARINE_INTERACTION
 	end
 
 Underwater_SeafloorCavern_MapScript1_15D9BF:: @ 815D9BF
