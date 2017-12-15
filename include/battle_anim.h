@@ -44,6 +44,10 @@ struct UnknownStruct3
     u8 filler1[0xB];
 };
 
+extern void (*gAnimScriptCallback)(void);
+extern u8 gAnimScriptActive;
+
+void ExecuteMoveAnim(u16 move);
 void DoMoveAnim(const u8 *const moveAnims[], u16 b, u8 c);
 bool8 IsAnimBankSpriteVisible(u8 a);
 void sub_8076034(u8, u8);

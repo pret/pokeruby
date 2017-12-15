@@ -14,6 +14,7 @@
 #include "palette.h"
 #include "random.h"
 #include "sound.h"
+#include "sprite.h"
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
@@ -21,6 +22,7 @@
 
 extern bool8 AreMovesContestCombo(u16, u16);
 extern void sub_80C8A38(u8);
+extern void sub_80C8C80(u8);
 
 struct Shared18000
 {
@@ -37,10 +39,13 @@ struct Shared19204
     /*0x19204*/ u8 unk19204;
     /*0x19205*/ u8 unk19205;
     /*0x19206*/ u8 unk19206[4];
-    /*0x1920A*/ u16 unk1920A_0:6;
+    /*0x1920A*/ u16 unk1920A_0:4;
+                u16 unk1920A_4:1;
+                u16 unk1920A_5:1;
                 u16 unk1920A_6:1;
                 u16 unk1920A_7:2;
                 u16 unk1920B_1:1;
+                u16 unk1920B_2:1;
     /*0x1920C*/ u8 unk1920C;
     /*0x1920D*/ u8 filler1920D[0x14-0xD];
     /*0x19214*/ u8 unk19214;
@@ -50,23 +55,64 @@ struct Shared19204
     /*0x19218*/ u8 unk19218[4];
     /*0x1921C*/ u32 unk1921C;
                 u8 filler19220[0x5D-0x20];
-    /*0x1925D*/ u8 unk1925D[3];
+    /*0x1925D*/ u8 unk1925D;
+    /*0x1925E*/ u8 unk1925E;
+    /*0x1925F*/ u8 filler1925F;
 };
 
 struct UnknownContestStruct1
 {
-    u8 filler0[6];
-    u16 unk6;
+    u8 filler0[2];
+    u16 unk2;  // s16?
+    u8 filler4[2];
+    u16 unk6;  // move
     u16 unk8;
-    u8 fillerA;
+    u8 unkA;   // contest category
     u8 unkB_0:2;
-    u8 fillerC[0x13-0xC];
+    u8 unkB_2:1;
+    u8 unkB_3:4;
+    u8 unkB_7:1;
+    u8 unkC_0:1;
+    u8 unkC_1:1;
+    u8 unkC_2:1;
+    u8 fillerD;
+    u8 unkE;
+    u8 fillerF;
+    u8 unk10;  // maybe a bitfield
+    u8 unk11;
+    u8 filler12;
     u8 unk13;
     u8 unk14;
     u8 unk15;
-    u8 filler16[0x19-0x16];
+    u8 filler16;
+    u8 unk17;
+    u8 filler18;
     u8 unk19;
     u8 filler1A[0x1C-0x1A];
+};
+
+struct UnknownContestStruct3
+{
+    u8 filler0[2];
+    //u8 unk2_0:1;
+    //u8 unk2_1:1;
+    u8 unk2;  // maybe a bitfield
+    u8 filler3;
+};
+
+// possibly the same as UnknownContestStruct3?
+struct UnknownContestStruct4
+{
+    u8 filler0[2];
+    u8 unk2;  // maybe a bitfield
+    u8 filler3;
+};
+
+struct UnknownContestStruct5
+{
+    u32 bits_0:8;
+    u32 bits_8:1;
+    u32 bits_9:3;
 };
 
 struct Shared19260
@@ -74,9 +120,11 @@ struct Shared19260
     /*0x19260*/ struct UnknownContestStruct1 unk19260[4];
     /*0x192D0*/ u8 unk192D0[0x14];
     /*0x192E4*/ u8 unk192E4[0x44];
-    /*0x19328*/ u8 unk19328[4];
+    ///*0x19328*/ u8 unk19328[4];
+    /*0x19328*/ struct UnknownContestStruct5 unk19328;
     /*0x1932C*/ u8 filler1932C[0x38-0x2C];
-    /*0x19338*/ u8 unk19338[0x10];
+    /*0x19338*/ struct UnknownContestStruct4 unk19338[4];
+    /*0x19348*/ struct UnknownContestStruct3 unk19348[5];
 };
 
 #define shared15800 (gSharedMem + 0x15800)
@@ -84,6 +132,7 @@ struct Shared19260
 #define shared19204 (*(struct Shared19204 *)(gSharedMem + 0x19204))
 #define shared19260 (*(struct Shared19260 *)(gSharedMem + 0x19260))
 
+extern u8 gBattleMonForms[];
 extern u8 gDisplayedStringBattle[];
 extern u16 gBattleTypeFlags;
 extern u8 gBankAttacker;
@@ -139,34 +188,55 @@ void sub_80AC204(u8);
 void sub_80AC250(u8);
 void sub_80AC284(u8);
 void sub_80AC2CC(u8);
+void sub_80AD8DC(u8);
+void sub_80AD8FC(struct Sprite *);
 void sub_80AE020();
 u8 sub_80AE858(void);
 u8 sub_80AE8B4(void);
+u8 sub_80AE9FC();
 void sub_80AEB30(void);
 void sub_80AEBEC(u16);
 void sub_80AED58(void);
+u8 sub_80AEE54();
+u8 sub_80AF038();
+void sub_80AF120(void);
 void sub_80AF138(void);
 u16 sub_80AF15C(u8);
 void sub_80AF1B8(void);
 u8 sub_80AF59C(u8);
 void sub_80AF860(void);
 void sub_80AFA5C(void);
+void sub_80AFBA0(s16, s16, u8);
 void sub_80AFE30(void);
 void sub_80AFFE0(u8);
 void sub_80B0034(void);
 void sub_80B00C8(void);
 void sub_80B0324(void);
+void sub_80B03A8();
 void sub_80B0518(void);
+u8 sub_80B09E4();
+void sub_80B0BC4();
+void sub_80B0CDC();
 void sub_80B0D7C(void);
 void sub_80B1118(void);
+void sub_80B114C(u8);
+void sub_80B146C();
 void sub_80B159C(void);
+void sub_80B1710();
 void sub_80B1B14(void);
 void sub_80B1BDC(void);
+void sub_80B1FD0();
+void sub_80B20C4(void);
 u8 sub_80B214C(u8);
 void sub_80B2184(void);
 void sub_80B2280(void);
 void sub_80B25E4();
+u16 sub_80B2760();
+void sub_80B2790();
+void sub_80B28CC();
+void sub_80B28F0();
 void sub_80B292C(void);
+void sub_80B29B4();
 
 
 void nullsub_89(u8 taskId)
@@ -260,6 +330,7 @@ void sub_80AB398(void)
     for (i = 0; i < 4; i++)
     {
         shared19260.unk19260[i].unkB_0 = 0;
+        //shared19260.unk19260[i].unkB_1 = 0;
         shared19260.unk19260[i].unk13 = 0xFF;
         shared19260.unk19260[i].unk14 = 0xFF;
     }
@@ -318,9 +389,9 @@ void sub_80AB47C(void)
         gMain.state++;
         break;
     case 2:
-        if (sub_80AB70C(shared19204.unk1925D) == 0)
+        if (sub_80AB70C(&shared19204.unk1925D) == 0)
             break;
-        shared19204.unk1925D[0] = 0;
+        shared19204.unk1925D = 0;
         gMain.state++;
         break;
     case 3:
@@ -600,16 +671,6 @@ struct UnknownContestStruct2
 extern struct UnknownContestStruct2 gUnknown_0203858E[];
 
 extern const u8 gUnknown_083CA340[][4];
-/*
-struct UnknownContestStruct3
-{
-    u8 unk0;
-    u8 unk1;
-    u8 unk2;
-    u8 unk3;
-};
-extern const struct UnknownContestStruct3 gUnknown_083CA340[];
-*/
 
 #ifdef NONMATCHING
 void sub_80ABCDC(u8 taskId)
@@ -1036,9 +1097,568 @@ void sub_80AC284(u8 taskId)
     }
 }
 
+u8 sub_80AE074(void);
+
+extern const u8 gUnknown_083CAFD7[];
+extern const u8 gUnknown_083CC103[];
+extern const u8 *const gUnknown_083CC330[];
+
 /*
 void sub_80AC2CC(u8 taskId)
 {
-
+    u8 spriteId; // r5
+    s32 r6;
+    u8 r7 = shared19204.unk19215;
+    
+    switch (gTasks[taskId].data[0])
+    {
+    case 0:
+    //_080AC404
+        {
+            //s32 r6;
+            
+            sub_80B0D7C();
+            r6 = 0;
+            while (shared19204.unk19214 != shared19260.unk192D0[r6])
+                r6++;
+            //_080AC42C
+            shared19204.unk19215 = r6;
+            r7 = shared19204.unk19215;  // is r7 actually a variable?
+            if (gIsLinkContest & 1)
+            {
+                u8 taskId2;
+                
+                shared19204.unk1920B_2 = 1;
+                if (sub_80AE074() != 0)
+                    sub_80B114C(shared19204.unk19215);
+                taskId2 = CreateTask(sub_80C8C80, 0);
+                SetTaskFuncWithFollowupFunc(taskId2, sub_80C8C80, sub_80AD8DC);
+                sub_80AF860();
+                gTasks[taskId].data[0] = 1;
+            }
+            //_080AC498
+            else
+            {
+                sub_80B114C(r7);
+                gTasks[taskId].data[0] = 2;
+            }
+        }
+        return;
+    case 1:
+        if (!shared19204.unk1920B_2)
+            gTasks[taskId].data[0] = 2;
+        return;
+    case 2:
+    //_080AC4D4
+        // Come on, get this part to match!
+        if (shared19260.unk19260[r7].unkC_1
+         || shared19260.unk19260[r7].unkC_2
+         || shared19260.unk19260[r7].unkB_7)
+        {
+            gTasks[taskId].data[0] = 31;
+        }
+        else
+        {
+            sub_80AF138();
+            sub_80B0CDC(r7, 0);
+            gTasks[taskId].data[10] = 0;
+            gTasks[taskId].data[0] = 3;
+        }
+        return;
+    case 3:
+    //_080AC534
+        {
+            s32 i;
+            
+            for (i = 0; i < 4; i++)
+                gBattleMonForms[i] = 0;
+            memset(shared19260.unk19348, 0, 20);
+            sub_80B28F0(shared19204.unk19215);
+            spriteId = sub_80AE9FC(
+              gContestMons[shared19204.unk19215].species,
+              gContestMons[shared19204.unk19215].unk3C,
+              gContestMons[shared19204.unk19215].unk38);
+            gSprites[spriteId].pos2.x = 120;
+            gSprites[spriteId].callback = sub_80AD8FC;
+            gTasks[taskId].data[2] = spriteId;
+            gObjectBankIDs[gBankAttacker] = spriteId;
+            sub_80B0BC4(sub_80B09E4(shared19204.unk19215), 0);
+            gTasks[taskId].data[0] = 4;
+        }
+        return;
+    case 4:
+    //_080AC5E8
+        spriteId = gTasks[taskId].data[2];
+        if (gSprites[spriteId].callback == SpriteCallbackDummy
+        // && !shared19260.unk19348[r7].unk2_1)
+         && !(shared19260.unk19348[r7].unk2 & 2))
+            gTasks[taskId].data[0] = 5;
+        return;
+    case 5:
+    //_080AC638
+        if (shared19260.unk19260[r7].unkC_0)
+        {
+            gTasks[taskId].data[0] = 33;
+        }
+        //_080AC664
+        else
+        {
+            sub_80AF138();
+            StringCopy(gStringVar1, gContestMons[r7].nickname);
+            if (shared19260.unk19260[r7].unk6 <= 354)
+                StringCopy(gStringVar2, gMoveNames[shared19260.unk19260[r7].unk6]);
+            else
+                StringCopy(gStringVar2, gUnknown_083CC330[shared19260.unk19260[r7].unkA]);
+            StringExpandPlaceholders(gStringVar4, gUnknown_083CAFD7);
+            sub_8002EB0(&gMenuWindow, gStringVar4, 776, 1, 15);
+            gTasks[taskId].data[0] = 6;
+        }
+        return;
+    case 6:
+    //_080AC6F8
+        if (sub_80037A0(&gMenuWindow) != 0)
+        {
+            shared19204.unk1925E = 0;
+            gTasks[taskId].data[0] = 7;
+        }
+        return;
+    case 7:
+    //_080AC730
+        {
+            // doesn't match
+            u16 r4 = sub_80B2760(shared19260.unk19260[shared19204.unk19215].unk6);
+            
+            sub_80B2790(shared19204.unk19215);
+            sub_80B28F0(shared19204.unk19215);
+            sub_80B29B4(r4);
+            ExecuteMoveAnim(r4);
+            gTasks[taskId].data[0] = 8;
+        }
+        return;
+    case 8:
+    //_080AC77C
+        gAnimScriptCallback();
+        if (!gAnimScriptActive)
+        {
+            sub_80B28CC(r7);
+            if (shared19204.unk1925E != 0)
+            {
+                gTasks[taskId].data[10] = 0;
+                gTasks[taskId].data[0] = 9;
+            }
+            else
+            {
+                if (!(shared19260.unk19260[r7].unk15 & 0x10))
+                    sub_80B03A8(r7);
+                sub_80B20C4();
+                gTasks[taskId].data[0] = 23;
+            }
+        }
+        return;
+    case 9:
+    //_080AC7F4
+        if (++gTasks[taskId].data[10] > 30)
+        {
+            gTasks[taskId].data[10] = 0;
+            gTasks[taskId].data[0] = 7;
+        }
+        return;
+    case 23:
+    //_080AC81E
+        gTasks[taskId].data[1] = 0;
+        if (shared19260.unk19260[r7].unk13 != 0xFF)
+        {
+            sub_80B146C(r7, shared19260.unk19260[r7].unk13);
+            shared19260.unk19260[r7].unk13 = 0xFF;
+            gTasks[taskId].data[0] = 24;
+        }
+        //_080AC85C
+        else
+        {
+            if (shared19260.unk19260[r7].unk14 != 0xFF)
+            {
+                //s32 r6 = 0;
+                
+                for (r6 = 0; r6 < 4; r6++)
+                {
+                    if (r6 != r7 && shared19260.unk19260[r6].unk13 != 0xFF)
+                        break;
+                }
+                //_080AC886
+                if (r6 == 4)
+                {
+                    sub_80B146C(r7, shared19260.unk19260[r7].unk14);
+                    shared19260.unk19260[r7].unk14 = 0xFF;
+                    gTasks[taskId].data[0] = 24;
+                }
+                //_080AC8B4
+                else
+                {
+                    gTasks[taskId].data[0] = 48;
+                }
+            }
+            //_080AC8C4
+            else
+            {
+                gTasks[taskId].data[0] = 48;
+            }
+        }
+        return;
+    case 24:
+    //_080AC8CC
+        if (sub_80037A0(&gMenuWindow) != 0)
+            gTasks[taskId].data[0] = 23;
+        return;
+    case 48:
+    //_080AC8F8
+        if ((shared19260.unk19260[r7].unk11 & 3) == 1)
+        {
+            sub_80B1710(5);
+            gTasks[taskId].data[0] = 49;
+        }
+        else if ((shared19260.unk19260[r7].unk11 & 3) == 2)
+        {
+            sub_80B1710(6);
+            gTasks[taskId].data[0] = 49;
+        }
+        else if ((shared19260.unk19260[r7].unk11 & 3) == 3)
+        {
+            sub_80B1710(7);
+            gTasks[taskId].data[0] = 49;
+        }
+        else
+        {
+            gTasks[taskId].data[0] = 47;
+        }
+        return;
+    case 49:
+    //_080AC94C
+        if (!shared19204.unk1920A_4)
+            gTasks[taskId].data[0] = 47;
+        return;
+    case 47:
+    //_080AC96C
+        sub_80B1FD0(1);
+        gTasks[taskId].data[0] = 12;
+        return;
+    case 12:
+    //_080AC98C
+        sub_80AFBA0(0, shared19260.unk19260[r7].unk2, r7);
+        gTasks[taskId].data[0] = 13;
+        return;
+    case 13:
+    //_080AC9C0
+        if (!(shared19260.unk19338[shared19204.unk19215].unk2 & 4))
+            gTasks[taskId].data[0] = 35;
+        return;
+    case 35:
+    //_080AC9EC
+        if ((shared19260.unk19260[r7].unk10 & 0x30) == 0x10)
+            sub_80B1710(8);
+        gTasks[taskId].data[0] = 36;
+        return;
+    case 36:
+    //_080ACA24
+        if (!shared19204.unk1920A_4)
+            gTasks[taskId].data[0] = 37;
+        return;
+    case 37:
+    //_080ACA44
+        if (sub_80AEE54(r7, 1) != 0)
+        {
+            gTasks[taskId].data[10] = 0;
+            gTasks[taskId].data[0] = 38;
+        }
+        else
+        {
+            gTasks[taskId].data[0] = 50;
+        }
+        return;
+    case 38:
+    //_080ACA84
+        if (++gTasks[taskId].data[10] > 20)
+        {
+            gTasks[taskId].data[10] = 0;
+            gTasks[taskId].data[0] = 50;
+        }
+        return;
+    case 50:
+    //_080ACAAE
+        if (sub_80AF038(r7) != 0)
+            PlaySE(SE_C_PASI);
+        gTasks[taskId].data[0] = 25;
+        return;
+    case 25:
+    //_080ACAD8
+        gTasks[taskId].data[1] = 0;
+        gTasks[taskId].data[0] = 26;
+        return;
+    case 26:
+    //_080ACAEE
+        {
+            s8 r4 = 0;
+            s32 r2 = 0;
+            
+            // Is this variable reused?
+            r6 = gTasks[taskId].data[1];
+            
+            // This part is really weird
+            while (r6 < 4)
+            {
+                r4 = 0;
+                r2 = 0;
+                
+                if (r4 != r7 && gUnknown_02038696[0] == r6
+                 && shared19260.unk19260[0].unk13 != 0xFF)
+                {
+                    r4 = 1;
+                    break;
+                }
+                //_080ACB2C
+                while (++r2 < 4)
+                {
+                    if (r2 != r7 && gUnknown_02038696[0] == r6
+                     && shared19260.unk19260[r2].unk13 != 0xFF)
+                    {
+                        r4 = 1;
+                        break;
+                    }
+                }
+                //_080ACB4E
+                if (r4 != 0)
+                    break;
+            }
+            //_080ACB58
+            if (r4 != 0)
+            {
+            //_080ACB60
+                gTasks[taskId].data[1] = gUnknown_02038696[r2];
+                sub_80B146C(r2, shared19260.unk19260[r2].unk13);
+                shared19260.unk19260[r2].unk13 = 0xFF;
+                gTasks[taskId].data[0] = 27;
+            }
+            //_080ACB98
+            else
+            {
+                gTasks[taskId].data[1] = 0;
+                gTasks[taskId].data[10] = 0;
+                gTasks[taskId].data[0] = 51;
+                sub_80AF120();
+            }
+        }
+        return;
+    case 27:
+    //_080ACBB0
+        if (sub_80037A0(&gMenuWindow) != 0)
+            gTasks[taskId].data[0] = 28;
+        return;
+    case 28:
+    //_080ACBDC
+        {
+            u8 r1;
+            
+            // check this later
+            r6 = 0;
+            while (gTasks[taskId].data[1] != gUnknown_02038696[r6])
+                r6++;
+            //_080ACC08
+            r1 = shared19260.unk19260[r6].unkE;
+            sub_80AFBA0(shared19260.unk19260[r6].unk2 + r1, -r1, r6);
+            gTasks[taskId].data[0] = 29;
+        }
+        return;
+    case 29:
+    //_080ACC44
+        r6 = 0;
+        while (gTasks[taskId].data[1] != gUnknown_02038696[r6])
+            r6++;
+        //_080ACC6C
+        if (!(shared19260.unk19338[r6].unk2 & 4))
+            gTasks[taskId].data[0] = 39;
+        return;
+    case 39:
+    //_080ACC98
+        r6 = 0;
+        while (gTasks[taskId].data[1] != gUnknown_02038696[r6])
+            r6++;
+        if (sub_80AEE54(r6, 1) != 0)
+        {
+            gTasks[taskId].data[10] = 0;
+            gTasks[taskId].data[0] = 40;
+        }
+        else
+        {
+            gTasks[taskId].data[0] = 30;
+        }
+        return;
+    case 40:
+    //_080ACD00
+        if (++gTasks[taskId].data[10] > 20)
+        {
+            gTasks[taskId].data[10] = 0;
+            gTasks[taskId].data[0] = 30;
+        }
+        return;
+    case 30:
+    //_080ACD2A
+        r6 = 0;
+        while (r6 < 4 && gTasks[taskId].data[1] != gUnknown_02038696[r6])
+            r6++;
+        //_080ACD5E
+        if (sub_80AF038(r6) != 0)
+            PlaySE(SE_C_PASI);
+        else
+            PlaySE(SE_C_SYU);
+        if (shared19260.unk19260[r6].unk15 & 0x20)
+        {
+            sub_80B03A8(r6);
+            shared19260.unk19260[r6].unk15 &= ~0x20;
+        }
+        gTasks[taskId].data[1]++;
+        gTasks[taskId].data[0] = 26;
+        return;
+    case 51:
+    //_080ACDC8
+        if (++gTasks[taskId].data[10] > 9)
+        {
+            gTasks[taskId].data[10] = 0;
+            if (shared19260.unk19260[r7].unkC_1
+             || shared19260.unk19260[r7].unkC_2
+             || (shared19260.unk19260[r7].unk11 & 4)
+            {
+                sub_80AF138();
+                StringCopy(gStringVar1, gContestMons[r7].nickname);
+                StringExpandPlaceholders(gStringVar4, gUnknown_083CC103);
+                sub_8002EB0(&gMenuWindow, gStringVar4, 776, 1, 15);
+            }
+            //_080ACE36
+            gTasks[taskId].data[0] = 52;
+        }
+        return;
+    case 52:
+    //_080ACE64
+        if (sub_80037A0(&gMenuWindow) != 0)
+        {
+            if (!(shared19260.unk19260[r7].unk15 & 0x40))
+                gTasks[taskId].data[0] = 17;
+            else
+                gTasks[taskId].data[0] = 14;
+        }
+        return;
+    case 14:
+    //_080ACEC0
+        {
+            s8 r4 = shared19260.unk19260[r7].unk16;
+            
+            if (r4 != 0)
+            {
+                sub_80AF138();
+                if (r4 == 1)
+                    sub_8002EB0(&gMenuWindow, gUnknown_083CBD79, 776, 1, 15);
+                else if (r4 == 2)
+                    sub_8002EB0(&gMenuWindow, gUnknown_083CBD9D, 776, 1, 15);
+                else
+                    sub_8002EB0(&gMenuWindow, gUnknown_083CBDC6, 776, 1, 15);
+                //_080ACF22
+                sub_80B1710(3);
+                gTasks[taskId].data[10] = 0;
+            }
+            //_080ACF48
+            else
+            {
+                sub_80AF138();
+                StringCopy(gStringVar1, gContestMons[r7].nickname);
+                StringExpandPlaceholders(gStringVar4, gUnknown_083CBD52);
+                sub_8002EB0(&gMenuWindow, gStringVar4, 776, 1, 15);
+                sub_80B1710(2);
+                gTasks[taskId].data[10] = 0;
+            }
+            gTasks[taskId].data[0] = 45;  // tail merge?
+        }
+        return;
+    case 45:
+    //_080ACFA8
+        if (!shared19204.unk1920A_4)
+        {
+            sub_80B09B0(shared19204.unk19215);
+            gTasks[taskId].data[0] = 15;
+        }
+        return;
+    case 15:
+    //_080ACFD4
+        if (sub_80037A0(&gMenuWindow) != 0)
+        {
+            if (++gTasks[taskId].data[10] > 50)
+            {
+                if (!(shared19260.unk19260[r7].unk15 & 0x10))
+                {
+                    sub_80AFBA0(
+                      shared19260.unk19260[r7].unk2,
+                      shared19260.unk19260[r7].unk17,
+                      r7);
+                    shared19260.unk19260[r7].unk2 += shared19260.unk19260[r7].unk17;
+                }
+                //_080AD02C
+                gTasks[taskId].data[0] = 16;
+            }
+        }
+        return;
+    case 16:
+    //_080AD040
+        if (!(shared19260.unk19338[r7].unk2 & 4))
+        {
+            gTasks[taskId].data[10] = 0;
+            gTasks[taskId].data[0] = 17;
+        }
+        return;
+    case 17:
+    //_080AD070
+        if (shared19260.unk19260[r7].unk15 & 1)
+        {
+            sub_80AF138();
+            StringCopy(gStringVar1, gContestMons[r7].nickname);
+            StringExpandPlaceholders(gStringVar4, gUnknown_083CC075);
+            sub_8002EB0(&gMenuWindow, gStringVar4, 776, 1, 15);
+            gTasks[taskId].data[10] = 0;
+            sub_80B1710();
+            gTasks[taskId].data[0] = 46;
+        }
+        //_080AD0E8
+        else
+        {
+            gTasks[taskId].data[0] = 41;
+        }
+        return;
+    case 46:
+    //_080AD0FA
+        if (!shared19204.unk1920A_4)
+            gTasks[taskId].data[0] = 19;
+        return;
+    case 19:
+    //_080AD11A
+        if (sub_80037A0(&gMenuWindow) != 0)
+        {
+            sub_80AFBA0(
+              shared19260.unk19260[r7].unk2,
+              -shared19260.unk19260[r7].unk18,
+              r7);
+            shared19260.unk19260[r7].unk2 -= shared19260.unk19260[r7].unk18;
+            gTasks[taskId].data[0] = 18;
+        }
+        return;
+    case 18:
+    //_080AD168
+        sub_80B0D7C();
+        if (!(shared19260.unk19338[r7].unk2 & 4))
+        {
+            gTasks[taskId].data[10] = 0;
+            sub_80AF138();
+            gTasks[taskId].data[0] = 41;
+        }
+        return;
+    case 41:
+    //_080AD1A4
+        if (shared)
+    }
 }
 */
