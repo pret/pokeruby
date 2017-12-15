@@ -28,7 +28,7 @@ IslandCave_EventScript_15EEDE:: @ 815EEDE
 	return
 
 IslandCave_MapScript1_15EF15:: @ 815EF15
-	setflag 2133
+	setflag FLAG_LANDMARK_ISLAND_CAVE
 	end
 
 S_OpenRegiceChamber:: @ 815EF19

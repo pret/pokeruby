@@ -28,7 +28,7 @@ FortreeCity_Gym_EventScript_157F15:: @ 8157F15
 	waitmessage
 	call FortreeCity_Gym_EventScript_1A02C5
 	msgbox FortreeCity_Gym_Text_185E73, 4
-	setflag 1225
+	setflag FLAG_DEFEATED_FORTREE_GYM
 	setflag BADGE06_GET
 	setvar 0x8008, 6
 	call FortreeCity_Gym_EventScript_1A01C0
@@ -67,7 +67,7 @@ FortreeCity_Gym_EventScript_157FA7:: @ 8157FA7
 FortreeCity_Gym_EventScript_157FBE:: @ 8157FBE
 	lock
 	faceplayer
-	checkflag 1225
+	checkflag FLAG_DEFEATED_FORTREE_GYM
 	goto_if_eq FortreeCity_Gym_EventScript_157FD3
 	msgbox FortreeCity_Gym_Text_18589C, 4
 	release

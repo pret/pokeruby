@@ -64,15 +64,15 @@ LilycoveCity_EventScript_14CB74:: @ 814CB74
 	lock
 	faceplayer
 	dodailyevents
-	checkflag 2255
+	checkflag FLAG_DAILY_RECEIVED_BERRY_LILYCOVE
 	goto_if_eq LilycoveCity_EventScript_14CBB4
 	msgbox LilycoveCity_Text_1C5A7A, 4
 	random 10
-	addvar RESULT, 133
+	addvar RESULT, ITEM_CHERI_BERRY
 	giveitem RESULT
 	compare RESULT, 0
 	goto_if_eq LilycoveCity_EventScript_1A029B
-	setflag 2255
+	setflag FLAG_DAILY_RECEIVED_BERRY_LILYCOVE
 	msgbox LilycoveCity_Text_1C5B1D, 4
 	release
 	end

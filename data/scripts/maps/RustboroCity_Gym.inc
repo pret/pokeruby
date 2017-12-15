@@ -14,7 +14,7 @@ RustboroCity_Gym_EventScript_1578FE:: @ 81578FE
 	waitmessage
 	call RustboroCity_Gym_EventScript_1A02C5
 	msgbox RustboroCity_Gym_Text_1840D5, 4
-	setflag 1201
+	setflag FLAG_DEFEATED_RUSTBORO_GYM
 	setflag BADGE01_GET
 	setvar 0x405a, 1
 	addvar 0x4085, 1
@@ -47,7 +47,7 @@ RustboroCity_Gym_EventScript_157977:: @ 8157977
 RustboroCity_Gym_EventScript_15798E:: @ 815798E
 	lock
 	faceplayer
-	checkflag 1201
+	checkflag FLAG_DEFEATED_RUSTBORO_GYM
 	goto_if_eq RustboroCity_Gym_EventScript_1579A3
 	msgbox RustboroCity_Gym_Text_183A4B, 4
 	release

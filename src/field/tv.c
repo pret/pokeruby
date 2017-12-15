@@ -674,7 +674,7 @@ void GabbyAndTyBeforeInterview(void)
 
     TakeTVShowInSearchOfTrainersOffTheAir();
     if (gSaveBlock1.gabbyAndTyData.lastMove == 0)
-        FlagSet(1);
+        FlagSet(FLAG_TEMP_1);
 }
 
 void sub_80BDC14(void)

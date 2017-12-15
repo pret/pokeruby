@@ -121,13 +121,13 @@ Route111_EventScript_1500C5:: @ 81500C5
 	lock
 	faceplayer
 	dodailyevents
-	checkflag 2252
+	checkflag FLAG_DAILY_RECEIVED_BERRY_ROUTE111
 	goto_if_eq Route111_EventScript_150100
 	msgbox Route111_Text_1C56F0, 4
 	giveitem ITEM_RAZZ_BERRY
 	compare RESULT, 0
 	goto_if_eq Route111_EventScript_1A029B
-	setflag 2252
+	setflag FLAG_DAILY_RECEIVED_BERRY_ROUTE111
 	special GetPlayerBigGuyGirlString
 	msgbox Route111_Text_1C5781, 4
 	release
@@ -236,7 +236,7 @@ Route111_EventScript_1501C9:: @ 81501C9
 Route111_EventScript_1501D1:: @ 81501D1
 	lock
 	faceplayer
-	setflag 2115
+	setflag FLAG_LANDMARK_WINSTRATE_FAMILY
 	msgbox Route111_Text_16F705, 5
 	compare RESULT, 1
 	goto_if_eq Route111_EventScript_1501F3

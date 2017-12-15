@@ -5,7 +5,7 @@ Route110_TrickHouseEntrance_MapScripts:: @ 8160F2B
 	.byte 0
 
 Route110_TrickHouseEntrance_MapScript1_160F3B:: @ 8160F3B
-	setflag 2114
+	setflag FLAG_LANDMARK_TRICK_HOUSE
 	compare 0x40b5, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_160FCE
 	compare 0x40c1, 1

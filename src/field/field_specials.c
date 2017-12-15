@@ -1881,14 +1881,14 @@ bool8 ScrSpecial_AreLeadMonEVsMaxedOut(void)
 
 u8 sub_810F5BC(void)
 {
-    if (!FlagGet(0xc7) && gSaveBlock1.location.mapGroup == MAP_GROUP(RUSTURF_TUNNEL) && gSaveBlock1.location.mapNum == MAP_NUM(RUSTURF_TUNNEL))
+    if (!FlagGet(FLAG_RUSTURF_TUNNEL_OPENED) && gSaveBlock1.location.mapGroup == MAP_GROUP(RUSTURF_TUNNEL) && gSaveBlock1.location.mapNum == MAP_NUM(RUSTURF_TUNNEL))
     {
-        if (FlagGet(0x3a3))
+        if (FlagGet(FLAG_HIDE_RUSTURF_TUNNEL_ROCK_1))
         {
             VarSet(VAR_0x409a, 4);
             return TRUE;
         }
-        else if (FlagGet(0x3a4))
+        else if (FlagGet(FLAG_HIDE_RUSTURF_TUNNEL_ROCK_2))
         {
             VarSet(VAR_0x409a, 5);
             return TRUE;
@@ -2002,7 +2002,7 @@ static void sub_810F814(u8 taskId)
 
 bool8 sub_810F828(void)
 {
-    return FlagGet(0x2b8);
+    return FlagGet(FLAG_UNKNOWN_2B8);
 }
 
 void SetRoute119Weather(void)

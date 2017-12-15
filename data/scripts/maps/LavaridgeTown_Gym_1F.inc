@@ -81,7 +81,7 @@ LavaridgeTown_Gym_1F_EventScript_153766:: @ 8153766
 	waitmessage
 	call LavaridgeTown_Gym_1F_EventScript_1A02C5
 	msgbox LavaridgeTown_Gym_1F_Text_176A8C, 4
-	setflag 1213
+	setflag FLAG_DEFEATED_LAVARIDGE_GYM
 	setflag BADGE04_GET
 	addvar 0x4085, 1
 	compare 0x4085, 6
@@ -135,7 +135,7 @@ LavaridgeTown_Gym_1F_EventScript_15383E:: @ 815383E
 LavaridgeTown_Gym_1F_EventScript_153859:: @ 8153859
 	lock
 	faceplayer
-	checkflag 1213
+	checkflag FLAG_DEFEATED_LAVARIDGE_GYM
 	goto_if_eq LavaridgeTown_Gym_1F_EventScript_15386E
 	msgbox LavaridgeTown_Gym_1F_Text_176312, 4
 	release

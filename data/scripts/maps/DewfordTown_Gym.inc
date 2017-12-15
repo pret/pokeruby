@@ -112,7 +112,7 @@ DewfordTown_Gym_EventScript_153177:: @ 8153177
 	waitmessage
 	call DewfordTown_Gym_EventScript_1A02C5
 	msgbox DewfordTown_Gym_Text_1752E6, 4
-	setflag 1204
+	setflag FLAG_DEFEATED_DEWFORD_GYM
 	setflag BADGE02_GET
 	addvar 0x4085, 1
 	compare 0x4085, 6
@@ -164,7 +164,7 @@ DewfordTown_Gym_EventScript_153238:: @ 8153238
 DewfordTown_Gym_EventScript_15323F:: @ 815323F
 	lock
 	faceplayer
-	checkflag 1204
+	checkflag FLAG_DEFEATED_DEWFORD_GYM
 	goto_if_eq DewfordTown_Gym_EventScript_153254
 	msgbox DewfordTown_Gym_Text_174D98, 4
 	release

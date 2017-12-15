@@ -3,7 +3,7 @@ Route104_MrBrineysHouse_MapScripts:: @ 815BCB2
 	.byte 0
 
 Route104_MrBrineysHouse_MapScript1_15BCB8:: @ 815BCB8
-	setflag 2109
+	setflag FLAG_LANDMARK_MR_BRINEY_HOUSE
 	compare 0x4090, 1
 	call_if 1, Route104_MrBrineysHouse_EventScript_15BCD4
 	checkflag FLAG_RECEIVED_POKENAV

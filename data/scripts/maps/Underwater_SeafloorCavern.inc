@@ -5,7 +5,7 @@ Underwater_SeafloorCavern_MapScripts:: @ 815D99E
 	.byte 0
 
 Underwater_SeafloorCavern_MapScript1_15D9AE:: @ 815D9AE
-	setflag 2119
+	setflag FLAG_LANDMARK_SEAFLOOR_CAVERN
 	checkflag FLAG_LEGEND_ESCAPED_SEAFLOOR_CAVERN
 	goto_if_eq Underwater_SeafloorCavern_EventScript_15D9BB
 	end

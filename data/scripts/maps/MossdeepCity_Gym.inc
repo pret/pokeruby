@@ -61,7 +61,7 @@ MossdeepCity_Gym_EventScript_15A594:: @ 815A594
 	waitmessage
 	call MossdeepCity_Gym_EventScript_1A02C5
 	msgbox MossdeepCity_Gym_Text_18D128, 4
-	setflag 1229
+	setflag FLAG_DEFEATED_MOSSDEEP_GYM
 	setflag BADGE07_GET
 	clearflag FLAG_HIDE_BRINEY_SLATEPORT_SHIPYARD
 	clearflag FLAG_UNKNOWN_393
@@ -210,7 +210,7 @@ MossdeepCity_Gym_EventScript_15A7C1:: @ 815A7C1
 MossdeepCity_Gym_EventScript_15A7D8:: @ 815A7D8
 	lock
 	faceplayer
-	checkflag 1229
+	checkflag FLAG_DEFEATED_MOSSDEEP_GYM
 	goto_if_eq MossdeepCity_Gym_EventScript_15A7ED
 	msgbox MossdeepCity_Gym_Text_18C7E3, 4
 	release

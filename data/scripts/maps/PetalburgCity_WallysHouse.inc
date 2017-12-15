@@ -8,7 +8,7 @@ PetalburgCity_WallysHouse_EventScript_1543C4:: @ 81543C4
 	goto_if_eq PetalburgCity_WallysHouse_EventScript_1543F7
 	checkflag FLAG_RECEIVED_HM03
 	goto_if_eq PetalburgCity_WallysHouse_EventScript_154427
-	checkflag 1217
+	checkflag FLAG_DEFEATED_PETALBURG_GYM
 	goto_if_eq PetalburgCity_WallysHouse_EventScript_154406
 	checkflag FLAG_THANKED_FOR_PLAYING_WITH_WALLY
 	goto_if_eq PetalburgCity_WallysHouse_EventScript_15443B
@@ -51,7 +51,7 @@ PetalburgCity_WallysHouse_EventScript_154445:: @ 8154445
 	faceplayer
 	checkflag FLAG_RECEIVED_HM03
 	goto_if_eq PetalburgCity_WallysHouse_EventScript_15446D
-	checkflag 1217
+	checkflag FLAG_DEFEATED_PETALBURG_GYM
 	goto_if_eq PetalburgCity_WallysHouse_EventScript_154463
 	msgbox PetalburgCity_WallysHouse_Text_179C2C, 4
 	release

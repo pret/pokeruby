@@ -100,7 +100,7 @@ SootopolisCity_Gym_1F_EventScript_15B02D:: @ 815B02D
 	waitmessage
 	call SootopolisCity_Gym_1F_EventScript_1A02C5
 	msgbox SootopolisCity_Gym_1F_Text_18F36B, 4
-	setflag 1236
+	setflag FLAG_DEFEATED_SOOTOPOLIS_GYM
 	setflag BADGE08_GET
 	setvar 0x8008, 8
 	call SootopolisCity_Gym_1F_EventScript_1A01C0
@@ -124,7 +124,7 @@ SootopolisCity_Gym_1F_EventScript_15B07A:: @ 815B07A
 SootopolisCity_Gym_1F_EventScript_15B084:: @ 815B084
 	lock
 	faceplayer
-	checkflag 1236
+	checkflag FLAG_DEFEATED_SOOTOPOLIS_GYM
 	goto_if_eq SootopolisCity_Gym_1F_EventScript_15B099
 	msgbox SootopolisCity_Gym_1F_Text_18E8A5, 4
 	release

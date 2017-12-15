@@ -1344,7 +1344,7 @@ S_WhiteOut:: @ 819FC74
 EventScript_19FC84:
 	checkflag FLAG_RECEIVED_GO_GOGGLES
 	goto_if_eq Route101_EventScript_1A14DC
-	checkflag 1213
+	checkflag FLAG_DEFEATED_LAVARIDGE_GYM
 	goto_if 0, Route101_EventScript_1A14DC
 	clearflag FLAG_HIDE_RIVAL_LAVARIDGE_1
 	setvar 0x4053, 2
@@ -1392,10 +1392,10 @@ EventScript_19FCF0:
 	end
 
 EverGrandeCity_HallOfFame_EventScript_19FD09:: @ 819FD09
-	clearflag 1245
-	clearflag 1246
-	clearflag 1247
-	clearflag 1248
+	clearflag FLAG_DEFEATED_ELITE_4_SYDNEY
+	clearflag FLAG_DEFEATED_ELITE_4_PHOEBE
+	clearflag FLAG_DEFEATED_ELITE_4_GLACIA
+	clearflag FLAG_DEFEATED_ELITE_4_DRAKE
 	setvar 0x409c, 0
 	return
 
@@ -1410,7 +1410,7 @@ SlateportCity_PokemonCenter_1F_EventScript_19FD1B:: @ 819FD1B
 VerdanturfTown_PokemonCenter_1F_EventScript_19FD1B:: @ 819FD1B
 	checkflag FLAG_RECEIVED_POKENAV
 	goto_if 0, OldaleTown_PokemonCenter_1F_EventScript_1A14DC
-	checkflag 1217
+	checkflag FLAG_DEFEATED_PETALBURG_GYM
 	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_1A14DC
 	checkflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE104
 	goto_if 0, OldaleTown_PokemonCenter_1F_EventScript_19FD49
@@ -1723,9 +1723,9 @@ EventScript_1A0070:
 
 EventScript_1A0085:
 	playse 2
-	checkflag 2123
+	checkflag SYS_PC_LANETTE
 	call_if 0, EventScript_1A00AC
-	checkflag 2123
+	checkflag SYS_PC_LANETTE
 	call_if 1, EventScript_1A00B5
 	msgbox UnknownString_81A0A35, 4
 	special ShowPokemonStorageSystem
@@ -2366,9 +2366,9 @@ MagmaHideout_B1F_EventScript_1A04FD:: @ 81A04FD
 	delay 40
 	waitpokecry
 	setflag FLAG_HIDE_ELECTRODE_1_HIDEOUT
-	setflag 2145
+	setflag SYS_CTRL_OBJ_DELETE
 	dowildbattle
-	clearflag 2145
+	clearflag SYS_CTRL_OBJ_DELETE
 	release
 	end
 
@@ -2382,9 +2382,9 @@ MagmaHideout_B1F_EventScript_1A051B:: @ 81A051B
 	delay 40
 	waitpokecry
 	setflag FLAG_HIDE_ELECTRODE_2_HIDEOUT
-	setflag 2145
+	setflag SYS_CTRL_OBJ_DELETE
 	dowildbattle
-	clearflag 2145
+	clearflag SYS_CTRL_OBJ_DELETE
 	release
 	end
 
@@ -2479,9 +2479,9 @@ Route119_EventScript_1A05C3:: @ 81A05C3
 	call_if 1, Route119_EventScript_1A065A
 	compare 0x8004, 7
 	call_if 1, Route119_EventScript_1A065E
-	setflag 2145
+	setflag SYS_CTRL_OBJ_DELETE
 	dowildbattle
-	clearflag 2145
+	clearflag SYS_CTRL_OBJ_DELETE
 	release
 	end
 

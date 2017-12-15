@@ -2322,12 +2322,12 @@ void sub_80FF474(void)
     u8 j;
     for (i=0; i<14; i++)
     {
-        if (FlagGet(i + 0xae) == 1)
+        if (FlagGet(i + FLAG_DECORATION_2) == 1)
         {
-            FlagClear(i + 0xae);
+            FlagClear(i + FLAG_DECORATION_2);
             for (j=0; j<gMapHeader.events->mapObjectCount; j++)
             {
-                if (gMapHeader.events->mapObjects[j].flagId == i + 0xae)
+                if (gMapHeader.events->mapObjects[j].flagId == i + FLAG_DECORATION_2)
                 {
                     break;
                 }

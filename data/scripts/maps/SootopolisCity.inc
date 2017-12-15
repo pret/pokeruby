@@ -92,16 +92,16 @@ SootopolisCity_EventScript_14D19F:: @ 814D19F
 	faceplayer
 	dodailyevents
 	special GetPlayerBigGuyGirlString
-	checkflag 2258
+	checkflag FLAG_DAILY_RECEIVED_BERRY_SOOTOPOLIS
 	goto_if_eq SootopolisCity_EventScript_14D241
 	msgbox SootopolisCity_Text_1C63F2, 4
 	random 10
 	addvar RESULT, 20
-	addvar RESULT, 133
+	addvar RESULT, ITEM_CHERI_BERRY
 	giveitem RESULT
 	compare RESULT, 0
 	goto_if_eq SootopolisCity_EventScript_1A029B
-	setflag 2258
+	setflag FLAG_DAILY_RECEIVED_BERRY_SOOTOPOLIS
 	msgbox SootopolisCity_Text_1C64D0, 4
 	random 2
 	compare RESULT, 0
@@ -142,7 +142,7 @@ SootopolisCity_EventScript_14D25E:: @ 814D25E
 SootopolisCity_EventScript_14D268:: @ 814D268
 	lock
 	faceplayer
-	checkflag 1236
+	checkflag FLAG_DEFEATED_SOOTOPOLIS_GYM
 	goto_if_eq SootopolisCity_EventScript_14D27D
 	msgbox SootopolisCity_Text_16A4D6, 4
 	release

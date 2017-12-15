@@ -28,7 +28,7 @@ DesertRuins_EventScript_15CB1B:: @ 815CB1B
 	return
 
 DesertRuins_MapScript1_15CB52:: @ 815CB52
-	setflag 2134
+	setflag FLAG_LANDMARK_DESERT_RUINS
 	end
 
 DesertRuins_EventScript_15CB56:: @ 815CB56

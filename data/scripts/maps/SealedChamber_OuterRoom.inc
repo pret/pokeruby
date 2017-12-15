@@ -10,7 +10,7 @@ SealedChamber_OuterRoom_MapScript1_15F0D6:: @ 815F0D6
 	end
 
 SealedChamber_OuterRoom_MapScript1_15F0E7:: @ 815F0E7
-	setflag 2140
+	setflag FLAG_LANDMARK_SEALED_CHAMBER
 	end
 
 SealedChamber_OuterRoom_MapScript1_15F0EB:: @ 815F0EB

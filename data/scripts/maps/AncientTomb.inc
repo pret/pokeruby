@@ -14,7 +14,7 @@ AncientTomb_EventScript_15EFD8:: @ 815EFD8
 	return
 
 AncientTomb_MapScript1_15EFDC:: @ 815EFDC
-	setflag 2137
+	setflag FLAG_LANDMARK_ANCIENT_TOMB
 	end
 
 AncientTomb_MapScript1_15EFE0:: @ 815EFE0

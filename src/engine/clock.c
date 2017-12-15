@@ -45,7 +45,7 @@ static void UpdatePerDay(struct Time *time)
     if (days != time->days && days <= time->days)
     {
         newDays = time->days - days;
-        ClearUpperFlags();
+        ClearDailyFlags();
         UpdateDewfordTrendPerDay(newDays);
         UpdateTVShowsPerDay(newDays);
         UpdateWeatherPerDay(newDays);

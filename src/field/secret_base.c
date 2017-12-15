@@ -877,7 +877,7 @@ void sub_80BC56C(void)
 void sub_80BC5BC(void)
 {
     gSaveBlock1.secretBases[sub_80BC14C(gUnknown_020387DC)].sbr_field_1_6 ^= 1;
-    FlagSet(0x10C);
+    FlagSet(FLAG_DECORATION_16);
 }
 
 void SecretBasePC_Decoration(void)
@@ -1244,7 +1244,7 @@ void sub_80BCE90()
 {
     u16 curBaseIndex = VarGet(VAR_0x4054);
 
-    if (!FlagGet(0x8C2))
+    if (!FlagGet(FLAG_DAILY_UNKNOWN_8C2))
     {
         u8 i;
 
@@ -1253,7 +1253,7 @@ void sub_80BCE90()
             gSaveBlock1.secretBases[i].sbr_field_1_5 = 0;
         }
 
-        FlagSet(0x8C2);
+        FlagSet(FLAG_DAILY_UNKNOWN_8C2);
     }
 
     gSpecialVar_0x8004 = sub_80BCCA4(curBaseIndex);
@@ -1650,7 +1650,7 @@ void sub_80BD610(struct SecretBaseRecord *basesA, struct SecretBaseRecord *bases
 
 void sub_80BD674(void *playerRecords, u32 size, u8 c)
 {
-    if (FlagGet(0x60))
+    if (FlagGet(FLAG_RECEIVED_SECRET_POWER))
     {
         u16 i;
         u8 numLinkedPlayers = GetLinkPlayerCount();

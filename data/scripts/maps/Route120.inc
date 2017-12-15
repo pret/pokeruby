@@ -113,7 +113,7 @@ Route120_EventScript_151739:: @ 8151739
 	lock
 	faceplayer
 	dodailyevents
-	checkflag 2254
+	checkflag FLAG_DAILY_RECEIVED_BERRY_ROUTE120
 	goto_if_eq Route120_EventScript_151837
 	msgbox Route120_Text_1C58F1, 5
 	compare RESULT, 1
@@ -135,27 +135,27 @@ Route120_EventScript_151739:: @ 8151739
 	end
 
 Route120_EventScript_1517DC:: @ 81517DC
-	setvar 0x8004, 143
+	setvar 0x8004, ITEM_FIGY_BERRY
 	goto Route120_EventScript_151813
 	end
 
 Route120_EventScript_1517E7:: @ 81517E7
-	setvar 0x8004, 144
+	setvar 0x8004, ITEM_WIKI_BERRY
 	goto Route120_EventScript_151813
 	end
 
 Route120_EventScript_1517F2:: @ 81517F2
-	setvar 0x8004, 145
+	setvar 0x8004, ITEM_MAGO_BERRY
 	goto Route120_EventScript_151813
 	end
 
 Route120_EventScript_1517FD:: @ 81517FD
-	setvar 0x8004, 146
+	setvar 0x8004, ITEM_AGUAV_BERRY
 	goto Route120_EventScript_151813
 	end
 
 Route120_EventScript_151808:: @ 8151808
-	setvar 0x8004, 147
+	setvar 0x8004, ITEM_IAPAPA_BERRY
 	goto Route120_EventScript_151813
 	end
 
@@ -163,7 +163,7 @@ Route120_EventScript_151813:: @ 8151813
 	giveitem 0x8004
 	compare RESULT, 0
 	goto_if_eq Route120_EventScript_1A029B
-	setflag 2254
+	setflag FLAG_DAILY_RECEIVED_BERRY_ROUTE120
 	msgbox Route120_Text_1C5A0B, 4
 	release
 	end

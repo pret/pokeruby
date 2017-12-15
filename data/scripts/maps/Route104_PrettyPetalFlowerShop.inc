@@ -3,7 +3,7 @@ Route104_PrettyPetalFlowerShop_MapScripts:: @ 815BDE4
 	.byte 0
 
 Route104_PrettyPetalFlowerShop_MapScript1_15BDEA:: @ 815BDEA
-	setflag 2108
+	setflag FLAG_LANDMARK_FLOWER_SHOP
 	checkflag FLAG_MET_PRETTY_PETAL_SHOP_OWNER
 	goto_if 0, Route104_PrettyPetalFlowerShop_EventScript_15BE03
 	checkflag BADGE03_GET
@@ -90,15 +90,15 @@ Route104_PrettyPetalFlowerShop_EventScript_15BEDA:: @ 815BEDA
 	lock
 	faceplayer
 	dodailyevents
-	checkflag 2256
+	checkflag FLAG_DAILY_RECEIVED_BERRY_FLOWER_SHOP
 	goto_if_eq Route104_PrettyPetalFlowerShop_EventScript_15BF1A
 	msgbox Route104_PrettyPetalFlowerShop_Text_1C62DA, 4
 	random 8
-	addvar RESULT, 133
+	addvar RESULT, ITEM_CHERI_BERRY
 	giveitem RESULT
 	compare RESULT, 0
 	goto_if_eq Route104_PrettyPetalFlowerShop_EventScript_1A029B
-	setflag 2256
+	setflag FLAG_DAILY_RECEIVED_BERRY_FLOWER_SHOP
 	msgbox Route104_PrettyPetalFlowerShop_Text_1C6335, 4
 	release
 	end
