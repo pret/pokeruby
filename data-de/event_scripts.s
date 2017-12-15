@@ -1242,7 +1242,7 @@ gUnknown_0819FA81:: @ 819FA81
 	setflag FLAG_HIDE_RIVAL_ROUTE119
 	setflag FLAG_HIDE_CAVE_OF_ORIGIN_ENTRANCE_WOMAN_1
 	setflag FLAG_HIDE_CAVE_OF_ORIGIN_ENTRANCE_WOMAN_2
-	setflag 973
+	setflag FLAG_HIDE_STEVEN_SOOTOPOLIS
 	setflag FLAG_HIDE_LANETTE
 	setflag FLAG_HIDE_TRICKMASTER_ENTRANCE
 	setflag FLAG_HIDE_MT_CHIMNEY_PEOPLE
@@ -2365,7 +2365,7 @@ MagmaHideout_B1F_EventScript_1A04FD:: @ 81A04FD
 	playpokecry SPECIES_ELECTRODE, 2
 	delay 40
 	waitpokecry
-	setflag 977
+	setflag FLAG_HIDE_ELECTRODE_1_HIDEOUT
 	setflag 2145
 	dowildbattle
 	clearflag 2145
@@ -2381,7 +2381,7 @@ MagmaHideout_B1F_EventScript_1A051B:: @ 81A051B
 	playpokecry SPECIES_ELECTRODE, 2
 	delay 40
 	waitpokecry
-	setflag 978
+	setflag FLAG_HIDE_ELECTRODE_2_HIDEOUT
 	setflag 2145
 	dowildbattle
 	clearflag 2145

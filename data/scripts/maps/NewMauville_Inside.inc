@@ -169,7 +169,7 @@ NewMauville_Inside_EventScript_15E900:: @ 815E900
 	playpokecry SPECIES_VOLTORB, 2
 	delay 40
 	waitpokecry
-	setflag 974
+	setflag FLAG_HIDE_VOLTORB_1_NEW_MAUVILLE
 	setflag SYS_CTRL_OBJ_DELETE
 	dowildbattle
 	clearflag SYS_CTRL_OBJ_DELETE
@@ -184,7 +184,7 @@ NewMauville_Inside_EventScript_15E91E:: @ 815E91E
 	playpokecry SPECIES_VOLTORB, 2
 	delay 40
 	waitpokecry
-	setflag 975
+	setflag FLAG_HIDE_VOLTORB_2_NEW_MAUVILLE
 	setflag SYS_CTRL_OBJ_DELETE
 	dowildbattle
 	clearflag SYS_CTRL_OBJ_DELETE
@@ -199,7 +199,7 @@ NewMauville_Inside_EventScript_15E93C:: @ 815E93C
 	playpokecry SPECIES_VOLTORB, 2
 	delay 40
 	waitpokecry
-	setflag 976
+	setflag FLAG_HIDE_VOLTORB_3_NEW_MAUVILLE
 	setflag SYS_CTRL_OBJ_DELETE
 	dowildbattle
 	clearflag SYS_CTRL_OBJ_DELETE
