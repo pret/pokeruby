@@ -597,7 +597,7 @@ SECTIONS {
         src/pokemon/pokeblock_feed.o(.rodata);
         data/intro_credits_graphics.o(.rodata);
         src/scene/evolution_graphics.o(.rodata);
-        data/bard_music.o(.rodata);
+        src/field/bard_music.o(.rodata);
         data/unknown_debug_menu.o(.rodata);
         data/strings2.o(.rodata);
         data/menu_cursor.o(.rodata);
