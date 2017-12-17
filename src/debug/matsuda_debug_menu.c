@@ -18,7 +18,7 @@
 #include "ewram.h"
 
 extern u8 gUnknown_0203856C;
-extern u8 gUnknown_0203857D[][64];
+extern u8 gUnknown_0203857D[][64];  // TODO: This is actually part of gContestMons
 extern u16 gUnknown_02038670[];
 extern u16 gUnknown_02038678[];
 extern u16 gUnknown_02038680[];
