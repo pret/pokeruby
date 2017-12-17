@@ -99,7 +99,7 @@ struct UnknownContestStruct1
     u8 filler12;
     u8 unk13;
     u8 unk14;
-    u8 unk15_0:1;
+    u8 unk15_0:1;  // Is this a bitfield or not? sub_80ABCDC says no.
     u8 unk15_1:3;
     u8 unk15_4:1;
     u8 unk15_5:1;
@@ -850,14 +850,6 @@ void sub_80ABC70(u8 taskId)
     }
 }
 
-
-struct UnknownContestStruct2
-{
-    u16 unk0[4];
-    u8 filler8[56];
-};
-extern struct UnknownContestStruct2 gUnknown_0203858E[];
-
 extern const u8 gUnknown_083CA340[][4];
 
 #ifdef NONMATCHING
@@ -878,14 +870,13 @@ void sub_80ABCDC(u8 taskId)
 
     for (i = 0; i < 4; i++)
     {
-        u32 offset = i * 2 + gContestPlayerMonIndex * 64;
-        u16 r4 = *(u16 *)((u8 *)gUnknown_0203858E + offset);
+        u16 r4 = gContestMons[gContestPlayerMonIndex].moves[i];
         u8 *r5 = sp8;
 
         if (shared19260.unk19260[gContestPlayerMonIndex].unk8 != 0
          && sub_80B214C(gContestPlayerMonIndex) != 0
          && AreMovesContestCombo(shared19260.unk19260[gContestPlayerMonIndex].unk8, r4)
-         && shared19260.unk19260[gContestPlayerMonIndex].unk15 & 0x10)
+         && shared19260.unk19260[gContestPlayerMonIndex].unk15_4)
         {
             r5 = StringCopy(sp8, gUnknownText_UnknownFormatting2);
         }

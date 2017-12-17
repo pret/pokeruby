@@ -51,9 +51,9 @@ extern u16 gUnknown_02038678[];
 
 void sub_80C4BF0(void)
 {
-    gSaveBlock1.vars[0x10] = gContestMons[0].unk16;
-    gSaveBlock1.vars[0x11] = gContestMons[1].unk16;
-    gSaveBlock1.vars[0x12] = gContestMons[2].unk16;
+    gSaveBlock1.vars[0x10] = gContestMons[0].unk15;
+    gSaveBlock1.vars[0x11] = gContestMons[1].unk15;
+    gSaveBlock1.vars[0x12] = gContestMons[2].unk15;
 }
 
 void sub_80C4C28(void)
@@ -376,10 +376,10 @@ void ShowContestWinner(void)
 
 void sub_80C4F70(void)
 {
-    VarSet(0x4010, gContestMons[0].unk16);
-    VarSet(0x4011, gContestMons[1].unk16);
-    VarSet(0x4012, gContestMons[2].unk16);
-    VarSet(0x4013, gContestMons[3].unk16);
+    VarSet(0x4010, gContestMons[0].unk15);
+    VarSet(0x4011, gContestMons[1].unk15);
+    VarSet(0x4012, gContestMons[2].unk15);
+    VarSet(0x4013, gContestMons[3].unk15);
 }
 
 bool8 GiveMonArtistRibbon(void)
@@ -421,8 +421,8 @@ void ShowContestEntryMonPic(void)
 
         MenuDrawTextWindow(left, top, 19, 13);
         species = gContestMons[gSpecialVar_0x8006].species;
-        var1 = gContestMons[gSpecialVar_0x8006].unk38; // v2
-        var2 = gContestMons[gSpecialVar_0x8006].unk3C; // v3
+        var1 = gContestMons[gSpecialVar_0x8006].personality;
+        var2 = gContestMons[gSpecialVar_0x8006].otId;
         taskId = CreateTask(sub_80C5190, 0x50);
         gTasks[taskId].data[0] = 0;
         gTasks[taskId].data[1] = species;

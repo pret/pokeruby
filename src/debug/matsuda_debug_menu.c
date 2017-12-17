@@ -18,7 +18,6 @@
 #include "ewram.h"
 
 extern u8 gUnknown_0203856C;
-extern u8 gUnknown_0203857D[][64];  // TODO: This is actually part of gContestMons
 extern u16 gUnknown_02038670[];
 extern u16 gUnknown_02038678[];
 extern u16 gUnknown_02038680[];
@@ -576,19 +575,14 @@ void sub_80AA280(u8 var) // no?
 
     FillWindowRect_DefaultPalette(&gMenuWindow, 0, 0, 0, 0x1E, 3);
     StringCopy(gSharedMem, gMatsudaDebugMenu_StartText);
-    StringAppend(gSharedMem, &gUnknown_0203857D[var][0]);
+    StringAppend(gSharedMem, gContestMons[var].trainerName);
 
     for (i = 0; i < 4; i++)
     {
         if (var == i)
-        {
-            sub_8003460(&gMenuWindow, gSharedMem, (10 * i + 2), gUnknown_083C926E[i][0], gUnknown_083C926E[i][1]);
-        }
+            sub_8003460(&gMenuWindow, gSharedMem, 10 * i + 2, gUnknown_083C926E[i][0], gUnknown_083C926E[i][1]);
         else
-        {
-            u8 *ptr = gUnknown_0203857D[i];
-            sub_8003460(&gMenuWindow, ptr, (10 * i + 2), gUnknown_083C926E[i][0], gUnknown_083C926E[i][1]);
-        }
+            sub_8003460(&gMenuWindow, gContestMons[i].trainerName, 10 * i + 2, gUnknown_083C926E[i][0], gUnknown_083C926E[i][1]);
     }
 }
 
