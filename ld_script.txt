@@ -502,7 +502,6 @@ SECTIONS {
         src/engine/cable_club.o(.rodata);
         src/debug/mori_debug_menu.o(.rodata);
         src/field/trainer_see.o(.rodata);
-        data/trainer_see.o(.rodata);
         src/field/wild_encounter.o(.rodata);
         src/field/field_effect.o(.rodata);
         src/pokemon/pokemon_menu.o(.rodata);
