@@ -1,5 +1,6 @@
 #include "global.h"
 #include "constants/items.h"
+#include "constants/map_objects.h"
 #include "constants/songs.h"
 #include "battle_anim.h"
 #include "contest.h"
@@ -15,6 +16,7 @@
 #include "overworld.h"
 #include "palette.h"
 #include "random.h"
+#include "rom_8077ABC.h"
 #include "script.h"
 #include "sound.h"
 #include "sprite.h"
@@ -164,6 +166,8 @@ struct Shared19260
 #define shared19204 (*(struct Shared19204 *)(gSharedMem + 0x19204))
 #define shared19260 (*(struct Shared19260 *)(gSharedMem + 0x19260))
 
+extern u16 gScriptContestCategory;
+extern u16 gScriptContestRank;
 extern u8 gBattleMonForms[];
 extern u8 gDisplayedStringBattle[];
 extern u16 gBattleTypeFlags;
@@ -189,9 +193,21 @@ extern u16 gUnknown_030042C4;
 extern u32 gUnknown_03005D28;
 
 extern u16 gUnknown_02038680[];
+extern u8 gUnknown_02038694;
 extern u8 gUnknown_02038696[];
 extern u8 gUnknown_0203869B;
+extern u16 gUnknown_02038670[];
+extern struct SpriteTemplate gUnknown_02024E8C;
 
+#define gContestOpponents gUnknown_083C9408
+extern const struct ContestPokemon gContestOpponents[60];
+extern const u8 gUnknown_083CA308[][2];
+extern const u8 gUnknown_083CA310[][2];
+extern const struct CompressedSpriteSheet gUnknown_083CA4BC;
+extern const struct SpriteTemplate gSpriteTemplate_83CA4A4;
+extern const struct CompressedSpriteSheet gUnknown_083CA4C4;
+extern const struct CompressedSpritePalette gUnknown_083CA4CC;
+extern const struct SpriteTemplate gUnknown_083CA4D4;
 extern const u8 gUnknown_083CAF84[];
 extern const u8 gUnknown_083CAFAE[];
 extern const struct ContestMove gContestMoves[];
@@ -199,6 +215,7 @@ extern const u8 gUnknownText_UnknownFormatting2[];
 extern const u8 gUnknownText_UnknownFormatting3[];
 extern const u8 gUnknown_083CB02C[];
 extern const u8 *const gUnknown_083CB2F0[];
+extern const u8 gUnknown_083CC59C[];
 
 void sub_80AB350(void);
 void sub_80AB5D4(u8);
@@ -251,9 +268,14 @@ void sub_80ADFD8(u8);
 void sub_80AE010(void);
 void sub_80AE020(u8 *, s32);
 bool8 sub_80AE074(void);
+void sub_80AE5BC(u8);
+void sub_80AE5D4(u8, u8);
+void sub_80AE6CC(u8);
+void sub_80AE6E4(u8, u8);
 u8 sub_80AE858(void);
 u8 sub_80AE8B4(void);
-u8 sub_80AE9FC();
+u8 sub_80AE9FC(u16, u32, u32);
+u8 sub_80AEB1C(u16);
 void sub_80AEB30(void);
 void sub_80AEBEC(u16);
 void sub_80AED58(void);
@@ -303,6 +325,7 @@ void sub_80B2280(void);
 void sub_80B237C(u8);
 void sub_80B25E4();
 u16 sub_80B2760();
+u16 sub_80B2778(u16);
 void sub_80B2790();
 void sub_80B28CC();
 void sub_80B28F0();
@@ -5187,8 +5210,8 @@ bool8 sub_80AE074(void)
         return FALSE;
 }
 
-// CreateContestMon
-void sub_80AE098(u8 a)
+// CreatePlayerContestMon
+void sub_80AE098(u8 index)
 {
     u8 name[20];
     u16 heldItem;
@@ -5209,18 +5232,18 @@ void sub_80AE098(u8 a)
     }
     memcpy(gContestMons[gContestPlayerMonIndex].trainerName, name, 8);
     if (gSaveBlock2.playerGender == MALE)
-        gContestMons[gContestPlayerMonIndex].unk15 = 0xD8;
+        gContestMons[gContestPlayerMonIndex].trainerGfxId = MAP_OBJ_GFX_LINK_BRENDAN;
     else
-        gContestMons[gContestPlayerMonIndex].unk15 = 0xD9;
-    gContestMons[gContestPlayerMonIndex].unk18 = 0;
+        gContestMons[gContestPlayerMonIndex].trainerGfxId = MAP_OBJ_GFX_LINK_MAY;
+    gContestMons[gContestPlayerMonIndex].flags = 0;
     gContestMons[gContestPlayerMonIndex].unk2C = 0;
-    gContestMons[gContestPlayerMonIndex].species = GetMonData(&gPlayerParty[a], MON_DATA_SPECIES);
-    GetMonData(&gPlayerParty[a], MON_DATA_NICKNAME, name);
+    gContestMons[gContestPlayerMonIndex].species = GetMonData(&gPlayerParty[index], MON_DATA_SPECIES);
+    GetMonData(&gPlayerParty[index], MON_DATA_NICKNAME, name);
     StringGetEnd10(name);
     if (gIsLinkContest & 1)
     {
         StripExtCtrlCodes(name);
-        if (GetMonData(&gPlayerParty[a], MON_DATA_LANGUAGE) == LANGUAGE_JAPANESE)
+        if (GetMonData(&gPlayerParty[index], MON_DATA_LANGUAGE) == LANGUAGE_JAPANESE)
         {
             name[5] = EOS;
             name[10] = EXT_CTRL_CODE_BEGIN;
@@ -5234,20 +5257,20 @@ void sub_80AE098(u8 a)
         }
     }
     memcpy(gContestMons[gContestPlayerMonIndex].nickname, name, 11);
-    gContestMons[gContestPlayerMonIndex].cool = GetMonData(&gPlayerParty[a], MON_DATA_COOL);
-    gContestMons[gContestPlayerMonIndex].beauty = GetMonData(&gPlayerParty[a], MON_DATA_BEAUTY);
-    gContestMons[gContestPlayerMonIndex].cute = GetMonData(&gPlayerParty[a], MON_DATA_CUTE);
-    gContestMons[gContestPlayerMonIndex].smart = GetMonData(&gPlayerParty[a], MON_DATA_SMART);
-    gContestMons[gContestPlayerMonIndex].tough = GetMonData(&gPlayerParty[a], MON_DATA_TOUGH);
-    gContestMons[gContestPlayerMonIndex].sheen = GetMonData(&gPlayerParty[a], MON_DATA_SHEEN);
-    gContestMons[gContestPlayerMonIndex].moves[0] = GetMonData(&gPlayerParty[a], MON_DATA_MOVE1);
-    gContestMons[gContestPlayerMonIndex].moves[1] = GetMonData(&gPlayerParty[a], MON_DATA_MOVE2);
-    gContestMons[gContestPlayerMonIndex].moves[2] = GetMonData(&gPlayerParty[a], MON_DATA_MOVE3);
-    gContestMons[gContestPlayerMonIndex].moves[3] = GetMonData(&gPlayerParty[a], MON_DATA_MOVE4);
-    gContestMons[gContestPlayerMonIndex].personality = GetMonData(&gPlayerParty[a], MON_DATA_PERSONALITY);
-    gContestMons[gContestPlayerMonIndex].otId = GetMonData(&gPlayerParty[a], MON_DATA_OT_ID);
+    gContestMons[gContestPlayerMonIndex].cool = GetMonData(&gPlayerParty[index], MON_DATA_COOL);
+    gContestMons[gContestPlayerMonIndex].beauty = GetMonData(&gPlayerParty[index], MON_DATA_BEAUTY);
+    gContestMons[gContestPlayerMonIndex].cute = GetMonData(&gPlayerParty[index], MON_DATA_CUTE);
+    gContestMons[gContestPlayerMonIndex].smart = GetMonData(&gPlayerParty[index], MON_DATA_SMART);
+    gContestMons[gContestPlayerMonIndex].tough = GetMonData(&gPlayerParty[index], MON_DATA_TOUGH);
+    gContestMons[gContestPlayerMonIndex].sheen = GetMonData(&gPlayerParty[index], MON_DATA_SHEEN);
+    gContestMons[gContestPlayerMonIndex].moves[0] = GetMonData(&gPlayerParty[index], MON_DATA_MOVE1);
+    gContestMons[gContestPlayerMonIndex].moves[1] = GetMonData(&gPlayerParty[index], MON_DATA_MOVE2);
+    gContestMons[gContestPlayerMonIndex].moves[2] = GetMonData(&gPlayerParty[index], MON_DATA_MOVE3);
+    gContestMons[gContestPlayerMonIndex].moves[3] = GetMonData(&gPlayerParty[index], MON_DATA_MOVE4);
+    gContestMons[gContestPlayerMonIndex].personality = GetMonData(&gPlayerParty[index], MON_DATA_PERSONALITY);
+    gContestMons[gContestPlayerMonIndex].otId = GetMonData(&gPlayerParty[index], MON_DATA_OT_ID);
 
-    heldItem = GetMonData(&gPlayerParty[a], MON_DATA_HELD_ITEM);
+    heldItem = GetMonData(&gPlayerParty[index], MON_DATA_HELD_ITEM);
     cool   = gContestMons[gContestPlayerMonIndex].cool;
     beauty = gContestMons[gContestPlayerMonIndex].beauty;
     cute   = gContestMons[gContestPlayerMonIndex].cute;
@@ -5278,4 +5301,316 @@ void sub_80AE098(u8 a)
     gContestMons[gContestPlayerMonIndex].cute = cute;
     gContestMons[gContestPlayerMonIndex].smart = smart;
     gContestMons[gContestPlayerMonIndex].tough = tough;
+}
+
+void sub_80AE398(u8 a, u8 b)
+{
+    s32 i;
+    u8 opponentsCount = 0;
+    u8 opponents[64];
+
+    sub_80AE054();
+
+    // Find all suitable opponents
+    for (i = 0; i < 60; i++)
+    {
+        if (b == gContestOpponents[i].unk1C_0)
+        {
+            if      (a == 0 && gContestOpponents[i].unk1C_2)
+                opponents[opponentsCount++] = i;
+            else if (a == 1 && gContestOpponents[i].unk1C_3)
+                opponents[opponentsCount++] = i;
+            else if (a == 2 && gContestOpponents[i].unk1C_4)
+                opponents[opponentsCount++] = i;
+            else if (a == 3 && gContestOpponents[i].unk1C_5)
+                opponents[opponentsCount++] = i;
+            else if (a == 4 && gContestOpponents[i].unk1C_6)
+                opponents[opponentsCount++] = i;
+        }
+    }
+    opponents[opponentsCount] = 0xFF;
+
+    // Choose three random opponents from the list
+    for (i = 0; i < 3; i++)
+    {
+        u16 rnd = Random() % opponentsCount;
+        s32 j;
+
+        gContestMons[i] = gContestOpponents[opponents[rnd]];
+        for (j = rnd; opponents[j] != 0xFF; j++)
+            opponents[j] = opponents[j + 1];
+        opponentsCount--;
+    }
+
+#ifndef NONMATCHING
+    // Compiler, please put i in r5. Thanks.
+    asm(""::"r"(i));
+    asm(""::"r"(i));
+    asm(""::"r"(i));
+    asm(""::"r"(i));
+    asm(""::"r"(i));
+#endif
+
+    sub_80AE098(gUnknown_02038694);
+}
+
+// GetContestAvailability?
+u8 sub_80AE47C(struct Pokemon *pkmn)
+{
+    u8 ribbon;
+    u8 retVal;
+
+    if (GetMonData(pkmn, MON_DATA_IS_EGG))
+        return 3;
+    if (GetMonData(pkmn, MON_DATA_HP) == 0)
+        return 4;
+    switch (gScriptContestCategory)
+    {
+    case 0:
+        ribbon = GetMonData(pkmn, MON_DATA_COOL_RIBBON);
+        break;
+    case 1:
+        ribbon = GetMonData(pkmn, MON_DATA_BEAUTY_RIBBON);
+        break;
+    case 2:
+        ribbon = GetMonData(pkmn, MON_DATA_CUTE_RIBBON);
+        break;
+    case 3:
+        ribbon = GetMonData(pkmn, MON_DATA_SMART_RIBBON);
+        break;
+    case 4:
+        ribbon = GetMonData(pkmn, MON_DATA_TOUGH_RIBBON);
+        break;
+    default:
+        return 0;
+    }
+
+    // Couldn't get this to match any other way.
+    // Returns 2, 1, or 0 respectively if ribbon's rank is above, equal, or below
+    // the current contest rank.
+    if (ribbon > gScriptContestRank)
+        retVal = 2;
+    else if (ribbon >= gScriptContestRank)
+        retVal = 1;
+    else
+        retVal = 0;
+    return retVal;
+}
+
+void sub_80AE514(void)
+{
+    u8 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        FillWindowRect_DefaultPalette(
+          &gUnknown_03004210,
+          0,
+          gUnknown_083CA308[gUnknown_02038696[i]][0],
+          gUnknown_083CA308[gUnknown_02038696[i]][1],
+          gUnknown_083CA310[gUnknown_02038696[i]][0] + 5,
+          gUnknown_083CA310[gUnknown_02038696[i]][1] + 1);
+        sub_80AE5BC(i);
+        sub_80AE6CC(i);
+    }
+}
+
+u8 *sub_80AE598(u8 *dest, const u8 *b, u8 c)
+{
+    dest = StringCopy(dest, gUnknown_083CC59C);
+    *dest++ = c;
+    dest = StringCopy(dest, b);
+    return dest;
+}
+
+void sub_80AE5BC(u8 a)
+{
+    sub_80AE5D4(a, a + 10);
+}
+
+void sub_80AE5D4(u8 a, u8 b)
+{
+    u8 *str = gDisplayedStringBattle;
+
+    str = sub_80AE598(str, gEmptyString_81E72B0, b);
+    str[0] = EXT_CTRL_CODE_BEGIN;
+    str[1] = 6;
+    str[2] = 4;
+    str += 3;
+    *str++ = CHAR_SLASH;
+
+    if ((gIsLinkContest & 1) && gLinkPlayers[a].language == LANGUAGE_JAPANESE)
+    {
+        StringCopy(str, gLinkPlayers[a].name);
+        sub_8004D04(
+          &gUnknown_03004210,
+          gDisplayedStringBattle,
+          592 + gUnknown_02038696[a] * 22,
+          251 + gUnknown_083CA310[gUnknown_02038696[a]][0] * 8,
+          gUnknown_083CA310[gUnknown_02038696[a]][1] * 8,
+          1);
+    }
+    else
+    {
+        StringCopy(str, gContestMons[a].trainerName);
+        sub_8003460(
+          &gUnknown_03004210,
+          gDisplayedStringBattle,
+          592 + gUnknown_02038696[a] * 22,
+          gUnknown_083CA310[gUnknown_02038696[a]][0],
+          gUnknown_083CA310[gUnknown_02038696[a]][1]);
+    }
+}
+
+void sub_80AE6CC(u8 a)
+{
+    sub_80AE6E4(a, a + 10);
+}
+
+void sub_80AE6E4(u8 a, u8 b)
+{
+    u8 *str = gDisplayedStringBattle;
+
+    str[0] = EXT_CTRL_CODE_BEGIN;
+    str[1] = 6;
+    str[2] = 4;
+    str += 3;
+
+    str = sub_80AE598(str, gContestMons[a].nickname, b);
+    *str = EOS;
+
+    sub_8004D04(
+      &gUnknown_03004210,
+      gDisplayedStringBattle,
+      512 + gUnknown_02038696[a] * 20,
+      253 + gUnknown_083CA308[gUnknown_02038696[a]][0] * 8,
+      gUnknown_083CA308[gUnknown_02038696[a]][1] * 8,
+      1);
+}
+
+u16 sub_80AE770(u8 a, u8 b)
+{
+    u8 r5;
+    u8 r4;
+    u8 r3;
+
+    switch (b)
+    {
+    case 0:
+        r5 = gContestMons[a].cool;
+        r4 = gContestMons[a].tough;
+        r3 = gContestMons[a].beauty;
+        break;
+    case 1:
+        r5 = gContestMons[a].beauty;
+        r4 = gContestMons[a].cool;
+        r3 = gContestMons[a].cute;
+        break;
+    case 2:
+        r5 = gContestMons[a].cute;
+        r4 = gContestMons[a].beauty;
+        r3 = gContestMons[a].smart;
+        break;
+    case 3:
+        r5 = gContestMons[a].smart;
+        r4 = gContestMons[a].cute;
+        r3 = gContestMons[a].tough;
+        break;
+    case 4:
+    default:
+        r5 = gContestMons[a].tough;
+        r4 = gContestMons[a].smart;
+        r3 = gContestMons[a].cool;
+        break;
+    }
+    return r5 + (r4 + r3 + gContestMons[a].sheen) / 2;
+}
+
+void sub_80AE82C(u8 a)
+{
+    u8 i;
+
+    for (i = 0; i < 4; i++)
+        gUnknown_02038670[i] = sub_80AE770(i, a);
+}
+
+u8 sub_80AE858(void)
+{
+    u8 spriteId;
+
+    LoadCompressedObjectPic(&gUnknown_083CA4BC);
+    LoadCompressedPalette(gContest2Pal, 0x110, 32);
+    spriteId = CreateSprite(&gSpriteTemplate_83CA4A4, 112, 36, 30);
+    gSprites[spriteId].oam.paletteNum = 1;
+    gSprites[spriteId].callback = SpriteCallbackDummy;
+    return spriteId;
+}
+
+u8 sub_80AE8B4(void)
+{
+    u8 spriteId;
+
+    LoadCompressedObjectPic(&gUnknown_083CA4C4);
+    LoadCompressedObjectPalette(&gUnknown_083CA4CC);
+    spriteId = CreateSprite(&gUnknown_083CA4D4, 96, 10, 29);
+    gSprites[spriteId].invisible = TRUE;
+    gSprites[spriteId].data[0] = gSprites[spriteId].oam.tileNum;
+    return spriteId;
+}
+
+u8 unref_sub_80AE908(void)
+{
+    u16 species = gContestMons[gContestPlayerMonIndex].species;
+    u8 spriteId;
+
+    DecompressPicFromTable_2(
+      &gMonFrontPicTable[species],
+      gMonFrontPicCoords[species].coords,
+      gMonFrontPicCoords[species].y_offset,
+      (void *)0x02000000,
+      gUnknown_081FAF4C[1],
+      species);
+    LoadCompressedPalette(gMonPaletteTable[species].data, 0x110, 32);
+    GetMonSpriteTemplate_803C56C(gContestMons[gContestPlayerMonIndex].species, 1);
+    spriteId = CreateSprite(
+      &gUnknown_02024E8C,
+      112, 80 + (8 - gMonFrontPicCoords[gContestMons[gContestPlayerMonIndex].species].coords) * 4,
+      30);
+    gSprites[spriteId].oam.paletteNum = 1;
+    gSprites[spriteId].callback = SpriteCallbackDummy;
+    gSprites[spriteId].affineAnims = gSpriteAffineAnimTable_81E7C18;
+    StartSpriteAffineAnim(&gSprites[spriteId], 0);
+    return spriteId;
+}
+
+u8 sub_80AE9FC(u16 species, u32 otId, u32 personality)
+{
+    const u8 *lzPaletteData;
+    u8 spriteId;
+
+    species = sub_80B2778(species);
+    HandleLoadSpecialPokePic(
+      &gMonBackPicTable[species],
+      gMonBackPicCoords[species].coords,
+      gMonBackPicCoords[species].y_offset,
+      0x02000000,
+      gUnknown_081FAF4C[0],
+      species,
+      personality);
+    lzPaletteData = GetMonSpritePalFromOtIdPersonality(species, otId, personality);
+    LoadCompressedPalette(lzPaletteData, 0x120, 32);
+    GetMonSpriteTemplate_803C56C(species, 0);
+    spriteId = CreateSprite(&gUnknown_02024E8C, 112, sub_8077E44(2, species, 0), 30);
+    gSprites[spriteId].oam.paletteNum = 2;
+    gSprites[spriteId].oam.priority = 2;
+    gSprites[spriteId].subpriority = sub_8079E90(2);
+    gSprites[spriteId].callback = SpriteCallbackDummy;
+    gSprites[spriteId].data[0] = gSprites[spriteId].oam.paletteNum;
+    gSprites[spriteId].data[2] = species;
+    if (sub_80AEB1C(species) != 0)
+        gSprites[spriteId].affineAnims = gSpriteAffineAnimTable_81E7C18;
+    else
+        gSprites[spriteId].affineAnims = gSpriteAffineAnimTable_81E7BEC;
+    StartSpriteAffineAnim(&gSprites[spriteId], 0);
+    return spriteId;
 }

@@ -21,11 +21,18 @@ struct ContestPokemon
 	/*0x00*/ u16 species;
 	/*0x02*/ u8 nickname[POKEMON_NAME_LENGTH + 1];
 	/*0x0D*/ u8 trainerName[8];
-	/*0x15*/ u8 unk15;
+	/*0x15*/ u8 trainerGfxId;
 	/*0x16*/ u8 unk16;
 	/*0x17*/ u8 filler17;
-	/*0x18*/ u32 unk18;
-	/*0x1C*/ u8 filler1C[2];
+	/*0x18*/ u32 flags;
+    /*0x1C*/ u8 unk1C_0:2;
+             u8 unk1C_2:1;
+             u8 unk1C_3:1;
+             u8 unk1C_4:1;
+             u8 unk1C_5:1;
+             u8 unk1C_6:1;
+             u8 unk1C_7:1;
+             u8 filler1D;
 	/*0x1E*/ u16 moves[4]; // moves
 	/*0x26*/ u8 cool; // cool
 	/*0x27*/ u8 beauty; // beauty
@@ -46,9 +53,9 @@ void sub_80AB47C(void);
 void sub_80AE098(u8);
 void sub_80AE398(u8, u8);
 u8 sub_80AE47C(struct Pokemon *party);
-u32 sub_80AE770(u8, u8);
+u16 sub_80AE770(u8, u8);
 void sub_80AE82C(u8);
-u8 sub_80AEB1C();
+u8 sub_80AEB1C(u16);
 void sub_80AF668(void);
 void sub_80B0F28(u8);
 int sub_80B2A7C(u8);  //Don't know return type size

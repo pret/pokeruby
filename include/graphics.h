@@ -43,6 +43,9 @@ extern const u8 gUnknown_08D1A364[];
 extern const u8 gUnknown_08D1A490[];
 extern const u8 gUnknown_08D1A618[];
 
+extern const u8 gContestJudgeGfx[];
+extern const u8 gContest2Pal[];
+
 extern const u8 gMonFootprint_QuestionMark[];
 
 // data/graphics/pokemon/graphics.inc
