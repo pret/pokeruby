@@ -14,7 +14,7 @@ static void sub_8084894(struct Sprite *sprite, u16 a2, u8 a3);
 static void objc_exclamation_mark_probably(struct Sprite *sprite);
 static bool8 TrainerCanApproachPlayer(struct MapObject *);
 static void sub_80842C8(struct MapObject *, u8);
-static bool8 CheckPathBetweenTrainerAndPlayer(struct MapObject2 *trainerObj, u8 approachDistance, u8 direction);
+static bool8 CheckPathBetweenTrainerAndPlayer(struct MapObject *trainerObj, u8 approachDistance, u8 direction);
 static void RunTrainerSeeFuncList(u8 taskId);
 
 const u8 gSpriteImage_839B308[] = INCBIN_U8("graphics/unknown_sprites/839B4E0/0.4bpp");
@@ -84,14 +84,14 @@ static bool8 TrainerCanApproachPlayer(struct MapObject *trainerObj)
     if (trainerObj->trainerType == 1)  // can only see in one direction
     {
         approachDistance = sDirectionalApproachDistanceFuncs[trainerObj->mapobj_unk_18 - 1](trainerObj, trainerObj->trainerRange_berryTreeId, x, y);
-        return CheckPathBetweenTrainerAndPlayer((struct MapObject2 *)trainerObj, approachDistance, trainerObj->mapobj_unk_18);
+        return CheckPathBetweenTrainerAndPlayer(trainerObj, approachDistance, trainerObj->mapobj_unk_18);
     }
     else  // can see in all directions
     {
         for (i = 0; i < 4; i++)
         {
             approachDistance = sDirectionalApproachDistanceFuncs[i](trainerObj, trainerObj->trainerRange_berryTreeId, x, y);
-            if (CheckPathBetweenTrainerAndPlayer((struct MapObject2 *)trainerObj, approachDistance, i + 1)) // directions are 1-4 instead of 0-3. south north west east
+            if (CheckPathBetweenTrainerAndPlayer(trainerObj, approachDistance, i + 1)) // directions are 1-4 instead of 0-3. south north west east
                 return approachDistance;
         }
     }
@@ -148,7 +148,7 @@ static u8 GetTrainerApproachDistanceEast(struct MapObject *trainerObj, s16 range
 #define COLLISION_MASK 1
 #endif
 
-static bool8 CheckPathBetweenTrainerAndPlayer(struct MapObject2 *trainerObj, u8 approachDistance, u8 direction)
+static bool8 CheckPathBetweenTrainerAndPlayer(struct MapObject *trainerObj, u8 approachDistance, u8 direction)
 {
     s16 x, y;
     u8 unk19_temp;
@@ -164,21 +164,21 @@ static bool8 CheckPathBetweenTrainerAndPlayer(struct MapObject2 *trainerObj, u8 
 
     for (i = 0; i <= approachDistance - 1; i++, MoveCoords(direction, &x, &y))
     {
-        collision = sub_8060024((struct MapObject *)trainerObj, x, y, direction);
+        collision = sub_8060024(trainerObj, x, y, direction);
         if (collision != 0 && (collision & COLLISION_MASK))
             return FALSE;
     }
 
     // preserve mapobj_unk_19 before clearing.
-    unk19_temp = trainerObj->mapobj_unk_19;
-    unk19b_temp = trainerObj->mapobj_unk_19b;
-    trainerObj->mapobj_unk_19 = 0;
-    trainerObj->mapobj_unk_19b = 0;
+    unk19_temp = trainerObj->range.as_nybbles.x;
+    unk19b_temp = trainerObj->range.as_nybbles.y;
+    trainerObj->range.as_nybbles.x = 0;
+    trainerObj->range.as_nybbles.y = 0;
 
     collision = npc_block_way((struct MapObject *)trainerObj, x, y, direction);
 
-    trainerObj->mapobj_unk_19 = unk19_temp;
-    trainerObj->mapobj_unk_19b = unk19b_temp;
+    trainerObj->range.as_nybbles.x = unk19_temp;
+    trainerObj->range.as_nybbles.y = unk19b_temp;
     if (collision == 4)
         return approachDistance;
 
