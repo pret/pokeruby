@@ -3,12 +3,114 @@
 #include "palette.h"
 #include "sprite.h"
 
-extern const struct SpriteSheet gUnknown_0842F140[];
-extern const struct SpriteSheet gUnknown_0842F1C0[];
-extern const struct SpritePalette gUnknown_0842F240;
-extern const struct SpritePalette gUnknown_0842F248;
-extern const struct SpriteTemplate gSpriteTemplate_842F250[];
-extern const struct SpriteTemplate gSpriteTemplate_842F298[];
+EWRAM_DATA u16 gUnknown_0203A360[0x10] = {};
+EWRAM_DATA struct Subsprite gMenuCursorSubsprites[10] = {0};
+EWRAM_DATA u8 gUnknown_0203A3D0 = 0;
+EWRAM_DATA u8 gUnknown_0203A3D1 = 0;
+EWRAM_DATA u8 gUnknown_0203A3D2 = 0;
+EWRAM_DATA u8 gUnknown_0203A3D3 = 0;
+EWRAM_DATA u8 gUnknown_0203A3D4 = 0;
+
+const u8 OutlineCursorTiles_00[] = INCBIN_U8("graphics/interface/outline_cursor_00.4bpp");
+const u8 OutlineCursorTiles_01[] = INCBIN_U8("graphics/interface/outline_cursor_01.4bpp");
+const u8 OutlineCursorTiles_02[] = INCBIN_U8("graphics/interface/outline_cursor_02.4bpp");
+const u8 OutlineCursorTiles_03[] = INCBIN_U8("graphics/interface/outline_cursor_03.4bpp");
+const u8 OutlineCursorTiles_04[] = INCBIN_U8("graphics/interface/outline_cursor_04.4bpp");
+const u8 OutlineCursorTiles_05[] = INCBIN_U8("graphics/interface/outline_cursor_05.4bpp");
+const u8 OutlineCursorTiles_06[] = INCBIN_U8("graphics/interface/outline_cursor_06.4bpp");
+const u8 OutlineCursorTiles_07[] = INCBIN_U8("graphics/interface/outline_cursor_07.4bpp");
+const u8 OutlineCursorTiles_08[] = INCBIN_U8("graphics/interface/outline_cursor_08.4bpp");
+const u8 OutlineCursorTiles_09[] = INCBIN_U8("graphics/interface/outline_cursor_09.4bpp");
+const u8 OutlineCursorTiles_10[] = INCBIN_U8("graphics/interface/outline_cursor_10.4bpp");
+const u8 OutlineCursorTiles_11[] = INCBIN_U8("graphics/interface/outline_cursor_11.4bpp");
+const u8 OutlineCursorTiles_12[] = INCBIN_U8("graphics/interface/outline_cursor_12.4bpp");
+const u8 OutlineCursorTiles_13[] = INCBIN_U8("graphics/interface/outline_cursor_13.4bpp");
+const u8 OutlineCursorTiles_14[] = INCBIN_U8("graphics/interface/outline_cursor_14.4bpp");
+const u8 OutlineCursorTiles_15[] = INCBIN_U8("graphics/interface/outline_cursor_15.4bpp");
+
+const struct OamData gOamData_842F11C = {
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = ST_OAM_V_RECTANGLE
+};
+const struct OamData gOamData_842F124 = {
+    .objMode = ST_OAM_OBJ_WINDOW,
+    .shape = ST_OAM_V_RECTANGLE
+};
+const struct OamData gOamData_842F12C = {
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = ST_OAM_V_RECTANGLE
+};
+
+const union AnimCmd gSpriteAnim_842F134[] = {
+    ANIMCMD_FRAME(0, 63),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gSpriteAnimTable_842F13C[] = {
+    gSpriteAnim_842F134
+};
+
+const struct SpriteSheet gUnknown_0842F140[] = {
+    { OutlineCursorTiles_00, 0x1C0, 0xFFF0 },
+    { OutlineCursorTiles_01, 0x1C0, 0xFFF0 },
+    { OutlineCursorTiles_02, 0x1C0, 0xFFF0 },
+    { OutlineCursorTiles_03, 0x1C0, 0xFFF0 },
+    { OutlineCursorTiles_04, 0x1C0, 0xFFF0 },
+    { OutlineCursorTiles_05, 0x1C0, 0xFFF0 },
+    { OutlineCursorTiles_06, 0x1C0, 0xFFF0 },
+    { OutlineCursorTiles_07, 0x1C0, 0xFFF0 },
+    { OutlineCursorTiles_08, 0x1C0, 0xFFF0 },
+    { OutlineCursorTiles_09, 0x1C0, 0xFFF0 },
+    { OutlineCursorTiles_10, 0x1C0, 0xFFF0 },
+    { OutlineCursorTiles_11, 0x1C0, 0xFFF0 },
+    { OutlineCursorTiles_12, 0x1C0, 0xFFF0 },
+    { OutlineCursorTiles_13, 0x1C0, 0xFFF0 },
+    { OutlineCursorTiles_14, 0x1C0, 0xFFF0 },
+    { OutlineCursorTiles_15, 0x1C0, 0xFFF0 }
+};
+
+const struct SpriteSheet gUnknown_0842F1C0[] = {
+    { OutlineCursorTiles_00, 0x1C0, 0xFFF1 },
+    { OutlineCursorTiles_01, 0x1C0, 0xFFF1 },
+    { OutlineCursorTiles_02, 0x1C0, 0xFFF1 },
+    { OutlineCursorTiles_03, 0x1C0, 0xFFF1 },
+    { OutlineCursorTiles_04, 0x1C0, 0xFFF1 },
+    { OutlineCursorTiles_05, 0x1C0, 0xFFF1 },
+    { OutlineCursorTiles_06, 0x1C0, 0xFFF1 },
+    { OutlineCursorTiles_07, 0x1C0, 0xFFF1 },
+    { OutlineCursorTiles_08, 0x1C0, 0xFFF1 },
+    { OutlineCursorTiles_09, 0x1C0, 0xFFF1 },
+    { OutlineCursorTiles_10, 0x1C0, 0xFFF1 },
+    { OutlineCursorTiles_11, 0x1C0, 0xFFF1 },
+    { OutlineCursorTiles_12, 0x1C0, 0xFFF1 },
+    { OutlineCursorTiles_13, 0x1C0, 0xFFF1 },
+    { OutlineCursorTiles_14, 0x1C0, 0xFFF1 },
+    { OutlineCursorTiles_15, 0x1C0, 0xFFF1 }
+};
+
+const struct SpritePalette gUnknown_0842F240 = {
+    gUnknown_0203A360, 0xfff0
+};
+const struct SpritePalette gUnknown_0842F248 = {
+    gUnknown_0203A360, 0xfff1
+};
+
+const struct SpriteTemplate gSpriteTemplate_842F250[] = {
+    {
+        0xfff0, 0xfff0, &gOamData_842F11C, gSpriteAnimTable_842F13C, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+    }, {
+        0xfff0, 0xffff, &gOamData_842F11C, gSpriteAnimTable_842F13C, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+    }, {
+        0xfff0, 0xffff, &gOamData_842F124, gSpriteAnimTable_842F13C, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+    }
+};
+const struct SpriteTemplate gSpriteTemplate_842F298[] = {
+    {
+        0xfff1, 0xfff1, &gOamData_842F12C, gSpriteAnimTable_842F13C, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+    }, {
+        0xfff1, 0xffff, &gOamData_842F12C, gSpriteAnimTable_842F13C, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+    }
+};
 
 extern struct Subsprite *const gUnknown_0842F5BC[];
 
@@ -19,15 +121,6 @@ extern const struct SubspriteTable gUnknown_0842F758[];
 extern const struct Subsprite gUnknown_0842F780;
 extern const struct Subsprite gUnknown_0842F788;
 extern const struct Subsprite gUnknown_0842F790;
-
-extern u16 gUnknown_0203A360[];
-
-EWRAM_DATA struct Subsprite gMenuCursorSubsprites[10] = {0};
-EWRAM_DATA u8 gUnknown_0203A3D0 = 0;
-EWRAM_DATA u8 gUnknown_0203A3D1 = 0;
-EWRAM_DATA u8 gUnknown_0203A3D2 = 0;
-EWRAM_DATA u8 gUnknown_0203A3D3 = 0;
-EWRAM_DATA u8 gUnknown_0203A3D4 = 0;
 
 void sub_814A590(void)
 {
