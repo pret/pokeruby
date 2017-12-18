@@ -5,7 +5,7 @@ Route120_MapScripts:: @ 815160E
 	.byte 0
 
 Route120_MapScript1_15161E:: @ 815161E
-	checkflag SYS_CTRL_OBJ_DELETE
+	checkflag FLAG_SYS_CTRL_OBJ_DELETE
 	call_if 1, Route120_EventScript_151628
 	end
 
@@ -227,9 +227,9 @@ Route120_EventScript_15189D:: @ 815189D
 	waitpokecry
 	setwildbattle SPECIES_KECLEON, 30, ITEM_NONE
 	setvar 0x8004, 0
-	setflag SYS_CTRL_OBJ_DELETE
+	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	dowildbattle
-	clearflag SYS_CTRL_OBJ_DELETE
+	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	goto Route120_EventScript_151908
 	end
 

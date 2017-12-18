@@ -4,7 +4,7 @@ EverGrandeCity_PokemonLeague_MapScripts:: @ 815BA75
 
 EverGrandeCity_PokemonLeague_MapScript1_15BA7B:: @ 815BA7B
 	sethealplace 20
-	setflag SYS_POKEMON_LEAGUE_FLY
+	setflag FLAG_SYS_POKEMON_LEAGUE_FLY
 	checkflag FLAG_ENTERED_ELITE_FOUR
 	call_if 0, EverGrandeCity_PokemonLeague_EventScript_15BA8B
 	end
@@ -57,7 +57,7 @@ EverGrandeCity_PokemonLeague_EventScript_15BAD2:: @ 815BAD2
 	message EverGrandeCity_PokemonLeague_Text_1916FD
 	waitmessage
 	delay 75
-	checkflag BADGE06_GET
+	checkflag FLAG_BADGE06_GET
 	goto_if 0, EverGrandeCity_PokemonLeague_EventScript_15BB4A
 	closemessage
 	applymovement 3, EverGrandeCity_PokemonLeague_Movement_15BB7E

@@ -199,9 +199,9 @@ SlateportCity_EventScript_14BC33:: @ 814BC33
 
 SlateportCity_EventScript_14BC3C:: @ 814BC3C
 	lockall
-	checkflag SYS_GAME_CLEAR
+	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if_eq SlateportCity_EventScript_14BC63
-	checkflag BADGE07_GET
+	checkflag FLAG_BADGE07_GET
 	goto_if_eq SlateportCity_EventScript_14BC59
 	msgbox SlateportCity_Text_1658A0, 4
 	releaseall
@@ -235,7 +235,7 @@ SlateportCity_EventScript_14BC88:: @ 814BC88
 
 SlateportCity_EventScript_14BC91:: @ 814BC91
 	lockall
-	checkflag SYS_GAME_CLEAR
+	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if_eq SlateportCity_EventScript_14BCA5
 	msgbox SlateportCity_Text_165A8B, 4
 	releaseall

@@ -29,7 +29,7 @@ FortreeCity_Gym_EventScript_157F15:: @ 8157F15
 	call FortreeCity_Gym_EventScript_1A02C5
 	msgbox FortreeCity_Gym_Text_185E73, 4
 	setflag FLAG_DEFEATED_FORTREE_GYM
-	setflag BADGE06_GET
+	setflag FLAG_BADGE06_GET
 	setvar 0x8008, 6
 	call FortreeCity_Gym_EventScript_1A01C0
 	goto FortreeCity_Gym_EventScript_157F3E
@@ -80,14 +80,14 @@ FortreeCity_Gym_EventScript_157FD3:: @ 8157FD3
 
 FortreeCity_Gym_EventScript_157FDD:: @ 8157FDD
 	lockall
-	checkflag BADGE06_GET
+	checkflag FLAG_BADGE06_GET
 	goto_if_eq FortreeCity_Gym_EventScript_157FFD
 	goto FortreeCity_Gym_EventScript_158007
 	end
 
 FortreeCity_Gym_EventScript_157FED:: @ 8157FED
 	lockall
-	checkflag BADGE06_GET
+	checkflag FLAG_BADGE06_GET
 	goto_if_eq FortreeCity_Gym_EventScript_157FFD
 	goto FortreeCity_Gym_EventScript_158007
 	end

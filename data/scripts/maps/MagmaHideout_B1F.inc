@@ -3,7 +3,7 @@ MagmaHideout_B1F_MapScripts:: @ 815F2A8
 	.byte 0
 
 MagmaHideout_B1F_MapScript1_15F2AE:: @ 815F2AE
-	checkflag SYS_CTRL_OBJ_DELETE
+	checkflag FLAG_SYS_CTRL_OBJ_DELETE
 	call_if 1, MagmaHideout_B1F_EventScript_15F2B8
 	end
 

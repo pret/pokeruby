@@ -159,7 +159,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152E6D:: @ 8152E6D
 	message LittlerootTown_ProfessorBirchsLab_Text_17422F
 	waitfanfare
 	waitmessage
-	setflag SYS_POKEDEX_GET
+	setflag FLAG_SYS_POKEDEX_GET
 	return
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152E7B:: @ 8152E7B

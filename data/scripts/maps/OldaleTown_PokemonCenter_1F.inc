@@ -26,7 +26,7 @@ OldaleTown_PokemonCenter_1F_EventScript_152F2E:: @ 8152F2E
 OldaleTown_PokemonCenter_1F_EventScript_152F37:: @ 8152F37
 	lock
 	faceplayer
-	checkflag SYS_POKEDEX_GET
+	checkflag FLAG_SYS_POKEDEX_GET
 	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_152F4C
 	msgbox OldaleTown_PokemonCenter_1F_Text_1749C0, 4
 	release

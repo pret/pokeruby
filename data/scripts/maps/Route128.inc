@@ -4,7 +4,7 @@ Route128_MapScripts:: @ 815211B
 	.byte 0
 
 Route128_MapScript1_152126:: @ 8152126
-	checkflag SYS_WEATHER_CTRL
+	checkflag FLAG_SYS_WEATHER_CTRL
 	call_if 1, Route128_EventScript_1A02C1
 	call Route128_EventScript_1A0196
 	end

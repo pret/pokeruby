@@ -4,7 +4,7 @@ SouthernIsland_Interior_MapScripts:: @ 8160B53
 	.byte 0
 
 SouthernIsland_Interior_MapScript1_160B5E:: @ 8160B5E
-	checkflag SYS_CTRL_OBJ_DELETE
+	checkflag FLAG_SYS_CTRL_OBJ_DELETE
 	call_if 1, SouthernIsland_Interior_EventScript_160B68
 	end
 
@@ -46,7 +46,7 @@ SouthernIsland_Interior_EventScript_160B9B:: @ 8160B9B
 SouthernIsland_Interior_EventScript_160BA7:: @ 8160BA7
 	checkflag FLAG_ECOUNTERED_LATIAS_OR_LATIOS
 	goto_if_eq SouthernIsland_Interior_EventScript_160C08
-	checkflag SYS_HAS_EON_TICKET
+	checkflag FLAG_SYS_HAS_EON_TICKET
 	goto_if 0, SouthernIsland_Interior_EventScript_160C08
 	setflag FLAG_ECOUNTERED_LATIAS_OR_LATIOS
 	special SpawnCameraDummy
@@ -66,10 +66,10 @@ SouthernIsland_Interior_EventScript_160BA7:: @ 8160BA7
 	special RemoveCameraDummy
 	setwildbattle SPECIES_LATIAS_OR_LATIOS, 50, ITEM_SOUL_DEW
 	setflag FLAG_HIDE_LATIOS_OR_LATIAS_STATIONARY
-	setflag SYS_CTRL_OBJ_DELETE
+	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special ScrSpecial_StartSouthernIslandBattle
 	waitstate
-	clearflag SYS_CTRL_OBJ_DELETE
+	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	releaseall
 	end
 

@@ -1,7 +1,7 @@
 PetalburgCity_PokemonCenter_1F_EventScript_1B1B14:: @ 81B1B14
 	lock
 	faceplayer
-	checkflag SYS_CHAT_USED
+	checkflag FLAG_SYS_CHAT_USED
 	goto_if_eq PetalburgCity_PokemonCenter_1F_EventScript_1B1BDB
 	msgbox PetalburgCity_PokemonCenter_1F_Text_1B1C97, 4
 	goto PetalburgCity_PokemonCenter_1F_EventScript_1B1B2D
@@ -97,11 +97,11 @@ PetalburgCity_PokemonCenter_1F_EventScript_1B1C6D:: @ 81B1C6D
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_1B1C77:: @ 81B1C77
-	checkflag BADGE05_GET
+	checkflag FLAG_BADGE05_GET
 	goto_if 0, PetalburgCity_PokemonCenter_1F_EventScript_1B1C96
-	checkflag SYS_EXDATA_ENABLE
+	checkflag FLAG_SYS_EXDATA_ENABLE
 	goto_if_eq PetalburgCity_PokemonCenter_1F_EventScript_1B1C96
-	setflag SYS_EXDATA_ENABLE
+	setflag FLAG_SYS_EXDATA_ENABLE
 	msgbox PetalburgCity_PokemonCenter_1F_Text_1B21CC, 3
 	release
 	end

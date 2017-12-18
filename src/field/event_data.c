@@ -36,10 +36,10 @@ void ClearTempFieldEventData(void)
 {
     memset(gSaveBlock1.flags, 0, TEMP_FLAGS_SIZE);
     memset(gSaveBlock1.vars, 0, TEMP_VARS_SIZE);
-    FlagClear(SYS_ENC_UP_ITEM);
-    FlagClear(SYS_ENC_DOWN_ITEM);
-    FlagClear(SYS_USE_STRENGTH);
-    FlagClear(SYS_CTRL_OBJ_DELETE);
+    FlagClear(FLAG_SYS_ENC_UP_ITEM);
+    FlagClear(FLAG_SYS_ENC_DOWN_ITEM);
+    FlagClear(FLAG_SYS_USE_STRENGTH);
+    FlagClear(FLAG_SYS_CTRL_OBJ_DELETE);
 }
 
 // probably had different flag splits at one point.
@@ -53,7 +53,7 @@ void DisableNationalPokedex(void)
     u16 *nationalDexVar = GetVarPointer(VAR_NATIONAL_DEX);
     gSaveBlock2.pokedex.nationalMagic = 0;
     *nationalDexVar = 0;
-    FlagClear(SYS_NATIONAL_DEX);
+    FlagClear(FLAG_SYS_NATIONAL_DEX);
 }
 
 void EnableNationalPokedex(void)
@@ -61,7 +61,7 @@ void EnableNationalPokedex(void)
     u16 *nationalDexVar = GetVarPointer(VAR_NATIONAL_DEX);
     gSaveBlock2.pokedex.nationalMagic = 0xDA;
     *nationalDexVar = 0x302;
-    FlagSet(SYS_NATIONAL_DEX);
+    FlagSet(FLAG_SYS_NATIONAL_DEX);
     gSaveBlock2.pokedex.unknown1 = 1;
     gSaveBlock2.pokedex.order = 0;
     sub_808C0A0();
@@ -69,7 +69,7 @@ void EnableNationalPokedex(void)
 
 bool32 IsNationalPokedexEnabled(void)
 {
-    if (gSaveBlock2.pokedex.nationalMagic == 0xDA && VarGet(VAR_NATIONAL_DEX) == 0x302 && FlagGet(SYS_NATIONAL_DEX))
+    if (gSaveBlock2.pokedex.nationalMagic == 0xDA && VarGet(VAR_NATIONAL_DEX) == 0x302 && FlagGet(FLAG_SYS_NATIONAL_DEX))
         return TRUE;
     else
         return FALSE;
@@ -77,34 +77,34 @@ bool32 IsNationalPokedexEnabled(void)
 
 void DisableMysteryGift(void)
 {
-    FlagClear(SYS_EXDATA_ENABLE);
+    FlagClear(FLAG_SYS_EXDATA_ENABLE);
 }
 
 void EnableMysteryGift(void)
 {
-    FlagSet(SYS_EXDATA_ENABLE);
+    FlagSet(FLAG_SYS_EXDATA_ENABLE);
 }
 
 bool32 IsMysteryGiftEnabled(void)
 {
-    return FlagGet(SYS_EXDATA_ENABLE);
+    return FlagGet(FLAG_SYS_EXDATA_ENABLE);
 }
 
 void DisableResetRTC(void)
 {
     VarSet(VAR_RESET_RTC_ENABLE, 0);
-    FlagClear(SYS_RESET_RTC_ENABLE);
+    FlagClear(FLAG_SYS_RESET_RTC_ENABLE);
 }
 
 void EnableResetRTC(void)
 {
     VarSet(VAR_RESET_RTC_ENABLE, 0x920);
-    FlagSet(SYS_RESET_RTC_ENABLE);
+    FlagSet(FLAG_SYS_RESET_RTC_ENABLE);
 }
 
 bool32 CanResetRTC(void)
 {
-    if (FlagGet(SYS_RESET_RTC_ENABLE) && VarGet(VAR_RESET_RTC_ENABLE) == 0x920)
+    if (FlagGet(FLAG_SYS_RESET_RTC_ENABLE) && VarGet(VAR_RESET_RTC_ENABLE) == 0x920)
         return TRUE;
     else
         return FALSE;

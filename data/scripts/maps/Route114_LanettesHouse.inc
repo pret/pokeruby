@@ -11,7 +11,7 @@ Route114_LanettesHouse_EventScript_15C262:: @ 815C262
 	faceplayer
 	checkflag FLAG_RECEIVED_DOLL_LANETTE
 	goto_if_eq Route114_LanettesHouse_EventScript_15C28F
-	setflag SYS_PC_LANETTE
+	setflag FLAG_SYS_PC_LANETTE
 	msgbox Route114_LanettesHouse_Text_192A0D, 4
 	.ifdef SAPPHIRE
 	givedecoration DECOR_LOTAD_DOLL

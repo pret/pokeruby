@@ -906,7 +906,7 @@ void ScriptMenu_CreatePCMenu(void)
     else
         width = 8;
 
-    if (FlagGet(SYS_GAME_CLEAR)) // player has cleared game?
+    if (FlagGet(FLAG_SYS_GAME_CLEAR)) // player has cleared game?
     {
         numChoices = 4;
         MenuDrawTextWindow(0, 0, width + 2, 9);
@@ -920,7 +920,7 @@ void ScriptMenu_CreatePCMenu(void)
         MenuPrint(gPCText_LogOff, 1, 5);
     }
 
-    if (FlagGet(SYS_PC_LANETTE)) // player met lanette?
+    if (FlagGet(FLAG_SYS_PC_LANETTE)) // player met lanette?
         MenuPrint(gPCText_LanettesPC, 1, 1);
     else
         MenuPrint(gPCText_SomeonesPC, 1, 1);

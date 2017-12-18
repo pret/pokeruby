@@ -4,7 +4,7 @@ ShoalCave_LowTideEntranceRoom_MapScripts:: @ 815E057
 
 ShoalCave_LowTideEntranceRoom_MapScript1_15E05D:: @ 815E05D
 	special UpdateShoalTideFlag
-	checkflag SYS_SHOAL_TIDE
+	checkflag FLAG_SYS_SHOAL_TIDE
 	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_15E06E
 	goto ShoalCave_LowTideEntranceRoom_EventScript_15E072
 
@@ -20,7 +20,7 @@ ShoalCave_LowTideEntranceRoom_EventScript_15E076:: @ 815E076
 	lock
 	faceplayer
 	dodailyevents
-	checkflag SYS_SHOAL_ITEM
+	checkflag FLAG_SYS_SHOAL_ITEM
 	call_if 1, ShoalCave_LowTideEntranceRoom_EventScript_15E176
 	checkitem ITEM_SHOAL_SALT, 4
 	compare RESULT, 0
@@ -98,5 +98,5 @@ ShoalCave_LowTideEntranceRoom_EventScript_15E176:: @ 815E176
 	clearflag FLAG_HIDE_TOOK_SHOAL_SHELL_2
 	clearflag FLAG_HIDE_TOOK_SHOAL_SHELL_3
 	clearflag FLAG_HIDE_TOOK_SHOAL_SHELL_4
-	clearflag SYS_SHOAL_ITEM
+	clearflag FLAG_SYS_SHOAL_ITEM
 	return

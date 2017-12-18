@@ -62,7 +62,7 @@ MossdeepCity_Gym_EventScript_15A594:: @ 815A594
 	call MossdeepCity_Gym_EventScript_1A02C5
 	msgbox MossdeepCity_Gym_Text_18D128, 4
 	setflag FLAG_DEFEATED_MOSSDEEP_GYM
-	setflag BADGE07_GET
+	setflag FLAG_BADGE07_GET
 	clearflag FLAG_HIDE_BRINEY_SLATEPORT_SHIPYARD
 	clearflag FLAG_UNKNOWN_393
 	setvar 0x8008, 7
@@ -228,14 +228,14 @@ MossdeepCity_Gym_Movement_15A7F7:: @ 815A7F7
 
 MossdeepCity_Gym_EventScript_15A7FA:: @ 815A7FA
 	lockall
-	checkflag BADGE07_GET
+	checkflag FLAG_BADGE07_GET
 	goto_if_eq MossdeepCity_Gym_EventScript_15A81A
 	goto MossdeepCity_Gym_EventScript_15A824
 	end
 
 MossdeepCity_Gym_EventScript_15A80A:: @ 815A80A
 	lockall
-	checkflag BADGE07_GET
+	checkflag FLAG_BADGE07_GET
 	goto_if_eq MossdeepCity_Gym_EventScript_15A81A
 	goto MossdeepCity_Gym_EventScript_15A824
 	end

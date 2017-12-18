@@ -3,7 +3,7 @@ EverGrandeCity_MapScripts:: @ 814D4D5
 	.byte 0
 
 EverGrandeCity_MapScript1_14D4DB:: @ 814D4DB
-	checkflag SYS_WEATHER_CTRL
+	checkflag FLAG_SYS_WEATHER_CTRL
 	call_if 1, EverGrandeCity_EventScript_1A02C1
 	end
 

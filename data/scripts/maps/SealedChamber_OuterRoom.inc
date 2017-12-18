@@ -14,7 +14,7 @@ SealedChamber_OuterRoom_MapScript1_15F0E7:: @ 815F0E7
 	end
 
 SealedChamber_OuterRoom_MapScript1_15F0EB:: @ 815F0EB
-	checkflag SYS_BRAILLE_DIG
+	checkflag FLAG_SYS_BRAILLE_DIG
 	call_if 0, SealedChamber_OuterRoom_EventScript_15F0F5
 	end
 
@@ -109,7 +109,7 @@ SealedChamber_OuterRoom_EventScript_15F1AA:: @ 815F1AA
 
 SealedChamber_OuterRoom_EventScript_15F1B8:: @ 815F1B8
 	lockall
-	checkflag SYS_BRAILLE_DIG
+	checkflag FLAG_SYS_BRAILLE_DIG
 	goto_if_eq SealedChamber_OuterRoom_EventScript_15F1CF
 	braillemessage SealedChamber_OuterRoom_Braille_1C53B1
 	waitbutton

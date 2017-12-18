@@ -89,7 +89,7 @@ SootopolisCity_Gym_1F_EventScript_15AFFF:: @ 815AFFF
 	trainerbattle 1, OPPONENT_WALLACE, 0, SootopolisCity_Gym_1F_Text_18F0CA, SootopolisCity_Gym_1F_Text_18F282, SootopolisCity_Gym_1F_EventScript_15B02D
 	checkflag FLAG_RECEIVED_TM03
 	goto_if 0, SootopolisCity_Gym_1F_EventScript_15B056
-	checkflag BADGE06_GET
+	checkflag FLAG_BADGE06_GET
 	goto_if 0, SootopolisCity_Gym_1F_EventScript_15B07A
 	msgbox SootopolisCity_Gym_1F_Text_18F4D7, 4
 	release
@@ -101,7 +101,7 @@ SootopolisCity_Gym_1F_EventScript_15B02D:: @ 815B02D
 	call SootopolisCity_Gym_1F_EventScript_1A02C5
 	msgbox SootopolisCity_Gym_1F_Text_18F36B, 4
 	setflag FLAG_DEFEATED_SOOTOPOLIS_GYM
-	setflag BADGE08_GET
+	setflag FLAG_BADGE08_GET
 	setvar 0x8008, 8
 	call SootopolisCity_Gym_1F_EventScript_1A01C0
 	goto SootopolisCity_Gym_1F_EventScript_15B056
@@ -137,14 +137,14 @@ SootopolisCity_Gym_1F_EventScript_15B099:: @ 815B099
 
 SootopolisCity_Gym_1F_EventScript_15B0A3:: @ 815B0A3
 	lockall
-	checkflag BADGE08_GET
+	checkflag FLAG_BADGE08_GET
 	goto_if_eq SootopolisCity_Gym_1F_EventScript_15B0C3
 	goto SootopolisCity_Gym_1F_EventScript_15B0CD
 	end
 
 SootopolisCity_Gym_1F_EventScript_15B0B3:: @ 815B0B3
 	lockall
-	checkflag BADGE08_GET
+	checkflag FLAG_BADGE08_GET
 	goto_if_eq SootopolisCity_Gym_1F_EventScript_15B0C3
 	goto SootopolisCity_Gym_1F_EventScript_15B0CD
 	end

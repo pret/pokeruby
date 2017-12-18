@@ -7,9 +7,9 @@ Event_TV:: @ 81A6E72
 	goto_if_eq EventScript_1A6F01
 	compare RESULT, 1
 	goto_if_eq EventScript_1A6F0B
-	checkflag SYS_TV_START
+	checkflag FLAG_SYS_TV_START
 	goto_if 0, EventScript_1A6EF1
-	checkflag SYS_TV_WATCH
+	checkflag FLAG_SYS_TV_WATCH
 	goto_if_eq EventScript_1A6EF1
 	specialvar RESULT, IsTVShowInSearchOfTrainersAiring
 	compare RESULT, 1
@@ -49,7 +49,7 @@ EventScript_1A6F0B:
 	msgbox UnknownString_8172C50, 4
 	.endif
 	special InitRoamer
-	clearflag SYS_TV_LATI
+	clearflag FLAG_SYS_TV_LATI
 	setflag FLAG_LATIOS_OR_LATIAS_ROAMING
 	special TurnOffTVScreen
 	releaseall
@@ -66,7 +66,7 @@ EventScript_1A6F21:
 
 EventScript_1A6F37:
 	special TurnOffTVScreen
-	setflag SYS_TV_WATCH
+	setflag FLAG_SYS_TV_WATCH
 	releaseall
 	end
 

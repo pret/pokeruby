@@ -63,37 +63,37 @@ Route110_TrickHouseEntrance_EventScript_160FDE:: @ 8160FDE
 	return
 
 Route110_TrickHouseEntrance_EventScript_16103C:: @ 816103C
-	checkflag BADGE03_GET
+	checkflag FLAG_BADGE03_GET
 	call_if 0, Route110_TrickHouseEntrance_EventScript_161088
 	return
 
 Route110_TrickHouseEntrance_EventScript_161046:: @ 8161046
-	checkflag BADGE04_GET
+	checkflag FLAG_BADGE04_GET
 	call_if 0, Route110_TrickHouseEntrance_EventScript_161088
 	return
 
 Route110_TrickHouseEntrance_EventScript_161050:: @ 8161050
-	checkflag BADGE05_GET
+	checkflag FLAG_BADGE05_GET
 	call_if 0, Route110_TrickHouseEntrance_EventScript_161088
 	return
 
 Route110_TrickHouseEntrance_EventScript_16105A:: @ 816105A
-	checkflag BADGE06_GET
+	checkflag FLAG_BADGE06_GET
 	call_if 0, Route110_TrickHouseEntrance_EventScript_161088
 	return
 
 Route110_TrickHouseEntrance_EventScript_161064:: @ 8161064
-	checkflag BADGE07_GET
+	checkflag FLAG_BADGE07_GET
 	call_if 0, Route110_TrickHouseEntrance_EventScript_161088
 	return
 
 Route110_TrickHouseEntrance_EventScript_16106E:: @ 816106E
-	checkflag BADGE08_GET
+	checkflag FLAG_BADGE08_GET
 	call_if 0, Route110_TrickHouseEntrance_EventScript_161088
 	return
 
 Route110_TrickHouseEntrance_EventScript_161078:: @ 8161078
-	checkflag SYS_GAME_CLEAR
+	checkflag FLAG_SYS_GAME_CLEAR
 	call_if 0, Route110_TrickHouseEntrance_EventScript_161088
 	return
 

@@ -6,7 +6,7 @@ Route104_PrettyPetalFlowerShop_MapScript1_15BDEA:: @ 815BDEA
 	setflag FLAG_LANDMARK_FLOWER_SHOP
 	checkflag FLAG_MET_PRETTY_PETAL_SHOP_OWNER
 	goto_if 0, Route104_PrettyPetalFlowerShop_EventScript_15BE03
-	checkflag BADGE03_GET
+	checkflag FLAG_BADGE03_GET
 	goto_if 0, Route104_PrettyPetalFlowerShop_EventScript_15BE03
 	setflag FLAG_TEMP_1
 	end

@@ -4,7 +4,7 @@ CaveOfOrigin_B4F_MapScripts:: @ 815DDAC
 	.byte 0
 
 CaveOfOrigin_B4F_MapScript1_15DDB7:: @ 815DDB7
-	checkflag SYS_CTRL_OBJ_DELETE
+	checkflag FLAG_SYS_CTRL_OBJ_DELETE
 	call_if 1, CaveOfOrigin_B4F_EventScript_15DDC1
 	end
 
@@ -61,10 +61,10 @@ CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 	playpokecry SPECIES_GROUDON_OR_KYOGRE, 2
 	delay 40
 	waitpokecry
-	setflag SYS_CTRL_OBJ_DELETE
+	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special ScrSpecial_StartGroudonKyogreBattle
 	waitstate
-	clearflag SYS_CTRL_OBJ_DELETE
+	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar RESULT, sub_810E300
 	compare RESULT, 1
 	call_if 1, CaveOfOrigin_B4F_EventScript_15DE73
@@ -75,7 +75,7 @@ CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 	setvar 0x409b, 1
 	setflag FLAG_LEGENDARY_BATTLE_COMPLETED
 	clearflag FLAG_HIDE_SOOTOPOLIS_RESIDENTS
-	clearflag SYS_WEATHER_CTRL
+	clearflag FLAG_SYS_WEATHER_CTRL
 	setvar 0x40b9, 2
 	clearflag FLAG_HIDE_LEADER_MT_PYRE_SUMMIT
 	releaseall

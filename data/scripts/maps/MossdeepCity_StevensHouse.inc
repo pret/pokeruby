@@ -5,7 +5,7 @@ MossdeepCity_StevensHouse_MapScripts:: @ 815A9C5
 	.byte 0
 
 MossdeepCity_StevensHouse_MapScript1_15A9D5:: @ 815A9D5
-	checkflag SYS_GAME_CLEAR
+	checkflag FLAG_SYS_GAME_CLEAR
 	call_if 0, MossdeepCity_StevensHouse_EventScript_15A9DF
 	end
 

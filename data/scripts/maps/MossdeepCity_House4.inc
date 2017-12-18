@@ -4,7 +4,7 @@ MossdeepCity_House4_MapScripts:: @ 815AB30
 MossdeepCity_House4_EventScript_15AB31:: @ 815AB31
 	lock
 	faceplayer
-	checkflag SYS_GAME_CLEAR
+	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if_eq MossdeepCity_House4_EventScript_15AB46
 	msgbox MossdeepCity_House4_Text_18E0E3, 4
 	release

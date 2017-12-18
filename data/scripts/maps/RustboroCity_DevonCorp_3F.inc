@@ -54,7 +54,7 @@ RustboroCity_DevonCorp_3F_EventScript_157752:: @ 8157752
 	message RustboroCity_DevonCorp_3F_Text_183422
 	waitfanfare
 	waitmessage
-	setflag SYS_POKENAV_GET
+	setflag FLAG_SYS_POKENAV_GET
 	setflag FLAG_RECEIVED_POKENAV
 	msgbox RustboroCity_DevonCorp_3F_Text_183439, 4
 	setflag FLAG_HIDE_TUNNER_DIGGER_ROUTE116

@@ -5,7 +5,7 @@ IslandCave_MapScripts:: @ 815EEB6
 	.byte 0
 
 IslandCave_MapScript1_15EEC6:: @ 815EEC6
-	checkflag SYS_CTRL_OBJ_DELETE
+	checkflag FLAG_SYS_CTRL_OBJ_DELETE
 	call_if 1, IslandCave_EventScript_15EED0
 	end
 
@@ -14,7 +14,7 @@ IslandCave_EventScript_15EED0:: @ 815EED0
 	return
 
 IslandCave_MapScript1_15EED4:: @ 815EED4
-	checkflag SYS_BRAILLE_WAIT
+	checkflag FLAG_SYS_BRAILLE_WAIT
 	call_if 0, IslandCave_EventScript_15EEDE
 	end
 
@@ -40,12 +40,12 @@ S_OpenRegiceChamber:: @ 815EF19
 	setmaptile 9, 20, 564, 1
 	special DrawWholeMapView
 	playse SE_BAN
-	setflag SYS_BRAILLE_WAIT
+	setflag FLAG_SYS_BRAILLE_WAIT
 	end
 
 IslandCave_EventScript_15EF59:: @ 815EF59
 	lockall
-	checkflag SYS_BRAILLE_WAIT
+	checkflag FLAG_SYS_BRAILLE_WAIT
 	goto_if_eq IslandCave_EventScript_15EF72
 	braillemessage IslandCave_Braille_1C54FC
 	special DoBrailleWait
@@ -61,7 +61,7 @@ IslandCave_EventScript_15EF72:: @ 815EF72
 IslandCave_EventScript_15EF7C:: @ 815EF7C
 	lockall
 	braillemessage IslandCave_Braille_1C54FC
-	checkflag SYS_BRAILLE_WAIT
+	checkflag FLAG_SYS_BRAILLE_WAIT
 	goto_if_eq IslandCave_EventScript_15EF95
 	special DoBrailleWait
 	waitstate
@@ -83,9 +83,9 @@ IslandCave_EventScript_15EF9D:: @ 815EF9D
 	waitpokecry
 	setwildbattle SPECIES_REGICE, 40, ITEM_NONE
 	setflag FLAG_HIDE_REGICE
-	setflag SYS_CTRL_OBJ_DELETE
+	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special ScrSpecial_StartRegiBattle
 	waitstate
-	clearflag SYS_CTRL_OBJ_DELETE
+	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	release
 	end

@@ -3,9 +3,9 @@ LilycoveCity_CoveLilyMotel_1F_MapScripts:: @ 81582C4
 
 LilycoveCity_CoveLilyMotel_1F_EventScript_1582C5:: @ 81582C5
 	lockall
-	checkflag SYS_GAME_CLEAR
+	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if_eq LilycoveCity_CoveLilyMotel_1F_EventScript_158326
-	checkflag BADGE07_GET
+	checkflag FLAG_BADGE07_GET
 	goto_if_eq LilycoveCity_CoveLilyMotel_1F_EventScript_1582FF
 	msgbox LilycoveCity_CoveLilyMotel_1F_Text_186B71, 4
 	applymovement 1, LilycoveCity_CoveLilyMotel_1F_Movement_1A0839

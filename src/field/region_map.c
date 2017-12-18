@@ -1422,7 +1422,7 @@ static const u8 *const sEverGrandeCityAreaNames[] = {OtherText_PokeLeague, Other
 
 static const struct UnknownStruct4 sUnknown_083E79C0[1] =
 {
-    {sEverGrandeCityAreaNames, MAPSEC_EVER_GRANDE_CITY, SYS_POKEMON_LEAGUE_FLY},
+    {sEverGrandeCityAreaNames, MAPSEC_EVER_GRANDE_CITY, FLAG_SYS_POKEMON_LEAGUE_FLY},
 };
 
 // XXX: what is this?
@@ -1822,7 +1822,7 @@ static void sub_80FC69C(void)
                 sub_8053538((gSaveBlock2.playerGender == MALE) ? 12 : 13);
                 break;
             case MAPSEC_EVER_GRANDE_CITY:
-                sub_8053538((FlagGet(SYS_POKEMON_LEAGUE_FLY) && ewram0_3.regionMap.everGrandeCityArea == 0) ? 20 : 11);
+                sub_8053538((FlagGet(FLAG_SYS_POKEMON_LEAGUE_FLY) && ewram0_3.regionMap.everGrandeCityArea == 0) ? 20 : 11);
                 break;
             default:
                 if (sUnknown_083E7920[ewram0_3.regionMap.mapSectionId][2] != 0)

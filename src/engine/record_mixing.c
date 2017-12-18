@@ -131,7 +131,7 @@ void Task_RecordMixing_Main(u8 taskId)
         if (!gTasks[data[10]].isActive)
         {
             tState = 2;
-            FlagSet(SYS_MIX_RECORD);
+            FlagSet(FLAG_SYS_MIX_RECORD);
             DestroyRecordMixingSprite();
             DestroyTask(tSndEffTaskId);
         }
@@ -1019,7 +1019,7 @@ void sub_80B9F3C(u16 *a, u8 b)
                 VarSet(VAR_0x4001, *a);
                 StringCopy(gStringVar1, gLinkPlayers[0].name);
                 if (*a == ITEM_EON_TICKET)
-                    FlagSet(SYS_HAS_EON_TICKET);
+                    FlagSet(FLAG_SYS_HAS_EON_TICKET);
             }
             else
             {

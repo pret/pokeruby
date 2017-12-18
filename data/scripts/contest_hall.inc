@@ -1143,7 +1143,7 @@ LinkContestRoom1_EventScript_1A5D3B:: @ 81A5D3B
 LinkContestRoom1_EventScript_1A5D5B:: @ 81A5D5B
 	special sub_80C44C0
 	incrementgamestat GAME_STAT_RECEIVED_RIBBONS
-	setflag SYS_RIBBON_GET
+	setflag FLAG_SYS_RIBBON_GET
 	lockall
 	msgbox LinkContestRoom1_Text_1A6D6A, 4
 	playfanfare 370

@@ -5,7 +5,7 @@ DesertRuins_MapScripts:: @ 815CAF3
 	.byte 0
 
 DesertRuins_MapScript1_15CB03:: @ 815CB03
-	checkflag SYS_CTRL_OBJ_DELETE
+	checkflag FLAG_SYS_CTRL_OBJ_DELETE
 	call_if 1, DesertRuins_EventScript_15CB0D
 	end
 
@@ -14,7 +14,7 @@ DesertRuins_EventScript_15CB0D:: @ 815CB0D
 	return
 
 DesertRuins_MapScript1_15CB11:: @ 815CB11
-	checkflag SYS_BRAILLE_STRENGTH
+	checkflag FLAG_SYS_BRAILLE_STRENGTH
 	call_if 0, DesertRuins_EventScript_15CB1B
 	end
 
@@ -33,7 +33,7 @@ DesertRuins_MapScript1_15CB52:: @ 815CB52
 
 DesertRuins_EventScript_15CB56:: @ 815CB56
 	lockall
-	checkflag SYS_BRAILLE_STRENGTH
+	checkflag FLAG_SYS_BRAILLE_STRENGTH
 	goto_if_eq DesertRuins_EventScript_15CB6D
 	braillemessage DesertRuins_Braille_1C54C8
 	waitbutton
@@ -63,9 +63,9 @@ DesertRuins_EventScript_15CB85:: @ 815CB85
 	waitpokecry
 	setwildbattle SPECIES_REGIROCK, 40, ITEM_NONE
 	setflag FLAG_HIDE_REGIROCK
-	setflag SYS_CTRL_OBJ_DELETE
+	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special ScrSpecial_StartRegiBattle
 	waitstate
-	clearflag SYS_CTRL_OBJ_DELETE
+	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	release
 	end

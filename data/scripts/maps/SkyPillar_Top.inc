@@ -3,7 +3,7 @@ SkyPillar_Top_MapScripts:: @ 815F302
 	.byte 0
 
 SkyPillar_Top_MapScript1_15F308:: @ 815F308
-	checkflag SYS_CTRL_OBJ_DELETE
+	checkflag FLAG_SYS_CTRL_OBJ_DELETE
 	call_if 1, SkyPillar_Top_EventScript_15F312
 	end
 
@@ -20,9 +20,9 @@ SkyPillar_Top_EventScript_15F316:: @ 815F316
 	delay 40
 	waitpokecry
 	setflag FLAG_HIDE_RAYQUAZA
-	setflag SYS_CTRL_OBJ_DELETE
+	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special ScrSpecial_StartRayquazaBattle
 	waitstate
-	clearflag SYS_CTRL_OBJ_DELETE
+	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	release
 	end

@@ -1,6 +1,6 @@
 S_CuttableTree:: @ 81B0DCC
 	lockall
-	checkflag BADGE01_GET
+	checkflag FLAG_BADGE01_GET
 	goto_if 0, CannotUseCut
 	checkpokemove MOVE_CUT
 	compare RESULT, 6
@@ -58,7 +58,7 @@ CannotUseCutText: @ 81B0E8E
 
 S_BreakableRock:: @ 81B0EB7
 	lockall
-	checkflag BADGE03_GET
+	checkflag FLAG_BADGE03_GET
 	goto_if 0, CannotUseRockSmash
 	checkpokemove MOVE_ROCK_SMASH
 	compare RESULT, 6
@@ -125,9 +125,9 @@ CannotUseRockSmashText: @ 81B0F90
 
 S_PushableBoulder:: @ 81B0FCB
 	lockall
-	checkflag BADGE04_GET
+	checkflag FLAG_BADGE04_GET
 	goto_if 0, CannotUseStrength
-	checkflag SYS_USE_STRENGTH
+	checkflag FLAG_SYS_USE_STRENGTH
 	goto_if_eq AlreadyUsedStrength
 	checkpokemove 70
 	compare RESULT, 6
@@ -150,7 +150,7 @@ S_UseStrength:: @ 81B100E
 	end
 
 UsedStrength: @ 81B1019
-	setflag SYS_USE_STRENGTH
+	setflag FLAG_SYS_USE_STRENGTH
 	msgbox UsedStrengthText, 3
 	releaseall
 	end

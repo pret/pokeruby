@@ -221,18 +221,18 @@ void UpdateCyclingRoadState(void) {
 
 void SetSSTidalFlag(void)
 {
-    FlagSet(SYS_CRUISE_MODE);
+    FlagSet(FLAG_SYS_CRUISE_MODE);
     *GetVarPointer(VAR_CRUISE_STEP_COUNT) = 0;
 }
 
 void ResetSSTidalFlag(void)
 {
-    FlagClear(SYS_CRUISE_MODE);
+    FlagClear(FLAG_SYS_CRUISE_MODE);
 }
 
 bool32 CountSSTidalStep(u16 delta)
 {
-    if (!FlagGet(SYS_CRUISE_MODE) || (*GetVarPointer(VAR_CRUISE_STEP_COUNT) += delta) <= 0xcc)
+    if (!FlagGet(FLAG_SYS_CRUISE_MODE) || (*GetVarPointer(VAR_CRUISE_STEP_COUNT) += delta) <= 0xcc)
     {
         return FALSE;
     }
@@ -1865,7 +1865,7 @@ void GivLeadMonEffortRibbon(void)
 {
     bool8 ribbonSet;
     IncrementGameStat(GAME_STAT_RECEIVED_RIBBONS);
-    FlagSet(SYS_RIBBON_GET);
+    FlagSet(FLAG_SYS_RIBBON_GET);
     ribbonSet = TRUE;
     SetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_EFFORT_RIBBON, &ribbonSet);
 }

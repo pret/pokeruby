@@ -1326,7 +1326,7 @@ EverGrandeCity_HallOfFame_EventScript_19FC62:: @ 819FC62
 	return
 
 EverGrandeCity_HallOfFame_EventScript_19FC70:: @ 819FC70
-	setflag SYS_TV_LATI
+	setflag FLAG_SYS_TV_LATI
 	return
 
 S_WhiteOut:: @ 819FC74
@@ -1717,9 +1717,9 @@ EventScript_1A0070:
 
 EventScript_1A0085:
 	playse 2
-	checkflag SYS_PC_LANETTE
+	checkflag FLAG_SYS_PC_LANETTE
 	call_if 0, EventScript_1A00AC
-	checkflag SYS_PC_LANETTE
+	checkflag FLAG_SYS_PC_LANETTE
 	call_if 1, EventScript_1A00B5
 	msgbox UnknownString_81A0A35, 4
 	special ShowPokemonStorageSystem
@@ -1743,7 +1743,7 @@ EventScript_1A00BE:
 	end
 
 EventScript_1A00CB:
-	checkflag SYS_GAME_CLEAR
+	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if 0, EventScript_1A00BE
 	playse 2
 	special AccessHallOfFamePC
@@ -2360,9 +2360,9 @@ MagmaHideout_B1F_EventScript_1A04FD:: @ 81A04FD
 	delay 40
 	waitpokecry
 	setflag FLAG_HIDE_ELECTRODE_1_HIDEOUT
-	setflag SYS_CTRL_OBJ_DELETE
+	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	dowildbattle
-	clearflag SYS_CTRL_OBJ_DELETE
+	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	release
 	end
 
@@ -2376,9 +2376,9 @@ MagmaHideout_B1F_EventScript_1A051B:: @ 81A051B
 	delay 40
 	waitpokecry
 	setflag FLAG_HIDE_ELECTRODE_2_HIDEOUT
-	setflag SYS_CTRL_OBJ_DELETE
+	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	dowildbattle
-	clearflag SYS_CTRL_OBJ_DELETE
+	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	release
 	end
 
@@ -2473,9 +2473,9 @@ Route119_EventScript_1A05C3:: @ 81A05C3
 	call_if 1, Route119_EventScript_1A065A
 	compare 0x8004, 7
 	call_if 1, Route119_EventScript_1A065E
-	setflag SYS_CTRL_OBJ_DELETE
+	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	dowildbattle
-	clearflag SYS_CTRL_OBJ_DELETE
+	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	release
 	end
 
@@ -3943,7 +3943,7 @@ SecretBase_YellowCave4_EventScript_1A2FC0:: @ 81A2FC0
 	end
 
 SecretBase_RedCave1_EventScript_1A3032:: @ 81A3032
-	checkflag SYS_GAME_CLEAR
+	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if 0, SecretBase_RedCave1_EventScript_1A3086
 	compare RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A30A5
@@ -3978,7 +3978,7 @@ SecretBase_RedCave1_EventScript_1A30A5:: @ 81A30A5
 	end
 
 SecretBase_RedCave1_EventScript_1A30AE:: @ 81A30AE
-	checkflag SYS_GAME_CLEAR
+	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if 0, SecretBase_RedCave1_EventScript_1A3102
 	compare RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3121
@@ -4013,7 +4013,7 @@ SecretBase_RedCave1_EventScript_1A3121:: @ 81A3121
 	end
 
 SecretBase_RedCave1_EventScript_1A312A:: @ 81A312A
-	checkflag SYS_GAME_CLEAR
+	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if 0, SecretBase_RedCave1_EventScript_1A317E
 	compare RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A319D
@@ -4048,7 +4048,7 @@ SecretBase_RedCave1_EventScript_1A319D:: @ 81A319D
 	end
 
 SecretBase_RedCave1_EventScript_1A31A6:: @ 81A31A6
-	checkflag SYS_GAME_CLEAR
+	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if 0, SecretBase_RedCave1_EventScript_1A31FA
 	compare RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3219
@@ -4083,7 +4083,7 @@ SecretBase_RedCave1_EventScript_1A3219:: @ 81A3219
 	end
 
 SecretBase_RedCave1_EventScript_1A3222:: @ 81A3222
-	checkflag SYS_GAME_CLEAR
+	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if 0, SecretBase_RedCave1_EventScript_1A3276
 	compare RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3295
@@ -4118,7 +4118,7 @@ SecretBase_RedCave1_EventScript_1A3295:: @ 81A3295
 	end
 
 SecretBase_RedCave1_EventScript_1A329E:: @ 81A329E
-	checkflag SYS_GAME_CLEAR
+	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if 0, SecretBase_RedCave1_EventScript_1A32F2
 	compare RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3311
@@ -4153,7 +4153,7 @@ SecretBase_RedCave1_EventScript_1A3311:: @ 81A3311
 	end
 
 SecretBase_RedCave1_EventScript_1A331A:: @ 81A331A
-	checkflag SYS_GAME_CLEAR
+	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if 0, SecretBase_RedCave1_EventScript_1A336E
 	compare RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A338D
@@ -4188,7 +4188,7 @@ SecretBase_RedCave1_EventScript_1A338D:: @ 81A338D
 	end
 
 SecretBase_RedCave1_EventScript_1A3396:: @ 81A3396
-	checkflag SYS_GAME_CLEAR
+	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if 0, SecretBase_RedCave1_EventScript_1A33EA
 	compare RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3409
@@ -4223,7 +4223,7 @@ SecretBase_RedCave1_EventScript_1A3409:: @ 81A3409
 	end
 
 SecretBase_RedCave1_EventScript_1A3412:: @ 81A3412
-	checkflag SYS_GAME_CLEAR
+	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if 0, SecretBase_RedCave1_EventScript_1A3466
 	compare RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3485
@@ -4258,7 +4258,7 @@ SecretBase_RedCave1_EventScript_1A3485:: @ 81A3485
 	end
 
 SecretBase_RedCave1_EventScript_1A348E:: @ 81A348E
-	checkflag SYS_GAME_CLEAR
+	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if 0, SecretBase_RedCave1_EventScript_1A34E2
 	compare RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3501

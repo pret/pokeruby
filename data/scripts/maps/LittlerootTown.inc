@@ -861,7 +861,7 @@ LittlerootTown_EventScript_14DCE2:: @ 814DCE2
 
 LittlerootTown_EventScript_14DD2B:: @ 814DD2B
 	removeobject 4
-	setflag SYS_B_DASH
+	setflag FLAG_SYS_B_DASH
 	setvar 0x4050, 4
 	release
 	end

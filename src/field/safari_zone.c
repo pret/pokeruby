@@ -41,17 +41,17 @@ extern u16 gScriptResult;
 
 bool32 GetSafariZoneFlag(void)
 {
-    return FlagGet(SYS_SAFARI_MODE);
+    return FlagGet(FLAG_SYS_SAFARI_MODE);
 }
 
 void SetSafariZoneFlag(void)
 {
-    FlagSet(SYS_SAFARI_MODE);
+    FlagSet(FLAG_SYS_SAFARI_MODE);
 }
 
 void ResetSafariZoneFlag(void)
 {
-    FlagClear(SYS_SAFARI_MODE);
+    FlagClear(FLAG_SYS_SAFARI_MODE);
 }
 
 void EnterSafariMode(void)

@@ -36,7 +36,7 @@ RustboroCity_EventScript_14C3B1:: @ 814C3B1
 RustboroCity_EventScript_14C3BA:: @ 814C3BA
 	lock
 	faceplayer
-	checkflag BADGE01_GET
+	checkflag FLAG_BADGE01_GET
 	goto_if_eq RustboroCity_EventScript_14C3CF
 	msgbox RustboroCity_Text_16696D, 4
 	release

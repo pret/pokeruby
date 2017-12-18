@@ -542,7 +542,7 @@ bool8 IsTVShowInSearchOfTrainersAiring(void);
 
 void UpdateTVScreensOnMap(int width, int height)
 {
-    FlagSet(SYS_TV_WATCH);
+    FlagSet(FLAG_SYS_TV_WATCH);
     switch (CheckForBigMovieOrEmergencyNewsOnTV())
     {
     case 1:
@@ -556,9 +556,9 @@ void UpdateTVScreensOnMap(int width, int height)
         {
             SetTVMetatilesOnMap(width, height, 0x3);
         }
-        else if (FlagGet(SYS_TV_START) && (sub_80BD8B8() != 0xff || sub_80BECA0() != 0xff || IsTVShowInSearchOfTrainersAiring()))
+        else if (FlagGet(FLAG_SYS_TV_START) && (sub_80BD8B8() != 0xff || sub_80BECA0() != 0xff || IsTVShowInSearchOfTrainersAiring()))
         {
-            FlagClear(SYS_TV_WATCH);
+            FlagClear(FLAG_SYS_TV_WATCH);
             SetTVMetatilesOnMap(width, height, 0x3);
         }
         break;
@@ -1138,7 +1138,7 @@ void nullsub_21(void)
 
 void sub_80BE778(void)
 {
-    if (FlagGet(SYS_GAME_CLEAR))
+    if (FlagGet(FLAG_SYS_GAME_CLEAR))
     {
         u8 i;
 
@@ -1331,7 +1331,7 @@ void sub_80BEB20(void)
 {
     u16 rval;
 
-    if (FlagGet(SYS_GAME_CLEAR) != 0)
+    if (FlagGet(FLAG_SYS_GAME_CLEAR) != 0)
     {
         gUnknown_03005D38.var0 = sub_80BEBC8(gSaveBlock1.unknown_2ABC);
         if (gUnknown_03005D38.var0 != -1 && sub_80BF77C(0x28f) != 1)
@@ -1507,7 +1507,7 @@ void sub_80BEE84(u16 var0)
             }
             else
             {
-                if (!gSaveBlock1.unknown_2ABC[i].val1 && FlagGet(SYS_GAME_CLEAR) == 1)
+                if (!gSaveBlock1.unknown_2ABC[i].val1 && FlagGet(FLAG_SYS_GAME_CLEAR) == 1)
                     gSaveBlock1.unknown_2ABC[i].val1 = 1;
                 gSaveBlock1.unknown_2ABC[i].val2 -= var0;
             }
@@ -2133,9 +2133,9 @@ u8 CheckForBigMovieOrEmergencyNewsOnTV(void)
         if (gSaveBlock1.location.mapNum != MAP_NUM(LITTLEROOT_TOWN_MAYS_HOUSE_1F))
             return 0;
     }
-    if (FlagGet(SYS_TV_LATI) == 1)
+    if (FlagGet(FLAG_SYS_TV_LATI) == 1)
         return 1;
-    if (FlagGet(SYS_TV_HOME) == 1)
+    if (FlagGet(FLAG_SYS_TV_HOME) == 1)
         return 2;
     return 1;
 }
@@ -2650,7 +2650,7 @@ void sub_80C0408(void)
 {
     u16 i;
 
-    if (FlagGet(SYS_GAME_CLEAR) == TRUE)
+    if (FlagGet(FLAG_SYS_GAME_CLEAR) == TRUE)
         return;
     for (i = 0; i < 24; i++)
     {
@@ -2801,7 +2801,7 @@ void sub_80C0788(void)
 {
     u8 i;
 
-    if (FlagGet(SYS_GAME_CLEAR) != 1)
+    if (FlagGet(FLAG_SYS_GAME_CLEAR) != 1)
     {
         for (i = 0; i < 16; i++)
             gSaveBlock1.unknown_2ABC[i].val1 = 0;

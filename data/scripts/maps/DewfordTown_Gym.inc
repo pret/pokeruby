@@ -113,7 +113,7 @@ DewfordTown_Gym_EventScript_153177:: @ 8153177
 	call DewfordTown_Gym_EventScript_1A02C5
 	msgbox DewfordTown_Gym_Text_1752E6, 4
 	setflag FLAG_DEFEATED_DEWFORD_GYM
-	setflag BADGE02_GET
+	setflag FLAG_BADGE02_GET
 	addvar 0x4085, 1
 	compare 0x4085, 6
 	call_if 1, DewfordTown_Gym_EventScript_1A00FB
@@ -177,14 +177,14 @@ DewfordTown_Gym_EventScript_153254:: @ 8153254
 
 DewfordTown_Gym_EventScript_15325E:: @ 815325E
 	lockall
-	checkflag BADGE02_GET
+	checkflag FLAG_BADGE02_GET
 	goto_if_eq DewfordTown_Gym_EventScript_15327E
 	goto DewfordTown_Gym_EventScript_153288
 	end
 
 DewfordTown_Gym_EventScript_15326E:: @ 815326E
 	lockall
-	checkflag BADGE02_GET
+	checkflag FLAG_BADGE02_GET
 	goto_if_eq DewfordTown_Gym_EventScript_15327E
 	goto DewfordTown_Gym_EventScript_153288
 	end

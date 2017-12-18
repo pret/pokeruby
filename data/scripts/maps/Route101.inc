@@ -217,7 +217,7 @@ Route101_EventScript_14EA76:: @ 814EA76
 Route101_EventScript_14EA7F:: @ 814EA7F
 	lock
 	faceplayer
-	setflag SYS_POKEMON_GET
+	setflag FLAG_SYS_POKEMON_GET
 	setflag FLAG_RESCUED_BIRCH
 	fadescreen 1
 	removeobject 4

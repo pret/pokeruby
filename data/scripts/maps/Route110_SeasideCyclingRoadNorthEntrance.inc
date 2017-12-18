@@ -28,7 +28,7 @@ Route110_SeasideCyclingRoadNorthEntrance_EventScript_1634F7:: @ 81634F7
 	call_if 1, Route110_SeasideCyclingRoadNorthEntrance_EventScript_16351D
 	compare RESULT, 0
 	goto_if_eq Route110_SeasideCyclingRoadNorthEntrance_EventScript_163523
-	setflag SYS_CYCLING_ROAD
+	setflag FLAG_SYS_CYCLING_ROAD
 	setvar 0x4001, 1
 	releaseall
 	end
@@ -55,7 +55,7 @@ Route110_SeasideCyclingRoadNorthEntrance_EventScript_16353A:: @ 816353A
 @ Coord event directly in front of the gatesman heading right to left
 	lockall
 	setvar 0x40a9, 0
-	clearflag SYS_CYCLING_ROAD
+	clearflag FLAG_SYS_CYCLING_ROAD
 	setvar 0x4001, 0
 	releaseall
 	end
