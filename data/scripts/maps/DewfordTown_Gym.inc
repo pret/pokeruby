@@ -100,7 +100,7 @@ DewfordTown_Gym_EventScript_153151:: @ 8153151
 
 DewfordTown_Gym_EventScript_153152:: @ 8153152
 	trainerbattle 1, OPPONENT_BRAWLY, 0, DewfordTown_Gym_Text_175182, DewfordTown_Gym_Text_175246, DewfordTown_Gym_EventScript_153177
-	checkflag 166
+	checkflag FLAG_RECEIVED_TM08
 	goto_if 0, DewfordTown_Gym_EventScript_1531B5
 	msgbox DewfordTown_Gym_Text_175412, 4
 	release
@@ -112,8 +112,8 @@ DewfordTown_Gym_EventScript_153177:: @ 8153177
 	waitmessage
 	call DewfordTown_Gym_EventScript_1A02C5
 	msgbox DewfordTown_Gym_Text_1752E6, 4
-	setflag 1204
-	setflag 2056
+	setflag FLAG_DEFEATED_DEWFORD_GYM
+	setflag FLAG_BADGE02_GET
 	addvar 0x4085, 1
 	compare 0x4085, 6
 	call_if 1, DewfordTown_Gym_EventScript_1A00FB
@@ -127,7 +127,7 @@ DewfordTown_Gym_EventScript_1531B5:: @ 81531B5
 	compare RESULT, 0
 	goto_if_eq DewfordTown_Gym_EventScript_1A029B
 	msgbox DewfordTown_Gym_Text_1753BF, 4
-	setflag 166
+	setflag FLAG_RECEIVED_TM08
 	release
 	end
 
@@ -164,7 +164,7 @@ DewfordTown_Gym_EventScript_153238:: @ 8153238
 DewfordTown_Gym_EventScript_15323F:: @ 815323F
 	lock
 	faceplayer
-	checkflag 1204
+	checkflag FLAG_DEFEATED_DEWFORD_GYM
 	goto_if_eq DewfordTown_Gym_EventScript_153254
 	msgbox DewfordTown_Gym_Text_174D98, 4
 	release
@@ -177,14 +177,14 @@ DewfordTown_Gym_EventScript_153254:: @ 8153254
 
 DewfordTown_Gym_EventScript_15325E:: @ 815325E
 	lockall
-	checkflag 2056
+	checkflag FLAG_BADGE02_GET
 	goto_if_eq DewfordTown_Gym_EventScript_15327E
 	goto DewfordTown_Gym_EventScript_153288
 	end
 
 DewfordTown_Gym_EventScript_15326E:: @ 815326E
 	lockall
-	checkflag 2056
+	checkflag FLAG_BADGE02_GET
 	goto_if_eq DewfordTown_Gym_EventScript_15327E
 	goto DewfordTown_Gym_EventScript_153288
 	end

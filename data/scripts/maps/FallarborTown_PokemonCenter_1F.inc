@@ -48,7 +48,7 @@ FallarborTown_PokemonCenter_1F_EventScript_153B59:: @ 8153B59
 FallarborTown_PokemonCenter_1F_EventScript_153B69:: @ 8153B69
 	playse 18
 	removeobject 4
-	clearflag 870
+	clearflag FLAG_HIDE_LANETTE
 	release
 	end
 

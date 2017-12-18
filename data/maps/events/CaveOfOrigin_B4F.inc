@@ -1,5 +1,5 @@
 CaveOfOrigin_B4F_MapObjects:: @ 838D880
-	object_event 1, 248, 0, 9, 0, 10, 0, 3, 8, 0, 0, 0, 0, 0, 0, 0x0, 825, 0, 0
+	object_event 1, 248, 0, 9, 0, 10, 0, 3, 8, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_LEGEND_MON_CAVE_OF_ORIGIN, 0, 0
 
 CaveOfOrigin_B4F_MapWarps:: @ 838D898
 	warp_def 12, 5, 3, 1, MAP_CAVE_OF_ORIGIN_B3F

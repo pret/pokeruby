@@ -16,14 +16,14 @@ int GameClear(void)
 
     ScrSpecial_HealPlayerParty();
 
-    if (FlagGet(SYS_GAME_CLEAR) == TRUE)
+    if (FlagGet(FLAG_SYS_GAME_CLEAR) == TRUE)
     {
         gUnknown_02039324 = 1;
     }
     else
     {
         gUnknown_02039324 = 0;
-        FlagSet(SYS_GAME_CLEAR);
+        FlagSet(FLAG_SYS_GAME_CLEAR);
     }
 
     if (!GetGameStat(1))
@@ -55,7 +55,7 @@ int GameClear(void)
     if (ribbonGet == TRUE)
     {
         IncrementGameStat(42);
-        FlagSet(SYS_RIBBON_GET);
+        FlagSet(FLAG_SYS_RIBBON_GET);
     }
 
     SetMainCallback2(sub_8141F90);

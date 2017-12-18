@@ -423,11 +423,11 @@ static u8 *sub_8068500(struct MapPosition *position, u8 b, u8 c)
 
 static u8 *TryGetFieldMoveScript(struct MapPosition *unused1, u8 b, u8 unused2)
 {
-    if (FlagGet(BADGE05_GET) == TRUE && PartyHasMonWithSurf() == TRUE && IsPlayerFacingSurfableFishableWater() == TRUE)
+    if (FlagGet(FLAG_BADGE05_GET) == TRUE && PartyHasMonWithSurf() == TRUE && IsPlayerFacingSurfableFishableWater() == TRUE)
         return UseSurfScript;
     if (MetatileBehavior_IsWaterfall(b) == TRUE)
     {
-        if (FlagGet(BADGE08_GET) == TRUE && IsPlayerSurfingNorth() == TRUE)
+        if (FlagGet(FLAG_BADGE08_GET) == TRUE && IsPlayerSurfingNorth() == TRUE)
             return S_UseWaterfall;
         else
             return S_CannotUseWaterfall;
@@ -437,7 +437,7 @@ static u8 *TryGetFieldMoveScript(struct MapPosition *unused1, u8 b, u8 unused2)
 
 static bool32 sub_8068770(void)
 {
-    if (FlagGet(BADGE07_GET) && sub_8068F18() == 2)
+    if (FlagGet(FLAG_BADGE07_GET) && sub_8068F18() == 2)
     {
         ScriptContext1_SetupScript(UseDiveScript);
         return TRUE;
@@ -447,7 +447,7 @@ static bool32 sub_8068770(void)
 
 static bool32 sub_80687A4(void)
 {
-    if (FlagGet(BADGE07_GET) && gMapHeader.mapType == MAP_TYPE_UNDERWATER && sub_8068F18() == 1)
+    if (FlagGet(FLAG_BADGE07_GET) && gMapHeader.mapType == MAP_TYPE_UNDERWATER && sub_8068F18() == 1)
     {
         ScriptContext1_SetupScript(S_UseDiveUnderwater);
         return TRUE;

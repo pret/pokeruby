@@ -4353,9 +4353,9 @@ static bool8 IsWildLevelAllowedByRepel(u8 wildLevel)
 
 static void ApplyFluteEncounterRateMod(u32 *encRate)
 {
-    if (FlagGet(SYS_ENC_UP_ITEM) == TRUE)
+    if (FlagGet(FLAG_SYS_ENC_UP_ITEM) == TRUE)
         *encRate += *encRate / 2;
-    else if (FlagGet(SYS_ENC_DOWN_ITEM) == TRUE)
+    else if (FlagGet(FLAG_SYS_ENC_DOWN_ITEM) == TRUE)
         *encRate = *encRate / 2;
 }
 

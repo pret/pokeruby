@@ -9,7 +9,7 @@ NewMauville_Inside_MapScript1_15E56F:: @ 815E56F
 	call_if 1, NewMauville_Inside_EventScript_15E5DA
 	compare 0x4002, 1
 	call_if 1, NewMauville_Inside_EventScript_15E728
-	checkflag 2145
+	checkflag FLAG_SYS_CTRL_OBJ_DELETE
 	call_if 1, NewMauville_Inside_EventScript_15E58F
 	end
 
@@ -169,10 +169,10 @@ NewMauville_Inside_EventScript_15E900:: @ 815E900
 	playpokecry SPECIES_VOLTORB, 2
 	delay 40
 	waitpokecry
-	setflag 974
-	setflag 2145
+	setflag FLAG_HIDE_VOLTORB_1_NEW_MAUVILLE
+	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	dowildbattle
-	clearflag 2145
+	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	release
 	end
 
@@ -184,10 +184,10 @@ NewMauville_Inside_EventScript_15E91E:: @ 815E91E
 	playpokecry SPECIES_VOLTORB, 2
 	delay 40
 	waitpokecry
-	setflag 975
-	setflag 2145
+	setflag FLAG_HIDE_VOLTORB_2_NEW_MAUVILLE
+	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	dowildbattle
-	clearflag 2145
+	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	release
 	end
 
@@ -199,9 +199,9 @@ NewMauville_Inside_EventScript_15E93C:: @ 815E93C
 	playpokecry SPECIES_VOLTORB, 2
 	delay 40
 	waitpokecry
-	setflag 976
-	setflag 2145
+	setflag FLAG_HIDE_VOLTORB_3_NEW_MAUVILLE
+	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	dowildbattle
-	clearflag 2145
+	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	release
 	end

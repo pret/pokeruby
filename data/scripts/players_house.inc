@@ -59,15 +59,15 @@ LittlerootTown_MaysHouse_2F_EventScript_1B69DF:: @ 81B69DF
 
 LittlerootTown_BrendansHouse_2F_EventScript_1B69EB:: @ 81B69EB
 LittlerootTown_MaysHouse_2F_EventScript_1B69EB:: @ 81B69EB
-	checkflag 81
+	checkflag FLAG_SET_WALL_CLOCK
 	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1B6A91
 	msgbox LittlerootTown_BrendansHouse_2F_Text_172E18, 4
 	call LittlerootTown_BrendansHouse_2F_EventScript_1B6A9B
 	delay 30
 	setvar 0x4092, 6
-	setflag 81
-	setflag 754
-	setflag 755
+	setflag FLAG_SET_WALL_CLOCK
+	setflag FLAG_HIDE_MACHOKE_MOVER_1
+	setflag FLAG_HIDE_MACHOKE_MOVER_2
 	checkplayergender
 	compare RESULT, 0
 	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_1B6A31
@@ -222,7 +222,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6BBE:: @ 81B6BBE
 	msgbox LittlerootTown_BrendansHouse_1F_Text_172841, 4
 	fadedefaultbgm
 	special TurnOffTVScreen
-	setflag 2096
+	setflag FLAG_SYS_TV_HOME
 	delay 35
 	return
 
@@ -256,9 +256,9 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6BE9:: @ 81B6BE9
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1B6C33
 	compare 0x408c, 4
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1B6C33
-	checkflag 2059
+	checkflag FLAG_BADGE05_GET
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1B6C3D
-	checkflag 82
+	checkflag FLAG_RESCUED_BIRCH
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1B6C72
 	compare 0x4001, 1
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1B6C80
@@ -274,14 +274,14 @@ LittlerootTown_BrendansHouse_1F_EventScript_1B6C33:: @ 81B6C33
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_1B6C3D:: @ 81B6C3D
-	checkflag 133
+	checkflag FLAG_RECEIVED_AMULET_COIN
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1B6C72
 	msgbox LittlerootTown_BrendansHouse_1F_Text_172782, 4
 	giveitem ITEM_AMULET_COIN
 	compare RESULT, 0
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1A029B
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1727CD, 4
-	setflag 133
+	setflag FLAG_RECEIVED_AMULET_COIN
 	release
 	end
 
@@ -398,7 +398,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6CDE:: @ 81B6CDE
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1B6E0B
 	playse 8
 	removeobject 0x8009
-	setflag 291
+	setflag FLAG_RECEIVED_SS_TICKET
 	setvar 0x4082, 4
 	setvar 0x408c, 4
 	releaseall

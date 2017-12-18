@@ -7,7 +7,7 @@ LittlerootTown_BrendansHouse_1F_MapScripts:: @ 815263B
 LittlerootTown_BrendansHouse_1F_MapScript1_15264B:: @ 815264B
 	compare 0x4092, 6
 	call_if 0, LittlerootTown_BrendansHouse_1F_EventScript_152660
-	checkflag 274
+	checkflag FLAG_RECEIVED_RUNNING_SHOES
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_152673
 	end
 
@@ -100,7 +100,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_152744:: @ 8152744
 	waitmovement 0
 	special GetRivalSonDaughterString
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1730C2, 4
-	setflag 87
+	setflag FLAG_MET_RIVAL_MOM
 	setvar 0x4082, 2
 	releaseall
 	end

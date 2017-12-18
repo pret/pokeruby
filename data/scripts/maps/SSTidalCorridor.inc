@@ -124,7 +124,7 @@ SSTidalCorridor_EventScript_15FDD6:: @ 815FDD6
 SSTidalCorridor_EventScript_15FDF8:: @ 815FDF8
 	sethealplace 8
 	msgbox SSTidalCorridor_Text_1991F4, 4
-	checkflag 260
+	checkflag FLAG_RECEIVED_TM49
 	call_if 1, SSTidalCorridor_EventScript_15FE36
 	warp MAP_LILYCOVE_CITY_HARBOR, 255, 8, 11
 	waitstate
@@ -134,7 +134,7 @@ SSTidalCorridor_EventScript_15FDF8:: @ 815FDF8
 SSTidalCorridor_EventScript_15FE17:: @ 815FE17
 	sethealplace 4
 	msgbox SSTidalCorridor_Text_1991F4, 4
-	checkflag 260
+	checkflag FLAG_RECEIVED_TM49
 	call_if 1, SSTidalCorridor_EventScript_15FE36
 	warp MAP_SLATEPORT_CITY_HARBOR, 255, 8, 11
 	waitstate
@@ -142,7 +142,7 @@ SSTidalCorridor_EventScript_15FE17:: @ 815FE17
 	end
 
 SSTidalCorridor_EventScript_15FE36:: @ 815FE36
-	setflag 951
+	setflag FLAG_HIDE_TM_49_GIVER_SS_TIDAL
 	return
 
 SSTidalCorridor_EventScript_15FE3A:: @ 815FE3A
@@ -163,7 +163,7 @@ SSTidalCorridor_EventScript_15FE5B:: @ 815FE5B
 SSTidalCorridor_EventScript_15FE60:: @ 815FE60
 	lock
 	faceplayer
-	checkflag 247
+	checkflag FLAG_DEFEATED_SS_TIDAL_TRAINERS
 	goto_if_eq SSTidalCorridor_EventScript_15FE7A
 	call SSTidalCorridor_EventScript_15FE84
 	msgbox SSTidalCorridor_Text_199203, 4
@@ -192,7 +192,7 @@ SSTidalCorridor_EventScript_15FE84:: @ 815FE84
 	goto_if 0, SSTidalCorridor_EventScript_15FED5
 	checktrainerflag OPPONENT_ANETTE
 	goto_if 0, SSTidalCorridor_EventScript_15FED5
-	setflag 247
+	setflag FLAG_DEFEATED_SS_TIDAL_TRAINERS
 	goto SSTidalCorridor_EventScript_15FE7A
 	return
 

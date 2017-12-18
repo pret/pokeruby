@@ -77,7 +77,7 @@ MeteorFalls_1F_1R_EventScript_15C49C:: @ 815C49C
 	removeobject 7
 	removeobject 8
 	removeobject 9
-	setflag 819
+	setflag FLAG_HIDE_GRUNTS_BLOCKING_CABLE_CAR
 	setvar 0x40bf, 1
 	releaseall
 	end
@@ -215,9 +215,9 @@ MeteorFalls_1F_1R_Movement_15C64F:: @ 815C64F
 MeteorFalls_1F_1R_EventScript_15C656:: @ 815C656
 	lock
 	faceplayer
-	checkflag 244
+	checkflag FLAG_MET_PROF_COSMO
 	goto_if_eq MeteorFalls_1F_1R_EventScript_15C66E
-	setflag 244
+	setflag FLAG_MET_PROF_COSMO
 	msgbox MeteorFalls_1F_1R_Text_1937EB, 4
 	release
 	end

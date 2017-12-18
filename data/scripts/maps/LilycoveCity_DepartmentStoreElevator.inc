@@ -4,7 +4,7 @@ LilycoveCity_DepartmentStoreElevator_MapScripts:: @ 815A39B
 LilycoveCity_DepartmentStoreElevator_EventScript_15A39C:: @ 815A39C
 	lock
 	faceplayer
-	checkflag 2
+	checkflag FLAG_TEMP_2
 	call_if 0, LilycoveCity_DepartmentStoreElevator_EventScript_15A4CF
 	copyvar 0x8005, 0x4043
 	special sub_810E944
@@ -76,7 +76,7 @@ LilycoveCity_DepartmentStoreElevator_EventScript_15A4B8:: @ 815A4B8
 	waitmovement 0
 	special sub_810EBEC
 	waitstate
-	setflag 2
+	setflag FLAG_TEMP_2
 	return
 
 LilycoveCity_DepartmentStoreElevator_EventScript_15A4CF:: @ 815A4CF

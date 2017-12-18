@@ -3,16 +3,16 @@ Route124_DivingTreasureHuntersHouse_MapScripts:: @ 8163DFA
 	.byte 0
 
 Route124_DivingTreasureHuntersHouse_MapScript1_163E00:: @ 8163E00
-	setflag 2139
+	setflag FLAG_LANDMARK_HUNTERS_HOUSE
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_163E04:: @ 8163E04
 	lock
 	faceplayer
-	checkflag 217
+	checkflag FLAG_MET_DIVING_TREASURE_HUNTER
 	goto_if_eq Route124_DivingTreasureHuntersHouse_EventScript_163E20
 	msgbox Route124_DivingTreasureHuntersHouse_Text_19F416, 4
-	setflag 217
+	setflag FLAG_MET_DIVING_TREASURE_HUNTER
 	goto Route124_DivingTreasureHuntersHouse_EventScript_163E2E
 	end
 

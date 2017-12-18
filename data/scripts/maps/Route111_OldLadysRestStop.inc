@@ -3,7 +3,7 @@ Route111_OldLadysRestStop_MapScripts:: @ 815BFD1
 	.byte 0
 
 Route111_OldLadysRestStop_MapScript1_15BFD7:: @ 815BFD7
-	setflag 2113
+	setflag FLAG_LANDMARK_OLD_LADY_REST_SHOP
 	end
 
 Route111_OldLadysRestStop_EventScript_15BFDB:: @ 815BFDB

@@ -1,5 +1,5 @@
 SkyPillar_Top_MapObjects:: @ 838EE50
-	object_event 1, MAP_OBJ_GFX_RAYQUAZA, 0, 14, 0, 6, 0, 3, 8, 17, 0, 0, 0, 0, 0, SkyPillar_Top_EventScript_15F316, 773, 0, 0
+	object_event 1, MAP_OBJ_GFX_RAYQUAZA, 0, 14, 0, 6, 0, 3, 8, 17, 0, 0, 0, 0, 0, SkyPillar_Top_EventScript_15F316, FLAG_HIDE_RAYQUAZA, 0, 0
 
 SkyPillar_Top_MapWarps:: @ 838EE68
 	warp_def 16, 14, 3, 1, MAP_SKY_PILLAR_5F

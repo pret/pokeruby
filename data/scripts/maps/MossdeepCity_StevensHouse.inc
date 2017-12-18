@@ -5,7 +5,7 @@ MossdeepCity_StevensHouse_MapScripts:: @ 815A9C5
 	.byte 0
 
 MossdeepCity_StevensHouse_MapScript1_15A9D5:: @ 815A9D5
-	checkflag 2052
+	checkflag FLAG_SYS_GAME_CLEAR
 	call_if 0, MossdeepCity_StevensHouse_EventScript_15A9DF
 	end
 
@@ -40,8 +40,8 @@ MossdeepCity_StevensHouse_EventScript_15AA0B:: @ 815AA0B
 	waitmovement 0
 	msgbox MossdeepCity_StevensHouse_Text_18DA77, 4
 	giveitem ITEM_HM08
-	setflag 123
-	setflag 302
+	setflag FLAG_RECEIVED_HM08
+	setflag FLAG_OMIT_DIVE_FROM_STEVEN_LETTER
 	msgbox MossdeepCity_StevensHouse_Text_18DB22, 4
 	closemessage
 	delay 20
@@ -88,8 +88,8 @@ MossdeepCity_StevensHouse_EventScript_15AA7C:: @ 815AA7C
 	msgbox MossdeepCity_StevensHouse_Text_1A1102, 5
 	compare RESULT, 1
 	call_if 1, MossdeepCity_StevensHouse_EventScript_1A0678
-	setflag 968
-	setflag 298
+	setflag FLAG_HIDE_BELDUM_BALL_STEVENS_HOUSE
+	setflag FLAG_RECEIVED_BELDUM
 	releaseall
 	end
 
@@ -113,7 +113,7 @@ MossdeepCity_StevensHouse_EventScript_15AAF9:: @ 815AAF9
 
 MossdeepCity_StevensHouse_EventScript_15AB02:: @ 815AB02
 	lockall
-	checkflag 302
+	checkflag FLAG_OMIT_DIVE_FROM_STEVEN_LETTER
 	goto_if_eq MossdeepCity_StevensHouse_EventScript_15AB16
 	msgbox MossdeepCity_StevensHouse_Text_18DF1A, 4
 	releaseall
@@ -126,5 +126,5 @@ MossdeepCity_StevensHouse_EventScript_15AB16:: @ 815AB16
 
 MossdeepCity_StevensHouse_EventScript_15AB20:: @ 815AB20
 	giveitem ITEM_HM08, 1, 1
-	setflag 123
+	setflag FLAG_RECEIVED_HM08
 	end

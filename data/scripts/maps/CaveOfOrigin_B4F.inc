@@ -4,7 +4,7 @@ CaveOfOrigin_B4F_MapScripts:: @ 815DDAC
 	.byte 0
 
 CaveOfOrigin_B4F_MapScript1_15DDB7:: @ 815DDB7
-	checkflag 2145
+	checkflag FLAG_SYS_CTRL_OBJ_DELETE
 	call_if 1, CaveOfOrigin_B4F_EventScript_15DDC1
 	end
 
@@ -19,7 +19,7 @@ CaveOfOrigin_B4F_MapScript1_15DDC5:: @ 815DDC5
 	setmaplayoutindex 313
 	.endif
 	call CaveOfOrigin_B4F_EventScript_1A01B5
-	checkflag 113
+	checkflag FLAG_LEGENDARY_BATTLE_COMPLETED
 	call_if 1, CaveOfOrigin_B4F_EventScript_1A04E3
 	end
 
@@ -61,23 +61,23 @@ CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 	playpokecry SPECIES_GROUDON_OR_KYOGRE, 2
 	delay 40
 	waitpokecry
-	setflag 2145
+	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special ScrSpecial_StartGroudonKyogreBattle
 	waitstate
-	clearflag 2145
+	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar RESULT, sub_810E300
 	compare RESULT, 1
 	call_if 1, CaveOfOrigin_B4F_EventScript_15DE73
-	setflag 816
-	setflag 855
-	setflag 856
-	clearflag 815
+	setflag FLAG_HIDE_WALLACE_SOOTOPOLIS
+	setflag FLAG_HIDE_CAVE_OF_ORIGIN_ENTRANCE_WOMAN_1
+	setflag FLAG_HIDE_CAVE_OF_ORIGIN_ENTRANCE_WOMAN_2
+	clearflag FLAG_HIDE_WALLACE_SOOTOPOLIS_GYM
 	setvar 0x409b, 1
-	setflag 113
-	clearflag 854
-	clearflag 2090
+	setflag FLAG_LEGENDARY_BATTLE_COMPLETED
+	clearflag FLAG_HIDE_SOOTOPOLIS_RESIDENTS
+	clearflag FLAG_SYS_WEATHER_CTRL
 	setvar 0x40b9, 2
-	clearflag 916
+	clearflag FLAG_HIDE_LEADER_MT_PYRE_SUMMIT
 	releaseall
 	end
 

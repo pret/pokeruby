@@ -3,5 +3,5 @@ SkyPillar_Entrance_MapScripts:: @ 815F2BD
 	.byte 0
 
 SkyPillar_Entrance_MapScript1_15F2C3:: @ 815F2C3
-	setflag 2142
+	setflag FLAG_LANDMARK_SKY_PILLAR
 	end

@@ -373,7 +373,7 @@ void sub_80C791C(void)
 
 void sub_80C7958(void)
 {
-    FlagSet(SYS_CRUISE_MODE);
+    FlagSet(FLAG_SYS_CRUISE_MODE);
     FlagSet(0x4001);
     FlagSet(0x4000);
     saved_warp2_set(0, gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum, -1);

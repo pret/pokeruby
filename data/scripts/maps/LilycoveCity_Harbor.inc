@@ -16,7 +16,7 @@ LilycoveCity_Harbor_EventScript_1598A2:: @ 81598A2
 	end
 
 LilycoveCity_Harbor_EventScript_1598BA:: @ 81598BA
-	checkflag 2052
+	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if_eq LilycoveCity_Harbor_EventScript_1598CD
 	msgbox LilycoveCity_Harbor_Text_18B306, 4
 	release
@@ -106,11 +106,11 @@ LilycoveCity_Harbor_EventScript_1599E4:: @ 81599E4
 	end
 
 LilycoveCity_Harbor_EventScript_1599EE:: @ 81599EE
-	checkflag 2052
+	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if 0, LilycoveCity_Harbor_EventScript_1598BA
-	checkflag 206
+	checkflag FLAG_ECOUNTERED_LATIAS_OR_LATIOS
 	goto_if_eq LilycoveCity_Harbor_EventScript_1598BA
-	checkflag 2131
+	checkflag FLAG_SYS_HAS_EON_TICKET
 	goto_if 0, LilycoveCity_Harbor_EventScript_1598BA
 	msgbox LilycoveCity_Harbor_Text_1C50F2, 4
 	closemessage
@@ -159,7 +159,7 @@ LilycoveCity_Harbor_Movement_159A89:: @ 8159A89
 LilycoveCity_Harbor_EventScript_159A8D:: @ 8159A8D
 	lock
 	faceplayer
-	checkflag 2052
+	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if_eq LilycoveCity_Harbor_EventScript_159AA2
 	msgbox LilycoveCity_Harbor_Text_18B504, 4
 	release

@@ -389,7 +389,7 @@ MauvilleCity_GameCorner_EventScript_156F8D:: @ 8156F8D
 MauvilleCity_GameCorner_EventScript_156F96:: @ 8156F96
 	lock
 	faceplayer
-	checkflag 226
+	checkflag FLAG_RECEIVED_STARTER_DOLL
 	goto_if_eq MauvilleCity_GameCorner_EventScript_157072
 	msgbox MauvilleCity_GameCorner_Text_181F3D, 5
 	compare RESULT, 0
@@ -401,35 +401,35 @@ MauvilleCity_GameCorner_EventScript_156F96:: @ 8156F96
 	end
 
 MauvilleCity_GameCorner_EventScript_156FDB:: @ 8156FDB
-	getdecorname 1, 88
-	checkdecor 88
+	getdecorname 1, DECOR_TREECKO_DOLL
+	checkdecor DECOR_TREECKO_DOLL
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_157059
 	msgbox MauvilleCity_GameCorner_Text_181F89, 4
-	givedecoration 88
-	setflag 226
+	givedecoration DECOR_TREECKO_DOLL
+	setflag FLAG_RECEIVED_STARTER_DOLL
 	goto MauvilleCity_GameCorner_EventScript_157072
 	end
 
 MauvilleCity_GameCorner_EventScript_157005:: @ 8157005
-	getdecorname 1, 89
-	checkdecor 89
+	getdecorname 1, DECOR_TORCHIC_DOLL
+	checkdecor DECOR_TORCHIC_DOLL
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_157059
 	msgbox MauvilleCity_GameCorner_Text_181F89, 4
-	givedecoration 89
-	setflag 226
+	givedecoration DECOR_TORCHIC_DOLL
+	setflag FLAG_RECEIVED_STARTER_DOLL
 	goto MauvilleCity_GameCorner_EventScript_157072
 	end
 
 MauvilleCity_GameCorner_EventScript_15702F:: @ 815702F
-	getdecorname 1, 90
-	checkdecor 90
+	getdecorname 1, DECOR_MUDKIP_DOLL
+	checkdecor DECOR_MUDKIP_DOLL
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_157059
 	msgbox MauvilleCity_GameCorner_Text_181F89, 4
-	givedecoration 90
-	setflag 226
+	givedecoration DECOR_MUDKIP_DOLL
+	setflag FLAG_RECEIVED_STARTER_DOLL
 	goto MauvilleCity_GameCorner_EventScript_157072
 	end
 
@@ -460,12 +460,12 @@ MauvilleCity_GameCorner_EventScript_15707C:: @ 815707C
 	end
 
 MauvilleCity_GameCorner_EventScript_15709C:: @ 815709C
-	checkflag 225
+	checkflag FLAG_RECEIVED_20_COINS
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1570CA
 	checkcoins 16385
 	compare 0x4001, 1
 	goto_if 4, MauvilleCity_GameCorner_EventScript_1570CA
-	setflag 225
+	setflag FLAG_RECEIVED_20_COINS
 	givecoins 20
 	msgbox MauvilleCity_GameCorner_Text_18208E, 4
 	playse 95

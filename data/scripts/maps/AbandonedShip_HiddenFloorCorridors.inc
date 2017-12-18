@@ -8,21 +8,21 @@ AbandonedShip_HiddenFloorCorridors_MapScript1_15EB51:: @ 815EB51
 	end
 
 AbandonedShip_HiddenFloorCorridors_MapScript1_15EB5A:: @ 815EB5A
-	checkflag 240
+	checkflag FLAG_USED_ROOM_1_KEY
 	call_if 0, AbandonedShip_HiddenFloorCorridors_EventScript_15EBCB
-	checkflag 241
+	checkflag FLAG_USED_ROOM_2_KEY
 	call_if 0, AbandonedShip_HiddenFloorCorridors_EventScript_15EBD5
-	checkflag 242
+	checkflag FLAG_USED_ROOM_4_KEY
 	call_if 0, AbandonedShip_HiddenFloorCorridors_EventScript_15EBDF
-	checkflag 243
+	checkflag FLAG_USED_ROOM_6_KEY
 	call_if 0, AbandonedShip_HiddenFloorCorridors_EventScript_15EBE9
-	checkflag 240
+	checkflag FLAG_USED_ROOM_1_KEY
 	call_if 1, AbandonedShip_HiddenFloorCorridors_EventScript_15EBA3
-	checkflag 241
+	checkflag FLAG_USED_ROOM_2_KEY
 	call_if 1, AbandonedShip_HiddenFloorCorridors_EventScript_15EBAD
-	checkflag 242
+	checkflag FLAG_USED_ROOM_4_KEY
 	call_if 1, AbandonedShip_HiddenFloorCorridors_EventScript_15EBB7
-	checkflag 243
+	checkflag FLAG_USED_ROOM_6_KEY
 	call_if 1, AbandonedShip_HiddenFloorCorridors_EventScript_15EBC1
 	end
 
@@ -60,7 +60,7 @@ AbandonedShip_HiddenFloorCorridors_EventScript_15EBE9:: @ 815EBE9
 
 AbandonedShip_HiddenFloorCorridors_EventScript_15EBF3:: @ 815EBF3
 	lockall
-	checkflag 240
+	checkflag FLAG_USED_ROOM_1_KEY
 	goto_if_eq AbandonedShip_HiddenFloorCorridors_EventScript_15ECF7
 	checkitem ITEM_ROOM_1_KEY, 1
 	compare RESULT, 0
@@ -68,7 +68,7 @@ AbandonedShip_HiddenFloorCorridors_EventScript_15EBF3:: @ 815EBF3
 	msgbox AbandonedShip_HiddenFloorCorridors_Text_198E90, 4
 	playse 21
 	removeitem ITEM_ROOM_1_KEY, 1
-	setflag 240
+	setflag FLAG_USED_ROOM_1_KEY
 	call AbandonedShip_HiddenFloorCorridors_EventScript_15EBA3
 	special DrawWholeMapView
 	releaseall
@@ -76,7 +76,7 @@ AbandonedShip_HiddenFloorCorridors_EventScript_15EBF3:: @ 815EBF3
 
 AbandonedShip_HiddenFloorCorridors_EventScript_15EC2A:: @ 815EC2A
 	lockall
-	checkflag 241
+	checkflag FLAG_USED_ROOM_2_KEY
 	goto_if_eq AbandonedShip_HiddenFloorCorridors_EventScript_15ECF7
 	checkitem ITEM_ROOM_2_KEY, 1
 	compare RESULT, 0
@@ -84,7 +84,7 @@ AbandonedShip_HiddenFloorCorridors_EventScript_15EC2A:: @ 815EC2A
 	msgbox AbandonedShip_HiddenFloorCorridors_Text_198E90, 4
 	playse 21
 	removeitem ITEM_ROOM_2_KEY, 1
-	setflag 241
+	setflag FLAG_USED_ROOM_2_KEY
 	call AbandonedShip_HiddenFloorCorridors_EventScript_15EBAD
 	special DrawWholeMapView
 	releaseall
@@ -92,7 +92,7 @@ AbandonedShip_HiddenFloorCorridors_EventScript_15EC2A:: @ 815EC2A
 
 AbandonedShip_HiddenFloorCorridors_EventScript_15EC61:: @ 815EC61
 	lockall
-	checkflag 242
+	checkflag FLAG_USED_ROOM_4_KEY
 	goto_if_eq AbandonedShip_HiddenFloorCorridors_EventScript_15ECF7
 	checkitem ITEM_ROOM_4_KEY, 1
 	compare RESULT, 0
@@ -100,7 +100,7 @@ AbandonedShip_HiddenFloorCorridors_EventScript_15EC61:: @ 815EC61
 	msgbox AbandonedShip_HiddenFloorCorridors_Text_198E90, 4
 	playse 21
 	removeitem ITEM_ROOM_4_KEY, 1
-	setflag 242
+	setflag FLAG_USED_ROOM_4_KEY
 	call AbandonedShip_HiddenFloorCorridors_EventScript_15EBB7
 	special DrawWholeMapView
 	releaseall
@@ -108,7 +108,7 @@ AbandonedShip_HiddenFloorCorridors_EventScript_15EC61:: @ 815EC61
 
 AbandonedShip_HiddenFloorCorridors_EventScript_15EC98:: @ 815EC98
 	lockall
-	checkflag 243
+	checkflag FLAG_USED_ROOM_6_KEY
 	goto_if_eq AbandonedShip_HiddenFloorCorridors_EventScript_15ECF7
 	checkitem ITEM_ROOM_6_KEY, 1
 	compare RESULT, 0
@@ -116,7 +116,7 @@ AbandonedShip_HiddenFloorCorridors_EventScript_15EC98:: @ 815EC98
 	msgbox AbandonedShip_HiddenFloorCorridors_Text_198E90, 4
 	playse 21
 	removeitem ITEM_ROOM_6_KEY, 1
-	setflag 243
+	setflag FLAG_USED_ROOM_6_KEY
 	call AbandonedShip_HiddenFloorCorridors_EventScript_15EBC1
 	special DrawWholeMapView
 	releaseall

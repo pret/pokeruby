@@ -1,8 +1,8 @@
 DewfordTown_MapObjects:: @ 8380B88
 	object_event 1, MAP_OBJ_GFX_WOMAN_3, 0, 7, 0, 12, 0, 3, 5, 1, 0, 0, 0, 0, 0, DewfordTown_EventScript_14E0A2, 0, 0, 0
-	object_event 2, MAP_OBJ_GFX_OLD_MAN_1, 0, 12, 0, 9, 0, 3, 9, 16, 0, 0, 0, 3, 0, DewfordTown_EventScript_14E002, 740, 0, 0
+	object_event 2, MAP_OBJ_GFX_OLD_MAN_1, 0, 12, 0, 9, 0, 3, 9, 16, 0, 0, 0, 3, 0, DewfordTown_EventScript_14E002, FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN, 0, 0
 	object_event 3, MAP_OBJ_GFX_FISHERMAN, 0, 12, 0, 14, 0, 3, 5, 1, 0, 0, 0, 0, 0, DewfordTown_EventScript_14E0C6, 0, 0, 0
-	object_event 4, MAP_OBJ_GFX_MR_BRINEYS_BOAT, 0, 12, 0, 8, 0, 1, 8, 0, 0, 0, 0, 0, 0, 0x0, 743, 0, 0
+	object_event 4, MAP_OBJ_GFX_MR_BRINEYS_BOAT, 0, 12, 0, 8, 0, 1, 8, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD, 0, 0
 	object_event 5, MAP_OBJ_GFX_BOY_1, 0, 1, 0, 6, 0, 3, 1, 0, 0, 0, 0, 0, 0, DewfordTown_EventScript_14E413, 0, 0, 0
 
 DewfordTown_MapWarps:: @ 8380C00

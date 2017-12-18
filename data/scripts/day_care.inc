@@ -21,7 +21,7 @@ Route117_EventScript_1B2262:: @ 81B2262
 	compare RESULT, 1
 	goto_if_eq Route117_EventScript_1B2298
 	msgbox Route117_Text_1B2745, 4
-	clearflag 134
+	clearflag FLAG_PENDING_DAYCARE_EGG
 	special RejectEggFromDayCare
 	release
 	end
@@ -42,7 +42,7 @@ Route117_EventScript_1B22B2:: @ 81B22B2
 	waitbutton
 	msgbox Route117_Text_1B27CD, 4
 	special GiveEggFromDaycare
-	clearflag 134
+	clearflag FLAG_PENDING_DAYCARE_EGG
 	release
 	end
 
