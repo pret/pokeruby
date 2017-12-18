@@ -79,13 +79,9 @@ struct UnknownContestStruct1
     u16 unk6;  // move
     u16 unk8;
     u8 unkA;   // contest category
-    /*
     u8 unkB_0:2;
-    u8 unkB_2:1;
-    u8 unkB_3:4;
+    u8 unkB_2:5;
     u8 unkB_7:1;
-    */
-    u8 unkB;
     /*
     u8 unkC_0:1;
     u8 unkC_1:1;
@@ -172,6 +168,7 @@ struct Shared19260
 // These are separate structs because sub_80AC2CC requires that to match.
 #define shared19260_ ((struct UnknownContestStruct1 *)(gSharedMem + 0x19260))
 #define shared192D0 (gSharedMem + 0x192D0)
+#define shared192E4 (gSharedMem + 0x192E4)
 #define shared19328 (*(struct UnknownContestStruct5 *)(gSharedMem + 0x19328))
 #define shared19338 ((struct UnknownContestStruct4 *)(gSharedMem + 0x19338))
 #define shared19348 ((struct UnknownContestStruct3 *)(gSharedMem + 0x19348))
@@ -440,156 +437,34 @@ void sub_80AB350(void)
     FillPalette(0x7E3F, 0xF3, 2);
 }
 
-// Can't figure out whether bitfields were used or not
-#ifdef NONMATCHING
 void sub_80AB398(void)
 {
     s32 i;
 
-    memset(&shared19204, 0, sizeof(shared19204));  // TODO: How is this struct divided?
+    memset(&shared19204, 0, sizeof(shared19204));
     for (i = 0; i < 4; i++)
         shared19204.unk19206[i] = 0xFF;
     for (i = 0; i < 4; i++)
-        memset(&shared19260.unk19260[i], 0, sizeof(shared19260.unk19260[i]));
+        memset(&shared19260_[i], 0, sizeof(shared19260_[i]));
     for (i = 0; i < 4; i++)
     {
-        /*
-        shared19260.unk19260[i].unkB &= ~3;
-        shared19260.unk19260[i].unk13 = 0xFF;
-        shared19260.unk19260[i].unk14 = 0xFF;
-        */
-        shared19260_[i].unkB &= ~3;
+        shared19260_[i].unkB_0 = 0;
         shared19260_[i].unk13 = 0xFF;
         shared19260_[i].unk14 = 0xFF;
     }
-    memset(&shared19260.unk192D0, 0, sizeof(shared19260.unk192D0));
-    memset(&shared19260.unk192E4, 0, sizeof(shared19260.unk192E4));
-    memset(&shared19260.unk19328, 0, sizeof(shared19260.unk19328));
-    memset(&shared19260.unk19338, 0, sizeof(shared19260.unk19338));
-    if (!(gIsLinkContest & 1))  // wat?
+    memset(shared192D0, 0, 20 * sizeof(*shared192D0));
+    memset(shared192E4, 0, 0x44 * sizeof(*shared192E4));
+    memset(&shared19328, 0, sizeof(shared19328));
+    memset(shared19338, 0, 4 * sizeof(*shared19338));
+    if (!(gIsLinkContest & 1))
         sub_80B0F28(0);
     for (i = 0; i < 4; i++)
     {
-        shared19260.unk19260[i].unk19 = 0xFF;
+        shared19260_[i].unk19 = 0xFF;
         shared19204.unk19218[i] = gUnknown_02038696[i];
     }
     sub_80B159C();
 }
-#else
-__attribute__((naked))
-void sub_80AB398(void)
-{
-    asm(".syntax unified\n\
-	push {r4-r6,lr}\n\
-	ldr r4, _080AB468 @ =gSharedMem + 0x19204\n\
-	adds r0, r4, 0\n\
-	movs r1, 0\n\
-	movs r2, 0x5C\n\
-	bl memset\n\
-	movs r5, 0\n\
-	adds r4, 0x2\n\
-	movs r2, 0xFF\n\
-_080AB3AC:\n\
-	adds r1, r5, r4\n\
-	ldrb r0, [r1]\n\
-	orrs r0, r2\n\
-	strb r0, [r1]\n\
-	adds r5, 0x1\n\
-	cmp r5, 0x3\n\
-	ble _080AB3AC\n\
-	ldr r4, _080AB46C @ =gSharedMem + 0x19260\n\
-	movs r5, 0x3\n\
-_080AB3BE:\n\
-	adds r0, r4, 0\n\
-	movs r1, 0\n\
-	movs r2, 0x1C\n\
-	bl memset\n\
-	adds r4, 0x1C\n\
-	subs r5, 0x1\n\
-	cmp r5, 0\n\
-	bge _080AB3BE\n\
-	ldr r4, _080AB470 @ =gSharedMem + 0x192D0\n\
-	movs r6, 0x4\n\
-	negs r6, r6\n\
-	movs r3, 0xFF\n\
-	adds r2, r4, 0\n\
-	subs r2, 0x65\n\
-	movs r5, 0x3\n\
-_080AB3DE:\n\
-	ldrb r1, [r2]\n\
-	adds r0, r6, 0\n\
-	ands r0, r1\n\
-	strb r0, [r2]\n\
-	ldrb r0, [r2, 0x8]\n\
-	orrs r0, r3\n\
-	strb r0, [r2, 0x8]\n\
-	ldrb r0, [r2, 0x9]\n\
-	orrs r0, r3\n\
-	strb r0, [r2, 0x9]\n\
-	adds r2, 0x1C\n\
-	subs r5, 0x1\n\
-	cmp r5, 0\n\
-	bge _080AB3DE\n\
-	adds r0, r4, 0\n\
-	movs r1, 0\n\
-	movs r2, 0x14\n\
-	bl memset\n\
-	adds r0, r4, 0\n\
-	adds r0, 0x14\n\
-	movs r1, 0\n\
-	movs r2, 0x44\n\
-	bl memset\n\
-	adds r0, r4, 0\n\
-	adds r0, 0x58\n\
-	movs r1, 0\n\
-	movs r2, 0x4\n\
-	bl memset\n\
-	adds r0, r4, 0\n\
-	adds r0, 0x68\n\
-	movs r1, 0\n\
-	movs r2, 0x10\n\
-	bl memset\n\
-	ldr r0, _080AB474 @ =gIsLinkContest\n\
-	ldrb r1, [r0]\n\
-	movs r0, 0x1\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	bne _080AB43A\n\
-	movs r0, 0\n\
-	bl sub_80B0F28\n\
-_080AB43A:\n\
-	movs r5, 0\n\
-	movs r6, 0xFF\n\
-	adds r3, r4, 0\n\
-	subs r3, 0xB8\n\
-	adds r2, r4, 0\n\
-	subs r2, 0x57\n\
-	ldr r4, _080AB478 @ =gUnknown_02038696\n\
-_080AB448:\n\
-	ldrb r0, [r2]\n\
-	orrs r0, r6\n\
-	strb r0, [r2]\n\
-	adds r1, r3, r5\n\
-	adds r0, r5, r4\n\
-	ldrb r0, [r0]\n\
-	strb r0, [r1]\n\
-	adds r2, 0x1C\n\
-	adds r5, 0x1\n\
-	cmp r5, 0x3\n\
-	ble _080AB448\n\
-	bl sub_80B159C\n\
-	pop {r4-r6}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_080AB468: .4byte gSharedMem + 0x19204\n\
-_080AB46C: .4byte gSharedMem + 0x19260\n\
-_080AB470: .4byte gSharedMem + 0x192D0\n\
-_080AB474: .4byte gIsLinkContest\n\
-_080AB478: .4byte gUnknown_02038696\n\
-    .syntax divided\n");
-}
-#endif
 
 void sub_80AB47C(void)
 {
@@ -1159,7 +1034,7 @@ void sub_80AC2CC(u8 taskId)
         return;
     case 2:
         if ((shared19260_[r7].unkC & 6)
-         || (shared19260_[r7].unkB & 0x80))
+         || (shared19260_[r7].unkB_7))
         {
             gTasks[taskId].data[0] = 31;
         }
@@ -2821,7 +2696,7 @@ bool8 sub_80AF038(u8 a)
         r4 = sub_80AEFE8(a, 0);
     else if (shared19260_[a].unkC & 1)
         r4 = sub_80AEFE8(a, 1);
-    else if ((shared19260_[a].unkC & 6) || (shared19260_[a].unkB & 0x80))
+    else if ((shared19260_[a].unkC & 6) || (shared19260_[a].unkB_7))
         r4 = sub_80AEFE8(a, 2);
     else
         r5 = FALSE;
