@@ -2,6 +2,7 @@
 #include "constants/items.h"
 #include "constants/map_objects.h"
 #include "constants/songs.h"
+#include "constants/species.h"
 #include "battle_anim.h"
 #include "contest.h"
 #include "contest_link_80C857C.h"
@@ -93,10 +94,11 @@ struct UnknownContestStruct1
     u8 unkC_2:1;
     */
     u8 unkC;
-    u8 fillerD;
+    s8 unkD;
     u8 unkE;
     u8 fillerF;
-    u8 unk10;  // maybe a bitfield
+    u8 unk10_0:4;
+    u8 unk10_4:2;  // definitely a bitfield
     u8 unk11;
     u8 filler12;
     u8 unk13;
@@ -216,6 +218,8 @@ extern const u8 gUnknownText_UnknownFormatting3[];
 extern const u8 gUnknown_083CB02C[];
 extern const u8 *const gUnknown_083CB2F0[];
 extern const u8 gUnknown_083CC59C[];
+extern const u8 gUnknown_083CC5A2[];
+extern const u8 *const gContestEffectStrings[];
 
 void sub_80AB350(void);
 void sub_80AB5D4(u8);
@@ -268,6 +272,7 @@ void sub_80ADFD8(u8);
 void sub_80AE010(void);
 void sub_80AE020(u8 *, s32);
 bool8 sub_80AE074(void);
+void sub_80AEB4C(void *);
 void sub_80AE5BC(u8);
 void sub_80AE5D4(u8, u8);
 void sub_80AE6CC(u8);
@@ -275,11 +280,11 @@ void sub_80AE6E4(u8, u8);
 u8 sub_80AE858(void);
 u8 sub_80AE8B4(void);
 u8 sub_80AE9FC(u16, u32, u32);
-u8 sub_80AEB1C(u16);
+bool8 sub_80AEB1C(u16);
 void sub_80AEB30(void);
 void sub_80AEBEC(u16);
 void sub_80AED58(void);
-u8 sub_80AEE54(u8, u8);
+bool8 sub_80AEE54(u8, u8);
 u8 sub_80AF038(u8);
 void sub_80AF120(void);
 void sub_80AF138(void);
@@ -1605,7 +1610,7 @@ void sub_80AC2CC(u8 taskId)
         return;
     case 37:
     //_080ACA44
-        if (sub_80AEE54(r7, 1) != 0)
+        if (sub_80AEE54(r7, 1))
         {
             gTasks[taskId].data[10] = 0;
             gTasks[taskId].data[0] = 38;
@@ -1718,7 +1723,7 @@ void sub_80AC2CC(u8 taskId)
     //_080ACC98
         for (r6 = 0; gTasks[taskId].data[1] != gUnknown_02038696[r6]; r6++)
             ;
-        if (sub_80AEE54(r6, 1) != 0)
+        if (sub_80AEE54(r6, 1))
         {
             gTasks[taskId].data[10] = 0;
             gTasks[taskId].data[0] = 40;
@@ -5607,10 +5612,271 @@ u8 sub_80AE9FC(u16 species, u32 otId, u32 personality)
     gSprites[spriteId].callback = SpriteCallbackDummy;
     gSprites[spriteId].data[0] = gSprites[spriteId].oam.paletteNum;
     gSprites[spriteId].data[2] = species;
-    if (sub_80AEB1C(species) != 0)
+    if (sub_80AEB1C(species))
         gSprites[spriteId].affineAnims = gSpriteAffineAnimTable_81E7C18;
     else
         gSprites[spriteId].affineAnims = gSpriteAffineAnimTable_81E7BEC;
     StartSpriteAffineAnim(&gSprites[spriteId], 0);
     return spriteId;
 }
+
+bool8 sub_80AEB1C(u16 species)
+{
+    if (species == SPECIES_UNOWN)
+        return FALSE;
+    else
+        return TRUE;
+}
+
+void sub_80AEB30(void)
+{
+    sub_80AEB4C((void *)(VRAM + 0xC000));
+    sub_80AEB4C((void *)(VRAM + 0xE000));
+}
+
+void sub_80AEB4C(void *a)
+{
+    void *src = a;
+    void *dest = (u8 *)a + 0x500;
+    DmaCopy16(3, src, dest, 0x280);
+}
+
+u16 sub_80AEB68(u16 a, u8 b)
+{
+    u16 var;
+
+    switch (gContestEffects[gContestMoves[a].effect].effectType)
+    {
+    case 0:
+    case 1:
+    case 8:
+        var = 0x9082;
+        break;
+    case 2:
+    case 3:
+        var = 0x9088;
+        break;
+    default:
+        var = 0x9086;
+        break;
+    }
+    var += 0x9000 + (b << 12);
+    return var;
+}
+
+void sub_80AEBEC(u16 a)
+{
+    u8 category;
+    u16 categoryTile;
+    s32 i;
+    u8 numHearts;
+
+    FillWindowRect_DefaultPalette(&gUnknown_03004210, 0, 11, 31, 16, 34);
+
+    category = gContestMoves[a].contestCategory;
+    if (category == 0)
+        categoryTile = 0x4040;
+    else if (category == 1)
+        categoryTile = 0x4045;
+    else if (category == 2)
+        categoryTile = 0x404A;
+    else if (category == 3)
+        categoryTile = 0x406A;
+    else
+        categoryTile = 0x408A;
+
+    for (i = 0; i < 5; i++)
+    {
+        *(u16 *)(VRAM + 0xC7D6 + i * 2) = categoryTile;
+        *(u16 *)(VRAM + 0xC816 + i * 2) = categoryTile + 16;
+        categoryTile++;
+    }
+
+    if (gContestEffects[gContestMoves[a].effect].appeal == 0xFF)
+        numHearts = 0;
+    else
+        numHearts = gContestEffects[gContestMoves[a].effect].appeal / 10;
+    if (numHearts > 8)
+        numHearts = 8;
+    for (i = 0; i < 8; i++)
+    {
+        if (i < numHearts)
+            *(u16 *)(VRAM + 0xC7EA + i * 2) = 0x5012;
+        else
+            *(u16 *)(VRAM + 0xC7EA + i * 2) = 0x5035;
+    }
+
+    if (gContestEffects[gContestMoves[a].effect].jam == 0xFF)
+        numHearts = 0;
+    else
+        numHearts = gContestEffects[gContestMoves[a].effect].jam / 10;
+    if (numHearts > 8)
+        numHearts = 8;
+    for (i = 0; i < 8; i++)
+    {
+        if (i < numHearts)
+            *(u16 *)(VRAM + 0xC82A + i * 2) = 0x5014;
+        else
+            *(u16 *)(VRAM + 0xC82A + i * 2) = 0x5036;
+    }
+
+    sub_8003460(&gUnknown_03004210, gContestEffectStrings[gContestMoves[a].effect], 868, 11, 35);
+    sub_8003460(&gUnknown_03004210, gUnknown_083CC5A2, 866, 16, 31);
+}
+
+void sub_80AED58(void)
+{
+    FillWindowRect_DefaultPalette(&gUnknown_03004210, 0, 11, 35, 28, 40);
+}
+
+// unused
+void sub_80AED7C(u16 a, u8 b)
+{
+    u8 r5 = gUnknown_02038696[b] * 5 + 2;
+    
+    if (sub_80AF59C(b) == 0 && a != 0)
+    {
+        u16 tile = sub_80AEB68(a, b);
+        
+        *(u16 *)(VRAM + 0xC028 + r5 * 64) = tile;
+        *(u16 *)(VRAM + 0xC028 + r5 * 64 + 2) = tile + 1;
+        
+        *(u16 *)(VRAM + 0xC068 + r5 * 64) = tile + 16;
+        *(u16 *)(VRAM + 0xC068 + r5 * 64 + 2) = tile + 17;
+        
+    }
+    else
+    {
+        *(u16 *)(VRAM + 0xC028 + r5 * 64) = 0;
+        *(u16 *)(VRAM + 0xC028 + r5 * 64 + 2) = 0;
+        
+        *(u16 *)(VRAM + 0xC068 + r5 * 64) = 0;
+        *(u16 *)(VRAM + 0xC068 + r5 * 64 + 2) = 0;
+    }
+}
+
+void unref_sub_80AEE20(void)
+{
+    u8 i;
+    
+    for (i = 0; i < 4; i++)
+    {
+        struct UnknownContestStruct1 *s = &shared19260.unk19260[i];
+        
+        sub_80AED7C(s->unk6, i);
+    }
+}
+
+u16 sub_80AEE4C(u8 unused)
+{
+    return 0x2034;
+}
+
+bool8 sub_80AEE54(u8 a, u8 b)
+{
+    struct UnknownContestStruct1 *s = &shared19260.unk19260[a];
+    u8 r9;
+    u16 r8;
+    s32 r4;
+    
+    if (s->unk10_4 == 0)
+        return FALSE;
+    r9 = gUnknown_02038696[a] * 5 + 2;
+    if (s->unk10_4 == 1)
+    {
+        struct UnknownContestStruct1 *r5;
+        
+        r8 = sub_80AEE4C(a);
+        r4 = 0;
+        while (1)
+        {
+            r5 = &shared19260.unk19260[a];
+            if (r5->unkD / 10 <= r4)
+                break;
+            *(u16 *)(VRAM + 0xC026 + (r9 + r4) * 64) = r8;
+            r4++;
+        }
+        if (b != 0)
+        {
+            PlaySE(SE_EXPMAX);
+            r5->unk10_4 = 0;
+        }
+    }
+    else
+    {
+        struct UnknownContestStruct1 *r5;
+        
+        r8 = 0;
+        r4 = 3;
+        while (1)
+        {
+            r5 = &shared19260.unk19260[a];
+            if (r5->unkD / 10 >= r4)
+                break;
+            *(u16 *)(VRAM + 0xBFE6 + (r9 + r4) * 64) = r8;
+            r4--;
+        }
+        if (b != 0)
+        {
+            PlaySE(SE_FU_ZAKU2);
+            r5->unk10_4 = 0;
+        }
+    }
+    return TRUE;
+}
+
+void sub_80AEF50(void)
+{
+    s32 i;
+    s32 r4;
+    
+    for (i = 0; i < 4; i++)
+    {
+        struct UnknownContestStruct1 *s;
+        u8 r8 = gUnknown_02038696[i] * 5 + 2;
+        u16 r6 = sub_80AEE4C(i);
+        
+        r4 = 0;
+        while (1)
+        {
+            s = &shared19260.unk19260[i];
+            if (r4 >= s->unkD / 10)
+                break;
+            *(u16 *)(VRAM + 0xC026 + (r8 + r4) * 64) = r6;
+            r4++;
+        }
+        r6 = 0;
+        while (r4 < 3)
+        {
+            *(u16 *)(VRAM + 0xC026 + (r8 + r4) * 64) = r6;
+            r4++;
+        }
+    }
+}
+
+u16 sub_80AEFE8(int unused, u8 b)
+{
+    u16 var = 0;
+    
+    switch (b)
+    {
+    case 0:
+        var = 0x80;
+        break;
+    case 1:
+        var = 0x84;
+        break;
+    case 2:
+        var = 0x86;
+        break;
+    case 3:
+        var = 0x88;
+        break;
+    case 4:
+        var = 0x82;
+        break;
+    }
+    var += 0x9000;
+    return var;
+}
+

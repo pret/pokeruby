@@ -47,6 +47,8 @@ struct ContestPokemon
 }; // wow
 
 extern struct ContestPokemon gContestMons[];
+extern struct ContestEffect gContestEffects[];
+
 void ResetLinkContestBoolean(void);
 void sub_80AB2AC(void);
 void sub_80AB47C(void);
