@@ -598,7 +598,6 @@ SECTIONS {
         src/scene/evolution_graphics.o(.rodata);
         src/field/bard_music.o(.rodata);
         src/debug/unknown_debug_menu.o(.rodata);
-        data/unknown_debug_menu.o(.rodata);
         data/strings2.o(.rodata);
         src/engine/menu_cursor.o(.rodata);
         data/mystery_event_msg.o(.rodata);
