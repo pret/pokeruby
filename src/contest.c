@@ -73,9 +73,9 @@ struct Shared19204
 
 struct UnknownContestStruct1
 {
-    u8 filler0[2];
-    u16 unk2;  // s16?
-    u16 unk4;
+    u16 unk0;
+    s16 unk2;  // s16?
+    s16 unk4;
     u16 unk6;  // move
     u16 unk8;
     u8 unkA;   // contest category
@@ -210,6 +210,7 @@ extern struct SpriteTemplate gUnknown_02024E8C;
 extern const struct ContestPokemon gContestOpponents[60];
 extern const u8 gUnknown_083CA308[][2];
 extern const u8 gUnknown_083CA310[][2];
+extern const u8 gUnknown_083CA318[][2];
 extern const struct CompressedSpriteSheet gUnknown_083CA4BC;
 extern const struct SpriteTemplate gSpriteTemplate_83CA4A4;
 extern const struct CompressedSpriteSheet gUnknown_083CA4C4;
@@ -239,6 +240,7 @@ extern const u8 gUnknown_083CB02C[];
 extern const u8 *const gUnknown_083CB2F0[];
 extern const u8 gUnknown_083CC59C[];
 extern const u8 gUnknown_083CC5A2[];
+extern const u8 gUnknownText_MissedTurn[];
 
 
 void sub_80AB350(void);
@@ -310,6 +312,7 @@ void sub_80AF120(void);
 void sub_80AF138(void);
 u16 sub_80AF15C(u8);
 void sub_80AF1B8(void);
+void sub_80AF2A0(u8);
 void sub_80AF2FC(void);
 void sub_80AF3C0(void);
 u8 sub_80AF59C(u8);
@@ -1754,7 +1757,6 @@ void sub_80AD960(u8 taskId)
             sub_80AF860();
             gTasks[taskId].data[0] = 1;
         }
-        //_080AD9E8
         else
         {
             sub_80AF2FC();
@@ -2755,3 +2757,139 @@ void sub_80AF1B8(void)
     for (i = 0; i < 4; i++)
         shared19260_[i].unk6 = sub_80AF15C(i);
 }
+
+void sub_80AF1E4(u8 a, u8 b)
+{
+    u8 r3;
+
+    if (b == 0)
+        r3 = a + 10;
+    else
+        r3 = 14;
+    if (shared19260_[a].unk6 == 0)
+        sub_80AE598(gDisplayedStringBattle, gUnknownText_MissedTurn, r3);
+    else
+        sub_80AE598(gDisplayedStringBattle, gMoveNames[shared19260_[a].unk6], r3);
+    sub_80AF2A0(a);
+    sub_8003460(
+      &gUnknown_03004210,
+      gDisplayedStringBattle,
+      696 + a * 20,
+      gUnknown_083CA318[a][0],
+      gUnknown_083CA318[a][1]);
+}
+
+void unref_sub_80AF280(u8 a)
+{
+    u8 i;
+
+    for (i = 0; i < 4; i++)
+        sub_80AF1E4(i, a);
+}
+
+void sub_80AF2A0(u8 a)
+{
+    FillWindowRect_DefaultPalette(
+      &gUnknown_03004210,
+      0,
+      gUnknown_083CA318[a][0],
+      gUnknown_083CA318[a][1],
+      gUnknown_083CA318[a][0] + 7,
+      gUnknown_083CA318[a][1] + 1);
+}
+
+void unref_sub_80AF2E0(void)
+{
+    u8 i;
+
+    for (i = 0; i < 4; i++)
+        sub_80AF2A0(i);
+}
+
+void sub_80AF2FC(void)
+{
+    u8 i;
+    u8 j;
+    s16 arr[4];
+
+    for (i = 0; i < 4; i++)
+    {
+        shared19260_[i].unk4 += shared19260_[i].unk2;
+        arr[i] = shared19260_[i].unk4;
+    }
+    for (i = 0; i < 3; i++)
+    {
+        for (j = 3; j > i; j--)
+        {
+            if (arr[j - 1] < arr[j])
+            {
+                u16 temp = arr[j];
+
+                arr[j] = arr[j - 1];
+                arr[j - 1] = temp;
+            }
+        }
+    }
+    for (i = 0; i < 4; i++)
+    {
+        for (j = 0; j < 4; j++)
+        {
+            if (shared19260_[i].unk4 == arr[j])
+            {
+                shared19260_[i].unkB_0 = j;
+                break;
+            }
+        }
+    }
+    sub_80B0F28(1);
+    sub_80B159C();
+}
+
+void sub_80AF3C0(void)
+{
+    s32 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        u8 var;
+
+        if (shared19260_[i].unk6 == 0)
+            var = 5;
+        else if (shared19260_[i].unk2 <= 0)
+            var = 0;
+        else if (shared19260_[i].unk2 < 30)
+            var = 1;
+        else if (shared19260_[i].unk2 < 60)
+            var = 2;
+        else if (shared19260_[i].unk2 < 80)
+            var = 3;
+        else
+            var = 4;
+
+        shared19260_[i].unk1A = var;
+    }
+}
+
+bool8 sub_80AF404(u8 a)
+{
+    if ((shared19260_[a].unkC & 6) || shared19260_[a].unkB_7)
+        return FALSE;
+    else
+        return TRUE;
+}
+
+/*
+void sub_80AF438(void)
+{
+    u8 r5;
+
+    for (r5 = 0; r5 < 4; r5++)
+    {
+        shared19260_[r5].unk2 = 0;
+        shared19260_[r5].unk0 = 0;
+        shared19260_[r5].unk12 = 0;
+        if (shared19260_[r5].unkC & 6)
+
+    }
+}
+*/
