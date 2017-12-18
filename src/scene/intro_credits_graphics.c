@@ -24,32 +24,282 @@
 // define register constants for the inline asm
 asm(".include \"constants/gba_constants.inc\"\n");
 
-struct UnknownStruct1
+struct IntroCreditsSpriteMetadata
 {
-    u8 var0_0:4;
-    u8 var0_4:2;
-    u8 var0_6:2;
-    u8 var1;
-    u8 var2;
-    u8 var3;
-    u16 var4;
+    u8 animNum:4;
+    u8 shape:2;
+    u8 size:2;
+    u8 x;
+    u8 y;
+    u8 subpriority;
+    u16 xOff;
 };
 
-extern u8 gUnknown_0841225C;
-extern u8 gUnknown_084126DC;
-extern u8 gUnknown_084121FC;
-extern u8 gUnknown_084128D8;
-extern u8 gUnknown_08412EB4;
-extern u8 gUnknown_08412818;
-extern u8 gUnknown_08413184;
-extern u8 gUnknown_08413340;
-extern u8 gUnknown_084139C8;
-extern u8 gUnknown_08413300;
-extern u8 gUnknown_08413CCC;
+const u16 gUnknown_084121FC[] = INCBIN_U16("graphics/intro/intro2_grass.gbapal");
+const u16 gUnknown_0841221C[] = INCBIN_U16("graphics/intro/intro2_grass_afternoon.gbapal");
+const u16 gUnknown_0841223C[] = INCBIN_U16("graphics/intro/intro2_grass_night.gbapal");
+const u8 gUnknown_0841225C[] = INCBIN_U8("graphics/intro/intro2_grass.4bpp.lz");
+const u8 gUnknown_084126DC[] = INCBIN_U8("graphics/intro/intro2_grass_map.bin.lz");
+const u16 gUnknown_08412818[] = INCBIN_U16("graphics/intro/8412818.gbapal");
+const u16 gUnknown_08412878[] = INCBIN_U16("graphics/intro/8412878.gbapal");
+const u8 gUnknown_084128D8[] = INCBIN_U8("graphics/intro/intro2_bgclouds.4bpp.lz");
+const u8 gUnknown_08412EB4[] = INCBIN_U8("graphics/intro/intro2_bgclouds_map.bin.lz");
+const u16 gUnknown_08413184[] = INCBIN_U16("graphics/intro/intro2_bgclouds.gbapal");
+const u16 gUnknown_084131A4[] = INCBIN_U16("graphics/intro/intro2_bgclouds_afternoon.gbapal");
+const u8 gUnknown_084131C4[] = INCBIN_U8("graphics/intro/intro2_bgclouds2.4bpp.lz");
+const u16 gUnknown_08413300[] = INCBIN_U16("graphics/intro/intro2_bgtrees2.gbapal");
+const u16 gUnknown_08413320[] = INCBIN_U16("graphics/intro/intro2_bgtrees2_afternoon.gbapal");
+const u8 gUnknown_08413340[] = INCBIN_U8("graphics/intro/intro2_bgtrees.4bpp.lz");
+const u8 gUnknown_084139C8[] = INCBIN_U8("graphics/intro/intro2_bgtrees_map.bin.lz");
+const u16 gUnknown_08413CCC[] = INCBIN_U16("graphics/intro/intro2_bgtrees.gbapal");
+const u8 gIntro2TreeTiles[] = INCBIN_U8("graphics/intro/intro2_bgtreessmall.4bpp.lz");
+const u16 gUnknown_08413E38[] = INCBIN_U16("graphics/intro/8413E38.gbapal");
+const u8 gUnknown_08413E78[] = INCBIN_U8("graphics/intro/intro2_bgnight.4bpp.lz"); // only used in credits, coupled with intro because bicycle sequence
+const u16 gUnknown_08414064[] = INCBIN_U16("graphics/intro/intro2_bgnight.gbapal");
+const u8 gUnknown_08414084[] = INCBIN_U8("graphics/intro/intro2_bgnight_map.bin.lz");
+const u8 gIntro2NightTiles[] = INCBIN_U8("graphics/intro/intro2_night.4bpp.lz");
+const u16 gIntro2BrendanPalette[] = INCBIN_U16("graphics/intro/intro2_brendan.gbapal");
+const u8 gIntro2BrendanTiles[] = INCBIN_U8("graphics/intro/intro2_brendan.4bpp.lz");
+const u16 gIntro2MayPalette[] = INCBIN_U16("graphics/intro/intro2_may.gbapal");
+const u16 gUnknown_08414F90[0xF0] = {0};
+const u8 gIntro2MayTiles[] = INCBIN_U8("graphics/intro/intro2_may.4bpp.lz");
+const u8 gIntro2BicycleTiles[] = INCBIN_U8("graphics/intro/intro2_bicycle.4bpp.lz");
+const u16 gIntro2LatiosPalette[] = INCBIN_U16("graphics/intro/intro2_latios.gbapal");
+const u8 gIntro2LatiosTiles[] = INCBIN_U8("graphics/intro/intro2_latios.4bpp.lz");
+const u16 gIntro2LatiasPalette[] = INCBIN_U16("graphics/intro/intro2_latias.gbapal");
+const u8 gIntro2LatiasTiles[] = INCBIN_U8("graphics/intro/intro2_latias.4bpp.lz");
 
-extern const struct SpriteTemplate gSpriteTemplate_8416B3C;
-const extern struct CompressedSpriteSheet gUnknown_08416B54;
-const extern struct CompressedSpriteSheet gUnknown_08416BDC;
+void sub_814910C(struct Sprite *sprite);
+void nullsub_82(struct Sprite *sprite);
+void sub_81492A0(struct Sprite *sprite);
+void nullsub_83(struct Sprite *sprite);
+
+const struct SpriteTemplate gSpriteTemplate_8416B3C = {
+    2000, 0xFFFF, &gDummyOamData, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_814910C
+};
+
+const struct CompressedSpriteSheet gUnknown_08416B54[] = {
+    { gUnknown_084131C4, 0x400, 2000 },
+    {}
+};
+
+const union AnimCmd gSpriteAnim_8416B64[] = {
+    ANIMCMD_FRAME( 0, 30),
+    ANIMCMD_END
+};
+
+const union AnimCmd gSpriteAnim_8416B6C[] = {
+    ANIMCMD_FRAME(16, 30),
+    ANIMCMD_END
+};
+
+const union AnimCmd gSpriteAnim_8416B74[] = {
+    ANIMCMD_FRAME(20, 30),
+    ANIMCMD_END
+};
+
+const union AnimCmd gSpriteAnim_8416B7C[] = {
+    ANIMCMD_FRAME(22, 30),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gSpriteAnimTable_8416B84[] = {
+    gSpriteAnim_8416B64,
+    gSpriteAnim_8416B6C,
+    gSpriteAnim_8416B74,
+    gSpriteAnim_8416B7C
+};
+
+const struct IntroCreditsSpriteMetadata gUnknown_08416B94[] = {
+    {  0, ST_OAM_SQUARE,      2,   72, 32, 100, 0xc00 },
+    {  0, ST_OAM_SQUARE,      2,  158, 32, 100, 0xc00 },
+    {  1, ST_OAM_SQUARE,      1,  192, 40, 101, 0x800 },
+    {  1, ST_OAM_SQUARE,      1,   56, 40, 101, 0x800 },
+    {  2, ST_OAM_H_RECTANGLE, 0,  100, 44, 102, 0x400 },
+    {  2, ST_OAM_H_RECTANGLE, 0,  152, 44, 102, 0x400 },
+    {  3, ST_OAM_H_RECTANGLE, 0,    8, 46, 103, 0x100 },
+    {  3, ST_OAM_H_RECTANGLE, 0,   56, 46, 103, 0x100 },
+    {  3, ST_OAM_H_RECTANGLE, 0,  240, 46, 103, 0x100 },
+};
+
+const struct CompressedSpriteSheet gUnknown_08416BDC[] = {
+    { gIntro2TreeTiles, 0x400, 2000 },
+    {}
+};
+
+const union AnimCmd gSpriteAnim_8416BEC[] = {
+    ANIMCMD_FRAME( 0, 30),
+    ANIMCMD_END
+};
+
+const union AnimCmd gSpriteAnim_8416BF4[] = {
+    ANIMCMD_FRAME(16, 30),
+    ANIMCMD_END
+};
+
+const union AnimCmd gSpriteAnim_8416BFC[] = {
+    ANIMCMD_FRAME(24, 30),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gSpriteAnimTable_8416C04[] = {
+    gSpriteAnim_8416BEC,
+    gSpriteAnim_8416BF4,
+    gSpriteAnim_8416BFC
+};
+
+const struct IntroCreditsSpriteMetadata gUnknown_08416C10[] = {
+    {  0, ST_OAM_SQUARE,      2,   16, 88, 100, 0x2000 },
+    {  0, ST_OAM_SQUARE,      2,   80, 88, 100, 0x2000 },
+    {  0, ST_OAM_SQUARE,      2,  144, 88, 100, 0x2000 },
+    {  0, ST_OAM_SQUARE,      2,  208, 88, 100, 0x2000 },
+    {  1, ST_OAM_V_RECTANGLE, 2,   40, 88, 101, 0x1000 },
+    {  1, ST_OAM_V_RECTANGLE, 2,  104, 88, 101, 0x1000 },
+    {  1, ST_OAM_V_RECTANGLE, 2,  168, 88, 101, 0x1000 },
+    {  1, ST_OAM_V_RECTANGLE, 2,  232, 88, 101, 0x1000 },
+    {  2, ST_OAM_V_RECTANGLE, 2,   56, 88, 102, 0x800  },
+    {  2, ST_OAM_V_RECTANGLE, 2,  120, 88, 102, 0x800  },
+    {  2, ST_OAM_V_RECTANGLE, 2,  184, 88, 102, 0x800  },
+    {  2, ST_OAM_V_RECTANGLE, 2,  248, 88, 102, 0x800  },
+};
+
+const struct CompressedSpriteSheet gUnknown_08416C70[] = {
+    { gIntro2NightTiles, 0x400, 2000 },
+    {}
+};
+
+const union AnimCmd gSpriteAnim_8416C80[] = {
+    ANIMCMD_FRAME(0, 30),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gSpriteAnimTable_8416C88[] = {
+    gSpriteAnim_8416C80
+};
+
+const struct IntroCreditsSpriteMetadata gUnknown_08416C8C[] = {
+    { 0, ST_OAM_SQUARE, 2,   24, 88, 100, 0x1000 },
+    { 0, ST_OAM_SQUARE, 2,   64, 88, 100, 0x1000 },
+    { 0, ST_OAM_SQUARE, 2,  104, 88, 100, 0x1000 },
+    { 0, ST_OAM_SQUARE, 2,  144, 88, 100, 0x1000 },
+    { 0, ST_OAM_SQUARE, 2,  184, 88, 100, 0x1000 },
+    { 0, ST_OAM_SQUARE, 2,  224, 88, 100, 0x1000 },
+};
+
+const struct OamData gOamData_8416CBC = {
+    .y = 160, .shape = ST_OAM_SQUARE, .size = 3, .priority = 1
+};
+
+const union AnimCmd gSpriteAnim_8416CC4[] = {
+    ANIMCMD_FRAME(  0, 8),
+    ANIMCMD_FRAME( 64, 8),
+    ANIMCMD_FRAME(128, 8),
+    ANIMCMD_FRAME(192, 8),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd *const gSpriteAnimTable_8416CD8[] = {
+    gSpriteAnim_8416CC4
+};
+
+const struct SpriteTemplate gSpriteTemplate_8416CDC = {
+    1002, 1002, &gOamData_8416CBC, gSpriteAnimTable_8416CD8, NULL, gDummySpriteAffineAnimTable, nullsub_82
+};
+
+const struct SpriteTemplate gSpriteTemplate_8416CF4 = {
+    1003, 1003, &gOamData_8416CBC, gSpriteAnimTable_8416CD8, NULL, gDummySpriteAffineAnimTable, nullsub_82
+};
+
+const struct OamData gOamData_8416D0C = {
+    .y = 160, .shape = ST_OAM_H_RECTANGLE, .size = 3, .priority = 1
+};
+
+const union AnimCmd gSpriteAnim_8416D14[] = {
+    ANIMCMD_FRAME(  0, 8),
+    ANIMCMD_FRAME( 32, 8),
+    ANIMCMD_FRAME( 64, 8),
+    ANIMCMD_FRAME( 96, 8),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd *const gSpriteAnimTable_8416D28[] = {
+    gSpriteAnim_8416D14
+};
+
+const struct SpriteTemplate gSpriteTemplate_Brendan = {
+    1001, 1002, &gOamData_8416D0C, gSpriteAnimTable_8416D28, NULL, gDummySpriteAffineAnimTable, sub_81492A0
+};
+
+const struct SpriteTemplate gSpriteTemplate_May = {
+    1001, 1003, &gOamData_8416D0C, gSpriteAnimTable_8416D28, NULL, gDummySpriteAffineAnimTable, sub_81492A0
+};
+
+const struct OamData gOamData_8416D5C = {
+    .y = 160, .shape = ST_OAM_SQUARE, .size = 3, .priority = 1
+};
+
+const union AnimCmd gSpriteAnim_8416D64[] = {
+    ANIMCMD_FRAME(  0, 16),
+    ANIMCMD_END
+};
+
+const union AnimCmd gSpriteAnim_8416D6C[] = {
+    ANIMCMD_FRAME( 64, 16),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gSpriteAnimTable_8416D74[] = {
+    gSpriteAnim_8416D64,
+    gSpriteAnim_8416D6C
+};
+
+const struct SpriteTemplate gSpriteTemplate_8416D7C = {
+    1004, 1004, &gOamData_8416D5C, gSpriteAnimTable_8416D74, NULL, gDummySpriteAffineAnimTable, nullsub_83
+};
+
+const struct SpriteTemplate gSpriteTemplate_8416D94 = {
+    1005, 1005, &gOamData_8416D5C, gSpriteAnimTable_8416D74, NULL, gDummySpriteAffineAnimTable, nullsub_83
+};
+
+const struct CompressedSpriteSheet gIntro2BrendanSpriteSheet[] = {
+    { gIntro2BrendanTiles, 0x3800, 1002 },
+    {}
+};
+const struct CompressedSpriteSheet gIntro2MaySpriteSheet[] = {
+    { gIntro2MayTiles, 0x3800, 1003 },
+    {}
+};
+const struct CompressedSpriteSheet gIntro2BicycleSpriteSheet[] = {
+    { gIntro2BicycleTiles, 0x1000, 1001 },
+    {}
+};
+const struct CompressedSpriteSheet gIntro2LatiosSpriteSheet[] = {
+    { gIntro2LatiosTiles, 0x1000, 1004 },
+    {}
+};
+const struct CompressedSpriteSheet gIntro2LatiasSpriteSheet[] = {
+    { gIntro2LatiasTiles, 0x1000, 1005 },
+    {}
+};
+
+const struct SpritePalette gIntro2SpritePalettes[] = {
+    {gIntro2BrendanPalette, 1002},
+    {gIntro2MayPalette,     1003},
+    {gIntro2LatiosPalette,  1004},
+    {gIntro2LatiasPalette,  1005},
+    {}
+};
+
+const struct CompressedSpriteSheet gUnknown_08416E24[] = {
+    { gIntro2BrendanTiles, 0x2000, 1002},
+    {}
+};
+
+const struct CompressedSpriteSheet gUnknown_08416E34[] = {
+    { gIntro2MayTiles, 0x2000, 1003},
+    {}
+};
+
 
 extern u16 gUnknown_02039358;
 extern s16 gUnknown_0203935A;
@@ -71,7 +321,7 @@ void load_intro_part2_graphics(u8 a)
         LZ77UnCompVram(&gUnknown_084128D8, (void *)(VRAM));
         LZ77UnCompVram(&gUnknown_08412EB4, (void *)(VRAM + 0x3000));
         LoadPalette(&gUnknown_08412818, 0, 96);
-        LoadCompressedObjectPic(&gUnknown_08416B54);
+        LoadCompressedObjectPic(gUnknown_08416B54);
         LoadPalette(&gUnknown_08413184, 256, 32);
         sub_8149248();
         break;
@@ -79,7 +329,7 @@ void load_intro_part2_graphics(u8 a)
         LZ77UnCompVram(&gUnknown_08413340, (void *)(VRAM));
         LZ77UnCompVram(&gUnknown_084139C8, (void *)(VRAM + 0x3000));
         LoadPalette(&gUnknown_08413300, 0, 32);
-        LoadCompressedObjectPic(&gUnknown_08416BDC);
+        LoadCompressedObjectPic(gUnknown_08416BDC);
         LoadPalette(&gUnknown_08413CCC, 256, 32);
         sub_8149264();
         break;
@@ -106,30 +356,6 @@ void sub_8148C78(u8 a)
     }
 }
 
-extern u8 gUnknown_084131C4;
-extern u8 gUnknown_084131A4;
-extern u8 gUnknown_0841221C;
-extern u8 gUnknown_08412878;
-extern u8 gUnknown_08413320;
-extern u8 gUnknown_0841223C;
-extern u8 gUnknown_08413E78;
-extern u8 gUnknown_08414084;
-extern u8 gUnknown_08413E38;
-const extern struct CompressedSpriteSheet gUnknown_08416C70;
-extern u8 gUnknown_08414064;
-extern struct UnknownStruct1 gUnknown_08416B94;
-extern struct UnknownStruct1 gUnknown_08416C10;
-extern struct UnknownStruct1 gUnknown_08416C8C;
-const extern union AnimCmd *const gSpriteAnimTable_8416B84;
-const extern union AnimCmd *const gSpriteAnimTable_8416C04;
-const extern union AnimCmd *const gSpriteAnimTable_8416C88;
-const extern struct SpriteTemplate gSpriteTemplate_8416CDC;
-const extern struct SpriteTemplate gSpriteTemplate_Brendan;
-const extern struct SpriteTemplate gSpriteTemplate_8416CF4;
-const extern struct SpriteTemplate gSpriteTemplate_May;
-const extern struct SpriteTemplate gSpriteTemplate_8416D7C;
-const extern struct SpriteTemplate gSpriteTemplate_8416D94;
-
 void sub_8149280();
 
 void sub_8148CB0(u8 a)
@@ -144,7 +370,7 @@ void sub_8148CB0(u8 a)
         LZ77UnCompVram(&gUnknown_084128D8, (void *)(VRAM));
         LZ77UnCompVram(&gUnknown_08412EB4, (void *)(VRAM + 0x3000));
         LoadPalette(&gUnknown_08412818, 0, 96);
-        LoadCompressedObjectPic(&gUnknown_08416B54);
+        LoadCompressedObjectPic(gUnknown_08416B54);
         LZ77UnCompVram(&gUnknown_084131C4, (void *)(VRAM + 0x10000));
         LoadPalette(&gUnknown_08413184, 256, 32);
         sub_8149248();
@@ -154,7 +380,7 @@ void sub_8148CB0(u8 a)
         LZ77UnCompVram(&gUnknown_084128D8, (void *)(VRAM));
         LZ77UnCompVram(&gUnknown_08412EB4, (void *)(VRAM + 0x3000));
         LoadPalette(&gUnknown_08412878, 0, 96);
-        LoadCompressedObjectPic(&gUnknown_08416B54);
+        LoadCompressedObjectPic(gUnknown_08416B54);
         LZ77UnCompVram(&gUnknown_084131C4, (void *)(VRAM + 0x10000));
         LoadPalette(&gUnknown_084131A4, 256, 32);
         sub_8149248();
@@ -165,7 +391,7 @@ void sub_8148CB0(u8 a)
         LZ77UnCompVram(&gUnknown_08413340, (void *)(VRAM));
         LZ77UnCompVram(&gUnknown_084139C8, (void *)(VRAM + 0x3000));
         LoadPalette(&gUnknown_08413320, 0, 32);
-        LoadCompressedObjectPic(&gUnknown_08416BDC);
+        LoadCompressedObjectPic(gUnknown_08416BDC);
         LoadPalette(&gUnknown_08413320, 256, 32);
         sub_8149264();
         break;
@@ -174,7 +400,7 @@ void sub_8148CB0(u8 a)
         LZ77UnCompVram(&gUnknown_08413E78, (void *)(VRAM));
         LZ77UnCompVram(&gUnknown_08414084, (void *)(VRAM + 0x3000));
         LoadPalette(&gUnknown_08413E38, 0, 64);
-        LoadCompressedObjectPic(&gUnknown_08416C70);
+        LoadCompressedObjectPic(gUnknown_08416C70);
         LoadPalette(&gUnknown_08414064, 256, 32);
         sub_8149280();
         break;
@@ -367,43 +593,43 @@ _0814901C: .4byte REG_BG3VOFS\n\
 
 void sub_8149020(u8 mode)
 {
-    u16 var1;
-    u16 var2;
+    u16 x;
+    u16 y;
     switch (mode)
     {
         case 0:
         default:
             /* stuff */
-            if (gMain.vblankCounter1 & 3 || gPaletteFade.active) 
+            if (gMain.vblankCounter1 & 3 || gPaletteFade.active)
                 break;
             if (gMain.vblankCounter1 & 4)
             {
-                var1 = gPlttBufferUnfaded[9];
-                var2 = gPlttBufferUnfaded[10];
+                x = gPlttBufferUnfaded[9];
+                y = gPlttBufferUnfaded[10];
             }
             else
             {
-                var1 = gPlttBufferUnfaded[10];
-                var2 = gPlttBufferUnfaded[9];
+                x = gPlttBufferUnfaded[10];
+                y = gPlttBufferUnfaded[9];
             }
-            LoadPalette(&var1, 9, 2);
-            LoadPalette(&var2, 10, 2);
+            LoadPalette(&x, 9, 2);
+            LoadPalette(&y, 10, 2);
             break;
         case 2:
-            if (gMain.vblankCounter1 & 3 || gPaletteFade.active) 
+            if (gMain.vblankCounter1 & 3 || gPaletteFade.active)
                 break;
             if (gMain.vblankCounter1 & 4)
             {
-                var1 = 0x3D27;
-                var2 = 0x295;
+                x = 0x3D27;
+                y = 0x295;
             }
             else
             {
-                var1 = 0x31C;
-                var2 = 0x3D27;
+                x = 0x31C;
+                y = 0x3D27;
             }
-            LoadPalette(&var1, 12, 2);
-            LoadPalette(&var2, 13, 2);
+            LoadPalette(&x, 12, 2);
+            LoadPalette(&y, 13, 2);
             break;
         case 1:
             break;
@@ -433,42 +659,42 @@ void sub_814910C(struct Sprite *sprite)
     }
 }
 
-void sub_8149174(u8 a, struct UnknownStruct1 *b, const union AnimCmd *const *c, u8 d)
+void sub_8149174(u8 a, const struct IntroCreditsSpriteMetadata *b, const union AnimCmd *const *c, u8 d)
 {
     u8 i;
 
     for(i = 0; i < d; i++)
     {
-        u8 sprite = CreateSprite(&gSpriteTemplate_8416B3C, b[i].var1, b[i].var2, b[i].var3);
-        CalcCenterToCornerVec(&gSprites[sprite], b[i].var0_4, b[i].var0_6, 0);
+        u8 sprite = CreateSprite(&gSpriteTemplate_8416B3C, b[i].x, b[i].y, b[i].subpriority);
+        CalcCenterToCornerVec(&gSprites[sprite], b[i].shape, b[i].size, 0);
         gSprites[sprite].oam.priority = 3;
-        gSprites[sprite].oam.shape = b[i].var0_4;
-        gSprites[sprite].oam.size = b[i].var0_6;
+        gSprites[sprite].oam.shape = b[i].shape;
+        gSprites[sprite].oam.size = b[i].size;
         gSprites[sprite].oam.paletteNum = 0;
         gSprites[sprite].anims = c;
-        StartSpriteAnim(&gSprites[sprite], b[i].var0_0);
+        StartSpriteAnim(&gSprites[sprite], b[i].animNum);
         gSprites[sprite].data[0] = a;
-        gSprites[sprite].data[1] = b[i].var4;
+        gSprites[sprite].data[1] = b[i].xOff;
         gSprites[sprite].data[2] = 0;
     }
 }
 
 void sub_8149248()
 {
-    sub_8149174(0, &gUnknown_08416B94, &gSpriteAnimTable_8416B84, 9);
+    sub_8149174(0, gUnknown_08416B94, gSpriteAnimTable_8416B84, 9);
 }
 
 void sub_8149264()
 {
-    sub_8149174(1, &gUnknown_08416C10, &gSpriteAnimTable_8416C04, 12);
+    sub_8149174(1, gUnknown_08416C10, gSpriteAnimTable_8416C04, 12);
 }
 
 void sub_8149280()
 {
-    sub_8149174(1, &gUnknown_08416C8C, &gSpriteAnimTable_8416C88, 6);
+    sub_8149174(1, gUnknown_08416C8C, gSpriteAnimTable_8416C88, 6);
 }
 
-void nullsub_82()
+void nullsub_82(struct Sprite *sprite)
 {
 }
 
@@ -499,7 +725,7 @@ u8 intro_create_may_sprite(s16 a, s16 b)
     return sprite;
 }
 
-void nullsub_83()
+void nullsub_83(struct Sprite *sprite)
 {
 }
 

@@ -594,7 +594,7 @@ SECTIONS {
         src/field/berry_tag_screen.o(.rodata);
         src/engine/save_failed_screen.o(.rodata);
         src/pokemon/pokeblock_feed.o(.rodata);
-        data/intro_credits_graphics.o(.rodata);
+        src/scene/intro_credits_graphics.o(.rodata);
         src/scene/evolution_graphics.o(.rodata);
         src/field/bard_music.o(.rodata);
         src/debug/unknown_debug_menu.o(.rodata);
