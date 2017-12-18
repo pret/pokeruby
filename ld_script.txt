@@ -273,8 +273,9 @@ SECTIONS {
         asm/guard.o(.text);
         asm/fury_cutter_count.o(.text);
         asm/rain.o(.text);
-        asm/bubble.o(.text);
+        src/battle/anim/bubble.o(.text);
         src/battle/anim/aurora.o(.text);
+        asm/aurora.o(.text);
         asm/liquid_ball.o(.text);
         asm/water.o(.text);
         asm/fire.o(.text);
