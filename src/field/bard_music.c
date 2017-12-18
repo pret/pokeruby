@@ -140,7 +140,36 @@ static const u32 sBardSoundLengthDeltas[] = {
     15
 };
 
-#include "../src/data/bard_music.h"
+#if ENGLISH
+#include "../src/data/bard_music_en.h"
+#elif GERMAN
+#include "../src/data/bard_music_de.h"
+#endif // ENGLISH/GERMAN
+
+static const struct BardSound (*const gBardMusicTable[])[6] = {
+    BardMusic_POKEMON,
+    BardMusic_TRAINER,
+    BardMusic_STATUS,
+    BardMusic_BATTLE,
+    BardMusic_GREETINGS,
+    BardMusic_PEOPLE,
+    BardMusic_VOICES,
+    BardMusic_SPEECH,
+    BardMusic_ENDINGS,
+    BardMusic_FEELINGS,
+    BardMusic_CONDITIONS,
+    BardMusic_ACTIONS,
+    BardMusic_LIFESTYLE,
+    BardMusic_HOBBIES,
+    BardMusic_TIME,
+    BardMusic_MISC,
+    BardMusic_ADJECTIVES,
+    BardMusic_EVENTS,
+    BardMusic_MOVE_1,
+    BardMusic_MOVE_2,
+    BardMusic_TRENDY_SAYING,
+    BardMusic_POKEMON_2
+};
 
 static s16 CalcWordPitch(u32 arg0, u32 songPos)
 {

@@ -12640,29 +12640,4 @@ static const struct BardSound BardMusic_POKEMON_2[][6] = {
     }
 };
 
-static const struct BardSound (*const gBardMusicTable[])[6] = {
-    BardMusic_POKEMON,
-    BardMusic_TRAINER,
-    BardMusic_STATUS,
-    BardMusic_BATTLE,
-    BardMusic_GREETINGS,
-    BardMusic_PEOPLE,
-    BardMusic_VOICES,
-    BardMusic_SPEECH,
-    BardMusic_ENDINGS,
-    BardMusic_FEELINGS,
-    BardMusic_CONDITIONS,
-    BardMusic_ACTIONS,
-    BardMusic_LIFESTYLE,
-    BardMusic_HOBBIES,
-    BardMusic_TIME,
-    BardMusic_MISC,
-    BardMusic_ADJECTIVES,
-    BardMusic_EVENTS,
-    BardMusic_MOVE_1,
-    BardMusic_MOVE_2,
-    BardMusic_TRENDY_SAYING,
-    BardMusic_POKEMON_2
-};
-
 #endif //GUARD_DATA_BARD_MUSIC_H
