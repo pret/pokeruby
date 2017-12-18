@@ -600,7 +600,6 @@ SECTIONS {
         data/unknown_debug_menu.o(.rodata);
         data/strings2.o(.rodata);
         src/engine/menu_cursor.o(.rodata);
-        data/menu_cursor.o(.rodata);
         data/mystery_event_msg.o(.rodata);
         src/libs/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
