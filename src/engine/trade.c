@@ -5696,7 +5696,7 @@ static void sub_804E1DC(void)
         numRibbons += GetMonData(&gEnemyParty[gUnknown_020297D8[1] % 6], MON_DATA_CHAMPION_RIBBON + i);
     }
     if (numRibbons != 0)
-        FlagSet(SYS_RIBBON_GET);
+        FlagSet(FLAG_SYS_RIBBON_GET);
 }
 
 void sub_804E22C(void)

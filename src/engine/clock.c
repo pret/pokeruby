@@ -20,7 +20,7 @@ static void ReturnFromStartWallClock(void);
 
 static void InitTimeBasedEvents(void)
 {
-    FlagSet(SYS_CLOCK_SET);
+    FlagSet(FLAG_SYS_CLOCK_SET);
     RtcCalcLocalTime();
     gSaveBlock2.lastBerryTreeUpdate = gLocalTime;
     VarSet(VAR_DAYS, gLocalTime.days);
@@ -28,7 +28,7 @@ static void InitTimeBasedEvents(void)
 
 void DoTimeBasedEvents(void)
 {
-    if (FlagGet(SYS_CLOCK_SET))
+    if (FlagGet(FLAG_SYS_CLOCK_SET))
     {
         RtcCalcLocalTime();
         UpdatePerDay(&gLocalTime);
@@ -45,7 +45,7 @@ static void UpdatePerDay(struct Time *time)
     if (days != time->days && days <= time->days)
     {
         newDays = time->days - days;
-        ClearUpperFlags();
+        ClearDailyFlags();
         UpdateDewfordTrendPerDay(newDays);
         UpdateTVShowsPerDay(newDays);
         UpdateWeatherPerDay(newDays);

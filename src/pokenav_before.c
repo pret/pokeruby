@@ -401,7 +401,7 @@ void sub_80EBCA8() {
 	ewram0_10.var6db2[1] = 2;
 	ewram0_10.var6db2[2] = 3;
 
-	if (FlagGet(SYS_RIBBON_GET)) {
+	if (FlagGet(FLAG_SYS_RIBBON_GET)) {
 		ewram0_10.var6db2[3] = 4;
 	}
 	else {

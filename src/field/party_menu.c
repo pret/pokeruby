@@ -5643,7 +5643,7 @@ _08070F8A:\n\
 
 void unref_sub_8070F90(void)
 {
-    FlagSet(SYS_POKEDEX_GET);
-    FlagSet(SYS_POKEMON_GET);
-    FlagSet(SYS_POKENAV_GET);
+    FlagSet(FLAG_SYS_POKEDEX_GET);
+    FlagSet(FLAG_SYS_POKEMON_GET);
+    FlagSet(FLAG_SYS_POKENAV_GET);
 }

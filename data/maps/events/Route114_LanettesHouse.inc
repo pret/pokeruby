@@ -1,5 +1,5 @@
 Route114_LanettesHouse_MapObjects:: @ 838B92C
-	object_event 1, MAP_OBJ_GFX_WOMAN_3, 0, 5, 0, 4, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route114_LanettesHouse_EventScript_15C262, 870, 0, 0
+	object_event 1, MAP_OBJ_GFX_WOMAN_3, 0, 5, 0, 4, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route114_LanettesHouse_EventScript_15C262, FLAG_HIDE_LANETTE, 0, 0
 
 Route114_LanettesHouse_MapWarps:: @ 838B944
 	warp_def 5, 7, 0, 2, MAP_ROUTE114

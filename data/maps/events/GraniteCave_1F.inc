@@ -1,6 +1,6 @@
 GraniteCave_1F_MapObjects:: @ 838BF24
 	object_event 1, MAP_OBJ_GFX_HIKER, 0, 36, 0, 9, 0, 3, 1, 0, 0, 0, 0, 0, 0, GraniteCave_1F_EventScript_15CBA7, 0, 0, 0
-	object_event 2, MAP_OBJ_GFX_ITEM_BALL, 0, 17, 0, 7, 0, 3, 8, 0, 0, 0, 0, 0, 0, GraniteCave_1F_EventScript_1B17A0, 1050, 0, 0
+	object_event 2, MAP_OBJ_GFX_ITEM_BALL, 0, 17, 0, 7, 0, 3, 8, 0, 0, 0, 0, 0, 0, GraniteCave_1F_EventScript_1B17A0, FLAG_ITEM_GRANITE_CAVE_1F_1, 0, 0
 
 GraniteCave_1F_MapWarps:: @ 838BF54
 	warp_def 37, 12, 3, 0, MAP_ROUTE106

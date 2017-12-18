@@ -3,7 +3,7 @@ Route131_MapScripts:: @ 815243E
 	.byte 0
 
 Route131_MapScript1_152444:: @ 8152444
-	checkflag 2052
+	checkflag FLAG_SYS_GAME_CLEAR
 	call_if 1, Route131_EventScript_15244E
 	end
 

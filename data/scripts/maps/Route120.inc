@@ -5,7 +5,7 @@ Route120_MapScripts:: @ 815160E
 	.byte 0
 
 Route120_MapScript1_15161E:: @ 815161E
-	checkflag 2145
+	checkflag FLAG_SYS_CTRL_OBJ_DELETE
 	call_if 1, Route120_EventScript_151628
 	end
 
@@ -50,11 +50,11 @@ Route120_EventScript_151682:: @ 8151682
 	return
 
 Route120_MapScript1_151686:: @ 8151686
-	checkflag 228
+	checkflag FLAG_REGI_DOORS_OPENED
 	call_if 0, Route120_EventScript_1516A2
-	checkflag 285
+	checkflag FLAG_RECEIVED_DEVON_SCOPE
 	call_if 1, Route120_EventScript_1516B5
-	checkflag 285
+	checkflag FLAG_RECEIVED_DEVON_SCOPE
 	call_if 0, Route120_EventScript_1516DA
 	end
 
@@ -113,7 +113,7 @@ Route120_EventScript_151739:: @ 8151739
 	lock
 	faceplayer
 	dodailyevents
-	checkflag 2254
+	checkflag FLAG_DAILY_RECEIVED_BERRY_ROUTE120
 	goto_if_eq Route120_EventScript_151837
 	msgbox Route120_Text_1C58F1, 5
 	compare RESULT, 1
@@ -135,27 +135,27 @@ Route120_EventScript_151739:: @ 8151739
 	end
 
 Route120_EventScript_1517DC:: @ 81517DC
-	setvar 0x8004, 143
+	setvar 0x8004, ITEM_FIGY_BERRY
 	goto Route120_EventScript_151813
 	end
 
 Route120_EventScript_1517E7:: @ 81517E7
-	setvar 0x8004, 144
+	setvar 0x8004, ITEM_WIKI_BERRY
 	goto Route120_EventScript_151813
 	end
 
 Route120_EventScript_1517F2:: @ 81517F2
-	setvar 0x8004, 145
+	setvar 0x8004, ITEM_MAGO_BERRY
 	goto Route120_EventScript_151813
 	end
 
 Route120_EventScript_1517FD:: @ 81517FD
-	setvar 0x8004, 146
+	setvar 0x8004, ITEM_AGUAV_BERRY
 	goto Route120_EventScript_151813
 	end
 
 Route120_EventScript_151808:: @ 8151808
-	setvar 0x8004, 147
+	setvar 0x8004, ITEM_IAPAPA_BERRY
 	goto Route120_EventScript_151813
 	end
 
@@ -163,7 +163,7 @@ Route120_EventScript_151813:: @ 8151813
 	giveitem 0x8004
 	compare RESULT, 0
 	goto_if_eq Route120_EventScript_1A029B
-	setflag 2254
+	setflag FLAG_DAILY_RECEIVED_BERRY_ROUTE120
 	msgbox Route120_Text_1C5A0B, 4
 	release
 	end
@@ -184,7 +184,7 @@ Route120_EventScript_15184A:: @ 815184A
 Route120_EventScript_151853:: @ 8151853
 	lock
 	faceplayer
-	checkflag 290
+	checkflag FLAG_NOT_READY_FOR_BATTLE_ROUTE120
 	goto_if_eq Route120_EventScript_151884
 	msgbox Route120_Text_171827, 5
 	compare RESULT, 0
@@ -194,7 +194,7 @@ Route120_EventScript_151853:: @ 8151853
 
 Route120_EventScript_151877:: @ 8151877
 	msgbox Route120_Text_17193D, 4
-	setflag 290
+	setflag FLAG_NOT_READY_FOR_BATTLE_ROUTE120
 	release
 	end
 
@@ -227,9 +227,9 @@ Route120_EventScript_15189D:: @ 815189D
 	waitpokecry
 	setwildbattle SPECIES_KECLEON, 30, ITEM_NONE
 	setvar 0x8004, 0
-	setflag 2145
+	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	dowildbattle
-	clearflag 2145
+	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	goto Route120_EventScript_151908
 	end
 
@@ -239,7 +239,7 @@ Route120_EventScript_151908:: @ 8151908
 	waitmovement 0
 	msgbox Route120_Text_171A40, 4
 	giveitem ITEM_DEVON_SCOPE
-	setflag 285
+	setflag FLAG_RECEIVED_DEVON_SCOPE
 	msgbox Route120_Text_171B0E, 4
 	closemessage
 	applymovement 31, Route120_Movement_1A0845

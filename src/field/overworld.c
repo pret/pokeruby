@@ -203,47 +203,47 @@ static void DoWhiteOut(void)
 void Overworld_ResetStateAfterFly(void)
 {
     player_avatar_init_params_reset();
-    FlagClear(SYS_CYCLING_ROAD);
-    FlagClear(SYS_CRUISE_MODE);
-    FlagClear(SYS_SAFARI_MODE);
-    FlagClear(SYS_USE_STRENGTH);
-    FlagClear(SYS_USE_FLASH);
+    FlagClear(FLAG_SYS_CYCLING_ROAD);
+    FlagClear(FLAG_SYS_CRUISE_MODE);
+    FlagClear(FLAG_SYS_SAFARI_MODE);
+    FlagClear(FLAG_SYS_USE_STRENGTH);
+    FlagClear(FLAG_SYS_USE_FLASH);
 }
 
 void Overworld_ResetStateAfterTeleport(void)
 {
     player_avatar_init_params_reset();
-    FlagClear(SYS_CYCLING_ROAD);
-    FlagClear(SYS_CRUISE_MODE);
-    FlagClear(SYS_SAFARI_MODE);
-    FlagClear(SYS_USE_STRENGTH);
-    FlagClear(SYS_USE_FLASH);
+    FlagClear(FLAG_SYS_CYCLING_ROAD);
+    FlagClear(FLAG_SYS_CRUISE_MODE);
+    FlagClear(FLAG_SYS_SAFARI_MODE);
+    FlagClear(FLAG_SYS_USE_STRENGTH);
+    FlagClear(FLAG_SYS_USE_FLASH);
     ScriptContext2_RunNewScript(gUnknown_0819FC9F);
 }
 
 void Overworld_ResetStateAfterDigEscRope(void)
 {
     player_avatar_init_params_reset();
-    FlagClear(SYS_CYCLING_ROAD);
-    FlagClear(SYS_CRUISE_MODE);
-    FlagClear(SYS_SAFARI_MODE);
-    FlagClear(SYS_USE_STRENGTH);
-    FlagClear(SYS_USE_FLASH);
+    FlagClear(FLAG_SYS_CYCLING_ROAD);
+    FlagClear(FLAG_SYS_CRUISE_MODE);
+    FlagClear(FLAG_SYS_SAFARI_MODE);
+    FlagClear(FLAG_SYS_USE_STRENGTH);
+    FlagClear(FLAG_SYS_USE_FLASH);
 }
 
 void Overworld_ResetStateAfterWhiteOut(void)
 {
     player_avatar_init_params_reset();
-    FlagClear(SYS_CYCLING_ROAD);
-    FlagClear(SYS_CRUISE_MODE);
-    FlagClear(SYS_SAFARI_MODE);
-    FlagClear(SYS_USE_STRENGTH);
-    FlagClear(SYS_USE_FLASH);
+    FlagClear(FLAG_SYS_CYCLING_ROAD);
+    FlagClear(FLAG_SYS_CRUISE_MODE);
+    FlagClear(FLAG_SYS_SAFARI_MODE);
+    FlagClear(FLAG_SYS_USE_STRENGTH);
+    FlagClear(FLAG_SYS_USE_FLASH);
 }
 
 void sub_805308C(void)
 {
-    FlagClear(SYS_SAFARI_MODE);
+    FlagClear(FLAG_SYS_SAFARI_MODE);
     ChooseAmbientCrySpecies();
     ResetCyclingRoadChallengeData();
     UpdateLocationHistoryForRoamer();
@@ -641,7 +641,7 @@ void sub_8053994(u32 a1)
     SetSav1WeatherFromCurrMapHeader();
     ChooseAmbientCrySpecies();
     if (v2)
-        FlagClear(SYS_USE_FLASH);
+        FlagClear(FLAG_SYS_USE_FLASH);
     SetDefaultFlashLevel();
     Overworld_ClearSavedMusic();
     mapheader_run_script_with_tag_x3();
@@ -691,7 +691,7 @@ struct UnkPlayerStruct *sub_8053AA8(void)
 
 u8 sub_8053B00(struct UnkPlayerStruct *playerStruct, u16 a2, u8 a3)
 {
-    if (a3 != 8 && FlagGet(SYS_CRUISE_MODE))
+    if (a3 != 8 && FlagGet(FLAG_SYS_CRUISE_MODE))
         return 1;
     if (a3 == 5)
         return 16;
@@ -708,7 +708,7 @@ u8 sub_8053B00(struct UnkPlayerStruct *playerStruct, u16 a2, u8 a3)
 
 u8 sub_8053B60(struct UnkPlayerStruct *playerStruct, u8 a2, u16 a3, u8 a4)
 {
-    if (FlagGet(SYS_CRUISE_MODE) && a4 == 6)
+    if (FlagGet(FLAG_SYS_CRUISE_MODE) && a4 == 6)
         return 4;
     if (MetatileBehavior_IsDeepSouthWarp(a3) == TRUE)
         return 2;
@@ -766,7 +766,7 @@ void SetDefaultFlashLevel(void)
 {
     if (!gMapHeader.cave)
         gSaveBlock1.flashLevel = 0;
-    else if (FlagGet(SYS_USE_FLASH))
+    else if (FlagGet(FLAG_SYS_USE_FLASH))
         gSaveBlock1.flashLevel = 1;
     else
         gSaveBlock1.flashLevel = gMaxFlashLevel;
@@ -792,7 +792,7 @@ void sub_8053D14(u16 mapDataId)
 
 static bool16 ShouldLegendaryMusicPlayAtLocation(struct WarpData *warp)
 {
-    if (!FlagGet(SYS_WEATHER_CTRL))
+    if (!FlagGet(FLAG_SYS_WEATHER_CTRL))
         return FALSE;
     if (warp->mapGroup == 0)
     {
@@ -912,7 +912,7 @@ void Overworld_ClearSavedMusic(void)
 
 void sub_8053F0C(void)
 {
-    if (FlagGet(SPECIAL_FLAG_1) != TRUE)
+    if (FlagGet(FLAG_SPECIAL_FLAG_1) != TRUE)
     {
         u16 newMusic = GetWarpDestinationMusic();
         u16 currentMusic = GetCurrentMapMusic();
@@ -959,7 +959,7 @@ u8 GetMapMusicFadeoutSpeed(void)
 void sub_8053FF8(void)
 {
     u16 music = GetWarpDestinationMusic();
-    if (FlagGet(SPECIAL_FLAG_1) != TRUE && music != GetCurrentMapMusic())
+    if (FlagGet(FLAG_SPECIAL_FLAG_1) != TRUE && music != GetCurrentMapMusic())
     {
         u8 speed = GetMapMusicFadeoutSpeed();
         FadeOutMapMusic(speed);

@@ -177,7 +177,7 @@ void ItemUseOutOfBattle_Bike(u8 taskId)
     PlayerGetDestCoords(&x, &y);
     tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
 
-    if (FlagGet(SYS_CYCLING_ROAD) == TRUE // on cycling road?
+    if (FlagGet(FLAG_SYS_CYCLING_ROAD) == TRUE // on cycling road?
         || MetatileBehavior_IsVerticalRail(tileBehavior) == TRUE
         || MetatileBehavior_IsHorizontalRail(tileBehavior) == TRUE
         || MetatileBehavior_IsIsolatedVerticalRail(tileBehavior) == TRUE
@@ -952,8 +952,8 @@ void ItemUseOutOfBattle_BlackWhiteFlute(u8 taskId)
 {
     if (gScriptItemId == ITEM_WHITE_FLUTE)
     {
-        FlagSet(SYS_ENC_UP_ITEM);
-        FlagClear(SYS_ENC_DOWN_ITEM);
+        FlagSet(FLAG_SYS_ENC_UP_ITEM);
+        FlagClear(FLAG_SYS_ENC_DOWN_ITEM);
         sub_80CA07C();
         StringExpandPlaceholders(gStringVar4, gOtherText_UsedFlute);
         gTasks[taskId].func = sub_80CA098;
@@ -961,8 +961,8 @@ void ItemUseOutOfBattle_BlackWhiteFlute(u8 taskId)
     }
     else if (gScriptItemId == ITEM_BLACK_FLUTE)
     {
-        FlagSet(SYS_ENC_DOWN_ITEM);
-        FlagClear(SYS_ENC_UP_ITEM);
+        FlagSet(FLAG_SYS_ENC_DOWN_ITEM);
+        FlagClear(FLAG_SYS_ENC_UP_ITEM);
         sub_80CA07C();
         StringExpandPlaceholders(gStringVar4, gOtherText_UsedRepel);
         gTasks[taskId].func = sub_80CA098;

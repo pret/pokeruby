@@ -18,7 +18,7 @@ NewMauville_Entrance_EventScript_15E4A1:: @ 815E4A1
 	return
 
 NewMauville_Entrance_MapScript1_15E4D8:: @ 815E4D8
-	setflag 2112
+	setflag FLAG_LANDMARK_NEW_MAUVILLE
 	end
 
 NewMauville_Entrance_EventScript_15E4DC:: @ 815E4DC

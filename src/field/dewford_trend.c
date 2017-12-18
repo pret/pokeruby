@@ -101,10 +101,10 @@ bool8 sub_80FA364(u16 *a)
 
     if (!SB1ContainsWords(a))
     {
-        if (!FlagGet(SYS_POPWORD_INPUT))
+        if (!FlagGet(FLAG_SYS_POPWORD_INPUT))
         {
-            FlagSet(SYS_POPWORD_INPUT);
-            if (!FlagGet(SYS_MIX_RECORD))
+            FlagSet(FLAG_SYS_POPWORD_INPUT);
+            if (!FlagGet(FLAG_SYS_MIX_RECORD))
             {
                 gSaveBlock1.easyChatPairs[0].words[0] = a[0];
                 gSaveBlock1.easyChatPairs[0].words[1] = a[1];

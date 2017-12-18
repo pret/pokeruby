@@ -17,9 +17,9 @@ SlateportCity_MapScript1_14BA3C:: @ 814BA3C
 	end
 
 SlateportCity_EventScript_14BA5C:: @ 814BA5C
-	setflag 2071
+	setflag FLAG_VISITED_SLATEPORT_CITY
 	setvar 0x4086, 0
-	setflag 803
+	setflag FLAG_HIDE_CONTEST_REPORTER_SLATEPORT
 	return
 
 SlateportCity_EventScript_14BA68:: @ 814BA68
@@ -125,7 +125,7 @@ SlateportCity_EventScript_14BB81:: @ 814BB81
 	faceplayer
 	compare 0x4058, 1
 	call_if 1, SlateportCity_EventScript_14BBA1
-	checkflag 96
+	checkflag FLAG_RECEIVED_SECRET_POWER
 	goto_if_eq SlateportCity_EventScript_14BBAB
 	msgbox SlateportCity_Text_164937, 4
 	release
@@ -182,7 +182,7 @@ SlateportCity_EventScript_14BC0A:: @ 814BC0A
 SlateportCity_EventScript_14BC14:: @ 814BC14
 	lock
 	faceplayer
-	checkflag 148
+	checkflag FLAG_DOCK_REJECTED_DEVON_GOODS
 	goto_if_eq SlateportCity_EventScript_14BC29
 	msgbox SlateportCity_Text_164BBF, 4
 	release
@@ -199,9 +199,9 @@ SlateportCity_EventScript_14BC33:: @ 814BC33
 
 SlateportCity_EventScript_14BC3C:: @ 814BC3C
 	lockall
-	checkflag 2052
+	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if_eq SlateportCity_EventScript_14BC63
-	checkflag 2061
+	checkflag FLAG_BADGE07_GET
 	goto_if_eq SlateportCity_EventScript_14BC59
 	msgbox SlateportCity_Text_1658A0, 4
 	releaseall
@@ -235,7 +235,7 @@ SlateportCity_EventScript_14BC88:: @ 814BC88
 
 SlateportCity_EventScript_14BC91:: @ 814BC91
 	lockall
-	checkflag 2052
+	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if_eq SlateportCity_EventScript_14BCA5
 	msgbox SlateportCity_Text_165A8B, 4
 	releaseall
@@ -410,7 +410,7 @@ SlateportCity_EventScript_14BE16:: @ 814BE16
 SlateportCity_EventScript_14BE20:: @ 814BE20
 	lock
 	faceplayer
-	checkflag 96
+	checkflag FLAG_RECEIVED_SECRET_POWER
 	goto_if 0, SlateportCity_EventScript_14BE16
 	message SlateportCity_Text_1A0BE4
 	waitmessage
@@ -442,7 +442,7 @@ SlateportCity_Decorations2:: @ 814BE40
 @ 814BE60
 	lock
 	faceplayer
-	checkflag 96
+	checkflag FLAG_RECEIVED_SECRET_POWER
 	goto_if 0, SlateportCity_EventScript_14BE16
 	message SlateportCity_Text_1A0BE4
 	waitmessage
@@ -533,10 +533,10 @@ SlateportCity_EventScript_14BEBC:: @ 814BEBC
 	applymovement 255, SlateportCity_Movement_14C008
 	waitmovement 0
 	removeobject 11
-	clearflag 841
-	clearflag 848
-	clearflag 845
-	clearflag 846
+	clearflag FLAG_HIDE_STERN_SLATEPORT_HARBOR
+	clearflag FLAG_HIDE_SUBMARINE_SHADOW_SLATEPORT_HARBOR
+	clearflag FLAG_HIDE_GRUNT_1_SLATEPORT_HARBOR
+	clearflag FLAG_HIDE_GRUNT_2_SLATEPORT_HARBOR
 	setvar 0x4058, 2
 	warp MAP_SLATEPORT_CITY_HARBOR, 255, 11, 14
 	waitstate

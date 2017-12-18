@@ -4,8 +4,8 @@ LavaridgeTown_MapScripts:: @ 814E4A3
 	.byte 0
 
 LavaridgeTown_MapScript1_14E4AE:: @ 814E4AE
-	setflag 2066
-	checkflag 139
+	setflag FLAG_VISITED_LAVARIDGE_TOWN
+	checkflag FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY
 	call_if 1, LavaridgeTown_EventScript_14E4DF
 	call LavaridgeTown_EventScript_1A014E
 	call LavaridgeTown_EventScript_1A0172
@@ -19,7 +19,7 @@ LavaridgeTown_EventScript_14E4D0:: @ 814E4D0
 	return
 
 LavaridgeTown_EventScript_14E4DF:: @ 814E4DF
-	clearflag 877
+	clearflag FLAG_HIDE_MT_CHIMNEY_PEOPLE
 	return
 
 LavaridgeTown_MapScript2_14E4E3:: @ 814E4E3
@@ -84,7 +84,7 @@ LavaridgeTown_EventScript_14E575:: @ 814E575
 LavaridgeTown_EventScript_14E5AB:: @ 814E5AB
 	msgbox LavaridgeTown_Text_16BDA4, 4
 	giveitem ITEM_GO_GOGGLES
-	setflag 221
+	setflag FLAG_RECEIVED_GO_GOGGLES
 	msgbox LavaridgeTown_Text_16BE7D, 4
 	goto LavaridgeTown_EventScript_14E5F5
 	end
@@ -92,7 +92,7 @@ LavaridgeTown_EventScript_14E5AB:: @ 814E5AB
 LavaridgeTown_EventScript_14E5D0:: @ 814E5D0
 	msgbox LavaridgeTown_Text_16BF92, 4
 	giveitem ITEM_GO_GOGGLES
-	setflag 221
+	setflag FLAG_RECEIVED_GO_GOGGLES
 	msgbox LavaridgeTown_Text_16C020, 4
 	goto LavaridgeTown_EventScript_14E5F5
 	end
@@ -272,7 +272,7 @@ LavaridgeTown_EventScript_14E751:: @ 814E751
 LavaridgeTown_EventScript_14E75A:: @ 814E75A
 	lock
 	faceplayer
-	checkflag 266
+	checkflag FLAG_RECEIVED_LAVARIDGE_EGG
 	goto_if_eq LavaridgeTown_EventScript_14E79E
 	msgbox LavaridgeTown_Text_16C174, 5
 	compare RESULT, 0
@@ -281,7 +281,7 @@ LavaridgeTown_EventScript_14E75A:: @ 814E75A
 	compare RESULT, 6
 	goto_if_eq LavaridgeTown_EventScript_14E7A8
 	msgbox LavaridgeTown_Text_16C2B6, 4
-	setflag 266
+	setflag FLAG_RECEIVED_LAVARIDGE_EGG
 	playfanfare 370
 	message LavaridgeTown_Text_16C2EA
 	waitfanfare

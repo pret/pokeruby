@@ -26,10 +26,10 @@ InsideOfTruck_EventScript_15FC29:: @ 815FC29
 InsideOfTruck_EventScript_15FC45:: @ 815FC45
 	sethealplace 1
 	setvar 0x4092, 1
-	setflag 759
-	setflag 762
-	setflag 784
-	setflag 760
+	setflag FLAG_HIDE_MAY_MOM_DOWNSTAIRS
+	setflag FLAG_HIDE_MOVING_TRUCK_MAY
+	setflag FLAG_HIDE_BRENDAN_MOM
+	setflag FLAG_HIDE_BRENDAN_UPSTAIRS
 	setvar 0x408c, 1
 	setdynamicwarp MAP_LITTLEROOT_TOWN, 255, 3, 10
 	releaseall
@@ -38,10 +38,10 @@ InsideOfTruck_EventScript_15FC45:: @ 815FC45
 InsideOfTruck_EventScript_15FC68:: @ 815FC68
 	sethealplace 2
 	setvar 0x4092, 2
-	setflag 758
-	setflag 761
-	setflag 785
-	setflag 722
+	setflag FLAG_HIDE_BRENDAN_MOM_DOWNSTAIRS
+	setflag FLAG_HIDE_MOVING_TRUCK_BRENDAN
+	setflag FLAG_HIDE_MAY_MOM
+	setflag FLAG_HIDE_MAY_UPSTAIRS
 	setvar 0x4082, 1
 	setdynamicwarp MAP_LITTLEROOT_TOWN, 255, 12, 10
 	releaseall

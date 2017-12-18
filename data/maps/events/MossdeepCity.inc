@@ -4,7 +4,7 @@ MossdeepCity_MapObjects:: @ 838042C
 	object_event 3, MAP_OBJ_GFX_WOMAN_2, 0, 32, 0, 12, 0, 5, 2, 17, 0, 0, 0, 0, 0, MossdeepCity_EventScript_14CFAE, 0, 0, 0
 	object_event 4, MAP_OBJ_GFX_LITTLE_BOY_1, 0, 26, 0, 21, 0, 5, 3, 16, 0, 0, 0, 0, 0, MossdeepCity_EventScript_14CFC0, 0, 0, 0
 	object_event 5, MAP_OBJ_GFX_GIRL_1, 0, 45, 0, 18, 0, 7, 9, 0, 0, 0, 0, 0, 0, MossdeepCity_EventScript_14CFD2, 0, 0, 0
-	object_event 6, MAP_OBJ_GFX_ITEM_BALL, 0, 62, 0, 35, 0, 5, 1, 0, 0, 0, 0, 0, 0, MossdeepCity_EventScript_1B1745, 1043, 0, 0
+	object_event 6, MAP_OBJ_GFX_ITEM_BALL, 0, 62, 0, 35, 0, 5, 1, 0, 0, 0, 0, 0, 0, MossdeepCity_EventScript_1B1745, FLAG_ITEM_MOSSDEEP_1, 0, 0
 	object_event 7, MAP_OBJ_GFX_MAN_1, 0, 53, 0, 5, 0, 7, 7, 0, 0, 0, 0, 0, 0, MossdeepCity_EventScript_14D011, 0, 0, 0
 	object_event 8, MAP_OBJ_GFX_GIRL_1, 0, 56, 0, 21, 0, 7, 10, 17, 0, 0, 0, 0, 0, MossdeepCity_EventScript_14CFDB, 0, 0, 0
 	object_event 9, MAP_OBJ_GFX_BOY_2, 0, 23, 0, 13, 0, 5, 2, 17, 0, 0, 0, 0, 0, MossdeepCity_EventScript_14D027, 0, 0, 0

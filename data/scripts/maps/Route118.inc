@@ -9,7 +9,7 @@ Route118_MapScript1_150F2E:: @ 8150F2E
 Route118_EventScript_150F34:: @ 8150F34
 	lock
 	faceplayer
-	checkflag 227
+	checkflag FLAG_RECEIVED_GOOD_ROD
 	goto_if_eq Route118_EventScript_150F89
 	msgbox Route118_Text_170F12, 5
 	compare RESULT, 1
@@ -21,7 +21,7 @@ Route118_EventScript_150F34:: @ 8150F34
 Route118_EventScript_150F5E:: @ 8150F5E
 	msgbox Route118_Text_170F46, 4
 	giveitem ITEM_GOOD_ROD
-	setflag 227
+	setflag FLAG_RECEIVED_GOOD_ROD
 	msgbox Route118_Text_170F7E, 4
 	release
 	end

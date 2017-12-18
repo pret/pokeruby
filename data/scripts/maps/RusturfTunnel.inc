@@ -32,9 +32,9 @@ RusturfTunnel_EventScript_15C782:: @ 815C782
 RusturfTunnel_EventScript_15C799:: @ 815C799
 	lock
 	faceplayer
-	checkflag 1
+	checkflag FLAG_TEMP_1
 	goto_if_eq RusturfTunnel_EventScript_15C7BC
-	setflag 1
+	setflag FLAG_TEMP_1
 	msgbox RusturfTunnel_Text_1944C5, 4
 	closemessage
 	applymovement LAST_TALKED, RusturfTunnel_Movement_1A083D
@@ -65,7 +65,7 @@ RusturfTunnel_EventScript_15C7D1:: @ 815C7D1
 	compare 0x4001, 3
 	call_if 1, RusturfTunnel_EventScript_15C8EB
 	giveitem ITEM_HM04
-	setflag 106
+	setflag FLAG_RECEIVED_HM04
 	msgbox RusturfTunnel_Text_194693, 4
 	closemessage
 	compare 0x4001, 1
@@ -341,11 +341,11 @@ RusturfTunnel_EventScript_15C9EA:: @ 815C9EA
 	waitmovement 0
 	removeobject 5
 	removeobject 7
-	clearflag 142
-	setflag 143
+	clearflag FLAG_DEVON_GOODS_STOLEN
+	setflag FLAG_RECOVERED_DEVON_GOODS
 	setvar 0x405a, 4
 	setvar 0x4090, 1
-	setflag 891
+	setflag FLAG_HIDE_BRINEY_ROUTE116
 	release
 	end
 

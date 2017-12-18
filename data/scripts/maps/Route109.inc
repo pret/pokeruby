@@ -43,14 +43,14 @@ Route109_EventScript_14F548:: @ 814F548
 	applymovement 255, Route109_Movement_14F670
 	waitmovement 0
 	addobject 4
-	clearflag 743
+	clearflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD
 	setobjectxyperm 2, 12, 8
 	addobject 2
 	setobjectpriority 2, 0, 11, 0
 	applymovement 2, Route109_Movement_14F67D
 	waitmovement 0
-	clearflag 740
-	setflag 744
+	clearflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE109
 	hideobject 1, 0, 24
 	msgbox Route109_Text_16B4B5, 4
 	closemessage
@@ -271,7 +271,7 @@ Route109_Movement_14F67D:: @ 814F67D
 Route109_EventScript_14F680:: @ 814F680
 	lock
 	faceplayer
-	checkflag 149
+	checkflag FLAG_DELIVERED_DEVON_GOODS
 	goto_if 0, Route109_EventScript_14F691
 	goto Route109_EventScript_14F6AF
 	end
@@ -328,7 +328,7 @@ Route109_EventScript_14F725:: @ 814F725
 	lock
 	faceplayer
 	special GetPlayerBigGuyGirlString
-	checkflag 280
+	checkflag FLAG_RECEIVED_SOFT_SAND
 	goto_if_eq Route109_EventScript_14F762
 	msgbox Route109_Text_16E433, 4
 	giveitem ITEM_SOFT_SAND
@@ -337,7 +337,7 @@ Route109_EventScript_14F725:: @ 814F725
 	closemessage
 	applymovement LAST_TALKED, Route109_Movement_1A083D
 	waitmovement 0
-	setflag 280
+	setflag FLAG_RECEIVED_SOFT_SAND
 	release
 	end
 

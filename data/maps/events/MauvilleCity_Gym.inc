@@ -1,5 +1,5 @@
 MauvilleCity_Gym_MapObjects:: @ 838821C
-	object_event 1, MAP_OBJ_GFX_WATTSON, 0, 4, 0, 3, 0, 3, 8, 0, 0, 0, 0, 0, 0, MauvilleCity_Gym_EventScript_1565AB, 913, 0, 0
+	object_event 1, MAP_OBJ_GFX_WATTSON, 0, 4, 0, 3, 0, 3, 8, 0, 0, 0, 0, 0, 0, MauvilleCity_Gym_EventScript_1565AB, FLAG_HIDE_WATTSON_MAUVILLE_GYM, 0, 0
 	object_event 2, MAP_OBJ_GFX_MAN_6, 0, 6, 0, 9, 0, 3, 9, 0, 0, 1, 0, 2, 0, MauvilleCity_Gym_EventScript_1566FD, 0, 0, 0
 	object_event 3, MAP_OBJ_GFX_GIRL_3, 0, 7, 0, 11, 0, 3, 8, 0, 0, 1, 0, 1, 0, MauvilleCity_Gym_EventScript_15672B, 0, 0, 0
 	object_event 4, MAP_OBJ_GFX_YOUNGSTER, 0, 1, 0, 13, 0, 3, 10, 0, 0, 1, 0, 1, 0, MauvilleCity_Gym_EventScript_156714, 0, 0, 0

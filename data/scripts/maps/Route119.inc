@@ -4,7 +4,7 @@ Route119_MapScripts:: @ 8151167
 	.byte 0
 
 Route119_MapScript1_151172:: @ 8151172
-	checkflag 2145
+	checkflag FLAG_SYS_CTRL_OBJ_DELETE
 	call_if 1, Route119_EventScript_15117C
 	end
 
@@ -33,8 +33,8 @@ Route119_MapScript1_15119B:: @ 815119B
 	end
 
 Route119_EventScript_1511B9:: @ 81511B9
-	setflag 893
-	clearflag 892
+	setflag FLAG_HIDE_WEATHER_INSTITUTE_WORKERS_2F
+	clearflag FLAG_HIDE_WEATHER_INSTITUTE_WORKERS_1F
 	setvar 0x40b3, 2
 	return
 
@@ -149,7 +149,7 @@ Route119_EventScript_151337:: @ 8151337
 
 Route119_EventScript_151352:: @ 8151352
 	giveitem ITEM_HM02
-	setflag 110
+	setflag FLAG_RECEIVED_HM02
 	return
 
 Route119_EventScript_151362:: @ 8151362

@@ -4,11 +4,11 @@ GraniteCave_1F_MapScripts:: @ 815CBA6
 GraniteCave_1F_EventScript_15CBA7:: @ 815CBA7
 	lock
 	faceplayer
-	checkflag 109
+	checkflag FLAG_RECEIVED_HM05
 	goto_if_eq GraniteCave_1F_EventScript_15CBD3
 	msgbox GraniteCave_1F_Text_194917, 4
 	giveitem ITEM_HM05
-	setflag 109
+	setflag FLAG_RECEIVED_HM05
 	msgbox GraniteCave_1F_Text_194A3E, 4
 	release
 	end

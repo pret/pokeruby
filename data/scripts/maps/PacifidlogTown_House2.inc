@@ -6,13 +6,13 @@ PacifidlogTown_House2_EventScript_154168:: @ 8154168
 	faceplayer
 	dodailyevents
 	call PacifidlogTown_House2_EventScript_1541B4
-	checkflag 299
+	checkflag FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK
 	goto_if_eq PacifidlogTown_House2_EventScript_154254
-	checkflag 300
+	checkflag FLAG_MET_FANCLUB_YOUNGER_BROTHER
 	call_if 1, PacifidlogTown_House2_EventScript_1541CE
-	checkflag 300
+	checkflag FLAG_MET_FANCLUB_YOUNGER_BROTHER
 	call_if 0, PacifidlogTown_House2_EventScript_1541D7
-	setflag 300
+	setflag FLAG_MET_FANCLUB_YOUNGER_BROTHER
 	specialvar RESULT, GetLeadMonFriendshipScore
 	compare RESULT, 4
 	goto_if 4, PacifidlogTown_House2_EventScript_1541EC
@@ -23,7 +23,7 @@ PacifidlogTown_House2_EventScript_154168:: @ 8154168
 	end
 
 PacifidlogTown_House2_EventScript_1541B4:: @ 81541B4
-	checkflag 299
+	checkflag FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK
 	goto_if 0, PacifidlogTown_House2_EventScript_1A14DC
 	specialvar RESULT, sub_810F908
 	compare RESULT, 0
@@ -40,7 +40,7 @@ PacifidlogTown_House2_EventScript_1541D7:: @ 81541D7
 	return
 
 PacifidlogTown_House2_EventScript_1541E8:: @ 81541E8
-	clearflag 299
+	clearflag FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK
 	return
 
 PacifidlogTown_House2_EventScript_1541EC:: @ 81541EC
@@ -48,7 +48,7 @@ PacifidlogTown_House2_EventScript_1541EC:: @ 81541EC
 	giveitem ITEM_TM27
 	compare RESULT, 0
 	goto_if_eq PacifidlogTown_House2_EventScript_1A029B
-	setflag 299
+	setflag FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK
 	special sub_810F950
 	msgbox PacifidlogTown_House2_Text_179283, 4
 	release
@@ -64,7 +64,7 @@ PacifidlogTown_House2_EventScript_154225:: @ 8154225
 	giveitem ITEM_TM21
 	compare RESULT, 0
 	goto_if_eq PacifidlogTown_House2_EventScript_1A029B
-	setflag 299
+	setflag FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK
 	special sub_810F950
 	msgbox PacifidlogTown_House2_Text_179283, 4
 	release

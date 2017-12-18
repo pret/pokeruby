@@ -15,7 +15,7 @@ void HandleDrawSaveWindowInfo(s16 left, s16 top)
     if (IsResizeSaveWindowEnabled())
         width = 13;
 
-    if (FlagGet(SYS_POKEDEX_GET))
+    if (FlagGet(FLAG_SYS_POKEDEX_GET))
     {
         // print info + dex information.
         MenuDrawTextWindow(left, top, left + width, top + 11);
@@ -44,7 +44,7 @@ void HandleCloseSaveWindow(u16 left, u16 top)
     if (IsResizeSaveWindowEnabled())
         width = 13;
 
-    if (FlagGet(SYS_POKEDEX_GET))
+    if (FlagGet(FLAG_SYS_POKEDEX_GET))
         MenuZeroFillWindowRect(left, top, left + width, top + 11);
     else
         MenuZeroFillWindowRect(left, top, left + width, top + 9);
@@ -106,7 +106,7 @@ u8 GetBadgeCount(void)
     u8 badgeCount = 0;
     int badgeFlag;
 
-    for (badgeFlag = BADGE01_GET; badgeFlag <= BADGE08_GET; badgeFlag++)
+    for (badgeFlag = FLAG_BADGE01_GET; badgeFlag <= FLAG_BADGE08_GET; badgeFlag++)
         if (FlagGet(badgeFlag))
             badgeCount++;
 

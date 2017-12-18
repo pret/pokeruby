@@ -4,8 +4,8 @@ EverGrandeCity_PokemonLeague_MapScripts:: @ 815BA75
 
 EverGrandeCity_PokemonLeague_MapScript1_15BA7B:: @ 815BA7B
 	sethealplace 20
-	setflag 2132
-	checkflag 263
+	setflag FLAG_SYS_POKEMON_LEAGUE_FLY
+	checkflag FLAG_ENTERED_ELITE_FOUR
 	call_if 0, EverGrandeCity_PokemonLeague_EventScript_15BA8B
 	end
 
@@ -47,7 +47,7 @@ EverGrandeCity_PokemonLeague_Items:: @ 815BAC0
 
 EverGrandeCity_PokemonLeague_EventScript_15BAD2:: @ 815BAD2
 	lockall
-	checkflag 263
+	checkflag FLAG_ENTERED_ELITE_FOUR
 	goto_if_eq EverGrandeCity_PokemonLeague_EventScript_15BB57
 	getplayerxy 0x4000, 0x4001
 	compare 0x4000, 11
@@ -57,7 +57,7 @@ EverGrandeCity_PokemonLeague_EventScript_15BAD2:: @ 815BAD2
 	message EverGrandeCity_PokemonLeague_Text_1916FD
 	waitmessage
 	delay 75
-	checkflag 2060
+	checkflag FLAG_BADGE06_GET
 	goto_if 0, EverGrandeCity_PokemonLeague_EventScript_15BB4A
 	closemessage
 	applymovement 3, EverGrandeCity_PokemonLeague_Movement_15BB7E
@@ -71,7 +71,7 @@ EverGrandeCity_PokemonLeague_EventScript_15BAD2:: @ 815BAD2
 	closemessage
 	moveobjectoffscreen 3
 	moveobjectoffscreen 4
-	setflag 263
+	setflag FLAG_ENTERED_ELITE_FOUR
 	releaseall
 	end
 

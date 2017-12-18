@@ -5,7 +5,7 @@ Route110_TrickHouseEntrance_MapScripts:: @ 8160F2B
 	.byte 0
 
 Route110_TrickHouseEntrance_MapScript1_160F3B:: @ 8160F3B
-	setflag 2114
+	setflag FLAG_LANDMARK_TRICK_HOUSE
 	compare 0x40b5, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_160FCE
 	compare 0x40c1, 1
@@ -63,37 +63,37 @@ Route110_TrickHouseEntrance_EventScript_160FDE:: @ 8160FDE
 	return
 
 Route110_TrickHouseEntrance_EventScript_16103C:: @ 816103C
-	checkflag 2057
+	checkflag FLAG_BADGE03_GET
 	call_if 0, Route110_TrickHouseEntrance_EventScript_161088
 	return
 
 Route110_TrickHouseEntrance_EventScript_161046:: @ 8161046
-	checkflag 2058
+	checkflag FLAG_BADGE04_GET
 	call_if 0, Route110_TrickHouseEntrance_EventScript_161088
 	return
 
 Route110_TrickHouseEntrance_EventScript_161050:: @ 8161050
-	checkflag 2059
+	checkflag FLAG_BADGE05_GET
 	call_if 0, Route110_TrickHouseEntrance_EventScript_161088
 	return
 
 Route110_TrickHouseEntrance_EventScript_16105A:: @ 816105A
-	checkflag 2060
+	checkflag FLAG_BADGE06_GET
 	call_if 0, Route110_TrickHouseEntrance_EventScript_161088
 	return
 
 Route110_TrickHouseEntrance_EventScript_161064:: @ 8161064
-	checkflag 2061
+	checkflag FLAG_BADGE07_GET
 	call_if 0, Route110_TrickHouseEntrance_EventScript_161088
 	return
 
 Route110_TrickHouseEntrance_EventScript_16106E:: @ 816106E
-	checkflag 2062
+	checkflag FLAG_BADGE08_GET
 	call_if 0, Route110_TrickHouseEntrance_EventScript_161088
 	return
 
 Route110_TrickHouseEntrance_EventScript_161078:: @ 8161078
-	checkflag 2052
+	checkflag FLAG_SYS_GAME_CLEAR
 	call_if 0, Route110_TrickHouseEntrance_EventScript_161088
 	return
 

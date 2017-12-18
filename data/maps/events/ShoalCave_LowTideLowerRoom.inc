@@ -1,5 +1,5 @@
 ShoalCave_LowTideLowerRoom_MapObjects:: @ 838DE3C
-	object_event 1, MAP_OBJ_GFX_PUSHABLE_BOULDER, 0, 25, 0, 3, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_PushableBoulder, 17, 0, 0
+	object_event 1, MAP_OBJ_GFX_PUSHABLE_BOULDER, 0, 25, 0, 3, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_PushableBoulder, FLAG_TEMP_11, 0, 0
 	object_event 2, MAP_OBJ_GFX_BLACK_BELT, 0, 11, 0, 4, 0, 3, 2, 17, 0, 0, 0, 0, 0, ShoalCave_LowTideLowerRoom_EventScript_15E44F, 0, 0, 0
 
 ShoalCave_LowTideLowerRoom_MapWarps:: @ 838DE6C

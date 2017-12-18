@@ -1,5 +1,5 @@
 ShoalCave_LowTideInnerRoom_MapObjects:: @ 838DD40
-	object_event 1, MAP_OBJ_GFX_ITEM_BALL, 0, 26, 0, 14, 0, 5, 1, 17, 0, 0, 0, 0, 0, ShoalCave_LowTideInnerRoom_EventScript_1B1A03, 1082, 0, 0
+	object_event 1, MAP_OBJ_GFX_ITEM_BALL, 0, 26, 0, 14, 0, 5, 1, 17, 0, 0, 0, 0, 0, ShoalCave_LowTideInnerRoom_EventScript_1B1A03, FLAG_ITEM_SHOAL_CAVE_LOW_TIDE_INNER_ROOM_1, 0, 0
 
 ShoalCave_LowTideInnerRoom_MapWarps:: @ 838DD58
 	warp_def 34, 29, 3, 1, MAP_SHOAL_CAVE_LOW_TIDE_ENTRANCE_ROOM

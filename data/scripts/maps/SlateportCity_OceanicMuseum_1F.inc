@@ -57,7 +57,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_155B2D:: @ 8155B2D
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_155B5A:: @ 8155B5A
-	checkflag 149
+	checkflag FLAG_DELIVERED_DEVON_GOODS
 	goto_if 0, SlateportCity_OceanicMuseum_1F_EventScript_155B7B
 	msgbox SlateportCity_OceanicMuseum_1F_Text_17E1F5, 4
 	closemessage
@@ -167,7 +167,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_155C3A:: @ 8155C3A
 	giveitem ITEM_TM46
 	compare RESULT, 0
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_155CC2
-	setflag 269
+	setflag FLAG_RECEIVED_TM46
 	msgbox SlateportCity_OceanicMuseum_1F_Text_17E606, 4
 	closemessage
 	compare FACING, 2
@@ -179,7 +179,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_155C3A:: @ 8155C3A
 SlateportCity_OceanicMuseum_1F_EventScript_155C98:: @ 8155C98
 	applymovement 13, SlateportCity_OceanicMuseum_1F_Movement_155CD3
 	waitmovement 0
-	setflag 965
+	setflag FLAG_HIDE_SCARED_GRUNT_OCEANIC_MUSEUM
 	playse 9
 	removeobject 13
 	release
@@ -188,7 +188,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_155C98:: @ 8155C98
 SlateportCity_OceanicMuseum_1F_EventScript_155CAD:: @ 8155CAD
 	applymovement 13, SlateportCity_OceanicMuseum_1F_Movement_155CCC
 	waitmovement 0
-	setflag 965
+	setflag FLAG_HIDE_SCARED_GRUNT_OCEANIC_MUSEUM
 	playse 9
 	removeobject 13
 	release

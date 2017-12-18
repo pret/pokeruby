@@ -5,7 +5,7 @@ EverGrandeCity_SidneysRoom_MapScripts:: @ 815B53F
 	.byte 0
 
 EverGrandeCity_SidneysRoom_MapScript1_15B54F:: @ 815B54F
-	checkflag 1245
+	checkflag FLAG_DEFEATED_ELITE_4_SYDNEY
 	call_if 1, EverGrandeCity_SidneysRoom_EventScript_15B564
 	compare 0x409c, 1
 	call_if 1, EverGrandeCity_SidneysRoom_EventScript_15B56A
@@ -42,7 +42,7 @@ EverGrandeCity_SidneysRoom_EventScript_15B589:: @ 815B589
 EverGrandeCity_SidneysRoom_EventScript_15B596:: @ 815B596
 	lock
 	faceplayer
-	checkflag 1245
+	checkflag FLAG_DEFEATED_ELITE_4_SYDNEY
 	goto_if_eq EverGrandeCity_SidneysRoom_EventScript_15B5BD
 	playbgm 450, 0
 	msgbox EverGrandeCity_SidneysRoom_Text_190728, 4
@@ -56,7 +56,7 @@ EverGrandeCity_SidneysRoom_EventScript_15B5BD:: @ 815B5BD
 	end
 
 EverGrandeCity_SidneysRoom_EventScript_15B5C7:: @ 815B5C7
-	setflag 1245
+	setflag FLAG_DEFEATED_ELITE_4_SYDNEY
 	call EverGrandeCity_SidneysRoom_EventScript_1A0693
 	msgbox EverGrandeCity_SidneysRoom_Text_19086D, 4
 	release

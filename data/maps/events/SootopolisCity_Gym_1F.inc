@@ -1,5 +1,5 @@
 SootopolisCity_Gym_1F_MapObjects:: @ 838ACF0
-	object_event 1, MAP_OBJ_GFX_WALLACE, 0, 8, 0, 2, 0, 3, 8, 0, 0, 0, 0, 0, 0, SootopolisCity_Gym_1F_EventScript_15AFFF, 815, 0, 0
+	object_event 1, MAP_OBJ_GFX_WALLACE, 0, 8, 0, 2, 0, 3, 8, 0, 0, 0, 0, 0, 0, SootopolisCity_Gym_1F_EventScript_15AFFF, FLAG_HIDE_WALLACE_SOOTOPOLIS_GYM, 0, 0
 	object_event 2, MAP_OBJ_GFX_MAN_2, 0, 7, 0, 24, 0, 3, 8, 0, 0, 0, 0, 0, 0, SootopolisCity_Gym_1F_EventScript_15B084, 0, 0, 0
 
 SootopolisCity_Gym_1F_MapWarps:: @ 838AD20

@@ -17,27 +17,27 @@ Route104_MapScript1_14EEA8:: @ 814EEA8
 	end
 
 Route104_EventScript_14EEAE:: @ 814EEAE
-	checkflag 127
+	checkflag FLAG_MET_PRETTY_PETAL_SHOP_OWNER
 	goto_if 0, Route104_EventScript_14EEC4
-	checkflag 2057
+	checkflag FLAG_BADGE03_GET
 	goto_if 0, Route104_EventScript_14EEC4
-	clearflag 906
+	clearflag FLAG_HIDE_FLOWER_SHOP_WORKER_OUTSIDE
 	return
 
 Route104_EventScript_14EEC4:: @ 814EEC4
-	setflag 906
+	setflag FLAG_HIDE_FLOWER_SHOP_WORKER_OUTSIDE
 	return
 
 Route104_EventScript_14EEC8:: @ 814EEC8
 	lock
 	faceplayer
-	checkflag 246
+	checkflag FLAG_RECEIVED_CHESTO_BERRY_ROUTE104
 	goto_if_eq Route104_EventScript_14EEFF
 	msgbox Route104_Text_1C55B9, 4
 	giveitem ITEM_CHESTO_BERRY
 	compare RESULT, 0
 	goto_if_eq Route104_EventScript_1A029B
-	setflag 246
+	setflag FLAG_RECEIVED_CHESTO_BERRY_ROUTE104
 	msgbox Route104_Text_1C5665, 4
 	release
 	end
@@ -50,13 +50,13 @@ Route104_EventScript_14EEFF:: @ 814EEFF
 Route104_EventScript_14EF09:: @ 814EF09
 	lock
 	faceplayer
-	checkflag 279
+	checkflag FLAG_RECEIVED_WHITE_HERB
 	goto_if_eq Route104_EventScript_14EF38
 	msgbox Route104_Text_16DD91, 4
 	giveitem ITEM_WHITE_HERB
 	compare RESULT, 0
 	goto_if_eq Route104_EventScript_1A029B
-	setflag 279
+	setflag FLAG_RECEIVED_WHITE_HERB
 	release
 	end
 
@@ -104,13 +104,13 @@ Route104_EventScript_14EF8A:: @ 814EF8A
 Route104_EventScript_14EF93:: @ 814EF93
 	lock
 	faceplayer
-	checkflag 262
+	checkflag FLAG_RECEIVED_TM09
 	goto_if_eq Route104_EventScript_14EFC2
 	msgbox Route104_Text_16DC5F, 4
 	giveitem ITEM_TM09
 	compare RESULT, 0
 	goto_if_eq Route104_EventScript_1A029B
-	setflag 262
+	setflag FLAG_RECEIVED_TM09
 	release
 	end
 
@@ -145,22 +145,22 @@ Route104_EventScript_14EFD5:: @ 814EFD5
 	setobjectxyperm 2, 12, 8
 	addobject 2
 	setobjectpriority 2, 0, 11, 0
-	clearflag 740
+	clearflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
 	applymovement 2, Route104_Movement_14F16F
 	waitmovement 0
 	addobject 4
-	clearflag 743
+	clearflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD
 	call Route104_EventScript_1A02EF
-	setflag 742
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE104
 	hideobject 7, 0, 19
 	copyvar 0x4096, 0x8008
 	resetobjectpriority 255, 0, 19
 	resetobjectpriority 2, 0, 11
 	moveobjectoffscreen 2
 	setvar 0x408e, 0
-	checkflag 189
+	checkflag FLAG_DELIVERED_STEVEN_LETTER
 	goto_if 0, Route104_EventScript_14F08B
-	checkflag 189
+	checkflag FLAG_DELIVERED_STEVEN_LETTER
 	goto_if_eq Route104_EventScript_14F095
 	end
 

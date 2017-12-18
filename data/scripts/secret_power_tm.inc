@@ -14,8 +14,8 @@ Route111_EventScript_1A3877:: @ 81A3877
 	goto_if_eq Route111_EventScript_1A38D9
 	msgbox Route111_Text_1A35C5, 4
 	closemessage
-	setflag 96
-	clearflag 948
+	setflag FLAG_RECEIVED_SECRET_POWER
+	clearflag FLAG_HIDE_TM_SALESMAN_SLATEPORT
 	compare FACING, 3
 	call_if 1, Route111_EventScript_1A38C3
 	compare FACING, 4

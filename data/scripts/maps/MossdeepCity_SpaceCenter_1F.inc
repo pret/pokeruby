@@ -32,13 +32,13 @@ MossdeepCity_SpaceCenter_1F_EventScript_15ABCC:: @ 815ABCC
 MossdeepCity_SpaceCenter_1F_EventScript_15ABD5:: @ 815ABD5
 	lock
 	faceplayer
-	checkflag 192
+	checkflag FLAG_RECEIVED_SUN_STONE_MOSSDEEP
 	goto_if_eq MossdeepCity_SpaceCenter_1F_EventScript_15AC0C
 	msgbox MossdeepCity_SpaceCenter_1F_Text_18E335, 4
 	giveitem ITEM_SUN_STONE
 	compare RESULT, 0
 	goto_if_eq MossdeepCity_SpaceCenter_1F_EventScript_1A029B
-	setflag 192
+	setflag FLAG_RECEIVED_SUN_STONE_MOSSDEEP
 	msgbox MossdeepCity_SpaceCenter_1F_Text_18E39B, 4
 	release
 	end

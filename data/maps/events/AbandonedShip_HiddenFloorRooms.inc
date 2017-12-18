@@ -1,8 +1,8 @@
 AbandonedShip_HiddenFloorRooms_MapObjects:: @ 838E540
-	object_event 1, MAP_OBJ_GFX_ITEM_BALL, 0, 41, 0, 4, 0, 3, 1, 0, 0, 0, 0, 0, 0, AbandonedShip_HiddenFloorRooms_EventScript_1B18CB, 1077, 0, 0
-	object_event 2, MAP_OBJ_GFX_ITEM_BALL, 0, 16, 0, 10, 0, 3, 1, 0, 0, 0, 0, 0, 0, AbandonedShip_HiddenFloorRooms_EventScript_1B18D8, 1078, 0, 0
-	object_event 3, MAP_OBJ_GFX_ITEM_BALL, 0, 5, 0, 11, 0, 3, 1, 17, 0, 0, 0, 0, 0, AbandonedShip_HiddenFloorRooms_EventScript_1B18F2, 1102, 0, 0
-	object_event 4, MAP_OBJ_GFX_ITEM_BALL, 0, 31, 0, 11, 0, 3, 1, 17, 0, 0, 0, 0, 0, AbandonedShip_HiddenFloorRooms_EventScript_1B18E5, 1101, 0, 0
+	object_event 1, MAP_OBJ_GFX_ITEM_BALL, 0, 41, 0, 4, 0, 3, 1, 0, 0, 0, 0, 0, 0, AbandonedShip_HiddenFloorRooms_EventScript_1B18CB, FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOMS_1, 0, 0
+	object_event 2, MAP_OBJ_GFX_ITEM_BALL, 0, 16, 0, 10, 0, 3, 1, 0, 0, 0, 0, 0, 0, AbandonedShip_HiddenFloorRooms_EventScript_1B18D8, FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOMS_2, 0, 0
+	object_event 3, MAP_OBJ_GFX_ITEM_BALL, 0, 5, 0, 11, 0, 3, 1, 17, 0, 0, 0, 0, 0, AbandonedShip_HiddenFloorRooms_EventScript_1B18F2, FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOMS_4, 0, 0
+	object_event 4, MAP_OBJ_GFX_ITEM_BALL, 0, 31, 0, 11, 0, 3, 1, 17, 0, 0, 0, 0, 0, AbandonedShip_HiddenFloorRooms_EventScript_1B18E5, FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOMS_3, 0, 0
 
 AbandonedShip_HiddenFloorRooms_MapWarps:: @ 838E5A0
 	warp_def 6, 14, 3, 0, MAP_ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS

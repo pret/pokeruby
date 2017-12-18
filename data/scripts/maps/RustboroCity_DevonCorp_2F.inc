@@ -25,7 +25,7 @@ RustboroCity_DevonCorp_2F_EventScript_1574F9:: @ 81574F9
 	faceplayer
 	compare 0x40c4, 1
 	call_if 1, RustboroCity_DevonCorp_2F_EventScript_1574DC
-	checkflag 287
+	checkflag FLAG_MET_DEVON_EMPLOYEE
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_157519
 	msgbox RustboroCity_DevonCorp_2F_Text_182BD8, 4
 	release
@@ -41,7 +41,7 @@ RustboroCity_DevonCorp_2F_EventScript_157523:: @ 8157523
 	faceplayer
 	compare 0x40c4, 1
 	call_if 1, RustboroCity_DevonCorp_2F_EventScript_1574DC
-	checkflag 188
+	checkflag FLAG_RECEIVED_POKENAV
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_157543
 	msgbox RustboroCity_DevonCorp_2F_Text_182D2A, 4
 	release
@@ -139,7 +139,7 @@ RustboroCity_DevonCorp_2F_EventScript_157661:: @ 8157661
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_157707
 	copyvar 0x8004, RESULT
 	setvar 0x40c4, 0
-	setflag 267
+	setflag FLAG_RECEIVED_FOSSIL_MON
 	playfanfare 370
 	message RustboroCity_DevonCorp_2F_Text_18319E
 	waitfanfare
@@ -159,7 +159,7 @@ RustboroCity_DevonCorp_2F_EventScript_1576B4:: @ 81576B4
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_157707
 	copyvar 0x8004, RESULT
 	setvar 0x40c4, 0
-	setflag 267
+	setflag FLAG_RECEIVED_FOSSIL_MON
 	playfanfare 370
 	message RustboroCity_DevonCorp_2F_Text_18319E
 	waitfanfare

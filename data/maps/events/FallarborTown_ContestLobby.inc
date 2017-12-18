@@ -3,7 +3,7 @@ FallarborTown_ContestLobby_MapObjects:: @ 83866F0
 	object_event 2, MAP_OBJ_GFX_LITTLE_BOY_2, 0, 2, 0, 6, 0, 3, 5, 1, 0, 0, 0, 0, 0, FallarborTown_ContestLobby_EventScript_153A8E, 0, 0, 0
 	object_event 3, MAP_OBJ_GFX_LASS, 0, 0, 0, 4, 0, 3, 8, 0, 0, 0, 0, 0, 0, FallarborTown_ContestLobby_EventScript_153AB2, 0, 0, 0
 	object_event 4, MAP_OBJ_GFX_OLD_MAN_1, 0, 11, 0, 5, 0, 3, 10, 0, 0, 0, 0, 0, 0, FallarborTown_ContestLobby_EventScript_1B778A, 0, 0, 0
-	object_event 5, MAP_OBJ_GFX_REPORTER_M, 0, 7, 0, 5, 0, 3, 9, 0, 0, 0, 0, 0, 0, FallarborTown_ContestLobby_EventScript_1AE0B6, 800, 0, 0
+	object_event 5, MAP_OBJ_GFX_REPORTER_M, 0, 7, 0, 5, 0, 3, 9, 0, 0, 0, 0, 0, 0, FallarborTown_ContestLobby_EventScript_1AE0B6, FLAG_HIDE_CONTEST_REPORTER_FALLARBOR, 0, 0
 	object_event 6, MAP_OBJ_GFX_ARTIST, 0, 12, 0, 2, 0, 3, 8, 0, 0, 0, 0, 0, 0, FallarborTown_ContestLobby_EventScript_153A97, 0, 0, 0
 
 FallarborTown_ContestLobby_MapWarps:: @ 8386780

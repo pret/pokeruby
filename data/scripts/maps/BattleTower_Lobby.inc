@@ -13,14 +13,14 @@ BattleTower_Lobby_MapScript1_160293:: @ 8160293
 BattleTower_Lobby_EventScript_16029C:: @ 816029C
 	setvar 0x8004, 10
 	special sub_8135668
-	checkflag 238
+	checkflag FLAG_RECEIVED_GOLD_SHIELD
 	goto_if_eq BattleTower_Lobby_EventScript_1602E4
-	checkflag 237
+	checkflag FLAG_RECEIVED_SILVER_SHIELD
 	goto_if_eq BattleTower_Lobby_EventScript_1602CD
 	specialvar 0x8007, sub_810F404
 	compare 0x8007, 50
 	goto_if 0, BattleTower_Lobby_EventScript_1602E4
-	clearflag 941
+	clearflag FLAG_HIDE_AWARD_MAN_BATTLE_TOWER
 	special sub_810F8FC
 	return
 
@@ -28,12 +28,12 @@ BattleTower_Lobby_EventScript_1602CD:: @ 81602CD
 	specialvar 0x8007, sub_810F404
 	compare 0x8007, 100
 	goto_if 0, BattleTower_Lobby_EventScript_1602E4
-	clearflag 941
+	clearflag FLAG_HIDE_AWARD_MAN_BATTLE_TOWER
 	special sub_810F8FC
 	return
 
 BattleTower_Lobby_EventScript_1602E4:: @ 81602E4
-	setflag 941
+	setflag FLAG_HIDE_AWARD_MAN_BATTLE_TOWER
 	return
 
 BattleTower_Lobby_MapScript1_1602E8:: @ 81602E8
@@ -387,16 +387,16 @@ BattleTower_Lobby_EventScript_160727:: @ 8160727
 BattleTower_Lobby_EventScript_160733:: @ 8160733
 	lock
 	faceplayer
-	checkflag 238
+	checkflag FLAG_RECEIVED_GOLD_SHIELD
 	goto_if_eq BattleTower_Lobby_EventScript_1607C5
-	checkflag 237
+	checkflag FLAG_RECEIVED_SILVER_SHIELD
 	goto_if_eq BattleTower_Lobby_EventScript_160773
 	msgbox BattleTower_Lobby_Text_19A9EE, 4
-	setvar 0x8008, 42
-	givedecoration 42
+	setvar 0x8008, DECOR_SILVER_SHIELD
+	givedecoration DECOR_SILVER_SHIELD
 	compare RESULT, 0
 	goto_if_eq BattleTower_Lobby_EventScript_1607AF
-	setflag 237
+	setflag FLAG_RECEIVED_SILVER_SHIELD
 	msgbox BattleTower_Lobby_Text_19ABAA, 4
 	release
 	end
@@ -406,11 +406,11 @@ BattleTower_Lobby_EventScript_160773:: @ 8160773
 	compare RESULT, 100
 	goto_if 0, BattleTower_Lobby_EventScript_1607C5
 	msgbox BattleTower_Lobby_Text_19AAC4, 4
-	setvar 0x8008, 43
-	givedecoration 43
+	setvar 0x8008, DECOR_GOLD_SHIELD
+	givedecoration DECOR_GOLD_SHIELD
 	compare RESULT, 0
 	goto_if_eq BattleTower_Lobby_EventScript_1607AF
-	setflag 238
+	setflag FLAG_RECEIVED_GOLD_SHIELD
 	msgbox BattleTower_Lobby_Text_19ABAA, 4
 	release
 	end

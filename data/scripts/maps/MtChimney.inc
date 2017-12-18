@@ -406,16 +406,16 @@ MtChimney_EventScript_15D174:: @ 815D174
 
 MtChimney_EventScript_15D17D:: @ 815D17D
 	lockall
-	checkflag 139
+	checkflag FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY
 	goto_if 0, MtChimney_EventScript_15D1D0
-	checkflag 115
+	checkflag FLAG_RECEIVED_METEORITE
 	goto_if_eq MtChimney_EventScript_15D1C6
 	msgbox MtChimney_Text_195870, 5
 	compare RESULT, 0
 	goto_if_eq MtChimney_EventScript_15D1BC
 	msgbox MtChimney_Text_1958C6, 4
 	giveitem ITEM_METEORITE
-	setflag 115
+	setflag FLAG_RECEIVED_METEORITE
 	releaseall
 	end
 
