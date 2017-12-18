@@ -104,145 +104,145 @@ const struct SpriteTemplate gSpriteTemplate_842F298[] = {
 
 
 const struct Subsprite gSubspriteTable_842F2C8[] = {
-    {  -1,  -1, ST_OAM_V_RECTANGLE, 1, 0, 0 },
-    {   1,  -1, ST_OAM_V_RECTANGLE, 1, 0, 0 }
+    {  -1,  -1, ST_OAM_V_RECTANGLE, 1,   0, 0 },
+    {   1,  -1, ST_OAM_V_RECTANGLE, 1,   8, 0 }
 };
 
 const struct Subsprite gSubspriteTable_842F2D8[] = {
-    {  -1,  -1, ST_OAM_V_RECTANGLE, 1, 0, 0 },
-    {   1,  -1, ST_OAM_V_RECTANGLE, 1, 0, 0 },
-    {   9,  -1, ST_OAM_V_RECTANGLE, 1, 0, 0 }
+    {  -1,  -1, ST_OAM_V_RECTANGLE, 1,   0, 0 },
+    {   1,  -1, ST_OAM_V_RECTANGLE, 1,   4, 0 },
+    {   9,  -1, ST_OAM_V_RECTANGLE, 1,   8, 0 }
 };
 
 const struct Subsprite gSubspriteTable_842F2F0[] = {
-    {  -1,  -1, ST_OAM_V_RECTANGLE, 1, 0, 0 },
-    {   1,  -1, ST_OAM_V_RECTANGLE, 1, 0, 0 },
-    {   9,  -1, ST_OAM_V_RECTANGLE, 1, 0, 0 },
-    {  17,  -1, ST_OAM_V_RECTANGLE, 1, 0, 0 }
+    {  -1,  -1, ST_OAM_V_RECTANGLE, 1,   0, 0 },
+    {   1,  -1, ST_OAM_V_RECTANGLE, 1,   4, 0 },
+    {   9,  -1, ST_OAM_V_RECTANGLE, 1,   4, 0 },
+    {  17,  -1, ST_OAM_V_RECTANGLE, 1,   8, 0 }
 };
 
 const struct Subsprite gSubspriteTable_842F310[] = {
-    {  -1,  -1, ST_OAM_V_RECTANGLE, 1, 0, 0 },
-    {   1,  -1, ST_OAM_SQUARE, 2, 0, 0 },
-    {  25,  -1, ST_OAM_V_RECTANGLE, 1, 0, 0 }
+    {  -1,  -1, ST_OAM_V_RECTANGLE, 1,   0, 0 },
+    {   1,  -1, ST_OAM_SQUARE, 2,  12, 0 },
+    {  25,  -1, ST_OAM_V_RECTANGLE, 1,   8, 0 }
 };
 
 const struct Subsprite gSubspriteTable_842F328[] = {
-    {  -1,  -1, ST_OAM_V_RECTANGLE, 1, 0, 0 },
-    {   1,  -1, ST_OAM_SQUARE, 2, 0, 0 },
-    {  33,  -1, ST_OAM_V_RECTANGLE, 1, 0, 0 }
+    {  -1,  -1, ST_OAM_V_RECTANGLE, 1,   0, 0 },
+    {   1,  -1, ST_OAM_SQUARE, 2,  12, 0 },
+    {  33,  -1, ST_OAM_V_RECTANGLE, 1,   8, 0 }
 };
 
 const struct Subsprite gSubspriteTable_842F340[] = {
-    {  -1,  -1, ST_OAM_V_RECTANGLE, 1, 0, 0 },
-    {   1,  -1, ST_OAM_V_RECTANGLE, 1, 0, 0 },
-    {   9,  -1, ST_OAM_SQUARE, 2, 0, 0 },
-    {  41,  -1, ST_OAM_V_RECTANGLE, 1, 0, 0 }
+    {  -1,  -1, ST_OAM_V_RECTANGLE, 1,   0, 0 },
+    {   1,  -1, ST_OAM_V_RECTANGLE, 1,   4, 0 },
+    {   9,  -1, ST_OAM_SQUARE, 2,  12, 0 },
+    {  41,  -1, ST_OAM_V_RECTANGLE, 1,   8, 0 }
 };
 
 const struct Subsprite gSubspriteTable_842F360[] = {
-    {  -1,  -1, ST_OAM_V_RECTANGLE, 1, 0, 0 },
-    {   1,  -1, ST_OAM_SQUARE, 2, 0, 0 },
-    {  17,  -1, ST_OAM_SQUARE, 2, 0, 0 },
-    {  49,  -1, ST_OAM_V_RECTANGLE, 1, 0, 0 }
+    {  -1,  -1, ST_OAM_V_RECTANGLE, 1,   0, 0 },
+    {   1,  -1, ST_OAM_SQUARE, 2,  12, 0 },
+    {  17,  -1, ST_OAM_SQUARE, 2,  12, 0 },
+    {  49,  -1, ST_OAM_V_RECTANGLE, 1,   8, 0 }
 };
 
 const struct Subsprite gSubspriteTable_842F380[] = {
-    {  -1,  -1, ST_OAM_V_RECTANGLE, 1, 0, 0 },
-    {   1,  -1, ST_OAM_SQUARE, 2, 0, 0 },
-    {  25,  -1, ST_OAM_SQUARE, 2, 0, 0 },
-    {  57,  -1, ST_OAM_V_RECTANGLE, 1, 0, 0 }
+    {  -1,  -1, ST_OAM_V_RECTANGLE, 1,   0, 0 },
+    {   1,  -1, ST_OAM_SQUARE, 2,  12, 0 },
+    {  25,  -1, ST_OAM_SQUARE, 2,  12, 0 },
+    {  57,  -1, ST_OAM_V_RECTANGLE, 1,   8, 0 }
 };
 
 const struct Subsprite gSubspriteTable_842F3A0[] = {
-    {  -1,  -1, ST_OAM_V_RECTANGLE, 1, 0, 0 },
-    {   1,  -1, ST_OAM_SQUARE, 2, 0, 0 },
-    {  33,  -1, ST_OAM_SQUARE, 2, 0, 0 },
-    {  65,  -1, ST_OAM_V_RECTANGLE, 1, 0, 0 }
+    {  -1,  -1, ST_OAM_V_RECTANGLE, 1,   0, 0 },
+    {   1,  -1, ST_OAM_SQUARE, 2,  12, 0 },
+    {  33,  -1, ST_OAM_SQUARE, 2,  12, 0 },
+    {  65,  -1, ST_OAM_V_RECTANGLE, 1,   8, 0 }
 };
 
 const struct Subsprite gSubspriteTable_842F3C0[] = {
-    {  -1,  -1, ST_OAM_V_RECTANGLE, 1, 0, 0 },
-    {   1,  -1, ST_OAM_V_RECTANGLE, 1, 0, 0 },
-    {   9,  -1, ST_OAM_SQUARE, 2, 0, 0 },
-    {  41,  -1, ST_OAM_SQUARE, 2, 0, 0 },
-    {  73,  -1, ST_OAM_V_RECTANGLE, 1, 0, 0 }
+    {  -1,  -1, ST_OAM_V_RECTANGLE, 1,   0, 0 },
+    {   1,  -1, ST_OAM_V_RECTANGLE, 1,   4, 0 },
+    {   9,  -1, ST_OAM_SQUARE, 2,  12, 0 },
+    {  41,  -1, ST_OAM_SQUARE, 2,  12, 0 },
+    {  73,  -1, ST_OAM_V_RECTANGLE, 1,   8, 0 }
 };
 
 const struct Subsprite gSubspriteTable_842F3E8[] = {
-    {  -1,  -1, ST_OAM_V_RECTANGLE, 1, 0, 0 },
-    {   1,  -1, ST_OAM_SQUARE, 2, 0, 0 },
-    {  33,  -1, ST_OAM_SQUARE, 2, 0, 0 },
-    {  49,  -1, ST_OAM_SQUARE, 2, 0, 0 },
-    {  81,  -1, ST_OAM_V_RECTANGLE, 1, 0, 0 }
+    {  -1,  -1, ST_OAM_V_RECTANGLE, 1,   0, 0 },
+    {   1,  -1, ST_OAM_SQUARE, 2,  12, 0 },
+    {  33,  -1, ST_OAM_SQUARE, 2,  12, 0 },
+    {  49,  -1, ST_OAM_SQUARE, 2,  12, 0 },
+    {  81,  -1, ST_OAM_V_RECTANGLE, 1,   8, 0 }
 };
 
 const struct Subsprite gSubspriteTable_842F410[] = {
-    {  -1,  -1, ST_OAM_V_RECTANGLE, 1, 0, 0 },
-    {   1,  -1, ST_OAM_SQUARE, 2, 0, 0 },
-    {  33,  -1, ST_OAM_SQUARE, 2, 0, 0 },
-    {  57,  -1, ST_OAM_SQUARE, 2, 0, 0 },
-    {  89,  -1, ST_OAM_V_RECTANGLE, 1, 0, 0 }
+    {  -1,  -1, ST_OAM_V_RECTANGLE, 1,   0, 0 },
+    {   1,  -1, ST_OAM_SQUARE, 2,  12, 0 },
+    {  33,  -1, ST_OAM_SQUARE, 2,  12, 0 },
+    {  57,  -1, ST_OAM_SQUARE, 2,  12, 0 },
+    {  89,  -1, ST_OAM_V_RECTANGLE, 1,   8, 0 }
 };
 
 const struct Subsprite gSubspriteTable_842F438[] = {
-    {  -1,  -1, ST_OAM_V_RECTANGLE, 1, 0, 0 },
-    {   1,  -1, ST_OAM_SQUARE, 2, 0, 0 },
-    {  33,  -1, ST_OAM_SQUARE, 2, 0, 0 },
-    {  65,  -1, ST_OAM_SQUARE, 2, 0, 0 },
-    {  97,  -1, ST_OAM_V_RECTANGLE, 1, 0, 0 }
+    {  -1,  -1, ST_OAM_V_RECTANGLE, 1,   0, 0 },
+    {   1,  -1, ST_OAM_SQUARE, 2,  12, 0 },
+    {  33,  -1, ST_OAM_SQUARE, 2,  12, 0 },
+    {  65,  -1, ST_OAM_SQUARE, 2,  12, 0 },
+    {  97,  -1, ST_OAM_V_RECTANGLE, 1,   8, 0 }
 };
 
 const struct Subsprite gSubspriteTable_842F460[] = {
-    {  -1,  -1, ST_OAM_V_RECTANGLE, 1, 0, 0 },
-    {   1,  -1, ST_OAM_V_RECTANGLE, 1, 0, 0 },
-    {   9,  -1, ST_OAM_SQUARE, 2, 0, 0 },
-    {  41,  -1, ST_OAM_SQUARE, 2, 0, 0 },
-    {  73,  -1, ST_OAM_SQUARE, 2, 0, 0 },
-    { 105,  -1, ST_OAM_V_RECTANGLE, 1, 0, 0 }
+    {  -1,  -1, ST_OAM_V_RECTANGLE, 1,   0, 0 },
+    {   1,  -1, ST_OAM_V_RECTANGLE, 1,   4, 0 },
+    {   9,  -1, ST_OAM_SQUARE, 2,  12, 0 },
+    {  41,  -1, ST_OAM_SQUARE, 2,  12, 0 },
+    {  73,  -1, ST_OAM_SQUARE, 2,  12, 0 },
+    { 105,  -1, ST_OAM_V_RECTANGLE, 1,   8, 0 }
 };
 
 const struct Subsprite gSubspriteTable_842F490[] = {
-    {  -1,  -1, ST_OAM_V_RECTANGLE, 1, 0, 0 },
-    {   1,  -1, ST_OAM_SQUARE, 2, 0, 0 },
-    {  33,  -1, ST_OAM_SQUARE, 2, 0, 0 },
-    {  65,  -1, ST_OAM_SQUARE, 2, 0, 0 },
-    {  81,  -1, ST_OAM_SQUARE, 2, 0, 0 },
-    { 113,  -1, ST_OAM_V_RECTANGLE, 1, 0, 0 }
+    {  -1,  -1, ST_OAM_V_RECTANGLE, 1,   0, 0 },
+    {   1,  -1, ST_OAM_SQUARE, 2,  12, 0 },
+    {  33,  -1, ST_OAM_SQUARE, 2,  12, 0 },
+    {  65,  -1, ST_OAM_SQUARE, 2,  12, 0 },
+    {  81,  -1, ST_OAM_SQUARE, 2,  12, 0 },
+    { 113,  -1, ST_OAM_V_RECTANGLE, 1,   8, 0 }
 };
 
 const struct Subsprite gSubspriteTable_842F4C0[] = {
-    {  -1,  -1, ST_OAM_V_RECTANGLE, 1, 0, 0 },
-    {   1,  -1, ST_OAM_SQUARE, 2, 0, 0 },
-    {  33,  -1, ST_OAM_SQUARE, 2, 0, 0 },
-    {  65,  -1, ST_OAM_SQUARE, 2, 0, 0 },
-    {  89,  -1, ST_OAM_SQUARE, 2, 0, 0 },
-    { 121,  -1, ST_OAM_V_RECTANGLE, 1, 0, 0 }
+    {  -1,  -1, ST_OAM_V_RECTANGLE, 1,   0, 0 },
+    {   1,  -1, ST_OAM_SQUARE, 2,  12, 0 },
+    {  33,  -1, ST_OAM_SQUARE, 2,  12, 0 },
+    {  65,  -1, ST_OAM_SQUARE, 2,  12, 0 },
+    {  89,  -1, ST_OAM_SQUARE, 2,  12, 0 },
+    { 121,  -1, ST_OAM_V_RECTANGLE, 1,   8, 0 }
 };
 
 const struct Subsprite gSubspriteTable_842F4F0[] = {
-    {  -1,  -1, ST_OAM_V_RECTANGLE, 1, 0, 0 },
-    {   1,  -1, ST_OAM_SQUARE, 2, 0, 0 },
-    {  33,  -1, ST_OAM_SQUARE, 2, 0, 0 },
-    {  65,  -1, ST_OAM_SQUARE, 2, 0, 0 },
-    {  97,  -1, ST_OAM_SQUARE, 2, 0, 0 },
-    { 129,  -1, ST_OAM_V_RECTANGLE, 1, 0, 0 }
+    {  -1,  -1, ST_OAM_V_RECTANGLE, 1,   0, 0 },
+    {   1,  -1, ST_OAM_SQUARE, 2,  12, 0 },
+    {  33,  -1, ST_OAM_SQUARE, 2,  12, 0 },
+    {  65,  -1, ST_OAM_SQUARE, 2,  12, 0 },
+    {  97,  -1, ST_OAM_SQUARE, 2,  12, 0 },
+    { 129,  -1, ST_OAM_V_RECTANGLE, 1,   8, 0 }
 };
 
 const struct Subsprite gSubspriteTable_842F520[] = {
-    {  -1,  -1, ST_OAM_V_RECTANGLE, 1, 0, 0 },
-    {   1,  -1, ST_OAM_V_RECTANGLE, 1, 0, 0 },
-    {   9,  -1, ST_OAM_SQUARE, 2, 0, 0 },
-    {  41,  -1, ST_OAM_SQUARE, 2, 0, 0 },
-    {  73,  -1, ST_OAM_SQUARE, 2, 0, 0 },
-    { 105,  -1, ST_OAM_SQUARE, 2, 0, 0 },
-    { 137,  -1, ST_OAM_V_RECTANGLE, 1, 0, 0 }
+    {  -1,  -1, ST_OAM_V_RECTANGLE, 1,   0, 0 },
+    {   1,  -1, ST_OAM_V_RECTANGLE, 1,   4, 0 },
+    {   9,  -1, ST_OAM_SQUARE, 2,  12, 0 },
+    {  41,  -1, ST_OAM_SQUARE, 2,  12, 0 },
+    {  73,  -1, ST_OAM_SQUARE, 2,  12, 0 },
+    { 105,  -1, ST_OAM_SQUARE, 2,  12, 0 },
+    { 137,  -1, ST_OAM_V_RECTANGLE, 1,   8, 0 }
 };
 
 const struct Subsprite gSubspriteTable_842F558[] = {
-    {  -1,  -1, ST_OAM_V_RECTANGLE, 0, 0, 0 },
-    {   7,  -1, ST_OAM_SQUARE, 2, 0, 0 },
-    {  35,  -1, ST_OAM_V_RECTANGLE, 0, 0, 0 }
+    {  -1,  -1, ST_OAM_V_RECTANGLE, 0,   0, 0 },
+    {   7,  -1, ST_OAM_SQUARE, 2,  12, 0 },
+    {  35,  -1, ST_OAM_V_RECTANGLE, 0,   8, 0 }
 };
 
 const struct Subsprite *const gUnknown_0842F5BC[] = {
@@ -266,7 +266,7 @@ const struct SubspriteTable gSubspriteTables_842F5C0[] = {
     {13, gMenuCursorSubsprites},
     {14, gMenuCursorSubsprites},
     {15, gMenuCursorSubsprites},
-    {1, gMenuCursorSubsprites},
+    {16, gMenuCursorSubsprites},
     {17, gMenuCursorSubsprites},
     {18, gMenuCursorSubsprites},
     {19, gMenuCursorSubsprites},
@@ -327,7 +327,7 @@ const struct Subsprite gUnknown_0842F778 = {
 };
 
 const struct Subsprite gUnknown_0842F780 = {
-    .y = -1, .shape = ST_OAM_V_RECTANGLE, .size = 2, .tileOffset = 6
+    .y = -1, .shape = ST_OAM_V_RECTANGLE, .size = 1
 };
 
 const struct Subsprite gUnknown_0842F788 = {
