@@ -268,7 +268,7 @@ SECTIONS {
         src/battle/anim/swipe.o(.text);
         src/battle/anim/struggle.o(.text);
         src/battle/anim/uproar.o(.text);
-        asm/noise.o(.text);
+        src/battle/anim/noise.o(.text);
         asm/note_spin.o(.text);
         asm/guard.o(.text);
         asm/fury_cutter_count.o(.text);
