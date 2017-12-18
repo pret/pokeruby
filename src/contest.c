@@ -31,6 +31,8 @@ extern bool8 AreMovesContestCombo(u16, u16);
 extern void sub_80C8A38(u8);
 extern void sub_80C8AD0(u8);
 extern void sub_80C8C80(u8);
+extern void sub_81288F4();
+extern u8 sub_8128944(void);
 
 struct Shared18000
 {
@@ -92,11 +94,12 @@ struct UnknownContestStruct1
     u8 unkC;
     s8 unkD;
     u8 unkE;
-    u8 fillerF;
-    u8 unk10_0:4;
+    u8 unkF;
+    u8 unk10_0:2;
+    u8 unk10_2:2;
     u8 unk10_4:2;  // definitely a bitfield
     u8 unk11;
-    u8 filler12;
+    u8 unk12;
     u8 unk13;
     u8 unk14;
     u8 unk15_0:1;  // Is this a bitfield or not? sub_80ABCDC says no.
@@ -233,14 +236,12 @@ extern const u8 gUnknown_083CC14A[];
 extern const u8 gUnknown_083CC16E[];
 extern const u8 *const gUnknown_083CC2D8[];
 extern const u8 *const gUnknown_083CC330[];
-extern const struct ContestMove gContestMoves[];
 extern const u8 gUnknownText_UnknownFormatting2[];
 extern const u8 gUnknownText_UnknownFormatting3[];
 extern const u8 gUnknown_083CB02C[];
 extern const u8 *const gUnknown_083CB2F0[];
 extern const u8 gUnknown_083CC59C[];
 extern const u8 gUnknown_083CC5A2[];
-extern const u8 *const gContestEffectStrings[];
 
 
 void sub_80AB350(void);
@@ -307,7 +308,7 @@ void sub_80AEB30(void);
 void sub_80AEBEC(u16);
 void sub_80AED58(void);
 bool8 sub_80AEE54(u8, u8);
-u8 sub_80AF038(u8);
+bool8 sub_80AF038(u8);
 void sub_80AF120(void);
 void sub_80AF138(void);
 u16 sub_80AF15C(u8);
@@ -1358,7 +1359,7 @@ void sub_80AC2CC(u8 taskId)
         }
         return;
     case 50:
-        if (sub_80AF038(r7) != 0)
+        if (sub_80AF038(r7))
             PlaySE(SE_C_PASI);
         gTasks[taskId].data[0] = 25;
         return;
@@ -1444,7 +1445,7 @@ void sub_80AC2CC(u8 taskId)
             if (gUnknown_02038696[r6] == gTasks[taskId].data[1])
                 break;
         }
-        if (sub_80AF038(r6) != 0)
+        if (sub_80AF038(r6))
             PlaySE(SE_C_PASI);
         else
             PlaySE(SE_C_SYU);
@@ -2810,3 +2811,72 @@ u16 sub_80AEFE8(int unused, u8 b)
     return var;
 }
 
+bool8 sub_80AF038(u8 a)
+{
+    bool8 r5 = TRUE;
+    u16 r4 = 0;
+    u8 r6 = gUnknown_02038696[a] * 5 + 2;
+
+    if (shared19260_[a].unk10_0 != 0 || shared19260_[a].unk12 != 0 || shared19260_[a].unkF != 0)
+        r4 = sub_80AEFE8(a, 0);
+    else if (shared19260_[a].unkC & 1)
+        r4 = sub_80AEFE8(a, 1);
+    else if ((shared19260_[a].unkC & 6) || (shared19260_[a].unkB & 0x80))
+        r4 = sub_80AEFE8(a, 2);
+    else
+        r5 = FALSE;
+    if (r5)
+    {
+        *(u16 *)(VRAM + 0xC028 + r6 * 64) = r4;
+        *(u16 *)(VRAM + 0xC028 + r6 * 64 + 2) = r4 + 1;
+        *(u16 *)(VRAM + 0xC068 + r6 * 64) = r4 + 16;
+        *(u16 *)(VRAM + 0xC068 + r6 * 64 + 2) = r4 + 17;
+    }
+    else
+    {
+        *(u16 *)(VRAM + 0xC028 + r6 * 64) = 0;
+        *(u16 *)(VRAM + 0xC028 + r6 * 64 + 2) = 0;
+        *(u16 *)(VRAM + 0xC068 + r6 * 64) = 0;
+        *(u16 *)(VRAM + 0xC068 + r6 * 64 + 2) = 0;
+    }
+    return r5;
+}
+
+void sub_80AF120(void)
+{
+    s32 i;
+
+    for (i = 0; i < 4; i++)
+        sub_80AF038(i);
+}
+
+void sub_80AF138(void)
+{
+    FillWindowRect_DefaultPalette(&gUnknown_03004210, 0, 1, 15, 17, 18);
+}
+
+u16 sub_80AF15C(u8 a)
+{
+    if (sub_80AF59C(a) != 0)
+        return 0;
+    if (a == gContestPlayerMonIndex)
+    {
+        return gContestMons[a].moves[shared19204.unk19204];
+    }
+    else
+    {
+        u8 moveChoice;
+
+        sub_81288F4(a);
+        moveChoice = sub_8128944();
+        return gContestMons[a].moves[moveChoice];
+    }
+}
+
+void sub_80AF1B8(void)
+{
+    u8 i;
+
+    for (i = 0; i < 4; i++)
+        shared19260_[i].unk6 = sub_80AF15C(i);
+}
