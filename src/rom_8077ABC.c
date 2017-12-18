@@ -70,12 +70,6 @@ struct Color {
     u16 b:5;
 };
 
-struct Struct_sub_8078914 {
-    u8 *field_0;
-    u8 *field_4;
-    u8 field_8;
-};
-
 struct BGCnt {
     u16 priority:2;
     u16 charBase:2;

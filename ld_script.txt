@@ -275,8 +275,8 @@ SECTIONS {
         asm/rain.o(.text);
         src/battle/anim/bubble.o(.text);
         src/battle/anim/aurora.o(.text);
-        asm/aurora.o(.text);
         asm/liquid_ball.o(.text);
+        src/battle/anim/water.o(.text);
         asm/water.o(.text);
         asm/fire.o(.text);
         asm/sunlight.o(.text);

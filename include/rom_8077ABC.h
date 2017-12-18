@@ -12,6 +12,12 @@ enum
     ANIM_BANK_DEF_PARTNER
 };
 
+struct Struct_sub_8078914 {
+    u8 *field_0;
+    u8 *field_4;
+    u8 field_8;
+};
+
 u8 sub_8077ABC(u8, u8);
 u8 sub_8077E44(u8 slot, u16 species, u8 a3);
 u8 GetAnimBankSpriteId(u8 side);
