@@ -270,7 +270,7 @@ SECTIONS {
         src/battle/anim/uproar.o(.text);
         src/battle/anim/noise.o(.text);
         src/battle/anim/note_spin.o(.text);
-        asm/guard.o(.text);
+        src/battle/anim/guard.o(.text);
         asm/fury_cutter_count.o(.text);
         asm/rain.o(.text);
         src/battle/anim/bubble.o(.text);
