@@ -105,5 +105,6 @@ u8 sub_8077FC0(u8 slot);
 void move_anim_8074EE0(struct Sprite *sprite);
 bool8 sub_8078718(struct Sprite *sprite);
 bool8 sub_8078CE8(struct Sprite *sprite);
+void oamt_add_pos2_onto_pos1(struct Sprite *sprite);
 
 #endif // GUARD_ROM_8077ABC_H
