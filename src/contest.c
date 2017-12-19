@@ -11,6 +11,7 @@
 #include "ewram.h"
 #include "graphics.h"
 #include "link.h"
+#include "m4a.h"
 #include "main.h"
 #include "menu.h"
 #include "menu_cursor.h"
@@ -49,7 +50,9 @@ struct Shared19204
     /*0x19204*/ u8 unk19204;
     /*0x19205*/ u8 unk19205;
     /*0x19206*/ u8 unk19206[4];
-    /*0x1920A*/ u16 unk1920A_0:4;
+    /*0x1920A*/ u16 unk1920A_0:1;
+    /*0x1920A*/ u16 unk1920A_1:1;
+    /*0x1920A*/ u16 unk1920A_2:2;
                 u16 unk1920A_4:1;
                 u16 unk1920A_5:1;
                 u16 unk1920A_6:1;
@@ -58,18 +61,26 @@ struct Shared19204
                 u16 unk1920B_1:1;
                 u16 unk1920B_2:1;
     /*0x1920C*/ u8 unk1920C;
-    /*0x1920D*/ u8 filler1920D[0x14-0xD];
+    /*0x1920D*/ u8 unk1920D[0x14-0xD];
     /*0x19214*/ u8 unk19214;
     /*0x19215*/ u8 unk19215;
     /*0x19216*/ u8 unk19216;
     /*0x19217*/ s8 unk19217;
     /*0x19218*/ u8 unk19218[4];
     /*0x1921C*/ u32 unk1921C;
-                u8 filler19220[0x5D-0x20];
+                u16 unk19220[2][4];  // unknown length
+                u8 filler19230[0x48-0x30];
+                u8 unk19248[5][4];
+                u8 unk1925C;
     /*0x1925D*/ u8 unk1925D;
     /*0x1925E*/ u8 unk1925E;
     /*0x1925F*/ u8 filler1925F;
 };
+
+#define static_assert(expr) \
+  typedef char ____[(expr) ? 1 : -1]
+
+static_assert(offsetof(struct Shared19204, filler19230) == 0x19230 - 0x19204);
 
 struct UnknownContestStruct1
 {
@@ -82,24 +93,29 @@ struct UnknownContestStruct1
     u8 unkB_0:2;
     u8 unkB_2:5;
     u8 unkB_7:1;
-    /*
     u8 unkC_0:1;
-    u8 unkC_1:1;
-    u8 unkC_2:1;
-    */
-    u8 unkC;
+    u8 unkC_1:2;
     s8 unkD;
     u8 unkE;
     u8 unkF;
-    u8 unk10_0:2;
-    u8 unk10_2:2;
-    u8 unk10_4:2;  // definitely a bitfield
-    u8 unk11;
+    u8 unk10_0:1;  // *
+    u8 unk10_1:1;  // *
+    u8 unk10_2:1;
+    u8 unk10_3:1;
+    u8 unk10_4:2;  // *
+    u8 unk10_6:2;
+    u8 unk11_0:2;
+    u8 unk11_2:1;
+    u8 unk11_3:1;
+    u8 unk11_4:1;
+    u8 unk11_5:1;
     u8 unk12;
     u8 unk13;
-    u8 unk14;
-    u8 unk15_0:1;  // Is this a bitfield or not? sub_80ABCDC says no.
-    u8 unk15_1:3;
+    u8 unk14;  // s8?
+    u8 unk15_0:1;
+    u8 unk15_1:1;
+    u8 unk15_2:1;
+    u8 unk15_3:1;
     u8 unk15_4:1;
     u8 unk15_5:1;
     u8 unk15_6:1;
@@ -123,20 +139,13 @@ struct UnknownContestStruct3
 // possibly the same as UnknownContestStruct3?
 struct UnknownContestStruct4
 {
-    u8 filler0[2];
-    u8 unk2;  // maybe a bitfield
-    u8 filler3;
-};
-
-/*
-struct UnknownContestStruct5_alt
-{
-    u8 bits_0;
+    u8 unk0;
     u8 unk1;
-    s8 unk2;
+    u8 unk2_0:1;
+    u8 unk2_1:1;
+    u8 unk2_2:1;
     u8 filler3;
 };
-*/
 
 struct UnknownContestStruct5
 {
@@ -148,6 +157,7 @@ struct UnknownContestStruct5
     u8 filler3;
 };
 
+#if 0
 struct Shared19260
 {
     /*0x19260*/ struct UnknownContestStruct1 unk19260[4];
@@ -159,11 +169,12 @@ struct Shared19260
     /*0x19338*/ struct UnknownContestStruct4 unk19338[4];
     /*0x19348*/ struct UnknownContestStruct3 unk19348[5];
 };
+#endif
 
 #define shared15800 (gSharedMem + 0x15800)
 #define shared18000 (*(struct Shared18000 *)(gSharedMem + 0x18000))
 #define shared19204 (*(struct Shared19204 *)(gSharedMem + 0x19204))
-#define shared19260 (*(struct Shared19260 *)(gSharedMem + 0x19260))
+//#define shared19260 (*(struct Shared19260 *)(gSharedMem + 0x19260))
 
 // These are separate structs because sub_80AC2CC requires that to match.
 #define shared19260_ ((struct UnknownContestStruct1 *)(gSharedMem + 0x19260))
@@ -173,6 +184,15 @@ struct Shared19260
 #define shared19338 ((struct UnknownContestStruct4 *)(gSharedMem + 0x19338))
 #define shared19348 ((struct UnknownContestStruct3 *)(gSharedMem + 0x19348))
 
+struct UnknownContestStruct6
+{
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+    s32 unkC;
+};
+
+extern struct MusicPlayerInfo gMPlay_SE1;
 extern u16 gScriptContestCategory;
 extern u16 gScriptContestRank;
 extern u8 gBattleMonForms[];
@@ -199,20 +219,39 @@ extern u16 gUnknown_030042C0;
 extern u16 gUnknown_030042C4;
 extern u32 gUnknown_03005D28;
 
-extern u16 gUnknown_02038680[];
+extern s16 gUnknown_02038680[];
+extern u16 gUnknown_02038688[];
 extern u8 gUnknown_02038694;
 extern u8 gUnknown_02038696[];
 extern u8 gUnknown_0203869B;
-extern u16 gUnknown_02038670[];
+extern s16 gUnknown_02038670[];
+extern s16 gUnknown_02038678[];
+extern u8 gUnknown_02038690[];
 extern struct SpriteTemplate gUnknown_02024E8C;
+
 
 #define gContestOpponents gUnknown_083C9408
 extern const struct ContestPokemon gContestOpponents[60];
 extern const u8 gUnknown_083CA308[][2];
 extern const u8 gUnknown_083CA310[][2];
 extern const u8 gUnknown_083CA318[][2];
-extern const struct CompressedSpriteSheet gUnknown_083CA4BC;
+extern const u8 gUnknown_083CA330[][2];
+extern const u8 gUnknown_083CA338[];
+extern const u8 gUnknown_083CA33C[];
+extern const struct CompressedSpriteSheet gUnknown_083CC3AC;
+extern const struct CompressedSpritePalette gUnknown_083CC3B4[];
+extern const struct SpriteTemplate gSpriteTemplate_83CC454[];
+extern const struct SpriteSheet gUnknown_083CA350;
+extern const struct SpriteTemplate gSpriteTemplate_83CA3AC;
+extern const struct CompressedSpriteSheet gUnknown_083CA3C4[];
+extern const struct SpritePalette gUnknown_083CA3E4;
+extern const struct SpriteTemplate gSpriteTemplate_83CA3F4[];
+extern const struct SubspriteTable gSubspriteTables_83CA464[];
+extern const struct CompressedSpriteSheet gUnknown_083CA46C;
+extern const struct SpritePalette gUnknown_083CA474;
+extern const struct SpriteTemplate gSpriteTemplate_83CA484;
 extern const struct SpriteTemplate gSpriteTemplate_83CA4A4;
+extern const struct CompressedSpriteSheet gUnknown_083CA4BC;
 extern const struct CompressedSpriteSheet gUnknown_083CA4C4;
 extern const struct CompressedSpritePalette gUnknown_083CA4CC;
 extern const struct SpriteTemplate gUnknown_083CA4D4;
@@ -225,6 +264,8 @@ extern const u8 gUnknown_083CBD79[];
 extern const u8 gUnknown_083CBD9D[];
 extern const u8 gUnknown_083CBDC6[];
 extern const u8 gUnknown_083CBF60[];
+extern const u8 gUnknown_083CB02C[];
+extern const u8 *const gUnknown_083CB2F0[];
 extern const u8 gUnknown_083CC075[];
 extern const u8 gUnknown_083CC0A0[];
 extern const u8 gUnknown_083CC0BC[];
@@ -236,11 +277,10 @@ extern const u8 *const gUnknown_083CC2D8[];
 extern const u8 *const gUnknown_083CC330[];
 extern const u8 gUnknownText_UnknownFormatting2[];
 extern const u8 gUnknownText_UnknownFormatting3[];
-extern const u8 gUnknown_083CB02C[];
-extern const u8 *const gUnknown_083CB2F0[];
 extern const u8 gUnknown_083CC59C[];
 extern const u8 gUnknown_083CC5A2[];
 extern const u8 gUnknownText_MissedTurn[];
+extern const u8 gUnknownText_LinkStandbyAndWinner[];
 
 
 void sub_80AB350(void);
@@ -315,20 +355,30 @@ void sub_80AF1B8(void);
 void sub_80AF2A0(u8);
 void sub_80AF2FC(void);
 void sub_80AF3C0(void);
-u8 sub_80AF59C(u8);
+bool8 sub_80AF59C(u8);
+s16 sub_80AF688(u8);
+void sub_80AF6A0(void);
+bool8 sub_80AF828(s32, s32, struct UnknownContestStruct6 *);
 void sub_80AF860(void);
+void sub_80AF94C(u8);
 void sub_80AFA5C(void);
-void sub_80AFBA0(s16, s16, u8);
+u16 sub_80AFB40(u8);
+s8 sub_80AFB74(s16);
+u8 sub_80AFBA0(s16, s16, u8);
+void sub_80AFC74(u8);
 void sub_80AFE30(void);
 void sub_80AFF10(void);
-u8 sub_80AFF28(void);
-void sub_80AFFE0(u8);
+bool8 sub_80AFF28(void);
+void sub_80AFF60(struct Sprite *);
+void sub_80AFFE0(bool8);
 void sub_80B0034(void);
 void sub_80B00C8(void);
-void nullsub_18();
+void nullsub_18(int);
+void sub_80B0238(struct Sprite *);
 void sub_80B0324(void);
 void sub_80B03A8(u8);
 void sub_80B0518(void);
+void nullsub_19();
 void sub_80B09B0();
 u8 sub_80B09E4();
 void sub_80B0BC4();
@@ -340,6 +390,7 @@ void sub_80B146C(u8, u8);
 void sub_80B159C(void);
 void sub_80B1710();
 void sub_80B1928(void);
+s8 contest_get_move_excitement(u16);
 void sub_80B1B14(void);
 void sub_80B1BDC(void);
 void sub_80B1CBC();
@@ -749,7 +800,7 @@ void sub_80ABB70(u8 taskId)
         void *dest = shared18000.unk18204;
         DmaCopy32(3, src, dest, 0x400);
     }
-    if (sub_80AF59C(gContestPlayerMonIndex) == 0)
+    if (!sub_80AF59C(gContestPlayerMonIndex))
         StringCopy(gDisplayedStringBattle, gUnknown_083CAF84);
     else
         StringCopy(gDisplayedStringBattle, gUnknown_083CAFAE);
@@ -771,9 +822,9 @@ void sub_80ABC70(u8 taskId)
     if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys == B_BUTTON))
     {
         PlaySE(SE_SELECT);
-        if (sub_80AF59C(gContestPlayerMonIndex) == 0)
+        if (!sub_80AF59C(gContestPlayerMonIndex))
         {
-            sub_80AFFE0(1);
+            sub_80AFFE0(TRUE);
             gTasks[taskId].func = sub_80ABCDC;
         }
         else
@@ -812,7 +863,6 @@ void sub_80ABCDC(u8 taskId)
         {
             r5 = StringCopy(sp8, gUnknownText_UnknownFormatting2);
         }
-        //_080ABDA0
         else if (r4 != 0
          && shared19260_[gContestPlayerMonIndex].unk8 == r4
          && gContestMoves[r4].effect != 3)
@@ -861,7 +911,7 @@ void sub_80ABEA0(u8 taskId)
         case B_BUTTON:
             sub_814A904();
             PlaySE(SE_SELECT);
-            sub_80AFFE0(0);
+            sub_80AFFE0(FALSE);
             FillWindowRect_DefaultPalette(
               &gUnknown_03004210,
               0,
@@ -869,7 +919,7 @@ void sub_80ABEA0(u8 taskId)
               gUnknown_083CA340[0][1],
               gUnknown_083CA340[0][2],
               gUnknown_083CA340[0][3]);
-            if (sub_80AF59C(gContestPlayerMonIndex) == 0)
+            if (!sub_80AF59C(gContestPlayerMonIndex))
                 StringCopy(gDisplayedStringBattle, gUnknown_083CAF84);
             else
                 StringCopy(gDisplayedStringBattle, gUnknown_083CAFAE);
@@ -933,7 +983,7 @@ void sub_80AC0C8(u8 taskId)
         SetTaskFuncWithFollowupFunc(taskId2, sub_80C8A38, sub_80AC15C);
         gTasks[taskId].func = nullsub_89;
         sub_80AF860();
-        sub_80AFFE0(0);
+        sub_80AFFE0(FALSE);
     }
     else
     {
@@ -953,7 +1003,7 @@ void sub_80AC188(u8 taskId)
     sub_80AF138();
     gUnknown_030042A0 = 0;
     gUnknown_03004280 = 0;
-    sub_80AFFE0(0);
+    sub_80AFFE0(FALSE);
     {
         void *src = gPlttBufferFaded;
         void *dest = shared18000.unk18604;
@@ -1036,8 +1086,8 @@ void sub_80AC2CC(u8 taskId)
             gTasks[taskId].data[0] = 2;
         return;
     case 2:
-        if ((shared19260_[r7].unkC & 6)
-         || (shared19260_[r7].unkB_7))
+        if (shared19260_[r7].unkC_1 != 0
+         || shared19260_[r7].unkB_7)
         {
             gTasks[taskId].data[0] = 31;
         }
@@ -1069,12 +1119,12 @@ void sub_80AC2CC(u8 taskId)
         spriteId = gTasks[taskId].data[2];
         if (gSprites[spriteId].callback == SpriteCallbackDummy)
         {
-            if (!(shared19338[r7].unk2 & 2))
+            if (!shared19338[r7].unk2_1)
                 gTasks[taskId].data[0] = 5;
         }
         return;
     case 5:
-        if (shared19260_[r7].unkC & 1)
+        if (shared19260_[r7].unkC_0)
         {
             gTasks[taskId].data[0] = 33;
         }
@@ -1174,15 +1224,15 @@ void sub_80AC2CC(u8 taskId)
             gTasks[taskId].data[0] = 23;
         return;
     case 48:
-        if ((shared19260_[r7].unk11 & 3) == 1)
+        if (shared19260_[r7].unk11_0 == 1)
         {
             sub_80B1710(5);
         }
-        else if ((shared19260_[r7].unk11 & 3) == 2)
+        else if (shared19260_[r7].unk11_0 == 2)
         {
             sub_80B1710(6);
         }
-        else if ((shared19260_[r7].unk11 & 3) == 3)
+        else if (shared19260_[r7].unk11_0 == 3)
         {
             sub_80B1710(7);
         }
@@ -1206,7 +1256,7 @@ void sub_80AC2CC(u8 taskId)
         gTasks[taskId].data[0] = 13;
         return;
     case 13:
-        if (!(shared19338[shared19204.unk19215].unk2 & 4))
+        if (!shared19338[shared19204.unk19215].unk2_2)
             gTasks[taskId].data[0] = 35;
         return;
     case 35:
@@ -1294,7 +1344,7 @@ void sub_80AC2CC(u8 taskId)
     case 29:
         for (r6 = 0; gTasks[taskId].data[1] != gUnknown_02038696[r6]; r6++)
             ;
-        if (!(shared19338[r6].unk2 & 4))
+        if (!shared19338[r6].unk2_2)
             gTasks[taskId].data[0] = 39;
         return;
     case 39:
@@ -1339,8 +1389,8 @@ void sub_80AC2CC(u8 taskId)
         if (gTasks[taskId].data[10]++ > 9)
         {
             gTasks[taskId].data[10] = 0;
-            if ((shared19260_[r7].unkC & 6)
-             || (shared19260_[r7].unk11 & 4))
+            if (shared19260_[r7].unkC_1 != 0
+             || shared19260_[r7].unk11_2)
             {
                 sub_80AF138();
                 StringCopy(gStringVar1, gContestMons[r7].nickname);
@@ -1410,7 +1460,7 @@ void sub_80AC2CC(u8 taskId)
         }
         return;
     case 16:
-        if (!(shared19338[r7].unk2 & 4))
+        if (!shared19338[r7].unk2_2)
         {
             gTasks[taskId].data[10] = 0;
             gTasks[taskId].data[0] = 17;
@@ -1446,7 +1496,7 @@ void sub_80AC2CC(u8 taskId)
         return;
     case 18:
         sub_80B0D7C();
-        if (!(shared19338[r7].unk2 & 4))
+        if (!shared19338[r7].unk2_2)
         {
             gTasks[taskId].data[10] = 0;
             sub_80AF138();
@@ -1461,7 +1511,7 @@ void sub_80AC2CC(u8 taskId)
         else
         {
             r4 = shared19328.bits_0;
-            if (shared19260_[r7].unk11 & 0x10)
+            if (shared19260_[r7].unk11_4)
             {
                 r4 = 1;
                 StringCopy(gStringVar3, gMoveNames[shared19260_[r7].unk6]);
@@ -1570,7 +1620,7 @@ void sub_80AC2CC(u8 taskId)
             }
             break;
         case 3:
-            if (!(shared19338[r7].unk2 & 4))
+            if (!shared19338[r7].unk2_2)
             {
                 if (!shared19204.unk1920A_7)
                 {
@@ -1590,7 +1640,7 @@ void sub_80AC2CC(u8 taskId)
         }
         return;
     case 43:
-        if (!(shared19338[r7].unk2 & 4))
+        if (!shared19338[r7].unk2_2)
         {
             sub_80AF138();
             gTasks[taskId].data[0] = 55;
@@ -1816,7 +1866,7 @@ void sub_80ADA4C(u8 taskId)
 
 void sub_80ADAD8(u8 taskId)
 {
-    if (sub_80AFF28() != 0)
+    if (sub_80AFF28())
         gTasks[taskId].func = sub_80ADB04;
 }
 
@@ -1875,7 +1925,7 @@ void sub_80ADC4C(u8 taskId)
 
 void sub_80ADC84(u8 taskId)
 {
-    if (sub_80AFF28() != 0)
+    if (sub_80AFF28())
     {
         gTasks[taskId].data[0] = 0;
         gTasks[taskId].func = sub_80ADCB4;
@@ -1982,7 +2032,7 @@ void sub_80ADF4C(u8 taskId)
     SetTaskFuncWithFollowupFunc(taskId2, sub_80C8AD0, sub_80ADF98);
     gTasks[taskId].func = nullsub_89;
     sub_80AF860();
-    sub_80AFFE0(0);
+    sub_80AFFE0(FALSE);
 }
 
 void sub_80ADF98(u8 taskId)
@@ -2561,7 +2611,7 @@ void sub_80AED7C(u16 a, u8 b)
 {
     u8 r5 = gUnknown_02038696[b] * 5 + 2;
 
-    if (sub_80AF59C(b) == 0 && a != 0)
+    if (!sub_80AF59C(b) && a != 0)
     {
         u16 tile = sub_80AEB68(a, b);
 
@@ -2694,11 +2744,11 @@ bool8 sub_80AF038(u8 a)
     u16 r4 = 0;
     u8 r6 = gUnknown_02038696[a] * 5 + 2;
 
-    if (shared19260_[a].unk10_0 != 0 || shared19260_[a].unk12 != 0 || shared19260_[a].unkF != 0)
+    if (shared19260_[a].unk10_0 != 0 || shared19260_[a].unk10_1 != 0 || shared19260_[a].unk12 != 0 || shared19260_[a].unkF != 0)
         r4 = sub_80AEFE8(a, 0);
-    else if (shared19260_[a].unkC & 1)
+    else if (shared19260_[a].unkC_0)
         r4 = sub_80AEFE8(a, 1);
-    else if ((shared19260_[a].unkC & 6) || (shared19260_[a].unkB_7))
+    else if (shared19260_[a].unkC_1 != 0 || shared19260_[a].unkB_7)
         r4 = sub_80AEFE8(a, 2);
     else
         r5 = FALSE;
@@ -2734,7 +2784,7 @@ void sub_80AF138(void)
 
 u16 sub_80AF15C(u8 a)
 {
-    if (sub_80AF59C(a) != 0)
+    if (sub_80AF59C(a))
         return 0;
     if (a == gContestPlayerMonIndex)
     {
@@ -2872,24 +2922,609 @@ void sub_80AF3C0(void)
 
 bool8 sub_80AF404(u8 a)
 {
-    if ((shared19260_[a].unkC & 6) || shared19260_[a].unkB_7)
+    if (shared19260_[a].unkC_1 != 0 || shared19260_[a].unkB_7)
         return FALSE;
     else
         return TRUE;
 }
 
-/*
 void sub_80AF438(void)
 {
-    u8 r5;
+    u8 i;
 
-    for (r5 = 0; r5 < 4; r5++)
+    for (i = 0; i < 4; i++)
     {
-        shared19260_[r5].unk2 = 0;
-        shared19260_[r5].unk0 = 0;
-        shared19260_[r5].unk12 = 0;
-        if (shared19260_[r5].unkC & 6)
+        // This is bitfield hell...
+        shared19260_[i].unk2 = 0;
+        shared19260_[i].unk0 = 0;
+        shared19260_[i].unk12 = 0;
+        if (shared19260_[i].unkC_1 > 0)
+            shared19260_[i].unkC_1--;
+        shared19260_[i].unkE = 0;
+        shared19260_[i].unk10_0 = 0;
+        shared19260_[i].unkF = 0;
+        shared19260_[i].unk10_1 = 0;
+        shared19260_[i].unk10_2 = 0;
+        shared19260_[i].unk10_3 = 0;
+        shared19260_[i].unkC_0 = 0;
+        shared19260_[i].unk13 = 0xFF;
+        shared19260_[i].unk14 = -1;
+        shared19260_[i].unk10_4 = 0;
+        shared19260_[i].unk15_2 = shared19260_[i].unk15_0;
+        shared19260_[i].unk15_0 = 0;
+        shared19260_[i].unk11_0 = 0;
+        shared19260_[i].unk11_5 = 0;
+        if (shared19260_[i].unk11_2)
+        {
+            shared19260_[i].unkC_1 = 1;
+            shared19260_[i].unk11_2 = 0;
+        }
+        if (shared19260_[i].unk11_3)
+        {
+            shared19260_[i].unkB_7 = 1;
+            shared19260_[i].unk11_3 = 0;
+        }
+        shared19260_[i].unk11_4 = 0;
+    }
+    for (i = 0; i < 4; i++)
+    {
+        shared19260_[i].unk8 = shared19260_[i].unk6;
+        shared19204.unk19220[shared19204.unk19205][i] = shared19260_[i].unk8;
+        shared19204.unk19248[shared19204.unk19205][i] = contest_get_move_excitement(shared19260_[i].unk6);
+        shared19260_[i].unk6 = 0;
+    }
+    shared19328.bits_8 = 0;
+}
 
+bool8 sub_80AF59C(u8 a)
+{
+    if (shared19260_[a].unkC_1 != 0 || shared19260_[a].unkB_7)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 unref_sub_80AF5D0(u8 a, u8 b)
+{
+    u8 i;
+
+    if (a != gContestPlayerMonIndex)
+        return TRUE;
+    for (i = 0; i < 4; i++)
+    {
+        if (b == 3)
+        {
+            shared19204.unk1920A_0 = 1;
+            return TRUE;
+        }
+        if (b == 4)
+        {
+            shared19204.unk1920A_1 = 1;
+            return TRUE;
+        }
+        if (shared19204.unk19206[i] == b)
+            return TRUE;
+        if (shared19204.unk19206[i] == 0xFF)
+        {
+            shared19204.unk19206[i] = b;
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+void sub_80AF630(u8 a)
+{
+    gUnknown_02038688[a] = sub_80AF688(a);
+    gUnknown_02038678[a] = gUnknown_02038670[a] + gUnknown_02038688[a];
+}
+
+void sub_80AF668(void)
+{
+    u8 i;
+
+    for (i = 0; i < 4; i++)
+        sub_80AF630(i);
+    sub_80AF6A0();
+}
+
+s16 sub_80AF688(u8 a)
+{
+    return gUnknown_02038680[a] * 2;
+}
+
+// Sorts something. Determines turn order, maybe?
+void sub_80AF6A0(void)
+{
+    u16 sp0[4] = {0};
+    struct UnknownContestStruct6 sp8[4];
+    s32 i;
+    s32 j;
+
+    for (i = 0; i < 4; i++)
+    {
+        s32 r2;
+
+        sp0[i] = Random();
+        for (r2 = 0; r2 < i; r2++)
+        {
+            if (sp0[i] == sp0[r2])
+            {
+                i--;
+                break;
+            }
+        }
+    }
+
+    for (i = 0; i < 4; i++)
+    {
+        sp8[i].unk0 = gUnknown_02038678[i];
+        sp8[i].unk4 = gUnknown_02038670[i];
+        sp8[i].unk8 = sp0[i];
+        sp8[i].unkC = i;
+    }
+
+    for (i = 0; i < 3; i++)
+    {
+        for (j = 3; j > i; j--)
+        {
+            if (sub_80AF828(j - 1, j, sp8))
+            {
+                struct UnknownContestStruct6 temp;
+
+                temp.unk0 = sp8[j - 1].unk0;
+                temp.unk4 = sp8[j - 1].unk4;
+                temp.unk8 = sp8[j - 1].unk8;
+                temp.unkC = sp8[j - 1].unkC;
+
+                sp8[j - 1].unk0 = sp8[j].unk0;
+                sp8[j - 1].unk4 = sp8[j].unk4;
+                sp8[j - 1].unk8 = sp8[j].unk8;
+                sp8[j - 1].unkC = sp8[j].unkC;
+
+                sp8[j].unk0 = temp.unk0;
+                sp8[j].unk4 = temp.unk4;
+                sp8[j].unk8 = temp.unk8;
+                sp8[j].unkC = temp.unkC;
+            }
+        }
+    }
+
+    for (i = 0; i < 4; i++)
+        gUnknown_02038690[sp8[i].unkC] = i;
+}
+
+bool8 sub_80AF828(s32 a, s32 b, struct UnknownContestStruct6 *c)
+{
+    bool8 retVal;
+
+    if      (c[a].unk0 < c[b].unk0)
+        retVal = TRUE;
+    else if (c[a].unk0 > c[b].unk0)
+        retVal = FALSE;
+    else if (c[a].unk4 < c[b].unk4)
+        retVal = TRUE;
+    else if (c[a].unk4 > c[b].unk4)
+        retVal = FALSE;
+    else if (c[a].unk8 < c[b].unk8)
+        retVal = TRUE;
+    else
+        retVal = FALSE;
+    return retVal;
+}
+
+void sub_80AF860(void)
+{
+    gUnknown_030042A0 = 0;
+    gUnknown_03004280 = 0;
+    sub_80AF138();
+    sub_8003460(&gMenuWindow, gUnknownText_LinkStandbyAndWinner, 776, 1, 15);
+}
+
+u8 unref_sub_80AF89C(s16 a, s16 b, u8 c, u8 d)
+{
+    u8 taskId;
+    u8 r5;
+    s8 r4;
+    u16 r0;
+
+    shared19338[d].unk2_2 = 1;
+    taskId = CreateTask(sub_80AF94C, 20);
+    r5 = sub_80AFB74(a);
+    r4 = sub_80AFB74(a + b) - r5;
+    r0 = sub_80AFB40(d);
+    gTasks[taskId].data[0] = r5;
+    gTasks[taskId].data[1] = r4;
+    gTasks[taskId].data[2] = r0 + c;
+    gTasks[taskId].data[3] = d;
+    if (b < 0)
+        nullsub_19(d);
+    return taskId;
+}
+
+void sub_80AF94C(u8 taskId)
+{
+    u8 r5 = gTasks[taskId].data[3];
+
+    if (gTasks[taskId].data[1] == 0)
+    {
+        nullsub_19(r5);
+        DestroyTask(taskId);
+        shared19338[r5].unk2_2 = 0;
+    }
+    else if (++gTasks[taskId].data[10] > 29)
+    {
+        u8 r6;
+
+        gTasks[taskId].data[10] = 0;
+        if (gTasks[taskId].data[1] < 0)
+        {
+            r6 = gTasks[taskId].data[0]--;
+            gTasks[taskId].data[1]++;
+            PlaySE(SE_BOO);
+        }
+        else
+        {
+            r6 = ++gTasks[taskId].data[0];
+            gTasks[taskId].data[1]--;
+            PlaySE(SE_PIN);
+        }
+        if ((u16)gTasks[taskId].data[2] != 0xFFFF)
+        {
+            RequestSpriteCopy(
+              &gTasks[taskId].data[2],
+              (void *)(VRAM + 0xC000 + (147 + r6 + r5 * 160) * 2),
+              2);
+        }
+        else
+        {
+            u8 i;
+
+            for (i = 0; i < 3; i++)
+            {
+                if (gTasks[taskId].data[i + 4] < 0)
+                {
+                    RequestSpriteCopy(
+                      &gTasks[taskId].data[i + 7],
+                      (void *)(VRAM + 0xC000 + (147 + r6 + r5 * 160) * 2),
+                      2);
+                    gTasks[taskId].data[i + 4]++;
+                    break;
+                }
+            }
+        }
     }
 }
-*/
+
+void sub_80AFA5C(void)
+{
+    u8 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        DmaClear16(3, (void *)(VRAM + 0xC000 + (86 + i * 160) * 2), 16);
+        DmaClear16(3, (void *)(VRAM + 0xC000 + (118 + i * 160) * 2), 16);
+    }
+}
+
+void unref_sub_80AFAB8(s16 a, u8 b)
+{
+    u8 r5 = sub_80AFB74(a);
+    u16 r2;
+    u8 i;
+    u16 arr[9];
+
+    if (b == 0)
+        r2 = 0x50A2;
+    else if (b == 1)
+        r2 = 0x60A2;
+    else if (b == 2)
+        r2 = 0x70A2;
+    else
+        r2 = 0x80A2;
+
+    for (i = 0; i < 9; i++)
+    {
+        if (i < r5)
+            arr[i] = r2;
+        else
+            arr[i] = 0;
+    }
+
+    {
+        void *src = arr;
+        void *dest = (void *)(VRAM + 0xC000 + (148 + b * 160) * 2);
+        DmaCopy16(3, src, dest, sizeof(arr));
+    }
+}
+
+u16 sub_80AFB40(u8 a)
+{
+    u16 var;
+
+    if (a == 0)
+        var = 0x5011;
+    else if (a == 1)
+        var = 0x6011;
+    else if (a == 2)
+        var = 0x7011;
+    else
+        var = 0x8011;
+    return var + 1;
+}
+
+s8 sub_80AFB74(s16 a)
+{
+    s8 retVal = a / 10;
+
+    if (retVal > 16)
+        retVal = 16;
+    else if (retVal < -16)
+        retVal = -16;
+    return retVal;
+}
+
+u8 sub_80AFBA0(s16 a, s16 b, u8 c)
+{
+    u8 taskId;
+    s8 r4;
+    s8 r5;
+
+    shared19338[c].unk2_2 = 1;
+    taskId = CreateTask(sub_80AFC74, 20);
+    r4 = sub_80AFB74(a);
+    r5 = sub_80AFB74(a + b) - r4;
+    sub_80AFB40(c);  // unused return value
+    gTasks[taskId].data[0] = abs(r4);
+    gTasks[taskId].data[1] = r5;
+    if (r4 > 0 || (r4 == 0 && r5 > 0))
+        gTasks[taskId].data[2] = 1;
+    else
+        gTasks[taskId].data[2] = -1;
+    gTasks[taskId].data[3] = c;
+    if (b < 0)
+        nullsub_19(c);
+    return taskId;
+}
+
+void sub_80AFC74(u8 taskId)
+{
+    u8 r7 = gTasks[taskId].data[3];
+    s16 r3 = gTasks[taskId].data[0];
+    s16 r1 = gTasks[taskId].data[1];
+
+    if (++gTasks[taskId].data[10] > 14)
+    {
+        u16 r6;
+        u8 r5;
+        u8 r10;
+
+        gTasks[taskId].data[10] = 0;
+        if (gTasks[taskId].data[1] == 0)
+        {
+            nullsub_19(r7);
+            DestroyTask(taskId);
+            shared19338[r7].unk2_2 = 0;
+            return;
+        }
+        else if (r3 == 0)
+        {
+            if (r1 < 0)
+            {
+                r6 = sub_80AFB40(r7) + 2;
+                gTasks[taskId].data[1]++;
+            }
+            else
+            {
+                r6 = sub_80AFB40(r7);
+                gTasks[taskId].data[1]--;
+            }
+            r5 = gTasks[taskId].data[0]++;
+        }
+        else
+        {
+            if (gTasks[taskId].data[2] < 0)
+            {
+                if (r1 < 0)
+                {
+                    r5 = gTasks[taskId].data[0]++;
+                    gTasks[taskId].data[1]++;
+                    r6 = sub_80AFB40(r7) + 2;
+                }
+                else
+                {
+                    r5 = --gTasks[taskId].data[0];
+                    r6 = 0;
+                    gTasks[taskId].data[1]--;
+                }
+            }
+            else
+            {
+                if (r1 < 0)
+                {
+                    r5 = --gTasks[taskId].data[0];
+                    r6 = 0;
+                    gTasks[taskId].data[1]++;
+                }
+                else
+                {
+                    r5 = gTasks[taskId].data[0]++;
+                    gTasks[taskId].data[1]--;
+                    r6 = sub_80AFB40(r7);
+                }
+            }
+        }
+        r10 = r5;
+        if (r5 > 7)
+            r5 += 24;
+        // Seriously, a 2-byte CpuFill? Why?
+        CpuFill16(r6, (void *)(VRAM + 0xC000 + (0x56 + r5 + gUnknown_02038696[r7] * 160) * 2), 2);
+        if (r1 > 0)
+        {
+            PlaySE(SE_C_GAJI);
+            m4aMPlayImmInit(&gMPlay_SE1);
+            m4aMPlayPitchControl(&gMPlay_SE1, 0xFFFF, r10 * 256);
+        }
+        else
+        {
+            PlaySE(SE_BOO);
+        }
+        if (r5 == 0 && r6 == 0)
+            gTasks[taskId].data[2] = -gTasks[taskId].data[2];
+    }
+}
+
+void sub_80AFE30(void)
+{
+    s32 i;
+    
+    LoadSpriteSheet(&gUnknown_083CA350);
+    for (i = 0; i < 4; i++)
+    {
+        u8 y = gUnknown_083CA338[gUnknown_02038696[i]];
+        
+        shared19338[i].unk0 = CreateSprite(&gSpriteTemplate_83CA3AC, 180, y, 1);
+    }
+}
+
+void sub_80AFE78(u8 a)
+{
+    u8 spriteId;
+    s16 r5;
+    
+    shared19338[a].unk2_0 = 1;
+    spriteId = shared19338[a].unk0;
+    r5 = shared19260_[a].unk4 / 10 * 2;
+    if (r5 > 56)
+        r5 = 56;
+    else if (r5 < 0)
+        r5 = 0;
+    gSprites[spriteId].invisible = FALSE;
+    gSprites[spriteId].data[0] = a;
+    gSprites[spriteId].data[1] = r5;
+    if (gSprites[spriteId].data[1] > gSprites[spriteId].pos2.x)
+        gSprites[spriteId].data[2] = 1;
+    else
+        gSprites[spriteId].data[2] = -1;
+    gSprites[spriteId].callback = sub_80AFF60;
+}
+
+void sub_80AFF10(void)
+{
+    s32 i;
+    
+    for (i = 0; i < 4; i++)
+        sub_80AFE78(i);
+}
+
+bool8 sub_80AFF28(void)
+{
+    s32 i;
+    
+    for (i = 0; i < 4; i++)
+    {
+        if (shared19338[i].unk2_0)
+            break;
+    }
+    if (i == 4)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+void sub_80AFF60(struct Sprite *sprite)
+{
+    if (sprite->pos2.x == sprite->data[1])
+    {
+        shared19338[sprite->data[0]].unk2_0 = 0;
+        sprite->callback = SpriteCallbackDummy;
+    }
+    else
+    {
+        sprite->pos2.x += sprite->data[2];
+    }
+}
+
+void sub_80AFFA0(void)
+{
+    s32 i;
+    
+    for (i = 0; i < 4; i++)
+        gSprites[shared19338[i].unk0].pos1.y = gUnknown_083CA338[gUnknown_02038696[i]];
+}
+
+void sub_80AFFE0(bool8 a)
+{
+    s32 i;
+    
+    for (i = 0; i < 4; i++)
+    {
+        if (gUnknown_02038696[i] > 1)
+        {
+            if (!a)
+                gSprites[shared19338[i].unk0].pos1.x = 180;
+            else
+                gSprites[shared19338[i].unk0].pos1.x = 256;
+        }
+    }
+}
+
+void sub_80B0034(void)
+{
+    s32 i;
+    
+    LoadSpritePalette(&gUnknown_083CA3E4);
+    for (i = 0; i < 4; i++)
+    {
+        LoadCompressedObjectPic(&gUnknown_083CA3C4[i]);
+        shared19338[i].unk1 = CreateSprite(
+          &gSpriteTemplate_83CA3F4[i],
+          204, gUnknown_083CA33C[gUnknown_02038696[i]],
+          0);
+        SetSubspriteTables(&gSprites[shared19338[i].unk1], gSubspriteTables_83CA464);
+        gSprites[shared19338[i].unk1].invisible = TRUE;
+    }
+}
+
+void sub_80B00C8(void)
+{
+    u8 spriteId;
+    
+    LoadCompressedObjectPic(&gUnknown_083CA46C);
+    LoadSpritePalette(&gUnknown_083CA474);
+    spriteId = CreateSprite(&gSpriteTemplate_83CA484, 30, 44, 1);
+    gSprites[spriteId].invisible = TRUE;
+    shared19204.unk1925C = spriteId;
+}
+
+void nullsub_18(int unused)
+{
+}
+
+void unref_sub_80B011C(void)
+{
+    u8 i;
+    
+    LoadCompressedObjectPic(&gUnknown_083CC3AC);
+    for (i = 0; i < 4; i++)
+        LoadCompressedObjectPalette(&gUnknown_083CC3B4[i]);
+    for (i = 0; i < 4; i++)
+    {
+        u8 spriteId = CreateSprite(
+          &gSpriteTemplate_83CC454[i],
+          gUnknown_083CA330[i][0], gUnknown_083CA330[i][1],
+          5);
+          
+        gSprites[spriteId].invisible = TRUE;
+        gSprites[spriteId].data[0] = i;
+        shared19204.unk1920D[i] = spriteId;
+    }
+}
+
+void unref_sub_80B01B0(void)
+{
+    s32 i;
+    
+    for (i = 0; i < 4; i++)
+        gSprites[shared19204.unk1920D[i]].callback = sub_80B0238;
+}
