@@ -281,7 +281,7 @@ SECTIONS {
         asm/fire.o(.text);
         src/battle/anim/sunlight.o(.text);
         asm/fire_2.o(.text);
-        asm/heated_rock.o(.text);
+        src/battle/anim/heated_rock.o(.text);
         asm/wisp_orb.o(.text);
         asm/wisp_fire.o(.text);
         asm/thunder.o(.text);
