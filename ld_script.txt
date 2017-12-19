@@ -522,7 +522,6 @@ SECTIONS {
         src/field/berry.o(.rodata);
         src/field/script_menu.o(.rodata);
         src/engine/naming_screen.o(.rodata);
-        data/naming_screen.o(.rodata);
         src/field/money.o(.rodata);
         data/contest_effect.o(.rodata);
         src/engine/record_mixing.o(.data);

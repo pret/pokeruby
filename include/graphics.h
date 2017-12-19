@@ -2611,4 +2611,19 @@ extern const u16 gTradeMonBoxTilemap[];
 extern const u8 gUnknown_08D00000[];
 extern const u16 gUnknown_08D00524[];
 extern const u8 gUnknown_08D004E0[];
+
+extern const u8 gNamingScreenBackButtonTiles[];
+extern const u8 gNamingScreenOKButtonTiles[];
+extern const u8 gNamingScreenChangeKeyboardBoxTiles[];
+extern const u8 gNamingScreenChangeKeyboardButtonTiles[];
+extern const u8 gNamingScreenLowerTextTiles[];
+extern const u8 gNamingScreenUpperTextTiles[];
+extern const u8 gNamingScreenOthersTextTiles[];
+extern const u8 gNamingScreenCursorTiles[];
+extern const u8 gNamingScreenActiveCursorSmallTiles[];
+extern const u8 gNamingScreenActiveCursorBigTiles[];
+extern const u8 gNamingScreenRightPointingTriangleTiles[];
+extern const u8 gNamingScreenUnderscoreTiles[];
+extern const u16 gNamingScreenPalettes[][16];
+
 #endif  // GUARD_GRAPHICS_H
