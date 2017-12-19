@@ -279,7 +279,7 @@ SECTIONS {
         src/battle/anim/water.o(.text);
         asm/water.o(.text);
         asm/fire.o(.text);
-        asm/sunlight.o(.text);
+        src/battle/anim/sunlight.o(.text);
         asm/fire_2.o(.text);
         asm/heated_rock.o(.text);
         asm/wisp_orb.o(.text);
