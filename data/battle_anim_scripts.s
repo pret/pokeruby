@@ -1416,11 +1416,11 @@ Move_FURY_CUTTER: @ 81C914A
 	monbg 1
 	setalpha 12, 8
 	panse_19 SE_W013, 63
-	createtask sub_80D30AC, 2
+	createtask UpdateFuryCutterAnimDirection, 2
 	jumpvareq 7, 0, _81C91A7
 	jump _81C91B9
 _81C916A:
-	createtask update_fury_cutter_counter_copy, 2
+	createtask UpdateFuryCutterAnimCount, 2
 	jumpvareq 7, 1, _81C918E
 	jumpvareq 7, 2, _81C91CB
 	jumpvareq 7, 3, _81C91E5
