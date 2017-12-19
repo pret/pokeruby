@@ -275,7 +275,7 @@ SECTIONS {
         src/battle/anim/rain.o(.text);
         src/battle/anim/bubble.o(.text);
         src/battle/anim/aurora.o(.text);
-        asm/liquid_ball.o(.text);
+        src/battle/anim/energy_wave.o(.text);
         src/battle/anim/water.o(.text);
         asm/water.o(.text);
         asm/fire.o(.text);
