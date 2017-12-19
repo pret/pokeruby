@@ -5271,8 +5271,8 @@ Move_RAIN_DANCE: @ 81CE997
 	panse_19 SE_W240, 192
 	createtask sub_80E2A38, 10, 1921, 2, 0, 4, 0
 	wait
-	createtask sub_80D30F0, 2, 0, 3, 120
-	createtask sub_80D30F0, 2, 0, 3, 120
+	createtask CreateAnimRaindrops, 2, 0, 3, 120
+	createtask CreateAnimRaindrops, 2, 0, 3, 120
 	pause 120
 	pause 30
 	wait
@@ -10497,8 +10497,8 @@ General_Rain: @ 81D67BB
 	panse_19 SE_W240, 192
 	createtask sub_80E2A38, 10, 1921, 2, 0, 4, 0
 	wait
-	createtask sub_80D30F0, 2, 0, 3, 60
-	createtask sub_80D30F0, 2, 0, 3, 60
+	createtask CreateAnimRaindrops, 2, 0, 3, 60
+	createtask CreateAnimRaindrops, 2, 0, 3, 60
 	pause 50
 	wait
 	createtask sub_80E2A38, 10, 1921, 2, 4, 0, 0
