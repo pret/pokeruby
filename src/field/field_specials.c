@@ -312,28 +312,23 @@ u8 GetLinkPartnerNames(void)
     return nLinkPlayers;
 }
 
-const u8 gUnknown_083F8358[4] = {7, 9, 8, 10};
-const s8 gUnknown_083F835C[4][2] = {
-    { 0,  1},
-    { 1,  0},
-    { 0, -1},
-    {-1,  0}
-};
-
 void SpawnBerryBlenderLinkPlayerSprites(void)
 {
-    u8 unknown_083F8358[4];
-    u8 unknown_083F835C[4][2];
+    u8 j = 0;
+    s16 x = 0;
+    s16 y = 0;
+    u8 unknown_083F8358[] = {7, 9, 8, 10};
+    s8 unknown_083F835C[][2] = {
+        { 0,  1},
+        { 1,  0},
+        { 0, -1},
+        {-1,  0}
+    };
     u8 myLinkPlayerNumber;
     u8 playerDirectionLowerNybble;
     u8 rivalAvatarGraphicsId;
     u8 i;
-    u8 j = 0;
-    s16 x = 0;
-    s16 y = 0;
 
-    memcpy(unknown_083F8358, gUnknown_083F8358, sizeof gUnknown_083F8358);
-    memcpy(unknown_083F835C, gUnknown_083F835C, sizeof gUnknown_083F835C);
     myLinkPlayerNumber = sub_8008218();
     playerDirectionLowerNybble = player_get_direction_lower_nybble();
     switch (playerDirectionLowerNybble)
@@ -362,7 +357,7 @@ void SpawnBerryBlenderLinkPlayerSprites(void)
         if (myLinkPlayerNumber != i)
         {
             rivalAvatarGraphicsId = GetRivalAvatarGraphicsIdByStateIdAndGender(0, gLinkPlayers[i].gender);
-            SpawnSpecialFieldObjectParametrized(rivalAvatarGraphicsId, unknown_083F8358[j], 0xf0 - i, (s8)unknown_083F835C[j][0] + x + 7, (s8)unknown_083F835C[j][1] + y + 7, 0);
+            SpawnSpecialFieldObjectParametrized(rivalAvatarGraphicsId, unknown_083F8358[j], 0xf0 - i, unknown_083F835C[j][0] + x + 7, unknown_083F835C[j][1] + y + 7, 0);
             j++;
             if (j == 4)
             {
