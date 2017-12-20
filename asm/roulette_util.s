@@ -5,19 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8124918
-sub_8124918: @ 8124918
-	push {lr}
-	movs r1, 0
-	strb r1, [r0]
-	strh r1, [r0, 0x2]
-	adds r0, 0x4
-	movs r2, 0xC0
-	bl memset
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8124918
-
 	thumb_func_start sub_812492C
 sub_812492C: @ 812492C
 	push {r4-r7,lr}

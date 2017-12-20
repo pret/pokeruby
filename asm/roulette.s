@@ -5,27 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81150FC
-sub_81150FC: @ 81150FC
-	push {lr}
-	bl RunTasks
-	bl AnimateSprites
-	bl BuildOamBuffer
-	ldr r0, _08115120 @ =gSharedMem + 0x19000
-	adds r1, r0, 0
-	adds r1, 0xB8
-	ldrb r0, [r1]
-	cmp r0, 0
-	beq _0811511C
-	adds r0, r1, 0
-	bl task_tutorial_controls_fadein
-_0811511C:
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08115120: .4byte gSharedMem + 0x19000
-	thumb_func_end sub_81150FC
-
 	thumb_func_start sub_8115124
 sub_8115124: @ 8115124
 	push {r4,lr}
@@ -562,7 +541,7 @@ _0811558C:
 	bl CreateTask
 	adds r4, 0xA5
 	strb r0, [r4]
-	ldr r0, _08115630 @ =sub_81150FC
+	ldr r0, _08115630 @ =CB2_Roulette
 	bl SetMainCallback2
 _081155FE:
 	add sp, 0x4
@@ -580,7 +559,7 @@ _08115620: .4byte gTasks
 _08115624: .4byte gSaveBlock1
 _08115628: .4byte 0x00000494
 _0811562C: .4byte sub_8115634
-_08115630: .4byte sub_81150FC
+_08115630: .4byte CB2_Roulette
 	thumb_func_end sub_8115384
 
 	thumb_func_start sub_8115634
