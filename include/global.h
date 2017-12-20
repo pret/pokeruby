@@ -3,6 +3,7 @@
 
 #include "gba/gba.h"
 #include "config.h"
+#include "assert.h"
 
 // IDE support
 #ifdef __APPLE__

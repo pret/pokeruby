@@ -98,6 +98,13 @@ void AgbMain()
 
     gSoftResetDisabled = FALSE;
 
+// In Fire Red, AGBPrintInit is called at this spot. For user convenience, I
+// opt to initialize the print area here. It is up to the user where they choose
+// to print stuff from, as anything else declared is NOT authoritative.
+#ifndef NOAGBPRN
+    AGBPrintInit();
+#endif
+
     if (gFlashMemoryPresent != TRUE)
         SetMainCallback2(NULL);
 
