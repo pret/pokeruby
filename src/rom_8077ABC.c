@@ -51,13 +51,6 @@ struct Struct_gUnknown_0837F578 {
     u8 field_1;
 };
 
-struct OamMatrix {
-    s16 a;
-    s16 b;
-    s16 c;
-    s16 d;
-};
-
 struct Struct_2017810 {
     u8 filler_0[6];
     u8 field_6;

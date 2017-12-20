@@ -286,7 +286,7 @@ SECTIONS {
         asm/wisp_fire.o(.text);
         src/battle/anim/thunder.o(.text);
         asm/beta_beat_up.o(.text);
-        asm/shock.o(.text);
+        src/battle/anim/shock.o(.text);
         asm/current.o(.text);
         asm/ice.o(.text);
         asm/fight.o(.text);
