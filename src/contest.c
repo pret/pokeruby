@@ -4,6 +4,7 @@
 #include "constants/songs.h"
 #include "constants/species.h"
 #include "battle_anim.h"
+#include "blend_palette.h"
 #include "contest.h"
 #include "contest_link_80C857C.h"
 #include "data2.h"
@@ -27,6 +28,7 @@
 #include "text.h"
 #include "tv.h"
 #include "unknown_task.h"
+#include "util.h"
 
 extern bool8 AreMovesContestCombo(u16, u16);
 extern void sub_80C8A38(u8);
@@ -51,8 +53,9 @@ struct Shared19204
     /*0x19205*/ u8 unk19205;
     /*0x19206*/ u8 unk19206[4];
     /*0x1920A*/ u16 unk1920A_0:1;
-    /*0x1920A*/ u16 unk1920A_1:1;
-    /*0x1920A*/ u16 unk1920A_2:2;
+                u16 unk1920A_1:1;
+                u16 unk1920A_2:1;
+                u16 unk1920A_3:1;
                 u16 unk1920A_4:1;
                 u16 unk1920A_5:1;
                 u16 unk1920A_6:1;
@@ -61,7 +64,10 @@ struct Shared19204
                 u16 unk1920B_1:1;
                 u16 unk1920B_2:1;
     /*0x1920C*/ u8 unk1920C;
-    /*0x1920D*/ u8 unk1920D[0x14-0xD];
+    /*0x1920D*/ u8 unk1920D[4];
+    /*0x19211*/ u8 unk19211;
+    /*0x19212*/ u8 unk19212;
+    /*0x19213*/ u8 filler19213;
     /*0x19214*/ u8 unk19214;
     /*0x19215*/ u8 unk19215;
     /*0x19216*/ u8 unk19216;
@@ -279,6 +285,7 @@ extern const u8 gUnknownText_UnknownFormatting2[];
 extern const u8 gUnknownText_UnknownFormatting3[];
 extern const u8 gUnknown_083CC59C[];
 extern const u8 gUnknown_083CC5A2[];
+extern const u16 gUnknown_083CC5A4[];
 extern const u8 gUnknownText_MissedTurn[];
 extern const u8 gUnknownText_LinkStandbyAndWinner[];
 
@@ -375,13 +382,24 @@ void sub_80B0034(void);
 void sub_80B00C8(void);
 void nullsub_18(int);
 void sub_80B0238(struct Sprite *);
+void sub_80B0280(struct Sprite *);
+void sub_80B02A8(struct Sprite *);
+void sub_80B02F4(struct Sprite *);
 void sub_80B0324(void);
 void sub_80B03A8(u8);
+void sub_80B03D8(u8);
+void sub_80B0458(u8);
 void sub_80B0518(void);
-void nullsub_19();
-void sub_80B09B0();
-u8 sub_80B09E4();
-void sub_80B0BC4();
+void sub_80B0548(u8);
+void sub_80B05A4(u8);
+void nullsub_19(int);
+void sub_80B05FC(u8);
+void sub_80B0748(u8);
+void sub_80B09B0(u8);
+u8 sub_80B09E4(u8);
+void sub_80B0BC4(u8, bool8);
+void sub_80B0C5C(struct Sprite *);
+void sub_80B0CB0(struct Sprite *);
 void sub_80B0CDC(u8, int);
 void sub_80B0D7C(void);
 void sub_80B1118(void);
@@ -1112,7 +1130,7 @@ void sub_80AC2CC(u8 taskId)
         gSprites[spriteId].callback = sub_80AD8FC;
         gTasks[taskId].data[2] = spriteId;
         gObjectBankIDs[gBankAttacker] = spriteId;
-        sub_80B0BC4(sub_80B09E4(shared19204.unk19215), 0);
+        sub_80B0BC4(sub_80B09E4(shared19204.unk19215), FALSE);
         gTasks[taskId].data[0] = 4;
         return;
     case 4:
@@ -3377,12 +3395,12 @@ void sub_80AFC74(u8 taskId)
 void sub_80AFE30(void)
 {
     s32 i;
-    
+
     LoadSpriteSheet(&gUnknown_083CA350);
     for (i = 0; i < 4; i++)
     {
         u8 y = gUnknown_083CA338[gUnknown_02038696[i]];
-        
+
         shared19338[i].unk0 = CreateSprite(&gSpriteTemplate_83CA3AC, 180, y, 1);
     }
 }
@@ -3391,7 +3409,7 @@ void sub_80AFE78(u8 a)
 {
     u8 spriteId;
     s16 r5;
-    
+
     shared19338[a].unk2_0 = 1;
     spriteId = shared19338[a].unk0;
     r5 = shared19260_[a].unk4 / 10 * 2;
@@ -3412,7 +3430,7 @@ void sub_80AFE78(u8 a)
 void sub_80AFF10(void)
 {
     s32 i;
-    
+
     for (i = 0; i < 4; i++)
         sub_80AFE78(i);
 }
@@ -3420,7 +3438,7 @@ void sub_80AFF10(void)
 bool8 sub_80AFF28(void)
 {
     s32 i;
-    
+
     for (i = 0; i < 4; i++)
     {
         if (shared19338[i].unk2_0)
@@ -3448,7 +3466,7 @@ void sub_80AFF60(struct Sprite *sprite)
 void sub_80AFFA0(void)
 {
     s32 i;
-    
+
     for (i = 0; i < 4; i++)
         gSprites[shared19338[i].unk0].pos1.y = gUnknown_083CA338[gUnknown_02038696[i]];
 }
@@ -3456,7 +3474,7 @@ void sub_80AFFA0(void)
 void sub_80AFFE0(bool8 a)
 {
     s32 i;
-    
+
     for (i = 0; i < 4; i++)
     {
         if (gUnknown_02038696[i] > 1)
@@ -3472,7 +3490,7 @@ void sub_80AFFE0(bool8 a)
 void sub_80B0034(void)
 {
     s32 i;
-    
+
     LoadSpritePalette(&gUnknown_083CA3E4);
     for (i = 0; i < 4; i++)
     {
@@ -3489,7 +3507,7 @@ void sub_80B0034(void)
 void sub_80B00C8(void)
 {
     u8 spriteId;
-    
+
     LoadCompressedObjectPic(&gUnknown_083CA46C);
     LoadSpritePalette(&gUnknown_083CA474);
     spriteId = CreateSprite(&gSpriteTemplate_83CA484, 30, 44, 1);
@@ -3504,7 +3522,7 @@ void nullsub_18(int unused)
 void unref_sub_80B011C(void)
 {
     u8 i;
-    
+
     LoadCompressedObjectPic(&gUnknown_083CC3AC);
     for (i = 0; i < 4; i++)
         LoadCompressedObjectPalette(&gUnknown_083CC3B4[i]);
@@ -3514,7 +3532,7 @@ void unref_sub_80B011C(void)
           &gSpriteTemplate_83CC454[i],
           gUnknown_083CA330[i][0], gUnknown_083CA330[i][1],
           5);
-          
+
         gSprites[spriteId].invisible = TRUE;
         gSprites[spriteId].data[0] = i;
         shared19204.unk1920D[i] = spriteId;
@@ -3524,7 +3542,978 @@ void unref_sub_80B011C(void)
 void unref_sub_80B01B0(void)
 {
     s32 i;
-    
+
     for (i = 0; i < 4; i++)
         gSprites[shared19204.unk1920D[i]].callback = sub_80B0238;
+}
+
+bool8 unref_sub_80B01E0(void)
+{
+    s32 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        if (gSprites[shared19204.unk1920D[i]].callback != SpriteCallbackDummy)
+            break;
+    }
+    if (i == 4)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+void sub_80B0238(struct Sprite *sprite)
+{
+    sprite->oam.affineMode = 1;
+    InitSpriteAffineAnim(sprite);
+    if (sprite->invisible)
+    {
+        sprite->callback = sub_80B02A8;
+    }
+    else
+    {
+        StartSpriteAffineAnim(sprite, 1);
+        sprite->callback = sub_80B0280;
+    }
+}
+
+void sub_80B0280(struct Sprite *sprite)
+{
+    if (sprite->affineAnimEnded)
+    {
+        sprite->invisible = TRUE;
+        sprite->callback = sub_80B02A8;
+    }
+}
+
+void sub_80B02A8(struct Sprite *sprite)
+{
+    sprite->invisible = FALSE;
+    StartSpriteAnim(sprite, shared19260_[sprite->data[0]].unkB_0);
+    StartSpriteAffineAnim(sprite, 2);
+    sprite->callback = sub_80B02F4;
+    PlaySE(SE_JYUNI);
+}
+
+void sub_80B02F4(struct Sprite *sprite)
+{
+    if (sprite->affineAnimEnded)
+    {
+        FreeSpriteOamMatrix(sprite);
+        sprite->oam.affineMode = 0;
+        sprite->callback = SpriteCallbackDummy;
+    }
+}
+
+void sub_80B0324(void)
+{
+    u8 i;
+    u8 taskId = CreateTask(sub_80B0458, 30);
+
+    shared19204.unk19211 = taskId;
+    for (i = 0; i < 4; i++)
+        gTasks[taskId].data[i * 4] = 0xFF;
+}
+
+void sub_80B0368(u8 a)
+{
+    gTasks[shared19204.unk19211].data[a * 4 + 0] = 0;
+    gTasks[shared19204.unk19211].data[a * 4 + 1] = 0;
+}
+
+void sub_80B03A8(u8 a)
+{
+    u8 taskId = CreateTask(sub_80B03D8, 31);
+
+    gTasks[taskId].data[0] = a;
+}
+
+void sub_80B03D8(u8 taskId)
+{
+    u8 r4 = gTasks[taskId].data[0];
+
+    if (gTasks[shared19204.unk19211].data[r4 * 4 + 0] == 0
+     || gTasks[shared19204.unk19211].data[r4 * 4 + 0] == 0xFF)
+    {
+        gTasks[shared19204.unk19211].data[r4 * 4 + 0] = 0xFF;
+        gTasks[shared19204.unk19211].data[r4 * 4 + 1] = 0;
+        BlendPalette((shared19204.unk19218[r4] + 5) * 16 + 6, 2, 0, 0x4BFF);
+        DestroyTask(taskId);
+    }
+}
+
+void sub_80B0458(u8 taskId)
+{
+    u8 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        u8 r3 = i * 4;
+
+        if (gTasks[taskId].data[r3 + 0] != 0xFF)
+        {
+            if (gTasks[taskId].data[r3 + 1] == 0)
+                gTasks[taskId].data[r3 + 0]++;
+            else
+                gTasks[taskId].data[r3 + 0]--;
+
+            if (gTasks[taskId].data[r3 + 0] == 16
+             || gTasks[taskId].data[r3 + 0] == 0)
+                gTasks[taskId].data[r3 + 1] ^= 1;
+
+            BlendPalette(
+              (shared19204.unk19218[i] + 5) * 16 + 6,
+              2,
+              gTasks[taskId].data[r3 + 0],
+              0x4BFF);
+        }
+    }
+}
+
+void sub_80B0518(void)
+{
+    u8 i;
+
+    shared19204.unk19212 = CreateTask(sub_80B05FC, 30);
+    for (i = 0; i < 4; i++)
+        sub_80B0548(i);
+}
+
+void sub_80B0548(u8 a)
+{
+    gTasks[shared19204.unk19212].data[a * 4 + 0] = 0xFF;
+    gTasks[shared19204.unk19212].data[a * 4 + 1] = 0;
+}
+
+void sub_80B0588(void)
+{
+    u8 i;
+
+    for (i = 0; i < 4; i++)
+        sub_80B05A4(i);
+}
+
+void sub_80B05A4(u8 a)
+{
+    u32 var;
+    u32 r0;
+
+    sub_80B0548(a);
+
+    // 2-byte DMA copy? Why?
+
+    r0 = a + 5;
+    {
+        void *src = gPlttBufferUnfaded + r0 * 16 + 10;
+        void *dest = gPlttBufferFaded + r0 * 16 + 10;
+        DmaCopy16(3, src, dest, 2);
+    }
+    var = (a + 5) * 16 + 12 + a;
+    {
+        void *src = gPlttBufferUnfaded + var;
+        void *dest = gPlttBufferFaded + var;
+        DmaCopy16(3, src, dest, 2);
+    }
+}
+
+void nullsub_19(int unused)
+{
+}
+
+void sub_80B05FC(u8 taskId)
+{
+    u8 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        u8 r3 = i * 4;
+
+        if (gTasks[taskId].data[r3 + 0] != 0xFF)
+        {
+            if (++gTasks[taskId].data[r3 + 2] > 2)
+            {
+                gTasks[taskId].data[r3 + 2] = 0;
+
+                if (gTasks[taskId].data[r3 + 1] == 0)
+                    gTasks[taskId].data[r3 + 0]++;
+                else
+                    gTasks[taskId].data[r3 + 0]--;
+
+                if (gTasks[taskId].data[r3 + 0] == 16
+                 || gTasks[taskId].data[r3 + 0] == 0)
+                    gTasks[taskId].data[r3 + 1] ^= 1;
+
+                BlendPalette((i + 5) * 16 + 10, 1, gTasks[taskId].data[r3 + 0], 0x4BFF);
+                BlendPalette((i + 5) * 16 + 12 + i, 1, gTasks[taskId].data[r3 + 0], 0x4BFF);
+            }
+        }
+    }
+}
+
+u8 unref_sub_80B06E0(u8 *a)
+{
+    u8 i;
+    u8 taskId = CreateTask(sub_80B0748, 10);
+
+    for (i = 0; i < 4; i++)
+    {
+        u8 r0 = i * 4;
+
+        gTasks[taskId].data[r0] = a[i];
+        if (a[i] != 0)
+            shared19338[i].unk2_1 = 1;
+    }
+    return taskId;
+}
+
+#ifdef NONMATCHING
+void sub_80B0748(u8 taskId)
+{
+    u8 i;
+    u8 r4_2;
+    u8 r1;
+    u8 r7;
+
+    for (i = 0; i < 4; i++)
+    {
+        //#define r4 r4_2
+        r4 = gUnknown_02038696[i];
+        r1 = r4 * 4;
+        r7 = gTasks[taskId].data[r1 + 0];
+
+        if (r7 != 0)
+        {
+            //_080B079C
+            u8 r8 = gTasks[taskId].data[r1 + 1];
+            u8 r5 = gTasks[taskId].data[r1 + 2];
+            u8 r6 = gTasks[taskId].data[r1 + 3];
+
+            if (r7 == 1)
+            {
+                r6++;
+                if (r6 == 1)
+                {
+                    //_080B07D2
+                    r6 = 0;
+                    BlendPalette((r4 + 5) * 16 + 1, 3, r5, 0x7FFF);
+                    if (r5 == 0 && r8 == 4)
+                    {
+                        gTasks[taskId].data[r1 + 0] = 0;
+                        //asm("");
+                    }
+                    //_080B0800
+                    else
+                    {
+                        r5 += 2;
+                        if (r5 > 13)
+                        {
+                            r5 = 0;
+                            r8++;
+                        }
+                    }
+                }
+                //to _080B08EA
+            }
+            //_080B0818
+            else if (r7 == 2 || r7 == 4)
+            {
+                r6++;
+                if (r6 == 3)
+                {
+                    r6 = 0;
+                    BlendPalette((r4 + 5) * 16 + 1, 3, r5, gUnknown_083CC5A4[r4]);
+                    if (r5 == 0 && r8 == 2)
+                    {
+                        gTasks[taskId].data[r1 + 0] = 0;
+                    }
+                    //_080B0858
+                    else
+                    {
+                        r5 += 1;
+                        if (r5 == 14)
+                        {
+                            r5 = 0;
+                            r8++;
+                            if (r7 == 4 && r8 == 1)
+                            {
+                                BlendPalette((r4 + 9) * 16 + 2, 1, 4, 0);
+                                BlendPalette((r4 + 9) * 16 + 5, 1, 4, 0);
+                            }
+                        }
+                    }
+                }
+                //to _080B08EA
+            }
+            //_080B0896
+            else if (r7 == 3)
+            {
+                r6++;
+                if (r6 == 12)
+                {
+                    r6 = 0;
+                    BlendPalette((r4 + 5) * 16 + 1, 3, r5, 0);
+                    r5 += 1;
+                    if (r5 == 5)
+                    {
+                        // What the hell? These aren't pointers.
+                        // This code would crash if run.
+                        {
+                            void *src = (void *)(u32)gPlttBufferFaded[(r4 + 5) * 16 + 1];
+                            void *dest = (void *)(u32)gPlttBufferUnfaded[(r4 + 5) * 16 + 1];
+                            u32 size = 6;
+                            DmaCopy16(3, src, dest, size);
+                        }
+                        gTasks[taskId].data[r1 + 0] = 0;
+                    }
+                }
+            }
+            //_080B08EA
+            gTasks[taskId].data[r1 + 1] = r8;
+            gTasks[taskId].data[r1 + 2] = r5;
+            gTasks[taskId].data[r1 + 3] = r6;
+        }
+        //_080B0910
+    }
+    //_080B0920
+
+    #define i r4_2
+    for (i = 0; i < 4; i++)  // r4 is i
+    {
+        if (gTasks[taskId].data[i * 4 + 0] != 0)
+            break;
+    }
+    //_080B0958
+    if (i == 4)
+    {
+        for (i = 0; i < 4; i++)
+            shared19338[i].unk2_2 = 0;
+        DestroyTask(taskId);
+    }
+    #undef i
+}
+#else
+__attribute__((naked))
+void sub_80B0748(u8 taskId)
+{
+    asm(".syntax unified\n\
+	push {r4-r7,lr}\n\
+	mov r7, r10\n\
+	mov r6, r9\n\
+	mov r5, r8\n\
+	push {r5-r7}\n\
+	sub sp, 0x20\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	str r0, [sp]\n\
+	movs r0, 0\n\
+	str r0, [sp, 0x4]\n\
+	ldr r2, _080B07F4 @ =gTasks\n\
+	movs r1, 0x8\n\
+	adds r1, r2\n\
+	mov r10, r1\n\
+	ldr r3, [sp]\n\
+	lsls r3, 2\n\
+	str r3, [sp, 0x1C]\n\
+	ldr r1, [sp]\n\
+	adds r0, r3, r1\n\
+	lsls r0, 3\n\
+	str r0, [sp, 0xC]\n\
+_080B0774:\n\
+	ldr r0, _080B07F8 @ =gUnknown_02038696\n\
+	ldr r3, [sp, 0x4]\n\
+	adds r0, r3, r0\n\
+	ldrb r4, [r0]\n\
+	lsls r0, r4, 26\n\
+	lsrs r1, r0, 24\n\
+	lsls r0, r1, 1\n\
+	str r0, [sp, 0x8]\n\
+	ldr r3, [sp]\n\
+	lsls r0, r3, 2\n\
+	adds r0, r3\n\
+	lsls r6, r0, 3\n\
+	ldr r3, [sp, 0x8]\n\
+	adds r0, r3, r6\n\
+	add r0, r10\n\
+	mov r9, r0\n\
+	ldrb r7, [r0]\n\
+	cmp r7, 0\n\
+	bne _080B079C\n\
+	b _080B0910\n\
+_080B079C:\n\
+	adds r3, r1, 0x1\n\
+	lsls r0, r3, 1\n\
+	adds r0, r6\n\
+	add r0, r10\n\
+	ldrb r0, [r0]\n\
+	mov r8, r0\n\
+	adds r2, r1, 0x2\n\
+	lsls r0, r2, 1\n\
+	adds r0, r6\n\
+	add r0, r10\n\
+	ldrb r5, [r0]\n\
+	adds r1, 0x3\n\
+	lsls r0, r1, 1\n\
+	adds r0, r6\n\
+	add r0, r10\n\
+	ldrb r6, [r0]\n\
+	str r3, [sp, 0x10]\n\
+	str r2, [sp, 0x14]\n\
+	str r1, [sp, 0x18]\n\
+	cmp r7, 0x1\n\
+	bne _080B0818\n\
+	adds r0, r6, 0x1\n\
+	lsls r0, 24\n\
+	lsrs r6, r0, 24\n\
+	cmp r6, 0x1\n\
+	beq _080B07D2\n\
+	b _080B08EA\n\
+_080B07D2:\n\
+	movs r6, 0\n\
+	adds r0, r4, 0x5\n\
+	lsls r0, 4\n\
+	adds r0, 0x1\n\
+	movs r1, 0x3\n\
+	adds r2, r5, 0\n\
+	ldr r3, _080B07FC @ =0x00007fff\n\
+	bl BlendPalette\n\
+	cmp r5, 0\n\
+	bne _080B0800\n\
+	mov r0, r8\n\
+	cmp r0, 0x4\n\
+	bne _080B0800\n\
+	mov r1, r9\n\
+	strh r6, [r1]\n\
+	b _080B08EA\n\
+	.align 2, 0\n\
+_080B07F4: .4byte gTasks\n\
+_080B07F8: .4byte gUnknown_02038696\n\
+_080B07FC: .4byte 0x00007fff\n\
+_080B0800:\n\
+	adds r0, r5, 0x2\n\
+	lsls r0, 24\n\
+	lsrs r5, r0, 24\n\
+	cmp r5, 0xD\n\
+	bls _080B08EA\n\
+	movs r5, 0\n\
+	mov r0, r8\n\
+	adds r0, 0x1\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	mov r8, r0\n\
+	b _080B08EA\n\
+_080B0818:\n\
+	cmp r7, 0x2\n\
+	beq _080B0820\n\
+	cmp r7, 0x4\n\
+	bne _080B0896\n\
+_080B0820:\n\
+	adds r0, r6, 0x1\n\
+	lsls r0, 24\n\
+	lsrs r6, r0, 24\n\
+	cmp r6, 0x3\n\
+	bne _080B08EA\n\
+	movs r6, 0\n\
+	adds r0, r4, 0x5\n\
+	lsls r0, 4\n\
+	adds r0, 0x1\n\
+	ldr r2, _080B0854 @ =gUnknown_083CC5A4\n\
+	lsls r1, r4, 1\n\
+	adds r1, r2\n\
+	ldrh r3, [r1]\n\
+	movs r1, 0x3\n\
+	adds r2, r5, 0\n\
+	bl BlendPalette\n\
+	cmp r5, 0\n\
+	bne _080B0858\n\
+	mov r2, r8\n\
+	cmp r2, 0x2\n\
+	bne _080B0858\n\
+	mov r3, r9\n\
+	strh r6, [r3]\n\
+	b _080B08EA\n\
+	.align 2, 0\n\
+_080B0854: .4byte gUnknown_083CC5A4\n\
+_080B0858:\n\
+	adds r0, r5, 0x1\n\
+	lsls r0, 24\n\
+	lsrs r5, r0, 24\n\
+	cmp r5, 0xE\n\
+	bne _080B08EA\n\
+	movs r5, 0\n\
+	mov r0, r8\n\
+	adds r0, 0x1\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	mov r8, r0\n\
+	cmp r7, 0x4\n\
+	bne _080B08EA\n\
+	cmp r0, 0x1\n\
+	bne _080B08EA\n\
+	adds r4, 0x9\n\
+	lsls r4, 4\n\
+	adds r0, r4, 0x2\n\
+	movs r1, 0x1\n\
+	movs r2, 0x4\n\
+	movs r3, 0\n\
+	bl BlendPalette\n\
+	adds r4, 0x5\n\
+	adds r0, r4, 0\n\
+	movs r1, 0x1\n\
+	movs r2, 0x4\n\
+	movs r3, 0\n\
+	bl BlendPalette\n\
+	b _080B08EA\n\
+_080B0896:\n\
+	cmp r7, 0x3\n\
+	bne _080B08EA\n\
+	adds r0, r6, 0x1\n\
+	lsls r0, 24\n\
+	lsrs r6, r0, 24\n\
+	cmp r6, 0xC\n\
+	bne _080B08EA\n\
+	movs r6, 0\n\
+	adds r0, r4, 0x5\n\
+	lsls r0, 4\n\
+	adds r4, r0, 0x1\n\
+	adds r0, r4, 0\n\
+	movs r1, 0x3\n\
+	adds r2, r5, 0\n\
+	movs r3, 0\n\
+	bl BlendPalette\n\
+	adds r0, r5, 0x1\n\
+	lsls r0, 24\n\
+	lsrs r5, r0, 24\n\
+	cmp r5, 0x5\n\
+	bne _080B08EA\n\
+	ldr r0, _080B0930 @ =gPlttBufferFaded\n\
+	lsls r1, r4, 1\n\
+	adds r0, r1, r0\n\
+	ldrh r2, [r0]\n\
+	ldr r0, _080B0934 @ =gPlttBufferUnfaded\n\
+	adds r1, r0\n\
+	ldrh r0, [r1]\n\
+	ldr r1, _080B0938 @ =0x040000d4\n\
+	str r2, [r1]\n\
+	str r0, [r1, 0x4]\n\
+	movs r0, 0x80\n\
+	lsls r0, 24\n\
+	orrs r7, r0\n\
+	str r7, [r1, 0x8]\n\
+	ldr r0, [r1, 0x8]\n\
+	ldr r1, [sp, 0x8]\n\
+	ldr r2, [sp, 0xC]\n\
+	adds r0, r1, r2\n\
+	add r0, r10\n\
+	strh r6, [r0]\n\
+_080B08EA:\n\
+	ldr r3, [sp, 0x10]\n\
+	lsls r0, r3, 1\n\
+	ldr r1, [sp, 0xC]\n\
+	adds r0, r1\n\
+	add r0, r10\n\
+	mov r2, r8\n\
+	strh r2, [r0]\n\
+	ldr r3, [sp, 0x14]\n\
+	lsls r0, r3, 1\n\
+	adds r0, r1\n\
+	add r0, r10\n\
+	strh r5, [r0]\n\
+	ldr r1, [sp, 0x18]\n\
+	lsls r0, r1, 1\n\
+	ldr r2, [sp, 0xC]\n\
+	adds r0, r2\n\
+	add r0, r10\n\
+	strh r6, [r0]\n\
+	ldr r2, _080B093C @ =gTasks\n\
+_080B0910:\n\
+	ldr r0, [sp, 0x4]\n\
+	adds r0, 0x1\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	str r0, [sp, 0x4]\n\
+	cmp r0, 0x3\n\
+	bhi _080B0920\n\
+	b _080B0774\n\
+_080B0920:\n\
+	movs r4, 0\n\
+	ldr r3, [sp, 0x1C]\n\
+	ldr r1, [sp]\n\
+	adds r0, r3, r1\n\
+	lsls r1, r0, 3\n\
+	adds r2, 0x8\n\
+	adds r0, r1, r2\n\
+	b _080B0950\n\
+	.align 2, 0\n\
+_080B0930: .4byte gPlttBufferFaded\n\
+_080B0934: .4byte gPlttBufferUnfaded\n\
+_080B0938: .4byte 0x040000d4\n\
+_080B093C: .4byte gTasks\n\
+_080B0940:\n\
+	adds r0, r4, 0x1\n\
+	lsls r0, 24\n\
+	lsrs r4, r0, 24\n\
+	cmp r4, 0x3\n\
+	bhi _080B0958\n\
+	lsls r0, r4, 3\n\
+	adds r0, r1\n\
+	adds r0, r2\n\
+_080B0950:\n\
+	movs r3, 0\n\
+	ldrsh r0, [r0, r3]\n\
+	cmp r0, 0\n\
+	beq _080B0940\n\
+_080B0958:\n\
+	cmp r4, 0x4\n\
+	bne _080B0980\n\
+	movs r4, 0\n\
+	ldr r3, _080B0990 @ =gSharedMem + 0x19338\n\
+	movs r5, 0x3\n\
+	negs r5, r5\n\
+_080B0964:\n\
+	lsls r1, r4, 2\n\
+	adds r1, r3\n\
+	ldrb r2, [r1, 0x2]\n\
+	adds r0, r5, 0\n\
+	ands r0, r2\n\
+	strb r0, [r1, 0x2]\n\
+	adds r0, r4, 0x1\n\
+	lsls r0, 24\n\
+	lsrs r4, r0, 24\n\
+	cmp r4, 0x3\n\
+	bls _080B0964\n\
+	ldr r0, [sp]\n\
+	bl DestroyTask\n\
+_080B0980:\n\
+	add sp, 0x20\n\
+	pop {r3-r5}\n\
+	mov r8, r3\n\
+	mov r9, r4\n\
+	mov r10, r5\n\
+	pop {r4-r7}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.align 2, 0\n\
+_080B0990: .4byte gSharedMem + 0x19338\n\
+    .syntax divided\n");
+}
+#endif
+
+void unref_sub_80B0994(u8 a)
+{
+    if (a != 0)
+        shared19204.unk1920A_2 = 1;
+}
+
+void sub_80B09B0(u8 a)
+{
+    if (shared19260_[a].unk15_4)
+        sub_80B0368(a);
+    else
+        sub_80B03A8(a);
+}
+
+extern const struct CompressedSpriteSheet gUnknown_083CC4B4[];
+extern const struct SpritePalette gUnknown_083CC4D4[];
+extern const struct SpriteTemplate gSpriteTemplate_83CC53C[];
+
+u8 sub_80B09E4(u8 a)
+{
+    u8 r5 = gUnknown_02038696[a] * 40 + 32;
+    u8 r8;
+    u8 r6;
+    volatile u8 zero;
+
+    LoadCompressedObjectPic(&gUnknown_083CC4B4[a]);
+    LoadSpritePalette(&gUnknown_083CC4D4[a]);
+    r8 = CreateSprite(&gSpriteTemplate_83CC53C[a], 184, r5, 29);
+    r6 = CreateSprite(&gSpriteTemplate_83CC53C[a], 248, r5, 29);
+    gSprites[r6].oam.tileNum += 64;
+
+    CopySpriteTiles(0, 3, (void *)VRAM, (u16 *)(VRAM + 0xE000 + gUnknown_02038696[a] * 5 * 64 + 0x26), (u8 *)(VRAM + 0x10000 + gSprites[r8].oam.tileNum * 32));
+    CopySpriteTiles(0, 3, (void *)VRAM, (u16 *)(VRAM + 0xE000 + gUnknown_02038696[a] * 5 * 64 + 0x36), (u8 *)(VRAM + 0x10000 + gSprites[r6].oam.tileNum * 32));
+
+    {
+        void *dest = (void *)(VRAM + 0x10000 + (0x28 + gSprites[r8].oam.tileNum) * 32);
+        u32 size = 0x300;
+        DmaFill32(3, 0, dest, size);
+    }
+
+    // What is this?
+    zero = 0;
+    zero = 0;
+
+    {
+        void *dest = (void *)(VRAM + 0x10000 + (0x28 + gSprites[r6].oam.tileNum) * 32);
+        u32 size = 0x300;
+        DmaFill32(3, 0, dest, size);
+    }
+
+    gSprites[r8].data[0] = r6;
+    gSprites[r6].data[0] = r8;
+    gSprites[r8].data[1] = a;
+    gSprites[r6].data[1] = a;
+    return r8;
+}
+
+void sub_80B0B5C(u8 spriteId)
+{
+    u8 spriteId2 = gSprites[spriteId].data[0];
+
+    FreeSpriteOamMatrix(&gSprites[spriteId2]);
+    DestroySprite(&gSprites[spriteId2]);
+    DestroySpriteAndFreeResources(&gSprites[spriteId]);
+}
+
+void sub_80B0B98(void)
+{
+    REG_BLDCNT = 0x3F40;
+    REG_BLDALPHA = 0x0907;
+}
+
+void sub_80B0BB4(void)
+{
+    REG_BLDCNT = 0;
+    REG_BLDALPHA = 0;
+}
+
+void sub_80B0BC4(u8 a, bool8 b)
+{
+    u8 r5;
+
+    sub_80B0B98();
+    shared19338[gSprites[a].data[1]].unk2_1 = 1;
+    r5 = gSprites[a].data[0];
+    StartSpriteAffineAnim(&gSprites[a], 1);
+    StartSpriteAffineAnim(&gSprites[r5], 1);
+    gSprites[a].callback = sub_80B0C5C;
+    gSprites[r5].callback = SpriteCallbackDummy;
+    if (b == FALSE)
+        PlaySE(SE_C_PIKON);
+    else
+        PlaySE(SE_PC_LOGON);
+}
+
+void sub_80B0C5C(struct Sprite *sprite)
+{
+    if (sprite->affineAnimEnded)
+    {
+        u8 r1 = sprite->data[0];
+
+        if (gSprites[r1].affineAnimEnded)
+        {
+            sprite->invisible = TRUE;
+            gSprites[r1].invisible = TRUE;
+            sprite->callback = sub_80B0CB0;
+        }
+    }
+}
+
+void sub_80B0CB0(struct Sprite *sprite)
+{
+    shared19338[sprite->data[1]].unk2_1 = 0;
+    sub_80B0B5C(sprite->data[0]);
+    sub_80B0BB4();
+}
+
+void sub_80B0CDC(u8 a, int unused)
+{
+    shared19338[a].unk2_1 = 0;
+}
+
+void unref_sub_80B0CF4(void)
+{
+    //shared18000.unk18000 ^= 1;
+    gSharedMem[0x18000] ^= 1;
+    //if (shared18000.unk18000 == 0)
+    if (gSharedMem[0x18000] == 0)
+    {
+        u8 i;
+
+        for (i = 0; i < 4; i++)
+        {
+            FillWindowRect_DefaultPalette(
+              &gUnknown_03004210,
+              0,
+              gUnknown_083CA308[i][0],
+              gUnknown_083CA308[i][1],
+              gUnknown_083CA310[i][0] + 5,
+              gUnknown_083CA310[i][1] + 1);
+        }
+        sub_80AE514();
+        sub_80AEB30();
+    }
+    else
+    {
+        sub_80B0D7C();
+    }
+}
+
+void sub_80B0D7C(void)
+{
+    u8 r5 = 0;
+    u8 sp8[8];
+
+    if (gSharedMem[0x18000] != 0)
+    {
+        u8 i;
+        s16 r2;
+
+        for (i = 0; i < 4; i++)
+        {
+            FillWindowRect_DefaultPalette(
+              &gUnknown_03004210,
+              0,
+              gUnknown_083CA308[i][0],
+              gUnknown_083CA308[i][1],
+              gUnknown_083CA310[i][0] + 5,
+              gUnknown_083CA310[i][1] + 1);
+        }
+        for (i = 0; i < 4; i++)
+        {
+            r2 = shared19260_[i].unk4;
+            if (r2 < 0)
+            {
+                r2 = -r2;
+                sp8[0] = CHAR_HYPHEN;
+                r5++;
+            }
+            ConvertIntToDecimalStringN(sp8 + r5, r2, 0, 4);
+            sub_8003460(
+              &gUnknown_03004210,
+              sp8,
+              592 + gUnknown_02038696[i] * 22,
+              gUnknown_083CA310[gUnknown_02038696[i]][0],
+              gUnknown_083CA310[gUnknown_02038696[i]][1]);
+            r5 = 0;
+        }
+        for (i = 0; i < 4; i++)
+        {
+            r2 = shared19260_[i].unk2;
+            if (r2 < 0)
+            {
+                r2 = -r2;
+                sp8[0] = CHAR_HYPHEN;
+                r5++;
+            }
+            ConvertIntToDecimalStringN(sp8 + r5, r2, 0, 4);
+            sub_8003460(
+              &gUnknown_03004210,
+              sp8,
+              512 + gUnknown_02038696[i] * 20,
+              gUnknown_083CA308[gUnknown_02038696[i]][0],
+              gUnknown_083CA308[gUnknown_02038696[i]][1]);
+            r5 = 0;
+        }
+        sub_80AEB30();
+    }
+}
+
+void unref_sub_80B0EE8(s32 *a, s32 b)
+{
+    s32 i;
+    s32 j;
+
+    for (i = 0; i < b - 1; i++)
+    {
+        for (j = b - 1; j > i; j--)
+        {
+            if (a[j - 1] > a[j])
+            {
+                s32 temp = a[j];
+
+                a[j] = a[j - 1];
+                a[j - 1] = temp;
+            }
+        }
+    }
+}
+
+void sub_80B0F28(u8 a)
+{
+    u8 sp0[4];
+    u16 sp4[4] = {0};
+    s32 i;
+    s32 r2;
+    s32 r4;
+
+    for (i = 0; i < 4; i++)
+    {
+        sp4[i] = Random();
+        for (r2 = 0; r2 < i; r2++)
+        {
+            if (sp4[i] == sp4[r2])
+            {
+                i--;
+                break;
+            }
+        }
+    }
+
+    if (a == 0)
+    {
+        for (i = 0; i < 4; i++)  //_080B0F9C
+        {
+            gUnknown_02038696[i] = i;
+            for (r4 = 0; r4 < i; r4++)  //_080B0FC4
+            {
+                if (gUnknown_02038670[gUnknown_02038696[r4]] < gUnknown_02038670[i]
+                 || (gUnknown_02038670[gUnknown_02038696[r4]] == gUnknown_02038670[i] && sp4[gUnknown_02038696[r4]] < sp4[i]))
+                {
+                    //_080B0FEC
+                    for (r2 = i; r2 > r4; r2--)
+                        gUnknown_02038696[r2] = gUnknown_02038696[r2 - 1];
+                    //_080B1004
+                    gUnknown_02038696[r4] = i;
+                    break;
+                }
+                //_080B1010
+            }
+            if (r4 == i)
+                gUnknown_02038696[i] = i;
+        }
+        memcpy(sp0, gUnknown_02038696, sizeof(sp0));
+        for (i = 0; i < 4; i++)
+            gUnknown_02038696[sp0[i]] = i;
+    }
+    //_080B1050
+    else
+    {
+        //u8 r2;
+
+        memset(sp0, 0xFF, sizeof(sp0));
+        for (i = 0; i < 4; i++)
+        {
+            u8 r2 = shared19260_[i].unkB_0;
+
+            while (1)
+            {
+                u8 *ptr = &sp0[r2];
+                if (*ptr == 0xFF)
+                {
+                    *ptr = i;
+                    //sp0[r2] = i;
+                    gUnknown_02038696[i] = r2;
+                    break;
+                }
+                r2++;
+            }
+        }
+        //_080B1098
+        for (i = 0; i < 3; i++)
+        {
+            for (r4 = 3; r4 > i; r4--)
+            {
+                if (shared19260_[r4 - 1].unkB_0 == shared19260_[r4].unkB_0
+                 && gUnknown_02038696[r4 - 1] < gUnknown_02038696[r4]
+                 && sp4[r4 - 1] < sp4[r4])
+                {
+                    u8 temp = gUnknown_02038696[r4];
+
+                    gUnknown_02038696[r4] = gUnknown_02038696[r4 - 1];
+                    gUnknown_02038696[r4 - 1] = temp;
+                }
+                //_080B10F0
+            }
+        }
+    }
 }
