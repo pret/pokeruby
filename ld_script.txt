@@ -351,6 +351,7 @@ SECTIONS {
         src/battle/battle_message.o(.text);
         src/field/choose_party.o(.text);
         asm/cable_car.o(.text);
+        src/field/roulette_util.o(.text);
         asm/roulette_util.o(.text);
         asm/cable_car_util.o(.text);
         src/unused_8124F94.o(.text);
