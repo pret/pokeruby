@@ -148,6 +148,28 @@ void sub_8101A28(void)
     REG_DISPCNT = 0;
 }
 
+void sub_8101A44(void)
+{
+    u16 imeBak;
+    SetVBlankCallback(sub_810196C);
+    imeBak = REG_IME;
+    REG_IME = 0;
+    REG_IE |= INTR_FLAG_VBLANK;
+    REG_IME = imeBak;
+    REG_DISPSTAT |= DISPSTAT_VBLANK_INTR;
+    REG_DISPCNT = DISPCNT_OBJ_1D_MAP | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON | DISPCNT_WIN0_ON;
+}
+
+void sub_8101A8C(void)
+{
+    DmaClearLarge16(3, (u16 *)(BG_VRAM), BG_VRAM_SIZE, 0x1000);
+}
+
+void sub_8101AE0(void)
+{
+    DmaClear16(3, (u16 *)OAM, OAM_SIZE);
+}
+
 asm(".section .text_a");
 
 static void LoadSlotMachineWheelOverlay(void);
