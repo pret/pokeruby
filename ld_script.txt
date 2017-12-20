@@ -318,8 +318,9 @@ SECTIONS {
         src/scene/cute_sketch.o(.text);
         asm/cute_sketch.o(.text);
         src/field/decoration.o(.text);
-        asm/slot_machine.o(.text);
         src/field/slot_machine.o(.text);
+        asm/slot_machine.o(.text);
+        src/field/slot_machine.o(.text_a);
         asm/slot_machine.o(.text_8104D30)
         src/field/slot_machine.o(.text_b);
         src/scene/contest_painting.o(.text);

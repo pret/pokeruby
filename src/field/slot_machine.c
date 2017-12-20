@@ -1,13 +1,24 @@
 #include "global.h"
+#include "main.h"
 #include "slot_machine.h"
 #include "decompress.h"
 #include "palette.h"
 #include "task.h"
+#include "util.h"
 #include "ewram.h"
 
-struct UnkStruct2000000 {
-    /*0x00*/ u8 filler00[61];
+struct SlotMachineEwramStruct {
+    /*0x00*/ u8 unk00;
+    /*0x01*/ u8 unk01;
+    /*0x02*/ u8 filler02[59];
     /*0x3D*/ u8 unk3D;
+    /*0x3E*/ u8 filler3E[26];
+    /*0x58*/ u16 win0h;
+    /*0x5a*/ u16 win0v;
+    /*0x5c*/ u16 winIn;
+    /*0x5e*/ u16 winOut;
+    /*0x60*/ u8 filler_60[4];
+    /*0x64*/ void *unk64;
 };
 
 struct UnkStruct1 {
@@ -31,6 +42,114 @@ extern const u16 gUnknown_08E95A18[];
 extern u16 gUnknown_08E95AB8[];
 extern u16 gUnknown_08E95FB8[];
 
+void sub_81018B8(void);
+void sub_8101954(void);
+void sub_81019B0(u8 arg0, void *ptr);
+void nullsub_67(u8 taskId);
+void sub_8101A28(void);
+void sub_8101BA4(void);
+void sub_8101A8C(void);
+void sub_8101AE0(void);
+void sub_8101B04(void);
+void sub_8101C84(void);
+void sub_8101CA0(void);
+void sub_8101CC0(void);
+void sub_8101CD4(void);
+void sub_8101CEC(void);
+void sub_8101A44(void);
+
+
+void PlaySlotMachine(u8 arg0, void *ptr)
+{
+    sub_81019B0(arg0, ptr);
+    SetMainCallback2(sub_81018B8);
+}
+
+void sub_81018B8(void)
+{
+    switch (gMain.state)
+    {
+        case 0:
+            sub_8101A28();
+            sub_8101BA4();
+            gMain.state++;
+            break;
+        case 1:
+            sub_8101A8C();
+            gMain.state++;
+            break;
+        case 2:
+            sub_8101AE0();
+            sub_8101B04();
+            gMain.state++;
+            break;
+        case 3:
+            sub_8101C84();
+            gMain.state++;
+            break;
+        case 4:
+            sub_8101CA0();
+            gMain.state++;
+            break;
+        case 5:
+            sub_8101CC0();
+            gMain.state++;
+            break;
+        case 6:
+            sub_8101CD4();
+            sub_8101CEC();
+            sub_8101A44();
+            SetMainCallback2(sub_8101954);
+            break;
+    }
+}
+
+void sub_8101954(void)
+{
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+}
+
+void sub_810196C(void)
+{
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    TransferPlttBuffer();
+    REG_WIN0H = eSlotMachine->win0h;
+    REG_WIN0V = eSlotMachine->win0v;
+    REG_WININ = eSlotMachine->winIn;
+    REG_WINOUT = eSlotMachine->winOut;
+}
+
+void sub_81019B0(u8 arg0, void *ptr)
+{
+    struct Task *task = &gTasks[CreateTask(nullsub_67, 0xFF)];
+    task->data[0] = arg0;
+    StoreWordInTwoHalfwords(task->data + 1, (intptr_t)ptr);
+}
+
+void sub_81019EC(void)
+{
+    struct Task *task = &gTasks[FindTaskIdByFunc(nullsub_67)];
+    eSlotMachine->unk01 = task->data[0];
+    LoadWordFromTwoHalfwords((u16 *)(task->data + 1), (u32 *)&eSlotMachine->unk64);
+}
+
+void nullsub_67(u8 taskId)
+{
+}
+
+void sub_8101A28(void)
+{
+    SetVBlankCallback(NULL);
+    SetHBlankCallback(NULL);
+    REG_DISPCNT = 0;
+}
+
+asm(".section .text_a");
+
 static void LoadSlotMachineWheelOverlay(void);
 
 void sub_8104CAC(u8 arg0) {
@@ -39,7 +158,7 @@ void sub_8104CAC(u8 arg0) {
 
     sub_8104DA4();
 
-    task = &gTasks[ewram0_8->unk3D];
+    task = &gTasks[eSlotMachine->unk3D];
     task->data[1] = arg0;
 
     i = 0;
