@@ -284,7 +284,7 @@ SECTIONS {
         src/battle/anim/heated_rock.o(.text);
         src/battle/anim/wisp_orb.o(.text);
         asm/wisp_fire.o(.text);
-        asm/thunder.o(.text);
+        src/battle/anim/thunder.o(.text);
         asm/beta_beat_up.o(.text);
         asm/shock.o(.text);
         asm/current.o(.text);
