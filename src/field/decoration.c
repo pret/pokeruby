@@ -1472,7 +1472,9 @@ void DoPlayerPCDecoration(u8 taskId)
 
 void sub_80FE2B4(void)
 {
-    u16 palettes[3] = {0x6318, 0x739C, 0x7FFF};
+    u16 palettes[3] = {RGB(24, 24, 24),
+                       RGB(28, 28, 28),
+                       RGB(31, 31, 31)};
     LoadPalette(&palettes[2], 0xdf, 2);
     LoadPalette(&palettes[1], 0xd1, 2);
     LoadPalette(&palettes[0], 0xd8, 2);
