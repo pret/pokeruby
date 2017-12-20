@@ -445,7 +445,7 @@ start_song:
 #define CRY ((s32)&gPokemonCrySongs + i * sizeof(struct PokemonCrySong))
 #define CRY_OFS(field) offsetof(struct PokemonCrySong, field)
 
-    memcpy((void *)CRY, &gPokemonCrySong, sizeof(struct PokemonCrySong));
+    *(struct PokemonCrySong *)CRY = gPokemonCrySong;
 
     *(u32 *)(CRY + CRY_OFS(tone)) = (u32)tone;
     *(u32 *)(CRY + CRY_OFS(part)) = CRY + CRY_OFS(part0);
