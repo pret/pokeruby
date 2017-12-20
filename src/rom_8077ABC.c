@@ -51,13 +51,6 @@ struct Struct_gUnknown_0837F578 {
     u8 field_1;
 };
 
-struct OamMatrix {
-    s16 a;
-    s16 b;
-    s16 c;
-    s16 d;
-};
-
 struct Struct_2017810 {
     u8 filler_0[6];
     u8 field_6;
@@ -68,12 +61,6 @@ struct Color {
     u16 r:5;
     u16 g:5;
     u16 b:5;
-};
-
-struct Struct_sub_8078914 {
-    u8 *field_0;
-    u8 *field_4;
-    u8 field_8;
 };
 
 struct BGCnt {

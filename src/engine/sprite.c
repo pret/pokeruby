@@ -26,14 +26,6 @@
 
 #define SPRITE_TILE_IS_ALLOCATED(n) ((gSpriteTileAllocBitmap[(n) / 8] >> ((n) % 8)) & 1)
 
-struct OamMatrix
-{
-    s16 a;
-    s16 b;
-    s16 c;
-    s16 d;
-};
-
 struct SpriteCopyRequest
 {
     const u8 *src;
