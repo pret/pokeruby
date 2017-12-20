@@ -338,6 +338,7 @@ SECTIONS {
         src/battle/battle_records.o(.text);
         asm/pokedex_area_screen.o(.text);
         src/scene/evolution_scene.o(.text);
+        src/field/roulette.o(.text);
         asm/roulette.o(.text);
         asm/pokedex_cry_screen.o(.text);
         src/pokemon/pokedex_cry_screen.o(.text);

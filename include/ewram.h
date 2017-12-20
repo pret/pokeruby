@@ -212,6 +212,7 @@ extern u8 gSharedMem[];
 #define ewram18800                      (&gSharedMem[0x18800])
 #define ePokedexView2                   (struct PokedexView *)(gSharedMem + 0x18800)
 #define ewram19000                      (&gSharedMem[0x19000])
+#define eRoulette1                      ((struct RouletteData *)(gSharedMem + 0x19000))
 #define ePokedexView3                   (struct PokedexView *)(gSharedMem + 0x19000)
 #define EWRAM_19348                     (*(u16 *)(gSharedMem + 0x19348))
 #define ewram19348                      (*(struct Struct2019348 *)(gSharedMem + 0x19348))
