@@ -34,30 +34,39 @@ extern const u16 gUnknown_08E95A18[];
 extern u16 gUnknown_08E95AB8[];
 extern u16 gUnknown_08E95FB8[];
 
-void sub_81018B8(void);
-void sub_8101954(void);
-void sub_81019B0(u8 arg0, void *ptr);
-void nullsub_67(u8 taskId);
-void sub_8101A28(void);
-void sub_8101A44(void);
-void sub_8101A8C(void);
-void sub_8101AE0(void);
-void sub_8101B04(void);
-void sub_8101BA4(void);
-void sub_8101C84(void);
-void sub_8101CA0(void);
-void sub_8101CC0(void);
-void sub_8101CD4(void);
-void sub_8101CEC(void);
-void sub_8101D04(void);
-void sub_8101D24(u8 taskId);
+static void sub_81018B8(void);
+static void sub_8101954(void);
+static void sub_81019B0(u8 arg0, void *ptr);
+static void nullsub_67(u8 taskId);
+static void sub_8101A28(void);
+static void sub_8101A44(void);
+static void sub_8101A8C(void);
+static void sub_8101AE0(void);
+static void sub_8101B04(void);
+static void sub_8101BA4(void);
+static void sub_8101C84(void);
+static void sub_8101CA0(void);
+static void sub_8101CC0(void);
+static void sub_8101CD4(void);
+static void sub_8101CEC(void);
+static void sub_8101D04(void);
+static void sub_8101D24(u8 taskId);
 
+void sub_8102484(void);
+void sub_81024F0(void);
 void sub_8102DA8(void);
+void sub_8102DEC(u8 a0);
+void sub_8102E1C(u8 a0);
+bool8 sub_8102E40(u8 a0);
+void sub_8103C14(u8 a0);
 void sub_8103D50(u8 a0);
 void sub_8103DC8(void);
 void sub_8104048(void);
 void sub_810423C(u8 a0);
+void sub_810430C(void);
+bool8 sub_810432C(void);
 void sub_8104AB8(u8 a0);
+bool8 sub_8104AEC(void);
 void sub_8104C5C(void);
 void sub_8104CAC(u8 arg0);
 bool8 sub_8104E18(void);
@@ -67,6 +76,7 @@ void sub_81050C4(void);
 void sub_81063C0(void);
 void sub_8106448(void);
 void sub_81064B8(void);
+u16 dp15_jump_random_unknown(void);
 
 void PlaySlotMachine(u8 arg0, void *ptr)
 {
@@ -74,7 +84,7 @@ void PlaySlotMachine(u8 arg0, void *ptr)
     SetMainCallback2(sub_81018B8);
 }
 
-void sub_81018B8(void)
+static void sub_81018B8(void)
 {
     switch (gMain.state)
     {
@@ -113,7 +123,7 @@ void sub_81018B8(void)
     }
 }
 
-void sub_8101954(void)
+static void sub_8101954(void)
 {
     RunTasks();
     AnimateSprites();
@@ -132,7 +142,7 @@ void sub_810196C(void)
     REG_WINOUT = eSlotMachine->winOut;
 }
 
-void sub_81019B0(u8 arg0, void *ptr)
+static void sub_81019B0(u8 arg0, void *ptr)
 {
     struct Task *task = &gTasks[CreateTask(nullsub_67, 0xFF)];
     task->data[0] = arg0;
@@ -146,18 +156,18 @@ void sub_81019EC(void)
     LoadWordFromTwoHalfwords((u16 *)(task->data + 1), (u32 *)&eSlotMachine->unk64);
 }
 
-void nullsub_67(u8 taskId)
+static void nullsub_67(u8 taskId)
 {
 }
 
-void sub_8101A28(void)
+static void sub_8101A28(void)
 {
     SetVBlankCallback(NULL);
     SetHBlankCallback(NULL);
     REG_DISPCNT = 0;
 }
 
-void sub_8101A44(void)
+static void sub_8101A44(void)
 {
     u16 imeBak;
     SetVBlankCallback(sub_810196C);
@@ -169,17 +179,17 @@ void sub_8101A44(void)
     REG_DISPCNT = DISPCNT_OBJ_1D_MAP | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON | DISPCNT_WIN0_ON;
 }
 
-void sub_8101A8C(void)
+static void sub_8101A8C(void)
 {
     DmaClearLarge16(3, (u16 *)(BG_VRAM), BG_VRAM_SIZE, 0x1000);
 }
 
-void sub_8101AE0(void)
+static void sub_8101AE0(void)
 {
     DmaClear16(3, (u16 *)OAM, OAM_SIZE);
 }
 
-void sub_8101B04(void)
+static void sub_8101B04(void)
 {
     REG_BG0CNT = 0;
     REG_BG1CNT = 0;
@@ -205,7 +215,7 @@ void sub_8101B04(void)
 
 extern const s16 gUnknown_083ECCF8[3][2];
 
-void sub_8101BA4(void)
+static void sub_8101BA4(void)
 {
     u8 i;
 
@@ -237,13 +247,13 @@ void sub_8101BA4(void)
     }
 }
 
-void sub_8101C84(void)
+static void sub_8101C84(void)
 {
     SetUpWindowConfig(&gWindowConfig_81E7128);
     InitMenuWindow(&gWindowConfig_81E7128);
 }
 
-void sub_8101CA0(void)
+static void sub_8101CA0(void)
 {
     ResetPaletteFade();
     ResetSpriteData();
@@ -252,14 +262,14 @@ void sub_8101CA0(void)
     ResetTasks();
 }
 
-void sub_8101CC0(void)
+static void sub_8101CC0(void)
 {
     sub_8106448();
     sub_81064B8();
     sub_81063C0();
 }
 
-void sub_8101CD4(void)
+static void sub_8101CD4(void)
 {
     sub_8104EA8();
     sub_8104F8C();
@@ -267,7 +277,7 @@ void sub_8101CD4(void)
     sub_81050C4();
 }
 
-void sub_8101CEC(void)
+static void sub_8101CEC(void)
 {
     sub_8104048();
     sub_8102DA8();
@@ -277,12 +287,12 @@ void sub_8101CEC(void)
 
 extern bool8 (*const gUnknown_083ECAAC[])(struct Task *task);
 
-void sub_8101D04(void)
+static void sub_8101D04(void)
 {
     sub_8101D24(CreateTask(sub_8101D24, 0));
 }
 
-void sub_8101D24(u8 taskId)
+static void sub_8101D24(u8 taskId)
 {
     while (gUnknown_083ECAAC[eSlotMachine->state](gTasks + taskId));
 }
@@ -401,6 +411,99 @@ bool8 sub_8101F44(struct Task *task)
 {
     sub_8101F2C(gOtherText_DontHaveThreeCoins);
     eSlotMachine->state = 7;
+    return FALSE;
+}
+
+bool8 sub_8101F60(struct Task *task)
+{
+    if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+    {
+        MenuZeroFillScreen();
+        eSlotMachine->state = 5;
+    }
+    return FALSE;
+}
+
+bool8 sub_8101F88(struct Task *task)
+{
+    if (sub_8104AEC())
+    {
+        eSlotMachine->state = 5;
+    }
+    return FALSE;
+}
+
+bool8 sub_8101FA4(struct Task *task)
+{
+    sub_8102484();
+    sub_8104DA4();
+    sub_8102DEC(0);
+    sub_8102DEC(1);
+    sub_8102DEC(2);
+    task->data[0] = 0;
+    if (eSlotMachine->unk04 & 0x20)
+    {
+        sub_810430C();
+        eSlotMachine->state = 10;
+    }
+    else
+    {
+        sub_8104CAC(1);
+        eSlotMachine->state = 11;
+    }
+    eSlotMachine->unk1A = 8;
+    if (eSlotMachine->unk0A)
+    {
+        eSlotMachine->unk1A = dp15_jump_random_unknown();
+    }
+    return FALSE;
+}
+
+bool8 sub_8102008(struct Task *task)
+{
+    if (sub_810432C())
+    {
+        sub_8104CAC(1);
+        eSlotMachine->unk04 &= 0xDF;
+        eSlotMachine->state = 11;
+    }
+    return FALSE;
+}
+
+bool8 sub_8102034(struct Task *task)
+{
+    if (++task->data[0] >= 30)
+    {
+        sub_81024F0();
+        eSlotMachine->state = 12;
+    }
+    return FALSE;
+}
+
+bool8 sub_8102058(struct Task *task)
+{
+    if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_JYUNI);
+        sub_8102E1C(eSlotMachine->unk18);
+        sub_8103C14(eSlotMachine->unk18);
+        eSlotMachine->state = 13;
+    }
+    return FALSE;
+}
+
+bool8 sub_8102090(struct Task *task)
+{
+    if (!sub_8102E40(eSlotMachine->unk18))
+    {
+        eSlotMachine->unk18++;
+        eSlotMachine->state = 12;
+        if (eSlotMachine->unk18 > 2)
+        {
+            eSlotMachine->state = 14;
+        }
+        return TRUE;
+    }
     return FALSE;
 }
 
