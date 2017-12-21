@@ -23,7 +23,7 @@ extern u8 gPlayerPartyCount;
 extern u16 gSpecialVar_0x8004;
 extern u16 gSpecialVar_0x8005;
 extern u8 gUnknown_02038694;
-extern u16 gScriptResult;
+extern u16 gSpecialVar_Result;
 
 extern void (*gFieldCallback)(void);
 
@@ -281,11 +281,11 @@ void ScrSpecial_CountPokemonMoves(void) // count pokemon moves
 {
     u8 i;
 
-    gScriptResult = 0;
+    gSpecialVar_Result = 0;
 
     for (i = 0; i < 4; i++) // checks MOVE1-MOVE4
         if (GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_MOVE1 + i))
-            gScriptResult++;
+            gSpecialVar_Result++;
 }
 
 void ScrSpecial_GetPokemonNicknameAndMoveName(void)
@@ -437,8 +437,8 @@ void sub_80FA0DC(void)
 void sub_80FA148(void)
 {
     struct Pokemon *party = &gPlayerParty[gSpecialVar_0x8004];
-    gScriptResult = 0;
+    gSpecialVar_Result = 0;
 
     if (GetMonData(party, MON_DATA_IS_EGG))
-        gScriptResult = 1;
+        gSpecialVar_Result = 1;
 }

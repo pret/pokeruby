@@ -9,7 +9,7 @@ Route111_EventScript_1A3858:: @ 81A3858
 	end
 
 Route111_EventScript_1A3877:: @ 81A3877
-	giveitem ITEM_TM43
+	giveitem_std ITEM_TM43
 	compare RESULT, 0
 	goto_if_eq Route111_EventScript_1A38D9
 	msgbox Route111_Text_1A35C5, 4

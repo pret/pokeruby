@@ -15,7 +15,7 @@ SlateportCity_ContestHall_EventScript_15555E:: @ 815555E
 	checkflag FLAG_RECEIVED_TM41
 	goto_if_eq SlateportCity_ContestHall_EventScript_155595
 	msgbox SlateportCity_ContestHall_Text_17CCE2, 4
-	giveitem ITEM_TM41
+	giveitem_std ITEM_TM41
 	compare RESULT, 0
 	goto_if_eq SlateportCity_ContestHall_EventScript_1A029B
 	setflag FLAG_RECEIVED_TM41

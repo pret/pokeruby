@@ -129,17 +129,17 @@ MauvilleCity_GameCorner_EventScript_156BA6:: @ 8156BA6
 
 MauvilleCity_GameCorner_EventScript_156BE2:: @ 8156BE2
 	setvar 0x4001, 1
-	getdecorname 0, 88
+	bufferdecorationname 0, 88
 	goto MauvilleCity_GameCorner_EventScript_156C0C
 
 MauvilleCity_GameCorner_EventScript_156BF0:: @ 8156BF0
 	setvar 0x4001, 2
-	getdecorname 0, 89
+	bufferdecorationname 0, 89
 	goto MauvilleCity_GameCorner_EventScript_156C0C
 
 MauvilleCity_GameCorner_EventScript_156BFE:: @ 8156BFE
 	setvar 0x4001, 3
-	getdecorname 0, 90
+	bufferdecorationname 0, 90
 	goto MauvilleCity_GameCorner_EventScript_156C0C
 
 MauvilleCity_GameCorner_EventScript_156C0C:: @ 8156C0C
@@ -156,12 +156,12 @@ MauvilleCity_GameCorner_EventScript_156C46:: @ 8156C46
 	checkcoins 16386
 	compare 0x4002, 1000
 	goto_if 0, MauvilleCity_GameCorner_EventScript_156CF4
-	getdecorname 1, 88
-	checkdecor 88
+	bufferdecorationname 1, 88
+	checkdecorspace 88
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_156D02
 	takecoins 1000
-	adddecor 88
+	givedecoration 88
 	updatecoinsbox 0, 0
 	playse 95
 	msgbox MauvilleCity_GameCorner_Text_181E49, 4
@@ -172,12 +172,12 @@ MauvilleCity_GameCorner_EventScript_156C80:: @ 8156C80
 	checkcoins 16386
 	compare 0x4002, 1000
 	goto_if 0, MauvilleCity_GameCorner_EventScript_156CF4
-	getdecorname 1, 89
-	checkdecor 89
+	bufferdecorationname 1, 89
+	checkdecorspace 89
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_156D02
 	takecoins 1000
-	adddecor 89
+	givedecoration 89
 	updatecoinsbox 0, 0
 	playse 95
 	msgbox MauvilleCity_GameCorner_Text_181E49, 4
@@ -188,12 +188,12 @@ MauvilleCity_GameCorner_EventScript_156CBA:: @ 8156CBA
 	checkcoins 16386
 	compare 0x4002, 1000
 	goto_if 0, MauvilleCity_GameCorner_EventScript_156CF4
-	getdecorname 1, 90
-	checkdecor 90
+	bufferdecorationname 1, 90
+	checkdecorspace 90
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_156D02
 	takecoins 1000
-	adddecor 90
+	givedecoration 90
 	updatecoinsbox 0, 0
 	playse 95
 	msgbox MauvilleCity_GameCorner_Text_181E49, 4
@@ -252,27 +252,27 @@ MauvilleCity_GameCorner_EventScript_156D54:: @ 8156D54
 
 MauvilleCity_GameCorner_EventScript_156DA6:: @ 8156DA6
 	setvar 0x4001, 1
-	getitemname 0, ITEM_TM32
+	bufferitemname 0, ITEM_TM32
 	goto MauvilleCity_GameCorner_EventScript_156DEC
 
 MauvilleCity_GameCorner_EventScript_156DB4:: @ 8156DB4
 	setvar 0x4001, 2
-	getitemname 0, ITEM_TM29
+	bufferitemname 0, ITEM_TM29
 	goto MauvilleCity_GameCorner_EventScript_156DEC
 
 MauvilleCity_GameCorner_EventScript_156DC2:: @ 8156DC2
 	setvar 0x4001, 3
-	getitemname 0, ITEM_TM35
+	bufferitemname 0, ITEM_TM35
 	goto MauvilleCity_GameCorner_EventScript_156DEC
 
 MauvilleCity_GameCorner_EventScript_156DD0:: @ 8156DD0
 	setvar 0x4001, 4
-	getitemname 0, ITEM_TM24
+	bufferitemname 0, ITEM_TM24
 	goto MauvilleCity_GameCorner_EventScript_156DEC
 
 MauvilleCity_GameCorner_EventScript_156DDE:: @ 8156DDE
 	setvar 0x4001, 5
-	getitemname 0, ITEM_TM13
+	bufferitemname 0, ITEM_TM13
 	goto MauvilleCity_GameCorner_EventScript_156DEC
 
 MauvilleCity_GameCorner_EventScript_156DEC:: @ 8156DEC
@@ -295,7 +295,7 @@ MauvilleCity_GameCorner_EventScript_156E3C:: @ 8156E3C
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_156F6C
 	takecoins 1500
-	additem ITEM_TM32, 1
+	giveitem ITEM_TM32, 1
 	updatecoinsbox 0, 0
 	playse 95
 	msgbox MauvilleCity_GameCorner_Text_181F08, 4
@@ -310,7 +310,7 @@ MauvilleCity_GameCorner_EventScript_156E76:: @ 8156E76
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_156F6C
 	takecoins 3500
-	additem ITEM_TM29, 1
+	giveitem ITEM_TM29, 1
 	updatecoinsbox 0, 0
 	playse 95
 	msgbox MauvilleCity_GameCorner_Text_181F08, 4
@@ -325,7 +325,7 @@ MauvilleCity_GameCorner_EventScript_156EB0:: @ 8156EB0
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_156F6C
 	takecoins 4000
-	additem ITEM_TM35, 1
+	giveitem ITEM_TM35, 1
 	updatecoinsbox 0, 0
 	playse 95
 	msgbox MauvilleCity_GameCorner_Text_181F08, 4
@@ -340,7 +340,7 @@ MauvilleCity_GameCorner_EventScript_156EEA:: @ 8156EEA
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_156F6C
 	takecoins 4000
-	additem ITEM_TM24, 1
+	giveitem ITEM_TM24, 1
 	updatecoinsbox 0, 0
 	playse 95
 	msgbox MauvilleCity_GameCorner_Text_181F08, 4
@@ -355,7 +355,7 @@ MauvilleCity_GameCorner_EventScript_156F24:: @ 8156F24
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_156F6C
 	takecoins 4000
-	additem ITEM_TM13, 1
+	giveitem ITEM_TM13, 1
 	updatecoinsbox 0, 0
 	playse 95
 	msgbox MauvilleCity_GameCorner_Text_181F08, 4
@@ -401,34 +401,34 @@ MauvilleCity_GameCorner_EventScript_156F96:: @ 8156F96
 	end
 
 MauvilleCity_GameCorner_EventScript_156FDB:: @ 8156FDB
-	getdecorname 1, DECOR_TREECKO_DOLL
-	checkdecor DECOR_TREECKO_DOLL
+	bufferdecorationname 1, DECOR_TREECKO_DOLL
+	checkdecorspace DECOR_TREECKO_DOLL
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_157059
 	msgbox MauvilleCity_GameCorner_Text_181F89, 4
-	givedecoration DECOR_TREECKO_DOLL
+	givedecoration_std DECOR_TREECKO_DOLL
 	setflag FLAG_RECEIVED_STARTER_DOLL
 	goto MauvilleCity_GameCorner_EventScript_157072
 	end
 
 MauvilleCity_GameCorner_EventScript_157005:: @ 8157005
-	getdecorname 1, DECOR_TORCHIC_DOLL
-	checkdecor DECOR_TORCHIC_DOLL
+	bufferdecorationname 1, DECOR_TORCHIC_DOLL
+	checkdecorspace DECOR_TORCHIC_DOLL
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_157059
 	msgbox MauvilleCity_GameCorner_Text_181F89, 4
-	givedecoration DECOR_TORCHIC_DOLL
+	givedecoration_std DECOR_TORCHIC_DOLL
 	setflag FLAG_RECEIVED_STARTER_DOLL
 	goto MauvilleCity_GameCorner_EventScript_157072
 	end
 
 MauvilleCity_GameCorner_EventScript_15702F:: @ 815702F
-	getdecorname 1, DECOR_MUDKIP_DOLL
-	checkdecor DECOR_MUDKIP_DOLL
+	bufferdecorationname 1, DECOR_MUDKIP_DOLL
+	checkdecorspace DECOR_MUDKIP_DOLL
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_157059
 	msgbox MauvilleCity_GameCorner_Text_181F89, 4
-	givedecoration DECOR_MUDKIP_DOLL
+	givedecoration_std DECOR_MUDKIP_DOLL
 	setflag FLAG_RECEIVED_STARTER_DOLL
 	goto MauvilleCity_GameCorner_EventScript_157072
 	end

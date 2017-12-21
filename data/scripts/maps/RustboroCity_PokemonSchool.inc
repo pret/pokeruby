@@ -84,7 +84,7 @@ RustboroCity_PokemonSchool_EventScript_157ACE:: @ 8157ACE
 	compare FACING, 3
 	call_if 1, RustboroCity_PokemonSchool_EventScript_157B29
 	msgbox RustboroCity_PokemonSchool_Text_1846A2, 4
-	giveitem ITEM_QUICK_CLAW
+	giveitem_std ITEM_QUICK_CLAW
 	compare RESULT, 0
 	goto_if_eq RustboroCity_PokemonSchool_EventScript_1A029B
 	closemessage

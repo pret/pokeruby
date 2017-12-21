@@ -3,14 +3,14 @@ SootopolisCity_PokemonCenter_1F_MapScripts:: @ 815B190
 	.byte 0
 
 SootopolisCity_PokemonCenter_1F_MapScript1_15B196:: @ 815B196
-	sethealplace 10
+	setrespawn 10
 	end
 
 @ 815B19A
 	setvar 0x800B, 1
 	call VerdanturfTown_PokemonCenter_1F_EventScript_19FD5B
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	release
 	end
 

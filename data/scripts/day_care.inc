@@ -39,7 +39,7 @@ Route117_EventScript_1B22B2:: @ 81B22B2
 	playfanfare 367
 	waitfanfare
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	msgbox Route117_Text_1B27CD, 4
 	special GiveEggFromDaycare
 	clearflag FLAG_PENDING_DAYCARE_EGG
@@ -70,7 +70,7 @@ Route117_EventScript_1B22FE:: @ 81B22FE
 	special SetDaycareCompatibilityString
 	special ShowFieldMessageStringVar4
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	setvar 0x8004, 0
 	call Route117_EventScript_1B22CD
 	setvar 0x8004, 1
@@ -110,9 +110,9 @@ Route117_PokemonDayCare_EventScript_1B236C:: @ 81B236C
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B23FD
 	specialvar 0x8005, GetSelectedDaycareMonNickname
 	waitse
-	playpokecry 0x8005, 0
+	playmoncry 0x8005, 0
 	msgbox Route117_PokemonDayCare_Text_1B296E, 4
-	waitpokecry
+	waitmoncry
 	special StoreSelectedPokemonInDaycare
 	incrementgamestat GAME_STAT_USED_DAYCARE
 	specialvar RESULT, GetDaycareState
@@ -211,9 +211,9 @@ Route117_PokemonDayCare_EventScript_1B24DE:: @ 81B24DE
 	playse 95
 	msgbox Route117_PokemonDayCare_Text_1B2B75, 4
 	waitse
-	playpokecry RESULT, 0
+	playmoncry RESULT, 0
 	msgbox Route117_PokemonDayCare_Text_1B2B93, 4
-	waitpokecry
+	waitmoncry
 	specialvar RESULT, GetDaycareState
 	compare RESULT, 2
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B2520

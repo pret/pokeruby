@@ -664,7 +664,7 @@ static void sub_810BF7C(u8 taskId)
             PlaySE(SE_SELECT);
             if (gUnknown_02039248.unk1 + gUnknown_02039248.unk0 == gUnknown_02039248.unk2)
             {
-                gScriptResult = 0xffff;
+                gSpecialVar_Result = 0xffff;
                 sub_810C31C(taskId);
             }
             else
@@ -675,7 +675,7 @@ static void sub_810BF7C(u8 taskId)
         else if (gMain.newKeys & B_BUTTON)
         {
             PlaySE(SE_SELECT);
-            gScriptResult = 0xffff;
+            gSpecialVar_Result = 0xffff;
             sub_810C31C(taskId);
         }
     }
@@ -800,7 +800,7 @@ static void sub_810C31C(u8 taskId)
     BeginNormalPaletteFade(-1, 0, 0, 16, 0);
     if (gUnknown_02039244 > 1)
     {
-        gScriptItemId = ITEM_NONE;
+        gSpecialVar_ItemId = ITEM_NONE;
     }
     gTasks[taskId].func = sub_810C2C8;
 }
@@ -816,7 +816,7 @@ static void sub_810C368(u8 taskId)
     MenuDrawTextWindow(7, v0 + 4, 13, 11);
     PrintMenuItemsReordered(8, v0 + 5, gUnknown_0203924C, gUnknown_083F7EF4, gUnknown_03000758);
     InitMenu(0, 8, v0 + 5, gUnknown_0203924C, 0, 5);
-    gScriptItemId = gUnknown_02039248.unk0 + gUnknown_02039248.unk1;
+    gSpecialVar_ItemId = gUnknown_02039248.unk0 + gUnknown_02039248.unk1;
     gTasks[taskId].func = sub_810C40C;
 }
 
@@ -855,7 +855,7 @@ static void sub_810C4C4(u8 taskId)
     if (!gPaletteFade.active)
     {
         sub_810C2B0();
-        sub_8136130(&gSaveBlock1.pokeblocks[gScriptItemId], sub_810B96C);
+        sub_8136130(&gSaveBlock1.pokeblocks[gSpecialVar_ItemId], sub_810B96C);
         DestroyTask(taskId);
     }
 }
@@ -939,21 +939,21 @@ static void sub_810C748(u8 taskId)
 
 static void sub_810C788(u8 taskId)
 {
-    s16 v0 = PokeblockGetGain(GetNature(&gEnemyParty[0]), &gSaveBlock1.pokeblocks[gScriptItemId]);
-    StringCopy(gBattleTextBuff1, gPokeblockNames[gSaveBlock1.pokeblocks[gScriptItemId].color]);
-    PokeblockClearIfExists(gScriptItemId);
-    gScriptItemId = gSaveBlock1.pokeblocks[gScriptItemId].color << 8;
+    s16 v0 = PokeblockGetGain(GetNature(&gEnemyParty[0]), &gSaveBlock1.pokeblocks[gSpecialVar_ItemId]);
+    StringCopy(gBattleTextBuff1, gPokeblockNames[gSaveBlock1.pokeblocks[gSpecialVar_ItemId].color]);
+    PokeblockClearIfExists(gSpecialVar_ItemId);
+    gSpecialVar_ItemId = gSaveBlock1.pokeblocks[gSpecialVar_ItemId].color << 8;
     if (v0 == 0)
     {
-        gScriptItemId += 1;
+        gSpecialVar_ItemId += 1;
     }
     if (v0 > 0)
     {
-        gScriptItemId += 2;
+        gSpecialVar_ItemId += 2;
     }
     if (v0 < 0)
     {
-        gScriptItemId += 3;
+        gSpecialVar_ItemId += 3;
     }
     BeginNormalPaletteFade(-1, 0, 0, 16, 0);
     gTasks[taskId].func = sub_810C2C8;
@@ -961,10 +961,10 @@ static void sub_810C788(u8 taskId)
 
 static void sub_810C854(u8 taskId)
 {
-    SafariZoneActivatePokeblockFeeder(gScriptItemId);
-    StringCopy(gStringVar1, gPokeblockNames[gSaveBlock1.pokeblocks[gScriptItemId].color]);
-    gScriptResult = gScriptItemId;
-    PokeblockClearIfExists(gScriptItemId);
+    SafariZoneActivatePokeblockFeeder(gSpecialVar_ItemId);
+    StringCopy(gStringVar1, gPokeblockNames[gSaveBlock1.pokeblocks[gSpecialVar_ItemId].color]);
+    gSpecialVar_Result = gSpecialVar_ItemId;
+    PokeblockClearIfExists(gSpecialVar_ItemId);
     BeginNormalPaletteFade(-1, 0, 0, 16, 0);
     gTasks[taskId].func = sub_810C2C8;
 }

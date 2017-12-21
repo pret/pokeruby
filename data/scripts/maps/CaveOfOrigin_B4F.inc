@@ -38,9 +38,9 @@ CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 	special WaitWeather
 	waitstate
 	playse 209
-	setfieldeffect 0, 9
-	setfieldeffect 1, 13
-	setfieldeffect 2, 0
+	setfieldeffectargument 0, 9
+	setfieldeffectargument 1, 13
+	setfieldeffectargument 2, 0
 	dofieldeffect 54
 	waitfieldeffect 54
 	.ifdef SAPPHIRE
@@ -58,9 +58,9 @@ CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 	delay 60
 	setwildbattle SPECIES_GROUDON_OR_KYOGRE, 45, ITEM_NONE
 	waitse
-	playpokecry SPECIES_GROUDON_OR_KYOGRE, 2
+	playmoncry SPECIES_GROUDON_OR_KYOGRE, 2
 	delay 40
-	waitpokecry
+	waitmoncry
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special ScrSpecial_StartGroudonKyogreBattle
 	waitstate

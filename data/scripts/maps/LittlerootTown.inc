@@ -124,7 +124,7 @@ LittlerootTown_EventScript_14D62B:: @ 814D62B
 	waitmovement 0
 	setflag FLAG_HIDE_MOM_LITTLEROOT
 	setvar 0x4092, 3
-	hideobject 255, 0, 0
+	hideobjectat 255, MAP_PETALBURG_CITY
 	closedoor 0x8004, 0x8005
 	waitdooranim
 	clearflag FLAG_HIDE_FAT_MAN_LITTLEROOT
@@ -599,7 +599,7 @@ LittlerootTown_EventScript_14DB46:: @ 814DB46
 	waitdooranim
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
-	hideobject 4, 0, 9
+	hideobjectat 4, MAP_LITTLEROOT_TOWN
 	closedoor 0x8009, 0x800a
 	waitdooranim
 	return
@@ -611,7 +611,7 @@ LittlerootTown_EventScript_14DB6C:: @ 814DB6C
 	waitdooranim
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
-	hideobject 4, 0, 9
+	hideobjectat 4, MAP_LITTLEROOT_TOWN
 	closedoor 0x8009, 0x800a
 	waitdooranim
 	return
@@ -623,7 +623,7 @@ LittlerootTown_EventScript_14DB92:: @ 814DB92
 	waitdooranim
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
-	hideobject 4, 0, 9
+	hideobjectat 4, MAP_LITTLEROOT_TOWN
 	closedoor 0x8009, 0x800a
 	waitdooranim
 	return
@@ -635,7 +635,7 @@ LittlerootTown_EventScript_14DBB8:: @ 814DBB8
 	waitdooranim
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
-	hideobject 4, 0, 9
+	hideobjectat 4, MAP_LITTLEROOT_TOWN
 	closedoor 0x8009, 0x800a
 	waitdooranim
 	return
@@ -647,7 +647,7 @@ LittlerootTown_EventScript_14DBDE:: @ 814DBDE
 	waitdooranim
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
-	hideobject 4, 0, 9
+	hideobjectat 4, MAP_LITTLEROOT_TOWN
 	closedoor 0x8009, 0x800a
 	waitdooranim
 	return
@@ -659,7 +659,7 @@ LittlerootTown_EventScript_14DC04:: @ 814DC04
 	waitdooranim
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
-	hideobject 4, 0, 9
+	hideobjectat 4, MAP_LITTLEROOT_TOWN
 	closedoor 0x8009, 0x800a
 	waitdooranim
 	return
@@ -671,7 +671,7 @@ LittlerootTown_EventScript_14DC2A:: @ 814DC2A
 	waitdooranim
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
-	hideobject 4, 0, 9
+	hideobjectat 4, MAP_LITTLEROOT_TOWN
 	closedoor 0x8009, 0x800a
 	waitdooranim
 	return
@@ -683,7 +683,7 @@ LittlerootTown_EventScript_14DC50:: @ 814DC50
 	waitdooranim
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
-	hideobject 4, 0, 9
+	hideobjectat 4, MAP_LITTLEROOT_TOWN
 	closedoor 0x8009, 0x800a
 	waitdooranim
 	return
@@ -853,7 +853,7 @@ LittlerootTown_EventScript_14DCE2:: @ 814DCE2
 	waitdooranim
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
-	hideobject 4, 0, 9
+	hideobjectat 4, MAP_LITTLEROOT_TOWN
 	closedoor 0x8009, 0x800a
 	waitdooranim
 	goto LittlerootTown_EventScript_14DD2B

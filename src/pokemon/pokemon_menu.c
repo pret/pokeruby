@@ -435,7 +435,7 @@ static void sub_808A1E0(u8 taskID)
 
 static void sub_808A228(u8 taskID)
 {
-    if (ItemIsMail(gScriptItemId) && gUnknown_0202E8F4 != 0)
+    if (ItemIsMail(gSpecialVar_ItemId) && gUnknown_0202E8F4 != 0)
     {
         BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
         gTasks[taskID].func = sub_808A180;
@@ -451,7 +451,7 @@ static void sub_808A228(u8 taskID)
 static void sub_808A2AC(u8 taskID)
 {
     if (!gPaletteFade.active)
-        PartyMenuTryGiveMonHeldItem(taskID, gScriptItemId, sub_808A228);
+        PartyMenuTryGiveMonHeldItem(taskID, gSpecialVar_ItemId, sub_808A228);
 }
 
 static void sub_808A2DC(u8 taskID)
@@ -463,7 +463,7 @@ static void sub_808A2DC(u8 taskID)
 
 static void sub_808A330(u8 taskID)
 {
-    PartyMenuTryGiveMonHeldItem(taskID, gScriptItemId, sub_808A2DC);
+    PartyMenuTryGiveMonHeldItem(taskID, gSpecialVar_ItemId, sub_808A2DC);
 }
 
 static void sub_808A34C(void)
@@ -507,7 +507,7 @@ static void sub_808A3A4(void)
 
 void sub_808A3F8(void)
 {
-    if (ItemIsMail(gScriptItemId))
+    if (ItemIsMail(gSpecialVar_ItemId))
     {
         u8 taskID = CreateTask(sub_808A330, 0);
         gPaletteFade.bufferTransferDisabled = 1;
@@ -523,7 +523,7 @@ void sub_808A3F8(void)
             DestroyTask(taskID);
     }
     gPaletteFade.bufferTransferDisabled = 1;
-    if (gScriptItemId)
+    if (gSpecialVar_ItemId)
     {
         SetPartyMenuSettings(PARTY_MENU_TYPE_STANDARD, 0xFF, sub_808A2AC, 0xFF);
         SetMainCallback2(sub_808A358);
@@ -554,7 +554,7 @@ static void sub_808A4D4(void)
 void sub_808A520(void)
 {
     gPaletteFade.bufferTransferDisabled = 1;
-    if (gScriptResult == 0)
+    if (gSpecialVar_Result == 0)
     {
         if (gUnknown_0202E8F8)
             RemoveBagItem(gUnknown_0202E8F8, 1);
@@ -572,7 +572,7 @@ static void sub_808A5BC(u8 taskID)
 {
     if (!gPaletteFade.active)
     {
-        DisplayGiveHeldItemMessage(gLastFieldPokeMenuOpened, gScriptItemId, 0);
+        DisplayGiveHeldItemMessage(gLastFieldPokeMenuOpened, gSpecialVar_ItemId, 0);
         gTasks[taskID].func = sub_808A1E0;
     }
 }
@@ -915,7 +915,7 @@ static bool8 SetUpFieldMove_Waterfall(void)
 static void sub_808AE8C(void)
 {
     u8 i;
-    u8 arg = gScriptItemId - 33;
+    u8 arg = gSpecialVar_ItemId - 33;
     for (i = 0; i < 6; i++)
     {
         if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES))
@@ -923,7 +923,7 @@ static void sub_808AE8C(void)
             sub_806D668(i);
             if (GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG) || !CanMonLearnTMHM(&gPlayerParty[i], arg))
                 sub_806BC3C(i, 0x9A);
-            else if (pokemon_has_move(&gPlayerParty[i], ItemIdToBattleMoveId(gScriptItemId)))
+            else if (pokemon_has_move(&gPlayerParty[i], ItemIdToBattleMoveId(gSpecialVar_ItemId)))
                 sub_806BC3C(i, 0xA8);
             else
                 sub_806BC3C(i, 0x8C);
@@ -938,7 +938,7 @@ static void sub_808AF20(void)
     {
         if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES))
         {
-            if (GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG) || !GetEvolutionTargetSpecies(&gPlayerParty[i], 3, gScriptItemId))
+            if (GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG) || !GetEvolutionTargetSpecies(&gPlayerParty[i], 3, gSpecialVar_ItemId))
             {
                 sub_806D668(i);
                 sub_806BC3C(i, 0);
@@ -955,7 +955,7 @@ static void sub_808AF80(void)
         {
             if (gUnknown_02038561 == 0)
             {
-                switch (CheckIfItemIsTMHMOrEvolutionStone(gScriptItemId))
+                switch (CheckIfItemIsTMHMOrEvolutionStone(gSpecialVar_ItemId))
                 {
                 case 1:
                     sub_808AE8C();
@@ -983,7 +983,7 @@ void sub_808B020(void)
     switch (gUnknown_02038561)
     {
     case 0:
-        if (CheckIfItemIsTMHMOrEvolutionStone(gScriptItemId) == 1)
+        if (CheckIfItemIsTMHMOrEvolutionStone(gSpecialVar_ItemId) == 1)
             SetPartyMenuSettings(PARTY_MENU_TYPE_STANDARD, 0, sub_808B0C0, 20);
         else
             SetPartyMenuSettings(PARTY_MENU_TYPE_STANDARD, 0, sub_808B0C0, 3);
@@ -1013,11 +1013,11 @@ void sub_808B0C0(u8 taskID)
             {
                 sub_806D5A4();
                 if (gUnknown_02038561 == 0)
-                    gUnknown_03004AE4(taskID, gScriptItemId, sub_808B224);
+                    gUnknown_03004AE4(taskID, gSpecialVar_ItemId, sub_808B224);
                 if (gUnknown_02038561 == 1)
                 {
                     PlaySE(SE_SELECT);
-                    PartyMenuTryGiveMonHeldItem(taskID, gScriptItemId, sub_808B2EC);
+                    PartyMenuTryGiveMonHeldItem(taskID, gSpecialVar_ItemId, sub_808B2EC);
                 }
                 if (gUnknown_02038561 == 3)
                 {
@@ -1042,7 +1042,7 @@ void sub_808B0C0(u8 taskID)
 static void sub_808B1EC(u8 taskID)
 {
     if (!gPaletteFade.active)
-        gUnknown_03004AE4(taskID, gScriptItemId, sub_808B224);
+        gUnknown_03004AE4(taskID, gSpecialVar_ItemId, sub_808B224);
 }
 
 static void sub_808B224(u8 taskID)
@@ -1120,7 +1120,7 @@ static void sub_808B3EC(void)
     IntrCallback callback;
 
     gPaletteFade.bufferTransferDisabled = 1;
-    if (gScriptResult == 0)
+    if (gSpecialVar_Result == 0)
     {
         if (gUnknown_0202E8F8)
             RemoveBagItem(gUnknown_0202E8F8, 1);
@@ -1143,7 +1143,7 @@ static void sub_808B4A4(u8 taskID)
 {
     if (!gPaletteFade.active)
     {
-        DisplayGiveHeldItemMessage(gLastFieldPokeMenuOpened, gScriptItemId, 1);
+        DisplayGiveHeldItemMessage(gLastFieldPokeMenuOpened, gSpecialVar_ItemId, 1);
         gTasks[taskID].func = sub_808B4EC;
     }
 }

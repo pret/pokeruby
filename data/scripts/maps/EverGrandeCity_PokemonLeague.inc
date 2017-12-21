@@ -3,7 +3,7 @@ EverGrandeCity_PokemonLeague_MapScripts:: @ 815BA75
 	.byte 0
 
 EverGrandeCity_PokemonLeague_MapScript1_15BA7B:: @ 815BA7B
-	sethealplace 20
+	setrespawn 20
 	setflag FLAG_SYS_POKEMON_LEAGUE_FLY
 	checkflag FLAG_ENTERED_ELITE_FOUR
 	call_if 0, EverGrandeCity_PokemonLeague_EventScript_15BA8B
@@ -18,7 +18,7 @@ EverGrandeCity_PokemonLeague_EventScript_15BA9A:: @ 815BA9A
 	setvar 0x800b, 1
 	call EverGrandeCity_PokemonLeague_EventScript_19FD5B
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	release
 	end
 

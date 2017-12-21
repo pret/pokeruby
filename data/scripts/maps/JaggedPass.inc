@@ -4,7 +4,7 @@ JaggedPass_MapScripts:: @ 815D266
 	.byte 0
 
 JaggedPass_MapScript1_15D271:: @ 815D271
-	tileeffect 1
+	setstepcallback 1
 	end
 
 JaggedPass_MapScript1_15D274:: @ 815D274

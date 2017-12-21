@@ -379,7 +379,7 @@ BattleTower_Lobby_EventScript_16071E:: @ 816071E
 BattleTower_Lobby_EventScript_160727:: @ 8160727
 	lockall
 	special ShowBattleTowerRecords
-	waitbutton
+	waitbuttonpress
 	erasebox 0, 0, 29, 19
 	releaseall
 	end
@@ -393,7 +393,7 @@ BattleTower_Lobby_EventScript_160733:: @ 8160733
 	goto_if_eq BattleTower_Lobby_EventScript_160773
 	msgbox BattleTower_Lobby_Text_19A9EE, 4
 	setvar 0x8008, DECOR_SILVER_SHIELD
-	givedecoration DECOR_SILVER_SHIELD
+	givedecoration_std DECOR_SILVER_SHIELD
 	compare RESULT, 0
 	goto_if_eq BattleTower_Lobby_EventScript_1607AF
 	setflag FLAG_RECEIVED_SILVER_SHIELD
@@ -407,7 +407,7 @@ BattleTower_Lobby_EventScript_160773:: @ 8160773
 	goto_if 0, BattleTower_Lobby_EventScript_1607C5
 	msgbox BattleTower_Lobby_Text_19AAC4, 4
 	setvar 0x8008, DECOR_GOLD_SHIELD
-	givedecoration DECOR_GOLD_SHIELD
+	givedecoration_std DECOR_GOLD_SHIELD
 	compare RESULT, 0
 	goto_if_eq BattleTower_Lobby_EventScript_1607AF
 	setflag FLAG_RECEIVED_GOLD_SHIELD
@@ -416,7 +416,7 @@ BattleTower_Lobby_EventScript_160773:: @ 8160773
 	end
 
 BattleTower_Lobby_EventScript_1607AF:: @ 81607AF
-	getdecorname 1, 0x8008
+	bufferdecorationname 1, 0x8008
 	msgbox BattleTower_Lobby_Text_1A0CEF, 4
 	msgbox BattleTower_Lobby_Text_19ABED, 4
 	release

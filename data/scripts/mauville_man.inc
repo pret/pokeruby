@@ -233,7 +233,7 @@ choose_story:
 	setvar 0x8008, 1
 	special ScrSpecial_StorytellerDisplayStory
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	specialvar RESULT, ScrSpecial_StorytellerUpdateStat
 	compare RESULT, FALSE
 	goto_if_eq no_stat_update

@@ -9,8 +9,8 @@ LavaridgeTown_House_EventScript_1538B7:: @ 81538B7
 	lock
 	faceplayer
 	waitse
-	playpokecry SPECIES_ZIGZAGOON, 0
+	playmoncry SPECIES_ZIGZAGOON, 0
 	msgbox LavaridgeTown_House_Text_176D94, 4
-	waitpokecry
+	waitmoncry
 	release
 	end

@@ -28,8 +28,8 @@ MauvilleCity_House2_EventScript_1572E5:: @ 81572E5
 
 MauvilleCity_House2_EventScript_15731B:: @ 815731B
 	msgbox MauvilleCity_House2_Text_182515, 4
-	removeitem ITEM_HARBOR_MAIL, 1
-	giveitem ITEM_COIN_CASE
+	takeitem ITEM_HARBOR_MAIL, 1
+	giveitem_std ITEM_COIN_CASE
 	setflag FLAG_RECEIVED_COIN_CASE
 	goto MauvilleCity_House2_EventScript_15733D
 	end

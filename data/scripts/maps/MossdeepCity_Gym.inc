@@ -26,26 +26,26 @@ MossdeepCity_Gym_EventScript_15A506:: @ 815A506
 	end
 
 MossdeepCity_Gym_EventScript_15A510:: @ 815A510
-	setmaptile 5, 5, 516, 0
-	setmaptile 2, 7, 569, 1
+	setmetatile 5, 5, 516, 0
+	setmetatile 2, 7, 569, 1
 	goto MossdeepCity_Gym_EventScript_15A4E8
 	end
 
 MossdeepCity_Gym_EventScript_15A528:: @ 815A528
-	setmaptile 8, 14, 516, 0
-	setmaptile 8, 10, 569, 1
+	setmetatile 8, 14, 516, 0
+	setmetatile 8, 10, 569, 1
 	goto MossdeepCity_Gym_EventScript_15A4F7
 	end
 
 MossdeepCity_Gym_EventScript_15A540:: @ 815A540
-	setmaptile 15, 17, 524, 0
-	setmaptile 17, 15, 569, 1
+	setmetatile 15, 17, 524, 0
+	setmetatile 17, 15, 569, 1
 	goto MossdeepCity_Gym_EventScript_15A506
 	end
 
 MossdeepCity_Gym_EventScript_15A558:: @ 815A558
-	setmaptile 1, 23, 525, 0
-	setmaptile 5, 24, 569, 1
+	setmetatile 1, 23, 525, 0
+	setmetatile 5, 24, 569, 1
 	end
 
 MossdeepCity_Gym_EventScript_15A56B:: @ 815A56B
@@ -72,7 +72,7 @@ MossdeepCity_Gym_EventScript_15A594:: @ 815A594
 	end
 
 MossdeepCity_Gym_EventScript_15A5C6:: @ 815A5C6
-	giveitem ITEM_TM04
+	giveitem_std ITEM_TM04
 	compare RESULT, 0
 	goto_if_eq MossdeepCity_Gym_EventScript_1A029B
 	msgbox MossdeepCity_Gym_Text_18D1CF, 4
@@ -87,8 +87,8 @@ MossdeepCity_Gym_EventScript_15A5EA:: @ 815A5EA
 	setflag FLAG_MOSSDEEP_GYM_SWITCH_1
 	applymovement 255, MossdeepCity_Gym_Movement_15A7F7
 	waitmovement 0
-	setmaptile 5, 5, 516, 0
-	setmaptile 2, 7, 569, 1
+	setmetatile 5, 5, 516, 0
+	setmetatile 2, 7, 569, 1
 	goto MossdeepCity_Gym_EventScript_15A619
 	end
 
@@ -102,8 +102,8 @@ MossdeepCity_Gym_EventScript_15A621:: @ 815A621
 	clearflag FLAG_MOSSDEEP_GYM_SWITCH_1
 	applymovement 255, MossdeepCity_Gym_Movement_15A7F7
 	waitmovement 0
-	setmaptile 5, 5, 524, 0
-	setmaptile 2, 7, 568, 1
+	setmetatile 5, 5, 524, 0
+	setmetatile 2, 7, 568, 1
 	goto MossdeepCity_Gym_EventScript_15A619
 	end
 
@@ -114,8 +114,8 @@ MossdeepCity_Gym_EventScript_15A646:: @ 815A646
 	setflag FLAG_MOSSDEEP_GYM_SWITCH_2
 	applymovement 255, MossdeepCity_Gym_Movement_15A7F7
 	waitmovement 0
-	setmaptile 8, 14, 516, 0
-	setmaptile 8, 10, 569, 1
+	setmetatile 8, 14, 516, 0
+	setmetatile 8, 10, 569, 1
 	goto MossdeepCity_Gym_EventScript_15A619
 	end
 
@@ -123,8 +123,8 @@ MossdeepCity_Gym_EventScript_15A675:: @ 815A675
 	clearflag FLAG_MOSSDEEP_GYM_SWITCH_2
 	applymovement 255, MossdeepCity_Gym_Movement_15A7F7
 	waitmovement 0
-	setmaptile 8, 14, 517, 0
-	setmaptile 8, 10, 568, 1
+	setmetatile 8, 14, 517, 0
+	setmetatile 8, 10, 568, 1
 	goto MossdeepCity_Gym_EventScript_15A619
 	end
 
@@ -135,8 +135,8 @@ MossdeepCity_Gym_EventScript_15A69A:: @ 815A69A
 	setflag FLAG_MOSSDEEP_GYM_SWITCH_3
 	applymovement 255, MossdeepCity_Gym_Movement_15A7F7
 	waitmovement 0
-	setmaptile 15, 17, 524, 0
-	setmaptile 17, 15, 569, 1
+	setmetatile 15, 17, 524, 0
+	setmetatile 17, 15, 569, 1
 	goto MossdeepCity_Gym_EventScript_15A619
 	end
 
@@ -144,8 +144,8 @@ MossdeepCity_Gym_EventScript_15A6C9:: @ 815A6C9
 	clearflag FLAG_MOSSDEEP_GYM_SWITCH_3
 	applymovement 255, MossdeepCity_Gym_Movement_15A7F7
 	waitmovement 0
-	setmaptile 15, 17, 516, 0
-	setmaptile 17, 15, 568, 1
+	setmetatile 15, 17, 516, 0
+	setmetatile 17, 15, 568, 1
 	goto MossdeepCity_Gym_EventScript_15A619
 	end
 
@@ -156,8 +156,8 @@ MossdeepCity_Gym_EventScript_15A6EE:: @ 815A6EE
 	setflag FLAG_MOSSDEEP_GYM_SWITCH_4
 	applymovement 255, MossdeepCity_Gym_Movement_15A7F7
 	waitmovement 0
-	setmaptile 1, 23, 525, 0
-	setmaptile 5, 24, 569, 1
+	setmetatile 1, 23, 525, 0
+	setmetatile 5, 24, 569, 1
 	goto MossdeepCity_Gym_EventScript_15A619
 	end
 
@@ -165,8 +165,8 @@ MossdeepCity_Gym_EventScript_15A71D:: @ 815A71D
 	clearflag FLAG_MOSSDEEP_GYM_SWITCH_4
 	applymovement 255, MossdeepCity_Gym_Movement_15A7F7
 	waitmovement 0
-	setmaptile 1, 23, 516, 0
-	setmaptile 5, 24, 568, 1
+	setmetatile 1, 23, 516, 0
+	setmetatile 5, 24, 568, 1
 	goto MossdeepCity_Gym_EventScript_15A619
 	end
 

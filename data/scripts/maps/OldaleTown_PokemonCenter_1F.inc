@@ -3,7 +3,7 @@ OldaleTown_PokemonCenter_1F_MapScripts:: @ 8152F08
 	.byte 0
 
 OldaleTown_PokemonCenter_1F_MapScript1_152F0E:: @ 8152F0E
-	sethealplace 14
+	setrespawn 14
 	call OldaleTown_PokemonCenter_1F_EventScript_19FD1B
 	end
 
@@ -11,7 +11,7 @@ OldaleTown_PokemonCenter_1F_EventScript_152F17:: @ 8152F17
 	setvar 0x800b, 1
 	call OldaleTown_PokemonCenter_1F_EventScript_19FD5B
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	release
 	end
 
