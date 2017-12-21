@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/songs.h"
 #include "random.h"
 #include "sound.h"
 #include "main.h"
@@ -51,16 +52,20 @@ void sub_8101D04(void);
 void sub_8101D24(u8 taskId);
 
 void sub_8102DA8(void);
+void sub_8103D50(u8 a0);
 void sub_8103DC8(void);
 void sub_8104048(void);
 void sub_810423C(u8 a0);
+void sub_8104AB8(u8 a0);
 void sub_8104C5C(void);
+void sub_8104CAC(u8 arg0);
+bool8 sub_8104E18(void);
 void sub_8104EA8(void);
 void sub_8104F8C(void);
 void sub_81050C4(void);
+void sub_81063C0(void);
 void sub_8106448(void);
 void sub_81064B8(void);
-void sub_81063C0(void);
 
 void PlaySlotMachine(u8 arg0, void *ptr)
 {
@@ -204,7 +209,7 @@ void sub_8101BA4(void)
     u8 i;
 
     sub_81019EC();
-    eSlotMachine->unk00 = 0;
+    eSlotMachine->state = 0;
     eSlotMachine->unk02 = 0;
     eSlotMachine->unk03 = Random() & 1;
     eSlotMachine->unk04 = 0;
@@ -214,7 +219,7 @@ void sub_8101BA4(void)
     eSlotMachine->coins = gSaveBlock1.coins;
     eSlotMachine->unk0E = 0;
     eSlotMachine->unk10 = 0;
-    eSlotMachine->unk12 = 0;
+    eSlotMachine->bet = 0;
     eSlotMachine->unk18 = 0;
     eSlotMachine->unk1A = 8;
     eSlotMachine->win0h = 0xf0;
@@ -278,14 +283,14 @@ void sub_8101D04(void)
 
 void sub_8101D24(u8 taskId)
 {
-    while (gUnknown_083ECAAC[eSlotMachine->unk00](gTasks + taskId));
+    while (gUnknown_083ECAAC[eSlotMachine->state](gTasks + taskId));
 }
 
 bool8 sub_8101D5C(struct Task *task)
 {
     BeginNormalPaletteFade(-1, 0, 16, 0, 0);
     sub_810423C(eSlotMachine->unk02);
-    eSlotMachine->unk00++;
+    eSlotMachine->state++;
     return FALSE;
 }
 
@@ -293,7 +298,94 @@ bool8 sub_8101D8C(struct Task *task)
 {
     if (!gPaletteFade.active)
     {
-        eSlotMachine->unk00++;
+        eSlotMachine->state++;
+    }
+    return FALSE;
+}
+
+bool8 sub_8101DB0(struct Task *task)
+{
+    eSlotMachine->unk0E = 0;
+    eSlotMachine->bet = 0;
+    eSlotMachine->unk18 = 0;
+    eSlotMachine->unk04 &= 0xc0;
+    eSlotMachine->state = 4;
+    if (eSlotMachine->coins <= 0)
+    {
+        eSlotMachine->state = 25;
+    }
+    else if (eSlotMachine->unk0A)
+    {
+        eSlotMachine->state = 3;
+        sub_8104CAC(4);
+    }
+    return TRUE;
+}
+
+bool8 sub_8101DF4(struct Task *task)
+{
+    if (sub_8104E18())
+    {
+        eSlotMachine->state = 4;
+    }
+    return FALSE;
+}
+
+bool8 sub_8101E10(struct Task *task)
+{
+    sub_8104CAC(0);
+    eSlotMachine->state = 5;
+    if (eSlotMachine->coins >= 9999)
+    {
+        eSlotMachine->state = 23;
+    }
+    return TRUE;
+}
+
+bool8 sub_8101E3C(struct Task *task)
+{
+    s16 i;
+
+    if (gMain.newKeys & SELECT_BUTTON)
+    {
+        sub_8104AB8(0);
+        eSlotMachine->state = 8;
+    }
+    else if (gMain.newKeys & R_BUTTON)
+    {
+        if (eSlotMachine->coins - (3 - eSlotMachine->bet) >= 0)
+        {
+            for (i = eSlotMachine->bet; i < 3; i++)
+            {
+                sub_8103D50(i);
+            }
+            eSlotMachine->coins -= (3 - eSlotMachine->bet);
+            eSlotMachine->bet = 3;
+            eSlotMachine->state = 9;
+            PlaySE(SE_REGI);
+        }
+        else
+        {
+            eSlotMachine->state = 6;
+        }
+    }
+    else
+    {
+        if (gMain.newKeys & DPAD_DOWN && eSlotMachine->coins != 0)
+        {
+            PlaySE(SE_REGI);
+            sub_8103D50(eSlotMachine->bet);
+            eSlotMachine->coins--;
+            eSlotMachine->bet++;
+        }
+        if (eSlotMachine->bet >= 3 || (eSlotMachine->bet != 0 && gMain.newKeys & A_BUTTON))
+        {
+            eSlotMachine->state = 9;
+        }
+        if (gMain.newKeys & B_BUTTON)
+        {
+            eSlotMachine->state = 21;
+        }
     }
     return FALSE;
 }

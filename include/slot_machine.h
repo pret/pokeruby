@@ -2,7 +2,7 @@
 #define GUARD_SLOT_MACHINE_H
 
 struct SlotMachineEwramStruct {
-    /*0x00*/ u8 unk00;
+    /*0x00*/ u8 state;
     /*0x01*/ u8 unk01;
     /*0x02*/ u8 unk02;
     /*0x03*/ u8 unk03;
@@ -11,10 +11,10 @@ struct SlotMachineEwramStruct {
     /*0x08*/ u16 unk08;
     /*0x0A*/ u8 unk0A;
     /*0x0B*/ u8 unk0B;
-    /*0x0C*/ u16 coins;
+    /*0x0C*/ s16 coins;
     /*0x0E*/ u16 unk0E;
     /*0x10*/ u16 unk10;
-    /*0x12*/ u16 unk12;
+    /*0x12*/ s16 bet;
     /*0x14*/ u8 filler14[4];
     /*0x18*/ u16 unk18;
     /*0x1A*/ u16 unk1A;
