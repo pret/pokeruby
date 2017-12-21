@@ -367,7 +367,7 @@ void sub_81374FC(void)
     if (gMain.callback2 == sub_800F808
      && !gPaletteFade.active)
     {
-        Emitcmd35(1, gScriptItemId);
+        Emitcmd35(1, gSpecialVar_ItemId);
         WallyBufferExecCompleted();
     }
 }

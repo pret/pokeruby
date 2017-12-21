@@ -50,7 +50,7 @@ static bool8 savingComplete;
 
 extern bool8 gDifferentSaveFile;
 extern u16 gSaveFileStatus;
-extern u16 gScriptResult;
+extern u16 gSpecialVar_Result;
 
 extern u8 gUnknown_03004860;
 
@@ -528,10 +528,10 @@ static void Task_SaveDialog(u8 taskId)
     {
     case SAVE_CANCELED:
     case SAVE_ERROR:
-        gScriptResult = 0;
+        gSpecialVar_Result = 0;
         break;
     case SAVE_SUCCESS:
-        gScriptResult = status;
+        gSpecialVar_Result = status;
         break;
     case SAVE_IN_PROGRESS:
         return;

@@ -32,12 +32,12 @@ gSpecialVars::
 	.4byte gSpecialVar_0x8009
 	.4byte gSpecialVar_0x800A
 	.4byte gSpecialVar_0x800B
-	.4byte gScriptFacing
-	.4byte gScriptResult
-	.4byte gScriptItemId
-	.4byte gScriptLastTalked
-	.4byte gScriptContestRank
-	.4byte gScriptContestCategory
+	.4byte gSpecialVar_Facing
+	.4byte gSpecialVar_Result
+	.4byte gSpecialVar_ItemId
+	.4byte gSpecialVar_LastTalked
+	.4byte gSpecialVar_ContestRank
+	.4byte gSpecialVar_ContestCategory
 
 	.include "data/specials.inc"
 

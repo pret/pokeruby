@@ -14,7 +14,7 @@ static void sub_811AA38(void);
 static void sub_811AA9C(void);
 
 extern u8 gLastFieldPokeMenuOpened;
-extern u16 gScriptResult;
+extern u16 gSpecialVar_Result;
 extern void (*gFieldCallback)(void);
 extern void (*gUnknown_03005CE4)(void);
 
@@ -24,7 +24,7 @@ bool8 SetUpFieldMove_Strength(void)
 {
     if (ShouldDoBrailleStrengthEffect())
     {
-        gScriptResult = gLastFieldPokeMenuOpened;
+        gSpecialVar_Result = gLastFieldPokeMenuOpened;
         gFieldCallback = FieldCallback_Teleport;
         gUnknown_03005CE4 = sub_811AA38;
     }
@@ -32,7 +32,7 @@ bool8 SetUpFieldMove_Strength(void)
     {
         if (npc_before_player_of_type(87) != TRUE)
             return 0;
-        gScriptResult = gLastFieldPokeMenuOpened;
+        gSpecialVar_Result = gLastFieldPokeMenuOpened;
         gFieldCallback = FieldCallback_Teleport;
         gUnknown_03005CE4 = sub_811AA18;
     }

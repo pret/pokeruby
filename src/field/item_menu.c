@@ -138,7 +138,7 @@ EWRAM_DATA static s8 sCurrentBagPocket = 0;
 EWRAM_DATA static u8 gUnknown_0203855A = 0;
 EWRAM_DATA static s8 gUnknown_0203855B = 0;
 EWRAM_DATA static s8 gUnknown_0203855C = 0;
-EWRAM_DATA u16 gScriptItemId = 0;
+EWRAM_DATA u16 gSpecialVar_ItemId = 0;
 EWRAM_DATA u8 gUnknown_02038560 = 0;
 EWRAM_DATA u8 gUnknown_02038561 = 0;
 EWRAM_DATA static u8 gUnknown_02038562 = 0;
@@ -1662,7 +1662,7 @@ static void sub_80A4BF0(u16 *a)
                 const u8 *text;
 
                 if (i == 0)
-                    text = sub_80A4B90(gScriptItemId);
+                    text = sub_80A4B90(gSpecialVar_ItemId);
                 else
                     text = sItemPopupMenuActions[sPopupMenuActionList[i]].text;
                 MenuPrint(text, 1 + (i / 2) * 6, 8 + (i % 2) * 2);
@@ -1849,7 +1849,7 @@ static void sub_80A50C8(u8 taskId)
             {
                 if (r5[10] == 0)
                 {
-                    gScriptItemId = 0;
+                    gSpecialVar_ItemId = 0;
                     gUnknown_083C16BC[sReturnLocation].onBagClose(taskId);
                 }
                 else
@@ -1864,7 +1864,7 @@ static void sub_80A50C8(u8 taskId)
                 {
                     PlaySE(SE_SELECT);
                     gUnknown_02038560 = gBagPocketScrollStates[sCurrentBagPocket].scrollTop + gBagPocketScrollStates[sCurrentBagPocket].cursorPos;
-                    gScriptItemId = gCurrentBagPocketItemSlots[gUnknown_02038560].itemId;
+                    gSpecialVar_ItemId = gCurrentBagPocketItemSlots[gUnknown_02038560].itemId;
                     gUnknown_083C16BC[sReturnLocation].onItemSelect(taskId);
                     sub_80F98A4(0);
                     sub_80F98A4(1);
@@ -1887,7 +1887,7 @@ static void sub_80A50C8(u8 taskId)
             {
                 if (sReturnLocation != RETURN_TO_FIELD_5)
                 {
-                    gScriptItemId = 0;
+                    gSpecialVar_ItemId = 0;
                     gUnknown_083C16BC[sReturnLocation].onBagClose(taskId);
                 }
             }
@@ -2527,7 +2527,7 @@ static void sub_80A57C4(void)
         gUnknown_02038564 = 1;
         r5 = 9;
     }
-    else if (sub_80F92F4(gScriptItemId) == 0)
+    else if (sub_80F92F4(gSpecialVar_ItemId) == 0)
     {
         sPopupMenuActionList = gUnknown_083C16AE[4];
         gUnknown_02038564 = 1;
@@ -2654,10 +2654,10 @@ void sub_80A5B40(void)
 
 static void HandlePopupMenuAction_UseOnField(u8 taskId)
 {
-    if (ItemId_GetFieldFunc(gScriptItemId) != NULL)
+    if (ItemId_GetFieldFunc(gSpecialVar_ItemId) != NULL)
     {
         PlaySE(SE_SELECT);
-        if (CalculatePlayerPartyCount() == 0 && ItemId_GetType(gScriptItemId) == 1)
+        if (CalculatePlayerPartyCount() == 0 && ItemId_GetType(gSpecialVar_ItemId) == 1)
         {
             sub_80A5BF8(taskId);
         }
@@ -2665,7 +2665,7 @@ static void HandlePopupMenuAction_UseOnField(u8 taskId)
         {
             gTasks[taskId].data[2] = 0;
             if (sCurrentBagPocket != BAG_POCKET_BERRIES)
-                ItemId_GetFieldFunc(gScriptItemId)(taskId);
+                ItemId_GetFieldFunc(gSpecialVar_ItemId)(taskId);
             else
                 sub_80C9C7C(taskId);
         }
@@ -2793,7 +2793,7 @@ static void sub_80A5EA0(u8 taskId)
     if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
-        sub_80A5DA0(gScriptItemId, gTasks[taskId].data[1]);
+        sub_80A5DA0(gSpecialVar_ItemId, gTasks[taskId].data[1]);
         DoYesNoFuncWithChoice(taskId, &gUnknown_083C16F4);
     }
     else if (gMain.newKeys & B_BUTTON)
@@ -2827,7 +2827,7 @@ static void sub_80A5F80(u8 taskId)
 static void HandlePopupMenuAction_Register(u8 taskId)
 {
     PlaySE(SE_SELECT);
-    if (gSaveBlock1.registeredItem == gScriptItemId)
+    if (gSaveBlock1.registeredItem == gSpecialVar_ItemId)
     {
         // Un-register the registered item
         RemoveSelectIconFromRegisteredItem();
@@ -2836,7 +2836,7 @@ static void HandlePopupMenuAction_Register(u8 taskId)
     else
     {
         AddSelectIconToRegisteredItem();
-        gSaveBlock1.registeredItem = gScriptItemId;
+        gSaveBlock1.registeredItem = gSpecialVar_ItemId;
     }
     sub_80A7528(0);
     sub_80A41D4(taskId);
@@ -2865,7 +2865,7 @@ static void sub_80A6024(u8 taskId)
 static void DisplayCannotBeHeldMessage(u8 taskId)
 {
     sub_80A73FC();
-    CopyItemName(gScriptItemId, gStringVar1);
+    CopyItemName(gSpecialVar_ItemId, gStringVar1);
     StringExpandPlaceholders(gStringVar4, gOtherText_CantBeHeld);
     sub_80A7590();
     DisplayCannotUseItemMessage(taskId, gStringVar4, sub_80A6024, 1);
@@ -2874,13 +2874,13 @@ static void DisplayCannotBeHeldMessage(u8 taskId)
 static void HandlePopupMenuAction_Give(u8 taskId)
 {
     PlaySE(SE_SELECT);
-    if (sub_80F931C(gScriptItemId) == 0)
+    if (sub_80F931C(gSpecialVar_ItemId) == 0)
     {
         sub_80A73FC();
         sub_80A7590();
         DisplayCannotUseItemMessage(taskId, gOtherText_CantWriteMail, sub_80A6024, 1);
     }
-    else if (ItemId_GetImportance(gScriptItemId) == 0)
+    else if (ItemId_GetImportance(gSpecialVar_ItemId) == 0)
     {
         if (CalculatePlayerPartyCount() == 0)
         {
@@ -2931,21 +2931,21 @@ static void OnItemSelect_PkmnList(u8 taskId)
 {
     u8 r6 = sCurrentBagPocket + 1;
 
-    if (sub_80F931C(gScriptItemId) == 0)
+    if (sub_80F931C(gSpecialVar_ItemId) == 0)
     {
         sub_80A73FC();
         sub_80A7590();
         DisplayCannotUseItemMessage(taskId, gOtherText_CantWriteMail, sub_80A6024, 1);
     }
-    else if (sub_80F92F4(gScriptItemId) == 0)
+    else if (sub_80F92F4(gSpecialVar_ItemId) == 0)
     {
         sub_80A73FC();
-        CopyItemName(gScriptItemId, gStringVar1);
+        CopyItemName(gSpecialVar_ItemId, gStringVar1);
         StringExpandPlaceholders(gStringVar4, gOtherText_CantBeHeldHere);
         sub_80A7590();
         DisplayCannotUseItemMessage(taskId, gStringVar4, sub_80A6024, 1);
     }
-    else if (r6 != 5 && ItemId_GetImportance(gScriptItemId) == 0)
+    else if (r6 != 5 && ItemId_GetImportance(gSpecialVar_ItemId) == 0)
     {
         gTasks[taskId].data[8] = (u32)sub_808A3F8 >> 16;
         gTasks[taskId].data[9] = (u32)sub_808A3F8;
@@ -2983,8 +2983,8 @@ static void OnItemSelect_Shop(u8 taskId)
     gTasks[taskId].data[10] = gBagPocketScrollStates[sCurrentBagPocket].scrollTop + gBagPocketScrollStates[sCurrentBagPocket].cursorPos + 1;
     sub_80A48E8(taskId, gBagPocketScrollStates[sCurrentBagPocket].cursorPos, gBagPocketScrollStates[sCurrentBagPocket].cursorPos);
     sub_80A73FC();
-    CopyItemName(gScriptItemId, gStringVar2);
-    if (ItemId_GetPrice(gScriptItemId) == 0)
+    CopyItemName(gSpecialVar_ItemId, gStringVar2);
+    if (ItemId_GetPrice(gSpecialVar_ItemId) == 0)
     {
         StringExpandPlaceholders(gStringVar4, gOtherText_CantBuyThat);
         DisplayCannotUseItemMessage(taskId, gStringVar4, sub_80A6444, 1);
@@ -3025,7 +3025,7 @@ static void sub_80A648C(u8 taskId)
         sub_80A418C(1, 1, 1, 11, 3);
     else
         sub_80A418C(1, 1, 1, 11, 2);
-    BuyMenuDisplayMessage(gScriptItemId, 1);
+    BuyMenuDisplayMessage(gSpecialVar_ItemId, 1);
     sub_80A683C();
 }
 
@@ -3047,7 +3047,7 @@ static void sub_80A6548(u8 taskId)
 static void sub_80A6574(u8 taskId)
 {
     PlaySE(SE_REGI);
-    sub_80A6870(gScriptItemId, gTasks[taskId].data[1]);
+    sub_80A6870(gSpecialVar_ItemId, gTasks[taskId].data[1]);
     gTasks[taskId].func = sub_80A6548;
 }
 
@@ -3055,7 +3055,7 @@ static void sub_80A65AC(u8 taskId)
 {
     MenuZeroFillWindowRect(7, 6, 13, 12);
     sub_80A36B8(gBGTilemapBuffers[1], 7, 6, 6, 6);
-    CopyItemName(gScriptItemId, gStringVar2);
+    CopyItemName(gSpecialVar_ItemId, gStringVar2);
     StringExpandPlaceholders(gStringVar4, gOtherText_SoldItem);
     DisplayCannotUseItemMessage(taskId, gStringVar4, sub_80A6574, 1);
     sub_80A3D5C(taskId);
@@ -3079,14 +3079,14 @@ static void Task_BuyHowManyDialogueHandleInput(u8 taskId)
     if (sub_80A5350(taskId) == TRUE)
     {
         MenuZeroFillWindowRect(6, 11, 12, 11);
-        BuyMenuDisplayMessage(gScriptItemId, gTasks[taskId].data[1]);
+        BuyMenuDisplayMessage(gSpecialVar_ItemId, gTasks[taskId].data[1]);
     }
     else if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
         MenuZeroFillWindowRect(0, 10, 13, 13);
         sub_80A36B8(gBGTilemapBuffers[1], 0, 10, 13, 3);
-        ConvertIntToDecimalStringN(gStringVar1, ItemId_GetPrice(gScriptItemId) / 2 * gTasks[taskId].data[1], STR_CONV_MODE_LEFT_ALIGN, 6);
+        ConvertIntToDecimalStringN(gStringVar1, ItemId_GetPrice(gSpecialVar_ItemId) / 2 * gTasks[taskId].data[1], STR_CONV_MODE_LEFT_ALIGN, 6);
         StringExpandPlaceholders(gStringVar4, gOtherText_CanPay);
         DisplayCannotUseItemMessage(taskId, gStringVar4, sub_80A6650, 1);
     }
@@ -3227,7 +3227,7 @@ static void sub_80A6A84(u8 taskId)
     s16 *taskData = gTasks[taskId].data;
 
     sub_80A4DA4(gBGTilemapBuffers[1]);
-    CopyItemName(gScriptItemId, gStringVar1);
+    CopyItemName(gSpecialVar_ItemId, gStringVar1);
     ConvertIntToDecimalStringN(gStringVar2, taskData[1], STR_CONV_MODE_LEFT_ALIGN, 3);
     MenuZeroFillWindowRect(7, 6, 11, 13);
     sub_80A7528(7);
@@ -3250,14 +3250,14 @@ static void sub_80A6B64(u8 taskId)
 {
     s16 *taskData = gTasks[taskId].data;
 
-    if (ItemId_GetImportance(gScriptItemId) == 2)
+    if (ItemId_GetImportance(gSpecialVar_ItemId) == 2)
     {
         gTasks[taskId].func = sub_80A6B00;
         sub_80A7528(9);
     }
     else
     {
-        if (AddPCItem(gScriptItemId, taskData[1]) == TRUE)
+        if (AddPCItem(gSpecialVar_ItemId, taskData[1]) == TRUE)
         {
             sub_80A6A84(taskId);
         }
@@ -3325,7 +3325,7 @@ bool32 sub_80A6D1C(void)
             FreezeMapObjects();
             sub_80594C0();
             sub_80597F4();
-            gScriptItemId = gSaveBlock1.registeredItem;
+            gSpecialVar_ItemId = gSaveBlock1.registeredItem;
             taskId = CreateTask(ItemId_GetFieldFunc(gSaveBlock1.registeredItem), 8);
             gTasks[taskId].data[2] = 1;
             return TRUE;
@@ -3415,7 +3415,7 @@ static const u8 gUnknown_083C170A[] = {5, 0};
 
 static void sub_80A6FDC(void)
 {
-    if (ItemId_GetBattleUsage(gScriptItemId) != 0)
+    if (ItemId_GetBattleUsage(gSpecialVar_ItemId) != 0)
     {
         sPopupMenuActionList = gUnknown_083C1708;
         gUnknown_02038564 = 2;
@@ -3454,10 +3454,10 @@ static void OnBagClose_Battle(u8 taskId)
 
 static void HandlePopupMenuAction_UseInBattle(u8 taskId)
 {
-    if (ItemId_GetBattleFunc(gScriptItemId) != NULL)
+    if (ItemId_GetBattleFunc(gSpecialVar_ItemId) != NULL)
     {
         PlaySE(SE_SELECT);
-        ItemId_GetBattleFunc(gScriptItemId)(taskId);
+        ItemId_GetBattleFunc(gSpecialVar_ItemId)(taskId);
     }
 }
 
@@ -3525,7 +3525,7 @@ static void sub_80A7230(u8 taskId)
         PlaySE(SE_SELECT);
         sub_80F98A4(2);
         sub_80F98A4(3);
-        gScriptItemId = ITEM_POKE_BALL;
+        gSpecialVar_ItemId = ITEM_POKE_BALL;
         sPopupMenuActionList = gUnknown_083C1708;
         gUnknown_02038564 = 2;
         gTasks[taskId].data[10] = gBagPocketScrollStates[sCurrentBagPocket].scrollTop + gBagPocketScrollStates[sCurrentBagPocket].cursorPos + 1;
@@ -3824,7 +3824,7 @@ static void sub_80A7768(void)
                 int var;
 
                 if (r4->unk1 == 1)
-                    text = sub_80A4B90(gScriptItemId);
+                    text = sub_80A4B90(gSpecialVar_ItemId);
                 else
                     text = sItemPopupMenuActions[sPopupMenuActionList[r4->unk1 - 1]].text;
                 var = r4->unk1 - 1;
