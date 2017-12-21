@@ -37,8 +37,8 @@ extern u16 gSpecialVar_0x8008;
 extern u16 gSpecialVar_0x8009;
 extern u16 gSpecialVar_0x800A;
 extern u16 gSpecialVar_0x800B;
-extern u16 gScriptResult;
-extern u16 gScriptLastTalked;
-extern u16 gScriptFacing;
+extern u16 gSpecialVar_Result;
+extern u16 gSpecialVar_LastTalked;
+extern u16 gSpecialVar_Facing;
 
 #endif // GUARD_EVENT_DATA_H

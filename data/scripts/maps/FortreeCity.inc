@@ -8,7 +8,7 @@ FortreeCity_MapScript1_14C94E:: @ 814C94E
 	end
 
 FortreeCity_MapScript1_14C952:: @ 814C952
-	tileeffect 2
+	setstepcallback 2
 	end
 
 FortreeCity_EventScript_14C955:: @ 814C955
@@ -76,9 +76,9 @@ FortreeCity_EventScript_14C9E4:: @ 814C9E4
 	applymovement LAST_TALKED, FortreeCity_Movement_1A0662
 	waitmovement 0
 	waitse
-	playpokecry SPECIES_KECLEON, 2
+	playmoncry SPECIES_KECLEON, 2
 	delay 40
-	waitpokecry
+	waitmoncry
 	applymovement LAST_TALKED, FortreeCity_Movement_14CA13
 	waitmovement 0
 	removeobject LAST_TALKED

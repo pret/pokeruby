@@ -6,7 +6,7 @@ SecretBase_YellowCave4_MapScripts:: @ 815F337
 	.byte 0
 
 SecretBase_RedCave1_MapScript1_15F34C:: @ 815F34C
-	tileeffect 6
+	setstepcallback 6
 	end
 
 SecretBase_RedCave1_MapScript1_15F34F:: @ 815F34F

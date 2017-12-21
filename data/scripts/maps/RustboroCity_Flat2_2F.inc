@@ -11,7 +11,7 @@ RustboroCity_Flat2_2F_EventScript_157DA0:: @ 8157DA0
 	checkflag FLAG_RECEIVED_PREMIER_BALL_RUSTBORO
 	goto_if_eq RustboroCity_Flat2_2F_EventScript_157DCF
 	msgbox RustboroCity_Flat2_2F_Text_185461, 4
-	giveitem ITEM_PREMIER_BALL
+	giveitem_std ITEM_PREMIER_BALL
 	compare RESULT, 0
 	goto_if_eq RustboroCity_Flat2_2F_EventScript_1A029B
 	setflag FLAG_RECEIVED_PREMIER_BALL_RUSTBORO

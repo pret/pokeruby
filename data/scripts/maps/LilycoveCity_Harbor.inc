@@ -79,13 +79,13 @@ LilycoveCity_Harbor_EventScript_15998A:: @ 815998A
 	applymovement LAST_TALKED, LilycoveCity_Harbor_Movement_1A0841
 	waitmovement 0
 	delay 30
-	hideobject LAST_TALKED, 13, 10
+	hideobjectat LAST_TALKED, MAP_LILYCOVE_CITY_HARBOR
 	compare FACING, 2
 	call_if 1, LilycoveCity_Harbor_EventScript_1599D9
 	compare FACING, 4
 	call_if 1, LilycoveCity_Harbor_EventScript_1599CE
 	delay 30
-	hideobject 255, 0, 0
+	hideobjectat 255, MAP_PETALBURG_CITY
 	setvar 0x8004, 2
 	call LilycoveCity_Harbor_EventScript_1A040E
 	return
@@ -117,7 +117,7 @@ LilycoveCity_Harbor_EventScript_1599EE:: @ 81599EE
 	applymovement LAST_TALKED, LilycoveCity_Harbor_Movement_1A0841
 	waitmovement 0
 	delay 30
-	hideobject LAST_TALKED, 13, 10
+	hideobjectat LAST_TALKED, MAP_LILYCOVE_CITY_HARBOR
 	delay 60
 	addobject 4
 	delay 30
@@ -134,7 +134,7 @@ LilycoveCity_Harbor_EventScript_1599EE:: @ 81599EE
 	compare FACING, 4
 	call_if 1, LilycoveCity_Harbor_EventScript_1599CE
 	delay 30
-	hideobject 255, 0, 0
+	hideobjectat 255, MAP_PETALBURG_CITY
 	special ScrSpecial_HealPlayerParty
 	setvar 0x8004, 2
 	call LilycoveCity_Harbor_EventScript_1A040E

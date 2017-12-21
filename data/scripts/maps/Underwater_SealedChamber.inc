@@ -21,7 +21,7 @@ Underwater_SealedChamber_EventScript_15F0AF:: @ 815F0AF
 Underwater_SealedChamber_EventScript_15F0B8:: @ 815F0B8
 	lockall
 	braillemessage Underwater_SealedChamber_Braille_1C533D
-	waitbutton
+	waitbuttonpress
 	erasebox 0, 0, 29, 19
 	releaseall
 	end

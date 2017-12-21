@@ -39,7 +39,7 @@ RustboroCity_House1_EventScript_157CFB:: @ 8157CFB
 	end
 
 RustboroCity_House1_EventScript_157D05:: @ 8157D05
-	getspeciesname 0, 0x8009
+	bufferspeciesname 0, 0x8009
 	msgbox RustboroCity_House1_Text_184F8F, 4
 	release
 	end

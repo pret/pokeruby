@@ -15,18 +15,18 @@ LilycoveCity_MapScript1_14CA20:: @ 814CA20
 
 LilycoveCity_MapScript1_14CA3F:: @ 814CA3F
 	.ifndef SAPPHIRE
-	setmaptile 69, 4, 169, 1
-	setmaptile 70, 4, 680, 1
-	setmaptile 71, 4, 681, 1
-	setmaptile 72, 4, 682, 1
-	setmaptile 69, 5, 145, 1
-	setmaptile 70, 5, 688, 1
-	setmaptile 71, 5, 689, 0
-	setmaptile 72, 5, 690, 1
-	setmaptile 69, 6, 446, 0
-	setmaptile 70, 6, 447, 0
-	setmaptile 71, 6, 368, 0
-	setmaptile 72, 6, 445, 0
+	setmetatile 69, 4, 169, 1
+	setmetatile 70, 4, 680, 1
+	setmetatile 71, 4, 681, 1
+	setmetatile 72, 4, 682, 1
+	setmetatile 69, 5, 145, 1
+	setmetatile 70, 5, 688, 1
+	setmetatile 71, 5, 689, 0
+	setmetatile 72, 5, 690, 1
+	setmetatile 69, 6, 446, 0
+	setmetatile 70, 6, 447, 0
+	setmetatile 71, 6, 368, 0
+	setmetatile 72, 6, 445, 0
 	.endif
 	checkflag FLAG_EVIL_TEAM_ESCAPED_IN_SUBMARINE
 	call_if 0, LilycoveCity_EventScript_14CABE
@@ -35,29 +35,29 @@ LilycoveCity_MapScript1_14CA3F:: @ 814CA3F
 	end
 
 LilycoveCity_EventScript_14CABE:: @ 814CABE
-	setmaptile 76, 12, 656, 1
-	setmaptile 77, 12, 657, 1
-	setmaptile 76, 13, 672, 1
-	setmaptile 77, 13, 673, 1
-	setmaptile 76, 14, 664, 1
-	setmaptile 77, 14, 665, 1
-	setmaptile 76, 15, 672, 1
-	setmaptile 77, 15, 673, 1
-	setmaptile 77, 16, 664, 1
-	setmaptile 78, 16, 665, 1
-	setmaptile 77, 17, 672, 1
-	setmaptile 78, 17, 673, 1
+	setmetatile 76, 12, 656, 1
+	setmetatile 77, 12, 657, 1
+	setmetatile 76, 13, 672, 1
+	setmetatile 77, 13, 673, 1
+	setmetatile 76, 14, 664, 1
+	setmetatile 77, 14, 665, 1
+	setmetatile 76, 15, 672, 1
+	setmetatile 77, 15, 673, 1
+	setmetatile 77, 16, 664, 1
+	setmetatile 78, 16, 665, 1
+	setmetatile 77, 17, 672, 1
+	setmetatile 78, 17, 673, 1
 	return
 
 LilycoveCity_EventScript_14CB2B:: @ 814CB2B
-	setmaptile 69, 4, 169, 1
-	setmaptile 70, 4, 169, 1
-	setmaptile 71, 4, 169, 1
-	setmaptile 72, 4, 169, 1
-	setmaptile 69, 5, 145, 1
-	setmaptile 70, 5, 145, 1
-	setmaptile 71, 5, 145, 1
-	setmaptile 72, 5, 145, 1
+	setmetatile 69, 4, 169, 1
+	setmetatile 70, 4, 169, 1
+	setmetatile 71, 4, 169, 1
+	setmetatile 72, 4, 169, 1
+	setmetatile 69, 5, 145, 1
+	setmetatile 70, 5, 145, 1
+	setmetatile 71, 5, 145, 1
+	setmetatile 72, 5, 145, 1
 	return
 
 LilycoveCity_EventScript_14CB74:: @ 814CB74
@@ -69,7 +69,7 @@ LilycoveCity_EventScript_14CB74:: @ 814CB74
 	msgbox LilycoveCity_Text_1C5A7A, 4
 	random 10
 	addvar RESULT, ITEM_CHERI_BERRY
-	giveitem RESULT
+	giveitem_std RESULT
 	compare RESULT, 0
 	goto_if_eq LilycoveCity_EventScript_1A029B
 	setflag FLAG_DAILY_RECEIVED_BERRY_LILYCOVE
@@ -415,7 +415,7 @@ LilycoveCity_EventScript_14CF6B:: @ 814CF6B
 	applymovement LAST_TALKED, LilycoveCity_Movement_1A0845
 	waitmovement 0
 	delay 50
-	setfieldeffect 0, 1
+	setfieldeffectargument 0, 1
 	dofieldeffect 30
 	delay 15
 	removeobject LAST_TALKED

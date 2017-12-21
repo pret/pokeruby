@@ -27,7 +27,7 @@ gUnknown_081C3448:: @ 81C3448
 	playse 73
 	message UnknownString_81C34E4
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	releaseall
 	goto EventScript_1C341B
 
@@ -36,7 +36,7 @@ gUnknown_081C3459:: @ 81C3459
 	playse 73
 	message UnknownString_81C3514
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	releaseall
 	goto EventScript_1C341B
 
@@ -62,13 +62,13 @@ EventScript_1C348E:
 EventScript_1C34A0:
 	message UnknownString_81C35A9
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	releaseall
 	end
 
 EventScript_1C34A9:
 	message UnknownString_81C3583
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	releaseall
 	end

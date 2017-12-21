@@ -52,7 +52,7 @@ Route128_EventScript_15213F:: @ 815213F
 	removeobject 5
 	removeobject 4
 	delay 100
-	setfieldeffect 0, 1
+	setfieldeffectargument 0, 1
 	dofieldeffect 30
 	waitfieldeffect 30
 	addobject 3
@@ -77,7 +77,7 @@ Route128_EventScript_15213F:: @ 815213F
 	applymovement 3, Route128_Movement_1A0845
 	waitmovement 0
 	delay 50
-	setfieldeffect 0, 1
+	setfieldeffectargument 0, 1
 	dofieldeffect 30
 	delay 15
 	removeobject 3

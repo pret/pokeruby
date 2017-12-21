@@ -16,7 +16,7 @@ Route123_EventScript_151C5D:: @ 8151C5D
 	compare RESULT, 0
 	goto_if_eq Route123_EventScript_151CAA
 	msgbox Route123_Text_171DC2, 4
-	giveitem ITEM_TM19
+	giveitem_std ITEM_TM19
 	compare RESULT, 0
 	goto_if_eq Route123_EventScript_1A029B
 	setflag FLAG_RECEIVED_TM19

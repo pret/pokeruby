@@ -19,12 +19,12 @@ IslandCave_MapScript1_15EED4:: @ 815EED4
 	end
 
 IslandCave_EventScript_15EEDE:: @ 815EEDE
-	setmaptile 7, 19, 553, 1
-	setmaptile 8, 19, 553, 1
-	setmaptile 9, 19, 553, 1
-	setmaptile 7, 20, 565, 1
-	setmaptile 8, 20, 565, 1
-	setmaptile 9, 20, 565, 1
+	setmetatile 7, 19, 553, 1
+	setmetatile 8, 19, 553, 1
+	setmetatile 9, 19, 553, 1
+	setmetatile 7, 20, 565, 1
+	setmetatile 8, 20, 565, 1
+	setmetatile 9, 20, 565, 1
 	return
 
 IslandCave_MapScript1_15EF15:: @ 815EF15
@@ -32,12 +32,12 @@ IslandCave_MapScript1_15EF15:: @ 815EF15
 	end
 
 S_OpenRegiceChamber:: @ 815EF19
-	setmaptile 7, 19, 554, 1
-	setmaptile 8, 19, 555, 1
-	setmaptile 9, 19, 556, 1
-	setmaptile 7, 20, 562, 1
-	setmaptile 8, 20, 563, 0
-	setmaptile 9, 20, 564, 1
+	setmetatile 7, 19, 554, 1
+	setmetatile 8, 19, 555, 1
+	setmetatile 9, 19, 556, 1
+	setmetatile 7, 20, 562, 1
+	setmetatile 8, 20, 563, 0
+	setmetatile 9, 20, 564, 1
 	special DrawWholeMapView
 	playse SE_BAN
 	setflag FLAG_SYS_BRAILLE_WAIT
@@ -69,7 +69,7 @@ IslandCave_EventScript_15EF7C:: @ 815EF7C
 	end
 
 IslandCave_EventScript_15EF95:: @ 815EF95
-	waitbutton
+	waitbuttonpress
 	erasebox 0, 0, 29, 19
 	releaseall
 	end
@@ -78,9 +78,9 @@ IslandCave_EventScript_15EF9D:: @ 815EF9D
 	lock
 	faceplayer
 	waitse
-	playpokecry SPECIES_REGICE, 2
+	playmoncry SPECIES_REGICE, 2
 	delay 40
-	waitpokecry
+	waitmoncry
 	setwildbattle SPECIES_REGICE, 40, ITEM_NONE
 	setflag FLAG_HIDE_REGICE
 	setflag FLAG_SYS_CTRL_OBJ_DELETE

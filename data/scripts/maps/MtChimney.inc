@@ -9,7 +9,7 @@ MtChimney_MapScript1_15CF87:: @ 815CF87
 	end
 
 MtChimney_MapScript1_15CF92:: @ 815CF92
-	tileeffect 1
+	setstepcallback 1
 	end
 
 MtChimney_EventScript_15CF95:: @ 815CF95
@@ -27,7 +27,7 @@ MtChimney_EventScript_15CF95:: @ 815CF95
 	checkitemspace ITEM_LAVA_COOKIE, 1
 	compare RESULT, 1
 	call_if 1, MtChimney_EventScript_15D000
-	giveitem ITEM_LAVA_COOKIE
+	giveitem_std ITEM_LAVA_COOKIE
 	compare RESULT, 0
 	goto_if_eq MtChimney_EventScript_15CFF3
 	hidemoneybox 0, 0
@@ -414,7 +414,7 @@ MtChimney_EventScript_15D17D:: @ 815D17D
 	compare RESULT, 0
 	goto_if_eq MtChimney_EventScript_15D1BC
 	msgbox MtChimney_Text_1958C6, 4
-	giveitem ITEM_METEORITE
+	giveitem_std ITEM_METEORITE
 	setflag FLAG_RECEIVED_METEORITE
 	releaseall
 	end

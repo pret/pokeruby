@@ -8,7 +8,7 @@
 #include "text.h"
 #include "ewram.h"
 
-extern u16 gScriptResult;
+extern u16 gSpecialVar_Result;
 extern u16 gSpecialVar_0x8004;
 
 static void sub_80FA46C(struct EasyChatPair *s, u16 b, u8 c);
@@ -219,12 +219,12 @@ void sub_80FA5E4(void)
         if (!gSaveBlock1.easyChatPairs[0].unk1_6 && gSaveBlock1.easyChatPairs[1].unk1_6)
             result = 1;
     }
-    gScriptResult = result;
+    gSpecialVar_Result = result;
 }
 
 void sub_80FA648(void)
 {
-    gScriptResult = (gSaveBlock1.easyChatPairs[0].words[0] + gSaveBlock1.easyChatPairs[0].words[1]) & 7;
+    gSpecialVar_Result = (gSaveBlock1.easyChatPairs[0].words[0] + gSaveBlock1.easyChatPairs[0].words[1]) & 7;
 }
 
 static bool8 sub_80FA670(struct EasyChatPair *a, struct EasyChatPair *b, u8 c)

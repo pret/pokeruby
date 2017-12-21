@@ -46,7 +46,7 @@ extern struct WarpData gUnknown_020297F0;
 extern u8 gBattleOutcome;
 extern u16 gSpecialVar_0x8004;
 extern u16 gSpecialVar_0x8005;
-extern u16 gScriptResult;
+extern u16 gSpecialVar_Result;
 
 extern u8 *const gUnknown_083D1464[3];
 
@@ -169,7 +169,7 @@ static void DetermineCyclingRoadResults(u32 arg0, u8 arg1)
     }
 
 
-    gScriptResult = result;
+    gSpecialVar_Result = result;
 }
 
 void FinishCyclingRoadChallenge(void) {
@@ -1112,17 +1112,17 @@ void sub_810E984(u8 taskId)
         saved_warp2_set_2(0, gUnknown_03000760[gUnknown_0203925B].var1, gUnknown_03000760[gUnknown_0203925B].var2, -1, 2, 1);
         if (gSpecialVar_0x8005 == gUnknown_0203925B)
         {
-            gScriptResult = 0;
+            gSpecialVar_Result = 0;
             PlaySE(SE_SELECT);
             MenuZeroFillWindowRect(0, 0, 29, 12);
             sub_810EC9C(taskId);
         }
         else
         {
-            gScriptResult = 1;
+            gSpecialVar_Result = 1;
             gSpecialVar_0x8005 = gUnknown_0203925B;
             sub_810EBEC();
-            FieldObjectTurnByLocalIdAndMap(gScriptLastTalked, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, DIR_SOUTH);
+            FieldObjectTurnByLocalIdAndMap(gSpecialVar_LastTalked, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, DIR_SOUTH);
             sub_810EEDC();
             MenuZeroFillScreen();
             DestroyTask(taskId);
@@ -1130,7 +1130,7 @@ void sub_810E984(u8 taskId)
     }
     else if (gMain.newKeys & B_BUTTON)
     {
-        gScriptResult = 0;
+        gSpecialVar_Result = 0;
         PlaySE(SE_SELECT);
         sub_810EEDC();
         MenuZeroFillWindowRect(0, 0, 29, 12);
@@ -1516,12 +1516,12 @@ void IsGrassTypeInParty(void)
             species = GetMonData(pokemon, MON_DATA_SPECIES);
             if (gBaseStats[species].type1 == TYPE_GRASS || gBaseStats[species].type2 == TYPE_GRASS)
             {
-                gScriptResult = TRUE;
+                gSpecialVar_Result = TRUE;
                 return;
             }
         }
     }
-    gScriptResult = FALSE;
+    gSpecialVar_Result = FALSE;
 }
 
 const u8 *const gUnknown_083F83C0[] = {
@@ -1579,7 +1579,7 @@ void sub_810F118(u8 taskId)
     if (gMain.newKeys & A_BUTTON)
     {
         HandleDestroyMenuCursors();
-        gScriptResult = gUnknown_0203925B;
+        gSpecialVar_Result = gUnknown_0203925B;
         PlaySE(SE_SELECT);
         sub_810EEDC();
         MenuZeroFillWindowRect(0, 0, 29, 12);
@@ -1588,7 +1588,7 @@ void sub_810F118(u8 taskId)
     if (gMain.newKeys & B_BUTTON)
     {
         HandleDestroyMenuCursors();
-        gScriptResult = 0x7f;
+        gSpecialVar_Result = 0x7f;
         PlaySE(SE_SELECT);
         sub_810EEDC();
         MenuZeroFillWindowRect(0, 0, 29, 12);
@@ -2077,27 +2077,27 @@ bool8 sub_810F96C(void)
 
 void sub_810F9AC(void)
 {
-    if (gScriptResult >= 10000)
+    if (gSpecialVar_Result >= 10000)
     {
-        sub_80BF088(0, gScriptResult);
+        sub_80BF088(0, gSpecialVar_Result);
     }
-    else if (gScriptResult >= 1000)
+    else if (gSpecialVar_Result >= 1000)
     {
         gStringVar1[0] = CHAR_0;
-        ConvertIntToDecimalStringN(gStringVar1 + 1, gScriptResult, 0, sub_80BF0B8(gScriptResult));
+        ConvertIntToDecimalStringN(gStringVar1 + 1, gSpecialVar_Result, 0, sub_80BF0B8(gSpecialVar_Result));
     }
-    else if (gScriptResult >= 100)
+    else if (gSpecialVar_Result >= 100)
     {
         gStringVar1[0] = CHAR_0;
         gStringVar1[1] = CHAR_0;
-        ConvertIntToDecimalStringN(gStringVar1 + 2, gScriptResult, 0, sub_80BF0B8(gScriptResult));
+        ConvertIntToDecimalStringN(gStringVar1 + 2, gSpecialVar_Result, 0, sub_80BF0B8(gSpecialVar_Result));
     }
-    else if (gScriptResult >= 10)
+    else if (gSpecialVar_Result >= 10)
     {
         gStringVar1[0] = CHAR_0;
         gStringVar1[1] = CHAR_0;
         gStringVar1[2] = CHAR_0;
-        ConvertIntToDecimalStringN(gStringVar1 + 3, gScriptResult, 0, sub_80BF0B8(gScriptResult));
+        ConvertIntToDecimalStringN(gStringVar1 + 3, gSpecialVar_Result, 0, sub_80BF0B8(gSpecialVar_Result));
     }
     else
     {
@@ -2105,7 +2105,7 @@ void sub_810F9AC(void)
         gStringVar1[1] = CHAR_0;
         gStringVar1[2] = CHAR_0;
         gStringVar1[3] = CHAR_0;
-        ConvertIntToDecimalStringN(gStringVar1 + 4, gScriptResult, 0, sub_80BF0B8(gScriptResult));
+        ConvertIntToDecimalStringN(gStringVar1 + 4, gSpecialVar_Result, 0, sub_80BF0B8(gSpecialVar_Result));
     }
 }
 

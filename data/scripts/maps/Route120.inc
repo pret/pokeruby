@@ -59,15 +59,15 @@ Route120_MapScript1_151686:: @ 8151686
 	end
 
 Route120_EventScript_1516A2:: @ 81516A2
-	setmaptile 7, 54, 124, 1
-	setmaptile 7, 55, 145, 1
+	setmetatile 7, 54, 124, 1
+	setmetatile 7, 55, 145, 1
 	return
 
 Route120_EventScript_1516B5:: @ 81516B5
-	setmaptile 13, 15, 663, 0
-	setmaptile 12, 16, 671, 0
-	setmaptile 12, 17, 161, 0
-	setmaptile 13, 17, 161, 0
+	setmetatile 13, 15, 663, 0
+	setmetatile 12, 16, 671, 0
+	setmetatile 12, 17, 161, 0
+	setmetatile 13, 17, 161, 0
 	return
 
 Route120_EventScript_1516DA:: @ 81516DA
@@ -160,7 +160,7 @@ Route120_EventScript_151808:: @ 8151808
 	end
 
 Route120_EventScript_151813:: @ 8151813
-	giveitem 0x8004
+	giveitem_std 0x8004
 	compare RESULT, 0
 	goto_if_eq Route120_EventScript_1A029B
 	setflag FLAG_DAILY_RECEIVED_BERRY_ROUTE120
@@ -222,9 +222,9 @@ Route120_EventScript_15189D:: @ 815189D
 	applymovement 30, Route120_Movement_1A0662
 	waitmovement 0
 	waitse
-	playpokecry SPECIES_KECLEON, 2
+	playmoncry SPECIES_KECLEON, 2
 	delay 40
-	waitpokecry
+	waitmoncry
 	setwildbattle SPECIES_KECLEON, 30, ITEM_NONE
 	setvar 0x8004, 0
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
@@ -238,22 +238,22 @@ Route120_EventScript_151908:: @ 8151908
 	applymovement 255, Route120_Movement_1A0841
 	waitmovement 0
 	msgbox Route120_Text_171A40, 4
-	giveitem ITEM_DEVON_SCOPE
+	giveitem_std ITEM_DEVON_SCOPE
 	setflag FLAG_RECEIVED_DEVON_SCOPE
 	msgbox Route120_Text_171B0E, 4
 	closemessage
 	applymovement 31, Route120_Movement_1A0845
 	waitmovement 0
 	delay 50
-	setfieldeffect 0, 1
+	setfieldeffectargument 0, 1
 	dofieldeffect 30
 	delay 15
 	removeobject 31
 	waitfieldeffect 30
-	setmaptile 13, 15, 663, 0
-	setmaptile 12, 16, 671, 0
-	setmaptile 12, 17, 161, 0
-	setmaptile 13, 17, 161, 0
+	setmetatile 13, 15, 663, 0
+	setmetatile 12, 16, 671, 0
+	setmetatile 12, 17, 161, 0
+	setmetatile 13, 17, 161, 0
 	special DrawWholeMapView
 	release
 	end

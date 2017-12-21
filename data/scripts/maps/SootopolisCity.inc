@@ -13,7 +13,7 @@ SootopolisCity_MapScript1_14D08D:: @ 814D08D
 
 SootopolisCity_EventScript_14D0A0:: @ 814D0A0
 	setobjectxyperm 3, 31, 18
-	setmaptile 31, 32, 592, 1
+	setmetatile 31, 32, 592, 1
 	return
 
 SootopolisCity_EventScript_14D0B1:: @ 814D0B1
@@ -22,15 +22,15 @@ SootopolisCity_EventScript_14D0B1:: @ 814D0B1
 	return
 
 SootopolisCity_EventScript_14D0BB:: @ 814D0BB
-	setmaptile 9, 6, 584, 1
-	setmaptile 9, 17, 584, 1
-	setmaptile 9, 26, 584, 1
-	setmaptile 44, 17, 584, 1
-	setmaptile 8, 35, 584, 1
-	setmaptile 53, 28, 584, 1
-	setmaptile 45, 6, 584, 1
-	setmaptile 48, 25, 584, 1
-	setmaptile 31, 32, 592, 1
+	setmetatile 9, 6, 584, 1
+	setmetatile 9, 17, 584, 1
+	setmetatile 9, 26, 584, 1
+	setmetatile 44, 17, 584, 1
+	setmetatile 8, 35, 584, 1
+	setmetatile 53, 28, 584, 1
+	setmetatile 45, 6, 584, 1
+	setmetatile 48, 25, 584, 1
+	setmetatile 31, 32, 592, 1
 	return
 
 SootopolisCity_MapScript1_14D10D:: @ 814D10D
@@ -98,7 +98,7 @@ SootopolisCity_EventScript_14D19F:: @ 814D19F
 	random 10
 	addvar RESULT, 20
 	addvar RESULT, ITEM_CHERI_BERRY
-	giveitem RESULT
+	giveitem_std RESULT
 	compare RESULT, 0
 	goto_if_eq SootopolisCity_EventScript_1A029B
 	setflag FLAG_DAILY_RECEIVED_BERRY_SOOTOPOLIS
@@ -111,7 +111,7 @@ SootopolisCity_EventScript_14D19F:: @ 814D19F
 	end
 
 SootopolisCity_EventScript_14D1FF:: @ 814D1FF
-	giveitem ITEM_FIGY_BERRY
+	giveitem_std ITEM_FIGY_BERRY
 	compare RESULT, 0
 	goto_if_eq SootopolisCity_EventScript_1A029B
 	msgbox SootopolisCity_Text_1C650B, 4
@@ -119,7 +119,7 @@ SootopolisCity_EventScript_14D1FF:: @ 814D1FF
 	end
 
 SootopolisCity_EventScript_14D220:: @ 814D220
-	giveitem ITEM_IAPAPA_BERRY
+	giveitem_std ITEM_IAPAPA_BERRY
 	compare RESULT, 0
 	goto_if_eq SootopolisCity_EventScript_1A029B
 	msgbox SootopolisCity_Text_1C650B, 4
@@ -461,7 +461,7 @@ SootopolisCity_EventScript_14D4AD:: @ 814D4AD
 	applymovement LAST_TALKED, SootopolisCity_Movement_1A0845
 	waitmovement 0
 	delay 50
-	setfieldeffect 0, 1
+	setfieldeffectargument 0, 1
 	dofieldeffect 30
 	delay 15
 	removeobject LAST_TALKED

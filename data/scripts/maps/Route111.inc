@@ -9,8 +9,8 @@ Route111_MapScript1_14FF9C:: @ 814FF9C
 	end
 
 Route111_EventScript_14FFA6:: @ 814FFA6
-	setmaptile 29, 86, 124, 1
-	setmaptile 29, 87, 145, 1
+	setmetatile 29, 86, 124, 1
+	setmetatile 29, 87, 145, 1
 	return
 
 Route111_MapScript1_14FFB9:: @ 814FFB9
@@ -54,7 +54,7 @@ Route111_EventScript_150023:: @ 8150023
 	msgbox Route111_Text_16FA54, 5
 	compare RESULT, 0
 	goto_if_eq Route111_EventScript_15005F
-	giveitem ITEM_ROOT_FOSSIL
+	giveitem_std ITEM_ROOT_FOSSIL
 	closemessage
 	setflag FLAG_HIDE_ROOT_FOSSIL
 	setflag FLAG_HIDE_CLAW_FOSSIL
@@ -76,7 +76,7 @@ Route111_EventScript_150069:: @ 8150069
 	msgbox Route111_Text_16FAED, 5
 	compare RESULT, 0
 	goto_if_eq Route111_EventScript_1500A5
-	giveitem ITEM_CLAW_FOSSIL
+	giveitem_std ITEM_CLAW_FOSSIL
 	closemessage
 	setflag FLAG_HIDE_CLAW_FOSSIL
 	setflag FLAG_HIDE_ROOT_FOSSIL
@@ -124,7 +124,7 @@ Route111_EventScript_1500C5:: @ 81500C5
 	checkflag FLAG_DAILY_RECEIVED_BERRY_ROUTE111
 	goto_if_eq Route111_EventScript_150100
 	msgbox Route111_Text_1C56F0, 4
-	giveitem ITEM_RAZZ_BERRY
+	giveitem_std ITEM_RAZZ_BERRY
 	compare RESULT, 0
 	goto_if_eq Route111_EventScript_1A029B
 	setflag FLAG_DAILY_RECEIVED_BERRY_ROUTE111

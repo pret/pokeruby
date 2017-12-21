@@ -52,7 +52,7 @@ Route104_PrettyPetalFlowerShop_EventScript_15BE73:: @ 815BE73
 Route104_PrettyPetalFlowerShop_EventScript_15BE7C:: @ 815BE7C
 	message Route104_PrettyPetalFlowerShop_Text_1A0C42
 	waitmessage
-	pokemartbp Route104_PrettyPetalFlowerShop_Items
+	pokemartdecoration2 Route104_PrettyPetalFlowerShop_Items
 	msgbox Route104_PrettyPetalFlowerShop_Text_1A0C02, 4
 	release
 	end
@@ -80,7 +80,7 @@ Route104_PrettyPetalFlowerShop_EventScript_15BEA4:: @ 815BEA4
 
 Route104_PrettyPetalFlowerShop_EventScript_15BEB9:: @ 815BEB9
 	msgbox Route104_PrettyPetalFlowerShop_Text_1C6158, 4
-	giveitem ITEM_WAILMER_PAIL
+	giveitem_std ITEM_WAILMER_PAIL
 	msgbox Route104_PrettyPetalFlowerShop_Text_1C61E8, 4
 	setflag FLAG_RECEIVED_WAILMER_PAIL
 	release
@@ -95,7 +95,7 @@ Route104_PrettyPetalFlowerShop_EventScript_15BEDA:: @ 815BEDA
 	msgbox Route104_PrettyPetalFlowerShop_Text_1C62DA, 4
 	random 8
 	addvar RESULT, ITEM_CHERI_BERRY
-	giveitem RESULT
+	giveitem_std RESULT
 	compare RESULT, 0
 	goto_if_eq Route104_PrettyPetalFlowerShop_EventScript_1A029B
 	setflag FLAG_DAILY_RECEIVED_BERRY_FLOWER_SHOP

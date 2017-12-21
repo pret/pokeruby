@@ -133,12 +133,12 @@ static bool8 sub_8146058(void)
         gMain.state += 1;
         break;
     case 8:
-        berry = gScriptItemId + OFFSET_7B;
+        berry = gSpecialVar_ItemId + OFFSET_7B;
         gUnknown_0203932C = CreateBerrySprite(berry, 56, 64);
         gMain.state += 1;
         break;
     case 9:
-        sub_8146600(gScriptItemId + OFFSET_7B);
+        sub_8146600(gSpecialVar_ItemId + OFFSET_7B);
         gMain.state += 1;
         break;
     case 10:
@@ -277,9 +277,9 @@ static void sub_81464E4(void)
     u8 buffer[16];
 #endif
 
-    berryInfo = GetBerryInfo(gScriptItemId + OFFSET_7B + 1);
+    berryInfo = GetBerryInfo(gSpecialVar_ItemId + OFFSET_7B + 1);
 
-    ConvertIntToDecimalStringN(gStringVar1, gScriptItemId - FIRST_BERRY + 1, STR_CONV_MODE_LEADING_ZEROS, 2);
+    ConvertIntToDecimalStringN(gStringVar1, gSpecialVar_ItemId - FIRST_BERRY + 1, STR_CONV_MODE_LEADING_ZEROS, 2);
     MenuPrint(gStringVar1, 12, 4);
 
 #if ENGLISH
@@ -437,7 +437,7 @@ static void sub_8146810(s8 berry)
             gBagPocketScrollStates[berryPocket].cursorPos += berry;
         }
     }
-    gScriptItemId = gCurrentBagPocketItemSlots[gBagPocketScrollStates[berryPocket].scrollTop + gBagPocketScrollStates[berryPocket].cursorPos].itemId;
+    gSpecialVar_ItemId = gCurrentBagPocketItemSlots[gBagPocketScrollStates[berryPocket].scrollTop + gBagPocketScrollStates[berryPocket].cursorPos].itemId;
     DestroySprite(&gSprites[gUnknown_0203932C]);
     sub_81466A0();
     sub_80A7DD4();
@@ -449,7 +449,7 @@ static void sub_81468BC(void)
     sub_81464E4();
 
     // center of berry sprite
-    gUnknown_0203932C = CreateBerrySprite(gScriptItemId + OFFSET_7B, 56, 64);
+    gUnknown_0203932C = CreateBerrySprite(gSpecialVar_ItemId + OFFSET_7B, 56, 64);
 
-    sub_8146600(gScriptItemId + OFFSET_7B);
+    sub_8146600(gSpecialVar_ItemId + OFFSET_7B);
 }

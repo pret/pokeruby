@@ -11,7 +11,7 @@ Route114_EventScript_150733:: @ 8150733
 	random 5
 	addvar RESULT, 15
 	addvar RESULT, 133
-	giveitem RESULT
+	giveitem_std RESULT
 	compare RESULT, 0
 	goto_if_eq Route114_EventScript_1A029B
 	setflag FLAG_DAILY_RECEIVED_BERRY_ROUTE114
@@ -30,7 +30,7 @@ Route114_EventScript_150782:: @ 8150782
 	checkflag FLAG_RECEIVED_TM05
 	goto_if_eq Route114_EventScript_1507B9
 	msgbox Route114_Text_170154, 4
-	giveitem ITEM_TM05
+	giveitem_std ITEM_TM05
 	compare RESULT, 0
 	goto_if_eq Route114_EventScript_1A029B
 	setflag FLAG_RECEIVED_TM05
@@ -47,9 +47,9 @@ Route114_EventScript_1507C3:: @ 81507C3
 	lock
 	faceplayer
 	waitse
-	playpokecry SPECIES_POOCHYENA, 2
+	playmoncry SPECIES_POOCHYENA, 2
 	msgbox Route114_Text_1701F9, 4
-	waitpokecry
+	waitmoncry
 	release
 	end
 

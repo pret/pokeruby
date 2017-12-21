@@ -148,7 +148,7 @@ Route119_EventScript_151337:: @ 8151337
 	end
 
 Route119_EventScript_151352:: @ 8151352
-	giveitem ITEM_HM02
+	giveitem_std ITEM_HM02
 	setflag FLAG_RECEIVED_HM02
 	return
 

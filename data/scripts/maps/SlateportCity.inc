@@ -64,7 +64,7 @@ SlateportCity_Items1:: @ 814BAD0
 SlateportCity_EventScript_14BAE0:: @ 814BAE0
 	lock
 	faceplayer
-	getfirstpartypokename 0
+	bufferleadmonspeciesname 0
 	msgbox SlateportCity_Text_164682, 4
 	specialvar RESULT, LeadMonHasEffortRibbon
 	compare RESULT, 1
@@ -388,7 +388,7 @@ SlateportCity_EventScript_14BDF2:: @ 814BDF2
 	faceplayer
 	message SlateportCity_Text_1A0BE4
 	waitmessage
-	pokemartdecor SlateportCity_Decorations1
+	pokemartdecoration SlateportCity_Decorations1
 	msgbox SlateportCity_Text_1A0C02, 4
 	release
 	end
@@ -414,7 +414,7 @@ SlateportCity_EventScript_14BE20:: @ 814BE20
 	goto_if 0, SlateportCity_EventScript_14BE16
 	message SlateportCity_Text_1A0BE4
 	waitmessage
-	pokemartdecor SlateportCity_Decorations2
+	pokemartdecoration SlateportCity_Decorations2
 	msgbox SlateportCity_Text_1A0C02, 4
 	release
 	end
@@ -446,7 +446,7 @@ SlateportCity_Decorations2:: @ 814BE40
 	goto_if 0, SlateportCity_EventScript_14BE16
 	message SlateportCity_Text_1A0BE4
 	waitmessage
-	pokemartdecor SlateportCity_Decorations3
+	pokemartdecoration SlateportCity_Decorations3
 	msgbox SlateportCity_Text_1A0C02, 4
 	release
 	end

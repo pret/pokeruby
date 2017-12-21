@@ -33,32 +33,32 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_1585F3:: @ 81585F3
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_1585FD:: @ 81585FD
-	setmaptile 10, 6, 606, 1
-	setmaptile 11, 6, 607, 1
+	setmetatile 10, 6, 606, 1
+	setmetatile 11, 6, 607, 1
 	goto LilycoveCity_LilycoveMuseum_2F_EventScript_1585C6
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_158615:: @ 8158615
-	setmaptile 18, 6, 604, 1
-	setmaptile 19, 6, 605, 1
+	setmetatile 18, 6, 604, 1
+	setmetatile 19, 6, 605, 1
 	goto LilycoveCity_LilycoveMuseum_2F_EventScript_1585D5
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_15862D:: @ 815862D
-	setmaptile 14, 10, 608, 1
-	setmaptile 15, 10, 609, 1
+	setmetatile 14, 10, 608, 1
+	setmetatile 15, 10, 609, 1
 	goto LilycoveCity_LilycoveMuseum_2F_EventScript_1585E4
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_158645:: @ 8158645
-	setmaptile 6, 10, 602, 1
-	setmaptile 7, 10, 603, 1
+	setmetatile 6, 10, 602, 1
+	setmetatile 7, 10, 603, 1
 	goto LilycoveCity_LilycoveMuseum_2F_EventScript_1585F3
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_15865D:: @ 815865D
-	setmaptile 2, 6, 610, 1
-	setmaptile 3, 6, 611, 1
+	setmetatile 2, 6, 610, 1
+	setmetatile 3, 6, 611, 1
 	end
 
 LilycoveCity_LilycoveMuseum_2F_MapScript2_158670:: @ 8158670
@@ -124,7 +124,7 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_158735:: @ 8158735
 LilycoveCity_LilycoveMuseum_2F_EventScript_15875C:: @ 815875C
 	applymovement 1, LilycoveCity_LilycoveMuseum_2F_Movement_1A0839
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_188120, 4
-	givedecoration DECOR_GLASS_ORNAMENT
+	givedecoration_std DECOR_GLASS_ORNAMENT
 	compare RESULT, 0
 	goto_if_eq LilycoveCity_LilycoveMuseum_2F_EventScript_158783
 	setflag FLAG_RECEIVED_GLASS_ORNAMENT

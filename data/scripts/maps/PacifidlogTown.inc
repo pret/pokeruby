@@ -8,7 +8,7 @@ PacifidlogTown_MapScript1_14E8F9:: @ 814E8F9
 	end
 
 PacifidlogTown_MapScript1_14E8FD:: @ 814E8FD
-	tileeffect 3
+	setstepcallback 3
 	end
 
 PacifidlogTown_EventScript_14E900:: @ 814E900

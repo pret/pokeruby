@@ -22,7 +22,7 @@ Route110_TrickHouseEnd_MapScript2_161965:: @ 8161965
 
 Route110_TrickHouseEnd_EventScript_16196F:: @ 816196F
 	addobject 1
-	showobject 1, 29, 1
+	showobjectat 1, MAP_ROUTE110_TRICK_HOUSE_END
 	turnobject 1, 4
 	end
 
@@ -37,7 +37,7 @@ Route110_TrickHouseEnd_EventScript_161986:: @ 8161986
 	end
 
 Route110_TrickHouseEnd_EventScript_161994:: @ 8161994
-	setmaptile 10, 1, 539, 1
+	setmetatile 10, 1, 539, 1
 	return
 
 Route110_TrickHouseEnd_EventScript_16199E:: @ 816199E
@@ -60,7 +60,7 @@ Route110_TrickHouseEnd_EventScript_161A0B:: @ 8161A0B
 	msgbox Route110_TrickHouseEnd_Text_19C2B2, 4
 	msgbox Route110_TrickHouseEnd_Text_19C90B, 4
 	setvar 0x40c1, 0
-	giveitem ITEM_RARE_CANDY
+	giveitem_std ITEM_RARE_CANDY
 	compare RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_161C4E
 	msgbox Route110_TrickHouseEnd_Text_19C9BD, 4
@@ -73,7 +73,7 @@ Route110_TrickHouseEnd_EventScript_161A47:: @ 8161A47
 	msgbox Route110_TrickHouseEnd_Text_19C333, 4
 	msgbox Route110_TrickHouseEnd_Text_19C90B, 4
 	setvar 0x40c1, 0
-	giveitem ITEM_TIMER_BALL
+	giveitem_std ITEM_TIMER_BALL
 	compare RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_161C4E
 	msgbox Route110_TrickHouseEnd_Text_19C9BD, 4
@@ -86,7 +86,7 @@ Route110_TrickHouseEnd_EventScript_161A83:: @ 8161A83
 	msgbox Route110_TrickHouseEnd_Text_19C3A7, 4
 	msgbox Route110_TrickHouseEnd_Text_19C90B, 4
 	setvar 0x40c1, 0
-	giveitem ITEM_HARD_STONE
+	giveitem_std ITEM_HARD_STONE
 	compare RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_161C4E
 	msgbox Route110_TrickHouseEnd_Text_19C9BD, 4
@@ -99,7 +99,7 @@ Route110_TrickHouseEnd_EventScript_161ABF:: @ 8161ABF
 	msgbox Route110_TrickHouseEnd_Text_19C41F, 4
 	msgbox Route110_TrickHouseEnd_Text_19C90B, 4
 	setvar 0x40c1, 0
-	giveitem ITEM_SMOKE_BALL
+	giveitem_std ITEM_SMOKE_BALL
 	compare RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_161C4E
 	msgbox Route110_TrickHouseEnd_Text_19C9BD, 4
@@ -112,7 +112,7 @@ Route110_TrickHouseEnd_EventScript_161AFB:: @ 8161AFB
 	msgbox Route110_TrickHouseEnd_Text_19C491, 4
 	msgbox Route110_TrickHouseEnd_Text_19C90B, 4
 	setvar 0x40c1, 0
-	giveitem ITEM_TM12
+	giveitem_std ITEM_TM12
 	compare RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_161C4E
 	msgbox Route110_TrickHouseEnd_Text_19C9BD, 4
@@ -125,7 +125,7 @@ Route110_TrickHouseEnd_EventScript_161B37:: @ 8161B37
 	msgbox Route110_TrickHouseEnd_Text_19C515, 4
 	msgbox Route110_TrickHouseEnd_Text_19C90B, 4
 	setvar 0x40c1, 0
-	giveitem ITEM_MAGNET
+	giveitem_std ITEM_MAGNET
 	compare RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_161C4E
 	msgbox Route110_TrickHouseEnd_Text_19C9BD, 4
@@ -138,7 +138,7 @@ Route110_TrickHouseEnd_EventScript_161B73:: @ 8161B73
 	msgbox Route110_TrickHouseEnd_Text_19C567, 4
 	msgbox Route110_TrickHouseEnd_Text_19C90B, 4
 	setvar 0x40c1, 0
-	giveitem ITEM_PP_MAX
+	giveitem_std ITEM_PP_MAX
 	compare RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_161C4E
 	msgbox Route110_TrickHouseEnd_Text_19C9BD, 4
@@ -167,9 +167,9 @@ Route110_TrickHouseEnd_EventScript_161BAF:: @ 8161BAF
 	msgbox Route110_TrickHouseEnd_Text_19C691, 4
 	setvar 0x40c1, 0
 	.ifdef SAPPHIRE
-	givedecoration 32
+	givedecoration_std 32
 	.else
-	givedecoration 31
+	givedecoration_std 31
 	.endc
 	compare RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_161C61

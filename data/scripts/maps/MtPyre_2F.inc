@@ -5,7 +5,7 @@ MtPyre_2F_MapScripts:: @ 815D36E
 	.byte 0
 
 MtPyre_2F_MapScript1_15D37E:: @ 815D37E
-	tileeffect 7
+	setstepcallback 7
 	setholewarp MAP_MT_PYRE_1F, 255, 0, 0
 	end
 

@@ -468,7 +468,7 @@ RustboroCity_EventScript_14C77D:: @ 814C77D
 	compare 0x4001, 4
 	call_if 1, RustboroCity_EventScript_14C8B8
 	msgbox RustboroCity_Text_166FB4, 4
-	giveitem ITEM_GREAT_BALL
+	giveitem_std ITEM_GREAT_BALL
 	compare RESULT, 0
 	call_if 1, RustboroCity_EventScript_14C7F5
 	msgbox RustboroCity_Text_16707F, 4

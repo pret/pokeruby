@@ -23,53 +23,53 @@ Route110_TrickHousePuzzle7_EventScript_163167:: @ 8163167
 	return
 
 Route110_TrickHousePuzzle7_EventScript_163195:: @ 8163195
-	setmaptile 13, 17, 610, 0
-	setmaptile 12, 16, 575, 1
+	setmetatile 13, 17, 610, 0
+	setmetatile 12, 16, 575, 1
 	return
 
 Route110_TrickHousePuzzle7_EventScript_1631A8:: @ 81631A8
-	setmaptile 12, 13, 610, 0
-	setmaptile 12, 11, 575, 1
+	setmetatile 12, 13, 610, 0
+	setmetatile 12, 11, 575, 1
 	return
 
 Route110_TrickHousePuzzle7_EventScript_1631BB:: @ 81631BB
-	setmaptile 7, 12, 610, 0
-	setmaptile 5, 10, 575, 1
+	setmetatile 7, 12, 610, 0
+	setmetatile 5, 10, 575, 1
 	return
 
 Route110_TrickHousePuzzle7_EventScript_1631CE:: @ 81631CE
-	setmaptile 6, 6, 636, 0
-	setmaptile 4, 4, 575, 1
+	setmetatile 6, 6, 636, 0
+	setmetatile 4, 4, 575, 1
 	return
 
 Route110_TrickHousePuzzle7_EventScript_1631E1:: @ 81631E1
-	setmaptile 8, 4, 609, 0
-	setmaptile 7, 5, 575, 1
+	setmetatile 8, 4, 609, 0
+	setmetatile 7, 5, 575, 1
 	return
 
 Route110_TrickHousePuzzle7_EventScript_1631F4:: @ 81631F4
-	setmaptile 13, 17, 611, 0
-	setmaptile 12, 16, 574, 1
+	setmetatile 13, 17, 611, 0
+	setmetatile 12, 16, 574, 1
 	return
 
 Route110_TrickHousePuzzle7_EventScript_163207:: @ 8163207
-	setmaptile 12, 13, 609, 0
-	setmaptile 12, 11, 574, 1
+	setmetatile 12, 13, 609, 0
+	setmetatile 12, 11, 574, 1
 	return
 
 Route110_TrickHousePuzzle7_EventScript_16321A:: @ 816321A
-	setmaptile 7, 12, 611, 0
-	setmaptile 5, 10, 574, 1
+	setmetatile 7, 12, 611, 0
+	setmetatile 5, 10, 574, 1
 	return
 
 Route110_TrickHousePuzzle7_EventScript_16322D:: @ 816322D
-	setmaptile 6, 6, 635, 0
-	setmaptile 4, 4, 574, 1
+	setmetatile 6, 6, 635, 0
+	setmetatile 4, 4, 574, 1
 	return
 
 Route110_TrickHousePuzzle7_EventScript_163240:: @ 8163240
-	setmaptile 8, 4, 608, 0
-	setmaptile 7, 5, 574, 1
+	setmetatile 8, 4, 608, 0
+	setmetatile 7, 5, 574, 1
 	return
 
 Route110_TrickHousePuzzle7_MapScript1_163253:: @ 8163253

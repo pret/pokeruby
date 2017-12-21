@@ -18,9 +18,9 @@ EWRAM_DATA u16 gSpecialVar_0x8008 = 0;
 EWRAM_DATA u16 gSpecialVar_0x8009 = 0;
 EWRAM_DATA u16 gSpecialVar_0x800A = 0;
 EWRAM_DATA u16 gSpecialVar_0x800B = 0;
-EWRAM_DATA u16 gScriptResult = 0;
-EWRAM_DATA u16 gScriptLastTalked = 0;
-EWRAM_DATA u16 gScriptFacing = 0;
+EWRAM_DATA u16 gSpecialVar_Result = 0;
+EWRAM_DATA u16 gSpecialVar_LastTalked = 0;
+EWRAM_DATA u16 gSpecialVar_Facing = 0;
 EWRAM_DATA u8 gUnknown_0202E8E2[16] = {0};
 
 extern u16 *gSpecialVars[];
