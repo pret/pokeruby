@@ -277,7 +277,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1B6C3D:: @ 81B6C3D
 	checkflag FLAG_RECEIVED_AMULET_COIN
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1B6C72
 	msgbox LittlerootTown_BrendansHouse_1F_Text_172782, 4
-	giveitem ITEM_AMULET_COIN
+	giveitem_std ITEM_AMULET_COIN
 	compare RESULT, 0
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1A029B
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1727CD, 4
@@ -313,9 +313,9 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6CA6:: @ 81B6CA6
 	lock
 	faceplayer
 	waitse
-	playpokecry SPECIES_MACHOKE, 0
+	playmoncry SPECIES_MACHOKE, 0
 	msgbox LittlerootTown_BrendansHouse_1F_Text_17281D, 4
-	waitpokecry
+	waitmoncry
 	release
 	end
 
@@ -324,9 +324,9 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6CB9:: @ 81B6CB9
 	lock
 	faceplayer
 	waitse
-	playpokecry SPECIES_MACHOKE, 0
+	playmoncry SPECIES_MACHOKE, 0
 	msgbox LittlerootTown_BrendansHouse_1F_Text_172831, 4
-	waitpokecry
+	waitmoncry
 	release
 	end
 
@@ -383,7 +383,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6CDE:: @ 81B6CDE
 	compare 0x8008, 1
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1B6DD8
 	msgbox LittlerootTown_BrendansHouse_1F_Text_17298B, 4
-	giveitem ITEM_SS_TICKET
+	giveitem_std ITEM_SS_TICKET
 	msgbox LittlerootTown_BrendansHouse_1F_Text_172A7D, 4
 	closemessage
 	compare 0x8008, 0

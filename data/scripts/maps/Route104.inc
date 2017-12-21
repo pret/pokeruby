@@ -34,7 +34,7 @@ Route104_EventScript_14EEC8:: @ 814EEC8
 	checkflag FLAG_RECEIVED_CHESTO_BERRY_ROUTE104
 	goto_if_eq Route104_EventScript_14EEFF
 	msgbox Route104_Text_1C55B9, 4
-	giveitem ITEM_CHESTO_BERRY
+	giveitem_std ITEM_CHESTO_BERRY
 	compare RESULT, 0
 	goto_if_eq Route104_EventScript_1A029B
 	setflag FLAG_RECEIVED_CHESTO_BERRY_ROUTE104
@@ -53,7 +53,7 @@ Route104_EventScript_14EF09:: @ 814EF09
 	checkflag FLAG_RECEIVED_WHITE_HERB
 	goto_if_eq Route104_EventScript_14EF38
 	msgbox Route104_Text_16DD91, 4
-	giveitem ITEM_WHITE_HERB
+	giveitem_std ITEM_WHITE_HERB
 	compare RESULT, 0
 	goto_if_eq Route104_EventScript_1A029B
 	setflag FLAG_RECEIVED_WHITE_HERB
@@ -107,7 +107,7 @@ Route104_EventScript_14EF93:: @ 814EF93
 	checkflag FLAG_RECEIVED_TM09
 	goto_if_eq Route104_EventScript_14EFC2
 	msgbox Route104_Text_16DC5F, 4
-	giveitem ITEM_TM09
+	giveitem_std ITEM_TM09
 	compare RESULT, 0
 	goto_if_eq Route104_EventScript_1A029B
 	setflag FLAG_RECEIVED_TM09
@@ -124,14 +124,14 @@ Route104_EventScript_14EFCC:: @ 814EFCC
 	end
 
 Route104_EventScript_14EFD5:: @ 814EFD5
-	setobjectpriority 8, 0, 19, 0
-	setobjectpriority 255, 0, 19, 0
+	setobjectpriority 8, MAP_ROUTE104, 0
+	setobjectpriority 255, MAP_ROUTE104, 0
 	applymovement 8, Route104_Movement_14F16C
 	waitmovement 0
 	removeobject 8
 	applymovement 255, Route104_Movement_14F162
 	waitmovement 0
-	hideobject 255, 0, 19
+	hideobjectat 255, MAP_ROUTE104
 	call Route104_EventScript_1A02E7
 	applymovement 7, Route104_Movement_14F09F
 	applymovement 255, Route104_Movement_14F09F
@@ -139,12 +139,12 @@ Route104_EventScript_14EFD5:: @ 814EFD5
 	applymovement 255, Route104_Movement_14F166
 	waitmovement 0
 	call Route104_EventScript_1A02EF
-	showobject 255, 0, 11
+	showobjectat 255, MAP_DEWFORD_TOWN
 	applymovement 255, Route104_Movement_14F168
 	waitmovement 0
 	setobjectxyperm 2, 12, 8
 	addobject 2
-	setobjectpriority 2, 0, 11, 0
+	setobjectpriority 2, MAP_DEWFORD_TOWN, 0
 	clearflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
 	applymovement 2, Route104_Movement_14F16F
 	waitmovement 0
@@ -152,10 +152,10 @@ Route104_EventScript_14EFD5:: @ 814EFD5
 	clearflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD
 	call Route104_EventScript_1A02EF
 	setflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE104
-	hideobject 7, 0, 19
+	hideobjectat 7, MAP_ROUTE104
 	copyvar 0x4096, 0x8008
-	resetobjectpriority 255, 0, 19
-	resetobjectpriority 2, 0, 11
+	resetobjectpriority 255, MAP_ROUTE104
+	resetobjectpriority 2, MAP_DEWFORD_TOWN
 	moveobjectoffscreen 2
 	setvar 0x408e, 0
 	checkflag FLAG_DELIVERED_STEVEN_LETTER

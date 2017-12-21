@@ -54,9 +54,9 @@ SouthernIsland_Interior_EventScript_160BA7:: @ 8160BA7
 	waitmovement 0
 	delay 50
 	waitse
-	playpokecry SPECIES_LATIAS_OR_LATIOS, 0
+	playmoncry SPECIES_LATIAS_OR_LATIOS, 0
 	delay 30
-	waitpokecry
+	waitmoncry
 	addobject 2
 	delay 30
 	applymovement 127, SouthernIsland_Interior_Movement_160C16

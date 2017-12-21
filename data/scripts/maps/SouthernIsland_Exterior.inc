@@ -17,7 +17,7 @@ SouthernIsland_Exterior_EventScript_160AE0:: @ 8160AE0
 	applymovement LAST_TALKED, SouthernIsland_Exterior_Movement_1A0845
 	waitmovement 0
 	delay 30
-	hideobject 1, 26, 9
+	hideobjectat 1, MAP_SOUTHERN_ISLAND_EXTERIOR
 	setvar 0x8004, 2
 	call SouthernIsland_Exterior_EventScript_1A047C
 	warp MAP_LILYCOVE_CITY_HARBOR, 255, 8, 11

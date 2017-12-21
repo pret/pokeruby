@@ -7,7 +7,7 @@ GraniteCave_1F_EventScript_15CBA7:: @ 815CBA7
 	checkflag FLAG_RECEIVED_HM05
 	goto_if_eq GraniteCave_1F_EventScript_15CBD3
 	msgbox GraniteCave_1F_Text_194917, 4
-	giveitem ITEM_HM05
+	giveitem_std ITEM_HM05
 	setflag FLAG_RECEIVED_HM05
 	msgbox GraniteCave_1F_Text_194A3E, 4
 	release

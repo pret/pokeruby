@@ -67,7 +67,7 @@ BattleTower_Outside_EventScript_160232:: @ 8160232
 	applymovement LAST_TALKED, BattleTower_Outside_Movement_1A0845
 	waitmovement 0
 	delay 30
-	hideobject 5, 26, 4
+	hideobjectat 5, MAP_BATTLE_TOWER_OUTSIDE
 	setvar 0x8004, 4
 	call BattleTower_Outside_EventScript_1A047C
 	return

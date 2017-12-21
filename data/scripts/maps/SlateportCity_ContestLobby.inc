@@ -23,14 +23,14 @@ SlateportCity_ContestLobby_EventScript_155448:: @ 8155448
 	applymovement 1, SlateportCity_ContestLobby_Movement_1554CC
 	waitmovement 0
 	playse 71
-	setmaptile 4, 2, 545, 1
-	setmaptile 4, 3, 609, 1
+	setmetatile 4, 2, 545, 1
+	setmetatile 4, 3, 609, 1
 	special DrawWholeMapView
 	applymovement 1, SlateportCity_ContestLobby_Movement_1554CF
 	waitmovement 0
 	playse 71
-	setmaptile 4, 2, 721, 1
-	setmaptile 4, 3, 729, 1
+	setmetatile 4, 2, 721, 1
+	setmetatile 4, 3, 729, 1
 	special DrawWholeMapView
 	delay 20
 	applymovement 1, SlateportCity_ContestLobby_Movement_1554DC
@@ -106,7 +106,7 @@ SlateportCity_ContestLobby_EventScript_1554F9:: @ 81554F9
 	applymovement 7, SlateportCity_ContestLobby_Movement_1A0839
 	waitmovement 0
 	msgbox SlateportCity_ContestLobby_Text_17CA67, 4
-	giveitem ITEM_POKEBLOCK_CASE
+	giveitem_std ITEM_POKEBLOCK_CASE
 	setflag FLAG_RECEIVED_POKEBLOCK_CASE
 	releaseall
 	end
@@ -129,7 +129,7 @@ SlateportCity_ContestLobby_EventScript_155536:: @ 8155536
 @ 815553F
 	lockall
 	special ShowBerryBlenderRecordWindow
-	waitbutton
+	waitbuttonpress
 	erasebox 0, 0, 29, 19
 	releaseall
 	end

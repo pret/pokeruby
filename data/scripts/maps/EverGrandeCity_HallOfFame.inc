@@ -51,16 +51,16 @@ EverGrandeCity_HallOfFame_EventScript_15BBA8:: @ 815BBA8
 	end
 
 EverGrandeCity_HallOfFame_EventScript_15BC41:: @ 815BC41
-	sethealplace 1
-	fadescreendelay 1, 24
+	setrespawn 1
+	fadescreenspeed 1, 24
 	special GameClear
 	waitstate
 	releaseall
 	end
 
 EverGrandeCity_HallOfFame_EventScript_15BC4D:: @ 815BC4D
-	sethealplace 2
-	fadescreendelay 1, 24
+	setrespawn 2
+	fadescreenspeed 1, 24
 	special GameClear
 	waitstate
 	releaseall

@@ -401,7 +401,7 @@ gUnknown_0815F36C:: @ 815F36C
 	dofieldeffect 61
 	waitstate
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	playse 5
 	goto EventScript_15F384
 	end
@@ -462,7 +462,7 @@ gUnknown_0815F43A:: @ 815F43A
 	dofieldeffect 61
 	waitstate
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	playse 5
 	goto EventScript_15F452
 	end
@@ -902,7 +902,7 @@ Std_2:
 	faceplayer
 	message 0x0
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	release
 	return
 
@@ -910,14 +910,14 @@ Std_3:
 	lockall
 	message 0x0
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	releaseall
 	return
 
 Std_4:
 	message 0x0
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	return
 
 Std_5:
@@ -959,7 +959,7 @@ gUnknown_0819F818:: @ 819F818
 	goto EventScript_19F8F2
 
 EventScript_19F83F:
-	ontrainerbattleend
+	gotopostbattlescript
 
 gUnknown_0819F840:: @ 819F840
 	lock
@@ -978,19 +978,19 @@ gUnknown_0819F840:: @ 819F840
 EventScript_19F870:
 	special ScrSpecial_ShowTrainerNonBattlingSpeech
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	release
 	end
 
 EventScript_19F877:
-	ontrainerbattleend
+	gotopostbattlescript
 
 gUnknown_0819F878:: @ 819F878
 	applymovement LAST_TALKED, Movement_19F8F0
 	waitmovement 0
 	special PlayTrainerEncounterMusic
-	battlebegin
-	ontrainerbattleend
+	trainerbattlebegin
+	gotopostbattlescript
 
 gUnknown_0819F887:: @ 819F887
 	call EventScript_19F8E5
@@ -1001,14 +1001,14 @@ gUnknown_0819F887:: @ 819F887
 	special sub_8082524
 	special ScrSpecial_ShowTrainerIntroSpeech
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	special ScrSpecial_StartTrainerEyeRematch
 	waitstate
 	releaseall
 	end
 
 EventScript_19F8AD:
-	ontrainerbattleend
+	gotopostbattlescript
 
 gUnknown_0819F8AE:: @ 819F8AE
 	specialvar RESULT, ScrSpecial_GetTrainerEyeRematchFlag
@@ -1021,19 +1021,19 @@ gUnknown_0819F8AE:: @ 819F8AE
 	special sub_8082524
 	special ScrSpecial_ShowTrainerIntroSpeech
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	special ScrSpecial_StartTrainerEyeRematch
 	waitstate
 	releaseall
 	end
 
 EventScript_19F8DD:
-	ontrainerbattleend
+	gotopostbattlescript
 
 EventScript_19F8DE:
 	special ScrSpecial_ShowTrainerNonBattlingSpeech
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	release
 	end
 
@@ -1049,8 +1049,8 @@ Movement_19F8F0::
 EventScript_19F8F2:
 	special ScrSpecial_ShowTrainerIntroSpeech
 	waitmessage
-	waitbutton
-	battlebegin
+	waitbuttonpress
+	trainerbattlebegin
 	specialvar RESULT, ScrSpecial_GetTrainerBattleMode
 	compare RESULT, 0
 	goto_if_eq EventScript_19F934
@@ -1068,96 +1068,96 @@ EventScript_19F934:
 	end
 
 EventScript_19F936:
-	ontrainerbattleendgoto
+	gotobeatenscript
 
 Std_6::
 	message 0x0
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	release
 	return
 
 Event_ResetBerryTrees: @ 19F940
-	plantberrytree 2, 7, 5
-	plantberrytree 1, 3, 5
-	plantberrytree 11, 7, 5
-	plantberrytree 13, 3, 5
-	plantberrytree 4, 7, 5
-	plantberrytree 76, 1, 5
-	plantberrytree 8, 1, 5
-	plantberrytree 10, 6, 5
-	plantberrytree 25, 20, 5
-	plantberrytree 26, 2, 5
-	plantberrytree 66, 2, 5
-	plantberrytree 67, 20, 5
-	plantberrytree 69, 22, 5
-	plantberrytree 70, 22, 5
-	plantberrytree 71, 22, 5
-	plantberrytree 55, 17, 5
-	plantberrytree 56, 17, 5
-	plantberrytree 5, 1, 5
-	plantberrytree 6, 6, 5
-	plantberrytree 7, 1, 5
-	plantberrytree 16, 18, 5
-	plantberrytree 17, 18, 5
-	plantberrytree 18, 18, 5
-	plantberrytree 29, 19, 5
-	plantberrytree 28, 19, 5
-	plantberrytree 27, 19, 5
-	plantberrytree 24, 4, 5
-	plantberrytree 23, 3, 5
-	plantberrytree 22, 3, 5
-	plantberrytree 21, 4, 5
-	plantberrytree 19, 16, 5
-	plantberrytree 20, 16, 5
-	plantberrytree 80, 7, 5
-	plantberrytree 81, 7, 5
-	plantberrytree 77, 8, 5
-	plantberrytree 78, 8, 5
-	plantberrytree 68, 8, 5
-	plantberrytree 31, 10, 5
-	plantberrytree 33, 10, 5
-	plantberrytree 34, 21, 5
-	plantberrytree 35, 21, 5
-	plantberrytree 36, 21, 5
-	plantberrytree 83, 24, 5
-	plantberrytree 84, 24, 5
-	plantberrytree 85, 10, 5
-	plantberrytree 86, 6, 5
-	plantberrytree 37, 5, 5
-	plantberrytree 38, 5, 5
-	plantberrytree 39, 5, 5
-	plantberrytree 40, 3, 5
-	plantberrytree 41, 3, 5
-	plantberrytree 42, 3, 5
-	plantberrytree 46, 19, 5
-	plantberrytree 45, 20, 5
-	plantberrytree 44, 18, 5
-	plantberrytree 43, 16, 5
-	plantberrytree 47, 8, 5
-	plantberrytree 48, 5, 5
-	plantberrytree 49, 4, 5
-	plantberrytree 50, 2, 5
-	plantberrytree 52, 18, 5
-	plantberrytree 53, 18, 5
-	plantberrytree 62, 6, 5
-	plantberrytree 64, 6, 5
-	plantberrytree 58, 21, 5
-	plantberrytree 59, 21, 5
-	plantberrytree 60, 25, 5
-	plantberrytree 61, 25, 5
-	plantberrytree 79, 23, 5
-	plantberrytree 14, 23, 5
-	plantberrytree 15, 21, 5
-	plantberrytree 30, 21, 5
-	plantberrytree 65, 25, 5
-	plantberrytree 72, 25, 5
-	plantberrytree 73, 23, 5
-	plantberrytree 74, 23, 5
-	plantberrytree 87, 3, 5
-	plantberrytree 88, 10, 5
-	plantberrytree 89, 4, 5
-	plantberrytree 82, 36, 5
+	setberrytree 2, 7, 5
+	setberrytree 1, 3, 5
+	setberrytree 11, 7, 5
+	setberrytree 13, 3, 5
+	setberrytree 4, 7, 5
+	setberrytree 76, 1, 5
+	setberrytree 8, 1, 5
+	setberrytree 10, 6, 5
+	setberrytree 25, 20, 5
+	setberrytree 26, 2, 5
+	setberrytree 66, 2, 5
+	setberrytree 67, 20, 5
+	setberrytree 69, 22, 5
+	setberrytree 70, 22, 5
+	setberrytree 71, 22, 5
+	setberrytree 55, 17, 5
+	setberrytree 56, 17, 5
+	setberrytree 5, 1, 5
+	setberrytree 6, 6, 5
+	setberrytree 7, 1, 5
+	setberrytree 16, 18, 5
+	setberrytree 17, 18, 5
+	setberrytree 18, 18, 5
+	setberrytree 29, 19, 5
+	setberrytree 28, 19, 5
+	setberrytree 27, 19, 5
+	setberrytree 24, 4, 5
+	setberrytree 23, 3, 5
+	setberrytree 22, 3, 5
+	setberrytree 21, 4, 5
+	setberrytree 19, 16, 5
+	setberrytree 20, 16, 5
+	setberrytree 80, 7, 5
+	setberrytree 81, 7, 5
+	setberrytree 77, 8, 5
+	setberrytree 78, 8, 5
+	setberrytree 68, 8, 5
+	setberrytree 31, 10, 5
+	setberrytree 33, 10, 5
+	setberrytree 34, 21, 5
+	setberrytree 35, 21, 5
+	setberrytree 36, 21, 5
+	setberrytree 83, 24, 5
+	setberrytree 84, 24, 5
+	setberrytree 85, 10, 5
+	setberrytree 86, 6, 5
+	setberrytree 37, 5, 5
+	setberrytree 38, 5, 5
+	setberrytree 39, 5, 5
+	setberrytree 40, 3, 5
+	setberrytree 41, 3, 5
+	setberrytree 42, 3, 5
+	setberrytree 46, 19, 5
+	setberrytree 45, 20, 5
+	setberrytree 44, 18, 5
+	setberrytree 43, 16, 5
+	setberrytree 47, 8, 5
+	setberrytree 48, 5, 5
+	setberrytree 49, 4, 5
+	setberrytree 50, 2, 5
+	setberrytree 52, 18, 5
+	setberrytree 53, 18, 5
+	setberrytree 62, 6, 5
+	setberrytree 64, 6, 5
+	setberrytree 58, 21, 5
+	setberrytree 59, 21, 5
+	setberrytree 60, 25, 5
+	setberrytree 61, 25, 5
+	setberrytree 79, 23, 5
+	setberrytree 14, 23, 5
+	setberrytree 15, 21, 5
+	setberrytree 30, 21, 5
+	setberrytree 65, 25, 5
+	setberrytree 72, 25, 5
+	setberrytree 73, 23, 5
+	setberrytree 74, 23, 5
+	setberrytree 87, 3, 5
+	setberrytree 88, 10, 5
+	setberrytree 89, 4, 5
+	setberrytree 82, 36, 5
 	return
 
 gUnknown_0819FA81:: @ 819FA81
@@ -1505,13 +1505,13 @@ OldaleTown_PokemonCenter_1F_Movement_19FDF4:: @ 819FDF4
 	step_end
 
 Std_ObtainItem: @ 819FDF7
-	additem 0x8000, 0x8001
+	giveitem 0x8000, 0x8001
 	copyvar 0x8007, RESULT
 	call Std_ObtainItem_
 	return
 
 Std_ObtainItem_: @ 819FE07
-	getitemname 1, 0x8000
+	bufferitemname 1, 0x8000
 	checkitemtype 0x8000
 	call GetItem_HandlePocket
 	compare 0x8007, 0x1
@@ -1530,31 +1530,31 @@ GetItem_HandlePocket:
 	end
 
 GetItem_HandlePocket_Items:
-	getstdstring 2, 0xE
+	bufferstdstring 2, 0xE
 	compare 0x8007, 1
 	call_if 1, PlayGetItemFanfare
 	return
 
 GetItem_HandlePocket_KeyItems:
-	getstdstring 2, 0xF
+	bufferstdstring 2, 0xF
 	compare 0x8007, 1
 	call_if 1, PlayGetItemFanfare
 	return
 
 GetItem_HandlePocket_PokeBalls:
-	getstdstring 2, 0x10
+	bufferstdstring 2, 0x10
 	compare 0x8007, 1
 	call_if 1, PlayGetItemFanfare
 	return
 
 GetItem_HandlePocket_TMsHMs:
-	getstdstring 2, 0x11
+	bufferstdstring 2, 0x11
 	compare 0x8007, 1
 	call_if 1, PlayGetTMHMFanfare
 	return
 
 GetItem_HandlePocket_Berries:
-	getstdstring 2, 0x12
+	bufferstdstring 2, 0x12
 	compare 0x8007, 1
 	call_if 1, PlayGetItemFanfare
 	return
@@ -1580,13 +1580,13 @@ PlayGetTMHMFanfare:
 	return
 
 Std_ObtainDecoration: @ 819FEDA
-	adddecor 0x8000
+	givedecoration 0x8000
 	copyvar 0x8007, RESULT
 	call Std_ObtainDecoration_
 	return
 
 Std_ObtainDecoration_: @ 819FEE8
-	getdecorname 1, 0x8000
+	bufferdecorationname 1, 0x8000
 	compare 0x8007, 1
 	call_if 1, Std_ObtainDecoration_Success
 	compare 0x8007, 0
@@ -1610,9 +1610,9 @@ Std_FindItem: @ 819FF21
 	lock
 	faceplayer
 	waitse
-	additem 0x8000, 0x8001
+	giveitem 0x8000, 0x8001
 	copyvar 0x8007, RESULT
-	getitemname 1, 0x8000
+	bufferitemname 1, 0x8000
 	checkitemtype 0x8000
 	call GetItem_HandlePocket
 	compare 0x8007, 1
@@ -1639,9 +1639,9 @@ Std_FindItem_Fail: @ 819FF65
 HiddenItemScript:: @ 819FF7B
 	lockall
 	waitse
-	additem 0x8005, 1
+	giveitem 0x8005, 1
 	copyvar 0x8007, RESULT
-	getitemname 0x1, 0x8005
+	bufferitemname 0x1, 0x8005
 	checkitemtype 0x8005
 	call GetItem_HandlePocket
 	compare 0x8007, 1
@@ -1683,7 +1683,7 @@ UnusedMixRecordsScript_Yes: @ 819FFFA
 UnusedMixRecordsScript_Done: @ 81A0000
 	message UnusedMixRecordsSeeYouAgainText
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	release
 	end
 
@@ -1826,11 +1826,11 @@ Route109_EventScript_1A010C:: @ 81A010C
 	return
 
 UseSurfScript:: @ 81A0117
-	checkpokemove MOVE_SURF
+	checkpartymove MOVE_SURF
 	compare RESULT, 6
 	goto_if_eq UseSurfScript_NoMon
-	getpartypokename 0, RESULT
-	setfieldeffect 0, RESULT
+	bufferpartymonnick 0, RESULT
+	setfieldeffectargument 0, RESULT
 	lockall
 	msgbox UseSurfPromptText, 5
 	compare RESULT, 0
@@ -2214,7 +2214,7 @@ Route101_EventScript_1A03A5:: @ 81A03A5
 	copyvar 0x8004, 0x8009
 	special ShowPokedexRatingMessage
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	return
 
 EverGrandeCity_ChampionsRoom_EventScript_1A03B0:: @ 81A03B0
@@ -2224,8 +2224,8 @@ Route101_EventScript_1A03B0:: @ 81A03B0
 	copyvar 0x8008, 0x8005
 	copyvar 0x8009, 0x8006
 	copyvar 0x800a, RESULT
-	getnumberstring 0, 0x8008
-	getnumberstring 1, 0x8009
+	buffernumberstring 0, 0x8008
+	buffernumberstring 1, 0x8009
 	msgbox Route101_Text_1C44DC, 4
 	call Route101_EventScript_1A03A5
 	compare 0x800a, 0
@@ -2234,8 +2234,8 @@ Route101_EventScript_1A03B0:: @ 81A03B0
 	specialvar RESULT, ScriptGetPokedexInfo
 	copyvar 0x8008, 0x8005
 	copyvar 0x8009, 0x8006
-	getnumberstring 0, 0x8008
-	getnumberstring 1, 0x8009
+	buffernumberstring 0, 0x8008
+	buffernumberstring 1, 0x8009
 	msgbox Route101_Text_1C4B05, 4
 	return
 
@@ -2282,7 +2282,7 @@ EventScript_1A0457: @ unreferenced?
 	delay 30
 	applymovement 255, SlateportCity_OceanicMuseum_2F_Movement_1A0841
 	waitmovement 0
-	showobject 255, 0, 0
+	showobjectat 255, MAP_PETALBURG_CITY
 	delay 30
 	applymovement 255, Movement_1A047A
 	waitmovement 0
@@ -2300,15 +2300,15 @@ SouthernIsland_Exterior_EventScript_1A047C:: @ 81A047C
 	compare FACING, 3
 	call_if 1, BattleTower_Outside_EventScript_160B3A
 	delay 30
-	hideobject 255, 0, 0
+	hideobjectat 255, 0, 0
 	call BattleTower_Outside_EventScript_1A040E
 	return
 
 CaveOfOrigin_B4F_EventScript_1A04A0:: @ 81A04A0
 	lockall
 	waitse
-	playpokecry SPECIES_GROUDON_OR_KYOGRE, 2
-	waitpokecry
+	playmoncry SPECIES_GROUDON_OR_KYOGRE, 2
+	waitmoncry
 	setvar 0x4005, 1
 	releaseall
 	end
@@ -2362,9 +2362,9 @@ MagmaHideout_B1F_EventScript_1A04FD:: @ 81A04FD
 	faceplayer
 	setwildbattle SPECIES_ELECTRODE, 30, ITEM_NONE
 	waitse
-	playpokecry SPECIES_ELECTRODE, 2
+	playmoncry SPECIES_ELECTRODE, 2
 	delay 40
-	waitpokecry
+	waitmoncry
 	setflag FLAG_HIDE_ELECTRODE_1_HIDEOUT
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	dowildbattle
@@ -2378,9 +2378,9 @@ MagmaHideout_B1F_EventScript_1A051B:: @ 81A051B
 	faceplayer
 	setwildbattle SPECIES_ELECTRODE, 30, ITEM_NONE
 	waitse
-	playpokecry SPECIES_ELECTRODE, 2
+	playmoncry SPECIES_ELECTRODE, 2
 	delay 40
-	waitpokecry
+	waitmoncry
 	setflag FLAG_HIDE_ELECTRODE_2_HIDEOUT
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	dowildbattle
@@ -2461,9 +2461,9 @@ Route119_EventScript_1A05C3:: @ 81A05C3
 	applymovement LAST_TALKED, Route119_Movement_1A0662
 	waitmovement 0
 	waitse
-	playpokecry SPECIES_KECLEON, 2
+	playmoncry SPECIES_KECLEON, 2
 	delay 40
-	waitpokecry
+	waitmoncry
 	setwildbattle SPECIES_KECLEON, 30, ITEM_NONE
 	compare 0x8004, 1
 	call_if 1, Route119_EventScript_1A0646
@@ -2552,12 +2552,12 @@ FallarborTown_House1_EventScript_1A067F:: @ 81A067F
 GraniteCave_StevensRoom_EventScript_1A067F:: @ 81A067F
 MtPyre_Summit_EventScript_1A067F:: @ 81A067F
 SlateportCity_OceanicMuseum_2F_EventScript_1A067F:: @ 81A067F
-	getitemname 0, 0x8004
+	bufferitemname 0, 0x8004
 	playfanfare 372
 	message FallarborTown_House1_Text_1A1498
 	waitmessage
 	waitfanfare
-	removeitem 0x8004, 1
+	takeitem 0x8004, 1
 	return
 
 EverGrandeCity_DrakesRoom_EventScript_1A0693:: @ 81A0693
@@ -2567,18 +2567,18 @@ EverGrandeCity_SidneysRoom_EventScript_1A0693:: @ 81A0693
 	applymovement 255, EverGrandeCity_SidneysRoom_Movement_1A0853
 	waitmovement 0
 	playse 8
-	setmaptile 6, 1, 836, 0
-	setmaptile 6, 2, 837, 0
-	setmaptile 0, 2, 734, 1
-	setmaptile 1, 2, 733, 1
-	setmaptile 2, 2, 734, 1
-	setmaptile 3, 2, 733, 1
-	setmaptile 4, 2, 734, 1
-	setmaptile 8, 2, 733, 1
-	setmaptile 9, 2, 734, 1
-	setmaptile 10, 2, 733, 1
-	setmaptile 11, 2, 734, 1
-	setmaptile 12, 2, 733, 1
+	setmetatile 6, 1, 836, 0
+	setmetatile 6, 2, 837, 0
+	setmetatile 0, 2, 734, 1
+	setmetatile 1, 2, 733, 1
+	setmetatile 2, 2, 734, 1
+	setmetatile 3, 2, 733, 1
+	setmetatile 4, 2, 734, 1
+	setmetatile 8, 2, 733, 1
+	setmetatile 9, 2, 734, 1
+	setmetatile 10, 2, 733, 1
+	setmetatile 11, 2, 734, 1
+	setmetatile 12, 2, 733, 1
 	special DrawWholeMapView
 	return
 
@@ -2589,12 +2589,12 @@ EverGrandeCity_SidneysRoom_EventScript_1A0710:: @ 81A0710
 	applymovement 255, EverGrandeCity_SidneysRoom_Movement_1A0847
 	waitmovement 0
 	playse 52
-	setmaptile 5, 12, 518, 1
-	setmaptile 6, 12, 518, 1
-	setmaptile 7, 12, 518, 1
-	setmaptile 5, 13, 526, 1
-	setmaptile 6, 13, 526, 1
-	setmaptile 7, 13, 526, 1
+	setmetatile 5, 12, 518, 1
+	setmetatile 6, 12, 518, 1
+	setmetatile 7, 12, 518, 1
+	setmetatile 5, 13, 526, 1
+	setmetatile 6, 13, 526, 1
+	setmetatile 7, 13, 526, 1
 	special DrawWholeMapView
 	return
 
@@ -2602,36 +2602,36 @@ EverGrandeCity_DrakesRoom_EventScript_1A0757:: @ 81A0757
 EverGrandeCity_GlaciasRoom_EventScript_1A0757:: @ 81A0757
 EverGrandeCity_PhoebesRoom_EventScript_1A0757:: @ 81A0757
 EverGrandeCity_SidneysRoom_EventScript_1A0757:: @ 81A0757
-	setmaptile 6, 1, 836, 0
-	setmaptile 6, 2, 837, 0
-	setmaptile 5, 12, 518, 1
-	setmaptile 6, 12, 518, 1
-	setmaptile 7, 12, 518, 1
-	setmaptile 5, 13, 526, 1
-	setmaptile 6, 13, 526, 1
-	setmaptile 7, 13, 526, 1
-	setmaptile 0, 2, 734, 1
-	setmaptile 1, 2, 733, 1
-	setmaptile 2, 2, 734, 1
-	setmaptile 3, 2, 733, 1
-	setmaptile 4, 2, 734, 1
-	setmaptile 8, 2, 733, 1
-	setmaptile 9, 2, 734, 1
-	setmaptile 10, 2, 733, 1
-	setmaptile 11, 2, 734, 1
-	setmaptile 12, 2, 733, 1
+	setmetatile 6, 1, 836, 0
+	setmetatile 6, 2, 837, 0
+	setmetatile 5, 12, 518, 1
+	setmetatile 6, 12, 518, 1
+	setmetatile 7, 12, 518, 1
+	setmetatile 5, 13, 526, 1
+	setmetatile 6, 13, 526, 1
+	setmetatile 7, 13, 526, 1
+	setmetatile 0, 2, 734, 1
+	setmetatile 1, 2, 733, 1
+	setmetatile 2, 2, 734, 1
+	setmetatile 3, 2, 733, 1
+	setmetatile 4, 2, 734, 1
+	setmetatile 8, 2, 733, 1
+	setmetatile 9, 2, 734, 1
+	setmetatile 10, 2, 733, 1
+	setmetatile 11, 2, 734, 1
+	setmetatile 12, 2, 733, 1
 	return
 
 EverGrandeCity_DrakesRoom_EventScript_1A07FA:: @ 81A07FA
 EverGrandeCity_GlaciasRoom_EventScript_1A07FA:: @ 81A07FA
 EverGrandeCity_PhoebesRoom_EventScript_1A07FA:: @ 81A07FA
 EverGrandeCity_SidneysRoom_EventScript_1A07FA:: @ 81A07FA
-	setmaptile 5, 12, 518, 1
-	setmaptile 6, 12, 518, 1
-	setmaptile 7, 12, 518, 1
-	setmaptile 5, 13, 526, 1
-	setmaptile 6, 13, 526, 1
-	setmaptile 7, 13, 526, 1
+	setmetatile 5, 12, 518, 1
+	setmetatile 6, 12, 518, 1
+	setmetatile 7, 12, 518, 1
+	setmetatile 5, 13, 526, 1
+	setmetatile 6, 13, 526, 1
+	setmetatile 7, 13, 526, 1
 	return
 
 SlateportCity_Movement_1A0831:: @ 81A0831
@@ -3281,7 +3281,7 @@ gUnknown_081A14B8:: @ 81A14B8
 EventScript_1A14CA::
 	message UnknownString_81A1141
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	special sub_8081924
 	waitstate
 	fadescreen 1
@@ -3630,9 +3630,9 @@ gUnknown_081A2C51:: @ 81A2C51
 	special sub_80BB63C
 	compare RESULT, 1
 	goto_if_eq EventScript_1A2E45
-	checkpokemove MOVE_SECRET_POWER
-	setfieldeffect 0, RESULT
-	getmovename 1, MOVE_SECRET_POWER
+	checkpartymove MOVE_SECRET_POWER
+	setfieldeffectargument 0, RESULT
+	buffermovename 1, MOVE_SECRET_POWER
 	compare 0x8007, 1
 	goto_if_eq EventScript_1A2CB0
 	compare 0x8007, 2
@@ -3651,7 +3651,7 @@ EventScript_1A2CB0:
 	lockall
 	compare RESULT, 6
 	goto_if_eq EventScript_1A2CF1
-	getpartypokename 0, RESULT
+	bufferpartymonnick 0, RESULT
 	msgbox UnknownString_8198F34, 5
 	compare RESULT, 0
 	goto_if_eq EventScript_1A2F3A
@@ -3682,7 +3682,7 @@ EventScript_1A2D08:
 	lockall
 	compare RESULT, 6
 	goto_if_eq EventScript_1A2D49
-	getpartypokename 0, RESULT
+	bufferpartymonnick 0, RESULT
 	msgbox UnknownString_81A197B, 5
 	compare RESULT, 0
 	goto_if_eq EventScript_1A2F3A
@@ -3713,7 +3713,7 @@ EventScript_1A2D60:
 	lockall
 	compare RESULT, 6
 	goto_if_eq EventScript_1A2DA1
-	getpartypokename 0, RESULT
+	bufferpartymonnick 0, RESULT
 	msgbox UnknownString_81A1A4B, 5
 	compare RESULT, 0
 	goto_if_eq EventScript_1A2F3A
@@ -3799,10 +3799,10 @@ EventScript_1A2E38:
 	end
 
 EventScript_1A2E45:
-	checkpokemove MOVE_SECRET_POWER
+	checkpartymove MOVE_SECRET_POWER
 	compare RESULT, 6
 	goto_if_eq EventScript_1A2EF7
-	setfieldeffect 0, RESULT
+	setfieldeffectargument 0, RESULT
 	setorcopyvar 0x8004, RESULT
 	lockall
 	special GetSecretBaseNearbyMapName
@@ -3819,8 +3819,8 @@ EventScript_1A2E45:
 	msgbox UnknownString_81A3CC9, 5
 	compare RESULT, 0
 	goto_if_eq EventScript_1A2F3A
-	getpartypokename 0, 0x8004
-	getmovename 1, MOVE_SECRET_POWER
+	bufferpartymonnick 0, 0x8004
+	buffermovename 1, MOVE_SECRET_POWER
 	msgbox UsedCutRockSmashText, 4
 	closemessage
 	closemessage
@@ -4805,8 +4805,8 @@ BattleTower_Lobby_EventScript_1AE30F:: @ 81AE30F
 	.include "data/text/magma_summit.inc"
 
 gUnknown_081B694A:: @ 81B694A
-	animdarklevel 1
-	setdarklevel 1
+	animateflash 1
+	setflashradius 1
 	end
 
 	.include "data/scripts/players_house.inc"
@@ -4960,7 +4960,7 @@ gUnknown_081C6C02:: @ 81C6C02
 @ 81C6C1D
 	lockall
 	braillemessage Underwater_SealedChamber_Braille_1C533D
-	waitbutton
+	waitbuttonpress
 	erasebox 0, 0, 29, 19
 	releaseall
 	end

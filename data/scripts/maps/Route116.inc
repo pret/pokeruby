@@ -43,7 +43,7 @@ Route116_EventScript_150A7B:: @ 8150A7B
 
 Route116_EventScript_150A94:: @ 8150A94
 	setflag FLAG_MET_DEVON_EMPLOYEE
-	giveitem ITEM_REPEAT_BALL
+	giveitem_std ITEM_REPEAT_BALL
 	compare RESULT, 0
 	goto_if_eq Route116_EventScript_150B12
 	msgbox Route116_Text_1707B8, 4

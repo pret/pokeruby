@@ -23,12 +23,12 @@ AncientTomb_MapScript1_15EFE0:: @ 815EFE0
 	end
 
 AncientTomb_EventScript_15EFEA:: @ 815EFEA
-	setmaptile 7, 19, 553, 1
-	setmaptile 8, 19, 553, 1
-	setmaptile 9, 19, 553, 1
-	setmaptile 7, 20, 565, 1
-	setmaptile 8, 20, 565, 1
-	setmaptile 9, 20, 565, 1
+	setmetatile 7, 19, 553, 1
+	setmetatile 8, 19, 553, 1
+	setmetatile 9, 19, 553, 1
+	setmetatile 7, 20, 565, 1
+	setmetatile 8, 20, 565, 1
+	setmetatile 9, 20, 565, 1
 	return
 
 AncientTomb_EventScript_15F021:: @ 815F021
@@ -36,7 +36,7 @@ AncientTomb_EventScript_15F021:: @ 815F021
 	checkflag FLAG_SYS_BRAILLE_FLY
 	goto_if_eq AncientTomb_EventScript_15F038
 	braillemessage AncientTomb_Braille_1C552E
-	waitbutton
+	waitbuttonpress
 	erasebox 0, 0, 29, 19
 	releaseall
 	end
@@ -49,7 +49,7 @@ AncientTomb_EventScript_15F038:: @ 815F038
 AncientTomb_EventScript_15F042:: @ 815F042
 	lockall
 	braillemessage AncientTomb_Braille_1C552E
-	waitbutton
+	waitbuttonpress
 	erasebox 0, 0, 29, 19
 	releaseall
 	end
@@ -58,9 +58,9 @@ AncientTomb_EventScript_15F050:: @ 815F050
 	lock
 	faceplayer
 	waitse
-	playpokecry SPECIES_REGISTEEL, 2
+	playmoncry SPECIES_REGISTEEL, 2
 	delay 40
-	waitpokecry
+	waitmoncry
 	setwildbattle SPECIES_REGISTEEL, 40, ITEM_NONE
 	setflag FLAG_HIDE_REGISTEEL
 	setflag FLAG_SYS_CTRL_OBJ_DELETE

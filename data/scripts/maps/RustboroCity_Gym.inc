@@ -26,7 +26,7 @@ RustboroCity_Gym_EventScript_1578FE:: @ 81578FE
 	end
 
 RustboroCity_Gym_EventScript_15793C:: @ 815793C
-	giveitem ITEM_TM39
+	giveitem_std ITEM_TM39
 	compare RESULT, 0
 	goto_if_eq RustboroCity_Gym_EventScript_1A029B
 	setflag FLAG_RECEIVED_TM39

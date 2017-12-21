@@ -420,7 +420,7 @@ Route110_EventScript_14FE8A:: @ 814FE8A
 	end
 
 Route110_EventScript_14FEA5:: @ 814FEA5
-	giveitem ITEM_ITEMFINDER
+	giveitem_std ITEM_ITEMFINDER
 	return
 
 Route110_EventScript_14FEB2:: @ 814FEB2

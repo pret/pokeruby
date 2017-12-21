@@ -67,18 +67,18 @@ gScriptCmdTable:: @ 814AE30
 	.4byte ScrCmd_setdivewarp             @ 0x40
 	.4byte ScrCmd_setholewarp             @ 0x41
 	.4byte ScrCmd_getplayerxy             @ 0x42
-	.4byte ScrCmd_countpokemon            @ 0x43
-	.4byte ScrCmd_additem                 @ 0x44
-	.4byte ScrCmd_removeitem              @ 0x45
+	.4byte ScrCmd_getpartysize            @ 0x43
+	.4byte ScrCmd_giveitem                @ 0x44
+	.4byte ScrCmd_takeitem                @ 0x45
 	.4byte ScrCmd_checkitemspace          @ 0x46
 	.4byte ScrCmd_checkitem               @ 0x47
 	.4byte ScrCmd_checkitemtype           @ 0x48
-	.4byte ScrCmd_addpcitem               @ 0x49
+	.4byte ScrCmd_givepcitem              @ 0x49
 	.4byte ScrCmd_checkpcitem             @ 0x4A
-	.4byte ScrCmd_adddecor                @ 0x4B
-	.4byte ScrCmd_removedecor             @ 0x4C
-	.4byte ScrCmd_hasdecor                @ 0x4D
-	.4byte ScrCmd_checkdecor              @ 0x4E
+	.4byte ScrCmd_givedecoration          @ 0x4B
+	.4byte ScrCmd_takedecoration          @ 0x4C
+	.4byte ScrCmd_checkdecor              @ 0x4D
+	.4byte ScrCmd_checkdecorspace         @ 0x4E
 	.4byte ScrCmd_applymovement           @ 0x4F
 	.4byte ScrCmd_applymovement_at        @ 0x50
 	.4byte ScrCmd_waitmovement            @ 0x51
@@ -88,14 +88,14 @@ gScriptCmdTable:: @ 814AE30
 	.4byte ScrCmd_addobject               @ 0x55
 	.4byte ScrCmd_addobject_at            @ 0x56
 	.4byte ScrCmd_setobjectxy             @ 0x57
-	.4byte ScrCmd_showobject              @ 0x58
-	.4byte ScrCmd_hideobject              @ 0x59
+	.4byte ScrCmd_showobjectat            @ 0x58
+	.4byte ScrCmd_hideobjectat            @ 0x59
 	.4byte ScrCmd_faceplayer              @ 0x5A
 	.4byte ScrCmd_turnobject              @ 0x5B
 	.4byte ScrCmd_trainerbattle           @ 0x5C
-	.4byte ScrCmd_battlebegin             @ 0x5D
-	.4byte ScrCmd_ontrainerbattleend      @ 0x5E
-	.4byte ScrCmd_ontrainerbattleendgoto  @ 0x5F
+	.4byte ScrCmd_trainerbattlebegin      @ 0x5D
+	.4byte ScrCmd_gotopostbattlescript    @ 0x5E
+	.4byte ScrCmd_gotobeatenscript        @ 0x5F
 	.4byte ScrCmd_checktrainerflag        @ 0x60
 	.4byte ScrCmd_settrainerflag          @ 0x61
 	.4byte ScrCmd_cleartrainerflag        @ 0x62
@@ -109,7 +109,7 @@ gScriptCmdTable:: @ 814AE30
 	.4byte ScrCmd_lock                    @ 0x6A
 	.4byte ScrCmd_releaseall              @ 0x6B
 	.4byte ScrCmd_release                 @ 0x6C
-	.4byte ScrCmd_waitbutton              @ 0x6D
+	.4byte ScrCmd_waitbuttonpress         @ 0x6D
 	.4byte ScrCmd_yesnobox                @ 0x6E
 	.4byte ScrCmd_multichoice             @ 0x6F
 	.4byte ScrCmd_multichoicedefault      @ 0x70
@@ -117,29 +117,29 @@ gScriptCmdTable:: @ 814AE30
 	.4byte ScrCmd_drawbox                 @ 0x72
 	.4byte ScrCmd_erasebox                @ 0x73
 	.4byte ScrCmd_drawboxtext             @ 0x74
-	.4byte ScrCmd_drawpokepic             @ 0x75
-	.4byte ScrCmd_erasepokepic            @ 0x76
+	.4byte ScrCmd_drawmonpic              @ 0x75
+	.4byte ScrCmd_erasemonpic             @ 0x76
 	.4byte ScrCmd_drawcontestwinner       @ 0x77
 	.4byte ScrCmd_braillemessage          @ 0x78
-	.4byte ScrCmd_givepoke                @ 0x79
+	.4byte ScrCmd_givemon                 @ 0x79
 	.4byte ScrCmd_giveegg                 @ 0x7A
-	.4byte ScrCmd_setpokemove             @ 0x7B
-	.4byte ScrCmd_checkpokemove           @ 0x7C
-	.4byte ScrCmd_getspeciesname          @ 0x7D
-	.4byte ScrCmd_getfirstpartypokename   @ 0x7E
-	.4byte ScrCmd_getpartypokename        @ 0x7F
-	.4byte ScrCmd_getitemname             @ 0x80
-	.4byte ScrCmd_getdecorname            @ 0x81
-	.4byte ScrCmd_getmovename             @ 0x82
-	.4byte ScrCmd_getnumberstring         @ 0x83
-	.4byte ScrCmd_getstdstring            @ 0x84
-	.4byte ScrCmd_getstring               @ 0x85
+	.4byte ScrCmd_setmonmove              @ 0x7B
+	.4byte ScrCmd_checkpartymove          @ 0x7C
+	.4byte ScrCmd_bufferspeciesname       @ 0x7D
+	.4byte ScrCmd_bufferleadmonspeciesname @ 0x7E
+	.4byte ScrCmd_bufferpartymonnick      @ 0x7F
+	.4byte ScrCmd_bufferitemname          @ 0x80
+	.4byte ScrCmd_bufferdecorationname    @ 0x81
+	.4byte ScrCmd_buffermovename          @ 0x82
+	.4byte ScrCmd_buffernumberstring      @ 0x83
+	.4byte ScrCmd_bufferstdstring         @ 0x84
+	.4byte ScrCmd_bufferstring            @ 0x85
 	.4byte ScrCmd_pokemart                @ 0x86
-	.4byte ScrCmd_pokemartdecor           @ 0x87
-	.4byte ScrCmd_pokemartbp              @ 0x88
+	.4byte ScrCmd_pokemartdecoration      @ 0x87
+	.4byte ScrCmd_pokemartdecoration2     @ 0x88
 	.4byte ScrCmd_playslotmachine         @ 0x89
-	.4byte ScrCmd_plantberrytree          @ 0x8A
-	.4byte ScrCmd_choosecontestpkmn       @ 0x8B
+	.4byte ScrCmd_setberrytree            @ 0x8A
+	.4byte ScrCmd_choosecontestmon        @ 0x8B
 	.4byte ScrCmd_startcontest            @ 0x8C
 	.4byte ScrCmd_showcontestresults      @ 0x8D
 	.4byte ScrCmd_contestlinktransfer     @ 0x8E
@@ -152,21 +152,21 @@ gScriptCmdTable:: @ 814AE30
 	.4byte ScrCmd_updatemoneybox          @ 0x95
 	.4byte ScrCmd_getpricereduction       @ 0x96
 	.4byte ScrCmd_fadescreen              @ 0x97
-	.4byte ScrCmd_fadescreendelay         @ 0x98
-	.4byte ScrCmd_setdarklevel            @ 0x99
-	.4byte ScrCmd_animdarklevel           @ 0x9A
+	.4byte ScrCmd_fadescreenspeed         @ 0x98
+	.4byte ScrCmd_setflashradius          @ 0x99
+	.4byte ScrCmd_animateflash            @ 0x9A
 	.4byte ScrCmd_messageautoscroll       @ 0x9B
 	.4byte ScrCmd_dofieldeffect           @ 0x9C
-	.4byte ScrCmd_setfieldeffect          @ 0x9D
+	.4byte ScrCmd_setfieldeffectargument  @ 0x9D
 	.4byte ScrCmd_waitfieldeffect         @ 0x9E
-	.4byte ScrCmd_sethealplace            @ 0x9F
+	.4byte ScrCmd_setrespawn              @ 0x9F
 	.4byte ScrCmd_checkplayergender       @ 0xA0
-	.4byte ScrCmd_playpokecry             @ 0xA1
-	.4byte ScrCmd_setmaptile              @ 0xA2
+	.4byte ScrCmd_playmoncry              @ 0xA1
+	.4byte ScrCmd_setmetatile             @ 0xA2
 	.4byte ScrCmd_resetweather            @ 0xA3
 	.4byte ScrCmd_setweather              @ 0xA4
 	.4byte ScrCmd_doweather               @ 0xA5
-	.4byte ScrCmd_tileeffect              @ 0xA6
+	.4byte ScrCmd_setstepcallback         @ 0xA6
 	.4byte ScrCmd_setmaplayoutindex       @ 0xA7
 	.4byte ScrCmd_setobjectpriority       @ 0xA8
 	.4byte ScrCmd_resetobjectpriority     @ 0xA9
@@ -190,14 +190,14 @@ gScriptCmdTable:: @ 814AE30
 	.4byte ScrCmd_vgoto_if                @ 0xBB
 	.4byte ScrCmd_vcall_if                @ 0xBC
 	.4byte ScrCmd_vmessage                @ 0xBD
-	.4byte ScrCmd_vloadword                @ 0xBE
-	.4byte ScrCmd_vgetstring              @ 0xBF
+	.4byte ScrCmd_vloadptr                @ 0xBE
+	.4byte ScrCmd_vbufferstring           @ 0xBF
 	.4byte ScrCmd_showcoinsbox            @ 0xC0
 	.4byte ScrCmd_hidecoinsbox            @ 0xC1
 	.4byte ScrCmd_updatecoinsbox          @ 0xC2
 	.4byte ScrCmd_incrementgamestat       @ 0xC3
 	.4byte ScrCmd_setescapewarp           @ 0xC4
-	.4byte ScrCmd_waitpokecry             @ 0xC5
+	.4byte ScrCmd_waitmoncry              @ 0xC5
 
 gScriptCmdTableEnd::
 	.4byte ScrCmd_nop

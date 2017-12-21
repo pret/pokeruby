@@ -10,7 +10,7 @@ MossdeepCity_StevensHouse_MapScript1_15A9D5:: @ 815A9D5
 	end
 
 MossdeepCity_StevensHouse_EventScript_15A9DF:: @ 815A9DF
-	setmaptile 6, 4, 753, 1
+	setmetatile 6, 4, 753, 1
 	return
 
 MossdeepCity_StevensHouse_MapScript1_15A9E9:: @ 815A9E9
@@ -39,7 +39,7 @@ MossdeepCity_StevensHouse_EventScript_15AA0B:: @ 815AA0B
 	applymovement 1, MossdeepCity_StevensHouse_Movement_15AA6E
 	waitmovement 0
 	msgbox MossdeepCity_StevensHouse_Text_18DA77, 4
-	giveitem ITEM_HM08
+	giveitem_std ITEM_HM08
 	setflag FLAG_RECEIVED_HM08
 	setflag FLAG_OMIT_DIVE_FROM_STEVEN_LETTER
 	msgbox MossdeepCity_StevensHouse_Text_18DB22, 4
@@ -74,7 +74,7 @@ MossdeepCity_StevensHouse_EventScript_15AA7C:: @ 815AA7C
 	msgbox MossdeepCity_StevensHouse_Text_18DD12, 5
 	compare RESULT, 0
 	goto_if_eq MossdeepCity_StevensHouse_EventScript_15AAE6
-	countpokemon
+	getpartysize
 	compare RESULT, 6
 	goto_if_eq MossdeepCity_StevensHouse_EventScript_15AADC
 	copyvar 0x8004, RESULT
@@ -83,8 +83,8 @@ MossdeepCity_StevensHouse_EventScript_15AA7C:: @ 815AA7C
 	message MossdeepCity_StevensHouse_Text_18DD61
 	waitfanfare
 	waitmessage
-	givepoke SPECIES_BELDUM, 5, ITEM_NONE, 0x0, 0x0, 0
-	getspeciesname 1, SPECIES_BELDUM
+	givemon SPECIES_BELDUM, 5, ITEM_NONE, 0x0, 0x0, 0
+	bufferspeciesname 1, SPECIES_BELDUM
 	msgbox MossdeepCity_StevensHouse_Text_1A1102, 5
 	compare RESULT, 1
 	call_if 1, MossdeepCity_StevensHouse_EventScript_1A0678
@@ -125,6 +125,6 @@ MossdeepCity_StevensHouse_EventScript_15AB16:: @ 815AB16
 	end
 
 MossdeepCity_StevensHouse_EventScript_15AB20:: @ 815AB20
-	giveitem ITEM_HM08, 1, 1
+	giveitem_std ITEM_HM08, 1, 1
 	setflag FLAG_RECEIVED_HM08
 	end

@@ -18,31 +18,31 @@ MauvilleCity_Gym_EventScript_156491:: @ 8156491
 	end
 
 MauvilleCity_Gym_EventScript_15649B:: @ 815649B
-	setmaptile 4, 7, 560, 0
-	setmaptile 4, 8, 568, 0
-	setmaptile 5, 7, 561, 0
-	setmaptile 5, 8, 569, 0
-	setmaptile 3, 8, 578, 1
-	setmaptile 3, 9, 538, 0
-	setmaptile 3, 10, 593, 0
-	setmaptile 1, 10, 546, 0
-	setmaptile 1, 11, 554, 1
-	setmaptile 2, 10, 547, 0
-	setmaptile 2, 11, 555, 1
-	setmaptile 4, 10, 546, 0
-	setmaptile 4, 11, 554, 1
-	setmaptile 5, 10, 547, 0
-	setmaptile 5, 11, 555, 1
-	setmaptile 6, 11, 578, 1
-	setmaptile 6, 12, 538, 0
-	setmaptile 6, 13, 593, 0
-	setmaptile 3, 11, 577, 1
-	setmaptile 3, 12, 585, 1
-	setmaptile 3, 13, 592, 1
-	setmaptile 4, 13, 560, 0
-	setmaptile 4, 14, 568, 0
-	setmaptile 5, 13, 561, 0
-	setmaptile 5, 14, 569, 0
+	setmetatile 4, 7, 560, 0
+	setmetatile 4, 8, 568, 0
+	setmetatile 5, 7, 561, 0
+	setmetatile 5, 8, 569, 0
+	setmetatile 3, 8, 578, 1
+	setmetatile 3, 9, 538, 0
+	setmetatile 3, 10, 593, 0
+	setmetatile 1, 10, 546, 0
+	setmetatile 1, 11, 554, 1
+	setmetatile 2, 10, 547, 0
+	setmetatile 2, 11, 555, 1
+	setmetatile 4, 10, 546, 0
+	setmetatile 4, 11, 554, 1
+	setmetatile 5, 10, 547, 0
+	setmetatile 5, 11, 555, 1
+	setmetatile 6, 11, 578, 1
+	setmetatile 6, 12, 538, 0
+	setmetatile 6, 13, 593, 0
+	setmetatile 3, 11, 577, 1
+	setmetatile 3, 12, 585, 1
+	setmetatile 3, 13, 592, 1
+	setmetatile 4, 13, 560, 0
+	setmetatile 4, 14, 568, 0
+	setmetatile 5, 13, 561, 0
+	setmetatile 5, 14, 569, 0
 	end
 
 MauvilleCity_Gym_EventScript_15657D:: @ 815657D
@@ -96,7 +96,7 @@ MauvilleCity_Gym_EventScript_1565DB:: @ 81565DB
 	end
 
 MauvilleCity_Gym_EventScript_15661D:: @ 815661D
-	giveitem ITEM_TM34
+	giveitem_std ITEM_TM34
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_Gym_EventScript_1A029B
 	msgbox MauvilleCity_Gym_Text_180E76, 4

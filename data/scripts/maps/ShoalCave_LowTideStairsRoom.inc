@@ -9,7 +9,7 @@ ShoalCave_LowTideStairsRoom_MapScript1_15E39D:: @ 815E39D
 ShoalCave_LowTideStairsRoom_EventScript_15E3A3:: @ 815E3A3
 	checkflag FLAG_HIDE_TOOK_SHOAL_SALT_3
 	goto_if_eq ShoalCave_LowTideStairsRoom_EventScript_15E3B6
-	setmaptile 11, 11, 856, 1
+	setmetatile 11, 11, 856, 1
 	return
 
 ShoalCave_LowTideStairsRoom_EventScript_15E3B6:: @ 815E3B6
@@ -19,10 +19,10 @@ ShoalCave_LowTideStairsRoom_EventScript_15E3B7:: @ 815E3B7
 	lockall
 	checkflag FLAG_HIDE_TOOK_SHOAL_SALT_3
 	goto_if_eq ShoalCave_LowTideStairsRoom_EventScript_15E3E9
-	giveitem ITEM_SHOAL_SALT
+	giveitem_std ITEM_SHOAL_SALT
 	compare RESULT, 0
 	goto_if_eq ShoalCave_LowTideStairsRoom_EventScript_1A029B
-	setmaptile 11, 11, 858, 0
+	setmetatile 11, 11, 858, 0
 	special DrawWholeMapView
 	setflag FLAG_HIDE_TOOK_SHOAL_SALT_3
 	releaseall
