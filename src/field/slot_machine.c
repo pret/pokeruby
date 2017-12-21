@@ -1,5 +1,6 @@
 #include "global.h"
 #include "constants/songs.h"
+#include "strings2.h"
 #include "random.h"
 #include "sound.h"
 #include "main.h"
@@ -387,6 +388,19 @@ bool8 sub_8101E3C(struct Task *task)
             eSlotMachine->state = 21;
         }
     }
+    return FALSE;
+}
+
+void sub_8101F2C(const u8 *str)
+{
+    MenuDisplayMessageBox();
+    MenuPrint(str, 2, 15);
+}
+
+bool8 sub_8101F44(struct Task *task)
+{
+    sub_8101F2C(gOtherText_DontHaveThreeCoins);
+    eSlotMachine->state = 7;
     return FALSE;
 }
 

@@ -5,36 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8101F2C
-sub_8101F2C: @ 8101F2C
-	push {r4,lr}
-	adds r4, r0, 0
-	bl MenuDisplayMessageBox
-	adds r0, r4, 0
-	movs r1, 0x2
-	movs r2, 0xF
-	bl MenuPrint
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8101F2C
-
-	thumb_func_start sub_8101F44
-sub_8101F44: @ 8101F44
-	push {lr}
-	ldr r0, _08101F58 @ =gOtherText_DontHaveThreeCoins
-	bl sub_8101F2C
-	ldr r1, _08101F5C @ =gSharedMem
-	movs r0, 0x7
-	strb r0, [r1]
-	movs r0, 0
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08101F58: .4byte gOtherText_DontHaveThreeCoins
-_08101F5C: .4byte gSharedMem
-	thumb_func_end sub_8101F44
-
 	thumb_func_start sub_8101F60
 sub_8101F60: @ 8101F60
 	push {lr}
