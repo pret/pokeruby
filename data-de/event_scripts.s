@@ -2300,7 +2300,7 @@ SouthernIsland_Exterior_EventScript_1A047C:: @ 81A047C
 	compare FACING, 3
 	call_if 1, BattleTower_Outside_EventScript_160B3A
 	delay 30
-	hideobjectat 255, 0, 0
+	hideobjectat 255, MAP_PETALBURG_CITY
 	call BattleTower_Outside_EventScript_1A040E
 	return
 
