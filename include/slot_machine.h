@@ -13,7 +13,7 @@ struct SlotMachineEwramStruct {
     /*0x0B*/ u8 unk0B;
     /*0x0C*/ s16 coins;
     /*0x0E*/ u16 unk0E;
-    /*0x10*/ u16 unk10;
+    /*0x10*/ s16 unk10;
     /*0x12*/ s16 bet;
     /*0x14*/ u8 filler14[4];
     /*0x18*/ s16 unk18;

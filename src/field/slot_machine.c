@@ -54,6 +54,8 @@ static void sub_8101D24(u8 taskId);
 
 void sub_8102484(void);
 void sub_81024F0(void);
+void sub_81027A0(void);
+void sub_8102A24(void);
 void sub_8102DA8(void);
 void sub_8102DEC(u8 a0);
 void sub_8102E1C(u8 a0);
@@ -61,7 +63,9 @@ bool8 sub_8102E40(u8 a0);
 void sub_8103C14(u8 a0);
 void sub_8103D50(u8 a0);
 void sub_8103DC8(void);
+void sub_8103F70(void);
 void sub_8104048(void);
+void sub_8104064(u8 a0);
 void sub_810423C(u8 a0);
 void sub_810430C(void);
 bool8 sub_810432C(void);
@@ -503,6 +507,71 @@ bool8 sub_8102090(struct Task *task)
             eSlotMachine->state = 14;
         }
         return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_81020C8(struct Task *task)
+{
+    eSlotMachine->unk04 &= 0xc0;
+    sub_81027A0();
+    if (eSlotMachine->unk0A)
+    {
+        eSlotMachine->unk0A--;
+        eSlotMachine->unk0B++;
+    }
+    if (eSlotMachine->unk08)
+    {
+        eSlotMachine->state = 15;
+        sub_8102A24();
+        sub_8103F70();
+        if ((eSlotMachine->unk10 -= eSlotMachine->unk0E) < 0)
+        {
+            eSlotMachine->unk10 = 0;
+        }
+        if (eSlotMachine->unk08 & 0x180)
+        {
+            PlayFanfare(BGM_ME_B_BIG);
+            sub_8104CAC(6);
+        }
+        else if (eSlotMachine->unk08 & 0x40)
+        {
+            PlayFanfare(BGM_ME_B_BIG);
+            sub_8104CAC(5);
+        }
+        else
+        {
+            PlayFanfare(BGM_ME_B_SMALL);
+            sub_8104CAC(2);
+        }
+        if (eSlotMachine->unk08 & 0x1c0)
+        {
+            eSlotMachine->unk04 &= 0x3f;
+            if (eSlotMachine->unk08 & 0x180)
+            {
+                eSlotMachine->unk0A = 0;
+                eSlotMachine->unk0B = 0;
+                eSlotMachine->unk03 = 0;
+                if (eSlotMachine->unk08 & 0x100)
+                {
+                    eSlotMachine->unk03 = 1;
+                }
+            }
+        }
+        if (eSlotMachine->unk08 & 0x20 && eSlotMachine->unk02 < 16)
+        {
+            eSlotMachine->unk02++;
+            sub_8104064(eSlotMachine->unk02);
+        }
+    }
+    else
+    {
+        sub_8104CAC(3);
+        eSlotMachine->state = 20;
+        if ((eSlotMachine->unk10 += eSlotMachine->bet) > 9999)
+        {
+            eSlotMachine->unk10 = 9999;
+        }
     }
     return FALSE;
 }
