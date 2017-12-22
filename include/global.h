@@ -230,12 +230,6 @@ struct RamScript
     struct RamScriptData data;
 };
 
-struct SB1_2EFC_Struct
-{
-    u16 var;
-    u8 unknown[0x1E];
-};
-
 struct EasyChatPair
 {
     u16 unk0_0:7;
@@ -530,26 +524,6 @@ union MauvilleMan
     u8 filler[0x40];  // needed to pad out the struct
 };
 
-struct Unk_SB_Access_Struct1
-{
-    u8 filler0[0xF8];
-    struct SB1_2EFC_Struct sb1_2EFC_struct[5];
-};
-
-struct Unk_SB_Access_Struct2
-{
-    /*0x0000*/ struct SB1_2EFC_Struct sb1_2EFC_struct2[12]; // each is 0x20
-    /*0x2F84*/ u8 filler[0x18];
-};
-
-/*0x2E04*/
-typedef union SB_Struct
-{
-    struct Unk_SB_Access_Struct1 unkSB1;
-    struct Unk_SB_Access_Struct2 unkSB2;
-} SB_Struct;
-// size is 0x198
-
 struct UnknownSaveStruct2ABC
 {
     u8 val0;
@@ -634,12 +608,12 @@ struct RecordMixingGift
 
 struct ContestWinner
 {
-    /*0x00*/ u32 unk0;  // personality
-    /*0x04*/ u32 unk4;  // otId
-    /*0x08*/ u16 unk8;  // species
-    /*0x0A*/ u8 unkA;
-    /*0x0B*/ u8 unkB[0x16-0xB];
-    /*0x16*/ u8 unk16[0x20-0x16];
+    /*0x00*/ u32 personality;  // personality
+    /*0x04*/ u32 otId;  // otId
+    /*0x08*/ u16 species;  // species
+    /*0x0A*/ u8 contestCategory;
+    /*0x0B*/ u8 nickname[0x16-0xB];
+    /*0x16*/ u8 trainerName[0x20-0x16];
 };
 
 // there should be enough flags for all 412 slots
@@ -720,14 +694,8 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x2D90*/ u8 filler_2D90[0x4];
     /*0x2D94*/ union MauvilleMan mauvilleMan;
     /*0x2DD4*/ struct EasyChatPair easyChatPairs[5]; //Dewford trend [0] and some other stuff
-#if 0
-    // I don't think this is right.
-    /*0x2DFC*/ u8 filler_2DFC[0x8];
-    /*0x2E04*/ SB_Struct sbStruct;
-#else
-	/*0x2DFC*/ struct ContestWinner contestWinners[4];
+	/*0x2DFC*/ struct ContestWinner contestWinners[4];  // how long is this?
     /*0x2E7C*/ u8 filler_2E7C[0x2F9C-0x2E7C];
-#endif
     /*0x2F9C*/ struct DayCare daycare;
     /*0x30B8*/ struct LinkBattleRecord linkBattleRecords[5];
     /*0x3108*/ u8 filler_3108[8];

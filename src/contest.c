@@ -5574,7 +5574,7 @@ bool8 sub_80B2A7C(u8 a)
     {
         shared15DE0.personality = gContestMons[i].personality;
         shared15DE0.otId = gContestMons[i].otId;
-        shared15DE0.unk8 = gContestMons[i].species;
+        shared15DE0.species = gContestMons[i].species;
         StringCopy(shared15DE0.nickname, gContestMons[i].nickname);
         if (gIsLinkContest & 1)
             StringCopy(shared15DE0.trainerName, gLinkPlayers[i].name);

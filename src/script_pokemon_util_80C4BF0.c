@@ -111,7 +111,7 @@ void sub_80C4C78(void)
         break;
     }
 
-    returnVar = gSaveBlock1.sbStruct.unkSB2.sb1_2EFC_struct2[var].var;
+    returnVar = gSaveBlock1.contestWinners[var].species;
 
     if(returnVar == 0)
         gSpecialVar_0x8004 = returnVar;
@@ -144,7 +144,7 @@ u8 sub_80C4D50(void)
     int i;
 
     for (i = 0; i < 5; i++)
-        if (gSaveBlock1.sbStruct.unkSB2.sb1_2EFC_struct2[i + 8].var)
+        if (gSaveBlock1.contestWinners[i + 8].species != 0)
             retVar++;
 
     return retVar;

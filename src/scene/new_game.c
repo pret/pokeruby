@@ -24,6 +24,7 @@
 #include "rtc.h"
 #include "script.h"
 #include "secret_base.h"
+#include "text.h"
 #include "tv.h"
 
 EWRAM_DATA u8 gDifferentSaveFile = 0;
@@ -35,14 +36,10 @@ extern u16 gSaveFileStatus;
 
 extern u8 gUnknown_0819FA81[];
 
-const struct SB1_2EFC_Struct gUnknown_08216604 =
+static const struct ContestWinner sEmptyContestWinner =
 {
-    0x0000,
-    {
-        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF,
-        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF,
-        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    }
+    .nickname = {EOS},
+    .trainerName = {EOS},
 };
 
 void write_word_to_mem(u32 var, u8 *dataPtr)
@@ -89,8 +86,7 @@ void sub_8052DA8(void)
 
     sub_80B2D1C();
     for (i = 0; i < 5; i++)
-        gSaveBlock1.contestWinners[i] = gUnknown_08216604;
-        //gSaveBlock1.sbStruct.unkSB1.sb1_2EFC_struct[i] = gUnknown_08216604;
+        gSaveBlock1.contestWinners[8 + i] = sEmptyContestWinner;
 }
 
 void ZeroBattleTowerData(void)

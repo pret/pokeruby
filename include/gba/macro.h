@@ -86,8 +86,8 @@
 
 #define DmaCopyLarge(dmaNum, src, dest, size, block, bit) \
 {                                                         \
-    const u8 *_src = src;                                 \
-    u8 *_dest = dest;                                     \
+    const void *_src = src;                               \
+    void *_dest = dest;                                   \
     u32 _size = size;                                     \
     while (1)                                             \
     {                                                     \
@@ -105,7 +105,7 @@
 
 #define DmaClearLarge(dmaNum, dest, size, block, bit) \
 {                                                     \
-	const u8 *_dest = dest;                           \
+	const void *_dest = dest;                         \
     u32 _size = size;                                 \
     while (1)                                         \
     {                                                 \
