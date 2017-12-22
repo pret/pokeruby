@@ -924,18 +924,18 @@ _080C8C18:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080C8C7A
-	ldr r0, _080C8C2C @ =gUnknown_02038690
+	ldr r0, _080C8C2C @ =gContestFinalStandings
 	movs r1, 0x4
 	bl sub_80C857C
 	b _080C8C4C
 	.align 2, 0
-_080C8C2C: .4byte gUnknown_02038690
+_080C8C2C: .4byte gContestFinalStandings
 _080C8C30:
 	bl sub_80C85D8
 	lsls r0, 24
 	cmp r0, 0
 	beq _080C8C7A
-	ldr r0, _080C8C60 @ =gUnknown_02038690
+	ldr r0, _080C8C60 @ =gContestFinalStandings
 	ldr r1, _080C8C64 @ =gUnknown_0203869B
 	ldrb r1, [r1]
 	lsls r1, 8
@@ -955,7 +955,7 @@ _080C8C4C:
 	strh r1, [r0, 0x8]
 	b _080C8C7A
 	.align 2, 0
-_080C8C60: .4byte gUnknown_02038690
+_080C8C60: .4byte gContestFinalStandings
 _080C8C64: .4byte gUnknown_0203869B
 _080C8C68: .4byte gBlockRecvBuffer
 _080C8C6C: .4byte gTasks

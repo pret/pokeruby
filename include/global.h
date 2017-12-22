@@ -42,8 +42,8 @@ fndec\
 #define POKEMON_NAME_LENGTH 10
 #define OT_NAME_LENGTH 7
 
-#define min(a, b) (a >= b ? a : b)
-#define max(a, b) (a <= b ? a : b)
+#define min(a, b) ((a) <= (b) ? (a) : (b))
+#define max(a, b) ((a) >= (b) ? (a) : (b))
 
 // why does GF hate 2d arrays
 #define MULTI_DIM_ARR(x, dim, y) ((x) * dim + (y))
@@ -51,9 +51,9 @@ fndec\
 // dim access enums
 enum
 {
-	B_8 = 1,
-	B_16 = 2,
-	B_32 = 4
+    B_8 = 1,
+    B_16 = 2,
+    B_32 = 4
 };
 
 // There are many quirks in the source code which have overarching behavioral differences from
@@ -229,12 +229,6 @@ struct RamScript
 {
     u32 checksum;
     struct RamScriptData data;
-};
-
-struct SB1_2EFC_Struct
-{
-    u16 var;
-    u8 unknown[0x1E];
 };
 
 struct EasyChatPair
@@ -531,26 +525,6 @@ union MauvilleMan
     u8 filler[0x40];  // needed to pad out the struct
 };
 
-struct Unk_SB_Access_Struct1
-{
-    u8 filler0[0xF8];
-    struct SB1_2EFC_Struct sb1_2EFC_struct[5];
-};
-
-struct Unk_SB_Access_Struct2
-{
-    /*0x0000*/ struct SB1_2EFC_Struct sb1_2EFC_struct2[12]; // each is 0x20
-    /*0x2F84*/ u8 filler[0x18];
-};
-
-/*0x2E04*/
-typedef union SB_Struct
-{
-    struct Unk_SB_Access_Struct1 unkSB1;
-    struct Unk_SB_Access_Struct2 unkSB2;
-} SB_Struct;
-// size is 0x198
-
 struct UnknownSaveStruct2ABC
 {
     u8 val0;
@@ -633,6 +607,16 @@ struct RecordMixingGift
     struct RecordMixingGiftData data;
 };
 
+struct ContestWinner
+{
+    /*0x00*/ u32 personality;  // personality
+    /*0x04*/ u32 otId;  // otId
+    /*0x08*/ u16 species;  // species
+    /*0x0A*/ u8 contestCategory;
+    /*0x0B*/ u8 nickname[0x16-0xB];
+    /*0x16*/ u8 trainerName[0x20-0x16];
+};
+
 // there should be enough flags for all 412 slots
 // each slot takes up 8 flags
 // if the value is not divisible by 8, we need to account for the reminder as well
@@ -711,8 +695,8 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x2D90*/ u8 filler_2D90[0x4];
     /*0x2D94*/ union MauvilleMan mauvilleMan;
     /*0x2DD4*/ struct EasyChatPair easyChatPairs[5]; //Dewford trend [0] and some other stuff
-    /*0x2DFC*/ u8 filler_2DFC[0x8];
-    /*0x2E04*/ SB_Struct sbStruct;
+    /*0x2DFC*/ struct ContestWinner contestWinners[8];
+    /*0x2EFC*/ struct ContestWinner museumPortraits[5];
     /*0x2F9C*/ struct DayCare daycare;
     /*0x30B8*/ struct LinkBattleRecord linkBattleRecords[5];
     /*0x3108*/ u8 filler_3108[8];

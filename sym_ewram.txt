@@ -476,7 +476,7 @@ gUnknown_02038680: @ 2038680
 gUnknown_02038688: @ 2038688
 	.space 0x8
 
-gUnknown_02038690: @ 2038690
+gContestFinalStandings: @ 2038690
 	.space 0x4
 
 gUnknown_02038694: @ 2038694
