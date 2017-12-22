@@ -4,38 +4,6 @@
 	.section .rodata
 
 	.align 2
-gUnknown_083ECAAC:: @ 83ECAAC
-	.4byte sub_8101D5C
-	.4byte sub_8101D8C
-	.4byte sub_8101DB0
-	.4byte sub_8101DF4
-	.4byte sub_8101E10
-	.4byte sub_8101E3C
-	.4byte sub_8101F44
-	.4byte sub_8101F60
-	.4byte sub_8101F88
-	.4byte sub_8101FA4
-	.4byte sub_8102008
-	.4byte sub_8102034
-	.4byte sub_8102058
-	.4byte sub_8102090
-	.4byte sub_81020C8
-	.4byte sub_81021E0
-	.4byte sub_81021FC
-	.4byte sub_8102264
-	.4byte sub_81022A0
-	.4byte sub_81022CC
-	.4byte sub_81022F0
-	.4byte sub_8102318
-	.4byte sub_8102344
-	.4byte sub_810239C
-	.4byte sub_81023B8
-	.4byte sub_81023E0
-	.4byte sub_81023FC
-	.4byte sub_8102424
-	.4byte sub_8102460
-
-	.align 2
 gUnknown_083ECB20:: @ 83ECB20
 	.4byte sub_8102A9C
 	.4byte sub_8102AD0

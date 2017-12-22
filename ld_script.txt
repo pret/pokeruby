@@ -554,6 +554,7 @@ SECTIONS {
         src/field/region_map.o(.rodata);
         data/cute_sketch.o(.rodata);
         src/field/decoration.o(.rodata);
+        src/field/slot_machine.o(.rodata);
         data/slot_machine.o(.rodata);
         src/scene/contest_painting.o(.rodata);
         src/battle/battle_ai.o(.rodata);

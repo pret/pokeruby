@@ -53,6 +53,35 @@ static void sub_8101CD4(void);
 static void sub_8101CEC(void);
 static void sub_8101D04(void);
 static void sub_8101D24(u8 taskId);
+static bool8 sub_8101D5C(struct Task *task);
+static bool8 sub_8101D8C(struct Task *task);
+static bool8 sub_8101DB0(struct Task *task);
+static bool8 sub_8101DF4(struct Task *task);
+static bool8 sub_8101E10(struct Task *task);
+static bool8 sub_8101E3C(struct Task *task);
+static bool8 sub_8101F44(struct Task *task);
+static bool8 sub_8101F60(struct Task *task);
+static bool8 sub_8101F88(struct Task *task);
+static bool8 sub_8101FA4(struct Task *task);
+static bool8 sub_8102008(struct Task *task);
+static bool8 sub_8102034(struct Task *task);
+static bool8 sub_8102058(struct Task *task);
+static bool8 sub_8102090(struct Task *task);
+static bool8 sub_81020C8(struct Task *task);
+static bool8 sub_81021E0(struct Task *task);
+static bool8 sub_81021FC(struct Task *task);
+static bool8 sub_8102264(struct Task *task);
+static bool8 sub_81022A0(struct Task *task);
+static bool8 sub_81022CC(struct Task *task);
+static bool8 sub_81022F0(struct Task *task);
+static bool8 sub_8102318(struct Task *task);
+static bool8 sub_8102344(struct Task *task);
+static bool8 sub_810239C(struct Task *task);
+static bool8 sub_81023B8(struct Task *task);
+static bool8 sub_81023E0(struct Task *task);
+static bool8 sub_81023FC(struct Task *task);
+static bool8 sub_8102424(struct Task *task);
+static bool8 sub_8102460(struct Task *task);
 
 void sub_8102484(void);
 void sub_81024F0(void);
@@ -87,6 +116,38 @@ void sub_81063C0(void);
 void sub_8106448(void);
 void sub_81064B8(void);
 u16 dp15_jump_random_unknown(void);
+
+static bool8 (*const gUnknown_083ECAAC[])(struct Task *task) = {
+    sub_8101D5C,
+    sub_8101D8C,
+    sub_8101DB0,
+    sub_8101DF4,
+    sub_8101E10,
+    sub_8101E3C,
+    sub_8101F44,
+    sub_8101F60,
+    sub_8101F88,
+    sub_8101FA4,
+    sub_8102008,
+    sub_8102034,
+    sub_8102058,
+    sub_8102090,
+    sub_81020C8,
+    sub_81021E0,
+    sub_81021FC,
+    sub_8102264,
+    sub_81022A0,
+    sub_81022CC,
+    sub_81022F0,
+    sub_8102318,
+    sub_8102344,
+    sub_810239C,
+    sub_81023B8,
+    sub_81023E0,
+    sub_81023FC,
+    sub_8102424,
+    sub_8102460
+};
 
 void PlaySlotMachine(u8 arg0, void *ptr)
 {
@@ -295,8 +356,6 @@ static void sub_8101CEC(void)
     sub_8101D04();
 }
 
-extern bool8 (*const gUnknown_083ECAAC[])(struct Task *task);
-
 static void sub_8101D04(void)
 {
     sub_8101D24(CreateTask(sub_8101D24, 0));
@@ -307,7 +366,7 @@ static void sub_8101D24(u8 taskId)
     while (gUnknown_083ECAAC[eSlotMachine->state](gTasks + taskId));
 }
 
-bool8 sub_8101D5C(struct Task *task)
+static bool8 sub_8101D5C(struct Task *task)
 {
     BeginNormalPaletteFade(-1, 0, 16, 0, 0);
     sub_810423C(eSlotMachine->unk02);
@@ -315,7 +374,7 @@ bool8 sub_8101D5C(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_8101D8C(struct Task *task)
+static bool8 sub_8101D8C(struct Task *task)
 {
     if (!gPaletteFade.active)
     {
@@ -324,7 +383,7 @@ bool8 sub_8101D8C(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_8101DB0(struct Task *task)
+static bool8 sub_8101DB0(struct Task *task)
 {
     eSlotMachine->unk0E = 0;
     eSlotMachine->bet = 0;
@@ -343,7 +402,7 @@ bool8 sub_8101DB0(struct Task *task)
     return TRUE;
 }
 
-bool8 sub_8101DF4(struct Task *task)
+static bool8 sub_8101DF4(struct Task *task)
 {
     if (sub_8104E18())
     {
@@ -352,7 +411,7 @@ bool8 sub_8101DF4(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_8101E10(struct Task *task)
+static bool8 sub_8101E10(struct Task *task)
 {
     sub_8104CAC(0);
     eSlotMachine->state = 5;
@@ -363,7 +422,7 @@ bool8 sub_8101E10(struct Task *task)
     return TRUE;
 }
 
-bool8 sub_8101E3C(struct Task *task)
+static bool8 sub_8101E3C(struct Task *task)
 {
     s16 i;
 
@@ -417,14 +476,14 @@ void sub_8101F2C(const u8 *str)
     MenuPrint(str, 2, 15);
 }
 
-bool8 sub_8101F44(struct Task *task)
+static bool8 sub_8101F44(struct Task *task)
 {
     sub_8101F2C(gOtherText_DontHaveThreeCoins);
     eSlotMachine->state = 7;
     return FALSE;
 }
 
-bool8 sub_8101F60(struct Task *task)
+static bool8 sub_8101F60(struct Task *task)
 {
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
@@ -434,7 +493,7 @@ bool8 sub_8101F60(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_8101F88(struct Task *task)
+static bool8 sub_8101F88(struct Task *task)
 {
     if (sub_8104AEC())
     {
@@ -443,7 +502,7 @@ bool8 sub_8101F88(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_8101FA4(struct Task *task)
+static bool8 sub_8101FA4(struct Task *task)
 {
     sub_8102484();
     sub_8104DA4();
@@ -469,7 +528,7 @@ bool8 sub_8101FA4(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_8102008(struct Task *task)
+static bool8 sub_8102008(struct Task *task)
 {
     if (sub_810432C())
     {
@@ -480,7 +539,7 @@ bool8 sub_8102008(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_8102034(struct Task *task)
+static bool8 sub_8102034(struct Task *task)
 {
     if (++task->data[0] >= 30)
     {
@@ -490,7 +549,7 @@ bool8 sub_8102034(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_8102058(struct Task *task)
+static bool8 sub_8102058(struct Task *task)
 {
     if (gMain.newKeys & A_BUTTON)
     {
@@ -502,7 +561,7 @@ bool8 sub_8102058(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_8102090(struct Task *task)
+static bool8 sub_8102090(struct Task *task)
 {
     if (!sub_8102E40(eSlotMachine->unk18))
     {
@@ -517,7 +576,7 @@ bool8 sub_8102090(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_81020C8(struct Task *task)
+static bool8 sub_81020C8(struct Task *task)
 {
     eSlotMachine->unk04 &= 0xc0;
     sub_81027A0();
@@ -582,7 +641,7 @@ bool8 sub_81020C8(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_81021E0(struct Task *task)
+static bool8 sub_81021E0(struct Task *task)
 {
     if (sub_8102A44())
     {
@@ -591,7 +650,7 @@ bool8 sub_81021E0(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_81021FC(struct Task *tas)
+static bool8 sub_81021FC(struct Task *task)
 {
     if (sub_8103FA0())
     {
@@ -618,7 +677,7 @@ bool8 sub_81021FC(struct Task *tas)
     return FALSE;
 }
 
-bool8 sub_8102264(struct Task *task)
+static bool8 sub_8102264(struct Task *task)
 {
     if (!sub_81040C8())
     {
@@ -636,7 +695,7 @@ bool8 sub_8102264(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_81022A0(struct Task *task)
+static bool8 sub_81022A0(struct Task *task)
 {
     if (sub_8104E18())
     {
@@ -649,7 +708,7 @@ bool8 sub_81022A0(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_81022CC(struct Task *task)
+static bool8 sub_81022CC(struct Task *task)
 {
     sub_8103D8C(0);
     sub_8103D8C(1);
@@ -658,7 +717,7 @@ bool8 sub_81022CC(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_81022F0(struct Task *task)
+static bool8 sub_81022F0(struct Task *task)
 {
     if (++task->data[1] > 64)
     {
@@ -668,7 +727,7 @@ bool8 sub_81022F0(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_8102318(struct Task *task)
+static bool8 sub_8102318(struct Task *task)
 {
     sub_8101F2C(gOtherText_QuitGamePrompt);
     DisplayYesNoMenu(21, 7, 1);
@@ -677,7 +736,7 @@ bool8 sub_8102318(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_8102344(struct Task *task)
+static bool8 sub_8102344(struct Task *task)
 {
     s8 input = ProcessMenuInputNoWrap_();
     if (input == 0)
@@ -697,14 +756,14 @@ bool8 sub_8102344(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_810239C(struct Task *task)
+static bool8 sub_810239C(struct Task *task)
 {
     sub_8101F2C(gOtherText_MaxCoins);
     eSlotMachine->state = 24;
     return FALSE;
 }
 
-bool8 sub_81023B8(struct Task *task)
+static bool8 sub_81023B8(struct Task *task)
 {
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
@@ -714,14 +773,14 @@ bool8 sub_81023B8(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_81023E0(struct Task *task)
+static bool8 sub_81023E0(struct Task *task)
 {
     sub_8101F2C(gOtherText_OutOfCoins);
     eSlotMachine->state = 26;
     return FALSE;
 }
 
-bool8 sub_81023FC(struct Task *task)
+static bool8 sub_81023FC(struct Task *task)
 {
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
@@ -731,7 +790,7 @@ bool8 sub_81023FC(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_8102424(struct Task *task)
+static bool8 sub_8102424(struct Task *task)
 {
     gSaveBlock1.coins = eSlotMachine->coins;
     BeginNormalPaletteFade(-1, 0, 0, 16, 0);
@@ -739,7 +798,7 @@ bool8 sub_8102424(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_8102460(struct Task *task)
+static bool8 sub_8102460(struct Task *task)
 {
     if (!gPaletteFade.active)
     {
