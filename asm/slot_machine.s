@@ -5,44 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8102578
-sub_8102578: @ 8102578
-	push {r4-r6,lr}
-	movs r5, 0
-	ldr r6, _081025B4 @ =gUnknown_083ECD16
-_0810257E:
-	bl Random
-	movs r2, 0xFF
-	ldr r3, _081025B8 @ =gSharedMem
-	lsls r1, r5, 16
-	asrs r4, r1, 16
-	lsls r1, r4, 1
-	adds r1, r4
-	lsls r1, 1
-	ldrb r3, [r3, 0x1]
-	adds r1, r3
-	adds r1, r6
-	ldrb r1, [r1]
-	ands r2, r0
-	cmp r1, r2
-	bgt _081025AA
-	adds r0, r4, 0x1
-	lsls r0, 16
-	lsrs r5, r0, 16
-	asrs r0, 16
-	cmp r0, 0x2
-	ble _0810257E
-_081025AA:
-	lsls r0, r5, 24
-	lsrs r0, 24
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_081025B4: .4byte gUnknown_083ECD16
-_081025B8: .4byte gSharedMem
-	thumb_func_end sub_8102578
-
 	thumb_func_start sub_81025BC
 sub_81025BC: @ 81025BC
 	push {r4-r7,lr}

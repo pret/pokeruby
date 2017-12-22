@@ -84,8 +84,8 @@ static bool8 sub_8102424(struct Task *task);
 static bool8 sub_8102460(struct Task *task);
 static void sub_8102484(void);
 static void sub_81024F0(void);
-bool8 sub_8102540(void);
-u8 sub_8102578(void);
+static bool8 sub_8102540(void);
+static u8 sub_8102578(void);
 u8 sub_81025BC(void);
 void sub_81027A0(void);
 void sub_8102A24(void);
@@ -864,7 +864,7 @@ u8 sub_810250C(u8 a0)
     return 0;
 }
 
-bool8 sub_8102540(void)
+static bool8 sub_8102540(void)
 {
     u8 rval = Random();
     if (gUnknown_083ECD04[eSlotMachine->unk01][eSlotMachine->bet - 1] > rval)
@@ -874,21 +874,60 @@ bool8 sub_8102540(void)
     return FALSE;
 }
 
-//extern const u8 gUnknown_083ECD16[][3];
-//
-//u8 sub_8102578(void)
-//{
-//    s16 i;
-//
-//    for (i = 0; i < 3; i++)
-//    {
-//        if ((Random() & 0xff) <= (int)gUnknown_083ECD16[i][eSlotMachine->unk01])
-//        {
-//            break;
-//        }
-//    }
-//    return i;
-//}
+extern const u8 gUnknown_083ECD16[][3];
+
+#ifdef NONMATCHING
+static u8 sub_8102578(void)
+{
+    s16 i;
+
+    for (i = 0; i < 3; i++)
+    {
+        if ((Random() & 0xff) <= gUnknown_083ECD16[i][eSlotMachine->unk01])
+        {
+            break;
+        }
+    }
+    return i;
+}
+#else
+static __attribute__((naked)) u8 sub_8102578(void)
+{
+    asm_unified("\tpush {r4-r6,lr}\n"
+                    "\tmovs r5, 0\n"
+                    "\tldr r6, =gUnknown_083ECD16\n"
+                    "_0810257E:\n"
+                    "\tbl Random\n"
+                    "\tmovs r2, 0xFF\n"
+                    "\tldr r3, =gSharedMem\n"
+                    "\tlsls r1, r5, 16\n"
+                    "\tasrs r4, r1, 16\n"
+                    "\tlsls r1, r4, 1\n"
+                    "\tadds r1, r4\n"
+                    "\tlsls r1, 1\n"
+                    "\tldrb r3, [r3, 0x1]\n"
+                    "\tadds r1, r3\n"
+                    "\tadds r1, r6\n"
+                    "\tldrb r1, [r1]\n"
+                    "\tands r2, r0\n"
+                    "\tcmp r1, r2\n"
+                    "\tbgt _081025AA\n"
+                    "\tadds r0, r4, 0x1\n"
+                    "\tlsls r0, 16\n"
+                    "\tlsrs r5, r0, 16\n"
+                    "\tasrs r0, 16\n"
+                    "\tcmp r0, 0x2\n"
+                    "\tble _0810257E\n"
+                    "_081025AA:\n"
+                    "\tlsls r0, r5, 24\n"
+                    "\tlsrs r0, 24\n"
+                    "\tpop {r4-r6}\n"
+                    "\tpop {r1}\n"
+                    "\tbx r1\n"
+                    "\t.align 2, 0\n"
+                    "\t.pool");
+}
+#endif
 
 asm(".section .text_a");
 
