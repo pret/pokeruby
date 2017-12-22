@@ -3,21 +3,11 @@
 
 #include "sprite.h"
 
-#define REG_BGnCNT_BITFIELD(n) (*(struct BGCntrlBitfield *)REG_ADDR_BG##n##CNT)
+#define REG_BGnCNT_BITFIELD(n) (*(vBgCnt *)REG_ADDR_BG##n##CNT)
 #define REG_BG0CNT_BITFIELD REG_BGnCNT_BITFIELD(0)
 #define REG_BG1CNT_BITFIELD REG_BGnCNT_BITFIELD(1)
 #define REG_BG2CNT_BITFIELD REG_BGnCNT_BITFIELD(2)
 #define REG_BG3CNT_BITFIELD REG_BGnCNT_BITFIELD(3)
-
-struct BGCntrlBitfield
-{
-    volatile u16 priority:2;
-    volatile u16 charBaseBlock:2;
-    volatile u16 field_0_2:4;
-    volatile u16 field_1_0:5;
-    volatile u16 areaOverflowMode:1;
-    volatile u16 screenSize:2;
-};
 
 struct BattleAnimBackground
 {
@@ -46,6 +36,8 @@ struct UnknownStruct3
 
 extern void (*gAnimScriptCallback)(void);
 extern u8 gAnimScriptActive;
+extern u8 gHappinessMoveAnim;
+extern u8 gUnknown_0202F7C4;
 
 void ExecuteMoveAnim(u16 move);
 void DoMoveAnim(const u8 *const moveAnims[], u16 b, u8 c);

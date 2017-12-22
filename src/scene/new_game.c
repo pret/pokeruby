@@ -89,7 +89,8 @@ void sub_8052DA8(void)
 
     sub_80B2D1C();
     for (i = 0; i < 5; i++)
-        gSaveBlock1.sbStruct.unkSB1.sb1_2EFC_struct[i] = gUnknown_08216604;
+        gSaveBlock1.contestWinners[i] = gUnknown_08216604;
+        //gSaveBlock1.sbStruct.unkSB1.sb1_2EFC_struct[i] = gUnknown_08216604;
 }
 
 void ZeroBattleTowerData(void)

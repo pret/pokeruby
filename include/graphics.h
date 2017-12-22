@@ -48,6 +48,14 @@ extern const u8 gContest2Pal[];
 
 extern const u8 gMonFootprint_QuestionMark[];
 
+extern const u8 gContestNextTurnGfx[];
+extern const u8 gContestNextTurnNumbersGfx[];
+extern const u8 gContestNextTurnRandomGfx[];
+extern const u8 gBattleAnimSpriteSheet_264[];
+extern const u8 gBattleAnimSpritePalette_264[];
+extern const u8 gBattleAnimSpritePalette_265[];
+extern const u8 gBattleAnimSpritePalette_067[];
+extern const u8 gBattleAnimSpritePalette_068[];
 extern const u8 gContestApplauseGfx[];
 extern const u8 gContestApplauseMeterGfx[];
 extern const u16 gContestPal[];

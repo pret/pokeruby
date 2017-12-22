@@ -198,15 +198,9 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
 
 static void sub_807B06C(void)
 {
-    struct BGCntrlBitfield *regBgcnt1, *regBgcnt2;
-
     sub_800D6D4();
-
-    regBgcnt1 = (void*)(&REG_BG1CNT);
-    regBgcnt1->charBaseBlock = 0;
-
-    regBgcnt2 = (void*)(&REG_BG2CNT);
-    regBgcnt2->charBaseBlock = 0;
+    ((vBgCnt *)&REG_BG1CNT)->charBaseBlock = 0;
+    ((vBgCnt *)&REG_BG2CNT)->charBaseBlock = 0;
 }
 
 static bool8 LoadAppropiateBankSprite(u8 bank)

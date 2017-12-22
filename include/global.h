@@ -632,6 +632,16 @@ struct RecordMixingGift
     struct RecordMixingGiftData data;
 };
 
+struct ContestWinner
+{
+    /*0x00*/ u32 unk0;  // personality
+    /*0x04*/ u32 unk4;  // otId
+    /*0x08*/ u16 unk8;  // species
+    /*0x0A*/ u8 unkA;
+    /*0x0B*/ u8 unkB[0x16-0xB];
+    /*0x16*/ u8 unk16[0x20-0x16];
+};
+
 // there should be enough flags for all 412 slots
 // each slot takes up 8 flags
 // if the value is not divisible by 8, we need to account for the reminder as well
@@ -710,8 +720,14 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x2D90*/ u8 filler_2D90[0x4];
     /*0x2D94*/ union MauvilleMan mauvilleMan;
     /*0x2DD4*/ struct EasyChatPair easyChatPairs[5]; //Dewford trend [0] and some other stuff
+#if 0
+    // I don't think this is right.
     /*0x2DFC*/ u8 filler_2DFC[0x8];
     /*0x2E04*/ SB_Struct sbStruct;
+#else
+	/*0x2DFC*/ struct ContestWinner contestWinners[4];
+    /*0x2E7C*/ u8 filler_2E7C[0x2F9C-0x2E7C];
+#endif
     /*0x2F9C*/ struct DayCare daycare;
     /*0x30B8*/ struct LinkBattleRecord linkBattleRecords[5];
     /*0x3108*/ u8 filler_3108[8];

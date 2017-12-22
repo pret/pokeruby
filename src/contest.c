@@ -3,6 +3,7 @@
 #include "constants/map_objects.h"
 #include "constants/songs.h"
 #include "constants/species.h"
+#include "battle.h"
 #include "battle_anim.h"
 #include "blend_palette.h"
 #include "contest.h"
@@ -128,14 +129,15 @@ struct UnknownContestStruct1
     u8 unk16;
     u8 unk17;
     u8 unk18;
-    u8 unk19;
+    u8 unk19;  // turn number
     u8 unk1A;
     u8 unk1B;
 };
 
 struct UnknownContestStruct3
 {
-    u8 filler0[2];
+    u8 unk0;
+    u8 unk1;
     //u8 unk2_0:1;
     //u8 unk2_1:1;
     u8 unk2;  // maybe a bitfield
@@ -145,8 +147,8 @@ struct UnknownContestStruct3
 // possibly the same as UnknownContestStruct3?
 struct UnknownContestStruct4
 {
-    u8 unk0;
-    u8 unk1;
+    u8 unk0;  // sprite ID
+    u8 unk1;  // sprite ID
     u8 unk2_0:1;
     u8 unk2_1:1;
     u8 unk2_2:1;
@@ -174,6 +176,18 @@ struct UnknownContestStruct7
     u8 filler12[2];
 };
 
+struct UnknownContestStruct8
+{
+    u16 unk0;
+    u16 unk2;
+    u8 unk4_0:1;
+    u8 unk5;
+    u8 filler6[2];
+    u32 unk8;
+    u32 unkC;
+    u32 unk10;
+};
+
 #if 0
 struct Shared19260
 {
@@ -189,6 +203,7 @@ struct Shared19260
 #endif
 
 #define shared15800 (gSharedMem + 0x15800)
+#define shared15DE0 (*(struct ContestWinner *)(gSharedMem + 0x15DE0))
 #define shared16800 (gSharedMem + 0x16800)
 #define shared18000 (*(struct Shared18000 *)(gSharedMem + 0x18000))
 #define shared19204 (*(struct Shared19204 *)(gSharedMem + 0x19204))
@@ -198,12 +213,13 @@ struct Shared19260
 
 // These are separate structs because sub_80AC2CC requires that to match.
 #define shared19260_ ((struct UnknownContestStruct1 *)(gSharedMem + 0x19260))
-#define shared192D0 (gSharedMem + 0x192D0)
+//#define shared192D0 (gSharedMem + 0x192D0)
 #define shared192D0_ (*(struct UnknownContestStruct7 *)(gSharedMem + 0x192D0))
 #define shared192E4 (gSharedMem + 0x192E4)
 #define shared19328 (*(struct UnknownContestStruct5 *)(gSharedMem + 0x19328))
 #define shared19338 ((struct UnknownContestStruct4 *)(gSharedMem + 0x19338))
-#define shared19348 ((struct UnknownContestStruct3 *)(gSharedMem + 0x19348))
+//#define shared19348 ((struct UnknownContestStruct3 *)(gSharedMem + 0x19348))
+#define shared19348_ (*(struct UnknownContestStruct8 *)(gSharedMem + 0x19348))
 
 struct UnknownContestStruct6
 {
@@ -444,20 +460,27 @@ void sub_80B1DDC(void);
 void sub_80B1DFC(u8);
 void sub_80B1EA8(s8, s8);
 void sub_80B1F4C(u8);
-void sub_80B1FD0();
+void sub_80B1FD0(bool8);
+const u8 *sub_80B208C(u8);
 void sub_80B20C4(void);
-u8 sub_80B214C(u8);
+bool8 sub_80B214C(u8);
 void sub_80B2184(void);
 void sub_80B2280(void);
 void sub_80B237C(u8);
-void sub_80B25E4();
-u16 sub_80B2760();
+void sub_80B23BC(u8);
+void sub_80B2400(u8);
+void sub_80B253C(u8);
+void sub_80B25A4(u8);
+void sub_80B25E4(u8);
+void sub_80B26C8(u8);
+u16 sub_80B2760(u16);
 u16 sub_80B2778(u16);
-void sub_80B2790();
-void sub_80B28CC();
-void sub_80B28F0();
+void sub_80B2790(u8);
+void sub_80B28CC(int);
+void sub_80B28F0(u8);
 void sub_80B292C(void);
-void sub_80B29B4();
+void sub_80B2968(void);
+void sub_80B29B4(u16);
 
 
 void nullsub_89(u8 taskId)
@@ -469,6 +492,7 @@ void ResetLinkContestBoolean(void)
     gIsLinkContest = FALSE;
 }
 
+// Contest_ResetGpuRegs
 void sub_80AB1BC(void)
 {
     u16 savedIme;
@@ -539,6 +563,7 @@ void sub_80AB350(void)
     FillPalette(0x7E3F, 0xF3, 2);
 }
 
+// ClearContestVars
 void sub_80AB398(void)
 {
     s32 i;
@@ -569,6 +594,7 @@ void sub_80AB398(void)
     sub_80B159C();
 }
 
+// CB2_StartContest
 void sub_80AB47C(void)
 {
     switch (gMain.state)
@@ -906,7 +932,7 @@ void sub_80ABCDC(u8 taskId)
         u8 *r5 = sp8;
 
         if (shared19260_[gContestPlayerMonIndex].unk8 != 0
-         && sub_80B214C(gContestPlayerMonIndex) != 0
+         && sub_80B214C(gContestPlayerMonIndex)
          && AreMovesContestCombo(shared19260_[gContestPlayerMonIndex].unk8, r4)
          && shared19260_[gContestPlayerMonIndex].unk15_4)
         {
@@ -1151,7 +1177,7 @@ void sub_80AC2CC(u8 taskId)
     case 3:
         for (r6 = 0; r6 < 4; r6++)
             gBattleMonForms[r6] = 0;
-        memset(shared19348, 0, 20);
+        memset(&shared19348_, 0, sizeof(shared19348_));
         sub_80B28F0(shared19204.unk19215);
         spriteId = sub_80AE9FC(
           gContestMons[shared19204.unk19215].species,
@@ -1297,7 +1323,7 @@ void sub_80AC2CC(u8 taskId)
             gTasks[taskId].data[0] = 47;
         return;
     case 47:
-        sub_80B1FD0(1);
+        sub_80B1FD0(TRUE);
         gTasks[taskId].data[0] = 12;
         return;
     case 12:
@@ -1876,7 +1902,7 @@ void sub_80AD960(u8 taskId)
 
 void sub_80ADA1C(u8 taskId)
 {
-    sub_80B1FD0(0);
+    sub_80B1FD0(FALSE);
     gTasks[taskId].data[0] = 0;
     gTasks[taskId].data[1] = 0;
     gTasks[taskId].func = sub_80ADA4C;
@@ -2761,7 +2787,7 @@ void sub_80AEF50(void)
     }
 }
 
-u16 sub_80AEFE8(int unused, u8 b)
+u16 sub_80AEFE8(u8 unused, u8 b)
 {
     u16 var = 0;
 
@@ -3724,6 +3750,7 @@ void sub_80B0588(void)
         sub_80B05A4(i);
 }
 
+// TODO: Try to write this better
 void sub_80B05A4(u8 a)
 {
     u32 var;
@@ -4459,6 +4486,7 @@ void unref_sub_80B0EE8(s32 *a, s32 b)
     }
 }
 
+// something to do with contest NPC opponents, I think.
 void sub_80B0F28(u8 a)
 {
     u8 sp0[4];
@@ -4597,7 +4625,7 @@ void sub_80B114C(u8 a)
             shared19260_[a].unk2 += shared19260_[a].unkD;
         shared19260_[a].unk16 = 0;
         shared19260_[a].unk15_6 = 0;
-        if (sub_80B214C(a) != 0)
+        if (sub_80B214C(a))
         {
             bool8 r2 = AreMovesContestCombo(shared19260_[a].unk8, shared19260_[a].unk6);
 
@@ -4999,7 +5027,6 @@ void sub_80B1DFC(u8 taskId)
         register u32 r4 asm("r4") = taskId * 4;
 
         gTasks[taskId].data[10] = 0;
-        gTasks[taskId].data[10] = 0;
         if (gTasks[taskId].data[11] == 0)
         {
             {
@@ -5039,44 +5066,521 @@ void sub_80B1DFC(u8 taskId)
     }
 }
 
+#define tBlendColor data[0]
+#define tBlendCoeff data[1]
+
 void sub_80B1EA8(s8 a, s8 b)
 {
     u8 taskId = CreateTask(sub_80B1F4C, 10);
-    u16 r7;
-    u8 r5;
+    u16 blendColor;
+    u8 blendCoeff;
     u8 r3;
 
     if (a > 0)
     {
-        r7 = 0x237E;
+        blendColor = RGB(30, 27, 8);
         if (b > 0)
         {
-            r5 = 0;
+            blendCoeff = 0;
             r3 = shared19204.unk19217 * 3;
         }
         else
         {
-            r5 = shared19204.unk19217 * 3;
+            blendCoeff = shared19204.unk19217 * 3;
             r3 = 0;
         }
     }
     else
     {
-        r7 = 0;
+        blendColor = 0;
         if (b > 0)
         {
-            r5 = 0;
+            blendCoeff = 0;
             r3 = 12;
         }
         else
         {
-            r5 = 12;
+            blendCoeff = 12;
             r3 = 0;
         }
     }
-    gTasks[taskId].data[0] = r7;
-    gTasks[taskId].data[1] = r5;
+    gTasks[taskId].tBlendColor = blendColor;
+    gTasks[taskId].tBlendCoeff = blendCoeff;
     gTasks[taskId].data[2] = b;
     gTasks[taskId].data[3] = r3;
     shared19204.unk1920B_0 = 0;
+}
+
+void sub_80B1F4C(u8 taskId)
+{
+    if (gTasks[taskId].data[10]++ >= 0)
+    {
+        gTasks[taskId].data[10] = 0;
+        if (gTasks[taskId].data[2] > 0)
+            gTasks[taskId].tBlendCoeff++;
+        else
+            gTasks[taskId].tBlendCoeff--;
+        BlendPalette(17, 1, gTasks[taskId].tBlendCoeff, gTasks[taskId].tBlendColor);
+        BlendPalette(26, 1, gTasks[taskId].tBlendCoeff, gTasks[taskId].tBlendColor);
+        if (gTasks[taskId].tBlendCoeff == gTasks[taskId].data[3])
+        {
+            DestroyTask(taskId);
+            shared19204.unk1920B_0 = 0;
+        }
+    }
+}
+
+#undef tBlendColor
+#undef tBlendCoeff
+
+void sub_80B1FD0(bool8 a)
+{
+    s32 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        if (shared19260_[i].unk10_6 != 0 && a)
+        {
+            CpuCopy32(
+              sub_80B208C(i),
+              (void *)(VRAM + 0x10000 + (gSprites[shared19338[i].unk1].oam.tileNum + 5) * 32),
+              64);
+            gSprites[shared19338[i].unk1].pos1.y = gUnknown_083CA33C[gUnknown_02038696[i]];
+            gSprites[shared19338[i].unk1].invisible = FALSE;
+        }
+        else
+        {
+            gSprites[shared19338[i].unk1].invisible = TRUE;
+        }
+    }
+}
+
+// GetTurnNumberGfx
+const u8 *sub_80B208C(u8 a)
+{
+    if (shared19260_[a].unk10_6 != 1)
+        return gContestNextTurnRandomGfx;
+    else
+        return gContestNextTurnNumbersGfx + shared19260_[a].unk19 * 64;
+}
+
+void sub_80B20C4(void)
+{
+    s32 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        if (shared192D0_.unkD[i] != 0 && !sub_80AF59C(i))
+        {
+            u8 r4 = gUnknown_02038696[i] * 5 + 2;
+            u16 r0 = sub_80AEFE8(i, 3);
+
+            *(u16 *)(VRAM + 0xC000 + r4 * 64 + 0x28) = r0;
+            *(u16 *)(VRAM + 0xC000 + r4 * 64 + 0x2A) = r0 + 1;
+            *(u16 *)(VRAM + 0xC000 + (r4 + 1) * 64 + 0x28) = r0 + 16;
+            *(u16 *)(VRAM + 0xC000 + (r4 + 1) * 64 + 0x2A) = r0 + 17;
+            PlaySE(SE_C_PASI);
+        }
+    }
+}
+
+bool8 sub_80B214C(u8 a)
+{
+    if (shared19260_[a].unk15_0 || shared19260_[a].unkC_0)
+        return FALSE;
+    else
+        return TRUE;
+}
+
+void sub_80B2184(void)
+{
+    s32 i;
+
+    ((vBgCnt *)&REG_BG1CNT)->priority = 0;
+    ((vBgCnt *)&REG_BG1CNT)->screenSize = 1;
+    ((vBgCnt *)&REG_BG1CNT)->areaOverflowMode = 0;
+
+    gUnknown_030042C0 = DISPLAY_WIDTH;
+    gUnknown_030041B4 = DISPLAY_HEIGHT;
+    REG_BG1HOFS = DISPLAY_WIDTH;
+    REG_BG1VOFS = DISPLAY_HEIGHT;
+
+    DmaClear32(3, (void *)(VRAM + 0xF000), 0x1000);
+    LZDecompressVram(gUnknown_08D17C3C, (void *)(VRAM + 0xF000));
+
+    ((vBgCnt *)&REG_BG1CNT)->charBaseBlock = 0;
+
+    for (i = 0; i < 4; i++)
+    {
+        gSprites[shared19338[i].unk0].oam.priority = 1;
+        gSprites[shared19338[i].unk1].oam.priority = 1;
+    }
+
+    ((vBgCnt *)&REG_BG2CNT)->priority = 1;
+    ((vBgCnt *)&REG_BG0CNT)->priority = 1;
+    ((vBgCnt *)&REG_BG1CNT)->screenSize = 2;
+}
+
+void sub_80B2280(void)
+{
+    s32 i;
+
+    DmaClearLarge32(3, (void *)(VRAM + 0x8000), 0x2000, 0x1000);
+    DmaClear32(3, (void *)(VRAM + 0xF000), 0x1000);
+
+    gUnknown_030042C0 = 0;
+    gUnknown_030041B4 = 0;
+
+    ((vBgCnt *)&REG_BG1CNT)->priority = 1;
+    ((vBgCnt *)&REG_BG1CNT)->screenSize = 0;
+    ((vBgCnt *)&REG_BG1CNT)->areaOverflowMode = 0;
+    ((vBgCnt *)&REG_BG1CNT)->charBaseBlock = 2;
+
+    for (i = 0; i < 4; i++)
+    {
+        gSprites[shared19338[i].unk0].oam.priority = 0;
+        gSprites[shared19338[i].unk1].oam.priority = 0;
+    }
+}
+
+void sub_80B237C(u8 taskId)
+{
+    gUnknown_030042C0 = 0;
+    gUnknown_030041B4 = DISPLAY_HEIGHT;
+    PlaySE12WithPanning(SE_C_MAKU_D, 0);
+    gTasks[taskId].func = sub_80B23BC;
+}
+
+void sub_80B23BC(u8 taskId)
+{
+    gUnknown_030041B4 -= 7;
+    if (gUnknown_030041B4 < 0)
+        gUnknown_030041B4 = 0;
+    if (*(u16 *)&gUnknown_030041B4 == 0)  // Why cast?
+    {
+        gTasks[taskId].data[0] = 0;
+        gTasks[taskId].data[1] = 0;
+        gTasks[taskId].data[2] = 0;
+        gTasks[taskId].func = sub_80B2400;
+    }
+}
+
+void sub_80B2400(u8 taskId)
+{
+    s32 i;
+
+    switch (gTasks[taskId].data[0])
+    {
+    case 0:
+        for (i = 0; i < 4; i++)
+            shared19204.unk19218[i] = gUnknown_02038696[i];
+        sub_80AFA5C();
+        sub_80B0588();
+        sub_80AEF50();
+        sub_80B1118();
+        sub_80B1FD0(TRUE);
+        sub_80AFFA0();
+        gTasks[taskId].data[0] = 1;
+        break;
+    case 1:
+        if (gIsLinkContest & 1)
+        {
+            u8 taskId2;
+
+            shared19204.unk1920B_2 = 1;
+            if (sub_80AE074())
+                sub_80AF438();
+            taskId2 = CreateTask(sub_80C8C80, 0);
+            SetTaskFuncWithFollowupFunc(taskId2, sub_80C8C80, sub_80AD8DC);
+            sub_80AF860();
+            gTasks[taskId].data[0] = 2;
+        }
+        else
+        {
+            sub_80AF438();
+            gTasks[taskId].data[0] = 3;
+        }
+        break;
+    case 2:
+        if (!shared19204.unk1920B_2)
+            gTasks[taskId].data[0] = 3;
+        break;
+    case 3:
+        sub_80AF120();
+        sub_80AEB30();
+        gTasks[taskId].data[0] = 0;
+        gTasks[taskId].func = sub_80B253C;
+        break;
+    }
+}
+
+void sub_80B2508(u8 taskId)
+{
+    gUnknown_030041B4 += 7;
+    if (gUnknown_030041B4 > DISPLAY_HEIGHT)
+        gTasks[taskId].func = sub_80ADCDC;
+}
+
+void sub_80B253C(u8 taskId)
+{
+    if (gTasks[taskId].data[2] < 10)
+    {
+        gTasks[taskId].data[2]++;
+    }
+    else
+    {
+        if (gTasks[taskId].data[1] == 0)
+        {
+            if (gTasks[taskId].data[0] == 16)
+                gTasks[taskId].data[1]++;
+            else
+                gTasks[taskId].data[0]++;
+        }
+        else
+        {
+            if (gTasks[taskId].data[0] == 0)
+            {
+                gTasks[taskId].data[1] = 0;
+                gTasks[taskId].data[2] = 0;
+                gTasks[taskId].func = sub_80B25A4;
+            }
+            else
+            {
+                gTasks[taskId].data[0]--;
+            }
+        }
+    }
+}
+
+void sub_80B25A4(u8 taskId)
+{
+    if (gTasks[taskId].data[2] < 10)
+    {
+        gTasks[taskId].data[2]++;
+    }
+    else
+    {
+        gTasks[taskId].data[2] = 0;
+        PlaySE12WithPanning(SE_C_MAKU_U, 0);
+        gTasks[taskId].func = sub_80B2508;
+    }
+}
+
+void sub_80B25E4(u8 a)
+{
+    s32 i;
+    u8 taskId;
+
+    for (i = 0; i < 4; i++)
+    {
+        gSprites[shared19338[i].unk0].oam.matrixNum = AllocOamMatrix();
+        gSprites[shared19338[i].unk0].oam.affineMode = 1;
+        StartSpriteAffineAnim(&gSprites[shared19338[i].unk0], a);
+        if (a == 2)
+        {
+            AnimateSprite(&gSprites[shared19338[i].unk0]);
+            gSprites[shared19338[i].unk0].invisible = FALSE;
+        }
+    }
+    taskId = CreateTask(sub_80B26C8, 5);
+    gTasks[taskId].data[0] = a;
+    shared19204.unk1920B_1 = 1;
+}
+
+void sub_80B26C8(u8 taskId)
+{
+    s32 i;
+
+    if (gSprites[shared19338[0].unk0].affineAnimEnded)
+    {
+        if ((u8)gTasks[taskId].data[0] == 1)
+        {
+            for (i = 0; i < 4; i++)
+                gSprites[shared19338[i].unk0].invisible = TRUE;
+        }
+        for (i = 0; i < 4; i++)
+            FreeSpriteOamMatrix(&gSprites[shared19338[i].unk0]);
+        shared19204.unk1920B_1 = 0;
+        DestroyTask(taskId);
+    }
+}
+
+// SanitizeMove
+u16 sub_80B2760(u16 a)
+{
+    if (a > 354)
+        a = 1;
+    return a;
+}
+
+// SanitizeSpecies
+u16 sub_80B2778(u16 species)
+{
+    if (species >= NUM_SPECIES)
+        species = SPECIES_NONE;
+    return species;
+}
+
+void sub_80B2790(u8 a)
+{
+    s32 i;
+    u16 r5 = sub_80B2760(shared19260_[a].unk6);
+    u16 r7 = sub_80B2778(gContestMons[a].species);
+    u8 r5_2;
+
+    memset(&shared19348_, 0, sizeof(shared19348_));
+    battle_anim_clear_some_data();
+    for (i = 0; i < 4; i++)
+        gBattleMonForms[i] = 0;
+    switch (r5)
+    {
+    case 0xAE:
+        if (gBaseStats[r7].type1 == 7 || gBaseStats[r7].type2 == 7)
+            gUnknown_0202F7C4 = 0;
+        else
+            gUnknown_0202F7C4 = 1;
+        break;
+    case 0x90:
+    case 0x110:
+        r5_2 = shared19260_[a].unk1B;
+        shared19348_.unk2 = sub_80B2778(gContestMons[r5_2].species);
+        shared19348_.unk10 = gContestMons[r5_2].personality;
+        shared19348_.unk4_0 = 1;
+        break;
+    case 0xD8:
+        gHappinessMoveAnim = 0xFF;
+        break;
+    case 0xDA:
+        gHappinessMoveAnim = 0;
+        break;
+    case 0x4C:
+    case 0xD:
+    case 0x82:
+    case 0x8F:
+        if (shared19204.unk1925E == 0)
+        {
+            shared19204.unk1925E = 2;
+            gUnknown_0202F7C4 = 0;
+        }
+        else
+        {
+            gUnknown_0202F7C4 = 1;
+        }
+        break;
+    }
+    sub_80B2968();
+}
+
+void sub_80B28CC(int unused)
+{
+    memset(&shared19348_, 0, sizeof(shared19348_));
+    if (shared19204.unk1925E != 0)
+        shared19204.unk1925E--;
+}
+
+void sub_80B28F0(u8 a)
+{
+    shared19348_.unk5 = a;
+    shared19348_.unk0 = sub_80B2778(gContestMons[a].species);
+    shared19348_.unk8 = gContestMons[a].personality;
+    shared19348_.unkC = gContestMons[a].otId;
+}
+
+void sub_80B292C(void)
+{
+    gObjectBankIDs[3] = CreateInvisibleSpriteWithCallback(SpriteCallbackDummy);
+    InitSpriteAffineAnim(&gSprites[gObjectBankIDs[gBankTarget]]);
+    sub_80B2968();
+}
+
+void sub_80B2968(void)
+{
+    struct Sprite *sprite = &gSprites[gObjectBankIDs[3]];
+
+    sprite->pos2.x = 0;
+    sprite->pos2.y = 0;
+    sprite->pos1.x = sub_8077ABC(3, 0);
+    sprite->pos1.y = sub_8077ABC(3, 1);
+    sprite->invisible = TRUE;
+}
+
+void sub_80B29B4(u16 a)
+{
+    switch (gBattleMoves[a].target)
+    {
+    case F_TARGET_UNK2:
+    case F_TARGET_USER:
+        gBankTarget = 2;
+        break;
+    case F_TARGET_SELECTED_POKEMON:
+    case F_TARGET_RANDOM:
+    case F_TARGET_BOTH_ENEMIES:
+    case F_TARGET_ALL_EXCEPT_USER:
+    default:
+        gBankTarget = 3;
+        break;
+    }
+}
+
+// SaveContestWinner
+bool8 sub_80B2A7C(u8 a)
+{
+    s32 i;
+    u8 r7 = Random() % 3;
+
+    for (i = 0; i < 3; i++)
+    {
+        if (gUnknown_02038690[i] == 0)
+            break;
+    }
+    if (a == 0xFF && i != gContestPlayerMonIndex)
+        return FALSE;
+    //_080B2AD0
+    switch (gScriptContestCategory)
+    {
+    case 0:
+        r7 += 0;
+        break;
+    case 1:
+        r7 += 3;
+        break;
+    case 2:
+        r7 += 6;
+        break;
+    case 3:
+        r7 += 9;
+        break;
+    case 4:
+        r7 += 12;
+        break;
+    }
+    //_080B2B16
+    if (a != 0xFE)
+    {
+        u8 r4 = sub_80B2C4C(a, 1);
+
+        gSaveBlock1.contestWinners[r4].personality = gContestMons[i].personality;
+        gSaveBlock1.contestWinners[r4].species = gContestMons[i].species;
+        gSaveBlock1.contestWinners[r4].otId = gContestMons[i].otId;
+        StringCopy(gSaveBlock1.contestWinners[r4].nickname, gContestMons[i].nickname);
+        StringCopy(gSaveBlock1.contestWinners[r4].trainerName, gContestMons[i].trainerName);
+        if (a != 0xFF)
+            gSaveBlock1.contestWinners[r4].contestCategory = gScriptContestCategory;
+        else
+            gSaveBlock1.contestWinners[r4].contestCategory = r7;
+    }
+    //_080B2BC4
+    else
+    {
+        shared15DE0.personality = gContestMons[i].personality;
+        shared15DE0.otId = gContestMons[i].otId;
+        shared15DE0.unk8 = gContestMons[i].species;
+        StringCopy(shared15DE0.nickname, gContestMons[i].nickname);
+        if (gIsLinkContest & 1)
+            StringCopy(shared15DE0.trainerName, gLinkPlayers[i].name);
+        else
+            StringCopy(shared15DE0.trainerName, gContestMons[i].trainerName);
+        shared15DE0.contestCategory = r7;
+    }
+    return TRUE;
 }

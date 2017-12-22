@@ -3,6 +3,22 @@
 
 #include "sprite.h"
 
+#define F_TARGET_SELECTED_POKEMON 0
+#define F_TARGET_SPECIAL          (1 << 0)
+#define F_TARGET_UNK2             (1 << 1)
+#define F_TARGET_RANDOM           (1 << 2)
+#define F_TARGET_BOTH_ENEMIES     (1 << 3)
+#define F_TARGET_USER             (1 << 4)
+#define F_TARGET_ALL_EXCEPT_USER  (1 << 5)
+#define F_TARGET_ENEMY_SIDE       (1 << 6)
+
+#define F_MAKES_CONTACT           (1 << 0)
+#define F_AFFECTED_BY_PROTECT     (1 << 1)
+#define F_AFFECTED_BY_MAGIC_COAT  (1 << 2)
+#define F_AFFECTED_BY_SNATCH      (1 << 3)
+#define F_MIRROR_MOVE_COMPATIBLE  (1 << 4)
+#define F_AFFECTED_BY_KINGS_ROCK  (1 << 5)
+
 #define BATTLE_TYPE_DOUBLE          0x0001
 #define BATTLE_TYPE_LINK            0x0002
 #define BATTLE_TYPE_WILD            0x0004

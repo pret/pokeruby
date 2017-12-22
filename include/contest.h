@@ -71,7 +71,7 @@ void sub_80AE82C(u8);
 u8 sub_80AEB1C(u16);
 void sub_80AF668(void);
 void sub_80B0F28(u8);
-int sub_80B2A7C(u8);  //Don't know return type size
+bool8 sub_80B2A7C(u8);
 u8 sub_80B2C4C(u8, u8);
 void sub_80B2D1C(void);
 
