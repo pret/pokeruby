@@ -22,7 +22,7 @@ SlateportCity_PokemonFanClub_EventScript_155795:: @ 8155795
 	end
 
 SlateportCity_PokemonFanClub_EventScript_1557A8:: @ 81557A8
-	setvar 0x4002, 0
+	setvar VAR_TEMP_2, 0
 	checkflag FLAG_RECEIVED_YELLOW_SCARF
 	call_if 1, SlateportCity_PokemonFanClub_EventScript_155893
 	checkflag FLAG_RECEIVED_GREEN_SCARF
@@ -33,7 +33,7 @@ SlateportCity_PokemonFanClub_EventScript_1557A8:: @ 81557A8
 	call_if 1, SlateportCity_PokemonFanClub_EventScript_155893
 	checkflag FLAG_RECEIVED_RED_SCARF
 	call_if 1, SlateportCity_PokemonFanClub_EventScript_155893
-	compare 0x4002, 5
+	compare VAR_TEMP_2, 5
 	call_if 1, SlateportCity_PokemonFanClub_EventScript_15588D
 	compare 0x40b7, 2
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_1557FE
@@ -48,7 +48,7 @@ SlateportCity_PokemonFanClub_EventScript_1557FE:: @ 81557FE
 
 SlateportCity_PokemonFanClub_EventScript_155808:: @ 8155808
 	msgbox SlateportCity_PokemonFanClub_Text_17DA49, 4
-	setvar 0x4001, 0
+	setvar VAR_TEMP_1, 0
 	checkflag FLAG_RECEIVED_YELLOW_SCARF
 	call_if 0, SlateportCity_PokemonFanClub_EventScript_1559FE
 	checkflag FLAG_RECEIVED_GREEN_SCARF
@@ -60,7 +60,7 @@ SlateportCity_PokemonFanClub_EventScript_155808:: @ 8155808
 	checkflag FLAG_RECEIVED_RED_SCARF
 	call_if 0, SlateportCity_PokemonFanClub_EventScript_1559A2
 	bufferleadmonspeciesname 0
-	switch 0x4001
+	switch VAR_TEMP_1
 	case 0, SlateportCity_PokemonFanClub_EventScript_155899
 	case 1, SlateportCity_PokemonFanClub_EventScript_1558A3
 	case 2, SlateportCity_PokemonFanClub_EventScript_1558D4
@@ -75,7 +75,7 @@ SlateportCity_PokemonFanClub_EventScript_15588D:: @ 815588D
 	return
 
 SlateportCity_PokemonFanClub_EventScript_155893:: @ 8155893
-	addvar 0x4002, 1
+	addvar VAR_TEMP_2, 1
 	return
 
 SlateportCity_PokemonFanClub_EventScript_155899:: @ 8155899
@@ -150,7 +150,7 @@ SlateportCity_PokemonFanClub_EventScript_1559A2:: @ 81559A2
 	return
 
 SlateportCity_PokemonFanClub_EventScript_1559B3:: @ 81559B3
-	setvar 0x4001, 1
+	setvar VAR_TEMP_1, 1
 	return
 
 SlateportCity_PokemonFanClub_EventScript_1559B9:: @ 81559B9
@@ -160,7 +160,7 @@ SlateportCity_PokemonFanClub_EventScript_1559B9:: @ 81559B9
 	return
 
 SlateportCity_PokemonFanClub_EventScript_1559CA:: @ 81559CA
-	setvar 0x4001, 2
+	setvar VAR_TEMP_1, 2
 	return
 
 SlateportCity_PokemonFanClub_EventScript_1559D0:: @ 81559D0
@@ -170,7 +170,7 @@ SlateportCity_PokemonFanClub_EventScript_1559D0:: @ 81559D0
 	return
 
 SlateportCity_PokemonFanClub_EventScript_1559E1:: @ 81559E1
-	setvar 0x4001, 3
+	setvar VAR_TEMP_1, 3
 	return
 
 SlateportCity_PokemonFanClub_EventScript_1559E7:: @ 81559E7
@@ -180,7 +180,7 @@ SlateportCity_PokemonFanClub_EventScript_1559E7:: @ 81559E7
 	return
 
 SlateportCity_PokemonFanClub_EventScript_1559F8:: @ 81559F8
-	setvar 0x4001, 4
+	setvar VAR_TEMP_1, 4
 	return
 
 SlateportCity_PokemonFanClub_EventScript_1559FE:: @ 81559FE
@@ -190,7 +190,7 @@ SlateportCity_PokemonFanClub_EventScript_1559FE:: @ 81559FE
 	return
 
 SlateportCity_PokemonFanClub_EventScript_155A0F:: @ 8155A0F
-	setvar 0x4001, 5
+	setvar VAR_TEMP_1, 5
 	return
 
 SlateportCity_PokemonFanClub_EventScript_155A15:: @ 8155A15

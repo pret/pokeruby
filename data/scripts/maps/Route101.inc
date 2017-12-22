@@ -12,7 +12,7 @@ Route101_MapScript2_14E935:: @ 814E935
 	.2byte 0
 
 Route101_EventScript_14E93F:: @ 814E93F
-	setflag 0x4000
+	setflag FLAG_SPECIAL_FLAG_0
 	setvar 0x4060, 1
 	end
 
@@ -235,7 +235,7 @@ Route101_EventScript_14EA7F:: @ 814EA7F
 	setflag FLAG_HIDE_BIRCH_STARTERS_BAG
 	setvar 0x4084, 2
 	setvar 0x4060, 3
-	clearflag 0x4000
+	clearflag FLAG_SPECIAL_FLAG_0
 	warp MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB, 255, 6, 5
 	waitstate
 	release

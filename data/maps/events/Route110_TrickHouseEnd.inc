@@ -6,7 +6,7 @@ Route110_TrickHouseEnd_MapWarps:: @ 83921E8
 	warp_def 2, 1, 3, 0, MAP_ROUTE110_TRICK_HOUSE_CORRIDOR
 
 Route110_TrickHouseEnd_MapCoordEvents:: @ 83921F8
-	coord_event 2, 2, 3, 0, 0x4002, 0, 0, Route110_TrickHouseEnd_EventScript_161CA0
+	coord_event 2, 2, 3, 0, VAR_TEMP_2, 0, 0, Route110_TrickHouseEnd_EventScript_161CA0
 
 Route110_TrickHouseEnd_MapBGEvents:: @ 8392208
 	bg_event 4, 5, 3, 7, 0, ITEM_NUGGET, 1, 0

@@ -690,7 +690,7 @@ RecordCorner_EventScript_1A4418:: @ 81A4418
 	setvar 0x8005, 0
 	special sub_80B929C
 	waitstate
-	compare 0x4001, 0
+	compare VAR_TEMP_1, 0
 	goto_if 5, RecordCorner_EventScript_1A446C
 	end
 
@@ -698,7 +698,7 @@ RecordCorner_EventScript_1A442D:: @ 81A442D
 	setvar 0x8005, 1
 	special sub_80B929C
 	waitstate
-	compare 0x4001, 0
+	compare VAR_TEMP_1, 0
 	goto_if 5, RecordCorner_EventScript_1A446C
 	end
 
@@ -706,7 +706,7 @@ RecordCorner_EventScript_1A4442:: @ 81A4442
 	setvar 0x8005, 2
 	special sub_80B929C
 	waitstate
-	compare 0x4001, 0
+	compare VAR_TEMP_1, 0
 	goto_if 5, RecordCorner_EventScript_1A446C
 	end
 
@@ -714,12 +714,12 @@ RecordCorner_EventScript_1A4457:: @ 81A4457
 	setvar 0x8005, 3
 	special sub_80B929C
 	waitstate
-	compare 0x4001, 0
+	compare VAR_TEMP_1, 0
 	goto_if 5, RecordCorner_EventScript_1A446C
 	end
 
 RecordCorner_EventScript_1A446C:: @ 81A446C
-	bufferitemname 1, 0x4001
+	bufferitemname 1, VAR_TEMP_1
 	message RecordCorner_Text_1A4E3B
 	waitmessage
 	waitbuttonpress
@@ -770,7 +770,7 @@ TradeCenter_EventScript_1A44AD:: @ 81A44AD
 	end
 
 RecordCorner_EventScript_1A44BC:: @ 81A44BC
-	compare 0x4000, 0
+	compare VAR_TEMP_0, 0
 	goto_if 5, RecordCorner_EventScript_1A44D6
 	special sub_8064EAC
 	message RecordCorner_Text_1A4DD7

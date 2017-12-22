@@ -8,7 +8,7 @@ FortreeCity_Gym_MapScript1_157EDE:: @ 8157EDE
 	end
 
 FortreeCity_Gym_MapScript2_157EE2:: @ 8157EE2
-	map_script_2 0x4000, 16384, FortreeCity_Gym_EventScript_157EEC
+	map_script_2 VAR_TEMP_0, 16384, FortreeCity_Gym_EventScript_157EEC
 	.2byte 0
 
 FortreeCity_Gym_EventScript_157EEC:: @ 8157EEC

@@ -2149,7 +2149,7 @@ void GetMomOrDadStringForTVMessage(void)
             if (gSaveBlock1.location.mapNum == MAP_NUM(LITTLEROOT_TOWN_BRENDANS_HOUSE_1F))
             {
                 StringCopy(gStringVar1, gOtherText_Mom);
-                VarSet(VAR_0x4003, 1);
+                VarSet(VAR_TEMP_3, 1);
             }
         }
         else
@@ -2157,21 +2157,21 @@ void GetMomOrDadStringForTVMessage(void)
             if (gSaveBlock1.location.mapNum == MAP_NUM(LITTLEROOT_TOWN_MAYS_HOUSE_1F))
             {
                 StringCopy(gStringVar1, gOtherText_Mom);
-                VarSet(VAR_0x4003, 1);
+                VarSet(VAR_TEMP_3, 1);
             }
         }
     }
-    if (VarGet(VAR_0x4003) == 1)
+    if (VarGet(VAR_TEMP_3) == 1)
     {
         StringCopy(gStringVar1, gOtherText_Mom);
     }
-    else if (VarGet(VAR_0x4003) == 2)
+    else if (VarGet(VAR_TEMP_3) == 2)
     {
         StringCopy(gStringVar1, gOtherText_Dad);
     }
-    else if (VarGet(VAR_0x4003) > 2)
+    else if (VarGet(VAR_TEMP_3) > 2)
     {
-        if (VarGet(VAR_0x4003) % 2 == 0)
+        if (VarGet(VAR_TEMP_3) % 2 == 0)
             StringCopy(gStringVar1, gOtherText_Mom);
         else
             StringCopy(gStringVar1, gOtherText_Dad);
@@ -2181,12 +2181,12 @@ void GetMomOrDadStringForTVMessage(void)
         if (Random() % 2 != 0)
         {
             StringCopy(gStringVar1, gOtherText_Mom);
-            VarSet(VAR_0x4003, 1);
+            VarSet(VAR_TEMP_3, 1);
         }
         else
         {
             StringCopy(gStringVar1, gOtherText_Dad);
-            VarSet(VAR_0x4003, 2);
+            VarSet(VAR_TEMP_3, 2);
         }
     }
 }

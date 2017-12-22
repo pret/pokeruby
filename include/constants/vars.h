@@ -3,17 +3,25 @@
 
 #define VAR_0x3F20                 0x3F20
 
-#define VAR_0x4000                 0x4000
-#define VAR_0x4001                 0x4001
-#define VAR_0x4002                 0x4002
-#define VAR_0x4003                 0x4003
-#define VAR_0x4004                 0x4004
-#define VAR_0x4005                 0x4005
-#define VAR_0x4006                 0x4006
-#define VAR_0x4007                 0x4007
-#define VAR_0x4008                 0x4008
-#define VAR_0x4009                 0x4009
-#define VAR_0x400A                 0x400A
+// temporary vars
+// The first 0x10 vars are are temporary--they are cleared every time a map is loaded.
+#define VAR_TEMP_0                 0x4000
+#define VAR_TEMP_1                 0x4001
+#define VAR_TEMP_2                 0x4002
+#define VAR_TEMP_3                 0x4003
+#define VAR_TEMP_4                 0x4004
+#define VAR_TEMP_5                 0x4005
+#define VAR_TEMP_6                 0x4006
+#define VAR_TEMP_7                 0x4007
+#define VAR_TEMP_8                 0x4008
+#define VAR_TEMP_9                 0x4009
+#define VAR_TEMP_A                 0x400A
+#define VAR_TEMP_B                 0x400B
+#define VAR_TEMP_C                 0x400C
+#define VAR_TEMP_D                 0x400D
+#define VAR_TEMP_E                 0x400E
+#define VAR_TEMP_F                 0x400F
+
 #define VAR_0x401F                 0x401F
 #define VAR_RECYCLE_GOODS          0x4020
 #define VAR_REPEL_STEP_COUNT       0x4021

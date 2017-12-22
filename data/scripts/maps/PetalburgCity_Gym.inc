@@ -194,7 +194,7 @@ PetalburgCity_Gym_EventScript_154669:: @ 8154669
 	call_if 1, PetalburgCity_Gym_EventScript_1548F1
 	msgbox PetalburgCity_Gym_Text_17A171, 4
 	closemessage
-	setflag 0x4001
+	setflag FLAG_SPECIAL_FLAG_1
 	playbgm 420, 0
 	compare 0x8008, 0
 	call_if 1, PetalburgCity_Gym_EventScript_154835

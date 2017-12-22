@@ -41,20 +41,20 @@ BattleTower_Lobby_MapScript1_1602E8:: @ 81602E8
 	end
 
 BattleTower_Lobby_MapScript2_1602EE:: @ 81602EE
-	map_script_2 0x4001, 0, BattleTower_Lobby_EventScript_1602F8
+	map_script_2 VAR_TEMP_1, 0, BattleTower_Lobby_EventScript_1602F8
 	.2byte 0
 
 BattleTower_Lobby_EventScript_1602F8:: @ 81602F8
-	setvar 0x4001, 1
+	setvar VAR_TEMP_1, 1
 	turnobject 255, 2
 	end
 
 BattleTower_Lobby_MapScript2_160302:: @ 8160302
-	map_script_2 0x4000, 0, BattleTower_Lobby_EventScript_16032C
-	map_script_2 0x4000, 1, BattleTower_Lobby_EventScript_160330
-	map_script_2 0x4000, 2, BattleTower_Lobby_EventScript_160342
-	map_script_2 0x4000, 3, BattleTower_Lobby_EventScript_160419
-	map_script_2 0x4000, 4, BattleTower_Lobby_EventScript_16044B
+	map_script_2 VAR_TEMP_0, 0, BattleTower_Lobby_EventScript_16032C
+	map_script_2 VAR_TEMP_0, 1, BattleTower_Lobby_EventScript_160330
+	map_script_2 VAR_TEMP_0, 2, BattleTower_Lobby_EventScript_160342
+	map_script_2 VAR_TEMP_0, 3, BattleTower_Lobby_EventScript_160419
+	map_script_2 VAR_TEMP_0, 4, BattleTower_Lobby_EventScript_16044B
 	.2byte 0
 
 BattleTower_Lobby_EventScript_16032C:: @ 816032C
@@ -66,7 +66,7 @@ BattleTower_Lobby_EventScript_160330:: @ 8160330
 	faceplayer
 	msgbox BattleTower_Lobby_Text_19A3FD, 4
 	closemessage
-	setvar 0x4000, 5
+	setvar VAR_TEMP_0, 5
 	release
 	end
 
@@ -125,7 +125,7 @@ BattleTower_Lobby_EventScript_1603AD:: @ 81603AD
 BattleTower_Lobby_EventScript_1603F8:: @ 81603F8
 	msgbox BattleTower_Lobby_Text_199FA9, 4
 	closemessage
-	setvar 0x4000, 5
+	setvar VAR_TEMP_0, 5
 	release
 	end
 
@@ -133,7 +133,7 @@ BattleTower_Lobby_EventScript_160408:: @ 8160408
 	msgbox BattleTower_Lobby_Text_19A520, 4
 	waitmessage
 	closemessage
-	setvar 0x4000, 5
+	setvar VAR_TEMP_0, 5
 	release
 	end
 
@@ -152,7 +152,7 @@ BattleTower_Lobby_EventScript_160419:: @ 8160419
 	waitse
 	msgbox BattleTower_Lobby_Text_199FA9, 4
 	closemessage
-	setvar 0x4000, 5
+	setvar VAR_TEMP_0, 5
 	release
 	end
 
@@ -171,14 +171,14 @@ BattleTower_Lobby_EventScript_16044B:: @ 816044B
 	setvar 0x8004, 8
 	setvar 0x8005, 0
 	special sub_8135668
-	setvar 0x4000, 5
+	setvar VAR_TEMP_0, 5
 	special SavePlayerParty
 	special sub_8135A14
 	msgbox BattleTower_Lobby_Text_19A0A8, 4
 	closemessage
 	call BattleTower_Lobby_EventScript_160664
 	warp MAP_BATTLE_TOWER_ELEVATOR, 255, 1, 6
-	setvar 0x4000, 0
+	setvar VAR_TEMP_0, 0
 	waitstate
 
 BattleTower_Lobby_EventScript_16049E:: @ 816049E
@@ -230,7 +230,7 @@ BattleTower_Lobby_EventScript_1604FA:: @ 81604FA
 BattleTower_Lobby_EventScript_160587:: @ 8160587
 	setvar 0x8004, 5
 	special sub_8135668
-	setvar 0x4000, 0
+	setvar VAR_TEMP_0, 0
 	setvar 0x8004, 11
 	special sub_8135668
 	setvar 0x8004, 0
@@ -243,7 +243,7 @@ BattleTower_Lobby_EventScript_160587:: @ 8160587
 	closemessage
 	delay 2
 	call S_DoSaveDialog
-	setvar 0x4000, 5
+	setvar VAR_TEMP_0, 5
 	erasebox 0, 0, 15, 10
 	compare RESULT, 0
 	goto_if_eq BattleTower_Lobby_EventScript_160642
@@ -255,7 +255,7 @@ BattleTower_Lobby_EventScript_160587:: @ 8160587
 	closemessage
 	call BattleTower_Lobby_EventScript_160664
 	warp MAP_BATTLE_TOWER_ELEVATOR, 255, 1, 6
-	setvar 0x4000, 0
+	setvar VAR_TEMP_0, 0
 	waitstate
 
 BattleTower_Lobby_EventScript_160600:: @ 8160600

@@ -16,11 +16,11 @@ BattleTower_Corridor_EventScript_16086E:: @ 816086E
 	end
 
 BattleTower_Corridor_MapScript2_160881:: @ 8160881
-	map_script_2 0x4000, 0, BattleTower_Corridor_EventScript_16088B
+	map_script_2 VAR_TEMP_0, 0, BattleTower_Corridor_EventScript_16088B
 	.2byte 0
 
 BattleTower_Corridor_EventScript_16088B:: @ 816088B
-	setvar 0x4000, 1
+	setvar VAR_TEMP_0, 1
 	compare 0x8006, 1
 	goto_if_eq BattleTower_Corridor_EventScript_1608B1
 	applymovement 1, BattleTower_Corridor_Movement_1608D5
@@ -34,7 +34,7 @@ BattleTower_Corridor_EventScript_1608B1:: @ 81608B1
 	waitmovement 0
 
 BattleTower_Corridor_EventScript_1608C2:: @ 81608C2
-	setvar 0x4000, 0
+	setvar VAR_TEMP_0, 0
 	warp MAP_BATTLE_TOWER_BATTLE_ROOM, 255, 4, 8
 	waitstate
 	end

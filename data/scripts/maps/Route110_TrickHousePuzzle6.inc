@@ -8,7 +8,7 @@ Route110_TrickHousePuzzle6_MapScript1_1630D8:: @ 81630D8
 	end
 
 Route110_TrickHousePuzzle6_MapScript2_1630DC:: @ 81630DC
-	map_script_2 0x4000, 16384, Route110_TrickHousePuzzle6_EventScript_1630E6
+	map_script_2 VAR_TEMP_0, 16384, Route110_TrickHousePuzzle6_EventScript_1630E6
 	.2byte 0
 
 Route110_TrickHousePuzzle6_EventScript_1630E6:: @ 81630E6

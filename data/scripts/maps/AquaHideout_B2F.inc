@@ -19,7 +19,7 @@ MagmaHideout_B2F_EventScript_15D8BD:: @ 815D8BD
 	applymovement 0x8008, AquaHideout_B2F_Movement_1A0841
 	.endif
 	waitmovement 0
-	setvar 0x4001, 1
+	setvar VAR_TEMP_1, 1
 	releaseall
 	end
 

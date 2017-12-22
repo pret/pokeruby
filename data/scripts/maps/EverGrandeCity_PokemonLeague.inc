@@ -49,10 +49,10 @@ EverGrandeCity_PokemonLeague_EventScript_15BAD2:: @ 815BAD2
 	lockall
 	checkflag FLAG_ENTERED_ELITE_FOUR
 	goto_if_eq EverGrandeCity_PokemonLeague_EventScript_15BB57
-	getplayerxy 0x4000, 0x4001
-	compare 0x4000, 11
+	getplayerxy VAR_TEMP_0, VAR_TEMP_1
+	compare VAR_TEMP_0, 11
 	call_if 4, EverGrandeCity_PokemonLeague_EventScript_15BB34
-	compare 0x4000, 8
+	compare VAR_TEMP_0, 8
 	call_if 3, EverGrandeCity_PokemonLeague_EventScript_15BB3F
 	message EverGrandeCity_PokemonLeague_Text_1916FD
 	waitmessage

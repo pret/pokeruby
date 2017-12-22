@@ -39,12 +39,12 @@ Route119_EventScript_1511B9:: @ 81511B9
 	return
 
 Route119_EventScript_1511C5:: @ 81511C5
-	setvar 0x4001, 1
+	setvar VAR_TEMP_1, 1
 	goto Route119_EventScript_1511DB
 	end
 
 Route119_EventScript_1511D0:: @ 81511D0
-	setvar 0x4001, 2
+	setvar VAR_TEMP_1, 2
 	goto Route119_EventScript_1511DB
 	end
 
@@ -57,16 +57,16 @@ Route119_EventScript_1511DB:: @ 81511DB
 	compare RESULT, 1
 	call_if 1, Route119_EventScript_151259
 	delay 65
-	compare 0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if 1, Route119_EventScript_1513A6
-	compare 0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if 1, Route119_EventScript_1513B1
 	applymovement 255, Route119_Movement_1A0845
 	waitmovement 0
 	delay 30
-	compare 0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if 1, Route119_EventScript_1513D2
-	compare 0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if 1, Route119_EventScript_1513E1
 	removeobject 25
 	addobject 16
@@ -154,16 +154,16 @@ Route119_EventScript_151352:: @ 8151352
 
 Route119_EventScript_151362:: @ 8151362
 	closemessage
-	compare 0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if 1, Route119_EventScript_1513D2
-	compare 0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if 1, Route119_EventScript_1513E1
 	removeobject 16
 	addobject 25
 	delay 30
-	compare 0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if 1, Route119_EventScript_1513BC
-	compare 0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if 1, Route119_EventScript_1513C7
 	removeobject 25
 	setvar 0x4072, 1

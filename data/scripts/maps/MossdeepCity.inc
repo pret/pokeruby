@@ -53,7 +53,7 @@ MossdeepCity_EventScript_14CFFF:: @ 814CFFF
 
 MossdeepCity_EventScript_14D008:: @ 814D008
 	setflag FLAG_VISITED_MOSSDEEP_CITY
-	setvar 0x4001, 1
+	setvar VAR_TEMP_1, 1
 	end
 
 MossdeepCity_EventScript_14D011:: @ 814D011

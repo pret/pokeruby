@@ -3,11 +3,11 @@ BattleTower_BattleRoom_MapScripts:: @ 81608DB
 	.byte 0
 
 BattleTower_BattleRoom_MapScript2_1608E1:: @ 81608E1
-	map_script_2 0x4000, 0, BattleTower_BattleRoom_EventScript_1608EB
+	map_script_2 VAR_TEMP_0, 0, BattleTower_BattleRoom_EventScript_1608EB
 	.2byte 0
 
 BattleTower_BattleRoom_EventScript_1608EB:: @ 81608EB
-	setvar 0x4000, 1
+	setvar VAR_TEMP_0, 1
 	applymovement 255, BattleTower_BattleRoom_Movement_160AB7
 	waitmovement 0
 

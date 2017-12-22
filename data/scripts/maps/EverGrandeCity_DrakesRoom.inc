@@ -5,7 +5,7 @@ EverGrandeCity_DrakesRoom_MapScripts:: @ 815B70D
 	.byte 0
 
 @ 815B71D
-	map_script_2 0x4001, 0, EverGrandeCity_DrakesRoom_EventScript_15B727
+	map_script_2 VAR_TEMP_1, 0, EverGrandeCity_DrakesRoom_EventScript_15B727
 	.2byte 0
 
 EverGrandeCity_DrakesRoom_EventScript_15B727:: @ 815B727

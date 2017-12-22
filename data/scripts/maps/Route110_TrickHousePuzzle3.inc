@@ -5,22 +5,22 @@ Route110_TrickHousePuzzle3_MapScripts:: @ 8161EBD
 
 Route110_TrickHousePuzzle3_MapScript1_161EC8:: @ 8161EC8
 	call Route110_TrickHousePuzzle3_EventScript_161F12
-	compare 0x4009, 0
+	compare VAR_TEMP_9, 0
 	call_if 1, Route110_TrickHousePuzzle3_EventScript_161FE5
-	compare 0x4009, 1
+	compare VAR_TEMP_9, 1
 	call_if 1, Route110_TrickHousePuzzle3_EventScript_1622C8
 	end
 
 Route110_TrickHousePuzzle3_MapScript1_161EE4:: @ 8161EE4
-	setvar 0x4001, 0
-	setvar 0x4002, 0
-	setvar 0x4003, 0
-	setvar 0x4004, 0
-	setvar 0x4005, 0
-	setvar 0x4006, 0
-	setvar 0x4007, 0
-	setvar 0x4008, 0
-	setvar 0x4009, 0
+	setvar VAR_TEMP_1, 0
+	setvar VAR_TEMP_2, 0
+	setvar VAR_TEMP_3, 0
+	setvar VAR_TEMP_4, 0
+	setvar VAR_TEMP_5, 0
+	setvar VAR_TEMP_6, 0
+	setvar VAR_TEMP_7, 0
+	setvar VAR_TEMP_8, 0
+	setvar VAR_TEMP_9, 0
 	end
 
 Route110_TrickHousePuzzle3_EventScript_161F12:: @ 8161F12
@@ -31,19 +31,19 @@ Route110_TrickHousePuzzle3_EventScript_161F12:: @ 8161F12
 	setmetatile 13, 7, 600, 0
 	setmetatile 1, 3, 600, 0
 	setmetatile 10, 2, 600, 0
-	compare 0x4008, 1
+	compare VAR_TEMP_8, 1
 	call_if 1, Route110_TrickHousePuzzle3_EventScript_161F9F
-	compare 0x4008, 2
+	compare VAR_TEMP_8, 2
 	call_if 1, Route110_TrickHousePuzzle3_EventScript_161FA9
-	compare 0x4008, 3
+	compare VAR_TEMP_8, 3
 	call_if 1, Route110_TrickHousePuzzle3_EventScript_161FB3
-	compare 0x4008, 4
+	compare VAR_TEMP_8, 4
 	call_if 1, Route110_TrickHousePuzzle3_EventScript_161FBD
-	compare 0x4008, 5
+	compare VAR_TEMP_8, 5
 	call_if 1, Route110_TrickHousePuzzle3_EventScript_161FC7
-	compare 0x4008, 6
+	compare VAR_TEMP_8, 6
 	call_if 1, Route110_TrickHousePuzzle3_EventScript_161FD1
-	compare 0x4008, 7
+	compare VAR_TEMP_8, 7
 	call_if 1, Route110_TrickHousePuzzle3_EventScript_161FDB
 	return
 
@@ -247,43 +247,43 @@ Route110_TrickHousePuzzle3_EventScript_1622C8:: @ 81622C8
 
 Route110_TrickHousePuzzle3_EventScript_1625AB:: @ 81625AB
 	lockall
-	setvar 0x4008, 1
+	setvar VAR_TEMP_8, 1
 	goto Route110_TrickHousePuzzle3_EventScript_1625FF
 	end
 
 Route110_TrickHousePuzzle3_EventScript_1625B7:: @ 81625B7
 	lockall
-	setvar 0x4008, 2
+	setvar VAR_TEMP_8, 2
 	goto Route110_TrickHousePuzzle3_EventScript_1625FF
 	end
 
 Route110_TrickHousePuzzle3_EventScript_1625C3:: @ 81625C3
 	lockall
-	setvar 0x4008, 3
+	setvar VAR_TEMP_8, 3
 	goto Route110_TrickHousePuzzle3_EventScript_1625FF
 	end
 
 Route110_TrickHousePuzzle3_EventScript_1625CF:: @ 81625CF
 	lockall
-	setvar 0x4008, 4
+	setvar VAR_TEMP_8, 4
 	goto Route110_TrickHousePuzzle3_EventScript_1625FF
 	end
 
 Route110_TrickHousePuzzle3_EventScript_1625DB:: @ 81625DB
 	lockall
-	setvar 0x4008, 5
+	setvar VAR_TEMP_8, 5
 	goto Route110_TrickHousePuzzle3_EventScript_1625FF
 	end
 
 Route110_TrickHousePuzzle3_EventScript_1625E7:: @ 81625E7
 	lockall
-	setvar 0x4008, 6
+	setvar VAR_TEMP_8, 6
 	goto Route110_TrickHousePuzzle3_EventScript_1625FF
 	end
 
 Route110_TrickHousePuzzle3_EventScript_1625F3:: @ 81625F3
 	lockall
-	setvar 0x4008, 7
+	setvar VAR_TEMP_8, 7
 	goto Route110_TrickHousePuzzle3_EventScript_1625FF
 	end
 
@@ -295,76 +295,76 @@ Route110_TrickHousePuzzle3_EventScript_1625FF:: @ 81625FF
 	end
 
 Route110_TrickHousePuzzle3_EventScript_162612:: @ 8162612
-	setvar 0x4001, 0
-	setvar 0x4002, 0
-	setvar 0x4003, 0
-	setvar 0x4004, 0
-	setvar 0x4005, 0
-	setvar 0x4006, 0
-	setvar 0x4007, 0
-	compare 0x4008, 1
+	setvar VAR_TEMP_1, 0
+	setvar VAR_TEMP_2, 0
+	setvar VAR_TEMP_3, 0
+	setvar VAR_TEMP_4, 0
+	setvar VAR_TEMP_5, 0
+	setvar VAR_TEMP_6, 0
+	setvar VAR_TEMP_7, 0
+	compare VAR_TEMP_8, 1
 	call_if 1, Route110_TrickHousePuzzle3_EventScript_162683
-	compare 0x4008, 2
+	compare VAR_TEMP_8, 2
 	call_if 1, Route110_TrickHousePuzzle3_EventScript_162689
-	compare 0x4008, 3
+	compare VAR_TEMP_8, 3
 	call_if 1, Route110_TrickHousePuzzle3_EventScript_16268F
-	compare 0x4008, 4
+	compare VAR_TEMP_8, 4
 	call_if 1, Route110_TrickHousePuzzle3_EventScript_162695
-	compare 0x4008, 5
+	compare VAR_TEMP_8, 5
 	call_if 1, Route110_TrickHousePuzzle3_EventScript_16269B
-	compare 0x4008, 6
+	compare VAR_TEMP_8, 6
 	call_if 1, Route110_TrickHousePuzzle3_EventScript_1626A1
-	compare 0x4008, 7
+	compare VAR_TEMP_8, 7
 	call_if 1, Route110_TrickHousePuzzle3_EventScript_1626A7
 	return
 
 Route110_TrickHousePuzzle3_EventScript_162683:: @ 8162683
-	setvar 0x4001, 1
+	setvar VAR_TEMP_1, 1
 	return
 
 Route110_TrickHousePuzzle3_EventScript_162689:: @ 8162689
-	setvar 0x4002, 1
+	setvar VAR_TEMP_2, 1
 	return
 
 Route110_TrickHousePuzzle3_EventScript_16268F:: @ 816268F
-	setvar 0x4003, 1
+	setvar VAR_TEMP_3, 1
 	return
 
 Route110_TrickHousePuzzle3_EventScript_162695:: @ 8162695
-	setvar 0x4004, 1
+	setvar VAR_TEMP_4, 1
 	return
 
 Route110_TrickHousePuzzle3_EventScript_16269B:: @ 816269B
-	setvar 0x4005, 1
+	setvar VAR_TEMP_5, 1
 	return
 
 Route110_TrickHousePuzzle3_EventScript_1626A1:: @ 81626A1
-	setvar 0x4006, 1
+	setvar VAR_TEMP_6, 1
 	return
 
 Route110_TrickHousePuzzle3_EventScript_1626A7:: @ 81626A7
-	setvar 0x4007, 1
+	setvar VAR_TEMP_7, 1
 	return
 
 Route110_TrickHousePuzzle3_EventScript_1626AD:: @ 81626AD
-	compare 0x4009, 1
+	compare VAR_TEMP_9, 1
 	call_if 1, Route110_TrickHousePuzzle3_EventScript_161FE5
-	compare 0x4009, 0
+	compare VAR_TEMP_9, 0
 	call_if 1, Route110_TrickHousePuzzle3_EventScript_1622C8
 	special DrawWholeMapView
-	compare 0x4009, 1
+	compare VAR_TEMP_9, 1
 	goto_if_eq Route110_TrickHousePuzzle3_EventScript_1626DD
-	compare 0x4009, 0
+	compare VAR_TEMP_9, 0
 	goto_if_eq Route110_TrickHousePuzzle3_EventScript_1626E4
 	end
 
 Route110_TrickHousePuzzle3_EventScript_1626DD:: @ 81626DD
-	setvar 0x4009, 0
+	setvar VAR_TEMP_9, 0
 	releaseall
 	end
 
 Route110_TrickHousePuzzle3_EventScript_1626E4:: @ 81626E4
-	setvar 0x4009, 1
+	setvar VAR_TEMP_9, 1
 	releaseall
 	end
 

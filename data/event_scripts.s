@@ -8,6 +8,7 @@
 #include "constants/opponents.h"
 #include "constants/songs.h"
 #include "constants/species.h"
+#include "constants/vars.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.include "constants/constants.inc"
@@ -2132,14 +2133,14 @@ Event_WorldMap:: @ 81A02D6
 DewfordTown_EventScript_1A02E7:: @ 81A02E7
 Route104_EventScript_1A02E7:: @ 81A02E7
 Route109_EventScript_1A02E7:: @ 81A02E7
-	setflag 0x4001
+	setflag FLAG_SPECIAL_FLAG_1
 	playbgm 431, 0
 	return
 
 DewfordTown_EventScript_1A02EF:: @ 81A02EF
 Route104_EventScript_1A02EF:: @ 81A02EF
 Route109_EventScript_1A02EF:: @ 81A02EF
-	clearflag 0x4001
+	clearflag FLAG_SPECIAL_FLAG_1
 	fadedefaultbgm
 	return
 
@@ -2303,7 +2304,7 @@ CaveOfOrigin_B4F_EventScript_1A04A0:: @ 81A04A0
 	waitse
 	playmoncry SPECIES_GROUDON_OR_KYOGRE, 2
 	waitmoncry
-	setvar 0x4005, 1
+	setvar VAR_TEMP_5, 1
 	releaseall
 	end
 
@@ -2312,20 +2313,20 @@ CaveOfOrigin_B1F_EventScript_1A04AF:: @ 81A04AF
 CaveOfOrigin_B2F_EventScript_1A04AF:: @ 81A04AF
 CaveOfOrigin_B3F_EventScript_1A04AF:: @ 81A04AF
 	lockall
-	setvar 0x4001, 1
+	setvar VAR_TEMP_1, 1
 	goto CaveOfOrigin_1F_EventScript_1A04D3
 	end
 
 CaveOfOrigin_B2F_EventScript_1A04BB:: @ 81A04BB
 CaveOfOrigin_B3F_EventScript_1A04BB:: @ 81A04BB
 	lockall
-	setvar 0x4002, 1
+	setvar VAR_TEMP_2, 1
 	goto CaveOfOrigin_B2F_EventScript_1A04D3
 	end
 
 @ 81A04C7
 	lockall
-	setvar 0x4003, 1
+	setvar VAR_TEMP_3, 1
 	goto CaveOfOrigin_B2F_EventScript_1A04D3
 	end
 
@@ -2343,11 +2344,11 @@ CaveOfOrigin_B1F_EventScript_1A04E3:: @ 81A04E3
 CaveOfOrigin_B2F_EventScript_1A04E3:: @ 81A04E3
 CaveOfOrigin_B3F_EventScript_1A04E3:: @ 81A04E3
 CaveOfOrigin_B4F_EventScript_1A04E3:: @ 81A04E3
-	setvar 0x4001, 1
-	setvar 0x4002, 1
-	setvar 0x4003, 1
-	setvar 0x4004, 1
-	setvar 0x4005, 1
+	setvar VAR_TEMP_1, 1
+	setvar VAR_TEMP_2, 1
+	setvar VAR_TEMP_3, 1
+	setvar VAR_TEMP_4, 1
+	setvar VAR_TEMP_5, 1
 	return
 
 AquaHideout_B1F_EventScript_1A04FD:: @ 81A04FD

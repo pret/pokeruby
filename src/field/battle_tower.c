@@ -294,24 +294,24 @@ void sub_8134548(void)
             ResetBattleTowerStreak(levelType);
             if (!var1)
             {
-                VarSet(VAR_0x4000, 5);
+                VarSet(VAR_TEMP_0, 5);
             }
             break;
         case 1:
             ResetBattleTowerStreak(levelType);
-            VarSet(VAR_0x4000, 1);
+            VarSet(VAR_TEMP_0, 1);
             var1++;
             break;
         case 4:
-            VarSet(VAR_0x4000, 2);
+            VarSet(VAR_TEMP_0, 2);
             var1++;
             break;
         case 5:
-            VarSet(VAR_0x4000, 3);
+            VarSet(VAR_TEMP_0, 3);
             var1++;
             break;
         case 2:
-            VarSet(VAR_0x4000, 4);
+            VarSet(VAR_TEMP_0, 4);
             var1++;
             break;
         case 3:
@@ -323,7 +323,7 @@ void sub_8134548(void)
     if ((gSaveBlock2.battleTower.var_4AE[0] == 3 || gSaveBlock2.battleTower.var_4AE[0] == 6)
         && (gSaveBlock2.battleTower.var_4AE[1] == 3 || gSaveBlock2.battleTower.var_4AE[1] == 6))
     {
-        VarSet(VAR_0x4000, 5);
+        VarSet(VAR_TEMP_0, 5);
     }
 
     ValidateBattleTowerRecordChecksums();
@@ -1976,7 +1976,7 @@ void sub_8135BA0(void)
         gSaveBlock2.battleTower.var_4AE[battleTowerLevelType] = gSpecialVar_0x8004;
     }
 
-    VarSet(VAR_0x4000, 0);
+    VarSet(VAR_TEMP_0, 0);
     gSaveBlock2.battleTower.unk_554 = 1;
     TrySavingData(EREADER_SAVE);
 }

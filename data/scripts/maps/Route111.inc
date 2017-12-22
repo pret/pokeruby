@@ -21,16 +21,16 @@ Route111_MapScript1_14FFB9:: @ 814FFB9
 	end
 
 Route111_EventScript_14FFCD:: @ 814FFCD
-	getplayerxy 0x4000, 0x4001
-	compare 0x4001, 34
+	getplayerxy VAR_TEMP_0, VAR_TEMP_1
+	compare VAR_TEMP_1, 34
 	goto_if 0, Route111_EventScript_15000C
-	compare 0x4001, 107
+	compare VAR_TEMP_1, 107
 	goto_if 2, Route111_EventScript_15000C
-	compare 0x4001, 72
+	compare VAR_TEMP_1, 72
 	goto_if 2, Route111_EventScript_150009
-	compare 0x4000, 2000
+	compare VAR_TEMP_0, 2000
 	goto_if 2, Route111_EventScript_15000C
-	compare 0x4000, 8
+	compare VAR_TEMP_0, 8
 	goto_if 0, Route111_EventScript_15000C
 
 Route111_EventScript_150009:: @ 8150009
@@ -166,7 +166,7 @@ Route111_EventScript_15013A:: @ 815013A
 	checkitem ITEM_GO_GOGGLES, 1
 	compare RESULT, 0
 	goto_if_eq Route111_EventScript_150151
-	setvar 0x4003, 1
+	setvar VAR_TEMP_3, 1
 	releaseall
 	end
 
@@ -224,7 +224,7 @@ Route111_EventScript_1501BC:: @ 81501BC
 	setweather 2
 	fadenewbgm 360
 	doweather
-	setvar 0x4003, 0
+	setvar VAR_TEMP_3, 0
 	end
 
 Route111_EventScript_1501C9:: @ 81501C9

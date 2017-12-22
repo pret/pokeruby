@@ -23,13 +23,13 @@ Route124_DivingTreasureHuntersHouse_EventScript_163E20:: @ 8163E20
 
 Route124_DivingTreasureHuntersHouse_EventScript_163E2E:: @ 8163E2E
 	call Route124_DivingTreasureHuntersHouse_EventScript_163E44
-	compare 0x4001, 0
+	compare VAR_TEMP_1, 0
 	goto_if_eq Route124_DivingTreasureHuntersHouse_EventScript_164329
 	goto Route124_DivingTreasureHuntersHouse_EventScript_163EA2
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_163E44:: @ 8163E44
-	setvar 0x4001, 0
+	setvar VAR_TEMP_1, 0
 	checkitem ITEM_RED_SHARD, 1
 	compare RESULT, 1
 	call_if 1, Route124_DivingTreasureHuntersHouse_EventScript_163E8A
@@ -45,19 +45,19 @@ Route124_DivingTreasureHuntersHouse_EventScript_163E44:: @ 8163E44
 	return
 
 Route124_DivingTreasureHuntersHouse_EventScript_163E8A:: @ 8163E8A
-	addvar 0x4001, 1
+	addvar VAR_TEMP_1, 1
 	return
 
 Route124_DivingTreasureHuntersHouse_EventScript_163E90:: @ 8163E90
-	addvar 0x4001, 2
+	addvar VAR_TEMP_1, 2
 	return
 
 Route124_DivingTreasureHuntersHouse_EventScript_163E96:: @ 8163E96
-	addvar 0x4001, 4
+	addvar VAR_TEMP_1, 4
 	return
 
 Route124_DivingTreasureHuntersHouse_EventScript_163E9C:: @ 8163E9C
-	addvar 0x4001, 8
+	addvar VAR_TEMP_1, 8
 	return
 
 Route124_DivingTreasureHuntersHouse_EventScript_163EA2:: @ 8163EA2
@@ -68,7 +68,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_163EA2:: @ 8163EA2
 Route124_DivingTreasureHuntersHouse_EventScript_163EB0:: @ 8163EB0
 	message Route124_DivingTreasureHuntersHouse_Text_19F5C5
 	waitmessage
-	switch 0x4001
+	switch VAR_TEMP_1
 	case 1, Route124_DivingTreasureHuntersHouse_EventScript_163F61
 	case 2, Route124_DivingTreasureHuntersHouse_EventScript_163F87
 	case 3, Route124_DivingTreasureHuntersHouse_EventScript_163FAD
@@ -263,7 +263,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_1642D3:: @ 81642D3
 	giveitem_std 0x8009
 	msgbox Route124_DivingTreasureHuntersHouse_Text_19F606, 4
 	call Route124_DivingTreasureHuntersHouse_EventScript_163E44
-	compare 0x4001, 0
+	compare VAR_TEMP_1, 0
 	goto_if_eq Route124_DivingTreasureHuntersHouse_EventScript_164333
 	msgbox Route124_DivingTreasureHuntersHouse_Text_19F629, 5
 	compare RESULT, 1

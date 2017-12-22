@@ -9,7 +9,7 @@ SafariZone_Southeast_MapScript2_160041:: @ 8160041
 
 SafariZone_Southeast_EventScript_16004B:: @ 816004B
 	lockall
-	setvar 0x4001, 0
+	setvar VAR_TEMP_1, 0
 	applymovement 255, SafariZone_Southeast_Movement_160087
 	waitmovement 0
 	applymovement 1, SafariZone_Southeast_Movement_160089
@@ -52,7 +52,7 @@ SafariZone_Southeast_EventScript_16009E:: @ 816009E
 SafariZone_Southeast_EventScript_1600A7:: @ 81600A7
 	lock
 	faceplayer
-	compare 0x4001, 0
+	compare VAR_TEMP_1, 0
 	goto_if_eq SafariZone_Southeast_EventScript_1600D1
 	msgbox SafariZone_Southeast_Text_1C3A56, 5
 	compare RESULT, 1
@@ -62,7 +62,7 @@ SafariZone_Southeast_EventScript_1600A7:: @ 81600A7
 	end
 
 SafariZone_Southeast_EventScript_1600D1:: @ 81600D1
-	setvar 0x4001, 1
+	setvar VAR_TEMP_1, 1
 	msgbox SafariZone_Southeast_Text_1C3B2D, 4
 	release
 	end

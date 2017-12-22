@@ -24,7 +24,7 @@ MossdeepCity_GameCorner_1F_MapScript1_15AC84:: @ 815AC84
 	end
 
 MossdeepCity_GameCorner_1F_EventScript_15AC9E:: @ 815AC9E
-	setvar 0x4001, 1
+	setvar VAR_TEMP_1, 1
 	setobjectxyperm 1, 3, 2
 	setobjectmovementtype 1, 8
 	return
@@ -84,7 +84,7 @@ MossdeepCity_GameCorner_1F_Movement_15AD3F:: @ 815AD3F
 MossdeepCity_GameCorner_1F_EventScript_15AD42:: @ 815AD42
 	lock
 	faceplayer
-	compare 0x4001, 1
+	compare VAR_TEMP_1, 1
 	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_15AD59
 	msgbox MossdeepCity_GameCorner_1F_Text_18E59A, 4
 	release

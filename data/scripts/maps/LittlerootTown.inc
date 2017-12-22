@@ -128,7 +128,7 @@ LittlerootTown_EventScript_14D62B:: @ 814D62B
 	closedoor 0x8004, 0x8005
 	waitdooranim
 	clearflag FLAG_HIDE_FAT_MAN_LITTLEROOT
-	clearflag 0x4000
+	clearflag FLAG_SPECIAL_FLAG_0
 	return
 
 LittlerootTown_Movement_14D6AC:: @ 814D6AC

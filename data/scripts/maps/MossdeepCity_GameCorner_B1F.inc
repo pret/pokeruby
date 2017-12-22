@@ -8,7 +8,7 @@ MossdeepCity_GameCorner_B1F_MapScript1_15AE60:: @ 815AE60
 	end
 
 MossdeepCity_GameCorner_B1F_MapScript2_15AE64:: @ 815AE64
-	map_script_2 0x4001, 0, MossdeepCity_GameCorner_B1F_EventScript_15AE6E
+	map_script_2 VAR_TEMP_1, 0, MossdeepCity_GameCorner_B1F_EventScript_15AE6E
 	.2byte 0
 
 MossdeepCity_GameCorner_B1F_EventScript_15AE6E:: @ 815AE6E
@@ -33,7 +33,7 @@ MossdeepCity_GameCorner_B1F_EventScript_15AE6E:: @ 815AE6E
 	applymovement 255, MossdeepCity_GameCorner_B1F_Movement_15AEFF
 	waitmovement 0
 	special LoadPlayerParty
-	setvar 0x4001, 1
+	setvar VAR_TEMP_1, 1
 	warp MAP_MOSSDEEP_CITY_GAME_CORNER_1F, 255, 3, 1
 	waitstate
 	releaseall

@@ -25,7 +25,7 @@ PetalburgCity_MapScript2_14B73D:: @ 814B73D
 
 PetalburgCity_EventScript_14B747:: @ 814B747
 	lockall
-	setflag 0x4000
+	setflag FLAG_SPECIAL_FLAG_0
 	special SavePlayerParty
 	special PutZigzagoonInPlayerParty
 	applymovement 2, PetalburgCity_Movement_14B7ED
@@ -39,10 +39,10 @@ PetalburgCity_EventScript_14B747:: @ 814B747
 	waitmovement 0, 0, 2
 	msgbox PetalburgCity_Text_16D408, 4
 	closemessage
-	clearflag 0x4000
+	clearflag FLAG_SPECIAL_FLAG_0
 	setvar 0x4057, 3
 	fadedefaultbgm
-	clearflag 0x4001
+	clearflag FLAG_SPECIAL_FLAG_1
 	special LoadPlayerParty
 	setvar 0x4085, 1
 	warp MAP_PETALBURG_CITY_GYM, 255, 4, 108

@@ -15,7 +15,7 @@ InsideOfTruck_MapScript1_15FC26:: @ 815FC26
 
 InsideOfTruck_EventScript_15FC29:: @ 815FC29
 	lockall
-	setflag 0x4000
+	setflag FLAG_SPECIAL_FLAG_0
 	checkplayergender
 	compare RESULT, 0
 	goto_if_eq InsideOfTruck_EventScript_15FC45

@@ -29,7 +29,7 @@ Route110_SeasideCyclingRoadNorthEntrance_EventScript_1634F7:: @ 81634F7
 	compare RESULT, 0
 	goto_if_eq Route110_SeasideCyclingRoadNorthEntrance_EventScript_163523
 	setflag FLAG_SYS_CYCLING_ROAD
-	setvar 0x4001, 1
+	setvar VAR_TEMP_1, 1
 	releaseall
 	end
 
@@ -56,6 +56,6 @@ Route110_SeasideCyclingRoadNorthEntrance_EventScript_16353A:: @ 816353A
 	lockall
 	setvar 0x40a9, 0
 	clearflag FLAG_SYS_CYCLING_ROAD
-	setvar 0x4001, 0
+	setvar VAR_TEMP_1, 0
 	releaseall
 	end

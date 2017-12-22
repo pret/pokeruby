@@ -6,18 +6,18 @@ Route110_TrickHouseEnd_MapScripts:: @ 8161936
 	.byte 0
 
 Route110_TrickHouseEnd_MapScript1_16194B:: @ 816194B
-	compare 0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if 1, Route110_TrickHouseEnd_EventScript_161994
 	end
 
 Route110_TrickHouseEnd_MapScript1_161957:: @ 8161957
-	setvar 0x4001, 0
-	setvar 0x4002, 0
+	setvar VAR_TEMP_1, 0
+	setvar VAR_TEMP_2, 0
 	special SetTrickHouseEndRoomFlag
 	end
 
 Route110_TrickHouseEnd_MapScript2_161965:: @ 8161965
-	map_script_2 0x4002, 0, Route110_TrickHouseEnd_EventScript_16196F
+	map_script_2 VAR_TEMP_2, 0, Route110_TrickHouseEnd_EventScript_16196F
 	.2byte 0
 
 Route110_TrickHouseEnd_EventScript_16196F:: @ 816196F
@@ -27,11 +27,11 @@ Route110_TrickHouseEnd_EventScript_16196F:: @ 816196F
 	end
 
 Route110_TrickHouseEnd_MapScript2_16197C:: @ 816197C
-	map_script_2 0x4001, 0, Route110_TrickHouseEnd_EventScript_161986
+	map_script_2 VAR_TEMP_1, 0, Route110_TrickHouseEnd_EventScript_161986
 	.2byte 0
 
 Route110_TrickHouseEnd_EventScript_161986:: @ 8161986
-	setvar 0x4001, 1
+	setvar VAR_TEMP_1, 1
 	call Route110_TrickHouseEnd_EventScript_161994
 	special DrawWholeMapView
 	end
@@ -44,7 +44,7 @@ Route110_TrickHouseEnd_EventScript_16199E:: @ 816199E
 	lock
 	faceplayer
 	msgbox Route110_TrickHouseEnd_Text_19C281, 4
-	setvar 0x4002, 1
+	setvar VAR_TEMP_2, 1
 	switch 0x4044
 	case 0, Route110_TrickHouseEnd_EventScript_161A0B
 	case 1, Route110_TrickHouseEnd_EventScript_161A47

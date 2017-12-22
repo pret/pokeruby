@@ -173,7 +173,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1B6ABF:: @ 81B6ABF
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1725FE, 4
 	msgbox LittlerootTown_BrendansHouse_1F_Text_172644, 4
 	closemessage
-	setvar 0x4001, 1
+	setvar VAR_TEMP_1, 1
 	applymovement 0x8005, LittlerootTown_BrendansHouse_1F_Movement_1B6BE1
 	waitmovement 0
 	goto LittlerootTown_BrendansHouse_1F_EventScript_1B6AB8
@@ -198,7 +198,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6B2E:: @ 81B6B2E
 	msgbox LittlerootTown_MaysHouse_1F_Text_1725FE, 4
 	msgbox LittlerootTown_MaysHouse_1F_Text_172644, 4
 	closemessage
-	setvar 0x4001, 1
+	setvar VAR_TEMP_1, 1
 	applymovement 0x8005, LittlerootTown_MaysHouse_1F_Movement_1B6BE5
 	waitmovement 0
 	goto LittlerootTown_MaysHouse_1F_EventScript_1B6AB8
@@ -260,7 +260,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6BE9:: @ 81B6BE9
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1B6C3D
 	checkflag FLAG_RESCUED_BIRCH
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1B6C72
-	compare 0x4001, 1
+	compare VAR_TEMP_1, 1
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1B6C80
 	compare 0x4092, 7
 	goto_if 4, LittlerootTown_BrendansHouse_1F_EventScript_1B6C9C
