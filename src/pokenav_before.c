@@ -5,14 +5,15 @@
 #include "battle.h"
 #include "data2.h"
 #include "de_rom_8040FE0.h"
-#include "flags.h"
+#include "event_data.h"
+#include "constants/flags.h"
 #include "landmark.h"
 #include "link.h"
 #include "menu.h"
 #include "overworld.h"
 #include "palette.h"
 #include "region_map.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "string_util.h"
 #include "sound.h"
 #include "task.h"
@@ -400,7 +401,7 @@ void sub_80EBCA8() {
 	ewram0_10.var6db2[1] = 2;
 	ewram0_10.var6db2[2] = 3;
 
-	if (FlagGet(SYS_RIBBON_GET)) {
+	if (FlagGet(FLAG_SYS_RIBBON_GET)) {
 		ewram0_10.var6db2[3] = 4;
 	}
 	else {

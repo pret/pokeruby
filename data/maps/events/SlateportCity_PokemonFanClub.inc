@@ -9,8 +9,8 @@ SlateportCity_PokemonFanClub_MapObjects:: @ 8387A54
 	object_event 8, MAP_OBJ_GFX_AZUMARILL, 0, 10, 0, 8, 0, 3, 1, 17, 0, 0, 0, 0, 0, SlateportCity_PokemonFanClub_EventScript_155AB7, 0, 0, 0
 
 SlateportCity_PokemonFanClub_MapWarps:: @ 8387B14
-	warp_def 6, 10, 0, 4, SlateportCity
-	warp_def 7, 10, 0, 4, SlateportCity
+	warp_def 6, 10, 0, 4, MAP_SLATEPORT_CITY
+	warp_def 7, 10, 0, 4, MAP_SLATEPORT_CITY
 
 SlateportCity_PokemonFanClub_MapEvents:: @ 8387B24
 	map_events SlateportCity_PokemonFanClub_MapObjects, SlateportCity_PokemonFanClub_MapWarps, 0x0, 0x0

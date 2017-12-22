@@ -1,8 +1,8 @@
 DoubleBattleColosseum_MapWarps:: @ 8391428
-	warp_def 5, 8, 3, 127, NONE
-	warp_def 6, 8, 3, 127, NONE
-	warp_def 7, 8, 3, 127, NONE
-	warp_def 8, 8, 3, 127, NONE
+	warp_def 5, 8, 3, 127, MAP_NONE
+	warp_def 6, 8, 3, 127, MAP_NONE
+	warp_def 7, 8, 3, 127, MAP_NONE
+	warp_def 8, 8, 3, 127, MAP_NONE
 
 DoubleBattleColosseum_MapCoordEvents:: @ 8391448
 	coord_event 3, 4, 3, 0, 0x4000, 0, 0, DoubleBattleColosseum_EventScript_1A4383

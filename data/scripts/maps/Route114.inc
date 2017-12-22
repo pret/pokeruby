@@ -5,16 +5,16 @@ Route114_EventScript_150733:: @ 8150733
 	lock
 	faceplayer
 	dodailyevents
-	checkflag 2251
+	checkflag FLAG_DAILY_RECEIVED_BERRY_ROUTE114
 	goto_if_eq Route114_EventScript_150778
 	msgbox Route114_Text_1C5803, 4
 	random 5
 	addvar RESULT, 15
 	addvar RESULT, 133
-	giveitem RESULT
+	giveitem_std RESULT
 	compare RESULT, 0
 	goto_if_eq Route114_EventScript_1A029B
-	setflag 2251
+	setflag FLAG_DAILY_RECEIVED_BERRY_ROUTE114
 	msgbox Route114_Text_1C5861, 4
 	release
 	end
@@ -27,13 +27,13 @@ Route114_EventScript_150778:: @ 8150778
 Route114_EventScript_150782:: @ 8150782
 	lock
 	faceplayer
-	checkflag 231
+	checkflag FLAG_RECEIVED_TM05
 	goto_if_eq Route114_EventScript_1507B9
 	msgbox Route114_Text_170154, 4
-	giveitem ITEM_TM05
+	giveitem_std ITEM_TM05
 	compare RESULT, 0
 	goto_if_eq Route114_EventScript_1A029B
-	setflag 231
+	setflag FLAG_RECEIVED_TM05
 	msgbox Route114_Text_1701C5, 4
 	release
 	end
@@ -47,9 +47,9 @@ Route114_EventScript_1507C3:: @ 81507C3
 	lock
 	faceplayer
 	waitse
-	playpokecry SPECIES_POOCHYENA, 2
+	playmoncry SPECIES_POOCHYENA, 2
 	msgbox Route114_Text_1701F9, 4
-	waitpokecry
+	waitmoncry
 	release
 	end
 

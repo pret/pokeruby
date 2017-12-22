@@ -14,7 +14,7 @@
 #include "fieldmap.h"
 #include "item.h"
 #include "item_menu.h"
-#include "items.h"
+#include "constants/items.h"
 #include "mail.h"
 #include "main.h"
 #include "map_obj_lock.h"
@@ -29,12 +29,12 @@
 #include "overworld.h"
 #include "rom_8094928.h"
 #include "script.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
-#include "vars.h"
+#include "constants/vars.h"
 
 extern void (*gFieldItemUseCallback)(u8);
 extern void (*gFieldCallback)(void);
@@ -80,10 +80,10 @@ void ExecuteSwitchToOverworldFromItemUse(u8 taskId)
 {
     u8 taskData;
 
-    if (gScriptItemId == 0xAF)
+    if (gSpecialVar_ItemId == 0xAF)
         taskData = gTasks[taskId].data[15] - 1;
     else
-        taskData = ItemId_GetType(gScriptItemId) - 1;
+        taskData = ItemId_GetType(gSpecialVar_ItemId) - 1;
 
     gTasks[taskId].data[8] = (u32)gExitToOverworldFuncList[taskData] >> 16;
     gTasks[taskId].data[9] = (u32)gExitToOverworldFuncList[taskData];
@@ -157,7 +157,7 @@ void ItemMenu_ReadMail(u8 taskId)
 
     if (!gPaletteFade.active)
     {
-        mailStruct.itemId = gScriptItemId;
+        mailStruct.itemId = gSpecialVar_ItemId;
         HandleReadMail(&mailStruct, sub_80A5D04, 0);
         DestroyTask(taskId);
     }
@@ -177,7 +177,7 @@ void ItemUseOutOfBattle_Bike(u8 taskId)
     PlayerGetDestCoords(&x, &y);
     tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
 
-    if (FlagGet(SYS_CYCLING_ROAD) == TRUE // on cycling road?
+    if (FlagGet(FLAG_SYS_CYCLING_ROAD) == TRUE // on cycling road?
         || MetatileBehavior_IsVerticalRail(tileBehavior) == TRUE
         || MetatileBehavior_IsHorizontalRail(tileBehavior) == TRUE
         || MetatileBehavior_IsIsolatedVerticalRail(tileBehavior) == TRUE
@@ -199,9 +199,9 @@ void ItemUseOutOfBattle_Bike(u8 taskId)
 
 void ItemUseOnFieldCB_Bike(u8 taskId)
 {
-    if (ItemId_GetSecondaryId(gScriptItemId) == 0)
+    if (ItemId_GetSecondaryId(gSpecialVar_ItemId) == 0)
         GetOnOffBike(2);
-    if (ItemId_GetSecondaryId(gScriptItemId) == 1)
+    if (ItemId_GetSecondaryId(gSpecialVar_ItemId) == 1)
         GetOnOffBike(4);
 
     sub_8064E2C();
@@ -252,7 +252,7 @@ void ItemUseOutOfBattle_Rod(u8 taskId)
 
 void ItemUseOnFieldCB_Rod(u8 taskId)
 {
-    StartFishing(ItemId_GetSecondaryId(gScriptItemId));
+    StartFishing(ItemId_GetSecondaryId(gSpecialVar_ItemId));
     DestroyTask(taskId);
 }
 
@@ -770,11 +770,11 @@ void ItemUseOutOfBattle_SSTicket(u8 taskId)
     if (gTasks[taskId].data[2] == 0)
     {
         MenuZeroFillWindowRect(0, 0xD, 0xD, 0x14);
-        DisplayItemMessageOnField(taskId, gUnknown_083D61DC[ItemId_GetSecondaryId(gScriptItemId)], sub_80C9BB8, 1);
+        DisplayItemMessageOnField(taskId, gUnknown_083D61DC[ItemId_GetSecondaryId(gSpecialVar_ItemId)], sub_80C9BB8, 1);
     }
     else
     {
-        DisplayItemMessageOnField(taskId, gUnknown_083D61DC[ItemId_GetSecondaryId(gScriptItemId)], sub_80C9BD8, 0);
+        DisplayItemMessageOnField(taskId, gUnknown_083D61DC[ItemId_GetSecondaryId(gSpecialVar_ItemId)], sub_80C9BD8, 0);
     }
 }
 
@@ -791,13 +791,13 @@ void sub_80C9C7C(u8 taskId)
     }
     else
     {
-        ItemId_GetFieldFunc(gScriptItemId)(taskId);
+        ItemId_GetFieldFunc(gSpecialVar_ItemId)(taskId);
     }
 }
 
 void sub_80C9D00(u8 taskId)
 {
-    RemoveBagItem(gScriptItemId, 1);
+    RemoveBagItem(gSpecialVar_ItemId, 1);
     ScriptContext2_Enable();
     ScriptContext1_SetupScript(gUnknown_081A1654);
     DestroyTask(taskId);
@@ -876,7 +876,7 @@ void ItemUseOutOfBattle_TMHM(u8 taskId)
 {
     MenuZeroFillWindowRect(0, 0xD, 0xD, 0x14);
 
-    if (gScriptItemId >= ITEM_HM01)
+    if (gSpecialVar_ItemId >= ITEM_HM01)
         DisplayItemMessageOnField(taskId, gOtherText_BootedHM, sub_80C9EE4, 1); // HM
     else
         DisplayItemMessageOnField(taskId, gOtherText_BootedTM, sub_80C9EE4, 1); // TM
@@ -892,7 +892,7 @@ void sub_80C9F10(u8 taskId)
 {
     if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
     {
-        StringCopy(gStringVar1, gMoveNames[ItemIdToBattleMoveId(gScriptItemId)]);
+        StringCopy(gStringVar1, gMoveNames[ItemIdToBattleMoveId(gSpecialVar_ItemId)]);
         StringExpandPlaceholders(gStringVar4, gOtherText_ContainsMove);
         DisplayItemMessageOnField(taskId, gStringVar4, sub_80C9F80, 1);
     }
@@ -913,9 +913,9 @@ void sub_80C9FC0(u8 var)
 
 static void PrepareItemUseMessage(void)
 {
-    RemoveBagItem(gScriptItemId, 1);
+    RemoveBagItem(gSpecialVar_ItemId, 1);
     sub_80A3E0C();
-    CopyItemName(gScriptItemId, gStringVar2);
+    CopyItemName(gSpecialVar_ItemId, gStringVar2);
     StringExpandPlaceholders(gStringVar4, gOtherText_UsedItem);
 }
 
@@ -923,7 +923,7 @@ void ItemUseOutOfBattle_Repel(u8 var)
 {
     if (VarGet(VAR_REPEL_STEP_COUNT) == FALSE)
     {
-        VarSet(VAR_REPEL_STEP_COUNT, ItemId_GetHoldEffectParam(gScriptItemId));
+        VarSet(VAR_REPEL_STEP_COUNT, ItemId_GetHoldEffectParam(gSpecialVar_ItemId));
         PrepareItemUseMessage();
         DisplayItemMessageOnField(var, gStringVar4, CleanUpItemMenuMessage, 1);
     }
@@ -936,7 +936,7 @@ void ItemUseOutOfBattle_Repel(u8 var)
 void sub_80CA07C(void)
 {
     sub_80A3E0C();
-    CopyItemName(gScriptItemId, gStringVar2);
+    CopyItemName(gSpecialVar_ItemId, gStringVar2);
 }
 
 void sub_80CA098(u8 taskId)
@@ -950,19 +950,19 @@ void sub_80CA098(u8 taskId)
 
 void ItemUseOutOfBattle_BlackWhiteFlute(u8 taskId)
 {
-    if (gScriptItemId == ITEM_WHITE_FLUTE)
+    if (gSpecialVar_ItemId == ITEM_WHITE_FLUTE)
     {
-        FlagSet(SYS_ENC_UP_ITEM);
-        FlagClear(SYS_ENC_DOWN_ITEM);
+        FlagSet(FLAG_SYS_ENC_UP_ITEM);
+        FlagClear(FLAG_SYS_ENC_DOWN_ITEM);
         sub_80CA07C();
         StringExpandPlaceholders(gStringVar4, gOtherText_UsedFlute);
         gTasks[taskId].func = sub_80CA098;
         gTasks[taskId].data[15] = 0;
     }
-    else if (gScriptItemId == ITEM_BLACK_FLUTE)
+    else if (gSpecialVar_ItemId == ITEM_BLACK_FLUTE)
     {
-        FlagSet(SYS_ENC_DOWN_ITEM);
-        FlagClear(SYS_ENC_UP_ITEM);
+        FlagSet(FLAG_SYS_ENC_DOWN_ITEM);
+        FlagClear(FLAG_SYS_ENC_UP_ITEM);
         sub_80CA07C();
         StringExpandPlaceholders(gStringVar4, gOtherText_UsedRepel);
         gTasks[taskId].func = sub_80CA098;
@@ -1016,7 +1016,7 @@ void ItemUseInBattle_PokeBall(u8 var)
 {
     if (PlayerPartyAndPokemonStorageFull() == FALSE) // have room for mon?
     {
-        RemoveBagItem(gScriptItemId, 1);
+        RemoveBagItem(gSpecialVar_ItemId, 1);
         sub_80A7094(var);
     }
     else
@@ -1037,8 +1037,8 @@ void sub_80CA2BC(u8 taskId)
     if(++gTasks[taskId].data[15] > 7)
     {
         PlaySE(SE_KAIFUKU);
-        RemoveBagItem(gScriptItemId, 1);
-        DisplayItemMessageOnField(taskId, sub_803F378(gScriptItemId), sub_80CA294, 1);
+        RemoveBagItem(gSpecialVar_ItemId, 1);
+        DisplayItemMessageOnField(taskId, sub_803F378(gSpecialVar_ItemId), sub_80CA294, 1);
     }
 }
 
@@ -1048,7 +1048,7 @@ void ItemUseInBattle_StatIncrease(u8 taskId)
 
     MenuZeroFillWindowRect(0, 0xD, 0xD, 0x14);
 
-    if (ExecuteTableBasedItemEffect_(&gPlayerParty[partyId], gScriptItemId, partyId, 0) != FALSE)
+    if (ExecuteTableBasedItemEffect_(&gPlayerParty[partyId], gSpecialVar_ItemId, partyId, 0) != FALSE)
     {
         DisplayItemMessageOnField(taskId, gOtherText_WontHaveAnyEffect, CleanUpItemMenuMessage, 1);
     }
@@ -1097,9 +1097,9 @@ void unref_sub_80CA448(u8 var)
 {
     MenuZeroFillWindowRect(0, 0xD, 0xD, 0x14);
 
-    if (ExecuteTableBasedItemEffect__(0, gScriptItemId, 0) == FALSE)
+    if (ExecuteTableBasedItemEffect__(0, gSpecialVar_ItemId, 0) == FALSE)
     {
-        RemoveBagItem(gScriptItemId, 1);
+        RemoveBagItem(gSpecialVar_ItemId, 1);
         GetMonNickname(&gPlayerParty[0], gStringVar1);
         StringExpandPlaceholders(gStringVar4, gOtherText_SnapConfusion);
         DisplayItemMessageOnField(var, gStringVar4, sub_80A7094, 1);
@@ -1127,7 +1127,7 @@ void ItemUseInBattle_Escape(u8 taskId)
 
 void ItemUseOutOfBattle_EnigmaBerry(u8 taskId)
 {
-    switch (GetItemEffectType(gScriptItemId) - 1)
+    switch (GetItemEffectType(gSpecialVar_ItemId) - 1)
     {
     case 1:
     case 2:
@@ -1170,7 +1170,7 @@ void ItemUseOutOfBattle_EnigmaBerry(u8 taskId)
 
 void ItemUseInBattle_EnigmaBerry(u8 taskId)
 {
-    switch (GetItemEffectType(gScriptItemId))
+    switch (GetItemEffectType(gSpecialVar_ItemId))
     {
     case 0:
         ItemUseInBattle_StatIncrease(taskId);

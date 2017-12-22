@@ -11,11 +11,11 @@ LilycoveCity_DepartmentStoreRooftop_MapScript1_15A145:: @ 815A145
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A15F:: @ 815A15F
-	clearflag 962
+	clearflag FLAG_HIDE_ROOFTOP_LADY_LILYCOVE_MART
 	return
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A163:: @ 815A163
-	setflag 962
+	setflag FLAG_HIDE_ROOFTOP_LADY_LILYCOVE_MART
 	return
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A167:: @ 815A167
@@ -23,7 +23,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A167:: @ 815A167
 	faceplayer
 	message LilycoveCity_DepartmentStoreRooftop_Text_1A0BE4
 	waitmessage
-	pokemartdecor LilycoveCity_DepartmentStoreRooftop_Decorations
+	pokemartdecoration LilycoveCity_DepartmentStoreRooftop_Decorations
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_1A0C02, 4
 	release
 	end
@@ -146,12 +146,12 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A267:: @ 815A267
 	call_if 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A260
 	updatemoneybox 0, 0
 	nop
-	getitemname 0, 0x4000
+	bufferitemname 0, 0x4000
 	playse 106
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_18C75F, 4
-	additem 0x4000, 1
-	getitemname 1, 0x4000
-	getstdstring 2, 14
+	giveitem 0x4000, 1
+	bufferitemname 1, 0x4000
+	bufferstdstring 2, 14
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_1A0C8C, 4
 	random 64
 	compare RESULT, 0
@@ -161,9 +161,9 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A267:: @ 815A267
 	goto_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_15A388
 	playse 106
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_18C780, 4
-	additem 0x4000, 1
-	getitemname 1, 0x4000
-	getstdstring 2, 14
+	giveitem 0x4000, 1
+	bufferitemname 1, 0x4000
+	bufferstdstring 2, 14
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_1A0C8C, 4
 	random 64
 	compare RESULT, 0
@@ -173,9 +173,9 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A267:: @ 815A267
 	goto_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_15A388
 	playse 106
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_18C780, 4
-	additem 0x4000, 1
-	getitemname 1, 0x4000
-	getstdstring 2, 14
+	giveitem 0x4000, 1
+	bufferitemname 1, 0x4000
+	bufferstdstring 2, 14
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_1A0C8C, 4
 	goto LilycoveCity_DepartmentStoreRooftop_EventScript_15A36E
 	end

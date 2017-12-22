@@ -5,7 +5,7 @@
 #include "field_player_avatar.h"
 #include "fieldmap.h"
 #include "script.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "task.h"
 

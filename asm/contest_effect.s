@@ -1,5 +1,4 @@
 	.include "constants/gba_constants.inc"
-	.include "constants/species_constants.inc"
 	.include "asm/macros.inc"
 
 	.syntax unified
@@ -2413,7 +2412,7 @@ ContestEffect_44: @ 80B8EBC
 	adds r0, r3
 	ldrb r0, [r0, 0x1]
 	lsls r0, 29
-	ldr r1, _080B8EF8 @ =gScriptContestCategory
+	ldr r1, _080B8EF8 @ =gSpecialVar_ContestCategory
 	lsrs r0, 29
 	ldrh r1, [r1]
 	cmp r0, r1
@@ -2428,7 +2427,7 @@ _080B8EEA:
 	.align 2, 0
 _080B8EF0: .4byte gContestMoves
 _080B8EF4: .4byte gSharedMem + 0x192D0
-_080B8EF8: .4byte gScriptContestCategory
+_080B8EF8: .4byte gSpecialVar_ContestCategory
 	thumb_func_end ContestEffect_44
 
 	thumb_func_start ContestEffect_45

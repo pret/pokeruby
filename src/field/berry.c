@@ -6,9 +6,9 @@
 #include "item.h"
 #include "item_menu.h"
 #include "item_use.h"
-#include "items.h"
+#include "constants/items.h"
 #include "main.h"
-#include "rng.h"
+#include "random.h"
 #include "text.h"
 
 #define BERRY_NAME_LENGTH 6
@@ -981,7 +981,7 @@ const struct Berry gBerries[] =
 static const struct BerryTree gBlankBerryTree = {0};
 
 extern u8 S_BerryTree[];
-extern u16 gScriptLastTalked;
+extern u16 gSpecialVar_LastTalked;
 extern u16 gSpecialVar_0x8004;
 extern u16 gSpecialVar_0x8005;
 extern u16 gSpecialVar_0x8006;
@@ -1368,7 +1368,7 @@ void FieldObjectInteractionGetBerryTreeData(void)
     id = FieldObjectGetBerryTreeId(gSelectedMapObject);
     berry = GetBerryTypeByBerryTreeId(id);
     ResetBerryTreeSparkleFlag(id);
-    localId = gScriptLastTalked;
+    localId = gSpecialVar_LastTalked;
     num = gSaveBlock1.location.mapNum;
     group = gSaveBlock1.location.mapGroup;
     if (IsBerryTreeSparkling(localId, num, group))
@@ -1392,7 +1392,7 @@ void Berry_FadeAndGoToBerryBagMenu(void)
 
 void FieldObjectInteractionPlantBerryTree(void)
 {
-    u8 berry = ItemIdToBerryType(gScriptItemId);
+    u8 berry = ItemIdToBerryType(gSpecialVar_ItemId);
 
     PlantBerryTree(FieldObjectGetBerryTreeId(gSelectedMapObject), berry, 1, TRUE);
     FieldObjectInteractionGetBerryTreeData();
@@ -1409,7 +1409,7 @@ void FieldObjectInteractionPickBerryTree(void)
 void FieldObjectInteractionRemoveBerryTree(void)
 {
     RemoveBerryTree(FieldObjectGetBerryTreeId(gSelectedMapObject));
-    sub_8060288(gScriptLastTalked, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
+    sub_8060288(gSpecialVar_LastTalked, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
 }
 
 bool8 PlayerHasBerries(void)

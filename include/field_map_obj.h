@@ -38,6 +38,9 @@ extern const u16 gMapObjectPalette19[];
 extern const u32 gMapObjectPic_MovingBox[32];
 extern const struct SpriteFrameImage gMapObjectPicTable_PechaBerryTree[];
 
+extern const u8 gFieldEffectPic_CutGrass[];
+extern const u16 gFieldEffectObjectPalette6[];
+
 void sub_805C058(struct MapObject *mapObject, s16 a, s16 b);
 void FieldObjectSetDirection(struct MapObject *pObject, u8 unk_18);
 void MoveCoords(u8 direction, s16 *x, s16 *y);

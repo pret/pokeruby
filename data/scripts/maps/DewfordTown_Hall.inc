@@ -252,13 +252,13 @@ DewfordTown_Hall_EventScript_15359D:: @ 815359D
 	lock
 	faceplayer
 	call DewfordTown_Hall_EventScript_1A0102
-	checkflag 230
+	checkflag FLAG_RECEIVED_TM36
 	goto_if_eq DewfordTown_Hall_EventScript_1535D1
 	msgbox DewfordTown_Hall_Text_175E13, 4
-	giveitem ITEM_TM36
+	giveitem_std ITEM_TM36
 	compare RESULT, 0
 	goto_if_eq DewfordTown_Hall_EventScript_1A029B
-	setflag 230
+	setflag FLAG_RECEIVED_TM36
 	release
 	end
 

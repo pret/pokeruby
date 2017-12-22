@@ -7,13 +7,13 @@ LittlerootTown_MaysHouse_1F_MapScripts:: @ 8152879
 LittlerootTown_MaysHouse_1F_MapScript1_152889:: @ 8152889
 	compare 0x4092, 6
 	call_if 0, LittlerootTown_MaysHouse_1F_EventScript_15289E
-	checkflag 274
+	checkflag FLAG_RECEIVED_RUNNING_SHOES
 	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1528B1
 	end
 
 LittlerootTown_MaysHouse_1F_EventScript_15289E:: @ 815289E
-	setmaptile 5, 4, 624, 1
-	setmaptile 5, 2, 616, 1
+	setmetatile 5, 4, 624, 1
+	setmetatile 5, 2, 616, 1
 	return
 
 LittlerootTown_MaysHouse_1F_EventScript_1528B1:: @ 81528B1
@@ -23,7 +23,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1528B1:: @ 81528B1
 	return
 
 LittlerootTown_MaysHouse_1F_EventScript_1528BE:: @ 81528BE
-	setmaptile 6, 7, 659, 1
+	setmetatile 6, 7, 659, 1
 	return
 
 LittlerootTown_MaysHouse_1F_MapScript1_1528C8:: @ 81528C8
@@ -65,7 +65,7 @@ LittlerootTown_MaysHouse_1F_EventScript_152938:: @ 8152938
 	applymovement 255, LittlerootTown_MaysHouse_1F_Movement_15295E
 	applymovement 1, LittlerootTown_MaysHouse_1F_Movement_15295E
 	waitmovement 0
-	warp LittlerootTown_MaysHouse_2F, 255, 1, 1
+	warp MAP_LITTLEROOT_TOWN_MAYS_HOUSE_2F, 255, 1, 1
 	waitstate
 	releaseall
 	end
@@ -100,7 +100,7 @@ LittlerootTown_MaysHouse_1F_EventScript_152982:: @ 8152982
 	waitmovement 0
 	special GetRivalSonDaughterString
 	msgbox LittlerootTown_MaysHouse_1F_Text_1730C2, 4
-	setflag 87
+	setflag FLAG_MET_RIVAL_MOM
 	setvar 0x408c, 2
 	releaseall
 	end
@@ -135,9 +135,9 @@ LittlerootTown_BrendansHouse_1F_EventScript_1529EB:: @ 81529EB
 LittlerootTown_MaysHouse_1F_EventScript_1529EB:: @ 81529EB
 	lock
 	faceplayer
-	checkflag 130
+	checkflag FLAG_DEFEATED_RIVAL_ROUTE103
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_152A21
-	checkflag 301
+	checkflag FLAG_RIVAL_LEFT_FOR_ROUTE103
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_152A17
 	compare 0x408d, 3
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_152A2B

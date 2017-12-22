@@ -18,7 +18,7 @@
 #include "pokedex.h"
 #include "pokemon_size_record.h"
 #include "pokemon_storage_system.h"
-#include "rng.h"
+#include "random.h"
 #include "roamer.h"
 #include "overworld.h"
 #include "rtc.h"

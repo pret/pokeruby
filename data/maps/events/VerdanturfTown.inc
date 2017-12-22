@@ -5,13 +5,13 @@ VerdanturfTown_MapObjects:: @ 8380F00
 	object_event 4, MAP_OBJ_GFX_CAMPER, 0, 6, 0, 10, 0, 3, 5, 1, 0, 0, 0, 0, 0, VerdanturfTown_EventScript_14E8A2, 0, 0, 0
 
 VerdanturfTown_MapWarps:: @ 8380F60
-	warp_def 4, 7, 0, 0, VerdanturfTown_ContestLobby
-	warp_def 12, 3, 0, 0, VerdanturfTown_Mart
-	warp_def 16, 3, 0, 0, VerdanturfTown_PokemonCenter_1F
-	warp_def 10, 14, 0, 0, VerdanturfTown_WandasHouse
-	warp_def 8, 1, 0, 1, RusturfTunnel
-	warp_def 1, 14, 0, 0, VerdanturfTown_FriendshipRatersHouse
-	warp_def 17, 15, 0, 0, VerdanturfTown_House
+	warp_def 4, 7, 0, 0, MAP_VERDANTURF_TOWN_CONTEST_LOBBY
+	warp_def 12, 3, 0, 0, MAP_VERDANTURF_TOWN_MART
+	warp_def 16, 3, 0, 0, MAP_VERDANTURF_TOWN_POKEMON_CENTER_1F
+	warp_def 10, 14, 0, 0, MAP_VERDANTURF_TOWN_WANDAS_HOUSE
+	warp_def 8, 1, 0, 1, MAP_RUSTURF_TUNNEL
+	warp_def 1, 14, 0, 0, MAP_VERDANTURF_TOWN_FRIENDSHIP_RATERS_HOUSE
+	warp_def 17, 15, 0, 0, MAP_VERDANTURF_TOWN_HOUSE
 
 VerdanturfTown_MapBGEvents:: @ 8380F98
 	bg_event 14, 3, 0, 1, 0, VerdanturfTown_EventScript_1A00E1

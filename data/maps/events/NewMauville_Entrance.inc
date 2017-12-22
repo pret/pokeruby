@@ -1,6 +1,6 @@
 NewMauville_Entrance_MapWarps:: @ 838DED4
-	warp_def 4, 6, 3, 0, Route110
-	warp_def 4, 1, 3, 0, NewMauville_Inside
+	warp_def 4, 6, 3, 0, MAP_ROUTE110
+	warp_def 4, 1, 3, 0, MAP_NEW_MAUVILLE_INSIDE
 
 NewMauville_Entrance_MapCoordEvents:: @ 838DEE4
 	coord_event 4, 2, 3, 0, 0x40ba, 0, 0, NewMauville_Entrance_EventScript_15E4DC

@@ -6,7 +6,7 @@
 #include "main.h"
 #include "text.h"
 #include "menu.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "title_screen.h"
 #include "sound.h"
 #include "pokedex_cry_screen.h"

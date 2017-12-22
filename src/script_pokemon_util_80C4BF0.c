@@ -10,17 +10,17 @@
 #include "debug.h"
 #include "decompress.h"
 #include "event_data.h"
-#include "items.h"
+#include "constants/items.h"
 #include "link.h"
 #include "load_save.h"
 #include "main.h"
 #include "menu.h"
 #include "pokedex.h"
 #include "pokemon.h"
-#include "rng.h"
+#include "random.h"
 #include "overworld.h"
 #include "script_pokemon_80C4.h"
-#include "species.h"
+#include "constants/species.h"
 #include "task.h"
 #include "ewram.h"
 
@@ -38,9 +38,9 @@ extern u16 gSpecialVar_0x8004;
 extern u16 gSpecialVar_0x8005;
 extern u16 gSpecialVar_0x8006;
 
-extern u16 gScriptContestCategory;
-extern u16 gScriptContestRank;
-extern u16 gScriptResult;
+extern u16 gSpecialVar_ContestCategory;
+extern u16 gSpecialVar_ContestRank;
+extern u16 gSpecialVar_Result;
 
 extern u32 gUnknown_03005D28;
 
@@ -91,7 +91,7 @@ void sub_80C4C78(void)
     u16 var;
     u16 returnVar;
 
-    switch(gScriptContestCategory)
+    switch(gSpecialVar_ContestCategory)
     {
     case 0:
         var = 8;
@@ -127,7 +127,7 @@ void sub_80C4CEC(void)
 void sub_80C4CF8(void)
 {
     if(!gUnknown_02038690[gContestPlayerMonIndex]
-    && gScriptContestRank == 3
+    && gSpecialVar_ContestRank == 3
     && (s16)gUnknown_02038678[gContestPlayerMonIndex] >= 800)
     {
         gSpecialVar_0x8004 = 1;
@@ -388,7 +388,7 @@ bool8 GiveMonArtistRibbon(void)
 
     if(ribbon == FALSE
     && gUnknown_02038690[gContestPlayerMonIndex] == 0
-    && gScriptContestRank == 3
+    && gSpecialVar_ContestRank == 3
     && (s16)gUnknown_02038678[gContestPlayerMonIndex] >= 800)
     {
         ribbon = TRUE;
@@ -488,9 +488,9 @@ void sub_80C5190(u8 taskId)
 void ScriptGetMultiplayerId(void)
 {
     if(gIsLinkContest & 1)
-        gScriptResult = GetMultiplayerId();
+        gSpecialVar_Result = GetMultiplayerId();
     else
-        gScriptResult = 4;
+        gSpecialVar_Result = 4;
 }
 
 void ScriptRandom(void)
@@ -502,11 +502,11 @@ void ScriptRandom(void)
     {
         gUnknown_03005D28 = 1103515245 * gUnknown_03005D28 + 24691;
         random = gUnknown_03005D28 >> 16;
-        scriptPtr = &gScriptResult;
+        scriptPtr = &gSpecialVar_Result;
     }
     else
     {
-        scriptPtr = &gScriptResult;
+        scriptPtr = &gSpecialVar_Result;
         random = Random();
     }
     *scriptPtr = random % *scriptPtr;
@@ -587,13 +587,13 @@ void CheckForAlivePartyMons(void)
     switch(var)
     {
     case 1:
-        gScriptResult = var;
+        gSpecialVar_Result = var;
         break;
     case 0:
-        gScriptResult = var;
+        gSpecialVar_Result = var;
         break;
     case 2:
-        gScriptResult = var;
+        gSpecialVar_Result = var;
         break;
     }
 }
@@ -657,10 +657,10 @@ void sub_80C5580(void)
     switch(var)
     {
     case 0:
-        gScriptResult = 0;
+        gSpecialVar_Result = 0;
         break;
     default:
-        gScriptResult = 1;
+        gSpecialVar_Result = 1;
         break;
     }
 
@@ -681,11 +681,11 @@ void SetBattleTowerPlayerParty(void)
     {
     case 0: // player quit battle tower?
         LoadPlayerParty();
-        gScriptResult = 0;
+        gSpecialVar_Result = 0;
         break;
     default: // load battle tower.
         ReducePlayerPartyToThree();
-        gScriptResult = 1;
+        gSpecialVar_Result = 1;
         break;
     }
 

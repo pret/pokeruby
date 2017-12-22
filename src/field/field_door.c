@@ -3,7 +3,7 @@
 #include "field_camera.h"
 #include "fieldmap.h"
 #include "metatile_behavior.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "task.h"
 
 const u8 DoorAnimTiles_04[][0x100] =

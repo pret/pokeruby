@@ -1,18 +1,19 @@
 #include "global.h"
-#include "abilities.h"
+#include "constants/abilities.h"
 #include "battle.h"
-#include "moves.h"
+#include "constants/moves.h"
 #include "item.h"
-#include "items.h"
-#include "hold_effects.h"
-#include "species.h"
+#include "constants/items.h"
+#include "event_data.h"
+#include "constants/hold_effects.h"
+#include "constants/species.h"
 #include "pokemon.h"
 #include "data2.h"
-#include "rng.h"
+#include "random.h"
 #include "text.h"
-#include "battle_move_effects.h"
+#include "constants/battle_move_effects.h"
 #include "string_util.h"
-#include "flags.h"
+#include "constants/flags.h"
 #include "ewram.h"
 
 extern u8* gBattlescriptCurrInstr;
@@ -3136,15 +3137,15 @@ u8 IsPokeDisobedient(void)
     if (gBattleTypeFlags & BATTLE_TYPE_LINK
      || GetBankSide(gBankAttacker) == 1
      || !IsOtherTrainer(gBattleMons[gBankAttacker].otId, gBattleMons[gBankAttacker].otName)
-     || FlagGet(BADGE08_GET))
+     || FlagGet(FLAG_BADGE08_GET))
         return 0;
 
     obedienceLevel = 10;
-    if (FlagGet(BADGE02_GET))
+    if (FlagGet(FLAG_BADGE02_GET))
         obedienceLevel = 30;
-    if (FlagGet(BADGE04_GET))
+    if (FlagGet(FLAG_BADGE04_GET))
         obedienceLevel = 50;
-    if (FlagGet(BADGE06_GET))
+    if (FlagGet(FLAG_BADGE06_GET))
         obedienceLevel = 70;
 
     if (gBattleMons[gBankAttacker].level <= obedienceLevel)

@@ -7,8 +7,8 @@ LilycoveCity_House3_MapObjects:: @ 838A110
 	object_event 6, MAP_OBJ_GFX_MAN_1, 0, 7, 0, 5, 0, 3, 9, 17, 0, 0, 0, 0, 0, LilycoveCity_House3_EventScript_159C32, 0, 0, 0
 
 LilycoveCity_House3_MapWarps:: @ 838A1A0
-	warp_def 3, 7, 0, 10, LilycoveCity
-	warp_def 4, 7, 0, 10, LilycoveCity
+	warp_def 3, 7, 0, 10, MAP_LILYCOVE_CITY
+	warp_def 4, 7, 0, 10, MAP_LILYCOVE_CITY
 
 LilycoveCity_House3_MapEvents:: @ 838A1B0
 	map_events LilycoveCity_House3_MapObjects, LilycoveCity_House3_MapWarps, 0x0, 0x0

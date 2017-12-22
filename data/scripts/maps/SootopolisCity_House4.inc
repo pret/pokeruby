@@ -13,8 +13,8 @@ SootopolisCity_House4_EventScript_15B35F:: @ 815B35F
 	lock
 	faceplayer
 	waitse
-	playpokecry SPECIES_AZUMARILL, 0
+	playmoncry SPECIES_AZUMARILL, 0
 	msgbox SootopolisCity_House4_Text_18FDD8, 4
-	waitpokecry
+	waitmoncry
 	release
 	end

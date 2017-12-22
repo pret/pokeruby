@@ -8,7 +8,7 @@
 #include "menu_cursor.h"
 #include "palette.h"
 #include "rom3.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "text.h"
 #include "util.h"
@@ -31,7 +31,7 @@ extern u8 gObjectBankIDs[];
 extern struct SpriteTemplate gUnknown_02024E8C;
 extern u16 gBattleTypeFlags;
 extern u32 gBattleExecBuffer;
-extern u16 gScriptItemId;
+extern u16 gSpecialVar_ItemId;
 extern MainCallback gPreBattleCallback1;
 extern u8 gBankInMenu;
 extern u8 gHealthboxIDs[];
@@ -315,7 +315,7 @@ void sub_812B758(void)
 {
     if (gMain.callback2 == sub_800F808 && !gPaletteFade.active)
     {
-        Emitcmd35(1, gScriptItemId);
+        Emitcmd35(1, gSpecialVar_ItemId);
         SafariBufferExecCompleted();
     }
 }

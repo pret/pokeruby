@@ -32,9 +32,9 @@ RusturfTunnel_EventScript_15C782:: @ 815C782
 RusturfTunnel_EventScript_15C799:: @ 815C799
 	lock
 	faceplayer
-	checkflag 1
+	checkflag FLAG_TEMP_1
 	goto_if_eq RusturfTunnel_EventScript_15C7BC
-	setflag 1
+	setflag FLAG_TEMP_1
 	msgbox RusturfTunnel_Text_1944C5, 4
 	closemessage
 	applymovement LAST_TALKED, RusturfTunnel_Movement_1A083D
@@ -64,8 +64,8 @@ RusturfTunnel_EventScript_15C7D1:: @ 815C7D1
 	call_if 1, RusturfTunnel_EventScript_15C8EB
 	compare 0x4001, 3
 	call_if 1, RusturfTunnel_EventScript_15C8EB
-	giveitem ITEM_HM04
-	setflag 106
+	giveitem_std ITEM_HM04
+	setflag FLAG_RECEIVED_HM04
 	msgbox RusturfTunnel_Text_194693, 4
 	closemessage
 	compare 0x4001, 1
@@ -300,9 +300,9 @@ RusturfTunnel_EventScript_15C9D7:: @ 815C9D7
 	lock
 	faceplayer
 	waitse
-	playpokecry SPECIES_WINGULL, 0
+	playmoncry SPECIES_WINGULL, 0
 	msgbox RusturfTunnel_Text_194188, 4
-	waitpokecry
+	waitmoncry
 	release
 	end
 
@@ -313,7 +313,7 @@ RusturfTunnel_EventScript_15C9EA:: @ 815C9EA
 	msgbox RusturfTunnel_Text_19419B, 4
 	trainerbattle 3, OPPONENT_RUSTURF_TUNNEL_GRUNT, 0, RusturfTunnel_Text_194243
 	msgbox RusturfTunnel_Text_194274, 4
-	giveitem ITEM_DEVON_GOODS
+	giveitem_std ITEM_DEVON_GOODS
 	closemessage
 	applymovement 255, RusturfTunnel_Movement_15CA99
 	applymovement 6, RusturfTunnel_Movement_15CAA2
@@ -332,20 +332,20 @@ RusturfTunnel_EventScript_15C9EA:: @ 815C9EA
 	message RusturfTunnel_Text_19434F
 	waitmessage
 	waitse
-	playpokecry SPECIES_WINGULL, 0
-	waitbutton
-	waitpokecry
+	playmoncry SPECIES_WINGULL, 0
+	waitbuttonpress
+	waitmoncry
 	closemessage
 	applymovement 5, RusturfTunnel_Movement_15CAB4
 	applymovement 7, RusturfTunnel_Movement_15CAC3
 	waitmovement 0
 	removeobject 5
 	removeobject 7
-	clearflag 142
-	setflag 143
+	clearflag FLAG_DEVON_GOODS_STOLEN
+	setflag FLAG_RECOVERED_DEVON_GOODS
 	setvar 0x405a, 4
 	setvar 0x4090, 1
-	setflag 891
+	setflag FLAG_HIDE_BRINEY_ROUTE116
 	release
 	end
 

@@ -1,19 +1,19 @@
 SSTidalCorridor_MapObjects:: @ 83916F8
 	object_event 1, MAP_OBJ_GFX_SAILOR, 0, 1, 0, 11, 0, 3, 7, 0, 0, 0, 0, 0, 0, SSTidalCorridor_EventScript_15FDD6, 0, 0, 0
 	object_event 2, MAP_OBJ_GFX_SAILOR, 0, 16, 0, 7, 0, 3, 3, 32, 0, 0, 0, 0, 0, SSTidalCorridor_EventScript_15FE60, 0, 0, 0
-	object_event 3, MAP_OBJ_GFX_OLD_MAN_1, 0, 9, 0, 2, 0, 3, 8, 17, 0, 0, 0, 0, 0, SSTidalCorridor_EventScript_15FD96, 950, 0, 0
-	object_event 4, MAP_OBJ_GFX_WINGULL, 0, 7, 0, 2, 0, 3, 1, 17, 0, 0, 0, 0, 0, SSTidalCorridor_EventScript_15FD9F, 950, 0, 0
+	object_event 3, MAP_OBJ_GFX_OLD_MAN_1, 0, 9, 0, 2, 0, 3, 8, 17, 0, 0, 0, 0, 0, SSTidalCorridor_EventScript_15FD96, FLAG_HIDE_BRINEY_AND_PEEKO_SS_TIDAL, 0, 0
+	object_event 4, MAP_OBJ_GFX_WINGULL, 0, 7, 0, 2, 0, 3, 1, 17, 0, 0, 0, 0, 0, SSTidalCorridor_EventScript_15FD9F, FLAG_HIDE_BRINEY_AND_PEEKO_SS_TIDAL, 0, 0
 
 SSTidalCorridor_MapWarps:: @ 8391758
-	warp_def 4, 9, 3, 0, SSTidalRooms
-	warp_def 7, 9, 3, 2, SSTidalRooms
-	warp_def 10, 9, 3, 4, SSTidalRooms
-	warp_def 13, 9, 3, 6, SSTidalRooms
-	warp_def 4, 3, 3, 8, SSTidalRooms
-	warp_def 7, 3, 3, 9, SSTidalRooms
-	warp_def 10, 3, 3, 10, SSTidalRooms
-	warp_def 13, 3, 3, 11, SSTidalRooms
-	warp_def 16, 2, 3, 0, SSTidalLowerDeck
+	warp_def 4, 9, 3, 0, MAP_SS_TIDAL_ROOMS
+	warp_def 7, 9, 3, 2, MAP_SS_TIDAL_ROOMS
+	warp_def 10, 9, 3, 4, MAP_SS_TIDAL_ROOMS
+	warp_def 13, 9, 3, 6, MAP_SS_TIDAL_ROOMS
+	warp_def 4, 3, 3, 8, MAP_SS_TIDAL_ROOMS
+	warp_def 7, 3, 3, 9, MAP_SS_TIDAL_ROOMS
+	warp_def 10, 3, 3, 10, MAP_SS_TIDAL_ROOMS
+	warp_def 13, 3, 3, 11, MAP_SS_TIDAL_ROOMS
+	warp_def 16, 2, 3, 0, MAP_SS_TIDAL_LOWER_DECK
 
 SSTidalCorridor_MapBGEvents:: @ 83917A0
 	bg_event 2, 1, 0, 0, 0, SSTidalCorridor_EventScript_15FE3A

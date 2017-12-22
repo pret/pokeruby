@@ -7,9 +7,9 @@
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
-#include "rng.h"
+#include "random.h"
 #include "save.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "sprite.h"
 #include "strings2.h"
@@ -635,7 +635,7 @@ static void BuildSendCmd(u16 code)
         break;
     case 0xAAAB:
         gSendCmd[0] = 0xAAAB;
-        gSendCmd[1] = gScriptItemId;
+        gSendCmd[1] = gSpecialVar_ItemId;
         break;
     case 0xCCCC:
         gSendCmd[0] = 0xCCCC;

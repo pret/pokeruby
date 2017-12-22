@@ -409,7 +409,7 @@ const u8 OtherText_Switch[] = _("SWITCH");
 const u8 OtherText_PokeInfo[] = _("POKéMON INFO");
 const u8 OtherText_PokeSkills[] = _("POKéMON SKILLS");
 const u8 OtherText_BattleMoves[] = _("BATTLE MOVES");
-const u8 OtherText_ContestMoves[] = _("C0NTEST MOVES"); // why the l33t 0, that's stupid
+const u8 OtherText_ContestMoves[] = _("C0NTEST MOVES"); // The "O" in "CONTEST" is actually a 0.
 const u8 OtherText_Info[] = _("INFO");
 
 const u8 gOtherText_EggLongTime[] = _("It looks like this EGG will\ntake a long time to hatch.");

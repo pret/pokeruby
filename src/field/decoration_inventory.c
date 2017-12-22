@@ -1,8 +1,5 @@
-//
-
-//
-
 #include "global.h"
+#include "constants/decorations.h"
 #include "sprite.h"
 #include "task.h"
 #include "decoration.h"

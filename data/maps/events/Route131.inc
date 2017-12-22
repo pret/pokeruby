@@ -7,7 +7,7 @@ Route131_MapObjects:: @ 8385298
 	object_event 6, MAP_OBJ_GFX_TUBER_M_SWIMMING, 0, 8, 0, 16, 0, 1, 8, 17, 0, 1, 0, 0, 0, Route131_EventScript_1524C9, 0, 0, 0
 
 Route131_MapWarps:: @ 8385328
-	warp_def 36, 6, 3, 0, SkyPillar_Entrance
+	warp_def 36, 6, 3, 0, MAP_SKY_PILLAR_ENTRANCE
 
 Route131_MapEvents:: @ 8385330
 	map_events Route131_MapObjects, Route131_MapWarps, 0x0, 0x0

@@ -1,11 +1,4 @@
-@ From mauville_old_man.h
-@ TODO: Put these in a header
-
-MAUVILLE_MAN_BARD        = 0
-MAUVILLE_MAN_HIPSTER     = 1
-MAUVILLE_MAN_TRADER      = 2
-MAUVILLE_MAN_STORYTELLER = 3
-MAUVILLE_MAN_GIDDY       = 4
+#include "constants/mauville_man.h"
 
 MauvilleCity_PokemonCenter_1F_EventScript_1AE744:: @ 81AE744
 	special ScrSpecial_GetCurrentMauvilleMan
@@ -91,7 +84,7 @@ dont_write_lyrics:
 SpeakToHipster:
 	lock
 	faceplayer
-	setflag 2054
+	setflag FLAG_SYS_HIPSTER_MEET
 	msgbox gTextHipster_TheyCallMeTheHipster, 4
 	special ScrSpecial_GetHipsterSpokenFlag
 	compare RESULT, FALSE
@@ -240,7 +233,7 @@ choose_story:
 	setvar 0x8008, 1
 	special ScrSpecial_StorytellerDisplayStory
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	specialvar RESULT, ScrSpecial_StorytellerUpdateStat
 	compare RESULT, FALSE
 	goto_if_eq no_stat_update

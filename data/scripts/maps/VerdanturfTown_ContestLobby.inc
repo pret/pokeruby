@@ -14,7 +14,7 @@ VerdanturfTown_ContestLobby_EventScript_153D76:: @ 8153D76
 	special sub_80C4BF0
 	call VerdanturfTown_ContestLobby_EventScript_15FBDB
 	setvar 0x4088, 1
-	warp LinkContestRoom1, 255, 7, 5
+	warp MAP_LINK_CONTEST_ROOM1, 255, 7, 5
 	waitstate
 	end
 
@@ -23,14 +23,14 @@ VerdanturfTown_ContestLobby_EventScript_153DA1:: @ 8153DA1
 	applymovement 1, VerdanturfTown_ContestLobby_Movement_153E25
 	waitmovement 0
 	playse 71
-	setmaptile 4, 2, 545, 1
-	setmaptile 4, 3, 609, 1
+	setmetatile 4, 2, 545, 1
+	setmetatile 4, 3, 609, 1
 	special DrawWholeMapView
 	applymovement 1, VerdanturfTown_ContestLobby_Movement_153E28
 	waitmovement 0
 	playse 71
-	setmaptile 4, 2, 721, 1
-	setmaptile 4, 3, 729, 1
+	setmetatile 4, 2, 721, 1
+	setmetatile 4, 3, 729, 1
 	special DrawWholeMapView
 	delay 20
 	applymovement 1, VerdanturfTown_ContestLobby_Movement_153E35
@@ -101,13 +101,13 @@ VerdanturfTown_ContestLobby_EventScript_153E3E:: @ 8153E3E
 VerdanturfTown_ContestLobby_EventScript_153E47:: @ 8153E47
 	lock
 	faceplayer
-	checkflag 235
+	checkflag FLAG_RECEIVED_TM45
 	goto_if_eq VerdanturfTown_ContestLobby_EventScript_153E76
 	msgbox VerdanturfTown_ContestLobby_Text_177DEC, 4
-	giveitem ITEM_TM45
+	giveitem_std ITEM_TM45
 	compare RESULT, 0
 	goto_if_eq VerdanturfTown_ContestLobby_EventScript_1A029B
-	setflag 235
+	setflag FLAG_RECEIVED_TM45
 	release
 	end
 
@@ -123,7 +123,7 @@ VerdanturfTown_ContestLobby_EventScript_153E80:: @ 8153E80
 VerdanturfTown_ContestLobby_EventScript_153E89:: @ 8153E89
 	lockall
 	special ShowBerryBlenderRecordWindow
-	waitbutton
+	waitbuttonpress
 	erasebox 0, 0, 29, 19
 	releaseall
 	end

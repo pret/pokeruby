@@ -14,7 +14,7 @@ FallarborTown_ContestLobby_EventScript_1539CD:: @ 81539CD
 	special sub_80C4BF0
 	call FallarborTown_ContestLobby_EventScript_15FBDB
 	setvar 0x4088, 2
-	warp LinkContestRoom1, 255, 7, 5
+	warp MAP_LINK_CONTEST_ROOM1, 255, 7, 5
 	waitstate
 	end
 
@@ -23,14 +23,14 @@ FallarborTown_ContestLobby_EventScript_1539F8:: @ 81539F8
 	applymovement 1, FallarborTown_ContestLobby_Movement_153A7C
 	waitmovement 0
 	playse 71
-	setmaptile 4, 2, 545, 1
-	setmaptile 4, 3, 609, 1
+	setmetatile 4, 2, 545, 1
+	setmetatile 4, 3, 609, 1
 	special DrawWholeMapView
 	applymovement 1, FallarborTown_ContestLobby_Movement_153A7F
 	waitmovement 0
 	playse 71
-	setmaptile 4, 2, 721, 1
-	setmaptile 4, 3, 729, 1
+	setmetatile 4, 2, 721, 1
+	setmetatile 4, 3, 729, 1
 	special DrawWholeMapView
 	delay 20
 	applymovement 1, FallarborTown_ContestLobby_Movement_153A8C
@@ -92,7 +92,7 @@ FallarborTown_ContestLobby_EventScript_153A8E:: @ 8153A8E
 	end
 
 FallarborTown_ContestLobby_EventScript_153A97:: @ 8153A97
-	checkflag 270
+	checkflag FLAG_CONTEST_SKETCH_CREATED
 	goto_if_eq FallarborTown_ContestLobby_EventScript_153AA9
 	msgbox FallarborTown_ContestLobby_Text_177246, 2
 	end
@@ -115,7 +115,7 @@ FallarborTown_ContestLobby_EventScript_153ABB:: @ 8153ABB
 FallarborTown_ContestLobby_EventScript_153AC2:: @ 8153AC2
 	lockall
 	special ShowBerryBlenderRecordWindow
-	waitbutton
+	waitbuttonpress
 	erasebox 0, 0, 29, 19
 	releaseall
 	end

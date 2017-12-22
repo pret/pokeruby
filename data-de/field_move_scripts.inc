@@ -1,13 +1,13 @@
 S_CuttableTree:: @ 81B0DCC
 	lockall
-	checkflag 2055
+	checkflag FLAG_BADGE01_GET
 	goto_if 0, CannotUseCut
-	checkpokemove MOVE_CUT
+	checkpartymove MOVE_CUT
 	compare RESULT, 6
 	goto_if_eq CannotUseCut
-	setfieldeffect 0, RESULT
-	getpartypokename 0, RESULT
-	getmovename 1, MOVE_CUT
+	setfieldeffectargument 0, RESULT
+	bufferpartymonnick 0, RESULT
+	buffermovename 1, MOVE_CUT
 	msgbox UseCutPromptText, 5
 	compare RESULT, 0
 	goto_if_eq Cut_ChoseNo
@@ -61,14 +61,14 @@ CannotUseCutText: @ 81B0E8E
 
 S_BreakableRock:: @ 81B0EB7
 	lockall
-	checkflag 2057
+	checkflag FLAG_BADGE03_GET
 	goto_if 0, CannotUseRockSmash
-	checkpokemove MOVE_ROCK_SMASH
+	checkpartymove MOVE_ROCK_SMASH
 	compare RESULT, 6
 	goto_if_eq CannotUseRockSmash
-	setfieldeffect 0, RESULT
-	getpartypokename 0, RESULT
-	getmovename 1, MOVE_ROCK_SMASH
+	setfieldeffectargument 0, RESULT
+	bufferpartymonnick 0, RESULT
+	buffermovename 1, MOVE_ROCK_SMASH
 	msgbox UseRockSmashPromptText, 5
 	compare RESULT, 0
 	goto_if_eq RockSmash_ChoseNo
@@ -128,14 +128,14 @@ CannotUseRockSmashText: @ 81B0F90
 
 S_PushableBoulder:: @ 81B0FCB
 	lockall
-	checkflag 2058
+	checkflag FLAG_BADGE04_GET
 	goto_if 0, CannotUseStrength
-	checkflag 2089
+	checkflag FLAG_SYS_USE_STRENGTH
 	goto_if_eq AlreadyUsedStrength
-	checkpokemove 70
+	checkpartymove 70
 	compare RESULT, 6
 	goto_if_eq CannotUseStrength
-	setfieldeffect 0, RESULT
+	setfieldeffectargument 0, RESULT
 	msgbox UseStrengthPromptText, 5
 	compare RESULT, 0
 	goto_if_eq Strength_ChoseNo
@@ -153,7 +153,7 @@ S_UseStrength:: @ 81B100E
 	end
 
 UsedStrength: @ 81B1019
-	setflag 2089
+	setflag FLAG_SYS_USE_STRENGTH
 	msgbox UsedStrengthText, 3
 	releaseall
 	end
@@ -193,11 +193,11 @@ AlreadyUsedStrengthText: @ 81B1127
 
 S_UseWaterfall:: @ 81B115A
 	lockall
-	checkpokemove MOVE_WATERFALL
+	checkpartymove MOVE_WATERFALL
 	compare RESULT, 6
 	goto_if_eq Waterfall_NoMonKnows
-	getpartypokename 0, RESULT
-	setfieldeffect 0, RESULT
+	bufferpartymonnick 0, RESULT
+	setfieldeffectargument 0, RESULT
 	msgbox UseWaterfallPromptText, 5
 	compare RESULT, 0
 	goto_if_eq Waterfall_Done
@@ -226,12 +226,12 @@ UsedWaterfallText: @ 81B120D
 
 UseDiveScript:: @ 81B1220
 	lockall
-	checkpokemove MOVE_DIVE
+	checkpartymove MOVE_DIVE
 	compare RESULT, 6
 	goto_if_eq CannotUseDive
-	getpartypokename 0, RESULT
-	setfieldeffect 0, RESULT
-	setfieldeffect 1, 1
+	bufferpartymonnick 0, RESULT
+	setfieldeffectargument 0, RESULT
+	setfieldeffectargument 1, 1
 	msgbox UseDivePromptText, 5
 	compare RESULT, 0
 	goto_if_eq Dive_Done
@@ -249,12 +249,12 @@ Dive_Done: @ 81B1267
 
 S_UseDiveUnderwater:: @ 81B1269
 	lockall
-	checkpokemove MOVE_DIVE
+	checkpartymove MOVE_DIVE
 	compare RESULT, 6
 	goto_if_eq UnderwaterCannotUseDive
-	getpartypokename 0, RESULT
-	setfieldeffect 0, RESULT
-	setfieldeffect 1, 1
+	bufferpartymonnick 0, RESULT
+	setfieldeffectargument 0, RESULT
+	setfieldeffectargument 1, 1
 	msgbox UnderwaterUseDivePromptText, 5
 	compare RESULT, 0
 	goto_if_eq UnderwaterDive_Done

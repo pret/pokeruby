@@ -3,7 +3,7 @@
 #include "event_data.h"
 #include "field_weather.h"
 #include "pokemon.h"
-#include "rng.h"
+#include "random.h"
 #include "overworld.h"
 #include "rtc.h"
 #include "script.h"
@@ -85,9 +85,9 @@ void UpdateShoalTideFlag(void)
     {
         RtcCalcLocalTime();
         if (tide[gLocalTime.hours])
-            FlagSet(SYS_SHOAL_TIDE);
+            FlagSet(FLAG_SYS_SHOAL_TIDE);
         else
-            FlagClear(SYS_SHOAL_TIDE);
+            FlagClear(FLAG_SYS_SHOAL_TIDE);
     }
 }
 

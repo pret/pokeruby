@@ -8,12 +8,12 @@
 #include "pokemon_menu.h"
 #include "overworld.h"
 #include "script.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
 
-extern u16 gScriptLastTalked;
+extern u16 gSpecialVar_LastTalked;
 extern void (*gFieldCallback)(void);
 extern u8 gLastFieldPokeMenuOpened;
 extern void (*gUnknown_03005CE4)(void);
@@ -43,7 +43,7 @@ bool8 npc_before_player_of_type(u8 a)
     }
     else
     {
-        gScriptLastTalked = gMapObjects[mapObjId].localId;
+        gSpecialVar_LastTalked = gMapObjects[mapObjId].localId;
         return TRUE;
     }
 }

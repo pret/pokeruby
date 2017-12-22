@@ -4,14 +4,14 @@
 #include "field_specials.h"
 #include "m4a.h"
 #include "main.h"
-#include "map_constants.h"
+#include "constants/maps.h"
 #include "menu.h"
 #include "palette.h"
 #include "pokemon_menu.h"
 #include "region_map.h"
 #include "overworld.h"
 #include "secret_base.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sprite.h"
 #include "strings.h"
 #include "string_util.h"
@@ -707,9 +707,9 @@ static void InitializeCursorPosition(void)
     u16 r9;
 
     if (gSaveBlock1.location.mapGroup == 25
-     && (gSaveBlock1.location.mapNum == MAP_ID_SS_TIDAL_CORRIDOR
-      || gSaveBlock1.location.mapNum == MAP_ID_SS_TIDAL_LOWER_DECK
-      || gSaveBlock1.location.mapNum == MAP_ID_SS_TIDAL_ROOMS))
+     && (gSaveBlock1.location.mapNum == MAP_NUM(SS_TIDAL_CORRIDOR)
+      || gSaveBlock1.location.mapNum == MAP_NUM(SS_TIDAL_LOWER_DECK)
+      || gSaveBlock1.location.mapNum == MAP_NUM(SS_TIDAL_ROOMS)))
     {
         sub_80FB600();
         return;
@@ -916,9 +916,9 @@ static u16 sub_80FB758(u16 mapSectionId)
         return FlagGet(FLAG_VISITED_EVER_GRANDE_CITY) ? 2 : 3;
 
     case MAPSEC_BATTLE_TOWER:
-        return FlagGet(FLAG_UNLOCK_BATTLE_TOWER) ? 4 : 0;
+        return FlagGet(FLAG_LANDMARK_BATTLE_TOWER) ? 4 : 0;
     case MAPSEC_SOUTHERN_ISLAND:
-        return FlagGet(FLAG_UNLOCK_SOUTHERN_ISLAND) ? 1 : 0;
+        return FlagGet(FLAG_LANDMARK_SOUTHERN_ISLAND) ? 1 : 0;
     default:
         return 1;
     }
@@ -1422,7 +1422,7 @@ static const u8 *const sEverGrandeCityAreaNames[] = {OtherText_PokeLeague, Other
 
 static const struct UnknownStruct4 sUnknown_083E79C0[1] =
 {
-    {sEverGrandeCityAreaNames, MAPSEC_EVER_GRANDE_CITY, SYS_POKEMON_LEAGUE_FLY},
+    {sEverGrandeCityAreaNames, MAPSEC_EVER_GRANDE_CITY, FLAG_SYS_POKEMON_LEAGUE_FLY},
 };
 
 // XXX: what is this?
@@ -1822,7 +1822,7 @@ static void sub_80FC69C(void)
                 sub_8053538((gSaveBlock2.playerGender == MALE) ? 12 : 13);
                 break;
             case MAPSEC_EVER_GRANDE_CITY:
-                sub_8053538((FlagGet(0x854) && ewram0_3.regionMap.everGrandeCityArea == 0) ? 20 : 11);
+                sub_8053538((FlagGet(FLAG_SYS_POKEMON_LEAGUE_FLY) && ewram0_3.regionMap.everGrandeCityArea == 0) ? 20 : 11);
                 break;
             default:
                 if (sUnknown_083E7920[ewram0_3.regionMap.mapSectionId][2] != 0)

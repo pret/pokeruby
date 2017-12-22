@@ -76,7 +76,7 @@ FallarborTown_ContestLobby_EventScript_1B76EF:: @ 81B76EF
 FallarborTown_ContestLobby_EventScript_1B770E:: @ 81B770E
 	msgbox FallarborTown_ContestLobby_Text_1B6FF0, 4
 	dodailyevents
-	checkflag 2241
+	checkflag FLAG_DAILY_RECEIVED_BERRY_FALLARBOR
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B774F
 	goto FallarborTown_ContestLobby_EventScript_1B7759
 	end
@@ -106,8 +106,8 @@ FallarborTown_ContestLobby_EventScript_1B774F:: @ 81B774F
 
 FallarborTown_ContestLobby_EventScript_1B7759:: @ 81B7759
 	msgbox FallarborTown_ContestLobby_Text_1B704A, 4
-	giveitem ITEM_PECHA_BERRY
-	setflag 2241
+	giveitem_std ITEM_PECHA_BERRY
+	setflag FLAG_DAILY_RECEIVED_BERRY_FALLARBOR
 	goto FallarborTown_ContestLobby_EventScript_1B76EF
 	end
 
@@ -162,7 +162,7 @@ FallarborTown_ContestLobby_EventScript_1B77DC:: @ 81B77DC
 
 FallarborTown_ContestLobby_EventScript_1B77E6:: @ 81B77E6
 	dodailyevents
-	checkflag 2241
+	checkflag FLAG_DAILY_RECEIVED_BERRY_FALLARBOR
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B77F6
 	goto FallarborTown_ContestLobby_EventScript_1B7800
 	end
@@ -174,8 +174,8 @@ FallarborTown_ContestLobby_EventScript_1B77F6:: @ 81B77F6
 
 FallarborTown_ContestLobby_EventScript_1B7800:: @ 81B7800
 	msgbox FallarborTown_ContestLobby_Text_1B74B4, 4
-	giveitem ITEM_PECHA_BERRY
-	setflag 2241
+	giveitem_std ITEM_PECHA_BERRY
+	setflag FLAG_DAILY_RECEIVED_BERRY_FALLARBOR
 	msgbox FallarborTown_ContestLobby_Text_1B753A, 4
 	release
 	end

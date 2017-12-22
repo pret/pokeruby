@@ -11,12 +11,12 @@
 #include "item.h"
 #include "item_use.h"
 #include "item_menu.h"
-#include "items.h"
+#include "constants/items.h"
 #include "mail_data.h"
 #include "main.h"
 #include "menu.h"
 #include "menu_helpers.h"
-#include "moves.h"
+#include "constants/moves.h"
 #include "palette.h"
 #include "pokemon.h"
 #include "pokemon_icon.h"
@@ -25,9 +25,9 @@
 #include "pokemon_summary_screen.h"
 #include "rom_8077ABC.h"
 #include "rom_8094928.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
-#include "species.h"
+#include "constants/species.h"
 #include "sprite.h"
 #include "string_util.h"
 #include "strings.h"
@@ -4292,7 +4292,7 @@ void sub_806F3FC(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        sub_809D9F0(gPlayerParty, ewram1C000.unk5, gPlayerPartyCount - 1, sub_808B564, ewram1C000.unk8);
+        ShowSelectMovePokemonSummaryScreen(gPlayerParty, ewram1C000.unk5, gPlayerPartyCount - 1, sub_808B564, ewram1C000.unk8);
         DestroyTask(taskId);
     }
 }
@@ -4314,7 +4314,7 @@ void TaughtMove(u8 taskId)
         u16 r4;
 
         gTasks[taskId].func = TaskDummy;
-        sub_806E8D0(taskId, gScriptItemId, sub_808B508);
+        sub_806E8D0(taskId, gSpecialVar_ItemId, sub_808B508);
         moveIndex = sub_809FA30();
         r4 = GetMonData(ewram1C000.pokemon, MON_DATA_MOVE1 + moveIndex);
         GetMonNickname(ewram1C000.pokemon, gStringVar1);
@@ -4340,7 +4340,7 @@ void StopTryingToTeachMove_806F588(u8 taskId)
     if (!gPaletteFade.active)
     {
         gTasks[taskId].func = TaskDummy;
-        sub_806E8D0(taskId, gScriptItemId, sub_808B508);
+        sub_806E8D0(taskId, gSpecialVar_ItemId, sub_808B508);
         StringCopy(gStringVar2, gMoveNames[ewram1C000.unk8]);
         StringExpandPlaceholders(gStringVar4, gOtherText_StopTryingTo);
         sub_806E834(gStringVar4, 1);
@@ -5643,7 +5643,7 @@ _08070F8A:\n\
 
 void unref_sub_8070F90(void)
 {
-    FlagSet(SYS_POKEDEX_GET);
-    FlagSet(SYS_POKEMON_GET);
-    FlagSet(SYS_POKENAV_GET);
+    FlagSet(FLAG_SYS_POKEDEX_GET);
+    FlagSet(FLAG_SYS_POKEMON_GET);
+    FlagSet(FLAG_SYS_POKENAV_GET);
 }

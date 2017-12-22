@@ -4,16 +4,16 @@
 #include "field_camera.h"
 #include "field_effect.h"
 #include "fieldmap.h"
-#include "flags.h"
+#include "constants/flags.h"
 #include "main.h"
-#include "map_constants.h"
+#include "constants/maps.h"
 #include "map_obj_lock.h"
 #include "menu.h"
 #include "rom6.h"
 #include "script.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
-#include "species.h"
+#include "constants/species.h"
 #include "task.h"
 #include "text.h"
 
@@ -24,9 +24,9 @@ extern u8 S_OpenRegiceChamber[]; // regiice event script
 
 bool8 ShouldDoBrailleDigEffect(void)
 {
-    if (!FlagGet(SYS_BRAILLE_DIG)
-     && (gSaveBlock1.location.mapGroup == MAP_GROUP_SEALED_CHAMBER_OUTER_ROOM
-     && gSaveBlock1.location.mapNum == MAP_ID_SEALED_CHAMBER_OUTER_ROOM))
+    if (!FlagGet(FLAG_SYS_BRAILLE_DIG)
+     && (gSaveBlock1.location.mapGroup == MAP_GROUP(SEALED_CHAMBER_OUTER_ROOM)
+     && gSaveBlock1.location.mapNum == MAP_NUM(SEALED_CHAMBER_OUTER_ROOM)))
     {
         if (gSaveBlock1.pos.x == 10 && gSaveBlock1.pos.y == 3)
             return TRUE;
@@ -49,7 +49,7 @@ void DoBrailleDigEffect(void)
     MapGridSetMetatileIdAt(18, 9, 3636);
     DrawWholeMapView();
     PlaySE(SE_BAN);
-    FlagSet(SYS_BRAILLE_DIG);
+    FlagSet(FLAG_SYS_BRAILLE_DIG);
     ScriptContext2_Disable();
 }
 
@@ -68,7 +68,7 @@ bool8 CheckRelicanthWailord(void)
 
 bool8 ShouldDoBrailleStrengthEffect(void)
 {
-    if (!FlagGet(SYS_BRAILLE_STRENGTH) && (gSaveBlock1.location.mapGroup == MAP_GROUP_DESERT_RUINS && gSaveBlock1.location.mapNum == MAP_ID_DESERT_RUINS))
+    if (!FlagGet(FLAG_SYS_BRAILLE_STRENGTH) && (gSaveBlock1.location.mapGroup == MAP_GROUP(DESERT_RUINS) && gSaveBlock1.location.mapNum == MAP_NUM(DESERT_RUINS)))
     {
         if (gSaveBlock1.pos.x == 10 && gSaveBlock1.pos.y == 23)
             return TRUE;
@@ -92,13 +92,13 @@ void DoBrailleStrengthEffect(void)
     MapGridSetMetatileIdAt(16, 27, 3636);
     DrawWholeMapView();
     PlaySE(SE_BAN);
-    FlagSet(SYS_BRAILLE_STRENGTH);
+    FlagSet(FLAG_SYS_BRAILLE_STRENGTH);
     ScriptContext2_Disable();
 }
 
 bool8 ShouldDoBrailleFlyEffect(void)
 {
-    if (!FlagGet(SYS_BRAILLE_FLY) && (gSaveBlock1.location.mapGroup == MAP_GROUP_ANCIENT_TOMB && gSaveBlock1.location.mapNum == MAP_ID_ANCIENT_TOMB))
+    if (!FlagGet(FLAG_SYS_BRAILLE_FLY) && (gSaveBlock1.location.mapGroup == MAP_GROUP(ANCIENT_TOMB) && gSaveBlock1.location.mapNum == MAP_NUM(ANCIENT_TOMB)))
     {
         if (gSaveBlock1.pos.x == 8 && gSaveBlock1.pos.y == 25)
             return TRUE;
@@ -138,13 +138,13 @@ void UseFlyAncientTomb_Finish(void)
     MapGridSetMetatileIdAt(16, 27, 3636);
     DrawWholeMapView();
     PlaySE(SE_BAN);
-    FlagSet(SYS_BRAILLE_FLY);
+    FlagSet(FLAG_SYS_BRAILLE_FLY);
     ScriptContext2_Disable();
 }
 
 void DoBrailleWait(void)
 {
-    if (!FlagGet(SYS_BRAILLE_WAIT))
+    if (!FlagGet(FLAG_SYS_BRAILLE_WAIT))
         CreateTask(Task_BrailleWait, 0x50);
 }
 

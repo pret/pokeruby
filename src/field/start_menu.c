@@ -20,7 +20,7 @@
 #include "save.h"
 #include "save_menu_util.h"
 #include "script.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "sprite.h"
 #include "string_util.h"
@@ -50,7 +50,7 @@ static bool8 savingComplete;
 
 extern bool8 gDifferentSaveFile;
 extern u16 gSaveFileStatus;
-extern u16 gScriptResult;
+extern u16 gSpecialVar_Result;
 
 extern u8 gUnknown_03004860;
 
@@ -154,12 +154,12 @@ static void AddStartMenuAction(u8 action)
 
 static void BuildStartMenuActions_Normal(void)
 {
-    if (FlagGet(SYS_POKEDEX_GET) == TRUE)
+    if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
         AddStartMenuAction(MENU_ACTION_POKEDEX);
-    if (FlagGet(SYS_POKEMON_GET) == TRUE)
+    if (FlagGet(FLAG_SYS_POKEMON_GET) == TRUE)
         AddStartMenuAction(MENU_ACTION_POKEMON);
     AddStartMenuAction(MENU_ACTION_BAG);
-    if (FlagGet(SYS_POKENAV_GET) == TRUE)
+    if (FlagGet(FLAG_SYS_POKENAV_GET) == TRUE)
         AddStartMenuAction(MENU_ACTION_POKENAV);
     AddStartMenuAction(MENU_ACTION_PLAYER);
     AddStartMenuAction(MENU_ACTION_SAVE);
@@ -182,7 +182,7 @@ static void BuildStartMenuActions_Link(void)
 {
     AddStartMenuAction(MENU_ACTION_POKEMON);
     AddStartMenuAction(MENU_ACTION_BAG);
-    if (FlagGet(SYS_POKENAV_GET) == TRUE)
+    if (FlagGet(FLAG_SYS_POKENAV_GET) == TRUE)
         AddStartMenuAction(MENU_ACTION_POKENAV);
     AddStartMenuAction(MENU_ACTION_PLAYER_LINK);
     AddStartMenuAction(MENU_ACTION_OPTION);
@@ -528,10 +528,10 @@ static void Task_SaveDialog(u8 taskId)
     {
     case SAVE_CANCELED:
     case SAVE_ERROR:
-        gScriptResult = 0;
+        gSpecialVar_Result = 0;
         break;
     case SAVE_SUCCESS:
-        gScriptResult = status;
+        gSpecialVar_Result = status;
         break;
     case SAVE_IN_PROGRESS:
         return;

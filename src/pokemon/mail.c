@@ -1,7 +1,8 @@
 #include "global.h"
 #include "mail.h"
 #include "easy_chat.h"
-#include "items.h"
+#include "constants/items.h"
+#include "graphics.h"
 #include "mail_data.h"
 #include "menu.h"
 #include "menu_helpers.h"
@@ -31,7 +32,7 @@ struct MailLayout
     u8 var2;
     u8 var3_0:4;
     u8 var3_4:4;
-    struct UnkMailStruct *var4;
+    const struct UnkMailStruct *var4;
 };
 
 struct Unk2000000
@@ -53,25 +54,188 @@ struct Unk2000000
     u8 pad101[3];
     /*0x104*/ MainCallback var104;
     /*0x108*/ MainCallback var108;
-    /*0x10C*/ struct MailLayout *var10C;
+    /*0x10C*/ const struct MailLayout *var10C;
 };
 
 struct MailGraphics
 {
-    u16 (*palette)[];
-    u8 (*tiles)[];
-    u8 (*tileMap)[];
+    const u16 *palette;
+    const u8 *tiles;
+    const u8 *tileMap;
     u16 var0C;
     u16 var0E;
     u16 color10;
     u16 color12;
 };
 
-extern struct MailGraphics gMailGraphicsTable[];
-extern u16 gUnknown_083E562C[][2];
+const u16 gUnknown_083E562C[][2] =
+{
+    {0x6ACD, 0x51A5},
+    {0x45FC, 0x38D4},
+};
 
-extern struct MailLayout gUnknown_083E5730[];
-extern struct MailLayout gUnknown_083E57A4[];
+const struct MailGraphics gMailGraphicsTable[] =
+{
+    {
+        .palette = gMailPalette_Orange,
+        .tiles = gMailTiles_Orange,
+        .tileMap = gMailTilemap_Orange,
+        .var0C = 0x2C0,
+        .var0E = 0,
+        .color10 = 0x294A,
+        .color12 = 0x6739,
+    },
+    {
+        .palette = gMailPalette_Harbor,
+        .tiles = gMailTiles_Harbor,
+        .tileMap = gMailTilemap_Harbor,
+        .var0C = 0x2E0,
+        .var0E = 0,
+        .color10 = 0x7FFF,
+        .color12 = 0x4631,
+    },
+    {
+        .palette = gMailPalette_Glitter,
+        .tiles = gMailTiles_Glitter,
+        .tileMap = gMailTilemap_Glitter,
+        .var0C = 0x400,
+        .var0E = 0,
+        .color10 = 0x294A,
+        .color12 = 0x6739,
+    },
+    {
+        .palette = gMailPalette_Mech,
+        .tiles = gMailTiles_Mech,
+        .tileMap = gMailTilemap_Mech,
+        .var0C = 0x1E0,
+        .var0E = 0,
+        .color10 = 0x7FFF,
+        .color12 = 0x4631,
+    },
+    {
+        .palette = gMailPalette_Wood,
+        .tiles = gMailTiles_Wood,
+        .tileMap = gMailTilemap_Wood,
+        .var0C = 0x2E0,
+        .var0E = 0,
+        .color10 = 0x7FFF,
+        .color12 = 0x4631,
+    },
+    {
+        .palette = gMailPalette_Wave,
+        .tiles = gMailTiles_Wave,
+        .tileMap = gMailTilemap_Wave,
+        .var0C = 0x300,
+        .var0E = 0,
+        .color10 = 0x294A,
+        .color12 = 0x6739,
+    },
+    {
+        .palette = gMailPalette_Bead,
+        .tiles = gMailTiles_Bead,
+        .tileMap = gMailTilemap_Bead,
+        .var0C = 0x140,
+        .var0E = 0,
+        .color10 = 0x7FFF,
+        .color12 = 0x4631,
+    },
+    {
+        .palette = gMailPalette_Shadow,
+        .tiles = gMailTiles_Shadow,
+        .tileMap = gMailTilemap_Shadow,
+        .var0C = 0x300,
+        .var0E = 0,
+        .color10 = 0x7FFF,
+        .color12 = 0x4631,
+    },
+    {
+        .palette = gMailPalette_Tropic,
+        .tiles = gMailTiles_Tropic,
+        .tileMap = gMailTilemap_Tropic,
+        .var0C = 0x220,
+        .var0E = 0,
+        .color10 = 0x294A,
+        .color12 = 0x6739,
+    },
+    {
+        .palette = gMailPalette_Dream,
+        .tiles = gMailTiles_Dream,
+        .tileMap = gMailTilemap_Dream,
+        .var0C = 0x340,
+        .var0E = 0,
+        .color10 = 0x294A,
+        .color12 = 0x6739,
+    },
+    {
+        .palette = gMailPalette_Fab,
+        .tiles = gMailTiles_Fab,
+        .tileMap = gMailTilemap_Fab,
+        .var0C = 0x2A0,
+        .var0E = 0,
+        .color10 = 0x294A,
+        .color12 = 0x6739,
+    },
+    {
+        .palette = gMailPalette_Retro,
+        .tiles = gMailTiles_Retro,
+        .tileMap = gMailTilemap_Retro,
+        .var0C = 0x520,
+        .var0E = 0,
+        .color10 = 0x294A,
+        .color12 = 0x6739,
+    },
+};
+
+const struct UnkMailStruct Unknown_3E5724[] =
+{
+    {0, 3, 0},
+    {0, 3, 0},
+    {0, 3, 0},
+};
+
+const struct MailLayout gUnknown_083E5730[] =
+{
+    {3, 15, 27, 4, 3, Unknown_3E5724},
+    {3, 15, 27, 4, 3, Unknown_3E5724},
+    {3, 15, 27, 4, 3, Unknown_3E5724},
+    {3, 15, 27, 4, 3, Unknown_3E5724},
+    {3, 15, 27, 4, 3, Unknown_3E5724},
+    {3, 15, 27, 4, 3, Unknown_3E5724},
+    {3, 15, 27, 4, 3, Unknown_3E5724},
+    {3, 15, 27, 4, 3, Unknown_3E5724},
+    {3, 15, 27, 4, 3, Unknown_3E5724},
+    {3, 15, 27, 4, 3, Unknown_3E5724},
+    {3, 16, 27, 4, 3, Unknown_3E5724},
+    {3, 15, 27, 4, 3, Unknown_3E5724},
+};
+
+const struct UnkMailStruct Unknown_3E5790[] =
+{
+    {0, 2, 0},
+    {0, 2, 0},
+    {0, 2, 0},
+    {0, 2, 0},
+    {0, 1, 0},
+};
+
+const struct MailLayout gUnknown_083E57A4[] =
+{
+    {5, 15, 15, 4, 3, Unknown_3E5790},
+    {5, 15, 15, 4, 3, Unknown_3E5790},
+    {5, 15, 16, 4, 3, Unknown_3E5790},
+    {5, 15, 15, 4, 3, Unknown_3E5790},
+    {5, 15, 15, 4, 3, Unknown_3E5790},
+    {5, 15, 16, 4, 3, Unknown_3E5790},
+    {5, 15, 16, 4, 3, Unknown_3E5790},
+    {5, 15, 15, 4, 3, Unknown_3E5790},
+    {5, 15, 15, 4, 3, Unknown_3E5790},
+    {5, 15, 15, 4, 3, Unknown_3E5790},
+    {5, 16, 15, 4, 3, Unknown_3E5790},
+    {5, 15, 15, 4, 3, Unknown_3E5790},
+};
+
+// XXX: what is this?
+static u8 *const sSharedMemPtr = gSharedMem;
 
 static u8 sub_80F8A28(void);
 static void sub_80F8D50(void);

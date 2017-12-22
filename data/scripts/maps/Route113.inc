@@ -4,7 +4,7 @@ Route113_MapScripts:: @ 81505CC
 	.byte 0
 
 Route113_MapScript1_1505D7:: @ 81505D7
-	tileeffect 1
+	setstepcallback 1
 	end
 
 Route113_MapScript1_1505DA:: @ 81505DA

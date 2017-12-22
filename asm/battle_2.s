@@ -1,5 +1,4 @@
 	.include "constants/gba_constants.inc"
-	.include "constants/species_constants.inc"
 	.include "asm/macros.inc"
 
 	.syntax unified
@@ -3337,7 +3336,7 @@ _08013ECE:
 	cmp r0, 0
 	bne _08013F2A
 _08013EE0:
-	ldr r1, _08013F3C @ =gScriptResult
+	ldr r1, _08013F3C @ =gSpecialVar_Result
 	ldr r5, _08013F40 @ =gBattleOutcome
 	ldrb r0, [r5]
 	strh r0, [r1]
@@ -3380,7 +3379,7 @@ _08013F2A:
 _08013F30: .4byte gBattleTypeFlags
 _08013F34: .4byte gPlayerParty
 _08013F38: .4byte gReceivedRemoteLinkPlayers
-_08013F3C: .4byte gScriptResult
+_08013F3C: .4byte gSpecialVar_Result
 _08013F40: .4byte gBattleOutcome
 _08013F44: .4byte gMain
 _08013F48: .4byte 0x0000043d

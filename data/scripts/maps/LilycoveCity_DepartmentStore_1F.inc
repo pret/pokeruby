@@ -11,12 +11,12 @@ LilycoveCity_DepartmentStore_1F_EventScript_159D5E:: @ 8159D5E
 	dodailyevents
 	compare 0x4045, 0
 	goto_if 5, LilycoveCity_DepartmentStore_1F_EventScript_159EB1
-	checkflag 2250
+	checkflag FLAG_DAILY_PICKED_LOTTO_TICKET
 	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E4C
 	msgbox LilycoveCity_DepartmentStore_1F_Text_1C4B5E, 5
 	compare RESULT, 0
 	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E56
-	setflag 2250
+	setflag FLAG_DAILY_PICKED_LOTTO_TICKET
 	message LilycoveCity_DepartmentStore_1F_Text_1C4CC6
 	waitmessage
 	special RetrieveLotteryNumber
@@ -40,7 +40,7 @@ LilycoveCity_DepartmentStore_1F_EventScript_159D5E:: @ 8159D5E
 	call_if 1, LilycoveCity_DepartmentStore_1F_EventScript_159E3A
 	compare 0x8006, 1
 	call_if 1, LilycoveCity_DepartmentStore_1F_EventScript_159E43
-	getitemname 0, 0x8005
+	bufferitemname 0, 0x8005
 	compare 0x8004, 1
 	call_if 1, LilycoveCity_DepartmentStore_1F_EventScript_159E78
 	compare 0x8004, 2
@@ -49,7 +49,7 @@ LilycoveCity_DepartmentStore_1F_EventScript_159D5E:: @ 8159D5E
 	call_if 1, LilycoveCity_DepartmentStore_1F_EventScript_159E8A
 	compare 0x8004, 4
 	call_if 1, LilycoveCity_DepartmentStore_1F_EventScript_159E93
-	giveitem 0x8005
+	giveitem_std 0x8005
 	compare RESULT, 0
 	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E9C
 	goto LilycoveCity_DepartmentStore_1F_EventScript_159E6E
@@ -111,7 +111,7 @@ LilycoveCity_DepartmentStore_1F_EventScript_159EA7:: @ 8159EA7
 
 LilycoveCity_DepartmentStore_1F_EventScript_159EB1:: @ 8159EB1
 	msgbox LilycoveCity_DepartmentStore_1F_Text_1C4FCC, 4
-	giveitem 0x4045
+	giveitem_std 0x4045
 	compare RESULT, 0
 	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159EA7
 	setvar 0x4045, 0
@@ -134,9 +134,9 @@ LilycoveCity_DepartmentStore_1F_EventScript_159EF2:: @ 8159EF2
 	lock
 	faceplayer
 	waitse
-	playpokecry SPECIES_AZUMARILL, 0
+	playmoncry SPECIES_AZUMARILL, 0
 	msgbox LilycoveCity_DepartmentStore_1F_Text_18C0C3, 4
-	waitpokecry
+	waitmoncry
 	release
 	end
 

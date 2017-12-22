@@ -56,8 +56,8 @@ VerdanturfTown_FriendshipRatersHouse_EventScript_1540D9:: @ 81540D9
 	lock
 	faceplayer
 	waitse
-	playpokecry SPECIES_PIKACHU, 0
+	playmoncry SPECIES_PIKACHU, 0
 	msgbox VerdanturfTown_FriendshipRatersHouse_Text_178CFD, 4
-	waitpokecry
+	waitmoncry
 	release
 	end

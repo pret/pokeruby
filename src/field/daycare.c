@@ -2,21 +2,21 @@
 #include "daycare.h"
 #include "event_data.h"
 #include "field_effect.h"
-#include "items.h"
+#include "constants/items.h"
 #include "mail_data.h"
 #include "main.h"
 #include "menu.h"
-#include "moves.h"
+#include "constants/moves.h"
 #include "name_string_util.h"
 #include "overworld.h"
 #include "party_menu.h"
 #include "pokemon.h"
 #include "pokemon_storage_system.h"
-#include "rng.h"
+#include "random.h"
 #include "script.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
-#include "species.h"
+#include "constants/species.h"
 #include "string_util.h"
 #include "strings2.h"
 #include "text.h"
@@ -1758,7 +1758,7 @@ static void HandleDaycareLevelMenuInput(u8 taskId)
     {
         HandleDestroyMenuCursors();
         PlaySE(SE_SELECT);
-        gLastFieldPokeMenuOpened = gScriptResult = gTasks[taskId].data[0];
+        gLastFieldPokeMenuOpened = gSpecialVar_Result = gTasks[taskId].data[0];
         DestroyTask(taskId);
         MenuZeroFillWindowRect(15, 6, 29, 13);
         EnableBothScriptContexts();
@@ -1766,7 +1766,7 @@ static void HandleDaycareLevelMenuInput(u8 taskId)
     else if (gMain.newKeys & B_BUTTON)
     {
         HandleDestroyMenuCursors();
-        gLastFieldPokeMenuOpened = gScriptResult = 2;
+        gLastFieldPokeMenuOpened = gSpecialVar_Result = 2;
         DestroyTask(taskId);
         MenuZeroFillWindowRect(15, 6, 29, 13);
         EnableBothScriptContexts();

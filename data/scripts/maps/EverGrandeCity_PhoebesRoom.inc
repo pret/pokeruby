@@ -24,7 +24,7 @@ EverGrandeCity_PhoebesRoom_EventScript_15B602:: @ 815B602
 	end
 
 EverGrandeCity_PhoebesRoom_MapScript1_15B60F:: @ 815B60F
-	checkflag 1246
+	checkflag FLAG_DEFEATED_ELITE_4_PHOEBE
 	call_if 1, EverGrandeCity_PhoebesRoom_EventScript_15B624
 	compare 0x409c, 2
 	call_if 1, EverGrandeCity_PhoebesRoom_EventScript_15B62A
@@ -41,7 +41,7 @@ EverGrandeCity_PhoebesRoom_EventScript_15B62A:: @ 815B62A
 EverGrandeCity_PhoebesRoom_EventScript_15B630:: @ 815B630
 	lock
 	faceplayer
-	checkflag 1246
+	checkflag FLAG_DEFEATED_ELITE_4_PHOEBE
 	goto_if_eq EverGrandeCity_PhoebesRoom_EventScript_15B657
 	playbgm 450, 0
 	msgbox EverGrandeCity_PhoebesRoom_Text_1908F5, 4
@@ -55,7 +55,7 @@ EverGrandeCity_PhoebesRoom_EventScript_15B657:: @ 815B657
 	end
 
 EverGrandeCity_PhoebesRoom_EventScript_15B661:: @ 815B661
-	setflag 1246
+	setflag FLAG_DEFEATED_ELITE_4_PHOEBE
 	call EverGrandeCity_PhoebesRoom_EventScript_1A0693
 	msgbox EverGrandeCity_PhoebesRoom_Text_190A2A, 4
 	release

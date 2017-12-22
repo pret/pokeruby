@@ -1,15 +1,7 @@
 #ifndef GUARD_MAUVILLE_OLD_MAN_H
 #define GUARD_MAUVILLE_OLD_MAN_H
 
-// IDs
-enum
-{
-    MAUVILLE_MAN_BARD,
-    MAUVILLE_MAN_HIPSTER,
-    MAUVILLE_MAN_TRADER,
-    MAUVILLE_MAN_STORYTELLER,
-    MAUVILLE_MAN_GIDDY,
-};
+#include "constants/mauville_man.h"
 
 void SetupMauvilleOldMan(void);
 void sub_80F7F30(void);

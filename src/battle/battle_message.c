@@ -3,7 +3,8 @@
 #include "battle_message.h"
 #include "battle_tower.h"
 #include "item.h"
-#include "items.h"
+#include "event_data.h"
+#include "constants/items.h"
 #include "pokemon.h"
 #include "data2.h"
 #include "text.h"
@@ -11,7 +12,7 @@
 #include "link.h"
 #include "battle_setup.h"
 #include "battle_tower.h"
-#include "flags.h"
+#include "constants/flags.h"
 #include "ewram.h"
 
 #define BATTLESTRING_TO_SUB 12
@@ -761,7 +762,7 @@ u32 StrCpyDecodeBattle(const u8* src, u8* dst)
                 HANDLE_NICKNAME_STRING_CASE(BATTLE_STRUCT->scriptingActive, BATTLE_STRUCT->unk1605E)
                 break;
             case 35: // lanette pc
-                if (FlagGet(SYS_PC_LANETTE))
+                if (FlagGet(FLAG_SYS_PC_LANETTE))
                     toCpy = BattleText_Lanette;
                 else
                     toCpy = BattleText_Someone;

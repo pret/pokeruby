@@ -10,16 +10,196 @@
 #include "rom6.h"
 #include "script.h"
 #include "secret_base.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 
 extern u8 gUnknown_081A2CE6[];
 extern u8 gUnknown_081A2D3E[];
 extern u8 gUnknown_081A2D96[];
 
-extern struct SpriteTemplate gSpriteTemplate_83D2614;
-extern struct SpriteTemplate gSpriteTemplate_83D262C;
-extern struct SpriteTemplate gSpriteTemplate_83D2644;
+const u8 gSpriteImage_83D198C[] = INCBIN_U8("graphics/unknown_sprites/83D259C/0.4bpp");
+const u8 gSpriteImage_83D1A0C[] = INCBIN_U8("graphics/unknown_sprites/83D259C/1.4bpp");
+const u8 gSpriteImage_83D1A8C[] = INCBIN_U8("graphics/unknown_sprites/83D259C/2.4bpp");
+const u8 gSpriteImage_83D1B0C[] = INCBIN_U8("graphics/unknown_sprites/83D259C/3.4bpp");
+const u8 gSpriteImage_83D1B8C[] = INCBIN_U8("graphics/unknown_sprites/83D259C/4.4bpp");
+const u8 gUnusedEmptySpace_83D1C0C[32] = {0};
+const u16 gFieldEffectObjectPalette7[] = INCBIN_U16("graphics/field_effect_objects/palettes/07.gbapal");
+const u8 gSpriteImage_83D1C4C[] = INCBIN_U8("graphics/unknown_sprites/83D25EC/0.4bpp");
+const u8 gSpriteImage_83D1CCC[] = INCBIN_U8("graphics/unknown_sprites/83D25EC/1.4bpp");
+const u8 gSpriteImage_83D1D4C[] = INCBIN_U8("graphics/unknown_sprites/83D25EC/2.4bpp");
+const u8 gSpriteImage_83D1DCC[] = INCBIN_U8("graphics/unknown_sprites/83D25EC/3.4bpp");
+const u8 gSpriteImage_83D1E4C[] = INCBIN_U8("graphics/unknown_sprites/83D25EC/4.4bpp");
+const u8 gSpriteImage_83D1ECC[] = INCBIN_U8("graphics/unknown_sprites/83D25C4/0.4bpp");
+const u8 gSpriteImage_83D1F4C[] = INCBIN_U8("graphics/unknown_sprites/83D25C4/1.4bpp");
+const u8 gSpriteImage_83D1FCC[] = INCBIN_U8("graphics/unknown_sprites/83D25C4/2.4bpp");
+const u8 gSpriteImage_83D204C[] = INCBIN_U8("graphics/unknown_sprites/83D25C4/3.4bpp");
+const u8 gSpriteImage_83D20CC[] = INCBIN_U8("graphics/unknown_sprites/83D25C4/4.4bpp");
+const u8 gSpriteImage_83D214C[] = INCBIN_U8("graphics/unknown_sprites/83D25C4/5.4bpp");  // unused
+const u16 gFieldEffectObjectPalette8[] = INCBIN_U16("graphics/field_effect_objects/palettes/08.gbapal");
+const u8 gSpriteImage_83D21EC[] = INCBIN_U8("graphics/unknown_sprites/83D2688/0.4bpp");
+const u8 gSpriteImage_83D22EC[] = INCBIN_U8("graphics/unknown_sprites/83D2688/1.4bpp");
+const u8 gSpriteImage_83D23EC[] = INCBIN_U8("graphics/unknown_sprites/83D2688/2.4bpp");
+
+const struct OamData gOamData_83D24EC =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 1,
+    .tileNum = 0,
+    .priority = 2,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+const union AnimCmd gSpriteAnim_83D24F4[] =
+{
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(1, 8),
+    ANIMCMD_FRAME(2, 8),
+    ANIMCMD_FRAME(3, 8),
+    ANIMCMD_FRAME(4, 8),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_83D250C[] =
+{
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(1, 8),
+    ANIMCMD_FRAME(2, 8),
+    ANIMCMD_FRAME(3, 8),
+    ANIMCMD_FRAME(4, 8),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_83D2524[] =
+{
+    ANIMCMD_FRAME(4, 8),
+    ANIMCMD_FRAME(3, 8),
+    ANIMCMD_FRAME(2, 8),
+    ANIMCMD_FRAME(1, 8),
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_83D253C[] =
+{
+    ANIMCMD_FRAME(0, 8, .hFlip = TRUE),
+    ANIMCMD_FRAME(1, 8, .hFlip = TRUE),
+    ANIMCMD_FRAME(2, 8, .hFlip = TRUE),
+    ANIMCMD_FRAME(3, 8, .hFlip = TRUE),
+    ANIMCMD_FRAME(4, 8, .hFlip = TRUE),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_83D2554[] =
+{
+    ANIMCMD_FRAME(4, 8, .hFlip = TRUE),
+    ANIMCMD_FRAME(3, 8, .hFlip = TRUE),
+    ANIMCMD_FRAME(2, 8, .hFlip = TRUE),
+    ANIMCMD_FRAME(1, 8, .hFlip = TRUE),
+    ANIMCMD_FRAME(0, 8, .hFlip = TRUE),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_83D256C[] =
+{
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(1, 8),
+    ANIMCMD_FRAME(2, 8),
+    ANIMCMD_FRAME(3, 8),
+    ANIMCMD_FRAME(4, 8),
+    ANIMCMD_END,
+};
+
+const union AnimCmd *const gSpriteAnimTable_83D2584[] =
+{
+    gSpriteAnim_83D24F4,
+};
+
+const union AnimCmd *const gSpriteAnimTable_83D2588[] =
+{
+    gSpriteAnim_83D250C,
+    gSpriteAnim_83D2524,
+    gSpriteAnim_83D253C,
+    gSpriteAnim_83D2554,
+};
+
+const union AnimCmd *const gSpriteAnimTable_83D2598[] =
+{
+    gSpriteAnim_83D256C,
+};
+
+const struct SpriteFrameImage gSpriteImageTable_83D259C[] = 
+{
+    {gSpriteImage_83D198C, 0x80},
+    {gSpriteImage_83D1A0C, 0x80},
+    {gSpriteImage_83D1A8C, 0x80},
+    {gSpriteImage_83D1B0C, 0x80},
+    {gSpriteImage_83D1B8C, 0x80},
+};
+
+const struct SpriteFrameImage gSpriteImageTable_83D25C4[] = 
+{
+    {gSpriteImage_83D1ECC, 0x80},
+    {gSpriteImage_83D1F4C, 0x80},
+    {gSpriteImage_83D1FCC, 0x80},
+    {gSpriteImage_83D204C, 0x80},
+    {gSpriteImage_83D20CC, 0x80},
+};
+
+const struct SpriteFrameImage gSpriteImageTable_83D25EC[] = 
+{
+    {gSpriteImage_83D1C4C, 0x80},
+    {gSpriteImage_83D1CCC, 0x80},
+    {gSpriteImage_83D1D4C, 0x80},
+    {gSpriteImage_83D1DCC, 0x80},
+    {gSpriteImage_83D1E4C, 0x80},
+};
+
+void sub_80C644C(struct Sprite *);
+const struct SpriteTemplate gSpriteTemplate_83D2614 =
+{
+    .tileTag = 0xFFFF,
+    .paletteTag = 4099,
+    .oam = &gOamData_83D24EC,
+    .anims = gSpriteAnimTable_83D2584,
+    .images = gSpriteImageTable_83D259C,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80C644C,
+};
+
+void sub_80C6598(struct Sprite *);
+const struct SpriteTemplate gSpriteTemplate_83D262C =
+{
+    .tileTag = 0xFFFF,
+    .paletteTag = 4104,
+    .oam = &gOamData_83D24EC,
+    .anims = gSpriteAnimTable_83D2588,
+    .images = gSpriteImageTable_83D25C4,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80C6598,
+};
+
+void sub_80C66BC(struct Sprite *);
+const struct SpriteTemplate gSpriteTemplate_83D2644 =
+{
+    .tileTag = 0xFFFF,
+    .paletteTag = 4104,
+    .oam = &gOamData_83D24EC,
+    .anims = gSpriteAnimTable_83D2598,
+    .images = gSpriteImageTable_83D25EC,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80C66BC,
+};
+
+const struct SpritePalette gFieldEffectObjectPaletteInfo7 = {gFieldEffectObjectPalette7, 0x1003};
+const struct SpritePalette gFieldEffectObjectPaletteInfo8 = {gFieldEffectObjectPalette8, 0x1008};
 
 void sub_80C639C(void);
 void sub_80C63E8(void);
@@ -69,7 +249,7 @@ bool8 SetUpFieldMove_SecretPower(void)
 
     sub_80BB63C();
 
-    if (gScriptResult == 1 || player_get_direction_lower_nybble() != DIR_NORTH)
+    if (gSpecialVar_Result == 1 || player_get_direction_lower_nybble() != DIR_NORTH)
         return FALSE;
 
     GetXYCoordsOneStepInFrontOfPlayer(&gUnknown_0203923C.x, &gUnknown_0203923C.y);

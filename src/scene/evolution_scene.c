@@ -16,9 +16,9 @@
 #include "trade.h"
 #include "menu.h"
 #include "pokedex.h"
-#include "species.h"
+#include "constants/species.h"
 #include "sound.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "overworld.h"
 #include "battle_message.h"
 #include "pokemon_summary_screen.h"
@@ -817,7 +817,7 @@ static void Task_EvolutionScene(u8 taskID)
         case 5:
             if (!gPaletteFade.active)
             {
-                sub_809D9F0(gPlayerParty, gTasks[taskID].tPartyID,
+                ShowSelectMovePokemonSummaryScreen(gPlayerParty, gTasks[taskID].tPartyID,
                             gPlayerPartyCount - 1, CB2_EvolutionSceneLoadGraphics,
                             gMoveToLearn);
                 gTasks[taskID].tLearnMoveState++;
@@ -1137,7 +1137,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
         case 5:
             if (!gPaletteFade.active)
             {
-                sub_809D9F0(gPlayerParty, gTasks[taskID].tPartyID,
+                ShowSelectMovePokemonSummaryScreen(gPlayerParty, gTasks[taskID].tPartyID,
                             gPlayerPartyCount - 1, CB2_TradeEvolutionSceneLoadGraphics,
                             gMoveToLearn);
                 gTasks[taskID].tLearnMoveState++;

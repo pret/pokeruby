@@ -5,25 +5,26 @@
 #include "battle_transition.h"
 #include "data2.h"
 #include "easy_chat.h"
+#include "constants/easy_chat.h"
 #include "event_data.h"
 #include "item.h"
-#include "items.h"
+#include "constants/items.h"
 #include "main.h"
-#include "map_object_constants.h"
-#include "moves.h"
+#include "constants/map_objects.h"
+#include "constants/moves.h"
 #include "new_game.h"
 #include "overworld.h"
 #include "pokedex.h"
-#include "rng.h"
+#include "random.h"
 #include "save.h"
 #include "script_pokemon_80C4.h"
-#include "species.h"
+#include "constants/species.h"
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
 #include "trainer.h"
 #include "tv.h"
-#include "vars.h"
+#include "constants/vars.h"
 #include "ewram.h"
 
 #if ENGLISH
@@ -349,7 +350,7 @@ bool8 ShouldBattleEReaderTrainer(u8 levelType, u16 winStreak)
 
     ValidateEReaderTrainer();
 
-    if (gScriptResult != 0 || gSaveBlock2.battleTower.ereaderTrainer.winStreak != winStreak)
+    if (gSpecialVar_Result != 0 || gSaveBlock2.battleTower.ereaderTrainer.winStreak != winStreak)
     {
         return FALSE;
     }
@@ -1515,7 +1516,7 @@ void CheckPartyBattleTowerBanlist(void)
         level = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
         hp = GetMonData(&gPlayerParty[i], MON_DATA_HP);
 
-        CheckMonBattleTowerBanlist(species2, heldItem, hp, gScriptResult, level, validPartySpecies, validPartyHeldItems, &counter);
+        CheckMonBattleTowerBanlist(species2, heldItem, hp, gSpecialVar_Result, level, validPartySpecies, validPartyHeldItems, &counter);
     }
 
     if (counter < 3)
@@ -1548,7 +1549,7 @@ void CheckPartyBattleTowerBanlist(void)
     else
     {
         gSpecialVar_0x8004 = 0;
-        gSaveBlock2.battleTower.battleTowerLevelType = gScriptResult;
+        gSaveBlock2.battleTower.battleTowerLevelType = gSpecialVar_Result;
     }
 }
 
@@ -1699,7 +1700,7 @@ void sub_8135668(void)
 
         gSaveBlock2.battleTower.curChallengeBattleNum[battleTowerLevelType]++;
         sub_8135A3C();
-        gScriptResult = gSaveBlock2.battleTower.curChallengeBattleNum[battleTowerLevelType];
+        gSpecialVar_Result = gSaveBlock2.battleTower.curChallengeBattleNum[battleTowerLevelType];
 
         gStringVar1[0] = gSaveBlock2.battleTower.curChallengeBattleNum[battleTowerLevelType] + 0xA1;
         gStringVar1[1] = 0xFF;
@@ -1711,7 +1712,7 @@ void sub_8135668(void)
         }
 
         sub_8135A3C();
-        gScriptResult = gSaveBlock2.battleTower.curStreakChallengesNum[battleTowerLevelType];
+        gSpecialVar_Result = gSaveBlock2.battleTower.curStreakChallengesNum[battleTowerLevelType];
         break;
     case 8:
         gSaveBlock2.battleTower.unk_554 = gSpecialVar_0x8005;
@@ -1746,29 +1747,29 @@ void sub_81358A4(void)
     switch (gSpecialVar_0x8004)
     {
     case 0:
-        gScriptResult = gSaveBlock2.battleTower.var_4AE[battleTowerLevelType];
+        gSpecialVar_Result = gSaveBlock2.battleTower.var_4AE[battleTowerLevelType];
         break;
     case 1:
-        gScriptResult = gSaveBlock2.battleTower.battleTowerLevelType;
+        gSpecialVar_Result = gSaveBlock2.battleTower.battleTowerLevelType;
         break;
     case 2:
-        gScriptResult = gSaveBlock2.battleTower.curChallengeBattleNum[battleTowerLevelType];
+        gSpecialVar_Result = gSaveBlock2.battleTower.curChallengeBattleNum[battleTowerLevelType];
         break;
     case 3:
-        gScriptResult = gSaveBlock2.battleTower.curStreakChallengesNum[battleTowerLevelType];
+        gSpecialVar_Result = gSaveBlock2.battleTower.curStreakChallengesNum[battleTowerLevelType];
         break;
     case 4:
-        gScriptResult = gSaveBlock2.battleTower.battleTowerTrainerId;
+        gSpecialVar_Result = gSaveBlock2.battleTower.battleTowerTrainerId;
         break;
     case 5:
     case 6:
     case 7:
         break;
     case 8:
-        gScriptResult = gSaveBlock2.battleTower.unk_554;
+        gSpecialVar_Result = gSaveBlock2.battleTower.unk_554;
         break;
     case 9:
-        gScriptResult = GetCurrentBattleTowerWinStreak(battleTowerLevelType);
+        gSpecialVar_Result = GetCurrentBattleTowerWinStreak(battleTowerLevelType);
         break;
     case 10:
         SetGameStat(GAME_STAT_BATTLE_TOWER_BEST_STREAK, gSaveBlock2.battleTower.bestBattleTowerWinStreak);
@@ -2148,11 +2149,11 @@ void GiveBattleTowerPrize(void)
     if (AddBagItem(gSaveBlock2.battleTower.prizeItem, 1) == TRUE)
     {
         CopyItemName(gSaveBlock2.battleTower.prizeItem, gStringVar1);
-        gScriptResult = 1;
+        gSpecialVar_Result = 1;
     }
     else
     {
-        gScriptResult = 0;
+        gSpecialVar_Result = 0;
         gSaveBlock2.battleTower.var_4AE[battleTowerLevelType] = 6;
     }
 }
@@ -2171,7 +2172,7 @@ void AwardBattleTowerRibbons(void)
         ribbonType = MON_DATA_VICTORY_RIBBON;
     }
 
-    gScriptResult = 0;
+    gSpecialVar_Result = 0;
 
     if (GetCurrentBattleTowerWinStreak(battleTowerLevelType) > 55)
     {
@@ -2181,13 +2182,13 @@ void AwardBattleTowerRibbons(void)
             pokemon = &gPlayerParty[partyIndex];
             if (!GetMonData(pokemon, ribbonType))
             {
-                gScriptResult = 1;
-                SetMonData(pokemon, ribbonType, &gScriptResult);
+                gSpecialVar_Result = 1;
+                SetMonData(pokemon, ribbonType, &gSpecialVar_Result);
             }
         }
     }
 
-    if (gScriptResult != 0)
+    if (gSpecialVar_Result != 0)
     {
         IncrementGameStat(GAME_STAT_RECEIVED_RIBBONS);
     }
@@ -2265,7 +2266,7 @@ void ValidateEReaderTrainer(void)
     u32 checksum;
     struct BattleTowerEReaderTrainer *ereaderTrainer;
 
-    gScriptResult = 0;
+    gSpecialVar_Result = 0;
     ereaderTrainer = &gSaveBlock2.battleTower.ereaderTrainer;
 
     checksum = 0;
@@ -2276,7 +2277,7 @@ void ValidateEReaderTrainer(void)
 
     if (checksum == 0)
     {
-        gScriptResult = 1;
+        gSpecialVar_Result = 1;
         return;
     }
 
@@ -2289,7 +2290,7 @@ void ValidateEReaderTrainer(void)
     if (gSaveBlock2.battleTower.ereaderTrainer.checksum != checksum)
     {
         ClearEReaderTrainer(&gSaveBlock2.battleTower.ereaderTrainer);
-        gScriptResult = 1;
+        gSpecialVar_Result = 1;
     }
 }
 

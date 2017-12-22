@@ -2,7 +2,7 @@
 #include "event_data.h"
 #include "field_message_box.h"
 #include "pokedex.h"
-#include "species.h"
+#include "constants/species.h"
 
 extern u16 gSpecialVar_0x8004;
 extern u16 gSpecialVar_0x8005;

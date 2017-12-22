@@ -1,3 +1,4 @@
+#include "constants/songs.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/battle_anim.inc"
 	.include "constants/constants.inc"
@@ -1415,11 +1416,11 @@ Move_FURY_CUTTER: @ 81C914A
 	monbg 1
 	setalpha 12, 8
 	panse_19 SE_W013, 63
-	createtask sub_80D30AC, 2
+	createtask UpdateFuryCutterAnimDirection, 2
 	jumpvareq 7, 0, _81C91A7
 	jump _81C91B9
 _81C916A:
-	createtask update_fury_cutter_counter_copy, 2
+	createtask UpdateFuryCutterAnimCount, 2
 	jumpvareq 7, 1, _81C918E
 	jumpvareq 7, 2, _81C91CB
 	jumpvareq 7, 3, _81C91E5
@@ -5270,8 +5271,8 @@ Move_RAIN_DANCE: @ 81CE997
 	panse_19 SE_W240, 192
 	createtask sub_80E2A38, 10, 1921, 2, 0, 4, 0
 	wait
-	createtask sub_80D30F0, 2, 0, 3, 120
-	createtask sub_80D30F0, 2, 0, 3, 120
+	createtask CreateAnimRaindrops, 2, 0, 3, 120
+	createtask CreateAnimRaindrops, 2, 0, 3, 120
 	pause 120
 	pause 30
 	wait
@@ -10496,8 +10497,8 @@ General_Rain: @ 81D67BB
 	panse_19 SE_W240, 192
 	createtask sub_80E2A38, 10, 1921, 2, 0, 4, 0
 	wait
-	createtask sub_80D30F0, 2, 0, 3, 60
-	createtask sub_80D30F0, 2, 0, 3, 60
+	createtask CreateAnimRaindrops, 2, 0, 3, 60
+	createtask CreateAnimRaindrops, 2, 0, 3, 60
 	pause 50
 	wait
 	createtask sub_80E2A38, 10, 1921, 2, 4, 0, 0

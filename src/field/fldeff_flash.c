@@ -7,7 +7,7 @@
 #include "overworld.h"
 #include "rom6.h"
 #include "script.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
@@ -73,7 +73,7 @@ static const u8 gCaveTransitionTiles[] = INCBIN_U8("graphics/misc/cave_transitio
 
 bool8 SetUpFieldMove_Flash(void)
 {
-    if (gMapHeader.cave == TRUE && !FlagGet(SYS_USE_FLASH))
+    if (gMapHeader.cave == TRUE && !FlagGet(FLAG_SYS_USE_FLASH))
     {
         gFieldCallback = FieldCallback_Teleport;
         gUnknown_03005CE4 = sub_810CBFC;
@@ -94,7 +94,7 @@ void sub_810CBFC(void)
 void sub_810CC34(void)
 {
     PlaySE(SE_W115);
-    FlagSet(SYS_USE_FLASH);
+    FlagSet(FLAG_SYS_USE_FLASH);
     ScriptContext1_SetupScript(gUnknown_081B694A);
 }
 

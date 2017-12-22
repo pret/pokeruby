@@ -2,11 +2,11 @@
 #include "evolution_graphics.h"
 #include "sprite.h"
 #include "trig.h"
-#include "rng.h"
+#include "random.h"
 #include "decompress.h"
 #include "task.h"
 #include "sound.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "palette.h"
 
 // this file's functions

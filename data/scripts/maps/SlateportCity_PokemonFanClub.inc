@@ -23,15 +23,15 @@ SlateportCity_PokemonFanClub_EventScript_155795:: @ 8155795
 
 SlateportCity_PokemonFanClub_EventScript_1557A8:: @ 81557A8
 	setvar 0x4002, 0
-	checkflag 204
+	checkflag FLAG_RECEIVED_YELLOW_SCARF
 	call_if 1, SlateportCity_PokemonFanClub_EventScript_155893
-	checkflag 203
+	checkflag FLAG_RECEIVED_GREEN_SCARF
 	call_if 1, SlateportCity_PokemonFanClub_EventScript_155893
-	checkflag 202
+	checkflag FLAG_RECEIVED_PINK_SCARF
 	call_if 1, SlateportCity_PokemonFanClub_EventScript_155893
-	checkflag 201
+	checkflag FLAG_RECEIVED_BLUE_SCARF
 	call_if 1, SlateportCity_PokemonFanClub_EventScript_155893
-	checkflag 200
+	checkflag FLAG_RECEIVED_RED_SCARF
 	call_if 1, SlateportCity_PokemonFanClub_EventScript_155893
 	compare 0x4002, 5
 	call_if 1, SlateportCity_PokemonFanClub_EventScript_15588D
@@ -49,17 +49,17 @@ SlateportCity_PokemonFanClub_EventScript_1557FE:: @ 81557FE
 SlateportCity_PokemonFanClub_EventScript_155808:: @ 8155808
 	msgbox SlateportCity_PokemonFanClub_Text_17DA49, 4
 	setvar 0x4001, 0
-	checkflag 204
+	checkflag FLAG_RECEIVED_YELLOW_SCARF
 	call_if 0, SlateportCity_PokemonFanClub_EventScript_1559FE
-	checkflag 203
+	checkflag FLAG_RECEIVED_GREEN_SCARF
 	call_if 0, SlateportCity_PokemonFanClub_EventScript_1559E7
-	checkflag 202
+	checkflag FLAG_RECEIVED_PINK_SCARF
 	call_if 0, SlateportCity_PokemonFanClub_EventScript_1559D0
-	checkflag 201
+	checkflag FLAG_RECEIVED_BLUE_SCARF
 	call_if 0, SlateportCity_PokemonFanClub_EventScript_1559B9
-	checkflag 200
+	checkflag FLAG_RECEIVED_RED_SCARF
 	call_if 0, SlateportCity_PokemonFanClub_EventScript_1559A2
-	getfirstpartypokename 0
+	bufferleadmonspeciesname 0
 	switch 0x4001
 	case 0, SlateportCity_PokemonFanClub_EventScript_155899
 	case 1, SlateportCity_PokemonFanClub_EventScript_1558A3
@@ -88,8 +88,8 @@ SlateportCity_PokemonFanClub_EventScript_1558A3:: @ 81558A3
 	compare RESULT, 0
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_155998
 	msgbox SlateportCity_PokemonFanClub_Text_17DB89, 4
-	setflag 200
-	giveitem ITEM_RED_SCARF
+	setflag FLAG_RECEIVED_RED_SCARF
+	giveitem_std ITEM_RED_SCARF
 	msgbox SlateportCity_PokemonFanClub_Text_17DC1B, 4
 	release
 	end
@@ -99,8 +99,8 @@ SlateportCity_PokemonFanClub_EventScript_1558D4:: @ 81558D4
 	compare RESULT, 0
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_155998
 	msgbox SlateportCity_PokemonFanClub_Text_17DB89, 4
-	setflag 201
-	giveitem ITEM_BLUE_SCARF
+	setflag FLAG_RECEIVED_BLUE_SCARF
+	giveitem_std ITEM_BLUE_SCARF
 	msgbox SlateportCity_PokemonFanClub_Text_17DC74, 4
 	release
 	end
@@ -110,8 +110,8 @@ SlateportCity_PokemonFanClub_EventScript_155905:: @ 8155905
 	compare RESULT, 0
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_155998
 	msgbox SlateportCity_PokemonFanClub_Text_17DB89, 4
-	setflag 202
-	giveitem ITEM_PINK_SCARF
+	setflag FLAG_RECEIVED_PINK_SCARF
+	giveitem_std ITEM_PINK_SCARF
 	msgbox SlateportCity_PokemonFanClub_Text_17DCCB, 4
 	release
 	end
@@ -121,8 +121,8 @@ SlateportCity_PokemonFanClub_EventScript_155936:: @ 8155936
 	compare RESULT, 0
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_155998
 	msgbox SlateportCity_PokemonFanClub_Text_17DB89, 4
-	setflag 203
-	giveitem ITEM_GREEN_SCARF
+	setflag FLAG_RECEIVED_GREEN_SCARF
+	giveitem_std ITEM_GREEN_SCARF
 	msgbox SlateportCity_PokemonFanClub_Text_17DD27, 4
 	release
 	end
@@ -132,8 +132,8 @@ SlateportCity_PokemonFanClub_EventScript_155967:: @ 8155967
 	compare RESULT, 0
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_155998
 	msgbox SlateportCity_PokemonFanClub_Text_17DB89, 4
-	setflag 204
-	giveitem ITEM_YELLOW_SCARF
+	setflag FLAG_RECEIVED_YELLOW_SCARF
+	giveitem_std ITEM_YELLOW_SCARF
 	msgbox SlateportCity_PokemonFanClub_Text_17DD78, 4
 	release
 	end
@@ -196,7 +196,7 @@ SlateportCity_PokemonFanClub_EventScript_155A0F:: @ 8155A0F
 SlateportCity_PokemonFanClub_EventScript_155A15:: @ 8155A15
 	lock
 	faceplayer
-	checkflag 278
+	checkflag FLAG_RECEIVED_SOOTHE_BELL
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_155A75
 	msgbox SlateportCity_PokemonFanClub_Text_17DE6B, 4
 	specialvar RESULT, GetLeadMonFriendshipScore
@@ -212,10 +212,10 @@ SlateportCity_PokemonFanClub_EventScript_155A3A:: @ 8155A3A
 	applymovement LAST_TALKED, SlateportCity_PokemonFanClub_Movement_1A0835
 	waitmovement 0
 	msgbox SlateportCity_PokemonFanClub_Text_17DF57, 4
-	giveitem ITEM_SOOTHE_BELL
+	giveitem_std ITEM_SOOTHE_BELL
 	compare RESULT, 0
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_1A029B
-	setflag 278
+	setflag FLAG_RECEIVED_SOOTHE_BELL
 	release
 	end
 
@@ -236,9 +236,9 @@ SlateportCity_PokemonFanClub_EventScript_155A91:: @ 8155A91
 	lock
 	faceplayer
 	waitse
-	playpokecry SPECIES_SKITTY, 0
+	playmoncry SPECIES_SKITTY, 0
 	msgbox SlateportCity_PokemonFanClub_Text_17E14E, 4
-	waitpokecry
+	waitmoncry
 	release
 	end
 
@@ -246,9 +246,9 @@ SlateportCity_PokemonFanClub_EventScript_155AA4:: @ 8155AA4
 	lock
 	faceplayer
 	waitse
-	playpokecry SPECIES_ZIGZAGOON, 0
+	playmoncry SPECIES_ZIGZAGOON, 0
 	msgbox SlateportCity_PokemonFanClub_Text_17E164, 4
-	waitpokecry
+	waitmoncry
 	release
 	end
 
@@ -256,8 +256,8 @@ SlateportCity_PokemonFanClub_EventScript_155AB7:: @ 8155AB7
 	lock
 	faceplayer
 	waitse
-	playpokecry SPECIES_AZUMARILL, 0
+	playmoncry SPECIES_AZUMARILL, 0
 	msgbox SlateportCity_PokemonFanClub_Text_17E178, 4
-	waitpokecry
+	waitmoncry
 	release
 	end

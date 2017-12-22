@@ -4,7 +4,7 @@ LittlerootTown_MaysHouse_2F_MapScripts:: @ 8152A50
 	.byte 0
 
 LittlerootTown_MaysHouse_2F_MapScript1_152A5B:: @ 8152A5B
-	checkflag 130
+	checkflag FLAG_DEFEATED_RIVAL_ROUTE103
 	call_if 0, LittlerootTown_MaysHouse_2F_EventScript_152A7A
 	compare 0x4092, 4
 	call_if 1, LittlerootTown_MaysHouse_2F_EventScript_1B6950
@@ -30,7 +30,7 @@ LittlerootTown_MaysHouse_2F_EventScript_152A90:: @ 8152A90
 LittlerootTown_BrendansHouse_2F_EventScript_152A9D:: @ 8152A9D
 LittlerootTown_MaysHouse_2F_EventScript_152A9D:: @ 8152A9D
 	lockall
-	checkflag 292
+	checkflag FLAG_MET_RIVAL_LILYCOVE
 	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_152BB5
 	checkplayergender
 	compare RESULT, 0
@@ -117,18 +117,18 @@ LittlerootTown_BrendansHouse_2F_EventScript_152BB5:: @ 8152BB5
 	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_152BDB
 	compare RESULT, 1
 	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_152BED
-	setflag 293
+	setflag FLAG_MET_RIVAL_IN_HOUSE_AFTER_LILYCOVE
 	releaseall
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_152BDB:: @ 8152BDB
-	checkflag 293
+	checkflag FLAG_MET_RIVAL_IN_HOUSE_AFTER_LILYCOVE
 	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_152BFF
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1737AE, 4
 	return
 
 LittlerootTown_BrendansHouse_2F_EventScript_152BED:: @ 8152BED
-	checkflag 293
+	checkflag FLAG_MET_RIVAL_IN_HOUSE_AFTER_LILYCOVE
 	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_152C08
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1738F2, 4
 	return

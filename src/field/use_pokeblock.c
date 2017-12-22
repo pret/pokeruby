@@ -15,7 +15,7 @@
 #include "text.h"
 #include "menu.h"
 #include "sound.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "pokeblock.h"
 
 #define GFX_TAG_CONDITIONUPDOWN 0
@@ -105,7 +105,7 @@ EWRAM_DATA u8 gPokeblockMonID = 0;
 EWRAM_DATA s16 gPokeblockGain = 0;
 
 extern u16 gKeyRepeatStartDelay;
-extern u16 gScriptItemId; // FIXME: remove after merge of #349 Pokeblock
+extern u16 gSpecialVar_ItemId; // FIXME: remove after merge of #349 Pokeblock
 
 static void launch_c3_walk_stairs_and_run_once(void (*const)(void));
 static void sub_81361E4(void);
@@ -574,7 +574,7 @@ static void sub_81369CC(void)
         case 5:
             if (gMain.newKeys & (A_BUTTON | B_BUTTON) && !sub_8136D00())
             {
-                PokeblockClearIfExists((u8)gScriptItemId);
+                PokeblockClearIfExists((u8)gSpecialVar_ItemId);
                 launch_c3_walk_stairs_and_run_once(sub_8136B44);
             }
             break;

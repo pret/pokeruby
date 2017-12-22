@@ -48,22 +48,22 @@ RustboroCity_DevonCorp_3F_EventScript_157752:: @ 8157752
 	applymovement 255, RustboroCity_DevonCorp_3F_Movement_157835
 	waitmovement 0
 	msgbox RustboroCity_DevonCorp_3F_Text_18320B, 4
-	giveitem ITEM_LETTER
+	giveitem_std ITEM_LETTER
 	msgbox RustboroCity_DevonCorp_3F_Text_18337E, 4
 	playfanfare 370
 	message RustboroCity_DevonCorp_3F_Text_183422
 	waitfanfare
 	waitmessage
-	setflag 2050
-	setflag 188
+	setflag FLAG_SYS_POKENAV_GET
+	setflag FLAG_RECEIVED_POKENAV
 	msgbox RustboroCity_DevonCorp_3F_Text_183439, 4
-	setflag 894
-	clearflag 807
-	clearflag 983
-	clearflag 739
-	clearflag 881
+	setflag FLAG_HIDE_TUNNER_DIGGER_ROUTE116
+	clearflag FLAG_HIDE_BOYFRIEND_RUSTURF_TUNNEL
+	clearflag FLAG_HIDE_GIRLFRIEND_RUSTURF_TUNNEL
+	clearflag FLAG_HIDE_MR_BRINEY_ROUTE104_HOUSE
+	clearflag FLAG_HIDE_PEEKO_BRINEY_HOUSE
 	setvar 0x4096, 1
-	clearflag 814
+	clearflag FLAG_HIDE_RIVAL_RUSTBORO
 	setvar 0x408f, 1
 	releaseall
 	end
@@ -146,9 +146,9 @@ RustboroCity_DevonCorp_3F_Movement_157835:: @ 8157835
 RustboroCity_DevonCorp_3F_EventScript_15783B:: @ 815783B
 	lock
 	faceplayer
-	checkflag 272
+	checkflag FLAG_RECEIVED_EXP_SHARE
 	goto_if_eq RustboroCity_DevonCorp_3F_EventScript_15789B
-	checkflag 189
+	checkflag FLAG_DELIVERED_STEVEN_LETTER
 	goto_if_eq RustboroCity_DevonCorp_3F_EventScript_157864
 	msgbox RustboroCity_DevonCorp_3F_Text_18351E, 4
 	closemessage
@@ -159,10 +159,10 @@ RustboroCity_DevonCorp_3F_EventScript_15783B:: @ 815783B
 
 RustboroCity_DevonCorp_3F_EventScript_157864:: @ 8157864
 	msgbox RustboroCity_DevonCorp_3F_Text_18353E, 4
-	giveitem ITEM_EXP_SHARE
+	giveitem_std ITEM_EXP_SHARE
 	compare RESULT, 0
 	goto_if_eq RustboroCity_DevonCorp_3F_EventScript_1A029B
-	setflag 272
+	setflag FLAG_RECEIVED_EXP_SHARE
 	msgbox RustboroCity_DevonCorp_3F_Text_1835B3, 4
 	closemessage
 	applymovement LAST_TALKED, RustboroCity_DevonCorp_3F_Movement_1A083D
@@ -181,7 +181,7 @@ RustboroCity_DevonCorp_3F_EventScript_15789B:: @ 815789B
 RustboroCity_DevonCorp_3F_EventScript_1578B0:: @ 81578B0
 	lock
 	faceplayer
-	checkflag 256
+	checkflag FLAG_RECEIVED_REPEAT_BALL
 	goto_if_eq RustboroCity_DevonCorp_3F_EventScript_1578C5
 	msgbox RustboroCity_DevonCorp_3F_Text_18395C, 4
 	release

@@ -16,11 +16,11 @@ Route123_MapObjects:: @ 83847F8
 	object_event 15, MAP_OBJ_GFX_BERRY_TREE, 0, 18, 0, 3, 0, 3, 12, 0, 0, 0, 0, 14, 0, S_BerryTree, 0, 0, 0
 	object_event 16, MAP_OBJ_GFX_BERRY_TREE, 0, 11, 0, 5, 0, 3, 12, 0, 0, 0, 0, 15, 0, S_BerryTree, 0, 0, 0
 	object_event 17, MAP_OBJ_GFX_BERRY_TREE, 0, 12, 0, 5, 0, 3, 12, 0, 0, 0, 0, 30, 0, S_BerryTree, 0, 0, 0
-	object_event 18, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 101, 0, 13, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_CuttableTree, 17, 0, 0
-	object_event 19, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 129, 0, 14, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_CuttableTree, 18, 0, 0
-	object_event 20, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 92, 0, 9, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_CuttableTree, 19, 0, 0
-	object_event 21, MAP_OBJ_GFX_ITEM_BALL, 0, 31, 0, 8, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route123_EventScript_1B165B, 1032, 0, 0
-	object_event 22, MAP_OBJ_GFX_ITEM_BALL, 0, 139, 0, 18, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route123_EventScript_1B1668, 1033, 0, 0
+	object_event 18, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 101, 0, 13, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_CuttableTree, FLAG_TEMP_11, 0, 0
+	object_event 19, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 129, 0, 14, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_CuttableTree, FLAG_TEMP_12, 0, 0
+	object_event 20, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 92, 0, 9, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_CuttableTree, FLAG_TEMP_13, 0, 0
+	object_event 21, MAP_OBJ_GFX_ITEM_BALL, 0, 31, 0, 8, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route123_EventScript_1B165B, FLAG_ITEM_ROUTE123_1, 0, 0
+	object_event 22, MAP_OBJ_GFX_ITEM_BALL, 0, 139, 0, 18, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route123_EventScript_1B1668, FLAG_ITEM_ROUTE123_2, 0, 0
 	object_event 23, MAP_OBJ_GFX_GIRL_3, 0, 108, 0, 13, 0, 3, 15, 0, 0, 0, 0, 0, 0, Route123_EventScript_151C5D, 0, 0, 0
 	object_event 24, MAP_OBJ_GFX_BERRY_TREE, 0, 109, 0, 13, 0, 3, 12, 0, 0, 0, 0, 87, 0, S_BerryTree, 0, 0, 0
 	object_event 25, MAP_OBJ_GFX_BERRY_TREE, 0, 110, 0, 13, 0, 3, 12, 0, 0, 0, 0, 88, 0, S_BerryTree, 0, 0, 0
@@ -31,11 +31,11 @@ Route123_MapObjects:: @ 83847F8
 	object_event 30, MAP_OBJ_GFX_PSYCHIC_M, 0, 138, 0, 12, 0, 3, 9, 0, 0, 1, 0, 6, 0, Route123_EventScript_151D16, 0, 0, 0
 	object_event 31, MAP_OBJ_GFX_LASS, 0, 50, 0, 16, 0, 3, 8, 0, 0, 1, 0, 1, 0, Route123_EventScript_151D54, 0, 0, 0
 	object_event 32, MAP_OBJ_GFX_HEX_MANIAC, 0, 87, 0, 14, 0, 3, 1, 0, 0, 1, 0, 3, 0, Route123_EventScript_151DC8, 0, 0, 0
-	object_event 33, MAP_OBJ_GFX_ITEM_BALL, 0, 27, 0, 18, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route123_EventScript_1B1675, 1104, 0, 0
-	object_event 34, MAP_OBJ_GFX_ITEM_BALL, 0, 75, 0, 9, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route123_EventScript_1B1682, 1109, 0, 0
+	object_event 33, MAP_OBJ_GFX_ITEM_BALL, 0, 27, 0, 18, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route123_EventScript_1B1675, FLAG_ITEM_ROUTE123_3, 0, 0
+	object_event 34, MAP_OBJ_GFX_ITEM_BALL, 0, 75, 0, 9, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route123_EventScript_1B1682, FLAG_ITEM_ROUTE123_4, 0, 0
 
 Route123_MapWarps:: @ 8384B28
-	warp_def 22, 6, 0, 0, Route123_BerryMastersHouse
+	warp_def 22, 6, 0, 0, MAP_ROUTE123_BERRY_MASTERS_HOUSE
 
 Route123_MapCoordEvents:: @ 8384B30
 	coord_event 90, 16, 3, 0, 21, 0, 0, 0x0

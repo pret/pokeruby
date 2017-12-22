@@ -7,18 +7,18 @@
 #include "event_data.h"
 #include "fldeff_recordmixing.h"
 #include "item.h"
-#include "items.h"
+#include "constants/items.h"
 #include "load_save.h"
 #include "link.h"
 #include "mauville_man.h"
 #include "menu.h"
 #include "mystery_event_script.h"
-#include "rng.h"
+#include "random.h"
 #include "overworld.h"
 #include "save.h"
 #include "script.h"
 #include "secret_base.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "string_util.h"
 #include "strings2.h"
@@ -131,7 +131,7 @@ void Task_RecordMixing_Main(u8 taskId)
         if (!gTasks[data[10]].isActive)
         {
             tState = 2;
-            FlagSet(SYS_MIX_RECORD);
+            FlagSet(FLAG_SYS_MIX_RECORD);
             DestroyRecordMixingSprite();
             DestroyTask(tSndEffTaskId);
         }
@@ -1019,7 +1019,7 @@ void sub_80B9F3C(u16 *a, u8 b)
                 VarSet(VAR_0x4001, *a);
                 StringCopy(gStringVar1, gLinkPlayers[0].name);
                 if (*a == ITEM_EON_TICKET)
-                    FlagSet(SYS_HAS_EON_TICKET);
+                    FlagSet(FLAG_SYS_HAS_EON_TICKET);
             }
             else
             {

@@ -1,13 +1,13 @@
 #include "global.h"
 #include "lottery_corner.h"
 #include "event_data.h"
-#include "items.h"
-#include "rng.h"
-#include "species.h"
+#include "constants/items.h"
+#include "random.h"
+#include "constants/species.h"
 #include "string_util.h"
 #include "text.h"
 
-extern u16 gScriptResult;
+extern u16 gSpecialVar_Result;
 extern u16 gSpecialVar_0x8004;
 extern struct PokemonStorage gPokemonStorage;
 extern u16 gSpecialVar_0x8005;
@@ -46,7 +46,7 @@ void SetRandomLotteryNumber(u16 i)
 void RetrieveLotteryNumber(void)
 {
     u16 lottoNumber = GetLotteryNumber();
-    gScriptResult = lottoNumber;
+    gSpecialVar_Result = lottoNumber;
 }
 
 void PickLotteryCornerTicket(void)
@@ -70,7 +70,7 @@ void PickLotteryCornerTicket(void)
             if (!GetMonData(pkmn, MON_DATA_IS_EGG))
             {
                 u32 otId = GetMonData(pkmn, MON_DATA_OT_ID);
-                u8 numMatchingDigits = GetMatchingDigits(gScriptResult, otId);
+                u8 numMatchingDigits = GetMatchingDigits(gSpecialVar_Result, otId);
 
                 if (numMatchingDigits > gSpecialVar_0x8004 && numMatchingDigits > 1)
                 {
@@ -97,7 +97,7 @@ void PickLotteryCornerTicket(void)
             !GetBoxMonData(pkmn, MON_DATA_IS_EGG))
             {
                 u32 otId = GetBoxMonData(pkmn, MON_DATA_OT_ID);
-                u8 numMatchingDigits = GetMatchingDigits(gScriptResult, otId);
+                u8 numMatchingDigits = GetMatchingDigits(gSpecialVar_Result, otId);
 
                 if (numMatchingDigits > gSpecialVar_0x8004 && numMatchingDigits > 1)
                 {

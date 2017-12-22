@@ -7,8 +7,8 @@ FortreeCity_Gym_MapObjects:: @ 8389018
 	object_event 6, MAP_OBJ_GFX_MAN_2, 0, 2, 0, 19, 0, 3, 8, 0, 0, 0, 0, 0, 0, FortreeCity_Gym_EventScript_157FBE, 0, 0, 0
 
 FortreeCity_Gym_MapWarps:: @ 83890A8
-	warp_def 2, 24, 0, 2, FortreeCity
-	warp_def 3, 24, 0, 2, FortreeCity
+	warp_def 2, 24, 0, 2, MAP_FORTREE_CITY
+	warp_def 3, 24, 0, 2, MAP_FORTREE_CITY
 
 FortreeCity_Gym_MapBGEvents:: @ 83890B8
 	bg_event 1, 21, 0, 1, 0, FortreeCity_Gym_EventScript_157FDD

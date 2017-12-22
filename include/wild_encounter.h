@@ -18,13 +18,13 @@ struct WildPokemonHeader
 {
     u8 mapGroup;
     u8 mapNum;
-    struct WildPokemonInfo *landMonsInfo;
-    struct WildPokemonInfo *waterMonsInfo;
-    struct WildPokemonInfo *rockSmashMonsInfo;
-    struct WildPokemonInfo *fishingMonsInfo;
+    const struct WildPokemonInfo *landMonsInfo;
+    const struct WildPokemonInfo *waterMonsInfo;
+    const struct WildPokemonInfo *rockSmashMonsInfo;
+    const struct WildPokemonInfo *fishingMonsInfo;
 };
 
-extern struct WildPokemonHeader gWildMonHeaders[];
+extern const struct WildPokemonHeader gWildMonHeaders[];
 
 void DisableWildEncounters(bool8 disabled);
 bool8 StandardWildEncounter(u16 a, u16 b);

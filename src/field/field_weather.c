@@ -3,9 +3,9 @@
 #include "field_map_obj.h"
 #include "field_weather.h"
 #include "palette.h"
-#include "rng.h"
+#include "random.h"
 #include "script.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
@@ -28,10 +28,10 @@ struct WeatherPaletteData
 
 struct WeatherCallbacks
 {
-    void (*func0)(void);
-    void (*func1)(void);
-    void (*func2)(void);
-    u8 (*func3)(void);
+    void (*initVars)(void);
+    void (*main)(void);
+    void (*initAll)(void);
+    bool8 (*finish)(void);
 };
 
 extern struct Weather gWeather;
@@ -48,7 +48,7 @@ const u8 DroughtPaletteData_5[] = INCBIN_U8("graphics/weather/drought5.bin.lz");
 extern u8 (*gUnknown_0202FC48)[32];
 extern u8 gUnknown_0202F9E8[32];
 
-const u8 *const gUnknown_08396FA8[] =
+static const u8 *const sCompressedDroughtPalettes[] =
 {
     DroughtPaletteData_0,
     DroughtPaletteData_1,
@@ -65,83 +65,83 @@ const u8 *const gUnknown_08396FA8[] =
 // this file produces the same result as accessing gWeather directly.
 struct Weather *const gWeatherPtr = &gWeather;
 
-void sub_807CAE8(void);
-void nullsub_38(void);
-u8 sub_807CB0C(void);
-void sub_807DE78(void);
-void sub_807DEF4(void);
-void sub_807DEC4(void);
-u8 sub_807DF54(void);
-void sub_807DF9C(void);
-void nullsub_55(void);
-void sub_807DFC0(void);
-u8 sub_807DFD0(void);
+void None_Init(void);
+void None_Main(void);
+bool8 None_Finish(void);
+void Clouds_InitVars(void);
+void Clouds_Main(void);
+void Clouds_InitAll(void);
+bool8 Clouds_Finish(void);
+void Weather2_InitVars(void);
+void Weather2_Main(void);
+void Weather2_InitAll(void);
+bool8 Weather2_Finish(void);
 void LightRain_InitVars(void);
-void sub_807E400(void);
-void sub_807E3D0(void);
-u8 sub_807E460(void);
+void LightRain_Main(void);
+void LightRain_InitAll(void);
+bool8 LightRain_Finish(void);
 void Snow_InitVars(void);
-void snowflakes_progress2(void);
-void sub_807EA18(void);
-u8 sub_807EAC0(void);
-void sub_807EE80(void);
-void sub_807EFC0(void);
-void sub_807EEF4(void);
-u8 sub_807F34C(void);
-void sub_807F49C(void);
-void sub_807F52C(void);
-void sub_807F4FC(void);
-u8 sub_807F5EC(void);
-void sub_807F7F8(void);
-void sub_807F888(void);
-void sub_807F858(void);
-u8 sub_807F934(void);
-void sub_807FE9C(void);
-void sub_807FF4C(void);
-void sub_807FF1C(void);
-u8 sub_807FFC8(void);
-void sub_807FB24(void);
-void sub_807FBD8(void);
-void sub_807FBA8(void);
-u8 sub_807FC3C(void);
-void sub_807F49C(void);
-void sub_807F52C(void);
-void sub_807F4FC(void);
-u8 sub_807F5EC(void);
-void sub_8080430(void);
-void nullsub_56(void);
-void sub_8080460(void);
-u8 sub_8080470(void);
-void sub_807E110(void);
-void sub_807E174(void);
-void sub_807E144(void);
-u8 sub_807E258(void);
-void sub_807EF24(void);
-void sub_807EFC0(void);
-void sub_807EF90(void);
-u8 sub_807F34C(void);
-void sub_8080474(void);
-void sub_80804F8(void);
-void sub_80804C8(void);
-u8 sub_808056C(void);
+void Snow_Main(void);
+void Snow_InitAll(void);
+bool8 Snow_Finish(void);
+void MedRain_InitVars(void);
+void Rain_Main(void);
+void MedRain_InitAll(void);
+bool8 Rain_Finish(void);
+void Fog1_InitVars(void);
+void Fog1_Main(void);
+void Fog1_InitAll(void);
+bool8 Fog1_Finish(void);
+void Ash_InitVars(void);
+void Ash_Main(void);
+void Ash_InitAll(void);
+bool8 Ash_Finish(void);
+void Sandstorm_InitVars(void);
+void Sandstorm_Main(void);
+void Sandstorm_InitAll(void);
+bool8 Sandstorm_Finish(void);
+void Fog2_InitVars(void);
+void Fog2_Main(void);
+void Fog2_InitAll(void);
+bool8 Fog2_Finish(void);
+void Fog1_InitVars(void);
+void Fog1_Main(void);
+void Fog1_InitAll(void);
+bool8 Fog1_Finish(void);
+void Weather11_InitVars(void);
+void Weather11_Main(void);
+void Weather11_InitAll(void);
+bool8 Weather11_Finish(void);
+void Drought_InitVars(void);
+void Drought_Main(void);
+void Drought_InitAll(void);
+bool8 Drought_Finish(void);
+void HeavyRain_InitVars(void);
+void Rain_Main(void);
+void HeavyRain_InitAll(void);
+bool8 Rain_Finish(void);
+void Bubbles_InitVars(void);
+void Bubbles_Main(void);
+void Bubbles_InitAll(void);
+bool8 Bubbles_Finish(void);
 
-const struct WeatherCallbacks gUnknown_08396FC8[] =
+static const struct WeatherCallbacks sWeatherFuncs[] =
 {
-    {sub_807CAE8, nullsub_38, sub_807CAE8, sub_807CB0C},
-    {sub_807DE78, sub_807DEF4, sub_807DEC4, sub_807DF54},
-    {sub_807DF9C, nullsub_55, sub_807DFC0, sub_807DFD0},
-    {LightRain_InitVars, sub_807E400, sub_807E3D0, sub_807E460},           // light rain
-    {Snow_InitVars, snowflakes_progress2, sub_807EA18, sub_807EAC0},  // snow
-    {sub_807EE80, sub_807EFC0, sub_807EEF4, sub_807F34C},
-    {sub_807F49C, sub_807F52C, sub_807F4FC, sub_807F5EC},
-    {sub_807F7F8, sub_807F888, sub_807F858, sub_807F934},
-    {sub_807FE9C, sub_807FF4C, sub_807FF1C, sub_807FFC8},
-    {sub_807FB24, sub_807FBD8, sub_807FBA8, sub_807FC3C},
-    {sub_807F49C, sub_807F52C, sub_807F4FC, sub_807F5EC},
-    {sub_8080430, nullsub_56, sub_8080460, sub_8080470},
-    {sub_807E110, sub_807E174, sub_807E144, sub_807E258},
-    {sub_807EF24, sub_807EFC0, sub_807EF90, sub_807F34C},
-    {sub_8080474, sub_80804F8, sub_80804C8, sub_808056C},
+    {None_Init,          None_Main,      None_Init,         None_Finish},
+    {Clouds_InitVars,    Clouds_Main,    Clouds_InitAll,    Clouds_Finish},
+    {Weather2_InitVars,  Weather2_Main,  Weather2_InitAll,  Weather2_Finish},
+    {LightRain_InitVars, LightRain_Main, LightRain_InitAll, LightRain_Finish},           // light rain
+    {Snow_InitVars,      Snow_Main,      Snow_InitAll,      Snow_Finish},
+    {MedRain_InitVars,   Rain_Main,      MedRain_InitAll,   Rain_Finish},
+    {Fog1_InitVars,      Fog1_Main,      Fog1_InitAll,      Fog1_Finish},
+    {Ash_InitVars,       Ash_Main,       Ash_InitAll,       Ash_Finish},
+    {Sandstorm_InitVars, Sandstorm_Main, Sandstorm_InitAll, Sandstorm_Finish},
+    {Fog2_InitVars,      Fog2_Main,      Fog2_InitAll,      Fog2_Finish},
+    {Fog1_InitVars,      Fog1_Main,      Fog1_InitAll,      Fog1_Finish},
+    {Weather11_InitVars, Weather11_Main, Weather11_InitAll, Weather11_Finish},
+    {Drought_InitVars,   Drought_Main,   Drought_InitAll,   Drought_Finish},
+    {HeavyRain_InitVars, Rain_Main,      HeavyRain_InitAll, Rain_Finish},
+    {Bubbles_InitVars,   Bubbles_Main,   Bubbles_InitAll,   Bubbles_Finish},
 };
 
 void (*const gUnknown_083970B8[])(void) =
@@ -190,33 +190,33 @@ const u8 gUnknown_083970C8[] =
 
 const u16 gUnknown_083970E8[] = INCBIN_U16("graphics/weather/0.gbapal");
 
-void sub_807C828(void)
+void StartWeather(void)
 {
     u8 index;
-    if (!FuncIsActiveTask(sub_807CA34))
+    if (!FuncIsActiveTask(Task_WeatherMain))
     {
         index = AllocSpritePalette(0x1200);
         CpuCopy32(gUnknown_083970E8, &gPlttBufferUnfaded[0x100 + index * 16], 32);
         sub_807CB10();
         gWeatherPtr->unknown_6D5 = index;
         gWeatherPtr->unknown_6D4 = AllocSpritePalette(0x1201);
-        gWeatherPtr->unknown_6DA = 0;
+        gWeatherPtr->rainSpriteCount = 0;
         gWeatherPtr->unknown_6D8 = 0;
-        gWeatherPtr->unknown_6DE = 0;
-        gWeatherPtr->unknown_6E4 = 0;
-        gWeatherPtr->unknown_700 = 0;
-        gWeatherPtr->unknown_6FB = 0;
-        gWeatherPtr->unknown_724 = 0;
-        gWeatherPtr->unknown_716 = 0;
-        gWeatherPtr->unknown_717 = 0;
+        gWeatherPtr->cloudSpritesCreated = 0;
+        gWeatherPtr->snowflakeSpriteCount = 0;
+        gWeatherPtr->ashSpritesCreated = 0;
+        gWeatherPtr->fog1SpritesCreated = 0;
+        gWeatherPtr->fog2SpritesCreated = 0;
+        gWeatherPtr->sandstormSprites1Created = 0;
+        gWeatherPtr->sandstormSprites2Created = 0;
         gWeatherPtr->unknown_72E = 0;
         gWeatherPtr->unknown_6FA = 0;
-        sub_807DB64(16, 0);
+        Weather_SetBlendCoeffs(16, 0);
         gWeatherPtr->currWeather = 0;
         gWeatherPtr->unknown_6C6 = 3;
         gWeatherPtr->unknown_6C8 = 0;
         gWeatherPtr->unknown_6D3 = 1;
-        gWeatherPtr->unknown_6C9 = CreateTask(sub_807C9E4, 80);
+        gWeatherPtr->unknown_6C9 = CreateTask(Task_WeatherInit, 80);
     }
 }
 
@@ -226,72 +226,70 @@ void DoWeatherEffect(u8 effect)
     {
         PlayRainSoundEffect();
     }
-    if (gWeatherPtr->unknown_6D1 != effect && gWeatherPtr->currWeather == effect)
+    if (gWeatherPtr->nextWeather != effect && gWeatherPtr->currWeather == effect)
     {
-        gUnknown_08396FC8[effect].func0();
+        sWeatherFuncs[effect].initVars();
     }
     gWeatherPtr->unknown_6D3 = 0;
-    gWeatherPtr->unknown_6D1 = effect;
-    gWeatherPtr->unknown_6CE = 0;
+    gWeatherPtr->nextWeather = effect;
+    gWeatherPtr->finishStep = 0;
 }
 
 void sub_807C988(u8 effect)
 {
     PlayRainSoundEffect();
     gWeatherPtr->currWeather = effect;
-    gWeatherPtr->unknown_6D1 = effect;
+    gWeatherPtr->nextWeather = effect;
 }
 
 void sub_807C9B4(u8 effect)
 {
     PlayRainSoundEffect();
     gWeatherPtr->currWeather = effect;
-    gWeatherPtr->unknown_6D1 = effect;
+    gWeatherPtr->nextWeather = effect;
     gWeatherPtr->unknown_6C8 = 1;
 }
 
-void sub_807C9E4(u8 taskId)
+void Task_WeatherInit(u8 taskId)
 {
     if (gWeatherPtr->unknown_6C8)
     {
-        gUnknown_08396FC8[gWeatherPtr->currWeather].func2();
-        gTasks[taskId].func = sub_807CA34;
+        sWeatherFuncs[gWeatherPtr->currWeather].initAll();
+        gTasks[taskId].func = Task_WeatherMain;
     }
 }
 
-void sub_807CA34(u8 task)
+void Task_WeatherMain(u8 taskId)
 {
-    u8 v1;
-    if (gWeatherPtr->currWeather != gWeatherPtr->unknown_6D1)
+    if (gWeatherPtr->currWeather != gWeatherPtr->nextWeather)
     {
-        v1 = gUnknown_08396FC8[gWeatherPtr->currWeather].func3();
-        if (!v1)
+        if (!sWeatherFuncs[gWeatherPtr->currWeather].finish())
         {
-            gUnknown_08396FC8[gWeatherPtr->unknown_6D1].func0();
-            gWeatherPtr->unknown_6C3 = 0; // compiler reuses v1
-            gWeatherPtr->unknown_6C6 = 0; // compiler reuses v1
-            gWeatherPtr->currWeather = gWeatherPtr->unknown_6D1;
+            sWeatherFuncs[gWeatherPtr->nextWeather].initVars();
+            gWeatherPtr->unknown_6C3 = 0;
+            gWeatherPtr->unknown_6C6 = 0;
+            gWeatherPtr->currWeather = gWeatherPtr->nextWeather;
             gWeatherPtr->unknown_6D3 = 1;
         }
     }
     else
     {
-        gUnknown_08396FC8[gWeatherPtr->currWeather].func1();
+        sWeatherFuncs[gWeatherPtr->currWeather].main();
     }
     gUnknown_083970B8[gWeatherPtr->unknown_6C6]();
 }
 
-void sub_807CAE8(void)
+void None_Init(void)
 {
     gWeatherPtr->unknown_6C1 = 0;
     gWeatherPtr->unknown_6C2 = 0;
 }
 
-void nullsub_38(void)
+void None_Main(void)
 {
 }
 
-u8 sub_807CB0C(void)
+u8 None_Finish(void)
 {
     return 0;
 }
@@ -627,14 +625,14 @@ void sub_807D1BC(u8 a1, u8 a2, s8 c, u8 d, u16 e)
     }
 }
 
-void sub_807D304(s8 a, u8 arg2, u16 c)
+void sub_807D304(s8 a, u8 coeff, u16 c)
 {
     struct RGBColor color;
     u8 r_;
     u8 g_;
     u8 b_;
     u16 r4;
-    u16 r5;
+    u16 palOffset;
     u16 r12;
 
     a = -a - 1;
@@ -642,13 +640,13 @@ void sub_807D304(s8 a, u8 arg2, u16 c)
     r_ = color.r;
     g_ = color.g;
     b_ = color.b;
-    r5 = 0;
+    palOffset = 0;
     for (r4 = 0; r4 < 32; r4++)
     {
         if (gUnknown_030006DC[r4] == 0)
         {
-            BlendPalette(r5, 16, arg2, c);
-            r5 += 16;
+            BlendPalette(palOffset, 16, coeff, c);
+            palOffset += 16;
         }
         else
         {
@@ -660,7 +658,7 @@ void sub_807D304(s8 a, u8 arg2, u16 c)
                 u8 r1, g1, b1;
                 u8 r2, g2, b2;
 
-                color1 = *(struct RGBColor *)&gPlttBufferUnfaded[r5];
+                color1 = *(struct RGBColor *)&gPlttBufferUnfaded[palOffset];
                 r1 = color1.r;
                 g1 = color1.g;
                 b1 = color1.b;
@@ -671,11 +669,11 @@ void sub_807D304(s8 a, u8 arg2, u16 c)
                 g2 = color2.g;
                 b2 = color2.b;
 
-                r2 += ((r_ - r2) * arg2) >> 4;
-                g2 += ((g_ - g2) * arg2) >> 4;
-                b2 += ((b_ - b2) * arg2) >> 4;
+                r2 += ((r_ - r2) * coeff) >> 4;
+                g2 += ((g_ - g2) * coeff) >> 4;
+                b2 += ((b_ - b2) * coeff) >> 4;
 
-                gPlttBufferFaded[r5++] = (b2 << 10) | (g2 << 5) | r2;
+                gPlttBufferFaded[palOffset++] = (b2 << 10) | (g2 << 5) | r2;
             }
         }
     }
@@ -775,28 +773,28 @@ void sub_807D5F0(u8 a, u8 b, u8 c)
     }
 }
 
-void fade_screen(u8 a, u8 b)
+void fade_screen(u8 a, u8 delay)
 {
-    u32 r4;
+    u32 fadeColor;
     u32 r1;
     u32 r2;
 
     switch (a)
     {
     case 0:
-        r4 = 0;
+        fadeColor = 0;
         r1 = 0;
         break;
     case 2:
-        r4 = 0xFFFF;
+        fadeColor = 0xFFFF;
         r1 = 0;
         break;
     case 1:
-        r4 = 0;
+        fadeColor = 0;
         r1 = 1;
         break;
     case 3:
-        r4 = 0xFFFF;
+        fadeColor = 0xFFFF;
         r1 = 1;
         break;
     default:
@@ -823,20 +821,20 @@ void fade_screen(u8 a, u8 b)
     {
         if (r2 != 0)
             CpuFastCopy(gPlttBufferFaded, gPlttBufferUnfaded, 0x400);
-        BeginNormalPaletteFade(0xFFFFFFFF, b, 0, 16, r4);
+        BeginNormalPaletteFade(0xFFFFFFFF, delay, 0, 16, fadeColor);
         gWeatherPtr->unknown_6C6 = 2;
     }
     else
     {
-        gWeatherPtr->unknown_6C4 = r4;
+        gWeatherPtr->unknown_6C4 = fadeColor;
         if (r2 != 0)
             gWeatherPtr->unknown_6C7 = 0;
         else
-            BeginNormalPaletteFade(0xFFFFFFFF, b, 16, 0, r4);
+            BeginNormalPaletteFade(0xFFFFFFFF, delay, 16, 0, fadeColor);
         gWeatherPtr->unknown_6C6 = 1;
         gWeatherPtr->unknown_6CA = 1;
         gWeatherPtr->unknown_6CB = 0;
-        sub_807DB64(gWeatherPtr->unknown_730, gWeatherPtr->unknown_732);
+        Weather_SetBlendCoeffs(gWeatherPtr->currBlendEVA, gWeatherPtr->currBlendEVB);
         gWeatherPtr->unknown_6C8 = 1;
     }
 }
@@ -909,7 +907,7 @@ void sub_807D8F0(u8 *a, u8 *b)
     if (r4 < 7)
     {
         r4--;
-        LZ77UnCompWram(gUnknown_08396FA8[r4], eWeatherPaletteData.data[r4]);
+        LZ77UnCompWram(sCompressedDroughtPalettes[r4], eWeatherPaletteData.data[r4]);
         if (r4 == 0)
         {
             eWeatherPaletteData.data[r4][0] = 0x421;
@@ -921,8 +919,7 @@ void sub_807D8F0(u8 *a, u8 *b)
             for (i = 0; i < 0x1000; i++)
                 eWeatherPaletteData.data[r4][i] += eWeatherPaletteData.data[r4 - 1][i];
         }
-        (*a)++;
-        if (*a == 7)
+        if (++(*a) == 7)
         {
             *a = 32;
             *b = 32;
@@ -997,52 +994,58 @@ void sub_807DA4C(void)
     }
 }
 
-void sub_807DB64(u8 a, u8 b)
+void Weather_SetBlendCoeffs(u8 eva, u8 evb)
 {
-    gWeatherPtr->unknown_730 = a;
-    gWeatherPtr->unknown_732 = b;
-    gWeatherPtr->unknown_734 = a;
-    gWeatherPtr->unknown_736 = b;
-    REG_BLDALPHA = (b << 8) | a;
+    gWeatherPtr->currBlendEVA = eva;
+    gWeatherPtr->currBlendEVB = evb;
+    gWeatherPtr->targetBlendEVA = eva;
+    gWeatherPtr->targetBlendEVB = evb;
+    REG_BLDALPHA = BLDALPHA_BLEND(eva, evb);
 }
 
-void sub_807DBA4(u8 a, u8 b, int c)
+void Weather_SetTargetBlendCoeffs(u8 eva, u8 evb, int delay)
 {
-    gWeatherPtr->unknown_734 = a;
-    gWeatherPtr->unknown_736 = b;
-    gWeatherPtr->unknown_73A = c;
+    gWeatherPtr->targetBlendEVA = eva;
+    gWeatherPtr->targetBlendEVB = evb;
+    gWeatherPtr->blendDelay = delay;
     gWeatherPtr->unknown_739 = 0;
     gWeatherPtr->unknown_738 = 0;
 }
 
-bool8 sub_807DBE8(void)
+bool8 Weather_UpdateBlend(void)
 {
-    if (gWeatherPtr->unknown_730 == gWeatherPtr->unknown_734
-     && gWeatherPtr->unknown_732 == gWeatherPtr->unknown_736)
+    if (gWeatherPtr->currBlendEVA == gWeatherPtr->targetBlendEVA
+     && gWeatherPtr->currBlendEVB == gWeatherPtr->targetBlendEVB)
         return TRUE;
-    if (++gWeatherPtr->unknown_739 > gWeatherPtr->unknown_73A)
+
+    if (++gWeatherPtr->unknown_739 > gWeatherPtr->blendDelay)
     {
         gWeatherPtr->unknown_739 = 0;
         gWeatherPtr->unknown_738++;
+
+        // Update currBlendEVA and currBlendEVB on alternate frames
         if (gWeatherPtr->unknown_738 & 1)
         {
-            if (gWeatherPtr->unknown_730 < gWeatherPtr->unknown_734)
-                gWeatherPtr->unknown_730++;
-            else if (gWeatherPtr->unknown_730 > gWeatherPtr->unknown_734)
-                gWeatherPtr->unknown_730--;
+            if (gWeatherPtr->currBlendEVA < gWeatherPtr->targetBlendEVA)
+                gWeatherPtr->currBlendEVA++;
+            else if (gWeatherPtr->currBlendEVA > gWeatherPtr->targetBlendEVA)
+                gWeatherPtr->currBlendEVA--;
         }
         else
         {
-            if (gWeatherPtr->unknown_732 < gWeatherPtr->unknown_736)
-                gWeatherPtr->unknown_732++;
-            else if (gWeatherPtr->unknown_732 > gWeatherPtr->unknown_736)
-                gWeatherPtr->unknown_732--;
+            if (gWeatherPtr->currBlendEVB < gWeatherPtr->targetBlendEVB)
+                gWeatherPtr->currBlendEVB++;
+            else if (gWeatherPtr->currBlendEVB > gWeatherPtr->targetBlendEVB)
+                gWeatherPtr->currBlendEVB--;
         }
     }
-    REG_BLDALPHA = (gWeatherPtr->unknown_732 << 8) | gWeatherPtr->unknown_730;
-    if (gWeatherPtr->unknown_730 == gWeatherPtr->unknown_734
-     && gWeatherPtr->unknown_732 == gWeatherPtr->unknown_736)
+
+    REG_BLDALPHA = BLDALPHA_BLEND(gWeatherPtr->currBlendEVA, gWeatherPtr->currBlendEVB);
+
+    if (gWeatherPtr->currBlendEVA == gWeatherPtr->targetBlendEVA
+     && gWeatherPtr->currBlendEVB == gWeatherPtr->targetBlendEVB)
         return TRUE;
+
     return FALSE;
 }
 

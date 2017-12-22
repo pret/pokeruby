@@ -3,7 +3,7 @@
 #include "battle.h"
 #include "main.h"
 #include "palette.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "string_util.h"
 

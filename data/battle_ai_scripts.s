@@ -1,3 +1,8 @@
+#include "constants/abilities.h"
+#include "constants/battle_move_effects.h"
+#include "constants/hold_effects.h"
+#include "constants/items.h"
+#include "constants/moves.h"
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
 	.include "asm/macros/battle_ai_script.inc"

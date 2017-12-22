@@ -148,7 +148,7 @@ ContestString_DescStopExcitement: @ 83CADA1
 	.string "terung des Publikums.$"
 
 	.align 2
-gUnknown_083CADD4:: @ 83CADD4
+gContestEffectStrings:: @ 83CADD4
 	.4byte ContestString_DescHighlyAppealing
 	.4byte ContestString_DescStartled1
 	.4byte ContestString_DescGreatLock

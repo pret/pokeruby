@@ -3,18 +3,18 @@ MauvilleCity_MapScripts:: @ 814C032
 	.byte 0
 
 MauvilleCity_MapScript1_14C038:: @ 814C038
-	setflag 2072
-	clearflag 961
-	setflag 2098
-	clearflag 99
+	setflag FLAG_VISITED_MAUVILLE_CITY
+	clearflag FLAG_HIDE_OCEANIC_MUSEUM_VISITORS
+	setflag FLAG_SYS_TV_START
+	clearflag FLAG_MAUVILLE_GYM_BARRIERS_STATE
 	setvar 0x4093, 0
-	checkflag 209
+	checkflag FLAG_RECEIVED_TM24
 	call_if 1, MauvilleCity_EventScript_14C053
 	end
 
 MauvilleCity_EventScript_14C053:: @ 814C053
-	clearflag 913
-	setflag 912
+	clearflag FLAG_HIDE_WATTSON_MAUVILLE_GYM
+	setflag FLAG_HIDE_WATTSON_MAUVILLE
 	return
 
 MauvilleCity_EventScript_14C05A:: @ 814C05A
@@ -52,10 +52,10 @@ MauvilleCity_EventScript_14C099:: @ 814C099
 MauvilleCity_EventScript_14C0A2:: @ 814C0A2
 	lock
 	faceplayer
-	checkflag 98
+	checkflag FLAG_TV_EXPLAINED
 	goto_if_eq MauvilleCity_EventScript_14C0BA
 	msgbox MauvilleCity_Text_16674A, 4
-	setflag 98
+	setflag FLAG_TV_EXPLAINED
 	release
 	end
 
@@ -67,7 +67,7 @@ MauvilleCity_EventScript_14C0BA:: @ 814C0BA
 MauvilleCity_EventScript_14C0C4:: @ 814C0C4
 	lock
 	faceplayer
-	checkflag 284
+	checkflag FLAG_DECLINED_WALLY_BATTLE_MAUVILLE
 	goto_if_eq MauvilleCity_EventScript_14C0E4
 	msgbox MauvilleCity_Text_165B76, 4
 	closemessage
@@ -86,7 +86,7 @@ MauvilleCity_EventScript_14C0E4:: @ 814C0E4
 
 MauvilleCity_EventScript_14C0F9:: @ 814C0F9
 	lockall
-	checkflag 284
+	checkflag FLAG_DECLINED_WALLY_BATTLE_MAUVILLE
 	goto_if_eq MauvilleCity_EventScript_14C292
 	applymovement 6, MauvilleCity_Movement_1A0843
 	waitmovement 0
@@ -156,9 +156,9 @@ MauvilleCity_EventScript_14C1D9:: @ 814C1D9
 MauvilleCity_EventScript_14C22B:: @ 814C22B
 	removeobject 6
 	removeobject 7
-	clearflag 806
-	clearflag 809
-	setflag 190
+	clearflag FLAG_HIDE_WALLY_WANDAS_HOUSE
+	clearflag FLAG_HIDE_WALLY_FATHER_WANDAS_HOUSE
+	setflag FLAG_DEFEATED_WALLY_MAUVILLE
 	releaseall
 	end
 
@@ -177,7 +177,7 @@ MauvilleCity_EventScript_14C23C:: @ 814C23C
 	return
 
 MauvilleCity_EventScript_14C285:: @ 814C285
-	setflag 284
+	setflag FLAG_DECLINED_WALLY_BATTLE_MAUVILLE
 	msgbox MauvilleCity_Text_165DE8, 4
 	release
 	end
@@ -284,15 +284,15 @@ MauvilleCity_Movement_14C2E8:: @ 814C2E8
 MauvilleCity_EventScript_14C2F2:: @ 814C2F2
 	lock
 	faceplayer
-	checkflag 209
+	checkflag FLAG_RECEIVED_TM24
 	goto_if_eq MauvilleCity_EventScript_14C368
 	compare 0x40ba, 2
 	goto_if_eq MauvilleCity_EventScript_14C33C
-	checkflag 208
+	checkflag FLAG_RECEIVED_BASEMENT_KEY
 	goto_if_eq MauvilleCity_EventScript_14C332
 	msgbox MauvilleCity_Text_1661C1, 4
-	giveitem ITEM_BASEMENT_KEY
-	setflag 208
+	giveitem_std ITEM_BASEMENT_KEY
+	setflag FLAG_RECEIVED_BASEMENT_KEY
 	msgbox MauvilleCity_Text_166331, 4
 	release
 	end
@@ -304,10 +304,10 @@ MauvilleCity_EventScript_14C332:: @ 814C332
 
 MauvilleCity_EventScript_14C33C:: @ 814C33C
 	msgbox MauvilleCity_Text_1663EB, 4
-	giveitem ITEM_TM24
+	giveitem_std ITEM_TM24
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_EventScript_1A029B
-	setflag 209
+	setflag FLAG_RECEIVED_TM24
 	msgbox MauvilleCity_Text_166488, 4
 	release
 	end

@@ -1,15 +1,15 @@
 ShoalCave_LowTideInnerRoom_MapObjects:: @ 838DD40
-	object_event 1, MAP_OBJ_GFX_ITEM_BALL, 0, 26, 0, 14, 0, 5, 1, 17, 0, 0, 0, 0, 0, ShoalCave_LowTideInnerRoom_EventScript_1B1A03, 1082, 0, 0
+	object_event 1, MAP_OBJ_GFX_ITEM_BALL, 0, 26, 0, 14, 0, 5, 1, 17, 0, 0, 0, 0, 0, ShoalCave_LowTideInnerRoom_EventScript_1B1A03, FLAG_ITEM_SHOAL_CAVE_LOW_TIDE_INNER_ROOM_1, 0, 0
 
 ShoalCave_LowTideInnerRoom_MapWarps:: @ 838DD58
-	warp_def 34, 29, 3, 1, ShoalCave_LowTideEntranceRoom
-	warp_def 38, 15, 3, 0, ShoalCave_LowTideStairsRoom
-	warp_def 42, 4, 3, 1, ShoalCave_LowTideStairsRoom
-	warp_def 19, 14, 4, 0, ShoalCave_LowTideLowerRoom
-	warp_def 15, 19, 3, 1, ShoalCave_LowTideLowerRoom
-	warp_def 30, 25, 3, 2, ShoalCave_LowTideLowerRoom
-	warp_def 14, 33, 5, 2, ShoalCave_LowTideEntranceRoom
-	warp_def 40, 33, 5, 3, ShoalCave_LowTideEntranceRoom
+	warp_def 34, 29, 3, 1, MAP_SHOAL_CAVE_LOW_TIDE_ENTRANCE_ROOM
+	warp_def 38, 15, 3, 0, MAP_SHOAL_CAVE_LOW_TIDE_STAIRS_ROOM
+	warp_def 42, 4, 3, 1, MAP_SHOAL_CAVE_LOW_TIDE_STAIRS_ROOM
+	warp_def 19, 14, 4, 0, MAP_SHOAL_CAVE_LOW_TIDE_LOWER_ROOM
+	warp_def 15, 19, 3, 1, MAP_SHOAL_CAVE_LOW_TIDE_LOWER_ROOM
+	warp_def 30, 25, 3, 2, MAP_SHOAL_CAVE_LOW_TIDE_LOWER_ROOM
+	warp_def 14, 33, 5, 2, MAP_SHOAL_CAVE_LOW_TIDE_ENTRANCE_ROOM
+	warp_def 40, 33, 5, 3, MAP_SHOAL_CAVE_LOW_TIDE_ENTRANCE_ROOM
 
 ShoalCave_LowTideInnerRoom_MapBGEvents:: @ 838DD98
 	bg_event 31, 8, 5, 0, 0, ShoalCave_LowTideInnerRoom_EventScript_15E329

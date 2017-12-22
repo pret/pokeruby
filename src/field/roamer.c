@@ -1,8 +1,8 @@
 #include "global.h"
 #include "roamer.h"
 #include "pokemon.h"
-#include "rng.h"
-#include "species.h"
+#include "random.h"
+#include "constants/species.h"
 
 #ifdef SAPPHIRE
 #define ROAMER_SPECIES SPECIES_LATIAS

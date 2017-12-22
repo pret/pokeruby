@@ -6,7 +6,7 @@ LilycoveCity_DepartmentStore_5F_EventScript_15A061:: @ 815A061
 	faceplayer
 	message LilycoveCity_DepartmentStore_5F_Text_1A0BE4
 	waitmessage
-	pokemartbp LilycoveCity_DepartmentStore_5F_Items1
+	pokemartdecoration2 LilycoveCity_DepartmentStore_5F_Items1
 	msgbox LilycoveCity_DepartmentStore_5F_Text_1A0C02, 4
 	release
 	end
@@ -34,7 +34,7 @@ LilycoveCity_DepartmentStore_5F_EventScript_15A094:: @ 815A094
 	faceplayer
 	message LilycoveCity_DepartmentStore_5F_Text_1A0BE4
 	waitmessage
-	pokemartbp LilycoveCity_DepartmentStore_5F_Items2
+	pokemartdecoration2 LilycoveCity_DepartmentStore_5F_Items2
 	msgbox LilycoveCity_DepartmentStore_5F_Text_1A0C02, 4
 	release
 	end
@@ -59,7 +59,7 @@ LilycoveCity_DepartmentStore_5F_EventScript_15A0C2:: @ 815A0C2
 	faceplayer
 	message LilycoveCity_DepartmentStore_5F_Text_1A0BE4
 	waitmessage
-	pokemartbp LilycoveCity_DepartmentStore_5F_Items3
+	pokemartdecoration2 LilycoveCity_DepartmentStore_5F_Items3
 	msgbox LilycoveCity_DepartmentStore_5F_Text_1A0C02, 4
 	release
 	end
@@ -84,7 +84,7 @@ LilycoveCity_DepartmentStore_5F_EventScript_15A0F2:: @ 815A0F2
 	faceplayer
 	message LilycoveCity_DepartmentStore_5F_Text_1A0BE4
 	waitmessage
-	pokemartbp LilycoveCity_DepartmentStore_5F_Items4
+	pokemartdecoration2 LilycoveCity_DepartmentStore_5F_Items4
 	msgbox LilycoveCity_DepartmentStore_5F_Text_1A0C02, 4
 	release
 	end

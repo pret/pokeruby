@@ -5,7 +5,7 @@
 #include "menu.h"
 #include "palette.h"
 #include "rtc.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "strings2.h"
 #include "task.h"

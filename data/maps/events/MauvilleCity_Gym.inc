@@ -1,5 +1,5 @@
 MauvilleCity_Gym_MapObjects:: @ 838821C
-	object_event 1, MAP_OBJ_GFX_WATTSON, 0, 4, 0, 3, 0, 3, 8, 0, 0, 0, 0, 0, 0, MauvilleCity_Gym_EventScript_1565AB, 913, 0, 0
+	object_event 1, MAP_OBJ_GFX_WATTSON, 0, 4, 0, 3, 0, 3, 8, 0, 0, 0, 0, 0, 0, MauvilleCity_Gym_EventScript_1565AB, FLAG_HIDE_WATTSON_MAUVILLE_GYM, 0, 0
 	object_event 2, MAP_OBJ_GFX_MAN_6, 0, 6, 0, 9, 0, 3, 9, 0, 0, 1, 0, 2, 0, MauvilleCity_Gym_EventScript_1566FD, 0, 0, 0
 	object_event 3, MAP_OBJ_GFX_GIRL_3, 0, 7, 0, 11, 0, 3, 8, 0, 0, 1, 0, 1, 0, MauvilleCity_Gym_EventScript_15672B, 0, 0, 0
 	object_event 4, MAP_OBJ_GFX_YOUNGSTER, 0, 1, 0, 13, 0, 3, 10, 0, 0, 1, 0, 1, 0, MauvilleCity_Gym_EventScript_156714, 0, 0, 0
@@ -7,8 +7,8 @@ MauvilleCity_Gym_MapObjects:: @ 838821C
 	object_event 6, MAP_OBJ_GFX_MAN_2, 0, 7, 0, 20, 0, 3, 9, 0, 0, 0, 0, 0, 0, MauvilleCity_Gym_EventScript_156742, 0, 0, 0
 
 MauvilleCity_Gym_MapWarps:: @ 83882AC
-	warp_def 4, 20, 0, 0, MauvilleCity
-	warp_def 5, 20, 0, 0, MauvilleCity
+	warp_def 4, 20, 0, 0, MAP_MAUVILLE_CITY
+	warp_def 5, 20, 0, 0, MAP_MAUVILLE_CITY
 
 MauvilleCity_Gym_MapCoordEvents:: @ 83882BC
 	coord_event 0, 9, 3, 0, 0x4000, 0, 0, MauvilleCity_Gym_EventScript_15664B

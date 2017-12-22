@@ -3,10 +3,10 @@
 #include "string_util.h"
 #include "text.h"
 #include "main.h"
-#include "species.h"
-#include "items.h"
-#include "moves.h"
-#include "easy_chat.h"
+#include "constants/species.h"
+#include "constants/items.h"
+#include "constants/moves.h"
+#include "constants/easy_chat.h"
 #include "link.h"
 #include "strings2.h"
 #include "graphics.h"
@@ -17,7 +17,7 @@
 #include "pokemon_icon.h"
 #include "cable_club.h"
 #include "party_menu.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "data2.h"
 #include "pokemon_summary_screen.h"
@@ -2186,11 +2186,11 @@ static void sub_804997C(void)
     {
         if (gUnknown_03004824->tradeMenuCursorPosition < PARTY_SIZE)
         {
-            ShowPokemonSummaryScreen(gPlayerParty, gUnknown_03004824->tradeMenuCursorPosition, gUnknown_03004824->partyCounts[0] - 1, sub_80484F4, 4);
+            ShowPokemonSummaryScreen(gPlayerParty, gUnknown_03004824->tradeMenuCursorPosition, gUnknown_03004824->partyCounts[0] - 1, sub_80484F4, PSS_MODE_NO_MOVE_ORDER_EDIT);
         }
         else
         {
-            ShowPokemonSummaryScreen(gEnemyParty, gUnknown_03004824->tradeMenuCursorPosition - 6, gUnknown_03004824->partyCounts[1] - 1, sub_80484F4, 4);
+            ShowPokemonSummaryScreen(gEnemyParty, gUnknown_03004824->tradeMenuCursorPosition - 6, gUnknown_03004824->partyCounts[1] - 1, sub_80484F4, PSS_MODE_NO_MOVE_ORDER_EDIT);
         }
     }
 }
@@ -5696,7 +5696,7 @@ static void sub_804E1DC(void)
         numRibbons += GetMonData(&gEnemyParty[gUnknown_020297D8[1] % 6], MON_DATA_CHAMPION_RIBBON + i);
     }
     if (numRibbons != 0)
-        FlagSet(SYS_RIBBON_GET);
+        FlagSet(FLAG_SYS_RIBBON_GET);
 }
 
 void sub_804E22C(void)

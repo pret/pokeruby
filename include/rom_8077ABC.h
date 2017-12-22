@@ -12,6 +12,12 @@ enum
     ANIM_BANK_DEF_PARTNER
 };
 
+struct Struct_sub_8078914 {
+    u8 *field_0;
+    u8 *field_4;
+    u8 field_8;
+};
+
 u8 sub_8077ABC(u8, u8);
 u8 sub_8077E44(u8 slot, u16 species, u8 a3);
 u8 GetAnimBankSpriteId(u8 side);
@@ -54,7 +60,7 @@ void sub_80797EC(struct Task *task);
 void sub_8079814(u8 taskId);
 void sub_8079A64(u8 sprite);
 u16 sub_8079B10(u8 sprite);
-void sub_8079BF4(s16 *bottom, s16 *top, void *ptr);
+void sub_8079BF4(s16 *bottom, s16 *top, const void *ptr);
 void *sub_8079BFC(s16 bottom, s16 top);
 void sub_8079E24();
 u8 sub_8079E90(u8 slot);
@@ -93,11 +99,13 @@ u32 sub_80792C0(u8 a1, u8 a2, u8 a3, u8 a4);
 s16 duplicate_obj_of_side_rel2move_in_transparent_mode(u8 a1);
 void obj_delete_but_dont_free_vram(struct Sprite *sprite);
 void sub_8079108(u16 a1, bool8 a2);
-void sub_80798F4(struct Task *task, u8 a2, void *a3);
+void sub_80798F4(struct Task *task, u8 a2, const void *a3);
 bool8 sub_807992C(struct Task *task);
 u8 sub_8077FC0(u8 slot);
 void move_anim_8074EE0(struct Sprite *sprite);
 bool8 sub_8078718(struct Sprite *sprite);
 bool8 sub_8078CE8(struct Sprite *sprite);
+void oamt_add_pos2_onto_pos1(struct Sprite *sprite);
+void sub_8078BD4(struct Sprite *sprite);
 
 #endif // GUARD_ROM_8077ABC_H

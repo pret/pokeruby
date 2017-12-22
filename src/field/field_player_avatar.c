@@ -9,15 +9,15 @@
 #include "field_map_obj_helpers.h"
 #include "fieldmap.h"
 #include "main.h"
-#include "map_object_constants.h"
+#include "constants/map_objects.h"
 #include "menu.h"
 #include "metatile_behavior.h"
 #include "party_menu.h"
-#include "rng.h"
+#include "random.h"
 #include "overworld.h"
 #include "rotating_gate.h"
 #include "script.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "strings2.h"
 #include "task.h"
@@ -490,7 +490,7 @@ void sub_8058D0C(u8 direction, u16 heldKeys)
             PlayerGoSpeed2(direction);
             return;
         }
-        if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_4) && (heldKeys & B_BUTTON) && FlagGet(SYS_B_DASH)
+        if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_4) && (heldKeys & B_BUTTON) && FlagGet(FLAG_SYS_B_DASH)
          && IsRunningDisallowed(gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_1E) == 0)
         {
             sub_805940C(direction);
@@ -563,7 +563,7 @@ static bool8 ShouldJumpLedge(s16 a, s16 b, u8 c)
 
 static u8 sub_8058F6C(s16 a, s16 b, u8 c)
 {
-    if (FlagGet(SYS_USE_STRENGTH))
+    if (FlagGet(FLAG_SYS_USE_STRENGTH))
     {
         u8 mapObjectId = GetFieldObjectIdByXY(a, b);
 

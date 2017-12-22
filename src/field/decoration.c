@@ -1,9 +1,10 @@
 #include "global.h"
+#include "constants/decorations.h"
 #include "main.h"
-#include "map_object_constants.h"
+#include "constants/map_objects.h"
 #include "overworld.h"
 #include "sound.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "string_util.h"
 #include "menu.h"
 #include "menu_helpers.h"
@@ -2321,12 +2322,12 @@ void sub_80FF474(void)
     u8 j;
     for (i=0; i<14; i++)
     {
-        if (FlagGet(i + 0xae) == 1)
+        if (FlagGet(i + FLAG_DECORATION_2) == 1)
         {
-            FlagClear(i + 0xae);
+            FlagClear(i + FLAG_DECORATION_2);
             for (j=0; j<gMapHeader.events->mapObjectCount; j++)
             {
-                if (gMapHeader.events->mapObjects[j].flagId == i + 0xae)
+                if (gMapHeader.events->mapObjects[j].flagId == i + FLAG_DECORATION_2)
                 {
                     break;
                 }
@@ -3646,10 +3647,10 @@ void sub_8100A7C(void)
 {
     u16 i;
     gSpecialVar_0x8005 = 0;
-    gScriptResult = 0;
+    gSpecialVar_Result = 0;
     if (gSpecialVar_0x8004 == gUnknown_02039234)
     {
-        gScriptResult = 1;
+        gSpecialVar_Result = 1;
     } else if (gDecorations[ewram_1f000.items[gUnknown_020391B4[gSpecialVar_0x8004].decorId]].permission == DECORPERM_SOLID_MAT)
     {
         gSpecialVar_0x8005 = gUnknown_020391B4[gSpecialVar_0x8004].flagId;

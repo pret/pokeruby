@@ -2997,8 +2997,8 @@ gBattleAnimSpriteSheet_277:: @ 8E6DA54
 	.incbin "graphics/battle_anims/sprites/277.4bpp.lz"
 
 	.align 2
-gWeatherFog1Tilemap:: @ 8E6DE48
-	.incbin "graphics/weather/fog1.bin.lz"
+gBattleAnimFogTilemap:: @ 8E6DE48
+	.incbin "graphics/battle_anims/backgrounds/fog.bin.lz"
 
 	.align 2
 gBattleAnimSpritePalette_283:: @ 8E6DFC0
@@ -3959,6 +3959,9 @@ gUnknown_08E94510:: @ 8E94510
 
 gUnknown_08E94550:: @ 8E94550
 	.incbin "graphics/unknown/unknown_E94550.bin"
+
+gUnknown_08E94590:: @ 8E94590
+	.incbin "graphics/unknown/unknown_E94590.bin"
 
 gUnknown_08E945D0:: @ 8E945D0
 	.incbin "graphics/interface/wordgroup_layout.bin"

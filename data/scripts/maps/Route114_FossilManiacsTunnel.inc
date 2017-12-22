@@ -4,7 +4,7 @@ Route114_FossilManiacsTunnel_MapScripts:: @ 815C20E
 Route114_FossilManiacsTunnel_EventScript_15C20F:: @ 815C20F
 	lock
 	faceplayer
-	checkflag 267
+	checkflag FLAG_RECEIVED_FOSSIL_MON
 	goto_if_eq Route114_FossilManiacsTunnel_EventScript_15C24E
 	checkitem ITEM_ROOT_FOSSIL, 1
 	compare RESULT, 1

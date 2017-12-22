@@ -4,12 +4,12 @@ PacifidlogTown_MapObjects:: @ 838100C
 	object_event 3, MAP_OBJ_GFX_LITTLE_BOY_1, 0, 9, 0, 16, 0, 3, 8, 0, 0, 0, 0, 0, 0, PacifidlogTown_EventScript_14E900, 0, 0, 0
 
 PacifidlogTown_MapWarps:: @ 8381054
-	warp_def 8, 15, 0, 0, PacifidlogTown_PokemonCenter_1F
-	warp_def 16, 13, 0, 0, PacifidlogTown_House1
-	warp_def 3, 22, 0, 0, PacifidlogTown_House2
-	warp_def 12, 24, 0, 0, PacifidlogTown_House3
-	warp_def 2, 12, 0, 0, PacifidlogTown_House4
-	warp_def 17, 21, 0, 0, PacifidlogTown_House5
+	warp_def 8, 15, 0, 0, MAP_PACIFIDLOG_TOWN_POKEMON_CENTER_1F
+	warp_def 16, 13, 0, 0, MAP_PACIFIDLOG_TOWN_HOUSE1
+	warp_def 3, 22, 0, 0, MAP_PACIFIDLOG_TOWN_HOUSE2
+	warp_def 12, 24, 0, 0, MAP_PACIFIDLOG_TOWN_HOUSE3
+	warp_def 2, 12, 0, 0, MAP_PACIFIDLOG_TOWN_HOUSE4
+	warp_def 17, 21, 0, 0, MAP_PACIFIDLOG_TOWN_HOUSE5
 
 PacifidlogTown_MapBGEvents:: @ 8381084
 	bg_event 9, 15, 0, 1, 0, PacifidlogTown_EventScript_1A00EA

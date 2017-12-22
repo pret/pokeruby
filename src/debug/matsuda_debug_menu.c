@@ -27,8 +27,8 @@ extern u8 gUnknown_02038694;
 extern u8 gIsLinkContest;
 extern u8 gUnknown_0203869B;
 extern u8 gContestPlayerMonIndex;
-extern u16 gScriptContestCategory;
-extern u16 gScriptContestRank;
+extern u16 gSpecialVar_ContestCategory;
+extern u16 gSpecialVar_ContestRank;
 
 extern u16 gUnknown_030042A4;
 extern u16 gUnknown_030042A0;
@@ -360,7 +360,7 @@ static void sub_80A9D58(u8 taskId)
        dest[i] = gTasks[taskId].data[5 + i];
 
    gUnknown_0203869B = sub_80C4B34(dest);
-   sub_80AE82C((u8)gScriptContestCategory);
+   sub_80AE82C((u8)gSpecialVar_ContestCategory);
    sub_80B0F28(0);
    SetTaskFuncWithFollowupFunc(taskId, sub_80C8EBC, sub_80A9DBC);
 }
@@ -552,10 +552,10 @@ static void sub_80AA10C(void)
             gMatsudaDebugMenuContestTopLeft[i][1]);
     }
 
-    gScriptContestCategory = gScriptContestRank = 0;
+    gSpecialVar_ContestCategory = gSpecialVar_ContestRank = 0;
     zero = 0; // it's possible this was some assignment that matsuda used to quickly edit and test things without changing whats passed to the later functions.
     sub_80AA5BC(zero);
-    sub_80AA5E8(gScriptContestRank);
+    sub_80AA5E8(gSpecialVar_ContestRank);
     sub_8003460(&gMenuWindow, gMatsudaDebugMenu_GoBackText, 0xD6, 0x12, 0x12);
     sub_8003460(&gMenuWindow, gMatsudaDebugMenu_BattlePointsText, 0xDC, zero, 0xC);
     LoadSpriteSheet(gUnknown_083C92B4);
@@ -873,8 +873,8 @@ void sub_80AABF0(struct Sprite *sprite, s8 var2)
         r4 = 4;
     sub_80AA5BC(r4);
     sprite->data[3] = r4;
-    gScriptContestCategory = sprite->data[3];
-    sub_80AE398(sprite->data[3], gScriptContestRank);
+    gSpecialVar_ContestCategory = sprite->data[3];
+    sub_80AE398(sprite->data[3], gSpecialVar_ContestRank);
     sub_80AA280(sprite->data[2]);
     sub_80AA658(sprite->data[2]);
 }
@@ -882,13 +882,13 @@ void sub_80AABF0(struct Sprite *sprite, s8 var2)
 void sub_80AAC5C(struct Sprite *sprite, s8 var2)
 {
     if (var2 > 0)
-        gScriptContestRank++;
-    else if (gScriptContestRank != 0)
-        gScriptContestRank--;
-    if (gScriptContestRank > 3)
-        gScriptContestRank = 3;
-    sub_80AA5E8(gScriptContestRank);
-    sub_80AE398(gScriptContestCategory, gScriptContestRank);
+        gSpecialVar_ContestRank++;
+    else if (gSpecialVar_ContestRank != 0)
+        gSpecialVar_ContestRank--;
+    if (gSpecialVar_ContestRank > 3)
+        gSpecialVar_ContestRank = 3;
+    sub_80AA5E8(gSpecialVar_ContestRank);
+    sub_80AE398(gSpecialVar_ContestCategory, gSpecialVar_ContestRank);
     sub_80AA280(sprite->data[2]);
     sub_80AA658(sprite->data[2]);
 }
@@ -923,7 +923,7 @@ void sub_80AAD44(struct Sprite *sprite, s8 var2)
 
         SetDebugMonForContest();
         for (i = 0; i < 4; i++)
-            gUnknown_02038670[i] = sub_80AE770(i, gScriptContestCategory);
+            gUnknown_02038670[i] = sub_80AE770(i, gSpecialVar_ContestCategory);
         SetMainCallback2(sub_805469C);
     }
 }
@@ -1204,7 +1204,7 @@ u8 MatsudaDebugMenu_SetArtMuseumItems(void)
     sub_80AE098(0);
     for (i = 3; i > -1; i--)
         gUnknown_02038690[i] = 3 - i;
-    for (gScriptContestCategory = 0; gScriptContestCategory < 5; gScriptContestCategory++)
+    for (gSpecialVar_ContestCategory = 0; gSpecialVar_ContestCategory < 5; gSpecialVar_ContestCategory++)
         sub_80B2A7C(0xFF);
     CloseMenu();
     return 1;

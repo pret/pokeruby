@@ -1,10 +1,10 @@
 DesertRuins_MapObjects:: @ 838BEBC
-	object_event 1, MAP_OBJ_GFX_REGIROCK, 0, 8, 0, 7, 0, 3, 8, 0, 0, 0, 0, 0, 0, DesertRuins_EventScript_15CB85, 935, 0, 0
+	object_event 1, MAP_OBJ_GFX_REGIROCK, 0, 8, 0, 7, 0, 3, 8, 0, 0, 0, 0, 0, 0, DesertRuins_EventScript_15CB85, FLAG_HIDE_REGIROCK, 0, 0
 
 DesertRuins_MapWarps:: @ 838BED4
-	warp_def 8, 29, 3, 1, Route111
-	warp_def 8, 20, 0, 2, DesertRuins
-	warp_def 8, 11, 3, 1, DesertRuins
+	warp_def 8, 29, 3, 1, MAP_ROUTE111
+	warp_def 8, 20, 0, 2, MAP_DESERT_RUINS
+	warp_def 8, 11, 3, 1, MAP_DESERT_RUINS
 
 DesertRuins_MapBGEvents:: @ 838BEEC
 	bg_event 8, 20, 0, 0, 0, DesertRuins_EventScript_15CB56
