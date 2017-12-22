@@ -28,7 +28,37 @@ extern const u8 gInterfaceGfx_PremierBall[];
 extern const u8 gInterfacePal_PremierBall[];
 extern const u8 gUnknown_08D030D0[];
 
+extern const u8 gUnknown_08D17144[];
+extern const u8 gUnknown_08D1725C[];
+extern const u8 gUnknown_08D17424[];
+extern const u8 gUnknown_08D17C3C[];
+extern const u8 gContestMiscGfx[];
+extern const u8 gContestAudienceGfx[];
+extern const u8 gContestJudgeSymbolsGfx[];
+extern const u8 gContest3Pal[];
+extern const u8 gTiles_8D1975C[];
+extern const u8 gUnknown_08D1977C[];
+extern const u8 gUnknown_08D1A250[];
+extern const u8 gUnknown_08D1A364[];
+extern const u8 gUnknown_08D1A490[];
+extern const u8 gUnknown_08D1A618[];
+
+extern const u8 gContestJudgeGfx[];
+extern const u8 gContest2Pal[];
+
 extern const u8 gMonFootprint_QuestionMark[];
+
+extern const u8 gContestNextTurnGfx[];
+extern const u8 gContestNextTurnNumbersGfx[];
+extern const u8 gContestNextTurnRandomGfx[];
+extern const u8 gBattleAnimSpriteSheet_264[];
+extern const u8 gBattleAnimSpritePalette_264[];
+extern const u8 gBattleAnimSpritePalette_265[];
+extern const u8 gBattleAnimSpritePalette_067[];
+extern const u8 gBattleAnimSpritePalette_068[];
+extern const u8 gContestApplauseGfx[];
+extern const u8 gContestApplauseMeterGfx[];
+extern const u16 gContestPal[];
 
 // data/graphics/pokemon/graphics.inc
 extern const u8 gMonFrontPic_Bulbasaur[];
