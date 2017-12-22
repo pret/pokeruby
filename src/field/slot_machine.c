@@ -82,9 +82,11 @@ static bool8 sub_81023E0(struct Task *task);
 static bool8 sub_81023FC(struct Task *task);
 static bool8 sub_8102424(struct Task *task);
 static bool8 sub_8102460(struct Task *task);
-
-void sub_8102484(void);
-void sub_81024F0(void);
+static void sub_8102484(void);
+static void sub_81024F0(void);
+bool8 sub_8102540(void);
+u8 sub_8102578(void);
+u8 sub_81025BC(void);
 void sub_81027A0(void);
 void sub_8102A24(void);
 bool8 sub_8102A44(void);
@@ -113,7 +115,7 @@ void sub_8104EA8(void);
 void sub_8104F8C(void);
 void sub_81050C4(void);
 void sub_81063C0(void);
-void sub_8106448(void);
+static void sub_8106448(void);
 void sub_81064B8(void);
 u16 dp15_jump_random_unknown(void);
 
@@ -148,6 +150,11 @@ static bool8 (*const gUnknown_083ECAAC[])(struct Task *task) = {
     sub_8102424,
     sub_8102460
 };
+
+extern const u8 gUnknown_083ECD04[][3];
+extern const u8 gUnknown_083ECE3A[];
+extern const u16 gUnknown_083ECE42[];
+extern const u16 gUnknown_083ECE48[];
 
 void PlaySlotMachine(u8 arg0, void *ptr)
 {
@@ -807,6 +814,82 @@ static bool8 sub_8102460(struct Task *task)
     return FALSE;
 }
 
+static void sub_8102484(void)
+{
+    u8 r3;
+
+    if (eSlotMachine->unk0A == 0 && !(eSlotMachine->unk04 & 0xc0))
+    {
+        if (sub_8102540())
+        {
+            r3 = sub_8102578();
+            if (r3 != 3)
+            {
+                eSlotMachine->unk04 |= gUnknown_083ECE42[r3];
+                if (r3 != 1)
+                {
+                    return;
+                }
+            }
+        }
+        r3 = sub_81025BC();
+        if (r3 != 5)
+        {
+            eSlotMachine->unk04 |= gUnknown_083ECE48[r3];
+        }
+    }
+}
+
+static void sub_81024F0(void)
+{
+    eSlotMachine->unk06 = 0;
+    if (eSlotMachine->unk04)
+    {
+        eSlotMachine->unk06 = 1;
+    }
+}
+
+u8 sub_810250C(u8 a0)
+{
+    u8 i;
+
+    for (i = 0; i < 8; i++)
+    {
+        if (a0 & 1)
+        {
+            return gUnknown_083ECE3A[i];
+        }
+        a0 >>= 1;
+    }
+    return 0;
+}
+
+bool8 sub_8102540(void)
+{
+    u8 rval = Random();
+    if (gUnknown_083ECD04[eSlotMachine->unk01][eSlotMachine->bet - 1] > rval)
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+//extern const u8 gUnknown_083ECD16[][3];
+//
+//u8 sub_8102578(void)
+//{
+//    s16 i;
+//
+//    for (i = 0; i < 3; i++)
+//    {
+//        if ((Random() & 0xff) <= (int)gUnknown_083ECD16[i][eSlotMachine->unk01])
+//        {
+//            break;
+//        }
+//    }
+//    return i;
+//}
+
 asm(".section .text_a");
 
 static void LoadSlotMachineWheelOverlay(void);
@@ -820,8 +903,7 @@ void sub_8104CAC(u8 arg0) {
     task = &gTasks[eSlotMachine->unk3D];
     task->data[1] = arg0;
 
-    i = 0;
-    while (gUnknown_083ED048[arg0][i].unk00 != 0xFF)
+    for (i = 0; gUnknown_083ED048[arg0][i].unk00 != 0xFF; i++)
     {
         u8 spriteId;
         spriteId = sub_8105BB4(
@@ -837,14 +919,12 @@ void sub_8104CAC(u8 arg0) {
             gSprites[spriteId].invisible = TRUE;
         }
 #endif
-
-        i += 1;
     }
 }
 
 asm(".section .text_b");
 
-void sub_8106448(void) {
+static void sub_8106448(void) {
     u32 offsetRead, offsetWrite;
     u32 size;
 

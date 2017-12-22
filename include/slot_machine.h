@@ -7,7 +7,9 @@ struct SlotMachineEwramStruct {
     /*0x02*/ u8 unk02;
     /*0x03*/ u8 unk03;
     /*0x04*/ u8 unk04;
-    /*0x05*/ u8 filler05[3];
+    /*0x05*/ u8 unk05;
+    /*0x06*/ u8 unk06;
+    /*0x07*/ u8 unk07;
     /*0x08*/ u16 unk08;
     /*0x0A*/ u8 unk0A;
     /*0x0B*/ u8 unk0B;
