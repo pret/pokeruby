@@ -22,7 +22,27 @@
 #define VAR_TEMP_E                 0x400E
 #define VAR_TEMP_F                 0x400F
 
-#define VAR_0x401F                 0x401F
+// object gfx id vars
+// These 0x10 vars are used to dynamically control a map object's sprite.
+// For example, the rival's sprite id is dynamically set based on the player's gender.
+// See VarGetFieldObjectGraphicsId().
+#define VAR_OBJ_GFX_ID_0           0x4010
+#define VAR_OBJ_GFX_ID_1           0x4011
+#define VAR_OBJ_GFX_ID_2           0x4012
+#define VAR_OBJ_GFX_ID_3           0x4013
+#define VAR_OBJ_GFX_ID_4           0x4014
+#define VAR_OBJ_GFX_ID_5           0x4015
+#define VAR_OBJ_GFX_ID_6           0x4016
+#define VAR_OBJ_GFX_ID_7           0x4017
+#define VAR_OBJ_GFX_ID_8           0x4018
+#define VAR_OBJ_GFX_ID_9           0x4019
+#define VAR_OBJ_GFX_ID_A           0x401A
+#define VAR_OBJ_GFX_ID_B           0x401B
+#define VAR_OBJ_GFX_ID_C           0x401C
+#define VAR_OBJ_GFX_ID_D           0x401D
+#define VAR_OBJ_GFX_ID_E           0x401E
+#define VAR_OBJ_GFX_ID_F           0x401F
+
 #define VAR_RECYCLE_GOODS          0x4020
 #define VAR_REPEL_STEP_COUNT       0x4021
 #define VAR_ICE_STEP_COUNT         0x4022

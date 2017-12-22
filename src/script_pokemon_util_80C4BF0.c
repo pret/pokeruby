@@ -249,10 +249,10 @@ void ShowContestWinner(void)
 
 void sub_80C4F70(void)
 {
-    VarSet(0x4010, gContestMons[0].trainerGfxId);
-    VarSet(0x4011, gContestMons[1].trainerGfxId);
-    VarSet(0x4012, gContestMons[2].trainerGfxId);
-    VarSet(0x4013, gContestMons[3].trainerGfxId);
+    VarSet(VAR_OBJ_GFX_ID_0, gContestMons[0].trainerGfxId);
+    VarSet(VAR_OBJ_GFX_ID_1, gContestMons[1].trainerGfxId);
+    VarSet(VAR_OBJ_GFX_ID_2, gContestMons[2].trainerGfxId);
+    VarSet(VAR_OBJ_GFX_ID_3, gContestMons[3].trainerGfxId);
 }
 
 bool8 GiveMonArtistRibbon(void)

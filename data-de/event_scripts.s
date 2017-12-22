@@ -1859,11 +1859,11 @@ RustboroCity_EventScript_1A014E:: @ 81A014E
 	end
 
 RustboroCity_EventScript_1A0166:: @ 81A0166
-	setvar 0x4010, 105
+	setvar VAR_OBJ_GFX_ID_0, MAP_OBJ_GFX_RIVAL_MAY_NORMAL
 	return
 
 RustboroCity_EventScript_1A016C:: @ 81A016C
-	setvar 0x4010, 100
+	setvar VAR_OBJ_GFX_ID_0, MAP_OBJ_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
 LavaridgeTown_EventScript_1A0172:: @ 81A0172
@@ -1877,11 +1877,11 @@ Route119_EventScript_1A0172:: @ 81A0172
 	end
 
 LavaridgeTown_EventScript_1A018A:: @ 81A018A
-	setvar 0x4013, 106
+	setvar VAR_OBJ_GFX_ID_3, MAP_OBJ_GFX_RIVAL_MAY_MACH_BIKE
 	return
 
 LavaridgeTown_EventScript_1A0190:: @ 81A0190
-	setvar 0x4013, 101
+	setvar VAR_OBJ_GFX_ID_3, MAP_OBJ_GFX_RIVAL_BRENDAN_MACH_BIKE
 	return
 
 AquaHideout_1F_EventScript_1A0196:: @ 81A0196
@@ -1908,30 +1908,30 @@ SeafloorCavern_Room4_EventScript_1A0196:: @ 81A0196
 SeafloorCavern_Room9_EventScript_1A0196:: @ 81A0196
 SlateportCity_OceanicMuseum_2F_EventScript_1A0196:: @ 81A0196
 	.ifdef SAPPHIRE
-	setvar 0x4011, 117
-	setvar 0x4012, 118
-	setvar 0x4014, 119
-	setvar 0x4015, 120
-	setvar 0x4016, 195
-	setvar 0x4017, 196
+	setvar VAR_OBJ_GFX_ID_1, MAP_OBJ_GFX_AQUA_MEMBER_M
+	setvar VAR_OBJ_GFX_ID_2, MAP_OBJ_GFX_AQUA_MEMBER_F
+	setvar VAR_OBJ_GFX_ID_4, MAP_OBJ_GFX_MAGMA_MEMBER_M
+	setvar VAR_OBJ_GFX_ID_5, MAP_OBJ_GFX_MAGMA_MEMBER_F
+	setvar VAR_OBJ_GFX_ID_6, MAP_OBJ_GFX_ARCHIE
+	setvar VAR_OBJ_GFX_ID_7, MAP_OBJ_GFX_MAXIE
 	.else
-	setvar 0x4011, 119
-	setvar 0x4012, 120
-	setvar 0x4014, 117
-	setvar 0x4015, 118
-	setvar 0x4016, 196
-	setvar 0x4017, 195
+	setvar VAR_OBJ_GFX_ID_1, MAP_OBJ_GFX_MAGMA_MEMBER_M
+	setvar VAR_OBJ_GFX_ID_2, MAP_OBJ_GFX_MAGMA_MEMBER_F
+	setvar VAR_OBJ_GFX_ID_4, MAP_OBJ_GFX_AQUA_MEMBER_M
+	setvar VAR_OBJ_GFX_ID_5, MAP_OBJ_GFX_AQUA_MEMBER_F
+	setvar VAR_OBJ_GFX_ID_6, MAP_OBJ_GFX_MAXIE
+	setvar VAR_OBJ_GFX_ID_7, MAP_OBJ_GFX_ARCHIE
 	.endif
 	return
 
 CaveOfOrigin_B4F_EventScript_1A01B5:: @ 81A01B5
 SeafloorCavern_Room9_EventScript_1A01B5:: @ 81A01B5
 	.ifdef SAPPHIRE
-	setvar 0x4018, 197
-	setvar 0x4019, 205
+	setvar VAR_OBJ_GFX_ID_8, MAP_OBJ_GFX_KYOGRE_1
+	setvar VAR_OBJ_GFX_ID_9, MAP_OBJ_GFX_KYOGRE_2
 	.else
-	setvar 0x4018, 198
-	setvar 0x4019, 206
+	setvar VAR_OBJ_GFX_ID_8, MAP_OBJ_GFX_GROUDON_1
+	setvar VAR_OBJ_GFX_ID_9, MAP_OBJ_GFX_GROUDON_2
 	.endif
 	return
 

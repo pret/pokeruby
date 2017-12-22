@@ -14,9 +14,9 @@ SouthernIsland_Interior_EventScript_160B68:: @ 8160B68
 
 SouthernIsland_Interior_MapScript1_160B6C:: @ 8160B6C
 	.ifdef SAPPHIRE
-	setvar 0x4011, 188
+	setvar VAR_OBJ_GFX_ID_1, MAP_OBJ_GFX_LATIOS
 	.else
-	setvar 0x4011, 187
+	setvar VAR_OBJ_GFX_ID_1, MAP_OBJ_GFX_LATIAS
 	.endif
 	call SouthernIsland_Interior_EventScript_160B77
 	end
@@ -30,11 +30,11 @@ SouthernIsland_Interior_EventScript_160B77:: @ 8160B77
 	end
 
 SouthernIsland_Interior_EventScript_160B8F:: @ 8160B8F
-	setvar 0x4010, 100
+	setvar VAR_OBJ_GFX_ID_0, MAP_OBJ_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
 SouthernIsland_Interior_EventScript_160B95:: @ 8160B95
-	setvar 0x4010, 105
+	setvar VAR_OBJ_GFX_ID_0, MAP_OBJ_GFX_RIVAL_MAY_NORMAL
 	return
 
 SouthernIsland_Interior_EventScript_160B9B:: @ 8160B9B

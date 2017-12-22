@@ -4,11 +4,11 @@ SlateportCity_MapScripts:: @ 814BA36
 
 SlateportCity_MapScript1_14BA3C:: @ 814BA3C
 	.ifdef SAPPHIRE
-	setvar 0x4010, MAP_OBJ_GFX_AQUA_MEMBER_F
-	setvar 0x4011, MAP_OBJ_GFX_AQUA_MEMBER_M
+	setvar VAR_OBJ_GFX_ID_0, MAP_OBJ_GFX_AQUA_MEMBER_F
+	setvar VAR_OBJ_GFX_ID_1, MAP_OBJ_GFX_AQUA_MEMBER_M
 	.else
-	setvar 0x4010, MAP_OBJ_GFX_MAGMA_MEMBER_F
-	setvar 0x4011, MAP_OBJ_GFX_MAGMA_MEMBER_M
+	setvar VAR_OBJ_GFX_ID_0, MAP_OBJ_GFX_MAGMA_MEMBER_F
+	setvar VAR_OBJ_GFX_ID_1, MAP_OBJ_GFX_MAGMA_MEMBER_M
 	.endif
 	setvar 0x40aa, 0
 	call SlateportCity_EventScript_14BA5C

@@ -479,7 +479,7 @@ void sub_80BBDD0(void)
 void sub_80BBFA4(void)
 {
     int curBase = VarGet(VAR_0x4054);
-    VarSet(VAR_0x401F, gUnknown_083D13EC[sub_80BCCA4(curBase)]);
+    VarSet(VAR_OBJ_GFX_ID_F, gUnknown_083D13EC[sub_80BCCA4(curBase)]);
 }
 
 void sub_80BBFD8(struct MapPosition *position, struct MapEvents *events)

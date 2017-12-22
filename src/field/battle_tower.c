@@ -801,7 +801,7 @@ void SetBattleTowerTrainerGfxId(u8 trainerIndex)
     if (i != 30)
     {
         u8 trainerObjectGfxId = sMaleTrainerGfxIds[i];
-        VarSet(0x4010, trainerObjectGfxId);
+        VarSet(VAR_OBJ_GFX_ID_0, trainerObjectGfxId);
         return;
     }
 
@@ -809,11 +809,11 @@ void SetBattleTowerTrainerGfxId(u8 trainerIndex)
     if (i != 20)
     {
         u8 trainerObjectGfxId = sFemaleTrainerGfxIds[i];
-        VarSet(0x4010, trainerObjectGfxId);
+        VarSet(VAR_OBJ_GFX_ID_0, trainerObjectGfxId);
         return;
     }
 
-    VarSet(0x4010, MAP_OBJ_GFX_BOY_1);
+    VarSet(VAR_OBJ_GFX_ID_0, MAP_OBJ_GFX_BOY_1);
 }
 
 void SetEReaderTrainerGfxId(void)

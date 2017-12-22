@@ -91,37 +91,37 @@ LinkContestRoom1_EventScript_15F646:: @ 815F646
 	end
 
 LinkContestRoom1_EventScript_15F699:: @ 815F699
-	copyvar 0x4014, VAR_TEMP_1
+	copyvar VAR_OBJ_GFX_ID_4, VAR_TEMP_1
 	addvar VAR_TEMP_0, 1
 	return
 
 LinkContestRoom1_EventScript_15F6A4:: @ 815F6A4
-	copyvar 0x4015, VAR_TEMP_1
+	copyvar VAR_OBJ_GFX_ID_5, VAR_TEMP_1
 	addvar VAR_TEMP_0, 1
 	return
 
 LinkContestRoom1_EventScript_15F6AF:: @ 815F6AF
-	copyvar 0x4016, VAR_TEMP_1
+	copyvar VAR_OBJ_GFX_ID_6, VAR_TEMP_1
 	addvar VAR_TEMP_0, 1
 	return
 
 LinkContestRoom1_EventScript_15F6BA:: @ 815F6BA
-	copyvar 0x4017, VAR_TEMP_1
+	copyvar VAR_OBJ_GFX_ID_7, VAR_TEMP_1
 	addvar VAR_TEMP_0, 1
 	return
 
 LinkContestRoom1_EventScript_15F6C5:: @ 815F6C5
-	copyvar 0x4018, VAR_TEMP_1
+	copyvar VAR_OBJ_GFX_ID_8, VAR_TEMP_1
 	addvar VAR_TEMP_0, 1
 	return
 
 LinkContestRoom1_EventScript_15F6D0:: @ 815F6D0
-	copyvar 0x4019, VAR_TEMP_1
+	copyvar VAR_OBJ_GFX_ID_9, VAR_TEMP_1
 	addvar VAR_TEMP_0, 1
 	return
 
 LinkContestRoom1_EventScript_15F6DB:: @ 815F6DB
-	copyvar 0x401a, VAR_TEMP_1
+	copyvar VAR_OBJ_GFX_ID_A, VAR_TEMP_1
 	addvar VAR_TEMP_0, 1
 	return
 
@@ -421,9 +421,9 @@ VerdanturfTown_ContestLobby_EventScript_15FBDB:: @ 815FBDB
 	return
 
 FallarborTown_ContestLobby_EventScript_15FBF3:: @ 815FBF3
-	setvar 0x4013, 100
+	setvar VAR_OBJ_GFX_ID_3, MAP_OBJ_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
 FallarborTown_ContestLobby_EventScript_15FBF9:: @ 815FBF9
-	setvar 0x4013, 105
+	setvar VAR_OBJ_GFX_ID_3, MAP_OBJ_GFX_RIVAL_MAY_NORMAL
 	return
