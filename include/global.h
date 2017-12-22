@@ -50,9 +50,9 @@ fndec\
 // dim access enums
 enum
 {
-	B_8 = 1,
-	B_16 = 2,
-	B_32 = 4
+    B_8 = 1,
+    B_16 = 2,
+    B_32 = 4
 };
 
 // There are many quirks in the source code which have overarching behavioral differences from
@@ -694,7 +694,7 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x2D90*/ u8 filler_2D90[0x4];
     /*0x2D94*/ union MauvilleMan mauvilleMan;
     /*0x2DD4*/ struct EasyChatPair easyChatPairs[5]; //Dewford trend [0] and some other stuff
-	/*0x2DFC*/ struct ContestWinner contestWinners[8];
+    /*0x2DFC*/ struct ContestWinner contestWinners[8];
     /*0x2EFC*/ struct ContestWinner museumPortraits[5];
     /*0x2F9C*/ struct DayCare daycare;
     /*0x30B8*/ struct LinkBattleRecord linkBattleRecords[5];

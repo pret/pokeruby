@@ -46,7 +46,7 @@ extern u32 gUnknown_03005D28;
 
 extern u8 gUnknown_02038694;
 extern u8 gUnknown_0203856C;
-extern u8 gUnknown_02038690[];
+extern u8 gContestFinalStandings[];
 extern u16 gUnknown_02038678[];
 
 void sub_80C4BF0(void)
@@ -121,12 +121,12 @@ void sub_80C4C78(void)
 
 void sub_80C4CEC(void)
 {
-    sub_80B2A7C(0xFF);
+    Contest_SaveWinner(0xFF);
 }
 
 void sub_80C4CF8(void)
 {
-    if(!gUnknown_02038690[gContestPlayerMonIndex]
+    if(!gContestFinalStandings[gContestPlayerMonIndex]
     && gSpecialVar_ContestRank == 3
     && (s16)gUnknown_02038678[gContestPlayerMonIndex] >= 800)
     {
@@ -367,7 +367,7 @@ void ShowContestWinner(void)
         sub_80AAF30();
         BATTLE_STRUCT->unk15DDF = 1;
         BATTLE_STRUCT->unk15DDE = sub_80B2C4C(254, 0);
-        sub_80B2A7C(3);
+        Contest_SaveWinner(3);
         gUnknown_0203856C = 0;
     }
     SetMainCallback2(CB2_ContestPainting);
@@ -387,7 +387,7 @@ bool8 GiveMonArtistRibbon(void)
     u8 ribbon = GetMonData(&gPlayerParty[gUnknown_02038694], MON_DATA_ARTIST_RIBBON);
 
     if(ribbon == FALSE
-    && gUnknown_02038690[gContestPlayerMonIndex] == 0
+    && gContestFinalStandings[gContestPlayerMonIndex] == 0
     && gSpecialVar_ContestRank == 3
     && (s16)gUnknown_02038678[gContestPlayerMonIndex] >= 800)
     {
