@@ -426,7 +426,7 @@ bool8 SetUpBattlePartyMenu(void)
     case 10:
         if (gUnknown_02038473 == 3)
         {
-            if (GetItemEffectType(gScriptItemId) == 10)
+            if (GetItemEffectType(gSpecialVar_ItemId) == 10)
                 ewram1B000.promptTextId = 0xFF;
             else
                 ewram1B000.promptTextId = 3;
@@ -464,9 +464,9 @@ void HandleBattlePartyMenu(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        if (gUnknown_02038473 == 3 && GetItemEffectType(gScriptItemId) == 10)
+        if (gUnknown_02038473 == 3 && GetItemEffectType(gSpecialVar_ItemId) == 10)
         {
-            gUnknown_03004AE4(taskId, gScriptItemId, Task_80952E4);
+            gUnknown_03004AE4(taskId, gSpecialVar_ItemId, Task_80952E4);
             return;
         }
 
@@ -480,7 +480,7 @@ void HandleBattlePartyMenu(u8 taskId)
                 else
                 {
                     sub_806D5A4();
-                    gUnknown_03004AE4(taskId, gScriptItemId, Task_80952E4);
+                    gUnknown_03004AE4(taskId, gSpecialVar_ItemId, Task_80952E4);
                 }
             }
             else

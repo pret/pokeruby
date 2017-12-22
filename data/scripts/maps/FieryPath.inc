@@ -3,5 +3,5 @@ FieryPath_MapScripts:: @ 815D318
 	.byte 0
 
 FieryPath_MapScript1_15D31E:: @ 815D31E
-	setflag 2122
+	setflag FLAG_LANDMARK_FIERY_PATH
 	end

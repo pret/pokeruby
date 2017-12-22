@@ -24,7 +24,7 @@ LittlerootTown_ProfessorBirchsLab_MapScript2_152CAC:: @ 8152CAC
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152CBE:: @ 8152CBE
 	lockall
-	getfirstpartypokename 0
+	bufferleadmonspeciesname 0
 	message LittlerootTown_ProfessorBirchsLab_Text_173D94
 	waitmessage
 	playfanfare 370
@@ -52,7 +52,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152CFA:: @ 8152CFA
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152D19:: @ 8152D19
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_174015, 4
-	clearflag 991
+	clearflag FLAG_HIDE_BOY_ROUTE101
 	setvar 0x4084, 3
 	releaseall
 	end
@@ -87,10 +87,10 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152D63:: @ 8152D63
 	faceplayer
 	compare 0x4084, 3
 	goto_if 4, LittlerootTown_ProfessorBirchsLab_EventScript_152D90
-	checkflag 88
+	checkflag FLAG_BIRCH_AIDE_MET
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152D86
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_173B29, 4
-	setflag 88
+	setflag FLAG_BIRCH_AIDE_MET
 	release
 	end
 
@@ -107,7 +107,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152D90:: @ 8152D90
 LittlerootTown_ProfessorBirchsLab_EventScript_152D9A:: @ 8152D9A
 	lock
 	faceplayer
-	checkflag 896
+	checkflag FLAG_UNKNOWN_BIRCH_380
 	goto_if 0, LittlerootTown_ProfessorBirchsLab_EventScript_1A037F
 	compare 0x4084, 5
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152E7B
@@ -129,7 +129,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152DBA:: @ 8152DBA
 	compare RESULT, 1
 	call_if 1, LittlerootTown_ProfessorBirchsLab_EventScript_152E40
 	setvar 0x4084, 5
-	setflag 116
+	setflag FLAG_ADVENTURE_STARTED
 	setvar 0x4051, 1
 	setvar 0x408d, 4
 	setvar 0x4050, 3
@@ -138,7 +138,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152DBA:: @ 8152DBA
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152E13:: @ 8152E13
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1743D4, 4
-	giveitem ITEM_POKE_BALL, 5
+	giveitem_std ITEM_POKE_BALL, 5
 	compare RESULT, 0
 	call_if 1, LittlerootTown_ProfessorBirchsLab_EventScript_152E85
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_17443D, 4
@@ -147,7 +147,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152E13:: @ 8152E13
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152E40:: @ 8152E40
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_17453C, 4
-	giveitem ITEM_POKE_BALL, 5
+	giveitem_std ITEM_POKE_BALL, 5
 	compare RESULT, 0
 	call_if 1, LittlerootTown_ProfessorBirchsLab_EventScript_152E8E
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_17458C, 4
@@ -159,7 +159,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152E6D:: @ 8152E6D
 	message LittlerootTown_ProfessorBirchsLab_Text_17422F
 	waitfanfare
 	waitmessage
-	setflag 2049
+	setflag FLAG_SYS_POKEDEX_GET
 	return
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152E7B:: @ 8152E7B

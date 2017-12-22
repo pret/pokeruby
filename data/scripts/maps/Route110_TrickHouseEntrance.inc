@@ -5,7 +5,7 @@ Route110_TrickHouseEntrance_MapScripts:: @ 8160F2B
 	.byte 0
 
 Route110_TrickHouseEntrance_MapScript1_160F3B:: @ 8160F3B
-	setflag 2114
+	setflag FLAG_LANDMARK_TRICK_HOUSE
 	compare 0x40b5, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_160FCE
 	compare 0x40c1, 1
@@ -63,37 +63,37 @@ Route110_TrickHouseEntrance_EventScript_160FDE:: @ 8160FDE
 	return
 
 Route110_TrickHouseEntrance_EventScript_16103C:: @ 816103C
-	checkflag 2057
+	checkflag FLAG_BADGE03_GET
 	call_if 0, Route110_TrickHouseEntrance_EventScript_161088
 	return
 
 Route110_TrickHouseEntrance_EventScript_161046:: @ 8161046
-	checkflag 2058
+	checkflag FLAG_BADGE04_GET
 	call_if 0, Route110_TrickHouseEntrance_EventScript_161088
 	return
 
 Route110_TrickHouseEntrance_EventScript_161050:: @ 8161050
-	checkflag 2059
+	checkflag FLAG_BADGE05_GET
 	call_if 0, Route110_TrickHouseEntrance_EventScript_161088
 	return
 
 Route110_TrickHouseEntrance_EventScript_16105A:: @ 816105A
-	checkflag 2060
+	checkflag FLAG_BADGE06_GET
 	call_if 0, Route110_TrickHouseEntrance_EventScript_161088
 	return
 
 Route110_TrickHouseEntrance_EventScript_161064:: @ 8161064
-	checkflag 2061
+	checkflag FLAG_BADGE07_GET
 	call_if 0, Route110_TrickHouseEntrance_EventScript_161088
 	return
 
 Route110_TrickHouseEntrance_EventScript_16106E:: @ 816106E
-	checkflag 2062
+	checkflag FLAG_BADGE08_GET
 	call_if 0, Route110_TrickHouseEntrance_EventScript_161088
 	return
 
 Route110_TrickHouseEntrance_EventScript_161078:: @ 8161078
-	checkflag 2052
+	checkflag FLAG_SYS_GAME_CLEAR
 	call_if 0, Route110_TrickHouseEntrance_EventScript_161088
 	return
 
@@ -139,14 +139,14 @@ Route110_TrickHouseEntrance_MapScript2_1610B2:: @ 81610B2
 
 Route110_TrickHouseEntrance_EventScript_1610F4:: @ 81610F4
 	addobject 1
-	showobject 1, 29, 0
+	showobjectat 1, MAP_ROUTE110_TRICK_HOUSE_ENTRANCE
 	turnobject 1, 4
 	turnobject 255, 3
 	end
 
 Route110_TrickHouseEntrance_EventScript_161105:: @ 8161105
 	addobject 1
-	hideobject 1, 29, 0
+	hideobjectat 1, MAP_ROUTE110_TRICK_HOUSE_ENTRANCE
 	switch 0x4044
 	case 0, Route110_TrickHouseEntrance_EventScript_16116B
 	case 1, Route110_TrickHouseEntrance_EventScript_161173
@@ -368,7 +368,7 @@ Route110_TrickHouseEntrance_EventScript_16136E:: @ 816136E
 	end
 
 Route110_TrickHouseEntrance_EventScript_1613CE:: @ 81613CE
-	giveitem ITEM_RARE_CANDY
+	giveitem_std ITEM_RARE_CANDY
 	compare RESULT, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_161502
 	compare RESULT, 0
@@ -378,7 +378,7 @@ Route110_TrickHouseEntrance_EventScript_1613CE:: @ 81613CE
 	end
 
 Route110_TrickHouseEntrance_EventScript_1613FA:: @ 81613FA
-	giveitem ITEM_TIMER_BALL
+	giveitem_std ITEM_TIMER_BALL
 	compare RESULT, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_161502
 	compare RESULT, 0
@@ -388,7 +388,7 @@ Route110_TrickHouseEntrance_EventScript_1613FA:: @ 81613FA
 	end
 
 Route110_TrickHouseEntrance_EventScript_161426:: @ 8161426
-	giveitem ITEM_HARD_STONE
+	giveitem_std ITEM_HARD_STONE
 	compare RESULT, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_161502
 	compare RESULT, 0
@@ -398,7 +398,7 @@ Route110_TrickHouseEntrance_EventScript_161426:: @ 8161426
 	end
 
 Route110_TrickHouseEntrance_EventScript_161452:: @ 8161452
-	giveitem ITEM_SMOKE_BALL
+	giveitem_std ITEM_SMOKE_BALL
 	compare RESULT, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_161502
 	compare RESULT, 0
@@ -408,7 +408,7 @@ Route110_TrickHouseEntrance_EventScript_161452:: @ 8161452
 	end
 
 Route110_TrickHouseEntrance_EventScript_16147E:: @ 816147E
-	giveitem ITEM_TM12
+	giveitem_std ITEM_TM12
 	compare RESULT, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_161502
 	compare RESULT, 0
@@ -418,7 +418,7 @@ Route110_TrickHouseEntrance_EventScript_16147E:: @ 816147E
 	end
 
 Route110_TrickHouseEntrance_EventScript_1614AA:: @ 81614AA
-	giveitem ITEM_MAGNET
+	giveitem_std ITEM_MAGNET
 	compare RESULT, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_161502
 	compare RESULT, 0
@@ -428,7 +428,7 @@ Route110_TrickHouseEntrance_EventScript_1614AA:: @ 81614AA
 	end
 
 Route110_TrickHouseEntrance_EventScript_1614D6:: @ 81614D6
-	giveitem ITEM_PP_MAX
+	giveitem_std ITEM_PP_MAX
 	compare RESULT, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_161502
 	compare RESULT, 0
@@ -450,9 +450,9 @@ Route110_TrickHouseEntrance_EventScript_161518:: @ 8161518
 	waitmovement 0
 	msgbox Route110_TrickHouseEntrance_Text_19C128, 4
 	.ifdef SAPPHIRE
-	givedecoration 32
+	givedecoration_std 32
 	.else
-	givedecoration 31
+	givedecoration_std 31
 	.endif
 	compare RESULT, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_161551
@@ -501,7 +501,7 @@ Route110_TrickHouseEntrance_EventScript_1615C7:: @ 81615C7
 	end
 
 Route110_TrickHouseEntrance_EventScript_1615DD:: @ 81615DD
-	setmaptile 5, 1, 537, 0
+	setmetatile 5, 1, 537, 0
 	special DrawWholeMapView
 	delay 20
 	applymovement 255, Route110_TrickHouseEntrance_Movement_1A0856
@@ -607,7 +607,7 @@ Route110_TrickHouseEntrance_EventScript_161740:: @ 8161740
 	msgbox UnknownString_819CAD1, 4
 	playse SE_PIN
 	setvar 0x40AB, 2
-	setmaptile 13, 1, 523, 0
+	setmetatile 13, 1, 523, 0
 	special DrawWholeMapView
 	releaseall
 	end
@@ -618,7 +618,7 @@ Route110_TrickHouseEntrance_EventScript_161769:: @ 8161769
 	msgbox UnknownString_819CCCB, 4
 	playse SE_PIN
 	setvar 0x40AC, 2
-	setmaptile 13, 1, 523, 0
+	setmetatile 13, 1, 523, 0
 	special DrawWholeMapView
 	releaseall
 	end
@@ -629,7 +629,7 @@ Route110_TrickHouseEntrance_EventScript_161792:: @ 8161792
 	msgbox UnknownString_819CEF9, 4
 	playse SE_PIN
 	setvar 0x40AD, 2
-	setmaptile 13, 1, 523, 0
+	setmetatile 13, 1, 523, 0
 	special DrawWholeMapView
 	releaseall
 	end
@@ -640,7 +640,7 @@ Route110_TrickHouseEntrance_EventScript_1617BB:: @ 81617BB
 	msgbox UnknownString_819D164, 4
 	playse SE_PIN
 	setvar 0x40AE, 2
-	setmaptile 13, 1, 523, 0
+	setmetatile 13, 1, 523, 0
 	special DrawWholeMapView
 	releaseall
 	end
@@ -651,7 +651,7 @@ Route110_TrickHouseEntrance_EventScript_1617E4:: @ 81617E4
 	msgbox UnknownString_819D3A5, 4
 	playse SE_PIN
 	setvar 0x40AF, 2
-	setmaptile 13, 1, 523, 0
+	setmetatile 13, 1, 523, 0
 	special DrawWholeMapView
 	releaseall
 	end
@@ -662,7 +662,7 @@ Route110_TrickHouseEntrance_EventScript_16180D:: @ 816180D
 	msgbox UnknownString_819DC0A, 4
 	playse SE_PIN
 	setvar 0x40B0, 2
-	setmaptile 13, 1, 523, 0
+	setmetatile 13, 1, 523, 0
 	special DrawWholeMapView
 	releaseall
 	end
@@ -673,7 +673,7 @@ Route110_TrickHouseEntrance_EventScript_161836:: @ 8161836
 	msgbox UnknownString_819DE8D, 4
 	playse SE_PIN
 	setvar 0x40B1, 2
-	setmaptile 13, 1, 523, 0
+	setmetatile 13, 1, 523, 0
 	special DrawWholeMapView
 	releaseall
 	end
@@ -684,7 +684,7 @@ Route110_TrickHouseEntrance_EventScript_16185F:: @ 816185F
 	msgbox UnknownString_819E0FF, 4
 	playse SE_PIN
 	setvar 0x40B2, 2
-	setmaptile 13, 1, 523, 0
+	setmetatile 13, 1, 523, 0
 	special DrawWholeMapView
 	releaseall
 	end
@@ -757,9 +757,9 @@ Route110_TrickHouseEntrance_EventScript_16190B:: @ 816190B
 	return
 
 Route110_TrickHouseEntrance_EventScript_161920:: @ 8161920
-	setfieldeffect 0, 32772
-	setfieldeffect 1, 32773
-	setfieldeffect 2, 32774
+	setfieldeffectargument 0, 32772
+	setfieldeffectargument 1, 32773
+	setfieldeffectargument 2, 32774
 	dofieldeffect 54
 	waitfieldeffect 54
 	delay 10

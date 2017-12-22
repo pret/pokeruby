@@ -4,11 +4,11 @@ PacifidlogTown_MapScripts:: @ 814E8EE
 	.byte 0
 
 PacifidlogTown_MapScript1_14E8F9:: @ 814E8F9
-	setflag 2069
+	setflag FLAG_VISITED_PACIFIDLOG_TOWN
 	end
 
 PacifidlogTown_MapScript1_14E8FD:: @ 814E8FD
-	tileeffect 3
+	setstepcallback 3
 	end
 
 PacifidlogTown_EventScript_14E900:: @ 814E900

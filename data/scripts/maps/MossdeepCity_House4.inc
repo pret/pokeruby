@@ -4,7 +4,7 @@ MossdeepCity_House4_MapScripts:: @ 815AB30
 MossdeepCity_House4_EventScript_15AB31:: @ 815AB31
 	lock
 	faceplayer
-	checkflag 2052
+	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if_eq MossdeepCity_House4_EventScript_15AB46
 	msgbox MossdeepCity_House4_Text_18E0E3, 4
 	release
@@ -35,8 +35,8 @@ MossdeepCity_House4_EventScript_15AB77:: @ 815AB77
 	lock
 	faceplayer
 	waitse
-	playpokecry SPECIES_SKITTY, 0
+	playmoncry SPECIES_SKITTY, 0
 	msgbox MossdeepCity_House4_Text_18E1E1, 4
-	waitpokecry
+	waitmoncry
 	release
 	end

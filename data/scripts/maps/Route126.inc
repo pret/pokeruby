@@ -3,7 +3,7 @@ Route126_MapScripts:: @ 8151FFE
 	.byte 0
 
 Route126_MapScript1_152004:: @ 8152004
-	checkflag 2090
+	checkflag FLAG_SYS_WEATHER_CTRL
 	call_if 1, Route126_EventScript_1A02C1
 	end
 

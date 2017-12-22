@@ -13,12 +13,12 @@ MossdeepCity_House2_EventScript_15A87B:: @ 815A87B
 	lock
 	faceplayer
 	waitse
-	playpokecry SPECIES_WINGULL, 0
+	playmoncry SPECIES_WINGULL, 0
 	msgbox MossdeepCity_House2_Text_18D61E, 4
-	waitpokecry
+	waitmoncry
 	closemessage
-	setflag 224
-	clearflag 933
+	setflag FLAG_WINGULL_DELIVERED_MAIL
+	clearflag FLAG_HIDE_WINGULL_FORTREE_HOUSE
 	compare FACING, 2
 	call_if 1, MossdeepCity_House2_EventScript_15A8AE
 	compare FACING, 3

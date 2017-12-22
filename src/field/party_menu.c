@@ -4314,7 +4314,7 @@ void TaughtMove(u8 taskId)
         u16 r4;
 
         gTasks[taskId].func = TaskDummy;
-        sub_806E8D0(taskId, gScriptItemId, sub_808B508);
+        sub_806E8D0(taskId, gSpecialVar_ItemId, sub_808B508);
         moveIndex = sub_809FA30();
         r4 = GetMonData(ewram1C000.pokemon, MON_DATA_MOVE1 + moveIndex);
         GetMonNickname(ewram1C000.pokemon, gStringVar1);
@@ -4340,7 +4340,7 @@ void StopTryingToTeachMove_806F588(u8 taskId)
     if (!gPaletteFade.active)
     {
         gTasks[taskId].func = TaskDummy;
-        sub_806E8D0(taskId, gScriptItemId, sub_808B508);
+        sub_806E8D0(taskId, gSpecialVar_ItemId, sub_808B508);
         StringCopy(gStringVar2, gMoveNames[ewram1C000.unk8]);
         StringExpandPlaceholders(gStringVar4, gOtherText_StopTryingTo);
         sub_806E834(gStringVar4, 1);
@@ -5643,7 +5643,7 @@ _08070F8A:\n\
 
 void unref_sub_8070F90(void)
 {
-    FlagSet(SYS_POKEDEX_GET);
-    FlagSet(SYS_POKEMON_GET);
-    FlagSet(SYS_POKENAV_GET);
+    FlagSet(FLAG_SYS_POKEDEX_GET);
+    FlagSet(FLAG_SYS_POKEMON_GET);
+    FlagSet(FLAG_SYS_POKENAV_GET);
 }

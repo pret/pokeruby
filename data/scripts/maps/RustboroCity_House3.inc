@@ -13,8 +13,8 @@ RustboroCity_House3_EventScript_157DFF:: @ 8157DFF
 	lock
 	faceplayer
 	waitse
-	playpokecry SPECIES_PIKACHU, 0
+	playmoncry SPECIES_PIKACHU, 0
 	msgbox RustboroCity_House3_Text_18567D, 4
-	waitpokecry
+	waitmoncry
 	release
 	end

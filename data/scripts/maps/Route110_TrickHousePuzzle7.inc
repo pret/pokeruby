@@ -10,76 +10,76 @@ Route110_TrickHousePuzzle7_MapScript1_163161:: @ 8163161
 	end
 
 Route110_TrickHousePuzzle7_EventScript_163167:: @ 8163167
-	checkflag 194
+	checkflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1
 	call_if 1, Route110_TrickHousePuzzle7_EventScript_163195
-	checkflag 195
+	checkflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2
 	call_if 1, Route110_TrickHousePuzzle7_EventScript_1631A8
-	checkflag 196
+	checkflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_3
 	call_if 1, Route110_TrickHousePuzzle7_EventScript_1631BB
-	checkflag 197
+	checkflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_4
 	call_if 1, Route110_TrickHousePuzzle7_EventScript_1631CE
-	checkflag 198
+	checkflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_5
 	call_if 1, Route110_TrickHousePuzzle7_EventScript_1631E1
 	return
 
 Route110_TrickHousePuzzle7_EventScript_163195:: @ 8163195
-	setmaptile 13, 17, 610, 0
-	setmaptile 12, 16, 575, 1
+	setmetatile 13, 17, 610, 0
+	setmetatile 12, 16, 575, 1
 	return
 
 Route110_TrickHousePuzzle7_EventScript_1631A8:: @ 81631A8
-	setmaptile 12, 13, 610, 0
-	setmaptile 12, 11, 575, 1
+	setmetatile 12, 13, 610, 0
+	setmetatile 12, 11, 575, 1
 	return
 
 Route110_TrickHousePuzzle7_EventScript_1631BB:: @ 81631BB
-	setmaptile 7, 12, 610, 0
-	setmaptile 5, 10, 575, 1
+	setmetatile 7, 12, 610, 0
+	setmetatile 5, 10, 575, 1
 	return
 
 Route110_TrickHousePuzzle7_EventScript_1631CE:: @ 81631CE
-	setmaptile 6, 6, 636, 0
-	setmaptile 4, 4, 575, 1
+	setmetatile 6, 6, 636, 0
+	setmetatile 4, 4, 575, 1
 	return
 
 Route110_TrickHousePuzzle7_EventScript_1631E1:: @ 81631E1
-	setmaptile 8, 4, 609, 0
-	setmaptile 7, 5, 575, 1
+	setmetatile 8, 4, 609, 0
+	setmetatile 7, 5, 575, 1
 	return
 
 Route110_TrickHousePuzzle7_EventScript_1631F4:: @ 81631F4
-	setmaptile 13, 17, 611, 0
-	setmaptile 12, 16, 574, 1
+	setmetatile 13, 17, 611, 0
+	setmetatile 12, 16, 574, 1
 	return
 
 Route110_TrickHousePuzzle7_EventScript_163207:: @ 8163207
-	setmaptile 12, 13, 609, 0
-	setmaptile 12, 11, 574, 1
+	setmetatile 12, 13, 609, 0
+	setmetatile 12, 11, 574, 1
 	return
 
 Route110_TrickHousePuzzle7_EventScript_16321A:: @ 816321A
-	setmaptile 7, 12, 611, 0
-	setmaptile 5, 10, 574, 1
+	setmetatile 7, 12, 611, 0
+	setmetatile 5, 10, 574, 1
 	return
 
 Route110_TrickHousePuzzle7_EventScript_16322D:: @ 816322D
-	setmaptile 6, 6, 635, 0
-	setmaptile 4, 4, 574, 1
+	setmetatile 6, 6, 635, 0
+	setmetatile 4, 4, 574, 1
 	return
 
 Route110_TrickHousePuzzle7_EventScript_163240:: @ 8163240
-	setmaptile 8, 4, 608, 0
-	setmaptile 7, 5, 574, 1
+	setmetatile 8, 4, 608, 0
+	setmetatile 7, 5, 574, 1
 	return
 
 Route110_TrickHousePuzzle7_MapScript1_163253:: @ 8163253
 	compare 0x40b6, 1
 	goto_if_eq Route110_TrickHousePuzzle7_EventScript_16326E
-	clearflag 194
-	clearflag 195
-	clearflag 196
-	clearflag 197
-	clearflag 198
+	clearflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1
+	clearflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2
+	clearflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_3
+	clearflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_4
+	clearflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_5
 	end
 
 Route110_TrickHousePuzzle7_EventScript_16326E:: @ 816326E
@@ -121,125 +121,125 @@ Route110_TrickHousePuzzle7_EventScript_1632A8:: @ 81632A8
 Route110_TrickHousePuzzle7_EventScript_1632B9:: @ 81632B9
 	lockall
 	delay 32
-	checkflag 194
+	checkflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1
 	call_if 0, Route110_TrickHousePuzzle7_EventScript_163195
-	checkflag 194
+	checkflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1
 	call_if 1, Route110_TrickHousePuzzle7_EventScript_1631F4
 	special DrawWholeMapView
 	playse 36
-	checkflag 194
+	checkflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1
 	goto_if 0, Route110_TrickHousePuzzle7_EventScript_1633A4
-	checkflag 194
+	checkflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1
 	goto_if_eq Route110_TrickHousePuzzle7_EventScript_1633A9
 	end
 
 Route110_TrickHousePuzzle7_EventScript_1632E8:: @ 81632E8
 	lockall
 	delay 32
-	checkflag 195
+	checkflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2
 	call_if 0, Route110_TrickHousePuzzle7_EventScript_1631A8
-	checkflag 195
+	checkflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2
 	call_if 1, Route110_TrickHousePuzzle7_EventScript_163207
 	special DrawWholeMapView
 	playse 36
-	checkflag 195
+	checkflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2
 	goto_if 0, Route110_TrickHousePuzzle7_EventScript_1633AE
-	checkflag 195
+	checkflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2
 	goto_if_eq Route110_TrickHousePuzzle7_EventScript_1633B3
 	end
 
 Route110_TrickHousePuzzle7_EventScript_163317:: @ 8163317
 	lockall
 	delay 32
-	checkflag 196
+	checkflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_3
 	call_if 0, Route110_TrickHousePuzzle7_EventScript_1631BB
-	checkflag 196
+	checkflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_3
 	call_if 1, Route110_TrickHousePuzzle7_EventScript_16321A
 	special DrawWholeMapView
 	playse 36
-	checkflag 196
+	checkflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_3
 	goto_if 0, Route110_TrickHousePuzzle7_EventScript_1633B8
-	checkflag 196
+	checkflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_3
 	goto_if_eq Route110_TrickHousePuzzle7_EventScript_1633BD
 	end
 
 Route110_TrickHousePuzzle7_EventScript_163346:: @ 8163346
 	lockall
 	delay 32
-	checkflag 197
+	checkflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_4
 	call_if 0, Route110_TrickHousePuzzle7_EventScript_1631CE
-	checkflag 197
+	checkflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_4
 	call_if 1, Route110_TrickHousePuzzle7_EventScript_16322D
 	special DrawWholeMapView
 	playse 36
-	checkflag 197
+	checkflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_4
 	goto_if 0, Route110_TrickHousePuzzle7_EventScript_1633C2
-	checkflag 197
+	checkflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_4
 	goto_if_eq Route110_TrickHousePuzzle7_EventScript_1633C7
 	end
 
 Route110_TrickHousePuzzle7_EventScript_163375:: @ 8163375
 	lockall
 	delay 32
-	checkflag 198
+	checkflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_5
 	call_if 0, Route110_TrickHousePuzzle7_EventScript_1631E1
-	checkflag 198
+	checkflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_5
 	call_if 1, Route110_TrickHousePuzzle7_EventScript_163240
 	special DrawWholeMapView
 	playse 36
-	checkflag 198
+	checkflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_5
 	goto_if 0, Route110_TrickHousePuzzle7_EventScript_1633CC
-	checkflag 198
+	checkflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_5
 	goto_if_eq Route110_TrickHousePuzzle7_EventScript_1633D1
 	end
 
 Route110_TrickHousePuzzle7_EventScript_1633A4:: @ 81633A4
-	setflag 194
+	setflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1
 	releaseall
 	end
 
 Route110_TrickHousePuzzle7_EventScript_1633A9:: @ 81633A9
-	clearflag 194
+	clearflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1
 	releaseall
 	end
 
 Route110_TrickHousePuzzle7_EventScript_1633AE:: @ 81633AE
-	setflag 195
+	setflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2
 	releaseall
 	end
 
 Route110_TrickHousePuzzle7_EventScript_1633B3:: @ 81633B3
-	clearflag 195
+	clearflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2
 	releaseall
 	end
 
 Route110_TrickHousePuzzle7_EventScript_1633B8:: @ 81633B8
-	setflag 196
+	setflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_3
 	releaseall
 	end
 
 Route110_TrickHousePuzzle7_EventScript_1633BD:: @ 81633BD
-	clearflag 196
+	clearflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_3
 	releaseall
 	end
 
 Route110_TrickHousePuzzle7_EventScript_1633C2:: @ 81633C2
-	setflag 197
+	setflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_4
 	releaseall
 	end
 
 Route110_TrickHousePuzzle7_EventScript_1633C7:: @ 81633C7
-	clearflag 197
+	clearflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_4
 	releaseall
 	end
 
 Route110_TrickHousePuzzle7_EventScript_1633CC:: @ 81633CC
-	setflag 198
+	setflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_5
 	releaseall
 	end
 
 Route110_TrickHousePuzzle7_EventScript_1633D1:: @ 81633D1
-	clearflag 198
+	clearflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_5
 	releaseall
 	end
 

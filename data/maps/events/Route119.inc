@@ -14,27 +14,27 @@ Route119_MapObjects:: @ 8383914
 	object_event 13, MAP_OBJ_GFX_LITTLE_BOY_1, 0, 19, 0, 49, 0, 3, 58, 0, 0, 1, 0, 3, 0, Route119_EventScript_151580, 0, 0, 0
 	object_event 14, MAP_OBJ_GFX_MAN_6, 0, 10, 0, 50, 0, 4, 10, 0, 0, 1, 0, 3, 0, Route119_EventScript_15153B, 0, 0, 0
 	object_event 15, MAP_OBJ_GFX_MAN_6, 0, 8, 0, 62, 0, 3, 8, 0, 0, 1, 0, 3, 0, Route119_EventScript_151552, 0, 0, 0
-	object_event 16, 240, 0, 25, 0, 32, 0, 3, 7, 0, 0, 0, 0, 0, 0, 0x0, 851, 0, 0
-	object_event 17, MAP_OBJ_GFX_ITEM_BALL, 0, 12, 0, 121, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route119_EventScript_1B15BF, 1024, 0, 0
-	object_event 18, MAP_OBJ_GFX_ITEM_BALL, 0, 4, 0, 96, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route119_EventScript_1B15CC, 1025, 0, 0
-	object_event 19, MAP_OBJ_GFX_ITEM_BALL, 0, 29, 0, 53, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route119_EventScript_1B15D9, 1026, 0, 0
-	object_event 20, MAP_OBJ_GFX_ITEM_BALL, 0, 25, 0, 76, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route119_EventScript_1B15E6, 1027, 0, 0
-	object_event 21, MAP_OBJ_GFX_ITEM_BALL, 0, 8, 0, 18, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route119_EventScript_1B15F3, 1028, 0, 0
-	object_event 22, MAP_OBJ_GFX_ITEM_BALL, 0, 33, 0, 117, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route119_EventScript_1B1600, 1029, 0, 0
-	object_event 23, 241, 0, 13, 0, 33, 0, 4, 10, 0, 0, 0, 0, 0, 0, Route119_EventScript_1515C5, 890, 0, 0
-	object_event 24, 241, 0, 13, 0, 34, 0, 4, 10, 0, 0, 0, 0, 0, 0, Route119_EventScript_1515DC, 890, 0, 0
-	object_event 25, 243, 0, 17, 0, 33, 0, 4, 7, 0, 0, 0, 0, 0, 0, 0x0, 923, 0, 0
+	object_event 16, 240, 0, 25, 0, 32, 0, 3, 7, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_RIVAL_ROUTE119, 0, 0
+	object_event 17, MAP_OBJ_GFX_ITEM_BALL, 0, 12, 0, 121, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route119_EventScript_1B15BF, FLAG_ITEM_ROUTE119_1, 0, 0
+	object_event 18, MAP_OBJ_GFX_ITEM_BALL, 0, 4, 0, 96, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route119_EventScript_1B15CC, FLAG_ITEM_ROUTE119_2, 0, 0
+	object_event 19, MAP_OBJ_GFX_ITEM_BALL, 0, 29, 0, 53, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route119_EventScript_1B15D9, FLAG_ITEM_ROUTE119_3, 0, 0
+	object_event 20, MAP_OBJ_GFX_ITEM_BALL, 0, 25, 0, 76, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route119_EventScript_1B15E6, FLAG_ITEM_ROUTE119_4, 0, 0
+	object_event 21, MAP_OBJ_GFX_ITEM_BALL, 0, 8, 0, 18, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route119_EventScript_1B15F3, FLAG_ITEM_ROUTE119_5, 0, 0
+	object_event 22, MAP_OBJ_GFX_ITEM_BALL, 0, 33, 0, 117, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route119_EventScript_1B1600, FLAG_ITEM_ROUTE119_6, 0, 0
+	object_event 23, 241, 0, 13, 0, 33, 0, 4, 10, 0, 0, 0, 0, 0, 0, Route119_EventScript_1515C5, FLAG_HIDE_EVIL_TEAM_WEATHER_INSTITUTE, 0, 0
+	object_event 24, 241, 0, 13, 0, 34, 0, 4, 10, 0, 0, 0, 0, 0, 0, Route119_EventScript_1515DC, FLAG_HIDE_EVIL_TEAM_WEATHER_INSTITUTE, 0, 0
+	object_event 25, 243, 0, 17, 0, 33, 0, 4, 7, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_RIVAL_ROUTE119_ON_BIKE, 0, 0
 	object_event 26, MAP_OBJ_GFX_BOY_3, 0, 31, 0, 109, 0, 3, 8, 17, 0, 0, 0, 0, 0, Route119_EventScript_1515F3, 0, 0, 0
 	object_event 27, MAP_OBJ_GFX_BERRY_TREE, 0, 8, 0, 23, 0, 3, 12, 0, 0, 0, 0, 83, 0, S_BerryTree, 0, 0, 0
 	object_event 28, MAP_OBJ_GFX_BERRY_TREE, 0, 9, 0, 23, 0, 3, 12, 0, 0, 0, 0, 84, 0, S_BerryTree, 0, 0, 0
 	object_event 29, MAP_OBJ_GFX_BERRY_TREE, 0, 29, 0, 90, 0, 3, 12, 0, 0, 0, 0, 85, 0, S_BerryTree, 0, 0, 0
 	object_event 30, MAP_OBJ_GFX_BERRY_TREE, 0, 30, 0, 90, 0, 3, 12, 0, 0, 0, 0, 86, 0, S_BerryTree, 0, 0, 0
 	object_event 31, MAP_OBJ_GFX_CYCLING_TRIATHLETE_M, 0, 19, 0, 133, 0, 3, 5, 18, 0, 0, 0, 0, 0, Route119_EventScript_15141A, 0, 0, 0
-	object_event 32, MAP_OBJ_GFX_ITEM_BALL, 0, 3, 0, 56, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route119_EventScript_1B160D, 1106, 0, 0
+	object_event 32, MAP_OBJ_GFX_ITEM_BALL, 0, 3, 0, 56, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route119_EventScript_1B160D, FLAG_ITEM_ROUTE119_7, 0, 0
 	object_event 33, MAP_OBJ_GFX_BOY_2, 0, 35, 0, 93, 0, 4, 2, 17, 0, 0, 0, 0, 0, Route119_EventScript_1515FC, 0, 0, 0
 	object_event 34, MAP_OBJ_GFX_LITTLE_BOY_1, 0, 29, 0, 6, 0, 3, 57, 17, 0, 1, 0, 3, 0, Route119_EventScript_151597, 0, 0, 0
-	object_event 35, MAP_OBJ_GFX_KECLEON_1, 0, 31, 0, 6, 0, 3, 76, 17, 0, 0, 0, 0, 0, Route119_EventScript_1A057A, 989, 0, 0
-	object_event 36, MAP_OBJ_GFX_KECLEON_1, 0, 20, 0, 13, 0, 4, 76, 17, 0, 0, 0, 0, 0, Route119_EventScript_1A0587, 990, 0, 0
+	object_event 35, MAP_OBJ_GFX_KECLEON_1, 0, 31, 0, 6, 0, 3, 76, 17, 0, 0, 0, 0, 0, Route119_EventScript_1A057A, FLAG_HIDE_KECLEON_ROUTE119_1, 0, 0
+	object_event 36, MAP_OBJ_GFX_KECLEON_1, 0, 20, 0, 13, 0, 4, 76, 17, 0, 0, 0, 0, 0, Route119_EventScript_1A0587, FLAG_HIDE_KECLEON_ROUTE119_2, 0, 0
 	object_event 37, MAP_OBJ_GFX_FISHERMAN, 0, 13, 0, 104, 0, 3, 10, 17, 0, 1, 0, 0, 0, Route119_EventScript_1515AE, 0, 0, 0
 
 Route119_MapWarps:: @ 8383C8C

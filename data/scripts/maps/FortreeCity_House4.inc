@@ -7,16 +7,16 @@ FortreeCity_House4_EventScript_15817F:: @ 815817F
 
 FortreeCity_House4_EventScript_158188:: @ 8158188
 	lockall
-	checkflag 223
+	checkflag FLAG_RECEIVED_MENTAL_HERB
 	goto_if_eq FortreeCity_House4_EventScript_158204
-	checkflag 224
+	checkflag FLAG_WINGULL_DELIVERED_MAIL
 	goto_if_eq FortreeCity_House4_EventScript_1581D6
-	checkflag 222
+	checkflag FLAG_WINGULL_SENT_ON_ERRAND
 	goto_if_eq FortreeCity_House4_EventScript_1581C2
 	msgbox FortreeCity_House4_Text_186835, 4
 	closemessage
-	setflag 222
-	clearflag 934
+	setflag FLAG_WINGULL_SENT_ON_ERRAND
+	clearflag FLAG_HIDE_WINGULL_MOSSDEEP_HOUSE
 	applymovement 3, FortreeCity_House4_Movement_158218
 	waitmovement 0
 	removeobject 3
@@ -34,10 +34,10 @@ FortreeCity_House4_EventScript_1581D6:: @ 81581D6
 	applymovement LAST_TALKED, FortreeCity_House4_Movement_1A0839
 	waitmovement 0
 	msgbox FortreeCity_House4_Text_186881, 4
-	giveitem ITEM_MENTAL_HERB
+	giveitem_std ITEM_MENTAL_HERB
 	compare RESULT, 0
 	goto_if_eq FortreeCity_House4_EventScript_1A029B
-	setflag 223
+	setflag FLAG_RECEIVED_MENTAL_HERB
 	releaseall
 	end
 
@@ -60,8 +60,8 @@ FortreeCity_House4_EventScript_15821E:: @ 815821E
 	lock
 	faceplayer
 	waitse
-	playpokecry SPECIES_WINGULL, 0
+	playmoncry SPECIES_WINGULL, 0
 	msgbox FortreeCity_House4_Text_18695C, 4
-	waitpokecry
+	waitmoncry
 	release
 	end

@@ -4,7 +4,7 @@ PetalburgCity_MapScripts:: @ 814B70C
 	.byte 0
 
 PetalburgCity_MapScript1_14B717:: @ 814B717
-	setflag 2070
+	setflag FLAG_VISITED_PETALBURG_CITY
 	compare 0x4057, 0
 	call_if 1, PetalburgCity_EventScript_14B731
 	compare 0x4057, 2

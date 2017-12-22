@@ -580,7 +580,7 @@ const u8 *const gUnknown_083CE048[] =
 
 extern u8 gPCText_WhichPCShouldBeAccessed[];
 
-extern u16 gScriptResult;
+extern u16 gSpecialVar_Result;
 
 static void Task_HandleMultichoiceInput(u8);
 static void Task_HandleYesNoInput(u8);
@@ -599,7 +599,7 @@ bool8 ScriptMenu_Multichoice(u8 left, u8 top, u8 multichoiceId, u8 ignoreBPress)
     }
     else
     {
-        gScriptResult = 0xFF;
+        gSpecialVar_Result = 0xFF;
         DrawMultichoiceMenu(left, top, gMultichoiceLists[multichoiceId].count, gMultichoiceLists[multichoiceId].list, ignoreBPress, 0);
         return TRUE;
     }
@@ -613,7 +613,7 @@ bool8 ScriptMenu_MultichoiceWithDefault(u8 left, u8 top, u8 multichoiceId, u8 ig
     }
     else
     {
-        gScriptResult = 0xFF;
+        gSpecialVar_Result = 0xFF;
         DrawMultichoiceMenu(left, top, gMultichoiceLists[multichoiceId].count, gMultichoiceLists[multichoiceId].list, ignoreBPress, defaultChoice);
         return TRUE;
     }
@@ -698,11 +698,11 @@ static void Task_HandleMultichoiceInput(u8 taskId)
                 if (gTasks[taskId].tIgnoreBPress)
                     return;
                 PlaySE(SE_SELECT);
-                gScriptResult = 127;
+                gSpecialVar_Result = 127;
             }
             else
             {
-                gScriptResult = selection;
+                gSpecialVar_Result = selection;
             }
             HandleDestroyMenuCursors();
             MenuZeroFillWindowRect(gTasks[taskId].tLeft, gTasks[taskId].tTop, gTasks[taskId].tRight, gTasks[taskId].tBottom);
@@ -720,7 +720,7 @@ bool8 Multichoice(u8 left, u8 top, u8 multichoiceId, u8 ignoreBPress)
     }
     else
     {
-        gScriptResult = 0xFF;
+        gSpecialVar_Result = 0xFF;
         sub_80B53B4(left, top, gMultichoiceLists[multichoiceId].count, gMultichoiceLists[multichoiceId].list, ignoreBPress);
         return TRUE;
     }
@@ -760,7 +760,7 @@ bool8 ScriptMenu_YesNo(u8 left, u8 top)
     }
     else
     {
-        gScriptResult = 0xFF;
+        gSpecialVar_Result = 0xFF;
         DisplayYesNoMenu(left, top, 1);
         taskId = CreateTask(Task_HandleYesNoInput, 0x50);
         gTasks[taskId].tLeft = left;
@@ -772,7 +772,7 @@ bool8 ScriptMenu_YesNo(u8 left, u8 top)
 // unused
 bool8 IsScriptActive(void)
 {
-    if (gScriptResult == 0xFF)
+    if (gSpecialVar_Result == 0xFF)
         return FALSE;
     else
         return TRUE;
@@ -795,10 +795,10 @@ static void Task_HandleYesNoInput(u8 taskId)
     case -1:
     case 1:
         PlaySE(SE_SELECT);
-        gScriptResult = 0;
+        gSpecialVar_Result = 0;
         break;
     case 0:
-        gScriptResult = 1;
+        gSpecialVar_Result = 1;
         break;
     }
 
@@ -823,7 +823,7 @@ bool8 ScriptMenu_MultichoiceGrid(u8 left, u8 top, u8 multichoiceId, u8 ignoreBPr
         u8 taskId;
         u8 width;
 
-        gScriptResult = 0xFF;
+        gSpecialVar_Result = 0xFF;
 
         sub_807274C(left, top, gMultichoiceLists[multichoiceId].count, 0, gMultichoiceLists[multichoiceId].list, columnCount, 0);
 
@@ -860,11 +860,11 @@ static void Task_HandleMultichoiceGridInput(u8 taskId)
             if (gTasks[taskId].tIgnoreBPress)
                 return;
             PlaySE(SE_SELECT);
-            gScriptResult = 127;
+            gSpecialVar_Result = 127;
         }
         else
         {
-            gScriptResult = selection;
+            gSpecialVar_Result = selection;
         }
         HandleDestroyMenuCursors();
         MenuZeroFillWindowRect(gTasks[taskId].tLeft, gTasks[taskId].tTop, gTasks[taskId].tRight, gTasks[taskId].tBottom);
@@ -888,7 +888,7 @@ bool8 ScrSpecial_CreatePCMenu(void)
     }
     else
     {
-        gScriptResult = 0xFF;
+        gSpecialVar_Result = 0xFF;
         ScriptMenu_CreatePCMenu();
         return TRUE;
     }
@@ -906,7 +906,7 @@ void ScriptMenu_CreatePCMenu(void)
     else
         width = 8;
 
-    if (FlagGet(SYS_GAME_CLEAR)) // player has cleared game?
+    if (FlagGet(FLAG_SYS_GAME_CLEAR)) // player has cleared game?
     {
         numChoices = 4;
         MenuDrawTextWindow(0, 0, width + 2, 9);
@@ -920,7 +920,7 @@ void ScriptMenu_CreatePCMenu(void)
         MenuPrint(gPCText_LogOff, 1, 5);
     }
 
-    if (FlagGet(SYS_PC_LANETTE)) // player met lanette?
+    if (FlagGet(FLAG_SYS_PC_LANETTE)) // player met lanette?
         MenuPrint(gPCText_LanettesPC, 1, 1);
     else
         MenuPrint(gPCText_SomeonesPC, 1, 1);

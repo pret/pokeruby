@@ -4,7 +4,7 @@ LittlerootTown_BrendansHouse_2F_MapScripts:: @ 81527A4
 	.byte 0
 
 LittlerootTown_BrendansHouse_2F_MapScript1_1527AF:: @ 81527AF
-	checkflag 130
+	checkflag FLAG_DEFEATED_RIVAL_ROUTE103
 	call_if 0, LittlerootTown_BrendansHouse_2F_EventScript_1527CE
 	compare 0x4092, 4
 	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_1B6950

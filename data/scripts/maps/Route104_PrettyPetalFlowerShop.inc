@@ -3,12 +3,12 @@ Route104_PrettyPetalFlowerShop_MapScripts:: @ 815BDE4
 	.byte 0
 
 Route104_PrettyPetalFlowerShop_MapScript1_15BDEA:: @ 815BDEA
-	setflag 2108
-	checkflag 127
+	setflag FLAG_LANDMARK_FLOWER_SHOP
+	checkflag FLAG_MET_PRETTY_PETAL_SHOP_OWNER
 	goto_if 0, Route104_PrettyPetalFlowerShop_EventScript_15BE03
-	checkflag 2057
+	checkflag FLAG_BADGE03_GET
 	goto_if 0, Route104_PrettyPetalFlowerShop_EventScript_15BE03
-	setflag 1
+	setflag FLAG_TEMP_1
 	end
 
 Route104_PrettyPetalFlowerShop_EventScript_15BE03:: @ 815BE03
@@ -18,12 +18,12 @@ Route104_PrettyPetalFlowerShop_EventScript_15BE03:: @ 815BE03
 Route104_PrettyPetalFlowerShop_EventScript_15BE0B:: @ 815BE0B
 	lock
 	faceplayer
-	checkflag 1
+	checkflag FLAG_TEMP_1
 	goto_if_eq Route104_PrettyPetalFlowerShop_EventScript_15BE7C
 	msgbox Route104_PrettyPetalFlowerShop_Text_1C5EC6, 4
-	checkflag 127
+	checkflag FLAG_MET_PRETTY_PETAL_SHOP_OWNER
 	goto_if_eq Route104_PrettyPetalFlowerShop_EventScript_15BE4A
-	setflag 127
+	setflag FLAG_MET_PRETTY_PETAL_SHOP_OWNER
 	msgbox Route104_PrettyPetalFlowerShop_Text_1C5F48, 5
 	compare RESULT, 1
 	call_if 1, Route104_PrettyPetalFlowerShop_EventScript_15BE6A
@@ -52,7 +52,7 @@ Route104_PrettyPetalFlowerShop_EventScript_15BE73:: @ 815BE73
 Route104_PrettyPetalFlowerShop_EventScript_15BE7C:: @ 815BE7C
 	message Route104_PrettyPetalFlowerShop_Text_1A0C42
 	waitmessage
-	pokemartbp Route104_PrettyPetalFlowerShop_Items
+	pokemartdecoration2 Route104_PrettyPetalFlowerShop_Items
 	msgbox Route104_PrettyPetalFlowerShop_Text_1A0C02, 4
 	release
 	end
@@ -72,7 +72,7 @@ Route104_PrettyPetalFlowerShop_Items:: @ 815BE94
 Route104_PrettyPetalFlowerShop_EventScript_15BEA4:: @ 815BEA4
 	lock
 	faceplayer
-	checkflag 94
+	checkflag FLAG_RECEIVED_WAILMER_PAIL
 	goto_if 0, Route104_PrettyPetalFlowerShop_EventScript_15BEB9
 	msgbox Route104_PrettyPetalFlowerShop_Text_1C61E8, 4
 	release
@@ -80,9 +80,9 @@ Route104_PrettyPetalFlowerShop_EventScript_15BEA4:: @ 815BEA4
 
 Route104_PrettyPetalFlowerShop_EventScript_15BEB9:: @ 815BEB9
 	msgbox Route104_PrettyPetalFlowerShop_Text_1C6158, 4
-	giveitem ITEM_WAILMER_PAIL
+	giveitem_std ITEM_WAILMER_PAIL
 	msgbox Route104_PrettyPetalFlowerShop_Text_1C61E8, 4
-	setflag 94
+	setflag FLAG_RECEIVED_WAILMER_PAIL
 	release
 	end
 
@@ -90,15 +90,15 @@ Route104_PrettyPetalFlowerShop_EventScript_15BEDA:: @ 815BEDA
 	lock
 	faceplayer
 	dodailyevents
-	checkflag 2256
+	checkflag FLAG_DAILY_RECEIVED_BERRY_FLOWER_SHOP
 	goto_if_eq Route104_PrettyPetalFlowerShop_EventScript_15BF1A
 	msgbox Route104_PrettyPetalFlowerShop_Text_1C62DA, 4
 	random 8
-	addvar RESULT, 133
-	giveitem RESULT
+	addvar RESULT, ITEM_CHERI_BERRY
+	giveitem_std RESULT
 	compare RESULT, 0
 	goto_if_eq Route104_PrettyPetalFlowerShop_EventScript_1A029B
-	setflag 2256
+	setflag FLAG_DAILY_RECEIVED_BERRY_FLOWER_SHOP
 	msgbox Route104_PrettyPetalFlowerShop_Text_1C6335, 4
 	release
 	end

@@ -20,8 +20,8 @@ gUnknown_083F856E:: @ 83F856E
 
 	.align 1
 gUnknown_083F857A:: @ 83F857A
-	.2byte 85, 2142
-	.2byte 68, 2119
+	.2byte 85, 2142 @ FLAG_LANDMARK_SKY_PILLAR
+	.2byte 68, 2119 @ FLAG_LANDMARK_SEAFLOOR_CAVERN
 	.2byte 88,    0
 
 @ XXX: what is this?

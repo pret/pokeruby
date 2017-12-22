@@ -1,4 +1,5 @@
 #include "constants/decorations.h"
+#include "constants/flags.h"
 #include "constants/game_stat.h"
 #include "constants/items.h"
 #include "constants/map_objects.h"
@@ -31,12 +32,12 @@ gSpecialVars::
 	.4byte gSpecialVar_0x8009
 	.4byte gSpecialVar_0x800A
 	.4byte gSpecialVar_0x800B
-	.4byte gScriptFacing
-	.4byte gScriptResult
-	.4byte gScriptItemId
-	.4byte gScriptLastTalked
-	.4byte gScriptContestRank
-	.4byte gScriptContestCategory
+	.4byte gSpecialVar_Facing
+	.4byte gSpecialVar_Result
+	.4byte gSpecialVar_ItemId
+	.4byte gSpecialVar_LastTalked
+	.4byte gSpecialVar_ContestRank
+	.4byte gSpecialVar_ContestCategory
 
 	.include "data/specials.inc"
 
@@ -400,7 +401,7 @@ gUnknown_0815F36C:: @ 815F36C
 	dofieldeffect 61
 	waitstate
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	playse 5
 	goto EventScript_15F384
 	end
@@ -408,7 +409,7 @@ gUnknown_0815F36C:: @ 815F36C
 EventScript_15F384:
 	message UnknownString_81A3A87
 	waitmessage
-	checkflag 268
+	checkflag FLAG_DECORATION_16
 	goto_if_eq EventScript_15F3A0
 	goto EventScript_15F3E2
 	end
@@ -461,7 +462,7 @@ gUnknown_0815F43A:: @ 815F43A
 	dofieldeffect 61
 	waitstate
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	playse 5
 	goto EventScript_15F452
 	end
@@ -900,7 +901,7 @@ Std_2:
 	faceplayer
 	message 0x0
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	release
 	return
 
@@ -908,14 +909,14 @@ Std_3:
 	lockall
 	message 0x0
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	releaseall
 	return
 
 Std_4:
 	message 0x0
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	return
 
 Std_5:
@@ -952,7 +953,7 @@ gUnknown_0819F818:: @ 819F818
 	goto EventScript_19F8F2
 
 EventScript_19F83F:
-	ontrainerbattleend
+	gotopostbattlescript
 
 gUnknown_0819F840:: @ 819F840
 	lock
@@ -971,19 +972,19 @@ gUnknown_0819F840:: @ 819F840
 EventScript_19F870:
 	special ScrSpecial_ShowTrainerNonBattlingSpeech
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	release
 	end
 
 EventScript_19F877:
-	ontrainerbattleend
+	gotopostbattlescript
 
 gUnknown_0819F878:: @ 819F878
 	applymovement LAST_TALKED, Movement_19F8F0
 	waitmovement 0
 	special PlayTrainerEncounterMusic
-	battlebegin
-	ontrainerbattleend
+	trainerbattlebegin
+	gotopostbattlescript
 
 gUnknown_0819F887:: @ 819F887
 	call EventScript_19F8E5
@@ -994,14 +995,14 @@ gUnknown_0819F887:: @ 819F887
 	special sub_8082524
 	special ScrSpecial_ShowTrainerIntroSpeech
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	special ScrSpecial_StartTrainerEyeRematch
 	waitstate
 	releaseall
 	end
 
 EventScript_19F8AD:
-	ontrainerbattleend
+	gotopostbattlescript
 
 gUnknown_0819F8AE:: @ 819F8AE
 	specialvar RESULT, ScrSpecial_GetTrainerEyeRematchFlag
@@ -1014,19 +1015,19 @@ gUnknown_0819F8AE:: @ 819F8AE
 	special sub_8082524
 	special ScrSpecial_ShowTrainerIntroSpeech
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	special ScrSpecial_StartTrainerEyeRematch
 	waitstate
 	releaseall
 	end
 
 EventScript_19F8DD:
-	ontrainerbattleend
+	gotopostbattlescript
 
 EventScript_19F8DE:
 	special ScrSpecial_ShowTrainerNonBattlingSpeech
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	release
 	end
 
@@ -1042,8 +1043,8 @@ Movement_19F8F0::
 EventScript_19F8F2:
 	special ScrSpecial_ShowTrainerIntroSpeech
 	waitmessage
-	waitbutton
-	battlebegin
+	waitbuttonpress
+	trainerbattlebegin
 	specialvar RESULT, ScrSpecial_GetTrainerBattleMode
 	compare RESULT, 0
 	goto_if_eq EventScript_19F934
@@ -1061,271 +1062,271 @@ EventScript_19F934:
 	end
 
 EventScript_19F936:
-	ontrainerbattleendgoto
+	gotobeatenscript
 
 Std_6::
 	message 0x0
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	release
 	return
 
 Event_ResetBerryTrees: @ 19F940
-	plantberrytree 2, 7, 5
-	plantberrytree 1, 3, 5
-	plantberrytree 11, 7, 5
-	plantberrytree 13, 3, 5
-	plantberrytree 4, 7, 5
-	plantberrytree 76, 1, 5
-	plantberrytree 8, 1, 5
-	plantberrytree 10, 6, 5
-	plantberrytree 25, 20, 5
-	plantberrytree 26, 2, 5
-	plantberrytree 66, 2, 5
-	plantberrytree 67, 20, 5
-	plantberrytree 69, 22, 5
-	plantberrytree 70, 22, 5
-	plantberrytree 71, 22, 5
-	plantberrytree 55, 17, 5
-	plantberrytree 56, 17, 5
-	plantberrytree 5, 1, 5
-	plantberrytree 6, 6, 5
-	plantberrytree 7, 1, 5
-	plantberrytree 16, 18, 5
-	plantberrytree 17, 18, 5
-	plantberrytree 18, 18, 5
-	plantberrytree 29, 19, 5
-	plantberrytree 28, 19, 5
-	plantberrytree 27, 19, 5
-	plantberrytree 24, 4, 5
-	plantberrytree 23, 3, 5
-	plantberrytree 22, 3, 5
-	plantberrytree 21, 4, 5
-	plantberrytree 19, 16, 5
-	plantberrytree 20, 16, 5
-	plantberrytree 80, 7, 5
-	plantberrytree 81, 7, 5
-	plantberrytree 77, 8, 5
-	plantberrytree 78, 8, 5
-	plantberrytree 68, 8, 5
-	plantberrytree 31, 10, 5
-	plantberrytree 33, 10, 5
-	plantberrytree 34, 21, 5
-	plantberrytree 35, 21, 5
-	plantberrytree 36, 21, 5
-	plantberrytree 83, 24, 5
-	plantberrytree 84, 24, 5
-	plantberrytree 85, 10, 5
-	plantberrytree 86, 6, 5
-	plantberrytree 37, 5, 5
-	plantberrytree 38, 5, 5
-	plantberrytree 39, 5, 5
-	plantberrytree 40, 3, 5
-	plantberrytree 41, 3, 5
-	plantberrytree 42, 3, 5
-	plantberrytree 46, 19, 5
-	plantberrytree 45, 20, 5
-	plantberrytree 44, 18, 5
-	plantberrytree 43, 16, 5
-	plantberrytree 47, 8, 5
-	plantberrytree 48, 5, 5
-	plantberrytree 49, 4, 5
-	plantberrytree 50, 2, 5
-	plantberrytree 52, 18, 5
-	plantberrytree 53, 18, 5
-	plantberrytree 62, 6, 5
-	plantberrytree 64, 6, 5
-	plantberrytree 58, 21, 5
-	plantberrytree 59, 21, 5
-	plantberrytree 60, 25, 5
-	plantberrytree 61, 25, 5
-	plantberrytree 79, 23, 5
-	plantberrytree 14, 23, 5
-	plantberrytree 15, 21, 5
-	plantberrytree 30, 21, 5
-	plantberrytree 65, 25, 5
-	plantberrytree 72, 25, 5
-	plantberrytree 73, 23, 5
-	plantberrytree 74, 23, 5
-	plantberrytree 87, 3, 5
-	plantberrytree 88, 10, 5
-	plantberrytree 89, 4, 5
-	plantberrytree 82, 36, 5
+	setberrytree 2, 7, 5
+	setberrytree 1, 3, 5
+	setberrytree 11, 7, 5
+	setberrytree 13, 3, 5
+	setberrytree 4, 7, 5
+	setberrytree 76, 1, 5
+	setberrytree 8, 1, 5
+	setberrytree 10, 6, 5
+	setberrytree 25, 20, 5
+	setberrytree 26, 2, 5
+	setberrytree 66, 2, 5
+	setberrytree 67, 20, 5
+	setberrytree 69, 22, 5
+	setberrytree 70, 22, 5
+	setberrytree 71, 22, 5
+	setberrytree 55, 17, 5
+	setberrytree 56, 17, 5
+	setberrytree 5, 1, 5
+	setberrytree 6, 6, 5
+	setberrytree 7, 1, 5
+	setberrytree 16, 18, 5
+	setberrytree 17, 18, 5
+	setberrytree 18, 18, 5
+	setberrytree 29, 19, 5
+	setberrytree 28, 19, 5
+	setberrytree 27, 19, 5
+	setberrytree 24, 4, 5
+	setberrytree 23, 3, 5
+	setberrytree 22, 3, 5
+	setberrytree 21, 4, 5
+	setberrytree 19, 16, 5
+	setberrytree 20, 16, 5
+	setberrytree 80, 7, 5
+	setberrytree 81, 7, 5
+	setberrytree 77, 8, 5
+	setberrytree 78, 8, 5
+	setberrytree 68, 8, 5
+	setberrytree 31, 10, 5
+	setberrytree 33, 10, 5
+	setberrytree 34, 21, 5
+	setberrytree 35, 21, 5
+	setberrytree 36, 21, 5
+	setberrytree 83, 24, 5
+	setberrytree 84, 24, 5
+	setberrytree 85, 10, 5
+	setberrytree 86, 6, 5
+	setberrytree 37, 5, 5
+	setberrytree 38, 5, 5
+	setberrytree 39, 5, 5
+	setberrytree 40, 3, 5
+	setberrytree 41, 3, 5
+	setberrytree 42, 3, 5
+	setberrytree 46, 19, 5
+	setberrytree 45, 20, 5
+	setberrytree 44, 18, 5
+	setberrytree 43, 16, 5
+	setberrytree 47, 8, 5
+	setberrytree 48, 5, 5
+	setberrytree 49, 4, 5
+	setberrytree 50, 2, 5
+	setberrytree 52, 18, 5
+	setberrytree 53, 18, 5
+	setberrytree 62, 6, 5
+	setberrytree 64, 6, 5
+	setberrytree 58, 21, 5
+	setberrytree 59, 21, 5
+	setberrytree 60, 25, 5
+	setberrytree 61, 25, 5
+	setberrytree 79, 23, 5
+	setberrytree 14, 23, 5
+	setberrytree 15, 21, 5
+	setberrytree 30, 21, 5
+	setberrytree 65, 25, 5
+	setberrytree 72, 25, 5
+	setberrytree 73, 23, 5
+	setberrytree 74, 23, 5
+	setberrytree 87, 3, 5
+	setberrytree 88, 10, 5
+	setberrytree 89, 4, 5
+	setberrytree 82, 36, 5
 	return
 
 gUnknown_0819FA81:: @ 819FA81
-	setflag 86
-	setflag 769
-	setflag 770
-	setflag 771
-	setflag 721
-	setflag 889
-	setflag 726
-	setflag 867
-	setflag 731
-	setflag 732
-	setflag 814
-	setflag 868
-	setflag 739
-	setflag 881
-	setflag 738
-	setflag 740
-	setflag 741
-	setflag 743
-	setflag 744
-	setflag 906
-	setflag 737
-	setflag 747
-	setflag 748
-	setflag 749
-	setflag 756
-	setflag 774
-	setflag 895
-	setflag 776
-	setflag 777
-	setflag 778
-	setflag 779
-	setflag 780
-	setflag 781
-	setflag 782
-	setflag 783
-	setflag 734
-	setflag 849
-	setflag 789
-	setflag 790
-	setflag 791
-	setflag 792
-	setflag 797
-	setflag 798
-	setflag 799
-	setflag 901
-	setflag 902
-	setflag 903
-	setflag 904
-	setflag 800
-	setflag 801
-	setflag 803
-	setflag 802
-	setflag 806
-	setflag 808
-	setflag 809
-	setflag 984
-	setflag 811
-	setflag 812
-	setflag 866
-	setflag 815
-	setflag 816
-	setflag 869
-	setflag 823
-	setflag 828
-	setflag 829
-	setflag 831
-	setflag 859
-	setflag 841
-	setflag 843
-	setflag 844
-	setflag 847
-	setflag 845
-	setflag 846
-	setflag 860
-	setflag 861
-	setflag 835
-	setflag 840
-	setflag 848
-	setflag 851
-	setflag 855
-	setflag 856
-	setflag 973
-	setflag 870
-	setflag 872
-	setflag 877
-	setflag 879
-	setflag 891
-	setflag 880
-	setflag 878
-	setflag 807
-	setflag 983
-	setflag 886
-	setflag 884
-	setflag 885
-	setflag 961
-	setflag 888
-	setflag 941
-	setflag 752
-	setflag 757
-	setflag 892
-	setflag 896
-	setflag 897
-	setflag 898
-	setflag 909
-	setflag 910
-	setflag 911
-	setflag 915
-	setflag 912
-	setflag 920
-	setflag 921
-	setflag 922
-	setflag 923
-	setflag 925
-	setflag 929
-	setflag 930
-	setflag 934
-	setflag 939
-	setflag 940
-	setflag 928
-	setflag 834
-	setflag 944
-	setflag 945
-	setflag 947
-	setflag 948
-	setflag 858
-	setflag 950
-	setflag 968
-	setflag 1133
-	setflag 727
-	setflag 979
-	setflag 751
-	setflag 991
+	setflag FLAG_LINK_CONTEST_ROOM_POKEBALL
+	setflag FLAG_HIDE_VICTORIA_WINSTRATE
+	setflag FLAG_HIDE_VIVI_WINSTRATE
+	setflag FLAG_HIDE_VICKI_WINSTRATE
+	setflag FLAG_HIDE_BIRCH_IN_LAB
+	setflag FLAG_HIDE_RIVAL_BIRCH_LAB
+	setflag FLAG_HIDE_WALLY_PETALBURG
+	setflag FLAG_UNKNOWN_363
+	setflag FLAG_HIDE_GRUNT_RUSTBORO
+	setflag FLAG_HIDE_DEVON_RUSTBORO
+	setflag FLAG_HIDE_RIVAL_RUSTBORO
+	setflag FLAG_HIDE_FAT_MAN_LITTLEROOT
+	setflag FLAG_HIDE_MR_BRINEY_ROUTE104_HOUSE
+	setflag FLAG_HIDE_PEEKO_BRINEY_HOUSE
+	setflag FLAG_HIDE_MR_BRINEY_ROUTE104
+	setflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
+	setflag FLAG_HIDE_MR_BRINEY_ROUTE109
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE109
+	setflag FLAG_HIDE_FLOWER_SHOP_WORKER_OUTSIDE
+	setflag FLAG_UNKNOWN_2E1
+	setflag FLAG_UNKNOWN_2EB
+	setflag FLAG_UNKNOWN_2EC
+	setflag FLAG_UNKNOWN_2ED
+	setflag FLAG_UNKNOWN_2F4
+	setflag FLAG_HIDE_LILYCOVE_CONTEST_ATTENDENT_1
+	setflag FLAG_HIDE_ARTIST_LILCOVE_CONTEST
+	setflag FLAG_HIDE_LILYCOVE_MUSEUM_PAINTING_LADY
+	setflag FLAG_HIDE_LILYCOVE_MUSEUM_PAINTING_GIRL
+	setflag FLAG_HIDE_LILYCOVE_MUSEUM_PAINTING_MAN
+	setflag FLAG_HIDE_LILYCOVE_MUSEUM_PAINTER
+	setflag FLAG_HIDE_LILYCOVE_MUSEUM_VISITORS
+	setflag FLAG_HIDE_PETALBURG_GYM_GUIDE
+	setflag FLAG_UNKNOWN_30E
+	setflag FLAG_UNKNOWN_30F
+	setflag FLAG_HIDE_NORMAN_LITTLEROOT
+	setflag FLAG_HIDE_MAY_PICHU_DOLL
+	setflag FLAG_HIDE_FANCLUB_OLD_LADY
+	setflag FLAG_HIDE_FANCLUB_BOY
+	setflag FLAG_HIDE_FANCLUB_LITTLE_BOY
+	setflag FLAG_HIDE_FANCLUB_LADY
+	setflag FLAG_HIDE_GABBY_AND_TY_ROUTE118_1
+	setflag FLAG_HIDE_GABBY_AND_TY_ROUTE120_1
+	setflag FLAG_HIDE_GABBY_AND_TY_ROUTE111_2
+	setflag FLAG_HIDE_GABBY_AND_TY_ROUTE118_2
+	setflag FLAG_HIDE_GABBY_AND_TY_ROUTE120_2
+	setflag FLAG_HIDE_GABBY_AND_TY_ROUTE111_3
+	setflag FLAG_HIDE_GABBY_AND_TY_ROUTE118_3
+	setflag FLAG_HIDE_CONTEST_REPORTER_FALLARBOR
+	setflag FLAG_HIDE_CONTEST_REPORTER_VERDANTURF
+	setflag FLAG_HIDE_CONTEST_REPORTER_SLATEPORT
+	setflag FLAG_HIDE_CONTEST_REPORTER_LILYCOVE
+	setflag FLAG_HIDE_WALLY_WANDAS_HOUSE
+	setflag FLAG_HIDE_BOYFRIEND_WANDAS_HOUSE
+	setflag FLAG_HIDE_WALLY_FATHER_WANDAS_HOUSE
+	setflag FLAG_HIDE_GIRLFRIEND_WANDAS_HOUSE
+	setflag FLAG_HIDE_WALLY_FATHER_PETALBURG
+	setflag FLAG_HIDE_WALLY_MOTHER_PETALBURG
+	setflag FLAG_HIDE_WALLY_PETALBURG_GYM
+	setflag FLAG_HIDE_WALLACE_SOOTOPOLIS_GYM
+	setflag FLAG_HIDE_WALLACE_SOOTOPOLIS
+	setflag FLAG_HIDE_BRINEY_SLATEPORT_SHIPYARD
+	setflag FLAG_UNKNOWN_337
+	setflag FLAG_HIDE_EVIL_LEADER_SEAFLOOR_CAVERN
+	setflag FLAG_HIDE_OTHER_LEADER_SEAFLOOR_CAVERN
+	setflag FLAG_HIDE_OTHER_TEAM_GRUNTS_SEAFLOOR_CAVERN
+	setflag FLAG_HIDE_AWAKENED_MON_SEAFLOOR_CAVERN
+	setflag FLAG_HIDE_STERN_SLATEPORT_HARBOR
+	setflag FLAG_UNKNOWN_34B
+	setflag FLAG_UNKNOWN_34C
+	setflag FLAG_UNKNOWN_34F
+	setflag FLAG_HIDE_GRUNT_1_SLATEPORT_HARBOR
+	setflag FLAG_HIDE_GRUNT_2_SLATEPORT_HARBOR
+	setflag FLAG_HIDE_SS_TIDAL_SLATEPORT_HARBOR
+	setflag FLAG_HIDE_SS_TIDAL_LILYCOVE_HARBOR
+	setflag FLAG_HIDE_GABBY_AND_TY_SLATEPORT
+	setflag FLAG_HIDE_STERN_SLATEPORT
+	setflag FLAG_HIDE_SUBMARINE_SHADOW_SLATEPORT_HARBOR
+	setflag FLAG_HIDE_RIVAL_ROUTE119
+	setflag FLAG_HIDE_CAVE_OF_ORIGIN_ENTRANCE_WOMAN_1
+	setflag FLAG_HIDE_CAVE_OF_ORIGIN_ENTRANCE_WOMAN_2
+	setflag FLAG_HIDE_STEVEN_SOOTOPOLIS
+	setflag FLAG_HIDE_LANETTE
+	setflag FLAG_HIDE_TRICKMASTER_ENTRANCE
+	setflag FLAG_HIDE_MT_CHIMNEY_PEOPLE
+	setflag FLAG_HIDE_BRINEY_RUSTURF_TUNNEL
+	setflag FLAG_HIDE_BRINEY_ROUTE116
+	setflag FLAG_HIDE_PEEKO_RUSTURF_TUNNEL
+	setflag FLAG_HIDE_GRUNT_RUSTURF_TUNNEL
+	setflag FLAG_HIDE_BOYFRIEND_RUSTURF_TUNNEL
+	setflag FLAG_HIDE_GIRLFRIEND_RUSTURF_TUNNEL
+	setflag FLAG_HIDE_EVIL_TEAM_LEADER_OCEANIC_MUSEUM_2F
+	setflag FLAG_HIDE_GRUNT_1_OCEANIC_MUSEUM_2F
+	setflag FLAG_HIDE_GRUNT_2_OCEANIC_MUSEUM_2F
+	setflag FLAG_HIDE_OCEANIC_MUSEUM_VISITORS
+	setflag FLAG_HIDE_BATTLE_TOWER_OPPONENT
+	setflag FLAG_HIDE_AWARD_MAN_BATTLE_TOWER
+	setflag FLAG_HIDE_MOM_LITTLEROOT
+	setflag FLAG_HIDE_MOM_UPSTAIRS
+	setflag FLAG_HIDE_WEATHER_INSTITUTE_WORKERS_1F
+	setflag FLAG_UNKNOWN_BIRCH_380
+	setflag FLAG_HIDE_BIRCH_ROUTE101
+	setflag FLAG_HIDE_BIRCH_ROUTE103
+	setflag FLAG_HIDE_FERRY_SAILOR_LILYCOVE
+	setflag FLAG_HIDE_LATIOS_OR_LATIAS_FLYING
+	setflag FLAG_HIDE_LATIOS_OR_LATIAS_STATIONARY
+	setflag FLAG_UNKNOWN_393
+	setflag FLAG_HIDE_WATTSON_MAUVILLE
+	setflag FLAG_HIDE_RIVAL_CHAMPIONS_ROOM
+	setflag FLAG_HIDE_BIRCH_CHAMPIONS_ROOM
+	setflag FLAG_HIDE_RIVAL_ON_BIKE_ROUTE110
+	setflag FLAG_HIDE_RIVAL_ROUTE119_ON_BIKE
+	setflag FLAG_HIDE_LILYCOVE_MOTEL_PEOPLE
+	setflag FLAG_HIDE_RIVAL_LAVARIDGE_1
+	setflag FLAG_HIDE_RIVAL_LAVARIDGE_2
+	setflag FLAG_HIDE_WINGULL_MOSSDEEP_HOUSE
+	setflag FLAG_HIDE_OTHER_TEAM_METEOR_FALLS_1F
+	setflag FLAG_HIDE_SLUDGE_BOMB_MAN_DEWFORD_HALL
+	setflag FLAG_HIDE_PROF_COSMO_FALLARBOR
+	setflag FLAG_HIDE_STEVEN_ROUTE128
+	setflag FLAG_HIDE_EVIL_LEADER_ROUTE128
+	setflag FLAG_HIDE_OTHER_LEADER_ROUTE128
+	setflag FLAG_HIDE_DEVON_EMPLOYEE_ROUTE116
+	setflag FLAG_HIDE_TM_SALESMAN_SLATEPORT
+	setflag FLAG_HIDE_WALLY_BATTLE_VICTORY_ROAD
+	setflag FLAG_HIDE_BRINEY_AND_PEEKO_SS_TIDAL
+	setflag FLAG_HIDE_BELDUM_BALL_STEVENS_HOUSE
+	setflag FLAG_ITEM_MOSSDEEP_STEVENS_HOUSE_1
+	setflag FLAG_HIDE_STEVENS_LETTER
+	setflag FLAG_HIDE_RIVAL_OLDALE_TOWN
+	setflag FLAG_HIDE_WALLY_DEFEATED_VICTORY_ROAD
+	setflag FLAG_HIDE_BOY_ROUTE101
 	call Event_ResetBerryTrees
 	end
 
 EverGrandeCity_HallOfFame_EventScript_19FC13:: @ 819FC13
-	clearflag 925
+	clearflag FLAG_HIDE_LILYCOVE_MOTEL_PEOPLE
 	call EverGrandeCity_HallOfFame_EventScript_19FD09
-	setflag 869
-	clearflag 950
-	clearflag 727
+	setflag FLAG_HIDE_BRINEY_SLATEPORT_SHIPYARD
+	clearflag FLAG_HIDE_BRINEY_AND_PEEKO_SS_TIDAL
+	clearflag FLAG_HIDE_STEVENS_LETTER
 	setvar 0x40c6, 1
-	clearflag 751
-	clearflag 860
-	clearflag 861
+	clearflag FLAG_HIDE_WALLY_DEFEATED_VICTORY_ROAD
+	clearflag FLAG_HIDE_SS_TIDAL_SLATEPORT_HARBOR
+	clearflag FLAG_HIDE_SS_TIDAL_LILYCOVE_HARBOR
 	special sub_810FAA0
-	checkflag 291
+	checkflag FLAG_RECEIVED_SS_TICKET
 	call_if 0, EverGrandeCity_HallOfFame_EventScript_19FC62
-	checkflag 255
+	checkflag FLAG_LATIOS_OR_LATIAS_ROAMING
 	call_if 0, EverGrandeCity_HallOfFame_EventScript_19FC70
-	checkflag 298
+	checkflag FLAG_RECEIVED_BELDUM
 	call_if 0, EverGrandeCity_HallOfFame_EventScript_19FC5A
-	checkflag 123
+	checkflag FLAG_RECEIVED_HM08
 	call_if 0, EverGrandeCity_HallOfFame_EventScript_19FC5E
 	return
 
 EverGrandeCity_HallOfFame_EventScript_19FC5A:: @ 819FC5A
-	clearflag 968
+	clearflag FLAG_HIDE_BELDUM_BALL_STEVENS_HOUSE
 	return
 
 EverGrandeCity_HallOfFame_EventScript_19FC5E:: @ 819FC5E
-	clearflag 1133
+	clearflag FLAG_ITEM_MOSSDEEP_STEVENS_HOUSE_1
 	return
 
 EverGrandeCity_HallOfFame_EventScript_19FC62:: @ 819FC62
 	setvar 0x4082, 3
 	setvar 0x408c, 3
-	clearflag 734
+	clearflag FLAG_HIDE_NORMAN_LITTLEROOT
 	return
 
 EverGrandeCity_HallOfFame_EventScript_19FC70:: @ 819FC70
-	setflag 2141
+	setflag FLAG_SYS_TV_LATI
 	return
 
 S_WhiteOut:: @ 819FC74
@@ -1335,11 +1336,11 @@ S_WhiteOut:: @ 819FC74
 	end
 
 EventScript_19FC84:
-	checkflag 221
+	checkflag FLAG_RECEIVED_GO_GOGGLES
 	goto_if_eq Route101_EventScript_1A14DC
-	checkflag 1213
+	checkflag FLAG_DEFEATED_LAVARIDGE_GYM
 	goto_if 0, Route101_EventScript_1A14DC
-	clearflag 929
+	clearflag FLAG_HIDE_RIVAL_LAVARIDGE_1
 	setvar 0x4053, 2
 	return
 
@@ -1353,42 +1354,42 @@ gUnknown_0819FC9F:: @ 819FC9F
 	end
 
 EventScript_19FCC1:
-	setflag 740
-	setflag 743
-	setflag 741
-	setflag 744
-	clearflag 742
-	clearflag 739
-	clearflag 881
+	setflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD
+	setflag FLAG_HIDE_MR_BRINEY_ROUTE109
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE109
+	clearflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE104
+	clearflag FLAG_HIDE_MR_BRINEY_ROUTE104_HOUSE
+	clearflag FLAG_HIDE_PEEKO_BRINEY_HOUSE
 	end
 
 EventScript_19FCD7:
-	setflag 741
-	setflag 744
-	setflag 738
-	setflag 742
-	setflag 739
-	setflag 881
-	clearflag 740
-	clearflag 743
+	setflag FLAG_HIDE_MR_BRINEY_ROUTE109
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE109
+	setflag FLAG_HIDE_MR_BRINEY_ROUTE104
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE104
+	setflag FLAG_HIDE_MR_BRINEY_ROUTE104_HOUSE
+	setflag FLAG_HIDE_PEEKO_BRINEY_HOUSE
+	clearflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
+	clearflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD
 	end
 
 EventScript_19FCF0:
-	setflag 738
-	setflag 742
-	setflag 739
-	setflag 881
-	setflag 740
-	setflag 743
-	clearflag 741
-	clearflag 744
+	setflag FLAG_HIDE_MR_BRINEY_ROUTE104
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE104
+	setflag FLAG_HIDE_MR_BRINEY_ROUTE104_HOUSE
+	setflag FLAG_HIDE_PEEKO_BRINEY_HOUSE
+	setflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD
+	clearflag FLAG_HIDE_MR_BRINEY_ROUTE109
+	clearflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE109
 	end
 
 EverGrandeCity_HallOfFame_EventScript_19FD09:: @ 819FD09
-	clearflag 1245
-	clearflag 1246
-	clearflag 1247
-	clearflag 1248
+	clearflag FLAG_DEFEATED_ELITE_4_SYDNEY
+	clearflag FLAG_DEFEATED_ELITE_4_PHOEBE
+	clearflag FLAG_DEFEATED_ELITE_4_GLACIA
+	clearflag FLAG_DEFEATED_ELITE_4_DRAKE
 	setvar 0x409c, 0
 	return
 
@@ -1401,15 +1402,15 @@ PetalburgCity_PokemonCenter_1F_EventScript_19FD1B:: @ 819FD1B
 RustboroCity_PokemonCenter_1F_EventScript_19FD1B:: @ 819FD1B
 SlateportCity_PokemonCenter_1F_EventScript_19FD1B:: @ 819FD1B
 VerdanturfTown_PokemonCenter_1F_EventScript_19FD1B:: @ 819FD1B
-	checkflag 188
+	checkflag FLAG_RECEIVED_POKENAV
 	goto_if 0, OldaleTown_PokemonCenter_1F_EventScript_1A14DC
-	checkflag 1217
+	checkflag FLAG_DEFEATED_PETALBURG_GYM
 	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_1A14DC
-	checkflag 742
+	checkflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE104
 	goto_if 0, OldaleTown_PokemonCenter_1F_EventScript_19FD49
-	checkflag 740
+	checkflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
 	goto_if 0, OldaleTown_PokemonCenter_1F_EventScript_19FD4F
-	checkflag 741
+	checkflag FLAG_HIDE_MR_BRINEY_ROUTE109
 	goto_if 0, OldaleTown_PokemonCenter_1F_EventScript_19FD55
 	return
 
@@ -1459,7 +1460,7 @@ do_heal_party:: @ 819FD7C
 	applymovement 0x800b, OldaleTown_PokemonCenter_1F_Movement_1A0845
 	waitmovement 0
 	special ScrSpecial_HealPlayerParty
-	checkflag 273
+	checkflag FLAG_POKERUS_EXPLAINED
 	goto_if 0, OldaleTown_PokemonCenter_1F_EventScript_19FDCE
 	goto OldaleTown_PokemonCenter_1F_EventScript_19FDB0
 	end
@@ -1489,7 +1490,7 @@ OldaleTown_PokemonCenter_1F_EventScript_19FDCE:: @ 819FDCE
 OldaleTown_PokemonCenter_1F_EventScript_19FDEA:: @ 819FDEA
 	message gText_NurseJoy_Pokerus
 	waitmessage
-	setflag 273
+	setflag FLAG_POKERUS_EXPLAINED
 	return
 
 OldaleTown_PokemonCenter_1F_Movement_19FDF4:: @ 819FDF4
@@ -1498,13 +1499,13 @@ OldaleTown_PokemonCenter_1F_Movement_19FDF4:: @ 819FDF4
 	step_end
 
 Std_ObtainItem: @ 819FDF7
-	additem 0x8000, 0x8001
+	giveitem 0x8000, 0x8001
 	copyvar 0x8007, RESULT
 	call Std_ObtainItem_
 	return
 
 Std_ObtainItem_: @ 819FE07
-	getitemname 1, 0x8000
+	bufferitemname 1, 0x8000
 	checkitemtype 0x8000
 	call GetItem_HandlePocket
 	compare 0x8007, 0x1
@@ -1523,31 +1524,31 @@ GetItem_HandlePocket:
 	end
 
 GetItem_HandlePocket_Items:
-	getstdstring 2, 0xE
+	bufferstdstring 2, 0xE
 	compare 0x8007, 1
 	call_if 1, PlayGetItemFanfare
 	return
 
 GetItem_HandlePocket_KeyItems:
-	getstdstring 2, 0xF
+	bufferstdstring 2, 0xF
 	compare 0x8007, 1
 	call_if 1, PlayGetItemFanfare
 	return
 
 GetItem_HandlePocket_PokeBalls:
-	getstdstring 2, 0x10
+	bufferstdstring 2, 0x10
 	compare 0x8007, 1
 	call_if 1, PlayGetItemFanfare
 	return
 
 GetItem_HandlePocket_TMsHMs:
-	getstdstring 2, 0x11
+	bufferstdstring 2, 0x11
 	compare 0x8007, 1
 	call_if 1, PlayGetTMHMFanfare
 	return
 
 GetItem_HandlePocket_Berries:
-	getstdstring 2, 0x12
+	bufferstdstring 2, 0x12
 	compare 0x8007, 1
 	call_if 1, PlayGetItemFanfare
 	return
@@ -1573,13 +1574,13 @@ PlayGetTMHMFanfare:
 	return
 
 Std_ObtainDecoration: @ 819FEDA
-	adddecor 0x8000
+	givedecoration 0x8000
 	copyvar 0x8007, RESULT
 	call Std_ObtainDecoration_
 	return
 
 Std_ObtainDecoration_: @ 819FEE8
-	getdecorname 1, 0x8000
+	bufferdecorationname 1, 0x8000
 	compare 0x8007, 1
 	call_if 1, Std_ObtainDecoration_Success
 	compare 0x8007, 0
@@ -1603,9 +1604,9 @@ Std_FindItem: @ 819FF21
 	lock
 	faceplayer
 	waitse
-	additem 0x8000, 0x8001
+	giveitem 0x8000, 0x8001
 	copyvar 0x8007, RESULT
-	getitemname 1, 0x8000
+	bufferitemname 1, 0x8000
 	checkitemtype 0x8000
 	call GetItem_HandlePocket
 	compare 0x8007, 1
@@ -1632,9 +1633,9 @@ Std_FindItem_Fail: @ 819FF65
 HiddenItemScript:: @ 819FF7B
 	lockall
 	waitse
-	additem 0x8005, 1
+	giveitem 0x8005, 1
 	copyvar 0x8007, RESULT
-	getitemname 0x1, 0x8005
+	bufferitemname 0x1, 0x8005
 	checkitemtype 0x8005
 	call GetItem_HandlePocket
 	compare 0x8007, 1
@@ -1676,7 +1677,7 @@ UnusedMixRecordsScript_Yes: @ 819FFFA
 UnusedMixRecordsScript_Done: @ 81A0000
 	message UnusedMixRecordsSeeYouAgainText
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	release
 	end
 
@@ -1716,9 +1717,9 @@ EventScript_1A0070:
 
 EventScript_1A0085:
 	playse 2
-	checkflag 2123
+	checkflag FLAG_SYS_PC_LANETTE
 	call_if 0, EventScript_1A00AC
-	checkflag 2123
+	checkflag FLAG_SYS_PC_LANETTE
 	call_if 1, EventScript_1A00B5
 	msgbox UnknownString_81A0A35, 4
 	special ShowPokemonStorageSystem
@@ -1742,7 +1743,7 @@ EventScript_1A00BE:
 	end
 
 EventScript_1A00CB:
-	checkflag 2052
+	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if 0, EventScript_1A00BE
 	playse 2
 	special AccessHallOfFamePC
@@ -1800,8 +1801,8 @@ DewfordTown_Gym_EventScript_1A00FB:: @ 81A00FB
 LavaridgeTown_Gym_1F_EventScript_1A00FB:: @ 81A00FB
 MauvilleCity_Gym_EventScript_1A00FB:: @ 81A00FB
 RustboroCity_Gym_EventScript_1A00FB:: @ 81A00FB
-	clearflag 781
-	setflag 296
+	clearflag FLAG_HIDE_PETALBURG_GYM_GUIDE
+	setflag FLAG_PETALBURG_MART_EXPANDED_ITEMS
 	return
 
 DewfordTown_EventScript_1A0102:: @ 81A0102
@@ -1819,11 +1820,11 @@ Route109_EventScript_1A010C:: @ 81A010C
 	return
 
 UseSurfScript:: @ 81A0117
-	checkpokemove MOVE_SURF
+	checkpartymove MOVE_SURF
 	compare RESULT, 6
 	goto_if_eq UseSurfScript_NoMon
-	getpartypokename 0, RESULT
-	setfieldeffect 0, RESULT
+	bufferpartymonnick 0, RESULT
+	setfieldeffectargument 0, RESULT
 	lockall
 	msgbox UseSurfPromptText, 5
 	compare RESULT, 0
@@ -2166,24 +2167,24 @@ Route103_EventScript_1A02F4:: @ 81A02F4
 	return
 
 Route101_EventScript_1A0358:: @ 81A0358
-	clearflag 721
-	clearflag 896
-	setflag 897
-	setflag 898
+	clearflag FLAG_HIDE_BIRCH_IN_LAB
+	clearflag FLAG_UNKNOWN_BIRCH_380
+	setflag FLAG_HIDE_BIRCH_ROUTE101
+	setflag FLAG_HIDE_BIRCH_ROUTE103
 	return
 
 Route101_EventScript_1A0365:: @ 81A0365
-	clearflag 897
-	setflag 721
-	setflag 896
-	setflag 898
+	clearflag FLAG_HIDE_BIRCH_ROUTE101
+	setflag FLAG_HIDE_BIRCH_IN_LAB
+	setflag FLAG_UNKNOWN_BIRCH_380
+	setflag FLAG_HIDE_BIRCH_ROUTE103
 	return
 
 Route101_EventScript_1A0372:: @ 81A0372
-	clearflag 898
-	setflag 897
-	setflag 721
-	setflag 896
+	clearflag FLAG_HIDE_BIRCH_ROUTE103
+	setflag FLAG_HIDE_BIRCH_ROUTE101
+	setflag FLAG_HIDE_BIRCH_IN_LAB
+	setflag FLAG_UNKNOWN_BIRCH_380
 	return
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1A037F:: @ 81A037F
@@ -2207,7 +2208,7 @@ Route101_EventScript_1A03A5:: @ 81A03A5
 	copyvar 0x8004, 0x8009
 	special ShowPokedexRatingMessage
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	return
 
 EverGrandeCity_ChampionsRoom_EventScript_1A03B0:: @ 81A03B0
@@ -2217,8 +2218,8 @@ Route101_EventScript_1A03B0:: @ 81A03B0
 	copyvar 0x8008, 0x8005
 	copyvar 0x8009, 0x8006
 	copyvar 0x800a, RESULT
-	getnumberstring 0, 0x8008
-	getnumberstring 1, 0x8009
+	buffernumberstring 0, 0x8008
+	buffernumberstring 1, 0x8009
 	msgbox Route101_Text_1C44DC, 4
 	call Route101_EventScript_1A03A5
 	compare 0x800a, 0
@@ -2227,8 +2228,8 @@ Route101_EventScript_1A03B0:: @ 81A03B0
 	specialvar RESULT, ScriptGetPokedexInfo
 	copyvar 0x8008, 0x8005
 	copyvar 0x8009, 0x8006
-	getnumberstring 0, 0x8008
-	getnumberstring 1, 0x8009
+	buffernumberstring 0, 0x8008
+	buffernumberstring 1, 0x8009
 	msgbox Route101_Text_1C4B05, 4
 	return
 
@@ -2251,31 +2252,31 @@ SlateportCity_Harbor_Movement_1A041C:: @ 81A041C
 	step_end
 
 PetalburgCity_Gym_EventScript_1A0424:: @ 81A0424
-	setflag 740
-	setflag 743
-	setflag 741
-	setflag 744
-	setflag 738
-	setflag 742
-	setflag 739
-	setflag 881
+	setflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD
+	setflag FLAG_HIDE_MR_BRINEY_ROUTE109
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE109
+	setflag FLAG_HIDE_MR_BRINEY_ROUTE104
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE104
+	setflag FLAG_HIDE_MR_BRINEY_ROUTE104_HOUSE
+	setflag FLAG_HIDE_PEEKO_BRINEY_HOUSE
 	setvar 0x4096, 0
 	return
 
 RusturfTunnel_EventScript_1A0442:: @ 81A0442
 	removeobject 1
 	removeobject 10
-	clearflag 808
-	clearflag 984
+	clearflag FLAG_HIDE_BOYFRIEND_WANDAS_HOUSE
+	clearflag FLAG_HIDE_GIRLFRIEND_WANDAS_HOUSE
 	setvar 0x409a, 6
-	setflag 199
+	setflag FLAG_RUSTURF_TUNNEL_OPENED
 	return
 
 EventScript_1A0457: @ unreferenced?
 	delay 30
 	applymovement 255, SlateportCity_OceanicMuseum_2F_Movement_1A0841
 	waitmovement 0
-	showobject 255, 0, 0
+	showobjectat 255, MAP_PETALBURG_CITY
 	delay 30
 	applymovement 255, Movement_1A047A
 	waitmovement 0
@@ -2293,15 +2294,15 @@ SouthernIsland_Exterior_EventScript_1A047C:: @ 81A047C
 	compare FACING, 3
 	call_if 1, BattleTower_Outside_EventScript_160B3A
 	delay 30
-	hideobject 255, 0, 0
+	hideobjectat 255, MAP_PETALBURG_CITY
 	call BattleTower_Outside_EventScript_1A040E
 	return
 
 CaveOfOrigin_B4F_EventScript_1A04A0:: @ 81A04A0
 	lockall
 	waitse
-	playpokecry SPECIES_GROUDON_OR_KYOGRE, 2
-	waitpokecry
+	playmoncry SPECIES_GROUDON_OR_KYOGRE, 2
+	waitmoncry
 	setvar 0x4005, 1
 	releaseall
 	end
@@ -2355,13 +2356,13 @@ MagmaHideout_B1F_EventScript_1A04FD:: @ 81A04FD
 	faceplayer
 	setwildbattle SPECIES_ELECTRODE, 30, ITEM_NONE
 	waitse
-	playpokecry SPECIES_ELECTRODE, 2
+	playmoncry SPECIES_ELECTRODE, 2
 	delay 40
-	waitpokecry
-	setflag 977
-	setflag 2145
+	waitmoncry
+	setflag FLAG_HIDE_ELECTRODE_1_HIDEOUT
+	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	dowildbattle
-	clearflag 2145
+	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	release
 	end
 
@@ -2371,13 +2372,13 @@ MagmaHideout_B1F_EventScript_1A051B:: @ 81A051B
 	faceplayer
 	setwildbattle SPECIES_ELECTRODE, 30, ITEM_NONE
 	waitse
-	playpokecry SPECIES_ELECTRODE, 2
+	playmoncry SPECIES_ELECTRODE, 2
 	delay 40
-	waitpokecry
-	setflag 978
-	setflag 2145
+	waitmoncry
+	setflag FLAG_HIDE_ELECTRODE_2_HIDEOUT
+	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	dowildbattle
-	clearflag 2145
+	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	release
 	end
 
@@ -2454,9 +2455,9 @@ Route119_EventScript_1A05C3:: @ 81A05C3
 	applymovement LAST_TALKED, Route119_Movement_1A0662
 	waitmovement 0
 	waitse
-	playpokecry SPECIES_KECLEON, 2
+	playmoncry SPECIES_KECLEON, 2
 	delay 40
-	waitpokecry
+	waitmoncry
 	setwildbattle SPECIES_KECLEON, 30, ITEM_NONE
 	compare 0x8004, 1
 	call_if 1, Route119_EventScript_1A0646
@@ -2472,38 +2473,38 @@ Route119_EventScript_1A05C3:: @ 81A05C3
 	call_if 1, Route119_EventScript_1A065A
 	compare 0x8004, 7
 	call_if 1, Route119_EventScript_1A065E
-	setflag 2145
+	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	dowildbattle
-	clearflag 2145
+	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	release
 	end
 
 Route119_EventScript_1A0646:: @ 81A0646
-	setflag 982
+	setflag FLAG_HIDE_KECLEON_ROUTE120_3
 	return
 
 Route119_EventScript_1A064A:: @ 81A064A
-	setflag 985
+	setflag FLAG_HIDE_KECLEON_ROUTE120_4
 	return
 
 Route119_EventScript_1A064E:: @ 81A064E
-	setflag 986
+	setflag FLAG_HIDE_KECLEON_ROUTE120_5
 	return
 
 Route119_EventScript_1A0652:: @ 81A0652
-	setflag 987
+	setflag FLAG_HIDE_KECLEON_ROUTE120_6
 	return
 
 Route119_EventScript_1A0656:: @ 81A0656
-	setflag 988
+	setflag FLAG_HIDE_KECLEON_ROUTE120_7
 	return
 
 Route119_EventScript_1A065A:: @ 81A065A
-	setflag 989
+	setflag FLAG_HIDE_KECLEON_ROUTE119_1
 	return
 
 Route119_EventScript_1A065E:: @ 81A065E
-	setflag 990
+	setflag FLAG_HIDE_KECLEON_ROUTE119_2
 	return
 
 FortreeCity_Movement_1A0662:: @ 81A0662
@@ -2545,12 +2546,12 @@ FallarborTown_House1_EventScript_1A067F:: @ 81A067F
 GraniteCave_StevensRoom_EventScript_1A067F:: @ 81A067F
 MtPyre_Summit_EventScript_1A067F:: @ 81A067F
 SlateportCity_OceanicMuseum_2F_EventScript_1A067F:: @ 81A067F
-	getitemname 0, 0x8004
+	bufferitemname 0, 0x8004
 	playfanfare 372
 	message FallarborTown_House1_Text_1A1498
 	waitmessage
 	waitfanfare
-	removeitem 0x8004, 1
+	takeitem 0x8004, 1
 	return
 
 EverGrandeCity_DrakesRoom_EventScript_1A0693:: @ 81A0693
@@ -2560,18 +2561,18 @@ EverGrandeCity_SidneysRoom_EventScript_1A0693:: @ 81A0693
 	applymovement 255, EverGrandeCity_SidneysRoom_Movement_1A0853
 	waitmovement 0
 	playse 8
-	setmaptile 6, 1, 836, 0
-	setmaptile 6, 2, 837, 0
-	setmaptile 0, 2, 734, 1
-	setmaptile 1, 2, 733, 1
-	setmaptile 2, 2, 734, 1
-	setmaptile 3, 2, 733, 1
-	setmaptile 4, 2, 734, 1
-	setmaptile 8, 2, 733, 1
-	setmaptile 9, 2, 734, 1
-	setmaptile 10, 2, 733, 1
-	setmaptile 11, 2, 734, 1
-	setmaptile 12, 2, 733, 1
+	setmetatile 6, 1, 836, 0
+	setmetatile 6, 2, 837, 0
+	setmetatile 0, 2, 734, 1
+	setmetatile 1, 2, 733, 1
+	setmetatile 2, 2, 734, 1
+	setmetatile 3, 2, 733, 1
+	setmetatile 4, 2, 734, 1
+	setmetatile 8, 2, 733, 1
+	setmetatile 9, 2, 734, 1
+	setmetatile 10, 2, 733, 1
+	setmetatile 11, 2, 734, 1
+	setmetatile 12, 2, 733, 1
 	special DrawWholeMapView
 	return
 
@@ -2582,12 +2583,12 @@ EverGrandeCity_SidneysRoom_EventScript_1A0710:: @ 81A0710
 	applymovement 255, EverGrandeCity_SidneysRoom_Movement_1A0847
 	waitmovement 0
 	playse 52
-	setmaptile 5, 12, 518, 1
-	setmaptile 6, 12, 518, 1
-	setmaptile 7, 12, 518, 1
-	setmaptile 5, 13, 526, 1
-	setmaptile 6, 13, 526, 1
-	setmaptile 7, 13, 526, 1
+	setmetatile 5, 12, 518, 1
+	setmetatile 6, 12, 518, 1
+	setmetatile 7, 12, 518, 1
+	setmetatile 5, 13, 526, 1
+	setmetatile 6, 13, 526, 1
+	setmetatile 7, 13, 526, 1
 	special DrawWholeMapView
 	return
 
@@ -2595,36 +2596,36 @@ EverGrandeCity_DrakesRoom_EventScript_1A0757:: @ 81A0757
 EverGrandeCity_GlaciasRoom_EventScript_1A0757:: @ 81A0757
 EverGrandeCity_PhoebesRoom_EventScript_1A0757:: @ 81A0757
 EverGrandeCity_SidneysRoom_EventScript_1A0757:: @ 81A0757
-	setmaptile 6, 1, 836, 0
-	setmaptile 6, 2, 837, 0
-	setmaptile 5, 12, 518, 1
-	setmaptile 6, 12, 518, 1
-	setmaptile 7, 12, 518, 1
-	setmaptile 5, 13, 526, 1
-	setmaptile 6, 13, 526, 1
-	setmaptile 7, 13, 526, 1
-	setmaptile 0, 2, 734, 1
-	setmaptile 1, 2, 733, 1
-	setmaptile 2, 2, 734, 1
-	setmaptile 3, 2, 733, 1
-	setmaptile 4, 2, 734, 1
-	setmaptile 8, 2, 733, 1
-	setmaptile 9, 2, 734, 1
-	setmaptile 10, 2, 733, 1
-	setmaptile 11, 2, 734, 1
-	setmaptile 12, 2, 733, 1
+	setmetatile 6, 1, 836, 0
+	setmetatile 6, 2, 837, 0
+	setmetatile 5, 12, 518, 1
+	setmetatile 6, 12, 518, 1
+	setmetatile 7, 12, 518, 1
+	setmetatile 5, 13, 526, 1
+	setmetatile 6, 13, 526, 1
+	setmetatile 7, 13, 526, 1
+	setmetatile 0, 2, 734, 1
+	setmetatile 1, 2, 733, 1
+	setmetatile 2, 2, 734, 1
+	setmetatile 3, 2, 733, 1
+	setmetatile 4, 2, 734, 1
+	setmetatile 8, 2, 733, 1
+	setmetatile 9, 2, 734, 1
+	setmetatile 10, 2, 733, 1
+	setmetatile 11, 2, 734, 1
+	setmetatile 12, 2, 733, 1
 	return
 
 EverGrandeCity_DrakesRoom_EventScript_1A07FA:: @ 81A07FA
 EverGrandeCity_GlaciasRoom_EventScript_1A07FA:: @ 81A07FA
 EverGrandeCity_PhoebesRoom_EventScript_1A07FA:: @ 81A07FA
 EverGrandeCity_SidneysRoom_EventScript_1A07FA:: @ 81A07FA
-	setmaptile 5, 12, 518, 1
-	setmaptile 6, 12, 518, 1
-	setmaptile 7, 12, 518, 1
-	setmaptile 5, 13, 526, 1
-	setmaptile 6, 13, 526, 1
-	setmaptile 7, 13, 526, 1
+	setmetatile 5, 12, 518, 1
+	setmetatile 6, 12, 518, 1
+	setmetatile 7, 12, 518, 1
+	setmetatile 5, 13, 526, 1
+	setmetatile 6, 13, 526, 1
+	setmetatile 7, 13, 526, 1
 	return
 
 SlateportCity_Movement_1A0831:: @ 81A0831
@@ -3270,7 +3271,7 @@ gUnknown_081A14B8:: @ 81A14B8
 EventScript_1A14CA::
 	message UnknownString_81A1141
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	special sub_8081924
 	waitstate
 	fadescreen 1
@@ -3608,9 +3609,9 @@ gUnknown_081A2C51:: @ 81A2C51
 	special sub_80BB63C
 	compare RESULT, 1
 	goto_if_eq EventScript_1A2E45
-	checkpokemove MOVE_SECRET_POWER
-	setfieldeffect 0, RESULT
-	getmovename 1, MOVE_SECRET_POWER
+	checkpartymove MOVE_SECRET_POWER
+	setfieldeffectargument 0, RESULT
+	buffermovename 1, MOVE_SECRET_POWER
 	compare 0x8007, 1
 	goto_if_eq EventScript_1A2CB0
 	compare 0x8007, 2
@@ -3629,7 +3630,7 @@ EventScript_1A2CB0:
 	lockall
 	compare RESULT, 6
 	goto_if_eq EventScript_1A2CF1
-	getpartypokename 0, RESULT
+	bufferpartymonnick 0, RESULT
 	msgbox UnknownString_8198F34, 5
 	compare RESULT, 0
 	goto_if_eq EventScript_1A2F3A
@@ -3660,7 +3661,7 @@ EventScript_1A2D08:
 	lockall
 	compare RESULT, 6
 	goto_if_eq EventScript_1A2D49
-	getpartypokename 0, RESULT
+	bufferpartymonnick 0, RESULT
 	msgbox UnknownString_81A197B, 5
 	compare RESULT, 0
 	goto_if_eq EventScript_1A2F3A
@@ -3691,7 +3692,7 @@ EventScript_1A2D60:
 	lockall
 	compare RESULT, 6
 	goto_if_eq EventScript_1A2DA1
-	getpartypokename 0, RESULT
+	bufferpartymonnick 0, RESULT
 	msgbox UnknownString_81A1A4B, 5
 	compare RESULT, 0
 	goto_if_eq EventScript_1A2F3A
@@ -3722,7 +3723,7 @@ EventScript_1A2DB8:
 	closemessage
 	playse 9
 	setvar 0x4097, 0
-	setflag 173
+	setflag FLAG_DECORATION_1
 	special sub_80BB8CC
 	special sub_80BBAF0
 	setvar 0x8004, 0
@@ -3746,7 +3747,7 @@ SecretBase_RedCave1_EventScript_1A2DDE:: @ 81A2DDE
 
 SecretBase_RedCave1_EventScript_1A2E08:: @ 81A2E08
 	closemessage
-	setflag 96
+	setflag FLAG_RECEIVED_SECRET_POWER
 	special sub_80BBC78
 	waitstate
 	end
@@ -3763,24 +3764,24 @@ gUnknown_081A2E14:: @ 81A2E14
 	special sub_80BC114
 	compare RESULT, 0
 	goto_if_eq EventScript_1A2E38
-	clearflag 173
+	clearflag FLAG_DECORATION_1
 	special sub_80BBAF0
 	setvar 0x4089, 0
 	waitstate
 	end
 
 EventScript_1A2E38:
-	setflag 173
+	setflag FLAG_DECORATION_1
 	special sub_80BBAF0
 	setvar 0x4089, 0
 	waitstate
 	end
 
 EventScript_1A2E45:
-	checkpokemove MOVE_SECRET_POWER
+	checkpartymove MOVE_SECRET_POWER
 	compare RESULT, 6
 	goto_if_eq EventScript_1A2EF7
-	setfieldeffect 0, RESULT
+	setfieldeffectargument 0, RESULT
 	setorcopyvar 0x8004, RESULT
 	lockall
 	special GetSecretBaseNearbyMapName
@@ -3797,8 +3798,8 @@ EventScript_1A2E45:
 	msgbox UnknownString_81A3CC9, 5
 	compare RESULT, 0
 	goto_if_eq EventScript_1A2F3A
-	getpartypokename 0, 0x8004
-	getmovename 1, MOVE_SECRET_POWER
+	bufferpartymonnick 0, 0x8004
+	buffermovename 1, MOVE_SECRET_POWER
 	msgbox UsedCutRockSmashText, 4
 	closemessage
 	closemessage
@@ -3840,20 +3841,20 @@ EventScript_1A2F3A::
 LittlerootTown_BrendansHouse_2F_EventScript_1A2F3D:: @ 81A2F3D
 LittlerootTown_MaysHouse_2F_EventScript_1A2F3D:: @ 81A2F3D
 SecretBase_RedCave1_EventScript_1A2F3D:: @ 81A2F3D
-	setflag 174
-	setflag 175
-	setflag 176
-	setflag 177
-	setflag 178
-	setflag 179
-	setflag 180
-	setflag 181
-	setflag 182
-	setflag 183
-	setflag 184
-	setflag 185
-	setflag 186
-	setflag 187
+	setflag FLAG_DECORATION_2
+	setflag FLAG_DECORATION_3
+	setflag FLAG_DECORATION_4
+	setflag FLAG_DECORATION_5
+	setflag FLAG_DECORATION_6
+	setflag FLAG_DECORATION_7
+	setflag FLAG_DECORATION_8
+	setflag FLAG_DECORATION_9
+	setflag FLAG_DECORATION_10
+	setflag FLAG_DECORATION_11
+	setflag FLAG_DECORATION_12
+	setflag FLAG_DECORATION_13
+	setflag FLAG_DECORATION_14
+	setflag FLAG_DECORATION_15
 	return
 
 LittlerootTown_BrendansHouse_2F_EventScript_1A2F68:: @ 81A2F68
@@ -3942,7 +3943,7 @@ SecretBase_YellowCave4_EventScript_1A2FC0:: @ 81A2FC0
 	end
 
 SecretBase_RedCave1_EventScript_1A3032:: @ 81A3032
-	checkflag 2052
+	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if 0, SecretBase_RedCave1_EventScript_1A3086
 	compare RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A30A5
@@ -3977,7 +3978,7 @@ SecretBase_RedCave1_EventScript_1A30A5:: @ 81A30A5
 	end
 
 SecretBase_RedCave1_EventScript_1A30AE:: @ 81A30AE
-	checkflag 2052
+	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if 0, SecretBase_RedCave1_EventScript_1A3102
 	compare RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3121
@@ -4012,7 +4013,7 @@ SecretBase_RedCave1_EventScript_1A3121:: @ 81A3121
 	end
 
 SecretBase_RedCave1_EventScript_1A312A:: @ 81A312A
-	checkflag 2052
+	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if 0, SecretBase_RedCave1_EventScript_1A317E
 	compare RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A319D
@@ -4047,7 +4048,7 @@ SecretBase_RedCave1_EventScript_1A319D:: @ 81A319D
 	end
 
 SecretBase_RedCave1_EventScript_1A31A6:: @ 81A31A6
-	checkflag 2052
+	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if 0, SecretBase_RedCave1_EventScript_1A31FA
 	compare RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3219
@@ -4082,7 +4083,7 @@ SecretBase_RedCave1_EventScript_1A3219:: @ 81A3219
 	end
 
 SecretBase_RedCave1_EventScript_1A3222:: @ 81A3222
-	checkflag 2052
+	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if 0, SecretBase_RedCave1_EventScript_1A3276
 	compare RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3295
@@ -4117,7 +4118,7 @@ SecretBase_RedCave1_EventScript_1A3295:: @ 81A3295
 	end
 
 SecretBase_RedCave1_EventScript_1A329E:: @ 81A329E
-	checkflag 2052
+	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if 0, SecretBase_RedCave1_EventScript_1A32F2
 	compare RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3311
@@ -4152,7 +4153,7 @@ SecretBase_RedCave1_EventScript_1A3311:: @ 81A3311
 	end
 
 SecretBase_RedCave1_EventScript_1A331A:: @ 81A331A
-	checkflag 2052
+	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if 0, SecretBase_RedCave1_EventScript_1A336E
 	compare RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A338D
@@ -4187,7 +4188,7 @@ SecretBase_RedCave1_EventScript_1A338D:: @ 81A338D
 	end
 
 SecretBase_RedCave1_EventScript_1A3396:: @ 81A3396
-	checkflag 2052
+	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if 0, SecretBase_RedCave1_EventScript_1A33EA
 	compare RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3409
@@ -4222,7 +4223,7 @@ SecretBase_RedCave1_EventScript_1A3409:: @ 81A3409
 	end
 
 SecretBase_RedCave1_EventScript_1A3412:: @ 81A3412
-	checkflag 2052
+	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if 0, SecretBase_RedCave1_EventScript_1A3466
 	compare RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3485
@@ -4257,7 +4258,7 @@ SecretBase_RedCave1_EventScript_1A3485:: @ 81A3485
 	end
 
 SecretBase_RedCave1_EventScript_1A348E:: @ 81A348E
-	checkflag 2052
+	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if 0, SecretBase_RedCave1_EventScript_1A34E2
 	compare RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3501
@@ -4438,9 +4439,9 @@ SlateportCity_OceanicMuseum_1F_EventScript_1ADEE0:: @ 81ADEE0
 	compare RESULT, 1
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_1ADF96
 	copyvar 0x8009, 0x8006
-	checkflag 105
+	checkflag FLAG_OCEANIC_MUSEUM_MET_REPORTER
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_1ADF25
-	setflag 105
+	setflag FLAG_OCEANIC_MUSEUM_MET_REPORTER
 	msgbox SlateportCity_OceanicMuseum_1F_Text_1A927F, 5
 	compare RESULT, 1
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_1ADF44
@@ -4567,7 +4568,7 @@ SlateportCity_ContestLobby_EventScript_1AE0B6:: @ 81AE0B6
 VerdanturfTown_ContestLobby_EventScript_1AE0B6:: @ 81AE0B6
 	lock
 	faceplayer
-	checkflag 2
+	checkflag FLAG_TEMP_2
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1AE17E
 	setvar 0x8005, 6
 	special sub_80BF2C4
@@ -4613,7 +4614,7 @@ FallarborTown_ContestLobby_EventScript_1AE137:: @ 81AE137
 	compare RESULT, 0
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1AE12D
 	msgbox FallarborTown_ContestLobby_Text_1A7153, 4
-	setflag 2
+	setflag FLAG_TEMP_2
 	setvar 0x8005, 6
 	goto FallarborTown_ContestLobby_EventScript_1ADE46
 	end
@@ -4643,19 +4644,19 @@ VerdanturfTown_ContestLobby_EventScript_1AE188:: @ 81AE188
 	end
 
 FallarborTown_ContestLobby_EventScript_1AE1EE:: @ 81AE1EE
-	clearflag 800
+	clearflag FLAG_HIDE_CONTEST_REPORTER_FALLARBOR
 	return
 
 FallarborTown_ContestLobby_EventScript_1AE1F2:: @ 81AE1F2
-	clearflag 801
+	clearflag FLAG_HIDE_CONTEST_REPORTER_VERDANTURF
 	return
 
 FallarborTown_ContestLobby_EventScript_1AE1F6:: @ 81AE1F6
-	clearflag 803
+	clearflag FLAG_HIDE_CONTEST_REPORTER_SLATEPORT
 	return
 
 FallarborTown_ContestLobby_EventScript_1AE1FA:: @ 81AE1FA
-	clearflag 802
+	clearflag FLAG_HIDE_CONTEST_REPORTER_LILYCOVE
 	return
 
 FallarborTown_ContestLobby_EventScript_1AE1FE:: @ 81AE1FE
@@ -4664,7 +4665,7 @@ FallarborTown_ContestLobby_EventScript_1AE1FE:: @ 81AE1FE
 BattleTower_Lobby_EventScript_1AE1FF:: @ 81AE1FF
 	lock
 	faceplayer
-	checkflag 2
+	checkflag FLAG_TEMP_2
 	goto_if_eq BattleTower_Lobby_EventScript_1AE2E3
 	setvar 0x8005, 7
 	special sub_80BF2C4
@@ -4716,7 +4717,7 @@ BattleTower_Lobby_EventScript_1AE2B3:: @ 81AE2B3
 	compare RESULT, 0
 	goto_if_eq BattleTower_Lobby_EventScript_1AE2D9
 	msgbox BattleTower_Lobby_Text_1A7A6E, 4
-	setflag 2
+	setflag FLAG_TEMP_2
 	copyvar 0x8004, 0x8008
 	setvar 0x8005, 7
 	goto BattleTower_Lobby_EventScript_1ADE46
@@ -4739,11 +4740,11 @@ BattleTower_Lobby_EventScript_1AE2ED:: @ 81AE2ED
 	special sub_80BF2C4
 	compare RESULT, 1
 	goto_if_eq BattleTower_Lobby_EventScript_1AE30F
-	clearflag 918
+	clearflag FLAG_HIDE_REPORTER_BATTLE_TOWER
 	return
 
 BattleTower_Lobby_EventScript_1AE30F:: @ 81AE30F
-	setflag 918
+	setflag FLAG_HIDE_REPORTER_BATTLE_TOWER
 	return
 
 	.include "data/scripts/gabby_and_ty.inc"
@@ -4772,8 +4773,8 @@ BattleTower_Lobby_EventScript_1AE30F:: @ 81AE30F
 	.include "data/text/magma_summit.inc"
 
 gUnknown_081B694A:: @ 81B694A
-	animdarklevel 1
-	setdarklevel 1
+	animateflash 1
+	setflashradius 1
 	end
 
 	.include "data/scripts/players_house.inc"
@@ -4927,7 +4928,7 @@ gUnknown_081C6C02:: @ 81C6C02
 @ 81C6C1D
 	lockall
 	braillemessage Underwater_SealedChamber_Braille_1C533D
-	waitbutton
+	waitbuttonpress
 	erasebox 0, 0, 29, 19
 	releaseall
 	end

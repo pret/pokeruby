@@ -70,7 +70,7 @@ LavaridgeTown_Gym_1F_EventScript_153740:: @ 8153740
 
 LavaridgeTown_Gym_1F_EventScript_153741:: @ 8153741
 	trainerbattle 1, OPPONENT_FLANNERY, 0, LavaridgeTown_Gym_1F_Text_176801, LavaridgeTown_Gym_1F_Text_176960, LavaridgeTown_Gym_1F_EventScript_153766
-	checkflag 168
+	checkflag FLAG_RECEIVED_TM50
 	goto_if 0, LavaridgeTown_Gym_1F_EventScript_1537A7
 	msgbox LavaridgeTown_Gym_1F_Text_176C4A, 4
 	release
@@ -81,24 +81,24 @@ LavaridgeTown_Gym_1F_EventScript_153766:: @ 8153766
 	waitmessage
 	call LavaridgeTown_Gym_1F_EventScript_1A02C5
 	msgbox LavaridgeTown_Gym_1F_Text_176A8C, 4
-	setflag 1213
-	setflag 2058
+	setflag FLAG_DEFEATED_LAVARIDGE_GYM
+	setflag FLAG_BADGE04_GET
 	addvar 0x4085, 1
 	compare 0x4085, 6
 	call_if 1, LavaridgeTown_Gym_1F_EventScript_1A00FB
 	setvar 0x8008, 4
 	call LavaridgeTown_Gym_1F_EventScript_1A01C0
-	setflag 806
+	setflag FLAG_HIDE_WALLY_WANDAS_HOUSE
 	setvar 0x4053, 1
 	goto LavaridgeTown_Gym_1F_EventScript_1537A7
 	end
 
 LavaridgeTown_Gym_1F_EventScript_1537A7:: @ 81537A7
-	giveitem ITEM_TM50
+	giveitem_std ITEM_TM50
 	compare RESULT, 0
 	goto_if_eq LavaridgeTown_Gym_1F_EventScript_1A029B
 	msgbox LavaridgeTown_Gym_1F_Text_176B8F, 4
-	setflag 168
+	setflag FLAG_RECEIVED_TM50
 	release
 	end
 
@@ -135,7 +135,7 @@ LavaridgeTown_Gym_1F_EventScript_15383E:: @ 815383E
 LavaridgeTown_Gym_1F_EventScript_153859:: @ 8153859
 	lock
 	faceplayer
-	checkflag 1213
+	checkflag FLAG_DEFEATED_LAVARIDGE_GYM
 	goto_if_eq LavaridgeTown_Gym_1F_EventScript_15386E
 	msgbox LavaridgeTown_Gym_1F_Text_176312, 4
 	release
@@ -148,14 +148,14 @@ LavaridgeTown_Gym_1F_EventScript_15386E:: @ 815386E
 
 LavaridgeTown_Gym_1F_EventScript_153878:: @ 8153878
 	lockall
-	checkflag 2058
+	checkflag FLAG_BADGE04_GET
 	goto_if_eq LavaridgeTown_Gym_1F_EventScript_153898
 	goto LavaridgeTown_Gym_1F_EventScript_1538A2
 	end
 
 LavaridgeTown_Gym_1F_EventScript_153888:: @ 8153888
 	lockall
-	checkflag 2058
+	checkflag FLAG_BADGE04_GET
 	goto_if_eq LavaridgeTown_Gym_1F_EventScript_153898
 	goto LavaridgeTown_Gym_1F_EventScript_1538A2
 	end

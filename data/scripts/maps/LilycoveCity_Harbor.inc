@@ -16,7 +16,7 @@ LilycoveCity_Harbor_EventScript_1598A2:: @ 81598A2
 	end
 
 LilycoveCity_Harbor_EventScript_1598BA:: @ 81598BA
-	checkflag 2052
+	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if_eq LilycoveCity_Harbor_EventScript_1598CD
 	msgbox LilycoveCity_Harbor_Text_18B306, 4
 	release
@@ -79,13 +79,13 @@ LilycoveCity_Harbor_EventScript_15998A:: @ 815998A
 	applymovement LAST_TALKED, LilycoveCity_Harbor_Movement_1A0841
 	waitmovement 0
 	delay 30
-	hideobject LAST_TALKED, 13, 10
+	hideobjectat LAST_TALKED, MAP_LILYCOVE_CITY_HARBOR
 	compare FACING, 2
 	call_if 1, LilycoveCity_Harbor_EventScript_1599D9
 	compare FACING, 4
 	call_if 1, LilycoveCity_Harbor_EventScript_1599CE
 	delay 30
-	hideobject 255, 0, 0
+	hideobjectat 255, MAP_PETALBURG_CITY
 	setvar 0x8004, 2
 	call LilycoveCity_Harbor_EventScript_1A040E
 	return
@@ -106,18 +106,18 @@ LilycoveCity_Harbor_EventScript_1599E4:: @ 81599E4
 	end
 
 LilycoveCity_Harbor_EventScript_1599EE:: @ 81599EE
-	checkflag 2052
+	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if 0, LilycoveCity_Harbor_EventScript_1598BA
-	checkflag 206
+	checkflag FLAG_ECOUNTERED_LATIAS_OR_LATIOS
 	goto_if_eq LilycoveCity_Harbor_EventScript_1598BA
-	checkflag 2131
+	checkflag FLAG_SYS_HAS_EON_TICKET
 	goto_if 0, LilycoveCity_Harbor_EventScript_1598BA
 	msgbox LilycoveCity_Harbor_Text_1C50F2, 4
 	closemessage
 	applymovement LAST_TALKED, LilycoveCity_Harbor_Movement_1A0841
 	waitmovement 0
 	delay 30
-	hideobject LAST_TALKED, 13, 10
+	hideobjectat LAST_TALKED, MAP_LILYCOVE_CITY_HARBOR
 	delay 60
 	addobject 4
 	delay 30
@@ -134,7 +134,7 @@ LilycoveCity_Harbor_EventScript_1599EE:: @ 81599EE
 	compare FACING, 4
 	call_if 1, LilycoveCity_Harbor_EventScript_1599CE
 	delay 30
-	hideobject 255, 0, 0
+	hideobjectat 255, MAP_PETALBURG_CITY
 	special ScrSpecial_HealPlayerParty
 	setvar 0x8004, 2
 	call LilycoveCity_Harbor_EventScript_1A040E
@@ -159,7 +159,7 @@ LilycoveCity_Harbor_Movement_159A89:: @ 8159A89
 LilycoveCity_Harbor_EventScript_159A8D:: @ 8159A8D
 	lock
 	faceplayer
-	checkflag 2052
+	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if_eq LilycoveCity_Harbor_EventScript_159AA2
 	msgbox LilycoveCity_Harbor_Text_18B504, 4
 	release

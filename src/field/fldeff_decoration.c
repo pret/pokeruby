@@ -344,21 +344,21 @@ void GetShieldToyTVDecorationInfo(void)
     case 822:
         ConvertIntToDecimalStringN(gStringVar1, 100, STR_CONV_MODE_LEFT_ALIGN, 3);
         StringCopy(gStringVar2, gSecretBaseText_GoldRank);
-        gScriptResult = 0;
+        gSpecialVar_Result = 0;
         break;
     case 734:
         ConvertIntToDecimalStringN(gStringVar1, 50, STR_CONV_MODE_LEFT_ALIGN, 2);
         StringCopy(gStringVar2, gSecretBaseText_SilverRank);
-        gScriptResult = 0;
+        gSpecialVar_Result = 0;
         break;
     case 756:
-        gScriptResult = 1;
+        gSpecialVar_Result = 1;
         break;
     case 757:
-        gScriptResult = 2;
+        gSpecialVar_Result = 2;
         break;
     case 758:
-        gScriptResult = 3;
+        gSpecialVar_Result = 3;
         break;
     }
 }

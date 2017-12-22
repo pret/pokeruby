@@ -762,7 +762,7 @@ u32 StrCpyDecodeBattle(const u8* src, u8* dst)
                 HANDLE_NICKNAME_STRING_CASE(BATTLE_STRUCT->scriptingActive, BATTLE_STRUCT->unk1605E)
                 break;
             case 35: // lanette pc
-                if (FlagGet(SYS_PC_LANETTE))
+                if (FlagGet(FLAG_SYS_PC_LANETTE))
                     toCpy = BattleText_Lanette;
                 else
                     toCpy = BattleText_Someone;

@@ -3695,7 +3695,7 @@ const u16 gRoute119WaterTileData[] =
 	0x5C, 0x8B, 0x12A,
 };
 
-extern u16 gScriptResult;
+extern u16 gSpecialVar_Result;
 extern u8 S_RepelWoreOff[];
 
 EWRAM_DATA static u8 sWildEncountersDisabled = 0;
@@ -4167,18 +4167,18 @@ void ScrSpecial_RockSmashWildEncounter(void)
 
         if (wildPokemonInfo == NULL)
         {
-            gScriptResult = 0;
+            gSpecialVar_Result = 0;
             return;
         }
         else if (DoWildEncounterTest(wildPokemonInfo->encounterRate, 1) == TRUE
          && GenerateWildMon(wildPokemonInfo, 2, TRUE) == TRUE)
         {
             BattleSetup_StartWildBattle();
-            gScriptResult = 1;
+            gSpecialVar_Result = 1;
             return;
         }
     }
-    gScriptResult = 0;
+    gSpecialVar_Result = 0;
     return;
 }
 
@@ -4353,9 +4353,9 @@ static bool8 IsWildLevelAllowedByRepel(u8 wildLevel)
 
 static void ApplyFluteEncounterRateMod(u32 *encRate)
 {
-    if (FlagGet(SYS_ENC_UP_ITEM) == TRUE)
+    if (FlagGet(FLAG_SYS_ENC_UP_ITEM) == TRUE)
         *encRate += *encRate / 2;
-    else if (FlagGet(SYS_ENC_DOWN_ITEM) == TRUE)
+    else if (FlagGet(FLAG_SYS_ENC_DOWN_ITEM) == TRUE)
         *encRate = *encRate / 2;
 }
 

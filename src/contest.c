@@ -206,8 +206,8 @@ struct UnknownContestStruct6
 #define shared19348_ (*(struct UnknownContestStruct8 *)(gSharedMem + 0x19348))
 
 extern struct MusicPlayerInfo gMPlay_SE1;
-extern u16 gScriptContestCategory;
-extern u16 gScriptContestRank;
+extern u16 gSpecialVar_ContestCategory;
+extern u16 gSpecialVar_ContestRank;
 extern u8 gBattleMonForms[];
 extern u8 gDisplayedStringBattle[];
 extern u16 gBattleTypeFlags;
@@ -2265,7 +2265,7 @@ u8 sub_80AE47C(struct Pokemon *pkmn)
         return 3;
     if (GetMonData(pkmn, MON_DATA_HP) == 0)
         return 4;
-    switch (gScriptContestCategory)
+    switch (gSpecialVar_ContestCategory)
     {
     case 0:
         ribbon = GetMonData(pkmn, MON_DATA_COOL_RIBBON);
@@ -2289,9 +2289,9 @@ u8 sub_80AE47C(struct Pokemon *pkmn)
     // Couldn't get this to match any other way.
     // Returns 2, 1, or 0 respectively if ribbon's rank is above, equal, or below
     // the current contest rank.
-    if (ribbon > gScriptContestRank)
+    if (ribbon > gSpecialVar_ContestRank)
         retVal = 2;
-    else if (ribbon >= gScriptContestRank)
+    else if (ribbon >= gSpecialVar_ContestRank)
         retVal = 1;
     else
         retVal = 0;
@@ -4822,7 +4822,7 @@ void unref_sub_80B19D0(void)
 
 s8 Contest_GetMoveExcitement(u16 move)
 {
-    return gContestExcitementTable[gScriptContestCategory][gContestMoves[move].contestCategory];
+    return gContestExcitementTable[gSpecialVar_ContestCategory][gContestMoves[move].contestCategory];
 }
 
 u8 sub_80B1A2C(void)
@@ -5477,7 +5477,7 @@ bool8 sub_80B2A7C(u8 a)
     }
     if (a == 0xFF && i != gContestPlayerMonIndex)
         return FALSE;
-    switch (gScriptContestCategory)
+    switch (gSpecialVar_ContestCategory)
     {
     case 0:
         r7 += 0;
@@ -5505,7 +5505,7 @@ bool8 sub_80B2A7C(u8 a)
         StringCopy(gSaveBlock1.contestWinners[r4].nickname, gContestMons[i].nickname);
         StringCopy(gSaveBlock1.contestWinners[r4].trainerName, gContestMons[i].trainerName);
         if (a != 0xFF)
-            gSaveBlock1.contestWinners[r4].contestCategory = gScriptContestCategory;
+            gSaveBlock1.contestWinners[r4].contestCategory = gSpecialVar_ContestCategory;
         else
             gSaveBlock1.contestWinners[r4].contestCategory = r7;
     }
@@ -5548,7 +5548,7 @@ u8 sub_80B2C4C(u8 a, u8 b)
         }
         return 5;
     default:
-        switch (gScriptContestCategory)
+        switch (gSpecialVar_ContestCategory)
         {
         case 0:
             return 8;

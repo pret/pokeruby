@@ -79,9 +79,9 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	setvar RESULT, 0
 	.endif
 	playse 209
-	setfieldeffect 0, 16
-	setfieldeffect 1, 42
-	setfieldeffect 2, 0
+	setfieldeffectargument 0, 16
+	setfieldeffectargument 1, 42
+	setfieldeffectargument 2, 0
 	dofieldeffect 54
 	waitfieldeffect 54
 	.ifdef SAPPHIRE
@@ -192,24 +192,24 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	msgbox SeafloorCavern_Room9_Text_1B4ECA, 4
 	.endif
 	setvar 0x407b, 1
-	clearflag 855
-	clearflag 856
-	clearflag 816
-	clearflag 973
+	clearflag FLAG_HIDE_CAVE_OF_ORIGIN_ENTRANCE_WOMAN_1
+	clearflag FLAG_HIDE_CAVE_OF_ORIGIN_ENTRANCE_WOMAN_2
+	clearflag FLAG_HIDE_WALLACE_SOOTOPOLIS
+	clearflag FLAG_HIDE_STEVEN_SOOTOPOLIS
 	setvar 0x405e, 1
-	clearflag 944
-	clearflag 945
-	setflag 2090
-	setflag 854
-	setflag 129
-	setflag 967
+	clearflag FLAG_HIDE_EVIL_LEADER_ROUTE128
+	clearflag FLAG_HIDE_OTHER_LEADER_ROUTE128
+	setflag FLAG_SYS_WEATHER_CTRL
+	setflag FLAG_HIDE_SOOTOPOLIS_RESIDENTS
+	setflag FLAG_LEGEND_ESCAPED_SEAFLOOR_CAVERN
+	setflag FLAG_HIDE_STEVEN_STEVENS_HOUSE
 	setvar 0x40c6, 1
 	setvar 0x40a2, 1
-	setflag 828
-	setflag 829
-	setflag 831
-	setflag 859
-	setflag 946
+	setflag FLAG_HIDE_EVIL_LEADER_SEAFLOOR_CAVERN
+	setflag FLAG_HIDE_OTHER_LEADER_SEAFLOOR_CAVERN
+	setflag FLAG_HIDE_OTHER_TEAM_GRUNTS_SEAFLOOR_CAVERN
+	setflag FLAG_HIDE_AWAKENED_MON_SEAFLOOR_CAVERN
+	setflag FLAG_HIDE_EVIL_TEAM_GRUNTS_SEAFLOOR_CAVERN
 	warp MAP_ROUTE128, 255, 38, 22
 	waitstate
 	releaseall

@@ -84,7 +84,7 @@ dont_write_lyrics:
 SpeakToHipster:
 	lock
 	faceplayer
-	setflag 2054
+	setflag FLAG_SYS_HIPSTER_MEET
 	msgbox gTextHipster_TheyCallMeTheHipster, 4
 	special ScrSpecial_GetHipsterSpokenFlag
 	compare RESULT, FALSE
@@ -233,7 +233,7 @@ choose_story:
 	setvar 0x8008, 1
 	special ScrSpecial_StorytellerDisplayStory
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	specialvar RESULT, ScrSpecial_StorytellerUpdateStat
 	compare RESULT, FALSE
 	goto_if_eq no_stat_update

@@ -4,7 +4,7 @@ PacifidlogTown_House3_MapScripts:: @ 815429D
 PacifidlogTown_House3_EventScript_15429E:: @ 815429E
 	lock
 	faceplayer
-	checkflag 154
+	checkflag FLAG_PACIFIDLOG_NPC_TRADE_COMPLETED
 	goto_if_eq PacifidlogTown_House3_EventScript_154338
 	setvar 0x8008, 2
 	copyvar 0x8004, 0x8008
@@ -28,9 +28,9 @@ PacifidlogTown_House3_EventScript_15429E:: @ 815429E
 	special sub_804DB68
 	special sub_804E174
 	waitstate
-	getspeciesname 0, 0x8009
+	bufferspeciesname 0, 0x8009
 	msgbox PacifidlogTown_House3_Text_1794C4, 4
-	setflag 154
+	setflag FLAG_PACIFIDLOG_NPC_TRADE_COMPLETED
 	release
 	end
 
@@ -40,7 +40,7 @@ PacifidlogTown_House3_EventScript_154320:: @ 8154320
 	end
 
 PacifidlogTown_House3_EventScript_15432A:: @ 815432A
-	getspeciesname 0, 0x8009
+	bufferspeciesname 0, 0x8009
 	msgbox PacifidlogTown_House3_Text_1794DF, 4
 	release
 	end

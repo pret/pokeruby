@@ -5,7 +5,7 @@ FortreeCity_MapObjects:: @ 8380020
 	object_event 4, MAP_OBJ_GFX_BOY_1, 0, 11, 0, 14, 0, 4, 1, 0, 0, 0, 0, 0, 0, FortreeCity_EventScript_14C98F, 0, 0, 0
 	object_event 5, MAP_OBJ_GFX_OLD_MAN_2, 0, 8, 0, 10, 0, 3, 1, 0, 0, 0, 0, 0, 0, FortreeCity_EventScript_14C986, 0, 0, 0
 	object_event 6, MAP_OBJ_GFX_BOY_5, 0, 9, 0, 16, 0, 3, 8, 0, 0, 0, 0, 0, 0, FortreeCity_EventScript_14C998, 0, 0, 0
-	object_event 7, MAP_OBJ_GFX_KECLEON_1, 0, 25, 0, 8, 0, 3, 76, 17, 0, 0, 0, 0, 0, FortreeCity_EventScript_14C9B3, 969, 0, 0
+	object_event 7, MAP_OBJ_GFX_KECLEON_1, 0, 25, 0, 8, 0, 3, 76, 17, 0, 0, 0, 0, 0, FortreeCity_EventScript_14C9B3, FLAG_HIDE_KECLEON_FORTREE, 0, 0
 
 FortreeCity_MapWarps:: @ 83800C8
 	warp_def 5, 6, 0, 0, MAP_FORTREE_CITY_POKEMON_CENTER_1F

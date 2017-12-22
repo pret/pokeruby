@@ -3,8 +3,8 @@ Route109_MapScripts:: @ 814F4D2
 
 Route109_EventScript_14F4D3:: @ 814F4D3
 	call Route109_EventScript_1A010C
-	setobjectpriority 2, 0, 24, 0
-	setobjectpriority 255, 0, 24, 0
+	setobjectpriority 2, MAP_ROUTE109, 0
+	setobjectpriority 255, MAP_ROUTE109, 0
 	applymovement 2, Route109_Movement_14F67B
 	waitmovement 0
 	removeobject 2
@@ -33,30 +33,30 @@ Route109_EventScript_14F538:: @ 814F538
 	end
 
 Route109_EventScript_14F548:: @ 814F548
-	hideobject 255, 0, 24
+	hideobjectat 255, MAP_ROUTE109
 	call Route109_EventScript_1A02E7
 	applymovement 1, Route109_Movement_14F5BF
 	applymovement 255, Route109_Movement_14F5BF
 	waitmovement 0
 	call Route109_EventScript_1A02EF
-	showobject 255, 0, 11
+	showobjectat 255, MAP_DEWFORD_TOWN
 	applymovement 255, Route109_Movement_14F670
 	waitmovement 0
 	addobject 4
-	clearflag 743
+	clearflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD
 	setobjectxyperm 2, 12, 8
 	addobject 2
-	setobjectpriority 2, 0, 11, 0
+	setobjectpriority 2, MAP_DEWFORD_TOWN, 0
 	applymovement 2, Route109_Movement_14F67D
 	waitmovement 0
-	clearflag 740
-	setflag 744
-	hideobject 1, 0, 24
+	clearflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE109
+	hideobjectat 1, MAP_ROUTE109
 	msgbox Route109_Text_16B4B5, 4
 	closemessage
 	copyvar 0x4096, 0x8008
-	resetobjectpriority 255, 0, 24
-	resetobjectpriority 2, 0, 11
+	resetobjectpriority 255, MAP_ROUTE109
+	resetobjectpriority 2, MAP_DEWFORD_TOWN
 	moveobjectoffscreen 2
 	release
 	end
@@ -271,7 +271,7 @@ Route109_Movement_14F67D:: @ 814F67D
 Route109_EventScript_14F680:: @ 814F680
 	lock
 	faceplayer
-	checkflag 149
+	checkflag FLAG_DELIVERED_DEVON_GOODS
 	goto_if 0, Route109_EventScript_14F691
 	goto Route109_EventScript_14F6AF
 	end
@@ -328,16 +328,16 @@ Route109_EventScript_14F725:: @ 814F725
 	lock
 	faceplayer
 	special GetPlayerBigGuyGirlString
-	checkflag 280
+	checkflag FLAG_RECEIVED_SOFT_SAND
 	goto_if_eq Route109_EventScript_14F762
 	msgbox Route109_Text_16E433, 4
-	giveitem ITEM_SOFT_SAND
+	giveitem_std ITEM_SOFT_SAND
 	compare RESULT, 0
 	goto_if_eq Route109_EventScript_1A029B
 	closemessage
 	applymovement LAST_TALKED, Route109_Movement_1A083D
 	waitmovement 0
-	setflag 280
+	setflag FLAG_RECEIVED_SOFT_SAND
 	release
 	end
 
@@ -360,9 +360,9 @@ Route109_EventScript_14F788:: @ 814F788
 	lock
 	faceplayer
 	waitse
-	playpokecry SPECIES_ZIGZAGOON, 0
+	playmoncry SPECIES_ZIGZAGOON, 0
 	msgbox Route109_Text_16E5CA, 4
-	waitpokecry
+	waitmoncry
 	release
 	end
 

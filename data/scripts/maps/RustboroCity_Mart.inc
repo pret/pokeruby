@@ -6,9 +6,9 @@ RustboroCity_Mart_EventScript_157BD4:: @ 8157BD4
 	faceplayer
 	message RustboroCity_Mart_Text_1A0BE4
 	waitmessage
-	checkflag 287
+	checkflag FLAG_MET_DEVON_EMPLOYEE
 	goto_if 0, RustboroCity_Mart_EventScript_157BEF
-	checkflag 287
+	checkflag FLAG_MET_DEVON_EMPLOYEE
 	goto_if_eq RustboroCity_Mart_EventScript_157C18
 	end
 

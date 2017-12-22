@@ -3,7 +3,7 @@ MauvilleCity_Gym_MapScripts:: @ 8156450
 	.byte 0
 
 MauvilleCity_Gym_MapScript1_156456:: @ 8156456
-	checkflag 1208
+	checkflag FLAG_DEFEATED_MAUVILLE_GYM
 	goto_if_eq MauvilleCity_Gym_EventScript_1565A7
 	switch 0x4093
 	case 0, MauvilleCity_Gym_EventScript_156491
@@ -13,36 +13,36 @@ MauvilleCity_Gym_MapScript1_156456:: @ 8156456
 	end
 
 MauvilleCity_Gym_EventScript_156491:: @ 8156491
-	checkflag 99
+	checkflag FLAG_MAUVILLE_GYM_BARRIERS_STATE
 	goto_if_eq MauvilleCity_Gym_EventScript_15649B
 	end
 
 MauvilleCity_Gym_EventScript_15649B:: @ 815649B
-	setmaptile 4, 7, 560, 0
-	setmaptile 4, 8, 568, 0
-	setmaptile 5, 7, 561, 0
-	setmaptile 5, 8, 569, 0
-	setmaptile 3, 8, 578, 1
-	setmaptile 3, 9, 538, 0
-	setmaptile 3, 10, 593, 0
-	setmaptile 1, 10, 546, 0
-	setmaptile 1, 11, 554, 1
-	setmaptile 2, 10, 547, 0
-	setmaptile 2, 11, 555, 1
-	setmaptile 4, 10, 546, 0
-	setmaptile 4, 11, 554, 1
-	setmaptile 5, 10, 547, 0
-	setmaptile 5, 11, 555, 1
-	setmaptile 6, 11, 578, 1
-	setmaptile 6, 12, 538, 0
-	setmaptile 6, 13, 593, 0
-	setmaptile 3, 11, 577, 1
-	setmaptile 3, 12, 585, 1
-	setmaptile 3, 13, 592, 1
-	setmaptile 4, 13, 560, 0
-	setmaptile 4, 14, 568, 0
-	setmaptile 5, 13, 561, 0
-	setmaptile 5, 14, 569, 0
+	setmetatile 4, 7, 560, 0
+	setmetatile 4, 8, 568, 0
+	setmetatile 5, 7, 561, 0
+	setmetatile 5, 8, 569, 0
+	setmetatile 3, 8, 578, 1
+	setmetatile 3, 9, 538, 0
+	setmetatile 3, 10, 593, 0
+	setmetatile 1, 10, 546, 0
+	setmetatile 1, 11, 554, 1
+	setmetatile 2, 10, 547, 0
+	setmetatile 2, 11, 555, 1
+	setmetatile 4, 10, 546, 0
+	setmetatile 4, 11, 554, 1
+	setmetatile 5, 10, 547, 0
+	setmetatile 5, 11, 555, 1
+	setmetatile 6, 11, 578, 1
+	setmetatile 6, 12, 538, 0
+	setmetatile 6, 13, 593, 0
+	setmetatile 3, 11, 577, 1
+	setmetatile 3, 12, 585, 1
+	setmetatile 3, 13, 592, 1
+	setmetatile 4, 13, 560, 0
+	setmetatile 4, 14, 568, 0
+	setmetatile 5, 13, 561, 0
+	setmetatile 5, 14, 569, 0
 	end
 
 MauvilleCity_Gym_EventScript_15657D:: @ 815657D
@@ -69,7 +69,7 @@ MauvilleCity_Gym_EventScript_1565A7:: @ 81565A7
 
 MauvilleCity_Gym_EventScript_1565AB:: @ 81565AB
 	trainerbattle 1, OPPONENT_WATTSON, 0, MauvilleCity_Gym_Text_180C32, MauvilleCity_Gym_Text_180D64, MauvilleCity_Gym_EventScript_1565DB
-	checkflag 167
+	checkflag FLAG_RECEIVED_TM34
 	goto_if 0, MauvilleCity_Gym_EventScript_15661D
 	compare 0x40ba, 2
 	goto_if_eq MauvilleCity_Gym_EventScript_156641
@@ -82,8 +82,8 @@ MauvilleCity_Gym_EventScript_1565DB:: @ 81565DB
 	waitmessage
 	call MauvilleCity_Gym_EventScript_1A02C5
 	msgbox MauvilleCity_Gym_Text_180DDA, 4
-	setflag 1208
-	setflag 2057
+	setflag FLAG_DEFEATED_MAUVILLE_GYM
+	setflag FLAG_BADGE03_GET
 	addvar 0x4085, 1
 	compare 0x4085, 6
 	call_if 1, MauvilleCity_Gym_EventScript_1A00FB
@@ -96,11 +96,11 @@ MauvilleCity_Gym_EventScript_1565DB:: @ 81565DB
 	end
 
 MauvilleCity_Gym_EventScript_15661D:: @ 815661D
-	giveitem ITEM_TM34
+	giveitem_std ITEM_TM34
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_Gym_EventScript_1A029B
 	msgbox MauvilleCity_Gym_Text_180E76, 4
-	setflag 167
+	setflag FLAG_RECEIVED_TM34
 	release
 	end
 
@@ -111,7 +111,7 @@ MauvilleCity_Gym_EventScript_156641:: @ 8156641
 
 MauvilleCity_Gym_EventScript_15664B:: @ 815664B
 	lockall
-	checkflag 1208
+	checkflag FLAG_DEFEATED_MAUVILLE_GYM
 	goto_if_eq MauvilleCity_Gym_EventScript_1566DA
 	compare 0x4093, 1
 	goto_if_eq MauvilleCity_Gym_EventScript_1566DA
@@ -122,7 +122,7 @@ MauvilleCity_Gym_EventScript_15664B:: @ 815664B
 
 MauvilleCity_Gym_EventScript_156670:: @ 8156670
 	lockall
-	checkflag 1208
+	checkflag FLAG_DEFEATED_MAUVILLE_GYM
 	goto_if_eq MauvilleCity_Gym_EventScript_1566DA
 	compare 0x4093, 2
 	goto_if_eq MauvilleCity_Gym_EventScript_1566DA
@@ -133,7 +133,7 @@ MauvilleCity_Gym_EventScript_156670:: @ 8156670
 
 MauvilleCity_Gym_EventScript_156695:: @ 8156695
 	lockall
-	checkflag 1208
+	checkflag FLAG_DEFEATED_MAUVILLE_GYM
 	goto_if_eq MauvilleCity_Gym_EventScript_1566DA
 	compare 0x4093, 3
 	goto_if_eq MauvilleCity_Gym_EventScript_1566DA
@@ -147,9 +147,9 @@ MauvilleCity_Gym_EventScript_1566BA:: @ 81566BA
 	special MauvilleGymSpecial1
 	special DrawWholeMapView
 	playse 44
-	checkflag 99
+	checkflag FLAG_MAUVILLE_GYM_BARRIERS_STATE
 	goto_if_eq MauvilleCity_Gym_EventScript_1566E1
-	checkflag 99
+	checkflag FLAG_MAUVILLE_GYM_BARRIERS_STATE
 	goto_if 0, MauvilleCity_Gym_EventScript_1566DC
 	releaseall
 	end
@@ -159,12 +159,12 @@ MauvilleCity_Gym_EventScript_1566DA:: @ 81566DA
 	end
 
 MauvilleCity_Gym_EventScript_1566DC:: @ 81566DC
-	setflag 99
+	setflag FLAG_MAUVILLE_GYM_BARRIERS_STATE
 	releaseall
 	end
 
 MauvilleCity_Gym_EventScript_1566E1:: @ 81566E1
-	clearflag 99
+	clearflag FLAG_MAUVILLE_GYM_BARRIERS_STATE
 	releaseall
 	end
 
@@ -191,7 +191,7 @@ MauvilleCity_Gym_EventScript_15672B:: @ 815672B
 MauvilleCity_Gym_EventScript_156742:: @ 8156742
 	lock
 	faceplayer
-	checkflag 1208
+	checkflag FLAG_DEFEATED_MAUVILLE_GYM
 	goto_if_eq MauvilleCity_Gym_EventScript_156757
 	msgbox MauvilleCity_Gym_Text_180815, 4
 	release
@@ -204,14 +204,14 @@ MauvilleCity_Gym_EventScript_156757:: @ 8156757
 
 MauvilleCity_Gym_EventScript_156761:: @ 8156761
 	lockall
-	checkflag 2057
+	checkflag FLAG_BADGE03_GET
 	goto_if_eq MauvilleCity_Gym_EventScript_156781
 	goto MauvilleCity_Gym_EventScript_15678B
 	end
 
 MauvilleCity_Gym_EventScript_156771:: @ 8156771
 	lockall
-	checkflag 2057
+	checkflag FLAG_BADGE03_GET
 	goto_if_eq MauvilleCity_Gym_EventScript_156781
 	goto MauvilleCity_Gym_EventScript_15678B
 	end

@@ -11,7 +11,7 @@ LinkContestRoom1_MapObjects:: @ 839149C
 	object_event 10, 249, 0, 10, 0, 2, 0, 3, 8, 0, 0, 0, 0, 0, 0, 0x0, 0, 0, 0
 	object_event 11, 250, 0, 12, 0, 5, 0, 3, 9, 0, 0, 0, 0, 0, 0, 0x0, 0, 0, 0
 	object_event 12, 245, 0, 2, 0, 5, 0, 3, 10, 0, 0, 0, 0, 0, 0, 0x0, 0, 0, 0
-	object_event 13, MAP_OBJ_GFX_ITEM_BALL, 0, 7, 0, 5, 0, 3, 1, 0, 0, 0, 0, 0, 0, 0x0, 86, 0, 0
+	object_event 13, MAP_OBJ_GFX_ITEM_BALL, 0, 7, 0, 5, 0, 3, 1, 0, 0, 0, 0, 0, 0, 0x0, FLAG_LINK_CONTEST_ROOM_POKEBALL, 0, 0
 	object_event 14, 243, 0, 10, 0, 7, 0, 3, 7, 0, 0, 0, 0, 0, 0, 0x0, 0, 0, 0
 	object_event 15, MAP_OBJ_GFX_ARTIST, 0, 12, 0, 6, 0, 3, 9, 0, 0, 0, 0, 0, 0, 0x0, 0, 0, 0
 

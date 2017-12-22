@@ -4,9 +4,9 @@ SealedChamber_InnerRoom_MapScripts:: @ 815F1E7
 SealedChamber_InnerRoom_EventScript_15F1E8:: @ 815F1E8
 	lockall
 	braillemessage SealedChamber_InnerRoom_Braille_1C53C1
-	waitbutton
+	waitbuttonpress
 	erasebox 0, 0, 29, 19
-	checkflag 228
+	checkflag FLAG_REGI_DOORS_OPENED
 	goto_if_eq SealedChamber_InnerRoom_EventScript_15F247
 	specialvar RESULT, CheckRelicanthWailord
 	compare RESULT, 0
@@ -31,7 +31,7 @@ SealedChamber_InnerRoom_EventScript_15F1E8:: @ 815F1E8
 	msgbox SealedChamber_InnerRoom_Text_1A138B, 4
 	closemessage
 	fadeinbgm 0
-	setflag 228
+	setflag FLAG_REGI_DOORS_OPENED
 	releaseall
 	end
 
@@ -42,7 +42,7 @@ SealedChamber_InnerRoom_EventScript_15F247:: @ 815F247
 SealedChamber_InnerRoom_EventScript_15F249:: @ 815F249
 	lockall
 	braillemessage SealedChamber_InnerRoom_Braille_1C53F2
-	waitbutton
+	waitbuttonpress
 	erasebox 0, 0, 29, 19
 	releaseall
 	end
@@ -50,7 +50,7 @@ SealedChamber_InnerRoom_EventScript_15F249:: @ 815F249
 SealedChamber_InnerRoom_EventScript_15F257:: @ 815F257
 	lockall
 	braillemessage SealedChamber_InnerRoom_Braille_1C5414
-	waitbutton
+	waitbuttonpress
 	erasebox 0, 0, 29, 19
 	releaseall
 	end
@@ -58,7 +58,7 @@ SealedChamber_InnerRoom_EventScript_15F257:: @ 815F257
 SealedChamber_InnerRoom_EventScript_15F265:: @ 815F265
 	lockall
 	braillemessage SealedChamber_InnerRoom_Braille_1C5435
-	waitbutton
+	waitbuttonpress
 	erasebox 0, 0, 29, 19
 	releaseall
 	end
@@ -66,7 +66,7 @@ SealedChamber_InnerRoom_EventScript_15F265:: @ 815F265
 SealedChamber_InnerRoom_EventScript_15F273:: @ 815F273
 	lockall
 	braillemessage SealedChamber_InnerRoom_Braille_1C545C
-	waitbutton
+	waitbuttonpress
 	erasebox 0, 0, 29, 19
 	releaseall
 	end
@@ -74,7 +74,7 @@ SealedChamber_InnerRoom_EventScript_15F273:: @ 815F273
 SealedChamber_InnerRoom_EventScript_15F281:: @ 815F281
 	lockall
 	braillemessage SealedChamber_InnerRoom_Braille_1C5470
-	waitbutton
+	waitbuttonpress
 	erasebox 0, 0, 29, 19
 	releaseall
 	end
@@ -82,7 +82,7 @@ SealedChamber_InnerRoom_EventScript_15F281:: @ 815F281
 SealedChamber_InnerRoom_EventScript_15F28F:: @ 815F28F
 	lockall
 	braillemessage SealedChamber_InnerRoom_Braille_1C549B
-	waitbutton
+	waitbuttonpress
 	erasebox 0, 0, 29, 19
 	releaseall
 	end

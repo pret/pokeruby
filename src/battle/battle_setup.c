@@ -33,7 +33,7 @@
 #include "text.h"
 #include "trainer.h"
 
-extern u16 gScriptResult;
+extern u16 gSpecialVar_Result;
 
 extern void (*gFieldCallback)(void);
 
@@ -48,7 +48,7 @@ EWRAM_DATA static u8 *sTrainerBattleScriptRetAddr = NULL;
 EWRAM_DATA static u8 *sTrainerBattleEndScript = NULL;
 
 extern u16 gBattleTypeFlags;
-extern u16 gScriptLastTalked;
+extern u16 gSpecialVar_LastTalked;
 extern u8 gBattleOutcome;
 
 extern struct MapObject gMapObjects[];
@@ -441,7 +441,17 @@ const struct TrainerEyeTrainer gTrainerEyeTrainers[] =
     },
 };
 
-static const u16 sBadgeFlags[] = {BADGE01_GET, BADGE02_GET, BADGE03_GET, BADGE04_GET, BADGE05_GET, BADGE06_GET, BADGE07_GET, BADGE08_GET};
+static const u16 sBadgeFlags[] =
+{
+    FLAG_BADGE01_GET,
+    FLAG_BADGE02_GET,
+    FLAG_BADGE03_GET,
+    FLAG_BADGE04_GET,
+    FLAG_BADGE05_GET,
+    FLAG_BADGE06_GET,
+    FLAG_BADGE07_GET,
+    FLAG_BADGE08_GET,
+};
 
 static void DoStandardWildBattle(void);
 static void DoSafariBattle(void);
@@ -848,8 +858,8 @@ static void CB2_GiveStarter(void)
 {
     u16 starterPoke;
 
-    *GetVarPointer(0x4023) = gScriptResult;
-    starterPoke = GetStarterPokemon(gScriptResult);
+    *GetVarPointer(0x4023) = gSpecialVar_Result;
+    starterPoke = GetStarterPokemon(gSpecialVar_Result);
     ScriptGiveMon(starterPoke, 5, 0, 0, 0, 0);
     ResetTasks();
     sub_80408BC();
@@ -970,7 +980,7 @@ static void battle_80801F0(void)
 {
     if (sTrainerMapObjectLocalId)
     {
-        gScriptLastTalked = sTrainerMapObjectLocalId;
+        gSpecialVar_LastTalked = sTrainerMapObjectLocalId;
         gSelectedMapObject = GetFieldObjectIdByLocalIdAndMap(sTrainerMapObjectLocalId, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
     }
 }
@@ -1019,7 +1029,7 @@ u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
 void TrainerWantsBattle(u8 trainerMapObjId, u8 *trainerScript)
 {
     gSelectedMapObject = trainerMapObjId;
-    gScriptLastTalked = gMapObjects[trainerMapObjId].localId;
+    gSpecialVar_LastTalked = gMapObjects[trainerMapObjId].localId;
     BattleSetup_ConfigureTrainerBattle(trainerScript + 1);
     ScriptContext1_SetupScript(gUnknown_0819F80B);
     ScriptContext2_Enable();

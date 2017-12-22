@@ -51,13 +51,6 @@ struct Struct_gUnknown_0837F578 {
     u8 field_1;
 };
 
-struct OamMatrix {
-    s16 a;
-    s16 b;
-    s16 c;
-    s16 d;
-};
-
 struct Struct_2017810 {
     u8 filler_0[6];
     u8 field_6;
@@ -68,12 +61,6 @@ struct Color {
     u16 r:5;
     u16 g:5;
     u16 b:5;
-};
-
-struct Struct_sub_8078914 {
-    u8 *field_0;
-    u8 *field_4;
-    u8 field_8;
 };
 
 struct BGCnt {
@@ -1435,7 +1422,7 @@ void sub_80798AC(u8 task) {
     sub_80797EC(&gTasks[task]);
 }
 
-void sub_80798F4(struct Task *task, u8 a2, void *a3) {
+void sub_80798F4(struct Task *task, u8 a2, const void *a3) {
     task->data[7] = 0;
     task->data[8] = 0;
     task->data[9] = 0;
@@ -1564,7 +1551,7 @@ u16 sub_8079B10(u8 sprite) {
     return 0x40;
 }
 
-void sub_8079BF4(s16 *bottom, s16 *top, void *ptr) {
+void sub_8079BF4(s16 *bottom, s16 *top, const void *ptr) {
     *bottom = ((intptr_t) ptr) & 0xffff;
     *top = (((intptr_t) ptr) >> 16) & 0xffff;
 }

@@ -3,9 +3,9 @@ BattleTower_Outside_MapScripts:: @ 8160156
 	.byte 0
 
 BattleTower_Outside_MapScript1_16015C:: @ 816015C
-	setflag 2120
+	setflag FLAG_LANDMARK_BATTLE_TOWER
 	setvar 0x40bc, 0
-	setflag 918
+	setflag FLAG_HIDE_REPORTER_BATTLE_TOWER
 	end
 
 BattleTower_Outside_EventScript_160168:: @ 8160168
@@ -67,7 +67,7 @@ BattleTower_Outside_EventScript_160232:: @ 8160232
 	applymovement LAST_TALKED, BattleTower_Outside_Movement_1A0845
 	waitmovement 0
 	delay 30
-	hideobject 5, 26, 4
+	hideobjectat 5, MAP_BATTLE_TOWER_OUTSIDE
 	setvar 0x8004, 4
 	call BattleTower_Outside_EventScript_1A047C
 	return

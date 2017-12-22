@@ -47,8 +47,8 @@ MtPyre_Summit_EventScript_15D4E1:: @ 815D4E1
 	removeobject 4
 	removeobject 5
 	removeobject 6
-	setflag 916
-	setflag 917
+	setflag FLAG_HIDE_LEADER_MT_PYRE_SUMMIT
+	setflag FLAG_HIDE_GRUNTS_MT_PYRE_SUMMIT
 	fadescreen 0
 	delay 20
 	call MtPyre_Summit_EventScript_15D57A
@@ -63,16 +63,16 @@ MtPyre_Summit_EventScript_15D4E1:: @ 815D4E1
 	.else
 	msgbox MtPyre_Summit_Text_1B5FE6, 4
 	.endif
-	giveitem ITEM_RED_OR_BLUE_ORB
-	setflag 212
+	giveitem_std ITEM_RED_OR_BLUE_ORB
+	setflag FLAG_RECEIVED_RED_OR_BLUE_ORB
 	releaseall
 	end
 
 MtPyre_Summit_EventScript_15D57A:: @ 815D57A
-	setflag 111
+	setflag FLAG_MT_PYRE_ORB_STOLEN
 	setvar 0x4058, 1
-	clearflag 840
-	clearflag 835
+	clearflag FLAG_HIDE_STERN_SLATEPORT
+	clearflag FLAG_HIDE_GABBY_AND_TY_SLATEPORT
 	setvar 0x40a0, 1
 	setvar 0x40b9, 1
 	return
@@ -169,11 +169,11 @@ MtPyre_Summit_EventScript_15D61A:: @ 815D61A
 MtPyre_Summit_EventScript_15D623:: @ 815D623
 	lock
 	faceplayer
-	checkflag 259
+	checkflag FLAG_RETURNED_RED_OR_BLUE_ORB
 	goto_if_eq MtPyre_Summit_EventScript_15D6C4
-	checkflag 113
+	checkflag FLAG_LEGENDARY_BATTLE_COMPLETED
 	goto_if_eq MtPyre_Summit_EventScript_15D64A
-	checkflag 129
+	checkflag FLAG_LEGEND_ESCAPED_SEAFLOOR_CAVERN
 	goto_if_eq MtPyre_Summit_EventScript_15D6BA
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B54BE, 4
@@ -210,7 +210,7 @@ MtPyre_Summit_EventScript_15D669:: @ 815D669
 	.else
 	msgbox MtPyre_Summit_Text_1B639C, 4
 	.endif
-	setflag 259
+	setflag FLAG_RETURNED_RED_OR_BLUE_ORB
 	release
 	end
 

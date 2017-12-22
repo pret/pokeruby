@@ -13,7 +13,7 @@ LilycoveCity_ContestLobby_MapScript2_158877:: @ 8158877
 	.2byte 0
 
 LilycoveCity_ContestLobby_EventScript_158889:: @ 8158889
-	checkflag 775
+	checkflag FLAG_HIDE_LILYCOVE_MUSEUM_CURATOR
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158898
 	setvar 0x4099, 0
 	end
@@ -97,23 +97,23 @@ LilycoveCity_ContestLobby_EventScript_158994:: @ 8158994
 	return
 
 LilycoveCity_ContestLobby_EventScript_1589D6:: @ 81589D6
-	clearflag 776
+	clearflag FLAG_HIDE_LILYCOVE_MUSEUM_PAINTING_LADY
 	return
 
 LilycoveCity_ContestLobby_EventScript_1589DA:: @ 81589DA
-	clearflag 777
+	clearflag FLAG_HIDE_LILYCOVE_MUSEUM_PAINTING_GIRL
 	return
 
 LilycoveCity_ContestLobby_EventScript_1589DE:: @ 81589DE
-	clearflag 778
+	clearflag FLAG_HIDE_LILYCOVE_MUSEUM_PAINTING_MAN
 	return
 
 LilycoveCity_ContestLobby_EventScript_1589E2:: @ 81589E2
-	clearflag 779
+	clearflag FLAG_HIDE_LILYCOVE_MUSEUM_PAINTER
 	return
 
 LilycoveCity_ContestLobby_EventScript_1589E6:: @ 81589E6
-	clearflag 780
+	clearflag FLAG_HIDE_LILYCOVE_MUSEUM_VISITORS
 	return
 
 LilycoveCity_ContestLobby_EventScript_1589EA:: @ 81589EA
@@ -126,23 +126,23 @@ LilycoveCity_ContestLobby_EventScript_1589EA:: @ 81589EA
 	return
 
 LilycoveCity_ContestLobby_EventScript_158A27:: @ 8158A27
-	setflag 160
+	setflag FLAG_COOL_PAINTING_MADE
 	return
 
 LilycoveCity_ContestLobby_EventScript_158A2B:: @ 8158A2B
-	setflag 161
+	setflag FLAG_BEAUTY_PAINTING_MADE
 	return
 
 LilycoveCity_ContestLobby_EventScript_158A2F:: @ 8158A2F
-	setflag 162
+	setflag FLAG_CUTE_PAINTING_MADE
 	return
 
 LilycoveCity_ContestLobby_EventScript_158A33:: @ 8158A33
-	setflag 163
+	setflag FLAG_SMART_PAINTING_MADE
 	return
 
 LilycoveCity_ContestLobby_EventScript_158A37:: @ 8158A37
-	setflag 164
+	setflag FLAG_TOUGH_PAINTING_MADE
 	return
 
 LilycoveCity_ContestLobby_Movement_158A3B:: @ 8158A3B
@@ -188,7 +188,7 @@ LilycoveCity_ContestLobby_Movement_158A52:: @ 8158A52
 	step_end
 
 LilycoveCity_ContestLobby_EventScript_158A5B:: @ 8158A5B
-	checkflag 775
+	checkflag FLAG_HIDE_LILYCOVE_MUSEUM_CURATOR
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158A6A
 	setvar 0x4099, 0
 	end
@@ -307,11 +307,11 @@ LilycoveCity_ContestLobby_EventScript_158B85:: @ 8158B85
 	checkitem ITEM_CONTEST_PASS, 1
 	compare RESULT, 0
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158BBA
-	checkflag 2
+	checkflag FLAG_TEMP_2
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158BAE
 	message LilycoveCity_ContestLobby_Text_18848C
 	waitmessage
-	setflag 2
+	setflag FLAG_TEMP_2
 	goto LilycoveCity_ContestLobby_EventScript_158BF0
 	end
 
@@ -334,7 +334,7 @@ LilycoveCity_ContestLobby_EventScript_158BC4:: @ 8158BC4
 	erasebox 0, 0, 15, 9
 	compare RESULT, 0
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158C35
-	setflag 3
+	setflag FLAG_TEMP_3
 	return
 
 LilycoveCity_ContestLobby_EventScript_158BF0:: @ 8158BF0
@@ -354,13 +354,13 @@ LilycoveCity_ContestLobby_EventScript_158C27:: @ 8158C27
 LilycoveCity_ContestLobby_EventScript_158C35:: @ 8158C35
 	msgbox LilycoveCity_ContestLobby_Text_188559, 4
 	releaseall
-	clearflag 3
+	clearflag FLAG_TEMP_3
 	end
 
 LilycoveCity_ContestLobby_EventScript_158C42:: @ 8158C42
 	msgbox LilycoveCity_ContestLobby_Text_188703, 4
 	setvar CONTEST_RANK, 0
-	choosecontestpkmn
+	choosecontestmon
 	compare 0x8004, 255
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158CEA
 	special sub_80C43F4
@@ -402,7 +402,7 @@ LilycoveCity_ContestLobby_EventScript_158CC0:: @ 8158CC0
 	end
 
 LilycoveCity_ContestLobby_EventScript_158CEA:: @ 8158CEA
-	checkflag 3
+	checkflag FLAG_TEMP_3
 	call_if 0, LilycoveCity_ContestLobby_EventScript_158BC4
 	message LilycoveCity_ContestLobby_Text_1886DC
 	waitmessage
@@ -445,7 +445,7 @@ LilycoveCity_ContestLobby_EventScript_158D90:: @ 8158D90
 	msgbox LilycoveCity_ContestLobby_Text_18878D, 4
 	closemessage
 	releaseall
-	clearflag 3
+	clearflag FLAG_TEMP_3
 	end
 
 LilycoveCity_ContestLobby_EventScript_158DA1:: @ 8158DA1
@@ -453,7 +453,7 @@ LilycoveCity_ContestLobby_EventScript_158DA1:: @ 8158DA1
 	msgbox LilycoveCity_ContestLobby_Text_1887F4, 4
 	closemessage
 	releaseall
-	clearflag 3
+	clearflag FLAG_TEMP_3
 	end
 
 LilycoveCity_ContestLobby_EventScript_158DB2:: @ 8158DB2
@@ -461,7 +461,7 @@ LilycoveCity_ContestLobby_EventScript_158DB2:: @ 8158DB2
 	msgbox LilycoveCity_ContestLobby_Text_18881F, 4
 	closemessage
 	releaseall
-	clearflag 3
+	clearflag FLAG_TEMP_3
 	end
 
 LilycoveCity_ContestLobby_EventScript_158DC3:: @ 8158DC3
@@ -472,7 +472,7 @@ LilycoveCity_ContestLobby_EventScript_158DC3:: @ 8158DC3
 LilycoveCity_ContestLobby_EventScript_158DD1:: @ 8158DD1
 	special sub_80C496C
 	addvar 0x8004, 1
-	getnumberstring 1, 32772
+	buffernumberstring 1, 32772
 	messageautoscroll LilycoveCity_ContestLobby_Text_188845
 	waitmessage
 	addvar 0x8004, 65535
@@ -497,14 +497,14 @@ LilycoveCity_ContestLobby_EventScript_158E0B:: @ 8158E0B
 	applymovement 2, LilycoveCity_ContestLobby_Movement_158E9C
 	waitmovement 0
 	playse 71
-	setmaptile 9, 2, 545, 1
-	setmaptile 9, 3, 609, 1
+	setmetatile 9, 2, 545, 1
+	setmetatile 9, 3, 609, 1
 	special DrawWholeMapView
 	applymovement 2, LilycoveCity_ContestLobby_Movement_158EA0
 	waitmovement 0
 	playse 71
-	setmaptile 9, 2, 721, 1
-	setmaptile 9, 3, 729, 1
+	setmetatile 9, 2, 721, 1
+	setmetatile 9, 3, 729, 1
 	special DrawWholeMapView
 	delay 20
 	applymovement 2, LilycoveCity_ContestLobby_Movement_158EAE
@@ -583,13 +583,13 @@ LilycoveCity_ContestLobby_EventScript_158EB0:: @ 8158EB0
 	end
 
 LilycoveCity_ContestLobby_EventScript_158EE8:: @ 8158EE8
-	setflag 775
+	setflag FLAG_HIDE_LILYCOVE_MUSEUM_CURATOR
 	copyvar 0x4094, 0x1
-	additem ITEM_CONTEST_PASS, 1
+	giveitem ITEM_CONTEST_PASS, 1
 	setvar 0x800b, 8
 	setvar CONTEST_RANK, 3
 	setvar 0x4099, 1
-	setflag 2107
+	setflag FLAG_SYS_RIBBON_GET
 	end
 
 LilycoveCity_ContestLobby_EventScript_158F08:: @ 8158F08
@@ -636,14 +636,14 @@ LilycoveCity_ContestLobby_EventScript_158F86:: @ 8158F86
 	applymovement 1, LilycoveCity_ContestLobby_Movement_15900B
 	waitmovement 0
 	playse 71
-	setmaptile 4, 2, 545, 1
-	setmaptile 4, 3, 609, 1
+	setmetatile 4, 2, 545, 1
+	setmetatile 4, 3, 609, 1
 	special DrawWholeMapView
 	applymovement 1, LilycoveCity_ContestLobby_Movement_15900F
 	waitmovement 0
 	playse 71
-	setmaptile 4, 2, 721, 1
-	setmaptile 4, 3, 729, 1
+	setmetatile 4, 2, 721, 1
+	setmetatile 4, 3, 729, 1
 	special DrawWholeMapView
 	delay 20
 	applymovement 1, LilycoveCity_ContestLobby_Movement_15901C
@@ -707,7 +707,7 @@ LilycoveCity_ContestLobby_EventScript_15901E:: @ 815901E
 	end
 
 LilycoveCity_ContestLobby_EventScript_159027:: @ 8159027
-	checkflag 150
+	checkflag FLAG_RECEIVED_CONTEST_PASS
 	goto_if 0, LilycoveCity_ContestLobby_EventScript_159039
 	msgbox LilycoveCity_ContestLobby_Text_188DDA, 2
 	end
@@ -765,7 +765,7 @@ LilycoveCity_ContestLobby_EventScript_15908D:: @ 815908D
 SlateportCity_ContestLobby_EventScript_15908D:: @ 815908D
 	lockall
 	special ShowBerryBlenderRecordWindow
-	waitbutton
+	waitbuttonpress
 	erasebox 0, 0, 29, 19
 	releaseall
 	end

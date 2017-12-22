@@ -1,14 +1,14 @@
 LilycoveCity_LilycoveMuseum_1F_MapObjects:: @ 8389564
 	object_event 1, MAP_OBJ_GFX_BEAUTY, 0, 5, 0, 12, 0, 3, 10, 0, 0, 0, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_15841C, 0, 0, 0
-	object_event 2, MAP_OBJ_GFX_GENTLEMAN, 0, 16, 0, 2, 0, 3, 8, 0, 0, 0, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_158425, 775, 0, 0
+	object_event 2, MAP_OBJ_GFX_GENTLEMAN, 0, 16, 0, 2, 0, 3, 8, 0, 0, 0, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_158425, FLAG_HIDE_LILYCOVE_MUSEUM_CURATOR, 0, 0
 	object_event 3, MAP_OBJ_GFX_SCHOOL_KID_M, 0, 13, 0, 7, 0, 3, 10, 0, 0, 0, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_158558, 0, 0, 0
 	object_event 4, MAP_OBJ_GFX_ARTIST, 0, 13, 0, 10, 0, 3, 5, 2, 0, 0, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_158561, 0, 0, 0
 	object_event 5, MAP_OBJ_GFX_LITTLE_BOY_1, 0, 2, 0, 8, 0, 3, 7, 0, 0, 0, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_15856A, 0, 0, 0
 	object_event 6, MAP_OBJ_GFX_WOMAN_5, 0, 3, 0, 8, 0, 3, 7, 0, 0, 0, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_158573, 0, 0, 0
-	object_event 7, MAP_OBJ_GFX_WOMAN_3, 0, 11, 0, 3, 0, 3, 2, 17, 0, 0, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_15857C, 776, 0, 0
-	object_event 8, MAP_OBJ_GFX_ARTIST, 0, 19, 0, 3, 0, 3, 7, 0, 0, 0, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_15858E, 779, 0, 0
-	object_event 9, MAP_OBJ_GFX_FAT_MAN, 0, 2, 0, 2, 0, 3, 2, 34, 0, 0, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_1585A3, 780, 0, 0
-	object_event 10, MAP_OBJ_GFX_PSYCHIC_M, 0, 6, 0, 2, 0, 3, 2, 17, 0, 0, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_158585, 778, 0, 0
+	object_event 7, MAP_OBJ_GFX_WOMAN_3, 0, 11, 0, 3, 0, 3, 2, 17, 0, 0, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_15857C, FLAG_HIDE_LILYCOVE_MUSEUM_PAINTING_LADY, 0, 0
+	object_event 8, MAP_OBJ_GFX_ARTIST, 0, 19, 0, 3, 0, 3, 7, 0, 0, 0, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_15858E, FLAG_HIDE_LILYCOVE_MUSEUM_PAINTER, 0, 0
+	object_event 9, MAP_OBJ_GFX_FAT_MAN, 0, 2, 0, 2, 0, 3, 2, 34, 0, 0, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_1585A3, FLAG_HIDE_LILYCOVE_MUSEUM_VISITORS, 0, 0
+	object_event 10, MAP_OBJ_GFX_PSYCHIC_M, 0, 6, 0, 2, 0, 3, 2, 17, 0, 0, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_158585, FLAG_HIDE_LILYCOVE_MUSEUM_PAINTING_MAN, 0, 0
 
 LilycoveCity_LilycoveMuseum_1F_MapWarps:: @ 8389654
 	warp_def 9, 13, 0, 3, MAP_LILYCOVE_CITY

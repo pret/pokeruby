@@ -916,9 +916,9 @@ static u16 sub_80FB758(u16 mapSectionId)
         return FlagGet(FLAG_VISITED_EVER_GRANDE_CITY) ? 2 : 3;
 
     case MAPSEC_BATTLE_TOWER:
-        return FlagGet(FLAG_UNLOCK_BATTLE_TOWER) ? 4 : 0;
+        return FlagGet(FLAG_LANDMARK_BATTLE_TOWER) ? 4 : 0;
     case MAPSEC_SOUTHERN_ISLAND:
-        return FlagGet(FLAG_UNLOCK_SOUTHERN_ISLAND) ? 1 : 0;
+        return FlagGet(FLAG_LANDMARK_SOUTHERN_ISLAND) ? 1 : 0;
     default:
         return 1;
     }
@@ -1422,7 +1422,7 @@ static const u8 *const sEverGrandeCityAreaNames[] = {OtherText_PokeLeague, Other
 
 static const struct UnknownStruct4 sUnknown_083E79C0[1] =
 {
-    {sEverGrandeCityAreaNames, MAPSEC_EVER_GRANDE_CITY, SYS_POKEMON_LEAGUE_FLY},
+    {sEverGrandeCityAreaNames, MAPSEC_EVER_GRANDE_CITY, FLAG_SYS_POKEMON_LEAGUE_FLY},
 };
 
 // XXX: what is this?
@@ -1822,7 +1822,7 @@ static void sub_80FC69C(void)
                 sub_8053538((gSaveBlock2.playerGender == MALE) ? 12 : 13);
                 break;
             case MAPSEC_EVER_GRANDE_CITY:
-                sub_8053538((FlagGet(0x854) && ewram0_3.regionMap.everGrandeCityArea == 0) ? 20 : 11);
+                sub_8053538((FlagGet(FLAG_SYS_POKEMON_LEAGUE_FLY) && ewram0_3.regionMap.everGrandeCityArea == 0) ? 20 : 11);
                 break;
             default:
                 if (sUnknown_083E7920[ewram0_3.regionMap.mapSectionId][2] != 0)

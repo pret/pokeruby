@@ -3,7 +3,7 @@ FallarborTown_PokemonCenter_1F_MapScripts:: @ 8153AF3
 	.byte 0
 
 FallarborTown_PokemonCenter_1F_MapScript1_153AF9:: @ 8153AF9
-	sethealplace 17
+	setrespawn 17
 	call FallarborTown_PokemonCenter_1F_EventScript_19FD1B
 	end
 
@@ -11,7 +11,7 @@ FallarborTown_PokemonCenter_1F_EventScript_153B02:: @ 8153B02
 	setvar 0x800b, 1
 	call FallarborTown_PokemonCenter_1F_EventScript_19FD5B
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	release
 	end
 
@@ -48,7 +48,7 @@ FallarborTown_PokemonCenter_1F_EventScript_153B59:: @ 8153B59
 FallarborTown_PokemonCenter_1F_EventScript_153B69:: @ 8153B69
 	playse 18
 	removeobject 4
-	clearflag 870
+	clearflag FLAG_HIDE_LANETTE
 	release
 	end
 
