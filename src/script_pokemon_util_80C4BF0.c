@@ -144,7 +144,7 @@ u8 sub_80C4D50(void)
     int i;
 
     for (i = 0; i < 5; i++)
-        if (gSaveBlock1.contestWinners[i + 8].species != 0)
+        if (gSaveBlock1.museumPortraits[i].species != 0)
             retVar++;
 
     return retVar;

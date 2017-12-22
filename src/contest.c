@@ -324,6 +324,7 @@ extern const u8 gUnknownText_UnknownFormatting3[];
 extern const u8 gUnknown_083CC59C[];
 extern const u8 gUnknown_083CC5A2[];
 extern const u16 gUnknown_083CC5A4[];
+extern const struct ContestWinner gUnknown_083CC5D0[];
 extern const u8 gUnknownText_MissedTurn[];
 extern const u8 gUnknownText_LinkStandbyAndWinner[];
 extern void (*const gContestEffectFuncs[])(void);
@@ -5535,7 +5536,6 @@ bool8 sub_80B2A7C(u8 a)
     }
     if (a == 0xFF && i != gContestPlayerMonIndex)
         return FALSE;
-    //_080B2AD0
     switch (gScriptContestCategory)
     {
     case 0:
@@ -5554,7 +5554,6 @@ bool8 sub_80B2A7C(u8 a)
         r7 += 12;
         break;
     }
-    //_080B2B16
     if (a != 0xFE)
     {
         u8 r4 = sub_80B2C4C(a, 1);
@@ -5569,7 +5568,6 @@ bool8 sub_80B2A7C(u8 a)
         else
             gSaveBlock1.contestWinners[r4].contestCategory = r7;
     }
-    //_080B2BC4
     else
     {
         shared15DE0.personality = gContestMons[i].personality;
@@ -5583,4 +5581,53 @@ bool8 sub_80B2A7C(u8 a)
         shared15DE0.contestCategory = r7;
     }
     return TRUE;
+}
+
+u8 sub_80B2C4C(u8 a, u8 b)
+{
+    s32 i;
+    
+    switch (a)
+    {
+    case 0:
+    case 1:
+        return a;
+    case 2:
+        if (b != 0)
+        {
+            for (i = 4; i >= 3; i--)
+                memcpy(&gSaveBlock1.contestWinners[i], &gSaveBlock1.contestWinners[i - 1], sizeof(struct ContestWinner));
+        }
+        return 2;
+    case 3:
+        if (b != 0)
+        {
+            for (i = 7; i >= 6; i--)
+                memcpy(&gSaveBlock1.contestWinners[i], &gSaveBlock1.contestWinners[i - 1], sizeof(struct ContestWinner));
+        }
+        return 5;
+    default:
+        switch (gScriptContestCategory)
+        {
+        case 0:
+            return 8;
+        case 1:
+            return 9;
+        case 2:
+            return 10;
+        case 3:
+            return 11;
+        case 4:
+        default:
+            return 12;
+        }
+    }
+}
+
+void sub_80B2D1C(void)
+{
+    s32 i;
+    
+    for (i = 0; i < 8; i++)
+        gSaveBlock1.contestWinners[i] = gUnknown_083CC5D0[i];
 }

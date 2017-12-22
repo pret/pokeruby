@@ -36,7 +36,7 @@ extern u16 gSaveFileStatus;
 
 extern u8 gUnknown_0819FA81[];
 
-static const struct ContestWinner sEmptyContestWinner =
+static const struct ContestWinner sEmptyMuseumPortrait =
 {
     .nickname = {EOS},
     .trainerName = {EOS},
@@ -86,7 +86,7 @@ void sub_8052DA8(void)
 
     sub_80B2D1C();
     for (i = 0; i < 5; i++)
-        gSaveBlock1.contestWinners[8 + i] = sEmptyContestWinner;
+        gSaveBlock1.museumPortraits[i] = sEmptyMuseumPortrait;
 }
 
 void ZeroBattleTowerData(void)
