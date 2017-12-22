@@ -48,6 +48,10 @@ extern const u8 gContest2Pal[];
 
 extern const u8 gMonFootprint_QuestionMark[];
 
+extern const u8 gContestApplauseGfx[];
+extern const u8 gContestApplauseMeterGfx[];
+extern const u16 gContestPal[];
+
 // data/graphics/pokemon/graphics.inc
 extern const u8 gMonFrontPic_Bulbasaur[];
 extern const u8 gMonPalette_Bulbasaur[];

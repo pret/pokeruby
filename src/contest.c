@@ -52,7 +52,7 @@ struct Shared19204
     /*0x19204*/ u8 unk19204;
     /*0x19205*/ u8 unk19205;
     /*0x19206*/ u8 unk19206[4];
-    /*0x1920A*/ u16 unk1920A_0:1;
+    /*0x1920A*/ u16 unk1920A_0:1;  // Task active flags?
                 u16 unk1920A_1:1;
                 u16 unk1920A_2:1;
                 u16 unk1920A_3:1;
@@ -70,14 +70,14 @@ struct Shared19204
     /*0x19213*/ u8 filler19213;
     /*0x19214*/ u8 unk19214;
     /*0x19215*/ u8 unk19215;
-    /*0x19216*/ u8 unk19216;
+    /*0x19216*/ u8 unk19216;    // sprite ID
     /*0x19217*/ s8 unk19217;
     /*0x19218*/ u8 unk19218[4];
     /*0x1921C*/ u32 unk1921C;
                 u16 unk19220[2][4];  // unknown length
                 u8 filler19230[0x48-0x30];
                 u8 unk19248[5][4];
-                u8 unk1925C;
+                u8 unk1925C;    // sprite ID
     /*0x1925D*/ u8 unk1925D;
     /*0x1925E*/ u8 unk1925E;
     /*0x1925F*/ u8 filler1925F;
@@ -86,29 +86,29 @@ struct Shared19204
 #define static_assert(expr) \
   typedef char ____[(expr) ? 1 : -1]
 
-static_assert(offsetof(struct Shared19204, filler19230) == 0x19230 - 0x19204);
-
+  // Appeal, maybe
 struct UnknownContestStruct1
 {
-    u16 unk0;
-    s16 unk2;  // s16?
+    s16 unk0;
+    s16 unk2;
     s16 unk4;
-    u16 unk6;  // move
-    u16 unk8;
+    u16 unk6;  // move 1
+    u16 unk8;  // move 2
     u8 unkA;   // contest category
     u8 unkB_0:2;
-    u8 unkB_2:5;
+    u8 unkB_2:2;
+    u8 unkB_4:3;
     u8 unkB_7:1;
     u8 unkC_0:1;
     u8 unkC_1:2;
     s8 unkD;
     u8 unkE;
     u8 unkF;
-    u8 unk10_0:1;  // *
-    u8 unk10_1:1;  // *
+    u8 unk10_0:1;
+    u8 unk10_1:1;
     u8 unk10_2:1;
     u8 unk10_3:1;
-    u8 unk10_4:2;  // *
+    u8 unk10_4:2;
     u8 unk10_6:2;
     u8 unk11_0:2;
     u8 unk11_2:1;
@@ -117,7 +117,7 @@ struct UnknownContestStruct1
     u8 unk11_5:1;
     u8 unk12;
     u8 unk13;
-    u8 unk14;  // s8?
+    u8 unk14;
     u8 unk15_0:1;
     u8 unk15_1:1;
     u8 unk15_2:1;
@@ -130,7 +130,7 @@ struct UnknownContestStruct1
     u8 unk18;
     u8 unk19;
     u8 unk1A;
-    u8 filler1B;
+    u8 unk1B;
 };
 
 struct UnknownContestStruct3
@@ -155,12 +155,23 @@ struct UnknownContestStruct4
 
 struct UnknownContestStruct5
 {
-    u16 bits_0:8;
-    u16 bits_8:1;
-    u16 bits_9:3;
-    u16 bits_C:4;
+    s8 bits_0;  // excitement?
+    u8 bits_8:1;
+    u8 bits_9:3;
+    u8 bits_C:4;
     s8 unk2;
     u8 filler3;
+};
+
+struct UnknownContestStruct7
+{
+    u8 unk0[4];
+    u16 unk4;
+    u16 unk6;
+    u8 filler8[0xD-8];
+    u8 unkD[4];
+    u8 unk11;
+    u8 filler12[2];
 };
 
 #if 0
@@ -178,13 +189,17 @@ struct Shared19260
 #endif
 
 #define shared15800 (gSharedMem + 0x15800)
+#define shared16800 (gSharedMem + 0x16800)
 #define shared18000 (*(struct Shared18000 *)(gSharedMem + 0x18000))
 #define shared19204 (*(struct Shared19204 *)(gSharedMem + 0x19204))
 //#define shared19260 (*(struct Shared19260 *)(gSharedMem + 0x19260))
 
+#define shared18004 ((u16 *)(gSharedMem + 0x18004))
+
 // These are separate structs because sub_80AC2CC requires that to match.
 #define shared19260_ ((struct UnknownContestStruct1 *)(gSharedMem + 0x19260))
 #define shared192D0 (gSharedMem + 0x192D0)
+#define shared192D0_ (*(struct UnknownContestStruct7 *)(gSharedMem + 0x192D0))
 #define shared192E4 (gSharedMem + 0x192E4)
 #define shared19328 (*(struct UnknownContestStruct5 *)(gSharedMem + 0x19328))
 #define shared19338 ((struct UnknownContestStruct4 *)(gSharedMem + 0x19338))
@@ -279,7 +294,14 @@ extern const u8 gUnknown_083CC0E3[];
 extern const u8 gUnknown_083CC103[];
 extern const u8 gUnknown_083CC14A[];
 extern const u8 gUnknown_083CC16E[];
+extern const u8 *const gUnknown_083CC188[];
+extern const u8 gUnknown_083CC280[];
+extern const u8 gUnknown_083CC288[];
+extern const u8 gUnknown_083CC290[];
+extern const u8 gUnknown_083CC299[];
+extern const u8 gUnknown_083CC2A3[];
 extern const u8 *const gUnknown_083CC2D8[];
+extern const u8 gUnknown_083CC2EC[];
 extern const u8 *const gUnknown_083CC330[];
 extern const u8 gUnknownText_UnknownFormatting2[];
 extern const u8 gUnknownText_UnknownFormatting3[];
@@ -288,7 +310,8 @@ extern const u8 gUnknown_083CC5A2[];
 extern const u16 gUnknown_083CC5A4[];
 extern const u8 gUnknownText_MissedTurn[];
 extern const u8 gUnknownText_LinkStandbyAndWinner[];
-
+extern void (*const gContestEffectFuncs[])(void);
+extern const s8 gContestExcitementTable[][5];
 
 void sub_80AB350(void);
 void sub_80AB5D4(u8);
@@ -380,7 +403,7 @@ void sub_80AFF60(struct Sprite *);
 void sub_80AFFE0(bool8);
 void sub_80B0034(void);
 void sub_80B00C8(void);
-void nullsub_18(int);
+void nullsub_18(s8);
 void sub_80B0238(struct Sprite *);
 void sub_80B0280(struct Sprite *);
 void sub_80B02A8(struct Sprite *);
@@ -406,14 +429,21 @@ void sub_80B1118(void);
 void sub_80B114C(u8);
 void sub_80B146C(u8, u8);
 void sub_80B159C(void);
-void sub_80B1710();
+void sub_80B1710(u8);
 void sub_80B1928(void);
 s8 contest_get_move_excitement(u16);
+u8 sub_80B1A2C(void);
+void c3_08130B10(u8);
 void sub_80B1B14(void);
+void sub_80B1B68(u8);
 void sub_80B1BDC(void);
-void sub_80B1CBC();
+void sub_80B1C34(u8);
+void sub_80B1CBC(s8);
+void sub_80B1CFC(u8);
 void sub_80B1DDC(void);
+void sub_80B1DFC(u8);
 void sub_80B1EA8(s8, s8);
+void sub_80B1F4C(u8);
 void sub_80B1FD0();
 void sub_80B20C4(void);
 u8 sub_80B214C(u8);
@@ -524,7 +554,8 @@ void sub_80AB398(void)
         shared19260_[i].unk13 = 0xFF;
         shared19260_[i].unk14 = 0xFF;
     }
-    memset(shared192D0, 0, 20 * sizeof(*shared192D0));
+    //memset(shared192D0, 0, 20 * sizeof(*shared192D0));
+    memset(&shared192D0_, 0, sizeof(shared192D0_));
     memset(shared192E4, 0, 0x44 * sizeof(*shared192E4));
     memset(&shared19328, 0, sizeof(shared19328));
     memset(shared19338, 0, 4 * sizeof(*shared19338));
@@ -1077,7 +1108,7 @@ void sub_80AC2CC(u8 taskId)
     {
     case 0:
         sub_80B0D7C();
-        for (r6 = 0; shared19204.unk19214 != shared192D0[r6]; r6++)
+        for (r6 = 0; shared19204.unk19214 != shared192D0_.unk0[r6]; r6++)
             ;
         shared19204.unk19215 = r6;
         r7 = shared19204.unk19215;
@@ -1492,7 +1523,7 @@ void sub_80AC2CC(u8 taskId)
             StringExpandPlaceholders(gStringVar4, gUnknown_083CC075);
             sub_8002EB0(&gMenuWindow, gStringVar4, 776, 1, 15);
             gTasks[taskId].data[10] = 0;
-            sub_80B1710();
+            sub_80B1710(0);
             gTasks[taskId].data[0] = 46;
         }
         else
@@ -2569,13 +2600,13 @@ void sub_80AEBEC(u16 a)
     FillWindowRect_DefaultPalette(&gUnknown_03004210, 0, 11, 31, 16, 34);
 
     category = gContestMoves[a].contestCategory;
-    if (category == 0)
+    if      (category == CONTEST_CATEGORY_COOL)
         categoryTile = 0x4040;
-    else if (category == 1)
+    else if (category == CONTEST_CATEGORY_BEAUTY)
         categoryTile = 0x4045;
-    else if (category == 2)
+    else if (category == CONTEST_CATEGORY_CUTE)
         categoryTile = 0x404A;
-    else if (category == 3)
+    else if (category == CONTEST_CATEGORY_SMART)
         categoryTile = 0x406A;
     else
         categoryTile = 0x408A;
@@ -3515,7 +3546,7 @@ void sub_80B00C8(void)
     shared19204.unk1925C = spriteId;
 }
 
-void nullsub_18(int unused)
+void nullsub_18(s8 unused)
 {
 }
 
@@ -4451,22 +4482,19 @@ void sub_80B0F28(u8 a)
 
     if (a == 0)
     {
-        for (i = 0; i < 4; i++)  //_080B0F9C
+        for (i = 0; i < 4; i++)
         {
             gUnknown_02038696[i] = i;
-            for (r4 = 0; r4 < i; r4++)  //_080B0FC4
+            for (r4 = 0; r4 < i; r4++)
             {
                 if (gUnknown_02038670[gUnknown_02038696[r4]] < gUnknown_02038670[i]
                  || (gUnknown_02038670[gUnknown_02038696[r4]] == gUnknown_02038670[i] && sp4[gUnknown_02038696[r4]] < sp4[i]))
                 {
-                    //_080B0FEC
                     for (r2 = i; r2 > r4; r2--)
                         gUnknown_02038696[r2] = gUnknown_02038696[r2 - 1];
-                    //_080B1004
                     gUnknown_02038696[r4] = i;
                     break;
                 }
-                //_080B1010
             }
             if (r4 == i)
                 gUnknown_02038696[i] = i;
@@ -4475,11 +4503,8 @@ void sub_80B0F28(u8 a)
         for (i = 0; i < 4; i++)
             gUnknown_02038696[sp0[i]] = i;
     }
-    //_080B1050
     else
     {
-        //u8 r2;
-
         memset(sp0, 0xFF, sizeof(sp0));
         for (i = 0; i < 4; i++)
         {
@@ -4491,14 +4516,12 @@ void sub_80B0F28(u8 a)
                 if (*ptr == 0xFF)
                 {
                     *ptr = i;
-                    //sp0[r2] = i;
                     gUnknown_02038696[i] = r2;
                     break;
                 }
                 r2++;
             }
         }
-        //_080B1098
         for (i = 0; i < 3; i++)
         {
             for (r4 = 3; r4 > i; r4--)
@@ -4512,8 +4535,548 @@ void sub_80B0F28(u8 a)
                     gUnknown_02038696[r4] = gUnknown_02038696[r4 - 1];
                     gUnknown_02038696[r4 - 1] = temp;
                 }
-                //_080B10F0
             }
         }
     }
+}
+
+void sub_80B1118(void)
+{
+    s32 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        //LoadPalette(shared18000.unk18004[5 + i], (gUnknown_02038696[i] + 5) * 16, 32);
+        LoadPalette(shared18004 + (i + 5) * 16, (gUnknown_02038696[i] + 5) * 16, 32);
+    }
+    sub_80AE514();
+}
+
+void sub_80B114C(u8 a)
+{
+    bool8 r8;
+    s32 i;
+
+    shared19260_[a].unk2 = 0;
+    shared19260_[a].unk0 = 0;
+    r8 = sub_80AF404(a);
+    if (r8)
+    {
+        u16 r0 = shared19260_[a].unk6;
+        u8 effect = gContestMoves[r0].effect;
+        u8 rnd;
+
+        shared19260_[a].unkA = gContestMoves[shared19260_[a].unk6].contestCategory;
+        if (shared19260_[a].unk6 == shared19260_[a].unk8 && shared19260_[a].unk6 != 0)
+        {
+            shared19260_[a].unk15_0 = 1;
+            shared19260_[a].unkB_4++;
+        }
+        else
+        {
+            shared19260_[a].unkB_4 = 0;
+        }
+        shared19260_[a].unk0 = gContestEffects[effect].appeal;
+        shared19260_[a].unk2 = gContestEffects[effect].appeal;
+        shared192D0_.unk4 = gContestEffects[effect].jam;
+        shared192D0_.unk6 = gContestEffects[effect].jam;
+        shared192D0_.unk11 = a;
+        for (i = 0; i < 4; i++)
+        {
+            shared19260_[i].unkE = 0;
+            shared192D0_.unkD[i] = 0;
+        }
+        if (shared19260_[a].unk15_4 && !AreMovesContestCombo(shared19260_[a].unk8, shared19260_[a].unk6))
+            shared19260_[a].unk15_4 = 0;
+        gContestEffectFuncs[effect]();
+        if (shared19260_[a].unk10_4 == 1)
+            shared19260_[a].unk2 += shared19260_[a].unkD - 10;
+        else if (shared19260_[a].unk11_5)
+            shared19260_[a].unk2 += shared19260_[a].unkD * 3;
+        else
+            shared19260_[a].unk2 += shared19260_[a].unkD;
+        shared19260_[a].unk16 = 0;
+        shared19260_[a].unk15_6 = 0;
+        if (sub_80B214C(a) != 0)
+        {
+            bool8 r2 = AreMovesContestCombo(shared19260_[a].unk8, shared19260_[a].unk6);
+
+            if (r2 && shared19260_[a].unk15_4)
+            {
+                shared19260_[a].unk16 = r2;
+                shared19260_[a].unk15_6 = 1;
+                shared19260_[a].unk15_4 = 0;
+                shared19260_[a].unk17 = shared19260_[a].unk0 * shared19260_[a].unk16;
+                shared19260_[a].unk15_3 = 1;
+            }
+            else
+            {
+                if (gContestMoves[shared19260_[a].unk6].comboStarterId != 0)
+                {
+                    shared19260_[a].unk15_4 = 1;
+                    shared19260_[a].unk15_6 = 1;
+                }
+                else
+                {
+                    shared19260_[a].unk15_4 = 0;
+                }
+            }
+        }
+        if (shared19260_[a].unk15_0)
+            shared19260_[a].unk18 = (shared19260_[a].unkB_4 + 1) * 10;
+        if (shared19260_[a].unkC_0)
+        {
+            shared19260_[a].unk15_4 = 0;
+            shared19260_[a].unk2 = 0;
+            shared19260_[a].unk0 = 0;
+        }
+        shared19328.bits_0 = contest_get_move_excitement(shared19260_[a].unk6);
+        if (shared19260_[a].unk11_4)
+            shared19328.bits_0 = 1;
+        if (shared19328.bits_0 > 0)
+        {
+            if (shared19204.unk19217 + shared19328.bits_0 > 4)
+                shared19328.unk2 = 60;
+            else
+                shared19328.unk2 = 10;
+        }
+        else
+        {
+            shared19328.unk2 = 0;
+        }
+
+        rnd = Random() % 3;
+        for (i = 0; i < 4; i++)
+        {
+            if (i != a)
+            {
+                if (rnd == 0)
+                    break;
+                rnd--;
+            }
+        }
+        shared19260_[a].unk1B = i;
+    }
+}
+
+void sub_80B13EC(u8 a, u8 b)
+{
+    shared19260_[a].unk13 = b;
+}
+
+void sub_80B1404(u8 a, u8 b)
+{
+    shared19260_[a].unk14 = b;
+}
+
+void sub_80B141C(u8 a, u8 b)
+{
+    if      (b >= 60)
+        sub_80B13EC(a, 53);
+    else if (b >= 40)
+        sub_80B13EC(a, 52);
+    else if (b >= 30)
+        sub_80B13EC(a, 51);
+    else if (b >= 20)
+        sub_80B13EC(a, 50);
+    else if (b >= 10)
+        sub_80B13EC(a, 49);
+}
+
+void sub_80B146C(u8 a, u8 b)
+{
+    StringCopy(gStringVar1, gContestMons[a].nickname);
+    StringCopy(gStringVar2, gMoveNames[shared19260_[a].unk6]);
+    if      (gContestMoves[shared19260_[shared192D0_.unk11].unk6].contestCategory == CONTEST_CATEGORY_COOL)
+        StringCopy(gStringVar3, gUnknown_083CC280);
+    else if (gContestMoves[shared19260_[shared192D0_.unk11].unk6].contestCategory == CONTEST_CATEGORY_BEAUTY)
+        StringCopy(gStringVar3, gUnknown_083CC288);
+    else if (gContestMoves[shared19260_[shared192D0_.unk11].unk6].contestCategory == CONTEST_CATEGORY_CUTE)
+        StringCopy(gStringVar3, gUnknown_083CC290);
+    else if (gContestMoves[shared19260_[shared192D0_.unk11].unk6].contestCategory == CONTEST_CATEGORY_SMART)
+        StringCopy(gStringVar3, gUnknown_083CC299);
+    else
+        StringCopy(gStringVar3, gUnknown_083CC2A3);
+    StringExpandPlaceholders(gStringVar4, gUnknown_083CC188[b]);
+    sub_80AF138();
+    sub_8002EB0(&gMenuWindow, gStringVar4, 776, 1, 15);
+}
+
+void sub_80B157C(u8 a)
+{
+    shared19260_[a].unkC_0 = 1;
+    shared19260_[a].unk6 = 0;
+}
+
+void sub_80B159C(void)
+{
+    u8 r12 = 0;
+    s32 i;
+    s32 j;
+    u8 sp0[4];
+    u8 sp4[4];
+
+    for (i = 0; i < 4; i++)
+    {
+        sp0[i] = gUnknown_02038696[i];
+        sp4[i] = 0;
+    }
+
+    for (i = 0; i < 4; i++)
+    {
+        for (j = 0; j < 4; j++)
+        {
+            if (shared19260_[j].unk19 == i)
+            {
+                sp0[j] = i;
+                sp4[j] = 1;
+                break;
+            }
+        }
+        if (j == 4)
+        {
+            for (j = 0; j < 4; j++)
+            {
+                if (sp4[j] == 0 && shared19260_[j].unk19 == 0xFF)
+                {
+                    r12 = j;
+                    j++;
+                    break;
+                }
+            }
+            for (; j < 4; j++)
+            {
+                if (sp4[j] == 0 && shared19260_[j].unk19 == 0xFF
+                 && gUnknown_02038696[r12] > gUnknown_02038696[j])
+                    r12 = j;
+            }
+            sp0[r12] = i;
+            sp4[r12] = 1;
+        }
+    }
+
+    for (i = 0; i < 4; i++)
+    {
+        shared192D0_.unk0[i] = sp0[i];
+        shared19260_[i].unk19 = 0xFF;
+        shared19260_[i].unk10_6 = 0;
+        gUnknown_02038696[i] = sp0[i];
+    }
+}
+
+void sub_80B16D0(struct Sprite *sprite)
+{
+    if (sprite->data[1]++ > 84)
+    {
+        sprite->data[1] = 0;
+        sprite->invisible = TRUE;
+        sprite->callback = SpriteCallbackDummy;
+        shared19204.unk1920A_4 = 0;
+    }
+}
+
+void sub_80B1710(u8 a)
+{
+    u8 spriteId = shared19204.unk19216;
+
+    switch (a)
+    {
+    case 0:
+    case 1:
+        gSprites[spriteId].oam.tileNum = gSprites[spriteId].data[0];
+        PlaySE(SE_HAZURE);
+        break;
+    case 2:
+        gSprites[spriteId].oam.tileNum = gSprites[spriteId].data[0] + 4;
+        PlaySE(SE_SEIKAI);
+        break;
+    case 3:
+        gSprites[spriteId].oam.tileNum = gSprites[spriteId].data[0] + 8;
+        PlaySE(SE_SEIKAI);
+        break;
+    case 4:
+        gSprites[spriteId].oam.tileNum = gSprites[spriteId].data[0] + 12;
+        PlaySE(SE_TK_WARPIN);
+        break;
+    case 5:  // exactly the same as case 4
+        gSprites[spriteId].oam.tileNum = gSprites[spriteId].data[0] + 12;
+        PlaySE(SE_TK_WARPIN);
+        break;
+    case 6:
+        gSprites[spriteId].oam.tileNum = gSprites[spriteId].data[0] + 16;
+        PlaySE(SE_TK_WARPIN);
+        break;
+    case 8:
+        gSprites[spriteId].oam.tileNum = gSprites[spriteId].data[0] + 24;
+        PlaySE(SE_W215);
+        break;
+    case 7:
+    default:
+        gSprites[spriteId].oam.tileNum = gSprites[spriteId].data[0] + 20;
+        PlaySE(SE_TK_WARPIN);
+        break;
+    }
+    gSprites[spriteId].data[1] = 0;
+    gSprites[spriteId].invisible = FALSE;
+    gSprites[spriteId].callback = sub_80B16D0;
+    shared19204.unk1920A_4 = 1;
+}
+
+void sub_80B1928(void)
+{
+    s32 i;
+
+    for (i = 0; i < 5; i++)
+    {
+        const u8 *src;
+
+        if (i < shared19204.unk19217)
+            src = gContestApplauseMeterGfx + 64;
+        else
+            src = gContestApplauseMeterGfx;
+        CpuCopy32(src,      (void *)(VRAM + 0x10000 + (gSprites[shared19204.unk1925C].oam.tileNum + 17 + i) * 32), 32);
+        CpuCopy32(src + 32, (void *)(VRAM + 0x10000 + (gSprites[shared19204.unk1925C].oam.tileNum + 25 + i) * 32), 32);
+        if (shared19204.unk19217 > 4)
+            sub_80B1A2C();
+    }
+}
+
+void unref_sub_80B19D0(void)
+{
+    u8 str[20];
+    StringCopy(str, gUnknown_083CC2EC);
+    sub_8003460(&gUnknown_03004210, str, 680, 0, 0);
+}
+
+s8 contest_get_move_excitement(u16 move)
+{
+    return gContestExcitementTable[gScriptContestCategory][gContestMoves[move].contestCategory];
+}
+
+u8 sub_80B1A2C(void)
+{
+    u8 taskId = CreateTask(c3_08130B10, 10);
+
+    gTasks[taskId].data[1] = 1;
+    gTasks[taskId].data[2] = IndexOfSpritePaletteTag(0x0ABE2);
+    return taskId;
+}
+
+void c3_08130B10(u8 taskId)
+{
+    if (++gTasks[taskId].data[0] == 1)
+    {
+        gTasks[taskId].data[0] = 0;
+        if (gTasks[taskId].data[3] == 0)
+            gTasks[taskId].data[4]++;
+        else
+            gTasks[taskId].data[4]--;
+        BlendPalette(264 + gTasks[taskId].data[2] * 16, 1, gTasks[taskId].data[4], 0x7FFF);
+        if (gTasks[taskId].data[4] == 0 || gTasks[taskId].data[4] == 16)
+        {
+            gTasks[taskId].data[3] ^= 1;
+            if (shared19204.unk19217 <= 4)
+            {
+                BlendPalette(264 + gTasks[taskId].data[2] * 16, 1, 0, 31);
+                DestroyTask(taskId);
+            }
+        }
+    }
+}
+
+void sub_80B1B14(void)
+{
+    CreateTask(sub_80B1B68, 10);
+    gSprites[shared19204.unk1925C].pos2.x = -70;
+    gSprites[shared19204.unk1925C].invisible = FALSE;
+    shared19204.unk1920A_6 = 1;
+}
+
+void sub_80B1B68(u8 taskId)
+{
+    struct Sprite *sprite = &gSprites[shared19204.unk1925C];
+
+    gTasks[taskId].data[10] += 1664;
+    sprite->pos2.x += gTasks[taskId].data[10] >> 8;
+    gTasks[taskId].data[10] = gTasks[taskId].data[10] & 0xFF;
+    if (sprite->pos2.x > 0)
+        sprite->pos2.x = 0;
+    if (sprite->pos2.x == 0)
+    {
+        shared19204.unk1920A_6 = 0;
+        DestroyTask(taskId);
+    }
+}
+
+void sub_80B1BDC(void)
+{
+    if (gSprites[shared19204.unk1925C].invisible == TRUE)
+    {
+        shared19204.unk1920A_6 = 0;
+    }
+    else
+    {
+        CreateTask(sub_80B1C34, 10);
+        gSprites[shared19204.unk1925C].pos2.x = 0;
+        shared19204.unk1920A_6 = 1;
+    }
+}
+
+void sub_80B1C34(u8 taskId)
+{
+    struct Sprite *sprite = &gSprites[shared19204.unk1925C];
+
+    gTasks[taskId].data[10] += 1664;
+    sprite->pos2.x -= gTasks[taskId].data[10] >> 8;
+    gTasks[taskId].data[10] = gTasks[taskId].data[10] & 0xFF;
+    if (sprite->pos2.x < -70)
+        sprite->pos2.x = -70;
+    if (sprite->pos2.x == -70)
+    {
+        sprite->invisible = TRUE;
+        shared19204.unk1920A_6 = 0;
+        DestroyTask(taskId);
+    }
+}
+
+void sub_80B1CBC(s8 a)
+{
+    u8 taskId = CreateTask(sub_80B1CFC, 5);
+
+    gTasks[taskId].data[0] = a;
+    shared19204.unk1920A_5 = 1;
+}
+
+void sub_80B1CFC(u8 taskId)
+{
+    switch (gTasks[taskId].data[10])
+    {
+    case 0:
+        sub_80B1B14();
+        gTasks[taskId].data[10]++;
+        break;
+    case 1:
+        if (!shared19204.unk1920A_6)
+        {
+            nullsub_18(gTasks[taskId].data[0]);
+            gTasks[taskId].data[10]++;
+        }
+        break;
+    case 2:
+        if (gTasks[taskId].data[11]++ > 20)
+        {
+            gTasks[taskId].data[11] = 0;
+            sub_80B1928();
+            shared19204.unk1920A_5 = 0;
+            DestroyTask(taskId);
+        }
+        break;
+    }
+}
+
+void unref_sub_80B1D84(void)
+{
+    gSprites[shared19204.unk1925C].pos2.x = 0;
+    gSprites[shared19204.unk1925C].invisible = FALSE;
+}
+
+void unref_sub_80B1DB8(void)
+{
+    gSprites[shared19204.unk1925C].invisible = TRUE;
+}
+
+void sub_80B1DDC(void)
+{
+    CreateTask(sub_80B1DFC, 15);
+    shared19204.unk1920A_7 = 1;
+}
+
+void sub_80B1DFC(u8 taskId)
+{
+    if (gTasks[taskId].data[10]++ > 6)
+    {
+        register struct Task *task asm("r0");
+        register u32 r4 asm("r4") = taskId * 4;
+
+        gTasks[taskId].data[10] = 0;
+        gTasks[taskId].data[10] = 0;
+        if (gTasks[taskId].data[11] == 0)
+        {
+            {
+                void *src = shared16800;
+                void *dest = (void *)(VRAM + 0x2000);
+                u32 size = 0x1000;
+                DmaCopy32(3, src, dest, size);
+            }
+        }
+        else
+        {
+            {
+                void *src = shared15800;
+                void *dest = (void *)(VRAM + 0x2000);
+                u32 size = 0x1000;
+                DmaCopy32(3, src, dest, size);
+            }
+            gTasks[taskId].data[12]++;
+        }
+
+        // Why won't this match the normal way?
+        asm("add %0, %1, #0\n\t"
+            "add %0, %3\n\t"
+            "lsl %0, #3\n\t"
+            "add %0, %2\n\t"
+            : "=r"(task):"r"(r4),"r"(gTasks),"r"(taskId));
+
+        //gTasks[taskId].data[11] ^= 1;
+        task->data[11] ^= 1;
+
+        //if (gTasks[taskId].data[12] == 9)
+        if (task->data[12] == 9)
+        {
+            shared19204.unk1920A_7 = 0;
+            DestroyTask(taskId);
+        }
+    }
+}
+
+void sub_80B1EA8(s8 a, s8 b)
+{
+    u8 taskId = CreateTask(sub_80B1F4C, 10);
+    u16 r7;
+    u8 r5;
+    u8 r3;
+
+    if (a > 0)
+    {
+        r7 = 0x237E;
+        if (b > 0)
+        {
+            r5 = 0;
+            r3 = shared19204.unk19217 * 3;
+        }
+        else
+        {
+            r5 = shared19204.unk19217 * 3;
+            r3 = 0;
+        }
+    }
+    else
+    {
+        r7 = 0;
+        if (b > 0)
+        {
+            r5 = 0;
+            r3 = 12;
+        }
+        else
+        {
+            r5 = 12;
+            r3 = 0;
+        }
+    }
+    gTasks[taskId].data[0] = r7;
+    gTasks[taskId].data[1] = r5;
+    gTasks[taskId].data[2] = b;
+    gTasks[taskId].data[3] = r3;
+    shared19204.unk1920B_0 = 0;
 }
