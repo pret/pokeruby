@@ -1,6 +1,8 @@
 #include "global.h"
 #include "constants/songs.h"
 #include "strings2.h"
+#include "overworld.h"
+#include "menu_cursor.h"
 #include "random.h"
 #include "sound.h"
 #include "main.h"
@@ -56,16 +58,20 @@ void sub_8102484(void);
 void sub_81024F0(void);
 void sub_81027A0(void);
 void sub_8102A24(void);
+bool8 sub_8102A44(void);
 void sub_8102DA8(void);
 void sub_8102DEC(u8 a0);
 void sub_8102E1C(u8 a0);
 bool8 sub_8102E40(u8 a0);
 void sub_8103C14(u8 a0);
 void sub_8103D50(u8 a0);
+void sub_8103D8C(u8 a0);
 void sub_8103DC8(void);
 void sub_8103F70(void);
+bool8 sub_8103FA0(void);
 void sub_8104048(void);
 void sub_8104064(u8 a0);
+bool8 sub_81040C8(void);
 void sub_810423C(u8 a0);
 void sub_810430C(void);
 bool8 sub_810432C(void);
@@ -157,7 +163,7 @@ void sub_81019EC(void)
 {
     struct Task *task = &gTasks[FindTaskIdByFunc(nullsub_67)];
     eSlotMachine->unk01 = task->data[0];
-    LoadWordFromTwoHalfwords((u16 *)(task->data + 1), (u32 *)&eSlotMachine->unk64);
+    LoadWordFromTwoHalfwords((u16 *)(task->data + 1), (u32 *)&eSlotMachine->prevMainCb);
 }
 
 static void nullsub_67(u8 taskId)
@@ -572,6 +578,172 @@ bool8 sub_81020C8(struct Task *task)
         {
             eSlotMachine->unk10 = 9999;
         }
+    }
+    return FALSE;
+}
+
+bool8 sub_81021E0(struct Task *task)
+{
+    if (sub_8102A44())
+    {
+        eSlotMachine->state = 16;
+    }
+    return FALSE;
+}
+
+bool8 sub_81021FC(struct Task *tas)
+{
+    if (sub_8103FA0())
+    {
+        eSlotMachine->state = 19;
+        if (eSlotMachine->unk08 & 0x180)
+        {
+            IncrementGameStat(GAME_STAT_SLOT_JACKPOTS);
+        }
+        if (eSlotMachine->unk08 & 0x04)
+        {
+            eSlotMachine->unk18 = 0;
+            eSlotMachine->state = 9;
+        }
+        if (eSlotMachine->unk08 & 0x20)
+        {
+            eSlotMachine->state = 17;
+        }
+        if (eSlotMachine->unk0A && eSlotMachine->unk08 & 0x04)
+        {
+            sub_8104CAC(4);
+            eSlotMachine->state = 18;
+        }
+    }
+    return FALSE;
+}
+
+bool8 sub_8102264(struct Task *task)
+{
+    if (!sub_81040C8())
+    {
+        eSlotMachine->state = 19;
+        if (eSlotMachine->unk08 & 0x04)
+        {
+            eSlotMachine->state = 9;
+            if (eSlotMachine->unk0A)
+            {
+                sub_8104CAC(4);
+                eSlotMachine->state = 18;
+            }
+        }
+    }
+    return FALSE;
+}
+
+bool8 sub_81022A0(struct Task *task)
+{
+    if (sub_8104E18())
+    {
+        eSlotMachine->state = 19;
+        if (eSlotMachine->unk08 & 0x04)
+        {
+            eSlotMachine->state = 9;
+        }
+    }
+    return FALSE;
+}
+
+bool8 sub_81022CC(struct Task *task)
+{
+    sub_8103D8C(0);
+    sub_8103D8C(1);
+    sub_8103D8C(2);
+    eSlotMachine->state = 2;
+    return FALSE;
+}
+
+bool8 sub_81022F0(struct Task *task)
+{
+    if (++task->data[1] > 64)
+    {
+        task->data[1] = 0;
+        eSlotMachine->state = 19;
+    }
+    return FALSE;
+}
+
+bool8 sub_8102318(struct Task *task)
+{
+    sub_8101F2C(gOtherText_QuitGamePrompt);
+    DisplayYesNoMenu(21, 7, 1);
+    sub_814AB84();
+    eSlotMachine->state = 22;
+    return FALSE;
+}
+
+bool8 sub_8102344(struct Task *task)
+{
+    s8 input = ProcessMenuInputNoWrap_();
+    if (input == 0)
+    {
+        MenuZeroFillScreen();
+        sub_8103D8C(0);
+        sub_8103D8C(1);
+        sub_8103D8C(2);
+        eSlotMachine->coins += eSlotMachine->bet;
+        eSlotMachine->state = 27;
+    }
+    else if (input == 1 || input == -1)
+    {
+        MenuZeroFillScreen();
+        eSlotMachine->state = 5;
+    }
+    return FALSE;
+}
+
+bool8 sub_810239C(struct Task *task)
+{
+    sub_8101F2C(gOtherText_MaxCoins);
+    eSlotMachine->state = 24;
+    return FALSE;
+}
+
+bool8 sub_81023B8(struct Task *task)
+{
+    if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+    {
+        MenuZeroFillScreen();
+        eSlotMachine->state = 5;
+    }
+    return FALSE;
+}
+
+bool8 sub_81023E0(struct Task *task)
+{
+    sub_8101F2C(gOtherText_OutOfCoins);
+    eSlotMachine->state = 26;
+    return FALSE;
+}
+
+bool8 sub_81023FC(struct Task *task)
+{
+    if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+    {
+        MenuZeroFillScreen();
+        eSlotMachine->state = 27;
+    }
+    return FALSE;
+}
+
+bool8 sub_8102424(struct Task *task)
+{
+    gSaveBlock1.coins = eSlotMachine->coins;
+    BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+    eSlotMachine->state++;
+    return FALSE;
+}
+
+bool8 sub_8102460(struct Task *task)
+{
+    if (!gPaletteFade.active)
+    {
+        SetMainCallback2(eSlotMachine->prevMainCb);
     }
     return FALSE;
 }

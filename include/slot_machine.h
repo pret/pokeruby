@@ -29,7 +29,7 @@ struct SlotMachineEwramStruct {
     /*0x5c*/ u16 winIn;
     /*0x5e*/ u16 winOut;
     /*0x60*/ u16 backupMapMusic;
-    /*0x64*/ void *unk64;
+    /*0x64*/ MainCallback prevMainCb;
 };
 
 void PlaySlotMachine(u8, void *);
