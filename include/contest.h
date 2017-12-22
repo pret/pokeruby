@@ -3,11 +3,23 @@
 
 enum
 {
-	CONTEST_CATEGORY_COOL,
-	CONTEST_CATEGORY_BEAUTY,
-	CONTEST_CATEGORY_CUTE,
-	CONTEST_CATEGORY_SMART,
-	CONTEST_CATEGORY_TOUGH,
+    CONTEST_CATEGORY_COOL,
+    CONTEST_CATEGORY_BEAUTY,
+    CONTEST_CATEGORY_CUTE,
+    CONTEST_CATEGORY_SMART,
+    CONTEST_CATEGORY_TOUGH,
+};
+
+enum
+{
+    CONTEST_EFFECT_HIGHLY_APPEALING,
+    CONTEST_EFFECT_USER_MORE_STARTLED,
+    CONTEST_EFFECT_APPEAL_ONLY_ONCE,
+    CONTEST_EFFECT_REPEATABLE,
+    CONTEST_EFFECT_AVOID_STARTLE_ONCE,
+    CONTEST_EFFECT_AVOID_STARTLE,
+    CONTEST_EFFECT_AVOID_STARTLE_LITTLE,
+    //...
 };
 
 struct ContestMove
@@ -62,8 +74,8 @@ extern const u8 *const gContestEffectStrings[];
 
 void ResetLinkContestBoolean(void);
 void sub_80AB2AC(void);
-void sub_80AB47C(void);
-void sub_80AE098(u8);
+void CB2_StartContest(void);
+void CreatePlayerContestMon(u8);
 void sub_80AE398(u8, u8);
 u8 sub_80AE47C(struct Pokemon *party);
 u16 sub_80AE770(u8, u8);
@@ -73,6 +85,6 @@ void sub_80AF668(void);
 void sub_80B0F28(u8);
 bool8 sub_80B2A7C(u8);
 u8 sub_80B2C4C(u8, u8);
-void sub_80B2D1C(void);
+void Contest_ResetWinners(void);
 
 #endif // GUARD_CONTEST_H

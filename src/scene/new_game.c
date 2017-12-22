@@ -80,11 +80,11 @@ void ClearPokedexFlags(void)
     memset(&gSaveBlock2.pokedex.seen, 0, sizeof(gSaveBlock2.pokedex.seen));
 }
 
-void sub_8052DA8(void)
+void ResetContestAndMuseumWinners(void)
 {
     s32 i;
 
-    sub_80B2D1C();
+    Contest_ResetWinners();
     for (i = 0; i < 5; i++)
         gSaveBlock1.museumPortraits[i] = sEmptyMuseumPortrait;
 }
@@ -139,7 +139,7 @@ void NewGameInitData(void)
     gSaveBlock1.money = 3000;
     ResetLinkContestBoolean();
     ResetGameStats();
-    sub_8052DA8();
+    ResetContestAndMuseumWinners();
     InitLinkBattleRecords();
     InitShroomishSizeRecord();
     InitBarboachSizeRecord();

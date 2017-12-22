@@ -320,7 +320,7 @@ u8 MatsudaDebugMenu_CommTest(void)
 
 static void sub_80A9C98(u8 taskId)
 {
-    sub_80AE098(0);
+    CreatePlayerContestMon(0);
     SetTaskFuncWithFollowupFunc(taskId, sub_80C8734, sub_80A9CC0);
 }
 
@@ -542,7 +542,7 @@ static void sub_80AA10C(void)
     if (!(gContestMons[0].nickname[0]))
         sub_80AE398(0, 0);
 
-    sub_80AE098(gUnknown_02038694);
+    CreatePlayerContestMon(gUnknown_02038694);
 
     for (i = 0; i < 6; i++)
     {
@@ -895,7 +895,7 @@ void sub_80AACC4(void)
         SetDebugMonForContest();
         if (!(gIsLinkContest & 1))
             sub_80AE82C(eMatsudaDebugVar);
-        SetMainCallback2(sub_80AB47C);
+        SetMainCallback2(CB2_StartContest);
     }
 }
 
@@ -1149,7 +1149,7 @@ void sub_80AAF30(void)
 
     gUnknown_0203856C = 1;
     gContestPlayerMonIndex = 3;
-    sub_80AE098(0);
+    CreatePlayerContestMon(0);
 
     for (i = 3; i > -1; i--)
         gUnknown_02038690[i] = 3 - i;
@@ -1195,7 +1195,7 @@ u8 MatsudaDebugMenu_SetArtMuseumItems(void)
     s32 i;
 
     gContestPlayerMonIndex = 3;
-    sub_80AE098(0);
+    CreatePlayerContestMon(0);
     for (i = 3; i > -1; i--)
         gUnknown_02038690[i] = 3 - i;
     for (gScriptContestCategory = 0; gScriptContestCategory < 5; gScriptContestCategory++)

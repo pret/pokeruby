@@ -208,10 +208,10 @@ gUnknown_083CAF70:: @ 83CAF70
 	.4byte ContestString_Smart
 	.4byte ContestString_Tough
 
-gUnknown_083CAF84:: @ 83CAF84
+gText_Contest_WhichMoveWillBePlayed:: @ 83CAF84
 	.string "Appeal no. {NAME_END}!\nWhich move will be played?$"
 
-gUnknown_083CAFAE:: @ 83CAFAE
+gText_Contest_ButItCantParticipate:: @ 83CAFAE
 	.string "Appeal no. {NAME_END}!\nBut it can’t participate!$"
 
 gUnknown_083CAFD7:: @ 83CAFD7
@@ -280,7 +280,7 @@ ContestString_StandOutDidnt:
 	.string "{STR_VAR_1} hasn’t made\nits appeal.{PAUSE_UNTIL_PRESS}$"
 
 	.align 2
-gUnknown_083CB2F0:: @ 83CB2F0
+gContestStandOutStrings:: @ 83CB2F0
 	.4byte ContestString_StandOutNone
 	.4byte ContestString_StandOutNotMuch
 	.4byte ContestString_StandOutLittle
@@ -625,7 +625,7 @@ ContestString_Toughness:
 	.string "toughness$"
 
 	.align 2
-gUnknown_083CC2D8:: @ 83CC2D8
+gContestCategoryStrings:: @ 83CC2D8
 	.4byte ContestString_Coolness
 	.4byte ContestString_Beauty2
 	.4byte ContestString_Cuteness

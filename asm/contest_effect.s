@@ -860,7 +860,7 @@ _080B8340:
 	bne _080B836E
 	lsls r0, r6, 24
 	lsrs r0, 24
-	bl sub_80AF59C
+	bl Contest_IsMonsTurnDisabled
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B836E

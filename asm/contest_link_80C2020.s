@@ -5125,12 +5125,12 @@ _080C4888: .4byte gStringVar1
 	thumb_func_start sub_80C488C
 sub_80C488C: @ 80C488C
 	push {lr}
-	ldr r0, _080C4898 @ =sub_80AB47C
+	ldr r0, _080C4898 @ =CB2_StartContest
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C4898: .4byte sub_80AB47C
+_080C4898: .4byte CB2_StartContest
 	thumb_func_end sub_80C488C
 
 	thumb_func_start sub_80C489C
@@ -5293,7 +5293,7 @@ sub_80C49C4: @ 80C49C4
 	lsrs r4, 24
 	ldr r0, _080C49E4 @ =gUnknown_02038694
 	ldrb r0, [r0]
-	bl sub_80AE098
+	bl CreatePlayerContestMon
 	ldr r1, _080C49E8 @ =sub_80C8734
 	ldr r2, _080C49EC @ =sub_80C49F0
 	adds r0, r4, 0

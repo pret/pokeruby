@@ -1414,7 +1414,7 @@ ContestAICmd_get_move_excitement: @ 81292E4
 	adds r2, 0x1E
 	adds r1, r2
 	ldrh r0, [r1]
-	bl contest_get_move_excitement
+	bl Contest_GetMoveExcitement
 	lsls r0, 24
 	asrs r0, 24
 	strh r0, [r4, 0x18]
@@ -3319,7 +3319,7 @@ ContestAICmd_check_can_participate: @ 812A0BC
 	bl sub_8128A7C
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80AF59C
+	bl Contest_IsMonsTurnDisabled
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812A0E4
@@ -5049,7 +5049,7 @@ _0812AD06:
 	ldrh r0, [r1]
 	cmp r0, 0
 	beq _0812AD30
-	bl contest_get_move_excitement
+	bl Contest_GetMoveExcitement
 	lsls r0, 24
 	asrs r0, 24
 	cmp r0, 0x1
