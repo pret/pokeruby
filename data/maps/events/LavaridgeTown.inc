@@ -5,8 +5,8 @@ LavaridgeTown_MapObjects:: @ 8380C78
 	object_event 4, MAP_OBJ_GFX_LITTLE_GIRL_1, 0, 10, 0, 13, 0, 3, 3, 32, 0, 0, 0, 0, 0, LavaridgeTown_EventScript_14E736, 0, 0, 0
 	object_event 5, MAP_OBJ_GFX_HOT_SPRINGS_OLD_WOMAN, 0, 4, 0, 4, 0, 3, 18, 0, 0, 0, 0, 0, 0, LavaridgeTown_EventScript_14E73F, 0, 0, 0
 	object_event 6, MAP_OBJ_GFX_HOT_SPRINGS_OLD_WOMAN, 0, 5, 0, 4, 0, 3, 17, 0, 0, 0, 0, 0, 0, LavaridgeTown_EventScript_14E748, 0, 0, 0
-	object_event 7, 243, 0, 6, 0, 16, 0, 3, 9, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_RIVAL_LAVARIDGE_2, 0, 0
-	object_event 8, 240, 0, 12, 0, 15, 0, 0, 8, 0, 0, 0, 0, 0, 0, LavaridgeTown_EventScript_14E575, FLAG_HIDE_RIVAL_LAVARIDGE_1, 0, 0
+	object_event 7, MAP_OBJ_GFX_VAR_3, 0, 6, 0, 16, 0, 3, 9, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_RIVAL_LAVARIDGE_2, 0, 0
+	object_event 8, MAP_OBJ_GFX_VAR_0, 0, 12, 0, 15, 0, 0, 8, 0, 0, 0, 0, 0, 0, LavaridgeTown_EventScript_14E575, FLAG_HIDE_RIVAL_LAVARIDGE_1, 0, 0
 	object_event 9, MAP_OBJ_GFX_OLD_WOMAN_1, 0, 4, 0, 7, 0, 3, 8, 17, 0, 0, 0, 0, 0, LavaridgeTown_EventScript_14E75A, 0, 0, 0
 
 LavaridgeTown_MapWarps:: @ 8380D50

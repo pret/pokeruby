@@ -1,10 +1,10 @@
 MtPyre_Summit_MapObjects:: @ 838CBD8
 	object_event 1, MAP_OBJ_GFX_OLD_MAN_2, 0, 22, 0, 5, 0, 3, 8, 0, 0, 0, 0, 0, 0, MtPyre_Summit_EventScript_15D5EF, 0, 0, 0
-	object_event 2, 246, 0, 23, 0, 6, 0, 3, 7, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_LEADER_MT_PYRE_SUMMIT, 0, 0
+	object_event 2, MAP_OBJ_GFX_VAR_6, 0, 23, 0, 6, 0, 3, 7, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_LEADER_MT_PYRE_SUMMIT, 0, 0
 	object_event 3, MAP_OBJ_GFX_OLD_WOMAN_1, 0, 23, 0, 5, 0, 3, 8, 0, 0, 0, 0, 0, 0, MtPyre_Summit_EventScript_15D623, 0, 0, 0
-	object_event 4, 241, 0, 21, 0, 18, 0, 3, 10, 0, 0, 1, 0, 3, 0, MtPyre_Summit_EventScript_1B2DA9, FLAG_HIDE_GRUNTS_MT_PYRE_SUMMIT, 0, 0
-	object_event 5, 241, 0, 25, 0, 15, 0, 3, 9, 0, 0, 1, 0, 3, 0, MtPyre_Summit_EventScript_1B2DC0, FLAG_HIDE_GRUNTS_MT_PYRE_SUMMIT, 0, 0
-	object_event 6, 241, 0, 21, 0, 11, 0, 3, 10, 0, 0, 1, 0, 3, 0, MtPyre_Summit_EventScript_1B2DD7, FLAG_HIDE_GRUNTS_MT_PYRE_SUMMIT, 0, 0
+	object_event 4, MAP_OBJ_GFX_VAR_1, 0, 21, 0, 18, 0, 3, 10, 0, 0, 1, 0, 3, 0, MtPyre_Summit_EventScript_1B2DA9, FLAG_HIDE_GRUNTS_MT_PYRE_SUMMIT, 0, 0
+	object_event 5, MAP_OBJ_GFX_VAR_1, 0, 25, 0, 15, 0, 3, 9, 0, 0, 1, 0, 3, 0, MtPyre_Summit_EventScript_1B2DC0, FLAG_HIDE_GRUNTS_MT_PYRE_SUMMIT, 0, 0
+	object_event 6, MAP_OBJ_GFX_VAR_1, 0, 21, 0, 11, 0, 3, 10, 0, 0, 1, 0, 3, 0, MtPyre_Summit_EventScript_1B2DD7, FLAG_HIDE_GRUNTS_MT_PYRE_SUMMIT, 0, 0
 
 MtPyre_Summit_MapWarps:: @ 838CC68
 	warp_def 22, 31, 3, 1, MAP_MT_PYRE_EXTERIOR
