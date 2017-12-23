@@ -18,9 +18,9 @@
 #include "ewram.h"
 
 extern u8 gUnknown_0203856C;
-extern u16 gUnknown_02038670[];
-extern u16 gUnknown_02038678[];
-extern u16 gUnknown_02038680[];
+extern s16 gUnknown_02038670[];
+extern s16 gUnknown_02038678[];
+extern s16 gUnknown_02038680[];
 extern u8 gContestFinalStandings[];
 extern u8 gUnknown_02038694;
 extern u8 gIsLinkContest;
