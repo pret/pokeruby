@@ -43,42 +43,130 @@
 #define VAR_OBJ_GFX_ID_E           0x401E
 #define VAR_OBJ_GFX_ID_F           0x401F
 
+// general purpose vars
 #define VAR_RECYCLE_GOODS          0x4020
 #define VAR_REPEL_STEP_COUNT       0x4021
 #define VAR_ICE_STEP_COUNT         0x4022
-#define VAR_FIRST_POKE             0x4023
+#define VAR_STARTER_MON            0x4023 // 0=Treecko, 1=Torchic, 2=Mudkip
 #define VAR_MIRAGE_RND_H           0x4024
 #define VAR_MIRAGE_RND_L           0x4025
 #define VAR_SECRET_BASE_MAP        0x4026
-
+#define VAR_CYCLING_ROAD_RECORD_COLLISIONS 0x4027
+#define VAR_CYCLING_ROAD_RECORD_TIME_L     0x4028
+#define VAR_CYCLING_ROAD_RECORD_TIME_H     0x4029
 #define VAR_HAPPINESS_STEP_COUNTER 0x402A
 #define VAR_POISON_STEP_COUNTER    0x402B
 #define VAR_RESET_RTC_ENABLE       0x402C
+#define VAR_ENIGMA_BERRY_AVAILABLE 0x402D
 
 #define VAR_DAYS                   0x4040
 
 #define VAR_DEPT_STORE_FLOOR       0x4043
-#define VAR_POKELOT_PRIZE          0x4045
+#define VAR_TRICK_HOUSE_ROOMS_COMPLETED 0x4044
+#define VAR_LOTTERY_PRIZE          0x4045
 #define VAR_NATIONAL_DEX           0x4046
 #define VAR_SHROOMISH_SIZE_RECORD  0x4047
 #define VAR_ASH_GATHER_COUNT       0x4048
 #define VAR_BIRCH_STATE            0x4049
 #define VAR_CRUISE_STEP_COUNT      0x404A
-#define VAR_POKELOT_RND1           0x404B
-#define VAR_POKELOT_RND2           0x404C
+#define VAR_LOTTERY_RND_L          0x404B
+#define VAR_LOTTERY_RND_H          0x404C
 
 #define VAR_BARBOACH_SIZE_RECORD   0x404F
+#define VAR_LITTLEROOT_STATE       0x4050
+#define VAR_ROUTE102_ACCESSIBLE    0x4051
 
-#define VAR_0x4054                 0x4054
+#define VAR_LAVARIDGE_RIVAL_STATE  0x4053
+#define VAR_CURRENT_SECRET_BASE    0x4054
 
-#define VAR_0x4089                 0x4089
-#define VAR_0x4095                 0x4095
-#define VAR_0x4097                 0x4097
-#define VAR_0x409a                 0x409a
-#define VAR_WEATHER_INSTITUTE_CLEARED 0x040B3
-#define VAR_PORTHOLE               0x40B4
+#define VAR_PETALBURG_STATE        0x4057
+#define VAR_SLATEPORT_STATE        0x4058
 
-#define VAR_0x40BC                 0x40BC
-#define VAR_0x40C2                 0x40C2
+#define VAR_RUSTBORO_STATE         0x405A
+
+#define VAR_SOOTOPOLIS_STATE       0x405E
+
+#define VAR_ROUTE101_STATE         0x4060
+
+#define VAR_ROUTE103_STATE         0x4062
+
+#define VAR_ROUTE110_STATE         0x4069
+
+#define VAR_ROUTE116_STATE         0x406F
+
+#define VAR_ROUTE118_STATE         0x4071
+#define VAR_ROUTE119_STATE         0x4072
+
+#define VAR_ROUTE121_STATE         0x4074
+#define VAR_ROUTE128_STATE         0x407B
+
+#define VAR_LITTLEROOT_HOUSES_STATE 0x4082 // TODO: needs more investigation
+
+#define VAR_BIRCH_LAB_STATE         0x4084
+#define VAR_PETALBURG_GYM_STATE     0x4085
+#define VAR_LINK_CONTEST_ROOM_STATE 0x4086
+#define VAR_CABLE_CLUB_STATE        0x4087
+#define VAR_CONTEST_LOCATION        0x4088
+#define VAR_0x4089                  0x4089 // TODO: related to decorations
+#define VAR_CONTEST_PRIZE_PICKUP    0x408A
+
+#define VAR_LITTLEROOT_HOUSES_STATE_2 0x408C // TODO: needs more investigation
+#define VAR_LITTLEROOT_RIVAL_STATE    0x408D
+#define VAR_BOARD_BRINEY_BOAT_ROUTE104_STATE 0x408E
+#define VAR_DEVON_CORP_3F_STATE       0x408F
+#define VAR_BRINEY_HOUSE_STATE        0x4090
+
+#define VAR_LITTLEROOT_INTRO_STATE   0x4092
+#define VAR_MAUVILLE_GYM_STATE       0x4093
+#define VAR_LILYCOVE_MUSEUM_2F_STATE 0x4094
+#define VAR_LILYCOVE_FAN_CLUB_STATE  0x4095
+#define VAR_BRINEY_LOCATION          0x4096
+#define VAR_0x4097                   0x4097 // TODO: related to creating new secret base
+#define VAR_PETALBURG_WOODS_STATE    0x4098
+#define VAR_LILYCOVE_CONTEST_LOBBY_STATE 0x4099
+#define VAR_RUSTURF_TUNNEL_STATE     0x409a
+#define VAR_CAVE_OF_ORIGIN_B4F_STATE 0x409B
+#define VAR_ELITE_4_STATE            0x409C
+
+#define VAR_SLATEPORT_HARBOR_STATE   0x40A0
+
+#define VAR_SEAFLOOR_CAVERN_STATE         0x40A2
+#define VAR_CABLE_CAR_STATION_STATE       0x40A3
+#define VAR_SAFARI_ZONE_STATE             0x40A4
+#define VAR_TRICK_HOUSE_ENTRANCE_STATE    0x40A5
+#define VAR_TRICK_HOUSE_ENTRANCE_STATE_2  0x40A6
+#define VAR_TRICK_HOUSE_ENTRANCE_STATE_3  0x40A7
+
+#define VAR_CYCLING_CHALLENGE_STATE       0x40A9
+#define VAR_SLATEPORT_MUSEUM_1F_STATE     0x40AA
+#define VAR_TRICK_HOUSE_PUZZLE_1_STATE    0x40AB
+#define VAR_TRICK_HOUSE_PUZZLE_2_STATE    0x40AC
+#define VAR_TRICK_HOUSE_PUZZLE_3_STATE    0x40AD
+#define VAR_TRICK_HOUSE_PUZZLE_4_STATE    0x40AE
+#define VAR_TRICK_HOUSE_PUZZLE_5_STATE    0x40AF
+#define VAR_TRICK_HOUSE_PUZZLE_6_STATE    0x40B0
+#define VAR_TRICK_HOUSE_PUZZLE_7_STATE    0x40B1
+#define VAR_TRICK_HOUSE_PUZZLE_8_STATE    0x40B2
+#define VAR_WEATHER_INSTITUTE_STATE       0x40B3
+#define VAR_PORTHOLE_STATE                0x40B4
+#define VAR_TRICK_HOUSE_STATE             0x40B5 // TODO: needs some further investigation
+#define VAR_TRICK_HOUSE_PUZZLE_7_STATE_2  0x40B6
+#define VAR_SLATEPORT_FAN_CLUB_STATE      0x40B7
+
+#define VAR_MT_PYRE_STATE                 0x40B9
+#define VAR_NEW_MAUVILLE_STATE            0x40BA
+
+#define VAR_BRAVO_TRAINER_BATTLE_TOWER_ON 0x40BC
+#define VAR_JAGGED_PASS_ASH_WEATHER       0x40BD
+#define VAR_GLASS_WORKSHOP_STATE          0x40BE
+#define VAR_METEOR_FALLS_STATE            0x40BF
+#define VAR_GAME_CORNER_STATE             0x40C0
+#define VAR_TRICK_HOUSE_PRIZE_PICKUP      0x40C1
+#define VAR_PACIFIDLOG_TM_RECEIVED_DAY    0x40C2
+#define VAR_VICTORY_ROAD_1F_STATE         0x40C3
+#define VAR_FOSSIL_RESURRECTION_STATE     0x40C4
+#define VAR_WHICH_FOSSIL_REVIVED          0x40C5
+#define VAR_STEVENS_HOUSE_STATE           0x40C6
+#define VAR_OLDALE_STATE                  0x40C7
 
 #endif // GUARD_CONSTANTS_VARS_H

@@ -55,11 +55,11 @@ LinkContestRoom1_EventScript_15F600:: @ 815F600
 	return
 
 LinkContestRoom1_MapScript2_15F606:: @ 815F606
-	map_script_2 0x4086, 1, LinkContestRoom1_EventScript_15F61A
+	map_script_2 VAR_LINK_CONTEST_ROOM_STATE, 1, LinkContestRoom1_EventScript_15F61A
 	.2byte 0
 
 LinkContestRoom1_MapScript2_15F610:: @ 815F610
-	map_script_2 0x4086, 1, LinkContestRoom1_EventScript_15F625
+	map_script_2 VAR_LINK_CONTEST_ROOM_STATE, 1, LinkContestRoom1_EventScript_15F625
 	.2byte 0
 
 LinkContestRoom1_EventScript_15F61A:: @ 815F61A
@@ -293,7 +293,7 @@ LinkContestRoom1_EventScript_15F913:: @ 815F913
 	return
 
 LinkContestRoom1_EventScript_15F919:: @ 815F919
-	switch 0x4088
+	switch VAR_CONTEST_LOCATION
 	case 1, LinkContestRoom1_EventScript_15F956
 	case 2, LinkContestRoom1_EventScript_15F969
 	case 3, LinkContestRoom1_EventScript_15F9C4
@@ -372,7 +372,7 @@ LinkContestRoom1_EventScript_15FA70:: @ 815FA70
 	return
 
 LinkContestRoom1_EventScript_15FB64:: @ 815FB64
-	switch 0x4088
+	switch VAR_CONTEST_LOCATION
 	case 1, LinkContestRoom1_EventScript_15FBA1
 	case 2, LinkContestRoom1_EventScript_15FBAD
 	case 3, LinkContestRoom1_EventScript_15FBB9

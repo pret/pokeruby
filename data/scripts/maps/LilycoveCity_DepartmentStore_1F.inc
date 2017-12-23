@@ -9,7 +9,7 @@ LilycoveCity_DepartmentStore_1F_EventScript_159D5E:: @ 8159D5E
 	lock
 	faceplayer
 	dodailyevents
-	compare 0x4045, 0
+	compare VAR_LOTTERY_PRIZE, 0
 	goto_if 5, LilycoveCity_DepartmentStore_1F_EventScript_159EB1
 	checkflag FLAG_DAILY_PICKED_LOTTO_TICKET
 	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E4C
@@ -100,7 +100,7 @@ LilycoveCity_DepartmentStore_1F_EventScript_159E93:: @ 8159E93
 	return
 
 LilycoveCity_DepartmentStore_1F_EventScript_159E9C:: @ 8159E9C
-	copyvar 0x4045, 0x8005
+	copyvar VAR_LOTTERY_PRIZE, 0x8005
 	goto LilycoveCity_DepartmentStore_1F_EventScript_159EA7
 	end
 
@@ -111,10 +111,10 @@ LilycoveCity_DepartmentStore_1F_EventScript_159EA7:: @ 8159EA7
 
 LilycoveCity_DepartmentStore_1F_EventScript_159EB1:: @ 8159EB1
 	msgbox LilycoveCity_DepartmentStore_1F_Text_1C4FCC, 4
-	giveitem_std 0x4045
+	giveitem_std VAR_LOTTERY_PRIZE
 	compare RESULT, 0
 	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159EA7
-	setvar 0x4045, 0
+	setvar VAR_LOTTERY_PRIZE, 0
 	release
 	end
 

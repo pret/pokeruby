@@ -5,7 +5,7 @@ LittlerootTown_MaysHouse_1F_MapScripts:: @ 8152879
 	.byte 0
 
 LittlerootTown_MaysHouse_1F_MapScript1_152889:: @ 8152889
-	compare 0x4092, 6
+	compare VAR_LITTLEROOT_INTRO_STATE, 6
 	call_if 0, LittlerootTown_MaysHouse_1F_EventScript_15289E
 	checkflag FLAG_RECEIVED_RUNNING_SHOES
 	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1528B1
@@ -27,11 +27,11 @@ LittlerootTown_MaysHouse_1F_EventScript_1528BE:: @ 81528BE
 	return
 
 LittlerootTown_MaysHouse_1F_MapScript1_1528C8:: @ 81528C8
-	compare 0x4092, 3
+	compare VAR_LITTLEROOT_INTRO_STATE, 3
 	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_152902
-	compare 0x4092, 5
+	compare VAR_LITTLEROOT_INTRO_STATE, 5
 	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1528EA
-	compare 0x4092, 6
+	compare VAR_LITTLEROOT_INTRO_STATE, 6
 	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1528F6
 	end
 
@@ -51,11 +51,11 @@ LittlerootTown_MaysHouse_1F_EventScript_152902:: @ 8152902
 	return
 
 LittlerootTown_MaysHouse_1F_MapScript2_15290E:: @ 815290E
-	map_script_2 0x4092, 3, LittlerootTown_MaysHouse_1F_EventScript_152960
-	map_script_2 0x4092, 5, LittlerootTown_MaysHouse_1F_EventScript_152938
-	map_script_2 0x4092, 6, LittlerootTown_MaysHouse_1F_EventScript_152971
-	map_script_2 0x408c, 1, LittlerootTown_MaysHouse_1F_EventScript_152982
-	map_script_2 0x4082, 3, LittlerootTown_MaysHouse_1F_EventScript_1B6CDE
+	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 3, LittlerootTown_MaysHouse_1F_EventScript_152960
+	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 5, LittlerootTown_MaysHouse_1F_EventScript_152938
+	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 6, LittlerootTown_MaysHouse_1F_EventScript_152971
+	map_script_2 VAR_LITTLEROOT_HOUSES_STATE_2, 1, LittlerootTown_MaysHouse_1F_EventScript_152982
+	map_script_2 VAR_LITTLEROOT_HOUSES_STATE, 3, LittlerootTown_MaysHouse_1F_EventScript_1B6CDE
 	.2byte 0
 
 LittlerootTown_MaysHouse_1F_EventScript_152938:: @ 8152938
@@ -101,7 +101,7 @@ LittlerootTown_MaysHouse_1F_EventScript_152982:: @ 8152982
 	special GetRivalSonDaughterString
 	msgbox LittlerootTown_MaysHouse_1F_Text_1730C2, 4
 	setflag FLAG_MET_RIVAL_MOM
-	setvar 0x408c, 2
+	setvar VAR_LITTLEROOT_HOUSES_STATE_2, 2
 	releaseall
 	end
 
@@ -139,7 +139,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1529EB:: @ 81529EB
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_152A21
 	checkflag FLAG_RIVAL_LEFT_FOR_ROUTE103
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_152A17
-	compare 0x408d, 3
+	compare VAR_LITTLEROOT_RIVAL_STATE, 3
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_152A2B
 	special GetRivalSonDaughterString
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1731C6, 4

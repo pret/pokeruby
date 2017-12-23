@@ -13,11 +13,11 @@ RustboroCity_PokemonCenter_2F_MapScript2_1A3D03:: @ 81A3D03
 SlateportCity_PokemonCenter_2F_MapScript2_1A3D03:: @ 81A3D03
 SootopolisCity_PokemonCenter_2F_MapScript2_1A3D03:: @ 81A3D03
 VerdanturfTown_PokemonCenter_2F_MapScript2_1A3D03:: @ 81A3D03
-	map_script_2 0x4087, 1, OldaleTown_PokemonCenter_2F_EventScript_1A3D2D
-	map_script_2 0x4087, 2, OldaleTown_PokemonCenter_2F_EventScript_1A3D2D
-	map_script_2 0x4087, 5, OldaleTown_PokemonCenter_2F_EventScript_1A3D2D
-	map_script_2 0x4087, 3, OldaleTown_PokemonCenter_2F_EventScript_1A3D2D
-	map_script_2 0x4087, 4, OldaleTown_PokemonCenter_2F_EventScript_1A3D2D
+	map_script_2 VAR_CABLE_CLUB_STATE, 1, OldaleTown_PokemonCenter_2F_EventScript_1A3D2D
+	map_script_2 VAR_CABLE_CLUB_STATE, 2, OldaleTown_PokemonCenter_2F_EventScript_1A3D2D
+	map_script_2 VAR_CABLE_CLUB_STATE, 5, OldaleTown_PokemonCenter_2F_EventScript_1A3D2D
+	map_script_2 VAR_CABLE_CLUB_STATE, 3, OldaleTown_PokemonCenter_2F_EventScript_1A3D2D
+	map_script_2 VAR_CABLE_CLUB_STATE, 4, OldaleTown_PokemonCenter_2F_EventScript_1A3D2D
 	.2byte 0
 
 OldaleTown_PokemonCenter_2F_EventScript_1A3D2D:: @ 81A3D2D
@@ -39,15 +39,15 @@ RustboroCity_PokemonCenter_2F_MapScript1_1A3D32:: @ 81A3D32
 SlateportCity_PokemonCenter_2F_MapScript1_1A3D32:: @ 81A3D32
 SootopolisCity_PokemonCenter_2F_MapScript1_1A3D32:: @ 81A3D32
 VerdanturfTown_PokemonCenter_2F_MapScript1_1A3D32:: @ 81A3D32
-	compare 0x4087, 1
+	compare VAR_CABLE_CLUB_STATE, 1
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A3D6A
-	compare 0x4087, 2
+	compare VAR_CABLE_CLUB_STATE, 2
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A3D6A
-	compare 0x4087, 5
+	compare VAR_CABLE_CLUB_STATE, 5
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A3D6A
-	compare 0x4087, 3
+	compare VAR_CABLE_CLUB_STATE, 3
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A3D74
-	compare 0x4087, 4
+	compare VAR_CABLE_CLUB_STATE, 4
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A3D7E
 	end
 
@@ -78,16 +78,16 @@ RustboroCity_PokemonCenter_2F_MapScript2_1A3D88:: @ 81A3D88
 SlateportCity_PokemonCenter_2F_MapScript2_1A3D88:: @ 81A3D88
 SootopolisCity_PokemonCenter_2F_MapScript2_1A3D88:: @ 81A3D88
 VerdanturfTown_PokemonCenter_2F_MapScript2_1A3D88:: @ 81A3D88
-	map_script_2 0x4087, 1, OldaleTown_PokemonCenter_2F_EventScript_1A3E8D
-	map_script_2 0x4087, 2, OldaleTown_PokemonCenter_2F_EventScript_1A3E8D
-	map_script_2 0x4087, 5, OldaleTown_PokemonCenter_2F_EventScript_1A3E8D
-	map_script_2 0x4087, 3, OldaleTown_PokemonCenter_2F_EventScript_1A3E17
-	map_script_2 0x4087, 4, OldaleTown_PokemonCenter_2F_EventScript_1A3E7B
+	map_script_2 VAR_CABLE_CLUB_STATE, 1, OldaleTown_PokemonCenter_2F_EventScript_1A3E8D
+	map_script_2 VAR_CABLE_CLUB_STATE, 2, OldaleTown_PokemonCenter_2F_EventScript_1A3E8D
+	map_script_2 VAR_CABLE_CLUB_STATE, 5, OldaleTown_PokemonCenter_2F_EventScript_1A3E8D
+	map_script_2 VAR_CABLE_CLUB_STATE, 3, OldaleTown_PokemonCenter_2F_EventScript_1A3E17
+	map_script_2 VAR_CABLE_CLUB_STATE, 4, OldaleTown_PokemonCenter_2F_EventScript_1A3E7B
 	.2byte 0
 
 OldaleTown_PokemonCenter_2F_EventScript_1A3DB2:: @ 81A3DB2
 	special CloseLink
-	setvar 0x4087, 0
+	setvar VAR_CABLE_CLUB_STATE, 0
 	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_1A4358
 	waitmovement 0
 	compare 0x8007, 0
@@ -100,7 +100,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A3DD9:: @ 81A3DD9
 
 OldaleTown_PokemonCenter_2F_EventScript_1A3DDA:: @ 81A3DDA
 	special CloseLink
-	setvar 0x4087, 0
+	setvar VAR_CABLE_CLUB_STATE, 0
 	compare 0x8007, 0
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A3E0C
 	applymovement 0x8007, OldaleTown_PokemonCenter_2F_Movement_1A4356
@@ -127,7 +127,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A3E17:: @ 81A3E17
 
 OldaleTown_PokemonCenter_2F_EventScript_1A3E30:: @ 81A3E30
 	special CloseLink
-	setvar 0x4087, 0
+	setvar VAR_CABLE_CLUB_STATE, 0
 	compare 0x8007, 0
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A3E0C
 	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_1A4361
@@ -218,7 +218,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A3F5E:: @ 81A3F5E
 	special ScrSpecial_HealPlayerParty
 	special SavePlayerParty
 	special LoadPlayerBag
-	copyvar 0x4087, 0x8004
+	copyvar VAR_CABLE_CLUB_STATE, 0x8004
 	messageautoscroll OldaleTown_PokemonCenter_2F_Text_1A4A22
 	waitmessage
 	setmetatile 5, 3, 514, 0
@@ -383,7 +383,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A40FA:: @ 81A40FA
 
 OldaleTown_PokemonCenter_2F_EventScript_1A4166:: @ 81A4166
 	setvar 0x8004, 3
-	copyvar 0x4087, 0x8004
+	copyvar VAR_CABLE_CLUB_STATE, 0x8004
 	messageautoscroll OldaleTown_PokemonCenter_2F_Text_1A4A22
 	waitmessage
 	setmetatile 8, 3, 514, 0
@@ -481,7 +481,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A4229:: @ 81A4229
 
 OldaleTown_PokemonCenter_2F_EventScript_1A4294:: @ 81A4294
 	setvar 0x8004, 4
-	copyvar 0x4087, 0x8004
+	copyvar VAR_CABLE_CLUB_STATE, 0x8004
 	messageautoscroll OldaleTown_PokemonCenter_2F_Text_1A4A22
 	waitmessage
 	setmetatile 11, 3, 514, 0

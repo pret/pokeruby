@@ -4,7 +4,7 @@ LilycoveCity_PokemonTrainerFanClub_MapScripts:: @ 815938A
 	.byte 0
 
 LilycoveCity_PokemonTrainerFanClub_MapScript2_159395:: @ 8159395
-	map_script_2 0x4095, 1, LilycoveCity_PokemonTrainerFanClub_EventScript_15939F
+	map_script_2 VAR_LILYCOVE_FAN_CLUB_STATE, 1, LilycoveCity_PokemonTrainerFanClub_EventScript_15939F
 	.2byte 0
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_15939F:: @ 815939F
@@ -24,7 +24,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_15939F:: @ 815939F
 	waitmovement 0
 	applymovement 4, LilycoveCity_PokemonTrainerFanClub_Movement_15940C
 	waitmovement 0
-	setvar 0x4095, 2
+	setvar VAR_LILYCOVE_FAN_CLUB_STATE, 2
 	releaseall
 	end
 
@@ -61,9 +61,9 @@ LilycoveCity_PokemonTrainerFanClub_Movement_15940C:: @ 815940C
 	step_end
 
 LilycoveCity_PokemonTrainerFanClub_MapScript1_159412:: @ 8159412
-	compare 0x4095, 1
+	compare VAR_LILYCOVE_FAN_CLUB_STATE, 1
 	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_159515
-	compare 0x4095, 2
+	compare VAR_LILYCOVE_FAN_CLUB_STATE, 2
 	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_159429
 	end
 
@@ -148,7 +148,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_15952F:: @ 815952F
 	faceplayer
 	setvar 0x8004, 13
 	special sub_810FDAC
-	compare 0x4095, 0
+	compare VAR_LILYCOVE_FAN_CLUB_STATE, 0
 	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_15959C
 	specialvar RESULT, sub_810FD60
 	compare RESULT, 1
@@ -188,7 +188,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_1595A6:: @ 81595A6
 	faceplayer
 	setvar 0x8004, 8
 	special sub_810FDAC
-	compare 0x4095, 0
+	compare VAR_LILYCOVE_FAN_CLUB_STATE, 0
 	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_159613
 	specialvar RESULT, sub_810FD60
 	compare RESULT, 1
@@ -228,7 +228,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_15961D:: @ 815961D
 	faceplayer
 	setvar 0x8004, 9
 	special sub_810FDAC
-	compare 0x4095, 0
+	compare VAR_LILYCOVE_FAN_CLUB_STATE, 0
 	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_15968A
 	specialvar RESULT, sub_810FD60
 	compare RESULT, 1
@@ -268,7 +268,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_159694:: @ 8159694
 	faceplayer
 	setvar 0x8004, 10
 	special sub_810FDAC
-	compare 0x4095, 0
+	compare VAR_LILYCOVE_FAN_CLUB_STATE, 0
 	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_159701
 	specialvar RESULT, sub_810FD60
 	compare RESULT, 1

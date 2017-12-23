@@ -370,13 +370,13 @@ Route110_TrickHousePuzzle3_EventScript_1626E4:: @ 81626E4
 
 Route110_TrickHousePuzzle3_EventScript_1626EB:: @ 81626EB
 	lockall
-	compare 0x40ad, 0
+	compare VAR_TRICK_HOUSE_PUZZLE_3_STATE, 0
 	goto_if_eq Route110_TrickHousePuzzle3_EventScript_1626FD
 	goto Route110_TrickHousePuzzle3_EventScript_161892
 	end
 
 Route110_TrickHousePuzzle3_EventScript_1626FD:: @ 81626FD
-	setvar 0x40ad, 1
+	setvar VAR_TRICK_HOUSE_PUZZLE_3_STATE, 1
 	goto Route110_TrickHousePuzzle3_EventScript_16189C
 	end
 

@@ -12,7 +12,7 @@ Route110_MapScript1_14F914:: @ 814F914
 	call Route110_EventScript_1A0196
 	call Route110_EventScript_1A014E
 	call Route110_EventScript_1A0172
-	compare 0x40a9, 1
+	compare VAR_CYCLING_CHALLENGE_STATE, 1
 	call_if 1, Route110_EventScript_14F92F
 	end
 
@@ -21,12 +21,12 @@ Route110_EventScript_14F92F:: @ 814F92F
 	return
 
 Route110_MapScript2_14F933:: @ 814F933
-	map_script_2 0x40a9, 1, Route110_EventScript_14F93D
+	map_script_2 VAR_CYCLING_CHALLENGE_STATE, 1, Route110_EventScript_14F93D
 	.2byte 0
 
 Route110_EventScript_14F93D:: @ 814F93D
 	special ScrSpecial_BeginCyclingRoadChallenge
-	setvar 0x40a9, 2
+	setvar VAR_CYCLING_CHALLENGE_STATE, 2
 	return
 
 Route110_EventScript_14F946:: @ 814F946
@@ -149,7 +149,7 @@ Route110_EventScript_14FA53:: @ 814FA53
 	specialvar RESULT, GetPlayerAvatarBike
 	compare RESULT, 1
 	goto_if_eq Route110_EventScript_14FA84
-	compare 0x40a9, 0
+	compare VAR_CYCLING_CHALLENGE_STATE, 0
 	goto_if_eq Route110_EventScript_14FA7A
 	msgbox Route110_Text_16F26A, 4
 	release
@@ -303,7 +303,7 @@ Route110_EventScript_14FCFB:: @ 814FCFB
 	end
 
 Route110_EventScript_14FD09:: @ 814FD09
-	setvar 0x40a9, 3
+	setvar VAR_CYCLING_CHALLENGE_STATE, 3
 	savebgm 0
 	fadedefaultbgm
 	return
@@ -361,7 +361,7 @@ Route110_EventScript_14FDAC:: @ 814FDAC
 
 Route110_EventScript_14FDB1:: @ 814FDB1
 	msgbox Route110_Text_16E7A1, 4
-	switch 0x4023
+	switch VAR_STARTER_MON
 	case 0, Route110_EventScript_14FDE0
 	case 1, Route110_EventScript_14FDF0
 	case 2, Route110_EventScript_14FE00
@@ -391,7 +391,7 @@ Route110_EventScript_14FE10:: @ 814FE10
 
 Route110_EventScript_14FE2B:: @ 814FE2B
 	msgbox Route110_Text_16E99A, 4
-	switch 0x4023
+	switch VAR_STARTER_MON
 	case 0, Route110_EventScript_14FE5A
 	case 1, Route110_EventScript_14FE6A
 	case 2, Route110_EventScript_14FE7A
@@ -443,7 +443,7 @@ Route110_EventScript_14FEB2:: @ 814FEB2
 	compare 0x8008, 3
 	call_if 1, Route110_EventScript_14FF4B
 	removeobject 29
-	setvar 0x4069, 1
+	setvar VAR_ROUTE110_STATE, 1
 	savebgm 0
 	fadedefaultbgm
 	releaseall

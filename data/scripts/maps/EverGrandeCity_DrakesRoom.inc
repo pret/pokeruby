@@ -13,20 +13,20 @@ EverGrandeCity_DrakesRoom_EventScript_15B727:: @ 815B727
 	end
 
 EverGrandeCity_DrakesRoom_MapScript2_15B72C:: @ 815B72C
-	map_script_2 0x409c, 3, EverGrandeCity_DrakesRoom_EventScript_15B736
+	map_script_2 VAR_ELITE_4_STATE, 3, EverGrandeCity_DrakesRoom_EventScript_15B736
 	.2byte 0
 
 EverGrandeCity_DrakesRoom_EventScript_15B736:: @ 815B736
 	lockall
 	call EverGrandeCity_DrakesRoom_EventScript_1A0710
-	setvar 0x409c, 4
+	setvar VAR_ELITE_4_STATE, 4
 	releaseall
 	end
 
 EverGrandeCity_DrakesRoom_MapScript1_15B743:: @ 815B743
 	checkflag FLAG_DEFEATED_ELITE_4_DRAKE
 	call_if 1, EverGrandeCity_DrakesRoom_EventScript_15B758
-	compare 0x409c, 4
+	compare VAR_ELITE_4_STATE, 4
 	call_if 1, EverGrandeCity_DrakesRoom_EventScript_15B75E
 	end
 

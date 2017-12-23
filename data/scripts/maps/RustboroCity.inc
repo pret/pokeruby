@@ -180,9 +180,9 @@ RustboroCity_EventScript_14C4F4:: @ 814C4F4
 	setobjectxyperm 9, 30, 10
 	clearflag FLAG_HIDE_DEVON_RUSTBORO
 	setflag FLAG_DEVON_GOODS_STOLEN
-	setvar 0x405a, 2
-	setvar 0x409a, 2
-	setvar 0x406f, 1
+	setvar VAR_RUSTBORO_STATE, 2
+	setvar VAR_RUSTURF_TUNNEL_STATE, 2
+	setvar VAR_ROUTE116_STATE, 1
 	clearflag FLAG_HIDE_BRINEY_ROUTE116
 	clearflag FLAG_HIDE_PEEKO_RUSTURF_TUNNEL
 	clearflag FLAG_HIDE_GRUNT_RUSTURF_TUNNEL
@@ -372,7 +372,7 @@ RustboroCity_EventScript_14C650:: @ 814C650
 	compare VAR_TEMP_1, 3
 	call_if 1, RustboroCity_EventScript_14C715
 	setflag FLAG_UNKNOWN_9F
-	setvar 0x405a, 3
+	setvar VAR_RUSTBORO_STATE, 3
 	moveobjectoffscreen 9
 	msgbox RustboroCity_Text_166EA5, 4
 	releaseall
@@ -475,7 +475,7 @@ RustboroCity_EventScript_14C77D:: @ 814C77D
 	closemessage
 	setflag FLAG_RETURNED_DEVON_GOODS
 	setflag FLAG_HIDE_DEVON_RUSTBORO
-	setvar 0x405a, 5
+	setvar VAR_RUSTBORO_STATE, 5
 	delay 30
 	warp MAP_RUSTBORO_CITY_DEVON_CORP_3F, 255, 2, 2
 	waitstate

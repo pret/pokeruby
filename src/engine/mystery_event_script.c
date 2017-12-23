@@ -317,7 +317,7 @@ bool8 MEScrCmd_setenigmaberry(struct ScriptContext *ctx)
     ctx->data[2] = 2;
 
     if (IsEnigmaBerryValid() == TRUE)
-        VarSet(0x402D, 1);
+        VarSet(VAR_ENIGMA_BERRY_AVAILABLE, 1);
     else
         ctx->data[2] = 1;
 

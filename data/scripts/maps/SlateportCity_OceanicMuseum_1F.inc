@@ -51,7 +51,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_155B2D:: @ 8155B2D
 	updatemoneybox 0, 0
 	nop
 	msgbox SlateportCity_OceanicMuseum_1F_Text_17E1DE, 4
-	setvar 0x40aa, 1
+	setvar VAR_SLATEPORT_MUSEUM_1F_STATE, 1
 	hidemoneybox 0, 0
 	releaseall
 	end
@@ -69,7 +69,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_155B5A:: @ 8155B5A
 
 SlateportCity_OceanicMuseum_1F_EventScript_155B7B:: @ 8155B7B
 	msgbox SlateportCity_OceanicMuseum_1F_Text_17E22D, 4
-	setvar 0x40aa, 1
+	setvar VAR_SLATEPORT_MUSEUM_1F_STATE, 1
 	hidemoneybox 0, 0
 	releaseall
 	end

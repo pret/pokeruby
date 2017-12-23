@@ -29,19 +29,19 @@ RustboroCity_MapWarps:: @ 837FE64
 	warp_def 26, 46, 0, 0, MAP_RUSTBORO_CITY_HOUSE3
 
 RustboroCity_MapCoordEvents:: @ 837FEC4
-	coord_event 23, 20, 3, 0, 0x405a, 1, 0, RustboroCity_EventScript_14C481
-	coord_event 23, 21, 3, 0, 0x405a, 1, 0, RustboroCity_EventScript_14C498
-	coord_event 23, 22, 3, 0, 0x405a, 1, 0, RustboroCity_EventScript_14C4AF
-	coord_event 23, 23, 3, 0, 0x405a, 1, 0, RustboroCity_EventScript_14C4C6
-	coord_event 23, 24, 3, 0, 0x405a, 1, 0, RustboroCity_EventScript_14C4DD
-	coord_event 30, 9, 3, 0, 0x405a, 2, 0, RustboroCity_EventScript_14C620
-	coord_event 29, 10, 3, 0, 0x405a, 2, 0, RustboroCity_EventScript_14C62C
-	coord_event 30, 11, 3, 0, 0x405a, 2, 0, RustboroCity_EventScript_14C638
-	coord_event 30, 12, 3, 0, 0x405a, 2, 0, RustboroCity_EventScript_14C644
-	coord_event 30, 9, 3, 0, 0x405a, 4, 0, RustboroCity_EventScript_14C74D
-	coord_event 31, 10, 3, 0, 0x405a, 4, 0, RustboroCity_EventScript_14C759
-	coord_event 30, 11, 3, 0, 0x405a, 4, 0, RustboroCity_EventScript_14C765
-	coord_event 30, 12, 3, 0, 0x405a, 4, 0, RustboroCity_EventScript_14C771
+	coord_event 23, 20, 3, 0, VAR_RUSTBORO_STATE, 1, 0, RustboroCity_EventScript_14C481
+	coord_event 23, 21, 3, 0, VAR_RUSTBORO_STATE, 1, 0, RustboroCity_EventScript_14C498
+	coord_event 23, 22, 3, 0, VAR_RUSTBORO_STATE, 1, 0, RustboroCity_EventScript_14C4AF
+	coord_event 23, 23, 3, 0, VAR_RUSTBORO_STATE, 1, 0, RustboroCity_EventScript_14C4C6
+	coord_event 23, 24, 3, 0, VAR_RUSTBORO_STATE, 1, 0, RustboroCity_EventScript_14C4DD
+	coord_event 30, 9, 3, 0, VAR_RUSTBORO_STATE, 2, 0, RustboroCity_EventScript_14C620
+	coord_event 29, 10, 3, 0, VAR_RUSTBORO_STATE, 2, 0, RustboroCity_EventScript_14C62C
+	coord_event 30, 11, 3, 0, VAR_RUSTBORO_STATE, 2, 0, RustboroCity_EventScript_14C638
+	coord_event 30, 12, 3, 0, VAR_RUSTBORO_STATE, 2, 0, RustboroCity_EventScript_14C644
+	coord_event 30, 9, 3, 0, VAR_RUSTBORO_STATE, 4, 0, RustboroCity_EventScript_14C74D
+	coord_event 31, 10, 3, 0, VAR_RUSTBORO_STATE, 4, 0, RustboroCity_EventScript_14C759
+	coord_event 30, 11, 3, 0, VAR_RUSTBORO_STATE, 4, 0, RustboroCity_EventScript_14C765
+	coord_event 30, 12, 3, 0, VAR_RUSTBORO_STATE, 4, 0, RustboroCity_EventScript_14C771
 
 RustboroCity_MapBGEvents:: @ 837FF94
 	bg_event 23, 19, 0, 0, 0, RustboroCity_EventScript_14C41C

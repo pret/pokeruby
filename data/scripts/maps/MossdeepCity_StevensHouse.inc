@@ -14,7 +14,7 @@ MossdeepCity_StevensHouse_EventScript_15A9DF:: @ 815A9DF
 	return
 
 MossdeepCity_StevensHouse_MapScript1_15A9E9:: @ 815A9E9
-	compare 0x40c6, 1
+	compare VAR_STEVENS_HOUSE_STATE, 1
 	call_if 1, MossdeepCity_StevensHouse_EventScript_15A9F5
 	end
 
@@ -24,7 +24,7 @@ MossdeepCity_StevensHouse_EventScript_15A9F5:: @ 815A9F5
 	return
 
 MossdeepCity_StevensHouse_MapScript2_15AA01:: @ 815AA01
-	map_script_2 0x40c6, 0, MossdeepCity_StevensHouse_EventScript_15AA0B
+	map_script_2 VAR_STEVENS_HOUSE_STATE, 0, MossdeepCity_StevensHouse_EventScript_15AA0B
 	.2byte 0
 
 MossdeepCity_StevensHouse_EventScript_15AA0B:: @ 815AA0B
@@ -47,7 +47,7 @@ MossdeepCity_StevensHouse_EventScript_15AA0B:: @ 815AA0B
 	delay 20
 	applymovement 1, MossdeepCity_StevensHouse_Movement_15AA76
 	waitmovement 0
-	setvar 0x40c6, 1
+	setvar VAR_STEVENS_HOUSE_STATE, 1
 	releaseall
 	end
 

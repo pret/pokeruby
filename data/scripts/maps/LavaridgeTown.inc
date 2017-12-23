@@ -9,7 +9,7 @@ LavaridgeTown_MapScript1_14E4AE:: @ 814E4AE
 	call_if 1, LavaridgeTown_EventScript_14E4DF
 	call LavaridgeTown_EventScript_1A014E
 	call LavaridgeTown_EventScript_1A0172
-	compare 0x4053, 2
+	compare VAR_LAVARIDGE_RIVAL_STATE, 2
 	call_if 1, LavaridgeTown_EventScript_14E4D0
 	end
 
@@ -23,7 +23,7 @@ LavaridgeTown_EventScript_14E4DF:: @ 814E4DF
 	return
 
 LavaridgeTown_MapScript2_14E4E3:: @ 814E4E3
-	map_script_2 0x4053, 1, LavaridgeTown_EventScript_14E4ED
+	map_script_2 VAR_LAVARIDGE_RIVAL_STATE, 1, LavaridgeTown_EventScript_14E4ED
 	.2byte 0
 
 LavaridgeTown_EventScript_14E4ED:: @ 814E4ED
@@ -111,7 +111,7 @@ LavaridgeTown_EventScript_14E5F5:: @ 814E5F5
 	compare 0x8008, 0
 	call_if 1, LavaridgeTown_EventScript_14E6A5
 	removeobject 7
-	setvar 0x4053, 2
+	setvar VAR_LAVARIDGE_RIVAL_STATE, 2
 	savebgm 0
 	fadedefaultbgm
 	compare 0x8008, 0

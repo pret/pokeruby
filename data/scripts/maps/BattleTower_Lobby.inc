@@ -159,7 +159,7 @@ BattleTower_Lobby_EventScript_160419:: @ 8160419
 BattleTower_Lobby_EventScript_16044B:: @ 816044B
 	lock
 	faceplayer
-	setvar 0x40bc, 1
+	setvar VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 1
 	message BattleTower_Lobby_Text_19A5B1
 	waitmessage
 	message BattleTower_Lobby_Text_19A5CE
@@ -250,7 +250,7 @@ BattleTower_Lobby_EventScript_160587:: @ 8160587
 	incrementgamestat GAME_STAT_ENTERED_BATTLE_TOWER
 	special SavePlayerParty
 	special sub_8135A14
-	setvar 0x40bc, 1
+	setvar VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 1
 	msgbox BattleTower_Lobby_Text_19A0A8, 4
 	closemessage
 	call BattleTower_Lobby_EventScript_160664

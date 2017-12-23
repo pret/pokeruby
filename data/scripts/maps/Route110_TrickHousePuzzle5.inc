@@ -13,13 +13,13 @@ Route110_TrickHousePuzzle5_MapScript1_1627B6:: @ 81627B6
 
 Route110_TrickHousePuzzle5_EventScript_1627D5:: @ 81627D5
 	lockall
-	compare 0x40af, 0
+	compare VAR_TRICK_HOUSE_PUZZLE_5_STATE, 0
 	goto_if_eq Route110_TrickHousePuzzle5_EventScript_1627E7
 	goto Route110_TrickHousePuzzle5_EventScript_161892
 	end
 
 Route110_TrickHousePuzzle5_EventScript_1627E7:: @ 81627E7
-	setvar 0x40af, 1
+	setvar VAR_TRICK_HOUSE_PUZZLE_5_STATE, 1
 	goto Route110_TrickHousePuzzle5_EventScript_16189C
 	end
 

@@ -13,7 +13,7 @@ SlateportCity_ContestLobby_EventScript_15541D:: @ 815541D
 	call SlateportCity_ContestLobby_EventScript_155448
 	special sub_80C4BF0
 	call SlateportCity_ContestLobby_EventScript_15FBDB
-	setvar 0x4088, 3
+	setvar VAR_CONTEST_LOCATION, 3
 	warp MAP_LINK_CONTEST_ROOM1, 255, 7, 5
 	waitstate
 	end

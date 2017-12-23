@@ -70,11 +70,11 @@ MtPyre_Summit_EventScript_15D4E1:: @ 815D4E1
 
 MtPyre_Summit_EventScript_15D57A:: @ 815D57A
 	setflag FLAG_MT_PYRE_ORB_STOLEN
-	setvar 0x4058, 1
+	setvar VAR_SLATEPORT_STATE, 1
 	clearflag FLAG_HIDE_STERN_SLATEPORT
 	clearflag FLAG_HIDE_GABBY_AND_TY_SLATEPORT
-	setvar 0x40a0, 1
-	setvar 0x40b9, 1
+	setvar VAR_SLATEPORT_HARBOR_STATE, 1
+	setvar VAR_MT_PYRE_STATE, 1
 	return
 
 MtPyre_Summit_EventScript_15D593:: @ 815D593
@@ -287,7 +287,7 @@ MtPyre_Summit_EventScript_15D6F2:: @ 815D6F2
 	compare 0x8008, 2
 	call_if 1, MtPyre_Summit_EventScript_15D795
 	removeobject 2
-	setvar 0x40b9, 3
+	setvar VAR_MT_PYRE_STATE, 3
 	releaseall
 	end
 

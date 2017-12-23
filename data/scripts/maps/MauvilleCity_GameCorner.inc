@@ -394,7 +394,7 @@ MauvilleCity_GameCorner_EventScript_156F96:: @ 8156F96
 	msgbox MauvilleCity_GameCorner_Text_181F3D, 5
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_157068
-	switch 0x4023
+	switch VAR_STARTER_MON
 	case 0, MauvilleCity_GameCorner_EventScript_156FDB
 	case 1, MauvilleCity_GameCorner_EventScript_157005
 	case 2, MauvilleCity_GameCorner_EventScript_15702F

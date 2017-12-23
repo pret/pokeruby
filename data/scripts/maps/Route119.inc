@@ -27,7 +27,7 @@ Route119_MapScript1_15119B:: @ 815119B
 	call Route119_EventScript_1A014E
 	call Route119_EventScript_1A0172
 	call Route119_EventScript_1A0196
-	compare 0x40b3, 1
+	compare VAR_WEATHER_INSTITUTE_STATE, 1
 	call_if 1, Route119_EventScript_1511B9
 	special SetRoute119Weather
 	end
@@ -35,7 +35,7 @@ Route119_MapScript1_15119B:: @ 815119B
 Route119_EventScript_1511B9:: @ 81511B9
 	setflag FLAG_HIDE_WEATHER_INSTITUTE_WORKERS_2F
 	clearflag FLAG_HIDE_WEATHER_INSTITUTE_WORKERS_1F
-	setvar 0x40b3, 2
+	setvar VAR_WEATHER_INSTITUTE_STATE, 2
 	return
 
 Route119_EventScript_1511C5:: @ 81511C5
@@ -89,7 +89,7 @@ Route119_EventScript_151259:: @ 8151259
 
 Route119_EventScript_15125E:: @ 815125E
 	msgbox Route119_Text_1710BB, 4
-	switch 0x4023
+	switch VAR_STARTER_MON
 	case 0, Route119_EventScript_15128D
 	case 1, Route119_EventScript_15129D
 	case 2, Route119_EventScript_1512AD
@@ -119,7 +119,7 @@ Route119_EventScript_1512BD:: @ 81512BD
 
 Route119_EventScript_1512D8:: @ 81512D8
 	msgbox Route119_Text_171358, 4
-	switch 0x4023
+	switch VAR_STARTER_MON
 	case 0, Route119_EventScript_151307
 	case 1, Route119_EventScript_151317
 	case 2, Route119_EventScript_151327
@@ -166,7 +166,7 @@ Route119_EventScript_151362:: @ 8151362
 	compare VAR_TEMP_1, 2
 	call_if 1, Route119_EventScript_1513C7
 	removeobject 25
-	setvar 0x4072, 1
+	setvar VAR_ROUTE119_STATE, 1
 	savebgm 0
 	fadedefaultbgm
 	releaseall

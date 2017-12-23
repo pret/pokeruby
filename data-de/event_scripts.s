@@ -1302,7 +1302,7 @@ EverGrandeCity_HallOfFame_EventScript_19FC13:: @ 819FC13
 	setflag FLAG_HIDE_BRINEY_SLATEPORT_SHIPYARD
 	clearflag FLAG_HIDE_BRINEY_AND_PEEKO_SS_TIDAL
 	clearflag FLAG_HIDE_STEVENS_LETTER
-	setvar 0x40c6, 1
+	setvar VAR_STEVENS_HOUSE_STATE, 1
 	clearflag FLAG_HIDE_WALLY_DEFEATED_VICTORY_ROAD
 	clearflag FLAG_HIDE_SS_TIDAL_SLATEPORT_HARBOR
 	clearflag FLAG_HIDE_SS_TIDAL_LILYCOVE_HARBOR
@@ -1326,8 +1326,8 @@ EverGrandeCity_HallOfFame_EventScript_19FC5E:: @ 819FC5E
 	return
 
 EverGrandeCity_HallOfFame_EventScript_19FC62:: @ 819FC62
-	setvar 0x4082, 3
-	setvar 0x408c, 3
+	setvar VAR_LITTLEROOT_HOUSES_STATE, 3
+	setvar VAR_LITTLEROOT_HOUSES_STATE_2, 3
 	clearflag FLAG_HIDE_NORMAN_LITTLEROOT
 	return
 
@@ -1347,15 +1347,15 @@ EventScript_19FC84:
 	checkflag FLAG_DEFEATED_LAVARIDGE_GYM
 	goto_if 0, Route101_EventScript_1A14DC
 	clearflag FLAG_HIDE_RIVAL_LAVARIDGE_1
-	setvar 0x4053, 2
+	setvar VAR_LAVARIDGE_RIVAL_STATE, 2
 	return
 
 gUnknown_0819FC9F:: @ 819FC9F
-	compare 0x4096, 1
+	compare VAR_BRINEY_LOCATION, 1
 	goto_if_eq EventScript_19FCC1
-	compare 0x4096, 2
+	compare VAR_BRINEY_LOCATION, 2
 	goto_if_eq EventScript_19FCD7
-	compare 0x4096, 3
+	compare VAR_BRINEY_LOCATION, 3
 	goto_if_eq EventScript_19FCF0
 	end
 
@@ -1396,7 +1396,7 @@ EverGrandeCity_HallOfFame_EventScript_19FD09:: @ 819FD09
 	clearflag FLAG_DEFEATED_ELITE_4_PHOEBE
 	clearflag FLAG_DEFEATED_ELITE_4_GLACIA
 	clearflag FLAG_DEFEATED_ELITE_4_DRAKE
-	setvar 0x409c, 0
+	setvar VAR_ELITE_4_STATE, 0
 	return
 
 DewfordTown_PokemonCenter_1F_EventScript_19FD1B:: @ 819FD1B
@@ -1421,15 +1421,15 @@ VerdanturfTown_PokemonCenter_1F_EventScript_19FD1B:: @ 819FD1B
 	return
 
 OldaleTown_PokemonCenter_1F_EventScript_19FD49:: @ 819FD49
-	setvar 0x4096, 1
+	setvar VAR_BRINEY_LOCATION, 1
 	return
 
 OldaleTown_PokemonCenter_1F_EventScript_19FD4F:: @ 819FD4F
-	setvar 0x4096, 2
+	setvar VAR_BRINEY_LOCATION, 2
 	return
 
 OldaleTown_PokemonCenter_1F_EventScript_19FD55:: @ 819FD55
-	setvar 0x4096, 3
+	setvar VAR_BRINEY_LOCATION, 3
 	return
 
 DewfordTown_PokemonCenter_1F_EventScript_19FD5B:: @ 819FD5B
@@ -1821,8 +1821,8 @@ DewfordTown_Hall_EventScript_1A0102:: @ 81A0102
 DewfordTown_EventScript_1A010C:: @ 81A010C
 Route104_MrBrineysHouse_EventScript_1A010C:: @ 81A010C
 Route109_EventScript_1A010C:: @ 81A010C
-	copyvar 0x8008, 0x4096
-	setvar 0x4096, 0
+	copyvar 0x8008, VAR_BRINEY_LOCATION
+	setvar VAR_BRINEY_LOCATION, 0
 	return
 
 UseSurfScript:: @ 81A0117
@@ -2152,23 +2152,23 @@ Route109_EventScript_1A02EF:: @ 81A02EF
 LittlerootTown_ProfessorBirchsLab_EventScript_1A02F4:: @ 81A02F4
 Route101_EventScript_1A02F4:: @ 81A02F4
 Route103_EventScript_1A02F4:: @ 81A02F4
-	compare 0x4085, 0
+	compare VAR_PETALBURG_GYM_STATE, 0
 	goto_if_eq Route101_EventScript_1A14DC
-	compare 0x4049, 0
+	compare VAR_BIRCH_STATE, 0
 	call_if 1, Route101_EventScript_1A0358
-	compare 0x4049, 1
+	compare VAR_BIRCH_STATE, 1
 	call_if 1, Route101_EventScript_1A0358
-	compare 0x4049, 2
+	compare VAR_BIRCH_STATE, 2
 	call_if 1, Route101_EventScript_1A0365
-	compare 0x4049, 3
+	compare VAR_BIRCH_STATE, 3
 	call_if 1, Route101_EventScript_1A0365
-	compare 0x4049, 4
+	compare VAR_BIRCH_STATE, 4
 	call_if 1, Route101_EventScript_1A0372
-	compare 0x4049, 5
+	compare VAR_BIRCH_STATE, 5
 	call_if 1, Route101_EventScript_1A0372
-	compare 0x4049, 6
+	compare VAR_BIRCH_STATE, 6
 	call_if 1, Route101_EventScript_1A0358
-	compare 0x4049, 7
+	compare VAR_BIRCH_STATE, 7
 	call_if 1, Route101_EventScript_1A0358
 	return
 
@@ -2266,7 +2266,7 @@ PetalburgCity_Gym_EventScript_1A0424:: @ 81A0424
 	setflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE104
 	setflag FLAG_HIDE_MR_BRINEY_ROUTE104_HOUSE
 	setflag FLAG_HIDE_PEEKO_BRINEY_HOUSE
-	setvar 0x4096, 0
+	setvar VAR_BRINEY_LOCATION, 0
 	return
 
 RusturfTunnel_EventScript_1A0442:: @ 81A0442
@@ -2274,7 +2274,7 @@ RusturfTunnel_EventScript_1A0442:: @ 81A0442
 	removeobject 10
 	clearflag FLAG_HIDE_BOYFRIEND_WANDAS_HOUSE
 	clearflag FLAG_HIDE_GIRLFRIEND_WANDAS_HOUSE
-	setvar 0x409a, 6
+	setvar VAR_RUSTURF_TUNNEL_STATE, 6
 	setflag FLAG_RUSTURF_TUNNEL_OPENED
 	return
 
@@ -3743,21 +3743,21 @@ EventScript_1A2DAA:
 EventScript_1A2DB8:
 	closemessage
 	playse 9
-	setvar 0x4097, 0
+	setvar VAR_0x4097, 0
 	setflag FLAG_DECORATION_1
 	special sub_80BB8CC
 	special sub_80BBAF0
 	setvar 0x8004, 0
 	setvar 0x8005, 0
 	special sub_80BBDD0
-	setvar 0x4089, 1
+	setvar VAR_0x4089, 1
 	waitstate
 	end
 
 SecretBase_RedCave1_EventScript_1A2DDE:: @ 81A2DDE
 	applymovement 255, SecretBase_RedCave1_Movement_1A2E11
 	waitmovement 0
-	setvar 0x4097, 1
+	setvar VAR_0x4097, 1
 	msgbox SecretBase_RedCave1_Text_198F89, 5
 	compare RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A2E08
@@ -3780,21 +3780,21 @@ SecretBase_RedCave1_Movement_1A2E11:: @ 81A2E11
 
 gUnknown_081A2E14:: @ 81A2E14
 	lockall
-	setvar 0x4097, 1
+	setvar VAR_0x4097, 1
 	playse 9
 	special sub_80BC114
 	compare RESULT, 0
 	goto_if_eq EventScript_1A2E38
 	clearflag FLAG_DECORATION_1
 	special sub_80BBAF0
-	setvar 0x4089, 0
+	setvar VAR_0x4089, 0
 	waitstate
 	end
 
 EventScript_1A2E38:
 	setflag FLAG_DECORATION_1
 	special sub_80BBAF0
-	setvar 0x4089, 0
+	setvar VAR_0x4089, 0
 	waitstate
 	end
 
@@ -3884,7 +3884,7 @@ SecretBase_RedCave1_EventScript_1A2F68:: @ 81A2F68
 	setvar 0x8004, 0
 	setvar 0x8005, 0
 	special sub_80BBDD0
-	setvar 0x4089, 1
+	setvar VAR_0x4089, 1
 	end
 
 gUnknown_081A2F7B:: @ 81A2F7B
@@ -4660,13 +4660,13 @@ FallarborTown_ContestLobby_EventScript_1AE188:: @ 81AE188
 LilycoveCity_ContestLobby_EventScript_1AE188:: @ 81AE188
 SlateportCity_ContestLobby_EventScript_1AE188:: @ 81AE188
 VerdanturfTown_ContestLobby_EventScript_1AE188:: @ 81AE188
-	compare 0x4086, 2
+	compare VAR_LINK_CONTEST_ROOM_STATE, 2
 	goto_if 5, FallarborTown_ContestLobby_EventScript_1AE1FE
 	setvar 0x8005, 6
 	special sub_80BF2C4
 	compare RESULT, 1
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1AE1FE
-	switch 0x4088
+	switch VAR_CONTEST_LOCATION
 	case 0, FallarborTown_ContestLobby_EventScript_1AE1FE
 	case 2, FallarborTown_ContestLobby_EventScript_1AE1EE
 	case 1, FallarborTown_ContestLobby_EventScript_1AE1F2
@@ -4766,7 +4766,7 @@ BattleTower_Lobby_EventScript_1AE2E3:: @ 81AE2E3
 	end
 
 BattleTower_Lobby_EventScript_1AE2ED:: @ 81AE2ED
-	compare 0x40bc, 0
+	compare VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 0
 	goto_if_eq BattleTower_Lobby_EventScript_1AE30F
 	setvar 0x8005, 7
 	special sub_80BF2C4
@@ -4900,14 +4900,14 @@ GraniteCave_B1F_MapScript2_1C6BB5:: @ 81C6BB5
 MtPyre_2F_MapScript2_1C6BB5:: @ 81C6BB5
 SkyPillar_2F_MapScript2_1C6BB5:: @ 81C6BB5
 SkyPillar_4F_MapScript2_1C6BB5:: @ 81C6BB5
-	map_script_2 0x4022, 0, S_FallDownHole
+	map_script_2 VAR_ICE_STEP_COUNT, 0, S_FallDownHole
 	.2byte 0
 
 GraniteCave_B1F_MapScript1_1C6BBF:: @ 81C6BBF
 MtPyre_2F_MapScript1_1C6BBF:: @ 81C6BBF
 SkyPillar_2F_MapScript1_1C6BBF:: @ 81C6BBF
 SkyPillar_4F_MapScript1_1C6BBF:: @ 81C6BBF
-	copyvar 0x4022, 0x1
+	copyvar VAR_ICE_STEP_COUNT, 0x1
 	end
 
 S_FallDownHole:: @ 81C6BC5

@@ -2193,7 +2193,7 @@ void GetMomOrDadStringForTVMessage(void)
 
 void sub_80BFD20(void)
 {
-    VarSet(VAR_0x40BC, 0);
+    VarSet(VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 0);
     RemoveFieldObjectByLocalIdAndMap(5, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
 }
 

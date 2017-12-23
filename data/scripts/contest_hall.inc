@@ -7,7 +7,7 @@ VerdanturfTown_ContestLobby_EventScript_1A4E92:: @ 81A4E92
 	checkitem ITEM_CONTEST_PASS, 1
 	compare RESULT, 0
 	call_if 1, FallarborTown_ContestLobby_EventScript_1A4EDD
-	compare 0x408a, 0
+	compare VAR_CONTEST_PRIZE_PICKUP, 0
 	goto_if 5, FallarborTown_ContestLobby_EventScript_1A4F4E
 	checkflag FLAG_TEMP_1
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1A4F8F
@@ -57,7 +57,7 @@ FallarborTown_ContestLobby_EventScript_1A4F44:: @ 81A4F44
 
 FallarborTown_ContestLobby_EventScript_1A4F4E:: @ 81A4F4E
 	msgbox FallarborTown_ContestLobby_Text_1A685A, 4
-	switch 0x408a
+	switch VAR_CONTEST_PRIZE_PICKUP
 	case 4, FallarborTown_ContestLobby_EventScript_1A4F67
 	end
 
@@ -65,7 +65,7 @@ FallarborTown_ContestLobby_EventScript_1A4F67:: @ 81A4F67
 	giveitem_std ITEM_LUXURY_BALL
 	compare RESULT, 0
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1A4F86
-	setvar 0x408a, 0
+	setvar VAR_CONTEST_PRIZE_PICKUP, 0
 	closemessage
 	release
 	end
@@ -182,7 +182,7 @@ FallarborTown_ContestLobby_EventScript_1A513D:: @ 81A513D
 	msgbox FallarborTown_ContestLobby_Text_1A67C1, 4
 	closemessage
 	releaseall
-	setvar 0x4086, 1
+	setvar VAR_LINK_CONTEST_ROOM_STATE, 1
 	return
 
 LinkContestRoom1_EventScript_1A514D:: @ 81A514D
@@ -203,7 +203,7 @@ LinkContestRoom1_EventScript_1A514D:: @ 81A514D
 	call LinkContestRoom1_EventScript_1A5A49
 	call LinkContestRoom1_EventScript_1A5A90
 	call LinkContestRoom1_EventScript_1A5BAB
-	setvar 0x4086, 2
+	setvar VAR_LINK_CONTEST_ROOM_STATE, 2
 	return
 
 LinkContestRoom1_EventScript_1A51A0:: @ 81A51A0
@@ -270,7 +270,7 @@ LinkContestRoom1_EventScript_1A5245:: @ 81A5245
 	return
 
 LinkContestRoom1_EventScript_1A525F:: @ 81A525F
-	compare 0x4088, 5
+	compare VAR_CONTEST_LOCATION, 5
 	goto_if_eq LinkContestRoom1_EventScript_1A5273
 	msgbox LinkContestRoom1_Text_1A68F0, 3
 	return
@@ -357,7 +357,7 @@ LinkContestRoom1_EventScript_1A5323:: @ 81A5323
 	return
 
 LinkContestRoom1_EventScript_1A535E:: @ 81A535E
-	compare 0x4088, 5
+	compare VAR_CONTEST_LOCATION, 5
 	goto_if_eq LinkContestRoom1_EventScript_1A5370
 	message LinkContestRoom1_Text_1A6A04
 	waitmessage
@@ -385,7 +385,7 @@ LinkContestRoom1_EventScript_1A5377:: @ 81A5377
 	return
 
 LinkContestRoom1_EventScript_1A53B3:: @ 81A53B3
-	compare 0x4088, 5
+	compare VAR_CONTEST_LOCATION, 5
 	goto_if_eq LinkContestRoom1_EventScript_1A53C7
 	msgbox LinkContestRoom1_Text_1A6A1F, 4
 	return
@@ -396,7 +396,7 @@ LinkContestRoom1_EventScript_1A53C7:: @ 81A53C7
 	return
 
 LinkContestRoom1_EventScript_1A53CE:: @ 81A53CE
-	compare 0x4088, 5
+	compare VAR_CONTEST_LOCATION, 5
 	goto_if_eq LinkContestRoom1_EventScript_1A53DF
 	message LinkContestRoom1_Text_1A6AE1
 	return
@@ -431,15 +431,15 @@ LinkContestRoom1_EventScript_1A53E5:: @ 81A53E5
 
 LinkContestRoom1_EventScript_1A5455:: @ 81A5455
 	special sub_80C47A0
-	compare 0x4088, 1
+	compare VAR_CONTEST_LOCATION, 1
 	call_if 1, LinkContestRoom1_EventScript_1A555A
-	compare 0x4088, 2
+	compare VAR_CONTEST_LOCATION, 2
 	call_if 1, LinkContestRoom1_EventScript_1A55B8
-	compare 0x4088, 3
+	compare VAR_CONTEST_LOCATION, 3
 	call_if 1, LinkContestRoom1_EventScript_1A5616
-	compare 0x4088, 4
+	compare VAR_CONTEST_LOCATION, 4
 	call_if 1, LinkContestRoom1_EventScript_1A5674
-	compare 0x4088, 5
+	compare VAR_CONTEST_LOCATION, 5
 	call_if 1, LinkContestRoom1_EventScript_1A56D2
 	setvar VAR_TEMP_1, 9
 	setvar VAR_TEMP_2, 9
@@ -782,7 +782,7 @@ LinkContestRoom1_EventScript_1A58EE:: @ 81A58EE
 	return
 
 LinkContestRoom1_EventScript_1A5930:: @ 81A5930
-	compare 0x4088, 5
+	compare VAR_CONTEST_LOCATION, 5
 	goto_if_eq LinkContestRoom1_EventScript_1A5944
 	msgbox LinkContestRoom1_Text_1A6AF5, 3
 	return
@@ -809,7 +809,7 @@ LinkContestRoom1_EventScript_1A594A:: @ 81A594A
 	return
 
 LinkContestRoom1_EventScript_1A5984:: @ 81A5984
-	compare 0x4088, 5
+	compare VAR_CONTEST_LOCATION, 5
 	goto_if_eq LinkContestRoom1_EventScript_1A5998
 	msgbox LinkContestRoom1_Text_1A6C06, 4
 	return
@@ -821,7 +821,7 @@ LinkContestRoom1_EventScript_1A5998:: @ 81A5998
 	return
 
 LinkContestRoom1_EventScript_1A59A2:: @ 81A59A2
-	compare 0x4088, 5
+	compare VAR_CONTEST_LOCATION, 5
 	goto_if_eq LinkContestRoom1_EventScript_1A59B6
 	msgbox LinkContestRoom1_Text_1A6C21, 4
 	return
@@ -833,7 +833,7 @@ LinkContestRoom1_EventScript_1A59B6:: @ 81A59B6
 	return
 
 LinkContestRoom1_EventScript_1A59C0:: @ 81A59C0
-	compare 0x4088, 5
+	compare VAR_CONTEST_LOCATION, 5
 	goto_if_eq LinkContestRoom1_EventScript_1A59D4
 	msgbox LinkContestRoom1_Text_1A6C9D, 4
 	return
@@ -845,7 +845,7 @@ LinkContestRoom1_EventScript_1A59D4:: @ 81A59D4
 	return
 
 LinkContestRoom1_EventScript_1A59DE:: @ 81A59DE
-	compare 0x4088, 5
+	compare VAR_CONTEST_LOCATION, 5
 	goto_if_eq LinkContestRoom1_EventScript_1A59F2
 	msgbox LinkContestRoom1_Text_1A6D16, 4
 	return
@@ -895,7 +895,7 @@ LinkContestRoom1_EventScript_1A5A49:: @ 81A5A49
 	return
 
 LinkContestRoom1_EventScript_1A5A75:: @ 81A5A75
-	compare 0x4088, 5
+	compare VAR_CONTEST_LOCATION, 5
 	goto_if_eq LinkContestRoom1_EventScript_1A5A89
 	msgbox LinkContestRoom1_Text_1A6D3C, 4
 	return
@@ -908,7 +908,7 @@ LinkContestRoom1_EventScript_1A5A89:: @ 81A5A89
 LinkContestRoom1_EventScript_1A5A90:: @ 81A5A90
 	addvar VAR_TEMP_1, 1
 	lockall
-	compare 0x4088, 1
+	compare VAR_CONTEST_LOCATION, 1
 	call_if 2, LinkContestRoom1_EventScript_1A5AE4
 	applymovement 9, LinkContestRoom1_Movement_1A5DB7
 	applymovement 12, LinkContestRoom1_Movement_1A5DBB
@@ -993,7 +993,7 @@ LinkContestRoom1_EventScript_1A5AE4:: @ 81A5AE4
 	return
 
 LinkContestRoom1_EventScript_1A5BAB:: @ 81A5BAB
-	compare 0x4088, 5
+	compare VAR_CONTEST_LOCATION, 5
 	goto_if_eq LinkContestRoom1_EventScript_1A5C4C
 	call LinkContestRoom1_EventScript_1A5C12
 	checkflag FLAG_TEMP_2
@@ -1046,7 +1046,7 @@ LinkContestRoom1_EventScript_1A5C42:: @ 81A5C42
 	return
 
 LinkContestRoom1_EventScript_1A5C46:: @ 81A5C46
-	setvar 0x4099, 1
+	setvar VAR_LILYCOVE_CONTEST_LOBBY_STATE, 1
 	return
 
 LinkContestRoom1_EventScript_1A5C4C:: @ 81A5C4C
@@ -1059,7 +1059,7 @@ LinkContestRoom1_EventScript_1A5C4C:: @ 81A5C4C
 	return
 
 LinkContestRoom1_EventScript_1A5C64:: @ 81A5C64
-	setvar 0x4099, 2
+	setvar VAR_LILYCOVE_CONTEST_LOBBY_STATE, 2
 	return
 
 LinkContestRoom1_EventScript_1A5C6A:: @ 81A5C6A
@@ -1117,7 +1117,7 @@ LinkContestRoom1_EventScript_1A5CE5:: @ 81A5CE5
 	return
 
 LinkContestRoom1_EventScript_1A5CFC:: @ 81A5CFC
-	compare 0x4088, 2
+	compare VAR_CONTEST_LOCATION, 2
 	call_if 1, LinkContestRoom1_EventScript_1A5C42
 	incrementgamestat GAME_STAT_WON_CONTEST
 	specialvar RESULT, sub_80C4440
@@ -1130,7 +1130,7 @@ LinkContestRoom1_EventScript_1A5CFC:: @ 81A5CFC
 
 LinkContestRoom1_EventScript_1A5D2D:: @ 81A5D2D
 	msgbox LinkContestRoom1_Text_1A6E1F, 3
-	setvar 0x408a, 4
+	setvar VAR_CONTEST_PRIZE_PICKUP, 4
 	return
 
 LinkContestRoom1_EventScript_1A5D3B:: @ 81A5D3B

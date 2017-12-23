@@ -11,10 +11,10 @@ OldaleTown_MapWarps:: @ 8380AD8
 	warp_def 14, 6, 0, 0, MAP_OLDALE_TOWN_MART
 
 OldaleTown_MapCoordEvents:: @ 8380AF8
-	coord_event 0, 10, 3, 0, 0x4051, 0, 0, OldaleTown_EventScript_14DEFF
-	coord_event 8, 19, 3, 0, 0x40c7, 1, 0, OldaleTown_EventScript_14DF41
-	coord_event 9, 19, 3, 0, 0x40c7, 1, 0, OldaleTown_EventScript_14DF5C
-	coord_event 10, 19, 3, 0, 0x40c7, 1, 0, OldaleTown_EventScript_14DF77
+	coord_event 0, 10, 3, 0, VAR_ROUTE102_ACCESSIBLE, 0, 0, OldaleTown_EventScript_14DEFF
+	coord_event 8, 19, 3, 0, VAR_OLDALE_STATE, 1, 0, OldaleTown_EventScript_14DF41
+	coord_event 9, 19, 3, 0, VAR_OLDALE_STATE, 1, 0, OldaleTown_EventScript_14DF5C
+	coord_event 10, 19, 3, 0, VAR_OLDALE_STATE, 1, 0, OldaleTown_EventScript_14DF77
 
 OldaleTown_MapBGEvents:: @ 8380B38
 	bg_event 11, 9, 0, 0, 0, OldaleTown_EventScript_14DDAA

@@ -40,19 +40,19 @@ MossdeepCity_GameCorner_B1F_EventScript_15AE6E:: @ 815AE6E
 	end
 
 MossdeepCity_GameCorner_B1F_EventScript_15AED5:: @ 815AED5
-	setvar 0x40c0, 3
+	setvar VAR_GAME_CORNER_STATE, 3
 	msgbox MossdeepCity_GameCorner_B1F_Text_18E796, 4
 	return
 
 MossdeepCity_GameCorner_B1F_EventScript_15AEE3:: @ 815AEE3
-	setvar 0x40c0, 1
+	setvar VAR_GAME_CORNER_STATE, 1
 	special ShowFieldMessageStringVar4
 	waitmessage
 	waitbuttonpress
 	return
 
 MossdeepCity_GameCorner_B1F_EventScript_15AEEE:: @ 815AEEE
-	setvar 0x40c0, 2
+	setvar VAR_GAME_CORNER_STATE, 2
 	special ShowFieldMessageStringVar4
 	waitmessage
 	waitbuttonpress

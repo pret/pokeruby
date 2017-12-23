@@ -21,7 +21,7 @@ NewMauville_Inside_MapCoordEvents:: @ 838DFD0
 	coord_event 6, 11, 3, 0, VAR_TEMP_1, 0, 0, NewMauville_Inside_EventScript_15E5AA
 	coord_event 13, 10, 3, 0, VAR_TEMP_1, 0, 0, NewMauville_Inside_EventScript_15E5AA
 	coord_event 17, 10, 3, 0, VAR_TEMP_2, 0, 0, NewMauville_Inside_EventScript_15E5C2
-	coord_event 33, 6, 3, 0, 0x40ba, 1, 0, NewMauville_Inside_EventScript_15E876
+	coord_event 33, 6, 3, 0, VAR_NEW_MAUVILLE_STATE, 1, 0, NewMauville_Inside_EventScript_15E876
 
 NewMauville_Inside_MapBGEvents:: @ 838E070
 	bg_event 32, 4, 3, 0, 0, NewMauville_Inside_EventScript_15E8E0

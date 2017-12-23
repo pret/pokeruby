@@ -8,14 +8,14 @@ LilycoveCity_ContestLobby_MapScript1_158871:: @ 8158871
 	end
 
 LilycoveCity_ContestLobby_MapScript2_158877:: @ 8158877
-	map_script_2 0x4099, 1, LilycoveCity_ContestLobby_EventScript_158889
-	map_script_2 0x4099, 2, LilycoveCity_ContestLobby_EventScript_158A5B
+	map_script_2 VAR_LILYCOVE_CONTEST_LOBBY_STATE, 1, LilycoveCity_ContestLobby_EventScript_158889
+	map_script_2 VAR_LILYCOVE_CONTEST_LOBBY_STATE, 2, LilycoveCity_ContestLobby_EventScript_158A5B
 	.2byte 0
 
 LilycoveCity_ContestLobby_EventScript_158889:: @ 8158889
 	checkflag FLAG_HIDE_LILYCOVE_MUSEUM_CURATOR
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158898
-	setvar 0x4099, 0
+	setvar VAR_LILYCOVE_CONTEST_LOBBY_STATE, 0
 	end
 
 LilycoveCity_ContestLobby_EventScript_158898:: @ 8158898
@@ -42,7 +42,7 @@ LilycoveCity_ContestLobby_EventScript_1588DE:: @ 81588DE
 	msgbox LilycoveCity_ContestLobby_Text_188AE8, 4
 	closemessage
 	special sub_80C4CEC
-	setvar 0x4099, 0
+	setvar VAR_LILYCOVE_CONTEST_LOBBY_STATE, 0
 	specialvar RESULT, GiveMonArtistRibbon
 	compare RESULT, 1
 	call_if 1, LilycoveCity_ContestLobby_EventScript_158948
@@ -62,7 +62,7 @@ LilycoveCity_ContestLobby_EventScript_158918:: @ 8158918
 	closemessage
 	applymovement 4, LilycoveCity_ContestLobby_Movement_158A43
 	waitmovement 0
-	setvar 0x4099, 0
+	setvar VAR_LILYCOVE_CONTEST_LOBBY_STATE, 0
 	removeobject 4
 	releaseall
 	end
@@ -190,7 +190,7 @@ LilycoveCity_ContestLobby_Movement_158A52:: @ 8158A52
 LilycoveCity_ContestLobby_EventScript_158A5B:: @ 8158A5B
 	checkflag FLAG_HIDE_LILYCOVE_MUSEUM_CURATOR
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158A6A
-	setvar 0x4099, 0
+	setvar VAR_LILYCOVE_CONTEST_LOBBY_STATE, 0
 	end
 
 LilycoveCity_ContestLobby_EventScript_158A6A:: @ 8158A6A
@@ -215,7 +215,7 @@ LilycoveCity_ContestLobby_EventScript_158AAE:: @ 8158AAE
 	msgbox LilycoveCity_ContestLobby_Text_188AE8, 4
 	closemessage
 	special sub_80C4CEC
-	setvar 0x4099, 0
+	setvar VAR_LILYCOVE_CONTEST_LOBBY_STATE, 0
 	specialvar RESULT, GiveMonArtistRibbon
 	compare RESULT, 1
 	call_if 1, LilycoveCity_ContestLobby_EventScript_158B18
@@ -235,7 +235,7 @@ LilycoveCity_ContestLobby_EventScript_158AE8:: @ 8158AE8
 	closemessage
 	applymovement 11, LilycoveCity_ContestLobby_Movement_158B6D
 	waitmovement 0
-	setvar 0x4099, 0
+	setvar VAR_LILYCOVE_CONTEST_LOBBY_STATE, 0
 	removeobject 11
 	releaseall
 	end
@@ -481,9 +481,9 @@ LilycoveCity_ContestLobby_EventScript_158DD1:: @ 8158DD1
 
 LilycoveCity_ContestLobby_EventScript_158DEE:: @ 8158DEE
 	call LilycoveCity_ContestLobby_EventScript_158E0B
-	setvar 0x4086, 1
+	setvar VAR_LINK_CONTEST_ROOM_STATE, 1
 	special sub_80C4F70
-	setvar 0x4088, 5
+	setvar VAR_CONTEST_LOCATION, 5
 	setvar CONTEST_RANK, 3
 	call LilycoveCity_ContestLobby_EventScript_158F08
 	end
@@ -577,18 +577,18 @@ LilycoveCity_ContestLobby_EventScript_158EB0:: @ 8158EB0
 	call LilycoveCity_ContestLobby_EventScript_158F86
 	special sub_80C4BF0
 	call LilycoveCity_ContestLobby_EventScript_15FBDB
-	setvar 0x4088, 4
+	setvar VAR_CONTEST_LOCATION, 4
 	call LilycoveCity_ContestLobby_EventScript_158F08
 	waitstate
 	end
 
 LilycoveCity_ContestLobby_EventScript_158EE8:: @ 8158EE8
 	setflag FLAG_HIDE_LILYCOVE_MUSEUM_CURATOR
-	copyvar 0x4094, 0x1
+	copyvar VAR_LILYCOVE_MUSEUM_2F_STATE, 0x1
 	giveitem ITEM_CONTEST_PASS, 1
 	setvar 0x800b, 8
 	setvar CONTEST_RANK, 3
-	setvar 0x4099, 1
+	setvar VAR_LILYCOVE_CONTEST_LOBBY_STATE, 1
 	setflag FLAG_SYS_RIBBON_GET
 	end
 

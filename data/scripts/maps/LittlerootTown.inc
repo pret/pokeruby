@@ -5,19 +5,19 @@ LittlerootTown_MapScripts:: @ 814D509
 
 LittlerootTown_MapScript1_14D514:: @ 814D514
 	setflag FLAG_VISITED_LITTLEROOT_TOWN
-	compare 0x4092, 2
+	compare VAR_LITTLEROOT_INTRO_STATE, 2
 	call_if 1, LittlerootTown_EventScript_14D57B
 	checkflag FLAG_RESCUED_BIRCH
 	call_if 0, LittlerootTown_EventScript_14D583
-	compare 0x4050, 3
+	compare VAR_LITTLEROOT_STATE, 3
 	call_if 1, LittlerootTown_EventScript_14D5A6
-	compare 0x4082, 4
+	compare VAR_LITTLEROOT_HOUSES_STATE, 4
 	call_if 1, LittlerootTown_EventScript_14D570
-	compare 0x408c, 4
+	compare VAR_LITTLEROOT_HOUSES_STATE_2, 4
 	call_if 1, LittlerootTown_EventScript_14D570
-	compare 0x40c7, 1
+	compare VAR_OLDALE_STATE, 1
 	call_if 1, LittlerootTown_EventScript_14D567
-	compare 0x408d, 3
+	compare VAR_LITTLEROOT_RIVAL_STATE, 3
 	call_if 1, LittlerootTown_EventScript_14D563
 	end
 
@@ -26,13 +26,13 @@ LittlerootTown_EventScript_14D563:: @ 814D563
 	return
 
 LittlerootTown_EventScript_14D567:: @ 814D567
-	setvar 0x40c7, 2
+	setvar VAR_OLDALE_STATE, 2
 	setflag FLAG_HIDE_RIVAL_OLDALE_TOWN
 	return
 
 LittlerootTown_EventScript_14D570:: @ 814D570
-	setvar 0x4082, 5
-	setvar 0x408c, 5
+	setvar VAR_LITTLEROOT_HOUSES_STATE, 5
+	setvar VAR_LITTLEROOT_HOUSES_STATE_2, 5
 	return
 
 LittlerootTown_EventScript_14D57B:: @ 814D57B
@@ -40,7 +40,7 @@ LittlerootTown_EventScript_14D57B:: @ 814D57B
 	return
 
 LittlerootTown_EventScript_14D583:: @ 814D583
-	compare 0x4050, 0
+	compare VAR_LITTLEROOT_STATE, 0
 	goto_if_eq LittlerootTown_EventScript_14D59A
 	setobjectxyperm 1, 10, 1
 	setobjectmovementtype 1, 7
@@ -70,9 +70,9 @@ LittlerootTown_EventScript_14D5CD:: @ 814D5CD
 	return
 
 LittlerootTown_MapScript2_14D5D5:: @ 814D5D5
-	map_script_2 0x4092, 1, LittlerootTown_EventScript_14D5EF
-	map_script_2 0x4092, 2, LittlerootTown_EventScript_14D60D
-	map_script_2 0x4092, 7, LittlerootTown_EventScript_14D6C5
+	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 1, LittlerootTown_EventScript_14D5EF
+	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 2, LittlerootTown_EventScript_14D60D
+	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 7, LittlerootTown_EventScript_14D6C5
 	.2byte 0
 
 LittlerootTown_EventScript_14D5EF:: @ 814D5EF
@@ -123,7 +123,7 @@ LittlerootTown_EventScript_14D62B:: @ 814D62B
 	applymovement 255, LittlerootTown_Movement_14D6BD
 	waitmovement 0
 	setflag FLAG_HIDE_MOM_LITTLEROOT
-	setvar 0x4092, 3
+	setvar VAR_LITTLEROOT_INTRO_STATE, 3
 	hideobjectat 255, MAP_PETALBURG_CITY
 	closedoor 0x8004, 0x8005
 	waitdooranim
@@ -172,7 +172,7 @@ LittlerootTown_Movement_14D6C0:: @ 814D6C0
 
 LittlerootTown_EventScript_14D6C5:: @ 814D6C5
 	lockall
-	setvar 0x4092, 8
+	setvar VAR_LITTLEROOT_INTRO_STATE, 8
 	releaseall
 	end
 
@@ -191,7 +191,7 @@ LittlerootTown_EventScript_14D6DF:: @ 814D6DF
 	goto_if_eq LittlerootTown_EventScript_14D72F
 	checkflag FLAG_RESCUED_BIRCH
 	goto_if_eq LittlerootTown_EventScript_14D722
-	compare 0x4050, 0
+	compare VAR_LITTLEROOT_STATE, 0
 	goto_if 5, LittlerootTown_EventScript_14D708
 	msgbox LittlerootTown_Text_16ACEB, 4
 	release
@@ -202,7 +202,7 @@ LittlerootTown_EventScript_14D708:: @ 814D708
 	closemessage
 	applymovement 1, LittlerootTown_Movement_1A083D
 	waitmovement 0
-	setvar 0x4050, 2
+	setvar VAR_LITTLEROOT_STATE, 2
 	release
 	end
 
@@ -319,7 +319,7 @@ LittlerootTown_EventScript_14D7C7:: @ 814D7C7
 	closemessage
 	applymovement 1, LittlerootTown_Movement_1A083D
 	waitmovement 0
-	setvar 0x4050, 2
+	setvar VAR_LITTLEROOT_STATE, 2
 	releaseall
 	end
 
@@ -862,7 +862,7 @@ LittlerootTown_EventScript_14DCE2:: @ 814DCE2
 LittlerootTown_EventScript_14DD2B:: @ 814DD2B
 	removeobject 4
 	setflag FLAG_SYS_B_DASH
-	setvar 0x4050, 4
+	setvar VAR_LITTLEROOT_STATE, 4
 	release
 	end
 

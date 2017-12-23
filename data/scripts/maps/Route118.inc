@@ -89,7 +89,7 @@ Route118_EventScript_151004:: @ 8151004
 	call_if 1, Route118_EventScript_151053
 	compare 0x8008, 2
 	call_if 1, Route118_EventScript_15105E
-	setvar 0x4071, 1
+	setvar VAR_ROUTE118_STATE, 1
 	removeobject 19
 	releaseall
 	end

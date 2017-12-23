@@ -140,10 +140,10 @@ DewfordTown_EventScript_14E151:: @ 814E151
 	clearflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE104
 	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD
 	hideobjectat 4, MAP_DEWFORD_TOWN
-	setvar 0x408e, 2
+	setvar VAR_BOARD_BRINEY_BOAT_ROUTE104_STATE, 2
 	resetobjectpriority 255, MAP_DEWFORD_TOWN
 	warp MAP_ROUTE104_MR_BRINEYS_HOUSE, 255, 5, 4
-	copyvar 0x4096, 0x8008
+	copyvar VAR_BRINEY_LOCATION, 0x8008
 	waitstate
 	release
 	end
@@ -181,7 +181,7 @@ DewfordTown_EventScript_14E1D8:: @ 814E1D8
 	checkflag FLAG_DELIVERED_DEVON_GOODS
 	call_if 1, DewfordTown_EventScript_14E28A
 	closemessage
-	copyvar 0x4096, 0x8008
+	copyvar VAR_BRINEY_LOCATION, 0x8008
 	resetobjectpriority 255, MAP_DEWFORD_TOWN
 	resetobjectpriority 2, MAP_ROUTE109
 	moveobjectoffscreen 2

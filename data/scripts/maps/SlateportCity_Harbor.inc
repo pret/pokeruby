@@ -5,7 +5,7 @@ SlateportCity_Harbor_MapScripts:: @ 8155F5D
 SlateportCity_Harbor_MapScript1_155F63:: @ 8155F63
 	setescapewarp MAP_SLATEPORT_CITY, 255, 28, 13
 	setvar VAR_TEMP_1, 0
-	compare 0x40a0, 1
+	compare VAR_SLATEPORT_HARBOR_STATE, 1
 	call_if 1, SlateportCity_Harbor_EventScript_155F89
 	checkflag FLAG_SYS_GAME_CLEAR
 	call_if 1, SlateportCity_Harbor_EventScript_155F85
@@ -62,7 +62,7 @@ SlateportCity_Harbor_EventScript_155FD5:: @ 8155FD5
 	removeobject 6
 	removeobject 7
 	removeobject 8
-	setvar 0x40a0, 2
+	setvar VAR_SLATEPORT_HARBOR_STATE, 2
 	compare 0x8008, 0
 	call_if 1, SlateportCity_Harbor_EventScript_15605C
 	compare 0x8008, 1
@@ -193,7 +193,7 @@ SlateportCity_Harbor_EventScript_15613F:: @ 815613F
 	msgbox SlateportCity_Harbor_Text_17FB81, 5
 	compare RESULT, 0
 	goto_if_eq SlateportCity_Harbor_EventScript_15618A
-	setvar 0x40b4, 1
+	setvar VAR_PORTHOLE_STATE, 1
 	call SlateportCity_Harbor_EventScript_156196
 	warp MAP_SS_TIDAL_CORRIDOR, 255, 1, 10
 	waitstate
@@ -274,7 +274,7 @@ SlateportCity_Harbor_EventScript_156211:: @ 8156211
 	goto_if_eq SlateportCity_Harbor_EventScript_156265
 	checkflag FLAG_EVIL_TEAM_ESCAPED_IN_SUBMARINE
 	goto_if_eq SlateportCity_Harbor_EventScript_156258
-	compare 0x40a0, 2
+	compare VAR_SLATEPORT_HARBOR_STATE, 2
 	goto_if_eq SlateportCity_Harbor_EventScript_15624E
 	msgbox SlateportCity_Harbor_Text_17FD1C, 4
 	closemessage

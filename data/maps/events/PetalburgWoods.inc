@@ -22,8 +22,8 @@ PetalburgWoods_MapWarps:: @ 838C284
 	warp_def 37, 38, 0, 7, MAP_ROUTE104
 
 PetalburgWoods_MapCoordEvents:: @ 838C2B4
-	coord_event 26, 23, 3, 0, 0x4098, 0, 0, PetalburgWoods_EventScript_15CCA8
-	coord_event 27, 23, 3, 0, 0x4098, 0, 0, PetalburgWoods_EventScript_15CD42
+	coord_event 26, 23, 3, 0, VAR_PETALBURG_WOODS_STATE, 0, 0, PetalburgWoods_EventScript_15CCA8
+	coord_event 27, 23, 3, 0, VAR_PETALBURG_WOODS_STATE, 0, 0, PetalburgWoods_EventScript_15CD42
 
 PetalburgWoods_MapBGEvents:: @ 838C2D4
 	bg_event 14, 32, 3, 0, 0, PetalburgWoods_EventScript_15CF15

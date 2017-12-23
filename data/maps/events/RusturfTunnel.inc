@@ -17,8 +17,8 @@ RusturfTunnel_MapWarps:: @ 838BE1C
 
 RusturfTunnel_MapCoordEvents:: @ 838BE34
 	coord_event 23, 4, 3, 0, 0, 0, 0, RusturfTunnel_EventScript_15C999
-	coord_event 9, 4, 3, 0, 0x409a, 2, 0, RusturfTunnel_EventScript_15C9AB
-	coord_event 9, 5, 3, 0, 0x409a, 2, 0, RusturfTunnel_EventScript_15C9AB
+	coord_event 9, 4, 3, 0, VAR_RUSTURF_TUNNEL_STATE, 2, 0, RusturfTunnel_EventScript_15C9AB
+	coord_event 9, 5, 3, 0, VAR_RUSTURF_TUNNEL_STATE, 2, 0, RusturfTunnel_EventScript_15C9AB
 	coord_event 25, 4, 3, 0, 0, 0, 0, RusturfTunnel_EventScript_15C99F
 	coord_event 25, 5, 3, 0, 0, 0, 0, RusturfTunnel_EventScript_15C9A5
 

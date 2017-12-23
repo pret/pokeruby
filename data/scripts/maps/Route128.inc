@@ -10,7 +10,7 @@ Route128_MapScript1_152126:: @ 8152126
 	end
 
 Route128_MapScript2_152135:: @ 8152135
-	map_script_2 0x407b, 1, Route128_EventScript_15213F
+	map_script_2 VAR_ROUTE128_STATE, 1, Route128_EventScript_15213F
 	.2byte 0
 
 Route128_EventScript_15213F:: @ 815213F
@@ -82,7 +82,7 @@ Route128_EventScript_15213F:: @ 815213F
 	delay 15
 	removeobject 3
 	waitfieldeffect 30
-	setvar 0x407b, 2
+	setvar VAR_ROUTE128_STATE, 2
 	releaseall
 	end
 

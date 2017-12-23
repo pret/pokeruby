@@ -5,7 +5,7 @@ LilycoveCity_MapScripts:: @ 814CA15
 
 LilycoveCity_MapScript1_14CA20:: @ 814CA20
 	setflag FLAG_VISITED_LILYCOVE_CITY
-	setvar 0x4086, 0
+	setvar VAR_LINK_CONTEST_ROOM_STATE, 0
 	setflag FLAG_HIDE_CONTEST_REPORTER_LILYCOVE
 	checkflag FLAG_SYS_WEATHER_CTRL
 	call_if 1, LilycoveCity_EventScript_1A02C1
@@ -263,7 +263,7 @@ LilycoveCity_EventScript_14CD60:: @ 814CD60
 	compare RESULT, 0
 	goto_if_eq LilycoveCity_EventScript_14CDC2
 	msgbox LilycoveCity_Text_167B94, 4
-	switch 0x4023
+	switch VAR_STARTER_MON
 	case 0, LilycoveCity_EventScript_14CE46
 	case 1, LilycoveCity_EventScript_14CE56
 	case 2, LilycoveCity_EventScript_14CE66
@@ -294,7 +294,7 @@ LilycoveCity_EventScript_14CDD3:: @ 814CDD3
 	compare RESULT, 0
 	goto_if_eq LilycoveCity_EventScript_14CE35
 	msgbox LilycoveCity_Text_1680A9, 4
-	switch 0x4023
+	switch VAR_STARTER_MON
 	case 0, LilycoveCity_EventScript_14CE76
 	case 1, LilycoveCity_EventScript_14CE86
 	case 2, LilycoveCity_EventScript_14CE96

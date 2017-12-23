@@ -4,26 +4,26 @@ Route113_GlassWorkshop_MapScripts:: @ 816354A
 
 Route113_GlassWorkshop_MapScript1_163550:: @ 8163550
 	setflag FLAG_LANDMARK_GLASS_WORKSHOP
-	compare 0x40be, 1
+	compare VAR_GLASS_WORKSHOP_STATE, 1
 	call_if 1, Route113_GlassWorkshop_EventScript_16355F
 	end
 
 Route113_GlassWorkshop_EventScript_16355F:: @ 816355F
-	setvar 0x40be, 2
+	setvar VAR_GLASS_WORKSHOP_STATE, 2
 	return
 
 Route113_GlassWorkshop_EventScript_163565:: @ 8163565
 	lock
 	faceplayer
-	compare 0x40be, 10
+	compare VAR_GLASS_WORKSHOP_STATE, 10
 	goto_if 4, Route113_GlassWorkshop_EventScript_1638D2
-	compare 0x40be, 2
+	compare VAR_GLASS_WORKSHOP_STATE, 2
 	goto_if_eq Route113_GlassWorkshop_EventScript_1635B5
-	compare 0x40be, 1
+	compare VAR_GLASS_WORKSHOP_STATE, 1
 	goto_if_eq Route113_GlassWorkshop_EventScript_1635AB
 	msgbox Route113_GlassWorkshop_Text_19E4E6, 4
 	giveitem_std ITEM_SOOT_SACK
-	setvar 0x40be, 1
+	setvar VAR_GLASS_WORKSHOP_STATE, 1
 	msgbox Route113_GlassWorkshop_Text_19E59B, 4
 	release
 	end
@@ -38,7 +38,7 @@ Route113_GlassWorkshop_EventScript_1635B5:: @ 81635B5
 	compare RESULT, 0
 	goto_if_eq Route113_GlassWorkshop_EventScript_1635E4
 	msgbox Route113_GlassWorkshop_Text_19E65B, 4
-	compare 0x4048, 250
+	compare VAR_ASH_GATHER_COUNT, 250
 	goto_if 0, Route113_GlassWorkshop_EventScript_163818
 	message Route113_GlassWorkshop_Text_19E757
 	waitmessage
@@ -70,13 +70,13 @@ Route113_GlassWorkshop_EventScript_163660:: @ 8163660
 	setvar 0x8008, 39
 	bufferitemname 0, 0x8008
 	setvar 0x800a, 250
-	compare 0x4048, 250
+	compare VAR_ASH_GATHER_COUNT, 250
 	goto_if 0, Route113_GlassWorkshop_EventScript_163830
 	msgbox Route113_GlassWorkshop_Text_19E7CD, 5
 	compare RESULT, 0
 	goto_if_eq Route113_GlassWorkshop_EventScript_163845
-	setvar 0x40be, 10
-	subvar 0x4048, 250
+	setvar VAR_GLASS_WORKSHOP_STATE, 10
+	subvar VAR_ASH_GATHER_COUNT, 250
 	goto Route113_GlassWorkshop_EventScript_163851
 	end
 
@@ -84,13 +84,13 @@ Route113_GlassWorkshop_EventScript_16369C:: @ 816369C
 	setvar 0x8008, 40
 	bufferitemname 0, 0x8008
 	setvar 0x800a, 500
-	compare 0x4048, 500
+	compare VAR_ASH_GATHER_COUNT, 500
 	goto_if 0, Route113_GlassWorkshop_EventScript_163830
 	msgbox Route113_GlassWorkshop_Text_19E7CD, 5
 	compare RESULT, 0
 	goto_if_eq Route113_GlassWorkshop_EventScript_163845
-	setvar 0x40be, 11
-	subvar 0x4048, 500
+	setvar VAR_GLASS_WORKSHOP_STATE, 11
+	subvar VAR_ASH_GATHER_COUNT, 500
 	goto Route113_GlassWorkshop_EventScript_163851
 	end
 
@@ -98,13 +98,13 @@ Route113_GlassWorkshop_EventScript_1636D8:: @ 81636D8
 	setvar 0x8008, 41
 	bufferitemname 0, 0x8008
 	setvar 0x800a, 500
-	compare 0x4048, 500
+	compare VAR_ASH_GATHER_COUNT, 500
 	goto_if 0, Route113_GlassWorkshop_EventScript_163830
 	msgbox Route113_GlassWorkshop_Text_19E7CD, 5
 	compare RESULT, 0
 	goto_if_eq Route113_GlassWorkshop_EventScript_163845
-	setvar 0x40be, 12
-	subvar 0x4048, 500
+	setvar VAR_GLASS_WORKSHOP_STATE, 12
+	subvar VAR_ASH_GATHER_COUNT, 500
 	goto Route113_GlassWorkshop_EventScript_163851
 	end
 
@@ -112,13 +112,13 @@ Route113_GlassWorkshop_EventScript_163714:: @ 8163714
 	setvar 0x8008, 43
 	bufferitemname 0, 0x8008
 	setvar 0x800a, 1000
-	compare 0x4048, 1000
+	compare VAR_ASH_GATHER_COUNT, 1000
 	goto_if 0, Route113_GlassWorkshop_EventScript_163830
 	msgbox Route113_GlassWorkshop_Text_19E7CD, 5
 	compare RESULT, 0
 	goto_if_eq Route113_GlassWorkshop_EventScript_163845
-	setvar 0x40be, 13
-	subvar 0x4048, 1000
+	setvar VAR_GLASS_WORKSHOP_STATE, 13
+	subvar VAR_ASH_GATHER_COUNT, 1000
 	goto Route113_GlassWorkshop_EventScript_163851
 	end
 
@@ -126,13 +126,13 @@ Route113_GlassWorkshop_EventScript_163750:: @ 8163750
 	setvar 0x8008, 42
 	bufferitemname 0, 0x8008
 	setvar 0x800a, 1000
-	compare 0x4048, 1000
+	compare VAR_ASH_GATHER_COUNT, 1000
 	goto_if 0, Route113_GlassWorkshop_EventScript_163830
 	msgbox Route113_GlassWorkshop_Text_19E7CD, 5
 	compare RESULT, 0
 	goto_if_eq Route113_GlassWorkshop_EventScript_163845
-	setvar 0x40be, 14
-	subvar 0x4048, 1000
+	setvar VAR_GLASS_WORKSHOP_STATE, 14
+	subvar VAR_ASH_GATHER_COUNT, 1000
 	goto Route113_GlassWorkshop_EventScript_163851
 	end
 
@@ -141,13 +141,13 @@ Route113_GlassWorkshop_EventScript_16378C:: @ 816378C
 	setvar 0x8008, 13
 	bufferdecorationname 0, 0x8008
 	setvar 0x800a, 6000
-	compare 0x4048, 6000
+	compare VAR_ASH_GATHER_COUNT, 6000
 	goto_if 0, Route113_GlassWorkshop_EventScript_163830
 	msgbox Route113_GlassWorkshop_Text_19E7CD, 5
 	compare RESULT, 0
 	goto_if_eq Route113_GlassWorkshop_EventScript_163845
-	setvar 0x40be, 15
-	subvar 0x4048, 6000
+	setvar VAR_GLASS_WORKSHOP_STATE, 15
+	subvar VAR_ASH_GATHER_COUNT, 6000
 	goto Route113_GlassWorkshop_EventScript_163851
 	end
 
@@ -156,13 +156,13 @@ Route113_GlassWorkshop_EventScript_1637CD:: @ 81637CD
 	setvar 0x8008, 6
 	bufferdecorationname 0, 0x8008
 	setvar 0x800a, 8000
-	compare 0x4048, 8000
+	compare VAR_ASH_GATHER_COUNT, 8000
 	goto_if 0, Route113_GlassWorkshop_EventScript_163830
 	msgbox Route113_GlassWorkshop_Text_19E7CD, 5
 	compare RESULT, 0
 	goto_if_eq Route113_GlassWorkshop_EventScript_163845
-	setvar 0x40be, 16
-	subvar 0x4048, 8000
+	setvar VAR_GLASS_WORKSHOP_STATE, 16
+	subvar VAR_ASH_GATHER_COUNT, 8000
 	goto Route113_GlassWorkshop_EventScript_163851
 	end
 
@@ -205,7 +205,7 @@ Route113_GlassWorkshop_EventScript_163851:: @ 8163851
 	call_if 1, Route113_GlassWorkshop_EventScript_163889
 	compare 0x8009, 1
 	call_if 1, Route113_GlassWorkshop_EventScript_1638A1
-	setvar 0x40be, 2
+	setvar VAR_GLASS_WORKSHOP_STATE, 2
 	release
 	end
 
@@ -234,7 +234,7 @@ Route113_GlassWorkshop_EventScript_1638C3:: @ 81638C3
 	end
 
 Route113_GlassWorkshop_EventScript_1638D2:: @ 81638D2
-	switch 0x40be
+	switch VAR_GLASS_WORKSHOP_STATE
 	case 10, Route113_GlassWorkshop_EventScript_163925
 	case 11, Route113_GlassWorkshop_EventScript_163939
 	case 12, Route113_GlassWorkshop_EventScript_16394D
@@ -299,7 +299,7 @@ Route113_GlassWorkshop_EventScript_1639B1:: @ 81639B1
 	call_if 1, Route113_GlassWorkshop_EventScript_163889
 	compare 0x8009, 1
 	call_if 1, Route113_GlassWorkshop_EventScript_1638A1
-	setvar 0x40be, 2
+	setvar VAR_GLASS_WORKSHOP_STATE, 2
 	release
 	end
 

@@ -45,7 +45,7 @@ Route110_TrickHouseEnd_EventScript_16199E:: @ 816199E
 	faceplayer
 	msgbox Route110_TrickHouseEnd_Text_19C281, 4
 	setvar VAR_TEMP_2, 1
-	switch 0x4044
+	switch VAR_TRICK_HOUSE_ROOMS_COMPLETED
 	case 0, Route110_TrickHouseEnd_EventScript_161A0B
 	case 1, Route110_TrickHouseEnd_EventScript_161A47
 	case 2, Route110_TrickHouseEnd_EventScript_161A83
@@ -59,7 +59,7 @@ Route110_TrickHouseEnd_EventScript_16199E:: @ 816199E
 Route110_TrickHouseEnd_EventScript_161A0B:: @ 8161A0B
 	msgbox Route110_TrickHouseEnd_Text_19C2B2, 4
 	msgbox Route110_TrickHouseEnd_Text_19C90B, 4
-	setvar 0x40c1, 0
+	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	giveitem_std ITEM_RARE_CANDY
 	compare RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_161C4E
@@ -72,7 +72,7 @@ Route110_TrickHouseEnd_EventScript_161A0B:: @ 8161A0B
 Route110_TrickHouseEnd_EventScript_161A47:: @ 8161A47
 	msgbox Route110_TrickHouseEnd_Text_19C333, 4
 	msgbox Route110_TrickHouseEnd_Text_19C90B, 4
-	setvar 0x40c1, 0
+	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	giveitem_std ITEM_TIMER_BALL
 	compare RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_161C4E
@@ -85,7 +85,7 @@ Route110_TrickHouseEnd_EventScript_161A47:: @ 8161A47
 Route110_TrickHouseEnd_EventScript_161A83:: @ 8161A83
 	msgbox Route110_TrickHouseEnd_Text_19C3A7, 4
 	msgbox Route110_TrickHouseEnd_Text_19C90B, 4
-	setvar 0x40c1, 0
+	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	giveitem_std ITEM_HARD_STONE
 	compare RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_161C4E
@@ -98,7 +98,7 @@ Route110_TrickHouseEnd_EventScript_161A83:: @ 8161A83
 Route110_TrickHouseEnd_EventScript_161ABF:: @ 8161ABF
 	msgbox Route110_TrickHouseEnd_Text_19C41F, 4
 	msgbox Route110_TrickHouseEnd_Text_19C90B, 4
-	setvar 0x40c1, 0
+	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	giveitem_std ITEM_SMOKE_BALL
 	compare RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_161C4E
@@ -111,7 +111,7 @@ Route110_TrickHouseEnd_EventScript_161ABF:: @ 8161ABF
 Route110_TrickHouseEnd_EventScript_161AFB:: @ 8161AFB
 	msgbox Route110_TrickHouseEnd_Text_19C491, 4
 	msgbox Route110_TrickHouseEnd_Text_19C90B, 4
-	setvar 0x40c1, 0
+	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	giveitem_std ITEM_TM12
 	compare RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_161C4E
@@ -124,7 +124,7 @@ Route110_TrickHouseEnd_EventScript_161AFB:: @ 8161AFB
 Route110_TrickHouseEnd_EventScript_161B37:: @ 8161B37
 	msgbox Route110_TrickHouseEnd_Text_19C515, 4
 	msgbox Route110_TrickHouseEnd_Text_19C90B, 4
-	setvar 0x40c1, 0
+	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	giveitem_std ITEM_MAGNET
 	compare RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_161C4E
@@ -137,7 +137,7 @@ Route110_TrickHouseEnd_EventScript_161B37:: @ 8161B37
 Route110_TrickHouseEnd_EventScript_161B73:: @ 8161B73
 	msgbox Route110_TrickHouseEnd_Text_19C567, 4
 	msgbox Route110_TrickHouseEnd_Text_19C90B, 4
-	setvar 0x40c1, 0
+	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	giveitem_std ITEM_PP_MAX
 	compare RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_161C4E
@@ -165,7 +165,7 @@ Route110_TrickHouseEnd_EventScript_161BAF:: @ 8161BAF
 	waitmovement 0
 	delay 30
 	msgbox Route110_TrickHouseEnd_Text_19C691, 4
-	setvar 0x40c1, 0
+	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	.ifdef SAPPHIRE
 	givedecoration_std 32
 	.else
@@ -186,19 +186,19 @@ Route110_TrickHouseEnd_EventScript_161C2E:: @ 8161C2E
 	applymovement 1, Route110_TrickHouseEnd_Movement_16131E
 	waitmovement 0
 	removeobject 1
-	addvar 0x4044, 1
+	addvar VAR_TRICK_HOUSE_ROOMS_COMPLETED, 1
 	return
 
 Route110_TrickHouseEnd_EventScript_161C4E:: @ 8161C4E
 	call Route110_TrickHouseEnd_EventScript_1A02A5
 	msgbox Route110_TrickHouseEnd_Text_19C92E, 4
-	setvar 0x40c1, 1
+	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 1
 	return
 
 Route110_TrickHouseEnd_EventScript_161C61:: @ 8161C61
 	call Route110_TrickHouseEnd_EventScript_1A02B8
 	msgbox Route110_TrickHouseEnd_Text_19C7D7, 4
-	setvar 0x40c1, 1
+	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 1
 	return
 
 Route110_TrickHouseEnd_EventScript_161C74:: @ 8161C74

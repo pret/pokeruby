@@ -130,7 +130,7 @@ Route116_EventScript_150B5D:: @ 8150B5D
 	lock
 	faceplayer
 	msgbox Route116_Text_17032A, 4
-	setvar 0x406f, 2
+	setvar VAR_ROUTE116_STATE, 2
 	release
 	end
 
@@ -140,7 +140,7 @@ Route116_EventScript_150B6E:: @ 8150B6E
 	applymovement 255, Route116_Movement_1A083F
 	waitmovement 0
 	msgbox Route116_Text_17032A, 4
-	setvar 0x406f, 2
+	setvar VAR_ROUTE116_STATE, 2
 	releaseall
 	end
 

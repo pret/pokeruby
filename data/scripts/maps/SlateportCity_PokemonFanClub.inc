@@ -8,7 +8,7 @@ SlateportCity_PokemonFanClub_MapScript1_15576A:: @ 815576A
 SlateportCity_PokemonFanClub_EventScript_15576B:: @ 815576B
 	lock
 	faceplayer
-	switch 0x40b7
+	switch VAR_SLATEPORT_FAN_CLUB_STATE
 	case 0, SlateportCity_PokemonFanClub_EventScript_155795
 	case 1, SlateportCity_PokemonFanClub_EventScript_1557A8
 	case 2, SlateportCity_PokemonFanClub_EventScript_1557FE
@@ -16,7 +16,7 @@ SlateportCity_PokemonFanClub_EventScript_15576B:: @ 815576B
 	end
 
 SlateportCity_PokemonFanClub_EventScript_155795:: @ 8155795
-	setvar 0x40b7, 1
+	setvar VAR_SLATEPORT_FAN_CLUB_STATE, 1
 	msgbox SlateportCity_PokemonFanClub_Text_17D773, 4
 	goto SlateportCity_PokemonFanClub_EventScript_155808
 	end
@@ -35,7 +35,7 @@ SlateportCity_PokemonFanClub_EventScript_1557A8:: @ 81557A8
 	call_if 1, SlateportCity_PokemonFanClub_EventScript_155893
 	compare VAR_TEMP_2, 5
 	call_if 1, SlateportCity_PokemonFanClub_EventScript_15588D
-	compare 0x40b7, 2
+	compare VAR_SLATEPORT_FAN_CLUB_STATE, 2
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_1557FE
 	msgbox SlateportCity_PokemonFanClub_Text_17DA14, 4
 	goto SlateportCity_PokemonFanClub_EventScript_155808
@@ -71,7 +71,7 @@ SlateportCity_PokemonFanClub_EventScript_155808:: @ 8155808
 	end
 
 SlateportCity_PokemonFanClub_EventScript_15588D:: @ 815588D
-	setvar 0x40b7, 2
+	setvar VAR_SLATEPORT_FAN_CLUB_STATE, 2
 	return
 
 SlateportCity_PokemonFanClub_EventScript_155893:: @ 8155893

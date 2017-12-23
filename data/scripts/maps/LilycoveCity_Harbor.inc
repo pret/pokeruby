@@ -50,7 +50,7 @@ LilycoveCity_Harbor_EventScript_159933:: @ 8159933
 	msgbox LilycoveCity_Harbor_Text_18B47D, 5
 	compare RESULT, 0
 	goto_if_eq LilycoveCity_Harbor_EventScript_15997E
-	setvar 0x40b4, 5
+	setvar VAR_PORTHOLE_STATE, 5
 	call LilycoveCity_Harbor_EventScript_15998A
 	warp MAP_SS_TIDAL_CORRIDOR, 255, 1, 10
 	waitstate

@@ -62,7 +62,7 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_15865D:: @ 815865D
 	end
 
 LilycoveCity_LilycoveMuseum_2F_MapScript2_158670:: @ 8158670
-	map_script_2 0x4094, 0, LilycoveCity_LilycoveMuseum_2F_EventScript_15867A
+	map_script_2 VAR_LILYCOVE_MUSEUM_2F_STATE, 0, LilycoveCity_LilycoveMuseum_2F_EventScript_15867A
 	.2byte 0
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_15867A:: @ 815867A
@@ -81,7 +81,7 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_15867A:: @ 815867A
 	applymovement 255, LilycoveCity_LilycoveMuseum_2F_Movement_1586D3
 	waitmovement 0
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_187E1D, 3
-	copyvar 0x4094, 0x1
+	copyvar VAR_LILYCOVE_MUSEUM_2F_STATE, 0x1
 	releaseall
 	end
 

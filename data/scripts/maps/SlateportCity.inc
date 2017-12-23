@@ -10,15 +10,15 @@ SlateportCity_MapScript1_14BA3C:: @ 814BA3C
 	setvar VAR_OBJ_GFX_ID_0, MAP_OBJ_GFX_MAGMA_MEMBER_F
 	setvar VAR_OBJ_GFX_ID_1, MAP_OBJ_GFX_MAGMA_MEMBER_M
 	.endif
-	setvar 0x40aa, 0
+	setvar VAR_SLATEPORT_MUSEUM_1F_STATE, 0
 	call SlateportCity_EventScript_14BA5C
-	compare 0x4058, 1
+	compare VAR_SLATEPORT_STATE, 1
 	call_if 1, SlateportCity_EventScript_14BA68
 	end
 
 SlateportCity_EventScript_14BA5C:: @ 814BA5C
 	setflag FLAG_VISITED_SLATEPORT_CITY
-	setvar 0x4086, 0
+	setvar VAR_LINK_CONTEST_ROOM_STATE, 0
 	setflag FLAG_HIDE_CONTEST_REPORTER_SLATEPORT
 	return
 
@@ -95,7 +95,7 @@ SlateportCity_EventScript_14BB35:: @ 814BB35
 SlateportCity_EventScript_14BB3F:: @ 814BB3F
 	lock
 	faceplayer
-	compare 0x4058, 1
+	compare VAR_SLATEPORT_STATE, 1
 	call_if 1, SlateportCity_EventScript_14BB56
 	msgbox SlateportCity_Text_164814, 4
 	release
@@ -109,7 +109,7 @@ SlateportCity_EventScript_14BB56:: @ 814BB56
 SlateportCity_EventScript_14BB60:: @ 814BB60
 	lock
 	faceplayer
-	compare 0x4058, 1
+	compare VAR_SLATEPORT_STATE, 1
 	call_if 1, SlateportCity_EventScript_14BB77
 	msgbox SlateportCity_Text_1648A0, 4
 	release
@@ -123,7 +123,7 @@ SlateportCity_EventScript_14BB77:: @ 814BB77
 SlateportCity_EventScript_14BB81:: @ 814BB81
 	lock
 	faceplayer
-	compare 0x4058, 1
+	compare VAR_SLATEPORT_STATE, 1
 	call_if 1, SlateportCity_EventScript_14BBA1
 	checkflag FLAG_RECEIVED_SECRET_POWER
 	goto_if_eq SlateportCity_EventScript_14BBAB
@@ -144,7 +144,7 @@ SlateportCity_EventScript_14BBAB:: @ 814BBAB
 SlateportCity_EventScript_14BBB5:: @ 814BBB5
 	lock
 	faceplayer
-	compare 0x4058, 1
+	compare VAR_SLATEPORT_STATE, 1
 	call_if 1, SlateportCity_EventScript_14BBCC
 	msgbox SlateportCity_Text_164A30, 4
 	release
@@ -156,7 +156,7 @@ SlateportCity_EventScript_14BBCC:: @ 814BBCC
 	end
 
 SlateportCity_EventScript_14BBD6:: @ 814BBD6
-	compare 0x4058, 1
+	compare VAR_SLATEPORT_STATE, 1
 	goto_if_eq SlateportCity_EventScript_14BBEA
 	msgbox SlateportCity_Text_164AA9, 2
 	end
@@ -168,7 +168,7 @@ SlateportCity_EventScript_14BBEA:: @ 814BBEA
 SlateportCity_EventScript_14BBF3:: @ 814BBF3
 	lock
 	faceplayer
-	compare 0x4058, 1
+	compare VAR_SLATEPORT_STATE, 1
 	call_if 1, SlateportCity_EventScript_14BC0A
 	msgbox SlateportCity_Text_164B34, 4
 	release
@@ -253,7 +253,7 @@ SlateportCity_EventScript_14BCAF:: @ 814BCAF
 SlateportCity_EventScript_14BCB8:: @ 814BCB8
 	lock
 	faceplayer
-	compare 0x4058, 1
+	compare VAR_SLATEPORT_STATE, 1
 	call_if 1, SlateportCity_EventScript_14BCCF
 	msgbox SlateportCity_Text_164F9E, 4
 	release
@@ -537,7 +537,7 @@ SlateportCity_EventScript_14BEBC:: @ 814BEBC
 	clearflag FLAG_HIDE_SUBMARINE_SHADOW_SLATEPORT_HARBOR
 	clearflag FLAG_HIDE_GRUNT_1_SLATEPORT_HARBOR
 	clearflag FLAG_HIDE_GRUNT_2_SLATEPORT_HARBOR
-	setvar 0x4058, 2
+	setvar VAR_SLATEPORT_STATE, 2
 	warp MAP_SLATEPORT_CITY_HARBOR, 255, 11, 14
 	waitstate
 	releaseall

@@ -19,7 +19,7 @@ MossdeepCity_GameCorner_1F_MapScript1_15AC84:: @ 815AC84
 	special ValidateEReaderTrainer
 	compare RESULT, 0
 	call_if 1, MossdeepCity_GameCorner_1F_EventScript_15AC9E
-	compare 0x40c0, 0
+	compare VAR_GAME_CORNER_STATE, 0
 	call_if 5, MossdeepCity_GameCorner_1F_EventScript_15ACAF
 	end
 
@@ -35,9 +35,9 @@ MossdeepCity_GameCorner_1F_EventScript_15ACAF:: @ 815ACAF
 	return
 
 MossdeepCity_GameCorner_1F_MapScript2_15ACBB:: @ 815ACBB
-	map_script_2 0x40c0, 1, MossdeepCity_GameCorner_1F_EventScript_15ACD5
-	map_script_2 0x40c0, 2, MossdeepCity_GameCorner_1F_EventScript_15ACD5
-	map_script_2 0x40c0, 3, MossdeepCity_GameCorner_1F_EventScript_15ACD5
+	map_script_2 VAR_GAME_CORNER_STATE, 1, MossdeepCity_GameCorner_1F_EventScript_15ACD5
+	map_script_2 VAR_GAME_CORNER_STATE, 2, MossdeepCity_GameCorner_1F_EventScript_15ACD5
+	map_script_2 VAR_GAME_CORNER_STATE, 3, MossdeepCity_GameCorner_1F_EventScript_15ACD5
 	.2byte 0
 
 MossdeepCity_GameCorner_1F_EventScript_15ACD5:: @ 815ACD5
@@ -49,14 +49,14 @@ MossdeepCity_GameCorner_1F_EventScript_15ACD5:: @ 815ACD5
 	moveobjectoffscreen 1
 	applymovement 255, MossdeepCity_GameCorner_1F_Movement_1A0841
 	waitmovement 0
-	compare 0x40c0, 1
+	compare VAR_GAME_CORNER_STATE, 1
 	call_if 1, MossdeepCity_GameCorner_1F_EventScript_15AD22
-	compare 0x40c0, 2
+	compare VAR_GAME_CORNER_STATE, 2
 	call_if 1, MossdeepCity_GameCorner_1F_EventScript_15AD2B
-	compare 0x40c0, 3
+	compare VAR_GAME_CORNER_STATE, 3
 	call_if 1, MossdeepCity_GameCorner_1F_EventScript_15AD34
 	special LoadPlayerParty
-	setvar 0x40c0, 0
+	setvar VAR_GAME_CORNER_STATE, 0
 	releaseall
 	end
 

@@ -20,8 +20,8 @@ SlateportCity_OceanicMuseum_1F_MapWarps:: @ 8387C88
 	warp_def 6, 1, 0, 0, MAP_SLATEPORT_CITY_OCEANIC_MUSEUM_2F
 
 SlateportCity_OceanicMuseum_1F_MapCoordEvents:: @ 8387CA0
-	coord_event 9, 7, 3, 0, 0x40aa, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_155AE4
-	coord_event 10, 7, 3, 0, 0x40aa, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_155AF5
+	coord_event 9, 7, 3, 0, VAR_SLATEPORT_MUSEUM_1F_STATE, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_155AE4
+	coord_event 10, 7, 3, 0, VAR_SLATEPORT_MUSEUM_1F_STATE, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_155AF5
 
 SlateportCity_OceanicMuseum_1F_MapBGEvents:: @ 8387CC0
 	bg_event 2, 7, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_155BC5

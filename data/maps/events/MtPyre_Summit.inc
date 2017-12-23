@@ -12,12 +12,12 @@ MtPyre_Summit_MapWarps:: @ 838CC68
 	warp_def 24, 31, 3, 1, MAP_MT_PYRE_EXTERIOR
 
 MtPyre_Summit_MapCoordEvents:: @ 838CC80
-	coord_event 22, 7, 3, 0, 0x40b9, 0, 0, MtPyre_Summit_EventScript_15D4BD
-	coord_event 23, 7, 3, 0, 0x40b9, 0, 0, MtPyre_Summit_EventScript_15D4C9
-	coord_event 24, 7, 3, 0, 0x40b9, 0, 0, MtPyre_Summit_EventScript_15D4D5
-	coord_event 22, 7, 3, 0, 0x40b9, 2, 0, MtPyre_Summit_EventScript_15D6CE
-	coord_event 23, 7, 3, 0, 0x40b9, 2, 0, MtPyre_Summit_EventScript_15D6DA
-	coord_event 24, 7, 3, 0, 0x40b9, 2, 0, MtPyre_Summit_EventScript_15D6E6
+	coord_event 22, 7, 3, 0, VAR_MT_PYRE_STATE, 0, 0, MtPyre_Summit_EventScript_15D4BD
+	coord_event 23, 7, 3, 0, VAR_MT_PYRE_STATE, 0, 0, MtPyre_Summit_EventScript_15D4C9
+	coord_event 24, 7, 3, 0, VAR_MT_PYRE_STATE, 0, 0, MtPyre_Summit_EventScript_15D4D5
+	coord_event 22, 7, 3, 0, VAR_MT_PYRE_STATE, 2, 0, MtPyre_Summit_EventScript_15D6CE
+	coord_event 23, 7, 3, 0, VAR_MT_PYRE_STATE, 2, 0, MtPyre_Summit_EventScript_15D6DA
+	coord_event 24, 7, 3, 0, VAR_MT_PYRE_STATE, 2, 0, MtPyre_Summit_EventScript_15D6E6
 
 MtPyre_Summit_MapBGEvents:: @ 838CCE0
 	bg_event 9, 25, 0, 7, 0, ITEM_ZINC, 79, 0

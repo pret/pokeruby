@@ -4,13 +4,13 @@ RusturfTunnel_MapScripts:: @ 815C745
 	.byte 0
 
 RusturfTunnel_MapScript2_15C750:: @ 815C750
-	map_script_2 0x409a, 4, RusturfTunnel_EventScript_15C7D1
-	map_script_2 0x409a, 5, RusturfTunnel_EventScript_15C7D1
+	map_script_2 VAR_RUSTURF_TUNNEL_STATE, 4, RusturfTunnel_EventScript_15C7D1
+	map_script_2 VAR_RUSTURF_TUNNEL_STATE, 5, RusturfTunnel_EventScript_15C7D1
 	.2byte 0
 
 RusturfTunnel_MapScript1_15C762:: @ 815C762
 	call RusturfTunnel_EventScript_1A0196
-	compare 0x409a, 2
+	compare VAR_RUSTURF_TUNNEL_STATE, 2
 	call_if 1, RusturfTunnel_EventScript_15C773
 	end
 
@@ -286,7 +286,7 @@ RusturfTunnel_EventScript_15C9AB:: @ 815C9AB
 	waitmovement 0
 	moveobjectoffscreen 6
 	moveobjectoffscreen 7
-	setvar 0x409a, 3
+	setvar VAR_RUSTURF_TUNNEL_STATE, 3
 	releaseall
 	end
 
@@ -343,8 +343,8 @@ RusturfTunnel_EventScript_15C9EA:: @ 815C9EA
 	removeobject 7
 	clearflag FLAG_DEVON_GOODS_STOLEN
 	setflag FLAG_RECOVERED_DEVON_GOODS
-	setvar 0x405a, 4
-	setvar 0x4090, 1
+	setvar VAR_RUSTBORO_STATE, 4
+	setvar VAR_BRINEY_HOUSE_STATE, 1
 	setflag FLAG_HIDE_BRINEY_ROUTE116
 	release
 	end

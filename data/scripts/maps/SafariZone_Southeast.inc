@@ -4,7 +4,7 @@ SafariZone_Southeast_MapScripts:: @ 8160036
 	.byte 0
 
 SafariZone_Southeast_MapScript2_160041:: @ 8160041
-	map_script_2 0x40a4, 2, SafariZone_Southeast_EventScript_16004B
+	map_script_2 VAR_SAFARI_ZONE_STATE, 2, SafariZone_Southeast_EventScript_16004B
 	.2byte 0
 
 SafariZone_Southeast_EventScript_16004B:: @ 816004B
@@ -15,12 +15,12 @@ SafariZone_Southeast_EventScript_16004B:: @ 816004B
 	applymovement 1, SafariZone_Southeast_Movement_160089
 	waitmovement 0
 	setobjectxyperm 1, 32, 34
-	setvar 0x40a4, 0
+	setvar VAR_SAFARI_ZONE_STATE, 0
 	releaseall
 	end
 
 SafariZone_Southeast_MapScript1_160073:: @ 8160073
-	compare 0x40a4, 2
+	compare VAR_SAFARI_ZONE_STATE, 2
 	call_if 1, SafariZone_Southeast_EventScript_16007F
 	end
 
@@ -92,7 +92,7 @@ SafariZone_Southeast_EventScript_16011F:: @ 816011F
 	end
 
 SafariZone_Southeast_EventScript_160139:: @ 8160139
-	setvar 0x40a4, 1
+	setvar VAR_SAFARI_ZONE_STATE, 1
 	special ExitSafariMode
 	warpdoor MAP_ROUTE121_SAFARI_ZONE_ENTRANCE, 255, 2, 5
 	waitstate

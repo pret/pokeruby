@@ -21,9 +21,9 @@ Route118_MapObjects:: @ 8383684
 	object_event 20, MAP_OBJ_GFX_ITEM_BALL, 0, 69, 0, 7, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route118_EventScript_1B15B2, FLAG_ITEM_ROUTE118_1, 0, 0
 
 Route118_MapCoordEvents:: @ 8383864
-	coord_event 43, 11, 3, 0, 0x4071, 0, 0, Route118_EventScript_150FAE
-	coord_event 44, 11, 3, 0, 0x4071, 0, 0, Route118_EventScript_150FCE
-	coord_event 45, 11, 3, 0, 0x4071, 0, 0, Route118_EventScript_150FE4
+	coord_event 43, 11, 3, 0, VAR_ROUTE118_STATE, 0, 0, Route118_EventScript_150FAE
+	coord_event 44, 11, 3, 0, VAR_ROUTE118_STATE, 0, 0, Route118_EventScript_150FCE
+	coord_event 45, 11, 3, 0, VAR_ROUTE118_STATE, 0, 0, Route118_EventScript_150FE4
 
 Route118_MapBGEvents:: @ 8383894
 	bg_event 47, 14, 0, 8, 0, ITEM_MASTER_BALL, 0, 0

@@ -6,9 +6,9 @@ PetalburgCity_Gym_MapScripts:: @ 8154477
 	.byte 0
 
 PetalburgCity_Gym_MapScript1_15448C:: @ 815448C
-	compare 0x4085, 6
+	compare VAR_PETALBURG_GYM_STATE, 6
 	goto_if_eq PetalburgCity_Gym_EventScript_1544A3
-	compare 0x4085, 7
+	compare VAR_PETALBURG_GYM_STATE, 7
 	call_if 4, PetalburgCity_Gym_EventScript_1544ED
 	end
 
@@ -44,9 +44,9 @@ PetalburgCity_Gym_EventScript_1544ED:: @ 81544ED
 	return
 
 PetalburgCity_Gym_MapScript1_15451B:: @ 815451B
-	compare 0x4085, 1
+	compare VAR_PETALBURG_GYM_STATE, 1
 	call_if 1, PetalburgCity_Gym_EventScript_15453B
-	compare 0x4085, 6
+	compare VAR_PETALBURG_GYM_STATE, 6
 	call_if 0, PetalburgCity_Gym_EventScript_154543
 	checkflag FLAG_SYS_GAME_CLEAR
 	call_if 1, PetalburgCity_Gym_EventScript_15454B
@@ -65,7 +65,7 @@ PetalburgCity_Gym_EventScript_15454B:: @ 815454B
 	return
 
 PetalburgCity_Gym_MapScript2_154553:: @ 8154553
-	map_script_2 0x4085, 1, PetalburgCity_Gym_EventScript_15455D
+	map_script_2 VAR_PETALBURG_GYM_STATE, 1, PetalburgCity_Gym_EventScript_15455D
 	.2byte 0
 
 PetalburgCity_Gym_EventScript_15455D:: @ 815455D
@@ -73,7 +73,7 @@ PetalburgCity_Gym_EventScript_15455D:: @ 815455D
 	end
 
 PetalburgCity_Gym_MapScript2_154562:: @ 8154562
-	map_script_2 0x4085, 1, PetalburgCity_Gym_EventScript_15456C
+	map_script_2 VAR_PETALBURG_GYM_STATE, 1, PetalburgCity_Gym_EventScript_15456C
 	.2byte 0
 
 PetalburgCity_Gym_EventScript_15456C:: @ 815456C
@@ -91,7 +91,7 @@ PetalburgCity_Gym_EventScript_15456C:: @ 815456C
 	applymovement 255, PetalburgCity_Gym_Movement_1A0841
 	waitmovement 0
 	msgbox PetalburgCity_Gym_Text_17A2A4, 4
-	setvar 0x4085, 2
+	setvar VAR_PETALBURG_GYM_STATE, 2
 	releaseall
 	end
 
@@ -105,7 +105,7 @@ PetalburgCity_Gym_Movement_1545B4:: @ 81545B4
 PetalburgCity_Gym_EventScript_1545B9:: @ 81545B9
 	lock
 	faceplayer
-	switch 0x4085
+	switch VAR_PETALBURG_GYM_STATE
 	case 2, PetalburgCity_Gym_EventScript_154907
 	case 3, PetalburgCity_Gym_EventScript_154911
 	case 4, PetalburgCity_Gym_EventScript_15491B
@@ -206,8 +206,8 @@ PetalburgCity_Gym_EventScript_154669:: @ 8154669
 	call_if 1, PetalburgCity_Gym_EventScript_154872
 	removeobject 10
 	setflag FLAG_HIDE_WALLY_MOM_PETALBURG_1
-	setvar 0x4085, 1
-	setvar 0x4057, 2
+	setvar VAR_PETALBURG_GYM_STATE, 1
+	setvar VAR_PETALBURG_STATE, 2
 	clearflag FLAG_HIDE_WALLY_PETALBURG
 	clearflag FLAG_HIDE_WALLY_PETALBURG_GYM
 	setflag FLAG_HIDE_RIVAL_BIRCH_LAB
@@ -372,7 +372,7 @@ PetalburgCity_Gym_EventScript_154969:: @ 8154969
 	checkpcitem ITEM_ENIGMA_BERRY, 1
 	compare RESULT, 1
 	goto_if_eq PetalburgCity_Gym_EventScript_1549B2
-	compare 0x402d, 0
+	compare VAR_ENIGMA_BERRY_AVAILABLE, 0
 	goto_if_eq PetalburgCity_Gym_EventScript_1549B2
 	msgbox PetalburgCity_Gym_Text_1C5570, 4
 	setvar RESULT, 1
@@ -386,7 +386,7 @@ PetalburgCity_Gym_EventScript_1549B8:: @ 81549B8
 	giveitem_std ITEM_ENIGMA_BERRY
 	compare RESULT, 0
 	goto_if_eq PetalburgCity_Gym_EventScript_1A029B
-	setvar 0x402d, 0
+	setvar VAR_ENIGMA_BERRY_AVAILABLE, 0
 	release
 	end
 
@@ -398,7 +398,7 @@ PetalburgCity_Gym_EventScript_1549D6:: @ 81549D6
 	call PetalburgCity_Gym_EventScript_1A02C5
 	msgbox PetalburgCity_Gym_Text_17A805, 4
 	setflag FLAG_DEFEATED_PETALBURG_GYM
-	setvar 0x4085, 7
+	setvar VAR_PETALBURG_GYM_STATE, 7
 	setflag FLAG_BADGE05_GET
 	call PetalburgCity_Gym_EventScript_1A0424
 	setflag FLAG_HIDE_WATTSON_MAUVILLE_GYM
@@ -592,7 +592,7 @@ PetalburgCity_Gym_EventScript_154B69:: @ 8154B69
 
 PetalburgCity_Gym_EventScript_154B73:: @ 8154B73
 	lockall
-	compare 0x4085, 6
+	compare VAR_PETALBURG_GYM_STATE, 6
 	goto_if 0, PetalburgCity_Gym_EventScript_154BB9
 	setvar 0x8008, 7
 	setvar 0x8009, 85
@@ -622,7 +622,7 @@ PetalburgCity_Gym_EventScript_154BB9:: @ 8154BB9
 
 PetalburgCity_Gym_EventScript_154BC3:: @ 8154BC3
 	lockall
-	compare 0x4085, 6
+	compare VAR_PETALBURG_GYM_STATE, 6
 	goto_if 0, PetalburgCity_Gym_EventScript_154BB9
 	setvar 0x8008, 1
 	setvar 0x8009, 98

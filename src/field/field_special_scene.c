@@ -291,7 +291,7 @@ bool8 sub_80C7754(void)
 void Task_HandlePorthole(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    u16 *var = GetVarPointer(VAR_PORTHOLE);
+    u16 *var = GetVarPointer(VAR_PORTHOLE_STATE);
     struct WarpData *location = &gSaveBlock1.location;
 
     switch (data[0])
@@ -352,7 +352,7 @@ void sub_80C78A0(void)
 
     gSprites[spriteId].coordOffsetEnabled = FALSE;
 
-    if (VarGet(0x40B4) == 2)
+    if (VarGet(VAR_PORTHOLE_STATE) == 2)
     {
         StartSpriteAnim(&gSprites[spriteId], FieldObjectDirectionToImageAnimId(4));
     }
