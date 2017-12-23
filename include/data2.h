@@ -22,7 +22,7 @@ extern const struct SpriteFrameImage gSpriteImageTable_81E7A70[];
 extern const union AffineAnimCmd *const gSpriteAffineAnimTable_81E7B70[];
 extern const union AffineAnimCmd *const gSpriteAffineAnimTable_81E7BEC[];
 
-extern const union AffineAnimCmd *const gSpriteAffineAnimTable_81E7C18;
+extern const union AffineAnimCmd *const gSpriteAffineAnimTable_81E7C18[];
 extern const union AnimCmd *const gSpriteAnimTable_81E7C64[];
 extern struct MonCoords gMonFrontPicCoords[];
 extern struct MonCoords gMonBackPicCoords[];

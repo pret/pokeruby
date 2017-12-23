@@ -1,4 +1,5 @@
 #include "global.h"
+#include "contest.h"
 #include "data2.h"
 #include "field_fadetransition.h"
 #include "main.h"
@@ -24,8 +25,6 @@ extern u16 gSpecialVar_0x8004;
 extern u16 gSpecialVar_0x8005;
 extern u8 gTileBuffer[];
 
-extern const struct ContestMove gContestMoves[];
-extern const struct ContestEffect gContestEffects[];
 extern const struct WindowConfig gWindowConfig_81E6CE4;
 extern const struct WindowConfig gWindowConfig_81E7240;
 extern const u8 *const gContestEffectStrings[];

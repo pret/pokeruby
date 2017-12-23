@@ -1729,7 +1729,7 @@ u8 sub_8079F44(u16 species, u8 isBackpic, u8 a3, s16 a4, s16 a5, u8 a6, u32 a7, 
         sprite = CreateSprite(&gSpriteTemplate_837F5B0[a3], a4, a5 + gMonBackPicCoords[species].y_offset, a6);
     }
     if (NotInBattle()) {
-        gSprites[sprite].affineAnims = &gSpriteAffineAnimTable_81E7C18;
+        gSprites[sprite].affineAnims = gSpriteAffineAnimTable_81E7C18;
         StartSpriteAffineAnim(&gSprites[sprite], 0);
     }
     return sprite;
