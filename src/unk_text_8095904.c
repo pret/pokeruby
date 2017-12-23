@@ -8,7 +8,7 @@
 
 // rodata
 
-extern const u8 gFont3LatinGlyphs[];
+extern const u32 gFont3LatinGlyphs[];
 
 // text
 
@@ -21,7 +21,7 @@ void sub_8095904(const u8 *src, u8 *dest, u8 bgOverride, u16 width, u8 bg, u8 *b
         u16 i;
         for (i = 0; i < strlen; i++)
         {
-            const u8 *glyphs = gFont3LatinGlyphs + ((src[i] & 0xfff0) << 6) + ((src[i] & 0xf) << 5);
+            const u8 *glyphs = (const u8 *)(gFont3LatinGlyphs + ((src[i] & 0xfff0) * 16) + ((src[i] & 0xf) * 8));
             CpuCopy16(glyphs, dest, 32);
             CpuCopy16(glyphs + 0x200, dest + width, 32);
             dest += 32;
@@ -38,7 +38,7 @@ void sub_8095904(const u8 *src, u8 *dest, u8 bgOverride, u16 width, u8 bg, u8 *b
             u16 j;
             for (j = 0; j < strlen; j++) // r5
             {
-                const u8 *glyphs = gFont3LatinGlyphs + (i * 0x200) + ((src[j] & 0xfff0) << 6) + ((src[j] & 0xf) << 5);
+                const u32 *glyphs = (const u8 *)(gFont3LatinGlyphs + (i * 0x80) + ((src[j] & 0xfff0) * 16) + ((src[j] & 0xf) * 8));
 
                 u16 k; // r6
                 for (k = 0; k < 32; k++)
