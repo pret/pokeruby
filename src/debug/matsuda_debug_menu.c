@@ -18,17 +18,16 @@
 #include "ewram.h"
 
 extern u8 gUnknown_0203856C;
-extern u8 gUnknown_0203857D[][64];
 extern u16 gUnknown_02038670[];
 extern u16 gUnknown_02038678[];
 extern u16 gUnknown_02038680[];
-extern u8 gUnknown_02038690[];
+extern u8 gContestFinalStandings[];
 extern u8 gUnknown_02038694;
 extern u8 gIsLinkContest;
 extern u8 gUnknown_0203869B;
 extern u8 gContestPlayerMonIndex;
-extern u16 gScriptContestCategory;
-extern u16 gScriptContestRank;
+extern u16 gSpecialVar_ContestCategory;
+extern u16 gSpecialVar_ContestRank;
 
 extern u16 gUnknown_030042A4;
 extern u16 gUnknown_030042A0;
@@ -321,7 +320,7 @@ u8 MatsudaDebugMenu_CommTest(void)
 
 static void sub_80A9C98(u8 taskId)
 {
-    sub_80AE098(0);
+    Contest_CreatePlayerMon(0);
     SetTaskFuncWithFollowupFunc(taskId, sub_80C8734, sub_80A9CC0);
 }
 
@@ -360,7 +359,7 @@ static void sub_80A9D58(u8 taskId)
        dest[i] = gTasks[taskId].data[5 + i];
 
    gUnknown_0203869B = sub_80C4B34(dest);
-   sub_80AE82C((u8)gScriptContestCategory);
+   sub_80AE82C((u8)gSpecialVar_ContestCategory);
    sub_80B0F28(0);
    SetTaskFuncWithFollowupFunc(taskId, sub_80C8EBC, sub_80A9DBC);
 }
@@ -541,9 +540,9 @@ static void sub_80AA10C(void)
     gUnknown_02038694 = 0;
 
     if (!(gContestMons[0].nickname[0]))
-        sub_80AE398(0, 0);
+        Contest_InitAllPokemon(0, 0);
 
-    sub_80AE098(gUnknown_02038694);
+    Contest_CreatePlayerMon(gUnknown_02038694);
 
     for (i = 0; i < 6; i++)
     {
@@ -552,10 +551,10 @@ static void sub_80AA10C(void)
             gMatsudaDebugMenuContestTopLeft[i][1]);
     }
 
-    gScriptContestCategory = gScriptContestRank = 0;
+    gSpecialVar_ContestCategory = gSpecialVar_ContestRank = 0;
     zero = 0; // it's possible this was some assignment that matsuda used to quickly edit and test things without changing whats passed to the later functions.
     sub_80AA5BC(zero);
-    sub_80AA5E8(gScriptContestRank);
+    sub_80AA5E8(gSpecialVar_ContestRank);
     sub_8003460(&gMenuWindow, gMatsudaDebugMenu_GoBackText, 0xD6, 0x12, 0x12);
     sub_8003460(&gMenuWindow, gMatsudaDebugMenu_BattlePointsText, 0xDC, zero, 0xC);
     LoadSpriteSheet(gUnknown_083C92B4);
@@ -576,19 +575,14 @@ void sub_80AA280(u8 var) // no?
 
     FillWindowRect_DefaultPalette(&gMenuWindow, 0, 0, 0, 0x1E, 3);
     StringCopy(gSharedMem, gMatsudaDebugMenu_StartText);
-    StringAppend(gSharedMem, &gUnknown_0203857D[var][0]);
+    StringAppend(gSharedMem, gContestMons[var].trainerName);
 
     for (i = 0; i < 4; i++)
     {
         if (var == i)
-        {
-            sub_8003460(&gMenuWindow, gSharedMem, (10 * i + 2), gUnknown_083C926E[i][0], gUnknown_083C926E[i][1]);
-        }
+            sub_8003460(&gMenuWindow, gSharedMem, 10 * i + 2, gUnknown_083C926E[i][0], gUnknown_083C926E[i][1]);
         else
-        {
-            u8 *ptr = gUnknown_0203857D[i];
-            sub_8003460(&gMenuWindow, ptr, (10 * i + 2), gUnknown_083C926E[i][0], gUnknown_083C926E[i][1]);
-        }
+            sub_8003460(&gMenuWindow, gContestMons[i].trainerName, 10 * i + 2, gUnknown_083C926E[i][0], gUnknown_083C926E[i][1]);
     }
 }
 
@@ -873,8 +867,8 @@ void sub_80AABF0(struct Sprite *sprite, s8 var2)
         r4 = 4;
     sub_80AA5BC(r4);
     sprite->data[3] = r4;
-    gScriptContestCategory = sprite->data[3];
-    sub_80AE398(sprite->data[3], gScriptContestRank);
+    gSpecialVar_ContestCategory = sprite->data[3];
+    Contest_InitAllPokemon(sprite->data[3], gSpecialVar_ContestRank);
     sub_80AA280(sprite->data[2]);
     sub_80AA658(sprite->data[2]);
 }
@@ -882,13 +876,13 @@ void sub_80AABF0(struct Sprite *sprite, s8 var2)
 void sub_80AAC5C(struct Sprite *sprite, s8 var2)
 {
     if (var2 > 0)
-        gScriptContestRank++;
-    else if (gScriptContestRank != 0)
-        gScriptContestRank--;
-    if (gScriptContestRank > 3)
-        gScriptContestRank = 3;
-    sub_80AA5E8(gScriptContestRank);
-    sub_80AE398(gScriptContestCategory, gScriptContestRank);
+        gSpecialVar_ContestRank++;
+    else if (gSpecialVar_ContestRank != 0)
+        gSpecialVar_ContestRank--;
+    if (gSpecialVar_ContestRank > 3)
+        gSpecialVar_ContestRank = 3;
+    sub_80AA5E8(gSpecialVar_ContestRank);
+    Contest_InitAllPokemon(gSpecialVar_ContestCategory, gSpecialVar_ContestRank);
     sub_80AA280(sprite->data[2]);
     sub_80AA658(sprite->data[2]);
 }
@@ -901,7 +895,7 @@ void sub_80AACC4(void)
         SetDebugMonForContest();
         if (!(gIsLinkContest & 1))
             sub_80AE82C(eMatsudaDebugVar);
-        SetMainCallback2(sub_80AB47C);
+        SetMainCallback2(CB2_StartContest);
     }
 }
 
@@ -923,7 +917,7 @@ void sub_80AAD44(struct Sprite *sprite, s8 var2)
 
         SetDebugMonForContest();
         for (i = 0; i < 4; i++)
-            gUnknown_02038670[i] = sub_80AE770(i, gScriptContestCategory);
+            gUnknown_02038670[i] = sub_80AE770(i, gSpecialVar_ContestCategory);
         SetMainCallback2(sub_805469C);
     }
 }
@@ -1155,10 +1149,10 @@ void sub_80AAF30(void)
 
     gUnknown_0203856C = 1;
     gContestPlayerMonIndex = 3;
-    sub_80AE098(0);
+    Contest_CreatePlayerMon(0);
 
     for (i = 3; i > -1; i--)
-        gUnknown_02038690[i] = 3 - i;
+        gContestFinalStandings[i] = 3 - i;
 
     for (i = 0; i < 3; i++)
     {
@@ -1171,7 +1165,7 @@ void sub_80AAF30(void)
     gUnknown_02038670[3] = 0x12C;
     gUnknown_02038680[3] = 0x190;
     gUnknown_02038678[3] = 0x190;
-    sub_80B2A7C(0xFE);
+    Contest_SaveWinner(0xFE);
 }
 
 u8 MatsudaDebugMenu_SetHighScore(void)
@@ -1201,11 +1195,11 @@ u8 MatsudaDebugMenu_SetArtMuseumItems(void)
     s32 i;
 
     gContestPlayerMonIndex = 3;
-    sub_80AE098(0);
+    Contest_CreatePlayerMon(0);
     for (i = 3; i > -1; i--)
-        gUnknown_02038690[i] = 3 - i;
-    for (gScriptContestCategory = 0; gScriptContestCategory < 5; gScriptContestCategory++)
-        sub_80B2A7C(0xFF);
+        gContestFinalStandings[i] = 3 - i;
+    for (gSpecialVar_ContestCategory = 0; gSpecialVar_ContestCategory < 5; gSpecialVar_ContestCategory++)
+        Contest_SaveWinner(0xFF);
     CloseMenu();
     return 1;
 }

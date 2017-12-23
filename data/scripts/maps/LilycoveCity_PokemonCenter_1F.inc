@@ -3,14 +3,14 @@ LilycoveCity_PokemonCenter_1F_MapScripts:: @ 8159327
 	.byte 0
 
 LilycoveCity_PokemonCenter_1F_MapScript1_15932D:: @ 815932D
-	sethealplace 8
+	setrespawn 8
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_159331:: @ 8159331
 	setvar 0x800b, 1
 	call LilycoveCity_PokemonCenter_1F_EventScript_19FD5B
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	release
 	end
 

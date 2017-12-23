@@ -179,7 +179,7 @@ void Task_HandleGetDecorationMenuInput(u8 taskId)
 void ScrSpecial_GetTraderTradedFlag(void)
 {
     struct MauvilleManTrader *trader = &gSaveBlock1.mauvilleMan.trader;
-    gScriptResult = trader->alreadyTraded;
+    gSpecialVar_Result = trader->alreadyTraded;
 }
 
 void ScrSpecial_DoesPlayerHaveNoDecorations(void)
@@ -190,21 +190,21 @@ void ScrSpecial_DoesPlayerHaveNoDecorations(void)
     {
         if (sub_8134194(i))
         {
-            gScriptResult = FALSE;
+            gSpecialVar_Result = FALSE;
             return;
         }
     }
-    gScriptResult = TRUE;
+    gSpecialVar_Result = TRUE;
 }
 
 void ScrSpecial_IsDecorationFull(void)
 {
-    gScriptResult = FALSE;
+    gSpecialVar_Result = FALSE;
     if (gDecorations[gSpecialVar_0x8004].category != gDecorations[gSpecialVar_0x8006].category
         && sub_8133F9C(gDecorations[gSpecialVar_0x8004].category) == -1)
     {
         sub_80FE7D4(gStringVar2, gDecorations[gSpecialVar_0x8004].category);
-        gScriptResult = TRUE;
+        gSpecialVar_Result = TRUE;
     }
 }
 

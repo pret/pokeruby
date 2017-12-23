@@ -383,7 +383,7 @@ PetalburgCity_Gym_EventScript_1549B2:: @ 81549B2
 	return
 
 PetalburgCity_Gym_EventScript_1549B8:: @ 81549B8
-	giveitem ITEM_ENIGMA_BERRY
+	giveitem_std ITEM_ENIGMA_BERRY
 	compare RESULT, 0
 	goto_if_eq PetalburgCity_Gym_EventScript_1A029B
 	setvar 0x402d, 0
@@ -412,7 +412,7 @@ PetalburgCity_Gym_EventScript_1549D6:: @ 81549D6
 	end
 
 PetalburgCity_Gym_EventScript_154A2C:: @ 8154A2C
-	giveitem ITEM_TM42
+	giveitem_std ITEM_TM42
 	compare RESULT, 0
 	goto_if_eq PetalburgCity_Gym_EventScript_1A029B
 	setflag FLAG_RECEIVED_TM42
@@ -962,51 +962,51 @@ PetalburgCity_Gym_EventScript_155081:: @ 8155081
 	return
 
 PetalburgCity_Gym_EventScript_1550A2:: @ 81550A2
-	setmaptile 6, 85, 528, 0
-	setmaptile 7, 85, 529, 0
-	setmaptile 1, 98, 528, 0
-	setmaptile 2, 98, 529, 0
+	setmetatile 6, 85, 528, 0
+	setmetatile 7, 85, 529, 0
+	setmetatile 1, 98, 528, 0
+	setmetatile 2, 98, 529, 0
 	return
 
 PetalburgCity_Gym_EventScript_1550C7:: @ 81550C7
-	setmaptile 6, 46, 528, 0
-	setmaptile 7, 46, 529, 0
-	setmaptile 1, 59, 528, 0
-	setmaptile 2, 59, 529, 0
+	setmetatile 6, 46, 528, 0
+	setmetatile 7, 46, 529, 0
+	setmetatile 1, 59, 528, 0
+	setmetatile 2, 59, 529, 0
 	return
 
 PetalburgCity_Gym_EventScript_1550EC:: @ 81550EC
-	setmaptile 6, 59, 528, 0
-	setmaptile 7, 59, 529, 0
-	setmaptile 1, 72, 528, 0
-	setmaptile 2, 72, 529, 0
+	setmetatile 6, 59, 528, 0
+	setmetatile 7, 59, 529, 0
+	setmetatile 1, 72, 528, 0
+	setmetatile 2, 72, 529, 0
 	return
 
 PetalburgCity_Gym_EventScript_155111:: @ 8155111
-	setmaptile 1, 20, 528, 0
-	setmaptile 2, 20, 529, 0
+	setmetatile 1, 20, 528, 0
+	setmetatile 2, 20, 529, 0
 	return
 
 PetalburgCity_Gym_EventScript_155124:: @ 8155124
-	setmaptile 6, 20, 528, 0
-	setmaptile 7, 20, 529, 0
-	setmaptile 1, 33, 528, 0
-	setmaptile 2, 33, 529, 0
+	setmetatile 6, 20, 528, 0
+	setmetatile 7, 20, 529, 0
+	setmetatile 1, 33, 528, 0
+	setmetatile 2, 33, 529, 0
 	return
 
 PetalburgCity_Gym_EventScript_155149:: @ 8155149
-	setmaptile 6, 33, 528, 0
-	setmaptile 7, 33, 529, 0
+	setmetatile 6, 33, 528, 0
+	setmetatile 7, 33, 529, 0
 	return
 
 PetalburgCity_Gym_EventScript_15515C:: @ 815515C
-	setmaptile 1, 7, 528, 0
-	setmaptile 2, 7, 529, 0
+	setmetatile 1, 7, 528, 0
+	setmetatile 2, 7, 529, 0
 	return
 
 PetalburgCity_Gym_EventScript_15516F:: @ 815516F
-	setmaptile 6, 7, 528, 0
-	setmaptile 7, 7, 529, 0
+	setmetatile 6, 7, 528, 0
+	setmetatile 7, 7, 529, 0
 	return
 
 PetalburgCity_Gym_EventScript_155182:: @ 8155182

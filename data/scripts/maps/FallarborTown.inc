@@ -35,9 +35,9 @@ FallarborTown_EventScript_14E826:: @ 814E826
 	lock
 	faceplayer
 	waitse
-	playpokecry SPECIES_AZURILL, 0
+	playmoncry SPECIES_AZURILL, 0
 	msgbox FallarborTown_Text_16C92C, 4
-	waitpokecry
+	waitmoncry
 	release
 	end
 

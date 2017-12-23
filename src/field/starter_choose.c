@@ -16,7 +16,7 @@
 #include "trig.h"
 #include "unknown_task.h"
 
-extern u16 gScriptResult;
+extern u16 gSpecialVar_Result;
 extern struct SpriteTemplate gUnknown_02024E8C;
 
 //--------------------------------------------------
@@ -439,7 +439,7 @@ static void Task_StarterChoose5(u8 taskId)
     {
     case 0:  // YES
         //Return the starter choice and exit.
-        gScriptResult = gTasks[taskId].tStarterSelection;
+        gSpecialVar_Result = gTasks[taskId].tStarterSelection;
         SetMainCallback2(gMain.savedCallback);
         break;
     case 1:  // NO

@@ -35,8 +35,8 @@ MossdeepCity_House4_EventScript_15AB77:: @ 815AB77
 	lock
 	faceplayer
 	waitse
-	playpokecry SPECIES_SKITTY, 0
+	playmoncry SPECIES_SKITTY, 0
 	msgbox MossdeepCity_House4_Text_18E1E1, 4
-	waitpokecry
+	waitmoncry
 	release
 	end

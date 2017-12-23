@@ -38,22 +38,22 @@ extern u16 gSpecialVar_0x8004;
 extern u16 gSpecialVar_0x8005;
 extern u16 gSpecialVar_0x8006;
 
-extern u16 gScriptContestCategory;
-extern u16 gScriptContestRank;
-extern u16 gScriptResult;
+extern u16 gSpecialVar_ContestCategory;
+extern u16 gSpecialVar_ContestRank;
+extern u16 gSpecialVar_Result;
 
 extern u32 gUnknown_03005D28;
 
 extern u8 gUnknown_02038694;
 extern u8 gUnknown_0203856C;
-extern u8 gUnknown_02038690[];
+extern u8 gContestFinalStandings[];
 extern u16 gUnknown_02038678[];
 
 void sub_80C4BF0(void)
 {
-    gSaveBlock1.vars[0x10] = gContestMons[0].unk16;
-    gSaveBlock1.vars[0x11] = gContestMons[1].unk16;
-    gSaveBlock1.vars[0x12] = gContestMons[2].unk16;
+    gSaveBlock1.vars[0x10] = gContestMons[0].trainerGfxId;
+    gSaveBlock1.vars[0x11] = gContestMons[1].trainerGfxId;
+    gSaveBlock1.vars[0x12] = gContestMons[2].trainerGfxId;
 }
 
 void sub_80C4C28(void)
@@ -91,7 +91,7 @@ void sub_80C4C78(void)
     u16 var;
     u16 returnVar;
 
-    switch(gScriptContestCategory)
+    switch(gSpecialVar_ContestCategory)
     {
     case 0:
         var = 8;
@@ -111,7 +111,7 @@ void sub_80C4C78(void)
         break;
     }
 
-    returnVar = gSaveBlock1.sbStruct.unkSB2.sb1_2EFC_struct2[var].var;
+    returnVar = gSaveBlock1.contestWinners[var].species;
 
     if(returnVar == 0)
         gSpecialVar_0x8004 = returnVar;
@@ -121,13 +121,13 @@ void sub_80C4C78(void)
 
 void sub_80C4CEC(void)
 {
-    sub_80B2A7C(0xFF);
+    Contest_SaveWinner(0xFF);
 }
 
 void sub_80C4CF8(void)
 {
-    if(!gUnknown_02038690[gContestPlayerMonIndex]
-    && gScriptContestRank == 3
+    if(!gContestFinalStandings[gContestPlayerMonIndex]
+    && gSpecialVar_ContestRank == 3
     && (s16)gUnknown_02038678[gContestPlayerMonIndex] >= 800)
     {
         gSpecialVar_0x8004 = 1;
@@ -144,7 +144,7 @@ u8 sub_80C4D50(void)
     int i;
 
     for (i = 0; i < 5; i++)
-        if (gSaveBlock1.sbStruct.unkSB2.sb1_2EFC_struct2[i + 8].var)
+        if (gSaveBlock1.museumPortraits[i].species != 0)
             retVar++;
 
     return retVar;
@@ -367,7 +367,7 @@ void ShowContestWinner(void)
         sub_80AAF30();
         BATTLE_STRUCT->unk15DDF = 1;
         BATTLE_STRUCT->unk15DDE = sub_80B2C4C(254, 0);
-        sub_80B2A7C(3);
+        Contest_SaveWinner(3);
         gUnknown_0203856C = 0;
     }
     SetMainCallback2(CB2_ContestPainting);
@@ -376,10 +376,10 @@ void ShowContestWinner(void)
 
 void sub_80C4F70(void)
 {
-    VarSet(0x4010, gContestMons[0].unk16);
-    VarSet(0x4011, gContestMons[1].unk16);
-    VarSet(0x4012, gContestMons[2].unk16);
-    VarSet(0x4013, gContestMons[3].unk16);
+    VarSet(0x4010, gContestMons[0].trainerGfxId);
+    VarSet(0x4011, gContestMons[1].trainerGfxId);
+    VarSet(0x4012, gContestMons[2].trainerGfxId);
+    VarSet(0x4013, gContestMons[3].trainerGfxId);
 }
 
 bool8 GiveMonArtistRibbon(void)
@@ -387,8 +387,8 @@ bool8 GiveMonArtistRibbon(void)
     u8 ribbon = GetMonData(&gPlayerParty[gUnknown_02038694], MON_DATA_ARTIST_RIBBON);
 
     if(ribbon == FALSE
-    && gUnknown_02038690[gContestPlayerMonIndex] == 0
-    && gScriptContestRank == 3
+    && gContestFinalStandings[gContestPlayerMonIndex] == 0
+    && gSpecialVar_ContestRank == 3
     && (s16)gUnknown_02038678[gContestPlayerMonIndex] >= 800)
     {
         ribbon = TRUE;
@@ -421,8 +421,8 @@ void ShowContestEntryMonPic(void)
 
         MenuDrawTextWindow(left, top, 19, 13);
         species = gContestMons[gSpecialVar_0x8006].species;
-        var1 = gContestMons[gSpecialVar_0x8006].unk38; // v2
-        var2 = gContestMons[gSpecialVar_0x8006].unk3C; // v3
+        var1 = gContestMons[gSpecialVar_0x8006].personality;
+        var2 = gContestMons[gSpecialVar_0x8006].otId;
         taskId = CreateTask(sub_80C5190, 0x50);
         gTasks[taskId].data[0] = 0;
         gTasks[taskId].data[1] = species;
@@ -488,9 +488,9 @@ void sub_80C5190(u8 taskId)
 void ScriptGetMultiplayerId(void)
 {
     if(gIsLinkContest & 1)
-        gScriptResult = GetMultiplayerId();
+        gSpecialVar_Result = GetMultiplayerId();
     else
-        gScriptResult = 4;
+        gSpecialVar_Result = 4;
 }
 
 void ScriptRandom(void)
@@ -502,11 +502,11 @@ void ScriptRandom(void)
     {
         gUnknown_03005D28 = 1103515245 * gUnknown_03005D28 + 24691;
         random = gUnknown_03005D28 >> 16;
-        scriptPtr = &gScriptResult;
+        scriptPtr = &gSpecialVar_Result;
     }
     else
     {
-        scriptPtr = &gScriptResult;
+        scriptPtr = &gSpecialVar_Result;
         random = Random();
     }
     *scriptPtr = random % *scriptPtr;
@@ -587,13 +587,13 @@ void CheckForAlivePartyMons(void)
     switch(var)
     {
     case 1:
-        gScriptResult = var;
+        gSpecialVar_Result = var;
         break;
     case 0:
-        gScriptResult = var;
+        gSpecialVar_Result = var;
         break;
     case 2:
-        gScriptResult = var;
+        gSpecialVar_Result = var;
         break;
     }
 }
@@ -657,10 +657,10 @@ void sub_80C5580(void)
     switch(var)
     {
     case 0:
-        gScriptResult = 0;
+        gSpecialVar_Result = 0;
         break;
     default:
-        gScriptResult = 1;
+        gSpecialVar_Result = 1;
         break;
     }
 
@@ -681,11 +681,11 @@ void SetBattleTowerPlayerParty(void)
     {
     case 0: // player quit battle tower?
         LoadPlayerParty();
-        gScriptResult = 0;
+        gSpecialVar_Result = 0;
         break;
     default: // load battle tower.
         ReducePlayerPartyToThree();
-        gScriptResult = 1;
+        gSpecialVar_Result = 1;
         break;
     }
 

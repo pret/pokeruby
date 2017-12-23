@@ -1578,13 +1578,13 @@ _080E6D3E:
 	beq _080E6D58
 	b _080E6D72
 _080E6D44:
-	ldr r0, _080E6D50 @ =gScriptResult
+	ldr r0, _080E6D50 @ =gSpecialVar_Result
 	strh r1, [r0]
 	ldr r0, _080E6D54 @ =sub_80E752C
 	bl sub_80E682C
 	b _080E6D72
 	.align 2, 0
-_080E6D50: .4byte gScriptResult
+_080E6D50: .4byte gSpecialVar_Result
 _080E6D54: .4byte sub_80E752C
 _080E6D58:
 	ldr r1, _080E6D60 @ =gSharedMem + 0x1000
@@ -1722,7 +1722,7 @@ _080E6E56:
 	beq _080E6EDC
 	b _080E6F5E
 _080E6E5C:
-	ldr r7, _080E6EC8 @ =gScriptResult
+	ldr r7, _080E6EC8 @ =gSpecialVar_Result
 	bl sub_80E7FA8
 	lsls r0, 24
 	lsrs r0, 24
@@ -1774,7 +1774,7 @@ _080E6EBE:
 	bl sub_80E682C
 	b _080E6F5E
 	.align 2, 0
-_080E6EC8: .4byte gScriptResult
+_080E6EC8: .4byte gSpecialVar_Result
 _080E6ECC: .4byte gSpecialVar_0x8004
 _080E6ED0: .4byte 0x00009fa8
 _080E6ED4: .4byte 0x0000ffff

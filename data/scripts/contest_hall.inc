@@ -11,7 +11,7 @@ VerdanturfTown_ContestLobby_EventScript_1A4E92:: @ 81A4E92
 	goto_if 5, FallarborTown_ContestLobby_EventScript_1A4F4E
 	checkflag FLAG_TEMP_1
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1A4F8F
-	getstdstring 0, 0x800b
+	bufferstdstring 0, 0x800b
 	msgbox FallarborTown_ContestLobby_Text_1A5DFC, 4
 	checkitem ITEM_CONTEST_PASS, 1
 	compare RESULT, 0
@@ -43,7 +43,7 @@ FallarborTown_ContestLobby_EventScript_1A4F13:: @ 81A4F13
 	checkflag FLAG_RECEIVED_CONTEST_PASS
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1A4F44
 	msgbox FallarborTown_ContestLobby_Text_1A6583, 4
-	giveitem ITEM_CONTEST_PASS
+	giveitem_std ITEM_CONTEST_PASS
 	setflag FLAG_RECEIVED_CONTEST_PASS
 	setflag FLAG_TEMP_1
 	msgbox FallarborTown_ContestLobby_Text_1A5E98, 4
@@ -62,7 +62,7 @@ FallarborTown_ContestLobby_EventScript_1A4F4E:: @ 81A4F4E
 	end
 
 FallarborTown_ContestLobby_EventScript_1A4F67:: @ 81A4F67
-	giveitem ITEM_LUXURY_BALL
+	giveitem_std ITEM_LUXURY_BALL
 	compare RESULT, 0
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1A4F86
 	setvar 0x408a, 0
@@ -119,7 +119,7 @@ FallarborTown_ContestLobby_EventScript_1A503E:: @ 81A503E
 
 FallarborTown_ContestLobby_EventScript_1A5048:: @ 81A5048
 	msgbox FallarborTown_ContestLobby_Text_1A6319, 4
-	choosecontestpkmn
+	choosecontestmon
 	compare 0x8004, 255
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1A5097
 	special sub_80C43F4
@@ -260,8 +260,8 @@ LinkContestRoom1_EventScript_1A523F:: @ 81A523F
 	return
 
 LinkContestRoom1_EventScript_1A5245:: @ 81A5245
-	getstdstring 1, 0x8008
-	getstdstring 2, 0x8009
+	bufferstdstring 1, 0x8008
+	bufferstdstring 2, 0x8009
 	call LinkContestRoom1_EventScript_1A525F
 	lockall
 	applymovement 1, LinkContestRoom1_Movement_1A5D87
@@ -339,7 +339,7 @@ LinkContestRoom1_EventScript_1A5311:: @ 81A5311
 LinkContestRoom1_EventScript_1A5323:: @ 81A5323
 	special sub_80C4C64
 	addvar 0x8006, 1
-	getnumberstring 1, 0x8006
+	buffernumberstring 1, 0x8006
 	lockall
 	applymovement 0x800b, LinkContestRoom1_Movement_1A5D9C
 	waitmovement 0
@@ -885,7 +885,7 @@ LinkContestRoom1_EventScript_1A5A49:: @ 81A5A49
 	special sub_80C47F0
 	special sub_80C4858
 	addvar 0x8005, 1
-	getnumberstring 1, 0x8005
+	buffernumberstring 1, 0x8005
 	addvar 0x8005, -1
 	call LinkContestRoom1_EventScript_1A5A75
 	applymovement 0x4003, LinkContestRoom1_Movement_1A5D99
@@ -1134,7 +1134,7 @@ LinkContestRoom1_EventScript_1A5D2D:: @ 81A5D2D
 	return
 
 LinkContestRoom1_EventScript_1A5D3B:: @ 81A5D3B
-	giveitem ITEM_LUXURY_BALL
+	giveitem_std ITEM_LUXURY_BALL
 	compare RESULT, 0
 	goto_if_eq LinkContestRoom1_EventScript_1A5D2D
 	msgbox LinkContestRoom1_Text_1A6DF1, 3

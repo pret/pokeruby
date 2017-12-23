@@ -30,8 +30,8 @@ struct Coords32
     s32 y;
 };
 
-extern u16 gScriptLastTalked;
-extern u16 gScriptFacing;
+extern u16 gSpecialVar_LastTalked;
+extern u16 gSpecialVar_Facing;
 extern struct LinkPlayerMapObject gLinkPlayerMapObjects[];
 extern u16 gSpecialVar_0x8004;
 extern u16 gSpecialVar_0x8005;
@@ -295,8 +295,8 @@ u8 *sub_80682A8(struct MapPosition *position, u8 unused, u8 c)
             return NULL;
     }
     gSelectedMapObject = r3;
-    gScriptLastTalked = gMapObjects[r3].localId;
-    gScriptFacing = c;
+    gSpecialVar_LastTalked = gMapObjects[r3].localId;
+    gSpecialVar_Facing = c;
     return GetFieldObjectScriptPointerByFieldObjectId(r3);
 }
 
@@ -316,10 +316,10 @@ static u8 *sub_8068364(struct MapPosition *position, u8 b, u8 c)
     }
     //_080683E8
     gSelectedMapObject = r3;
-    gScriptLastTalked = gMapObjects[r3].localId;
-    gScriptFacing = c;
+    gSpecialVar_LastTalked = gMapObjects[r3].localId;
+    gSpecialVar_Facing = c;
     script = GetFieldObjectScriptPointerByFieldObjectId(r3);
-    script = GetRamScript(gScriptLastTalked, script);
+    script = GetRamScript(gSpecialVar_LastTalked, script);
     return script;
 }
 

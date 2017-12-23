@@ -37,9 +37,9 @@ ShoalCave_LowTideEntranceRoom_EventScript_15E076:: @ 815E076
 	compare RESULT, 2
 	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_15E12E
 	msgbox ShoalCave_LowTideEntranceRoom_Text_1C6808, 4
-	removeitem ITEM_SHOAL_SALT, 4
-	removeitem ITEM_SHOAL_SHELL, 4
-	giveitem ITEM_SHELL_BELL
+	takeitem ITEM_SHOAL_SALT, 4
+	takeitem ITEM_SHOAL_SHELL, 4
+	giveitem_std ITEM_SHELL_BELL
 	compare RESULT, 0
 	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_1A029B
 	msgbox ShoalCave_LowTideEntranceRoom_Text_1C688E, 4

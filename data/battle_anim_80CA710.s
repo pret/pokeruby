@@ -2091,7 +2091,7 @@ gSpriteAnimTable_83D912C:: @ 83D912C
 
 	.align 2
 gSpriteTemplate_83D9130:: @ 83D9130
-	spr_template 10115, 10115, gOamData_837DF74, gSpriteAnimTable_83D912C, NULL, gDummySpriteAffineAnimTable, sub_80D3184
+	spr_template 10115, 10115, gOamData_837DF74, gSpriteAnimTable_83D912C, NULL, gDummySpriteAffineAnimTable, SetAnimRaindropCallback
 
 	.align 2
 gSpriteAffineAnim_83D9148:: @ 83D9148

@@ -222,13 +222,13 @@ SlateportCity_Harbor_EventScript_156196:: @ 8156196
 	applymovement LAST_TALKED, SlateportCity_Harbor_Movement_1A0841
 	waitmovement 0
 	delay 30
-	hideobject LAST_TALKED, 9, 8
+	hideobjectat LAST_TALKED, MAP_SLATEPORT_CITY_HARBOR
 	compare FACING, 2
 	call_if 1, SlateportCity_Harbor_EventScript_1561EF
 	compare FACING, 4
 	call_if 1, SlateportCity_Harbor_EventScript_1561E4
 	delay 30
-	hideobject 255, 0, 0
+	hideobjectat 255, MAP_PETALBURG_CITY
 	setvar 0x8004, 5
 	call SlateportCity_Harbor_EventScript_1A040E
 	return
@@ -335,10 +335,10 @@ SlateportCity_Harbor_EventScript_1562EA:: @ 81562EA
 	msgbox SlateportCity_Harbor_Text_1803DD, 5
 	compare RESULT, 0
 	goto_if_eq SlateportCity_Harbor_EventScript_156374
-	giveitem ITEM_DEEP_SEA_TOOTH
+	giveitem_std ITEM_DEEP_SEA_TOOTH
 	compare RESULT, 0
 	goto_if_eq SlateportCity_Harbor_EventScript_1A029B
-	removeitem ITEM_SCANNER, 1
+	takeitem ITEM_SCANNER, 1
 	msgbox SlateportCity_Harbor_Text_18046B, 4
 	setflag FLAG_EXCHANGED_SCANNER
 	goto SlateportCity_Harbor_EventScript_156380
@@ -348,10 +348,10 @@ SlateportCity_Harbor_EventScript_15632A:: @ 815632A
 	msgbox SlateportCity_Harbor_Text_180412, 5
 	compare RESULT, 0
 	goto_if_eq SlateportCity_Harbor_EventScript_156374
-	giveitem ITEM_DEEP_SEA_SCALE
+	giveitem_std ITEM_DEEP_SEA_SCALE
 	compare RESULT, 0
 	goto_if_eq SlateportCity_Harbor_EventScript_1A029B
-	removeitem ITEM_SCANNER, 1
+	takeitem ITEM_SCANNER, 1
 	msgbox SlateportCity_Harbor_Text_18046B, 4
 	setflag FLAG_EXCHANGED_SCANNER
 	goto SlateportCity_Harbor_EventScript_156380

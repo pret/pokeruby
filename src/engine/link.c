@@ -635,7 +635,7 @@ static void BuildSendCmd(u16 code)
         break;
     case 0xAAAB:
         gSendCmd[0] = 0xAAAB;
-        gSendCmd[1] = gScriptItemId;
+        gSendCmd[1] = gSpecialVar_ItemId;
         break;
     case 0xCCCC:
         gSendCmd[0] = 0xCCCC;

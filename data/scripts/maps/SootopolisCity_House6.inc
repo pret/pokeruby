@@ -10,7 +10,7 @@ SootopolisCity_House6_EventScript_15B386:: @ 815B386
 	compare RESULT, 0
 	call_if 1, SootopolisCity_House6_EventScript_15B3C3
 	msgbox SootopolisCity_House6_Text_18FF12, 4
-	givedecoration DECOR_WAILMER_DOLL
+	givedecoration_std DECOR_WAILMER_DOLL
 	compare RESULT, 0
 	goto_if_eq SootopolisCity_House6_EventScript_15B3D7
 	setflag FLAG_RECEIVED_WAILMER_DOLL
@@ -28,7 +28,7 @@ SootopolisCity_House6_EventScript_15B3CD:: @ 815B3CD
 	end
 
 SootopolisCity_House6_EventScript_15B3D7:: @ 815B3D7
-	getdecorname 1, DECOR_WAILMER_DOLL
+	bufferdecorationname 1, DECOR_WAILMER_DOLL
 	msgbox SootopolisCity_House6_Text_1A0CEF, 4
 	msgbox SootopolisCity_House6_Text_18FF28, 4
 	release

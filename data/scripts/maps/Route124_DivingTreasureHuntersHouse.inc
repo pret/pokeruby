@@ -244,8 +244,8 @@ Route124_DivingTreasureHuntersHouse_EventScript_164283:: @ 8164283
 	goto Route124_DivingTreasureHuntersHouse_EventScript_164292
 
 Route124_DivingTreasureHuntersHouse_EventScript_164292:: @ 8164292
-	getitemname 0, 0x8008
-	getitemname 1, 0x8009
+	bufferitemname 0, 0x8008
+	bufferitemname 1, 0x8009
 	msgbox Route124_DivingTreasureHuntersHouse_Text_19F5E0, 5
 	compare RESULT, 0
 	goto_if_eq Route124_DivingTreasureHuntersHouse_EventScript_16431F
@@ -259,8 +259,8 @@ Route124_DivingTreasureHuntersHouse_EventScript_164292:: @ 8164292
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_1642D3:: @ 81642D3
-	removeitem 0x8008, 1
-	giveitem 0x8009
+	takeitem 0x8008, 1
+	giveitem_std 0x8009
 	msgbox Route124_DivingTreasureHuntersHouse_Text_19F606, 4
 	call Route124_DivingTreasureHuntersHouse_EventScript_163E44
 	compare 0x4001, 0

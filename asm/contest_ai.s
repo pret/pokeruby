@@ -1315,7 +1315,7 @@ _0812923C:
 	thumb_func_start ContestAICmd_get_contest_type
 ContestAICmd_get_contest_type: @ 8129244
 	ldr r1, _08129258 @ =gSharedMem + 0x192E4
-	ldr r0, _0812925C @ =gScriptContestCategory
+	ldr r0, _0812925C @ =gSpecialVar_ContestCategory
 	ldrh r0, [r0]
 	strh r0, [r1, 0x18]
 	ldr r1, _08129260 @ =gAIScriptPtr
@@ -1325,7 +1325,7 @@ ContestAICmd_get_contest_type: @ 8129244
 	bx lr
 	.align 2, 0
 _08129258: .4byte gSharedMem + 0x192E4
-_0812925C: .4byte gScriptContestCategory
+_0812925C: .4byte gSpecialVar_ContestCategory
 _08129260: .4byte gAIScriptPtr
 	thumb_func_end ContestAICmd_get_contest_type
 
@@ -1414,7 +1414,7 @@ ContestAICmd_get_move_excitement: @ 81292E4
 	adds r2, 0x1E
 	adds r1, r2
 	ldrh r0, [r1]
-	bl contest_get_move_excitement
+	bl Contest_GetMoveExcitement
 	lsls r0, 24
 	asrs r0, 24
 	strh r0, [r4, 0x18]
@@ -3319,7 +3319,7 @@ ContestAICmd_check_can_participate: @ 812A0BC
 	bl sub_8128A7C
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80AF59C
+	bl Contest_IsMonsTurnDisabled
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812A0E4
@@ -5049,7 +5049,7 @@ _0812AD06:
 	ldrh r0, [r1]
 	cmp r0, 0
 	beq _0812AD30
-	bl contest_get_move_excitement
+	bl Contest_GetMoveExcitement
 	lsls r0, 24
 	asrs r0, 24
 	cmp r0, 0x1

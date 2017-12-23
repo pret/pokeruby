@@ -83,7 +83,7 @@ LavaridgeTown_EventScript_14E575:: @ 814E575
 
 LavaridgeTown_EventScript_14E5AB:: @ 814E5AB
 	msgbox LavaridgeTown_Text_16BDA4, 4
-	giveitem ITEM_GO_GOGGLES
+	giveitem_std ITEM_GO_GOGGLES
 	setflag FLAG_RECEIVED_GO_GOGGLES
 	msgbox LavaridgeTown_Text_16BE7D, 4
 	goto LavaridgeTown_EventScript_14E5F5
@@ -91,7 +91,7 @@ LavaridgeTown_EventScript_14E5AB:: @ 814E5AB
 
 LavaridgeTown_EventScript_14E5D0:: @ 814E5D0
 	msgbox LavaridgeTown_Text_16BF92, 4
-	giveitem ITEM_GO_GOGGLES
+	giveitem_std ITEM_GO_GOGGLES
 	setflag FLAG_RECEIVED_GO_GOGGLES
 	msgbox LavaridgeTown_Text_16C020, 4
 	goto LavaridgeTown_EventScript_14E5F5
@@ -277,7 +277,7 @@ LavaridgeTown_EventScript_14E75A:: @ 814E75A
 	msgbox LavaridgeTown_Text_16C174, 5
 	compare RESULT, 0
 	goto_if_eq LavaridgeTown_EventScript_14E7B2
-	countpokemon
+	getpartysize
 	compare RESULT, 6
 	goto_if_eq LavaridgeTown_EventScript_14E7A8
 	msgbox LavaridgeTown_Text_16C2B6, 4

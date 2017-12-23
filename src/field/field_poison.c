@@ -9,7 +9,7 @@
 #include "task.h"
 #include "text.h"
 
-extern u16 gScriptResult;
+extern u16 gSpecialVar_Result;
 extern u8 fieldPoisonText_PokemonFainted[];
 
 bool32 CheckMonIsValid(struct Pokemon *pkmn)
@@ -93,9 +93,9 @@ void Task_WhiteOut(u8 taskId)
         break;
     case 2: //Done checking Pokemon
         if (AllMonsFainted())
-            gScriptResult = 1;
+            gSpecialVar_Result = 1;
         else
-            gScriptResult = 0;
+            gSpecialVar_Result = 0;
         EnableBothScriptContexts();
         DestroyTask(taskId);
         break;

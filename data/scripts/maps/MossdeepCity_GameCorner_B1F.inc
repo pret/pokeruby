@@ -48,14 +48,14 @@ MossdeepCity_GameCorner_B1F_EventScript_15AEE3:: @ 815AEE3
 	setvar 0x40c0, 1
 	special ShowFieldMessageStringVar4
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	return
 
 MossdeepCity_GameCorner_B1F_EventScript_15AEEE:: @ 815AEEE
 	setvar 0x40c0, 2
 	special ShowFieldMessageStringVar4
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	return
 
 MossdeepCity_GameCorner_B1F_Movement_15AEF9:: @ 815AEF9

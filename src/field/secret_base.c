@@ -175,11 +175,11 @@ void sub_80BB5D0(void)
 void sub_80BB5E4(void)
 {
     u16 i;
-    gScriptResult = 0;
+    gSpecialVar_Result = 0;
     for (i = 0; i < MAX_SECRET_BASES; i++) {
         if (gUnknown_020387DC != gSaveBlock1.secretBases[i].secretBaseId)
             continue;
-        gScriptResult = 1;
+        gSpecialVar_Result = 1;
         VarSet(VAR_0x4054, i);
         break;
     }
@@ -188,9 +188,9 @@ void sub_80BB5E4(void)
 void sub_80BB63C(void) // 80bb63c
 {
     if (gSaveBlock1.secretBases[0].secretBaseId)
-        gScriptResult = 1;
+        gSpecialVar_Result = 1;
     else
-        gScriptResult = 0;
+        gSpecialVar_Result = 0;
 }
 
 u8 sub_80BB66C(void) // 80bb66c
@@ -462,13 +462,13 @@ void sub_80BBDD0(void)
                 gSpecialVar_0x8007 = roomdecorpos[decidx] & 0xF;
                 metatile = MapGridGetMetatileBehaviorAt(gSpecialVar_0x8006 + 7, gSpecialVar_0x8007 + 7);
                 if (sub_80572D8(metatile) == TRUE || sub_80572EC(metatile) == TRUE) {
-                    gScriptResult = gMapHeader.events->mapObjects[objid].graphicsId + VAR_0x3F20;
-                    VarSet(gScriptResult, gDecorations[roomdecor[decidx]].tiles[0]);
-                    gScriptResult = gMapHeader.events->mapObjects[objid].localId;
+                    gSpecialVar_Result = gMapHeader.events->mapObjects[objid].graphicsId + VAR_0x3F20;
+                    VarSet(gSpecialVar_Result, gDecorations[roomdecor[decidx]].tiles[0]);
+                    gSpecialVar_Result = gMapHeader.events->mapObjects[objid].localId;
                     FlagClear(gSpecialVar_0x8004 + 0xAE);
-                    show_sprite(gScriptResult, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
-                    sub_805C0F8(gScriptResult, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, gSpecialVar_0x8006, gSpecialVar_0x8007);
-                    sub_805C78C(gScriptResult, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
+                    show_sprite(gSpecialVar_Result, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
+                    sub_805C0F8(gSpecialVar_Result, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, gSpecialVar_0x8006, gSpecialVar_0x8007);
+                    sub_805C78C(gSpecialVar_Result, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
                     gSpecialVar_0x8004 ++;
                 }
             }
@@ -504,7 +504,7 @@ bool8 sub_80BC050(void)
 {
     sub_80BB5D0();
     sub_80BB5E4();
-    if (gScriptResult == 1)
+    if (gSpecialVar_Result == 1)
         return FALSE;
     return TRUE;
 }
@@ -539,9 +539,9 @@ void sub_80BC0F8(void) {
 
 void sub_80BC114(void) {
     if (gSaveBlock1.secretBases[0].secretBaseId != gUnknown_020387DC)
-        gScriptResult = 1;
+        gSpecialVar_Result = 1;
     else
-        gScriptResult = 0;
+        gSpecialVar_Result = 0;
 }
 
 u8 sub_80BC14C(u8 sbid)
@@ -862,15 +862,15 @@ void sub_80BC56C(void)
     u8 secretBaseIndex = sub_80BC14C(gUnknown_020387DC);
     if (sub_80BC268(secretBaseIndex) == TRUE)
     {
-        gScriptResult = 1;
+        gSpecialVar_Result = 1;
     }
     else if (sub_80BC538() > 9)
     {
-        gScriptResult = 2;
+        gSpecialVar_Result = 2;
     }
     else
     {
-        gScriptResult = 0;
+        gSpecialVar_Result = 0;
     }
 }
 
@@ -1237,7 +1237,7 @@ void sub_80BCE1C(void)
 
 void sub_80BCE4C()
 {
-    gSaveBlock1.secretBases[VarGet(VAR_0x4054)].sbr_field_1_5 = gScriptResult;
+    gSaveBlock1.secretBases[VarGet(VAR_0x4054)].sbr_field_1_5 = gSpecialVar_Result;
 }
 
 void sub_80BCE90()
@@ -1257,7 +1257,7 @@ void sub_80BCE90()
     }
 
     gSpecialVar_0x8004 = sub_80BCCA4(curBaseIndex);
-    gScriptResult = gSaveBlock1.secretBases[curBaseIndex].sbr_field_1_5;
+    gSpecialVar_Result = gSaveBlock1.secretBases[curBaseIndex].sbr_field_1_5;
 }
 
 void sub_80BCF1C(u8 taskId)

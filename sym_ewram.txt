@@ -476,7 +476,7 @@ gUnknown_02038680: @ 2038680
 gUnknown_02038688: @ 2038688
 	.space 0x8
 
-gUnknown_02038690: @ 2038690
+gContestFinalStandings: @ 2038690
 	.space 0x4
 
 gUnknown_02038694: @ 2038694
@@ -494,10 +494,10 @@ gIsLinkContest: @ 203869A
 gUnknown_0203869B: @ 203869B
 	.space 0x1
 
-gScriptContestCategory: @ 203869C
+gSpecialVar_ContestCategory: @ 203869C
 	.space 0x2
 
-gScriptContestRank: @ 203869E
+gSpecialVar_ContestRank: @ 203869E
 	.space 0x2
 
 	.include "src/field/shop.o"

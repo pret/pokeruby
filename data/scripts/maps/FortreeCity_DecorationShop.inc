@@ -14,7 +14,7 @@ FortreeCity_DecorationShop_EventScript_15826A:: @ 815826A
 	faceplayer
 	message FortreeCity_DecorationShop_Text_1A0BE4
 	waitmessage
-	pokemartdecor FortreeCity_DecorationShop_Decorations1
+	pokemartdecoration FortreeCity_DecorationShop_Decorations1
 	msgbox FortreeCity_DecorationShop_Text_1A0C02, 4
 	release
 	end
@@ -38,7 +38,7 @@ FortreeCity_DecorationShop_EventScript_158298:: @ 8158298
 	faceplayer
 	message FortreeCity_DecorationShop_Text_1A0BE4
 	waitmessage
-	pokemartdecor FortreeCity_DecorationShop_Decorations2
+	pokemartdecoration FortreeCity_DecorationShop_Decorations2
 	msgbox FortreeCity_DecorationShop_Text_1A0C02, 4
 	release
 	end
