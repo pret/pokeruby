@@ -79,9 +79,9 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	setvar RESULT, 0
 	.endif
 	playse 209
-	setfieldeffect 0, 16
-	setfieldeffect 1, 42
-	setfieldeffect 2, 0
+	setfieldeffectargument 0, 16
+	setfieldeffectargument 1, 42
+	setfieldeffectargument 2, 0
 	dofieldeffect 54
 	waitfieldeffect 54
 	.ifdef SAPPHIRE

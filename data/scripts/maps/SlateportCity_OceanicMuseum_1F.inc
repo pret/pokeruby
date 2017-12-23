@@ -164,7 +164,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_155C3A:: @ 8155C3A
 	applymovement 13, SlateportCity_OceanicMuseum_1F_Movement_1A0835
 	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_1F_Text_17E582, 4
-	giveitem ITEM_TM46
+	giveitem_std ITEM_TM46
 	compare RESULT, 0
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_155CC2
 	setflag FLAG_RECEIVED_TM46

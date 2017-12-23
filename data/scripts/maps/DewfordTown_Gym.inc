@@ -20,23 +20,23 @@ DewfordTown_Gym_EventScript_153071:: @ 8153071
 	goto DewfordTown_Gym_EventScript_1530AE
 
 DewfordTown_Gym_EventScript_1530AA:: @ 81530AA
-	setdarklevel 0
+	setflashradius 0
 	return
 
 DewfordTown_Gym_EventScript_1530AE:: @ 81530AE
-	setdarklevel 1
+	setflashradius 1
 	return
 
 DewfordTown_Gym_EventScript_1530B2:: @ 81530B2
-	setdarklevel 2
+	setflashradius 2
 	return
 
 DewfordTown_Gym_EventScript_1530B6:: @ 81530B6
-	setdarklevel 3
+	setflashradius 3
 	return
 
 DewfordTown_Gym_EventScript_1530BA:: @ 81530BA
-	setdarklevel 4
+	setflashradius 4
 	return
 
 DewfordTown_Gym_EventScript_1530BE:: @ 81530BE
@@ -57,25 +57,25 @@ DewfordTown_Gym_EventScript_1530F5:: @ 81530F5
 
 DewfordTown_Gym_EventScript_1530F6:: @ 81530F6
 	playse 35
-	animdarklevel 3
+	animateflash 3
 	call DewfordTown_Gym_EventScript_153071
 	return
 
 DewfordTown_Gym_EventScript_153101:: @ 8153101
 	playse 35
-	animdarklevel 2
+	animateflash 2
 	call DewfordTown_Gym_EventScript_153071
 	return
 
 DewfordTown_Gym_EventScript_15310C:: @ 815310C
 	playse 35
-	animdarklevel 1
+	animateflash 1
 	call DewfordTown_Gym_EventScript_153071
 	return
 
 DewfordTown_Gym_EventScript_153117:: @ 8153117
 	playse 35
-	animdarklevel 0
+	animateflash 0
 	call DewfordTown_Gym_EventScript_153071
 	return
 
@@ -123,7 +123,7 @@ DewfordTown_Gym_EventScript_153177:: @ 8153177
 	end
 
 DewfordTown_Gym_EventScript_1531B5:: @ 81531B5
-	giveitem ITEM_TM08
+	giveitem_std ITEM_TM08
 	compare RESULT, 0
 	goto_if_eq DewfordTown_Gym_EventScript_1A029B
 	msgbox DewfordTown_Gym_Text_1753BF, 4

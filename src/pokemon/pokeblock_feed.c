@@ -645,7 +645,7 @@ static bool8 sub_8147B20(struct Pokemon* mon)
         ewram1FFFF++;
         break;
     case 5:
-        SetPokeblockFeedSpritePal(gScriptItemId);
+        SetPokeblockFeedSpritePal(gSpecialVar_ItemId);
         LoadCompressedObjectPalette(&sPokeblockFeedSpritePal);
         ewram1FFFF++;
         break;
@@ -722,7 +722,7 @@ static void Task_WaitForAtePokeblockText(u8 taskID)
 static void Task_PrintAtePokeblockText(u8 taskID)
 {
     struct Pokemon* mon = &gPlayerParty[gPokeblockMonID];
-    struct Pokeblock* pokeblock = &gSaveBlock1.pokeblocks[gScriptItemId];
+    struct Pokeblock* pokeblock = &gSaveBlock1.pokeblocks[gSpecialVar_ItemId];
 
     gPokeblockGain = PokeblockGetGain(GetNature(mon), pokeblock);
     GetMonNickname(mon, gStringVar1);

@@ -208,7 +208,7 @@ extern void de_sub_8073110();
 
 extern struct MusicPlayerInfo gMPlay_SE2;
 extern struct MusicPlayerInfo gMPlay_BGM;
-extern u16 gScriptItemId;
+extern u16 gSpecialVar_ItemId;
 extern u8 gUnknown_020297ED;
 extern u8 byte_3002A68;
 
@@ -1192,7 +1192,7 @@ static void sub_804E9F8(void)
     case 8:
         gBerryBlenderData->field_0++;
         gBerryBlenderData->field_13C = 0;
-        Blender_CopyBerryData(&gBerryBlenderData->blendedBerries[0], gScriptItemId);
+        Blender_CopyBerryData(&gBerryBlenderData->blendedBerries[0], gSpecialVar_ItemId);
         memcpy(gBlockSendBuffer, &gBerryBlenderData->blendedBerries[0], sizeof(struct BlenderBerry));
         sub_80084A4();
         gBerryBlenderData->framesToWait = 0;
@@ -1438,9 +1438,9 @@ static void sub_804F378(void)
     {
     case 0:
         sub_804F0F4();
-        Blender_SetBankBerryData(0, gScriptItemId);
-        Blender_CopyBerryData(&gBerryBlenderData->blendedBerries[0], gScriptItemId);
-        sub_804F1BC(gScriptItemId, gBerryBlenderData->playersNo, &gBerryBlenderData->blendedBerries[0]);
+        Blender_SetBankBerryData(0, gSpecialVar_ItemId);
+        Blender_CopyBerryData(&gBerryBlenderData->blendedBerries[0], gSpecialVar_ItemId);
+        sub_804F1BC(gSpecialVar_ItemId, gBerryBlenderData->playersNo, &gBerryBlenderData->blendedBerries[0]);
         for (i = 0; i < BLENDER_MAX_PLAYERS; i++)
         {
             gBerryBlenderData->field_70[i] = 0;
@@ -3431,7 +3431,7 @@ static bool8 Blender_PrintBlendingResults(void)
         Blender_PrintMadePokeblockString(&pokeblock, gBerryBlenderData->stringVar);
         CreateTask(sub_8052BD0, 6);
         MenuPrintMessage(gBerryBlenderData->stringVar, 1, 15);
-        RemoveBagItem(gScriptItemId, 1);
+        RemoveBagItem(gSpecialVar_ItemId, 1);
         sub_810CA34(&pokeblock);
         gBerryBlenderData->field_0++;
         break;

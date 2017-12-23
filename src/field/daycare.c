@@ -1758,7 +1758,7 @@ static void HandleDaycareLevelMenuInput(u8 taskId)
     {
         HandleDestroyMenuCursors();
         PlaySE(SE_SELECT);
-        gLastFieldPokeMenuOpened = gScriptResult = gTasks[taskId].data[0];
+        gLastFieldPokeMenuOpened = gSpecialVar_Result = gTasks[taskId].data[0];
         DestroyTask(taskId);
         MenuZeroFillWindowRect(15, 6, 29, 13);
         EnableBothScriptContexts();
@@ -1766,7 +1766,7 @@ static void HandleDaycareLevelMenuInput(u8 taskId)
     else if (gMain.newKeys & B_BUTTON)
     {
         HandleDestroyMenuCursors();
-        gLastFieldPokeMenuOpened = gScriptResult = 2;
+        gLastFieldPokeMenuOpened = gSpecialVar_Result = 2;
         DestroyTask(taskId);
         MenuZeroFillWindowRect(15, 6, 29, 13);
         EnableBothScriptContexts();

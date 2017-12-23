@@ -162,7 +162,7 @@ extern u8 gUnknown_0300434C[];
 extern u8 gUnknown_0202E8F4;
 extern u8 gUnknown_0202E8F5;
 extern u8 gUnknown_02038470[];
-extern u16 gScriptItemId;
+extern u16 gSpecialVar_ItemId;
 extern u8 gDisplayedStringBattle[];
 extern const u8 BattleText_LinkStandby[];
 
@@ -1522,7 +1522,7 @@ void sub_802E03C(void)
 {
     if (gMain.callback2 == sub_800F808 && !gPaletteFade.active)
     {
-        Emitcmd35(1, gScriptItemId);
+        Emitcmd35(1, gSpecialVar_ItemId);
         PlayerBufferExecCompleted();
     }
 }

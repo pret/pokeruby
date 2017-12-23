@@ -291,7 +291,7 @@ MauvilleCity_EventScript_14C2F2:: @ 814C2F2
 	checkflag FLAG_RECEIVED_BASEMENT_KEY
 	goto_if_eq MauvilleCity_EventScript_14C332
 	msgbox MauvilleCity_Text_1661C1, 4
-	giveitem ITEM_BASEMENT_KEY
+	giveitem_std ITEM_BASEMENT_KEY
 	setflag FLAG_RECEIVED_BASEMENT_KEY
 	msgbox MauvilleCity_Text_166331, 4
 	release
@@ -304,7 +304,7 @@ MauvilleCity_EventScript_14C332:: @ 814C332
 
 MauvilleCity_EventScript_14C33C:: @ 814C33C
 	msgbox MauvilleCity_Text_1663EB, 4
-	giveitem ITEM_TM24
+	giveitem_std ITEM_TM24
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_EventScript_1A029B
 	setflag FLAG_RECEIVED_TM24

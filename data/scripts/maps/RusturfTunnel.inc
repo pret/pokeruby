@@ -64,7 +64,7 @@ RusturfTunnel_EventScript_15C7D1:: @ 815C7D1
 	call_if 1, RusturfTunnel_EventScript_15C8EB
 	compare 0x4001, 3
 	call_if 1, RusturfTunnel_EventScript_15C8EB
-	giveitem ITEM_HM04
+	giveitem_std ITEM_HM04
 	setflag FLAG_RECEIVED_HM04
 	msgbox RusturfTunnel_Text_194693, 4
 	closemessage
@@ -300,9 +300,9 @@ RusturfTunnel_EventScript_15C9D7:: @ 815C9D7
 	lock
 	faceplayer
 	waitse
-	playpokecry SPECIES_WINGULL, 0
+	playmoncry SPECIES_WINGULL, 0
 	msgbox RusturfTunnel_Text_194188, 4
-	waitpokecry
+	waitmoncry
 	release
 	end
 
@@ -313,7 +313,7 @@ RusturfTunnel_EventScript_15C9EA:: @ 815C9EA
 	msgbox RusturfTunnel_Text_19419B, 4
 	trainerbattle 3, OPPONENT_RUSTURF_TUNNEL_GRUNT, 0, RusturfTunnel_Text_194243
 	msgbox RusturfTunnel_Text_194274, 4
-	giveitem ITEM_DEVON_GOODS
+	giveitem_std ITEM_DEVON_GOODS
 	closemessage
 	applymovement 255, RusturfTunnel_Movement_15CA99
 	applymovement 6, RusturfTunnel_Movement_15CAA2
@@ -332,9 +332,9 @@ RusturfTunnel_EventScript_15C9EA:: @ 815C9EA
 	message RusturfTunnel_Text_19434F
 	waitmessage
 	waitse
-	playpokecry SPECIES_WINGULL, 0
-	waitbutton
-	waitpokecry
+	playmoncry SPECIES_WINGULL, 0
+	waitbuttonpress
+	waitmoncry
 	closemessage
 	applymovement 5, RusturfTunnel_Movement_15CAB4
 	applymovement 7, RusturfTunnel_Movement_15CAC3

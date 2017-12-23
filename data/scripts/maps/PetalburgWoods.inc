@@ -90,7 +90,7 @@ PetalburgWoods_EventScript_15CDFA:: @ 815CDFA
 	applymovement 255, PetalburgWoods_Movement_1A0845
 	waitmovement 0
 	msgbox PetalburgWoods_Text_19507E, 4
-	giveitem ITEM_GREAT_BALL
+	giveitem_std ITEM_GREAT_BALL
 	compare RESULT, 0
 	goto_if_eq PetalburgWoods_EventScript_15CE3F
 	goto PetalburgWoods_EventScript_15CE4D
@@ -244,7 +244,7 @@ PetalburgWoods_EventScript_15CEDC:: @ 815CEDC
 	checkflag FLAG_RECEIVED_MIRACLE_SEED
 	goto_if_eq PetalburgWoods_EventScript_15CF0B
 	msgbox PetalburgWoods_Text_19549E, 4
-	giveitem ITEM_MIRACLE_SEED
+	giveitem_std ITEM_MIRACLE_SEED
 	compare RESULT, 0
 	goto_if_eq PetalburgWoods_EventScript_1A029B
 	setflag FLAG_RECEIVED_MIRACLE_SEED

@@ -85,7 +85,7 @@ DewfordTown_EventScript_14E0C6:: @ 814E0C6
 
 DewfordTown_EventScript_14E0F0:: @ 814E0F0
 	msgbox DewfordTown_Text_16B6A8, 4
-	giveitem ITEM_OLD_ROD
+	giveitem_std ITEM_OLD_ROD
 	setflag FLAG_RECEIVED_OLD_ROD
 	msgbox DewfordTown_Text_16B6F9, 4
 	release
@@ -118,30 +118,30 @@ DewfordTown_EventScript_14E147:: @ 814E147
 
 DewfordTown_EventScript_14E151:: @ 814E151
 	call DewfordTown_EventScript_1A010C
-	setobjectpriority 2, 0, 11, 0
-	setobjectpriority 255, 0, 11, 0
+	setobjectpriority 2, MAP_DEWFORD_TOWN, 0
+	setobjectpriority 255, MAP_DEWFORD_TOWN, 0
 	applymovement 2, DewfordTown_Movement_14E40E
 	waitmovement 0
 	removeobject 2
 	applymovement 255, DewfordTown_Movement_14E402
 	waitmovement 0
-	hideobject 255, 0, 11
+	hideobjectat 255, MAP_DEWFORD_TOWN
 	call DewfordTown_EventScript_1A02E7
 	applymovement 4, DewfordTown_Movement_14E293
 	applymovement 255, DewfordTown_Movement_14E293
 	waitmovement 0
-	showobject 255, 0, 19
+	showobjectat 255, MAP_ROUTE104
 	call DewfordTown_EventScript_1A02EF
 	applymovement 255, DewfordTown_Movement_14E405
 	waitmovement 0
-	showobject 255, 0, 19
+	showobjectat 255, MAP_ROUTE104
 	clearflag FLAG_HIDE_MR_BRINEY_ROUTE104_HOUSE
 	clearflag FLAG_HIDE_PEEKO_BRINEY_HOUSE
 	clearflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE104
 	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD
-	hideobject 4, 0, 11
+	hideobjectat 4, MAP_DEWFORD_TOWN
 	setvar 0x408e, 2
-	resetobjectpriority 255, 0, 11
+	resetobjectpriority 255, MAP_DEWFORD_TOWN
 	warp MAP_ROUTE104_MR_BRINEYS_HOUSE, 255, 5, 4
 	copyvar 0x4096, 0x8008
 	waitstate
@@ -150,40 +150,40 @@ DewfordTown_EventScript_14E151:: @ 814E151
 
 DewfordTown_EventScript_14E1D8:: @ 814E1D8
 	call DewfordTown_EventScript_1A010C
-	setobjectpriority 2, 0, 11, 0
-	setobjectpriority 255, 0, 11, 1
+	setobjectpriority 2, MAP_DEWFORD_TOWN, 0
+	setobjectpriority 255, MAP_DEWFORD_TOWN, 1
 	applymovement 2, DewfordTown_Movement_14E40E
 	waitmovement 0
 	removeobject 2
 	applymovement 255, DewfordTown_Movement_14E402
 	waitmovement 0
-	hideobject 255, 0, 11
+	hideobjectat 255, MAP_DEWFORD_TOWN
 	call DewfordTown_EventScript_1A02E7
 	applymovement 4, DewfordTown_Movement_14E356
 	applymovement 255, DewfordTown_Movement_14E356
 	waitmovement 0
 	call DewfordTown_EventScript_1A02EF
-	showobject 255, 0, 24
+	showobjectat 255, MAP_ROUTE109
 	applymovement 255, DewfordTown_Movement_14E409
 	waitmovement 0
 	setobjectxyperm 2, 21, 26
 	addobject 2
-	setobjectpriority 2, 0, 24, 0
+	setobjectpriority 2, MAP_ROUTE109, 0
 	applymovement 2, DewfordTown_Movement_14E410
 	waitmovement 0
 	clearflag FLAG_HIDE_MR_BRINEY_ROUTE109
 	addobject 1
 	clearflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE109
 	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD
-	hideobject 4, 0, 11
+	hideobjectat 4, MAP_DEWFORD_TOWN
 	checkflag FLAG_DELIVERED_DEVON_GOODS
 	call_if 0, DewfordTown_EventScript_14E281
 	checkflag FLAG_DELIVERED_DEVON_GOODS
 	call_if 1, DewfordTown_EventScript_14E28A
 	closemessage
 	copyvar 0x4096, 0x8008
-	resetobjectpriority 255, 0, 11
-	resetobjectpriority 2, 0, 24
+	resetobjectpriority 255, MAP_DEWFORD_TOWN
+	resetobjectpriority 2, MAP_ROUTE109
 	moveobjectoffscreen 2
 	release
 	end

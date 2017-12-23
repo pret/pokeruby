@@ -15,11 +15,11 @@ AbandonedShip_Corridors_B1F_MapScript1_15E9A3:: @ 815E9A3
 	end
 
 AbandonedShip_Corridors_B1F_EventScript_15E9B6:: @ 815E9B6
-	setmaptile 11, 4, 563, 1
+	setmetatile 11, 4, 563, 1
 	return
 
 AbandonedShip_Corridors_B1F_EventScript_15E9C0:: @ 815E9C0
-	setmaptile 11, 4, 555, 1
+	setmetatile 11, 4, 555, 1
 	return
 
 AbandonedShip_Corridors_B1F_EventScript_15E9CA:: @ 815E9CA
@@ -35,7 +35,7 @@ AbandonedShip_Corridors_B1F_EventScript_15E9D3:: @ 815E9D3
 	goto_if_eq AbandonedShip_Corridors_B1F_EventScript_15EA0A
 	msgbox AbandonedShip_Corridors_B1F_Text_198692, 4
 	playse 21
-	removeitem ITEM_STORAGE_KEY, 1
+	takeitem ITEM_STORAGE_KEY, 1
 	setflag FLAG_USED_STORAGE_KEY
 	call AbandonedShip_Corridors_B1F_EventScript_15E9C0
 	special DrawWholeMapView

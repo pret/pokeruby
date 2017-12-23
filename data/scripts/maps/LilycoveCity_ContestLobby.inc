@@ -360,7 +360,7 @@ LilycoveCity_ContestLobby_EventScript_158C35:: @ 8158C35
 LilycoveCity_ContestLobby_EventScript_158C42:: @ 8158C42
 	msgbox LilycoveCity_ContestLobby_Text_188703, 4
 	setvar CONTEST_RANK, 0
-	choosecontestpkmn
+	choosecontestmon
 	compare 0x8004, 255
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158CEA
 	special sub_80C43F4
@@ -472,7 +472,7 @@ LilycoveCity_ContestLobby_EventScript_158DC3:: @ 8158DC3
 LilycoveCity_ContestLobby_EventScript_158DD1:: @ 8158DD1
 	special sub_80C496C
 	addvar 0x8004, 1
-	getnumberstring 1, 32772
+	buffernumberstring 1, 32772
 	messageautoscroll LilycoveCity_ContestLobby_Text_188845
 	waitmessage
 	addvar 0x8004, 65535
@@ -497,14 +497,14 @@ LilycoveCity_ContestLobby_EventScript_158E0B:: @ 8158E0B
 	applymovement 2, LilycoveCity_ContestLobby_Movement_158E9C
 	waitmovement 0
 	playse 71
-	setmaptile 9, 2, 545, 1
-	setmaptile 9, 3, 609, 1
+	setmetatile 9, 2, 545, 1
+	setmetatile 9, 3, 609, 1
 	special DrawWholeMapView
 	applymovement 2, LilycoveCity_ContestLobby_Movement_158EA0
 	waitmovement 0
 	playse 71
-	setmaptile 9, 2, 721, 1
-	setmaptile 9, 3, 729, 1
+	setmetatile 9, 2, 721, 1
+	setmetatile 9, 3, 729, 1
 	special DrawWholeMapView
 	delay 20
 	applymovement 2, LilycoveCity_ContestLobby_Movement_158EAE
@@ -585,7 +585,7 @@ LilycoveCity_ContestLobby_EventScript_158EB0:: @ 8158EB0
 LilycoveCity_ContestLobby_EventScript_158EE8:: @ 8158EE8
 	setflag FLAG_HIDE_LILYCOVE_MUSEUM_CURATOR
 	copyvar 0x4094, 0x1
-	additem ITEM_CONTEST_PASS, 1
+	giveitem ITEM_CONTEST_PASS, 1
 	setvar 0x800b, 8
 	setvar CONTEST_RANK, 3
 	setvar 0x4099, 1
@@ -636,14 +636,14 @@ LilycoveCity_ContestLobby_EventScript_158F86:: @ 8158F86
 	applymovement 1, LilycoveCity_ContestLobby_Movement_15900B
 	waitmovement 0
 	playse 71
-	setmaptile 4, 2, 545, 1
-	setmaptile 4, 3, 609, 1
+	setmetatile 4, 2, 545, 1
+	setmetatile 4, 3, 609, 1
 	special DrawWholeMapView
 	applymovement 1, LilycoveCity_ContestLobby_Movement_15900F
 	waitmovement 0
 	playse 71
-	setmaptile 4, 2, 721, 1
-	setmaptile 4, 3, 729, 1
+	setmetatile 4, 2, 721, 1
+	setmetatile 4, 3, 729, 1
 	special DrawWholeMapView
 	delay 20
 	applymovement 1, LilycoveCity_ContestLobby_Movement_15901C
@@ -765,7 +765,7 @@ LilycoveCity_ContestLobby_EventScript_15908D:: @ 815908D
 SlateportCity_ContestLobby_EventScript_15908D:: @ 815908D
 	lockall
 	special ShowBerryBlenderRecordWindow
-	waitbutton
+	waitbuttonpress
 	erasebox 0, 0, 29, 19
 	releaseall
 	end

@@ -283,17 +283,17 @@ void sub_80818A4(void)
     u8 taskId = CreateTask(sub_80816A8, 80);
     s16 *data = gTasks[taskId].data;
 
-    if (gScriptResult == 0)
+    if (gSpecialVar_Result == 0)
     {
         data[1] = 0;
         data[2] = 104;
     }
-    else if (gScriptResult == 1)
+    else if (gSpecialVar_Result == 1)
     {
         data[1] = 1;
         data[2] = 104;
     }
-    else if (gScriptResult == 2)
+    else if (gSpecialVar_Result == 2)
     {
         data[1] = 0;
         data[2] = 120;

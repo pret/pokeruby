@@ -3647,10 +3647,10 @@ void sub_8100A7C(void)
 {
     u16 i;
     gSpecialVar_0x8005 = 0;
-    gScriptResult = 0;
+    gSpecialVar_Result = 0;
     if (gSpecialVar_0x8004 == gUnknown_02039234)
     {
-        gScriptResult = 1;
+        gSpecialVar_Result = 1;
     } else if (gDecorations[ewram_1f000.items[gUnknown_020391B4[gSpecialVar_0x8004].decorId]].permission == DECORPERM_SOLID_MAT)
     {
         gSpecialVar_0x8005 = gUnknown_020391B4[gSpecialVar_0x8004].flagId;

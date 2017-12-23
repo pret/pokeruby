@@ -8,7 +8,7 @@ Route110_TrickHousePuzzle1_MapScript1_161CFE:: @ 8161CFE
 	end
 
 Route110_TrickHousePuzzle1_EventScript_161D0A:: @ 8161D0A
-	setmaptile 13, 1, 523, 0
+	setmetatile 13, 1, 523, 0
 	end
 
 Route110_TrickHousePuzzle1_EventScript_161D14:: @ 8161D14

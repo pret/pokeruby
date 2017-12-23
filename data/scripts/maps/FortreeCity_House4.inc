@@ -34,7 +34,7 @@ FortreeCity_House4_EventScript_1581D6:: @ 81581D6
 	applymovement LAST_TALKED, FortreeCity_House4_Movement_1A0839
 	waitmovement 0
 	msgbox FortreeCity_House4_Text_186881, 4
-	giveitem ITEM_MENTAL_HERB
+	giveitem_std ITEM_MENTAL_HERB
 	compare RESULT, 0
 	goto_if_eq FortreeCity_House4_EventScript_1A029B
 	setflag FLAG_RECEIVED_MENTAL_HERB
@@ -60,8 +60,8 @@ FortreeCity_House4_EventScript_15821E:: @ 815821E
 	lock
 	faceplayer
 	waitse
-	playpokecry SPECIES_WINGULL, 0
+	playmoncry SPECIES_WINGULL, 0
 	msgbox FortreeCity_House4_Text_18695C, 4
-	waitpokecry
+	waitmoncry
 	release
 	end

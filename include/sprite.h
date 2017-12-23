@@ -222,12 +222,21 @@ struct Sprite
     /*0x43*/ u8 subpriority;
 };
 
+struct OamMatrix
+{
+    s16 a;
+    s16 b;
+    s16 c;
+    s16 d;
+};
+
 extern const struct OamData gDummyOamData;
 extern const union AnimCmd *const gDummySpriteAnimTable[];
 extern const union AffineAnimCmd *const gDummySpriteAffineAnimTable[];
 
 extern s16 gSpriteCoordOffsetX;
 extern s16 gSpriteCoordOffsetY;
+extern u8 gReservedSpritePaletteCount;
 
 extern struct Sprite gSprites[];
 

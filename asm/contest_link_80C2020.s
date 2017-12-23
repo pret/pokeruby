@@ -1086,7 +1086,7 @@ _080C2904:
 	adds r1, r0
 	lsls r1, 3
 	adds r1, r7
-	ldr r0, _080C2934 @ =gUnknown_02038690
+	ldr r0, _080C2934 @ =gContestFinalStandings
 	adds r0, r4, r0
 	ldrb r0, [r0]
 	strh r0, [r1, 0x8]
@@ -1098,7 +1098,7 @@ _080C2904:
 	.align 2, 0
 _080C292C: .4byte gTasks
 _080C2930: .4byte sub_80C3A5C
-_080C2934: .4byte gUnknown_02038690
+_080C2934: .4byte gContestFinalStandings
 _080C2938:
 	ldr r0, _080C2990 @ =gSharedMem + 0x18000
 	ldrb r0, [r0, 0x5]
@@ -1128,7 +1128,7 @@ _080C295A:
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
 	movs r4, 0
-	ldr r1, _080C2998 @ =gUnknown_02038690
+	ldr r1, _080C2998 @ =gContestFinalStandings
 	ldrb r0, [r1]
 	cmp r0, 0
 	beq _080C2984
@@ -1149,7 +1149,7 @@ _080C2984:
 	.align 2, 0
 _080C2990: .4byte gSharedMem + 0x18000
 _080C2994: .4byte sub_80C3B30
-_080C2998: .4byte gUnknown_02038690
+_080C2998: .4byte gContestFinalStandings
 _080C299C:
 	lsls r1, r5, 2
 	adds r0, r1, r5
@@ -1166,7 +1166,7 @@ _080C299C:
 	movs r0, 0
 	strh r0, [r2, 0xA]
 	movs r4, 0
-	ldr r2, _080C29F4 @ =gUnknown_02038690
+	ldr r2, _080C29F4 @ =gContestFinalStandings
 	ldrb r0, [r2]
 	ldr r1, _080C29F8 @ =gIsLinkContest
 	ldr r3, _080C29FC @ =gStringVar1
@@ -1196,7 +1196,7 @@ _080C29D4:
 	lsls r4, 6
 	b _080C2A10
 	.align 2, 0
-_080C29F4: .4byte gUnknown_02038690
+_080C29F4: .4byte gContestFinalStandings
 _080C29F8: .4byte gIsLinkContest
 _080C29FC: .4byte gStringVar1
 _080C2A00: .4byte gLinkPlayers + 0x8
@@ -1310,7 +1310,7 @@ _080C2ADC:
 	adds r0, r3, 0
 	strh r0, [r1]
 	movs r1, 0
-	ldr r3, _080C2BD0 @ =gUnknown_02038690
+	ldr r3, _080C2BD0 @ =gContestFinalStandings
 	ldrb r0, [r3]
 	lsls r4, r7, 2
 	mov r10, r4
@@ -1416,7 +1416,7 @@ _080C2B14:
 _080C2BC4: .4byte gUnknown_030042C4
 _080C2BC8: .4byte gUnknown_03004240
 _080C2BCC: .4byte 0x00005050
-_080C2BD0: .4byte gUnknown_02038690
+_080C2BD0: .4byte gContestFinalStandings
 _080C2BD4: .4byte gContestMons
 _080C2BD8: .4byte gMonFrontPicTable
 _080C2BDC: .4byte gMonFrontPicCoords
@@ -1705,7 +1705,7 @@ sub_80C2E14: @ 80C2E14
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r1, _080C2E80 @ =gUnknown_02038690
+	ldr r1, _080C2E80 @ =gContestFinalStandings
 	ldr r0, _080C2E84 @ =gContestPlayerMonIndex
 	ldrb r0, [r0]
 	adds r0, r1
@@ -1713,11 +1713,11 @@ sub_80C2E14: @ 80C2E14
 	bl sub_80BE284
 	movs r0, 0x2
 	bl sub_810FB10
-	ldr r0, _080C2E88 @ =gScriptContestRank
+	ldr r0, _080C2E88 @ =gSpecialVar_ContestRank
 	ldrb r0, [r0]
-	bl sub_80B2A7C
+	bl Contest_SaveWinner
 	movs r0, 0xFE
-	bl sub_80B2A7C
+	bl Contest_SaveWinner
 	ldr r4, _080C2E8C @ =gSharedMem
 	ldr r0, _080C2E90 @ =0x00015ddf
 	adds r1, r4, r0
@@ -1748,9 +1748,9 @@ sub_80C2E14: @ 80C2E14
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C2E80: .4byte gUnknown_02038690
+_080C2E80: .4byte gContestFinalStandings
 _080C2E84: .4byte gContestPlayerMonIndex
-_080C2E88: .4byte gScriptContestRank
+_080C2E88: .4byte gSpecialVar_ContestRank
 _080C2E8C: .4byte gSharedMem
 _080C2E90: .4byte 0x00015ddf
 _080C2E94: .4byte 0x00015dde
@@ -2971,7 +2971,7 @@ _080C3808: .4byte gIsLinkContest
 _080C380C: .4byte 0x0600e000
 _080C3810: .4byte gUnknown_08E964B8
 _080C3814:
-	ldr r0, _080C3830 @ =gScriptContestRank
+	ldr r0, _080C3830 @ =gSpecialVar_ContestRank
 	ldrh r2, [r0]
 	cmp r2, 0
 	bne _080C383C
@@ -2986,7 +2986,7 @@ _080C3814:
 	str r1, [sp, 0xC]
 	b _080C3870
 	.align 2, 0
-_080C3830: .4byte gScriptContestRank
+_080C3830: .4byte gSpecialVar_ContestRank
 _080C3834: .4byte 0x0600e000
 _080C3838: .4byte gUnknown_08E964B8
 _080C383C:
@@ -3040,7 +3040,7 @@ _080C3884:
 	bl sub_809D104
 _080C389E:
 	adds r4, 0xD
-	ldr r0, _080C38C8 @ =gScriptContestCategory
+	ldr r0, _080C38C8 @ =gSpecialVar_ContestCategory
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _080C38CC
@@ -3058,7 +3058,7 @@ _080C389E:
 	.align 2, 0
 _080C38C0: .4byte 0x0600e000
 _080C38C4: .4byte gUnknown_08E964B8
-_080C38C8: .4byte gScriptContestCategory
+_080C38C8: .4byte gSpecialVar_ContestCategory
 _080C38CC:
 	cmp r0, 0x1
 	bne _080C38EC
@@ -3385,7 +3385,7 @@ sub_80C3B30: @ 80C3B30
 	lsrs r0, 24
 	mov r12, r0
 	movs r5, 0
-	ldr r1, _080C3BC0 @ =gUnknown_02038690
+	ldr r1, _080C3BC0 @ =gContestFinalStandings
 	ldrb r0, [r1]
 	ldr r2, _080C3BC4 @ =gTasks
 	mov r10, r2
@@ -3453,7 +3453,7 @@ _080C3B82:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C3BC0: .4byte gUnknown_02038690
+_080C3BC0: .4byte gContestFinalStandings
 _080C3BC4: .4byte gTasks
 _080C3BC8: .4byte 0x00000fff
 _080C3BCC: .4byte 0x0600e100
@@ -4058,7 +4058,7 @@ _080C403A:
 	negs r0, r0
 _080C4060:
 	strb r0, [r5, 0x12]
-	ldr r0, _080C40A8 @ =gUnknown_02038690
+	ldr r0, _080C40A8 @ =gContestFinalStandings
 	add r0, r8
 	ldrb r0, [r0]
 	cmp r0, 0
@@ -4091,7 +4091,7 @@ _080C4098: .4byte gUnknown_02038678
 _080C409C: .4byte gUnknown_02038670
 _080C40A0: .4byte gSharedMem + 0x18018
 _080C40A4: .4byte gUnknown_02038688
-_080C40A8: .4byte gUnknown_02038690
+_080C40A8: .4byte gContestFinalStandings
 _080C40AC:
 	cmp r2, 0
 	ble _080C40B4
@@ -4545,15 +4545,15 @@ sub_80C43F4: @ 80C43F4
 	adds r5, r0, 0
 	cmp r5, 0
 	beq _080C4422
-	ldr r4, _080C4434 @ =gScriptContestCategory
+	ldr r4, _080C4434 @ =gSpecialVar_ContestCategory
 	ldrb r0, [r4]
-	ldr r1, _080C4438 @ =gScriptContestRank
+	ldr r1, _080C4438 @ =gSpecialVar_ContestRank
 	ldrb r1, [r1]
-	bl sub_80AE398
+	bl Contest_InitAllPokemon
 	ldrb r0, [r4]
 	bl sub_80AE82C
 _080C4422:
-	ldr r0, _080C443C @ =gScriptResult
+	ldr r0, _080C443C @ =gSpecialVar_Result
 	strh r5, [r0]
 	pop {r4,r5}
 	pop {r0}
@@ -4561,9 +4561,9 @@ _080C4422:
 	.align 2, 0
 _080C442C: .4byte gUnknown_02038694
 _080C4430: .4byte gPlayerParty
-_080C4434: .4byte gScriptContestCategory
-_080C4438: .4byte gScriptContestRank
-_080C443C: .4byte gScriptResult
+_080C4434: .4byte gSpecialVar_ContestCategory
+_080C4438: .4byte gSpecialVar_ContestRank
+_080C443C: .4byte gSpecialVar_Result
 	thumb_func_end sub_80C43F4
 
 	thumb_func_start sub_80C4440
@@ -4576,7 +4576,7 @@ sub_80C4440: @ 80C4440
 	muls r1, r0
 	ldr r0, _080C4468 @ =gPlayerParty
 	adds r2, r1, r0
-	ldr r0, _080C446C @ =gScriptContestCategory
+	ldr r0, _080C446C @ =gSpecialVar_ContestCategory
 	ldrh r0, [r0]
 	cmp r0, 0x4
 	bhi _080C44B2
@@ -4588,7 +4588,7 @@ sub_80C4440: @ 80C4440
 	.align 2, 0
 _080C4464: .4byte gUnknown_02038694
 _080C4468: .4byte gPlayerParty
-_080C446C: .4byte gScriptContestCategory
+_080C446C: .4byte gSpecialVar_ContestCategory
 _080C4470: .4byte _080C4474
 	.align 2, 0
 _080C4474:
@@ -4618,7 +4618,7 @@ _080C44A0:
 	movs r1, 0x36
 _080C44A4:
 	bl GetMonData
-	ldr r1, _080C44BC @ =gScriptContestRank
+	ldr r1, _080C44BC @ =gSpecialVar_ContestRank
 	ldrh r1, [r1]
 	cmp r0, r1
 	bls _080C44B2
@@ -4629,14 +4629,14 @@ _080C44B2:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080C44BC: .4byte gScriptContestRank
+_080C44BC: .4byte gSpecialVar_ContestRank
 	thumb_func_end sub_80C4440
 
 	thumb_func_start sub_80C44C0
 sub_80C44C0: @ 80C44C0
 	push {r4-r7,lr}
 	sub sp, 0x4
-	ldr r1, _080C44E8 @ =gUnknown_02038690
+	ldr r1, _080C44E8 @ =gContestFinalStandings
 	ldr r0, _080C44EC @ =gContestPlayerMonIndex
 	ldrb r0, [r0]
 	adds r0, r1
@@ -4645,7 +4645,7 @@ sub_80C44C0: @ 80C44C0
 	beq _080C44D4
 	b _080C465E
 _080C44D4:
-	ldr r0, _080C44F0 @ =gScriptContestCategory
+	ldr r0, _080C44F0 @ =gSpecialVar_ContestCategory
 	ldrh r0, [r0]
 	cmp r0, 0x4
 	bls _080C44DE
@@ -4657,9 +4657,9 @@ _080C44DE:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080C44E8: .4byte gUnknown_02038690
+_080C44E8: .4byte gContestFinalStandings
 _080C44EC: .4byte gContestPlayerMonIndex
-_080C44F0: .4byte gScriptContestCategory
+_080C44F0: .4byte gSpecialVar_ContestCategory
 _080C44F4: .4byte _080C44F8
 	.align 2, 0
 _080C44F8:
@@ -4681,7 +4681,7 @@ _080C450C:
 	lsrs r1, r0, 24
 	mov r0, sp
 	strb r1, [r0]
-	ldr r0, _080C4550 @ =gScriptContestRank
+	ldr r0, _080C4550 @ =gSpecialVar_ContestRank
 	ldrh r0, [r0]
 	cmp r1, r0
 	bls _080C4530
@@ -4703,7 +4703,7 @@ _080C4538:
 	.align 2, 0
 _080C4548: .4byte gUnknown_02038694
 _080C454C: .4byte gPlayerParty
-_080C4550: .4byte gScriptContestRank
+_080C4550: .4byte gSpecialVar_ContestRank
 _080C4554:
 	mov r4, sp
 	ldr r7, _080C458C @ =gUnknown_02038694
@@ -4717,7 +4717,7 @@ _080C4554:
 	strb r0, [r4]
 	mov r0, sp
 	ldrb r2, [r0]
-	ldr r0, _080C4594 @ =gScriptContestRank
+	ldr r0, _080C4594 @ =gSpecialVar_ContestRank
 	ldrh r0, [r0]
 	cmp r2, r0
 	bhi _080C465E
@@ -4734,7 +4734,7 @@ _080C4554:
 	.align 2, 0
 _080C458C: .4byte gUnknown_02038694
 _080C4590: .4byte gPlayerParty
-_080C4594: .4byte gScriptContestRank
+_080C4594: .4byte gSpecialVar_ContestRank
 _080C4598:
 	mov r4, sp
 	ldr r7, _080C45D0 @ =gUnknown_02038694
@@ -4748,7 +4748,7 @@ _080C4598:
 	strb r0, [r4]
 	mov r0, sp
 	ldrb r2, [r0]
-	ldr r0, _080C45D8 @ =gScriptContestRank
+	ldr r0, _080C45D8 @ =gSpecialVar_ContestRank
 	ldrh r0, [r0]
 	cmp r2, r0
 	bhi _080C465E
@@ -4765,7 +4765,7 @@ _080C4598:
 	.align 2, 0
 _080C45D0: .4byte gUnknown_02038694
 _080C45D4: .4byte gPlayerParty
-_080C45D8: .4byte gScriptContestRank
+_080C45D8: .4byte gSpecialVar_ContestRank
 _080C45DC:
 	mov r4, sp
 	ldr r7, _080C4618 @ =gUnknown_02038694
@@ -4779,7 +4779,7 @@ _080C45DC:
 	strb r0, [r4]
 	mov r0, sp
 	ldrb r2, [r0]
-	ldr r0, _080C4620 @ =gScriptContestRank
+	ldr r0, _080C4620 @ =gSpecialVar_ContestRank
 	ldrh r0, [r0]
 	cmp r2, r0
 	bhi _080C465E
@@ -4799,7 +4799,7 @@ _080C4610:
 	.align 2, 0
 _080C4618: .4byte gUnknown_02038694
 _080C461C: .4byte gPlayerParty
-_080C4620: .4byte gScriptContestRank
+_080C4620: .4byte gSpecialVar_ContestRank
 _080C4624:
 	mov r4, sp
 	ldr r7, _080C4668 @ =gUnknown_02038694
@@ -4813,7 +4813,7 @@ _080C4624:
 	strb r0, [r4]
 	mov r0, sp
 	ldrb r2, [r0]
-	ldr r0, _080C4670 @ =gScriptContestRank
+	ldr r0, _080C4670 @ =gSpecialVar_ContestRank
 	ldrh r0, [r0]
 	cmp r2, r0
 	bhi _080C465E
@@ -4836,7 +4836,7 @@ _080C465E:
 	.align 2, 0
 _080C4668: .4byte gUnknown_02038694
 _080C466C: .4byte gPlayerParty
-_080C4670: .4byte gScriptContestRank
+_080C4670: .4byte gSpecialVar_ContestRank
 	thumb_func_end sub_80C44C0
 
 	thumb_func_start sub_80C4674
@@ -5016,7 +5016,7 @@ _080C47BC: .4byte gSpecialVar_0x8006
 sub_80C47C0: @ 80C47C0
 	push {lr}
 	movs r1, 0
-	ldr r2, _080C47E8 @ =gUnknown_02038690
+	ldr r2, _080C47E8 @ =gContestFinalStandings
 	ldrb r0, [r2]
 	ldr r3, _080C47EC @ =gSpecialVar_0x8005
 	cmp r0, 0
@@ -5036,7 +5036,7 @@ _080C47E0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C47E8: .4byte gUnknown_02038690
+_080C47E8: .4byte gContestFinalStandings
 _080C47EC: .4byte gSpecialVar_0x8005
 	thumb_func_end sub_80C47C0
 
@@ -5044,7 +5044,7 @@ _080C47EC: .4byte gSpecialVar_0x8005
 sub_80C47F0: @ 80C47F0
 	push {r4,lr}
 	movs r2, 0
-	ldr r3, _080C4830 @ =gUnknown_02038690
+	ldr r3, _080C4830 @ =gContestFinalStandings
 	ldrb r0, [r3]
 	ldr r1, _080C4834 @ =gIsLinkContest
 	ldr r4, _080C4838 @ =gStringVar3
@@ -5075,7 +5075,7 @@ _080C4812:
 	bl sub_80C4674
 	b _080C484C
 	.align 2, 0
-_080C4830: .4byte gUnknown_02038690
+_080C4830: .4byte gContestFinalStandings
 _080C4834: .4byte gIsLinkContest
 _080C4838: .4byte gStringVar3
 _080C483C: .4byte gLinkPlayers + 0x8
@@ -5097,7 +5097,7 @@ _080C4854: .4byte gUnknown_0203857D
 sub_80C4858: @ 80C4858
 	push {lr}
 	movs r1, 0
-	ldr r2, _080C4884 @ =gUnknown_02038690
+	ldr r2, _080C4884 @ =gContestFinalStandings
 	ldrb r0, [r2]
 	ldr r3, _080C4888 @ =gStringVar1
 	cmp r0, 0
@@ -5118,19 +5118,19 @@ _080C4878:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C4884: .4byte gUnknown_02038690
+_080C4884: .4byte gContestFinalStandings
 _080C4888: .4byte gStringVar1
 	thumb_func_end sub_80C4858
 
 	thumb_func_start sub_80C488C
 sub_80C488C: @ 80C488C
 	push {lr}
-	ldr r0, _080C4898 @ =sub_80AB47C
+	ldr r0, _080C4898 @ =CB2_StartContest
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C4898: .4byte sub_80AB47C
+_080C4898: .4byte CB2_StartContest
 	thumb_func_end sub_80C488C
 
 	thumb_func_start sub_80C489C
@@ -5293,7 +5293,7 @@ sub_80C49C4: @ 80C49C4
 	lsrs r4, 24
 	ldr r0, _080C49E4 @ =gUnknown_02038694
 	ldrb r0, [r0]
-	bl sub_80AE098
+	bl Contest_CreatePlayerMon
 	ldr r1, _080C49E8 @ =sub_80C8734
 	ldr r2, _080C49EC @ =sub_80C49F0
 	adds r0, r4, 0
@@ -5432,7 +5432,7 @@ _080C4AB8:
 	bl sub_80C4B34
 	ldr r1, _080C4AFC @ =gUnknown_0203869B
 	strb r0, [r1]
-	ldr r0, _080C4B00 @ =gScriptContestCategory
+	ldr r0, _080C4B00 @ =gSpecialVar_ContestCategory
 	ldrb r0, [r0]
 	bl sub_80AE82C
 	ldr r1, _080C4B04 @ =sub_80C8EBC
@@ -5448,7 +5448,7 @@ _080C4AB8:
 	.align 2, 0
 _080C4AF8: .4byte gTasks + 0x8
 _080C4AFC: .4byte gUnknown_0203869B
-_080C4B00: .4byte gScriptContestCategory
+_080C4B00: .4byte gSpecialVar_ContestCategory
 _080C4B04: .4byte sub_80C8EBC
 _080C4B08: .4byte sub_80C4B0C
 	thumb_func_end sub_80C4A44

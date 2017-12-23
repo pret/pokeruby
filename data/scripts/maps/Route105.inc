@@ -8,8 +8,8 @@ Route105_MapScript1_14F29E:: @ 814F29E
 	end
 
 Route105_EventScript_14F2A8:: @ 814F2A8
-	setmaptile 9, 19, 124, 1
-	setmaptile 9, 20, 145, 1
+	setmetatile 9, 19, 124, 1
+	setmetatile 9, 20, 145, 1
 	return
 
 Route105_EventScript_14F2BB:: @ 814F2BB

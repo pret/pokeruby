@@ -24,7 +24,7 @@ LittlerootTown_ProfessorBirchsLab_MapScript2_152CAC:: @ 8152CAC
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152CBE:: @ 8152CBE
 	lockall
-	getfirstpartypokename 0
+	bufferleadmonspeciesname 0
 	message LittlerootTown_ProfessorBirchsLab_Text_173D94
 	waitmessage
 	playfanfare 370
@@ -138,7 +138,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152DBA:: @ 8152DBA
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152E13:: @ 8152E13
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1743D4, 4
-	giveitem ITEM_POKE_BALL, 5
+	giveitem_std ITEM_POKE_BALL, 5
 	compare RESULT, 0
 	call_if 1, LittlerootTown_ProfessorBirchsLab_EventScript_152E85
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_17443D, 4
@@ -147,7 +147,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152E13:: @ 8152E13
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152E40:: @ 8152E40
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_17453C, 4
-	giveitem ITEM_POKE_BALL, 5
+	giveitem_std ITEM_POKE_BALL, 5
 	compare RESULT, 0
 	call_if 1, LittlerootTown_ProfessorBirchsLab_EventScript_152E8E
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_17458C, 4
