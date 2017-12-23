@@ -1,5 +1,4 @@
 	.include "constants/gba_constants.inc"
-	.include "constants/species_constants.inc"
 	.include "asm/macros.inc"
 
 	.syntax unified
@@ -135,7 +134,7 @@ sub_812C220: @ 812C220
 	strh r0, [r4, 0x30]
 	ldr r1, _0812C25C @ =sub_812C268
 	adds r0, r4, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	ldr r1, _0812C260 @ =REG_BLDCNT
 	movs r2, 0xFD
 	lsls r2, 6
@@ -241,7 +240,7 @@ sub_812C2BC: @ 812C2BC
 	lsls r1, 23
 	adds r0, r1
 	lsrs r4, r0, 16
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812C31A
@@ -267,7 +266,7 @@ _0812C31A:
 	str r0, [r5, 0x1C]
 	ldr r1, _0812C354 @ =move_anim_8072740
 	adds r0, r5, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	add sp, 0x4
 	pop {r4-r7}
 	pop {r0}
@@ -862,7 +861,7 @@ sub_812C798: @ 812C798
 	str r0, [r4, 0x1C]
 	ldr r1, _0812C7C4 @ =sub_812C7C8
 	adds r0, r4, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 _0812C7BA:
 	pop {r4}
 	pop {r0}
@@ -929,7 +928,7 @@ sub_812C80C: @ 812C80C
 	str r0, [r4, 0x1C]
 	ldr r1, _0812C844 @ =move_anim_8072740
 	adds r0, r4, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -954,7 +953,7 @@ sub_812C848: @ 812C848
 	ldrsh r1, [r5, r2]
 	adds r0, r4, 0
 	bl sub_807867C
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _0812C89C
@@ -1473,7 +1472,7 @@ sub_812CC44: @ 812CC44
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812CC7A
@@ -1518,7 +1517,7 @@ sub_812CCA8: @ 812CCA8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812CCCA
@@ -2350,7 +2349,7 @@ _0812D2F0:
 	bne _0812D33C
 	ldr r1, _0812D344 @ =move_anim_8072740
 	adds r0, r5, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	ldrh r0, [r5, 0x24]
 	ldrh r2, [r5, 0x20]
 	adds r0, r2
@@ -3125,7 +3124,7 @@ _0812D8C4:
 	ldrb r1, [r5]
 	mov r0, sp
 	bl sub_8078954
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	mov r9, r4
 	cmp r0, 0
@@ -3159,11 +3158,11 @@ _0812D906:
 	ldr r1, _0812D9DC @ =0x84000200
 	str r1, [r0, 0x8]
 	ldr r0, [r0, 0x8]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812DA20
-	ldr r5, _0812D9E0 @ =0x02019348
+	ldr r5, _0812D9E0 @ =gSharedMem + 0x19348
 	ldrh r0, [r5]
 	bl sub_80AEB1C
 	adds r4, r0, 0
@@ -3221,7 +3220,7 @@ _0812D98E:
 	cmp r5, 0x7
 	ble _0812D986
 _0812D9A2:
-	ldr r0, _0812D9E0 @ =0x02019348
+	ldr r0, _0812D9E0 @ =gSharedMem + 0x19348
 	ldrh r0, [r0, 0x2]
 	bl sub_80AEB1C
 	lsls r0, 24
@@ -3247,7 +3246,7 @@ _0812D9D0: .4byte gBattleMonForms
 _0812D9D4: .4byte gBattleAnimBankAttacker
 _0812D9D8: .4byte 0x040000d4
 _0812D9DC: .4byte 0x84000200
-_0812D9E0: .4byte 0x02019348
+_0812D9E0: .4byte gSharedMem + 0x19348
 _0812D9E4: .4byte gSprites
 _0812D9E8: .4byte gObjectBankIDs
 _0812D9EC: .4byte gSpriteAffineAnimTable_81E7C18
@@ -3350,7 +3349,7 @@ _0812DAAE:
 	negs r0, r0
 	ands r0, r1
 	strb r0, [r2]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _0812DAF4
@@ -3373,7 +3372,7 @@ _0812DAAE:
 	bne _0812DAF4
 	ldrb r0, [r4]
 	lsls r1, r0, 2
-	ldr r2, _0812DB14 @ =0x02017800
+	ldr r2, _0812DB14 @ =gSharedMem + 0x17800
 	adds r1, r2
 	ldrh r1, [r1, 0x2]
 	bl sub_8032984
@@ -3392,7 +3391,7 @@ _0812DAFA:
 _0812DB08: .4byte REG_BG2CNT
 _0812DB0C: .4byte gBattleAnimBankAttacker
 _0812DB10: .4byte gTasks
-_0812DB14: .4byte 0x02017800
+_0812DB14: .4byte gSharedMem + 0x17800
 	thumb_func_end sub_812D7E8
 
 	thumb_func_start c3_80DFBE4
@@ -3507,7 +3506,7 @@ _0812DBD0:
 	movs r1, 0x1
 	orrs r0, r1
 	strb r0, [r4]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _0812DC12
@@ -3542,7 +3541,7 @@ _0812DC12:
 	lsls r1, 4
 	movs r2, 0x20
 	bl LoadCompressedPalette
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812DC9C
@@ -3786,7 +3785,7 @@ _0812DE0C:
 	ldr r1, _0812DE98 @ =0x85000200
 	str r1, [r0, 0x8]
 	ldr r0, [r0, 0x8]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _0812DE5A
@@ -4226,7 +4225,7 @@ _0812E194:
 	movs r1, 0x1
 	orrs r0, r1
 	strb r0, [r4]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _0812E1D4
@@ -4261,7 +4260,7 @@ _0812E1D4:
 	lsls r1, 4
 	movs r2, 0x20
 	bl LoadCompressedPalette
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812E260
@@ -4529,7 +4528,7 @@ _0812E420:
 	ldr r0, _0812E484 @ =0x85000200
 	str r0, [r1, 0x8]
 	ldr r0, [r1, 0x8]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _0812E450
@@ -5513,7 +5512,7 @@ _0812EBC2:
 	bl obj_id_set_rotscale
 	adds r0, r5, 0
 	bl sub_8079A64
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _0812EBE8
@@ -6047,13 +6046,13 @@ sub_812EFC8: @ 812EFC8
 	str r0, [sp, 0x10]
 	movs r0, 0
 	bl GetAnimBankSpriteId
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812F004
 	movs r0, 0x1
 	str r0, [sp, 0x14]
-	ldr r0, _0812F000 @ =0x02019348
+	ldr r0, _0812F000 @ =gSharedMem + 0x19348
 	ldr r1, [r0, 0x10]
 	mov r9, r1
 	ldr r2, [r0, 0xC]
@@ -6062,7 +6061,7 @@ sub_812EFC8: @ 812EFC8
 	movs r3, 0x14
 	b _0812F13C
 	.align 2, 0
-_0812F000: .4byte 0x02019348
+_0812F000: .4byte gSharedMem + 0x19348
 _0812F004:
 	ldr r0, _0812F070 @ =gBattleAnimBankAttacker
 	ldrb r0, [r0]
@@ -6096,7 +6095,7 @@ _0812F004:
 	mov r8, r0
 	ldrb r2, [r4]
 	lsls r1, r2, 2
-	ldr r0, _0812F080 @ =0x02017800
+	ldr r0, _0812F080 @ =gSharedMem + 0x17800
 	adds r1, r0
 	ldrh r0, [r1, 0x2]
 	cmp r0, 0
@@ -6118,7 +6117,7 @@ _0812F070: .4byte gBattleAnimBankAttacker
 _0812F074: .4byte gBattlePartyID
 _0812F078: .4byte gBattleAnimBankTarget
 _0812F07C: .4byte gPlayerParty
-_0812F080: .4byte 0x02017800
+_0812F080: .4byte gSharedMem + 0x17800
 _0812F084:
 	ldrb r0, [r4]
 	lsls r0, 1
@@ -6168,7 +6167,7 @@ _0812F0AC:
 	mov r8, r0
 	ldrb r2, [r4]
 	lsls r1, r2, 2
-	ldr r0, _0812F118 @ =0x02017800
+	ldr r0, _0812F118 @ =gSharedMem + 0x17800
 	adds r1, r0
 	ldrh r0, [r1, 0x2]
 	cmp r0, 0
@@ -6190,7 +6189,7 @@ _0812F0AC:
 _0812F10C: .4byte gBattlePartyID
 _0812F110: .4byte gBattleAnimBankTarget
 _0812F114: .4byte gEnemyParty
-_0812F118: .4byte 0x02017800
+_0812F118: .4byte gSharedMem + 0x17800
 _0812F11C: .4byte gPlayerParty
 _0812F120:
 	ldrb r0, [r4]
@@ -8382,7 +8381,7 @@ sub_81301EC: @ 81301EC
 	lsls r1, 3
 	ldr r0, _08130218 @ =gTasks
 	adds r6, r1, r0
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -8810,7 +8809,7 @@ sub_813051C: @ 813051C
 	strh r0, [r4, 0x2E]
 	ldr r1, _0813054C @ =move_anim_8072740
 	adds r0, r4, 0
-	bl StoreSpriteCallbackInData6
+	bl StoreSpriteCallbackInData
 	ldr r0, _08130550 @ =sub_8078CC0
 	str r0, [r4, 0x1C]
 	pop {r4}
@@ -9863,7 +9862,7 @@ sub_8130D20: @ 8130D20
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0x26]
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _08130DA8
@@ -10557,7 +10556,7 @@ sub_8131264: @ 8131264
 	lsls r0, 24
 	cmp r0, 0
 	beq _08131290
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _081312A8
@@ -10690,7 +10689,7 @@ _08131384:
 	ldrb r0, [r4]
 	movs r1, 0
 	bl refresh_graphics_maybe
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _081313C6
@@ -11140,7 +11139,7 @@ sub_81316F8: @ 81316F8
 	lsls r0, 24
 	lsrs r4, r0, 24
 	mov r10, r4
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0
@@ -11560,11 +11559,11 @@ _08131A2E:
 _08131A3C: .4byte gSprites
 _08131A40: .4byte gTasks
 _08131A44:
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _08131A74
-	ldr r0, _08131A6C @ =0x02019348
+	ldr r0, _08131A6C @ =gSharedMem + 0x19348
 	ldr r2, [r0, 0x8]
 	mov r10, r2
 	ldr r3, [r0, 0xC]
@@ -11578,7 +11577,7 @@ _08131A44:
 	movs r7, 0
 	b _08131B92
 	.align 2, 0
-_08131A6C: .4byte 0x02019348
+_08131A6C: .4byte gSharedMem + 0x19348
 _08131A70: .4byte gBattleAnimBankAttacker
 _08131A74:
 	ldr r4, _08131AD4 @ =gBattleAnimBankAttacker
@@ -11610,7 +11609,7 @@ _08131A74:
 	mov r9, r0
 	ldrb r2, [r4]
 	lsls r1, r2, 2
-	ldr r0, _08131AE0 @ =0x02017800
+	ldr r0, _08131AE0 @ =gSharedMem + 0x17800
 	adds r1, r0
 	ldrh r0, [r1, 0x2]
 	cmp r0, 0
@@ -11629,7 +11628,7 @@ _08131A74:
 _08131AD4: .4byte gBattleAnimBankAttacker
 _08131AD8: .4byte gBattlePartyID
 _08131ADC: .4byte gPlayerParty
-_08131AE0: .4byte 0x02017800
+_08131AE0: .4byte gSharedMem + 0x17800
 _08131AE4:
 	ldrh r5, [r1, 0x2]
 _08131AE6:
@@ -11677,7 +11676,7 @@ _08131B10:
 	mov r9, r0
 	ldrb r2, [r4]
 	lsls r1, r2, 2
-	ldr r0, _08131B6C @ =0x02017800
+	ldr r0, _08131B6C @ =gSharedMem + 0x17800
 	adds r1, r0
 	ldrh r0, [r1, 0x2]
 	cmp r0, 0
@@ -11695,7 +11694,7 @@ _08131B10:
 	.align 2, 0
 _08131B64: .4byte gBattlePartyID
 _08131B68: .4byte gEnemyParty
-_08131B6C: .4byte 0x02017800
+_08131B6C: .4byte gSharedMem + 0x17800
 _08131B70:
 	ldrh r5, [r1, 0x2]
 _08131B72:
@@ -11740,7 +11739,7 @@ _08131B94:
 	ldr r0, _08131C10 @ =gBattleAnimBankAttacker
 	ldrb r0, [r0]
 	lsls r0, 2
-	ldr r1, _08131C14 @ =0x02017800
+	ldr r1, _08131C14 @ =gSharedMem + 0x17800
 	adds r0, r1
 	ldrh r0, [r0, 0x2]
 	cmp r0, 0
@@ -11775,7 +11774,7 @@ _08131C04: .4byte gSprites
 _08131C08: .4byte 0x0000ffe0
 _08131C0C: .4byte gBattleAnimBankTarget
 _08131C10: .4byte gBattleAnimBankAttacker
-_08131C14: .4byte 0x02017800
+_08131C14: .4byte gSharedMem + 0x17800
 _08131C18: .4byte 0x00007fff
 _08131C1C: .4byte gTasks
 _08131C20:
@@ -12151,7 +12150,7 @@ _08131ECA:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08131FF4
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _08131FF4

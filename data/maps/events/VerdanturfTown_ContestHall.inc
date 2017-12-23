@@ -4,8 +4,8 @@ VerdanturfTown_ContestHall_MapObjects:: @ 8386AEC
 	object_event 3, MAP_OBJ_GFX_LITTLE_GIRL_2, 0, 9, 0, 8, 0, 3, 2, 34, 0, 0, 0, 0, 0, VerdanturfTown_ContestHall_EventScript_153EA0, 0, 0, 0
 
 VerdanturfTown_ContestHall_MapWarps:: @ 8386B34
-	warp_def 11, 17, 0, 2, VerdanturfTown_ContestLobby
-	warp_def 10, 17, 0, 2, VerdanturfTown_ContestLobby
+	warp_def 11, 17, 0, 2, MAP_VERDANTURF_TOWN_CONTEST_LOBBY
+	warp_def 10, 17, 0, 2, MAP_VERDANTURF_TOWN_CONTEST_LOBBY
 
 VerdanturfTown_ContestHall_MapBGEvents:: @ 8386B44
 	bg_event 12, 14, 3, 0, 0, VerdanturfTown_ContestHall_EventScript_153EB2

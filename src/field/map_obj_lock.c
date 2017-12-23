@@ -6,11 +6,11 @@
 #include "script_movement.h"
 #include "task.h"
 
-extern u16 gScriptFacing;
+extern u16 gSpecialVar_Facing;
 
 bool8 walkrun_is_standing_still(void)
 {
-    if (gPlayerAvatar.running1 == 1)
+    if (gPlayerAvatar.tileTransitionState == T_TILE_TRANSITION)
         return FALSE;
     else
         return TRUE;
@@ -109,7 +109,7 @@ void unref_sub_8064E5C(void)
 
 void sub_8064EAC(void)
 {
-    FieldObjectFaceOppositeDirection(&gMapObjects[gSelectedMapObject], gScriptFacing);
+    FieldObjectFaceOppositeDirection(&gMapObjects[gSelectedMapObject], gSpecialVar_Facing);
 }
 
 void sub_8064ED4(void)

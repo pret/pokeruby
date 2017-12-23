@@ -5,6 +5,6 @@ GraniteCave_B1F_MapScripts:: @ 815CBDD
 	.byte 0
 
 GraniteCave_B1F_MapScript1_15CBED:: @ 815CBED
-	tileeffect 7
-	setholewarp GraniteCave_B2F, 255, 0, 0
+	setstepcallback 7
+	setholewarp MAP_GRANITE_CAVE_B2F, 255, 0, 0
 	end

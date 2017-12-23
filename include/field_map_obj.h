@@ -9,18 +9,18 @@ extern const u8 gUnknown_0830FD14[];
 static u8 callback(struct MapObject *, struct Sprite *);\
 void setup(struct Sprite *sprite)\
 {\
-    meta_step(&gMapObjects[sprite->data0], sprite, callback);\
+    meta_step(&gMapObjects[sprite->data[0]], sprite, callback);\
 }\
 static u8 callback(struct MapObject *mapObject, struct Sprite *sprite)\
 {\
-    return table[sprite->data1](mapObject, sprite);\
+    return table[sprite->data[1]](mapObject, sprite);\
 }
 
 #define fieldmap_object_null_cb(setup, callback) \
 static u8 callback(struct MapObject *, struct Sprite *);\
 void setup(struct Sprite *sprite)\
 {\
-    meta_step(&gMapObjects[sprite->data0], sprite, callback);\
+    meta_step(&gMapObjects[sprite->data[0]], sprite, callback);\
 }\
 static u8 callback(struct MapObject *mapObject, struct Sprite *sprite)\
 {\
@@ -37,6 +37,9 @@ extern const u16 gMapObjectPalette19[];
 
 extern const u32 gMapObjectPic_MovingBox[32];
 extern const struct SpriteFrameImage gMapObjectPicTable_PechaBerryTree[];
+
+extern const u8 gFieldEffectPic_CutGrass[];
+extern const u16 gFieldEffectObjectPalette6[];
 
 void sub_805C058(struct MapObject *mapObject, s16 a, s16 b);
 void FieldObjectSetDirection(struct MapObject *pObject, u8 unk_18);
@@ -344,7 +347,7 @@ void FieldObjectTurnByLocalIdAndMap(u8, u8, u8, u8);
 const struct MapObjectGraphicsInfo *GetFieldObjectGraphicsInfo(u8);
 void FieldObjectHandleDynamicGraphicsId(struct MapObject *);
 void npc_by_local_id_and_map_set_field_1_bit_x20(u8, u8, u8, u8);
-void FieldObjectGetLocalIdAndMap(struct MapObject *, u8 *, u8 *, u8 *);
+void FieldObjectGetLocalIdAndMap(struct MapObject *, void *, void *, void *);
 void sub_805BCC0(s16 x, s16 y);
 void sub_805BCF0(u8, u8, u8, u8);
 void sub_805BD48(u8, u8, u8);
@@ -381,7 +384,7 @@ void npc_set_running_behaviour_etc(struct MapObject *, u8);
 u8 npc_running_behaviour_by_direction(u8);
 u8 npc_block_way(struct MapObject *, s16, s16, u32);
 u8 sub_8060024(struct MapObject *, s16, s16, u8);
-u8 sub_8060234(u8, u8, u8);
+bool8 IsBerryTreeSparkling(u8, u8, u8);
 void sub_8060288(u8, u8, u8);
 void sub_8060388(s16, s16, s16 *, s16 *);
 void sub_80603CC(s16 x, s16 y, s16 *pInt, s16 *pInt1);

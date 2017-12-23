@@ -13,8 +13,8 @@ MauvilleCity_GameCorner_MapObjects:: @ 83883C0
 	object_event 12, MAP_OBJ_GFX_WOMAN_7, 0, 4, 0, 6, 0, 3, 9, 17, 0, 0, 0, 0, 0, MauvilleCity_GameCorner_EventScript_157125, 0, 0, 0
 
 MauvilleCity_GameCorner_MapWarps:: @ 83884E0
-	warp_def 11, 10, 3, 5, MauvilleCity
-	warp_def 12, 10, 3, 5, MauvilleCity
+	warp_def 11, 10, 3, 5, MAP_MAUVILLE_CITY
+	warp_def 12, 10, 3, 5, MAP_MAUVILLE_CITY
 
 MauvilleCity_GameCorner_MapBGEvents:: @ 83884F0
 	bg_event 2, 6, 0, 3, 0, MauvilleCity_GameCorner_EventScript_157135

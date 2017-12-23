@@ -1,51 +1,56 @@
+#include "constants/easy_chat.h"
+#include "constants/moves.h"
+#include "constants/species.h"
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
+
+#define EC_DUPLICATES(count) (0xFF00 + (count))
 
 	.section .rodata
 
 	.align 1
 gMysteryEventPhrase:: @ 83DB678
-	ec_word MYSTERY
-	ec_word EVENT
-	ec_word IS
-	ec_word EXCITING
+	.2byte EC_WORD_MYSTERY
+	.2byte EC_WORD_EVENT
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_EXCITING
 
 	.align 1
 gBerryMasterWifePhrases:: @ 83DB680
 .ifdef ENGLISH
-	ec_word GREAT
-	ec_word BATTLE
+	.2byte EC_WORD_GREAT
+	.2byte EC_WORD_BATTLE
 
-	ec_word CHALLENGE
-	ec_word CONTEST
+	.2byte EC_WORD_CHALLENGE
+	.2byte EC_WORD_CONTEST
 
-	ec_word OVERWHELMING
-	ec_pokemon1 LATIAS
+	.2byte EC_WORD_OVERWHELMING
+	.2byte EC_POKEMON(LATIAS)
 
-	ec_word COOL
-	ec_pokemon1 LATIOS
+	.2byte EC_WORD_COOL
+	.2byte EC_POKEMON(LATIOS)
 
-	ec_word SUPER
-	ec_word HUSTLE
+	.2byte EC_WORD_SUPER
+	.2byte EC_WORD_HUSTLE
 .else
-	ec_word GREAT
-	ec_word FIGHT
+	.2byte EC_WORD_GREAT
+	.2byte EC_WORD_FIGHT
 
-	ec_word CONTEST
-	ec_word CHALLENGE
+	.2byte EC_WORD_CONTEST
+	.2byte EC_WORD_CHALLENGE
 
-	ec_pokemon1 LATIAS
-	ec_word OVERWHELMING
+	.2byte EC_POKEMON(LATIAS)
+	.2byte EC_WORD_OVERWHELMING
 
-	ec_pokemon1 LATIOS
-	ec_word COOL
+	.2byte EC_POKEMON(LATIOS)
+	.2byte EC_WORD_COOL
 
-	ec_word SUPER
+	.2byte EC_WORD_SUPER
 	.2byte 0xFFFF
 .endif
 
 gUnknown_083DB694:: @ 83DB694
-	.4byte 0x02001000
+	.4byte gSharedMem + 0x1000
 
 	.align 2
 gUnknown_083DB698:: @ 83DB698
@@ -114,39 +119,39 @@ gUnknown_083DB7C0:: @ 83DB7C0
 	.align 2
 gUnknown_083DB7DC:: @ 83DB7DC
 .ifdef ENGLISH
-	.4byte 0x0200ac80
-	.4byte 0x0200acc9
-	.4byte 0x0200ad12
-	.4byte 0x0200ad5b
+	.4byte gSharedMem + 0xAC80
+	.4byte gSharedMem + 0xACC9
+	.4byte gSharedMem + 0xAD12
+	.4byte gSharedMem + 0xAD5B
 .else
-	.4byte 0x0200AFAC
-	.4byte 0x0200AFF5
-	.4byte 0x0200B03E
-	.4byte 0x0200B087
+	.4byte gSharedMem + 0xAFAC
+	.4byte gSharedMem + 0xAFF5
+	.4byte gSharedMem + 0xB03E
+	.4byte gSharedMem + 0xB087
 .endif
 
 	.align 1
 gUnknown_083DB7EC:: @ 83DB7EC
 .ifdef ENGLISH
-	ec_word I_AM
-	ec_word A
-	ec_word POKEMON
-	ec_word GREAT
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_A
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_GREAT
 .else
-	ec_word I_AM
-	ec_word BIG
-	ec_word IN
-	ec_word POKEMON
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_BIG
+	.2byte EC_WORD_IN
+	.2byte EC_WORD_POKEMON
 .endif
 
 	.align 1
 gUnknown_083DB7F4:: @ 83DB7F4
-	ec_word ARE
-	ec_word YOU
-	ec_word READY
-	ec_word QUES
-	ec_word HERE_I_COME
-	ec_word EXCL
+	.2byte EC_WORD_ARE
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_READY
+	.2byte EC_WORD_QUES
+	.2byte EC_WORD_HERE_I_COME
+	.2byte EC_WORD_EXCL
 
 	.align 2
 InterviewPalette_0:: @ 83DB800

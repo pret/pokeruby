@@ -1,10 +1,11 @@
 #include "global.h"
 #include "decompress.h"
 #include "data2.h"
-#include "species.h"
+#include "constants/species.h"
 #include "text.h"
+#include "ewram.h"
 
-#define WRAM 0x02000000
+#define WRAM ewram_addr // using gSharedMem doesn't match
 
 void LZDecompressWram(const void *src, void *dest)
 {

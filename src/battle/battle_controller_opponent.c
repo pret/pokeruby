@@ -4,6 +4,7 @@
 #include "data2.h"
 #include "battle_811DA74.h"
 #include "battle_anim_813F0F4.h"
+#include "battle_tower.h"
 #include "link.h"
 #include "m4a.h"
 #include "main.h"
@@ -13,12 +14,13 @@
 #include "rom3.h"
 #include "rom_8077ABC.h"
 #include "sound.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sprite.h"
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
 #include "util.h"
+#include "ewram.h"
 
 struct UnknownStruct3
 {
@@ -76,7 +78,6 @@ extern u8 sub_8046400();
 extern void sub_8032A08();
 extern void sub_8043DB0();
 extern void sub_8033160(void);
-extern u8 sub_8135FBC(void);
 extern u8 get_trainer_class_pic_index(void);
 extern void sub_80313A0(struct Sprite *);
 extern void sub_8032B4C(void);
@@ -85,7 +86,7 @@ extern void sub_8032B84(void);
 extern void sub_8078B34(struct Sprite *);
 extern void sub_8032BBC(void);
 extern void oamt_add_pos2_onto_pos1();
-extern void StoreSpriteCallbackInData6();
+extern void StoreSpriteCallbackInData();
 extern void sub_803311C(void);
 extern void sub_8010384(struct Sprite *);
 extern bool8 mplay_80342A4(u8);
@@ -294,7 +295,7 @@ void sub_8032BBC(void)
     if (gSprites[gObjectBankIDs[gActiveBank]].callback == SpriteCallbackDummy)
     {
         sub_8031B74(gSprites[gObjectBankIDs[gActiveBank]].oam.affineParam);
-        gSprites[gObjectBankIDs[gActiveBank]].oam.tileNum = gSprites[gObjectBankIDs[gActiveBank]].data5;
+        gSprites[gObjectBankIDs[gActiveBank]].oam.tileNum = gSprites[gObjectBankIDs[gActiveBank]].data[5];
         FreeSpriteOamMatrix(&gSprites[gObjectBankIDs[gActiveBank]]);
         DestroySprite(&gSprites[gObjectBankIDs[gActiveBank]]);
         OpponentBufferExecCompleted();
@@ -446,18 +447,18 @@ void bx_blink_t7(void)
 {
     u8 spriteId = gObjectBankIDs[gActiveBank];
 
-    if (gSprites[spriteId].data1 == 32)
+    if (gSprites[spriteId].data[1] == 32)
     {
-        gSprites[spriteId].data1 = 0;
+        gSprites[spriteId].data[1] = 0;
         gSprites[spriteId].invisible = FALSE;
         gDoingBattleAnim = 0;
         OpponentBufferExecCompleted();
     }
     else
     {
-        if (((u16)gSprites[spriteId].data1 % 4) == 0)
+        if (((u16)gSprites[spriteId].data[1] % 4) == 0)
             gSprites[spriteId].invisible ^= 1;
-        gSprites[spriteId].data1++;
+        gSprites[spriteId].data[1]++;
     }
 }
 
@@ -582,7 +583,7 @@ u32 sub_8033598(u8 a, u8 *buffer)
         battlePokemon.hpIV = GetMonData(&gEnemyParty[a], MON_DATA_HP_IV);
         battlePokemon.attackIV = GetMonData(&gEnemyParty[a], MON_DATA_ATK_IV);
         battlePokemon.defenseIV = GetMonData(&gEnemyParty[a], MON_DATA_DEF_IV);
-        battlePokemon.speedIV = GetMonData(&gEnemyParty[a], MON_DATA_SPD_IV);
+        battlePokemon.speedIV = GetMonData(&gEnemyParty[a], MON_DATA_SPEED_IV);
         battlePokemon.spAttackIV = GetMonData(&gEnemyParty[a], MON_DATA_SPATK_IV);
         battlePokemon.spDefenseIV = GetMonData(&gEnemyParty[a], MON_DATA_SPDEF_IV);
         battlePokemon.personality = GetMonData(&gEnemyParty[a], MON_DATA_PERSONALITY);
@@ -592,7 +593,7 @@ u32 sub_8033598(u8 a, u8 *buffer)
         battlePokemon.maxHP = GetMonData(&gEnemyParty[a], MON_DATA_MAX_HP);
         battlePokemon.attack = GetMonData(&gEnemyParty[a], MON_DATA_ATK);
         battlePokemon.defense = GetMonData(&gEnemyParty[a], MON_DATA_DEF);
-        battlePokemon.speed = GetMonData(&gEnemyParty[a], MON_DATA_SPD);
+        battlePokemon.speed = GetMonData(&gEnemyParty[a], MON_DATA_SPEED);
         battlePokemon.spAttack = GetMonData(&gEnemyParty[a], MON_DATA_SPATK);
         battlePokemon.spDefense = GetMonData(&gEnemyParty[a], MON_DATA_SPDEF);
         battlePokemon.isEgg = GetMonData(&gEnemyParty[a], MON_DATA_IS_EGG);
@@ -601,9 +602,7 @@ u32 sub_8033598(u8 a, u8 *buffer)
         GetMonData(&gEnemyParty[a], MON_DATA_NICKNAME, nickname);
         StringCopy10(battlePokemon.nickname, nickname);
         GetMonData(&gEnemyParty[a], MON_DATA_OT_NAME, battlePokemon.otName);
-        src = (u8 *)&battlePokemon;
-        for (size = 0; size < sizeof(battlePokemon); size++)
-            buffer[size] = src[size];
+        MEMCPY_ALT(&battlePokemon, buffer, sizeof(battlePokemon), size, src);
         break;
     case 1:
         data16 = GetMonData(&gEnemyParty[a], MON_DATA_SPECIES);
@@ -624,9 +623,7 @@ u32 sub_8033598(u8 a, u8 *buffer)
             moveData.pp[size] = GetMonData(&gEnemyParty[a], MON_DATA_PP1 + size);
         }
         moveData.ppBonuses = GetMonData(&gEnemyParty[a], MON_DATA_PP_BONUSES);
-        src = (u8 *)&moveData;
-        for (size = 0; size < sizeof(moveData); size++)
-            buffer[size] = src[size];
+        MEMCPY_ALT(&moveData, buffer, sizeof(moveData), size, src);
         break;
     case 4:
     case 5:
@@ -677,7 +674,7 @@ u32 sub_8033598(u8 a, u8 *buffer)
         size = 1;
         break;
     case 22:
-        buffer[0] = GetMonData(&gEnemyParty[a], MON_DATA_SPD_EV);
+        buffer[0] = GetMonData(&gEnemyParty[a], MON_DATA_SPEED_EV);
         size = 1;
         break;
     case 23:
@@ -716,7 +713,7 @@ u32 sub_8033598(u8 a, u8 *buffer)
         buffer[0] = GetMonData(&gEnemyParty[a], MON_DATA_HP_IV);
         buffer[1] = GetMonData(&gEnemyParty[a], MON_DATA_ATK_IV);
         buffer[2] = GetMonData(&gEnemyParty[a], MON_DATA_DEF_IV);
-        buffer[3] = GetMonData(&gEnemyParty[a], MON_DATA_SPD_IV);
+        buffer[3] = GetMonData(&gEnemyParty[a], MON_DATA_SPEED_IV);
         buffer[4] = GetMonData(&gEnemyParty[a], MON_DATA_SPATK_IV);
         buffer[5] = GetMonData(&gEnemyParty[a], MON_DATA_SPDEF_IV);
         size = 6;
@@ -734,7 +731,7 @@ u32 sub_8033598(u8 a, u8 *buffer)
         size = 1;
         break;
     case 35:
-        buffer[0] = GetMonData(&gEnemyParty[a], MON_DATA_SPD_IV);
+        buffer[0] = GetMonData(&gEnemyParty[a], MON_DATA_SPEED_IV);
         size = 1;
         break;
     case 36:
@@ -796,7 +793,7 @@ u32 sub_8033598(u8 a, u8 *buffer)
         size = 2;
         break;
     case 46:
-        data16 = GetMonData(&gEnemyParty[a], MON_DATA_SPD);
+        data16 = GetMonData(&gEnemyParty[a], MON_DATA_SPEED);
         buffer[0] = data16;
         buffer[1] = data16 >> 8;
         size = 2;
@@ -864,12 +861,12 @@ u32 sub_8033598(u8 a, u8 *buffer)
 void OpponentHandlecmd1(void)
 {
     struct BattlePokemon buffer;
-    u8 *src = (u8 *)&gEnemyParty[gBattlePartyID[gActiveBank]] + gBattleBufferA[gActiveBank][1];
-    u8 *dst = (u8 *)&buffer + gBattleBufferA[gActiveBank][1];
     u8 i;
+    // TODO: Maybe fix this. Integrating this into MEMSET_ALT is too hard.
+    u8 *src = (u8 *)&gEnemyParty[gBattlePartyID[gActiveBank]] + gBattleBufferA[gActiveBank][1];
+    u8 *dst;
 
-    for (i = 0; i < gBattleBufferA[gActiveBank][2]; i++)
-        dst[i] = src[i];
+    MEMSET_ALT(&buffer + gBattleBufferA[gActiveBank][1], src[i], gBattleBufferA[gActiveBank][2], i, dst);
     Emitcmd29(1, gBattleBufferA[gActiveBank][2], dst);
     OpponentBufferExecCompleted();
 }
@@ -908,38 +905,38 @@ void sub_8033E24(u8 a)
         {
             u8 iv;
 
-            SetMonData(&gEnemyParty[a], MON_DATA_SPECIES, (u8 *)&battlePokemon->species);
-            SetMonData(&gEnemyParty[a], MON_DATA_HELD_ITEM, (u8 *)&battlePokemon->item);
+            SetMonData(&gEnemyParty[a], MON_DATA_SPECIES, &battlePokemon->species);
+            SetMonData(&gEnemyParty[a], MON_DATA_HELD_ITEM, &battlePokemon->item);
             for (i = 0; i < 4; i++)
             {
-                SetMonData(&gEnemyParty[a], MON_DATA_MOVE1 + i, (u8 *)&battlePokemon->moves[i]);
-                SetMonData(&gEnemyParty[a], MON_DATA_PP1 + i, (u8 *)&battlePokemon->pp[i]);
+                SetMonData(&gEnemyParty[a], MON_DATA_MOVE1 + i, &battlePokemon->moves[i]);
+                SetMonData(&gEnemyParty[a], MON_DATA_PP1 + i, &battlePokemon->pp[i]);
             }
-            SetMonData(&gEnemyParty[a], MON_DATA_PP_BONUSES, (u8 *)&battlePokemon->ppBonuses);
-            SetMonData(&gEnemyParty[a], MON_DATA_FRIENDSHIP, (u8 *)&battlePokemon->friendship);
-            SetMonData(&gEnemyParty[a], MON_DATA_EXP, (u8 *)&battlePokemon->experience);
+            SetMonData(&gEnemyParty[a], MON_DATA_PP_BONUSES, &battlePokemon->ppBonuses);
+            SetMonData(&gEnemyParty[a], MON_DATA_FRIENDSHIP, &battlePokemon->friendship);
+            SetMonData(&gEnemyParty[a], MON_DATA_EXP, &battlePokemon->experience);
             iv = battlePokemon->hpIV;
-            SetMonData(&gEnemyParty[a], MON_DATA_HP_IV, (u8 *)&iv);
+            SetMonData(&gEnemyParty[a], MON_DATA_HP_IV, &iv);
             iv = battlePokemon->attackIV;
-            SetMonData(&gEnemyParty[a], MON_DATA_ATK_IV, (u8 *)&iv);
+            SetMonData(&gEnemyParty[a], MON_DATA_ATK_IV, &iv);
             iv = battlePokemon->defenseIV;
-            SetMonData(&gEnemyParty[a], MON_DATA_DEF_IV, (u8 *)&iv);
+            SetMonData(&gEnemyParty[a], MON_DATA_DEF_IV, &iv);
             iv = battlePokemon->speedIV;
-            SetMonData(&gEnemyParty[a], MON_DATA_SPD_IV, (u8 *)&iv);
+            SetMonData(&gEnemyParty[a], MON_DATA_SPEED_IV, &iv);
             iv = battlePokemon->spAttackIV;
-            SetMonData(&gEnemyParty[a], MON_DATA_SPATK_IV, (u8 *)&iv);
+            SetMonData(&gEnemyParty[a], MON_DATA_SPATK_IV, &iv);
             iv = battlePokemon->spDefenseIV;
-            SetMonData(&gEnemyParty[a], MON_DATA_SPDEF_IV, (u8 *)&iv);
-            SetMonData(&gEnemyParty[a], MON_DATA_PERSONALITY, (u8 *)&battlePokemon->personality);
-            SetMonData(&gEnemyParty[a], MON_DATA_STATUS, (u8 *)&battlePokemon->status1);
-            SetMonData(&gEnemyParty[a], MON_DATA_LEVEL, (u8 *)&battlePokemon->level);
-            SetMonData(&gEnemyParty[a], MON_DATA_HP, (u8 *)&battlePokemon->hp);
-            SetMonData(&gEnemyParty[a], MON_DATA_MAX_HP, (u8 *)&battlePokemon->maxHP);
-            SetMonData(&gEnemyParty[a], MON_DATA_ATK, (u8 *)&battlePokemon->attack);
-            SetMonData(&gEnemyParty[a], MON_DATA_DEF, (u8 *)&battlePokemon->defense);
-            SetMonData(&gEnemyParty[a], MON_DATA_SPD, (u8 *)&battlePokemon->speed);
-            SetMonData(&gEnemyParty[a], MON_DATA_SPATK, (u8 *)&battlePokemon->spAttack);
-            SetMonData(&gEnemyParty[a], MON_DATA_SPDEF, (u8 *)&battlePokemon->spDefense);
+            SetMonData(&gEnemyParty[a], MON_DATA_SPDEF_IV, &iv);
+            SetMonData(&gEnemyParty[a], MON_DATA_PERSONALITY, &battlePokemon->personality);
+            SetMonData(&gEnemyParty[a], MON_DATA_STATUS, &battlePokemon->status1);
+            SetMonData(&gEnemyParty[a], MON_DATA_LEVEL, &battlePokemon->level);
+            SetMonData(&gEnemyParty[a], MON_DATA_HP, &battlePokemon->hp);
+            SetMonData(&gEnemyParty[a], MON_DATA_MAX_HP, &battlePokemon->maxHP);
+            SetMonData(&gEnemyParty[a], MON_DATA_ATK, &battlePokemon->attack);
+            SetMonData(&gEnemyParty[a], MON_DATA_DEF, &battlePokemon->defense);
+            SetMonData(&gEnemyParty[a], MON_DATA_SPEED, &battlePokemon->speed);
+            SetMonData(&gEnemyParty[a], MON_DATA_SPATK, &battlePokemon->spAttack);
+            SetMonData(&gEnemyParty[a], MON_DATA_SPDEF, &battlePokemon->spDefense);
         }
         break;
     case 1:
@@ -951,8 +948,8 @@ void sub_8033E24(u8 a)
     case 3:
         for (i = 0; i < 4; i++)
         {
-            SetMonData(&gEnemyParty[a], MON_DATA_MOVE1 + i, (u8 *)&moveData->moves[i]);
-            SetMonData(&gEnemyParty[a], MON_DATA_PP1 + i, (u8 *)&moveData->pp[i]);
+            SetMonData(&gEnemyParty[a], MON_DATA_MOVE1 + i, &moveData->moves[i]);
+            SetMonData(&gEnemyParty[a], MON_DATA_PP1 + i, &moveData->pp[i]);
         }
         SetMonData(&gEnemyParty[a], MON_DATA_PP_BONUSES, &moveData->ppBonuses);
         break;
@@ -991,7 +988,7 @@ void sub_8033E24(u8 a)
         SetMonData(&gEnemyParty[a], MON_DATA_DEF_EV, &gBattleBufferA[gActiveBank][3]);
         break;
     case 22:
-        SetMonData(&gEnemyParty[a], MON_DATA_SPD_EV, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gEnemyParty[a], MON_DATA_SPEED_EV, &gBattleBufferA[gActiveBank][3]);
         break;
     case 23:
         SetMonData(&gEnemyParty[a], MON_DATA_SPATK_EV, &gBattleBufferA[gActiveBank][3]);
@@ -1021,7 +1018,7 @@ void sub_8033E24(u8 a)
         SetMonData(&gEnemyParty[a], MON_DATA_HP_IV, &gBattleBufferA[gActiveBank][3]);
         SetMonData(&gEnemyParty[a], MON_DATA_ATK_IV, &gBattleBufferA[gActiveBank][4]);
         SetMonData(&gEnemyParty[a], MON_DATA_DEF_IV, &gBattleBufferA[gActiveBank][5]);
-        SetMonData(&gEnemyParty[a], MON_DATA_SPD_IV, &gBattleBufferA[gActiveBank][6]);
+        SetMonData(&gEnemyParty[a], MON_DATA_SPEED_IV, &gBattleBufferA[gActiveBank][6]);
         SetMonData(&gEnemyParty[a], MON_DATA_SPATK_IV, &gBattleBufferA[gActiveBank][7]);
         SetMonData(&gEnemyParty[a], MON_DATA_SPDEF_IV, &gBattleBufferA[gActiveBank][8]);
         break;
@@ -1035,7 +1032,7 @@ void sub_8033E24(u8 a)
         SetMonData(&gEnemyParty[a], MON_DATA_DEF_IV, &gBattleBufferA[gActiveBank][3]);
         break;
     case 35:
-        SetMonData(&gEnemyParty[a], MON_DATA_SPD_IV, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gEnemyParty[a], MON_DATA_SPEED_IV, &gBattleBufferA[gActiveBank][3]);
         break;
     case 36:
         SetMonData(&gEnemyParty[a], MON_DATA_SPATK_IV, &gBattleBufferA[gActiveBank][3]);
@@ -1068,7 +1065,7 @@ void sub_8033E24(u8 a)
         SetMonData(&gEnemyParty[a], MON_DATA_DEF, &gBattleBufferA[gActiveBank][3]);
         break;
     case 46:
-        SetMonData(&gEnemyParty[a], MON_DATA_SPD, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gEnemyParty[a], MON_DATA_SPEED, &gBattleBufferA[gActiveBank][3]);
         break;
     case 47:
         SetMonData(&gEnemyParty[a], MON_DATA_SPATK, &gBattleBufferA[gActiveBank][3]);
@@ -1117,9 +1114,8 @@ void OpponentHandlecmd3(void)
     u8 *dst;
     u8 i;
 
-    dst = (u8 *)&gEnemyParty[gBattlePartyID[gActiveBank]] + gBattleBufferA[gActiveBank][1];
-    for (i = 0; i < gBattleBufferA[gActiveBank][2]; i++)
-        dst[i] = gBattleBufferA[gActiveBank][3 + i];
+    MEMSET_ALT(&gEnemyParty[gBattlePartyID[gActiveBank]] + gBattleBufferA[gActiveBank][1], gBattleBufferA[gActiveBank][3 + i], 
+        gBattleBufferA[gActiveBank][2], i, dst);
     OpponentBufferExecCompleted();
 }
 
@@ -1135,8 +1131,8 @@ void OpponentHandleLoadPokeSprite(void)
       sub_8077F68(gActiveBank),
       sub_8079E90(gActiveBank));
     gSprites[gObjectBankIDs[gActiveBank]].pos2.x = -240;
-    gSprites[gObjectBankIDs[gActiveBank]].data0 = gActiveBank;
-    gSprites[gObjectBankIDs[gActiveBank]].data2 = species;
+    gSprites[gObjectBankIDs[gActiveBank]].data[0] = gActiveBank;
+    gSprites[gObjectBankIDs[gActiveBank]].data[2] = species;
     gSprites[gObjectBankIDs[gActiveBank]].oam.paletteNum = gActiveBank;
     StartSpriteAnim(&gSprites[gObjectBankIDs[gActiveBank]], gBattleMonForms[gActiveBank]);
     sub_8032984(gActiveBank, GetMonData(&gEnemyParty[gBattlePartyID[gActiveBank]], MON_DATA_SPECIES));
@@ -1166,14 +1162,14 @@ void sub_803495C(u8 a, u8 b)
       sub_8077ABC(a, 2),
       sub_8077F68(a),
       sub_8079E90(a));
-    gSprites[gObjectBankIDs[a]].data0 = a;
-    gSprites[gObjectBankIDs[a]].data2 = species;
-    gSprites[gUnknown_0300434C[a]].data1 = gObjectBankIDs[a];
+    gSprites[gObjectBankIDs[a]].data[0] = a;
+    gSprites[gObjectBankIDs[a]].data[2] = species;
+    gSprites[gUnknown_0300434C[a]].data[1] = gObjectBankIDs[a];
     gSprites[gObjectBankIDs[a]].oam.paletteNum = a;
     StartSpriteAnim(&gSprites[gObjectBankIDs[a]], gBattleMonForms[a]);
     gSprites[gObjectBankIDs[a]].invisible = TRUE;
     gSprites[gObjectBankIDs[a]].callback = SpriteCallbackDummy;
-    gSprites[gUnknown_0300434C[a]].data0 = sub_8046400(0, 0xFE);
+    gSprites[gUnknown_0300434C[a]].data[0] = sub_8046400(0, 0xFE);
 }
 
 void OpponentHandleReturnPokeToBall(void)
@@ -1222,7 +1218,7 @@ void OpponentHandleTrainerThrow(void)
     else if (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
         trainerPicIndex = get_trainer_class_pic_index();
     else if (gBattleTypeFlags & BATTLE_TYPE_EREADER_TRAINER)
-        trainerPicIndex = sub_8135FBC();
+        trainerPicIndex = GetEReaderTrainerPicIndex();
     else
         trainerPicIndex = gTrainers[gTrainerBattleOpponent].trainerPic;
 
@@ -1234,9 +1230,9 @@ void OpponentHandleTrainerThrow(void)
       40 + 4 * (8 - gTrainerFrontPicCoords[trainerPicIndex].coords),
       sub_8079E90(gActiveBank));
     gSprites[gObjectBankIDs[gActiveBank]].pos2.x = -240;
-    gSprites[gObjectBankIDs[gActiveBank]].data0 = 2;
+    gSprites[gObjectBankIDs[gActiveBank]].data[0] = 2;
     gSprites[gObjectBankIDs[gActiveBank]].oam.paletteNum = IndexOfSpritePaletteTag(gTrainerFrontPicPaletteTable[trainerPicIndex].tag);
-    gSprites[gObjectBankIDs[gActiveBank]].data5 = gSprites[gObjectBankIDs[gActiveBank]].oam.tileNum;
+    gSprites[gObjectBankIDs[gActiveBank]].data[5] = gSprites[gObjectBankIDs[gActiveBank]].oam.tileNum;
     gSprites[gObjectBankIDs[gActiveBank]].oam.tileNum = GetSpriteTileStartByTag(gTrainerFrontPicTable[trainerPicIndex].tag);
     gSprites[gObjectBankIDs[gActiveBank]].oam.affineParam = trainerPicIndex;
     gSprites[gObjectBankIDs[gActiveBank]].callback = sub_80313A0;
@@ -1252,7 +1248,7 @@ void OpponentHandleTrainerSlide(void)
     else if (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
         trainerPicIndex = get_trainer_class_pic_index();
     else if (gBattleTypeFlags & BATTLE_TYPE_EREADER_TRAINER)
-        trainerPicIndex = sub_8135FBC();
+        trainerPicIndex = GetEReaderTrainerPicIndex();
     else
         trainerPicIndex = gTrainers[gTrainerBattleOpponent].trainerPic;
 
@@ -1265,9 +1261,9 @@ void OpponentHandleTrainerSlide(void)
       0x1E);
     gSprites[gObjectBankIDs[gActiveBank]].pos2.x = 96;
     gSprites[gObjectBankIDs[gActiveBank]].pos1.x += 32;
-    gSprites[gObjectBankIDs[gActiveBank]].data0 = -2;
+    gSprites[gObjectBankIDs[gActiveBank]].data[0] = -2;
     gSprites[gObjectBankIDs[gActiveBank]].oam.paletteNum = IndexOfSpritePaletteTag(gTrainerFrontPicPaletteTable[trainerPicIndex].tag);
-    gSprites[gObjectBankIDs[gActiveBank]].data5 = gSprites[gObjectBankIDs[gActiveBank]].oam.tileNum;
+    gSprites[gObjectBankIDs[gActiveBank]].data[5] = gSprites[gObjectBankIDs[gActiveBank]].oam.tileNum;
     gSprites[gObjectBankIDs[gActiveBank]].oam.tileNum = GetSpriteTileStartByTag(gTrainerFrontPicTable[trainerPicIndex].tag);
     gSprites[gObjectBankIDs[gActiveBank]].oam.affineParam = trainerPicIndex;
     gSprites[gObjectBankIDs[gActiveBank]].callback = sub_80313A0;
@@ -1277,11 +1273,11 @@ void OpponentHandleTrainerSlide(void)
 void OpponentHandleTrainerSlideBack(void)
 {
     oamt_add_pos2_onto_pos1(&gSprites[gObjectBankIDs[gActiveBank]]);
-    gSprites[gObjectBankIDs[gActiveBank]].data0 = 35;
-    gSprites[gObjectBankIDs[gActiveBank]].data2 = 280;
-    gSprites[gObjectBankIDs[gActiveBank]].data4 = gSprites[gObjectBankIDs[gActiveBank]].pos1.y;
+    gSprites[gObjectBankIDs[gActiveBank]].data[0] = 35;
+    gSprites[gObjectBankIDs[gActiveBank]].data[2] = 280;
+    gSprites[gObjectBankIDs[gActiveBank]].data[4] = gSprites[gObjectBankIDs[gActiveBank]].pos1.y;
     gSprites[gObjectBankIDs[gActiveBank]].callback = sub_8078B34;
-    StoreSpriteCallbackInData6(&gSprites[gObjectBankIDs[gActiveBank]], SpriteCallbackDummy);
+    StoreSpriteCallbackInData(&gSprites[gObjectBankIDs[gActiveBank]], SpriteCallbackDummy);
     gBattleBankFunc[gActiveBank] = sub_8032BBC;
 }
 
@@ -1678,7 +1674,7 @@ _0803558A:\n\
 void OpponentHandleOpenBag(void)
 {
     // What is this?
-    Emitcmd35(1, ewram[0x160D4 + gActiveBank / 2 * 2]);
+    Emitcmd35(1, ewram160D4(gActiveBank));
     OpponentBufferExecCompleted();
 }
 
@@ -1686,7 +1682,7 @@ void OpponentHandlecmd22(void)
 {
     s32 r4;
 
-    if (ewram[0x160C8 + GetBankIdentity(gActiveBank) / 2] == 6)
+    if (ewram160C8arr(GetBankIdentity(gActiveBank)) == 6)
     {
         u8 r6;
         u8 r5;
@@ -1715,10 +1711,10 @@ void OpponentHandlecmd22(void)
     }
     else
     {
-        r4 = ewram[0x160C8 + GetBankIdentity(gActiveBank) / 2];
-        ewram[0x160C8 + GetBankIdentity(gActiveBank) / 2] = 6;
+        r4 = ewram160C8arr(GetBankIdentity(gActiveBank));
+        ewram160C8arr(GetBankIdentity(gActiveBank)) = 6;
     }
-    ewram[0x16068 + gActiveBank] = r4;
+    ewram16068arr(gActiveBank) = r4;
     Emitcmd34(1, r4, 0);
     OpponentBufferExecCompleted();
 }
@@ -1857,7 +1853,7 @@ void OpponentHandleHitAnimation(void)
     else
     {
         gDoingBattleAnim = TRUE;
-        gSprites[gObjectBankIDs[gActiveBank]].data1 = 0;
+        gSprites[gObjectBankIDs[gActiveBank]].data[1] = 0;
         sub_8047858(gActiveBank);
         gBattleBankFunc[gActiveBank] = bx_blink_t7;
     }
@@ -1906,11 +1902,11 @@ void OpponentHandleTrainerBallThrow(void)
     u8 taskId;
 
     oamt_add_pos2_onto_pos1(&gSprites[gObjectBankIDs[gActiveBank]]);
-    gSprites[gObjectBankIDs[gActiveBank]].data0 = 35;
-    gSprites[gObjectBankIDs[gActiveBank]].data2 = 280;
-    gSprites[gObjectBankIDs[gActiveBank]].data4 = gSprites[gObjectBankIDs[gActiveBank]].pos1.y;
+    gSprites[gObjectBankIDs[gActiveBank]].data[0] = 35;
+    gSprites[gObjectBankIDs[gActiveBank]].data[2] = 280;
+    gSprites[gObjectBankIDs[gActiveBank]].data[4] = gSprites[gObjectBankIDs[gActiveBank]].pos1.y;
     gSprites[gObjectBankIDs[gActiveBank]].callback = sub_8078B34;
-    StoreSpriteCallbackInData6(&gSprites[gObjectBankIDs[gActiveBank]], sub_8035C10);
+    StoreSpriteCallbackInData(&gSprites[gObjectBankIDs[gActiveBank]], sub_8035C10);
     taskId = CreateTask(sub_8035C44, 5);
     gTasks[taskId].data[0] = gActiveBank;
     if (ewram17810[gActiveBank].unk0_0)
@@ -1922,7 +1918,7 @@ void OpponentHandleTrainerBallThrow(void)
 void sub_8035C10(struct Sprite *sprite)
 {
     sub_8031B74(sprite->oam.affineParam);
-    sprite->oam.tileNum = sprite->data5;
+    sprite->oam.tileNum = sprite->data[5];
     FreeSpriteOamMatrix(sprite);
     DestroySprite(sprite);
 }

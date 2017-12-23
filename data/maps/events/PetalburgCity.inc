@@ -1,21 +1,21 @@
 PetalburgCity_MapObjects:: @ 837F5F0
-	object_event 1, MAP_OBJ_GFX_WOMAN_5, 0, 16, 0, 18, 0, 3, 2, 17, 0, 0, 0, 0, 0, PetalburgCity_EventScript_14B7C3, 728, 0, 0
-	object_event 2, MAP_OBJ_GFX_WALLY, 0, 15, 0, 10, 0, 3, 7, 0, 0, 0, 0, 0, 0, 0x0, 726, 0, 0
+	object_event 1, MAP_OBJ_GFX_WOMAN_5, 0, 16, 0, 18, 0, 3, 2, 17, 0, 0, 0, 0, 0, PetalburgCity_EventScript_14B7C3, FLAG_HIDE_WALLY_MOM_PETALBURG_1, 0, 0
+	object_event 2, MAP_OBJ_GFX_WALLY, 0, 15, 0, 10, 0, 3, 7, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_WALLY_PETALBURG, 0, 0
 	object_event 3, MAP_OBJ_GFX_BOY_1, 0, 8, 0, 22, 0, 3, 8, 0, 0, 0, 0, 0, 0, PetalburgCity_EventScript_14B7AC, 0, 0, 0
 	object_event 4, MAP_OBJ_GFX_GENTLEMAN, 0, 20, 0, 10, 0, 3, 3, 16, 0, 0, 0, 0, 0, PetalburgCity_EventScript_14B824, 0, 0, 0
-	object_event 5, MAP_OBJ_GFX_MAN_1, 0, 15, 0, 11, 0, 3, 7, 0, 0, 0, 0, 0, 0, 0x0, 811, 0, 0
-	object_event 6, MAP_OBJ_GFX_WOMAN_2, 0, 14, 0, 11, 0, 3, 7, 0, 0, 0, 0, 0, 0, 0x0, 812, 0, 0
-	object_event 7, MAP_OBJ_GFX_ITEM_BALL, 0, 19, 0, 2, 0, 3, 1, 0, 0, 0, 0, 0, 0, PetalburgCity_EventScript_1B1704, 1039, 0, 0
-	object_event 8, MAP_OBJ_GFX_ITEM_BALL, 0, 3, 0, 28, 0, 3, 1, 0, 0, 0, 0, 0, 0, PetalburgCity_EventScript_1B1711, 1040, 0, 0
+	object_event 5, MAP_OBJ_GFX_MAN_1, 0, 15, 0, 11, 0, 3, 7, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_WALLY_FATHER_PETALBURG, 0, 0
+	object_event 6, MAP_OBJ_GFX_WOMAN_2, 0, 14, 0, 11, 0, 3, 7, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_WALLY_MOTHER_PETALBURG, 0, 0
+	object_event 7, MAP_OBJ_GFX_ITEM_BALL, 0, 19, 0, 2, 0, 3, 1, 0, 0, 0, 0, 0, 0, PetalburgCity_EventScript_1B1704, FLAG_ITEM_PETALBURG_1, 0, 0
+	object_event 8, MAP_OBJ_GFX_ITEM_BALL, 0, 3, 0, 28, 0, 3, 1, 0, 0, 0, 0, 0, 0, PetalburgCity_EventScript_1B1711, FLAG_ITEM_PETALBURG_2, 0, 0
 	object_event 9, MAP_OBJ_GFX_BOY_2, 0, 12, 0, 15, 0, 3, 1, 0, 0, 0, 0, 0, 0, PetalburgCity_EventScript_14BA2D, 0, 0, 0
 
 PetalburgCity_MapWarps:: @ 837F6C8
-	warp_def 10, 19, 0, 0, PetalburgCity_House1
-	warp_def 7, 5, 0, 0, PetalburgCity_WallysHouse
-	warp_def 15, 8, 0, 0, PetalburgCity_Gym
-	warp_def 20, 16, 0, 0, PetalburgCity_PokemonCenter_1F
-	warp_def 20, 24, 0, 0, PetalburgCity_House2
-	warp_def 25, 12, 0, 0, PetalburgCity_Mart
+	warp_def 10, 19, 0, 0, MAP_PETALBURG_CITY_HOUSE1
+	warp_def 7, 5, 0, 0, MAP_PETALBURG_CITY_WALLYS_HOUSE
+	warp_def 15, 8, 0, 0, MAP_PETALBURG_CITY_GYM
+	warp_def 20, 16, 0, 0, MAP_PETALBURG_CITY_POKEMON_CENTER_1F
+	warp_def 20, 24, 0, 0, MAP_PETALBURG_CITY_HOUSE2
+	warp_def 25, 12, 0, 0, MAP_PETALBURG_CITY_MART
 
 PetalburgCity_MapCoordEvents:: @ 837F6F8
 	coord_event 8, 10, 3, 0, 0x4057, 0, 0, PetalburgCity_EventScript_14B836

@@ -1,10 +1,11 @@
 #include "global.h"
 #include "easy_chat.h"
+#include "constants/easy_chat.h"
 #include "data2.h"
 #include "event_data.h"
 #include "field_message_box.h"
 #include "pokedex.h"
-#include "rng.h"
+#include "random.h"
 #include "string_util.h"
 #include "strings.h"
 #include "strings2.h"
@@ -161,7 +162,7 @@ u16 unref_sub_80EB5E0(u16 arg0)
     {
     case EC_GROUP_POKEMON: // 0
     case EC_GROUP_POKEMON_2: // 21
-        chars = (u8 *) gSpeciesNames[word];
+        chars = gSpeciesNames[word];
         break;
     case EC_GROUP_MOVE_1: // 18
     case EC_GROUP_MOVE_2: // 19
@@ -278,13 +279,13 @@ void sub_80EB7C4(void)
     switch (gSpecialVar_0x8004)
     {
     case 0:
-        words = gSaveBlock1.unk2B1C;
+        words = gSaveBlock1.easyChats.unk2B1C;
         arg1 = 2;
         arg2 = 2;
         break;
     case 1:
-        words = gSaveBlock1.unk2B28;
-        if (sub_80EB680(gSaveBlock1.unk2B28, 3, 2, 20))
+        words = gSaveBlock1.easyChats.unk2B28;
+        if (sub_80EB680(gSaveBlock1.easyChats.unk2B28, 3, 2, 20))
         {
             arg1 = 2;
             arg2 = 3;
@@ -296,12 +297,12 @@ void sub_80EB7C4(void)
         }
         break;
     case 2:
-        words = gSaveBlock1.unk2B34;
+        words = gSaveBlock1.easyChats.unk2B34;
         arg1 = 3;
         arg2 = 2;
         break;
     case 3:
-        words = gSaveBlock1.unk2B40;
+        words = gSaveBlock1.easyChats.unk2B40;
         arg1 = 3;
         arg2 = 2;
         break;

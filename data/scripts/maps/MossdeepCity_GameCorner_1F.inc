@@ -5,18 +5,18 @@ MossdeepCity_GameCorner_1F_MapScripts:: @ 815AC52
 	.byte 0
 
 MossdeepCity_GameCorner_1F_MapScript1_15AC62:: @ 815AC62
-	special sub_813601C
+	special ValidateEReaderTrainer
 	compare RESULT, 1
 	call_if 1, MossdeepCity_GameCorner_1F_EventScript_15AC71
 	end
 
 MossdeepCity_GameCorner_1F_EventScript_15AC71:: @ 815AC71
-	setmaptile 3, 0, 653, 1
-	setmaptile 3, 1, 661, 1
+	setmetatile 3, 0, 653, 1
+	setmetatile 3, 1, 661, 1
 	return
 
 MossdeepCity_GameCorner_1F_MapScript1_15AC84:: @ 815AC84
-	special sub_813601C
+	special ValidateEReaderTrainer
 	compare RESULT, 0
 	call_if 1, MossdeepCity_GameCorner_1F_EventScript_15AC9E
 	compare 0x40c0, 0
@@ -117,7 +117,7 @@ MossdeepCity_GameCorner_1F_EventScript_15AD59:: @ 815AD59
 	call_if 1, MossdeepCity_GameCorner_1F_EventScript_15AE16
 	compare FACING, 3
 	call_if 1, MossdeepCity_GameCorner_1F_EventScript_15AE28
-	warp MossdeepCity_GameCorner_B1F, 255, 3, 1
+	warp MAP_MOSSDEEP_CITY_GAME_CORNER_B1F, 255, 3, 1
 	waitstate
 	release
 	end

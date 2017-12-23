@@ -64,8 +64,8 @@ AquaHideout_B2F_EventScript_15D8FD:: @ 815D8FD
 	applymovement 0x8008, AquaHideout_B2F_Movement_1A0839
 	waitmovement 0
 	msgbox AquaHideout_B2F_Text_1971AE, 4
-	setflag 112
-	setflag 852
+	setflag FLAG_EVIL_TEAM_ESCAPED_IN_SUBMARINE
+	setflag FLAG_HIDE_GRUNTS_LILYCOVE
 	release
 	end
 

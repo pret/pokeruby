@@ -3,8 +3,8 @@
 #include "event_data.h"
 #include "field_map_obj.h"
 #include "fieldmap.h"
-#include "map_constants.h"
-#include "songs.h"
+#include "constants/maps.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "sprite.h"
 
@@ -622,14 +622,14 @@ static EWRAM_DATA u8 gRotatingGate_PuzzleCount = 0;
 
 static int GetCurrentMapRotatingGatePuzzleType(void)
 {
-    if (gSaveBlock1.location.mapGroup == MAP_GROUP_FORTREE_CITY_GYM &&
-        gSaveBlock1.location.mapNum == MAP_ID_FORTREE_CITY_GYM)
+    if (gSaveBlock1.location.mapGroup == MAP_GROUP(FORTREE_CITY_GYM) &&
+        gSaveBlock1.location.mapNum == MAP_NUM(FORTREE_CITY_GYM))
     {
         return PUZZLE_FORTREE_CITY_GYM;
     }
 
-    if (gSaveBlock1.location.mapGroup == MAP_GROUP_ROUTE110_TRICK_HOUSE_PUZZLE6 &&
-        gSaveBlock1.location.mapNum == MAP_ID_ROUTE110_TRICK_HOUSE_PUZZLE6)
+    if (gSaveBlock1.location.mapGroup == MAP_GROUP(ROUTE110_TRICK_HOUSE_PUZZLE6) &&
+        gSaveBlock1.location.mapNum == MAP_NUM(ROUTE110_TRICK_HOUSE_PUZZLE6))
     {
         return PUZZLE_ROUTE110_TRICK_HOUSE_PUZZLE6;
     }
@@ -762,7 +762,7 @@ static u8 RotatingGate_CreateGate(u8 gateId, s16 deltaX, s16 deltaY)
     y = gate->y + 7;
 
     sprite = &gSprites[spriteId];
-    sprite->data0 = gateId;
+    sprite->data[0] = gateId;
     sprite->coordOffsetEnabled = 1;
 
     sub_8060388(x + deltaX, y + deltaY, &sprite->pos1.x, &sprite->pos1.y);
@@ -778,8 +778,8 @@ static void SpriteCallback_RotatingGate(struct Sprite *sprite)
     u8 orientation;
     u8 affineAnimation;
 
-    rotationDirection = sprite->data1;
-    orientation = sprite->data2;
+    rotationDirection = sprite->data[1];
+    orientation = sprite->data[2];
 
     RotatingGate_HideGatesOutsideViewport(sprite);
 
@@ -804,7 +804,7 @@ static void SpriteCallback_RotatingGate(struct Sprite *sprite)
         StartSpriteAffineAnim(sprite, affineAnimation);
     }
 
-    sprite->data1 = ROTATE_NONE;
+    sprite->data[1] = ROTATE_NONE;
 }
 
 static void RotatingGate_HideGatesOutsideViewport(struct Sprite *sprite)
@@ -1065,8 +1065,8 @@ static void RotatingGate_TriggerRotationAnimation(u8 gateId, int rotationDirecti
     if (gRotatingGate_GateSpriteIds[gateId] != MAX_SPRITES)
     {
         sprite = &gSprites[gRotatingGate_GateSpriteIds[gateId]];
-        sprite->data1 = rotationDirection;
-        sprite->data2 = RotatingGate_GetGateOrientation(gateId);
+        sprite->data[1] = rotationDirection;
+        sprite->data[2] = RotatingGate_GetGateOrientation(gateId);
     }
 }
 

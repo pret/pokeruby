@@ -2,6 +2,7 @@
 #include "fldeff_cut.h"
 #include "field_camera.h"
 #include "field_effect.h"
+#include "field_map_obj.h"
 #include "field_player_avatar.h"
 #include "fieldmap.h"
 #include "map_obj_lock.h"
@@ -11,24 +12,65 @@
 #include "overworld.h"
 #include "rom6.h"
 #include "script.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
 #include "trig.h"
-
-extern u8 gCutGrassSpriteArray[8]; // seems to be an array of 8 sprite IDs
+#include "ewram.h"
 
 extern void (*gFieldCallback)(void);
 extern void (*gUnknown_03005CE4)(void);
-
-extern struct SpriteTemplate gSpriteTemplate_CutGrass;
-
-extern struct MapPosition gUnknown_0203923C;
-
 extern u8 gLastFieldPokeMenuOpened;
 
-extern u8 S_UseCut[];
+extern const u8 S_UseCut[];
+
+const struct OamData gOamData_CutGrass =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 0,
+    .tileNum = 1,
+    .priority = 1,
+    .paletteNum = 1,
+    .affineParam = 0,
+};
+
+const union AnimCmd gSpriteAnim_CutGrass[] =
+{
+    ANIMCMD_FRAME(0, 30),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd *const gSpriteAnimTable_CutGrass[] =
+{
+    gSpriteAnim_CutGrass,
+};
+
+const struct SpriteFrameImage gSpriteImageTable_CutGrass[] =
+{
+    {gFieldEffectPic_CutGrass, 0x20},
+};
+
+const struct SpritePalette gFieldEffectObjectPaletteInfo6 = {gFieldEffectObjectPalette6, 0x1000};
+
+static void sub_80A2A48(struct Sprite *);
+static const struct SpriteTemplate gSpriteTemplate_CutGrass =
+{
+    .tileTag = 0xFFFF,
+    .paletteTag = 0x1000,
+    .oam = &gOamData_CutGrass,
+    .anims = gSpriteAnimTable_CutGrass,
+    .images = gSpriteImageTable_CutGrass,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80A2A48,
+};
 
 bool8 SetUpFieldMove_Cut(void)
 {
@@ -135,9 +177,9 @@ bool8 FldEff_CutGrass(void)
     // populate sprite ID array
     for(i = 0; i < 8; i++)
     {
-        gCutGrassSpriteArray[i] = CreateSprite((struct SpriteTemplate *)&gSpriteTemplate_CutGrass,
+        eCutGrassSpriteArray[i] = CreateSprite((struct SpriteTemplate *)&gSpriteTemplate_CutGrass,
         gSprites[gPlayerAvatar.spriteId].oam.x + 8, gSprites[gPlayerAvatar.spriteId].oam.y + 20, 0);
-        gSprites[gCutGrassSpriteArray[i]].data2 = 32 * i;
+        gSprites[eCutGrassSpriteArray[i]].data[2] = 32 * i;
     }
     return 0;
 }
@@ -241,11 +283,11 @@ void sub_80A28F4(s16 x, s16 y)
     }
 }
 
-void sub_80A2A48(struct Sprite *sprite)
+static void sub_80A2A48(struct Sprite *sprite)
 {
-    sprite->data0 = 8;
-    sprite->data1 = 0;
-    sprite->data3 = 0;
+    sprite->data[0] = 8;
+    sprite->data[1] = 0;
+    sprite->data[3] = 0;
     sprite->callback = (void *)objc_8097BBC;
 }
 
@@ -254,16 +296,16 @@ void objc_8097BBC(struct Sprite *sprite)
     u16 tempdata;
     u16 tempdata2;
 
-    sprite->pos2.x = Sin(sprite->data2, sprite->data0);
-    sprite->pos2.y = Cos(sprite->data2, sprite->data0);
+    sprite->pos2.x = Sin(sprite->data[2], sprite->data[0]);
+    sprite->pos2.y = Cos(sprite->data[2], sprite->data[0]);
 
-    sprite->data2 = (sprite->data2 + 8) & 0xFF;
-    sprite->data0 += ((tempdata2 = sprite->data3) << 16 >> 18) + 1; // what?
-    sprite->data3 = tempdata2 + 1;
+    sprite->data[2] = (sprite->data[2] + 8) & 0xFF;
+    sprite->data[0] += ((tempdata2 = sprite->data[3]) << 16 >> 18) + 1; // what?
+    sprite->data[3] = tempdata2 + 1;
 
-    tempdata = sprite->data1;
+    tempdata = sprite->data[1];
     if((s16)tempdata != 28) // done rotating the grass, execute clean up function
-        sprite->data1++;
+        sprite->data[1]++;
     else
         sprite->callback = (void *)sub_80A2AB8;
 }
@@ -273,8 +315,8 @@ void sub_80A2AB8(void)
     u8 i;
 
     for (i = 1; i < 8; i++)
-        DestroySprite(&gSprites[gCutGrassSpriteArray[i]]);
-    FieldEffectStop(&gSprites[gCutGrassSpriteArray[0]], FLDEFF_CUT_GRASS);
+        DestroySprite(&gSprites[eCutGrassSpriteArray[i]]);
+    FieldEffectStop(&gSprites[eCutGrassSpriteArray[0]], FLDEFF_CUT_GRASS);
     sub_8064E2C();
     ScriptContext2_Disable();
 }

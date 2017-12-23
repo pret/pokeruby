@@ -9,8 +9,8 @@ Route119_House_EventScript_163DE7:: @ 8163DE7
 	lock
 	faceplayer
 	waitse
-	playpokecry SPECIES_WINGULL, 0
+	playmoncry SPECIES_WINGULL, 0
 	msgbox Route119_House_Text_19F406, 4
-	waitpokecry
+	waitmoncry
 	release
 	end

@@ -33,7 +33,7 @@ gSpecials::
 	def_special sub_8100A7C
 	def_special sub_80BBC78
 	def_special sub_80BCE4C
-	def_special sub_80C683C
+	def_special DoSecretBasePCTurnOffEffect
 	def_special sub_80B929C
 	def_special sub_808347C
 	def_special sub_80834E4
@@ -51,7 +51,7 @@ gSpecials::
 	def_special sub_80C5568
 	def_special sub_8083BDC
 	def_special FieldObjectInteractionGetBerryTreeData
-	def_special sub_80B4EE4
+	def_special Berry_FadeAndGoToBerryBagMenu
 	def_special FieldObjectInteractionPlantBerryTree
 	def_special FieldObjectInteractionPickBerryTree
 	def_special FieldObjectInteractionRemoveBerryTree
@@ -188,18 +188,18 @@ gSpecials::
 	def_special sub_80BDD18
 	def_special GabbyAndTySetScriptVarsToFieldObjectLocalIds
 	def_special sub_810E300
-	def_special sp0B5_daycare
-	def_special sp0B6_daycare
-	def_special sub_8041E7C
-	def_special sp0B8_daycare
-	def_special sp0B9_daycare_relationship_comment
-	def_special sub_8042328
-	def_special Daycare_SendPokemon_Special
+	def_special GetDaycareMonNicknames
+	def_special GetDaycareState
+	def_special RejectEggFromDayCare
+	def_special GiveEggFromDaycare
+	def_special SetDaycareCompatibilityString
+	def_special GetSelectedDaycareMonNickname
+	def_special StoreSelectedPokemonInDaycare
 	def_special ChooseSendDaycareMon
 	def_special ShowDaycareLevelMenu
-	def_special sub_80417B8
-	def_special sub_8041770
-	def_special sub_8041648
+	def_special GetNumLevelsGainedFromDaycare
+	def_special GetDaycareCost
+	def_special TakePokemonFromDaycare
 	def_special ScriptHatchMon
 	def_special EggHatch
 	def_special sub_8042B4C
@@ -241,19 +241,19 @@ gSpecials::
 	def_special sub_8134548
 	def_special sub_81347F8
 	def_special CheckPartyBattleTowerBanlist
-	def_special sub_8135474
-	def_special sub_81360C0
+	def_special PrintBattleTowerTrainerGreeting
+	def_special PrintEReaderTrainerGreeting
 	def_special sub_813556C
 	def_special sub_8135668
 	def_special sub_81358A4
 	def_special sub_8135A14
 	def_special sub_8135BA0
-	def_special sub_8135C38
-	def_special sub_8135D84
-	def_special sub_8135DEC
-	def_special sub_8135E50
+	def_special BattleTower_SoftReset
+	def_special DetermineBattleTowerPrize
+	def_special GiveBattleTowerPrize
+	def_special AwardBattleTowerRibbons
 	def_special ChooseBattleTowerPlayerParty
-	def_special sub_813601C
+	def_special ValidateEReaderTrainer
 	def_special sub_810F404
 	def_special ReducePlayerPartyToThree
 	def_special BedroomPC
@@ -329,7 +329,7 @@ gSpecials::
 	def_special sp13F_fall_to_last_warp
 	def_special ShowContestEntryMonPic
 	def_special sub_80C5164
-	def_special sub_8134AB4
+	def_special SetEReaderTrainerGfxId
 	def_special ScrSpecial_StartSouthernIslandBattle
 	def_special SetRoute119Weather
 	def_special SetRoute123Weather

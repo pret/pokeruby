@@ -5,7 +5,7 @@ SafariZone_Southeast_MapObjects:: @ 8391B70
 	object_event 4, MAP_OBJ_GFX_YOUNGSTER, 0, 15, 0, 31, 0, 3, 2, 17, 0, 0, 0, 0, 0, SafariZone_Southeast_EventScript_16009E, 0, 0, 0
 
 SafariZone_Southeast_MapWarps:: @ 8391BD0
-	warp_def 32, 33, 0, 0, Route121_SafariZoneEntrance
+	warp_def 32, 33, 0, 0, MAP_ROUTE121_SAFARI_ZONE_ENTRANCE
 
 SafariZone_Southeast_MapEvents:: @ 8391BD8
 	map_events SafariZone_Southeast_MapObjects, SafariZone_Southeast_MapWarps, 0x0, 0x0

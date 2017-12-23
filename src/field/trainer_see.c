@@ -257,7 +257,7 @@ static bool8 sub_8084398(u8 taskId, struct Task *task, struct MapObject *trainer
 {
     u8 direction;
 
-    FieldObjectGetLocalIdAndMap(trainerObj, (u8 *)&gFieldEffectArguments[0], (u8 *)&gFieldEffectArguments[1], (u8 *)&gFieldEffectArguments[2]);
+    FieldObjectGetLocalIdAndMap(trainerObj, &gFieldEffectArguments[0], &gFieldEffectArguments[1], &gFieldEffectArguments[2]);
     FieldEffectStart(FLDEFF_EXCLAMATION_MARK_ICON_1);
     direction = GetFaceDirectionAnimId(trainerObj->mapobj_unk_18);
     FieldObjectSetSpecialAnim(trainerObj, direction);
@@ -485,11 +485,11 @@ void sub_8084894(struct Sprite *sprite, u16 a2, u8 a3)
     sprite->oam.priority = 1;
     sprite->coordOffsetEnabled = 1;
 
-    sprite->data0 = gFieldEffectArguments[0];
-    sprite->data1 = gFieldEffectArguments[1];
-    sprite->data2 = gFieldEffectArguments[2];
-    sprite->data3 = -5;
-    sprite->data7 = a2;
+    sprite->data[0] = gFieldEffectArguments[0];
+    sprite->data[1] = gFieldEffectArguments[1];
+    sprite->data[2] = gFieldEffectArguments[2];
+    sprite->data[3] = -5;
+    sprite->data[7] = a2;
 
     StartSpriteAnim(sprite, a3);
 }
@@ -498,22 +498,22 @@ void objc_exclamation_mark_probably(struct Sprite *sprite)
 {
     u8 mapObjId;
 
-    if (TryGetFieldObjectIdByLocalIdAndMap(sprite->data0, sprite->data1, sprite->data2, &mapObjId)
+    if (TryGetFieldObjectIdByLocalIdAndMap(sprite->data[0], sprite->data[1], sprite->data[2], &mapObjId)
      || sprite->animEnded)
     {
-        FieldEffectStop(sprite, (u8)sprite->data7);
+        FieldEffectStop(sprite, (u8)sprite->data[7]);
     }
     else
     {
         struct Sprite *mapObjSprite = &gSprites[gMapObjects[mapObjId].spriteId];
-        sprite->data4 += sprite->data3;
+        sprite->data[4] += sprite->data[3];
         sprite->pos1.x = mapObjSprite->pos1.x;
         sprite->pos1.y = mapObjSprite->pos1.y - 16;
         sprite->pos2.x = mapObjSprite->pos2.x;
-        sprite->pos2.y = mapObjSprite->pos2.y + sprite->data4;
-        if (sprite->data4)
-            sprite->data3++;
+        sprite->pos2.y = mapObjSprite->pos2.y + sprite->data[4];
+        if (sprite->data[4])
+            sprite->data[3]++;
         else
-            sprite->data3 = 0;
+            sprite->data[3] = 0;
     }
 }

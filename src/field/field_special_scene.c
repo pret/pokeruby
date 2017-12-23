@@ -11,12 +11,58 @@
 #include "overworld.h"
 #include "script.h"
 #include "script_movement.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
 
 #define SECONDS(value) ((signed) (60.0 * value + 0.5))
+
+// TODO: Move somewhere else
+enum
+{
+    STEP_17 = 0x17,
+    STEP_18,
+    STEP_END = 0xFE,
+};
+
+const u32 gMapObjectPic_MovingBox[] = INCBIN_U32("graphics/map_objects/pics/misc/moving_box.4bpp");
+const u16 gMapObjectPalette19[] = INCBIN_U16("graphics/map_objects/palettes/19.gbapal");
+
+static const s8 gTruckCamera_HorizontalTable[] =
+{
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    -1,
+    -1,
+    -1,
+    0,
+};
+
+const u8 gUnknown_083D295F[] =
+{
+    STEP_18,
+    STEP_END,
+};
+
+const u8 gUnknown_083D2961[] =
+{
+    STEP_17,
+    STEP_END,
+};
 
 // porthole states
 enum
@@ -27,12 +73,7 @@ enum
     EXIT_PORTHOLE,
 };
 
-extern s8 gTruckCamera_HorizontalTable[];
-
-extern u8 gUnknown_083D295F[];
-extern u8 gUnknown_083D2961[];
-
-s32 GetTruckCameraBobbingY(int a1)
+s16 GetTruckCameraBobbingY(int a1)
 {
     if (!(a1 % 120))
         return -1;
@@ -42,7 +83,7 @@ s32 GetTruckCameraBobbingY(int a1)
     return 0;
 }
 
-s32 GetTruckBoxMovement(int a1) // for the box movement?
+s16 GetTruckBoxMovement(int a1) // for the box movement?
 {
     if (!((a1 + 120) % 180))
         return -1;
@@ -53,28 +94,22 @@ s32 GetTruckBoxMovement(int a1) // for the box movement?
 void Task_Truck1(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    s16 cameraYpan;
-    s16 box1 = 0;
-    s16 box2 = 0;
-    s16 box3 = 0;
-    u8 mapNum, mapGroup;
-    register s16 zero asm("r4");
+    s16 cameraYpan, cameraXpan = 0;
+    s16 box1, box2, box3;
 
     box1 = GetTruckBoxMovement(data[0] + 30) * 4; // top box.
-    sub_805BD90(1, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, 3, box1 + 3);
+    sub_805BD90(1, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, 3 - cameraXpan, box1 + 3);
     box2 = GetTruckBoxMovement(data[0]) * 2; // bottom left box.
-    sub_805BD90(2, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, 0, box2 - 3);
+    sub_805BD90(2, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, -cameraXpan, box2 - 3);
     box3 = GetTruckBoxMovement(data[0]) * 4; // bottom right box.
-    mapNum = gSaveBlock1.location.mapNum;
-    mapGroup = gSaveBlock1.location.mapGroup;
-    zero = 0;
-    sub_805BD90(3, mapNum, mapGroup, -3, box3);
+    sub_805BD90(3, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, -3 - cameraXpan, box3);
 
     if (++data[0] == SECONDS(500)) // this will never run
-        data[0] = zero; // reset the timer if it gets stuck.
+        data[0] = 0; // reset the timer if it gets stuck.
 
+    // this also matches with directly calling GetTruckCameraBobbingY within SetCameraPanning, but this is consistent with a later function that requires a temp variable.
     cameraYpan = GetTruckCameraBobbingY(data[0]);
-    SetCameraPanning(0, cameraYpan);
+    SetCameraPanning(cameraXpan, cameraYpan);
 }
 
 void Task_Truck2(u8 taskId)
@@ -82,9 +117,7 @@ void Task_Truck2(u8 taskId)
     s16 *data = gTasks[taskId].data;
     s16 cameraYpan;
     s16 cameraXpan;
-    s16 box1;
-    s16 box2;
-    s16 box3;
+    s16 box1, box2, box3;
 
     data[0]++;
     data[2]++;
@@ -137,7 +170,7 @@ void Task_Truck3(u8 taskId)
    {
        cameraXpan = gTruckCamera_HorizontalTable[data[1]];
        cameraYpan = 0;
-       SetCameraPanning(cameraXpan, 0);
+       SetCameraPanning(cameraXpan, cameraYpan);
        sub_805BD90(1, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, 3 - cameraXpan, cameraYpan + 3);
        sub_805BD90(2, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, -cameraXpan, cameraYpan - 3);
        sub_805BD90(3, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, -3 - cameraXpan, cameraYpan);
@@ -340,7 +373,7 @@ void sub_80C791C(void)
 
 void sub_80C7958(void)
 {
-    FlagSet(SYS_CRUISE_MODE);
+    FlagSet(FLAG_SYS_CRUISE_MODE);
     FlagSet(0x4001);
     FlagSet(0x4000);
     saved_warp2_set(0, gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum, -1);

@@ -5,8 +5,8 @@ PetalburgCity_Mart_MapObjects:: @ 8387614
 	object_event 4, MAP_OBJ_GFX_WOMAN_3, 0, 5, 0, 5, 0, 3, 10, 0, 0, 0, 0, 0, 0, PetalburgCity_Mart_EventScript_15531A, 0, 0, 0
 
 PetalburgCity_Mart_MapWarps:: @ 8387674
-	warp_def 3, 7, 0, 5, PetalburgCity
-	warp_def 4, 7, 0, 5, PetalburgCity
+	warp_def 3, 7, 0, 5, MAP_PETALBURG_CITY
+	warp_def 4, 7, 0, 5, MAP_PETALBURG_CITY
 
 PetalburgCity_Mart_MapEvents:: @ 8387684
 	map_events PetalburgCity_Mart_MapObjects, PetalburgCity_Mart_MapWarps, 0x0, 0x0

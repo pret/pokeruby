@@ -4,9 +4,9 @@ SlateportCity_PokemonCenter_1F_MapObjects:: @ 83880B8
 	object_event 3, MAP_OBJ_GFX_WOMAN_7, 0, 10, 0, 7, 0, 3, 10, 0, 0, 0, 0, 0, 0, SlateportCity_PokemonCenter_1F_EventScript_1563E5, 0, 0, 0
 
 SlateportCity_PokemonCenter_1F_MapWarps:: @ 8388100
-	warp_def 7, 8, 3, 0, SlateportCity
-	warp_def 6, 8, 3, 0, SlateportCity
-	warp_def 1, 6, 4, 0, SlateportCity_PokemonCenter_2F
+	warp_def 7, 8, 3, 0, MAP_SLATEPORT_CITY
+	warp_def 6, 8, 3, 0, MAP_SLATEPORT_CITY
+	warp_def 1, 6, 4, 0, MAP_SLATEPORT_CITY_POKEMON_CENTER_2F
 
 SlateportCity_PokemonCenter_1F_MapEvents:: @ 8388118
 	map_events SlateportCity_PokemonCenter_1F_MapObjects, SlateportCity_PokemonCenter_1F_MapWarps, 0x0, 0x0

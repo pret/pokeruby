@@ -4,10 +4,10 @@ LittlerootTown_MapScripts:: @ 814D509
 	.byte 0
 
 LittlerootTown_MapScript1_14D514:: @ 814D514
-	setflag 2063
+	setflag FLAG_VISITED_LITTLEROOT_TOWN
 	compare 0x4092, 2
 	call_if 1, LittlerootTown_EventScript_14D57B
-	checkflag 82
+	checkflag FLAG_RESCUED_BIRCH
 	call_if 0, LittlerootTown_EventScript_14D583
 	compare 0x4050, 3
 	call_if 1, LittlerootTown_EventScript_14D5A6
@@ -22,12 +22,12 @@ LittlerootTown_MapScript1_14D514:: @ 814D514
 	end
 
 LittlerootTown_EventScript_14D563:: @ 814D563
-	setflag 301
+	setflag FLAG_RIVAL_LEFT_FOR_ROUTE103
 	return
 
 LittlerootTown_EventScript_14D567:: @ 814D567
 	setvar 0x40c7, 2
-	setflag 979
+	setflag FLAG_HIDE_RIVAL_OLDALE_TOWN
 	return
 
 LittlerootTown_EventScript_14D570:: @ 814D570
@@ -52,7 +52,7 @@ LittlerootTown_EventScript_14D59A:: @ 814D59A
 	return
 
 LittlerootTown_EventScript_14D5A6:: @ 814D5A6
-	clearflag 752
+	clearflag FLAG_HIDE_MOM_LITTLEROOT
 	setobjectmovementtype 4, 8
 	checkplayergender
 	compare RESULT, 0
@@ -80,8 +80,8 @@ LittlerootTown_EventScript_14D5EF:: @ 814D5EF
 	setvar 0x8004, 5
 	setvar 0x8005, 8
 	call LittlerootTown_EventScript_14D62B
-	setflag 761
-	warpsilent LittlerootTown_BrendansHouse_1F, 255, 8, 8
+	setflag FLAG_HIDE_MOVING_TRUCK_BRENDAN
+	warpsilent MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F, 255, 8, 8
 	waitstate
 	releaseall
 	end
@@ -91,8 +91,8 @@ LittlerootTown_EventScript_14D60D:: @ 814D60D
 	setvar 0x8004, 14
 	setvar 0x8005, 8
 	call LittlerootTown_EventScript_14D62B
-	setflag 762
-	warpsilent LittlerootTown_MaysHouse_1F, 255, 2, 8
+	setflag FLAG_HIDE_MOVING_TRUCK_MAY
+	warpsilent MAP_LITTLEROOT_TOWN_MAYS_HOUSE_1F, 255, 2, 8
 	waitstate
 	releaseall
 	end
@@ -122,12 +122,12 @@ LittlerootTown_EventScript_14D62B:: @ 814D62B
 	applymovement 4, LittlerootTown_Movement_14D6B5
 	applymovement 255, LittlerootTown_Movement_14D6BD
 	waitmovement 0
-	setflag 752
+	setflag FLAG_HIDE_MOM_LITTLEROOT
 	setvar 0x4092, 3
-	hideobject 255, 0, 0
+	hideobjectat 255, MAP_PETALBURG_CITY
 	closedoor 0x8004, 0x8005
 	waitdooranim
-	clearflag 868
+	clearflag FLAG_HIDE_FAT_MAN_LITTLEROOT
 	clearflag 0x4000
 	return
 
@@ -187,9 +187,9 @@ LittlerootTown_EventScript_14D6D6:: @ 814D6D6
 LittlerootTown_EventScript_14D6DF:: @ 814D6DF
 	lock
 	faceplayer
-	checkflag 116
+	checkflag FLAG_ADVENTURE_STARTED
 	goto_if_eq LittlerootTown_EventScript_14D72F
-	checkflag 82
+	checkflag FLAG_RESCUED_BIRCH
 	goto_if_eq LittlerootTown_EventScript_14D722
 	compare 0x4050, 0
 	goto_if 5, LittlerootTown_EventScript_14D708
@@ -599,7 +599,7 @@ LittlerootTown_EventScript_14DB46:: @ 814DB46
 	waitdooranim
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
-	hideobject 4, 0, 9
+	hideobjectat 4, MAP_LITTLEROOT_TOWN
 	closedoor 0x8009, 0x800a
 	waitdooranim
 	return
@@ -611,7 +611,7 @@ LittlerootTown_EventScript_14DB6C:: @ 814DB6C
 	waitdooranim
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
-	hideobject 4, 0, 9
+	hideobjectat 4, MAP_LITTLEROOT_TOWN
 	closedoor 0x8009, 0x800a
 	waitdooranim
 	return
@@ -623,7 +623,7 @@ LittlerootTown_EventScript_14DB92:: @ 814DB92
 	waitdooranim
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
-	hideobject 4, 0, 9
+	hideobjectat 4, MAP_LITTLEROOT_TOWN
 	closedoor 0x8009, 0x800a
 	waitdooranim
 	return
@@ -635,7 +635,7 @@ LittlerootTown_EventScript_14DBB8:: @ 814DBB8
 	waitdooranim
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
-	hideobject 4, 0, 9
+	hideobjectat 4, MAP_LITTLEROOT_TOWN
 	closedoor 0x8009, 0x800a
 	waitdooranim
 	return
@@ -647,7 +647,7 @@ LittlerootTown_EventScript_14DBDE:: @ 814DBDE
 	waitdooranim
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
-	hideobject 4, 0, 9
+	hideobjectat 4, MAP_LITTLEROOT_TOWN
 	closedoor 0x8009, 0x800a
 	waitdooranim
 	return
@@ -659,7 +659,7 @@ LittlerootTown_EventScript_14DC04:: @ 814DC04
 	waitdooranim
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
-	hideobject 4, 0, 9
+	hideobjectat 4, MAP_LITTLEROOT_TOWN
 	closedoor 0x8009, 0x800a
 	waitdooranim
 	return
@@ -671,7 +671,7 @@ LittlerootTown_EventScript_14DC2A:: @ 814DC2A
 	waitdooranim
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
-	hideobject 4, 0, 9
+	hideobjectat 4, MAP_LITTLEROOT_TOWN
 	closedoor 0x8009, 0x800a
 	waitdooranim
 	return
@@ -683,7 +683,7 @@ LittlerootTown_EventScript_14DC50:: @ 814DC50
 	waitdooranim
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
-	hideobject 4, 0, 9
+	hideobjectat 4, MAP_LITTLEROOT_TOWN
 	closedoor 0x8009, 0x800a
 	waitdooranim
 	return
@@ -853,7 +853,7 @@ LittlerootTown_EventScript_14DCE2:: @ 814DCE2
 	waitdooranim
 	applymovement 4, LittlerootTown_Movement_14DCE0
 	waitmovement 0
-	hideobject 4, 0, 9
+	hideobjectat 4, MAP_LITTLEROOT_TOWN
 	closedoor 0x8009, 0x800a
 	waitdooranim
 	goto LittlerootTown_EventScript_14DD2B
@@ -861,7 +861,7 @@ LittlerootTown_EventScript_14DCE2:: @ 814DCE2
 
 LittlerootTown_EventScript_14DD2B:: @ 814DD2B
 	removeobject 4
-	setflag 2144
+	setflag FLAG_SYS_B_DASH
 	setvar 0x4050, 4
 	release
 	end
@@ -872,7 +872,7 @@ LittlerootTown_EventScript_14DD38:: @ 814DD38
 	message LittlerootTown_Text_16AA32
 	waitfanfare
 	waitmessage
-	setflag 274
+	setflag FLAG_RECEIVED_RUNNING_SHOES
 	msgbox LittlerootTown_Text_16AA5C, 4
 	msgbox LittlerootTown_Text_16AB10, 4
 	closemessage

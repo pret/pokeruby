@@ -350,7 +350,7 @@ gPartyMenuType: @ 202E8FA
 @ field_weather
 
 	.align 2
-gUnknown_0202F7E8: @ 202F7E8
+gWeather: @ 202F7E8
 	.space 0x200
 
 gUnknown_0202F9E8: @ 202F9E8
@@ -494,10 +494,10 @@ gIsLinkContest: @ 203869A
 gUnknown_0203869B: @ 203869B
 	.space 0x1
 
-gScriptContestCategory: @ 203869C
+gSpecialVar_ContestCategory: @ 203869C
 	.space 0x2
 
-gScriptContestRank: @ 203869E
+gSpecialVar_ContestRank: @ 203869E
 	.space 0x2
 
 	.include "src/field/shop.o"

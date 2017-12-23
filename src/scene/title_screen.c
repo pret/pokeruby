@@ -360,7 +360,7 @@ static void UpdateLegendaryMarkingColor(u8);
 
 void SpriteCallback_VersionBannerLeft(struct Sprite *sprite)
 {
-    struct Task *task = &gTasks[sprite->data1];
+    struct Task *task = &gTasks[sprite->data[1]];
 
     if (task->data[1] != 0)
     {
@@ -384,7 +384,7 @@ void SpriteCallback_VersionBannerLeft(struct Sprite *sprite)
 
 void SpriteCallback_VersionBannerRight(struct Sprite *sprite)
 {
-    struct Task *task = &gTasks[sprite->data1];
+    struct Task *task = &gTasks[sprite->data[1]];
 
     if (task->data[1] != 0)
     {
@@ -405,11 +405,11 @@ void SpriteCallback_VersionBannerRight(struct Sprite *sprite)
 
 void SpriteCallback_PressStartCopyrightBanner(struct Sprite *sprite)
 {
-    if (sprite->data0 == 1)
+    if (sprite->data[0] == 1)
     {
-        sprite->data1++;
+        sprite->data[1]++;
         //Alternate between hidden and shown every 16th frame
-        if (sprite->data1 & 16)
+        if (sprite->data[1] & 16)
             sprite->invisible = FALSE;
         else
             sprite->invisible = TRUE;
@@ -429,7 +429,7 @@ static void CreatePressStartBanner(s16 x, s16 y)
     {
         spriteId = CreateSprite(&sStartCopyrightBannerSpriteTemplate, x, y, 0);
         StartSpriteAnim(&gSprites[spriteId], i);
-        gSprites[spriteId].data0 = 1;
+        gSprites[spriteId].data[0] = 1;
     }
 }
 #elif GERMAN
@@ -554,27 +554,27 @@ void SpriteCallback_PokemonLogoShine(struct Sprite *sprite)
 {
     if (gTasks[gUnknown_0202F7E4].data[1] == 0 && sprite->pos1.x < 272)
     {
-        if (sprite->data0) //Flash background
+        if (sprite->data[0]) //Flash background
         {
             u16 backgroundColor;
 
             if (sprite->pos1.x < DISPLAY_WIDTH / 2)
             {
                 //Brighten background color
-                if (sprite->data1 < 31)
-                    sprite->data1++;
-                if (sprite->data1 < 31)
-                    sprite->data1++;
+                if (sprite->data[1] < 31)
+                    sprite->data[1]++;
+                if (sprite->data[1] < 31)
+                    sprite->data[1]++;
             }
             else
             {
                 //Darken background color
-                if (sprite->data1 != 0)
-                    sprite->data1--;
-                if (sprite->data1 != 0)
-                    sprite->data1--;
+                if (sprite->data[1] != 0)
+                    sprite->data[1]--;
+                if (sprite->data[1] != 0)
+                    sprite->data[1]--;
             }
-            backgroundColor = _RGB(sprite->data1, sprite->data1, sprite->data1);
+            backgroundColor = _RGB(sprite->data[1], sprite->data[1], sprite->data[1]);
             gPlttBufferFaded[0] = backgroundColor;
             gPlttBufferFaded[PLTT_BUFFER_INDEX] = backgroundColor;
         }
@@ -593,7 +593,7 @@ static void StartPokemonLogoShine(bool8 flashBackground)
     u8 spriteId = CreateSprite(&sPokemonLogoShineSpriteTemplate, 0, 68, 0);
 
     gSprites[spriteId].oam.objMode = 2;
-    gSprites[spriteId].data0 = flashBackground;
+    gSprites[spriteId].data[0] = flashBackground;
 }
 
 static void VBlankCB(void)
@@ -758,12 +758,12 @@ static void Task_TitleScreenPhase1(u8 taskId)
         //Create left side of version banner
         spriteId = CreateSprite(&sVersionBannerLeftSpriteTemplate, VERSION_BANNER_LEFT_X, VERSION_BANNER_Y, 0);
         gSprites[spriteId].invisible = TRUE;
-        gSprites[spriteId].data1 = taskId;
+        gSprites[spriteId].data[1] = taskId;
 
         //Create right side of version banner
         spriteId = CreateSprite(&sVersionBannerRightSpriteTemplate, VERSION_BANNER_RIGHT_X, VERSION_BANNER_Y, 0);
         gSprites[spriteId].invisible = TRUE;
-        gSprites[spriteId].data1 = taskId;
+        gSprites[spriteId].data[1] = taskId;
 
         gTasks[taskId].data[5] = 88;
         gTasks[taskId].tCounter = 144;

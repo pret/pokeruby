@@ -15,17 +15,17 @@
 #include "text.h"
 #include "menu.h"
 #include "sound.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "pokeblock.h"
 
 #define GFX_TAG_CONDITIONUPDOWN 0
 
 #ifdef GERMAN
 extern const u16 ConditionUpDownPalette[16];
-extern const u32 ConditionUpDownTiles[0x80];
+extern const u8 ConditionUpDownTiles[0x200];
 #else
 const u16 ConditionUpDownPalette[] = INCBIN_U16("graphics/misc/condition_up_down.gbapal");
-const u32 ConditionUpDownTiles[] = INCBIN_U32("graphics/misc/condition_up_down.4bpp");
+const u8 ConditionUpDownTiles[] = INCBIN_U8("graphics/misc/condition_up_down.4bpp");
 #endif
 
 static const u32 sContestStatsMonData[] = {
@@ -49,7 +49,7 @@ static const u8 *const sContextStatNames[] = {
 };
 
 static const struct SpriteSheet gSpriteSheet_ConditionUpDown = {
-    (u8 *)ConditionUpDownTiles,
+    ConditionUpDownTiles,
     sizeof ConditionUpDownTiles,
     GFX_TAG_CONDITIONUPDOWN
 };
@@ -105,7 +105,7 @@ EWRAM_DATA u8 gPokeblockMonID = 0;
 EWRAM_DATA s16 gPokeblockGain = 0;
 
 extern u16 gKeyRepeatStartDelay;
-extern u16 gScriptItemId; // FIXME: remove after merge of #349 Pokeblock
+extern u16 gSpecialVar_ItemId; // FIXME: remove after merge of #349 Pokeblock
 
 static void launch_c3_walk_stairs_and_run_once(void (*const)(void));
 static void sub_81361E4(void);
@@ -244,7 +244,7 @@ static void sub_8136294(void)
         case 6:
             gUnknown_083DFEC4->unk76AA = 0;
             gUnknown_083DFEC4->unk87E0 = NULL;
-            gUnknown_083DFEC4->unk030C = 0x20;
+            gUnknown_083DFEC4->unk030C.val = 0x20;
             gUnknown_02039304->unk50++;
             break;
         case 7:
@@ -574,7 +574,7 @@ static void sub_81369CC(void)
         case 5:
             if (gMain.newKeys & (A_BUTTON | B_BUTTON) && !sub_8136D00())
             {
-                PokeblockClearIfExists((u8)gScriptItemId);
+                PokeblockClearIfExists((u8)gSpecialVar_ItemId);
                 launch_c3_walk_stairs_and_run_once(sub_8136B44);
             }
             break;
@@ -893,11 +893,11 @@ static void sub_8137138(void)
 
 static void sub_81371DC(struct Sprite *sprite)
 {
-    if (sprite->data0 <= 5)
+    if (sprite->data[0] <= 5)
         sprite->pos2.y -= 2;
-    else if (sprite->data0 <= 11)
+    else if (sprite->data[0] <= 11)
         sprite->pos2.y += 2;
-    if ((++sprite->data0) > 60)
+    if ((++sprite->data[0]) > 60)
     {
         DestroySprite(sprite);
         gUnknown_02039304->unk54--;

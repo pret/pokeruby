@@ -4,11 +4,11 @@ SootopolisCity_House1_MapScripts:: @ 815B29A
 SootopolisCity_House1_EventScript_15B29B:: @ 815B29B
 	lock
 	faceplayer
-	checkflag 121
+	checkflag FLAG_RECEIVED_TM31
 	goto_if_eq SootopolisCity_House1_EventScript_15B2C7
 	msgbox SootopolisCity_House1_Text_18F991, 4
-	giveitem ITEM_TM31
-	setflag 121
+	giveitem_std ITEM_TM31
+	setflag FLAG_RECEIVED_TM31
 	msgbox SootopolisCity_House1_Text_18FA03, 4
 	release
 	end
@@ -22,8 +22,8 @@ SootopolisCity_House1_EventScript_15B2D1:: @ 815B2D1
 	lock
 	faceplayer
 	waitse
-	playpokecry SPECIES_KECLEON, 0
+	playmoncry SPECIES_KECLEON, 0
 	msgbox SootopolisCity_House1_Text_18FA50, 4
-	waitpokecry
+	waitmoncry
 	release
 	end

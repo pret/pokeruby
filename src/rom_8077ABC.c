@@ -7,11 +7,12 @@
 #include "decompress.h"
 #include "palette.h"
 #include "pokemon_icon.h"
-#include "species.h"
+#include "constants/species.h"
 #include "sprite.h"
 #include "task.h"
 #include "trig.h"
 #include "util.h"
+#include "ewram.h"
 
 #define GET_UNOWN_LETTER(personality) ((\
       (((personality & 0x03000000) >> 24) << 6) \
@@ -50,13 +51,6 @@ struct Struct_gUnknown_0837F578 {
     u8 field_1;
 };
 
-struct OamMatrix {
-    s16 a;
-    s16 b;
-    s16 c;
-    s16 d;
-};
-
 struct Struct_2017810 {
     u8 filler_0[6];
     u8 field_6;
@@ -67,12 +61,6 @@ struct Color {
     u16 r:5;
     u16 g:5;
     u16 b:5;
-};
-
-struct Struct_sub_8078914 {
-    u8 *field_0;
-    u8 *field_4;
-    u8 field_8;
 };
 
 struct BGCnt {
@@ -94,8 +82,6 @@ extern struct OamData gOamData_837DF9C[];
 extern const union AnimCmd *const gDummySpriteAnimTable[];
 extern const union AffineAnimCmd *const gDummySpriteAffineAnimTable[];
 
-extern struct Struct_unk_2019348 unk_2019348;
-extern struct TransformStatus gTransformStatuses[];
 extern u16 gBattleMonPartyPositions[];
 extern u16 gBattleTypeFlags;
 extern u32 gTransformPersonalities[NUM_BATTLE_SLOTS];
@@ -187,7 +173,7 @@ u8 sub_8077ABC(u8 slot, u8 a2) {
     u16 species;
     struct TransformStatus *transform;
 
-    if (IsContest()) {
+    if (NotInBattle()) {
         if (a2 == 3 && slot == 3) {
             a2 = 1;
         }
@@ -203,22 +189,22 @@ u8 sub_8077ABC(u8 slot, u8 a2) {
     case 3:
     case 4:
     default:
-        if (IsContest()) {
-            if (unk_2019348.field_4 & 1) {
-                species = unk_2019348.field_2;
+        if (NotInBattle()) {
+            if (ewram19348.unk4 & 1) {
+                species = ewram19348.unk2;
             } else {
-                species = unk_2019348.field_0;
+                species = ewram19348.unk0;
             }
         } else {
             if (GetBankSide(slot)) {
-                transform = &gTransformStatuses[slot];
+                transform = &eTransformStatuses[slot];
                 if (!transform->species) {
                     species = GetMonData(&gEnemyParty[gBattleMonPartyPositions[slot]], MON_DATA_SPECIES);
                 } else {
                     species = transform->species;
                 }
             } else {
-                transform = &gTransformStatuses[slot];
+                transform = &eTransformStatuses[slot];
                 if (!transform->species) {
                     species = GetMonData(&gPlayerParty[gBattleMonPartyPositions[slot]], MON_DATA_SPECIES);
                 } else {
@@ -243,16 +229,16 @@ u8 sub_8077BFC(u8 slot, u16 species) {
     u8 ret;
     u16 var;
 
-    if (!GetBankSide(slot) || IsContest()) {
+    if (!GetBankSide(slot) || NotInBattle()) {
         if (species == SPECIES_UNOWN) {
-            if (IsContest()) {
-                if (unk_2019348.field_4 & 1) {
-                    personality = unk_2019348.field_10;
+            if (NotInBattle()) {
+                if (ewram19348.unk4 & 1) {
+                    personality = ewram19348.unk10;
                 } else {
-                    personality = unk_2019348.field_8;
+                    personality = ewram19348.unk8;
                 }
             } else {
-                transform = &gTransformStatuses[slot];
+                transform = &eTransformStatuses[slot];
                 if (!transform->species) {
                     personality = GetMonData(&gPlayerParty[gBattleMonPartyPositions[slot]], MON_DATA_PERSONALITY);
                 } else {
@@ -275,7 +261,7 @@ u8 sub_8077BFC(u8 slot, u16 species) {
         }
     } else {
         if (species == SPECIES_UNOWN) {
-            transform = &gTransformStatuses[slot];
+            transform = &eTransformStatuses[slot];
             if (!transform->species) {
                 personality = GetMonData(&gEnemyParty[gBattleMonPartyPositions[slot]], MON_DATA_PERSONALITY);
             } else {
@@ -302,7 +288,7 @@ u8 sub_8077BFC(u8 slot, u16 species) {
 u8 sub_8077DD8(u8 slot, u16 species) {
     u8 ret = 0;
     if (GetBankSide(slot) == 1) {
-        if (!IsContest()) {
+        if (!NotInBattle()) {
             if (species == SPECIES_CASTFORM) {
                 ret = gCastformElevations[gBattleMonForms[slot]];
             } else if (species > NUM_SPECIES) {
@@ -318,7 +304,7 @@ u8 sub_8077DD8(u8 slot, u16 species) {
 u8 sub_8077E44(u8 slot, u16 species, u8 a3) {
     u16 offset;
     u8 y;
-    if (GetBankSide(slot) == 0 || IsContest()) {
+    if (GetBankSide(slot) == 0 || NotInBattle()) {
         offset = sub_8077BFC(slot, species);
     } else {
         offset = sub_8077BFC(slot, species);
@@ -338,14 +324,14 @@ u8 sub_8077EE4(u8 slot, u8 a2) {
     u16 species;
     struct TransformStatus *transform;
     if (a2 == 3 || a2 == 4) {
-        if (IsContest()) {
-            if (unk_2019348.field_4 & 1) {
-                species = unk_2019348.field_2;
+        if (NotInBattle()) {
+            if (ewram19348.unk4 & 1) {
+                species = ewram19348.unk2;
             } else {
-                species = unk_2019348.field_0;
+                species = ewram19348.unk0;
             }
         } else {
-            transform = &gTransformStatuses[slot];
+            transform = &eTransformStatuses[slot];
             if (!transform->species) {
                 species = gUnknown_0202F7CA[slot];
             } else {
@@ -381,16 +367,16 @@ u8 sub_8077FC0(u8 slot) {
     u8 r6;
     struct TransformStatus *transform;
     r6 = sub_8077ABC(slot, 1);
-    if (!IsContest()) {
+    if (!NotInBattle()) {
         if (GetBankSide(slot)) {
-            transform = &gTransformStatuses[slot];
+            transform = &eTransformStatuses[slot];
             if (!transform->species) {
                 var = GetMonData(&gEnemyParty[gBattleMonPartyPositions[slot]], MON_DATA_SPECIES);
             } else {
                 var = transform->species;
             }
         } else {
-            transform = &gTransformStatuses[slot];
+            transform = &eTransformStatuses[slot];
             if (!transform->species) {
                 var = GetMonData(&gPlayerParty[gBattleMonPartyPositions[slot]], MON_DATA_SPECIES);
             } else {
@@ -435,92 +421,92 @@ u8 GetAnimBankSpriteId(u8 whichBank) {
     }
 }
 
-void StoreSpriteCallbackInData6(struct Sprite *sprite, void (*callback)(struct Sprite*)) {
-    sprite->data6 = (u32)(callback) & 0xffff;
-    sprite->data7 = (u32)(callback) >> 16;
+void StoreSpriteCallbackInData(struct Sprite *sprite, void (*callback)(struct Sprite*)) {
+    sprite->data[6] = (u32)(callback) & 0xffff;
+    sprite->data[7] = (u32)(callback) >> 16;
 }
 
-void SetCallbackToStoredInData6(struct Sprite *sprite) {
-    u32 callback = (u16)sprite->data6 | (sprite->data7 << 16);
+void SetCallbackToStoredInData(struct Sprite *sprite) {
+    u32 callback = (u16)sprite->data[6] | (sprite->data[7] << 16);
     sprite->callback = (void (*)(struct Sprite *))callback;
 }
 
 void sub_8078114(struct Sprite *sprite) {
-    if (sprite->data3) {
-        sprite->pos2.x = Sin(sprite->data0, sprite->data1);
-        sprite->pos2.y = Cos(sprite->data0, sprite->data1);
-        sprite->data0 += sprite->data2;
-        if (sprite->data0 >= 0x100) {
-            sprite->data0 -= 0x100;
-        } else if (sprite->data0 < 0) {
-            sprite->data0 += 0x100;
+    if (sprite->data[3]) {
+        sprite->pos2.x = Sin(sprite->data[0], sprite->data[1]);
+        sprite->pos2.y = Cos(sprite->data[0], sprite->data[1]);
+        sprite->data[0] += sprite->data[2];
+        if (sprite->data[0] >= 0x100) {
+            sprite->data[0] -= 0x100;
+        } else if (sprite->data[0] < 0) {
+            sprite->data[0] += 0x100;
         }
-        sprite->data3--;
+        sprite->data[3]--;
     } else {
-        SetCallbackToStoredInData6(sprite);
+        SetCallbackToStoredInData(sprite);
     }
 }
 
 void sub_8078174(struct Sprite *sprite) {
-    if (sprite->data3) {
-        sprite->pos2.x = Sin(sprite->data0, (sprite->data5 >> 8) + sprite->data1);
-        sprite->pos2.y = Cos(sprite->data0, (sprite->data5 >> 8) + sprite->data1);
-        sprite->data0 += sprite->data2;
-        sprite->data5 += sprite->data4;
-        if (sprite->data0 >= 0x100) {
-            sprite->data0 -= 0x100;
-        } else if (sprite->data0 < 0) {
-            sprite->data0 += 0x100;
+    if (sprite->data[3]) {
+        sprite->pos2.x = Sin(sprite->data[0], (sprite->data[5] >> 8) + sprite->data[1]);
+        sprite->pos2.y = Cos(sprite->data[0], (sprite->data[5] >> 8) + sprite->data[1]);
+        sprite->data[0] += sprite->data[2];
+        sprite->data[5] += sprite->data[4];
+        if (sprite->data[0] >= 0x100) {
+            sprite->data[0] -= 0x100;
+        } else if (sprite->data[0] < 0) {
+            sprite->data[0] += 0x100;
         }
-        sprite->data3--;
+        sprite->data[3]--;
     } else {
-        SetCallbackToStoredInData6(sprite);
+        SetCallbackToStoredInData(sprite);
     }
 }
 
 void unref_sub_80781F0(struct Sprite *sprite) {
-    if (sprite->data3) {
-        sprite->pos2.x = Sin(sprite->data0, sprite->data1);
-        sprite->pos2.y = Cos(sprite->data4, sprite->data1);
-        sprite->data0 += sprite->data2;
-        sprite->data4 += sprite->data5;
-        if (sprite->data0 >= 0x100) {
-            sprite->data0 -= 0x100;
-        } else if (sprite->data0 < 0) {
-            sprite->data0 += 0x100;
+    if (sprite->data[3]) {
+        sprite->pos2.x = Sin(sprite->data[0], sprite->data[1]);
+        sprite->pos2.y = Cos(sprite->data[4], sprite->data[1]);
+        sprite->data[0] += sprite->data[2];
+        sprite->data[4] += sprite->data[5];
+        if (sprite->data[0] >= 0x100) {
+            sprite->data[0] -= 0x100;
+        } else if (sprite->data[0] < 0) {
+            sprite->data[0] += 0x100;
         }
-        if (sprite->data4 >= 0x100) {
-            sprite->data4 -= 0x100;
-        } else if (sprite->data4 < 0) {
-            sprite->data4 += 0x100;
+        if (sprite->data[4] >= 0x100) {
+            sprite->data[4] -= 0x100;
+        } else if (sprite->data[4] < 0) {
+            sprite->data[4] += 0x100;
         }
-        sprite->data3--;
+        sprite->data[3]--;
     } else {
-        SetCallbackToStoredInData6(sprite);
+        SetCallbackToStoredInData(sprite);
     }
 }
 
 void sub_8078278(struct Sprite *sprite) {
-    if (sprite->data3) {
-        sprite->pos2.x = Sin(sprite->data0, sprite->data1);
-        sprite->pos2.y = Cos(sprite->data0, sprite->data4);
-        sprite->data0 += sprite->data2;
-        if (sprite->data0 >= 0x100) {
-            sprite->data0 -= 0x100;
-        } else if (sprite->data0 < 0) {
-            sprite->data0 += 0x100;
+    if (sprite->data[3]) {
+        sprite->pos2.x = Sin(sprite->data[0], sprite->data[1]);
+        sprite->pos2.y = Cos(sprite->data[0], sprite->data[4]);
+        sprite->data[0] += sprite->data[2];
+        if (sprite->data[0] >= 0x100) {
+            sprite->data[0] -= 0x100;
+        } else if (sprite->data[0] < 0) {
+            sprite->data[0] += 0x100;
         }
-        sprite->data3--;
+        sprite->data[3]--;
     } else {
-        SetCallbackToStoredInData6(sprite);
+        SetCallbackToStoredInData(sprite);
     }
 }
 
 void sub_80782D8(struct Sprite *sprite) {
-    if (sprite->data0 > 0) {
-        sprite->data0--;
+    if (sprite->data[0] > 0) {
+        sprite->data[0]--;
     } else {
-        SetCallbackToStoredInData6(sprite);
+        SetCallbackToStoredInData(sprite);
     }
 }
 
@@ -533,95 +519,95 @@ void sub_80782F8(struct Sprite *sprite) {
 void sub_8078314(struct Sprite *sprite) {
     s16 old;
     int v1;
-    if (sprite->data1 > sprite->data2) {
-        sprite->data0 = -sprite->data0;
+    if (sprite->data[1] > sprite->data[2]) {
+        sprite->data[0] = -sprite->data[0];
     }
-    v1 = sprite->data2 - sprite->data1;
-    old = sprite->data0;
-    sprite->data0 = abs(v1 / sprite->data0);
-    sprite->data2 = (sprite->data4 - sprite->data3) / sprite->data0;
-    sprite->data1 = old;
+    v1 = sprite->data[2] - sprite->data[1];
+    old = sprite->data[0];
+    sprite->data[0] = abs(v1 / sprite->data[0]);
+    sprite->data[2] = (sprite->data[4] - sprite->data[3]) / sprite->data[0];
+    sprite->data[1] = old;
 }
 
 void sub_8078364(struct Sprite *sprite) {
-    if (sprite->data0 > 0) {
-        sprite->data0--;
-        sprite->pos2.x += sprite->data1;
-        sprite->pos2.y += sprite->data2;
+    if (sprite->data[0] > 0) {
+        sprite->data[0]--;
+        sprite->pos2.x += sprite->data[1];
+        sprite->pos2.y += sprite->data[2];
     } else {
-        SetCallbackToStoredInData6(sprite);
+        SetCallbackToStoredInData(sprite);
     }
 }
 
 void sub_8078394(struct Sprite *sprite) {
-    if (sprite->data0 > 0) {
-        sprite->data0--;
-        sprite->data3 += sprite->data1;
-        sprite->data4 += sprite->data2;
-        sprite->pos2.x = sprite->data3 >> 8;
-        sprite->pos2.y = sprite->data4 >> 8;
+    if (sprite->data[0] > 0) {
+        sprite->data[0]--;
+        sprite->data[3] += sprite->data[1];
+        sprite->data[4] += sprite->data[2];
+        sprite->pos2.x = sprite->data[3] >> 8;
+        sprite->pos2.y = sprite->data[4] >> 8;
     } else {
-        SetCallbackToStoredInData6(sprite);
+        SetCallbackToStoredInData(sprite);
     }
 }
 
 void sub_80783D0(struct Sprite *sprite) {
-    if (sprite->data0 > 0) {
-        sprite->data0--;
-        sprite->data3 += sprite->data1;
-        sprite->data4 += sprite->data2;
-        sprite->pos2.x = sprite->data3 >> 8;
-        sprite->pos2.y = sprite->data4 >> 8;
+    if (sprite->data[0] > 0) {
+        sprite->data[0]--;
+        sprite->data[3] += sprite->data[1];
+        sprite->data[4] += sprite->data[2];
+        sprite->pos2.x = sprite->data[3] >> 8;
+        sprite->pos2.y = sprite->data[4] >> 8;
     } else {
-        SetCallbackToStoredInData6(sprite);
+        SetCallbackToStoredInData(sprite);
     }
     UpdateMonIconFrame(sprite);
 }
 
 void unref_sub_8078414(struct Sprite *sprite) {
-    sprite->data1 = sprite->pos1.x + sprite->pos2.x;
-    sprite->data3 = sprite->pos1.y + sprite->pos2.y;
-    sprite->data2 = sub_8077ABC(gBattleAnimBankTarget, 2);
-    sprite->data4 = sub_8077ABC(gBattleAnimBankTarget, 3);
+    sprite->data[1] = sprite->pos1.x + sprite->pos2.x;
+    sprite->data[3] = sprite->pos1.y + sprite->pos2.y;
+    sprite->data[2] = sub_8077ABC(gBattleAnimBankTarget, 2);
+    sprite->data[4] = sub_8077ABC(gBattleAnimBankTarget, 3);
     sprite->callback = sub_80782F8;
 }
 
 void sub_8078458(struct Sprite *sprite) {
-    if (sprite->data0 > 0) {
-        sprite->data0--;
-        gSprites[sprite->data3].pos2.x += sprite->data1;
-        gSprites[sprite->data3].pos2.y += sprite->data2;
+    if (sprite->data[0] > 0) {
+        sprite->data[0]--;
+        gSprites[sprite->data[3]].pos2.x += sprite->data[1];
+        gSprites[sprite->data[3]].pos2.y += sprite->data[2];
     } else {
-        SetCallbackToStoredInData6(sprite);
+        SetCallbackToStoredInData(sprite);
     }
 }
 
 void sub_80784A8(struct Sprite *sprite) {
-    if (sprite->data0 > 0) {
-        sprite->data0--;
-        sprite->data3 += sprite->data1;
-        sprite->data4 += sprite->data2;
-        gSprites[sprite->data5].pos2.x = sprite->data3 >> 8;
-        gSprites[sprite->data5].pos2.y = sprite->data4 >> 8;
+    if (sprite->data[0] > 0) {
+        sprite->data[0]--;
+        sprite->data[3] += sprite->data[1];
+        sprite->data[4] += sprite->data[2];
+        gSprites[sprite->data[5]].pos2.x = sprite->data[3] >> 8;
+        gSprites[sprite->data[5]].pos2.y = sprite->data[4] >> 8;
     } else {
-        SetCallbackToStoredInData6(sprite);
+        SetCallbackToStoredInData(sprite);
     }
 }
 
 void sub_8078504(struct Sprite *sprite) {
-    if (sprite->data0 > 0) {
-        sprite->data0--;
-        sprite->pos2.x = sprite->data2 >> 8;
-        sprite->data2 += sprite->data1;
-        sprite->pos2.y = sprite->data4 >> 8;
-        sprite->data4 += sprite->data3;
-        if (sprite->data0 % sprite->data5 == 0) {
-            if (sprite->data5) {
+    if (sprite->data[0] > 0) {
+        sprite->data[0]--;
+        sprite->pos2.x = sprite->data[2] >> 8;
+        sprite->data[2] += sprite->data[1];
+        sprite->pos2.y = sprite->data[4] >> 8;
+        sprite->data[4] += sprite->data[3];
+        if (sprite->data[0] % sprite->data[5] == 0) {
+            if (sprite->data[5]) {
                 sprite->invisible ^= 1;
             }
         }
     } else {
-        SetCallbackToStoredInData6(sprite);
+        SetCallbackToStoredInData(sprite);
     }
 }
 
@@ -631,27 +617,27 @@ void move_anim_8074EE0(struct Sprite *sprite) {
 }
 
 void unref_sub_8078588(struct Sprite *sprite) {
-    sprite->data1 = sprite->pos1.x + sprite->pos2.x;
-    sprite->data3 = sprite->pos1.y + sprite->pos2.y;
-    sprite->data2 = sub_8077ABC(gBattleAnimBankAttacker, 2);
-    sprite->data4 = sub_8077ABC(gBattleAnimBankAttacker, 3);
+    sprite->data[1] = sprite->pos1.x + sprite->pos2.x;
+    sprite->data[3] = sprite->pos1.y + sprite->pos2.y;
+    sprite->data[2] = sub_8077ABC(gBattleAnimBankAttacker, 2);
+    sprite->data[4] = sub_8077ABC(gBattleAnimBankAttacker, 3);
     sprite->callback = sub_80782F8;
 }
 
 void unref_sub_80785CC(struct Sprite *sprite) {
-    ResetPaletteStructByUid(sprite->data5);
+    ResetPaletteStructByUid(sprite->data[5]);
     move_anim_8074EE0(sprite);
 }
 
 void sub_80785E4(struct Sprite *sprite) {
     if (sprite->affineAnimEnded) {
-        SetCallbackToStoredInData6(sprite);
+        SetCallbackToStoredInData(sprite);
     }
 }
 
 void sub_8078600(struct Sprite *sprite) {
     if (sprite->animEnded) {
-        SetCallbackToStoredInData6(sprite);
+        SetCallbackToStoredInData(sprite);
     }
 }
 
@@ -689,19 +675,19 @@ void sub_807867C(struct Sprite *sprite, s16 a2) {
 }
 
 void sub_80786EC(struct Sprite *sprite) {
-    sprite->data1 = sprite->pos1.x;
-    sprite->data3 = sprite->pos1.y;
+    sprite->data[1] = sprite->pos1.x;
+    sprite->data[3] = sprite->pos1.y;
     obj_translate_based_on_private_1_2_3_4(sprite);
-    sprite->data6 = 0x8000 / sprite->data0;
-    sprite->data7 = 0;
+    sprite->data[6] = 0x8000 / sprite->data[0];
+    sprite->data[7] = 0;
 }
 
 bool8 sub_8078718(struct Sprite *sprite) {
     if (sub_8078B5C(sprite)) {
         return TRUE;
     }
-    sprite->data7 += sprite->data6;
-    sprite->pos2.y += Sin((u8)(sprite->data7 >> 8), sprite->data5);
+    sprite->data[7] += sprite->data[6];
+    sprite->pos2.y += Sin((u8)(sprite->data[7] >> 8), sprite->data[5]);
     return FALSE;
 }
 
@@ -752,7 +738,7 @@ u8 GetBankByPlayerAI(u8 slot) {
 }
 
 bool8 AnimBankSpriteExists(u8 slot) {
-    if (IsContest()) {
+    if (NotInBattle()) {
         if (gBattleAnimBankAttacker == slot) {
             return TRUE;
         }
@@ -782,7 +768,7 @@ bool8 IsDoubleBattle() {
 }
 
 void sub_8078914(struct Struct_sub_8078914 *unk) {
-    if (IsContest()) {
+    if (NotInBattle()) {
         unk->field_0 = (u8 *)0x6008000;
         unk->field_4 = (u8 *)0x600f000;
         unk->field_8 = 0xe;
@@ -794,7 +780,7 @@ void sub_8078914(struct Struct_sub_8078914 *unk) {
 }
 
 void sub_8078954(struct Struct_sub_8078914 *unk) {
-    if (IsContest()) {
+    if (NotInBattle()) {
         unk->field_0 = (u8 *)0x6008000;
         unk->field_4 = (u8 *)0x600f000;
         unk->field_8 = 0xe;
@@ -810,7 +796,7 @@ void sub_8078954(struct Struct_sub_8078914 *unk) {
 }
 
 u8 sub_80789BC() {
-    if (IsContest()) {
+    if (NotInBattle()) {
         return 1;
     }
     return 2;
@@ -820,7 +806,7 @@ void sub_80789D4(bool8 a1) {
     if (!a1) {
         BG3CNT.size = 0;
         BG3CNT.overflow = 1;
-    } else if (IsContest()) {
+    } else if (NotInBattle()) {
         BG3CNT.size = 0;
         BG3CNT.overflow = 1;
     } else {
@@ -830,31 +816,31 @@ void sub_80789D4(bool8 a1) {
 }
 
 void sub_8078A34(struct Sprite *sprite) {
-    sprite->data1 = sprite->pos1.x;
-    sprite->data3 = sprite->pos1.y;
+    sprite->data[1] = sprite->pos1.x;
+    sprite->data[3] = sprite->pos1.y;
     sub_8078A5C(sprite);
     sprite->callback = sub_80783D0;
     sprite->callback(sprite);
 }
 
 void sub_8078A5C(struct Sprite *sprite) {
-    s16 x = (sprite->data2 - sprite->data1) << 8;
-    s16 y = (sprite->data4 - sprite->data3) << 8;
-    sprite->data1 = x / sprite->data0;
-    sprite->data2 = y / sprite->data0;
-    sprite->data4 = 0;
-    sprite->data3 = 0;
+    s16 x = (sprite->data[2] - sprite->data[1]) << 8;
+    s16 y = (sprite->data[4] - sprite->data[3]) << 8;
+    sprite->data[1] = x / sprite->data[0];
+    sprite->data[2] = y / sprite->data[0];
+    sprite->data[4] = 0;
+    sprite->data[3] = 0;
 }
 
 void obj_translate_based_on_private_1_2_3_4(struct Sprite *sprite) {
-    int x = sprite->data2 - sprite->data1;
-    int y = sprite->data4 - sprite->data3;
+    int x = sprite->data[2] - sprite->data[1];
+    int y = sprite->data[4] - sprite->data[3];
     bool8 r8 = x < 0;
     bool8 r9 = y < 0;
     u16 x2 = abs(x) << 8;
     u16 y2 = abs(y) << 8;
-    x2 = x2 / sprite->data0;
-    y2 = y2 / sprite->data0;
+    x2 = x2 / sprite->data[0];
+    y2 = y2 / sprite->data[0];
     if (r8) {
         x2 |= 1;
     } else {
@@ -865,15 +851,15 @@ void obj_translate_based_on_private_1_2_3_4(struct Sprite *sprite) {
     } else {
         y2 &= ~1;
     }
-    sprite->data1 = x2;
-    sprite->data2 = y2;
-    sprite->data4 = 0;
-    sprite->data3 = 0;
+    sprite->data[1] = x2;
+    sprite->data[2] = y2;
+    sprite->data[4] = 0;
+    sprite->data[3] = 0;
 }
 
 void sub_8078B34(struct Sprite *sprite) {
-    sprite->data1 = sprite->pos1.x;
-    sprite->data3 = sprite->pos1.y;
+    sprite->data[1] = sprite->pos1.x;
+    sprite->data[3] = sprite->pos1.y;
     obj_translate_based_on_private_1_2_3_4(sprite);
     sprite->callback = sub_8078BB8;
     sprite->callback(sprite);
@@ -881,13 +867,13 @@ void sub_8078B34(struct Sprite *sprite) {
 
 bool8 sub_8078B5C(struct Sprite *sprite) {
     u16 v1, v2, x, y;
-    if (!sprite->data0) {
+    if (!sprite->data[0]) {
         return TRUE;
     }
-    v1 = sprite->data1;
-    v2 = sprite->data2;
-    x = sprite->data3;
-    y = sprite->data4;
+    v1 = sprite->data[1];
+    v2 = sprite->data[2];
+    x = sprite->data[3];
+    y = sprite->data[4];
     x += v1;
     y += v2;
     if (v1 & 1) {
@@ -900,41 +886,41 @@ bool8 sub_8078B5C(struct Sprite *sprite) {
     } else {
         sprite->pos2.y = y >> 8;
     }
-    sprite->data3 = x;
-    sprite->data4 = y;
-    sprite->data0--;
+    sprite->data[3] = x;
+    sprite->data[4] = y;
+    sprite->data[0]--;
     return FALSE;
 }
 
 void sub_8078BB8(struct Sprite *sprite) {
     if (sub_8078B5C(sprite)) {
-        SetCallbackToStoredInData6(sprite);
+        SetCallbackToStoredInData(sprite);
     }
 }
 
 void sub_8078BD4(struct Sprite *sprite) {
-    int v1 = abs(sprite->data2 - sprite->data1) << 8;
-    sprite->data0 = v1 / sprite->data0;
+    int v1 = abs(sprite->data[2] - sprite->data[1]) << 8;
+    sprite->data[0] = v1 / sprite->data[0];
     obj_translate_based_on_private_1_2_3_4(sprite);
 }
 
 void sub_8078C00(struct Sprite *sprite) {
-    sprite->data1 = sprite->pos1.x;
-    sprite->data3 = sprite->pos1.y;
+    sprite->data[1] = sprite->pos1.x;
+    sprite->data[3] = sprite->pos1.y;
     sub_8078BD4(sprite);
     sprite->callback = sub_8078BB8;
     sprite->callback(sprite);
 }
 
 void sub_8078C28(struct Sprite *sprite) {
-    int x = sprite->data2 - sprite->data1;
-    int y = sprite->data4 - sprite->data3;
+    int x = sprite->data[2] - sprite->data[1];
+    int y = sprite->data[4] - sprite->data[3];
     bool8 x_sign = x < 0;
     bool8 y_sign = y < 0;
     u16 x2 = abs(x) << 4;
     u16 y2 = abs(y) << 4;
-    x2 /= sprite->data0;
-    y2 /= sprite->data0;
+    x2 /= sprite->data[0];
+    y2 /= sprite->data[0];
     if (x_sign) {
         x2 |= 1;
     } else {
@@ -945,15 +931,15 @@ void sub_8078C28(struct Sprite *sprite) {
     } else {
         y2 &= ~1;
     }
-    sprite->data1 = x2;
-    sprite->data2 = y2;
-    sprite->data4 = 0;
-    sprite->data3 = 0;
+    sprite->data[1] = x2;
+    sprite->data[2] = y2;
+    sprite->data[4] = 0;
+    sprite->data[3] = 0;
 }
 
 void sub_8078CC0(struct Sprite *sprite) {
-    sprite->data1 = sprite->pos1.x;
-    sprite->data3 = sprite->pos1.y;
+    sprite->data[1] = sprite->pos1.x;
+    sprite->data[3] = sprite->pos1.y;
     sub_8078C28(sprite);
     sprite->callback = sub_8078D44;
     sprite->callback(sprite);
@@ -961,13 +947,13 @@ void sub_8078CC0(struct Sprite *sprite) {
 
 bool8 sub_8078CE8(struct Sprite *sprite) {
     u16 v1, v2, x, y;
-    if (!sprite->data0) {
+    if (!sprite->data[0]) {
         return TRUE;
     }
-    v1 = sprite->data1;
-    v2 = sprite->data2;
-    x = sprite->data3;
-    y = sprite->data4;
+    v1 = sprite->data[1];
+    v2 = sprite->data[2];
+    x = sprite->data[3];
+    y = sprite->data[4];
     x += v1;
     y += v2;
     if (v1 & 1) {
@@ -980,27 +966,27 @@ bool8 sub_8078CE8(struct Sprite *sprite) {
     } else {
         sprite->pos2.y = y >> 4;
     }
-    sprite->data3 = x;
-    sprite->data4 = y;
-    sprite->data0--;
+    sprite->data[3] = x;
+    sprite->data[4] = y;
+    sprite->data[0]--;
     return FALSE;
 }
 
 void sub_8078D44(struct Sprite *sprite) {
     if (sub_8078CE8(sprite)) {
-        SetCallbackToStoredInData6(sprite);
+        SetCallbackToStoredInData(sprite);
     }
 }
 
 void sub_8078D60(struct Sprite *sprite) {
-    int v1 = abs(sprite->data2 - sprite->data1) << 4;
-    sprite->data0 = v1 / sprite->data0;
+    int v1 = abs(sprite->data[2] - sprite->data[1]) << 4;
+    sprite->data[0] = v1 / sprite->data[0];
     sub_8078C28(sprite);
 }
 
 void sub_8078D8C(struct Sprite *sprite) {
-    sprite->data1 = sprite->pos1.x;
-    sprite->data3 = sprite->pos1.y;
+    sprite->data[1] = sprite->pos1.x;
+    sprite->data[3] = sprite->pos1.y;
     sub_8078D60(sprite);
     sprite->callback = sub_8078D44;
     sprite->callback(sprite);
@@ -1025,8 +1011,8 @@ void obj_id_set_rotscale(u8 sprite, s16 xScale, s16 yScale, u16 rotation) {
 }
 
 bool8 sub_8078E38() {
-    if (IsContest()) {
-        if (gSprites[GetAnimBankSpriteId(0)].data2 == 0xc9 /* XXX SPECIES_UNOWN? */) {
+    if (NotInBattle()) {
+        if (gSprites[GetAnimBankSpriteId(0)].data[2] == 0xc9 /* XXX SPECIES_UNOWN? */) {
             return FALSE;
         }
         return TRUE;
@@ -1035,16 +1021,14 @@ bool8 sub_8078E38() {
 }
 
 void sub_8078E70(u8 sprite, u8 a2) {
-    struct Struct_2017810 *unk;
-    u8 r7 = gSprites[sprite].data0;
-    if (IsContest() || IsAnimBankSpriteVisible(r7)) {
+    u8 r7 = gSprites[sprite].data[0];
+    if (NotInBattle() || IsAnimBankSpriteVisible(r7)) {
         gSprites[sprite].invisible = FALSE;
     }
     gSprites[sprite].oam.objMode = a2;
     gSprites[sprite].affineAnimPaused = TRUE;
-    if (!IsContest() && !gSprites[sprite].oam.affineMode) {
-        unk = &unk_2017810[r7];
-        gSprites[sprite].oam.matrixNum = unk->field_6;
+    if (!NotInBattle() && !gSprites[sprite].oam.affineMode) {
+        gSprites[sprite].oam.matrixNum = ewram17810[r7].unk6;
     }
     gSprites[sprite].oam.affineMode = 3;
     CalcCenterToCornerVec(&gSprites[sprite], gSprites[sprite].oam.shape, gSprites[sprite].oam.size, gSprites[sprite].oam.affineMode);
@@ -1135,7 +1119,7 @@ u32 sub_80791A8(u8 a1, u8 a2, u8 a3, u8 a4, u8 a5, u8 a6, u8 a7) {
     u32 var = 0;
     u32 shift;
     if (a1) {
-        if (!IsContest()) {
+        if (!NotInBattle()) {
             var = 0xe;
         } else {
             var = 1 << sub_80789BC();
@@ -1162,14 +1146,14 @@ u32 sub_80791A8(u8 a1, u8 a2, u8 a3, u8 a4, u8 a5, u8 a6, u8 a7) {
         }
     }
     if (a6) {
-        if (!IsContest()) {
+        if (!NotInBattle()) {
             var |= 0x100;
         } else {
             var |= 0x4000;
         }
     }
     if (a7) {
-        if (!IsContest()) {
+        if (!NotInBattle()) {
             var |= 0x200;
         }
     }
@@ -1179,7 +1163,7 @@ u32 sub_80791A8(u8 a1, u8 a2, u8 a3, u8 a4, u8 a5, u8 a6, u8 a7) {
 u32 sub_80792C0(u8 a1, u8 a2, u8 a3, u8 a4) {
     u32 var = 0;
     u32 shift;
-    if (IsContest()) {
+    if (NotInBattle()) {
         if (a1) {
             var |= 1 << 18;
             return var;
@@ -1222,7 +1206,7 @@ u8 unref_sub_80793B0(u8 a1) {
 
 void sub_80793C4(struct Sprite *sprite) {
     bool8 var;
-    if (!sprite->data0) {
+    if (!sprite->data[0]) {
         if (!gBattleAnimArgs[3]) {
             var = TRUE;
         } else {
@@ -1233,7 +1217,7 @@ void sub_80793C4(struct Sprite *sprite) {
         } else {
             sub_8078764(sprite, var);
         }
-        sprite->data0++;
+        sprite->data[0]++;
 
     } else if (sprite->animEnded || sprite->affineAnimEnded) {
         move_anim_8074EE0(sprite);
@@ -1257,11 +1241,11 @@ void sub_807941C(struct Sprite *sprite) {
     if (GetBankSide(gBattleAnimBankAttacker)) {
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
     }
-    sprite->data0 = gBattleAnimArgs[4];
-    sprite->data2 = sub_8077ABC(gBattleAnimBankTarget, 2) + gBattleAnimArgs[2];
-    sprite->data4 = sub_8077ABC(gBattleAnimBankTarget, v2) + gBattleAnimArgs[3];
+    sprite->data[0] = gBattleAnimArgs[4];
+    sprite->data[2] = sub_8077ABC(gBattleAnimBankTarget, 2) + gBattleAnimArgs[2];
+    sprite->data[4] = sub_8077ABC(gBattleAnimBankTarget, v2) + gBattleAnimArgs[3];
     sprite->callback = sub_8078B34;
-    StoreSpriteCallbackInData6(sprite, move_anim_8072740);
+    StoreSpriteCallbackInData(sprite, move_anim_8072740);
 }
 
 void sub_80794A8(struct Sprite *sprite) {
@@ -1269,10 +1253,10 @@ void sub_80794A8(struct Sprite *sprite) {
     if (GetBankSide(gBattleAnimBankAttacker)) {
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
     }
-    sprite->data0 = gBattleAnimArgs[4];
-    sprite->data2 = sub_8077ABC(gBattleAnimBankTarget, 2) + gBattleAnimArgs[2];
-    sprite->data4 = sub_8077ABC(gBattleAnimBankTarget, 3) + gBattleAnimArgs[3];
-    sprite->data5 = gBattleAnimArgs[5];
+    sprite->data[0] = gBattleAnimArgs[4];
+    sprite->data[2] = sub_8077ABC(gBattleAnimBankTarget, 2) + gBattleAnimArgs[2];
+    sprite->data[4] = sub_8077ABC(gBattleAnimBankTarget, 3) + gBattleAnimArgs[3];
+    sprite->data[5] = gBattleAnimArgs[5];
     sub_80786EC(sprite);
     sprite->callback = sub_8079518;
 }
@@ -1303,11 +1287,11 @@ void sub_8079534(struct Sprite *sprite) {
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
     }
     sub_8078764(sprite, r4);
-    sprite->data0 = gBattleAnimArgs[4];
-    sprite->data2 = sub_8077ABC(slot, 2) + gBattleAnimArgs[2];
-    sprite->data4 = sub_8077ABC(slot, r7) + gBattleAnimArgs[3];
+    sprite->data[0] = gBattleAnimArgs[4];
+    sprite->data[2] = sub_8077ABC(slot, 2) + gBattleAnimArgs[2];
+    sprite->data[4] = sub_8077ABC(slot, r7) + gBattleAnimArgs[3];
     sprite->callback = sub_8078B34;
-    StoreSpriteCallbackInData6(sprite, move_anim_8072740);
+    StoreSpriteCallbackInData(sprite, move_anim_8072740);
 }
 
 s16 duplicate_obj_of_side_rel2move_in_transparent_mode(u8 a1) {
@@ -1438,7 +1422,7 @@ void sub_80798AC(u8 task) {
     sub_80797EC(&gTasks[task]);
 }
 
-void sub_80798F4(struct Task *task, u8 a2, void *a3) {
+void sub_80798F4(struct Task *task, u8 a2, const void *a3) {
     task->data[7] = 0;
     task->data[8] = 0;
     task->data[9] = 0;
@@ -1535,17 +1519,17 @@ void sub_8079AB8(u8 sprite, u8 sprite2) {
 
 u16 sub_8079B10(u8 sprite) {
     struct TransformStatus *transform;
-    u8 slot = gSprites[sprite].data0;
+    u8 slot = gSprites[sprite].data[0];
     u16 species;
     u16 i;
     for (i = 0; i < (sizeof(gBattleMonSprites) / sizeof(u8)); i++) {
         if (gBattleMonSprites[i] == sprite) {
-            if (IsContest()) {
-                species = unk_2019348.field_0;
+            if (NotInBattle()) {
+                species = ewram19348.unk0;
                 return gMonBackPicCoords[species].y_offset;
             } else {
                 if (!GetBankSide(i)) {
-                    transform = &gTransformStatuses[slot];
+                    transform = &eTransformStatuses[slot];
                     if (!transform->species) {
                         species = GetMonData(&gPlayerParty[gBattleMonPartyPositions[i]], MON_DATA_SPECIES);
                     } else {
@@ -1553,7 +1537,7 @@ u16 sub_8079B10(u8 sprite) {
                     }
                     return gMonBackPicCoords[species].y_offset;
                 } else {
-                    transform = &gTransformStatuses[slot];
+                    transform = &eTransformStatuses[slot];
                     if (!transform->species) {
                         species = GetMonData(&gEnemyParty[gBattleMonPartyPositions[i]], MON_DATA_SPECIES);
                     } else {
@@ -1567,7 +1551,7 @@ u16 sub_8079B10(u8 sprite) {
     return 0x40;
 }
 
-void sub_8079BF4(s16 *bottom, s16 *top, void *ptr) {
+void sub_8079BF4(s16 *bottom, s16 *top, const void *ptr) {
     *bottom = ((intptr_t) ptr) & 0xffff;
     *top = (((intptr_t) ptr) >> 16) & 0xffff;
 }
@@ -1653,7 +1637,7 @@ void sub_8079E24() {
 u8 sub_8079E90(u8 slot) {
     u8 status;
     u8 ret;
-    if (IsContest()) {
+    if (NotInBattle()) {
         if (slot == 2) {
             return 30;
         } else {
@@ -1676,7 +1660,7 @@ u8 sub_8079E90(u8 slot) {
 
 u8 sub_8079ED4(u8 slot) {
     u8 status = GetBankIdentity(slot);
-    if (IsContest()) {
+    if (NotInBattle()) {
         return 2;
     }
     if (status == 0 || status == 3) {
@@ -1688,7 +1672,7 @@ u8 sub_8079ED4(u8 slot) {
 
 u8 GetBankIdentity_permutated(u8 slot) {
     u8 status;
-    if (!IsContest()) {
+    if (!NotInBattle()) {
         status = GetBankIdentity(slot);
         if (status == 0 || status == 3) {
             return 2;
@@ -1744,7 +1728,7 @@ u8 sub_8079F44(u16 species, u8 isBackpic, u8 a3, s16 a4, s16 a5, u8 a6, u32 a7, 
     } else {
         sprite = CreateSprite(&gSpriteTemplate_837F5B0[a3], a4, a5 + gMonBackPicCoords[species].y_offset, a6);
     }
-    if (IsContest()) {
+    if (NotInBattle()) {
         gSprites[sprite].affineAnims = &gSpriteAffineAnimTable_81E7C18;
         StartSpriteAffineAnim(&gSprites[sprite], 0);
     }
@@ -1763,13 +1747,13 @@ int sub_807A100(u8 slot, u8 a2) {
     int ret;
     const struct MonCoords *coords;
     struct TransformStatus *transform;
-    if (IsContest()) {
-        if (unk_2019348.field_4 & 1) {
-            species = unk_2019348.field_2;
-            personality = unk_2019348.field_10;
+    if (NotInBattle()) {
+        if (ewram19348.unk4 & 1) {
+            species = ewram19348.unk2;
+            personality = ewram19348.unk10;
         } else {
-            species = unk_2019348.field_0;
-            personality = unk_2019348.field_8;
+            species = ewram19348.unk0;
+            personality = ewram19348.unk8;
         }
         if (species == SPECIES_UNOWN) {
             letter = GET_UNOWN_LETTER(personality);
@@ -1788,7 +1772,7 @@ int sub_807A100(u8 slot, u8 a2) {
         }
     } else {
         if (!GetBankSide(slot)) {
-            transform = &gTransformStatuses[slot];
+            transform = &eTransformStatuses[slot];
             if (!transform->species) {
                 species = GetMonData(&gPlayerParty[gBattleMonPartyPositions[slot]], MON_DATA_SPECIES);
                 personality = GetMonData(&gPlayerParty[gBattleMonPartyPositions[slot]], MON_DATA_PERSONALITY);
@@ -1810,7 +1794,7 @@ int sub_807A100(u8 slot, u8 a2) {
                 coords = &gMonBackPicCoords[species];
             }
         } else {
-            transform = &gTransformStatuses[slot];
+            transform = &eTransformStatuses[slot];
             if (!transform->species) {
                 species = GetMonData(&gEnemyParty[gBattleMonPartyPositions[slot]], MON_DATA_SPECIES);
                 personality = GetMonData(&gEnemyParty[gBattleMonPartyPositions[slot]], MON_DATA_PERSONALITY);
@@ -1870,7 +1854,7 @@ void sub_807A3FC(u8 slot, u8 a2, s16 *a3, s16 *a4) {
     }
     v3 = sub_8077ABC(slot, v1);
     v4 = sub_8077ABC(slot, v2);
-    if (IsDoubleBattle() && !IsContest()) {
+    if (IsDoubleBattle() && !NotInBattle()) {
         v5 = sub_8077ABC(slot ^ 2, v1);
         v6 = sub_8077ABC(slot ^ 2, v2);
     } else {
@@ -1902,11 +1886,11 @@ void sub_807A544(struct Sprite *sprite) {
         sprite->pos1.x += gBattleAnimArgs[0];
     }
     sprite->pos1.y += gBattleAnimArgs[1];
-    sprite->data0 = gBattleAnimArgs[2];
-    sprite->data1 = gBattleAnimArgs[3];
-    sprite->data3 = gBattleAnimArgs[4];
-    sprite->data5 = gBattleAnimArgs[5];
-    StoreSpriteCallbackInData6(sprite, move_anim_8074EE0);
+    sprite->data[0] = gBattleAnimArgs[2];
+    sprite->data[1] = gBattleAnimArgs[3];
+    sprite->data[3] = gBattleAnimArgs[4];
+    sprite->data[5] = gBattleAnimArgs[5];
+    StoreSpriteCallbackInData(sprite, move_anim_8074EE0);
     sprite->callback = sub_8078504;
 }
 
@@ -1918,12 +1902,12 @@ void sub_807A5C4(struct Sprite *sprite) {
         sprite->pos1.x += gBattleAnimArgs[0];
     }
     sprite->pos1.y += gBattleAnimArgs[1];
-    sprite->data0 = gBattleAnimArgs[2];
-    sprite->data1 = gBattleAnimArgs[3];
-    sprite->data3 = gBattleAnimArgs[4];
-    sprite->data5 = gBattleAnimArgs[5];
+    sprite->data[0] = gBattleAnimArgs[2];
+    sprite->data[1] = gBattleAnimArgs[3];
+    sprite->data[3] = gBattleAnimArgs[4];
+    sprite->data[5] = gBattleAnimArgs[5];
     StartSpriteAnim(sprite, gBattleAnimArgs[6]);
-    StoreSpriteCallbackInData6(sprite, move_anim_8074EE0);
+    StoreSpriteCallbackInData(sprite, move_anim_8074EE0);
     sprite->callback = sub_8078504;
 }
 
@@ -1936,7 +1920,7 @@ void sub_807A63C(struct Sprite *sprite) {
     }
     sprite->pos1.y += gBattleAnimArgs[1];
     sprite->callback = sub_8078600;
-    StoreSpriteCallbackInData6(sprite, move_anim_8072740);
+    StoreSpriteCallbackInData(sprite, move_anim_8072740);
 }
 
 void sub_807A69C(u8 taskId) {
@@ -1997,9 +1981,9 @@ void sub_807A850(struct Task *task, u8 taskId) {
     if (sprite >= 0) {
         gSprites[sprite].oam.priority = task->data[6];
         gSprites[sprite].oam.paletteNum = task->data[4];
-        gSprites[sprite].data0 = 8;
-        gSprites[sprite].data1 = taskId;
-        gSprites[sprite].data2 = sprite;
+        gSprites[sprite].data[0] = 8;
+        gSprites[sprite].data[1] = taskId;
+        gSprites[sprite].data[2] = sprite;
         gSprites[sprite].pos2.x = gSprites[task->data[0]].pos2.x;
         gSprites[sprite].callback = sub_807A8D4;
         task->data[5]++;
@@ -2007,8 +1991,8 @@ void sub_807A850(struct Task *task, u8 taskId) {
 }
 
 void sub_807A8D4(struct Sprite *sprite) {
-    if (--sprite->data0 == 0) {
-        gTasks[sprite->data1].data[5]--;
+    if (--sprite->data[0] == 0) {
+        gTasks[sprite->data[1]].data[5]--;
         obj_delete_but_dont_free_vram(sprite);
     }
 }
@@ -2017,21 +2001,21 @@ void sub_807A908(struct Sprite *sprite) {
     sprite->pos1.x = sub_8077ABC(gBattleAnimBankAttacker, 2);
     sprite->pos1.y = sub_8077ABC(gBattleAnimBankAttacker, 3);
     if (!GetBankSide(gBattleAnimBankAttacker)) {
-        sprite->data0 = 5;
+        sprite->data[0] = 5;
     } else {
-        sprite->data0 = -10;
+        sprite->data[0] = -10;
     }
-    sprite->data1 = -40;
+    sprite->data[1] = -40;
     sprite->callback = sub_807A960;
 }
 
 void sub_807A960(struct Sprite *sprite) {
-    sprite->data2 += sprite->data0;
-    sprite->data3 += sprite->data1;
-    sprite->pos2.x = sprite->data2 / 10;
-    sprite->pos2.y = sprite->data3 / 10;
-    if (sprite->data1 < -20) {
-        sprite->data1++;
+    sprite->data[2] += sprite->data[0];
+    sprite->data[3] += sprite->data[1];
+    sprite->pos2.x = sprite->data[2] / 10;
+    sprite->pos2.y = sprite->data[3] / 10;
+    if (sprite->data[1] < -20) {
+        sprite->data[1]++;
     }
     if ((sprite->pos1.y + sprite->pos2.y) < -32) {
         move_anim_8072740(sprite);
@@ -2040,9 +2024,9 @@ void sub_807A960(struct Sprite *sprite) {
 
 void sub_807A9BC(struct Sprite *sprite) {
     int x;
-    sprite->data0 = gBattleAnimArgs[2];
-    sprite->data2 = sprite->pos1.x + gBattleAnimArgs[4];
-    sprite->data4 = sprite->pos1.y + gBattleAnimArgs[5];
+    sprite->data[0] = gBattleAnimArgs[2];
+    sprite->data[2] = sprite->pos1.x + gBattleAnimArgs[4];
+    sprite->data[4] = sprite->pos1.y + gBattleAnimArgs[5];
     if (!GetBankSide(gBattleAnimBankTarget)) {
         x = (u16)gBattleAnimArgs[4] + 30;
         sprite->pos1.x += x;
@@ -2053,5 +2037,5 @@ void sub_807A9BC(struct Sprite *sprite) {
         sprite->pos1.y = gBattleAnimArgs[5] - 80;
     }
     sprite->callback = sub_8078B34;
-    StoreSpriteCallbackInData6(sprite, move_anim_8072740);
+    StoreSpriteCallbackInData(sprite, move_anim_8072740);
 }

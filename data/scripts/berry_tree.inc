@@ -14,7 +14,7 @@ Route102_EventScript_1A1533:: @ 81A1533
 	lockall
 	message Route102_Text_1A1946
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	releaseall
 	end
 
@@ -26,7 +26,7 @@ Route102_EventScript_1A153D:: @ 81A153D
 	goto_if_eq Route102_EventScript_1A1558
 	message Route102_Text_1A16B6
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	release
 	end
 
@@ -41,11 +41,11 @@ Route102_EventScript_1A1558:: @ 81A1558
 Route102_EventScript_1A1577:: @ 81A1577
 	fadescreen 1
 	closemessage
-	special sub_80B4EE4
+	special Berry_FadeAndGoToBerryBagMenu
 	waitstate
 	compare ITEM_ID, 0
 	goto_if_eq Route102_EventScript_1A1593
-	removeitem ITEM_ID, 1
+	takeitem ITEM_ID, 1
 	call Route102_EventScript_1A16A9
 
 Route102_EventScript_1A1593:: @ 81A1593
@@ -56,21 +56,21 @@ Route102_EventScript_1A1595:: @ 81A1595
 	lockall
 	message Route102_Text_1A172C
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	goto Route102_EventScript_1A165F
 
 Route102_EventScript_1A15A2:: @ 81A15A2
 	lockall
 	message Route102_Text_1A174B
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	goto Route102_EventScript_1A165F
 
 Route102_EventScript_1A15AF:: @ 81A15AF
 	lockall
 	message Route102_Text_1A175C
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	goto Route102_EventScript_1A165F
 
 Route102_EventScript_1A15BC:: @ 81A15BC
@@ -78,7 +78,7 @@ Route102_EventScript_1A15BC:: @ 81A15BC
 	lockall
 	message Route102_Text_1A177D
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	goto Route102_EventScript_1A165F
 
 Route102_EventScript_1A15CE:: @ 81A15CE
@@ -86,19 +86,19 @@ Route102_EventScript_1A15CE:: @ 81A15CE
 	goto_if_eq Route102_EventScript_1A15F2
 	compare 0x8005, 4
 	goto_if_eq Route102_EventScript_1A15EB
-	getstring 1, Route102_Text_1A17B7
+	bufferstring 1, Route102_Text_1A17B7
 	return
 
 Route102_EventScript_1A15EB:: @ 81A15EB
-	getstring 1, Route102_Text_1A179F
+	bufferstring 1, Route102_Text_1A179F
 	return
 
 Route102_EventScript_1A15F2:: @ 81A15F2
-	getstring 1, Route102_Text_1A17B0
+	bufferstring 1, Route102_Text_1A17B0
 	return
 
 Route102_EventScript_1A15F9:: @ 81A15F9
-	getnumberstring 1, 0x8006
+	buffernumberstring 1, 0x8006
 	lock
 	faceplayer
 	msgbox Route102_Text_1A17C0, 5
@@ -116,24 +116,24 @@ Route102_EventScript_1A161D:: @ 81A161D
 	playfanfare 387
 	waitmessage
 	waitfanfare
-	waitbutton
+	waitbuttonpress
 	message Route102_Text_1A181A
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	release
 	end
 
 Route102_EventScript_1A1642:: @ 81A1642
 	message Route102_Text_1A1881
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	release
 	end
 
 Route102_EventScript_1A164B:: @ 81A164B
 	message Route102_Text_1A18C5
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	release
 	end
 
@@ -170,7 +170,7 @@ Route102_EventScript_1A1693:: @ 81A1693
 	waitstate
 	message Route102_Text_1A1925
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	releaseall
 	end
 
@@ -179,5 +179,5 @@ Route102_EventScript_1A16A9:: @ 81A16A9
 	incrementgamestat GAME_STAT_PLANTED_BERRIES
 	message Route102_Text_1A16FB
 	waitmessage
-	waitbutton
+	waitbuttonpress
 	return

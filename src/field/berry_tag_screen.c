@@ -4,14 +4,14 @@
 #include "decompress.h"
 #include "field_map_obj.h"
 #include "item_menu.h"
-#include "items.h"
+#include "constants/items.h"
 #include "item_use.h"
 #include "main.h"
 #include "menu.h"
 #include "menu_helpers.h"
 #include "palette.h"
 #include "overworld.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "sprite.h"
 #include "string_util.h"
@@ -28,7 +28,7 @@ struct Struct2000000
     /*0x1FFFF*/ u8 var_1FFFF;
 };
 
-extern struct Struct2000000 unk_2000000;
+extern struct Struct2000000 gSharedMem;
 extern u16 gUnknown_030041B4;
 
 static EWRAM_DATA u8 gUnknown_0203932C = 0;
@@ -119,13 +119,13 @@ static bool8 sub_8146058(void)
     case 5:
         if (!MultistepInitMenuWindowContinue())
             break;
-        unk_2000000.var_1FFFF = 0;
+        gSharedMem.var_1FFFF = 0;
         gMain.state += 1;
         break;
     case 6:
         if (!sub_81462B8())
             break;
-        unk_2000000.var_1FFFF = 0;
+        gSharedMem.var_1FFFF = 0;
         gMain.state += 1;
         break;
     case 7:
@@ -133,12 +133,12 @@ static bool8 sub_8146058(void)
         gMain.state += 1;
         break;
     case 8:
-        berry = gScriptItemId + OFFSET_7B;
+        berry = gSpecialVar_ItemId + OFFSET_7B;
         gUnknown_0203932C = CreateBerrySprite(berry, 56, 64);
         gMain.state += 1;
         break;
     case 9:
-        sub_8146600(gScriptItemId + OFFSET_7B);
+        sub_8146600(gSpecialVar_ItemId + OFFSET_7B);
         gMain.state += 1;
         break;
     case 10:
@@ -191,19 +191,19 @@ bool8 sub_81462B8(void)
     u16 i;
     void *addr;
 
-    switch (unk_2000000.var_1FFFF)
+    switch (gSharedMem.var_1FFFF)
     {
     case 0:
         LZDecompressVram(gBerryCheck_Gfx, (void *)VRAM);
-        unk_2000000.var_1FFFF += 1;
+        gSharedMem.var_1FFFF += 1;
         break;
     case 1:
         LZDecompressVram(gUnknown_08E788E4, (void *)VRAM + 0x2800);
-        unk_2000000.var_1FFFF += 1;
+        gSharedMem.var_1FFFF += 1;
         break;
     case 2:
         LZDecompressVram(gUnknown_08E78A84, (void *)VRAM + 0x3000);
-        unk_2000000.var_1FFFF += 1;
+        gSharedMem.var_1FFFF += 1;
         break;
     case 3:
         for (i = 0; i < 0x400; i++)
@@ -215,19 +215,19 @@ bool8 sub_81462B8(void)
         }
         addr = (void *)(VRAM + 0x3800);
         DmaCopy16(3, gBGTilemapBuffers[2], addr, 0x800);
-        unk_2000000.var_1FFFF += 1;
+        gSharedMem.var_1FFFF += 1;
         break;
     case 4:
         LoadCompressedPalette(gBerryCheck_Pal, 0, 96 * 2);
-        unk_2000000.var_1FFFF += 1;
+        gSharedMem.var_1FFFF += 1;
         break;
     case 5:
         LoadCompressedObjectPic(&gUnknown_083C1F74);
-        unk_2000000.var_1FFFF += 1;
+        gSharedMem.var_1FFFF += 1;
         break;
     case 6:
         LoadCompressedObjectPalette(&gUnknown_083C1F7C);
-        unk_2000000.var_1FFFF = 0;
+        gSharedMem.var_1FFFF = 0;
         return TRUE;
     }
 
@@ -277,9 +277,9 @@ static void sub_81464E4(void)
     u8 buffer[16];
 #endif
 
-    berryInfo = GetBerryInfo(gScriptItemId + OFFSET_7B + 1);
+    berryInfo = GetBerryInfo(gSpecialVar_ItemId + OFFSET_7B + 1);
 
-    ConvertIntToDecimalStringN(gStringVar1, gScriptItemId - FIRST_BERRY + 1, STR_CONV_MODE_LEADING_ZEROS, 2);
+    ConvertIntToDecimalStringN(gStringVar1, gSpecialVar_ItemId - FIRST_BERRY + 1, STR_CONV_MODE_LEADING_ZEROS, 2);
     MenuPrint(gStringVar1, 12, 4);
 
 #if ENGLISH
@@ -437,7 +437,7 @@ static void sub_8146810(s8 berry)
             gBagPocketScrollStates[berryPocket].cursorPos += berry;
         }
     }
-    gScriptItemId = gCurrentBagPocketItemSlots[gBagPocketScrollStates[berryPocket].scrollTop + gBagPocketScrollStates[berryPocket].cursorPos].itemId;
+    gSpecialVar_ItemId = gCurrentBagPocketItemSlots[gBagPocketScrollStates[berryPocket].scrollTop + gBagPocketScrollStates[berryPocket].cursorPos].itemId;
     DestroySprite(&gSprites[gUnknown_0203932C]);
     sub_81466A0();
     sub_80A7DD4();
@@ -449,7 +449,7 @@ static void sub_81468BC(void)
     sub_81464E4();
 
     // center of berry sprite
-    gUnknown_0203932C = CreateBerrySprite(gScriptItemId + OFFSET_7B, 56, 64);
+    gUnknown_0203932C = CreateBerrySprite(gSpecialVar_ItemId + OFFSET_7B, 56, 64);
 
-    sub_8146600(gScriptItemId + OFFSET_7B);
+    sub_8146600(gSpecialVar_ItemId + OFFSET_7B);
 }

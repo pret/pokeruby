@@ -4,13 +4,13 @@ InsideOfTruck_MapScripts:: @ 815FBFF
 	.byte 0
 
 InsideOfTruck_MapScript1_15FC0A:: @ 815FC0A
-	setmaptile 4, 1, 520, 0
-	setmaptile 4, 2, 528, 0
-	setmaptile 4, 3, 536, 0
+	setmetatile 4, 1, 520, 0
+	setmetatile 4, 2, 528, 0
+	setmetatile 4, 3, 536, 0
 	end
 
 InsideOfTruck_MapScript1_15FC26:: @ 815FC26
-	tileeffect 5
+	setstepcallback 5
 	end
 
 InsideOfTruck_EventScript_15FC29:: @ 815FC29
@@ -24,26 +24,26 @@ InsideOfTruck_EventScript_15FC29:: @ 815FC29
 	end
 
 InsideOfTruck_EventScript_15FC45:: @ 815FC45
-	sethealplace 1
+	setrespawn 1
 	setvar 0x4092, 1
-	setflag 759
-	setflag 762
-	setflag 784
-	setflag 760
+	setflag FLAG_HIDE_MAY_MOM_DOWNSTAIRS
+	setflag FLAG_HIDE_MOVING_TRUCK_MAY
+	setflag FLAG_HIDE_BRENDAN_MOM
+	setflag FLAG_HIDE_BRENDAN_UPSTAIRS
 	setvar 0x408c, 1
-	setdynamicwarp LittlerootTown, 255, 3, 10
+	setdynamicwarp MAP_LITTLEROOT_TOWN, 255, 3, 10
 	releaseall
 	end
 
 InsideOfTruck_EventScript_15FC68:: @ 815FC68
-	sethealplace 2
+	setrespawn 2
 	setvar 0x4092, 2
-	setflag 758
-	setflag 761
-	setflag 785
-	setflag 722
+	setflag FLAG_HIDE_BRENDAN_MOM_DOWNSTAIRS
+	setflag FLAG_HIDE_MOVING_TRUCK_BRENDAN
+	setflag FLAG_HIDE_MAY_MOM
+	setflag FLAG_HIDE_MAY_UPSTAIRS
 	setvar 0x4082, 1
-	setdynamicwarp LittlerootTown, 255, 12, 10
+	setdynamicwarp MAP_LITTLEROOT_TOWN, 255, 12, 10
 	releaseall
 	end
 

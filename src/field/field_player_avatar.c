@@ -9,15 +9,15 @@
 #include "field_map_obj_helpers.h"
 #include "fieldmap.h"
 #include "main.h"
-#include "map_object_constants.h"
+#include "constants/map_objects.h"
 #include "menu.h"
 #include "metatile_behavior.h"
 #include "party_menu.h"
-#include "rng.h"
+#include "random.h"
 #include "overworld.h"
 #include "rotating_gate.h"
 #include "script.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "strings2.h"
 #include "task.h"
@@ -31,7 +31,7 @@ static bool8 sub_8058854(struct MapObject *, u8);
 static void npc_clear_strange_bits(struct MapObject *a);
 static void MovePlayerAvatarUsingKeypadInput(u8 a, u16 b, u16 c);
 static void PlayerAllowForcedMovementIfMovingSameDirection(void);
-static u8 TryDoMetatileBehaviorForcedMovement(void);
+static bool8 TryDoMetatileBehaviorForcedMovement(void);
 static u8 GetForcedMovementByMetatileBehavior(void);
 static void MovePlayerNotOnBike(u8 a, u16 b);
 static u8 CheckMovementInputNotOnBike(u8 a);
@@ -49,7 +49,7 @@ static void PlayerNotOnBikeCollide(u8 a);
 static void PlayCollisionSoundIfNotFacingWarp(u8 a);
 static void sub_8059D60(struct MapObject *a);
 static void StartStrengthAnim(u8 a, u8 b);
-static void sub_8059F94(void);
+static void DoPlayerMatJump(void);
 static void sub_805A06C(void);
 
 static bool8 (*const gUnknown_0830FB58[])(u8) =
@@ -73,7 +73,7 @@ static bool8 (*const gUnknown_0830FB58[])(u8) =
     MetatileBehavior_0xBC,
     MetatileBehavior_IsMuddySlope,
 };
-static u8 (*const gUnknown_0830FBA0[])(void) =
+static bool8 (*const gUnknown_0830FBA0[])(void) =
 {
     ForcedMovement_None,
     ForcedMovement_Slip,
@@ -91,7 +91,7 @@ static u8 (*const gUnknown_0830FBA0[])(void) =
     ForcedMovement_SlideWest,
     ForcedMovement_SlideEast,
     sub_8058B0C,
-    sub_8058C04,
+    ForcedMovement_MatJump,
     sub_8058C10,
     ForcedMovement_MuddySlope,
 };
@@ -182,9 +182,9 @@ static u8 (*const gUnknown_0830FC88[])(struct Task *, struct MapObject *, struct
     sub_8059EA4,
     sub_8059F40,
 };
-static u8 (*const gUnknown_0830FC94[])(struct Task *, struct MapObject *) =
+static u8 (*const sPlayerAvatarSecretBaseMatJump[])(struct Task *, struct MapObject *) =
 {
-    sub_805A000,
+    PlayerAvatar_DoSecretBaseMatJump,
 };
 static u8 (*const gUnknown_0830FC98[])(struct Task *, struct MapObject *) =
 {
@@ -201,9 +201,9 @@ void player_step(u8 direction, u16 newKeys, u16 heldKeys)
     struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
 
     sub_8059D60(playerMapObj);
-    if (gPlayerAvatar.unk6 == 0)
+    if (gPlayerAvatar.preventStep == FALSE)
     {
-        sub_80E5B38(newKeys, heldKeys);
+        Bike_TryAcroBikeHistoryUpdate(newKeys, heldKeys);
         if (!sub_8058854(playerMapObj, direction))
         {
             npc_clear_strange_bits(playerMapObj);
@@ -256,11 +256,11 @@ static void MovePlayerAvatarUsingKeypadInput(u8 direction, u16 newKeys, u16 held
 
 static void PlayerAllowForcedMovementIfMovingSameDirection(void)
 {
-    if (gPlayerAvatar.running2 == 2)
+    if (gPlayerAvatar.runningState == MOVING)
         gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_5;
 }
 
-static u8 TryDoMetatileBehaviorForcedMovement(void)
+static bool8 TryDoMetatileBehaviorForcedMovement(void)
 {
     return gUnknown_0830FBA0[GetForcedMovementByMetatileBehavior()]();
 }
@@ -282,7 +282,7 @@ static u8 GetForcedMovementByMetatileBehavior(void)
     return 0;
 }
 
-u8 ForcedMovement_None(void)
+bool8 ForcedMovement_None(void)
 {
     if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_6)
     {
@@ -293,7 +293,7 @@ u8 ForcedMovement_None(void)
         FieldObjectSetDirection(playerMapObj, playerMapObj->mapobj_unk_18);
         gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_6;
     }
-    return 0;
+    return FALSE;
 }
 
 static u8 DoForcedMovement(u8 direction, void (*b)(u8))
@@ -314,13 +314,13 @@ static u8 DoForcedMovement(u8 direction, void (*b)(u8))
             if (collisionType == COLLISION_LEDGE_JUMP)
                 PlayerJumpLedge(direction);
             playerAvatar->flags |= PLAYER_AVATAR_FLAG_6;
-            playerAvatar->running2 = 2;
+            playerAvatar->runningState = MOVING;
             return 1;
         }
     }
     else
     {
-        playerAvatar->running2 = 2;
+        playerAvatar->runningState = MOVING;
         b(direction);
         return 1;
     }
@@ -334,47 +334,47 @@ static u8 DoForcedMovementInCurrentDirection(void (*a)(u8))
     return DoForcedMovement(playerMapObj->placeholder18, a);
 }
 
-u8 ForcedMovement_Slip(void)
+bool8 ForcedMovement_Slip(void)
 {
-    return DoForcedMovementInCurrentDirection(sub_80593C4);
+    return DoForcedMovementInCurrentDirection(PlayerGoSpeed2);
 }
 
-u8 sub_8058AAC(void)
+bool8 sub_8058AAC(void)
 {
-    return DoForcedMovement(1, PlayerGoSpeed0);
+    return DoForcedMovement(1, PlayerGoSpeed1);
 }
 
-u8 sub_8058AC4(void)
+bool8 sub_8058AC4(void)
 {
-    return DoForcedMovement(2, PlayerGoSpeed0);
+    return DoForcedMovement(2, PlayerGoSpeed1);
 }
 
-u8 sub_8058ADC(void)
+bool8 sub_8058ADC(void)
 {
-    return DoForcedMovement(3, PlayerGoSpeed0);
+    return DoForcedMovement(3, PlayerGoSpeed1);
 }
 
-u8 sub_8058AF4(void)
+bool8 sub_8058AF4(void)
 {
-    return DoForcedMovement(4, PlayerGoSpeed0);
+    return DoForcedMovement(4, PlayerGoSpeed1);
 }
 
-u8 sub_8058B0C(void)
+bool8 sub_8058B0C(void)
 {
     return DoForcedMovement(1, npc_use_some_d2s);
 }
 
-u8 sub_8058B24(void)
+bool8 sub_8058B24(void)
 {
     return DoForcedMovement(2, npc_use_some_d2s);
 }
 
-u8 sub_8058B3C(void)
+bool8 sub_8058B3C(void)
 {
     return DoForcedMovement(3, npc_use_some_d2s);
 }
 
-u8 sub_8058B54(void)
+bool8 sub_8058B54(void)
 {
     return DoForcedMovement(4, npc_use_some_d2s);
 }
@@ -388,51 +388,51 @@ static u8 ForcedMovement_Slide(u8 direction, void (*b)(u8))
     return DoForcedMovement(direction, b);
 }
 
-u8 ForcedMovement_SlideSouth(void)
+bool8 ForcedMovement_SlideSouth(void)
 {
-    return ForcedMovement_Slide(1, sub_80593C4);
+    return ForcedMovement_Slide(1, PlayerGoSpeed2);
 }
 
-u8 ForcedMovement_SlideNorth(void)
+bool8 ForcedMovement_SlideNorth(void)
 {
-    return ForcedMovement_Slide(2, sub_80593C4);
+    return ForcedMovement_Slide(2, PlayerGoSpeed2);
 }
 
-u8 ForcedMovement_SlideWest(void)
+bool8 ForcedMovement_SlideWest(void)
 {
-    return ForcedMovement_Slide(3, sub_80593C4);
+    return ForcedMovement_Slide(3, PlayerGoSpeed2);
 }
 
-u8 ForcedMovement_SlideEast(void)
+bool8 ForcedMovement_SlideEast(void)
 {
-    return ForcedMovement_Slide(4, sub_80593C4);
+    return ForcedMovement_Slide(4, PlayerGoSpeed2);
 }
 
-u8 sub_8058C04(void)
+bool8 ForcedMovement_MatJump(void)
 {
-    sub_8059F94();
-    return 1;
+    DoPlayerMatJump();
+    return TRUE;
 }
 
-u8 sub_8058C10(void)
+bool8 sub_8058C10(void)
 {
     sub_805A06C();
-    return 1;
+    return TRUE;
 }
 
-u8 ForcedMovement_MuddySlope(void)
+bool8 ForcedMovement_MuddySlope(void)
 {
     struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
 
     if (playerMapObj->placeholder18 != 2 || GetPlayerSpeed() <= 3)
     {
-        sub_80E6010(0);
+        Bike_UpdateBikeCounterSpeed(0);
         playerMapObj->mapobj_bit_9 = 1;
-        return DoForcedMovement(1, sub_80593C4);
+        return DoForcedMovement(1, PlayerGoSpeed2);
     }
     else
     {
-        return 0;
+        return FALSE;
     }
 }
 
@@ -445,17 +445,17 @@ static u8 CheckMovementInputNotOnBike(u8 direction)
 {
     if (direction == DIR_NONE)
     {
-        gPlayerAvatar.running2 = 0;
+        gPlayerAvatar.runningState = NOT_MOVING;
         return 0;
     }
-    else if (direction != player_get_direction_upper_nybble() && gPlayerAvatar.running2 != 2)
+    else if (direction != player_get_direction_upper_nybble() && gPlayerAvatar.runningState != MOVING)
     {
-        gPlayerAvatar.running2 = 1;
+        gPlayerAvatar.runningState = TURN_DIRECTION;
         return 1;
     }
     else
     {
-        gPlayerAvatar.running2 = 2;
+        gPlayerAvatar.runningState = MOVING;
         return 2;
     }
 }
@@ -486,10 +486,11 @@ void sub_8058D0C(u8 direction, u16 heldKeys)
     case 0:
         if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
         {
-            sub_80593C4(direction);
+			// speed 2 is fast, same speed as running
+            PlayerGoSpeed2(direction);
             return;
         }
-        if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_4) && (heldKeys & B_BUTTON) && FlagGet(SYS_B_DASH)
+        if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_4) && (heldKeys & B_BUTTON) && FlagGet(FLAG_SYS_B_DASH)
          && IsRunningDisallowed(gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_1E) == 0)
         {
             sub_805940C(direction);
@@ -497,7 +498,7 @@ void sub_8058D0C(u8 direction, u16 heldKeys)
         }
         else
         {
-            PlayerGoSpeed0(direction);
+            PlayerGoSpeed1(direction);
         }
     }
 }
@@ -562,7 +563,7 @@ static bool8 ShouldJumpLedge(s16 a, s16 b, u8 c)
 
 static u8 sub_8058F6C(s16 a, s16 b, u8 c)
 {
-    if (FlagGet(SYS_USE_STRENGTH))
+    if (FlagGet(FLAG_SYS_USE_STRENGTH))
     {
         u8 mapObjectId = GetFieldObjectIdByXY(a, b);
 
@@ -601,14 +602,14 @@ static void check_acro_bike_metatile(int unused1, int unused2, u8 c, u8 *d)
 
 void SetPlayerAvatarTransitionFlags(u16 a)
 {
-    gPlayerAvatar.bike |= a;
+    gPlayerAvatar.unk1 |= a;
     DoPlayerAvatarTransition();
 }
 
 static void DoPlayerAvatarTransition(void)
 {
     u8 i;
-    u32 flags = gPlayerAvatar.bike;
+    u32 flags = gPlayerAvatar.unk1;
 
     if (flags != 0)
     {
@@ -627,7 +628,7 @@ static void DoPlayerAvatarTransition(void)
             }
 #endif
         }
-        gPlayerAvatar.bike = 0;
+        gPlayerAvatar.unk1 = 0;
     }
 }
 
@@ -656,7 +657,7 @@ void PlayerAvatarTransition_AcroBike(struct MapObject *a)
     FieldObjectTurn(a, a->placeholder18);
     SetPlayerAvatarStateMask(4);
     BikeClearState(0, 0);
-    sub_80E6084();
+    Bike_HandleBumpySlopeJump();
 }
 
 void PlayerAvatarTransition_Surfing(struct MapObject *a)
@@ -689,18 +690,18 @@ void sub_80591F4(struct MapObject *a)
 
 void sub_8059204(void)
 {
-    gPlayerAvatar.running1 = 0;
+    gPlayerAvatar.tileTransitionState = T_NOT_MOVING;
     if (PlayerIsAnimActive())
     {
         if (!PlayerCheckIfAnimFinishedOrInactive())
         {
             if (!player_is_anim_in_certain_ranges())
-                gPlayerAvatar.running1 = 1;
+                gPlayerAvatar.tileTransitionState = T_TILE_TRANSITION;
         }
         else
         {
             if (!sub_80592A4())
-                gPlayerAvatar.running1 = 2;
+                gPlayerAvatar.tileTransitionState = T_TILE_CENTER;
         }
     }
 }
@@ -721,7 +722,7 @@ static bool8 player_is_anim_in_certain_ranges(void)
 
 static bool8 sub_80592A4(void)
 {
-    if (player_is_anim_in_certain_ranges() && gPlayerAvatar.running2 != 1)
+    if (player_is_anim_in_certain_ranges() && gPlayerAvatar.runningState != TURN_DIRECTION)
         return TRUE;
     else
         return FALSE;
@@ -761,12 +762,14 @@ void PlayerSetAnimId(u8 animId, u8 b)
     }
 }
 
-void PlayerGoSpeed0(u8 a)
+// normal speed (1 speed)
+void PlayerGoSpeed1(u8 a)
 {
     PlayerSetAnimId(GetGoSpeed0AnimId(a), 2);
 }
 
-void sub_80593C4(u8 a)
+// fast speed (2 speed)
+void PlayerGoSpeed2(u8 a)
 {
     PlayerSetAnimId(sub_8060744(a), 2);
 }
@@ -776,7 +779,8 @@ void npc_use_some_d2s(u8 a)
     PlayerSetAnimId(d2s_08064034(a), 2);
 }
 
-void sub_80593F4(u8 a)
+// fastest speed (4 speed)
+void PlayerGoSpeed4(u8 a)
 {
     PlayerSetAnimId(sub_806079C(a), 2);
 }
@@ -816,48 +820,54 @@ void PlayerJumpLedge(u8 direction)
 
 void sub_80594C0(void)
 {
-    if (gPlayerAvatar.running1 == 2 || gPlayerAvatar.running1 == 0)
+    if (gPlayerAvatar.tileTransitionState == T_TILE_CENTER || gPlayerAvatar.tileTransitionState == T_NOT_MOVING)
     {
         if (player_should_look_direction_be_enforced_upon_movement())
             sub_8059348(GetFaceDirectionAnimId(gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_18));
     }
 }
 
-void sub_8059504(u8 a)
+// wheelie idle
+void PlayerIdleWheelie(u8 a)
 {
     PlayerSetAnimId(sub_80609D8(a), 1);
 }
 
-//normal to wheelie
+// normal to wheelie
 void PlayerStartWheelie(u8 a)
 {
     PlayerSetAnimId(sub_8060A04(a), 1);
 }
 
-void sub_8059534(u8 a)
+// wheelie to normal
+void PlayerEndWheelie(u8 a)
 {
     PlayerSetAnimId(sub_8060A30(a), 1);
 }
 
-void sub_805954C(u8 a)
+// wheelie hopping standing
+void PlayerStandingHoppingWheelie(u8 a)
 {
     PlaySE(SE_JITE_PYOKO);
     PlayerSetAnimId(sub_8060A5C(a), 1);
 }
 
-void sub_8059570(u8 a)
+// wheelie hopping moving
+void PlayerMovingHoppingWheelie(u8 a)
 {
     PlaySE(SE_JITE_PYOKO);
     PlayerSetAnimId(sub_8060A88(a), 2);
 }
 
-void sub_8059594(u8 a)
+// wheelie hopping ledge
+void PlayerLedgeHoppingWheelie(u8 a)
 {
     PlaySE(SE_JITE_PYOKO);
     PlayerSetAnimId(sub_8060AB4(a), 8);
 }
 
-void sub_80595B8(u8 direction)
+// acro turn jump
+void PlayerAcroTurnJump(u8 direction)
 {
     PlaySE(SE_JITE_PYOKO);
     PlayerSetAnimId(sub_8060878(direction), 1);
@@ -963,8 +973,8 @@ void sub_80597F4(void)
     FieldObjectSetDirection(playerMapObj, playerMapObj->mapobj_unk_18);
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
     {
-        sub_80E6084();
-        sub_80E6010(0);
+        Bike_HandleBumpySlopeJump();
+        Bike_UpdateBikeCounterSpeed(0);
     }
 }
 
@@ -1060,7 +1070,6 @@ bool8 IsPlayerFacingSurfableFishableWater(void)
 
 void ClearPlayerAvatarInfo(void)
 {
-    //TODO: 0x24 should be the size of gPlayerAvatar
     memset(&gPlayerAvatar, 0, sizeof(struct PlayerAvatar));
 }
 
@@ -1099,7 +1108,7 @@ void SetPlayerAvatarExtraStateTransition(u8 a, u8 b)
 {
     u8 unk = GetPlayerAvatarStateTransitionByGraphicsId(a, gPlayerAvatar.gender);
 
-    gPlayerAvatar.bike |= unk | b;
+    gPlayerAvatar.unk1 |= unk | b;
     DoPlayerAvatarTransition();
 }
 
@@ -1127,8 +1136,8 @@ void InitPlayerAvatar(s16 x, s16 y, u8 direction, u8 gender)
     mapObject->mapobj_unk_1B = sub_8126B54();
     FieldObjectTurn(mapObject, direction);
     ClearPlayerAvatarInfo();
-    gPlayerAvatar.running2 = 0;
-    gPlayerAvatar.running1 = 0;
+    gPlayerAvatar.runningState = NOT_MOVING;
+    gPlayerAvatar.tileTransitionState = T_NOT_MOVING;
     gPlayerAvatar.mapObjectId = mapObjectId;
     gPlayerAvatar.spriteId = mapObject->spriteId;
     gPlayerAvatar.gender = gender;
@@ -1212,7 +1221,7 @@ static void sub_8059E2C(u8 taskId)
 u8 sub_8059E84(struct Task *task, struct MapObject *b, struct MapObject *c)
 {
     ScriptContext2_Enable();
-    gPlayerAvatar.unk6 = 1;
+    gPlayerAvatar.preventStep = TRUE;
     task->data[0]++;
     return 0;
 }
@@ -1244,7 +1253,7 @@ u8 sub_8059F40(struct Task *task, struct MapObject *b, struct MapObject *c)
     {
         FieldObjectClearAnimIfSpecialAnimFinished(b);
         FieldObjectClearAnimIfSpecialAnimFinished(c);
-        gPlayerAvatar.unk6 = 0;
+        gPlayerAvatar.preventStep = FALSE;
         ScriptContext2_Disable();
         DestroyTask(FindTaskIdByFunc(sub_8059E2C));
     }
@@ -1253,24 +1262,23 @@ u8 sub_8059F40(struct Task *task, struct MapObject *b, struct MapObject *c)
 
 /* Some field effect */
 
-static void sub_8059FB4(u8 taskId);
+static void DoPlayerAvatarSecretBaseMatJump(u8 taskId);
 
-static void sub_8059F94(void)
+static void DoPlayerMatJump(void)
 {
-    u8 taskId = CreateTask(sub_8059FB4, 0xFF);
-
-    sub_8059FB4(taskId);
+    DoPlayerAvatarSecretBaseMatJump(CreateTask(DoPlayerAvatarSecretBaseMatJump, 0xFF));
 }
 
-static void sub_8059FB4(u8 taskId)
+static void DoPlayerAvatarSecretBaseMatJump(u8 taskId)
 {
-    while (gUnknown_0830FC94[gTasks[taskId].data[0]](&gTasks[taskId], &gMapObjects[gPlayerAvatar.mapObjectId]))
+    while (sPlayerAvatarSecretBaseMatJump[gTasks[taskId].data[0]](&gTasks[taskId], &gMapObjects[gPlayerAvatar.mapObjectId]))
         ;
 }
 
-u8 sub_805A000(struct Task *task, struct MapObject *mapObject)
+// because data[0] is used to call this, it can be inferred that there may have been multiple mat jump functions at one point, so the name for these groups of functions is appropriate in assuming the sole use of mat jump.
+u8 PlayerAvatar_DoSecretBaseMatJump(struct Task *task, struct MapObject *mapObject)
 {
-    gPlayerAvatar.unk6 = 1;
+    gPlayerAvatar.preventStep = TRUE;
     if (FieldObjectClearAnimIfSpecialAnimFinished(mapObject))
     {
         PlaySE(SE_DANSA);
@@ -1278,9 +1286,9 @@ u8 sub_805A000(struct Task *task, struct MapObject *mapObject)
         task->data[1]++;
         if (task->data[1] > 1)
         {
-            gPlayerAvatar.unk6 = 0;
-            gPlayerAvatar.bike |= 0x20;
-            DestroyTask(FindTaskIdByFunc(sub_8059FB4));
+            gPlayerAvatar.preventStep = FALSE;
+            gPlayerAvatar.unk1 |= 0x20;
+            DestroyTask(FindTaskIdByFunc(DoPlayerAvatarSecretBaseMatJump));
         }
     }
     return 0;
@@ -1307,7 +1315,7 @@ u8 sub_805A0D8(struct Task *task, struct MapObject *mapObject)
 {
     task->data[0]++;
     task->data[1] = mapObject->placeholder18;
-    gPlayerAvatar.unk6 = 1;
+    gPlayerAvatar.preventStep = TRUE;
     ScriptContext2_Enable();
     PlaySE(SE_TK_WARPIN);
     return 1;
@@ -1349,7 +1357,7 @@ u8 sub_805A1B8(struct Task *task, struct MapObject *mapObject)
     {
         FieldObjectSetSpecialAnim(mapObject, GetSimpleGoAnimId(GetOppositeDirection(task->data[1])));
         ScriptContext2_Disable();
-        gPlayerAvatar.unk6 = 0;
+        gPlayerAvatar.preventStep = FALSE;
         DestroyTask(FindTaskIdByFunc(sub_805A08C));
     }
     return 0;
@@ -1369,7 +1377,7 @@ void sub_805A20C(u8 a)
     Overworld_ChangeMusicToDefault();
     gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_SURFING;
     gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_ON_FOOT;
-    gPlayerAvatar.unk6 = 1;
+    gPlayerAvatar.preventStep = TRUE;
     taskId = CreateTask(taskFF_0805D1D4, 0xFF);
     gTasks[taskId].data[0] = a;
     taskFF_0805D1D4(taskId);
@@ -1397,7 +1405,7 @@ static void sub_805A2D0(u8 taskId)
     {
         sub_805B980(playerMapObj, GetPlayerAvatarGraphicsIdByStateId(0));
         FieldObjectSetSpecialAnim(playerMapObj, GetFaceDirectionAnimId(playerMapObj->mapobj_unk_18));
-        gPlayerAvatar.unk6 = 0;
+        gPlayerAvatar.preventStep = FALSE;
         ScriptContext2_Disable();
         DestroySprite(&gSprites[playerMapObj->mapobj_unk_1A]);
         DestroyTask(taskId);
@@ -1462,7 +1470,7 @@ static void Task_Fishing(u8 taskId)
 u8 Fishing1(struct Task *task)
 {
     ScriptContext2_Enable();
-    gPlayerAvatar.unk6 = 1;
+    gPlayerAvatar.preventStep = TRUE;
     task->tStep++;
     return 0;
 }
@@ -1647,7 +1655,7 @@ u8 Fishing11(struct Task *task)
 
     if (task->tFrameCounter != 0)
     {
-        gPlayerAvatar.unk6 = 0;
+        gPlayerAvatar.preventStep = FALSE;
         ScriptContext2_Disable();
         FishingWildEncounter(task->tFishingRod);
         sub_80BE97C(1);
@@ -1707,7 +1715,7 @@ u8 Fishing16(struct Task *task)
 {
     if (MenuUpdateWindowText())
     {
-        gPlayerAvatar.unk6 = 0;
+        gPlayerAvatar.preventStep = FALSE;
         ScriptContext2_Disable();
         UnfreezeMapObjects();
         MenuZeroFillScreen();

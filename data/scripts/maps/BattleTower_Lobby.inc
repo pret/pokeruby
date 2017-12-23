@@ -13,14 +13,14 @@ BattleTower_Lobby_MapScript1_160293:: @ 8160293
 BattleTower_Lobby_EventScript_16029C:: @ 816029C
 	setvar 0x8004, 10
 	special sub_8135668
-	checkflag 238
+	checkflag FLAG_RECEIVED_GOLD_SHIELD
 	goto_if_eq BattleTower_Lobby_EventScript_1602E4
-	checkflag 237
+	checkflag FLAG_RECEIVED_SILVER_SHIELD
 	goto_if_eq BattleTower_Lobby_EventScript_1602CD
 	specialvar 0x8007, sub_810F404
 	compare 0x8007, 50
 	goto_if 0, BattleTower_Lobby_EventScript_1602E4
-	clearflag 941
+	clearflag FLAG_HIDE_AWARD_MAN_BATTLE_TOWER
 	special sub_810F8FC
 	return
 
@@ -28,12 +28,12 @@ BattleTower_Lobby_EventScript_1602CD:: @ 81602CD
 	specialvar 0x8007, sub_810F404
 	compare 0x8007, 100
 	goto_if 0, BattleTower_Lobby_EventScript_1602E4
-	clearflag 941
+	clearflag FLAG_HIDE_AWARD_MAN_BATTLE_TOWER
 	special sub_810F8FC
 	return
 
 BattleTower_Lobby_EventScript_1602E4:: @ 81602E4
-	setflag 941
+	setflag FLAG_HIDE_AWARD_MAN_BATTLE_TOWER
 	return
 
 BattleTower_Lobby_MapScript1_1602E8:: @ 81602E8
@@ -79,7 +79,7 @@ BattleTower_Lobby_EventScript_160342:: @ 8160342
 	special sub_81358A4
 	compare RESULT, 6
 	goto_if_eq BattleTower_Lobby_EventScript_16037D
-	special sub_8135E50
+	special AwardBattleTowerRibbons
 	compare RESULT, 0
 	goto_if_eq BattleTower_Lobby_EventScript_16037D
 	message BattleTower_Lobby_Text_19A6BE
@@ -97,7 +97,7 @@ BattleTower_Lobby_EventScript_16037D:: @ 816037D
 	waitmessage
 	setvar 0x8004, 13
 	special sub_8135668
-	special sub_8135D84
+	special DetermineBattleTowerPrize
 	setvar 0x8004, 3
 	special sub_8135BA0
 	playse 55
@@ -109,7 +109,7 @@ BattleTower_Lobby_EventScript_1603AD:: @ 81603AD
 	special sub_8135668
 	message BattleTower_Lobby_Text_19A4BB
 	waitmessage
-	special sub_8135DEC
+	special GiveBattleTowerPrize
 	switch RESULT
 	case 0, BattleTower_Lobby_EventScript_160408
 	message BattleTower_Lobby_Text_19A506
@@ -177,7 +177,7 @@ BattleTower_Lobby_EventScript_16044B:: @ 816044B
 	msgbox BattleTower_Lobby_Text_19A0A8, 4
 	closemessage
 	call BattleTower_Lobby_EventScript_160664
-	warp BattleTower_Elevator, 255, 1, 6
+	warp MAP_BATTLE_TOWER_ELEVATOR, 255, 1, 6
 	setvar 0x4000, 0
 	waitstate
 
@@ -254,7 +254,7 @@ BattleTower_Lobby_EventScript_160587:: @ 8160587
 	msgbox BattleTower_Lobby_Text_19A0A8, 4
 	closemessage
 	call BattleTower_Lobby_EventScript_160664
-	warp BattleTower_Elevator, 255, 1, 6
+	warp MAP_BATTLE_TOWER_ELEVATOR, 255, 1, 6
 	setvar 0x4000, 0
 	waitstate
 
@@ -379,7 +379,7 @@ BattleTower_Lobby_EventScript_16071E:: @ 816071E
 BattleTower_Lobby_EventScript_160727:: @ 8160727
 	lockall
 	special ShowBattleTowerRecords
-	waitbutton
+	waitbuttonpress
 	erasebox 0, 0, 29, 19
 	releaseall
 	end
@@ -387,16 +387,16 @@ BattleTower_Lobby_EventScript_160727:: @ 8160727
 BattleTower_Lobby_EventScript_160733:: @ 8160733
 	lock
 	faceplayer
-	checkflag 238
+	checkflag FLAG_RECEIVED_GOLD_SHIELD
 	goto_if_eq BattleTower_Lobby_EventScript_1607C5
-	checkflag 237
+	checkflag FLAG_RECEIVED_SILVER_SHIELD
 	goto_if_eq BattleTower_Lobby_EventScript_160773
 	msgbox BattleTower_Lobby_Text_19A9EE, 4
-	setvar 0x8008, 42
-	givedecoration 42
+	setvar 0x8008, DECOR_SILVER_SHIELD
+	givedecoration_std DECOR_SILVER_SHIELD
 	compare RESULT, 0
 	goto_if_eq BattleTower_Lobby_EventScript_1607AF
-	setflag 237
+	setflag FLAG_RECEIVED_SILVER_SHIELD
 	msgbox BattleTower_Lobby_Text_19ABAA, 4
 	release
 	end
@@ -406,17 +406,17 @@ BattleTower_Lobby_EventScript_160773:: @ 8160773
 	compare RESULT, 100
 	goto_if 0, BattleTower_Lobby_EventScript_1607C5
 	msgbox BattleTower_Lobby_Text_19AAC4, 4
-	setvar 0x8008, 43
-	givedecoration 43
+	setvar 0x8008, DECOR_GOLD_SHIELD
+	givedecoration_std DECOR_GOLD_SHIELD
 	compare RESULT, 0
 	goto_if_eq BattleTower_Lobby_EventScript_1607AF
-	setflag 238
+	setflag FLAG_RECEIVED_GOLD_SHIELD
 	msgbox BattleTower_Lobby_Text_19ABAA, 4
 	release
 	end
 
 BattleTower_Lobby_EventScript_1607AF:: @ 81607AF
-	getdecorname 1, 0x8008
+	bufferdecorationname 1, 0x8008
 	msgbox BattleTower_Lobby_Text_1A0CEF, 4
 	msgbox BattleTower_Lobby_Text_19ABED, 4
 	release

@@ -1,5 +1,6 @@
 #include "global.h"
 #include "berry.h"
+#include "battle_tower.h"
 #include "easy_chat.h"
 #include "event_data.h"
 #include "mail_data.h"
@@ -8,7 +9,7 @@
 #include "pokemon.h"
 #include "pokemon_size_record.h"
 #include "script.h"
-#include "species.h"
+#include "constants/species.h"
 #include "strings.h"
 #include "string_util.h"
 #include "text.h"
@@ -27,7 +28,6 @@
 #endif
 
 extern void party_compaction(void);
-extern void sub_813601C(void);
 
 extern ScrCmdFunc gMysteryEventScriptCmdTable[];
 extern ScrCmdFunc gMysteryEventScriptCmdTableEnd[];
@@ -420,8 +420,8 @@ bool8 MEScrCmd_givepokemon(struct ScriptContext *ctx)
 bool8 MEScrCmd_addtrainer(struct ScriptContext *ctx)
 {
     u32 data = ScriptReadWord(ctx) - ctx->data[1] + ctx->data[0];
-    memcpy(gSaveBlock2.filler_A8.ereaderTrainer, (void *)data, sizeof(gSaveBlock2.filler_A8.ereaderTrainer));
-    sub_813601C();
+    memcpy(&gSaveBlock2.battleTower.ereaderTrainer, (void *)data, sizeof(gSaveBlock2.battleTower.ereaderTrainer));
+    ValidateEReaderTrainer();
     StringExpandPlaceholders(gStringVar4, gOtherText_NewTrainerInHoenn);
     ctx->data[2] = 2;
     return FALSE;

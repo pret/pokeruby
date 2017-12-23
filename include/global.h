@@ -55,6 +55,24 @@ enum
 	B_32 = 4
 };
 
+// There are many quirks in the source code which have overarching behavioral differences from
+// a number of other files. For example, diploma.c seems to declare rodata before each use while
+// other files declare out of order and must be at the beginning. There are also a number of
+// macros which differ from one file to the next due to the method of obtaining the result, such
+// as these below. Because of this, there is a theory (Two Team Theory) that states that these
+// programming projects had more than 1 "programming team" which utilized different macros for
+// each of the files that were worked on.
+#define T1_READ_8(ptr)  ((ptr)[0])
+#define T1_READ_16(ptr) ((ptr)[0] | ((ptr)[1] << 8))
+#define T1_READ_32(ptr) ((ptr)[0] | ((ptr)[1] << 8) | ((ptr)[2] << 16) | ((ptr)[3] << 24))
+#define T1_READ_PTR(ptr) (u8*) T1_READ_32(ptr)
+
+// T2_READ_8 is a duplicate to remain consistent with each group.
+#define T2_READ_8(ptr)  ((ptr)[0])
+#define T2_READ_16(ptr) ((ptr)[0] + ((ptr)[1] << 8))
+#define T2_READ_32(ptr) ((ptr)[0] + ((ptr)[1] << 8) + ((ptr)[2] << 16) + ((ptr)[3] << 24))
+#define T2_READ_PTR(ptr) (void*) T2_READ_32(ptr)
+
 enum
 {
     VERSION_SAPPHIRE = 1,
@@ -130,13 +148,13 @@ struct UCoords16
 
 struct SecretBaseRecord
 {
-    /*ID?*/ /*0x1A08*/ u8 sbr_field_0;
+    /*0x1A08*/ u8 secretBaseId;
     /*0x1A09*/ u8 sbr_field_1_0:4;
     /*0x1A09*/ u8 gender:1;
     /*0x1A09*/ u8 sbr_field_1_5:1;
     /*0x1A09*/ u8 sbr_field_1_6:2;
-    /*0x1A0A*/ u8 sbr_field_2[7]; // 0xFF bytes?
-    /*0x1A12*/ u8 trainerId[4]; // byte 0 is used for determining trainer class
+    /*0x1A0A*/ u8 playerName[OT_NAME_LENGTH];
+    /*0x1A11*/ u8 trainerId[4]; // byte 0 is used for determining trainer class
     /*0x1A16*/ u16 sbr_field_e;
     /*0x1A18*/ u8 sbr_field_10;
     /*0x1A19*/ u8 sbr_field_11;
@@ -150,7 +168,7 @@ struct SecretBaseRecord
     /*0x1AA2*/ u8 partyEVs[6];
 };
 
-#include "game_stat.h"
+#include "constants/game_stat.h"
 #include "global.fieldmap.h"
 #include "global.berry.h"
 #include "pokemon.h"
@@ -569,15 +587,15 @@ struct DayCareMail
 
 struct DayCareStepCountersEtc {
     u32 steps[2];
-    u16 personalityLo;
-    u8 unk_11a;
+    u16 pendingEggPersonality;
+    u8 eggCycleStepsRemaining;
 };
 
 struct RecordMixingDayCareMail
 {
     struct DayCareMail mail[2];
-    u32 unk70;
-    u16 unk74[2];
+    u32 numDaycareMons;
+    u16 itemsHeld[2]; // marks whether or not each daycare mon is currently holding an item.
 };
 
 struct DayCareMisc
@@ -586,7 +604,7 @@ struct DayCareMisc
     struct DayCareStepCountersEtc countersEtc;
 };
 
-struct DayCareData {
+struct DayCare {
     struct BoxPokemon mons[2];
     struct DayCareMisc misc;
 };
@@ -681,10 +699,12 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x2B0D*/ u8 outbreakPokemonProbability;
     /*0x2B0E*/ u16 outbreakUnk5;
     /*0x2B10*/ struct GabbyAndTyData gabbyAndTyData;
-    /*0x2B1C*/ u16 unk2B1C[6];
-    /*0x2B28*/ u16 unk2B28[6];
-    /*0x2B34*/ u16 unk2B34[6];
-    /*0x2B40*/ u16 unk2B40[6];
+    /*0x2B1C*/ struct {
+        /*0x2B1C*/ u16 unk2B1C[6];
+        /*0x2B28*/ u16 unk2B28[6];
+        /*0x2B34*/ u16 unk2B34[6];
+        /*0x2B40*/ u16 unk2B40[6];
+    } easyChats;
     /*0x2B4C*/ struct MailStruct mail[16];
     /*0x2D8C*/ u8 unk2D8C[4];
     /*0x2D90*/ u8 filler_2D90[0x4];
@@ -692,7 +712,7 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x2DD4*/ struct EasyChatPair easyChatPairs[5]; //Dewford trend [0] and some other stuff
     /*0x2DFC*/ u8 filler_2DFC[0x8];
     /*0x2E04*/ SB_Struct sbStruct;
-    /*0x2F9C*/ struct DayCareData daycareData;
+    /*0x2F9C*/ struct DayCare daycare;
     /*0x30B8*/ struct LinkBattleRecord linkBattleRecords[5];
     /*0x3108*/ u8 filler_3108[8];
     /*0x3110*/ u8 giftRibbons[11];
@@ -727,26 +747,74 @@ struct Pokedex
     /*0x44*/ u8 seen[DEX_FLAGS_NO];
 };
 
-struct SaveBlock2_Sub
+struct BattleTowerTrainer
 {
-    /*0x0000, 0x00A8*/ u8 filler_000[0x3D8];
-    /*0x03D8, 0x0480*/ u16 var_480;
-    /*0x03DA, 0x0482*/ u16 var_482;
-    /*0x03DC, 0x0484*/ u8 filler_3DC[0x14];
-    /*0x03F0, 0x0498*/ u8 ereaderTrainer[0xBC];
-    /*0x04AC, 0x0554*/ u8 var_4AC;
-    /*0x04AD, 0x0555*/ u8 var_4AD;
+    u8 trainerClass;
+    u8 name[8];
+    u8 teamFlags;
+    struct {
+        u16 easyChat[6];
+    } greeting;
+};
+
+struct BattleTowerRecord // record mixing
+{
+    /*0x00*/u8 battleTowerLevelType; // 0 = level 50, 1 = level 100
+    /*0x01*/u8 trainerClass;
+    /*0x02*/u16 winStreak;
+    /*0x04*/u8 name[8];
+    /*0x0C*/u8 trainerId[4];
+    /*0x10*/struct {
+        u16 easyChat[6];
+    } greeting;
+    /*0x1C*/struct UnknownPokemonStruct party[3];
+    /*0xA0*/u32 checksum;
+};
+
+struct BattleTowerEReaderTrainer
+{
+    /*0x00*/u8 unk0;
+    /*0x01*/u8 trainerClass;
+    /*0x02*/u16 winStreak;
+    /*0x04*/u8 name[8];
+    /*0x0C*/u8 trainerId[4];
+    /*0x10*/struct {
+        u16 easyChat[6];
+    } greeting;
+    /*0x1C*/struct {
+        u16 easyChat[6];
+    } farewellPlayerLost;
+    /*0x28*/struct {
+        u16 easyChat[6];
+    } farewellPlayerWon;
+    /*0x34*/struct UnknownPokemonStruct party[3];
+    /*0xB8*/u32 checksum;
+};
+
+struct BattleTowerData
+{
+    /*0x0000, 0x00A8*/ struct BattleTowerRecord playerRecord;
+    /*0x00A4, 0x014C*/ struct BattleTowerRecord records[5]; // from record mixing
+    /*0x03D8, 0x0480*/ u16 firstMonSpecies; // species of the first pokemon in the player's battle tower party
+    /*0x03DA, 0x0482*/ u16 defeatedBySpecies; // species of the pokemon that defated the player
+    /*0x03DC, 0x0484*/ u8 defeatedByTrainerName[8];
+    /*0x03E4, 0x048C*/ u8 firstMonNickname[POKEMON_NAME_LENGTH]; // nickname of the first pokemon in the player's battle tower party
+    /*0x03F0, 0x0498*/ struct BattleTowerEReaderTrainer ereaderTrainer;
+    /*0x04AC, 0x0554*/ u8 battleTowerLevelType:1; // 0 = level 50; 1 = level 100
+    /*0x04AC, 0x0554*/ u8 unk_554:1;
+    /*0x04AD, 0x0555*/ u8 battleOutcome;
     /*0x04AE, 0x0556*/ u8 var_4AE[2];
-    /*0x04B0, 0x0558*/ u16 var_4B0;
-    /*0x04B2, 0x055A*/ u16 var_4B2;
-    /*0x04B4, 0x055C*/ u16 var_4B4;
-    /*0x04B6, 0x055E*/ u16 var_4B6;
-    /*0x04B8, 0x0560*/ u16 recordWinStreak[2];
-    /*0x04BC, 0x0564*/ u8 filler_4BC[0xC];
-    /*0x04C8, 0x0570*/ u16 var_4C8;
-    /*0x04CA, 0x0572*/ u16 var_4CA;
-    /*0x04CC, 0x0574*/ u16 winStreak[2];
-    /*0x04D0, 0x0578*/ u8 var_4D0;
+    /*0x04B0, 0x0558*/ u16 curChallengeBattleNum[2]; // 1-based index of battle in the current challenge. (challenges consist of 7 battles)
+    /*0x04B4, 0x055C*/ u16 curStreakChallengesNum[2]; // 1-based index of the current challenge in the current streak.
+    /*0x04B8, 0x0560*/ u16 recordWinStreaks[2];
+    /*0x04BC, 0x0564*/ u8 battleTowerTrainerId; // index for gBattleTowerTrainers table
+    /*0x04BD, 0x0565*/ u8 selectedPartyMons[0x3]; // indices of the 3 selected player party mons.
+    /*0x04C0, 0x0568*/ u16 prizeItem;
+    /*0x04C2, 0x056A*/ u8 filler_4C2[0x6];
+    /*0x04C8, 0x0570*/ u16 totalBattleTowerWins;
+    /*0x04CA, 0x0572*/ u16 bestBattleTowerWinStreak;
+    /*0x04CC, 0x0574*/ u16 currentWinStreaks[2];
+    /*0x04D0, 0x0578*/ u8 lastStreakLevelType; // 0 = level 50, 1 = level 100.  level type of the last streak. Used by tv to report the level mode.
     /*0x04D1, 0x0579*/ u8 filler_4D1[0x317];
 };
 
@@ -771,7 +839,7 @@ struct SaveBlock2 /* 0x02024EA4 */
     /*0x90*/ u8 filler_90[0x8];
     /*0x98*/ struct Time localTimeOffset;
     /*0xA0*/ struct Time lastBerryTreeUpdate;
-    /*0xA8*/ struct SaveBlock2_Sub filler_A8;
+    /*0xA8*/ struct BattleTowerData battleTower;
 };
 
 struct MapPosition

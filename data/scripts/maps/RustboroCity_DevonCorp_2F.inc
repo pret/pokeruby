@@ -25,7 +25,7 @@ RustboroCity_DevonCorp_2F_EventScript_1574F9:: @ 81574F9
 	faceplayer
 	compare 0x40c4, 1
 	call_if 1, RustboroCity_DevonCorp_2F_EventScript_1574DC
-	checkflag 287
+	checkflag FLAG_MET_DEVON_EMPLOYEE
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_157519
 	msgbox RustboroCity_DevonCorp_2F_Text_182BD8, 4
 	release
@@ -41,7 +41,7 @@ RustboroCity_DevonCorp_2F_EventScript_157523:: @ 8157523
 	faceplayer
 	compare 0x40c4, 1
 	call_if 1, RustboroCity_DevonCorp_2F_EventScript_1574DC
-	checkflag 188
+	checkflag FLAG_RECEIVED_POKENAV
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_157543
 	msgbox RustboroCity_DevonCorp_2F_Text_182D2A, 4
 	release
@@ -88,9 +88,9 @@ RustboroCity_DevonCorp_2F_EventScript_1575A6:: @ 81575A6
 	msgbox RustboroCity_DevonCorp_2F_Text_182F35, 5
 	compare RESULT, 0
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_157636
-	getitemname 0, ITEM_ROOT_FOSSIL
+	bufferitemname 0, ITEM_ROOT_FOSSIL
 	msgbox RustboroCity_DevonCorp_2F_Text_183023, 4
-	removeitem ITEM_ROOT_FOSSIL, 1
+	takeitem ITEM_ROOT_FOSSIL, 1
 	setvar 0x40c4, 1
 	setvar 0x40c5, 1
 	release
@@ -106,9 +106,9 @@ RustboroCity_DevonCorp_2F_EventScript_1575EE:: @ 81575EE
 	msgbox RustboroCity_DevonCorp_2F_Text_182F35, 5
 	compare RESULT, 0
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_157636
-	getitemname 0, ITEM_CLAW_FOSSIL
+	bufferitemname 0, ITEM_CLAW_FOSSIL
 	msgbox RustboroCity_DevonCorp_2F_Text_183023, 4
-	removeitem ITEM_CLAW_FOSSIL, 1
+	takeitem ITEM_CLAW_FOSSIL, 1
 	setvar 0x40c4, 1
 	setvar 0x40c5, 2
 	release
@@ -132,19 +132,19 @@ RustboroCity_DevonCorp_2F_EventScript_15764A:: @ 815764A
 	end
 
 RustboroCity_DevonCorp_2F_EventScript_157661:: @ 8157661
-	getspeciesname 1, SPECIES_LILEEP
+	bufferspeciesname 1, SPECIES_LILEEP
 	msgbox RustboroCity_DevonCorp_2F_Text_183124, 4
-	countpokemon
+	getpartysize
 	compare RESULT, 6
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_157707
 	copyvar 0x8004, RESULT
 	setvar 0x40c4, 0
-	setflag 267
+	setflag FLAG_RECEIVED_FOSSIL_MON
 	playfanfare 370
 	message RustboroCity_DevonCorp_2F_Text_18319E
 	waitfanfare
 	waitmessage
-	givepoke SPECIES_LILEEP, 20, ITEM_NONE, 0x0, 0x0, 0
+	givemon SPECIES_LILEEP, 20, ITEM_NONE, 0x0, 0x0, 0
 	msgbox RustboroCity_DevonCorp_2F_Text_1A1102, 5
 	compare RESULT, 1
 	call_if 1, RustboroCity_DevonCorp_2F_EventScript_1A0678
@@ -152,19 +152,19 @@ RustboroCity_DevonCorp_2F_EventScript_157661:: @ 8157661
 	end
 
 RustboroCity_DevonCorp_2F_EventScript_1576B4:: @ 81576B4
-	getspeciesname 1, SPECIES_ANORITH
+	bufferspeciesname 1, SPECIES_ANORITH
 	msgbox RustboroCity_DevonCorp_2F_Text_183124, 4
-	countpokemon
+	getpartysize
 	compare RESULT, 6
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_157707
 	copyvar 0x8004, RESULT
 	setvar 0x40c4, 0
-	setflag 267
+	setflag FLAG_RECEIVED_FOSSIL_MON
 	playfanfare 370
 	message RustboroCity_DevonCorp_2F_Text_18319E
 	waitfanfare
 	waitmessage
-	givepoke SPECIES_ANORITH, 20, ITEM_NONE, 0x0, 0x0, 0
+	givemon SPECIES_ANORITH, 20, ITEM_NONE, 0x0, 0x0, 0
 	msgbox RustboroCity_DevonCorp_2F_Text_1A1102, 5
 	compare RESULT, 1
 	call_if 1, RustboroCity_DevonCorp_2F_EventScript_1A0678

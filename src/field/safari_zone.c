@@ -37,21 +37,21 @@ extern u8 gUnknown_081C3448;
 extern u8 gUnknown_081C3459;
 extern u8 *gPokeblockNames[];
 
-extern u16 gScriptResult;
+extern u16 gSpecialVar_Result;
 
 bool32 GetSafariZoneFlag(void)
 {
-    return FlagGet(SYS_SAFARI_MODE);
+    return FlagGet(FLAG_SYS_SAFARI_MODE);
 }
 
 void SetSafariZoneFlag(void)
 {
-    FlagSet(SYS_SAFARI_MODE);
+    FlagSet(FLAG_SYS_SAFARI_MODE);
 }
 
 void ResetSafariZoneFlag(void)
 {
-    FlagClear(SYS_SAFARI_MODE);
+    FlagClear(FLAG_SYS_SAFARI_MODE);
 }
 
 void EnterSafariMode(void)
@@ -137,13 +137,13 @@ void SafariZoneGetPokeblockNameInFeeder(void)
          && gPokeblockFeeders[i].x == x
          && gPokeblockFeeders[i].y == y)
         {
-            gScriptResult = i;
+            gSpecialVar_Result = i;
             StringCopy(gStringVar1, gPokeblockNames[gPokeblockFeeders[i].pokeblock.color]);
             return;
         }
     }
 
-    gScriptResult = -1;
+    gSpecialVar_Result = -1;
 }
 
 static void GetPokeblockFeederWithinRange(void)
@@ -166,23 +166,23 @@ static void GetPokeblockFeederWithinRange(void)
                 y *= -1;
             if ((x + y) <= 5)
             {
-                gScriptResult = i;
+                gSpecialVar_Result = i;
                 return;
             }
         }
     }
 
-    gScriptResult = -1;
+    gSpecialVar_Result = -1;
 }
 
 struct Pokeblock *unref_sub_80C8418(void)
 {
     SafariZoneGetPokeblockNameInFeeder();
 
-    if (gScriptResult == 0xFFFF)
+    if (gSpecialVar_Result == 0xFFFF)
         return NULL;
     else
-        return &gPokeblockFeeders[gScriptResult].pokeblock;
+        return &gPokeblockFeeders[gSpecialVar_Result].pokeblock;
 }
 
 
@@ -190,10 +190,10 @@ struct Pokeblock *SafariZoneGetActivePokeblock(void)
 {
     GetPokeblockFeederWithinRange();
 
-    if (gScriptResult == 0xFFFF)
+    if (gSpecialVar_Result == 0xFFFF)
         return NULL;
     else
-        return &gPokeblockFeeders[gScriptResult].pokeblock;
+        return &gPokeblockFeeders[gSpecialVar_Result].pokeblock;
 }
 
 
@@ -240,13 +240,13 @@ bool8 unref_sub_80C853C(void)
 {
     SafariZoneGetPokeblockNameInFeeder();
 
-    if (gScriptResult == 0xFFFF)
+    if (gSpecialVar_Result == 0xFFFF)
     {
         return FALSE;
     }
 
     ConvertIntToDecimalStringN(gStringVar2,
-        gPokeblockFeeders[gScriptResult].stepCounter,
+        gPokeblockFeeders[gSpecialVar_Result].stepCounter,
         STR_CONV_MODE_LEADING_ZEROS, 3);
 
     return TRUE;

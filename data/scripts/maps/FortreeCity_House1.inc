@@ -4,7 +4,7 @@ FortreeCity_House1_MapScripts:: @ 8157E12
 FortreeCity_House1_EventScript_157E13:: @ 8157E13
 	lock
 	faceplayer
-	checkflag 155
+	checkflag FLAG_FORTREE_NPC_TRADE_COMPLETED
 	goto_if_eq FortreeCity_House1_EventScript_157EAD
 	setvar 0x8008, 1
 	copyvar 0x8004, 0x8008
@@ -28,9 +28,9 @@ FortreeCity_House1_EventScript_157E13:: @ 8157E13
 	special sub_804DB68
 	special sub_804E174
 	waitstate
-	getspeciesname 0, 0x8009
+	bufferspeciesname 0, 0x8009
 	msgbox FortreeCity_House1_Text_1856F7, 4
-	setflag 155
+	setflag FLAG_FORTREE_NPC_TRADE_COMPLETED
 	release
 	end
 
@@ -40,7 +40,7 @@ FortreeCity_House1_EventScript_157E95:: @ 8157E95
 	end
 
 FortreeCity_House1_EventScript_157E9F:: @ 8157E9F
-	getspeciesname 0, 0x8009
+	bufferspeciesname 0, 0x8009
 	msgbox FortreeCity_House1_Text_185737, 4
 	release
 	end
@@ -58,8 +58,8 @@ FortreeCity_House1_EventScript_157EC0:: @ 8157EC0
 	lock
 	faceplayer
 	waitse
-	playpokecry SPECIES_ZIGZAGOON, 0
+	playmoncry SPECIES_ZIGZAGOON, 0
 	msgbox FortreeCity_House1_Text_185888, 4
-	waitpokecry
+	waitmoncry
 	release
 	end

@@ -175,6 +175,52 @@
 #define WEATHER_SUN_ANY ((WEATHER_SUN_TEMPORARY | WEATHER_SUN_PERMANENT))
 #define WEATHER_HAIL                (1 << 7)
 
+// status animation table
+#define B_ANIM_STATUS_PSN               0x0
+#define B_ANIM_STATUS_CONFUSION         0x1
+#define B_ANIM_STATUS_BRN               0x2
+#define B_ANIM_STATUS_INFATUATION       0x3
+#define B_ANIM_STATUS_SLP               0x4
+#define B_ANIM_STATUS_PRZ               0x5
+#define B_ANIM_STATUS_FRZ               0x6
+#define B_ANIM_STATUS_CURSED            0x7
+#define B_ANIM_STATUS_NIGHTMARE         0x8
+#define B_ANIM_STATUS_WRAPPED           0x9
+
+// general animation table
+#define B_ANIM_CASTFORM_CHANGE          0x0
+#define B_ANIM_STATS_CHANGE             0x1
+#define B_ANIM_SUBSTITUTE_FADE          0x2
+#define B_ANIM_SUBSTITUTE_APPEAR        0x3
+#define B_ANIM_POKEBLOCK_THROW          0x4
+#define B_ANIM_ITEM_KNOCKOFF            0x5
+#define B_ANIM_TURN_TRAP                0x6
+#define B_ANIM_ITEM_EFFECT              0x7
+#define B_ANIM_SMOKEBALL_ESCAPE         0x8
+#define B_ANIM_HANGED_ON                0x9
+#define B_ANIM_RAIN_CONTINUES           0xA
+#define B_ANIM_SUN_CONTINUES            0xB
+#define B_ANIM_SANDSTORM_CONTINUES      0xC
+#define B_ANIM_HAIL_CONTINUES           0xD
+#define B_ANIM_LEECH_SEED_DRAIN         0xE
+#define B_ANIM_MON_HIT                  0xF
+#define B_ANIM_ITEM_STEAL               0x10
+#define B_ANIM_SNATCH_MOVE              0x11
+#define B_ANIM_FUTURE_SIGHT_HIT         0x12
+#define B_ANIM_DOOM_DESIRE_HIT          0x13
+#define B_ANIM_FOCUS_PUNCH_SET_UP       0x14
+#define B_ANIM_INGRAIN_HEAL             0x15
+#define B_ANIM_WISH_HEAL                0x16
+
+// special animation table
+#define B_ANIM_LVL_UP                   0x0
+#define B_ANIM_SWITCH_OUT_PLAYER_MON    0x1
+#define B_ANIM_SWITCH_OUT_OPPONENT_MON  0x2
+#define B_ANIM_BALL_THROW               0x3
+#define B_ANIM_SAFARI_BALL_THROW        0x4
+#define B_ANIM_SUBSTITUTE_TO_MON        0x5
+#define B_ANIM_MON_TO_SUBSTITUTE        0x6
+
 enum
 {
     BATTLE_TERRAIN_GRASS,
@@ -188,9 +234,6 @@ enum
     BATTLE_TERRAIN_BUILDING,
     BATTLE_TERRAIN_PLAIN,
 };
-
-// needed to match the hack that is get_item, thanks cam, someone else clean this up later.
-extern u8 unk_2000000[];
 
 struct Trainer
 {
@@ -237,7 +280,11 @@ struct AI_ThinkingStruct /* 0x2016800 */
 
 struct BattleStruct /* 0x2000000 */
 {
-    u8 filler0[0x15DDE];
+    /*0x00000*/ u8 unk0;
+    /*0x00001*/ bool8 unk1;
+    /*0x00002*/ u8 unk2;
+    /*0x00003*/ bool8 unk3;
+    u8 filler4[0x15DDA];
     /*0x15DDE*/ u8 unk15DDE;
     /*0x15DDF*/ u8 unk15DDF;
     /*0x15DE0*/ u8 filler15DE0[0x220];
@@ -533,6 +580,21 @@ struct BattleResults
     u8 unk36[10];  // usedBalls?
 };
 
+struct Struct2017100
+{
+    u32 arr[4];
+};
+
+struct Struct2019348
+{
+    u16 unk0;
+    u16 unk2;
+    u8 unk4;
+    u32 unk8;
+    u32 unkC;
+    u32 unk10;
+};
+
 struct Struct2017800
 {
     u8 invisible:1;
@@ -545,25 +607,25 @@ struct Struct2017800
 
 struct Struct2017810
 {
-    u8 unk0_0:1;
-    u8 unk0_1:1;
-    u8 unk0_2:1;
-    u8 unk0_3:1;
-    u8 unk0_4:1;
-    u8 unk0_5:1;
-    u8 unk0_6:1;
-    u8 unk0_7:1;
-    u8 unk1_0:1;
-    u8 unk1_1:5;
-    u8 unk2;
-    u8 unk3;
-    u8 unk4;
-    u8 unk5;
-    u8 unk6;
-    u8 unk7;
-    u8 unk8;
-    u8 unk9;
-    u8 fillerA[2];
+ /*0x00*/ u8 unk0_0:1;
+ /*0x00*/ u8 unk0_1:1;
+ /*0x00*/ u8 unk0_2:1;
+ /*0x00*/ u8 unk0_3:1;
+ /*0x00*/ u8 unk0_4:1;
+ /*0x00*/ u8 unk0_5:1;
+ /*0x00*/ u8 unk0_6:1;
+ /*0x00*/ u8 unk0_7:1;
+ /*0x01*/ u8 unk1_0:1;
+ /*0x01*/ u8 unk1_1:5;
+ /*0x02*/ u8 unk2;
+ /*0x03*/ u8 unk3;
+ /*0x04*/ u8 unk4;
+ /*0x05*/ u8 unk5;
+ /*0x06*/ u8 unk6;
+ /*0x07*/ u8 unk7;
+ /*0x08*/ u8 unk8;
+ /*0x09*/ u8 unk9;
+ /*0x0A*/ u8 fillerA[2];
 };
 
 struct Struct2017840
@@ -671,20 +733,31 @@ extern struct WishFutureKnock gWishFutureKnock;
 extern struct AI_ThinkingStruct gAIThinkingSpace;
 extern struct Struct20238C8 gUnknown_020238C8;
 
-// TODO: move ewram to global.h
-extern u8 ewram[];
+// used in many battle files, it seems as though Hisashi Sogabe wrote
+// some sort of macro to replace the use of actually calling memset.
+// Perhaps it was thought calling memset was much slower?
 
-#define BATTLE_STRUCT           ((struct BattleStruct *)     (ewram + 0x00000))
-#define AI_THINKING_STRUCT      ((struct AI_ThinkingStruct *)(ewram + 0x16800))
-#define UNK_2016A00_STRUCT      ((struct UnkBattleStruct1 *) (ewram + 0x16A00))
-#define AI_STACK                ((struct AI_Stack *)         (ewram + 0x16C00))
-#define AI_ARRAY_160CC          ((struct SmallItemStruct *)  (ewram + 0x160CC))
-#define B_BATTLESCRIPTS_STACK   ((struct scriptsStack *)     (ewram + 0x17110))
-#define B_FUNCTION_STACK        ((struct funcStack *)        (ewram + 0x17140))
-#define ewram17800              ((struct Struct2017800 *)    (ewram + 0x17800))
-#define ewram17810              ((struct Struct2017810 *)    (ewram + 0x17810))
-#define ewram17840              (*(struct Struct2017840 *)   (ewram + 0x17840))
-#define ewram17000              ((u32 *)                     (ewram + 0x17100))
+// The compiler wont allow us to locally declare ptr in this macro; some
+// functions that invoke this macro will not match without this egregeous
+// assumption about the variable names, so in order to avoid this assumption,
+// we opt to pass the variables themselves, even though it is likely that
+// Sogabe assumed the variables were named src and dest. Trust me: I tried to
+// avoid assuming variable names, but the ROM just will not match without the
+// assumptions. Therefore, these macros are bad practice, but I'm putting them
+// here anyway.
+#define MEMSET_ALT(data, c, size, var, dest)    \
+{    \
+    dest = (u8 *)data;    \
+    for(var = 0; var < (u32)size; var++)    \
+        dest[var] = c;    \
+}    \
+
+#define MEMCPY_ALT(data, dest, size, var, src)    \
+{    \
+    src = (u8 *)data;    \
+    for(var = 0; var < (u32)size; var++)    \
+        dest[var] = src[var];    \
+}    \
 
 typedef void (*BattleCmdFunc)(void);
 
@@ -725,7 +798,6 @@ void EmitEffectivenessSound(u8 a, u16 sound); //0x2B
 void Emitcmd44(u8 a, u16 sound);    //0x2C
 void EmitFaintingCry(u8 a); //0x2D
 void EmitIntroSlide(u8 a, u8 b); //0x2E
-void Emitcmd48(u8 a, u8 *b, u8 c); //0x30
 void Emitcmd49(u8 a);  //0x31
 void EmitSpriteInvisibility(u8 a, u8 b); //0x33
 void EmitBattleAnimation(u8 a, u8 b, u16 c); //0x34

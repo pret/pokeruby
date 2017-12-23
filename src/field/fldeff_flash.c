@@ -7,7 +7,7 @@
 #include "overworld.h"
 #include "rom6.h"
 #include "script.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
@@ -20,14 +20,6 @@ struct FlashStruct
     u8 unk3;
     void (*func)(void);
 };
-
-extern struct FlashStruct gUnknown_083F7FC4[];
-extern u16 gCaveTransitionPalette_White[];
-extern u16 gCaveTransitionPalette_Black[];
-extern u16 gUnknown_083F808C[];
-extern u16 gUnknown_083F809C[];
-extern u16 gCaveTransitionTilemap[];
-extern u8 gCaveTransitionTiles[];
 
 extern u8 gLastFieldPokeMenuOpened;
 extern void (*gUnknown_03005CE4)(void);
@@ -46,10 +38,42 @@ void sub_810D00C(u8);
 void sub_810D028(u8);
 void sub_810D0C4(u8);
 void sub_810D128(u8);
+void sub_810CFF8(void);
+void sub_810CE48(void);
+
+static const struct FlashStruct gUnknown_083F7FC4[] =
+{
+    {1, 4, 1, 0, sub_810CFF8},
+    {2, 4, 1, 0, sub_810CFF8},
+    {3, 4, 1, 0, sub_810CFF8},
+    {5, 4, 1, 0, sub_810CFF8},
+    {6, 4, 1, 0, sub_810CFF8},
+    {7, 4, 1, 0, sub_810CFF8},
+    {8, 4, 1, 0, sub_810CFF8},
+    {9, 4, 1, 0, sub_810CFF8},
+    {4, 1, 0, 1, sub_810CE48},
+    {4, 2, 0, 1, sub_810CE48},
+    {4, 3, 0, 1, sub_810CE48},
+    {4, 5, 0, 1, sub_810CE48},
+    {4, 6, 0, 1, sub_810CE48},
+    {4, 7, 0, 1, sub_810CE48},
+    {4, 8, 0, 1, sub_810CE48},
+    {4, 9, 0, 1, sub_810CE48},
+    {0, 0, 0, 0, NULL},
+};
+
+// TODO: Make these extracted palettes?
+static const u16 gCaveTransitionPalette_White[] = {0x7FFF, 0x7FFF, 0x7FFF, 0x7FFF, 0x7FFF, 0x7FFF, 0x7FFF, 0x7FFF, 0x7FFF, 0x7FFF, 0x7FFF, 0x7FFF, 0x7FFF, 0x7FFF, 0x7FFF, 0x7FFF};
+static const u16 gCaveTransitionPalette_Black[] = {0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000};
+
+static const u16 gUnknown_083F808C[] = INCBIN_U16("graphics/misc/83F808C.gbapal");
+static const u16 gUnknown_083F809C[] = INCBIN_U16("graphics/misc/83F809C.gbapal");
+static const u16 gCaveTransitionTilemap[] = INCBIN_U16("graphics/misc/cave_transition_map.bin.lz");
+static const u8 gCaveTransitionTiles[] = INCBIN_U8("graphics/misc/cave_transition.4bpp.lz");
 
 bool8 SetUpFieldMove_Flash(void)
 {
-    if (gMapHeader.cave == TRUE && !FlagGet(SYS_USE_FLASH))
+    if (gMapHeader.cave == TRUE && !FlagGet(FLAG_SYS_USE_FLASH))
     {
         gFieldCallback = FieldCallback_Teleport;
         gUnknown_03005CE4 = sub_810CBFC;
@@ -70,7 +94,7 @@ void sub_810CBFC(void)
 void sub_810CC34(void)
 {
     PlaySE(SE_W115);
-    FlagSet(SYS_USE_FLASH);
+    FlagSet(FLAG_SYS_USE_FLASH);
     ScriptContext1_SetupScript(gUnknown_081B694A);
 }
 

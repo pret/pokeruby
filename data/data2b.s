@@ -72,7 +72,7 @@ gSpriteTemplate_81FAF34:: @ 81FAF34
 
 	.align 2
 gUnknown_081FAF4C:: @ 81FAF4C
-	.4byte 0x02008000
-	.4byte 0x0200a000
-	.4byte 0x0200c000
-	.4byte 0x0200e000
+	.4byte gSharedMem + 0x8000
+	.4byte gSharedMem + 0xA000
+	.4byte gSharedMem + 0xC000
+	.4byte gSharedMem + 0xE000

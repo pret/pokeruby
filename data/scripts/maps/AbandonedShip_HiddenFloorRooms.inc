@@ -39,9 +39,9 @@ AbandonedShip_HiddenFloorRooms_EventScript_15ED95:: @ 815ED95
 
 AbandonedShip_HiddenFloorRooms_EventScript_15ED9B:: @ 815ED9B
 	delay 20
-	setfieldeffect 0, 10
-	setfieldeffect 1, 10
-	setfieldeffect 2, 0
+	setfieldeffectargument 0, 10
+	setfieldeffectargument 1, 10
+	setfieldeffectargument 2, 0
 	dofieldeffect 54
 	specialvar RESULT, sub_810F4D4
 	compare RESULT, 0
@@ -69,13 +69,13 @@ AbandonedShip_HiddenFloorRooms_EventScript_15EDEA:: @ 815EDEA
 
 AbandonedShip_HiddenFloorRooms_EventScript_15EDEB:: @ 815EDEB
 	delay 20
-	setfieldeffect 0, 8
-	setfieldeffect 1, 5
-	setfieldeffect 2, 0
+	setfieldeffectargument 0, 8
+	setfieldeffectargument 1, 5
+	setfieldeffectargument 2, 0
 	dofieldeffect 54
-	setfieldeffect 0, 11
-	setfieldeffect 1, 3
-	setfieldeffect 2, 0
+	setfieldeffectargument 0, 11
+	setfieldeffectargument 1, 3
+	setfieldeffectargument 2, 0
 	dofieldeffect 54
 	specialvar RESULT, sub_810F4FC
 	compare RESULT, 0
@@ -86,17 +86,17 @@ AbandonedShip_HiddenFloorRooms_EventScript_15EDEB:: @ 815EDEB
 
 AbandonedShip_HiddenFloorRooms_EventScript_15EE23:: @ 815EE23
 	delay 20
-	setfieldeffect 0, 16
-	setfieldeffect 1, 3
-	setfieldeffect 2, 0
+	setfieldeffectargument 0, 16
+	setfieldeffectargument 1, 3
+	setfieldeffectargument 2, 0
 	dofieldeffect 54
-	setfieldeffect 0, 25
-	setfieldeffect 1, 2
-	setfieldeffect 2, 0
+	setfieldeffectargument 0, 25
+	setfieldeffectargument 1, 2
+	setfieldeffectargument 2, 0
 	dofieldeffect 54
-	setfieldeffect 0, 24
-	setfieldeffect 1, 6
-	setfieldeffect 2, 0
+	setfieldeffectargument 0, 24
+	setfieldeffectargument 1, 6
+	setfieldeffectargument 2, 0
 	dofieldeffect 54
 	specialvar RESULT, sub_810F4B0
 	compare RESULT, 0
@@ -109,30 +109,30 @@ AbandonedShip_HiddenFloorRooms_EventScript_15EE6A:: @ 815EE6A
 	end
 
 AbandonedShip_HiddenFloorRooms_EventScript_15EE6B:: @ 815EE6B
-	setfieldeffect 0, 42
-	setfieldeffect 1, 10
-	setfieldeffect 2, 0
+	setfieldeffectargument 0, 42
+	setfieldeffectargument 1, 10
+	setfieldeffectargument 2, 0
 	dofieldeffect 54
 	return
 
 AbandonedShip_HiddenFloorRooms_EventScript_15EE7B:: @ 815EE7B
-	setfieldeffect 0, 20
-	setfieldeffect 1, 5
-	setfieldeffect 2, 0
+	setfieldeffectargument 0, 20
+	setfieldeffectargument 1, 5
+	setfieldeffectargument 2, 0
 	dofieldeffect 54
 	return
 
 AbandonedShip_HiddenFloorRooms_EventScript_15EE8B:: @ 815EE8B
-	setfieldeffect 0, 1
-	setfieldeffect 1, 12
-	setfieldeffect 2, 0
+	setfieldeffectargument 0, 1
+	setfieldeffectargument 1, 12
+	setfieldeffectargument 2, 0
 	dofieldeffect 54
 	return
 
 AbandonedShip_HiddenFloorRooms_EventScript_15EE9B:: @ 815EE9B
-	setfieldeffect 0, 1
-	setfieldeffect 1, 2
-	setfieldeffect 2, 0
+	setfieldeffectargument 0, 1
+	setfieldeffectargument 1, 2
+	setfieldeffectargument 2, 0
 	dofieldeffect 54
 	return
 

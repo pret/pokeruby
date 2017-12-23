@@ -340,26 +340,26 @@ void sub_80A8530(struct Sprite *sprite)
     sprite->invisible = TRUE;
     if (GetBankSide(gBattleAnimBankAttacker))
     {
-        sprite->data1 = -gBattleAnimArgs[1];
+        sprite->data[1] = -gBattleAnimArgs[1];
     }
     else
     {
-        sprite->data1 = gBattleAnimArgs[1];
+        sprite->data[1] = gBattleAnimArgs[1];
     }
-    sprite->data0 = gBattleAnimArgs[0];
-    sprite->data2 = 0;
-    sprite->data3 = gObjectBankIDs[gBattleAnimBankAttacker];
-    sprite->data4 = gBattleAnimArgs[0];
-    StoreSpriteCallbackInData6(sprite, sub_80A85A4);
+    sprite->data[0] = gBattleAnimArgs[0];
+    sprite->data[2] = 0;
+    sprite->data[3] = gObjectBankIDs[gBattleAnimBankAttacker];
+    sprite->data[4] = gBattleAnimArgs[0];
+    StoreSpriteCallbackInData(sprite, sub_80A85A4);
     sprite->callback = sub_8078458;
 }
 
 static void sub_80A85A4(struct Sprite *sprite)
 {
-    sprite->data0 = sprite->data4;
-    sprite->data1 = -sprite->data1;
+    sprite->data[0] = sprite->data[4];
+    sprite->data[1] = -sprite->data[1];
     sprite->callback = sub_8078458;
-    StoreSpriteCallbackInData6(sprite, move_anim_8072740);
+    StoreSpriteCallbackInData(sprite, move_anim_8072740);
 }
 
 void sub_80A85C8(struct Sprite *sprite)
@@ -367,21 +367,21 @@ void sub_80A85C8(struct Sprite *sprite)
     u8 spriteId;
     sprite->invisible = TRUE;
     spriteId = GetAnimBankSpriteId(gBattleAnimArgs[2]);
-    sprite->data0 = gBattleAnimArgs[0];
-    sprite->data1 = 0;
-    sprite->data2 = gBattleAnimArgs[1];
-    sprite->data3 = spriteId;
-    sprite->data4 = gBattleAnimArgs[0];
-    StoreSpriteCallbackInData6(sprite, sub_80A8614);
+    sprite->data[0] = gBattleAnimArgs[0];
+    sprite->data[1] = 0;
+    sprite->data[2] = gBattleAnimArgs[1];
+    sprite->data[3] = spriteId;
+    sprite->data[4] = gBattleAnimArgs[0];
+    StoreSpriteCallbackInData(sprite, sub_80A8614);
     sprite->callback = sub_8078458;
 }
 
 void sub_80A8614(struct Sprite *sprite)
 {
-    sprite->data0 = sprite->data4;
-    sprite->data2 = -sprite->data2;
+    sprite->data[0] = sprite->data[4];
+    sprite->data[2] = -sprite->data[2];
     sprite->callback = sub_8078458;
-    StoreSpriteCallbackInData6(sprite, move_anim_8072740);
+    StoreSpriteCallbackInData(sprite, move_anim_8072740);
 }
 
 void sub_80A8638(struct Sprite *sprite)
@@ -396,28 +396,28 @@ void sub_80A8638(struct Sprite *sprite)
     {
         spriteId = gObjectBankIDs[gBattleAnimBankTarget];
     }
-    sprite->data0 = gBattleAnimArgs[2];
-    sprite->data1 = gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x;
-    sprite->data2 = gSprites[spriteId].pos1.x;
-    sprite->data3 = gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y;
-    sprite->data4 = gSprites[spriteId].pos1.y;
+    sprite->data[0] = gBattleAnimArgs[2];
+    sprite->data[1] = gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x;
+    sprite->data[2] = gSprites[spriteId].pos1.x;
+    sprite->data[3] = gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y;
+    sprite->data[4] = gSprites[spriteId].pos1.y;
     something = 0;
     sub_8078A5C(sprite);
-    sprite->data3 = something;
-    sprite->data4 = something;
-    sprite->data5 = gSprites[spriteId].pos2.x;
-    sprite->data6 = gSprites[spriteId].pos2.y;
+    sprite->data[3] = something;
+    sprite->data[4] = something;
+    sprite->data[5] = gSprites[spriteId].pos2.x;
+    sprite->data[6] = gSprites[spriteId].pos2.y;
     sprite->invisible = TRUE;
     if (gBattleAnimArgs[1] == 1)
     {
-        sprite->data2 = something;
+        sprite->data[2] = something;
     }
     else if (gBattleAnimArgs[1] == 2)
     {
-        sprite->data1 = something;
+        sprite->data[1] = something;
     }
-    sprite->data7 = gBattleAnimArgs[1];
-    sprite->data7 |= spriteId << 8;
+    sprite->data[7] = gBattleAnimArgs[1];
+    sprite->data[7] |= spriteId << 8;
     sprite->callback = sub_80A86F4;
 }
 
@@ -426,10 +426,10 @@ static void sub_80A86F4(struct Sprite *sprite)
     s8 spriteId;
     u8 lo;
     struct Sprite *sprite2;
-    lo = sprite->data7 & 0xff;
-    spriteId = sprite->data7 >> 8;
+    lo = sprite->data[7] & 0xff;
+    spriteId = sprite->data[7] >> 8;
     sprite2 = &gSprites[spriteId];
-    if (sprite->data0 == 0)
+    if (sprite->data[0] == 0)
     {
         if (lo < 2)
         {
@@ -443,11 +443,11 @@ static void sub_80A86F4(struct Sprite *sprite)
     }
     else
     {
-        sprite->data0--;
-        sprite->data3 += sprite->data1;
-        sprite->data4 += sprite->data2;
-        sprite2->pos2.x = (s8)(sprite->data3 >> 8) + sprite->data5;
-        sprite2->pos2.y = (s8)(sprite->data4 >> 8) + sprite->data6;
+        sprite->data[0]--;
+        sprite->data[3] += sprite->data[1];
+        sprite->data[4] += sprite->data[2];
+        sprite2->pos2.x = (s8)(sprite->data[3] >> 8) + sprite->data[5];
+        sprite2->pos2.y = (s8)(sprite->data[4] >> 8) + sprite->data[6];
     }
 }
 
@@ -472,17 +472,17 @@ void sub_80A8764(struct Sprite *sprite)
             gBattleAnimArgs[2] = -gBattleAnimArgs[2];
         }
     }
-    sprite->data0 = gBattleAnimArgs[4];
-    sprite->data1 = gSprites[spriteId].pos1.x;
-    sprite->data2 = gSprites[spriteId].pos1.x + gBattleAnimArgs[1];
-    sprite->data3 = gSprites[spriteId].pos1.y;
-    sprite->data4 = gSprites[spriteId].pos1.y + gBattleAnimArgs[2];
+    sprite->data[0] = gBattleAnimArgs[4];
+    sprite->data[1] = gSprites[spriteId].pos1.x;
+    sprite->data[2] = gSprites[spriteId].pos1.x + gBattleAnimArgs[1];
+    sprite->data[3] = gSprites[spriteId].pos1.y;
+    sprite->data[4] = gSprites[spriteId].pos1.y + gBattleAnimArgs[2];
     sub_8078A5C(sprite);
-    sprite->data3 = 0;
-    sprite->data4 = 0;
-    sprite->data5 = spriteId;
+    sprite->data[3] = 0;
+    sprite->data[4] = 0;
+    sprite->data[5] = spriteId;
     sprite->invisible = TRUE;
-    StoreSpriteCallbackInData6(sprite, move_anim_8072740);
+    StoreSpriteCallbackInData(sprite, move_anim_8072740);
     sprite->callback = sub_80784A8;
 }
 
@@ -508,23 +508,23 @@ void sub_80A8818(struct Sprite *sprite)
             gBattleAnimArgs[2] = -gBattleAnimArgs[2];
         }
     }
-    sprite->data0 = gBattleAnimArgs[4];
-    sprite->data1 = gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x;
-    sprite->data2 = sprite->data1 + gBattleAnimArgs[1];
-    sprite->data3 = gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y;
-    sprite->data4 = sprite->data3 + gBattleAnimArgs[2];
+    sprite->data[0] = gBattleAnimArgs[4];
+    sprite->data[1] = gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x;
+    sprite->data[2] = sprite->data[1] + gBattleAnimArgs[1];
+    sprite->data[3] = gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y;
+    sprite->data[4] = sprite->data[3] + gBattleAnimArgs[2];
     sub_8078A5C(sprite);
-    sprite->data3 = gSprites[spriteId].pos2.x << 8;
-    sprite->data4 = gSprites[spriteId].pos2.y << 8;
-    sprite->data5 = spriteId;
-    sprite->data6 = gBattleAnimArgs[5];
+    sprite->data[3] = gSprites[spriteId].pos2.x << 8;
+    sprite->data[4] = gSprites[spriteId].pos2.y << 8;
+    sprite->data[5] = spriteId;
+    sprite->data[6] = gBattleAnimArgs[5];
     if (!gBattleAnimArgs[5])
     {
-        StoreSpriteCallbackInData6(sprite, move_anim_8072740);
+        StoreSpriteCallbackInData(sprite, move_anim_8072740);
     }
     else
     {
-        StoreSpriteCallbackInData6(sprite, sub_80A88F0);
+        StoreSpriteCallbackInData(sprite, sub_80A88F0);
     }
     sprite->callback = sub_80784A8;
 }
@@ -532,8 +532,8 @@ void sub_80A8818(struct Sprite *sprite)
 
 static void sub_80A88F0(struct Sprite *sprite)
 {
-    gSprites[sprite->data5].pos2.x = 0;
-    gSprites[sprite->data5].pos2.y = 0;
+    gSprites[sprite->data[5]].pos2.x = 0;
+    gSprites[sprite->data[5]].pos2.y = 0;
     move_anim_8072740(sprite);
 }
 
@@ -769,7 +769,7 @@ void sub_80A8E04(u8 taskId)
     TASK.data[4] = gBattleAnimArgs[1];
     TASK.data[5] = spriteId;
     TASK.data[6] = gBattleAnimArgs[3];
-    if (IsContest())
+    if (NotInBattle())
     {
         TASK.data[7] = 1;
     }
@@ -786,7 +786,7 @@ void sub_80A8E04(u8 taskId)
     }
     if (TASK.data[7])
     {
-        if (!IsContest())
+        if (!NotInBattle())
         {
             TASK.data[3] *= -1;
             TASK.data[4] *= -1;

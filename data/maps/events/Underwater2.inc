@@ -1,5 +1,5 @@
 Underwater2_MapWarps:: @ 8385580
-	warp_def 45, 65, 0, 0, Underwater_SootopolisCity
+	warp_def 45, 65, 0, 0, MAP_UNDERWATER_SOOTOPOLIS_CITY
 
 Underwater2_MapBGEvents:: @ 8385588
 	bg_event 30, 17, 3, 7, 0, ITEM_HEART_SCALE, 14, 0

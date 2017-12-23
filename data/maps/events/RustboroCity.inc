@@ -7,26 +7,26 @@ RustboroCity_MapObjects:: @ 837FD14
 	object_event 6, MAP_OBJ_GFX_MAN_4, 0, 26, 0, 23, 0, 3, 1, 17, 0, 0, 0, 0, 0, RustboroCity_EventScript_14C3BA, 0, 0, 0
 	object_event 7, MAP_OBJ_GFX_LITTLE_BOY_2, 0, 24, 0, 51, 0, 3, 10, 0, 0, 0, 0, 0, 0, RustboroCity_EventScript_14C449, 0, 0, 0
 	object_event 8, MAP_OBJ_GFX_LITTLE_GIRL_2, 0, 25, 0, 51, 0, 3, 9, 0, 0, 0, 0, 0, 0, RustboroCity_EventScript_14C45F, 0, 0, 0
-	object_event 9, MAP_OBJ_GFX_MAN_2, 0, 30, 0, 10, 0, 3, 10, 17, 0, 0, 0, 0, 0, RustboroCity_EventScript_14C5FF, 732, 0, 0
-	object_event 10, 241, 0, 13, 0, 21, 0, 3, 10, 0, 0, 0, 0, 0, 0, 0x0, 731, 0, 0
+	object_event 9, MAP_OBJ_GFX_MAN_2, 0, 30, 0, 10, 0, 3, 10, 17, 0, 0, 0, 0, 0, RustboroCity_EventScript_14C5FF, FLAG_HIDE_DEVON_RUSTBORO, 0, 0
+	object_event 10, 241, 0, 13, 0, 21, 0, 3, 10, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_GRUNT_RUSTBORO, 0, 0
 	object_event 11, MAP_OBJ_GFX_MAN_7, 0, 13, 0, 34, 0, 3, 2, 17, 0, 0, 0, 0, 0, RustboroCity_EventScript_14C3A5, 0, 0, 0
-	object_event 12, MAP_OBJ_GFX_ITEM_BALL, 0, 36, 0, 51, 0, 3, 1, 0, 0, 0, 0, 0, 0, RustboroCity_EventScript_1B172B, 1041, 0, 0
+	object_event 12, MAP_OBJ_GFX_ITEM_BALL, 0, 36, 0, 51, 0, 3, 1, 0, 0, 0, 0, 0, 0, RustboroCity_EventScript_1B172B, FLAG_ITEM_RUSTBORO_1, 0, 0
 	object_event 13, MAP_OBJ_GFX_MAN_5, 0, 19, 0, 27, 0, 3, 8, 16, 0, 0, 0, 0, 0, RustboroCity_EventScript_14C475, 0, 0, 0
-	object_event 14, 240, 0, 16, 0, 50, 0, 3, 1, 17, 0, 0, 0, 0, 0, RustboroCity_EventScript_14C8DA, 814, 0, 0
+	object_event 14, 240, 0, 16, 0, 50, 0, 3, 1, 17, 0, 0, 0, 0, 0, RustboroCity_EventScript_14C8DA, FLAG_HIDE_RIVAL_RUSTBORO, 0, 0
 
 RustboroCity_MapWarps:: @ 837FE64
-	warp_def 27, 19, 0, 0, RustboroCity_Gym
-	warp_def 13, 30, 0, 0, RustboroCity_Flat1_1F
-	warp_def 16, 45, 0, 0, RustboroCity_Mart
-	warp_def 16, 38, 0, 0, RustboroCity_PokemonCenter_1F
-	warp_def 27, 34, 0, 0, RustboroCity_PokemonSchool
-	warp_def 11, 15, 0, 0, RustboroCity_DevonCorp_1F
-	warp_def 12, 15, 0, 1, RustboroCity_DevonCorp_1F
-	warp_def 33, 19, 0, 0, RustboroCity_House1
-	warp_def 9, 38, 0, 0, RustboroCity_CuttersHouse
-	warp_def 30, 28, 0, 0, RustboroCity_House2
-	warp_def 5, 51, 0, 0, RustboroCity_Flat2_1F
-	warp_def 26, 46, 0, 0, RustboroCity_House3
+	warp_def 27, 19, 0, 0, MAP_RUSTBORO_CITY_GYM
+	warp_def 13, 30, 0, 0, MAP_RUSTBORO_CITY_FLAT1_1F
+	warp_def 16, 45, 0, 0, MAP_RUSTBORO_CITY_MART
+	warp_def 16, 38, 0, 0, MAP_RUSTBORO_CITY_POKEMON_CENTER_1F
+	warp_def 27, 34, 0, 0, MAP_RUSTBORO_CITY_POKEMON_SCHOOL
+	warp_def 11, 15, 0, 0, MAP_RUSTBORO_CITY_DEVON_CORP_1F
+	warp_def 12, 15, 0, 1, MAP_RUSTBORO_CITY_DEVON_CORP_1F
+	warp_def 33, 19, 0, 0, MAP_RUSTBORO_CITY_HOUSE1
+	warp_def 9, 38, 0, 0, MAP_RUSTBORO_CITY_CUTTERS_HOUSE
+	warp_def 30, 28, 0, 0, MAP_RUSTBORO_CITY_HOUSE2
+	warp_def 5, 51, 0, 0, MAP_RUSTBORO_CITY_FLAT2_1F
+	warp_def 26, 46, 0, 0, MAP_RUSTBORO_CITY_HOUSE3
 
 RustboroCity_MapCoordEvents:: @ 837FEC4
 	coord_event 23, 20, 3, 0, 0x405a, 1, 0, RustboroCity_EventScript_14C481

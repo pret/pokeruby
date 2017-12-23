@@ -21,12 +21,13 @@
 #include "item_menu.h"
 #include "item_use.h"
 #include "item.h"
-#include "items.h"
+#include "constants/items.h"
 #include "sound.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "safari_zone.h"
 #include "event_data.h"
 #include "pokeblock.h"
+#include "ewram.h"
 
 struct UnkPokeblockStruct
 {
@@ -35,9 +36,6 @@ struct UnkPokeblockStruct
     u8 unk2;
     u8 unk3;
 };
-
-extern u8 ewram[];
-
 
 static EWRAM_DATA u8 gUnknown_02039244 = 0;
 static EWRAM_DATA struct UnkPokeblockStruct gUnknown_02039248 = {0};
@@ -301,7 +299,7 @@ static bool8 sub_810B6C0(void)
         case 10:
             if (MultistepInitMenuWindowContinue())
             {
-                ewram[0x1ffff] = 0;
+                ewram1FFFF = 0;
                 gMain.state++;
             }
             break;
@@ -319,7 +317,7 @@ static bool8 sub_810B6C0(void)
             gMain.state++;
             break;
         case 13:
-            ewram[0x1fffe] = sub_810BA50(0x38, 0x40, 0);
+            ewram1FFFE = sub_810BA50(0x38, 0x40, 0);
             gMain.state++;
             break;
         case 14:
@@ -371,27 +369,27 @@ void sub_810B96C(void)
 
 static bool8 sub_810B998(void)
 {
-    switch (ewram[0x1ffff])
+    switch (ewram1FFFF)
     {
         case 0:
-            LZDecompressVram(gMenuPokeblock_Gfx, (u8 *)BG_CHAR_ADDR(2));
-            ewram[0x1ffff]++;
+            LZDecompressVram(gMenuPokeblock_Gfx, BG_CHAR_ADDR(2));
+            ewram1FFFF++;
             break;
         case 1:
             LZDecompressWram(gMenuPokeblock_Tilemap, gBGTilemapBuffers[2]);
-            ewram[0x1ffff]++;
+            ewram1FFFF++;
             break;
         case 2:
             LoadCompressedPalette(gMenuPokeblock_Pal, 0, 0xc0);
-            ewram[0x1ffff]++;
+            ewram1FFFF++;
             break;
         case 3:
             LoadCompressedObjectPic(&gUnknown_083F7F74);
-            ewram[0x1ffff]++;
+            ewram1FFFF++;
             break;
         case 4:
             LoadCompressedObjectPalette(&gUnknown_083F7F7C);
-            ewram[0x1ffff] = 0;
+            ewram1FFFF = 0;
             return TRUE;
     }
     return FALSE;
@@ -613,7 +611,7 @@ static void sub_810BDAC(bool8 flag)
 static void sub_810BF38(bool8 flag)
 {
     PlaySE(SE_SELECT);
-    gSprites[ewram[0x1fffe]].callback = sub_810C8D4;
+    gSprites[ewram1FFFE].callback = sub_810C8D4;
     sub_810BDAC(flag);
 }
 
@@ -666,7 +664,7 @@ static void sub_810BF7C(u8 taskId)
             PlaySE(SE_SELECT);
             if (gUnknown_02039248.unk1 + gUnknown_02039248.unk0 == gUnknown_02039248.unk2)
             {
-                gScriptResult = 0xffff;
+                gSpecialVar_Result = 0xffff;
                 sub_810C31C(taskId);
             }
             else
@@ -677,7 +675,7 @@ static void sub_810BF7C(u8 taskId)
         else if (gMain.newKeys & B_BUTTON)
         {
             PlaySE(SE_SELECT);
-            gScriptResult = 0xffff;
+            gSpecialVar_Result = 0xffff;
             sub_810C31C(taskId);
         }
     }
@@ -802,7 +800,7 @@ static void sub_810C31C(u8 taskId)
     BeginNormalPaletteFade(-1, 0, 0, 16, 0);
     if (gUnknown_02039244 > 1)
     {
-        gScriptItemId = ITEM_NONE;
+        gSpecialVar_ItemId = ITEM_NONE;
     }
     gTasks[taskId].func = sub_810C2C8;
 }
@@ -818,7 +816,7 @@ static void sub_810C368(u8 taskId)
     MenuDrawTextWindow(7, v0 + 4, 13, 11);
     PrintMenuItemsReordered(8, v0 + 5, gUnknown_0203924C, gUnknown_083F7EF4, gUnknown_03000758);
     InitMenu(0, 8, v0 + 5, gUnknown_0203924C, 0, 5);
-    gScriptItemId = gUnknown_02039248.unk0 + gUnknown_02039248.unk1;
+    gSpecialVar_ItemId = gUnknown_02039248.unk0 + gUnknown_02039248.unk1;
     gTasks[taskId].func = sub_810C40C;
 }
 
@@ -857,7 +855,7 @@ static void sub_810C4C4(u8 taskId)
     if (!gPaletteFade.active)
     {
         sub_810C2B0();
-        sub_8136130(&gSaveBlock1.pokeblocks[gScriptItemId], sub_810B96C);
+        sub_8136130(&gSaveBlock1.pokeblocks[gSpecialVar_ItemId], sub_810B96C);
         DestroyTask(taskId);
     }
 }
@@ -941,21 +939,21 @@ static void sub_810C748(u8 taskId)
 
 static void sub_810C788(u8 taskId)
 {
-    s16 v0 = PokeblockGetGain(GetNature(&gEnemyParty[0]), &gSaveBlock1.pokeblocks[gScriptItemId]);
-    StringCopy(gBattleTextBuff1, gPokeblockNames[gSaveBlock1.pokeblocks[gScriptItemId].color]);
-    PokeblockClearIfExists(gScriptItemId);
-    gScriptItemId = gSaveBlock1.pokeblocks[gScriptItemId].color << 8;
+    s16 v0 = PokeblockGetGain(GetNature(&gEnemyParty[0]), &gSaveBlock1.pokeblocks[gSpecialVar_ItemId]);
+    StringCopy(gBattleTextBuff1, gPokeblockNames[gSaveBlock1.pokeblocks[gSpecialVar_ItemId].color]);
+    PokeblockClearIfExists(gSpecialVar_ItemId);
+    gSpecialVar_ItemId = gSaveBlock1.pokeblocks[gSpecialVar_ItemId].color << 8;
     if (v0 == 0)
     {
-        gScriptItemId += 1;
+        gSpecialVar_ItemId += 1;
     }
     if (v0 > 0)
     {
-        gScriptItemId += 2;
+        gSpecialVar_ItemId += 2;
     }
     if (v0 < 0)
     {
-        gScriptItemId += 3;
+        gSpecialVar_ItemId += 3;
     }
     BeginNormalPaletteFade(-1, 0, 0, 16, 0);
     gTasks[taskId].func = sub_810C2C8;
@@ -963,35 +961,35 @@ static void sub_810C788(u8 taskId)
 
 static void sub_810C854(u8 taskId)
 {
-    SafariZoneActivatePokeblockFeeder(gScriptItemId);
-    StringCopy(gStringVar1, gPokeblockNames[gSaveBlock1.pokeblocks[gScriptItemId].color]);
-    gScriptResult = gScriptItemId;
-    PokeblockClearIfExists(gScriptItemId);
+    SafariZoneActivatePokeblockFeeder(gSpecialVar_ItemId);
+    StringCopy(gStringVar1, gPokeblockNames[gSaveBlock1.pokeblocks[gSpecialVar_ItemId].color]);
+    gSpecialVar_Result = gSpecialVar_ItemId;
+    PokeblockClearIfExists(gSpecialVar_ItemId);
     BeginNormalPaletteFade(-1, 0, 0, 16, 0);
     gTasks[taskId].func = sub_810C2C8;
 }
 
 static void sub_810C8D4(struct Sprite *sprite)
 {
-    if (sprite->data0 > 1)
+    if (sprite->data[0] > 1)
     {
-        sprite->data0 = 0;
+        sprite->data[0] = 0;
     }
-    switch (sprite->data0)
+    switch (sprite->data[0])
     {
         case 0:
             sprite->oam.affineMode = 1;
             sprite->affineAnims = gSpriteAffineAnimTable_83F7F70;
             InitSpriteAffineAnim(sprite);
-            sprite->data0 = 1;
-            sprite->data1 = 0;
+            sprite->data[0] = 1;
+            sprite->data[1] = 0;
             break;
         case 1:
-            if (++sprite->data1 > 11)
+            if (++sprite->data[1] > 11)
             {
                 sprite->oam.affineMode = 0;
-                sprite->data0 = 0;
-                sprite->data1 = 0;
+                sprite->data[0] = 0;
+                sprite->data[1] = 0;
                 FreeOamMatrix(sprite->oam.matrixNum);
                 sprite->callback = SpriteCallbackDummy;
             }

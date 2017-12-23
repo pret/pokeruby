@@ -4,19 +4,20 @@
 #include "field_specials.h"
 #include "m4a.h"
 #include "main.h"
-#include "map_constants.h"
+#include "constants/maps.h"
 #include "menu.h"
 #include "palette.h"
 #include "pokemon_menu.h"
 #include "region_map.h"
 #include "overworld.h"
 #include "secret_base.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sprite.h"
 #include "strings.h"
 #include "string_util.h"
 #include "text.h"
 #include "trig.h"
+#include "ewram.h"
 
 // Map Section IDs
 #define MAPSEC_LITTLEROOT_TOWN 0
@@ -336,9 +337,9 @@ bool8 sub_80FA940(void)
         InitializeCursorPosition();
         gRegionMap->unk74 = gRegionMap->cursorPosX;
         gRegionMap->unk76 = gRegionMap->cursorPosY;
-        gRegionMap->unk16 = sub_80FB758(gRegionMap->mapSecId);
-        gRegionMap->mapSecId = sub_80FB9C0(gRegionMap->mapSecId);
-        GetMapSectionName(gRegionMap->mapSecName, gRegionMap->mapSecId, 16);
+        gRegionMap->unk16 = sub_80FB758(gRegionMap->mapSectionId);
+        gRegionMap->mapSectionId = sub_80FB9C0(gRegionMap->mapSectionId);
+        GetMapSectionName(gRegionMap->mapSectionName, gRegionMap->mapSectionId, 16);
         break;
     case 6:
         if (gRegionMap->zoomed == FALSE)
@@ -433,7 +434,7 @@ static u8 sub_80FAB78(void)
 
 static u8 _swiopen(void)
 {
-    u16 mapSecId;
+    u16 mapSectionId;
 
     if (gRegionMap->unk7A != 0)
         return INPUT_EVENT_2;
@@ -450,12 +451,12 @@ static u8 _swiopen(void)
     if (gRegionMap->cursorDeltaY < 0)
         gRegionMap->cursorPosY--;
 
-    mapSecId = GetRegionMapSectionAt(gRegionMap->cursorPosX, gRegionMap->cursorPosY);
-    gRegionMap->unk16 = sub_80FB758(mapSecId);
-    if (mapSecId != gRegionMap->mapSecId)
+    mapSectionId = GetRegionMapSectionAt(gRegionMap->cursorPosX, gRegionMap->cursorPosY);
+    gRegionMap->unk16 = sub_80FB758(mapSectionId);
+    if (mapSectionId != gRegionMap->mapSectionId)
     {
-        gRegionMap->mapSecId = mapSecId;
-        GetMapSectionName(gRegionMap->mapSecName, gRegionMap->mapSecId, 16);
+        gRegionMap->mapSectionId = mapSectionId;
+        GetMapSectionName(gRegionMap->mapSectionName, gRegionMap->mapSectionId, 16);
     }
     sub_80FBA18();
     gRegionMap->inputCallback = sub_80FAB78;
@@ -515,16 +516,16 @@ static u8 sub_80FADE4(void)
 
         if (r3 != gRegionMap->unk64 || r1 != gRegionMap->unk66)
         {
-            u16 mapSecId;
+            u16 mapSectionId;
 
             gRegionMap->unk64 = r3;
             gRegionMap->unk66 = r1;
-            mapSecId = GetRegionMapSectionAt(r3, r1);
-            gRegionMap->unk16 = sub_80FB758(mapSecId);
-            if (mapSecId != gRegionMap->mapSecId)
+            mapSectionId = GetRegionMapSectionAt(r3, r1);
+            gRegionMap->unk16 = sub_80FB758(mapSectionId);
+            if (mapSectionId != gRegionMap->mapSectionId)
             {
-                gRegionMap->mapSecId = mapSecId;
-                GetMapSectionName(gRegionMap->mapSecName, gRegionMap->mapSecId, 16);
+                gRegionMap->mapSectionId = mapSectionId;
+                GetMapSectionName(gRegionMap->mapSectionName, gRegionMap->mapSectionId, 16);
             }
             sub_80FBA18();
         }
@@ -706,9 +707,9 @@ static void InitializeCursorPosition(void)
     u16 r9;
 
     if (gSaveBlock1.location.mapGroup == 25
-     && (gSaveBlock1.location.mapNum == MAP_ID_SS_TIDAL_CORRIDOR
-      || gSaveBlock1.location.mapNum == MAP_ID_SS_TIDAL_LOWER_DECK
-      || gSaveBlock1.location.mapNum == MAP_ID_SS_TIDAL_ROOMS))
+     && (gSaveBlock1.location.mapNum == MAP_NUM(SS_TIDAL_CORRIDOR)
+      || gSaveBlock1.location.mapNum == MAP_NUM(SS_TIDAL_LOWER_DECK)
+      || gSaveBlock1.location.mapNum == MAP_NUM(SS_TIDAL_ROOMS)))
     {
         sub_80FB600();
         return;
@@ -722,19 +723,19 @@ static void InitializeCursorPosition(void)
     case 2:
     case 4:
     case 5:
-        gRegionMap->mapSecId = gMapHeader.regionMapSectionId;
+        gRegionMap->mapSectionId = gMapHeader.regionMapSectionId;
         gRegionMap->playerIsInCave = FALSE;
         mapWidth = gMapHeader.mapData->width;
         mapHeight = gMapHeader.mapData->height;
         x = gSaveBlock1.pos.x;
         y = gSaveBlock1.pos.y;
-        if (gRegionMap->mapSecId == MAPSEC_UNDERWATER6)
+        if (gRegionMap->mapSectionId == MAPSEC_UNDERWATER6)
             gRegionMap->playerIsInCave = TRUE;
         break;
     case 3:
     case 6:
         mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1.warp4.mapGroup, gSaveBlock1.warp4.mapNum);
-        gRegionMap->mapSecId = mapHeader->regionMapSectionId;
+        gRegionMap->mapSectionId = mapHeader->regionMapSectionId;
         gRegionMap->playerIsInCave = TRUE;
         mapWidth = mapHeader->mapData->width;
         mapHeight = mapHeader->mapData->height;
@@ -743,7 +744,7 @@ static void InitializeCursorPosition(void)
         break;
     case 8:
         mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1.warp2.mapGroup, gSaveBlock1.warp2.mapNum);
-        gRegionMap->mapSecId = mapHeader->regionMapSectionId;
+        gRegionMap->mapSectionId = mapHeader->regionMapSectionId;
         gRegionMap->playerIsInCave = TRUE;
         mapWidth = mapHeader->mapData->width;
         mapHeight = mapHeader->mapData->height;
@@ -754,8 +755,8 @@ static void InitializeCursorPosition(void)
         {
             struct WarpData *r4;
 
-            gRegionMap->mapSecId = gMapHeader.regionMapSectionId;
-            if (gRegionMap->mapSecId != MAPSEC_UNK_0x57)
+            gRegionMap->mapSectionId = gMapHeader.regionMapSectionId;
+            if (gRegionMap->mapSectionId != MAPSEC_UNK_0x57)
             {
                 r4 = &gSaveBlock1.warp4;
                 mapHeader = Overworld_GetMapHeaderByGroupAndId(r4->mapGroup, r4->mapNum);
@@ -764,7 +765,7 @@ static void InitializeCursorPosition(void)
             {
                 r4 = &gSaveBlock1.warp2;
                 mapHeader = Overworld_GetMapHeaderByGroupAndId(r4->mapGroup, r4->mapNum);
-                gRegionMap->mapSecId = mapHeader->regionMapSectionId;
+                gRegionMap->mapSectionId = mapHeader->regionMapSectionId;
             }
             gRegionMap->playerIsInCave = FALSE;
             mapWidth = mapHeader->mapData->width;
@@ -777,21 +778,21 @@ static void InitializeCursorPosition(void)
 
     r9 = x;
 
-    r1 = mapWidth / gRegionMapLocations[gRegionMap->mapSecId].width;
+    r1 = mapWidth / gRegionMapLocations[gRegionMap->mapSectionId].width;
     if (r1 == 0)
         r1 = 1;
     x /= r1;
-    if (x >= gRegionMapLocations[gRegionMap->mapSecId].width)
-        x = gRegionMapLocations[gRegionMap->mapSecId].width - 1;
+    if (x >= gRegionMapLocations[gRegionMap->mapSectionId].width)
+        x = gRegionMapLocations[gRegionMap->mapSectionId].width - 1;
 
-    r1 = mapHeight / gRegionMapLocations[gRegionMap->mapSecId].height;
+    r1 = mapHeight / gRegionMapLocations[gRegionMap->mapSectionId].height;
     if (r1 == 0)
         r1 = 1;
     y /= r1;
-    if (y >= gRegionMapLocations[gRegionMap->mapSecId].height)
-        y = gRegionMapLocations[gRegionMap->mapSecId].height - 1;
+    if (y >= gRegionMapLocations[gRegionMap->mapSectionId].height)
+        y = gRegionMapLocations[gRegionMap->mapSectionId].height - 1;
 
-    switch (gRegionMap->mapSecId)
+    switch (gRegionMap->mapSectionId)
     {
     case MAPSEC_ROUTE_114:
         if (y != 0)
@@ -820,8 +821,8 @@ static void InitializeCursorPosition(void)
             x++;
         break;
     }
-    gRegionMap->cursorPosX = gRegionMapLocations[gRegionMap->mapSecId].x + x + MAPCURSOR_X_MIN;
-    gRegionMap->cursorPosY = gRegionMapLocations[gRegionMap->mapSecId].y + y + MAPCURSOR_Y_MIN;
+    gRegionMap->cursorPosX = gRegionMapLocations[gRegionMap->mapSectionId].x + x + MAPCURSOR_X_MIN;
+    gRegionMap->cursorPosY = gRegionMapLocations[gRegionMap->mapSectionId].y + y + MAPCURSOR_Y_MIN;
 }
 
 static void sub_80FB600(void)
@@ -836,16 +837,16 @@ static void sub_80FB600(void)
     switch (GetSSTidalLocation(&mapGroup, &mapNum, &sp2, &sp4))
     {
     case 1:
-        gRegionMap->mapSecId = MAPSEC_SLATEPORT_CITY;
+        gRegionMap->mapSectionId = MAPSEC_SLATEPORT_CITY;
         break;
     case 2:
-        gRegionMap->mapSecId = MAPSEC_LILYCOVE_CITY;
+        gRegionMap->mapSectionId = MAPSEC_LILYCOVE_CITY;
         break;
     case 3:
-        gRegionMap->mapSecId = MAPSEC_ROUTE_124;
+        gRegionMap->mapSectionId = MAPSEC_ROUTE_124;
         break;
     case 4:
-        gRegionMap->mapSecId = MAPSEC_ROUTE_131;
+        gRegionMap->mapSectionId = MAPSEC_ROUTE_131;
         break;
     default:
     case 0:
@@ -853,31 +854,31 @@ static void sub_80FB600(void)
             struct MapHeader *mapHeader = Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum);
             u16 r1;
 
-            gRegionMap->mapSecId = mapHeader->regionMapSectionId;
-            r1 = mapHeader->mapData->width / gRegionMapLocations[gRegionMap->mapSecId].width;
+            gRegionMap->mapSectionId = mapHeader->regionMapSectionId;
+            r1 = mapHeader->mapData->width / gRegionMapLocations[gRegionMap->mapSectionId].width;
             if (r1 == 0)
                 r1 = 1;
             x = sp2 / r1;
-            if (x >= gRegionMapLocations[gRegionMap->mapSecId].width)
-                x = gRegionMapLocations[gRegionMap->mapSecId].width - 1;
+            if (x >= gRegionMapLocations[gRegionMap->mapSectionId].width)
+                x = gRegionMapLocations[gRegionMap->mapSectionId].width - 1;
 
-            r1 = mapHeader->mapData->height / gRegionMapLocations[gRegionMap->mapSecId].height;
+            r1 = mapHeader->mapData->height / gRegionMapLocations[gRegionMap->mapSectionId].height;
             if (r1 == 0)
                 r1 = 1;
             y = sp4 / r1;
-            if (y >= gRegionMapLocations[gRegionMap->mapSecId].height)
-                y = gRegionMapLocations[gRegionMap->mapSecId].height - 1;
+            if (y >= gRegionMapLocations[gRegionMap->mapSectionId].height)
+                y = gRegionMapLocations[gRegionMap->mapSectionId].height - 1;
         }
         break;
     }
     gRegionMap->playerIsInCave = FALSE;
-    gRegionMap->cursorPosX = gRegionMapLocations[gRegionMap->mapSecId].x + x + MAPCURSOR_X_MIN;
-    gRegionMap->cursorPosY = gRegionMapLocations[gRegionMap->mapSecId].y + y + MAPCURSOR_Y_MIN;
+    gRegionMap->cursorPosX = gRegionMapLocations[gRegionMap->mapSectionId].x + x + MAPCURSOR_X_MIN;
+    gRegionMap->cursorPosY = gRegionMapLocations[gRegionMap->mapSectionId].y + y + MAPCURSOR_Y_MIN;
 }
 
-static u16 sub_80FB758(u16 mapSecId)
+static u16 sub_80FB758(u16 mapSectionId)
 {
-    switch (mapSecId)
+    switch (mapSectionId)
     {
     case MAPSEC_NONE:
         return 0;
@@ -915,9 +916,9 @@ static u16 sub_80FB758(u16 mapSecId)
         return FlagGet(FLAG_VISITED_EVER_GRANDE_CITY) ? 2 : 3;
 
     case MAPSEC_BATTLE_TOWER:
-        return FlagGet(FLAG_UNLOCK_BATTLE_TOWER) ? 4 : 0;
+        return FlagGet(FLAG_LANDMARK_BATTLE_TOWER) ? 4 : 0;
     case MAPSEC_SOUTHERN_ISLAND:
-        return FlagGet(FLAG_UNLOCK_SOUTHERN_ISLAND) ? 1 : 0;
+        return FlagGet(FLAG_LANDMARK_SOUTHERN_ISLAND) ? 1 : 0;
     default:
         return 1;
     }
@@ -928,21 +929,21 @@ u16 GetRegionMapSectionAt_(u16 x, u16 y)
     return GetRegionMapSectionAt(x, y);
 }
 
-static u16 sub_80FB9C0(u16 mapSecId)
+static u16 sub_80FB9C0(u16 mapSectionId)
 {
     u16 i;
 
     for (i = 0; gUnknown_083E7684[i][0] != MAPSEC_NONE; i++)
     {
-        if (gUnknown_083E7684[i][0] == mapSecId)
+        if (gUnknown_083E7684[i][0] == mapSectionId)
             return gUnknown_083E7684[i][1];
     }
-    return mapSecId;
+    return mapSectionId;
 }
 
-u16 sub_80FBA04(u16 mapSecId)
+u16 sub_80FBA04(u16 mapSectionId)
 {
-    return sub_80FB9C0(mapSecId);
+    return sub_80FB9C0(mapSectionId);
 }
 
 static void sub_80FBA18(void)
@@ -951,7 +952,7 @@ static void sub_80FBA18(void)
     u16 y;
     u16 i;
 
-    if (gRegionMap->mapSecId == MAPSEC_NONE)
+    if (gRegionMap->mapSectionId == MAPSEC_NONE)
     {
         gRegionMap->everGrandeCityArea = 0;
         return;
@@ -986,7 +987,7 @@ static void sub_80FBA18(void)
         else
         {
             x--;
-            if (GetRegionMapSectionAt(x, y) == gRegionMap->mapSecId)
+            if (GetRegionMapSectionAt(x, y) == gRegionMap->mapSectionId)
                 i++;
         }
     }
@@ -1005,7 +1006,7 @@ static bool8 sub_80FBAA0(u16 a)
 
     for (x = MAPCURSOR_X_MIN; x <= MAPCURSOR_X_MAX; x++)
     {
-        if (GetRegionMapSectionAt(x, y) == gRegionMap->mapSecId)
+        if (GetRegionMapSectionAt(x, y) == gRegionMap->mapSectionId)
             return TRUE;
     }
     return FALSE;
@@ -1120,9 +1121,9 @@ void CreateRegionMapCursor(u16 tileTag, u16 paletteTag)
             gRegionMap->cursorSprite->pos1.x = gRegionMap->cursorPosX * 8 + 4;
             gRegionMap->cursorSprite->pos1.y = gRegionMap->cursorPosY * 8 + 4;
         }
-        gRegionMap->cursorSprite->data1 = 2;
-        gRegionMap->cursorSprite->data2 = IndexOfSpritePaletteTag(paletteTag) * 16 + 0x0101;
-        gRegionMap->cursorSprite->data3 = 1;
+        gRegionMap->cursorSprite->data[1] = 2;
+        gRegionMap->cursorSprite->data[2] = IndexOfSpritePaletteTag(paletteTag) * 16 + 0x0101;
+        gRegionMap->cursorSprite->data[3] = 1;
     }
 }
 
@@ -1138,12 +1139,12 @@ static void sub_80FBCA0(void)
 
 void unref_sub_80FBCD0(void)
 {
-    gRegionMap->cursorSprite->data3 = 1;
+    gRegionMap->cursorSprite->data[3] = 1;
 }
 
 void unref_sub_80FBCE0(void)
 {
-    gRegionMap->cursorSprite->data3 = 0;
+    gRegionMap->cursorSprite->data[3] = 0;
 }
 
 static const struct OamData sPlayerIconOamData =
@@ -1258,16 +1259,16 @@ static void SpriteCB_PlayerIconZoomedIn(struct Sprite *sprite)
 {
     sprite->pos2.x = -(gRegionMap->scrollX * 2);
     sprite->pos2.y = -(gRegionMap->scrollY * 2);
-    sprite->data0 = sprite->pos1.y + sprite->pos2.y + sprite->centerToCornerVecY;
-    sprite->data1 = sprite->pos1.x + sprite->pos2.x + sprite->centerToCornerVecX;
+    sprite->data[0] = sprite->pos1.y + sprite->pos2.y + sprite->centerToCornerVecY;
+    sprite->data[1] = sprite->pos1.x + sprite->pos2.x + sprite->centerToCornerVecX;
 
     // Determine if sprite is on screen
-    if (sprite->data0 < -8 || sprite->data0 > 0xA8 || sprite->data1 < -8 || sprite->data1 > 0xF8)
-        sprite->data2 = FALSE;
+    if (sprite->data[0] < -8 || sprite->data[0] > 0xA8 || sprite->data[1] < -8 || sprite->data[1] > 0xF8)
+        sprite->data[2] = FALSE;
     else
-        sprite->data2 = TRUE;
+        sprite->data[2] = TRUE;
 
-    if (sprite->data2 == TRUE)
+    if (sprite->data[2] == TRUE)
         UpdateIconBlink(sprite);
     else
         sprite->invisible = TRUE;
@@ -1283,10 +1284,10 @@ static void UpdateIconBlink(struct Sprite *sprite)
     if (gRegionMap->blinkPlayerIcon)
     {
         // Toggle visibility every 16 frames
-        sprite->data7++;
-        if (sprite->data7 > 16)
+        sprite->data[7]++;
+        if (sprite->data[7] > 16)
         {
-            sprite->data7 = 0;
+            sprite->data[7] = 0;
             sprite->invisible = !sprite->invisible;
         }
     }
@@ -1302,44 +1303,44 @@ void sub_80FBF94(void)
         gRegionMap->blinkPlayerIcon = TRUE;
 }
 
-const u8 *GetMapSectionName(u8 *dest, u16 mapSecId, u16 length)
+const u8 *GetMapSectionName(u8 *dest, u16 mapSectionId, u16 length)
 {
-    if (mapSecId == MAPSEC_SECRET_BASE)
+    if (mapSectionId == MAPSEC_SECRET_BASE)
         return GetSecretBaseMapName(dest);
-    if (mapSecId < MAPSEC_NONE)
-        return StringCopy(dest, gRegionMapLocations[mapSecId].regionMapSectionId);
+    if (mapSectionId < MAPSEC_NONE)
+        return StringCopy(dest, gRegionMapLocations[mapSectionId].regionMapSectionId);
     if (length == 0)
         length = 18;
     return StringFill(dest, CHAR_SPACE, length);
 }
 
-const u8 *CopyMapName(u8 *dest, u16 mapSecId)
+const u8 *CopyMapName(u8 *dest, u16 mapSectionId)
 {
-    switch (mapSecId)
+    switch (mapSectionId)
     {
     case MAPSEC_UNK_0x57:
         return StringCopy(dest, gOtherText_Ferry);
     case MAPSEC_SECRET_BASE:
         return StringCopy(dest, gOtherText_SecretBase);
     default:
-        return GetMapSectionName(dest, mapSecId, 0);
+        return GetMapSectionName(dest, mapSectionId, 0);
     }
 }
 
-const u8 *CopyLocationName(u8 *dest, u16 mapSecId)
+const u8 *CopyLocationName(u8 *dest, u16 mapSectionId)
 {
-    if (mapSecId == MAPSEC_EVIL_TEAM_HIDEOUT)
+    if (mapSectionId == MAPSEC_EVIL_TEAM_HIDEOUT)
         return StringCopy(dest, gOtherText_Hideout);
     else
-        return CopyMapName(dest, mapSecId);
+        return CopyMapName(dest, mapSectionId);
 }
 
-static void GetRegionMapLocationPosition(u16 mapSecId, u16 *x, u16 *y, u16 *width, u16 *height)
+static void GetRegionMapLocationPosition(u16 mapSectionId, u16 *x, u16 *y, u16 *width, u16 *height)
 {
-    *x = gRegionMapLocations[mapSecId].x;
-    *y = gRegionMapLocations[mapSecId].y;
-    *width = gRegionMapLocations[mapSecId].width;
-    *height = gRegionMapLocations[mapSecId].height;
+    *x = gRegionMapLocations[mapSectionId].x;
+    *y = gRegionMapLocations[mapSectionId].y;
+    *width = gRegionMapLocations[mapSectionId].width;
+    *height = gRegionMapLocations[mapSectionId].height;
 }
 
 struct UnknownStruct3
@@ -1349,12 +1350,6 @@ struct UnknownStruct3
     u16 unk6;
     struct RegionMap regionMap;
 };
-
-extern u8 ewram[];
-#define ewram0 (*(struct UnknownStruct3 *)(ewram + 0))
-#define ewram888 (ewram + 0x888)
-#define ewramA6E (ewram[0xA6E])
-#define ewramBlankMapName (ewram + 0xA48)
 
 static const u16 sFlyRegionMapFrame_Pal[] = INCBIN_U16("graphics/pokenav/map_frame.gbapal");
 static const u8 sFlyRegionMapFrame_ImageLZ[] = INCBIN_U8("graphics/pokenav/map_frame.4bpp.lz");
@@ -1419,7 +1414,7 @@ static const u8 sUnknown_083E7920[][3] =
 struct UnknownStruct4
 {
     const u8 *const *unk0;
-    u16 mapSecId;
+    u16 mapSectionId;
     u16 flag;
 };
 
@@ -1427,18 +1422,18 @@ static const u8 *const sEverGrandeCityAreaNames[] = {OtherText_PokeLeague, Other
 
 static const struct UnknownStruct4 sUnknown_083E79C0[1] =
 {
-    {sEverGrandeCityAreaNames, MAPSEC_EVER_GRANDE_CITY, SYS_POKEMON_LEAGUE_FLY},
+    {sEverGrandeCityAreaNames, MAPSEC_EVER_GRANDE_CITY, FLAG_SYS_POKEMON_LEAGUE_FLY},
 };
 
 // XXX: what is this?
-static u8 *const ewram_ = ewram;
+static u8 *const ewram_ = gSharedMem;
 
 static const struct SpritePalette sFlyTargetIconSpritePalette = {sFlyTargetIcons_Pal, 2};
 
 // Fly targets that are not cities or towns
 static const u16 sSpecialFlyAreas[][2] =
 {
-    // flag, mapSecId
+    // flag, mapSectionId
     {0x848, MAPSEC_BATTLE_TOWER},
     {0xFFFF, MAPSEC_NONE},
 };
@@ -1552,10 +1547,10 @@ void CB2_InitFlyRegionMap(void)
         MenuZeroFillScreen();
         break;
     case 3:
-        InitRegionMap(&ewram0.regionMap, 0);
+        InitRegionMap(&ewram0_3.regionMap, 0);
         CreateRegionMapCursor(0, 0);
         CreateRegionMapPlayerIcon(1, 1);
-        ewram0.unk6 = ewram0.regionMap.mapSecId;
+        ewram0_3.unk6 = ewram0_3.regionMap.mapSectionId;
         StringFill(ewramBlankMapName, CHAR_SPACE, 12);
         PrintFlyTargetName();
         break;
@@ -1598,20 +1593,20 @@ static void VBlankCB_FlyRegionMap(void)
 
 static void CB2_FlyRegionMap(void)
 {
-    ewram0.unk0();
+    ewram0_3.unk0();
     AnimateSprites();
     BuildOamBuffer();
 }
 
 static void sub_80FC244(void (*func)(void))
 {
-    ewram0.unk0 = func;
-    ewram0.unk4 = 0;
+    ewram0_3.unk0 = func;
+    ewram0_3.unk4 = 0;
 }
 
 static void PrintFlyTargetName(void)
 {
-    if (ewram0.regionMap.unk16 == 2 || ewram0.regionMap.unk16 == 4)
+    if (ewram0_3.regionMap.unk16 == 2 || ewram0_3.regionMap.unk16 == 4)
     {
         u16 i = 0;
         int zero;
@@ -1620,13 +1615,13 @@ static void PrintFlyTargetName(void)
         {
             const struct UnknownStruct4 *r4 = &sUnknown_083E79C0[i];
 
-            if (ewram0.regionMap.mapSecId == r4->mapSecId)
+            if (ewram0_3.regionMap.mapSectionId == r4->mapSectionId)
             {
                 if (FlagGet(r4->flag))
                 {
                     MenuDrawTextWindow(16, 14, 29, 19);
-                    MenuPrint(ewram0.regionMap.mapSecName, 17, 15);
-                    MenuPrint_RightAligned(r4->unk0[ewram0.regionMap.everGrandeCityArea], 29, 17);
+                    MenuPrint(ewram0_3.regionMap.mapSectionName, 17, 15);
+                    MenuPrint_RightAligned(r4->unk0[ewram0_3.regionMap.everGrandeCityArea], 29, 17);
                     return;
                 }
                 break;
@@ -1637,7 +1632,7 @@ static void PrintFlyTargetName(void)
         if (zero == 0)
         {
             MenuDrawTextWindow(16, 16, 29, 19);
-            MenuPrint(ewram0.regionMap.mapSecName, 17, 17);
+            MenuPrint(ewram0_3.regionMap.mapSectionName, 17, 17);
             MenuZeroFillWindowRect(16, 14, 29, 15);
         }
     }
@@ -1696,7 +1691,7 @@ static void CreateCityTownFlyTargetIcons(void)
             else
                 r7 += 3;
             StartSpriteAnim(&gSprites[spriteId], r7);
-            gSprites[spriteId].data0 = i;
+            gSprites[spriteId].data[0] = i;
         }
         canFlyFlag++;
     }
@@ -1717,10 +1712,10 @@ static void CreateSpecialAreaFlyTargetIcons(void)
 
         if (FlagGet(sSpecialFlyAreas[i][0]))
         {
-            u16 mapSecId = sSpecialFlyAreas[i][1];
+            u16 mapSectionId = sSpecialFlyAreas[i][1];
             u8 spriteId;
 
-            GetRegionMapLocationPosition(mapSecId, &x, &y, &width, &height);
+            GetRegionMapLocationPosition(mapSectionId, &x, &y, &width, &height);
             x = (x + 1) * 8;
             y = (y + 2) * 8;
             spriteId = CreateSprite(&gFlyTargetSpriteTemplate, x, y, 10);
@@ -1729,7 +1724,7 @@ static void CreateSpecialAreaFlyTargetIcons(void)
                 gSprites[spriteId].oam.size = 1;
                 gSprites[spriteId].callback = SpriteCB_FlyTargetIcons;
                 StartSpriteAnim(&gSprites[spriteId], 6);
-                gSprites[spriteId].data0 = mapSecId;
+                gSprites[spriteId].data[0] = mapSectionId;
             }
         }
     }
@@ -1737,31 +1732,31 @@ static void CreateSpecialAreaFlyTargetIcons(void)
 
 static void SpriteCB_FlyTargetIcons(struct Sprite *sprite)
 {
-    // Blink if our mapSecId is the one selected on the map
-    if (ewram0.regionMap.mapSecId == sprite->data0)
+    // Blink if our mapSectionId is the one selected on the map
+    if (ewram0_3.regionMap.mapSectionId == sprite->data[0])
     {
         // Toggle visibility every 16 frames
-        sprite->data1++;
-        if (sprite->data1 > 16)
+        sprite->data[1]++;
+        if (sprite->data[1] > 16)
         {
-            sprite->data1 = 0;
+            sprite->data[1] = 0;
             sprite->invisible = !sprite->invisible;
         }
     }
     else
     {
-        sprite->data1 = 16;
+        sprite->data[1] = 16;
         sprite->invisible = FALSE;
     }
 }
 
 static void sub_80FC5B4(void)
 {
-    switch (ewram0.unk4)
+    switch (ewram0_3.unk4)
     {
     case 0:
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
-        ewram0.unk4++;
+        ewram0_3.unk4++;
         break;
     case 1:
         if (UpdatePaletteFade() != 0)
@@ -1773,7 +1768,7 @@ static void sub_80FC5B4(void)
 
 static void sub_80FC600(void)
 {
-    if (ewram0.unk4 == 0)
+    if (ewram0_3.unk4 == 0)
     {
         switch (sub_80FAB60())
         {
@@ -1785,7 +1780,7 @@ static void sub_80FC600(void)
             PrintFlyTargetName();
             break;
         case INPUT_EVENT_A_BUTTON:
-            if (ewram0.regionMap.unk16 == 2 || ewram0.regionMap.unk16 == 4)
+            if (ewram0_3.regionMap.unk16 == 2 || ewram0_3.regionMap.unk16 == 4)
             {
                 m4aSongNumStart(SE_SELECT);
                 ewramA6E = 1;
@@ -1803,11 +1798,11 @@ static void sub_80FC600(void)
 
 static void sub_80FC69C(void)
 {
-    switch (ewram0.unk4)
+    switch (ewram0_3.unk4)
     {
     case 0:
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
-        ewram0.unk4++;
+        ewram0_3.unk4++;
         break;
     case 1:
         if (UpdatePaletteFade() != 0)
@@ -1815,7 +1810,7 @@ static void sub_80FC69C(void)
         FreeRegionMapIconResources();
         if (ewramA6E != 0)
         {
-            switch (ewram0.regionMap.mapSecId)
+            switch (ewram0_3.regionMap.mapSectionId)
             {
             case MAPSEC_SOUTHERN_ISLAND:
                 sub_8053538(22);
@@ -1827,13 +1822,13 @@ static void sub_80FC69C(void)
                 sub_8053538((gSaveBlock2.playerGender == MALE) ? 12 : 13);
                 break;
             case MAPSEC_EVER_GRANDE_CITY:
-                sub_8053538((FlagGet(0x854) && ewram0.regionMap.everGrandeCityArea == 0) ? 20 : 11);
+                sub_8053538((FlagGet(FLAG_SYS_POKEMON_LEAGUE_FLY) && ewram0_3.regionMap.everGrandeCityArea == 0) ? 20 : 11);
                 break;
             default:
-                if (sUnknown_083E7920[ewram0.regionMap.mapSecId][2] != 0)
-                    sub_8053538(sUnknown_083E7920[ewram0.regionMap.mapSecId][2]);
+                if (sUnknown_083E7920[ewram0_3.regionMap.mapSectionId][2] != 0)
+                    sub_8053538(sUnknown_083E7920[ewram0_3.regionMap.mapSectionId][2]);
                 else
-                    warp1_set_2(sUnknown_083E7920[ewram0.regionMap.mapSecId][0], sUnknown_083E7920[ewram0.regionMap.mapSecId][1], -1);
+                    warp1_set_2(sUnknown_083E7920[ewram0_3.regionMap.mapSectionId][0], sUnknown_083E7920[ewram0_3.regionMap.mapSectionId][1], -1);
                 break;
             }
             sub_80865BC();

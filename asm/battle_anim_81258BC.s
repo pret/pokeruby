@@ -1,5 +1,4 @@
 	.include "constants/gba_constants.inc"
-	.include "constants/species_constants.inc"
 	.include "asm/macros.inc"
 
 	.syntax unified
@@ -377,7 +376,7 @@ sub_812B18C: @ 812B18C
 	bl sub_8076F98
 	lsls r0, 24
 	lsrs r6, r0, 24
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812B1CC
@@ -386,12 +385,12 @@ sub_812B18C: @ 812B18C
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bne _0812B1C4
-	ldr r0, _0812B1C0 @ =0x02019348
+	ldr r0, _0812B1C0 @ =gSharedMem + 0x19348
 	ldrh r4, [r0]
 	b _0812B272
 	.align 2, 0
 _0812B1BC: .4byte gBattleAnimArgs
-_0812B1C0: .4byte 0x02019348
+_0812B1C0: .4byte gSharedMem + 0x19348
 _0812B1C4:
 	adds r0, r5, 0
 	bl DestroyAnimVisualTask
@@ -524,14 +523,14 @@ sub_812B2B8: @ 812B2B8
 	bl sub_8076F98
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl IsContest
+	bl NotInBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812B2DC
-	ldr r0, _0812B2D8 @ =0x02019348
+	ldr r0, _0812B2D8 @ =gSharedMem + 0x19348
 	b _0812B2E6
 	.align 2, 0
-_0812B2D8: .4byte 0x02019348
+_0812B2D8: .4byte gSharedMem + 0x19348
 _0812B2DC:
 	ldr r1, _0812B304 @ =gUnknown_0202F7CA
 	ldr r0, _0812B308 @ =gBattleAnimBankAttacker

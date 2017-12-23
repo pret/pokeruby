@@ -8,7 +8,7 @@ Route125_MapObjects:: @ 8384E28
 	object_event 7, MAP_OBJ_GFX_LASS, 0, 21, 0, 21, 0, 3, 8, 17, 0, 1, 0, 0, 0, Route125_EventScript_151FE3, 0, 0, 0
 
 Route125_MapWarps:: @ 8384ED0
-	warp_def 22, 19, 0, 0, ShoalCave_LowTideEntranceRoom
+	warp_def 22, 19, 0, 0, MAP_SHOAL_CAVE_LOW_TIDE_ENTRANCE_ROOM
 
 Route125_MapBGEvents:: @ 8384ED8
 	bg_event 53, 10, 0, 8, 0, ITEM_ULTRA_BALL, 0, 0

@@ -4,21 +4,22 @@
 #include "battle_interface.h"
 #include "battle_message.h"
 #include "item.h"
-#include "items.h"
+#include "constants/items.h"
 #include "link.h"
 #include "m4a.h"
 #include "main.h"
 #include "menu_cursor.h"
-#include "moves.h"
+#include "constants/moves.h"
 #include "palette.h"
 #include "pokemon.h"
 #include "rom3.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
 #include "util.h"
+#include "ewram.h"
 
 //Possibly PokemonSubstruct1
 struct UnknownStruct3
@@ -77,9 +78,9 @@ extern u16 gUnknown_030042C0;
 extern u8 gUnknown_03004344;
 extern u8 gUnknown_0300434C[];
 
-extern const u8 gUnknown_08400CA8[];
-extern const u8 gUnknown_08400CF3[];
-extern const u8 gUnknown_08400D38[];
+extern const u8 BattleText_OtherMenu[];
+extern const u8 BattleText_MenuOptions[];
+extern const u8 BattleText_PP[];
 
 extern void sub_802C68C(void);
 extern void sub_802E1B0(void);
@@ -101,7 +102,7 @@ extern u8 GetBankSide(u8);
 extern void sub_80E43C0();
 extern void oamt_add_pos2_onto_pos1();
 extern void sub_8078B34(struct Sprite *);
-extern void StoreSpriteCallbackInData6();
+extern void StoreSpriteCallbackInData();
 extern void BattleLoadPlayerMonSprite();
 extern bool8 IsDoubleBattle(void);
 extern void sub_802D500(void);
@@ -151,7 +152,7 @@ extern u16 gBattlePartyID[];
 extern u16 gUnknown_030042A0;
 extern u16 gUnknown_030042A4;
 extern struct Window gUnknown_03004210;
-extern const u8 gUnknown_08400D89[];
+extern const u8 BattleText_SwitchWhich[];
 extern u8 gUnknown_03004348;
 extern struct BattlePokemon gBattleMons[];
 extern MainCallback gPreBattleCallback1;
@@ -161,9 +162,9 @@ extern u8 gUnknown_0300434C[];
 extern u8 gUnknown_0202E8F4;
 extern u8 gUnknown_0202E8F5;
 extern u8 gUnknown_02038470[];
-extern u16 gScriptItemId;
+extern u16 gSpecialVar_ItemId;
 extern u8 gDisplayedStringBattle[];
-extern const u8 gUnknown_08400CE0[];
+extern const u8 BattleText_LinkStandby[];
 
 extern void dp11b_obj_instanciate(u8, u8, s8, s8);
 extern u8 GetBankIdentity(u8);
@@ -745,15 +746,14 @@ void sub_802C68C(void)
                 gUnknown_03004344 = gMoveSelectionCursor[gActiveBank] + 1;
             sub_802E3B4(gUnknown_03004344, 27);
             FillWindowRect(&gUnknown_03004210, 0x1016, 0x17, 0x37, 0x1C, 0x3A);
-            InitWindow(&gUnknown_03004210, gUnknown_08400D89, 0x290, 0x17, 0x37);
+            InitWindow(&gUnknown_03004210, BattleText_SwitchWhich, 0x290, 0x17, 0x37);
             sub_8002F44(&gUnknown_03004210);
             gBattleBankFunc[gActiveBank] = sub_802CA60;
         }
     }
 }
 
-extern const u8 gUnknown_08400D49[];
-extern const u8 gUnknown_08400D38[];
+extern const u8 BattleText_Format[];
 
 void sub_802CA60(void)
 {
@@ -841,7 +841,7 @@ void sub_802CA60(void)
 
                 for (i = 0; i < 4; i++)
                 {
-                    SetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_MOVE1 + i, (u8 *)&sp0.moves[i]);
+                    SetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_MOVE1 + i, &sp0.moves[i]);
                     SetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_PP1 + i, &sp0.pp[i]);
                 }
                 SetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_PP_BONUSES, &totalPPBonuses);
@@ -849,13 +849,13 @@ void sub_802CA60(void)
         }
         else
         {
-            sub_802E12C(gUnknown_03004344, gUnknown_08400D49);
+            sub_802E12C(gUnknown_03004344, BattleText_Format);
         }
         gBattleBankFunc[gActiveBank] = sub_802C68C;
         gMoveSelectionCursor[gActiveBank] = gUnknown_03004344;
         sub_802E3B4(gMoveSelectionCursor[gActiveBank], 0);
         FillWindowRect(&gUnknown_03004210, 0x1016, 0x17, 0x37, 0x1C, 0x3A);
-        InitWindow(&gUnknown_03004210, gUnknown_08400D38, 0x290, 0x17, 0x37);
+        InitWindow(&gUnknown_03004210, BattleText_PP, 0x290, 0x17, 0x37);
         sub_8002F44(&gUnknown_03004210);
         sub_802E220();
         sub_802E2D4();
@@ -865,10 +865,10 @@ void sub_802CA60(void)
         PlaySE(SE_SELECT);
         nullsub_7(gUnknown_03004344);
         sub_802E3B4(gMoveSelectionCursor[gActiveBank], 0);
-        sub_802E12C(gMoveSelectionCursor[gActiveBank], gUnknown_08400D49);
+        sub_802E12C(gMoveSelectionCursor[gActiveBank], BattleText_Format);
         gBattleBankFunc[gActiveBank] = sub_802C68C;
         FillWindowRect(&gUnknown_03004210, 0x1016, 0x17, 0x37, 0x1C, 0x3A);
-        InitWindow(&gUnknown_03004210, gUnknown_08400D38, 0x290, 0x17, 0x37);
+        InitWindow(&gUnknown_03004210, BattleText_PP, 0x290, 0x17, 0x37);
         sub_8002F44(&gUnknown_03004210);
         sub_802E220();
         sub_802E2D4();
@@ -1149,7 +1149,7 @@ void sub_802D924(u8 taskId)
         {
             u8 savedActiveBank;
 
-            SetMonData(pkmn, MON_DATA_EXP, (u8 *)&nextLvlExp);
+            SetMonData(pkmn, MON_DATA_EXP, &nextLvlExp);
             CalculateMonStats(pkmn);
             gainedExp -= nextLvlExp - currExp;
             savedActiveBank = gActiveBank;
@@ -1166,7 +1166,7 @@ void sub_802D924(u8 taskId)
         else
         {
             currExp += gainedExp;
-            SetMonData(pkmn, MON_DATA_EXP, (u8 *)&currExp);
+            SetMonData(pkmn, MON_DATA_EXP, &currExp);
             gBattleBankFunc[bank] = sub_802D90C;
             DestroyTask(taskId);
         }
@@ -1231,7 +1231,7 @@ void sub_802DB6C(u8 taskId)
                 u8 r5;
                 u32 asdf;
 
-                SetMonData(pkmn, MON_DATA_EXP, (u8 *)&sp0);
+                SetMonData(pkmn, MON_DATA_EXP, &sp0);
                 CalculateMonStats(pkmn);
                 //r10 -= sp0 - sp4;
                 asdf = sp0 - sp4;
@@ -1247,7 +1247,7 @@ void sub_802DB6C(u8 taskId)
             {
                 //u32 asdf = sp4 + r10;
                 sp4 += r10;
-                SetMonData(pkmn, MON_DATA_EXP, (u8 *)&sp4);
+                SetMonData(pkmn, MON_DATA_EXP, &sp4);
                 gBattleBankFunc[r7] = sub_802D90C;
                 DestroyTask(taskId);
             }
@@ -1522,7 +1522,7 @@ void sub_802E03C(void)
 {
     if (gMain.callback2 == sub_800F808 && !gPaletteFade.active)
     {
-        Emitcmd35(1, gScriptItemId);
+        Emitcmd35(1, gSpecialVar_ItemId);
         PlayerBufferExecCompleted();
     }
 }
@@ -1537,18 +1537,18 @@ void bx_blink_t1(void)
 {
     u8 spriteId = gObjectBankIDs[gActiveBank];
 
-    if (gSprites[spriteId].data1 == 32)
+    if (gSprites[spriteId].data[1] == 32)
     {
-        gSprites[spriteId].data1 = 0;
+        gSprites[spriteId].data[1] = 0;
         gSprites[spriteId].invisible = FALSE;
         gDoingBattleAnim = 0;
         PlayerBufferExecCompleted();
     }
     else
     {
-        if (((u16)gSprites[spriteId].data1 % 4) == 0)
+        if (((u16)gSprites[spriteId].data[1] % 4) == 0)
             gSprites[spriteId].invisible ^= 1;
-        gSprites[spriteId].data1++;
+        gSprites[spriteId].data[1]++;
     }
 }
 
@@ -1577,7 +1577,7 @@ void sub_802E1B0(void)
     for (i = 0; i < 4; i++)
     {
         nullsub_7(i);
-        sub_802E12C(i, gUnknown_08400D49);
+        sub_802E12C(i, BattleText_Format);
         if (r4->moves[i] != 0)
             gUnknown_03004348++;
     }
@@ -1590,7 +1590,7 @@ void sub_802E220(void)
         struct UnknownStruct1 *r4 = (struct UnknownStruct1 *)&gBattleBufferA[gActiveBank][4];
         u8 *str = gDisplayedStringBattle;
 
-        str = StringCopy(str, gUnknown_08400D49);
+        str = StringCopy(str, BattleText_Format);
         str[0] = EXT_CTRL_CODE_BEGIN;
         str[1] = 0x11;
         str[2] = 2;
@@ -1607,7 +1607,7 @@ void sub_802E220(void)
     }
 }
 
-extern const u8 gUnknown_08400D52[];
+extern const u8 BattleText_ForgetMove[];
 extern const u8 gTypeNames[][7];
 
 void sub_802E2D4(void)
@@ -1615,14 +1615,14 @@ void sub_802E2D4(void)
     if (gBattleBufferA[gActiveBank][2] == 1)
     {
         FillWindowRect(&gUnknown_03004210, 0x1016, 0x17, 0x37, 0x1C, 0x3A);
-        InitWindow(&gUnknown_03004210, gUnknown_08400D52, 0x290, 0x13, 0x37);
+        InitWindow(&gUnknown_03004210, BattleText_ForgetMove, 0x290, 0x13, 0x37);
     }
     else
     {
         struct UnknownStruct1 *r4 = (struct UnknownStruct1 *)&gBattleBufferA[gActiveBank][4];
         u8 *str = gDisplayedStringBattle;
 
-        str = StringCopy(str, gUnknown_08400D49);
+        str = StringCopy(str, BattleText_Format);
         StringCopy(str, gTypeNames[gBattleMoves[r4->moves[gMoveSelectionCursor[gActiveBank]]].type]);
         FillWindowRect(&gUnknown_03004210, 0x1016, 0x17, 0x39, 0x1C, 0x3A);
         InitWindow(&gUnknown_03004210, gDisplayedStringBattle, 0x2C0, 0x17, 0x39);
@@ -1698,7 +1698,7 @@ void b_link_standby_message(void)
     {
         gUnknown_030042A4 = 0;
         gUnknown_030042A0 = 0;
-        sub_8002EB0(&gUnknown_03004210, gUnknown_08400CE0, 0x90, 2, 15);
+        sub_8002EB0(&gUnknown_03004210, BattleText_LinkStandby, 0x90, 2, 15);
     }
 }
 
@@ -1754,7 +1754,7 @@ u32 dp01_getattr_by_ch1_for_player_pokemon_(u8 a, u8 *buffer)
         battlePokemon.hpIV = GetMonData(&gPlayerParty[a], MON_DATA_HP_IV);
         battlePokemon.attackIV = GetMonData(&gPlayerParty[a], MON_DATA_ATK_IV);
         battlePokemon.defenseIV = GetMonData(&gPlayerParty[a], MON_DATA_DEF_IV);
-        battlePokemon.speedIV = GetMonData(&gPlayerParty[a], MON_DATA_SPD_IV);
+        battlePokemon.speedIV = GetMonData(&gPlayerParty[a], MON_DATA_SPEED_IV);
         battlePokemon.spAttackIV = GetMonData(&gPlayerParty[a], MON_DATA_SPATK_IV);
         battlePokemon.spDefenseIV = GetMonData(&gPlayerParty[a], MON_DATA_SPDEF_IV);
         battlePokemon.personality = GetMonData(&gPlayerParty[a], MON_DATA_PERSONALITY);
@@ -1764,7 +1764,7 @@ u32 dp01_getattr_by_ch1_for_player_pokemon_(u8 a, u8 *buffer)
         battlePokemon.maxHP = GetMonData(&gPlayerParty[a], MON_DATA_MAX_HP);
         battlePokemon.attack = GetMonData(&gPlayerParty[a], MON_DATA_ATK);
         battlePokemon.defense = GetMonData(&gPlayerParty[a], MON_DATA_DEF);
-        battlePokemon.speed = GetMonData(&gPlayerParty[a], MON_DATA_SPD);
+        battlePokemon.speed = GetMonData(&gPlayerParty[a], MON_DATA_SPEED);
         battlePokemon.spAttack = GetMonData(&gPlayerParty[a], MON_DATA_SPATK);
         battlePokemon.spDefense = GetMonData(&gPlayerParty[a], MON_DATA_SPDEF);
         battlePokemon.isEgg = GetMonData(&gPlayerParty[a], MON_DATA_IS_EGG);
@@ -1773,9 +1773,7 @@ u32 dp01_getattr_by_ch1_for_player_pokemon_(u8 a, u8 *buffer)
         GetMonData(&gPlayerParty[a], MON_DATA_NICKNAME, nickname);
         StringCopy10(battlePokemon.nickname, nickname);
         GetMonData(&gPlayerParty[a], MON_DATA_OT_NAME, battlePokemon.otName);
-        src = (u8 *)&battlePokemon;
-        for (size = 0; size < sizeof(battlePokemon); size++)
-            buffer[size] = src[size];
+        MEMCPY_ALT(&battlePokemon, buffer, sizeof(battlePokemon), size, src);
         break;
     case 1:
         data16 = GetMonData(&gPlayerParty[a], MON_DATA_SPECIES);
@@ -1796,9 +1794,7 @@ u32 dp01_getattr_by_ch1_for_player_pokemon_(u8 a, u8 *buffer)
             moveData.pp[size] = GetMonData(&gPlayerParty[a], MON_DATA_PP1 + size);
         }
         moveData.ppBonuses = GetMonData(&gPlayerParty[a], MON_DATA_PP_BONUSES);
-        src = (u8 *)&moveData;
-        for (size = 0; size < sizeof(moveData); size++)
-            buffer[size] = src[size];
+        MEMCPY_ALT(&moveData, buffer, sizeof(moveData), size, src);
         break;
     case 4:
     case 5:
@@ -1849,7 +1845,7 @@ u32 dp01_getattr_by_ch1_for_player_pokemon_(u8 a, u8 *buffer)
         size = 1;
         break;
     case 22:
-        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_SPD_EV);
+        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_SPEED_EV);
         size = 1;
         break;
     case 23:
@@ -1888,7 +1884,7 @@ u32 dp01_getattr_by_ch1_for_player_pokemon_(u8 a, u8 *buffer)
         buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_HP_IV);
         buffer[1] = GetMonData(&gPlayerParty[a], MON_DATA_ATK_IV);
         buffer[2] = GetMonData(&gPlayerParty[a], MON_DATA_DEF_IV);
-        buffer[3] = GetMonData(&gPlayerParty[a], MON_DATA_SPD_IV);
+        buffer[3] = GetMonData(&gPlayerParty[a], MON_DATA_SPEED_IV);
         buffer[4] = GetMonData(&gPlayerParty[a], MON_DATA_SPATK_IV);
         buffer[5] = GetMonData(&gPlayerParty[a], MON_DATA_SPDEF_IV);
         size = 6;
@@ -1906,7 +1902,7 @@ u32 dp01_getattr_by_ch1_for_player_pokemon_(u8 a, u8 *buffer)
         size = 1;
         break;
     case 35:
-        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_SPD_IV);
+        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_SPEED_IV);
         size = 1;
         break;
     case 36:
@@ -1968,7 +1964,7 @@ u32 dp01_getattr_by_ch1_for_player_pokemon_(u8 a, u8 *buffer)
         size = 2;
         break;
     case 46:
-        data16 = GetMonData(&gPlayerParty[a], MON_DATA_SPD);
+        data16 = GetMonData(&gPlayerParty[a], MON_DATA_SPEED);
         buffer[0] = data16;
         buffer[1] = data16 >> 8;
         size = 2;
@@ -2035,13 +2031,13 @@ u32 dp01_getattr_by_ch1_for_player_pokemon_(u8 a, u8 *buffer)
 
 void PlayerHandlecmd1(void)
 {
-    struct BattlePokemon battleMon;  // I think this is a BattlePokemon
-    u8 *src = (u8 *)&gPlayerParty[gBattlePartyID[gActiveBank]] + gBattleBufferA[gActiveBank][1];
-    u8 *dst = (u8 *)&battleMon + gBattleBufferA[gActiveBank][1];
+    struct BattlePokemon battleMon;
     u8 i;
+    // TODO: Maybe fix this. Integrating this into MEMSET_ALT is too hard.
+    u8 *src = (u8 *)&gPlayerParty[gBattlePartyID[gActiveBank]] + gBattleBufferA[gActiveBank][1];
+    u8 *dst;
 
-    for (i = 0; i < gBattleBufferA[gActiveBank][2]; i++)
-        dst[i] = src[i];
+    MEMSET_ALT(&battleMon + gBattleBufferA[gActiveBank][1], src[i], gBattleBufferA[gActiveBank][2], i, dst);
     Emitcmd29(1, gBattleBufferA[gActiveBank][2], dst);
     PlayerBufferExecCompleted();
 }
@@ -2081,38 +2077,38 @@ void dp01_setattr_by_ch1_for_player_pokemon(u8 a)
         {
             u8 iv;
 
-            SetMonData(&gPlayerParty[a], MON_DATA_SPECIES, (u8 *)&battlePokemon->species);
-            SetMonData(&gPlayerParty[a], MON_DATA_HELD_ITEM, (u8 *)&battlePokemon->item);
+            SetMonData(&gPlayerParty[a], MON_DATA_SPECIES, &battlePokemon->species);
+            SetMonData(&gPlayerParty[a], MON_DATA_HELD_ITEM, &battlePokemon->item);
             for (i = 0; i < 4; i++)
             {
-                SetMonData(&gPlayerParty[a], MON_DATA_MOVE1 + i, (u8 *)&battlePokemon->moves[i]);
-                SetMonData(&gPlayerParty[a], MON_DATA_PP1 + i, (u8 *)&battlePokemon->pp[i]);
+                SetMonData(&gPlayerParty[a], MON_DATA_MOVE1 + i, &battlePokemon->moves[i]);
+                SetMonData(&gPlayerParty[a], MON_DATA_PP1 + i, &battlePokemon->pp[i]);
             }
-            SetMonData(&gPlayerParty[a], MON_DATA_PP_BONUSES, (u8 *)&battlePokemon->ppBonuses);
-            SetMonData(&gPlayerParty[a], MON_DATA_FRIENDSHIP, (u8 *)&battlePokemon->friendship);
-            SetMonData(&gPlayerParty[a], MON_DATA_EXP, (u8 *)&battlePokemon->experience);
+            SetMonData(&gPlayerParty[a], MON_DATA_PP_BONUSES, &battlePokemon->ppBonuses);
+            SetMonData(&gPlayerParty[a], MON_DATA_FRIENDSHIP, &battlePokemon->friendship);
+            SetMonData(&gPlayerParty[a], MON_DATA_EXP, &battlePokemon->experience);
             iv = battlePokemon->hpIV;
-            SetMonData(&gPlayerParty[a], MON_DATA_HP_IV, (u8 *)&iv);
+            SetMonData(&gPlayerParty[a], MON_DATA_HP_IV, &iv);
             iv = battlePokemon->attackIV;
-            SetMonData(&gPlayerParty[a], MON_DATA_ATK_IV, (u8 *)&iv);
+            SetMonData(&gPlayerParty[a], MON_DATA_ATK_IV, &iv);
             iv = battlePokemon->defenseIV;
-            SetMonData(&gPlayerParty[a], MON_DATA_DEF_IV, (u8 *)&iv);
+            SetMonData(&gPlayerParty[a], MON_DATA_DEF_IV, &iv);
             iv = battlePokemon->speedIV;
-            SetMonData(&gPlayerParty[a], MON_DATA_SPD_IV, (u8 *)&iv);
+            SetMonData(&gPlayerParty[a], MON_DATA_SPEED_IV, &iv);
             iv = battlePokemon->spAttackIV;
-            SetMonData(&gPlayerParty[a], MON_DATA_SPATK_IV, (u8 *)&iv);
+            SetMonData(&gPlayerParty[a], MON_DATA_SPATK_IV, &iv);
             iv = battlePokemon->spDefenseIV;
-            SetMonData(&gPlayerParty[a], MON_DATA_SPDEF_IV, (u8 *)&iv);
-            SetMonData(&gPlayerParty[a], MON_DATA_PERSONALITY, (u8 *)&battlePokemon->personality);
-            SetMonData(&gPlayerParty[a], MON_DATA_STATUS, (u8 *)&battlePokemon->status1);
-            SetMonData(&gPlayerParty[a], MON_DATA_LEVEL, (u8 *)&battlePokemon->level);
-            SetMonData(&gPlayerParty[a], MON_DATA_HP, (u8 *)&battlePokemon->hp);
-            SetMonData(&gPlayerParty[a], MON_DATA_MAX_HP, (u8 *)&battlePokemon->maxHP);
-            SetMonData(&gPlayerParty[a], MON_DATA_ATK, (u8 *)&battlePokemon->attack);
-            SetMonData(&gPlayerParty[a], MON_DATA_DEF, (u8 *)&battlePokemon->defense);
-            SetMonData(&gPlayerParty[a], MON_DATA_SPD, (u8 *)&battlePokemon->speed);
-            SetMonData(&gPlayerParty[a], MON_DATA_SPATK, (u8 *)&battlePokemon->spAttack);
-            SetMonData(&gPlayerParty[a], MON_DATA_SPDEF, (u8 *)&battlePokemon->spDefense);
+            SetMonData(&gPlayerParty[a], MON_DATA_SPDEF_IV, &iv);
+            SetMonData(&gPlayerParty[a], MON_DATA_PERSONALITY, &battlePokemon->personality);
+            SetMonData(&gPlayerParty[a], MON_DATA_STATUS, &battlePokemon->status1);
+            SetMonData(&gPlayerParty[a], MON_DATA_LEVEL, &battlePokemon->level);
+            SetMonData(&gPlayerParty[a], MON_DATA_HP, &battlePokemon->hp);
+            SetMonData(&gPlayerParty[a], MON_DATA_MAX_HP, &battlePokemon->maxHP);
+            SetMonData(&gPlayerParty[a], MON_DATA_ATK, &battlePokemon->attack);
+            SetMonData(&gPlayerParty[a], MON_DATA_DEF, &battlePokemon->defense);
+            SetMonData(&gPlayerParty[a], MON_DATA_SPEED, &battlePokemon->speed);
+            SetMonData(&gPlayerParty[a], MON_DATA_SPATK, &battlePokemon->spAttack);
+            SetMonData(&gPlayerParty[a], MON_DATA_SPDEF, &battlePokemon->spDefense);
         }
         break;
     case 1:
@@ -2124,8 +2120,8 @@ void dp01_setattr_by_ch1_for_player_pokemon(u8 a)
     case 3:
         for (i = 0; i < 4; i++)
         {
-            SetMonData(&gPlayerParty[a], MON_DATA_MOVE1 + i, (u8 *)&moveData->moves[i]);
-            SetMonData(&gPlayerParty[a], MON_DATA_PP1 + i, (u8 *)&moveData->pp[i]);
+            SetMonData(&gPlayerParty[a], MON_DATA_MOVE1 + i, &moveData->moves[i]);
+            SetMonData(&gPlayerParty[a], MON_DATA_PP1 + i, &moveData->pp[i]);
         }
         SetMonData(&gPlayerParty[a], MON_DATA_PP_BONUSES, &moveData->ppBonuses);
         break;
@@ -2164,7 +2160,7 @@ void dp01_setattr_by_ch1_for_player_pokemon(u8 a)
         SetMonData(&gPlayerParty[a], MON_DATA_DEF_EV, &gBattleBufferA[gActiveBank][3]);
         break;
     case 22:
-        SetMonData(&gPlayerParty[a], MON_DATA_SPD_EV, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_SPEED_EV, &gBattleBufferA[gActiveBank][3]);
         break;
     case 23:
         SetMonData(&gPlayerParty[a], MON_DATA_SPATK_EV, &gBattleBufferA[gActiveBank][3]);
@@ -2194,7 +2190,7 @@ void dp01_setattr_by_ch1_for_player_pokemon(u8 a)
         SetMonData(&gPlayerParty[a], MON_DATA_HP_IV, &gBattleBufferA[gActiveBank][3]);
         SetMonData(&gPlayerParty[a], MON_DATA_ATK_IV, &gBattleBufferA[gActiveBank][4]);
         SetMonData(&gPlayerParty[a], MON_DATA_DEF_IV, &gBattleBufferA[gActiveBank][5]);
-        SetMonData(&gPlayerParty[a], MON_DATA_SPD_IV, &gBattleBufferA[gActiveBank][6]);
+        SetMonData(&gPlayerParty[a], MON_DATA_SPEED_IV, &gBattleBufferA[gActiveBank][6]);
         SetMonData(&gPlayerParty[a], MON_DATA_SPATK_IV, &gBattleBufferA[gActiveBank][7]);
         SetMonData(&gPlayerParty[a], MON_DATA_SPDEF_IV, &gBattleBufferA[gActiveBank][8]);
         break;
@@ -2208,7 +2204,7 @@ void dp01_setattr_by_ch1_for_player_pokemon(u8 a)
         SetMonData(&gPlayerParty[a], MON_DATA_DEF_IV, &gBattleBufferA[gActiveBank][3]);
         break;
     case 35:
-        SetMonData(&gPlayerParty[a], MON_DATA_SPD_IV, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_SPEED_IV, &gBattleBufferA[gActiveBank][3]);
         break;
     case 36:
         SetMonData(&gPlayerParty[a], MON_DATA_SPATK_IV, &gBattleBufferA[gActiveBank][3]);
@@ -2241,7 +2237,7 @@ void dp01_setattr_by_ch1_for_player_pokemon(u8 a)
         SetMonData(&gPlayerParty[a], MON_DATA_DEF, &gBattleBufferA[gActiveBank][3]);
         break;
     case 46:
-        SetMonData(&gPlayerParty[a], MON_DATA_SPD, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_SPEED, &gBattleBufferA[gActiveBank][3]);
         break;
     case 47:
         SetMonData(&gPlayerParty[a], MON_DATA_SPATK, &gBattleBufferA[gActiveBank][3]);
@@ -2288,11 +2284,11 @@ void dp01_setattr_by_ch1_for_player_pokemon(u8 a)
 
 void PlayerHandlecmd3(void)
 {
-    u8 *dst = (u8 *)&gPlayerParty[gBattlePartyID[gActiveBank]] + gBattleBufferA[gActiveBank][1];
     u8 i;
+    u8 *dst;
 
-    for (i = 0; i < gBattleBufferA[gActiveBank][2]; i++)
-        dst[i] = gBattleBufferA[gActiveBank][3 + i];
+    MEMSET_ALT(&gPlayerParty[gBattlePartyID[gActiveBank]] + gBattleBufferA[gActiveBank][1], gBattleBufferA[gActiveBank][3 + i], 
+        gBattleBufferA[gActiveBank][2], i, dst);
     PlayerBufferExecCompleted();
 }
 
@@ -2328,14 +2324,14 @@ void sub_802F934(u8 bank, u8 b)
       sub_8077ABC(bank, 2),
       sub_8077F68(bank),
       sub_8079E90(bank));
-    gSprites[gUnknown_0300434C[bank]].data1 = gObjectBankIDs[bank];
-    gSprites[gObjectBankIDs[bank]].data0 = bank;
-    gSprites[gObjectBankIDs[bank]].data2 = species;
+    gSprites[gUnknown_0300434C[bank]].data[1] = gObjectBankIDs[bank];
+    gSprites[gObjectBankIDs[bank]].data[0] = bank;
+    gSprites[gObjectBankIDs[bank]].data[2] = species;
     gSprites[gObjectBankIDs[bank]].oam.paletteNum = bank;
     StartSpriteAnim(&gSprites[gObjectBankIDs[bank]], gBattleMonForms[bank]);
     gSprites[gObjectBankIDs[bank]].invisible = TRUE;
     gSprites[gObjectBankIDs[bank]].callback = SpriteCallbackDummy;
-    gSprites[gUnknown_0300434C[bank]].data0 = sub_8046400(0, 0xFF);
+    gSprites[gUnknown_0300434C[bank]].data[0] = sub_8046400(0, 0xFF);
 }
 
 void PlayerHandleReturnPokeToBall(void)
@@ -2397,7 +2393,7 @@ void PlayerHandleTrainerThrow(void)
       sub_8079E90(gActiveBank));
     gSprites[gObjectBankIDs[gActiveBank]].oam.paletteNum = gActiveBank;
     gSprites[gObjectBankIDs[gActiveBank]].pos2.x = 240;
-    gSprites[gObjectBankIDs[gActiveBank]].data0 = -2;
+    gSprites[gObjectBankIDs[gActiveBank]].data[0] = -2;
     gSprites[gObjectBankIDs[gActiveBank]].callback = sub_80313A0;
     gBattleBankFunc[gActiveBank] = sub_802D204;
 }
@@ -2413,7 +2409,7 @@ void PlayerHandleTrainerSlide(void)
       30);
     gSprites[gObjectBankIDs[gActiveBank]].oam.paletteNum = gActiveBank;
     gSprites[gObjectBankIDs[gActiveBank]].pos2.x = -96;
-    gSprites[gObjectBankIDs[gActiveBank]].data0 = 2;
+    gSprites[gObjectBankIDs[gActiveBank]].data[0] = 2;
     gSprites[gObjectBankIDs[gActiveBank]].callback = sub_80313A0;
     gBattleBankFunc[gActiveBank] = sub_802D23C;
 }
@@ -2421,11 +2417,11 @@ void PlayerHandleTrainerSlide(void)
 void PlayerHandleTrainerSlideBack(void)
 {
     oamt_add_pos2_onto_pos1(&gSprites[gObjectBankIDs[gActiveBank]]);
-    gSprites[gObjectBankIDs[gActiveBank]].data0 = 50;
-    gSprites[gObjectBankIDs[gActiveBank]].data2 = -40;
-    gSprites[gObjectBankIDs[gActiveBank]].data4 = gSprites[gObjectBankIDs[gActiveBank]].pos1.y;
+    gSprites[gObjectBankIDs[gActiveBank]].data[0] = 50;
+    gSprites[gObjectBankIDs[gActiveBank]].data[2] = -40;
+    gSprites[gObjectBankIDs[gActiveBank]].data[4] = gSprites[gObjectBankIDs[gActiveBank]].pos1.y;
     gSprites[gObjectBankIDs[gActiveBank]].callback = sub_8078B34;
-    StoreSpriteCallbackInData6(&gSprites[gObjectBankIDs[gActiveBank]], SpriteCallbackDummy);
+    StoreSpriteCallbackInData(&gSprites[gObjectBankIDs[gActiveBank]], SpriteCallbackDummy);
     StartSpriteAnim(&gSprites[gObjectBankIDs[gActiveBank]], 1);
     gBattleBankFunc[gActiveBank] = sub_802D274;
 }
@@ -2445,8 +2441,8 @@ void PlayerHandlecmd10(void)
             ewram17810[gActiveBank].unk4 = 0;
             sub_80324F8(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
             PlaySE12WithPanning(SE_POKE_DEAD, -64);
-            gSprites[gObjectBankIDs[gActiveBank]].data1 = 0;
-            gSprites[gObjectBankIDs[gActiveBank]].data2 = 5;
+            gSprites[gObjectBankIDs[gActiveBank]].data[1] = 0;
+            gSprites[gObjectBankIDs[gActiveBank]].data[2] = 5;
             gSprites[gObjectBankIDs[gActiveBank]].callback = sub_80105EC;
             gBattleBankFunc[gActiveBank] = sub_802DE10;
         }
@@ -2590,7 +2586,7 @@ void PlayerHandlecmd18(void)
 
     gBattleBankFunc[gActiveBank] = sub_802C098;
 
-    InitWindow(&gUnknown_03004210, gUnknown_08400CF3, 400, 18, 35);
+    InitWindow(&gUnknown_03004210, BattleText_MenuOptions, 400, 18, 35);
     sub_8002F44(&gUnknown_03004210);
     sub_814A5C0(0, 0xFFFF, 12, 11679, 0);
 
@@ -2599,7 +2595,7 @@ void PlayerHandlecmd18(void)
 
     sub_802E3E4(gActionSelectionCursor[gActiveBank], 0);
 
-    StrCpyDecodeToDisplayedStringBattle((u8 *) gUnknown_08400CA8);
+    StrCpyDecodeToDisplayedStringBattle(BattleText_OtherMenu);
     InitWindow(&gUnknown_03004210, gDisplayedStringBattle, SUB_803037C_TILE_DATA_OFFSET, 2, 35);
     sub_8002F44(&gUnknown_03004210);
 }
@@ -2624,7 +2620,7 @@ void sub_80304A8(void)
     sub_802E3B4(gMoveSelectionCursor[gActiveBank], 0);
     if (gBattleBufferA[gActiveBank][2] != 1)
     {
-        InitWindow(&gUnknown_03004210, gUnknown_08400D38, 656, 23, 55);
+        InitWindow(&gUnknown_03004210, BattleText_PP, 656, 23, 55);
         sub_8002F44(&gUnknown_03004210);
     }
     sub_802E220();
@@ -2648,9 +2644,9 @@ void PlayerHandlecmd22(void)
 
     gUnknown_0300434C[gActiveBank] = CreateTask(TaskDummy, 0xFF);
     gTasks[gUnknown_0300434C[gActiveBank]].data[0] = gBattleBufferA[gActiveBank][1] & 0xF;
-    ewram[0x16054] = gBattleBufferA[gActiveBank][1] >> 4;
-    ewram[0x1609D] = gBattleBufferA[gActiveBank][2];
-    ewram[0x160C0] = gBattleBufferA[gActiveBank][3];
+    ewram16054 = gBattleBufferA[gActiveBank][1] >> 4;
+    EWRAM_1609D = gBattleBufferA[gActiveBank][2];
+    ewram160C0 = gBattleBufferA[gActiveBank][3];
     for (i = 0; i < 3; i++)
         gUnknown_02038470[i] = gBattleBufferA[gActiveBank][4 + i];
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
@@ -2841,7 +2837,7 @@ void PlayerHandleHitAnimation(void)
     else
     {
         gDoingBattleAnim = 1;
-        gSprites[gObjectBankIDs[gActiveBank]].data1 = 0;
+        gSprites[gObjectBankIDs[gActiveBank]].data[1] = 0;
         sub_8047858(gActiveBank);
         gBattleBankFunc[gActiveBank] = bx_blink_t1;
     }
@@ -2891,12 +2887,12 @@ void PlayerHandleTrainerBallThrow(void)
     u8 taskId;
 
     oamt_add_pos2_onto_pos1(&gSprites[gObjectBankIDs[gActiveBank]]);
-    gSprites[gObjectBankIDs[gActiveBank]].data0 = 50;
-    gSprites[gObjectBankIDs[gActiveBank]].data2 = -40;
-    gSprites[gObjectBankIDs[gActiveBank]].data4 = gSprites[gObjectBankIDs[gActiveBank]].pos1.y;
+    gSprites[gObjectBankIDs[gActiveBank]].data[0] = 50;
+    gSprites[gObjectBankIDs[gActiveBank]].data[2] = -40;
+    gSprites[gObjectBankIDs[gActiveBank]].data[4] = gSprites[gObjectBankIDs[gActiveBank]].pos1.y;
     gSprites[gObjectBankIDs[gActiveBank]].callback = sub_8078B34;
-    gSprites[gObjectBankIDs[gActiveBank]].data5 = gActiveBank;
-    StoreSpriteCallbackInData6(&gSprites[gObjectBankIDs[gActiveBank]], sub_8030E38);
+    gSprites[gObjectBankIDs[gActiveBank]].data[5] = gActiveBank;
+    StoreSpriteCallbackInData(&gSprites[gObjectBankIDs[gActiveBank]], sub_8030E38);
     StartSpriteAnim(&gSprites[gObjectBankIDs[gActiveBank]], 1);
     paletteNum = AllocSpritePalette(0xD6F8);
     LoadCompressedPalette(gTrainerBackPicPaletteTable[gSaveBlock2.playerGender].data, 0x100 + paletteNum * 16, 32);
@@ -2911,7 +2907,7 @@ void PlayerHandleTrainerBallThrow(void)
 
 void sub_8030E38(struct Sprite *sprite)
 {
-    u8 r4 = sprite->data5;
+    u8 r4 = sprite->data[5];
 
     FreeSpriteOamMatrix(sprite);
     FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(sprite->oam.paletteNum));

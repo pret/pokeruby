@@ -1,14 +1,14 @@
 MtChimney_EventScript_1B2C95:: @ 81B2C95
 	lock
 	faceplayer
-	checkflag 219
+	checkflag FLAG_EVIL_LEADER_PLEASE_STOP
 	call_if 0, MtChimney_EventScript_1B2CB9
-	checkflag 219
+	checkflag FLAG_EVIL_LEADER_PLEASE_STOP
 	call_if 1, MtChimney_EventScript_1B2CC2
 	closemessage
 	applymovement 1, MtChimney_Movement_1A083D
 	waitmovement 0
-	setflag 219
+	setflag FLAG_EVIL_LEADER_PLEASE_STOP
 	release
 	end
 
@@ -63,7 +63,7 @@ MtChimney_EventScript_1B2CCB:: @ 81B2CCB
 	removeobject 2
 	removeobject 3
 	removeobject 22
-	setflag 926
+	setflag FLAG_HIDE_EVIL_TEAM_MT_CHIMNEY
 	fadescreen 0
 	setobjectxyperm 1, 10, 12
 	addobject 1
@@ -84,10 +84,10 @@ MtChimney_EventScript_1B2CCB:: @ 81B2CCB
 	compare FACING, 2
 	call_if 1, MtChimney_EventScript_1B2D9E
 	removeobject 1
-	setflag 927
-	setflag 139
-	clearflag 928
-	setflag 942
+	setflag FLAG_HIDE_OTEHR_TEAM_MT_CHIMNEY
+	setflag FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY
+	clearflag FLAG_HIDE_PROF_COSMO_FALLARBOR
+	setflag FLAG_HIDE_PROF_COSMO_METEOR_FALLS
 	releaseall
 	end
 

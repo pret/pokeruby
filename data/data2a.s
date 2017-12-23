@@ -1,5 +1,8 @@
 @ the second big chunk of data
 
+#include "constants/items.h"
+#include "constants/moves.h"
+#include "constants/species.h"
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
 
@@ -7,31 +10,31 @@
 
 	.align 2
 gSpriteImageTable_81E7A10:: @ 81E7A10
-	obj_frame_tiles 0x2008000, 0x800
-	obj_frame_tiles 0x2008800, 0x800
-	obj_frame_tiles 0x2009000, 0x800
-	obj_frame_tiles 0x2009800, 0x800
+	obj_frame_tiles gSharedMem + 0x8000, 0x800
+	obj_frame_tiles gSharedMem + 0x8800, 0x800
+	obj_frame_tiles gSharedMem + 0x9000, 0x800
+	obj_frame_tiles gSharedMem + 0x9800, 0x800
 
 	.align 2
 gSpriteImageTable_81E7A30:: @ 81E7A30
-	obj_frame_tiles 0x200A000, 0x800
-	obj_frame_tiles 0x200A800, 0x800
-	obj_frame_tiles 0x200B000, 0x800
-	obj_frame_tiles 0x200B800, 0x800
+	obj_frame_tiles gSharedMem + 0xA000, 0x800
+	obj_frame_tiles gSharedMem + 0xA800, 0x800
+	obj_frame_tiles gSharedMem + 0xB000, 0x800
+	obj_frame_tiles gSharedMem + 0xB800, 0x800
 
 	.align 2
 gSpriteImageTable_81E7A50:: @ 81E7A50
-	obj_frame_tiles 0x200C000, 0x800
-	obj_frame_tiles 0x200C800, 0x800
-	obj_frame_tiles 0x200D000, 0x800
-	obj_frame_tiles 0x200D800, 0x800
+	obj_frame_tiles gSharedMem + 0xC000, 0x800
+	obj_frame_tiles gSharedMem + 0xC800, 0x800
+	obj_frame_tiles gSharedMem + 0xD000, 0x800
+	obj_frame_tiles gSharedMem + 0xD800, 0x800
 
 	.align 2
 gSpriteImageTable_81E7A70:: @ 81E7A70
-	obj_frame_tiles 0x200E000, 0x800
-	obj_frame_tiles 0x200E800, 0x800
-	obj_frame_tiles 0x200F000, 0x800
-	obj_frame_tiles 0x200F800, 0x800
+	obj_frame_tiles gSharedMem + 0xE000, 0x800
+	obj_frame_tiles gSharedMem + 0xE800, 0x800
+	obj_frame_tiles gSharedMem + 0xF000, 0x800
+	obj_frame_tiles gSharedMem + 0xF800, 0x800
 
 	.align 2
 gSpriteAnim_81E7A90:: @ 81E7A90

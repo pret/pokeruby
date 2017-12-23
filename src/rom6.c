@@ -8,12 +8,12 @@
 #include "pokemon_menu.h"
 #include "overworld.h"
 #include "script.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
 
-extern u16 gScriptLastTalked;
+extern u16 gSpecialVar_LastTalked;
 extern void (*gFieldCallback)(void);
 extern u8 gLastFieldPokeMenuOpened;
 extern void (*gUnknown_03005CE4)(void);
@@ -43,7 +43,7 @@ bool8 npc_before_player_of_type(u8 a)
     }
     else
     {
-        gScriptLastTalked = gMapObjects[mapObjId].localId;
+        gSpecialVar_LastTalked = gMapObjects[mapObjId].localId;
         return TRUE;
     }
 }
@@ -59,7 +59,7 @@ static void task08_080C9820(u8 taskId)
     u8 mapObjId;
 
     ScriptContext2_Enable();
-    gPlayerAvatar.unk6 = 1;
+    gPlayerAvatar.preventStep = TRUE;
     mapObjId = gPlayerAvatar.mapObjectId;
     if (!FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(&gMapObjects[mapObjId])
      || FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[mapObjId]))
@@ -112,7 +112,7 @@ static void sub_810B4CC(u8 taskId)
     void (*func)(void) = (void (*)(void))(((u16)gTasks[taskId].data[8] << 16) | (u16)gTasks[taskId].data[9]);
 
     func();
-    gPlayerAvatar.unk6 = 0;
+    gPlayerAvatar.preventStep = FALSE;
     DestroyTask(taskId);
 }
 

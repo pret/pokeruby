@@ -1,5 +1,4 @@
 	.include "constants/gba_constants.inc"
-	.include "constants/species_constants.inc"
 	.include "asm/macros.inc"
 
 	.syntax unified
@@ -9,7 +8,7 @@
 	thumb_func_start UnusedPokedexAreaScreen
 UnusedPokedexAreaScreen: @ 8110664
 	push {lr}
-	ldr r3, _08110678 @ =0x02000000
+	ldr r3, _08110678 @ =gSharedMem
 	str r1, [r3, 0x4]
 	str r2, [r3, 0x8]
 	strh r0, [r3, 0xE]
@@ -18,7 +17,7 @@ UnusedPokedexAreaScreen: @ 8110664
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08110678: .4byte 0x02000000
+_08110678: .4byte gSharedMem
 _0811067C: .4byte CB2_UnusedPokedexAreaScreen
 	thumb_func_end UnusedPokedexAreaScreen
 
@@ -89,7 +88,7 @@ _08110714: .4byte REG_BG0VOFS
 _08110718: .4byte 0x0000fff8
 _0811071C: .4byte REG_BG2VOFS
 _08110720:
-	ldr r4, _0811073C @ =0x020006e8
+	ldr r4, _0811073C @ =gSharedMem + 0x6E8
 	adds r0, r4, 0
 	movs r1, 0
 	bl InitRegionMap
@@ -102,7 +101,7 @@ _08110720:
 	bl StringFill
 	b _081107C0
 	.align 2, 0
-_0811073C: .4byte 0x020006e8
+_0811073C: .4byte gSharedMem + 0x6E8
 _08110740:
 	bl sub_8110824
 	b _081107C0
@@ -189,7 +188,7 @@ sub_81107DC: @ 81107DC
 	thumb_func_start sub_81107F0
 sub_81107F0: @ 81107F0
 	push {lr}
-	ldr r0, _08110810 @ =0x02000000
+	ldr r0, _08110810 @ =gSharedMem
 	ldr r0, [r0]
 	bl _call_via_r0
 	bl sub_8111110
@@ -199,23 +198,23 @@ sub_81107F0: @ 81107F0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08110810: .4byte 0x02000000
+_08110810: .4byte gSharedMem
 	thumb_func_end sub_81107F0
 
 	thumb_func_start sub_8110814
 sub_8110814: @ 8110814
-	ldr r1, _08110820 @ =0x02000000
+	ldr r1, _08110820 @ =gSharedMem
 	str r0, [r1]
 	movs r0, 0
 	strh r0, [r1, 0xC]
 	bx lr
 	.align 2, 0
-_08110820: .4byte 0x02000000
+_08110820: .4byte gSharedMem
 	thumb_func_end sub_8110814
 
 	thumb_func_start sub_8110824
 sub_8110824: @ 8110824
-	ldr r0, _08110834 @ =0x02000000
+	ldr r0, _08110834 @ =gSharedMem
 	movs r1, 0x8A
 	lsls r1, 1
 	adds r0, r1
@@ -223,13 +222,13 @@ sub_8110824: @ 8110824
 	strh r1, [r0]
 	bx lr
 	.align 2, 0
-_08110834: .4byte 0x02000000
+_08110834: .4byte gSharedMem
 	thumb_func_end sub_8110824
 
 	thumb_func_start DrawAreaGlow
 DrawAreaGlow: @ 8110838
 	push {lr}
-	ldr r1, _08110854 @ =0x02000000
+	ldr r1, _08110854 @ =gSharedMem
 	movs r2, 0x8A
 	lsls r2, 1
 	adds r0, r1, r2
@@ -243,7 +242,7 @@ DrawAreaGlow: @ 8110838
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08110854: .4byte 0x02000000
+_08110854: .4byte gSharedMem
 _08110858: .4byte _0811085C
 	.align 2, 0
 _0811085C:
@@ -254,12 +253,12 @@ _0811085C:
 	.4byte _081108C0
 	.4byte _081108D0
 _08110874:
-	ldr r0, _08110880 @ =0x02000000
+	ldr r0, _08110880 @ =gSharedMem
 	ldrh r0, [r0, 0xE]
 	bl FindMapsWithMon
 	b _081108F0
 	.align 2, 0
-_08110880: .4byte 0x02000000
+_08110880: .4byte gSharedMem
 _08110884:
 	bl BuildAreaGlowTilemap
 	b _081108F0
@@ -273,7 +272,7 @@ _08110894: .4byte gUnknown_083F8438
 _08110898: .4byte 0x0600c000
 _0811089C:
 	ldr r1, _081108B0 @ =0x040000d4
-	ldr r0, _081108B4 @ =0x02000116
+	ldr r0, _081108B4 @ =gSharedMem + 0x116
 	str r0, [r1]
 	ldr r0, _081108B8 @ =0x0600f000
 	str r0, [r1, 0x4]
@@ -283,7 +282,7 @@ _0811089C:
 	b _081108F0
 	.align 2, 0
 _081108B0: .4byte 0x040000d4
-_081108B4: .4byte 0x02000116
+_081108B4: .4byte gSharedMem + 0x116
 _081108B8: .4byte 0x0600f000
 _081108BC: .4byte 0x80000280
 _081108C0:
@@ -312,7 +311,7 @@ _081108E4:
 _081108E8: .4byte REG_BG0CNT
 _081108EC: .4byte 0x00001e0d
 _081108F0:
-	ldr r1, _08110904 @ =0x02000000
+	ldr r1, _08110904 @ =gSharedMem
 	movs r2, 0x8A
 	lsls r2, 1
 	adds r1, r2
@@ -324,7 +323,7 @@ _08110900:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08110904: .4byte 0x02000000
+_08110904: .4byte gSharedMem
 	thumb_func_end DrawAreaGlow
 
 	thumb_func_start FindMapsWithMon
@@ -346,7 +345,7 @@ FindMapsWithMon: @ 8110908
 	bne _0811091E
 	b _08110A44
 _0811091E:
-	ldr r2, _08110988 @ =0x02000000
+	ldr r2, _08110988 @ =gSharedMem
 	movs r1, 0x88
 	lsls r1, 1
 	adds r0, r2, r1
@@ -405,7 +404,7 @@ _08110960:
 	.ifdef SAPPHIRE
 _sub_8110908_Latias: .4byte 407
 	.endif
-_08110988: .4byte 0x02000000
+_08110988: .4byte gSharedMem
 _0811098C: .4byte gUnknown_083F856C
 _08110990: .4byte gUnknown_083F856E
 _08110994:
@@ -501,7 +500,7 @@ _08110A28:
 	.align 2, 0
 _08110A40: .4byte gWildMonHeaders
 _08110A44:
-	ldr r4, _08110A7C @ =0x02000000
+	ldr r4, _08110A7C @ =gSharedMem
 	movs r0, 0x89
 	lsls r0, 1
 	adds r1, r4, r0
@@ -528,7 +527,7 @@ _08110A44:
 	strh r0, [r1]
 	b _08110A8C
 	.align 2, 0
-_08110A7C: .4byte 0x02000000
+_08110A7C: .4byte gSharedMem
 _08110A80: .4byte gSaveBlock1 + 0x3144
 _08110A84:
 	movs r1, 0x88
@@ -551,7 +550,7 @@ SetAreaHasMon: @ 8110A98
 	lsrs r2, r0, 16
 	lsls r1, 16
 	lsrs r1, 16
-	ldr r5, _08110AE0 @ =0x02000000
+	ldr r5, _08110AE0 @ =gSharedMem
 	movs r0, 0x88
 	lsls r0, 1
 	adds r4, r5, r0
@@ -581,7 +580,7 @@ _08110AD8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08110AE0: .4byte 0x02000000
+_08110AE0: .4byte gSharedMem
 	thumb_func_end SetAreaHasMon
 
 	thumb_func_start SetSpecialMapHasMon
@@ -591,7 +590,7 @@ SetSpecialMapHasMon: @ 8110AE4
 	lsrs r2, r0, 16
 	lsls r1, 16
 	lsrs r1, 16
-	ldr r0, _08110B9C @ =0x02000000
+	ldr r0, _08110B9C @ =gSharedMem
 	movs r3, 0x89
 	lsls r3, 1
 	adds r0, r3
@@ -635,7 +634,7 @@ _08110B32:
 	bne _08110B16
 _08110B42:
 	movs r4, 0
-	ldr r0, _08110B9C @ =0x02000000
+	ldr r0, _08110B9C @ =gSharedMem
 	movs r1, 0x89
 	lsls r1, 1
 	adds r2, r0, r1
@@ -683,7 +682,7 @@ _08110B96:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08110B9C: .4byte 0x02000000
+_08110B9C: .4byte gSharedMem
 _08110BA0: .4byte gUnknown_083F857A
 	thumb_func_end SetSpecialMapHasMon
 
@@ -779,7 +778,7 @@ BuildAreaGlowTilemap: @ 8110C34
 	movs r0, 0
 	strh r0, [r1]
 	mov r9, r1
-	ldr r0, _08110E60 @ =0x02000000
+	ldr r0, _08110E60 @ =gSharedMem
 	mov r8, r0
 	ldr r1, _08110E64 @ =gUnknown_02039262
 	mov r12, r1
@@ -873,7 +872,7 @@ _08110CCC:
 	strh r0, [r7]
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r3, _08110E78 @ =0x02000110
+	ldr r3, _08110E78 @ =gSharedMem + 0x110
 	ldrh r3, [r3]
 	cmp r0, r3
 	bcc _08110C9A
@@ -886,7 +885,7 @@ _08110D04:
 	ldr r6, _08110E64 @ =gUnknown_02039262
 	mov r10, r0
 	adds r3, r1, 0
-	ldr r5, _08110E7C @ =0x02000116
+	ldr r5, _08110E7C @ =gSharedMem + 0x116
 	ldr r4, _08110E74 @ =0x0000ffff
 	ldr r7, _08110E70 @ =gUnknown_02039264
 _08110D1A:
@@ -1064,14 +1063,14 @@ _08110E3C:
 	b _0811105E
 	.align 2, 0
 _08110E5C: .4byte gUnknown_02039260
-_08110E60: .4byte 0x02000000
+_08110E60: .4byte gSharedMem
 _08110E64: .4byte gUnknown_02039262
 _08110E68: .4byte 0x0000027f
 _08110E6C: .4byte gUnknown_02039266
 _08110E70: .4byte gUnknown_02039264
 _08110E74: .4byte 0x0000ffff
-_08110E78: .4byte 0x02000110
-_08110E7C: .4byte 0x02000116
+_08110E78: .4byte gSharedMem + 0x110
+_08110E7C: .4byte gSharedMem + 0x116
 _08110E80:
 	cmp r1, 0
 	bne _08110E86
@@ -1341,7 +1340,7 @@ _08111080: .4byte 0x027f0000
 	thumb_func_start sub_8111084
 sub_8111084: @ 8111084
 	push {lr}
-	ldr r0, _081110AC @ =0x02000000
+	ldr r0, _081110AC @ =gSharedMem
 	movs r2, 0x89
 	lsls r2, 1
 	adds r1, r0, r2
@@ -1360,7 +1359,7 @@ sub_8111084: @ 8111084
 	movs r0, 0x1
 	b _081110BA
 	.align 2, 0
-_081110AC: .4byte 0x02000000
+_081110AC: .4byte gSharedMem
 _081110B0: .4byte 0x0000061e
 _081110B4:
 	ldr r3, _081110FC @ =0x0000061e
@@ -1413,7 +1412,7 @@ sub_8111110: @ 8111110
 	mov r7, r9
 	mov r6, r8
 	push {r6,r7}
-	ldr r0, _0811114C @ =0x02000000
+	ldr r0, _0811114C @ =gSharedMem
 	ldr r2, _08111150 @ =0x0000061e
 	adds r1, r0, r2
 	ldrb r1, [r1]
@@ -1439,7 +1438,7 @@ sub_8111110: @ 8111110
 	adds r0, r5, r2
 	b _0811115C
 	.align 2, 0
-_0811114C: .4byte 0x02000000
+_0811114C: .4byte gSharedMem
 _08111150: .4byte 0x0000061e
 _08111154: .4byte 0x00000616
 _08111158:
@@ -1598,7 +1597,7 @@ _08111284: .4byte 0x0000061e
 	thumb_func_start sub_8111288
 sub_8111288: @ 8111288
 	push {lr}
-	ldr r1, _08111298 @ =0x02000000
+	ldr r1, _08111298 @ =gSharedMem
 	ldrh r0, [r1, 0xC]
 	cmp r0, 0
 	beq _0811129C
@@ -1606,7 +1605,7 @@ sub_8111288: @ 8111288
 	beq _081112A2
 	b _081112B2
 	.align 2, 0
-_08111298: .4byte 0x02000000
+_08111298: .4byte gSharedMem
 _0811129C:
 	movs r0, 0x1
 	strh r0, [r1, 0xC]
@@ -1628,7 +1627,7 @@ _081112B8: .4byte sub_81112BC
 	thumb_func_start sub_81112BC
 sub_81112BC: @ 81112BC
 	push {lr}
-	ldr r0, _081112DC @ =0x02000000
+	ldr r0, _081112DC @ =gSharedMem
 	ldrh r0, [r0, 0xC]
 	cmp r0, 0
 	bne _08111308
@@ -1642,7 +1641,7 @@ sub_81112BC: @ 81112BC
 	bl sub_8110814
 	b _08111308
 	.align 2, 0
-_081112DC: .4byte 0x02000000
+_081112DC: .4byte gSharedMem
 _081112E0: .4byte gMain
 _081112E4: .4byte sub_8111314
 _081112E8:
@@ -1674,7 +1673,7 @@ _08111310: .4byte sub_8111360
 sub_8111314: @ 8111314
 	push {r4,lr}
 	sub sp, 0x4
-	ldr r4, _08111328 @ =0x02000000
+	ldr r4, _08111328 @ =gSharedMem
 	ldrh r1, [r4, 0xC]
 	cmp r1, 0
 	beq _0811132C
@@ -1682,7 +1681,7 @@ sub_8111314: @ 8111314
 	beq _08111344
 	b _08111358
 	.align 2, 0
-_08111328: .4byte 0x02000000
+_08111328: .4byte gSharedMem
 _0811132C:
 	movs r0, 0x15
 	negs r0, r0
@@ -1714,7 +1713,7 @@ _08111358:
 sub_8111360: @ 8111360
 	push {r4,lr}
 	sub sp, 0x4
-	ldr r4, _08111374 @ =0x02000000
+	ldr r4, _08111374 @ =gSharedMem
 	ldrh r1, [r4, 0xC]
 	cmp r1, 0
 	beq _08111378
@@ -1722,7 +1721,7 @@ sub_8111360: @ 8111360
 	beq _08111390
 	b _081113A4
 	.align 2, 0
-_08111374: .4byte 0x02000000
+_08111374: .4byte gSharedMem
 _08111378:
 	movs r0, 0x15
 	negs r0, r0
@@ -1753,7 +1752,7 @@ _081113A4:
 	thumb_func_start ShowPokedexAreaScreen
 ShowPokedexAreaScreen: @ 81113AC
 	push {r4,lr}
-	ldr r2, _081113DC @ =0x02000000
+	ldr r2, _081113DC @ =gSharedMem
 	movs r3, 0
 	movs r4, 0
 	strh r0, [r2, 0xE]
@@ -1776,7 +1775,7 @@ ShowPokedexAreaScreen: @ 81113AC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081113DC: .4byte 0x02000000
+_081113DC: .4byte gSharedMem
 _081113E0: .4byte 0x000006e4
 _081113E4: .4byte Task_PokedexAreaScreen_0
 _081113E8: .4byte gTasks
@@ -1856,7 +1855,7 @@ _08111488:
 	bl FreeAllSpritePalettes
 	b _08111540
 _08111496:
-	ldr r4, _081114B4 @ =0x020006e8
+	ldr r4, _081114B4 @ =gSharedMem + 0x6E8
 	adds r0, r4, 0
 	movs r1, 0
 	bl InitRegionMap
@@ -1869,7 +1868,7 @@ _08111496:
 	bl StringFill
 	b _08111540
 	.align 2, 0
-_081114B4: .4byte 0x020006e8
+_081114B4: .4byte gSharedMem + 0x6E8
 _081114B8:
 	bl sub_8110824
 	b _08111540
@@ -2051,7 +2050,7 @@ _0811160A:
 	cmp r0, 0
 	bne _0811164C
 	bl DestroyAreaSprites
-	ldr r0, _08111634 @ =0x02000000
+	ldr r0, _08111634 @ =gSharedMem
 	ldr r1, _08111638 @ =0x000006e4
 	adds r0, r1
 	ldr r1, [r0]
@@ -2062,7 +2061,7 @@ _0811160A:
 	b _0811164C
 	.align 2, 0
 _08111630: .4byte gPaletteFade
-_08111634: .4byte 0x02000000
+_08111634: .4byte gSharedMem
 _08111638: .4byte 0x000006e4
 _0811163C:
 	ldr r0, _08111654 @ =gTasks
@@ -2093,7 +2092,7 @@ CreateAreaMarkerSprites: @ 8111658
 	bl LoadSpritePalette
 	movs r5, 0
 	movs r1, 0
-	ldr r0, _08111728 @ =0x02000000
+	ldr r0, _08111728 @ =gSharedMem
 	movs r3, 0x89
 	lsls r3, 1
 	adds r2, r0, r3
@@ -2174,7 +2173,7 @@ _081116FC:
 	cmp r0, r2
 	blt _08111680
 _0811170C:
-	ldr r0, _08111728 @ =0x02000000
+	ldr r0, _08111728 @ =gSharedMem
 	movs r3, 0xDC
 	lsls r3, 3
 	adds r0, r3
@@ -2187,7 +2186,7 @@ _0811170C:
 	.align 2, 0
 _08111720: .4byte gUnknown_083F858C
 _08111724: .4byte gUnknown_083F8594
-_08111728: .4byte 0x02000000
+_08111728: .4byte gSharedMem
 _0811172C: .4byte gRegionMapLocations
 _08111730: .4byte gSpriteTemplate_83F85A4
 _08111734: .4byte gSprites
@@ -2201,7 +2200,7 @@ DestroyAreaSprites: @ 8111738
 	movs r0, 0x2
 	bl FreeSpritePaletteByTag
 	movs r4, 0
-	ldr r1, _081117A4 @ =0x02000000
+	ldr r1, _081117A4 @ =gSharedMem
 	movs r2, 0xDC
 	lsls r2, 3
 	adds r0, r1, r2
@@ -2230,7 +2229,7 @@ _08111776:
 	movs r0, 0x3
 	bl FreeSpritePaletteByTag
 	movs r4, 0
-	ldr r5, _081117A8 @ =0x02000fa8
+	ldr r5, _081117A8 @ =gSharedMem + 0xFA8
 _08111786:
 	lsls r0, r4, 2
 	adds r0, r5
@@ -2248,8 +2247,8 @@ _08111794:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081117A4: .4byte 0x02000000
-_081117A8: .4byte 0x02000fa8
+_081117A4: .4byte gSharedMem
+_081117A8: .4byte gSharedMem + 0xFA8
 	thumb_func_end DestroyAreaSprites
 
 	thumb_func_start LoadAreaUnknownGraphics
@@ -2262,7 +2261,7 @@ LoadAreaUnknownGraphics: @ 81117AC
 	str r0, [sp]
 	str r1, [sp, 0x4]
 	ldr r0, _081117D8 @ =gAreaUnknownTiles
-	ldr r1, _081117DC @ =0x02000fb4
+	ldr r1, _081117DC @ =gSharedMem + 0xFB4
 	bl LZ77UnCompWram
 	mov r0, sp
 	bl LoadSpriteSheet
@@ -2274,14 +2273,14 @@ LoadAreaUnknownGraphics: @ 81117AC
 	.align 2, 0
 _081117D4: .4byte gUnknown_083F8664
 _081117D8: .4byte gAreaUnknownTiles
-_081117DC: .4byte 0x02000fb4
+_081117DC: .4byte gSharedMem + 0xFB4
 _081117E0: .4byte gUnknown_083F865C
 	thumb_func_end LoadAreaUnknownGraphics
 
 	thumb_func_start CreateAreaUnknownSprites
 CreateAreaUnknownSprites: @ 81117E4
 	push {r4-r7,lr}
-	ldr r1, _08111810 @ =0x02000000
+	ldr r1, _08111810 @ =gSharedMem
 	movs r2, 0x88
 	lsls r2, 1
 	adds r0, r1, r2
@@ -2303,7 +2302,7 @@ _081117FC:
 	bls _081117FC
 	b _0811188E
 	.align 2, 0
-_08111810: .4byte 0x02000000
+_08111810: .4byte gSharedMem
 _08111814: .4byte 0x00000fa8
 _08111818:
 	movs r4, 0

@@ -6,15 +6,14 @@
 #include "mystery_event_script.h"
 #include "palette.h"
 #include "save.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "sprite.h"
 #include "string_util.h"
 #include "strings2.h"
 #include "task.h"
 #include "text.h"
-
-extern u8 unk_2000000[];
+#include "ewram.h"
 
 static EWRAM_DATA u8 gUnknown_02039338 = 0;
 
@@ -287,8 +286,8 @@ static void CB2_MysteryEventMenu(void)
     case 11:
         if (gReceivedRemoteLinkPlayers)
             break;
-        unkVal = RunMysteryEventScript(unk_2000000);
-        CpuFill32(0, unk_2000000, 0x7D4);
+        unkVal = RunMysteryEventScript(gSharedMem);
+        CpuFill32(0, gSharedMem, 0x7D4);
         if (!GetEventLoadMessage(gStringVar4, unkVal))
             TrySavingData(NORMAL_SAVE);
         gMain.state++;

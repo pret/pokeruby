@@ -98,21 +98,21 @@ void Step8(struct Sprite *sprite, u8 dir)
 
 void oamt_npc_ministep_reset(struct Sprite *sprite, u8 a2, u8 a3)
 {
-    sprite->data3 = a2;
-    sprite->data4 = a3;
-    sprite->data5 = 0;
+    sprite->data[3] = a2;
+    sprite->data[4] = a3;
+    sprite->data[5] = 0;
 }
 
 bool8 obj_npc_ministep(struct Sprite *sprite)
 {
-    if (sprite->data5 >= gUnknown_08376194[sprite->data4])
+    if (sprite->data[5] >= gUnknown_08376194[sprite->data[4]])
         return FALSE;
 
-    gUnknown_08376180[sprite->data4][sprite->data5](sprite, sprite->data3);
+    gUnknown_08376180[sprite->data[4]][sprite->data[5]](sprite, sprite->data[3]);
 
-    sprite->data5++;
+    sprite->data[5]++;
 
-    if (sprite->data5 < gUnknown_08376194[sprite->data4])
+    if (sprite->data[5] < gUnknown_08376194[sprite->data[4]])
         return FALSE;
 
     return TRUE;
@@ -120,22 +120,22 @@ bool8 obj_npc_ministep(struct Sprite *sprite)
 
 void sub_806467C(struct Sprite *sprite, u8 a2)
 {
-    sprite->data3 = a2;
-    sprite->data4 = 0;
-    sprite->data5 = 0;
+    sprite->data[3] = a2;
+    sprite->data[4] = 0;
+    sprite->data[5] = 0;
 }
 
 bool8 sub_806468C(struct Sprite *sprite)
 {
-    if (!(sprite->data4 & 1))
+    if (!(sprite->data[4] & 1))
     {
-        Step1(sprite, sprite->data3);
-        sprite->data5++;
+        Step1(sprite, sprite->data[3]);
+        sprite->data[5]++;
     }
 
-    sprite->data4++;
+    sprite->data[4]++;
 
-    if (sprite->data5 > 15)
+    if (sprite->data[5] > 15)
         return TRUE;
     else
         return FALSE;
@@ -148,10 +148,10 @@ s16 sub_80646C8(s16 a1, u8 a2)
 
 void sub_80646E4(struct Sprite *sprite, u8 a2, u8 a3, u8 a4)
 {
-    sprite->data3 = a2;
-    sprite->data4 = a3;
-    sprite->data5 = a4;
-    sprite->data6 = 0;
+    sprite->data[3] = a2;
+    sprite->data[4] = a3;
+    sprite->data[5] = a4;
+    sprite->data[6] = 0;
 }
 
 u8 sub_8064704(struct Sprite *sprite)
@@ -165,17 +165,17 @@ u8 sub_8064704(struct Sprite *sprite)
 
     v2 = 0;
 
-    if (sprite->data4)
-        Step1(sprite, sprite->data3);
+    if (sprite->data[4])
+        Step1(sprite, sprite->data[3]);
 
-    sprite->pos2.y = sub_80646C8(sprite->data6 >> v6[sprite->data4], sprite->data5);
+    sprite->pos2.y = sub_80646C8(sprite->data[6] >> v6[sprite->data[4]], sprite->data[5]);
 
-    sprite->data6++;
+    sprite->data[6]++;
 
-    if (sprite->data6 == (v5[sprite->data4] >> 1))
+    if (sprite->data[6] == (v5[sprite->data[4]] >> 1))
         v2 = 1;
 
-    if (sprite->data6 >= v5[sprite->data4])
+    if (sprite->data[6] >= v5[sprite->data[4]])
     {
         sprite->pos2.y = 0;
         v2 = -1;
@@ -195,17 +195,17 @@ u8 sub_806478C(struct Sprite *sprite)
 
     v2 = 0;
 
-    if (sprite->data4 && !(sprite->data6 & 1))
-        Step1(sprite, sprite->data3);
+    if (sprite->data[4] && !(sprite->data[6] & 1))
+        Step1(sprite, sprite->data[3]);
 
-    sprite->pos2.y = sub_80646C8(sprite->data6 >> v6[sprite->data4], sprite->data5);
+    sprite->pos2.y = sub_80646C8(sprite->data[6] >> v6[sprite->data[4]], sprite->data[5]);
 
-    sprite->data6++;
+    sprite->data[6]++;
 
-    if (sprite->data6 == (v5[sprite->data4] >> 1))
+    if (sprite->data[6] == (v5[sprite->data[4]] >> 1))
         v2 = 1;
 
-    if (sprite->data6 >= v5[sprite->data4])
+    if (sprite->data[6] >= v5[sprite->data[4]])
     {
         sprite->pos2.y = 0;
         v2 = -1;
@@ -216,14 +216,14 @@ u8 sub_806478C(struct Sprite *sprite)
 
 void sub_8064820(struct Sprite *sprite, u16 a2)
 {
-    sprite->data3 = a2;
+    sprite->data[3] = a2;
 }
 
 bool8 sub_8064824(struct Sprite *sprite)
 {
-    sprite->data3--;
+    sprite->data[3]--;
 
-    if (sprite->data3 == 0)
+    if (sprite->data[3] == 0)
         return TRUE;
     else
         return FALSE;
@@ -273,7 +273,7 @@ void sub_806487C(struct Sprite *sprite, bool8 invisible)
 
 void sub_8064970(struct Sprite *sprite)
 {
-    SetObjectSubpriorityByZCoord(sprite->data1, sprite, 1);
+    SetObjectSubpriorityByZCoord(sprite->data[1], sprite, 1);
     sub_806487C(sprite, 0);
 }
 
@@ -283,7 +283,7 @@ void sub_8064990(u8 a1, u8 dir)
     for (i = 0; i < MAX_SPRITES; i++)
     {
         struct Sprite *sprite = &gSprites[i];
-        if (sprite->inUse && sprite->callback == sub_8064970 && (u8)sprite->data0 == a1)
+        if (sprite->inUse && sprite->callback == sub_8064970 && (u8)sprite->data[0] == a1)
         {
             u8 animNum = FieldObjectDirectionToImageAnimId(dir);
             StartSpriteAnim(sprite, animNum);
@@ -294,7 +294,7 @@ void sub_8064990(u8 a1, u8 dir)
 
 u32 oe_exec_and_other_stuff(u8 fieldEffectId, struct MapObject *mapObject)
 {
-    FieldObjectGetLocalIdAndMap(mapObject, (u8 *)&gFieldEffectArguments[0], (u8 *)&gFieldEffectArguments[1], (u8 *)&gFieldEffectArguments[2]);
+    FieldObjectGetLocalIdAndMap(mapObject, &gFieldEffectArguments[0], &gFieldEffectArguments[1], &gFieldEffectArguments[2]);
     return FieldEffectStart(fieldEffectId);
 }
 

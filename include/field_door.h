@@ -5,8 +5,8 @@ struct DoorGraphics
 {
     u16 metatileNum;
     u8 unk2;
-    void *tiles;
-    void *palette;
+    const void *tiles;
+    const void *palette;
 };
 
 struct DoorAnimFrame

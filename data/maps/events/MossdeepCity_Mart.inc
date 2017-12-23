@@ -5,8 +5,8 @@ MossdeepCity_Mart_MapObjects:: @ 838A984
 	object_event 4, MAP_OBJ_GFX_SAILOR, 0, 5, 0, 3, 0, 3, 2, 17, 0, 0, 0, 0, 0, MossdeepCity_Mart_EventScript_15A968, 0, 0, 0
 
 MossdeepCity_Mart_MapWarps:: @ 838A9E4
-	warp_def 3, 7, 0, 4, MossdeepCity
-	warp_def 4, 7, 0, 4, MossdeepCity
+	warp_def 3, 7, 0, 4, MAP_MOSSDEEP_CITY
+	warp_def 4, 7, 0, 4, MAP_MOSSDEEP_CITY
 
 MossdeepCity_Mart_MapEvents:: @ 838A9F4
 	map_events MossdeepCity_Mart_MapObjects, MossdeepCity_Mart_MapWarps, 0x0, 0x0

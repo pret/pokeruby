@@ -7,7 +7,7 @@ CC1             := tools/agbcc/bin/agbcc
 override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Wunused -Werror -O2 -fhex-asm
 
 CPP      := $(DEVKITARM)/bin/arm-none-eabi-cpp
-CPPFLAGS := -I tools/agbcc/include -iquote include -nostdinc -undef -Werror
+CPPFLAGS := -I tools/agbcc/include -iquote include -nostdinc -undef -Werror -Wno-trigraphs
 
 LD      := $(DEVKITARM)/bin/arm-none-eabi-ld
 
@@ -40,9 +40,9 @@ VERSIONS := ruby sapphire ruby_rev1 sapphire_rev1 ruby_rev2 sapphire_rev2 ruby_d
 $(VERSIONS) $(VERSIONS:%=compare_%)
 
 
-$(shell mkdir -p build/ $(VERSIONS:%=build/%/{,asm,data,src{,/battle,/field,/debug,/scene,/pokemon,/engine,/libs}}))
+$(shell mkdir -p build/ $(VERSIONS:%=build/%/{,asm,data,src{,/battle{,/anim},/field,/debug,/scene,/pokemon,/engine,/libs}}))
 
-C_SRCS := $(wildcard src/*/*.c) $(wildcard src/*.c)
+C_SRCS := $(shell find src -iname "*.c")
 ASM_SRCS := $(wildcard asm/*.s)
 DATA_ASM_SRCS := $(wildcard data/*.s)
 
@@ -143,7 +143,7 @@ $$($1_DATA_ASM_OBJS): VERSION := $2
 $$($1_DATA_ASM_OBJS): REVISION := $3
 $$($1_DATA_ASM_OBJS): LANGUAGE := $4
 build/$1/data/%.o: data/%.s $$$$(asm_dep)
-	$$(PREPROC) $$< charmap.txt | $$(AS) $$(ASFLAGS) --defsym $$(VERSION)=1 --defsym REVISION=$$(REVISION) --defsym $$(LANGUAGE)=1 -o $$@
+	$$(PREPROC) $$< charmap.txt | $$(CPP) -I include | $$(AS) $$(ASFLAGS) --defsym $$(VERSION)=1 --defsym REVISION=$$(REVISION) --defsym $$(LANGUAGE)=1 -o $$@
 
 build/$1/sym_bss.ld: LANGUAGE := $4
 build/$1/sym_bss.ld: sym_bss.txt
@@ -161,7 +161,7 @@ build/$1/ld_script.ld: ld_script.txt build/$1/sym_bss.ld build/$1/sym_common.ld 
 	cd build/$1 && sed -f ../../ld_script.sed ../../ld_script.txt | sed "s#tools/#../../tools/#g" | sed "s#sound/#../../sound/#g" >ld_script.ld
 
 poke$1.elf: build/$1/ld_script.ld $$($1_OBJS)
-	cd build/$1 && $$(LD) -T ld_script.ld -T ../../shared_syms.txt -Map ../../poke$1.map -o ../../$$@ $$($1_OBJS_REL) ../../$$(LIBGCC)
+	cd build/$1 && $$(LD) -T ld_script.ld -Map ../../poke$1.map -o ../../$$@ $$($1_OBJS_REL) ../../$$(LIBGCC)
 
 poke$1.gba: %.gba: %.elf
 	$$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $$< $$@

@@ -14,8 +14,8 @@ SlateportCity_ContestHall_MapObjects:: @ 83878A4
 	object_event 13, MAP_OBJ_GFX_SAILOR, 0, 0, 0, 17, 0, 3, 2, 65, 0, 0, 0, 0, 0, SlateportCity_ContestHall_EventScript_15555E, 0, 0, 0
 
 SlateportCity_ContestHall_MapWarps:: @ 83879DC
-	warp_def 10, 17, 0, 2, SlateportCity_ContestLobby
-	warp_def 11, 17, 0, 2, SlateportCity_ContestLobby
+	warp_def 10, 17, 0, 2, MAP_SLATEPORT_CITY_CONTEST_LOBBY
+	warp_def 11, 17, 0, 2, MAP_SLATEPORT_CITY_CONTEST_LOBBY
 
 SlateportCity_ContestHall_MapBGEvents:: @ 83879EC
 	bg_event 12, 14, 3, 0, 0, SlateportCity_ContestHall_EventScript_155671

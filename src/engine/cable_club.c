@@ -14,7 +14,7 @@
 #include "overworld.h"
 #include "script.h"
 #include "script_pokemon_80C4.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "start_menu.h"
 #include "string_util.h"
@@ -23,7 +23,7 @@
 #include "text.h"
 #include "trainer_card.h"
 
-extern u16 gScriptResult;
+extern u16 gSpecialVar_Result;
 extern struct TrainerCard gTrainerCards[4];
 extern u8 gUnknown_03004860;
 extern u8 gFieldLinkPlayerCount;
@@ -35,7 +35,6 @@ extern const u8 gUnknown_081A4932[];
 extern const u8 gUnknown_081A4975[];
 extern const u8 gUnknown_081A49B6[];
 extern const u8 gUnknown_081A490C[];
-extern const u8* const gTrainerCardColorNames[];
 extern struct
 {
     u8 field0;
@@ -75,6 +74,26 @@ extern void sub_805559C(void);
 extern void sub_8055574(void);
 extern s32 sub_80554F8(void);
 extern void sub_805465C(void);
+
+#ifdef GERMAN
+const u8 TrainerCardColorName_Bronze[] = _("BRONZE");
+const u8 TrainerCardColorName_Copper[] = _("KUPFER");
+const u8 TrainerCardColorName_Silver[] = _("SILBER");
+const u8 TrainerCardColorName_Gold[] = _("GOLD");
+#else
+const u8 TrainerCardColorName_Bronze[] = _("BRONZE");
+const u8 TrainerCardColorName_Copper[] = _("COPPER");
+const u8 TrainerCardColorName_Silver[] = _("SILVER");
+const u8 TrainerCardColorName_Gold[] = _("GOLD");
+#endif
+
+const u8 *const gTrainerCardColorNames[] =
+{
+    TrainerCardColorName_Bronze,
+    TrainerCardColorName_Copper,
+    TrainerCardColorName_Silver,
+    TrainerCardColorName_Gold,
+};
 
 static void sub_8082CD4(u8 arg0, u8 arg1)
 {
@@ -324,8 +343,8 @@ static void sub_8083188(u8 taskId)
     }
     else
     {
-        gScriptResult = sub_8082D9C(local1, local2);
-        if (gScriptResult != 0)
+        gSpecialVar_Result = sub_8082D9C(local1, local2);
+        if (gSpecialVar_Result != 0)
             gTasks[taskId].func = sub_8083288;
     }
 }
@@ -341,10 +360,10 @@ void sub_80831F8(u8 taskId)
      || sub_8082DF4(taskId) == TRUE)
         return;
 
-    gScriptResult = sub_8082D9C(local1, local2);
-    if (gScriptResult == 0)
+    gSpecialVar_Result = sub_8082D9C(local1, local2);
+    if (gSpecialVar_Result == 0)
         return;
-    if (gScriptResult == 3)
+    if (gSpecialVar_Result == 3)
     {
         sub_800832C();
         HideFieldMessageBox();
@@ -365,7 +384,7 @@ static void sub_8083288(u8 taskId)
     if (sub_8082DF4(taskId) == TRUE)
         return;
 
-    if (gScriptResult == 3)
+    if (gSpecialVar_Result == 3)
     {
         sub_800832C();
         HideFieldMessageBox();
@@ -406,7 +425,7 @@ static void sub_8083314(u8 taskId)
     ResetBlockReceivedFlags();
     HideFieldMessageBox();
 
-    if (gScriptResult == 1)
+    if (gSpecialVar_Result == 1)
     {
 #if ENGLISH
         u16 linkType;
@@ -442,7 +461,7 @@ static void sub_80833C4(u8 taskId)
 
 static void sub_80833EC(u8 taskId)
 {
-    gScriptResult = 5;
+    gSpecialVar_Result = 5;
     sub_8082D4C();
     HideFieldMessageBox();
     EnableBothScriptContexts();
@@ -451,7 +470,7 @@ static void sub_80833EC(u8 taskId)
 
 static void sub_8083418(u8 taskId)
 {
-    gScriptResult = 6;
+    gSpecialVar_Result = 6;
     sub_8082D4C();
     HideFieldMessageBox();
     EnableBothScriptContexts();
@@ -504,7 +523,7 @@ void sub_80834E4(void)
 
 void sub_808350C(void)
 {
-    gScriptResult = 0;
+    gSpecialVar_Result = 0;
     gLinkType = 0x3311;
     gBattleTypeFlags = 0;
     sub_8082CD4(2, 4);
@@ -518,14 +537,14 @@ static void sub_808353C(u8 taskId)
     switch (gTasks[taskId].data[0])
     {
     case 0:
-        if (gScriptResult == 1)
+        if (gSpecialVar_Result == 1)
         {
             playerCount = GetLinkPlayerCount();
             for (i = 0; i < playerCount; i++)
             {
                 if (gLinkPlayers[i].language == LANGUAGE_JAPANESE)
                 {
-                    gScriptResult = 7;
+                    gSpecialVar_Result = 7;
                     sub_8008480();
                     gTasks[taskId].data[0] = 1;
                     return;

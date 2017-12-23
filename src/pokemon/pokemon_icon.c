@@ -1,7 +1,7 @@
 #include "global.h"
 #include "graphics.h"
 #include "mail_data.h"
-#include "species.h"
+#include "constants/species.h"
 #include "sprite.h"
 
 #define POKE_ICON_BASE_PAL_TAG 56000
@@ -1215,8 +1215,11 @@ u8 UpdateMonIconFrame(struct Sprite *sprite)
             break;
         default:
             RequestSpriteCopy(
-                (u8 *)sprite->images + sSpriteImageSizes[sprite->oam.shape][sprite->oam.size] * frame,
-                (u8 *)OBJ_VRAM0 + sprite->oam.tileNum * TILE_SIZE_4BPP,
+                // pointer arithmetic is needed to get the correct pointer to perform the sprite copy on.
+                // because sprite->images is a struct def, it has to be casted to (u8 *) before any
+                // arithmetic can be performed.
+                (u8 *)sprite->images + (sSpriteImageSizes[sprite->oam.shape][sprite->oam.size] * frame),
+                OBJ_VRAM0 + sprite->oam.tileNum * TILE_SIZE_4BPP,
                 sSpriteImageSizes[sprite->oam.shape][sprite->oam.size]);
             {
                 register u8 duration asm("r0") = sprite->anims[sprite->animNum][sprite->animCmdIndex].frame.duration;

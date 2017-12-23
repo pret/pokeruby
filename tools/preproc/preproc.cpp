@@ -89,8 +89,8 @@ void PreprocAsmFile(std::string filename)
 
             if (globalLabel.length() != 0)
             {
-                std::printf("\t.global %s\n", globalLabel.c_str());
-                std::printf("%s:\n", globalLabel.c_str());
+                const char *s = globalLabel.c_str();
+                std::printf("%s: ; .global %s\n", s, s);
             }
             else
             {

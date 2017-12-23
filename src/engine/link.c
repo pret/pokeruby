@@ -7,14 +7,15 @@
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
-#include "rng.h"
+#include "random.h"
 #include "save.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "sprite.h"
 #include "strings2.h"
 #include "task.h"
 #include "text.h"
+#include "ewram.h"
 
 #define SIO_MULTI_CNT ((struct SioMultiCnt *)REG_ADDR_SIOCNT)
 
@@ -35,8 +36,6 @@ struct LinkTestBGInfo
     u32 dummy_C;
 };
 
-extern u8 unk_2000000[];
-extern u8 unk_2004000[];
 extern u16 gBattleTypeFlags;
 
 extern u16 word_3004858;
@@ -404,7 +403,7 @@ static void LinkTestProcessKeyInput(void)
     if (gMain.newKeys & A_BUTTON)
         gShouldAdvanceLinkState = 1;
     if (gMain.heldKeys & B_BUTTON)
-        InitBlockSend(unk_2004000, 0x2004);
+        InitBlockSend(ewram4000, 0x2004);
     if (gMain.newKeys & L_BUTTON)
         BeginNormalPaletteFade(-1, 0, 0x10, 0, 2);
     if (gMain.newKeys & START_BUTTON)
@@ -507,7 +506,7 @@ static void ProcessRecvCmds(u8 unusedParam)
         case 0x8888:
             if (sBlockRecv[i].size > BLOCK_BUFFER_SIZE)
             {
-                u16 *buffer = (u16 *)unk_2000000;
+                u16 *buffer = (u16 *)gSharedMem;
                 u16 j;
                 for (j = 0; j < CMD_LENGTH - 1; j++)
                     buffer[(sBlockRecv[i].pos / 2) + j] = gRecvCmds[j + 1][i];
@@ -636,7 +635,7 @@ static void BuildSendCmd(u16 code)
         break;
     case 0xAAAB:
         gSendCmd[0] = 0xAAAB;
-        gSendCmd[1] = gScriptItemId;
+        gSendCmd[1] = gSpecialVar_ItemId;
         break;
     case 0xCCCC:
         gSendCmd[0] = 0xCCCC;
@@ -954,7 +953,7 @@ static u16 LinkTestCalcBlockChecksum(void *data, u16 size)
 
 static void PrintHexDigit(u8 tileNum, u8 x, u8 y)
 {
-    u16 *tilemap = (u16 *)BG_SCREEN_ADDR(gLinkTestBGInfo.screenBaseBlock);
+    u16 *tilemap = BG_SCREEN_ADDR(gLinkTestBGInfo.screenBaseBlock);
     tilemap[(32 * y) + x] = (gLinkTestBGInfo.paletteNum << 12) | (tileNum + 1);
 }
 

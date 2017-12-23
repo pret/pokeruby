@@ -4,13 +4,13 @@ Route111_MapScripts:: @ 814FF91
 	.byte 0
 
 Route111_MapScript1_14FF9C:: @ 814FF9C
-	checkflag 228
+	checkflag FLAG_REGI_DOORS_OPENED
 	call_if 0, Route111_EventScript_14FFA6
 	end
 
 Route111_EventScript_14FFA6:: @ 814FFA6
-	setmaptile 29, 86, 124, 1
-	setmaptile 29, 87, 145, 1
+	setmetatile 29, 86, 124, 1
+	setmetatile 29, 87, 145, 1
 	return
 
 Route111_MapScript1_14FFB9:: @ 814FFB9
@@ -40,10 +40,10 @@ Route111_EventScript_15000C:: @ 815000C
 	return
 
 Route111_EventScript_15000D:: @ 815000D
-	clearflag 768
-	setflag 769
-	setflag 770
-	setflag 771
+	clearflag FLAG_HIDE_VICTOR_WINSTRATE
+	setflag FLAG_HIDE_VICTORIA_WINSTRATE
+	setflag FLAG_HIDE_VIVI_WINSTRATE
+	setflag FLAG_HIDE_VICKI_WINSTRATE
 	cleartrainerflag OPPONENT_VICTOR
 	cleartrainerflag OPPONENT_VICTORIA
 	cleartrainerflag OPPONENT_VIVI
@@ -54,10 +54,10 @@ Route111_EventScript_150023:: @ 8150023
 	msgbox Route111_Text_16FA54, 5
 	compare RESULT, 0
 	goto_if_eq Route111_EventScript_15005F
-	giveitem ITEM_ROOT_FOSSIL
+	giveitem_std ITEM_ROOT_FOSSIL
 	closemessage
-	setflag 963
-	setflag 964
+	setflag FLAG_HIDE_ROOT_FOSSIL
+	setflag FLAG_HIDE_CLAW_FOSSIL
 	removeobject 34
 	delay 30
 	applymovement 35, Route111_Movement_1500AF
@@ -76,10 +76,10 @@ Route111_EventScript_150069:: @ 8150069
 	msgbox Route111_Text_16FAED, 5
 	compare RESULT, 0
 	goto_if_eq Route111_EventScript_1500A5
-	giveitem ITEM_CLAW_FOSSIL
+	giveitem_std ITEM_CLAW_FOSSIL
 	closemessage
-	setflag 964
-	setflag 963
+	setflag FLAG_HIDE_CLAW_FOSSIL
+	setflag FLAG_HIDE_ROOT_FOSSIL
 	removeobject 35
 	delay 30
 	applymovement 34, Route111_Movement_1500AF
@@ -121,13 +121,13 @@ Route111_EventScript_1500C5:: @ 81500C5
 	lock
 	faceplayer
 	dodailyevents
-	checkflag 2252
+	checkflag FLAG_DAILY_RECEIVED_BERRY_ROUTE111
 	goto_if_eq Route111_EventScript_150100
 	msgbox Route111_Text_1C56F0, 4
-	giveitem ITEM_RAZZ_BERRY
+	giveitem_std ITEM_RAZZ_BERRY
 	compare RESULT, 0
 	goto_if_eq Route111_EventScript_1A029B
-	setflag 2252
+	setflag FLAG_DAILY_RECEIVED_BERRY_ROUTE111
 	special GetPlayerBigGuyGirlString
 	msgbox Route111_Text_1C5781, 4
 	release
@@ -236,7 +236,7 @@ Route111_EventScript_1501C9:: @ 81501C9
 Route111_EventScript_1501D1:: @ 81501D1
 	lock
 	faceplayer
-	setflag 2115
+	setflag FLAG_LANDMARK_WINSTRATE_FAMILY
 	msgbox Route111_Text_16F705, 5
 	compare RESULT, 1
 	goto_if_eq Route111_EventScript_1501F3

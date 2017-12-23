@@ -8,36 +8,39 @@
 #include "fieldmap.h"
 #include "field_message_box.h"
 #include "field_camera.h"
-#include "flags.h"
-#include "rng.h"
+#include "constants/flags.h"
+#include "random.h"
 #include "string_util.h"
 #include "text.h"
-#include "species.h"
+#include "constants/species.h"
 #include "pokedex.h"
 #include "naming_screen.h"
 #include "overworld.h"
-#include "map_constants.h"
+#include "constants/maps.h"
 #include "strings.h"
 #include "battle.h"
 #include "link.h"
-#include "easy_chat.h"
+#include "constants/easy_chat.h"
 #include "field_map_obj.h"
 #include "field_specials.h"
 #include "item.h"
-#include "items.h"
+#include "constants/items.h"
 #include "link.h"
-#include "map_constants.h"
+#include "constants/maps.h"
 #include "naming_screen.h"
 #include "pokedex.h"
 #include "region_map.h"
-#include "rng.h"
+#include "random.h"
 #include "overworld.h"
 #include "rtc.h"
 #include "script_menu.h"
-#include "species.h"
+#include "constants/species.h"
 #include "string_util.h"
 #include "strings.h"
 #include "text.h"
+#include "ewram.h"
+#include "constants/moves.h"
+#include "region_map_sections.h"
 
 struct UnkTvStruct
 {
@@ -65,38 +68,14 @@ extern struct TVSaleItem gUnknown_02038724[3];
 
 struct UnkTvStruct gUnknown_03005D38;
 
-extern u8 *gTVBravoTrainerTextGroup[];
-extern u8 *gTVBravoTrainerBattleTowerTextGroup[];
-extern u8 *gTVSmartShopperTextGroup[];
-extern u8 *gTVNameRaterTextGroup[];
-extern u8 *gTVPokemonTodayTextGroup[];
-extern u8 *gTVPokemonTodayFailedCaptureTextGroup[];
-extern u8 *gTVFanClubTextGroup[];
-extern u8 *gTVRecentHappeningsTextGroup[];
-extern u8 *gTVFanClubOpinionsTextGroup[];
-extern u8 *gTVPokemonOutbreakTextGroup[];
-extern u8 *gTVGabbyAndTyTextGroup[];
-extern u8 *gTVFishingGuruAdviceTextGroup[];
-extern u8 *gTVWorldOfMastersTextGroup[];
-extern struct OutbreakPokemon gPokeOutbreakSpeciesList[5];
+extern u16 gSpecialVar_LastTalked;
 
-
-
-extern const u8 *gTVNewsTextGroup1[];
-extern const u8 *gTVNewsTextGroup2[];
-extern const u8 *gTVNewsTextGroup3[];
-
-extern u16 gScriptLastTalked;
-
-extern u8 gScriptContestCategory;
-extern u8 gScriptContestRank;
+extern u8 gSpecialVar_ContestCategory;
+extern u8 gSpecialVar_ContestRank;
 extern u8 gUnknown_03004316[11];
 extern u8 gBattleOutcome;
 
 extern u16 gLastUsedItem;
-
-extern u8 ewram[];
-#define gUnknown_02007000 (*(ewramStruct_02007000 *)(ewram + 0x7000))
 
 static EWRAM_DATA u16 gUnknown_020387E0 = 0;
 static EWRAM_DATA u16 gUnknown_020387E2 = 0;
@@ -106,6 +85,351 @@ static EWRAM_DATA ALIGNED(4) u8 gUnknown_020387E8 = 0; // why is this aligned to
 static u8 gUnknown_03000720;
 static u8 gUnknown_03000721;
 static s8 gUnknown_03000722;
+
+const struct OutbreakPokemon gPokeOutbreakSpeciesList[5] =
+{
+    {
+        .species = SPECIES_SURSKIT,
+        .moves = {MOVE_BUBBLE, MOVE_QUICK_ATTACK, MOVE_NONE, MOVE_NONE},
+        .level = 3,
+        .location = MAPSEC_Route102,
+    },
+    {
+        .species = SPECIES_SURSKIT,
+        .moves = {MOVE_BUBBLE, MOVE_QUICK_ATTACK, MOVE_NONE, MOVE_NONE},
+        .level = 15,
+        .location = MAPSEC_Route114,
+    },
+    {
+        .species = SPECIES_SURSKIT,
+        .moves = {MOVE_BUBBLE, MOVE_QUICK_ATTACK, MOVE_NONE, MOVE_NONE},
+        .level = 15,
+        .location = MAPSEC_Route117,
+    },
+    {
+        .species = SPECIES_SURSKIT,
+        .moves = {MOVE_BUBBLE, MOVE_QUICK_ATTACK, MOVE_NONE, MOVE_NONE},
+        .level = 28,
+        .location = MAPSEC_Route120,
+    },
+    {
+        .species = SPECIES_SKITTY,
+        .moves = {MOVE_GROWL, MOVE_TACKLE, MOVE_NONE, MOVE_NONE},
+        .level = 15,
+        .location = MAPSEC_Route116,
+    },
+};
+
+extern const u8 gTVNewsText_EnergyGuru1[];
+extern const u8 gTVNewsText_GameCorner1[];
+extern const u8 gTVNewsText_LilycoveDepartment1[];
+extern const u8 gTVNewsText_EnergyGuru2[];
+extern const u8 gTVNewsText_GameCorner2[];
+extern const u8 gTVNewsText_LilycoveDepartment2[];
+extern const u8 gTVNewsText_EnergyGuru3[];
+extern const u8 gTVNewsText_GameCorner3[];
+extern const u8 gTVNewsText_LilycoveDepartment3[];
+extern const u8 gTVFanClubText1[];
+extern const u8 gTVFanClubText2[];
+extern const u8 gTVFanClubText3[];
+extern const u8 gTVFanClubText4[];
+extern const u8 gTVFanClubText5[];
+extern const u8 gTVFanClubText6[];
+extern const u8 gTVFanClubText7[];
+extern const u8 gTVFanClubText8[];
+extern const u8 gTVRecentHappeningsText1[];
+extern const u8 gTVRecentHappeningsText2[];
+extern const u8 gTVRecentHappeningsText3[];
+extern const u8 gTVRecentHappeningsText4[];
+extern const u8 gTVRecentHappeningsText5[];
+extern const u8 gTVRecentHappeningsText6[];
+extern const u8 gTVFanClubOpinionsText1[];
+extern const u8 gTVFanClubOpinionsText2[];
+extern const u8 gTVFanClubOpinionsText3[];
+extern const u8 gTVFanClubOpinionsText4[];
+extern const u8 gTVFanClubOpinionsText5[];
+extern const u8 gTVPokemonOutbreakText[];
+extern const u8 gTVPokemonTodayText1[];
+extern const u8 gTVPokemonTodayText2[];
+extern const u8 gTVPokemonTodayText3[];
+extern const u8 gTVPokemonTodayText4[];
+extern const u8 gTVPokemonTodayText5[];
+extern const u8 gTVPokemonTodayText6[];
+extern const u8 gTVPokemonTodayText7[];
+extern const u8 gTVPokemonTodayText8[];
+extern const u8 gTVPokemonTodayText9[];
+extern const u8 gTVPokemonTodayText10[];
+extern const u8 gTVPokemonTodayText11[];
+extern const u8 gTVPokemonTodayText12[];
+extern const u8 gTVSmartShopperText1[];
+extern const u8 gTVSmartShopperText2[];
+extern const u8 gTVSmartShopperText3[];
+extern const u8 gTVSmartShopperText4[];
+extern const u8 gTVSmartShopperText5[];
+extern const u8 gTVSmartShopperText6[];
+extern const u8 gTVSmartShopperText7[];
+extern const u8 gTVSmartShopperText8[];
+extern const u8 gTVSmartShopperText9[];
+extern const u8 gTVSmartShopperText10[];
+extern const u8 gTVSmartShopperText11[];
+extern const u8 gTVSmartShopperText12[];
+extern const u8 gTVSmartShopperText13[];
+extern const u8 gTVBravoTrainerText1[];
+extern const u8 gTVBravoTrainerText2[];
+extern const u8 gTVBravoTrainerText3[];
+extern const u8 gTVBravoTrainerText4[];
+extern const u8 gTVBravoTrainerText5[];
+extern const u8 gTVBravoTrainerText6[];
+extern const u8 gTVBravoTrainerText7[];
+extern const u8 gTVBravoTrainerText8[];
+extern const u8 gTVBravoTrainerText9[];
+extern const u8 gTVBravoTrainerBattleTowerText1[];
+extern const u8 gTVBravoTrainerBattleTowerText2[];
+extern const u8 gTVBravoTrainerBattleTowerText3[];
+extern const u8 gTVBravoTrainerBattleTowerText4[];
+extern const u8 gTVBravoTrainerBattleTowerText5[];
+extern const u8 gTVBravoTrainerBattleTowerText6[];
+extern const u8 gTVBravoTrainerBattleTowerText7[];
+extern const u8 gTVBravoTrainerBattleTowerText8[];
+extern const u8 gTVBravoTrainerBattleTowerText9[];
+extern const u8 gTVBravoTrainerBattleTowerText10[];
+extern const u8 gTVBravoTrainerBattleTowerText11[];
+extern const u8 gTVBravoTrainerBattleTowerText12[];
+extern const u8 gTVBravoTrainerBattleTowerText13[];
+extern const u8 gTVBravoTrainerBattleTowerText14[];
+extern const u8 gTVBravoTrainerBattleTowerText15[];
+extern const u8 gTVNameRaterText1[];
+extern const u8 gTVNameRaterText2[];
+extern const u8 gTVNameRaterText3[];
+extern const u8 gTVNameRaterText4[];
+extern const u8 gTVNameRaterText5[];
+extern const u8 gTVNameRaterText6[];
+extern const u8 gTVNameRaterText7[];
+extern const u8 gTVNameRaterText8[];
+extern const u8 gTVNameRaterText9[];
+extern const u8 gTVNameRaterText10[];
+extern const u8 gTVNameRaterText11[];
+extern const u8 gTVNameRaterText12[];
+extern const u8 gTVNameRaterText13[];
+extern const u8 gTVNameRaterText14[];
+extern const u8 gTVNameRaterText15[];
+extern const u8 gTVNameRaterText16[];
+extern const u8 gTVNameRaterText17[];
+extern const u8 gTVNameRaterText18[];
+extern const u8 gTVNameRaterText19[];
+extern const u8 gTVPokemonTodayFailedCaptureText1[];
+extern const u8 gTVPokemonTodayFailedCaptureText2[];
+extern const u8 gTVPokemonTodayFailedCaptureText3[];
+extern const u8 gTVPokemonTodayFailedCaptureText4[];
+extern const u8 gTVPokemonTodayFailedCaptureText5[];
+extern const u8 gTVPokemonTodayFailedCaptureText6[];
+extern const u8 gTVPokemonTodayFailedCaptureText7[];
+extern const u8 gTVFishingGuruAdviceText1[];
+extern const u8 gTVFishingGuruAdviceText2[];
+extern const u8 gTVWorldOfMastersText1[];
+extern const u8 gTVWorldOfMastersText2[];
+extern const u8 gTVWorldOfMastersText3[];
+extern const u8 gTVGabbyAndTyText1[];
+extern const u8 gTVGabbyAndTyText2[];
+extern const u8 gTVGabbyAndTyText3[];
+extern const u8 gTVGabbyAndTyText4[];
+extern const u8 gTVGabbyAndTyText5[];
+extern const u8 gTVGabbyAndTyText6[];
+extern const u8 gTVGabbyAndTyText7[];
+extern const u8 gTVGabbyAndTyText8[];
+extern const u8 gTVGabbyAndTyText9[];
+
+const u8 *const gTVNewsTextGroup1[] =
+{
+    NULL,
+    gTVNewsText_EnergyGuru1,
+    gTVNewsText_GameCorner1,
+    gTVNewsText_LilycoveDepartment1,
+};
+
+const u8 *const gTVNewsTextGroup2[] =
+{
+    NULL,
+    gTVNewsText_EnergyGuru2,
+    gTVNewsText_GameCorner2,
+    gTVNewsText_LilycoveDepartment2,
+};
+
+const u8 *const gTVNewsTextGroup3[] =
+{
+    NULL,
+    gTVNewsText_EnergyGuru3,
+    gTVNewsText_GameCorner3,
+    gTVNewsText_LilycoveDepartment3,
+};
+
+u8 *const gUnknown_083D1464[] =
+{
+    gStringVar1,
+    gStringVar2,
+    gStringVar3,
+};
+
+const u8 *const gTVFanClubTextGroup[] =
+{
+    gTVFanClubText1,
+    gTVFanClubText2,
+    gTVFanClubText3,
+    gTVFanClubText4,
+    gTVFanClubText5,
+    gTVFanClubText6,
+    gTVFanClubText7,
+    gTVFanClubText8,
+};
+
+const u8 *const gTVRecentHappeningsTextGroup[] =
+{
+    gTVRecentHappeningsText1,
+    gTVRecentHappeningsText2,
+    gTVRecentHappeningsText3,
+    gTVRecentHappeningsText4,
+    gTVRecentHappeningsText5,
+    gTVRecentHappeningsText6,
+};
+
+const u8 *const gTVFanClubOpinionsTextGroup[] =
+{
+    gTVFanClubOpinionsText1,
+    gTVFanClubOpinionsText2,
+    gTVFanClubOpinionsText3,
+    gTVFanClubOpinionsText4,
+    gTVFanClubOpinionsText5,
+};
+
+const u8 *const gTVPokemonOutbreakTextGroup[] =
+{
+    gTVPokemonOutbreakText,
+};
+
+const u8 *const gTVPokemonTodayTextGroup[] =
+{
+    gTVPokemonTodayText1,
+    gTVPokemonTodayText2,
+    gTVPokemonTodayText3,
+    gTVPokemonTodayText4,
+    gTVPokemonTodayText5,
+    gTVPokemonTodayText6,
+    gTVPokemonTodayText7,
+    gTVPokemonTodayText8,
+    gTVPokemonTodayText9,
+    gTVPokemonTodayText10,
+    gTVPokemonTodayText11,
+    gTVPokemonTodayText12,
+};
+
+const u8 *const gTVSmartShopperTextGroup[] =
+{
+    gTVSmartShopperText1,
+    gTVSmartShopperText2,
+    gTVSmartShopperText3,
+    gTVSmartShopperText4,
+    gTVSmartShopperText5,
+    gTVSmartShopperText6,
+    gTVSmartShopperText7,
+    gTVSmartShopperText8,
+    gTVSmartShopperText9,
+    gTVSmartShopperText10,
+    gTVSmartShopperText11,
+    gTVSmartShopperText12,
+    gTVSmartShopperText13,
+};
+
+const u8 *const gTVBravoTrainerTextGroup[] =
+{
+    gTVBravoTrainerText1,
+    gTVBravoTrainerText2,
+    gTVBravoTrainerText3,
+    gTVBravoTrainerText4,
+    gTVBravoTrainerText5,
+    gTVBravoTrainerText6,
+    gTVBravoTrainerText7,
+    gTVBravoTrainerText8,
+    gTVBravoTrainerText9,
+};
+
+const u8 *const gTVBravoTrainerBattleTowerTextGroup[] =
+{
+    gTVBravoTrainerBattleTowerText1,
+    gTVBravoTrainerBattleTowerText2,
+    gTVBravoTrainerBattleTowerText3,
+    gTVBravoTrainerBattleTowerText4,
+    gTVBravoTrainerBattleTowerText5,
+    gTVBravoTrainerBattleTowerText6,
+    gTVBravoTrainerBattleTowerText7,
+    gTVBravoTrainerBattleTowerText8,
+    gTVBravoTrainerBattleTowerText9,
+    gTVBravoTrainerBattleTowerText10,
+    gTVBravoTrainerBattleTowerText11,
+    gTVBravoTrainerBattleTowerText12,
+    gTVBravoTrainerBattleTowerText13,
+    gTVBravoTrainerBattleTowerText14,
+    gTVBravoTrainerBattleTowerText15,
+};
+
+const u8 *const gTVNameRaterTextGroup[] =
+{
+    gTVNameRaterText1,
+    gTVNameRaterText2,
+    gTVNameRaterText3,
+    gTVNameRaterText4,
+    gTVNameRaterText5,
+    gTVNameRaterText6,
+    gTVNameRaterText7,
+    gTVNameRaterText8,
+    gTVNameRaterText9,
+    gTVNameRaterText10,
+    gTVNameRaterText11,
+    gTVNameRaterText12,
+    gTVNameRaterText13,
+    gTVNameRaterText14,
+    gTVNameRaterText15,
+    gTVNameRaterText16,
+    gTVNameRaterText17,
+    gTVNameRaterText18,
+    gTVNameRaterText19,
+};
+
+const u8 *const gTVPokemonTodayFailedCaptureTextGroup[] =
+{
+    gTVPokemonTodayFailedCaptureText1,
+    gTVPokemonTodayFailedCaptureText2,
+    gTVPokemonTodayFailedCaptureText3,
+    gTVPokemonTodayFailedCaptureText4,
+    gTVPokemonTodayFailedCaptureText5,
+    gTVPokemonTodayFailedCaptureText6,
+    gTVPokemonTodayFailedCaptureText7,
+};
+
+const u8 *const gTVFishingGuruAdviceTextGroup[] =
+{
+    gTVFishingGuruAdviceText1,
+    gTVFishingGuruAdviceText2,
+};
+
+const u8 *const gTVWorldOfMastersTextGroup[] =
+{
+    gTVWorldOfMastersText1,
+    gTVWorldOfMastersText2,
+    gTVWorldOfMastersText3,
+};
+
+const u8 *const gTVGabbyAndTyTextGroup[] =
+{
+    gTVGabbyAndTyText1,
+    gTVGabbyAndTyText2,
+    gTVGabbyAndTyText3,
+    gTVGabbyAndTyText4,
+    gTVGabbyAndTyText5,
+    gTVGabbyAndTyText6,
+    gTVGabbyAndTyText7,
+    gTVGabbyAndTyText8,
+    gTVGabbyAndTyText9,
+};
 
 void ClearTVShowData(void)
 {
@@ -123,9 +447,8 @@ void ClearTVShowData(void)
 
 bool8 sub_80BF1B4(u8);
 void sub_80BF20C(void);
-extern u16 sub_8135D3C(u8);
-extern u8 gScriptContestCategory;
-extern u8 gScriptContestRank;
+extern u8 gSpecialVar_ContestCategory;
+extern u8 gSpecialVar_ContestRank;
 extern u8 gUnknown_03004316[11];
 extern u8 gBattleOutcome;
 
@@ -219,7 +542,7 @@ bool8 IsTVShowInSearchOfTrainersAiring(void);
 
 void UpdateTVScreensOnMap(int width, int height)
 {
-    FlagSet(SYS_TV_WATCH);
+    FlagSet(FLAG_SYS_TV_WATCH);
     switch (CheckForBigMovieOrEmergencyNewsOnTV())
     {
     case 1:
@@ -228,14 +551,14 @@ void UpdateTVScreensOnMap(int width, int height)
     case 2:
         break;
     default:
-        if (gSaveBlock1.location.mapGroup == MAP_GROUP_LILYCOVE_CITY_COVE_LILY_MOTEL_1F
-         && gSaveBlock1.location.mapNum == MAP_ID_LILYCOVE_CITY_COVE_LILY_MOTEL_1F)
+        if (gSaveBlock1.location.mapGroup == MAP_GROUP(LILYCOVE_CITY_COVE_LILY_MOTEL_1F)
+         && gSaveBlock1.location.mapNum == MAP_NUM(LILYCOVE_CITY_COVE_LILY_MOTEL_1F))
         {
             SetTVMetatilesOnMap(width, height, 0x3);
         }
-        else if (FlagGet(SYS_TV_START) && (sub_80BD8B8() != 0xff || sub_80BECA0() != 0xff || IsTVShowInSearchOfTrainersAiring()))
+        else if (FlagGet(FLAG_SYS_TV_START) && (sub_80BD8B8() != 0xff || sub_80BECA0() != 0xff || IsTVShowInSearchOfTrainersAiring()))
         {
-            FlagClear(SYS_TV_WATCH);
+            FlagClear(FLAG_SYS_TV_WATCH);
             SetTVMetatilesOnMap(width, height, 0x3);
         }
         break;
@@ -351,7 +674,7 @@ void GabbyAndTyBeforeInterview(void)
 
     TakeTVShowInSearchOfTrainersOffTheAir();
     if (gSaveBlock1.gabbyAndTyData.lastMove == 0)
-        FlagSet(1);
+        FlagSet(FLAG_TEMP_1);
 }
 
 void sub_80BDC14(void)
@@ -660,8 +983,8 @@ void sub_80BE284(u8 a0)
     if (gUnknown_03005D38.var0 != -1)
     {
         bravoTrainer->contestResult = a0;
-        bravoTrainer->contestCategory = gScriptContestCategory;
-        bravoTrainer->contestRank = gScriptContestRank;
+        bravoTrainer->contestCategory = gSpecialVar_ContestCategory;
+        bravoTrainer->contestRank = gSpecialVar_ContestRank;
         bravoTrainer->species = GetMonData(&gPlayerParty[gUnknown_02038694], MON_DATA_SPECIES, NULL);
         GetMonData(&gPlayerParty[gUnknown_02038694], MON_DATA_NICKNAME, bravoTrainer->pokemonNickname);
     }
@@ -674,12 +997,12 @@ void sub_80BE320(void)
     bravoTrainerTower->var00 = TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE;
     bravoTrainerTower->var01 = 1;
     StringCopy(bravoTrainerTower->trainerName, gSaveBlock2.playerName);
-    StringCopy(bravoTrainerTower->pokemonName, gSaveBlock2.filler_A8.filler_3DC);
-    bravoTrainerTower->species = gSaveBlock2.filler_A8.var_480;
-    bravoTrainerTower->defeatedSpecies = gSaveBlock2.filler_A8.var_482;
-    bravoTrainerTower->var16 = sub_8135D3C(gSaveBlock2.filler_A8.var_4D0);
-    bravoTrainerTower->var1c = gSaveBlock2.filler_A8.var_4AD;
-    if (gSaveBlock2.filler_A8.var_4D0 == 0)
+    StringCopy(bravoTrainerTower->pokemonName, gSaveBlock2.battleTower.defeatedByTrainerName);
+    bravoTrainerTower->species = gSaveBlock2.battleTower.firstMonSpecies;
+    bravoTrainerTower->defeatedSpecies = gSaveBlock2.battleTower.defeatedBySpecies;
+    bravoTrainerTower->var16 = GetCurrentBattleTowerWinStreak(gSaveBlock2.battleTower.lastStreakLevelType);
+    bravoTrainerTower->var1c = gSaveBlock2.battleTower.battleOutcome;
+    if (gSaveBlock2.battleTower.lastStreakLevelType == 0)
         bravoTrainerTower->btLevel = 50;
     else
         bravoTrainerTower->btLevel = 100;
@@ -724,7 +1047,7 @@ void sub_80BE3BC(void)
 void sub_80BE478(void)
 {
     sub_80BF478();
-    if (gScriptResult == 1)
+    if (gSpecialVar_Result == 1)
         return;
 
     GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar1);
@@ -815,7 +1138,7 @@ void nullsub_21(void)
 
 void sub_80BE778(void)
 {
-    if (FlagGet(SYS_GAME_CLEAR))
+    if (FlagGet(FLAG_SYS_GAME_CLEAR))
     {
         u8 i;
 
@@ -1008,7 +1331,7 @@ void sub_80BEB20(void)
 {
     u16 rval;
 
-    if (FlagGet(SYS_GAME_CLEAR) != 0)
+    if (FlagGet(FLAG_SYS_GAME_CLEAR) != 0)
     {
         gUnknown_03005D38.var0 = sub_80BEBC8(gSaveBlock1.unknown_2ABC);
         if (gUnknown_03005D38.var0 != -1 && sub_80BF77C(0x28f) != 1)
@@ -1091,7 +1414,7 @@ void sub_80BECE8(void)
     arg0 = sub_80BECA0();
     if (arg0 == 0xff)
     {
-        gScriptResult = 0;
+        gSpecialVar_Result = 0;
         return;
     }
     if (gSaveBlock1.unknown_2ABC[arg0].val2 == 0)
@@ -1110,7 +1433,7 @@ void sub_80BECE8(void)
         gSaveBlock1.unknown_2ABC[arg0].val1 = 0;
         ShowFieldMessage(gTVNewsTextGroup1[gSaveBlock1.unknown_2ABC[arg0].val0]);
     }
-    gScriptResult = 1;
+    gSpecialVar_Result = 1;
 }
 
 bool8 GetPriceReduction(u8 arg0)
@@ -1137,16 +1460,16 @@ bool8 IsPriceDiscounted(u8 arg0)
     switch (arg0)
     {
     case 1:
-        if (gSaveBlock1.location.mapGroup == MAP_GROUP_SLATEPORT_CITY
-         && gSaveBlock1.location.mapNum == MAP_ID_SLATEPORT_CITY
-         && gScriptLastTalked == 0x1a)
+        if (gSaveBlock1.location.mapGroup == MAP_GROUP(SLATEPORT_CITY)
+         && gSaveBlock1.location.mapNum == MAP_NUM(SLATEPORT_CITY)
+         && gSpecialVar_LastTalked == 0x1a)
             return TRUE;
         else
             return FALSE;
         break;
     case 3:
-        if (gSaveBlock1.location.mapGroup == MAP_GROUP_LILYCOVE_CITY_DEPARTMENT_STORE_ROOFTOP
-         && gSaveBlock1.location.mapNum == MAP_ID_LILYCOVE_CITY_DEPARTMENT_STORE_ROOFTOP)
+        if (gSaveBlock1.location.mapGroup == MAP_GROUP(LILYCOVE_CITY_DEPARTMENT_STORE_ROOFTOP)
+         && gSaveBlock1.location.mapNum == MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_ROOFTOP))
             return TRUE;
         else
             return FALSE;
@@ -1184,7 +1507,7 @@ void sub_80BEE84(u16 var0)
             }
             else
             {
-                if (!gSaveBlock1.unknown_2ABC[i].val1 && FlagGet(SYS_GAME_CLEAR) == 1)
+                if (!gSaveBlock1.unknown_2ABC[i].val1 && FlagGet(FLAG_SYS_GAME_CLEAR) == 1)
                     gSaveBlock1.unknown_2ABC[i].val1 = 1;
                 gSaveBlock1.unknown_2ABC[i].val2 -= var0;
             }
@@ -1337,7 +1660,7 @@ void sub_80BF25C(u8 showType)
         {
             if(gSaveBlock1.tvShows[i].common.var01 == 1)
             {
-                gScriptResult = 1;
+                gSpecialVar_Result = 1;
             }
             else
             {
@@ -1353,7 +1676,7 @@ void sub_80BF25C(u8 showType)
 
 void sub_80BF2C4(void)
 {
-    gScriptResult = 0;
+    gSpecialVar_Result = 0;
     switch (gSpecialVar_0x8005)
     {
     case TVSHOW_FAN_CLUB_LETTER:
@@ -1385,7 +1708,7 @@ void sub_80BF334(void)
     struct TVShowFanClubLetter *fanclubLetter;
 
     sub_80BF25C(TVSHOW_FAN_CLUB_LETTER);
-    if (gScriptResult == 0)
+    if (gSpecialVar_Result == 0)
     {
         StringCopy(gStringVar1, gSpeciesNames[GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_SPECIES, 0)]);
         fanclubLetter = &gSaveBlock1.tvShows[gUnknown_03005D38.var0].fanclubLetter;
@@ -1398,7 +1721,7 @@ void sub_80BF3A4(void)
     struct TVShowRecentHappenings *recentHappenings;
 
     sub_80BF25C(TVSHOW_RECENT_HAPPENINGS);
-    if (gScriptResult == 0)
+    if (gSpecialVar_Result == 0)
     {
         recentHappenings = &gSaveBlock1.tvShows[gUnknown_03005D38.var0].recentHappenings;
         sub_80EB6FC(recentHappenings->var04, 6);
@@ -1410,7 +1733,7 @@ void sub_80BF3DC(void)
     struct TVShowFanclubOpinions *fanclubOpinions;
 
     sub_80BF25C(TVSHOW_PKMN_FAN_CLUB_OPINIONS);
-    if (gScriptResult == 0)
+    if (gSpecialVar_Result == 0)
     {
         StringCopy(gStringVar1, gSpeciesNames[GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_SPECIES, 0)]);
         GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_NICKNAME, gStringVar2);
@@ -1422,7 +1745,7 @@ void sub_80BF3DC(void)
 
 void sub_80BF46C(void)
 {
-    gScriptResult = 1;
+    gSpecialVar_Result = 1;
 }
 
 void sub_80BF478(void)
@@ -1435,7 +1758,7 @@ void sub_80BF484(void)
     struct TVShowBravoTrainerPokemonProfiles *bravoTrainer;
 
     sub_80BF25C(TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE);
-    if (gScriptResult == 0)
+    if (gSpecialVar_Result == 0)
     {
         bravoTrainer = &gSaveBlock1.tvShows[gUnknown_03005D38.var0].bravoTrainer;
         sub_80EB6FC(bravoTrainer->var04, 2);
@@ -1447,7 +1770,7 @@ void sub_80BF4BC(void)
     struct TVShowBravoTrainerBattleTowerSpotlight *bravoTrainerTower;
 
     sub_80BF25C(TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE);
-    if (gScriptResult == 0)
+    if (gSpecialVar_Result == 0)
     {
         bravoTrainerTower = &gSaveBlock1.tvShows[gUnknown_03005D38.var0].bravoTrainerTower;
         sub_80EB6FC(bravoTrainerTower->var18, 1); // wrong struct ident, fix later
@@ -1575,9 +1898,9 @@ void sub_80BF6D8(void)
     gUnknown_03005D38.var0 = sub_80BF720(gSaveBlock1.tvShows);
     gSpecialVar_0x8006 = gUnknown_03005D38.var0;
     if (gUnknown_03005D38.var0 == -1)
-        gScriptResult = 1;
+        gSpecialVar_Result = 1;
     else
-        gScriptResult = 0;
+        gSpecialVar_Result = 0;
 }
 
 s8 sub_80BF720(TVShow tvShow[])
@@ -1772,9 +2095,9 @@ void sub_80BFAE0(void)
 void sub_80BFB10(void)
 {
     if (GetPlayerTrainerId() == GetMonData(&(gPlayerParty[gSpecialVar_0x8004]), MON_DATA_OT_ID, 0))
-        gScriptResult = 0;
+        gSpecialVar_Result = 0;
     else
-        gScriptResult = 1;
+        gSpecialVar_Result = 1;
 }
 
 u8 sub_80BFB54(u8 arg0)
@@ -1798,32 +2121,32 @@ u32 GetPlayerTrainerId(void)
 
 u8 CheckForBigMovieOrEmergencyNewsOnTV(void)
 {
-    if (gSaveBlock1.location.mapGroup != MAP_GROUP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F)
+    if (gSaveBlock1.location.mapGroup != MAP_GROUP(LITTLEROOT_TOWN_BRENDANS_HOUSE_1F))
         return 0;
     if (gSaveBlock2.playerGender == MALE)
     {
-        if (gSaveBlock1.location.mapNum != MAP_ID_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F)
+        if (gSaveBlock1.location.mapNum != MAP_NUM(LITTLEROOT_TOWN_BRENDANS_HOUSE_1F))
             return 0;
     }
     else
     {
-        if (gSaveBlock1.location.mapNum != MAP_ID_LITTLEROOT_TOWN_MAYS_HOUSE_1F)
+        if (gSaveBlock1.location.mapNum != MAP_NUM(LITTLEROOT_TOWN_MAYS_HOUSE_1F))
             return 0;
     }
-    if (FlagGet(SYS_TV_LATI) == 1)
+    if (FlagGet(FLAG_SYS_TV_LATI) == 1)
         return 1;
-    if (FlagGet(SYS_TV_HOME) == 1)
+    if (FlagGet(FLAG_SYS_TV_HOME) == 1)
         return 2;
     return 1;
 }
 
 void GetMomOrDadStringForTVMessage(void)
 {
-    if (gSaveBlock1.location.mapGroup == MAP_GROUP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F)
+    if (gSaveBlock1.location.mapGroup == MAP_GROUP(LITTLEROOT_TOWN_BRENDANS_HOUSE_1F))
     {
         if (gSaveBlock2.playerGender == MALE)
         {
-            if (gSaveBlock1.location.mapNum == MAP_ID_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F)
+            if (gSaveBlock1.location.mapNum == MAP_NUM(LITTLEROOT_TOWN_BRENDANS_HOUSE_1F))
             {
                 StringCopy(gStringVar1, gOtherText_Mom);
                 VarSet(VAR_0x4003, 1);
@@ -1831,7 +2154,7 @@ void GetMomOrDadStringForTVMessage(void)
         }
         else
         {
-            if (gSaveBlock1.location.mapNum == MAP_ID_LITTLEROOT_TOWN_MAYS_HOUSE_1F)
+            if (gSaveBlock1.location.mapNum == MAP_NUM(LITTLEROOT_TOWN_MAYS_HOUSE_1F))
             {
                 StringCopy(gStringVar1, gOtherText_Mom);
                 VarSet(VAR_0x4003, 1);
@@ -2327,7 +2650,7 @@ void sub_80C0408(void)
 {
     u16 i;
 
-    if (FlagGet(SYS_GAME_CLEAR) == TRUE)
+    if (FlagGet(FLAG_SYS_GAME_CLEAR) == TRUE)
         return;
     for (i = 0; i < 24; i++)
     {
@@ -2478,7 +2801,7 @@ void sub_80C0788(void)
 {
     u8 i;
 
-    if (FlagGet(SYS_GAME_CLEAR) != 1)
+    if (FlagGet(FLAG_SYS_GAME_CLEAR) != 1)
     {
         for (i = 0; i < 16; i++)
             gSaveBlock1.unknown_2ABC[i].val1 = 0;
@@ -2546,7 +2869,7 @@ void DoTVShowBravoTrainerPokemonProfile(void)
     struct TVShowBravoTrainerPokemonProfiles *bravoTrainer = &gSaveBlock1.tvShows[gSpecialVar_0x8004].bravoTrainer;
     u8 state;
 
-    gScriptResult = 0;
+    gSpecialVar_Result = 0;
     state = gUnknown_020387E8;
     switch(state)
     {
@@ -2617,7 +2940,7 @@ void DoTVShowBravoTrainerBattleTowerProfile(void)
     struct TVShowBravoTrainerBattleTowerSpotlight *bravoTrainerTower = &gSaveBlock1.tvShows[gSpecialVar_0x8004].bravoTrainerTower;
     u8 state;
 
-    gScriptResult = 0;
+    gSpecialVar_Result = 0;
     state = gUnknown_020387E8;
     switch(state)
     {
@@ -2706,7 +3029,7 @@ void DoTVShowTodaysSmartShopper(void)
     struct TVShowSmartShopper *smartShopper = &gSaveBlock1.tvShows[gSpecialVar_0x8004].smartshopperShow;
     u8 state;
 
-    gScriptResult = 0;
+    gSpecialVar_Result = 0;
     state = gUnknown_020387E8;
     switch(state)
     {
@@ -2794,7 +3117,7 @@ void DoTVShowTheNameRaterShow(void)
     struct TVShowNameRaterShow *nameRaterShow = &gSaveBlock1.tvShows[gSpecialVar_0x8004].nameRaterShow;
     u8 state;
 
-    gScriptResult = 0;
+    gSpecialVar_Result = 0;
     state = gUnknown_020387E8;
     switch (state)
     {
@@ -2890,7 +3213,7 @@ void DoTVShowPokemonTodaySuccessfulCapture(void)
     struct TVShowPokemonToday *pokemonToday = &gSaveBlock1.tvShows[gSpecialVar_0x8004].pokemonToday;
     u8 state;
 
-    gScriptResult = 0;
+    gSpecialVar_Result = 0;
     state = gUnknown_020387E8;
     switch (state)
     {
@@ -2959,7 +3282,7 @@ void DoTVShowPokemonTodayFailedCapture(void)
     struct TVShowPokemonTodayFailed *pokemonTodayFailed = &gSaveBlock1.tvShows[gSpecialVar_0x8004].pokemonTodayFailed;
     u8 state;
 
-    gScriptResult = 0;
+    gSpecialVar_Result = 0;
     state = gUnknown_020387E8;
     switch (state)
     {
@@ -3004,7 +3327,7 @@ void DoTVShowPokemonFanClubLetter(void)
     u8 state;
     u16 rval;
 
-    gScriptResult = 0;
+    gSpecialVar_Result = 0;
     state = gUnknown_020387E8;
     switch (state)
     {
@@ -3056,7 +3379,7 @@ void DoTVShowRecentHappenings(void)
     struct TVShowRecentHappenings *recentHappenings = &gSaveBlock1.tvShows[gSpecialVar_0x8004].recentHappenings;
     u8 state;
 
-    gScriptResult = 0;
+    gSpecialVar_Result = 0;
     state = gUnknown_020387E8;
     switch (state)
     {
@@ -3090,7 +3413,7 @@ void DoTVShowPokemonFanClubOpinions(void)
     struct TVShowFanclubOpinions *fanclubOpinions = &gSaveBlock1.tvShows[gSpecialVar_0x8004].fanclubOpinions;
     u8 state;
 
-    gScriptResult = 0;
+    gSpecialVar_Result = 0;
     state = gUnknown_020387E8;
     switch (state)
     {
@@ -3136,7 +3459,7 @@ void DoTVShowInSearchOfTrainers(void)
 {
     u8 state;
 
-    gScriptResult = 0;
+    gSpecialVar_Result = 0;
     state = gUnknown_020387E8;
     switch (state)
     {
@@ -3178,7 +3501,7 @@ void DoTVShowInSearchOfTrainers(void)
         EasyChat_GetWordText(gStringVar1, gSaveBlock1.gabbyAndTyData.quote);
         StringCopy(gStringVar2, gSpeciesNames[gSaveBlock1.gabbyAndTyData.mon1]);
         StringCopy(gStringVar3, gSpeciesNames[gSaveBlock1.gabbyAndTyData.mon2]);
-        gScriptResult = 1;
+        gSpecialVar_Result = 1;
         gUnknown_020387E8 = 0;;
         TakeTVShowInSearchOfTrainersOffTheAir();
         break;
@@ -3191,7 +3514,7 @@ void DoTVShowPokemonAngler(void)
     struct TVShowPokemonAngler *pokemonAngler = &gSaveBlock1.tvShows[gSpecialVar_0x8004].pokemonAngler;
     u8 state;
 
-    gScriptResult = 0;
+    gSpecialVar_Result = 0;
     if (pokemonAngler->var02 < pokemonAngler->var03)
         gUnknown_020387E8 = 0;
     else
@@ -3220,7 +3543,7 @@ void DoTVShowTheWorldOfMasters(void)
     struct TVShowWorldOfMasters *worldOfMasters = &gSaveBlock1.tvShows[gSpecialVar_0x8004].worldOfMasters;
     u8 state;
 
-    gScriptResult = 0;
+    gSpecialVar_Result = 0;
     state = gUnknown_020387E8;
     switch (state)
     {
@@ -3248,7 +3571,7 @@ void DoTVShowTheWorldOfMasters(void)
 
 void TVShowDone(void)
 {
-    gScriptResult = 1;
+    gSpecialVar_Result = 1;
     gUnknown_020387E8 = 0;
     gSaveBlock1.tvShows[gSpecialVar_0x8004].common.var01 = 0;
 }

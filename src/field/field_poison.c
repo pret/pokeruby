@@ -1,7 +1,7 @@
 #include "global.h"
 #include "field_poison.h"
 #include "field_message_box.h"
-#include "fldeff_80C5CD4.h"
+#include "fldeff_poison.h"
 #include "pokemon.h"
 #include "pokemon_summary_screen.h"
 #include "script.h"
@@ -9,7 +9,7 @@
 #include "task.h"
 #include "text.h"
 
-extern u16 gScriptResult;
+extern u16 gSpecialVar_Result;
 extern u8 fieldPoisonText_PokemonFainted[];
 
 bool32 CheckMonIsValid(struct Pokemon *pkmn)
@@ -93,9 +93,9 @@ void Task_WhiteOut(u8 taskId)
         break;
     case 2: //Done checking Pokemon
         if (AllMonsFainted())
-            gScriptResult = 1;
+            gSpecialVar_Result = 1;
         else
-            gScriptResult = 0;
+            gSpecialVar_Result = 0;
         EnableBothScriptContexts();
         DestroyTask(taskId);
         break;
@@ -128,7 +128,7 @@ s32 DoPoisonFieldEffect(void)
                 hp--;
             if (hp == 0)
                 numFainting++; //Pokemon will now faint due to poison
-            SetMonData(pkmn, MON_DATA_HP, (u8 *)&hp);
+            SetMonData(pkmn, MON_DATA_HP, &hp);
             numPoisoned++;
         }
         pkmn++;

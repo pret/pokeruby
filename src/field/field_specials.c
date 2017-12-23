@@ -11,22 +11,22 @@
 #include "field_camera.h"
 #include "field_player_avatar.h"
 #include "main.h"
-#include "map_constants.h"
+#include "constants/maps.h"
 #include "overworld.h"
 #include "script.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "string_util.h"
 #include "strings.h"
 #include "pokeblock.h"
-#include "species.h"
-#include "abilities.h"
-#include "moves.h"
+#include "constants/species.h"
+#include "constants/abilities.h"
+#include "constants/moves.h"
 #include "text.h"
 #include "wallclock.h"
 #include "tv.h"
 #include "rtc.h"
 #include "link.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "menu.h"
 #include "starter_choose.h"
@@ -34,7 +34,7 @@
 #include "battle_tower.h"
 #include "field_weather.h"
 #include "pokemon_summary_screen.h"
-#include "rng.h"
+#include "random.h"
 
 #if ENGLISH
 #define CHAR_DECIMAL_SEPARATOR CHAR_PERIOD
@@ -46,11 +46,13 @@ extern struct WarpData gUnknown_020297F0;
 extern u8 gBattleOutcome;
 extern u16 gSpecialVar_0x8004;
 extern u16 gSpecialVar_0x8005;
-extern u16 gScriptResult;
+extern u16 gSpecialVar_Result;
 
-EWRAM_DATA u8 gUnknown_02039250 = 0;
-EWRAM_DATA u8 gUnknown_02039251 = 0;
-EWRAM_DATA u32 gUnknown_02039254 = 0;
+extern u8 *const gUnknown_083D1464[3];
+
+EWRAM_DATA bool8 gBikeCyclingChallenge = FALSE;
+EWRAM_DATA u8 gBikeCollisions = 0;
+EWRAM_DATA u32 gBikeCyclingTimer = 0;
 EWRAM_DATA u8 gUnknown_02039258 = 0;
 EWRAM_DATA u8 gUnknown_02039259 = 0;
 EWRAM_DATA u8 gUnknown_0203925A = 0;
@@ -76,16 +78,16 @@ void ScrSpecial_ViewWallClock(void)
 
 void ResetCyclingRoadChallengeData(void)
 {
-    gUnknown_02039250 = 0;
-    gUnknown_02039251 = 0;
-    gUnknown_02039254 = 0;
+    gBikeCyclingChallenge = FALSE;
+    gBikeCollisions = 0;
+    gBikeCyclingTimer = 0;
 }
 
 void ScrSpecial_BeginCyclingRoadChallenge(void)
 {
-    gUnknown_02039250 = 1;
-    gUnknown_02039251 = 0;
-    gUnknown_02039254 = gMain.vblankCounter1;
+    gBikeCyclingChallenge = TRUE;
+    gBikeCollisions = 0;
+    gBikeCyclingTimer = gMain.vblankCounter1;
 }
 
 u16 GetPlayerAvatarBike(void)
@@ -167,14 +169,14 @@ static void DetermineCyclingRoadResults(u32 arg0, u8 arg1)
     }
 
 
-    gScriptResult = result;
+    gSpecialVar_Result = result;
 }
 
 void FinishCyclingRoadChallenge(void) {
-    const u32 time = gMain.vblankCounter1 - gUnknown_02039254;
+    const u32 time = gMain.vblankCounter1 - gBikeCyclingTimer;
 
-    DetermineCyclingRoadResults(time, gUnknown_02039251);
-    RecordCyclingRoadResults(time, gUnknown_02039251);
+    DetermineCyclingRoadResults(time, gBikeCollisions);
+    RecordCyclingRoadResults(time, gBikeCollisions);
 }
 
 static void RecordCyclingRoadResults(u32 arg0, u8 arg1) {
@@ -205,7 +207,7 @@ u16 GetRecordedCyclingRoadResults(void) {
 }
 
 void UpdateCyclingRoadState(void) {
-    if (gUnknown_020297F0.mapNum == MAP_ID_ROUTE110_SEASIDE_CYCLING_ROAD_NORTH_ENTRANCE && gUnknown_020297F0.mapGroup == MAP_GROUP_ROUTE110_SEASIDE_CYCLING_ROAD_NORTH_ENTRANCE)
+    if (gUnknown_020297F0.mapNum == MAP_NUM(ROUTE110_SEASIDE_CYCLING_ROAD_NORTH_ENTRANCE) && gUnknown_020297F0.mapGroup == MAP_GROUP(ROUTE110_SEASIDE_CYCLING_ROAD_NORTH_ENTRANCE))
     {
         return;
     }
@@ -219,18 +221,18 @@ void UpdateCyclingRoadState(void) {
 
 void SetSSTidalFlag(void)
 {
-    FlagSet(SYS_CRUISE_MODE);
+    FlagSet(FLAG_SYS_CRUISE_MODE);
     *GetVarPointer(VAR_CRUISE_STEP_COUNT) = 0;
 }
 
 void ResetSSTidalFlag(void)
 {
-    FlagClear(SYS_CRUISE_MODE);
+    FlagClear(FLAG_SYS_CRUISE_MODE);
 }
 
 bool32 CountSSTidalStep(u16 delta)
 {
-    if (!FlagGet(SYS_CRUISE_MODE) || (*GetVarPointer(VAR_CRUISE_STEP_COUNT) += delta) <= 0xcc)
+    if (!FlagGet(FLAG_SYS_CRUISE_MODE) || (*GetVarPointer(VAR_CRUISE_STEP_COUNT) += delta) <= 0xcc)
     {
         return FALSE;
     }
@@ -257,38 +259,38 @@ u8 GetSSTidalLocation(s8 *mapGroup, s8 *mapNum, s16 *x, s16 *y)
         case 2:
             if (*varCruiseStepCount < 60)
             {
-                *mapNum = MAP_ID_ROUTE134;
+                *mapNum = MAP_NUM(ROUTE134);
                 *x = *varCruiseStepCount + 19;
             }
             else if (*varCruiseStepCount < 140)
             {
-                *mapNum = MAP_ID_ROUTE133;
+                *mapNum = MAP_NUM(ROUTE133);
                 *x = *varCruiseStepCount - 60;
             }
             else
             {
-                *mapNum = MAP_ID_ROUTE132;
+                *mapNum = MAP_NUM(ROUTE132);
                 *x = *varCruiseStepCount - 140;
             }
             break;
         case 7:
             if (*varCruiseStepCount < 66)
             {
-                *mapNum = MAP_ID_ROUTE132;
+                *mapNum = MAP_NUM(ROUTE132);
                 *x = 65 - *varCruiseStepCount;
             }
             else if (*varCruiseStepCount < 146) {
-                *mapNum = MAP_ID_ROUTE133;
+                *mapNum = MAP_NUM(ROUTE133);
                 *x = 145 - *varCruiseStepCount;
             }
             else
             {
-                *mapNum = MAP_ID_ROUTE134;
+                *mapNum = MAP_NUM(ROUTE134);
                 *x = 224 - *varCruiseStepCount;
             }
             break;
     }
-    *mapGroup = MAP_GROUP_ROUTE132;
+    *mapGroup = MAP_GROUP(ROUTE132);
     *y = 20;
     return 0;
 }
@@ -700,11 +702,11 @@ void CableCarWarp(void)
 {
     if (gSpecialVar_0x8004 != 0)
     {
-        Overworld_SetWarpDestination(MAP_GROUP_ROUTE112_CABLE_CAR_STATION, MAP_ID_ROUTE112_CABLE_CAR_STATION, -1, 6, 4);
+        Overworld_SetWarpDestination(MAP_GROUP(ROUTE112_CABLE_CAR_STATION), MAP_NUM(ROUTE112_CABLE_CAR_STATION), -1, 6, 4);
     }
     else
     {
-        Overworld_SetWarpDestination(MAP_GROUP_MT_CHIMNEY_CABLE_CAR_STATION, MAP_ID_MT_CHIMNEY_CABLE_CAR_STATION, -1, 6, 4);
+        Overworld_SetWarpDestination(MAP_GROUP(MT_CHIMNEY_CABLE_CAR_STATION), MAP_NUM(MT_CHIMNEY_CABLE_CAR_STATION), -1, 6, 4);
     }
 }
 
@@ -999,22 +1001,22 @@ void SetDepartmentStoreFloorVar(void)
     u8 deptStoreFloor;
     switch (gSaveBlock1.warp2.mapNum)
     {
-        case MAP_ID_LILYCOVE_CITY_DEPARTMENT_STORE_1F:
+        case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_1F):
             deptStoreFloor = 0;
             break;
-        case MAP_ID_LILYCOVE_CITY_DEPARTMENT_STORE_2F:
+        case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_2F):
             deptStoreFloor = 1;
             break;
-        case MAP_ID_LILYCOVE_CITY_DEPARTMENT_STORE_3F:
+        case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_3F):
             deptStoreFloor = 2;
             break;
-        case MAP_ID_LILYCOVE_CITY_DEPARTMENT_STORE_4F:
+        case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_4F):
             deptStoreFloor = 3;
             break;
-        case MAP_ID_LILYCOVE_CITY_DEPARTMENT_STORE_5F:
+        case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_5F):
             deptStoreFloor = 4;
             break;
-        case MAP_ID_LILYCOVE_CITY_DEPARTMENT_STORE_ROOFTOP:
+        case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_ROOFTOP):
             deptStoreFloor = 15;
             break;
         default:
@@ -1110,17 +1112,17 @@ void sub_810E984(u8 taskId)
         saved_warp2_set_2(0, gUnknown_03000760[gUnknown_0203925B].var1, gUnknown_03000760[gUnknown_0203925B].var2, -1, 2, 1);
         if (gSpecialVar_0x8005 == gUnknown_0203925B)
         {
-            gScriptResult = 0;
+            gSpecialVar_Result = 0;
             PlaySE(SE_SELECT);
             MenuZeroFillWindowRect(0, 0, 29, 12);
             sub_810EC9C(taskId);
         }
         else
         {
-            gScriptResult = 1;
+            gSpecialVar_Result = 1;
             gSpecialVar_0x8005 = gUnknown_0203925B;
             sub_810EBEC();
-            FieldObjectTurnByLocalIdAndMap(gScriptLastTalked, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, DIR_SOUTH);
+            FieldObjectTurnByLocalIdAndMap(gSpecialVar_LastTalked, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, DIR_SOUTH);
             sub_810EEDC();
             MenuZeroFillScreen();
             DestroyTask(taskId);
@@ -1128,7 +1130,7 @@ void sub_810E984(u8 taskId)
     }
     else if (gMain.newKeys & B_BUTTON)
     {
-        gScriptResult = 0;
+        gSpecialVar_Result = 0;
         PlaySE(SE_SELECT);
         sub_810EEDC();
         MenuZeroFillWindowRect(0, 0, 29, 12);
@@ -1514,12 +1516,12 @@ void IsGrassTypeInParty(void)
             species = GetMonData(pokemon, MON_DATA_SPECIES);
             if (gBaseStats[species].type1 == TYPE_GRASS || gBaseStats[species].type2 == TYPE_GRASS)
             {
-                gScriptResult = TRUE;
+                gSpecialVar_Result = TRUE;
                 return;
             }
         }
     }
-    gScriptResult = FALSE;
+    gSpecialVar_Result = FALSE;
 }
 
 const u8 *const gUnknown_083F83C0[] = {
@@ -1577,7 +1579,7 @@ void sub_810F118(u8 taskId)
     if (gMain.newKeys & A_BUTTON)
     {
         HandleDestroyMenuCursors();
-        gScriptResult = gUnknown_0203925B;
+        gSpecialVar_Result = gUnknown_0203925B;
         PlaySE(SE_SELECT);
         sub_810EEDC();
         MenuZeroFillWindowRect(0, 0, 29, 12);
@@ -1586,7 +1588,7 @@ void sub_810F118(u8 taskId)
     if (gMain.newKeys & B_BUTTON)
     {
         HandleDestroyMenuCursors();
-        gScriptResult = 0x7f;
+        gSpecialVar_Result = 0x7f;
         PlaySE(SE_SELECT);
         sub_810EEDC();
         MenuZeroFillWindowRect(0, 0, 29, 12);
@@ -1789,7 +1791,7 @@ u16 sub_810F404(void)
 
 void sub_810F414(void)
 {
-    sub_8135FF4(gStringVar1);
+    SetEReaderTrainerName(gStringVar1);
 }
 
 const u8 gUnknown_083F83E0[] = {12, 2, 4, 5, 1, 8, 7, 11, 3, 10, 9, 6};
@@ -1863,7 +1865,7 @@ void GivLeadMonEffortRibbon(void)
 {
     bool8 ribbonSet;
     IncrementGameStat(GAME_STAT_RECEIVED_RIBBONS);
-    FlagSet(SYS_RIBBON_GET);
+    FlagSet(FLAG_SYS_RIBBON_GET);
     ribbonSet = TRUE;
     SetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_EFFORT_RIBBON, &ribbonSet);
 }
@@ -1879,14 +1881,14 @@ bool8 ScrSpecial_AreLeadMonEVsMaxedOut(void)
 
 u8 sub_810F5BC(void)
 {
-    if (!FlagGet(0xc7) && gSaveBlock1.location.mapGroup == MAP_GROUP_RUSTURF_TUNNEL && gSaveBlock1.location.mapNum == MAP_ID_RUSTURF_TUNNEL)
+    if (!FlagGet(FLAG_RUSTURF_TUNNEL_OPENED) && gSaveBlock1.location.mapGroup == MAP_GROUP(RUSTURF_TUNNEL) && gSaveBlock1.location.mapNum == MAP_NUM(RUSTURF_TUNNEL))
     {
-        if (FlagGet(0x3a3))
+        if (FlagGet(FLAG_HIDE_RUSTURF_TUNNEL_ROCK_1))
         {
             VarSet(VAR_0x409a, 4);
             return TRUE;
         }
-        else if (FlagGet(0x3a4))
+        else if (FlagGet(FLAG_HIDE_RUSTURF_TUNNEL_ROCK_2))
         {
             VarSet(VAR_0x409a, 5);
             return TRUE;
@@ -1905,13 +1907,13 @@ void PutZigzagoonInPlayerParty(void)
     u16 monData;
     CreateMon(&gPlayerParty[0], SPECIES_ZIGZAGOON, 7, 0x20, FALSE, 0, FALSE, 0);
     monData = TRUE;
-    SetMonData(&gPlayerParty[0], MON_DATA_ALT_ABILITY, (u8 *)&monData);
+    SetMonData(&gPlayerParty[0], MON_DATA_ALT_ABILITY, &monData);
     monData = MOVE_TACKLE;
-    SetMonData(&gPlayerParty[0], MON_DATA_MOVE1, (u8 *)&monData);
+    SetMonData(&gPlayerParty[0], MON_DATA_MOVE1, &monData);
     monData = MOVE_NONE;
-    SetMonData(&gPlayerParty[0], MON_DATA_MOVE2, (u8 *)&monData);
-    SetMonData(&gPlayerParty[0], MON_DATA_MOVE3, (u8 *)&monData);
-    SetMonData(&gPlayerParty[0], MON_DATA_MOVE4, (u8 *)&monData);
+    SetMonData(&gPlayerParty[0], MON_DATA_MOVE2, &monData);
+    SetMonData(&gPlayerParty[0], MON_DATA_MOVE3, &monData);
+    SetMonData(&gPlayerParty[0], MON_DATA_MOVE4, &monData);
 }
 
 bool8 IsStarterInParty(void)
@@ -2000,7 +2002,7 @@ static void sub_810F814(u8 taskId)
 
 bool8 sub_810F828(void)
 {
-    return FlagGet(0x2b8);
+    return FlagGet(FLAG_UNKNOWN_2B8);
 }
 
 void SetRoute119Weather(void)
@@ -2075,27 +2077,27 @@ bool8 sub_810F96C(void)
 
 void sub_810F9AC(void)
 {
-    if (gScriptResult >= 10000)
+    if (gSpecialVar_Result >= 10000)
     {
-        sub_80BF088(0, gScriptResult);
+        sub_80BF088(0, gSpecialVar_Result);
     }
-    else if (gScriptResult >= 1000)
+    else if (gSpecialVar_Result >= 1000)
     {
         gStringVar1[0] = CHAR_0;
-        ConvertIntToDecimalStringN(gStringVar1 + 1, gScriptResult, 0, sub_80BF0B8(gScriptResult));
+        ConvertIntToDecimalStringN(gStringVar1 + 1, gSpecialVar_Result, 0, sub_80BF0B8(gSpecialVar_Result));
     }
-    else if (gScriptResult >= 100)
+    else if (gSpecialVar_Result >= 100)
     {
         gStringVar1[0] = CHAR_0;
         gStringVar1[1] = CHAR_0;
-        ConvertIntToDecimalStringN(gStringVar1 + 2, gScriptResult, 0, sub_80BF0B8(gScriptResult));
+        ConvertIntToDecimalStringN(gStringVar1 + 2, gSpecialVar_Result, 0, sub_80BF0B8(gSpecialVar_Result));
     }
-    else if (gScriptResult >= 10)
+    else if (gSpecialVar_Result >= 10)
     {
         gStringVar1[0] = CHAR_0;
         gStringVar1[1] = CHAR_0;
         gStringVar1[2] = CHAR_0;
-        ConvertIntToDecimalStringN(gStringVar1 + 3, gScriptResult, 0, sub_80BF0B8(gScriptResult));
+        ConvertIntToDecimalStringN(gStringVar1 + 3, gSpecialVar_Result, 0, sub_80BF0B8(gSpecialVar_Result));
     }
     else
     {
@@ -2103,7 +2105,7 @@ void sub_810F9AC(void)
         gStringVar1[1] = CHAR_0;
         gStringVar1[2] = CHAR_0;
         gStringVar1[3] = CHAR_0;
-        ConvertIntToDecimalStringN(gStringVar1 + 4, gScriptResult, 0, sub_80BF0B8(gScriptResult));
+        ConvertIntToDecimalStringN(gStringVar1 + 4, gSpecialVar_Result, 0, sub_80BF0B8(gSpecialVar_Result));
     }
 }
 

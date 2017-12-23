@@ -4,21 +4,19 @@
 #include "event_data.h"
 #include "main.h"
 #include "pokemon.h"
-#include "rng.h"
+#include "random.h"
 #include "rom_8077ABC.h"
-#include "species.h"
+#include "constants/species.h"
 #include "sprite.h"
 #include "string_util.h"
 #include "strings2.h"
 #include "text.h"
 #include "util.h"
+#include "ewram.h"
 
 extern u8 gPlayerPartyCount;
 extern u8 gEnemyPartyCount;
 
-extern u16 unk_20160BC[];
-extern struct SecretBaseRecord gSecretBaseRecord;
-extern u32 dword_2017100[];
 extern u16 gBattleTypeFlags;
 extern u8 gActiveBank;
 extern struct BattlePokemon gBattleMons[4];
@@ -278,7 +276,7 @@ u32 GetMonData(struct Pokemon *mon, s32 field, u8 *data)
         return mon->attack;
     case MON_DATA_DEF:
         return mon->defense;
-    case MON_DATA_SPD:
+    case MON_DATA_SPEED:
         return mon->speed;
     case MON_DATA_SPATK:
         return mon->spAttack;
@@ -422,7 +420,7 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
     case MON_DATA_DEF_EV:
         retVal = substruct2->defenseEV;
         break;
-    case MON_DATA_SPD_EV:
+    case MON_DATA_SPEED_EV:
         retVal = substruct2->speedEV;
         break;
     case MON_DATA_SPATK_EV:
@@ -476,7 +474,7 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
     case MON_DATA_DEF_IV:
         retVal = substruct3->defenseIV;
         break;
-    case MON_DATA_SPD_IV:
+    case MON_DATA_SPEED_IV:
         retVal = substruct3->speedIV;
         break;
     case MON_DATA_SPATK_IV:
@@ -653,7 +651,7 @@ void SetMonData(struct Pokemon *mon, s32 field, const u8 *data)
     case MON_DATA_DEF:
         SET16(mon->defense);
         break;
-    case MON_DATA_SPD:
+    case MON_DATA_SPEED:
         SET16(mon->speed);
         break;
     case MON_DATA_SPATK:
@@ -784,7 +782,7 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const u8 *data)
     case MON_DATA_DEF_EV:
         SET8(substruct2->defenseEV);
         break;
-    case MON_DATA_SPD_EV:
+    case MON_DATA_SPEED_EV:
         SET8(substruct2->speedEV);
         break;
     case MON_DATA_SPATK_EV:
@@ -844,7 +842,7 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const u8 *data)
     case MON_DATA_DEF_IV:
         SET8(substruct3->defenseIV);
         break;
-    case MON_DATA_SPD_IV:
+    case MON_DATA_SPEED_IV:
         SET8(substruct3->speedIV);
         break;
     case MON_DATA_SPATK_IV:
@@ -1062,30 +1060,31 @@ void CreateSecretBaseEnemyParty(struct SecretBaseRecord *secretBaseRecord)
     s32 i, j;
 
     ZeroEnemyPartyMons();
-    memcpy(&gSecretBaseRecord, secretBaseRecord, sizeof(*secretBaseRecord));
+    memcpy(eSecretBaseRecord, secretBaseRecord, sizeof(*secretBaseRecord));
 
     for (i = 0; i < 6; i++)
     {
-        if (gSecretBaseRecord.partySpecies[i])
+        if (eSecretBaseRecord->partySpecies[i])
         {
             CreateMon(&gEnemyParty[i],
-                gSecretBaseRecord.partySpecies[i],
-                gSecretBaseRecord.partyLevels[i],
+                eSecretBaseRecord->partySpecies[i],
+                eSecretBaseRecord->partyLevels[i],
                 15,
                 1,
-                gSecretBaseRecord.partyPersonality[i],
+                eSecretBaseRecord->partyPersonality[i],
                 2,
                 0);
 
-            SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, (u8 *)&gSecretBaseRecord.partyHeldItems[i]);
+            // these two SetMonData calls require the (u8 *) cast since SetMonData is declared in this function.
+            SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, (u8 *)&eSecretBaseRecord->partyHeldItems[i]);
 
             for (j = 0; j < 6; j++)
-                SetMonData(&gEnemyParty[i], MON_DATA_HP_EV + j, &gSecretBaseRecord.partyEVs[i]);
+                SetMonData(&gEnemyParty[i], MON_DATA_HP_EV + j, &eSecretBaseRecord->partyEVs[i]);
 
             for (j = 0; j < 4; j++)
             {
-                SetMonData(&gEnemyParty[i], MON_DATA_MOVE1 + j, (u8 *)&gSecretBaseRecord.partyMoves[i * 4 + j]);
-                SetMonData(&gEnemyParty[i], MON_DATA_PP1 + j, &gBattleMoves[gSecretBaseRecord.partyMoves[i * 4 + j]].pp);
+                SetMonData(&gEnemyParty[i], MON_DATA_MOVE1 + j, (u8 *)&eSecretBaseRecord->partyMoves[i * 4 + j]);
+                SetMonData(&gEnemyParty[i], MON_DATA_PP1 + j, &gBattleMoves[eSecretBaseRecord->partyMoves[i * 4 + j]].pp);
             }
         }
     }
@@ -1096,13 +1095,13 @@ void CreateSecretBaseEnemyParty(struct SecretBaseRecord *secretBaseRecord)
 
 u8 GetSecretBaseTrainerPicIndex(void)
 {
-    u8 trainerClass = gSecretBaseTrainerClasses[gSecretBaseRecord.gender][gSecretBaseRecord.trainerId[0] % 5];
+    u8 trainerClass = gSecretBaseTrainerClasses[eSecretBaseRecord->gender][eSecretBaseRecord->trainerId[0] % 5];
     return gTrainerClassToPicIndex[trainerClass];
 }
 
 u8 GetSecretBaseTrainerNameIndex(void)
 {
-    u8 trainerClass = gSecretBaseTrainerClasses[gSecretBaseRecord.gender][gSecretBaseRecord.trainerId[0] % 5];
+    u8 trainerClass = gSecretBaseTrainerClasses[eSecretBaseRecord->gender][eSecretBaseRecord->trainerId[0] % 5];
     return gTrainerClassToNameIndex[trainerClass];
 }
 
@@ -1185,7 +1184,7 @@ void CopyPlayerPartyMonToBattleData(u8 battleIndex, u8 partyIndex)
     gBattleMons[battleIndex].hpIV = GetMonData(&gPlayerParty[partyIndex], MON_DATA_HP_IV, NULL);
     gBattleMons[battleIndex].attackIV = GetMonData(&gPlayerParty[partyIndex], MON_DATA_ATK_IV, NULL);
     gBattleMons[battleIndex].defenseIV = GetMonData(&gPlayerParty[partyIndex], MON_DATA_DEF_IV, NULL);
-    gBattleMons[battleIndex].speedIV = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPD_IV, NULL);
+    gBattleMons[battleIndex].speedIV = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPEED_IV, NULL);
     gBattleMons[battleIndex].spAttackIV = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPATK_IV, NULL);
     gBattleMons[battleIndex].spDefenseIV = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPDEF_IV, NULL);
     gBattleMons[battleIndex].personality = GetMonData(&gPlayerParty[partyIndex], MON_DATA_PERSONALITY, NULL);
@@ -1195,7 +1194,7 @@ void CopyPlayerPartyMonToBattleData(u8 battleIndex, u8 partyIndex)
     gBattleMons[battleIndex].maxHP = GetMonData(&gPlayerParty[partyIndex], MON_DATA_MAX_HP, NULL);
     gBattleMons[battleIndex].attack = GetMonData(&gPlayerParty[partyIndex], MON_DATA_ATK, NULL);
     gBattleMons[battleIndex].defense = GetMonData(&gPlayerParty[partyIndex], MON_DATA_DEF, NULL);
-    gBattleMons[battleIndex].speed = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPD, NULL);
+    gBattleMons[battleIndex].speed = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPEED, NULL);
     gBattleMons[battleIndex].spAttack = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPATK, NULL);
     gBattleMons[battleIndex].spDefense = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPDEF, NULL);
     gBattleMons[battleIndex].isEgg = GetMonData(&gPlayerParty[partyIndex], MON_DATA_IS_EGG, NULL);
@@ -1207,7 +1206,7 @@ void CopyPlayerPartyMonToBattleData(u8 battleIndex, u8 partyIndex)
     GetMonData(&gPlayerParty[partyIndex], MON_DATA_NICKNAME, nickname);
     StringCopy10(gBattleMons[battleIndex].nickname, nickname);
     GetMonData(&gPlayerParty[partyIndex], MON_DATA_OT_NAME, gBattleMons[battleIndex].otName);
-    *(unk_20160BC + GetBankSide(battleIndex)) = gBattleMons[battleIndex].hp;
+    ewram160BC[GetBankSide(battleIndex)] = gBattleMons[battleIndex].hp;
 
     for (i = 0; i < 8; i++)
         gBattleMons[battleIndex].statStages[i] = 6;

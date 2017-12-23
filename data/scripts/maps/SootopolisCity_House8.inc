@@ -38,7 +38,7 @@ SootopolisCity_House8_EventScript_15B45C:: @ 815B45C
 
 SootopolisCity_House8_EventScript_15B466:: @ 815B466
 	msgbox SootopolisCity_House8_Text_19021D, 4
-	giveitem ITEM_ELIXIR
+	giveitem_std ITEM_ELIXIR
 	compare RESULT, 0
 	goto_if_eq SootopolisCity_House8_EventScript_15B488
 	closemessage
@@ -87,7 +87,7 @@ SootopolisCity_House8_EventScript_15B4ED:: @ 815B4ED
 
 SootopolisCity_House8_EventScript_15B4F7:: @ 815B4F7
 	msgbox SootopolisCity_House8_Text_190536, 4
-	giveitem ITEM_ELIXIR
+	giveitem_std ITEM_ELIXIR
 	compare RESULT, 0
 	goto_if_eq SootopolisCity_House8_EventScript_15B519
 	closemessage

@@ -1,6 +1,6 @@
 #include "global.h"
 #include "battle_records.h"
-#include "game_stat.h"
+#include "constants/game_stat.h"
 #include "link.h"
 #include "menu.h"
 #include "overworld.h"
@@ -243,7 +243,7 @@ static void PrintLinkBattleRecord(struct LinkBattleRecord *record, u8 y)
 void ShowLinkBattleRecords(void) {
     s32 i;
     MenuDrawTextWindow(1, 0, 28, 18);
-    sub_8072BD8((u8 *) gOtherText_BattleResults, 0, 1, 240);
+    sub_8072BD8(gOtherText_BattleResults, 0, 1, 240);
 
     PrintLinkBattleWinsLossesDraws(gSaveBlock1.linkBattleRecords);
 #if ENGLISH
@@ -260,9 +260,9 @@ void ShowLinkBattleRecords(void) {
 
 static bool32 sub_8110494(u8 level)
 {
-    struct SaveBlock2_Sub *sb2sub = &gSaveBlock2.filler_A8;
+    struct BattleTowerData *battleTower = &gSaveBlock2.battleTower;
 
-    switch (sb2sub->var_4AE[level])
+    switch (battleTower->var_4AE[level])
     {
     case 0:
         return FALSE;
@@ -294,17 +294,18 @@ static void PrintWinStreak(const u8 *str, u16 streak, u8 left, u8 top)
 
 static void PrintRecordWinStreak(u8 level, u8 left, u8 top)
 {
-    struct SaveBlock2_Sub *sb2sub = &gSaveBlock2.filler_A8;
-    u16 winStreak = sb2sub->recordWinStreak[level];
+    struct BattleTowerData *battleTower = &gSaveBlock2.battleTower;
+    u16 winStreak = battleTower->recordWinStreaks[level];
     PrintWinStreak(gOtherText_Record, winStreak, left, top);
 }
 
 static u16 GetLastWinStreak(u8 level)
 {
-    u16 result = gSaveBlock2.filler_A8.winStreak[level];
-    if (result > 9999)
-        result = 9999;
-    return result;
+    u16 winStreak = gSaveBlock2.battleTower.currentWinStreaks[level];
+    if (winStreak > 9999)
+        winStreak = 9999;
+
+    return winStreak;
 }
 
 static void PrintLastWinStreak(u8 level, u8 left, u8 top)

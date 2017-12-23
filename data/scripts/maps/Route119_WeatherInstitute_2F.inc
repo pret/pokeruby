@@ -39,10 +39,10 @@ Route119_WeatherInstitute_2F_EventScript_163D45:: @ 8163D45
 	msgbox Route119_WeatherInstitute_2F_Text_19F11B, 4
 	closemessage
 	setvar 0x40b3, 1
-	clearflag 893
+	clearflag FLAG_HIDE_WEATHER_INSTITUTE_WORKERS_2F
 	fadedefaultbgm
 	fadescreen 1
-	setflag 890
+	setflag FLAG_HIDE_EVIL_TEAM_WEATHER_INSTITUTE
 	removeobject 1
 	removeobject 2
 	removeobject 3
@@ -55,15 +55,15 @@ Route119_WeatherInstitute_2F_EventScript_163D45:: @ 8163D45
 
 Route119_WeatherInstitute_2F_EventScript_163D7A:: @ 8163D7A
 	msgbox Route119_WeatherInstitute_2F_Text_19F1CF, 4
-	countpokemon
+	getpartysize
 	compare RESULT, 6
 	goto_if_eq Route119_WeatherInstitute_2F_EventScript_163DB4
 	playfanfare 370
 	message Route119_WeatherInstitute_2F_Text_19F267
 	waitfanfare
 	waitmessage
-	givepoke SPECIES_CASTFORM, 25, ITEM_MYSTIC_WATER, 0x0, 0x0, 0
-	setflag 151
+	givemon SPECIES_CASTFORM, 25, ITEM_MYSTIC_WATER, 0x0, 0x0, 0
+	setflag FLAG_RECEIVED_CASTFORM
 	msgbox Route119_WeatherInstitute_2F_Text_19F27D, 4
 	release
 	end
@@ -87,7 +87,7 @@ Route119_WeatherInstitute_2F_Movement_163DC8:: @ 8163DC8
 Route119_WeatherInstitute_2F_EventScript_163DCC:: @ 8163DCC
 	lock
 	faceplayer
-	checkflag 151
+	checkflag FLAG_RECEIVED_CASTFORM
 	goto_if_eq Route119_WeatherInstitute_2F_EventScript_163DBE
 	goto Route119_WeatherInstitute_2F_EventScript_163D7A
 	end

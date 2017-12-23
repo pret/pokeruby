@@ -3,23 +3,23 @@ SlateportCity_Harbor_MapScripts:: @ 8155F5D
 	.byte 0
 
 SlateportCity_Harbor_MapScript1_155F63:: @ 8155F63
-	setescapewarp SlateportCity, 255, 28, 13
+	setescapewarp MAP_SLATEPORT_CITY, 255, 28, 13
 	setvar 0x4001, 0
 	compare 0x40a0, 1
 	call_if 1, SlateportCity_Harbor_EventScript_155F89
-	checkflag 2052
+	checkflag FLAG_SYS_GAME_CLEAR
 	call_if 1, SlateportCity_Harbor_EventScript_155F85
 	end
 
 SlateportCity_Harbor_EventScript_155F85:: @ 8155F85
-	clearflag 860
+	clearflag FLAG_HIDE_SS_TIDAL_SLATEPORT_HARBOR
 	return
 
 SlateportCity_Harbor_EventScript_155F89:: @ 8155F89
 	savebgm BGM_EVIL_TEAM
 	setobjectxyperm 4, 12, 13
 	setobjectmovementtype 4, 9
-	setflag 905
+	setflag FLAG_HIDE_WORKERS_SLATEPORT_HARBOR
 	return
 
 SlateportCity_Harbor_EventScript_155F9B:: @ 8155F9B
@@ -73,8 +73,8 @@ SlateportCity_Harbor_EventScript_155FD5:: @ 8155FD5
 	call_if 1, SlateportCity_Harbor_EventScript_156086
 	msgbox SlateportCity_Harbor_Text_17FE60, 4
 	closemessage
-	setflag 821
-	setflag 822
+	setflag FLAG_HIDE_GRUNT_1_BLOCKING_HIDEOUT
+	setflag FLAG_HIDE_GRUNT_2_BLOCKING_HIDEOUT
 	moveobjectoffscreen 4
 	setobjectmovementtype 4, 10
 	releaseall
@@ -159,7 +159,7 @@ SlateportCity_Harbor_Movement_1560C2:: @ 81560C2
 SlateportCity_Harbor_EventScript_1560C4:: @ 81560C4
 	lock
 	faceplayer
-	checkflag 2052
+	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if_eq SlateportCity_Harbor_EventScript_1560D9
 	msgbox SlateportCity_Harbor_Text_17FA0A, 4
 	release
@@ -195,7 +195,7 @@ SlateportCity_Harbor_EventScript_15613F:: @ 815613F
 	goto_if_eq SlateportCity_Harbor_EventScript_15618A
 	setvar 0x40b4, 1
 	call SlateportCity_Harbor_EventScript_156196
-	warp SSTidalCorridor, 255, 1, 10
+	warp MAP_SS_TIDAL_CORRIDOR, 255, 1, 10
 	waitstate
 	release
 	end
@@ -205,7 +205,7 @@ SlateportCity_Harbor_EventScript_156167:: @ 8156167
 	compare RESULT, 0
 	goto_if_eq SlateportCity_Harbor_EventScript_15618A
 	call SlateportCity_Harbor_EventScript_156196
-	warp BattleTower_Outside, 255, 19, 23
+	warp MAP_BATTLE_TOWER_OUTSIDE, 255, 19, 23
 	waitstate
 	release
 	end
@@ -222,13 +222,13 @@ SlateportCity_Harbor_EventScript_156196:: @ 8156196
 	applymovement LAST_TALKED, SlateportCity_Harbor_Movement_1A0841
 	waitmovement 0
 	delay 30
-	hideobject LAST_TALKED, 9, 8
+	hideobjectat LAST_TALKED, MAP_SLATEPORT_CITY_HARBOR
 	compare FACING, 2
 	call_if 1, SlateportCity_Harbor_EventScript_1561EF
 	compare FACING, 4
 	call_if 1, SlateportCity_Harbor_EventScript_1561E4
 	delay 30
-	hideobject 255, 0, 0
+	hideobjectat 255, MAP_PETALBURG_CITY
 	setvar 0x8004, 5
 	call SlateportCity_Harbor_EventScript_1A040E
 	return
@@ -268,11 +268,11 @@ SlateportCity_Harbor_EventScript_156208:: @ 8156208
 SlateportCity_Harbor_EventScript_156211:: @ 8156211
 	lock
 	faceplayer
-	checkflag 2061
+	checkflag FLAG_BADGE07_GET
 	goto_if_eq SlateportCity_Harbor_EventScript_15626F
-	checkflag 271
+	checkflag FLAG_EVIL_TEAM_ESCAPED_STERN_SPOKE
 	goto_if_eq SlateportCity_Harbor_EventScript_156265
-	checkflag 112
+	checkflag FLAG_EVIL_TEAM_ESCAPED_IN_SUBMARINE
 	goto_if_eq SlateportCity_Harbor_EventScript_156258
 	compare 0x40a0, 2
 	goto_if_eq SlateportCity_Harbor_EventScript_15624E
@@ -289,7 +289,7 @@ SlateportCity_Harbor_EventScript_15624E:: @ 815624E
 	end
 
 SlateportCity_Harbor_EventScript_156258:: @ 8156258
-	setflag 271
+	setflag FLAG_EVIL_TEAM_ESCAPED_STERN_SPOKE
 	msgbox SlateportCity_Harbor_Text_17FF35, 4
 	release
 	end
@@ -305,7 +305,7 @@ SlateportCity_Harbor_EventScript_15626F:: @ 815626F
 	checkitem ITEM_SCANNER, 1
 	compare RESULT, 1
 	goto_if_eq SlateportCity_Harbor_EventScript_1562A7
-	checkflag 2052
+	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if_eq SlateportCity_Harbor_EventScript_15629D
 	msgbox SlateportCity_Harbor_Text_18017B, 4
 	release
@@ -335,12 +335,12 @@ SlateportCity_Harbor_EventScript_1562EA:: @ 81562EA
 	msgbox SlateportCity_Harbor_Text_1803DD, 5
 	compare RESULT, 0
 	goto_if_eq SlateportCity_Harbor_EventScript_156374
-	giveitem ITEM_DEEP_SEA_TOOTH
+	giveitem_std ITEM_DEEP_SEA_TOOTH
 	compare RESULT, 0
 	goto_if_eq SlateportCity_Harbor_EventScript_1A029B
-	removeitem ITEM_SCANNER, 1
+	takeitem ITEM_SCANNER, 1
 	msgbox SlateportCity_Harbor_Text_18046B, 4
-	setflag 294
+	setflag FLAG_EXCHANGED_SCANNER
 	goto SlateportCity_Harbor_EventScript_156380
 	end
 
@@ -348,12 +348,12 @@ SlateportCity_Harbor_EventScript_15632A:: @ 815632A
 	msgbox SlateportCity_Harbor_Text_180412, 5
 	compare RESULT, 0
 	goto_if_eq SlateportCity_Harbor_EventScript_156374
-	giveitem ITEM_DEEP_SEA_SCALE
+	giveitem_std ITEM_DEEP_SEA_SCALE
 	compare RESULT, 0
 	goto_if_eq SlateportCity_Harbor_EventScript_1A029B
-	removeitem ITEM_SCANNER, 1
+	takeitem ITEM_SCANNER, 1
 	msgbox SlateportCity_Harbor_Text_18046B, 4
-	setflag 294
+	setflag FLAG_EXCHANGED_SCANNER
 	goto SlateportCity_Harbor_EventScript_156380
 	end
 

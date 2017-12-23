@@ -6,7 +6,7 @@ BattleTower_Outside_MapObjects:: @ 8391BEC
 	object_event 5, MAP_OBJ_GFX_BEAUTY, 0, 19, 0, 24, 0, 3, 7, 17, 0, 0, 0, 0, 0, BattleTower_Outside_EventScript_160168, 0, 0, 0
 
 BattleTower_Outside_MapWarps:: @ 8391C64
-	warp_def 14, 8, 0, 0, BattleTower_Lobby
+	warp_def 14, 8, 0, 0, MAP_BATTLE_TOWER_LOBBY
 
 BattleTower_Outside_MapBGEvents:: @ 8391C6C
 	bg_event 16, 13, 0, 0, 0, BattleTower_Outside_EventScript_16025A

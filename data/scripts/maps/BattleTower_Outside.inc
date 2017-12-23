@@ -3,9 +3,9 @@ BattleTower_Outside_MapScripts:: @ 8160156
 	.byte 0
 
 BattleTower_Outside_MapScript1_16015C:: @ 816015C
-	setflag 2120
+	setflag FLAG_LANDMARK_BATTLE_TOWER
 	setvar 0x40bc, 0
-	setflag 918
+	setflag FLAG_HIDE_REPORTER_BATTLE_TOWER
 	end
 
 BattleTower_Outside_EventScript_160168:: @ 8160168
@@ -40,7 +40,7 @@ BattleTower_Outside_EventScript_1601D0:: @ 81601D0
 	goto_if_eq BattleTower_Outside_EventScript_160226
 	msgbox BattleTower_Outside_Text_199E4B, 4
 	call BattleTower_Outside_EventScript_160232
-	warp SlateportCity_Harbor, 255, 8, 11
+	warp MAP_SLATEPORT_CITY_HARBOR, 255, 8, 11
 	waitstate
 	release
 	end
@@ -51,7 +51,7 @@ BattleTower_Outside_EventScript_1601FB:: @ 81601FB
 	goto_if_eq BattleTower_Outside_EventScript_160226
 	msgbox BattleTower_Outside_Text_199E4B, 4
 	call BattleTower_Outside_EventScript_160232
-	warp LilycoveCity_Harbor, 255, 8, 11
+	warp MAP_LILYCOVE_CITY_HARBOR, 255, 8, 11
 	waitstate
 	release
 	end
@@ -67,7 +67,7 @@ BattleTower_Outside_EventScript_160232:: @ 8160232
 	applymovement LAST_TALKED, BattleTower_Outside_Movement_1A0845
 	waitmovement 0
 	delay 30
-	hideobject 5, 26, 4
+	hideobjectat 5, MAP_BATTLE_TOWER_OUTSIDE
 	setvar 0x8004, 4
 	call BattleTower_Outside_EventScript_1A047C
 	return

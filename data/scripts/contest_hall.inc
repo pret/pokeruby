@@ -9,19 +9,19 @@ VerdanturfTown_ContestLobby_EventScript_1A4E92:: @ 81A4E92
 	call_if 1, FallarborTown_ContestLobby_EventScript_1A4EDD
 	compare 0x408a, 0
 	goto_if 5, FallarborTown_ContestLobby_EventScript_1A4F4E
-	checkflag 1
+	checkflag FLAG_TEMP_1
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1A4F8F
-	getstdstring 0, 0x800b
+	bufferstdstring 0, 0x800b
 	msgbox FallarborTown_ContestLobby_Text_1A5DFC, 4
 	checkitem ITEM_CONTEST_PASS, 1
 	compare RESULT, 0
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1A4EE1
-	setflag 1
+	setflag FLAG_TEMP_1
 	goto FallarborTown_ContestLobby_EventScript_1A4F8F
 	end
 
 FallarborTown_ContestLobby_EventScript_1A4EDD:: @ 81A4EDD
-	clearflag 1
+	clearflag FLAG_TEMP_1
 	return
 
 FallarborTown_ContestLobby_EventScript_1A4EE1:: @ 81A4EE1
@@ -40,12 +40,12 @@ FallarborTown_ContestLobby_EventScript_1A4EF6:: @ 81A4EF6
 	end
 
 FallarborTown_ContestLobby_EventScript_1A4F13:: @ 81A4F13
-	checkflag 150
+	checkflag FLAG_RECEIVED_CONTEST_PASS
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1A4F44
 	msgbox FallarborTown_ContestLobby_Text_1A6583, 4
-	giveitem ITEM_CONTEST_PASS
-	setflag 150
-	setflag 1
+	giveitem_std ITEM_CONTEST_PASS
+	setflag FLAG_RECEIVED_CONTEST_PASS
+	setflag FLAG_TEMP_1
 	msgbox FallarborTown_ContestLobby_Text_1A5E98, 4
 	goto FallarborTown_ContestLobby_EventScript_1A4F8F
 	end
@@ -62,7 +62,7 @@ FallarborTown_ContestLobby_EventScript_1A4F4E:: @ 81A4F4E
 	end
 
 FallarborTown_ContestLobby_EventScript_1A4F67:: @ 81A4F67
-	giveitem ITEM_LUXURY_BALL
+	giveitem_std ITEM_LUXURY_BALL
 	compare RESULT, 0
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1A4F86
 	setvar 0x408a, 0
@@ -119,7 +119,7 @@ FallarborTown_ContestLobby_EventScript_1A503E:: @ 81A503E
 
 FallarborTown_ContestLobby_EventScript_1A5048:: @ 81A5048
 	msgbox FallarborTown_ContestLobby_Text_1A6319, 4
-	choosecontestpkmn
+	choosecontestmon
 	compare 0x8004, 255
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1A5097
 	special sub_80C43F4
@@ -260,8 +260,8 @@ LinkContestRoom1_EventScript_1A523F:: @ 81A523F
 	return
 
 LinkContestRoom1_EventScript_1A5245:: @ 81A5245
-	getstdstring 1, 0x8008
-	getstdstring 2, 0x8009
+	bufferstdstring 1, 0x8008
+	bufferstdstring 2, 0x8009
 	call LinkContestRoom1_EventScript_1A525F
 	lockall
 	applymovement 1, LinkContestRoom1_Movement_1A5D87
@@ -339,7 +339,7 @@ LinkContestRoom1_EventScript_1A5311:: @ 81A5311
 LinkContestRoom1_EventScript_1A5323:: @ 81A5323
 	special sub_80C4C64
 	addvar 0x8006, 1
-	getnumberstring 1, 0x8006
+	buffernumberstring 1, 0x8006
 	lockall
 	applymovement 0x800b, LinkContestRoom1_Movement_1A5D9C
 	waitmovement 0
@@ -885,7 +885,7 @@ LinkContestRoom1_EventScript_1A5A49:: @ 81A5A49
 	special sub_80C47F0
 	special sub_80C4858
 	addvar 0x8005, 1
-	getnumberstring 1, 0x8005
+	buffernumberstring 1, 0x8005
 	addvar 0x8005, -1
 	call LinkContestRoom1_EventScript_1A5A75
 	applymovement 0x4003, LinkContestRoom1_Movement_1A5D99
@@ -996,7 +996,7 @@ LinkContestRoom1_EventScript_1A5BAB:: @ 81A5BAB
 	compare 0x4088, 5
 	goto_if_eq LinkContestRoom1_EventScript_1A5C4C
 	call LinkContestRoom1_EventScript_1A5C12
-	checkflag 2
+	checkflag FLAG_TEMP_2
 	goto_if_eq LinkContestRoom1_EventScript_1A5BF6
 	msgbox LinkContestRoom1_Text_1A6DC5, 3
 	waitmessage
@@ -1035,14 +1035,14 @@ LinkContestRoom1_EventScript_1A5C23:: @ 81A5C23
 LinkContestRoom1_EventScript_1A5C32:: @ 81A5C32
 	compare CONTEST_RANK, 3
 	goto_if_eq LinkContestRoom1_EventScript_1A5C41
-	setflag 2
+	setflag FLAG_TEMP_2
 	return
 
 LinkContestRoom1_EventScript_1A5C41:: @ 81A5C41
 	return
 
 LinkContestRoom1_EventScript_1A5C42:: @ 81A5C42
-	setflag 270
+	setflag FLAG_CONTEST_SKETCH_CREATED
 	return
 
 LinkContestRoom1_EventScript_1A5C46:: @ 81A5C46
@@ -1134,7 +1134,7 @@ LinkContestRoom1_EventScript_1A5D2D:: @ 81A5D2D
 	return
 
 LinkContestRoom1_EventScript_1A5D3B:: @ 81A5D3B
-	giveitem ITEM_LUXURY_BALL
+	giveitem_std ITEM_LUXURY_BALL
 	compare RESULT, 0
 	goto_if_eq LinkContestRoom1_EventScript_1A5D2D
 	msgbox LinkContestRoom1_Text_1A6DF1, 3
@@ -1143,7 +1143,7 @@ LinkContestRoom1_EventScript_1A5D3B:: @ 81A5D3B
 LinkContestRoom1_EventScript_1A5D5B:: @ 81A5D5B
 	special sub_80C44C0
 	incrementgamestat GAME_STAT_RECEIVED_RIBBONS
-	setflag 2107
+	setflag FLAG_SYS_RIBBON_GET
 	lockall
 	msgbox LinkContestRoom1_Text_1A6D6A, 4
 	playfanfare 370

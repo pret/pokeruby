@@ -101,12 +101,6 @@ struct UnknownPokemonStruct2
     /*0x1D*/ u8 language;
 };
 
-extern u8 ewram[];
-#define ewram01000 (*(struct Unk2001000 *)(ewram + 0x01000))
-#define ewram1B000 (*(struct Unk201B000 *)(ewram + 0x1B000))
-#define ewram1B000_alt (*(struct Struct201B000 *)(ewram + 0x1B000))
-#define EWRAM_1B000 ewram1B000_alt
-
 void CB2_PartyMenuMain(void);
 void ChangeBattleTowerPartyMenuSelection(u8 taskId, s8 directionPressed);
 void SetPartyMenuSettings(u8 menuType, u8 battleTypeFlags, TaskFunc menuHandlerFunc, u8 textId);
@@ -222,5 +216,6 @@ void PartyMenuTryGiveMonMail(u8 taskId, TaskFunc func);
 void sub_806D668(u8 monIndex);
 void TaughtMove(u8 taskId);
 void StopTryingToTeachMove_806F588(u8 taskId);
+bool8 IsHMMove(u16 move);
 
 #endif // GUARD_PARTY_MENU_H

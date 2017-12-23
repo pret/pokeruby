@@ -4,11 +4,13 @@
 #include "main.h"
 #include "menu.h"
 #include "menu_cursor.h"
+#include "learn_move.h"
 #include "palette.h"
 #include "pokemon.h"
+#include "pokemon_summary_screen.h"
 #include "overworld.h"
 #include "script.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "sprite.h"
 #include "string_util.h"
@@ -16,32 +18,17 @@
 #include "strings2.h"
 #include "task.h"
 #include "trig.h"
+#include "ewram.h"
 
-extern u8 ewram[];
 extern u16 gSpecialVar_0x8004;
 extern u16 gSpecialVar_0x8005;
 extern u8 gTileBuffer[];
-
-struct ContestMove
-{
-    u8 effect;
-    u8 contestCategory:3;
-    u8 comboStarterId;
-    u8 comboMoves[4];
-};
-
-struct ContestEffect
-{
-    u8 effectType;
-    u8 appeal;
-    u8 jam;
-};
 
 extern const struct ContestMove gContestMoves[];
 extern const struct ContestEffect gContestEffects[];
 extern const struct WindowConfig gWindowConfig_81E6CE4;
 extern const struct WindowConfig gWindowConfig_81E7240;
-extern const u8 *const gUnknown_083CADD4[];
+extern const u8 *const gContestEffectStrings[];
 extern const u8 *const gMoveDescriptions[];
 extern const u8 gTypeNames[][7];
 extern const u8 *const gUnknown_083CAF70[];
@@ -50,7 +37,6 @@ extern const u8 *const gUnknown_083CAF70[];
 extern const u8 deuOtherText_ForgotAndLearned[];
 #endif
 
-extern void sub_809D9F0(struct Pokemon *, u8, u8, void *, u32);
 
 struct LearnMoveStruct
 {
@@ -277,7 +263,7 @@ void CB2_InitLearnMove(void)
     ResetSpriteData();
     FreeAllSpritePalettes();
     ResetTasks();
-    sLearnMoveStruct = (struct LearnMoveStruct *)(ewram + 0x17000);
+    sLearnMoveStruct = eLearnMoveStruct;
     ClearLearnMoveVars();
     sLearnMoveStruct->partyMon = gSpecialVar_0x8004;
     sub_8133558();
@@ -312,7 +298,7 @@ void sub_81327A4(void)
     ResetSpriteData();
     FreeAllSpritePalettes();
     ResetTasks();
-    sLearnMoveStruct = (struct LearnMoveStruct *)(ewram + 0x17000);
+    sLearnMoveStruct = eLearnMoveStruct;
     sub_8133558();
     sLearnMoveStruct->unk2C6 = gSpecialVar_0x8005;
     SetVBlankCallback(VBlankCB_LearnMove);
@@ -557,7 +543,7 @@ void LearnMoveMain(void)
     case 20:
         if (!gPaletteFade.active)
         {
-            sub_809D9F0(gPlayerParty, sLearnMoveStruct->partyMon, gPlayerPartyCount - 1, sub_81327A4, sLearnMoveStruct->movesToLearn[sLearnMoveStruct->menuSelection]);
+            ShowSelectMovePokemonSummaryScreen(gPlayerParty, sLearnMoveStruct->partyMon, gPlayerPartyCount - 1, sub_81327A4, sLearnMoveStruct->movesToLearn[sLearnMoveStruct->menuSelection]);
             sLearnMoveStruct->state = 28;
         }
         break;
@@ -765,20 +751,20 @@ void ClearLearnMoveVars(void)
 
 void sub_8133300(struct Sprite *sprite)
 {
-    s16 var = (sprite->data1 * 10) & 0xFF;
+    s16 var = (sprite->data[1] * 10) & 0xFF;
 
-    switch (sprite->data0)
+    switch (sprite->data[0])
     {
     case 0:
         break;
     case 1:
-        sprite->pos2.x = Sin(var, 3) * sprite->data2;
+        sprite->pos2.x = Sin(var, 3) * sprite->data[2];
         break;
     case 2:
-        sprite->pos2.y = Sin(var, 1) * sprite->data2;
+        sprite->pos2.y = Sin(var, 1) * sprite->data[2];
         break;
     }
-    sprite->data1++;
+    sprite->data[1]++;
 }
 
 void sub_8133358(void)
@@ -786,22 +772,22 @@ void sub_8133358(void)
     s32 i;
 
     sLearnMoveStruct->spriteIDs[0] = CreateSprite(&gSpriteTemplate_8402D90, 8, 16, 0);
-    gSprites[sLearnMoveStruct->spriteIDs[0]].data0 = 1;
-    gSprites[sLearnMoveStruct->spriteIDs[0]].data2 = -1;
+    gSprites[sLearnMoveStruct->spriteIDs[0]].data[0] = 1;
+    gSprites[sLearnMoveStruct->spriteIDs[0]].data[2] = -1;
 
     sLearnMoveStruct->spriteIDs[1] = CreateSprite(&gSpriteTemplate_8402D90, 72, 16, 0);
     StartSpriteAnim(&gSprites[sLearnMoveStruct->spriteIDs[1]], 1);
-    gSprites[sLearnMoveStruct->spriteIDs[1]].data0 = 1;
-    gSprites[sLearnMoveStruct->spriteIDs[1]].data2 = 1;
+    gSprites[sLearnMoveStruct->spriteIDs[1]].data[0] = 1;
+    gSprites[sLearnMoveStruct->spriteIDs[1]].data[2] = 1;
 
     sLearnMoveStruct->spriteIDs[2] = CreateSprite(&gSpriteTemplate_8402DC0, 160, 4, 0);
     StartSpriteAnim(&gSprites[sLearnMoveStruct->spriteIDs[2]], 1);
-    gSprites[sLearnMoveStruct->spriteIDs[2]].data0 = 2;
-    gSprites[sLearnMoveStruct->spriteIDs[2]].data2 = -1;
+    gSprites[sLearnMoveStruct->spriteIDs[2]].data[0] = 2;
+    gSprites[sLearnMoveStruct->spriteIDs[2]].data[2] = -1;
 
     sLearnMoveStruct->spriteIDs[3] = CreateSprite(&gSpriteTemplate_8402DC0, 160, 60, 0);
-    gSprites[sLearnMoveStruct->spriteIDs[3]].data0 = 2;
-    gSprites[sLearnMoveStruct->spriteIDs[3]].data2 = 1;
+    gSprites[sLearnMoveStruct->spriteIDs[3]].data[0] = 2;
+    gSprites[sLearnMoveStruct->spriteIDs[3]].data[2] = 1;
 
     for (i = 0; i < 8; i++)
     {
@@ -1039,7 +1025,7 @@ void sub_8133AEC(bool8 contestInfo, int unused)
                 gSprites[sLearnMoveStruct->spriteIDs[i + 4]].invisible = FALSE;
             for (i = 0; i < 3; i++)
                 PrintMoveInfo(moveId, gUnknown_08402E24[gUnknown_08402E3D[i]]);
-            sub_8072AB0(gUnknown_083CADD4[gContestMoves[moveId].effect], 0x58, 0x48, 0x90, 32, 1);
+            sub_8072AB0(gContestEffectStrings[gContestMoves[moveId].effect], 0x58, 0x48, 0x90, 32, 1);
         }
         else
         {

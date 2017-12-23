@@ -14,16 +14,17 @@
 #include "pokedex_area_screen.h"
 #include "pokedex_cry_screen.h"
 #include "pokemon.h"
-#include "rng.h"
+#include "random.h"
 #include "overworld.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
-#include "species.h"
+#include "constants/species.h"
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
 #include "trig.h"
 #include "unknown_task.h"
+#include "ewram.h"
 
 #define NATIONAL_DEX_COUNT 386
 
@@ -954,86 +955,86 @@ static const struct OamData gOamData_83B557C =
 };
 static void *const gUnknown_083B5584[] =
 {
-    (void *)0x02008000,
-    (void *)0x0200C000,
-    (void *)0x02010000,
-    (void *)0x02014000,
+    ePokedexPalAddr1,
+    ePokedexPalAddr2,
+    ePokedexPalAddr3,
+    ePokedexPalAddr4,
 };
 static const struct SpriteFrameImage gSpriteImageTable_83B5594[] =
 {
-    {(u8 *)0x02008000, 0x800},
-    {(u8 *)0x02008800, 0x800},
-    {(u8 *)0x02009000, 0x800},
-    {(u8 *)0x02009800, 0x800},
-    {(u8 *)0x0200A000, 0x800},
-    {(u8 *)0x0200A800, 0x800},
-    {(u8 *)0x0200B000, 0x800},
-    {(u8 *)0x0200B800, 0x800},
-    {(u8 *)0x0200C000, 0x800},
-    {(u8 *)0x0200C800, 0x800},
-    {(u8 *)0x0200D000, 0x800},
-    {(u8 *)0x0200D800, 0x800},
-    {(u8 *)0x0200E000, 0x800},
-    {(u8 *)0x0200E800, 0x800},
-    {(u8 *)0x0200F000, 0x800},
-    {(u8 *)0x0200F800, 0x800},
+    {ewram8000, 0x800},
+    {ewram8800, 0x800},
+    {ewram9000, 0x800},
+    {ewram9800, 0x800},
+    {ewramA000, 0x800},
+    {ewramA800, 0x800},
+    {ewramB000, 0x800},
+    {ewramB800, 0x800},
+    {ewramC000, 0x800},
+    {ewramC800, 0x800},
+    {ewramD000, 0x800},
+    {ewramD800, 0x800},
+    {ewramE000, 0x800},
+    {ewramE800, 0x800},
+    {ewramF000, 0x800},
+    {ewramF800, 0x800},
 };
 static const struct SpriteFrameImage gSpriteImageTable_83B5614[] =
 {
-    {(u8 *)0x0200C000, 0x800},
-    {(u8 *)0x0200C800, 0x800},
-    {(u8 *)0x0200D000, 0x800},
-    {(u8 *)0x0200D800, 0x800},
-    {(u8 *)0x0200E000, 0x800},
-    {(u8 *)0x0200E800, 0x800},
-    {(u8 *)0x0200F000, 0x800},
-    {(u8 *)0x0200F800, 0x800},
-    {(u8 *)0x02010000, 0x800},
-    {(u8 *)0x02010800, 0x800},
-    {(u8 *)0x02011000, 0x800},
-    {(u8 *)0x02011800, 0x800},
-    {(u8 *)0x02012000, 0x800},
-    {(u8 *)0x02012800, 0x800},
-    {(u8 *)0x02013000, 0x800},
-    {(u8 *)0x02013800, 0x800},
+    {ewramC000, 0x800},
+    {ewramC800, 0x800},
+    {ewramD000, 0x800},
+    {ewramD800, 0x800},
+    {ewramE000, 0x800},
+    {ewramE800, 0x800},
+    {ewramF000, 0x800},
+    {ewramF800, 0x800},
+    {ewram10000, 0x800},
+    {ewram10800, 0x800},
+    {ewram11000, 0x800},
+    {ewram11800, 0x800},
+    {ewram12000, 0x800},
+    {ewram12800, 0x800},
+    {ewram13000, 0x800},
+    {ewram13800, 0x800},
 };
 static const struct SpriteFrameImage gSpriteImageTable_83B5694[] =
 {
-    {(u8 *)0x02010000, 0x800},
-    {(u8 *)0x02010800, 0x800},
-    {(u8 *)0x02011000, 0x800},
-    {(u8 *)0x02011800, 0x800},
-    {(u8 *)0x02012000, 0x800},
-    {(u8 *)0x02012800, 0x800},
-    {(u8 *)0x02013000, 0x800},
-    {(u8 *)0x02013800, 0x800},
-    {(u8 *)0x02014000, 0x800},
-    {(u8 *)0x02014800, 0x800},
-    {(u8 *)0x02015000, 0x800},
-    {(u8 *)0x02015800, 0x800},
-    {(u8 *)0x02016000, 0x800},
-    {(u8 *)0x02016800, 0x800},
-    {(u8 *)0x02017000, 0x800},
-    {(u8 *)0x02017800, 0x800},
+    {ewram10000, 0x800},
+    {ewram10800, 0x800},
+    {ewram11000, 0x800},
+    {ewram11800, 0x800},
+    {ewram12000, 0x800},
+    {ewram12800, 0x800},
+    {ewram13000, 0x800},
+    {ewram13800, 0x800},
+    {ewram14000, 0x800},
+    {ewram14800, 0x800},
+    {ewram15000, 0x800},
+    {ewram15800, 0x800},
+    {ewram16000_2, 0x800},
+    {ewram16800, 0x800},
+    {ewram17000, 0x800},
+    {ewram17800_2, 0x800},
 };
 static const struct SpriteFrameImage gSpriteImageTable_83B5714[] =
 {
-    {(u8 *)0x02014000, 0x800},
-    {(u8 *)0x02014800, 0x800},
-    {(u8 *)0x02015000, 0x800},
-    {(u8 *)0x02015800, 0x800},
-    {(u8 *)0x02016000, 0x800},
-    {(u8 *)0x02016800, 0x800},
-    {(u8 *)0x02017000, 0x800},
-    {(u8 *)0x02017800, 0x800},
-    {(u8 *)0x02018000, 0x800},
-    {(u8 *)0x02018800, 0x800},
-    {(u8 *)0x02019000, 0x800},
-    {(u8 *)0x02019800, 0x800},
-    {(u8 *)0x0201A000, 0x800},
-    {(u8 *)0x0201A800, 0x800},
-    {(u8 *)0x0201B000, 0x800},
-    {(u8 *)0x0201B800, 0x800},
+    {ewram14000, 0x800},
+    {ewram14800, 0x800},
+    {ewram15000, 0x800},
+    {ewram15800, 0x800},
+    {ewram16000_2, 0x800},
+    {ewram16800, 0x800},
+    {ewram17000, 0x800},
+    {ewram17800_2, 0x800},
+    {ewram18000_2, 0x800},
+    {ewram18800, 0x800},
+    {ewram19000, 0x800},
+    {ewram19800, 0x800},
+    {ewram1A000, 0x800},
+    {ewram1A800, 0x800},
+    {ewram1B000_2, 0x800},
+    {ewram1B800, 0x800},
 };
 static const struct SpriteFrameImage *const gUnknown_083B5794[] =
 {
@@ -1275,8 +1276,8 @@ static void sub_8091564(u16 weight, u8 i, u8 i1);
 static void sub_8091738(u16, u16, u16);
 static void sub_80917CC(u16 i, u16 i1);
 static u16 sub_8091818(u8, u16, u16, u16);
-static u16 sub_80918EC(u16 a, s16 b, s16 c, u16 d);
-static u8 sub_8091A4C(u16 gender, s16, s16, u16);
+u16 sub_80918EC(u16 a, s16 b, s16 c, u16 d);
+u8 sub_8091A4C(u16 gender, s16, s16, u16);
 static void sub_8091E54(u8);
 static void sub_809204C(u8);
 static void sub_809207C(u8);
@@ -1433,16 +1434,16 @@ void CB2_InitPokedex(void)
         {
         case 0:
         default:
-            gPokedexView = (struct PokedexView *)0x02018000;
+            gPokedexView = ePokedexView1;
             break;
         case 1:
-            gPokedexView = (struct PokedexView *)0x02018800;
+            gPokedexView = ePokedexView2;
             break;
         case 2:
-            gPokedexView = (struct PokedexView *)0x02019000;
+            gPokedexView = ePokedexView3;
             break;
         case 3:
-            gPokedexView = (struct PokedexView *)0x02019800;
+            gPokedexView = ePokedexView4;
             break;
         }
         ClearPokedexView(gPokedexView);
@@ -2314,7 +2315,7 @@ static void sub_808E0CC(u16 a, u16 b)
     {
         spriteId = sub_808E8C8(unk, 0x60, 0x50);
         gSprites[spriteId].callback = sub_808EE28;
-        gSprites[spriteId].data5 = -32;
+        gSprites[spriteId].data[5] = -32;
     }
 
     unk = sub_808E888(a);
@@ -2322,7 +2323,7 @@ static void sub_808E0CC(u16 a, u16 b)
     {
         spriteId = sub_808E8C8(unk, 0x60, 0x50);
         gSprites[spriteId].callback = sub_808EE28;
-        gSprites[spriteId].data5 = 0;
+        gSprites[spriteId].data[5] = 0;
     }
 
     unk = sub_808E888(a + 1);
@@ -2330,7 +2331,7 @@ static void sub_808E0CC(u16 a, u16 b)
     {
         spriteId = sub_808E8C8(unk, 0x60, 0x50);
         gSprites[spriteId].callback = sub_808EE28;
-        gSprites[spriteId].data5 = 32;
+        gSprites[spriteId].data[5] = 32;
     }
 
     gPokedexView->unk630 = 0;
@@ -2351,7 +2352,7 @@ static bool8 sub_808E208(u8 a, u8 b, u8 c)
             for (i = 0; i < 4; i++)
             {
                 if (gPokedexView->unk61E[i] != 0xFFFF)
-                    gSprites[gPokedexView->unk61E[i]].data5 += b;
+                    gSprites[gPokedexView->unk61E[i]].data[5] += b;
             }
             foo = 16 * (c - gPokedexView->unk62E) / c;
             REG_BG2VOFS = gPokedexView->unk62D + gPokedexView->unk632 * 16 - foo;
@@ -2361,7 +2362,7 @@ static bool8 sub_808E208(u8 a, u8 b, u8 c)
             for (i = 0; i < 4; i++)
             {
                 if (gPokedexView->unk61E[i] != 0xFFFF)
-                    gSprites[gPokedexView->unk61E[i]].data5 -= b;
+                    gSprites[gPokedexView->unk61E[i]].data[5] -= b;
             }
             foo = 16 * (c - gPokedexView->unk62E) / c;
             REG_BG2VOFS = gPokedexView->unk62D + gPokedexView->unk632 * 16 + foo;
@@ -2391,7 +2392,7 @@ static void sub_808E398(u8 a, u16 b)
         {
             spriteId = sub_808E8C8(unk, 0x60, 0x50);
             gSprites[spriteId].callback = sub_808EE28;
-            gSprites[spriteId].data5 = -64;
+            gSprites[spriteId].data[5] = -64;
         }
         if (gPokedexView->unk630 > 0)
             gPokedexView->unk630--;
@@ -2404,7 +2405,7 @@ static void sub_808E398(u8 a, u16 b)
         {
             spriteId = sub_808E8C8(unk, 0x60, 0x50);
             gSprites[spriteId].callback = sub_808EE28;
-            gSprites[spriteId].data5 = 0x40;
+            gSprites[spriteId].data[5] = 0x40;
         }
         if (gPokedexView->unk630 <= 0xE)
             gPokedexView->unk630++;
@@ -2599,9 +2600,9 @@ static u32 sub_808E8C8(u16 a, s16 b, s16 c)
 
             gSprites[spriteId].oam.affineMode = 1;
             gSprites[spriteId].oam.priority = 3;
-            gSprites[spriteId].data0 = 0;
-            gSprites[spriteId].data1 = i;
-            gSprites[spriteId].data2 = NationalPokedexNumToSpecies(a);
+            gSprites[spriteId].data[0] = 0;
+            gSprites[spriteId].data[1] = i;
+            gSprites[spriteId].data[2] = NationalPokedexNumToSpecies(a);
             gPokedexView->unk61E[i] = spriteId;
             return spriteId;
         }
@@ -2615,10 +2616,10 @@ static void sub_808E978(u8 a)
     u16 r5;
 
     spriteId = CreateSprite(&gSpriteTemplate_83A053C, 184, 4, 0);
-    gSprites[spriteId].data1 = 0;
+    gSprites[spriteId].data[1] = 0;
 
     spriteId = CreateSprite(&gSpriteTemplate_83A053C, 184, 156, 0);
-    gSprites[spriteId].data1 = 1;
+    gSprites[spriteId].data[1] = 1;
     gSprites[spriteId].vFlip = TRUE;
 
     CreateSprite(&gSpriteTemplate_83A0524, 234, 20, 0);
@@ -2629,7 +2630,7 @@ static void sub_808E978(u8 a)
 
     spriteId = CreateSprite(&gSpriteTemplate_83A0554, 16, 158, 0);
     StartSpriteAnim(&gSprites[spriteId], 2);
-    gSprites[spriteId].data2 = 0x80;
+    gSprites[spriteId].data[2] = 0x80;
 
     spriteId = CreateSprite(&gSpriteTemplate_83A0554, 48, 158, 0);
     StartSpriteAnim(&gSprites[spriteId], 1);
@@ -2637,14 +2638,14 @@ static void sub_808E978(u8 a)
     spriteId = CreateSprite(&gSpriteTemplate_83A056C, 0, 80, 2);
     gSprites[spriteId].oam.affineMode = 1;
     gSprites[spriteId].oam.matrixNum = 30;
-    gSprites[spriteId].data0 = 0x1E;
-    gSprites[spriteId].data1 = 0;
+    gSprites[spriteId].data[0] = 0x1E;
+    gSprites[spriteId].data[1] = 0;
 
     spriteId = CreateSprite(&gSpriteTemplate_83A056C, 0, 80, 2);
     gSprites[spriteId].oam.affineMode = 1;
     gSprites[spriteId].oam.matrixNum = 31;
-    gSprites[spriteId].data0 = 0x1F;
-    gSprites[spriteId].data1 = 0x80;
+    gSprites[spriteId].data[0] = 0x1F;
+    gSprites[spriteId].data[1] = 0x80;
 
     if (a == 0)
     {
@@ -2742,7 +2743,7 @@ static void sub_808EDB8(struct Sprite *sprite)
 
 static void sub_808EE28(struct Sprite *sprite)
 {
-    u8 data1 = sprite->data1;
+    u8 data1 = sprite->data[1];
 
     if (gPokedexView->unk64A != 0 && gPokedexView->unk64A != 3)
     {
@@ -2753,24 +2754,24 @@ static void sub_808EE28(struct Sprite *sprite)
     {
         u32 var;
 
-        sprite->pos2.y = gSineTable[(u8)sprite->data5] * 76 / 256;
-        var = 0x10000 / gSineTable[sprite->data5 + 0x40];
+        sprite->pos2.y = gSineTable[(u8)sprite->data[5]] * 76 / 256;
+        var = 0x10000 / gSineTable[sprite->data[5] + 0x40];
         if (var > 0xFFFF)
             var = 0xFFFF;
-        SetOamMatrix(sprite->data1 + 1, 0x100, 0, 0, var);
+        SetOamMatrix(sprite->data[1] + 1, 0x100, 0, 0, var);
         sprite->oam.matrixNum = data1 + 1;
 
-        if (sprite->data5 > -64 && sprite->data5 < 64)
+        if (sprite->data[5] > -64 && sprite->data[5] < 64)
         {
             sprite->invisible = FALSE;
-            sprite->data0 = 1;
+            sprite->data[0] = 1;
         }
         else
         {
             sprite->invisible = TRUE;
         }
 
-        if ((sprite->data5 <= -64 || sprite->data5 >= 64) && sprite->data0 != 0)
+        if ((sprite->data[5] <= -64 || sprite->data[5] >= 64) && sprite->data[0] != 0)
         {
             DestroySprite(sprite);
             gPokedexView->unk61E[data1] = 0xFFFF;
@@ -2796,13 +2797,13 @@ static void sub_808EF8C(struct Sprite *sprite)
     {
         u8 r0;
 
-        if (sprite->data1 != 0)
+        if (sprite->data[1] != 0)
         {
             if (gPokedexView->selectedPokemon == gPokedexView->pokemonListCount - 1)
                 sprite->invisible = TRUE;
             else
                 sprite->invisible = FALSE;
-            r0 = sprite->data2;
+            r0 = sprite->data[2];
         }
         else
         {
@@ -2810,10 +2811,10 @@ static void sub_808EF8C(struct Sprite *sprite)
                 sprite->invisible = TRUE;
             else
                 sprite->invisible = FALSE;
-            r0 = sprite->data2 - 128;
+            r0 = sprite->data[2] - 128;
         }
         sprite->pos2.y = gSineTable[r0] / 64;
-        sprite->data2 = sprite->data2 + 8;
+        sprite->data[2] = sprite->data[2] + 8;
         if (gPokedexView->menuIsOpen == 0 && gPokedexView->menuY == 0 && sprite->invisible == 0)
             sprite->invisible = FALSE;
         else
@@ -2839,12 +2840,12 @@ static void sub_808F0B4(struct Sprite *sprite)
         s16 r3;
         s16 r0;
 
-        val = gPokedexView->unk62C + sprite->data1;
+        val = gPokedexView->unk62C + sprite->data[1];
         r3 = gSineTable[val];
         r0 = gSineTable[val + 0x40];
-        SetOamMatrix(sprite->data0, r0, r3, -r3, r0);
+        SetOamMatrix(sprite->data[0], r0, r3, -r3, r0);
 
-        val = gPokedexView->unk62C + (sprite->data1 + 0x40);
+        val = gPokedexView->unk62C + (sprite->data[1] + 0x40);
         r3 = gSineTable[val];
         r0 = gSineTable[val + 0x40];
         sprite->pos2.x = r0 * 40 / 256;
@@ -2866,8 +2867,8 @@ static void sub_808F168(struct Sprite *sprite)
         {
             sprite->invisible = FALSE;
             sprite->pos2.y = gPokedexView->menuCursorPos * 16;
-            sprite->pos2.x = gSineTable[(u8)sprite->data2] / 64;
-            sprite->data2 += 8;
+            sprite->pos2.x = gSineTable[(u8)sprite->data[2]] / 64;
+            sprite->data[2] += 8;
         }
         else
         {
@@ -4557,7 +4558,7 @@ u16 sub_80918EC(u16 num, s16 x, s16 y, u16 paletteNum)
           &gMonFrontPicTable[num],
           gMonFrontPicCoords[num].coords,
           gMonFrontPicCoords[num].y_offset,
-          (void *)0x02000000,
+          (void*)ewram_addr,
           gUnknown_083B5584[paletteNum],
           num);
         break;
@@ -4566,7 +4567,7 @@ u16 sub_80918EC(u16 num, s16 x, s16 y, u16 paletteNum)
           &gMonFrontPicTable[num],
           gMonFrontPicCoords[num].coords,
           gMonFrontPicCoords[num].y_offset,
-          0x02000000,
+          ewram_addr,
           gUnknown_083B5584[paletteNum],
           num,
           gSaveBlock2.pokedex.spindaPersonality,
@@ -4577,7 +4578,7 @@ u16 sub_80918EC(u16 num, s16 x, s16 y, u16 paletteNum)
           &gMonFrontPicTable[num],
           gMonFrontPicCoords[num].coords,
           gMonFrontPicCoords[num].y_offset,
-          0x02000000,
+          ewram_addr,
           gUnknown_083B5584[paletteNum],
           num,
           gSaveBlock2.pokedex.unownPersonality,
@@ -4591,7 +4592,7 @@ u16 sub_80918EC(u16 num, s16 x, s16 y, u16 paletteNum)
     return spriteId;
 }
 
-static u8 sub_8091A4C(u16 gender, s16 x, s16 y, u16 paletteNum)
+u8 sub_8091A4C(u16 gender, s16 x, s16 y, u16 paletteNum)
 {
     u8 spriteId;
 
@@ -4599,7 +4600,7 @@ static u8 sub_8091A4C(u16 gender, s16 x, s16 y, u16 paletteNum)
       &gTrainerFrontPicTable[gender],
       gTrainerFrontPicCoords[gender].coords,
       gTrainerFrontPicCoords[gender].y_offset,
-      (void *)0x02000000,
+      (void*)ewram_addr,
       gUnknown_083B5584[0],
       gender);
     sub_80918B0(gender, 0);
@@ -5481,27 +5482,27 @@ static bool8 sub_8092F8C(u8 taskId)
 
 static void sub_8092FD8(struct Sprite *sprite)
 {
-    if (gTasks[sprite->data0].func == sub_8092644)
+    if (gTasks[sprite->data[0]].func == sub_8092644)
     {
         u8 val;
 
-        if (sprite->data1 != 0)
+        if (sprite->data[1] != 0)
         {
-            if (sub_8092F8C(sprite->data0))
+            if (sub_8092F8C(sprite->data[0]))
                 sprite->invisible = TRUE;
             else
                 sprite->invisible = FALSE;
         }
         else
         {
-            if (sub_8092F44(sprite->data0))
+            if (sub_8092F44(sprite->data[0]))
                 sprite->invisible = TRUE;
             else
                 sprite->invisible = FALSE;
         }
-        val = sprite->data2 + sprite->data1 * 128;
+        val = sprite->data[2] + sprite->data[1] * 128;
         sprite->pos2.y = gSineTable[val] / 128;
-        sprite->data2 += 8;
+        sprite->data[2] += 8;
     }
     else
     {
@@ -5514,13 +5515,13 @@ static void sub_809308C(u8 taskId)
     u8 spriteId;
 
     spriteId = CreateSprite(&gSpriteTemplate_83A053C, 184, 4, 0);
-    gSprites[spriteId].data0 = taskId;
-    gSprites[spriteId].data1 = 0;
+    gSprites[spriteId].data[0] = taskId;
+    gSprites[spriteId].data[1] = 0;
     gSprites[spriteId].callback = sub_8092FD8;
 
     spriteId = CreateSprite(&gSpriteTemplate_83A053C, 184, 108, 0);
-    gSprites[spriteId].data0 = taskId;
-    gSprites[spriteId].data1 = 1;
+    gSprites[spriteId].data[0] = taskId;
+    gSprites[spriteId].data[1] = 1;
     gSprites[spriteId].vFlip = TRUE;
     gSprites[spriteId].callback = sub_8092FD8;
 }

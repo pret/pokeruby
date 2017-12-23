@@ -6,19 +6,19 @@
 #include "palette.h"
 #include "trig.h"
 #include "field_effect.h"
-#include "rng.h"
+#include "random.h"
 #include "sprite.h"
 #include "sound.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "trainer.h"
 #include "field_camera.h"
+#include "ewram.h"
+#include "unknown_task.h"
 
 void sub_807DE10(void);
 void dp12_8087EA4(void);
 
-extern u8 ewram[];
 extern u16 gUnknown_03005560[];
-extern u16 gUnknown_03004DE0[][0x3C0];
 
 extern const struct OamData gFieldOamData_32x32;
 
@@ -45,7 +45,6 @@ struct TransitionData
     s16 data[11];
 };
 
-#define TRANSITION_STRUCT   (*(struct TransitionData *)   (ewram + 0xC000))
 typedef bool8 (*TransitionState)(struct Task* task);
 typedef bool8 (*TransitionSpriteCallback)(struct Sprite* sprite);
 
@@ -1020,9 +1019,9 @@ bool8 FldEff_Pokeball(void)
     u8 spriteID = CreateSpriteAtEnd(&sSpriteTemplate_83FD98C, gFieldEffectArguments[0], gFieldEffectArguments[1], 0);
     gSprites[spriteID].oam.priority = 0;
     gSprites[spriteID].oam.affineMode = 1;
-    gSprites[spriteID].data0 = gFieldEffectArguments[2];
-    gSprites[spriteID].data1 = gFieldEffectArguments[3];
-    gSprites[spriteID].data2 = -1;
+    gSprites[spriteID].data[0] = gFieldEffectArguments[2];
+    gSprites[spriteID].data[1] = gFieldEffectArguments[3];
+    gSprites[spriteID].data[2] = -1;
     InitSpriteAffineAnim(&gSprites[spriteID]);
     StartSpriteAffineAnim(&gSprites[spriteID], gFieldEffectArguments[2]);
     return FALSE;
@@ -1039,8 +1038,8 @@ static void sub_811B720(struct Sprite* sprite)
     s16 arr0[2];
 
     memcpy(arr0, sUnknown_083FD7F2, sizeof(sUnknown_083FD7F2));
-    if (sprite->data1 != 0)
-        sprite->data1--;
+    if (sprite->data[1] != 0)
+        sprite->data[1]--;
     else
     {
         if (sprite->pos1.x >= 0 && sprite->pos1.x <= 240)
@@ -1048,12 +1047,12 @@ static void sub_811B720(struct Sprite* sprite)
             s16 posX = sprite->pos1.x >> 3;
             s16 posY = sprite->pos1.y >> 3;
 
-            if (posX != sprite->data2)
+            if (posX != sprite->data[2])
             {
                 u32 var;
                 u16 *ptr;
 
-                sprite->data2 = posX;
+                sprite->data[2] = posX;
                 var = (((REG_BG0CNT >> 8) & 0x1F) << 11);  // r2
                 ptr = (u16 *)(VRAM + var);
 
@@ -1063,7 +1062,7 @@ static void sub_811B720(struct Sprite* sprite)
                 SOME_VRAM_STORE(ptr, posY + 1, posX, 0xF001);
             }
         }
-        sprite->pos1.x += arr0[sprite->data0];
+        sprite->pos1.x += arr0[sprite->data[0]];
         if (sprite->pos1.x < -15 || sprite->pos1.x > 255)
             FieldEffectStop(sprite, FLDEFF_POKEBALL);
     }
@@ -1734,8 +1733,8 @@ static void Mugshots_CreateOpponentPlayerSprites(struct Task* task)
     task->tMugshotOpponentID = CreateTrainerSprite(sMugshotsTrainerPicIDsTable[mugshotID],
                                                      sMugshotsOpponentCoords[mugshotID][0] - 32,
                                                      sMugshotsOpponentCoords[mugshotID][1] + 42,
-                                                     0, &ewram[0xC03C]);
-    task->tMugshotPlayerID = CreateTrainerSprite(gSaveBlock2.playerGender, 272, 106, 0, &ewram[0xC03C]);
+                                                     0, ewramC03C);
+    task->tMugshotPlayerID = CreateTrainerSprite(gSaveBlock2.playerGender, 272, 106, 0, ewramC03C);
 
     opponentSprite = &gSprites[task->tMugshotOpponentID];
     playerSprite = &gSprites[task->tMugshotPlayerID];
@@ -1764,7 +1763,7 @@ static void Mugshots_CreateOpponentPlayerSprites(struct Task* task)
 
 static void sub_811C90C(struct Sprite* sprite)
 {
-    while (sUnknown_083FD880[sprite->data0](sprite));
+    while (sUnknown_083FD880[sprite->data[0]](sprite));
 }
 
 static bool8 sub_811C934(struct Sprite* sprite)
@@ -1780,57 +1779,57 @@ static bool8 sub_811C938(struct Sprite* sprite)
     memcpy(arr0, sUnknown_083FD89C, sizeof(sUnknown_083FD89C));
     memcpy(arr1, sUnknown_083FD8A0, sizeof(sUnknown_083FD8A0));
 
-    sprite->data0++;
-    sprite->data1 = arr0[sprite->data7];
-    sprite->data2 = arr1[sprite->data7];
+    sprite->data[0]++;
+    sprite->data[1] = arr0[sprite->data[7]];
+    sprite->data[2] = arr1[sprite->data[7]];
     return TRUE;
 }
 
 static bool8 sub_811C984(struct Sprite* sprite)
 {
-    sprite->pos1.x += sprite->data1;
-    if (sprite->data7 && sprite->pos1.x < 133)
-        sprite->data0++;
-    else if (!sprite->data7 && sprite->pos1.x > 103)
-        sprite->data0++;
+    sprite->pos1.x += sprite->data[1];
+    if (sprite->data[7] && sprite->pos1.x < 133)
+        sprite->data[0]++;
+    else if (!sprite->data[7] && sprite->pos1.x > 103)
+        sprite->data[0]++;
     return FALSE;
 }
 
 static bool8 sub_811C9B8(struct Sprite* sprite)
 {
-    sprite->data1 += sprite->data2;
-    sprite->pos1.x += sprite->data1;
-    if (sprite->data1 == 0)
+    sprite->data[1] += sprite->data[2];
+    sprite->pos1.x += sprite->data[1];
+    if (sprite->data[1] == 0)
     {
-        sprite->data0++;
-        sprite->data2 = -sprite->data2;
-        sprite->data6 = 1;
+        sprite->data[0]++;
+        sprite->data[2] = -sprite->data[2];
+        sprite->data[6] = 1;
     }
     return FALSE;
 }
 
 static bool8 sub_811C9E4(struct Sprite* sprite)
 {
-    sprite->data1 += sprite->data2;
-    sprite->pos1.x += sprite->data1;
+    sprite->data[1] += sprite->data[2];
+    sprite->pos1.x += sprite->data[1];
     if (sprite->pos1.x < -31 || sprite->pos1.x > 271)
-        sprite->data0++;
+        sprite->data[0]++;
     return FALSE;
 }
 
 static void sub_811CA10(s16 spriteID, s16 value)
 {
-    gSprites[spriteID].data7 = value;
+    gSprites[spriteID].data[7] = value;
 }
 
 static void sub_811CA28(s16 spriteID)
 {
-    gSprites[spriteID].data0++;
+    gSprites[spriteID].data[0]++;
 }
 
 static s16 sub_811CA44(s16 spriteID)
 {
-    return gSprites[spriteID].data6;
+    return gSprites[spriteID].data[6];
 }
 
 #undef tMugshotOpponentID
@@ -1982,9 +1981,9 @@ static bool8 Phase2_Transition_WhiteFade_Func2(struct Task* task)
         sprite = &gSprites[CreateInvisibleSprite(sub_811CFD0)];
         sprite->pos1.x = 0xF0;
         sprite->pos1.y = posY;
-        sprite->data5 = arr1[i];
+        sprite->data[5] = arr1[i];
     }
-    sprite->data6++;
+    sprite->data[6]++;
 
     task->tState++;
     return FALSE;
@@ -2061,10 +2060,10 @@ static void HBlankCB_Phase2_Transition_WhiteFade(void)
 
 static void sub_811CFD0(struct Sprite* sprite)
 {
-    if (sprite->data5)
+    if (sprite->data[5])
     {
-        sprite->data5--;
-        if (sprite->data6)
+        sprite->data[5]--;
+        if (sprite->data[6])
             TRANSITION_STRUCT.VBlank_DMA = 1;
     }
     else
@@ -2074,26 +2073,26 @@ static void sub_811CFD0(struct Sprite* sprite)
         u16* ptr2 = &gUnknown_03004DE0[0][sprite->pos1.y + 160];
         for (i = 0; i < 20; i++)
         {
-            ptr1[i] = sprite->data0 >> 8;
+            ptr1[i] = sprite->data[0] >> 8;
             ptr2[i] = (u8)(sprite->pos1.x);
         }
-        if (sprite->pos1.x == 0 && sprite->data0 == 0x1000)
-            sprite->data1 = 1;
+        if (sprite->pos1.x == 0 && sprite->data[0] == 0x1000)
+            sprite->data[1] = 1;
 
         sprite->pos1.x -= 16;
-        sprite->data0 += 0x80;
+        sprite->data[0] += 0x80;
 
         if (sprite->pos1.x < 0)
             sprite->pos1.x = 0;
-        if (sprite->data0 > 0x1000)
-            sprite->data0 = 0x1000;
+        if (sprite->data[0] > 0x1000)
+            sprite->data[0] = 0x1000;
 
-        if (sprite->data6)
+        if (sprite->data[6])
             TRANSITION_STRUCT.VBlank_DMA = 1;
 
-        if (sprite->data1)
+        if (sprite->data[1])
         {
-            if (sprite->data6 == 0 || (TRANSITION_STRUCT.field_20 > 6 && sprite->data2++ > 7))
+            if (sprite->data[6] == 0 || (TRANSITION_STRUCT.field_20 > 6 && sprite->data[2]++ > 7))
             {
                 TRANSITION_STRUCT.field_20++;
                 DestroySprite(sprite);

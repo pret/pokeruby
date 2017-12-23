@@ -217,8 +217,8 @@ Route101_EventScript_14EA76:: @ 814EA76
 Route101_EventScript_14EA7F:: @ 814EA7F
 	lock
 	faceplayer
-	setflag 2048
-	setflag 82
+	setflag FLAG_SYS_POKEMON_GET
+	setflag FLAG_RESCUED_BIRCH
 	fadescreen 1
 	removeobject 4
 	setobjectxy 255, 6, 13
@@ -230,13 +230,13 @@ Route101_EventScript_14EA7F:: @ 814EA7F
 	waitmovement 0
 	msgbox Route101_Text_16D191, 4
 	special ScrSpecial_HealPlayerParty
-	setflag 720
-	clearflag 721
-	setflag 700
+	setflag FLAG_HIDE_BIRCH_BATTLE_POOCHYENA
+	clearflag FLAG_HIDE_BIRCH_IN_LAB
+	setflag FLAG_HIDE_BIRCH_STARTERS_BAG
 	setvar 0x4084, 2
 	setvar 0x4060, 3
 	clearflag 0x4000
-	warp LittlerootTown_ProfessorBirchsLab, 255, 6, 5
+	warp MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB, 255, 6, 5
 	waitstate
 	release
 	end

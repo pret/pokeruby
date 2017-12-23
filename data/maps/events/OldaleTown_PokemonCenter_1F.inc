@@ -5,9 +5,9 @@ OldaleTown_PokemonCenter_1F_MapObjects:: @ 8385CDC
 	object_event 4, MAP_OBJ_GFX_GIRL_3, 0, 3, 0, 7, 0, 3, 10, 17, 0, 0, 0, 0, 0, OldaleTown_PokemonCenter_1F_EventScript_152F37, 0, 0, 0
 
 OldaleTown_PokemonCenter_1F_MapWarps:: @ 8385D3C
-	warp_def 7, 8, 3, 2, OldaleTown
-	warp_def 6, 8, 3, 2, OldaleTown
-	warp_def 1, 6, 4, 0, OldaleTown_PokemonCenter_2F
+	warp_def 7, 8, 3, 2, MAP_OLDALE_TOWN
+	warp_def 6, 8, 3, 2, MAP_OLDALE_TOWN
+	warp_def 1, 6, 4, 0, MAP_OLDALE_TOWN_POKEMON_CENTER_2F
 
 OldaleTown_PokemonCenter_1F_MapEvents:: @ 8385D54
 	map_events OldaleTown_PokemonCenter_1F_MapObjects, OldaleTown_PokemonCenter_1F_MapWarps, 0x0, 0x0

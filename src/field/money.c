@@ -4,6 +4,7 @@
 #include "menu.h"
 #include "sprite.h"
 #include "string_util.h"
+#include "graphics.h"
 
 #define SPRITE_TAG_MONEY (0x2722)
 
@@ -11,9 +12,47 @@ extern u16 gSpecialVar_0x8005;
 
 static EWRAM_DATA u8 gUnknown_02038734 = 0;
 
-extern const struct CompressedSpriteSheet gUnknown_083CF584;
-extern const struct CompressedSpritePalette gUnknown_083CF58C;
-extern const struct SpriteTemplate gSpriteTemplate_83CF56C;
+static const struct OamData gOamData_83CF558 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 1,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 2,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+const union AnimCmd gSpriteAnim_83CF560[] =
+{
+    ANIMCMD_FRAME(0, 0),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gSpriteAnimTable_83CF568[] =
+{
+    gSpriteAnim_83CF560,
+};
+
+const struct SpriteTemplate gSpriteTemplate_83CF56C =
+{
+    .tileTag = 10018,
+    .paletteTag = 10018,
+    .oam = &gOamData_83CF558,
+    .anims = gSpriteAnimTable_83CF568,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
+
+const struct CompressedSpriteSheet gUnknown_083CF584[] = {gMenuMoneyGfx, 256, SPRITE_TAG_MONEY};
+const struct CompressedSpritePalette gUnknown_083CF58C[] = {gMenuMoneyPal, SPRITE_TAG_MONEY};
 
 bool8 IsEnoughMoney(u32 budget, u32 cost)
 {
@@ -239,8 +278,8 @@ void OpenMoneyWindow(u32 amount, u8 x, u8 y)
     MenuDrawTextWindow(x, y, x + 13, y + 3);
     UpdateMoneyWindow(amount, x, y);
 
-    LoadCompressedObjectPic(&gUnknown_083CF584);
-    LoadCompressedObjectPalette(&gUnknown_083CF58C);
+    LoadCompressedObjectPic(gUnknown_083CF584);
+    LoadCompressedObjectPalette(gUnknown_083CF58C);
 
     gUnknown_02038734 = CreateSprite(&gSpriteTemplate_83CF56C, x * 8 + 19, y * 8 + 11, 0);
 }

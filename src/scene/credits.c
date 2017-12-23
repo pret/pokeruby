@@ -9,13 +9,14 @@
 #include "menu.h"
 #include "palette.h"
 #include "pokedex.h"
-#include "rng.h"
-#include "songs.h"
+#include "random.h"
+#include "constants/songs.h"
 #include "sound.h"
-#include "species.h"
+#include "constants/species.h"
 #include "starter_choose.h"
 #include "task.h"
 #include "trig.h"
+#include "ewram.h"
 
 asm(".set REG_BASE, 0x4000000");
 asm(".set OFFSET_REG_BLDCNT,      0x50");
@@ -159,21 +160,11 @@ struct Unk201C000
 struct CreditsEntry
 {
     u8 var_0;
-    u8 *text;
+    const u8 *text;
 };
 
-extern u8 ewram[];
-
-#define EWRAM_1F800          ((u16 *)(ewram + 0x1F800))
-#define HALL_OF_FAME_SHEET_0 ((u8 *)(ewram + 0x1E000))
-#define HALL_OF_FAME_SHEET_1 ((u8 *)(ewram + 0x1E800))
-#define HALL_OF_FAME_SHEET_2 ((u8 *)(ewram + 0x1F000))
-#define ewram1c000           (*(struct Unk201C000 *)(ewram + 0x1C000))
-
-extern struct HallOfFame gHallOfFame;
 extern u8 unk_201e800[0x800];
 extern u8 unk_201f000[0x800];
-extern u16 unk_201f800[];
 
 extern struct SpriteTemplate gUnknown_02024E8C;
 
@@ -194,18 +185,208 @@ extern void *gUnknown_0840B5A0[];
 // data/credits
 const u16 gUnknown_0840B7BC[] = INCBIN_U16("graphics/credits/palette_1.gbapal");
 const u8 gUnknown_0840B7FC[] = INCBIN_U8("graphics/credits/ampersand.4bpp");
-extern u8 gUnknown_0840B83C[];
-extern u8 gUnknown_0840B84B[];
-extern u8 gUnknown_0840B85A[];
-extern u8 gUnknown_0840B869[];
-extern u8 gUnknown_0840B878[];
-extern struct CreditsEntry *gCreditsEntryPointerTable[][5];
-extern u8 gUnknown_0840CA00[][2];
-extern struct SpriteSheet gUnknown_0840CAA0;
-extern struct SpritePalette gUnknown_0840CAB0;
-extern const union AnimCmd *const gSpriteAnimTable_0840CA54[];
-extern const union AnimCmd *const gSpriteAnimTable_0840CA94[];
-extern struct SpriteTemplate gSpriteTemplate_840CAEC;
+
+void spritecb_814580C(struct Sprite *sprite);
+
+const u8 gUnknown_0840B83C[] =
+{
+    0,    1, 0,
+    0xFF, 1, 0xFF,
+    0xFF, 1, 0xFF,
+    0xFF, 1, 0xFF,
+    0xFF, 1, 0xFF,
+};
+
+const u8 gUnknown_0840B84B[] =
+{
+    1, 0xFF, 1,
+    1, 0xFF, 1,
+    1, 2,    1,
+    1, 0xFF, 1,
+    1, 0xFF, 1,
+};
+
+const u8 gUnknown_0840B85A[] =
+{
+    1, 0, 0,
+    1, 0xFF, 0xFF,
+    1, 2,    2,
+    1, 0xFF, 0xFF,
+    1, 0x80, 0x80,
+};
+
+const u8 gUnknown_0840B869[] =
+{
+    1, 3, 1,
+    1, 4, 1,
+    1, 5, 1,
+    1, 0xC4, 1,
+    1, 0xC3, 1,
+};
+
+const u8 gUnknown_0840B878[] =
+{
+    1, 6, 7,
+    1, 8, 9,
+    1, 0xFF, 1,
+    1, 0x88, 0x89,
+    1, 0x86, 0x87,
+#ifdef GERMAN
+    1, 0, 0,
+    1, 0xFF, 0xFF,
+    1, 0x80, 0x8A,
+    1, 0xFF, 0xFF,
+    1, 0xFF, 0xFF,
+    0, 1, 0,
+    0xFF, 1, 0xFF,
+    0xFF, 1, 0xFF,
+    0xFF, 1, 0xFF,
+    0x80, 1, 0x80,
+#endif
+};
+
+#ifdef GERMAN
+#include "../data/credits_de.h"
+#else
+#include "../data/credits_en.h"
+#endif
+
+const u8 gUnknown_0840CA00[][2] =
+{
+    {104, 36},
+    {120, 36},
+    {136, 36},
+};
+
+static const union AnimCmd gSpriteAnim_840CA08[] =
+{
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(64, 8),
+    ANIMCMD_FRAME(128, 8),
+    ANIMCMD_FRAME(192, 8),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd gSpriteAnim_840CA1C[] =
+{
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(64, 4),
+    ANIMCMD_FRAME(128, 4),
+    ANIMCMD_FRAME(192, 4),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd gSpriteAnim_840CA30[] =
+{
+    ANIMCMD_FRAME(256, 4),
+    ANIMCMD_FRAME(320, 4),
+    ANIMCMD_FRAME(384, 4),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd gSpriteAnim_840CA40[] =
+{
+    ANIMCMD_FRAME(384, 30),
+    ANIMCMD_FRAME(320, 30),
+    ANIMCMD_FRAME(256, 30),
+    ANIMCMD_FRAME(256, 30),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd *const gSpriteAnimTable_0840CA54[] =
+{
+    gSpriteAnim_840CA08,
+    gSpriteAnim_840CA1C,
+    gSpriteAnim_840CA30,
+    gSpriteAnim_840CA40,
+};
+
+static const union AnimCmd gSpriteAnim_840CA64[] =
+{
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(64, 8),
+    ANIMCMD_FRAME(128, 8),
+    ANIMCMD_FRAME(192, 8),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd gSpriteAnim_840CA78[] =
+{
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(64, 4),
+    ANIMCMD_FRAME(128, 4),
+    ANIMCMD_FRAME(192, 4),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd gSpriteAnim_840CA8C[] =
+{
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd *const gSpriteAnimTable_0840CA94[] =
+{
+    gSpriteAnim_840CA64,
+    gSpriteAnim_840CA78,
+    gSpriteAnim_840CA8C,
+};
+
+static const struct SpriteSheet gUnknown_0840CAA0[] = {{ewram1E000_2, 6144, 1001}, {0}};
+static const struct SpritePalette gUnknown_0840CAB0[] = {{ewram_1F800_2, 1001}, {0}};
+
+static const struct OamData gOamData_840CAC0 =
+{
+    .y = 160,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd gSpriteAnim_840CAC8[] =
+{
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd gSpriteAnim_840CAD0[] =
+{
+    ANIMCMD_FRAME(64, 8),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd gSpriteAnim_840CAD8[] =
+{
+    ANIMCMD_FRAME(128, 8),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd *const gSpriteAnimTable_840CAE0[] =
+{
+    gSpriteAnim_840CAC8,
+    gSpriteAnim_840CAD0,
+    gSpriteAnim_840CAD8,
+};
+
+static const struct SpriteTemplate gSpriteTemplate_840CAEC =
+{
+    .tileTag = 1001,
+    .paletteTag = 1001,
+    .oam = &gOamData_840CAC0,
+    .anims = gSpriteAnimTable_840CAE0,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = spritecb_814580C,
+};
 
 // graphics
 extern u8 gCreditsCopyrightEnd_Gfx[];
@@ -339,7 +520,7 @@ static void task_a_8143B38(u8 taskIdA)
 
 static void task_a_8143B68(u8 taskIdA)
 {
-    u16 data11;
+    u16 data1;
 
     if (gTasks[taskIdA].data[TDA_4])
     {
@@ -354,18 +535,18 @@ static void task_a_8143B68(u8 taskIdA)
     }
 
     gUnknown_02039320 = 0;
-    data11 = gTasks[taskIdA].data[TDA_11];
+    data1 = gTasks[taskIdA].data[TDA_11];
 
     if (gTasks[taskIdA].data[TDA_11] == 1)
     {
-        gTasks[taskIdA].data[TDA_13] = data11;
+        gTasks[taskIdA].data[TDA_13] = data1;
         gTasks[taskIdA].data[TDA_11] = 0;
         BeginNormalPaletteFade(-1, 0, 0, 16, 0);
         gTasks[taskIdA].func = task_a_8143BFC;
     }
     else if (gTasks[taskIdA].data[TDA_11] == 2)
     {
-        gTasks[taskIdA].data[TDA_13] = data11;
+        gTasks[taskIdA].data[TDA_13] = data1;
         gTasks[taskIdA].data[TDA_11] = 0;
         BeginNormalPaletteFade(-1, 0, 0, 16, 0);
         gTasks[taskIdA].func = task_a_8143CC0;
@@ -441,8 +622,8 @@ void task_a_8143D04(u8 taskIdA)
         EWRAM_1F800[2] = 0x529F; // light red
         EWRAM_1F800[3] = 0x7E94; // light blue
 
-        LoadSpriteSheet(&gUnknown_0840CAA0);
-        LoadSpritePalette(&gUnknown_0840CAB0);
+        LoadSpriteSheet(gUnknown_0840CAA0);
+        LoadSpritePalette(gUnknown_0840CAB0);
 
         gMain.state += 1;
         break;
@@ -775,12 +956,12 @@ static void task_d_8144514(u8 taskIdD)
         if (r6->unk8C < r6->unk8E - 1)
         {
             r6->unk8C++;
-            gSprites[r2].data3 = 50;
+            gSprites[r2].data[3] = 50;
         }
         else
         {
             r6->unk8C = 0;
-            gSprites[r2].data3 = 512;
+            gSprites[r2].data[3] = 512;
         }
         r6->unk88++;
         if (r6->unk8A == 2)
@@ -815,7 +996,7 @@ void task_c_8144664(u8 taskIdC)
         }
         else
         {
-            gSprites[gTasks[taskIdC].data[TDC_2]].data0 = 2;
+            gSprites[gTasks[taskIdC].data[TDC_2]].data[0] = 2;
             gTasks[taskIdC].data[TDC_5] = 0;
             gTasks[taskIdC].data[TDC_0]++;
         }
@@ -832,8 +1013,8 @@ void task_c_8144664(u8 taskIdC)
         }
         break;
     case 3:
-        gSprites[gTasks[taskIdC].data[TDC_2]].data0 = 3;
-        gSprites[gTasks[taskIdC].data[TDC_3]].data0 = 1;
+        gSprites[gTasks[taskIdC].data[TDC_2]].data[0] = 3;
+        gSprites[gTasks[taskIdC].data[TDC_3]].data[0] = 1;
         gTasks[taskIdC].data[TDC_4] = 120;
         gTasks[taskIdC].data[TDC_0]++;
         break;
@@ -856,7 +1037,7 @@ void task_c_8144664(u8 taskIdC)
         }
         else
         {
-            gSprites[gTasks[taskIdC].data[TDC_2]].data0 = 1;
+            gSprites[gTasks[taskIdC].data[TDC_2]].data[0] = 1;
             gTasks[taskIdC].data[TDC_0]++;
         }
         break;
@@ -864,16 +1045,16 @@ void task_c_8144664(u8 taskIdC)
         gTasks[taskIdC].data[TDC_0] = 50;
         break;
     case 10:
-        gSprites[gTasks[taskIdC].data[TDC_3]].data0 = 2;
+        gSprites[gTasks[taskIdC].data[TDC_3]].data[0] = 2;
         gTasks[taskIdC].data[TDC_0] = 50;
         break;
     case 20:
-        gSprites[gTasks[taskIdC].data[TDC_2]].data0 = 4;
+        gSprites[gTasks[taskIdC].data[TDC_2]].data[0] = 4;
         gTasks[taskIdC].data[TDC_0] = 50;
         break;
     case 30:
-        gSprites[gTasks[taskIdC].data[TDC_2]].data0 = 5;
-        gSprites[gTasks[taskIdC].data[TDC_3]].data0 = 3;
+        gSprites[gTasks[taskIdC].data[TDC_2]].data[0] = 5;
+        gSprites[gTasks[taskIdC].data[TDC_3]].data[0] = 3;
         gTasks[taskIdC].data[TDC_0] = 50;
         break;
     case 50:
@@ -951,8 +1132,8 @@ static void sub_8144A68(u8 data, u8 taskIdA)
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.x = 272;
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].pos1.y = 46;
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.y = 46;
-        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].data0 = 0;
-        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].data0 = 0;
+        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].data[0] = 0;
+        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].data[0] = 0;
         gTasks[taskIdA].data[TDA_0] = sub_8148EC0(0, 0x2000, 0x20, 8);
         break;
     case 1:
@@ -962,8 +1143,8 @@ static void sub_8144A68(u8 data, u8 taskIdA)
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.x = 272;
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].pos1.y = 46;
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.y = 46;
-        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].data0 = 0;
-        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].data0 = 0;
+        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].data[0] = 0;
+        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].data[0] = 0;
         gTasks[taskIdA].data[TDA_0] = sub_8148EC0(0, 0x2000, 0x20, 8);
         break;
     case 2:
@@ -973,8 +1154,8 @@ static void sub_8144A68(u8 data, u8 taskIdA)
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.x = 272;
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].pos1.y = 46;
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.y = 46;
-        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].data0 = 0;
-        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].data0 = 0;
+        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].data[0] = 0;
+        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].data[0] = 0;
         gTasks[taskIdA].data[TDA_0] = sub_8148EC0(1, 0x2000, 0x200, 8);
         break;
     case 3:
@@ -984,8 +1165,8 @@ static void sub_8144A68(u8 data, u8 taskIdA)
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.x = -32;
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].pos1.y = 46;
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.y = 46;
-        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].data0 = 0;
-        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].data0 = 0;
+        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].data[0] = 0;
+        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].data[0] = 0;
         gTasks[taskIdA].data[TDA_0] = sub_8148EC0(1, 0x2000, 0x200, 8);
         break;
     case 4:
@@ -995,8 +1176,8 @@ static void sub_8144A68(u8 data, u8 taskIdA)
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.x = 152;
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].pos1.y = 46;
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.y = 46;
-        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].data0 = 0;
-        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].data0 = 0;
+        gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].data[0] = 0;
+        gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].data[0] = 0;
         gTasks[taskIdA].data[TDA_0] = sub_8148EC0(2, 0x2000, 0x200, 8);
         break;
     }
@@ -1160,7 +1341,7 @@ u16 sub_8145208(u8 arg0)
     return out;
 }
 
-void sub_814524C(u8 arg0[], u8 baseX, u8 baseY, u16 arg3, u16 palette)
+void sub_814524C(const u8 arg0[], u8 baseX, u8 baseY, u16 arg3, u16 palette)
 {
     u8 y, x;
     const u16 tileOffset = (palette / 16) << 12;
@@ -1203,7 +1384,7 @@ static void spritecb_player_8145378(struct Sprite *sprite)
         return;
     }
 
-    switch (sprite->data0)
+    switch (sprite->data[0])
     {
     case 0:
         StartSpriteAnimIfDifferent(sprite, 0);
@@ -1240,7 +1421,7 @@ static void spritecb_rival_8145420(struct Sprite *sprite)
         return;
     }
 
-    switch (sprite->data0)
+    switch (sprite->data[0])
     {
     case 0:
         sprite->pos2.y = 0;
@@ -1256,9 +1437,9 @@ static void spritecb_rival_8145420(struct Sprite *sprite)
         sprite->pos2.y = -gUnknown_0203935A;
         break;
     case 2:
-        sprite->data7 += 1;
+        sprite->data[7] += 1;
         StartSpriteAnimIfDifferent(sprite, 0);
-        if ((sprite->data7 & 3) == 0)
+        if ((sprite->data[7] & 3) == 0)
             sprite->pos1.x += 1;
         break;
     case 3:
@@ -1277,74 +1458,74 @@ void spritecb_81454E0(struct Sprite *sprite)
         return;
     }
 
-    sprite->data7 += 1;
-    switch (sprite->data0)
+    sprite->data[7] += 1;
+    switch (sprite->data[0])
     {
     case 0:
     default:
         sprite->oam.affineMode = 1;
-        sprite->oam.matrixNum = sprite->data1;
-        sprite->data2 = 16;
-        SetOamMatrix(sprite->data1, 0x10000 / sprite->data2, 0, 0, 0x10000 / sprite->data2);
+        sprite->oam.matrixNum = sprite->data[1];
+        sprite->data[2] = 16;
+        SetOamMatrix(sprite->data[1], 0x10000 / sprite->data[2], 0, 0, 0x10000 / sprite->data[2]);
         sprite->invisible = FALSE;
-        sprite->data0 = 1;
+        sprite->data[0] = 1;
         break;
     case 1:
-        if (sprite->data2 < 256)
+        if (sprite->data[2] < 256)
         {
-            sprite->data2 += 8;
-            SetOamMatrix(sprite->data1, 0x10000 / sprite->data2, 0, 0, 0x10000 / sprite->data2);
+            sprite->data[2] += 8;
+            SetOamMatrix(sprite->data[1], 0x10000 / sprite->data[2], 0, 0, 0x10000 / sprite->data[2]);
         }
         else
         {
-            sprite->data0 += 1;
+            sprite->data[0] += 1;
         }
-        switch (sprite->data1)
+        switch (sprite->data[1])
         {
         case 1:
-            if ((sprite->data7 & 3) == 0)
+            if ((sprite->data[7] & 3) == 0)
                 sprite->pos1.y += 1;
             sprite->pos1.x -= 2;
             break;
         case 2:
             break;
         case 3:
-            if ((sprite->data7 & 3) == 0)
+            if ((sprite->data[7] & 3) == 0)
                 sprite->pos1.y += 1;
             sprite->pos1.x += 2;
             break;
         }
         break;
     case 2:
-        if (sprite->data3 != 0)
+        if (sprite->data[3] != 0)
         {
-            sprite->data3 -= 1;
+            sprite->data[3] -= 1;
         }
         else
         {
             REG_BLDCNT = 0xF40;
             REG_BLDALPHA = 0x10;
             sprite->oam.objMode = 1;
-            sprite->data3 = 16;
-            sprite->data0 += 1;
+            sprite->data[3] = 16;
+            sprite->data[0] += 1;
         }
         break;
     case 3:
-        if (sprite->data3 != 0)
+        if (sprite->data[3] != 0)
         {
             int data3;
             vu16 *reg;
 
-            sprite->data3 -= 1;
+            sprite->data[3] -= 1;
 
             reg = &REG_BLDALPHA;
-            data3 = 16 - sprite->data3;
-            *reg = (data3 << 8) + sprite->data3;
+            data3 = 16 - sprite->data[3];
+            *reg = (data3 << 8) + sprite->data[3];
         }
         else
         {
             sprite->invisible = TRUE;
-            sprite->data0 = 10;
+            sprite->data[0] = 10;
         }
         break;
     case 10:
@@ -1394,12 +1575,12 @@ static u8 sub_81456B4(u16 species, u16 x, u16 y, u16 position)
     spriteId = CreateSprite(&gUnknown_02024E8C, x, y, 0);
     gSprites[spriteId].oam.paletteNum = position;
     gSprites[spriteId].oam.priority = 1;
-    gSprites[spriteId].data1 = position + 1;
+    gSprites[spriteId].data[1] = position + 1;
     gSprites[spriteId].invisible = TRUE;
     gSprites[spriteId].callback = spritecb_81454E0;
 
     spriteId2 = CreateSprite(&gSpriteTemplate_840CAEC, gSprites[spriteId].pos1.x, gSprites[spriteId].pos1.y, 1);
-    gSprites[spriteId2].data0 = spriteId;
+    gSprites[spriteId2].data[0] = spriteId;
 
     StartSpriteAnimIfDifferent(&gSprites[spriteId2], position);
 
@@ -1408,18 +1589,18 @@ static u8 sub_81456B4(u16 species, u16 x, u16 y, u16 position)
 
 void spritecb_814580C(struct Sprite *sprite)
 {
-    if (gSprites[sprite->data0].data0 == 10 || gUnknown_0203935C)
+    if (gSprites[sprite->data[0]].data[0] == 10 || gUnknown_0203935C)
     {
         DestroySprite(sprite);
         return;
     }
 
-    sprite->invisible = gSprites[sprite->data0].invisible;
-    sprite->oam.objMode = gSprites[sprite->data0].oam.objMode;
-    sprite->oam.affineMode = gSprites[sprite->data0].oam.affineMode;
-    sprite->oam.matrixNum = gSprites[sprite->data0].oam.matrixNum;
-    sprite->pos1.x = gSprites[sprite->data0].pos1.x;
-    sprite->pos1.y = gSprites[sprite->data0].pos1.y;
+    sprite->invisible = gSprites[sprite->data[0]].invisible;
+    sprite->oam.objMode = gSprites[sprite->data[0]].oam.objMode;
+    sprite->oam.affineMode = gSprites[sprite->data[0]].oam.affineMode;
+    sprite->oam.matrixNum = gSprites[sprite->data[0]].oam.matrixNum;
+    sprite->pos1.x = gSprites[sprite->data[0]].pos1.x;
+    sprite->pos1.y = gSprites[sprite->data[0]].pos1.y;
 }
 
 static void sub_81458DC(void)

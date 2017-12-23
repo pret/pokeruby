@@ -25,23 +25,23 @@
 #include "link.h"
 #include "load_save.h"
 #include "main.h"
-#include "map_constants.h"
+#include "constants/maps.h"
 #include "map_name_popup.h"
 #include "menu.h"
 #include "metatile_behavior.h"
 #include "new_game.h"
 #include "palette.h"
 #include "play_time.h"
-#include "rng.h"
+#include "random.h"
 #include "roamer.h"
 #include "rotating_gate.h"
 #include "safari_zone.h"
 #include "script.h"
 #include "script_pokemon_80C4.h"
 #include "secret_base.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
-#include "species.h"
+#include "constants/species.h"
 #include "start_menu.h"
 #include "task.h"
 #include "tileset_anim.h"
@@ -203,47 +203,47 @@ static void DoWhiteOut(void)
 void Overworld_ResetStateAfterFly(void)
 {
     player_avatar_init_params_reset();
-    FlagClear(SYS_CYCLING_ROAD);
-    FlagClear(SYS_CRUISE_MODE);
-    FlagClear(SYS_SAFARI_MODE);
-    FlagClear(SYS_USE_STRENGTH);
-    FlagClear(SYS_USE_FLASH);
+    FlagClear(FLAG_SYS_CYCLING_ROAD);
+    FlagClear(FLAG_SYS_CRUISE_MODE);
+    FlagClear(FLAG_SYS_SAFARI_MODE);
+    FlagClear(FLAG_SYS_USE_STRENGTH);
+    FlagClear(FLAG_SYS_USE_FLASH);
 }
 
 void Overworld_ResetStateAfterTeleport(void)
 {
     player_avatar_init_params_reset();
-    FlagClear(SYS_CYCLING_ROAD);
-    FlagClear(SYS_CRUISE_MODE);
-    FlagClear(SYS_SAFARI_MODE);
-    FlagClear(SYS_USE_STRENGTH);
-    FlagClear(SYS_USE_FLASH);
+    FlagClear(FLAG_SYS_CYCLING_ROAD);
+    FlagClear(FLAG_SYS_CRUISE_MODE);
+    FlagClear(FLAG_SYS_SAFARI_MODE);
+    FlagClear(FLAG_SYS_USE_STRENGTH);
+    FlagClear(FLAG_SYS_USE_FLASH);
     ScriptContext2_RunNewScript(gUnknown_0819FC9F);
 }
 
 void Overworld_ResetStateAfterDigEscRope(void)
 {
     player_avatar_init_params_reset();
-    FlagClear(SYS_CYCLING_ROAD);
-    FlagClear(SYS_CRUISE_MODE);
-    FlagClear(SYS_SAFARI_MODE);
-    FlagClear(SYS_USE_STRENGTH);
-    FlagClear(SYS_USE_FLASH);
+    FlagClear(FLAG_SYS_CYCLING_ROAD);
+    FlagClear(FLAG_SYS_CRUISE_MODE);
+    FlagClear(FLAG_SYS_SAFARI_MODE);
+    FlagClear(FLAG_SYS_USE_STRENGTH);
+    FlagClear(FLAG_SYS_USE_FLASH);
 }
 
 void Overworld_ResetStateAfterWhiteOut(void)
 {
     player_avatar_init_params_reset();
-    FlagClear(SYS_CYCLING_ROAD);
-    FlagClear(SYS_CRUISE_MODE);
-    FlagClear(SYS_SAFARI_MODE);
-    FlagClear(SYS_USE_STRENGTH);
-    FlagClear(SYS_USE_FLASH);
+    FlagClear(FLAG_SYS_CYCLING_ROAD);
+    FlagClear(FLAG_SYS_CRUISE_MODE);
+    FlagClear(FLAG_SYS_SAFARI_MODE);
+    FlagClear(FLAG_SYS_USE_STRENGTH);
+    FlagClear(FLAG_SYS_USE_FLASH);
 }
 
 void sub_805308C(void)
 {
-    FlagClear(SYS_SAFARI_MODE);
+    FlagClear(FLAG_SYS_SAFARI_MODE);
     ChooseAmbientCrySpecies();
     ResetCyclingRoadChallengeData();
     UpdateLocationHistoryForRoamer();
@@ -602,7 +602,7 @@ void sub_80538F0(u8 mapGroup, u8 mapNum)
     prev_quest_postbuffer_cursor_backup_reset();
     sub_8082BD0(mapGroup, mapNum);
     DoTimeBasedEvents();
-    sub_80806E4();
+    SetSav1WeatherFromCurrMapHeader();
     ChooseAmbientCrySpecies();
     SetDefaultFlashLevel();
     Overworld_ClearSavedMusic();
@@ -638,10 +638,10 @@ void sub_8053994(u32 a1)
     sub_8082BD0(gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum);
     if (a1 != 1)
         DoTimeBasedEvents();
-    sub_80806E4();
+    SetSav1WeatherFromCurrMapHeader();
     ChooseAmbientCrySpecies();
     if (v2)
-        FlagClear(SYS_USE_FLASH);
+        FlagClear(FLAG_SYS_USE_FLASH);
     SetDefaultFlashLevel();
     Overworld_ClearSavedMusic();
     mapheader_run_script_with_tag_x3();
@@ -691,7 +691,7 @@ struct UnkPlayerStruct *sub_8053AA8(void)
 
 u8 sub_8053B00(struct UnkPlayerStruct *playerStruct, u16 a2, u8 a3)
 {
-    if (a3 != 8 && FlagGet(SYS_CRUISE_MODE))
+    if (a3 != 8 && FlagGet(FLAG_SYS_CRUISE_MODE))
         return 1;
     if (a3 == 5)
         return 16;
@@ -708,7 +708,7 @@ u8 sub_8053B00(struct UnkPlayerStruct *playerStruct, u16 a2, u8 a3)
 
 u8 sub_8053B60(struct UnkPlayerStruct *playerStruct, u8 a2, u16 a3, u8 a4)
 {
-    if (FlagGet(SYS_CRUISE_MODE) && a4 == 6)
+    if (FlagGet(FLAG_SYS_CRUISE_MODE) && a4 == 6)
         return 4;
     if (MetatileBehavior_IsDeepSouthWarp(a3) == TRUE)
         return 2;
@@ -738,9 +738,9 @@ u16 cur_mapdata_block_role_at_screen_center_acc_to_sav1(void)
 bool32 Overworld_IsBikingAllowed(void)
 {
     // is player in cycling road entrance?
-    if (gSaveBlock1.location.mapGroup == MAP_GROUP_ROUTE110_SEASIDE_CYCLING_ROAD_SOUTH_ENTRANCE
-     && (gSaveBlock1.location.mapNum == MAP_ID_ROUTE110_SEASIDE_CYCLING_ROAD_SOUTH_ENTRANCE
-      || gSaveBlock1.location.mapNum == MAP_ID_ROUTE110_SEASIDE_CYCLING_ROAD_NORTH_ENTRANCE))
+    if (gSaveBlock1.location.mapGroup == MAP_GROUP(ROUTE110_SEASIDE_CYCLING_ROAD_SOUTH_ENTRANCE)
+     && (gSaveBlock1.location.mapNum == MAP_NUM(ROUTE110_SEASIDE_CYCLING_ROAD_SOUTH_ENTRANCE)
+      || gSaveBlock1.location.mapNum == MAP_NUM(ROUTE110_SEASIDE_CYCLING_ROAD_NORTH_ENTRANCE)))
         return TRUE;
 
     // is player indoor, in a secret base, or underwater?
@@ -752,11 +752,11 @@ bool32 Overworld_IsBikingAllowed(void)
         return FALSE;
 
     // Thou shalt not bike on the sacred resting grounds of Kyogre/Groudon.
-    if (gSaveBlock1.location.mapGroup == MAP_GROUP_SEAFLOOR_CAVERN_ROOM9
-     && gSaveBlock1.location.mapNum == MAP_ID_SEAFLOOR_CAVERN_ROOM9)
+    if (gSaveBlock1.location.mapGroup == MAP_GROUP(SEAFLOOR_CAVERN_ROOM9)
+     && gSaveBlock1.location.mapNum == MAP_NUM(SEAFLOOR_CAVERN_ROOM9))
         return FALSE;
-    if (gSaveBlock1.location.mapGroup == MAP_GROUP_CAVE_OF_ORIGIN_B4F
-     && gSaveBlock1.location.mapNum == MAP_ID_CAVE_OF_ORIGIN_B4F)
+    if (gSaveBlock1.location.mapGroup == MAP_GROUP(CAVE_OF_ORIGIN_B4F)
+     && gSaveBlock1.location.mapNum == MAP_NUM(CAVE_OF_ORIGIN_B4F))
         return FALSE;
 
     return TRUE;
@@ -766,7 +766,7 @@ void SetDefaultFlashLevel(void)
 {
     if (!gMapHeader.cave)
         gSaveBlock1.flashLevel = 0;
-    else if (FlagGet(SYS_USE_FLASH))
+    else if (FlagGet(FLAG_SYS_USE_FLASH))
         gSaveBlock1.flashLevel = 1;
     else
         gSaveBlock1.flashLevel = gMaxFlashLevel;
@@ -792,22 +792,22 @@ void sub_8053D14(u16 mapDataId)
 
 static bool16 ShouldLegendaryMusicPlayAtLocation(struct WarpData *warp)
 {
-    if (!FlagGet(SYS_WEATHER_CTRL))
+    if (!FlagGet(FLAG_SYS_WEATHER_CTRL))
         return FALSE;
     if (warp->mapGroup == 0)
     {
         switch (warp->mapNum)
         {
-        case MAP_ID_LILYCOVE_CITY:
-        case MAP_ID_MOSSDEEP_CITY:
-        case MAP_ID_SOOTOPOLIS_CITY:
-        case MAP_ID_EVER_GRANDE_CITY:
+        case MAP_NUM(LILYCOVE_CITY):
+        case MAP_NUM(MOSSDEEP_CITY):
+        case MAP_NUM(SOOTOPOLIS_CITY):
+        case MAP_NUM(EVER_GRANDE_CITY):
             return TRUE;
-        case MAP_ID_ROUTE124:
-        case MAP_ID_ROUTE125:
-        case MAP_ID_ROUTE126:
-        case MAP_ID_ROUTE127:
-        case MAP_ID_ROUTE128:
+        case MAP_NUM(ROUTE124):
+        case MAP_NUM(ROUTE125):
+        case MAP_NUM(ROUTE126):
+        case MAP_NUM(ROUTE127):
+        case MAP_NUM(ROUTE128):
             return TRUE;
         }
     }
@@ -818,10 +818,10 @@ static bool16 IsInfiltratedWeatherInstitute(struct WarpData *warp)
 {
     if (VarGet(VAR_WEATHER_INSTITUTE_CLEARED))
         return FALSE;
-    if (warp->mapGroup != MAP_GROUP_ROUTE119_WEATHER_INSTITUTE_1F)
+    if (warp->mapGroup != MAP_GROUP(ROUTE119_WEATHER_INSTITUTE_1F))
         return FALSE;
-    if (warp->mapNum == MAP_ID_ROUTE119_WEATHER_INSTITUTE_1F
-     || warp->mapNum == MAP_ID_ROUTE119_WEATHER_INSTITUTE_2F)
+    if (warp->mapNum == MAP_NUM(ROUTE119_WEATHER_INSTITUTE_1F)
+     || warp->mapNum == MAP_NUM(ROUTE119_WEATHER_INSTITUTE_2F))
         return TRUE;
     return FALSE;
 }
@@ -841,8 +841,8 @@ u16 GetCurrLocationDefaultMusic(void)
     u16 music;
 
     // Play the desert music only when the sandstorm is active on Route 111.
-    if (gSaveBlock1.location.mapGroup == MAP_GROUP_ROUTE111
-     && gSaveBlock1.location.mapNum == MAP_ID_ROUTE111
+    if (gSaveBlock1.location.mapGroup == MAP_GROUP(ROUTE111)
+     && gSaveBlock1.location.mapNum == MAP_NUM(ROUTE111)
      && GetSav1Weather() == 8)
         return BGM_ASHROAD;
 
@@ -869,8 +869,8 @@ u16 GetWarpDestinationMusic(void)
     }
     else
     {
-        if (gSaveBlock1.location.mapGroup == MAP_GROUP_MAUVILLE_CITY
-         && gSaveBlock1.location.mapNum == MAP_ID_MAUVILLE_CITY)
+        if (gSaveBlock1.location.mapGroup == MAP_GROUP(MAUVILLE_CITY)
+         && gSaveBlock1.location.mapNum == MAP_NUM(MAUVILLE_CITY))
             return BGM_DOORO_X1;
         else
             return BGM_GRANROAD;
@@ -912,7 +912,7 @@ void Overworld_ClearSavedMusic(void)
 
 void sub_8053F0C(void)
 {
-    if (FlagGet(SPECIAL_FLAG_1) != TRUE)
+    if (FlagGet(FLAG_SPECIAL_FLAG_1) != TRUE)
     {
         u16 newMusic = GetWarpDestinationMusic();
         u16 currentMusic = GetCurrentMapMusic();
@@ -959,7 +959,7 @@ u8 GetMapMusicFadeoutSpeed(void)
 void sub_8053FF8(void)
 {
     u16 music = GetWarpDestinationMusic();
-    if (FlagGet(SPECIAL_FLAG_1) != TRUE && music != GetCurrentMapMusic())
+    if (FlagGet(FLAG_SPECIAL_FLAG_1) != TRUE && music != GetCurrentMapMusic())
     {
         u8 speed = GetMapMusicFadeoutSpeed();
         FadeOutMapMusic(speed);
@@ -1024,8 +1024,8 @@ void UpdateAmbientCry(s16 *state, u16 *delayCounter)
 
 void ChooseAmbientCrySpecies(void)
 {
-    if ((gSaveBlock1.location.mapGroup == MAP_GROUP_ROUTE130
-     && gSaveBlock1.location.mapNum == MAP_ID_ROUTE130)
+    if ((gSaveBlock1.location.mapGroup == MAP_GROUP(ROUTE130)
+     && gSaveBlock1.location.mapNum == MAP_NUM(ROUTE130))
      && !IsMirageIslandPresent())
     {
         // Only play water pokemon cries on this route
@@ -1737,7 +1737,7 @@ void sub_8054D4C(u32 a1)
     sub_805C7C4(0);
     FieldEffectActiveListClear();
     InitFieldMessageBox();
-    sub_807C828();
+    StartWeather();
     sub_8080750();
     if (!a1)
         SetUpFieldTasks();
@@ -2648,14 +2648,14 @@ void CreateLinkPlayerSprite(u8 linkPlayerId)
         mapObj->spriteId = AddPseudoFieldObject(val, SpriteCB_LinkPlayer, 0, 0, 0);
         sprite = &gSprites[mapObj->spriteId];
         sprite->coordOffsetEnabled = TRUE;
-        sprite->data0 = linkPlayerId;
+        sprite->data[0] = linkPlayerId;
         mapObj->mapobj_bit_2 = 0;
     }
 }
 
 void SpriteCB_LinkPlayer(struct Sprite *sprite)
 {
-    struct LinkPlayerMapObject *linkPlayerMapObj = &gLinkPlayerMapObjects[sprite->data0];
+    struct LinkPlayerMapObject *linkPlayerMapObj = &gLinkPlayerMapObjects[sprite->data[0]];
     struct MapObject *mapObj = &gMapObjects[linkPlayerMapObj->mapObjId];
     sprite->pos1.x = mapObj->coords1.x;
     sprite->pos1.y = mapObj->coords1.y;
@@ -2668,7 +2668,7 @@ void SpriteCB_LinkPlayer(struct Sprite *sprite)
     sub_806487C(sprite, 0);
     if (mapObj->mapobj_bit_2)
     {
-        sprite->invisible = ((sprite->data7 & 4) >> 2);
-        sprite->data7++;
+        sprite->invisible = ((sprite->data[7] & 4) >> 2);
+        sprite->data[7]++;
     }
 }

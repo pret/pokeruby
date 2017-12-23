@@ -8,18 +8,19 @@
 #include "menu_cursor.h"
 #include "palette.h"
 #include "rom3.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "text.h"
 #include "util.h"
+#include "ewram.h"
 
 extern struct Window gUnknown_03004210;
 extern u8 gDisplayedStringBattle[];
 extern u8 gActionSelectionCursor[];
 
-extern const u8 gUnknown_08400CBB[];
+extern const u8 BattleText_PlayerMenu[];
 extern u8 gActiveBank;
-extern const u8 gUnknown_08400D15[];
+extern const u8 BattleText_MenuOptionsSafari[];
 
 extern void *gBattleBankFunc[];
 extern u16 gUnknown_030042A0;
@@ -30,7 +31,7 @@ extern u8 gObjectBankIDs[];
 extern struct SpriteTemplate gUnknown_02024E8C;
 extern u16 gBattleTypeFlags;
 extern u32 gBattleExecBuffer;
-extern u16 gScriptItemId;
+extern u16 gSpecialVar_ItemId;
 extern MainCallback gPreBattleCallback1;
 extern u8 gBankInMenu;
 extern u8 gHealthboxIDs[];
@@ -314,7 +315,7 @@ void sub_812B758(void)
 {
     if (gMain.callback2 == sub_800F808 && !gPaletteFade.active)
     {
-        Emitcmd35(1, gScriptItemId);
+        Emitcmd35(1, gSpecialVar_ItemId);
         SafariBufferExecCompleted();
     }
 }
@@ -393,7 +394,7 @@ void SafariHandleTrainerThrow(void)
       30);
     gSprites[gObjectBankIDs[gActiveBank]].oam.paletteNum = gActiveBank;
     gSprites[gObjectBankIDs[gActiveBank]].pos2.x = 240;
-    gSprites[gObjectBankIDs[gActiveBank]].data0 = -2;
+    gSprites[gObjectBankIDs[gActiveBank]].data[0] = -2;
     gSprites[gObjectBankIDs[gActiveBank]].callback = sub_80313A0;
     gBattleBankFunc[gActiveBank] = sub_812B65C;
 }
@@ -475,7 +476,7 @@ void SafariHandlecmd18(void)
     FillWindowRect_DefaultPalette(&gUnknown_03004210, 10, 2, 35, 16, 36);
     gBattleBankFunc[gActiveBank] = bx_battle_menu_t6_2;
 
-    InitWindow(&gUnknown_03004210, gUnknown_08400D15, 400, 18, 35);
+    InitWindow(&gUnknown_03004210, BattleText_MenuOptionsSafari, 400, 18, 35);
     sub_8002F44(&gUnknown_03004210);
     sub_814A5C0(0, 0xFFFF, 12, 11679, 0);
 
@@ -483,7 +484,7 @@ void SafariHandlecmd18(void)
         nullsub_8(i);
 
     sub_802E3E4(gActionSelectionCursor[gActiveBank], 0);
-    StrCpyDecodeToDisplayedStringBattle((u8 *) gUnknown_08400CBB);
+    StrCpyDecodeToDisplayedStringBattle(BattleText_PlayerMenu);
 
     InitWindow(&gUnknown_03004210, gDisplayedStringBattle, SUB_812BB10_TILE_DATA_OFFSET, 2, 35);
     sub_8002F44(&gUnknown_03004210);

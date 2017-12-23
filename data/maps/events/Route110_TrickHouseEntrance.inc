@@ -1,10 +1,10 @@
 Route110_TrickHouseEntrance_MapObjects:: @ 8392140
-	object_event 1, MAP_OBJ_GFX_MAN_1, 0, 6, 0, 2, 0, 3, 9, 0, 0, 0, 0, 0, 0, Route110_TrickHouseEntrance_EventScript_16121A, 872, 0, 0
+	object_event 1, MAP_OBJ_GFX_MAN_1, 0, 6, 0, 2, 0, 3, 9, 0, 0, 0, 0, 0, 0, Route110_TrickHouseEntrance_EventScript_16121A, FLAG_HIDE_TRICKMASTER_ENTRANCE, 0, 0
 
 Route110_TrickHouseEntrance_MapWarps:: @ 8392158
-	warp_def 5, 7, 3, 1, Route110
-	warp_def 6, 7, 3, 1, Route110
-	warp_def 5, 2, 3, 0, Route110_TrickHousePuzzle1
+	warp_def 5, 7, 3, 1, MAP_ROUTE110
+	warp_def 6, 7, 3, 1, MAP_ROUTE110
+	warp_def 5, 2, 3, 0, MAP_ROUTE110_TRICK_HOUSE_PUZZLE1
 
 Route110_TrickHouseEntrance_MapCoordEvents:: @ 8392170
 	coord_event 4, 7, 3, 0, 0x40a5, 0, 0, Route110_TrickHouseEntrance_EventScript_1618B0

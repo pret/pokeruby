@@ -1,14 +1,10 @@
-//
-
-//
-
 #include "global.h"
 #include "task.h"
 #include "main.h"
-#include "vars.h"
+#include "constants/vars.h"
 #include "bike.h"
 #include "item.h"
-#include "items.h"
+#include "constants/items.h"
 #include "event_data.h"
 #include "overworld.h"
 #include "clock.h"
@@ -20,7 +16,7 @@
 #include "fieldmap.h"
 #include "field_player_avatar.h"
 #include "field_camera.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "field_tasks.h"
 
@@ -201,7 +197,7 @@ const struct MetatileOffset *sub_80695E0(const struct MetatileOffset a0[][2], s8
 void sub_8069638(const struct MetatileOffset offsets[][2], s16 x, s16 y, bool32 flag)
 {
     const struct MetatileOffset *offsetData = sub_80695E0(offsets, MapGridGetMetatileBehaviorAt(x, y));
-    const struct MetatileOffset *offsetData2 = offsetData;
+    const struct MetatileOffset *offsetdata2 = offsetData;
     if (offsetData != NULL)
     {
         MapGridSetMetatileIdAt(x + offsetData[0].x, y + offsetData[0].y, offsetData[0].tileId);
@@ -209,10 +205,10 @@ void sub_8069638(const struct MetatileOffset offsets[][2], s16 x, s16 y, bool32 
         {
             CurrentMapDrawMetatileAt(x + offsetData[0].x, y + offsetData[0].y);
         }
-        MapGridSetMetatileIdAt(x + offsetData2[1].x, y + offsetData2[1].y, offsetData2[1].tileId);
+        MapGridSetMetatileIdAt(x + offsetdata2[1].x, y + offsetdata2[1].y, offsetdata2[1].tileId);
         if (flag)
         {
-            CurrentMapDrawMetatileAt(x + offsetData2[1].x, y + offsetData2[1].y);
+            CurrentMapDrawMetatileAt(x + offsetdata2[1].x, y + offsetdata2[1].y);
         }
     }
 }

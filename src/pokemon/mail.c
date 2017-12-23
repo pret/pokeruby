@@ -1,7 +1,8 @@
 #include "global.h"
 #include "mail.h"
 #include "easy_chat.h"
-#include "items.h"
+#include "constants/items.h"
+#include "graphics.h"
 #include "mail_data.h"
 #include "menu.h"
 #include "menu_helpers.h"
@@ -15,6 +16,7 @@
 #include "task.h"
 #include "text.h"
 #include "unknown_task.h"
+#include "ewram.h"
 
 struct UnkMailStruct
 {
@@ -30,7 +32,7 @@ struct MailLayout
     u8 var2;
     u8 var3_0:4;
     u8 var3_4:4;
-    struct UnkMailStruct *var4;
+    const struct UnkMailStruct *var4;
 };
 
 struct Unk2000000
@@ -52,28 +54,188 @@ struct Unk2000000
     u8 pad101[3];
     /*0x104*/ MainCallback var104;
     /*0x108*/ MainCallback var108;
-    /*0x10C*/ struct MailLayout *var10C;
+    /*0x10C*/ const struct MailLayout *var10C;
 };
 
 struct MailGraphics
 {
-    u16 (*palette)[];
-    u8 (*tiles)[];
-    u8 (*tileMap)[];
+    const u16 *palette;
+    const u8 *tiles;
+    const u8 *tileMap;
     u16 var0C;
     u16 var0E;
     u16 color10;
     u16 color12;
 };
 
-extern u8 ewram[];
-#define ewram0 (*(struct Unk2000000 *)(ewram))
+const u16 gUnknown_083E562C[][2] =
+{
+    {0x6ACD, 0x51A5},
+    {0x45FC, 0x38D4},
+};
 
-extern struct MailGraphics gMailGraphicsTable[];
-extern u16 gUnknown_083E562C[][2];
+const struct MailGraphics gMailGraphicsTable[] =
+{
+    {
+        .palette = gMailPalette_Orange,
+        .tiles = gMailTiles_Orange,
+        .tileMap = gMailTilemap_Orange,
+        .var0C = 0x2C0,
+        .var0E = 0,
+        .color10 = 0x294A,
+        .color12 = 0x6739,
+    },
+    {
+        .palette = gMailPalette_Harbor,
+        .tiles = gMailTiles_Harbor,
+        .tileMap = gMailTilemap_Harbor,
+        .var0C = 0x2E0,
+        .var0E = 0,
+        .color10 = 0x7FFF,
+        .color12 = 0x4631,
+    },
+    {
+        .palette = gMailPalette_Glitter,
+        .tiles = gMailTiles_Glitter,
+        .tileMap = gMailTilemap_Glitter,
+        .var0C = 0x400,
+        .var0E = 0,
+        .color10 = 0x294A,
+        .color12 = 0x6739,
+    },
+    {
+        .palette = gMailPalette_Mech,
+        .tiles = gMailTiles_Mech,
+        .tileMap = gMailTilemap_Mech,
+        .var0C = 0x1E0,
+        .var0E = 0,
+        .color10 = 0x7FFF,
+        .color12 = 0x4631,
+    },
+    {
+        .palette = gMailPalette_Wood,
+        .tiles = gMailTiles_Wood,
+        .tileMap = gMailTilemap_Wood,
+        .var0C = 0x2E0,
+        .var0E = 0,
+        .color10 = 0x7FFF,
+        .color12 = 0x4631,
+    },
+    {
+        .palette = gMailPalette_Wave,
+        .tiles = gMailTiles_Wave,
+        .tileMap = gMailTilemap_Wave,
+        .var0C = 0x300,
+        .var0E = 0,
+        .color10 = 0x294A,
+        .color12 = 0x6739,
+    },
+    {
+        .palette = gMailPalette_Bead,
+        .tiles = gMailTiles_Bead,
+        .tileMap = gMailTilemap_Bead,
+        .var0C = 0x140,
+        .var0E = 0,
+        .color10 = 0x7FFF,
+        .color12 = 0x4631,
+    },
+    {
+        .palette = gMailPalette_Shadow,
+        .tiles = gMailTiles_Shadow,
+        .tileMap = gMailTilemap_Shadow,
+        .var0C = 0x300,
+        .var0E = 0,
+        .color10 = 0x7FFF,
+        .color12 = 0x4631,
+    },
+    {
+        .palette = gMailPalette_Tropic,
+        .tiles = gMailTiles_Tropic,
+        .tileMap = gMailTilemap_Tropic,
+        .var0C = 0x220,
+        .var0E = 0,
+        .color10 = 0x294A,
+        .color12 = 0x6739,
+    },
+    {
+        .palette = gMailPalette_Dream,
+        .tiles = gMailTiles_Dream,
+        .tileMap = gMailTilemap_Dream,
+        .var0C = 0x340,
+        .var0E = 0,
+        .color10 = 0x294A,
+        .color12 = 0x6739,
+    },
+    {
+        .palette = gMailPalette_Fab,
+        .tiles = gMailTiles_Fab,
+        .tileMap = gMailTilemap_Fab,
+        .var0C = 0x2A0,
+        .var0E = 0,
+        .color10 = 0x294A,
+        .color12 = 0x6739,
+    },
+    {
+        .palette = gMailPalette_Retro,
+        .tiles = gMailTiles_Retro,
+        .tileMap = gMailTilemap_Retro,
+        .var0C = 0x520,
+        .var0E = 0,
+        .color10 = 0x294A,
+        .color12 = 0x6739,
+    },
+};
 
-extern struct MailLayout gUnknown_083E5730[];
-extern struct MailLayout gUnknown_083E57A4[];
+const struct UnkMailStruct Unknown_3E5724[] =
+{
+    {0, 3, 0},
+    {0, 3, 0},
+    {0, 3, 0},
+};
+
+const struct MailLayout gUnknown_083E5730[] =
+{
+    {3, 15, 27, 4, 3, Unknown_3E5724},
+    {3, 15, 27, 4, 3, Unknown_3E5724},
+    {3, 15, 27, 4, 3, Unknown_3E5724},
+    {3, 15, 27, 4, 3, Unknown_3E5724},
+    {3, 15, 27, 4, 3, Unknown_3E5724},
+    {3, 15, 27, 4, 3, Unknown_3E5724},
+    {3, 15, 27, 4, 3, Unknown_3E5724},
+    {3, 15, 27, 4, 3, Unknown_3E5724},
+    {3, 15, 27, 4, 3, Unknown_3E5724},
+    {3, 15, 27, 4, 3, Unknown_3E5724},
+    {3, 16, 27, 4, 3, Unknown_3E5724},
+    {3, 15, 27, 4, 3, Unknown_3E5724},
+};
+
+const struct UnkMailStruct Unknown_3E5790[] =
+{
+    {0, 2, 0},
+    {0, 2, 0},
+    {0, 2, 0},
+    {0, 2, 0},
+    {0, 1, 0},
+};
+
+const struct MailLayout gUnknown_083E57A4[] =
+{
+    {5, 15, 15, 4, 3, Unknown_3E5790},
+    {5, 15, 15, 4, 3, Unknown_3E5790},
+    {5, 15, 16, 4, 3, Unknown_3E5790},
+    {5, 15, 15, 4, 3, Unknown_3E5790},
+    {5, 15, 15, 4, 3, Unknown_3E5790},
+    {5, 15, 16, 4, 3, Unknown_3E5790},
+    {5, 15, 16, 4, 3, Unknown_3E5790},
+    {5, 15, 15, 4, 3, Unknown_3E5790},
+    {5, 15, 15, 4, 3, Unknown_3E5790},
+    {5, 15, 15, 4, 3, Unknown_3E5790},
+    {5, 16, 15, 4, 3, Unknown_3E5790},
+    {5, 15, 15, 4, 3, Unknown_3E5790},
+};
+
+// XXX: what is this?
+static u8 *const sSharedMemPtr = gSharedMem;
 
 static u8 sub_80F8A28(void);
 static void sub_80F8D50(void);
@@ -90,61 +252,61 @@ void HandleReadMail(struct MailStruct *arg0, MainCallback arg1, bool8 arg2)
     u16 mailDesign;
     u16 buffer[2];
 
-    ewram0.varFF = GAME_LANGUAGE;
-    ewram0.var100 = 1;
-    ewram0.var104 = (MainCallback)EasyChat_GetWordText;
-    ewram0.var108 = (MainCallback)ConvertEasyChatWordsToString;
+    ewram0_4.varFF = GAME_LANGUAGE;
+    ewram0_4.var100 = 1;
+    ewram0_4.var104 = (MainCallback)EasyChat_GetWordText;
+    ewram0_4.var108 = (MainCallback)ConvertEasyChatWordsToString;
 
     mailDesign = arg0->itemId - ITEM_ORANGE_MAIL;
 
     if (mailDesign <= 11)
     {
-        ewram0.varFA = arg0->itemId - ITEM_ORANGE_MAIL;
+        ewram0_4.varFA = arg0->itemId - ITEM_ORANGE_MAIL;
     }
     else
     {
-        ewram0.varFA = 0;
+        ewram0_4.varFA = 0;
         arg2 = FALSE;
     }
 
-    switch (ewram0.var100)
+    switch (ewram0_4.var100)
     {
     case 0:
     default:
-        ewram0.var10C = &gUnknown_083E5730[ewram0.varFA];
+        ewram0_4.var10C = &gUnknown_083E5730[ewram0_4.varFA];
         break;
 
     case 1:
-        ewram0.var10C = &gUnknown_083E57A4[ewram0.varFA];
+        ewram0_4.var10C = &gUnknown_083E57A4[ewram0_4.varFA];
         break;
     }
 
     if (((MailSpeciesToSpecies(arg0->species, buffer) << 16) + 0xFFFF0000) <= (410 << 16))
     {
-        switch (ewram0.varFA)
+        switch (ewram0_4.varFA)
         {
         case 6:
-            ewram0.varFB = 1;
+            ewram0_4.varFB = 1;
             break;
 
         case 9:
-            ewram0.varFB = 2;
+            ewram0_4.varFB = 2;
             break;
 
         default:
-            ewram0.varFB = 0;
+            ewram0_4.varFB = 0;
             break;
         }
     }
     else
     {
-        ewram0.varFB = 0;
+        ewram0_4.varFB = 0;
     }
 
 
-    ewram0.varF4 = arg0;
-    ewram0.varEC = arg1;
-    ewram0.varF8 = arg2;
+    ewram0_4.varF4 = arg0;
+    ewram0_4.varEC = arg1;
+    ewram0_4.varF8 = arg2;
 
     SetMainCallback2(sub_80F8D50);
 }
@@ -214,31 +376,31 @@ static u8 sub_80F8A28(void)
         RETURN_UP_STATE;
 
     case 11:
-        LoadPalette(gMailGraphicsTable[ewram0.varFA].palette, 0, 16 * 2);
+        LoadPalette(gMailGraphicsTable[ewram0_4.varFA].palette, 0, 16 * 2);
         RETURN_UP_STATE;
 
     case 12:
-        LZ77UnCompVram(gMailGraphicsTable[ewram0.varFA].tileMap, (void *)(VRAM + 0x4000));
+        LZ77UnCompVram(gMailGraphicsTable[ewram0_4.varFA].tileMap, (void *)(VRAM + 0x4000));
         RETURN_UP_STATE;
 
     case 13:
-        LZ77UnCompVram(gMailGraphicsTable[ewram0.varFA].tiles, (void *)(VRAM));
+        LZ77UnCompVram(gMailGraphicsTable[ewram0_4.varFA].tiles, (void *)(VRAM));
 
-        gPlttBufferUnfaded[241] = gMailGraphicsTable[ewram0.varFA].color10;
-        gPlttBufferUnfaded[248] = gMailGraphicsTable[ewram0.varFA].color12;
+        gPlttBufferUnfaded[241] = gMailGraphicsTable[ewram0_4.varFA].color10;
+        gPlttBufferUnfaded[248] = gMailGraphicsTable[ewram0_4.varFA].color12;
         gPlttBufferUnfaded[10] = gUnknown_083E562C[gSaveBlock2.playerGender][0];
         gPlttBufferUnfaded[11] = gUnknown_083E562C[gSaveBlock2.playerGender][1];
         RETURN_UP_STATE;
 
     case 14:
-        if (ewram0.varF8 != 0)
+        if (ewram0_4.varF8 != 0)
         {
             sub_80F8DA0();
         }
         RETURN_UP_STATE;
 
     case 15:
-        if (ewram0.varF8 != 0)
+        if (ewram0_4.varF8 != 0)
         {
             sub_80F8E80();
         }
@@ -251,18 +413,18 @@ static u8 sub_80F8A28(void)
     {
         u16 local1;
 
-        local1 = sub_809D4A8(ewram0.varF4->species);
+        local1 = sub_809D4A8(ewram0_4.varF4->species);
 
-        switch (ewram0.varFB)
+        switch (ewram0_4.varFB)
         {
         case 1:
             sub_809D580(local1);
-            ewram0.varFC = sub_809D3A4(local1, SpriteCallbackDummy, 96, 128, 0);
+            ewram0_4.varFC = sub_809D3A4(local1, SpriteCallbackDummy, 96, 128, 0);
             break;
 
         case 2:
             sub_809D580(local1);
-            ewram0.varFC = sub_809D3A4(local1, SpriteCallbackDummy, 40, 128, 0);
+            ewram0_4.varFC = sub_809D3A4(local1, SpriteCallbackDummy, 40, 128, 0);
             break;
         }
         RETURN_UP_STATE;
@@ -283,7 +445,7 @@ static u8 sub_80F8A28(void)
         REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_BG2_ON | DISPCNT_OBJ_ON;
         BeginNormalPaletteFade(-1, 0, 16, 0, 0);
         gPaletteFade.bufferTransferDisabled = 0;
-        ewram0.varF0 = sub_80F8F58;
+        ewram0_4.varF0 = sub_80F8F58;
         return TRUE;
 
     default:
@@ -325,24 +487,24 @@ static void sub_80F8DA0(void)
     u8 *ptr;
 
     r6 = 0;
-    for (i = 0; i < ewram0.var10C->var0; i++)
+    for (i = 0; i < ewram0_4.var10C->var0; i++)
     {
-        ConvertEasyChatWordsToString(ewram0.words[i], &ewram0.varF4->words[r6], ewram0.var10C->var4[i].unk_0_2, 1);
-        r6 += ewram0.var10C->var4[i].unk_0_2;
+        ConvertEasyChatWordsToString(ewram0_4.words[i], &ewram0_4.varF4->words[r6], ewram0_4.var10C->var4[i].unk_0_2, 1);
+        r6 += ewram0_4.var10C->var4[i].unk_0_2;
     }
-    ptr = ewram0.varD8;
-    if (ewram0.var100 == 0)
+    ptr = ewram0_4.varD8;
+    if (ewram0_4.var100 == 0)
     {
-        ptr = sub_80F8D7C(ptr, ewram0.varF4->playerName);
+        ptr = sub_80F8D7C(ptr, ewram0_4.varF4->playerName);
         StringCopy(ptr, gOtherText_From);
-        ewram0.varF9 = ewram0.var10C->var2 - StringLength(ewram0.varD8);
+        ewram0_4.varF9 = ewram0_4.var10C->var2 - StringLength(ewram0_4.varD8);
 
     }
     else
     {
         ptr = StringCopy(ptr, gOtherText_From);
-        sub_80F8D7C(ptr, ewram0.varF4->playerName);
-        ewram0.varF9 = ewram0.var10C->var2;
+        sub_80F8D7C(ptr, ewram0_4.varF4->playerName);
+        ewram0_4.varF9 = ewram0_4.var10C->var2;
     }
 }
 
@@ -352,25 +514,25 @@ static void sub_80F8E80(void)
     u8 x;
     u8 y = 0;
 
-    for (pos = 0; pos < ewram0.var10C->var0; pos++)
+    for (pos = 0; pos < ewram0_4.var10C->var0; pos++)
     {
-        if (ewram0.words[pos][0] == 0xFF)
+        if (ewram0_4.words[pos][0] == 0xFF)
         {
             continue;
         }
 
-        if (ewram0.words[pos][0] == 0x00)
+        if (ewram0_4.words[pos][0] == 0x00)
         {
             continue;
         }
 
-        x = ewram0.var10C->var4[pos].unk_0_4;
-        y += ewram0.var10C->var4[pos].unk_0_0;
-        MenuPrint(ewram0.words[pos], ewram0.var10C->var3_4 + x, ewram0.var10C->var3_0 + y);
+        x = ewram0_4.var10C->var4[pos].unk_0_4;
+        y += ewram0_4.var10C->var4[pos].unk_0_0;
+        MenuPrint(ewram0_4.words[pos], ewram0_4.var10C->var3_4 + x, ewram0_4.var10C->var3_0 + y);
         y += 2;
     }
 
-    MenuPrint(ewram0.varD8, ewram0.varF9, ewram0.var10C->var1);
+    MenuPrint(ewram0_4.varD8, ewram0_4.varF9, ewram0_4.var10C->var1);
 }
 
 static void sub_80F8F18(void)
@@ -382,13 +544,13 @@ static void sub_80F8F18(void)
 
 static void sub_80F8F2C(void)
 {
-    if (ewram0.varFB != 0)
+    if (ewram0_4.varFB != 0)
     {
         AnimateSprites();
         BuildOamBuffer();
     }
 
-    ewram0.varF0();
+    ewram0_4.varF0();
 }
 
 static void sub_80F8F58(void)
@@ -398,7 +560,7 @@ static void sub_80F8F58(void)
     local0 = UpdatePaletteFade();
     if (local0 == 0)
     {
-        ewram0.varF0 = sub_80F8F78;
+        ewram0_4.varF0 = sub_80F8F78;
     }
 }
 
@@ -407,7 +569,7 @@ static void sub_80F8F78(void)
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
         BeginNormalPaletteFade(-1, 0, 0, 16, 0);
-        ewram0.varF0 = sub_80F8FB4;
+        ewram0_4.varF0 = sub_80F8FB4;
     }
 }
 
@@ -420,18 +582,18 @@ static void sub_80F8FB4(void)
         return;
     }
 
-    SetMainCallback2(ewram0.varEC);
-    switch (ewram0.varFB)
+    SetMainCallback2(ewram0_4.varEC);
+    switch (ewram0_4.varFB)
     {
     case 2:
     case 1:
-        local1 = sub_809D4A8(ewram0.varF4->species);
+        local1 = sub_809D4A8(ewram0_4.varF4->species);
         sub_809D608(local1);
 
-        sub_809D510(&gSprites[ewram0.varFC]);
+        sub_809D510(&gSprites[ewram0_4.varFC]);
         break;
     }
 
-    memset(&ewram0, 0, 0x110);
+    memset(&ewram0_4, 0, 0x110);
     ResetPaletteFade();
 }

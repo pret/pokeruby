@@ -4,7 +4,7 @@ PetalburgCity_MapScripts:: @ 814B70C
 	.byte 0
 
 PetalburgCity_MapScript1_14B717:: @ 814B717
-	setflag 2070
+	setflag FLAG_VISITED_PETALBURG_CITY
 	compare 0x4057, 0
 	call_if 1, PetalburgCity_EventScript_14B731
 	compare 0x4057, 2
@@ -45,7 +45,7 @@ PetalburgCity_EventScript_14B747:: @ 814B747
 	clearflag 0x4001
 	special LoadPlayerParty
 	setvar 0x4085, 1
-	warp PetalburgCity_Gym, 255, 4, 108
+	warp MAP_PETALBURG_CITY_GYM, 255, 4, 108
 	waitstate
 	releaseall
 	end

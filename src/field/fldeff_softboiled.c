@@ -4,11 +4,12 @@
 #include "party_menu.h"
 #include "pokemon.h"
 #include "pokemon_menu.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "sprite.h"
 #include "strings.h"
 #include "task.h"
+#include "ewram.h"
 
 struct Struct2001000 {
     u8 unk0;
@@ -38,15 +39,9 @@ struct Struct201C000 {
 #define WINDOW_RIGHT 29
 #endif
 
-#define EWRAM_1000 (*(struct Struct2001000 *)(unk_2000000 + 0x1000))
-#define EWRAM_1B000_2 (*(struct Struct201B000 *)(unk_2000000 + 0x1B000))
-#define EWRAM_1C000 (*(struct Struct201C000 *)(unk_2000000 + 0x1C000))
-
 // extern
 extern u8 gUnknown_0202E8F6;
 extern u8 gLastFieldPokeMenuOpened;
-
-extern u8 unk_2000000[];
 extern u8 gUnknown_0202E8F4;
 
 // Static
@@ -87,8 +82,8 @@ static void sub_8133D50(u8 taskId) {
     struct Sprite *sprites = gSprites;
 
 
-    unk1 = sprites[EWRAM_1000.unk1].data0;
-    unk2 = sprites[EWRAM_1000.unk2].data0;
+    unk1 = sprites[EWRAM_1000.unk1].data[0];
+    unk2 = sprites[EWRAM_1000.unk2].data[0];
 
     if (unk1 > 5 || unk2 > 5)
     {
@@ -96,7 +91,7 @@ static void sub_8133D50(u8 taskId) {
         return;
     }
 
-    EWRAM_1C000.unk0 = &gPlayerParty[sprites[EWRAM_1000.unk2].data0];
+    EWRAM_1C000.unk0 = &gPlayerParty[sprites[EWRAM_1000.unk2].data[0]];
     hp = GetMonData(EWRAM_1C000.unk0, MON_DATA_HP);
 
     if (hp == 0 || unk1 == unk2 || GetMonData(EWRAM_1C000.unk0, MON_DATA_MAX_HP) == hp)
@@ -107,7 +102,7 @@ static void sub_8133D50(u8 taskId) {
 
     PlaySE(SE_KAIFUKU);
 
-    EWRAM_1C000.unk5 = gSprites[EWRAM_1000.unk1].data0;
+    EWRAM_1C000.unk5 = gSprites[EWRAM_1000.unk1].data[0];
 
     pokemon = &gPlayerParty[EWRAM_1C000.unk5];
     EWRAM_1C000.unk0 = pokemon;

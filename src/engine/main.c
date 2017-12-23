@@ -7,7 +7,7 @@
 #include "load_save.h"
 #include "m4a.h"
 #include "play_time.h"
-#include "rng.h"
+#include "random.h"
 #include "rom3.h"
 #include "overworld.h"
 #include "rtc.h"
@@ -70,6 +70,7 @@ bool8 gLinkVSyncDisabled;
 u32 IntrMain_Buffer[0x200];
 u8 gPcmDmaCounter;
 
+EWRAM_DATA u8 gSharedMem[0x20000] = {0};
 EWRAM_DATA void (**gFlashTimerIntrFunc)(void) = NULL;
 
 static void UpdateLinkAndCallCallbacks(void);

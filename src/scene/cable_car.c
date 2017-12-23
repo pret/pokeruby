@@ -1,21 +1,22 @@
 
 // Includes
 #include "global.h"
+#include "ewram.h"
 #include "overworld.h"
 #include "palette.h"
-#include "rng.h"
+#include "random.h"
 #include "main.h"
 #include "script.h"
 #include "task.h"
 #include "sound.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "decompress.h"
 #include "field_weather.h"
 #include "field_map_obj.h"
 #include "unknown_task.h"
 #include "event_data.h"
 #include "cable_car_util.h"
-#include "map_object_constants.h"
+#include "constants/map_objects.h"
 
 // Static type declarations
 
@@ -28,7 +29,7 @@
     f;                       \
 })
 
-struct Unk_2017000 {
+struct CableCarEwramStruct1 {
     u8 unk_0000;
     u8 unk_0001;
     u8 unk_0002;
@@ -48,19 +49,16 @@ struct Unk_2017000 {
     u16 unk_08fc[0x400];
 }; // size 0x10FC
 
-struct Unk_2019000 {
+struct CableCarEwramStruct2 {
     /* 0x000 */ u16 mtChimneyTilemap[0xb4];
     /* 0x168 */ u16 treeTilemap[0x1e0];
     /* 0x528 */ u16 mountainTilemap[0x258];
     /* 0x9d8 */ u16 pylonStemTilemap[0x628]; // size not actually known
 };
 
-#define ewram_17000 (*(struct Unk_2017000 *)(ewram + 0x17000))
-#define ewram_19000 (*(struct Unk_2019000 *)(ewram + 0x19000))
-
 // Static RAM declarations
 
-EWRAM_DATA struct Unk_2017000 *gUnknown_02039274 = NULL;
+EWRAM_DATA struct CableCarEwramStruct1 *gUnknown_02039274 = NULL;
 EWRAM_DATA u8 gUnknown_02039278 = 0;
 EWRAM_DATA u8 gUnknown_02039279 = 0;
 EWRAM_DATA u8 gUnknown_0203927A = 0;
@@ -206,8 +204,8 @@ void sub_8123244(void)
             DmaFill16Large(3, 0, VRAM, VRAM_SIZE, 0x1000);
             DmaFill32Defvars(3, 0, OAM, OAM_SIZE);
             DmaFill16Defvars(3, 0, PLTT, PLTT_SIZE);
-            gUnknown_02039274 = &ewram_17000;
-            DmaFill16Large(3, 0, &ewram_17000, 0x10FC, 0x1000);
+            gUnknown_02039274 = eCableCar1;
+            DmaFill16Large(3, 0, eCableCar1, 0x10FC, 0x1000);
             gMain.state ++;
             break;
         case 1:
@@ -215,10 +213,10 @@ void sub_8123244(void)
             ResetTasks();
             FreeAllSpritePalettes();
             ResetPaletteFade();
-            sub_807C828();
+            StartWeather();
             for (i = 0; i < 20; i ++)
             {
-                gUnknown_08396FC4->unk_0f0[i] = NULL;
+                gWeatherPtr->sprites.s2.ashSprites[i] = NULL;
             }
             InitMapMusic();
             ResetMapMusic();
@@ -231,10 +229,10 @@ void sub_8123244(void)
                 LoadCompressedObjectPic(&gUnknown_08401CF8[i]);
             }
             LoadSpritePalettes(gUnknown_08401D18);
-            LZDecompressWram(gCableCarMtChimneyTilemap, ewram_19000.mtChimneyTilemap);
-            LZDecompressWram(gCableCarTreeTilemap, ewram_19000.treeTilemap);
-            LZDecompressWram(gCableCarMountainTilemap, ewram_19000.mountainTilemap);
-            LZDecompressWram(gCableCarPylonStemTilemap, ewram_19000.pylonStemTilemap);
+            LZDecompressWram(gCableCarMtChimneyTilemap, eCableCar2->mtChimneyTilemap);
+            LZDecompressWram(gCableCarTreeTilemap, eCableCar2->treeTilemap);
+            LZDecompressWram(gCableCarMountainTilemap, eCableCar2->mountainTilemap);
+            LZDecompressWram(gCableCarPylonStemTilemap, eCableCar2->pylonStemTilemap);
             LoadPalette(gCableCarBG_Pal, 0, 0x80);
             LZ77UnCompVram(gCableCarBG_Gfx, (u16 *)BG_VRAM);
             gMain.state ++;
@@ -249,35 +247,35 @@ void sub_8123244(void)
             {
                 gMain.state ++;
             }
-            else if (gUnknown_08396FC4->unk_0f0[0] != NULL)
+            else if (gWeatherPtr->sprites.s2.ashSprites[0] != NULL)
             {
                 for (i = 0; i < 20; i ++)
                 {
-                    if (gUnknown_08396FC4->unk_0f0[i] != NULL)
+                    if (gWeatherPtr->sprites.s2.ashSprites[i] != NULL)
                     {
-                        gUnknown_08396FC4->unk_0f0[i]->oam.priority = 0;
+                        gWeatherPtr->sprites.s2.ashSprites[i]->oam.priority = 0;
                     }
                 }
                 gMain.state ++;
             }
             break;
         case 5:
-            sub_8124F08((u16 *)BG_SCREEN_ADDR(29), ewram_19000.treeTilemap, 0, 17, 32, 15);
-            sub_8124F08((u16 *)BG_SCREEN_ADDR(30), ewram_19000.mountainTilemap, 0, 0, 30, 20);
+            sub_8124F08((u16 *)BG_SCREEN_ADDR(29), eCableCar2->treeTilemap, 0, 17, 32, 15);
+            sub_8124F08((u16 *)BG_SCREEN_ADDR(30), eCableCar2->mountainTilemap, 0, 0, 30, 20);
             sub_8124F08(gUnknown_02039274->unk_08fc, gCableCarPylonHookTilemapEntries, 0, 0, 5, 2);
-            sub_8124F08(gUnknown_02039274->unk_08fc, ewram_19000.pylonStemTilemap, 0, 2, 2, 20);
+            sub_8124F08(gUnknown_02039274->unk_08fc, eCableCar2->pylonStemTilemap, 0, 2, 2, 20);
             gMain.state ++;
             break;
         case 6:
             sub_81248AC(gSpecialVar_0x8004);
-            sub_8124F08(gUnknown_02039274->unk_00fc, ewram_19000.mtChimneyTilemap + 0x48, 0, 14, 12, 3);
-            sub_8124F08(gUnknown_02039274->unk_00fc, ewram_19000.mtChimneyTilemap + 0x6C, 12, 17, 12, 3);
-            sub_8124F08(gUnknown_02039274->unk_00fc, ewram_19000.mtChimneyTilemap + 0x90, 24, 20, 12, 3);
-            sub_8124F08(gUnknown_02039274->unk_00fc, ewram_19000.mtChimneyTilemap + 0x00, 0, 17, 12, 3);
-            sub_8124F08(gUnknown_02039274->unk_00fc, ewram_19000.mtChimneyTilemap + 0x24, 0, 20, 12, 3);
-            sub_8124F08(gUnknown_02039274->unk_00fc, ewram_19000.mtChimneyTilemap + 0x00, 12, 20, 12, 3);
-            sub_8124F08(gUnknown_02039274->unk_00fc, ewram_19000.mtChimneyTilemap + 0x24, 12, 23, 12, 3);
-            sub_8124F08(gUnknown_02039274->unk_00fc, ewram_19000.mtChimneyTilemap + 0x00, 24, 23, 12, 3);
+            sub_8124F08(gUnknown_02039274->unk_00fc, eCableCar2->mtChimneyTilemap + 0x48, 0, 14, 12, 3);
+            sub_8124F08(gUnknown_02039274->unk_00fc, eCableCar2->mtChimneyTilemap + 0x6C, 12, 17, 12, 3);
+            sub_8124F08(gUnknown_02039274->unk_00fc, eCableCar2->mtChimneyTilemap + 0x90, 24, 20, 12, 3);
+            sub_8124F08(gUnknown_02039274->unk_00fc, eCableCar2->mtChimneyTilemap + 0x00, 0, 17, 12, 3);
+            sub_8124F08(gUnknown_02039274->unk_00fc, eCableCar2->mtChimneyTilemap + 0x24, 0, 20, 12, 3);
+            sub_8124F08(gUnknown_02039274->unk_00fc, eCableCar2->mtChimneyTilemap + 0x00, 12, 20, 12, 3);
+            sub_8124F08(gUnknown_02039274->unk_00fc, eCableCar2->mtChimneyTilemap + 0x24, 12, 23, 12, 3);
+            sub_8124F08(gUnknown_02039274->unk_00fc, eCableCar2->mtChimneyTilemap + 0x00, 24, 23, 12, 3);
             gMain.state ++;
             break;
         case 7:
@@ -325,12 +323,12 @@ void sub_8123740(void)
     sub_807C9B4(0);
     for (; i < 20; i ++)
     {
-        gUnknown_08396FC4->unk_0f0[i] = NULL;
+        gWeatherPtr->sprites.s2.ashSprites[i] = NULL;
     }
     ResetTasks();
     ResetSpriteData();
     ResetPaletteFade();
-    DmaFill32Large(3, 0, ewram, 0x20000, 0x1000);
+    DmaFill32Large(3, 0, gSharedMem, 0x20000, 0x1000);
     gUnknown_02039274 = NULL;
     DmaFill16Large(3, 0, VRAM, VRAM_SIZE, 0x1000);
     DmaFill32Defvars(3, 0, OAM, OAM_SIZE);
@@ -359,20 +357,20 @@ void sub_8123878(u8 taskId)
             switch (gUnknown_02039274->unk_0002)
             {
                 case 7:
-                    if (gUnknown_08396FC4->unk_0f0[0] != NULL && gUnknown_08396FC4->unk_0f0[0]->oam.priority != 0)
+                    if (gWeatherPtr->sprites.s2.ashSprites[0] != NULL && gWeatherPtr->sprites.s2.ashSprites[0]->oam.priority != 0)
                     {
                         for (; i < 20; i ++)
                         {
-                            if (gUnknown_08396FC4->unk_0f0[i] != NULL)
+                            if (gWeatherPtr->sprites.s2.ashSprites[i] != NULL)
                             {
-                                gUnknown_08396FC4->unk_0f0[i]->oam.priority = 0;
+                                gWeatherPtr->sprites.s2.ashSprites[i]->oam.priority = 0;
                             }
                         }
                         gUnknown_02039274->unk_0001 = 2;
                     }
                     break;
                 case 2:
-                    if (gUnknown_08396FC4->unknown_6D0 == 2)
+                    if (gWeatherPtr->currWeather == 2)
                     {
                         gUnknown_02039274->unk_0001 = 2;
                     }
@@ -380,9 +378,9 @@ void sub_8123878(u8 taskId)
                     {
                         for (; i < 20; i ++)
                         {
-                            if (gUnknown_08396FC4->unk_0f0[i] != NULL)
+                            if (gWeatherPtr->sprites.s2.ashSprites[i] != NULL)
                             {
-                                gUnknown_08396FC4->unk_0f0[i]->invisible ^= TRUE;
+                                gWeatherPtr->sprites.s2.ashSprites[i]->invisible ^= TRUE;
                             }
                         }
                     }
@@ -439,7 +437,7 @@ void sub_81239E4(u8 taskId)
                 break;
             case 16:
                 sub_8124F08(gUnknown_02039274->unk_08fc, gCableCarPylonHookTilemapEntries, 0, 0, 5, 2);
-                sub_8124F08(gUnknown_02039274->unk_08fc, ewram_19000.pylonStemTilemap, 0, 2, 2, 30);
+                sub_8124F08(gUnknown_02039274->unk_08fc, eCableCar2->pylonStemTilemap, 0, 2, 2, 30);
                 gUnknown_02039274->unk_0015 = 64;
                 break;
         }
@@ -465,7 +463,7 @@ void sub_8123AF8(u8 taskId)
         switch (gUnknown_02039274->unk_0014)
         {
             case 176:
-                sub_8124F08(gUnknown_02039274->unk_08fc, ewram_19000.pylonStemTilemap, 0, 2, 2, 30);
+                sub_8124F08(gUnknown_02039274->unk_08fc, eCableCar2->pylonStemTilemap, 0, 2, 2, 30);
                 break;
             case 16:
                 sub_8124E7C(gUnknown_02039274->unk_08fc, 0, 2, 0, 3, 2);
@@ -490,7 +488,7 @@ void sub_8123AF8(u8 taskId)
     }
     else
     {
-        gUnknown_08396FC4->unknown_6FC = (gUnknown_08396FC4->unknown_6FC + 247) % 248;
+        gWeatherPtr->unknown_6FC = (gWeatherPtr->unknown_6FC + 247) % 248;
     }
 }
 
@@ -520,13 +518,13 @@ void sub_8123CB8(struct Sprite *sprite)
     {
         if (gSpecialVar_0x8004 == 0)
         {
-            sprite->pos1.x = sprite->data0 - (u8)(0.14f * S16TOPOSFLOAT(gUnknown_02039274->unk_0006));
-            sprite->pos1.y = sprite->data1 - (u8)(0.067f * S16TOPOSFLOAT(gUnknown_02039274->unk_0006));
+            sprite->pos1.x = sprite->data[0] - (u8)(0.14f * S16TOPOSFLOAT(gUnknown_02039274->unk_0006));
+            sprite->pos1.y = sprite->data[1] - (u8)(0.067f * S16TOPOSFLOAT(gUnknown_02039274->unk_0006));
         }
         else
         {
-            sprite->pos1.x = sprite->data0 + (u8)(0.14f * S16TOPOSFLOAT(gUnknown_02039274->unk_0006));
-            sprite->pos1.y = sprite->data1 + (u8)(0.067f * S16TOPOSFLOAT(gUnknown_02039274->unk_0006));
+            sprite->pos1.x = sprite->data[0] + (u8)(0.14f * S16TOPOSFLOAT(gUnknown_02039274->unk_0006));
+            sprite->pos1.y = sprite->data[1] + (u8)(0.067f * S16TOPOSFLOAT(gUnknown_02039274->unk_0006));
         }
     }
 }
@@ -537,30 +535,30 @@ void sub_8123D98(struct Sprite *sprite)
     {
         if (gSpecialVar_0x8004 == 0)
         {
-            sprite->pos1.x = sprite->data0 - (u8)(0.14f * S16TOPOSFLOAT(gUnknown_02039274->unk_0006));
-            sprite->pos1.y = sprite->data1 - (u8)(0.067f * S16TOPOSFLOAT(gUnknown_02039274->unk_0006));
+            sprite->pos1.x = sprite->data[0] - (u8)(0.14f * S16TOPOSFLOAT(gUnknown_02039274->unk_0006));
+            sprite->pos1.y = sprite->data[1] - (u8)(0.067f * S16TOPOSFLOAT(gUnknown_02039274->unk_0006));
         }
         else
         {
-            sprite->pos1.x = sprite->data0 + (u8)(0.14f * S16TOPOSFLOAT(gUnknown_02039274->unk_0006));
-            sprite->pos1.y = sprite->data1 + (u8)(0.067f * S16TOPOSFLOAT(gUnknown_02039274->unk_0006));
+            sprite->pos1.x = sprite->data[0] + (u8)(0.14f * S16TOPOSFLOAT(gUnknown_02039274->unk_0006));
+            sprite->pos1.y = sprite->data[1] + (u8)(0.067f * S16TOPOSFLOAT(gUnknown_02039274->unk_0006));
         }
-        switch (sprite->data2)
+        switch (sprite->data[2])
         {
             case 0:
                 sprite->pos2.y = 17;
-                if (sprite->data3 ++ > 9)
+                if (sprite->data[3] ++ > 9)
                 {
-                    sprite->data3 = 0;
-                    sprite->data2 ++;
+                    sprite->data[3] = 0;
+                    sprite->data[2] ++;
                 }
                 break;
             default:
                 sprite->pos2.y = 16;
-                if (sprite->data3 ++ > 9)
+                if (sprite->data[3] ++ > 9)
                 {
-                    sprite->data3 = 0;
-                    sprite->data2 = 0;
+                    sprite->data[3] = 0;
+                    sprite->data[2] = 0;
                 }
                 break;
         }
@@ -569,24 +567,24 @@ void sub_8123D98(struct Sprite *sprite)
 
 void sub_8123EB8(struct Sprite *sprite)
 {
-    if (sprite->data0 == 0)
+    if (sprite->data[0] == 0)
     {
         sprite->pos1.x += 2 * sprite->centerToCornerVecX;
         sprite->pos1.y += 16 + sprite->centerToCornerVecY;
     }
-    if (++ sprite->data0 >= sprite->data2)
+    if (++ sprite->data[0] >= sprite->data[2])
     {
-        switch (sprite->data1)
+        switch (sprite->data[1])
         {
             case 0:
                 sprite->pos1.x ++;
-                if ((sprite->data0 % 4) == 0)
+                if ((sprite->data[0] % 4) == 0)
                 {
                     sprite->pos1.y ++;
                 }
                 break;
             case 1:
-                if ((sprite->data0 % 2) != 0)
+                if ((sprite->data[0] % 2) != 0)
                 {
                     sprite->pos1.x ++;
                     if ((sprite->pos1.x % 4) == 0)
@@ -605,23 +603,23 @@ void sub_8123EB8(struct Sprite *sprite)
 
 void sub_8123F44(struct Sprite *sprite)
 {
-    if (sprite->data0 == 0)
+    if (sprite->data[0] == 0)
     {
         sprite->pos1.y += 16 + sprite->centerToCornerVecY;
     }
-    if (++ sprite->data0 >= sprite->data2)
+    if (++ sprite->data[0] >= sprite->data[2])
     {
-        switch (sprite->data1)
+        switch (sprite->data[1])
         {
             case 0:
                 sprite->pos1.x --;
-                if ((sprite->data0 % 4) == 0)
+                if ((sprite->data[0] % 4) == 0)
                 {
                     sprite->pos1.y --;
                 }
                 break;
             case 1:
-                if ((sprite->data0 % 2) != 0)
+                if ((sprite->data[0] % 2) != 0)
                 {
                     sprite->pos1.x --;
                     if ((sprite->pos1.x % 4) == 0)
@@ -749,42 +747,42 @@ void sub_8124118(void)
                 gSprites[spriteId].oam.priority = 2;
                 gSprites[spriteId].pos2.x = 0x08;
                 gSprites[spriteId].pos2.y = 0x10;
-                gSprites[spriteId].data0 = 0xc8;
-                gSprites[spriteId].data1 = 0x49;
+                gSprites[spriteId].data[0] = 0xc8;
+                gSprites[spriteId].data[1] = 0x49;
             }
             spriteId = CreateSprite(&gSpriteTemplate_8401D40[0], 0xb0, 0x2b, 0x67);
             gSprites[spriteId].pos2.x = gSprites[spriteId].pos2.y = 0x20;
-            gSprites[spriteId].data0 = 0xb0;
-            gSprites[spriteId].data1 = 0x2b;
+            gSprites[spriteId].data[0] = 0xb0;
+            gSprites[spriteId].data[1] = 0x2b;
             spriteId = CreateSprite(&gSpriteTemplate_8401D40[1], 0xc8, 0x63, 0x65);
             gSprites[spriteId].pos2.x = 8;
             gSprites[spriteId].pos2.y = 4;
-            gSprites[spriteId].data0 = 0xc8;
-            gSprites[spriteId].data1 = 0x63;
+            gSprites[spriteId].data[0] = 0xc8;
+            gSprites[spriteId].data[1] = 0x63;
             gUnknown_02039274->unk_0002 = 7;
             gUnknown_02039274->unk_0004 = 0x15e;
             sub_807C9B4(2);
             break;
         case 1:
-            sub_8124F08(gUnknown_02039274->unk_00fc, ewram_19000.mtChimneyTilemap + 0x24, 0x18, 0x1a, 0x0c, 0x03);
+            sub_8124F08(gUnknown_02039274->unk_00fc, eCableCar2->mtChimneyTilemap + 0x24, 0x18, 0x1a, 0x0c, 0x03);
             spriteId = AddPseudoFieldObject(playerGraphicsIds[gSaveBlock2.playerGender], sub_8123D98, 0x80, 0x27, 0x66);
             if (spriteId != MAX_SPRITES)
             {
                 gSprites[spriteId].oam.priority = 2;
                 gSprites[spriteId].pos2.x = 0x08;
                 gSprites[spriteId].pos2.y = 0x10;
-                gSprites[spriteId].data0 = 0x80;
-                gSprites[spriteId].data1 = 0x27;
+                gSprites[spriteId].data[0] = 0x80;
+                gSprites[spriteId].data[1] = 0x27;
             }
             spriteId = CreateSprite(&gSpriteTemplate_8401D40[0], 0x68, 0x09, 0x67);
             gSprites[spriteId].pos2.x = gSprites[spriteId].pos2.y = 0x20;
-            gSprites[spriteId].data0 = 0x68;
-            gSprites[spriteId].data1 = 0x09;
+            gSprites[spriteId].data[0] = 0x68;
+            gSprites[spriteId].data[1] = 0x09;
             spriteId = CreateSprite(&gSpriteTemplate_8401D40[1], 0x80, 0x41, 0x65);
             gSprites[spriteId].pos2.x = 8;
             gSprites[spriteId].pos2.y = 4;
-            gSprites[spriteId].data0 = 0x80;
-            gSprites[spriteId].data1 = 0x41;
+            gSprites[spriteId].data[0] = 0x80;
+            gSprites[spriteId].data[1] = 0x41;
             gUnknown_02039274->unk_0002 = 2;
             gUnknown_02039274->unk_0004 = 0x109;
             sub_807C9B4(7);
@@ -809,13 +807,13 @@ void sub_8124118(void)
                 if (rval % 2)
                 {
                     StartSpriteAnim(&gSprites[spriteId], 6);
-                    gSprites[spriteId].data1 = 1;
+                    gSprites[spriteId].data[1] = 1;
                     gSprites[spriteId].pos1.y += 2;
                 }
                 else
                 {
                     StartSpriteAnim(&gSprites[spriteId], 7);
-                    gSprites[spriteId].data1 = 0;
+                    gSprites[spriteId].data[1] = 0;
                 }
             }
             else
@@ -823,16 +821,16 @@ void sub_8124118(void)
                 if (rval % 2)
                 {
                     StartSpriteAnim(&gSprites[spriteId], 7);
-                    gSprites[spriteId].data1 = 1;
+                    gSprites[spriteId].data[1] = 1;
                     gSprites[spriteId].pos1.y += 2;
                 }
                 else
                 {
                     StartSpriteAnim(&gSprites[spriteId], 6);
-                    gSprites[spriteId].data1 = 0;
+                    gSprites[spriteId].data[1] = 0;
                 }
             }
-            gSprites[spriteId].data2 = hikerMovementDelayTable[rval % 4];
+            gSprites[spriteId].data[2] = hikerMovementDelayTable[rval % 4];
         }
     }
 }
@@ -850,9 +848,9 @@ void sub_812446C(void)
     {
         for (j = 0; j < 12; j ++)
         {
-            gUnknown_02039274->unk_0022[i][k] = ewram_19000.mtChimneyTilemap[0][offset + k];
-            gUnknown_02039274->unk_0022[i + 3][k] = ewram_19000.mtChimneyTilemap[0][k];
-            gUnknown_02039274->unk_0022[i + 6][k] = ewram_19000.mtChimneyTilemap[2][k];
+            gUnknown_02039274->unk_0022[i][k] = eCableCar2->mtChimneyTilemap[0][offset + k];
+            gUnknown_02039274->unk_0022[i + 3][k] = eCableCar2->mtChimneyTilemap[0][k];
+            gUnknown_02039274->unk_0022[i + 6][k] = eCableCar2->mtChimneyTilemap[2][k];
             k ++;
         }
     }

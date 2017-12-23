@@ -19,8 +19,8 @@
 #include "field_effect.h"
 #include "sound.h"
 #include "trig.h"
+#include "ewram.h"
 
-extern u8 ewram[];
 extern struct MusicPlayerInfo gMPlay_BGM;
 extern u8 gPokeblockMonID;
 extern s16 gPokeblockGain;
@@ -540,7 +540,7 @@ static bool8 TransitionToPokeblockFeedScene(void)
     case 6:
         if (MultistepInitMenuWindowContinue())
         {
-            ewram[0x1FFFF] = 0;
+            ewram1FFFF = 0;
             gMain.state++;
         }
         break;
@@ -551,11 +551,11 @@ static bool8 TransitionToPokeblockFeedScene(void)
         }
         break;
     case 8:
-        ewram[0x1FFFD] = sub_81480B4();
+        ewram1FFFD = sub_81480B4();
         gMain.state++;
         break;
     case 9:
-        ewram[0x1FFFE] = PokeblockFeed_CreatePokeSprite(&gPlayerParty[gPokeblockMonID]);
+        ewram1FFFE = PokeblockFeed_CreatePokeSprite(&gPlayerParty[gPokeblockMonID]);
         gMain.state++;
         break;
     case 10:
@@ -611,13 +611,13 @@ static bool8 sub_8147B20(struct Pokemon* mon)
 {
     u16 species;
     u32 PiD, TiD;
-    switch (ewram[0x1FFFF])
+    switch (ewram1FFFF)
     {
     case 0:
         species = GetMonData(mon, MON_DATA_SPECIES2);
         PiD = GetMonData(mon, MON_DATA_PERSONALITY);
         HandleLoadSpecialPokePic(&gMonFrontPicTable[species], gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset, 0x2000000, gUnknown_081FAF4C[1], species, PiD);
-        ewram[0x1FFFF]++;
+        ewram1FFFF++;
         break;
     case 1:
         {
@@ -629,37 +629,37 @@ static bool8 sub_8147B20(struct Pokemon* mon)
             palette = GetMonSpritePalStructFromOtIdPersonality(species, TiD, PiD);
             LoadCompressedObjectPalette(palette);
             GetMonSpriteTemplate_803C56C(palette->tag, 1);
-            ewram[0x1FFFF]++;
+            ewram1FFFF++;
         }
         break;
     case 2:
         LoadCompressedObjectPic(&gUnknown_083F7F74);
-        ewram[0x1FFFF]++;
+        ewram1FFFF++;
         break;
     case 3:
         LoadCompressedObjectPalette(&gUnknown_083F7F7C);
-        ewram[0x1FFFF]++;
+        ewram1FFFF++;
         break;
     case 4:
         LoadCompressedObjectPic(&sUnknown_084121DC);
-        ewram[0x1FFFF]++;
+        ewram1FFFF++;
         break;
     case 5:
-        SetPokeblockFeedSpritePal(gScriptItemId);
+        SetPokeblockFeedSpritePal(gSpecialVar_ItemId);
         LoadCompressedObjectPalette(&sPokeblockFeedSpritePal);
-        ewram[0x1FFFF]++;
+        ewram1FFFF++;
         break;
     case 6:
         LZDecompressVram(gBattleTerrainTiles_Building, (void*)(VRAM));
-        ewram[0x1FFFF]++;
+        ewram1FFFF++;
         break;
     case 7:
         LZDecompressVram(gUnknown_08E782FC, (void*)(VRAM + 0xE800));
-        ewram[0x1FFFF]++;
+        ewram1FFFF++;
         break;
     case 8:
         LoadCompressedPalette(gBattleTerrainPalette_BattleTower, 0x20, 0x60);
-        ewram[0x1FFFF] = 0;
+        ewram1FFFF = 0;
         return TRUE;
     }
     return FALSE;
@@ -684,13 +684,13 @@ static void sub_8147CC8(u8 taskID)
             sub_81481DC();
             break;
         case 255:
-            sub_8148108(ewram[0x1FFFD], gTasks[taskID].data[1]);
+            sub_8148108(ewram1FFFD, gTasks[taskID].data[1]);
             break;
         case 269:
-            ewram[0x1FFFC] = CreatePokeblockSprite();
+            ewram1FFFC = CreatePokeblockSprite();
             break;
         case 281:
-            sub_8148044(ewram[0x1FFFE]);
+            sub_8148044(ewram1FFFE);
             break;
         case 297:
             gTasks[taskID].func = Task_PrintAtePokeblockText;
@@ -722,7 +722,7 @@ static void Task_WaitForAtePokeblockText(u8 taskID)
 static void Task_PrintAtePokeblockText(u8 taskID)
 {
     struct Pokemon* mon = &gPlayerParty[gPokeblockMonID];
-    struct Pokeblock* pokeblock = &gSaveBlock1.pokeblocks[gScriptItemId];
+    struct Pokeblock* pokeblock = &gSaveBlock1.pokeblocks[gSpecialVar_ItemId];
 
     gPokeblockGain = PokeblockGetGain(GetNature(mon), pokeblock);
     GetMonNickname(mon, gStringVar1);
@@ -763,7 +763,7 @@ static u8 PokeblockFeed_CreatePokeSprite(struct Pokemon* mon)
     gPokeblockFeedMonSpecies = species;
     gPokeblockFeedMonSpriteID = spriteID;
     gPokeblockFeedMonNature = GetNature(mon);
-    gSprites[spriteID].data2 = species;
+    gSprites[spriteID].data[2] = species;
     gSprites[spriteID].callback = SpriteCallbackDummy;
     gPokeblockMonNotFlipped = 1;
     if (!IsPokeSpriteNotFlipped(species))
@@ -780,19 +780,19 @@ static void sub_8148044(u8 spriteID)
 {
     gSprites[spriteID].pos1.x = 48;
     gSprites[spriteID].pos1.y = 80;
-    gSprites[spriteID].data0 = -8;
-    gSprites[spriteID].data1 = 1;
+    gSprites[spriteID].data[0] = -8;
+    gSprites[spriteID].data[1] = 1;
     gSprites[spriteID].callback = sub_8148078;
 }
 
 static void sub_8148078(struct Sprite* sprite)
 {
     sprite->pos1.x += 4;
-    sprite->pos1.y += sprite->data0;
-    sprite->data0 += sprite->data1;
-    if (sprite->data0 == 0)
-        PlayCry1(sprite->data2, 0);
-    if (sprite->data0 == 9)
+    sprite->pos1.y += sprite->data[0];
+    sprite->data[0] += sprite->data[1];
+    if (sprite->data[0] == 0)
+        PlayCry1(sprite->data[2], 0);
+    if (sprite->data[0] == 9)
         sprite->callback = SpriteCallbackDummy;
 }
 
@@ -820,17 +820,17 @@ static void sub_8148108(u8 spriteID, bool8 a1)
 static u8 CreatePokeblockSprite(void)
 {
     u8 spriteID = CreateSprite(&sThrownPokeblockSpriteTemplate, 174, 84, 1);
-    gSprites[spriteID].data0 = -12;
-    gSprites[spriteID].data1 = 1;
+    gSprites[spriteID].data[0] = -12;
+    gSprites[spriteID].data[1] = 1;
     return spriteID;
 }
 
 static void SpriteCB_ThrownPokeblock(struct Sprite* sprite)
 {
     sprite->pos1.x -= 4;
-    sprite->pos1.y += sprite->data0;
-    sprite->data0 += sprite->data1;
-    if (sprite->data0 == 10)
+    sprite->pos1.y += sprite->data[0];
+    sprite->data[0] += sprite->data[1];
+    if (sprite->data[0] == 10)
         DestroySprite(sprite);
 }
 
@@ -928,14 +928,11 @@ static bool8 sub_8148540(void)
     }
 }
 
-#define ewram1D000 ((u16 *)(ewram + 0x1D000))
-#define ewram1D400 ((u16 *)(ewram + 0x1D400))
-
 static bool8 sub_81485CC(void)
 {
     u16 var = gUnknown_03005FA0[12] - gUnknown_03005FA0[4];
 
-    gPokeblockFeedPokeSprite->pos2.x = ewram1D000[var];
+    gPokeblockFeedPokeSprite->pos2.x = ewram1D000_2[var];
     gPokeblockFeedPokeSprite->pos2.y = ewram1D400[var];
 
     if (--gUnknown_03005FA0[4] == 0)
@@ -960,7 +957,7 @@ static void sub_814862C(void)
 
     for (i = 0; i < r7 - 1; i++)
     {
-        s16* r3 = &ewram1D000[r8 + i];
+        s16* r3 = &ewram1D000_2[r8 + i];
         s16 r1 = *r3 - (var3);
 
         s16* r5 = &ewram1D400[r8 + i];
@@ -970,7 +967,7 @@ static void sub_814862C(void)
         *r5 -= r4 * (i + 1) / r7;
     }
 
-    ewram1D000[(r8 + r7) - 1] = var3;
+    ewram1D000_2[(r8 + r7) - 1] = var3;
     ewram1D400[(r8 + r7) - 1] = r9;
 }
 
@@ -999,12 +996,12 @@ void sub_8148710(void)
 
         if (!var_24)
         {
-            ewram1D000[r4] = Sin(gUnknown_03005FA0[0], gUnknown_03005FA0[2] + r5 / 256) + r8;
+            ewram1D000_2[r4] = Sin(gUnknown_03005FA0[0], gUnknown_03005FA0[2] + r5 / 256) + r8;
             ewram1D400[r4] = Cos(gUnknown_03005FA0[0], gUnknown_03005FA0[3] + r5 / 256) + r7;
         }
         else
         {
-            ewram1D000[r4] = Sin(gUnknown_03005FA0[0], gUnknown_03005FA0[2] - r5 / 256) + r8;
+            ewram1D000_2[r4] = Sin(gUnknown_03005FA0[0], gUnknown_03005FA0[2] - r5 / 256) + r8;
             ewram1D400[r4] = Cos(gUnknown_03005FA0[0], gUnknown_03005FA0[3] - r5 / 256) + r7;
         }
 

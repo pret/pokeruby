@@ -12,15 +12,13 @@
 #include "pokemon_summary_screen.h"
 #include "rom_8077ABC.h"
 #include "rom_8094928.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
 #include "text.h"
-
-extern u8 ewram[];
-#define UNK_201606C_ARRAY (ewram + 0x1606C) // lazy define but whatever.
+#include "ewram.h"
 
 extern u8 sub_806BD58(u8, u8);
 extern void PartyMenuPrintMonsLevelOrStatus(void);
@@ -206,7 +204,7 @@ void sub_8094B6C(u8 a, u8 b, u8 c)
 
     if (IsLinkDoubleBattle())
     {
-        u8 *arr = ewram + 0x1606C + a * 3;
+        u8 *arr = &ewram1606Carr(0, a);
 
         for (i = 0, j = 0; i < 3; i++)
         {
@@ -428,7 +426,7 @@ bool8 SetUpBattlePartyMenu(void)
     case 10:
         if (gUnknown_02038473 == 3)
         {
-            if (GetItemEffectType(gScriptItemId) == 10)
+            if (GetItemEffectType(gSpecialVar_ItemId) == 10)
                 ewram1B000.promptTextId = 0xFF;
             else
                 ewram1B000.promptTextId = 3;
@@ -466,9 +464,9 @@ void HandleBattlePartyMenu(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        if (gUnknown_02038473 == 3 && GetItemEffectType(gScriptItemId) == 10)
+        if (gUnknown_02038473 == 3 && GetItemEffectType(gSpecialVar_ItemId) == 10)
         {
-            gUnknown_03004AE4(taskId, gScriptItemId, Task_80952E4);
+            gUnknown_03004AE4(taskId, gSpecialVar_ItemId, Task_80952E4);
             return;
         }
 
@@ -482,7 +480,7 @@ void HandleBattlePartyMenu(u8 taskId)
                 else
                 {
                     sub_806D5A4();
-                    gUnknown_03004AE4(taskId, gScriptItemId, Task_80952E4);
+                    gUnknown_03004AE4(taskId, gSpecialVar_ItemId, Task_80952E4);
                 }
             }
             else
@@ -627,7 +625,7 @@ static void Task_ShowSummaryScreen(u8 taskId)
     {
         DestroyTask(taskId);
         EWRAM_1B000.unk262 = 1;
-        ShowPokemonSummaryScreen(gPlayerParty, partySelection, gPlayerPartyCount - 1, Task_809535C, 4);
+        ShowPokemonSummaryScreen(gPlayerParty, partySelection, gPlayerPartyCount - 1, Task_809535C, PSS_MODE_NO_MOVE_ORDER_EDIT);
     }
 }
 

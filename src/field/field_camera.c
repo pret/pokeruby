@@ -7,7 +7,7 @@
 #include "sprite.h"
 #include "text.h"
 
-EWRAM_DATA u8 gUnknown_0202E854 = 0;
+EWRAM_DATA bool8 gUnusedBikeCameraAheadPanback = FALSE;
 
 struct UnknownStruct
 {
@@ -322,8 +322,8 @@ static void CameraUpdateCallback(struct CameraSomething *a)
 {
     if (a->unk4 != 0)
     {
-        a->unk8 = gSprites[a->unk4].data2;
-        a->unkC = gSprites[a->unk4].data3;
+        a->unk8 = gSprites[a->unk4].data[2];
+        a->unkC = gSprites[a->unk4].data[3];
     }
 }
 
@@ -455,13 +455,14 @@ static void CameraPanningCB_PanAhead(void)
 {
     u8 var;
 
-    if (gUnknown_0202E854 == 0)
+    if (gUnusedBikeCameraAheadPanback == FALSE)
     {
         InstallCameraPanAheadCallback();
     }
     else
     {
-        if (gPlayerAvatar.running1 == 1)
+        // this code is never reached.
+        if (gPlayerAvatar.tileTransitionState == T_TILE_TRANSITION)
         {
             gUnknown_0300059C ^= 1;
             if (gUnknown_0300059C == 0)

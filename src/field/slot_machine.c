@@ -3,6 +3,7 @@
 #include "decompress.h"
 #include "palette.h"
 #include "task.h"
+#include "ewram.h"
 
 struct UnkStruct2000000 {
     /*0x00*/ u8 filler00[61];
@@ -14,8 +15,6 @@ struct UnkStruct1 {
     /*0x01*/ u8 unk01;
     /*0x02*/ s16 unk02;
 };
-
-extern struct UnkStruct2000000 unk_2000000;
 
 extern struct UnkStruct1 *gUnknown_083ED048[];
 extern const u16 gPalette_83EDE24[];
@@ -40,7 +39,7 @@ void sub_8104CAC(u8 arg0) {
 
     sub_8104DA4();
 
-    task = &gTasks[unk_2000000.unk3D];
+    task = &gTasks[ewram0_8->unk3D];
     task->data[1] = arg0;
 
     i = 0;
@@ -71,9 +70,9 @@ void sub_8106448(void) {
     u32 offsetRead, offsetWrite;
     u32 size;
 
-    LZDecompressWram(gSlotMachine_Gfx, (void *) 0x02010000);
+    LZDecompressWram(gSlotMachine_Gfx, ewram10000_2);
 
-    offsetRead = 0x02010000;
+    offsetRead = (u32)ewram10000_2;
     offsetWrite = BG_VRAM;
     size = SLOTMACHINE_GFX_TILES * 32;
     while (TRUE)
@@ -94,7 +93,7 @@ void sub_8106448(void) {
 }
 
 void sub_81064B8(void) {
-    CpuCopy16(gUnknown_08E95AB8, (void *) BG_SCREEN_ADDR(29), 20 * 32 * 2);
+    CpuCopy16(gUnknown_08E95AB8, BG_SCREEN_ADDR(29), 20 * 32 * 2);
     LoadSlotMachineWheelOverlay();
 }
 
@@ -102,7 +101,7 @@ static void LoadSlotMachineWheelOverlay(void) {
     s16 x, y, dx;
     u16 *screen;
 
-    screen = (u16 *) BG_SCREEN_ADDR(30);
+    screen = BG_SCREEN_ADDR(30);
 
     for (x = 4; x < 18; x += 5)
     {
@@ -125,7 +124,7 @@ static void LoadSlotMachineWheelOverlay(void) {
 }
 
 void sub_81065A8(s16 arg0, u16 arg1, u16 arg2, u16 arg3, u16 arg4) {
-    u16 *vram = (u16 *) BG_SCREEN_ADDR(29);
+    u16 *vram = BG_SCREEN_ADDR(29);
 
     vram[15 * 32 + arg0] = arg1;
     vram[15 * 32 + 1 + arg0] = arg2;
@@ -137,9 +136,9 @@ void sub_81065DC(void) {
     s16 y, x;
     u16 *screen;
 
-    CpuCopy16(gUnknown_08E95FB8, (void *) BG_SCREEN_ADDR(29), 20 * 32 * 2);
+    CpuCopy16(gUnknown_08E95FB8, BG_SCREEN_ADDR(29), 20 * 32 * 2);
 
-    screen = (u16 *) BG_SCREEN_ADDR(30);
+    screen = BG_SCREEN_ADDR(30);
     for (y = 0; y < 20; y++)
     {
         for (x = 0; x < 30; x++)

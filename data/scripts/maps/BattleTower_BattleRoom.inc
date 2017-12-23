@@ -16,8 +16,8 @@ BattleTower_BattleRoom_EventScript_1608FA:: @ 81608FA
 	addobject 1
 	applymovement 1, BattleTower_BattleRoom_Movement_160AC0
 	waitmovement 0
-	special sub_8135474
-	msgbox 0x20234cc, 4
+	special PrintBattleTowerTrainerGreeting
+	msgbox gStringVar4, 4
 	waitmessage
 	closemessage
 	special ScrSpecial_HealPlayerParty
@@ -35,7 +35,7 @@ BattleTower_BattleRoom_EventScript_1608FA:: @ 81608FA
 	special sub_8135668
 	setvar 0x8004, 3
 	special sub_810FF60
-	warp BattleTower_Lobby, 255, 6, 6
+	warp MAP_BATTLE_TOWER_LOBBY, 255, 6, 6
 	waitstate
 
 BattleTower_BattleRoom_EventScript_160961:: @ 8160961
@@ -101,7 +101,7 @@ BattleTower_BattleRoom_EventScript_160A56:: @ 8160A56
 	special sub_8135668
 	setvar 0x8004, 3
 	special sub_810FF60
-	warp BattleTower_Lobby, 255, 6, 6
+	warp MAP_BATTLE_TOWER_LOBBY, 255, 6, 6
 	waitstate
 
 BattleTower_BattleRoom_EventScript_160A94:: @ 8160A94
@@ -116,7 +116,7 @@ BattleTower_BattleRoom_EventScript_160A94:: @ 8160A94
 
 BattleTower_BattleRoom_EventScript_160AB1:: @ 8160AB1
 	fadescreen 1
-	special sub_8135C38
+	special BattleTower_SoftReset
 	end
 
 BattleTower_BattleRoom_Movement_160AB7:: @ 8160AB7

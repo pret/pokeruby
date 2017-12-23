@@ -11,12 +11,13 @@
 #include "pokemon_summary_screen.h"
 #include "overworld.h"
 #include "script.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "strings.h"
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
+#include "ewram.h"
 
 extern u8 gPlayerPartyCount;
 extern u8 gLastFieldPokeMenuOpened;
@@ -24,17 +25,16 @@ extern u8 gUnknown_020384F0;
 extern struct UnknownPokemonStruct2 gUnknown_02023A00[];
 extern u8 gUnknown_0202E8F6;
 extern struct Pokemon gUnknown_030042FC[];
-extern const u16 gBattleTowerBanlist[];
+extern const u16 gBattleTowerBannedSpecies[];
 
 EWRAM_DATA u8 gSelectedOrderFromParty[3] = {0};
 
 extern u8 sub_806BD58(u8, u8);
 extern void PartyMenuPrintMonsLevelOrStatus(void);
 extern void sub_806BC3C(u8, u8);
-extern void ShowPokemonSummaryScreen(struct Pokemon *, u8, u8, void (*)(void), int);
 extern u8 GetMonStatusAndPokerus();
 extern void PartyMenuPrintHP();
-extern bool8 sub_80F9344(void);
+extern bool8 sub_80F9344(void); 
 
 static void ClearPartySelection(void);
 static bool8 IsMonAllowedInBattleTower(struct Pokemon *);
@@ -176,15 +176,15 @@ static bool8 IsMonAllowedInBattleTower(struct Pokemon *pkmn)
             return TRUE;
     }
 
-    if ((gSaveBlock2.filler_A8.var_4AC & 1) == 0
+    if ((gSaveBlock2.battleTower.battleTowerLevelType) == 0
      && GetMonData(pkmn, MON_DATA_LEVEL) > 50)
         return FALSE;
 
     // Check if the pkmn is in the ban list
     species = GetMonData(pkmn, MON_DATA_SPECIES);
-    while (gBattleTowerBanlist[i] != 0xFFFF)
+    while (gBattleTowerBannedSpecies[i] != 0xFFFF)
     {
-        if (gBattleTowerBanlist[i] == species)
+        if (gBattleTowerBannedSpecies[i] == species)
             return FALSE;
         i++;
     }
@@ -429,11 +429,11 @@ static void sub_81225D4(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        u8 r4 = gSprites[gTasks[taskId].data[3] >> 8].data0;
+        u8 r4 = gSprites[gTasks[taskId].data[3] >> 8].data[0];
 
         DestroyTask(taskId);
         ewram1B000.unk262 = 1;
-        ShowPokemonSummaryScreen(gPlayerParty, r4, gPlayerPartyCount - 1, sub_81225A4, 0);
+        ShowPokemonSummaryScreen(gPlayerParty, r4, gPlayerPartyCount - 1, sub_81225A4, PSS_MODE_NORMAL);
     }
 }
 
@@ -879,11 +879,11 @@ static void sub_8123034(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        u8 r4 = gSprites[gTasks[taskId].data[3] >> 8].data0;
+        u8 r4 = gSprites[gTasks[taskId].data[3] >> 8].data[0];
 
         DestroyTask(taskId);
         ewram1B000.unk262 = 1;
-        ShowPokemonSummaryScreen(gPlayerParty, r4, gPlayerPartyCount - 1, sub_8123004, 0);
+        ShowPokemonSummaryScreen(gPlayerParty, r4, gPlayerPartyCount - 1, sub_8123004, PSS_MODE_NORMAL);
     }
 }
 

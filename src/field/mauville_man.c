@@ -2,14 +2,15 @@
 #include "bard_music.h"
 #include "mauville_man.h"
 #include "easy_chat.h"
+#include "constants/easy_chat.h"
 #include "event_data.h"
 #include "field_message_box.h"
 #include "m4a.h"
 #include "menu.h"
 #include "overworld.h"
-#include "rng.h"
+#include "random.h"
 #include "script.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "string_util.h"
 #include "strings.h"
@@ -20,7 +21,7 @@
 
 extern struct MusicPlayerInfo gMPlay_SE2;
 
-extern u16 gScriptResult;
+extern u16 gSpecialVar_Result;
 extern u16 gSpecialVar_0x8004;
 
 extern const u8 gTextStoryteller_Story1Title[];
@@ -257,12 +258,12 @@ static u8 GetCurrentMauvilleOldMan(void)
 
 void ScrSpecial_GetCurrentMauvilleMan(void)
 {
-    gScriptResult = GetCurrentMauvilleOldMan();
+    gSpecialVar_Result = GetCurrentMauvilleOldMan();
 }
 
 void ScrSpecial_HasBardSongBeenChanged(void)
 {
-    u16 *scriptResult = &gScriptResult; // why??
+    u16 *scriptResult = &gSpecialVar_Result; // why??
     struct MauvilleManBard *bard = &gSaveBlock1.mauvilleMan.bard;
 
     *scriptResult = bard->hasChangedSong;
@@ -349,7 +350,7 @@ void ScrSpecial_PlayBardSong(void)
 
 void ScrSpecial_GetHipsterSpokenFlag(void)
 {
-    u16 *scriptResult = &gScriptResult; // again??
+    u16 *scriptResult = &gSpecialVar_Result; // again??
     struct MauvilleManHipster *hipster = &gSaveBlock1.mauvilleMan.hipster;
 
     *scriptResult = hipster->alreadySpoken;
@@ -368,12 +369,12 @@ void ScrSpecial_HipsterTeachWord(void)
 
     if (var == 0xFFFF)
     {
-        gScriptResult = FALSE;
+        gSpecialVar_Result = FALSE;
     }
     else
     {
         EasyChat_GetWordText(gStringVar1, var);
-        gScriptResult = TRUE;
+        gSpecialVar_Result = TRUE;
     }
 }
 
@@ -383,12 +384,12 @@ void ScrSpecial_GiddyShouldTellAnotherTale(void)
 
     if (giddy->taleCounter == 10)
     {
-        gScriptResult = FALSE;
+        gSpecialVar_Result = FALSE;
         giddy->taleCounter = 0;
     }
     else
     {
-        gScriptResult = TRUE;
+        gSpecialVar_Result = TRUE;
     }
 }
 
@@ -420,7 +421,7 @@ void ScrSpecial_GenerateGiddyLine(void)
     else
         giddy->taleCounter++;
 
-    gScriptResult = TRUE;
+    gSpecialVar_Result = TRUE;
 }
 
 #ifdef NONMATCHING
@@ -1250,11 +1251,11 @@ static void Task_StoryListMenu(u8 taskId)
             break;
         if (selection == -1 || selection == GetFreeStorySlot())
         {
-            gScriptResult = 0;
+            gSpecialVar_Result = 0;
         }
         else
         {
-            gScriptResult = 1;
+            gSpecialVar_Result = 1;
             gUnknown_03000748 = selection;
         }
         HandleDestroyMenuCursors();
@@ -1265,7 +1266,7 @@ static void Task_StoryListMenu(u8 taskId)
     }
 }
 
-// Sets gScriptResult to TRUE if player selected a story
+// Sets gSpecialVar_Result to TRUE if player selected a story
 void ScrSpecial_StorytellerStoryListMenu(void)
 {
     CreateTask(Task_StoryListMenu, 0x50);

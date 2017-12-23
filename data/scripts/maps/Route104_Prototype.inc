@@ -16,9 +16,9 @@ Route104_Prototype_EventScript_160C4B:: @ 8160C4B
 	goto_if 0, Route104_Prototype_EventScript_160C99
 	checktrainerflag OPPONENT_MIKE_1
 	goto_if 0, Route104_Prototype_EventScript_160C99
-	setflag 215
+	setflag FLAG_ROUTE104_PROTOTYPE_COMPLETED_1
 	msgbox Route104_Prototype_Text_19B267, 4
-	checkflag 216
+	checkflag FLAG_ROUTE104_PROTOTYPE_COMPLETED_2
 	goto_if_eq Route104_Prototype_EventScript_160CFB
 	release
 	end
@@ -43,9 +43,9 @@ Route104_Prototype_EventScript_160CA3:: @ 8160CA3
 	goto_if 0, Route104_Prototype_EventScript_160CF1
 	checktrainerflag OPPONENT_MIKE_1
 	goto_if 0, Route104_Prototype_EventScript_160CF1
-	setflag 216
+	setflag FLAG_ROUTE104_PROTOTYPE_COMPLETED_2
 	msgbox Route104_Prototype_Text_19B2E9, 4
-	checkflag 215
+	checkflag FLAG_ROUTE104_PROTOTYPE_COMPLETED_1
 	goto_if_eq Route104_Prototype_EventScript_160CFB
 	release
 	end

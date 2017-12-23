@@ -1,9 +1,10 @@
 #include "global.h"
+#include "constants/decorations.h"
 #include "main.h"
-#include "map_object_constants.h"
+#include "constants/map_objects.h"
 #include "overworld.h"
 #include "sound.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "string_util.h"
 #include "menu.h"
 #include "menu_helpers.h"
@@ -18,6 +19,7 @@
 #include "event_data.h"
 #include "field_weather.h"
 #include "decoration.h"
+#include "ewram.h"
 
 EWRAM_DATA u8 *gUnknown_020388D0 = NULL;
 EWRAM_DATA u8 gUnknown_020388D4 = 0;
@@ -1494,7 +1496,7 @@ const union AnimCmd *const gSpriteAnimTable_83EC930[] = {
 };
 
 const struct SpriteFrameImage gSpriteImageTable_83EC934[] = {
-    {.data = (u8 *)&gUnknown_02038900.image, .size = sizeof gUnknown_02038900.image}
+    {.data = gUnknown_02038900.image, .size = sizeof(gUnknown_02038900.image)}
 };
 
 const struct SpriteTemplate gSpriteTemplate_83EC93C = {
@@ -1555,7 +1557,7 @@ const struct SpriteTemplate gSpriteTemplate_83ECA88 = {
 
 const struct YesNoFuncTable gUnknown_083ECAA0 = {.yesFunc = sub_8101848, .noFunc = sub_80FED3C};
 
-u8 *const unref_label_083ECAA8[] = {ewram};
+u8 *const unref_label_083ECAA8[] = {gSharedMem};
 
 // text
 
@@ -2320,12 +2322,12 @@ void sub_80FF474(void)
     u8 j;
     for (i=0; i<14; i++)
     {
-        if (FlagGet(i + 0xae) == 1)
+        if (FlagGet(i + FLAG_DECORATION_2) == 1)
         {
-            FlagClear(i + 0xae);
+            FlagClear(i + FLAG_DECORATION_2);
             for (j=0; j<gMapHeader.events->mapObjectCount; j++)
             {
-                if (gMapHeader.events->mapObjects[j].flagId == i + 0xae)
+                if (gMapHeader.events->mapObjects[j].flagId == i + FLAG_DECORATION_2)
                 {
                     break;
                 }
@@ -2438,11 +2440,11 @@ void AddDecorationIconObjectFromFieldObject(struct UnkStruct_02038900 * unk_0203
         sub_8100874(unk_02038900);
         sub_810070C(unk_02038900->palette, ((u16 *)gMapHeader.mapData->secondaryTileset->metatiles + 8 * unk_02038900->decoration->tiles[0])[7] >> 12);
         LoadSpritePalette(&gUnknown_083EC954);
-        gUnknown_020391A8 = gSprites[gUnknown_03004880.unk4].data0;
+        gUnknown_020391A8 = gSprites[gUnknown_03004880.unk4].data[0];
         gUnknown_03004880.unk4 = CreateSprite(&gSpriteTemplate_83EC93C, gUnknown_083EC900[unk_02038900->decoration->shape].x,  gUnknown_083EC900[unk_02038900->decoration->shape].y, 0);
     } else
     {
-        gUnknown_020391A8 = gSprites[gUnknown_03004880.unk4].data0;
+        gUnknown_020391A8 = gSprites[gUnknown_03004880.unk4].data[0];
         gUnknown_03004880.unk4 = AddPseudoFieldObject(unk_02038900->decoration->tiles[0], sub_81009A8, gUnknown_083EC900[unk_02038900->decoration->shape].x,  gUnknown_083EC900[unk_02038900->decoration->shape].y, 1);
         gSprites[gUnknown_03004880.unk4].oam.priority = 1;
     }
@@ -2519,8 +2521,8 @@ void sub_80FF960(u8 taskId)
 void sub_80FFAB0(u8 taskId)
 {
     gTasks[taskId].data[10] = 0;
-    gSprites[gUnknown_020391A8].data7 = 1;
-    gSprites[gUnknown_020391A9].data7 = 1;
+    gSprites[gUnknown_020391A8].data[7] = 1;
+    gSprites[gUnknown_020391A9].data[7] = 1;
     sub_810045C();
     sub_8100038(taskId);
 }
@@ -2528,8 +2530,8 @@ void sub_80FFAB0(u8 taskId)
 void sub_80FFB08(u8 taskId)
 {
     gTasks[taskId].data[10] = 0;
-    gSprites[gUnknown_020391A8].data7 = 1;
-    gSprites[gUnknown_020391A9].data7 = 1;
+    gSprites[gUnknown_020391A8].data[7] = 1;
+    gSprites[gUnknown_020391A9].data[7] = 1;
     sub_810045C();
     DisplayItemMessageOnField(taskId, gSecretBaseText_CancelDecorating, sub_8100248, 0);
 }
@@ -3399,13 +3401,13 @@ bool8 sub_8100430(void)
 void sub_810045C(void)
 {
     gUnknown_020391AA = 0;
-    gSprites[gUnknown_020391A8].data2 = 0;
-    gSprites[gUnknown_020391A8].data3 = 0;
+    gSprites[gUnknown_020391A8].data[2] = 0;
+    gSprites[gUnknown_020391A8].data[3] = 0;
 }
 
 void sub_8100494(u8 taskId)
 {
-    if (!gSprites[gUnknown_020391A8].data4)
+    if (!gSprites[gUnknown_020391A8].data[4])
     {
         if (gTasks[taskId].data[10] == 1)
         {
@@ -3419,29 +3421,29 @@ void sub_8100494(u8 taskId)
         if ((gMain.heldKeys & DPAD_ANY) == DPAD_UP)
         {
             gUnknown_020391AA = DIR_SOUTH;
-            gSprites[gUnknown_020391A8].data2 =  0;
-            gSprites[gUnknown_020391A8].data3 = -2;
+            gSprites[gUnknown_020391A8].data[2] =  0;
+            gSprites[gUnknown_020391A8].data[3] = -2;
             gTasks[taskId].data[1]--;
         }
         if ((gMain.heldKeys & DPAD_ANY) == DPAD_DOWN)
         {
             gUnknown_020391AA = DIR_NORTH;
-            gSprites[gUnknown_020391A8].data2 =  0;
-            gSprites[gUnknown_020391A8].data3 =  2;
+            gSprites[gUnknown_020391A8].data[2] =  0;
+            gSprites[gUnknown_020391A8].data[3] =  2;
             gTasks[taskId].data[1]++;
         }
         if ((gMain.heldKeys & DPAD_ANY) == DPAD_LEFT)
         {
             gUnknown_020391AA = DIR_WEST;
-            gSprites[gUnknown_020391A8].data2 = -2;
-            gSprites[gUnknown_020391A8].data3 =  0;
+            gSprites[gUnknown_020391A8].data[2] = -2;
+            gSprites[gUnknown_020391A8].data[3] =  0;
             gTasks[taskId].data[0]--;
         }
         if ((gMain.heldKeys & DPAD_ANY) == DPAD_RIGHT)
         {
             gUnknown_020391AA = DIR_EAST;
-            gSprites[gUnknown_020391A8].data2 =  2;
-            gSprites[gUnknown_020391A8].data3 =  0;
+            gSprites[gUnknown_020391A8].data[2] =  2;
+            gSprites[gUnknown_020391A8].data[3] =  0;
             gTasks[taskId].data[0]++;
         }
         if (!sub_8100430() || !sub_810038C(taskId))
@@ -3451,8 +3453,8 @@ void sub_8100494(u8 taskId)
     }
     if (gUnknown_020391AA)
     {
-        gSprites[gUnknown_020391A8].data4++;
-        gSprites[gUnknown_020391A8].data4 &= 7;
+        gSprites[gUnknown_020391A8].data[4]++;
+        gSprites[gUnknown_020391A8].data[4] &= 7;
     }
     if (!gTasks[taskId].data[10])
     {
@@ -3470,7 +3472,7 @@ void sub_8100494(u8 taskId)
 void sub_810065C(u8 taskId)
 {
     MenuZeroFillWindowRect(0, 0, 29, 19);
-    gSprites[gUnknown_020391A8].data7 = 0;
+    gSprites[gUnknown_020391A8].data[7] = 0;
     gTasks[taskId].data[10] = 0;
     gTasks[taskId].func = sub_8100494;
 }
@@ -3595,27 +3597,27 @@ void sub_8100930(u8 decoShape)
 
 void sub_81009A8(struct Sprite *sprite)
 {
-    sprite->data2 = 0;
-    sprite->data3 = 0;
-    sprite->data4 = 0;
-    sprite->data5 = 0;
-    sprite->data6 = 0;
-    sprite->data7 = 0;
+    sprite->data[2] = 0;
+    sprite->data[3] = 0;
+    sprite->data[4] = 0;
+    sprite->data[5] = 0;
+    sprite->data[6] = 0;
+    sprite->data[7] = 0;
     sprite->callback = sub_81009C0;
 }
 
 void sub_81009C0(struct Sprite *sprite)
 {
-    if (sprite->data7 == 0)
+    if (sprite->data[7] == 0)
     {
-        if (sprite->data6 < 15)
+        if (sprite->data[6] < 15)
         {
             sprite->invisible = 0;
         } else
         {
             sprite->invisible = 1;
         }
-        sprite->data6 = (sprite->data6 + 1) & 0x1f;
+        sprite->data[6] = (sprite->data[6] + 1) & 0x1f;
     } else
     {
         sprite->invisible = 0;
@@ -3645,10 +3647,10 @@ void sub_8100A7C(void)
 {
     u16 i;
     gSpecialVar_0x8005 = 0;
-    gScriptResult = 0;
+    gSpecialVar_Result = 0;
     if (gSpecialVar_0x8004 == gUnknown_02039234)
     {
-        gScriptResult = 1;
+        gSpecialVar_Result = 1;
     } else if (gDecorations[ewram_1f000.items[gUnknown_020391B4[gSpecialVar_0x8004].decorId]].permission == DECORPERM_SOLID_MAT)
     {
         gSpecialVar_0x8005 = gUnknown_020391B4[gSpecialVar_0x8004].flagId;
@@ -3759,7 +3761,7 @@ void SetUpPuttingAwayDecorationPlayerAvatar(void)
 {
     player_get_direction_lower_nybble();
     MenuZeroFillWindowRect(0, 0, 29, 19);
-    gUnknown_020391A8 = gSprites[gUnknown_03004880.unk4].data0;
+    gUnknown_020391A8 = gSprites[gUnknown_03004880.unk4].data[0];
     sub_81016C8();
     gUnknown_03004880.unk4 = CreateSprite(&gSpriteTemplate_83ECA88, 0x78, 0x50, 0);
     if (gSaveBlock2.playerGender == MALE)
@@ -3809,7 +3811,7 @@ void sub_8100E70(u8 taskId)
 void sub_8100EEC(u8 taskId)
 {
     MenuZeroFillWindowRect(0, 0, 29, 19);
-    gSprites[gUnknown_020391A8].data7 = 0;
+    gSprites[gUnknown_020391A8].data[7] = 0;
     gSprites[gUnknown_020391A8].invisible = 0;
     gSprites[gUnknown_020391A8].callback = sub_8101698;
     gSprites[gUnknown_020391A9].pos1.x = 0x88;
@@ -4197,8 +4199,8 @@ void sub_8101678(void)
 
 void sub_8101698(struct Sprite *sprite)
 {
-    sprite->data0 = (sprite->data0 + 1) & 0x1f;
-    if (sprite->data0 >= 16)
+    sprite->data[0] = (sprite->data[0] + 1) & 0x1f;
+    if (sprite->data[0] >= 16)
     {
         sprite->invisible = TRUE;
     } else

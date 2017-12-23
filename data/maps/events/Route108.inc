@@ -5,7 +5,7 @@ Route108_MapObjects:: @ 8381A74
 	object_event 4, MAP_OBJ_GFX_SWIMMER_F, 0, 36, 0, 12, 0, 1, 51, 54, 0, 1, 0, 3, 0, Route108_EventScript_14F4BB, 0, 0, 0
 
 Route108_MapWarps:: @ 8381AD4
-	warp_def 29, 6, 3, 0, AbandonedShip_Deck
+	warp_def 29, 6, 3, 0, MAP_ABANDONED_SHIP_DECK
 
 Route108_MapBGEvents:: @ 8381ADC
 	bg_event 38, 14, 3, 7, 0, ITEM_RARE_CANDY, 86, 0
