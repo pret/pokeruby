@@ -86,7 +86,6 @@ void m4aSoundInit(void)
     }
 
     gPokemonCrySong = gPokemonCrySongTemplate;
-//    memcpy(&gPokemonCrySong, &gPokemonCrySongTemplate, sizeof(struct PokemonCrySong));
 
     for (i = 0; i < MAX_POKEMON_CRIES; i++)
     {
