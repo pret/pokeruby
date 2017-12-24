@@ -3675,152 +3675,37 @@ void sub_80EFC3C(void)
 	sub_80EFD3C();
 }
 
-#ifdef NONMATCHING // "var1 = gUnknown_083DFEC4->unkBC9A;" is the only thing that doesnt' match.
 bool8 sub_80EFC64(void)
 {
 	u16 i;
-	u16 var1;
+	u8 var1;
 	u16 var2;
 
-	if (gUnknown_083DFEC4->unkBC9A < 16)
-	{
-		var1 = gUnknown_083DFEC4->unkBC9A;
-		var2 = gUnknown_083DFEC4->unkBC9B;
-		for (i = 0; i < 2; i++)
-		{
-			if (gPokenavCityMaps[var1][i] != 0)
-			{
-				LZ77UnCompVram(gPokenavCityMaps[var1][i], gUnknown_083DFEC4->unkBC9C[var2]);
-				gUnknown_083DFEC4->unkCDCC[var1][i] = gUnknown_083DFEC4->unkBC9C[var2];
-				var2++;
-			}
-			else
-			{
-				gUnknown_083DFEC4->unkCDCC[var1][i] = NULL;
-			}
-		}
+	if (gUnknown_083DFEC4->unkBC9A >= 16)
+        return FALSE;
 
-		gUnknown_083DFEC4->unkBC9A++;
-		if (gUnknown_083DFEC4->unkBC9A < 16)
-		{
-			gUnknown_083DFEC4->unkBC9B = var2;
-			return TRUE;
-		}
-	}
+    var1 = gUnknown_083DFEC4->unkBC9A;
+    var2 = gUnknown_083DFEC4->unkBC9B;
+    for (i = 0; i < 2; i++)
+    {
+        if (gPokenavCityMaps[var1][i] != 0)
+        {
+            LZ77UnCompVram(gPokenavCityMaps[var1][i], gUnknown_083DFEC4->unkBC9C[var2]);
+            gUnknown_083DFEC4->unkCDCC[var1][i] = gUnknown_083DFEC4->unkBC9C[var2];
+            var2++;
+        }
+        else
+        {
+            gUnknown_083DFEC4->unkCDCC[var1][i] = NULL;
+        }
+    }
 
-	return FALSE;
+    if (++gUnknown_083DFEC4->unkBC9A >= 16)
+        return FALSE;
+
+    gUnknown_083DFEC4->unkBC9B = var2;
+    return TRUE;
 }
-#else
-__attribute__((naked))
-bool8 sub_80EFC64(void)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r9\n\
-    mov r6, r8\n\
-    push {r6,r7}\n\
-    sub sp, 0x8\n\
-    ldr r4, _080EFCD0 @ =gUnknown_083DFEC4\n\
-    ldr r2, [r4]\n\
-    ldr r0, _080EFCD4 @ =0x0000bc9a\n\
-    adds r1, r2, r0\n\
-    ldrb r0, [r1]\n\
-    cmp r0, 0xF\n\
-    bhi _080EFD2C\n\
-    ldrb r1, [r1]\n\
-    mov r8, r1\n\
-    ldr r1, _080EFCD8 @ =0x0000bc9b\n\
-    adds r0, r2, r1\n\
-    ldrb r7, [r0]\n\
-    movs r2, 0\n\
-    ldr r0, _080EFCDC @ =gPokenavCityMaps\n\
-    mov r9, r0\n\
-    adds r3, r4, 0\n\
-_080EFC8E:\n\
-    lsls r0, r2, 2\n\
-    mov r4, r8\n\
-    lsls r1, r4, 3\n\
-    adds r6, r0, r1\n\
-    mov r1, r9\n\
-    adds r0, r6, r1\n\
-    ldr r1, [r0]\n\
-    cmp r1, 0\n\
-    beq _080EFCE8\n\
-    movs r0, 0xC8\n\
-    adds r5, r7, 0\n\
-    muls r5, r0\n\
-    ldr r4, _080EFCE0 @ =0x0000bc9c\n\
-    adds r5, r4\n\
-    ldr r4, [r3]\n\
-    adds r5, r4, r5\n\
-    adds r0, r1, 0\n\
-    adds r1, r5, 0\n\
-    str r2, [sp]\n\
-    str r3, [sp, 0x4]\n\
-    bl LZ77UnCompVram\n\
-    ldr r0, _080EFCE4 @ =0x0000cdcc\n\
-    adds r4, r0\n\
-    adds r4, r6\n\
-    str r5, [r4]\n\
-    adds r0, r7, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r7, r0, 16\n\
-    ldr r2, [sp]\n\
-    ldr r3, [sp, 0x4]\n\
-    b _080EFCF2\n\
-    .align 2, 0\n\
-_080EFCD0: .4byte gUnknown_083DFEC4\n\
-_080EFCD4: .4byte 0x0000bc9a\n\
-_080EFCD8: .4byte 0x0000bc9b\n\
-_080EFCDC: .4byte gPokenavCityMaps\n\
-_080EFCE0: .4byte 0x0000bc9c\n\
-_080EFCE4: .4byte 0x0000cdcc\n\
-_080EFCE8:\n\
-    ldr r0, [r3]\n\
-    ldr r4, _080EFD1C @ =0x0000cdcc\n\
-    adds r0, r4\n\
-    adds r0, r6\n\
-    str r1, [r0]\n\
-_080EFCF2:\n\
-    adds r0, r2, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r2, r0, 16\n\
-    cmp r2, 0x1\n\
-    bls _080EFC8E\n\
-    ldr r0, _080EFD20 @ =gUnknown_083DFEC4\n\
-    ldr r2, [r0]\n\
-    ldr r0, _080EFD24 @ =0x0000bc9a\n\
-    adds r1, r2, r0\n\
-    ldrb r0, [r1]\n\
-    adds r0, 0x1\n\
-    strb r0, [r1]\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0xF\n\
-    bhi _080EFD2C\n\
-    ldr r1, _080EFD28 @ =0x0000bc9b\n\
-    adds r0, r2, r1\n\
-    strb r7, [r0]\n\
-    movs r0, 0x1\n\
-    b _080EFD2E\n\
-    .align 2, 0\n\
-_080EFD1C: .4byte 0x0000cdcc\n\
-_080EFD20: .4byte gUnknown_083DFEC4\n\
-_080EFD24: .4byte 0x0000bc9a\n\
-_080EFD28: .4byte 0x0000bc9b\n\
-_080EFD2C:\n\
-    movs r0, 0\n\
-_080EFD2E:\n\
-    add sp, 0x8\n\
-    pop {r3,r4}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    pop {r4-r7}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .syntax divided\n");
-}
-#endif // NONMATCHING
 
 void sub_80EFD3C(void)
 {
