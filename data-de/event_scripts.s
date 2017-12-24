@@ -8,6 +8,7 @@
 #include "constants/opponents.h"
 #include "constants/songs.h"
 #include "constants/species.h"
+#include "constants/vars.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.include "constants/constants.inc"
