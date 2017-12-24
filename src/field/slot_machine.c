@@ -86,10 +86,16 @@ static void sub_8102484(void);
 static void sub_81024F0(void);
 static bool8 sub_8102540(void);
 static u8 sub_8102578(void);
-u8 sub_81025BC(void);
-void sub_81027A0(void);
+u16 dp15_jump_random_unknown(void);
+static u8 sub_81025BC(void);
+static void sub_81027A0(void);
+void sub_81027D0(void);
+void sub_8102840(void);
+void sub_810290C(void);
+u8 sub_81029D4(u8 a0, u8 a1, u8 a2);
 void sub_8102A24(void);
 bool8 sub_8102A44(void);
+u8 sub_8102BA4(u8 a0, u8 a1);
 void sub_8102DA8(void);
 void sub_8102DEC(u8 a0);
 void sub_8102E1C(u8 a0);
@@ -98,6 +104,7 @@ void sub_8103C14(u8 a0);
 void sub_8103D50(u8 a0);
 void sub_8103D8C(u8 a0);
 void sub_8103DC8(void);
+void sub_8103E04(u8 a0);
 void sub_8103F70(void);
 bool8 sub_8103FA0(void);
 void sub_8104048(void);
@@ -117,7 +124,6 @@ void sub_81050C4(void);
 void sub_81063C0(void);
 static void sub_8106448(void);
 void sub_81064B8(void);
-u16 dp15_jump_random_unknown(void);
 
 static bool8 (*const gUnknown_083ECAAC[])(struct Task *task) = {
     sub_8101D5C,
@@ -894,7 +900,7 @@ static u8 sub_8102578(void)
 
 extern const u8 gUnknown_083ECD28[][6];
 
-u8 sub_81025BC(void)
+static u8 sub_81025BC(void)
 {
     s16 i;
 
@@ -1009,6 +1015,34 @@ u16 dp15_jump_random_unknown(void)
         return 2;
     }
     return 8;
+}
+
+static void sub_81027A0(void)
+{
+    eSlotMachine->unk08 = 0;
+    sub_81027D0();
+    if (eSlotMachine->bet > 1)
+    {
+        sub_8102840();
+    }
+    if (eSlotMachine->bet > 2)
+    {
+        sub_810290C();
+    }
+}
+
+extern const u16 gUnknown_083ECE6C[];
+extern const u16 gUnknown_083ECE5A[];
+
+void sub_81027D0(void)
+{
+    u8 payout = sub_81029D4(sub_8102BA4(0, 2), sub_8102BA4(1, 2), sub_8102BA4(2, 2));
+    if (payout != 9)
+    {
+        eSlotMachine->unk0E += gUnknown_083ECE6C[payout];
+        eSlotMachine->unk08 |= gUnknown_083ECE5A[payout];
+        sub_8103E04(0);
+    }
 }
 
 asm(".section .text_a");
