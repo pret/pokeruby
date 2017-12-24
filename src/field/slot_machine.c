@@ -874,60 +874,57 @@ static bool8 sub_8102540(void)
     return FALSE;
 }
 
-extern const u8 gUnknown_083ECD16[][3];
+extern const u8 gUnknown_083ECD16[][6];
 
-#ifdef NONMATCHING
 static u8 sub_8102578(void)
 {
     s16 i;
 
     for (i = 0; i < 3; i++)
     {
-        if ((Random() & 0xff) <= gUnknown_083ECD16[i][eSlotMachine->unk01])
+        s16 rval = Random() & 0xff;
+        s16 value = gUnknown_083ECD16[i][eSlotMachine->unk01];
+        if (value > rval)
         {
             break;
         }
     }
     return i;
 }
-#else
-static __attribute__((naked)) u8 sub_8102578(void)
+
+extern const u8 gUnknown_083ECD28[][6];
+
+u8 sub_81025BC(void)
 {
-    asm_unified("\tpush {r4-r6,lr}\n"
-                    "\tmovs r5, 0\n"
-                    "\tldr r6, =gUnknown_083ECD16\n"
-                    "_0810257E:\n"
-                    "\tbl Random\n"
-                    "\tmovs r2, 0xFF\n"
-                    "\tldr r3, =gSharedMem\n"
-                    "\tlsls r1, r5, 16\n"
-                    "\tasrs r4, r1, 16\n"
-                    "\tlsls r1, r4, 1\n"
-                    "\tadds r1, r4\n"
-                    "\tlsls r1, 1\n"
-                    "\tldrb r3, [r3, 0x1]\n"
-                    "\tadds r1, r3\n"
-                    "\tadds r1, r6\n"
-                    "\tldrb r1, [r1]\n"
-                    "\tands r2, r0\n"
-                    "\tcmp r1, r2\n"
-                    "\tbgt _081025AA\n"
-                    "\tadds r0, r4, 0x1\n"
-                    "\tlsls r0, 16\n"
-                    "\tlsrs r5, r0, 16\n"
-                    "\tasrs r0, 16\n"
-                    "\tcmp r0, 0x2\n"
-                    "\tble _0810257E\n"
-                    "_081025AA:\n"
-                    "\tlsls r0, r5, 24\n"
-                    "\tlsrs r0, 24\n"
-                    "\tpop {r4-r6}\n"
-                    "\tpop {r1}\n"
-                    "\tbx r1\n"
-                    "\t.align 2, 0\n"
-                    "\t.pool");
+    s16 i;
+
+    for (i = 0; i < 5; i++)
+    {
+        s16 rval = Random() & 0xff;
+        s16 r3 = gUnknown_083ECD28[i][eSlotMachine->unk01];
+        if (i == 0 && eSlotMachine->unk03 == 1)
+        {
+            r3 += 10;
+            if (r3 > 0x100)
+            {
+                r3 = 0x100;
+            }
+        }
+        else if (i == 4 && eSlotMachine->unk03 == 1)
+        {
+            r3 -= 10;
+            if (r3 < 0)
+            {
+                r3 = 0;
+            }
+        }
+        if (r3 > rval)
+        {
+            break;
+        }
+    }
+    return i;
 }
-#endif
 
 asm(".section .text_a");
 
