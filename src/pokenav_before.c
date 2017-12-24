@@ -3553,316 +3553,72 @@ bool8 sub_80EF874(void)
 
 asm(".include \"constants/gba_constants.inc\"\n");
 
-#ifdef NONMATCHING
 void sub_80EF9F8(void)
 {
-	s32 zero;
-	u16 i;
-	u8 *mapSectionName;
-	u32 offset;
+	bool8 someBool = FALSE;
+    u16 top = 4;
 	u16 mapSectionId;
 	u8 b;
-	u8 **pointer;
-	u16 var1 = 4;
-
 
 	switch (gUnknown_083DFEC4->regionMap.unk16)
 	{
+    case 0:
+        break;
 	case 1:
 	case 4:
-		sub_8072A18(gUnknown_083DFEC4->regionMap.mapSectionName, 0x70, var1 * 8, 0x78, 1);
-		var1 += 2;
-
+		sub_8072A18(gUnknown_083DFEC4->regionMap.mapSectionName, 0x70, top * 8, 0x78, 1);
+		top += 2;
 		if (gLinkOpen == TRUE)
 		{
 			sub_80F1A80();
+            someBool = TRUE;
 		}
 		else
 		{
-			i = 0;
-			while (i < 4 && (mapSectionName = GetLandmarkName(gUnknown_083DFEC4->regionMap.mapSectionId, gUnknown_083DFEC4->regionMap.everGrandeCityArea, i)) != NULL)
-			{
-				sub_8072A18(mapSectionName, 0x70, var1 * 8, 0x78, 1);
-				var1 += 2;
-				i++;
-			}
+            u16 i;
 
-			// This check is always true, but somehow the compiler still performed it.
-			asm("mov %0, #0\n":"=r"(zero));  // zero = 0
-			if (!zero && var1 < 16)
-			{
-				MenuFillWindowRectWithBlankTile(14, var1, 28, 15);
-			}
+            for (i = 0; i < 4; i++)
+            {
+                const u8 *secName = GetLandmarkName(
+                  gUnknown_083DFEC4->regionMap.mapSectionId,
+                  gUnknown_083DFEC4->regionMap.everGrandeCityArea,
+                  i);
+
+                if (secName == NULL)
+                    break;
+                sub_8072A18(secName, 0x70, top * 8, 0x78, 1);
+                top += 2;
+            }
 		}
 		break;
 	case 2:
-		sub_8072A18(gUnknown_083DFEC4->regionMap.mapSectionName, 0x70, var1 * 8, 0x78, 1);
-		var1 += 2;
-
+		sub_8072A18(gUnknown_083DFEC4->regionMap.mapSectionName, 0x70, top * 8, 0x78, 1);
+		top += 2;
 		mapSectionId = gUnknown_083DFEC4->regionMap.mapSectionId;
-		b = gUnknown_083DFEC4->regionMap.everGrandeCityArea;
-		offset = (b << 2) + (mapSectionId << 3);
-		pointer = (u8 **)((u8 *)&gUnknown_083DFEC4->unkCDCC + offset);
-		if (*pointer != NULL)
+        b = gUnknown_083DFEC4->regionMap.everGrandeCityArea;
+        if (gUnknown_083DFEC4->unkCDCC[mapSectionId][b] != NULL)
 		{
-			MenuFillWindowRectWithBlankTile(14, var1, 15, 15);
-			MenuFillWindowRectWithBlankTile(26, var1, 28, 15);
-
-			sub_8095C8C((void *)VRAM + 0xF800, 16, 6, *pointer, 0, 0, 10, 10, 10);
-
-			var1 += 11;
-		}
-
-		// This check is always true, but somehow the compiler still performed it.
-		asm("mov %0, #0\n":"=r"(zero));  // zero = 0
-		if (!zero && var1 < 16)
-		{
-			MenuFillWindowRectWithBlankTile(14, var1, 28, 15);
+			MenuFillWindowRectWithBlankTile(14, top, 15, 15);
+			MenuFillWindowRectWithBlankTile(26, top, 28, 15);
+			sub_8095C8C((void *)(VRAM + 0xF800), 16, 6, gUnknown_083DFEC4->unkCDCC[mapSectionId][b], 0, 0, 10, 10, 10);
+			top += 11;
 		}
 		break;
 	case 3:
-		sub_8072A18(gUnknown_083DFEC4->regionMap.mapSectionName, 0x70, var1 * 8, 0x78, 1);
-		var1 += 2;
-
-		// This check is always true, but somehow the compiler still performed it.
-		asm("mov %0, #0\n":"=r"(zero));  // zero = 0
-		if (!zero && var1 < 16)
-		{
-			MenuFillWindowRectWithBlankTile(14, var1, 28, 15);
-		}
-		break;
-	case 0:
-	default:
-		// This check is always true, but somehow the compiler still performed it.
-		asm("mov %0, #0\n":"=r"(zero));  // zero = 0
-		if (!zero && var1 < 16)
-		{
-			MenuFillWindowRectWithBlankTile(14, var1, 28, 15);
-		}
+		sub_8072A18(gUnknown_083DFEC4->regionMap.mapSectionName, 0x70, top * 8, 0x78, 1);
+		top += 2;
 		break;
 	}
+
+    // Epic fail by the compiler at optimizing this.
+    if (!someBool && top < 16)
+        MenuFillWindowRectWithBlankTile(14, top, 28, 15);
 
 	if (gUnknown_083DFEC4->regionMap.unk16 == 2)
-	{
 		sub_80EFD74();
-	}
 	else
-	{
 		sub_80EFDA0();
-	}
 }
-#else
-__attribute__((naked))
-void sub_80EF9F8(void)
-{
-    asm(".syntax unified\n\
-    push {r4-r6,lr}\n\
-    sub sp, 0x14\n\
-    movs r5, 0x4\n\
-    ldr r0, _080EFA18 @ =gUnknown_083DFEC4\n\
-    ldr r0, [r0]\n\
-    ldr r1, _080EFA1C @ =0x00006e2e\n\
-    adds r0, r1\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x4\n\
-    bls _080EFA0E\n\
-    b _080EFB6A\n\
-_080EFA0E:\n\
-    lsls r0, 2\n\
-    ldr r1, _080EFA20 @ =_080EFA24\n\
-    adds r0, r1\n\
-    ldr r0, [r0]\n\
-    mov pc, r0\n\
-    .align 2, 0\n\
-_080EFA18: .4byte gUnknown_083DFEC4\n\
-_080EFA1C: .4byte 0x00006e2e\n\
-_080EFA20: .4byte _080EFA24\n\
-    .align 2, 0\n\
-_080EFA24:\n\
-    .4byte _080EFB6A\n\
-    .4byte _080EFA38\n\
-    .4byte _080EFAC0\n\
-    .4byte _080EFB4C\n\
-    .4byte _080EFA38\n\
-_080EFA38:\n\
-    ldr r0, _080EFA64 @ =gUnknown_083DFEC4\n\
-    ldr r0, [r0]\n\
-    ldr r2, _080EFA68 @ =0x00006e18\n\
-    adds r0, r2\n\
-    lsls r2, r5, 19\n\
-    lsrs r2, 16\n\
-    movs r1, 0x1\n\
-    str r1, [sp]\n\
-    movs r1, 0x70\n\
-    movs r3, 0x78\n\
-    bl sub_8072A18\n\
-    adds r0, r5, 0x2\n\
-    lsls r0, 16\n\
-    lsrs r5, r0, 16\n\
-    ldr r0, _080EFA6C @ =gLinkOpen\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x1\n\
-    bne _080EFA70\n\
-    bl sub_80F1A80\n\
-    b _080EFB82\n\
-    .align 2, 0\n\
-_080EFA64: .4byte gUnknown_083DFEC4\n\
-_080EFA68: .4byte 0x00006e18\n\
-_080EFA6C: .4byte gLinkOpen\n\
-_080EFA70:\n\
-    movs r4, 0\n\
-    b _080EFA92\n\
-_080EFA74:\n\
-    lsls r2, r5, 19\n\
-    lsrs r2, 16\n\
-    movs r0, 0x1\n\
-    str r0, [sp]\n\
-    adds r0, r1, 0\n\
-    movs r1, 0x70\n\
-    movs r3, 0x78\n\
-    bl sub_8072A18\n\
-    adds r0, r5, 0x2\n\
-    lsls r0, 16\n\
-    lsrs r5, r0, 16\n\
-    adds r0, r4, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r4, r0, 16\n\
-_080EFA92:\n\
-    cmp r4, 0x3\n\
-    bhi _080EFB6A\n\
-    ldr r0, _080EFAB8 @ =gUnknown_083DFEC4\n\
-    ldr r1, [r0]\n\
-    ldr r2, _080EFABC @ =0x00006e2c\n\
-    adds r0, r1, r2\n\
-    ldrb r0, [r0]\n\
-    adds r2, 0x3\n\
-    adds r1, r2\n\
-    ldrb r1, [r1]\n\
-    lsls r2, r4, 24\n\
-    lsrs r2, 24\n\
-    bl GetLandmarkName\n\
-    adds r1, r0, 0\n\
-    cmp r1, 0\n\
-    bne _080EFA74\n\
-    b _080EFB6A\n\
-    .align 2, 0\n\
-_080EFAB8: .4byte gUnknown_083DFEC4\n\
-_080EFABC: .4byte 0x00006e2c\n\
-_080EFAC0:\n\
-    ldr r0, _080EFB38 @ =gUnknown_083DFEC4\n\
-    ldr r4, [r0]\n\
-    ldr r1, _080EFB3C @ =0x00006e18\n\
-    adds r0, r4, r1\n\
-    lsls r2, r5, 19\n\
-    lsrs r2, 16\n\
-    movs r1, 0x1\n\
-    str r1, [sp]\n\
-    movs r1, 0x70\n\
-    movs r3, 0x78\n\
-    bl sub_8072A18\n\
-    adds r0, r5, 0x2\n\
-    lsls r0, 16\n\
-    lsrs r5, r0, 16\n\
-    ldr r2, _080EFB40 @ =0x00006e2c\n\
-    adds r0, r4, r2\n\
-    ldrh r1, [r0]\n\
-    adds r2, 0x3\n\
-    adds r0, r4, r2\n\
-    ldrb r0, [r0]\n\
-    lsls r0, 2\n\
-    lsls r1, 3\n\
-    adds r0, r1\n\
-    ldr r1, _080EFB44 @ =0x0000cdcc\n\
-    adds r4, r1\n\
-    adds r6, r4, r0\n\
-    ldr r0, [r6]\n\
-    cmp r0, 0\n\
-    beq _080EFB6A\n\
-    lsls r4, r5, 24\n\
-    lsrs r4, 24\n\
-    movs r0, 0xE\n\
-    adds r1, r4, 0\n\
-    movs r2, 0xF\n\
-    movs r3, 0xF\n\
-    bl MenuFillWindowRectWithBlankTile\n\
-    movs r0, 0x1A\n\
-    adds r1, r4, 0\n\
-    movs r2, 0x1C\n\
-    movs r3, 0xF\n\
-    bl MenuFillWindowRectWithBlankTile\n\
-    ldr r0, _080EFB48 @ =0x0600f800\n\
-    ldr r3, [r6]\n\
-    movs r1, 0\n\
-    str r1, [sp]\n\
-    str r1, [sp, 0x4]\n\
-    movs r1, 0xA\n\
-    str r1, [sp, 0x8]\n\
-    str r1, [sp, 0xC]\n\
-    str r1, [sp, 0x10]\n\
-    movs r1, 0x10\n\
-    movs r2, 0x6\n\
-    bl sub_8095C8C\n\
-    adds r0, r5, 0\n\
-    adds r0, 0xB\n\
-    b _080EFB66\n\
-    .align 2, 0\n\
-_080EFB38: .4byte gUnknown_083DFEC4\n\
-_080EFB3C: .4byte 0x00006e18\n\
-_080EFB40: .4byte 0x00006e2c\n\
-_080EFB44: .4byte 0x0000cdcc\n\
-_080EFB48: .4byte 0x0600f800\n\
-_080EFB4C:\n\
-    ldr r0, _080EFB98 @ =gUnknown_083DFEC4\n\
-    ldr r0, [r0]\n\
-    ldr r2, _080EFB9C @ =0x00006e18\n\
-    adds r0, r2\n\
-    lsls r2, r5, 19\n\
-    lsrs r2, 16\n\
-    movs r1, 0x1\n\
-    str r1, [sp]\n\
-    movs r1, 0x70\n\
-    movs r3, 0x78\n\
-    bl sub_8072A18\n\
-    adds r0, r5, 0x2\n\
-_080EFB66:\n\
-    lsls r0, 16\n\
-    lsrs r5, r0, 16\n\
-_080EFB6A:\n\
-    movs r0, 0\n\
-    cmp r0, 0\n\
-    bne _080EFB82\n\
-    cmp r5, 0xF\n\
-    bhi _080EFB82\n\
-    lsls r1, r5, 24\n\
-    lsrs r1, 24\n\
-    movs r0, 0xE\n\
-    movs r2, 0x1C\n\
-    movs r3, 0xF\n\
-    bl MenuFillWindowRectWithBlankTile\n\
-_080EFB82:\n\
-    ldr r0, _080EFB98 @ =gUnknown_083DFEC4\n\
-    ldr r0, [r0]\n\
-    ldr r1, _080EFBA0 @ =0x00006e2e\n\
-    adds r0, r1\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x2\n\
-    bne _080EFBA4\n\
-    bl sub_80EFD74\n\
-    b _080EFBA8\n\
-    .align 2, 0\n\
-_080EFB98: .4byte gUnknown_083DFEC4\n\
-_080EFB9C: .4byte 0x00006e18\n\
-_080EFBA0: .4byte 0x00006e2e\n\
-_080EFBA4:\n\
-    bl sub_80EFDA0\n\
-_080EFBA8:\n\
-    add sp, 0x14\n\
-    pop {r4-r6}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .syntax divided\n");
-}
-#endif // NONMATCHING
 
 void sub_80EFBB0(void)
 {
