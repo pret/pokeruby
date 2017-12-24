@@ -926,6 +926,40 @@ u8 sub_81025BC(void)
     return i;
 }
 
+extern const u8 gUnknown_083ECDAC[][17];
+extern const u8 gUnknown_083ECD46[][17];
+
+u8 sub_810264C(u8 a0)
+{
+    if (eSlotMachine->unk03 == 0)
+    {
+        return gUnknown_083ECD46[a0][eSlotMachine->unk02];
+    }
+    return gUnknown_083ECDAC[a0][eSlotMachine->unk02];
+}
+
+void sub_8102680(void)
+{
+    u8 rval;
+    s16 i;
+
+    eSlotMachine->unk05 = 0;
+    rval = Random();
+    if (rval < sub_810264C(0))
+    {
+        return;
+    }
+    for (i = 5; i > 0; i--)
+    {
+        rval = Random();
+        if (rval < sub_810264C(i))
+        {
+            break;
+        }
+    }
+    eSlotMachine->unk05 = i;
+}
+
 asm(".section .text_a");
 
 static void LoadSlotMachineWheelOverlay(void);
@@ -957,7 +991,6 @@ void sub_8104CAC(u8 arg0) {
 #endif
     }
 }
-
 asm(".section .text_b");
 
 static void sub_8106448(void) {
