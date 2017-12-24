@@ -960,6 +960,57 @@ void sub_8102680(void)
     eSlotMachine->unk05 = i;
 }
 
+extern const u16 gUnknown_083ECE12[];
+
+bool8 sub_81026DC(u16 a0)
+{
+    u16 rval = Random() & 0xff;
+    if (rval < gUnknown_083ECE12[a0])
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+extern const u16 gUnknown_083ECE1C[][2];
+extern const u16 gUnknown_083ECE30[];
+
+u16 dp15_jump_random_unknown(void)
+{
+    u8 r4 = 0;
+    u8 rval;
+    u8 value;
+    if (eSlotMachine->unk10 >= 300)
+    {
+        r4 = 4;
+    }
+    else if (eSlotMachine->unk10 >= 250)
+    {
+        r4 = 3;
+    }
+    else if (eSlotMachine->unk10 >= 200)
+    {
+        r4 = 2;
+    }
+    else if (eSlotMachine->unk10 >= 150)
+    {
+        r4 = 1;
+    }
+    rval = Random() % 100;
+    value = gUnknown_083ECE1C[r4][0];
+    if (rval < value)
+    {
+        return 4;
+    }
+    rval = Random() % 100;
+    value = gUnknown_083ECE1C[r4][1] + gUnknown_083ECE30[eSlotMachine->unk0B];
+    if (rval < value)
+    {
+        return 2;
+    }
+    return 8;
+}
+
 asm(".section .text_a");
 
 static void LoadSlotMachineWheelOverlay(void);
