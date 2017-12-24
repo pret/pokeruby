@@ -1,6 +1,6 @@
 S_BerryTree:: @ 81A14DD
 	special FieldObjectInteractionGetBerryTreeData
-	switch SPECIALVAR_4
+	switch VAR_SPECIAL_4
 	case 255, Route102_EventScript_1A1533
 	case 0, Route102_EventScript_1A153D
 	case 1, Route102_EventScript_1A1595
@@ -82,9 +82,9 @@ Route102_EventScript_1A15BC:: @ 81A15BC
 	goto Route102_EventScript_1A165F
 
 Route102_EventScript_1A15CE:: @ 81A15CE
-	compare SPECIALVAR_5, 0
+	compare VAR_SPECIAL_5, 0
 	goto_if_eq Route102_EventScript_1A15F2
-	compare SPECIALVAR_5, 4
+	compare VAR_SPECIAL_5, 4
 	goto_if_eq Route102_EventScript_1A15EB
 	bufferstring 1, Route102_Text_1A17B7
 	return
@@ -98,7 +98,7 @@ Route102_EventScript_1A15F2:: @ 81A15F2
 	return
 
 Route102_EventScript_1A15F9:: @ 81A15F9
-	buffernumberstring 1, SPECIALVAR_6
+	buffernumberstring 1, VAR_SPECIAL_6
 	lock
 	faceplayer
 	msgbox Route102_Text_1A17C0, 5
@@ -109,7 +109,7 @@ Route102_EventScript_1A15F9:: @ 81A15F9
 
 Route102_EventScript_1A161D:: @ 81A161D
 	special FieldObjectInteractionPickBerryTree
-	compare SPECIALVAR_4, 0
+	compare VAR_SPECIAL_4, 0
 	goto_if_eq Route102_EventScript_1A1642
 	special FieldObjectInteractionRemoveBerryTree
 	message Route102_Text_1A17FD

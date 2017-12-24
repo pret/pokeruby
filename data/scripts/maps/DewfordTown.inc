@@ -143,7 +143,7 @@ DewfordTown_EventScript_14E151:: @ 814E151
 	setvar VAR_BOARD_BRINEY_BOAT_ROUTE104_STATE, 2
 	resetobjectpriority 255, MAP_DEWFORD_TOWN
 	warp MAP_ROUTE104_MR_BRINEYS_HOUSE, 255, 5, 4
-	copyvar VAR_BRINEY_LOCATION, SPECIALVAR_8
+	copyvar VAR_BRINEY_LOCATION, VAR_SPECIAL_8
 	waitstate
 	release
 	end
@@ -181,7 +181,7 @@ DewfordTown_EventScript_14E1D8:: @ 814E1D8
 	checkflag FLAG_DELIVERED_DEVON_GOODS
 	call_if 1, DewfordTown_EventScript_14E28A
 	closemessage
-	copyvar VAR_BRINEY_LOCATION, SPECIALVAR_8
+	copyvar VAR_BRINEY_LOCATION, VAR_SPECIAL_8
 	resetobjectpriority 255, MAP_DEWFORD_TOWN
 	resetobjectpriority 2, MAP_ROUTE109
 	moveobjectoffscreen 2
@@ -612,7 +612,7 @@ DewfordTown_EventScript_14E439:: @ 814E439
 
 DewfordTown_EventScript_14E443:: @ 814E443
 	msgbox DewfordTown_Text_16BADC, 4
-	setvar SPECIALVAR_4, 9
+	setvar VAR_SPECIAL_4, 9
 	call DewfordTown_EventScript_1A00F3
 	lock
 	faceplayer
@@ -624,7 +624,7 @@ DewfordTown_EventScript_14E443:: @ 814E443
 
 DewfordTown_EventScript_14E46E:: @ 814E46E
 	incrementgamestat GAME_STAT_STARTED_TRENDS
-	compare SPECIALVAR_4, 0
+	compare VAR_SPECIAL_4, 0
 	goto_if_eq DewfordTown_EventScript_14E48F
 	msgbox DewfordTown_Text_16BB44, 4
 	release

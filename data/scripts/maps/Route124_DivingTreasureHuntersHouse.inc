@@ -224,43 +224,43 @@ Route124_DivingTreasureHuntersHouse_EventScript_16420F:: @ 816420F
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_164256:: @ 8164256
-	setvar SPECIALVAR_8, 48
-	setvar SPECIALVAR_9, 95
+	setvar VAR_SPECIAL_8, 48
+	setvar VAR_SPECIAL_9, 95
 	goto Route124_DivingTreasureHuntersHouse_EventScript_164292
 
 Route124_DivingTreasureHuntersHouse_EventScript_164265:: @ 8164265
-	setvar SPECIALVAR_8, 50
-	setvar SPECIALVAR_9, 96
+	setvar VAR_SPECIAL_8, 50
+	setvar VAR_SPECIAL_9, 96
 	goto Route124_DivingTreasureHuntersHouse_EventScript_164292
 
 Route124_DivingTreasureHuntersHouse_EventScript_164274:: @ 8164274
-	setvar SPECIALVAR_8, 49
-	setvar SPECIALVAR_9, 97
+	setvar VAR_SPECIAL_8, 49
+	setvar VAR_SPECIAL_9, 97
 	goto Route124_DivingTreasureHuntersHouse_EventScript_164292
 
 Route124_DivingTreasureHuntersHouse_EventScript_164283:: @ 8164283
-	setvar SPECIALVAR_8, 51
-	setvar SPECIALVAR_9, 98
+	setvar VAR_SPECIAL_8, 51
+	setvar VAR_SPECIAL_9, 98
 	goto Route124_DivingTreasureHuntersHouse_EventScript_164292
 
 Route124_DivingTreasureHuntersHouse_EventScript_164292:: @ 8164292
-	bufferitemname 0, SPECIALVAR_8
-	bufferitemname 1, SPECIALVAR_9
+	bufferitemname 0, VAR_SPECIAL_8
+	bufferitemname 1, VAR_SPECIAL_9
 	msgbox Route124_DivingTreasureHuntersHouse_Text_19F5E0, 5
 	compare RESULT, 0
 	goto_if_eq Route124_DivingTreasureHuntersHouse_EventScript_16431F
-	checkitemspace SPECIALVAR_9, 1
+	checkitemspace VAR_SPECIAL_9, 1
 	compare RESULT, 1
 	goto_if_eq Route124_DivingTreasureHuntersHouse_EventScript_1642D3
-	checkitem SPECIALVAR_8, 2
+	checkitem VAR_SPECIAL_8, 2
 	compare RESULT, 0
 	goto_if_eq Route124_DivingTreasureHuntersHouse_EventScript_1642D3
 	goto Route124_DivingTreasureHuntersHouse_EventScript_164315
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_1642D3:: @ 81642D3
-	takeitem SPECIALVAR_8, 1
-	giveitem_std SPECIALVAR_9
+	takeitem VAR_SPECIAL_8, 1
+	giveitem_std VAR_SPECIAL_9
 	msgbox Route124_DivingTreasureHuntersHouse_Text_19F606, 4
 	call Route124_DivingTreasureHuntersHouse_EventScript_163E44
 	compare VAR_TEMP_1, 0

@@ -28,7 +28,7 @@ LavaridgeTown_MapScript2_14E4E3:: @ 814E4E3
 
 LavaridgeTown_EventScript_14E4ED:: @ 814E4ED
 	lockall
-	setvar SPECIALVAR_8, 1
+	setvar VAR_SPECIAL_8, 1
 	opendoor 12, 15
 	waitdooranim
 	addobject 8
@@ -48,7 +48,7 @@ LavaridgeTown_EventScript_14E4ED:: @ 814E4ED
 	call_if 1, LavaridgeTown_EventScript_14E56B
 	compare RESULT, 1
 	call_if 1, LavaridgeTown_EventScript_14E570
-	compare SPECIALVAR_8, 1
+	compare VAR_SPECIAL_8, 1
 	call_if 1, LavaridgeTown_EventScript_14E68F
 	checkplayergender
 	compare RESULT, 0
@@ -68,7 +68,7 @@ LavaridgeTown_EventScript_14E570:: @ 814E570
 LavaridgeTown_EventScript_14E575:: @ 814E575
 	lock
 	faceplayer
-	setvar SPECIALVAR_8, 0
+	setvar VAR_SPECIAL_8, 0
 	checkplayergender
 	compare RESULT, 0
 	call_if 1, LavaridgeTown_EventScript_14E56B
@@ -99,22 +99,22 @@ LavaridgeTown_EventScript_14E5D0:: @ 814E5D0
 
 LavaridgeTown_EventScript_14E5F5:: @ 814E5F5
 	closemessage
-	compare SPECIALVAR_8, 1
+	compare VAR_SPECIAL_8, 1
 	call_if 1, LavaridgeTown_EventScript_14E646
-	compare SPECIALVAR_8, 0
+	compare VAR_SPECIAL_8, 0
 	call_if 1, LavaridgeTown_EventScript_14E64E
 	removeobject 8
 	addobject 7
 	delay 30
-	compare SPECIALVAR_8, 1
+	compare VAR_SPECIAL_8, 1
 	call_if 1, LavaridgeTown_EventScript_14E69A
-	compare SPECIALVAR_8, 0
+	compare VAR_SPECIAL_8, 0
 	call_if 1, LavaridgeTown_EventScript_14E6A5
 	removeobject 7
 	setvar VAR_LAVARIDGE_RIVAL_STATE, 2
 	savebgm 0
 	fadedefaultbgm
-	compare SPECIALVAR_8, 0
+	compare VAR_SPECIAL_8, 0
 	goto_if_eq LavaridgeTown_EventScript_14E644
 	releaseall
 	end

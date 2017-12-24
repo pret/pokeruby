@@ -126,7 +126,7 @@ RustboroCity_EventScript_14C481:: @ 814C481
 	lockall
 	setobjectxyperm 9, 14, 21
 	setobjectmovementtype 9, 10
-	setvar SPECIALVAR_4, 0
+	setvar VAR_SPECIAL_4, 0
 	goto RustboroCity_EventScript_14C4F4
 	end
 
@@ -134,7 +134,7 @@ RustboroCity_EventScript_14C498:: @ 814C498
 	lockall
 	setobjectxyperm 9, 14, 21
 	setobjectmovementtype 9, 10
-	setvar SPECIALVAR_4, 1
+	setvar VAR_SPECIAL_4, 1
 	goto RustboroCity_EventScript_14C4F4
 	end
 
@@ -142,7 +142,7 @@ RustboroCity_EventScript_14C4AF:: @ 814C4AF
 	lockall
 	setobjectxyperm 9, 14, 21
 	setobjectmovementtype 9, 10
-	setvar SPECIALVAR_4, 2
+	setvar VAR_SPECIAL_4, 2
 	goto RustboroCity_EventScript_14C4F4
 	end
 
@@ -150,7 +150,7 @@ RustboroCity_EventScript_14C4C6:: @ 814C4C6
 	lockall
 	setobjectxyperm 9, 14, 21
 	setobjectmovementtype 9, 10
-	setvar SPECIALVAR_4, 3
+	setvar VAR_SPECIAL_4, 3
 	goto RustboroCity_EventScript_14C4F4
 	end
 
@@ -158,7 +158,7 @@ RustboroCity_EventScript_14C4DD:: @ 814C4DD
 	lockall
 	setobjectxyperm 9, 14, 21
 	setobjectmovementtype 9, 10
-	setvar SPECIALVAR_4, 4
+	setvar VAR_SPECIAL_4, 4
 	goto RustboroCity_EventScript_14C4F4
 	end
 

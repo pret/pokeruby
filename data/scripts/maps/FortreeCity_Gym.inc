@@ -30,7 +30,7 @@ FortreeCity_Gym_EventScript_157F15:: @ 8157F15
 	msgbox FortreeCity_Gym_Text_185E73, 4
 	setflag FLAG_DEFEATED_FORTREE_GYM
 	setflag FLAG_BADGE06_GET
-	setvar SPECIALVAR_8, 6
+	setvar VAR_SPECIAL_8, 6
 	call FortreeCity_Gym_EventScript_1A01C0
 	goto FortreeCity_Gym_EventScript_157F3E
 	end

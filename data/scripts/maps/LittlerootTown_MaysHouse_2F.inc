@@ -206,7 +206,7 @@ LittlerootTown_MaysHouse_2F_EventScript_152C52:: @ 8152C52
 	end
 
 LittlerootTown_MaysHouse_2F_EventScript_152C5C:: @ 8152C5C
-	setvar SPECIALVAR_4, 2
+	setvar VAR_SPECIAL_4, 2
 	special DoPCTurnOnEffect
 	playse SE_PC_ON
 	msgbox LittlerootTown_MaysHouse_2F_Text_1A10D6, 4
@@ -216,7 +216,7 @@ LittlerootTown_MaysHouse_2F_EventScript_152C5C:: @ 8152C5C
 	end
 
 gMayHouse_TurnPCOff:: @ 8152C75
-	setvar SPECIALVAR_4, 2
+	setvar VAR_SPECIAL_4, 2
 	playse SE_PC_OFF
 	special DoPCTurnOffEffect
 	releaseall

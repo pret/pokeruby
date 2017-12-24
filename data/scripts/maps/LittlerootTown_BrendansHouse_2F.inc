@@ -58,7 +58,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_15281E:: @ 815281E
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_152837:: @ 8152837
-	setvar SPECIALVAR_4, 1
+	setvar VAR_SPECIAL_4, 1
 	special DoPCTurnOnEffect
 	playse SE_PC_ON
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1A10D6, 4
@@ -68,7 +68,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_152837:: @ 8152837
 	end
 
 gBrendanHouse_TurnPCOff:: @ 8152850
-	setvar SPECIALVAR_4, 1
+	setvar VAR_SPECIAL_4, 1
 	playse SE_PC_OFF
 	special DoPCTurnOffEffect
 	releaseall

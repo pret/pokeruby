@@ -50,7 +50,7 @@ Route118_EventScript_150FA5:: @ 8150FA5
 
 Route118_EventScript_150FAE:: @ 8150FAE
 	lockall
-	setvar SPECIALVAR_8, 0
+	setvar VAR_SPECIAL_8, 0
 	applymovement 255, Route118_Movement_1A0841
 	waitmovement 0
 	applymovement 19, Route118_Movement_151069
@@ -60,7 +60,7 @@ Route118_EventScript_150FAE:: @ 8150FAE
 
 Route118_EventScript_150FCE:: @ 8150FCE
 	lockall
-	setvar SPECIALVAR_8, 1
+	setvar VAR_SPECIAL_8, 1
 	applymovement 255, Route118_Movement_1A0841
 	waitmovement 0
 	goto Route118_EventScript_151004
@@ -68,7 +68,7 @@ Route118_EventScript_150FCE:: @ 8150FCE
 
 Route118_EventScript_150FE4:: @ 8150FE4
 	lockall
-	setvar SPECIALVAR_8, 2
+	setvar VAR_SPECIAL_8, 2
 	applymovement 255, Route118_Movement_1A0841
 	waitmovement 0
 	applymovement 19, Route118_Movement_15106B
@@ -83,11 +83,11 @@ Route118_EventScript_151004:: @ 8151004
 	delay 30
 	msgbox Route118_Text_170D66, 4
 	closemessage
-	compare SPECIALVAR_8, 0
+	compare VAR_SPECIAL_8, 0
 	call_if 1, Route118_EventScript_151048
-	compare SPECIALVAR_8, 1
+	compare VAR_SPECIAL_8, 1
 	call_if 1, Route118_EventScript_151053
-	compare SPECIALVAR_8, 2
+	compare VAR_SPECIAL_8, 2
 	call_if 1, Route118_EventScript_15105E
 	setvar VAR_ROUTE118_STATE, 1
 	removeobject 19

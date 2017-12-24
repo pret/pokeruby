@@ -24,25 +24,25 @@ SlateportCity_Harbor_EventScript_155F89:: @ 8155F89
 
 SlateportCity_Harbor_EventScript_155F9B:: @ 8155F9B
 	lockall
-	setvar SPECIALVAR_8, 0
+	setvar VAR_SPECIAL_8, 0
 	goto SlateportCity_Harbor_EventScript_155FD5
 	end
 
 SlateportCity_Harbor_EventScript_155FA7:: @ 8155FA7
 	lockall
-	setvar SPECIALVAR_8, 1
+	setvar VAR_SPECIAL_8, 1
 	goto SlateportCity_Harbor_EventScript_155FD5
 	end
 
 SlateportCity_Harbor_EventScript_155FB3:: @ 8155FB3
 	lockall
-	setvar SPECIALVAR_8, 2
+	setvar VAR_SPECIAL_8, 2
 	goto SlateportCity_Harbor_EventScript_155FD5
 	end
 
 SlateportCity_Harbor_EventScript_155FBF:: @ 8155FBF
 	lockall
-	setvar SPECIALVAR_8, 3
+	setvar VAR_SPECIAL_8, 3
 	applymovement 255, SlateportCity_Harbor_Movement_1560C2
 	waitmovement 0
 	goto SlateportCity_Harbor_EventScript_155FD5
@@ -63,13 +63,13 @@ SlateportCity_Harbor_EventScript_155FD5:: @ 8155FD5
 	removeobject 7
 	removeobject 8
 	setvar VAR_SLATEPORT_HARBOR_STATE, 2
-	compare SPECIALVAR_8, 0
+	compare VAR_SPECIAL_8, 0
 	call_if 1, SlateportCity_Harbor_EventScript_15605C
-	compare SPECIALVAR_8, 1
+	compare VAR_SPECIAL_8, 1
 	call_if 1, SlateportCity_Harbor_EventScript_156071
-	compare SPECIALVAR_8, 2
+	compare VAR_SPECIAL_8, 2
 	call_if 1, SlateportCity_Harbor_EventScript_156086
-	compare SPECIALVAR_8, 3
+	compare VAR_SPECIAL_8, 3
 	call_if 1, SlateportCity_Harbor_EventScript_156086
 	msgbox SlateportCity_Harbor_Text_17FE60, 4
 	closemessage
@@ -229,7 +229,7 @@ SlateportCity_Harbor_EventScript_156196:: @ 8156196
 	call_if 1, SlateportCity_Harbor_EventScript_1561E4
 	delay 30
 	hideobjectat 255, MAP_PETALBURG_CITY
-	setvar SPECIALVAR_4, 5
+	setvar VAR_SPECIAL_4, 5
 	call SlateportCity_Harbor_EventScript_1A040E
 	return
 

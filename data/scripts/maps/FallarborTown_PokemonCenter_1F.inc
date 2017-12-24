@@ -8,7 +8,7 @@ FallarborTown_PokemonCenter_1F_MapScript1_153AF9:: @ 8153AF9
 	end
 
 FallarborTown_PokemonCenter_1F_EventScript_153B02:: @ 8153B02
-	setvar SPECIALVAR_B, 1
+	setvar VAR_SPECIAL_B, 1
 	call FallarborTown_PokemonCenter_1F_EventScript_19FD5B
 	waitmessage
 	waitbuttonpress

@@ -15,7 +15,7 @@ EverGrandeCity_PokemonLeague_EventScript_15BA8B:: @ 815BA8B
 	return
 
 EverGrandeCity_PokemonLeague_EventScript_15BA9A:: @ 815BA9A
-	setvar SPECIALVAR_B, 1
+	setvar VAR_SPECIAL_B, 1
 	call EverGrandeCity_PokemonLeague_EventScript_19FD5B
 	waitmessage
 	waitbuttonpress

@@ -87,8 +87,8 @@ LilycoveCity_ContestLobby_EventScript_158948:: @ 8158948
 	return
 
 LilycoveCity_ContestLobby_EventScript_158994:: @ 8158994
-	specialvar SPECIALVAR_4, sub_80C4D50
-	switch SPECIALVAR_4
+	specialvar VAR_SPECIAL_4, sub_80C4D50
+	switch VAR_SPECIAL_4
 	case 1, LilycoveCity_ContestLobby_EventScript_1589D6
 	case 2, LilycoveCity_ContestLobby_EventScript_1589DA
 	case 3, LilycoveCity_ContestLobby_EventScript_1589DE
@@ -361,7 +361,7 @@ LilycoveCity_ContestLobby_EventScript_158C42:: @ 8158C42
 	msgbox LilycoveCity_ContestLobby_Text_188703, 4
 	setvar CONTEST_RANK, 0
 	choosecontestmon
-	compare SPECIALVAR_4, 255
+	compare VAR_SPECIAL_4, 255
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158CEA
 	special sub_80C43F4
 	compare RESULT, 0
@@ -392,7 +392,7 @@ LilycoveCity_ContestLobby_EventScript_158CB2:: @ 8158CB2
 	end
 
 LilycoveCity_ContestLobby_EventScript_158CC0:: @ 8158CC0
-	copyvar SPECIALVAR_8, SPECIALVAR_4
+	copyvar VAR_SPECIAL_8, VAR_SPECIAL_4
 	message LilycoveCity_ContestLobby_Text_1A67A3
 	waitmessage
 	yesnobox 20, 8
@@ -417,7 +417,7 @@ LilycoveCity_ContestLobby_EventScript_158CEA:: @ 8158CEA
 LilycoveCity_ContestLobby_EventScript_158D24:: @ 8158D24
 	message LilycoveCity_ContestLobby_Text_1887C7
 	waitmessage
-	copyvar SPECIALVAR_4, RESULT
+	copyvar VAR_SPECIAL_4, RESULT
 	special sub_808363C
 	waitstate
 	compare RESULT, 3
@@ -429,7 +429,7 @@ LilycoveCity_ContestLobby_EventScript_158D24:: @ 8158D24
 	messageautoscroll LilycoveCity_ContestLobby_Text_18872A
 	waitmessage
 	contestlinktransfer
-	switch SPECIALVAR_4
+	switch VAR_SPECIAL_4
 	case 0, LilycoveCity_ContestLobby_EventScript_158DD1
 	case 1, LilycoveCity_ContestLobby_EventScript_158D82
 	case 2, LilycoveCity_ContestLobby_EventScript_158DC3
@@ -471,11 +471,11 @@ LilycoveCity_ContestLobby_EventScript_158DC3:: @ 8158DC3
 
 LilycoveCity_ContestLobby_EventScript_158DD1:: @ 8158DD1
 	special sub_80C496C
-	addvar SPECIALVAR_4, 1
+	addvar VAR_SPECIAL_4, 1
 	buffernumberstring 1, 32772
 	messageautoscroll LilycoveCity_ContestLobby_Text_188845
 	waitmessage
-	addvar SPECIALVAR_4, 65535
+	addvar VAR_SPECIAL_4, 65535
 	goto LilycoveCity_ContestLobby_EventScript_158DEE
 	end
 
@@ -571,7 +571,7 @@ LilycoveCity_ContestLobby_EventScript_158EB0:: @ 8158EB0
 	specialvar RESULT, sub_80C5044
 	compare RESULT, 1
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158EE8
-	setvar SPECIALVAR_B, 8
+	setvar VAR_SPECIAL_B, 8
 	setvar CONTEST_RANK, 3
 	call LilycoveCity_ContestLobby_EventScript_1A4E92
 	call LilycoveCity_ContestLobby_EventScript_158F86
@@ -586,7 +586,7 @@ LilycoveCity_ContestLobby_EventScript_158EE8:: @ 8158EE8
 	setflag FLAG_HIDE_LILYCOVE_MUSEUM_CURATOR
 	copyvar VAR_LILYCOVE_MUSEUM_2F_STATE, 0x1
 	giveitem ITEM_CONTEST_PASS, 1
-	setvar SPECIALVAR_B, 8
+	setvar VAR_SPECIAL_B, 8
 	setvar CONTEST_RANK, 3
 	setvar VAR_LILYCOVE_CONTEST_LOBBY_STATE, 1
 	setflag FLAG_SYS_RIBBON_GET

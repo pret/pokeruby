@@ -121,13 +121,13 @@ DewfordTown_Hall_EventScript_1533E8:: @ 81533E8
 
 DewfordTown_Hall_EventScript_1533F2:: @ 81533F2
 	lockall
-	setvar SPECIALVAR_8, 0
+	setvar VAR_SPECIAL_8, 0
 	goto DewfordTown_Hall_EventScript_15340A
 	end
 
 DewfordTown_Hall_EventScript_1533FE:: @ 81533FE
 	lockall
-	setvar SPECIALVAR_8, 1
+	setvar VAR_SPECIAL_8, 1
 	goto DewfordTown_Hall_EventScript_15340A
 	end
 
@@ -191,9 +191,9 @@ DewfordTown_Hall_EventScript_1534FC:: @ 81534FC
 DewfordTown_Hall_EventScript_1534FD:: @ 81534FD
 	applymovement 8, DewfordTown_Hall_Movement_153599
 	waitmovement 0
-	compare SPECIALVAR_8, 0
+	compare VAR_SPECIAL_8, 0
 	goto_if_eq DewfordTown_Hall_EventScript_15351E
-	compare SPECIALVAR_8, 1
+	compare VAR_SPECIAL_8, 1
 	goto_if_eq DewfordTown_Hall_EventScript_153534
 	end
 
@@ -210,9 +210,9 @@ DewfordTown_Hall_EventScript_153534:: @ 8153534
 DewfordTown_Hall_EventScript_153535:: @ 8153535
 	applymovement 7, DewfordTown_Hall_Movement_15359B
 	waitmovement 0
-	compare SPECIALVAR_8, 0
+	compare VAR_SPECIAL_8, 0
 	goto_if_eq DewfordTown_Hall_EventScript_153556
-	compare SPECIALVAR_8, 1
+	compare VAR_SPECIAL_8, 1
 	goto_if_eq DewfordTown_Hall_EventScript_153583
 	end
 

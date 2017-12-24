@@ -172,8 +172,8 @@ LilycoveCity_EventScript_14CC79:: @ 814CC79
 
 LilycoveCity_EventScript_14CC82:: @ 814CC82
 	lockall
-	specialvar SPECIALVAR_4, sub_80C4D50
-	switch SPECIALVAR_4
+	specialvar VAR_SPECIAL_4, sub_80C4D50
+	switch VAR_SPECIAL_4
 	case 0, LilycoveCity_EventScript_14CCA2
 	msgbox LilycoveCity_Text_168EA4, 4
 	releaseall

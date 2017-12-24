@@ -55,7 +55,7 @@ EverGrandeCity_DrakesRoom_EventScript_15B78B:: @ 815B78B
 	end
 
 EverGrandeCity_DrakesRoom_EventScript_15B795:: @ 815B795
-	setvar SPECIALVAR_4, 0
+	setvar VAR_SPECIAL_4, 0
 	special sub_810FF60
 	setflag FLAG_DEFEATED_ELITE_4_DRAKE
 	call EverGrandeCity_DrakesRoom_EventScript_1A0693

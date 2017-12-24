@@ -7,7 +7,7 @@ SlateportCity_ContestLobby_MapScript1_155417:: @ 8155417
 	end
 
 SlateportCity_ContestLobby_EventScript_15541D:: @ 815541D
-	setvar SPECIALVAR_B, 7
+	setvar VAR_SPECIAL_B, 7
 	setvar CONTEST_RANK, 2
 	call SlateportCity_ContestLobby_EventScript_1A4E92
 	call SlateportCity_ContestLobby_EventScript_155448

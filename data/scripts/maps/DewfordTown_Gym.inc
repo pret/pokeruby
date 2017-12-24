@@ -10,12 +10,12 @@ DewfordTown_Gym_EventScript_153071:: @ 8153071
 	checktrainerflag OPPONENT_BRAWLY
 	goto_if_eq DewfordTown_Gym_EventScript_1530AA
 	call DewfordTown_Gym_EventScript_153122
-	copyvar SPECIALVAR_1, SPECIALVAR_0
-	compare SPECIALVAR_0, 0
+	copyvar VAR_SPECIAL_1, VAR_SPECIAL_0
+	compare VAR_SPECIAL_0, 0
 	goto_if_eq DewfordTown_Gym_EventScript_1530BA
-	compare SPECIALVAR_0, 1
+	compare VAR_SPECIAL_0, 1
 	goto_if_eq DewfordTown_Gym_EventScript_1530B6
-	compare SPECIALVAR_0, 2
+	compare VAR_SPECIAL_0, 2
 	goto_if_eq DewfordTown_Gym_EventScript_1530B2
 	goto DewfordTown_Gym_EventScript_1530AE
 
@@ -42,14 +42,14 @@ DewfordTown_Gym_EventScript_1530BA:: @ 81530BA
 DewfordTown_Gym_EventScript_1530BE:: @ 81530BE
 	call DewfordTown_Gym_EventScript_153122
 	nop1
-	compare SPECIALVAR_0, SPECIALVAR_1
+	compare VAR_SPECIAL_0, VAR_SPECIAL_1
 	goto_if_eq DewfordTown_Gym_EventScript_1530F5
-	copyvar SPECIALVAR_1, SPECIALVAR_0
-	compare SPECIALVAR_0, 1
+	copyvar VAR_SPECIAL_1, VAR_SPECIAL_0
+	compare VAR_SPECIAL_0, 1
 	goto_if_eq DewfordTown_Gym_EventScript_1530F6
-	compare SPECIALVAR_0, 2
+	compare VAR_SPECIAL_0, 2
 	goto_if_eq DewfordTown_Gym_EventScript_153101
-	compare SPECIALVAR_0, 3
+	compare VAR_SPECIAL_0, 3
 	goto_if_eq DewfordTown_Gym_EventScript_15310C
 
 DewfordTown_Gym_EventScript_1530F5:: @ 81530F5
@@ -80,20 +80,20 @@ DewfordTown_Gym_EventScript_153117:: @ 8153117
 	return
 
 DewfordTown_Gym_EventScript_153122:: @ 8153122
-	setvar SPECIALVAR_0, 0
+	setvar VAR_SPECIAL_0, 0
 	checktrainerflag OPPONENT_HIDEKI
 	goto_if 0, DewfordTown_Gym_EventScript_153135
-	addvar SPECIALVAR_0, 1
+	addvar VAR_SPECIAL_0, 1
 
 DewfordTown_Gym_EventScript_153135:: @ 8153135
 	checktrainerflag OPPONENT_TESSA
 	goto_if 0, DewfordTown_Gym_EventScript_153143
-	addvar SPECIALVAR_0, 1
+	addvar VAR_SPECIAL_0, 1
 
 DewfordTown_Gym_EventScript_153143:: @ 8153143
 	checktrainerflag OPPONENT_LAURA
 	goto_if 0, DewfordTown_Gym_EventScript_153151
-	addvar SPECIALVAR_0, 1
+	addvar VAR_SPECIAL_0, 1
 
 DewfordTown_Gym_EventScript_153151:: @ 8153151
 	return
@@ -117,7 +117,7 @@ DewfordTown_Gym_EventScript_153177:: @ 8153177
 	addvar VAR_PETALBURG_GYM_STATE, 1
 	compare VAR_PETALBURG_GYM_STATE, 6
 	call_if 1, DewfordTown_Gym_EventScript_1A00FB
-	setvar SPECIALVAR_8, 2
+	setvar VAR_SPECIAL_8, 2
 	call DewfordTown_Gym_EventScript_1A01C0
 	goto DewfordTown_Gym_EventScript_1531B5
 	end

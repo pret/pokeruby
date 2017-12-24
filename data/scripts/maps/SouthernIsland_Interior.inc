@@ -39,7 +39,7 @@ SouthernIsland_Interior_EventScript_160B95:: @ 8160B95
 
 SouthernIsland_Interior_EventScript_160B9B:: @ 8160B9B
 	lockall
-	setvar SPECIALVAR_8, 12
+	setvar VAR_SPECIAL_8, 12
 	goto SouthernIsland_Interior_EventScript_160BA7
 	end
 

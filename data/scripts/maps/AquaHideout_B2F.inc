@@ -9,14 +9,14 @@ AquaHideout_B2F_MapScript1_15D8B7:: @ 815D8B7
 AquaHideout_B2F_EventScript_15D8BD:: @ 815D8BD
 MagmaHideout_B2F_EventScript_15D8BD:: @ 815D8BD
 	lockall
-	setvar SPECIALVAR_8, 1
+	setvar VAR_SPECIAL_8, 1
 	playse 21
-	applymovement SPECIALVAR_8, AquaHideout_B2F_Movement_1A0833
+	applymovement VAR_SPECIAL_8, AquaHideout_B2F_Movement_1A0833
 	waitmovement 0
 	.ifdef SAPPHIRE
-	applymovement SPECIALVAR_8, AquaHideout_B2F_Movement_1A0839
+	applymovement VAR_SPECIAL_8, AquaHideout_B2F_Movement_1A0839
 	.else
-	applymovement SPECIALVAR_8, AquaHideout_B2F_Movement_1A0841
+	applymovement VAR_SPECIAL_8, AquaHideout_B2F_Movement_1A0841
 	.endif
 	waitmovement 0
 	setvar VAR_TEMP_1, 1
@@ -31,37 +31,37 @@ MagmaHideout_B2F_EventScript_15D8E1:: @ 815D8E1
 	end
 
 AquaHideout_B2F_EventScript_15D8FD:: @ 815D8FD
-	setvar SPECIALVAR_8, 1
+	setvar VAR_SPECIAL_8, 1
 	.ifdef SAPPHIRE
-	setvar SPECIALVAR_9, 4
+	setvar VAR_SPECIAL_9, 4
 	.else
-	setvar SPECIALVAR_9, 3
+	setvar VAR_SPECIAL_9, 3
 	.endif
 	.ifdef SAPPHIRE
-	applymovement SPECIALVAR_8, Movement_1A083F
+	applymovement VAR_SPECIAL_8, Movement_1A083F
 	.else
-	applymovement SPECIALVAR_8, AquaHideout_B2F_Movement_1A0843
+	applymovement VAR_SPECIAL_8, AquaHideout_B2F_Movement_1A0843
 	.endif
 	waitmovement 0
 	delay 20
-	applymovement SPECIALVAR_8, AquaHideout_B2F_Movement_1A0839
+	applymovement VAR_SPECIAL_8, AquaHideout_B2F_Movement_1A0839
 	waitmovement 0
 	msgbox AquaHideout_B2F_Text_197162, 4
 	closemessage
 	.ifdef SAPPHIRE
-	applymovement SPECIALVAR_8, Movement_1A083F
+	applymovement VAR_SPECIAL_8, Movement_1A083F
 	.else
-	applymovement SPECIALVAR_8, AquaHideout_B2F_Movement_1A0843
+	applymovement VAR_SPECIAL_8, AquaHideout_B2F_Movement_1A0843
 	.endif
 	.ifdef SAPPHIRE
-	applymovement SPECIALVAR_9, AquaHideout_B2F_Movement_15D958
+	applymovement VAR_SPECIAL_9, AquaHideout_B2F_Movement_15D958
 	.else
-	applymovement SPECIALVAR_9, AquaHideout_B2F_Movement_15D95D
+	applymovement VAR_SPECIAL_9, AquaHideout_B2F_Movement_15D95D
 	.endif
 	waitmovement 0
-	removeobject SPECIALVAR_9
+	removeobject VAR_SPECIAL_9
 	delay 20
-	applymovement SPECIALVAR_8, AquaHideout_B2F_Movement_1A0839
+	applymovement VAR_SPECIAL_8, AquaHideout_B2F_Movement_1A0839
 	waitmovement 0
 	msgbox AquaHideout_B2F_Text_1971AE, 4
 	setflag FLAG_EVIL_TEAM_ESCAPED_IN_SUBMARINE

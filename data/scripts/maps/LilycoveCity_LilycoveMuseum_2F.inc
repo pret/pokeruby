@@ -98,8 +98,8 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_1586D8:: @ 81586D8
 	lockall
 	checkflag FLAG_RECEIVED_GLASS_ORNAMENT
 	goto_if_eq LilycoveCity_LilycoveMuseum_2F_EventScript_158793
-	specialvar SPECIALVAR_4, sub_80C4D50
-	switch SPECIALVAR_4
+	specialvar VAR_SPECIAL_4, sub_80C4D50
+	switch VAR_SPECIAL_4
 	case 1, LilycoveCity_LilycoveMuseum_2F_EventScript_15872C
 	case 2, LilycoveCity_LilycoveMuseum_2F_EventScript_15872C
 	case 3, LilycoveCity_LilycoveMuseum_2F_EventScript_15872C

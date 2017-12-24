@@ -28,7 +28,7 @@ FallarborTown_House1_EventScript_153BDA:: @ 8153BDA
 	giveitem_std ITEM_TM27
 	compare RESULT, 0
 	goto_if_eq FallarborTown_House1_EventScript_1A029B
-	setvar SPECIALVAR_4, 280
+	setvar VAR_SPECIAL_4, 280
 	call FallarborTown_House1_EventScript_1A067F
 	setflag FLAG_RECEIVED_TM27
 	msgbox FallarborTown_House1_Text_177910, 4

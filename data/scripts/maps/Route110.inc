@@ -309,17 +309,17 @@ Route110_EventScript_14FD09:: @ 814FD09
 	return
 
 Route110_EventScript_14FD13:: @ 814FD13
-	setvar SPECIALVAR_8, 1
+	setvar VAR_SPECIAL_8, 1
 	goto Route110_EventScript_14FD34
 	end
 
 Route110_EventScript_14FD1E:: @ 814FD1E
-	setvar SPECIALVAR_8, 2
+	setvar VAR_SPECIAL_8, 2
 	goto Route110_EventScript_14FD34
 	end
 
 Route110_EventScript_14FD29:: @ 814FD29
-	setvar SPECIALVAR_8, 3
+	setvar VAR_SPECIAL_8, 3
 	goto Route110_EventScript_14FD34
 	end
 
@@ -337,11 +337,11 @@ Route110_EventScript_14FD34:: @ 814FD34
 	applymovement 28, Route110_Movement_1A0835
 	waitmovement 0
 	delay 30
-	compare SPECIALVAR_8, 1
+	compare VAR_SPECIAL_8, 1
 	call_if 1, Route110_EventScript_14FF14
-	compare SPECIALVAR_8, 2
+	compare VAR_SPECIAL_8, 2
 	call_if 1, Route110_EventScript_14FF1F
-	compare SPECIALVAR_8, 3
+	compare VAR_SPECIAL_8, 3
 	call_if 1, Route110_EventScript_14FF2A
 	checkplayergender
 	compare RESULT, 0
@@ -425,22 +425,22 @@ Route110_EventScript_14FEA5:: @ 814FEA5
 
 Route110_EventScript_14FEB2:: @ 814FEB2
 	closemessage
-	compare SPECIALVAR_8, 1
+	compare VAR_SPECIAL_8, 1
 	call_if 1, Route110_EventScript_14FF56
-	compare SPECIALVAR_8, 2
+	compare VAR_SPECIAL_8, 2
 	call_if 1, Route110_EventScript_14FF5E
-	compare SPECIALVAR_8, 3
+	compare VAR_SPECIAL_8, 3
 	call_if 1, Route110_EventScript_14FF66
 	setobjectmovementtype 28, 10
 	setobjectmovementtype 29, 10
 	removeobject 28
 	addobject 29
 	delay 45
-	compare SPECIALVAR_8, 1
+	compare VAR_SPECIAL_8, 1
 	call_if 1, Route110_EventScript_14FF35
-	compare SPECIALVAR_8, 2
+	compare VAR_SPECIAL_8, 2
 	call_if 1, Route110_EventScript_14FF40
-	compare SPECIALVAR_8, 3
+	compare VAR_SPECIAL_8, 3
 	call_if 1, Route110_EventScript_14FF4B
 	removeobject 29
 	setvar VAR_ROUTE110_STATE, 1

@@ -18,13 +18,13 @@ Event_TV:: @ 81A6E72
 	end
 
 EventScript_1A6EBB:
-	specialvar SPECIALVAR_4, special_0x44
-	compare SPECIALVAR_4, 255
+	specialvar VAR_SPECIAL_4, special_0x44
+	compare VAR_SPECIAL_4, 255
 	goto_if_eq EventScript_1A6F3F
 	specialvar RESULT, special_0x4a
 	compare RESULT, 255
 	goto_if_eq EventScript_1A6F3F
-	copyvar SPECIALVAR_4, RESULT
+	copyvar VAR_SPECIAL_4, RESULT
 	specialvar RESULT, sub_80BDA0C
 	compare RESULT, 0
 	goto_if 5, EventScript_1A6F21

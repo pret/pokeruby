@@ -6,7 +6,7 @@ LilycoveCity_DepartmentStoreElevator_EventScript_15A39C:: @ 815A39C
 	faceplayer
 	checkflag FLAG_TEMP_2
 	call_if 0, LilycoveCity_DepartmentStoreElevator_EventScript_15A4CF
-	copyvar SPECIALVAR_5, VAR_DEPT_STORE_FLOOR
+	copyvar VAR_SPECIAL_5, VAR_DEPT_STORE_FLOOR
 	special sub_810E944
 	message LilycoveCity_DepartmentStoreElevator_Text_1A0EF6
 	waitmessage

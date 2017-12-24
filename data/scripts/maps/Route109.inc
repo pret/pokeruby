@@ -54,7 +54,7 @@ Route109_EventScript_14F548:: @ 814F548
 	hideobjectat 1, MAP_ROUTE109
 	msgbox Route109_Text_16B4B5, 4
 	closemessage
-	copyvar VAR_BRINEY_LOCATION, SPECIALVAR_8
+	copyvar VAR_BRINEY_LOCATION, VAR_SPECIAL_8
 	resetobjectpriority 255, MAP_ROUTE109
 	resetobjectpriority 2, MAP_DEWFORD_TOWN
 	moveobjectoffscreen 2

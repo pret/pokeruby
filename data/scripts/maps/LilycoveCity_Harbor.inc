@@ -86,7 +86,7 @@ LilycoveCity_Harbor_EventScript_15998A:: @ 815998A
 	call_if 1, LilycoveCity_Harbor_EventScript_1599CE
 	delay 30
 	hideobjectat 255, MAP_PETALBURG_CITY
-	setvar SPECIALVAR_4, 2
+	setvar VAR_SPECIAL_4, 2
 	call LilycoveCity_Harbor_EventScript_1A040E
 	return
 
@@ -136,7 +136,7 @@ LilycoveCity_Harbor_EventScript_1599EE:: @ 81599EE
 	delay 30
 	hideobjectat 255, MAP_PETALBURG_CITY
 	special ScrSpecial_HealPlayerParty
-	setvar SPECIALVAR_4, 2
+	setvar VAR_SPECIAL_4, 2
 	call LilycoveCity_Harbor_EventScript_1A040E
 	warp MAP_SOUTHERN_ISLAND_EXTERIOR, 255, 13, 22
 	waitstate
