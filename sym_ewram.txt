@@ -641,7 +641,4 @@ gUnknown_02039460: @ 2039460
 gUnknown_02039760: @ 2039760
 	.space 0xC00
 
-gUnknown_0203A360: @ 203A360
-	.space 0x20
-
 	.include "src/engine/menu_cursor.o"
