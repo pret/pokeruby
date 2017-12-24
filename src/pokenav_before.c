@@ -308,7 +308,7 @@ void sub_80EBA5C() {
 				gMain.state++;
 				SetMainCallback2(&sub_80EBBE8);
 				break;
-			} 
+			}
 			break;
 		case 1:
 			SetVBlankCallback(NULL);
@@ -331,7 +331,7 @@ void sub_80EBA5C() {
 		case 7:
 			sub_80F1A90();
 			gMain.state++;
-		case 8: 
+		case 8:
 			if (sub_80F1AC4()) return;
 			break;
 		case 9:
@@ -535,7 +535,7 @@ void sub_80EBDD8() {
 			sub_80EBDBC(&sub_80EC268);
 		}
 		return;
-		
+
 	}
 
 }
@@ -584,7 +584,7 @@ void sub_80EC00C() {
 		ewram0_10.var304++;
 		return;
 	case 9:
-		sub_80F2598(); 
+		sub_80F2598();
 		ewram0_10.var304++;
 		break;
 	case 10:
@@ -3479,8 +3479,6 @@ void sub_80EF840(void)
 	}
 }
 
-// The only non-matching part is the gSaveBlock2.regionMapZoom access.
-#ifdef NONMATCHING
 bool8 sub_80EF874(void)
 {
 	switch (gUnknown_083DFEC4->unkD160)
@@ -3504,7 +3502,7 @@ bool8 sub_80EF874(void)
 		MenuZeroFillScreen();
 		break;
 	case 5:
-		sub_80FA904(&gUnknown_083DFEC4->regionMap, gSaveBlock2.regionMapZoom);
+		sub_80FA904(&gUnknown_083DFEC4->regionMap, gSaveBlock2.regionMapZoom ? TRUE : FALSE);
 		break;
 	case 6:
 		if (sub_80FA940())
@@ -3552,190 +3550,8 @@ bool8 sub_80EF874(void)
 	gUnknown_083DFEC4->unkD160++;
 	return TRUE;
 }
-#else
-asm(".include \"constants/gba_constants.inc\"\n");
 
-__attribute__((naked))
-bool8 sub_80EF874(void)
-{
-    asm(".syntax unified\n\
-	push {lr}\n\
-	ldr r0, _080EF890 @ =gUnknown_083DFEC4\n\
-	ldr r0, [r0]\n\
-	ldr r1, _080EF894 @ =0x0000d160\n\
-	adds r0, r1\n\
-	ldrh r0, [r0]\n\
-	cmp r0, 0xB\n\
-	bls _080EF886\n\
-	b _080EF9D8\n\
-_080EF886:\n\
-	lsls r0, 2\n\
-	ldr r1, _080EF898 @ =_080EF89C\n\
-	adds r0, r1\n\
-	ldr r0, [r0]\n\
-	mov pc, r0\n\
-	.align 2, 0\n\
-_080EF890: .4byte gUnknown_083DFEC4\n\
-_080EF894: .4byte 0x0000d160\n\
-_080EF898: .4byte _080EF89C\n\
-	.align 2, 0\n\
-_080EF89C:\n\
-	.4byte _080EF8CC\n\
-	.4byte _080EF8D2\n\
-	.4byte _080EF8E0\n\
-	.4byte _080EF8EC\n\
-	.4byte _080EF8F6\n\
-	.4byte _080EF8FC\n\
-	.4byte _080EF920\n\
-	.4byte _080EF92C\n\
-	.4byte _080EF940\n\
-	.4byte _080EF954\n\
-	.4byte _080EF960\n\
-	.4byte _080EF972\n\
-_080EF8CC:\n\
-	bl sub_80EEDE8\n\
-	b _080EF9DC\n\
-_080EF8D2:\n\
-	ldr r0, _080EF8DC @ =gWindowConfig_81E7224\n\
-	bl SetUpWindowConfig\n\
-	b _080EF9DC\n\
-	.align 2, 0\n\
-_080EF8DC: .4byte gWindowConfig_81E7224\n\
-_080EF8E0:\n\
-	ldr r0, _080EF8E8 @ =gWindowConfig_81E7224\n\
-	bl MultistepInitMenuWindowBegin\n\
-	b _080EF9DC\n\
-	.align 2, 0\n\
-_080EF8E8: .4byte gWindowConfig_81E7224\n\
-_080EF8EC:\n\
-	bl MultistepInitMenuWindowContinue\n\
-	cmp r0, 0\n\
-	bne _080EF9DC\n\
-	b _080EF9EA\n\
-_080EF8F6:\n\
-	bl MenuZeroFillScreen\n\
-	b _080EF9DC\n\
-_080EF8FC:\n\
-	ldr r0, _080EF914 @ =gUnknown_083DFEC4\n\
-	ldr r0, [r0]\n\
-	ldr r2, _080EF918 @ =0x00006e18\n\
-	adds r0, r2\n\
-	ldr r1, _080EF91C @ =gSaveBlock2\n\
-	ldrb r1, [r1, 0x15]\n\
-	lsrs r1, 3\n\
-	movs r2, 0x1\n\
-	ands r1, r2\n\
-	bl sub_80FA904\n\
-	b _080EF9DC\n\
-	.align 2, 0\n\
-_080EF914: .4byte gUnknown_083DFEC4\n\
-_080EF918: .4byte 0x00006e18\n\
-_080EF91C: .4byte gSaveBlock2\n\
-_080EF920:\n\
-	bl sub_80FA940\n\
-	lsls r0, 24\n\
-	cmp r0, 0\n\
-	beq _080EF9DC\n\
-	b _080EF9EA\n\
-_080EF92C:\n\
-	ldr r0, _080EF938 @ =gPokenavHoennMapSquares_Gfx\n\
-	ldr r1, _080EF93C @ =0x06005000\n\
-	bl LZ77UnCompVram\n\
-	b _080EF9DC\n\
-	.align 2, 0\n\
-_080EF938: .4byte gPokenavHoennMapSquares_Gfx\n\
-_080EF93C: .4byte 0x06005000\n\
-_080EF940:\n\
-	ldr r0, _080EF950 @ =gPokenavHoennMapSquares_Pal\n\
-	movs r1, 0x30\n\
-	movs r2, 0x20\n\
-	bl LoadPalette\n\
-	bl sub_80EFC3C\n\
-	b _080EF9DC\n\
-	.align 2, 0\n\
-_080EF950: .4byte gPokenavHoennMapSquares_Pal\n\
-_080EF954:\n\
-	bl sub_80EFC64\n\
-	lsls r0, 24\n\
-	cmp r0, 0\n\
-	beq _080EF9DC\n\
-	b _080EF9EA\n\
-_080EF960:\n\
-	movs r0, 0xD\n\
-	movs r1, 0x3\n\
-	movs r2, 0x1D\n\
-	movs r3, 0x11\n\
-	bl MenuDrawTextWindow\n\
-	bl sub_80EF9F8\n\
-	b _080EF9DC\n\
-_080EF972:\n\
-	ldr r0, _080EF990 @ =gUnknown_083DFEC4\n\
-	ldr r1, [r0]\n\
-	ldr r2, _080EF994 @ =0x00006e90\n\
-	adds r0, r1, r2\n\
-	ldrb r0, [r0]\n\
-	cmp r0, 0\n\
-	bne _080EF9A0\n\
-	ldr r2, _080EF998 @ =0x00007698\n\
-	adds r0, r1, r2\n\
-	movs r1, 0xA0\n\
-	strh r1, [r0]\n\
-	ldr r0, _080EF99C @ =REG_BG0VOFS\n\
-	strh r1, [r0]\n\
-	b _080EF9B0\n\
-	.align 2, 0\n\
-_080EF990: .4byte gUnknown_083DFEC4\n\
-_080EF994: .4byte 0x00006e90\n\
-_080EF998: .4byte 0x00007698\n\
-_080EF99C: .4byte REG_BG0VOFS\n\
-_080EF9A0:\n\
-	ldr r0, _080EF9C8 @ =0x00007698\n\
-	adds r1, r0\n\
-	movs r2, 0\n\
-	movs r0, 0x80\n\
-	lsls r0, 1\n\
-	strh r0, [r1]\n\
-	ldr r0, _080EF9CC @ =REG_BG0VOFS\n\
-	strh r2, [r0]\n\
-_080EF9B0:\n\
-	ldr r2, _080EF9D0 @ =REG_BG0CNT\n\
-	ldrh r0, [r2]\n\
-	strh r0, [r2]\n\
-	ldrh r0, [r2]\n\
-	movs r1, 0x1\n\
-	orrs r0, r1\n\
-	strh r0, [r2]\n\
-	ldr r1, _080EF9D4 @ =REG_BLDCNT\n\
-	movs r0, 0\n\
-	strh r0, [r1]\n\
-	b _080EF9DC\n\
-	.align 2, 0\n\
-_080EF9C8: .4byte 0x00007698\n\
-_080EF9CC: .4byte REG_BG0VOFS\n\
-_080EF9D0: .4byte REG_BG0CNT\n\
-_080EF9D4: .4byte REG_BLDCNT\n\
-_080EF9D8:\n\
-	movs r0, 0\n\
-	b _080EF9EC\n\
-_080EF9DC:\n\
-	ldr r0, _080EF9F0 @ =gUnknown_083DFEC4\n\
-	ldr r1, [r0]\n\
-	ldr r2, _080EF9F4 @ =0x0000d160\n\
-	adds r1, r2\n\
-	ldrh r0, [r1]\n\
-	adds r0, 0x1\n\
-	strh r0, [r1]\n\
-_080EF9EA:\n\
-	movs r0, 0x1\n\
-_080EF9EC:\n\
-	pop {r1}\n\
-	bx r1\n\
-	.align 2, 0\n\
-_080EF9F0: .4byte gUnknown_083DFEC4\n\
-_080EF9F4: .4byte 0x0000d160\n\
-    .syntax divided\n");
-}
-#endif // NONMATCHING
+asm(".include \"constants/gba_constants.inc\"\n");
 
 #ifdef NONMATCHING
 void sub_80EF9F8(void)
@@ -4335,7 +4151,7 @@ void sub_80EFE7C(void)
 	case 2:
 		sub_80EFDE4(1);
 		gUnknown_083DFEC4->unk769D = 1;
-		break;	
+		break;
 	}
 }
 
