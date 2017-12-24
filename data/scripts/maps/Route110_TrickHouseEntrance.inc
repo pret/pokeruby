@@ -736,23 +736,23 @@ Route110_TrickHouseEntrance_EventScript_1618B0:: @ 81618B0
 	end
 
 Route110_TrickHouseEntrance_EventScript_1618E1:: @ 81618E1
-	setvar 0x8004, 6
-	setvar 0x8005, 3
-	setvar 0x8006, 0
+	setvar SPECIALVAR_4, 6
+	setvar SPECIALVAR_5, 3
+	setvar SPECIALVAR_6, 0
 	call Route110_TrickHouseEntrance_EventScript_161920
 	return
 
 Route110_TrickHouseEntrance_EventScript_1618F6:: @ 81618F6
-	setvar 0x8004, 11
-	setvar 0x8005, 5
-	setvar 0x8006, 0
+	setvar SPECIALVAR_4, 11
+	setvar SPECIALVAR_5, 5
+	setvar SPECIALVAR_6, 0
 	call Route110_TrickHouseEntrance_EventScript_161920
 	return
 
 Route110_TrickHouseEntrance_EventScript_16190B:: @ 816190B
-	setvar 0x8004, 9
-	setvar 0x8005, 2
-	setvar 0x8006, 0
+	setvar SPECIALVAR_4, 9
+	setvar SPECIALVAR_5, 2
+	setvar SPECIALVAR_6, 0
 	call Route110_TrickHouseEntrance_EventScript_161920
 	return
 

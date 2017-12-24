@@ -77,7 +77,7 @@ MossdeepCity_StevensHouse_EventScript_15AA7C:: @ 815AA7C
 	getpartysize
 	compare RESULT, 6
 	goto_if_eq MossdeepCity_StevensHouse_EventScript_15AADC
-	copyvar 0x8004, RESULT
+	copyvar SPECIALVAR_4, RESULT
 	removeobject 2
 	playfanfare 370
 	message MossdeepCity_StevensHouse_Text_18DD61

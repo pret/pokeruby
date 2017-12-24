@@ -169,4 +169,25 @@
 #define VAR_STEVENS_HOUSE_STATE           0x40C6
 #define VAR_OLDALE_STATE                  0x40C7
 
+// special vars
+// They are commonly used as parameters to commands, or return values from commands.
+#define SPECIALVAR_0     0x8000
+#define SPECIALVAR_1     0x8001
+#define SPECIALVAR_2     0x8002
+#define SPECIALVAR_3     0x8003
+#define SPECIALVAR_4     0x8004
+#define SPECIALVAR_5     0x8005
+#define SPECIALVAR_6     0x8006
+#define SPECIALVAR_7     0x8007
+#define SPECIALVAR_8     0x8008
+#define SPECIALVAR_9     0x8009
+#define SPECIALVAR_A     0x800A
+#define SPECIALVAR_B     0x800B
+#define FACING           0x800C
+#define RESULT           0x800D
+#define ITEM_ID          0x800E
+#define LAST_TALKED      0x800F
+#define CONTEST_RANK     0x8010
+#define CONTEST_CATEGORY 0x8011
+
 #endif // GUARD_CONSTANTS_VARS_H

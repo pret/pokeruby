@@ -18,8 +18,8 @@ MossdeepCity_GameCorner_B1F_EventScript_15AE6E:: @ 815AE6E
 	special PrintEReaderTrainerGreeting
 	msgbox gStringVar4, 4
 	closemessage
-	setvar 0x8004, 2
-	setvar 0x8005, 0
+	setvar SPECIALVAR_4, 2
+	setvar SPECIALVAR_5, 0
 	special sub_813556C
 	waitstate
 	compare RESULT, 3

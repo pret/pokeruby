@@ -37,7 +37,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152CBE:: @ 8152CBE
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152CEA:: @ 8152CEA
-	setvar 0x8004, 0
+	setvar SPECIALVAR_4, 0
 	call LittlerootTown_ProfessorBirchsLab_EventScript_1A0678
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_152CFA
 	end

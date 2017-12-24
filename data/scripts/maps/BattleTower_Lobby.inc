@@ -11,22 +11,22 @@ BattleTower_Lobby_MapScript1_160293:: @ 8160293
 	end
 
 BattleTower_Lobby_EventScript_16029C:: @ 816029C
-	setvar 0x8004, 10
+	setvar SPECIALVAR_4, 10
 	special sub_8135668
 	checkflag FLAG_RECEIVED_GOLD_SHIELD
 	goto_if_eq BattleTower_Lobby_EventScript_1602E4
 	checkflag FLAG_RECEIVED_SILVER_SHIELD
 	goto_if_eq BattleTower_Lobby_EventScript_1602CD
-	specialvar 0x8007, sub_810F404
-	compare 0x8007, 50
+	specialvar SPECIALVAR_7, sub_810F404
+	compare SPECIALVAR_7, 50
 	goto_if 0, BattleTower_Lobby_EventScript_1602E4
 	clearflag FLAG_HIDE_AWARD_MAN_BATTLE_TOWER
 	special sub_810F8FC
 	return
 
 BattleTower_Lobby_EventScript_1602CD:: @ 81602CD
-	specialvar 0x8007, sub_810F404
-	compare 0x8007, 100
+	specialvar SPECIALVAR_7, sub_810F404
+	compare SPECIALVAR_7, 100
 	goto_if 0, BattleTower_Lobby_EventScript_1602E4
 	clearflag FLAG_HIDE_AWARD_MAN_BATTLE_TOWER
 	special sub_810F8FC
@@ -75,7 +75,7 @@ BattleTower_Lobby_EventScript_160342:: @ 8160342
 	faceplayer
 	message BattleTower_Lobby_Text_19A487
 	waitmessage
-	setvar 0x8004, 0
+	setvar SPECIALVAR_4, 0
 	special sub_81358A4
 	compare RESULT, 6
 	goto_if_eq BattleTower_Lobby_EventScript_16037D
@@ -89,23 +89,23 @@ BattleTower_Lobby_EventScript_160342:: @ 8160342
 	msgbox BattleTower_Lobby_Text_19A719, 4
 
 BattleTower_Lobby_EventScript_16037D:: @ 816037D
-	setvar 0x8004, 8
+	setvar SPECIALVAR_4, 8
 	special sub_81358A4
 	compare RESULT, 1
 	goto_if_eq BattleTower_Lobby_EventScript_1603AD
 	message BattleTower_Lobby_Text_19A589
 	waitmessage
-	setvar 0x8004, 13
+	setvar SPECIALVAR_4, 13
 	special sub_8135668
 	special DetermineBattleTowerPrize
-	setvar 0x8004, 3
+	setvar SPECIALVAR_4, 3
 	special sub_8135BA0
 	playse 55
 	waitse
 
 BattleTower_Lobby_EventScript_1603AD:: @ 81603AD
-	setvar 0x8004, 0
-	setvar 0x8005, 3
+	setvar SPECIALVAR_4, 0
+	setvar SPECIALVAR_5, 3
 	special sub_8135668
 	message BattleTower_Lobby_Text_19A4BB
 	waitmessage
@@ -116,7 +116,7 @@ BattleTower_Lobby_EventScript_1603AD:: @ 81603AD
 	waitmessage
 	playfanfare 370
 	waitfanfare
-	setvar 0x8004, 9
+	setvar SPECIALVAR_4, 9
 	special sub_81358A4
 	compare RESULT, 49
 	goto_if 5, BattleTower_Lobby_EventScript_1603F8
@@ -144,9 +144,9 @@ BattleTower_Lobby_EventScript_160419:: @ 8160419
 	waitmessage
 	message BattleTower_Lobby_Text_19A589
 	waitmessage
-	setvar 0x8004, 13
+	setvar SPECIALVAR_4, 13
 	special sub_8135668
-	setvar 0x8004, 0
+	setvar SPECIALVAR_4, 0
 	special sub_8135BA0
 	playse 55
 	waitse
@@ -164,12 +164,12 @@ BattleTower_Lobby_EventScript_16044B:: @ 816044B
 	waitmessage
 	message BattleTower_Lobby_Text_19A5CE
 	waitmessage
-	setvar 0x8004, 1
+	setvar SPECIALVAR_4, 1
 	special sub_8135BA0
 	playse 55
 	waitse
-	setvar 0x8004, 8
-	setvar 0x8005, 0
+	setvar SPECIALVAR_4, 8
+	setvar SPECIALVAR_5, 0
 	special sub_8135668
 	setvar VAR_TEMP_0, 5
 	special SavePlayerParty
@@ -184,7 +184,7 @@ BattleTower_Lobby_EventScript_16044B:: @ 816044B
 BattleTower_Lobby_EventScript_16049E:: @ 816049E
 	lock
 	faceplayer
-	setvar 0x8004, 0
+	setvar SPECIALVAR_4, 0
 	special sub_81358A4
 	compare RESULT, 6
 	goto_if_eq BattleTower_Lobby_EventScript_160342
@@ -209,11 +209,11 @@ BattleTower_Lobby_EventScript_1604FA:: @ 81604FA
 	case 2, BattleTower_Lobby_EventScript_160652
 	case 127, BattleTower_Lobby_EventScript_160652
 	special CheckPartyBattleTowerBanlist
-	compare 0x8004, 1
+	compare SPECIALVAR_4, 1
 	goto_if_eq BattleTower_Lobby_EventScript_16060D
-	setvar 0x8004, 1
-	copyvar 0x8005, RESULT
-	copyvar 0x8006, RESULT
+	setvar SPECIALVAR_4, 1
+	copyvar SPECIALVAR_5, RESULT
+	copyvar SPECIALVAR_6, RESULT
 	special sub_8135668
 	msgbox BattleTower_Lobby_Text_19A07B, 4
 	fadescreen 1
@@ -228,16 +228,16 @@ BattleTower_Lobby_EventScript_1604FA:: @ 81604FA
 	case 127, BattleTower_Lobby_EventScript_16064F
 
 BattleTower_Lobby_EventScript_160587:: @ 8160587
-	setvar 0x8004, 5
+	setvar SPECIALVAR_4, 5
 	special sub_8135668
 	setvar VAR_TEMP_0, 0
-	setvar 0x8004, 11
+	setvar SPECIALVAR_4, 11
 	special sub_8135668
-	setvar 0x8004, 0
-	setvar 0x8005, 1
+	setvar SPECIALVAR_4, 0
+	setvar SPECIALVAR_5, 1
 	special sub_8135668
-	setvar 0x8004, 8
-	setvar 0x8005, 0
+	setvar SPECIALVAR_4, 8
+	setvar SPECIALVAR_5, 0
 	special sub_8135668
 	special LoadPlayerParty
 	closemessage
@@ -276,7 +276,7 @@ BattleTower_Lobby_EventScript_160635:: @ 8160635
 	goto BattleTower_Lobby_EventScript_160662
 
 BattleTower_Lobby_EventScript_160642:: @ 8160642
-	setvar 0x8004, 12
+	setvar SPECIALVAR_4, 12
 	special sub_8135668
 	goto BattleTower_Lobby_EventScript_160652
 
@@ -285,7 +285,7 @@ BattleTower_Lobby_EventScript_16064F:: @ 816064F
 
 BattleTower_Lobby_EventScript_160652:: @ 8160652
 	msgbox BattleTower_Lobby_Text_199FA9, 4
-	setvar 0x8004, 11
+	setvar SPECIALVAR_4, 11
 	special sub_8135668
 
 BattleTower_Lobby_EventScript_160662:: @ 8160662
@@ -343,7 +343,7 @@ BattleTower_Lobby_EventScript_1606A5:: @ 81606A5
 
 BattleTower_Lobby_EventScript_1606CC:: @ 81606CC
 	msgbox BattleTower_Lobby_Text_19A7C3, 4
-	setvar 0x8004, 1
+	setvar SPECIALVAR_4, 1
 	call BattleTower_Lobby_EventScript_1A00F3
 	lock
 	faceplayer
@@ -392,7 +392,7 @@ BattleTower_Lobby_EventScript_160733:: @ 8160733
 	checkflag FLAG_RECEIVED_SILVER_SHIELD
 	goto_if_eq BattleTower_Lobby_EventScript_160773
 	msgbox BattleTower_Lobby_Text_19A9EE, 4
-	setvar 0x8008, DECOR_SILVER_SHIELD
+	setvar SPECIALVAR_8, DECOR_SILVER_SHIELD
 	givedecoration_std DECOR_SILVER_SHIELD
 	compare RESULT, 0
 	goto_if_eq BattleTower_Lobby_EventScript_1607AF
@@ -406,7 +406,7 @@ BattleTower_Lobby_EventScript_160773:: @ 8160773
 	compare RESULT, 100
 	goto_if 0, BattleTower_Lobby_EventScript_1607C5
 	msgbox BattleTower_Lobby_Text_19AAC4, 4
-	setvar 0x8008, DECOR_GOLD_SHIELD
+	setvar SPECIALVAR_8, DECOR_GOLD_SHIELD
 	givedecoration_std DECOR_GOLD_SHIELD
 	compare RESULT, 0
 	goto_if_eq BattleTower_Lobby_EventScript_1607AF
@@ -416,7 +416,7 @@ BattleTower_Lobby_EventScript_160773:: @ 8160773
 	end
 
 BattleTower_Lobby_EventScript_1607AF:: @ 81607AF
-	bufferdecorationname 1, 0x8008
+	bufferdecorationname 1, SPECIALVAR_8
 	msgbox BattleTower_Lobby_Text_1A0CEF, 4
 	msgbox BattleTower_Lobby_Text_19ABED, 4
 	release

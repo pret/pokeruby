@@ -76,15 +76,15 @@ LittlerootTown_BrendansHouse_1F_Movement_152720:: @ 8152720
 
 LittlerootTown_BrendansHouse_1F_EventScript_152722:: @ 8152722
 	lockall
-	setvar 0x8004, 1
-	setvar 0x8005, 0
+	setvar SPECIALVAR_4, 1
+	setvar SPECIALVAR_5, 0
 	goto LittlerootTown_BrendansHouse_1F_EventScript_1B6956
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_152733:: @ 8152733
 	lockall
-	setvar 0x8004, 0
-	setvar 0x8005, 1
+	setvar SPECIALVAR_4, 0
+	setvar SPECIALVAR_5, 1
 	goto LittlerootTown_BrendansHouse_1F_EventScript_1B6ABF
 	end
 
@@ -116,9 +116,9 @@ LittlerootTown_BrendansHouse_1F_Movement_152782:: @ 8152782
 
 LittlerootTown_BrendansHouse_1F_EventScript_152789:: @ 8152789
 	lockall
-	setvar 0x8004, 1
-	setvar 0x8005, 0
-	applymovement 0x8004, LittlerootTown_BrendansHouse_1F_Movement_1A083F
+	setvar SPECIALVAR_4, 1
+	setvar SPECIALVAR_5, 0
+	applymovement SPECIALVAR_4, LittlerootTown_BrendansHouse_1F_Movement_1A083F
 	waitmovement 0
 	goto LittlerootTown_BrendansHouse_1F_EventScript_1B69B7
 	end

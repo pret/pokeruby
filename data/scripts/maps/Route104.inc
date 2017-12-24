@@ -153,7 +153,7 @@ Route104_EventScript_14EFD5:: @ 814EFD5
 	call Route104_EventScript_1A02EF
 	setflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE104
 	hideobjectat 7, MAP_ROUTE104
-	copyvar VAR_BRINEY_LOCATION, 0x8008
+	copyvar VAR_BRINEY_LOCATION, SPECIALVAR_8
 	resetobjectpriority 255, MAP_ROUTE104
 	resetobjectpriority 2, MAP_DEWFORD_TOWN
 	moveobjectoffscreen 2

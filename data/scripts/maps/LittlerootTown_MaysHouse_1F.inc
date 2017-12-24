@@ -76,15 +76,15 @@ LittlerootTown_MaysHouse_1F_Movement_15295E:: @ 815295E
 
 LittlerootTown_MaysHouse_1F_EventScript_152960:: @ 8152960
 	lockall
-	setvar 0x8004, 1
-	setvar 0x8005, 1
+	setvar SPECIALVAR_4, 1
+	setvar SPECIALVAR_5, 1
 	goto LittlerootTown_MaysHouse_1F_EventScript_1B6956
 	end
 
 LittlerootTown_MaysHouse_1F_EventScript_152971:: @ 8152971
 	lockall
-	setvar 0x8004, 1
-	setvar 0x8005, 1
+	setvar SPECIALVAR_4, 1
+	setvar SPECIALVAR_5, 1
 	goto LittlerootTown_MaysHouse_1F_EventScript_1B6B2E
 	end
 
@@ -163,9 +163,9 @@ LittlerootTown_BrendansHouse_1F_EventScript_152A2B:: @ 8152A2B
 
 LittlerootTown_MaysHouse_1F_EventScript_152A35:: @ 8152A35
 	lockall
-	setvar 0x8004, 1
-	setvar 0x8005, 1
-	applymovement 0x8004, LittlerootTown_MaysHouse_1F_Movement_1A0843
+	setvar SPECIALVAR_4, 1
+	setvar SPECIALVAR_5, 1
+	applymovement SPECIALVAR_4, LittlerootTown_MaysHouse_1F_Movement_1A0843
 	waitmovement 0
 	goto LittlerootTown_MaysHouse_1F_EventScript_1B69B7
 	end

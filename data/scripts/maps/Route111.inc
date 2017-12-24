@@ -140,25 +140,25 @@ Route111_EventScript_150100:: @ 8150100
 
 @ 815010A
 	lockall
-	setvar 0x8004, 0
+	setvar SPECIALVAR_4, 0
 	goto Route111_EventScript_15013A
 	end
 
 Route111_EventScript_150116:: @ 8150116
 	lockall
-	setvar 0x8004, 1
+	setvar SPECIALVAR_4, 1
 	goto Route111_EventScript_15013A
 	end
 
 Route111_EventScript_150122:: @ 8150122
 	lockall
-	setvar 0x8004, 2
+	setvar SPECIALVAR_4, 2
 	goto Route111_EventScript_15013A
 	end
 
 @ 815012E
 	lockall
-	setvar 0x8004, 3
+	setvar SPECIALVAR_4, 3
 	goto Route111_EventScript_15013A
 	end
 
@@ -173,13 +173,13 @@ Route111_EventScript_15013A:: @ 815013A
 Route111_EventScript_150151:: @ 8150151
 	msgbox Route111_Text_1A0F93, 4
 	closemessage
-	compare 0x8004, 0
+	compare SPECIALVAR_4, 0
 	call_if 1, Route111_EventScript_150188
-	compare 0x8004, 1
+	compare SPECIALVAR_4, 1
 	call_if 1, Route111_EventScript_150193
-	compare 0x8004, 2
+	compare SPECIALVAR_4, 2
 	call_if 1, Route111_EventScript_15019E
-	compare 0x8004, 3
+	compare SPECIALVAR_4, 3
 	call_if 1, Route111_EventScript_1501A9
 	releaseall
 	end

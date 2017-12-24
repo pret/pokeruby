@@ -6,25 +6,25 @@ RustboroCity_House1_EventScript_157C7D:: @ 8157C7D
 	faceplayer
 	checkflag FLAG_RUSTBORO_NPC_TRADE_COMPLETED
 	goto_if_eq RustboroCity_House1_EventScript_157D13
-	setvar 0x8008, 0
-	copyvar 0x8004, 0x8008
+	setvar SPECIALVAR_8, 0
+	copyvar SPECIALVAR_4, SPECIALVAR_8
 	specialvar RESULT, sub_804D89C
-	copyvar 0x8009, RESULT
+	copyvar SPECIALVAR_9, RESULT
 	msgbox RustboroCity_House1_Text_184EBA, 5
 	compare RESULT, 0
 	goto_if_eq RustboroCity_House1_EventScript_157CFB
 	special sub_80F9A0C
 	waitstate
-	copyvar 0x800a, 0x8004
-	compare 0x8004, 255
+	copyvar SPECIALVAR_A, SPECIALVAR_4
+	compare SPECIALVAR_4, 255
 	goto_if_eq RustboroCity_House1_EventScript_157CFB
-	copyvar 0x8005, 0x800a
+	copyvar SPECIALVAR_5, SPECIALVAR_A
 	specialvar RESULT, sub_804DB2C
-	copyvar 0x800b, RESULT
-	compare RESULT, 0x8009
+	copyvar SPECIALVAR_B, RESULT
+	compare RESULT, SPECIALVAR_9
 	goto_if 5, RustboroCity_House1_EventScript_157D05
-	copyvar 0x8004, 0x8008
-	copyvar 0x8005, 0x800a
+	copyvar SPECIALVAR_4, SPECIALVAR_8
+	copyvar SPECIALVAR_5, SPECIALVAR_A
 	special sub_804DB68
 	special sub_804E174
 	waitstate
@@ -39,7 +39,7 @@ RustboroCity_House1_EventScript_157CFB:: @ 8157CFB
 	end
 
 RustboroCity_House1_EventScript_157D05:: @ 8157D05
-	bufferspeciesname 0, 0x8009
+	bufferspeciesname 0, SPECIALVAR_9
 	msgbox RustboroCity_House1_Text_184F8F, 4
 	release
 	end

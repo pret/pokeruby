@@ -8,7 +8,7 @@ PetalburgCity_PokemonCenter_1F_MapScript1_15520A:: @ 815520A
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_155213:: @ 8155213
-	setvar 0x800b, 1
+	setvar SPECIALVAR_B, 1
 	call PetalburgCity_PokemonCenter_1F_EventScript_19FD5B
 	waitmessage
 	waitbuttonpress

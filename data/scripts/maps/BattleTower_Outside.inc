@@ -68,7 +68,7 @@ BattleTower_Outside_EventScript_160232:: @ 8160232
 	waitmovement 0
 	delay 30
 	hideobjectat 5, MAP_BATTLE_TOWER_OUTSIDE
-	setvar 0x8004, 4
+	setvar SPECIALVAR_4, 4
 	call BattleTower_Outside_EventScript_1A047C
 	return
 

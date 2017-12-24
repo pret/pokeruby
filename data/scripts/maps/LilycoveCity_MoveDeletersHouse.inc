@@ -16,7 +16,7 @@ LilycoveCity_MoveDeletersHouse_EventScript_159ADE:: @ 8159ADE
 	msgbox LilycoveCity_MoveDeletersHouse_Text_18B68C, 4
 	special sub_80F9A0C
 	waitstate
-	compare 0x8004, 255
+	compare SPECIALVAR_4, 255
 	goto_if_eq LilycoveCity_MoveDeletersHouse_EventScript_159B7B
 	special sub_80FA148
 	compare RESULT, 1
@@ -28,7 +28,7 @@ LilycoveCity_MoveDeletersHouse_EventScript_159ADE:: @ 8159ADE
 	fadescreen 1
 	special sub_80F9EEC
 	fadescreen 0
-	compare 0x8005, 4
+	compare SPECIALVAR_5, 4
 	goto_if_eq LilycoveCity_MoveDeletersHouse_EventScript_159ADE
 	special ScrSpecial_GetPokemonNicknameAndMoveName
 	msgbox LilycoveCity_MoveDeletersHouse_Text_18B6F2, 5

@@ -10,17 +10,17 @@ Route120_MapScript1_15161E:: @ 815161E
 	end
 
 Route120_EventScript_151628:: @ 8151628
-	compare 0x8004, 0
+	compare SPECIALVAR_4, 0
 	call_if 1, Route120_EventScript_15166B
-	compare 0x8004, 1
+	compare SPECIALVAR_4, 1
 	call_if 1, Route120_EventScript_151672
-	compare 0x8004, 2
+	compare SPECIALVAR_4, 2
 	call_if 1, Route120_EventScript_151676
-	compare 0x8004, 3
+	compare SPECIALVAR_4, 3
 	call_if 1, Route120_EventScript_15167A
-	compare 0x8004, 4
+	compare SPECIALVAR_4, 4
 	call_if 1, Route120_EventScript_15167E
-	compare 0x8004, 5
+	compare SPECIALVAR_4, 5
 	call_if 1, Route120_EventScript_151682
 	return
 
@@ -135,32 +135,32 @@ Route120_EventScript_151739:: @ 8151739
 	end
 
 Route120_EventScript_1517DC:: @ 81517DC
-	setvar 0x8004, ITEM_FIGY_BERRY
+	setvar SPECIALVAR_4, ITEM_FIGY_BERRY
 	goto Route120_EventScript_151813
 	end
 
 Route120_EventScript_1517E7:: @ 81517E7
-	setvar 0x8004, ITEM_WIKI_BERRY
+	setvar SPECIALVAR_4, ITEM_WIKI_BERRY
 	goto Route120_EventScript_151813
 	end
 
 Route120_EventScript_1517F2:: @ 81517F2
-	setvar 0x8004, ITEM_MAGO_BERRY
+	setvar SPECIALVAR_4, ITEM_MAGO_BERRY
 	goto Route120_EventScript_151813
 	end
 
 Route120_EventScript_1517FD:: @ 81517FD
-	setvar 0x8004, ITEM_AGUAV_BERRY
+	setvar SPECIALVAR_4, ITEM_AGUAV_BERRY
 	goto Route120_EventScript_151813
 	end
 
 Route120_EventScript_151808:: @ 8151808
-	setvar 0x8004, ITEM_IAPAPA_BERRY
+	setvar SPECIALVAR_4, ITEM_IAPAPA_BERRY
 	goto Route120_EventScript_151813
 	end
 
 Route120_EventScript_151813:: @ 8151813
-	giveitem_std 0x8004
+	giveitem_std SPECIALVAR_4
 	compare RESULT, 0
 	goto_if_eq Route120_EventScript_1A029B
 	setflag FLAG_DAILY_RECEIVED_BERRY_ROUTE120
@@ -226,7 +226,7 @@ Route120_EventScript_15189D:: @ 815189D
 	delay 40
 	waitmoncry
 	setwildbattle SPECIES_KECLEON, 30, ITEM_NONE
-	setvar 0x8004, 0
+	setvar SPECIALVAR_4, 0
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	dowildbattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE

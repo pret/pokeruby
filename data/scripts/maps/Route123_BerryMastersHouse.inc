@@ -43,7 +43,7 @@ Route123_BerryMastersHouse_EventScript_163A64:: @ 8163A64
 	checkflag FLAG_DAILY_RECEIVED_BERRY_FROM_BERRYMASTER_WIFE
 	goto_if_eq Route123_BerryMastersHouse_EventScript_163C13
 	msgbox Route123_BerryMastersHouse_Text_1C5D24, 4
-	setvar 0x8004, 13
+	setvar SPECIALVAR_4, 13
 	call Route123_BerryMastersHouse_EventScript_1A00F3
 	lock
 	faceplayer
@@ -60,17 +60,17 @@ Route123_BerryMastersHouse_EventScript_163A9B:: @ 8163A9B
 	end
 
 Route123_BerryMastersHouse_EventScript_163AAD:: @ 8163AAD
-	compare 0x8004, 0
+	compare SPECIALVAR_4, 0
 	goto_if_eq Route123_BerryMastersHouse_EventScript_163AF0
-	compare 0x8004, 1
+	compare SPECIALVAR_4, 1
 	goto_if_eq Route123_BerryMastersHouse_EventScript_163B1E
-	compare 0x8004, 2
+	compare SPECIALVAR_4, 2
 	goto_if_eq Route123_BerryMastersHouse_EventScript_163B4F
-	compare 0x8004, 3
+	compare SPECIALVAR_4, 3
 	goto_if_eq Route123_BerryMastersHouse_EventScript_163B80
-	compare 0x8004, 4
+	compare SPECIALVAR_4, 4
 	goto_if_eq Route123_BerryMastersHouse_EventScript_163BB1
-	compare 0x8004, 5
+	compare SPECIALVAR_4, 5
 	goto_if_eq Route123_BerryMastersHouse_EventScript_163BE2
 	end
 

@@ -44,7 +44,7 @@ MtChimney_CableCarStation_EventScript_15C16C:: @ 815C16C
 	applymovement 1, MtChimney_CableCarStation_Movement_15C1A5
 	applymovement 255, MtChimney_CableCarStation_Movement_15C1AF
 	waitmovement 0
-	setvar 0x8004, 1
+	setvar SPECIALVAR_4, 1
 	setvar VAR_CABLE_CAR_STATION_STATE, 2
 	incrementgamestat GAME_STAT_RODE_CABLE_CAR
 	special CableCarWarp

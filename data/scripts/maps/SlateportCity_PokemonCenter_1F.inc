@@ -8,7 +8,7 @@ SlateportCity_PokemonCenter_1F_MapScript1_1563C5:: @ 81563C5
 	end
 
 SlateportCity_PokemonCenter_1F_EventScript_1563CE:: @ 81563CE
-	setvar 0x800b, 1
+	setvar SPECIALVAR_B, 1
 	call SlateportCity_PokemonCenter_1F_EventScript_19FD5B
 	waitmessage
 	waitbuttonpress

@@ -156,25 +156,25 @@ PetalburgCity_EventScript_14B82D:: @ 814B82D
 
 PetalburgCity_EventScript_14B836:: @ 814B836
 	lockall
-	setvar 0x8008, 0
+	setvar SPECIALVAR_8, 0
 	goto PetalburgCity_EventScript_14B866
 	end
 
 PetalburgCity_EventScript_14B842:: @ 814B842
 	lockall
-	setvar 0x8008, 1
+	setvar SPECIALVAR_8, 1
 	goto PetalburgCity_EventScript_14B866
 	end
 
 PetalburgCity_EventScript_14B84E:: @ 814B84E
 	lockall
-	setvar 0x8008, 2
+	setvar SPECIALVAR_8, 2
 	goto PetalburgCity_EventScript_14B866
 	end
 
 PetalburgCity_EventScript_14B85A:: @ 814B85A
 	lockall
-	setvar 0x8008, 3
+	setvar SPECIALVAR_8, 3
 	goto PetalburgCity_EventScript_14B866
 	end
 
@@ -187,23 +187,23 @@ PetalburgCity_EventScript_14B866:: @ 814B866
 	waitmovement 0
 	applymovement 9, PetalburgCity_Movement_1A0835
 	waitmovement 0
-	compare 0x8008, 0
+	compare SPECIALVAR_8, 0
 	call_if 1, PetalburgCity_EventScript_14B91B
-	compare 0x8008, 1
+	compare SPECIALVAR_8, 1
 	call_if 1, PetalburgCity_EventScript_14B930
-	compare 0x8008, 2
+	compare SPECIALVAR_8, 2
 	call_if 1, PetalburgCity_EventScript_14B93B
-	compare 0x8008, 3
+	compare SPECIALVAR_8, 3
 	call_if 1, PetalburgCity_EventScript_14B950
 	msgbox PetalburgCity_Text_16438A, 4
 	closemessage
-	compare 0x8008, 0
+	compare SPECIALVAR_8, 0
 	call_if 1, PetalburgCity_EventScript_14B965
-	compare 0x8008, 1
+	compare SPECIALVAR_8, 1
 	call_if 1, PetalburgCity_EventScript_14B977
-	compare 0x8008, 2
+	compare SPECIALVAR_8, 2
 	call_if 1, PetalburgCity_EventScript_14B989
-	compare 0x8008, 3
+	compare SPECIALVAR_8, 3
 	call_if 1, PetalburgCity_EventScript_14B99B
 	msgbox PetalburgCity_Text_164426, 4
 	applymovement 9, PetalburgCity_Movement_1A0843

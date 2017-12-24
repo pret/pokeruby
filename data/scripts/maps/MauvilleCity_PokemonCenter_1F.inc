@@ -13,7 +13,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_157365:: @ 8157365
 	end
 
 MauvilleCity_PokemonCenter_1F_EventScript_157369:: @ 8157369
-	setvar 0x800b, 1
+	setvar SPECIALVAR_B, 1
 	call MauvilleCity_PokemonCenter_1F_EventScript_19FD5B
 	waitmessage
 	waitbuttonpress

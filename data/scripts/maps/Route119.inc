@@ -9,9 +9,9 @@ Route119_MapScript1_151172:: @ 8151172
 	end
 
 Route119_EventScript_15117C:: @ 815117C
-	compare 0x8004, 6
+	compare SPECIALVAR_4, 6
 	call_if 1, Route119_EventScript_151193
-	compare 0x8004, 7
+	compare SPECIALVAR_4, 7
 	call_if 1, Route119_EventScript_151197
 	return
 

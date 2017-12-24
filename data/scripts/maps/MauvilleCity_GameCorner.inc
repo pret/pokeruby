@@ -524,7 +524,7 @@ MauvilleCity_GameCorner_EventScript_157135:: @ 8157135
 	checkitem ITEM_COIN_CASE, 1
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
-	setvar 0x8004, 0
+	setvar SPECIALVAR_4, 0
 	specialvar RESULT, sub_810F424
 	playslotmachine RESULT
 	releaseall
@@ -535,7 +535,7 @@ MauvilleCity_GameCorner_EventScript_157155:: @ 8157155
 	checkitem ITEM_COIN_CASE, 1
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
-	setvar 0x8004, 1
+	setvar SPECIALVAR_4, 1
 	specialvar RESULT, sub_810F424
 	playslotmachine RESULT
 	releaseall
@@ -546,7 +546,7 @@ MauvilleCity_GameCorner_EventScript_157175:: @ 8157175
 	checkitem ITEM_COIN_CASE, 1
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
-	setvar 0x8004, 2
+	setvar SPECIALVAR_4, 2
 	specialvar RESULT, sub_810F424
 	playslotmachine RESULT
 	releaseall
@@ -557,7 +557,7 @@ MauvilleCity_GameCorner_EventScript_157195:: @ 8157195
 	checkitem ITEM_COIN_CASE, 1
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
-	setvar 0x8004, 3
+	setvar SPECIALVAR_4, 3
 	specialvar RESULT, sub_810F424
 	playslotmachine RESULT
 	releaseall
@@ -568,7 +568,7 @@ MauvilleCity_GameCorner_EventScript_1571B5:: @ 81571B5
 	checkitem ITEM_COIN_CASE, 1
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
-	setvar 0x8004, 4
+	setvar SPECIALVAR_4, 4
 	specialvar RESULT, sub_810F424
 	playslotmachine RESULT
 	releaseall
@@ -579,7 +579,7 @@ MauvilleCity_GameCorner_EventScript_1571D5:: @ 81571D5
 	checkitem ITEM_COIN_CASE, 1
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
-	setvar 0x8004, 5
+	setvar SPECIALVAR_4, 5
 	specialvar RESULT, sub_810F424
 	playslotmachine RESULT
 	releaseall
@@ -590,7 +590,7 @@ MauvilleCity_GameCorner_EventScript_1571F5:: @ 81571F5
 	checkitem ITEM_COIN_CASE, 1
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
-	setvar 0x8004, 6
+	setvar SPECIALVAR_4, 6
 	specialvar RESULT, sub_810F424
 	playslotmachine RESULT
 	releaseall
@@ -601,7 +601,7 @@ MauvilleCity_GameCorner_EventScript_157215:: @ 8157215
 	checkitem ITEM_COIN_CASE, 1
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
-	setvar 0x8004, 7
+	setvar SPECIALVAR_4, 7
 	specialvar RESULT, sub_810F424
 	playslotmachine RESULT
 	releaseall
@@ -612,7 +612,7 @@ MauvilleCity_GameCorner_EventScript_157235:: @ 8157235
 	checkitem ITEM_COIN_CASE, 1
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
-	setvar 0x8004, 8
+	setvar SPECIALVAR_4, 8
 	specialvar RESULT, sub_810F424
 	playslotmachine RESULT
 	releaseall
@@ -623,7 +623,7 @@ MauvilleCity_GameCorner_EventScript_157255:: @ 8157255
 	checkitem ITEM_COIN_CASE, 1
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
-	setvar 0x8004, 9
+	setvar SPECIALVAR_4, 9
 	specialvar RESULT, sub_810F424
 	playslotmachine RESULT
 	releaseall
@@ -634,7 +634,7 @@ MauvilleCity_GameCorner_EventScript_157275:: @ 8157275
 	checkitem ITEM_COIN_CASE, 1
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
-	setvar 0x8004, 10
+	setvar SPECIALVAR_4, 10
 	specialvar RESULT, sub_810F424
 	playslotmachine RESULT
 	releaseall
@@ -645,7 +645,7 @@ MauvilleCity_GameCorner_EventScript_157295:: @ 8157295
 	checkitem ITEM_COIN_CASE, 1
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
-	setvar 0x8004, 11
+	setvar SPECIALVAR_4, 11
 	specialvar RESULT, sub_810F424
 	playslotmachine RESULT
 	releaseall

@@ -137,7 +137,7 @@ RustboroCity_DevonCorp_2F_EventScript_157661:: @ 8157661
 	getpartysize
 	compare RESULT, 6
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_157707
-	copyvar 0x8004, RESULT
+	copyvar SPECIALVAR_4, RESULT
 	setvar VAR_FOSSIL_RESURRECTION_STATE, 0
 	setflag FLAG_RECEIVED_FOSSIL_MON
 	playfanfare 370
@@ -157,7 +157,7 @@ RustboroCity_DevonCorp_2F_EventScript_1576B4:: @ 81576B4
 	getpartysize
 	compare RESULT, 6
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_157707
-	copyvar 0x8004, RESULT
+	copyvar SPECIALVAR_4, RESULT
 	setvar VAR_FOSSIL_RESURRECTION_STATE, 0
 	setflag FLAG_RECEIVED_FOSSIL_MON
 	playfanfare 370
