@@ -60,7 +60,7 @@ void DoSecretBasePCTurnOffEffect(void)
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
     PlaySE(SE_PC_OFF);
 
-    if (!VarGet(VAR_0x4054))
+    if (!VarGet(VAR_CURRENT_SECRET_BASE))
         MapGridSetMetatileIdAt(x, y, 3616);
     else
         MapGridSetMetatileIdAt(x, y, 3617);

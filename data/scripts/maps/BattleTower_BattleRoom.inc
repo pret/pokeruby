@@ -3,11 +3,11 @@ BattleTower_BattleRoom_MapScripts:: @ 81608DB
 	.byte 0
 
 BattleTower_BattleRoom_MapScript2_1608E1:: @ 81608E1
-	map_script_2 0x4000, 0, BattleTower_BattleRoom_EventScript_1608EB
+	map_script_2 VAR_TEMP_0, 0, BattleTower_BattleRoom_EventScript_1608EB
 	.2byte 0
 
 BattleTower_BattleRoom_EventScript_1608EB:: @ 81608EB
-	setvar 0x4000, 1
+	setvar VAR_TEMP_0, 1
 	applymovement 255, BattleTower_BattleRoom_Movement_160AB7
 	waitmovement 0
 
@@ -21,25 +21,25 @@ BattleTower_BattleRoom_EventScript_1608FA:: @ 81608FA
 	waitmessage
 	closemessage
 	special ScrSpecial_HealPlayerParty
-	setvar 0x8004, 0
-	setvar 0x8005, 0
+	setvar VAR_SPECIAL_4, 0
+	setvar VAR_SPECIAL_5, 0
 	special sub_813556C
 	waitstate
 	switch RESULT
 	case 1, BattleTower_BattleRoom_EventScript_160961
 	special LoadPlayerParty
-	setvar 0x8004, 0
-	setvar 0x8005, 5
+	setvar VAR_SPECIAL_4, 0
+	setvar VAR_SPECIAL_5, 5
 	special sub_8135668
-	setvar 0x8004, 14
+	setvar VAR_SPECIAL_4, 14
 	special sub_8135668
-	setvar 0x8004, 3
+	setvar VAR_SPECIAL_4, 3
 	special sub_810FF60
 	warp MAP_BATTLE_TOWER_LOBBY, 255, 6, 6
 	waitstate
 
 BattleTower_BattleRoom_EventScript_160961:: @ 8160961
-	setvar 0x8004, 6
+	setvar VAR_SPECIAL_4, 6
 	special sub_8135668
 	switch RESULT
 	case 8, BattleTower_BattleRoom_EventScript_160A56
@@ -89,23 +89,23 @@ BattleTower_BattleRoom_EventScript_160A3C:: @ 8160A3C
 
 BattleTower_BattleRoom_EventScript_160A56:: @ 8160A56
 	special LoadPlayerParty
-	setvar 0x8004, 0
-	setvar 0x8005, 4
+	setvar VAR_SPECIAL_4, 0
+	setvar VAR_SPECIAL_5, 4
 	special sub_8135668
-	setvar 0x8004, 2
-	setvar 0x8005, 1
+	setvar VAR_SPECIAL_4, 2
+	setvar VAR_SPECIAL_5, 1
 	special sub_8135668
-	setvar 0x8004, 7
+	setvar VAR_SPECIAL_4, 7
 	special sub_8135668
-	setvar 0x8004, 14
+	setvar VAR_SPECIAL_4, 14
 	special sub_8135668
-	setvar 0x8004, 3
+	setvar VAR_SPECIAL_4, 3
 	special sub_810FF60
 	warp MAP_BATTLE_TOWER_LOBBY, 255, 6, 6
 	waitstate
 
 BattleTower_BattleRoom_EventScript_160A94:: @ 8160A94
-	setvar 0x8004, 2
+	setvar VAR_SPECIAL_4, 2
 	special sub_8135BA0
 	message BattleTower_BattleRoom_Text_1C6CE1
 	delay 60

@@ -10,12 +10,12 @@ DewfordTown_Gym_EventScript_153071:: @ 8153071
 	checktrainerflag OPPONENT_BRAWLY
 	goto_if_eq DewfordTown_Gym_EventScript_1530AA
 	call DewfordTown_Gym_EventScript_153122
-	copyvar 0x8001, 0x8000
-	compare 0x8000, 0
+	copyvar VAR_SPECIAL_1, VAR_SPECIAL_0
+	compare VAR_SPECIAL_0, 0
 	goto_if_eq DewfordTown_Gym_EventScript_1530BA
-	compare 0x8000, 1
+	compare VAR_SPECIAL_0, 1
 	goto_if_eq DewfordTown_Gym_EventScript_1530B6
-	compare 0x8000, 2
+	compare VAR_SPECIAL_0, 2
 	goto_if_eq DewfordTown_Gym_EventScript_1530B2
 	goto DewfordTown_Gym_EventScript_1530AE
 
@@ -42,14 +42,14 @@ DewfordTown_Gym_EventScript_1530BA:: @ 81530BA
 DewfordTown_Gym_EventScript_1530BE:: @ 81530BE
 	call DewfordTown_Gym_EventScript_153122
 	nop1
-	compare 0x8000, 0x8001
+	compare VAR_SPECIAL_0, VAR_SPECIAL_1
 	goto_if_eq DewfordTown_Gym_EventScript_1530F5
-	copyvar 0x8001, 0x8000
-	compare 0x8000, 1
+	copyvar VAR_SPECIAL_1, VAR_SPECIAL_0
+	compare VAR_SPECIAL_0, 1
 	goto_if_eq DewfordTown_Gym_EventScript_1530F6
-	compare 0x8000, 2
+	compare VAR_SPECIAL_0, 2
 	goto_if_eq DewfordTown_Gym_EventScript_153101
-	compare 0x8000, 3
+	compare VAR_SPECIAL_0, 3
 	goto_if_eq DewfordTown_Gym_EventScript_15310C
 
 DewfordTown_Gym_EventScript_1530F5:: @ 81530F5
@@ -80,20 +80,20 @@ DewfordTown_Gym_EventScript_153117:: @ 8153117
 	return
 
 DewfordTown_Gym_EventScript_153122:: @ 8153122
-	setvar 0x8000, 0
+	setvar VAR_SPECIAL_0, 0
 	checktrainerflag OPPONENT_HIDEKI
 	goto_if 0, DewfordTown_Gym_EventScript_153135
-	addvar 0x8000, 1
+	addvar VAR_SPECIAL_0, 1
 
 DewfordTown_Gym_EventScript_153135:: @ 8153135
 	checktrainerflag OPPONENT_TESSA
 	goto_if 0, DewfordTown_Gym_EventScript_153143
-	addvar 0x8000, 1
+	addvar VAR_SPECIAL_0, 1
 
 DewfordTown_Gym_EventScript_153143:: @ 8153143
 	checktrainerflag OPPONENT_LAURA
 	goto_if 0, DewfordTown_Gym_EventScript_153151
-	addvar 0x8000, 1
+	addvar VAR_SPECIAL_0, 1
 
 DewfordTown_Gym_EventScript_153151:: @ 8153151
 	return
@@ -114,10 +114,10 @@ DewfordTown_Gym_EventScript_153177:: @ 8153177
 	msgbox DewfordTown_Gym_Text_1752E6, 4
 	setflag FLAG_DEFEATED_DEWFORD_GYM
 	setflag FLAG_BADGE02_GET
-	addvar 0x4085, 1
-	compare 0x4085, 6
+	addvar VAR_PETALBURG_GYM_STATE, 1
+	compare VAR_PETALBURG_GYM_STATE, 6
 	call_if 1, DewfordTown_Gym_EventScript_1A00FB
-	setvar 0x8008, 2
+	setvar VAR_SPECIAL_8, 2
 	call DewfordTown_Gym_EventScript_1A01C0
 	goto DewfordTown_Gym_EventScript_1531B5
 	end

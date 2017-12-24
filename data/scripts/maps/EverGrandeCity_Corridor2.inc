@@ -3,7 +3,7 @@ EverGrandeCity_Corridor2_MapScripts:: @ 815BA21
 	.byte 0
 
 EverGrandeCity_Corridor2_MapScript2_15BA27:: @ 815BA27
-	map_script_2 0x4001, 0, EverGrandeCity_Corridor2_EventScript_15BA31
+	map_script_2 VAR_TEMP_1, 0, EverGrandeCity_Corridor2_EventScript_15BA31
 	.2byte 0
 
 EverGrandeCity_Corridor2_EventScript_15BA31:: @ 815BA31

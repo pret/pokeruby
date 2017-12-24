@@ -15,9 +15,9 @@ SlateportCity_House1_EventScript_15569C:: @ 815569C
 	msgbox SlateportCity_House1_Text_17D4DB, 4
 	special sub_80F9A0C
 	waitstate
-	compare 0x8004, 255
+	compare VAR_SPECIAL_4, 255
 	goto_if 5, SlateportCity_House1_EventScript_1556C9
-	compare 0x8004, 255
+	compare VAR_SPECIAL_4, 255
 	goto_if_eq SlateportCity_House1_EventScript_1556BF
 	end
 

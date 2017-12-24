@@ -28,7 +28,7 @@ Route116_MapWarps:: @ 8383380
 	warp_def 65, 10, 0, 2, MAP_RUSTURF_TUNNEL
 
 Route116_MapCoordEvents:: @ 8383398
-	coord_event 47, 9, 3, 0, 0x406f, 1, 0, Route116_EventScript_150B6E
+	coord_event 47, 9, 3, 0, VAR_ROUTE116_STATE, 1, 0, Route116_EventScript_150B6E
 
 Route116_MapBGEvents:: @ 83833A8
 	bg_event 5, 10, 0, 0, 0, Route116_EventScript_150B30

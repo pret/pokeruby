@@ -8,7 +8,7 @@ Route110_TrickHousePuzzle6_MapScript1_1630D8:: @ 81630D8
 	end
 
 Route110_TrickHousePuzzle6_MapScript2_1630DC:: @ 81630DC
-	map_script_2 0x4000, 16384, Route110_TrickHousePuzzle6_EventScript_1630E6
+	map_script_2 VAR_TEMP_0, 16384, Route110_TrickHousePuzzle6_EventScript_1630E6
 	.2byte 0
 
 Route110_TrickHousePuzzle6_EventScript_1630E6:: @ 81630E6
@@ -17,13 +17,13 @@ Route110_TrickHousePuzzle6_EventScript_1630E6:: @ 81630E6
 
 Route110_TrickHousePuzzle6_EventScript_1630EA:: @ 81630EA
 	lockall
-	compare 0x40b0, 0
+	compare VAR_TRICK_HOUSE_PUZZLE_6_STATE, 0
 	goto_if_eq Route110_TrickHousePuzzle6_EventScript_1630FC
 	goto Route110_TrickHousePuzzle6_EventScript_161892
 	end
 
 Route110_TrickHousePuzzle6_EventScript_1630FC:: @ 81630FC
-	setvar 0x40b0, 1
+	setvar VAR_TRICK_HOUSE_PUZZLE_6_STATE, 1
 	goto Route110_TrickHousePuzzle6_EventScript_16189C
 	end
 

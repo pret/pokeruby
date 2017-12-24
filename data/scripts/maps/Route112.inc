@@ -4,7 +4,7 @@ Route112_MapScripts:: @ 8150502
 
 Route112_MapScript1_150508:: @ 8150508
 	call Route112_EventScript_1A0196
-	setvar 0x40bd, 0
+	setvar VAR_JAGGED_PASS_ASH_WEATHER, 0
 	end
 
 Route112_EventScript_150513:: @ 8150513

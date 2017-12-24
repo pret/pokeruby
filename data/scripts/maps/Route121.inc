@@ -29,7 +29,7 @@ Route121_EventScript_151B25:: @ 8151B25
 	removeobject 12
 	removeobject 13
 	removeobject 14
-	setvar 0x4074, 1
+	setvar VAR_ROUTE121_STATE, 1
 	releaseall
 	end
 

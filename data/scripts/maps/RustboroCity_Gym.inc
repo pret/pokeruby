@@ -16,11 +16,11 @@ RustboroCity_Gym_EventScript_1578FE:: @ 81578FE
 	msgbox RustboroCity_Gym_Text_1840D5, 4
 	setflag FLAG_DEFEATED_RUSTBORO_GYM
 	setflag FLAG_BADGE01_GET
-	setvar 0x405a, 1
-	addvar 0x4085, 1
-	setvar 0x8008, 1
+	setvar VAR_RUSTBORO_STATE, 1
+	addvar VAR_PETALBURG_GYM_STATE, 1
+	setvar VAR_SPECIAL_8, 1
 	call RustboroCity_Gym_EventScript_1A01C0
-	compare 0x4085, 6
+	compare VAR_PETALBURG_GYM_STATE, 6
 	call_if 1, RustboroCity_Gym_EventScript_1A00FB
 	goto RustboroCity_Gym_EventScript_15793C
 	end

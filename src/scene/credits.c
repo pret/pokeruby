@@ -1606,7 +1606,7 @@ void spritecb_814580C(struct Sprite *sprite)
 static void sub_81458DC(void)
 {
     struct Unk201C000 *unk201C000 = &ewram1c000;
-    u16 starter = SpeciesToNationalPokedexNum(GetStarterPokemon(VarGet(VAR_FIRST_POKE)));
+    u16 starter = SpeciesToNationalPokedexNum(GetStarterPokemon(VarGet(VAR_STARTER_MON)));
     u16 seenTypesCount;
     u16 page;
     u16 dexNum;

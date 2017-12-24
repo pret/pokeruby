@@ -50,7 +50,7 @@ LilycoveCity_Harbor_EventScript_159933:: @ 8159933
 	msgbox LilycoveCity_Harbor_Text_18B47D, 5
 	compare RESULT, 0
 	goto_if_eq LilycoveCity_Harbor_EventScript_15997E
-	setvar 0x40b4, 5
+	setvar VAR_PORTHOLE_STATE, 5
 	call LilycoveCity_Harbor_EventScript_15998A
 	warp MAP_SS_TIDAL_CORRIDOR, 255, 1, 10
 	waitstate
@@ -86,7 +86,7 @@ LilycoveCity_Harbor_EventScript_15998A:: @ 815998A
 	call_if 1, LilycoveCity_Harbor_EventScript_1599CE
 	delay 30
 	hideobjectat 255, MAP_PETALBURG_CITY
-	setvar 0x8004, 2
+	setvar VAR_SPECIAL_4, 2
 	call LilycoveCity_Harbor_EventScript_1A040E
 	return
 
@@ -136,7 +136,7 @@ LilycoveCity_Harbor_EventScript_1599EE:: @ 81599EE
 	delay 30
 	hideobjectat 255, MAP_PETALBURG_CITY
 	special ScrSpecial_HealPlayerParty
-	setvar 0x8004, 2
+	setvar VAR_SPECIAL_4, 2
 	call LilycoveCity_Harbor_EventScript_1A040E
 	warp MAP_SOUTHERN_ISLAND_EXTERIOR, 255, 13, 22
 	waitstate

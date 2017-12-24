@@ -111,7 +111,7 @@ PetalburgWoods_EventScript_15CE4D:: @ 815CE4D
 
 PetalburgWoods_EventScript_15CE69:: @ 815CE69
 	removeobject 4
-	setvar 0x4098, 1
+	setvar VAR_PETALBURG_WOODS_STATE, 1
 	releaseall
 	end
 

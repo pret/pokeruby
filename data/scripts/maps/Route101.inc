@@ -8,12 +8,12 @@ Route101_MapScript1_14E92F:: @ 814E92F
 	end
 
 Route101_MapScript2_14E935:: @ 814E935
-	map_script_2 0x4060, 0, Route101_EventScript_14E93F
+	map_script_2 VAR_ROUTE101_STATE, 0, Route101_EventScript_14E93F
 	.2byte 0
 
 Route101_EventScript_14E93F:: @ 814E93F
-	setflag 0x4000
-	setvar 0x4060, 1
+	setflag FLAG_SPECIAL_FLAG_0
+	setvar VAR_ROUTE101_STATE, 1
 	end
 
 Route101_EventScript_14E948:: @ 814E948
@@ -37,7 +37,7 @@ Route101_EventScript_14E948:: @ 814E948
 	waitmovement 0
 	msgbox Route101_Text_16D119, 4
 	closemessage
-	setvar 0x4060, 2
+	setvar VAR_ROUTE101_STATE, 2
 	releaseall
 	end
 
@@ -233,9 +233,9 @@ Route101_EventScript_14EA7F:: @ 814EA7F
 	setflag FLAG_HIDE_BIRCH_BATTLE_POOCHYENA
 	clearflag FLAG_HIDE_BIRCH_IN_LAB
 	setflag FLAG_HIDE_BIRCH_STARTERS_BAG
-	setvar 0x4084, 2
-	setvar 0x4060, 3
-	clearflag 0x4000
+	setvar VAR_BIRCH_LAB_STATE, 2
+	setvar VAR_ROUTE101_STATE, 3
+	clearflag FLAG_SPECIAL_FLAG_0
 	warp MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB, 255, 6, 5
 	waitstate
 	release

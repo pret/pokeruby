@@ -9,9 +9,9 @@ Route119_MapScript1_151172:: @ 8151172
 	end
 
 Route119_EventScript_15117C:: @ 815117C
-	compare 0x8004, 6
+	compare VAR_SPECIAL_4, 6
 	call_if 1, Route119_EventScript_151193
-	compare 0x8004, 7
+	compare VAR_SPECIAL_4, 7
 	call_if 1, Route119_EventScript_151197
 	return
 
@@ -27,7 +27,7 @@ Route119_MapScript1_15119B:: @ 815119B
 	call Route119_EventScript_1A014E
 	call Route119_EventScript_1A0172
 	call Route119_EventScript_1A0196
-	compare 0x40b3, 1
+	compare VAR_WEATHER_INSTITUTE_STATE, 1
 	call_if 1, Route119_EventScript_1511B9
 	special SetRoute119Weather
 	end
@@ -35,16 +35,16 @@ Route119_MapScript1_15119B:: @ 815119B
 Route119_EventScript_1511B9:: @ 81511B9
 	setflag FLAG_HIDE_WEATHER_INSTITUTE_WORKERS_2F
 	clearflag FLAG_HIDE_WEATHER_INSTITUTE_WORKERS_1F
-	setvar 0x40b3, 2
+	setvar VAR_WEATHER_INSTITUTE_STATE, 2
 	return
 
 Route119_EventScript_1511C5:: @ 81511C5
-	setvar 0x4001, 1
+	setvar VAR_TEMP_1, 1
 	goto Route119_EventScript_1511DB
 	end
 
 Route119_EventScript_1511D0:: @ 81511D0
-	setvar 0x4001, 2
+	setvar VAR_TEMP_1, 2
 	goto Route119_EventScript_1511DB
 	end
 
@@ -57,16 +57,16 @@ Route119_EventScript_1511DB:: @ 81511DB
 	compare RESULT, 1
 	call_if 1, Route119_EventScript_151259
 	delay 65
-	compare 0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if 1, Route119_EventScript_1513A6
-	compare 0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if 1, Route119_EventScript_1513B1
 	applymovement 255, Route119_Movement_1A0845
 	waitmovement 0
 	delay 30
-	compare 0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if 1, Route119_EventScript_1513D2
-	compare 0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if 1, Route119_EventScript_1513E1
 	removeobject 25
 	addobject 16
@@ -89,7 +89,7 @@ Route119_EventScript_151259:: @ 8151259
 
 Route119_EventScript_15125E:: @ 815125E
 	msgbox Route119_Text_1710BB, 4
-	switch 0x4023
+	switch VAR_STARTER_MON
 	case 0, Route119_EventScript_15128D
 	case 1, Route119_EventScript_15129D
 	case 2, Route119_EventScript_1512AD
@@ -119,7 +119,7 @@ Route119_EventScript_1512BD:: @ 81512BD
 
 Route119_EventScript_1512D8:: @ 81512D8
 	msgbox Route119_Text_171358, 4
-	switch 0x4023
+	switch VAR_STARTER_MON
 	case 0, Route119_EventScript_151307
 	case 1, Route119_EventScript_151317
 	case 2, Route119_EventScript_151327
@@ -154,19 +154,19 @@ Route119_EventScript_151352:: @ 8151352
 
 Route119_EventScript_151362:: @ 8151362
 	closemessage
-	compare 0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if 1, Route119_EventScript_1513D2
-	compare 0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if 1, Route119_EventScript_1513E1
 	removeobject 16
 	addobject 25
 	delay 30
-	compare 0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if 1, Route119_EventScript_1513BC
-	compare 0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if 1, Route119_EventScript_1513C7
 	removeobject 25
-	setvar 0x4072, 1
+	setvar VAR_ROUTE119_STATE, 1
 	savebgm 0
 	fadedefaultbgm
 	releaseall

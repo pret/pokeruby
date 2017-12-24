@@ -17,13 +17,13 @@ Route110_TrickHousePuzzle3_MapWarps:: @ 8392654
 	warp_def 13, 1, 3, 0, MAP_ROUTE110_TRICK_HOUSE_END
 
 Route110_TrickHousePuzzle3_MapCoordEvents:: @ 839266C
-	coord_event 5, 20, 3, 0, 0x4001, 0, 0, Route110_TrickHousePuzzle3_EventScript_1625AB
-	coord_event 4, 12, 3, 0, 0x4002, 0, 0, Route110_TrickHousePuzzle3_EventScript_1625B7
-	coord_event 11, 10, 3, 0, 0x4003, 0, 0, Route110_TrickHousePuzzle3_EventScript_1625C3
-	coord_event 3, 8, 3, 0, 0x4004, 0, 0, Route110_TrickHousePuzzle3_EventScript_1625CF
-	coord_event 13, 7, 3, 0, 0x4005, 0, 0, Route110_TrickHousePuzzle3_EventScript_1625DB
-	coord_event 1, 3, 3, 0, 0x4006, 0, 0, Route110_TrickHousePuzzle3_EventScript_1625E7
-	coord_event 10, 2, 3, 0, 0x4007, 0, 0, Route110_TrickHousePuzzle3_EventScript_1625F3
+	coord_event 5, 20, 3, 0, VAR_TEMP_1, 0, 0, Route110_TrickHousePuzzle3_EventScript_1625AB
+	coord_event 4, 12, 3, 0, VAR_TEMP_2, 0, 0, Route110_TrickHousePuzzle3_EventScript_1625B7
+	coord_event 11, 10, 3, 0, VAR_TEMP_3, 0, 0, Route110_TrickHousePuzzle3_EventScript_1625C3
+	coord_event 3, 8, 3, 0, VAR_TEMP_4, 0, 0, Route110_TrickHousePuzzle3_EventScript_1625CF
+	coord_event 13, 7, 3, 0, VAR_TEMP_5, 0, 0, Route110_TrickHousePuzzle3_EventScript_1625DB
+	coord_event 1, 3, 3, 0, VAR_TEMP_6, 0, 0, Route110_TrickHousePuzzle3_EventScript_1625E7
+	coord_event 10, 2, 3, 0, VAR_TEMP_7, 0, 0, Route110_TrickHousePuzzle3_EventScript_1625F3
 
 Route110_TrickHousePuzzle3_MapBGEvents:: @ 83926DC
 	bg_event 0, 8, 3, 0, 0, Route110_TrickHousePuzzle3_EventScript_1626EB

@@ -99,13 +99,13 @@ u16 GetPlayerAvatarBike(void)
     return 0;
 }
 
-static void DetermineCyclingRoadResults(u32 arg0, u8 arg1)
+static void DetermineCyclingRoadResults(u32 numFrames, u8 numBikeCollisions)
 {
     u8 result;
 
-    if (arg1 <= 99)
+    if (numBikeCollisions <= 99)
     {
-        ConvertIntToDecimalStringN(gStringVar1, arg1, STR_CONV_MODE_LEFT_ALIGN, 2);
+        ConvertIntToDecimalStringN(gStringVar1, numBikeCollisions, STR_CONV_MODE_LEFT_ALIGN, 2);
         StringAppend(gStringVar1, gOtherText_Times);
     }
     else
@@ -113,11 +113,11 @@ static void DetermineCyclingRoadResults(u32 arg0, u8 arg1)
         StringCopy(gStringVar1, gOtherText_99Times);
     }
 
-    if (arg0 < 3600)
+    if (numFrames < 3600)
     {
-        ConvertIntToDecimalStringN(gStringVar2, arg0 / 60, STR_CONV_MODE_RIGHT_ALIGN, 2);
+        ConvertIntToDecimalStringN(gStringVar2, numFrames / 60, STR_CONV_MODE_RIGHT_ALIGN, 2);
         gStringVar2[2] = CHAR_DECIMAL_SEPARATOR;
-        ConvertIntToDecimalStringN(&gStringVar2[3], ((arg0 % 60) * 100) / 60, STR_CONV_MODE_LEADING_ZEROS, 2);
+        ConvertIntToDecimalStringN(&gStringVar2[3], ((numFrames % 60) * 100) / 60, STR_CONV_MODE_LEADING_ZEROS, 2);
         StringAppend(gStringVar2, gOtherText_Seconds);
     }
     else
@@ -126,44 +126,44 @@ static void DetermineCyclingRoadResults(u32 arg0, u8 arg1)
     }
 
     result = 0;
-    if (arg1 == 0)
+    if (numBikeCollisions == 0)
     {
         result = 5;
     }
-    else if (arg1 < 4)
+    else if (numBikeCollisions < 4)
     {
         result = 4;
     }
-    else if (arg1 < 10)
+    else if (numBikeCollisions < 10)
     {
         result = 3;
     }
-    else if (arg1 < 20)
+    else if (numBikeCollisions < 20)
     {
         result = 2;
     }
-    else if (arg1 < 100)
+    else if (numBikeCollisions < 100)
     {
         result = 1;
     }
 
-    if (arg0 / 60 <= 10)
+    if (numFrames / 60 <= 10)
     {
         result += 5;
     }
-    else if (arg0 / 60 <= 15)
+    else if (numFrames / 60 <= 15)
     {
         result += 4;
     }
-    else if (arg0 / 60 <= 20)
+    else if (numFrames / 60 <= 20)
     {
         result += 3;
     }
-    else if (arg0 / 60 <= 40)
+    else if (numFrames / 60 <= 40)
     {
         result += 2;
     }
-    else if (arg0 / 60 < 60)
+    else if (numFrames / 60 < 60)
     {
         result += 1;
     }
@@ -173,36 +173,36 @@ static void DetermineCyclingRoadResults(u32 arg0, u8 arg1)
 }
 
 void FinishCyclingRoadChallenge(void) {
-    const u32 time = gMain.vblankCounter1 - gBikeCyclingTimer;
+    const u32 numFrames = gMain.vblankCounter1 - gBikeCyclingTimer;
 
-    DetermineCyclingRoadResults(time, gBikeCollisions);
-    RecordCyclingRoadResults(time, gBikeCollisions);
+    DetermineCyclingRoadResults(numFrames, gBikeCollisions);
+    RecordCyclingRoadResults(numFrames, gBikeCollisions);
 }
 
-static void RecordCyclingRoadResults(u32 arg0, u8 arg1) {
-    u16 high = VarGet(0x4028);
-    u16 low = VarGet(0x4029);
-    u32 record = high + (low << 16);
+static void RecordCyclingRoadResults(u32 numFrames, u8 numBikeCollisions) {
+    u16 low = VarGet(VAR_CYCLING_ROAD_RECORD_TIME_L);
+    u16 high = VarGet(VAR_CYCLING_ROAD_RECORD_TIME_H);
+    u32 framesRecord = low + (high << 16);
 
-    if (record > arg0 || record == 0)
+    if (framesRecord > numFrames || framesRecord == 0)
     {
-        VarSet(0x4028, arg0);
-        VarSet(0x4029, arg0 >> 16);
-        VarSet(0x4027, arg1);
+        VarSet(VAR_CYCLING_ROAD_RECORD_TIME_L, numFrames);
+        VarSet(VAR_CYCLING_ROAD_RECORD_TIME_H, numFrames >> 16);
+        VarSet(VAR_CYCLING_ROAD_RECORD_COLLISIONS, numBikeCollisions);
     }
 }
 
 u16 GetRecordedCyclingRoadResults(void) {
-    u16 high = VarGet(0x4028);
-    u16 low = VarGet(0x4029);
-    u32 record = high + (low << 16);
+    u16 low = VarGet(VAR_CYCLING_ROAD_RECORD_TIME_L);
+    u16 high = VarGet(VAR_CYCLING_ROAD_RECORD_TIME_H);
+    u32 framesRecord = low + (high << 16);
 
-    if (record == 0)
+    if (framesRecord == 0)
     {
         return FALSE;
     }
 
-    DetermineCyclingRoadResults(record, VarGet(0x4027));
+    DetermineCyclingRoadResults(framesRecord, VarGet(VAR_CYCLING_ROAD_RECORD_COLLISIONS));
     return TRUE;
 }
 
@@ -212,9 +212,9 @@ void UpdateCyclingRoadState(void) {
         return;
     }
 
-    if (VarGet(0x40a9) == 2 || VarGet(0x40a9) == 3)
+    if (VarGet(VAR_CYCLING_CHALLENGE_STATE) == 2 || VarGet(VAR_CYCLING_CHALLENGE_STATE) == 3)
     {
-        VarSet(0x40a9, 0);
+        VarSet(VAR_CYCLING_CHALLENGE_STATE, 0);
         Overworld_SetSavedMusic(SE_STOP);
     }
 }
@@ -242,7 +242,7 @@ bool32 CountSSTidalStep(u16 delta)
 u8 GetSSTidalLocation(s8 *mapGroup, s8 *mapNum, s16 *x, s16 *y)
 {
     u16 *varCruiseStepCount = GetVarPointer(VAR_CRUISE_STEP_COUNT);
-    switch (*GetVarPointer(VAR_PORTHOLE))
+    switch (*GetVarPointer(VAR_PORTHOLE_STATE))
     {
         case 1:
         case 8:
@@ -1885,12 +1885,12 @@ u8 sub_810F5BC(void)
     {
         if (FlagGet(FLAG_HIDE_RUSTURF_TUNNEL_ROCK_1))
         {
-            VarSet(VAR_0x409a, 4);
+            VarSet(VAR_RUSTURF_TUNNEL_STATE, 4);
             return TRUE;
         }
         else if (FlagGet(FLAG_HIDE_RUSTURF_TUNNEL_ROCK_2))
         {
-            VarSet(VAR_0x409a, 5);
+            VarSet(VAR_RUSTURF_TUNNEL_STATE, 5);
             return TRUE;
         }
     }
@@ -1919,7 +1919,7 @@ void PutZigzagoonInPlayerParty(void)
 bool8 IsStarterInParty(void)
 {
     u8 i;
-    u16 starter = GetStarterPokemon(VarGet(VAR_FIRST_POKE));
+    u16 starter = GetStarterPokemon(VarGet(VAR_STARTER_MON));
     u8 partyCount = CalculatePlayerPartyCount();
     for (i = 0; i < partyCount; i++)
     {
@@ -2047,8 +2047,8 @@ void sub_810F8FC(void)
 
 u16 sub_810F908(void)
 {
-    u16 var40c2 = VarGet(VAR_0x40C2);
-    if (gLocalTime.days - var40c2 >= 7)
+    u16 tmReceivedDay = VarGet(VAR_PACIFIDLOG_TM_RECEIVED_DAY);
+    if (gLocalTime.days - tmReceivedDay >= 7)
     {
         return 0;
     }
@@ -2056,12 +2056,12 @@ u16 sub_810F908(void)
     {
         return 8;
     }
-    return 7 - (gLocalTime.days - var40c2);
+    return 7 - (gLocalTime.days - tmReceivedDay);
 }
 
 u16 sub_810F950(void)
 {
-    VarSet(VAR_0x40C2, gLocalTime.days);
+    VarSet(VAR_PACIFIDLOG_TM_RECEIVED_DAY, gLocalTime.days);
     return gLocalTime.days;
 }
 
@@ -2146,13 +2146,13 @@ void sub_810FAA0(void)
         FlagClear(0x316);
         FlagClear(0x317);
         FlagClear(0x318);
-        VarSet(VAR_0x4095, 1);
+        VarSet(VAR_LILYCOVE_FAN_CLUB_STATE, 1);
     }
 }
 
 u8 sub_810FB10(u8 a0)
 {
-    if (VarGet(VAR_0x4095) == 2)
+    if (VarGet(VAR_LILYCOVE_FAN_CLUB_STATE) == 2)
     {
         if ((gSaveBlock1.vars[0x41] & 0x7f) + gUnknown_083F8404[a0] >= 20)
         {
@@ -2355,7 +2355,7 @@ void sub_810FE1C(void *linkRecords, u8 a, u8 b)
 
 void sub_810FEFC(void)
 {
-    if (VarGet(VAR_0x4095) == 2)
+    if (VarGet(VAR_LILYCOVE_FAN_CLUB_STATE) == 2)
     {
         sub_810FA74();
         if (gBattleOutcome == 1)

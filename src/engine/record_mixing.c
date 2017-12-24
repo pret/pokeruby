@@ -119,7 +119,7 @@ void Task_RecordMixing_Main(u8 taskId)
     {
     case 0:        // init
         sub_8007270(gSpecialVar_0x8005);
-        VarSet(VAR_0x4000, 1);
+        VarSet(VAR_TEMP_0, 1);
         gUnknown_03000718 = 0;
         RecordMixing_PrepareExchangePacket();
         CreateRecordMixingSprite();
@@ -1016,26 +1016,26 @@ void sub_80B9F3C(u16 *a, u8 b)
         {
             if (!CheckBagHasItem(*a, 1) && !CheckPCHasItem(*a, 1) && AddBagItem(*a, 1))
             {
-                VarSet(VAR_0x4001, *a);
+                VarSet(VAR_TEMP_1, *a);
                 StringCopy(gStringVar1, gLinkPlayers[0].name);
                 if (*a == ITEM_EON_TICKET)
                     FlagSet(FLAG_SYS_HAS_EON_TICKET);
             }
             else
             {
-                VarSet(VAR_0x4001, ITEM_NONE);
+                VarSet(VAR_TEMP_1, ITEM_NONE);
             }
         }
         else
         {
             if (AddBagItem(*a, 1) == TRUE)
             {
-                VarSet(VAR_0x4001, *a);
+                VarSet(VAR_TEMP_1, *a);
                 StringCopy(gStringVar1, gLinkPlayers[0].name);
             }
             else
             {
-                VarSet(VAR_0x4001, ITEM_NONE);
+                VarSet(VAR_TEMP_1, ITEM_NONE);
             }
         }
     }

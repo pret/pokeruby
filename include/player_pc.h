@@ -19,8 +19,8 @@
 // defined and used in the above macro
 enum
 {
-    ITEM_ID,
-    QUANTITY
+    PC_ITEM_ID,
+    PC_QUANTITY
 };
 
 // player PC menu options

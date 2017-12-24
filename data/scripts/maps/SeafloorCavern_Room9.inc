@@ -14,10 +14,10 @@ SeafloorCavern_Room9_MapScript1_15DAEC:: @ 815DAEC
 
 SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	lockall
-	setvar 0x8004, 2
-	setvar 0x8005, 3
-	setvar 0x8006, 4
-	setvar 0x8007, 5
+	setvar VAR_SPECIAL_4, 2
+	setvar VAR_SPECIAL_5, 3
+	setvar VAR_SPECIAL_6, 4
+	setvar VAR_SPECIAL_7, 5
 	applymovement 255, SeafloorCavern_Room9_Movement_1A0841
 	waitmovement 0
 	applymovement 255, SeafloorCavern_Room9_Movement_15DD68
@@ -28,24 +28,24 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	msgbox SeafloorCavern_Room9_Text_1B4850, 4
 	.endif
 	closemessage
-	addobject 0x8004
+	addobject VAR_SPECIAL_4
 	applymovement 255, SeafloorCavern_Room9_Movement_1A083F
 	waitmovement 0
-	applymovement 0x8004, SeafloorCavern_Room9_Movement_15DD36
+	applymovement VAR_SPECIAL_4, SeafloorCavern_Room9_Movement_15DD36
 	waitmovement 0
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B41D5, 4
 	.else
 	msgbox SeafloorCavern_Room9_Text_1B486C, 4
 	.endif
-	applymovement 0x8004, SeafloorCavern_Room9_Movement_1A0841
+	applymovement VAR_SPECIAL_4, SeafloorCavern_Room9_Movement_1A0841
 	waitmovement 0
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B4201, 4
 	.else
 	msgbox SeafloorCavern_Room9_Text_1B4897, 4
 	.endif
-	applymovement 0x8004, SeafloorCavern_Room9_Movement_1A0839
+	applymovement VAR_SPECIAL_4, SeafloorCavern_Room9_Movement_1A0839
 	waitmovement 0
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B4289, 4
@@ -92,7 +92,7 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	playfanfare 388
 	playse 107
 	special sub_80818A4
-	applymovement 0x8004, SeafloorCavern_Room9_Movement_1A0841
+	applymovement VAR_SPECIAL_4, SeafloorCavern_Room9_Movement_1A0841
 	applymovement 255, SeafloorCavern_Room9_Movement_1A0841
 	waitmovement 0
 	delay 150
@@ -104,23 +104,23 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	waitmovement 0
 	special sub_80818FC
 	waitstate
-	setvar 0x8004, 1
-	setvar 0x8005, 1
+	setvar VAR_SPECIAL_4, 1
+	setvar VAR_SPECIAL_5, 1
 	special sub_810F758
 	waitstate
 	applymovement 1, SeafloorCavern_Room9_Movement_15DD57
 	waitmovement 0
 	removeobject 1
 	delay 4
-	setvar 0x8004, 2
-	setvar 0x8005, 2
+	setvar VAR_SPECIAL_4, 2
+	setvar VAR_SPECIAL_5, 2
 	special sub_810F758
 	waitstate
 	delay 30
-	setvar 0x8004, 2
-	setvar 0x8005, 3
-	setvar 0x8006, 4
-	setvar 0x8007, 5
+	setvar VAR_SPECIAL_4, 2
+	setvar VAR_SPECIAL_5, 3
+	setvar VAR_SPECIAL_6, 4
+	setvar VAR_SPECIAL_7, 5
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B43F2, 4
 	.else
@@ -135,7 +135,7 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	msgbox SeafloorCavern_Room9_Text_1B4ADB, 4
 	.endif
 	closemessage
-	applymovement 0x8004, SeafloorCavern_Room9_Movement_15DD41
+	applymovement VAR_SPECIAL_4, SeafloorCavern_Room9_Movement_15DD41
 	waitmovement 0
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B447A, 4
@@ -145,7 +145,7 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	closemessage
 	playse 3
 	delay 20
-	applymovement 0x8004, SeafloorCavern_Room9_Movement_1A0845
+	applymovement VAR_SPECIAL_4, SeafloorCavern_Room9_Movement_1A0845
 	waitmovement 0
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B45C6, 4
@@ -153,14 +153,14 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	msgbox SeafloorCavern_Room9_Text_1B4C79, 4
 	.endif
 	closemessage
-	addobject 0x8005
-	addobject 0x8006
-	addobject 0x8007
-	applymovement 0x8007, SeafloorCavern_Room9_Movement_15DD63
-	applymovement 0x8006, SeafloorCavern_Room9_Movement_15DD63
-	applymovement 0x8005, SeafloorCavern_Room9_Movement_15DD5A
+	addobject VAR_SPECIAL_5
+	addobject VAR_SPECIAL_6
+	addobject VAR_SPECIAL_7
+	applymovement VAR_SPECIAL_7, SeafloorCavern_Room9_Movement_15DD63
+	applymovement VAR_SPECIAL_6, SeafloorCavern_Room9_Movement_15DD63
+	applymovement VAR_SPECIAL_5, SeafloorCavern_Room9_Movement_15DD5A
 	waitmovement 0
-	applymovement 0x8004, SeafloorCavern_Room9_Movement_1A083F
+	applymovement VAR_SPECIAL_4, SeafloorCavern_Room9_Movement_1A083F
 	waitmovement 0
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B464D, 4
@@ -168,9 +168,9 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	msgbox SeafloorCavern_Room9_Text_1B4D02, 4
 	.endif
 	playse 21
-	applymovement 0x8004, SeafloorCavern_Room9_Movement_1A0833
+	applymovement VAR_SPECIAL_4, SeafloorCavern_Room9_Movement_1A0833
 	waitmovement 0
-	applymovement 0x8004, SeafloorCavern_Room9_Movement_1A0835
+	applymovement VAR_SPECIAL_4, SeafloorCavern_Room9_Movement_1A0835
 	waitmovement 0
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B4723, 4
@@ -183,28 +183,28 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	msgbox SeafloorCavern_Room9_Text_1B4E37, 4
 	.endif
 	closemessage
-	applymovement 0x8005, SeafloorCavern_Room9_Movement_15DD60
-	applymovement 0x8004, SeafloorCavern_Room9_Movement_15DD46
+	applymovement VAR_SPECIAL_5, SeafloorCavern_Room9_Movement_15DD60
+	applymovement VAR_SPECIAL_4, SeafloorCavern_Room9_Movement_15DD46
 	waitmovement 0
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B4818, 4
 	.else
 	msgbox SeafloorCavern_Room9_Text_1B4ECA, 4
 	.endif
-	setvar 0x407b, 1
+	setvar VAR_ROUTE128_STATE, 1
 	clearflag FLAG_HIDE_CAVE_OF_ORIGIN_ENTRANCE_WOMAN_1
 	clearflag FLAG_HIDE_CAVE_OF_ORIGIN_ENTRANCE_WOMAN_2
 	clearflag FLAG_HIDE_WALLACE_SOOTOPOLIS
 	clearflag FLAG_HIDE_STEVEN_SOOTOPOLIS
-	setvar 0x405e, 1
+	setvar VAR_SOOTOPOLIS_STATE, 1
 	clearflag FLAG_HIDE_EVIL_LEADER_ROUTE128
 	clearflag FLAG_HIDE_OTHER_LEADER_ROUTE128
 	setflag FLAG_SYS_WEATHER_CTRL
 	setflag FLAG_HIDE_SOOTOPOLIS_RESIDENTS
 	setflag FLAG_LEGEND_ESCAPED_SEAFLOOR_CAVERN
 	setflag FLAG_HIDE_STEVEN_STEVENS_HOUSE
-	setvar 0x40c6, 1
-	setvar 0x40a2, 1
+	setvar VAR_STEVENS_HOUSE_STATE, 1
+	setvar VAR_SEAFLOOR_CAVERN_STATE, 1
 	setflag FLAG_HIDE_EVIL_LEADER_SEAFLOOR_CAVERN
 	setflag FLAG_HIDE_OTHER_LEADER_SEAFLOOR_CAVERN
 	setflag FLAG_HIDE_OTHER_TEAM_GRUNTS_SEAFLOOR_CAVERN

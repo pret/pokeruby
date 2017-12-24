@@ -2,8 +2,8 @@
 #define GUARD_CONSTANTS_FLAGS_H
 
 // temporary flags
-// These temporary are are cleared every time a map is loaded. They are used for
-// things like shortening an NPCs introduction text if the player already spoke
+// These temporary flags are are cleared every time a map is loaded. They are used
+// for things like shortening an NPCs introduction text if the player already spoke
 // to them once.
 #define FLAG_TEMP_1   0x1
 #define FLAG_TEMP_2   0x2
@@ -799,6 +799,7 @@
 
 // SPECIAL FLAGS (unknown purpose)
 
+#define FLAG_SPECIAL_FLAG_0 0x4000
 #define FLAG_SPECIAL_FLAG_1 0x4001
 
 #endif // GUARD_CONSTANTS_FLAGS_H

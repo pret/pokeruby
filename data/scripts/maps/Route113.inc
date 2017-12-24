@@ -13,10 +13,10 @@ Route113_MapScript1_1505DA:: @ 81505DA
 	end
 
 Route113_EventScript_1505E5:: @ 81505E5
-	getplayerxy 0x4000, 0x4001
-	compare 0x4000, 19
+	getplayerxy VAR_TEMP_0, VAR_TEMP_1
+	compare VAR_TEMP_0, 19
 	goto_if 0, Route113_EventScript_150604
-	compare 0x4000, 84
+	compare VAR_TEMP_0, 84
 	goto_if 2, Route113_EventScript_150604
 	setweather 7
 	return
