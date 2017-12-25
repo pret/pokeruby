@@ -95,7 +95,7 @@ void sub_810290C(void);
 u8 sub_81029D4(u8 a0, u8 a1, u8 a2);
 void sub_8102A24(void);
 bool8 sub_8102A44(void);
-u8 sub_8102BA4(u8 a0, u8 a1);
+u8 sub_8102BA4(u8 a0, s16 a1);
 void sub_8102DA8(void);
 void sub_8102DEC(u8 a0);
 void sub_8102E1C(u8 a0);
@@ -105,6 +105,8 @@ void sub_8103D50(u8 a0);
 void sub_8103D8C(u8 a0);
 void sub_8103DC8(void);
 void sub_8103E04(u8 a0);
+bool8 sub_8103E38(void);
+bool8 sub_8103E7C(void);
 void sub_8103F70(void);
 bool8 sub_8103FA0(void);
 void sub_8104048(void);
@@ -1114,6 +1116,123 @@ void sub_810290C(void)
         }
         sub_8103E04(4);
     }
+}
+
+extern const u8 gUnknown_083ECE52[];
+
+u8 sub_81029D4(u8 c1, u8 c2, u8 c3)
+{
+    if (c1 == c2 && c1 == c3)
+    {
+        return gUnknown_083ECE52[c1];
+    }
+    if (c1 == 0 && c2 == 0 && c3 == 1)
+    {
+        return 6;
+    }
+    if (c1 == 1 && c2 == 1 && c3 == 0)
+    {
+        return 6;
+    }
+    if (c1 == 4)
+    {
+        return 0;
+    }
+    return 9;
+}
+
+void sub_8102A64(u8 taskId);
+
+void sub_8102A24(void)
+{
+    sub_8102A64(CreateTask(sub_8102A64, 4));
+}
+
+bool8 sub_8102A44(void)
+{
+    if (FindTaskIdByFunc(sub_8102A64) == 0xff)
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+extern bool8 (*const gUnknown_083ECB20[])(struct Task *task);
+
+void sub_8102A64(u8 taskId)
+{
+    while (gUnknown_083ECB20[gTasks[taskId].data[0]](gTasks + taskId));
+}
+
+bool8 sub_8102A9C(struct Task *task)
+{
+    if (sub_8103E38())
+    {
+        task->data[0]++;
+        if (eSlotMachine->unk0E == 0)
+        {
+            task->data[0] = 2;
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+bool8 sub_8102AD0(struct Task *task)
+{
+    if (!task->data[1]--)
+    {
+        if (IsFanfareTaskInactive())
+        {
+            PlaySE(SE_PIN);
+        }
+        eSlotMachine->unk0E--;
+        if (eSlotMachine->coins < 9999)
+        {
+            eSlotMachine->coins++;
+        }
+        task->data[1] = 8;
+        if (gMain.heldKeys & A_BUTTON)
+        {
+            task->data[1] = 4;
+        }
+    }
+    if (IsFanfareTaskInactive() && gMain.newKeys & START_BUTTON)
+    {
+        PlaySE(SE_PIN);
+        eSlotMachine->coins += eSlotMachine->unk0E;
+        if (eSlotMachine->coins > 9999)
+        {
+            eSlotMachine->coins = 9999;
+        }
+        eSlotMachine->unk0E = 0;
+    }
+    if (eSlotMachine->unk0E == 0)
+    {
+        task->data[0]++;
+    }
+    return FALSE;
+}
+
+bool8 sub_8102B80(struct Task *task)
+{
+    if (sub_8103E7C())
+    {
+        DestroyTask(FindTaskIdByFunc(sub_8102A64));
+    }
+    return FALSE;
+}
+
+extern const u8 gUnknown_083ECCB2[][21];
+
+u8 sub_8102BA4(u8 x, s16 y)
+{
+    s16 offset = (eSlotMachine->unk28[x] + y) % 21;
+    if (offset < 0)
+    {
+        offset += 21;
+    }
+    return gUnknown_083ECCB2[x][offset];
 }
 
 asm(".section .text_a");
