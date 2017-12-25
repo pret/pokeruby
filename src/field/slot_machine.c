@@ -1036,12 +1036,83 @@ extern const u16 gUnknown_083ECE5A[];
 
 void sub_81027D0(void)
 {
-    u8 payout = sub_81029D4(sub_8102BA4(0, 2), sub_8102BA4(1, 2), sub_8102BA4(2, 2));
+    u8 c1, c2, c3, payout;
+
+    c1 = sub_8102BA4(0, 2);
+    c2 = sub_8102BA4(1, 2);
+    c3 = sub_8102BA4(2, 2);
+    payout = sub_81029D4(c1, c2, c3);
     if (payout != 9)
     {
         eSlotMachine->unk0E += gUnknown_083ECE6C[payout];
         eSlotMachine->unk08 |= gUnknown_083ECE5A[payout];
         sub_8103E04(0);
+    }
+}
+
+void sub_8102840(void)
+{
+    u8 c1, c2, c3, payout;
+
+    c1 = sub_8102BA4(0, 1);
+    c2 = sub_8102BA4(1, 1);
+    c3 = sub_8102BA4(2, 1);
+    payout = sub_81029D4(c1, c2, c3);
+    if (payout != 9)
+    {
+        if (payout == 0)
+        {
+            payout = 1;
+        }
+        eSlotMachine->unk0E += gUnknown_083ECE6C[payout];
+        eSlotMachine->unk08 |= gUnknown_083ECE5A[payout];
+        sub_8103E04(1);
+    }
+    c1 = sub_8102BA4(0, 3);
+    c2 = sub_8102BA4(1, 3);
+    c3 = sub_8102BA4(2, 3);
+    payout = sub_81029D4(c1, c2, c3);
+    if (payout != 9)
+    {
+        if (payout == 0)
+        {
+            payout = 1;
+        }
+        eSlotMachine->unk0E += gUnknown_083ECE6C[payout];
+        eSlotMachine->unk08 |= gUnknown_083ECE5A[payout];
+        sub_8103E04(2);
+    }
+}
+
+void sub_810290C(void)
+{
+    u8 c1, c2, c3, payout;
+
+    c1 = sub_8102BA4(0, 1);
+    c2 = sub_8102BA4(1, 2);
+    c3 = sub_8102BA4(2, 3);
+    payout = sub_81029D4(c1, c2, c3);
+    if (payout != 9)
+    {
+        if (payout != 0)
+        {
+            eSlotMachine->unk0E += gUnknown_083ECE6C[payout];
+            eSlotMachine->unk08 |= gUnknown_083ECE5A[payout];
+        }
+        sub_8103E04(3);
+    }
+    c1 = sub_8102BA4(0, 3);
+    c2 = sub_8102BA4(1, 2);
+    c3 = sub_8102BA4(2, 1);
+    payout = sub_81029D4(c1, c2, c3);
+    if (payout != 9)
+    {
+        if (payout != 0)
+        {
+            eSlotMachine->unk0E += gUnknown_083ECE6C[payout];
+            eSlotMachine->unk08 |= gUnknown_083ECE5A[payout];
+        }
+        sub_8103E04(4);
     }
 }
 
