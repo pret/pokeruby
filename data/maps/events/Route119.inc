@@ -44,29 +44,29 @@ Route119_MapWarps:: @ 8383C8C
 Route119_MapCoordEvents:: @ 8383C9C
 	coord_event 25, 31, 0, 0, VAR_ROUTE119_STATE, 0, 0, Route119_EventScript_1511C5
 	coord_event 26, 31, 0, 0, VAR_ROUTE119_STATE, 0, 0, Route119_EventScript_1511D0
-	coord_event 28, 13, 0, 0, 20, 0, 0, 0x0
-	coord_event 29, 13, 3, 0, 20, 0, 0, 0x0
-	coord_event 30, 13, 3, 0, 20, 0, 0, 0x0
-	coord_event 31, 13, 3, 0, 20, 0, 0, 0x0
-	coord_event 32, 13, 3, 0, 20, 0, 0, 0x0
-	coord_event 33, 13, 3, 0, 20, 0, 0, 0x0
-	coord_event 15, 133, 3, 0, 20, 0, 0, 0x0
-	coord_event 16, 132, 3, 0, 20, 0, 0, 0x0
-	coord_event 17, 131, 3, 0, 20, 0, 0, 0x0
-	coord_event 18, 130, 3, 0, 20, 0, 0, 0x0
-	coord_event 19, 131, 3, 0, 20, 0, 0, 0x0
-	coord_event 20, 132, 3, 0, 20, 0, 0, 0x0
-	coord_event 21, 133, 3, 0, 20, 0, 0, 0x0
-	coord_event 36, 6, 3, 0, 2, 0, 0, 0x0
-	coord_event 36, 7, 3, 0, 2, 0, 0, 0x0
-	coord_event 35, 8, 3, 0, 2, 0, 0, 0x0
-	coord_event 35, 9, 3, 0, 2, 0, 0, 0x0
-	coord_event 34, 10, 3, 0, 2, 0, 0, 0x0
-	coord_event 16, 137, 3, 0, 2, 0, 0, 0x0
-	coord_event 17, 137, 3, 0, 2, 0, 0, 0x0
-	coord_event 18, 137, 3, 0, 2, 0, 0, 0x0
-	coord_event 19, 137, 3, 0, 2, 0, 0, 0x0
-	coord_event 20, 137, 3, 0, 2, 0, 0, 0x0
+	coord_weather_event 28, 13, 0, COORD_EVENT_WEATHER_ROUTE119_CYCLE
+	coord_weather_event 29, 13, 3, COORD_EVENT_WEATHER_ROUTE119_CYCLE
+	coord_weather_event 30, 13, 3, COORD_EVENT_WEATHER_ROUTE119_CYCLE
+	coord_weather_event 31, 13, 3, COORD_EVENT_WEATHER_ROUTE119_CYCLE
+	coord_weather_event 32, 13, 3, COORD_EVENT_WEATHER_ROUTE119_CYCLE
+	coord_weather_event 33, 13, 3, COORD_EVENT_WEATHER_ROUTE119_CYCLE
+	coord_weather_event 15, 133, 3, COORD_EVENT_WEATHER_ROUTE119_CYCLE
+	coord_weather_event 16, 132, 3, COORD_EVENT_WEATHER_ROUTE119_CYCLE
+	coord_weather_event 17, 131, 3, COORD_EVENT_WEATHER_ROUTE119_CYCLE
+	coord_weather_event 18, 130, 3, COORD_EVENT_WEATHER_ROUTE119_CYCLE
+	coord_weather_event 19, 131, 3, COORD_EVENT_WEATHER_ROUTE119_CYCLE
+	coord_weather_event 20, 132, 3, COORD_EVENT_WEATHER_ROUTE119_CYCLE
+	coord_weather_event 21, 133, 3, COORD_EVENT_WEATHER_ROUTE119_CYCLE
+	coord_weather_event 36, 6, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 36, 7, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 35, 8, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 35, 9, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 34, 10, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 16, 137, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 17, 137, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 18, 137, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 19, 137, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 20, 137, 3, COORD_EVENT_WEATHER_SUNNY
 
 Route119_MapBGEvents:: @ 8383E2C
 	bg_event 9, 33, 0, 0, 0, Route119_EventScript_15142C

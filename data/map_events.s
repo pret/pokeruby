@@ -3,6 +3,7 @@
 #include "constants/map_objects.h"
 #include "constants/maps.h"
 #include "constants/vars.h"
+#include "constants/weather.h"
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
 

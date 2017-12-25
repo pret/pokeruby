@@ -40,6 +40,10 @@
 	inc _num_traps
 	.endm
 
+	.macro coord_weather_event x, y, height, weather
+	coord_event \x, \y, \height, 0, \weather, 0, 0, 0x0
+	.endm
+
 	.macro bg_event x, y, byte, kind, word, arg6, arg7, arg8
 	.2byte \x, \y
 	.byte \byte, \kind

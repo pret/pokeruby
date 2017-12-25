@@ -46,25 +46,25 @@ Route120_MapWarps:: @ 8384308
 	warp_def 19, 23, 1, 0, MAP_SCORCHED_SLAB
 
 Route120_MapCoordEvents:: @ 8384318
-	coord_event 7, 15, 0, 0, 3, 0, 0, 0x0
-	coord_event 7, 16, 0, 0, 3, 0, 0, 0x0
-	coord_event 22, 61, 3, 0, 3, 0, 0, 0x0
-	coord_event 12, 64, 3, 0, 3, 0, 0, 0x0
-	coord_event 35, 63, 3, 0, 1, 0, 0, 0x0
-	coord_event 36, 63, 3, 0, 1, 0, 0, 0x0
-	coord_event 37, 63, 3, 0, 1, 0, 0, 0x0
-	coord_event 38, 63, 3, 0, 1, 0, 0, 0x0
-	coord_event 32, 88, 5, 0, 1, 0, 0, 0x0
-	coord_event 28, 15, 0, 0, 2, 0, 0, 0x0
-	coord_event 28, 16, 0, 0, 2, 0, 0, 0x0
-	coord_event 28, 17, 3, 0, 2, 0, 0, 0x0
-	coord_event 32, 89, 5, 0, 1, 0, 0, 0x0
-	coord_event 32, 90, 5, 0, 1, 0, 0, 0x0
-	coord_event 32, 91, 5, 0, 1, 0, 0, 0x0
-	coord_event 10, 75, 3, 0, 1, 0, 0, 0x0
-	coord_event 11, 75, 3, 0, 1, 0, 0, 0x0
-	coord_event 12, 75, 3, 0, 1, 0, 0, 0x0
-	coord_event 13, 75, 3, 0, 1, 0, 0, 0x0
+	coord_weather_event 7, 15, 0, COORD_EVENT_WEATHER_RAIN_LIGHT
+	coord_weather_event 7, 16, 0, COORD_EVENT_WEATHER_RAIN_LIGHT
+	coord_weather_event 22, 61, 3, COORD_EVENT_WEATHER_RAIN_LIGHT
+	coord_weather_event 12, 64, 3, COORD_EVENT_WEATHER_RAIN_LIGHT
+	coord_weather_event 35, 63, 3, COORD_EVENT_WEATHER_CLOUDS
+	coord_weather_event 36, 63, 3, COORD_EVENT_WEATHER_CLOUDS
+	coord_weather_event 37, 63, 3, COORD_EVENT_WEATHER_CLOUDS
+	coord_weather_event 38, 63, 3, COORD_EVENT_WEATHER_CLOUDS
+	coord_weather_event 32, 88, 5, COORD_EVENT_WEATHER_CLOUDS
+	coord_weather_event 28, 15, 0, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 28, 16, 0, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 28, 17, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 32, 89, 5, COORD_EVENT_WEATHER_CLOUDS
+	coord_weather_event 32, 90, 5, COORD_EVENT_WEATHER_CLOUDS
+	coord_weather_event 32, 91, 5, COORD_EVENT_WEATHER_CLOUDS
+	coord_weather_event 10, 75, 3, COORD_EVENT_WEATHER_CLOUDS
+	coord_weather_event 11, 75, 3, COORD_EVENT_WEATHER_CLOUDS
+	coord_weather_event 12, 75, 3, COORD_EVENT_WEATHER_CLOUDS
+	coord_weather_event 13, 75, 3, COORD_EVENT_WEATHER_CLOUDS
 
 Route120_MapBGEvents:: @ 8384448
 	bg_event 27, 3, 3, 0, 0, Route120_EventScript_1519A1

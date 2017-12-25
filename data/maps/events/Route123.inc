@@ -38,28 +38,28 @@ Route123_MapWarps:: @ 8384B28
 	warp_def 22, 6, 0, 0, MAP_ROUTE123_BERRY_MASTERS_HOUSE
 
 Route123_MapCoordEvents:: @ 8384B30
-	coord_event 90, 16, 3, 0, 21, 0, 0, 0x0
-	coord_event 92, 9, 3, 0, 21, 0, 0, 0x0
-	coord_event 93, 12, 3, 0, 21, 0, 0, 0x0
-	coord_event 92, 13, 3, 0, 21, 0, 0, 0x0
-	coord_event 91, 14, 3, 0, 21, 0, 0, 0x0
-	coord_event 19, 13, 3, 0, 21, 0, 0, 0x0
-	coord_event 19, 12, 3, 0, 21, 0, 0, 0x0
-	coord_event 34, 13, 3, 0, 21, 0, 0, 0x0
-	coord_event 19, 14, 3, 0, 21, 0, 0, 0x0
-	coord_event 19, 15, 3, 0, 21, 0, 0, 0x0
-	coord_event 19, 16, 3, 0, 21, 0, 0, 0x0
-	coord_event 108, 14, 3, 0, 2, 0, 0, 0x0
-	coord_event 109, 15, 3, 0, 2, 0, 0, 0x0
-	coord_event 110, 16, 3, 0, 2, 0, 0, 0x0
-	coord_event 111, 17, 3, 0, 2, 0, 0, 0x0
-	coord_event 112, 18, 3, 0, 2, 0, 0, 0x0
-	coord_event 9, 12, 3, 0, 2, 0, 0, 0x0
-	coord_event 9, 13, 3, 0, 2, 0, 0, 0x0
-	coord_event 9, 14, 3, 0, 2, 0, 0, 0x0
-	coord_event 9, 15, 3, 0, 2, 0, 0, 0x0
-	coord_event 9, 16, 3, 0, 2, 0, 0, 0x0
-	coord_event 94, 10, 3, 0, 21, 0, 0, 0x0
+	coord_weather_event 90, 16, 3, COORD_EVENT_WEATHER_ROUTE123_CYCLE
+	coord_weather_event 92, 9, 3, COORD_EVENT_WEATHER_ROUTE123_CYCLE
+	coord_weather_event 93, 12, 3, COORD_EVENT_WEATHER_ROUTE123_CYCLE
+	coord_weather_event 92, 13, 3, COORD_EVENT_WEATHER_ROUTE123_CYCLE
+	coord_weather_event 91, 14, 3, COORD_EVENT_WEATHER_ROUTE123_CYCLE
+	coord_weather_event 19, 13, 3, COORD_EVENT_WEATHER_ROUTE123_CYCLE
+	coord_weather_event 19, 12, 3, COORD_EVENT_WEATHER_ROUTE123_CYCLE
+	coord_weather_event 34, 13, 3, COORD_EVENT_WEATHER_ROUTE123_CYCLE
+	coord_weather_event 19, 14, 3, COORD_EVENT_WEATHER_ROUTE123_CYCLE
+	coord_weather_event 19, 15, 3, COORD_EVENT_WEATHER_ROUTE123_CYCLE
+	coord_weather_event 19, 16, 3, COORD_EVENT_WEATHER_ROUTE123_CYCLE
+	coord_weather_event 108, 14, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 109, 15, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 110, 16, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 111, 17, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 112, 18, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 9, 12, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 9, 13, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 9, 14, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 9, 15, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 9, 16, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 94, 10, 3, COORD_EVENT_WEATHER_ROUTE123_CYCLE
 
 Route123_MapBGEvents:: @ 8384C90
 	bg_event 117, 10, 0, 0, 0, Route123_EventScript_151CBF

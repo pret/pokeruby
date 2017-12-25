@@ -15,25 +15,25 @@ Route113_MapWarps:: @ 8382AA8
 	warp_def 33, 5, 0, 0, MAP_ROUTE113_GLASS_WORKSHOP
 
 Route113_MapCoordEvents:: @ 8382AB0
-	coord_event 19, 11, 3, 0, 8, 0, 0, 0x0
-	coord_event 19, 10, 3, 0, 8, 0, 0, 0x0
-	coord_event 19, 12, 3, 0, 8, 0, 0, 0x0
-	coord_event 19, 13, 3, 0, 8, 0, 0, 0x0
-	coord_event 87, 9, 3, 0, 8, 0, 0, 0x0
-	coord_event 86, 10, 3, 0, 8, 0, 0, 0x0
-	coord_event 86, 11, 3, 0, 8, 0, 0, 0x0
-	coord_event 14, 10, 3, 0, 2, 0, 0, 0x0
-	coord_event 14, 11, 3, 0, 2, 0, 0, 0x0
-	coord_event 14, 12, 3, 0, 2, 0, 0, 0x0
-	coord_event 14, 13, 3, 0, 2, 0, 0, 0x0
-	coord_event 94, 8, 3, 0, 2, 0, 0, 0x0
-	coord_event 94, 9, 3, 0, 2, 0, 0, 0x0
-	coord_event 94, 10, 3, 0, 2, 0, 0, 0x0
-	coord_event 94, 11, 0, 0, 2, 0, 0, 0x0
-	coord_event 19, 14, 3, 0, 8, 0, 0, 0x0
-	coord_event 88, 8, 3, 0, 8, 0, 0, 0x0
-	coord_event 88, 6, 3, 0, 8, 0, 0, 0x0
-	coord_event 88, 7, 3, 0, 8, 0, 0, 0x0
+	coord_weather_event 19, 11, 3, COORD_EVENT_WEATHER_ASH
+	coord_weather_event 19, 10, 3, COORD_EVENT_WEATHER_ASH
+	coord_weather_event 19, 12, 3, COORD_EVENT_WEATHER_ASH
+	coord_weather_event 19, 13, 3, COORD_EVENT_WEATHER_ASH
+	coord_weather_event 87, 9, 3, COORD_EVENT_WEATHER_ASH
+	coord_weather_event 86, 10, 3, COORD_EVENT_WEATHER_ASH
+	coord_weather_event 86, 11, 3, COORD_EVENT_WEATHER_ASH
+	coord_weather_event 14, 10, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 14, 11, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 14, 12, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 14, 13, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 94, 8, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 94, 9, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 94, 10, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 94, 11, 0, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 19, 14, 3, COORD_EVENT_WEATHER_ASH
+	coord_weather_event 88, 8, 3, COORD_EVENT_WEATHER_ASH
+	coord_weather_event 88, 6, 3, COORD_EVENT_WEATHER_ASH
+	coord_weather_event 88, 7, 3, COORD_EVENT_WEATHER_ASH
 
 Route113_MapBGEvents:: @ 8382BE0
 	bg_event 85, 6, 0, 0, 0, Route113_EventScript_150617
