@@ -363,7 +363,7 @@ static u8 *TryGetInvisibleMapObjectScript(struct MapPosition *position, u8 unuse
     case 8:
         if (c == 2)
         {
-            gSpecialVar_0x8004 = (u32)bgEvent->bgUnion.script;
+            gSpecialVar_0x8004 = bgEvent->bgUnion.secretBaseId;
             if (sub_80BC050())
                 return gUnknown_081A2C51;
         }

@@ -33,10 +33,10 @@ Route121_MapCoordEvents:: @ 838471C
 
 Route121_MapBGEvents:: @ 838475C
 	bg_event 32, 14, 0, 0, 0, Route121_EventScript_151B13
-	bg_event 40, 11, 0, 8, 0, ITEM_PREMIER_BALL, 0, 0
-	bg_event 18, 13, 0, 8, 0, ITEM_SUPER_POTION, 0, 0
-	bg_event 43, 7, 0, 8, 0, ITEM_NOMEL_BERRY, 0, 0
-	bg_event 42, 7, 0, 8, 0, ITEM_APICOT_BERRY, 0, 0
+	bg_secret_base_event 40, 11, 0, SECRET_BASE_RED_CAVE2(2)
+	bg_secret_base_event 18, 13, 0, SECRET_BASE_RED_CAVE3(2)
+	bg_secret_base_event 43, 7, 0, SECRET_BASE_TREE1(2)
+	bg_secret_base_event 42, 7, 0, SECRET_BASE_TREE2(2)
 	bg_event 39, 6, 0, 0, 0, Route121_EventScript_151B1C
 	bg_hidden_item_event 23, 10, 3, ITEM_HP_UP, FLAG_HIDDEN_ITEM_27
 	bg_hidden_item_event 58, 3, 3, ITEM_NUGGET, FLAG_HIDDEN_ITEM_28

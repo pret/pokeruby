@@ -20,19 +20,19 @@ Route115_MapWarps:: @ 83830AC
 	warp_def 27, 37, 0, 1, MAP_METEOR_FALLS_1F_1R
 
 Route115_MapBGEvents:: @ 83830B4
-	bg_event 32, 6, 0, 8, 0, 72, 0, 0
-	bg_event 21, 18, 0, 8, 0, 62, 0, 0
+	bg_secret_base_event 32, 6, 0, SECRET_BASE_BROWN_CAVE4(2)
+	bg_secret_base_event 21, 18, 0, SECRET_BASE_BROWN_CAVE3(2)
 	bg_event 16, 64, 0, 0, 0, Route115_EventScript_150937
 	bg_event 25, 38, 3, 0, 0, Route115_EventScript_150940
-	bg_event 8, 30, 0, 8, 0, ITEM_CHERI_BERRY, 0, 0
-	bg_event 32, 39, 0, 8, 0, ITEM_BLACK_FLUTE, 0, 0
-	bg_event 26, 15, 0, 8, 0, 52, 0, 0
-	bg_event 23, 8, 0, 8, 0, ITEM_WHITE_FLUTE, 0, 0
-	bg_event 32, 46, 0, 8, 0, 53, 0, 0
-	bg_event 7, 20, 0, 8, 0, ITEM_STARF_BERRY, 0, 0
-	bg_event 8, 20, 0, 8, 0, ITEM_QUICK_CLAW, 0, 0
-	bg_event 25, 24, 0, 8, 0, ITEM_HP_UP, 0, 0
-	bg_event 20, 53, 0, 8, 0, ITEM_HYPER_POTION, 0, 0
+	bg_secret_base_event 8, 30, 0, SECRET_BASE_YELLOW_CAVE2(3)
+	bg_secret_base_event 32, 39, 0, SECRET_BASE_BROWN_CAVE1(2)
+	bg_secret_base_event 26, 15, 0, SECRET_BASE_BROWN_CAVE2(2)
+	bg_secret_base_event 23, 8, 0, SECRET_BASE_BROWN_CAVE1(3)
+	bg_secret_base_event 32, 46, 0, SECRET_BASE_BROWN_CAVE2(3)
+	bg_secret_base_event 7, 20, 0, SECRET_BASE_TREE2(4)
+	bg_secret_base_event 8, 20, 0, SECRET_BASE_TREE3(3)
+	bg_secret_base_event 25, 24, 0, SECRET_BASE_BROWN_CAVE3(3)
+	bg_secret_base_event 20, 53, 0, SECRET_BASE_RED_CAVE3(1)
 	bg_hidden_item_event 15, 49, 3, ITEM_HEART_SCALE, FLAG_HIDDEN_ITEM_61
 
 Route115_MapEvents:: @ 838315C

@@ -61,6 +61,10 @@
 	bg_event \x, \y, \height, 7, 0, \item, ((\flag) - FLAG_HIDDEN_ITEMS_START), 0
 	.endm
 
+	.macro bg_secret_base_event x, y, height, secret_base_id
+	bg_event \x, \y, \height, 8, 0, \secret_base_id, 0, 0
+	.endm	
+
 	.macro map_events npcs, warps, traps, signs
 	.byte _num_npcs, _num_warps, _num_traps, _num_signs
 	.4byte \npcs, \warps, \traps, \signs

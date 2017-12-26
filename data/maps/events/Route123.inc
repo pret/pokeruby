@@ -63,12 +63,12 @@ Route123_MapCoordEvents:: @ 8384B30
 
 Route123_MapBGEvents:: @ 8384C90
 	bg_event 117, 10, 0, 0, 0, Route123_EventScript_151CBF
-	bg_event 47, 3, 0, 8, 0, 82, 0, 0
-	bg_event 49, 3, 0, 8, 0, 92, 0, 0
+	bg_secret_base_event 47, 3, 0, SECRET_BASE_BLUE_CAVE1(2)
+	bg_secret_base_event 49, 3, 0, SECRET_BASE_BLUE_CAVE2(2)
 	bg_event 10, 12, 3, 0, 0, Route123_EventScript_151CB6
 	bg_hidden_item_event 75, 1, 3, ITEM_SUPER_REPEL, FLAG_HIDDEN_ITEM_7
 	bg_event 20, 7, 3, 0, 0, Route123_EventScript_151CC8
-	bg_event 57, 5, 0, 8, 0, ITEM_SUPER_REPEL, 0, 0
+	bg_secret_base_event 57, 5, 0, SECRET_BASE_BLUE_CAVE1(3)
 	bg_hidden_item_event 12, 1, 3, ITEM_REVIVE, FLAG_HIDDEN_ITEM_29
 	bg_hidden_item_event 91, 15, 3, ITEM_HYPER_POTION, FLAG_HIDDEN_ITEM_4A
 
