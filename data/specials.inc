@@ -323,7 +323,7 @@ gSpecials::
 	def_special ScrSpecial_StartRegiBattle
 	def_special sub_8082524
 	def_special DoSealedChamberShakingEffect2
-	def_special sub_810F828
+	def_special FoundBlackGlasses
 	def_special sub_807E25C
 	def_special sp13E_warp_to_last_warp
 	def_special sp13F_fall_to_last_warp

@@ -57,6 +57,10 @@
 	inc _num_signs
 	.endm
 
+	.macro bg_hidden_item_event x, y, height, item, flag
+	bg_event \x, \y, \height, 7, 0, \item, ((\flag) - FLAG_HIDDEN_ITEMS_START), 0
+	.endm
+
 	.macro map_events npcs, warps, traps, signs
 	.byte _num_npcs, _num_warps, _num_traps, _num_signs
 	.4byte \npcs, \warps, \traps, \signs

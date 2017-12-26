@@ -19,7 +19,7 @@ FallarborTown_MapBGEvents:: @ 8380E8C
 	bg_event 10, 11, 0, 0, 0, FallarborTown_EventScript_14E842
 	bg_event 17, 15, 0, 1, 0, FallarborTown_EventScript_1A00E1
 	bg_event 3, 7, 0, 0, 0, FallarborTown_EventScript_14E84B
-	bg_event 2, 15, 3, 7, 0, ITEM_NUGGET, 28, 0
+	bg_hidden_item_event 2, 15, 3, ITEM_NUGGET, FLAG_HIDDEN_ITEM_1C
 
 FallarborTown_MapEvents:: @ 8380EEC
 	map_events FallarborTown_MapObjects, FallarborTown_MapWarps, 0x0, FallarborTown_MapBGEvents

@@ -38,9 +38,9 @@ Route114_MapBGEvents:: @ 8382E88
 	bg_event 11, 27, 0, 8, 0, ITEM_EXP_SHARE, 0, 0
 	bg_event 12, 27, 0, 8, 0, ITEM_DEEP_SEA_TOOTH, 0, 0
 	bg_event 25, 38, 3, 0, 0, Route114_EventScript_1507E8
-	bg_event 20, 57, 3, 7, 0, ITEM_CARBOS, 4, 0
+	bg_hidden_item_event 20, 57, 3, ITEM_CARBOS, FLAG_HIDDEN_ITEM_4
 	bg_event 32, 57, 0, 8, 0, ITEM_GUARD_SPEC, 0, 0
-	bg_event 7, 30, 3, 7, 0, ITEM_REVIVE, 42, 0
+	bg_hidden_item_event 7, 30, 3, ITEM_REVIVE, FLAG_HIDDEN_ITEM_2A
 
 Route114_MapEvents:: @ 8382F18
 	map_events Route114_MapObjects, Route114_MapWarps, 0x0, Route114_MapBGEvents

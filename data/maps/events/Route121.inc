@@ -38,9 +38,9 @@ Route121_MapBGEvents:: @ 838475C
 	bg_event 43, 7, 0, 8, 0, ITEM_NOMEL_BERRY, 0, 0
 	bg_event 42, 7, 0, 8, 0, ITEM_APICOT_BERRY, 0, 0
 	bg_event 39, 6, 0, 0, 0, Route121_EventScript_151B1C
-	bg_event 23, 10, 3, 7, 0, ITEM_HP_UP, 39, 0
-	bg_event 58, 3, 3, 7, 0, ITEM_NUGGET, 40, 0
-	bg_event 72, 5, 3, 7, 0, ITEM_FULL_HEAL, 73, 0
+	bg_hidden_item_event 23, 10, 3, ITEM_HP_UP, FLAG_HIDDEN_ITEM_27
+	bg_hidden_item_event 58, 3, 3, ITEM_NUGGET, FLAG_HIDDEN_ITEM_28
+	bg_hidden_item_event 72, 5, 3, ITEM_FULL_HEAL, FLAG_HIDDEN_ITEM_49
 
 Route121_MapEvents:: @ 83847C8
 	map_events Route121_MapObjects, Route121_MapWarps, Route121_MapCoordEvents, Route121_MapBGEvents

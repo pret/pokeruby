@@ -40,8 +40,8 @@ Route116_MapBGEvents:: @ 83833A8
 	bg_event 29, 10, 0, 0, 0, Route116_EventScript_150B54
 	bg_event 56, 6, 0, 8, 0, 102, 0, 0
 	bg_event 55, 15, 0, 8, 0, 112, 0, 0
-	bg_event 22, 9, 3, 7, 0, ITEM_SUPER_POTION, 45, 0
-	bg_event 70, 13, 3, 7, 0, ITEM_BLACK_GLASSES, 96, 0
+	bg_hidden_item_event 22, 9, 3, ITEM_SUPER_POTION, FLAG_HIDDEN_ITEM_2D
+	bg_hidden_item_event 70, 13, 3, ITEM_BLACK_GLASSES, FLAG_HIDDEN_ITEM_60
 
 Route116_MapEvents:: @ 838342C
 	map_events Route116_MapObjects, Route116_MapWarps, Route116_MapCoordEvents, Route116_MapBGEvents

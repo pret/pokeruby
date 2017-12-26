@@ -18,8 +18,8 @@ JaggedPass_MapCoordEvents:: @ 838C69C
 	coord_weather_event 22, 19, 3, COORD_EVENT_WEATHER_SUNNY
 
 JaggedPass_MapBGEvents:: @ 838C6EC
-	bg_event 8, 10, 3, 7, 0, ITEM_FULL_HEAL, 77, 0
-	bg_event 7, 29, 3, 7, 0, ITEM_GREAT_BALL, 76, 0
+	bg_hidden_item_event 8, 10, 3, ITEM_FULL_HEAL, FLAG_HIDDEN_ITEM_4D
+	bg_hidden_item_event 7, 29, 3, ITEM_GREAT_BALL, FLAG_HIDDEN_ITEM_4C
 
 JaggedPass_MapEvents:: @ 838C704
 	map_events JaggedPass_MapObjects, JaggedPass_MapWarps, JaggedPass_MapCoordEvents, JaggedPass_MapBGEvents

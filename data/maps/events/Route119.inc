@@ -79,15 +79,15 @@ Route119_MapBGEvents:: @ 8383E2C
 	bg_event 31, 73, 3, 8, 0, 231, 0, 0
 	bg_event 16, 81, 0, 8, 0, ITEM_TINY_MUSHROOM, 0, 0
 	bg_event 16, 28, 0, 8, 0, 113, 0, 0
-	bg_event 17, 82, 3, 7, 0, ITEM_CALCIUM, 5, 0
-	bg_event 38, 63, 3, 7, 0, ITEM_ULTRA_BALL, 6, 0
+	bg_hidden_item_event 17, 82, 3, ITEM_CALCIUM, FLAG_HIDDEN_ITEM_5
+	bg_hidden_item_event 38, 63, 3, ITEM_ULTRA_BALL, FLAG_HIDDEN_ITEM_6
 	bg_event 26, 81, 0, 8, 0, ITEM_FULL_HEAL, 0, 0
 	bg_event 19, 76, 0, 8, 0, ITEM_LANSAT_BERRY, 0, 0
 	bg_event 18, 76, 0, 8, 0, ITEM_DEEP_SEA_SCALE, 0, 0
 	bg_event 4, 15, 0, 8, 0, ITEM_METAL_POWDER, 0, 0
 	bg_event 6, 2, 0, 8, 0, 233, 0, 0
-	bg_event 26, 120, 3, 7, 0, ITEM_FULL_HEAL, 68, 0
-	bg_event 20, 29, 3, 7, 0, ITEM_MAX_ETHER, 87, 0
+	bg_hidden_item_event 26, 120, 3, ITEM_FULL_HEAL, FLAG_HIDDEN_ITEM_44
+	bg_hidden_item_event 20, 29, 3, ITEM_MAX_ETHER, FLAG_HIDDEN_ITEM_57
 	bg_event 28, 9, 0, 0, 0, Route119_EventScript_151605
 
 Route119_MapEvents:: @ 8383F1C

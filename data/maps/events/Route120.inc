@@ -76,10 +76,10 @@ Route120_MapBGEvents:: @ 8384448
 	bg_event 18, 12, 0, 8, 0, ITEM_SUN_STONE, 0, 0
 	bg_event 38, 54, 0, 8, 0, ITEM_SOFT_SAND, 0, 0
 	bg_event 31, 23, 0, 8, 0, ITEM_SPELL_TAG, 0, 0
-	bg_event 9, 1, 3, 7, 0, ITEM_RARE_CANDY, 71, 0
-	bg_event 31, 11, 3, 7, 0, ITEM_REVIVE, 84, 0
-	bg_event 0, 86, 3, 7, 0, ITEM_RARE_CANDY, 69, 0
-	bg_event 24, 42, 3, 7, 0, ITEM_ZINC, 70, 0
+	bg_hidden_item_event 9, 1, 3, ITEM_RARE_CANDY, FLAG_HIDDEN_ITEM_47
+	bg_hidden_item_event 31, 11, 3, ITEM_REVIVE, FLAG_HIDDEN_ITEM_54
+	bg_hidden_item_event 0, 86, 3, ITEM_RARE_CANDY, FLAG_HIDDEN_ITEM_45
+	bg_hidden_item_event 24, 42, 3, ITEM_ZINC, FLAG_HIDDEN_ITEM_46
 	bg_event 5, 76, 0, 8, 0, ITEM_HARD_STONE, 0, 0
 
 Route120_MapEvents:: @ 83844F0

@@ -66,11 +66,11 @@ Route123_MapBGEvents:: @ 8384C90
 	bg_event 47, 3, 0, 8, 0, 82, 0, 0
 	bg_event 49, 3, 0, 8, 0, 92, 0, 0
 	bg_event 10, 12, 3, 0, 0, Route123_EventScript_151CB6
-	bg_event 75, 1, 3, 7, 0, ITEM_SUPER_REPEL, 7, 0
+	bg_hidden_item_event 75, 1, 3, ITEM_SUPER_REPEL, FLAG_HIDDEN_ITEM_7
 	bg_event 20, 7, 3, 0, 0, Route123_EventScript_151CC8
 	bg_event 57, 5, 0, 8, 0, ITEM_SUPER_REPEL, 0, 0
-	bg_event 12, 1, 3, 7, 0, ITEM_REVIVE, 41, 0
-	bg_event 91, 15, 3, 7, 0, ITEM_HYPER_POTION, 74, 0
+	bg_hidden_item_event 12, 1, 3, ITEM_REVIVE, FLAG_HIDDEN_ITEM_29
+	bg_hidden_item_event 91, 15, 3, ITEM_HYPER_POTION, FLAG_HIDDEN_ITEM_4A
 
 Route123_MapEvents:: @ 8384CFC
 	map_events Route123_MapObjects, Route123_MapWarps, Route123_MapCoordEvents, Route123_MapBGEvents

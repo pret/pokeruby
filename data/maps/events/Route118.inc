@@ -33,8 +33,8 @@ Route118_MapBGEvents:: @ 8383894
 	bg_event 29, 5, 0, 8, 0, ITEM_HARBOR_MAIL, 0, 0
 	bg_event 47, 5, 0, 8, 0, ITEM_SPELON_BERRY, 0, 0
 	bg_event 46, 5, 0, 8, 0, ITEM_PETAYA_BERRY, 0, 0
-	bg_event 31, 13, 3, 7, 0, ITEM_IRON, 67, 0
-	bg_event 12, 14, 3, 7, 0, ITEM_HEART_SCALE, 66, 0
+	bg_hidden_item_event 31, 13, 3, ITEM_IRON, FLAG_HIDDEN_ITEM_43
+	bg_hidden_item_event 12, 14, 3, ITEM_HEART_SCALE, FLAG_HIDDEN_ITEM_42
 
 Route118_MapEvents:: @ 8383900
 	map_events Route118_MapObjects, 0x0, Route118_MapCoordEvents, Route118_MapBGEvents

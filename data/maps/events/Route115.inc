@@ -33,7 +33,7 @@ Route115_MapBGEvents:: @ 83830B4
 	bg_event 8, 20, 0, 8, 0, ITEM_QUICK_CLAW, 0, 0
 	bg_event 25, 24, 0, 8, 0, ITEM_HP_UP, 0, 0
 	bg_event 20, 53, 0, 8, 0, ITEM_HYPER_POTION, 0, 0
-	bg_event 15, 49, 3, 7, 0, ITEM_HEART_SCALE, 97, 0
+	bg_hidden_item_event 15, 49, 3, ITEM_HEART_SCALE, FLAG_HIDDEN_ITEM_61
 
 Route115_MapEvents:: @ 838315C
 	map_events Route115_MapObjects, Route115_MapWarps, 0x0, Route115_MapBGEvents
