@@ -439,7 +439,7 @@ AI_CBM_PerishSong: @ 81DA6BB
 
 AI_CBM_Sandstorm: @ 81DA6C6
 	get_weather
-	if_equal WEATHER_SANDSTORM, Score_Down8
+	if_equal BATTLE_WEATHER_SANDSTORM, Score_Down8
 	end
 
 AI_CBM_Attract: @ 81DA6CE
@@ -479,12 +479,12 @@ AI_CBM_BatonPass: @ 81DA729
 
 AI_CBM_RainDance: @ 81DA732
 	get_weather
-	if_equal WEATHER_RAIN, Score_Down8
+	if_equal BATTLE_WEATHER_RAIN, Score_Down8
 	end
 
 AI_CBM_SunnyDay: @ 81DA73A
 	get_weather
-	if_equal WEATHER_SUN, Score_Down8
+	if_equal BATTLE_WEATHER_SUN, Score_Down8
 	end
 
 AI_CBM_FutureSight: @ 81DA742
@@ -509,7 +509,7 @@ AI_CBM_SpitUpAndSwallow: @ 81DA75F
 
 AI_CBM_Hail: @ 81DA76E
 	get_weather
-	if_equal WEATHER_HAIL, Score_Down8
+	if_equal BATTLE_WEATHER_HAIL, Score_Down8
 	end
 
 AI_CBM_Torment: @ 81DA776
@@ -1361,9 +1361,9 @@ AI_CV_Conversion_End: @ 81DB190
 
 AI_CV_HealWeather: @ 81DB191
 	get_weather
-	if_equal WEATHER_HAIL, AI_CV_HealWeather_ScoreDown2
-	if_equal WEATHER_RAIN, AI_CV_HealWeather_ScoreDown2
-	if_equal WEATHER_SANDSTORM, AI_CV_HealWeather_ScoreDown2
+	if_equal BATTLE_WEATHER_HAIL, AI_CV_HealWeather_ScoreDown2
+	if_equal BATTLE_WEATHER_RAIN, AI_CV_HealWeather_ScoreDown2
+	if_equal BATTLE_WEATHER_SANDSTORM, AI_CV_HealWeather_ScoreDown2
 	jump AI_CV_Heal
 
 AI_CV_HealWeather_ScoreDown2: @ 81DB1A9
@@ -2107,9 +2107,9 @@ AI_CV_RainDance: @ 81DB8E9
 AI_CV_RainDance2: @ 81DB8F7
 	if_hp_less_than USER, 40, AI_CV_RainDance_ScoreDown1
 	get_weather
-	if_equal WEATHER_HAIL, AI_CV_RainDance3
-	if_equal WEATHER_SUN, AI_CV_RainDance3
-	if_equal WEATHER_SANDSTORM, AI_CV_RainDance3
+	if_equal BATTLE_WEATHER_HAIL, AI_CV_RainDance3
+	if_equal BATTLE_WEATHER_SUN, AI_CV_RainDance3
+	if_equal BATTLE_WEATHER_SANDSTORM, AI_CV_RainDance3
 	get_ability USER
 	if_equal ABILITY_RAIN_DISH, AI_CV_RainDance3
 	jump AI_CV_RainDance_End
@@ -2127,9 +2127,9 @@ AI_CV_RainDance_End: @ 81DB927
 AI_CV_SunnyDay: @ 81DB928
 	if_hp_less_than USER, 40, AI_CV_SunnyDay_ScoreDown1
 	get_weather
-	if_equal WEATHER_HAIL, AI_CV_SunnyDay2
-	if_equal WEATHER_RAIN, AI_CV_SunnyDay2
-	if_equal WEATHER_SANDSTORM, AI_CV_SunnyDay2
+	if_equal BATTLE_WEATHER_HAIL, AI_CV_SunnyDay2
+	if_equal BATTLE_WEATHER_RAIN, AI_CV_SunnyDay2
+	if_equal BATTLE_WEATHER_SANDSTORM, AI_CV_SunnyDay2
 	jump AI_CV_SunnyDay_End
 
 AI_CV_SunnyDay2: @ 81DB947
@@ -2264,8 +2264,8 @@ AI_CV_Fly2: @ 81DBA9F
 	if_status2 TARGET, S_CURSED, AI_CV_Fly6
 	if_status3 TARGET, S_LEECH_SEED, AI_CV_Fly6
 	get_weather
-	if_equal WEATHER_HAIL, AI_CV_Fly3
-	if_equal WEATHER_SANDSTORM, AI_CV_Fly4
+	if_equal BATTLE_WEATHER_HAIL, AI_CV_Fly3
+	if_equal BATTLE_WEATHER_SANDSTORM, AI_CV_Fly4
 	jump AI_CV_Fly5
 
 AI_CV_Fly3: @ 81DBACF
@@ -2317,9 +2317,9 @@ AI_CV_SpitUp_End: @ 81DBB2E
 AI_CV_Hail: @ 81DBB2F
 	if_hp_less_than USER, 40, AI_CV_Hail_ScoreDown1
 	get_weather
-	if_equal WEATHER_SUN, AI_CV_Hail2
-	if_equal WEATHER_RAIN, AI_CV_Hail2
-	if_equal WEATHER_SANDSTORM, AI_CV_Hail2
+	if_equal BATTLE_WEATHER_SUN, AI_CV_Hail2
+	if_equal BATTLE_WEATHER_RAIN, AI_CV_Hail2
+	if_equal BATTLE_WEATHER_SANDSTORM, AI_CV_Hail2
 	jump AI_CV_Hail_End
 
 AI_CV_Hail2: @ 81DBB4E

@@ -14,6 +14,7 @@
 #include "fieldmap.h"
 #include "item.h"
 #include "item_menu.h"
+#include "constants/flags.h"
 #include "constants/items.h"
 #include "mail.h"
 #include "main.h"
@@ -328,7 +329,7 @@ bool8 ItemfinderCheckForHiddenItems(struct MapEvents *events, u8 taskId)
 
     for (i = 0; i < events->bgEventCount; i++)
     {
-        if ((events -> bgEvents[i].kind == 7) && !FlagGet(events -> bgEvents[i].bgUnion.hiddenItem.hiddenItemId + 600))
+        if ((events -> bgEvents[i].kind == 7) && !FlagGet(events -> bgEvents[i].bgUnion.hiddenItem.hiddenItemId + FLAG_HIDDEN_ITEMS_START))
         {
             // do a distance lookup of each item so long as the index remains less than the objects on the current map.
             distanceX = (u16)events -> bgEvents[i].x + 7;
@@ -360,7 +361,7 @@ bool8 HiddenItemAtPos(struct MapEvents *events, s16 x, s16 y)
     {
         if (bgEvent[i].kind == 7 && x == (u16)bgEvent[i].x && y == (u16)bgEvent[i].y) // hidden item and coordinates matches x and y passed?
         {
-            if (!FlagGet(bgEvent[i].bgUnion.hiddenItem.hiddenItemId + 600))
+            if (!FlagGet(bgEvent[i].bgUnion.hiddenItem.hiddenItemId + FLAG_HIDDEN_ITEMS_START))
                 return TRUE;
             else
                 return FALSE;

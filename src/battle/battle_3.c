@@ -7,6 +7,7 @@
 #include "event_data.h"
 #include "constants/hold_effects.h"
 #include "constants/species.h"
+#include "constants/weather.h"
 #include "pokemon.h"
 #include "data2.h"
 #include "random.h"
@@ -1500,9 +1501,9 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
             //_08018586
                 switch (weather_get_current())
                 {
-                case 3:
-                case 5:
-                case 13:
+                case WEATHER_RAIN_LIGHT:
+                case WEATHER_RAIN_MED:
+                case WEATHER_RAIN_HEAVY:
                     if (!(gBattleWeather & WEATHER_RAIN_ANY))
                     {
                         gBattleWeather = (WEATHER_RAIN_TEMPORARY | WEATHER_RAIN_PERMANENT);
@@ -1511,7 +1512,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                         effect++;
                     }
                     break;
-                case 8:
+                case WEATHER_SANDSTORM:
                     if (!(gBattleWeather & WEATHER_SANDSTORM_ANY))
                     {
                         gBattleWeather = (WEATHER_SANDSTORM_PERMANENT | WEATHER_SANDSTORM_TEMPORARY);
@@ -1520,7 +1521,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                         effect++;
                     }
                     break;
-                case 12:
+                case WEATHER_DROUGHT:
                     if (!(gBattleWeather & WEATHER_SUN_ANY))
                     {
                         gBattleWeather = (WEATHER_SUN_PERMANENT | WEATHER_SUN_TEMPORARY);

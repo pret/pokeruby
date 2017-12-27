@@ -31,7 +31,7 @@ PetalburgCity_MapBGEvents:: @ 837F738
 	bg_event 22, 16, 0, 1, 0, PetalburgCity_EventScript_1A00EA
 	bg_event 27, 12, 0, 1, 0, PetalburgCity_EventScript_1A00E1
 	bg_event 8, 9, 0, 0, 0, PetalburgCity_EventScript_14B82D
-	bg_event 11, 29, 3, 7, 0, ITEM_RARE_CANDY, 95, 0
+	bg_hidden_item_event 11, 29, 3, ITEM_RARE_CANDY, FLAG_HIDDEN_ITEM_5F
 
 PetalburgCity_MapEvents:: @ 837F798
 	map_events PetalburgCity_MapObjects, PetalburgCity_MapWarps, PetalburgCity_MapCoordEvents, PetalburgCity_MapBGEvents

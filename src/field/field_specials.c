@@ -1995,9 +1995,9 @@ static void sub_810F814(u8 taskId)
     EnableBothScriptContexts();
 }
 
-bool8 sub_810F828(void)
+bool8 FoundBlackGlasses(void)
 {
-    return FlagGet(FLAG_UNKNOWN_2B8);
+    return FlagGet(FLAG_HIDDEN_ITEM_BLACK_GLASSES);
 }
 
 void SetRoute119Weather(void)

@@ -9,9 +9,9 @@ Route128_MapObjects:: @ 83850D0
 	object_event 8, MAP_OBJ_GFX_WOMAN_7, 0, 47, 0, 9, 0, 3, 10, 17, 0, 1, 0, 3, 0, Route128_EventScript_152320, 0, 0, 0
 
 Route128_MapBGEvents:: @ 8385190
-	bg_event 49, 9, 3, 7, 0, ITEM_HEART_SCALE, 92, 0
-	bg_event 57, 21, 3, 7, 0, ITEM_HEART_SCALE, 93, 0
-	bg_event 31, 33, 3, 7, 0, ITEM_HEART_SCALE, 94, 0
+	bg_hidden_item_event 49, 9, 3, ITEM_HEART_SCALE, FLAG_HIDDEN_ITEM_5C
+	bg_hidden_item_event 57, 21, 3, ITEM_HEART_SCALE, FLAG_HIDDEN_ITEM_5D
+	bg_hidden_item_event 31, 33, 3, ITEM_HEART_SCALE, FLAG_HIDDEN_ITEM_5E
 
 Route128_MapEvents:: @ 83851B4
 	map_events Route128_MapObjects, 0x0, 0x0, Route128_MapBGEvents

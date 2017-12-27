@@ -20,8 +20,8 @@ MtPyre_Summit_MapCoordEvents:: @ 838CC80
 	coord_event 24, 7, 3, 0, VAR_MT_PYRE_STATE, 2, 0, MtPyre_Summit_EventScript_15D6E6
 
 MtPyre_Summit_MapBGEvents:: @ 838CCE0
-	bg_event 9, 25, 0, 7, 0, ITEM_ZINC, 79, 0
-	bg_event 37, 7, 3, 7, 0, ITEM_RARE_CANDY, 80, 0
+	bg_hidden_item_event 9, 25, 0, ITEM_ZINC, FLAG_HIDDEN_ITEM_4F
+	bg_hidden_item_event 37, 7, 3, ITEM_RARE_CANDY, FLAG_HIDDEN_ITEM_50
 
 MtPyre_Summit_MapEvents:: @ 838CCF8
 	map_events MtPyre_Summit_MapObjects, MtPyre_Summit_MapWarps, MtPyre_Summit_MapCoordEvents, MtPyre_Summit_MapBGEvents

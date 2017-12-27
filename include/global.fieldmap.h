@@ -119,9 +119,9 @@ struct BgEvent
         // in gen 3, "kind" (0x3 in BgEvent struct) determines the method to read the union.
         u8 *script;
 
-        // hidden item type probably
+        // hidden item type
         struct {
-            u8 filler6[0x2];
+            u16 item;
             u16 hiddenItemId; // flag offset to determine flag lookup
         } hiddenItem;
 
