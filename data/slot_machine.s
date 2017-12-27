@@ -30,7 +30,7 @@ gUnknown_083ECB4C:: @ 83ECB4C
 	.4byte sub_810380C
 
 	.align 1
-gUnknown_083ECB58:: @ 83ECB58
+gUnknown_083ECB58:: @ 83ECB58 (sub_8102F4C)
 	.2byte 2, 4, 4, 4, 8
 
 	.align 2

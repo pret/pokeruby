@@ -1339,6 +1339,69 @@ bool8 sub_8102EA4(struct Task *task)
     return FALSE;
 }
 
+extern bool8 (*const gUnknown_083ECB40[])(void);
+extern void (*const gUnknown_083ECB4C[])(void);
+
+bool8 sub_8102EC0(struct Task *task)
+{
+    task->data[0]++;
+    eSlotMachine->unk34[task->data[15]] = 0;
+    eSlotMachine->unk2E[task->data[15]] = 0;
+    if (eSlotMachine->unk0A == 0 && (eSlotMachine->unk04 == 0 || eSlotMachine->unk06 == 0 || !gUnknown_083ECB40[task->data[15]]()))
+    {
+        eSlotMachine->unk06 = 0;
+        gUnknown_083ECB4C[task->data[15]]();
+    }
+    task->data[1] = eSlotMachine->unk2E[task->data[15]];
+    return TRUE;
+}
+
+extern const u16 gUnknown_083ECB58[5]; // don't move this
+
+bool8 sub_8102F4C(struct Task *task)
+{
+    s16 r2;
+    u16 sp[5];
+    memcpy(sp, gUnknown_083ECB58, sizeof gUnknown_083ECB58);
+    // u16 sp[] = {2, 4, 4, 4, 8};
+    r2 = eSlotMachine->unk1C[task->data[15]] % 24;
+    if (r2 != 0)
+    {
+        r2 = sub_8102CCC(task->data[15], eSlotMachine->unk1A);
+    }
+    else if (eSlotMachine->unk2E[task->data[15]])
+    {
+        eSlotMachine->unk2E[task->data[15]]--;
+        sub_8102C84(task->data[15], eSlotMachine->unk1A);
+        r2 = eSlotMachine->unk1C[task->data[15]] % 24;
+    }
+    if (r2 == 0 && eSlotMachine->unk2E[task->data[15]] == 0)
+    {
+        task->data[0]++;
+        task->data[1] = sp[task->data[1]];
+        task->data[2] = 0;
+    }
+    return FALSE;
+}
+
+bool8 sub_8103008(struct Task *task)
+{
+    eSlotMachine->unk22[task->data[15]] = task->data[1];
+    task->data[1] = -task->data[1];
+    task->data[2]++;
+    if ((task->data[2] & 0x3) == 0)
+    {
+        task->data[1] >>= 1;
+    }
+    if (task->data[1] == 0)
+    {
+        task->data[0] = 0;
+        task->data[14] = 0;
+        eSlotMachine->unk22[task->data[15]] = 0;
+    }
+    return FALSE;
+}
+
 asm(".section .text_a");
 
 static void LoadSlotMachineWheelOverlay(void);
