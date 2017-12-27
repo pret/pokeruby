@@ -99,7 +99,7 @@ bool8 sub_8102A44(void);
 u8 sub_8102BA4(u8 x, s16 y);
 static void sub_8102DA8(void);
 static void sub_8102DEC(u8 a0);
-void sub_8102E1C(u8 a0);
+static void sub_8102E1C(u8 a0);
 bool8 sub_8102E40(u8 a0);
 void sub_8102E68(u8 taskId);
 void sub_8103C14(u8 a0);
@@ -1309,6 +1309,34 @@ static void sub_8102DEC(u8 a0)
 {
     gTasks[eSlotMachine->unk3A[a0]].data[0] = 1;
     gTasks[eSlotMachine->unk3A[a0]].data[14] = 1;
+}
+
+static void sub_8102E1C(u8 a0)
+{
+    gTasks[eSlotMachine->unk3A[a0]].data[0] = 2;
+}
+
+bool8 sub_8102E40(u8 a0)
+{
+    return gTasks[eSlotMachine->unk3A[a0]].data[14];
+}
+
+extern bool8 (*const gUnknown_083ECB2C[])(struct Task *task);
+
+void sub_8102E68(u8 taskId)
+{
+    while (gUnknown_083ECB2C[gTasks[taskId].data[0]](gTasks + taskId));
+}
+
+bool8 sub_8102EA0(struct Task *task)
+{
+    return FALSE;
+}
+
+bool8 sub_8102EA4(struct Task *task)
+{
+    sub_8102C84(task->data[15], eSlotMachine->unk1A);
+    return FALSE;
 }
 
 asm(".section .text_a");
