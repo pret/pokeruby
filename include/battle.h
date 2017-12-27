@@ -312,7 +312,7 @@ struct BattleStruct /* 0x2000000 */
     /*0x1600C*/ u8 cmd49StateTracker;
     /*0x1600D*/ u8 unk1600D;
     /*0x1600E*/ u8 turncountersTracker;
-    /*0x1600F*/ u8 atk23StateTracker;
+    /*0x1600F*/ u8 getexpStateTracker;
     /*0x16010*/ u8 moveTarget[4];
     /*0x16014*/ u8 unk16014;
     /*0x16015*/ u8 unk16015;

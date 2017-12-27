@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
-	.include "constants/constants.inc"
 	.include "asm/macros/battle_script.inc"
+	.include "constants/constants.inc"
+	.include "constants/battle_script_constants.inc"
 
 	.section script_data, "aw", %progbits
 
@@ -40,46 +41,46 @@ gBattlescriptsForSafariActions:: @ 81D9E98
 BattleScript_1D9EA8: @ 81D9EA8
 	jumpifhalfword 4, gBattleTypeFlags, 512, BattleScript_1D9EB8
 	printstring BATTLE_TEXT_Used1
-	pokemoncatchfunction
+	handleballthrow
 
 BattleScript_1D9EB8: @ 81D9EB8
 	printstring BATTLE_TEXT_TutorialUsed
-	pokemoncatchfunction
+	handleballthrow
 
 BattleScript_1D9EBC: @ 81D9EBC
 	printstring BATTLE_TEXT_Used1
-	atk98 1
-	pokemoncatchfunction
+	updatestatusicon 1
+	handleballthrow
 
 BattleScript_SuccessBallThrow:: @ 81D9EC2
 	jumpifhalfword 0, gLastUsedItem, 5, BattleScript_1D9ED0
-	atk60 11
+	incrementgamestat 11
 
 BattleScript_1D9ED0: @ 81D9ED0
 	printstring BATTLE_TEXT_BallCaught1
-	capturesomethingf1 BattleScript_1D9EE3
+	trysetcaughtmondexflags BattleScript_1D9EE3
 	printstring BATTLE_TEXT_AddedToDex
-	waitstateatk
+	waitstate
 	setbyte gBattleCommunication, 0
-	capturesomethingf2
+	displaydexinfo
 
 BattleScript_1D9EE3: @ 81D9EE3
 	printstring BATTLE_TEXT_GiveNickname
-	waitstateatk
+	waitstate
 	setbyte gBattleCommunication, 0
-	capturesomethingf3 BattleScript_1D9EF8
+	trygivecaughtmonnick BattleScript_1D9EF8
 	printstring BATTLE_TEXT_SentToPC
 	waitmessage 64
 
 BattleScript_1D9EF8: @ 81D9EF8
-	catchpoke
+	givecaughtmon
 	setbyte gBattleOutcome, 7
-	activesidesomething
+	finishturn
 
 BattleScript_WallyBallThrow:: @ 81D9F00
 	printstring BATTLE_TEXT_BallCaught2
 	setbyte gBattleOutcome, 7
-	activesidesomething
+	finishturn
 
 BattleScript_ShakeBallThrow:: @ 81D9F0A
 	printfromtable BattleTextList_4015E6
@@ -91,7 +92,7 @@ BattleScript_ShakeBallThrow:: @ 81D9F0A
 	setbyte gBattleOutcome, 8
 
 BattleScript_1D9F34: @ 81D9F34
-	atkf6
+	finishaction
 
 BattleScript_TrainerBallBlock:: @ 81D9F35
 	waitmessage 64
@@ -99,70 +100,70 @@ BattleScript_TrainerBallBlock:: @ 81D9F35
 	waitmessage 64
 	printstring BATTLE_TEXT_DontBeAThief
 	waitmessage 64
-	atkf6
+	finishaction
 
 BattleScript_1D9F45: @ 81D9F45
 	setbyte gSharedMem + 0x1600C, 15
-	atk49 1, 0
+	moveend 1, 0
 	end
 
 BattleScript_1D9F4F: @ 81D9F4F
 	pause 48
-	atk54 1
+	playse 1
 	printstring BATTLE_TEXT_Used2
 	waitmessage 64
-	atk75
+	useitemonopponent
 	orword gHitMarker, 0x100
-	graphicalhpupdate USER
+	healthbarupdate USER
 	datahpupdate USER
 	printstring BATTLE_TEXT_RestoredHealth
 	waitmessage 64
-	atk98 1
+	updatestatusicon 1
 	setbyte gSharedMem + 0x1600C, 15
-	atk49 1, 0
-	atkf6
+	moveend 1, 0
+	finishaction
 
 BattleScript_1D9F7B: @ 81D9F7B
 	pause 48
-	atk54 1
+	playse 1
 	printstring BATTLE_TEXT_Used2
 	waitmessage 64
-	atk75
+	useitemonopponent
 	printfromtable BattleTextList_401620
 	waitmessage 64
-	atk98 1
+	updatestatusicon 1
 	setbyte gSharedMem + 0x1600C, 15
-	atk49 1, 0
-	atkf6
+	moveend 1, 0
+	finishaction
 
 BattleScript_1D9F9C: @ 81D9F9C
 	pause 48
-	atk54 1
+	playse 1
 	printstring BATTLE_TEXT_Used2
 	waitmessage 64
-	atk75
+	useitemonopponent
 	printfromtable BattleTextList_401570
 	waitmessage 64
 	setbyte gSharedMem + 0x1600C, 15
-	atk49 1, 0
-	atkf6
+	moveend 1, 0
+	finishaction
 
 BattleScript_1D9FBB: @ 81D9FBB
 	pause 48
-	atk54 1
+	playse 1
 	printstring BATTLE_TEXT_Used2
 	waitmessage 64
-	atk75
+	useitemonopponent
 	printfromtable BattleTextList_4015A0
 	waitmessage 64
 	setbyte gSharedMem + 0x1600C, 15
-	atk49 1, 0
-	atkf6
+	moveend 1, 0
+	finishaction
 
 BattleScript_1D9FDA: @ 81D9FDA
-	atk54 17
+	playse 17
 	setbyte gBattleOutcome, 4
-	activesidesomething
+	finishturn
 
 BattleScript_1D9FE4: @ 81D9FE4
 	printstring BATTLE_TEXT_WatchingCarefully
@@ -185,10 +186,10 @@ BattleScript_1D9FF4: @ 81D9FF4
 BattleScript_1DA00A: @ 81DA00A
 	printstring 2
 	waitmessage 64
-	atk4b
-	waitstateatk
-	atk53 0
-	waitstateatk
+	returnatktoball
+	waitstate
+	trainerslidein 0
+	waitstate
 	printstring BATTLE_TEXT_WallyBall
 	waitmessage 64
 	end2
