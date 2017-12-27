@@ -89,17 +89,19 @@ static u8 sub_8102578(void);
 u16 dp15_jump_random_unknown(void);
 static u8 sub_81025BC(void);
 static void sub_81027A0(void);
-void sub_81027D0(void);
-void sub_8102840(void);
-void sub_810290C(void);
-u8 sub_81029D4(u8 a0, u8 a1, u8 a2);
-void sub_8102A24(void);
+static void sub_81027D0(void);
+static void sub_8102840(void);
+static void sub_810290C(void);
+static u8 sub_81029D4(u8 c1, u8 c2, u8 c3);
+static void sub_8102A24(void);
+static void sub_8102A64(u8 taskId);
 bool8 sub_8102A44(void);
-u8 sub_8102BA4(u8 a0, s16 a1);
-void sub_8102DA8(void);
-void sub_8102DEC(u8 a0);
+u8 sub_8102BA4(u8 x, s16 y);
+static void sub_8102DA8(void);
+static void sub_8102DEC(u8 a0);
 void sub_8102E1C(u8 a0);
 bool8 sub_8102E40(u8 a0);
+void sub_8102E68(u8 taskId);
 void sub_8103C14(u8 a0);
 void sub_8103D50(u8 a0);
 void sub_8103D8C(u8 a0);
@@ -1036,7 +1038,7 @@ static void sub_81027A0(void)
 extern const u16 gUnknown_083ECE6C[];
 extern const u16 gUnknown_083ECE5A[];
 
-void sub_81027D0(void)
+static void sub_81027D0(void)
 {
     u8 c1, c2, c3, payout;
 
@@ -1052,7 +1054,7 @@ void sub_81027D0(void)
     }
 }
 
-void sub_8102840(void)
+static void sub_8102840(void)
 {
     u8 c1, c2, c3, payout;
 
@@ -1086,7 +1088,7 @@ void sub_8102840(void)
     }
 }
 
-void sub_810290C(void)
+static void sub_810290C(void)
 {
     u8 c1, c2, c3, payout;
 
@@ -1120,7 +1122,7 @@ void sub_810290C(void)
 
 extern const u8 gUnknown_083ECE52[];
 
-u8 sub_81029D4(u8 c1, u8 c2, u8 c3)
+static u8 sub_81029D4(u8 c1, u8 c2, u8 c3)
 {
     if (c1 == c2 && c1 == c3)
     {
@@ -1141,9 +1143,7 @@ u8 sub_81029D4(u8 c1, u8 c2, u8 c3)
     return 9;
 }
 
-void sub_8102A64(u8 taskId);
-
-void sub_8102A24(void)
+static void sub_8102A24(void)
 {
     sub_8102A64(CreateTask(sub_8102A64, 4));
 }
@@ -1159,7 +1159,7 @@ bool8 sub_8102A44(void)
 
 extern bool8 (*const gUnknown_083ECB20[])(struct Task *task);
 
-void sub_8102A64(u8 taskId)
+static void sub_8102A64(u8 taskId)
 {
     while (gUnknown_083ECB20[gTasks[taskId].data[0]](gTasks + taskId));
 }
@@ -1241,6 +1241,74 @@ u8 sub_8102BF8(u8 x, s16 y)
     if ((eSlotMachine->unk1C[x]) % 24)
         r6 = -1;
     return sub_8102BA4(x, y + r6);
+}
+
+extern const u8 gUnknown_083ECCF1[];
+
+u8 sub_8102C48(s16 a0)
+{
+    s16 r1 = (eSlotMachine->unk16 + a0) % 6;
+    if (r1 < 0)
+        r1 += 6;
+    return gUnknown_083ECCF1[r1];
+}
+
+void sub_8102C84(u8 a0, s16 a1)
+{
+    eSlotMachine->unk1C[a0] += a1;
+    eSlotMachine->unk1C[a0] %= 504;
+    eSlotMachine->unk28[a0] = 21 - eSlotMachine->unk1C[a0] / 24;
+}
+
+s16 sub_8102CCC(u8 a0, s16 a1)
+{
+    s16 r1 = eSlotMachine->unk1C[a0] % 24;
+    if (r1 != 0)
+    {
+        if (r1 < a1)
+            a1 = r1;
+        sub_8102C84(a0, a1);
+        r1 = eSlotMachine->unk1C[a0] % 24;
+    }
+    return r1;
+}
+
+void sub_8102D28(s16 a0)
+{
+    eSlotMachine->unk14 += a0;
+    eSlotMachine->unk14 %= 120;
+    eSlotMachine->unk16 = 6 - eSlotMachine->unk14 / 20;
+}
+
+s16 sub_8102D5C(s16 a0)
+{
+    s16 r1 = eSlotMachine->unk14 % 20;
+    if (r1 != 0)
+    {
+        if (r1 < a0)
+            a0 = r1;
+        sub_8102D28(a0);
+        r1 = eSlotMachine->unk14 % 20;
+    }
+    return r1;
+}
+
+static void sub_8102DA8(void)
+{
+    u8 i;
+    for (i = 0; i < 3; i++)
+    {
+        u8 taskId = CreateTask(sub_8102E68, 2);
+        gTasks[taskId].data[15] = i;
+        eSlotMachine->unk3A[i] = taskId;
+        sub_8102E68(taskId);
+    }
+}
+
+static void sub_8102DEC(u8 a0)
+{
+    gTasks[eSlotMachine->unk3A[a0]].data[0] = 1;
+    gTasks[eSlotMachine->unk3A[a0]].data[14] = 1;
 }
 
 asm(".section .text_a");
