@@ -1402,6 +1402,49 @@ bool8 sub_8103008(struct Task *task)
     return FALSE;
 }
 
+extern bool8 (*const gUnknown_083ECB64[])(u8 a0, u8 a1);
+
+bool8 sub_810305C(void)
+{
+    u8 r3 = sub_810250C(eSlotMachine->unk04);
+    u8 r5 = r3;
+    if (eSlotMachine->unk04 & 0xc0)
+    {
+        r5 = 0;
+        r3 = 1;
+    }
+    return gUnknown_083ECB64[eSlotMachine->bet - 1](r5, r3);
+}
+
+bool8 sub_81030A4(s16 a0, u8 a1, u8 a2)
+{
+    u8 r1 = sub_8102BF8(0, a0);
+    if (r1 == a1 || r1 == a2)
+    {
+        eSlotMachine->unk07 = r1;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_81030E0(s16 a0)
+{
+    if (sub_8102BF8(0, 1 - a0) == 4 || sub_8102BF8(0, 2 - a0) == 4 || sub_8102BF8(0, 3 - a0) == 4)
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8103134(void)
+{
+    if (eSlotMachine->unk04 & 0xc2)
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
+
 asm(".section .text_a");
 
 static void LoadSlotMachineWheelOverlay(void);
