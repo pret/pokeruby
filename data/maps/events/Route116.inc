@@ -41,7 +41,7 @@ Route116_MapBGEvents:: @ 83833A8
 	bg_secret_base_event 56, 6, 0, SECRET_BASE_BLUE_CAVE3_2
 	bg_secret_base_event 55, 15, 0, SECRET_BASE_BLUE_CAVE4_2
 	bg_hidden_item_event 22, 9, 3, ITEM_SUPER_POTION, FLAG_HIDDEN_ITEM_2D
-	bg_hidden_item_event 70, 13, 3, ITEM_BLACK_GLASSES, FLAG_HIDDEN_ITEM_60
+	bg_hidden_item_event 70, 13, 3, ITEM_BLACK_GLASSES, FLAG_HIDDEN_ITEM_BLACK_GLASSES
 
 Route116_MapEvents:: @ 838342C
 	map_events Route116_MapObjects, Route116_MapWarps, Route116_MapCoordEvents, Route116_MapBGEvents
