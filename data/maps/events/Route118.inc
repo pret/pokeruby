@@ -26,13 +26,13 @@ Route118_MapCoordEvents:: @ 8383864
 	coord_event 45, 11, 3, 0, VAR_ROUTE118_STATE, 0, 0, Route118_EventScript_150FE4
 
 Route118_MapBGEvents:: @ 8383894
-	bg_secret_base_event 47, 14, 0, SECRET_BASE_RED_CAVE1(1)
+	bg_secret_base_event 47, 14, 0, SECRET_BASE_RED_CAVE1_1
 	bg_event 13, 6, 0, 0, 0, Route118_EventScript_150F9C
 	bg_event 56, 8, 0, 0, 0, Route118_EventScript_150FA5
-	bg_secret_base_event 67, 6, 0, SECRET_BASE_RED_CAVE2(1)
-	bg_secret_base_event 29, 5, 0, SECRET_BASE_YELLOW_CAVE1(2)
-	bg_secret_base_event 47, 5, 0, SECRET_BASE_TREE1(3)
-	bg_secret_base_event 46, 5, 0, SECRET_BASE_TREE2(1)
+	bg_secret_base_event 67, 6, 0, SECRET_BASE_RED_CAVE2_1
+	bg_secret_base_event 29, 5, 0, SECRET_BASE_YELLOW_CAVE1_2
+	bg_secret_base_event 47, 5, 0, SECRET_BASE_TREE1_3
+	bg_secret_base_event 46, 5, 0, SECRET_BASE_TREE2_1
 	bg_hidden_item_event 31, 13, 3, ITEM_IRON, FLAG_HIDDEN_ITEM_43
 	bg_hidden_item_event 12, 14, 3, ITEM_HEART_SCALE, FLAG_HIDDEN_ITEM_42
 

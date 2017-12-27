@@ -71,21 +71,21 @@ Route119_MapCoordEvents:: @ 8383C9C
 Route119_MapBGEvents:: @ 8383E2C
 	bg_event 9, 33, 0, 0, 0, Route119_EventScript_15142C
 	bg_event 27, 19, 0, 0, 0, Route119_EventScript_151423
-	bg_secret_base_event 5, 2, 0, SECRET_BASE_SHRUB1(1)
-	bg_secret_base_event 4, 89, 0, SECRET_BASE_SHRUB1(2)
-	bg_secret_base_event 5, 15, 0, SECRET_BASE_SHRUB2(1)
-	bg_secret_base_event 7, 101, 3, SECRET_BASE_SHRUB2(2)
-	bg_secret_base_event 34, 24, 3, SECRET_BASE_SHRUB3(1)
-	bg_secret_base_event 31, 73, 3, SECRET_BASE_SHRUB4(1)
-	bg_secret_base_event 16, 81, 0, SECRET_BASE_BLUE_CAVE3(3)
-	bg_secret_base_event 16, 28, 0, SECRET_BASE_BLUE_CAVE4(3)
+	bg_secret_base_event 5, 2, 0, SECRET_BASE_SHRUB1_1
+	bg_secret_base_event 4, 89, 0, SECRET_BASE_SHRUB1_2
+	bg_secret_base_event 5, 15, 0, SECRET_BASE_SHRUB2_1
+	bg_secret_base_event 7, 101, 3, SECRET_BASE_SHRUB2_2
+	bg_secret_base_event 34, 24, 3, SECRET_BASE_SHRUB3_1
+	bg_secret_base_event 31, 73, 3, SECRET_BASE_SHRUB4_1
+	bg_secret_base_event 16, 81, 0, SECRET_BASE_BLUE_CAVE3_3
+	bg_secret_base_event 16, 28, 0, SECRET_BASE_BLUE_CAVE4_3
 	bg_hidden_item_event 17, 82, 3, ITEM_CALCIUM, FLAG_HIDDEN_ITEM_5
 	bg_hidden_item_event 38, 63, 3, ITEM_ULTRA_BALL, FLAG_HIDDEN_ITEM_6
-	bg_secret_base_event 26, 81, 0, SECRET_BASE_RED_CAVE3(3)
-	bg_secret_base_event 19, 76, 0, SECRET_BASE_TREE2(3)
-	bg_secret_base_event 18, 76, 0, SECRET_BASE_TREE4(3)
-	bg_secret_base_event 4, 15, 0, SECRET_BASE_SHRUB3(3)
-	bg_secret_base_event 6, 2, 0, SECRET_BASE_SHRUB4(3)
+	bg_secret_base_event 26, 81, 0, SECRET_BASE_RED_CAVE3_3
+	bg_secret_base_event 19, 76, 0, SECRET_BASE_TREE2_3
+	bg_secret_base_event 18, 76, 0, SECRET_BASE_TREE4_3
+	bg_secret_base_event 4, 15, 0, SECRET_BASE_SHRUB3_3
+	bg_secret_base_event 6, 2, 0, SECRET_BASE_SHRUB4_3
 	bg_hidden_item_event 26, 120, 3, ITEM_FULL_HEAL, FLAG_HIDDEN_ITEM_44
 	bg_hidden_item_event 20, 29, 3, ITEM_MAX_ETHER, FLAG_HIDDEN_ITEM_57
 	bg_event 28, 9, 0, 0, 0, Route119_EventScript_151605

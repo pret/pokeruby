@@ -40,7 +40,7 @@ Route113_MapBGEvents:: @ 8382BE0
 	bg_event 11, 9, 0, 0, 0, Route113_EventScript_150620
 	bg_event 58, 4, 3, 0, 0, Route113_EventScript_150632
 	bg_event 31, 5, 0, 0, 0, Route113_EventScript_150629
-	bg_secret_base_event 49, 8, 0, SECRET_BASE_RED_CAVE1(3)
+	bg_secret_base_event 49, 8, 0, SECRET_BASE_RED_CAVE1_3
 	bg_hidden_item_event 72, 4, 3, ITEM_ETHER, FLAG_HIDDEN_ITEM_3
 	bg_hidden_item_event 22, 5, 3, ITEM_TM32, FLAG_HIDDEN_ITEM_1E
 

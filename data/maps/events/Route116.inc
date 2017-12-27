@@ -34,12 +34,12 @@ Route116_MapBGEvents:: @ 83833A8
 	bg_event 5, 10, 0, 0, 0, Route116_EventScript_150B30
 	bg_event 48, 9, 0, 0, 0, Route116_EventScript_150B39
 	bg_event 40, 9, 0, 0, 0, Route116_EventScript_150B42
-	bg_secret_base_event 71, 4, 0, SECRET_BASE_BLUE_CAVE1(1)
-	bg_secret_base_event 79, 11, 0, SECRET_BASE_BLUE_CAVE2(1)
+	bg_secret_base_event 71, 4, 0, SECRET_BASE_BLUE_CAVE1_1
+	bg_secret_base_event 79, 11, 0, SECRET_BASE_BLUE_CAVE2_1
 	bg_event 16, 12, 0, 0, 0, Route116_EventScript_150B4B
 	bg_event 29, 10, 0, 0, 0, Route116_EventScript_150B54
-	bg_secret_base_event 56, 6, 0, SECRET_BASE_BLUE_CAVE3(2)
-	bg_secret_base_event 55, 15, 0, SECRET_BASE_BLUE_CAVE4(2)
+	bg_secret_base_event 56, 6, 0, SECRET_BASE_BLUE_CAVE3_2
+	bg_secret_base_event 55, 15, 0, SECRET_BASE_BLUE_CAVE4_2
 	bg_hidden_item_event 22, 9, 3, ITEM_SUPER_POTION, FLAG_HIDDEN_ITEM_2D
 	bg_hidden_item_event 70, 13, 3, ITEM_BLACK_GLASSES, FLAG_HIDDEN_ITEM_60
 

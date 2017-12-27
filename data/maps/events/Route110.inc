@@ -53,8 +53,8 @@ Route110_MapBGEvents:: @ 83820C0
 	bg_event 20, 94, 0, 0, 0, Route110_EventScript_14F9DD
 	bg_event 7, 75, 0, 0, 0, Route110_EventScript_14F9F8
 	bg_event 3, 17, 0, 0, 0, Route110_EventScript_14FA0A
-	bg_secret_base_event 16, 25, 0, SECRET_BASE_TREE3(1)
-	bg_secret_base_event 17, 25, 0, SECRET_BASE_TREE4(1)
+	bg_secret_base_event 16, 25, 0, SECRET_BASE_TREE3_1
+	bg_secret_base_event 17, 25, 0, SECRET_BASE_TREE4_1
 	bg_event 35, 39, 3, 0, 0, Route110_EventScript_14FA13
 	bg_event 37, 70, 3, 0, 0, Route110_EventScript_14FA1C
 	bg_event 8, 67, 0, 0, 0, Route110_EventScript_14FA25
