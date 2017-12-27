@@ -80,7 +80,7 @@ void setup_poochyena_battle(void)
     }
     sub_800B858();
     gBattleExecBuffer = 0;
-    battle_anim_clear_some_data();
+    ClearBattleAnimationVars();
     ClearBattleMonForms();
     BattleAI_HandleItemUseBeforeAISetup();
     if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)

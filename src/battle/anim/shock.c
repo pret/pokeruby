@@ -4,8 +4,8 @@
 #include "trig.h"
 
 extern s16 gBattleAnimArgs[8];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 extern struct OamMatrix gOamMatrices[];
 
 extern void sub_80DA48C(struct Sprite *);
@@ -15,10 +15,10 @@ extern void sub_80DA48C(struct Sprite *);
 
 void sub_80D6294(struct Sprite *sprite)
 {
-    sprite->pos1.x = sub_8077ABC(gBattleAnimBankTarget, 2);
-    sprite->pos1.y = sub_8077ABC(gBattleAnimBankTarget, 3);
+    sprite->pos1.x = GetBankPosition(gAnimBankTarget, 2);
+    sprite->pos1.y = GetBankPosition(gAnimBankTarget, 3);
 
-    if (GetBankSide(gBattleAnimBankAttacker) != 0)
+    if (GetBankSide(gAnimBankAttacker) != 0)
     {
         sprite->pos1.x -= gBattleAnimArgs[0];
         sprite->pos1.y -= gBattleAnimArgs[1];
@@ -47,43 +47,43 @@ void sub_80D6328(struct Sprite *sprite)
     switch (gBattleAnimArgs[4])
     {
     case 0:
-        slot = gBattleAnimBankAttacker;
+        slot = gAnimBankAttacker;
         break;
     case 1:
     default:
-        slot = gBattleAnimBankTarget;
+        slot = gAnimBankTarget;
         break;
     case 2:
-        if (!IsAnimBankSpriteVisible(gBattleAnimBankAttacker ^ 2))
+        if (!IsAnimBankSpriteVisible(gAnimBankAttacker ^ 2))
         {
-            slot = gBattleAnimBankAttacker;
+            slot = gAnimBankAttacker;
         }
         else
         {
-            slot = gBattleAnimBankAttacker ^ 2;
+            slot = gAnimBankAttacker ^ 2;
         }
         break;
     case 3:
-        if (IsAnimBankSpriteVisible(gBattleAnimBankAttacker ^ 2))
+        if (IsAnimBankSpriteVisible(gAnimBankAttacker ^ 2))
         {
-            slot = gBattleAnimBankTarget ^ 2;
+            slot = gAnimBankTarget ^ 2;
         }
         else
         {
-            slot = gBattleAnimBankTarget;
+            slot = gAnimBankTarget;
         }
         break;
     }
 
     if (gBattleAnimArgs[5] == 0)
     {
-        sprite->pos1.x = sub_8077ABC(slot, 0);
-        sprite->pos1.y = sub_8077ABC(slot, 1);
+        sprite->pos1.x = GetBankPosition(slot, 0);
+        sprite->pos1.y = GetBankPosition(slot, 1);
     }
     else
     {
-        sprite->pos1.x = sub_8077ABC(slot, 2);
-        sprite->pos1.y = sub_8077ABC(slot, 3);
+        sprite->pos1.x = GetBankPosition(slot, 2);
+        sprite->pos1.y = GetBankPosition(slot, 3);
     }
 
     sprite->pos2.x = (gSineTable[gBattleAnimArgs[0]] * gBattleAnimArgs[1]) >> 8;

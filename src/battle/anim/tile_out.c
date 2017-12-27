@@ -6,8 +6,8 @@
 #include "battle_interface.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 extern u8 gNoOfAllBanks;
 extern u8 gHealthboxIDs[];
@@ -35,10 +35,10 @@ void sub_80CE1AC(struct Sprite* sprite)
     {
         sprite->animPaused = 0;
         sprite->data[0] = 30;
-        sprite->data[2] = sub_8077ABC(gBattleAnimBankAttacker, 2);
-        sprite->data[4] = sub_8077ABC(gBattleAnimBankAttacker, 3);
+        sprite->data[2] = GetBankPosition(gAnimBankAttacker, 2);
+        sprite->data[4] = GetBankPosition(gAnimBankAttacker, 3);
         sprite->callback = sub_8078B34;
-        StoreSpriteCallbackInData(sprite, move_anim_8072740);
+        StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
     }
 }
 

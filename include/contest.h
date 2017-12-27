@@ -73,14 +73,14 @@ extern const struct ContestEffect gContestEffects[];
 extern const u8 *const gContestEffectStrings[];
 
 void ResetLinkContestBoolean(void);
-void sub_80AB2AC(void);
+void LoadContestBgAfterMoveAnim(void);
 void CB2_StartContest(void);
 void Contest_CreatePlayerMon(u8);
 void Contest_InitAllPokemon(u8, u8);
 u8 sub_80AE47C(struct Pokemon *party);
 u16 sub_80AE770(u8, u8);
 void sub_80AE82C(u8);
-u8 sub_80AEB1C(u16);
+u8 IsSpeciesNotUnown(u16);
 void sub_80AF668(void);
 void sub_80B0F28(u8);
 bool8 Contest_SaveWinner(u8);

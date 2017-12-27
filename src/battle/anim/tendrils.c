@@ -4,8 +4,8 @@
 #include "battle_anim.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 static void sub_80CB298(struct Sprite* sprite);
 static void sub_80CB2D4(struct Sprite* sprite);
@@ -61,7 +61,7 @@ void sub_80CB2D4(struct Sprite* sprite)
         }
         else
         {
-            move_anim_8072740(sprite);
+            DestroyAnimSprite(sprite);
         }
     }
 }

@@ -5,8 +5,8 @@
 #include "sound.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 static void sub_80CCB00(struct Sprite* sprite);
 
@@ -15,9 +15,9 @@ static void sub_80CCB00(struct Sprite* sprite);
 
 void sub_80CC914(struct Sprite* sprite)
 {
-    sprite->pos1.x = sub_8077ABC(gBattleAnimBankTarget, 0);
-    sprite->pos1.y = sub_8077ABC(gBattleAnimBankTarget, 1);
-    if (GetBankSide(gBattleAnimBankTarget) == 0)
+    sprite->pos1.x = GetBankPosition(gAnimBankTarget, 0);
+    sprite->pos1.y = GetBankPosition(gAnimBankTarget, 1);
+    if (GetBankSide(gAnimBankTarget) == 0)
         sprite->pos1.y += 8;
 
     sprite->callback = sub_80CCB00;
@@ -46,28 +46,28 @@ void sub_80CC9BC(struct Sprite* sprite)
     switch (gBattleAnimArgs[3])
     {
     case 1:
-        a = sub_8077ABC(gBattleAnimBankTarget ^ 2, 0);
-        b = sub_8077ABC(gBattleAnimBankTarget ^ 2, 1);
+        a = GetBankPosition(gAnimBankTarget ^ 2, 0);
+        b = GetBankPosition(gAnimBankTarget ^ 2, 1);
         break;
     case 2:
-        a = sub_8077ABC(gBattleAnimBankTarget, 0);
-        b = sub_8077ABC(gBattleAnimBankTarget, 1);
-        if (IsAnimBankSpriteVisible(gBattleAnimBankTarget ^ 2))
+        a = GetBankPosition(gAnimBankTarget, 0);
+        b = GetBankPosition(gAnimBankTarget, 1);
+        if (IsAnimBankSpriteVisible(gAnimBankTarget ^ 2))
         {
-            a = (sub_8077ABC(gBattleAnimBankTarget ^ 2, 0) + a) / 2;
-            b = (sub_8077ABC(gBattleAnimBankTarget ^ 2, 1) + b) / 2;
+            a = (GetBankPosition(gAnimBankTarget ^ 2, 0) + a) / 2;
+            b = (GetBankPosition(gAnimBankTarget ^ 2, 1) + b) / 2;
         }
         break;
     case 0:
     default:
-        a = sub_8077ABC(gBattleAnimBankTarget, 0);
-        b = sub_8077ABC(gBattleAnimBankTarget, 1);
+        a = GetBankPosition(gAnimBankTarget, 0);
+        b = GetBankPosition(gAnimBankTarget, 1);
         break;
     }
 
     sprite->pos1.x = a;
     sprite->pos1.y = b;
-    if (GetBankSide(gBattleAnimBankTarget) == 0)
+    if (GetBankSide(gAnimBankTarget) == 0)
         sprite->pos1.y += 8;
 
     sprite->callback = sub_80CCB00;
@@ -104,7 +104,7 @@ void sub_80CCB00(struct Sprite* sprite)
     sprite->data[0]++;
     if (sprite->data[0] == 20)
     {
-        StoreSpriteCallbackInData(sprite, move_anim_8072740);
+        StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
         sprite->data[0] = 3;
         sprite->callback = sub_80782D8;
     }

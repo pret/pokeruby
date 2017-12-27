@@ -5,8 +5,8 @@
 #include "sound.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 static void sub_80CF6B4(struct Sprite* sprite);
 
@@ -26,5 +26,5 @@ void sub_80CF6B4(struct Sprite* sprite)
     sprite->data[2] = sprite->pos1.x;
     sprite->data[4] = sprite->pos1.y - 32;
     sprite->callback = sub_8078B34;
-    StoreSpriteCallbackInData(sprite, move_anim_8072740);
+    StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }

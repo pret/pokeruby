@@ -50,11 +50,11 @@ extern u8 gDoingBattleAnim;
 extern u32 gPID_perBank[];
 extern struct SpriteTemplate gUnknown_02024E8C;
 extern u32 *gDisableStructMoveAnim;
-extern u32 gMoveDmgMoveAnim;
-extern u16 gMovePowerMoveAnim;
-extern u8 gHappinessMoveAnim;
+extern u32 gAnimMoveDmg;
+extern u16 gAnimMovePower;
+extern u8 gAnimFriendship;
 extern u16 gWeatherMoveAnim;
-extern u8 gUnknown_0202F7C4;
+extern u8 gAnimMoveTurn;
 extern struct Window gUnknown_03004210;
 extern u16 gUnknown_030042A0;
 extern u16 gUnknown_030042A4;
@@ -67,7 +67,7 @@ extern u8 gAnimScriptActive;
 extern void (*gAnimScriptCallback)(void);
 
 extern u8 move_anim_start_t3();
-extern u8 AnimBankSpriteExists();
+extern u8 IsBankSpritePresent();
 extern void sub_8044CA0(u8);
 extern void sub_8030E38(struct Sprite *);
 extern void sub_80E43C0();
@@ -78,7 +78,7 @@ extern void sub_8043D84();
 extern void BufferStringBattle();
 extern void sub_8031F24(void);
 extern void sub_80326EC();
-extern void ExecuteMoveAnim();
+extern void DoMoveAnim();
 extern void sub_80324BC();
 extern u8 sub_8031720();
 extern u8 mplay_80342A4();
@@ -93,7 +93,7 @@ extern u8 sub_8046400();
 extern void sub_80312F0(struct Sprite *);
 extern u8 CreateInvisibleSpriteWithCallback();
 extern void BattleLoadPlayerMonSprite();
-extern u8 sub_8077ABC();
+extern u8 GetBankPosition();
 extern u8 sub_8077F68();
 extern u8 sub_8079E90();
 extern void nullsub_10();
@@ -1114,7 +1114,7 @@ void LinkPartnerHandleLoadPokeSprite(void)
       GetBankIdentity(gActiveBank));
     gObjectBankIDs[gActiveBank] = CreateSprite(
       &gUnknown_02024E8C,
-      sub_8077ABC(gActiveBank, 2),
+      GetBankPosition(gActiveBank, 2),
       sub_8077F68(gActiveBank),
       sub_8079E90(gActiveBank));
     gSprites[gObjectBankIDs[gActiveBank]].pos2.x = -240;
@@ -1144,7 +1144,7 @@ void sub_811F864(u8 a, u8 b)
     GetMonSpriteTemplate_803C56C(species, GetBankIdentity(a));
     gObjectBankIDs[a] = CreateSprite(
       &gUnknown_02024E8C,
-      sub_8077ABC(a, 2),
+      GetBankPosition(a, 2),
       sub_8077F68(a),
       sub_8079E90(a));
     gSprites[gUnknown_0300434C[a]].data[1] = gObjectBankIDs[a];
@@ -1287,20 +1287,20 @@ void LinkPartnerHandleMoveAnimation(void)
         u32 r0 = gBattleBufferA[gActiveBank][1]
                | (gBattleBufferA[gActiveBank][2] << 8);
 
-        gUnknown_0202F7C4 = gBattleBufferA[gActiveBank][3];
-        gMovePowerMoveAnim = gBattleBufferA[gActiveBank][4]
+        gAnimMoveTurn = gBattleBufferA[gActiveBank][3];
+        gAnimMovePower = gBattleBufferA[gActiveBank][4]
                           | (gBattleBufferA[gActiveBank][5] << 8);
-        gMoveDmgMoveAnim = gBattleBufferA[gActiveBank][6]
+        gAnimMoveDmg = gBattleBufferA[gActiveBank][6]
                           | (gBattleBufferA[gActiveBank][7] << 8)
                           | (gBattleBufferA[gActiveBank][8] << 16)
                           | (gBattleBufferA[gActiveBank][9] << 24);
-        gHappinessMoveAnim = gBattleBufferA[gActiveBank][10];
+        gAnimFriendship = gBattleBufferA[gActiveBank][10];
         gWeatherMoveAnim = gBattleBufferA[gActiveBank][12]
                           | (gBattleBufferA[gActiveBank][13] << 8);
         gDisableStructMoveAnim = (u32 *)&gBattleBufferA[gActiveBank][16];
         gPID_perBank[gActiveBank] = *gDisableStructMoveAnim;
 
-        if (sub_8031720(r0, gUnknown_0202F7C4) != 0)
+        if (sub_8031720(r0, gAnimMoveTurn) != 0)
             LinkPartnerBufferExecCompleted();
         else
         {
@@ -1330,7 +1330,7 @@ void sub_811FF30(void)
         if (!ewram17810[gActiveBank].unk0_6)
         {
             sub_80326EC(0);
-            ExecuteMoveAnim(r4);
+            DoMoveAnim(r4);
             ewram17810[gActiveBank].unk4 = 2;
         }
         break;
@@ -1679,7 +1679,7 @@ void LinkPartnerHandlecmd50(void)
 
 void LinkPartnerHandleSpriteInvisibility(void)
 {
-    if (AnimBankSpriteExists(gActiveBank) != 0)
+    if (IsBankSpritePresent(gActiveBank) != 0)
     {
         gSprites[gObjectBankIDs[gActiveBank]].invisible = gBattleBufferA[gActiveBank][1];
         sub_8031F88(gActiveBank);

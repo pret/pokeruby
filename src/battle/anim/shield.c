@@ -6,8 +6,8 @@
 #include "palette.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 static void sub_80CCE0C(struct Sprite* sprite);
 
@@ -16,17 +16,17 @@ static void sub_80CCE0C(struct Sprite* sprite);
 
 void sub_80CCD24(struct Sprite* sprite)
 {
-    if (NotInBattle() != 0)
+    if (IsContest() != 0)
     {
         gBattleAnimArgs[1] += 8;
     }
 
-    sprite->pos1.x = sub_8077EE4(gBattleAnimBankAttacker, 0) + gBattleAnimArgs[0];
-    sprite->pos1.y = sub_8077EE4(gBattleAnimBankAttacker, 1) + gBattleAnimArgs[1];
-    if (GetBankSide(gBattleAnimBankAttacker) == 0 || NotInBattle())
-        sprite->oam.priority = sub_8079ED4(gBattleAnimBankAttacker) + 1;
+    sprite->pos1.x = sub_8077EE4(gAnimBankAttacker, 0) + gBattleAnimArgs[0];
+    sprite->pos1.y = sub_8077EE4(gAnimBankAttacker, 1) + gBattleAnimArgs[1];
+    if (GetBankSide(gAnimBankAttacker) == 0 || IsContest())
+        sprite->oam.priority = sub_8079ED4(gAnimBankAttacker) + 1;
     else
-        sprite->oam.priority = sub_8079ED4(gBattleAnimBankAttacker);
+        sprite->oam.priority = sub_8079ED4(gAnimBankAttacker);
 
     sprite->data[0] = gBattleAnimArgs[2];
     sprite->data[2] = (IndexOfSpritePaletteTag(0x2828) << 4) + 0x100;

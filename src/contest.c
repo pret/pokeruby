@@ -217,18 +217,18 @@ extern u8 gObjectBankIDs[];
 extern u8 gIsLinkContest;
 extern u8 gContestPlayerMonIndex;
 extern u16 gUnknown_030041B0;
-extern s16 gUnknown_030041B4;
+extern s16 gBattle_BG1_Y;
 extern u16 gUnknown_030041B8;
-extern u16 gUnknown_03004200;
+extern u16 gBattle_WIN1H;
 extern struct Window gUnknown_03004210;
-extern u16 gUnknown_03004240;
-extern u16 gUnknown_03004244;
-extern u16 gUnknown_03004280;
-extern u16 gUnknown_03004288;
+extern u16 gBattle_WIN0V;
+extern u16 gBattle_WIN1V;
+extern u16 gBattle_BG2_Y;
+extern u16 gBattle_BG2_X;
 extern u16 gUnknown_030042A0;
 extern u16 gUnknown_030042A4;
-extern u16 gUnknown_030042C0;
-extern u16 gUnknown_030042C4;
+extern u16 gBattle_BG1_X;
+extern u16 gBattle_WIN0H;
 extern u32 gUnknown_03005D28;  // saved RNG value
 
 extern s16 gUnknown_02038680[];
@@ -364,7 +364,7 @@ void sub_80AE6E4(u8, u8);
 u8 CreateJudgeSprite(void);
 u8 sub_80AE8B4(void);
 u8 sub_80AE9FC(u16, u32, u32);
-bool8 sub_80AEB1C(u16);
+bool8 IsSpeciesNotUnown(u16);
 void sub_80AEB30(void);
 void sub_80AEBEC(u16);
 void sub_80AED58(void);
@@ -491,19 +491,19 @@ void ResetContestGpuRegs(void)
 
     gUnknown_030042A4 = 0;
     gUnknown_030042A0 = 0;
-    gUnknown_030042C0 = 0;
-    gUnknown_030041B4 = 0;
-    gUnknown_03004288 = 0;
-    gUnknown_03004280 = 0;
+    gBattle_BG1_X = 0;
+    gBattle_BG1_Y = 0;
+    gBattle_BG2_X = 0;
+    gBattle_BG2_Y = 0;
     gUnknown_030041B0 = 0;
     gUnknown_030041B8 = 0;
-    gUnknown_030042C4 = 0;
-    gUnknown_03004240 = 0;
-    gUnknown_03004200 = 0;
-    gUnknown_03004244 = 0;
+    gBattle_WIN0H = 0;
+    gBattle_WIN0V = 0;
+    gBattle_WIN1H = 0;
+    gBattle_WIN1V = 0;
 }
 
-void sub_80AB2AC(void)
+void LoadContestBgAfterMoveAnim(void)
 {
     s32 i;
 
@@ -603,8 +603,8 @@ void CB2_StartContest(void)
         break;
     case 3:
         sub_80B2184();
-        gUnknown_030042C0 = 0;
-        gUnknown_030041B4 = 0;
+        gBattle_BG1_X = 0;
+        gBattle_BG1_Y = 0;
         BeginFastPaletteFade(2);
         gPaletteFade.bufferTransferDisabled = FALSE;
         SetVBlankCallback(ContestVBlankCallback);
@@ -749,8 +749,8 @@ void sub_80AB9A0(u8 taskId)
         gTasks[taskId].data[0]++;
         break;
     case 1:
-        gUnknown_030041B4 += 7;
-        if (gUnknown_030041B4 <= 160)
+        gBattle_BG1_Y += 7;
+        if (gBattle_BG1_Y <= 160)
             break;
         gTasks[taskId].data[0]++;
         break;
@@ -787,16 +787,16 @@ void ContestVBlankCallback(void)
 {
     REG_BG0HOFS = gUnknown_030042A4;
     REG_BG0VOFS = gUnknown_030042A0;
-    REG_BG1HOFS = gUnknown_030042C0;
-    REG_BG1VOFS = gUnknown_030041B4;
-    REG_BG2HOFS = gUnknown_03004288;
-    REG_BG2VOFS = gUnknown_03004280;
+    REG_BG1HOFS = gBattle_BG1_X;
+    REG_BG1VOFS = gBattle_BG1_Y;
+    REG_BG2HOFS = gBattle_BG2_X;
+    REG_BG2VOFS = gBattle_BG2_Y;
     REG_BG3HOFS = gUnknown_030041B0;
     REG_BG3VOFS = gUnknown_030041B8;
-    REG_WIN0H = gUnknown_030042C4;
-    REG_WIN0V = gUnknown_03004240;
-    REG_WIN1H = gUnknown_03004200;
-    REG_WIN1V = gUnknown_03004244;
+    REG_WIN0H = gBattle_WIN0H;
+    REG_WIN0V = gBattle_WIN0V;
+    REG_WIN1H = gBattle_WIN1H;
+    REG_WIN1V = gBattle_WIN1V;
     TransferPlttBuffer();
     LoadOam();
     ProcessSpriteCopyRequests();
@@ -806,7 +806,7 @@ void ContestVBlankCallback(void)
 void sub_80ABB70(u8 taskId)
 {
     gUnknown_030042A0 = 0;
-    gUnknown_03004280 = 0;
+    gBattle_BG2_Y = 0;
     sub_80B0D7C();
     DmaCopy32Defvars(3, gPlttBufferUnfaded, shared18000.unk18204, 0x400);
     if (!Contest_IsMonsTurnDisabled(gContestPlayerMonIndex))
@@ -850,7 +850,7 @@ void sub_80ABCDC(u8 taskId)
     u8 sp8[32];
 
     gUnknown_030042A0 = 0xA0;
-    gUnknown_03004280 = 0xA0;
+    gBattle_BG2_Y = 0xA0;
     FillWindowRect_DefaultPalette(
       &gUnknown_03004210,
       0,
@@ -938,7 +938,7 @@ void sub_80ABEA0(u8 taskId)
             StringExpandPlaceholders(gStringVar4, gDisplayedStringBattle);
             sub_8003460(&gMenuWindow, gStringVar4, 776, 1, 15);
             gUnknown_030042A0 = 0;
-            gUnknown_03004280 = 0;
+            gBattle_BG2_Y = 0;
             gTasks[taskId].func = sub_80ABC70;
             break;
         case DPAD_LEFT:
@@ -1012,7 +1012,7 @@ void sub_80AC188(u8 taskId)
 {
     sub_80AF138();
     gUnknown_030042A0 = 0;
-    gUnknown_03004280 = 0;
+    gBattle_BG2_Y = 0;
     sub_80AFFE0(FALSE);
     DmaCopy32Defvars(3, gPlttBufferFaded, shared18000.unk18604, 0x400);
     LoadPalette(shared18000.unk18204, 0, 0x400);
@@ -1159,7 +1159,7 @@ void sub_80AC2CC(u8 taskId)
             sub_80B2790(sContest.unk19215);
             sub_80B28F0(sContest.unk19215);
             SelectContestMoveBankTarget(move);
-            ExecuteMoveAnim(move);
+            DoMoveAnim(move);
             gTasks[taskId].data[0] = 8;
         }
         return;
@@ -1970,7 +1970,7 @@ void sub_80ADDA4(u8 taskId)
     s32 i;
 
     gUnknown_030042A0 = 0;
-    gUnknown_03004280 = 0;
+    gBattle_BG2_Y = 0;
     for (i = 0; i < 4; i++)
         gUnknown_02038680[i] = sContestantStatus[i].unk4;
     sub_80AF668();
@@ -1988,8 +1988,8 @@ void sub_80ADE54(u8 taskId)
     if (sub_80037A0(&gMenuWindow) == 1)
     {
         sub_80B2184();
-        gUnknown_030042C0 = 0;
-        gUnknown_030041B4 = 160;
+        gBattle_BG1_X = 0;
+        gBattle_BG1_Y = 160;
         PlaySE12WithPanning(SE_C_MAKU_D, 0);
         gTasks[taskId].data[0] = 0;
         gTasks[taskId].func = sub_80ADEAC;
@@ -1998,10 +1998,10 @@ void sub_80ADE54(u8 taskId)
 
 void sub_80ADEAC(u8 taskId)
 {
-    gUnknown_030041B4 -= 7;
-    if (gUnknown_030041B4 < 0)
-        gUnknown_030041B4 = 0;
-    if (*(u16 *)&gUnknown_030041B4 == 0)  // Why cast?
+    gBattle_BG1_Y -= 7;
+    if (gBattle_BG1_Y < 0)
+        gBattle_BG1_Y = 0;
+    if (*(u16 *)&gBattle_BG1_Y == 0)  // Why cast?
     {
         gTasks[taskId].func = sub_80ADEEC;
         gTasks[taskId].data[0] = 0;
@@ -2491,7 +2491,7 @@ u8 sub_80AE9FC(u16 species, u32 otId, u32 personality)
     gSprites[spriteId].callback = SpriteCallbackDummy;
     gSprites[spriteId].data[0] = gSprites[spriteId].oam.paletteNum;
     gSprites[spriteId].data[2] = species;
-    if (sub_80AEB1C(species))
+    if (IsSpeciesNotUnown(species))
         gSprites[spriteId].affineAnims = gSpriteAffineAnimTable_81E7C18;
     else
         gSprites[spriteId].affineAnims = gSpriteAffineAnimTable_81E7BEC;
@@ -2499,7 +2499,7 @@ u8 sub_80AE9FC(u16 species, u32 otId, u32 personality)
     return spriteId;
 }
 
-bool8 sub_80AEB1C(u16 species)
+bool8 IsSpeciesNotUnown(u16 species)
 {
     if (species == SPECIES_UNOWN)
         return FALSE;
@@ -3116,7 +3116,7 @@ bool8 sub_80AF828(s32 a, s32 b, struct UnknownContestStruct6 *c)
 void sub_80AF860(void)
 {
     gUnknown_030042A0 = 0;
-    gUnknown_03004280 = 0;
+    gBattle_BG2_Y = 0;
     sub_80AF138();
     sub_8003460(&gMenuWindow, gUnknownText_LinkStandbyAndWinner, 776, 1, 15);
 }
@@ -5113,8 +5113,8 @@ void sub_80B2184(void)
     ((vBgCnt *)&REG_BG1CNT)->screenSize = 1;
     ((vBgCnt *)&REG_BG1CNT)->areaOverflowMode = 0;
 
-    gUnknown_030042C0 = DISPLAY_WIDTH;
-    gUnknown_030041B4 = DISPLAY_HEIGHT;
+    gBattle_BG1_X = DISPLAY_WIDTH;
+    gBattle_BG1_Y = DISPLAY_HEIGHT;
     REG_BG1HOFS = DISPLAY_WIDTH;
     REG_BG1VOFS = DISPLAY_HEIGHT;
 
@@ -5141,8 +5141,8 @@ void sub_80B2280(void)
     DmaClearLarge32(3, (void *)(VRAM + 0x8000), 0x2000, 0x1000);
     DmaClear32(3, (void *)(VRAM + 0xF000), 0x1000);
 
-    gUnknown_030042C0 = 0;
-    gUnknown_030041B4 = 0;
+    gBattle_BG1_X = 0;
+    gBattle_BG1_Y = 0;
 
     ((vBgCnt *)&REG_BG1CNT)->priority = 1;
     ((vBgCnt *)&REG_BG1CNT)->screenSize = 0;
@@ -5158,18 +5158,18 @@ void sub_80B2280(void)
 
 void sub_80B237C(u8 taskId)
 {
-    gUnknown_030042C0 = 0;
-    gUnknown_030041B4 = DISPLAY_HEIGHT;
+    gBattle_BG1_X = 0;
+    gBattle_BG1_Y = DISPLAY_HEIGHT;
     PlaySE12WithPanning(SE_C_MAKU_D, 0);
     gTasks[taskId].func = sub_80B23BC;
 }
 
 void sub_80B23BC(u8 taskId)
 {
-    gUnknown_030041B4 -= 7;
-    if (gUnknown_030041B4 < 0)
-        gUnknown_030041B4 = 0;
-    if (*(u16 *)&gUnknown_030041B4 == 0)  // Why cast?
+    gBattle_BG1_Y -= 7;
+    if (gBattle_BG1_Y < 0)
+        gBattle_BG1_Y = 0;
+    if (*(u16 *)&gBattle_BG1_Y == 0)  // Why cast?
     {
         gTasks[taskId].data[0] = 0;
         gTasks[taskId].data[1] = 0;
@@ -5229,8 +5229,8 @@ void sub_80B2400(u8 taskId)
 
 void sub_80B2508(u8 taskId)
 {
-    gUnknown_030041B4 += 7;
-    if (gUnknown_030041B4 > DISPLAY_HEIGHT)
+    gBattle_BG1_Y += 7;
+    if (gBattle_BG1_Y > DISPLAY_HEIGHT)
         gTasks[taskId].func = sub_80ADCDC;
 }
 
@@ -5340,16 +5340,16 @@ void sub_80B2790(u8 a)
     u8 r5_2;
 
     memset(&shared19348_, 0, sizeof(shared19348_));
-    battle_anim_clear_some_data();
+    ClearBattleAnimationVars();
     for (i = 0; i < 4; i++)
         gBattleMonForms[i] = 0;
     switch (move)
     {
     case MOVE_CURSE:
         if (gBaseStats[species].type1 == TYPE_GHOST || gBaseStats[species].type2 == TYPE_GHOST)
-            gUnknown_0202F7C4 = 0;
+            gAnimMoveTurn = 0;
         else
-            gUnknown_0202F7C4 = 1;
+            gAnimMoveTurn = 1;
         break;
     case MOVE_TRANSFORM:
     case MOVE_ROLE_PLAY:
@@ -5359,10 +5359,10 @@ void sub_80B2790(u8 a)
         shared19348_.unk4_0 = 1;
         break;
     case MOVE_RETURN:
-        gHappinessMoveAnim = 0xFF;
+        gAnimFriendship = 0xFF;
         break;
     case MOVE_FRUSTRATION:
-        gHappinessMoveAnim = 0;
+        gAnimFriendship = 0;
         break;
     case MOVE_SOLAR_BEAM:
     case MOVE_RAZOR_WIND:
@@ -5371,11 +5371,11 @@ void sub_80B2790(u8 a)
         if (sContest.unk1925E == 0)
         {
             sContest.unk1925E = 2;
-            gUnknown_0202F7C4 = 0;
+            gAnimMoveTurn = 0;
         }
         else
         {
-            gUnknown_0202F7C4 = 1;
+            gAnimMoveTurn = 1;
         }
         break;
     }
@@ -5410,8 +5410,8 @@ void sub_80B2968(void)
 
     sprite->pos2.x = 0;
     sprite->pos2.y = 0;
-    sprite->pos1.x = sub_8077ABC(3, 0);
-    sprite->pos1.y = sub_8077ABC(3, 1);
+    sprite->pos1.x = GetBankPosition(3, 0);
+    sprite->pos1.y = GetBankPosition(3, 1);
     sprite->invisible = TRUE;
 }
 

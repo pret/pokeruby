@@ -37,9 +37,9 @@ extern bool8 gDoingBattleAnim;
 extern u16 gBattlePartyID[];
 extern u8 gHealthboxIDs[];
 extern u16 gBattleTypeFlags;
-extern u16 gMovePowerMoveAnim;
-extern u32 gMoveDmgMoveAnim;
-extern u8 gHappinessMoveAnim;
+extern u16 gAnimMovePower;
+extern u32 gAnimMoveDmg;
+extern u8 gAnimFriendship;
 extern u16 gWeatherMoveAnim;
 extern u32 *gDisableStructMoveAnim;
 extern u32 gPID_perBank[];
@@ -52,7 +52,7 @@ extern u8 gBattleOutcome;
 extern u16 gUnknown_02024DE8;
 extern u8 gUnknown_02024E68[];
 extern struct SpriteTemplate gUnknown_02024E8C;
-extern u8 gUnknown_0202F7C4;
+extern u8 gAnimMoveTurn;
 extern struct Window gUnknown_03004210;
 extern u16 gUnknown_030042A0;
 extern u16 gUnknown_030042A4;
@@ -78,7 +78,7 @@ extern u8 GetBankIdentity(u8);
 extern void sub_80313A0(struct Sprite *);
 extern u8 GetBankByPlayerAI(u8);
 extern u8 sub_8031720();
-extern void ExecuteMoveAnim();
+extern void DoMoveAnim();
 extern void sub_80326EC();
 extern void sub_8031F24(void);
 extern void sub_80324BC();
@@ -92,7 +92,7 @@ extern void sub_8078B34(struct Sprite *);
 extern void sub_8030E38(struct Sprite *);
 extern void StoreSpriteCallbackInData();
 extern u8 sub_8046400();
-extern u8 sub_8077ABC();
+extern u8 GetBankPosition();
 extern u8 sub_8077F68();
 extern u8 sub_8079E90();
 extern void sub_80312F0(struct Sprite *);
@@ -1173,14 +1173,14 @@ void WallyHandleMoveAnimation(void)
 {
     u16 r0 = gBattleBufferA[gActiveBank][1] | (gBattleBufferA[gActiveBank][2] << 8);
 
-    gUnknown_0202F7C4 = gBattleBufferA[gActiveBank][3];
-    gMovePowerMoveAnim = gBattleBufferA[gActiveBank][4] | (gBattleBufferA[gActiveBank][5] << 8);
-    gMoveDmgMoveAnim = gBattleBufferA[gActiveBank][6] | (gBattleBufferA[gActiveBank][7] << 8) | (gBattleBufferA[gActiveBank][8] << 16) | (gBattleBufferA[gActiveBank][9] << 24);
-    gHappinessMoveAnim = gBattleBufferA[gActiveBank][10];
+    gAnimMoveTurn = gBattleBufferA[gActiveBank][3];
+    gAnimMovePower = gBattleBufferA[gActiveBank][4] | (gBattleBufferA[gActiveBank][5] << 8);
+    gAnimMoveDmg = gBattleBufferA[gActiveBank][6] | (gBattleBufferA[gActiveBank][7] << 8) | (gBattleBufferA[gActiveBank][8] << 16) | (gBattleBufferA[gActiveBank][9] << 24);
+    gAnimFriendship = gBattleBufferA[gActiveBank][10];
     gWeatherMoveAnim = gBattleBufferA[gActiveBank][12] | (gBattleBufferA[gActiveBank][13] << 8);
     gDisableStructMoveAnim = (u32 *)&gBattleBufferA[gActiveBank][16];
     gPID_perBank[gActiveBank] = *gDisableStructMoveAnim;
-    if (sub_8031720(r0, gUnknown_0202F7C4) != 0)
+    if (sub_8031720(r0, gAnimMoveTurn) != 0)
     {
         // Dead code. sub_8031720 always returns 0.
         WallyBufferExecCompleted();
@@ -1211,7 +1211,7 @@ void sub_81390D0(void)
         if (ewram17810[gActiveBank].unk0_6 == 0)
         {
             sub_80326EC(0);
-            ExecuteMoveAnim(r4);
+            DoMoveAnim(r4);
             ewram17810[gActiveBank].unk4 = 2;
         }
         break;
@@ -1511,7 +1511,7 @@ void sub_81398BC(u8 bank)
     GetMonSpriteTemplate_803C56C(species, GetBankIdentity(bank));
     gObjectBankIDs[bank] = CreateSprite(
       &gUnknown_02024E8C,
-      sub_8077ABC(bank, 2),
+      GetBankPosition(bank, 2),
       sub_8077F68(bank),
       sub_8079E90(bank));
     gSprites[gUnknown_0300434C[bank]].data[1] = gObjectBankIDs[bank];

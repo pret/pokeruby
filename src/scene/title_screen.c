@@ -41,8 +41,8 @@
 
 extern u8 gReservedSpritePaletteCount;
 extern struct MusicPlayerInfo gMPlay_BGM;
-extern u16 gUnknown_030041B4;
-extern u16 gUnknown_030042C0;
+extern u16 gBattle_BG1_Y;
+extern u16 gBattle_BG1_X;
 extern const u8 gUnknown_08E9D8CC[];
 extern const u16 gUnknown_08E9F624[];
 extern const u8 gUnknown_08E9F7E4[];
@@ -602,7 +602,7 @@ static void VBlankCB(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
-    REG_BG1VOFS = gUnknown_030041B4;
+    REG_BG1VOFS = gBattle_BG1_Y;
 }
 
 
@@ -836,8 +836,8 @@ static void Task_TitleScreenPhase3(u8 taskId)
             if (gTasks[taskId].tCounter & 1)
             {
                 gTasks[taskId].data[4]++;
-                gUnknown_030041B4 = gTasks[taskId].data[4];
-                gUnknown_030042C0 = 0;
+                gBattle_BG1_Y = gTasks[taskId].data[4];
+                gBattle_BG1_X = 0;
             }
             UpdateLegendaryMarkingColor(gTasks[taskId].tCounter);
             if ((gMPlay_BGM.status & 0xFFFF) == 0)

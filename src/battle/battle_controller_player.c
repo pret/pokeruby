@@ -56,9 +56,9 @@ extern u16 gBattleTypeFlags;
 extern u8 gBattleOutcome;
 extern void (*gAnimScriptCallback)(void);
 extern bool8 gAnimScriptActive;
-extern u16 gMovePowerMoveAnim;
-extern u32 gMoveDmgMoveAnim;
-extern u8 gHappinessMoveAnim;
+extern u16 gAnimMovePower;
+extern u32 gAnimMoveDmg;
+extern u8 gAnimFriendship;
 extern u16 gWeatherMoveAnim;
 extern u32 *gDisableStructMoveAnim;
 extern u32 gPID_perBank[];
@@ -66,15 +66,15 @@ extern u8 gBattleMonForms[];
 extern u16 gUnknown_02024DE8;
 extern u8 gUnknown_02024E68[];
 extern struct SpriteTemplate gUnknown_02024E8C;
-extern u8 gUnknown_0202F7C4;
+extern u8 gAnimMoveTurn;
 extern u8 gUnknown_02038470[];
 extern u16 gUnknown_030041B0;
-extern u16 gUnknown_030041B4;
+extern u16 gBattle_BG1_Y;
 extern u16 gUnknown_030041B8;
-extern u16 gUnknown_03004280;
-extern u16 gUnknown_03004288;
+extern u16 gBattle_BG2_Y;
+extern u16 gBattle_BG2_X;
 extern u16 gUnknown_030042A4;
-extern u16 gUnknown_030042C0;
+extern u16 gBattle_BG1_X;
 extern u8 gUnknown_03004344;
 extern u8 gUnknown_0300434C[];
 
@@ -106,7 +106,7 @@ extern void StoreSpriteCallbackInData();
 extern void BattleLoadPlayerMonSprite();
 extern bool8 IsDoubleBattle(void);
 extern void sub_802D500(void);
-extern bool8 AnimBankSpriteExists(u8);
+extern bool8 IsBankSpritePresent(u8);
 extern bool8 move_anim_start_t3();
 extern void sub_802E460(void);
 extern void b_link_standby_message(void);
@@ -114,7 +114,7 @@ extern void sub_802D18C(void);
 extern void sub_802DF18(void);
 extern void BufferStringBattle();
 extern void sub_80326EC();
-extern void ExecuteMoveAnim();
+extern void DoMoveAnim();
 extern void sub_8031F24(void);
 extern void sub_80324BC();
 extern u8 sub_8031720();
@@ -131,7 +131,7 @@ extern void sub_802D204(void);
 extern u8 sub_8079E90();
 extern void sub_802DEAC(void);
 extern void sub_80312F0(struct Sprite *);
-extern u8 sub_8077ABC();
+extern u8 GetBankPosition();
 extern u8 sub_8077F68();
 extern u8 sub_8046400();
 extern void sub_802D798(void);
@@ -2321,7 +2321,7 @@ void sub_802F934(u8 bank, u8 b)
     GetMonSpriteTemplate_803C56C(species, GetBankIdentity(bank));
     gObjectBankIDs[bank] = CreateSprite(
       &gUnknown_02024E8C,
-      sub_8077ABC(bank, 2),
+      GetBankPosition(bank, 2),
       sub_8077F68(bank),
       sub_8079E90(bank));
     gSprites[gUnknown_0300434C[bank]].data[1] = gObjectBankIDs[bank];
@@ -2490,14 +2490,14 @@ void PlayerHandleMoveAnimation(void)
     {
         u16 r0 = gBattleBufferA[gActiveBank][1] | (gBattleBufferA[gActiveBank][2] << 8);
 
-        gUnknown_0202F7C4 = gBattleBufferA[gActiveBank][3];
-        gMovePowerMoveAnim = gBattleBufferA[gActiveBank][4] | (gBattleBufferA[gActiveBank][5] << 8);
-        gMoveDmgMoveAnim = gBattleBufferA[gActiveBank][6] | (gBattleBufferA[gActiveBank][7] << 8) | (gBattleBufferA[gActiveBank][8] << 16) | (gBattleBufferA[gActiveBank][9] << 24);
-        gHappinessMoveAnim = gBattleBufferA[gActiveBank][10];
+        gAnimMoveTurn = gBattleBufferA[gActiveBank][3];
+        gAnimMovePower = gBattleBufferA[gActiveBank][4] | (gBattleBufferA[gActiveBank][5] << 8);
+        gAnimMoveDmg = gBattleBufferA[gActiveBank][6] | (gBattleBufferA[gActiveBank][7] << 8) | (gBattleBufferA[gActiveBank][8] << 16) | (gBattleBufferA[gActiveBank][9] << 24);
+        gAnimFriendship = gBattleBufferA[gActiveBank][10];
         gWeatherMoveAnim = gBattleBufferA[gActiveBank][12] | (gBattleBufferA[gActiveBank][13] << 8);
         gDisableStructMoveAnim = (u32 *)&gBattleBufferA[gActiveBank][16];
         gPID_perBank[gActiveBank] = *gDisableStructMoveAnim;
-        if (sub_8031720(r0, gUnknown_0202F7C4) != 0)
+        if (sub_8031720(r0, gAnimMoveTurn) != 0)
         {
             // Dead code. sub_8031720 always returns 0.
             PlayerBufferExecCompleted();
@@ -2529,7 +2529,7 @@ void sub_8030190(void)
         if (ewram17810[gActiveBank].unk0_6 == 0)
         {
             sub_80326EC(0);
-            ExecuteMoveAnim(r4);
+            DoMoveAnim(r4);
             ewram17810[gActiveBank].unk4 = 2;
         }
         break;
@@ -2990,7 +2990,7 @@ void PlayerHandlecmd50(void)
 
 void PlayerHandleSpriteInvisibility(void)
 {
-    if (AnimBankSpriteExists(gActiveBank))
+    if (IsBankSpritePresent(gActiveBank))
     {
         gSprites[gObjectBankIDs[gActiveBank]].invisible = gBattleBufferA[gActiveBank][1];
         sub_8031F88(gActiveBank);

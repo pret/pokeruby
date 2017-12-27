@@ -8,8 +8,8 @@
 #include "decompress.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 extern u16 gUnknown_083D7A5C[5];
 
@@ -32,11 +32,11 @@ void sub_80D1ADC(u8 taskId)
     }
 
     src = &gBattleAnimSpritePalette_206;
-    dest = (NotInBattle()) ? gSharedMem + 0x18000 - 0x3800: gSharedMem + 0x18000;
+    dest = (IsContest()) ? gSharedMem + 0x18000 - 0x3800: gSharedMem + 0x18000;
     LZDecompressWram(src, dest);
     for (i = 0; i <= 4; i++)
     {
-        what = ((NotInBattle()) ? gSharedMem + 0x14800 : gSharedMem + 0x18000) + (i << 5);
+        what = ((IsContest()) ? gSharedMem + 0x14800 : gSharedMem + 0x18000) + (i << 5);
         LoadPalette(what, (u16)((sp[i] << 4) + 0x100), 32);
     }
 

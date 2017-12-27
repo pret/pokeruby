@@ -39,8 +39,8 @@ extern struct MusicPlayerInfo gMPlay_BGM;
 extern u32 gBitTable[];
 extern u16 gBattleTypeFlags;
 extern u8 gBattleMonForms[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 extern void (*gAnimScriptCallback)(void);
 extern u8 gAnimScriptActive;
 extern const u8 *const gBattleAnims_General[];
@@ -66,8 +66,8 @@ extern void c3_0802FDF4(u8);
 extern void sub_80440EC();
 extern void sub_804777C();
 extern void sub_8141828();
-extern u8 sub_8077ABC();
-extern u8 AnimBankSpriteExists(u8);
+extern u8 GetBankPosition();
+extern u8 IsBankSpritePresent(u8);
 extern u8 sub_8077F68(u8);
 extern u8 sub_8077F7C(u8);
 extern void sub_8094958(void);
@@ -174,10 +174,10 @@ bool8 move_anim_start_t3(u8 a, u8 b, u8 c, u8 d, u16 e)
         sub_80324E0(a);
         return TRUE;
     }
-    gBattleAnimBankAttacker = b;
-    gBattleAnimBankTarget = c;
+    gAnimBankAttacker = b;
+    gAnimBankTarget = c;
     ewram17840.unk0 = e;
-    DoMoveAnim(gBattleAnims_General, d, 0);
+    LaunchBattleAnimation(gBattleAnims_General, d, 0);
     taskId = CreateTask(sub_80315E8, 10);
     gTasks[taskId].data[0] = a;
     ewram17810[gTasks[taskId].data[0]].unk0_5 = 1;
@@ -214,9 +214,9 @@ void move_anim_start_t4(u8 a, u8 b, u8 c, u8 d)
 {
     u8 taskId;
 
-    gBattleAnimBankAttacker = b;
-    gBattleAnimBankTarget = c;
-    DoMoveAnim(gBattleAnims_Special, d, 0);
+    gAnimBankAttacker = b;
+    gAnimBankTarget = c;
+    LaunchBattleAnimation(gBattleAnims_Special, d, 0);
     taskId = CreateTask(sub_80316CC, 10);
     gTasks[taskId].data[0] = a;
     ewram17810[gTasks[taskId].data[0]].unk0_6 = 1;
@@ -626,7 +626,7 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
         const void *src;
         void *dst;
 
-        if (NotInBattle())
+        if (IsContest())
         {
             r10 = 0;
             species = ewram19348.unk2;
@@ -691,7 +691,7 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
         }
         BlendPalette(paletteOffset, 16, 6, 0x7FFF);
         CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, 32);
-        if (!NotInBattle())
+        if (!IsContest())
         {
             ewram17800[a].transformedSpecies = species;
             gBattleMonForms[a] = gBattleMonForms[b];
@@ -711,11 +711,11 @@ void BattleLoadSubstituteSprite(u8 a, u8 b)
 
     if (b == 0)
     {
-        if (NotInBattle())
+        if (IsContest())
             r4 = 0;
         else
             r4 = GetBankIdentity(a);
-        if (NotInBattle())
+        if (IsContest())
             LZDecompressVram(gSubstituteDollTilemap, gUnknown_081FAF4C[r4]);
         else if (GetBankSide(a) != 0)
             LZDecompressVram(gSubstituteDollGfx, gUnknown_081FAF4C[r4]);
@@ -731,7 +731,7 @@ void BattleLoadSubstituteSprite(u8 a, u8 b)
     }
     else
     {
-        if (!NotInBattle())
+        if (!IsContest())
         {
             if (GetBankSide(a) != 0)
                 BattleLoadOpponentMonSprite(&gEnemyParty[gBattlePartyID[a]], a);
@@ -835,7 +835,7 @@ void sub_80326EC(u8 a)
 
     for (i = 0; i < gNoOfAllBanks; i++)
     {
-        if (AnimBankSpriteExists(i) != 0)
+        if (IsBankSpritePresent(i) != 0)
         {
             gSprites[gObjectBankIDs[i]].oam.affineMode = a;
             if (a == 0)
@@ -857,12 +857,12 @@ void sub_80327CC(void)
 
     LoadCompressedObjectPic(&gUnknown_081FAF24);
     r5 = GetBankByPlayerAI(1);
-    ewram17810[r5].unk7 = CreateSprite(&gSpriteTemplate_81FAF34, sub_8077ABC(r5, 0), sub_8077ABC(r5, 1) + 32, 0xC8);
+    ewram17810[r5].unk7 = CreateSprite(&gSpriteTemplate_81FAF34, GetBankPosition(r5, 0), GetBankPosition(r5, 1) + 32, 0xC8);
     gSprites[ewram17810[r5].unk7].data[0] = r5;
     if (IsDoubleBattle())
     {
         r5 = GetBankByPlayerAI(3);
-        ewram17810[r5].unk7 = CreateSprite(&gSpriteTemplate_81FAF34, sub_8077ABC(r5, 0), sub_8077ABC(r5, 1) + 32, 0xC8);
+        ewram17810[r5].unk7 = CreateSprite(&gSpriteTemplate_81FAF34, GetBankPosition(r5, 0), GetBankPosition(r5, 1) + 32, 0xC8);
         gSprites[ewram17810[r5].unk7].data[0] = r5;
     }
 }
@@ -873,7 +873,7 @@ void sub_80328A4(struct Sprite *sprite)
     u8 r4 = sprite->data[0];
     struct Sprite *r7 = &gSprites[gObjectBankIDs[r4]];
 
-    if (!r7->inUse || AnimBankSpriteExists(r4) == 0)
+    if (!r7->inUse || IsBankSpritePresent(r4) == 0)
     {
         sprite->callback = sub_8032978;
         return;

@@ -4,8 +4,8 @@
 #include "battle_anim.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 static void sub_80CAF20(struct Sprite* sprite);
 static void sub_80CAF6C(struct Sprite* sprite);
@@ -15,8 +15,8 @@ static void sub_80CAF6C(struct Sprite* sprite);
 
 void sub_80CAED8(struct Sprite* sprite)
 {
-    sprite->pos1.x = sub_8077ABC(gBattleAnimBankAttacker, 2);
-    sprite->pos1.y = sub_8077ABC(gBattleAnimBankAttacker, 3);
+    sprite->pos1.x = GetBankPosition(gAnimBankAttacker, 2);
+    sprite->pos1.y = GetBankPosition(gAnimBankAttacker, 3);
     sprite->data[0] = gBattleAnimArgs[0];
     sprite->data[1] = gBattleAnimArgs[1];
     sprite->data[2] = gBattleAnimArgs[2];
@@ -51,7 +51,7 @@ void sub_80CAF20(struct Sprite* sprite)
 
 void sub_80CAF6C(struct Sprite* sprite)
 {
-    if (GetBankSide(gBattleAnimBankAttacker))
+    if (GetBankSide(gAnimBankAttacker))
     {
         sprite->pos2.x = -Sin(sprite->data[0], 0x19);
     }
@@ -69,6 +69,6 @@ void sub_80CAF6C(struct Sprite* sprite)
 
     if (sprite->data[1] > 0x50)
     {
-        move_anim_8072740(sprite);
+        DestroyAnimSprite(sprite);
     }
 }

@@ -5,8 +5,8 @@
 #include "sound.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 // perceive (shows a sparkle in a set of eyes, usually for heightened perception.)
 // Used in Glare, Tickle, and Scary Face.
@@ -14,7 +14,7 @@ extern u8 gBattleAnimBankTarget;
 void sub_80D2904(struct Sprite* sprite)
 {
     if (sprite->animEnded)
-        move_anim_8072740(sprite);
+        DestroyAnimSprite(sprite);
 }
 
 void sub_80D2920(struct Sprite* sprite)
