@@ -5,47 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8102BF8
-sub_8102BF8: @ 8102BF8
-	push {r4-r6,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	adds r5, r0, 0
-	lsls r1, 16
-	lsrs r4, r1, 16
-	movs r6, 0
-	ldr r0, _08102C40 @ =gSharedMem
-	lsls r1, r5, 1
-	adds r0, 0x1C
-	adds r1, r0
-	movs r2, 0
-	ldrsh r0, [r1, r2]
-	movs r1, 0x18
-	bl __modsi3
-	lsls r0, 16
-	cmp r0, 0
-	beq _08102C20
-	ldr r6, _08102C44 @ =0x0000ffff
-_08102C20:
-	lsls r1, r4, 16
-	asrs r1, 16
-	lsls r0, r6, 16
-	asrs r0, 16
-	adds r1, r0
-	lsls r1, 16
-	asrs r1, 16
-	adds r0, r5, 0
-	bl sub_8102BA4
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08102C40: .4byte gSharedMem
-_08102C44: .4byte 0x0000ffff
-	thumb_func_end sub_8102BF8
-
 	thumb_func_start sub_8102C48
 sub_8102C48: @ 8102C48
 	push {lr}

@@ -1235,6 +1235,14 @@ u8 sub_8102BA4(u8 x, s16 y)
     return gUnknown_083ECCB2[x][offset];
 }
 
+u8 sub_8102BF8(u8 x, s16 y)
+{
+    s16 r6 = 0;
+    if ((eSlotMachine->unk1C[x]) % 24)
+        r6 = -1;
+    return sub_8102BA4(x, y + r6);
+}
+
 asm(".section .text_a");
 
 static void LoadSlotMachineWheelOverlay(void);
