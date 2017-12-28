@@ -1445,6 +1445,90 @@ bool8 sub_8103134(void)
     return FALSE;
 }
 
+bool8 sub_8103154(u8 a0, u8 a1)
+{
+    s16 i;
+
+    for (i = 0; i < 5; i++)
+    {
+        if (sub_81030A4(2 - i, a0, a1))
+        {
+            eSlotMachine->unk34[0] = 2;
+            eSlotMachine->unk2E[0] = i;
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+bool8 sub_81031B4(u8 a0, u8 a1)
+{
+    s16 i;
+    bool8 r6 = sub_8103134();
+    if (r6 || !sub_81030E0(0))
+    {
+        for (i = 1; i < 4; i++)
+        {
+            if (sub_81030A4(i, a0, a1))
+            {
+                eSlotMachine->unk34[0] = i;
+                eSlotMachine->unk2E[0] = 0;
+                return TRUE;
+            }
+        }
+    }
+    for (i = 1; i < 5; i++)
+    {
+        bool8 r7 = r6;
+        if (r7 || !sub_81030E0(i))
+        {
+            if (sub_81030A4(1 - i, a0, a1))
+            {
+                if (i == 1 && (r7 || !sub_81030E0(3)))
+                {
+                    eSlotMachine->unk34[0] = 3;
+                    eSlotMachine->unk2E[0] = 3;
+                    return TRUE;
+                }
+                if (i < 4 && (r7 || !sub_81030E0(i + 1)))
+                {
+                    eSlotMachine->unk34[0] = 2;
+                    eSlotMachine->unk2E[0] = i + 1;
+                    return TRUE;
+                }
+                eSlotMachine->unk34[0] = 1;
+                eSlotMachine->unk2E[0] = i;
+                return TRUE;
+            }
+        }
+    }
+    return FALSE;
+}
+
+extern bool8 (*const gUnknown_083ECB70[])(void);
+
+bool8 sub_81032C0(void)
+{
+    return gUnknown_083ECB70[eSlotMachine->bet - 1]();
+}
+
+bool8 sub_81032E8(void)
+{
+    s16 i;
+    s16 unk34_0 = eSlotMachine->unk34[0];
+
+    for (i = 0; i < 5; i++)
+    {
+        if (sub_8102BF8(1, unk34_0 - i) == eSlotMachine->unk07)
+        {
+            eSlotMachine->unk34[1] = unk34_0;
+            eSlotMachine->unk2E[1] = i;
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
 asm(".section .text_a");
 
 static void LoadSlotMachineWheelOverlay(void);
