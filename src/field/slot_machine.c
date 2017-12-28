@@ -1596,6 +1596,53 @@ bool8 sub_810341C(u8 a0)
     return FALSE;
 }
 
+bool8 sub_810347C(u8 a0)
+{
+    s16 i;
+    s16 r8;
+    if (eSlotMachine->unk34[0] == eSlotMachine->unk34[1])
+    {
+        return sub_810341C(a0);
+    }
+    r8 = 1;
+    if (eSlotMachine->unk34[0] == 1)
+    {
+        r8 = 3;
+    }
+    for (i = 0; i < 5; i++)
+    {
+        if (sub_8102BF8(2, r8 - i) == a0)
+        {
+            eSlotMachine->unk2E[2] = i;
+            eSlotMachine->unk34[2] = r8;
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+void sub_81034F4(void)
+{
+    s16 i;
+    for (i = 0; sub_81030E0(i); i++);
+    eSlotMachine->unk2E[0] = i;
+}
+
+bool8 sub_8103520(u8 *a0)
+{
+    if (*a0 == 0)
+    {
+        *a0 = 1;
+        return TRUE;
+    }
+    if (*a0 == 1)
+    {
+        *a0 = 0;
+        return TRUE;
+    }
+    return FALSE;
+}
+
 asm(".section .text_a");
 
 static void LoadSlotMachineWheelOverlay(void);
