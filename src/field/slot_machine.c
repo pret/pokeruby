@@ -1529,6 +1529,73 @@ bool8 sub_81032E8(void)
     return FALSE;
 }
 
+bool8 sub_810333C(void)
+{
+    s16 i;
+    if (sub_81032E8())
+    {
+        if (eSlotMachine->unk34[0] != 2 && eSlotMachine->unk2E[1] > 1 && eSlotMachine->unk2E[1] != 4)
+        {
+            for (i = 0; i < 5; i++)
+            {
+                if (sub_8102BF8(1, 2 - i) == eSlotMachine->unk07)
+                {
+                    eSlotMachine->unk34[1] = 2;
+                    eSlotMachine->unk2E[1] = i;
+                    break;
+                }
+            }
+        }
+        return TRUE;
+    }
+    if (eSlotMachine->unk34[0] != 2)
+    {
+        for (i = 0; i < 5; i++)
+        {
+            if (sub_8102BF8(1, 2 - i) == eSlotMachine->unk07)
+            {
+                eSlotMachine->unk34[1] = 2;
+                eSlotMachine->unk2E[1] = i;
+                return TRUE;
+            }
+        }
+    }
+    return FALSE;
+}
+
+extern bool8 (*const gUnknown_083ECB7C[])(u8 a0);
+
+bool8 sub_81033DC(void)
+{
+    u8 r3 = eSlotMachine->unk07;
+    if (eSlotMachine->unk04 & 0x40)
+    {
+        r3 = 0;
+        if (eSlotMachine->unk07 == 0)
+        {
+            r3 = 1;
+        }
+    }
+    return gUnknown_083ECB7C[eSlotMachine->bet - 1](r3);
+}
+
+bool8 sub_810341C(u8 a0)
+{
+    s16 i;
+    s16 unk34_1 = eSlotMachine->unk34[1];
+
+    for (i = 0; i < 5; i++)
+    {
+        if (sub_8102BF8(2, unk34_1 - i) == a0)
+        {
+            eSlotMachine->unk34[2] = unk34_1;
+            eSlotMachine->unk2E[2] = i;
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
 asm(".section .text_a");
 
 static void LoadSlotMachineWheelOverlay(void);
