@@ -83,6 +83,10 @@ static void WaitForVBlank(void);
 
 #define B_START_SELECT (B_BUTTON | START_BUTTON | SELECT_BUTTON)
 
+#ifndef NOAGBPRN
+    #include <stdlib.h> // don't include if not needed.
+#endif
+
 void AgbMain()
 {
     RegisterRamReset(RESET_ALL);
@@ -103,6 +107,7 @@ void AgbMain()
 // to print stuff from, as anything else declared is NOT authoritative.
 #ifndef NOAGBPRN
     AGBPrintInit();
+    __mb_cur_max = 1; // fix for AGBPrintf
 #endif
 
     if (gFlashMemoryPresent != TRUE)
