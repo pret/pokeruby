@@ -1696,6 +1696,8 @@ void j5_08111E84(void)
                    // and variable i is mistakenly plopped into r6
 void sub_8103668(void)
 {
+    s16 i;
+    s16 r6;
     if (eSlotMachine->unk34[0] != 0 && eSlotMachine->unk04 & 0x80)
     {
         if (eSlotMachine->unk34[0] == 2)
@@ -1707,8 +1709,7 @@ void sub_8103668(void)
             u8 sp0 = sub_8102BF8(0, eSlotMachine->unk34[0] - eSlotMachine->unk2E[0]);
             if (sub_8103520(&sp0))
             {
-                s16 i;
-                s16 r6 = 2;
+                r6 = 2;
                 if (eSlotMachine->unk34[0] == 3)
                     r6 = 3;
                 for (i = 0; i < 2; i++, r6--)
@@ -1972,6 +1973,54 @@ void sub_8103830(void)
         }
     }
     eSlotMachine->unk2E[2] = i;
+}
+
+void sub_8103910(void)
+{
+    s16 sp0 = 0;
+    s16 i;
+    u8 r7;
+    u8 r6;
+    u8 r4;
+
+    if (eSlotMachine->unk34[1] != 0 && eSlotMachine->unk34[0] == eSlotMachine->unk34[1] && eSlotMachine->unk04 & 0x80)
+    {
+        r7 = sub_8102BF8(0, eSlotMachine->unk34[0] - eSlotMachine->unk2E[0]);
+        r6 = sub_8102BF8(1, eSlotMachine->unk34[1] - eSlotMachine->unk2E[1]);
+        if (sub_8103764(r7, r6))
+        {
+            for (i = 0; i < 5; i++)
+            {
+                r4 = sub_8102BF8(2, eSlotMachine->unk34[1] - i);
+                if (r7 == r4)
+                {
+                    sp0 = i;
+                    break;
+                }
+            }
+        }
+    }
+    while (1)
+    {
+        s16 r8;
+        for (i = 1, r8 = 0; i < 4; i++)
+        {
+            r7 = sub_8102BF8(0, i - eSlotMachine->unk2E[0]);
+            r6 = sub_8102BF8(1, i - eSlotMachine->unk2E[1]);
+            r4 = sub_8102BF8(2, i - sp0);
+            if (!sub_81037BC(r7, r6, r4) && (!sub_810378C(r7, r6, r4) || !(eSlotMachine->unk04 & 0x80)))
+            {
+                r8++;
+                break;
+            }
+        }
+        if (r8 == 0)
+        {
+            break;
+        }
+        sp0++;
+    }
+    eSlotMachine->unk2E[2] = sp0;
 }
 
 asm(".section .text_a");
