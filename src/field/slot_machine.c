@@ -1893,6 +1893,44 @@ __attribute__((naked)) void sub_8103668(void)
 }
 #endif // NONMATCHING
 
+bool8 sub_8103764(u8 a0, u8 a1)
+{
+    if ((a0 == 0 && a1 == 1) || (a0 == 1 && a1 == 0))
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_810378C(u8 a0, u8 a1, u8 a2)
+{
+    if ((a0 == 0 && a1 == 1 && a2 == 0) || (a0 == 1 && a1 == 0 && a2 == 1))
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_81037BC(u8 a0, u8 a1, u8 a2)
+{
+    if ((a0 == 0 && a1 == 1 && a2 == 0) ||
+        (a0 == 1 && a1 == 0 && a2 == 1) ||
+        (a0 == 0 && a1 == 0 && a2 == 1) ||
+        (a0 == 1 && a1 == 1 && a2 == 0) ||
+        (a0 == a1 && a0 == a2))
+    {
+        return FALSE;
+    }
+    return TRUE;
+}
+
+extern void (*const gUnknown_083ECB94[])(void);
+
+void sub_810380C(void)
+{
+    gUnknown_083ECB94[eSlotMachine->bet - 1]();
+}
+
 asm(".section .text_a");
 
 static void LoadSlotMachineWheelOverlay(void);
