@@ -95,14 +95,15 @@ static void sub_810290C(void);
 static u8 sub_81029D4(u8 c1, u8 c2, u8 c3);
 static void sub_8102A24(void);
 static void sub_8102A64(u8 taskId);
-bool8 sub_8102A44(void);
+static bool8 sub_8102A44(void);
 u8 sub_8102BA4(u8 x, s16 y);
 static void sub_8102DA8(void);
 static void sub_8102DEC(u8 a0);
 static void sub_8102E1C(u8 a0);
-bool8 sub_8102E40(u8 a0);
-void sub_8102E68(u8 taskId);
-void sub_8103C14(u8 a0);
+static bool8 sub_8102E40(u8 a0);
+static void sub_8102E68(u8 taskId);
+static void sub_8103C14(u8 a0);
+void sub_8103C48(u8 taskId);
 void sub_8103D50(u8 a0);
 void sub_8103D8C(u8 a0);
 void sub_8103DC8(void);
@@ -128,6 +129,7 @@ void sub_81050C4(void);
 void sub_81063C0(void);
 static void sub_8106448(void);
 void sub_81064B8(void);
+void sub_81065A8(s16 arg0, u16 arg1, u16 arg2, u16 arg3, u16 arg4);
 
 static bool8 (*const gUnknown_083ECAAC[])(struct Task *task) = {
     sub_8101D5C,
@@ -1148,7 +1150,7 @@ static void sub_8102A24(void)
     sub_8102A64(CreateTask(sub_8102A64, 4));
 }
 
-bool8 sub_8102A44(void)
+static bool8 sub_8102A44(void)
 {
     if (FindTaskIdByFunc(sub_8102A64) == 0xff)
     {
@@ -1316,14 +1318,14 @@ static void sub_8102E1C(u8 a0)
     gTasks[eSlotMachine->unk3A[a0]].data[0] = 2;
 }
 
-bool8 sub_8102E40(u8 a0)
+static bool8 sub_8102E40(u8 a0)
 {
     return gTasks[eSlotMachine->unk3A[a0]].data[14];
 }
 
 extern bool8 (*const gUnknown_083ECB2C[])(struct Task *task);
 
-void sub_8102E68(u8 taskId)
+static void sub_8102E68(u8 taskId)
 {
     while (gUnknown_083ECB2C[gTasks[taskId].data[0]](gTasks + taskId));
 }
@@ -2070,6 +2072,40 @@ void sub_8103A78(void)
             break;
         eSlotMachine->unk2E[2]++;
     }
+}
+
+static void sub_8103C14(u8 a0)
+{
+    u8 taskId = CreateTask(sub_8103C48, 5);
+    gTasks[taskId].data[15] = a0;
+    sub_8103C48(taskId);
+}
+
+extern void (*const gUnknown_083ECBA0[])(struct Task *task, u8 taskId);
+
+void sub_8103C48(u8 taskId)
+{
+    gUnknown_083ECBA0[gTasks[taskId].data[0]](gTasks + taskId, taskId);
+}
+
+extern const s16 gUnknown_083ECBAC[];
+
+void sub_8103C78(struct Task *task, u8 taskId)
+{
+    sub_81065A8(gUnknown_083ECBAC[task->data[15]], 0x62, 0x63, 0x72, 0x73);
+    task->data[0]++;
+}
+
+void sub_8103CAC(struct Task *task, u8 taskId)
+{
+    if (++task->data[1] > 11)
+        task->data[0]++;
+}
+
+void sub_8103CC8(struct Task *task, u8 taskId)
+{
+    sub_81065A8(gUnknown_083ECBAC[task->data[15]], 0x42, 0x43, 0x52, 0x53);
+    DestroyTask(taskId);
 }
 
 asm(".section .text_a");
