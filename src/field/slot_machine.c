@@ -1643,6 +1643,256 @@ bool8 sub_8103520(u8 *a0)
     return FALSE;
 }
 
+extern void (*gUnknown_083ECB88[])(void);
+
+void sub_8103540(void)
+{
+    gUnknown_083ECB88[eSlotMachine->bet - 1]();
+}
+
+void sub_8103564(void)
+{
+    if (eSlotMachine->unk34[0] != 0 && eSlotMachine->unk04 & 0x80)
+    {
+        u8 sp0 = sub_8102BF8(0, 2 - eSlotMachine->unk2E[0]);
+        if (sub_8103520(&sp0))
+        {
+            s16 i;
+            for (i = 0; i < 5; i++)
+            {
+                if (sp0 == sub_8102BF8(1, 2 - i))
+                {
+                    eSlotMachine->unk34[1] = 2;
+                    eSlotMachine->unk2E[1] = i;
+                    break;
+                }
+            }
+        }
+    }
+}
+
+void j5_08111E84(void)
+{
+    if (eSlotMachine->unk34[0] != 0 && eSlotMachine->unk04 & 0x80)
+    {
+        u8 sp0 = sub_8102BF8(0, eSlotMachine->unk34[0] - eSlotMachine->unk2E[0]);
+        if (sub_8103520(&sp0))
+        {
+            s16 i;
+            for (i = 0; i < 5; i++)
+            {
+                if (sp0 == sub_8102BF8(1, eSlotMachine->unk34[0] - i))
+                {
+                    eSlotMachine->unk34[1] = eSlotMachine->unk34[0];
+                    eSlotMachine->unk2E[1] = i;
+                    break;
+                }
+            }
+        }
+    }
+}
+
+#ifdef NONMATCHING // variable r6 is mistakenly plopped into r5,
+                   // and variable i is mistakenly plopped into r6
+void sub_8103668(void)
+{
+    if (eSlotMachine->unk34[0] != 0 && eSlotMachine->unk04 & 0x80)
+    {
+        if (eSlotMachine->unk34[0] == 2)
+        {
+            j5_08111E84();
+        }
+        else
+        {
+            u8 sp0 = sub_8102BF8(0, eSlotMachine->unk34[0] - eSlotMachine->unk2E[0]);
+            if (sub_8103520(&sp0))
+            {
+                s16 i;
+                s16 r6 = 2;
+                if (eSlotMachine->unk34[0] == 3)
+                    r6 = 3;
+                for (i = 0; i < 2; i++, r6--)
+                {
+                    if (sp0 == sub_8102BF8(1, r6))
+                    {
+                        eSlotMachine->unk34[1] = r6;
+                        eSlotMachine->unk2E[1] = 0;
+                        return;
+                    }
+                }
+                for (i = 1; i < 5; i++)
+                {
+                    if (sp0 == sub_8102BF8(1, eSlotMachine->unk34[0] - i))
+                    {
+                        if (eSlotMachine->unk34[0] == 1)
+                        {
+                            if (i < 3)
+                            {
+                                eSlotMachine->unk34[1] = 2;
+                                eSlotMachine->unk2E[1] = i + 1;
+                            }
+                            else
+                            {
+                                eSlotMachine->unk34[1] = 1;
+                                eSlotMachine->unk2E[1] = i;
+                            }
+                        }
+                        else
+                        {
+                            if (i < 3)
+                            {
+                                eSlotMachine->unk34[1] = 3;
+                                eSlotMachine->unk2E[1] = i;
+                            }
+                            else
+                            {
+                                eSlotMachine->unk34[1] = 2;
+                                eSlotMachine->unk2E[1] = i - 1;
+                            }
+                        }
+                        return;
+                    }
+                }
+            }
+        }
+    }
+}
+#else
+__attribute__((naked)) void sub_8103668(void)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                    "\tsub sp, 0x4\n"
+                    "\tldr r4, _0810368C @ =gSharedMem\n"
+                    "\tldrh r3, [r4, 0x34]\n"
+                    "\tmovs r0, 0x34\n"
+                    "\tldrsh r2, [r4, r0]\n"
+                    "\tcmp r2, 0\n"
+                    "\tbeq _0810375A\n"
+                    "\tldrb r1, [r4, 0x4]\n"
+                    "\tmovs r0, 0x80\n"
+                    "\tands r0, r1\n"
+                    "\tcmp r0, 0\n"
+                    "\tbeq _0810375A\n"
+                    "\tcmp r2, 0x2\n"
+                    "\tbne _081036AE\n"
+                    "\tbl j5_08111E84\n"
+                    "\tb _0810375A\n"
+                    "\t.align 2, 0\n"
+                    "_0810368C: .4byte gSharedMem\n"
+                    "_08103690:\n"
+                    "\tldr r0, _0810369C @ =gSharedMem\n"
+                    "\tmovs r1, 0\n"
+                    "\tstrh r6, [r0, 0x36]\n"
+                    "\tstrh r1, [r0, 0x30]\n"
+                    "\tb _0810375A\n"
+                    "\t.align 2, 0\n"
+                    "_0810369C: .4byte gSharedMem\n"
+                    "_081036A0:\n"
+                    "\tmovs r0, 0x2\n"
+                    "\tstrh r0, [r5, 0x36]\n"
+                    "\tadds r0, r4, 0x1\n"
+                    "\tstrh r0, [r5, 0x30]\n"
+                    "\tb _0810375A\n"
+                    "_081036AA:\n"
+                    "\tmovs r0, 0x3\n"
+                    "\tb _08103736\n"
+                    "_081036AE:\n"
+                    "\tldrh r1, [r4, 0x2E]\n"
+                    "\tsubs r1, r3, r1\n"
+                    "\tlsls r1, 16\n"
+                    "\tasrs r1, 16\n"
+                    "\tmovs r0, 0\n"
+                    "\tbl sub_8102BF8\n"
+                    "\tmov r1, sp\n"
+                    "\tstrb r0, [r1]\n"
+                    "\tmov r0, sp\n"
+                    "\tbl sub_8103520\n"
+                    "\tlsls r0, 24\n"
+                    "\tcmp r0, 0\n"
+                    "\tbeq _0810375A\n"
+                    "\tmovs r6, 0x2\n"
+                    "\tmovs r1, 0x34\n"
+                    "\tldrsh r0, [r4, r1]\n"
+                    "\tcmp r0, 0x3\n"
+                    "\tbne _081036D8\n"
+                    "\tmovs r6, 0x3\n"
+                    "_081036D8:\n"
+                    "\tmovs r5, 0\n"
+                    "\tmov r7, sp\n"
+                    "_081036DC:\n"
+                    "\tlsls r0, r6, 16\n"
+                    "\tasrs r4, r0, 16\n"
+                    "\tmovs r0, 0x1\n"
+                    "\tadds r1, r4, 0\n"
+                    "\tbl sub_8102BF8\n"
+                    "\tldrb r1, [r7]\n"
+                    "\tlsls r0, 24\n"
+                    "\tlsrs r0, 24\n"
+                    "\tcmp r1, r0\n"
+                    "\tbeq _08103690\n"
+                    "\tlsls r1, r5, 16\n"
+                    "\tmovs r0, 0x80\n"
+                    "\tlsls r0, 9\n"
+                    "\tadds r1, r0\n"
+                    "\tsubs r0, r4, 0x1\n"
+                    "\tlsls r0, 16\n"
+                    "\tlsrs r6, r0, 16\n"
+                    "\tlsrs r5, r1, 16\n"
+                    "\tasrs r1, 16\n"
+                    "\tcmp r1, 0x1\n"
+                    "\tble _081036DC\n"
+                    "\tmovs r6, 0x1\n"
+                    "\tmov r7, sp\n"
+                    "\tldr r5, _0810373C @ =gSharedMem\n"
+                    "_0810370E:\n"
+                    "\tldrh r1, [r5, 0x34]\n"
+                    "\tlsls r0, r6, 16\n"
+                    "\tasrs r4, r0, 16\n"
+                    "\tsubs r1, r4\n"
+                    "\tlsls r1, 16\n"
+                    "\tasrs r1, 16\n"
+                    "\tmovs r0, 0x1\n"
+                    "\tbl sub_8102BF8\n"
+                    "\tldrb r1, [r7]\n"
+                    "\tlsls r0, 24\n"
+                    "\tlsrs r0, 24\n"
+                    "\tcmp r1, r0\n"
+                    "\tbne _0810374E\n"
+                    "\tmovs r1, 0x34\n"
+                    "\tldrsh r0, [r5, r1]\n"
+                    "\tcmp r0, 0x1\n"
+                    "\tbne _08103740\n"
+                    "\tcmp r4, 0x2\n"
+                    "\tble _081036A0\n"
+                    "_08103736:\n"
+                    "\tstrh r0, [r5, 0x36]\n"
+                    "\tstrh r6, [r5, 0x30]\n"
+                    "\tb _0810375A\n"
+                    "\t.align 2, 0\n"
+                    "_0810373C: .4byte gSharedMem\n"
+                    "_08103740:\n"
+                    "\tcmp r4, 0x2\n"
+                    "\tble _081036AA\n"
+                    "\tmovs r0, 0x2\n"
+                    "\tstrh r0, [r5, 0x36]\n"
+                    "\tsubs r0, r4, 0x1\n"
+                    "\tstrh r0, [r5, 0x30]\n"
+                    "\tb _0810375A\n"
+                    "_0810374E:\n"
+                    "\tadds r0, r4, 0x1\n"
+                    "\tlsls r0, 16\n"
+                    "\tlsrs r6, r0, 16\n"
+                    "\tasrs r0, 16\n"
+                    "\tcmp r0, 0x4\n"
+                    "\tble _0810370E\n"
+                    "_0810375A:\n"
+                    "\tadd sp, 0x4\n"
+                    "\tpop {r4-r7}\n"
+                    "\tpop {r0}\n"
+                    "\tbx r0");
+}
+#endif // NONMATCHING
+
 asm(".section .text_a");
 
 static void LoadSlotMachineWheelOverlay(void);
