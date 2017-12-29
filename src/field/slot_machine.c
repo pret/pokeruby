@@ -1931,6 +1931,49 @@ void sub_810380C(void)
     gUnknown_083ECB94[eSlotMachine->bet - 1]();
 }
 
+void sub_8103830(void)
+{
+    s16 i = 0;
+    u8 r5 = sub_8102BF8(0, 2 - eSlotMachine->unk2E[0]);
+    u8 r1 = sub_8102BF8(1, 2 - eSlotMachine->unk2E[1]);
+    if (r5 == r1)
+    {
+        while (1)
+        {
+            u8 r0;
+            if (!(r5 == (r0 = sub_8102BF8(2, 2 - i)) || (r5 == 0 && r0 == 1) || (r5 == 1 && r0 == 0)))
+            {
+                break;
+            }
+            i++;
+        }
+    }
+    else if (sub_8103764(r5, r1))
+    {
+        if (eSlotMachine->unk04 & 0x80)
+        {
+            for (i = 0; i < 5; i++)
+            {
+                if (r5 == sub_8102BF8(2, 2 - i))
+                {
+                    eSlotMachine->unk2E[2] = i;
+                    return;
+                }
+            }
+        }
+        i = 0;
+        while (1)
+        {
+            if (r5 != sub_8102BF8(2, 2 - i))
+            {
+                break;
+            }
+            i++;
+        }
+    }
+    eSlotMachine->unk2E[2] = i;
+}
+
 asm(".section .text_a");
 
 static void LoadSlotMachineWheelOverlay(void);
