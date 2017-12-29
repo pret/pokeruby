@@ -40,6 +40,10 @@
 	inc _num_traps
 	.endm
 
+	.macro coord_weather_event x, y, height, weather
+	coord_event \x, \y, \height, 0, \weather, 0, 0, 0x0
+	.endm
+
 	.macro bg_event x, y, byte, kind, word, arg6, arg7, arg8
 	.2byte \x, \y
 	.byte \byte, \kind
@@ -52,6 +56,14 @@
 	.endif
 	inc _num_signs
 	.endm
+
+	.macro bg_hidden_item_event x, y, height, item, flag
+	bg_event \x, \y, \height, 7, 0, \item, ((\flag) - FLAG_HIDDEN_ITEMS_START), 0
+	.endm
+
+	.macro bg_secret_base_event x, y, height, secret_base_id
+	bg_event \x, \y, \height, 8, 0, \secret_base_id, 0, 0
+	.endm	
 
 	.macro map_events npcs, warps, traps, signs
 	.byte _num_npcs, _num_warps, _num_traps, _num_signs

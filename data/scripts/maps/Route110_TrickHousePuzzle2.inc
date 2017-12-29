@@ -4,38 +4,38 @@ Route110_TrickHousePuzzle2_MapScripts:: @ 8161D76
 	.byte 0
 
 Route110_TrickHousePuzzle2_MapScript1_161D81:: @ 8161D81
-	compare 0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if 1, Route110_TrickHousePuzzle2_EventScript_161E2C
-	compare 0x4002, 1
+	compare VAR_TEMP_2, 1
 	call_if 1, Route110_TrickHousePuzzle2_EventScript_161E3F
-	compare 0x4003, 1
+	compare VAR_TEMP_3, 1
 	call_if 1, Route110_TrickHousePuzzle2_EventScript_161E52
-	compare 0x4004, 1
+	compare VAR_TEMP_4, 1
 	call_if 1, Route110_TrickHousePuzzle2_EventScript_161E65
 	end
 
 Route110_TrickHousePuzzle2_MapScript1_161DAE:: @ 8161DAE
-	setvar 0x4001, 0
-	setvar 0x4002, 0
-	setvar 0x4003, 0
-	setvar 0x4004, 0
+	setvar VAR_TEMP_1, 0
+	setvar VAR_TEMP_2, 0
+	setvar VAR_TEMP_3, 0
+	setvar VAR_TEMP_4, 0
 	end
 
 Route110_TrickHousePuzzle2_EventScript_161DC3:: @ 8161DC3
 	lockall
-	compare 0x40ac, 0
+	compare VAR_TRICK_HOUSE_PUZZLE_2_STATE, 0
 	goto_if_eq Route110_TrickHousePuzzle2_EventScript_161DD5
 	goto Route110_TrickHousePuzzle2_EventScript_161892
 	end
 
 Route110_TrickHousePuzzle2_EventScript_161DD5:: @ 8161DD5
-	setvar 0x40ac, 1
+	setvar VAR_TRICK_HOUSE_PUZZLE_2_STATE, 1
 	goto Route110_TrickHousePuzzle2_EventScript_16189C
 	end
 
 Route110_TrickHousePuzzle2_EventScript_161DE0:: @ 8161DE0
 	lockall
-	setvar 0x4001, 1
+	setvar VAR_TEMP_1, 1
 	playse 21
 	call Route110_TrickHousePuzzle2_EventScript_161E2C
 	special DrawWholeMapView
@@ -44,7 +44,7 @@ Route110_TrickHousePuzzle2_EventScript_161DE0:: @ 8161DE0
 
 Route110_TrickHousePuzzle2_EventScript_161DF3:: @ 8161DF3
 	lockall
-	setvar 0x4002, 1
+	setvar VAR_TEMP_2, 1
 	playse 21
 	call Route110_TrickHousePuzzle2_EventScript_161E3F
 	special DrawWholeMapView
@@ -53,7 +53,7 @@ Route110_TrickHousePuzzle2_EventScript_161DF3:: @ 8161DF3
 
 Route110_TrickHousePuzzle2_EventScript_161E06:: @ 8161E06
 	lockall
-	setvar 0x4003, 1
+	setvar VAR_TEMP_3, 1
 	playse 21
 	call Route110_TrickHousePuzzle2_EventScript_161E52
 	special DrawWholeMapView
@@ -62,7 +62,7 @@ Route110_TrickHousePuzzle2_EventScript_161E06:: @ 8161E06
 
 Route110_TrickHousePuzzle2_EventScript_161E19:: @ 8161E19
 	lockall
-	setvar 0x4004, 1
+	setvar VAR_TEMP_4, 1
 	playse 21
 	call Route110_TrickHousePuzzle2_EventScript_161E65
 	special DrawWholeMapView

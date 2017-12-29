@@ -11,9 +11,9 @@ MauvilleCity_Gym_MapWarps:: @ 83882AC
 	warp_def 5, 20, 0, 0, MAP_MAUVILLE_CITY
 
 MauvilleCity_Gym_MapCoordEvents:: @ 83882BC
-	coord_event 0, 9, 3, 0, 0x4000, 0, 0, MauvilleCity_Gym_EventScript_15664B
-	coord_event 8, 11, 3, 0, 0x4000, 0, 0, MauvilleCity_Gym_EventScript_156670
-	coord_event 4, 15, 3, 0, 0x4000, 0, 0, MauvilleCity_Gym_EventScript_156695
+	coord_event 0, 9, 3, 0, VAR_TEMP_0, 0, 0, MauvilleCity_Gym_EventScript_15664B
+	coord_event 8, 11, 3, 0, VAR_TEMP_0, 0, 0, MauvilleCity_Gym_EventScript_156670
+	coord_event 4, 15, 3, 0, VAR_TEMP_0, 0, 0, MauvilleCity_Gym_EventScript_156695
 
 MauvilleCity_Gym_MapBGEvents:: @ 83882EC
 	bg_event 3, 18, 0, 1, 0, MauvilleCity_Gym_EventScript_156761

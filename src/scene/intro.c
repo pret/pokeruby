@@ -1087,14 +1087,14 @@ static void Task_IntroStartBikeRide(u8 taskId)
     u8 spriteId;
 
     if (gUnknown_02039318 == 0)
-        LoadCompressedObjectPic(&gIntro2BrendanSpriteSheet);
+        LoadCompressedObjectPic(gIntro2BrendanSpriteSheet);
     else
-        LoadCompressedObjectPic(&gIntro2MaySpriteSheet);
-    LoadCompressedObjectPic(&gIntro2BicycleSpriteSheet);
+        LoadCompressedObjectPic(gIntro2MaySpriteSheet);
+    LoadCompressedObjectPic(gIntro2BicycleSpriteSheet);
 #ifdef SAPPHIRE
-    LoadCompressedObjectPic(&gIntro2LatiasSpriteSheet);
+    LoadCompressedObjectPic(gIntro2LatiasSpriteSheet);
 #else
-    LoadCompressedObjectPic(&gIntro2LatiosSpriteSheet);
+    LoadCompressedObjectPic(gIntro2LatiosSpriteSheet);
 #endif
     LoadSpritePalettes(gIntro2SpritePalettes);
     if (gUnknown_02039318 == 0)

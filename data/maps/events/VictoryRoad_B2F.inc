@@ -12,8 +12,8 @@ VictoryRoad_B2F_MapWarps:: @ 838DC90
 	warp_def 5, 26, 3, 6, MAP_VICTORY_ROAD_B1F
 
 VictoryRoad_B2F_MapBGEvents:: @ 838DCB0
-	bg_event 28, 5, 3, 7, 0, ITEM_ELIXIR, 82, 0
-	bg_event 37, 1, 3, 7, 0, ITEM_MAX_REPEL, 83, 0
+	bg_hidden_item_event 28, 5, 3, ITEM_ELIXIR, FLAG_HIDDEN_ITEM_52
+	bg_hidden_item_event 37, 1, 3, ITEM_MAX_REPEL, FLAG_HIDDEN_ITEM_53
 
 VictoryRoad_B2F_MapEvents:: @ 838DCC8
 	map_events VictoryRoad_B2F_MapObjects, VictoryRoad_B2F_MapWarps, 0x0, VictoryRoad_B2F_MapBGEvents

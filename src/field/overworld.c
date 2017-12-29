@@ -287,7 +287,7 @@ void LoadMapObjTemplatesFromHeader(void)
 {
     // Clear map object templates
     CpuFill32(0, gSaveBlock1.mapObjectTemplates, sizeof(gSaveBlock1.mapObjectTemplates));
-    
+
     // Copy map header events to save block
     CpuCopy32(gMapHeader.events->mapObjects,
               gSaveBlock1.mapObjectTemplates,
@@ -816,7 +816,7 @@ static bool16 ShouldLegendaryMusicPlayAtLocation(struct WarpData *warp)
 
 static bool16 IsInfiltratedWeatherInstitute(struct WarpData *warp)
 {
-    if (VarGet(VAR_WEATHER_INSTITUTE_CLEARED))
+    if (VarGet(VAR_WEATHER_INSTITUTE_STATE))
         return FALSE;
     if (warp->mapGroup != MAP_GROUP(ROUTE119_WEATHER_INSTITUTE_1F))
         return FALSE;
@@ -981,7 +981,7 @@ static void PlayAmbientCry(void)
     s16 x, y;
     s8 pan;
     s8 volume;
-    
+
     PlayerGetDestCoords(&x, &y);
     if (sIsAmbientCryWaterMon == TRUE
      && !MetatileBehavior_IsSurfableWaterOrUnderwater(MapGridGetMetatileBehaviorAt(x, y)))
@@ -1158,7 +1158,7 @@ void OverworldBasic(void)
     sub_8072EDC();
 }
 
-// This CB2 is used when starting 
+// This CB2 is used when starting
 void CB2_OverworldBasic(void)
 {
     OverworldBasic();
@@ -2430,7 +2430,7 @@ void SpawnLinkPlayerMapObject(u8 linkPlayerId, s16 x, s16 y, u8 a4)
 
     mapObj->active = 1;
     mapObj->mapobj_bit_1 = a4;
-    mapObj->mapobj_unk_19 = 2;
+    mapObj->range.as_byte = 2;
     mapObj->spriteId = 64;
 
     InitLinkPlayerMapObjectPos(mapObj, x, y);
@@ -2453,7 +2453,7 @@ void unref_sub_8055A6C(u8 linkPlayerId, u8 a2)
     {
         u8 mapObjId = gLinkPlayerMapObjects[linkPlayerId].mapObjId;
         struct MapObject *mapObj = &gMapObjects[mapObjId];
-        mapObj->mapobj_unk_19 = a2;
+        mapObj->range.as_byte = a2;
     }
 }
 
@@ -2487,7 +2487,7 @@ u8 sub_8055B30(u8 linkPlayerId)
 {
     u8 mapObjId = gLinkPlayerMapObjects[linkPlayerId].mapObjId;
     struct MapObject *mapObj = &gMapObjects[mapObjId];
-    return mapObj->mapobj_unk_19;
+    return mapObj->range.as_byte;
 }
 
 u8 sub_8055B50(u8 linkPlayerId)
@@ -2559,10 +2559,10 @@ static u8 sub_8055CB0(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapOb
 {
     s16 x, y;
 
-    mapObj->mapobj_unk_19 = npc_something3(a3, mapObj->mapobj_unk_19);
-    FieldObjectMoveDestCoords(mapObj, mapObj->mapobj_unk_19, &x, &y);
+    mapObj->range.as_byte = npc_something3(a3, mapObj->range.as_byte);
+    FieldObjectMoveDestCoords(mapObj, mapObj->range.as_byte, &x, &y);
 
-    if (LinkPlayerDetectCollision(linkPlayerMapObj->mapObjId, mapObj->mapobj_unk_19, x, y))
+    if (LinkPlayerDetectCollision(linkPlayerMapObj->mapObjId, mapObj->range.as_byte, x, y))
     {
         return 0;
     }
@@ -2577,7 +2577,7 @@ static u8 sub_8055CB0(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapOb
 
 static u8 sub_8055D18(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj, u8 a3)
 {
-    mapObj->mapobj_unk_19 = npc_something3(a3, mapObj->mapobj_unk_19);
+    mapObj->range.as_byte = npc_something3(a3, mapObj->range.as_byte);
     return 0;
 }
 
@@ -2590,7 +2590,7 @@ static void sub_8055D38(struct LinkPlayerMapObject *linkPlayerMapObj, struct Map
 {
     mapObj->mapobj_unk_21--;
     linkPlayerMapObj->mode = 1;
-    MoveCoords(mapObj->mapobj_unk_19, &mapObj->coords1.x, &mapObj->coords1.y);
+    MoveCoords(mapObj->range.as_byte, &mapObj->coords1.x, &mapObj->coords1.y);
     if (!mapObj->mapobj_unk_21)
     {
         npc_coords_shift_still(mapObj);
@@ -2662,9 +2662,9 @@ void SpriteCB_LinkPlayer(struct Sprite *sprite)
     SetObjectSubpriorityByZCoord(mapObj->elevation, sprite, 1);
     sprite->oam.priority = ZCoordToPriority(mapObj->elevation);
     if (!linkPlayerMapObj->mode)
-        StartSpriteAnim(sprite, FieldObjectDirectionToImageAnimId(mapObj->mapobj_unk_19));
+        StartSpriteAnim(sprite, FieldObjectDirectionToImageAnimId(mapObj->range.as_byte));
     else
-        StartSpriteAnimIfDifferent(sprite, get_go_image_anim_num(mapObj->mapobj_unk_19));
+        StartSpriteAnimIfDifferent(sprite, get_go_image_anim_num(mapObj->range.as_byte));
     sub_806487C(sprite, 0);
     if (mapObj->mapobj_bit_2)
     {

@@ -180,7 +180,7 @@ void sub_80BB5E4(void)
         if (gUnknown_020387DC != gSaveBlock1.secretBases[i].secretBaseId)
             continue;
         gSpecialVar_Result = 1;
-        VarSet(VAR_0x4054, i);
+        VarSet(VAR_CURRENT_SECRET_BASE, i);
         break;
     }
 }
@@ -284,7 +284,7 @@ void sub_80BB8CC(void)
     for (idx=0; idx<4; idx++) {
         gSaveBlock1.secretBases[0].trainerId[idx] = gSaveBlock2.playerTrainerId[idx];
     }
-    VarSet(VAR_0x4054, 0);
+    VarSet(VAR_CURRENT_SECRET_BASE, 0);
     nameLength = sub_80BB8A8(gSaveBlock2.playerName);
     memset(gSaveBlock1.secretBases[0].playerName, 0xFF, OT_NAME_LENGTH);
     StringCopyN(gSaveBlock1.secretBases[0].playerName, gSaveBlock2.playerName, nameLength);
@@ -333,7 +333,7 @@ void sub_80BBA48(u8 taskid)
         }
         break;
     case 2:
-        curbaseid = VarGet(VAR_0x4054);
+        curbaseid = VarGet(VAR_CURRENT_SECRET_BASE);
         if (gSaveBlock1.secretBases[curbaseid].sbr_field_10 < 0xff)
             gSaveBlock1.secretBases[curbaseid].sbr_field_10++;
         sub_80BBA14();
@@ -412,7 +412,7 @@ void sub_80BBCCC(u8 flagIn)
     u16 curBaseId;
     u16 x, y;
     if (CurrentMapIsSecretBase()) {
-        curBaseId = VarGet(VAR_0x4054);
+        curBaseId = VarGet(VAR_CURRENT_SECRET_BASE);
         for (x=0; x<16; x++) {
             if (gSaveBlock1.secretBases[curBaseId].decorations[x] > 0 && gSaveBlock1.secretBases[curBaseId].decorations[x] <= 0x78 && gDecorations[gSaveBlock1.secretBases[curBaseId].decorations[x]].permission != DECORPERM_SOLID_MAT) {
                 sub_80FF394((gSaveBlock1.secretBases[curBaseId].decorationPos[x] >> 4) + 7, (gSaveBlock1.secretBases[curBaseId].decorationPos[x] & 0xF) + 7, gSaveBlock1.secretBases[curBaseId].decorations[x]);
@@ -437,7 +437,7 @@ void sub_80BBDD0(void)
     u8 metatile;
     u8 permission;
     u8 ndecor;
-    u16 curBase = VarGet(VAR_0x4054);
+    u16 curBase = VarGet(VAR_CURRENT_SECRET_BASE);
     if (!CurrentMapIsSecretBase()) {
         roomdecor = gSaveBlock1.playerRoomDecor;
         roomdecorpos = gSaveBlock1.playerRoomDecorPos;
@@ -478,8 +478,8 @@ void sub_80BBDD0(void)
 
 void sub_80BBFA4(void)
 {
-    int curBase = VarGet(VAR_0x4054);
-    VarSet(VAR_0x401F, gUnknown_083D13EC[sub_80BCCA4(curBase)]);
+    int curBase = VarGet(VAR_CURRENT_SECRET_BASE);
+    VarSet(VAR_OBJ_GFX_ID_F, gUnknown_083D13EC[sub_80BCCA4(curBase)]);
 }
 
 void sub_80BBFD8(struct MapPosition *position, struct MapEvents *events)
@@ -571,12 +571,12 @@ u8 *sub_80BC190(u8 *dest, u8 arg1) { // 80bc190
 }
 
 u8 *GetSecretBaseMapName(u8 *dest) {
-    gUnknown_020387DC = gSaveBlock1.secretBases[VarGet(VAR_0x4054)].secretBaseId;
-    return sub_80BC190(dest, VarGet(VAR_0x4054));
+    gUnknown_020387DC = gSaveBlock1.secretBases[VarGet(VAR_CURRENT_SECRET_BASE)].secretBaseId;
+    return sub_80BC190(dest, VarGet(VAR_CURRENT_SECRET_BASE));
 }
 
 void sub_80BC224(void) {
-    u8 *var0 = gSaveBlock1.secretBases[(u8)VarGet(VAR_0x4054)].playerName;
+    u8 *var0 = gSaveBlock1.secretBases[(u8)VarGet(VAR_CURRENT_SECRET_BASE)].playerName;
     u8 *var1 = gStringVar1;
     u8 var2 = sub_80BB8A8(var0);
     u8 *var3 = StringCopyN(var1, var0, var2);
@@ -1173,7 +1173,7 @@ void sub_80BCBF8(u8 taskId)
 
 void sub_80BCC54(u8 taskId)
 {
-    u16 curBaseIndex = VarGet(VAR_0x4054);
+    u16 curBaseIndex = VarGet(VAR_CURRENT_SECRET_BASE);
 
     BuyMenuFreeMemory();
     DestroyVerticalScrollIndicator(0);
@@ -1199,7 +1199,7 @@ u8 sub_80BCCA4(u8 secretBaseIndex)
 
 const u8 *sub_80BCCE8(void)
 {
-    u8 param = sub_80BCCA4(VarGet(VAR_0x4054));
+    u8 param = sub_80BCCA4(VarGet(VAR_CURRENT_SECRET_BASE));
     if (param == 0) return UnknownString_81A1BB2;
     if (param == 1) return UnknownString_81A1F67;
     if (param == 2) return UnknownString_81A2254;
@@ -1229,7 +1229,7 @@ void unref_sub_80BCD7C(u8 secretBaseIndex)
 
 void sub_80BCE1C(void)
 {
-    u16 curBaseIndex = VarGet(VAR_0x4054);
+    u16 curBaseIndex = VarGet(VAR_CURRENT_SECRET_BASE);
     sub_810FB10(1);
 
     CreateSecretBaseEnemyParty(&gSaveBlock1.secretBases[curBaseIndex]);
@@ -1237,12 +1237,12 @@ void sub_80BCE1C(void)
 
 void sub_80BCE4C()
 {
-    gSaveBlock1.secretBases[VarGet(VAR_0x4054)].sbr_field_1_5 = gSpecialVar_Result;
+    gSaveBlock1.secretBases[VarGet(VAR_CURRENT_SECRET_BASE)].sbr_field_1_5 = gSpecialVar_Result;
 }
 
 void sub_80BCE90()
 {
-    u16 curBaseIndex = VarGet(VAR_0x4054);
+    u16 curBaseIndex = VarGet(VAR_CURRENT_SECRET_BASE);
 
     if (!FlagGet(FLAG_DAILY_UNKNOWN_8C2))
     {

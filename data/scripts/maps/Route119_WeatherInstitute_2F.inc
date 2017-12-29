@@ -4,9 +4,9 @@ Route119_WeatherInstitute_2F_MapScripts:: @ 8163CC2
 
 Route119_WeatherInstitute_2F_MapScript1_163CC8:: @ 8163CC8
 	call Route119_WeatherInstitute_2F_EventScript_1A0196
-	compare 0x40b3, 0
+	compare VAR_WEATHER_INSTITUTE_STATE, 0
 	call_if 1, Route119_WeatherInstitute_2F_EventScript_163CE4
-	compare 0x40b3, 1
+	compare VAR_WEATHER_INSTITUTE_STATE, 1
 	call_if 1, Route119_WeatherInstitute_2F_EventScript_163CF0
 	end
 
@@ -38,7 +38,7 @@ Route119_WeatherInstitute_2F_EventScript_163D2A:: @ 8163D2A
 Route119_WeatherInstitute_2F_EventScript_163D45:: @ 8163D45
 	msgbox Route119_WeatherInstitute_2F_Text_19F11B, 4
 	closemessage
-	setvar 0x40b3, 1
+	setvar VAR_WEATHER_INSTITUTE_STATE, 1
 	clearflag FLAG_HIDE_WEATHER_INSTITUTE_WORKERS_2F
 	fadedefaultbgm
 	fadescreen 1

@@ -32,8 +32,8 @@ MauvilleCity_GameCorner_EventScript_156A60:: @ 8156A60
 	end
 
 MauvilleCity_GameCorner_EventScript_156AAE:: @ 8156AAE
-	checkcoins 16385
-	compare 0x4001, 9950
+	checkcoins VAR_TEMP_1
+	compare VAR_TEMP_1, 9950
 	goto_if 4, MauvilleCity_GameCorner_EventScript_156B5C
 	checkmoney 0x3e8, 0
 	compare RESULT, 0
@@ -51,8 +51,8 @@ MauvilleCity_GameCorner_EventScript_156AAE:: @ 8156AAE
 	end
 
 MauvilleCity_GameCorner_EventScript_156AF0:: @ 8156AF0
-	checkcoins 16385
-	compare 0x4001, 9500
+	checkcoins VAR_TEMP_1
+	compare VAR_TEMP_1, 9500
 	goto_if 4, MauvilleCity_GameCorner_EventScript_156B5C
 	checkmoney 0x2710, 0
 	compare RESULT, 0
@@ -109,7 +109,7 @@ MauvilleCity_GameCorner_EventScript_156B88:: @ 8156B88
 	message MauvilleCity_GameCorner_Text_181E17
 	waitmessage
 	showcoinsbox 0, 0
-	setvar 0x4001, 0
+	setvar VAR_TEMP_1, 0
 	goto MauvilleCity_GameCorner_EventScript_156BA6
 
 MauvilleCity_GameCorner_EventScript_156B9B:: @ 8156B9B
@@ -128,17 +128,17 @@ MauvilleCity_GameCorner_EventScript_156BA6:: @ 8156BA6
 	end
 
 MauvilleCity_GameCorner_EventScript_156BE2:: @ 8156BE2
-	setvar 0x4001, 1
+	setvar VAR_TEMP_1, 1
 	bufferdecorationname 0, 88
 	goto MauvilleCity_GameCorner_EventScript_156C0C
 
 MauvilleCity_GameCorner_EventScript_156BF0:: @ 8156BF0
-	setvar 0x4001, 2
+	setvar VAR_TEMP_1, 2
 	bufferdecorationname 0, 89
 	goto MauvilleCity_GameCorner_EventScript_156C0C
 
 MauvilleCity_GameCorner_EventScript_156BFE:: @ 8156BFE
-	setvar 0x4001, 3
+	setvar VAR_TEMP_1, 3
 	bufferdecorationname 0, 90
 	goto MauvilleCity_GameCorner_EventScript_156C0C
 
@@ -146,15 +146,15 @@ MauvilleCity_GameCorner_EventScript_156C0C:: @ 8156C0C
 	msgbox MauvilleCity_GameCorner_Text_181E33, 5
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_156D0D
-	switch 0x4001
+	switch VAR_TEMP_1
 	case 1, MauvilleCity_GameCorner_EventScript_156C46
 	case 2, MauvilleCity_GameCorner_EventScript_156C80
 	case 3, MauvilleCity_GameCorner_EventScript_156CBA
 	end
 
 MauvilleCity_GameCorner_EventScript_156C46:: @ 8156C46
-	checkcoins 16386
-	compare 0x4002, 1000
+	checkcoins VAR_TEMP_2
+	compare VAR_TEMP_2, 1000
 	goto_if 0, MauvilleCity_GameCorner_EventScript_156CF4
 	bufferdecorationname 1, 88
 	checkdecorspace 88
@@ -169,8 +169,8 @@ MauvilleCity_GameCorner_EventScript_156C46:: @ 8156C46
 	end
 
 MauvilleCity_GameCorner_EventScript_156C80:: @ 8156C80
-	checkcoins 16386
-	compare 0x4002, 1000
+	checkcoins VAR_TEMP_2
+	compare VAR_TEMP_2, 1000
 	goto_if 0, MauvilleCity_GameCorner_EventScript_156CF4
 	bufferdecorationname 1, 89
 	checkdecorspace 89
@@ -185,8 +185,8 @@ MauvilleCity_GameCorner_EventScript_156C80:: @ 8156C80
 	end
 
 MauvilleCity_GameCorner_EventScript_156CBA:: @ 8156CBA
-	checkcoins 16386
-	compare 0x4002, 1000
+	checkcoins VAR_TEMP_2
+	compare VAR_TEMP_2, 1000
 	goto_if 0, MauvilleCity_GameCorner_EventScript_156CF4
 	bufferdecorationname 1, 90
 	checkdecorspace 90
@@ -230,7 +230,7 @@ MauvilleCity_GameCorner_EventScript_156D36:: @ 8156D36
 	message MauvilleCity_GameCorner_Text_181E17
 	waitmessage
 	showcoinsbox 0, 0
-	setvar 0x4001, 0
+	setvar VAR_TEMP_1, 0
 	goto MauvilleCity_GameCorner_EventScript_156D54
 
 MauvilleCity_GameCorner_EventScript_156D49:: @ 8156D49
@@ -251,27 +251,27 @@ MauvilleCity_GameCorner_EventScript_156D54:: @ 8156D54
 	end
 
 MauvilleCity_GameCorner_EventScript_156DA6:: @ 8156DA6
-	setvar 0x4001, 1
+	setvar VAR_TEMP_1, 1
 	bufferitemname 0, ITEM_TM32
 	goto MauvilleCity_GameCorner_EventScript_156DEC
 
 MauvilleCity_GameCorner_EventScript_156DB4:: @ 8156DB4
-	setvar 0x4001, 2
+	setvar VAR_TEMP_1, 2
 	bufferitemname 0, ITEM_TM29
 	goto MauvilleCity_GameCorner_EventScript_156DEC
 
 MauvilleCity_GameCorner_EventScript_156DC2:: @ 8156DC2
-	setvar 0x4001, 3
+	setvar VAR_TEMP_1, 3
 	bufferitemname 0, ITEM_TM35
 	goto MauvilleCity_GameCorner_EventScript_156DEC
 
 MauvilleCity_GameCorner_EventScript_156DD0:: @ 8156DD0
-	setvar 0x4001, 4
+	setvar VAR_TEMP_1, 4
 	bufferitemname 0, ITEM_TM24
 	goto MauvilleCity_GameCorner_EventScript_156DEC
 
 MauvilleCity_GameCorner_EventScript_156DDE:: @ 8156DDE
-	setvar 0x4001, 5
+	setvar VAR_TEMP_1, 5
 	bufferitemname 0, ITEM_TM13
 	goto MauvilleCity_GameCorner_EventScript_156DEC
 
@@ -279,7 +279,7 @@ MauvilleCity_GameCorner_EventScript_156DEC:: @ 8156DEC
 	msgbox MauvilleCity_GameCorner_Text_181E33, 5
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_156F77
-	switch 0x4001
+	switch VAR_TEMP_1
 	case 1, MauvilleCity_GameCorner_EventScript_156E3C
 	case 2, MauvilleCity_GameCorner_EventScript_156E76
 	case 3, MauvilleCity_GameCorner_EventScript_156EB0
@@ -288,8 +288,8 @@ MauvilleCity_GameCorner_EventScript_156DEC:: @ 8156DEC
 	end
 
 MauvilleCity_GameCorner_EventScript_156E3C:: @ 8156E3C
-	checkcoins 16386
-	compare 0x4002, 1500
+	checkcoins VAR_TEMP_2
+	compare VAR_TEMP_2, 1500
 	goto_if 0, MauvilleCity_GameCorner_EventScript_156F5E
 	checkitemspace ITEM_TM32, 1
 	compare RESULT, 0
@@ -303,8 +303,8 @@ MauvilleCity_GameCorner_EventScript_156E3C:: @ 8156E3C
 	end
 
 MauvilleCity_GameCorner_EventScript_156E76:: @ 8156E76
-	checkcoins 16386
-	compare 0x4002, 3500
+	checkcoins VAR_TEMP_2
+	compare VAR_TEMP_2, 3500
 	goto_if 0, MauvilleCity_GameCorner_EventScript_156F5E
 	checkitemspace ITEM_TM29, 1
 	compare RESULT, 0
@@ -318,8 +318,8 @@ MauvilleCity_GameCorner_EventScript_156E76:: @ 8156E76
 	end
 
 MauvilleCity_GameCorner_EventScript_156EB0:: @ 8156EB0
-	checkcoins 16386
-	compare 0x4002, 4000
+	checkcoins VAR_TEMP_2
+	compare VAR_TEMP_2, 4000
 	goto_if 0, MauvilleCity_GameCorner_EventScript_156F5E
 	checkitemspace ITEM_TM35, 1
 	compare RESULT, 0
@@ -333,8 +333,8 @@ MauvilleCity_GameCorner_EventScript_156EB0:: @ 8156EB0
 	end
 
 MauvilleCity_GameCorner_EventScript_156EEA:: @ 8156EEA
-	checkcoins 16386
-	compare 0x4002, 4000
+	checkcoins VAR_TEMP_2
+	compare VAR_TEMP_2, 4000
 	goto_if 0, MauvilleCity_GameCorner_EventScript_156F5E
 	checkitemspace ITEM_TM24, 1
 	compare RESULT, 0
@@ -348,8 +348,8 @@ MauvilleCity_GameCorner_EventScript_156EEA:: @ 8156EEA
 	end
 
 MauvilleCity_GameCorner_EventScript_156F24:: @ 8156F24
-	checkcoins 16386
-	compare 0x4002, 4000
+	checkcoins VAR_TEMP_2
+	compare VAR_TEMP_2, 4000
 	goto_if 0, MauvilleCity_GameCorner_EventScript_156F5E
 	checkitemspace ITEM_TM13, 1
 	compare RESULT, 0
@@ -394,7 +394,7 @@ MauvilleCity_GameCorner_EventScript_156F96:: @ 8156F96
 	msgbox MauvilleCity_GameCorner_Text_181F3D, 5
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_157068
-	switch 0x4023
+	switch VAR_STARTER_MON
 	case 0, MauvilleCity_GameCorner_EventScript_156FDB
 	case 1, MauvilleCity_GameCorner_EventScript_157005
 	case 2, MauvilleCity_GameCorner_EventScript_15702F
@@ -462,8 +462,8 @@ MauvilleCity_GameCorner_EventScript_15707C:: @ 815707C
 MauvilleCity_GameCorner_EventScript_15709C:: @ 815709C
 	checkflag FLAG_RECEIVED_20_COINS
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1570CA
-	checkcoins 16385
-	compare 0x4001, 1
+	checkcoins VAR_TEMP_1
+	compare VAR_TEMP_1, 1
 	goto_if 4, MauvilleCity_GameCorner_EventScript_1570CA
 	setflag FLAG_RECEIVED_20_COINS
 	givecoins 20
@@ -524,7 +524,7 @@ MauvilleCity_GameCorner_EventScript_157135:: @ 8157135
 	checkitem ITEM_COIN_CASE, 1
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
-	setvar 0x8004, 0
+	setvar VAR_SPECIAL_4, 0
 	specialvar RESULT, sub_810F424
 	playslotmachine RESULT
 	releaseall
@@ -535,7 +535,7 @@ MauvilleCity_GameCorner_EventScript_157155:: @ 8157155
 	checkitem ITEM_COIN_CASE, 1
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
-	setvar 0x8004, 1
+	setvar VAR_SPECIAL_4, 1
 	specialvar RESULT, sub_810F424
 	playslotmachine RESULT
 	releaseall
@@ -546,7 +546,7 @@ MauvilleCity_GameCorner_EventScript_157175:: @ 8157175
 	checkitem ITEM_COIN_CASE, 1
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
-	setvar 0x8004, 2
+	setvar VAR_SPECIAL_4, 2
 	specialvar RESULT, sub_810F424
 	playslotmachine RESULT
 	releaseall
@@ -557,7 +557,7 @@ MauvilleCity_GameCorner_EventScript_157195:: @ 8157195
 	checkitem ITEM_COIN_CASE, 1
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
-	setvar 0x8004, 3
+	setvar VAR_SPECIAL_4, 3
 	specialvar RESULT, sub_810F424
 	playslotmachine RESULT
 	releaseall
@@ -568,7 +568,7 @@ MauvilleCity_GameCorner_EventScript_1571B5:: @ 81571B5
 	checkitem ITEM_COIN_CASE, 1
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
-	setvar 0x8004, 4
+	setvar VAR_SPECIAL_4, 4
 	specialvar RESULT, sub_810F424
 	playslotmachine RESULT
 	releaseall
@@ -579,7 +579,7 @@ MauvilleCity_GameCorner_EventScript_1571D5:: @ 81571D5
 	checkitem ITEM_COIN_CASE, 1
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
-	setvar 0x8004, 5
+	setvar VAR_SPECIAL_4, 5
 	specialvar RESULT, sub_810F424
 	playslotmachine RESULT
 	releaseall
@@ -590,7 +590,7 @@ MauvilleCity_GameCorner_EventScript_1571F5:: @ 81571F5
 	checkitem ITEM_COIN_CASE, 1
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
-	setvar 0x8004, 6
+	setvar VAR_SPECIAL_4, 6
 	specialvar RESULT, sub_810F424
 	playslotmachine RESULT
 	releaseall
@@ -601,7 +601,7 @@ MauvilleCity_GameCorner_EventScript_157215:: @ 8157215
 	checkitem ITEM_COIN_CASE, 1
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
-	setvar 0x8004, 7
+	setvar VAR_SPECIAL_4, 7
 	specialvar RESULT, sub_810F424
 	playslotmachine RESULT
 	releaseall
@@ -612,7 +612,7 @@ MauvilleCity_GameCorner_EventScript_157235:: @ 8157235
 	checkitem ITEM_COIN_CASE, 1
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
-	setvar 0x8004, 8
+	setvar VAR_SPECIAL_4, 8
 	specialvar RESULT, sub_810F424
 	playslotmachine RESULT
 	releaseall
@@ -623,7 +623,7 @@ MauvilleCity_GameCorner_EventScript_157255:: @ 8157255
 	checkitem ITEM_COIN_CASE, 1
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
-	setvar 0x8004, 9
+	setvar VAR_SPECIAL_4, 9
 	specialvar RESULT, sub_810F424
 	playslotmachine RESULT
 	releaseall
@@ -634,7 +634,7 @@ MauvilleCity_GameCorner_EventScript_157275:: @ 8157275
 	checkitem ITEM_COIN_CASE, 1
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
-	setvar 0x8004, 10
+	setvar VAR_SPECIAL_4, 10
 	specialvar RESULT, sub_810F424
 	playslotmachine RESULT
 	releaseall
@@ -645,7 +645,7 @@ MauvilleCity_GameCorner_EventScript_157295:: @ 8157295
 	checkitem ITEM_COIN_CASE, 1
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_1572B5
-	setvar 0x8004, 11
+	setvar VAR_SPECIAL_4, 11
 	specialvar RESULT, sub_810F424
 	playslotmachine RESULT
 	releaseall

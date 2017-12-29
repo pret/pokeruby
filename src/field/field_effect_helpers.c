@@ -31,50 +31,6 @@ static u32 ShowDisguiseFieldEffect(u8, u8, u8);
 
 const u8 UnusedEggString_8401E28[] = _("タマゴ");
 
-const u16 gUnknown_08401E2C[] = {
-    0x0c,
-    0x1c,
-    0x2c
-};
-
-const u8 gUnknown_08401E32[] = {
-    0,
-    1,
-    2,
-    3
-};
-
-const u16 gUnknown_08401E36[] = {
-     4,
-     4,
-     4,
-    16
-};
-
-void (*const gUnknown_08401E40[])(struct Sprite *) = {
-    sub_81275A0,
-    sub_81275C4
-};
-
-void (*const gUnknown_08401E48[])(struct Sprite *) = {
-    sub_8127DA0,
-    sub_8127DD0,
-    sub_8127E30
-};
-
-const u8 gUnknown_08401E54[] = {
-    0,
-    0,
-    1,
-    2,
-    3
-};
-
-const u16 gUnknown_08401E5A[] = {
-    3,
-    7
-};
-
 void SetUpReflection(struct MapObject *mapObject, struct Sprite *sprite, bool8 flag)
 {
     struct Sprite *newSprite;
@@ -107,9 +63,7 @@ static s16 sub_81268D0(struct MapObject *mapObject)
 static void npc_pal_op(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 whichElement;
-    u16 unk_8041e2c[ARRAY_COUNT(gUnknown_08401E2C)];
-
-    memcpy(unk_8041e2c, gUnknown_08401E2C, sizeof gUnknown_08401E2C);
+    u16 unk_8041e2c[] = {0x0c, 0x1c, 0x2c};
     sprite->data[2] = 0;
     if (!GetFieldObjectGraphicsInfo(mapObject->graphicsId)->disableReflectionPaletteLoad && ((whichElement = sub_8057450(mapObject->mapobj_unk_1F)) || (whichElement = sub_8057450(mapObject->mapobj_unk_1E))))
     {
@@ -236,6 +190,20 @@ void sub_8126BC4(u8 spriteId, u8 animNum, s16 x, s16 y)
         StartSpriteAnim(sprite, animNum - 1);
     }
 }
+
+const u8 gUnknown_08401E32[] = {
+    0,
+    1,
+    2,
+    3
+};
+
+const u16 gUnknown_08401E36[] = {
+    4,
+    4,
+    4,
+    16
+};
 
 u32 FldEff_Shadow(void)
 {
@@ -589,6 +557,11 @@ u32 FldEff_BikeTireTracks(void)
     return spriteId;
 }
 
+void (*const gUnknown_08401E40[])(struct Sprite *) = {
+    sub_81275A0,
+    sub_81275C4
+};
+
 void sub_8127584(struct Sprite *sprite)
 {
     gUnknown_08401E40[sprite->data[0]](sprite);
@@ -917,6 +890,12 @@ u32 FldEff_Ash(void)
     return 0;
 }
 
+void (*const gUnknown_08401E48[])(struct Sprite *) = {
+    sub_8127DA0,
+    sub_8127DD0,
+    sub_8127E30
+};
+
 void sub_8127D84(struct Sprite *sprite)
 {
     gUnknown_08401E48[sprite->data[0]](sprite);
@@ -1018,9 +997,7 @@ void sub_8127F7C(struct Sprite *sprite)
 
 static void sub_8127FD4(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    u8 unk_8041E54[ARRAY_COUNT(gUnknown_08401E54)];
-
-    memcpy(unk_8041E54, gUnknown_08401E54, sizeof gUnknown_08401E54);
+    u8 unk_8041E54[] = {0, 0, 1, 2, 3};
     if (sub_8127F64(sprite) == 0)
     {
         StartSpriteAnimIfDifferent(sprite, unk_8041E54[mapObject->placeholder18]);
@@ -1134,11 +1111,8 @@ __attribute__((naked)) static void sub_812800C(struct MapObject *mapObject, stru
 
 static void sub_81280A0(struct MapObject *mapObject, struct Sprite *linkedSprite, struct Sprite *sprite)
 {
-    u16 unk_8401E5A[ARRAY_COUNT(gUnknown_08401E5A)];
-    u8 v0;
-
-    memcpy(unk_8401E5A, gUnknown_08401E5A, sizeof gUnknown_08401E5A);
-    v0 = sub_8127F5C(sprite);
+    u16 unk_8401E5A[] = {3, 7};
+    u8 v0 = sub_8127F5C(sprite);
     if (v0 != 0)
     {
         if (((u16)(++ sprite->data[4]) & unk_8401E5A[sprite->data[5]]) == 0)

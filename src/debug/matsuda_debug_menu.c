@@ -18,9 +18,9 @@
 #include "ewram.h"
 
 extern u8 gUnknown_0203856C;
-extern u16 gUnknown_02038670[];
-extern u16 gUnknown_02038678[];
-extern u16 gUnknown_02038680[];
+extern s16 gUnknown_02038670[];
+extern s16 gUnknown_02038678[];
+extern s16 gUnknown_02038680[];
 extern u8 gContestFinalStandings[];
 extern u8 gUnknown_02038694;
 extern u8 gIsLinkContest;
@@ -922,211 +922,40 @@ void sub_80AAD44(struct Sprite *sprite, s8 var2)
     }
 }
 
-//Do this later
-/*
 void sub_80AAD84(u8 *string, u8 b, u8 c, u8 d)
 {
-    u32 r5;
-    u16 r7;
-    u8 r7_2;
-    //u32 sp44;
-    //u32 sp48;
-    u32 sp58;
+    u16 len;
+    u8 r7;
+    s32 i;
+    u8 sp0[32];
+    u8 sp20[32];
+    u8 str2[2];
 
-    gMain.state = 0;
+    DmaClear32(3, (void *)(VRAM + 0x18000 - (d + 1) * 256), 0x100);
 
-    r5 = d + 1;
-    //Could also be DmaClear32
-    DmaFill32(3, 0, (u8 *)VRAM + 0x18000 - r5 * 256, 0x100);
+    len = StringLength(string);
+    if (len > 8)
+        len = 8;
 
-    r7 = StringLength(string);
-    if (r7 > 8)
-        r7 = 8;
-    sp58 = d * 2;
+    for (i = 0; i < len; i++)
+    {
+        str2[0] = string[i];
+        str2[1] = EOS;
+        sub_80034D4(sp0, str2);
+        DmaCopy32Defvars(3, sp20, (void *)(VRAM + 0x18000 - (d + 1) * 256 + i * 32), sizeof(sp0));
+    }
 
-    //More stuff
+    r7 = 124 - d * 2;
 
-    r7_2 = 0x7C - sp58;
+    gMain.oamBuffer[r7] = gUnknown_083C9400;
+    gMain.oamBuffer[r7].tileNum = 1024 - (d + 1) * 8;
+    gMain.oamBuffer[r7].x = b;
+    gMain.oamBuffer[r7].y = c;
 
-}
-*/
-
-__attribute__((naked))
-void sub_80AAD84(u8 *string, u8 b, u8 c, u8 d)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x64\n\
-    mov r9, r0\n\
-    lsls r1, 24\n\
-    lsrs r1, 24\n\
-    str r1, [sp, 0x48]\n\
-    lsls r2, 24\n\
-    lsrs r2, 24\n\
-    str r2, [sp, 0x4C]\n\
-    lsls r3, 24\n\
-    lsrs r3, 24\n\
-    mov r10, r3\n\
-    mov r5, r10\n\
-    adds r5, 0x1\n\
-    lsls r1, r5, 8\n\
-    ldr r0, _080AAEC4 @ =0x06018000\n\
-    subs r1, r0, r1\n\
-    movs r0, 0\n\
-    str r0, [sp, 0x44]\n\
-    ldr r4, _080AAEC8 @ =0x040000d4\n\
-    add r0, sp, 0x44\n\
-    str r0, [r4]\n\
-    str r1, [r4, 0x4]\n\
-    ldr r0, _080AAECC @ =0x85000040\n\
-    str r0, [r4, 0x8]\n\
-    ldr r0, [r4, 0x8]\n\
-    mov r0, r9\n\
-    bl StringLength\n\
-    lsls r0, 16\n\
-    lsrs r7, r0, 16\n\
-    cmp r7, 0x8\n\
-    bls _080AADD0\n\
-    movs r7, 0x8\n\
-_080AADD0:\n\
-    movs r6, 0\n\
-    mov r8, r5\n\
-    mov r1, r10\n\
-    lsls r1, 1\n\
-    str r1, [sp, 0x58]\n\
-    ldr r2, [sp, 0x48]\n\
-    adds r2, 0x20\n\
-    str r2, [sp, 0x5C]\n\
-    cmp r6, r7\n\
-    bge _080AAE1E\n\
-    add r5, sp, 0x40\n\
-    add r0, sp, 0x20\n\
-    mov r10, r0\n\
-    ldr r2, _080AAEC4 @ =0x06018000\n\
-_080AADEC:\n\
-    mov r1, r9\n\
-    adds r0, r1, r6\n\
-    ldrb r0, [r0]\n\
-    strb r0, [r5]\n\
-    movs r0, 0xFF\n\
-    strb r0, [r5, 0x1]\n\
-    mov r0, sp\n\
-    adds r1, r5, 0\n\
-    str r2, [sp, 0x60]\n\
-    bl sub_80034D4\n\
-    mov r1, r8\n\
-    lsls r0, r1, 8\n\
-    ldr r2, [sp, 0x60]\n\
-    subs r0, r2, r0\n\
-    mov r1, r10\n\
-    str r1, [r4]\n\
-    str r0, [r4, 0x4]\n\
-    ldr r0, _080AAED0 @ =0x84000008\n\
-    str r0, [r4, 0x8]\n\
-    ldr r0, [r4, 0x8]\n\
-    adds r2, 0x20\n\
-    adds r6, 0x1\n\
-    cmp r6, r7\n\
-    blt _080AADEC\n\
-_080AAE1E:\n\
-    movs r1, 0x7C\n\
-    ldr r2, [sp, 0x58]\n\
-    subs r1, r2\n\
-    lsls r1, 24\n\
-    lsrs r7, r1, 24\n\
-    ldr r0, _080AAED4 @ =gMain\n\
-    mov r9, r0\n\
-    lsls r3, r7, 3\n\
-    add r3, r9\n\
-    ldr r0, _080AAED8 @ =gUnknown_083C9400\n\
-    ldr r1, [r0]\n\
-    ldr r2, [r0, 0x4]\n\
-    str r1, [sp, 0x50]\n\
-    str r2, [sp, 0x54]\n\
-    str r1, [r3, 0x3C]\n\
-    str r2, [r3, 0x40]\n\
-    mov r2, r8\n\
-    lsls r0, r2, 3\n\
-    movs r1, 0x80\n\
-    lsls r1, 3\n\
-    adds r2, r1, 0\n\
-    subs r2, r0\n\
-    adds r6, r3, 0\n\
-    adds r6, 0x40\n\
-    ldr r0, _080AAEDC @ =0x000003ff\n\
-    mov r8, r0\n\
-    mov r1, r8\n\
-    ands r2, r1\n\
-    ldrh r5, [r6]\n\
-    ldr r4, _080AAEE0 @ =0xfffffc00\n\
-    adds r0, r4, 0\n\
-    ands r0, r5\n\
-    orrs r0, r2\n\
-    strh r0, [r6]\n\
-    ldrh r5, [r3, 0x3E]\n\
-    ldr r2, _080AAEE4 @ =0xfffffe00\n\
-    adds r0, r2, 0\n\
-    ands r0, r5\n\
-    ldr r1, [sp, 0x48]\n\
-    orrs r0, r1\n\
-    strh r0, [r3, 0x3E]\n\
-    adds r3, 0x3C\n\
-    add r0, sp, 0x4C\n\
-    ldrb r0, [r0]\n\
-    strb r0, [r3]\n\
-    adds r1, r7, 0x1\n\
-    lsls r1, 3\n\
-    mov r0, r9\n\
-    adds r7, r1, r0\n\
-    ldr r0, [sp, 0x50]\n\
-    ldr r1, [sp, 0x54]\n\
-    str r0, [r7, 0x3C]\n\
-    str r1, [r7, 0x40]\n\
-    ldrh r0, [r6]\n\
-    lsls r0, 22\n\
-    lsrs r0, 22\n\
-    adds r0, 0x4\n\
-    adds r5, r7, 0\n\
-    adds r5, 0x40\n\
-    mov r1, r8\n\
-    ands r0, r1\n\
-    ldrh r3, [r5]\n\
-    ands r4, r3\n\
-    orrs r4, r0\n\
-    strh r4, [r5]\n\
-    ldrh r0, [r7, 0x3E]\n\
-    ands r2, r0\n\
-    ldr r0, [sp, 0x5C]\n\
-    orrs r2, r0\n\
-    strh r2, [r7, 0x3E]\n\
-    adds r1, r7, 0\n\
-    adds r1, 0x3C\n\
-    add r2, sp, 0x4C\n\
-    ldrb r2, [r2]\n\
-    strb r2, [r1]\n\
-    add sp, 0x64\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_080AAEC4: .4byte 0x06018000\n\
-_080AAEC8: .4byte 0x040000d4\n\
-_080AAECC: .4byte 0x85000040\n\
-_080AAED0: .4byte 0x84000008\n\
-_080AAED4: .4byte gMain\n\
-_080AAED8: .4byte gUnknown_083C9400\n\
-_080AAEDC: .4byte 0x000003ff\n\
-_080AAEE0: .4byte 0xfffffc00\n\
-_080AAEE4: .4byte 0xfffffe00\n\
-    .syntax divided\n");
+    gMain.oamBuffer[r7 + 1] = gUnknown_083C9400;
+    gMain.oamBuffer[r7 + 1].tileNum = gMain.oamBuffer[r7].tileNum + 4;
+    gMain.oamBuffer[r7 + 1].x = b + 32;
+    gMain.oamBuffer[r7 + 1].y = c;
 }
 
 void unref_sub_80AAEE8(s32 a, u8 b, u8 c, u8 d)

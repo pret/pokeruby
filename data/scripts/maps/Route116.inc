@@ -130,7 +130,7 @@ Route116_EventScript_150B5D:: @ 8150B5D
 	lock
 	faceplayer
 	msgbox Route116_Text_17032A, 4
-	setvar 0x406f, 2
+	setvar VAR_ROUTE116_STATE, 2
 	release
 	end
 
@@ -140,7 +140,7 @@ Route116_EventScript_150B6E:: @ 8150B6E
 	applymovement 255, Route116_Movement_1A083F
 	waitmovement 0
 	msgbox Route116_Text_17032A, 4
-	setvar 0x406f, 2
+	setvar VAR_ROUTE116_STATE, 2
 	releaseall
 	end
 
@@ -150,7 +150,7 @@ Route116_EventScript_150B8F:: @ 8150B8F
 	checkitem ITEM_BLACK_GLASSES, 1
 	compare RESULT, 1
 	goto_if_eq Route116_EventScript_150BCA
-	specialvar RESULT, sub_810F828
+	specialvar RESULT, FoundBlackGlasses
 	compare RESULT, 1
 	goto_if_eq Route116_EventScript_150BBB
 	msgbox Route116_Text_1708EE, 4
@@ -166,7 +166,7 @@ Route116_EventScript_150BBB:: @ 8150BBB
 Route116_EventScript_150BCA:: @ 8150BCA
 	msgbox Route116_Text_1708EE, 4
 	msgbox Route116_Text_170921, 4
-	specialvar RESULT, sub_810F828
+	specialvar RESULT, FoundBlackGlasses
 	compare RESULT, 1
 	goto_if_eq Route116_EventScript_150BF4
 	msgbox Route116_Text_170A03, 4

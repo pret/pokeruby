@@ -28,20 +28,20 @@ Route116_MapWarps:: @ 8383380
 	warp_def 65, 10, 0, 2, MAP_RUSTURF_TUNNEL
 
 Route116_MapCoordEvents:: @ 8383398
-	coord_event 47, 9, 3, 0, 0x406f, 1, 0, Route116_EventScript_150B6E
+	coord_event 47, 9, 3, 0, VAR_ROUTE116_STATE, 1, 0, Route116_EventScript_150B6E
 
 Route116_MapBGEvents:: @ 83833A8
 	bg_event 5, 10, 0, 0, 0, Route116_EventScript_150B30
 	bg_event 48, 9, 0, 0, 0, Route116_EventScript_150B39
 	bg_event 40, 9, 0, 0, 0, Route116_EventScript_150B42
-	bg_event 71, 4, 0, 8, 0, ITEM_FLUFFY_TAIL, 0, 0
-	bg_event 79, 11, 0, 8, 0, 91, 0, 0
+	bg_secret_base_event 71, 4, 0, SECRET_BASE_BLUE_CAVE1_1
+	bg_secret_base_event 79, 11, 0, SECRET_BASE_BLUE_CAVE2_1
 	bg_event 16, 12, 0, 0, 0, Route116_EventScript_150B4B
 	bg_event 29, 10, 0, 0, 0, Route116_EventScript_150B54
-	bg_event 56, 6, 0, 8, 0, 102, 0, 0
-	bg_event 55, 15, 0, 8, 0, 112, 0, 0
-	bg_event 22, 9, 3, 7, 0, ITEM_SUPER_POTION, 45, 0
-	bg_event 70, 13, 3, 7, 0, ITEM_BLACK_GLASSES, 96, 0
+	bg_secret_base_event 56, 6, 0, SECRET_BASE_BLUE_CAVE3_2
+	bg_secret_base_event 55, 15, 0, SECRET_BASE_BLUE_CAVE4_2
+	bg_hidden_item_event 22, 9, 3, ITEM_SUPER_POTION, FLAG_HIDDEN_ITEM_2D
+	bg_hidden_item_event 70, 13, 3, ITEM_BLACK_GLASSES, FLAG_HIDDEN_ITEM_BLACK_GLASSES
 
 Route116_MapEvents:: @ 838342C
 	map_events Route116_MapObjects, Route116_MapWarps, Route116_MapCoordEvents, Route116_MapBGEvents

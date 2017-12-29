@@ -4,7 +4,7 @@ Route104_MapScripts:: @ 814EE8C
 	.byte 0
 
 Route104_MapScript2_14EE97:: @ 814EE97
-	map_script_2 0x408e, 1, Route104_EventScript_14EEA1
+	map_script_2 VAR_BOARD_BRINEY_BOAT_ROUTE104_STATE, 1, Route104_EventScript_14EEA1
 	.2byte 0
 
 Route104_EventScript_14EEA1:: @ 814EEA1
@@ -153,11 +153,11 @@ Route104_EventScript_14EFD5:: @ 814EFD5
 	call Route104_EventScript_1A02EF
 	setflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE104
 	hideobjectat 7, MAP_ROUTE104
-	copyvar 0x4096, 0x8008
+	copyvar VAR_BRINEY_LOCATION, VAR_SPECIAL_8
 	resetobjectpriority 255, MAP_ROUTE104
 	resetobjectpriority 2, MAP_DEWFORD_TOWN
 	moveobjectoffscreen 2
-	setvar 0x408e, 0
+	setvar VAR_BOARD_BRINEY_BOAT_ROUTE104_STATE, 0
 	checkflag FLAG_DELIVERED_STEVEN_LETTER
 	goto_if 0, Route104_EventScript_14F08B
 	checkflag FLAG_DELIVERED_STEVEN_LETTER

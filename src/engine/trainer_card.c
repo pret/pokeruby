@@ -287,10 +287,7 @@ void sub_8093324(void)
 
     if (ewram0_2.var_1)
     {
-        struct TrainerCard(*trainerCards)[4] = &gTrainerCards;
-        s16 var = task->data[TD_1];
-        struct TrainerCard *dest = &(*trainerCards)[var];
-        memcpy(&ewram0_2.var_64, dest, sizeof(struct TrainerCard));
+        ewram0_2.var_64 = gTrainerCards[task->data[TD_1]];
     }
     else
     {

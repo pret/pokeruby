@@ -26,12 +26,12 @@ Route109_MapWarps:: @ 8381CDC
 Route109_MapBGEvents:: @ 8381CE4
 	bg_event 15, 5, 0, 0, 0, Route109_EventScript_14F79B
 	bg_event 29, 10, 3, 0, 0, Route109_EventScript_14F7A4
-	bg_event 16, 23, 3, 7, 0, ITEM_REVIVE, 50, 0
-	bg_event 33, 5, 3, 7, 0, ITEM_HEART_SCALE, 52, 0
-	bg_event 9, 10, 3, 7, 0, ITEM_GREAT_BALL, 51, 0
-	bg_event 28, 20, 3, 7, 0, ITEM_ETHER, 64, 0
-	bg_event 13, 16, 3, 7, 0, ITEM_HEART_SCALE, 90, 0
-	bg_event 8, 42, 3, 7, 0, ITEM_HEART_SCALE, 91, 0
+	bg_hidden_item_event 16, 23, 3, ITEM_REVIVE, FLAG_HIDDEN_ITEM_32
+	bg_hidden_item_event 33, 5, 3, ITEM_HEART_SCALE, FLAG_HIDDEN_ITEM_34
+	bg_hidden_item_event 9, 10, 3, ITEM_GREAT_BALL, FLAG_HIDDEN_ITEM_33
+	bg_hidden_item_event 28, 20, 3, ITEM_ETHER, FLAG_HIDDEN_ITEM_40
+	bg_hidden_item_event 13, 16, 3, ITEM_HEART_SCALE, FLAG_HIDDEN_ITEM_5A
+	bg_hidden_item_event 8, 42, 3, ITEM_HEART_SCALE, FLAG_HIDDEN_ITEM_5B
 
 Route109_MapEvents:: @ 8381D44
 	map_events Route109_MapObjects, Route109_MapWarps, 0x0, Route109_MapBGEvents

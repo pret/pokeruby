@@ -220,6 +220,26 @@
 #define MAP_OBJ_GFX_LINK_BRENDAN 216
 #define MAP_OBJ_GFX_LINK_MAY 217
 
+// These are dynamic object gfx ids.
+// They correspond with the values of the VAR_OBJ_GFX_ID_X vars.
+// More info about them in include/constants/vars.h
+#define MAP_OBJ_GFX_VAR_0 240
+#define MAP_OBJ_GFX_VAR_1 241
+#define MAP_OBJ_GFX_VAR_2 242
+#define MAP_OBJ_GFX_VAR_3 243
+#define MAP_OBJ_GFX_VAR_4 244
+#define MAP_OBJ_GFX_VAR_5 245
+#define MAP_OBJ_GFX_VAR_6 246
+#define MAP_OBJ_GFX_VAR_7 247
+#define MAP_OBJ_GFX_VAR_8 248
+#define MAP_OBJ_GFX_VAR_9 249
+#define MAP_OBJ_GFX_VAR_A 250
+#define MAP_OBJ_GFX_VAR_B 251
+#define MAP_OBJ_GFX_VAR_C 252
+#define MAP_OBJ_GFX_VAR_D 253
+#define MAP_OBJ_GFX_VAR_E 254
+#define MAP_OBJ_GFX_VAR_F 255
+
 #define SHADOW_SIZE_S 0
 #define SHADOW_SIZE_M 1
 #define SHADOW_SIZE_L 2

@@ -9,9 +9,9 @@ Route106_MapWarps:: @ 8381984
 	warp_def 48, 16, 0, 0, MAP_GRANITE_CAVE_1F
 
 Route106_MapBGEvents:: @ 838198C
-	bg_event 41, 11, 3, 7, 0, ITEM_POKE_BALL, 63, 0
-	bg_event 53, 12, 0, 7, 0, ITEM_STARDUST, 46, 0
-	bg_event 68, 15, 3, 7, 0, ITEM_HEART_SCALE, 47, 0
+	bg_hidden_item_event 41, 11, 3, ITEM_POKE_BALL, FLAG_HIDDEN_ITEM_3F
+	bg_hidden_item_event 53, 12, 0, ITEM_STARDUST, FLAG_HIDDEN_ITEM_2E
+	bg_hidden_item_event 68, 15, 3, ITEM_HEART_SCALE, FLAG_HIDDEN_ITEM_2F
 	bg_event 59, 13, 3, 0, 0, Route106_EventScript_14F32F
 
 Route106_MapEvents:: @ 83819BC

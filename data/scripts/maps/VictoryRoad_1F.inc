@@ -44,7 +44,7 @@ VictoryRoad_1F_EventScript_15DED3:: @ 815DED3
 	clearflag FLAG_HIDE_WALLY_BATTLE_VICTORY_ROAD
 	moveobjectoffscreen 4
 	setflag FLAG_DEFEATED_WALLY_VICTORY_ROAD
-	setvar 0x40c3, 1
+	setvar VAR_VICTORY_ROAD_1F_STATE, 1
 	releaseall
 	end
 

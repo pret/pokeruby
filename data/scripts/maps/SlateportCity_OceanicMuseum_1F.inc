@@ -4,11 +4,11 @@ SlateportCity_OceanicMuseum_1F_MapScripts:: @ 8155ACA
 
 SlateportCity_OceanicMuseum_1F_MapScript1_155AD0:: @ 8155AD0
 	.ifdef SAPPHIRE
-	setvar 0x4010, MAP_OBJ_GFX_AQUA_MEMBER_F
-	setvar 0x4011, MAP_OBJ_GFX_AQUA_MEMBER_M
+	setvar VAR_OBJ_GFX_ID_0, MAP_OBJ_GFX_AQUA_MEMBER_F
+	setvar VAR_OBJ_GFX_ID_1, MAP_OBJ_GFX_AQUA_MEMBER_M
 	.else
-	setvar 0x4010, MAP_OBJ_GFX_MAGMA_MEMBER_F
-	setvar 0x4011, MAP_OBJ_GFX_MAGMA_MEMBER_M
+	setvar VAR_OBJ_GFX_ID_0, MAP_OBJ_GFX_MAGMA_MEMBER_F
+	setvar VAR_OBJ_GFX_ID_1, MAP_OBJ_GFX_MAGMA_MEMBER_M
 	.endif
 	end
 
@@ -51,7 +51,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_155B2D:: @ 8155B2D
 	updatemoneybox 0, 0
 	nop
 	msgbox SlateportCity_OceanicMuseum_1F_Text_17E1DE, 4
-	setvar 0x40aa, 1
+	setvar VAR_SLATEPORT_MUSEUM_1F_STATE, 1
 	hidemoneybox 0, 0
 	releaseall
 	end
@@ -69,7 +69,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_155B5A:: @ 8155B5A
 
 SlateportCity_OceanicMuseum_1F_EventScript_155B7B:: @ 8155B7B
 	msgbox SlateportCity_OceanicMuseum_1F_Text_17E22D, 4
-	setvar 0x40aa, 1
+	setvar VAR_SLATEPORT_MUSEUM_1F_STATE, 1
 	hidemoneybox 0, 0
 	releaseall
 	end

@@ -1167,13 +1167,13 @@ static void sub_809E5C4(void)
     struct Pokemon *pkmn = &party[pssData.monIndex];
     u8 moveIndex1 = pssData.selectedMoveIndex;
     u8 moveIndex2 = pssData.switchMoveIndex;
-    
+
     u16 move1 = GetMonData(pkmn, MON_DATA_MOVE1 + moveIndex1);
     u16 move2 = GetMonData(pkmn, MON_DATA_MOVE1 + moveIndex2);
     u8 move1pp = GetMonData(pkmn, MON_DATA_PP1 + moveIndex1);
     u8 move2pp = GetMonData(pkmn, MON_DATA_PP1 + moveIndex2);
     u8 ppBonuses = GetMonData(pkmn, MON_DATA_PP_BONUSES);
-    
+
     // Calculate PP bonuses
     u8 r9 = gUnknown_08208238[moveIndex1];
     u8 r2 = (ppBonuses & r9) >> (moveIndex1 * 2);
@@ -1182,7 +1182,7 @@ static void sub_809E5C4(void)
     ppBonuses &= ~r9;
     ppBonuses &= ~r3;
     ppBonuses |= (r2 << (moveIndex2 * 2)) + (r1 << (moveIndex1 * 2));
-    
+
     // Swap the moves
     SetMonData(pkmn, MON_DATA_MOVE1 + moveIndex1, &move2);
     SetMonData(pkmn, MON_DATA_MOVE1 + moveIndex2, &move1);
@@ -1197,13 +1197,13 @@ static void sub_809E6D8(void)
     struct BoxPokemon *pkmn = &boxMons[pssData.monIndex];
     u8 moveIndex1 = pssData.selectedMoveIndex;
     u8 moveIndex2 = pssData.switchMoveIndex;
-    
+
     u16 move1 = GetBoxMonData(pkmn, MON_DATA_MOVE1 + moveIndex1);
     u16 move2 = GetBoxMonData(pkmn, MON_DATA_MOVE1 + moveIndex2);
     u8 move1pp = GetBoxMonData(pkmn, MON_DATA_PP1 + moveIndex1);
     u8 move2pp = GetBoxMonData(pkmn, MON_DATA_PP1 + moveIndex2);
     u8 ppBonuses = GetBoxMonData(pkmn, MON_DATA_PP_BONUSES);
-    
+
     // Calculate PP bonuses
     u8 r9 = gUnknown_08208238[moveIndex1];
     u8 r2 = (ppBonuses & r9) >> (moveIndex1 * 2);
@@ -1212,7 +1212,7 @@ static void sub_809E6D8(void)
     ppBonuses &= ~r9;
     ppBonuses &= ~r3;
     ppBonuses |= (r2 << (moveIndex2 * 2)) + (r1 << (moveIndex1 * 2));
-    
+
     // Swap the moves
     SetBoxMonData(pkmn, MON_DATA_MOVE1 + moveIndex1, &move2);
     SetBoxMonData(pkmn, MON_DATA_MOVE1 + moveIndex2, &move1);
@@ -2078,7 +2078,7 @@ s8 sub_809F344(u8 partyIndex)
 {
     while (1)
     {
-        partyIndex++;    
+        partyIndex++;
         if (partyIndex == PARTY_SIZE)
         {
             return -1;
@@ -2100,7 +2100,7 @@ s8 sub_809F388(u8 partyIndex)
             return -1;
         }
 
-        partyIndex--;    
+        partyIndex--;
         if (sub_809F310(&gPlayerParty[sDoubleBattlePartyOrder[partyIndex]]) == TRUE)
         {
             return sDoubleBattlePartyOrder[partyIndex];
@@ -2332,7 +2332,7 @@ static bool8 sub_809F7D0(u8 taskId)
     u16 move;
 
     sub_809F678(&mon);
-    move = GetMonMove(&mon, pssData.selectedMoveIndex);    
+    move = GetMonMove(&mon, pssData.selectedMoveIndex);
     if (IsHMMove(move) == TRUE && pssData.mode != PSS_MODE_UNKNOWN)
     {
         return FALSE;
@@ -2341,17 +2341,13 @@ static bool8 sub_809F7D0(u8 taskId)
     return TRUE;
 }
 
-#ifdef NONMATCHING // The two "pssData.selectedMoveIndex = taskData[15];" lines have small register differences.
 void sub_809F814(u8 taskId)
 {
-    u16 var1;
-
     s16 *taskData = gTasks[taskId].data;
 
-    var1 = taskData[14];
     if (taskData[14] < 4)
     {
-        taskData[14] = var1 + 1;
+        taskData[14]++;
     }
     else if (gMain.newKeys & DPAD_UP)
     {
@@ -2359,7 +2355,7 @@ void sub_809F814(u8 taskId)
         taskData[0] = 4;
         taskData[13] = 1;
         pssData.selectedMoveIndex = taskData[15];
-        sub_809E8F0(taskId, -1);
+        sub_809E8F0(taskId, -1, &pssData.selectedMoveIndex);
     }
     else if (gMain.newKeys & DPAD_DOWN)
     {
@@ -2367,7 +2363,7 @@ void sub_809F814(u8 taskId)
         taskData[0] = 4;
         taskData[13] = 1;
         pssData.selectedMoveIndex = taskData[15];
-        sub_809E8F0(taskId, 1);
+        sub_809E8F0(taskId, 1, &pssData.selectedMoveIndex);
     }
     else if ((gMain.newKeys & DPAD_LEFT) || sub_80F9284() == 1)
     {
@@ -2409,229 +2405,6 @@ void sub_809F814(u8 taskId)
         gTasks[taskId].func = sub_809E260;
     }
 }
-
-#else
-__attribute__((naked))
-void sub_809F814(u8 taskId)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r8\n\
-    push {r7}\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    lsls r0, r5, 2\n\
-    adds r0, r5\n\
-    lsls r6, r0, 3\n\
-    ldr r0, _0809F83C @ =gTasks + 0x8\n\
-    mov r8, r0\n\
-    adds r4, r6, r0\n\
-    ldrh r1, [r4, 0x1C]\n\
-    movs r2, 0x1C\n\
-    ldrsh r0, [r4, r2]\n\
-    cmp r0, 0x3\n\
-    bgt _0809F840\n\
-    adds r0, r1, 0x1\n\
-    strh r0, [r4, 0x1C]\n\
-    b _0809F9C0\n\
-    .align 2, 0\n\
-_0809F83C: .4byte gTasks + 0x8\n\
-_0809F840:\n\
-    ldr r7, _0809F874 @ =gMain\n\
-    ldrh r1, [r7, 0x2E]\n\
-    movs r0, 0x40\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _0809F880\n\
-    mov r0, r8\n\
-    subs r0, 0x8\n\
-    adds r0, r6, r0\n\
-    ldr r1, _0809F878 @ =sub_809E260\n\
-    str r1, [r0]\n\
-    movs r0, 0x4\n\
-    strh r0, [r4]\n\
-    movs r0, 0x1\n\
-    strh r0, [r4, 0x1A]\n\
-    ldr r2, _0809F87C @ =gSharedMem + 0x18000\n\
-    ldrh r0, [r4, 0x1E]\n\
-    adds r2, 0x79\n\
-    strb r0, [r2]\n\
-    movs r1, 0x1\n\
-    negs r1, r1\n\
-    adds r0, r5, 0\n\
-    bl sub_809E8F0\n\
-    b _0809F9C0\n\
-    .align 2, 0\n\
-_0809F874: .4byte gMain\n\
-_0809F878: .4byte sub_809E260\n\
-_0809F87C: .4byte gSharedMem + 0x18000\n\
-_0809F880:\n\
-    movs r0, 0x80\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _0809F8B4\n\
-    mov r0, r8\n\
-    subs r0, 0x8\n\
-    adds r0, r6, r0\n\
-    ldr r1, _0809F8AC @ =sub_809E260\n\
-    str r1, [r0]\n\
-    movs r0, 0x4\n\
-    strh r0, [r4]\n\
-    movs r0, 0x1\n\
-    strh r0, [r4, 0x1A]\n\
-    ldr r2, _0809F8B0 @ =gSharedMem + 0x18000\n\
-    ldrh r0, [r4, 0x1E]\n\
-    adds r2, 0x79\n\
-    strb r0, [r2]\n\
-    adds r0, r5, 0\n\
-    movs r1, 0x1\n\
-    bl sub_809E8F0\n\
-    b _0809F9C0\n\
-    .align 2, 0\n\
-_0809F8AC: .4byte sub_809E260\n\
-_0809F8B0: .4byte gSharedMem + 0x18000\n\
-_0809F8B4:\n\
-    movs r0, 0x20\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _0809F8C8\n\
-    bl sub_80F9284\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x1\n\
-    bne _0809F918\n\
-_0809F8C8:\n\
-    ldr r1, _0809F90C @ =gSharedMem + 0x18000\n\
-    ldrb r0, [r1, 0xB]\n\
-    cmp r0, 0x2\n\
-    beq _0809F9C0\n\
-    cmp r0, 0x3\n\
-    bne _0809F8F4\n\
-    adds r0, r1, 0\n\
-    adds r0, 0x79\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x4\n\
-    bne _0809F8E8\n\
-    adds r0, r1, 0\n\
-    adds r0, 0x7C\n\
-    ldrh r0, [r0]\n\
-    cmp r0, 0\n\
-    beq _0809F8F4\n\
-_0809F8E8:\n\
-    movs r0, 0\n\
-    movs r1, 0xE\n\
-    movs r2, 0x9\n\
-    movs r3, 0x12\n\
-    bl MenuZeroFillWindowRect\n\
-_0809F8F4:\n\
-    ldr r1, _0809F910 @ =gTasks\n\
-    lsls r0, r5, 2\n\
-    adds r0, r5\n\
-    lsls r0, 3\n\
-    adds r0, r1\n\
-    ldr r1, _0809F914 @ =sub_809E260\n\
-    str r1, [r0]\n\
-    movs r1, 0x1\n\
-    negs r1, r1\n\
-    adds r0, r5, 0\n\
-    b _0809F972\n\
-    .align 2, 0\n\
-_0809F90C: .4byte gSharedMem + 0x18000\n\
-_0809F910: .4byte gTasks\n\
-_0809F914: .4byte sub_809E260\n\
-_0809F918:\n\
-    ldrh r1, [r7, 0x2E]\n\
-    movs r0, 0x10\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _0809F92E\n\
-    bl sub_80F9284\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x2\n\
-    bne _0809F994\n\
-_0809F92E:\n\
-    ldr r1, _0809F988 @ =gSharedMem + 0x18000\n\
-    adds r2, r1, 0\n\
-    adds r2, 0x76\n\
-    ldrb r0, [r1, 0xB]\n\
-    ldrb r2, [r2]\n\
-    cmp r0, r2\n\
-    beq _0809F9C0\n\
-    cmp r0, 0x2\n\
-    bne _0809F960\n\
-    adds r0, r1, 0\n\
-    adds r0, 0x79\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x4\n\
-    bne _0809F954\n\
-    adds r0, r1, 0\n\
-    adds r0, 0x7C\n\
-    ldrh r0, [r0]\n\
-    cmp r0, 0\n\
-    beq _0809F960\n\
-_0809F954:\n\
-    movs r0, 0\n\
-    movs r1, 0xE\n\
-    movs r2, 0x9\n\
-    movs r3, 0x12\n\
-    bl MenuZeroFillWindowRect\n\
-_0809F960:\n\
-    ldr r1, _0809F98C @ =gTasks\n\
-    lsls r0, r5, 2\n\
-    adds r0, r5\n\
-    lsls r0, 3\n\
-    adds r0, r1\n\
-    ldr r1, _0809F990 @ =sub_809E260\n\
-    str r1, [r0]\n\
-    adds r0, r5, 0\n\
-    movs r1, 0x1\n\
-_0809F972:\n\
-    bl SummaryScreenHandleLeftRightInput\n\
-    ldrb r1, [r4, 0x1E]\n\
-    movs r0, 0x1\n\
-    bl sub_80A1488\n\
-    ldrb r1, [r4, 0x1E]\n\
-    movs r0, 0x1\n\
-    bl sub_80A1654\n\
-    b _0809F9C0\n\
-    .align 2, 0\n\
-_0809F988: .4byte gSharedMem + 0x18000\n\
-_0809F98C: .4byte gTasks\n\
-_0809F990: .4byte sub_809E260\n\
-_0809F994:\n\
-    ldrh r1, [r7, 0x2E]\n\
-    movs r0, 0x1\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _0809F9A6\n\
-    movs r0, 0x2\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _0809F9C0\n\
-_0809F9A6:\n\
-    ldrb r1, [r4, 0x1E]\n\
-    movs r0, 0x2\n\
-    bl sub_80A1488\n\
-    ldrb r1, [r4, 0x1E]\n\
-    movs r0, 0x2\n\
-    bl sub_80A1654\n\
-    mov r0, r8\n\
-    subs r0, 0x8\n\
-    adds r0, r6, r0\n\
-    ldr r1, _0809F9CC @ =sub_809E260\n\
-    str r1, [r0]\n\
-_0809F9C0:\n\
-    pop {r3}\n\
-    mov r8, r3\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_0809F9CC: .4byte sub_809E260\n\
-    .syntax divided\n");
-}
-#endif // NONMATCHING
 
 static void sub_809F9D0(u8 taskId, u8 b)
 {
@@ -3012,7 +2785,7 @@ static void sub_80A015C(struct Pokemon *mon)
 
             sub_80A1FF8(gMoveNames[move], 13, 15, (2 * i) + 4);
             GetStringCenterAlignXOffset(1, 24, (2 * i) + 4);
-            
+
             ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
             maxPP = CalculatePPWithBonus(move, ppBonuses, i);
 

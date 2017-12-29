@@ -4,7 +4,7 @@ MtChimney_MapScripts:: @ 815CF7C
 	.byte 0
 
 MtChimney_MapScript1_15CF87:: @ 815CF87
-	setvar 0x40bd, 1
+	setvar VAR_JAGGED_PASS_ASH_WEATHER, 1
 	call MtChimney_EventScript_1A0196
 	end
 
