@@ -2023,6 +2023,55 @@ void sub_8103910(void)
     eSlotMachine->unk2E[2] = sp0;
 }
 
+void sub_8103A78(void)
+{
+    u8 r6;
+    u8 r5;
+    u8 r4;
+    s16 r8;
+    s16 i;
+
+    sub_8103910();
+    if (eSlotMachine->unk34[1] != 0 && eSlotMachine->unk34[0] != eSlotMachine->unk34[1] && eSlotMachine->unk04 & 0x80)
+    {
+        r6 = sub_8102BF8(0, eSlotMachine->unk34[0] - eSlotMachine->unk2E[0]);
+        r5 = sub_8102BF8(1, eSlotMachine->unk34[1] - eSlotMachine->unk2E[1]);
+        if (sub_8103764(r6, r5))
+        {
+            r8 = 1;
+            if (eSlotMachine->unk34[0] == 1)
+                r8 = 3;
+            for (i = 0; i < 5; i++)
+            {
+                r4 = sub_8102BF8(2, r8 - (eSlotMachine->unk2E[2] + i));
+                if (r6 == r4)
+                {
+                    eSlotMachine->unk2E[2] += i;
+                    break;
+                }
+            }
+        }
+    }
+    while (1)
+    {
+        r6 = sub_8102BF8(0, 1 - eSlotMachine->unk2E[0]);
+        r5 = sub_8102BF8(1, 2 - eSlotMachine->unk2E[1]);
+        r4 = sub_8102BF8(2, 3 - eSlotMachine->unk2E[2]);
+        if (sub_81037BC(r6, r5, r4) || (sub_810378C(r6, r5, r4) && eSlotMachine->unk04 & 0x80))
+            break;
+        eSlotMachine->unk2E[2]++;
+    }
+    while (1)
+    {
+        r6 = sub_8102BF8(0, 3 - eSlotMachine->unk2E[0]);
+        r5 = sub_8102BF8(1, 2 - eSlotMachine->unk2E[1]);
+        r4 = sub_8102BF8(2, 1 - eSlotMachine->unk2E[2]);
+        if (sub_81037BC(r6, r5, r4) || (sub_810378C(r6, r5, r4) && eSlotMachine->unk04 & 0x80))
+            break;
+        eSlotMachine->unk2E[2]++;
+    }
+}
+
 asm(".section .text_a");
 
 static void LoadSlotMachineWheelOverlay(void);
