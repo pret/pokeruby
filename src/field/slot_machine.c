@@ -169,6 +169,7 @@ void sub_8104940(struct Task *task);
 void sub_81049C8(struct Task *task);
 void sub_81049F8(struct Task *task);
 void sub_8104A40(s16 a0, s16 a1);
+void sub_8104A88(s16 a0);
 void sub_8104AB8(u8 a0);
 bool8 sub_8104AEC(void);
 void sub_8104C5C(void);
@@ -178,14 +179,28 @@ void sub_8104EA8(void);
 void sub_8104F8C(void);
 void sub_81050C4(void);
 void sub_8105100(void);
+void sub_810514C(void);
 void sub_81051C0(void);
+void sub_8105284(void);
 void sub_81052EC(void);
 void sub_81053A0(void);
 void sub_810545C(void);
+void sub_81054B8(void);
+void sub_8105524(void);
+void sub_8105554(void);
 void sub_8105578(void);
 void sub_8105688(s16 a0);
+void sub_81056C0(void);
 void sub_81056F0(void);
 void sub_81057E8(s16 a0);
+void sub_8105804(void);
+void sub_8105854(void);
+void sub_81058A0(void);
+void sub_81058C4(void);
+void sub_81059B8(void);
+void sub_81059E8(void);
+bool8 sub_8105ACC(void);
+void sub_8105AEC(void);
 u8 sub_8105B1C(s16 a0, s16 a1);
 void sub_8105B88(u8 a0);
 void sub_81063C0(void);
@@ -2665,6 +2680,186 @@ void sub_81045CC(struct Task *task)
         }
         task->data[6]++;
     }
+}
+
+void sub_810463C(struct Task *task)
+{
+    s16 r5 = eSlotMachine->unk14 % 20;
+    if (r5)
+    {
+        r5 = sub_8102D5C(task->data[4] >> 8);
+        task->data[4] = (u8)task->data[4] + 0x40;
+    }
+    else if (sub_8102C48(1) != eSlotMachine->unk05)
+    {
+        sub_8102D28(task->data[4] >> 8);
+        r5 = eSlotMachine->unk14 % 20;
+        task->data[4] = (u8)task->data[4] + 0x40;
+    }
+    if (r5 == 0 && sub_8102C48(1) == eSlotMachine->unk05)
+    {
+        task->data[4] = 0;
+        task->data[0]++;
+    }
+}
+
+void sub_81046C0(struct Task *task)
+{
+    if (++task->data[4] >= 60)
+    {
+        StopMapMusic();
+        sub_81056C0();
+        sub_8105804();
+        task->data[0]++;
+        if(eSlotMachine->unk05 == 0)
+        {
+            task->data[4] = 0xa0;
+            StartSpriteAnimIfDifferent(gSprites + eSlotMachine->unk3F, 5);
+            PlayFanfare(BGM_ME_ZANNEN);
+        }
+        else
+        {
+            task->data[4] = 0xc0;
+            StartSpriteAnimIfDifferent(gSprites + eSlotMachine->unk3F, 4);
+            gSprites[eSlotMachine->unk3F].animCmdIndex = 0;
+            if (eSlotMachine->unk02)
+            {
+                sub_8104098();
+                eSlotMachine->unk02 = 0;
+            }
+            PlayFanfare(BGM_ME_B_SMALL);
+        }
+    }
+}
+
+void sub_8104764(struct Task *task)
+{
+    if ((task->data[4] == 0 || --task->data[4] == 0) && !sub_81040C8())
+    {
+        task->data[0]++;
+    }
+}
+
+void sub_8104794(struct Task *task)
+{
+    s16 r4;
+    gSpriteCoordOffsetX -= 8;
+    task->data[1] += 8;
+    task->data[3] += 8;
+    r4 = ((task->data[1] - 8) & 0xff) >> 3;
+    REG_BG1HOFS = task->data[1] & 0x1ff;
+    if (task->data[3] >> 3 <= 25)
+    {
+        sub_8104A88(r4);
+    }
+    else
+    {
+        task->data[0]++;
+    }
+}
+
+void sub_81047EC(struct Task *task)
+{
+    eSlotMachine->unk0B = 0;
+    eSlotMachine->unk0A = eSlotMachine->unk05;
+    gSpriteCoordOffsetX = 0;
+    REG_BG1HOFS = 0;
+    eSlotMachine->unk1A = 8;
+    sub_810514C();
+    sub_81054B8();
+    sub_8105524();
+    PlayNewMapMusic(eSlotMachine->backupMapMusic);
+    if (eSlotMachine->unk0A == 0)
+    {
+        DestroyTask(FindTaskIdByFunc(sub_810434C));
+    }
+    else
+    {
+        sub_8104CAC(4);
+        task->data[1] = dp15_jump_random_unknown();
+        task->data[2] = 0;
+        task->data[3] = 0;
+        task->data[0]++;
+    }
+}
+
+void sub_8104860(struct Task *task)
+{
+    if (eSlotMachine->unk1A == task->data[1])
+    {
+        task->data[0]++;
+    }
+    else if (eSlotMachine->unk1C[0] % 24 == 0 && (++task->data[2]& 0x07) == 0)
+    {
+        eSlotMachine->unk1A >>= 1;
+    }
+}
+
+void sub_81048A8(struct Task *task)
+{
+    if (sub_8104E18())
+    {
+        DestroyTask(FindTaskIdByFunc(sub_810434C));
+    }
+}
+
+void sub_81048CC(struct Task *task)
+{
+    sub_81054B8();
+    sub_81056C0();
+    sub_8105804();
+    sub_8105854();
+    gSprites[eSlotMachine->unk4E].invisible = TRUE;
+    StartSpriteAnimIfDifferent(gSprites + eSlotMachine->unk3F, 5);
+    task->data[0]++;
+    task->data[4] = 4;
+    task->data[5] = 0;
+    StopMapMusic();
+    PlayFanfare(BGM_ME_ZANNEN);
+    PlaySE(SE_W153);
+}
+
+void sub_8104940(struct Task *task)
+{
+    gSpriteCoordOffsetY = task->data[4];
+    REG_BG1VOFS = task->data[4];
+    if (task->data[5] & 0x01)
+        task->data[4] = -task->data[4];
+    if ((++task->data[5] & 0x1f) == 0)
+        task->data[4] >>= 1;
+    if (task->data[4] == 0)
+    {
+        sub_81058A0();
+        sub_81058C4();
+        sub_8105284();
+        sub_81059E8();
+        gSprites[eSlotMachine->unk4E].invisible = FALSE;
+        task->data[0]++;
+        task->data[5] = 0;
+    }
+}
+
+void sub_81049C8(struct Task *task)
+{
+    gSpriteCoordOffsetY = 0;
+    REG_BG1VOFS = 0;
+    if (sub_8105ACC())
+    {
+        task->data[0]++;
+        sub_8105AEC();
+    }
+}
+
+void sub_81049F8(struct Task *task)
+{
+    gSpriteCoordOffsetX = 0;
+    REG_BG1HOFS = 0;
+    PlayNewMapMusic(eSlotMachine->backupMapMusic);
+    sub_810514C();
+    sub_8105554();
+    sub_8105524();
+    sub_81059B8();
+    DestroyTask(FindTaskIdByFunc(sub_810434C));
 }
 
 asm(".section .text_a");
