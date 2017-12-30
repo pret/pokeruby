@@ -3,18 +3,6 @@
 
 	.section .rodata
 
-	.align 2
-gUnknown_083ECC30:: @ 83ECC30
-	.4byte sub_8104B3C
-	.4byte sub_8104B60
-	.4byte sub_8104B80
-	.4byte sub_8104B60
-	.4byte sub_8104BC8
-	.4byte sub_8104B60
-	.4byte sub_8104BFC
-	.4byte sub_8104B60
-	.4byte sub_8104C44
-
 gUnknown_083ECC54:: @ 83ECC54
 	.4byte nullsub_69
 

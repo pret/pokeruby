@@ -172,9 +172,17 @@ void sub_8104A40(s16 a0, s16 a1);
 void sub_8104A88(s16 a0);
 void sub_8104AB8(u8 a0);
 bool8 sub_8104AEC(void);
+void sub_8104B0C(u8 taskId);
+void sub_8104B3C(struct Task *task);
+void sub_8104B60(struct Task *task);
+void sub_8104B80(struct Task *task);
+void sub_8104BC8(struct Task *task);
+void sub_8104BFC(struct Task *task);
+void sub_8104C44(struct Task *task);
 void sub_8104C5C(void);
 void sub_8104CAC(u8 arg0);
 bool8 sub_8104E18(void);
+void sub_8104E74(u8 taskId);
 void sub_8104EA8(void);
 void sub_8104F8C(void);
 void sub_81050C4(void);
@@ -207,6 +215,7 @@ void sub_81063C0(void);
 static void sub_8106448(void);
 void sub_81064B8(void);
 void sub_81065A8(s16 arg0, u16 arg1, u16 arg2, u16 arg3, u16 arg4);
+void sub_81065DC(void);
 
 extern struct UnkStruct1 *gUnknown_083ED048[];
 extern const u16 gPalette_83EDE24[];
@@ -2862,7 +2871,122 @@ void sub_81049F8(struct Task *task)
     DestroyTask(FindTaskIdByFunc(sub_810434C));
 }
 
-asm(".section .text_a");
+extern const u16 gReelTimeWindowTilemap[];
+
+void sub_8104A40(s16 a0, s16 a1)
+{
+    s16 i;
+
+    for (i = 4; i < 15; i++)
+    {
+        u16 tile = gReelTimeWindowTilemap[a1 + (i - 4) * 20];
+        ((u16 *)BG_SCREEN_ADDR(28))[32 * i + a0] = tile;
+    }
+}
+
+void sub_8104A88(s16 a0)
+{
+    s16 i;
+
+    for (i = 4; i < 15; i++)
+    {
+        ((u16 *)BG_SCREEN_ADDR(28))[32 * i + a0] = 0;
+    }
+}
+
+void sub_8104AB8(u8 a0)
+{
+    u8 taskId = CreateTask(sub_8104B0C, 1);
+    gTasks[taskId].data[1] = a0;
+    sub_8104B0C(taskId);
+}
+
+bool8 sub_8104AEC(void)
+{
+    if (FindTaskIdByFunc(sub_8104B0C) == 0xFF)
+        return TRUE;
+    return FALSE;
+}
+
+void (*const gUnknown_083ECC30[])(struct Task *task) = {
+    sub_8104B3C,
+    sub_8104B60,
+    sub_8104B80,
+    sub_8104B60,
+    sub_8104BC8,
+    sub_8104B60,
+    sub_8104BFC,
+    sub_8104B60,
+    sub_8104C44
+};
+
+void sub_8104B0C(u8 taskId)
+{
+    gUnknown_083ECC30[gTasks[taskId].data[0]](gTasks + taskId);
+}
+
+void sub_8104B3C(struct Task *task)
+{
+    BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+    task->data[0]++;
+}
+
+void sub_8104B60(struct Task *task)
+{
+    if (!gPaletteFade.active)
+    {
+        task->data[0]++;
+    }
+}
+
+void sub_8104B80(struct Task *task)
+{
+    sub_8104DA4();
+    sub_81065DC();
+    BasicInitMenuWindow(&gWindowConfig_81E7144);
+    MenuPrint_PixelCoords(gOtherText_ReelTime, 10, 32, 1);
+    BeginNormalPaletteFade(-1, 0, 16, 0, 0);
+    task->data[0]++;
+}
+
+void sub_8104BC8(struct Task *task)
+{
+    if (gMain.newKeys & (B_BUTTON | SELECT_BUTTON))
+    {
+        BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+        task->data[0]++;
+    }
+}
+
+void sub_8104BFC(struct Task *task)
+{
+    MenuZeroFillScreen();
+    BasicInitMenuWindow(&gWindowConfig_81E7128);
+    sub_81064B8();
+    sub_8104CAC(task->data[1]);
+    sub_810423C(eSlotMachine->unk02);
+    BeginNormalPaletteFade(-1, 0, 16, 0, 0);
+    task->data[0]++;
+}
+
+void sub_8104C44(struct Task *task)
+{
+    DestroyTask(FindTaskIdByFunc(sub_8104B0C));
+}
+
+void sub_8104C5C(void)
+{
+    u8 i;
+    struct Task *task;
+    i = CreateTask(sub_8104E74, 3);
+    eSlotMachine->unk3D = i;
+    task = gTasks + i;
+    task->data[1] = -1;
+    for (i = 4; i < 16; i++)
+    {
+        task->data[i] = 0x40;
+    }
+}
 
 static void LoadSlotMachineWheelOverlay(void);
 
