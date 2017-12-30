@@ -110,7 +110,7 @@ gUnknown_02024BE5: @ 2024BE5
 gCurrentMove: @ 2024BE6
 	.space 0x2
 
-gUnknown_02024BE8: @ 2024BE8
+gChosenMove: @ 2024BE8
 	.space 0x2
 
 gRandomMove: @ 2024BEA

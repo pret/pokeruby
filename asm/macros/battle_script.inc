@@ -476,7 +476,7 @@
 
 	.macro fanfare int
 	.byte 0x55
-	.4byte \int
+	.2byte \int
 	.endm
 
 	.macro playfaintcry bank_or_side
@@ -1334,4 +1334,81 @@
 
 	.macro playtrainerdefeatbgm bank
 	various \bank, VARIOUS_PLAY_TRAINER_DEFEATED_MUSIC
+	.endm
+
+@ helpful macros
+	.macro setstatchanger stat, stages, down
+	setbyte sSTATCHANGER \stat | \stages << 4 | \down << 7
+	.endm
+	
+	.macro setmoveeffect effect
+	setbyte cEFFECT_CHOOSER \effect
+	.endm
+	
+	.macro chosenstatus1animation bank, status
+	chosenstatusanimation \bank 0x0 \status
+	.endm
+	
+	.macro chosenstatus2animation bank, status
+	chosenstatusanimation \bank 0x1 \status
+	.endm
+	
+	.macro sethword dst, value
+	setbyte \dst, \value & 0xFF
+	setbyte \dst + 1, (\value >> 8) & 0xFF
+	.endm
+	
+	.macro setword dst, value
+	setbyte \dst, \value & 0xFF
+	setbyte \dst + 1, (\value >> 8) & 0xFF
+	setbyte \dst + 2, (\value >> 16) & 0xFF
+	setbyte \dst + 3, (\value >> 24) & 0xFF
+	.endm
+	
+	.macro copybyte dst, src
+	copyarray \dst, \src, 0x1
+	.endm
+	
+	.macro copyhword dst, src
+	copyarray \dst, \src, 0x2
+	.endm
+	
+	.macro copyword dst, src
+	copyarray \dst, \src, 0x4
+	.endm
+	
+	.macro jumpifbytenotequal byte1, byte2, jumpptr
+	jumpifarraynotequal \byte1, \byte2, 0x1, \jumpptr
+	.endm
+	
+	.macro jumpifbyteequal byte1, byte2, jumpptr
+	jumpifarrayequal \byte1, \byte2, 0x1, \jumpptr
+	.endm
+	
+	.macro jumpifmove move, jumpptr
+	jumpifhalfword EQUAL, gCurrentMove, \move, \jumpptr
+	.endm
+
+	.macro jumpifnotmove move, jumpptr
+	jumpifhalfword NOT_EQUAL, gCurrentMove, \move, \jumpptr
+	.endm
+	
+	.macro jumpifstatus3 bank, status, jumpptr
+	jumpifstatus3condition \bank, \status, 0x0, \jumpptr
+	.endm
+	
+	.macro jumpifnostatus3 bank, status, jumpptr
+	jumpifstatus3condition \bank, \status, 0x1, \jumpptr
+	.endm
+	
+	.macro jumpifmovehadnoeffect jumpptr
+	jumpifbyte COMMON_BITS, gBattleMoveFlags, MOVESTATUS_MISSED | MOVESTATUS_NOTAFFECTED | MOVESTATUS_FAILED, \jumpptr
+	.endm
+	
+	.macro jumpifbattletype flags, jumpptr
+	jumpifhalfword COMMON_BITS, gBattleTypeFlags, \flags, \jumpptr
+	.endm
+	
+	.macro jumpifnotbattletype flags, jumpptr
+	jumpifhalfword NO_COMMON_BITS, gBattleTypeFlags, \flags, \jumpptr
 	.endm
