@@ -114,11 +114,13 @@ static bool8 sub_8103E7C(void);
 static bool8 sub_8103EAC(u8 spriteId);
 static void sub_8103EE4(struct Sprite *sprite);
 static void sub_8103F70(void);
-void sub_8103FE8(u8 taskId);
 static bool8 sub_8103FA0(void);
-void sub_8104048(void);
-void sub_8104064(u8 a0);
+static void sub_8103FE8(u8 taskId);
+static void sub_8104048(void);
+static void sub_8104064(u8 unused);
 bool8 sub_81040C8(void);
+void sub_81040E8(u8 taskId);
+void sub_810421C(struct Task *task);
 void sub_810423C(u8 a0);
 void sub_810430C(void);
 bool8 sub_810432C(void);
@@ -130,6 +132,8 @@ bool8 sub_8104E18(void);
 void sub_8104EA8(void);
 void sub_8104F8C(void);
 void sub_81050C4(void);
+u8 sub_8105B1C(s16 a0, s16 a1);
+void sub_8105B88(u8 a0);
 void sub_81063C0(void);
 static void sub_8106448(void);
 void sub_81064B8(void);
@@ -2238,6 +2242,7 @@ static void sub_8103F70(void)
     sub_8103FE8(taskId);
 }
 
+extern const u16 *const gUnknown_083EDDA0[];
 extern const u16 *const gUnknown_083EDDAC;
 
 static bool8 sub_8103FA0(void)
@@ -2250,6 +2255,86 @@ static bool8 sub_8103FA0(void)
         return TRUE;
     }
     return FALSE;
+}
+
+static void sub_8103FE8(u8 taskId)
+{
+    struct Task *task = gTasks + taskId;
+    if (!task->data[1]--)
+    {
+        task->data[1] = 4;
+        task->data[2] += task->data[3];
+        if (task->data[2] == 0 || task->data[2] == 2)
+        {
+            task->data[3] = -task->data[3];
+        }
+    }
+    LoadPalette(gUnknown_083EDDA0[task->data[2]], 0x10, 0x20);
+}
+
+static void sub_8104048(void)
+{
+    eSlotMachine->unk3E = CreateTask(sub_81040E8, 8);
+}
+
+static void sub_8104064(u8 unused)
+{
+    struct Task *task = gTasks + eSlotMachine->unk3E;
+    sub_810421C(task);
+    task->data[0] = 1;
+    task->data[1]++;
+    task->data[15] = 1;
+}
+
+void sub_8104098(void)
+{
+    struct Task *task = gTasks + eSlotMachine->unk3E;
+    sub_810421C(task);
+    task->data[0] = 3;
+    task->data[15] = 1;
+}
+
+bool8 sub_81040C8(void)
+{
+    return gTasks[eSlotMachine->unk3E].data[15];
+}
+
+extern void (*const gUnknown_083ECBB4[])(struct Task *task);
+
+void sub_81040E8(u8 taskId)
+{
+    gUnknown_083ECBB4[gTasks[taskId].data[0]](gTasks + taskId);
+}
+
+void nullsub_68(struct Task *task)
+{
+
+}
+
+void sub_810411C(struct Task *task)
+{
+    task->data[2] = sub_8105B1C((task->data[1] << 3) + 20, 20);
+    task->data[0]++;
+}
+
+extern const u16 gUnknown_083ECBC4[][2];
+
+void sub_8104144(struct Task *task)
+{
+    u16 *vaddr = (u16 *)BG_SCREEN_ADDR(29);
+    if (gSprites[task->data[2]].data[7])
+    {
+        s16 r2 = task->data[1] + 2;
+        u8 r0 = 0;
+        if (task->data[1] == 1)
+            r0 = 1;
+        else if (task->data[1] == 16)
+            r0 = 2;
+        vaddr[r2 + 0x40] = gUnknown_083ECBC4[r0][0];
+        sub_8105B88(task->data[2]);
+        task->data[0] = 0;
+        task->data[15] = 0;
+    }
 }
 
 asm(".section .text_a");
