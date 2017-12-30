@@ -103,13 +103,15 @@ static void sub_8102E1C(u8 a0);
 static bool8 sub_8102E40(u8 a0);
 static void sub_8102E68(u8 taskId);
 static void sub_8103C14(u8 a0);
-void sub_8103C48(u8 taskId);
-void sub_8103D50(u8 a0);
-void sub_8103D8C(u8 a0);
-void sub_8103DC8(void);
-void sub_8103E04(u8 a0);
-bool8 sub_8103E38(void);
-bool8 sub_8103E7C(void);
+static void sub_8103C48(u8 taskId);
+static void sub_8103D50(u8 a0);
+static void sub_8103D8C(u8 a0);
+static void sub_8103DC8(void);
+static void sub_8103E04(u8 a0);
+static bool8 sub_8103E38(void);
+static bool8 sub_8103E7C(void);
+bool8 sub_8103EAC(u8 a0);
+void sub_8103EE4(struct Sprite *sprite);
 void sub_8103F70(void);
 bool8 sub_8103FA0(void);
 void sub_8104048(void);
@@ -2083,7 +2085,7 @@ static void sub_8103C14(u8 a0)
 
 extern void (*const gUnknown_083ECBA0[])(struct Task *task, u8 taskId);
 
-void sub_8103C48(u8 taskId)
+static void sub_8103C48(u8 taskId)
 {
     gUnknown_083ECBA0[gTasks[taskId].data[0]](gTasks + taskId, taskId);
 }
@@ -2106,6 +2108,86 @@ void sub_8103CC8(struct Task *task, u8 taskId)
 {
     sub_81065A8(gUnknown_083ECBAC[task->data[15]], 0x42, 0x43, 0x52, 0x53);
     DestroyTask(taskId);
+}
+
+extern const u16 *const gUnknown_083EDD08[];
+extern const u16 *const gUnknown_083EDD1C[];
+extern const u8 gUnknown_083EDD30[];
+
+static void sub_8103D00(u8 a0)
+{
+    LoadPalette(gUnknown_083EDD08[a0], gUnknown_083EDD30[a0], 2);
+}
+
+static void sub_8103D28(u8 a0)
+{
+    LoadPalette(gUnknown_083EDD1C[a0], gUnknown_083EDD30[a0], 2);
+}
+
+extern const u8 gUnknown_083EDD3B[];
+extern const u8 gUnknown_083EDD35[][2];
+
+static void sub_8103D50(u8 a0)
+{
+    u8 i;
+    for (i = 0; i < gUnknown_083EDD3B[a0]; i++)
+    {
+        sub_8103D00(gUnknown_083EDD35[a0][i]);
+    }
+}
+
+static void sub_8103D8C(u8 a0)
+{
+    u8 i;
+    for (i = 0; i < gUnknown_083EDD3B[a0]; i++)
+    {
+        sub_8103D28(gUnknown_083EDD35[a0][i]);
+    }
+}
+
+static void sub_8103DC8(void)
+{
+    u8 i;
+    for (i = 0; i < 5; i++)
+    {
+        u8 spriteId = CreateInvisibleSprite(sub_8103EE4);
+        gSprites[spriteId].data[0] = i;
+        eSlotMachine->unk44[i] = spriteId;
+    }
+}
+
+static void sub_8103E04(u8 a0)
+{
+    struct Sprite *sprite = gSprites + eSlotMachine->unk44[a0];
+    sprite->data[1] = 1;
+    sprite->data[2] = 4;
+    sprite->data[3] = 0;
+    sprite->data[4] = 0;
+    sprite->data[5] = 2;
+    sprite->data[7] = 0;
+}
+
+static bool8 sub_8103E38(void)
+{
+    u8 i;
+    for (i = 0; i < 5; i++)
+    {
+        struct Sprite *sprite = gSprites + eSlotMachine->unk44[i];
+        if (sprite->data[1] && sprite->data[2])
+            return FALSE;
+    }
+    return TRUE;
+}
+
+static bool8 sub_8103E7C(void)
+{
+    u8 i;
+    for (i = 0; i < 5; i++)
+    {
+        if (!sub_8103EAC(eSlotMachine->unk44[i]))
+            return FALSE;
+    }
+    return TRUE;
 }
 
 asm(".section .text_a");

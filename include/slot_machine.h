@@ -28,7 +28,9 @@ struct SlotMachineEwramStruct {
     /*0x34*/ s16 unk34[3];
     /*0x3A*/ u8 unk3A[3];
     /*0x3D*/ u8 unk3D;
-    /*0x3E*/ u8 filler3E[26];
+    /*0x3E*/ u8 filler3E[6];
+    /*0x44*/ u8 unk44[5];
+    /*0x49*/ u8 filler49[15];
     /*0x58*/ u16 win0h;
     /*0x5a*/ u16 win0v;
     /*0x5c*/ u16 winIn;
