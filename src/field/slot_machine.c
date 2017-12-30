@@ -2618,6 +2618,55 @@ void sub_8104498(struct Task *task)
     }
 }
 
+void sub_8104548(struct Task *task)
+{
+    sub_8102D28(task->data[4] >> 8);
+    if (++task->data[5] >= 80)
+    {
+        task->data[0]++;
+        task->data[5] = 0;
+        sub_81057E8(2);
+        StartSpriteAnimIfDifferent(gSprites + eSlotMachine->unk3F, 3);
+    }
+}
+
+void sub_8104598(struct Task *task)
+{
+    sub_8102D28(task->data[4] >> 8);
+    task->data[4] = (u8)task->data[4] + 0x80;
+    if (++task->data[5] >= 80)
+    {
+        task->data[0]++;
+        task->data[5] = 0;
+    }
+}
+
+void sub_81045CC(struct Task *task)
+{
+    sub_8102D28(task->data[4] >> 8);
+    task->data[4] = (u8)task->data[4] + 0x40;
+    if (++task->data[5] >= 40)
+    {
+        task->data[5] = 0;
+        if (eSlotMachine->unk05)
+        {
+            if (eSlotMachine->unk0A <= task->data[6])
+            {
+                task->data[0]++;
+            }
+        }
+        else if (task->data[6] > 3)
+        {
+            task->data[0]++;
+        }
+        else if (sub_81026DC(task->data[6]))
+        {
+            task->data[0] = 14;
+        }
+        task->data[6]++;
+    }
+}
+
 asm(".section .text_a");
 
 static void LoadSlotMachineWheelOverlay(void);
