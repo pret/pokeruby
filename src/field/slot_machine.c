@@ -119,11 +119,13 @@ static void sub_8103FE8(u8 taskId);
 static void sub_8104048(void);
 static void sub_8104064(u8 unused);
 bool8 sub_81040C8(void);
-void sub_81040E8(u8 taskId);
-void sub_810421C(struct Task *task);
+static void sub_81040E8(u8 taskId);
+static void sub_810421C(struct Task *task);
 void sub_810423C(u8 a0);
-void sub_810430C(void);
-bool8 sub_810432C(void);
+static void sub_810430C(void);
+static bool8 sub_810432C(void);
+void sub_810434C(u8 taskId);
+void sub_8104A40(s16 a0, s16 a1);
 void sub_8104AB8(u8 a0);
 bool8 sub_8104AEC(void);
 void sub_8104C5C(void);
@@ -132,6 +134,11 @@ bool8 sub_8104E18(void);
 void sub_8104EA8(void);
 void sub_8104F8C(void);
 void sub_81050C4(void);
+void sub_8105100(void);
+void sub_81051C0(void);
+void sub_81052EC(void);
+void sub_81053A0(void);
+void sub_810545C(void);
 u8 sub_8105B1C(s16 a0, s16 a1);
 void sub_8105B88(u8 a0);
 void sub_81063C0(void);
@@ -2301,7 +2308,7 @@ bool8 sub_81040C8(void)
 
 extern void (*const gUnknown_083ECBB4[])(struct Task *task);
 
-void sub_81040E8(u8 taskId)
+static void sub_81040E8(u8 taskId)
 {
     gUnknown_083ECBB4[gTasks[taskId].data[0]](gTasks + taskId);
 }
@@ -2335,6 +2342,108 @@ void sub_8104144(struct Task *task)
         task->data[0] = 0;
         task->data[15] = 0;
     }
+}
+
+void sub_81041AC(struct Task *task)
+{
+    u16 *vaddr = (u16 *)BG_SCREEN_ADDR(29);
+    s16 r4 = task->data[1] + 2;
+    u8 r2 = 0;
+    if (task->data[1] == 1)
+        r2 = 1;
+    else if (task->data[1] == 16)
+        r2 = 2;
+    if (task->data[2] == 0)
+    {
+        vaddr[r4 + 0x40] = gUnknown_083ECBC4[r2][1];
+        task->data[1]--;
+    }
+    if (++task->data[2] >= 20)
+        task->data[2] = 0;
+    if (task->data[1] == 0)
+    {
+        task->data[0] = 0;
+        task->data[15] = 0;
+    }
+}
+
+static void sub_810421C(struct Task *task)
+{
+    u8 i;
+
+    for (i = 2; i < 16; i++)
+        task->data[i] = 0;
+}
+
+void sub_810423C(u8 a0)
+{
+    s16 i;
+    u8 r3;
+    s16 r2 = 3;
+    u16 *vaddr = (u16 *)BG_SCREEN_ADDR(29);
+    for (i = 0; i < a0; i++, r2++)
+    {
+        r3 = 0;
+        if (i == 0)
+            r3 = 1;
+        else if (i == 15)
+            r3 = 2;
+        vaddr[r2 + 0x40] = gUnknown_083ECBC4[r3][0];
+    }
+    for (; i < 16; i++, r2++)
+    {
+        r3 = 0;
+        if (i == 0)
+            r3 = 1;
+        else if (i == 15)
+            r3 = 2;
+        vaddr[r2 + 0x40] = gUnknown_083ECBC4[r3][1];
+    }
+    gTasks[eSlotMachine->unk3E].data[1] = a0;
+}
+
+static void sub_810430C(void)
+{
+    u8 taskId = CreateTask(sub_810434C, 7);
+    sub_810434C(taskId);
+}
+
+static bool8 sub_810432C(void)
+{
+    if (FindTaskIdByFunc(sub_810434C) == 0xFF)
+        return TRUE;
+    return FALSE;
+}
+
+extern void (*const gUnknown_083ECBD0[])(struct Task *task);
+
+void sub_810434C(u8 taskId)
+{
+    gUnknown_083ECBD0[gTasks[taskId].data[0]](gTasks + taskId);
+}
+
+void sub_810437C(struct Task *task)
+{
+    eSlotMachine->unk0A = 0;
+    eSlotMachine->unk14 = 0;
+    eSlotMachine->unk16 = 0;
+    task->data[0]++;
+    task->data[1] = 0;
+    task->data[2] = 30;
+    task->data[4] = 1280;
+    gSpriteCoordOffsetX = 0;
+    gSpriteCoordOffsetY = 0;
+    REG_BG1HOFS = 0;
+    REG_BG1VOFS = 0;
+    sub_8104A40(30, 0);
+    sub_81051C0();
+    sub_8105100();
+    sub_81052EC();
+    sub_81053A0();
+    sub_810545C();
+    sub_8102680();
+    StopMapMusic();
+    PlayNewMapMusic(BGM_BD_TIME);
 }
 
 asm(".section .text_a");
