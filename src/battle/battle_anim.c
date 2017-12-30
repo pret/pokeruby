@@ -31,7 +31,7 @@ EWRAM_DATA s8 gAnimFramesToWait = 0;
 EWRAM_DATA u8 gAnimScriptActive = FALSE;
 EWRAM_DATA u8 gAnimVisualTaskCount = 0;
 EWRAM_DATA u8 gAnimSoundTaskCount = 0;
-EWRAM_DATA u32 gDisableStructMoveAnim = 0;
+EWRAM_DATA struct DisableStruct *gAnimDisableStructPtr = NULL;
 EWRAM_DATA u32 gAnimMoveDmg = 0;
 EWRAM_DATA u16 gAnimMovePower = 0;
 EWRAM_DATA u8 gAnimFriendship = 0;
@@ -186,7 +186,7 @@ void ClearBattleAnimationVars(void)
     gAnimScriptActive = FALSE;
     gAnimVisualTaskCount = 0;
     gAnimSoundTaskCount = 0;
-    gDisableStructMoveAnim = 0;
+    gAnimDisableStructPtr = NULL;
     gAnimMoveDmg = 0;
     gAnimMovePower = 0;
     gAnimFriendship = 0;

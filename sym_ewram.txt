@@ -281,7 +281,7 @@ gBankInMenu: @ 2024E6C
 gDoingBattleAnim: @ 2024E6D
 	.space 0x3
 
-gPID_perBank: @ 2024E70
+gTransformedPersonalities: @ 2024E70
 	.space 0x10
 
 gBattleMovePower: @ 2024E80

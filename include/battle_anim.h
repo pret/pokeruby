@@ -46,6 +46,7 @@ extern void (*gAnimScriptCallback)(void);
 extern u8 gAnimScriptActive;
 extern u8 gAnimFriendship;
 extern u8 gAnimMoveTurn;
+extern struct DisableStruct *gAnimDisableStructPtr;
 
 void DoMoveAnim(u16 move);
 void LaunchBattleAnimation(const u8 *const moveAnims[], u16 b, u8 c);

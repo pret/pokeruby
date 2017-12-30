@@ -1,6 +1,7 @@
 #include "global.h"
 #include "data2.h"
 #include "battle.h"
+#include "battle_anim.h"
 #include "battle_interface.h"
 #include "battle_message.h"
 #include "item.h"
@@ -21,8 +22,7 @@
 #include "util.h"
 #include "ewram.h"
 
-//Possibly PokemonSubstruct1
-struct UnknownStruct3
+struct MovePpInfo
 {
     u16 moves[4];
     u8 pp[4];
@@ -60,8 +60,7 @@ extern u16 gAnimMovePower;
 extern u32 gAnimMoveDmg;
 extern u8 gAnimFriendship;
 extern u16 gWeatherMoveAnim;
-extern u32 *gDisableStructMoveAnim;
-extern u32 gPID_perBank[];
+extern u32 gTransformedPersonalities[];
 extern u8 gBattleMonForms[];
 extern u16 gUnknown_02024DE8;
 extern u8 gUnknown_02024E68[];
@@ -606,7 +605,7 @@ void sub_802C2EC(void)
     }
 }
 
-struct UnknownStruct1
+struct ChooseMoveStruct
 {
     u16 moves[4];
     u8 pp[4];
@@ -621,7 +620,7 @@ const u8 gUnknown_081FAE80[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW WHITE LIGHT
 void sub_802C68C(void)
 {
     u32 r8 = 0;
-    struct UnknownStruct1 *r6 = (struct UnknownStruct1 *)(gBattleBufferA[gActiveBank] + 4);
+    struct ChooseMoveStruct *r6 = (struct ChooseMoveStruct *)(gBattleBufferA[gActiveBank] + 4);
 
     if (gMain.newKeys & A_BUTTON)
     {
@@ -764,7 +763,7 @@ void sub_802CA60(void)
         u8 pp[4];
         u8 filler18[8];  // what is this?
     } sp0;
-    //struct UnknownStruct1 sp0;
+    //struct ChooseMoveStruct sp0;
     u8 totalPPBonuses;
 
     if (gMain.newKeys & (A_BUTTON | SELECT_BUTTON))
@@ -772,7 +771,7 @@ void sub_802CA60(void)
         PlaySE(SE_SELECT);
         if (gMoveSelectionCursor[gActiveBank] != gUnknown_03004344)
         {
-            struct UnknownStruct1 *r9 = (struct UnknownStruct1 *)&gBattleBufferA[gActiveBank][4];
+            struct ChooseMoveStruct *r9 = (struct ChooseMoveStruct *)&gBattleBufferA[gActiveBank][4];
             s32 i;
 
             i = r9->moves[gMoveSelectionCursor[gActiveBank]];
@@ -1554,7 +1553,7 @@ void bx_blink_t1(void)
 
 void sub_802E12C(s32 a, const u8 *b)
 {
-    struct UnknownStruct1 *r4 = (struct UnknownStruct1 *)&gBattleBufferA[gActiveBank][4];
+    struct ChooseMoveStruct *r4 = (struct ChooseMoveStruct *)&gBattleBufferA[gActiveBank][4];
 
     StringCopy(gDisplayedStringBattle, b);
     StringAppend(gDisplayedStringBattle, gMoveNames[r4->moves[a]]);
@@ -1569,7 +1568,7 @@ void sub_802E12C(s32 a, const u8 *b)
 
 void sub_802E1B0(void)
 {
-    struct UnknownStruct1 *r4 = (struct UnknownStruct1 *)&gBattleBufferA[gActiveBank][4];
+    struct ChooseMoveStruct *r4 = (struct ChooseMoveStruct *)&gBattleBufferA[gActiveBank][4];
     s32 i;
 
     gUnknown_03004348 = 0;
@@ -1587,7 +1586,7 @@ void sub_802E220(void)
 {
     if (gBattleBufferA[gActiveBank][2] != 1)
     {
-        struct UnknownStruct1 *r4 = (struct UnknownStruct1 *)&gBattleBufferA[gActiveBank][4];
+        struct ChooseMoveStruct *r4 = (struct ChooseMoveStruct *)&gBattleBufferA[gActiveBank][4];
         u8 *str = gDisplayedStringBattle;
 
         str = StringCopy(str, BattleText_Format);
@@ -1619,7 +1618,7 @@ void sub_802E2D4(void)
     }
     else
     {
-        struct UnknownStruct1 *r4 = (struct UnknownStruct1 *)&gBattleBufferA[gActiveBank][4];
+        struct ChooseMoveStruct *r4 = (struct ChooseMoveStruct *)&gBattleBufferA[gActiveBank][4];
         u8 *str = gDisplayedStringBattle;
 
         str = StringCopy(str, BattleText_Format);
@@ -1731,7 +1730,7 @@ void PlayerHandleGetAttributes(void)
 u32 dp01_getattr_by_ch1_for_player_pokemon_(u8 a, u8 *buffer)
 {
     struct BattlePokemon battlePokemon;
-    struct UnknownStruct3 moveData;
+    struct MovePpInfo moveData;
     u8 nickname[20];
     u8 *src;
     s16 data16;
@@ -2068,7 +2067,7 @@ void PlayerHandleSetAttributes(void)
 void dp01_setattr_by_ch1_for_player_pokemon(u8 a)
 {
     struct BattlePokemon *battlePokemon = (struct BattlePokemon *)&gBattleBufferA[gActiveBank][3];
-    struct UnknownStruct3 *moveData = (struct UnknownStruct3 *)&gBattleBufferA[gActiveBank][3];
+    struct MovePpInfo *moveData = (struct MovePpInfo *)&gBattleBufferA[gActiveBank][3];
     s32 i;
 
     switch (gBattleBufferA[gActiveBank][1])
@@ -2495,8 +2494,8 @@ void PlayerHandleMoveAnimation(void)
         gAnimMoveDmg = gBattleBufferA[gActiveBank][6] | (gBattleBufferA[gActiveBank][7] << 8) | (gBattleBufferA[gActiveBank][8] << 16) | (gBattleBufferA[gActiveBank][9] << 24);
         gAnimFriendship = gBattleBufferA[gActiveBank][10];
         gWeatherMoveAnim = gBattleBufferA[gActiveBank][12] | (gBattleBufferA[gActiveBank][13] << 8);
-        gDisableStructMoveAnim = (u32 *)&gBattleBufferA[gActiveBank][16];
-        gPID_perBank[gActiveBank] = *gDisableStructMoveAnim;
+        gAnimDisableStructPtr = (struct DisableStruct *)&gBattleBufferA[gActiveBank][16];
+        gTransformedPersonalities[gActiveBank] = gAnimDisableStructPtr->transformedMonPersonality;
         if (sub_8031720(r0, gAnimMoveTurn) != 0)
         {
             // Dead code. sub_8031720 always returns 0.

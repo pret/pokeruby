@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle.h"
+#include "battle_anim.h"
 #include "battle_interface.h"
 #include "data2.h"
 #include "battle_811DA74.h"
@@ -21,15 +22,7 @@
 #include "util.h"
 #include "ewram.h"
 
-struct UnknownStruct1
-{
-    u8 unk0;
-    u8 unk1;
-    u8 unk2[0x1FE];
-};
-
-//Possibly PokemonSubstruct1
-struct UnknownStruct3
+struct MovePpInfo
 {
     u16 moves[4];
     u8 pp[4];
@@ -47,9 +40,8 @@ extern u8 gBattleOutcome;
 extern u16 gUnknown_02024DE8;
 extern u8 gUnknown_02024E68[];
 extern u8 gDoingBattleAnim;
-extern u32 gPID_perBank[];
+extern u32 gTransformedPersonalities[];
 extern struct SpriteTemplate gUnknown_02024E8C;
-extern u32 *gDisableStructMoveAnim;
 extern u32 gAnimMoveDmg;
 extern u16 gAnimMovePower;
 extern u8 gAnimFriendship;
@@ -552,7 +544,7 @@ void LinkPartnerHandleGetAttributes(void)
 u32 dp01_getattr_by_ch1_for_player_pokemon(u8 a, u8 *buffer)
 {
     struct BattlePokemon battlePokemon;
-    struct UnknownStruct3 moveData;
+    struct MovePpInfo moveData;
     u8 nickname[20];
     u8 *src;
     s16 data16;
@@ -881,7 +873,7 @@ void LinkPartnerHandleSetAttributes(void)
 void sub_811EC68(u8 a)
 {
     struct BattlePokemon *battlePokemon = (struct BattlePokemon *)&gBattleBufferA[gActiveBank][3];
-    struct UnknownStruct3 *moveData = (struct UnknownStruct3 *)&gBattleBufferA[gActiveBank][3];
+    struct MovePpInfo *moveData = (struct MovePpInfo *)&gBattleBufferA[gActiveBank][3];
     s32 i;
 
     switch (gBattleBufferA[gActiveBank][1])
@@ -1297,8 +1289,8 @@ void LinkPartnerHandleMoveAnimation(void)
         gAnimFriendship = gBattleBufferA[gActiveBank][10];
         gWeatherMoveAnim = gBattleBufferA[gActiveBank][12]
                           | (gBattleBufferA[gActiveBank][13] << 8);
-        gDisableStructMoveAnim = (u32 *)&gBattleBufferA[gActiveBank][16];
-        gPID_perBank[gActiveBank] = *gDisableStructMoveAnim;
+        gAnimDisableStructPtr = (struct DisableStruct *)&gBattleBufferA[gActiveBank][16];
+        gTransformedPersonalities[gActiveBank] = gAnimDisableStructPtr->transformedMonPersonality;
 
         if (sub_8031720(r0, gAnimMoveTurn) != 0)
             LinkPartnerBufferExecCompleted();

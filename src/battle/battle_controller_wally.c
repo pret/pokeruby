@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle.h"
+#include "battle_anim.h"
 #include "battle_interface.h"
 #include "battle_message.h"
 #include "data2.h"
@@ -19,8 +20,7 @@
 #include "util.h"
 #include "ewram.h"
 
-//Possibly PokemonSubstruct1
-struct UnknownStruct3
+struct MovePpInfo
 {
     u16 moves[4];
     u8 pp[4];
@@ -41,8 +41,7 @@ extern u16 gAnimMovePower;
 extern u32 gAnimMoveDmg;
 extern u8 gAnimFriendship;
 extern u16 gWeatherMoveAnim;
-extern u32 *gDisableStructMoveAnim;
-extern u32 gPID_perBank[];
+extern u32 gTransformedPersonalities[];
 extern void (*gAnimScriptCallback)(void);
 extern bool8 gAnimScriptActive;
 extern u8 gDisplayedStringBattle[];
@@ -528,7 +527,7 @@ void WallyHandleGetAttributes(void)
 u32 sub_8137A84(u8 a, u8 *buffer)
 {
     struct BattlePokemon battlePokemon;
-    struct UnknownStruct3 moveData;
+    struct MovePpInfo moveData;
     u8 nickname[20];
     u8 *src;
     s16 data16;
@@ -856,7 +855,7 @@ void WallyHandleSetAttributes(void)
 void sub_8138294(u8 a)
 {
     struct BattlePokemon *battlePokemon = (struct BattlePokemon *)&gBattleBufferA[gActiveBank][3];
-    struct UnknownStruct3 *moveData = (struct UnknownStruct3 *)&gBattleBufferA[gActiveBank][3];
+    struct MovePpInfo *moveData = (struct MovePpInfo *)&gBattleBufferA[gActiveBank][3];
     s32 i;
 
     switch (gBattleBufferA[gActiveBank][1])
@@ -1171,16 +1170,16 @@ void WallyHandlePuase(void)
 
 void WallyHandleMoveAnimation(void)
 {
-    u16 r0 = gBattleBufferA[gActiveBank][1] | (gBattleBufferA[gActiveBank][2] << 8);
+    u16 move = gBattleBufferA[gActiveBank][1] | (gBattleBufferA[gActiveBank][2] << 8);
 
     gAnimMoveTurn = gBattleBufferA[gActiveBank][3];
     gAnimMovePower = gBattleBufferA[gActiveBank][4] | (gBattleBufferA[gActiveBank][5] << 8);
     gAnimMoveDmg = gBattleBufferA[gActiveBank][6] | (gBattleBufferA[gActiveBank][7] << 8) | (gBattleBufferA[gActiveBank][8] << 16) | (gBattleBufferA[gActiveBank][9] << 24);
     gAnimFriendship = gBattleBufferA[gActiveBank][10];
     gWeatherMoveAnim = gBattleBufferA[gActiveBank][12] | (gBattleBufferA[gActiveBank][13] << 8);
-    gDisableStructMoveAnim = (u32 *)&gBattleBufferA[gActiveBank][16];
-    gPID_perBank[gActiveBank] = *gDisableStructMoveAnim;
-    if (sub_8031720(r0, gAnimMoveTurn) != 0)
+    gAnimDisableStructPtr = (struct DisableStruct *)&gBattleBufferA[gActiveBank][16];
+    gTransformedPersonalities[gActiveBank] = gAnimDisableStructPtr->transformedMonPersonality;
+    if (sub_8031720(move, gAnimMoveTurn) != 0)
     {
         // Dead code. sub_8031720 always returns 0.
         WallyBufferExecCompleted();

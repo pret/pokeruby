@@ -306,7 +306,7 @@ struct BattleStruct /* 0x2000000 */
 
 struct DisableStruct
 {
-    /*0x00*/ u32 unk0;
+    /*0x00*/ u32 transformedMonPersonality;
     /*0x04*/ u16 disabledMove;
     /*0x06*/ u16 encoredMove;
     /*0x08*/ u8 protectUses;

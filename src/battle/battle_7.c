@@ -28,7 +28,7 @@ extern u8 gBanksBySide[];
 extern u8 gObjectBankIDs[];
 extern u16 gUnknown_02024DE8;
 extern u8 gDoingBattleAnim;
-extern u32 gPID_perBank[];
+extern u32 gTransformedPersonalities[];
 extern struct Window gUnknown_03004210;
 extern void (*gBattleBankFunc[])(void);
 extern u8 gHealthboxIDs[];
@@ -276,7 +276,7 @@ void BattleLoadOpponentMonSprite(struct Pokemon *pkmn, u8 b)
     else
     {
         species = ewram17800[b].transformedSpecies;
-        r7 = gPID_perBank[b];
+        r7 = gTransformedPersonalities[b];
     }
     otId = GetMonData(pkmn, MON_DATA_OT_ID);
     var = GetBankIdentity(b);
@@ -328,7 +328,7 @@ void BattleLoadPlayerMonSprite(struct Pokemon *pkmn, u8 b)
     else
     {
         species = ewram17800[b].transformedSpecies;
-        r7 = gPID_perBank[b];
+        r7 = gTransformedPersonalities[b];
     }
     otId = GetMonData(pkmn, MON_DATA_OT_ID);
     var = GetBankIdentity(b);
@@ -659,7 +659,7 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
                   eVoidSharedArr2,
                   gUnknown_081FAF4C[r10],
                   species,
-                  gPID_perBank[a]);
+                  gTransformedPersonalities[a]);
             }
             else
             {
@@ -672,7 +672,7 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
                   eVoidSharedArr2,
                   gUnknown_081FAF4C[r10],
                   species,
-                  gPID_perBank[a]);
+                  gTransformedPersonalities[a]);
             }
         }
         src = gUnknown_081FAF4C[r10];

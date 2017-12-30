@@ -1283,7 +1283,7 @@ _080DD8B8: .4byte gTasks
 	thumb_func_start sub_80DD8BC
 sub_80DD8BC: @ 80DD8BC
 	push {lr}
-	ldr r0, _080DD8E4 @ =gDisableStructMoveAnim
+	ldr r0, _080DD8E4 @ =gAnimDisableStructPtr
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x11]
 	lsrs r0, r1, 4
@@ -1304,7 +1304,7 @@ _080DD8DE:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080DD8E4: .4byte gDisableStructMoveAnim
+_080DD8E4: .4byte gAnimDisableStructPtr
 	thumb_func_end sub_80DD8BC
 
 	thumb_func_start sub_80DD8E8

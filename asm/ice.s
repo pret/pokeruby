@@ -3008,7 +3008,7 @@ _080D8E48: .4byte gTasks
 unc_080B06FC: @ 80D8E4C
 	push {r4-r6,lr}
 	adds r5, r0, 0
-	ldr r0, _080D8ECC @ =gDisableStructMoveAnim
+	ldr r0, _080D8ECC @ =gAnimDisableStructPtr
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x11]
 	lsrs r0, r1, 4
@@ -3067,7 +3067,7 @@ _080D8E92:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D8ECC: .4byte gDisableStructMoveAnim
+_080D8ECC: .4byte gAnimDisableStructPtr
 _080D8ED0: .4byte gBattleAnimArgs
 _080D8ED4: .4byte gAnimBankAttacker
 _080D8ED8: .4byte gAnimBankTarget
@@ -3201,7 +3201,7 @@ sub_80D8FC0: @ 80D8FC0
 	ldrb r3, [r1]
 	lsls r3, 1
 	adds r3, r1
-	ldr r1, _080D8FEC @ =gDisableStructMoveAnim
+	ldr r1, _080D8FEC @ =gAnimDisableStructPtr
 	ldr r1, [r1]
 	ldrb r1, [r1, 0x11]
 	lsrs r2, r1, 4
@@ -3215,7 +3215,7 @@ sub_80D8FC0: @ 80D8FC0
 	bx r0
 	.align 2, 0
 _080D8FE8: .4byte gBattleAnimArgs
-_080D8FEC: .4byte gDisableStructMoveAnim
+_080D8FEC: .4byte gAnimDisableStructPtr
 	thumb_func_end sub_80D8FC0
 	
 	.align 2, 0 @ Don't pad with nop.

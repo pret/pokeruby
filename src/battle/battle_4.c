@@ -14092,7 +14092,7 @@ static void atk9B_transformdataexecution(void)
         gBattleMons[gBankAttacker].status2 |= STATUS2_TRANSFORMED;
         gDisableStructs[gBankAttacker].disabledMove = 0;
         gDisableStructs[gBankAttacker].disableTimer1 = 0;
-        gDisableStructs[gBankAttacker].unk0 = gBattleMons[gBankTarget].personality;
+        gDisableStructs[gBankAttacker].transformedMonPersonality = gBattleMons[gBankTarget].personality;
         gDisableStructs[gBankAttacker].unk18_b = 0;
 
         gBattleTextBuff1[0] = 0xFD;
