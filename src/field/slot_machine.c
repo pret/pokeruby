@@ -3,6 +3,7 @@
 #include "strings2.h"
 #include "overworld.h"
 #include "menu_cursor.h"
+#include "field_effect.h"
 #include "random.h"
 #include "sound.h"
 #include "main.h"
@@ -110,10 +111,11 @@ static void sub_8103DC8(void);
 static void sub_8103E04(u8 a0);
 static bool8 sub_8103E38(void);
 static bool8 sub_8103E7C(void);
-bool8 sub_8103EAC(u8 a0);
-void sub_8103EE4(struct Sprite *sprite);
-void sub_8103F70(void);
-bool8 sub_8103FA0(void);
+static bool8 sub_8103EAC(u8 spriteId);
+static void sub_8103EE4(struct Sprite *sprite);
+static void sub_8103F70(void);
+void sub_8103FE8(u8 taskId);
+static bool8 sub_8103FA0(void);
 void sub_8104048(void);
 void sub_8104064(u8 a0);
 bool8 sub_81040C8(void);
@@ -2188,6 +2190,66 @@ static bool8 sub_8103E7C(void)
             return FALSE;
     }
     return TRUE;
+}
+
+static bool8 sub_8103EAC(u8 spriteId)
+{
+    struct Sprite *sprite = gSprites + spriteId;
+    if (!sprite->data[1])
+        return TRUE;
+    if (sprite->data[7])
+        sprite->data[1] = 0;
+    return sprite->data[7];
+}
+
+static void sub_8103EE4(struct Sprite *sprite)
+{
+    s16 r4;
+    if (sprite->data[1])
+    {
+        if (!sprite->data[3]--)
+        {
+            sprite->data[7] = 0;
+            sprite->data[3] = 1;
+            sprite->data[4] += sprite->data[5];
+            r4 = 4;
+            if (sprite->data[2])
+                r4 = 8;
+            if (sprite->data[4] <= 0)
+            {
+                sprite->data[7] = 1;
+                sprite->data[5] = -sprite->data[5];
+                if (sprite->data[2])
+                    sprite->data[2]--;
+            }
+            else if (sprite->data[4] >= r4)
+                sprite->data[5] = -sprite->data[5];
+            if (sprite->data[2])
+                sprite->data[3] <<= 1;
+        }
+        MultiplyPaletteRGBComponents(gUnknown_083EDD30[sprite->data[0]], sprite->data[4], sprite->data[4], sprite->data[4]);
+    }
+}
+
+static void sub_8103F70(void)
+{
+    u8 taskId = CreateTask(sub_8103FE8, 6);
+    gTasks[taskId].data[3] = 1;
+    sub_8103FE8(taskId);
+}
+
+extern const u16 *const gUnknown_083EDDAC;
+
+static bool8 sub_8103FA0(void)
+{
+    u8 taskId = FindTaskIdByFunc(sub_8103FE8);
+    if (!gTasks[taskId].data[2])
+    {
+        DestroyTask(taskId);
+        LoadPalette(gUnknown_083EDDAC, 0x10, 0x20);
+        return TRUE;
+    }
+    return FALSE;
 }
 
 asm(".section .text_a");
