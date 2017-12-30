@@ -22,20 +22,12 @@ struct UnkStruct1 {
     /*0x02*/ s16 unk02;
 };
 
-extern struct UnkStruct1 *gUnknown_083ED048[];
-extern const u16 gPalette_83EDE24[];
-
-extern const u8 gSlotMachine_Gfx[];
 #if ENGLISH
 #define SLOTMACHINE_GFX_TILES 233
 #elif GERMAN
 #define SLOTMACHINE_GFX_TILES 236
 #endif
 
-extern const u16 gUnknown_08E95A18[];
-
-extern u16 gUnknown_08E95AB8[];
-extern u16 gUnknown_08E95FB8[];
 
 static void sub_81018B8(void);
 static void sub_8101954(void);
@@ -97,15 +89,44 @@ static u8 sub_81029D4(u8 c1, u8 c2, u8 c3);
 static void sub_8102A24(void);
 static void sub_8102A64(u8 taskId);
 static bool8 sub_8102A44(void);
+bool8 sub_8102A9C(struct Task *task);
+bool8 sub_8102AD0(struct Task *task);
+bool8 sub_8102B80(struct Task *task);
 u8 sub_8102BA4(u8 x, s16 y);
 static void sub_8102DA8(void);
 static void sub_8102DEC(u8 a0);
 static void sub_8102E1C(u8 a0);
 static bool8 sub_8102E40(u8 a0);
 static void sub_8102E68(u8 taskId);
+bool8 sub_8102EA0(struct Task *task);
+bool8 sub_8102EA4(struct Task *task);
+bool8 sub_8102EC0(struct Task *task);
+bool8 sub_8102F4C(struct Task *task);
+bool8 sub_8103008(struct Task *task);
+bool8 sub_810305C(void);
+bool8 sub_8103154(u8 a0, u8 a1);
+bool8 sub_81031B4(u8 a0, u8 a1);
+bool8 sub_81032C0(void);
+bool8 sub_81032E8(void);
+bool8 sub_810333C(void);
+bool8 sub_81033DC(void);
+bool8 sub_810341C(u8 a0);
+bool8 sub_810347C(u8 a0);
+void sub_81034F4(void);
+void sub_8103540(void);
+void sub_8103564(void);
+void j5_08111E84(void);
+void sub_8103668(void);
+void sub_810380C(void);
+void sub_8103830(void);
+void sub_8103910(void);
+void sub_8103A78(void);
 static void sub_8103C14(u8 a0);
 static void sub_8103C48(u8 taskId);
 static void sub_8103D50(u8 a0);
+void sub_8103C78(struct Task *task, u8 taskId);
+void sub_8103CAC(struct Task *task, u8 taskId);
+void sub_8103CC8(struct Task *task, u8 taskId);
 static void sub_8103D8C(u8 a0);
 static void sub_8103DC8(void);
 static void sub_8103E04(u8 a0);
@@ -120,11 +141,33 @@ static void sub_8104048(void);
 static void sub_8104064(u8 unused);
 bool8 sub_81040C8(void);
 static void sub_81040E8(u8 taskId);
+void nullsub_68(struct Task *task);
+void sub_810411C(struct Task *task);
+void sub_8104144(struct Task *task);
+void sub_81041AC(struct Task *task);
 static void sub_810421C(struct Task *task);
 void sub_810423C(u8 a0);
 static void sub_810430C(void);
 static bool8 sub_810432C(void);
 void sub_810434C(u8 taskId);
+void sub_810437C(struct Task *task);
+void sub_81043EC(struct Task *task);
+void sub_8104468(struct Task *task);
+void sub_8104498(struct Task *task);
+void sub_8104548(struct Task *task);
+void sub_8104598(struct Task *task);
+void sub_81045CC(struct Task *task);
+void sub_810463C(struct Task *task);
+void sub_81046C0(struct Task *task);
+void sub_8104764(struct Task *task);
+void sub_8104794(struct Task *task);
+void sub_81047EC(struct Task *task);
+void sub_8104860(struct Task *task);
+void sub_81048A8(struct Task *task);
+void sub_81048CC(struct Task *task);
+void sub_8104940(struct Task *task);
+void sub_81049C8(struct Task *task);
+void sub_81049F8(struct Task *task);
 void sub_8104A40(s16 a0, s16 a1);
 void sub_8104AB8(u8 a0);
 bool8 sub_8104AEC(void);
@@ -139,6 +182,10 @@ void sub_81051C0(void);
 void sub_81052EC(void);
 void sub_81053A0(void);
 void sub_810545C(void);
+void sub_8105578(void);
+void sub_8105688(s16 a0);
+void sub_81056F0(void);
+void sub_81057E8(s16 a0);
 u8 sub_8105B1C(s16 a0, s16 a1);
 void sub_8105B88(u8 a0);
 void sub_81063C0(void);
@@ -146,38 +193,12 @@ static void sub_8106448(void);
 void sub_81064B8(void);
 void sub_81065A8(s16 arg0, u16 arg1, u16 arg2, u16 arg3, u16 arg4);
 
-static bool8 (*const gUnknown_083ECAAC[])(struct Task *task) = {
-    sub_8101D5C,
-    sub_8101D8C,
-    sub_8101DB0,
-    sub_8101DF4,
-    sub_8101E10,
-    sub_8101E3C,
-    sub_8101F44,
-    sub_8101F60,
-    sub_8101F88,
-    sub_8101FA4,
-    sub_8102008,
-    sub_8102034,
-    sub_8102058,
-    sub_8102090,
-    sub_81020C8,
-    sub_81021E0,
-    sub_81021FC,
-    sub_8102264,
-    sub_81022A0,
-    sub_81022CC,
-    sub_81022F0,
-    sub_8102318,
-    sub_8102344,
-    sub_810239C,
-    sub_81023B8,
-    sub_81023E0,
-    sub_81023FC,
-    sub_8102424,
-    sub_8102460
-};
-
+extern struct UnkStruct1 *gUnknown_083ED048[];
+extern const u16 gPalette_83EDE24[];
+extern const u8 gSlotMachine_Gfx[];
+extern const u16 gUnknown_08E95A18[];
+extern u16 gUnknown_08E95AB8[];
+extern u16 gUnknown_08E95FB8[];
 extern const u8 gUnknown_083ECD04[][3];
 extern const u8 gUnknown_083ECE3A[];
 extern const u16 gUnknown_083ECE42[];
@@ -394,6 +415,38 @@ static void sub_8101D04(void)
 {
     sub_8101D24(CreateTask(sub_8101D24, 0));
 }
+
+static bool8 (*const gUnknown_083ECAAC[])(struct Task *task) = {
+    sub_8101D5C,
+    sub_8101D8C,
+    sub_8101DB0,
+    sub_8101DF4,
+    sub_8101E10,
+    sub_8101E3C,
+    sub_8101F44,
+    sub_8101F60,
+    sub_8101F88,
+    sub_8101FA4,
+    sub_8102008,
+    sub_8102034,
+    sub_8102058,
+    sub_8102090,
+    sub_81020C8,
+    sub_81021E0,
+    sub_81021FC,
+    sub_8102264,
+    sub_81022A0,
+    sub_81022CC,
+    sub_81022F0,
+    sub_8102318,
+    sub_8102344,
+    sub_810239C,
+    sub_81023B8,
+    sub_81023E0,
+    sub_81023FC,
+    sub_8102424,
+    sub_8102460
+};
 
 static void sub_8101D24(u8 taskId)
 {
@@ -1174,7 +1227,11 @@ static bool8 sub_8102A44(void)
     return FALSE;
 }
 
-extern bool8 (*const gUnknown_083ECB20[])(struct Task *task);
+bool8 (*const gUnknown_083ECB20[])(struct Task *task) = {
+    sub_8102A9C,
+    sub_8102AD0,
+    sub_8102B80
+};
 
 static void sub_8102A64(u8 taskId)
 {
@@ -1338,7 +1395,13 @@ static bool8 sub_8102E40(u8 a0)
     return gTasks[eSlotMachine->unk3A[a0]].data[14];
 }
 
-extern bool8 (*const gUnknown_083ECB2C[])(struct Task *task);
+bool8 (*const gUnknown_083ECB2C[])(struct Task *task) = {
+    sub_8102EA0,
+    sub_8102EA4,
+    sub_8102EC0,
+    sub_8102F4C,
+    sub_8103008
+};
 
 static void sub_8102E68(u8 taskId)
 {
@@ -1356,8 +1419,16 @@ bool8 sub_8102EA4(struct Task *task)
     return FALSE;
 }
 
-extern bool8 (*const gUnknown_083ECB40[])(void);
-extern void (*const gUnknown_083ECB4C[])(void);
+bool8 (*const gUnknown_083ECB40[])(void) = {
+    sub_810305C,
+    sub_81032C0,
+    sub_81033DC
+};
+void (*const gUnknown_083ECB4C[])(void) = {
+    sub_81034F4,
+    sub_8103540,
+    sub_810380C
+};
 
 bool8 sub_8102EC0(struct Task *task)
 {
@@ -1373,15 +1444,10 @@ bool8 sub_8102EC0(struct Task *task)
     return TRUE;
 }
 
-extern const u16 gUnknown_083ECB58[5]; // don't move this
-
 bool8 sub_8102F4C(struct Task *task)
 {
-    s16 r2;
-    u16 sp[5];
-    memcpy(sp, gUnknown_083ECB58, sizeof gUnknown_083ECB58);
-    // u16 sp[] = {2, 4, 4, 4, 8};
-    r2 = eSlotMachine->unk1C[task->data[15]] % 24;
+    u16 sp[] = {2, 4, 4, 4, 8};
+    s16 r2 = eSlotMachine->unk1C[task->data[15]] % 24;
     if (r2 != 0)
     {
         r2 = sub_8102CCC(task->data[15], eSlotMachine->unk1A);
@@ -1419,7 +1485,11 @@ bool8 sub_8103008(struct Task *task)
     return FALSE;
 }
 
-extern bool8 (*const gUnknown_083ECB64[])(u8 a0, u8 a1);
+bool8 (*const gUnknown_083ECB64[])(u8 a0, u8 a1) = {
+    sub_8103154,
+    sub_81031B4,
+    sub_81031B4
+};
 
 bool8 sub_810305C(void)
 {
@@ -1522,7 +1592,11 @@ bool8 sub_81031B4(u8 a0, u8 a1)
     return FALSE;
 }
 
-extern bool8 (*const gUnknown_083ECB70[])(void);
+bool8 (*const gUnknown_083ECB70[])(void) = {
+    sub_81032E8,
+    sub_81032E8,
+    sub_810333C
+};
 
 bool8 sub_81032C0(void)
 {
@@ -1580,7 +1654,11 @@ bool8 sub_810333C(void)
     return FALSE;
 }
 
-extern bool8 (*const gUnknown_083ECB7C[])(u8 a0);
+bool8 (*const gUnknown_083ECB7C[])(u8 a0) = {
+    sub_810341C,
+    sub_810341C,
+    sub_810347C
+};
 
 bool8 sub_81033DC(void)
 {
@@ -1660,7 +1738,11 @@ bool8 sub_8103520(u8 *a0)
     return FALSE;
 }
 
-extern void (*gUnknown_083ECB88[])(void);
+void (*const gUnknown_083ECB88[])(void) = {
+    sub_8103564,
+    j5_08111E84,
+    sub_8103668
+};
 
 void sub_8103540(void)
 {
@@ -1942,7 +2024,11 @@ bool8 sub_81037BC(u8 a0, u8 a1, u8 a2)
     return TRUE;
 }
 
-extern void (*const gUnknown_083ECB94[])(void);
+void (*const gUnknown_083ECB94[])(void) = {
+    sub_8103830,
+    sub_8103910,
+    sub_8103A78
+};
 
 void sub_810380C(void)
 {
@@ -2096,14 +2182,18 @@ static void sub_8103C14(u8 a0)
     sub_8103C48(taskId);
 }
 
-extern void (*const gUnknown_083ECBA0[])(struct Task *task, u8 taskId);
+void (*const gUnknown_083ECBA0[])(struct Task *task, u8 taskId) = {
+    sub_8103C78,
+    sub_8103CAC,
+    sub_8103CC8
+};
 
 static void sub_8103C48(u8 taskId)
 {
     gUnknown_083ECBA0[gTasks[taskId].data[0]](gTasks + taskId, taskId);
 }
 
-extern const s16 gUnknown_083ECBAC[];
+const s16 gUnknown_083ECBAC[] = {5, 10, 15};
 
 void sub_8103C78(struct Task *task, u8 taskId)
 {
@@ -2306,7 +2396,12 @@ bool8 sub_81040C8(void)
     return gTasks[eSlotMachine->unk3E].data[15];
 }
 
-extern void (*const gUnknown_083ECBB4[])(struct Task *task);
+void (*const gUnknown_083ECBB4[])(struct Task *task) = {
+    nullsub_68,
+    sub_810411C,
+    sub_8104144,
+    sub_81041AC
+};
 
 static void sub_81040E8(u8 taskId)
 {
@@ -2324,7 +2419,11 @@ void sub_810411C(struct Task *task)
     task->data[0]++;
 }
 
-extern const u16 gUnknown_083ECBC4[][2];
+const u16 gUnknown_083ECBC4[][2] = {
+    {0x9e, 0x6e},
+    {0x9f, 0x6f},
+    {0xaf, 0x7f}
+};
 
 void sub_8104144(struct Task *task)
 {
@@ -2415,7 +2514,27 @@ static bool8 sub_810432C(void)
     return FALSE;
 }
 
-extern void (*const gUnknown_083ECBD0[])(struct Task *task);
+void (*const gUnknown_083ECBD0[])(struct Task *task) = {
+    sub_810437C,
+    sub_81043EC,
+    sub_8104468,
+    sub_8104498,
+    sub_8104548,
+    sub_8104598,
+    sub_81045CC,
+    sub_810463C,
+    sub_81046C0,
+    sub_8104764,
+    sub_8104794,
+    sub_81047EC,
+    sub_8104860,
+    sub_81048A8,
+    sub_81048CC,
+    sub_8104940,
+    sub_81049C8,
+    sub_8104794,
+    sub_81049F8
+};
 
 void sub_810434C(u8 taskId)
 {
@@ -2444,6 +2563,59 @@ void sub_810437C(struct Task *task)
     sub_8102680();
     StopMapMusic();
     PlayNewMapMusic(BGM_BD_TIME);
+}
+
+void sub_81043EC(struct Task *task)
+{
+    s16 r3;
+    gSpriteCoordOffsetX -= 8;
+    task->data[1] += 8;
+    r3 = ((task->data[1] + 240) & 0xff) >> 3;
+    REG_BG1HOFS = task->data[1] & 0x1ff;
+    if (r3 != task->data[2] && task->data[3] <= 18)
+    {
+        task->data[2] = r3;
+        task->data[3] = task->data[1] >> 3;
+        sub_8104A40(r3, task->data[3]);
+    }
+    if (task->data[1] >= 200)
+    {
+        task->data[0]++;
+        task->data[3] = 0;
+    }
+    sub_8102D28(task->data[4] >> 8);
+}
+
+void sub_8104468(struct Task *task)
+{
+    sub_8102D28(task->data[4] >> 8);
+    if (++task->data[5] >= 60)
+    {
+        task->data[0]++;
+        sub_8105578();
+        sub_81056F0();
+    }
+}
+
+void sub_8104498(struct Task *task)
+{
+    int r5;
+    u8 sp0[] = {1, 1, 2, 2};
+    s16 sp4[] = {0x40, 0x30, 0x18, 0x08};
+    s16 spC[] = {10, 8, 6, 4};
+
+    sub_8102D28(task->data[4] >> 8);
+    task->data[4] -= 4;
+    r5 = 4 - (task->data[4] >> 8);
+    sub_8105688(sp4[r5]);
+    sub_81057E8(spC[r5]);
+    StartSpriteAnimIfDifferent(gSprites + eSlotMachine->unk3F, sp0[r5]);
+    if (task->data[4] <= 0x100)
+    {
+        task->data[0]++;
+        task->data[4] = 0x100;
+        task->data[5] = 0;
+    }
 }
 
 asm(".section .text_a");
