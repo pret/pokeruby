@@ -124,14 +124,14 @@
 #define SIDE_STATUS_MIST             (1 << 8)
 #define SIDE_STATUS_SPIKES_DAMAGED   (1 << 9)
 
-#define F_TARGET_SELECTED_POKEMON 0
-#define F_TARGET_SPECIAL          (1 << 0)
-#define F_TARGET_UNK2             (1 << 1)
-#define F_TARGET_RANDOM           (1 << 2)
-#define F_TARGET_BOTH_ENEMIES     (1 << 3)
-#define F_TARGET_USER             (1 << 4)
-#define F_TARGET_ALL_EXCEPT_USER  (1 << 5)
-#define F_TARGET_ENEMY_SIDE       (1 << 6)
+#define TARGET_SELECTED_POKEMON 0
+#define TARGET_SPECIAL          (1 << 0)
+#define TARGET_UNK2             (1 << 1)
+#define TARGET_RANDOM           (1 << 2)
+#define TARGET_BOTH_ENEMIES     (1 << 3)
+#define TARGET_USER             (1 << 4)
+#define TARGET_ALL_EXCEPT_USER  (1 << 5)
+#define TARGET_ENEMY_SIDE       (1 << 6)
 
 #define F_MAKES_CONTACT           (1 << 0)
 #define F_AFFECTED_BY_PROTECT     (1 << 1)

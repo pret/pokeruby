@@ -5419,14 +5419,14 @@ void SelectContestMoveBankTarget(u16 move)
 {
     switch (gBattleMoves[move].target)
     {
-    case F_TARGET_UNK2:
-    case F_TARGET_USER:
+    case TARGET_UNK2:
+    case TARGET_USER:
         gBankTarget = 2;
         break;
-    case F_TARGET_SELECTED_POKEMON:
-    case F_TARGET_RANDOM:
-    case F_TARGET_BOTH_ENEMIES:
-    case F_TARGET_ALL_EXCEPT_USER:
+    case TARGET_SELECTED_POKEMON:
+    case TARGET_RANDOM:
+    case TARGET_BOTH_ENEMIES:
+    case TARGET_ALL_EXCEPT_USER:
     default:
         gBankTarget = 3;
         break;
