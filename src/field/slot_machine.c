@@ -3082,7 +3082,7 @@ void nullsub_69(struct Task *task)
 
 }
 
-const struct SpriteTemplate gSpriteTemplate_83ED414;
+extern const struct SpriteTemplate gSpriteTemplate_83ED414;
 
 void sub_8104EA8(void)
 {
@@ -3189,6 +3189,66 @@ void sub_8105170(struct Sprite *sprite)
             sprite->pos2.y = -8;
         }
     }
+}
+
+extern const struct SpriteTemplate gSpriteTemplate_83ED474;
+extern const struct SpriteTemplate gSpriteTemplate_83ED48C;
+extern const struct SubspriteTable gSubspriteTables_83ED73C[];
+extern const struct SubspriteTable gSubspriteTables_83ED75C[];
+
+void sub_81051C0(void)
+{
+    u8 spriteId = CreateSprite(&gSpriteTemplate_83ED474, 0x170, 0x34, 7);
+    struct Sprite *sprite = gSprites + spriteId;
+    sprite->oam.priority = 1;
+    sprite->coordOffsetEnabled = TRUE;
+    SetSubspriteTables(sprite, gSubspriteTables_83ED73C);
+    eSlotMachine->unk49 = spriteId;
+
+    spriteId = CreateSprite(&gSpriteTemplate_83ED48C, 0x170, 0x54, 7);
+    sprite = gSprites + spriteId;
+    sprite->oam.priority = 1;
+    sprite->coordOffsetEnabled = TRUE;
+    SetSubspriteTables(sprite, gSubspriteTables_83ED75C);
+    eSlotMachine->unk4A = spriteId;
+}
+
+extern const struct SpriteTemplate gSpriteTemplate_83ED4A4;
+extern const struct SubspriteTable gSubspriteTables_83ED78C[];
+
+void sub_8105284(void)
+{
+    u8 spriteId = CreateSprite(&gSpriteTemplate_83ED4A4, 0xa8 - gSpriteCoordOffsetX, 0x50, 7);
+    struct Sprite *sprite = gSprites + spriteId;
+    sprite->oam.priority = 1;
+    sprite->coordOffsetEnabled = TRUE;
+    SetSubspriteTables(sprite, gSubspriteTables_83ED78C);
+    eSlotMachine->unk42 = spriteId;
+}
+
+extern const struct SpriteTemplate gSpriteTemplate_83ED4BC;
+
+void sub_81052EC(void)
+{
+    u8 i;
+    s16 r5;
+    for (i = 0, r5 = 0; i < 3; i++, r5 += 20)
+    {
+        u8 spriteId = CreateSprite(&gSpriteTemplate_83ED4BC, 0x170, 0x00, 10);
+        struct Sprite *sprite = gSprites + spriteId;
+        sprite->oam.priority = 1;
+        sprite->coordOffsetEnabled = TRUE;
+        sprite->data[7] = r5;
+        eSlotMachine->unk4B[i] = spriteId;
+    }
+}
+
+void sub_810535C(struct Sprite *sprite)
+{
+    s16 r0 = (u16)(eSlotMachine->unk14 + sprite->data[7]);
+    r0 %= 40;
+    sprite->pos1.y = r0 + 59;
+    StartSpriteAnimIfDifferent(sprite, sub_8102C48(r0 / 20));
 }
 
 asm(".section .text_b");
