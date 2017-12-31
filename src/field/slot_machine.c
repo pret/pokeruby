@@ -182,9 +182,11 @@ void sub_8104C44(struct Task *task);
 void sub_8104C5C(void);
 void sub_8104CAC(u8 arg0);
 bool8 sub_8104E18(void);
+void nullsub_69(struct Task *task);
 void sub_8104E74(u8 taskId);
 void sub_8104EA8(void);
 void sub_8104F8C(void);
+void sub_8104FF4(s16 a0, s16 a1, u8 a2, s16 a3);
 void sub_81050C4(void);
 void sub_8105100(void);
 void sub_810514C(void);
@@ -211,6 +213,7 @@ bool8 sub_8105ACC(void);
 void sub_8105AEC(void);
 u8 sub_8105B1C(s16 a0, s16 a1);
 void sub_8105B88(u8 a0);
+u8 sub_8105BF8(u8, u32, s16, s16, s16);
 void sub_81063C0(void);
 static void sub_8106448(void);
 void sub_81064B8(void);
@@ -2984,7 +2987,7 @@ void sub_8104C5C(void)
     task->data[1] = -1;
     for (i = 4; i < 16; i++)
     {
-        task->data[i] = 0x40;
+        task->data[i] = MAX_SPRITES;
     }
 }
 
@@ -3017,6 +3020,111 @@ void sub_8104CAC(u8 arg0) {
 #endif
     }
 }
+
+void sub_8104D30(u8 a0, u32 a1, s16 a2, s16 a3, s16 a4)
+{
+    u8 i;
+    struct Task *task = gTasks + eSlotMachine->unk3D;
+    for (i = 4; i < 16; i++)
+    {
+        if (task->data[i] == MAX_SPRITES)
+        {
+            task->data[i] = sub_8105BF8(a0, a1, a2, a3, a4);
+            break;
+        }
+    }
+}
+
+extern void (*const gUnknown_083ED064[])(void);
+
+void sub_8104DA4(void)
+{
+    u8 i;
+    struct Task *task = gTasks + eSlotMachine->unk3D;
+    if ((u16)task->data[1] != 0xFFFF)
+        gUnknown_083ED064[task->data[1]]();
+    for (i = 4; i < 16; i++)
+    {
+        if (task->data[i] != MAX_SPRITES)
+        {
+            DestroySprite(gSprites + task->data[i]);
+            task->data[i] = MAX_SPRITES;
+        }
+    }
+}
+
+bool8 sub_8104E18(void)
+{
+    u8 i;
+    struct Task *task = gTasks + eSlotMachine->unk3D;
+    for (i = 4; i < 16; i++)
+    {
+        if (task->data[i] != MAX_SPRITES)
+        {
+            if (gSprites[task->data[i]].data[7])
+                return FALSE;
+        }
+    }
+    return TRUE;
+}
+
+void (*const gUnknown_083ECC54[])(struct Task *task) = {
+    nullsub_69
+};
+
+void sub_8104E74(u8 taskId)
+{
+    gUnknown_083ECC54[gTasks[taskId].data[0]](gTasks + taskId);
+}
+
+void nullsub_69(struct Task *task)
+{
+
+}
+
+const struct SpriteTemplate gSpriteTemplate_83ED414;
+
+void sub_8104EA8(void)
+{
+    s16 i;
+    s16 j;
+    s16 x;
+    for (i = 0, x = 0x30; i < 3; i++, x += 0x28)
+    {
+        for (j = 0; j < 120; j += 24)
+        {
+            struct Sprite *sprite = gSprites + CreateSprite(&gSpriteTemplate_83ED414, x, 0, 14);
+            sprite->oam.priority = 3;
+            sprite->data[0] = i;
+            sprite->data[1] = j;
+            sprite->data[3] = -1;
+        }
+    }
+}
+
+void sub_8104F18(struct Sprite *sprite)
+{
+    sprite->data[2] = eSlotMachine->unk1C[sprite->data[0]] + sprite->data[1];
+    sprite->data[2] %= 120;
+    sprite->pos1.y = eSlotMachine->unk22[sprite->data[0]] + 28 + sprite->data[2];
+    sprite->sheetTileStart = GetSpriteTileStartByTag(sub_8102BA4(sprite->data[0], sprite->data[2] / 24));
+    SetSpriteSheetFrameTileNum(sprite);
+}
+
+void sub_8104F8C(void)
+{
+    s16 i;
+    s16 r4;
+    for (r4 = 203, i = 1; i < 10000; i *= 10, r4 -= 7)
+    {
+        sub_8104FF4(r4, 23, 0, i);
+    }
+    for (r4 = 235, i = 1; i < 10000; i *= 10, r4 -= 7)
+    {
+        sub_8104FF4(r4, 23, 1, i);
+    }
+}
+
 asm(".section .text_b");
 
 static void sub_8106448(void) {

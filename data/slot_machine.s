@@ -3,9 +3,6 @@
 
 	.section .rodata
 
-gUnknown_083ECC54:: @ 83ECC54
-	.4byte nullsub_69
-
 gUnknown_083ECC58:: @ 83ECC58
 	.byte 16, 0
 
