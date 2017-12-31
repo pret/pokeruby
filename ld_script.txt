@@ -278,7 +278,7 @@ SECTIONS {
         src/battle/anim/energy_wave.o(.text);
         src/battle/anim/water.o(.text);
         asm/water.o(.text);
-        asm/fire.o(.text);
+        src/battle/anim/fire.o(.text);
         src/battle/anim/sunlight.o(.text);
         asm/fire_2.o(.text);
         src/battle/anim/heated_rock.o(.text);
