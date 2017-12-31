@@ -575,7 +575,7 @@ LilycoveCity_ContestLobby_EventScript_158EB0:: @ 8158EB0
 	setvar CONTEST_RANK, 3
 	call LilycoveCity_ContestLobby_EventScript_1A4E92
 	call LilycoveCity_ContestLobby_EventScript_158F86
-	special sub_80C4BF0
+	special SetContestTrainerGfxIds
 	call LilycoveCity_ContestLobby_EventScript_15FBDB
 	setvar VAR_CONTEST_LOCATION, 4
 	call LilycoveCity_ContestLobby_EventScript_158F08

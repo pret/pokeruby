@@ -161,7 +161,7 @@ Route118_Movement_151086:: @ 8151086
 
 Route118_EventScript_15108F:: @ 815108F
 	trainerbattle 0, OPPONENT_ROSE_1, 0, Route118_Text_1BDFF4, Route118_Text_1BE03C
-	specialvar RESULT, sub_8082C68
+	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
 	goto_if_eq Route118_EventScript_1510B6
 	msgbox Route118_Text_1BE05E, 6
@@ -184,7 +184,7 @@ Route118_EventScript_1510E4:: @ 81510E4
 
 Route118_EventScript_1510FB:: @ 81510FB
 	trainerbattle 0, OPPONENT_DALTON_1, 0, Route118_Text_1BE3E8, Route118_Text_1BE406
-	specialvar RESULT, sub_8082C68
+	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
 	goto_if_eq Route118_EventScript_151122
 	msgbox Route118_Text_1BE413, 6

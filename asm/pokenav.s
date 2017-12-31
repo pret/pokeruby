@@ -4038,7 +4038,7 @@ sub_80F2598: @ 80F2598
 	asrs r1, 24
 	lsls r1, 16
 	lsrs r1, 16
-	bl sub_8082C0C
+	bl DoesSomeoneWantRematchIn
 	cmp r0, 0x1
 	bne _080F2618
 	ldr r0, _080F25FC @ =gSpriteSheet_PokenavBlueLight

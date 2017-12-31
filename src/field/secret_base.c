@@ -1197,7 +1197,7 @@ u8 sub_80BCCA4(u8 secretBaseIndex)
         + gSaveBlock1.secretBases[secretBaseIndex].gender * 5;
 }
 
-const u8 *sub_80BCCE8(void)
+const u8 *GetSecretBaseTrainerLoseText(void)
 {
     u8 param = sub_80BCCA4(VarGet(VAR_CURRENT_SECRET_BASE));
     if (param == 0) return UnknownString_81A1BB2;

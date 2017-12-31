@@ -600,7 +600,7 @@ void sub_80538F0(u8 mapGroup, u8 mapNum)
     ClearTempFieldEventData();
     ResetCyclingRoadChallengeData();
     prev_quest_postbuffer_cursor_backup_reset();
-    sub_8082BD0(mapGroup, mapNum);
+    TryUpdateRandomTrainerRematches(mapGroup, mapNum);
     DoTimeBasedEvents();
     SetSav1WeatherFromCurrMapHeader();
     ChooseAmbientCrySpecies();
@@ -635,7 +635,7 @@ void sub_8053994(u32 a1)
     ClearTempFieldEventData();
     ResetCyclingRoadChallengeData();
     prev_quest_postbuffer_cursor_backup_reset();
-    sub_8082BD0(gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum);
+    TryUpdateRandomTrainerRematches(gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum);
     if (a1 != 1)
         DoTimeBasedEvents();
     SetSav1WeatherFromCurrMapHeader();

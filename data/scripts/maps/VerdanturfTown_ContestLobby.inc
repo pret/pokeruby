@@ -11,7 +11,7 @@ VerdanturfTown_ContestLobby_EventScript_153D76:: @ 8153D76
 	setvar CONTEST_RANK, 0
 	call VerdanturfTown_ContestLobby_EventScript_1A4E92
 	call VerdanturfTown_ContestLobby_EventScript_153DA1
-	special sub_80C4BF0
+	special SetContestTrainerGfxIds
 	call VerdanturfTown_ContestLobby_EventScript_15FBDB
 	setvar VAR_CONTEST_LOCATION, 1
 	warp MAP_LINK_CONTEST_ROOM1, 255, 7, 5

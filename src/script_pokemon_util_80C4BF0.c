@@ -53,7 +53,7 @@ extern u8 gContestFinalStandings[];
 extern s16 gUnknown_02038670[];
 extern s16 gUnknown_02038678[];
 
-void sub_80C4BF0(void)
+void SetContestTrainerGfxIds(void)
 {
     gSaveBlock1.vars[0x10] = gContestMons[0].trainerGfxId;
     gSaveBlock1.vars[0x11] = gContestMons[1].trainerGfxId;

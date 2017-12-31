@@ -64,7 +64,7 @@ gSpecials::
 	def_special ScrSpecial_HasTrainerBeenFought
 	def_special ScrSpecial_EndTrainerApproach
 	def_special PlayTrainerEncounterMusic
-	def_special sub_8082C68
+	def_special ShouldTryRematchBattle
 	def_special ScrSpecial_GetTrainerEyeRematchFlag
 	def_special ScrSpecial_StartTrainerEyeRematch
 	def_special ShowPokemonStorageSystem
@@ -90,7 +90,7 @@ gSpecials::
 	def_special sub_80C4858
 	def_special sub_80C4C64
 	def_special sub_80C4758
-	def_special sub_80C4BF0
+	def_special SetContestTrainerGfxIds
 	def_special sub_80C43F4
 	def_special sub_80C4D80
 	def_special sub_80C4F70

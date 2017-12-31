@@ -296,7 +296,7 @@ Route119_EventScript_1514A8:: @ 81514A8
 
 Route119_EventScript_1514BF:: @ 81514BF
 	trainerbattle 0, OPPONENT_JACKSON_1, 0, Route119_Text_1BE8BB, Route119_Text_1BE90E
-	specialvar RESULT, sub_8082C68
+	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
 	goto_if_eq Route119_EventScript_1514E6
 	msgbox Route119_Text_1BE937, 6
@@ -309,7 +309,7 @@ Route119_EventScript_1514E6:: @ 81514E6
 
 Route119_EventScript_1514FD:: @ 81514FD
 	trainerbattle 0, OPPONENT_CATHERINE_1, 0, Route119_Text_1BEA3A, Route119_Text_1BEA88
-	specialvar RESULT, sub_8082C68
+	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
 	goto_if_eq Route119_EventScript_151524
 	msgbox Route119_Text_1BEAB3, 6

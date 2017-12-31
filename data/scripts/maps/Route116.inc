@@ -240,7 +240,7 @@ Route116_EventScript_150C79:: @ 8150C79
 
 Route116_EventScript_150C90:: @ 8150C90
 	trainerbattle 0, OPPONENT_JERRY_1, 0, Route116_Text_1BD1C0, Route116_Text_1BD21A
-	specialvar RESULT, sub_8082C68
+	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
 	goto_if_eq Route116_EventScript_150CB7
 	msgbox Route116_Text_1BD248, 6
@@ -263,7 +263,7 @@ Route116_EventScript_150CE5:: @ 8150CE5
 
 Route116_EventScript_150CFC:: @ 8150CFC
 	trainerbattle 0, OPPONENT_KAREN_1, 0, Route116_Text_1BD377, Route116_Text_1BD3AC
-	specialvar RESULT, sub_8082C68
+	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
 	goto_if_eq Route116_EventScript_150D23
 	msgbox Route116_Text_1BD3C3, 6

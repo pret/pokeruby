@@ -756,7 +756,7 @@ u32 StrCpyDecodeBattle(const u8* src, u8* dst)
                 toCpy = gSaveBlock2.playerName;
                 break;
             case 33: // ?
-                toCpy = sub_8082830();
+                toCpy = GetTrainerLoseText();
                 break;
             case 34: // ?
                 HANDLE_NICKNAME_STRING_CASE(BATTLE_STRUCT->scriptingActive, BATTLE_STRUCT->unk1605E)
