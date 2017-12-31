@@ -186,7 +186,7 @@ void nullsub_69(struct Task *task);
 void sub_8104E74(u8 taskId);
 void sub_8104EA8(void);
 void sub_8104F8C(void);
-void sub_8104FF4(s16 a0, s16 a1, u8 a2, s16 a3);
+void sub_8104FF4(s16 x, s16 y, u8 a2, s16 a3);
 void sub_81050C4(void);
 void sub_8105100(void);
 void sub_810514C(void);
@@ -3114,14 +3114,80 @@ void sub_8104F18(struct Sprite *sprite)
 void sub_8104F8C(void)
 {
     s16 i;
-    s16 r4;
-    for (r4 = 203, i = 1; i < 10000; i *= 10, r4 -= 7)
+    s16 x;
+    for (x = 203, i = 1; i < 10000; i *= 10, x -= 7)
     {
-        sub_8104FF4(r4, 23, 0, i);
+        sub_8104FF4(x, 23, 0, i);
     }
-    for (r4 = 235, i = 1; i < 10000; i *= 10, r4 -= 7)
+    for (x = 235, i = 1; i < 10000; i *= 10, x -= 7)
     {
-        sub_8104FF4(r4, 23, 1, i);
+        sub_8104FF4(x, 23, 1, i);
+    }
+}
+
+extern const struct SpriteTemplate gSpriteTemplate_83ED42C;
+
+void sub_8104FF4(s16 x, s16 y, u8 a2, s16 a3)
+{
+    struct Sprite *sprite = gSprites + CreateSprite(&gSpriteTemplate_83ED42C, x, y, 13);
+    sprite->oam.priority = 2;
+    sprite->data[0] = a2;
+    sprite->data[1] = a3;
+    sprite->data[2] = a3 * 10;
+    sprite->data[3] = -1;
+}
+
+void sub_810506C(struct Sprite *sprite)
+{
+    u16 tag = eSlotMachine->coins;
+    if (sprite->data[0])
+        tag = eSlotMachine->unk0E;
+    if (sprite->data[3] != tag)
+    {
+        sprite->data[3] = tag;
+        tag %= (u16)sprite->data[2];
+        tag /= (u16)sprite->data[1];
+        tag += 7;
+        sprite->sheetTileStart = GetSpriteTileStartByTag(tag);
+        SetSpriteSheetFrameTileNum(sprite);
+    }
+}
+
+extern const struct SpriteTemplate gSpriteTemplate_83ED444;
+extern const struct SubspriteTable gSubspriteTables_83ED704[];
+
+void sub_81050C4(void)
+{
+    u8 spriteId = CreateSprite(&gSpriteTemplate_83ED444, 0x58, 0x48, 15);
+    gSprites[spriteId].oam.priority = 3;
+    SetSubspriteTables(gSprites + spriteId, gSubspriteTables_83ED704);
+}
+
+extern const struct SpriteTemplate gSpriteTemplate_83ED45C;
+
+void sub_8105100(void)
+{
+    u8 spriteId = CreateSprite(&gSpriteTemplate_83ED45C, 0x118, 0x50, 1);
+    gSprites[spriteId].oam.priority = 1;
+    gSprites[spriteId].coordOffsetEnabled = TRUE;
+    eSlotMachine->unk3F = spriteId;
+}
+
+void sub_810514C(void)
+{
+    DestroySprite(gSprites + eSlotMachine->unk3F);
+}
+
+void sub_8105170(struct Sprite *sprite)
+{
+    sprite->pos2.y = sprite->pos2.x = 0;
+    if (sprite->animNum == 4)
+    {
+        sprite->pos2.y = sprite->pos2.x = 8;
+        if ((sprite->animCmdIndex != 0 && sprite->animDelayCounter != 0) || (sprite->animCmdIndex == 0 && sprite->animDelayCounter == 0))
+        {
+            sprite->pos2.y = -8;
+        }
     }
 }
 
