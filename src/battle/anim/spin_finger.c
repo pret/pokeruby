@@ -5,8 +5,8 @@
 #include "sound.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 extern void sub_80CF088(struct Sprite* sprite);
 static void sub_80CF138(struct Sprite* sprite);
@@ -19,11 +19,11 @@ void sub_80CF0BC(struct Sprite* sprite)
 {
     u8 bank;
     if (gBattleAnimArgs[0] == 0)
-        bank = gBattleAnimBankAttacker;
+        bank = gAnimBankAttacker;
     else
-        bank = gBattleAnimBankTarget;
+        bank = gAnimBankTarget;
 
-    sprite->pos1.x = sub_8077ABC(bank, 0);
+    sprite->pos1.x = GetBankPosition(bank, 0);
     sprite->pos1.y = sub_807A100(bank, 2);
     if (sprite->pos1.y <= 9)
         sprite->pos1.y = 10;

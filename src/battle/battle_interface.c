@@ -583,7 +583,7 @@ void nullsub_11()
 {
 }
 
-void sub_8043EB4(u8 priority)
+void UpdateOamPriorityInAllHealthboxes(u8 priority)
 {
     s32 i;
 

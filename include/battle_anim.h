@@ -9,6 +9,14 @@
 #define REG_BG2CNT_BITFIELD REG_BGnCNT_BITFIELD(2)
 #define REG_BG3CNT_BITFIELD REG_BGnCNT_BITFIELD(3)
 
+enum
+{
+    ANIM_BANK_ATTACKER,
+    ANIM_BANK_TARGET,
+    ANIM_BANK_ATK_PARTNER,
+    ANIM_BANK_DEF_PARTNER,
+};
+
 struct BattleAnimBackground
 {
     void *image;
@@ -36,20 +44,21 @@ struct UnknownStruct3
 
 extern void (*gAnimScriptCallback)(void);
 extern u8 gAnimScriptActive;
-extern u8 gHappinessMoveAnim;
-extern u8 gUnknown_0202F7C4;
+extern u8 gAnimFriendship;
+extern u8 gAnimMoveTurn;
+extern struct DisableStruct *gAnimDisableStructPtr;
 
-void ExecuteMoveAnim(u16 move);
-void DoMoveAnim(const u8 *const moveAnims[], u16 b, u8 c);
+void DoMoveAnim(u16 move);
+void LaunchBattleAnimation(const u8 *const moveAnims[], u16 b, u8 c);
 bool8 IsAnimBankSpriteVisible(u8 a);
 void sub_8076034(u8, u8);
-bool8 NotInBattle(void);
-void battle_anim_clear_some_data(void);
-void move_anim_8072740(struct Sprite *sprite);
+bool8 IsContest(void);
+void ClearBattleAnimationVars(void);
+void DestroyAnimSprite(struct Sprite *sprite);
 void DestroyAnimVisualTask(u8 task);
 void DestroyAnimVisualTask(u8 task);
 bool8 IsAnimBankSpriteVisible(u8);
-s8 sub_8076F98(s8 a);
+s8 BattleAnimAdjustPanning(s8 a);
 void sub_80763FC(u16 a, u16 *b, u32 c, u8 d);
 
 #endif

@@ -5,8 +5,8 @@
 #include "util.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 static void sub_80D32E8(struct Sprite *sprite);
 static void sub_80D3370(struct Sprite *sprite);
@@ -19,29 +19,29 @@ void sub_80D31C8(struct Sprite* sprite)
 {
     u8 newSpriteId;
 
-    if (GetBankSide(gBattleAnimBankAttacker) != 0)
+    if (GetBankSide(gAnimBankAttacker) != 0)
     {
-        sprite->pos1.x = sub_8077ABC(gBattleAnimBankAttacker, 2) - gBattleAnimArgs[0];
-        sprite->pos1.y = sub_8077ABC(gBattleAnimBankAttacker, 3) + gBattleAnimArgs[1];
+        sprite->pos1.x = GetBankPosition(gAnimBankAttacker, 2) - gBattleAnimArgs[0];
+        sprite->pos1.y = GetBankPosition(gAnimBankAttacker, 3) + gBattleAnimArgs[1];
     }
     else
     {
-        sprite->pos1.x = sub_8077ABC(gBattleAnimBankAttacker, 2) + gBattleAnimArgs[0];
-        sprite->pos1.y = sub_8077ABC(gBattleAnimBankAttacker, 3) + gBattleAnimArgs[1];
+        sprite->pos1.x = GetBankPosition(gAnimBankAttacker, 2) + gBattleAnimArgs[0];
+        sprite->pos1.y = GetBankPosition(gAnimBankAttacker, 3) + gBattleAnimArgs[1];
     }
 
     sprite->animPaused = 1;
 
-    if (GetBankSide(gBattleAnimBankAttacker) != 0)
+    if (GetBankSide(gAnimBankAttacker) != 0)
     {
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
     }
 
     sprite->data[0] = gBattleAnimArgs[6];
     sprite->data[1] = sprite->pos1.x;
-    sprite->data[2] = sub_8077ABC(gBattleAnimBankTarget, 2);
+    sprite->data[2] = GetBankPosition(gAnimBankTarget, 2);
     sprite->data[3] = sprite->pos1.y;
-    sprite->data[4] = sub_8077ABC(gBattleAnimBankTarget, 3);
+    sprite->data[4] = GetBankPosition(gAnimBankTarget, 3);
 
     obj_translate_based_on_private_1_2_3_4(sprite);
 

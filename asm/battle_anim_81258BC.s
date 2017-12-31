@@ -77,12 +77,12 @@ sub_812AF30: @ 812AF30
 	strh r0, [r6, 0xA]
 	movs r0, 0x40
 	negs r0, r0
-	bl sub_8076F98
+	bl BattleAnimAdjustPanning
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x3F
-	bl sub_8076F98
+	bl BattleAnimAdjustPanning
 	adds r5, r0, 0
 	lsls r4, 24
 	asrs r4, 24
@@ -91,7 +91,7 @@ sub_812AF30: @ 812AF30
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0x2
-	bl sub_807712C
+	bl CalculatePanIncrement
 	strh r4, [r6, 0xC]
 	strh r5, [r6, 0xE]
 	lsls r0, 24
@@ -188,7 +188,7 @@ sub_812B004: @ 812B004
 	movs r0, 0
 	strh r0, [r4, 0x1C]
 	movs r0, 0x3F
-	bl sub_8076F98
+	bl BattleAnimAdjustPanning
 	adds r1, r0, 0
 	ldrh r0, [r4, 0xA]
 	lsls r1, 24
@@ -236,14 +236,14 @@ sub_812B058: @ 812B058
 	ldrb r0, [r0, 0x2]
 	lsls r0, 24
 	asrs r0, 24
-	bl sub_8076F98
+	bl BattleAnimAdjustPanning
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	lsls r5, 24
 	asrs r5, 24
 	adds r0, r5, 0
-	bl sub_8076F98
+	bl BattleAnimAdjustPanning
 	adds r5, r0, 0
 	lsls r4, 24
 	asrs r4, 24
@@ -254,7 +254,7 @@ sub_812B058: @ 812B058
 	adds r0, r4, 0
 	adds r1, r5, 0
 	adds r2, r6, 0
-	bl sub_807712C
+	bl CalculatePanIncrement
 	ldr r2, _0812B100 @ =gTasks
 	mov r3, r8
 	lsls r1, r3, 2
@@ -373,10 +373,10 @@ sub_812B18C: @ 812B18C
 	movs r4, 0
 	movs r0, 0x40
 	negs r0, r0
-	bl sub_8076F98
+	bl BattleAnimAdjustPanning
 	lsls r0, 24
 	lsrs r6, r0, 24
-	bl NotInBattle
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812B1CC
@@ -402,29 +402,29 @@ _0812B1CC:
 	adds r2, r0, 0
 	cmp r1, 0
 	bne _0812B1E8
-	ldr r0, _0812B1E4 @ =gBattleAnimBankAttacker
+	ldr r0, _0812B1E4 @ =gAnimBankAttacker
 	ldrb r4, [r0]
 	b _0812B20E
 	.align 2, 0
 _0812B1E0: .4byte gBattleAnimArgs
-_0812B1E4: .4byte gBattleAnimBankAttacker
+_0812B1E4: .4byte gAnimBankAttacker
 _0812B1E8:
 	cmp r1, 0x1
 	bne _0812B1F8
-	ldr r0, _0812B1F4 @ =gBattleAnimBankTarget
+	ldr r0, _0812B1F4 @ =gAnimBankTarget
 	ldrb r4, [r0]
 	b _0812B20E
 	.align 2, 0
-_0812B1F4: .4byte gBattleAnimBankTarget
+_0812B1F4: .4byte gAnimBankTarget
 _0812B1F8:
 	cmp r1, 0x2
 	bne _0812B204
-	ldr r0, _0812B200 @ =gBattleAnimBankAttacker
+	ldr r0, _0812B200 @ =gAnimBankAttacker
 	b _0812B206
 	.align 2, 0
-_0812B200: .4byte gBattleAnimBankAttacker
+_0812B200: .4byte gAnimBankAttacker
 _0812B204:
-	ldr r0, _0812B230 @ =gBattleAnimBankTarget
+	ldr r0, _0812B230 @ =gAnimBankTarget
 _0812B206:
 	ldrb r1, [r0]
 	movs r0, 0x2
@@ -447,7 +447,7 @@ _0812B21A:
 	bl DestroyAnimVisualTask
 	b _0812B2B0
 	.align 2, 0
-_0812B230: .4byte gBattleAnimBankTarget
+_0812B230: .4byte gAnimBankTarget
 _0812B234:
 	adds r0, r4, 0
 	bl GetBankSide
@@ -520,10 +520,10 @@ sub_812B2B8: @ 812B2B8
 	lsrs r5, r0, 24
 	movs r0, 0x40
 	negs r0, r0
-	bl sub_8076F98
+	bl BattleAnimAdjustPanning
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl NotInBattle
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812B2DC
@@ -532,8 +532,8 @@ sub_812B2B8: @ 812B2B8
 	.align 2, 0
 _0812B2D8: .4byte gSharedMem + 0x19348
 _0812B2DC:
-	ldr r1, _0812B304 @ =gUnknown_0202F7CA
-	ldr r0, _0812B308 @ =gBattleAnimBankAttacker
+	ldr r1, _0812B304 @ =gAnimSpeciesByBanks
+	ldr r0, _0812B308 @ =gAnimBankAttacker
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -552,8 +552,8 @@ _0812B2F6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0812B304: .4byte gUnknown_0202F7CA
-_0812B308: .4byte gBattleAnimBankAttacker
+_0812B304: .4byte gAnimSpeciesByBanks
+_0812B308: .4byte gAnimBankAttacker
 	thumb_func_end sub_812B2B8
 
 	thumb_func_start sub_812B30C
@@ -567,7 +567,7 @@ sub_812B30C: @ 812B30C
 	ldrb r0, [r0, 0x2]
 	lsls r0, 24
 	asrs r0, 24
-	bl sub_8076F98
+	bl BattleAnimAdjustPanning
 	adds r1, r0, 0
 	lsls r1, 24
 	asrs r1, 24
@@ -593,7 +593,7 @@ sub_812B340: @ 812B340
 	ldrb r0, [r0, 0x2]
 	lsls r0, 24
 	asrs r0, 24
-	bl sub_8076F98
+	bl BattleAnimAdjustPanning
 	adds r1, r0, 0
 	lsls r1, 24
 	asrs r1, 24
@@ -626,14 +626,14 @@ sub_812B374: @ 812B374
 	ldrb r0, [r0]
 	lsls r0, 24
 	asrs r0, 24
-	bl sub_8076F98
+	bl BattleAnimAdjustPanning
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	lsls r5, 24
 	asrs r5, 24
 	adds r0, r5, 0
-	bl sub_8076F98
+	bl BattleAnimAdjustPanning
 	adds r5, r0, 0
 	lsls r4, 24
 	asrs r4, 24
@@ -644,7 +644,7 @@ sub_812B374: @ 812B374
 	adds r0, r4, 0
 	adds r1, r5, 0
 	adds r2, r6, 0
-	bl sub_807712C
+	bl CalculatePanIncrement
 	ldr r2, _0812B3FC @ =gTasks
 	mov r3, r8
 	lsls r1, r3, 2

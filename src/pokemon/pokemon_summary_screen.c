@@ -124,10 +124,10 @@ extern struct MusicPlayerInfo gMPlay_BGM;
 extern u8 gUnknown_020384F0;
 extern u8 gUnknown_08208238[];
 extern u16 gUnknown_030041B8;
-extern u16 gUnknown_03004280;
-extern u16 gUnknown_030041B4;
-extern u16 gUnknown_030042C0;
-extern u16 gUnknown_03004288;
+extern u16 gBattle_BG2_Y;
+extern u16 gBattle_BG1_Y;
+extern u16 gBattle_BG1_X;
+extern u16 gBattle_BG2_X;
 extern u16 gUnknown_030041B0;
 extern TaskFunc gUnknown_03005CF0;
 extern struct Sprite *gUnknown_020384F4;
@@ -582,10 +582,10 @@ void sub_809D844(void)
 
 void sub_809D85C(void)
 {
-    REG_BG1HOFS = gUnknown_030042C0;
-    REG_BG1VOFS = gUnknown_030041B4;
-    REG_BG2HOFS = gUnknown_03004288;
-    REG_BG2VOFS = gUnknown_03004280;
+    REG_BG1HOFS = gBattle_BG1_X;
+    REG_BG1VOFS = gBattle_BG1_Y;
+    REG_BG2HOFS = gBattle_BG2_X;
+    REG_BG2VOFS = gBattle_BG2_Y;
     REG_BG3HOFS = gUnknown_030041B0;
     REG_BG3VOFS = gUnknown_030041B8;
 
@@ -868,10 +868,10 @@ static void sub_809DE64(void)
     REG_BG2CNT = 0x4A02;
     REG_BG3CNT = 0x5C03;
 
-    gUnknown_030042C0 = 0;
-    gUnknown_030041B4 = 0;
-    gUnknown_03004288 = 0;
-    gUnknown_03004280 = 0;
+    gBattle_BG1_X = 0;
+    gBattle_BG1_Y = 0;
+    gBattle_BG2_X = 0;
+    gBattle_BG2_Y = 0;
     gUnknown_030041B0 = 0;
     gUnknown_030041B8 = 0;
 
@@ -1522,7 +1522,7 @@ static void sub_809EBC4(void)
     if (pssData.page != PSS_PAGE_INFO)
     {
         DrawSummaryScreenNavigationDots();
-        gUnknown_030042C0 = 0x100;
+        gBattle_BG1_X = 0x100;
 
         if (pssData.page == PSS_PAGE_SKILLS)
             REG_BG1CNT = (REG_BG1CNT & 0xE0FF) + 0x800;
@@ -1547,7 +1547,7 @@ void sub_809EC38(u8 taskId)
         {
             if (pssData.page != PSS_PAGE_INFO)
             {
-                gUnknown_03004288 = 0x100;
+                gBattle_BG2_X = 0x100;
             }
 
             if (pssData.page == PSS_PAGE_SKILLS)
@@ -1564,7 +1564,7 @@ void sub_809EC38(u8 taskId)
         {
             if (pssData.page != PSS_PAGE_INFO)
             {
-                gUnknown_030042C0 = 0x100;
+                gBattle_BG1_X = 0x100;
             }
 
             if (pssData.page == PSS_PAGE_SKILLS)
@@ -1583,8 +1583,8 @@ void sub_809EC38(u8 taskId)
     case 1:
         if (pssData.bgToggle == 0)
         {
-            int var2 = gUnknown_030042C0 - 0x20;
-            gUnknown_030042C0 = var2;
+            int var2 = gBattle_BG1_X - 0x20;
+            gBattle_BG1_X = var2;
             if (var2 << 16 == 0)
             {
                 REG_BG1CNT = (REG_BG1CNT & 0xFFFC) + 2;
@@ -1594,8 +1594,8 @@ void sub_809EC38(u8 taskId)
         }
         else
         {
-            int var2 = gUnknown_03004288 - 0x20;
-            gUnknown_03004288 = var2;
+            int var2 = gBattle_BG2_X - 0x20;
+            gBattle_BG2_X = var2;
             if (var2 << 16 == 0)
             {
                 REG_BG1CNT = (REG_BG1CNT & 0xFFFC) + 1;
@@ -1663,12 +1663,12 @@ void sub_809EE74(u8 taskId)
         var1 = pssData.bgToggle;
         if (var1 == 0)
         {
-            gUnknown_03004288 = pssData.bgToggle;
+            gBattle_BG2_X = pssData.bgToggle;
             taskData[0]++;
         }
         else
         {
-            gUnknown_030042C0 = 0;
+            gBattle_BG1_X = 0;
             taskData[0]++;
         }
         break;
@@ -1705,8 +1705,8 @@ void sub_809EE74(u8 taskId)
     case 2:
         if (pssData.bgToggle == 0)
         {
-            int var2 = gUnknown_03004288 + 0x20;
-            gUnknown_03004288 = var2;
+            int var2 = gBattle_BG2_X + 0x20;
+            gBattle_BG2_X = var2;
             if ((var2 << 16) == 0x1000000)
             {
                 taskData[0]++;
@@ -1714,8 +1714,8 @@ void sub_809EE74(u8 taskId)
         }
         else
         {
-            int var2 = gUnknown_030042C0 + 0x20;
-            gUnknown_030042C0 = var2;
+            int var2 = gBattle_BG1_X + 0x20;
+            gBattle_BG1_X = var2;
             if ((var2 << 16) == 0x1000000)
             {
                 taskData[0]++;

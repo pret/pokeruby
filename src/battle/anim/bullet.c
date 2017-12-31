@@ -6,8 +6,8 @@
 #include "random.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 static void sub_80D0030(struct Sprite* sprite);
 static void sub_80D00B4(struct Sprite* sprite);
@@ -19,8 +19,8 @@ void sub_80CFFD8(struct Sprite* sprite)
 {
     sub_80787B0(sprite, 1);
     sprite->data[0] = 20;
-    sprite->data[2] = sub_8077ABC(gBattleAnimBankTarget, 2);
-    sprite->data[4] = sub_8077ABC(gBattleAnimBankTarget, 3);
+    sprite->data[2] = GetBankPosition(gAnimBankTarget, 2);
+    sprite->data[4] = GetBankPosition(gAnimBankTarget, 3);
     sprite->callback = sub_8078B34;
     sprite->affineAnimPaused = 1;
     StoreSpriteCallbackInData(sprite, sub_80D0030);
@@ -31,7 +31,7 @@ void sub_80D0030(struct Sprite* sprite)
     int i;
     u16 rand;
     s16* ptr;
-    PlaySE12WithPanning(0xA6, sub_8076F98(0x3F));
+    PlaySE12WithPanning(0xA6, BattleAnimAdjustPanning(0x3F));
     sprite->pos1.x += sprite->pos2.x;
     sprite->pos1.y += sprite->pos2.y;
     sprite->pos2.y = 0;
@@ -64,6 +64,6 @@ void sub_80D00B4(struct Sprite* sprite)
         sprite->data[1] = 0;
         sprite->data[2] /= 2;
         if (++sprite->data[3] == 1)
-            move_anim_8072740(sprite);
+            DestroyAnimSprite(sprite);
     }
 }

@@ -426,13 +426,13 @@ _080126C2:
 	ldrb r0, [r3]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _080126DC @ =gUnknown_081D9B29
+	ldr r1, _080126DC @ =BattleScript_ActionSelectionItemsCantBeUsed
 	b _080129CC
 	.align 2, 0
 _080126D0: .4byte gBattleTypeFlags
 _080126D4: .4byte 0x00000902
 _080126D8: .4byte gUnknown_02024C1C
-_080126DC: .4byte gUnknown_081D9B29
+_080126DC: .4byte BattleScript_ActionSelectionItemsCantBeUsed
 _080126E0:
 	ldr r3, _08012738 @ =gSharedMem
 	ldr r5, _0801273C @ =gActiveBank
@@ -661,7 +661,7 @@ _080128B0:
 	ldrb r0, [r2]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, _080128F4 @ =gUnknown_081D8E4A
+	ldr r1, _080128F4 @ =BattleScript_PrintFullBox
 	str r1, [r0]
 	ldr r0, _080128F8 @ =gBattleCommunication
 	ldrb r1, [r2]
@@ -684,7 +684,7 @@ _080128B0:
 	.align 2, 0
 _080128EC: .4byte gUnknown_02024C1C
 _080128F0: .4byte gActiveBank
-_080128F4: .4byte gUnknown_081D8E4A
+_080128F4: .4byte BattleScript_PrintFullBox
 _080128F8: .4byte gBattleCommunication
 _080128FC: .4byte gSharedMem
 _08012900: .4byte 0x00016060
@@ -747,7 +747,7 @@ _08012968:
 	ldrb r0, [r1]
 	cmp r0, 0x3
 	bne _080129A8
-	ldr r0, _080129A0 @ =gUnknown_081D8E37
+	ldr r0, _080129A0 @ =BattleScript_PrintCantRunFromTrainer
 	bl b_call_bc_move_exec
 	ldr r1, _080129A4 @ =gBattleCommunication
 	ldrb r0, [r4]
@@ -757,7 +757,7 @@ _08012968:
 _08012994: .4byte gBattleTypeFlags
 _08012998: .4byte gBattleBufferB
 _0801299C: .4byte gActiveBank
-_080129A0: .4byte gUnknown_081D8E37
+_080129A0: .4byte BattleScript_PrintCantRunFromTrainer
 _080129A4: .4byte gBattleCommunication
 _080129A8:
 	bl CanRunFromBattle
@@ -776,7 +776,7 @@ _080129A8:
 	ldr r1, _080129FC @ =gUnknown_02024C1C
 	lsls r0, r2, 2
 	adds r0, r1
-	ldr r1, _08012A00 @ =gUnknown_081D8E44
+	ldr r1, _08012A00 @ =BattleScript_PrintCantEscapeFromBattle
 _080129CC:
 	str r1, [r0]
 	ldr r0, _08012A04 @ =gBattleCommunication
@@ -801,7 +801,7 @@ _080129CC:
 _080129F4: .4byte gBattleBufferB
 _080129F8: .4byte gActiveBank
 _080129FC: .4byte gUnknown_02024C1C
-_08012A00: .4byte gUnknown_081D8E44
+_08012A00: .4byte BattleScript_PrintCantEscapeFromBattle
 _08012A04: .4byte gBattleCommunication
 _08012A08: .4byte gSharedMem
 _08012A0C: .4byte 0x00016060
@@ -2790,7 +2790,7 @@ _08013A04:
 _08013A0E:
 	bl BattleMusicStop
 	ldr r1, _08013A3C @ =gBattlescriptCurrInstr
-	ldr r0, _08013A40 @ =gUnknown_081D8DBE
+	ldr r0, _08013A40 @ =BattleScript_LocalTrainerBattleWon
 	str r0, [r1]
 	ldr r2, _08013A44 @ =gTrainers
 	ldr r0, _08013A48 @ =gTrainerBattleOpponent
@@ -2812,7 +2812,7 @@ _08013A30:
 	mov pc, r0
 	.align 2, 0
 _08013A3C: .4byte gBattlescriptCurrInstr
-_08013A40: .4byte gUnknown_081D8DBE
+_08013A40: .4byte BattleScript_LocalTrainerBattleWon
 _08013A44: .4byte gTrainers
 _08013A48: .4byte gTrainerBattleOpponent
 _08013A4C: .4byte _08013A50
@@ -2891,7 +2891,7 @@ _08013B38:
 	b _08013B48
 _08013B42:
 	ldr r1, _08013B54 @ =gBattlescriptCurrInstr
-	ldr r0, _08013B58 @ =gUnknown_081D8DCE
+	ldr r0, _08013B58 @ =BattleScript_PayDayMoneyAndPickUpItems
 _08013B46:
 	str r0, [r1]
 _08013B48:
@@ -2903,7 +2903,7 @@ _08013B48:
 	bx r0
 	.align 2, 0
 _08013B54: .4byte gBattlescriptCurrInstr
-_08013B58: .4byte gUnknown_081D8DCE
+_08013B58: .4byte BattleScript_PayDayMoneyAndPickUpItems
 _08013B5C: .4byte gBattleMainFunc
 _08013B60: .4byte sub_8013C9C
 	thumb_func_end sub_8013998
@@ -2946,7 +2946,7 @@ _08013BB0: .4byte gBattlescriptCurrInstr
 _08013BB4: .4byte gUnknown_081D8E02
 _08013BB8:
 	ldr r1, _08013BCC @ =gBattlescriptCurrInstr
-	ldr r0, _08013BD0 @ =gUnknown_081D8DD1
+	ldr r0, _08013BD0 @ =BattleScript_LocalBattleLost
 	str r0, [r1]
 _08013BBE:
 	ldr r1, _08013BD4 @ =gBattleMainFunc
@@ -2957,7 +2957,7 @@ _08013BBE:
 	bx r0
 	.align 2, 0
 _08013BCC: .4byte gBattlescriptCurrInstr
-_08013BD0: .4byte gUnknown_081D8DD1
+_08013BD0: .4byte BattleScript_LocalBattleLost
 _08013BD4: .4byte gBattleMainFunc
 _08013BD8: .4byte sub_8013C9C
 	thumb_func_end sub_8013B64
@@ -2981,24 +2981,24 @@ sub_8013BDC: @ 8013BDC
 	cmp r0, 0x2
 	beq _08013C28
 	ldr r1, _08013C10 @ =gBattlescriptCurrInstr
-	ldr r0, _08013C14 @ =gUnknown_081D8E29
+	ldr r0, _08013C14 @ =BattleScript_GotAwaySafely
 	b _08013C2C
 	.align 2, 0
 _08013C04: .4byte gFightStateTracker
 _08013C08: .4byte gProtectStructs
 _08013C0C: .4byte gBankAttacker
 _08013C10: .4byte gBattlescriptCurrInstr
-_08013C14: .4byte gUnknown_081D8E29
+_08013C14: .4byte BattleScript_GotAwaySafely
 _08013C18:
 	ldr r1, _08013C20 @ =gBattlescriptCurrInstr
-	ldr r0, _08013C24 @ =gUnknown_081D8E14
+	ldr r0, _08013C24 @ =BattleScript_SmokeBallEscape
 	b _08013C2C
 	.align 2, 0
 _08013C20: .4byte gBattlescriptCurrInstr
-_08013C24: .4byte gUnknown_081D8E14
+_08013C24: .4byte BattleScript_SmokeBallEscape
 _08013C28:
 	ldr r1, _08013C38 @ =gBattlescriptCurrInstr
-	ldr r0, _08013C3C @ =gUnknown_081D8E22
+	ldr r0, _08013C3C @ =BattleScript_RanAwayUsingMonAbility
 _08013C2C:
 	str r0, [r1]
 	ldr r1, _08013C40 @ =gBattleMainFunc
@@ -3008,7 +3008,7 @@ _08013C2C:
 	bx r0
 	.align 2, 0
 _08013C38: .4byte gBattlescriptCurrInstr
-_08013C3C: .4byte gUnknown_081D8E22
+_08013C3C: .4byte BattleScript_RanAwayUsingMonAbility
 _08013C40: .4byte gBattleMainFunc
 _08013C44: .4byte sub_8013C9C
 	thumb_func_end sub_8013BDC
@@ -3035,7 +3035,7 @@ sub_8013C48: @ 8013C48
 	movs r0, 0xFF
 	strb r0, [r1, 0x4]
 	ldr r1, _08013C8C @ =gBattlescriptCurrInstr
-	ldr r0, _08013C90 @ =gUnknown_081D8E30
+	ldr r0, _08013C90 @ =BattleScript_WildMonFled
 	str r0, [r1]
 	ldr r1, _08013C94 @ =gBattleMainFunc
 	ldr r0, _08013C98 @ =sub_8013C9C
@@ -3047,7 +3047,7 @@ _08013C80: .4byte gBattleTextBuff1
 _08013C84: .4byte gBankAttacker
 _08013C88: .4byte gBattlePartyID
 _08013C8C: .4byte gBattlescriptCurrInstr
-_08013C90: .4byte gUnknown_081D8E30
+_08013C90: .4byte BattleScript_WildMonFled
 _08013C94: .4byte gBattleMainFunc
 _08013C98: .4byte sub_8013C9C
 	thumb_func_end sub_8013C48
@@ -3545,7 +3545,7 @@ _08014044:
 	ands r0, r1
 	strb r0, [r5]
 	ldr r2, _080140E0 @ =gCurrentMove
-	ldr r1, _080140E4 @ =gUnknown_02024BE8
+	ldr r1, _080140E4 @ =gChosenMove
 	movs r0, 0xA5
 	strh r0, [r1]
 	strh r0, [r2]
@@ -3574,7 +3574,7 @@ _080140D4: .4byte 0x0001608c
 _080140D8: .4byte gUnknown_02024BE5
 _080140DC: .4byte gProtectStructs
 _080140E0: .4byte gCurrentMove
-_080140E4: .4byte gUnknown_02024BE8
+_080140E4: .4byte gChosenMove
 _080140E8: .4byte gHitMarker
 _080140EC: .4byte 0x00016010
 _080140F0:
@@ -3598,7 +3598,7 @@ _080140F0:
 	beq _08014138
 _08014114:
 	ldr r3, _0801412C @ =gCurrentMove
-	ldr r2, _08014130 @ =gUnknown_02024BE8
+	ldr r2, _08014130 @ =gChosenMove
 	ldr r1, _08014134 @ =gLockedMove
 	lsls r0, r4, 1
 	adds r0, r1
@@ -3609,7 +3609,7 @@ _08014114:
 	.align 2, 0
 _08014128: .4byte gBattleMons
 _0801412C: .4byte gCurrentMove
-_08014130: .4byte gUnknown_02024BE8
+_08014130: .4byte gChosenMove
 _08014134: .4byte gLockedMove
 _08014138:
 	ldr r3, _08014188 @ =gDisableStructs
@@ -3635,7 +3635,7 @@ _08014138:
 	cmp r1, r0
 	bne _080141A0
 	ldr r1, _08014190 @ =gCurrentMove
-	ldr r0, _08014194 @ =gUnknown_02024BE8
+	ldr r0, _08014194 @ =gChosenMove
 	strh r4, [r0]
 	strh r4, [r1]
 	ldrb r0, [r2, 0xC]
@@ -3654,7 +3654,7 @@ _08014138:
 _08014188: .4byte gDisableStructs
 _0801418C: .4byte gBattleMons
 _08014190: .4byte gCurrentMove
-_08014194: .4byte gUnknown_02024BE8
+_08014194: .4byte gChosenMove
 _08014198: .4byte gUnknown_02024BE5
 _0801419C: .4byte 0x00016010
 _080141A0:
@@ -3667,7 +3667,7 @@ _080141A0:
 	mov r1, r8
 	strb r3, [r1]
 	ldr r3, _0801420C @ =gCurrentMove
-	ldr r1, _08014210 @ =gUnknown_02024BE8
+	ldr r1, _08014210 @ =gChosenMove
 	mov r2, r8
 	ldrb r0, [r2]
 	lsls r0, 1
@@ -3712,7 +3712,7 @@ _08014200:
 	.align 2, 0
 _08014208: .4byte gUnknown_02024BE5
 _0801420C: .4byte gCurrentMove
-_08014210: .4byte gUnknown_02024BE8
+_08014210: .4byte gChosenMove
 _08014214: .4byte 0x00016010
 _08014218:
 	mov r4, r8
@@ -3734,7 +3734,7 @@ _08014218:
 	cmp r3, r2
 	beq _08014278
 	ldr r1, _08014268 @ =gCurrentMove
-	ldr r0, _0801426C @ =gUnknown_02024BE8
+	ldr r0, _0801426C @ =gChosenMove
 	strh r3, [r0]
 	strh r3, [r1]
 	ldrh r0, [r1]
@@ -3752,12 +3752,12 @@ _0801425C: .4byte gBankAttacker
 _08014260: .4byte gBattleMons
 _08014264: .4byte gChosenMovesByBanks
 _08014268: .4byte gCurrentMove
-_0801426C: .4byte gUnknown_02024BE8
+_0801426C: .4byte gChosenMove
 _08014270: .4byte gSharedMem
 _08014274: .4byte 0x00016010
 _08014278:
 	ldr r1, _08014298 @ =gCurrentMove
-	ldr r0, _0801429C @ =gUnknown_02024BE8
+	ldr r0, _0801429C @ =gChosenMove
 	strh r3, [r0]
 	strh r3, [r1]
 _08014280:
@@ -3774,7 +3774,7 @@ _08014280:
 	b _080142B0
 	.align 2, 0
 _08014298: .4byte gCurrentMove
-_0801429C: .4byte gUnknown_02024BE8
+_0801429C: .4byte gChosenMove
 _080142A0: .4byte gBankAttacker
 _080142A4: .4byte gBattleResults
 _080142A8:
@@ -3963,7 +3963,7 @@ _08014416:
 	b _08014522
 _0801441E:
 	ldr r2, _08014460 @ =gBattleMoves
-	ldr r0, _0801447C @ =gUnknown_02024BE8
+	ldr r0, _0801447C @ =gChosenMove
 	ldrh r1, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -3998,7 +3998,7 @@ _0801446C: .4byte gSharedMem
 _08014470: .4byte 0x00016010
 _08014474: .4byte gActiveBank
 _08014478: .4byte gNoOfAllBanks
-_0801447C: .4byte gUnknown_02024BE8
+_0801447C: .4byte gChosenMove
 _08014480:
 	movs r0, 0x3
 	b _08014496
@@ -4121,7 +4121,7 @@ _08014570:
 	cmp r0, 0
 	beq _0801461C
 	ldr r2, _080145B4 @ =gBattleMoves
-	ldr r0, _080145B8 @ =gUnknown_02024BE8
+	ldr r0, _080145B8 @ =gChosenMove
 	ldrh r1, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -4146,7 +4146,7 @@ _08014570:
 	b _080145D2
 	.align 2, 0
 _080145B4: .4byte gBattleMoves
-_080145B8: .4byte gUnknown_02024BE8
+_080145B8: .4byte gChosenMove
 _080145BC:
 	movs r0, 0x3
 	b _080145D2
@@ -4260,7 +4260,7 @@ _0801469A:
 	strb r0, [r5]
 _080146AC:
 	ldr r4, _080146E0 @ =gBattlescriptCurrInstr
-	ldr r3, _080146E4 @ =gBattleScriptsEffectsTable
+	ldr r3, _080146E4 @ =gBattleScriptsForMoveEffects
 	ldr r2, _080146E8 @ =gBattleMoves
 	ldr r0, _080146EC @ =gCurrentMove
 	ldrh r1, [r0]
@@ -4287,7 +4287,7 @@ _080146CC:
 	bx r0
 	.align 2, 0
 _080146E0: .4byte gBattlescriptCurrInstr
-_080146E4: .4byte gBattleScriptsEffectsTable
+_080146E4: .4byte gBattleScriptsForMoveEffects
 _080146E8: .4byte gBattleMoves
 _080146EC: .4byte gCurrentMove
 _080146F0: .4byte gFightStateTracker
@@ -4336,7 +4336,7 @@ sub_80146F4: @ 80146F4
 	adds r1, r0
 	strb r4, [r1]
 	ldr r1, _08014790 @ =gBattlescriptCurrInstr
-	ldr r0, _08014794 @ =gUnknown_081D8E4E
+	ldr r0, _08014794 @ =BattleScript_ActionSwitch
 	str r0, [r1]
 	ldr r1, _08014798 @ =gFightStateTracker
 	movs r0, 0xA
@@ -4364,7 +4364,7 @@ _08014784: .4byte gSharedMem
 _08014788: .4byte 0x00016064
 _0801478C: .4byte 0x00016003
 _08014790: .4byte gBattlescriptCurrInstr
-_08014794: .4byte gUnknown_081D8E4E
+_08014794: .4byte BattleScript_ActionSwitch
 _08014798: .4byte gFightStateTracker
 _0801479C: .4byte gBattleResults
 	thumb_func_end sub_80146F4
@@ -4452,14 +4452,14 @@ _0801484C:
 	cmp r0, 0
 	bne _0801486C
 	ldr r0, _08014864 @ =gBattlescriptCurrInstr
-	ldr r1, _08014868 @ =gUnknown_081D9E7C
+	ldr r1, _08014868 @ =gBattlescriptsForUsingItem
 _0801485C:
 	ldr r1, [r1]
 	str r1, [r0]
 	b _08014A8C
 	.align 2, 0
 _08014864: .4byte gBattlescriptCurrInstr
-_08014868: .4byte gUnknown_081D9E7C
+_08014868: .4byte gBattlescriptsForUsingItem
 _0801486C:
 	ldr r2, _080148A0 @ =gSharedMem
 	ldrb r0, [r4]
@@ -4476,7 +4476,7 @@ _0801486C:
 	mov r8, r4
 	ldr r3, _080148AC @ =gBattlescriptCurrInstr
 	mov r9, r3
-	ldr r1, _080148B0 @ =gUnknown_081D9E7C
+	ldr r1, _080148B0 @ =gBattlescriptsForUsingItem
 	mov r10, r1
 	adds r7, r2, 0
 	cmp r0, 0x4
@@ -4493,7 +4493,7 @@ _080148A0: .4byte gSharedMem
 _080148A4: .4byte 0x00016003
 _080148A8: .4byte 0x000160d8
 _080148AC: .4byte gBattlescriptCurrInstr
-_080148B0: .4byte gUnknown_081D9E7C
+_080148B0: .4byte gBattlescriptsForUsingItem
 _080148B4: .4byte _080148B8
 	.align 2, 0
 _080148B8:
@@ -4522,7 +4522,7 @@ _080148CC:
 	ands r0, r3
 	ldr r3, _08014910 @ =gBattlescriptCurrInstr
 	mov r9, r3
-	ldr r1, _08014914 @ =gUnknown_081D9E7C
+	ldr r1, _08014914 @ =gBattlescriptsForUsingItem
 	mov r10, r1
 	cmp r0, 0
 	bne _080148FC
@@ -4536,11 +4536,11 @@ _08014904: .4byte gBattleCommunication
 _08014908: .4byte gBankAttacker
 _0801490C: .4byte 0x000160da
 _08014910: .4byte gBattlescriptCurrInstr
-_08014914: .4byte gUnknown_081D9E7C
+_08014914: .4byte gBattlescriptsForUsingItem
 _08014918:
 	ldr r3, _08014950 @ =gBattlescriptCurrInstr
 	mov r9, r3
-	ldr r0, _08014954 @ =gUnknown_081D9E7C
+	ldr r0, _08014954 @ =gBattlescriptsForUsingItem
 	mov r10, r0
 	adds r5, r7, 0
 	mov r4, r8
@@ -4568,7 +4568,7 @@ _08014926:
 	b _08014A74
 	.align 2, 0
 _08014950: .4byte gBattlescriptCurrInstr
-_08014954: .4byte gUnknown_081D9E7C
+_08014954: .4byte gBattlescriptsForUsingItem
 _08014958:
 	ldr r3, _0801498C @ =gBattleCommunication
 	movs r0, 0x4
@@ -4592,7 +4592,7 @@ _08014958:
 	strb r0, [r3, 0x5]
 	ldr r2, _08014998 @ =gBattlescriptCurrInstr
 	mov r9, r2
-	ldr r3, _0801499C @ =gUnknown_081D9E7C
+	ldr r3, _0801499C @ =gBattlescriptsForUsingItem
 	mov r10, r3
 	b _08014A74
 	.align 2, 0
@@ -4600,7 +4600,7 @@ _0801498C: .4byte gBattleCommunication
 _08014990: .4byte gBankAttacker
 _08014994: .4byte 0x000160da
 _08014998: .4byte gBattlescriptCurrInstr
-_0801499C: .4byte gUnknown_081D9E7C
+_0801499C: .4byte gBattlescriptsForUsingItem
 _080149A0:
 	ldr r3, _08014A18 @ =gBattleTextBuff1
 	movs r4, 0xFD
@@ -4623,7 +4623,7 @@ _080149A0:
 	ands r2, r0
 	ldr r0, _08014A20 @ =gBattlescriptCurrInstr
 	mov r9, r0
-	ldr r1, _08014A24 @ =gUnknown_081D9E7C
+	ldr r1, _08014A24 @ =gBattlescriptsForUsingItem
 	mov r10, r1
 	adds r6, r3, 0
 	cmp r2, 0
@@ -4667,7 +4667,7 @@ _08014A02:
 _08014A18: .4byte gBattleTextBuff1
 _08014A1C: .4byte gBattleTextBuff2
 _08014A20: .4byte gBattlescriptCurrInstr
-_08014A24: .4byte gUnknown_081D9E7C
+_08014A24: .4byte gBattlescriptsForUsingItem
 _08014A28: .4byte 0x000160a4
 _08014A2C: .4byte 0x000160a5
 _08014A30:
@@ -4684,7 +4684,7 @@ _08014A30:
 	mov r8, r0
 	ldr r1, _08014A5C @ =gBattlescriptCurrInstr
 	mov r9, r1
-	ldr r2, _08014A60 @ =gUnknown_081D9E7C
+	ldr r2, _08014A60 @ =gBattlescriptsForUsingItem
 	mov r10, r2
 	b _08014A74
 	.align 2, 0
@@ -4692,7 +4692,7 @@ _08014A50: .4byte gBattleTypeFlags
 _08014A54: .4byte gBattleCommunication
 _08014A58: .4byte gBankAttacker
 _08014A5C: .4byte gBattlescriptCurrInstr
-_08014A60: .4byte gUnknown_081D9E7C
+_08014A60: .4byte gBattlescriptsForUsingItem
 _08014A64:
 	ldr r0, _08014AA0 @ =gBattleCommunication
 	strb r1, [r0, 0x5]
@@ -4700,7 +4700,7 @@ _08014A64:
 	mov r8, r3
 	ldr r0, _08014AA8 @ =gBattlescriptCurrInstr
 	mov r9, r0
-	ldr r1, _08014AAC @ =gUnknown_081D9E7C
+	ldr r1, _08014AAC @ =gBattlescriptsForUsingItem
 	mov r10, r1
 _08014A74:
 	mov r2, r8
@@ -4730,7 +4730,7 @@ _08014A8C:
 _08014AA0: .4byte gBattleCommunication
 _08014AA4: .4byte gBankAttacker
 _08014AA8: .4byte gBattlescriptCurrInstr
-_08014AAC: .4byte gUnknown_081D9E7C
+_08014AAC: .4byte gBattlescriptsForUsingItem
 _08014AB0: .4byte 0x000160d8
 _08014AB4: .4byte gFightStateTracker
 	thumb_func_end sub_80147A0
@@ -4998,7 +4998,7 @@ _08014C9C:
 	movs r0, 0x3
 	strb r0, [r1, 0x5]
 	ldr r1, _08014CE8 @ =gBattlescriptCurrInstr
-	ldr r0, _08014CEC @ =gUnknown_081D8E3B
+	ldr r0, _08014CEC @ =BattleScript_PrintFailedToRunString
 	str r0, [r1]
 	ldr r1, _08014CF0 @ =gFightStateTracker
 	movs r0, 0xA
@@ -5008,7 +5008,7 @@ _08014CDC: .4byte gBattleMons
 _08014CE0: .4byte 0xfdffffff
 _08014CE4: .4byte gBattleCommunication
 _08014CE8: .4byte gBattlescriptCurrInstr
-_08014CEC: .4byte gUnknown_081D8E3B
+_08014CEC: .4byte BattleScript_PrintFailedToRunString
 _08014CF0: .4byte gFightStateTracker
 _08014CF4:
 	ldr r1, _08014D1C @ =gBattleMons
@@ -5026,7 +5026,7 @@ _08014CF4:
 	movs r0, 0x4
 	strb r0, [r1, 0x5]
 	ldr r1, _08014D28 @ =gBattlescriptCurrInstr
-	ldr r0, _08014D2C @ =gUnknown_081D8E3B
+	ldr r0, _08014D2C @ =BattleScript_PrintFailedToRunString
 	str r0, [r1]
 	ldr r1, _08014D30 @ =gFightStateTracker
 	movs r0, 0xA
@@ -5036,7 +5036,7 @@ _08014D1C: .4byte gBattleMons
 _08014D20: .4byte 0x0400e000
 _08014D24: .4byte gBattleCommunication
 _08014D28: .4byte gBattlescriptCurrInstr
-_08014D2C: .4byte gUnknown_081D8E3B
+_08014D2C: .4byte BattleScript_PrintFailedToRunString
 _08014D30: .4byte gFightStateTracker
 _08014D34:
 	ldr r0, _08014D48 @ =gNoOfAllBanks

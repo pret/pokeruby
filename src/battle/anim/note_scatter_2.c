@@ -5,8 +5,8 @@
 #include "sound.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 extern u16 gUnknown_083D712C[4][6];
 
@@ -52,6 +52,6 @@ void sub_80CEEE8(struct Sprite* sprite)
     }
     else
     {
-        move_anim_8072740(sprite);
+        DestroyAnimSprite(sprite);
     }
 }

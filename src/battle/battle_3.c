@@ -110,22 +110,22 @@ extern u8 BattleScript_WrapEnds[];
 extern u8 BattleScript_DisabledNoMore[];
 extern u8 BattleScript_EncoredNoMore[];
 
-extern u8 gUnknown_081D9030[];
-extern u8 gUnknown_081D8F62[];
-extern u8 gUnknown_081D8FFF[];
-extern u8 gUnknown_081D8F7D[];
-extern u8 gUnknown_081D9016[];
-extern u8 gUnknown_081D9008[];
-extern u8 gUnknown_081D9041[];
-extern u8 gUnknown_081D950F[]; //uproar wakeup BS
-extern u8 gUnknown_081D957E[]; //uproar BS
+extern u8 BattleScript_SideStatusWoreOff[];
+extern u8 BattleScript_RainContinuesOrEnds[];
+extern u8 BattleScript_SandStormHailEnds[];
+extern u8 BattleScript_DamagingWeatherContinues[];
+extern u8 BattleScript_SunlightFaded[];
+extern u8 BattleScript_SunlightContinues[];
+extern u8 BattleScript_SafeguardEnds[];
+extern u8 BattleScript_MonWokeUpInUproar[]; //uproar wakeup BS
+extern u8 BattleScript_PrintUproarOverTurns[]; //uproar BS
 extern u8 BattleScript_ThrashConfuses[];
 extern u8 BattleScript_YawnMakesAsleep[];
-extern u8 BattleScript_FutureSightHits[];
+extern u8 BattleScript_MonTookFutureAttack[];
 extern u8 BattleScript_PerishSongHits[];
 extern u8 BattleScript_PerishSongTimerGoesDown[];
-extern u8 gUnknown_081D8C72[];
-extern u8 gUnknown_081D8C7B[];
+extern u8 BattleScript_GiveExp[];
+extern u8 BattleScript_HandleFaintedMon[];
 
 extern u8 BattleScript_MoveUsedIsAsleep[];
 extern u8 BattleScript_MoveUsedWokeUp[];
@@ -146,7 +146,7 @@ extern u8 BattleScript_BideStoringEnergy[];
 extern u8 BattleScript_BideAttack[];
 extern u8 BattleScript_BideNoEnergyToAttack[];
 
-extern u8 gUnknown_081D901D[]; //load weather from overworld
+extern u8 BattleScript_OverworldWeatherStarts[]; //load weather from overworld
 extern u8 BattleScript_DrizzleActivates[];
 extern u8 BattleScript_SandstreamActivates[];
 extern u8 BattleScript_DroughtActivates[];
@@ -165,7 +165,7 @@ extern u8 BattleScript_ColorChangeActivates[];
 extern u8 BattleScript_RoughSkinActivates[];
 extern u8 BattleScript_ApplySecondaryEffect[];
 extern u8 BattleScript_CuteCharmActivates[];
-extern u8 gUnknown_081D9956[]; //ability status clear
+extern u8 BattleScript_AbilityCuredStatus[]; //ability status clear
 extern u8 BattleScript_SynchronizeActivates[];
 extern u8 gUnknown_081D978C[]; //intimidate1
 extern u8 gUnknown_081D9795[]; //intimidate2
@@ -185,20 +185,20 @@ extern u8 BattleScript_BerryCureBrnEnd2[];
 extern u8 BattleScript_BerryCureFrzEnd2[];
 extern u8 BattleScript_BerryCureSlpEnd2[];
 extern u8 BattleScript_BerryCureConfusionEnd2[];
-extern u8 gUnknown_081D9A44[]; //berry cure any status end2
+extern u8 BattleScript_BerryCureChosenStatusEnd2[]; //berry cure any status end2
 extern u8 BattleScript_BerryCureParRet[];
 extern u8 BattleScript_BerryCurePsnRet[];
 extern u8 BattleScript_BerryCureBrnRet[];
 extern u8 BattleScript_BerryCureFrzRet[];
 extern u8 BattleScript_BerryCureSlpRet[];
 extern u8 BattleScript_BerryCureConfusionRet[];
-extern u8 gUnknown_081D9A4A[]; //berry cure any status return
+extern u8 BattleScript_BerryCureChosenStatusRet[]; //berry cure any status return
 
 extern u8 BattleScript_ItemHealHP_Ret[];
 
 extern u8 gUnknown_081D995F[]; //disobedient while asleep
-extern u8 gUnknown_081D996F[]; //disobedient, uses a random move
-extern u8 gUnknown_081D9989[]; //disobedient, went to sleep
+extern u8 BattleScript_IgnoresAndUsesRandomMove[]; //disobedient, uses a random move
+extern u8 BattleScript_IgnoresAndFallsAsleep[]; //disobedient, went to sleep
 extern u8 gUnknown_081D99A0[]; //disobedient, hits itself
 
 //array entries for battle communication
@@ -396,7 +396,7 @@ u8 UpdateTurnCounters(void)
                     {
 
                         gSideAffecting[sideBank] &= ~SIDE_STATUS_REFLECT;
-                        b_call_bc_move_exec(gUnknown_081D9030);
+                        b_call_bc_move_exec(BattleScript_SideStatusWoreOff);
                         gBattleTextBuff1[0] = 0xFD;
                         gBattleTextBuff1[1] = 2;
                         gBattleTextBuff1[2] = MOVE_REFLECT;
@@ -424,7 +424,7 @@ u8 UpdateTurnCounters(void)
                     if (--gSideTimer[sideBank].lightscreenTimer == 0)
                     {
                         gSideAffecting[sideBank] &= ~SIDE_STATUS_LIGHTSCREEN;
-                        b_call_bc_move_exec(gUnknown_081D9030);
+                        b_call_bc_move_exec(BattleScript_SideStatusWoreOff);
                         gBattleCommunication[MULTISTRING_CHOOSER] = sideBank;
                         gBattleTextBuff1[0] = 0xFD;
                         gBattleTextBuff1[1] = 2;
@@ -451,7 +451,7 @@ u8 UpdateTurnCounters(void)
                 if (gSideTimer[sideBank].mistTimer && --gSideTimer[sideBank].mistTimer == 0)
                 {
                     gSideAffecting[sideBank] &= ~SIDE_STATUS_MIST;
-                    b_call_bc_move_exec(gUnknown_081D9030);
+                    b_call_bc_move_exec(BattleScript_SideStatusWoreOff);
                     gBattleCommunication[MULTISTRING_CHOOSER] = sideBank;
                     gBattleTextBuff1[0] = 0xFD;
                     gBattleTextBuff1[1] = 2;
@@ -479,7 +479,7 @@ u8 UpdateTurnCounters(void)
                     if (--gSideTimer[sideBank].safeguardTimer == 0)
                     {
                         gSideAffecting[sideBank] &= ~SIDE_STATUS_SAFEGUARD;
-                        b_call_bc_move_exec(gUnknown_081D9041);
+                        b_call_bc_move_exec(BattleScript_SafeguardEnds);
                         effect++;
                     }
                 }
@@ -532,7 +532,7 @@ u8 UpdateTurnCounters(void)
                     gBattleCommunication[MULTISTRING_CHOOSER] = 1;
                 else
                     gBattleCommunication[MULTISTRING_CHOOSER] = 0;
-                b_call_bc_move_exec(gUnknown_081D8F62);
+                b_call_bc_move_exec(BattleScript_RainContinuesOrEnds);
                 effect++;
             }
             BATTLE_STRUCT->turncountersTracker++;
@@ -543,10 +543,10 @@ u8 UpdateTurnCounters(void)
                 if (!(gBattleWeather & WEATHER_SANDSTORM_PERMANENT) && --gWishFutureKnock.weatherDuration == 0)
                 {
                     gBattleWeather &= ~WEATHER_SANDSTORM_TEMPORARY;
-                    gBattlescriptCurrInstr = gUnknown_081D8FFF;
+                    gBattlescriptCurrInstr = BattleScript_SandStormHailEnds;
                 }
                 else
-                    gBattlescriptCurrInstr = gUnknown_081D8F7D;
+                    gBattlescriptCurrInstr = BattleScript_DamagingWeatherContinues;
 
                 BATTLE_STRUCT->animArg1 = B_ANIM_SANDSTORM_CONTINUES;
                 gBattleCommunication[MULTISTRING_CHOOSER] = 0;
@@ -561,10 +561,10 @@ u8 UpdateTurnCounters(void)
                 if (!(gBattleWeather & WEATHER_SUN_PERMANENT) && --gWishFutureKnock.weatherDuration == 0)
                 {
                     gBattleWeather &= ~WEATHER_SUN_TEMPORARY;
-                    gBattlescriptCurrInstr = gUnknown_081D9016;
+                    gBattlescriptCurrInstr = BattleScript_SunlightFaded;
                 }
                 else
-                    gBattlescriptCurrInstr = gUnknown_081D9008;
+                    gBattlescriptCurrInstr = BattleScript_SunlightContinues;
 
                 b_call_bc_move_exec(gBattlescriptCurrInstr);
                 effect++;
@@ -577,10 +577,10 @@ u8 UpdateTurnCounters(void)
                 if (--gWishFutureKnock.weatherDuration == 0)
                 {
                     gBattleWeather &= ~WEATHER_HAIL;
-                    gBattlescriptCurrInstr = gUnknown_081D8FFF;
+                    gBattlescriptCurrInstr = BattleScript_SandStormHailEnds;
                 }
                 else
-                    gBattlescriptCurrInstr = gUnknown_081D8F7D;
+                    gBattlescriptCurrInstr = BattleScript_DamagingWeatherContinues;
 
                 BATTLE_STRUCT->animArg1 = B_ANIM_HAIL_CONTINUES;
                 gBattleCommunication[MULTISTRING_CHOOSER] = 1;
@@ -760,7 +760,7 @@ u8 TurnBasedEffects(void)
                             gBattleMons[gBankAttacker].status1 &= ~(STATUS_SLEEP);
                             gBattleMons[gBankAttacker].status2 &= ~(STATUS2_NIGHTMARE);
                             gBattleCommunication[MULTISTRING_CHOOSER] = 1;
-                            b_call_bc_move_exec(gUnknown_081D950F);
+                            b_call_bc_move_exec(BattleScript_MonWokeUpInUproar);
                             gActiveBank = gBankAttacker;
                             EmitSetAttributes(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBank].status1);
                             MarkBufferBankForExecution(gActiveBank);
@@ -791,7 +791,7 @@ u8 TurnBasedEffects(void)
                             gBattleCommunication[MULTISTRING_CHOOSER] = 1;
                             CancelMultiTurnMoves(gActiveBank);
                         }
-                        b_call_bc_move_exec(gUnknown_081D957E);
+                        b_call_bc_move_exec(BattleScript_PrintUproarOverTurns);
                         effect = 1;
                     }
                 }
@@ -938,7 +938,7 @@ bool8 sub_80170DC(void) // handle future sight and perish song
                     gBankAttacker = gWishFutureKnock.futureSightAttacker[gActiveBank];
                     gBattleMoveDamage = gWishFutureKnock.futureSightDmg[gActiveBank];
                     gSpecialStatuses[gBankTarget].moveturnLostHP = 0xFFFF;
-                    b_call_bc_move_exec(BattleScript_FutureSightHits);
+                    b_call_bc_move_exec(BattleScript_MonTookFutureAttack);
                     return 1;
                 }
             }
@@ -1009,7 +1009,7 @@ bool8 sub_80173A4(void)
                 gBank1 = gBankTarget = BATTLE_STRUCT->unk1605A;
                 if (gBattleMons[BATTLE_STRUCT->unk1605A].hp == 0 && !(BATTLE_STRUCT->unk16113 & gBitTable[gBattlePartyID[BATTLE_STRUCT->unk1605A]]) && !(gAbsentBankFlags & gBitTable[BATTLE_STRUCT->unk1605A]))
                 {
-                    b_call_bc_move_exec(gUnknown_081D8C72);
+                    b_call_bc_move_exec(BattleScript_GiveExp);
                     BATTLE_STRUCT->sub80173A4_Tracker = 2;
                     return 1;
                 }
@@ -1032,7 +1032,7 @@ bool8 sub_80173A4(void)
                 gBank1 = gBankTarget = BATTLE_STRUCT->unk1605A; //or should banks be switched?
                 if (gBattleMons[BATTLE_STRUCT->unk1605A].hp == 0 && !(gAbsentBankFlags & gBitTable[BATTLE_STRUCT->unk1605A]))
                 {
-                    b_call_bc_move_exec(gUnknown_081D8C7B);
+                    b_call_bc_move_exec(BattleScript_HandleFaintedMon);
                     BATTLE_STRUCT->sub80173A4_Tracker = 5;
                     return 1;
                 }
@@ -1534,7 +1534,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                 if (effect)
                 {
                     gBattleCommunication[MULTISTRING_CHOOSER] = weather_get_current();
-                    b_push_move_exec(gUnknown_081D901D);
+                    b_push_move_exec(BattleScript_OverworldWeatherStarts);
                 }
                 break;
             case ABILITY_DRIZZLE:
@@ -1969,7 +1969,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                             break;
                         }
                         b_movescr_stack_push_cursor();
-                        gBattlescriptCurrInstr = gUnknown_081D9956;
+                        gBattlescriptCurrInstr = BattleScript_AbilityCuredStatus;
                         BATTLE_STRUCT->scriptingActive = bank;
                         gActiveBank = bank;
                         EmitSetAttributes(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBank].status1);
@@ -2768,7 +2768,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                         gBattleCommunication[MULTISTRING_CHOOSER] = 1;
                     gBattleMons[bank].status1 = 0;
                     gBattleMons[bank].status2 &= ~(STATUS2_CONFUSION);
-                    b_call_bc_move_exec(gUnknown_081D9A44);
+                    b_call_bc_move_exec(BattleScript_BerryCureChosenStatusEnd2);
                     effect = ITEM_STATUS_CHANGE;
                 }
                 break;
@@ -2777,7 +2777,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                 {
                     gBattleMons[bank].status2 &= ~(STATUS2_INFATUATION);
                     StringCopy(gBattleTextBuff1, gStatusConditionString_LoveJpn);
-                    b_call_bc_move_exec(gUnknown_081D9A44);
+                    b_call_bc_move_exec(BattleScript_BerryCureChosenStatusEnd2);
                     gBattleCommunication[MULTISTRING_CHOOSER] = 0;
                     effect = ITEM_EFFECT_OTHER;
                 }
@@ -2882,7 +2882,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                     StringCopy(gBattleTextBuff1, gStatusConditionString_LoveJpn);
                     b_movescr_stack_push_cursor();
                     gBattleCommunication[MULTISTRING_CHOOSER] = 0;
-                    gBattlescriptCurrInstr = gUnknown_081D9A4A;
+                    gBattlescriptCurrInstr = BattleScript_BerryCureChosenStatusRet;
                     effect = ITEM_EFFECT_OTHER;
                 }
                 break;
@@ -2918,7 +2918,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                     gBattleMons[bank].status2 &= ~(STATUS2_CONFUSION);
                     b_movescr_stack_push_cursor();
                     gBattleCommunication[MULTISTRING_CHOOSER] = 0;
-                    gBattlescriptCurrInstr = gUnknown_081D9A4A;
+                    gBattlescriptCurrInstr = BattleScript_BerryCureChosenStatusRet;
                     effect = ITEM_STATUS_CHANGE;
                 }
                 break;
@@ -3186,7 +3186,7 @@ u8 IsPokeDisobedient(void)
             gBattleCommunication[3] = 0;
             gDynamicBasePower = 0;
             BATTLE_STRUCT->dynamicMoveType = 0;
-            gBattlescriptCurrInstr = gUnknown_081D996F;
+            gBattlescriptCurrInstr = BattleScript_IgnoresAndUsesRandomMove;
             gBankTarget = GetMoveTarget(gRandomMove, 0);
             gHitMarker |= HITMARKER_x200000;
             return 2;
@@ -3208,7 +3208,7 @@ u8 IsPokeDisobedient(void)
             }
             if (i == gNoOfAllBanks)
             {
-                gBattlescriptCurrInstr = gUnknown_081D9989;
+                gBattlescriptCurrInstr = BattleScript_IgnoresAndFallsAsleep;
                 return 1;
             }
         }

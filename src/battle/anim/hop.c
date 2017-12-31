@@ -4,8 +4,8 @@
 #include "battle_anim.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 // hop (where a sprite "hops" across the screen)
 // Used by Present, Trick, and the item knock off effect.
@@ -65,7 +65,7 @@ void sub_80CB8B8(struct Sprite* sprite)
     sprite->data[0]++;
     if (sprite->data[0] > 50)
     {
-        move_anim_8072740(sprite);
+        DestroyAnimSprite(sprite);
     }
 }
 
@@ -92,9 +92,9 @@ void sub_80CB94C(struct Sprite* sprite)
     s16 e1;
     s16 e2;
     sub_80787B0(sprite, 0);
-    e1 = sub_8077ABC(gBattleAnimBankTarget, 0);
-    e2 = sub_8077ABC(gBattleAnimBankTarget, 1);
-    if ((gBattleAnimBankAttacker ^ 2) == gBattleAnimBankTarget)
+    e1 = GetBankPosition(gAnimBankTarget, 0);
+    e2 = GetBankPosition(gAnimBankTarget, 1);
+    if ((gAnimBankAttacker ^ 2) == gAnimBankTarget)
     {
         sprite->data[6] = e1;
         sprite->data[7] = e2 + 10;
@@ -129,14 +129,14 @@ void sub_80CB9C4(struct Sprite* sprite)
     {
         sprite->pos2.y = zero;
         sprite->data[0] = zero;
-        move_anim_8072740(sprite);
+        DestroyAnimSprite(sprite);
     }
 }
 
 void sub_80CBA28(struct Sprite* sprite)
 {
-    s16 e = sub_8077ABC(gBattleAnimBankTarget, 1);
-    if (GetBankSide(gBattleAnimBankTarget) == 0)
+    s16 e = GetBankPosition(gAnimBankTarget, 1);
+    if (GetBankSide(gAnimBankTarget) == 0)
     {
         sprite->data[6] = 0;
         sprite->data[7] = e + 10;
@@ -149,7 +149,7 @@ void sub_80CBA28(struct Sprite* sprite)
     {
         sprite->data[6] = 255;
         sprite->data[7] = e + 10;
-        if (NotInBattle())
+        if (IsContest())
             sprite->data[6] = 0;
 
         sub_80CB7EC(sprite, 0x28);

@@ -23,7 +23,7 @@ sub_80D4ED8: @ 80D4ED8
 	movs r0, 0xFE
 	lsls r0, 8
 	strh r0, [r4, 0x36]
-	ldr r1, _080D4F10 @ =move_anim_8072740
+	ldr r1, _080D4F10 @ =DestroyAnimSprite
 	adds r0, r4, 0
 	bl StoreSpriteCallbackInData
 	ldr r1, _080D4F14 @ =sub_8078174
@@ -35,7 +35,7 @@ sub_80D4ED8: @ 80D4ED8
 	bx r0
 	.align 2, 0
 _080D4F0C: .4byte gBattleAnimArgs
-_080D4F10: .4byte move_anim_8072740
+_080D4F10: .4byte DestroyAnimSprite
 _080D4F14: .4byte sub_8078174
 	thumb_func_end sub_80D4ED8
 
@@ -60,7 +60,7 @@ sub_80D4F18: @ 80D4F18
 	strh r0, [r4, 0x32]
 	ldr r0, _080D4F54 @ =sub_8078394
 	str r0, [r4, 0x1C]
-	ldr r1, _080D4F58 @ =move_anim_8072740
+	ldr r1, _080D4F58 @ =DestroyAnimSprite
 	adds r0, r4, 0
 	bl StoreSpriteCallbackInData
 	pop {r4,r5}
@@ -69,7 +69,7 @@ sub_80D4F18: @ 80D4F18
 	.align 2, 0
 _080D4F50: .4byte gBattleAnimArgs
 _080D4F54: .4byte sub_8078394
-_080D4F58: .4byte move_anim_8072740
+_080D4F58: .4byte DestroyAnimSprite
 	thumb_func_end sub_80D4F18
 
 	thumb_func_start sub_80D4F5C
@@ -77,7 +77,7 @@ sub_80D4F5C: @ 80D4F5C
 	push {r4,lr}
 	adds r4, r0, 0
 	bl sub_8078650
-	ldr r0, _080D4F90 @ =gBattleAnimBankAttacker
+	ldr r0, _080D4F90 @ =gAnimBankAttacker
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
@@ -98,7 +98,7 @@ sub_80D4F5C: @ 80D4F5C
 	adds r1, r2, 0
 	b _080D4FAE
 	.align 2, 0
-_080D4F90: .4byte gBattleAnimBankAttacker
+_080D4F90: .4byte gAnimBankAttacker
 _080D4F94: .4byte gBattleAnimArgs
 _080D4F98:
 	ldr r1, _080D4FC4 @ =gBattleAnimArgs
@@ -133,7 +133,7 @@ _080D4FC8: .4byte sub_80D5038
 sub_80D4FCC: @ 80D4FCC
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, _080D4FF8 @ =gBattleAnimBankAttacker
+	ldr r0, _080D4FF8 @ =gAnimBankAttacker
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
@@ -153,7 +153,7 @@ sub_80D4FCC: @ 80D4FCC
 	adds r1, r2, 0
 	b _080D5018
 	.align 2, 0
-_080D4FF8: .4byte gBattleAnimBankAttacker
+_080D4FF8: .4byte gAnimBankAttacker
 _080D4FFC: .4byte gBattleAnimArgs
 _080D5000:
 	ldr r1, _080D5030 @ =gBattleAnimArgs
@@ -225,7 +225,7 @@ sub_80D5074: @ 80D5074
 	push {r4,lr}
 	adds r4, r0, 0
 	bl sub_8078650
-	ldr r0, _080D5098 @ =gBattleAnimBankAttacker
+	ldr r0, _080D5098 @ =gAnimBankAttacker
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
@@ -238,7 +238,7 @@ sub_80D5074: @ 80D5074
 	strh r1, [r4, 0x20]
 	b _080D50B2
 	.align 2, 0
-_080D5098: .4byte gBattleAnimBankAttacker
+_080D5098: .4byte gAnimBankAttacker
 _080D509C: .4byte gBattleAnimArgs
 _080D50A0:
 	ldr r0, _080D50E0 @ =gBattleAnimArgs
