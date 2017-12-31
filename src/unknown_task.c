@@ -8,13 +8,13 @@ static void sub_80896F4(void);
 static void sub_8089714(void);
 
 extern u16 gUnknown_030041B0;
-extern u16 gUnknown_030041B4;
+extern u16 gBattle_BG1_Y;
 extern u16 gUnknown_030041B8;
-extern u16 gUnknown_03004280;
-extern u16 gUnknown_03004288;
+extern u16 gBattle_BG2_Y;
+extern u16 gBattle_BG2_X;
 extern u16 gUnknown_030042A0;
 extern u16 gUnknown_030042A4;
-extern u16 gUnknown_030042C0;
+extern u16 gBattle_BG1_X;
 
 extern u8 gUnknown_0202FFA4;
 
@@ -125,16 +125,16 @@ static void task00_for_dp12(u8 taskId)
                 value = gUnknown_030042A0;
                 break;
             case 0x4:
-                value = gUnknown_030042C0;
+                value = gBattle_BG1_X;
                 break;
             case 0x6:
-                value = gUnknown_030041B4;
+                value = gBattle_BG1_Y;
                 break;
             case 0x8:
-                value = gUnknown_03004288;
+                value = gBattle_BG2_X;
                 break;
             case 0xA:
-                value = gUnknown_03004280;
+                value = gBattle_BG2_Y;
                 break;
             case 0xC:
                 value = gUnknown_030041B0;

@@ -1329,7 +1329,7 @@ void sub_805465C(void)
 void sub_805469C(void)
 {
     FieldClearVBlankHBlankCallbacks();
-    gFieldCallback = atk17_seteffectuser;
+    gFieldCallback = atk17_seteffectsecondary;
     c2_exit_to_overworld_2_switch();
 }
 

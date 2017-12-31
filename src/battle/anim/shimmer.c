@@ -6,8 +6,8 @@
 #include "blend_palette.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 extern u16 gUnknown_083D6984[];
 

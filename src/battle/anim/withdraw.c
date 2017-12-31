@@ -5,8 +5,8 @@
 #include "sound.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 extern u8 gObjectBankIDs[];
 
@@ -17,15 +17,15 @@ static void sub_80CF514(u8 taskId);
 
 void sub_80CF4D8(u8 taskId)
 {
-    sub_8078E70(gObjectBankIDs[gBattleAnimBankAttacker], 0);
+    sub_8078E70(gObjectBankIDs[gAnimBankAttacker], 0);
     gTasks[taskId].func = sub_80CF514;
 }
 
 void sub_80CF514(u8 taskId)
 {
-    u8 a = gObjectBankIDs[gBattleAnimBankAttacker];
+    u8 a = gObjectBankIDs[gAnimBankAttacker];
     s16 b;
-    if (GetBankSide(gBattleAnimBankAttacker) == 0)
+    if (GetBankSide(gAnimBankAttacker) == 0)
     {
         b = -gTasks[taskId].data[0];
     }

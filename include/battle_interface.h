@@ -22,7 +22,7 @@ void sub_8043D84(u8, u8, u32, u32, u32);
 void sub_8043DB0(u8);
 void sub_8043DFC(u8);
 void nullsub_11();
-void sub_8043EB4(u8);
+void UpdateOamPriorityInAllHealthboxes(u8);
 void sub_8043F44(u8);
 void sub_804454C(void);
 u8 sub_8044804(u8, const struct BattleInterfaceStruct2 *, u8, u8);

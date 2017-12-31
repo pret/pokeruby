@@ -6,8 +6,8 @@
 #include "battle_anim_80CA710.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 // sonic (shoots a projectile towards the target.)
 // Used in Sonic Boom and Air Cutter.
@@ -18,11 +18,11 @@ void sub_80CF6DC(struct Sprite* sprite)
     s16 b;
     u16 c;
 
-    if (NotInBattle())
+    if (IsContest())
     {
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
     }
-    else if (GetBankSide(gBattleAnimBankAttacker) != 0)
+    else if (GetBankSide(gAnimBankAttacker) != 0)
     {
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
@@ -30,11 +30,11 @@ void sub_80CF6DC(struct Sprite* sprite)
     }
 
     sub_80787B0(sprite, 1);
-    a = sub_8077ABC(gBattleAnimBankTarget, 2) + gBattleAnimArgs[2];
-    b = sub_8077ABC(gBattleAnimBankTarget, 3) + gBattleAnimArgs[3];
+    a = GetBankPosition(gAnimBankTarget, 2) + gBattleAnimArgs[2];
+    b = GetBankPosition(gAnimBankTarget, 3) + gBattleAnimArgs[3];
     c = sub_80790F0(a - sprite->pos1.x, b - sprite->pos1.y);
     c += 0xF000;
-    if (NotInBattle())
+    if (IsContest())
         c -= 0x6000;
 
     sub_8078FDC(sprite, 0, 0x100, 0x100, c);
@@ -42,7 +42,7 @@ void sub_80CF6DC(struct Sprite* sprite)
     sprite->data[2] = a;
     sprite->data[4] = b;
     sprite->callback = sub_8078B34;
-    StoreSpriteCallbackInData(sprite, move_anim_8072740);
+    StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
 
 void sub_80CF7E0(struct Sprite* sprite)

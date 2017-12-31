@@ -4,7 +4,7 @@
 #include "trig.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
+extern u8 gAnimBankAttacker;
 
 void sub_80D5038(struct Sprite *);
 void sub_80D50E8(struct Sprite *);
@@ -15,7 +15,7 @@ void sub_80D4ED8(struct Sprite *sprite) {
     sprite->data[2] = 9;
     sprite->data[3] = 30;
     sprite->data[4] = 65024;
-    StoreSpriteCallbackInData(sprite, move_anim_8072740); // DestroyAnimSprite
+    StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
     sprite->callback = sub_8078174;
     sub_8078174(sprite);
 }
@@ -27,12 +27,12 @@ void sub_80D4F18(struct Sprite *sprite) {
     sprite->data[1] = gBattleAnimArgs[2];
     sprite->data[2] = gBattleAnimArgs[3];
     sprite->callback = sub_8078394;
-    StoreSpriteCallbackInData(sprite, move_anim_8072740); // DestroyAnimSprite
+    StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
 
 void sub_80D4F5C(struct Sprite *sprite) {
     sub_8078650(sprite);
-    if (GetBankSide(gBattleAnimBankAttacker) << 24) { // g.. = gAnimBankAttacker
+    if (GetBankSide(gAnimBankAttacker) << 24) {
         sprite->pos1.x = sprite->pos1.x - gBattleAnimArgs[0];
         sprite->pos1.y = sprite->pos1.y + gBattleAnimArgs[1];
         sprite->data[2] = -gBattleAnimArgs[4];
@@ -48,7 +48,7 @@ void sub_80D4F5C(struct Sprite *sprite) {
 }
 
 void sub_80D4FCC(struct Sprite *sprite) {
-    if (GetBankSide(gBattleAnimBankAttacker) << 24) { // g.. = gAnimBankAttacker
+    if (GetBankSide(gAnimBankAttacker) << 24) {
         sprite->pos1.x = sprite->pos1.x - gBattleAnimArgs[0];
         sprite->pos1.y = sprite->pos1.y + gBattleAnimArgs[1];
         sprite->data[2] = gBattleAnimArgs[4];
@@ -76,7 +76,7 @@ void sub_80D5038(struct Sprite *sprite) {
 
 void sub_80D5074(struct Sprite *sprite) {
     sub_8078650(sprite);
-    if (GetBankSide(gBattleAnimBankAttacker) << 24) { // g.. = gAnimBankAttacker
+    if (GetBankSide(gAnimBankAttacker) << 24) {
         sprite->pos1.x = sprite->pos1.x - gBattleAnimArgs[0];
     } else {
         sprite->pos1.x = sprite->pos1.x + gBattleAnimArgs[0];

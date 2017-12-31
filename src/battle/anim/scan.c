@@ -6,8 +6,8 @@
 #include "palette.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 extern s8 gUnknown_083D6DDC[4][2];
 
@@ -50,7 +50,7 @@ void sub_80CD408(struct Sprite* sprite)
         sprite->callback = sub_8078B34;
         StoreSpriteCallbackInData(sprite, sub_80CD4B8);
         sprite->data[5] += 0x100;
-        PlaySE12WithPanning(0xD2, sub_8076F98(0x3F));
+        PlaySE12WithPanning(0xD2, BattleAnimAdjustPanning(0x3F));
         break;
     }
 
@@ -110,8 +110,8 @@ void sub_80CD4EC(struct Sprite* sprite)
         sprite->pos2.y = 0;
         sprite->pos2.x = 0;
         sprite->data[0] = 6;
-        sprite->data[2] = sub_8077ABC(gBattleAnimBankTarget, 2) + a;
-        sprite->data[4] = sub_8077ABC(gBattleAnimBankTarget, 3) + b;
+        sprite->data[2] = GetBankPosition(gAnimBankTarget, 2) + a;
+        sprite->data[4] = GetBankPosition(gAnimBankTarget, 3) + b;
         sprite->callback = sub_8078B34;
         StoreSpriteCallbackInData(sprite, sub_80CD654);
     }
@@ -136,7 +136,7 @@ void sub_80CD5A8(struct Sprite* sprite)
         sprite->data[2]++;
         pal = sprite->oam.paletteNum;
         LoadPalette(&gPlttBufferUnfaded[0x108 + pal * 16], pal * 16 | 0x101, 4);
-        PlaySE12WithPanning(0xC0, sub_8076F98(0x3F));
+        PlaySE12WithPanning(0xC0, BattleAnimAdjustPanning(0x3F));
     }
     else if (sprite->data[1] == 0)
     {
@@ -164,7 +164,7 @@ void sub_80CD67C(struct Sprite* sprite)
 
     sprite->data[0]++;
     if (sprite->data[1] == 8)
-        move_anim_8072740(sprite);
+        DestroyAnimSprite(sprite);
 }
 
 void sub_80CD6CC(struct Sprite* sprite)

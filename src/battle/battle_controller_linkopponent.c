@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle.h"
+#include "battle_anim.h"
 #include "battle_interface.h"
 #include "data2.h"
 #include "link.h"
@@ -17,7 +18,7 @@
 #include "util.h"
 #include "ewram.h"
 
-struct UnknownStruct3
+struct MovePpInfo
 {
     u16 moves[4];
     u8 pp[4];
@@ -32,12 +33,11 @@ extern u8 gHealthboxIDs[];
 extern u16 gBattleTypeFlags;
 extern u8 gBattleMonForms[];
 extern void (*gBattleBankFunc[])(void);
-extern u32 *gDisableStructMoveAnim;
-extern u32 gMoveDmgMoveAnim;
-extern u16 gMovePowerMoveAnim;
-extern u8 gHappinessMoveAnim;
+extern u32 gAnimMoveDmg;
+extern u16 gAnimMovePower;
+extern u8 gAnimFriendship;
 extern u16 gWeatherMoveAnim;
-extern u32 gPID_perBank[];
+extern u32 gTransformedPersonalities[];
 extern u8 gAnimScriptActive;
 extern void (*gAnimScriptCallback)(void);
 extern u8 gDisplayedStringBattle[];
@@ -46,7 +46,7 @@ extern u8 gBattleOutcome;
 extern u16 gUnknown_02024DE8;
 extern u8 gUnknown_02024E68[];
 extern struct SpriteTemplate gUnknown_02024E8C;
-extern u8 gUnknown_0202F7C4;
+extern u8 gAnimMoveTurn;
 extern struct Window gUnknown_03004210;
 extern u16 gUnknown_030042A0;
 extern u16 gUnknown_030042A4;
@@ -79,7 +79,7 @@ extern void sub_8010384(struct Sprite *);
 extern void sub_8037B78(void);
 extern u8 sub_8031720();
 extern bool8 mplay_80342A4(u8);
-extern void ExecuteMoveAnim();
+extern void DoMoveAnim();
 extern void sub_80326EC();
 extern void sub_8031F24(void);
 extern void sub_80324BC();
@@ -100,7 +100,7 @@ extern void nullsub_47(void);
 extern bool8 IsDoubleBattle(void);
 extern void sub_8037840(void);
 extern void sub_8031B74();
-extern u8 AnimBankSpriteExists();
+extern u8 IsBankSpritePresent();
 extern u8 move_anim_start_t3();
 extern void sub_8037FD8(void);
 extern void sub_8037F34(void);
@@ -596,7 +596,7 @@ void LinkOpponentHandleGetAttributes(void)
 u32 dp01_getattr_by_ch1_for_player_pokemon__(u8 a, u8 *buffer)
 {
     struct BattlePokemon battlePokemon;
-    struct UnknownStruct3 moveData;
+    struct MovePpInfo moveData;
     u8 nickname[20];
     u8 *src;
     s16 data16;
@@ -925,7 +925,7 @@ void LinkOpponentHandleSetAttributes(void)
 void sub_8038900(u8 a)
 {
     struct BattlePokemon *battlePokemon = (struct BattlePokemon *)&gBattleBufferA[gActiveBank][3];
-    struct UnknownStruct3 *moveData = (struct UnknownStruct3 *)&gBattleBufferA[gActiveBank][3];
+    struct MovePpInfo *moveData = (struct MovePpInfo *)&gBattleBufferA[gActiveBank][3];
     s32 i;
 
     switch (gBattleBufferA[gActiveBank][1])
@@ -1157,7 +1157,7 @@ void LinkOpponentHandleLoadPokeSprite(void)
     GetMonSpriteTemplate_803C56C(species, GetBankIdentity(gActiveBank));
     gObjectBankIDs[gActiveBank] = CreateSprite(
       &gUnknown_02024E8C,
-      sub_8077ABC(gActiveBank, 2),
+      GetBankPosition(gActiveBank, 2),
       sub_8077F68(gActiveBank),
       sub_8079E90(gActiveBank));
     gSprites[gObjectBankIDs[gActiveBank]].pos2.x = -240;
@@ -1187,7 +1187,7 @@ void sub_8039430(u8 a, u8 b)
     GetMonSpriteTemplate_803C56C(species, GetBankIdentity(a));
     gObjectBankIDs[a] = CreateSprite(
       &gUnknown_02024E8C,
-      sub_8077ABC(a, 2),
+      GetBankPosition(a, 2),
       sub_8077F68(a),
       sub_8079E90(a));
     gSprites[gUnknown_0300434C[a]].data[1] = gObjectBankIDs[a];
@@ -1331,21 +1331,21 @@ void LinkOpponentHandleMoveAnimation(void)
         u32 r0 = gBattleBufferA[gActiveBank][1]
                | (gBattleBufferA[gActiveBank][2] << 8);
 
-        gUnknown_0202F7C4 = gBattleBufferA[gActiveBank][3];
-        gMovePowerMoveAnim = gBattleBufferA[gActiveBank][4]
+        gAnimMoveTurn = gBattleBufferA[gActiveBank][3];
+        gAnimMovePower = gBattleBufferA[gActiveBank][4]
                           | (gBattleBufferA[gActiveBank][5] << 8);
-        gMoveDmgMoveAnim = gBattleBufferA[gActiveBank][6]
+        gAnimMoveDmg = gBattleBufferA[gActiveBank][6]
                           | (gBattleBufferA[gActiveBank][7] << 8)
                           | (gBattleBufferA[gActiveBank][8] << 16)
                           | (gBattleBufferA[gActiveBank][9] << 24);
-        gHappinessMoveAnim = gBattleBufferA[gActiveBank][10];
+        gAnimFriendship = gBattleBufferA[gActiveBank][10];
         gWeatherMoveAnim = gBattleBufferA[gActiveBank][12]
                           | (gBattleBufferA[gActiveBank][13] << 8);
-        gDisableStructMoveAnim = (u32 *)&gBattleBufferA[gActiveBank][16];
-        gPID_perBank[gActiveBank] = *gDisableStructMoveAnim;
+        gAnimDisableStructPtr = (struct DisableStruct *)&gBattleBufferA[gActiveBank][16];
+        gTransformedPersonalities[gActiveBank] = gAnimDisableStructPtr->transformedMonPersonality;
 
         // Dead code. sub_8031720 always returns 0.
-        if (sub_8031720(r0, gUnknown_0202F7C4) != 0)
+        if (sub_8031720(r0, gAnimMoveTurn) != 0)
         {
             LinkOpponentBufferExecCompleted();
         }
@@ -1377,7 +1377,7 @@ void sub_8039B64(void)
         if (!ewram17810[gActiveBank].unk0_6)
         {
             sub_80326EC(0);
-            ExecuteMoveAnim(r4);
+            DoMoveAnim(r4);
             ewram17810[gActiveBank].unk4 = 2;
         }
         break;
@@ -1731,7 +1731,7 @@ void LinkOpponentHandlecmd50(void)
 
 void LinkOpponentHandleSpriteInvisibility(void)
 {
-    if (AnimBankSpriteExists(gActiveBank) != 0)
+    if (IsBankSpritePresent(gActiveBank) != 0)
     {
         gSprites[gObjectBankIDs[gActiveBank]].invisible = gBattleBufferA[gActiveBank][1];
         sub_8031F88(gActiveBank);

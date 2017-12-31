@@ -4,8 +4,8 @@
 #include "battle_anim.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 static void sub_80CB3A8(u8 taskId);
 static void sub_80CB438(u8 taskId);
@@ -35,7 +35,7 @@ void sub_80CB3A8(u8 taskId)
     u8 spriteId = GetAnimBankSpriteId(1);
     gTasks[taskId].data[10] += gTasks[taskId].data[0];
     gSprites[spriteId].pos2.x = gTasks[taskId].data[10] >> 8;
-    if (GetBankSide(gBattleAnimBankTarget))
+    if (GetBankSide(gAnimBankTarget))
     {
         gSprites[spriteId].pos2.x = -gSprites[spriteId].pos2.x;
     }

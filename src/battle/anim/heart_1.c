@@ -5,8 +5,8 @@
 #include "sound.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 // heart_1 (a floating heart in a wave pattern upward.)
 // Used in Charm, Covet, and when a Pokemon is infatuated.
@@ -21,5 +21,5 @@ void sub_80D1C80(struct Sprite* sprite)
     sprite->data[1] = (sprite->data[1] + 7) & 0xFF;
     sprite->data[2] -= 0x80;
     if (sprite->data[0] == 0x3C)
-        move_anim_8072740(sprite);
+        DestroyAnimSprite(sprite);
 }

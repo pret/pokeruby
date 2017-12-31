@@ -5,8 +5,8 @@
 #include "sound.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 static void sub_80CFF68(struct Sprite* sprite);
 
@@ -20,9 +20,9 @@ void sub_80CFE9C(struct Sprite* sprite)
     u16 var;
 
     sub_80787B0(sprite, 1);
-    r6 = sub_8077ABC(gBattleAnimBankTarget, 2);
-    r7 = sub_8077ABC(gBattleAnimBankTarget, 3) + gBattleAnimArgs[3];
-    if (GetBankSide(gBattleAnimBankAttacker) != 0)
+    r6 = GetBankPosition(gAnimBankTarget, 2);
+    r7 = GetBankPosition(gAnimBankTarget, 3) + gBattleAnimArgs[3];
+    if (GetBankSide(gAnimBankAttacker) != 0)
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
 
     r6 += gBattleAnimArgs[2];
@@ -33,7 +33,7 @@ void sub_80CFE9C(struct Sprite* sprite)
     sprite->data[2] = r6;
     sprite->data[4] = r7;
     sprite->callback = sub_8078C00;
-    StoreSpriteCallbackInData(sprite, move_anim_8072740);
+    StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
 
 void sub_80CFF50(struct Sprite* sprite)
@@ -47,7 +47,7 @@ void sub_80CFF68(struct Sprite* sprite)
 {
     sprite->data[0] += 0x80;
     sprite->pos2.x = sprite->data[0] >> 8;
-    if (GetBankSide(gBattleAnimBankAttacker) == 0)
+    if (GetBankSide(gAnimBankAttacker) == 0)
         sprite->pos2.x = -sprite->pos2.x;
 
     sprite->pos2.y = Sin(sprite->data[1], sprite->data[2]);
@@ -57,6 +57,6 @@ void sub_80CFF68(struct Sprite* sprite)
         sprite->data[1] = 0;
         sprite->data[2] /= 2;
         if (++sprite->data[3] == 2)
-            move_anim_8072740(sprite);
+            DestroyAnimSprite(sprite);
     }
 }

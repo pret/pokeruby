@@ -15,6 +15,6 @@ void sub_80D2BE8(struct Sprite *sprite)
     }
     else if (sprite->animEnded)
     {
-        move_anim_8072740(sprite);
+        DestroyAnimSprite(sprite);
     }
 }

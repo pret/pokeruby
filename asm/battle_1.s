@@ -490,8 +490,8 @@ _0800D7B0: .4byte 0x0000675a
 _0800D7B4: .4byte gPlttBufferFaded + 0xB8
 	thumb_func_end sub_800D74C
 
-	thumb_func_start sub_800D7B8
-sub_800D7B8: @ 800D7B8
+	thumb_func_start DrawMainBattleBackground
+DrawMainBattleBackground: @ 800D7B8
 	push {r4,r5,lr}
 	ldr r0, _0800D7DC @ =gBattleTypeFlags
 	ldrh r1, [r0]
@@ -792,7 +792,7 @@ _0800DAA8: .4byte 0x06008000
 _0800DAAC: .4byte gBattleTerrainTilemap_Building
 _0800DAB0: .4byte 0x0600d000
 _0800DAB4: .4byte gBattleTerrainPalette_BattleTower
-	thumb_func_end sub_800D7B8
+	thumb_func_end DrawMainBattleBackground
 
 	thumb_func_start sub_800DAB8
 sub_800DAB8: @ 800DAB8
@@ -811,7 +811,7 @@ sub_800DAB8: @ 800DAB8
 	movs r2, 0x40
 	bl LoadCompressedPalette
 	bl sub_800D74C
-	bl sub_800D7B8
+	bl DrawMainBattleBackground
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1231,7 +1231,7 @@ _0800E03C:
 	ldrsh r0, [r6, r1]
 	cmp r0, 0
 	beq _0800E0A4
-	ldr r4, _0800E090 @ =gUnknown_030042C0
+	ldr r4, _0800E090 @ =gBattle_BG1_X
 	ldrh r0, [r6, 0xA]
 	bl Sin2
 	lsls r0, 16
@@ -1246,7 +1246,7 @@ _0800E056:
 	adds r0, r2, 0
 	subs r0, r1
 	strh r0, [r4]
-	ldr r4, _0800E094 @ =gUnknown_03004288
+	ldr r4, _0800E094 @ =gBattle_BG2_X
 	ldrh r0, [r6, 0xC]
 	bl Sin2
 	lsls r0, 16
@@ -1261,21 +1261,21 @@ _0800E074:
 	adds r0, r5, 0
 	subs r0, r1
 	strh r0, [r4]
-	ldr r0, _0800E098 @ =gUnknown_030041B4
+	ldr r0, _0800E098 @ =gBattle_BG1_Y
 	ldr r2, _0800E09C @ =0x0000ffdc
 	adds r1, r2, 0
 	strh r1, [r0]
-	ldr r0, _0800E0A0 @ =gUnknown_03004280
+	ldr r0, _0800E0A0 @ =gBattle_BG2_Y
 	strh r1, [r0]
 	b _0800E110
 	.align 2, 0
-_0800E090: .4byte gUnknown_030042C0
-_0800E094: .4byte gUnknown_03004288
-_0800E098: .4byte gUnknown_030041B4
+_0800E090: .4byte gBattle_BG1_X
+_0800E094: .4byte gBattle_BG2_X
+_0800E098: .4byte gBattle_BG1_Y
 _0800E09C: .4byte 0x0000ffdc
-_0800E0A0: .4byte gUnknown_03004280
+_0800E0A0: .4byte gBattle_BG2_Y
 _0800E0A4:
-	ldr r4, _0800E134 @ =gUnknown_030042C0
+	ldr r4, _0800E134 @ =gBattle_BG1_X
 	ldrh r0, [r6, 0xA]
 	bl Sin2
 	lsls r0, 16
@@ -1290,7 +1290,7 @@ _0800E0B6:
 	adds r0, r5, 0
 	subs r0, r1
 	strh r0, [r4]
-	ldr r4, _0800E138 @ =gUnknown_030041B4
+	ldr r4, _0800E138 @ =gBattle_BG1_Y
 	ldrh r0, [r6, 0xA]
 	bl Cos2
 	lsls r0, 16
@@ -1302,7 +1302,7 @@ _0800E0D4:
 	asrs r0, 5
 	subs r0, 0xA4
 	strh r0, [r4]
-	ldr r4, _0800E13C @ =gUnknown_03004288
+	ldr r4, _0800E13C @ =gBattle_BG2_X
 	ldrh r0, [r6, 0xC]
 	bl Sin2
 	lsls r0, 16
@@ -1317,7 +1317,7 @@ _0800E0EC:
 	adds r0, r2, 0
 	subs r0, r1
 	strh r0, [r4]
-	ldr r4, _0800E140 @ =gUnknown_03004280
+	ldr r4, _0800E140 @ =gBattle_BG2_Y
 	ldrh r0, [r6, 0xC]
 	bl Cos2
 	lsls r0, 16
@@ -1348,10 +1348,10 @@ _0800E110:
 	strh r0, [r1, 0xA]
 	b _0800E212
 	.align 2, 0
-_0800E134: .4byte gUnknown_030042C0
-_0800E138: .4byte gUnknown_030041B4
-_0800E13C: .4byte gUnknown_03004288
-_0800E140: .4byte gUnknown_03004280
+_0800E134: .4byte gBattle_BG1_X
+_0800E138: .4byte gBattle_BG1_Y
+_0800E13C: .4byte gBattle_BG2_X
+_0800E140: .4byte gBattle_BG2_Y
 _0800E144: .4byte gTasks
 _0800E148:
 	movs r5, 0x12
@@ -1506,11 +1506,11 @@ sub_800E23C: @ 800E23C
 	strh r1, [r0]
 	adds r0, 0x2
 	strh r1, [r0]
-	ldr r0, _0800E2CC @ =gUnknown_030041B4
+	ldr r0, _0800E2CC @ =gBattle_BG1_Y
 	ldr r2, _0800E2D0 @ =0x0000ff5c
 	adds r1, r2, 0
 	strh r1, [r0]
-	ldr r0, _0800E2D4 @ =gUnknown_03004280
+	ldr r0, _0800E2D4 @ =gBattle_BG2_Y
 	strh r1, [r0]
 	ldr r0, _0800E2D8 @ =gUnknown_081F95A4
 	bl LoadCompressedObjectPic
@@ -1528,9 +1528,9 @@ _0800E2BC: .4byte gVersusFramePal
 _0800E2C0: .4byte REG_BG1CNT
 _0800E2C4: .4byte 0x00005c04
 _0800E2C8: .4byte REG_WININ
-_0800E2CC: .4byte gUnknown_030041B4
+_0800E2CC: .4byte gBattle_BG1_Y
 _0800E2D0: .4byte 0x0000ff5c
-_0800E2D4: .4byte gUnknown_03004280
+_0800E2D4: .4byte gBattle_BG2_Y
 _0800E2D8: .4byte gUnknown_081F95A4
 _0800E2DC:
 	ldr r0, _0800E2F0 @ =0x00000902
