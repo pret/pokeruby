@@ -2117,8 +2117,8 @@ int sub_810FB9C(void);
 
 void ResetFanClub(void)
 {
-    gSaveBlock1.vars[0x41] = 0;
-    gSaveBlock1.vars[0x42] = 0;
+    gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] = 0;
+    gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_2 - VARS_START] = 0;
 }
 
 void sub_810FA74(void)
@@ -2126,17 +2126,17 @@ void sub_810FA74(void)
     if (sub_810FF30())
     {
         UpdateMovedLilycoveFanClubMembers();
-        gSaveBlock1.vars[0x42] = gSaveBlock2.playTimeHours;
+        gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_2 - VARS_START] = gSaveBlock2.playTimeHours;
     }
 }
 
 void sub_810FAA0(void)
 {
-    if (!((gSaveBlock1.vars[0x41] >> 7) & 1))
+    if (!((gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] >> 7) & 1))
     {
         sub_810FF48();
         sub_810FD80();
-        gSaveBlock1.vars[0x42] = gSaveBlock2.playTimeHours;
+        gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_2 - VARS_START] = gSaveBlock2.playTimeHours;
         FlagClear(FLAG_HIDE_FANCLUB_OLD_LADY);
         FlagClear(FLAG_HIDE_FANCLUB_BOY);
         FlagClear(FLAG_HIDE_FANCLUB_LITTLE_BOY);
@@ -2149,24 +2149,24 @@ u8 sub_810FB10(u8 a0)
 {
     if (VarGet(VAR_LILYCOVE_FAN_CLUB_STATE) == 2)
     {
-        if ((gSaveBlock1.vars[0x41] & 0x7f) + gUnknown_083F8404[a0] >= 20)
+        if ((gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] & 0x7f) + gUnknown_083F8404[a0] >= 20)
         {
             if (GetNumMovedLilycoveFanClubMembers() < 3)
             {
                 sub_810FB9C();
-                gSaveBlock1.vars[0x41] &= 0xff80;
+                gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] &= 0xff80;
             }
             else
             {
-                gSaveBlock1.vars[0x41] = (gSaveBlock1.vars[0x41] & 0xff80) | 20;
+                gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] = (gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] & 0xff80) | 20;
             }
         }
         else
         {
-            gSaveBlock1.vars[0x41] += gUnknown_083F8404[a0];
+            gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] += gUnknown_083F8404[a0];
         }
     }
-    return gSaveBlock1.vars[0x41] & 0x7f;
+    return gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] & 0x7f;
 }
 
 int sub_810FB9C(void)
@@ -2175,17 +2175,17 @@ int sub_810FB9C(void)
     int retval = 0;
     for (i=0; i<8; i++)
     {
-        if (!((gSaveBlock1.vars[0x41] >> gUnknown_083F8408[i]) & 0x01))
+        if (!((gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] >> gUnknown_083F8408[i]) & 0x01))
         {
             retval = i;
             if (Random() & 1)
             {
-                gSaveBlock1.vars[0x41] |= (1 << gUnknown_083F8408[i]);
+                gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] |= (1 << gUnknown_083F8408[i]);
                 return retval;
             }
         }
     }
-    gSaveBlock1.vars[0x41] |= (1 << gUnknown_083F8408[retval]);
+    gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] |= (1 << gUnknown_083F8408[retval]);
     return retval;
 }
 
@@ -2199,19 +2199,19 @@ int sub_810FC18(void)
     }
     for (i=0; i<8; i++)
     {
-        if ((gSaveBlock1.vars[0x41] >> gUnknown_083F8410[i]) & 1)
+        if ((gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] >> gUnknown_083F8410[i]) & 1)
         {
             retval = i;
             if (Random() & 1)
             {
-                gSaveBlock1.vars[0x41] ^= (1 << gUnknown_083F8410[i]);
+                gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] ^= (1 << gUnknown_083F8410[i]);
                 return retval;
             }
         }
     }
-    if ((gSaveBlock1.vars[0x41] >> gUnknown_083F8410[retval]) & 1)
+    if ((gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] >> gUnknown_083F8410[retval]) & 1)
     {
-        gSaveBlock1.vars[0x41] ^= (1 << gUnknown_083F8410[retval]);
+        gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] ^= (1 << gUnknown_083F8410[retval]);
     }
     return retval;
 }
@@ -2222,7 +2222,7 @@ u16 GetNumMovedLilycoveFanClubMembers(void)
     u8 retval = 0;
     for (i = 0; i < 8; i++)
     {
-        if ((gSaveBlock1.vars[0x41] >> (i + 8)) & 1)
+        if ((gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] >> (i + 8)) & 1)
         {
             retval++;
         }
@@ -2240,19 +2240,19 @@ void UpdateMovedLilycoveFanClubMembers(void)
         {
             if (GetNumMovedLilycoveFanClubMembers() < 5)
             {
-                gSaveBlock1.vars[0x42] = gSaveBlock2.playTimeHours;
+                gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_2 - VARS_START] = gSaveBlock2.playTimeHours;
                 break;
             }
             else if (i == 8)
             {
                 break;
             }
-            else if (gSaveBlock2.playTimeHours - gSaveBlock1.vars[0x42] < 12)
+            else if (gSaveBlock2.playTimeHours - gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_2 - VARS_START] < 12)
             {
                 return;
             }
             sub_810FC18();
-            gSaveBlock1.vars[0x42] += 12;
+            gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_2 - VARS_START] += 12;
             i++;
         }
     }
@@ -2260,14 +2260,14 @@ void UpdateMovedLilycoveFanClubMembers(void)
 
 bool8 ShouldMoveLilycoveFanClubMember(void)
 {
-    return (gSaveBlock1.vars[0x41] >> gSpecialVar_0x8004) & 0x01;
+    return (gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] >> gSpecialVar_0x8004) & 0x01;
 }
 
 void sub_810FD80(void)
 {
-    gSaveBlock1.vars[0x41] |= 0x2000;
-    gSaveBlock1.vars[0x41] |= 0x100;
-    gSaveBlock1.vars[0x41] |= 0x400;
+    gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] |= 0x2000;
+    gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] |= 0x100;
+    gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] |= 0x400;
 }
 
 void sub_810FE1C(void *, u8, u8);
@@ -2367,12 +2367,12 @@ void sub_810FEFC(void)
 
 bool8 sub_810FF30(void)
 {
-    return (gSaveBlock1.vars[0x41] >> 7) & 0x01;
+    return (gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] >> 7) & 0x01;
 }
 
 void sub_810FF48(void)
 {
-    gSaveBlock1.vars[0x41] |= 0x80;
+    gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] |= 0x80;
 }
 
 u8 sub_810FF60(void)

@@ -55,9 +55,9 @@ extern s16 gUnknown_02038678[];
 
 void SetContestTrainerGfxIds(void)
 {
-    gSaveBlock1.vars[0x10] = gContestMons[0].trainerGfxId;
-    gSaveBlock1.vars[0x11] = gContestMons[1].trainerGfxId;
-    gSaveBlock1.vars[0x12] = gContestMons[2].trainerGfxId;
+    gSaveBlock1.vars[VAR_OBJ_GFX_ID_0 - VARS_START] = gContestMons[0].trainerGfxId;
+    gSaveBlock1.vars[VAR_OBJ_GFX_ID_1 - VARS_START] = gContestMons[1].trainerGfxId;
+    gSaveBlock1.vars[VAR_OBJ_GFX_ID_2 - VARS_START] = gContestMons[2].trainerGfxId;
 }
 
 void sub_80C4C28(void)

@@ -3,6 +3,8 @@
 
 #define VAR_0x3F20                 0x3F20
 
+#define VARS_START 0x4000
+
 // temporary vars
 // The first 0x10 vars are are temporary--they are cleared every time a map is loaded.
 #define VAR_TEMP_0                 0x4000
@@ -60,7 +62,8 @@
 #define VAR_ENIGMA_BERRY_AVAILABLE 0x402D
 
 #define VAR_DAYS                   0x4040
-
+#define VAR_FANCLUB_UNKNOWN_1      0x4041 // TODO: document these two fanclub vars
+#define VAR_FANCLUB_UNKNOWN_2      0x4042
 #define VAR_DEPT_STORE_FLOOR       0x4043
 #define VAR_TRICK_HOUSE_ROOMS_COMPLETED 0x4044
 #define VAR_LOTTERY_PRIZE          0x4045
