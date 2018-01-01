@@ -212,9 +212,9 @@ void sub_81059B8(void);
 void sub_81059E8(void);
 bool8 sub_8105ACC(void);
 void sub_8105AEC(void);
-u8 sub_8105B1C(s16 a0, s16 a1);
-void sub_8105B88(u8 a0);
-u8 sub_8105BF8(u8, u32, s16, s16, s16);
+u8 sub_8105B1C(s16 x, s16 y);
+void sub_8105B88(u8 spriteId);
+u8 sub_8105BF8(u8 templateIdx, SpriteCallback callback, s16 x, s16 y, s16 a4);
 void sub_81063C0(void);
 static void sub_8106448(void);
 void sub_81064B8(void);
@@ -3022,7 +3022,7 @@ void sub_8104CAC(u8 arg0) {
     }
 }
 
-void sub_8104D30(u8 a0, u32 a1, s16 a2, s16 a3, s16 a4)
+void sub_8104D30(u8 a0, SpriteCallback a1, s16 a2, s16 a3, s16 a4)
 {
     u8 i;
     struct Task *task = gTasks + eSlotMachine->unk3D;
@@ -3488,6 +3488,106 @@ void sub_81059B8(void)
     {
         DestroySprite(gSprites + eSlotMachine->unk54[i]);
     }
+}
+
+extern const struct SpriteTemplate gSpriteTemplate_83ED564;
+
+void sub_81059E8(void)
+{
+    u8 spriteId = CreateSprite(&gSpriteTemplate_83ED564, 0xa8, 0x3c, 8);
+    struct Sprite *sprite = gSprites + spriteId;
+    sprite->oam.priority = 1;
+    sprite->oam.affineMode = ST_OAM_AFFINE_DOUBLE;
+    InitSpriteAffineAnim(sprite);
+    eSlotMachine->unk43 = spriteId;
+}
+
+void sub_8105A38(struct Sprite *sprite)
+{
+    if (sprite->data[0] == 0)
+    {
+        if (sprite->affineAnimEnded)
+            sprite->data[0]++;
+    }
+    else if (sprite->data[0] == 1)
+    {
+        sprite->invisible ^= 1;
+        if (++sprite->data[2] >= 24)
+        {
+            sprite->data[0]++;
+            sprite->data[2] = 0;
+        }
+    }
+    else
+    {
+        sprite->invisible = TRUE;
+        if (++sprite->data[2] >= 16)
+            sprite->data[7] = 1;
+    }
+    sprite->data[1] &= 0xff;
+    sprite->data[1] += 16;
+    sprite->pos2.y -= (sprite->data[1] >> 8);
+}
+
+u8 sub_8105ACC(void)
+{
+    return gSprites[eSlotMachine->unk43].data[7];
+}
+
+void sub_8105AEC(void)
+{
+    struct Sprite *sprite = gSprites + eSlotMachine->unk43;
+    FreeOamMatrix(sprite->oam.matrixNum);
+    DestroySprite(sprite);
+}
+
+extern const struct SpriteTemplate gSpriteTemplate_83ED6CC;
+
+u8 sub_8105B1C(s16 x, s16 y)
+{
+    u8 spriteId = CreateSprite(&gSpriteTemplate_83ED6CC, x, y, 12);
+    struct Sprite *sprite = gSprites + spriteId;
+    sprite->oam.priority = 2;
+    sprite->oam.affineMode = ST_OAM_AFFINE_DOUBLE;
+    InitSpriteAffineAnim(sprite);
+    return spriteId;
+}
+
+void sub_8105B70(struct Sprite *sprite)
+{
+    if (sprite->affineAnimEnded)
+        sprite->data[7] = 1;
+}
+
+void sub_8105B88(u8 spriteId)
+{
+    struct Sprite *sprite = gSprites + spriteId;
+    FreeOamMatrix(sprite->oam.matrixNum);
+    DestroySprite(sprite);
+}
+
+extern const SpriteCallback gUnknown_083ECF0C[];
+extern const s16 gUnknown_083ECE7E[][2];
+
+u8 sub_8105BB4(u8 a0, u8 a1, s16 a2)
+{
+    return sub_8105BF8(a0, gUnknown_083ECF0C[a1], gUnknown_083ECE7E[a1][0], gUnknown_083ECE7E[a1][1], a2);
+}
+
+extern const struct SpriteTemplate *gUnknown_083EDB5C[];
+extern const struct SubspriteTable *gUnknown_083EDBC4[];
+
+u8 sub_8105BF8(u8 templateIdx, SpriteCallback callback, s16 x, s16 y, s16 a4)
+{
+    u8 spriteId = CreateSprite(gUnknown_083EDB5C[templateIdx], x, y, 16);
+    struct Sprite *sprite = gSprites + spriteId;
+    sprite->oam.priority = 3;
+    sprite->callback = callback;
+    sprite->data[6] = a4;
+    sprite->data[7] = 1;
+    if (gUnknown_083EDBC4[templateIdx])
+        SetSubspriteTables(sprite, gUnknown_083EDBC4[templateIdx]);
+    return spriteId;
 }
 
 asm(".section .text_b");
