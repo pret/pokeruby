@@ -30,12 +30,12 @@ SlateportCity_House1_EventScript_1556C9:: @ 81556C9
 	specialvar RESULT, ScriptGetPartyMonSpecies
 	compare RESULT, SPECIES_EGG
 	goto_if_eq SlateportCity_House1_EventScript_15571C
-	special sub_80BFAE0
-	special sub_80BFB10
+	special TV_CopyNicknameToStringVar1AndEnsureTerminated
+	special TV_CheckMonOTIDEqualsPlayerID
 	compare RESULT, 1
 	goto_if_eq SlateportCity_House1_EventScript_155726
 	specialvar RESULT, sub_810F96C
-	special sub_80BFAE0
+	special TV_CopyNicknameToStringVar1AndEnsureTerminated
 	compare RESULT, 1
 	goto_if_eq SlateportCity_House1_EventScript_155726
 	msgbox SlateportCity_House1_Text_17D505, 5
@@ -58,8 +58,8 @@ SlateportCity_House1_EventScript_155726:: @ 8155726
 SlateportCity_House1_EventScript_155730:: @ 8155730
 	msgbox SlateportCity_House1_Text_17D580, 4
 	call SlateportCity_House1_EventScript_1A0678
-	specialvar RESULT, sub_80BF9B4
-	special sub_80BFAE0
+	specialvar RESULT, TV_PutNameRaterShowOnTheAirIfNicnkameChanged
+	special TV_CopyNicknameToStringVar1AndEnsureTerminated
 	compare RESULT, 1
 	goto_if_eq SlateportCity_House1_EventScript_15575A
 	msgbox SlateportCity_House1_Text_17D63A, 4

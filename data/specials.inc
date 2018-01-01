@@ -73,16 +73,16 @@ gSpecials::
 	def_special DoTVShow
 	def_special DoPokeNews
 	def_special special_0x44
-	def_special sub_80BDA0C
-	def_special sub_80BF2C4
-	def_special sub_80BDE48
-	def_special sub_80BF544
+	def_special GetTVShowType
+	def_special InterviewBefore
+	def_special InterviewAfter
+	def_special LeadMonNicknamed
 	def_special SetContestCategoryStringVarForInterview
-	def_special special_0x4a
-	def_special sub_80BF974
+	def_special GetNonMassOutbreakActiveTVShow
+	def_special TV_IsScriptShowKindAlreadyInQueue
 	def_special CheckForBigMovieOrEmergencyNewsOnTV
 	def_special GetMomOrDadStringForTVMessage
-	def_special sub_80C2014
+	def_special ResetTVShowState
 	def_special sub_80C47C0
 	def_special sub_80C496C
 	def_special sub_80C4C28
@@ -130,9 +130,9 @@ gSpecials::
 	def_special CompareShroomishSize
 	def_special GetBarboachSizeRecordInfo
 	def_special CompareBarboachSize
-	def_special sub_80BF9B4
-	def_special sub_80BFAE0
-	def_special sub_80BFB10
+	def_special TV_PutNameRaterShowOnTheAirIfNicnkameChanged
+	def_special TV_CopyNicknameToStringVar1AndEnsureTerminated
+	def_special TV_CheckMonOTIDEqualsPlayerID
 	def_special sub_80FA5BC
 	def_special sub_80FA5E4
 	def_special sub_80EB83C
