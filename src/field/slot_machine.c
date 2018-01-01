@@ -3590,6 +3590,88 @@ u8 sub_8105BF8(u8 templateIdx, SpriteCallback callback, s16 x, s16 y, s16 a4)
     return spriteId;
 }
 
+void sub_8105C64(struct Sprite *sprite)
+{
+    sprite->data[7] = 0;
+}
+
+extern const s16 gUnknown_083ECC62[4]; // do not delete yet
+extern const s16 gUnknown_083ECC6A[4]; // do not delete yet
+
+void sub_8105C6C(struct Sprite *sprite)
+{
+    // s16 sp0[] = {4, -4, 4, -4};
+    // s16 sp8[] = {4, 4, -4, -4};
+
+    s16 sp0[ARRAY_COUNT(gUnknown_083ECC62)];
+    s16 sp8[ARRAY_COUNT(gUnknown_083ECC6A)];
+    memcpy(sp0, gUnknown_083ECC62, sizeof gUnknown_083ECC62);
+    memcpy(sp8, gUnknown_083ECC6A, sizeof gUnknown_083ECC6A);
+
+    if (sprite->data[1]++ >= 16)
+    {
+        sprite->subspriteTableNum ^= 1;
+        sprite->data[1] = 0;
+    }
+    sprite->pos2.x = 0;
+    sprite->pos2.y = 0;
+    if (sprite->subspriteTableNum != 0)
+    {
+        sprite->pos2.x = sp0[sprite->data[6]];
+        sprite->pos2.y = sp8[sprite->data[6]];
+    }
+}
+
+void sub_8105CF0(struct Sprite *sprite)
+{
+    sprite->hFlip = TRUE;
+    sub_8105C6C(sprite);
+}
+
+void sub_8105D08(struct Sprite *sprite)
+{
+    sprite->vFlip = TRUE;
+    sub_8105C6C(sprite);
+}
+
+void sub_8105D20(struct Sprite *sprite)
+{
+    sprite->hFlip = TRUE;
+    sprite->vFlip = TRUE;
+    sub_8105C6C(sprite);
+}
+
+void sub_8105D3C(struct Sprite *sprite)
+{
+    switch (sprite->data[0])
+    {
+        case 0:
+            sprite->pos1.x += 4;
+            if (sprite->pos1.x >= 0xd0)
+            {
+                sprite->pos1.x = 0xd0;
+                sprite->data[0]++;
+            }
+            break;
+        case 1:
+            if (++sprite->data[1] > 90)
+            {
+                sprite->data[0]++;
+            }
+            break;
+        case 2:
+            sprite->pos1.x += 4;
+            if (sprite->pos1.x >= 0x110)
+            {
+                sprite->data[0]++;
+            }
+            break;
+        case 3:
+            sprite->data[7] = 0;
+            break;
+    }
+}
+
 asm(".section .text_b");
 
 static void sub_8106448(void) {
