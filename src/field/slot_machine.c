@@ -2821,7 +2821,7 @@ void sub_81048CC(struct Task *task)
     sub_81056C0();
     sub_8105804();
     sub_8105854();
-    gSprites[eSlotMachine->unk4E].invisible = TRUE;
+    gSprites[eSlotMachine->unk4E[0]].invisible = TRUE;
     StartSpriteAnimIfDifferent(gSprites + eSlotMachine->unk3F, 5);
     task->data[0]++;
     task->data[4] = 4;
@@ -2845,7 +2845,7 @@ void sub_8104940(struct Task *task)
         sub_81058C4();
         sub_8105284();
         sub_81059E8();
-        gSprites[eSlotMachine->unk4E].invisible = FALSE;
+        gSprites[eSlotMachine->unk4E[0]].invisible = FALSE;
         task->data[0]++;
         task->data[5] = 0;
     }
@@ -3203,14 +3203,14 @@ void sub_81051C0(void)
     sprite->oam.priority = 1;
     sprite->coordOffsetEnabled = TRUE;
     SetSubspriteTables(sprite, gSubspriteTables_83ED73C);
-    eSlotMachine->unk49 = spriteId;
+    eSlotMachine->unk49[0] = spriteId;
 
     spriteId = CreateSprite(&gSpriteTemplate_83ED48C, 0x170, 0x54, 7);
     sprite = gSprites + spriteId;
     sprite->oam.priority = 1;
     sprite->coordOffsetEnabled = TRUE;
     SetSubspriteTables(sprite, gSubspriteTables_83ED75C);
-    eSlotMachine->unk4A = spriteId;
+    eSlotMachine->unk49[1] = spriteId;
 }
 
 extern const struct SpriteTemplate gSpriteTemplate_83ED4A4;
@@ -3249,6 +3249,68 @@ void sub_810535C(struct Sprite *sprite)
     r0 %= 40;
     sprite->pos1.y = r0 + 59;
     StartSpriteAnimIfDifferent(sprite, sub_8102C48(r0 / 20));
+}
+
+extern const struct SpriteTemplate gSpriteTemplate_83ED4D4;
+extern const struct SubspriteTable gSubspriteTables_83ED7B4[];
+
+void sub_81053A0(void)
+{
+    u8 spriteId = CreateSprite(&gSpriteTemplate_83ED4D4, 0x170, 0x64, 9);
+    struct Sprite *sprite = gSprites + spriteId;
+    sprite->coordOffsetEnabled = TRUE;
+    sprite->oam.priority = 1;
+    SetSubspriteTables(sprite, gSubspriteTables_83ED7B4);
+    eSlotMachine->unk4E[0] = spriteId;
+
+    spriteId = CreateSprite(&gSpriteTemplate_83ED4D4, 0x120, 0x68, 4);
+    sprite = gSprites + spriteId;
+    sprite->coordOffsetEnabled = TRUE;
+    sprite->oam.priority = 1;
+    SetSubspriteTables(sprite, gSubspriteTables_83ED7B4);
+    eSlotMachine->unk4E[1] = spriteId;
+}
+
+extern const struct SpriteTemplate gSpriteTemplate_83ED4EC;
+extern const struct SubspriteTable gSubspriteTables_83ED7D4[];
+
+void sub_810545C(void)
+{
+    u8 spriteId = CreateSprite(&gSpriteTemplate_83ED4EC, 0x170, 0x4c, 11);
+    struct Sprite *sprite = gSprites + spriteId;
+    sprite->coordOffsetEnabled = TRUE;
+    sprite->oam.priority = 1;
+    SetSubspriteTables(sprite, gSubspriteTables_83ED7D4);
+    eSlotMachine->unk40 = spriteId;
+}
+
+void sub_81054B8(void)
+{
+    u8 i;
+
+    DestroySprite(gSprites + eSlotMachine->unk40);
+    for (i = 0; i < 2; i++)
+    {
+        DestroySprite(gSprites + eSlotMachine->unk49[i]);
+    }
+    for (i = 0; i < 3; i++)
+    {
+        DestroySprite(gSprites + eSlotMachine->unk4B[i]);
+    }
+}
+
+void sub_8105524(void)
+{
+    u8 i;
+    for (i = 0; i < 2; i++)
+    {
+        DestroySprite(gSprites + eSlotMachine->unk4E[i]);
+    }
+}
+
+void sub_8105554(void)
+{
+    DestroySprite(gSprites + eSlotMachine->unk42);
 }
 
 asm(".section .text_b");
