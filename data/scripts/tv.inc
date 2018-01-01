@@ -77,7 +77,7 @@ EventScript_1A6F3F:
 	end
 
 EventScript_1A6F50:
-	special sub_80BECE8
+	special DoPokeNews
 	compare RESULT, 0
 	goto_if_eq EventScript_1A6EBB
 	waitmessage

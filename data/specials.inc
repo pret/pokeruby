@@ -71,7 +71,7 @@ gSpecials::
 	def_special CheckForAlivePartyMons
 	def_special TurnOffTVScreen
 	def_special DoTVShow
-	def_special sub_80BECE8
+	def_special DoPokeNews
 	def_special special_0x44
 	def_special sub_80BDA0C
 	def_special sub_80BF2C4

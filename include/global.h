@@ -524,11 +524,11 @@ union MauvilleMan
     u8 filler[0x40];  // needed to pad out the struct
 };
 
-struct UnknownSaveStruct2ABC
+struct PokeNews
 {
-    u8 val0;
-    u8 val1;
-    u16 val2;
+    u8 kind;
+    u8 state;
+    u16 days;
 };
 
 struct GabbyAndTyData
@@ -671,7 +671,7 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x272C*/ u8 decorCushion[10];
     /*0x2736*/ u8 padding_2736[2];
     /*0x2738*/ TVShow tvShows[25];
-    /*0x2ABC*/ struct UnknownSaveStruct2ABC unknown_2ABC[16];
+    /*0x2ABC*/ struct PokeNews pokeNews[16];
     /*0x2AFC*/ u16 outbreakPokemonSpecies;
     /*0x2AFE*/ u8 outbreakLocationMapNum;
     /*0x2AFF*/ u8 outbreakLocationMapGroup;

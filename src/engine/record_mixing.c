@@ -36,7 +36,7 @@ static u8 gUnknown_0300071C[4];
 
 void *recordMixingSecretBases = &gSaveBlock1.secretBases;
 void *recordMixingTvShows = &gSaveBlock1.tvShows;
-void *gUnknown_083D0274 = &gSaveBlock1.unknown_2ABC;
+void *gUnknown_083D0274 = &gSaveBlock1.pokeNews;
 void *gUnknown_083D0278 = &gSaveBlock1.mauvilleMan;
 void *recordMixingEasyChatPairs = &gSaveBlock1.easyChatPairs;
 struct RecordMixingDayCareMail *gUnknown_083D0280 = &gUnknown_02038738;

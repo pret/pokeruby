@@ -537,7 +537,7 @@ u8 sub_80BD8B8(void)
 
 u8 CheckForBigMovieOrEmergencyNewsOnTV(void);
 void SetTVMetatilesOnMap(int, int, u16);
-bool8 sub_80BECA0(void);
+bool8 FindAnyTVNewsOnTheAir(void);
 bool8 IsTVShowInSearchOfTrainersAiring(void);
 
 void UpdateTVScreensOnMap(int width, int height)
@@ -556,7 +556,7 @@ void UpdateTVScreensOnMap(int width, int height)
         {
             SetTVMetatilesOnMap(width, height, 0x3);
         }
-        else if (FlagGet(FLAG_SYS_TV_START) && (sub_80BD8B8() != 0xff || sub_80BECA0() != 0xff || IsTVShowInSearchOfTrainersAiring()))
+        else if (FlagGet(FLAG_SYS_TV_START) && (sub_80BD8B8() != 0xff || FindAnyTVNewsOnTheAir() != 0xff || IsTVShowInSearchOfTrainersAiring()))
         {
             FlagClear(FLAG_SYS_TV_WATCH);
             SetTVMetatilesOnMap(width, height, 0x3);
@@ -1333,27 +1333,27 @@ void sub_80BEB20(void)
 
     if (FlagGet(FLAG_SYS_GAME_CLEAR) != 0)
     {
-        gUnknown_03005D38.var0 = sub_80BEBC8(gSaveBlock1.unknown_2ABC);
+        gUnknown_03005D38.var0 = sub_80BEBC8(gSaveBlock1.pokeNews);
         if (gUnknown_03005D38.var0 != -1 && sub_80BF77C(0x28f) != 1)
         {
             rval = (Random() % 3) + 1;
             if (sub_80BEE48(rval) != 1)
             {
-                gSaveBlock1.unknown_2ABC[gUnknown_03005D38.var0].val0 = rval;
-                gSaveBlock1.unknown_2ABC[gUnknown_03005D38.var0].val2 = 4;
-                gSaveBlock1.unknown_2ABC[gUnknown_03005D38.var0].val1 = 1;
+                gSaveBlock1.pokeNews[gUnknown_03005D38.var0].kind = rval;
+                gSaveBlock1.pokeNews[gUnknown_03005D38.var0].days = 4;
+                gSaveBlock1.pokeNews[gUnknown_03005D38.var0].state = 1;
             }
         }
     }
 }
 
-int sub_80BEBC8(struct UnknownSaveStruct2ABC *arg0)
+int sub_80BEBC8(struct PokeNews *pokeNews)
 {
     s8 i;
 
     for (i = 0; i < 16; i++)
     {
-        if (arg0[i].val0 == 0)
+        if (pokeNews[i].kind == 0)
             return i;
     }
     return -1;
@@ -1369,9 +1369,9 @@ void sub_80BEBF4(void)
 
 void sub_80BEC10(u8 arg0)
 {
-    gSaveBlock1.unknown_2ABC[arg0].val0 = 0;
-    gSaveBlock1.unknown_2ABC[arg0].val1 = 0;
-    gSaveBlock1.unknown_2ABC[arg0].val2 = 0;
+    gSaveBlock1.pokeNews[arg0].kind = 0;
+    gSaveBlock1.pokeNews[arg0].state = 0;
+    gSaveBlock1.pokeNews[arg0].days = 0;
 }
 
 void sub_80BEC40(void)
@@ -1380,13 +1380,13 @@ void sub_80BEC40(void)
 
     for (i = 0; i < 15; i++)
     {
-        if (gSaveBlock1.unknown_2ABC[i].val0 == 0)
+        if (gSaveBlock1.pokeNews[i].kind == 0)
         {
             for (j = i + 1; j < 16; j++)
             {
-                if (gSaveBlock1.unknown_2ABC[j].val0 != 0)
+                if (gSaveBlock1.pokeNews[j].kind != 0)
                 {
-                    gSaveBlock1.unknown_2ABC[i] = gSaveBlock1.unknown_2ABC[j];
+                    gSaveBlock1.pokeNews[i] = gSaveBlock1.pokeNews[j];
                     sub_80BEC10(j);
                     break;
                 }
@@ -1395,43 +1395,43 @@ void sub_80BEC40(void)
     }
 }
 
-u8 sub_80BECA0(void)
+u8 FindAnyTVNewsOnTheAir(void)
 {
     u8 i;
     for (i = 0; i < 16; i++)
     {
-        if (gSaveBlock1.unknown_2ABC[i].val0 != 0
-         && gSaveBlock1.unknown_2ABC[i].val1 == 1
-         && gSaveBlock1.unknown_2ABC[i].val2 < 3)
+        if (gSaveBlock1.pokeNews[i].kind != 0
+         && gSaveBlock1.pokeNews[i].state == 1
+         && gSaveBlock1.pokeNews[i].days < 3)
             return i;
     }
     return 0xFF;
 }
 
-void sub_80BECE8(void)
+void DoPokeNews(void)
 {
-    u8 arg0;
-    arg0 = sub_80BECA0();
-    if (arg0 == 0xff)
+    u8 i;
+    i = FindAnyTVNewsOnTheAir();
+    if (i == 0xff)
     {
         gSpecialVar_Result = 0;
         return;
     }
-    if (gSaveBlock1.unknown_2ABC[arg0].val2 == 0)
+    if (gSaveBlock1.pokeNews[i].days == 0)
     {
-        gSaveBlock1.unknown_2ABC[arg0].val1 = 2;
+        gSaveBlock1.pokeNews[i].state = 2;
         if (gLocalTime.hours < 20)
-            ShowFieldMessage(gTVNewsTextGroup2[gSaveBlock1.unknown_2ABC[arg0].val0]);
+            ShowFieldMessage(gTVNewsTextGroup2[gSaveBlock1.pokeNews[i].kind]);
         else
-            ShowFieldMessage(gTVNewsTextGroup3[gSaveBlock1.unknown_2ABC[arg0].val0]);
+            ShowFieldMessage(gTVNewsTextGroup3[gSaveBlock1.pokeNews[i].kind]);
     }
     else
     {
-        u16 value = gSaveBlock1.unknown_2ABC[arg0].val2;
+        u16 value = gSaveBlock1.pokeNews[i].days;
 
         ConvertIntToDecimalStringN(gStringVar1, value, 0, 1);
-        gSaveBlock1.unknown_2ABC[arg0].val1 = 0;
-        ShowFieldMessage(gTVNewsTextGroup1[gSaveBlock1.unknown_2ABC[arg0].val0]);
+        gSaveBlock1.pokeNews[i].state = 0;
+        ShowFieldMessage(gTVNewsTextGroup1[gSaveBlock1.pokeNews[i].kind]);
     }
     gSpecialVar_Result = 1;
 }
@@ -1444,9 +1444,9 @@ bool8 GetPriceReduction(u8 arg0)
         return FALSE;
     for (i=0; i<16; i++)
     {
-        if (gSaveBlock1.unknown_2ABC[i].val0 == arg0)
+        if (gSaveBlock1.pokeNews[i].kind == arg0)
         {
-            if (gSaveBlock1.unknown_2ABC[i].val1 == 2 && IsPriceDiscounted(arg0) != 0)
+            if (gSaveBlock1.pokeNews[i].state == 2 && IsPriceDiscounted(arg0) != 0)
                 return TRUE;
             else
                 return FALSE;
@@ -1487,7 +1487,7 @@ bool8 sub_80BEE48(u8 arg0)
         return TRUE;
     for (i=0; i<16; i++)
     {
-        if (gSaveBlock1.unknown_2ABC[i].val0 == arg0)
+        if (gSaveBlock1.pokeNews[i].kind == arg0)
             return TRUE;
     }
     return FALSE;
@@ -1499,17 +1499,17 @@ void sub_80BEE84(u16 var0)
 
     for (i=0; i<16; i++)
     {
-        if (gSaveBlock1.unknown_2ABC[i].val0)
+        if (gSaveBlock1.pokeNews[i].kind)
         {
-            if (gSaveBlock1.unknown_2ABC[i].val2 < var0)
+            if (gSaveBlock1.pokeNews[i].days < var0)
             {
                 sub_80BEC10(i);
             }
             else
             {
-                if (!gSaveBlock1.unknown_2ABC[i].val1 && FlagGet(FLAG_SYS_GAME_CLEAR) == 1)
-                    gSaveBlock1.unknown_2ABC[i].val1 = 1;
-                gSaveBlock1.unknown_2ABC[i].val2 -= var0;
+                if (!gSaveBlock1.pokeNews[i].state && FlagGet(FLAG_SYS_GAME_CLEAR) == 1)
+                    gSaveBlock1.pokeNews[i].state = 1;
+                gSaveBlock1.pokeNews[i].days -= var0;
             }
         }
     }
@@ -2200,7 +2200,7 @@ void sub_80BFD20(void)
 typedef union ewramStruct_02007000
 {
     TVShow tvshows[4][25];
-    struct UnknownSaveStruct2ABC unknown_2abc[4][16];
+    struct PokeNews pokeNews[4][16];
 } ewramStruct_02007000;
 
 void sub_80BFE24(TVShow arg0[25], TVShow arg1[25], TVShow arg2[25], TVShow arg3[25]);
@@ -2687,11 +2687,11 @@ void sub_80C04A0(void)
         sub_80BF55C(gSaveBlock1.tvShows, showIdx+5);
 }
 
-void sub_80C05C4(struct UnknownSaveStruct2ABC[16], struct UnknownSaveStruct2ABC[16], struct UnknownSaveStruct2ABC[16], struct UnknownSaveStruct2ABC[16]);
+void sub_80C05C4(struct PokeNews[16], struct PokeNews[16], struct PokeNews[16], struct PokeNews[16]);
 void sub_80C0750(void);
 void sub_80C0788(void);
-s8 sub_80C0730(struct UnknownSaveStruct2ABC[16], u8);
-void sub_80C06BC(struct UnknownSaveStruct2ABC *[16], struct UnknownSaveStruct2ABC *[16]);
+s8 sub_80C0730(struct PokeNews[16], u8);
+void sub_80C06BC(struct PokeNews *[16], struct PokeNews *[16]);
 
 void sub_80C0514(void *a0, u32 a1, u8 a2)
 {
@@ -2699,33 +2699,33 @@ void sub_80C0514(void *a0, u32 a1, u8 a2)
     u8 i;
 
     for (i = 0; i < 4; i++)
-        memcpy(gUnknown_02007000.unknown_2abc[i], a0 + i * a1, 64);
+        memcpy(gUnknown_02007000.pokeNews[i], a0 + i * a1, 64);
     struct02007000 = &gUnknown_02007000;
     switch (a2)
     {
     case 0:
-        sub_80C05C4(gSaveBlock1.unknown_2ABC, struct02007000->unknown_2abc[1], struct02007000->unknown_2abc[2], struct02007000->unknown_2abc[3]);
+        sub_80C05C4(gSaveBlock1.pokeNews, struct02007000->pokeNews[1], struct02007000->pokeNews[2], struct02007000->pokeNews[3]);
         break;
     case 1:
-        sub_80C05C4(struct02007000->unknown_2abc[0], gSaveBlock1.unknown_2ABC, struct02007000->unknown_2abc[2], struct02007000->unknown_2abc[3]);
+        sub_80C05C4(struct02007000->pokeNews[0], gSaveBlock1.pokeNews, struct02007000->pokeNews[2], struct02007000->pokeNews[3]);
         break;
     case 2:
-        sub_80C05C4(struct02007000->unknown_2abc[0], struct02007000->unknown_2abc[1], gSaveBlock1.unknown_2ABC, struct02007000->unknown_2abc[3]);
+        sub_80C05C4(struct02007000->pokeNews[0], struct02007000->pokeNews[1], gSaveBlock1.pokeNews, struct02007000->pokeNews[3]);
         break;
     case 3:
-        sub_80C05C4(struct02007000->unknown_2abc[0], struct02007000->unknown_2abc[1], struct02007000->unknown_2abc[2], gSaveBlock1.unknown_2ABC);
+        sub_80C05C4(struct02007000->pokeNews[0], struct02007000->pokeNews[1], struct02007000->pokeNews[2], gSaveBlock1.pokeNews);
         break;
     }
     sub_80C0750();
     sub_80C0788();
 }
 
-void sub_80C05C4(struct UnknownSaveStruct2ABC a0[16], struct UnknownSaveStruct2ABC a1[16], struct UnknownSaveStruct2ABC a2[16], struct UnknownSaveStruct2ABC a3[16])
+void sub_80C05C4(struct PokeNews a0[16], struct PokeNews a1[16], struct PokeNews a2[16], struct PokeNews a3[16])
 {
     u8 i;
     u8 j;
     u8 k;
-    struct UnknownSaveStruct2ABC ** arglist[4];
+    struct PokeNews ** arglist[4];
 
     arglist[0] = &a0;
     arglist[1] = &a1;
@@ -2750,10 +2750,10 @@ void sub_80C05C4(struct UnknownSaveStruct2ABC a0[16], struct UnknownSaveStruct2A
     }
 }
 
-void sub_80C06BC(struct UnknownSaveStruct2ABC *arg0[16], struct UnknownSaveStruct2ABC *arg1[16])
+void sub_80C06BC(struct PokeNews *arg0[16], struct PokeNews *arg1[16])
 {
-    struct UnknownSaveStruct2ABC *str0;
-    struct UnknownSaveStruct2ABC *str1;
+    struct PokeNews *str0;
+    struct PokeNews *str1;
 
     str0 = arg0[0];
     str1 = arg1[0];
@@ -2761,26 +2761,26 @@ void sub_80C06BC(struct UnknownSaveStruct2ABC *arg0[16], struct UnknownSaveStruc
     sub_80C06E8(str0, str1, gUnknown_03005D38.var0);
 }
 
-bool8 sub_80C06E8(struct UnknownSaveStruct2ABC *arg0, struct UnknownSaveStruct2ABC *arg1, s8 arg2)
+bool8 sub_80C06E8(struct PokeNews *arg0, struct PokeNews *arg1, s8 arg2)
 {
     u8 i;
 
-    if (arg1->val0 == 0)
+    if (arg1->kind == 0)
         return FALSE;
     for (i = 0; i < 16; i++)
     {
-        if (arg0[i].val0 == arg1->val0)
+        if (arg0[i].kind == arg1->kind)
             return FALSE;
     }
-    arg0[arg2].val0 = arg1->val0;
-    arg0[arg2].val1 = 1;
-    arg0[arg2].val2 = arg1->val2;
+    arg0[arg2].kind = arg1->kind;
+    arg0[arg2].state = 1;
+    arg0[arg2].days = arg1->days;
     return TRUE;
 }
 
-s8 sub_80C0730(struct UnknownSaveStruct2ABC *arg0, u8 arg1)
+s8 sub_80C0730(struct PokeNews *arg0, u8 arg1)
 {
-    if (arg0[arg1].val0 == 0)
+    if (arg0[arg1].kind == 0)
         return -1;
     return arg1;
 }
@@ -2791,7 +2791,7 @@ void sub_80C0750(void)
 
     for (i = 0; i < 16; i++)
     {
-        if (gSaveBlock1.unknown_2ABC[i].val0 > 3)
+        if (gSaveBlock1.pokeNews[i].kind > 3)
             sub_80BEC10(i);
     }
     sub_80BEC40();
@@ -2804,7 +2804,7 @@ void sub_80C0788(void)
     if (FlagGet(FLAG_SYS_GAME_CLEAR) != 1)
     {
         for (i = 0; i < 16; i++)
-            gSaveBlock1.unknown_2ABC[i].val1 = 0;
+            gSaveBlock1.pokeNews[i].state = 0;
     }
 }
 
