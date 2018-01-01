@@ -1809,7 +1809,7 @@ DewfordTown_EventScript_1A0102:: @ 81A0102
 DewfordTown_Hall_EventScript_1A0102:: @ 81A0102
 	dodailyevents
 	setvar VAR_SPECIAL_4, 0
-	special sub_80FA5BC
+	special BufferTrendyPhraseString
 	return
 
 DewfordTown_EventScript_1A010C:: @ 81A010C

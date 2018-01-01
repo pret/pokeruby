@@ -314,7 +314,7 @@ void sub_80EB7C4(void)
     ShowFieldAutoScrollMessage(gStringVar4);
 }
 
-void sub_80EB83C(void)
+void BufferRandomHobbyOrLifestyleString(void)
 {
     u16 group, local2;
 

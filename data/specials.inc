@@ -133,10 +133,10 @@ gSpecials::
 	def_special TV_PutNameRaterShowOnTheAirIfNicnkameChanged
 	def_special TV_CopyNicknameToStringVar1AndEnsureTerminated
 	def_special TV_CheckMonOTIDEqualsPlayerID
-	def_special sub_80FA5BC
-	def_special sub_80FA5E4
-	def_special sub_80EB83C
-	def_special sub_80FA648
+	def_special BufferTrendyPhraseString
+	def_special TrendyPhraseIsOld
+	def_special BufferRandomHobbyOrLifestyleString
+	def_special GetDewfordHallPaintingNameIndex
 	def_special SwapRegisteredBike
 	def_special CalculatePlayerPartyCount
 	def_special sub_8095B6C
