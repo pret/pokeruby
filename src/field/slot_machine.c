@@ -9,6 +9,7 @@
 #include "main.h"
 #include "slot_machine.h"
 #include "decompress.h"
+#include "trig.h"
 #include "palette.h"
 #include "task.h"
 #include "util.h"
@@ -3371,6 +3372,121 @@ void sub_81056C0(void)
     for (i = 0; i < 2; i++)
     {
         DestroySprite(gSprites + eSlotMachine->unk50[i]);
+    }
+}
+
+extern const struct SpriteTemplate gSpriteTemplate_83ED51C;
+
+void sub_81056F0(void)
+{
+    u8 spriteId = CreateSprite(&gSpriteTemplate_83ED51C, 0x48, 0x50, 3);
+    gSprites[spriteId].oam.priority = 1;
+    gSprites[spriteId].data[0] = 1;
+    gSprites[spriteId].data[5] = 0;
+    gSprites[spriteId].data[6] = 16;
+    gSprites[spriteId].data[7] = 8;
+    eSlotMachine->unk52[0] = spriteId;
+
+    spriteId = CreateSprite(&gSpriteTemplate_83ED51C, 0x68, 0x50, 3);
+    gSprites[spriteId].oam.priority = 1;
+    gSprites[spriteId].hFlip = TRUE;
+    eSlotMachine->unk52[1] = spriteId;
+}
+
+extern const u8 gUnknown_083ECC58[2]; // don't remove this until decompiled through gUnknown_083ECCF8
+
+void sub_8105784(struct Sprite *sprite)
+{
+    // u8 sp[] = {16, 0};
+    u8 sp[ARRAY_COUNT(gUnknown_083ECC58)];
+    memcpy(sp, gUnknown_083ECC58, sizeof gUnknown_083ECC58);
+    if (sprite->data[0] && --sprite->data[6] <= 0)
+    {
+        MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(7) << 4) + 0x103, sp[sprite->data[5]], sp[sprite->data[5]], sp[sprite->data[5]]);
+        ++sprite->data[5];
+        sprite->data[5] &= 1;
+        sprite->data[6] = sprite->data[7];
+    }
+}
+
+void sub_81057E8(s16 a0)
+{
+    gSprites[eSlotMachine->unk52[0]].data[7] = a0;
+}
+
+void sub_8105804(void)
+{
+    u8 i;
+    MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(7) << 4) + 0x103, 0, 0, 0);
+    for (i = 0; i < 2; i++)
+    {
+        DestroySprite(gSprites + eSlotMachine->unk52[i]);
+    }
+}
+
+extern const struct SpriteTemplate gSpriteTemplate_83ED534;
+
+void sub_8105854(void)
+{
+    u8 spriteId = CreateSprite(&gSpriteTemplate_83ED534, 0xa8, 0x50, 6);
+    gSprites[spriteId].oam.priority = 1;
+    eSlotMachine->unk41 = spriteId;
+}
+
+void sub_8105894(struct Sprite *sprite)
+{
+    sprite->pos2.y = gSpriteCoordOffsetY;
+}
+
+void sub_81058A0(void)
+{
+    DestroySprite(gSprites + eSlotMachine->unk41);
+}
+
+extern const struct SpriteTemplate gSpriteTemplate_83ED54C;
+extern const u16 gUnknown_083ECC5A[4]; // don't remove this until decompiled through gUnknown_083ECCF8
+
+void sub_81058C4(void)
+{
+    u8 i;
+    // u16 sp[] = {0x0, 0x40, 0x80, 0xC0};
+    u16 sp[ARRAY_COUNT(gUnknown_083ECC5A)];
+    memcpy(sp, gUnknown_083ECC5A, sizeof gUnknown_083ECC5A);
+    for (i = 0; i < 4; i++)
+    {
+        u8 spriteId = CreateSprite(&gSpriteTemplate_83ED54C, 0x50 - gSpriteCoordOffsetX, 0x44, 0);
+        struct Sprite *sprite = gSprites + spriteId;
+        sprite->oam.priority = 1;
+        sprite->coordOffsetEnabled = TRUE;
+        sprite->data[0] = sp[i];
+        eSlotMachine->unk54[i] = spriteId;
+    }
+}
+
+void sub_810594C(struct Sprite *sprite)
+{
+    sprite->data[0] -= 2;
+    sprite->data[0] &= 0xff;
+    sprite->pos2.x = Cos(sprite->data[0], 20);
+    sprite->pos2.y = Sin(sprite->data[0], 6);
+    sprite->subpriority = 0;
+    if (sprite->data[0] >= 0x80)
+    {
+        sprite->subpriority = 2;
+    }
+    if (++sprite->data[1] >= 16)
+    {
+        sprite->hFlip ^= 1;
+        sprite->data[1] = 0;
+    }
+}
+
+void sub_81059B8(void)
+{
+    u8 i;
+    for (i = 0; i < 4; i++)
+    {
+        DestroySprite(gSprites + eSlotMachine->unk54[i]);
     }
 }
 
