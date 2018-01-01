@@ -8,25 +8,25 @@ RustboroCity_House1_EventScript_157C7D:: @ 8157C7D
 	goto_if_eq RustboroCity_House1_EventScript_157D13
 	setvar VAR_SPECIAL_8, 0
 	copyvar VAR_SPECIAL_4, VAR_SPECIAL_8
-	specialvar RESULT, sub_804D89C
+	specialvar RESULT, GetInGameTradeSpeciesInfo
 	copyvar VAR_SPECIAL_9, RESULT
 	msgbox RustboroCity_House1_Text_184EBA, 5
 	compare RESULT, 0
 	goto_if_eq RustboroCity_House1_EventScript_157CFB
-	special sub_80F9A0C
+	special SelectMonForNPCTrade
 	waitstate
 	copyvar VAR_SPECIAL_A, VAR_SPECIAL_4
 	compare VAR_SPECIAL_4, 255
 	goto_if_eq RustboroCity_House1_EventScript_157CFB
 	copyvar VAR_SPECIAL_5, VAR_SPECIAL_A
-	specialvar RESULT, sub_804DB2C
+	specialvar RESULT, GetTradeSpecies
 	copyvar VAR_SPECIAL_B, RESULT
 	compare RESULT, VAR_SPECIAL_9
 	goto_if 5, RustboroCity_House1_EventScript_157D05
 	copyvar VAR_SPECIAL_4, VAR_SPECIAL_8
 	copyvar VAR_SPECIAL_5, VAR_SPECIAL_A
-	special sub_804DB68
-	special sub_804E174
+	special CreateInGameTradePokemon
+	special DoInGameTradeScene
 	waitstate
 	msgbox RustboroCity_House1_Text_184F6B, 4
 	setflag FLAG_RUSTBORO_NPC_TRADE_COMPLETED

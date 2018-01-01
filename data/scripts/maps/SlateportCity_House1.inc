@@ -13,7 +13,7 @@ SlateportCity_House1_EventScript_15567B:: @ 815567B
 
 SlateportCity_House1_EventScript_15569C:: @ 815569C
 	msgbox SlateportCity_House1_Text_17D4DB, 4
-	special sub_80F9A0C
+	special SelectMonForNPCTrade
 	waitstate
 	compare VAR_SPECIAL_4, 255
 	goto_if 5, SlateportCity_House1_EventScript_1556C9
@@ -34,7 +34,7 @@ SlateportCity_House1_EventScript_1556C9:: @ 81556C9
 	special TV_CheckMonOTIDEqualsPlayerID
 	compare RESULT, 1
 	goto_if_eq SlateportCity_House1_EventScript_155726
-	specialvar RESULT, sub_810F96C
+	specialvar RESULT, MonOTNameMatchesPlayer
 	special TV_CopyNicknameToStringVar1AndEnsureTerminated
 	compare RESULT, 1
 	goto_if_eq SlateportCity_House1_EventScript_155726

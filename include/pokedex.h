@@ -22,7 +22,7 @@ s8 GetSetPokedexFlag(u16, u8);
 
 u16 GetNationalPokedexCount(u8);
 u16 GetHoennPokedexCount(u8);
-bool8 sub_8090FC0(void);
+bool8 CompletedHoennPokedex(void);
 u16 sub_8090FF4(void);
 
 #endif // GUARD_POKEDEX_H

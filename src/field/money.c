@@ -291,12 +291,12 @@ void CloseMoneyWindow(u8 x, u8 y)
     MenuZeroFillWindowRect(x, y, x + 13, y + 3);
 }
 
-bool8 sub_80B7CE8(void)
+bool8 HasEnoughMoneyFor(void)
 {
     return IsEnoughMoney(gSaveBlock1.money, gSpecialVar_0x8005);
 }
 
-void sub_80B7D0C(void)
+void PayMoneyFor(void)
 {
     RemoveMoney(&gSaveBlock1.money, gSpecialVar_0x8005);
 }

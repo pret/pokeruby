@@ -490,7 +490,7 @@ EventScript_15F4A1:
 	goto_if_eq EventScript_15F4E0
 	compare RESULT, 2
 	goto_if_eq EventScript_15F503
-	special sub_80BC224
+	special BufferSecretBaseOwnerName
 	msgbox UnknownString_81A3958, 5
 	compare RESULT, 0
 	goto_if_eq EventScript_15F452
@@ -2544,7 +2544,7 @@ MossdeepCity_StevensHouse_EventScript_1A0678:: @ 81A0678
 RustboroCity_DevonCorp_2F_EventScript_1A0678:: @ 81A0678
 SlateportCity_House1_EventScript_1A0678:: @ 81A0678
 	fadescreen 1
-	special sub_80BF9F8
+	special ChangePokemonNickname
 	waitstate
 	return
 
@@ -3813,7 +3813,7 @@ EventScript_1A2E45:
 	compare RESULT, 0
 	goto_if_eq EventScript_1A2F3A
 	fadescreen 1
-	special sub_80BC50C
+	special MoveSecretBase
 	closemessage
 	fadescreen 0
 	msgbox UnknownString_81A3CC9, 5
@@ -4317,7 +4317,7 @@ SecretBase_RedCave1_EventScript_1A350A:: @ 81A350A
 	special sub_80BCE1C
 	setvar VAR_SPECIAL_4, 1
 	setvar VAR_SPECIAL_5, 0
-	special sub_813556C
+	special StartSpecialBattle
 	waitstate
 	special ScrSpecial_HealPlayerParty
 	release

@@ -321,7 +321,7 @@ void sub_8093390(struct TrainerCard *trainerCard)
     trainerCard->firstHallOfFameC = playTime & 0xFF;
 
     trainerCard->hasPokedex = FlagGet(FLAG_SYS_POKEDEX_GET);
-    trainerCard->var_3 = sub_8090FC0();
+    trainerCard->var_3 = CompletedHoennPokedex();
     trainerCard->pokedexSeen = GetPokedexSeenCount();
 
     trainerCard->trainerId = (gSaveBlock2.playerTrainerId[1] << 8) | gSaveBlock2.playerTrainerId[0];

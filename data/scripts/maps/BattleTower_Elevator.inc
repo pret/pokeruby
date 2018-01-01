@@ -12,7 +12,7 @@ BattleTower_Elevator_EventScript_1607E4:: @ 81607E4
 	applymovement 1, BattleTower_Elevator_Movement_160835
 	applymovement 255, BattleTower_Elevator_Movement_160839
 	waitmovement 0
-	special sub_810EBEC
+	special ShakeScreenInElevator
 	waitstate
 	delay 64
 	applymovement 1, BattleTower_Elevator_Movement_16083D

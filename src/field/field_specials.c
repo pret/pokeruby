@@ -688,7 +688,7 @@ void GetRivalSonDaughterString(void)
     }
 }
 
-u8 sub_810E300(void)
+u8 GetBattleOutcome(void)
 {
     return gBattleOutcome;
 }
@@ -958,11 +958,11 @@ void EndLotteryCornerComputerEffect(void)
 }
 
 static void sub_810E874(void);
-void sub_810E944(void);
+void DisplayCurrentElevatorFloor(void);
 void sub_810E984(u8);
 bool8 sub_810EAC8(u8, u8);
 void sub_810EB90(u8, u8);
-void sub_810EBEC(void);
+void ShakeScreenInElevator(void);
 void sub_810EC34(u8);
 void sub_810EC9C(u8);
 void sub_810ECB0(void);
@@ -1074,11 +1074,11 @@ static void sub_810E874(void)
     {
         MenuPrint(gUnknown_083F8380[gUnknown_03000760[i].var0], 1, 2 * i + 1);
     }
-    sub_810E944();
+    DisplayCurrentElevatorFloor();
     CreateTask(sub_810E984, 8);
 }
 
-void sub_810E944(void)
+void DisplayCurrentElevatorFloor(void)
 {
     MenuDrawTextWindow(20, 0, 29, 5);
     sub_8072BD8(gOtherText_NowOn, 21, 1, 64);
@@ -1116,7 +1116,7 @@ void sub_810E984(u8 taskId)
         {
             gSpecialVar_Result = 1;
             gSpecialVar_0x8005 = gUnknown_0203925B;
-            sub_810EBEC();
+            ShakeScreenInElevator();
             FieldObjectTurnByLocalIdAndMap(gSpecialVar_LastTalked, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, DIR_SOUTH);
             sub_810EEDC();
             MenuZeroFillScreen();
@@ -1300,7 +1300,7 @@ void sub_810EB90(u8 newPos, u8 maxItems)
     }
 }
 
-void sub_810EBEC(void)
+void ShakeScreenInElevator(void)
 {
     u8 taskId = CreateTask(sub_810EC34, 9);
     gTasks[taskId].data[0] = 1;
@@ -1779,12 +1779,12 @@ void GetSecretBaseNearbyMapName(void)
     GetMapSectionName(gStringVar1, VarGet(VAR_SECRET_BASE_MAP), 0);
 }
 
-u16 sub_810F404(void)
+u16 GetBestBattleTowerStreak(void)
 {
     return GetGameStat(GAME_STAT_BATTLE_TOWER_BEST_STREAK);
 }
 
-void sub_810F414(void)
+void BufferEReaderTrainerName(void)
 {
     SetEReaderTrainerName(gStringVar1);
 }
@@ -1793,7 +1793,7 @@ const u8 gUnknown_083F83E0[] = {12, 2, 4, 5, 1, 8, 7, 11, 3, 10, 9, 6};
 const u8 gUnknown_083F83EC[] = {0, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 5};
 const u8 gUnknown_083F83F8[] = {3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5};
 
-u8 sub_810F424(void)
+u8 GetSlotMachineId(void)
 {
     u32 v0 = gSaveBlock1.easyChatPairs[0].unk0_0 + gSaveBlock1.easyChatPairs[0].unk2 + gUnknown_083F83E0[gSpecialVar_0x8004];
     if (GetPriceReduction(2))
@@ -1803,10 +1803,10 @@ u8 sub_810F424(void)
     return gUnknown_083F83EC[v0 % 12];
 }
 
-bool8 sub_810F488(void)
+bool8 FoundAbandonedShipRoom1Key(void)
 {
     u16 *specVar = &gSpecialVar_0x8004;
-    u16 flag = 0x277;
+    u16 flag = FLAG_HIDDEN_ITEM_1F;
     *specVar = flag;
     if (!FlagGet(flag))
     {
@@ -1815,10 +1815,10 @@ bool8 sub_810F488(void)
     return TRUE;
 }
 
-bool8 sub_810F4B0(void)
+bool8 FoundAbandonedShipRoom2Key(void)
 {
     u16 *specVar = &gSpecialVar_0x8004;
-    u16 flag = 0x278;
+    u16 flag = FLAG_HIDDEN_ITEM_20;
     *specVar = flag;
     if (!FlagGet(flag))
     {
@@ -1827,10 +1827,10 @@ bool8 sub_810F4B0(void)
     return TRUE;
 }
 
-bool8 sub_810F4D4(void)
+bool8 FoundAbandonedShipRoom4Key(void)
 {
     u16 *specVar = &gSpecialVar_0x8004;
-    u16 flag = 0x279;
+    u16 flag = FLAG_HIDDEN_ITEM_21;
     *specVar = flag;
     if (!FlagGet(flag))
     {
@@ -1839,10 +1839,10 @@ bool8 sub_810F4D4(void)
     return TRUE;
 }
 
-bool8 sub_810F4FC(void)
+bool8 FoundAbandonedShipRoom6Key(void)
 {
     u16 *specVar = &gSpecialVar_0x8004;
-    u16 flag = 0x27a;
+    u16 flag = FLAG_HIDDEN_ITEM_22;
     *specVar = flag;
     if (!FlagGet(flag))
     {
@@ -1874,7 +1874,7 @@ bool8 ScrSpecial_AreLeadMonEVsMaxedOut(void)
     return FALSE;
 }
 
-u8 sub_810F5BC(void)
+u8 TryUpdateRusturfTunnelState(void)
 {
     if (!FlagGet(FLAG_RUSTURF_TUNNEL_OPENED) && gSaveBlock1.location.mapGroup == MAP_GROUP(RUSTURF_TUNNEL) && gSaveBlock1.location.mapNum == MAP_NUM(RUSTURF_TUNNEL))
     {
@@ -2040,7 +2040,7 @@ void sub_810F8FC(void)
     sub_805ADDC(6);
 }
 
-u16 sub_810F908(void)
+u16 GetDaysUntilPacifidlogTMAvailable(void)
 {
     u16 tmReceivedDay = VarGet(VAR_PACIFIDLOG_TM_RECEIVED_DAY);
     if (gLocalTime.days - tmReceivedDay >= 7)
@@ -2054,13 +2054,13 @@ u16 sub_810F908(void)
     return 7 - (gLocalTime.days - tmReceivedDay);
 }
 
-u16 sub_810F950(void)
+u16 SetPacifidlogTMReceivedDay(void)
 {
     VarSet(VAR_PACIFIDLOG_TM_RECEIVED_DAY, gLocalTime.days);
     return gLocalTime.days;
 }
 
-bool8 sub_810F96C(void)
+bool8 MonOTNameMatchesPlayer(void)
 {
     GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_OT_NAME, gStringVar1);
     if (!StringCompareWithoutExtCtrlCodes(gSaveBlock2.playerName, gStringVar1))
@@ -2070,7 +2070,7 @@ bool8 sub_810F96C(void)
     return TRUE;
 }
 
-void sub_810F9AC(void)
+void BufferLottoTicketNumber(void)
 {
     if (gSpecialVar_Result >= 10000)
     {
@@ -2109,10 +2109,10 @@ const u8 gUnknown_083F8408[] = {8,  9, 10, 11, 12, 13, 14, 15};
 const u8 gUnknown_083F8410[] = {8, 13, 14, 11, 10, 12, 15,  9};
 
 bool8 sub_810FF30(void);
-void sub_810FCE8(void);
+void UpdateMovedLilycoveFanClubMembers(void);
 void sub_810FF48(void);
 void sub_810FD80(void);
-u16 sub_810FCB0(void);
+u16 GetNumMovedLilycoveFanClubMembers(void);
 int sub_810FB9C(void);
 
 void ResetFanClub(void)
@@ -2125,7 +2125,7 @@ void sub_810FA74(void)
 {
     if (sub_810FF30())
     {
-        sub_810FCE8();
+        UpdateMovedLilycoveFanClubMembers();
         gSaveBlock1.vars[0x42] = gSaveBlock2.playTimeHours;
     }
 }
@@ -2137,10 +2137,10 @@ void sub_810FAA0(void)
         sub_810FF48();
         sub_810FD80();
         gSaveBlock1.vars[0x42] = gSaveBlock2.playTimeHours;
-        FlagClear(0x315);
-        FlagClear(0x316);
-        FlagClear(0x317);
-        FlagClear(0x318);
+        FlagClear(FLAG_HIDE_FANCLUB_OLD_LADY);
+        FlagClear(FLAG_HIDE_FANCLUB_BOY);
+        FlagClear(FLAG_HIDE_FANCLUB_LITTLE_BOY);
+        FlagClear(FLAG_HIDE_FANCLUB_LADY);
         VarSet(VAR_LILYCOVE_FAN_CLUB_STATE, 1);
     }
 }
@@ -2151,7 +2151,7 @@ u8 sub_810FB10(u8 a0)
     {
         if ((gSaveBlock1.vars[0x41] & 0x7f) + gUnknown_083F8404[a0] >= 20)
         {
-            if (sub_810FCB0() < 3)
+            if (GetNumMovedLilycoveFanClubMembers() < 3)
             {
                 sub_810FB9C();
                 gSaveBlock1.vars[0x41] &= 0xff80;
@@ -2193,7 +2193,7 @@ int sub_810FC18(void)
 {
     u8 i;
     int retval = 0;
-    if (sub_810FCB0() == TRUE)
+    if (GetNumMovedLilycoveFanClubMembers() == 1)
     {
         return 0;
     }
@@ -2216,28 +2216,29 @@ int sub_810FC18(void)
     return retval;
 }
 
-u16 sub_810FCB0(void)
+u16 GetNumMovedLilycoveFanClubMembers(void)
 {
     u8 i;
     u8 retval = 0;
-    for (i=0; i<8; i++)
+    for (i = 0; i < 8; i++)
     {
         if ((gSaveBlock1.vars[0x41] >> (i + 8)) & 1)
         {
-            retval ++;
+            retval++;
         }
     }
+
     return retval;
 }
 
-void sub_810FCE8(void)
+void UpdateMovedLilycoveFanClubMembers(void)
 {
     u8 i = 0;
     if (gSaveBlock2.playTimeHours < 999)
     {
         while (1)
         {
-            if (sub_810FCB0() < 5)
+            if (GetNumMovedLilycoveFanClubMembers() < 5)
             {
                 gSaveBlock1.vars[0x42] = gSaveBlock2.playTimeHours;
                 break;
@@ -2257,7 +2258,7 @@ void sub_810FCE8(void)
     }
 }
 
-bool8 sub_810FD60(void)
+bool8 ShouldMoveLilycoveFanClubMember(void)
 {
     return (gSaveBlock1.vars[0x41] >> gSpecialVar_0x8004) & 0x01;
 }
@@ -2271,7 +2272,7 @@ void sub_810FD80(void)
 
 void sub_810FE1C(void *, u8, u8);
 
-void sub_810FDAC(void)
+void BufferStreakTrainerText(void)
 {
     u8 a = 0;
     u8 b = 0;

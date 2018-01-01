@@ -53,7 +53,7 @@ FallarborTown_ContestLobby_EventScript_1B76A1:: @ 81B76A1
 	compare RESULT, 0
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B770E
 	msgbox FallarborTown_ContestLobby_Text_1B6E9D, 4
-	specialvar RESULT, sub_810CA00
+	specialvar RESULT, GetFirstFreePokeblockSlot
 	compare RESULT, 65535
 	goto_if 5, FallarborTown_ContestLobby_EventScript_1B76EF
 	compare RESULT, 65535
@@ -94,7 +94,7 @@ FallarborTown_ContestLobby_EventScript_1B7734:: @ 81B7734
 FallarborTown_ContestLobby_EventScript_1B7742:: @ 81B7742
 	copyvar VAR_SPECIAL_4, VAR_SPECIAL_9
 	fadescreen 1
-	special sub_804E538
+	special DoBerryBlending
 	waitstate
 	releaseall
 	end
@@ -214,7 +214,7 @@ VerdanturfTown_ContestLobby_EventScript_1B783B:: @ 81B783B
 	checkitem ITEM_POKEBLOCK_CASE, 1
 	compare RESULT, 0
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7942
-	specialvar RESULT, sub_810CA00
+	specialvar RESULT, GetFirstFreePokeblockSlot
 	compare RESULT, 65535
 	goto_if 5, FallarborTown_ContestLobby_EventScript_1B7878
 	compare RESULT, 65535
@@ -276,7 +276,7 @@ FallarborTown_ContestLobby_EventScript_1B791D:: @ 81B791D
 	removeobject 239
 	removeobject 238
 	removeobject 237
-	special sub_804E538
+	special DoBerryBlending
 	waitstate
 	releaseall
 	end

@@ -608,14 +608,14 @@ bool32 sub_8069D34(s16 x, s16 y)
     return FALSE;
 }
 
-void sub_8069D78(void)
+void SetSootopolisGymCrackedIceMetatiles(void)
 {
     s32 x, y;
     s32 width = gMapHeader.mapData->width;
     s32 height = gMapHeader.mapData->height;
-    for (x=0; x<width; x++)
+    for (x = 0; x < width; x++)
     {
-        for (y=0; y<height; y++)
+        for (y = 0; y < height; y++)
         {
             if (sub_8069D34(x, y) == TRUE)
             {

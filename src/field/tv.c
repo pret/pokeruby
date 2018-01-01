@@ -686,7 +686,7 @@ void GabbyAndTyBeforeInterview(void)
         FlagSet(FLAG_TEMP_1);
 }
 
-void sub_80BDC14(void)
+void GabbyAndTyAfterInterview(void)
 {
     gSaveBlock1.gabbyAndTyData.valB_0 = gSaveBlock1.gabbyAndTyData.valA_0;
     gSaveBlock1.gabbyAndTyData.valB_1 = gSaveBlock1.gabbyAndTyData.valA_1;
@@ -725,7 +725,7 @@ bool8 GabbyAndTyGetLastQuote(void)
     return TRUE;
 }
 
-u8 sub_80BDD18(void)
+u8 GabbyAndTyGetLastBattleTrivia(void)
 {
     if (!gSaveBlock1.gabbyAndTyData.valB_0)
         return 1;
@@ -2073,9 +2073,9 @@ bool8 TV_PutNameRaterShowOnTheAirIfNicnkameChanged(void)
     return TRUE;
 }
 
-void c2_080CC144(void);
+void ChangePokemonNickname_CB(void);
 
-void sub_80BF9F8(void)
+void ChangePokemonNickname(void)
 {
     u16 spec;
     u16 gender;
@@ -2086,10 +2086,10 @@ void sub_80BF9F8(void)
     spec = GetMonData(&(gPlayerParty[gSpecialVar_0x8004]), MON_DATA_SPECIES, 0);
     gender = GetMonGender(&(gPlayerParty[gSpecialVar_0x8004]));
     pval = GetMonData(&(gPlayerParty[gSpecialVar_0x8004]), MON_DATA_PERSONALITY, 0);
-    DoNamingScreen(3, gStringVar2, spec, gender, pval, c2_080CC144);
+    DoNamingScreen(3, gStringVar2, spec, gender, pval, ChangePokemonNickname_CB);
 }
 
-void c2_080CC144(void)
+void ChangePokemonNickname_CB(void)
 {
     SetMonData(&(gPlayerParty[gSpecialVar_0x8004]), MON_DATA_NICKNAME, gStringVar2);
     c2_exit_to_overworld_1_continue_scripts_restart_music();
