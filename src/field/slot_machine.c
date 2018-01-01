@@ -3313,6 +3313,67 @@ void sub_8105554(void)
     DestroySprite(gSprites + eSlotMachine->unk42);
 }
 
+extern const struct SpriteTemplate gSpriteTemplate_83ED504;
+
+void sub_8105578(void)
+{
+    u8 spriteId = CreateSprite(&gSpriteTemplate_83ED504, 0x98, 0x20, 5);
+    struct Sprite *sprite = gSprites + spriteId;
+    sprite->oam.priority = 1;
+    sprite->hFlip = TRUE;
+    eSlotMachine->unk50[0] = spriteId;
+    sprite->data[0] = 8;
+    sprite->data[1] = -1;
+    sprite->data[2] = -1;
+    sprite->data[7] = 0x20;
+
+    spriteId = CreateSprite(&gSpriteTemplate_83ED504, 0xb8, 0x20, 5);
+    sprite = gSprites + spriteId;
+    sprite->oam.priority = 1;
+    eSlotMachine->unk50[1] = spriteId;
+    sprite->data[1] = 1;
+    sprite->data[2] = -1;
+    sprite->data[7] = 0x20;
+}
+
+void sub_810562C(struct Sprite *sprite)
+{
+    if (sprite->data[0] != 0)
+    {
+        sprite->data[0]--;
+        sprite->pos2.x = 0;
+        sprite->pos2.y = 0;
+        sprite->invisible = TRUE;
+    }
+    else
+    {
+        sprite->invisible = FALSE;
+        sprite->pos2.x += sprite->data[1];
+        sprite->pos2.y += sprite->data[2];
+        if (++sprite->data[3] >= 8)
+        {
+            sprite->data[0] = sprite->data[7];
+            sprite->data[3] = 0;
+        }
+    }
+}
+
+void sub_8105688(s16 a0)
+{
+    gSprites[eSlotMachine->unk50[0]].data[7] = a0;
+    gSprites[eSlotMachine->unk50[1]].data[7] = a0;
+}
+
+void sub_81056C0(void)
+{
+    u8 i;
+
+    for (i = 0; i < 2; i++)
+    {
+        DestroySprite(gSprites + eSlotMachine->unk50[i]);
+    }
+}
+
 asm(".section .text_b");
 
 static void sub_8106448(void) {
