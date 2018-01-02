@@ -216,6 +216,7 @@ u8 sub_8105B1C(s16 x, s16 y);
 void sub_8105B88(u8 spriteId);
 u8 sub_8105BF8(u8 templateIdx, SpriteCallback callback, s16 x, s16 y, s16 a4);
 void sub_81063C0(void);
+void sub_8106404(void);
 static void sub_8106448(void);
 void sub_81064B8(void);
 void sub_81065A8(s16 arg0, u16 arg1, u16 arg2, u16 arg3, u16 arg4);
@@ -3843,7 +3844,232 @@ void sub_8105F9C(struct Sprite *sprite)
     }
 }
 
-asm(".section .text_b");
+extern const u16 *const gUnknown_083EDE10[];
+
+void sub_8106058(struct Sprite *sprite)
+{
+    if (sprite->data[1] < 3)
+    {
+        LoadPalette(gUnknown_083EDE10[sprite->data[1]], (IndexOfSpritePaletteTag(6) << 4) + 0x100, 0x20);
+        if (++sprite->data[2] >= 4)
+        {
+            sprite->data[1]++;
+            sprite->data[2] = 0;
+        }
+    }
+    else
+    {
+        LoadPalette(gUnknown_083EDE10[sprite->data[1]], (IndexOfSpritePaletteTag(6) << 4) + 0x100, 0x20);
+        if (++sprite->data[2] >= 25)
+        {
+            sprite->data[1] = 0;
+            sprite->data[2] = 0;
+        }
+    }
+    StartSpriteAnimIfDifferent(sprite, 1);
+    sprite->data[7] = 0;
+}
+
+extern const s16 gUnknown_083ECC72[8]; // do not remove these yet
+extern const s16 gUnknown_083ECC82[8]; // do not remove these yet
+extern const s16 gUnknown_083ECC92[8]; // do not remove these yet
+
+void sub_81060FC(struct Sprite *sprite)
+{
+    // s16 sp00[] = {0, -40, 0, 0, 48, 0, 24, 0};
+    // s16 sp10[] = {-32, 0, -32, -48, 0, -48, 0, -48};
+    // s16 sp20[] = {16, 12, 16, 0, 0, 4, 8, 8};
+
+    s16 sp00[ARRAY_COUNT(gUnknown_083ECC72)];
+    s16 sp10[ARRAY_COUNT(gUnknown_083ECC82)];
+    s16 sp20[ARRAY_COUNT(gUnknown_083ECC92)];
+
+    memcpy(sp00, gUnknown_083ECC72, sizeof gUnknown_083ECC72);
+    memcpy(sp10, gUnknown_083ECC82, sizeof gUnknown_083ECC82);
+    memcpy(sp20, gUnknown_083ECC92, sizeof gUnknown_083ECC92);
+
+    switch (sprite->data[0])
+    {
+        case 0:
+            sprite->pos2.x = sp00[sprite->data[6]];
+            sprite->pos2.y = sp10[sprite->data[6]];
+            sprite->data[1] = sp20[sprite->data[6]];
+            sprite->data[0]++;
+            // fallthrough
+        case 1:
+            if (sprite->data[1]-- == 0)
+            {
+                sprite->data[0]++;
+            }
+            break;
+        case 2:
+            if (sprite->pos2.x > 0)
+            {
+                sprite->pos2.x -= 4;
+            }
+            else if (sprite->pos2.x < 0)
+            {
+                sprite->pos2.x += 4;
+            }
+            if (sprite->pos2.y > 0)
+            {
+                sprite->pos2.y -= 4;
+            }
+            else if (sprite->pos2.y < 0)
+            {
+                sprite->pos2.y += 4;
+            }
+            if (sprite->pos2.x == 0 && sprite->pos2.y == 0)
+            {
+                sprite->data[0]++;
+            }
+            break;
+    }
+}
+
+extern const s16 gUnknown_083ECCA2[8]; // do not remove this yet
+
+void sub_81061C8(struct Sprite *sprite)
+{
+    s16 sp0[ARRAY_COUNT(gUnknown_083ECCA2)];
+
+    memcpy(sp0, gUnknown_083ECCA2, sizeof gUnknown_083ECCA2);
+
+    if (sprite->data[0] == 0)
+    {
+        sprite->data[0]++;
+        sprite->data[1] = 12;
+    }
+    sprite->pos2.x = Cos(sp0[sprite->data[6]], sprite->data[1]);
+    sprite->pos2.y = Sin(sp0[sprite->data[6]], sprite->data[1]);
+    if (sprite->data[1])
+    {
+        sprite->data[1]--;
+    }
+}
+
+void sub_8106230(struct Sprite *sprite)
+{
+    switch (sprite->data[0])
+    {
+        case 0:
+            eSlotMachine->winIn = 0x2f;
+            eSlotMachine->winOut = 0x3f;
+            eSlotMachine->win0v = 0x2088;
+            sprite->invisible = TRUE;
+            sprite->data[0]++;
+            // fallthrough
+        case 1:
+            sprite->data[1] += 2;
+            sprite->data[2] = sprite->data[1] + 0xb0;
+            sprite->data[3] = 0xf0 - sprite->data[1];
+            if (sprite->data[2] > 0xd0)
+            {
+                sprite->data[2] = 0xd0;
+            }
+            if (sprite->data[3] < 0xd0)
+            {
+                sprite->data[3] = 0xd0;
+            }
+            eSlotMachine->win0h = (sprite->data[2] << 8) | sprite->data[3];
+            if (sprite->data[1] > 0x33)
+            {
+                sprite->data[0]++;
+                eSlotMachine->winIn = 0x3f;
+            }
+            break;
+        case 2:
+            if (eSlotMachine->bet == 0)
+            {
+                break;
+            }
+            sub_8104D30(5, SpriteCallbackDummy, 0xd0, 0x74, 0);
+            eSlotMachine->win0h = 0xc0e0;
+            eSlotMachine->win0v = 0x6880;
+            eSlotMachine->winIn = 0x2f;
+            sprite->data[0]++;
+            sprite->data[1] = 0;
+            // fallthrough
+        case 3:
+            sprite->data[1] += 2;
+            sprite->data[2] = sprite->data[1] + 0xc0;
+            sprite->data[3] = 0xe0 - sprite->data[1];
+            if (sprite->data[2] > 0xd0)
+            {
+                sprite->data[2] = 0xd0;
+            }
+            if (sprite->data[3] < 0xd0)
+            {
+                sprite->data[3] = 0xd0;
+            }
+            eSlotMachine->win0h = (sprite->data[2] << 8) | sprite->data[3];
+            if (sprite->data[1] > 0x0f)
+            {
+                sprite->data[0]++;
+                eSlotMachine->winIn = 0x3f;
+            }
+            break;
+    }
+}
+
+void nullsub_70(void)
+{
+
+}
+
+void sub_8106364(void)
+{
+    REG_MOSAIC = 0;
+}
+
+extern const u16 *const gUnknown_083EDE20;
+
+void sub_8106370(void)
+{
+    LoadPalette(gUnknown_083EDE20, (IndexOfSpritePaletteTag(6) << 4) + 0x100, 0x20);
+}
+
+void sub_810639C(void)
+{
+    eSlotMachine->win0h = 0xf0;
+    eSlotMachine->win0v = 0xa0;
+    eSlotMachine->winIn = 0x3f;
+    eSlotMachine->winOut = 0x3f;
+}
+
+extern const u8 gSlotMachineReelTimeLights_Gfx[];
+extern const u8 gUnknown_083EDE8C[];
+extern const struct SpriteSheet gUnknown_083EDC2C[];
+extern const struct SpritePalette gSlotMachineSpritePalettes[];
+
+void sub_81063C0(void)
+{
+    sub_8106404();
+    LZDecompressWram(gSlotMachineReelTimeLights_Gfx, ewram10000);
+    LZDecompressWram(gUnknown_083EDE8C, ewram10000 + 0x3200);
+    LoadSpriteSheets(gUnknown_083EDC2C);
+    LoadSpritePalettes(gSlotMachineSpritePalettes);
+}
+
+extern const u8 *gUnknown_083EDCE4;
+extern const struct SpriteSheet gUnknown_083EDCDC;
+
+void sub_8106404(void)
+{
+    u8 *dest = ewram10000;
+    u8 i = 0;
+    const struct SpriteSheet *sheet = &gUnknown_083EDCDC;
+    const u8 *src = gUnknown_083EDCE4;
+    for (i = 0; i < 0x40; i++)
+    {
+        u8 j;
+        for (j = 0; j < 0x20; j++, dest++)
+        {
+            *dest = src[j];
+        }
+    }
+    LoadSpriteSheet(sheet);
+}
 
 static void sub_8106448(void) {
     u32 offsetRead, offsetWrite;

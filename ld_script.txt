@@ -320,8 +320,6 @@ SECTIONS {
         asm/cute_sketch.o(.text);
         src/field/decoration.o(.text);
         src/field/slot_machine.o(.text);
-        asm/slot_machine.o(.text);
-        src/field/slot_machine.o(.text_b);
         src/scene/contest_painting.o(.text);
         src/battle/battle_ai.o(.text);
         src/field/trader.o(.text);
