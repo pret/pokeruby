@@ -3672,6 +3672,177 @@ void sub_8105D3C(struct Sprite *sprite)
     }
 }
 
+void sub_8105DA4(struct Sprite *sprite)
+{
+    switch (sprite->data[0])
+    {
+        case 0:
+            sprite->pos1.x -= 4;
+            if (sprite->pos1.x <= 0xd0)
+            {
+                sprite->pos1.x = 0xd0;
+                sprite->data[0]++;
+            }
+            break;
+        case 1:
+            if (++sprite->data[1] > 90)
+            {
+                sprite->data[0]++;
+            }
+            break;
+        case 2:
+            sprite->pos1.x -= 4;
+            if (sprite->pos1.x <= 0x90)
+            {
+                sprite->data[0]++;
+            }
+            break;
+        case 3:
+            sprite->data[7] = 0;
+            break;
+    }
+}
+
+void sub_8105E08(struct Sprite *sprite)
+{
+    switch (sprite->data[0])
+    {
+        case 0:
+            StartSpriteAnim(sprite, eSlotMachine->unk0A - 1);
+            sprite->data[0]++;
+            // fallthrough
+        case 1:
+            if (++sprite->data[1] >= 4)
+            {
+                sprite->data[0]++;
+                sprite->data[1] = 0;
+            }
+            break;
+        case 2:
+            sprite->pos1.x += 4;
+            if (sprite->pos1.x >= 0xd0)
+            {
+                sprite->pos1.x = 0xd0;
+                sprite->data[0]++;
+            }
+            break;
+        case 3:
+            if (++sprite->data[1] > 90)
+            {
+                sprite->data[0]++;
+            }
+            break;
+        case 4:
+            sprite->pos1.x += 4;
+            if (sprite->pos1.x >= 0xf8)
+            {
+                sprite->data[0]++;
+            }
+            break;
+        case 5:
+            sprite->data[7] = 0;
+            break;
+    }
+}
+
+void sub_8105EB4(struct Sprite *sprite)
+{
+    switch (sprite->data[0])
+    {
+        case 0:
+            sprite->animPaused = TRUE;
+            sprite->data[0]++;
+            // fallthrough
+        case 1:
+            sprite->pos1.y += 8;
+            if (sprite->pos1.y >= 0x70)
+            {
+                sprite->pos1.y = 0x70;
+                sprite->data[1] = 16;
+                sprite->data[0]++;
+            }
+            break;
+        case 2:
+            if (sprite->data[2] == 0)
+            {
+                sprite->pos1.y -= sprite->data[1];
+                sprite->data[1] = -sprite->data[1];
+                if (++sprite->data[3] >= 2)
+                {
+                    sprite->data[1] >>= 2;
+                    sprite->data[3] = 0;
+                    if (sprite->data[1] == 0)
+                    {
+                        sprite->data[0]++;
+                        sprite->data[7] = 0;
+                        sprite->animPaused = FALSE;
+                    }
+                }
+            }
+            sprite->data[2]++;
+            sprite->data[2] &= 0x07;
+            break;
+    }
+}
+
+void sub_8105F54(struct Sprite *sprite)
+{
+    switch (sprite->data[0])
+    {
+        case 0:
+            if (++sprite->data[1] > 8)
+            {
+                sprite->data[0]++;
+            }
+            break;
+        case 1:
+            sprite->pos1.y += 2;
+            if (sprite->pos1.y >= 0x30)
+            {
+                sprite->pos1.y = 0x30;
+                sprite->data[0]++;
+                sprite->data[7] = 0;
+            }
+            break;
+    }
+}
+
+void sub_8105F9C(struct Sprite *sprite)
+{
+    switch (sprite->data[0])
+    {
+        case 0:
+            sprite->invisible = TRUE;
+            if (++sprite->data[1] > 0x20)
+            {
+                sprite->data[0]++;
+                sprite->data[1] = 5;
+                sprite->oam.mosaic = TRUE;
+                sprite->invisible = FALSE;
+                StartSpriteAnim(sprite, 1);
+                REG_MOSAIC = ((sprite->data[1] << 4) | sprite->data[1]) << 8;
+            }
+            break;
+        case 1:
+            sprite->data[1] -= (sprite->data[2] >> 8);
+            if (sprite->data[1] < 0)
+            {
+                sprite->data[1] = 0;
+            }
+            REG_MOSAIC = ((sprite->data[1] << 4) | sprite->data[1]) << 8;
+            sprite->data[2] &= 0xff;
+            sprite->data[2] += 0x80;
+            if (sprite->data[1] == 0)
+            {
+                sprite->data[0]++;
+                sprite->data[7] = 0;
+                sprite->oam.mosaic = FALSE;
+                StartSpriteAnim(sprite, 0);
+            }
+            break;
+    }
+}
+
 asm(".section .text_b");
 
 static void sub_8106448(void) {
