@@ -10,6 +10,7 @@
 #include "slot_machine.h"
 #include "decompress.h"
 #include "trig.h"
+#include "graphics.h"
 #include "palette.h"
 #include "task.h"
 #include "util.h"
@@ -4017,7 +4018,7 @@ void sub_81063C0(void)
 {
     sub_8106404();
     LZDecompressWram(gSlotMachineReelTimeLights_Gfx, ewram10000);
-    LZDecompressWram(gUnknown_083EDE8C, ewram10000 + 0x3200);
+    LZDecompressWram(gUnknown_083EDE8C, ewram13200);
     LoadSpriteSheets(gUnknown_083EDC2C);
     LoadSpritePalettes(gSlotMachineSpritePalettes);
 }
@@ -4510,4 +4511,131 @@ const struct OamData gOamData_83ED0B8 = {
     .priority = 0,
     .paletteNum = 0,
     .affineParam = 0
+};
+
+const struct SpriteFrameImage gSpriteImageTable_83ED0C0[] = {
+    {ewram13200 + 0x0000, 0x800},
+    {ewram13200 + 0x0800, 0x800},
+    {ewram13200 + 0x1000, 0x800},
+    {ewram13200 + 0x1800, 0x800},
+    {ewram13200 + 0x2000, 0x800}
+};
+
+const struct SpriteFrameImage gSpriteImageTable_83ED0E8[] = {
+    {ewram13200 + 0x2800, 0x300}
+};
+
+const struct SpriteFrameImage gSpriteImageTable_83ED0F0[] = {
+    {ewram13200 + 0x2B00, 0x500}
+};
+
+const struct SpriteFrameImage gSpriteImageTable_83ED0F8[] = {
+    {ewram13200 + 0x3000, 0x600}
+};
+
+const struct SpriteFrameImage gSpriteImageTable_83ED100[] = {
+    {gSpriteImage_8E988E8, 0x80},
+    {gSpriteImage_8E98968, 0x80},
+    {gSpriteImage_8E989E8, 0x80},
+    {gSpriteImage_8E98A68, 0x80},
+    {gSpriteImage_8E98AE8, 0x80},
+    {gSpriteImage_8E98B68, 0x80}
+};
+
+const struct SpriteFrameImage gSpriteImageTable_83ED130[] = {
+    {gSpriteImage_8E991E8, 0x200}
+};
+
+const struct SpriteFrameImage gSpriteImageTable_83ED138[] = {
+    {gSpriteImage_8E99808, 0x40}
+};
+
+const struct SpriteFrameImage gSpriteImageTable_83ED140[] = {
+    {gSpriteImage_8E98BE8, 0x100},
+    {gSpriteImage_8E98CE8, 0x100}
+};
+
+const struct SpriteFrameImage gSpriteImageTable_83ED150[] = {
+    {gSpriteImage_8E993E8, 0x400}
+};
+
+const struct SpriteFrameImage gSpriteImageTable_83ED158[] = {
+    {gSpriteImage_8E98DE8, 0x200},
+    {gSpriteImage_8E98FE8, 0x200}
+};
+
+const struct SpriteFrameImage gSpriteImageTable_83ED168[] = {
+    {gSpriteImage_8E98848, 0x20}
+};
+
+const struct SpriteFrameImage gSpriteImageTable_83ED170[] = {
+    {gSpriteImage_8E98868, 0x80}
+};
+
+const struct SpriteFrameImage gSpriteImageTable_83ED178[] = {
+    {ewram10000 + 0x0000, 0x600}
+};
+
+const struct SpriteFrameImage gSpriteImageTable_83ED180[] = {
+    {ewram10000 + 0x0600, 0x200}
+};
+
+const struct SpriteFrameImage gSpriteImageTable_83ED188[] = {
+    {ewram10000 + 0x0800, 0x200}
+};
+
+const struct SpriteFrameImage gSpriteImageTable_83ED190[] = {
+    {ewram10000 + 0x0A00, 0x200}
+};
+
+const struct SpriteFrameImage gSpriteImageTable_83ED198[] = {
+    {ewram10000 + 0x0C00, 0x300}
+};
+
+const struct SpriteFrameImage gSpriteImageTable_83ED1A0[] = {
+    {ewram10000 + 0x1000, 0x400}
+};
+
+const struct SpriteFrameImage gSpriteImageTable_83ED1A8[] = {
+    {ewram10000 + 0x1400, 0x200}
+};
+
+const struct SpriteFrameImage gSpriteImageTable_83ED1B0[] = {
+    {ewram10000 + 0x1600, 0x300}
+};
+
+const struct SpriteFrameImage gSpriteImageTable_83ED1B8[] = {
+    {ewram10000 + 0x1900, 0x300}
+};
+
+const struct SpriteFrameImage gSpriteImageTable_83ED1C0[] = {
+    {ewram10000 + 0x1C00, 0x200},
+    {ewram10000 + 0x1E00, 0x200},
+    {ewram10000 + 0x1E00, 0x200} // is this a typo?
+};
+
+const struct SpriteFrameImage gSpriteImageTable_83ED1D8[] = {
+    {ewram10000 + 0x2000, 0x280}
+};
+
+const struct SpriteFrameImage gSpriteImageTable_83ED1E0[] = {
+    {ewram10000 + 0x2280, 0x80},
+    {ewram10000 + 0x2300, 0x80},
+    {ewram10000 + 0x2380, 0x80},
+    {ewram10000 + 0x2400, 0x80},
+    {ewram10000 + 0x2480, 0x80}
+};
+
+const struct SpriteFrameImage gSpriteImageTable_83ED208[] = {
+    {ewram10000 + 0x2600, 0x480},
+    {ewram10000 + 0x2A80, 0x480}
+};
+
+const struct SpriteFrameImage gSpriteImageTable_83ED218[] = {
+    {ewram10000 + 0x2F00, 0x180},
+    {ewram10000 + 0x3080, 0x180}
+};
+
+const struct SpriteFrameImage gSpriteImageTable_83ED228[] = {
+    {gSpriteImage_8E98828, 0x20}
 };

@@ -2656,4 +2656,21 @@ extern const u8 gNamingScreenRightPointingTriangleTiles[];
 extern const u8 gNamingScreenUnderscoreTiles[];
 extern const u16 gNamingScreenPalettes[][16];
 
+extern const u8 gSpriteImage_8E988E8[];
+extern const u8 gSpriteImage_8E98968[];
+extern const u8 gSpriteImage_8E989E8[];
+extern const u8 gSpriteImage_8E98A68[];
+extern const u8 gSpriteImage_8E98AE8[];
+extern const u8 gSpriteImage_8E98B68[];
+extern const u8 gSpriteImage_8E991E8[];
+extern const u8 gSpriteImage_8E99808[];
+extern const u8 gSpriteImage_8E98BE8[];
+extern const u8 gSpriteImage_8E98CE8[];
+extern const u8 gSpriteImage_8E993E8[];
+extern const u8 gSpriteImage_8E98DE8[];
+extern const u8 gSpriteImage_8E98FE8[];
+extern const u8 gSpriteImage_8E98848[];
+extern const u8 gSpriteImage_8E98868[];
+extern const u8 gSpriteImage_8E98828[];
+
 #endif  // GUARD_GRAPHICS_H

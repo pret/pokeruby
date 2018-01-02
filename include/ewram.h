@@ -78,6 +78,7 @@ extern u8 gSharedMem[];
 #define ewram12000                      (&gSharedMem[0x12000])
 #define ewram12800                      (&gSharedMem[0x12800])
 #define ewram13000                      (&gSharedMem[0x13000])
+#define ewram13200                      (&gSharedMem[0x13200])
 #define ewram13800                      (&gSharedMem[0x13800])
 #define EWRAM_14000                     ((u8 *)(gSharedMem + 0x14000))
 #define ewram14000                      (&gSharedMem[0x14000])
