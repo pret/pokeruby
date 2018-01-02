@@ -33,8 +33,7 @@
     void AGBPrintFlush1Block(void);
     void AGBPrintFlush(void);
     void AGBAssert(const char *pFile, int nLine, const char *pExpression, int nStopProgram);
-    // NOGBA PROTOTYPES FOR LIBISAGBPRN.C
-    bool32 IsNoGba(void);
+    // NOGBA PROTOTYPE FOR LIBISAGBPRN.C
     void NOGBAPrint(const char *pBuf);
 #endif
 
