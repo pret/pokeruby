@@ -51,14 +51,11 @@ extern const u32 gUnknown_0820CA98[];
 extern const u16 gUnknown_0820F798[];
 
 void sub_8047CD8(void);
-u16 sub_804DB2C(void);
-void sub_804DB68(void);
 void sub_804E174(void);
 extern const u8 gOtherText_MaleSymbol3[2];
 extern const u8 gOtherText_FemaleSymbol3[2];
 extern const u8 gOtherText_GenderlessSymbol[2];
 
 void sub_804E22C(void);
-u16 sub_804D89C(void);
 
 #endif //POKERUBY_TRADE_H

@@ -15,7 +15,7 @@ SootopolisCity_Gym_1F_MapScript1_15AF22:: @ 815AF22
 
 SootopolisCity_Gym_1F_MapScript1_15AF25:: @ 815AF25
 	call SootopolisCity_Gym_1F_EventScript_15AF2E
-	special sub_8069D78
+	special SetSootopolisGymCrackedIceMetatiles
 	end
 
 SootopolisCity_Gym_1F_EventScript_15AF2E:: @ 815AF2E

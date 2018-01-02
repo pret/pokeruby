@@ -292,7 +292,7 @@ Route120_EventScript_1519B3:: @ 81519B3
 
 Route120_EventScript_1519CA:: @ 81519CA
 	trainerbattle 0, OPPONENT_ROBERT_1, 0, Route120_Text_1BF07E, Route120_Text_1BF0A5
-	specialvar RESULT, sub_8082C68
+	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
 	goto_if_eq Route120_EventScript_1519F1
 	msgbox Route120_Text_1BF0C3, 6
@@ -315,7 +315,7 @@ Route120_EventScript_151A1F:: @ 8151A1F
 
 Route120_EventScript_151A36:: @ 8151A36
 	trainerbattle 0, OPPONENT_BRANDON_1, 0, Route120_Text_1BF32B, Route120_Text_1BF36B
-	specialvar RESULT, sub_8082C68
+	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
 	goto_if_eq Route120_EventScript_151A5D
 	msgbox Route120_Text_1BF38D, 6

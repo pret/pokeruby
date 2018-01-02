@@ -25,7 +25,7 @@ PacifidlogTown_House2_EventScript_154168:: @ 8154168
 PacifidlogTown_House2_EventScript_1541B4:: @ 81541B4
 	checkflag FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK
 	goto_if 0, PacifidlogTown_House2_EventScript_1A14DC
-	specialvar RESULT, sub_810F908
+	specialvar RESULT, GetDaysUntilPacifidlogTMAvailable
 	compare RESULT, 0
 	call_if 1, PacifidlogTown_House2_EventScript_1541E8
 	return
@@ -49,7 +49,7 @@ PacifidlogTown_House2_EventScript_1541EC:: @ 81541EC
 	compare RESULT, 0
 	goto_if_eq PacifidlogTown_House2_EventScript_1A029B
 	setflag FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK
-	special sub_810F950
+	special SetPacifidlogTMReceivedDay
 	msgbox PacifidlogTown_House2_Text_179283, 4
 	release
 	end
@@ -65,13 +65,13 @@ PacifidlogTown_House2_EventScript_154225:: @ 8154225
 	compare RESULT, 0
 	goto_if_eq PacifidlogTown_House2_EventScript_1A029B
 	setflag FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK
-	special sub_810F950
+	special SetPacifidlogTMReceivedDay
 	msgbox PacifidlogTown_House2_Text_179283, 4
 	release
 	end
 
 PacifidlogTown_House2_EventScript_154254:: @ 8154254
-	specialvar RESULT, sub_810F908
+	specialvar RESULT, GetDaysUntilPacifidlogTMAvailable
 	buffernumberstring 0, RESULT
 	msgbox PacifidlogTown_House2_Text_1792F2, 4
 	release

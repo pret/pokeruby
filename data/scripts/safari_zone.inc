@@ -53,7 +53,7 @@ gUnknown_081C346A:: @ 81C346A
 
 EventScript_1C348E:
 	fadescreen 1
-	special sub_810BAF4
+	special OpenPokeblockCaseOnFeeder
 	waitstate
 	compare RESULT, 0xFFFF
 	goto_if 5, EventScript_1C34A0

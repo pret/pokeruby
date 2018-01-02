@@ -39,7 +39,7 @@ void sub_80F99CC(void)
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
 }
 
-void sub_80F9A0C(void)
+void SelectMonForNPCTrade(void)
 {
     u8 taskId;
 
@@ -49,7 +49,7 @@ void sub_80F9A0C(void)
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
 }
 
-void sub_80F9A4C(void)
+void SelectMoveTutorMon(void)
 {
     u8 taskId;
 
@@ -272,7 +272,7 @@ void HandleMoveTutorPartyMenu(u8 var)
     }
 }
 
-void sub_80F9EEC(void)
+void SelectMove(void)
 {
     ShowSelectMovePokemonSummaryScreen(&gPlayerParty[0], gSpecialVar_0x8004, gPlayerPartyCount - 1, c2_exit_to_overworld_2_switch, 0);
     UNK_2018000_STRUCT.unk8 = 3;
@@ -321,7 +321,7 @@ void sub_80F9FDC(struct Pokemon *pkmn, u8 moveIndex1, u8 moveIndex2)
     SetMonData(pkmn, MON_DATA_PP_BONUSES, &bonuses);
 }
 
-void sub_80FA0DC(void)
+void DeleteMonMove(void)
 {
     u16 i;
 
@@ -332,7 +332,7 @@ void sub_80FA0DC(void)
         sub_80F9FDC(&gPlayerParty[gSpecialVar_0x8004], i, i + 1);
 }
 
-void sub_80FA148(void)
+void IsSelectedMonEgg(void)
 {
     struct Pokemon *party = &gPlayerParty[gSpecialVar_0x8004];
     gSpecialVar_Result = 0;

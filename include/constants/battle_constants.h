@@ -105,6 +105,8 @@
 #define BATTLE_TYPE_REGI            0x4000
 #define BATTLE_TYPE_LINK_DOUBLE     (BATTLE_TYPE_MULTI | BATTLE_TYPE_TRAINER | BATTLE_TYPE_LINK | BATTLE_TYPE_DOUBLE)
 
+#define SECRET_BASE_OPPONENT        0x400
+
 #define BATTLE_WON                  0x1
 #define BATTLE_LOST                 0x2
 #define BATTLE_DREW                 0x3

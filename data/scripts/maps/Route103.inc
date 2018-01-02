@@ -173,7 +173,7 @@ Route103_EventScript_14ED94:: @ 814ED94
 
 Route103_EventScript_14EDAB:: @ 814EDAB
 	trainerbattle 4, OPPONENT_AMY_AND_LIV_1, 0, Route103_Text_1B7DF7, Route103_Text_1B7E3B, Route103_Text_1B7EAC
-	specialvar RESULT, sub_8082C68
+	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
 	goto_if_eq Route103_EventScript_14EDD6
 	msgbox Route103_Text_1B7E50, 6
@@ -186,7 +186,7 @@ Route103_EventScript_14EDD6:: @ 814EDD6
 
 Route103_EventScript_14EDF1:: @ 814EDF1
 	trainerbattle 4, OPPONENT_AMY_AND_LIV_1, 0, Route103_Text_1B7EFB, Route103_Text_1B7F20, Route103_Text_1B7F8E
-	specialvar RESULT, sub_8082C68
+	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
 	goto_if_eq Route103_EventScript_14EE1C
 	msgbox Route103_Text_1B7F40, 6
@@ -204,7 +204,7 @@ Route103_EventScript_14EE37:: @ 814EE37
 
 Route103_EventScript_14EE4E:: @ 814EE4E
 	trainerbattle 0, OPPONENT_MIGUEL_1, 0, Route103_Text_1B82A9, Route103_Text_1B82EC
-	specialvar RESULT, sub_8082C68
+	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
 	goto_if_eq Route103_EventScript_14EE75
 	msgbox Route103_Text_1B830D, 6
