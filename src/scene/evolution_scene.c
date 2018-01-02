@@ -67,10 +67,10 @@ bool32 IsHMMove2(u16 move);
 extern struct Window gUnknown_03004210;
 extern u16 gUnknown_030042A4;
 extern u16 gUnknown_030042A0;
-extern u16 gUnknown_030042C0;
-extern u16 gUnknown_030041B4;
-extern u16 gUnknown_03004288;
-extern u16 gUnknown_03004280;
+extern u16 gBattle_BG1_X;
+extern u16 gBattle_BG1_Y;
+extern u16 gBattle_BG2_X;
+extern u16 gBattle_BG2_Y;
 extern u16 gUnknown_030041B0;
 extern u16 gUnknown_030041B8;
 extern u8 gBattleTerrain;
@@ -202,10 +202,10 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
 
     gUnknown_030042A4 = 0;
     gUnknown_030042A0 = 0;
-    gUnknown_030042C0 = 0;
-    gUnknown_030041B4 = 0;
-    gUnknown_03004288 = 0;
-    gUnknown_03004280 = 0;
+    gBattle_BG1_X = 0;
+    gBattle_BG1_Y = 0;
+    gBattle_BG2_X = 0;
+    gBattle_BG2_Y = 0;
     gUnknown_030041B0 = 256;
     gUnknown_030041B8 = 0;
 
@@ -310,10 +310,10 @@ static void CB2_EvolutionSceneLoadGraphics(void)
     ResetPaletteFade();
     gUnknown_030042A4 = 0;
     gUnknown_030042A0 = 0;
-    gUnknown_030042C0 = 0;
-    gUnknown_030041B4 = 0;
-    gUnknown_03004288 = 0;
-    gUnknown_03004280 = 0;
+    gBattle_BG1_X = 0;
+    gBattle_BG1_Y = 0;
+    gBattle_BG2_X = 0;
+    gBattle_BG2_Y = 0;
     gUnknown_030041B0 = 256;
     gUnknown_030041B8 = 0;
 
@@ -364,10 +364,10 @@ static void CB2_TradeEvolutionSceneLoadGraphics(void)
         gReservedSpritePaletteCount = 4;
         gUnknown_030042A4 = 0;
         gUnknown_030042A0 = 0;
-        gUnknown_030042C0 = 0;
-        gUnknown_030041B4 = 0;
-        gUnknown_03004288 = 0;
-        gUnknown_03004280 = 0;
+        gBattle_BG1_X = 0;
+        gBattle_BG1_Y = 0;
+        gBattle_BG2_X = 0;
+        gBattle_BG2_Y = 0;
         gUnknown_030041B0 = 256;
         gUnknown_030041B8 = 0;
         gMain.state++;
@@ -3925,10 +3925,10 @@ static void VBlankCB_EvolutionScene(void)
     REG_BG0CNT = BGCNT_SCREENBASE(24) | BGCNT_16COLOR | BGCNT_TXT256x256 | BGCNT_AFF512x512 | BGCNT_PRIORITY(3); // 0x9803
     REG_BG0HOFS = gUnknown_030042A4;
     REG_BG0VOFS = gUnknown_030042A0;
-    REG_BG1HOFS = gUnknown_030042C0;
-    REG_BG1VOFS = gUnknown_030041B4;
-    REG_BG2HOFS = gUnknown_03004288;
-    REG_BG2VOFS = gUnknown_03004280;
+    REG_BG1HOFS = gBattle_BG1_X;
+    REG_BG1VOFS = gBattle_BG1_Y;
+    REG_BG2HOFS = gBattle_BG2_X;
+    REG_BG2VOFS = gBattle_BG2_Y;
     REG_BG3HOFS = gUnknown_030041B0;
     REG_BG3VOFS = gUnknown_030041B8;
     LoadOam();
@@ -3941,10 +3941,10 @@ static void VBlankCB_TradeEvolutionScene(void)
 {
     REG_BG0HOFS = gUnknown_030042A4;
     REG_BG0VOFS = gUnknown_030042A0;
-    REG_BG1HOFS = gUnknown_030042C0;
-    REG_BG1VOFS = gUnknown_030041B4;
-    REG_BG2HOFS = gUnknown_03004288;
-    REG_BG2VOFS = gUnknown_03004280;
+    REG_BG1HOFS = gBattle_BG1_X;
+    REG_BG1VOFS = gBattle_BG1_Y;
+    REG_BG2HOFS = gBattle_BG2_X;
+    REG_BG2VOFS = gBattle_BG2_Y;
     REG_BG3HOFS = gUnknown_030041B0;
     REG_BG3VOFS = gUnknown_030041B8;
     LoadOam();

@@ -34,19 +34,19 @@
 	.byte 0x04
 	.endm
 
-	.macro atk5
+	.macro damagecalc
 	.byte 0x05
 	.endm
 
-	.macro atk6
+	.macro typecalc
 	.byte 0x06
 	.endm
 
-	.macro atk7
+	.macro adjustnormaldamage
 	.byte 0x07
 	.endm
 
-	.macro atk8
+	.macro adjustnormaldamage2
 	.byte 0x08
 	.endm
 
@@ -58,7 +58,7 @@
 	.byte 0x0a
 	.endm
 
-	.macro graphicalhpupdate bank
+	.macro healthbarupdate bank
 	.byte 0x0b
 	.byte \bank
 	.endm
@@ -72,7 +72,7 @@
 	.byte 0x0d
 	.endm
 
-	.macro missmessage
+	.macro effectivenesssound
 	.byte 0x0e
 	.endm
 
@@ -85,7 +85,7 @@
 	.2byte \string
 	.endm
 
-	.macro printstring2 string
+	.macro printselectionstring string
 	.byte 0x11
 	.2byte \string
 	.endm
@@ -100,41 +100,41 @@
 	.4byte \table
 	.endm
 
-	.macro printfromtable2 table
+	.macro printselectionstringfromtable table
 	.byte 0x14
 	.4byte \table
 	.endm
 
-	.macro seteffectwithchancetarget
+	.macro seteffectwithchance
 	.byte 0x15
 	.endm
 
-	.macro seteffecttarget
+	.macro seteffectprimary
 	.byte 0x16
 	.endm
 
-	.macro seteffectuser
+	.macro seteffectsecondary
 	.byte 0x17
 	.endm
 
-	.macro clearstatus bank
+	.macro clearstatusfromeffect bank
 	.byte 0x18
 	.byte \bank
 	.endm
 
-	.macro faintpokemon bank, param2, param3
+	.macro tryfaintmon bank, param2, param3
 	.byte 0x19
 	.byte \bank
 	.byte \param2
 	.4byte \param3
 	.endm
 
-	.macro atk1a param1
+	.macro dofaintanimation param1
 	.byte 0x1a
 	.byte \param1
 	.endm
 
-	.macro atk1b bank
+	.macro cleareffectsonfaint bank
 	.byte 0x1b
 	.byte \bank
 	.endm
@@ -146,7 +146,7 @@
 	.4byte \address
 	.endm
 
-	.macro jumpifsecondarytstatus bank, status, address
+	.macro jumpifstatus2 bank, status, address
 	.byte 0x1d
 	.byte \bank
 	.4byte \status
@@ -160,7 +160,7 @@
 	.4byte \address
 	.endm
 
-	.macro jumpifhalverset bank, status, address
+	.macro jumpifsideaffecting bank, status, address
 	.byte 0x1f
 	.byte \bank
 	.2byte \status
@@ -176,7 +176,7 @@
 	.4byte \address
 	.endm
 
-	.macro jumpifspecialstatusflag bank, mask, status, address
+	.macro jumpifstatus3condition bank, mask, status, address
 	.byte 0x21
 	.byte \bank
 	.4byte \mask
@@ -191,7 +191,7 @@
 	.4byte \address
 	.endm
 
-	.macro atk23 bank
+	.macro getexp bank
 	.byte 0x23
 	.byte \bank
 	.endm
@@ -201,21 +201,21 @@
 	.4byte \address
 	.endm
 
-	.macro atk25
+	.macro movevaluescleanup
 	.byte 0x25
 	.endm
 
-	.macro atk26 param1
+	.macro setmultihit param1
 	.byte 0x26
 	.byte \param1
 	.endm
 
-	.macro atk27 address
+	.macro decrementmultihit address
 	.byte 0x27
 	.4byte \address
 	.endm
 
-	.macro jump address
+	.macro goto address
 	.byte 0x28
 	.4byte \address
 	.endm
@@ -272,7 +272,7 @@
 	.byte \value
 	.endm
 
-	.macro subtractbyte pointer, value
+	.macro subbyte pointer, value
 	.byte 0x30
 	.4byte \pointer
 	.byte \value
@@ -285,7 +285,7 @@
 	.byte \size
 	.endm
 
-	.macro atk32 param1, param2, param3, byte
+	.macro copyarraywithindex param1, param2, param3, byte
 	.byte 0x32
 	.4byte \param1
 	.4byte \param2
@@ -334,11 +334,11 @@
 	.2byte \pause_duration
 	.endm
 
-	.macro waitstateatk
+	.macro waitstate
 	.byte 0x3a
 	.endm
 
-	.macro somethinghealatk3b bank
+	.macro healthbar_update bank
 	.byte 0x3b
 	.byte \bank
 	.endm
@@ -359,12 +359,12 @@
 	.byte 0x3f
 	.endm
 
-	.macro atk40 address
+	.macro jumpifaffectedbyprotect address
 	.byte 0x40
 	.4byte \address
 	.endm
 
-	.macro callatk address
+	.macro call address
 	.byte 0x41
 	.4byte \address
 	.endm
@@ -382,7 +382,7 @@
 	.4byte \address
 	.endm
 
-	.macro atk44
+	.macro endselectionscript
 	.byte 0x44
 	.endm
 
@@ -393,14 +393,14 @@
 	.4byte \var_address
 	.endm
 
-	.macro atk46 bank, address, int
+	.macro playanimation2 bank, address, int
 	.byte 0x46
 	.byte \bank
 	.4byte \address
 	.4byte \int
 	.endm
 
-	.macro atk47
+	.macro setgraphicalstatchangevalues
 	.byte 0x47
 	.endm
 
@@ -411,37 +411,37 @@
 	.byte \byte
 	.endm
 
-	.macro atk49 byte1, byte2
+	.macro moveend byte1, byte2
 	.byte 0x49
 	.byte \byte1
 	.byte \byte2
 	.endm
 
-	.macro damagecalc2
+	.macro typecalc2
 	.byte 0x4a
 	.endm
 
-	.macro atk4b
+	.macro returnatktoball
 	.byte 0x4b
 	.endm
 
-	.macro switch1 bank
+	.macro getswitchedmondata bank
 	.byte 0x4c
 	.byte \bank
 	.endm
 
-	.macro switch2 bank
+	.macro switchindataupdate bank
 	.byte 0x4d
 	.byte \bank
 	.endm
 
-	.macro switch3 bank, byte
+	.macro switchinanim bank, byte
 	.byte 0x4e
 	.byte \bank
 	.byte \byte
 	.endm
 
-	.macro jumpifcannotswitch bank, address
+	.macro jumpifcantswitch bank, address
 	.byte 0x4f
 	.byte \bank
 	.4byte \address
@@ -453,33 +453,33 @@
 	.4byte \address
 	.endm
 
-	.macro atk51 bank, param2
+	.macro switchhandleorder bank, param2
 	.byte 0x51
 	.byte \bank
 	.byte \param2
 	.endm
 
-	.macro atk52 bank
+	.macro switchineffects bank
 	.byte 0x52
 	.byte \bank
 	.endm
 
-	.macro atk53 bank
+	.macro trainerslidein bank
 	.byte 0x53
 	.byte \bank
 	.endm
 
-	.macro atk54 word
+	.macro playse word
 	.byte 0x54
 	.2byte \word
 	.endm
 
-	.macro atk55 int
+	.macro fanfare int
 	.byte 0x55
-	.4byte \int
+	.2byte \int
 	.endm
 
-	.macro atk56 bank_or_side
+	.macro playfaintcry bank_or_side
 	.byte 0x56
 	.byte \bank_or_side
 	.endm
@@ -488,34 +488,34 @@
 	.byte 0x57
 	.endm
 
-	.macro atk58 bank
+	.macro returntoball bank
 	.byte 0x58
 	.byte \bank
 	.endm
 
-	.macro checkiflearnmoveinbattle param1, param2, bank_maybe
+	.macro handlelearnnewmove param1, param2, bank_maybe
 	.byte 0x59
 	.4byte \param1
 	.4byte \param2
 	.byte \bank_maybe
 	.endm
 
-	.macro atk5a address
+	.macro yesnoboxlearnmove address
 	.byte 0x5a
 	.4byte \address
 	.endm
 
-	.macro atk5b address
+	.macro yesnoboxstoplearningmove address
 	.byte 0x5b
 	.4byte \address
 	.endm
 
-	.macro atk5c bank
+	.macro hitanimation bank
 	.byte 0x5c
 	.byte \bank
 	.endm
 
-	.macro atk5d
+	.macro getmoneyreward
 	.byte 0x5d
 	.endm
 
@@ -528,12 +528,12 @@
 	.byte 0x5f
 	.endm
 
-	.macro atk60 byte
+	.macro incrementgamestat byte
 	.byte 0x60
 	.byte \byte
 	.endm
 
-	.macro atk61 bank_or_side
+	.macro drawpartystatussummary bank_or_side
 	.byte 0x61
 	.byte \bank_or_side
 	.endm
@@ -543,7 +543,7 @@
 	.byte \bank_or_side
 	.endm
 
-	.macro jumptoattack bank
+	.macro jumptorandomattack bank
 	.byte 0x63
 	.byte \bank
 	.endm
@@ -553,28 +553,28 @@
 	.byte \bank
 	.endm
 
-	.macro atk65 bank_or_side, address
+	.macro status2animation bank_or_side, address
 	.byte 0x65
 	.byte \bank_or_side
 	.4byte \address
 	.endm
 
-	.macro atk66 bank_or_side, bank_or_side2, address
+	.macro chosenstatusanimation bank_or_side, bank_or_side2, address
 	.byte 0x66
 	.byte \bank_or_side
 	.byte \bank_or_side2
 	.4byte \address
 	.endm
 
-	.macro atk67
+	.macro yesnobox
 	.byte 0x67
 	.endm
 
-	.macro atk68
+	.macro cancelallactions
 	.byte 0x68
 	.endm
 
-	.macro atk69
+	.macro adjustsetdamage
 	.byte 0x69
 	.endm
 
@@ -583,62 +583,62 @@
 	.byte \bank
 	.endm
 
-	.macro atk6b
+	.macro atknameinbuff1
 	.byte 0x6b
 	.endm
 
-	.macro atk6c
+	.macro drawlvlupbox
 	.byte 0x6c
 	.endm
 
-	.macro atk6d
+	.macro resetsentmonsvalue
 	.byte 0x6d
 	.endm
 
-	.macro atk6e
+	.macro setatktoplayer0
 	.byte 0x6e
 	.endm
 
-	.macro atk6f bank
+	.macro makevisible bank
 	.byte 0x6f
 	.byte \bank
 	.endm
 
-	.macro atk70 bank
+	.macro recordlastability bank
 	.byte 0x70
 	.byte \bank
 	.endm
 
-	.macro atk71
+	.macro buffermovetolearn
 	.byte 0x71
 	.endm
 
-	.macro atk72 address
+	.macro jumpifplayerran address
 	.byte 0x72
 	.4byte \address
 	.endm
 
-	.macro atk73 bank
+	.macro hpthresholds bank
 	.byte 0x73
 	.byte \bank
 	.endm
 
-	.macro atk74 bank
+	.macro hpthresholds2 bank
 	.byte 0x74
 	.byte \bank
 	.endm
 
-	.macro atk75
+	.macro useitemonopponent
 	.byte 0x75
 	.endm
 
-	.macro atk76 bank, byte
+	.macro various bank, byte
 	.byte 0x76
 	.byte \bank
 	.byte \byte
 	.endm
 
-	.macro setprotect
+	.macro setprotectlike
 	.byte 0x77
 	.endm
 
@@ -646,22 +646,22 @@
 	.byte 0x78
 	.endm
 
-	.macro setuserhptozero
+	.macro setatkhptozero
 	.byte 0x79
 	.endm
 
-	.macro jumpwhiletargetvalid address
+	.macro jumpifnexttargetvalid address
 	.byte 0x7a
 	.4byte \address
 	.endm
 
-	.macro setdamageasrestorehalfmaxhp address, byte
+	.macro tryhealhalfhealth address, byte
 	.byte 0x7b
 	.4byte \address
 	.byte \byte
 	.endm
 
-	.macro jumptolastusedattack
+	.macro trymirrormove
 	.byte 0x7c
 	.endm
 
@@ -673,7 +673,7 @@
 	.byte 0x7e
 	.endm
 
-	.macro setleechseed
+	.macro setseeded
 	.byte 0x7f
 	.endm
 
@@ -682,7 +682,7 @@
 	.byte \id
 	.endm
 
-	.macro setrest address
+	.macro trysetrest address
 	.byte 0x81
 	.4byte \address
 	.endm
@@ -692,11 +692,11 @@
 	.4byte \address
 	.endm
 
-	.macro nop3
+	.macro nop
 	.byte 0x83
 	.endm
 
-	.macro jumpifcannotsleep address
+	.macro jumpifcantmakeasleep address
 	.byte 0x84
 	.4byte \address
 	.endm
@@ -710,7 +710,7 @@
 	.4byte \address
 	.endm
 
-	.macro stockpiletohprecovery address
+	.macro stockpiletohpheal address
 	.byte 0x87
 	.4byte \address
 	.endm
@@ -737,12 +737,12 @@
 	.byte 0x8c
 	.endm
 
-	.macro setloopcounter count
+	.macro setmultihitcounter count
 	.byte 0x8d
 	.byte \count
 	.endm
 
-	.macro atk8e
+	.macro initmultihitstring
 	.byte 0x8e
 	.endm
 
@@ -751,12 +751,12 @@
 	.4byte \address
 	.endm
 
-	.macro changetypestoenemyattacktype address
+	.macro tryconversiontypechange address
 	.byte 0x90
 	.4byte \address
 	.endm
 
-	.macro givemoney
+	.macro givepaydaymoney
 	.byte 0x91
 	.endm
 
@@ -764,12 +764,12 @@
 	.byte 0x92
 	.endm
 
-	.macro koplussomethings address
+	.macro tryKO address
 	.byte 0x93
 	.4byte \address
 	.endm
 
-	.macro gethalfcurrentenemyhp
+	.macro damagetohalftargethp
 	.byte 0x94
 	.endm
 
@@ -781,21 +781,21 @@
 	.byte 0x96
 	.endm
 
-	.macro tryinfatuatetarget address
+	.macro tryinfatuating address
 	.byte 0x97
 	.4byte \address
 	.endm
 
-	.macro atk98 byte
+	.macro updatestatusicon byte
 	.byte 0x98
 	.byte \byte
 	.endm
 
-	.macro setmisteffect
+	.macro setmist
 	.byte 0x99
 	.endm
 
-	.macro setincreasedcriticalchance
+	.macro setfocusenergy
 	.byte 0x9a
 	.endm
 
@@ -803,20 +803,20 @@
 	.byte 0x9b
 	.endm
 
-	.macro setsubstituteeffect
+	.macro setsubstitute
 	.byte 0x9c
 	.endm
 
-	.macro copyattack address
+	.macro mimicattackcopy address
 	.byte 0x9d
 	.4byte \address
 	.endm
 
-	.macro metronomeeffect
+	.macro metronome
 	.byte 0x9e
 	.endm
 
-	.macro nightshadedamageeffect
+	.macro dmgtolevel
 	.byte 0x9f
 	.endm
 
@@ -839,12 +839,12 @@
 	.4byte \address
 	.endm
 
-	.macro setencore address
+	.macro trysetencore address
 	.byte 0xa4
 	.4byte \address
 	.endm
 
-	.macro painsplitdamagecalculator address
+	.macro painsplitdmgcalc address
 	.byte 0xa5
 	.4byte \address
 	.endm
@@ -863,16 +863,16 @@
 	.4byte \address
 	.endm
 
-	.macro selectrandommovefromusermoves address
+	.macro trychoosesleeptalkmove address
 	.byte 0xa9
 	.4byte \address
 	.endm
 
-	.macro destinybondeffect
+	.macro setdestinybond
 	.byte 0xaa
 	.endm
 
-	.macro atkab
+	.macro trysetdestinybondtohappen
 	.byte 0xab
 	.endm
 
@@ -880,12 +880,12 @@
 	.byte 0xac
 	.endm
 
-	.macro reducepprandom address
+	.macro tryspiteppreduce address
 	.byte 0xad
 	.4byte \address
 	.endm
 
-	.macro clearstatusifnotsoundproofed
+	.macro healpartystatus
 	.byte 0xae
 	.endm
 
@@ -894,7 +894,7 @@
 	.4byte \address
 	.endm
 
-	.macro setspikes address
+	.macro trysetspikes address
 	.byte 0xb0
 	.4byte \address
 	.endm
@@ -903,7 +903,7 @@
 	.byte 0xb1
 	.endm
 
-	.macro setperishsong address
+	.macro trysetperishsong address
 	.byte 0xb2
 	.4byte \address
 	.endm
@@ -912,13 +912,13 @@
 	.byte 0xb3
 	.endm
 
-	.macro jumpifconfusedandattackmaxed bank, address
+	.macro jumpifconfusedandstatmaxed bank, address
 	.byte 0xb4
 	.byte \bank
 	.4byte \address
 	.endm
 
-	.macro furycutterdamagecalculation
+	.macro furycuttercalc
 	.byte 0xb5
 	.endm
 
@@ -938,7 +938,7 @@
 	.byte 0xb9
 	.endm
 
-	.macro atkba address
+	.macro jumpifnopursuitswitchdmg address
 	.byte 0xba
 	.4byte \address
 	.endm
@@ -957,11 +957,11 @@
 	.4byte \address
 	.endm
 
-	.macro breakfree
+	.macro rapidspinfree
 	.byte 0xbe
 	.endm
 
-	.macro setcurled
+	.macro setdefensecurlbit
 	.byte 0xbf
 	.endm
 
@@ -970,30 +970,30 @@
 	.4byte \address
 	.endm
 
-	.macro hiddenpowerdamagecalculation
+	.macro hiddenpowercalc
 	.byte 0xc1
 	.endm
 
-	.macro selectnexttarget
+	.macro selectfirstvalidtarget
 	.byte 0xc2
 	.endm
 
-	.macro setfutureattack address
+	.macro trysetfutureattack address
 	.byte 0xc3
 	.4byte \address
 	.endm
 
-	.macro beatupcalculation address1, address2
+	.macro trydobeatup address1, address2
 	.byte 0xc4
 	.4byte \address1
 	.4byte \address2
 	.endm
 
-	.macro hidepreattack
+	.macro setsemiinvulnerablebit
 	.byte 0xc5
 	.endm
 
-	.macro unhidepostattack
+	.macro clearsemiinvulnerablebit
 	.byte 0xc6
 	.endm
 
@@ -1042,28 +1042,28 @@
 	.4byte \address
 	.endm
 
-	.macro sethelpinghand address
+	.macro trysethelpinghand address
 	.byte 0xd1
 	.4byte \address
 	.endm
 
-	.macro itemswap address
+	.macro tryswapitems address
 	.byte 0xd2
 	.4byte \address
 	.endm
 
-	.macro copyability address
+	.macro trycopyability address
 	.byte 0xd3
 	.4byte \address
 	.endm
 
-	.macro atkd4 byte, address
+	.macro trywish byte, address
 	.byte 0xd4
 	.byte \byte
 	.4byte \address
 	.endm
 
-	.macro setroots address
+	.macro trysetroots address
 	.byte 0xd5
 	.4byte \address
 	.endm
@@ -1086,17 +1086,17 @@
 	.byte 0xd9
 	.endm
 
-	.macro abilityswap address
+	.macro tryswapabilities address
 	.byte 0xda
 	.4byte \address
 	.endm
 
-	.macro imprisoneffect address
+	.macro tryimprision address
 	.byte 0xdb
 	.4byte \address
 	.endm
 
-	.macro setgrudge address
+	.macro trysetgrudge address
 	.byte 0xdc
 	.4byte \address
 	.endm
@@ -1110,45 +1110,45 @@
 	.4byte \address
 	.endm
 
-	.macro setmagiccoat address
+	.macro trysetmagiccoat address
 	.byte 0xdf
 	.4byte \address
 	.endm
 
-	.macro setstealstatchange address
+	.macro trysetsnatch address
 	.byte 0xe0
 	.4byte \address
 	.endm
 
-	.macro atke1 address
+	.macro trygetintimidatetarget address
 	.byte 0xe1
 	.4byte \address
 	.endm
 
-	.macro atke2 bank
+	.macro switchoutabilities bank
 	.byte 0xe2
 	.byte \bank
 	.endm
 
-	.macro jumpiffainted bank, address
+	.macro jumpifhasnohp bank, address
 	.byte 0xe3
 	.byte \bank
 	.4byte \address
 	.endm
 
-	.macro naturepowereffect
+	.macro getsecretpowereffect
 	.byte 0xe4
 	.endm
 
-	.macro pickupitemcalculation
+	.macro pickup
 	.byte 0xe5
 	.endm
 
-	.macro actualcastformswitch
+	.macro docastformchangeanimation
 	.byte 0xe6
 	.endm
 
-	.macro castformswitch
+	.macro trycastformdatachange
 	.byte 0xe7
 	.endm
 
@@ -1157,11 +1157,11 @@
 	.4byte \address
 	.endm
 
-	.macro seteffectbyweather
+	.macro setweatherballtype
 	.byte 0xe9
 	.endm
 
-	.macro recycleitem address
+	.macro tryrecycleitem address
 	.byte 0xea
 	.4byte \address
 	.endm
@@ -1171,58 +1171,244 @@
 	.4byte \address
 	.endm
 
-	.macro pursuitwhenswitched address
+	.macro pursuitrelated address
 	.byte 0xec
 	.4byte \address
 	.endm
 
-	.macro snatchmove
+	.macro snatchsetbanks
 	.byte 0xed
 	.endm
 
-	.macro removereflectlightscreen
+	.macro removelightscreenreflect
 	.byte 0xee
 	.endm
 
-	.macro pokemoncatchfunction
+	.macro handleballthrow
 	.byte 0xef
 	.endm
 
-	.macro catchpoke
+	.macro givecaughtmon
 	.byte 0xf0
 	.endm
 
-	.macro capturesomethingf1 address
+	.macro trysetcaughtmondexflags address
 	.byte 0xf1
 	.4byte \address
 	.endm
 
-	.macro capturesomethingf2
+	.macro displaydexinfo
 	.byte 0xf2
 	.endm
 
-	.macro capturesomethingf3 address
+	.macro trygivecaughtmonnick address
 	.byte 0xf3
 	.4byte \address
 	.endm
 
-	.macro removehp
+	.macro subattackerhpbydmg
 	.byte 0xf4
 	.endm
 
-	.macro curestatusfirstword
+	.macro removeattackerstatus1
 	.byte 0xf5
 	.endm
 
-	.macro atkf6
+	.macro finishaction
 	.byte 0xf6
 	.endm
 
-	.macro activesidesomething
+	.macro finishturn
 	.byte 0xf7
 	.endm
 
-	.macro atkf8 bank
+	.macro trainerslideout bank
 	.byte 0xf8
 	.byte \bank
+	.endm
+
+@ various command changed to more readable macros
+	.macro cancelmultiturnmoves bank
+	various \bank, VARIOUS_CANCEL_MULTI_TURN_MOVES
+	.endm
+
+	.macro setmagiccoattarget bank
+	various \bank, VARIOUS_SET_MAGIC_COAT_TARGET
+	.endm
+
+	.macro getifcantrunfrombattle bank
+	various \bank, VARIOUS_IS_RUNNING_IMPOSSIBLE
+	.endm
+
+	.macro getmovetarget bank
+	various \bank, VARIOUS_GET_MOVE_TARGET
+	.endm
+
+	.macro various4 bank
+	various \bank, 4
+	.endm
+
+	.macro resetintrimidatetracebits bank
+	various \bank, VARIOUS_RESET_INTIMIDATE_TRACE_BITS
+	.endm
+
+	.macro updatechoicemoveonlvlup bank
+	various \bank, VARIOUS_UPDATE_CHOICE_MOVE_ON_LVL_UP
+	.endm
+
+	.macro various7 bank
+	various \bank, 7
+	.endm
+
+	.macro various8 bank
+	various \bank, 8
+	.endm
+
+	.macro various9 bank
+	various \bank, 9
+	.endm
+
+	.macro various10 bank
+	various \bank, 10
+	.endm
+
+	.macro various11 bank
+	various \bank, 11
+	.endm
+
+	.macro various12 bank
+	various \bank, 12
+	.endm
+
+	.macro forfeityesnobox bank
+	various \bank, VARIOUS_EMIT_YESNOBOX
+	.endm
+
+	.macro various14 bank
+	various \bank, 14
+	.endm
+
+	.macro various15 bank
+	various \bank, 15
+	.endm
+
+	.macro various16 bank
+	various \bank, 16
+	.endm
+
+	.macro various17 bank
+	various \bank, 17
+	.endm
+
+	.macro waitcry bank
+	various \bank, VARIOUS_WAIT_CRY
+	.endm
+
+	.macro returnopponentmon1toball bank
+	various \bank, VARIOUS_RETURN_OPPONENT_MON1
+	.endm
+
+	.macro returnopponentmon2toball bank
+	various \bank, VARIOUS_RETURN_OPPONENT_MON2
+	.endm
+
+	.macro various21 bank
+	various \bank, 21
+	.endm
+
+	.macro various22 bank
+	various \bank, 22
+	.endm
+
+	.macro various23 bank
+	various \bank, 23
+	.endm
+
+	.macro various24 bank
+	various \bank, 24
+	.endm
+
+	.macro setoutcomeonteleport bank
+	various \bank, VARIOUS_SET_TELEPORT_OUTCOME
+	.endm
+
+	.macro playtrainerdefeatbgm bank
+	various \bank, VARIOUS_PLAY_TRAINER_DEFEATED_MUSIC
+	.endm
+
+@ helpful macros
+	.macro setstatchanger stat, stages, down
+	setbyte sSTATCHANGER \stat | \stages << 4 | \down << 7
+	.endm
+	
+	.macro setmoveeffect effect
+	setbyte cEFFECT_CHOOSER \effect
+	.endm
+	
+	.macro chosenstatus1animation bank, status
+	chosenstatusanimation \bank 0x0 \status
+	.endm
+	
+	.macro chosenstatus2animation bank, status
+	chosenstatusanimation \bank 0x1 \status
+	.endm
+	
+	.macro sethword dst, value
+	setbyte \dst, \value & 0xFF
+	setbyte \dst + 1, (\value >> 8) & 0xFF
+	.endm
+	
+	.macro setword dst, value
+	setbyte \dst, \value & 0xFF
+	setbyte \dst + 1, (\value >> 8) & 0xFF
+	setbyte \dst + 2, (\value >> 16) & 0xFF
+	setbyte \dst + 3, (\value >> 24) & 0xFF
+	.endm
+	
+	.macro copybyte dst, src
+	copyarray \dst, \src, 0x1
+	.endm
+	
+	.macro copyhword dst, src
+	copyarray \dst, \src, 0x2
+	.endm
+	
+	.macro copyword dst, src
+	copyarray \dst, \src, 0x4
+	.endm
+	
+	.macro jumpifbytenotequal byte1, byte2, jumpptr
+	jumpifarraynotequal \byte1, \byte2, 0x1, \jumpptr
+	.endm
+	
+	.macro jumpifbyteequal byte1, byte2, jumpptr
+	jumpifarrayequal \byte1, \byte2, 0x1, \jumpptr
+	.endm
+	
+	.macro jumpifmove move, jumpptr
+	jumpifhalfword EQUAL, gCurrentMove, \move, \jumpptr
+	.endm
+
+	.macro jumpifnotmove move, jumpptr
+	jumpifhalfword NOT_EQUAL, gCurrentMove, \move, \jumpptr
+	.endm
+	
+	.macro jumpifstatus3 bank, status, jumpptr
+	jumpifstatus3condition \bank, \status, 0x0, \jumpptr
+	.endm
+	
+	.macro jumpifnostatus3 bank, status, jumpptr
+	jumpifstatus3condition \bank, \status, 0x1, \jumpptr
+	.endm
+	
+	.macro jumpifmovehadnoeffect jumpptr
+	jumpifbyte COMMON_BITS, gBattleMoveFlags, MOVESTATUS_MISSED | MOVESTATUS_NOTAFFECTED | MOVESTATUS_FAILED, \jumpptr
+	.endm
+	
+	.macro jumpifbattletype flags, jumpptr
+	jumpifhalfword COMMON_BITS, gBattleTypeFlags, \flags, \jumpptr
+	.endm
+	
+	.macro jumpifnotbattletype flags, jumpptr
+	jumpifhalfword NO_COMMON_BITS, gBattleTypeFlags, \flags, \jumpptr
 	.endm

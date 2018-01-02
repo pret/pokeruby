@@ -1,22 +1,22 @@
 LittlerootTown_BrendansHouse_2F_EventScript_1B6950:: @ 81B6950
 LittlerootTown_MaysHouse_2F_EventScript_1B6950:: @ 81B6950
-	setvar 0x4092, 5
+	setvar VAR_LITTLEROOT_INTRO_STATE, 5
 	return
 
 LittlerootTown_BrendansHouse_1F_EventScript_1B6956:: @ 81B6956
 LittlerootTown_MaysHouse_1F_EventScript_1B6956:: @ 81B6956
 	msgbox LittlerootTown_BrendansHouse_1F_Text_172429, 4
-	applymovement 0x8004, LittlerootTown_BrendansHouse_1F_Movement_1A0839
+	applymovement VAR_SPECIAL_4, LittlerootTown_BrendansHouse_1F_Movement_1A0839
 	waitmovement 0
-	compare 0x8005, 0
+	compare VAR_SPECIAL_5, 0
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1B699F
-	compare 0x8005, 1
+	compare VAR_SPECIAL_5, 1
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1B69AA
 	msgbox LittlerootTown_BrendansHouse_1F_Text_172453, 4
 	closemessage
-	setvar 0x4092, 4
+	setvar VAR_LITTLEROOT_INTRO_STATE, 4
 	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_1B69B5
-	applymovement 0x8004, LittlerootTown_BrendansHouse_1F_Movement_1A0841
+	applymovement VAR_SPECIAL_4, LittlerootTown_BrendansHouse_1F_Movement_1A0841
 	waitmovement 0
 	releaseall
 	end
@@ -39,7 +39,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1B69B7:: @ 81B69B7
 LittlerootTown_MaysHouse_1F_EventScript_1B69B7:: @ 81B69B7
 	msgbox LittlerootTown_BrendansHouse_1F_Text_172531, 4
 	closemessage
-	applymovement 0x8004, LittlerootTown_BrendansHouse_1F_Movement_1A0841
+	applymovement VAR_SPECIAL_4, LittlerootTown_BrendansHouse_1F_Movement_1A0841
 	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_1B6CDC
 	waitmovement 0
 	releaseall
@@ -47,13 +47,13 @@ LittlerootTown_MaysHouse_1F_EventScript_1B69B7:: @ 81B69B7
 
 LittlerootTown_BrendansHouse_2F_EventScript_1B69D3:: @ 81B69D3
 	lockall
-	setvar 0x8004, 0
+	setvar VAR_SPECIAL_4, 0
 	goto LittlerootTown_BrendansHouse_2F_EventScript_1B69EB
 	end
 
 LittlerootTown_MaysHouse_2F_EventScript_1B69DF:: @ 81B69DF
 	lockall
-	setvar 0x8004, 1
+	setvar VAR_SPECIAL_4, 1
 	goto LittlerootTown_MaysHouse_2F_EventScript_1B69EB
 	end
 
@@ -64,7 +64,7 @@ LittlerootTown_MaysHouse_2F_EventScript_1B69EB:: @ 81B69EB
 	msgbox LittlerootTown_BrendansHouse_2F_Text_172E18, 4
 	call LittlerootTown_BrendansHouse_2F_EventScript_1B6A9B
 	delay 30
-	setvar 0x4092, 6
+	setvar VAR_LITTLEROOT_INTRO_STATE, 6
 	setflag FLAG_SET_WALL_CLOCK
 	setflag FLAG_HIDE_MACHOKE_MOVER_1
 	setflag FLAG_HIDE_MACHOKE_MOVER_2
@@ -74,33 +74,33 @@ LittlerootTown_MaysHouse_2F_EventScript_1B69EB:: @ 81B69EB
 	compare RESULT, 1
 	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_1B6A61
 	playse 9
-	removeobject 0x8008
+	removeobject VAR_SPECIAL_8
 	releaseall
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_1B6A31:: @ 81B6A31
-	setvar 0x8008, 14
-	addobject 0x8008
-	applymovement 0x8008, LittlerootTown_BrendansHouse_2F_Movement_1B6AA2
+	setvar VAR_SPECIAL_8, 14
+	addobject VAR_SPECIAL_8
+	applymovement VAR_SPECIAL_8, LittlerootTown_BrendansHouse_2F_Movement_1B6AA2
 	waitmovement 0
 	applymovement 255, LittlerootTown_BrendansHouse_2F_Movement_1A0843
 	waitmovement 0
 	msgbox LittlerootTown_BrendansHouse_2F_Text_172E4C, 4
 	closemessage
-	applymovement 0x8008, LittlerootTown_BrendansHouse_2F_Movement_1B6AA9
+	applymovement VAR_SPECIAL_8, LittlerootTown_BrendansHouse_2F_Movement_1B6AA9
 	waitmovement 0
 	return
 
 LittlerootTown_BrendansHouse_2F_EventScript_1B6A61:: @ 81B6A61
-	setvar 0x8008, 14
-	addobject 0x8008
-	applymovement 0x8008, LittlerootTown_BrendansHouse_2F_Movement_1B6AAD
+	setvar VAR_SPECIAL_8, 14
+	addobject VAR_SPECIAL_8
+	applymovement VAR_SPECIAL_8, LittlerootTown_BrendansHouse_2F_Movement_1B6AAD
 	waitmovement 0
 	applymovement 255, LittlerootTown_BrendansHouse_2F_Movement_1A083F
 	waitmovement 0
 	msgbox LittlerootTown_BrendansHouse_2F_Text_172E4C, 4
 	closemessage
-	applymovement 0x8008, LittlerootTown_BrendansHouse_2F_Movement_1B6AB4
+	applymovement VAR_SPECIAL_8, LittlerootTown_BrendansHouse_2F_Movement_1B6AB4
 	waitmovement 0
 	return
 
@@ -150,12 +150,12 @@ LittlerootTown_BrendansHouse_2F_Movement_1B6AB4:: @ 81B6AB4
 
 LittlerootTown_BrendansHouse_1F_EventScript_1B6AB8:: @ 81B6AB8
 LittlerootTown_MaysHouse_1F_EventScript_1B6AB8:: @ 81B6AB8
-	setvar 0x4092, 7
+	setvar VAR_LITTLEROOT_INTRO_STATE, 7
 	releaseall
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_1B6ABF:: @ 81B6ABF
-	applymovement 0x8005, LittlerootTown_BrendansHouse_1F_Movement_1A0843
+	applymovement VAR_SPECIAL_5, LittlerootTown_BrendansHouse_1F_Movement_1A0843
 	waitmovement 0
 	call LittlerootTown_BrendansHouse_1F_EventScript_1B6B9D
 	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_1B6CCC
@@ -163,7 +163,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1B6ABF:: @ 81B6ABF
 	playbgm 453, 0
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1725C9, 4
 	closemessage
-	applymovement 0x8005, LittlerootTown_BrendansHouse_1F_Movement_1B6BDB
+	applymovement VAR_SPECIAL_5, LittlerootTown_BrendansHouse_1F_Movement_1B6BDB
 	waitmovement 0
 	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_1B6CD2
 	waitmovement 0
@@ -173,14 +173,14 @@ LittlerootTown_BrendansHouse_1F_EventScript_1B6ABF:: @ 81B6ABF
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1725FE, 4
 	msgbox LittlerootTown_BrendansHouse_1F_Text_172644, 4
 	closemessage
-	setvar 0x4001, 1
-	applymovement 0x8005, LittlerootTown_BrendansHouse_1F_Movement_1B6BE1
+	setvar VAR_TEMP_1, 1
+	applymovement VAR_SPECIAL_5, LittlerootTown_BrendansHouse_1F_Movement_1B6BE1
 	waitmovement 0
 	goto LittlerootTown_BrendansHouse_1F_EventScript_1B6AB8
 	end
 
 LittlerootTown_MaysHouse_1F_EventScript_1B6B2E:: @ 81B6B2E
-	applymovement 0x8005, LittlerootTown_MaysHouse_1F_Movement_1A083F
+	applymovement VAR_SPECIAL_5, LittlerootTown_MaysHouse_1F_Movement_1A083F
 	waitmovement 0
 	call LittlerootTown_MaysHouse_1F_EventScript_1B6B9D
 	applymovement 255, LittlerootTown_MaysHouse_1F_Movement_1B6CD4
@@ -188,7 +188,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6B2E:: @ 81B6B2E
 	playbgm 453, 0
 	msgbox LittlerootTown_MaysHouse_1F_Text_1725C9, 4
 	closemessage
-	applymovement 0x8005, LittlerootTown_MaysHouse_1F_Movement_1B6BDE
+	applymovement VAR_SPECIAL_5, LittlerootTown_MaysHouse_1F_Movement_1B6BDE
 	waitmovement 0
 	applymovement 255, LittlerootTown_MaysHouse_1F_Movement_1B6CDA
 	waitmovement 0
@@ -198,8 +198,8 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6B2E:: @ 81B6B2E
 	msgbox LittlerootTown_MaysHouse_1F_Text_1725FE, 4
 	msgbox LittlerootTown_MaysHouse_1F_Text_172644, 4
 	closemessage
-	setvar 0x4001, 1
-	applymovement 0x8005, LittlerootTown_MaysHouse_1F_Movement_1B6BE5
+	setvar VAR_TEMP_1, 1
+	applymovement VAR_SPECIAL_5, LittlerootTown_MaysHouse_1F_Movement_1B6BE5
 	waitmovement 0
 	goto LittlerootTown_MaysHouse_1F_EventScript_1B6AB8
 	end
@@ -207,9 +207,9 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6B2E:: @ 81B6B2E
 LittlerootTown_BrendansHouse_1F_EventScript_1B6B9D:: @ 81B6B9D
 LittlerootTown_MaysHouse_1F_EventScript_1B6B9D:: @ 81B6B9D
 	playse 21
-	applymovement 0x8005, LittlerootTown_BrendansHouse_1F_Movement_1A0833
+	applymovement VAR_SPECIAL_5, LittlerootTown_BrendansHouse_1F_Movement_1A0833
 	waitmovement 0
-	applymovement 0x8005, LittlerootTown_BrendansHouse_1F_Movement_1A0835
+	applymovement VAR_SPECIAL_5, LittlerootTown_BrendansHouse_1F_Movement_1A0835
 	waitmovement 0
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1725A3, 4
 	closemessage
@@ -252,17 +252,17 @@ LittlerootTown_BrendansHouse_1F_EventScript_1B6BE9:: @ 81B6BE9
 LittlerootTown_MaysHouse_1F_EventScript_1B6BE9:: @ 81B6BE9
 	lock
 	faceplayer
-	compare 0x4082, 4
+	compare VAR_LITTLEROOT_HOUSES_STATE, 4
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1B6C33
-	compare 0x408c, 4
+	compare VAR_LITTLEROOT_HOUSES_STATE_2, 4
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1B6C33
 	checkflag FLAG_BADGE05_GET
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1B6C3D
 	checkflag FLAG_RESCUED_BIRCH
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1B6C72
-	compare 0x4001, 1
+	compare VAR_TEMP_1, 1
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1B6C80
-	compare 0x4092, 7
+	compare VAR_LITTLEROOT_INTRO_STATE, 7
 	goto_if 4, LittlerootTown_BrendansHouse_1F_EventScript_1B6C9C
 	msgbox LittlerootTown_BrendansHouse_1F_Text_172429, 4
 	release
@@ -366,85 +366,85 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6CDE:: @ 81B6CDE
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1B6DAD
 	compare RESULT, 1
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1B6DBD
-	compare 0x8008, 0
+	compare VAR_SPECIAL_8, 0
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1B6E1D
-	compare 0x8008, 1
+	compare VAR_SPECIAL_8, 1
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1B6E28
-	applymovement 0x8009, LittlerootTown_BrendansHouse_1F_Movement_1A0839
+	applymovement VAR_SPECIAL_9, LittlerootTown_BrendansHouse_1F_Movement_1A0839
 	waitmovement 0
 	playse 21
-	applymovement 0x8009, LittlerootTown_BrendansHouse_1F_Movement_1A0833
+	applymovement VAR_SPECIAL_9, LittlerootTown_BrendansHouse_1F_Movement_1A0833
 	waitmovement 0
-	applymovement 0x8009, LittlerootTown_BrendansHouse_1F_Movement_1A0835
+	applymovement VAR_SPECIAL_9, LittlerootTown_BrendansHouse_1F_Movement_1A0835
 	waitmovement 0
 	delay 20
-	compare 0x8008, 0
+	compare VAR_SPECIAL_8, 0
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1B6DCD
-	compare 0x8008, 1
+	compare VAR_SPECIAL_8, 1
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1B6DD8
 	msgbox LittlerootTown_BrendansHouse_1F_Text_17298B, 4
 	giveitem_std ITEM_SS_TICKET
 	msgbox LittlerootTown_BrendansHouse_1F_Text_172A7D, 4
 	closemessage
-	compare 0x8008, 0
+	compare VAR_SPECIAL_8, 0
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1B6DE3
-	compare 0x8008, 1
+	compare VAR_SPECIAL_8, 1
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1B6DEE
 	msgbox LittlerootTown_BrendansHouse_1F_Text_172B5E, 4
 	closemessage
-	compare 0x8008, 0
+	compare VAR_SPECIAL_8, 0
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1B6DF9
-	compare 0x8008, 1
+	compare VAR_SPECIAL_8, 1
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1B6E0B
 	playse 8
-	removeobject 0x8009
+	removeobject VAR_SPECIAL_9
 	setflag FLAG_RECEIVED_SS_TICKET
-	setvar 0x4082, 4
-	setvar 0x408c, 4
+	setvar VAR_LITTLEROOT_HOUSES_STATE, 4
+	setvar VAR_LITTLEROOT_HOUSES_STATE_2, 4
 	releaseall
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_1B6DAD:: @ 81B6DAD
-	setvar 0x8008, 0
-	setvar 0x8009, 5
-	setvar 0x800a, 1
+	setvar VAR_SPECIAL_8, 0
+	setvar VAR_SPECIAL_9, 5
+	setvar VAR_SPECIAL_A, 1
 	return
 
 LittlerootTown_BrendansHouse_1F_EventScript_1B6DBD:: @ 81B6DBD
-	setvar 0x8008, 1
-	setvar 0x8009, 5
-	setvar 0x800a, 1
+	setvar VAR_SPECIAL_8, 1
+	setvar VAR_SPECIAL_9, 5
+	setvar VAR_SPECIAL_A, 1
 	return
 
 LittlerootTown_BrendansHouse_1F_EventScript_1B6DCD:: @ 81B6DCD
-	applymovement 0x8009, LittlerootTown_BrendansHouse_1F_Movement_1B6E33
+	applymovement VAR_SPECIAL_9, LittlerootTown_BrendansHouse_1F_Movement_1B6E33
 	waitmovement 0
 	return
 
 LittlerootTown_BrendansHouse_1F_EventScript_1B6DD8:: @ 81B6DD8
-	applymovement 0x8009, LittlerootTown_BrendansHouse_1F_Movement_1B6E36
+	applymovement VAR_SPECIAL_9, LittlerootTown_BrendansHouse_1F_Movement_1B6E36
 	waitmovement 0
 	return
 
 LittlerootTown_BrendansHouse_1F_EventScript_1B6DE3:: @ 81B6DE3
-	applymovement 0x8009, LittlerootTown_BrendansHouse_1F_Movement_1B6E39
+	applymovement VAR_SPECIAL_9, LittlerootTown_BrendansHouse_1F_Movement_1B6E39
 	waitmovement 0
 	return
 
 LittlerootTown_BrendansHouse_1F_EventScript_1B6DEE:: @ 81B6DEE
-	applymovement 0x8009, LittlerootTown_BrendansHouse_1F_Movement_1B6E3B
+	applymovement VAR_SPECIAL_9, LittlerootTown_BrendansHouse_1F_Movement_1B6E3B
 	waitmovement 0
 	return
 
 LittlerootTown_BrendansHouse_1F_EventScript_1B6DF9:: @ 81B6DF9
 	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_1B6E4F
-	applymovement 0x8009, LittlerootTown_BrendansHouse_1F_Movement_1B6E3D
+	applymovement VAR_SPECIAL_9, LittlerootTown_BrendansHouse_1F_Movement_1B6E3D
 	waitmovement 0
 	return
 
 LittlerootTown_BrendansHouse_1F_EventScript_1B6E0B:: @ 81B6E0B
 	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_1B6E4F
-	applymovement 0x8009, LittlerootTown_BrendansHouse_1F_Movement_1B6E43
+	applymovement VAR_SPECIAL_9, LittlerootTown_BrendansHouse_1F_Movement_1B6E43
 	waitmovement 0
 	return
 

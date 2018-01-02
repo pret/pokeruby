@@ -3,7 +3,7 @@ Route121_SafariZoneEntrance_MapScripts:: @ 815C323
 	.byte 0
 
 Route121_SafariZoneEntrance_MapScript2_15C329:: @ 815C329
-	map_script_2 0x40a4, 1, Route121_SafariZoneEntrance_EventScript_15C333
+	map_script_2 VAR_SAFARI_ZONE_STATE, 1, Route121_SafariZoneEntrance_EventScript_15C333
 	.2byte 0
 
 Route121_SafariZoneEntrance_EventScript_15C333:: @ 815C333
@@ -11,7 +11,7 @@ Route121_SafariZoneEntrance_EventScript_15C333:: @ 815C333
 	applymovement 255, Route121_SafariZoneEntrance_Movement_15C348
 	waitmovement 0
 	special ExitSafariMode
-	setvar 0x40a4, 0
+	setvar VAR_SAFARI_ZONE_STATE, 0
 	releaseall
 	end
 
@@ -81,7 +81,7 @@ Route121_SafariZoneEntrance_EventScript_15C3B3:: @ 815C3B3
 	applymovement 255, Route121_SafariZoneEntrance_Movement_15C47E
 	waitmovement 0
 	special EnterSafariMode
-	setvar 0x40a4, 2
+	setvar VAR_SAFARI_ZONE_STATE, 2
 	warp MAP_SAFARI_ZONE_SOUTHEAST, 255, 32, 33
 	waitstate
 	end

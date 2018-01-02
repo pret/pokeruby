@@ -355,7 +355,7 @@ static u8 *TryGetInvisibleMapObjectScript(struct MapPosition *position, u8 unuse
     case 5:
     case 6:
     case 7:
-        gSpecialVar_0x8004 = ((u32)bgEvent->bgUnion.script >> 16) + 0x258;
+        gSpecialVar_0x8004 = ((u32)bgEvent->bgUnion.script >> 16) + FLAG_HIDDEN_ITEMS_START;
         gSpecialVar_0x8005 = (u32)bgEvent->bgUnion.script;
         if (FlagGet(gSpecialVar_0x8004) == TRUE)
             return NULL;
@@ -363,7 +363,7 @@ static u8 *TryGetInvisibleMapObjectScript(struct MapPosition *position, u8 unuse
     case 8:
         if (c == 2)
         {
-            gSpecialVar_0x8004 = (u32)bgEvent->bgUnion.script;
+            gSpecialVar_0x8004 = bgEvent->bgUnion.secretBaseId;
             if (sub_80BC050())
                 return gUnknown_081A2C51;
         }
@@ -493,7 +493,7 @@ bool8 sub_8068870(u16 a)
 
 bool8 sub_8068894(void)
 {
-    sub_8082B78();
+    IncrementRematchStepCounter();
     happiness_algorithm_step();
     if (overworld_poison_step() == TRUE)
     {

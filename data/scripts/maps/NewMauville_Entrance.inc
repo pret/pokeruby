@@ -4,7 +4,7 @@ NewMauville_Entrance_MapScripts:: @ 815E48A
 	.byte 0
 
 NewMauville_Entrance_MapScript1_15E495:: @ 815E495
-	compare 0x40ba, 0
+	compare VAR_NEW_MAUVILLE_STATE, 0
 	call_if 1, NewMauville_Entrance_EventScript_15E4A1
 	end
 
@@ -41,7 +41,7 @@ NewMauville_Entrance_EventScript_15E4DC:: @ 815E4DC
 	setmetatile 5, 1, 717, 1
 	special DrawWholeMapView
 	playse 20
-	setvar 0x40ba, 1
+	setvar VAR_NEW_MAUVILLE_STATE, 1
 	releaseall
 	end
 

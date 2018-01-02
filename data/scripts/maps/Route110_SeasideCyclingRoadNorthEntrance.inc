@@ -3,14 +3,14 @@ Route110_SeasideCyclingRoadNorthEntrance_MapScripts:: @ 81634C8
 	.byte 0
 
 Route110_SeasideCyclingRoadNorthEntrance_MapScript1_1634CE:: @ 81634CE
-	compare 0x40a9, 3
+	compare VAR_CYCLING_CHALLENGE_STATE, 3
 	call_if 1, Route110_SeasideCyclingRoadNorthEntrance_EventScript_1634E5
-	compare 0x40a9, 2
+	compare VAR_CYCLING_CHALLENGE_STATE, 2
 	call_if 1, Route110_SeasideCyclingRoadNorthEntrance_EventScript_1634E5
 	end
 
 Route110_SeasideCyclingRoadNorthEntrance_EventScript_1634E5:: @ 81634E5
-	setvar 0x40a9, 1
+	setvar VAR_CYCLING_CHALLENGE_STATE, 1
 	return
 
 Route110_SeasideCyclingRoadNorthEntrance_EventScript_1634EB:: @ 81634EB
@@ -29,13 +29,13 @@ Route110_SeasideCyclingRoadNorthEntrance_EventScript_1634F7:: @ 81634F7
 	compare RESULT, 0
 	goto_if_eq Route110_SeasideCyclingRoadNorthEntrance_EventScript_163523
 	setflag FLAG_SYS_CYCLING_ROAD
-	setvar 0x4001, 1
+	setvar VAR_TEMP_1, 1
 	releaseall
 	end
 
 Route110_SeasideCyclingRoadNorthEntrance_EventScript_16351D:: @ 816351D
 @ You're on the Mach Bike!
-	setvar 0x40a9, 1
+	setvar VAR_CYCLING_CHALLENGE_STATE, 1
 	return
 
 Route110_SeasideCyclingRoadNorthEntrance_EventScript_163523:: @ 8163523
@@ -54,8 +54,8 @@ Route110_SeasideCyclingRoadNorthEntrance_Movement_163538:: @ 8163538
 Route110_SeasideCyclingRoadNorthEntrance_EventScript_16353A:: @ 816353A
 @ Coord event directly in front of the gatesman heading right to left
 	lockall
-	setvar 0x40a9, 0
+	setvar VAR_CYCLING_CHALLENGE_STATE, 0
 	clearflag FLAG_SYS_CYCLING_ROAD
-	setvar 0x4001, 0
+	setvar VAR_TEMP_1, 0
 	releaseall
 	end

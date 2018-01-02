@@ -13,10 +13,10 @@ Route113_MapScript1_1505DA:: @ 81505DA
 	end
 
 Route113_EventScript_1505E5:: @ 81505E5
-	getplayerxy 0x4000, 0x4001
-	compare 0x4000, 19
+	getplayerxy VAR_TEMP_0, VAR_TEMP_1
+	compare VAR_TEMP_0, 19
 	goto_if 0, Route113_EventScript_150604
-	compare 0x4000, 84
+	compare VAR_TEMP_0, 84
 	goto_if 2, Route113_EventScript_150604
 	setweather 7
 	return
@@ -60,7 +60,7 @@ Route113_EventScript_150652:: @ 8150652
 
 Route113_EventScript_150669:: @ 8150669
 	trainerbattle 0, OPPONENT_MADELINE_1, 0, Route113_Text_1BBB27, Route113_Text_1BBB7A
-	specialvar RESULT, sub_8082C68
+	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
 	goto_if_eq Route113_EventScript_150690
 	msgbox Route113_Text_1BBB9A, 6
@@ -73,7 +73,7 @@ Route113_EventScript_150690:: @ 8150690
 
 Route113_EventScript_1506A7:: @ 81506A7
 	trainerbattle 0, OPPONENT_LAO_1, 0, Route113_Text_1BBC59, Route113_Text_1BBC90
-	specialvar RESULT, sub_8082C68
+	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
 	goto_if_eq Route113_EventScript_1506CE
 	msgbox Route113_Text_1BBCAB, 6

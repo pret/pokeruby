@@ -10,11 +10,11 @@ Route127_MapObjects:: @ 8384FA8
 	object_event 9, MAP_OBJ_GFX_BLACK_BELT, 0, 63, 0, 63, 0, 3, 1, 17, 0, 1, 0, 3, 0, Route127_EventScript_1520ED, 0, 0, 0
 
 Route127_MapBGEvents:: @ 8385080
-	bg_event 59, 67, 0, 8, 0, ITEM_ENERGY_ROOT, 0, 0
-	bg_event 59, 72, 0, 8, 0, ITEM_SITRUS_BERRY, 0, 0
-	bg_event 67, 63, 0, 8, 0, ITEM_WEPEAR_BERRY, 0, 0
-	bg_event 61, 21, 0, 8, 0, ITEM_FIGY_BERRY, 0, 0
-	bg_event 45, 24, 0, 8, 0, ITEM_GLITTER_MAIL, 0, 0
+	bg_secret_base_event 59, 67, 0, SECRET_BASE_RED_CAVE4_1
+	bg_secret_base_event 59, 72, 0, SECRET_BASE_YELLOW_CAVE3_2
+	bg_secret_base_event 67, 63, 0, SECRET_BASE_YELLOW_CAVE4_1
+	bg_secret_base_event 61, 21, 0, SECRET_BASE_YELLOW_CAVE3_3
+	bg_secret_base_event 45, 24, 0, SECRET_BASE_YELLOW_CAVE1_3
 
 Route127_MapEvents:: @ 83850BC
 	map_events Route127_MapObjects, 0x0, 0x0, Route127_MapBGEvents

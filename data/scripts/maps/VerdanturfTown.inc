@@ -4,7 +4,7 @@ VerdanturfTown_MapScripts:: @ 814E854
 
 VerdanturfTown_MapScript1_14E85A:: @ 814E85A
 	setflag FLAG_VISITED_VERDANTURF_TOWN
-	setvar 0x4086, 0
+	setvar VAR_LINK_CONTEST_ROOM_STATE, 0
 	setflag FLAG_HIDE_CONTEST_REPORTER_VERDANTURF
 	end
 

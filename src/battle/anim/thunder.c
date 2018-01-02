@@ -3,8 +3,8 @@
 #include "rom_8077ABC.h"
 
 extern s16 gBattleAnimArgs[8];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 extern u16 gBattleTypeFlags;
 
 static void sub_80D6218(struct Sprite *);
@@ -14,7 +14,7 @@ static void sub_80D6218(struct Sprite *);
 
 void sub_80D61C8(struct Sprite *sprite)
 {
-    if (GetBankSide(gBattleAnimBankAttacker) != 0)
+    if (GetBankSide(gAnimBankAttacker) != 0)
     {
         sprite->pos1.x -= gBattleAnimArgs[0];
     }
@@ -31,6 +31,6 @@ static void sub_80D6218(struct Sprite *sprite)
 {
     if (sprite->animEnded)
     {
-        move_anim_8072740(sprite);
+        DestroyAnimSprite(sprite);
     }
 }

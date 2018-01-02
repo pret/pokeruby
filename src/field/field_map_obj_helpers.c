@@ -7,13 +7,92 @@
 
 typedef void (*SpriteStepFunc)(struct Sprite *sprite, u8 dir);
 
-extern s16 gUnknown_08376194[];
-extern SpriteStepFunc *gUnknown_08376180[];
-extern s8 *gUnknown_083761D0[];
-extern s16 gUnknown_083761DC[];
-extern u8 gUnknown_083761E2[];
-extern s16 gUnknown_083761E6[];
-extern u8 gUnknown_083761EC[];
+void Step1(struct Sprite *sprite, u8 dir);
+void Step2(struct Sprite *sprite, u8 dir);
+void Step3(struct Sprite *sprite, u8 dir);
+void Step4(struct Sprite *sprite, u8 dir);
+void Step8(struct Sprite *sprite, u8 dir);
+
+const SpriteStepFunc Unknown_83760F0[] = {
+    Step1,
+    Step1,
+    Step1,
+    Step1,
+    Step1,
+    Step1,
+    Step1,
+    Step1,
+    Step1,
+    Step1,
+    Step1,
+    Step1,
+    Step1,
+    Step1,
+    Step1,
+    Step1
+};
+
+const SpriteStepFunc Unknown_8376130[] = {
+    Step2,
+    Step2,
+    Step2,
+    Step2,
+    Step2,
+    Step2,
+    Step2,
+    Step2
+};
+
+const SpriteStepFunc Unknown_8376150[] = {
+    Step2,
+    Step3,
+    Step3,
+    Step2,
+    Step3,
+    Step3
+};
+
+const SpriteStepFunc Unknown_8376168[] = {
+    Step4,
+    Step4,
+    Step4,
+    Step4
+};
+
+const SpriteStepFunc Unknown_8376178[] = {
+    Step8,
+    Step8
+};
+
+const SpriteStepFunc *const gUnknown_08376180[] = {
+    Unknown_83760F0,
+    Unknown_8376130,
+    Unknown_8376150,
+    Unknown_8376168,
+    Unknown_8376178
+};
+
+const s16 gUnknown_08376194[] = {
+    16, 8, 6, 4, 2
+};
+
+const s8 Unknown_837619E[] = {
+     -4,  -6,  -8, -10, -11, -12, -12, -12, -11, -10,  -9,  -8,  -6,  -4,   0,   0
+};
+
+const s8 Unknown_83761AE[] = {
+      0,  -2,  -3,  -4,  -5,  -6,  -6,  -6,  -5,  -5,  -4,  -3,  -2,   0,   0,   0
+};
+
+const s8 Unknown_83761BE[] = {
+     -2,  -4,  -6,  -8,  -9, -10, -10, -10,  -9,  -8,  -6,  -5,  -3,  -2,   0,   0
+};
+
+const s8 *const gUnknown_083761D0[] = {
+    Unknown_837619E,
+    Unknown_83761AE,
+    Unknown_83761BE
+};
 
 bool8 FreezeMapObject(struct MapObject *mapObject)
 {
@@ -156,14 +235,9 @@ void sub_80646E4(struct Sprite *sprite, u8 a2, u8 a3, u8 a4)
 
 u8 sub_8064704(struct Sprite *sprite)
 {
-    u8 v2;
-    s16 v5[3];
-    u8 v6[3];
-
-    memcpy(v5, gUnknown_083761DC, 6);
-    memcpy(v6, gUnknown_083761E2, 3);
-
-    v2 = 0;
+    s16 v5[3] = {0x10, 0x10, 0x20};
+    u8 v6[3] = {0, 0, 1};
+    u8 v2 = 0;
 
     if (sprite->data[4])
         Step1(sprite, sprite->data[3]);
@@ -186,14 +260,9 @@ u8 sub_8064704(struct Sprite *sprite)
 
 u8 sub_806478C(struct Sprite *sprite)
 {
-    u8 v2;
-    s16 v5[3];
-    u8 v6[3];
-
-    memcpy(v5, gUnknown_083761E6, 6);
-    memcpy(v6, gUnknown_083761EC, 3);
-
-    v2 = 0;
+    s16 v5[3] = {0x20, 0x20, 0x40};
+    u8 v6[3] = {1, 1, 2};
+    u8 v2 = 0;
 
     if (sprite->data[4] && !(sprite->data[6] & 1))
         Step1(sprite, sprite->data[3]);

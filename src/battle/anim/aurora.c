@@ -6,8 +6,8 @@
 #include "task.h"
 
 extern s16 gBattleAnimArgs[8];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 static void sub_80D344C(struct Sprite *);
 static void sub_80D34D4(u8);
@@ -17,15 +17,15 @@ void sub_80D33B4(struct Sprite *sprite)
     s16 r6;
 
     sub_80787B0(sprite, 1);
-    if (GetBankSide(gBattleAnimBankAttacker) != 0)
+    if (GetBankSide(gAnimBankAttacker) != 0)
         r6 = -gBattleAnimArgs[2];
     else
         r6 = gBattleAnimArgs[2];
     sprite->data[0] = gBattleAnimArgs[4];
     sprite->data[1] = sprite->pos1.x;
-    sprite->data[2] = sub_8077ABC(gBattleAnimBankTarget, 2) + r6;
+    sprite->data[2] = GetBankPosition(gAnimBankTarget, 2) + r6;
     sprite->data[3] = sprite->pos1.y;
-    sprite->data[4] = sub_8077ABC(gBattleAnimBankTarget, 3) + gBattleAnimArgs[3];
+    sprite->data[4] = GetBankPosition(gAnimBankTarget, 3) + gBattleAnimArgs[3];
     obj_translate_based_on_private_1_2_3_4(sprite);
     sprite->callback = sub_80D344C;
     sprite->affineAnimPaused = TRUE;
@@ -40,7 +40,7 @@ static void sub_80D344C(struct Sprite *sprite)
         sprite->affineAnimPaused = FALSE;
     }
     if (sub_8078B5C(sprite) != 0)
-        move_anim_8072740(sprite);
+        DestroyAnimSprite(sprite);
 }
 
 void sub_80D3490(u8 taskId)

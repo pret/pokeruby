@@ -1,7 +1,7 @@
 PetalburgWoods_MapObjects:: @ 838C14C
 	object_event 1, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 19, 0, 10, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_CuttableTree, FLAG_TEMP_11, 0, 0
 	object_event 2, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 19, 0, 11, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_CuttableTree, FLAG_TEMP_12, 0, 0
-	object_event 3, 241, 0, 26, 0, 17, 0, 3, 10, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_EVIL_TEAM_PETALBURG_WOODS, 0, 0
+	object_event 3, MAP_OBJ_GFX_VAR_1, 0, 26, 0, 17, 0, 3, 10, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_EVIL_TEAM_PETALBURG_WOODS, 0, 0
 	object_event 4, MAP_OBJ_GFX_MAN_2, 0, 26, 0, 20, 0, 3, 1, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_DEVON_PETALBURG_WOODS, 0, 0
 	object_event 5, MAP_OBJ_GFX_ITEM_BALL, 0, 45, 0, 7, 0, 3, 8, 0, 0, 0, 0, 0, 0, PetalburgWoods_EventScript_1B175F, FLAG_ITEM_PETALBURG_WOODS_2, 0, 0
 	object_event 6, MAP_OBJ_GFX_ITEM_BALL, 0, 35, 0, 20, 0, 3, 8, 0, 0, 0, 0, 0, 0, PetalburgWoods_EventScript_1B1752, FLAG_ITEM_PETALBURG_WOODS_1, 0, 0
@@ -22,15 +22,15 @@ PetalburgWoods_MapWarps:: @ 838C284
 	warp_def 37, 38, 0, 7, MAP_ROUTE104
 
 PetalburgWoods_MapCoordEvents:: @ 838C2B4
-	coord_event 26, 23, 3, 0, 0x4098, 0, 0, PetalburgWoods_EventScript_15CCA8
-	coord_event 27, 23, 3, 0, 0x4098, 0, 0, PetalburgWoods_EventScript_15CD42
+	coord_event 26, 23, 3, 0, VAR_PETALBURG_WOODS_STATE, 0, 0, PetalburgWoods_EventScript_15CCA8
+	coord_event 27, 23, 3, 0, VAR_PETALBURG_WOODS_STATE, 0, 0, PetalburgWoods_EventScript_15CD42
 
 PetalburgWoods_MapBGEvents:: @ 838C2D4
 	bg_event 14, 32, 3, 0, 0, PetalburgWoods_EventScript_15CF15
-	bg_event 39, 35, 3, 7, 0, ITEM_POTION, 58, 0
-	bg_event 26, 6, 3, 7, 0, ITEM_TINY_MUSHROOM, 59, 0
-	bg_event 40, 29, 3, 7, 0, ITEM_TINY_MUSHROOM, 60, 0
-	bg_event 4, 19, 3, 7, 0, ITEM_POKE_BALL, 61, 0
+	bg_hidden_item_event 39, 35, 3, ITEM_POTION, FLAG_HIDDEN_ITEM_3A
+	bg_hidden_item_event 26, 6, 3, ITEM_TINY_MUSHROOM, FLAG_HIDDEN_ITEM_3B
+	bg_hidden_item_event 40, 29, 3, ITEM_TINY_MUSHROOM, FLAG_HIDDEN_ITEM_3C
+	bg_hidden_item_event 4, 19, 3, ITEM_POKE_BALL, FLAG_HIDDEN_ITEM_3D
 	bg_event 11, 8, 3, 0, 0, PetalburgWoods_EventScript_15CF1E
 
 PetalburgWoods_MapEvents:: @ 838C31C

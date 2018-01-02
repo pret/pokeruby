@@ -5,8 +5,8 @@
 #include "sound.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 // drum (using hands to slap the Pokemon's belly in a rhythm.)
 // Used in Belly Drum.
@@ -24,9 +24,9 @@ void sub_80CEDF0(struct Sprite* sprite)
         a = -16;
     }
 
-    sprite->pos1.x = sub_8077ABC(gBattleAnimBankAttacker, 2) + a;
-    sprite->pos1.y = sub_8077ABC(gBattleAnimBankAttacker, 3) + 8;
+    sprite->pos1.x = GetBankPosition(gAnimBankAttacker, 2) + a;
+    sprite->pos1.y = GetBankPosition(gAnimBankAttacker, 3) + 8;
     sprite->data[0] = 8;
     sprite->callback = sub_80782D8;
-    StoreSpriteCallbackInData(sprite, move_anim_8072740);
+    StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }

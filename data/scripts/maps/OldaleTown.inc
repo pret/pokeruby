@@ -14,7 +14,7 @@ OldaleTown_MapScript1_14DD68:: @ 814DD68
 	end
 
 OldaleTown_EventScript_14DD8C:: @ 814DD8C
-	setvar 0x4051, 1
+	setvar VAR_ROUTE102_ACCESSIBLE, 1
 	return
 
 OldaleTown_EventScript_14DD92:: @ 814DD92
@@ -278,7 +278,7 @@ OldaleTown_EventScript_14DFC6:: @ 814DFC6
 	applymovement 4, OldaleTown_Movement_14DFE5
 	waitmovement 0
 	removeobject 4
-	setvar 0x40c7, 2
+	setvar VAR_OLDALE_STATE, 2
 	setflag FLAG_HIDE_RIVAL_OLDALE_TOWN
 	releaseall
 	end

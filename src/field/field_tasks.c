@@ -554,20 +554,20 @@ const u16 gUnknown_083763E4[] = {
     0,
     0,
     0,
-    VAR_0x4001,
-    VAR_0x4002,
-    VAR_0x4003,
-    VAR_0x4004,
+    VAR_TEMP_1,
+    VAR_TEMP_2,
+    VAR_TEMP_3,
+    VAR_TEMP_4,
     0,
     0,
-    VAR_0x4005,
-    VAR_0x4006,
-    VAR_0x4007,
+    VAR_TEMP_5,
+    VAR_TEMP_6,
+    VAR_TEMP_7,
     0,
     0,
-    VAR_0x4008,
-    VAR_0x4009,
-    VAR_0x400A,
+    VAR_TEMP_8,
+    VAR_TEMP_9,
+    VAR_TEMP_A,
     0,
     0,
     0,
@@ -608,14 +608,14 @@ bool32 sub_8069D34(s16 x, s16 y)
     return FALSE;
 }
 
-void sub_8069D78(void)
+void SetSootopolisGymCrackedIceMetatiles(void)
 {
     s32 x, y;
     s32 width = gMapHeader.mapData->width;
     s32 height = gMapHeader.mapData->height;
-    for (x=0; x<width; x++)
+    for (x = 0; x < width; x++)
     {
-        for (y=0; y<height; y++)
+        for (y = 0; y < height; y++)
         {
             if (sub_8069D34(x, y) == TRUE)
             {

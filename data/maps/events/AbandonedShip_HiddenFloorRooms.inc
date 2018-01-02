@@ -16,10 +16,10 @@ AbandonedShip_HiddenFloorRooms_MapWarps:: @ 838E5A0
 	warp_def 36, 1, 3, 5, MAP_ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS
 
 AbandonedShip_HiddenFloorRooms_MapBGEvents:: @ 838E5E8
-	bg_event 42, 10, 3, 7, 0, ITEM_ROOM_1_KEY, 31, 0
-	bg_event 20, 5, 3, 7, 0, ITEM_ROOM_2_KEY, 32, 0
-	bg_event 1, 12, 3, 7, 0, ITEM_ROOM_4_KEY, 33, 0
-	bg_event 1, 2, 0, 7, 0, ITEM_ROOM_6_KEY, 34, 0
+	bg_hidden_item_event 42, 10, 3, ITEM_ROOM_1_KEY, FLAG_HIDDEN_ITEM_1F
+	bg_hidden_item_event 20, 5, 3, ITEM_ROOM_2_KEY, FLAG_HIDDEN_ITEM_20
+	bg_hidden_item_event 1, 12, 3, ITEM_ROOM_4_KEY, FLAG_HIDDEN_ITEM_21
+	bg_hidden_item_event 1, 2, 0, ITEM_ROOM_6_KEY, FLAG_HIDDEN_ITEM_22
 	bg_event 8, 5, 3, 0, 0, AbandonedShip_HiddenFloorRooms_EventScript_15EEAB
 	bg_event 11, 3, 3, 0, 0, AbandonedShip_HiddenFloorRooms_EventScript_15EEAB
 	bg_event 10, 10, 3, 0, 0, AbandonedShip_HiddenFloorRooms_EventScript_15EEAB

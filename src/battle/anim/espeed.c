@@ -5,8 +5,8 @@
 #include "sound.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 extern s8 gUnknown_083D7A00[4][2];
 
@@ -51,7 +51,7 @@ void sub_80D1638(u8 taskId)
     task->data[2] = 0;
     task->data[3] = 0;
     task->data[12] = 3;
-    if (GetBankSide(gBattleAnimBankTarget) == 0)
+    if (GetBankSide(gAnimBankTarget) == 0)
     {
         task->data[13] = 0xFFFF;
         task->data[14] = 8;
@@ -169,8 +169,8 @@ void sub_80D18D4(u8 taskId)
     task->data[7] = 0;
     task->data[8] = 0;
     task->data[13] = 0;
-    task->data[14] = sub_8077ABC(gBattleAnimBankAttacker, 0);
-    task->data[15] = sub_8077ABC(gBattleAnimBankAttacker, 1);
+    task->data[14] = GetBankPosition(gAnimBankAttacker, 0);
+    task->data[15] = GetBankPosition(gAnimBankAttacker, 1);
     task->func = sub_80D1930;
 }
 

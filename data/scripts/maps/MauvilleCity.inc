@@ -7,7 +7,7 @@ MauvilleCity_MapScript1_14C038:: @ 814C038
 	clearflag FLAG_HIDE_OCEANIC_MUSEUM_VISITORS
 	setflag FLAG_SYS_TV_START
 	clearflag FLAG_MAUVILLE_GYM_BARRIERS_STATE
-	setvar 0x4093, 0
+	setvar VAR_MAUVILLE_GYM_STATE, 0
 	checkflag FLAG_RECEIVED_TM24
 	call_if 1, MauvilleCity_EventScript_14C053
 	end
@@ -286,7 +286,7 @@ MauvilleCity_EventScript_14C2F2:: @ 814C2F2
 	faceplayer
 	checkflag FLAG_RECEIVED_TM24
 	goto_if_eq MauvilleCity_EventScript_14C368
-	compare 0x40ba, 2
+	compare VAR_NEW_MAUVILLE_STATE, 2
 	goto_if_eq MauvilleCity_EventScript_14C33C
 	checkflag FLAG_RECEIVED_BASEMENT_KEY
 	goto_if_eq MauvilleCity_EventScript_14C332

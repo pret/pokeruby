@@ -24,23 +24,23 @@ FallarborTown_House2_EventScript_153CB6:: @ 8153CB6
 
 FallarborTown_House2_EventScript_153CE4:: @ 8153CE4
 	msgbox FallarborTown_House2_Text_177C3F, 4
-	special sub_80F9A4C
+	special SelectMoveTutorMon
 	waitstate
-	compare 0x8004, 255
+	compare VAR_SPECIAL_4, 255
 	goto_if_eq FallarborTown_House2_EventScript_153D60
-	special sub_80FA148
+	special IsSelectedMonEgg
 	compare RESULT, 1
 	goto_if_eq FallarborTown_House2_EventScript_153D52
-	compare 0x8005, 0
+	compare VAR_SPECIAL_5, 0
 	goto_if_eq FallarborTown_House2_EventScript_153D44
 	goto FallarborTown_House2_EventScript_153D1A
 	end
 
 FallarborTown_House2_EventScript_153D1A:: @ 8153D1A
 	msgbox FallarborTown_House2_Text_177C5D, 4
-	special sub_8132670
+	special TeachMoveTutorMove
 	waitstate
-	compare 0x8004, 0
+	compare VAR_SPECIAL_4, 0
 	goto_if_eq FallarborTown_House2_EventScript_153CE4
 	msgbox FallarborTown_House2_Text_177CC3, 4
 	takeitem ITEM_HEART_SCALE, 1

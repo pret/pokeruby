@@ -4,7 +4,7 @@ MtChimney_CableCarStation_MapScripts:: @ 815C0FA
 	.byte 0
 
 MtChimney_CableCarStation_MapScript1_15C105:: @ 815C105
-	compare 0x40a3, 1
+	compare VAR_CABLE_CAR_STATION_STATE, 1
 	call_if 1, MtChimney_CableCarStation_EventScript_15C111
 	end
 
@@ -14,7 +14,7 @@ MtChimney_CableCarStation_EventScript_15C111:: @ 815C111
 	return
 
 MtChimney_CableCarStation_MapScript2_15C11D:: @ 815C11D
-	map_script_2 0x40a3, 1, MtChimney_CableCarStation_EventScript_15C127
+	map_script_2 VAR_CABLE_CAR_STATION_STATE, 1, MtChimney_CableCarStation_EventScript_15C127
 	.2byte 0
 
 MtChimney_CableCarStation_EventScript_15C127:: @ 815C127
@@ -22,7 +22,7 @@ MtChimney_CableCarStation_EventScript_15C127:: @ 815C127
 	applymovement 255, MtChimney_CableCarStation_Movement_15C1B4
 	applymovement 1, MtChimney_CableCarStation_Movement_15C1AA
 	waitmovement 0
-	setvar 0x40a3, 0
+	setvar VAR_CABLE_CAR_STATION_STATE, 0
 	setobjectxyperm 1, 6, 7
 	setobjectmovementtype 1, 8
 	releaseall
@@ -44,8 +44,8 @@ MtChimney_CableCarStation_EventScript_15C16C:: @ 815C16C
 	applymovement 1, MtChimney_CableCarStation_Movement_15C1A5
 	applymovement 255, MtChimney_CableCarStation_Movement_15C1AF
 	waitmovement 0
-	setvar 0x8004, 1
-	setvar 0x40a3, 2
+	setvar VAR_SPECIAL_4, 1
+	setvar VAR_CABLE_CAR_STATION_STATE, 2
 	incrementgamestat GAME_STAT_RODE_CABLE_CAR
 	special CableCarWarp
 	special sub_8123218

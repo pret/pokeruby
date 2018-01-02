@@ -6,8 +6,8 @@
 #include "trig.h"
 
 extern s16 gBattleAnimArgs[8];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 extern const struct SpriteTemplate gSpriteTemplate_83D9130[];
 
 static void sub_80D35DC(struct Sprite *);
@@ -24,9 +24,9 @@ void sub_80D3554(struct Sprite *sprite)
 
     sprite->data[0] = 30;
     sprite->data[1] = sprite->pos1.x;
-    sprite->data[2] = sub_8077ABC(gBattleAnimBankTarget, 2);
+    sprite->data[2] = GetBankPosition(gAnimBankTarget, 2);
     sprite->data[3] = sprite->pos1.y;
-    sprite->data[4] = sub_8077ABC(gBattleAnimBankTarget, 3);
+    sprite->data[4] = GetBankPosition(gAnimBankTarget, 3);
 
     obj_translate_based_on_private_1_2_3_4(sprite);
 
@@ -51,7 +51,7 @@ static void sub_80D35DC(struct Sprite *sprite)
 {
     if (sub_8078B5C(sprite))
     {
-        move_anim_8072740(sprite);
+        DestroyAnimSprite(sprite);
     }
 
     sprite->pos2.y += Sin(sprite->data[6] >> 8, sprite->data[7]);
@@ -86,15 +86,15 @@ void sub_80D3698(struct Sprite *sprite)
 {
     u8 subpriority;
 
-    sprite->pos1.x = sub_8077ABC(gBattleAnimBankAttacker, 0);
-    sprite->pos1.y = sub_8077ABC(gBattleAnimBankAttacker, 1);
+    sprite->pos1.x = GetBankPosition(gAnimBankAttacker, 0);
+    sprite->pos1.y = GetBankPosition(gAnimBankAttacker, 1);
     sprite->pos2.y = -10;
 
-    subpriority = sub_8079E90(gBattleAnimBankAttacker);
+    subpriority = sub_8079E90(gAnimBankAttacker);
 
-    if (!NotInBattle())
+    if (!IsContest())
     {
-        if (GetBankSide(gBattleAnimBankAttacker) == 0)
+        if (GetBankSide(gAnimBankAttacker) == 0)
         {
             sprite->pos2.x = 10;
             sprite->subpriority = subpriority + 2;
@@ -118,7 +118,7 @@ static void sub_80D370C(struct Sprite *sprite)
 {
     if (sprite->affineAnimEnded)
     {
-        move_anim_8072740(sprite);
+        DestroyAnimSprite(sprite);
     }
 }
 
@@ -126,11 +126,11 @@ void sub_80D3728(struct Sprite *sprite)
 {
     int var1, var2;
 
-    if (GetBankSide(gBattleAnimBankAttacker) == GetBankSide(gBattleAnimBankTarget))
+    if (GetBankSide(gAnimBankAttacker) == GetBankSide(gAnimBankTarget))
     {
         gBattleAnimArgs[0] *= -1;
 
-        if (GetBankIdentity(gBattleAnimBankAttacker) == 0 || GetBankIdentity(gBattleAnimBankAttacker) == 1)
+        if (GetBankIdentity(gAnimBankAttacker) == 0 || GetBankIdentity(gAnimBankAttacker) == 1)
         {
             gBattleAnimArgs[0] *= -1;
         }
@@ -149,14 +149,14 @@ void sub_80D3728(struct Sprite *sprite)
 
     sub_80787B0(sprite, var1);
 
-    if (GetBankSide(gBattleAnimBankAttacker) != 0)
+    if (GetBankSide(gAnimBankAttacker) != 0)
     {
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
     }
 
     sprite->data[0] = gBattleAnimArgs[4];
-    sprite->data[2] = sub_8077ABC(gBattleAnimBankTarget, 2) + gBattleAnimArgs[2];
-    sprite->data[4] = sub_8077ABC(gBattleAnimBankTarget, var2) + gBattleAnimArgs[3];
+    sprite->data[2] = GetBankPosition(gAnimBankTarget, 2) + gBattleAnimArgs[2];
+    sprite->data[4] = GetBankPosition(gAnimBankTarget, var2) + gBattleAnimArgs[3];
     sprite->callback = sub_8078B34;
-    StoreSpriteCallbackInData(sprite, move_anim_8072740);
+    StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }

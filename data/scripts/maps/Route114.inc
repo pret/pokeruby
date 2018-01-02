@@ -87,7 +87,7 @@ Route114_EventScript_150836:: @ 8150836
 
 Route114_EventScript_15084D:: @ 815084D
 	trainerbattle 0, OPPONENT_STEVE_1, 0, Route114_Text_1BC2F5, Route114_Text_1BC327
-	specialvar RESULT, sub_8082C68
+	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
 	goto_if_eq Route114_EventScript_150874
 	msgbox Route114_Text_1BC337, 6
@@ -100,7 +100,7 @@ Route114_EventScript_150874:: @ 8150874
 
 Route114_EventScript_15088B:: @ 815088B
 	trainerbattle 0, OPPONENT_BERNIE_1, 0, Route114_Text_1BC45A, Route114_Text_1BC499
-	specialvar RESULT, sub_8082C68
+	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
 	goto_if_eq Route114_EventScript_1508B2
 	msgbox Route114_Text_1BC4B5, 6

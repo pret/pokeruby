@@ -112,10 +112,10 @@ bool32 CanResetRTC(void)
 
 u16 *GetVarPointer(u16 id)
 {
-    if (id < 0x4000)
+    if (id < VARS_START)
         return NULL;
     if (id < 0x8000)
-        return &gSaveBlock1.vars[id - 0x4000];
+        return &gSaveBlock1.vars[id - VARS_START];
     return gSpecialVars[id - 0x8000];
 }
 
@@ -138,7 +138,7 @@ bool8 VarSet(u16 id, u16 value)
 
 u8 VarGetFieldObjectGraphicsId(u8 id)
 {
-    return VarGet(0x4010 + id);
+    return VarGet(VAR_OBJ_GFX_ID_0 + id);
 }
 
 u8 *GetFlagPointer(u16 id)

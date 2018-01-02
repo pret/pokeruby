@@ -5,7 +5,7 @@ LittlerootTown_BrendansHouse_1F_MapScripts:: @ 815263B
 	.byte 0
 
 LittlerootTown_BrendansHouse_1F_MapScript1_15264B:: @ 815264B
-	compare 0x4092, 6
+	compare VAR_LITTLEROOT_INTRO_STATE, 6
 	call_if 0, LittlerootTown_BrendansHouse_1F_EventScript_152660
 	checkflag FLAG_RECEIVED_RUNNING_SHOES
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_152673
@@ -27,11 +27,11 @@ LittlerootTown_BrendansHouse_1F_EventScript_152680:: @ 8152680
 	return
 
 LittlerootTown_BrendansHouse_1F_MapScript1_15268A:: @ 815268A
-	compare 0x4092, 3
+	compare VAR_LITTLEROOT_INTRO_STATE, 3
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1526C4
-	compare 0x4092, 5
+	compare VAR_LITTLEROOT_INTRO_STATE, 5
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1526AC
-	compare 0x4092, 6
+	compare VAR_LITTLEROOT_INTRO_STATE, 6
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1526B8
 	end
 
@@ -51,11 +51,11 @@ LittlerootTown_BrendansHouse_1F_EventScript_1526C4:: @ 81526C4
 	return
 
 LittlerootTown_BrendansHouse_1F_MapScript2_1526D0:: @ 81526D0
-	map_script_2 0x4092, 3, LittlerootTown_BrendansHouse_1F_EventScript_152722
-	map_script_2 0x4092, 5, LittlerootTown_BrendansHouse_1F_EventScript_1526FA
-	map_script_2 0x4092, 6, LittlerootTown_BrendansHouse_1F_EventScript_152733
-	map_script_2 0x4082, 1, LittlerootTown_BrendansHouse_1F_EventScript_152744
-	map_script_2 0x4082, 3, LittlerootTown_BrendansHouse_1F_EventScript_1B6CDE
+	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 3, LittlerootTown_BrendansHouse_1F_EventScript_152722
+	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 5, LittlerootTown_BrendansHouse_1F_EventScript_1526FA
+	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 6, LittlerootTown_BrendansHouse_1F_EventScript_152733
+	map_script_2 VAR_LITTLEROOT_HOUSES_STATE, 1, LittlerootTown_BrendansHouse_1F_EventScript_152744
+	map_script_2 VAR_LITTLEROOT_HOUSES_STATE, 3, LittlerootTown_BrendansHouse_1F_EventScript_1B6CDE
 	.2byte 0
 
 LittlerootTown_BrendansHouse_1F_EventScript_1526FA:: @ 81526FA
@@ -76,15 +76,15 @@ LittlerootTown_BrendansHouse_1F_Movement_152720:: @ 8152720
 
 LittlerootTown_BrendansHouse_1F_EventScript_152722:: @ 8152722
 	lockall
-	setvar 0x8004, 1
-	setvar 0x8005, 0
+	setvar VAR_SPECIAL_4, 1
+	setvar VAR_SPECIAL_5, 0
 	goto LittlerootTown_BrendansHouse_1F_EventScript_1B6956
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_152733:: @ 8152733
 	lockall
-	setvar 0x8004, 0
-	setvar 0x8005, 1
+	setvar VAR_SPECIAL_4, 0
+	setvar VAR_SPECIAL_5, 1
 	goto LittlerootTown_BrendansHouse_1F_EventScript_1B6ABF
 	end
 
@@ -101,7 +101,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_152744:: @ 8152744
 	special GetRivalSonDaughterString
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1730C2, 4
 	setflag FLAG_MET_RIVAL_MOM
-	setvar 0x4082, 2
+	setvar VAR_LITTLEROOT_HOUSES_STATE, 2
 	releaseall
 	end
 
@@ -116,9 +116,9 @@ LittlerootTown_BrendansHouse_1F_Movement_152782:: @ 8152782
 
 LittlerootTown_BrendansHouse_1F_EventScript_152789:: @ 8152789
 	lockall
-	setvar 0x8004, 1
-	setvar 0x8005, 0
-	applymovement 0x8004, LittlerootTown_BrendansHouse_1F_Movement_1A083F
+	setvar VAR_SPECIAL_4, 1
+	setvar VAR_SPECIAL_5, 0
+	applymovement VAR_SPECIAL_4, LittlerootTown_BrendansHouse_1F_Movement_1A083F
 	waitmovement 0
 	goto LittlerootTown_BrendansHouse_1F_EventScript_1B69B7
 	end

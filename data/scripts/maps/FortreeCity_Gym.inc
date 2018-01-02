@@ -8,7 +8,7 @@ FortreeCity_Gym_MapScript1_157EDE:: @ 8157EDE
 	end
 
 FortreeCity_Gym_MapScript2_157EE2:: @ 8157EE2
-	map_script_2 0x4000, 16384, FortreeCity_Gym_EventScript_157EEC
+	map_script_2 VAR_TEMP_0, 16384, FortreeCity_Gym_EventScript_157EEC
 	.2byte 0
 
 FortreeCity_Gym_EventScript_157EEC:: @ 8157EEC
@@ -30,7 +30,7 @@ FortreeCity_Gym_EventScript_157F15:: @ 8157F15
 	msgbox FortreeCity_Gym_Text_185E73, 4
 	setflag FLAG_DEFEATED_FORTREE_GYM
 	setflag FLAG_BADGE06_GET
-	setvar 0x8008, 6
+	setvar VAR_SPECIAL_8, 6
 	call FortreeCity_Gym_EventScript_1A01C0
 	goto FortreeCity_Gym_EventScript_157F3E
 	end

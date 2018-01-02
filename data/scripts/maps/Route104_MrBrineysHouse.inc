@@ -4,7 +4,7 @@ Route104_MrBrineysHouse_MapScripts:: @ 815BCB2
 
 Route104_MrBrineysHouse_MapScript1_15BCB8:: @ 815BCB8
 	setflag FLAG_LANDMARK_MR_BRINEY_HOUSE
-	compare 0x4090, 1
+	compare VAR_BRINEY_HOUSE_STATE, 1
 	call_if 1, Route104_MrBrineysHouse_EventScript_15BCD4
 	checkflag FLAG_RECEIVED_POKENAV
 	call_if 1, Route104_MrBrineysHouse_EventScript_15BCD0
@@ -79,7 +79,7 @@ Route104_MrBrineysHouse_EventScript_15BDA1:: @ 815BDA1
 Route104_MrBrineysHouse_EventScript_15BDAB:: @ 815BDAB
 	msgbox Route104_MrBrineysHouse_Text_191BFD, 4
 	call Route104_MrBrineysHouse_EventScript_1A010C
-	setvar 0x408e, 1
+	setvar VAR_BOARD_BRINEY_BOAT_ROUTE104_STATE, 1
 	clearflag FLAG_HIDE_MR_BRINEY_ROUTE104
 	setflag FLAG_HIDE_MR_BRINEY_ROUTE104_HOUSE
 	setflag FLAG_HIDE_PEEKO_BRINEY_HOUSE

@@ -6,8 +6,8 @@
 #include "trig.h"
 
 extern s16 gBattleAnimArgs[8];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 extern u16 gBattleTypeFlags;
 extern u8 gUnknown_0202F7D2;
 
@@ -25,7 +25,7 @@ void sub_80D5B0C(struct Sprite *sprite)
         StartSpriteAnim(sprite, gBattleAnimArgs[2]);
         sprite->data[7] = gBattleAnimArgs[2];
 
-        if (GetBankSide(gBattleAnimBankAttacker) != 0)
+        if (GetBankSide(gAnimBankAttacker) != 0)
         {
             sprite->data[4] = 4;
         }
@@ -34,12 +34,12 @@ void sub_80D5B0C(struct Sprite *sprite)
             sprite->data[4] = -4;
         }
 
-        sprite->oam.priority = sub_8079ED4(gBattleAnimBankTarget);
+        sprite->oam.priority = sub_8079ED4(gAnimBankTarget);
         sprite->data[0]++;
         break;
     case 1:
         sprite->data[1] += 192;
-        if (GetBankSide(gBattleAnimBankAttacker) != 0)
+        if (GetBankSide(gAnimBankAttacker) != 0)
         {
             sprite->pos2.y = -(sprite->data[1] >> 8);
         }
@@ -70,9 +70,9 @@ void sub_80D5B0C(struct Sprite *sprite)
 
             sprite->data[0] = 256;
             sprite->data[1] = sprite->pos1.x;
-            sprite->data[2] = sub_8077ABC(gBattleAnimBankTarget, 2);
+            sprite->data[2] = GetBankPosition(gAnimBankTarget, 2);
             sprite->data[3] = sprite->pos1.y;
-            sprite->data[4] = sub_8077ABC(gBattleAnimBankTarget, 3);
+            sprite->data[4] = GetBankPosition(gAnimBankTarget, 3);
 
             sub_8078BD4(sprite);
             sprite->callback = sub_80D5C5C;
@@ -100,6 +100,6 @@ static void sub_80D5C5C(struct Sprite *sprite)
     }
     else
     {
-        move_anim_8072740(sprite);
+        DestroyAnimSprite(sprite);
     }
 }

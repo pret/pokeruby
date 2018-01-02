@@ -8,7 +8,7 @@ LilycoveCity_CoveLilyMotel_2F_EventScript_1583A1:: @ 81583A1
 	call_if 0, LilycoveCity_CoveLilyMotel_2F_EventScript_1583C7
 	checkflag FLAG_TEMP_2
 	call_if 1, LilycoveCity_CoveLilyMotel_2F_EventScript_1583DD
-	specialvar RESULT, sub_8090FC0
+	specialvar RESULT, CompletedHoennPokedex
 	compare RESULT, 1
 	goto_if_eq LilycoveCity_CoveLilyMotel_2F_EventScript_1583D0
 	release

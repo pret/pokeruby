@@ -1,6 +1,6 @@
 Route103_MapObjects:: @ 8381300
 	object_event 1, MAP_OBJ_GFX_MAN_4, 0, 49, 0, 12, 0, 3, 9, 0, 0, 0, 0, 0, 0, Route103_EventScript_14ED82, 0, 0, 0
-	object_event 2, 240, 0, 10, 0, 2, 0, 3, 7, 0, 0, 0, 0, 0, 0, Route103_EventScript_14EB92, FLAG_HIDE_RIVAL_ROUTE103, 0, 0
+	object_event 2, MAP_OBJ_GFX_VAR_0, 0, 10, 0, 2, 0, 3, 7, 0, 0, 0, 0, 0, 0, Route103_EventScript_14EB92, FLAG_HIDE_RIVAL_ROUTE103, 0, 0
 	object_event 3, MAP_OBJ_GFX_WOMAN_3, 0, 71, 0, 10, 0, 3, 18, 0, 0, 1, 0, 3, 0, Route103_EventScript_14ED94, 0, 0, 0
 	object_event 4, MAP_OBJ_GFX_LITTLE_GIRL_1, 0, 65, 0, 11, 0, 3, 8, 0, 0, 1, 0, 0, 0, Route103_EventScript_14EDF1, 0, 0, 0
 	object_event 5, MAP_OBJ_GFX_LITTLE_GIRL_1, 0, 64, 0, 11, 0, 3, 8, 0, 0, 1, 0, 0, 0, Route103_EventScript_14EDAB, 0, 0, 0

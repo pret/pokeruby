@@ -200,7 +200,7 @@ void sub_80A6978(void);
 u8 sub_80A7DEC(u8 berryId, u8 x, u8 y, bool8 animate);
 void sub_814A880(u8 a1, u8 a2);
 u8 sub_814A5C0(u8 a1, u16 a2, u8 a3, u16 a4, u8 a5);
-s8 sub_810CA00(void);
+s8 GetFirstFreePokeblockSlot(void);
 bool8 sub_810CA34(struct Pokeblock *pokeblock);
 #ifdef GERMAN
 extern void de_sub_8073110();
@@ -933,7 +933,7 @@ static void sub_804E4FC(void)
     REG_BG1VOFS = 0;
 }
 
-void sub_804E538(void)
+void DoBerryBlending(void)
 {
     u8* field6F; //this temp value is needed to match
 
@@ -2621,7 +2621,7 @@ static void sub_8050954(void)
                 gBerryBlenderData->field_7C = 2;
                 gSendCmd[1] = 0x9999;
             }
-            else if (sub_810CA00() == -1)
+            else if (GetFirstFreePokeblockSlot() == -1)
             {
                 gBerryBlenderData->field_7C = 3;
                 gSendCmd[1] = 0xAAAA;
@@ -2816,7 +2816,7 @@ static void sub_8050E30(void)
         if (!gPaletteFade.active)
         {
             if (gBerryBlenderData->field_70[0] == 0x2222)
-                SetMainCallback2(sub_804E538);
+                SetMainCallback2(DoBerryBlending);
             else
             {
                 gBerryBlenderData->framesToWait = 0;
@@ -2880,7 +2880,7 @@ static void sub_80510E8(void)
         if (!gPaletteFade.active)
         {
             if (gBerryBlenderData->field_7C == 0)
-                SetMainCallback2(sub_804E538);
+                SetMainCallback2(DoBerryBlending);
             else
                 SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
         }

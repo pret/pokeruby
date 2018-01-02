@@ -4109,7 +4109,7 @@ u16 GetHoennPokedexCount(u8 caseID)
     return count;
 }
 
-bool8 sub_8090FC0(void)
+bool8 CompletedHoennPokedex(void)
 {
     u16 i;
 
