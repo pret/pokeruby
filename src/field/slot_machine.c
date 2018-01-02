@@ -4986,3 +4986,324 @@ const struct SpriteTemplate gSpriteTemplate_83ED6CC = {
     0xFFFF, 4, &gOamData_83ED080, gSpriteAnimTable_83ED32C, gSpriteImageTable_83ED228, gSpriteAffineAnimTable_83ED410, sub_8105B70
 };
 
+const struct Subsprite gSubspriteTable_83ED6E4[] = {
+    {-64, -64, ST_OAM_SQUARE, 3, 0x0, 3},
+    {0, -64, ST_OAM_SQUARE, 3, 0x0, 3},
+    {-64, 0, ST_OAM_SQUARE, 3, 0x0, 3},
+    {0, 0, ST_OAM_SQUARE, 3, 0x0, 3}
+};
+
+const struct SubspriteTable gSubspriteTables_83ED704[] = {
+    {4, gSubspriteTable_83ED6E4}
+};
+
+const struct Subsprite gSubspriteTable_83ED70C[] = {
+    {-32, -12, ST_OAM_H_RECTANGLE, 1, 0x0, 1},
+    {0, -12, ST_OAM_H_RECTANGLE, 1, 0x4, 1},
+    {-32, -4, ST_OAM_H_RECTANGLE, 1, 0x8, 1},
+    {0, -4, ST_OAM_H_RECTANGLE, 1, 0xc, 1},
+    {-32, 4, ST_OAM_H_RECTANGLE, 1, 0x10, 1},
+    {0, 4, ST_OAM_H_RECTANGLE, 1, 0x14, 1}
+};
+
+const struct SubspriteTable gSubspriteTables_83ED73C[] = {
+    {6, gSubspriteTable_83ED70C}
+};
+
+const struct Subsprite gSubspriteTable_83ED744[] = {
+    {-32, -20, ST_OAM_H_RECTANGLE, 3, 0x0, 1},
+    {-32, 12, ST_OAM_H_RECTANGLE, 1, 0x20, 1},
+    {0, 12, ST_OAM_H_RECTANGLE, 1, 0x24, 1}
+};
+
+const struct SubspriteTable gSubspriteTables_83ED75C[] = {
+    {3, gSubspriteTable_83ED744}
+};
+
+const struct Subsprite gSubspriteTable_83ED764[] = {
+    {-32, -24, ST_OAM_H_RECTANGLE, 3, 0x0, 1},
+    {-32, 8, ST_OAM_H_RECTANGLE, 1, 0x20, 1},
+    {0, 8, ST_OAM_H_RECTANGLE, 1, 0x24, 1},
+    {-32, 16, ST_OAM_H_RECTANGLE, 1, 0x28, 1},
+    {0, 16, ST_OAM_H_RECTANGLE, 1, 0x2c, 1}
+};
+
+const struct SubspriteTable gSubspriteTables_83ED78C[] = {
+    {5, gSubspriteTable_83ED764}
+};
+
+const struct Subsprite gSubspriteTable_83ED794[] = {
+    {-32, -8, ST_OAM_H_RECTANGLE, 1, 0x0, 1},
+    {0, -8, ST_OAM_H_RECTANGLE, 1, 0x4, 1},
+    {-32, 0, ST_OAM_H_RECTANGLE, 1, 0x8, 1},
+    {0, 0, ST_OAM_H_RECTANGLE, 1, 0xc, 1}
+};
+
+const struct SubspriteTable gSubspriteTables_83ED7B4[] = {
+    {4, gSubspriteTable_83ED794}
+};
+
+const struct Subsprite gSubspriteTable_83ED7BC[] = {
+    {-8, -12, ST_OAM_H_RECTANGLE, 0, 0x0, 1},
+    {-8, -4, ST_OAM_H_RECTANGLE, 0, 0x0, 1},
+    {-8, 4, ST_OAM_H_RECTANGLE, 0, 0x0, 1}
+};
+
+const struct SubspriteTable gSubspriteTables_83ED7D4[] = {
+    {3, gSubspriteTable_83ED7BC}
+};
+
+const struct Subsprite gSubspriteTable_83ED7DC[] = {
+    {-32, -24, ST_OAM_H_RECTANGLE, 3, 0x0, 3},
+    {-32, 8, ST_OAM_H_RECTANGLE, 1, 0x20, 3},
+    {0, 8, ST_OAM_H_RECTANGLE, 1, 0x24, 3},
+    {-32, 16, ST_OAM_H_RECTANGLE, 1, 0x28, 3},
+    {0, 16, ST_OAM_H_RECTANGLE, 1, 0x2c, 3}
+};
+
+const struct SubspriteTable gSubspriteTables_83ED804[] = {
+    {5, gSubspriteTable_83ED7DC}
+};
+
+const struct Subsprite gSubspriteTable_83ED80C[] = {
+    {-32, -8, ST_OAM_H_RECTANGLE, 1, 0x0, 3},
+    {0, -8, ST_OAM_H_RECTANGLE, 1, 0x4, 3},
+    {-32, 0, ST_OAM_H_RECTANGLE, 1, 0x8, 3},
+    {0, 0, ST_OAM_H_RECTANGLE, 1, 0xc, 3}
+};
+
+const struct SubspriteTable gSubspriteTables_83ED82C[] = {
+    {4, gSubspriteTable_83ED80C}
+};
+
+const struct Subsprite gSubspriteTable_83ED834[] = {
+    {-32, -8, ST_OAM_H_RECTANGLE, 1, 0x0, 3},
+    {0, -8, ST_OAM_H_RECTANGLE, 1, 0x4, 3},
+    {-32, 0, ST_OAM_H_RECTANGLE, 1, 0x8, 3},
+    {0, 0, ST_OAM_H_RECTANGLE, 1, 0xc, 3}
+};
+
+const struct SubspriteTable gSubspriteTables_83ED854[] = {
+    {4, gSubspriteTable_83ED834}
+};
+
+const struct Subsprite gSubspriteTable_83ED85C[] = {
+    {-32, -8, ST_OAM_H_RECTANGLE, 1, 0x0, 3},
+    {0, -8, ST_OAM_H_RECTANGLE, 1, 0x4, 3},
+    {-32, 0, ST_OAM_H_RECTANGLE, 1, 0x8, 3},
+    {0, 0, ST_OAM_H_RECTANGLE, 1, 0xc, 3}
+};
+
+const struct SubspriteTable gSubspriteTables_83ED87C[] = {
+    {4, gSubspriteTable_83ED85C}
+};
+
+const struct Subsprite gSubspriteTable_83ED884[] = {
+    {-32, -12, ST_OAM_H_RECTANGLE, 1, 0x0, 3},
+    {0, -12, ST_OAM_H_RECTANGLE, 1, 0x4, 3},
+    {-32, -4, ST_OAM_H_RECTANGLE, 1, 0x8, 3},
+    {0, -4, ST_OAM_H_RECTANGLE, 1, 0xc, 3},
+    {-32, 4, ST_OAM_H_RECTANGLE, 1, 0x10, 3},
+    {0, 4, ST_OAM_H_RECTANGLE, 1, 0x14, 3}
+};
+
+const struct SubspriteTable gSubspriteTables_83ED8B4[] = {
+    {6, gSubspriteTable_83ED884}
+};
+
+const struct Subsprite gSubspriteTable_83ED8BC[] = {
+    {-16, -16, ST_OAM_SQUARE, 2, 0x0, 3}
+};
+
+const struct Subsprite gSubspriteTable_83ED8C4[] = {
+    {-8, -8, ST_OAM_SQUARE, 1, 0x10, 3}
+};
+
+const struct SubspriteTable gSubspriteTables_83ED8CC[] = {
+    {1, gSubspriteTable_83ED8BC},
+    {1, gSubspriteTable_83ED8C4}
+};
+
+const struct Subsprite gSubspriteTable_83ED8DC[] = {
+    {-24, -24, ST_OAM_H_RECTANGLE, 1, 0x0, 3},
+    {8, -24, ST_OAM_H_RECTANGLE, 0, 0x4, 3},
+    {-24, -16, ST_OAM_H_RECTANGLE, 1, 0x6, 3},
+    {8, -16, ST_OAM_H_RECTANGLE, 0, 0xa, 3},
+    {-24, -8, ST_OAM_H_RECTANGLE, 1, 0xc, 3},
+    {8, -8, ST_OAM_H_RECTANGLE, 0, 0x10, 3},
+    {-24, 0, ST_OAM_H_RECTANGLE, 1, 0x12, 3},
+    {8, 0, ST_OAM_H_RECTANGLE, 0, 0x16, 3},
+    {-24, 8, ST_OAM_H_RECTANGLE, 1, 0x18, 3},
+    {8, 8, ST_OAM_H_RECTANGLE, 0, 0x1c, 3},
+    {-24, 16, ST_OAM_H_RECTANGLE, 1, 0x1e, 3},
+    {8, 16, ST_OAM_H_RECTANGLE, 0, 0x22, 3}
+};
+
+const struct SubspriteTable gSubspriteTables_83ED93C[] = {
+    12, gSubspriteTable_83ED8DC
+};
+
+const struct Subsprite gSubspriteTable_83ED944[] = {
+    {-16, -12, ST_OAM_H_RECTANGLE, 2, 0x0, 3},
+    {-16, 4, ST_OAM_H_RECTANGLE, 0, 0x8, 3},
+    {0, 4, ST_OAM_H_RECTANGLE, 0, 0xa, 3}
+};
+
+const struct SubspriteTable gSubspriteTables_83ED95C[] = {
+    {3, gSubspriteTable_83ED944}
+};
+
+const struct Subsprite gSubspriteTable_83ED964[] = {
+    {-8, -8, ST_OAM_H_RECTANGLE, 0, 0x0, 3},
+    {-8, 0, ST_OAM_H_RECTANGLE, 0, 0x8, 3}
+};
+
+const struct SubspriteTable gSubspriteTables_83ED974[] = {
+    {2, gSubspriteTable_83ED964}
+};
+
+const struct Subsprite gSubspriteTable_83ED97C[] = {
+    {-8, -8, ST_OAM_H_RECTANGLE, 0, 0x2, 3},
+    {-8, 0, ST_OAM_H_RECTANGLE, 0, 0xa, 3}
+};
+
+const struct SubspriteTable gSubspriteTables_83ED98C[] = {
+    {2, gSubspriteTable_83ED97C}
+};
+
+const struct Subsprite gSubspriteTable_83ED994[] = {
+    {-8, -8, ST_OAM_H_RECTANGLE, 0, 0x4, 3},
+    {-8, 0, ST_OAM_H_RECTANGLE, 0, 0xc, 3}
+};
+
+const struct SubspriteTable gSubspriteTables_83ED9A4[] = {
+    {2, gSubspriteTable_83ED994}
+};
+
+const struct Subsprite gSubspriteTable_83ED9AC[] = {
+    {-8, -8, ST_OAM_H_RECTANGLE, 0, 0x6, 3},
+    {-8, 0, ST_OAM_H_RECTANGLE, 0, 0xe, 3}
+};
+
+const struct SubspriteTable gSubspriteTables_83ED9BC[] = {
+    {2, gSubspriteTable_83ED9AC}
+};
+
+const struct Subsprite gSubspriteTable_83ED9C4[] = {
+    {-8, -8, ST_OAM_H_RECTANGLE, 0, 0x0, 3},
+    {-8, 0, ST_OAM_H_RECTANGLE, 0, 0x8, 3}
+};
+
+const struct SubspriteTable gSubspriteTables_83ED9D4[] = {
+    {2, gSubspriteTable_83ED9C4}
+};
+
+const struct Subsprite gSubspriteTable_83ED9DC[] = {
+    {-4, -8, ST_OAM_SQUARE, 0, 0x2, 3},
+    {-4, 0, ST_OAM_SQUARE, 0, 0xa, 3}
+};
+
+const struct SubspriteTable gSubspriteTables_83ED9EC[] = {
+    {2, gSubspriteTable_83ED9DC}
+};
+
+const struct Subsprite gSubspriteTable_83ED9F4[] = {
+    {-8, -8, ST_OAM_H_RECTANGLE, 0, 0x3, 3},
+    {-8, 0, ST_OAM_H_RECTANGLE, 0, 0xb, 3}
+};
+
+const struct SubspriteTable gSubspriteTables_83EDA04[] = {
+    {2, gSubspriteTable_83ED9F4}
+};
+
+const struct Subsprite gSubspriteTable_83EDA0C[] = {
+    {-4, -8, ST_OAM_SQUARE, 0, 0x5, 3},
+    {-4, 0, ST_OAM_SQUARE, 0, 0xd, 3}
+};
+
+const struct SubspriteTable gSubspriteTables_83EDA1C[] = {
+    {2, gSubspriteTable_83EDA0C}
+};
+
+const struct Subsprite gSubspriteTable_83EDA24[] = {
+    {-8, -8, ST_OAM_H_RECTANGLE, 0, 0x6, 3},
+    {-8, 0, ST_OAM_H_RECTANGLE, 0, 0xe, 3}
+};
+
+const struct SubspriteTable gSubspriteTables_83EDA34[] = {
+    {2, gSubspriteTable_83EDA24}
+};
+
+const struct Subsprite gSubspriteTable_83EDA3C[] = {
+    {-12, -12, ST_OAM_H_RECTANGLE, 0, 0x0, 3},
+    {4, -12, ST_OAM_SQUARE, 0, 0x2, 3},
+    {-12, -4, ST_OAM_H_RECTANGLE, 0, 0x8, 3},
+    {4, -4, ST_OAM_SQUARE, 0, 0xa, 3},
+    {-12, 4, ST_OAM_H_RECTANGLE, 0, 0x10, 3},
+    {4, 4, ST_OAM_SQUARE, 0, 0x12, 3}
+};
+
+const struct SubspriteTable gSubspriteTables_83EDA6C[] = {
+    {6, gSubspriteTable_83EDA3C}
+};
+
+const struct Subsprite gSubspriteTable_83EDA74[] = {
+    {-8, -12, ST_OAM_H_RECTANGLE, 0, 0x3, 3},
+    {-8, -4, ST_OAM_H_RECTANGLE, 0, 0xb, 3},
+    {-8, 4, ST_OAM_H_RECTANGLE, 0, 0x13, 3}
+};
+
+const struct SubspriteTable gSubspriteTables_83EDA8C[] = {
+    {3, gSubspriteTable_83EDA74}
+};
+
+const struct Subsprite gSubspriteTable_83EDA94[] = {
+    {-12, -12, ST_OAM_H_RECTANGLE, 0, 0x5, 3},
+    {4, -12, ST_OAM_SQUARE, 0, 0x7, 3},
+    {-12, -4, ST_OAM_H_RECTANGLE, 0, 0xd, 3},
+    {4, -4, ST_OAM_SQUARE, 0, 0xf, 3},
+    {-12, 4, ST_OAM_H_RECTANGLE, 0, 0x15, 3},
+    {4, 4, ST_OAM_SQUARE, 0, 0x17, 3}
+};
+
+const struct SubspriteTable gSubspriteTables_83EDAC4[] = {
+    {6, gSubspriteTable_83EDA94}
+};
+
+const struct Subsprite gSubspriteTable_83EDACC[] = {
+    {-12, -12, ST_OAM_H_RECTANGLE, 0, 0x0, 3},
+    {4, -12, ST_OAM_SQUARE, 0, 0x2, 3},
+    {-12, -4, ST_OAM_H_RECTANGLE, 0, 0x8, 3},
+    {4, -4, ST_OAM_SQUARE, 0, 0xa, 3},
+    {-12, 4, ST_OAM_H_RECTANGLE, 0, 0x10, 3},
+    {4, 4, ST_OAM_SQUARE, 0, 0x12, 3}
+};
+
+const struct SubspriteTable gSubspriteTables_83EDAFC[] = {
+    {6, gSubspriteTable_83EDACC}
+};
+
+const struct Subsprite gSubspriteTable_83EDB04[] = {
+    {-8, -12, ST_OAM_H_RECTANGLE, 0, 0x3, 3},
+    {-8, -4, ST_OAM_H_RECTANGLE, 0, 0xb, 3},
+    {-8, 4, ST_OAM_H_RECTANGLE, 0, 0x13, 3}
+};
+
+const struct SubspriteTable gSubspriteTables_83EDB1C[] = {
+    {3, gSubspriteTable_83EDB04}
+};
+
+const struct Subsprite gSubspriteTable_83EDB24[] = {
+    {-12, -12, ST_OAM_H_RECTANGLE, 0, 0x5, 3},
+    {4, -12, ST_OAM_SQUARE, 0, 0x7, 3},
+    {-12, -4, ST_OAM_H_RECTANGLE, 0, 0xd, 3},
+    {4, -4, ST_OAM_SQUARE, 0, 0xf, 3},
+    {-12, 4, ST_OAM_H_RECTANGLE, 0, 0x15, 3},
+    {4, 4, ST_OAM_SQUARE, 0, 0x17, 3}
+};
+
+const struct SubspriteTable gSubspriteTables_83EDB54[] = {
+    {6, gSubspriteTable_83EDB24}
+};
+
+
