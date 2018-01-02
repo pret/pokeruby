@@ -3571,8 +3571,8 @@ u8 sub_8105BB4(u8 a0, u8 a1, s16 a2)
     return sub_8105BF8(a0, gUnknown_083ECF0C[a1], gUnknown_083ECE7E[a1][0], gUnknown_083ECE7E[a1][1], a2);
 }
 
-extern const struct SpriteTemplate *gUnknown_083EDB5C[];
-extern const struct SubspriteTable *gUnknown_083EDBC4[];
+const struct SpriteTemplate *const gUnknown_083EDB5C[];
+const struct SubspriteTable *const gUnknown_083EDBC4[];
 
 u8 sub_8105BF8(u8 templateIdx, SpriteCallback callback, s16 x, s16 y, s16 a4)
 {
@@ -4011,7 +4011,7 @@ void sub_810639C(void)
 
 extern const u8 gSlotMachineReelTimeLights_Gfx[];
 extern const u8 gUnknown_083EDE8C[];
-extern const struct SpriteSheet gUnknown_083EDC2C[];
+const struct SpriteSheet gUnknown_083EDC2C[];
 extern const struct SpritePalette gSlotMachineSpritePalettes[];
 
 void sub_81063C0(void)
@@ -4023,8 +4023,8 @@ void sub_81063C0(void)
     LoadSpritePalettes(gSlotMachineSpritePalettes);
 }
 
-extern const u8 *gUnknown_083EDCE4;
-extern const struct SpriteSheet gUnknown_083EDCDC;
+const u8 *const gUnknown_083EDCE4;
+const struct SpriteSheet gUnknown_083EDCDC;
 
 void sub_8106404(void)
 {
@@ -5306,4 +5306,106 @@ const struct SubspriteTable gSubspriteTables_83EDB54[] = {
     {6, gSubspriteTable_83EDB24}
 };
 
+const struct SpriteTemplate *const gUnknown_083EDB5C[] = {
+    &gSpriteTemplate_83ED57C,
+    &gSpriteTemplate_83ED594,
+    &gSpriteTemplate_83ED5AC,
+    &gSpriteTemplate_83ED5DC,
+    &gSpriteTemplate_83ED5F4,
+    &gSpriteTemplate_83ED654,
+    &gSpriteTemplate_83ED66C,
+    &gSpriteTemplate_83ED684,
+    &gSpriteTemplate_83ED69C,
+    &gSpriteTemplate_83ED6B4,
+    &gSpriteTemplate_83ED5C4,
+    &gSpriteTemplate_83ED5C4,
+    &gSpriteTemplate_83ED5C4,
+    &gSpriteTemplate_83ED5C4,
+    &gSpriteTemplate_83ED60C,
+    &gSpriteTemplate_83ED60C,
+    &gSpriteTemplate_83ED60C,
+    &gSpriteTemplate_83ED60C,
+    &gSpriteTemplate_83ED60C,
+    &gSpriteTemplate_83ED624,
+    &gSpriteTemplate_83ED624,
+    &gSpriteTemplate_83ED624,
+    &gSpriteTemplate_83ED63C,
+    &gSpriteTemplate_83ED63C,
+    &gSpriteTemplate_83ED63C,
+    &gDummySpriteTemplate
+};
+
+const struct SubspriteTable *const gUnknown_083EDBC4[] = {
+    gSubspriteTables_83ED804,
+    gSubspriteTables_83ED82C,
+    gSubspriteTables_83ED854,
+    gSubspriteTables_83ED8B4,
+    NULL,
+    NULL,
+    gSubspriteTables_83ED8CC,
+    NULL,
+    gSubspriteTables_83ED93C,
+    gSubspriteTables_83ED95C,
+    gSubspriteTables_83ED974,
+    gSubspriteTables_83ED98C,
+    gSubspriteTables_83ED9A4,
+    gSubspriteTables_83ED9BC,
+    gSubspriteTables_83ED9D4,
+    gSubspriteTables_83ED9EC,
+    gSubspriteTables_83EDA04,
+    gSubspriteTables_83EDA1C,
+    gSubspriteTables_83EDA34,
+    gSubspriteTables_83EDA6C,
+    gSubspriteTables_83EDA8C,
+    gSubspriteTables_83EDAC4,
+    gSubspriteTables_83EDAFC,
+    gSubspriteTables_83EDB1C,
+    gSubspriteTables_83EDB54,
+    NULL
+};
+
+const struct SpriteSheet gUnknown_083EDC2C[] = {
+    {gSlotMachineReelSymbol1Tiles, 0x200, 0},
+    {gSlotMachineReelSymbol2Tiles, 0x200, 1},
+    {gSlotMachineReelSymbol3Tiles, 0x200, 2},
+    {gSlotMachineReelSymbol4Tiles, 0x200, 3},
+    {gSlotMachineReelSymbol5Tiles, 0x200, 4},
+    {gSlotMachineReelSymbol6Tiles, 0x200, 5},
+    {gSlotMachineReelSymbol7Tiles, 0x200, 6},
+    {gSlotMachineNumber0Tiles, 0x40, 7},
+    {gSlotMachineNumber1Tiles, 0x40, 8},
+    {gSlotMachineNumber2Tiles, 0x40, 9},
+    {gSlotMachineNumber3Tiles, 0x40, 10},
+    {gSlotMachineNumber4Tiles, 0x40, 11},
+    {gSlotMachineNumber5Tiles, 0x40, 12},
+    {gSlotMachineNumber6Tiles, 0x40, 13},
+    {gSlotMachineNumber7Tiles, 0x40, 14},
+    {gSlotMachineNumber8Tiles, 0x40, 15},
+    {gSlotMachineNumber9Tiles, 0x40, 16},
+    {ewram10000 + 0x0A00, 0x200, 18},
+    {ewram10000 + 0x1400, 0x200, 19},
+    {ewram10000 + 0x1600, 0x300, 20},
+    {ewram10000 + 0x1900, 0x300, 21},
+    {}
+};
+
+const struct SpriteSheet gUnknown_083EDCDC = {
+    ewram10000 + 0x0000, 0x800, 17
+};
+
+const u8 *const gUnknown_083EDCE4 = gUnknownPalette_08E997E8;
+
+#ifdef SAPPHIRE
+const u16 UnknownPalette_83EDCE8[] = INCBIN_U16("graphics/unknown/sapphire_83EDD40.gbapal");
+#elif defined(RUBY)
+const u16 UnknownPalette_83EDCE8[] = INCBIN_U16("graphics/unknown/ruby_83EDCE8.gbapal");
+#endif // RS
+
+const u16 *const gUnknown_083EDD08[] = {
+    UnknownPalette_83EDCE8 + 10,
+    UnknownPalette_83EDCE8 + 11,
+    UnknownPalette_83EDCE8 + 12,
+    UnknownPalette_83EDCE8 + 13,
+    UnknownPalette_83EDCE8 + 14
+};
 

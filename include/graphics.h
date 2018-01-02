@@ -2672,5 +2672,23 @@ extern const u8 gSpriteImage_8E98FE8[];
 extern const u8 gSpriteImage_8E98848[];
 extern const u8 gSpriteImage_8E98868[];
 extern const u8 gSpriteImage_8E98828[];
+extern const u8 gSlotMachineReelSymbol1Tiles[];
+extern const u8 gSlotMachineReelSymbol2Tiles[];
+extern const u8 gSlotMachineReelSymbol3Tiles[];
+extern const u8 gSlotMachineReelSymbol4Tiles[];
+extern const u8 gSlotMachineReelSymbol5Tiles[];
+extern const u8 gSlotMachineReelSymbol6Tiles[];
+extern const u8 gSlotMachineReelSymbol7Tiles[];
+extern const u8 gSlotMachineNumber0Tiles[];
+extern const u8 gSlotMachineNumber1Tiles[];
+extern const u8 gSlotMachineNumber2Tiles[];
+extern const u8 gSlotMachineNumber3Tiles[];
+extern const u8 gSlotMachineNumber4Tiles[];
+extern const u8 gSlotMachineNumber5Tiles[];
+extern const u8 gSlotMachineNumber6Tiles[];
+extern const u8 gSlotMachineNumber7Tiles[];
+extern const u8 gSlotMachineNumber8Tiles[];
+extern const u8 gSlotMachineNumber9Tiles[];
+extern const u8 gUnknownPalette_08E997E8[];
 
 #endif  // GUARD_GRAPHICS_H
