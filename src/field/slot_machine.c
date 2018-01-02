@@ -4639,3 +4639,350 @@ const struct SpriteFrameImage gSpriteImageTable_83ED218[] = {
 const struct SpriteFrameImage gSpriteImageTable_83ED228[] = {
     {gSpriteImage_8E98828, 0x20}
 };
+
+const union AnimCmd gSpriteAnim_83ED230[] = {
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END
+};
+
+const union AnimCmd gSpriteAnim_83ED238[] = {
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gSpriteAnim_83ED240[] = {
+    ANIMCMD_FRAME(0, 16),
+    ANIMCMD_END
+};
+
+const union AnimCmd gSpriteAnim_83ED248[] = {
+    ANIMCMD_FRAME(1, 16),
+    ANIMCMD_FRAME(0, 16),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gSpriteAnim_83ED254[] = {
+    ANIMCMD_FRAME(1, 8),
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gSpriteAnim_83ED260[] = {
+    ANIMCMD_FRAME(1, 4),
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gSpriteAnim_83ED26C[] = {
+    ANIMCMD_FRAME(2, 32),
+    ANIMCMD_FRAME(3, 32),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gSpriteAnim_83ED278[] = {
+    ANIMCMD_FRAME(4, 1),
+    ANIMCMD_END
+};
+
+const union AnimCmd gSpriteAnim_83ED280[] = {
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END
+};
+
+const union AnimCmd gSpriteAnim_83ED288[] = {
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_END
+};
+
+const union AnimCmd gSpriteAnim_83ED290[] = {
+    ANIMCMD_FRAME(2, 1),
+    ANIMCMD_END
+};
+
+const union AnimCmd gSpriteAnim_83ED298[] = {
+    ANIMCMD_FRAME(3, 1),
+    ANIMCMD_END
+};
+
+const union AnimCmd gSpriteAnim_83ED2A0[] = {
+    ANIMCMD_FRAME(4, 1),
+    ANIMCMD_END
+};
+
+const union AnimCmd gSpriteAnim_83ED2A8[] = {
+    ANIMCMD_FRAME(5, 1),
+    ANIMCMD_END
+};
+
+const union AnimCmd gSpriteAnim_83ED2B0[] = {
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(1, 4),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gSpriteAnim_83ED2BC[] = {
+    ANIMCMD_FRAME(0, 16),
+    ANIMCMD_FRAME(1, 16),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gSpriteAnim_83ED2C8[] = {
+    ANIMCMD_FRAME(0, 30),
+    ANIMCMD_FRAME(1, 30),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gSpriteAnim_83ED2D4[] = {
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_END
+};
+
+const union AnimCmd gSpriteAnim_83ED2DC[] = {
+    ANIMCMD_FRAME(0, 30),
+    ANIMCMD_FRAME(1, 30),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gSpriteAnim_83ED2E8[] = {
+    ANIMCMD_FRAME(0, 16),
+    ANIMCMD_FRAME(1, 16),
+    ANIMCMD_FRAME(0, 16),
+    ANIMCMD_FRAME(1, 16, .hFlip = TRUE),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gSpriteAnim_83ED2FC[] = {
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END
+};
+
+const union AnimCmd gSpriteAnim_83ED304[] = {
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END
+};
+
+const union AnimCmd gSpriteAnim_83ED30C[] = {
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_END
+};
+
+const union AnimCmd gSpriteAnim_83ED314[] = {
+    ANIMCMD_FRAME(2, 1),
+    ANIMCMD_END
+};
+
+const union AnimCmd gSpriteAnim_83ED31C[] = {
+    ANIMCMD_FRAME(3, 1),
+    ANIMCMD_END
+};
+
+const union AnimCmd gSpriteAnim_83ED324[] = {
+    ANIMCMD_FRAME(4, 1),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gSpriteAnimTable_83ED32C[] = {
+    gSpriteAnim_83ED230
+};
+
+const union AnimCmd *const gSpriteAnimTable_83ED330[] = {
+    gSpriteAnim_83ED238
+};
+
+const union AnimCmd *const gSpriteAnimTable_83ED334[] = {
+    gSpriteAnim_83ED240,
+    gSpriteAnim_83ED248,
+    gSpriteAnim_83ED254,
+    gSpriteAnim_83ED260,
+    gSpriteAnim_83ED26C,
+    gSpriteAnim_83ED278
+};
+
+const union AnimCmd *const gSpriteAnimTable_83ED34C[] = {
+    gSpriteAnim_83ED280,
+    gSpriteAnim_83ED288,
+    gSpriteAnim_83ED290,
+    gSpriteAnim_83ED298,
+    gSpriteAnim_83ED2A0,
+    gSpriteAnim_83ED2A8
+};
+
+const union AnimCmd *const gSpriteAnimTable_83ED364[] = {
+    gSpriteAnim_83ED2B0
+};
+
+const union AnimCmd *const gSpriteAnimTable_83ED368[] = {
+    gSpriteAnim_83ED2BC
+};
+
+const union AnimCmd *const gSpriteAnimTable_83ED36C[] = {
+    gSpriteAnim_83ED2C8,
+    gSpriteAnim_83ED2D4
+};
+
+const union AnimCmd *const gSpriteAnimTable_83ED374[] = {
+    gSpriteAnim_83ED2DC
+};
+
+const union AnimCmd *const gSpriteAnimTable_83ED378[] = {
+    gSpriteAnim_83ED2E8,
+    gSpriteAnim_83ED2FC
+};
+
+const union AnimCmd *const gSpriteAnimTable_83ED380[] = {
+    gSpriteAnim_83ED304,
+    gSpriteAnim_83ED30C,
+    gSpriteAnim_83ED314,
+    gSpriteAnim_83ED31C,
+    gSpriteAnim_83ED324
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83ED394[] = {
+    AFFINEANIMCMD_FRAME(0x10, 0x10, 0, 0),
+    AFFINEANIMCMD_LOOP(0),
+    AFFINEANIMCMD_FRAME(0x1, 0x1, 0, 1),
+    AFFINEANIMCMD_LOOP(255),
+    AFFINEANIMCMD_END
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_83ED3BC[] = {
+    gSpriteAffineAnim_83ED394
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83ED3C0[] = {
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 8, 32),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 6, 32),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 4, 16),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 12, 2),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, -12, 4),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 12, 2),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 12, 2),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, -12, 4),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 12, 2),
+    AFFINEANIMCMD_END
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_83ED410[] = {
+    gSpriteAffineAnim_83ED3C0
+};
+
+const struct SpriteTemplate gSpriteTemplate_83ED414 = {
+    0, 0, &gOamData_83ED0A0, gSpriteAnimTable_83ED32C, NULL, gDummySpriteAffineAnimTable, sub_8104F18
+};
+
+const struct SpriteTemplate gSpriteTemplate_83ED42C = {
+    7, 4, &gOamData_83ED088, gSpriteAnimTable_83ED32C, NULL, gDummySpriteAffineAnimTable, sub_810506C
+};
+
+const struct SpriteTemplate gSpriteTemplate_83ED444 = {
+    17, 0, &gOamData_83ED0B8, gSpriteAnimTable_83ED32C, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+};
+
+const struct SpriteTemplate gSpriteTemplate_83ED45C = {
+    0xFFFF, 1, &gOamData_83ED0B8, gSpriteAnimTable_83ED334, gSpriteImageTable_83ED0C0, gDummySpriteAffineAnimTable, sub_8105170
+};
+
+const struct SpriteTemplate gSpriteTemplate_83ED474 = {
+    0xFFFF, 2, &gOamData_83ED088, gSpriteAnimTable_83ED32C, gSpriteImageTable_83ED0E8, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+};
+
+const struct SpriteTemplate gSpriteTemplate_83ED48C = {
+    0xFFFF, 3, &gOamData_83ED088, gSpriteAnimTable_83ED32C, gSpriteImageTable_83ED0F0, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+};
+
+const struct SpriteTemplate gSpriteTemplate_83ED4A4 = {
+    0xFFFF, 3, &gOamData_83ED088, gSpriteAnimTable_83ED32C, gSpriteImageTable_83ED0F8, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+};
+
+const struct SpriteTemplate gSpriteTemplate_83ED4BC = {
+    0xFFFF, 4, &gOamData_83ED090, gSpriteAnimTable_83ED34C, gSpriteImageTable_83ED100, gDummySpriteAffineAnimTable, sub_810535C
+};
+
+const struct SpriteTemplate gSpriteTemplate_83ED4D4 = {
+    0xFFFF, 4, &gOamData_83ED090, gSpriteAnimTable_83ED32C, gSpriteImageTable_83ED130, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+};
+
+const struct SpriteTemplate gSpriteTemplate_83ED4EC = {
+    0xFFFF, 4, &gOamData_83ED090, gSpriteAnimTable_83ED32C, gSpriteImageTable_83ED138, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+};
+
+const struct SpriteTemplate gSpriteTemplate_83ED504 = {
+    0xFFFF, 4, &gOamData_83ED098, gSpriteAnimTable_83ED364, gSpriteImageTable_83ED140, gDummySpriteAffineAnimTable, sub_810562C
+};
+
+const struct SpriteTemplate gSpriteTemplate_83ED51C = {
+    0xFFFF, 7, &gOamData_83ED0A8, gSpriteAnimTable_83ED32C, gSpriteImageTable_83ED150, gDummySpriteAffineAnimTable, sub_8105784
+};
+
+const struct SpriteTemplate gSpriteTemplate_83ED534 = {
+    0xFFFF, 5, &gOamData_83ED0A0, gSpriteAnimTable_83ED368, gSpriteImageTable_83ED158, gDummySpriteAffineAnimTable, sub_8105894
+};
+
+const struct SpriteTemplate gSpriteTemplate_83ED54C = {
+    0xFFFF, 4, &gOamData_83ED080, gSpriteAnimTable_83ED330, gSpriteImageTable_83ED168, gDummySpriteAffineAnimTable, sub_810594C
+};
+
+const struct SpriteTemplate gSpriteTemplate_83ED564 = {
+    0xFFFF, 4, &gOamData_83ED090, gSpriteAnimTable_83ED32C, gSpriteImageTable_83ED170, gSpriteAffineAnimTable_83ED3BC, sub_8105A38
+};
+
+const struct SpriteTemplate gSpriteTemplate_83ED57C = {
+    0xFFFF, 6, &gOamData_83ED080, gSpriteAnimTable_83ED32C, gSpriteImageTable_83ED178, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+};
+
+const struct SpriteTemplate gSpriteTemplate_83ED594 = {
+    0xFFFF, 6, &gOamData_83ED080, gSpriteAnimTable_83ED32C, gSpriteImageTable_83ED180, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+};
+
+const struct SpriteTemplate gSpriteTemplate_83ED5AC = {
+    0xFFFF, 6, &gOamData_83ED080, gSpriteAnimTable_83ED32C, gSpriteImageTable_83ED188, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+};
+
+const struct SpriteTemplate gSpriteTemplate_83ED5C4 = {
+    18, 6, &gOamData_83ED080, gSpriteAnimTable_83ED32C, gSpriteImageTable_83ED190, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+};
+
+const struct SpriteTemplate gSpriteTemplate_83ED5DC = {
+    0xFFFF, 6, &gOamData_83ED0B0, gSpriteAnimTable_83ED32C, gSpriteImageTable_83ED198, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+};
+
+const struct SpriteTemplate gSpriteTemplate_83ED5F4 = {
+    0xFFFF, 6, &gOamData_83ED0B0, gSpriteAnimTable_83ED32C, gSpriteImageTable_83ED1A0, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+};
+
+const struct SpriteTemplate gSpriteTemplate_83ED60C = {
+    19, 6, &gOamData_83ED080, gSpriteAnimTable_83ED32C, gSpriteImageTable_83ED1A8, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+};
+
+const struct SpriteTemplate gSpriteTemplate_83ED624 = {
+    20, 6, &gOamData_83ED080, gSpriteAnimTable_83ED32C, gSpriteImageTable_83ED1B0, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+};
+
+const struct SpriteTemplate gSpriteTemplate_83ED63C = {
+    21, 6, &gOamData_83ED080, gSpriteAnimTable_83ED32C, gSpriteImageTable_83ED1B8, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+};
+
+const struct SpriteTemplate gSpriteTemplate_83ED654 = {
+    0xFFFF, 6, &gOamData_83ED0A0, gSpriteAnimTable_83ED36C, gSpriteImageTable_83ED1C0, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+};
+
+const struct SpriteTemplate gSpriteTemplate_83ED66C = {
+    0xFFFF, 6, &gOamData_83ED080, gSpriteAnimTable_83ED32C, gSpriteImageTable_83ED1D8, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+};
+
+const struct SpriteTemplate gSpriteTemplate_83ED684 = {
+    0xFFFF, 6, &gOamData_83ED090, gSpriteAnimTable_83ED380, gSpriteImageTable_83ED1E0, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+};
+
+const struct SpriteTemplate gSpriteTemplate_83ED69C = {
+    0xFFFF, 6, &gOamData_83ED080, gSpriteAnimTable_83ED378, gSpriteImageTable_83ED208, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+};
+
+const struct SpriteTemplate gSpriteTemplate_83ED6B4 = {
+    0xFFFF, 6, &gOamData_83ED080, gSpriteAnimTable_83ED374, gSpriteImageTable_83ED218, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+};
+
+const struct SpriteTemplate gSpriteTemplate_83ED6CC = {
+    0xFFFF, 4, &gOamData_83ED080, gSpriteAnimTable_83ED32C, gSpriteImageTable_83ED228, gSpriteAffineAnimTable_83ED410, sub_8105B70
+};
+
