@@ -1,3 +1,6 @@
+// TODO: Integrate German code into this
+#if ENGLISH
+
 #include "global.h"
 #include "constants/easy_chat.h"
 #include "constants/species.h"
@@ -682,3 +685,5 @@ void sub_80E6AC4(void)
     sub_80E91D4(0);
     sub_80E682C(sub_80E6AE4);
 }
+
+#endif
