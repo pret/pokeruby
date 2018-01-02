@@ -70,16 +70,16 @@ void AGBPutc(const char cChr)
 
 void AGBPrint(const char *pBuf)
 {
-	volatile struct AGBPrintStruct *pPrint = (struct AGBPrintStruct *)AGB_PRINT_STRUCT_ADDR;
-	u16 *pWSCNT = (u16 *)REG_ADDR_WAITCNT;
-	u16 nOldWSCNT = *pWSCNT;
-	*pWSCNT = WSCNT_DATA;
-	while (*pBuf)
-	{
-		AGBPutc(*pBuf);
-		pBuf++;
-	}
-	*pWSCNT = nOldWSCNT;
+    volatile struct AGBPrintStruct *pPrint = (struct AGBPrintStruct *)AGB_PRINT_STRUCT_ADDR;
+    u16 *pWSCNT = (u16 *)REG_ADDR_WAITCNT;
+    u16 nOldWSCNT = *pWSCNT;
+    *pWSCNT = WSCNT_DATA;
+    while (*pBuf)
+    {
+        AGBPutc(*pBuf);
+        pBuf++;
+    }
+    *pWSCNT = nOldWSCNT;
 }
 
 // I have to define this twice to avoid messing AGBPrint up. If there's a better way of doing this, please fix it.
