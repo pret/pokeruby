@@ -25,7 +25,7 @@
 	.include "src/engine/record_mixing.o"
 	.include "src/field/tv.o"
 	.include "src/battle/battle_anim_80CA710.o"
-	.include "src/field/easy_chat.o"
+	.include "src/easy_chat.o"
 	.include "src/pokenav_before.o"
 	.include "src/field/mauville_man.o"
 	.include "src/field/menu_helpers.o"

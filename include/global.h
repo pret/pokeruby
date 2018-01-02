@@ -690,7 +690,7 @@ struct SaveBlock1 /* 0x02025734 */
         /*0x2B40*/ u16 unk2B40[6];
     } easyChats;
     /*0x2B4C*/ struct MailStruct mail[16];
-    /*0x2D8C*/ u8 unk2D8C[4];
+    /*0x2D8C*/ u8 unk2D8C[4];  // What is this? Apparently it's supposed to be 64 bytes in size.
     /*0x2D90*/ u8 filler_2D90[0x4];
     /*0x2D94*/ union MauvilleMan mauvilleMan;
     /*0x2DD4*/ struct EasyChatPair easyChatPairs[5]; //Dewford trend [0] and some other stuff

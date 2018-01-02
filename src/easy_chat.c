@@ -1,5 +1,6 @@
 #include "global.h"
 #include "easy_chat.h"
+#include "ewram.h"
 #include "constants/easy_chat.h"
 #include "data2.h"
 #include "event_data.h"
@@ -11,7 +12,6 @@
 #include "strings2.h"
 #include "text.h"
 
-static bool8 sub_80EB680(u16 *, u16, u16, u16);
 static u16 sub_80EB9D8(void);
 static u16 sub_80EB960(void);
 
@@ -21,6 +21,109 @@ extern const u8 gEasyChatGroupSizes[];
 extern u16 gSpecialVar_0x8004;
 
 IWRAM_DATA u8 gUnknown_03000740;
+
+/*
+
+extern const u8 *const gUnknown_083DB694[];
+
+u16 sub_80EB2D4(u16 a)
+{
+    u16 r2;
+    u16 r1;
+    const u8 *str;
+    
+    if (sub_80EB37C(a) != 0)
+        return StringLength(gOtherText_ThreeQuestions);
+    //_080EB2F8
+    if (a == 0xFFFF)
+        return 0;
+    //_080EB308
+    r2 = a >> 9;
+    r1 = a & 0x1FF;
+    switch (r2)
+    {
+    case 0:
+    case 0x13:
+    case 0x14:
+    case 0x15:
+        str = gSpeciesNames[r1];
+        break;
+    case 0x12:
+        str = gMoveNames[r1];
+        break;
+    case 0x15:
+        str = 
+    }
+}
+*/
+
+#ifdef NONMATCHING
+bool8 sub_80EB37C(u16 a)
+{
+    u16 i;
+    u16 r2;
+    u16 r5;
+    u16 *r4;
+
+    if (a == 0xFFFF)
+        return FALSE;
+
+    r2 = a >> 9;
+    r5 = a & 0x1FF;
+    
+    if (r2 <= 0x15)
+    {
+        /*
+        switch (r2)
+        {
+        case EC_GROUP_MOVE_1:
+        case EC_GROUP_MOVE_2:
+        case EC_GROUP_POKEMON:
+        case EC_GROUP_POKEMON_2:
+        case EC_GROUP_TRENDY_SAYING:
+            r4 = gEasyChatGroupWords[r2];
+            for (i = 0; i < gEasyChatGroupSizes[r2]; i++)
+            {
+                if (r5 == r4[i])
+                    return FALSE;
+            }
+            break;
+        default:
+            if (r5 < gEasyChatGroupSizes[a])
+                return FALSE;
+            break;
+        }
+        */
+        if ((r2 == EC_GROUP_MOVE_1 || r2 == EC_GROUP_MOVE_2)
+         || (r2 == EC_GROUP_POKEMON || r2 == EC_GROUP_POKEMON_2))
+        {
+            r4 = gEasyChatGroupWords[r2];
+            for (i = 0; i < gEasyChatGroupSizes[r2]; i++)
+            {
+                if (r5 == r4[i])
+                    return FALSE;
+            }
+        }
+        else if (r2 == EC_GROUP_TRENDY_SAYING)
+        {
+            r4 = gEasyChatGroupWords[r2];
+            for (i = 0; i < gEasyChatGroupSizes[r2]; i++)
+            {
+                if (r5 == r4[i])
+                    return FALSE;
+            }
+        }
+        else
+        {
+            if (r5 < gEasyChatGroupSizes[a])
+                return FALSE;
+        }
+    }
+    return TRUE;
+}
+#else
+
+#endif
 
 // returns the end of the destination buffer text
 u8 *EasyChat_GetWordText(u8 *dst, u16 word)
@@ -188,7 +291,7 @@ u16 unref_sub_80EB5E0(u16 arg0)
     return length;
 }
 
-static bool8 sub_80EB680(u16 *arg0, u16 arg1, u16 arg2, u16 arg3)
+bool8 sub_80EB680(u16 *arg0, u16 arg1, u16 arg2, u16 arg3)
 {
     return FALSE;
 }
