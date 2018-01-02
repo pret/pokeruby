@@ -222,13 +222,13 @@ void sub_81064B8(void);
 void sub_81065A8(s16 arg0, u16 arg1, u16 arg2, u16 arg3, u16 arg4);
 void sub_81065DC(void);
 
-extern struct UnkStruct1 *gUnknown_083ED048[];
+extern const struct UnkStruct1 *gUnknown_083ED048[];
 extern const u16 gPalette_83EDE24[];
 extern const u8 gSlotMachine_Gfx[];
 extern const u16 gUnknown_08E95A18[];
-extern u16 gUnknown_08E95AB8[];
-extern u16 gUnknown_08E95FB8[];
-extern const u8 gUnknown_083ECD04[][3];
+extern const u16 gUnknown_08E95AB8[];
+extern const u16 gUnknown_08E95FB8[];
+const u8 gUnknown_083ECD04[][3];
 extern const u8 gUnknown_083ECE3A[];
 extern const u16 gUnknown_083ECE42[];
 extern const u16 gUnknown_083ECE48[];
@@ -368,7 +368,7 @@ static void sub_8101B04(void)
     REG_BLDALPHA = 0x809;
 }
 
-extern const s16 gUnknown_083ECCF8[3][2];
+const s16 gUnknown_083ECCF8[][2];
 
 static void sub_8101BA4(void)
 {
@@ -983,7 +983,7 @@ static bool8 sub_8102540(void)
     return FALSE;
 }
 
-extern const u8 gUnknown_083ECD16[][6];
+const u8 gUnknown_083ECD16[][6];
 
 static u8 sub_8102578(void)
 {
@@ -1001,7 +1001,7 @@ static u8 sub_8102578(void)
     return i;
 }
 
-extern const u8 gUnknown_083ECD28[][6];
+const u8 gUnknown_083ECD28[][6];
 
 static u8 sub_81025BC(void)
 {
@@ -1035,8 +1035,8 @@ static u8 sub_81025BC(void)
     return i;
 }
 
-extern const u8 gUnknown_083ECDAC[][17];
-extern const u8 gUnknown_083ECD46[][17];
+const u8 gUnknown_083ECD46[][17];
+const u8 gUnknown_083ECDAC[][17];
 
 u8 sub_810264C(u8 a0)
 {
@@ -1069,7 +1069,7 @@ void sub_8102680(void)
     eSlotMachine->unk05 = i;
 }
 
-extern const u16 gUnknown_083ECE12[];
+const u16 gUnknown_083ECE12[];
 
 bool8 sub_81026DC(u16 a0)
 {
@@ -4132,4 +4132,55 @@ const u8 gUnknown_083ECCB2[][21] = {
 
 const u8 gUnknown_083ECCF1[] = {
     1, 0, 5, 4, 3, 2
+};
+
+const s16 gUnknown_083ECCF8[][2] = {
+    {0,  6},
+    {0, 10},
+    {0,  2}
+};
+
+const u8 gUnknown_083ECD04[][3] = {
+    {1, 1, 12},
+    {1, 1, 14},
+    {2, 2, 14},
+    {2, 2, 14},
+    {2, 3, 16},
+    {3, 3, 16}
+};
+
+const u8 gUnknown_083ECD16[][6] = {
+    {25, 25, 30, 40, 40, 50},
+    {25, 25, 30, 30, 35, 35},
+    {25, 25, 30, 25, 25, 30}
+};
+
+const u8 gUnknown_083ECD28[][6] = {
+    {20, 25, 25, 20, 25, 25},
+    {12, 15, 15, 18, 19, 22},
+    {25, 25, 25, 30, 30, 40},
+    {25, 25, 20, 20, 15, 15},
+    {40, 40, 35, 35, 40, 40}
+};
+
+const u8 gUnknown_083ECD46[][17] = {
+    {243, 243, 243,  80,  80,  80,  80,  40,  40,  40,  40,  40,  40,   5,   5,   5,   5},
+    {  5,   5,   5, 150, 150, 150, 150, 130, 130, 130, 130, 130, 130, 100, 100, 100,   5},
+    {  4,   4,   4,  20,  20,  20,  20,  80,  80,  80,  80,  80,  80, 100, 100, 100,  40},
+    {  2,   2,   2,   3,   3,   3,   3,   3,   3,   3,   3,   3,   3,  45,  45,  45, 100},
+    {  1,   1,   1,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   5,   5,   5, 100},
+    {  1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   6}
+};
+
+const u8 gUnknown_083ECDAC[][17] = {
+    { 243, 243, 243, 200, 200, 200, 200, 160, 160, 160, 160, 160, 160,  70,  70,  70,   5},
+    {   5,   5,   5,  25,  25,  25,  25,   5,   5,   5,   5,   5,   5,   2,   2,   2,   6},
+    {   4,   4,   4,  25,  25,  25,  25,  30,  30,  30,  30,  30,  30,  40,  40,  40,  35},
+    {   2,   2,   2,   3,   3,   3,   3,  30,  30,  30,  30,  30,  30, 100, 100, 100,  50},
+    {   1,   1,   1,   2,   2,   2,   2,  30,  30,  30,  30,  30,  30,  40,  40,  40, 100},
+    {   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   4,   4,   4,  60}
+};
+
+const u16 gUnknown_083ECE12[] = {
+    0x80, 0xaf, 0xc8, 0xe1, 0x100
 };
