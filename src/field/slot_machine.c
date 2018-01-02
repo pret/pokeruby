@@ -222,16 +222,16 @@ void sub_81064B8(void);
 void sub_81065A8(s16 arg0, u16 arg1, u16 arg2, u16 arg3, u16 arg4);
 void sub_81065DC(void);
 
-extern const struct UnkStruct1 *gUnknown_083ED048[];
+const struct UnkStruct1 *const gUnknown_083ED048[];
 extern const u16 gPalette_83EDE24[];
 extern const u8 gSlotMachine_Gfx[];
 extern const u16 gUnknown_08E95A18[];
 extern const u16 gUnknown_08E95AB8[];
 extern const u16 gUnknown_08E95FB8[];
 const u8 gUnknown_083ECD04[][3];
-extern const u8 gUnknown_083ECE3A[];
-extern const u16 gUnknown_083ECE42[];
-extern const u16 gUnknown_083ECE48[];
+const u8 gUnknown_083ECE3A[];
+const u16 gUnknown_083ECE42[];
+const u16 gUnknown_083ECE48[];
 
 void PlaySlotMachine(u8 arg0, void *ptr)
 {
@@ -1081,8 +1081,8 @@ bool8 sub_81026DC(u16 a0)
     return FALSE;
 }
 
-extern const u16 gUnknown_083ECE1C[][2];
-extern const u16 gUnknown_083ECE30[];
+const u16 gUnknown_083ECE1C[][2];
+const u16 gUnknown_083ECE30[];
 
 u16 dp15_jump_random_unknown(void)
 {
@@ -1134,8 +1134,8 @@ static void sub_81027A0(void)
     }
 }
 
-extern const u16 gUnknown_083ECE6C[];
 extern const u16 gUnknown_083ECE5A[];
+extern const u16 gUnknown_083ECE6C[];
 
 static void sub_81027D0(void)
 {
@@ -1219,7 +1219,7 @@ static void sub_810290C(void)
     }
 }
 
-extern const u8 gUnknown_083ECE52[];
+const u8 gUnknown_083ECE52[];
 
 static u8 sub_81029D4(u8 c1, u8 c2, u8 c3)
 {
@@ -3037,7 +3037,7 @@ void sub_8104D30(u8 a0, SpriteCallback a1, s16 a2, s16 a3, s16 a4)
     }
 }
 
-extern void (*const gUnknown_083ED064[])(void);
+void (*const gUnknown_083ED064[])(void);
 
 void sub_8104DA4(void)
 {
@@ -3562,8 +3562,8 @@ void sub_8105B88(u8 spriteId)
     DestroySprite(sprite);
 }
 
-extern const SpriteCallback gUnknown_083ECF0C[];
-extern const s16 gUnknown_083ECE7E[][2];
+const s16 gUnknown_083ECE7E[][2];
+const SpriteCallback gUnknown_083ECF0C[];
 
 u8 sub_8105BB4(u8 a0, u8 a1, s16 a2)
 {
@@ -4183,4 +4183,331 @@ const u8 gUnknown_083ECDAC[][17] = {
 
 const u16 gUnknown_083ECE12[] = {
     0x80, 0xaf, 0xc8, 0xe1, 0x100
+};
+
+const u16 gUnknown_083ECE1C[][2] = {
+    {10,  5},
+    {10, 10},
+    {10, 15},
+    {10, 25},
+    {10, 35}
+};
+
+const u16 gUnknown_083ECE30[] = {
+    0, 5, 10, 15, 20
+};
+
+
+const u8 gUnknown_083ECE3A[] = {
+    6, 4, 3, 2, 5, 0, 0, 0
+};
+
+const u16 gUnknown_083ECE42[] = {
+    0x80, 0x20, 0x40
+};
+
+const u16 gUnknown_083ECE48[] = {
+    0x10, 0x08, 0x04, 0x02, 0x01
+};
+
+const u8 gUnknown_083ECE52[] = {
+    7, 8, 4, 3, 0, 5, 2
+};
+
+const u16 gUnknown_083ECE5A[] = {
+    0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x100
+};
+
+const u16 gUnknown_083ECE6C[] = {
+    2, 4, 0, 6, 12, 3, 90, 300, 300
+};
+
+const s16 gUnknown_083ECE7E[][2] = {
+    { 0xd0, 0x38},
+    { 0xb8, 0x00},
+    { 0xc8, 0x08},
+    { 0xd8, 0x10},
+    { 0xe8, 0x18},
+    { 0xd0, 0x48},
+    { 0xd0, 0x08},
+    { 0xd0, 0x40},
+    { 0xd0, 0x38},
+    { 0xc0, 0x58},
+    { 0xe0, 0x58},
+    { 0xc0, 0x78},
+    { 0xe0, 0x78},
+    { 0x90, 0x38},
+    {0x110, 0x58},
+    { 0xa8, 0x70},
+    { 0xd0, 0x54},
+    { 0xd0, 0x70},
+    { 0xbc, 0x34},
+    { 0xd0, 0x34},
+    { 0xe4, 0x34},
+    { 0xb8, 0x48},
+    { 0xc4, 0x48},
+    { 0xd0, 0x48},
+    { 0xdc, 0x48},
+    { 0xe8, 0x48},
+    { 0xbc, 0x34},
+    { 0xd0, 0x34},
+    { 0xe4, 0x34},
+    { 0xb8, 0x48},
+    { 0xc4, 0x48},
+    { 0xd0, 0x48},
+    { 0xdc, 0x48},
+    { 0xe8, 0x48},
+    { 0x00, 0x00}
+};
+
+const SpriteCallback gUnknown_083ECF0C[] = {
+    sub_8105C64,
+    sub_8105F54,
+    sub_8105F54,
+    sub_8105F54,
+    sub_8105F54,
+    sub_8105F9C,
+    sub_8105EB4,
+    sub_8105C64,
+    sub_8105C64,
+    sub_8105C6C,
+    sub_8105CF0,
+    sub_8105D08,
+    sub_8105D20,
+    sub_8105D3C,
+    sub_8105DA4,
+    sub_8105E08,
+    sub_8105C64,
+    sub_8106058,
+    sub_81060FC,
+    sub_81060FC,
+    sub_81060FC,
+    sub_81060FC,
+    sub_81060FC,
+    sub_81060FC,
+    sub_81060FC,
+    sub_81060FC,
+    sub_81061C8,
+    sub_81061C8,
+    sub_81061C8,
+    sub_81061C8,
+    sub_81061C8,
+    sub_81061C8,
+    sub_81061C8,
+    sub_81061C8,
+    sub_8106230
+};
+
+static const struct UnkStruct1 Unknown_83ECF98[] = {
+    {25, 34, 0},
+    {2, 0, 0},
+    {9, 16, 0},
+    {255, 0, 0}
+};
+
+static const struct UnkStruct1 Unknown_83ECFA8[] = {
+    {10, 1, 0},
+    {11, 2, 0},
+    {12, 3, 0},
+    {13, 4, 0},
+    {5, 5, 0},
+    {8, 6, 0},
+    {255, 0, 0}
+};
+
+static const struct UnkStruct1 Unknown_83ECFC4[] = {
+    {3, 7, 0},
+    {8, 17, 0},
+    {255, 0, 0}
+};
+
+static const struct UnkStruct1 Unknown_83ECFD0[] = {
+    {4, 8, 0},
+    {6, 9, 0},
+    {6, 10, 1},
+    {6, 11, 2},
+    {6, 12, 3},
+    {255, 0, 0}
+};
+
+static const struct UnkStruct1 Unknown_83ECFE8[] = {
+    {0, 13, 0},
+    {1, 14, 0},
+    {7, 15, 0},
+    {255, 0, 0}
+};
+
+static const struct UnkStruct1 Unknown_83ECFF8[] = {
+    {19, 26, 0},
+    {20, 27, 1},
+    {21, 28, 2},
+    {14, 29, 3},
+    {15, 30, 4},
+    {16, 31, 5},
+    {17, 32, 6},
+    {18, 33, 7},
+    {8, 17, 0},
+    {255, 0, 0}
+};
+
+static const struct UnkStruct1 Unknown_83ED020[] = {
+    {22, 18, 0},
+    {23, 19, 1},
+    {24, 20, 2},
+    {14, 21, 3},
+    {15, 22, 4},
+    {16, 23, 5},
+    {17, 24, 6},
+    {18, 25, 7},
+    {8, 17, 0},
+    {255, 0, 0}
+};
+
+const struct UnkStruct1 *const gUnknown_083ED048[] = {
+    Unknown_83ECF98,
+    Unknown_83ECFA8,
+    Unknown_83ECFC4,
+    Unknown_83ECFD0,
+    Unknown_83ECFE8,
+    Unknown_83ED020,
+    Unknown_83ECFF8
+};
+
+void (*const gUnknown_083ED064[])(void) = {
+    sub_810639C,
+    sub_8106364,
+    sub_8106370,
+    nullsub_70,
+    nullsub_70,
+    sub_8106370,
+    sub_8106370
+};
+
+
+const struct OamData gOamData_83ED080 = {
+    .y = 0x0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = ST_OAM_SQUARE,
+    .x = 0x0,
+    .matrixNum = 0,
+    .size = 0,
+    .tileNum = 0x0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0
+};
+
+const struct OamData gOamData_83ED088 = {
+    .y = 0x0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = ST_OAM_V_RECTANGLE,
+    .x = 0x0,
+    .matrixNum = 0,
+    .size = 0,
+    .tileNum = 0x0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0
+};
+
+const struct OamData gOamData_83ED090 = {
+    .y = 0x0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = ST_OAM_SQUARE,
+    .x = 0x0,
+    .matrixNum = 0,
+    .size = 1,
+    .tileNum = 0x0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0
+};
+
+const struct OamData gOamData_83ED098 = {
+    .y = 0x0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = ST_OAM_V_RECTANGLE,
+    .x = 0x0,
+    .matrixNum = 0,
+    .size = 2,
+    .tileNum = 0x0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0
+};
+
+const struct OamData gOamData_83ED0A0 = {
+    .y = 0x0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = ST_OAM_SQUARE,
+    .x = 0x0,
+    .matrixNum = 0,
+    .size = 2,
+    .tileNum = 0x0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0
+};
+
+const struct OamData gOamData_83ED0A8 = {
+    .y = 0x0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = ST_OAM_V_RECTANGLE,
+    .x = 0x0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0x0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0
+};
+
+const struct OamData gOamData_83ED0B0 = {
+    .y = 0x0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = ST_OAM_H_RECTANGLE,
+    .x = 0x0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0x0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0
+};
+
+const struct OamData gOamData_83ED0B8 = {
+    .y = 0x0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = ST_OAM_SQUARE,
+    .x = 0x0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0x0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0
 };
