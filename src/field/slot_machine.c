@@ -1326,7 +1326,7 @@ bool8 sub_8102B80(struct Task *task)
     return FALSE;
 }
 
-extern const u8 gUnknown_083ECCB2[][21];
+const u8 gUnknown_083ECCB2[][21];
 
 u8 sub_8102BA4(u8 x, s16 y)
 {
@@ -1346,7 +1346,7 @@ u8 sub_8102BF8(u8 x, s16 y)
     return sub_8102BA4(x, y + r6);
 }
 
-extern const u8 gUnknown_083ECCF1[];
+const u8 gUnknown_083ECCF1[];
 
 u8 sub_8102C48(s16 a0)
 {
@@ -3398,9 +3398,7 @@ extern const u8 gUnknown_083ECC58[2]; // don't remove this until decompiled thro
 
 void sub_8105784(struct Sprite *sprite)
 {
-    // u8 sp[] = {16, 0};
-    u8 sp[ARRAY_COUNT(gUnknown_083ECC58)];
-    memcpy(sp, gUnknown_083ECC58, sizeof gUnknown_083ECC58);
+    u8 sp[] = {16, 0};
     if (sprite->data[0] && --sprite->data[6] <= 0)
     {
         MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(7) << 4) + 0x103, sp[sprite->data[5]], sp[sprite->data[5]], sp[sprite->data[5]]);
@@ -3445,14 +3443,11 @@ void sub_81058A0(void)
 }
 
 extern const struct SpriteTemplate gSpriteTemplate_83ED54C;
-extern const u16 gUnknown_083ECC5A[4]; // don't remove this until decompiled through gUnknown_083ECCF8
 
 void sub_81058C4(void)
 {
     u8 i;
-    // u16 sp[] = {0x0, 0x40, 0x80, 0xC0};
-    u16 sp[ARRAY_COUNT(gUnknown_083ECC5A)];
-    memcpy(sp, gUnknown_083ECC5A, sizeof gUnknown_083ECC5A);
+    u16 sp[] = {0x0, 0x40, 0x80, 0xC0};
     for (i = 0; i < 4; i++)
     {
         u8 spriteId = CreateSprite(&gSpriteTemplate_83ED54C, 0x50 - gSpriteCoordOffsetX, 0x44, 0);
@@ -3596,18 +3591,10 @@ void sub_8105C64(struct Sprite *sprite)
     sprite->data[7] = 0;
 }
 
-extern const s16 gUnknown_083ECC62[4]; // do not delete yet
-extern const s16 gUnknown_083ECC6A[4]; // do not delete yet
-
 void sub_8105C6C(struct Sprite *sprite)
 {
-    // s16 sp0[] = {4, -4, 4, -4};
-    // s16 sp8[] = {4, 4, -4, -4};
-
-    s16 sp0[ARRAY_COUNT(gUnknown_083ECC62)];
-    s16 sp8[ARRAY_COUNT(gUnknown_083ECC6A)];
-    memcpy(sp0, gUnknown_083ECC62, sizeof gUnknown_083ECC62);
-    memcpy(sp8, gUnknown_083ECC6A, sizeof gUnknown_083ECC6A);
+    s16 sp0[] = {4, -4, 4, -4};
+    s16 sp8[] = {4, 4, -4, -4};
 
     if (sprite->data[1]++ >= 16)
     {
@@ -3870,23 +3857,11 @@ void sub_8106058(struct Sprite *sprite)
     sprite->data[7] = 0;
 }
 
-extern const s16 gUnknown_083ECC72[8]; // do not remove these yet
-extern const s16 gUnknown_083ECC82[8]; // do not remove these yet
-extern const s16 gUnknown_083ECC92[8]; // do not remove these yet
-
 void sub_81060FC(struct Sprite *sprite)
 {
-    // s16 sp00[] = {0, -40, 0, 0, 48, 0, 24, 0};
-    // s16 sp10[] = {-32, 0, -32, -48, 0, -48, 0, -48};
-    // s16 sp20[] = {16, 12, 16, 0, 0, 4, 8, 8};
-
-    s16 sp00[ARRAY_COUNT(gUnknown_083ECC72)];
-    s16 sp10[ARRAY_COUNT(gUnknown_083ECC82)];
-    s16 sp20[ARRAY_COUNT(gUnknown_083ECC92)];
-
-    memcpy(sp00, gUnknown_083ECC72, sizeof gUnknown_083ECC72);
-    memcpy(sp10, gUnknown_083ECC82, sizeof gUnknown_083ECC82);
-    memcpy(sp20, gUnknown_083ECC92, sizeof gUnknown_083ECC92);
+    s16 sp00[] = {0, -40, 0, 0, 48, 0, 24, 0};
+    s16 sp10[] = {-32, 0, -32, -48, 0, -48, 0, -48};
+    s16 sp20[] = {16, 12, 16, 0, 0, 4, 8, 8};
 
     switch (sprite->data[0])
     {
@@ -3927,13 +3902,9 @@ void sub_81060FC(struct Sprite *sprite)
     }
 }
 
-extern const s16 gUnknown_083ECCA2[8]; // do not remove this yet
-
 void sub_81061C8(struct Sprite *sprite)
 {
-    s16 sp0[ARRAY_COUNT(gUnknown_083ECCA2)];
-
-    memcpy(sp0, gUnknown_083ECCA2, sizeof gUnknown_083ECCA2);
+    s16 sp0[] = {160, 192, 224, 104, 80, 64, 48, 24};
 
     if (sprite->data[0] == 0)
     {
@@ -4152,3 +4123,13 @@ void sub_81065DC(void) {
         }
     }
 }
+
+const u8 gUnknown_083ECCB2[][21] = {
+    {0, 4, 2, 6, 5, 3, 1, 3, 4, 5, 6, 2, 0, 5, 3, 6, 2, 1, 5, 3, 6},
+    {0, 4, 6, 3, 2, 4, 6, 5, 5, 3, 1, 3, 6, 4, 2, 3, 6, 4, 3, 6, 4},
+    {0, 5, 1, 6, 3, 2, 6, 3, 5, 2, 6, 3, 2, 5, 6, 3, 2, 5, 6, 3, 4}
+};
+
+const u8 gUnknown_083ECCF1[] = {
+    1, 0, 5, 4, 3, 2
+};

@@ -3,45 +3,6 @@
 
 	.section .rodata
 
-gUnknown_083ECC58:: @ 83ECC58
-	.byte 16, 0
-
-	.align 1
-gUnknown_083ECC5A:: @ 83ECC5A
-	.2byte 0x0, 0x40, 0x80, 0xC0
-
-	.align 1
-gUnknown_083ECC62:: @ 83ECC62
-	.2byte 4, -4, 4, -4
-
-	.align 1
-gUnknown_083ECC6A:: @ 83ECC6A
-	.2byte 4, 4, -4, -4
-
-	.align 1
-gUnknown_083ECC72:: @ 83ECC72
-	.2byte 0, -40, 0, 0, 48, 0, 24, 0
-
-	.align 1
-gUnknown_083ECC82:: @ 83ECC82
-	.2byte -32, 0, -32, -48, 0, -48, 0, -48
-
-	.align 1
-gUnknown_083ECC92:: @ 83ECC92
-	.2byte 16, 12, 16, 0, 0, 4, 8, 8
-
-	.align 1
-gUnknown_083ECCA2:: @ 83ECCA2
-	.2byte 160, 192, 224, 104, 80, 64, 48, 24
-
-gUnknown_083ECCB2:: @ 83ECCB2
-	.byte 0, 4, 2, 6, 5, 3, 1, 3, 4, 5, 6, 2, 0, 5, 3, 6, 2, 1, 5, 3, 6
-	.byte 0, 4, 6, 3, 2, 4, 6, 5, 5, 3, 1, 3, 6, 4, 2, 3, 6, 4, 3, 6, 4
-	.byte 0, 5, 1, 6, 3, 2, 6, 3, 5, 2, 6, 3, 2, 5, 6, 3, 2, 5, 6, 3, 4
-
-gUnknown_083ECCF1:: @ 83ECCF1
-	.byte 1, 0, 5, 4, 3, 2, 0
-
 	.align 1
 gUnknown_083ECCF8:: @ 83ECCF8
 	.2byte 0, 6, 0, 10, 0, 2
