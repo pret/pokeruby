@@ -83,8 +83,11 @@ struct Shared1000
     u8 filler9C7A[2];
     u16 unk9C7C;  // this is at 0x9FA8 in German
     s16 unk9C7E;
-    u8 filler9C80[0xDA4-0xC80];
-    u8 unk9DA4[0x24];
+    u8 unk9C80[0xC9-0x80];
+    u8 unk9CC9[0xD12-0xCC9];
+    u8 unk9D12[0x5B-0x12];
+    u8 unk9D5B[0xA4-0x5B];
+    u8 unk9DA4[0xC8-0xA4];
     u8 filler9DC8[0xE14 - 0xDC8];
     u8 unk9E14[0xE41 - 0xE14];
     u8 unk9E41[0xF6E - 0xE41];
@@ -270,9 +273,6 @@ void sub_80EB0B0(void);
 void sub_80EB218();
 u16 sub_80EB2D4();
 bool8 sub_80EB680(u16 *, u16, u16, u16);
-
-// TODO: Integrate German code into this
-#if ENGLISH
 
 void sub_80E60D8(void)
 {
@@ -542,13 +542,8 @@ void sub_80E6690(void)
 {
     u8 *pointers[] =
     {
-#if ENGLISH
-        gSharedMem + 0xAC80, gSharedMem + 0xACC9,
-        gSharedMem + 0xAD12, gSharedMem + 0xAD5B,
-#else
-        gSharedMem + 0xAFAC, gSharedMem + 0xAFF5,
-        gSharedMem + 0xB03E, gSharedMem + 0xB087,
-#endif
+        shared1000.unk9C80, shared1000.unk9CC9,
+        shared1000.unk9D12, shared1000.unk9D5B,
     };
     u8 *r3;
     u16 i;
@@ -581,22 +576,6 @@ void sub_80E6690(void)
     r3[3] = 0xFF;
 }
 
-#endif
-
-// local variable
-#if GERMAN
-u8 *const gUnknown_083DB7DC[] =
-{
-#if ENGLISH
-    gSharedMem + 0xAC80, gSharedMem + 0xACC9,
-    gSharedMem + 0xAD12, gSharedMem + 0xAD5B,
-#else
-    gSharedMem + 0xAFAC, gSharedMem + 0xAFF5,
-    gSharedMem + 0xB03E, gSharedMem + 0xB087,
-#endif
-};
-#endif
-
 // Default profile phrase
 const u16 gUnknown_083DB7EC[] =
 {
@@ -625,7 +604,6 @@ const u16 gUnknown_083DB7F4[] =
 
 const u16 InterviewPalette_0[] = INCBIN_U16("graphics/misc/interview_pal0.gbapal");
 
-#if ENGLISH
 // ResetDefaultEasyChatPhrases
 void InitEasyChatPhrases(void)
 {
@@ -1795,5 +1773,3 @@ bool8 sub_80E8094(void)
     }
     return TRUE;
 }
-
-#endif
