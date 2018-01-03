@@ -11,7 +11,7 @@ void sub_80B7B34(u8, u8, int);
 void UpdateMoneyWindow(u32, u8, u8);
 void OpenMoneyWindow(u32, u8, u8);
 void CloseMoneyWindow(u8, u8);
-bool8 sub_80B7CE8(void);
-void sub_80B7D0C(void);
+bool8 HasEnoughMoneyFor(void);
+void PayMoneyFor(void);
 
 #endif // GUARD_MONEY_H

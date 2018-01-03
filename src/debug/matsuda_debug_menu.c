@@ -31,10 +31,10 @@ extern u16 gSpecialVar_ContestRank;
 
 extern u16 gUnknown_030042A4;
 extern u16 gUnknown_030042A0;
-extern u16 gUnknown_030042C0;
-extern u16 gUnknown_030041B4;
-extern u16 gUnknown_03004288;
-extern u16 gUnknown_03004280;
+extern u16 gBattle_BG1_X;
+extern u16 gBattle_BG1_Y;
+extern u16 gBattle_BG2_X;
+extern u16 gBattle_BG2_Y;
 extern u16 gUnknown_030041B0;
 extern u16 gUnknown_030041B8;
 extern struct Window gUnknown_03004210;
@@ -459,10 +459,10 @@ static void sub_80A9F50(void)
     REG_BG0VOFS = 0;
     gUnknown_030042A4 = 0;
     gUnknown_030042A0 = 0;
-    gUnknown_030042C0 = 0;
-    gUnknown_030041B4 = 0;
-    gUnknown_03004288 = 0;
-    gUnknown_03004280 = 0;
+    gBattle_BG1_X = 0;
+    gBattle_BG1_Y = 0;
+    gBattle_BG2_X = 0;
+    gBattle_BG2_Y = 0;
     gUnknown_030041B0 = 0;
     gUnknown_030041B8 = 0;
 }
@@ -507,10 +507,10 @@ static void sub_80AA090(void)
 {
     REG_BG0HOFS = gUnknown_030042A4;
     REG_BG0VOFS = gUnknown_030042A0;
-    REG_BG1HOFS = gUnknown_030042C0;
-    REG_BG1VOFS = gUnknown_030041B4;
-    REG_BG2HOFS = gUnknown_03004288;
-    REG_BG2VOFS = gUnknown_03004280;
+    REG_BG1HOFS = gBattle_BG1_X;
+    REG_BG1VOFS = gBattle_BG1_Y;
+    REG_BG2HOFS = gBattle_BG2_X;
+    REG_BG2VOFS = gBattle_BG2_Y;
     REG_BG3HOFS = gUnknown_030041B0;
     REG_BG3VOFS = gUnknown_030041B8;
     LoadOam();

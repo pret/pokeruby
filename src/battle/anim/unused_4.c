@@ -5,8 +5,8 @@
 #include "sound.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 extern u8 gObjectBankIDs[];
 
@@ -27,8 +27,8 @@ void sub_80CD9D4(struct Sprite* sprite)
     {
     case 0:
         sprite->data[1] = 0;
-        sprite->data[2] = gObjectBankIDs[gBattleAnimBankAttacker];
-        sprite->data[3] = GetBankSide(gBattleAnimBankAttacker);
+        sprite->data[2] = gObjectBankIDs[gAnimBankAttacker];
+        sprite->data[3] = GetBankSide(gAnimBankAttacker);
         sprite->data[4] = (sprite->data[3] != 0) ? 0x200 : -0x200;
         sprite->data[5] = 0;
         sub_8078E70(sprite->data[2], 0);
@@ -51,7 +51,7 @@ void sub_80CD9D4(struct Sprite* sprite)
         if (++sprite->data[1] > 3)
         {
             sub_8078F40(sprite->data[2]);
-            move_anim_8072740(sprite);
+            DestroyAnimSprite(sprite);
         }
         break;
     }

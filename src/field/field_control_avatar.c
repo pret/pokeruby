@@ -493,7 +493,7 @@ bool8 sub_8068870(u16 a)
 
 bool8 sub_8068894(void)
 {
-    sub_8082B78();
+    IncrementRematchStepCounter();
     happiness_algorithm_step();
     if (overworld_poison_step() == TRUE)
     {

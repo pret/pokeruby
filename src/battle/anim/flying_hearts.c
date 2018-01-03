@@ -5,8 +5,8 @@
 #include "sound.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 static void sub_80D2094(struct Sprite* sprite);
 
@@ -35,6 +35,6 @@ void sub_80D2094(struct Sprite* sprite)
     {
         sprite->invisible = sprite->data[3] % 2;
         if (y <= 0x40)
-            move_anim_8072740(sprite);
+            DestroyAnimSprite(sprite);
     }
 }

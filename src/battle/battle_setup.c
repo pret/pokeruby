@@ -802,7 +802,7 @@ static u8 GetTrainerBattleTransition(void)
     u8 enemyLevel;
     u8 playerLevel;
 
-    if (gTrainerBattleOpponent == 1024) // link battle?
+    if (gTrainerBattleOpponent == SECRET_BASE_OPPONENT) // link battle?
         return B_TRANSITION_STEVEN;
 
     trainer = gTrainers;
@@ -915,20 +915,21 @@ static bool32 IsPlayerDefeated(u32 battleOutcome)
 {
     switch (battleOutcome)
     {
-    case 2:
-    case 3:
+    case BATTLE_LOST:
+    case BATTLE_DREW:
         return TRUE;
-    case 1:
-    case 4:
-    case 5:
-    case 6:
-    case 7:
+    case BATTLE_WON:
+    case BATTLE_RAN:
+    case BATTLE_PLAYER_TELEPORTED:
+    case BATTLE_POKE_FLED:
+    case BATTLE_CAUGHT:
+        return FALSE;
+    default:
         return FALSE;
     }
-    return FALSE;
 }
 
-static void sub_80822BC(void)
+static void ResetTrainerOpponentIds(void)
 {
     sTrainerBattleMode = 0;
     gTrainerBattleOpponent = 0;
@@ -976,7 +977,7 @@ static void TrainerBattleLoadArgs(const struct TrainerBattleParameter *specs, co
     }
 }
 
-static void battle_80801F0(void)
+static void SetMapVarsToTrainer(void)
 {
     if (sTrainerMapObjectLocalId)
     {
@@ -987,7 +988,7 @@ static void battle_80801F0(void)
 
 u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
 {
-    sub_80822BC();
+    ResetTrainerOpponentIds();
     sTrainerBattleMode = TrainerBattleLoadArg8(data);
 
     switch (sTrainerBattleMode)
@@ -997,31 +998,31 @@ u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
         return gUnknown_0819F878;
     case 4:
         TrainerBattleLoadArgs(gTrainerBattleSpecs_2, data);
-        battle_80801F0();
+        SetMapVarsToTrainer();
         return gUnknown_0819F840;
     case 1:
     case 2:
         TrainerBattleLoadArgs(gTrainerBattleSpecs_1, data);
-        battle_80801F0();
+        SetMapVarsToTrainer();
         return gUnknown_0819F818;
     case 6:
     case 8:
         TrainerBattleLoadArgs(gTrainerBattleSpecs_4, data);
-        battle_80801F0();
+        SetMapVarsToTrainer();
         return gUnknown_0819F840;
     case 7:
         TrainerBattleLoadArgs(gTrainerBattleSpecs_2, data);
-        battle_80801F0();
-        gTrainerBattleOpponent = sub_8082C4C(gTrainerBattleOpponent);
+        SetMapVarsToTrainer();
+        gTrainerBattleOpponent = GetRematchTrainerId(gTrainerBattleOpponent);
         return gUnknown_0819F8AE;
     case 5:
         TrainerBattleLoadArgs(gTrainerBattleSpecs_0, data);
-        battle_80801F0();
-        gTrainerBattleOpponent = sub_8082C4C(gTrainerBattleOpponent);
+        SetMapVarsToTrainer();
+        gTrainerBattleOpponent = GetRematchTrainerId(gTrainerBattleOpponent);
         return gUnknown_0819F887;
     default:
         TrainerBattleLoadArgs(gTrainerBattleSpecs_0, data);
-        battle_80801F0();
+        SetMapVarsToTrainer();
         return gUnknown_0819F818;
     }
 }
@@ -1073,12 +1074,12 @@ u8 HasTrainerAlreadyBeenFought(u16 flag)
     return FlagGet(TRAINER_FLAG_START + flag);
 }
 
-void trainer_flag_set(u16 flag)
+void SetTrainerFlag(u16 flag)
 {
     FlagSet(TRAINER_FLAG_START + flag);
 }
 
-void trainer_flag_clear(u16 flag)
+void ClearTrainerFlag(u16 flag)
 {
     FlagClear(TRAINER_FLAG_START + flag);
 }
@@ -1086,14 +1087,14 @@ void trainer_flag_clear(u16 flag)
 void BattleSetup_StartTrainerBattle(void)
 {
     gBattleTypeFlags = BATTLE_TYPE_TRAINER;
-    gMain.savedCallback = sub_808260C;
+    gMain.savedCallback = CB2_EndTrainerBattle;
     StartTheBattle();
     ScriptContext1_Stop();
 }
 
-void sub_808260C(void)
+void CB2_EndTrainerBattle(void)
 {
-    if (gTrainerBattleOpponent == 1024)
+    if (gTrainerBattleOpponent == SECRET_BASE_OPPONENT)
     {
         SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music); // link battle?
     }
@@ -1110,7 +1111,7 @@ void sub_808260C(void)
 
 void CB2_EndTrainerEyeRematchBattle(void)
 {
-    if (gTrainerBattleOpponent == 1024)
+    if (gTrainerBattleOpponent == SECRET_BASE_OPPONENT)
     {
         SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music); // link battle?
     }
@@ -1231,12 +1232,12 @@ static const u8 *GetTrainerIntroSpeech(void)
     return SanitizeString(sTrainerIntroSpeech);
 }
 
-u8 *sub_8082830(void)
+u8 *GetTrainerLoseText(void)
 {
     const u8 *str;
 
-    if (gTrainerBattleOpponent == 1024)
-        str = sub_80BCCE8();
+    if (gTrainerBattleOpponent == SECRET_BASE_OPPONENT)
+        str = GetSecretBaseTrainerLoseText();
     else
         str = sTrainerDefeatSpeech;
 
@@ -1254,7 +1255,7 @@ static const u8 *GetTrainerNonBattlingSpeech(void)
     return SanitizeString(sTrainerCannotBattleSpeech);
 }
 
-s32 sub_8082894(const struct TrainerEyeTrainer *trainers, u16 opponentId)
+s32 FirstBattleTrainerIdToRematchTableId(const struct TrainerEyeTrainer *trainers, u16 opponentId)
 {
     s32 i;
 
@@ -1266,7 +1267,7 @@ s32 sub_8082894(const struct TrainerEyeTrainer *trainers, u16 opponentId)
     return -1;
 }
 
-s32 sub_80828B8(const struct TrainerEyeTrainer *trainers, u16 opponentId)
+s32 TrainerIdToRematchTableId(const struct TrainerEyeTrainer *trainers, u16 opponentId)
 {
     s32 i;
     s32 j;
@@ -1312,7 +1313,7 @@ bool32 UpdateRandomTrainerEyeRematches(const struct TrainerEyeTrainer *trainers,
    return ret;
 }
 
-s32 sub_80829A8(const struct TrainerEyeTrainer *trainers, u16 mapGroup, u16 mapNum)
+s32 DoesSomeoneWantRematchIn_(const struct TrainerEyeTrainer *trainers, u16 mapGroup, u16 mapNum)
 {
     s32 i;
 
@@ -1324,7 +1325,7 @@ s32 sub_80829A8(const struct TrainerEyeTrainer *trainers, u16 mapGroup, u16 mapN
     return 0;
 }
 
-s32 sub_80829E8(const struct TrainerEyeTrainer *trainers, u16 mapGroup, u16 mapNum)
+s32 IsRematchTrainerIn_(const struct TrainerEyeTrainer *trainers, u16 mapGroup, u16 mapNum)
 {
     s32 i;
 
@@ -1336,9 +1337,9 @@ s32 sub_80829E8(const struct TrainerEyeTrainer *trainers, u16 mapGroup, u16 mapN
     return 0;
 }
 
-bool8 sub_8082A18(const struct TrainerEyeTrainer *trainers, u16 opponentId)
+bool8 IsFirstTrainerIdReadyForRematch(const struct TrainerEyeTrainer *trainers, u16 opponentId)
 {
-    s32 trainerEyeIndex = sub_8082894(trainers, opponentId);
+    s32 trainerEyeIndex = FirstBattleTrainerIdToRematchTableId(trainers, opponentId);
 
     if (trainerEyeIndex != -1 && trainerEyeIndex < 100 && gSaveBlock1.trainerRematches[trainerEyeIndex])
         return TRUE;
@@ -1348,7 +1349,7 @@ bool8 sub_8082A18(const struct TrainerEyeTrainer *trainers, u16 opponentId)
 
 bool8 GetTrainerEyeRematchFlag(const struct TrainerEyeTrainer *trainers, u16 opponentId)
 {
-    s32 trainerEyeIndex = sub_80828B8(trainers, opponentId);
+    s32 trainerEyeIndex = TrainerIdToRematchTableId(trainers, opponentId);
 
     if (trainerEyeIndex != -1 && trainerEyeIndex < 100 && gSaveBlock1.trainerRematches[trainerEyeIndex])
         return TRUE;
@@ -1356,11 +1357,11 @@ bool8 GetTrainerEyeRematchFlag(const struct TrainerEyeTrainer *trainers, u16 opp
         return FALSE;
 }
 
-u16 sub_8082A90(const struct TrainerEyeTrainer *trainers, u16 opponentId)
+u16 GetRematchTrainerIdFromTable(const struct TrainerEyeTrainer *trainers, u16 opponentId)
 {
     int i;
     const struct TrainerEyeTrainer *trainer;
-    s32 trainerEyeIndex = sub_8082894(trainers, opponentId);
+    s32 trainerEyeIndex = FirstBattleTrainerIdToRematchTableId(trainers, opponentId);
 
     if (trainerEyeIndex == -1)
         return 0;
@@ -1377,15 +1378,15 @@ u16 sub_8082A90(const struct TrainerEyeTrainer *trainers, u16 opponentId)
 
 void ClearTrainerEyeRematchFlag(const struct TrainerEyeTrainer *trainers, u16 opponentId)
 {
-    s32 trainerEyeIndex = sub_80828B8(trainers, opponentId);
+    s32 trainerEyeIndex = TrainerIdToRematchTableId(trainers, opponentId);
 
     if (trainerEyeIndex != -1)
         gSaveBlock1.trainerRematches[trainerEyeIndex] = 0;
 }
 
-bool8 sub_8082B10(const struct TrainerEyeTrainer *trainers, u16 opponentId)
+bool8 WasSecondRematchWon(const struct TrainerEyeTrainer *trainers, u16 opponentId)
 {
-    s32 trainerEyeIndex = sub_8082894(trainers, opponentId);
+    s32 trainerEyeIndex = FirstBattleTrainerIdToRematchTableId(trainers, opponentId);
 
     if (trainerEyeIndex != -1 && HasTrainerAlreadyBeenFought(trainers[trainerEyeIndex].opponentIDs[1]))
         return TRUE;
@@ -1393,7 +1394,7 @@ bool8 sub_8082B10(const struct TrainerEyeTrainer *trainers, u16 opponentId)
         return FALSE;
 }
 
-bool32 sub_8082B44(void)
+bool32 HasAtLeastFiveBadges(void)
 {
     int badgeCount = 0;
     u32 i;
@@ -1410,9 +1411,9 @@ bool32 sub_8082B44(void)
     return FALSE;
 }
 
-void sub_8082B78(void)
+void IncrementRematchStepCounter(void)
 {
-    if (sub_8082B44())
+    if (HasAtLeastFiveBadges())
     {
         if (gSaveBlock1.trainerRematchStepCounter >= TRAINER_REMATCH_STEPS)
             gSaveBlock1.trainerRematchStepCounter = TRAINER_REMATCH_STEPS;
@@ -1421,41 +1422,41 @@ void sub_8082B78(void)
     }
 }
 
-bool32 sub_8082BA4(void)
+bool32 IsRematchStepCounterMaxed(void)
 {
-    if (sub_8082B44() && gSaveBlock1.trainerRematchStepCounter >= TRAINER_REMATCH_STEPS)
+    if (HasAtLeastFiveBadges() && gSaveBlock1.trainerRematchStepCounter >= TRAINER_REMATCH_STEPS)
         return TRUE;
     else
         return FALSE;
 }
 
-void sub_8082BD0(u16 mapGroup, u16 mapNum)
+void TryUpdateRandomTrainerRematches(u16 mapGroup, u16 mapNum)
 {
-    if (sub_8082BA4() && UpdateRandomTrainerEyeRematches(gTrainerEyeTrainers, mapGroup, mapNum) == TRUE)
+    if (IsRematchStepCounterMaxed() && UpdateRandomTrainerEyeRematches(gTrainerEyeTrainers, mapGroup, mapNum) == TRUE)
         gSaveBlock1.trainerRematchStepCounter = 0;
 }
 
-s32 sub_8082C0C(u16 mapGroup, u16 mapNum)
+s32 DoesSomeoneWantRematchIn(u16 mapGroup, u16 mapNum)
 {
-    return sub_80829A8(gTrainerEyeTrainers, mapGroup, mapNum);
+    return DoesSomeoneWantRematchIn_(gTrainerEyeTrainers, mapGroup, mapNum);
 }
 
-s32 unref_sub_8082C2C(u16 mapGroup, u16 mapNum)
+s32 IsRematchTrainerIn(u16 mapGroup, u16 mapNum)
 {
-    return sub_80829E8(gTrainerEyeTrainers, mapGroup, mapNum);
+    return IsRematchTrainerIn_(gTrainerEyeTrainers, mapGroup, mapNum);
 }
 
-u16 sub_8082C4C(u16 opponentId)
+u16 GetRematchTrainerId(u16 opponentId)
 {
-    return sub_8082A90(gTrainerEyeTrainers, opponentId);
+    return GetRematchTrainerIdFromTable(gTrainerEyeTrainers, opponentId);
 }
 
-s32 sub_8082C68(void)
+bool8 ShouldTryRematchBattle(void)
 {
-    if (sub_8082A18(gTrainerEyeTrainers, gTrainerBattleOpponent))
+    if (IsFirstTrainerIdReadyForRematch(gTrainerEyeTrainers, gTrainerBattleOpponent))
         return 1;
     else
-        return sub_8082B10(gTrainerEyeTrainers, gTrainerBattleOpponent);
+        return WasSecondRematchWon(gTrainerEyeTrainers, gTrainerBattleOpponent);
 }
 
 u8 ScrSpecial_GetTrainerEyeRematchFlag(void)

@@ -490,7 +490,7 @@ EventScript_15F4A1:
 	goto_if_eq EventScript_15F4E0
 	compare RESULT, 2
 	goto_if_eq EventScript_15F503
-	special sub_80BC224
+	special BufferSecretBaseOwnerName
 	msgbox UnknownString_81A3958, 5
 	compare RESULT, 0
 	goto_if_eq EventScript_15F452
@@ -1815,7 +1815,7 @@ DewfordTown_EventScript_1A0102:: @ 81A0102
 DewfordTown_Hall_EventScript_1A0102:: @ 81A0102
 	dodailyevents
 	setvar VAR_SPECIAL_4, 0
-	special sub_80FA5BC
+	special BufferTrendyPhraseString
 	return
 
 DewfordTown_EventScript_1A010C:: @ 81A010C
@@ -2544,7 +2544,7 @@ MossdeepCity_StevensHouse_EventScript_1A0678:: @ 81A0678
 RustboroCity_DevonCorp_2F_EventScript_1A0678:: @ 81A0678
 SlateportCity_House1_EventScript_1A0678:: @ 81A0678
 	fadescreen 1
-	special sub_80BF9F8
+	special ChangePokemonNickname
 	waitstate
 	return
 
@@ -3813,7 +3813,7 @@ EventScript_1A2E45:
 	compare RESULT, 0
 	goto_if_eq EventScript_1A2F3A
 	fadescreen 1
-	special sub_80BC50C
+	special MoveSecretBase
 	closemessage
 	fadescreen 0
 	msgbox UnknownString_81A3CC9, 5
@@ -4317,7 +4317,7 @@ SecretBase_RedCave1_EventScript_1A350A:: @ 81A350A
 	special sub_80BCE1C
 	setvar VAR_SPECIAL_4, 1
 	setvar VAR_SPECIAL_5, 0
-	special sub_813556C
+	special StartSpecialBattle
 	waitstate
 	special ScrSpecial_HealPlayerParty
 	release
@@ -4415,14 +4415,14 @@ BattleTower_Lobby_EventScript_1ADE46:: @ 81ADE46
 FallarborTown_ContestLobby_EventScript_1ADE46:: @ 81ADE46
 SlateportCity_OceanicMuseum_1F_EventScript_1ADE46:: @ 81ADE46
 SlateportCity_PokemonFanClub_EventScript_1ADE46:: @ 81ADE46
-	special sub_80BDE48
+	special InterviewAfter
 	incrementgamestat GAME_STAT_GOT_INTERVIEWED
 	release
 	end
 
 SlateportCity_PokemonFanClub_EventScript_1ADE4D:: @ 81ADE4D
 	setvar VAR_SPECIAL_5, 1
-	special sub_80BF2C4
+	special InterviewBefore
 	compare RESULT, 1
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_1ADED6
 	copyvar VAR_SPECIAL_9, VAR_SPECIAL_6
@@ -4467,7 +4467,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_1ADEE0:: @ 81ADEE0
 	lock
 	faceplayer
 	setvar VAR_SPECIAL_5, 2
-	special sub_80BF2C4
+	special InterviewBefore
 	compare RESULT, 1
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_1ADF96
 	copyvar VAR_SPECIAL_9, VAR_SPECIAL_6
@@ -4522,11 +4522,11 @@ SlateportCity_OceanicMuseum_1F_EventScript_1ADF96:: @ 81ADF96
 SlateportCity_PokemonFanClub_EventScript_1ADFA0:: @ 81ADFA0
 	lock
 	faceplayer
-	specialvar RESULT, sub_80BF544
+	specialvar RESULT, LeadMonNicknamed
 	compare RESULT, 0
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_1ADE4D
 	setvar VAR_SPECIAL_5, 3
-	special sub_80BF2C4
+	special InterviewBefore
 	compare RESULT, 1
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_1AE0AC
 	copyvar VAR_SPECIAL_9, VAR_SPECIAL_6
@@ -4603,7 +4603,7 @@ VerdanturfTown_ContestLobby_EventScript_1AE0B6:: @ 81AE0B6
 	checkflag FLAG_TEMP_2
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1AE17E
 	setvar VAR_SPECIAL_5, 6
-	special sub_80BF2C4
+	special InterviewBefore
 	compare RESULT, 1
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1AE17E
 	copyvar VAR_SPECIAL_9, VAR_SPECIAL_6
@@ -4663,7 +4663,7 @@ VerdanturfTown_ContestLobby_EventScript_1AE188:: @ 81AE188
 	compare VAR_LINK_CONTEST_ROOM_STATE, 2
 	goto_if 5, FallarborTown_ContestLobby_EventScript_1AE1FE
 	setvar VAR_SPECIAL_5, 6
-	special sub_80BF2C4
+	special InterviewBefore
 	compare RESULT, 1
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1AE1FE
 	switch VAR_CONTEST_LOCATION
@@ -4700,7 +4700,7 @@ BattleTower_Lobby_EventScript_1AE1FF:: @ 81AE1FF
 	checkflag FLAG_TEMP_2
 	goto_if_eq BattleTower_Lobby_EventScript_1AE2E3
 	setvar VAR_SPECIAL_5, 7
-	special sub_80BF2C4
+	special InterviewBefore
 	compare RESULT, 1
 	goto_if_eq BattleTower_Lobby_EventScript_1AE2E3
 	copyvar VAR_SPECIAL_9, VAR_SPECIAL_6
@@ -4769,7 +4769,7 @@ BattleTower_Lobby_EventScript_1AE2ED:: @ 81AE2ED
 	compare VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 0
 	goto_if_eq BattleTower_Lobby_EventScript_1AE30F
 	setvar VAR_SPECIAL_5, 7
-	special sub_80BF2C4
+	special InterviewBefore
 	compare RESULT, 1
 	goto_if_eq BattleTower_Lobby_EventScript_1AE30F
 	clearflag FLAG_HIDE_REPORTER_BATTLE_TOWER

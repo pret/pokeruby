@@ -23,16 +23,16 @@ BattleTower_BattleRoom_EventScript_1608FA:: @ 81608FA
 	special ScrSpecial_HealPlayerParty
 	setvar VAR_SPECIAL_4, 0
 	setvar VAR_SPECIAL_5, 0
-	special sub_813556C
+	special StartSpecialBattle
 	waitstate
 	switch RESULT
 	case 1, BattleTower_BattleRoom_EventScript_160961
 	special LoadPlayerParty
 	setvar VAR_SPECIAL_4, 0
 	setvar VAR_SPECIAL_5, 5
-	special sub_8135668
+	special SetBattleTowerProperty
 	setvar VAR_SPECIAL_4, 14
-	special sub_8135668
+	special SetBattleTowerProperty
 	setvar VAR_SPECIAL_4, 3
 	special sub_810FF60
 	warp MAP_BATTLE_TOWER_LOBBY, 255, 6, 6
@@ -40,7 +40,7 @@ BattleTower_BattleRoom_EventScript_1608FA:: @ 81608FA
 
 BattleTower_BattleRoom_EventScript_160961:: @ 8160961
 	setvar VAR_SPECIAL_4, 6
-	special sub_8135668
+	special SetBattleTowerProperty
 	switch RESULT
 	case 8, BattleTower_BattleRoom_EventScript_160A56
 	applymovement 1, BattleTower_BattleRoom_Movement_160AC6
@@ -53,7 +53,7 @@ BattleTower_BattleRoom_EventScript_160961:: @ 8160961
 	msgbox BattleTower_BattleRoom_Text_19ACDC, 4
 	special LoadPlayerParty
 	special SavePlayerParty
-	special sub_8135A14
+	special SetBattleTowerParty
 	playfanfare 368
 	waitfanfare
 	special ScrSpecial_HealPlayerParty
@@ -91,14 +91,14 @@ BattleTower_BattleRoom_EventScript_160A56:: @ 8160A56
 	special LoadPlayerParty
 	setvar VAR_SPECIAL_4, 0
 	setvar VAR_SPECIAL_5, 4
-	special sub_8135668
+	special SetBattleTowerProperty
 	setvar VAR_SPECIAL_4, 2
 	setvar VAR_SPECIAL_5, 1
-	special sub_8135668
+	special SetBattleTowerProperty
 	setvar VAR_SPECIAL_4, 7
-	special sub_8135668
+	special SetBattleTowerProperty
 	setvar VAR_SPECIAL_4, 14
-	special sub_8135668
+	special SetBattleTowerProperty
 	setvar VAR_SPECIAL_4, 3
 	special sub_810FF60
 	warp MAP_BATTLE_TOWER_LOBBY, 255, 6, 6
@@ -106,7 +106,7 @@ BattleTower_BattleRoom_EventScript_160A56:: @ 8160A56
 
 BattleTower_BattleRoom_EventScript_160A94:: @ 8160A94
 	setvar VAR_SPECIAL_4, 2
-	special sub_8135BA0
+	special SaveBattleTowerProgress
 	message BattleTower_BattleRoom_Text_1C6CE1
 	delay 60
 	waitmessage

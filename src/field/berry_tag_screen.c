@@ -29,7 +29,7 @@ struct Struct2000000
 };
 
 extern struct Struct2000000 gSharedMem;
-extern u16 gUnknown_030041B4;
+extern u16 gBattle_BG1_Y;
 
 static EWRAM_DATA u8 gUnknown_0203932C = 0;
 static EWRAM_DATA s16 gUnknown_0203932E[5] = {0};
@@ -77,8 +77,8 @@ static void sub_8146014(void)
 
 static void sub_814602C(void)
 {
-    REG_BG0VOFS = gUnknown_030041B4;
-    REG_BG1VOFS = gUnknown_030041B4;
+    REG_BG0VOFS = gBattle_BG1_Y;
+    REG_BG1VOFS = gBattle_BG1_Y;
 
     LoadOam();
     ProcessSpriteCopyRequests();
@@ -183,7 +183,7 @@ static void sub_8146288(void)
     REG_BG1CNT = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(5) | BGCNT_16COLOR | BGCNT_TXT256x256;
     REG_BG2CNT = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(6) | BGCNT_16COLOR | BGCNT_TXT256x256;
     REG_BG3CNT = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(7) | BGCNT_16COLOR | BGCNT_TXT256x256;
-    gUnknown_030041B4 = 0;
+    gBattle_BG1_Y = 0;
 }
 
 bool8 sub_81462B8(void)
@@ -394,17 +394,17 @@ static void sub_8146798(u8 taskId)
 {
     s16 *taskData = gTasks[taskId].data;
 
-    gUnknown_030041B4 = (gUnknown_030041B4 + taskData[0]) & 0xFF;
-    if ((taskData[0] > 0 && gUnknown_030041B4 == 144)
-     || (taskData[0] < 0 && gUnknown_030041B4 == 112))
+    gBattle_BG1_Y = (gBattle_BG1_Y + taskData[0]) & 0xFF;
+    if ((taskData[0] > 0 && gBattle_BG1_Y == 144)
+     || (taskData[0] < 0 && gBattle_BG1_Y == 112))
     {
         sub_8146810(gTasks[taskId].data[1]);
         sub_81468BC();
     }
-    if (gUnknown_030041B4 == 0)
+    if (gBattle_BG1_Y == 0)
     {
-        gTasks[taskId].data[0] = gUnknown_030041B4;
-        gTasks[taskId].data[1] = gUnknown_030041B4;
+        gTasks[taskId].data[0] = gBattle_BG1_Y;
+        gTasks[taskId].data[1] = gBattle_BG1_Y;
         gTasks[taskId].func = sub_8146480;
     }
 }

@@ -1227,7 +1227,7 @@ const u16 gMissStrings[] =
     BATTLE_TEXT_GroundMoveNegate,
 };
 
-const u16 BattleTextList_401512[] =
+const u16 gNoEscapeStringIds[] =
 {
     BATTLE_TEXT_CantEscape2,
     BATTLE_TEXT_BirchDontLeaveMe,
@@ -1236,7 +1236,7 @@ const u16 BattleTextList_401512[] =
     BATTLE_TEXT_AttackingCantEscape,
 };
 
-const u16 BattleTextList_40151C[] =
+const u16 gMoveWeatherChangeStringIds[] =
 {
     BATTLE_TEXT_RainStart,
     BATTLE_TEXT_PourStart,
@@ -1246,39 +1246,39 @@ const u16 BattleTextList_40151C[] =
     BATTLE_TEXT_HailStart,
 };
 
-const u16 BattleTextList_401528[] =
+const u16 gSandStormHailContinuesStringIds[] =
 {
     BATTLE_TEXT_SandRages,
     BATTLE_TEXT_HailCont,
 };
 
-const u16 BattleTextList_40152C[] =
+const u16 gSandStormHailDmgStringIds[] =
 {
     BATTLE_TEXT_SandBuffeted,
     BATTLE_TEXT_HailStricken,
 };
 
-const u16 BattleTextList_401530[] =
+const u16 gSandStormHailEndStringIds[] =
 {
     BATTLE_TEXT_SandSubsided,
     BATTLE_TEXT_HailStop,
 };
 
-const u16 BattleTextList_401534[] =
+const u16 gRainContinuesStringIds[] =
 {
     BATTLE_TEXT_RainCont1,
     BATTLE_TEXT_PourCont,
     BATTLE_TEXT_RainStop,
 };
 
-const u16 BattleTextList_40153A[] =
+const u16 gProtectLikeUsedStringIds[] =
 {
     BATTLE_TEXT_ProtectedItself2,
     BATTLE_TEXT_BracedItself,
     BATTLE_TEXT_Failed,
 };
 
-const u16 BattleTextList_401540[] =
+const u16 gReflectLightScreenSafeguardStringIds[] =
 {
     BATTLE_TEXT_Failed,
     BATTLE_TEXT_RaisedDefense,
@@ -1288,7 +1288,7 @@ const u16 BattleTextList_401540[] =
     BATTLE_TEXT_CoveredVeil,
 };
 
-const u16 BattleTextList_40154C[] =
+const u16 gLeechSeedStringIds[] =
 {
     BATTLE_TEXT_WasSeeded,
     BATTLE_TEXT_EvadedAttack,
@@ -1297,44 +1297,44 @@ const u16 BattleTextList_40154C[] =
     BATTLE_TEXT_OozeSuckup,
 };
 
-const u16 BattleTextList_401556[] =
+const u16 gRestUsedStringIds[] =
 {
     BATTLE_TEXT_WentToSleep,
     BATTLE_TEXT_SpeltHealthy,
 };
 
-const u16 BattleTextList_40155A[] =
+const u16 gUproarOverTurnStringIds[] =
 {
     BATTLE_TEXT_UproarMaking,
     BATTLE_TEXT_CalmedDown,
 };
 
-const u16 BattleTextList_40155E[] =
+const u16 gStockpileUsedStringIds[] =
 {
     BATTLE_TEXT_Stockpiled,
     BATTLE_TEXT_StockpiledCant,
 };
 
-const u16 BattleTextList_401562[] =
+const u16 gWokeUpStringIds[] =
 {
     BATTLE_TEXT_WokeUp,
     BATTLE_TEXT_UproarWoke,
 };
 
-const u16 BattleTextList_401566[] =
+const u16 gSwallowFailStringIds[] =
 {
     BATTLE_TEXT_SwallowFail,
     BATTLE_TEXT_HPFull,
 };
 
-const u16 BattleTextList_40156A[] =
+const u16 gUproarAwakeStringIds[] =
 {
     BATTLE_TEXT_UproarCantSleep2,
     BATTLE_TEXT_UproarKeptAwake,
     BATTLE_TEXT_StayedAwake,
 };
 
-const u16 BattleTextList_401570[] =
+const u16 gStatUpStringIds[] =
 {
     BATTLE_TEXT_UnknownString7,
     BATTLE_TEXT_UnknownString3,
@@ -1344,7 +1344,7 @@ const u16 BattleTextList_401570[] =
     BATTLE_TEXT_HustleUse,
 };
 
-const u16 BattleTextList_40157C[] =
+const u16 gStatDownStringIds[] =
 {
     BATTLE_TEXT_UnknownString5,
     BATTLE_TEXT_UnknownString6,
@@ -1352,7 +1352,7 @@ const u16 BattleTextList_40157C[] =
     BATTLE_TEXT_Terminator2,
 };
 
-const u16 BattleTextList_401584[] =
+const u16 gFirstTurnOfTwoStringIds[] =
 {
     BATTLE_TEXT_WhipWhirlwind,
     BATTLE_TEXT_TookSunlight,
@@ -1364,7 +1364,7 @@ const u16 BattleTextList_401584[] =
     BATTLE_TEXT_SprangUp,
 };
 
-const u16 BattleTextList_401594[] =
+const u16 gWrappedStringIds[] =
 {
     BATTLE_TEXT_SqueezedBind, 
     BATTLE_TEXT_Wrapped, 
@@ -1374,67 +1374,67 @@ const u16 BattleTextList_401594[] =
     BATTLE_TEXT_SandTombTrapped, 
 };
 
-const u16 BattleTextList_4015A0[] =
+const u16 gMistUsedStringIds[] =
 {
     BATTLE_TEXT_MistShroud,
     BATTLE_TEXT_Failed,
 };
 
-const u16 BattleTextList_4015A4[] =
+const u16 gFocusEnergyUsedStringIds[] =
 {
     BATTLE_TEXT_GetPumped,
     BATTLE_TEXT_Failed,
 };
 
-const u16 BattleTextList_4015A8[] =
+const u16 gTransformUsedStringIds[] =
 {
     BATTLE_TEXT_Transformed,
     BATTLE_TEXT_Failed,
 };
 
-const u16 BattleTextList_4015AC[] =
+const u16 gSubsituteUsedStringIds[] =
 {
     BATTLE_TEXT_SubMade,
     BATTLE_TEXT_SubWeak,
 };
 
-const u16 BattleTextList_4015B0[] =
+const u16 gGotPoisonedStringIds[] =
 {
     BATTLE_TEXT_Poisoned,
     BATTLE_TEXT_Poisoned2,
 };
 
-const u16 BattleTextList_4015B4[] =
+const u16 gGotParalyzedStringIds[] =
 {
     BATTLE_TEXT_Paralyzed,
     BATTLE_TEXT_Paralyzed2,
 };
 
-const u16 BattleTextList_4015B8[] =
+const u16 gFellAsleepStringIds[] =
 {
     BATTLE_TEXT_FellAsleep,
     BATTLE_TEXT_MadeAsleep,
 };
 
-const u16 BattleTextList_4015BC[] =
+const u16 gGotBurnedStringIds[] =
 {
     BATTLE_TEXT_Burned,
     BATTLE_TEXT_Burned2,
 };
 
-const u16 BattleTextList_4015C0[] =
+const u16 gGotFrozenStringIds[] =
 {
     BATTLE_TEXT_Frozen,
     BATTLE_TEXT_Frozen2,
 };
 
-const u16 BattleTextList_4015C4[] =
+const u16 gGotDefrostedStringIds[] =
 {
     BATTLE_TEXT_AttackingDefrosted,
     BATTLE_TEXT_Defrosted,
 };
 
-const u16 BattleTextList_4015C8[] =
+const u16 gKOFailedStringIds[] =
 {
     BATTLE_TEXT_AttackMissed,
     BATTLE_TEXT_Unaffected,
@@ -1442,19 +1442,19 @@ const u16 BattleTextList_4015C8[] =
     BATTLE_TEXT_InfatuatedPoke,
 };
 
-const u16 BattleTextList_4015D0[] =
+const u16 gLeechSeedDrainStringIds[] =
 {
     BATTLE_TEXT_EnergyDrained,
     BATTLE_TEXT_OozeSuckup,
 };
 
-const u16 BattleTextList_4015D4[] =
+const u16 gSportsUsedStringIds[] =
 {
     BATTLE_TEXT_ElecWeakened,
     BATTLE_TEXT_FireWeakened,
 };
 
-const u16 BattleTextList_4015D8[] =
+const u16 gPartyStatusHealStringIds[] =
 {
     BATTLE_TEXT_BellChime,
     BATTLE_TEXT_BellChime,
@@ -1463,13 +1463,13 @@ const u16 BattleTextList_4015D8[] =
     BATTLE_TEXT_SoothingAroma,
 };
 
-const u16 BattleTextList_4015E2[] =
+const u16 gFutureMoveUsedStringIds[] =
 {
     BATTLE_TEXT_ForesawAttack,
     BATTLE_TEXT_ChoseDestiny,
 };
 
-const u16 BattleTextList_4015E6[] =
+const u16 gBallEscapeStringIds[] =
 {
     BATTLE_TEXT_BallBrokeOhNo,
     BATTLE_TEXT_BallBrokeAppeared,
@@ -1477,7 +1477,7 @@ const u16 BattleTextList_4015E6[] =
     BATTLE_TEXT_BallBrokeSoClose,
 };
 
-const u16 BattleTextList_4015EE[] =
+const u16 gWeatherContinuesStringIds[] =
 {
     BATTLE_TEXT_Raining,
     BATTLE_TEXT_Raining,
@@ -1497,7 +1497,7 @@ const u16 BattleTextList_4015EE[] =
     BATTLE_TEXT_Raining,
 };
 
-const u16 BattleTextList_40160E[] =
+const u16 gInobedientStringIds[] =
 {
     BATTLE_TEXT_LoafingAround, 
     BATTLE_TEXT_WontObey, 
@@ -1505,20 +1505,20 @@ const u16 BattleTextList_40160E[] =
     BATTLE_TEXT_NotNotice, 
 };
 
-const u16 BattleTextList_401616[] =
+const u16 gSafariGetNearStringIds[] =
 {
     BATTLE_TEXT_CreptCloser,
     BATTLE_TEXT_CantGetCloser,
 };
 
-const u16 BattleTextList_40161A[] =
+const u16 gSafariPokeblockResultStringIds[] =
 {
     BATTLE_TEXT_CuriousAbout,
     BATTLE_TEXT_EnthralledBy,
     BATTLE_TEXT_IgnoredThing,
 };
 
-const u16 BattleTextList_401620[] =
+const u16 gTrainerItemCuredStatusStringIds[] =
 {
     BATTLE_TEXT_CuredConfusion,
     BATTLE_TEXT_CuredParalysis,
@@ -1528,41 +1528,41 @@ const u16 BattleTextList_401620[] =
     BATTLE_TEXT_CuredSleep,
 };
 
-const u16 BattleTextList_40162C[] =
+const u16 gBerryEffectStringIds[] =
 {
     BATTLE_TEXT_CuredStatus,
     BATTLE_TEXT_NormalizedStatus,
 };
 
-const u16 BattleTextList_401630[] =
+const u16 gBRNPreventionStringIds[] =
 {
     BATTLE_TEXT_PreventedBurn,
     BATTLE_TEXT_PreventedOther2,
     BATTLE_TEXT_NoEffectOn,
 };
 
-const u16 BattleTextList_401636[] =
+const u16 gPRLZPreventionStringIds[] =
 {
     BATTLE_TEXT_PreventedPara,
     BATTLE_TEXT_PreventedOther2,
     BATTLE_TEXT_NoEffectOn,
 };
 
-const u16 BattleTextList_40163C[] =
+const u16 gPSNPreventionStringIds[] =
 {
     BATTLE_TEXT_PreventedPoison,
     BATTLE_TEXT_PreventedOther2,
     BATTLE_TEXT_NoEffectOn,
 };
 
-const u16 BattleTextList_401642[] =
+const u16 gItemSwapStringIds[] =
 {
     BATTLE_TEXT_Obtained1,
     BATTLE_TEXT_Obtained2,
     BATTLE_TEXT_Obtained3,
 };
 
-const u16 BattleTextList_401648[] =
+const u16 gFlashFireStringIds[] =
 {
     BATTLE_TEXT_RaisedFirePower,
     BATTLE_TEXT_MadeIneffective,

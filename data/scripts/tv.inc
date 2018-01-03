@@ -1,7 +1,7 @@
 Event_TV:: @ 81A6E72
 	lockall
 	incrementgamestat GAME_STAT_WATCHED_TV
-	special sub_80C2014
+	special ResetTVShowState
 	specialvar RESULT, CheckForBigMovieOrEmergencyNewsOnTV
 	compare RESULT, 2
 	goto_if_eq EventScript_1A6F01
@@ -21,11 +21,11 @@ EventScript_1A6EBB:
 	specialvar VAR_SPECIAL_4, special_0x44
 	compare VAR_SPECIAL_4, 255
 	goto_if_eq EventScript_1A6F3F
-	specialvar RESULT, special_0x4a
+	specialvar RESULT, GetNonMassOutbreakActiveTVShow
 	compare RESULT, 255
 	goto_if_eq EventScript_1A6F3F
 	copyvar VAR_SPECIAL_4, RESULT
-	specialvar RESULT, sub_80BDA0C
+	specialvar RESULT, GetTVShowType
 	compare RESULT, 0
 	goto_if 5, EventScript_1A6F21
 	end
@@ -77,7 +77,7 @@ EventScript_1A6F3F:
 	end
 
 EventScript_1A6F50:
-	special sub_80BECE8
+	special DoPokeNews
 	compare RESULT, 0
 	goto_if_eq EventScript_1A6EBB
 	waitmessage

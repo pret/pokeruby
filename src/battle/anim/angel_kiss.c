@@ -6,8 +6,8 @@
 #include "random.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 // angel_kiss (a different variation of kiss_fountain.)
 // Used in Sweet Kiss.
@@ -22,7 +22,7 @@ void sub_80D29CC(struct Sprite* sprite)
         sprite->invisible = sprite->data[5] % 2;
 
     if (sprite->data[5] > 30)
-        move_anim_8072740(sprite);
+        DestroyAnimSprite(sprite);
 }
 
 void sub_80D2A38(struct Sprite* sprite)
@@ -62,7 +62,7 @@ void sub_80D2A38(struct Sprite* sprite)
         sprite->pos1.x += gBattleAnimArgs[0];
         sprite->pos1.y += gBattleAnimArgs[1];
         StartSpriteAnim(sprite, 0);
-        sprite->subpriority = sub_8079E90(gBattleAnimBankTarget) - 1;
+        sprite->subpriority = sub_8079E90(gAnimBankTarget) - 1;
         sprite->data[2] = 1;
     }
 

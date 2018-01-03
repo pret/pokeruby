@@ -96,7 +96,7 @@ Route117_PokemonDayCare_EventScript_1B2327:: @ 81B2327
 	end
 
 Route117_PokemonDayCare_EventScript_1B236C:: @ 81B236C
-	specialvar RESULT, sub_8095B6C
+	specialvar RESULT, GetNumValidDaycarePartyMons
 	compare RESULT, 1
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B23F3
 	msgbox Route117_PokemonDayCare_Text_1B2947, 4
@@ -105,7 +105,7 @@ Route117_PokemonDayCare_EventScript_1B236C:: @ 81B236C
 	waitstate
 	compare VAR_SPECIAL_4, 255
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B23D0
-	specialvar RESULT, sub_8095C10
+	specialvar RESULT, CountAlivePartyMonsExceptSelectedOne
 	compare RESULT, 0
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B23FD
 	specialvar VAR_SPECIAL_5, GetSelectedDaycareMonNickname
@@ -196,7 +196,7 @@ Route117_PokemonDayCare_EventScript_1B24A8:: @ 81B24A8
 	end
 
 Route117_PokemonDayCare_EventScript_1B24C4:: @ 81B24C4
-	specialvar RESULT, sub_80B7CE8
+	specialvar RESULT, HasEnoughMoneyFor
 	compare RESULT, 1
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B24DE
 	msgbox Route117_PokemonDayCare_Text_1B2A30, 4
@@ -207,7 +207,7 @@ Route117_PokemonDayCare_EventScript_1B24DE:: @ 81B24DE
 	applymovement 1, Route117_PokemonDayCare_Movement_1B2543
 	waitmovement 0
 	specialvar RESULT, TakePokemonFromDaycare
-	special sub_80B7D0C
+	special PayMoneyFor
 	playse 95
 	msgbox Route117_PokemonDayCare_Text_1B2B75, 4
 	waitse

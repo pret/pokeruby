@@ -11,7 +11,7 @@ SlateportCity_ContestLobby_EventScript_15541D:: @ 815541D
 	setvar CONTEST_RANK, 2
 	call SlateportCity_ContestLobby_EventScript_1A4E92
 	call SlateportCity_ContestLobby_EventScript_155448
-	special sub_80C4BF0
+	special SetContestTrainerGfxIds
 	call SlateportCity_ContestLobby_EventScript_15FBDB
 	setvar VAR_CONTEST_LOCATION, 3
 	warp MAP_LINK_CONTEST_ROOM1, 255, 7, 5

@@ -20,7 +20,7 @@ MossdeepCity_GameCorner_B1F_EventScript_15AE6E:: @ 815AE6E
 	closemessage
 	setvar VAR_SPECIAL_4, 2
 	setvar VAR_SPECIAL_5, 0
-	special sub_813556C
+	special StartSpecialBattle
 	waitstate
 	compare RESULT, 3
 	call_if 1, MossdeepCity_GameCorner_B1F_EventScript_15AED5

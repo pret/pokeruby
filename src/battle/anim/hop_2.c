@@ -5,8 +5,8 @@
 #include "sound.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 extern void sub_80CB7EC(struct Sprite* sprite, s16 c);
 extern bool8 sub_80CB814(struct Sprite* sprite);
@@ -22,9 +22,9 @@ void sub_80CBAE8(struct Sprite* sprite)
     s16 p1;
     s16 p2;
     sub_8078764(sprite, 0);
-    p1 = sub_8077ABC(gBattleAnimBankAttacker, 0);
-    p2 = sub_8077ABC(gBattleAnimBankAttacker, 1);
-    if ((gBattleAnimBankTarget ^ 2) == gBattleAnimBankAttacker)
+    p1 = GetBankPosition(gAnimBankAttacker, 0);
+    p2 = GetBankPosition(gAnimBankAttacker, 1);
+    if ((gAnimBankTarget ^ 2) == gAnimBankAttacker)
     {
         sprite->data[6] = p1;
         sprite->data[7] = p2 + 10;
@@ -57,7 +57,7 @@ void sub_80CBB60(struct Sprite* sprite)
     sprite->pos2.y = Sin(sprite->data[0] + 0x80, 30 - sprite->data[1] * 8);
     if (sprite->pos2.y == 0)
     {
-        PlaySE12WithPanning(0x7D, sub_8076F98(0x3F));
+        PlaySE12WithPanning(0x7D, BattleAnimAdjustPanning(0x3F));
     }
 
     if (sub_80CB814(sprite))
@@ -65,6 +65,6 @@ void sub_80CBB60(struct Sprite* sprite)
         sprite->pos2.y = 0;
         sprite->data[0] = 0;
         sprite->callback = sub_80CB8B8;
-        PlaySE12WithPanning(0x7D, sub_8076F98(-0x40));
+        PlaySE12WithPanning(0x7D, BattleAnimAdjustPanning(-0x40));
     }
 }

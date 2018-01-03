@@ -5,8 +5,8 @@
 #include "sound.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 // cyclone (creates a circling motion like a cyclone, usually a wind sprite.)
 // Used in Razor Wind.
@@ -14,7 +14,7 @@ extern u8 gBattleAnimBankTarget;
 void sub_80D0118(struct Sprite* sprite)
 {
     sub_80787B0(sprite, 0);
-    if (GetBankSide(gBattleAnimBankAttacker) == 0)
+    if (GetBankSide(gAnimBankAttacker) == 0)
         sprite->pos1.y += 16;
 
     sprite->data[0] = gBattleAnimArgs[4];
@@ -23,6 +23,6 @@ void sub_80D0118(struct Sprite* sprite)
     sprite->data[3] = gBattleAnimArgs[6];
     sprite->data[4] = gBattleAnimArgs[3];
     sprite->callback = sub_8078114;
-    StoreSpriteCallbackInData(sprite, move_anim_8072740);
+    StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
     sprite->callback(sprite);
 }

@@ -5,8 +5,8 @@
 #include "sound.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 static void sub_80CE798(struct Sprite* sprite);
 
@@ -23,11 +23,11 @@ void sub_80CE670(struct Sprite* sprite)
 
     sprite->data[0] = 0;
     sprite->data[1] = gBattleAnimArgs[2];
-    sprite->pos1.x = sub_8077ABC(gBattleAnimBankTarget, 2) + gBattleAnimArgs[0];
-    sprite->pos1.y = sub_8077ABC(gBattleAnimBankTarget, 3) + gBattleAnimArgs[1];
+    sprite->pos1.x = GetBankPosition(gAnimBankTarget, 2) + gBattleAnimArgs[0];
+    sprite->pos1.y = GetBankPosition(gAnimBankTarget, 3) + gBattleAnimArgs[1];
     sprite->data[6] = sprite->pos1.x;
     sprite->data[7] = sprite->pos1.y;
-    if (NotInBattle() != 0)
+    if (IsContest() != 0)
     {
         sprite->oam.matrixNum = 8;
         sprite->pos1.x += 40;
@@ -37,7 +37,7 @@ void sub_80CE670(struct Sprite* sprite)
         sprite->data[4] = sprite->pos1.y << 7;
         sprite->data[5] = -0xA00 / sprite->data[1];
     }
-    else if (GetBankSide(gBattleAnimBankAttacker) == 0)
+    else if (GetBankSide(gAnimBankAttacker) == 0)
     {
         sprite->pos1.x -= 40;
         sprite->pos1.y += 20;
@@ -73,5 +73,5 @@ void sub_80CE798(struct Sprite* sprite)
     }
 
     if (sprite->data[1] == 0)
-        move_anim_8072740(sprite);
+        DestroyAnimSprite(sprite);
 }

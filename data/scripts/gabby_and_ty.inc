@@ -248,7 +248,7 @@ Route120_EventScript_1AE60F:: @ 81AE60F
 	compare RESULT, 0
 	goto_if_eq Route111_EventScript_1AE69F
 	msgbox Route111_Text_1AC10A, 4
-	specialvar RESULT, sub_80BDD18
+	specialvar RESULT, GabbyAndTyGetLastBattleTrivia
 	switch RESULT
 	case 0, Route111_EventScript_1AE6AD
 	case 1, Route111_EventScript_1AE6BB
@@ -310,7 +310,7 @@ Route111_EventScript_1AE6F3:: @ 81AE6F3
 	compare RESULT, 0
 	goto_if_eq Route111_EventScript_1AE72D
 	msgbox Route111_Text_1AC487, 4
-	special sub_80BDC14
+	special GabbyAndTyAfterInterview
 	setflag FLAG_TEMP_1
 	release
 	end

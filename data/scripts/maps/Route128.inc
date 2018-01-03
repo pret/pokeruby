@@ -182,7 +182,7 @@ Route128_Movement_1522A1:: @ 81522A1
 
 Route128_EventScript_1522A4:: @ 81522A4
 	trainerbattle 0, OPPONENT_ISAIAH_1, 0, Route128_Text_1C1C67, Route128_Text_1C1C95
-	specialvar RESULT, sub_8082C68
+	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
 	goto_if_eq Route128_EventScript_1522CB
 	msgbox Route128_Text_1C1CC3, 6
@@ -195,7 +195,7 @@ Route128_EventScript_1522CB:: @ 81522CB
 
 Route128_EventScript_1522E2:: @ 81522E2
 	trainerbattle 0, OPPONENT_KATELYN_1, 0, Route128_Text_1C1DB0, Route128_Text_1C1E25
-	specialvar RESULT, sub_8082C68
+	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
 	goto_if_eq Route128_EventScript_152309
 	msgbox Route128_Text_1C1E4A, 6

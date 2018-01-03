@@ -9,12 +9,12 @@
 #include "trig.h"
 #include "ewram.h"
 
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 extern bool8 gAnimScriptActive;
 extern void (*gAnimScriptCallback)(void);
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankTarget;
 extern u8 gObjectBankIDs[];
 extern const struct CompressedSpriteSheet gBattleAnimPicTable[];
 extern const struct CompressedSpritePalette gBattleAnimPaletteTable[];
@@ -22,7 +22,7 @@ extern const u8 *const gBattleAnims_StatusConditions[];
 extern const struct OamData gOamData_837E05C;
 extern const struct OamData gOamData_837DF24;
 
-extern u8 sub_8077ABC(u8, u8);
+extern u8 GetBankPosition(u8, u8);
 extern void sub_80E32E0(u8);
 
 
@@ -180,11 +180,11 @@ static void sub_807B8A4(struct Sprite *sprite)
 
 void sub_807B920(u8 taskId)
 {
-    s16 x = sub_8077ABC(gBattleAnimBankTarget, 2) - 32;
-    s16 y = sub_8077ABC(gBattleAnimBankTarget, 3) - 36;
+    s16 x = GetBankPosition(gAnimBankTarget, 2) - 32;
+    s16 y = GetBankPosition(gAnimBankTarget, 3) - 36;
     u8 spriteId;
 
-    if (NotInBattle())
+    if (IsContest())
         x -= 6;
     REG_BLDCNT = 0x3F40;
     REG_BLDALPHA = 0x1000;
@@ -336,9 +336,9 @@ void move_anim_start_t2(u8 a, u8 b)
 {
     u8 taskId;
 
-    gBattleAnimBankAttacker = a;
-    gBattleAnimBankTarget = a;
-    DoMoveAnim(gBattleAnims_StatusConditions, b, 0);
+    gAnimBankAttacker = a;
+    gAnimBankTarget = a;
+    LaunchBattleAnimation(gBattleAnims_StatusConditions, b, 0);
     taskId = CreateTask(sub_807BDAC, 10);
     gTasks[taskId].data[0] = a;
 }

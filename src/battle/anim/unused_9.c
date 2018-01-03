@@ -5,8 +5,8 @@
 #include "sound.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 extern struct SpriteTemplate gSpriteTemplate_83D75AC;
 
@@ -44,7 +44,7 @@ void sub_80CFE2C(struct Sprite* sprite)
 
         gPlttBufferFaded[sprite->data[0] + 15] = r7;
         if (++sprite->data[2] == 0x18)
-            move_anim_8072740(sprite);
+            DestroyAnimSprite(sprite);
     }
 }
 #else
@@ -101,7 +101,7 @@ _080CFE64:\n\
 	cmp r0, 0x18\n\
 	bne _080CFE90\n\
 	adds r0, r4, 0\n\
-	bl move_anim_8072740\n\
+	bl DestroyAnimSprite\n\
 _080CFE90:\n\
 	pop {r4-r7}\n\
 	pop {r0}\n\
