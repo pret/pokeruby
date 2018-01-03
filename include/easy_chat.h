@@ -1,7 +1,99 @@
 #ifndef GUARD_EASYCHAT_H
 #define GUARD_EASYCHAT_H
 
+struct Sprite;
+
+struct Shared1000
+{
+    void (*unk0)(void);  // main cb 2
+    u16 *unk4;
+    u8 unk8;
+    u8 unk9;
+    u8 unkA;
+    u8 unkB;
+    u16 unkC[(0x20-0xC)/2];   // unknown length
+    void (*unk20)(void);
+    u16 unk24;
+    u8 unk26;
+    u8 unk27;
+    u16 unk28;
+    u8 unk2A[11][2];  // unknown length
+    u8 unk40[4][14];
+    u8 unk78[0x7D - 0x78];  // unknown length
+    u8 unk7D;
+    u8 unk7E[0x83-0x7E];
+    s8 unk83;   // s8?
+    //u8 unk83;   // s8?
+    s8 unk84;
+    s8 unk85;
+    s8 unk86;
+    bool8 unk87;
+    u16 unk88;
+    u16 unk8A;
+    u8 unk8C[(0x96-0x8C)/2][2];
+    u8 unk96;
+    u8 filler97;
+    struct Sprite *unk98;
+    struct Sprite *unk9C;
+    struct Sprite *unkA0;
+    struct Sprite *unkA4;
+    u8 fillerA8[0x1A8-0xA8];
+    s8 unk1A8;
+    s8 unk1A9;
+    s8 unk1AA[0xB5-0xAA];  // unknown length
+    s8 unk1B5;
+    s8 unk1B6;
+    s8 unk1B7;
+    u8 unk1B8;
+    u8 unk1B9;
+    u16 unk1BA;
+    u8 filler1BC[0xBE - 0xBC];
+    u8 unk1BE;
+    u8 filler1BF;
+    s8 unk1C0;
+    u8 filler1C1[3];
+    void (*unk1C4)(void);
+    u8 filler1C8[0x4142-0x1C8];
+#if GERMAN
+    u8 filler4142_de[0x32A];
+#endif
+    u16 unk4142[(0x78-0x42)/2];
+    u16 unk4178[(0x99A4-0x4178)/2]; // unknown length
+#if GERMAN
+    u8 filler99A4_de[2];
+#endif
+    s8 unk99A4;
+    s8 unk99A5;
+    s8 unk99A6[0xA28-0x9A6];
+    s8 unk9A28;
+    s8 unk9A29;
+    //u8 filler9A2A[0xC7C-0xA2A];
+    u16 unk9A2A[0x94][2];  // unknown length
+    u8 filler9C7A[2];
+    u16 unk9C7C;  // this is at 0x9FA8 in German
+    s16 unk9C7E;
+    u8 unk9C80[0xC9-0x80];
+    u8 unk9CC9[0xD12-0xCC9];
+    u8 unk9D12[0x5B-0x12];
+    u8 unk9D5B[0xA4-0x5B];
+    u8 unk9DA4[0xC8-0xA4];
+    u8 filler9DC8[0xE14 - 0xDC8];
+    u8 unk9E14[0xE41 - 0xE14];
+    u8 unk9E41[0x6E - 0x41];
+    u8 unk9E6E[0xEE - 0x6E];
+    u8 unk9EEE[0xF6E - 0xEEE];
+    u8 unk9F6E[1];  // unknown length
+};
+
+#define static_assert(cond) \
+  typedef char test_[(cond) ? 1 : -1]
+
+//static_assert(offsetof(struct Shared1000, unk1A8) == 0x1A8);
+
 extern u8 gUnknown_020388AC;
+
+// const pointer to shared1000. easy_chat might be two separate files.
+extern struct Shared1000 *const gUnknown_083DB694;
 
 void sub_80E62A0(u8 arg0, u16 *arg1, void (*arg2)(void), u8 arg3);
 u16 sub_80EB72C(u16 group);

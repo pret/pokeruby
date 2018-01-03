@@ -1,0 +1,10 @@
+const struct SpriteTemplate gSpriteTemplate_83DBCAC =
+{
+    .tileTag = 1,
+    .paletteTag = 1,
+    .oam = &gOamData_83DBC14,
+    .anims = gSpriteAnimTable_83DBC7C,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80E85F8,
+};

@@ -303,6 +303,7 @@ SECTIONS {
         asm/battle_intro.o(.text);
         src/field/bike.o(.text);
         src/easy_chat_before.o(.text);
+		src/easy_chat_2.o(.text);
         asm/easy_chat.o(.text);
         src/easy_chat.o(.text);
         src/pokenav_before.o(.text);
@@ -544,6 +545,7 @@ SECTIONS {
         data/battle_anim_80CA710.o(.rodata);
         src/field/bike.o(.rodata);
         src/easy_chat_before.o(.rodata);
+        src/easy_chat_2.o(.rodata);
         data/easy_chat.o(.rodata);
         data/pokenav.o(.rodata);
         src/pokemon/mon_markings.o(.rodata);

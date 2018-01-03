@@ -2656,4 +2656,6 @@ extern const u8 gNamingScreenRightPointingTriangleTiles[];
 extern const u8 gNamingScreenUnderscoreTiles[];
 extern const u16 gNamingScreenPalettes[][16];
 
+extern const u8 gInterviewOutlineCursorTiles[];
+
 #endif  // GUARD_GRAPHICS_H
