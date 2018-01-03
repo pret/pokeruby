@@ -46,6 +46,7 @@ void sub_8078E70(u8 sprite, u8);
 void sub_8078F40(u8 sprite);
 void sub_8078F9C(u8 sprite);
 void sub_8079518(struct Sprite *sprite);
+void sub_8079534(struct Sprite *sprite);
 void sub_80796F8(u8 task);
 void sub_80797EC(struct Task *task);
 void sub_8079814(u8 taskId);
@@ -53,6 +54,9 @@ void sub_8079A64(u8 sprite);
 u16 sub_8079B10(u8 sprite);
 void sub_8079BF4(s16 *bottom, s16 *top, const void *ptr);
 void *sub_8079BFC(s16 bottom, s16 top);
+// u8 a2 := u8 sprite
+void sub_8079C08(struct Task *task, u8 a2, s16 a3, s16 a4, s16 a5, s16 a6, u16 a7);
+u8 sub_8079C74(struct Task *task);
 void sub_8079E24();
 u8 sub_8079E90(u8 slot);
 u8 GetBankIdentity_permutated(u8 slot);

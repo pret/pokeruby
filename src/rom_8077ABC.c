@@ -1565,7 +1565,7 @@ void *sub_8079BFC(s16 bottom, s16 top) {
 
 void sub_8079C08(struct Task *task, u8 a2, s16 a3, s16 a4, s16 a5, s16 a6, u16 a7) {
     task->data[8] = a7;
-    task->data[15] = a2;
+    task->data[15] = a2; // spriteId
     task->data[9] = a3;
     task->data[10] = a4;
     task->data[13] = a5;
