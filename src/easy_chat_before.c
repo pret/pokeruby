@@ -21,15 +21,13 @@ extern void sub_80546B8(void);
 
 struct Shared1000
 {
-    void *unk0;  // callback
+    void (*unk0)(void);  // main cb 2
     u16 *unk4;
     u8 unk8;
     u8 unk9;
     u8 unkA;
     u8 unkB;
-    u16 unkC;
-    u16 unkE;
-    u8 filler10[0x20-0x10];
+    u16 unkC[(0x20-0xC)/2];   // unknown length
     void (*unk20)(void);
     u16 unk24;
     u8 unk26;
@@ -37,12 +35,15 @@ struct Shared1000
     u16 unk28;
     u8 unk2A[11][2];  // unknown length
     u8 unk40[4][14];
-    u8 unk78[0x83-0x78];  // unknown length
-    u8 unk83;
+    u8 unk78[0x7D - 0x78];  // unknown length
+    u8 unk7D;
+    u8 unk7E[0x83-0x7E];
+    s8 unk83;   // s8?
+    //u8 unk83;   // s8?
     s8 unk84;
     s8 unk85;
     s8 unk86;
-    u8 unk87;
+    bool8 unk87;
     u16 unk88;
     u16 unk8A;
     u8 filler8C[0x96-0x8C];
@@ -50,8 +51,8 @@ struct Shared1000
     u8 filler97[0x1A8-0x97];
     s8 unk1A8;
     s8 unk1A9;
-    u8 unk1AA[0xB5-0xAA];  // unknown length
-    u8 unk1B5;
+    s8 unk1AA[0xB5-0xAA];  // unknown length
+    s8 unk1B5;
     s8 unk1B6;
     s8 unk1B7;
     u8 unk1B8;
@@ -89,7 +90,7 @@ struct Shared1000
 #define static_assert(cond) \
   typedef char test_[(cond) ? 1 : -1]
 
-//static_assert(offsetof(struct Shared1000, unk4142) == 0x4142);
+static_assert(offsetof(struct Shared1000, unk20) == 0x20);
 
 #define shared1000 (*(struct Shared1000 *)(gSharedMem + 0x1000))
 
@@ -204,12 +205,15 @@ void sub_80E73D0(void);
 void sub_80E7458(void);
 void sub_80E752C(void);
 void sub_80E7574(void);
-u8 sub_80E75D8(void);
-u8 sub_80E77C8(void);
+bool8 sub_80E75D8(void);
+bool8 sub_80E77C8(void);
+void sub_80E7A98(void);
 void sub_80E7AD4(void);
 u8 sub_80E7B40(void);
+void sub_80E7D30(void);
 void sub_80E7D6C(void);
 void sub_80E7D9C(void);
+u8 sub_80E7DD0(void);
 void sub_80E7E50(void);
 void sub_80E7F00();
 u8 sub_80E7FA8(void);
@@ -236,20 +240,28 @@ void sub_80E95A4(void);
 void sub_80E9744(void);
 void sub_80E98C4(void);
 void sub_80E9974(void);
+void sub_80E9A14(void);
 void sub_80E9A4C(void);
 void sub_80E9AD4(void);
+void sub_80E9D00(void);
+void sub_80E9D7C(void);
+void sub_80E9E08();
+u8 sub_80E9E54(void);
 void sub_80E9E98(void);
 u8 sub_80E9EA8(void);
 u8 sub_80E9F50(void);
 u8 sub_80E9FD4(void);
 u8 sub_80EA014(void);
 u8 sub_80EA050(void);
+u8 sub_80EA0E4(void);
+u8 sub_80EA184(void);
 void sub_80EAC5C(void);
 void sub_80EAD08(void);
 u8 sub_80EAD7C(u8);
 void sub_80EAECC(void);
 void sub_80EB040(void);
 void sub_80EB0B0(void);
+u16 sub_80EB2D4();
 bool8 sub_80EB680(u16 *, u16, u16, u16);
 void sub_80E9C94(void);
 
@@ -331,7 +343,7 @@ void sub_80E60D8(void)
     sub_80E62A0(gSpecialVar_0x8004, r1, sub_80546B8, r4);
 }
 
-void sub_80E62A0(u8 a, u16 *b, void *c, u8 d)
+void sub_80E62A0(u8 a, u16 *b, void (*c)(void), u8 d)
 {
     shared1000.unk0 = c;
     shared1000.unk4 = b;
@@ -766,14 +778,11 @@ void sub_80E6AC4(void)
 void sub_80E6AE4(void)
 {
     shared1000.unk87 = sub_80E75D8();
-    if (shared1000.unk87 != 0)
+    if (shared1000.unk87)
         PlaySE(SE_SELECT);
     if (gMain.newKeys & A_BUTTON)
     {
-        u8 r2;
-
         PlaySE(SE_SELECT);
-        r2 = shared1000.unk86;
         if (shared1000.unk86 == shared1000.unk84)
         {
             switch (shared1000.unk85)
@@ -791,7 +800,7 @@ void sub_80E6AE4(void)
         }
         else
         {
-            shared1000.unk27 = shared1000.unk83 * r2 + shared1000.unk85;
+            shared1000.unk27 = shared1000.unk86 * shared1000.unk83 + shared1000.unk85;
             sub_80E7574();
             sub_80E682C(sub_80E6F68);
             return;
@@ -805,8 +814,6 @@ void sub_80E6AE4(void)
 
 void sub_80E6BC0(void)
 {
-    //s8 selection;
-
     switch (shared1000.unk24)
     {
     case 0:
@@ -928,7 +935,7 @@ void sub_80E6D7C(void)
                 shared1000.unk24 = 10;
                 break;
             }
-            if (shared1000.unkC == 0xFFFF || shared1000.unkE == 0xFFFF)
+            if (shared1000.unkC[0] == 0xFFFF || shared1000.unkC[1] == 0xFFFF)
             {
                 sub_80E91D4(9);
                 shared1000.unk24 = 10;
@@ -963,7 +970,7 @@ void sub_80E6D7C(void)
             }
             if (shared1000.unk8 == 13)
             {
-                if (shared1000.unkC == 0xFFFF || shared1000.unkE == 0xFFFF)
+                if (shared1000.unkC[0] == 0xFFFF || shared1000.unkC[1] == 0xFFFF)
                     gSpecialVar_Result = 0;
                 gSpecialVar_0x8004 = sub_80E810C();
             }
@@ -1040,7 +1047,7 @@ void sub_80E6FC8(void)
     }
     else
     {
-        if (shared1000.unk96 != 0)
+        if (shared1000.unk96)
             PlaySE(SE_SELECT);
         if (gMain.newKeys & A_BUTTON)
         {
@@ -1203,6 +1210,371 @@ void sub_80E7294(void)
             sub_80E682C(sub_80E73D0);
         }
     }
+}
+
+void sub_80E7324(void)
+{
+    switch (shared1000.unk24)
+    {
+    case 0:
+        if (sub_80E7DD0() == 0)
+        {
+            sub_80E682C(sub_80E7294);
+        }
+        else
+        {
+            sub_80E88F0();
+            sub_80E87CC(0);
+            shared1000.unk24++;
+        }
+        break;
+    case 1:
+        shared1000.unk24++;
+        break;
+    case 2:
+        sub_80E9E98();
+        shared1000.unk24++;
+        break;
+    case 3:
+        if (sub_80EA184() != 0)
+            shared1000.unk24++;
+        break;
+    case 4:
+        if (shared1000.unk8 == 6 && sub_80E7FA8() != 0)
+            sub_80E682C(sub_80E6D7C);
+        else
+            sub_80E682C(sub_80E6AC4);
+        break;
+    }
+}
+
+void sub_80E73D0(void)
+{
+    switch (shared1000.unk24)
+    {
+    case 0:
+        sub_80E87CC(0);
+        sub_80E88F0();
+        shared1000.unk24++;
+        break;
+    case 1:
+        sub_80E9AD4();
+        sub_80E9E98();
+        shared1000.unk24++;
+        break;
+    case 2:
+        if (sub_80EA0E4() != 0)
+        {
+            sub_80E8D8C(1);
+            sub_80E9A14();
+            shared1000.unk24++;
+        }
+        break;
+    case 3:
+        sub_80E8420();
+        sub_80E8958(0);
+        shared1000.unk24++;
+        break;
+    case 4:
+        sub_80E9974();
+        sub_80E682C(sub_80E6FC8);
+        break;
+    }
+}
+
+void sub_80E7458(void)
+{
+    switch (shared1000.unk24)
+    {
+    case 0:
+        if (shared1000.unk1C4 == sub_80E6FC8)
+            sub_80E9D7C();
+        else
+            sub_80E9D00();
+        sub_80E9E08(shared1000.unk1BE);
+        shared1000.unk24++;
+        break;
+    case 1:
+        if (sub_80E9E54() != 0)
+        {
+            if (shared1000.unk1C4 == sub_80E6FC8)
+            {
+                sub_80E9D7C();
+                shared1000.unk1B5 += shared1000.unk1C0;
+                sub_80E7A98();
+                shared1000.unk96 = TRUE;
+            }
+            else
+            {
+                shared1000.unk9A29 += shared1000.unk1C0;
+                sub_80E7D30();
+                shared1000.unk1B9 = 1;
+            }
+            shared1000.unk1BE = 2;
+            sub_80E682C(shared1000.unk1C4);
+        }
+        break;
+    }
+}
+
+void sub_80E752C(void)
+{
+    switch (shared1000.unk24)
+    {
+    case 0:
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+        shared1000.unk24++;
+        break;
+    case 1:
+        if (!UpdatePaletteFade())
+            SetMainCallback2(shared1000.unk0);
+        break;
+    }
+}
+
+void sub_80E7574(void)
+{
+    if (shared1000.unk8 == 1
+     && shared1000.unk7E[shared1000.unk86] == 2
+     && sub_80EB2D4(shared1000.unkC[shared1000.unk27]) != 7)
+        shared1000.unk7D = 1;
+    else
+        shared1000.unk7D = 0;
+    shared1000.unk7D = 0;  // What the hell?
+}
+
+bool8 sub_80E75D8(void)
+{
+    bool8 pressedUpDown = FALSE;
+    u8 r0;
+
+    if (gMain.newKeys & START_BUTTON)
+    {
+        shared1000.unk86 = shared1000.unk84;
+        shared1000.unk85 = 2;
+        return TRUE;
+    }
+
+    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    {
+        shared1000.unk86--;
+        if (shared1000.unk86 < 0)
+            shared1000.unk86 = shared1000.unk84;
+        pressedUpDown = TRUE;
+    }
+    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    {
+        shared1000.unk86++;
+        if (shared1000.unk86 > shared1000.unk84)
+            shared1000.unk86 = 0;
+        pressedUpDown = TRUE;
+    }
+
+    if (pressedUpDown)
+    {
+        if (shared1000.unk9 == 2)
+        {
+            if (shared1000.unk86 == shared1000.unk84)
+                shared1000.unk85 = 2;
+            else
+                shared1000.unk85 = 0;
+            return TRUE;
+        }
+        else
+        {
+            if (shared1000.unk85 >= shared1000.unk83)
+                shared1000.unk85 = shared1000.unk83 - 1;
+            if (shared1000.unk86 != shared1000.unk84)
+            {
+                r0 = shared1000.unk86 * shared1000.unk83 + shared1000.unk85;
+                if (r0 >= shared1000.unkA)
+                    shared1000.unk85 = r0 - shared1000.unkA;
+            }
+            return TRUE;
+        }
+    }
+    else
+    {
+        if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+        {
+            if (--shared1000.unk85 < 0)
+            {
+                if (shared1000.unk86 == shared1000.unk84)
+                {
+                    shared1000.unk85 = 2;
+                }
+                else
+                {
+                    shared1000.unk85 = shared1000.unk83 - 1;
+                    r0 = shared1000.unk86 * shared1000.unk83 + shared1000.unk85;
+                    if (r0 >= shared1000.unkA)
+                        shared1000.unk85 = r0 - shared1000.unkA;
+                }
+            }
+            return TRUE;
+        }
+        if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+        {
+            if (shared1000.unk86 == shared1000.unk84)
+            {
+                if (++shared1000.unk85 > 2)
+                    shared1000.unk85 = 0;
+            }
+            else
+            {
+                if (++shared1000.unk85 >= shared1000.unk83)
+                    shared1000.unk85 = 0;
+                r0 = shared1000.unk86 * shared1000.unk83 + shared1000.unk85;
+                if (r0 >= shared1000.unkA)
+                    shared1000.unk85 = r0 - shared1000.unkA;
+            }
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+bool8 sub_80E77C8(void)
+{
+    bool8 pressedLeftRight = FALSE;
+    bool8 pressedUpDown;
+
+    if (shared1000.unk1B7 != 0)
+    {
+        if (gMain.newAndRepeatedKeys & DPAD_UP)
+        {
+            shared1000.unk1A8--;
+            if (shared1000.unk1A8 < 1)
+                shared1000.unk1A8 = 3;
+            return TRUE;
+        }
+        else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+        {
+            shared1000.unk1A8++;
+            if (shared1000.unk1A8 > 3)
+                shared1000.unk1A8 = 1;
+            return TRUE;
+        }
+    }
+    else
+    {
+        if (shared1000.unk26 == 1)
+        {
+            pressedUpDown = FALSE;
+
+            if (gMain.newAndRepeatedKeys & DPAD_UP)
+            {
+                shared1000.unk1A8--;
+                if (shared1000.unk1A8 < 0)
+                    shared1000.unk1A8 = 3;
+                pressedUpDown = TRUE;
+            }
+            else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+            {
+                shared1000.unk1A8++;
+                if (shared1000.unk1A8 > 3)
+                    shared1000.unk1A8 = 0;
+                pressedUpDown = TRUE;
+            }
+
+            if (pressedUpDown)
+            {
+                sub_80E7A98();
+                return TRUE;
+            }
+        }
+        else
+        {
+            pressedUpDown = FALSE;
+            shared1000.unk1C0 = 0;
+
+            if (gMain.newAndRepeatedKeys & DPAD_UP)
+            {
+                if (shared1000.unk1A8 == 0)
+                    return FALSE;
+                shared1000.unk1A8--;
+                if (shared1000.unk1A8 < shared1000.unk1B5)
+                    shared1000.unk1C0 = -1;
+                pressedUpDown = TRUE;
+            }
+            else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+            {
+                if (shared1000.unk1A8 >= shared1000.unk1B6 - 1)
+                    return FALSE;
+                shared1000.unk1A8++;
+                if (shared1000.unk1A8 > shared1000.unk1B5 + 3)
+                    shared1000.unk1C0 = 1;
+                pressedUpDown = TRUE;
+            }
+
+            if (pressedUpDown)
+            {
+                if (shared1000.unk1C0 == 0)
+                {
+                    sub_80E7A98();
+                    return TRUE;
+                }
+                return FALSE;
+            }
+        }
+    }
+
+    if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+    {
+        if (shared1000.unk1A9 != 0)
+            shared1000.unk1A9--;
+        else
+            shared1000.unk1A9 = shared1000.unk1AA[shared1000.unk1A8];
+        pressedLeftRight = TRUE;
+    }
+    else if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+    {
+        if (shared1000.unk1B7 != 0
+         || shared1000.unk1A9 == shared1000.unk1AA[shared1000.unk1A8])
+            shared1000.unk1A9 = 0;
+        else
+            shared1000.unk1A9++;
+        pressedLeftRight = TRUE;
+    }
+
+    if (pressedLeftRight)
+    {
+        s8 r9 = shared1000.unk1B7;
+
+        shared1000.unk1B7 = (shared1000.unk1A9 == shared1000.unk1AA[shared1000.unk1A8]);
+        if (shared1000.unk1B7 != 0)
+        {
+            shared1000.unk1A8 -= shared1000.unk1B5;
+            if (shared1000.unk1A8 == 0)
+            {
+                shared1000.unk1A8 = 1;
+                shared1000.unk1A9 = shared1000.unk1AA[shared1000.unk1A8];
+            }
+        }
+        else if (r9 != 0)
+        {
+            shared1000.unk1A8 += shared1000.unk1B5;
+            if (shared1000.unk1A9 != 0)
+                shared1000.unk1A9 = shared1000.unk1AA[shared1000.unk1A8] - 1;
+        }
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+void sub_80E7A98(void)
+{
+    if (shared1000.unk1A9 >= shared1000.unk1AA[shared1000.unk1A8])
+        shared1000.unk1A9 = shared1000.unk1AA[shared1000.unk1A8] - 1;
+}
+
+void sub_80E7AD4(void)
+{
+    if (shared1000.unk26 == 0)
+        shared1000.unk1B8 = shared1000.unk2A[shared1000.unk1A8][shared1000.unk1A9];
+    else
+        shared1000.unk1B8 = shared1000.unk40[shared1000.unk1A8][shared1000.unk1A9];
 }
 
 #endif

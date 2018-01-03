@@ -3,7 +3,7 @@
 
 extern u8 gUnknown_020388AC;
 
-void sub_80E62A0(u8 arg0, u16 *arg1, void *arg2, u8 arg3);
+void sub_80E62A0(u8 arg0, u16 *arg1, void (*arg2)(void), u8 arg3);
 u16 sub_80EB72C(u16 group);
 void sub_80EB6FC(u16 *, u16);
 void InitEasyChatPhrases(void);
