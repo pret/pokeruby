@@ -46,7 +46,7 @@ struct Shared1000
     bool8 unk87;
     u16 unk88;
     u16 unk8A;
-    u8 filler8C[0x96-0x8C];
+    u8 unk8C[(0x96-0x8C)/2][2];
     u8 unk96;
     u8 filler97[0x1A8-0x97];
     s8 unk1A8;
@@ -73,28 +73,33 @@ struct Shared1000
 #if GERMAN
     u8 filler99A4_de[2];
 #endif
-    u8 unk99A4;
-    u8 unk99A5;
-    u8 unk99A6[0xA28-0x9A6];
+    s8 unk99A4;
+    s8 unk99A5;
+    s8 unk99A6[0xA28-0x9A6];
     s8 unk9A28;
-    u8 unk9A29;
-    u8 filler9A2A[0xC7C-0xA2A];
+    s8 unk9A29;
+    //u8 filler9A2A[0xC7C-0xA2A];
+    u16 unk9A2A[0x94][2];  // unknown length
+    u8 filler9C7A[2];
     u16 unk9C7C;  // this is at 0x9FA8 in German
     s16 unk9C7E;
     u8 filler9C80[0xDA4-0xC80];
     u8 unk9DA4[0x24];
-    u8 filler9DC8[0xF6E - 0xDC8];
+    u8 filler9DC8[0xE14 - 0xDC8];
+    u8 unk9E14[0xE41 - 0xE14];
+    u8 unk9E41[0xF6E - 0xE41];
     u8 unk9F6E[1];  // unknown length
 };
 
 #define static_assert(cond) \
   typedef char test_[(cond) ? 1 : -1]
 
-static_assert(offsetof(struct Shared1000, unk20) == 0x20);
+//static_assert(offsetof(struct Shared1000, unk9DA4) == 0x9DA4);
 
 #define shared1000 (*(struct Shared1000 *)(gSharedMem + 0x1000))
 
 const u16 gMysteryEventPhrase[] = {EC_WORD_MYSTERY, EC_WORD_EVENT, EC_WORD_IS, EC_WORD_EXCITING};
+
 const u16 gBerryMasterWifePhrases[][2] =
 {
 #if ENGLISH
@@ -209,15 +214,15 @@ bool8 sub_80E75D8(void);
 bool8 sub_80E77C8(void);
 void sub_80E7A98(void);
 void sub_80E7AD4(void);
-u8 sub_80E7B40(void);
+bool8 sub_80E7B40(void);
 void sub_80E7D30(void);
 void sub_80E7D6C(void);
 void sub_80E7D9C(void);
-u8 sub_80E7DD0(void);
+bool8 sub_80E7DD0(void);
 void sub_80E7E50(void);
-void sub_80E7F00();
+void sub_80E7F00(u16, u16);
 u8 sub_80E7FA8(void);
-u8 sub_80E8054(void);
+bool8 sub_80E8054(void);
 u8 sub_80E8094(void);
 u8 sub_80E810C(void);
 void sub_80E81C0(void);
@@ -243,6 +248,7 @@ void sub_80E9974(void);
 void sub_80E9A14(void);
 void sub_80E9A4C(void);
 void sub_80E9AD4(void);
+void sub_80E9C94(void);
 void sub_80E9D00(void);
 void sub_80E9D7C(void);
 void sub_80E9E08();
@@ -261,9 +267,9 @@ u8 sub_80EAD7C(u8);
 void sub_80EAECC(void);
 void sub_80EB040(void);
 void sub_80EB0B0(void);
+void sub_80EB218();
 u16 sub_80EB2D4();
 bool8 sub_80EB680(u16 *, u16, u16, u16);
-void sub_80E9C94(void);
 
 // TODO: Integrate German code into this
 #if ENGLISH
@@ -921,7 +927,7 @@ void sub_80E6D7C(void)
     {
     case 0:
         sub_80E8398(2);
-        if (sub_80E8054() != 0)
+        if (sub_80E8054())
         {
             sub_80E91D4(5);
             shared1000.unk24 = 10;
@@ -1198,7 +1204,7 @@ void sub_80E7294(void)
     }
     else
     {
-        if (shared1000.unk1B9 != 0)
+        if (shared1000.unk1B9)
             PlaySE(SE_SELECT);
         if (gMain.newKeys & A_BUTTON)
         {
@@ -1217,7 +1223,7 @@ void sub_80E7324(void)
     switch (shared1000.unk24)
     {
     case 0:
-        if (sub_80E7DD0() == 0)
+        if (!sub_80E7DD0())
         {
             sub_80E682C(sub_80E7294);
         }
@@ -1575,6 +1581,219 @@ void sub_80E7AD4(void)
         shared1000.unk1B8 = shared1000.unk2A[shared1000.unk1A8][shared1000.unk1A9];
     else
         shared1000.unk1B8 = shared1000.unk40[shared1000.unk1A8][shared1000.unk1A9];
+}
+
+bool8 sub_80E7B40(void)
+{
+    bool8 pressedUpDown = FALSE;
+
+    shared1000.unk1C0 = 0;
+    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    {
+        if (shared1000.unk99A4 == 0)
+            return FALSE;
+        shared1000.unk99A4--;
+        if (shared1000.unk99A4 < shared1000.unk9A29)
+        {
+            shared1000.unk1C0 = -1;
+            return FALSE;
+        }
+        pressedUpDown = TRUE;
+    }
+    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    {
+        if (shared1000.unk99A4 >= shared1000.unk9A28 - 1)
+            return FALSE;
+        shared1000.unk99A4++;
+        if (shared1000.unk99A4 >= shared1000.unk9A29 + 4)
+        {
+            shared1000.unk1C0 = 1;
+            return FALSE;
+        }
+        pressedUpDown = TRUE;
+    }
+
+    if (pressedUpDown)
+    {
+        sub_80E7D30();
+        return TRUE;
+    }
+
+    if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+    {
+        shared1000.unk99A5--;
+        if (shared1000.unk99A5 < 0)
+            shared1000.unk99A5 = shared1000.unk99A6[shared1000.unk99A4] - 1;
+        return TRUE;
+    }
+    else if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+    {
+        shared1000.unk99A5++;
+        if (shared1000.unk99A5 >= shared1000.unk99A6[shared1000.unk99A4])
+            shared1000.unk99A5 = 0;
+        return TRUE;
+    }
+
+    if (gMain.newKeys & START_BUTTON)
+    {
+        if (shared1000.unk9A29 != 0)
+        {
+            shared1000.unk1C0 = -shared1000.unk9A29;
+            if (shared1000.unk1C0 < -4)
+                shared1000.unk1C0 = -4;
+        }
+        shared1000.unk99A4 += shared1000.unk1C0;
+        shared1000.unk1BE = 4;
+    }
+    else if (gMain.newKeys & SELECT_BUTTON)
+    {
+        if (shared1000.unk9A29 < shared1000.unk9A28 - 4)
+        {
+            shared1000.unk1C0 = shared1000.unk9A28 - 4 - shared1000.unk9A29;
+            if (shared1000.unk1C0 > 4)
+                shared1000.unk1C0 = 4;
+        }
+        shared1000.unk99A4 += shared1000.unk1C0;
+        shared1000.unk1BE = 4;
+    }
+
+    return FALSE;
+}
+
+void sub_80E7D30(void)
+{
+    if (shared1000.unk99A5 >= shared1000.unk99A6[shared1000.unk99A4])
+        shared1000.unk99A5 = shared1000.unk99A6[shared1000.unk99A4] - 1;
+}
+
+void sub_80E7D6C(void)
+{
+    u16 i;
+
+    for (i = 0; i < shared1000.unkA; i++)
+        sub_80E7F00(i, 0xFFFF);
+}
+
+void sub_80E7D9C(void)
+{
+    u16 i;
+
+    for (i = 0; i < shared1000.unkA; i++)
+        shared1000.unk4[i] = shared1000.unkC[i];
+}
+
+bool8 sub_80E7DD0(void)
+{
+    u16 r4 = shared1000.unk9A2A[shared1000.unk99A4][shared1000.unk99A5];
+
+    if (shared1000.unk7D != 0
+     && shared1000.unk7E[shared1000.unk86] > 1
+     && sub_80EB2D4(r4) == 7)
+        return FALSE;
+
+    sub_80E7F00(shared1000.unk27, r4);
+    sub_80E95A4();
+    return TRUE;
+}
+
+void sub_80E7E50(void)
+{
+    u16 r5 = 0;
+    u16 i;
+    u16 j;
+
+    for (i = 0; i < shared1000.unk84; i++)
+    {
+        shared1000.unk7E[i] = 0;
+        for (j = 0; j < shared1000.unk83; j++)
+        {
+            shared1000.unkC[r5] = shared1000.unk4[r5];
+            shared1000.unk8C[i][j] = 0;
+            r5++;
+        }
+    }
+}
+
+void sub_80E7F00(u16 a, u16 b)
+{
+    u16 r5 = a / shared1000.unk83;
+    u16 r8 = a % shared1000.unk83;
+    u16 r4 = sub_80EB2D4(shared1000.unkC[a]);
+    u16 r3 = sub_80EB2D4(b);
+
+    if (r4 == 7)
+    {
+        if (r3 != 7)
+            shared1000.unk7E[r5]--;
+    }
+    else
+    {
+        if (r3 == 7)
+            shared1000.unk7E[r5]++;
+    }
+    r3 = 0;
+    shared1000.unk8C[r5][r8] = r3;
+    shared1000.unkC[a] = b;
+}
+
+u8 sub_80E7FA8(void)
+{
+    u16 r8 = 0;
+    u16 i;
+    u8 *r1;
+    u8 *r2;
+
+    for (i = 0; i < shared1000.unkA; i++)
+    {
+        sub_80EB218(shared1000.unk9E14, shared1000.unk4[i], 0);
+        sub_80EB218(shared1000.unk9E41, shared1000.unkC[i], 0);
+        r1 = shared1000.unk9E14;
+        r2 = shared1000.unk9E41;
+        while (*r1 == *r2 && *r1 != 0xFF)
+        {
+            r1++;
+            r2++;
+        }
+        if (*r1 != *r2)
+            r8++;
+    }
+    return r8;
+}
+
+bool8 sub_80E8054(void)
+{
+    u16 i;
+
+    for (i = 0; i < shared1000.unkA; i++)
+    {
+        if (shared1000.unkC[i] != 0xFFFF)
+            return FALSE;
+    }
+    return TRUE;
+}
+
+// CheckMysteryEventPhrase
+bool8 sub_80E8094(void)
+{
+    u16 i;
+    u8 *r3;
+    u8 *r4;
+
+    for (i = 0; i < 4; i++)
+    {
+        sub_80EB218(shared1000.unk9E14, shared1000.unkC[i], 0);
+        sub_80EB218(shared1000.unk9E41, gMysteryEventPhrase[i], 0);
+        r3 = shared1000.unk9E14;
+        r4 = shared1000.unk9E41;
+        while (*r3 != 0xFF && *r4 != 0xFF)
+        {
+            if (*r3++ != *r4++)
+                return FALSE;
+        }
+        if (*r3 != 0xFF || *r4 != 0xFF)
+            return FALSE;
+    }
+    return TRUE;
 }
 
 #endif
