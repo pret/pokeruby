@@ -11,7 +11,7 @@ FallarborTown_ContestLobby_EventScript_1539CD:: @ 81539CD
 	setvar CONTEST_RANK, 1
 	call FallarborTown_ContestLobby_EventScript_1A4E92
 	call FallarborTown_ContestLobby_EventScript_1539F8
-	special sub_80C4BF0
+	special SetContestTrainerGfxIds
 	call FallarborTown_ContestLobby_EventScript_15FBDB
 	setvar VAR_CONTEST_LOCATION, 2
 	warp MAP_LINK_CONTEST_ROOM1, 255, 7, 5

@@ -80,7 +80,7 @@ extern u16 gLastUsedItem;
 static EWRAM_DATA u16 gUnknown_020387E0 = 0;
 static EWRAM_DATA u16 gUnknown_020387E2 = 0;
 static EWRAM_DATA u8 gUnknown_020387E4 = 0;
-static EWRAM_DATA ALIGNED(4) u8 gUnknown_020387E8 = 0; // why is this aligned to a 4-byte boundary?
+static EWRAM_DATA ALIGNED(4) u8 sTVShowState = 0; // why is this aligned to a 4-byte boundary?
 
 static u8 gUnknown_03000720;
 static u8 gUnknown_03000721;
@@ -436,8 +436,8 @@ void ClearTVShowData(void)
     u8 showidx;
     u8 extradataidx;
     for (showidx=0; showidx<25; showidx++) {
-        gSaveBlock1.tvShows[showidx].common.var00 = 0;
-        gSaveBlock1.tvShows[showidx].common.var01 = 0;
+        gSaveBlock1.tvShows[showidx].common.kind = 0;
+        gSaveBlock1.tvShows[showidx].common.active = 0;
         for (extradataidx=0; extradataidx<34; extradataidx++) {
             gSaveBlock1.tvShows[showidx].common.pad02[extradataidx] = 0;
         }
@@ -452,20 +452,20 @@ extern u8 gSpecialVar_ContestRank;
 extern u8 gUnknown_03004316[11];
 extern u8 gBattleOutcome;
 
-void sub_80BF334(void);
-void sub_80BF3A4(void);
-void sub_80BF3DC(void);
-void sub_80BF46C(void);
-void sub_80BF478(void);
-void sub_80BF484(void);
-void sub_80BF4BC(void);
+void InterviewBefore_FanClubLetter(void);
+void InterviewBefore_RecentHappenings(void);
+void InterviewBefore_PkmnFanClubOpinions(void);
+void InterviewBefore_Dummy(void);
+void InterviewBefore_NameRater(void);
+void InterviewBefore_BravoTrainerPkmnProfile(void);
+void InterviewBefore_BravoTrainerBTProfile(void);
 
 void sub_80BE028(void);
 void sub_80BE074(void);
 void sub_80BE778(void);
 void sub_80BEB20(void);
 
-u8 sub_80BFB54(u8);
+u8 GetTVChannelByShowType(u8);
 
 s8 sub_80BF74C(TVShow tvShow[]);
 
@@ -476,53 +476,62 @@ void sub_80BE138(TVShow *show);
 void sub_80BE160(TVShow *show);
 extern u16 gLastUsedItem;
 
-void sub_80BE5FC(void);
-void sub_80BE65C(void);
-void sub_80BE6A0(void);
-void nullsub_21(void);
-void sub_80BE188(void);
-void sub_80BE320(void);
+void InterviewAfter_FanClubLetter(void);
+void InterviewAfter_RecentHappenings(void);
+void InterviewAfter_PkmnFanClubOpinions(void);
+void InterviewAfter_DummyShow4(void);
+void InterviewAfter_BravoTrainerPokemonProfile(void);
+void InterviewAfter_BravoTrainerBattleTowerProfile(void);
 
 u8 special_0x44(void)
 {
     u8 i;
     u8 j;
+    u8 selIdx;
+    TVShow *show;
 
-#ifndef NONMATCHING
-    asm("":::"r5");
-#endif
-
-    for (i = 5; i < 24; i++)
+    for (i = 5; i < ARRAY_COUNT(gSaveBlock1.tvShows) - 1; i++)
     {
-        if (gSaveBlock1.tvShows[i].common.var00 == 0)
+        if (gSaveBlock1.tvShows[i].common.kind == 0)
+        {
             break;
+        }
     }
-    i = Random() % i;
-    j = i;
+
+    j = Random() % i;
+    selIdx = j;
+
     do
     {
-        if (sub_80BFB54(gSaveBlock1.tvShows[i].common.var00) != 4)
+        if (GetTVChannelByShowType(gSaveBlock1.tvShows[j].common.kind) != 4)
         {
-            if (gSaveBlock1.tvShows[i].common.var01 == 1)
-                return i;
+            if (gSaveBlock1.tvShows[j].common.active == TRUE)
+            {
+                return j;
+            }
         }
         else
         {
-            struct TVShowMassOutbreak *massOutbreak = &gSaveBlock1.tvShows[i].massOutbreak;
-
-            if (massOutbreak->var16 == 0 && massOutbreak->var01 == 1)
-                return i;
+            show = &gSaveBlock1.tvShows[j];
+            if (show->massOutbreak.daysLeft == 0 && show->massOutbreak.active == TRUE)
+            {
+                return j;
+            }
         }
-
-        if (i == 0)
-            i = 23;
+        if (j == 0)
+        {
+            j = ARRAY_COUNT(gSaveBlock1.tvShows) - 2;
+        }
         else
-            i--;
-    } while (i != j);
+        {
+            j--;
+        }
+    } while (j != selIdx);
+
     return 0xFF;
 }
 
-u8 sub_80BDA30(void);
+u8 FindNonMassOutbreakActiveTVShow(void);
 
 u8 sub_80BD8B8(void)
 {
@@ -530,14 +539,14 @@ u8 sub_80BD8B8(void)
 
     if (retval == 0xff)
         return 0xff;
-    if (gSaveBlock1.outbreakPokemonSpecies != 0 && gSaveBlock1.tvShows[retval].common.var00 == TVSHOW_MASS_OUTBREAK)
-        return sub_80BDA30();
+    if (gSaveBlock1.outbreakPokemonSpecies != 0 && gSaveBlock1.tvShows[retval].common.kind == TVSHOW_MASS_OUTBREAK)
+        return FindNonMassOutbreakActiveTVShow();
     return retval;
 }
 
 u8 CheckForBigMovieOrEmergencyNewsOnTV(void);
 void SetTVMetatilesOnMap(int, int, u16);
-bool8 sub_80BECA0(void);
+bool8 FindAnyTVNewsOnTheAir(void);
 bool8 IsTVShowInSearchOfTrainersAiring(void);
 
 void UpdateTVScreensOnMap(int width, int height)
@@ -556,7 +565,7 @@ void UpdateTVScreensOnMap(int width, int height)
         {
             SetTVMetatilesOnMap(width, height, 0x3);
         }
-        else if (FlagGet(FLAG_SYS_TV_START) && (sub_80BD8B8() != 0xff || sub_80BECA0() != 0xff || IsTVShowInSearchOfTrainersAiring()))
+        else if (FlagGet(FLAG_SYS_TV_START) && (sub_80BD8B8() != 0xff || FindAnyTVNewsOnTheAir() != 0xff || IsTVShowInSearchOfTrainersAiring()))
         {
             FlagClear(FLAG_SYS_TV_WATCH);
             SetTVMetatilesOnMap(width, height, 0x3);
@@ -586,28 +595,28 @@ void TurnOffTVScreen(void)
     DrawWholeMapView();
 }
 
-u8 sub_80BDA0C(void)
+u8 GetTVShowType(void)
 {
-    return gSaveBlock1.tvShows[gSpecialVar_0x8004].common.var00;
+    return gSaveBlock1.tvShows[gSpecialVar_0x8004].common.kind;
 }
 
-u8 sub_80BDA30(void)
+u8 FindNonMassOutbreakActiveTVShow(void)
 {
     u8 showIdx;
     for (showIdx=0; showIdx<24; showIdx++)
     {
-        if (gSaveBlock1.tvShows[showIdx].common.var00 != 0 && gSaveBlock1.tvShows[showIdx].common.var00 != TVSHOW_MASS_OUTBREAK && gSaveBlock1.tvShows[showIdx].common.var01 == 1)
+        if (gSaveBlock1.tvShows[showIdx].common.kind != 0 && gSaveBlock1.tvShows[showIdx].common.kind != TVSHOW_MASS_OUTBREAK && gSaveBlock1.tvShows[showIdx].common.active == 1)
             return showIdx;
     }
     return 0xff;
 }
 
-u8 special_0x4a(void)
+u8 GetNonMassOutbreakActiveTVShow(void)
 {
     TVShow *tvShow;
     tvShow = &gSaveBlock1.tvShows[gSpecialVar_0x8004];
-    if (tvShow->common.var00 == TVSHOW_MASS_OUTBREAK && gSaveBlock1.outbreakPokemonSpecies)
-        return sub_80BDA30();
+    if (tvShow->common.kind == TVSHOW_MASS_OUTBREAK && gSaveBlock1.outbreakPokemonSpecies)
+        return FindNonMassOutbreakActiveTVShow();
     return gSpecialVar_0x8004;
 }
 
@@ -677,7 +686,7 @@ void GabbyAndTyBeforeInterview(void)
         FlagSet(FLAG_TEMP_1);
 }
 
-void sub_80BDC14(void)
+void GabbyAndTyAfterInterview(void)
 {
     gSaveBlock1.gabbyAndTyData.valB_0 = gSaveBlock1.gabbyAndTyData.valA_0;
     gSaveBlock1.gabbyAndTyData.valB_1 = gSaveBlock1.gabbyAndTyData.valA_1;
@@ -716,7 +725,7 @@ bool8 GabbyAndTyGetLastQuote(void)
     return TRUE;
 }
 
-u8 sub_80BDD18(void)
+u8 GabbyAndTyGetLastBattleTrivia(void)
 {
     if (!gSaveBlock1.gabbyAndTyData.valB_0)
         return 1;
@@ -768,27 +777,27 @@ void GabbyAndTySetScriptVarsToFieldObjectLocalIds(void)
     }
 }
 
-void sub_80BDE48(void)
+void InterviewAfter(void)
 {
     switch (gSpecialVar_0x8005)
     {
     case TVSHOW_FAN_CLUB_LETTER:
-        sub_80BE5FC();
+        InterviewAfter_FanClubLetter();
         break;
     case TVSHOW_RECENT_HAPPENINGS:
-        sub_80BE65C();
+        InterviewAfter_RecentHappenings();
         break;
     case TVSHOW_PKMN_FAN_CLUB_OPINIONS:
-        sub_80BE6A0();
+        InterviewAfter_PkmnFanClubOpinions();
         break;
     case TVSHOW_UNKN_SHOWTYPE_04:
-        nullsub_21();
+        InterviewAfter_DummyShow4();
         break;
     case TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE:
-        sub_80BE188();
+        InterviewAfter_BravoTrainerPokemonProfile();
         break;
     case TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE:
-        sub_80BE320();
+        InterviewAfter_BravoTrainerBattleTowerProfile();
         break;
     }
 }
@@ -832,8 +841,8 @@ void sub_80BDEC8(void)
 
                     total = 0;
                     pokemonToday = &gSaveBlock1.tvShows[gUnknown_03005D38.var0].pokemonToday;
-                    pokemonToday->var00 = TVSHOW_POKEMON_TODAY_CAUGHT;
-                    pokemonToday->var01 = total;
+                    pokemonToday->kind = TVSHOW_POKEMON_TODAY_CAUGHT;
+                    pokemonToday->active = total;
                     if (gBattleResults.unk5_1 != 0)
                     {
                         total = 1;
@@ -866,11 +875,11 @@ void sub_80BE028(void)
 {
     struct TVShowWorldOfMasters *worldOfMasters = &gSaveBlock1.tvShows[24].worldOfMasters;
 
-    if (worldOfMasters->var00 != TVSHOW_WORLD_OF_MASTERS)
+    if (worldOfMasters->kind != TVSHOW_WORLD_OF_MASTERS)
     {
         sub_80BF55C(gSaveBlock1.tvShows, 24);
         worldOfMasters->var06 = GetGameStat(GAME_STAT_STEPS);
-        worldOfMasters->var00 = TVSHOW_WORLD_OF_MASTERS;
+        worldOfMasters->kind = TVSHOW_WORLD_OF_MASTERS;
     }
     worldOfMasters->var02++;
     worldOfMasters->var04 = gBattleResults.caughtPoke;
@@ -898,8 +907,8 @@ void sub_80BE074(void)
                 struct TVShowPokemonTodayFailed *pokemonTodayFailed = &gSaveBlock1.tvShows[gUnknown_03005D38.var0].pokemonTodayFailed;
 
                 zero = 0;
-                pokemonTodayFailed->var00 = TVSHOW_POKEMON_TODAY_FAILED;
-                pokemonTodayFailed->var01 = zero;
+                pokemonTodayFailed->kind = TVSHOW_POKEMON_TODAY_FAILED;
+                pokemonTodayFailed->active = zero;
                 pokemonTodayFailed->species = gBattleResults.poke1Species;
                 pokemonTodayFailed->species2 = gBattleResults.lastOpponentSpecies;
                 pokemonTodayFailed->var10 = total;
@@ -936,16 +945,16 @@ void sub_80BE160(TVShow *show)
     show->common.trainerIdHi = playerId >> 8;
 }
 
-void sub_80BE188(void)
+void InterviewAfter_BravoTrainerPokemonProfile(void)
 {
     struct TVShowBravoTrainerPokemonProfiles *bravoTrainerSrc = &gSaveBlock1.tvShows[24].bravoTrainer;
 
-    if (bravoTrainerSrc->var00 == TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE)
+    if (bravoTrainerSrc->kind == TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE)
     {
         struct TVShowBravoTrainerPokemonProfiles *bravoTrainerNew = &gSaveBlock1.tvShows[gUnknown_03005D38.var0].bravoTrainer;
 
-        bravoTrainerNew->var00 = TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE;
-        bravoTrainerNew->var01 = 1;
+        bravoTrainerNew->kind = TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE;
+        bravoTrainerNew->active = 1;
         bravoTrainerNew->species = bravoTrainerSrc->species;
         StringCopy(bravoTrainerNew->playerName, gSaveBlock2.playerName);
         StringCopy(bravoTrainerNew->pokemonNickname, bravoTrainerSrc->pokemonNickname);
@@ -965,13 +974,13 @@ void sub_80BE23C(u16 a0)
 {
     struct TVShowBravoTrainerPokemonProfiles *bravoTrainer = &gSaveBlock1.tvShows[24].bravoTrainer;
 
-    sub_80BF484();
+    InterviewBefore_BravoTrainerPkmnProfile();
     gUnknown_03005D38.var0 = sub_80BF720(gSaveBlock1.tvShows);
     if (gUnknown_03005D38.var0 != -1)
     {
         sub_80BF55C(gSaveBlock1.tvShows, 24);
         bravoTrainer->var14 = a0;
-        bravoTrainer->var00 = TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE;
+        bravoTrainer->kind = TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE;
     }
 }
 
@@ -990,12 +999,12 @@ void sub_80BE284(u8 a0)
     }
 }
 
-void sub_80BE320(void)
+void InterviewAfter_BravoTrainerBattleTowerProfile(void)
 {
     struct TVShowBravoTrainerBattleTowerSpotlight *bravoTrainerTower = &gSaveBlock1.tvShows[gUnknown_03005D38.var0].bravoTrainerTower;
 
-    bravoTrainerTower->var00 = TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE;
-    bravoTrainerTower->var01 = 1;
+    bravoTrainerTower->kind = TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE;
+    bravoTrainerTower->active = 1;
     StringCopy(bravoTrainerTower->trainerName, gSaveBlock2.playerName);
     StringCopy(bravoTrainerTower->pokemonName, gSaveBlock2.battleTower.defeatedByTrainerName);
     bravoTrainerTower->species = gSaveBlock2.battleTower.firstMonSpecies;
@@ -1027,8 +1036,8 @@ void sub_80BE3BC(void)
             {
                 struct TVShowSmartShopper *smartShopper = &gSaveBlock1.tvShows[gUnknown_03005D38.var0].smartshopperShow;
 
-                smartShopper->var00 = TVSHOW_SMART_SHOPPER;
-                smartShopper->var01 = rval;
+                smartShopper->kind = TVSHOW_SMART_SHOPPER;
+                smartShopper->active = rval;
                 smartShopper->shopLocation = gMapHeader.regionMapSectionId;
                 for (i=0; i<3; i++)
                 {
@@ -1046,7 +1055,7 @@ void sub_80BE3BC(void)
 
 void sub_80BE478(void)
 {
-    sub_80BF478();
+    InterviewBefore_NameRater();
     if (gSpecialVar_Result == 1)
         return;
 
@@ -1055,8 +1064,8 @@ void sub_80BE478(void)
     {
         struct TVShowNameRaterShow *nameRaterShow = &gSaveBlock1.tvShows[gUnknown_03005D38.var0].nameRaterShow;
 
-        nameRaterShow->var00 = TVSHOW_NAME_RATER_SHOW;
-        nameRaterShow->var01 = 1;
+        nameRaterShow->kind = TVSHOW_NAME_RATER_SHOW;
+        nameRaterShow->active = 1;
         nameRaterShow->species = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES, NULL);
         nameRaterShow->random = Random() % 3;
         nameRaterShow->random2 = Random() % 2;
@@ -1089,37 +1098,37 @@ void StartMassOutbreak(void)
     gSaveBlock1.outbreakUnk5 = 2;
 }
 
-void sub_80BE5FC(void)
+void InterviewAfter_FanClubLetter(void)
 {
     struct TVShowFanClubLetter *fanclubLetter = &gSaveBlock1.tvShows[gUnknown_03005D38.var0].fanclubLetter;
 
-    fanclubLetter->var00 = TVSHOW_FAN_CLUB_LETTER;
-    fanclubLetter->var01 = 1;
+    fanclubLetter->kind = TVSHOW_FAN_CLUB_LETTER;
+    fanclubLetter->active = 1;
     StringCopy(fanclubLetter->playerName, gSaveBlock2.playerName);
     fanclubLetter->species = GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_SPECIES, NULL);
     sub_80BE160((TVShow *)fanclubLetter);
     fanclubLetter->language = GAME_LANGUAGE;
 }
 
-void sub_80BE65C(void)
+void InterviewAfter_RecentHappenings(void)
 {
     struct TVShowRecentHappenings *recentHappenings = &gSaveBlock1.tvShows[gUnknown_03005D38.var0].recentHappenings;
 
-    recentHappenings->var00 = TVSHOW_RECENT_HAPPENINGS;
-    recentHappenings->var01 = 1;
+    recentHappenings->kind = TVSHOW_RECENT_HAPPENINGS;
+    recentHappenings->active = 1;
     StringCopy(recentHappenings->playerName, gSaveBlock2.playerName);
     recentHappenings->var02 = 0;
     sub_80BE160((TVShow *)recentHappenings);
     recentHappenings->language = GAME_LANGUAGE;
 }
 
-void sub_80BE6A0(void)
+void InterviewAfter_PkmnFanClubOpinions(void)
 {
     u8 monIndex;
     struct TVShowFanclubOpinions *fanclubOpinions = &gSaveBlock1.tvShows[gUnknown_03005D38.var0].fanclubOpinions;
 
-    fanclubOpinions->var00 = TVSHOW_PKMN_FAN_CLUB_OPINIONS;
-    fanclubOpinions->var01 = 1;
+    fanclubOpinions->kind = TVSHOW_PKMN_FAN_CLUB_OPINIONS;
+    fanclubOpinions->active = 1;
     monIndex = GetLeadMonIndex();
     fanclubOpinions->var04A = GetMonData(&gPlayerParty[monIndex], MON_DATA_FRIENDSHIP, NULL) / 16;
     fanclubOpinions->var04B = gSpecialVar_0x8007;
@@ -1132,7 +1141,7 @@ void sub_80BE6A0(void)
     StripExtCtrlCodes(fanclubOpinions->var10);
 }
 
-void nullsub_21(void)
+void InterviewAfter_DummyShow4(void)
 {
 }
 
@@ -1144,7 +1153,7 @@ void sub_80BE778(void)
 
         for (i = 0; i < 24; i++)
         {
-            if (gSaveBlock1.tvShows[i].massOutbreak.var00 == TVSHOW_MASS_OUTBREAK)
+            if (gSaveBlock1.tvShows[i].massOutbreak.kind == TVSHOW_MASS_OUTBREAK)
                 return;
         }
         if (sub_80BF77C(0x147))
@@ -1158,8 +1167,8 @@ void sub_80BE778(void)
             s32 val2 = gUnknown_03005D38.var0;
             struct TVShowMassOutbreak *massOutbreak = &gSaveBlock1.tvShows[val2].massOutbreak;
 
-            massOutbreak->var00 = TVSHOW_MASS_OUTBREAK;
-            massOutbreak->var01 = 1;
+            massOutbreak->kind = TVSHOW_MASS_OUTBREAK;
+            massOutbreak->active = 1;
             massOutbreak->level = gPokeOutbreakSpeciesList[val].level;
             massOutbreak->var02 = 0;
             massOutbreak->var03 = 0;
@@ -1174,7 +1183,7 @@ void sub_80BE778(void)
             massOutbreak->var12 = 0;
             massOutbreak->probability = 0x32;
             massOutbreak->var15 = 0;
-            massOutbreak->var16 = 0x01;
+            massOutbreak->daysLeft = 0x01;
             sub_80BE160((TVShow *)massOutbreak);
             massOutbreak->language = GAME_LANGUAGE;
         }
@@ -1214,15 +1223,15 @@ void sub_80BE8EC(u16 arg0)
     {
         for (showidx=0; showidx<24; showidx++)
         {
-            if (gSaveBlock1.tvShows[showidx].massOutbreak.var00 == TVSHOW_MASS_OUTBREAK
-             && gSaveBlock1.tvShows[showidx].massOutbreak.var01 == 0x01)
+            if (gSaveBlock1.tvShows[showidx].massOutbreak.kind == TVSHOW_MASS_OUTBREAK
+             && gSaveBlock1.tvShows[showidx].massOutbreak.active == 0x01)
             {
                 struct TVShowMassOutbreak *massOutbreak = &gSaveBlock1.tvShows[showidx].massOutbreak;
 
-                if (massOutbreak->var16 < arg0)
-                    massOutbreak->var16 = 0;
+                if (massOutbreak->daysLeft < arg0)
+                    massOutbreak->daysLeft = 0;
                 else
-                    massOutbreak->var16 -= arg0;
+                    massOutbreak->daysLeft -= arg0;
                 break;
             }
         }
@@ -1272,8 +1281,8 @@ void sub_80BE9D4(void)
         register u8 zero asm("r1") = 0;
 
         asm(""::"r"(zero));
-        pokemonAngler->var00 = TVSHOW_FISHING_ADVICE;
-        pokemonAngler->var01 = zero;
+        pokemonAngler->kind = TVSHOW_FISHING_ADVICE;
+        pokemonAngler->active = zero;
         pokemonAngler->var02 = gUnknown_020387E2 & 0xFF;
         pokemonAngler->var03 = gUnknown_020387E2 >> 8;
         pokemonAngler->var04 = gUnknown_020387E0;
@@ -1294,7 +1303,7 @@ void sub_80BEA5C(u16 arg0)
 {
     struct TVShowWorldOfMasters *worldOfMasters = &gSaveBlock1.tvShows[24].worldOfMasters;
 
-    if (worldOfMasters->var00 == TVSHOW_WORLD_OF_MASTERS)
+    if (worldOfMasters->kind == TVSHOW_WORLD_OF_MASTERS)
     {
         if (worldOfMasters->var02 < 20)
             sub_80BF55C(gSaveBlock1.tvShows, 0x18);
@@ -1313,8 +1322,8 @@ void sub_80BEA88(void)
         {
             struct TVShowWorldOfMasters *worldOfMastersDst = &gSaveBlock1.tvShows[gUnknown_03005D38.var0].worldOfMasters;
 
-            worldOfMastersDst->var00 = TVSHOW_WORLD_OF_MASTERS;
-            worldOfMastersDst->var01 = 0;
+            worldOfMastersDst->kind = TVSHOW_WORLD_OF_MASTERS;
+            worldOfMastersDst->active = 0;
             worldOfMastersDst->var02 = worldOfMastersSrc->var02;
             worldOfMastersDst->var06 = GetGameStat(GAME_STAT_STEPS) - worldOfMastersSrc->var06;
             worldOfMastersDst->var04 = worldOfMastersSrc->var04;
@@ -1333,27 +1342,27 @@ void sub_80BEB20(void)
 
     if (FlagGet(FLAG_SYS_GAME_CLEAR) != 0)
     {
-        gUnknown_03005D38.var0 = sub_80BEBC8(gSaveBlock1.unknown_2ABC);
+        gUnknown_03005D38.var0 = sub_80BEBC8(gSaveBlock1.pokeNews);
         if (gUnknown_03005D38.var0 != -1 && sub_80BF77C(0x28f) != 1)
         {
             rval = (Random() % 3) + 1;
             if (sub_80BEE48(rval) != 1)
             {
-                gSaveBlock1.unknown_2ABC[gUnknown_03005D38.var0].val0 = rval;
-                gSaveBlock1.unknown_2ABC[gUnknown_03005D38.var0].val2 = 4;
-                gSaveBlock1.unknown_2ABC[gUnknown_03005D38.var0].val1 = 1;
+                gSaveBlock1.pokeNews[gUnknown_03005D38.var0].kind = rval;
+                gSaveBlock1.pokeNews[gUnknown_03005D38.var0].days = 4;
+                gSaveBlock1.pokeNews[gUnknown_03005D38.var0].state = 1;
             }
         }
     }
 }
 
-int sub_80BEBC8(struct UnknownSaveStruct2ABC *arg0)
+int sub_80BEBC8(struct PokeNews *pokeNews)
 {
     s8 i;
 
     for (i = 0; i < 16; i++)
     {
-        if (arg0[i].val0 == 0)
+        if (pokeNews[i].kind == 0)
             return i;
     }
     return -1;
@@ -1369,9 +1378,9 @@ void sub_80BEBF4(void)
 
 void sub_80BEC10(u8 arg0)
 {
-    gSaveBlock1.unknown_2ABC[arg0].val0 = 0;
-    gSaveBlock1.unknown_2ABC[arg0].val1 = 0;
-    gSaveBlock1.unknown_2ABC[arg0].val2 = 0;
+    gSaveBlock1.pokeNews[arg0].kind = 0;
+    gSaveBlock1.pokeNews[arg0].state = 0;
+    gSaveBlock1.pokeNews[arg0].days = 0;
 }
 
 void sub_80BEC40(void)
@@ -1380,13 +1389,13 @@ void sub_80BEC40(void)
 
     for (i = 0; i < 15; i++)
     {
-        if (gSaveBlock1.unknown_2ABC[i].val0 == 0)
+        if (gSaveBlock1.pokeNews[i].kind == 0)
         {
             for (j = i + 1; j < 16; j++)
             {
-                if (gSaveBlock1.unknown_2ABC[j].val0 != 0)
+                if (gSaveBlock1.pokeNews[j].kind != 0)
                 {
-                    gSaveBlock1.unknown_2ABC[i] = gSaveBlock1.unknown_2ABC[j];
+                    gSaveBlock1.pokeNews[i] = gSaveBlock1.pokeNews[j];
                     sub_80BEC10(j);
                     break;
                 }
@@ -1395,43 +1404,43 @@ void sub_80BEC40(void)
     }
 }
 
-u8 sub_80BECA0(void)
+u8 FindAnyTVNewsOnTheAir(void)
 {
     u8 i;
     for (i = 0; i < 16; i++)
     {
-        if (gSaveBlock1.unknown_2ABC[i].val0 != 0
-         && gSaveBlock1.unknown_2ABC[i].val1 == 1
-         && gSaveBlock1.unknown_2ABC[i].val2 < 3)
+        if (gSaveBlock1.pokeNews[i].kind != 0
+         && gSaveBlock1.pokeNews[i].state == 1
+         && gSaveBlock1.pokeNews[i].days < 3)
             return i;
     }
     return 0xFF;
 }
 
-void sub_80BECE8(void)
+void DoPokeNews(void)
 {
-    u8 arg0;
-    arg0 = sub_80BECA0();
-    if (arg0 == 0xff)
+    u8 i;
+    i = FindAnyTVNewsOnTheAir();
+    if (i == 0xff)
     {
         gSpecialVar_Result = 0;
         return;
     }
-    if (gSaveBlock1.unknown_2ABC[arg0].val2 == 0)
+    if (gSaveBlock1.pokeNews[i].days == 0)
     {
-        gSaveBlock1.unknown_2ABC[arg0].val1 = 2;
+        gSaveBlock1.pokeNews[i].state = 2;
         if (gLocalTime.hours < 20)
-            ShowFieldMessage(gTVNewsTextGroup2[gSaveBlock1.unknown_2ABC[arg0].val0]);
+            ShowFieldMessage(gTVNewsTextGroup2[gSaveBlock1.pokeNews[i].kind]);
         else
-            ShowFieldMessage(gTVNewsTextGroup3[gSaveBlock1.unknown_2ABC[arg0].val0]);
+            ShowFieldMessage(gTVNewsTextGroup3[gSaveBlock1.pokeNews[i].kind]);
     }
     else
     {
-        u16 value = gSaveBlock1.unknown_2ABC[arg0].val2;
+        u16 value = gSaveBlock1.pokeNews[i].days;
 
         ConvertIntToDecimalStringN(gStringVar1, value, 0, 1);
-        gSaveBlock1.unknown_2ABC[arg0].val1 = 0;
-        ShowFieldMessage(gTVNewsTextGroup1[gSaveBlock1.unknown_2ABC[arg0].val0]);
+        gSaveBlock1.pokeNews[i].state = 0;
+        ShowFieldMessage(gTVNewsTextGroup1[gSaveBlock1.pokeNews[i].kind]);
     }
     gSpecialVar_Result = 1;
 }
@@ -1444,9 +1453,9 @@ bool8 GetPriceReduction(u8 arg0)
         return FALSE;
     for (i=0; i<16; i++)
     {
-        if (gSaveBlock1.unknown_2ABC[i].val0 == arg0)
+        if (gSaveBlock1.pokeNews[i].kind == arg0)
         {
-            if (gSaveBlock1.unknown_2ABC[i].val1 == 2 && IsPriceDiscounted(arg0) != 0)
+            if (gSaveBlock1.pokeNews[i].state == 2 && IsPriceDiscounted(arg0) != 0)
                 return TRUE;
             else
                 return FALSE;
@@ -1487,7 +1496,7 @@ bool8 sub_80BEE48(u8 arg0)
         return TRUE;
     for (i=0; i<16; i++)
     {
-        if (gSaveBlock1.unknown_2ABC[i].val0 == arg0)
+        if (gSaveBlock1.pokeNews[i].kind == arg0)
             return TRUE;
     }
     return FALSE;
@@ -1499,17 +1508,17 @@ void sub_80BEE84(u16 var0)
 
     for (i=0; i<16; i++)
     {
-        if (gSaveBlock1.unknown_2ABC[i].val0)
+        if (gSaveBlock1.pokeNews[i].kind)
         {
-            if (gSaveBlock1.unknown_2ABC[i].val2 < var0)
+            if (gSaveBlock1.pokeNews[i].days < var0)
             {
                 sub_80BEC10(i);
             }
             else
             {
-                if (!gSaveBlock1.unknown_2ABC[i].val1 && FlagGet(FLAG_SYS_GAME_CLEAR) == 1)
-                    gSaveBlock1.unknown_2ABC[i].val1 = 1;
-                gSaveBlock1.unknown_2ABC[i].val2 -= var0;
+                if (!gSaveBlock1.pokeNews[i].state && FlagGet(FLAG_SYS_GAME_CLEAR) == 1)
+                    gSaveBlock1.pokeNews[i].state = 1;
+                gSaveBlock1.pokeNews[i].days -= var0;
             }
         }
     }
@@ -1619,7 +1628,7 @@ bool8 sub_80BF1B4(u8 showIdx)
 
     for (i = 5; i < 24; i++)
     {
-        if (tvShows[i].common.var00 == showIdx)
+        if (tvShows[i].common.kind == showIdx)
         {
             if ((trainerId & 0xFF) == tvShows[i].common.trainerIdLo && ((trainerId >> 8) & 0xFF) == tvShows[i].common.trainerIdHi)
                 return TRUE;
@@ -1656,9 +1665,9 @@ void sub_80BF25C(u8 showType)
 
     for (i = 0; i < 5; i++)
     {
-        if (gSaveBlock1.tvShows[i].common.var00 == showType)
+        if (gSaveBlock1.tvShows[i].common.kind == showType)
         {
-            if(gSaveBlock1.tvShows[i].common.var01 == 1)
+            if(gSaveBlock1.tvShows[i].common.active == 1)
             {
                 gSpecialVar_Result = 1;
             }
@@ -1674,36 +1683,36 @@ void sub_80BF25C(u8 showType)
     sub_80BF6D8();
 }
 
-void sub_80BF2C4(void)
+void InterviewBefore(void)
 {
-    gSpecialVar_Result = 0;
+    gSpecialVar_Result = FALSE;
     switch (gSpecialVar_0x8005)
     {
     case TVSHOW_FAN_CLUB_LETTER:
-        sub_80BF334();
+        InterviewBefore_FanClubLetter();
         break;
     case TVSHOW_RECENT_HAPPENINGS:
-        sub_80BF3A4();
+        InterviewBefore_RecentHappenings();
         break;
     case TVSHOW_PKMN_FAN_CLUB_OPINIONS:
-        sub_80BF3DC();
+        InterviewBefore_PkmnFanClubOpinions();
         break;
     case TVSHOW_UNKN_SHOWTYPE_04:
-        sub_80BF46C();
+        InterviewBefore_Dummy();
         break;
     case TVSHOW_NAME_RATER_SHOW:
-        sub_80BF478();
+        InterviewBefore_NameRater();
         break;
     case TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE:
-        sub_80BF484();
+        InterviewBefore_BravoTrainerPkmnProfile();
         break;
     case TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE:
-        sub_80BF4BC();
+        InterviewBefore_BravoTrainerBTProfile();
         break;
     }
 }
 
-void sub_80BF334(void)
+void InterviewBefore_FanClubLetter(void)
 {
     struct TVShowFanClubLetter *fanclubLetter;
 
@@ -1716,7 +1725,7 @@ void sub_80BF334(void)
     }
 }
 
-void sub_80BF3A4(void)
+void InterviewBefore_RecentHappenings(void)
 {
     struct TVShowRecentHappenings *recentHappenings;
 
@@ -1728,7 +1737,7 @@ void sub_80BF3A4(void)
     }
 }
 
-void sub_80BF3DC(void)
+void InterviewBefore_PkmnFanClubOpinions(void)
 {
     struct TVShowFanclubOpinions *fanclubOpinions;
 
@@ -1743,17 +1752,17 @@ void sub_80BF3DC(void)
     }
 }
 
-void sub_80BF46C(void)
+void InterviewBefore_Dummy(void)
 {
     gSpecialVar_Result = 1;
 }
 
-void sub_80BF478(void)
+void InterviewBefore_NameRater(void)
 {
     sub_80BF25C(TVSHOW_NAME_RATER_SHOW);
 }
 
-void sub_80BF484(void)
+void InterviewBefore_BravoTrainerPkmnProfile(void)
 {
     struct TVShowBravoTrainerPokemonProfiles *bravoTrainer;
 
@@ -1765,7 +1774,7 @@ void sub_80BF484(void)
     }
 }
 
-void sub_80BF4BC(void)
+void InterviewBefore_BravoTrainerBTProfile(void)
 {
     struct TVShowBravoTrainerBattleTowerSpotlight *bravoTrainerTower;
 
@@ -1778,32 +1787,32 @@ void sub_80BF4BC(void)
 }
 
 #if ENGLISH
-u8 sub_80BF4F4(u8 arg0)
+u8 NicknameDiffersFromSpeciesName(u8 monIndex)
 {
     u32 species;
 
-    GetMonData(&gPlayerParty[arg0], MON_DATA_NICKNAME, &gStringVar1);
-    species = GetMonData(&gPlayerParty[arg0], MON_DATA_SPECIES, NULL);
-    if (StringCompareWithoutExtCtrlCodes(gSpeciesNames[species], gStringVar1) == FALSE)
+    GetMonData(&gPlayerParty[monIndex], MON_DATA_NICKNAME, &gStringVar1);
+    species = GetMonData(&gPlayerParty[monIndex], MON_DATA_SPECIES, NULL);
+    if (StringCompareWithoutExtCtrlCodes(gSpeciesNames[species], gStringVar1) == 0)
         return FALSE;
 
     return TRUE;
 }
 #elif GERMAN
-u8 sub_80BF4F4(u8 arg0)
+u8 NicknameDiffersFromSpeciesName(u8 monIndex)
 {
     u8 langData[4];
     u32 species;
     u8 *tmp;
 
-    GetMonData(&gPlayerParty[arg0], MON_DATA_NICKNAME, &gStringVar1);
+    GetMonData(&gPlayerParty[monIndex], MON_DATA_NICKNAME, &gStringVar1);
 
     tmp = langData;
-    tmp[0] = GetMonData(&gPlayerParty[arg0], MON_DATA_LANGUAGE, &langData);
+    tmp[0] = GetMonData(&gPlayerParty[monIndex], MON_DATA_LANGUAGE, &langData);
     if (tmp[0] != GAME_LANGUAGE)
         return TRUE;
 
-    species = GetMonData(&gPlayerParty[arg0], MON_DATA_SPECIES, NULL);
+    species = GetMonData(&gPlayerParty[monIndex], MON_DATA_SPECIES, NULL);
     if (StringCompareWithoutExtCtrlCodes(gSpeciesNames[species], gStringVar1))
         return TRUE;
 
@@ -1811,17 +1820,17 @@ u8 sub_80BF4F4(u8 arg0)
 }
 #endif
 
-u8 sub_80BF544(void)
+u8 LeadMonNicknamed(void)
 {
-    return sub_80BF4F4(GetLeadMonIndex());
+    return NicknameDiffersFromSpeciesName(GetLeadMonIndex());
 }
 
 void sub_80BF55C(TVShow tvShow[], u8 showidx)
 {
     u8 idx;
 
-    tvShow[showidx].common.var00 = 0;
-    tvShow[showidx].common.var01 = 0;
+    tvShow[showidx].common.kind = 0;
+    tvShow[showidx].common.active = 0;
     for (idx = 0; idx < 34; idx++)
         tvShow[showidx].common.pad02[idx] = 0;
 }
@@ -1833,11 +1842,11 @@ void sub_80BF588(TVShow tvShow[])
 
     for (showidx = 0; showidx < 4; showidx++)
     {
-        if (tvShow[showidx].common.var00 == 0)
+        if (tvShow[showidx].common.kind == 0)
         {
             for (showidx2 = showidx + 1; showidx2 < 5; showidx2++)
             {
-                if (tvShow[showidx2].common.var00 != 0)
+                if (tvShow[showidx2].common.kind != 0)
                 {
                     tvShow[showidx] = tvShow[showidx2];
                     sub_80BF55C(tvShow, showidx2);
@@ -1848,11 +1857,11 @@ void sub_80BF588(TVShow tvShow[])
     }
     for (showidx = 5; showidx < 24; showidx++)
     {
-        if (tvShow[showidx].common.var00 == 0)
+        if (tvShow[showidx].common.kind == 0)
         {
             for (showidx2 = showidx + 1; showidx2 < 24; showidx2++)
             {
-                if (tvShow[showidx2].common.var00 != 0)
+                if (tvShow[showidx2].common.kind != 0)
                 {
                     tvShow[showidx] = tvShow[showidx2];
                     sub_80BF55C(gSaveBlock1.tvShows, showidx2);
@@ -1909,7 +1918,7 @@ s8 sub_80BF720(TVShow tvShow[])
 
     for (idx = 0; idx < 5; idx++)
     {
-        if (tvShow[idx].common.var00 == 0)
+        if (tvShow[idx].common.kind == 0)
             return idx;
     }
     return -1;
@@ -1921,7 +1930,7 @@ s8 sub_80BF74C(TVShow tvShow[])
 
     for (idx = 5; idx < 24; idx++)
     {
-        if (tvShow[idx].common.var00 == 0)
+        if (tvShow[idx].common.kind == 0)
             return idx;
     }
     return -1;
@@ -2043,19 +2052,19 @@ void sub_80BF820(u8 arg0, u8 arg1, u8 arg2, u16 arg3, u16 arg4, struct TVShowNam
     StringCopy(gUnknown_083D1464[arg0], flags);
 }
 
-bool8 sub_80BF974(void)
+bool8 TV_IsScriptShowKindAlreadyInQueue(void)
 {
     u8 i;
 
     for (i = 0; i < 5; i++)
     {
-        if (gSaveBlock1.tvShows[i].common.var00 == gSpecialVar_0x8004)
+        if (gSaveBlock1.tvShows[i].common.kind == gSpecialVar_0x8004)
             return TRUE;
     }
     return FALSE;
 }
 
-bool8 sub_80BF9B4(void)
+bool8 TV_PutNameRaterShowOnTheAirIfNicnkameChanged(void)
 {
     GetMonData(&(gPlayerParty[gSpecialVar_0x8004]), MON_DATA_NICKNAME, &gStringVar1);
     if (!StringCompareWithoutExtCtrlCodes(gStringVar3, gStringVar1))
@@ -2064,9 +2073,9 @@ bool8 sub_80BF9B4(void)
     return TRUE;
 }
 
-void c2_080CC144(void);
+void ChangePokemonNickname_CB(void);
 
-void sub_80BF9F8(void)
+void ChangePokemonNickname(void)
 {
     u16 spec;
     u16 gender;
@@ -2077,22 +2086,22 @@ void sub_80BF9F8(void)
     spec = GetMonData(&(gPlayerParty[gSpecialVar_0x8004]), MON_DATA_SPECIES, 0);
     gender = GetMonGender(&(gPlayerParty[gSpecialVar_0x8004]));
     pval = GetMonData(&(gPlayerParty[gSpecialVar_0x8004]), MON_DATA_PERSONALITY, 0);
-    DoNamingScreen(3, gStringVar2, spec, gender, pval, c2_080CC144);
+    DoNamingScreen(3, gStringVar2, spec, gender, pval, ChangePokemonNickname_CB);
 }
 
-void c2_080CC144(void)
+void ChangePokemonNickname_CB(void)
 {
     SetMonData(&(gPlayerParty[gSpecialVar_0x8004]), MON_DATA_NICKNAME, gStringVar2);
     c2_exit_to_overworld_1_continue_scripts_restart_music();
 }
 
-void sub_80BFAE0(void)
+void TV_CopyNicknameToStringVar1AndEnsureTerminated(void)
 {
     GetMonData(&(gPlayerParty[gSpecialVar_0x8004]), MON_DATA_NICKNAME, &gStringVar1);
     StringGetEnd10(gStringVar1);
 }
 
-void sub_80BFB10(void)
+void TV_CheckMonOTIDEqualsPlayerID(void)
 {
     if (GetPlayerTrainerId() == GetMonData(&(gPlayerParty[gSpecialVar_0x8004]), MON_DATA_OT_ID, 0))
         gSpecialVar_Result = 0;
@@ -2100,7 +2109,7 @@ void sub_80BFB10(void)
         gSpecialVar_Result = 1;
 }
 
-u8 sub_80BFB54(u8 arg0)
+u8 GetTVChannelByShowType(u8 arg0)
 {
     if (arg0 == 0)
         return 0;
@@ -2200,7 +2209,7 @@ void sub_80BFD20(void)
 typedef union ewramStruct_02007000
 {
     TVShow tvshows[4][25];
-    struct UnknownSaveStruct2ABC unknown_2abc[4][16];
+    struct PokeNews pokeNews[4][16];
 } ewramStruct_02007000;
 
 void sub_80BFE24(TVShow arg0[25], TVShow arg1[25], TVShow arg2[25], TVShow arg3[25]);
@@ -2294,7 +2303,7 @@ bool8 sub_80BFF68(TVShow * arg1[25], TVShow * arg2[25], u8 idx)
     tv1 = *arg1;
     tv2 = *arg2;
     value = FALSE;
-    switchval = sub_80BFB54(tv2[gUnknown_03000722].common.var00);
+    switchval = GetTVChannelByShowType(tv2[gUnknown_03000722].common.kind);
     switch (switchval)
     {
     case 2:
@@ -2329,7 +2338,7 @@ u8 sub_80C004C(TVShow *tv1, TVShow *tv2, u8 idx)
     tv2->common.srcTrainerIdLo = linkTrainerId & 0xFF;
     tv2->common.srcTrainerIdHi = linkTrainerId >> 8;
     *tv1 = *tv2;
-    tv1->common.var01 = 1;
+    tv1->common.active = 1;
     return TRUE;
 }
 
@@ -2345,7 +2354,7 @@ u8 sub_80C00B4(TVShow *tv1, TVShow *tv2, u8 idx)
     tv2->common.srcTrainerId2Lo = linkTrainerId & 0xFF;
     tv2->common.srcTrainerId2Hi = linkTrainerId >> 8;
     *tv1 = *tv2;
-    tv1->common.var01 = 1;
+    tv1->common.active = 1;
     return TRUE;
 }
 
@@ -2359,7 +2368,7 @@ u8 sub_80C0134(TVShow *tv1, TVShow *tv2, u8 idx)
     tv2->common.srcTrainerIdLo = linkTrainerId & 0xFF;
     tv2->common.srcTrainerIdHi = linkTrainerId >> 8;
     *tv1 = *tv2;
-    tv1->common.var01 = 1;
+    tv1->common.active = 1;
     tv1->common.var16[0] = 1;
     return TRUE;
 }
@@ -2369,7 +2378,7 @@ s8 sub_80C019C(TVShow tvShows[])
     u8 i;
     for (i = 0; i < 24; i++)
     {
-        if (tvShows[i].common.var01 == 0 && (u8)(tvShows[i].common.var00 - 1) < 60)
+        if (tvShows[i].common.active == 0 && (u8)(tvShows[i].common.kind - 1) < 60)
             return i;
     }
     return -1;
@@ -2381,7 +2390,7 @@ void sub_80C01D4(void)
     u16 i;
     for (i=0; i<24; i++)
     {
-        switch (gSaveBlock1.tvShows[i].common.var00)
+        switch (gSaveBlock1.tvShows[i].common.kind)
         {
             case 0:
             case TVSHOW_RECENT_HAPPENINGS:
@@ -2637,13 +2646,13 @@ _080C03A0:\n\
 
 void sub_80C03A8(u8 showidx)
 {
-    gSaveBlock1.tvShows[showidx].common.var01 = 0;
+    gSaveBlock1.tvShows[showidx].common.active = 0;
 }
 
 void sub_80C03C8(u16 species, u8 showidx)
 {
     if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), 0) == 0)
-        gSaveBlock1.tvShows[showidx].common.var01 = 0;
+        gSaveBlock1.tvShows[showidx].common.active = 0;
 }
 
 void sub_80C0408(void)
@@ -2654,10 +2663,10 @@ void sub_80C0408(void)
         return;
     for (i = 0; i < 24; i++)
     {
-        if (gSaveBlock1.tvShows[i].common.var00 == TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE)
-            gSaveBlock1.tvShows[i].common.var01 = 0;
-        else if (gSaveBlock1.tvShows[i].common.var00 == TVSHOW_MASS_OUTBREAK)
-            gSaveBlock1.tvShows[i].common.var01 = 0;
+        if (gSaveBlock1.tvShows[i].common.kind == TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE)
+            gSaveBlock1.tvShows[i].common.active = 0;
+        else if (gSaveBlock1.tvShows[i].common.kind == TVSHOW_MASS_OUTBREAK)
+            gSaveBlock1.tvShows[i].common.active = 0;
     }
 }
 
@@ -2667,8 +2676,8 @@ void sub_80C045C(void)
 
     for (i = 0; i < 5; i++)
     {
-        if (sub_80BFB54(gSaveBlock1.tvShows[i].common.var00) == 2)
-            gSaveBlock1.tvShows[i].common.var01 = 0;
+        if (GetTVChannelByShowType(gSaveBlock1.tvShows[i].common.kind) == 2)
+            gSaveBlock1.tvShows[i].common.active = 0;
     }
 }
 
@@ -2680,18 +2689,18 @@ void sub_80C04A0(void)
 
     for (showIdx = 5; showIdx < 24; showIdx++)
     {
-        if (gSaveBlock1.tvShows[showIdx].common.var00 == 0)
+        if (gSaveBlock1.tvShows[showIdx].common.kind == 0)
             count++;
     }
     for (showIdx = 0; showIdx < 5 - count; showIdx++)
         sub_80BF55C(gSaveBlock1.tvShows, showIdx+5);
 }
 
-void sub_80C05C4(struct UnknownSaveStruct2ABC[16], struct UnknownSaveStruct2ABC[16], struct UnknownSaveStruct2ABC[16], struct UnknownSaveStruct2ABC[16]);
+void sub_80C05C4(struct PokeNews[16], struct PokeNews[16], struct PokeNews[16], struct PokeNews[16]);
 void sub_80C0750(void);
 void sub_80C0788(void);
-s8 sub_80C0730(struct UnknownSaveStruct2ABC[16], u8);
-void sub_80C06BC(struct UnknownSaveStruct2ABC *[16], struct UnknownSaveStruct2ABC *[16]);
+s8 sub_80C0730(struct PokeNews[16], u8);
+void sub_80C06BC(struct PokeNews *[16], struct PokeNews *[16]);
 
 void sub_80C0514(void *a0, u32 a1, u8 a2)
 {
@@ -2699,33 +2708,33 @@ void sub_80C0514(void *a0, u32 a1, u8 a2)
     u8 i;
 
     for (i = 0; i < 4; i++)
-        memcpy(gUnknown_02007000.unknown_2abc[i], a0 + i * a1, 64);
+        memcpy(gUnknown_02007000.pokeNews[i], a0 + i * a1, 64);
     struct02007000 = &gUnknown_02007000;
     switch (a2)
     {
     case 0:
-        sub_80C05C4(gSaveBlock1.unknown_2ABC, struct02007000->unknown_2abc[1], struct02007000->unknown_2abc[2], struct02007000->unknown_2abc[3]);
+        sub_80C05C4(gSaveBlock1.pokeNews, struct02007000->pokeNews[1], struct02007000->pokeNews[2], struct02007000->pokeNews[3]);
         break;
     case 1:
-        sub_80C05C4(struct02007000->unknown_2abc[0], gSaveBlock1.unknown_2ABC, struct02007000->unknown_2abc[2], struct02007000->unknown_2abc[3]);
+        sub_80C05C4(struct02007000->pokeNews[0], gSaveBlock1.pokeNews, struct02007000->pokeNews[2], struct02007000->pokeNews[3]);
         break;
     case 2:
-        sub_80C05C4(struct02007000->unknown_2abc[0], struct02007000->unknown_2abc[1], gSaveBlock1.unknown_2ABC, struct02007000->unknown_2abc[3]);
+        sub_80C05C4(struct02007000->pokeNews[0], struct02007000->pokeNews[1], gSaveBlock1.pokeNews, struct02007000->pokeNews[3]);
         break;
     case 3:
-        sub_80C05C4(struct02007000->unknown_2abc[0], struct02007000->unknown_2abc[1], struct02007000->unknown_2abc[2], gSaveBlock1.unknown_2ABC);
+        sub_80C05C4(struct02007000->pokeNews[0], struct02007000->pokeNews[1], struct02007000->pokeNews[2], gSaveBlock1.pokeNews);
         break;
     }
     sub_80C0750();
     sub_80C0788();
 }
 
-void sub_80C05C4(struct UnknownSaveStruct2ABC a0[16], struct UnknownSaveStruct2ABC a1[16], struct UnknownSaveStruct2ABC a2[16], struct UnknownSaveStruct2ABC a3[16])
+void sub_80C05C4(struct PokeNews a0[16], struct PokeNews a1[16], struct PokeNews a2[16], struct PokeNews a3[16])
 {
     u8 i;
     u8 j;
     u8 k;
-    struct UnknownSaveStruct2ABC ** arglist[4];
+    struct PokeNews ** arglist[4];
 
     arglist[0] = &a0;
     arglist[1] = &a1;
@@ -2750,10 +2759,10 @@ void sub_80C05C4(struct UnknownSaveStruct2ABC a0[16], struct UnknownSaveStruct2A
     }
 }
 
-void sub_80C06BC(struct UnknownSaveStruct2ABC *arg0[16], struct UnknownSaveStruct2ABC *arg1[16])
+void sub_80C06BC(struct PokeNews *arg0[16], struct PokeNews *arg1[16])
 {
-    struct UnknownSaveStruct2ABC *str0;
-    struct UnknownSaveStruct2ABC *str1;
+    struct PokeNews *str0;
+    struct PokeNews *str1;
 
     str0 = arg0[0];
     str1 = arg1[0];
@@ -2761,26 +2770,26 @@ void sub_80C06BC(struct UnknownSaveStruct2ABC *arg0[16], struct UnknownSaveStruc
     sub_80C06E8(str0, str1, gUnknown_03005D38.var0);
 }
 
-bool8 sub_80C06E8(struct UnknownSaveStruct2ABC *arg0, struct UnknownSaveStruct2ABC *arg1, s8 arg2)
+bool8 sub_80C06E8(struct PokeNews *arg0, struct PokeNews *arg1, s8 arg2)
 {
     u8 i;
 
-    if (arg1->val0 == 0)
+    if (arg1->kind == 0)
         return FALSE;
     for (i = 0; i < 16; i++)
     {
-        if (arg0[i].val0 == arg1->val0)
+        if (arg0[i].kind == arg1->kind)
             return FALSE;
     }
-    arg0[arg2].val0 = arg1->val0;
-    arg0[arg2].val1 = 1;
-    arg0[arg2].val2 = arg1->val2;
+    arg0[arg2].kind = arg1->kind;
+    arg0[arg2].state = 1;
+    arg0[arg2].days = arg1->days;
     return TRUE;
 }
 
-s8 sub_80C0730(struct UnknownSaveStruct2ABC *arg0, u8 arg1)
+s8 sub_80C0730(struct PokeNews *arg0, u8 arg1)
 {
-    if (arg0[arg1].val0 == 0)
+    if (arg0[arg1].kind == 0)
         return -1;
     return arg1;
 }
@@ -2791,7 +2800,7 @@ void sub_80C0750(void)
 
     for (i = 0; i < 16; i++)
     {
-        if (gSaveBlock1.unknown_2ABC[i].val0 > 3)
+        if (gSaveBlock1.pokeNews[i].kind > 3)
             sub_80BEC10(i);
     }
     sub_80BEC40();
@@ -2804,15 +2813,15 @@ void sub_80C0788(void)
     if (FlagGet(FLAG_SYS_GAME_CLEAR) != 1)
     {
         for (i = 0; i < 16; i++)
-            gSaveBlock1.unknown_2ABC[i].val1 = 0;
+            gSaveBlock1.pokeNews[i].state = 0;
     }
 }
 
 void DoTVShow(void)
 {
-    if (gSaveBlock1.tvShows[gSpecialVar_0x8004].common.var01 != 0)
+    if (gSaveBlock1.tvShows[gSpecialVar_0x8004].common.active != 0)
     {
-        switch (gSaveBlock1.tvShows[gSpecialVar_0x8004].common.var00)
+        switch (gSaveBlock1.tvShows[gSpecialVar_0x8004].common.kind)
         {
         case TVSHOW_FAN_CLUB_LETTER:
             DoTVShowPokemonFanClubLetter();
@@ -2870,7 +2879,7 @@ void DoTVShowBravoTrainerPokemonProfile(void)
     u8 state;
 
     gSpecialVar_Result = 0;
-    state = gUnknown_020387E8;
+    state = sTVShowState;
     switch(state)
     {
     case 0:
@@ -2878,49 +2887,49 @@ void DoTVShowBravoTrainerPokemonProfile(void)
         CopyContestCategoryToStringVar(1, bravoTrainer->contestCategory);
         sub_80BEF10(2, bravoTrainer->contestRank);
         if (!StringCompareWithoutExtCtrlCodes(gSpeciesNames[bravoTrainer->species], bravoTrainer->pokemonNickname))
-            gUnknown_020387E8 = 8;
+            sTVShowState = 8;
         else
-            gUnknown_020387E8 = 1;
+            sTVShowState = 1;
         break;
     case 1:
         StringCopy(gStringVar1, gSpeciesNames[bravoTrainer->species]);
         TVShowConvertInternationalString(gStringVar2, bravoTrainer->pokemonNickname, bravoTrainer->var1f);
         CopyContestCategoryToStringVar(2, bravoTrainer->contestCategory);
-        gUnknown_020387E8 = 2;
+        sTVShowState = 2;
         break;
     case 2:
         TVShowConvertInternationalString(gStringVar1, bravoTrainer->playerName, bravoTrainer->language);
         if (bravoTrainer->contestResult == 0) // placed first
-            gUnknown_020387E8 = 3;
+            sTVShowState = 3;
         else
-            gUnknown_020387E8 = 4;
+            sTVShowState = 4;
         break;
     case 3:
         TVShowConvertInternationalString(gStringVar1, bravoTrainer->playerName, bravoTrainer->language);
         EasyChat_GetWordText(gStringVar2, bravoTrainer->var04[0]);
         sub_80BF088(2, bravoTrainer->contestResult + 1);
-        gUnknown_020387E8 = 5;
+        sTVShowState = 5;
         break;
     case 4:
         TVShowConvertInternationalString(gStringVar1, bravoTrainer->playerName, bravoTrainer->language);
         EasyChat_GetWordText(gStringVar2, bravoTrainer->var04[0]);
         sub_80BF088(2, bravoTrainer->contestResult + 1);
-        gUnknown_020387E8 = 5;
+        sTVShowState = 5;
         break;
     case 5:
         TVShowConvertInternationalString(gStringVar1, bravoTrainer->playerName, bravoTrainer->language);
         CopyContestCategoryToStringVar(1, bravoTrainer->contestCategory);
         EasyChat_GetWordText(gStringVar3, bravoTrainer->var04[1]);
         if (bravoTrainer->var14)
-            gUnknown_020387E8 = 6;
+            sTVShowState = 6;
         else
-            gUnknown_020387E8 = 7;
+            sTVShowState = 7;
         break;
     case 6:
         StringCopy(gStringVar1, gSpeciesNames[bravoTrainer->species]);
         StringCopy(gStringVar2, gMoveNames[bravoTrainer->var14]);
         EasyChat_GetWordText(gStringVar3, bravoTrainer->var04[1]);
-        gUnknown_020387E8 = 7;
+        sTVShowState = 7;
         break;
     case 7:
         TVShowConvertInternationalString(gStringVar1, bravoTrainer->playerName, bravoTrainer->language);
@@ -2929,7 +2938,7 @@ void DoTVShowBravoTrainerPokemonProfile(void)
         break;
     case 8:
         StringCopy(gStringVar1, gSpeciesNames[bravoTrainer->species]);
-        gUnknown_020387E8 = 2;
+        sTVShowState = 2;
         break;
     }
     ShowFieldMessage(gTVBravoTrainerTextGroup[state]);
@@ -2941,79 +2950,79 @@ void DoTVShowBravoTrainerBattleTowerProfile(void)
     u8 state;
 
     gSpecialVar_Result = 0;
-    state = gUnknown_020387E8;
+    state = sTVShowState;
     switch(state)
     {
     case 0:
         TVShowConvertInternationalString(gStringVar1, bravoTrainerTower->trainerName, bravoTrainerTower->language);
         StringCopy(gStringVar2, gSpeciesNames[bravoTrainerTower->species]);
         if (bravoTrainerTower->var16 >= 7)
-            gUnknown_020387E8 = 1;
+            sTVShowState = 1;
         else
-            gUnknown_020387E8 = 2;
+            sTVShowState = 2;
         break;
     case 1:
         sub_80BF088(0, bravoTrainerTower->btLevel);
         sub_80BF088(1, bravoTrainerTower->var16);
         if (bravoTrainerTower->var1c == 1)
-            gUnknown_020387E8 = 3;
+            sTVShowState = 3;
         else
-            gUnknown_020387E8 = 4;
+            sTVShowState = 4;
         break;
     case 2:
         TVShowConvertInternationalString(gStringVar1, bravoTrainerTower->pokemonName, bravoTrainerTower->language);
         sub_80BF088(1, bravoTrainerTower->var16 + 1);
         if (bravoTrainerTower->var1b == 0)
-            gUnknown_020387E8 = 5;
+            sTVShowState = 5;
         else
-            gUnknown_020387E8 = 6;
+            sTVShowState = 6;
         break;
     case 3:
         TVShowConvertInternationalString(gStringVar1, bravoTrainerTower->pokemonName, bravoTrainerTower->language);
         StringCopy(gStringVar2, gSpeciesNames[bravoTrainerTower->defeatedSpecies]);
         if (bravoTrainerTower->var1b == 0)
-            gUnknown_020387E8 = 5;
+            sTVShowState = 5;
         else
-            gUnknown_020387E8 = 6;
+            sTVShowState = 6;
         break;
     case 4:
         TVShowConvertInternationalString(gStringVar1, bravoTrainerTower->pokemonName, bravoTrainerTower->language);
         StringCopy(gStringVar2, gSpeciesNames[bravoTrainerTower->defeatedSpecies]);
         if (bravoTrainerTower->var1b == 0)
-            gUnknown_020387E8 = 5;
+            sTVShowState = 5;
         else
-            gUnknown_020387E8 = 6;
+            sTVShowState = 6;
         break;
     case 5:
         TVShowConvertInternationalString(gStringVar1, bravoTrainerTower->pokemonName, bravoTrainerTower->language);
-        gUnknown_020387E8 = 11;
+        sTVShowState = 11;
         break;
     case 6:
         TVShowConvertInternationalString(gStringVar1, bravoTrainerTower->pokemonName, bravoTrainerTower->language);
-        gUnknown_020387E8 = 11;
+        sTVShowState = 11;
         break;
     case 7:
-        gUnknown_020387E8 = 11;
+        sTVShowState = 11;
         break;
     case 8:
     case 9:
     case 10:
         TVShowConvertInternationalString(gStringVar1, bravoTrainerTower->trainerName, bravoTrainerTower->language);
-        gUnknown_020387E8 = 11;
+        sTVShowState = 11;
         break;
     case 11:
         EasyChat_GetWordText(gStringVar1, bravoTrainerTower->var18[0]);
         if (bravoTrainerTower->var1b == 0)
-            gUnknown_020387E8 = 12;
+            sTVShowState = 12;
         else
-            gUnknown_020387E8 = 13;
+            sTVShowState = 13;
         break;
     case 12:
     case 13:
         EasyChat_GetWordText(gStringVar1, bravoTrainerTower->var18[0]);
         TVShowConvertInternationalString(gStringVar2, bravoTrainerTower->trainerName, bravoTrainerTower->language);
         TVShowConvertInternationalString(gStringVar3, bravoTrainerTower->pokemonName, bravoTrainerTower->language);
-        gUnknown_020387E8 = 14;
+        sTVShowState = 14;
         break;
     case 14:
         TVShowConvertInternationalString(gStringVar1, bravoTrainerTower->trainerName, bravoTrainerTower->language);
@@ -3030,61 +3039,61 @@ void DoTVShowTodaysSmartShopper(void)
     u8 state;
 
     gSpecialVar_Result = 0;
-    state = gUnknown_020387E8;
+    state = sTVShowState;
     switch(state)
     {
     case 0:
         TVShowConvertInternationalString(gStringVar1, smartShopper->playerName, smartShopper->language);
         GetMapSectionName(gStringVar2, smartShopper->shopLocation, 0);
         if (smartShopper->itemAmounts[0] >= 0xff)
-            gUnknown_020387E8 = 11;
+            sTVShowState = 11;
         else
-            gUnknown_020387E8 = 1;
+            sTVShowState = 1;
         break;
     case 1:
         TVShowConvertInternationalString(gStringVar1, smartShopper->playerName, smartShopper->language);
         StringCopy(gStringVar2, ItemId_GetItem(smartShopper->itemIds[0])->name);
         sub_80BF088(2, smartShopper->itemAmounts[0]);
-        gUnknown_020387E8 += (Random() % 4) + 1;
+        sTVShowState += (Random() % 4) + 1;
         break;
     case 2:
     case 4:
     case 5:
         if (smartShopper->itemIds[1] != 0)
-            gUnknown_020387E8 = 6;
+            sTVShowState = 6;
         else
-            gUnknown_020387E8 = 10;
+            sTVShowState = 10;
         break;
     case 3:
         sub_80BF088(2, smartShopper->itemAmounts[0] + 1);
         if (smartShopper->itemIds[1] != 0)
-            gUnknown_020387E8 = 6;
+            sTVShowState = 6;
         else
-            gUnknown_020387E8 = 10;
+            sTVShowState = 10;
         break;
     case 6:
         StringCopy(gStringVar2, ItemId_GetItem(smartShopper->itemIds[1])->name);
         sub_80BF088(2, smartShopper->itemAmounts[1]);
         if (smartShopper->itemIds[2] != 0)
-            gUnknown_020387E8 = 7;
+            sTVShowState = 7;
         else if (smartShopper->priceReduced == 1)
-            gUnknown_020387E8 = 8;
+            sTVShowState = 8;
         else
-            gUnknown_020387E8 = 9;
+            sTVShowState = 9;
         break;
     case 7:
         StringCopy(gStringVar2, ItemId_GetItem(smartShopper->itemIds[2])->name);
         sub_80BF088(2, smartShopper->itemAmounts[2]);
         if (smartShopper->priceReduced == 1)
-            gUnknown_020387E8 = 8;
+            sTVShowState = 8;
         else
-            gUnknown_020387E8 = 9;
+            sTVShowState = 9;
         break;
     case 8:
         if (smartShopper->itemAmounts[0] < 0xff)
-            gUnknown_020387E8 = 9;
+            sTVShowState = 9;
         else
-            gUnknown_020387E8 = 12;
+            sTVShowState = 12;
         break;
     case 9:
         sub_80BF154(1, smartShopper);
@@ -3092,17 +3101,17 @@ void DoTVShowTodaysSmartShopper(void)
         break;
     case 10:
         if (smartShopper->priceReduced == 1)
-            gUnknown_020387E8 = 8;
+            sTVShowState = 8;
         else
-            gUnknown_020387E8 = 9;
+            sTVShowState = 9;
         break;
     case 11:
         TVShowConvertInternationalString(gStringVar1, smartShopper->playerName, smartShopper->language);
         StringCopy(gStringVar2, ItemId_GetItem(smartShopper->itemIds[0])->name);
         if (smartShopper->priceReduced == 1)
-            gUnknown_020387E8 = 8;
+            sTVShowState = 8;
         else
-            gUnknown_020387E8 = 12;
+            sTVShowState = 12;
         break;
     case 12:
         TVShowConvertInternationalString(gStringVar1, smartShopper->playerName, smartShopper->language);
@@ -3118,14 +3127,14 @@ void DoTVShowTheNameRaterShow(void)
     u8 state;
 
     gSpecialVar_Result = 0;
-    state = gUnknown_020387E8;
+    state = sTVShowState;
     switch (state)
     {
     case 0:
         TVShowConvertInternationalString(gStringVar1, nameRaterShow->trainerName, nameRaterShow->language);
         StringCopy(gStringVar2, gSpeciesNames[nameRaterShow->species]);
         TVShowConvertInternationalString(gStringVar3, nameRaterShow->pokemonName, nameRaterShow->pokemonNameLanguage);
-        gUnknown_020387E8 = sub_80BF7E8(nameRaterShow) + 1;
+        sTVShowState = sub_80BF7E8(nameRaterShow) + 1;
         break;
     case 1:
     case 3:
@@ -3135,20 +3144,20 @@ void DoTVShowTheNameRaterShow(void)
     case 7:
     case 8:
         if (nameRaterShow->random == 0)
-            gUnknown_020387E8 = 9;
+            sTVShowState = 9;
         else if (nameRaterShow->random == 1)
-            gUnknown_020387E8 = 10;
+            sTVShowState = 10;
         else if (nameRaterShow->random == 2)
-            gUnknown_020387E8 = 11;
+            sTVShowState = 11;
         break;
     case 2:
         TVShowConvertInternationalString(gStringVar1, nameRaterShow->trainerName, nameRaterShow->language);
         if (nameRaterShow->random == 0)
-            gUnknown_020387E8 = 9;
+            sTVShowState = 9;
         else if (nameRaterShow->random == 1)
-            gUnknown_020387E8 = 10;
+            sTVShowState = 10;
         else if (nameRaterShow->random == 2)
-            gUnknown_020387E8 = 11;
+            sTVShowState = 11;
         break;
     case 9:
     case 10:
@@ -3158,7 +3167,7 @@ void DoTVShowTheNameRaterShow(void)
         sub_80BF820(0, 0, 0, 1, 0, nameRaterShow);
         TVShowConvertInternationalString(gStringVar2, gStringVar1, nameRaterShow->pokemonNameLanguage);
         TVShowConvertInternationalString(gStringVar1, nameRaterShow->pokemonName, nameRaterShow->pokemonNameLanguage);
-        gUnknown_020387E8 = 12;
+        sTVShowState = 12;
         break;
     case 13:
         sub_80BF820(0, 0, 3, 1, 0, nameRaterShow);
@@ -3166,7 +3175,7 @@ void DoTVShowTheNameRaterShow(void)
         sub_80BF820(0, 0, 2, 0, 0, nameRaterShow);
         TVShowConvertInternationalString(gStringVar2, gStringVar1, nameRaterShow->language);
         TVShowConvertInternationalString(gStringVar1, nameRaterShow->trainerName, nameRaterShow->language);
-        gUnknown_020387E8 = 14;
+        sTVShowState = 14;
         break;
     case 14:
         sub_80BF820(0, 0, 3, 0, 0, nameRaterShow);
@@ -3174,31 +3183,31 @@ void DoTVShowTheNameRaterShow(void)
         sub_80BF820(0, 0, 2, 1, 0, nameRaterShow);
         TVShowConvertInternationalString(gStringVar2, gStringVar1, nameRaterShow->pokemonNameLanguage);
         TVShowConvertInternationalString(gStringVar1, nameRaterShow->trainerName, nameRaterShow->language);
-        gUnknown_020387E8 = 18;
+        sTVShowState = 18;
         break;
     case 15:
         sub_80BF820(1, 0, 2, 1, 0, nameRaterShow);
         TVShowConvertInternationalString(gStringVar1, gStringVar2, nameRaterShow->pokemonNameLanguage);
         StringCopy(gStringVar2, gSpeciesNames[nameRaterShow->species]);
         sub_80BF820(2, 0, 3, 2, nameRaterShow->species, nameRaterShow);
-        gUnknown_020387E8 = 16;
+        sTVShowState = 16;
         break;
     case 16:
         sub_80BF820(0, 0, 3, 1, 0, nameRaterShow);
         TVShowConvertInternationalString(gStringVar3, gStringVar1, nameRaterShow->pokemonNameLanguage);
         sub_80BF820(0, 0, 2, 2, nameRaterShow->species, nameRaterShow);
-        gUnknown_020387E8 = 17;
+        sTVShowState = 17;
         break;
     case 17:
         sub_80BF820(1, 0, 2, 1, 0, nameRaterShow);
         TVShowConvertInternationalString(gStringVar1, gStringVar2, nameRaterShow->pokemonNameLanguage);
         sub_80BF820(2, 0, 3, 2, nameRaterShow->var1C, nameRaterShow);
         StringCopy(gStringVar2, gSpeciesNames[nameRaterShow->var1C]);
-        gUnknown_020387E8 = 18;
+        sTVShowState = 18;
         break;
     case 12:
         state = 18;
-        gUnknown_020387E8 = 18;
+        sTVShowState = 18;
     case 18:
         TVShowConvertInternationalString(gStringVar1, nameRaterShow->pokemonName, nameRaterShow->pokemonNameLanguage);
         TVShowConvertInternationalString(gStringVar2, nameRaterShow->trainerName, nameRaterShow->language);
@@ -3214,7 +3223,7 @@ void DoTVShowPokemonTodaySuccessfulCapture(void)
     u8 state;
 
     gSpecialVar_Result = 0;
-    state = gUnknown_020387E8;
+    state = sTVShowState;
     switch (state)
     {
     case 0:
@@ -3222,53 +3231,53 @@ void DoTVShowPokemonTodaySuccessfulCapture(void)
         StringCopy(gStringVar2, gSpeciesNames[pokemonToday->species]);
         TVShowConvertInternationalString(gStringVar3, pokemonToday->nickname, pokemonToday->language2);
         if (pokemonToday->ball == ITEM_MASTER_BALL)
-            gUnknown_020387E8 = 5;
+            sTVShowState = 5;
         else
-            gUnknown_020387E8 = 1;
+            sTVShowState = 1;
         break;
     case 1:
-        gUnknown_020387E8 = 2;
+        sTVShowState = 2;
         break;
     case 2:
         StringCopy(gStringVar2, ItemId_GetItem(pokemonToday->ball)->name);
         sub_80BF088(2, pokemonToday->var12);
         if (pokemonToday->var12 < 4)
-            gUnknown_020387E8 = 3;
+            sTVShowState = 3;
         else
-            gUnknown_020387E8 = 4;
+            sTVShowState = 4;
         break;
     case 3:
         TVShowConvertInternationalString(gStringVar1, pokemonToday->playerName, pokemonToday->language);
         StringCopy(gStringVar2, gSpeciesNames[pokemonToday->species]);
         TVShowConvertInternationalString(gStringVar3, pokemonToday->nickname, pokemonToday->language2);
-        gUnknown_020387E8 = 6;
+        sTVShowState = 6;
         break;
     case 4:
-        gUnknown_020387E8 = 6;
+        sTVShowState = 6;
         break;
     case 5:
         TVShowConvertInternationalString(gStringVar1, pokemonToday->playerName, pokemonToday->language);
         StringCopy(gStringVar2, gSpeciesNames[pokemonToday->species]);
-        gUnknown_020387E8 = 6;
+        sTVShowState = 6;
         break;
     case 6:
         TVShowConvertInternationalString(gStringVar1, pokemonToday->playerName, pokemonToday->language);
         StringCopy(gStringVar2, gSpeciesNames[pokemonToday->species]);
         TVShowConvertInternationalString(gStringVar3, pokemonToday->nickname, pokemonToday->language2);
-        gUnknown_020387E8 += (Random() % 4) + 1;
+        sTVShowState += (Random() % 4) + 1;
         break;
     case 7:
     case 8:
         StringCopy(gStringVar1, gSpeciesNames[pokemonToday->species]);
         TVShowConvertInternationalString(gStringVar2, pokemonToday->nickname, pokemonToday->language2);
         sub_80BF638(2, pokemonToday->species);
-        gUnknown_020387E8 = 11;
+        sTVShowState = 11;
         break;
     case 9:
     case 10:
         StringCopy(gStringVar1, gSpeciesNames[pokemonToday->species]);
         TVShowConvertInternationalString(gStringVar2, pokemonToday->nickname, pokemonToday->language2);
-        gUnknown_020387E8 = 11;
+        sTVShowState = 11;
         break;
     case 11:
         TVShowDone();
@@ -3283,36 +3292,36 @@ void DoTVShowPokemonTodayFailedCapture(void)
     u8 state;
 
     gSpecialVar_Result = 0;
-    state = gUnknown_020387E8;
+    state = sTVShowState;
     switch (state)
     {
     case 0:
         TVShowConvertInternationalString(gStringVar1, pokemonTodayFailed->playerName, pokemonTodayFailed->language);
         StringCopy(gStringVar2, gSpeciesNames[pokemonTodayFailed->species]);
-        gUnknown_020387E8 = 1;
+        sTVShowState = 1;
         break;
     case 1:
         TVShowConvertInternationalString(gStringVar1, pokemonTodayFailed->playerName, pokemonTodayFailed->language);
         GetMapSectionName(gStringVar2, pokemonTodayFailed->var12, 0);
         StringCopy(gStringVar3, gSpeciesNames[pokemonTodayFailed->species2]);
         if (pokemonTodayFailed->var11 == 1)
-            gUnknown_020387E8 = 3;
+            sTVShowState = 3;
         else
-            gUnknown_020387E8 = 2;
+            sTVShowState = 2;
         break;
     case 2:
     case 3:
         TVShowConvertInternationalString(gStringVar1, pokemonTodayFailed->playerName, pokemonTodayFailed->language);
         sub_80BF088(1, pokemonTodayFailed->var10);
         if ((Random() % 3) == 0)
-            gUnknown_020387E8 = 5;
+            sTVShowState = 5;
         else
-            gUnknown_020387E8 = 4;
+            sTVShowState = 4;
         break;
     case 4:
     case 5:
         TVShowConvertInternationalString(gStringVar1, pokemonTodayFailed->playerName, pokemonTodayFailed->language);
-        gUnknown_020387E8 = 6;
+        sTVShowState = 6;
         break;
     case 6:
         TVShowDone();
@@ -3328,32 +3337,32 @@ void DoTVShowPokemonFanClubLetter(void)
     u16 rval;
 
     gSpecialVar_Result = 0;
-    state = gUnknown_020387E8;
+    state = sTVShowState;
     switch (state)
     {
     case 0:
         TVShowConvertInternationalString(gStringVar1, fanclubLetter->playerName, fanclubLetter->language);
         StringCopy(gStringVar2, gSpeciesNames[fanclubLetter->species]);
-        gUnknown_020387E8 = 50;
+        sTVShowState = 50;
         break;
     case 1:
         rval = (Random() % 4) + 1;
         if (rval == 1)
-            gUnknown_020387E8 = 2;
+            sTVShowState = 2;
         else
-            gUnknown_020387E8 = rval + 2;
+            sTVShowState = rval + 2;
         break;
     case 2:
-        gUnknown_020387E8 = 51;
+        sTVShowState = 51;
         break;
     case 3:
-        gUnknown_020387E8 += (Random() % 3) + 1;
+        sTVShowState += (Random() % 3) + 1;
         break;
     case 4:
     case 5:
     case 6:
         sub_80BF79C((TVShow *)fanclubLetter);
-        gUnknown_020387E8 = 7;
+        sTVShowState = 7;
         break;
     case 7:
         rval = (Random() % 0x1f) + 0x46;
@@ -3363,12 +3372,12 @@ void DoTVShowPokemonFanClubLetter(void)
     case 50:
         ConvertEasyChatWordsToString(gStringVar4, fanclubLetter->pad04, 2, 2);
         ShowFieldMessage(gStringVar4);
-        gUnknown_020387E8 = 1;
+        sTVShowState = 1;
         return;
     case 51:
         ConvertEasyChatWordsToString(gStringVar4, fanclubLetter->pad04, 2, 2);
         ShowFieldMessage(gStringVar4);
-        gUnknown_020387E8 = 3;
+        sTVShowState = 3;
         return;
     }
     ShowFieldMessage(gTVFanClubTextGroup[state]);
@@ -3380,21 +3389,21 @@ void DoTVShowRecentHappenings(void)
     u8 state;
 
     gSpecialVar_Result = 0;
-    state = gUnknown_020387E8;
+    state = sTVShowState;
     switch (state)
     {
     case 0:
         TVShowConvertInternationalString(gStringVar1, recentHappenings->playerName, recentHappenings->language);
         sub_80BF79C((TVShow *)recentHappenings);
-        gUnknown_020387E8 = 50;
+        sTVShowState = 50;
         break;
     case 1:
-        gUnknown_020387E8 += 1 + (Random() % 3);
+        sTVShowState += 1 + (Random() % 3);
         break;
     case 2:
     case 3:
     case 4:
-        gUnknown_020387E8 = 5;
+        sTVShowState = 5;
         break;
     case 5:
         TVShowDone();
@@ -3402,7 +3411,7 @@ void DoTVShowRecentHappenings(void)
     case 50:
         ConvertEasyChatWordsToString(gStringVar4, recentHappenings->var04, 2, 2);
         ShowFieldMessage(gStringVar4);
-        gUnknown_020387E8 = 1;
+        sTVShowState = 1;
         return;
     }
     ShowFieldMessage(gTVRecentHappeningsTextGroup[state]);
@@ -3414,14 +3423,14 @@ void DoTVShowPokemonFanClubOpinions(void)
     u8 state;
 
     gSpecialVar_Result = 0;
-    state = gUnknown_020387E8;
+    state = sTVShowState;
     switch (state)
     {
     case 0:
         TVShowConvertInternationalString(gStringVar1, fanclubOpinions->playerName, fanclubOpinions->language);
         StringCopy(gStringVar2, gSpeciesNames[fanclubOpinions->var02]);
         TVShowConvertInternationalString(gStringVar3, fanclubOpinions->var10, fanclubOpinions->var0E);
-        gUnknown_020387E8 = fanclubOpinions->var04B + 1;
+        sTVShowState = fanclubOpinions->var04B + 1;
         break;
     case 1:
     case 2:
@@ -3429,7 +3438,7 @@ void DoTVShowPokemonFanClubOpinions(void)
         TVShowConvertInternationalString(gStringVar1, fanclubOpinions->playerName, fanclubOpinions->language);
         StringCopy(gStringVar2, gSpeciesNames[fanclubOpinions->var02]);
         EasyChat_GetWordText(gStringVar3, fanclubOpinions->var1C[0]);
-        gUnknown_020387E8 = 4;
+        sTVShowState = 4;
         break;
     case 4:
         TVShowConvertInternationalString(gStringVar1, fanclubOpinions->playerName, fanclubOpinions->language);
@@ -3452,7 +3461,7 @@ void DoTVShowPokemonNewsMassOutbreak(void)
     StringCopy(gStringVar2, gSpeciesNames[massOutbreak->species]);
     TVShowDone();
     StartMassOutbreak();
-    ShowFieldMessage(gTVPokemonOutbreakTextGroup[gUnknown_020387E8]);
+    ShowFieldMessage(gTVPokemonOutbreakTextGroup[sTVShowState]);
 }
 
 void DoTVShowInSearchOfTrainers(void)
@@ -3460,49 +3469,49 @@ void DoTVShowInSearchOfTrainers(void)
     u8 state;
 
     gSpecialVar_Result = 0;
-    state = gUnknown_020387E8;
+    state = sTVShowState;
     switch (state)
     {
     case 0:
         GetMapSectionName(gStringVar1, gSaveBlock1.gabbyAndTyData.mapnum, 0);
         if (gSaveBlock1.gabbyAndTyData.battleNum > 1)
-            gUnknown_020387E8 = 1;
+            sTVShowState = 1;
         else
-            gUnknown_020387E8 = 2;
+            sTVShowState = 2;
         break;
     case 1:
-        gUnknown_020387E8 = 2;
+        sTVShowState = 2;
         break;
     case 2:
         if (gSaveBlock1.gabbyAndTyData.valA_0 == 0)
-            gUnknown_020387E8 = 4;
+            sTVShowState = 4;
         else if (gSaveBlock1.gabbyAndTyData.valA_3 != 0)
-            gUnknown_020387E8 = 5;
+            sTVShowState = 5;
         else if (gSaveBlock1.gabbyAndTyData.valA_2 != 0)
-            gUnknown_020387E8 = 6;
+            sTVShowState = 6;
         else if (gSaveBlock1.gabbyAndTyData.valA_1 != 0)
-            gUnknown_020387E8 = 7;
+            sTVShowState = 7;
         else
-            gUnknown_020387E8 = 3;
+            sTVShowState = 3;
         break;
     case 3:
         StringCopy(gStringVar1, gSpeciesNames[gSaveBlock1.gabbyAndTyData.mon1]);
         StringCopy(gStringVar2, gMoveNames[gSaveBlock1.gabbyAndTyData.lastMove]);
         StringCopy(gStringVar3, gSpeciesNames[gSaveBlock1.gabbyAndTyData.mon2]);
-        gUnknown_020387E8 = 8;
+        sTVShowState = 8;
         break;
     case 4:
     case 5:
     case 6:
     case 7:
-        gUnknown_020387E8 = 8;
+        sTVShowState = 8;
         break;
     case 8:
         EasyChat_GetWordText(gStringVar1, gSaveBlock1.gabbyAndTyData.quote);
         StringCopy(gStringVar2, gSpeciesNames[gSaveBlock1.gabbyAndTyData.mon1]);
         StringCopy(gStringVar3, gSpeciesNames[gSaveBlock1.gabbyAndTyData.mon2]);
         gSpecialVar_Result = 1;
-        gUnknown_020387E8 = 0;;
+        sTVShowState = 0;;
         TakeTVShowInSearchOfTrainersOffTheAir();
         break;
     }
@@ -3516,10 +3525,10 @@ void DoTVShowPokemonAngler(void)
 
     gSpecialVar_Result = 0;
     if (pokemonAngler->var02 < pokemonAngler->var03)
-        gUnknown_020387E8 = 0;
+        sTVShowState = 0;
     else
-        gUnknown_020387E8 = 1;
-    state = gUnknown_020387E8;
+        sTVShowState = 1;
+    state = sTVShowState;
     switch (state)
     {
     case 0:
@@ -3544,7 +3553,7 @@ void DoTVShowTheWorldOfMasters(void)
     u8 state;
 
     gSpecialVar_Result = 0;
-    state = gUnknown_020387E8;
+    state = sTVShowState;
     switch (state)
     {
     case 0:
@@ -3552,11 +3561,11 @@ void DoTVShowTheWorldOfMasters(void)
                                          worldOfMasters->language);
         sub_80BF088(1, worldOfMasters->var06);
         sub_80BF088(2, worldOfMasters->var02);
-        gUnknown_020387E8 = 1;
+        sTVShowState = 1;
         break;
     case 1:
         StringCopy(gStringVar1, gSpeciesNames[worldOfMasters->var08]);
-        gUnknown_020387E8 = 2;
+        sTVShowState = 2;
         break;
     case 2:
         TVShowConvertInternationalString(gStringVar1, worldOfMasters->playerName,
@@ -3572,11 +3581,11 @@ void DoTVShowTheWorldOfMasters(void)
 void TVShowDone(void)
 {
     gSpecialVar_Result = 1;
-    gUnknown_020387E8 = 0;
-    gSaveBlock1.tvShows[gSpecialVar_0x8004].common.var01 = 0;
+    sTVShowState = 0;
+    gSaveBlock1.tvShows[gSpecialVar_0x8004].common.active = 0;
 }
 
-void sub_80C2014(void)
+void ResetTVShowState(void)
 {
-    gUnknown_020387E8 = 0;
+    sTVShowState = 0;
 }

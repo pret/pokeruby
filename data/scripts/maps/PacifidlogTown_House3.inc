@@ -8,25 +8,25 @@ PacifidlogTown_House3_EventScript_15429E:: @ 815429E
 	goto_if_eq PacifidlogTown_House3_EventScript_154338
 	setvar VAR_SPECIAL_8, 2
 	copyvar VAR_SPECIAL_4, VAR_SPECIAL_8
-	specialvar RESULT, sub_804D89C
+	specialvar RESULT, GetInGameTradeSpeciesInfo
 	copyvar VAR_SPECIAL_9, RESULT
 	msgbox PacifidlogTown_House3_Text_17940E, 5
 	compare RESULT, 0
 	goto_if_eq PacifidlogTown_House3_EventScript_154320
-	special sub_80F9A0C
+	special SelectMonForNPCTrade
 	waitstate
 	copyvar VAR_SPECIAL_A, VAR_SPECIAL_4
 	compare VAR_SPECIAL_4, 255
 	goto_if_eq PacifidlogTown_House3_EventScript_154320
 	copyvar VAR_SPECIAL_5, VAR_SPECIAL_A
-	specialvar RESULT, sub_804DB2C
+	specialvar RESULT, GetTradeSpecies
 	copyvar VAR_SPECIAL_B, RESULT
 	compare RESULT, VAR_SPECIAL_9
 	goto_if 5, PacifidlogTown_House3_EventScript_15432A
 	copyvar VAR_SPECIAL_4, VAR_SPECIAL_8
 	copyvar VAR_SPECIAL_5, VAR_SPECIAL_A
-	special sub_804DB68
-	special sub_804E174
+	special CreateInGameTradePokemon
+	special DoInGameTradeScene
 	waitstate
 	bufferspeciesname 0, VAR_SPECIAL_9
 	msgbox PacifidlogTown_House3_Text_1794C4, 4

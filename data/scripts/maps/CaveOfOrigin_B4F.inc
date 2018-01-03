@@ -65,7 +65,7 @@ CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 	special ScrSpecial_StartGroudonKyogreBattle
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-	specialvar RESULT, sub_810E300
+	specialvar RESULT, GetBattleOutcome
 	compare RESULT, 1
 	call_if 1, CaveOfOrigin_B4F_EventScript_15DE73
 	setflag FLAG_HIDE_WALLACE_SOOTOPOLIS

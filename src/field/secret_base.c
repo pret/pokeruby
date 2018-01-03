@@ -575,7 +575,7 @@ u8 *GetSecretBaseMapName(u8 *dest) {
     return sub_80BC190(dest, VarGet(VAR_CURRENT_SECRET_BASE));
 }
 
-void sub_80BC224(void) {
+void BufferSecretBaseOwnerName(void) {
     u8 *var0 = gSaveBlock1.secretBases[(u8)VarGet(VAR_CURRENT_SECRET_BASE)].playerName;
     u8 *var1 = gStringVar1;
     u8 var2 = sub_80BB8A8(var0);
@@ -830,7 +830,7 @@ void sub_80BC474(void)
     }
 }
 
-void sub_80BC50C(void)
+void MoveSecretBase(void)
 {
     u16 backupValue;
     sub_80BC474();
@@ -1197,7 +1197,7 @@ u8 sub_80BCCA4(u8 secretBaseIndex)
         + gSaveBlock1.secretBases[secretBaseIndex].gender * 5;
 }
 
-const u8 *sub_80BCCE8(void)
+const u8 *GetSecretBaseTrainerLoseText(void)
 {
     u8 param = sub_80BCCA4(VarGet(VAR_CURRENT_SECRET_BASE));
     if (param == 0) return UnknownString_81A1BB2;

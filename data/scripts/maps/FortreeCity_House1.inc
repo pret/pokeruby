@@ -8,25 +8,25 @@ FortreeCity_House1_EventScript_157E13:: @ 8157E13
 	goto_if_eq FortreeCity_House1_EventScript_157EAD
 	setvar VAR_SPECIAL_8, 1
 	copyvar VAR_SPECIAL_4, VAR_SPECIAL_8
-	specialvar RESULT, sub_804D89C
+	specialvar RESULT, GetInGameTradeSpeciesInfo
 	copyvar VAR_SPECIAL_9, RESULT
 	msgbox FortreeCity_House1_Text_18568C, 5
 	compare RESULT, 0
 	goto_if_eq FortreeCity_House1_EventScript_157E95
-	special sub_80F9A0C
+	special SelectMonForNPCTrade
 	waitstate
 	copyvar VAR_SPECIAL_A, VAR_SPECIAL_4
 	compare VAR_SPECIAL_4, 255
 	goto_if_eq FortreeCity_House1_EventScript_157E95
 	copyvar VAR_SPECIAL_5, VAR_SPECIAL_A
-	specialvar RESULT, sub_804DB2C
+	specialvar RESULT, GetTradeSpecies
 	copyvar VAR_SPECIAL_B, RESULT
 	compare RESULT, VAR_SPECIAL_9
 	goto_if 5, FortreeCity_House1_EventScript_157E9F
 	copyvar VAR_SPECIAL_4, VAR_SPECIAL_8
 	copyvar VAR_SPECIAL_5, VAR_SPECIAL_A
-	special sub_804DB68
-	special sub_804E174
+	special CreateInGameTradePokemon
+	special DoInGameTradeScene
 	waitstate
 	bufferspeciesname 0, VAR_SPECIAL_9
 	msgbox FortreeCity_House1_Text_1856F7, 4

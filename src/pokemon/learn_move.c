@@ -239,7 +239,7 @@ void VBlankCB_LearnMove(void)
     TransferPlttBuffer();
 }
 
-void sub_8132670(void)
+void TeachMoveTutorMove(void)
 {
     ScriptContext2_Enable();
     CreateTask(sub_813269C, 10);

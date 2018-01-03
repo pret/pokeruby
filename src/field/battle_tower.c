@@ -1608,7 +1608,7 @@ void sub_8135534(u8 taskId)
     }
 }
 
-void sub_813556C(void)
+void StartSpecialBattle(void)
 {
     s32 i;
     u16 heldItem;
@@ -1616,7 +1616,7 @@ void sub_813556C(void)
 
     switch (gSpecialVar_0x8004)
     {
-    case 0:
+    case 0: // battle tower battle
         gBattleTypeFlags = (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_TRAINER);
         gTrainerBattleOpponent = 0;
 
@@ -1627,7 +1627,7 @@ void sub_813556C(void)
         transition = BattleSetup_GetBattleTowerBattleTransition();
         BattleTransition_StartOnField(transition);
         break;
-    case 1:
+    case 1: // secret base battle
         for (i = 0; i < PARTY_SIZE; i++)
         {
             heldItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
@@ -1639,7 +1639,7 @@ void sub_813556C(void)
         transition = BattleSetup_GetBattleTowerBattleTransition();
         BattleTransition_StartOnField(transition);
         break;
-    case 2:
+    case 2: // e-reader trainer battle
         ZeroEnemyPartyMons();
 
         for (i = 0; i < 3; i++)
@@ -1658,7 +1658,7 @@ void sub_813556C(void)
     }
 }
 
-void sub_8135668(void)
+void SetBattleTowerProperty(void)
 {
     s32 i;
     u8 battleTowerLevelType = gSaveBlock2.battleTower.battleTowerLevelType;
@@ -1740,7 +1740,7 @@ void sub_8135668(void)
     }
 }
 
-void sub_81358A4(void)
+void BattleTowerUtil(void)
 {
     u8 battleTowerLevelType = gSaveBlock2.battleTower.battleTowerLevelType;
 
@@ -1789,7 +1789,7 @@ void sub_81358A4(void)
     }
 }
 
-void sub_8135A14(void)
+void SetBattleTowerParty(void)
 {
     s32 i;
 
@@ -1954,7 +1954,7 @@ void sub_8135AC4(void)
     sub_8135A3C();
 }
 
-void sub_8135BA0(void)
+void SaveBattleTowerProgress(void)
 {
     u8 battleTowerLevelType = gSaveBlock2.battleTower.battleTowerLevelType;
 
@@ -2336,7 +2336,7 @@ void PrintEReaderTrainerFarewellMessage(void)
     }
 }
 
-void sub_813610C(void)
+void TryEnableBravoTrainerBattleTower(void)
 {
     s32 i;
 
