@@ -550,7 +550,6 @@ SECTIONS {
         data/cute_sketch.o(.rodata);
         src/field/decoration.o(.rodata);
         src/field/slot_machine.o(.rodata);
-        data/slot_machine.o(.rodata);
         src/scene/contest_painting.o(.rodata);
         src/battle/battle_ai.o(.rodata);
         src/field/trader.o(.rodata);

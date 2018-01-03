@@ -2244,8 +2244,8 @@ void sub_8103CC8(struct Task *task, u8 taskId)
 }
 
 extern const u16 *const gUnknown_083EDD08[];
-extern const u16 *const gUnknown_083EDD1C[];
-extern const u8 gUnknown_083EDD30[];
+const u16 *const gUnknown_083EDD1C[];
+const u8 gUnknown_083EDD30[];
 
 static void sub_8103D00(u8 a0)
 {
@@ -2257,8 +2257,8 @@ static void sub_8103D28(u8 a0)
     LoadPalette(gUnknown_083EDD1C[a0], gUnknown_083EDD30[a0], 2);
 }
 
-extern const u8 gUnknown_083EDD3B[];
-extern const u8 gUnknown_083EDD35[][2];
+const u8 gUnknown_083EDD35[][2];
+const u8 gUnknown_083EDD3B[];
 
 static void sub_8103D50(u8 a0)
 {
@@ -2369,8 +2369,8 @@ static void sub_8103F70(void)
     sub_8103FE8(taskId);
 }
 
-extern const u16 *const gUnknown_083EDDA0[];
-extern const u16 *const gUnknown_083EDDAC;
+const u16 *const gUnknown_083EDDA0[];
+const u16 *const gUnknown_083EDDAC;
 
 static bool8 sub_8103FA0(void)
 {
@@ -5409,3 +5409,70 @@ const u16 *const gUnknown_083EDD08[] = {
     UnknownPalette_83EDCE8 + 14
 };
 
+const u16 *const gUnknown_083EDD1C[] = {
+    gUnknown_08E95A18 + 74,
+    gUnknown_08E95A18 + 75,
+    gUnknown_08E95A18 + 76,
+    gUnknown_08E95A18 + 77,
+    gUnknown_08E95A18 + 78
+};
+
+const u8 gUnknown_083EDD30[] = {
+    0x4a, 0x4b, 0x4c, 0x4e, 0x4d
+};
+
+const u8 gUnknown_083EDD35[][2] = {
+    {0, 0},
+    {1, 2},
+    {3, 4}
+};
+const u8 gUnknown_083EDD3B[] = {1, 2, 2};
+
+#ifdef SAPPHIRE
+const u16 Unknown_83EDD3E[] = INCBIN_U16("graphics/unknown/sapphire_83EDD96.gbapal");
+const u16 Unknown_83EDD5E[] = INCBIN_U16("graphics/unknown/sapphire_83EDDB6.gbapal");
+const u16 Unknown_83EDD7E[] = INCBIN_U16("graphics/unknown/sapphire_83EDDD6.gbapal");
+#elif defined (RUBY)
+const u16 Unknown_83EDD3E[] = INCBIN_U16("graphics/unknown/ruby_83EDD3E.gbapal");
+const u16 Unknown_83EDD5E[] = INCBIN_U16("graphics/unknown/ruby_83EDD5E.gbapal");
+const u16 Unknown_83EDD7E[] = INCBIN_U16("graphics/unknown/ruby_83EDD7E.gbapal");
+#endif // RS
+
+const u16 *const gUnknown_083EDDA0[] = {
+    Unknown_83EDD3E,
+    Unknown_83EDD5E,
+    Unknown_83EDD7E
+};
+
+const u16 *const gUnknown_083EDDAC = gUnknown_08E95A18 + 16;
+
+const u16 Palette_83EDDB0[] = INCBIN_U16("graphics/slot_machine/83EDDB0.gbapal");
+const u16 Palette_83EDDD0[] = INCBIN_U16("graphics/slot_machine/83EDDD0.gbapal");
+const u16 Palette_83EDDF0[] = INCBIN_U16("graphics/slot_machine/83EDDF0.gbapal");
+
+const u16 *const gUnknown_083EDE10[] = {
+    Palette_83EDDB0,
+    Palette_83EDDD0,
+    Palette_83EDDF0,
+    gSlotMachineSpritePalette6
+};
+
+const u16 *const gUnknown_083EDE20 = gSlotMachineSpritePalette6;
+
+const u16 gPalette_83EDE24[] = INCBIN_U16("graphics/slot_machine/83EDE24_pal.bin");
+
+const struct SpritePalette gSlotMachineSpritePalettes[] = {
+    {gSlotMachineSpritePalette0, 0},
+    {gSlotMachineSpritePalette1, 1},
+    {gSlotMachineSpritePalette2, 2},
+    {gSlotMachineSpritePalette3, 3},
+    {gSlotMachineSpritePalette4, 4},
+    {gSlotMachineSpritePalette5, 5},
+    {gSlotMachineSpritePalette6, 6},
+    {gSlotMachineSpritePalette4, 7},
+    {}
+};
+
+const u8 gUnknown_083EDE8C[] = INCBIN_U8("graphics/slot_machine/reel_time.4bpp.lz");
+
+const u16 gReelTimeWindowTilemap[] = INCBIN_U16("graphics/slot_machine/reel_time_window_map.bin");
