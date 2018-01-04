@@ -12,7 +12,6 @@
 #include "trig.h"
 #include "graphics.h"
 #include "palette.h"
-#include "task.h"
 #include "util.h"
 #include "text.h"
 #include "menu.h"
