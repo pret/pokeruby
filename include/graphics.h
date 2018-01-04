@@ -2697,5 +2697,10 @@ extern const u16 gSlotMachineSpritePalette3[];
 extern const u16 gSlotMachineSpritePalette4[];
 extern const u16 gSlotMachineSpritePalette5[];
 extern const u16 gSlotMachineSpritePalette6[];
+extern const u8 gSlotMachine_Gfx[];
+extern const u8 gSlotMachineReelTimeLights_Gfx[];
+extern const u16 gUnknown_08E95A18[];
+extern const u16 gUnknown_08E95AB8[];
+extern const u16 gUnknown_08E95FB8[];
 
 #endif  // GUARD_GRAPHICS_H

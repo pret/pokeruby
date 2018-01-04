@@ -80,7 +80,7 @@ static void sub_8102484(void);
 static void sub_81024F0(void);
 static bool8 sub_8102540(void);
 static u8 sub_8102578(void);
-u16 dp15_jump_random_unknown(void);
+static u16 dp15_jump_random_unknown(void);
 static u8 sub_81025BC(void);
 static void sub_81027A0(void);
 static void sub_81027D0(void);
@@ -90,44 +90,44 @@ static u8 sub_81029D4(u8 c1, u8 c2, u8 c3);
 static void sub_8102A24(void);
 static void sub_8102A64(u8 taskId);
 static bool8 sub_8102A44(void);
-bool8 sub_8102A9C(struct Task *task);
-bool8 sub_8102AD0(struct Task *task);
-bool8 sub_8102B80(struct Task *task);
-u8 sub_8102BA4(u8 x, s16 y);
+static bool8 sub_8102A9C(struct Task *task);
+static bool8 sub_8102AD0(struct Task *task);
+static bool8 sub_8102B80(struct Task *task);
+static u8 sub_8102BA4(u8 x, s16 y);
 static void sub_8102DA8(void);
 static void sub_8102DEC(u8 a0);
 static void sub_8102E1C(u8 a0);
 static bool8 sub_8102E40(u8 a0);
 static void sub_8102E68(u8 taskId);
-bool8 sub_8102EA0(struct Task *task);
-bool8 sub_8102EA4(struct Task *task);
-bool8 sub_8102EC0(struct Task *task);
-bool8 sub_8102F4C(struct Task *task);
-bool8 sub_8103008(struct Task *task);
-bool8 sub_810305C(void);
-bool8 sub_8103154(u8 a0, u8 a1);
-bool8 sub_81031B4(u8 a0, u8 a1);
-bool8 sub_81032C0(void);
-bool8 sub_81032E8(void);
-bool8 sub_810333C(void);
-bool8 sub_81033DC(void);
-bool8 sub_810341C(u8 a0);
-bool8 sub_810347C(u8 a0);
-void sub_81034F4(void);
-void sub_8103540(void);
-void sub_8103564(void);
-void j5_08111E84(void);
-void sub_8103668(void);
-void sub_810380C(void);
-void sub_8103830(void);
-void sub_8103910(void);
-void sub_8103A78(void);
+static bool8 sub_8102EA0(struct Task *task);
+static bool8 sub_8102EA4(struct Task *task);
+static bool8 sub_8102EC0(struct Task *task);
+static bool8 sub_8102F4C(struct Task *task);
+static bool8 sub_8103008(struct Task *task);
+static bool8 sub_810305C(void);
+static bool8 sub_8103154(u8 a0, u8 a1);
+static bool8 sub_81031B4(u8 a0, u8 a1);
+static bool8 sub_81032C0(void);
+static bool8 sub_81032E8(void);
+static bool8 sub_810333C(void);
+static bool8 sub_81033DC(void);
+static bool8 sub_810341C(u8 a0);
+static bool8 sub_810347C(u8 a0);
+static void sub_81034F4(void);
+static void sub_8103540(void);
+static void sub_8103564(void);
+static void j5_08111E84(void);
+static void sub_8103668(void);
+static void sub_810380C(void);
+static void sub_8103830(void);
+static void sub_8103910(void);
+static void sub_8103A78(void);
 static void sub_8103C14(u8 a0);
 static void sub_8103C48(u8 taskId);
 static void sub_8103D50(u8 a0);
-void sub_8103C78(struct Task *task, u8 taskId);
-void sub_8103CAC(struct Task *task, u8 taskId);
-void sub_8103CC8(struct Task *task, u8 taskId);
+static void sub_8103C78(struct Task *task, u8 taskId);
+static void sub_8103CAC(struct Task *task, u8 taskId);
+static void sub_8103CC8(struct Task *task, u8 taskId);
 static void sub_8103D8C(u8 a0);
 static void sub_8103DC8(void);
 static void sub_8103E04(u8 a0);
@@ -140,98 +140,94 @@ static bool8 sub_8103FA0(void);
 static void sub_8103FE8(u8 taskId);
 static void sub_8104048(void);
 static void sub_8104064(u8 unused);
-bool8 sub_81040C8(void);
+static bool8 sub_81040C8(void);
 static void sub_81040E8(u8 taskId);
-void nullsub_68(struct Task *task);
-void sub_810411C(struct Task *task);
-void sub_8104144(struct Task *task);
-void sub_81041AC(struct Task *task);
+static void nullsub_68(struct Task *task);
+static void sub_810411C(struct Task *task);
+static void sub_8104144(struct Task *task);
+static void sub_81041AC(struct Task *task);
 static void sub_810421C(struct Task *task);
-void sub_810423C(u8 a0);
+static void sub_810423C(u8 a0);
 static void sub_810430C(void);
 static bool8 sub_810432C(void);
-void sub_810434C(u8 taskId);
-void sub_810437C(struct Task *task);
-void sub_81043EC(struct Task *task);
-void sub_8104468(struct Task *task);
-void sub_8104498(struct Task *task);
-void sub_8104548(struct Task *task);
-void sub_8104598(struct Task *task);
-void sub_81045CC(struct Task *task);
-void sub_810463C(struct Task *task);
-void sub_81046C0(struct Task *task);
-void sub_8104764(struct Task *task);
-void sub_8104794(struct Task *task);
-void sub_81047EC(struct Task *task);
-void sub_8104860(struct Task *task);
-void sub_81048A8(struct Task *task);
-void sub_81048CC(struct Task *task);
-void sub_8104940(struct Task *task);
-void sub_81049C8(struct Task *task);
-void sub_81049F8(struct Task *task);
-void sub_8104A40(s16 a0, s16 a1);
-void sub_8104A88(s16 a0);
-void sub_8104AB8(u8 a0);
-bool8 sub_8104AEC(void);
-void sub_8104B0C(u8 taskId);
-void sub_8104B3C(struct Task *task);
-void sub_8104B60(struct Task *task);
-void sub_8104B80(struct Task *task);
-void sub_8104BC8(struct Task *task);
-void sub_8104BFC(struct Task *task);
-void sub_8104C44(struct Task *task);
-void sub_8104C5C(void);
-void sub_8104CAC(u8 arg0);
-bool8 sub_8104E18(void);
-void nullsub_69(struct Task *task);
-void sub_8104E74(u8 taskId);
-void sub_8104EA8(void);
-void sub_8104F8C(void);
-void sub_8104FF4(s16 x, s16 y, u8 a2, s16 a3);
-void sub_81050C4(void);
-void sub_8105100(void);
-void sub_810514C(void);
-void sub_81051C0(void);
-void sub_8105284(void);
-void sub_81052EC(void);
-void sub_81053A0(void);
-void sub_810545C(void);
-void sub_81054B8(void);
-void sub_8105524(void);
-void sub_8105554(void);
-void sub_8105578(void);
-void sub_8105688(s16 a0);
-void sub_81056C0(void);
-void sub_81056F0(void);
-void sub_81057E8(s16 a0);
-void sub_8105804(void);
-void sub_8105854(void);
-void sub_81058A0(void);
-void sub_81058C4(void);
-void sub_81059B8(void);
-void sub_81059E8(void);
-bool8 sub_8105ACC(void);
-void sub_8105AEC(void);
-u8 sub_8105B1C(s16 x, s16 y);
-void sub_8105B88(u8 spriteId);
-u8 sub_8105BF8(u8 templateIdx, SpriteCallback callback, s16 x, s16 y, s16 a4);
-void sub_81063C0(void);
-void sub_8106404(void);
+static void sub_810434C(u8 taskId);
+static void sub_810437C(struct Task *task);
+static void sub_81043EC(struct Task *task);
+static void sub_8104468(struct Task *task);
+static void sub_8104498(struct Task *task);
+static void sub_8104548(struct Task *task);
+static void sub_8104598(struct Task *task);
+static void sub_81045CC(struct Task *task);
+static void sub_810463C(struct Task *task);
+static void sub_81046C0(struct Task *task);
+static void sub_8104764(struct Task *task);
+static void sub_8104794(struct Task *task);
+static void sub_81047EC(struct Task *task);
+static void sub_8104860(struct Task *task);
+static void sub_81048A8(struct Task *task);
+static void sub_81048CC(struct Task *task);
+static void sub_8104940(struct Task *task);
+static void sub_81049C8(struct Task *task);
+static void sub_81049F8(struct Task *task);
+static void sub_8104A40(s16 a0, s16 a1);
+static void sub_8104A88(s16 a0);
+static void sub_8104AB8(u8 a0);
+static bool8 sub_8104AEC(void);
+static void sub_8104B0C(u8 taskId);
+static void sub_8104B3C(struct Task *task);
+static void sub_8104B60(struct Task *task);
+static void sub_8104B80(struct Task *task);
+static void sub_8104BC8(struct Task *task);
+static void sub_8104BFC(struct Task *task);
+static void sub_8104C44(struct Task *task);
+static void sub_8104C5C(void);
+static void sub_8104CAC(u8 arg0);
+static bool8 sub_8104E18(void);
+static void nullsub_69(struct Task *task);
+static void sub_8104E74(u8 taskId);
+static void sub_8104EA8(void);
+static void sub_8104F8C(void);
+static void sub_8104FF4(s16 x, s16 y, u8 a2, s16 a3);
+static void sub_81050C4(void);
+static void sub_8105100(void);
+static void sub_810514C(void);
+static void sub_81051C0(void);
+static void sub_8105284(void);
+static void sub_81052EC(void);
+static void sub_81053A0(void);
+static void sub_810545C(void);
+static void sub_81054B8(void);
+static void sub_8105524(void);
+static void sub_8105554(void);
+static void sub_8105578(void);
+static void sub_8105688(s16 a0);
+static void sub_81056C0(void);
+static void sub_81056F0(void);
+static void sub_81057E8(s16 a0);
+static void sub_8105804(void);
+static void sub_8105854(void);
+static void sub_81058A0(void);
+static void sub_81058C4(void);
+static void sub_81059B8(void);
+static void sub_81059E8(void);
+static bool8 sub_8105ACC(void);
+static void sub_8105AEC(void);
+static u8 sub_8105B1C(s16 x, s16 y);
+static void sub_8105B88(u8 spriteId);
+static u8 sub_8105BF8(u8 templateIdx, SpriteCallback callback, s16 x, s16 y, s16 a4);
+static void sub_81063C0(void);
+static void sub_8106404(void);
 static void sub_8106448(void);
-void sub_81064B8(void);
-void sub_81065A8(s16 arg0, u16 arg1, u16 arg2, u16 arg3, u16 arg4);
-void sub_81065DC(void);
+static void sub_81064B8(void);
+static void sub_81065A8(s16 arg0, u16 arg1, u16 arg2, u16 arg3, u16 arg4);
+static void sub_81065DC(void);
 
-const struct UnkStruct1 *const gUnknown_083ED048[];
-extern const u16 gPalette_83EDE24[];
-extern const u8 gSlotMachine_Gfx[];
-extern const u16 gUnknown_08E95A18[];
-extern const u16 gUnknown_08E95AB8[];
-extern const u16 gUnknown_08E95FB8[];
-const u8 gUnknown_083ECD04[][3];
-const u8 gUnknown_083ECE3A[];
-const u16 gUnknown_083ECE42[];
-const u16 gUnknown_083ECE48[];
+static const struct UnkStruct1 *const gUnknown_083ED048[];
+static const u16 gPalette_83EDE24[];
+static const u8 gUnknown_083ECD04[][3];
+static const u8 gUnknown_083ECE3A[];
+static const u16 gUnknown_083ECE42[];
+static const u16 gUnknown_083ECE48[];
 
 void PlaySlotMachine(u8 arg0, void *ptr)
 {
@@ -286,7 +282,7 @@ static void sub_8101954(void)
     UpdatePaletteFade();
 }
 
-void sub_810196C(void)
+static void sub_810196C(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
@@ -304,7 +300,7 @@ static void sub_81019B0(u8 arg0, void *ptr)
     StoreWordInTwoHalfwords(task->data + 1, (intptr_t)ptr);
 }
 
-void sub_81019EC(void)
+static void sub_81019EC(void)
 {
     struct Task *task = &gTasks[FindTaskIdByFunc(nullsub_67)];
     eSlotMachine->unk01 = task->data[0];
@@ -368,7 +364,7 @@ static void sub_8101B04(void)
     REG_BLDALPHA = 0x809;
 }
 
-const s16 gUnknown_083ECCF8[][2];
+static const s16 gUnknown_083ECCF8[][2];
 
 static void sub_8101BA4(void)
 {
@@ -586,7 +582,7 @@ static bool8 sub_8101E3C(struct Task *task)
     return FALSE;
 }
 
-void sub_8101F2C(const u8 *str)
+static void sub_8101F2C(const u8 *str)
 {
     MenuDisplayMessageBox();
     MenuPrint(str, 2, 15);
@@ -958,7 +954,7 @@ static void sub_81024F0(void)
     }
 }
 
-u8 sub_810250C(u8 a0)
+static u8 sub_810250C(u8 a0)
 {
     u8 i;
 
@@ -983,7 +979,7 @@ static bool8 sub_8102540(void)
     return FALSE;
 }
 
-const u8 gUnknown_083ECD16[][6];
+static const u8 gUnknown_083ECD16[][6];
 
 static u8 sub_8102578(void)
 {
@@ -1001,7 +997,7 @@ static u8 sub_8102578(void)
     return i;
 }
 
-const u8 gUnknown_083ECD28[][6];
+static const u8 gUnknown_083ECD28[][6];
 
 static u8 sub_81025BC(void)
 {
@@ -1035,10 +1031,10 @@ static u8 sub_81025BC(void)
     return i;
 }
 
-const u8 gUnknown_083ECD46[][17];
-const u8 gUnknown_083ECDAC[][17];
+static const u8 gUnknown_083ECD46[][17];
+static const u8 gUnknown_083ECDAC[][17];
 
-u8 sub_810264C(u8 a0)
+static u8 sub_810264C(u8 a0)
 {
     if (eSlotMachine->unk03 == 0)
     {
@@ -1047,7 +1043,7 @@ u8 sub_810264C(u8 a0)
     return gUnknown_083ECDAC[a0][eSlotMachine->unk02];
 }
 
-void sub_8102680(void)
+static void sub_8102680(void)
 {
     u8 rval;
     s16 i;
@@ -1069,9 +1065,9 @@ void sub_8102680(void)
     eSlotMachine->unk05 = i;
 }
 
-const u16 gUnknown_083ECE12[];
+static const u16 gUnknown_083ECE12[];
 
-bool8 sub_81026DC(u16 a0)
+static bool8 sub_81026DC(u16 a0)
 {
     u16 rval = Random() & 0xff;
     if (rval < gUnknown_083ECE12[a0])
@@ -1081,10 +1077,10 @@ bool8 sub_81026DC(u16 a0)
     return FALSE;
 }
 
-const u16 gUnknown_083ECE1C[][2];
-const u16 gUnknown_083ECE30[];
+static const u16 gUnknown_083ECE1C[][2];
+static const u16 gUnknown_083ECE30[];
 
-u16 dp15_jump_random_unknown(void)
+static u16 dp15_jump_random_unknown(void)
 {
     u8 r4 = 0;
     u8 rval;
@@ -1134,8 +1130,8 @@ static void sub_81027A0(void)
     }
 }
 
-extern const u16 gUnknown_083ECE5A[];
-extern const u16 gUnknown_083ECE6C[];
+static const u16 gUnknown_083ECE5A[];
+static const u16 gUnknown_083ECE6C[];
 
 static void sub_81027D0(void)
 {
@@ -1219,7 +1215,7 @@ static void sub_810290C(void)
     }
 }
 
-const u8 gUnknown_083ECE52[];
+static const u8 gUnknown_083ECE52[];
 
 static u8 sub_81029D4(u8 c1, u8 c2, u8 c3)
 {
@@ -1256,7 +1252,7 @@ static bool8 sub_8102A44(void)
     return FALSE;
 }
 
-bool8 (*const gUnknown_083ECB20[])(struct Task *task) = {
+static bool8 (*const gUnknown_083ECB20[])(struct Task *task) = {
     sub_8102A9C,
     sub_8102AD0,
     sub_8102B80
@@ -1267,7 +1263,7 @@ static void sub_8102A64(u8 taskId)
     while (gUnknown_083ECB20[gTasks[taskId].data[0]](gTasks + taskId));
 }
 
-bool8 sub_8102A9C(struct Task *task)
+static bool8 sub_8102A9C(struct Task *task)
 {
     if (sub_8103E38())
     {
@@ -1281,7 +1277,7 @@ bool8 sub_8102A9C(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_8102AD0(struct Task *task)
+static bool8 sub_8102AD0(struct Task *task)
 {
     if (!task->data[1]--)
     {
@@ -1317,7 +1313,7 @@ bool8 sub_8102AD0(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_8102B80(struct Task *task)
+static bool8 sub_8102B80(struct Task *task)
 {
     if (sub_8103E7C())
     {
@@ -1326,9 +1322,9 @@ bool8 sub_8102B80(struct Task *task)
     return FALSE;
 }
 
-const u8 gUnknown_083ECCB2[][21];
+static const u8 gUnknown_083ECCB2[][21];
 
-u8 sub_8102BA4(u8 x, s16 y)
+static u8 sub_8102BA4(u8 x, s16 y)
 {
     s16 offset = (eSlotMachine->unk28[x] + y) % 21;
     if (offset < 0)
@@ -1338,7 +1334,7 @@ u8 sub_8102BA4(u8 x, s16 y)
     return gUnknown_083ECCB2[x][offset];
 }
 
-u8 sub_8102BF8(u8 x, s16 y)
+static u8 sub_8102BF8(u8 x, s16 y)
 {
     s16 r6 = 0;
     if ((eSlotMachine->unk1C[x]) % 24)
@@ -1346,9 +1342,9 @@ u8 sub_8102BF8(u8 x, s16 y)
     return sub_8102BA4(x, y + r6);
 }
 
-const u8 gUnknown_083ECCF1[];
+static const u8 gUnknown_083ECCF1[];
 
-u8 sub_8102C48(s16 a0)
+static u8 sub_8102C48(s16 a0)
 {
     s16 r1 = (eSlotMachine->unk16 + a0) % 6;
     if (r1 < 0)
@@ -1356,14 +1352,14 @@ u8 sub_8102C48(s16 a0)
     return gUnknown_083ECCF1[r1];
 }
 
-void sub_8102C84(u8 a0, s16 a1)
+static void sub_8102C84(u8 a0, s16 a1)
 {
     eSlotMachine->unk1C[a0] += a1;
     eSlotMachine->unk1C[a0] %= 504;
     eSlotMachine->unk28[a0] = 21 - eSlotMachine->unk1C[a0] / 24;
 }
 
-s16 sub_8102CCC(u8 a0, s16 a1)
+static s16 sub_8102CCC(u8 a0, s16 a1)
 {
     s16 r1 = eSlotMachine->unk1C[a0] % 24;
     if (r1 != 0)
@@ -1376,14 +1372,14 @@ s16 sub_8102CCC(u8 a0, s16 a1)
     return r1;
 }
 
-void sub_8102D28(s16 a0)
+static void sub_8102D28(s16 a0)
 {
     eSlotMachine->unk14 += a0;
     eSlotMachine->unk14 %= 120;
     eSlotMachine->unk16 = 6 - eSlotMachine->unk14 / 20;
 }
 
-s16 sub_8102D5C(s16 a0)
+static s16 sub_8102D5C(s16 a0)
 {
     s16 r1 = eSlotMachine->unk14 % 20;
     if (r1 != 0)
@@ -1424,7 +1420,7 @@ static bool8 sub_8102E40(u8 a0)
     return gTasks[eSlotMachine->unk3A[a0]].data[14];
 }
 
-bool8 (*const gUnknown_083ECB2C[])(struct Task *task) = {
+static bool8 (*const gUnknown_083ECB2C[])(struct Task *task) = {
     sub_8102EA0,
     sub_8102EA4,
     sub_8102EC0,
@@ -1437,29 +1433,29 @@ static void sub_8102E68(u8 taskId)
     while (gUnknown_083ECB2C[gTasks[taskId].data[0]](gTasks + taskId));
 }
 
-bool8 sub_8102EA0(struct Task *task)
+static bool8 sub_8102EA0(struct Task *task)
 {
     return FALSE;
 }
 
-bool8 sub_8102EA4(struct Task *task)
+static bool8 sub_8102EA4(struct Task *task)
 {
     sub_8102C84(task->data[15], eSlotMachine->unk1A);
     return FALSE;
 }
 
-bool8 (*const gUnknown_083ECB40[])(void) = {
+static bool8 (*const gUnknown_083ECB40[])(void) = {
     sub_810305C,
     sub_81032C0,
     sub_81033DC
 };
-void (*const gUnknown_083ECB4C[])(void) = {
+static void (*const gUnknown_083ECB4C[])(void) = {
     sub_81034F4,
     sub_8103540,
     sub_810380C
 };
 
-bool8 sub_8102EC0(struct Task *task)
+static bool8 sub_8102EC0(struct Task *task)
 {
     task->data[0]++;
     eSlotMachine->unk34[task->data[15]] = 0;
@@ -1473,7 +1469,7 @@ bool8 sub_8102EC0(struct Task *task)
     return TRUE;
 }
 
-bool8 sub_8102F4C(struct Task *task)
+static bool8 sub_8102F4C(struct Task *task)
 {
     u16 sp[] = {2, 4, 4, 4, 8};
     s16 r2 = eSlotMachine->unk1C[task->data[15]] % 24;
@@ -1496,7 +1492,7 @@ bool8 sub_8102F4C(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_8103008(struct Task *task)
+static bool8 sub_8103008(struct Task *task)
 {
     eSlotMachine->unk22[task->data[15]] = task->data[1];
     task->data[1] = -task->data[1];
@@ -1514,13 +1510,13 @@ bool8 sub_8103008(struct Task *task)
     return FALSE;
 }
 
-bool8 (*const gUnknown_083ECB64[])(u8 a0, u8 a1) = {
+static bool8 (*const gUnknown_083ECB64[])(u8 a0, u8 a1) = {
     sub_8103154,
     sub_81031B4,
     sub_81031B4
 };
 
-bool8 sub_810305C(void)
+static bool8 sub_810305C(void)
 {
     u8 r3 = sub_810250C(eSlotMachine->unk04);
     u8 r5 = r3;
@@ -1532,7 +1528,7 @@ bool8 sub_810305C(void)
     return gUnknown_083ECB64[eSlotMachine->bet - 1](r5, r3);
 }
 
-bool8 sub_81030A4(s16 a0, u8 a1, u8 a2)
+static bool8 sub_81030A4(s16 a0, u8 a1, u8 a2)
 {
     u8 r1 = sub_8102BF8(0, a0);
     if (r1 == a1 || r1 == a2)
@@ -1543,7 +1539,7 @@ bool8 sub_81030A4(s16 a0, u8 a1, u8 a2)
     return FALSE;
 }
 
-bool8 sub_81030E0(s16 a0)
+static bool8 sub_81030E0(s16 a0)
 {
     if (sub_8102BF8(0, 1 - a0) == 4 || sub_8102BF8(0, 2 - a0) == 4 || sub_8102BF8(0, 3 - a0) == 4)
     {
@@ -1552,7 +1548,7 @@ bool8 sub_81030E0(s16 a0)
     return FALSE;
 }
 
-bool8 sub_8103134(void)
+static bool8 sub_8103134(void)
 {
     if (eSlotMachine->unk04 & 0xc2)
     {
@@ -1561,7 +1557,7 @@ bool8 sub_8103134(void)
     return FALSE;
 }
 
-bool8 sub_8103154(u8 a0, u8 a1)
+static bool8 sub_8103154(u8 a0, u8 a1)
 {
     s16 i;
 
@@ -1577,7 +1573,7 @@ bool8 sub_8103154(u8 a0, u8 a1)
     return FALSE;
 }
 
-bool8 sub_81031B4(u8 a0, u8 a1)
+static bool8 sub_81031B4(u8 a0, u8 a1)
 {
     s16 i;
     bool8 r6 = sub_8103134();
@@ -1621,18 +1617,18 @@ bool8 sub_81031B4(u8 a0, u8 a1)
     return FALSE;
 }
 
-bool8 (*const gUnknown_083ECB70[])(void) = {
+static bool8 (*const gUnknown_083ECB70[])(void) = {
     sub_81032E8,
     sub_81032E8,
     sub_810333C
 };
 
-bool8 sub_81032C0(void)
+static bool8 sub_81032C0(void)
 {
     return gUnknown_083ECB70[eSlotMachine->bet - 1]();
 }
 
-bool8 sub_81032E8(void)
+static bool8 sub_81032E8(void)
 {
     s16 i;
     s16 unk34_0 = eSlotMachine->unk34[0];
@@ -1649,7 +1645,7 @@ bool8 sub_81032E8(void)
     return FALSE;
 }
 
-bool8 sub_810333C(void)
+static bool8 sub_810333C(void)
 {
     s16 i;
     if (sub_81032E8())
@@ -1683,13 +1679,13 @@ bool8 sub_810333C(void)
     return FALSE;
 }
 
-bool8 (*const gUnknown_083ECB7C[])(u8 a0) = {
+static bool8 (*const gUnknown_083ECB7C[])(u8 a0) = {
     sub_810341C,
     sub_810341C,
     sub_810347C
 };
 
-bool8 sub_81033DC(void)
+static bool8 sub_81033DC(void)
 {
     u8 r3 = eSlotMachine->unk07;
     if (eSlotMachine->unk04 & 0x40)
@@ -1703,7 +1699,7 @@ bool8 sub_81033DC(void)
     return gUnknown_083ECB7C[eSlotMachine->bet - 1](r3);
 }
 
-bool8 sub_810341C(u8 a0)
+static bool8 sub_810341C(u8 a0)
 {
     s16 i;
     s16 unk34_1 = eSlotMachine->unk34[1];
@@ -1720,7 +1716,7 @@ bool8 sub_810341C(u8 a0)
     return FALSE;
 }
 
-bool8 sub_810347C(u8 a0)
+static bool8 sub_810347C(u8 a0)
 {
     s16 i;
     s16 r8;
@@ -1745,14 +1741,14 @@ bool8 sub_810347C(u8 a0)
     return FALSE;
 }
 
-void sub_81034F4(void)
+static void sub_81034F4(void)
 {
     s16 i;
     for (i = 0; sub_81030E0(i); i++);
     eSlotMachine->unk2E[0] = i;
 }
 
-bool8 sub_8103520(u8 *a0)
+static bool8 sub_8103520(u8 *a0)
 {
     if (*a0 == 0)
     {
@@ -1767,18 +1763,18 @@ bool8 sub_8103520(u8 *a0)
     return FALSE;
 }
 
-void (*const gUnknown_083ECB88[])(void) = {
+static void (*const gUnknown_083ECB88[])(void) = {
     sub_8103564,
     j5_08111E84,
     sub_8103668
 };
 
-void sub_8103540(void)
+static void sub_8103540(void)
 {
     gUnknown_083ECB88[eSlotMachine->bet - 1]();
 }
 
-void sub_8103564(void)
+static void sub_8103564(void)
 {
     if (eSlotMachine->unk34[0] != 0 && eSlotMachine->unk04 & 0x80)
     {
@@ -1799,7 +1795,7 @@ void sub_8103564(void)
     }
 }
 
-void j5_08111E84(void)
+static void j5_08111E84(void)
 {
     if (eSlotMachine->unk34[0] != 0 && eSlotMachine->unk04 & 0x80)
     {
@@ -1822,7 +1818,7 @@ void j5_08111E84(void)
 
 #ifdef NONMATCHING // variable r6 is mistakenly plopped into r5,
                    // and variable i is mistakenly plopped into r6
-void sub_8103668(void)
+static void sub_8103668(void)
 {
     s16 i;
     s16 r6;
@@ -2022,7 +2018,7 @@ __attribute__((naked)) void sub_8103668(void)
 }
 #endif // NONMATCHING
 
-bool8 sub_8103764(u8 a0, u8 a1)
+static bool8 sub_8103764(u8 a0, u8 a1)
 {
     if ((a0 == 0 && a1 == 1) || (a0 == 1 && a1 == 0))
     {
@@ -2031,7 +2027,7 @@ bool8 sub_8103764(u8 a0, u8 a1)
     return FALSE;
 }
 
-bool8 sub_810378C(u8 a0, u8 a1, u8 a2)
+static bool8 sub_810378C(u8 a0, u8 a1, u8 a2)
 {
     if ((a0 == 0 && a1 == 1 && a2 == 0) || (a0 == 1 && a1 == 0 && a2 == 1))
     {
@@ -2040,7 +2036,7 @@ bool8 sub_810378C(u8 a0, u8 a1, u8 a2)
     return FALSE;
 }
 
-bool8 sub_81037BC(u8 a0, u8 a1, u8 a2)
+static bool8 sub_81037BC(u8 a0, u8 a1, u8 a2)
 {
     if ((a0 == 0 && a1 == 1 && a2 == 0) ||
         (a0 == 1 && a1 == 0 && a2 == 1) ||
@@ -2053,18 +2049,18 @@ bool8 sub_81037BC(u8 a0, u8 a1, u8 a2)
     return TRUE;
 }
 
-void (*const gUnknown_083ECB94[])(void) = {
+static void (*const gUnknown_083ECB94[])(void) = {
     sub_8103830,
     sub_8103910,
     sub_8103A78
 };
 
-void sub_810380C(void)
+static void sub_810380C(void)
 {
     gUnknown_083ECB94[eSlotMachine->bet - 1]();
 }
 
-void sub_8103830(void)
+static void sub_8103830(void)
 {
     s16 i = 0;
     u8 r5 = sub_8102BF8(0, 2 - eSlotMachine->unk2E[0]);
@@ -2107,7 +2103,7 @@ void sub_8103830(void)
     eSlotMachine->unk2E[2] = i;
 }
 
-void sub_8103910(void)
+static void sub_8103910(void)
 {
     s16 sp0 = 0;
     s16 i;
@@ -2155,7 +2151,7 @@ void sub_8103910(void)
     eSlotMachine->unk2E[2] = sp0;
 }
 
-void sub_8103A78(void)
+static void sub_8103A78(void)
 {
     u8 r6;
     u8 r5;
@@ -2211,7 +2207,7 @@ static void sub_8103C14(u8 a0)
     sub_8103C48(taskId);
 }
 
-void (*const gUnknown_083ECBA0[])(struct Task *task, u8 taskId) = {
+static void (*const gUnknown_083ECBA0[])(struct Task *task, u8 taskId) = {
     sub_8103C78,
     sub_8103CAC,
     sub_8103CC8
@@ -2222,29 +2218,29 @@ static void sub_8103C48(u8 taskId)
     gUnknown_083ECBA0[gTasks[taskId].data[0]](gTasks + taskId, taskId);
 }
 
-const s16 gUnknown_083ECBAC[] = {5, 10, 15};
+static const s16 gUnknown_083ECBAC[] = {5, 10, 15};
 
-void sub_8103C78(struct Task *task, u8 taskId)
+static void sub_8103C78(struct Task *task, u8 taskId)
 {
     sub_81065A8(gUnknown_083ECBAC[task->data[15]], 0x62, 0x63, 0x72, 0x73);
     task->data[0]++;
 }
 
-void sub_8103CAC(struct Task *task, u8 taskId)
+static void sub_8103CAC(struct Task *task, u8 taskId)
 {
     if (++task->data[1] > 11)
         task->data[0]++;
 }
 
-void sub_8103CC8(struct Task *task, u8 taskId)
+static void sub_8103CC8(struct Task *task, u8 taskId)
 {
     sub_81065A8(gUnknown_083ECBAC[task->data[15]], 0x42, 0x43, 0x52, 0x53);
     DestroyTask(taskId);
 }
 
-extern const u16 *const gUnknown_083EDD08[];
-const u16 *const gUnknown_083EDD1C[];
-const u8 gUnknown_083EDD30[];
+static const u16 *const gUnknown_083EDD08[];
+static const u16 *const gUnknown_083EDD1C[];
+static const u8 gUnknown_083EDD30[];
 
 static void sub_8103D00(u8 a0)
 {
@@ -2256,8 +2252,8 @@ static void sub_8103D28(u8 a0)
     LoadPalette(gUnknown_083EDD1C[a0], gUnknown_083EDD30[a0], 2);
 }
 
-const u8 gUnknown_083EDD35[][2];
-const u8 gUnknown_083EDD3B[];
+static const u8 gUnknown_083EDD35[][2];
+static const u8 gUnknown_083EDD3B[];
 
 static void sub_8103D50(u8 a0)
 {
@@ -2368,8 +2364,8 @@ static void sub_8103F70(void)
     sub_8103FE8(taskId);
 }
 
-const u16 *const gUnknown_083EDDA0[];
-const u16 *const gUnknown_083EDDAC;
+static const u16 *const gUnknown_083EDDA0[];
+static const u16 *const gUnknown_083EDDAC;
 
 static bool8 sub_8103FA0(void)
 {
@@ -2412,7 +2408,7 @@ static void sub_8104064(u8 unused)
     task->data[15] = 1;
 }
 
-void sub_8104098(void)
+static void sub_8104098(void)
 {
     struct Task *task = gTasks + eSlotMachine->unk3E;
     sub_810421C(task);
@@ -2420,12 +2416,12 @@ void sub_8104098(void)
     task->data[15] = 1;
 }
 
-bool8 sub_81040C8(void)
+static bool8 sub_81040C8(void)
 {
     return gTasks[eSlotMachine->unk3E].data[15];
 }
 
-void (*const gUnknown_083ECBB4[])(struct Task *task) = {
+static void (*const gUnknown_083ECBB4[])(struct Task *task) = {
     nullsub_68,
     sub_810411C,
     sub_8104144,
@@ -2437,24 +2433,24 @@ static void sub_81040E8(u8 taskId)
     gUnknown_083ECBB4[gTasks[taskId].data[0]](gTasks + taskId);
 }
 
-void nullsub_68(struct Task *task)
+static void nullsub_68(struct Task *task)
 {
 
 }
 
-void sub_810411C(struct Task *task)
+static void sub_810411C(struct Task *task)
 {
     task->data[2] = sub_8105B1C((task->data[1] << 3) + 20, 20);
     task->data[0]++;
 }
 
-const u16 gUnknown_083ECBC4[][2] = {
+static const u16 gUnknown_083ECBC4[][2] = {
     {0x9e, 0x6e},
     {0x9f, 0x6f},
     {0xaf, 0x7f}
 };
 
-void sub_8104144(struct Task *task)
+static void sub_8104144(struct Task *task)
 {
     u16 *vaddr = (u16 *)BG_SCREEN_ADDR(29);
     if (gSprites[task->data[2]].data[7])
@@ -2472,7 +2468,7 @@ void sub_8104144(struct Task *task)
     }
 }
 
-void sub_81041AC(struct Task *task)
+static void sub_81041AC(struct Task *task)
 {
     u16 *vaddr = (u16 *)BG_SCREEN_ADDR(29);
     s16 r4 = task->data[1] + 2;
@@ -2503,7 +2499,7 @@ static void sub_810421C(struct Task *task)
         task->data[i] = 0;
 }
 
-void sub_810423C(u8 a0)
+static void sub_810423C(u8 a0)
 {
     s16 i;
     u8 r3;
@@ -2543,7 +2539,7 @@ static bool8 sub_810432C(void)
     return FALSE;
 }
 
-void (*const gUnknown_083ECBD0[])(struct Task *task) = {
+static void (*const gUnknown_083ECBD0[])(struct Task *task) = {
     sub_810437C,
     sub_81043EC,
     sub_8104468,
@@ -2565,12 +2561,12 @@ void (*const gUnknown_083ECBD0[])(struct Task *task) = {
     sub_81049F8
 };
 
-void sub_810434C(u8 taskId)
+static void sub_810434C(u8 taskId)
 {
     gUnknown_083ECBD0[gTasks[taskId].data[0]](gTasks + taskId);
 }
 
-void sub_810437C(struct Task *task)
+static void sub_810437C(struct Task *task)
 {
     eSlotMachine->unk0A = 0;
     eSlotMachine->unk14 = 0;
@@ -2594,7 +2590,7 @@ void sub_810437C(struct Task *task)
     PlayNewMapMusic(BGM_BD_TIME);
 }
 
-void sub_81043EC(struct Task *task)
+static void sub_81043EC(struct Task *task)
 {
     s16 r3;
     gSpriteCoordOffsetX -= 8;
@@ -2615,7 +2611,7 @@ void sub_81043EC(struct Task *task)
     sub_8102D28(task->data[4] >> 8);
 }
 
-void sub_8104468(struct Task *task)
+static void sub_8104468(struct Task *task)
 {
     sub_8102D28(task->data[4] >> 8);
     if (++task->data[5] >= 60)
@@ -2626,7 +2622,7 @@ void sub_8104468(struct Task *task)
     }
 }
 
-void sub_8104498(struct Task *task)
+static void sub_8104498(struct Task *task)
 {
     int r5;
     u8 sp0[] = {1, 1, 2, 2};
@@ -2647,7 +2643,7 @@ void sub_8104498(struct Task *task)
     }
 }
 
-void sub_8104548(struct Task *task)
+static void sub_8104548(struct Task *task)
 {
     sub_8102D28(task->data[4] >> 8);
     if (++task->data[5] >= 80)
@@ -2659,7 +2655,7 @@ void sub_8104548(struct Task *task)
     }
 }
 
-void sub_8104598(struct Task *task)
+static void sub_8104598(struct Task *task)
 {
     sub_8102D28(task->data[4] >> 8);
     task->data[4] = (u8)task->data[4] + 0x80;
@@ -2670,7 +2666,7 @@ void sub_8104598(struct Task *task)
     }
 }
 
-void sub_81045CC(struct Task *task)
+static void sub_81045CC(struct Task *task)
 {
     sub_8102D28(task->data[4] >> 8);
     task->data[4] = (u8)task->data[4] + 0x40;
@@ -2696,7 +2692,7 @@ void sub_81045CC(struct Task *task)
     }
 }
 
-void sub_810463C(struct Task *task)
+static void sub_810463C(struct Task *task)
 {
     s16 r5 = eSlotMachine->unk14 % 20;
     if (r5)
@@ -2717,7 +2713,7 @@ void sub_810463C(struct Task *task)
     }
 }
 
-void sub_81046C0(struct Task *task)
+static void sub_81046C0(struct Task *task)
 {
     if (++task->data[4] >= 60)
     {
@@ -2746,7 +2742,7 @@ void sub_81046C0(struct Task *task)
     }
 }
 
-void sub_8104764(struct Task *task)
+static void sub_8104764(struct Task *task)
 {
     if ((task->data[4] == 0 || --task->data[4] == 0) && !sub_81040C8())
     {
@@ -2754,7 +2750,7 @@ void sub_8104764(struct Task *task)
     }
 }
 
-void sub_8104794(struct Task *task)
+static void sub_8104794(struct Task *task)
 {
     s16 r4;
     gSpriteCoordOffsetX -= 8;
@@ -2772,7 +2768,7 @@ void sub_8104794(struct Task *task)
     }
 }
 
-void sub_81047EC(struct Task *task)
+static void sub_81047EC(struct Task *task)
 {
     eSlotMachine->unk0B = 0;
     eSlotMachine->unk0A = eSlotMachine->unk05;
@@ -2797,7 +2793,7 @@ void sub_81047EC(struct Task *task)
     }
 }
 
-void sub_8104860(struct Task *task)
+static void sub_8104860(struct Task *task)
 {
     if (eSlotMachine->unk1A == task->data[1])
     {
@@ -2809,7 +2805,7 @@ void sub_8104860(struct Task *task)
     }
 }
 
-void sub_81048A8(struct Task *task)
+static void sub_81048A8(struct Task *task)
 {
     if (sub_8104E18())
     {
@@ -2817,7 +2813,7 @@ void sub_81048A8(struct Task *task)
     }
 }
 
-void sub_81048CC(struct Task *task)
+static void sub_81048CC(struct Task *task)
 {
     sub_81054B8();
     sub_81056C0();
@@ -2833,7 +2829,7 @@ void sub_81048CC(struct Task *task)
     PlaySE(SE_W153);
 }
 
-void sub_8104940(struct Task *task)
+static void sub_8104940(struct Task *task)
 {
     gSpriteCoordOffsetY = task->data[4];
     REG_BG1VOFS = task->data[4];
@@ -2853,7 +2849,7 @@ void sub_8104940(struct Task *task)
     }
 }
 
-void sub_81049C8(struct Task *task)
+static void sub_81049C8(struct Task *task)
 {
     gSpriteCoordOffsetY = 0;
     REG_BG1VOFS = 0;
@@ -2864,7 +2860,7 @@ void sub_81049C8(struct Task *task)
     }
 }
 
-void sub_81049F8(struct Task *task)
+static void sub_81049F8(struct Task *task)
 {
     gSpriteCoordOffsetX = 0;
     REG_BG1HOFS = 0;
@@ -2876,9 +2872,9 @@ void sub_81049F8(struct Task *task)
     DestroyTask(FindTaskIdByFunc(sub_810434C));
 }
 
-extern const u16 gReelTimeWindowTilemap[];
+static const u16 gReelTimeWindowTilemap[];
 
-void sub_8104A40(s16 a0, s16 a1)
+static void sub_8104A40(s16 a0, s16 a1)
 {
     s16 i;
 
@@ -2889,7 +2885,7 @@ void sub_8104A40(s16 a0, s16 a1)
     }
 }
 
-void sub_8104A88(s16 a0)
+static void sub_8104A88(s16 a0)
 {
     s16 i;
 
@@ -2899,21 +2895,21 @@ void sub_8104A88(s16 a0)
     }
 }
 
-void sub_8104AB8(u8 a0)
+static void sub_8104AB8(u8 a0)
 {
     u8 taskId = CreateTask(sub_8104B0C, 1);
     gTasks[taskId].data[1] = a0;
     sub_8104B0C(taskId);
 }
 
-bool8 sub_8104AEC(void)
+static bool8 sub_8104AEC(void)
 {
     if (FindTaskIdByFunc(sub_8104B0C) == 0xFF)
         return TRUE;
     return FALSE;
 }
 
-void (*const gUnknown_083ECC30[])(struct Task *task) = {
+static void (*const gUnknown_083ECC30[])(struct Task *task) = {
     sub_8104B3C,
     sub_8104B60,
     sub_8104B80,
@@ -2925,18 +2921,18 @@ void (*const gUnknown_083ECC30[])(struct Task *task) = {
     sub_8104C44
 };
 
-void sub_8104B0C(u8 taskId)
+static void sub_8104B0C(u8 taskId)
 {
     gUnknown_083ECC30[gTasks[taskId].data[0]](gTasks + taskId);
 }
 
-void sub_8104B3C(struct Task *task)
+static void sub_8104B3C(struct Task *task)
 {
     BeginNormalPaletteFade(-1, 0, 0, 16, 0);
     task->data[0]++;
 }
 
-void sub_8104B60(struct Task *task)
+static void sub_8104B60(struct Task *task)
 {
     if (!gPaletteFade.active)
     {
@@ -2944,7 +2940,7 @@ void sub_8104B60(struct Task *task)
     }
 }
 
-void sub_8104B80(struct Task *task)
+static void sub_8104B80(struct Task *task)
 {
     sub_8104DA4();
     sub_81065DC();
@@ -2954,7 +2950,7 @@ void sub_8104B80(struct Task *task)
     task->data[0]++;
 }
 
-void sub_8104BC8(struct Task *task)
+static void sub_8104BC8(struct Task *task)
 {
     if (gMain.newKeys & (B_BUTTON | SELECT_BUTTON))
     {
@@ -2963,7 +2959,7 @@ void sub_8104BC8(struct Task *task)
     }
 }
 
-void sub_8104BFC(struct Task *task)
+static void sub_8104BFC(struct Task *task)
 {
     MenuZeroFillScreen();
     BasicInitMenuWindow(&gWindowConfig_81E7128);
@@ -2974,12 +2970,12 @@ void sub_8104BFC(struct Task *task)
     task->data[0]++;
 }
 
-void sub_8104C44(struct Task *task)
+static void sub_8104C44(struct Task *task)
 {
     DestroyTask(FindTaskIdByFunc(sub_8104B0C));
 }
 
-void sub_8104C5C(void)
+static void sub_8104C5C(void)
 {
     u8 i;
     struct Task *task;
@@ -2995,7 +2991,7 @@ void sub_8104C5C(void)
 
 static void LoadSlotMachineWheelOverlay(void);
 
-void sub_8104CAC(u8 arg0) {
+static void sub_8104CAC(u8 arg0) {
     u8 i;
     struct Task *task;
 
@@ -3023,7 +3019,7 @@ void sub_8104CAC(u8 arg0) {
     }
 }
 
-void sub_8104D30(u8 a0, SpriteCallback a1, s16 a2, s16 a3, s16 a4)
+static void sub_8104D30(u8 a0, SpriteCallback a1, s16 a2, s16 a3, s16 a4)
 {
     u8 i;
     struct Task *task = gTasks + eSlotMachine->unk3D;
@@ -3037,7 +3033,7 @@ void sub_8104D30(u8 a0, SpriteCallback a1, s16 a2, s16 a3, s16 a4)
     }
 }
 
-void (*const gUnknown_083ED064[])(void);
+static void (*const gUnknown_083ED064[])(void);
 
 void sub_8104DA4(void)
 {
@@ -3055,7 +3051,7 @@ void sub_8104DA4(void)
     }
 }
 
-bool8 sub_8104E18(void)
+static bool8 sub_8104E18(void)
 {
     u8 i;
     struct Task *task = gTasks + eSlotMachine->unk3D;
@@ -3070,23 +3066,23 @@ bool8 sub_8104E18(void)
     return TRUE;
 }
 
-void (*const gUnknown_083ECC54[])(struct Task *task) = {
+static void (*const gUnknown_083ECC54[])(struct Task *task) = {
     nullsub_69
 };
 
-void sub_8104E74(u8 taskId)
+static void sub_8104E74(u8 taskId)
 {
     gUnknown_083ECC54[gTasks[taskId].data[0]](gTasks + taskId);
 }
 
-void nullsub_69(struct Task *task)
+static void nullsub_69(struct Task *task)
 {
 
 }
 
-extern const struct SpriteTemplate gSpriteTemplate_83ED414;
+static const struct SpriteTemplate gSpriteTemplate_83ED414;
 
-void sub_8104EA8(void)
+static void sub_8104EA8(void)
 {
     s16 i;
     s16 j;
@@ -3104,7 +3100,7 @@ void sub_8104EA8(void)
     }
 }
 
-void sub_8104F18(struct Sprite *sprite)
+static void sub_8104F18(struct Sprite *sprite)
 {
     sprite->data[2] = eSlotMachine->unk1C[sprite->data[0]] + sprite->data[1];
     sprite->data[2] %= 120;
@@ -3113,7 +3109,7 @@ void sub_8104F18(struct Sprite *sprite)
     SetSpriteSheetFrameTileNum(sprite);
 }
 
-void sub_8104F8C(void)
+static void sub_8104F8C(void)
 {
     s16 i;
     s16 x;
@@ -3127,9 +3123,9 @@ void sub_8104F8C(void)
     }
 }
 
-extern const struct SpriteTemplate gSpriteTemplate_83ED42C;
+static const struct SpriteTemplate gSpriteTemplate_83ED42C;
 
-void sub_8104FF4(s16 x, s16 y, u8 a2, s16 a3)
+static void sub_8104FF4(s16 x, s16 y, u8 a2, s16 a3)
 {
     struct Sprite *sprite = gSprites + CreateSprite(&gSpriteTemplate_83ED42C, x, y, 13);
     sprite->oam.priority = 2;
@@ -3139,7 +3135,7 @@ void sub_8104FF4(s16 x, s16 y, u8 a2, s16 a3)
     sprite->data[3] = -1;
 }
 
-void sub_810506C(struct Sprite *sprite)
+static void sub_810506C(struct Sprite *sprite)
 {
     u16 tag = eSlotMachine->coins;
     if (sprite->data[0])
@@ -3155,19 +3151,19 @@ void sub_810506C(struct Sprite *sprite)
     }
 }
 
-extern const struct SpriteTemplate gSpriteTemplate_83ED444;
-extern const struct SubspriteTable gSubspriteTables_83ED704[];
+static const struct SpriteTemplate gSpriteTemplate_83ED444;
+static const struct SubspriteTable gSubspriteTables_83ED704[];
 
-void sub_81050C4(void)
+static void sub_81050C4(void)
 {
     u8 spriteId = CreateSprite(&gSpriteTemplate_83ED444, 0x58, 0x48, 15);
     gSprites[spriteId].oam.priority = 3;
     SetSubspriteTables(gSprites + spriteId, gSubspriteTables_83ED704);
 }
 
-extern const struct SpriteTemplate gSpriteTemplate_83ED45C;
+static const struct SpriteTemplate gSpriteTemplate_83ED45C;
 
-void sub_8105100(void)
+static void sub_8105100(void)
 {
     u8 spriteId = CreateSprite(&gSpriteTemplate_83ED45C, 0x118, 0x50, 1);
     gSprites[spriteId].oam.priority = 1;
@@ -3175,12 +3171,12 @@ void sub_8105100(void)
     eSlotMachine->unk3F = spriteId;
 }
 
-void sub_810514C(void)
+static void sub_810514C(void)
 {
     DestroySprite(gSprites + eSlotMachine->unk3F);
 }
 
-void sub_8105170(struct Sprite *sprite)
+static void sub_8105170(struct Sprite *sprite)
 {
     sprite->pos2.y = sprite->pos2.x = 0;
     if (sprite->animNum == 4)
@@ -3193,12 +3189,12 @@ void sub_8105170(struct Sprite *sprite)
     }
 }
 
-extern const struct SpriteTemplate gSpriteTemplate_83ED474;
-extern const struct SpriteTemplate gSpriteTemplate_83ED48C;
-extern const struct SubspriteTable gSubspriteTables_83ED73C[];
-extern const struct SubspriteTable gSubspriteTables_83ED75C[];
+static const struct SpriteTemplate gSpriteTemplate_83ED474;
+static const struct SpriteTemplate gSpriteTemplate_83ED48C;
+static const struct SubspriteTable gSubspriteTables_83ED73C[];
+static const struct SubspriteTable gSubspriteTables_83ED75C[];
 
-void sub_81051C0(void)
+static void sub_81051C0(void)
 {
     u8 spriteId = CreateSprite(&gSpriteTemplate_83ED474, 0x170, 0x34, 7);
     struct Sprite *sprite = gSprites + spriteId;
@@ -3215,10 +3211,10 @@ void sub_81051C0(void)
     eSlotMachine->unk49[1] = spriteId;
 }
 
-extern const struct SpriteTemplate gSpriteTemplate_83ED4A4;
-extern const struct SubspriteTable gSubspriteTables_83ED78C[];
+static const struct SpriteTemplate gSpriteTemplate_83ED4A4;
+static const struct SubspriteTable gSubspriteTables_83ED78C[];
 
-void sub_8105284(void)
+static void sub_8105284(void)
 {
     u8 spriteId = CreateSprite(&gSpriteTemplate_83ED4A4, 0xa8 - gSpriteCoordOffsetX, 0x50, 7);
     struct Sprite *sprite = gSprites + spriteId;
@@ -3228,9 +3224,9 @@ void sub_8105284(void)
     eSlotMachine->unk42 = spriteId;
 }
 
-extern const struct SpriteTemplate gSpriteTemplate_83ED4BC;
+static const struct SpriteTemplate gSpriteTemplate_83ED4BC;
 
-void sub_81052EC(void)
+static void sub_81052EC(void)
 {
     u8 i;
     s16 r5;
@@ -3245,7 +3241,7 @@ void sub_81052EC(void)
     }
 }
 
-void sub_810535C(struct Sprite *sprite)
+static void sub_810535C(struct Sprite *sprite)
 {
     s16 r0 = (u16)(eSlotMachine->unk14 + sprite->data[7]);
     r0 %= 40;
@@ -3253,10 +3249,10 @@ void sub_810535C(struct Sprite *sprite)
     StartSpriteAnimIfDifferent(sprite, sub_8102C48(r0 / 20));
 }
 
-extern const struct SpriteTemplate gSpriteTemplate_83ED4D4;
-extern const struct SubspriteTable gSubspriteTables_83ED7B4[];
+static const struct SpriteTemplate gSpriteTemplate_83ED4D4;
+static const struct SubspriteTable gSubspriteTables_83ED7B4[];
 
-void sub_81053A0(void)
+static void sub_81053A0(void)
 {
     u8 spriteId = CreateSprite(&gSpriteTemplate_83ED4D4, 0x170, 0x64, 9);
     struct Sprite *sprite = gSprites + spriteId;
@@ -3273,10 +3269,10 @@ void sub_81053A0(void)
     eSlotMachine->unk4E[1] = spriteId;
 }
 
-extern const struct SpriteTemplate gSpriteTemplate_83ED4EC;
-extern const struct SubspriteTable gSubspriteTables_83ED7D4[];
+static const struct SpriteTemplate gSpriteTemplate_83ED4EC;
+static const struct SubspriteTable gSubspriteTables_83ED7D4[];
 
-void sub_810545C(void)
+static void sub_810545C(void)
 {
     u8 spriteId = CreateSprite(&gSpriteTemplate_83ED4EC, 0x170, 0x4c, 11);
     struct Sprite *sprite = gSprites + spriteId;
@@ -3286,7 +3282,7 @@ void sub_810545C(void)
     eSlotMachine->unk40 = spriteId;
 }
 
-void sub_81054B8(void)
+static void sub_81054B8(void)
 {
     u8 i;
 
@@ -3301,7 +3297,7 @@ void sub_81054B8(void)
     }
 }
 
-void sub_8105524(void)
+static void sub_8105524(void)
 {
     u8 i;
     for (i = 0; i < 2; i++)
@@ -3310,14 +3306,14 @@ void sub_8105524(void)
     }
 }
 
-void sub_8105554(void)
+static void sub_8105554(void)
 {
     DestroySprite(gSprites + eSlotMachine->unk42);
 }
 
-extern const struct SpriteTemplate gSpriteTemplate_83ED504;
+static const struct SpriteTemplate gSpriteTemplate_83ED504;
 
-void sub_8105578(void)
+static void sub_8105578(void)
 {
     u8 spriteId = CreateSprite(&gSpriteTemplate_83ED504, 0x98, 0x20, 5);
     struct Sprite *sprite = gSprites + spriteId;
@@ -3338,7 +3334,7 @@ void sub_8105578(void)
     sprite->data[7] = 0x20;
 }
 
-void sub_810562C(struct Sprite *sprite)
+static void sub_810562C(struct Sprite *sprite)
 {
     if (sprite->data[0] != 0)
     {
@@ -3360,13 +3356,13 @@ void sub_810562C(struct Sprite *sprite)
     }
 }
 
-void sub_8105688(s16 a0)
+static void sub_8105688(s16 a0)
 {
     gSprites[eSlotMachine->unk50[0]].data[7] = a0;
     gSprites[eSlotMachine->unk50[1]].data[7] = a0;
 }
 
-void sub_81056C0(void)
+static void sub_81056C0(void)
 {
     u8 i;
 
@@ -3376,9 +3372,9 @@ void sub_81056C0(void)
     }
 }
 
-extern const struct SpriteTemplate gSpriteTemplate_83ED51C;
+static const struct SpriteTemplate gSpriteTemplate_83ED51C;
 
-void sub_81056F0(void)
+static void sub_81056F0(void)
 {
     u8 spriteId = CreateSprite(&gSpriteTemplate_83ED51C, 0x48, 0x50, 3);
     gSprites[spriteId].oam.priority = 1;
@@ -3394,9 +3390,9 @@ void sub_81056F0(void)
     eSlotMachine->unk52[1] = spriteId;
 }
 
-extern const u8 gUnknown_083ECC58[2]; // don't remove this until decompiled through gUnknown_083ECCF8
+static const u8 gUnknown_083ECC58[2]; // don't remove this until decompiled through gUnknown_083ECCF8
 
-void sub_8105784(struct Sprite *sprite)
+static void sub_8105784(struct Sprite *sprite)
 {
     u8 sp[] = {16, 0};
     if (sprite->data[0] && --sprite->data[6] <= 0)
@@ -3408,12 +3404,12 @@ void sub_8105784(struct Sprite *sprite)
     }
 }
 
-void sub_81057E8(s16 a0)
+static void sub_81057E8(s16 a0)
 {
     gSprites[eSlotMachine->unk52[0]].data[7] = a0;
 }
 
-void sub_8105804(void)
+static void sub_8105804(void)
 {
     u8 i;
     MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(7) << 4) + 0x103, 0, 0, 0);
@@ -3423,28 +3419,28 @@ void sub_8105804(void)
     }
 }
 
-extern const struct SpriteTemplate gSpriteTemplate_83ED534;
+static const struct SpriteTemplate gSpriteTemplate_83ED534;
 
-void sub_8105854(void)
+static void sub_8105854(void)
 {
     u8 spriteId = CreateSprite(&gSpriteTemplate_83ED534, 0xa8, 0x50, 6);
     gSprites[spriteId].oam.priority = 1;
     eSlotMachine->unk41 = spriteId;
 }
 
-void sub_8105894(struct Sprite *sprite)
+static void sub_8105894(struct Sprite *sprite)
 {
     sprite->pos2.y = gSpriteCoordOffsetY;
 }
 
-void sub_81058A0(void)
+static void sub_81058A0(void)
 {
     DestroySprite(gSprites + eSlotMachine->unk41);
 }
 
-extern const struct SpriteTemplate gSpriteTemplate_83ED54C;
+static const struct SpriteTemplate gSpriteTemplate_83ED54C;
 
-void sub_81058C4(void)
+static void sub_81058C4(void)
 {
     u8 i;
     u16 sp[] = {0x0, 0x40, 0x80, 0xC0};
@@ -3459,7 +3455,7 @@ void sub_81058C4(void)
     }
 }
 
-void sub_810594C(struct Sprite *sprite)
+static void sub_810594C(struct Sprite *sprite)
 {
     sprite->data[0] -= 2;
     sprite->data[0] &= 0xff;
@@ -3477,7 +3473,7 @@ void sub_810594C(struct Sprite *sprite)
     }
 }
 
-void sub_81059B8(void)
+static void sub_81059B8(void)
 {
     u8 i;
     for (i = 0; i < 4; i++)
@@ -3486,9 +3482,9 @@ void sub_81059B8(void)
     }
 }
 
-extern const struct SpriteTemplate gSpriteTemplate_83ED564;
+static const struct SpriteTemplate gSpriteTemplate_83ED564;
 
-void sub_81059E8(void)
+static void sub_81059E8(void)
 {
     u8 spriteId = CreateSprite(&gSpriteTemplate_83ED564, 0xa8, 0x3c, 8);
     struct Sprite *sprite = gSprites + spriteId;
@@ -3498,7 +3494,7 @@ void sub_81059E8(void)
     eSlotMachine->unk43 = spriteId;
 }
 
-void sub_8105A38(struct Sprite *sprite)
+static void sub_8105A38(struct Sprite *sprite)
 {
     if (sprite->data[0] == 0)
     {
@@ -3530,16 +3526,16 @@ u8 sub_8105ACC(void)
     return gSprites[eSlotMachine->unk43].data[7];
 }
 
-void sub_8105AEC(void)
+static void sub_8105AEC(void)
 {
     struct Sprite *sprite = gSprites + eSlotMachine->unk43;
     FreeOamMatrix(sprite->oam.matrixNum);
     DestroySprite(sprite);
 }
 
-extern const struct SpriteTemplate gSpriteTemplate_83ED6CC;
+static const struct SpriteTemplate gSpriteTemplate_83ED6CC;
 
-u8 sub_8105B1C(s16 x, s16 y)
+static u8 sub_8105B1C(s16 x, s16 y)
 {
     u8 spriteId = CreateSprite(&gSpriteTemplate_83ED6CC, x, y, 12);
     struct Sprite *sprite = gSprites + spriteId;
@@ -3549,31 +3545,31 @@ u8 sub_8105B1C(s16 x, s16 y)
     return spriteId;
 }
 
-void sub_8105B70(struct Sprite *sprite)
+static void sub_8105B70(struct Sprite *sprite)
 {
     if (sprite->affineAnimEnded)
         sprite->data[7] = 1;
 }
 
-void sub_8105B88(u8 spriteId)
+static void sub_8105B88(u8 spriteId)
 {
     struct Sprite *sprite = gSprites + spriteId;
     FreeOamMatrix(sprite->oam.matrixNum);
     DestroySprite(sprite);
 }
 
-const s16 gUnknown_083ECE7E[][2];
-const SpriteCallback gUnknown_083ECF0C[];
+static const s16 gUnknown_083ECE7E[][2];
+static const SpriteCallback gUnknown_083ECF0C[];
 
 u8 sub_8105BB4(u8 a0, u8 a1, s16 a2)
 {
     return sub_8105BF8(a0, gUnknown_083ECF0C[a1], gUnknown_083ECE7E[a1][0], gUnknown_083ECE7E[a1][1], a2);
 }
 
-const struct SpriteTemplate *const gUnknown_083EDB5C[];
-const struct SubspriteTable *const gUnknown_083EDBC4[];
+static const struct SpriteTemplate *const gUnknown_083EDB5C[];
+static const struct SubspriteTable *const gUnknown_083EDBC4[];
 
-u8 sub_8105BF8(u8 templateIdx, SpriteCallback callback, s16 x, s16 y, s16 a4)
+static u8 sub_8105BF8(u8 templateIdx, SpriteCallback callback, s16 x, s16 y, s16 a4)
 {
     u8 spriteId = CreateSprite(gUnknown_083EDB5C[templateIdx], x, y, 16);
     struct Sprite *sprite = gSprites + spriteId;
@@ -3586,12 +3582,12 @@ u8 sub_8105BF8(u8 templateIdx, SpriteCallback callback, s16 x, s16 y, s16 a4)
     return spriteId;
 }
 
-void sub_8105C64(struct Sprite *sprite)
+static void sub_8105C64(struct Sprite *sprite)
 {
     sprite->data[7] = 0;
 }
 
-void sub_8105C6C(struct Sprite *sprite)
+static void sub_8105C6C(struct Sprite *sprite)
 {
     s16 sp0[] = {4, -4, 4, -4};
     s16 sp8[] = {4, 4, -4, -4};
@@ -3610,26 +3606,26 @@ void sub_8105C6C(struct Sprite *sprite)
     }
 }
 
-void sub_8105CF0(struct Sprite *sprite)
+static void sub_8105CF0(struct Sprite *sprite)
 {
     sprite->hFlip = TRUE;
     sub_8105C6C(sprite);
 }
 
-void sub_8105D08(struct Sprite *sprite)
+static void sub_8105D08(struct Sprite *sprite)
 {
     sprite->vFlip = TRUE;
     sub_8105C6C(sprite);
 }
 
-void sub_8105D20(struct Sprite *sprite)
+static void sub_8105D20(struct Sprite *sprite)
 {
     sprite->hFlip = TRUE;
     sprite->vFlip = TRUE;
     sub_8105C6C(sprite);
 }
 
-void sub_8105D3C(struct Sprite *sprite)
+static void sub_8105D3C(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
@@ -3660,7 +3656,7 @@ void sub_8105D3C(struct Sprite *sprite)
     }
 }
 
-void sub_8105DA4(struct Sprite *sprite)
+static void sub_8105DA4(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
@@ -3691,7 +3687,7 @@ void sub_8105DA4(struct Sprite *sprite)
     }
 }
 
-void sub_8105E08(struct Sprite *sprite)
+static void sub_8105E08(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
@@ -3733,7 +3729,7 @@ void sub_8105E08(struct Sprite *sprite)
     }
 }
 
-void sub_8105EB4(struct Sprite *sprite)
+static void sub_8105EB4(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
@@ -3773,7 +3769,7 @@ void sub_8105EB4(struct Sprite *sprite)
     }
 }
 
-void sub_8105F54(struct Sprite *sprite)
+static void sub_8105F54(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
@@ -3795,7 +3791,7 @@ void sub_8105F54(struct Sprite *sprite)
     }
 }
 
-void sub_8105F9C(struct Sprite *sprite)
+static void sub_8105F9C(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
@@ -3831,9 +3827,9 @@ void sub_8105F9C(struct Sprite *sprite)
     }
 }
 
-extern const u16 *const gUnknown_083EDE10[];
+static const u16 *const gUnknown_083EDE10[];
 
-void sub_8106058(struct Sprite *sprite)
+static void sub_8106058(struct Sprite *sprite)
 {
     if (sprite->data[1] < 3)
     {
@@ -3857,7 +3853,7 @@ void sub_8106058(struct Sprite *sprite)
     sprite->data[7] = 0;
 }
 
-void sub_81060FC(struct Sprite *sprite)
+static void sub_81060FC(struct Sprite *sprite)
 {
     s16 sp00[] = {0, -40, 0, 0, 48, 0, 24, 0};
     s16 sp10[] = {-32, 0, -32, -48, 0, -48, 0, -48};
@@ -3902,7 +3898,7 @@ void sub_81060FC(struct Sprite *sprite)
     }
 }
 
-void sub_81061C8(struct Sprite *sprite)
+static void sub_81061C8(struct Sprite *sprite)
 {
     s16 sp0[] = {160, 192, 224, 104, 80, 64, 48, 24};
 
@@ -3919,7 +3915,7 @@ void sub_81061C8(struct Sprite *sprite)
     }
 }
 
-void sub_8106230(struct Sprite *sprite)
+static void sub_8106230(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
@@ -3983,24 +3979,24 @@ void sub_8106230(struct Sprite *sprite)
     }
 }
 
-void nullsub_70(void)
+static void nullsub_70(void)
 {
 
 }
 
-void sub_8106364(void)
+static void sub_8106364(void)
 {
     REG_MOSAIC = 0;
 }
 
-extern const u16 *const gUnknown_083EDE20;
+static const u16 *const gUnknown_083EDE20;
 
-void sub_8106370(void)
+static void sub_8106370(void)
 {
     LoadPalette(gUnknown_083EDE20, (IndexOfSpritePaletteTag(6) << 4) + 0x100, 0x20);
 }
 
-void sub_810639C(void)
+static void sub_810639C(void)
 {
     eSlotMachine->win0h = 0xf0;
     eSlotMachine->win0v = 0xa0;
@@ -4008,12 +4004,11 @@ void sub_810639C(void)
     eSlotMachine->winOut = 0x3f;
 }
 
-extern const u8 gSlotMachineReelTimeLights_Gfx[];
-extern const u8 gUnknown_083EDE8C[];
-const struct SpriteSheet gUnknown_083EDC2C[];
-extern const struct SpritePalette gSlotMachineSpritePalettes[];
+static const u8 gUnknown_083EDE8C[];
+static const struct SpriteSheet gUnknown_083EDC2C[];
+static const struct SpritePalette gSlotMachineSpritePalettes[];
 
-void sub_81063C0(void)
+static void sub_81063C0(void)
 {
     sub_8106404();
     LZDecompressWram(gSlotMachineReelTimeLights_Gfx, ewram10000);
@@ -4022,10 +4017,10 @@ void sub_81063C0(void)
     LoadSpritePalettes(gSlotMachineSpritePalettes);
 }
 
-const u8 *const gUnknown_083EDCE4;
-const struct SpriteSheet gUnknown_083EDCDC;
+static const u8 *const gUnknown_083EDCE4;
+static const struct SpriteSheet gUnknown_083EDCDC;
 
-void sub_8106404(void)
+static void sub_8106404(void)
 {
     u8 *dest = ewram10000;
     u8 i = 0;
@@ -4068,7 +4063,7 @@ static void sub_8106448(void) {
     LoadPalette(gPalette_83EDE24, 208, 32);
 }
 
-void sub_81064B8(void) {
+static void sub_81064B8(void) {
     CpuCopy16(gUnknown_08E95AB8, BG_SCREEN_ADDR(29), 20 * 32 * 2);
     LoadSlotMachineWheelOverlay();
 }
@@ -4099,7 +4094,7 @@ static void LoadSlotMachineWheelOverlay(void) {
     }
 }
 
-void sub_81065A8(s16 arg0, u16 arg1, u16 arg2, u16 arg3, u16 arg4) {
+static void sub_81065A8(s16 arg0, u16 arg1, u16 arg2, u16 arg3, u16 arg4) {
     u16 *vram = BG_SCREEN_ADDR(29);
 
     vram[15 * 32 + arg0] = arg1;
@@ -4108,7 +4103,7 @@ void sub_81065A8(s16 arg0, u16 arg1, u16 arg2, u16 arg3, u16 arg4) {
     vram[16 * 32 + 1 + arg0] = arg4;
 }
 
-void sub_81065DC(void) {
+static void sub_81065DC(void) {
     s16 y, x;
     u16 *screen;
 
@@ -4124,23 +4119,23 @@ void sub_81065DC(void) {
     }
 }
 
-const u8 gUnknown_083ECCB2[][21] = {
+static const u8 gUnknown_083ECCB2[][21] = {
     {0, 4, 2, 6, 5, 3, 1, 3, 4, 5, 6, 2, 0, 5, 3, 6, 2, 1, 5, 3, 6},
     {0, 4, 6, 3, 2, 4, 6, 5, 5, 3, 1, 3, 6, 4, 2, 3, 6, 4, 3, 6, 4},
     {0, 5, 1, 6, 3, 2, 6, 3, 5, 2, 6, 3, 2, 5, 6, 3, 2, 5, 6, 3, 4}
 };
 
-const u8 gUnknown_083ECCF1[] = {
+static const u8 gUnknown_083ECCF1[] = {
     1, 0, 5, 4, 3, 2
 };
 
-const s16 gUnknown_083ECCF8[][2] = {
+static const s16 gUnknown_083ECCF8[][2] = {
     {0,  6},
     {0, 10},
     {0,  2}
 };
 
-const u8 gUnknown_083ECD04[][3] = {
+static const u8 gUnknown_083ECD04[][3] = {
     {1, 1, 12},
     {1, 1, 14},
     {2, 2, 14},
@@ -4149,13 +4144,13 @@ const u8 gUnknown_083ECD04[][3] = {
     {3, 3, 16}
 };
 
-const u8 gUnknown_083ECD16[][6] = {
+static const u8 gUnknown_083ECD16[][6] = {
     {25, 25, 30, 40, 40, 50},
     {25, 25, 30, 30, 35, 35},
     {25, 25, 30, 25, 25, 30}
 };
 
-const u8 gUnknown_083ECD28[][6] = {
+static const u8 gUnknown_083ECD28[][6] = {
     {20, 25, 25, 20, 25, 25},
     {12, 15, 15, 18, 19, 22},
     {25, 25, 25, 30, 30, 40},
@@ -4163,7 +4158,7 @@ const u8 gUnknown_083ECD28[][6] = {
     {40, 40, 35, 35, 40, 40}
 };
 
-const u8 gUnknown_083ECD46[][17] = {
+static const u8 gUnknown_083ECD46[][17] = {
     {243, 243, 243,  80,  80,  80,  80,  40,  40,  40,  40,  40,  40,   5,   5,   5,   5},
     {  5,   5,   5, 150, 150, 150, 150, 130, 130, 130, 130, 130, 130, 100, 100, 100,   5},
     {  4,   4,   4,  20,  20,  20,  20,  80,  80,  80,  80,  80,  80, 100, 100, 100,  40},
@@ -4172,7 +4167,7 @@ const u8 gUnknown_083ECD46[][17] = {
     {  1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   6}
 };
 
-const u8 gUnknown_083ECDAC[][17] = {
+static const u8 gUnknown_083ECDAC[][17] = {
     { 243, 243, 243, 200, 200, 200, 200, 160, 160, 160, 160, 160, 160,  70,  70,  70,   5},
     {   5,   5,   5,  25,  25,  25,  25,   5,   5,   5,   5,   5,   5,   2,   2,   2,   6},
     {   4,   4,   4,  25,  25,  25,  25,  30,  30,  30,  30,  30,  30,  40,  40,  40,  35},
@@ -4181,11 +4176,11 @@ const u8 gUnknown_083ECDAC[][17] = {
     {   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   4,   4,   4,  60}
 };
 
-const u16 gUnknown_083ECE12[] = {
+static const u16 gUnknown_083ECE12[] = {
     0x80, 0xaf, 0xc8, 0xe1, 0x100
 };
 
-const u16 gUnknown_083ECE1C[][2] = {
+static const u16 gUnknown_083ECE1C[][2] = {
     {10,  5},
     {10, 10},
     {10, 15},
@@ -4193,36 +4188,36 @@ const u16 gUnknown_083ECE1C[][2] = {
     {10, 35}
 };
 
-const u16 gUnknown_083ECE30[] = {
+static const u16 gUnknown_083ECE30[] = {
     0, 5, 10, 15, 20
 };
 
 
-const u8 gUnknown_083ECE3A[] = {
+static const u8 gUnknown_083ECE3A[] = {
     6, 4, 3, 2, 5, 0, 0, 0
 };
 
-const u16 gUnknown_083ECE42[] = {
+static const u16 gUnknown_083ECE42[] = {
     0x80, 0x20, 0x40
 };
 
-const u16 gUnknown_083ECE48[] = {
+static const u16 gUnknown_083ECE48[] = {
     0x10, 0x08, 0x04, 0x02, 0x01
 };
 
-const u8 gUnknown_083ECE52[] = {
+static const u8 gUnknown_083ECE52[] = {
     7, 8, 4, 3, 0, 5, 2
 };
 
-const u16 gUnknown_083ECE5A[] = {
+static const u16 gUnknown_083ECE5A[] = {
     0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x100
 };
 
-const u16 gUnknown_083ECE6C[] = {
+static const u16 gUnknown_083ECE6C[] = {
     2, 4, 0, 6, 12, 3, 90, 300, 300
 };
 
-const s16 gUnknown_083ECE7E[][2] = {
+static const s16 gUnknown_083ECE7E[][2] = {
     { 0xd0, 0x38},
     { 0xb8, 0x00},
     { 0xc8, 0x08},
@@ -4260,7 +4255,7 @@ const s16 gUnknown_083ECE7E[][2] = {
     { 0x00, 0x00}
 };
 
-const SpriteCallback gUnknown_083ECF0C[] = {
+static const SpriteCallback gUnknown_083ECF0C[] = {
     sub_8105C64,
     sub_8105F54,
     sub_8105F54,
@@ -4363,7 +4358,7 @@ static const struct UnkStruct1 Unknown_83ED020[] = {
     {255, 0, 0}
 };
 
-const struct UnkStruct1 *const gUnknown_083ED048[] = {
+static const struct UnkStruct1 *const gUnknown_083ED048[] = {
     Unknown_83ECF98,
     Unknown_83ECFA8,
     Unknown_83ECFC4,
@@ -4373,7 +4368,7 @@ const struct UnkStruct1 *const gUnknown_083ED048[] = {
     Unknown_83ECFF8
 };
 
-void (*const gUnknown_083ED064[])(void) = {
+static void (*const gUnknown_083ED064[])(void) = {
     sub_810639C,
     sub_8106364,
     sub_8106370,
@@ -4384,7 +4379,7 @@ void (*const gUnknown_083ED064[])(void) = {
 };
 
 
-const struct OamData gOamData_83ED080 = {
+static const struct OamData gOamData_83ED080 = {
     .y = 0x0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -4400,7 +4395,7 @@ const struct OamData gOamData_83ED080 = {
     .affineParam = 0
 };
 
-const struct OamData gOamData_83ED088 = {
+static const struct OamData gOamData_83ED088 = {
     .y = 0x0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -4416,7 +4411,7 @@ const struct OamData gOamData_83ED088 = {
     .affineParam = 0
 };
 
-const struct OamData gOamData_83ED090 = {
+static const struct OamData gOamData_83ED090 = {
     .y = 0x0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -4432,7 +4427,7 @@ const struct OamData gOamData_83ED090 = {
     .affineParam = 0
 };
 
-const struct OamData gOamData_83ED098 = {
+static const struct OamData gOamData_83ED098 = {
     .y = 0x0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -4448,7 +4443,7 @@ const struct OamData gOamData_83ED098 = {
     .affineParam = 0
 };
 
-const struct OamData gOamData_83ED0A0 = {
+static const struct OamData gOamData_83ED0A0 = {
     .y = 0x0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -4464,7 +4459,7 @@ const struct OamData gOamData_83ED0A0 = {
     .affineParam = 0
 };
 
-const struct OamData gOamData_83ED0A8 = {
+static const struct OamData gOamData_83ED0A8 = {
     .y = 0x0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -4480,7 +4475,7 @@ const struct OamData gOamData_83ED0A8 = {
     .affineParam = 0
 };
 
-const struct OamData gOamData_83ED0B0 = {
+static const struct OamData gOamData_83ED0B0 = {
     .y = 0x0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -4496,7 +4491,7 @@ const struct OamData gOamData_83ED0B0 = {
     .affineParam = 0
 };
 
-const struct OamData gOamData_83ED0B8 = {
+static const struct OamData gOamData_83ED0B8 = {
     .y = 0x0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -4512,7 +4507,7 @@ const struct OamData gOamData_83ED0B8 = {
     .affineParam = 0
 };
 
-const struct SpriteFrameImage gSpriteImageTable_83ED0C0[] = {
+static const struct SpriteFrameImage gSpriteImageTable_83ED0C0[] = {
     {ewram13200 + 0x0000, 0x800},
     {ewram13200 + 0x0800, 0x800},
     {ewram13200 + 0x1000, 0x800},
@@ -4520,19 +4515,19 @@ const struct SpriteFrameImage gSpriteImageTable_83ED0C0[] = {
     {ewram13200 + 0x2000, 0x800}
 };
 
-const struct SpriteFrameImage gSpriteImageTable_83ED0E8[] = {
+static const struct SpriteFrameImage gSpriteImageTable_83ED0E8[] = {
     {ewram13200 + 0x2800, 0x300}
 };
 
-const struct SpriteFrameImage gSpriteImageTable_83ED0F0[] = {
+static const struct SpriteFrameImage gSpriteImageTable_83ED0F0[] = {
     {ewram13200 + 0x2B00, 0x500}
 };
 
-const struct SpriteFrameImage gSpriteImageTable_83ED0F8[] = {
+static const struct SpriteFrameImage gSpriteImageTable_83ED0F8[] = {
     {ewram13200 + 0x3000, 0x600}
 };
 
-const struct SpriteFrameImage gSpriteImageTable_83ED100[] = {
+static const struct SpriteFrameImage gSpriteImageTable_83ED100[] = {
     {gSpriteImage_8E988E8, 0x80},
     {gSpriteImage_8E98968, 0x80},
     {gSpriteImage_8E989E8, 0x80},
@@ -4541,83 +4536,83 @@ const struct SpriteFrameImage gSpriteImageTable_83ED100[] = {
     {gSpriteImage_8E98B68, 0x80}
 };
 
-const struct SpriteFrameImage gSpriteImageTable_83ED130[] = {
+static const struct SpriteFrameImage gSpriteImageTable_83ED130[] = {
     {gSpriteImage_8E991E8, 0x200}
 };
 
-const struct SpriteFrameImage gSpriteImageTable_83ED138[] = {
+static const struct SpriteFrameImage gSpriteImageTable_83ED138[] = {
     {gSpriteImage_8E99808, 0x40}
 };
 
-const struct SpriteFrameImage gSpriteImageTable_83ED140[] = {
+static const struct SpriteFrameImage gSpriteImageTable_83ED140[] = {
     {gSpriteImage_8E98BE8, 0x100},
     {gSpriteImage_8E98CE8, 0x100}
 };
 
-const struct SpriteFrameImage gSpriteImageTable_83ED150[] = {
+static const struct SpriteFrameImage gSpriteImageTable_83ED150[] = {
     {gSpriteImage_8E993E8, 0x400}
 };
 
-const struct SpriteFrameImage gSpriteImageTable_83ED158[] = {
+static const struct SpriteFrameImage gSpriteImageTable_83ED158[] = {
     {gSpriteImage_8E98DE8, 0x200},
     {gSpriteImage_8E98FE8, 0x200}
 };
 
-const struct SpriteFrameImage gSpriteImageTable_83ED168[] = {
+static const struct SpriteFrameImage gSpriteImageTable_83ED168[] = {
     {gSpriteImage_8E98848, 0x20}
 };
 
-const struct SpriteFrameImage gSpriteImageTable_83ED170[] = {
+static const struct SpriteFrameImage gSpriteImageTable_83ED170[] = {
     {gSpriteImage_8E98868, 0x80}
 };
 
-const struct SpriteFrameImage gSpriteImageTable_83ED178[] = {
+static const struct SpriteFrameImage gSpriteImageTable_83ED178[] = {
     {ewram10000 + 0x0000, 0x600}
 };
 
-const struct SpriteFrameImage gSpriteImageTable_83ED180[] = {
+static const struct SpriteFrameImage gSpriteImageTable_83ED180[] = {
     {ewram10000 + 0x0600, 0x200}
 };
 
-const struct SpriteFrameImage gSpriteImageTable_83ED188[] = {
+static const struct SpriteFrameImage gSpriteImageTable_83ED188[] = {
     {ewram10000 + 0x0800, 0x200}
 };
 
-const struct SpriteFrameImage gSpriteImageTable_83ED190[] = {
+static const struct SpriteFrameImage gSpriteImageTable_83ED190[] = {
     {ewram10000 + 0x0A00, 0x200}
 };
 
-const struct SpriteFrameImage gSpriteImageTable_83ED198[] = {
+static const struct SpriteFrameImage gSpriteImageTable_83ED198[] = {
     {ewram10000 + 0x0C00, 0x300}
 };
 
-const struct SpriteFrameImage gSpriteImageTable_83ED1A0[] = {
+static const struct SpriteFrameImage gSpriteImageTable_83ED1A0[] = {
     {ewram10000 + 0x1000, 0x400}
 };
 
-const struct SpriteFrameImage gSpriteImageTable_83ED1A8[] = {
+static const struct SpriteFrameImage gSpriteImageTable_83ED1A8[] = {
     {ewram10000 + 0x1400, 0x200}
 };
 
-const struct SpriteFrameImage gSpriteImageTable_83ED1B0[] = {
+static const struct SpriteFrameImage gSpriteImageTable_83ED1B0[] = {
     {ewram10000 + 0x1600, 0x300}
 };
 
-const struct SpriteFrameImage gSpriteImageTable_83ED1B8[] = {
+static const struct SpriteFrameImage gSpriteImageTable_83ED1B8[] = {
     {ewram10000 + 0x1900, 0x300}
 };
 
-const struct SpriteFrameImage gSpriteImageTable_83ED1C0[] = {
+static const struct SpriteFrameImage gSpriteImageTable_83ED1C0[] = {
     {ewram10000 + 0x1C00, 0x200},
     {ewram10000 + 0x1E00, 0x200},
     {ewram10000 + 0x1E00, 0x200} // is this a typo?
 };
 
-const struct SpriteFrameImage gSpriteImageTable_83ED1D8[] = {
+static const struct SpriteFrameImage gSpriteImageTable_83ED1D8[] = {
     {ewram10000 + 0x2000, 0x280}
 };
 
-const struct SpriteFrameImage gSpriteImageTable_83ED1E0[] = {
+static const struct SpriteFrameImage gSpriteImageTable_83ED1E0[] = {
     {ewram10000 + 0x2280, 0x80},
     {ewram10000 + 0x2300, 0x80},
     {ewram10000 + 0x2380, 0x80},
@@ -4625,124 +4620,124 @@ const struct SpriteFrameImage gSpriteImageTable_83ED1E0[] = {
     {ewram10000 + 0x2480, 0x80}
 };
 
-const struct SpriteFrameImage gSpriteImageTable_83ED208[] = {
+static const struct SpriteFrameImage gSpriteImageTable_83ED208[] = {
     {ewram10000 + 0x2600, 0x480},
     {ewram10000 + 0x2A80, 0x480}
 };
 
-const struct SpriteFrameImage gSpriteImageTable_83ED218[] = {
+static const struct SpriteFrameImage gSpriteImageTable_83ED218[] = {
     {ewram10000 + 0x2F00, 0x180},
     {ewram10000 + 0x3080, 0x180}
 };
 
-const struct SpriteFrameImage gSpriteImageTable_83ED228[] = {
+static const struct SpriteFrameImage gSpriteImageTable_83ED228[] = {
     {gSpriteImage_8E98828, 0x20}
 };
 
-const union AnimCmd gSpriteAnim_83ED230[] = {
+static const union AnimCmd gSpriteAnim_83ED230[] = {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END
 };
 
-const union AnimCmd gSpriteAnim_83ED238[] = {
+static const union AnimCmd gSpriteAnim_83ED238[] = {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd gSpriteAnim_83ED240[] = {
+static const union AnimCmd gSpriteAnim_83ED240[] = {
     ANIMCMD_FRAME(0, 16),
     ANIMCMD_END
 };
 
-const union AnimCmd gSpriteAnim_83ED248[] = {
+static const union AnimCmd gSpriteAnim_83ED248[] = {
     ANIMCMD_FRAME(1, 16),
     ANIMCMD_FRAME(0, 16),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd gSpriteAnim_83ED254[] = {
+static const union AnimCmd gSpriteAnim_83ED254[] = {
     ANIMCMD_FRAME(1, 8),
     ANIMCMD_FRAME(0, 8),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd gSpriteAnim_83ED260[] = {
+static const union AnimCmd gSpriteAnim_83ED260[] = {
     ANIMCMD_FRAME(1, 4),
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd gSpriteAnim_83ED26C[] = {
+static const union AnimCmd gSpriteAnim_83ED26C[] = {
     ANIMCMD_FRAME(2, 32),
     ANIMCMD_FRAME(3, 32),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd gSpriteAnim_83ED278[] = {
+static const union AnimCmd gSpriteAnim_83ED278[] = {
     ANIMCMD_FRAME(4, 1),
     ANIMCMD_END
 };
 
-const union AnimCmd gSpriteAnim_83ED280[] = {
+static const union AnimCmd gSpriteAnim_83ED280[] = {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END
 };
 
-const union AnimCmd gSpriteAnim_83ED288[] = {
+static const union AnimCmd gSpriteAnim_83ED288[] = {
     ANIMCMD_FRAME(1, 1),
     ANIMCMD_END
 };
 
-const union AnimCmd gSpriteAnim_83ED290[] = {
+static const union AnimCmd gSpriteAnim_83ED290[] = {
     ANIMCMD_FRAME(2, 1),
     ANIMCMD_END
 };
 
-const union AnimCmd gSpriteAnim_83ED298[] = {
+static const union AnimCmd gSpriteAnim_83ED298[] = {
     ANIMCMD_FRAME(3, 1),
     ANIMCMD_END
 };
 
-const union AnimCmd gSpriteAnim_83ED2A0[] = {
+static const union AnimCmd gSpriteAnim_83ED2A0[] = {
     ANIMCMD_FRAME(4, 1),
     ANIMCMD_END
 };
 
-const union AnimCmd gSpriteAnim_83ED2A8[] = {
+static const union AnimCmd gSpriteAnim_83ED2A8[] = {
     ANIMCMD_FRAME(5, 1),
     ANIMCMD_END
 };
 
-const union AnimCmd gSpriteAnim_83ED2B0[] = {
+static const union AnimCmd gSpriteAnim_83ED2B0[] = {
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_FRAME(1, 4),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd gSpriteAnim_83ED2BC[] = {
+static const union AnimCmd gSpriteAnim_83ED2BC[] = {
     ANIMCMD_FRAME(0, 16),
     ANIMCMD_FRAME(1, 16),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd gSpriteAnim_83ED2C8[] = {
+static const union AnimCmd gSpriteAnim_83ED2C8[] = {
     ANIMCMD_FRAME(0, 30),
     ANIMCMD_FRAME(1, 30),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd gSpriteAnim_83ED2D4[] = {
+static const union AnimCmd gSpriteAnim_83ED2D4[] = {
     ANIMCMD_FRAME(1, 1),
     ANIMCMD_END
 };
 
-const union AnimCmd gSpriteAnim_83ED2DC[] = {
+static const union AnimCmd gSpriteAnim_83ED2DC[] = {
     ANIMCMD_FRAME(0, 30),
     ANIMCMD_FRAME(1, 30),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd gSpriteAnim_83ED2E8[] = {
+static const union AnimCmd gSpriteAnim_83ED2E8[] = {
     ANIMCMD_FRAME(0, 16),
     ANIMCMD_FRAME(1, 16),
     ANIMCMD_FRAME(0, 16),
@@ -4750,45 +4745,45 @@ const union AnimCmd gSpriteAnim_83ED2E8[] = {
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd gSpriteAnim_83ED2FC[] = {
+static const union AnimCmd gSpriteAnim_83ED2FC[] = {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END
 };
 
-const union AnimCmd gSpriteAnim_83ED304[] = {
+static const union AnimCmd gSpriteAnim_83ED304[] = {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END
 };
 
-const union AnimCmd gSpriteAnim_83ED30C[] = {
+static const union AnimCmd gSpriteAnim_83ED30C[] = {
     ANIMCMD_FRAME(1, 1),
     ANIMCMD_END
 };
 
-const union AnimCmd gSpriteAnim_83ED314[] = {
+static const union AnimCmd gSpriteAnim_83ED314[] = {
     ANIMCMD_FRAME(2, 1),
     ANIMCMD_END
 };
 
-const union AnimCmd gSpriteAnim_83ED31C[] = {
+static const union AnimCmd gSpriteAnim_83ED31C[] = {
     ANIMCMD_FRAME(3, 1),
     ANIMCMD_END
 };
 
-const union AnimCmd gSpriteAnim_83ED324[] = {
+static const union AnimCmd gSpriteAnim_83ED324[] = {
     ANIMCMD_FRAME(4, 1),
     ANIMCMD_END
 };
 
-const union AnimCmd *const gSpriteAnimTable_83ED32C[] = {
+static const union AnimCmd *const gSpriteAnimTable_83ED32C[] = {
     gSpriteAnim_83ED230
 };
 
-const union AnimCmd *const gSpriteAnimTable_83ED330[] = {
+static const union AnimCmd *const gSpriteAnimTable_83ED330[] = {
     gSpriteAnim_83ED238
 };
 
-const union AnimCmd *const gSpriteAnimTable_83ED334[] = {
+static const union AnimCmd *const gSpriteAnimTable_83ED334[] = {
     gSpriteAnim_83ED240,
     gSpriteAnim_83ED248,
     gSpriteAnim_83ED254,
@@ -4797,7 +4792,7 @@ const union AnimCmd *const gSpriteAnimTable_83ED334[] = {
     gSpriteAnim_83ED278
 };
 
-const union AnimCmd *const gSpriteAnimTable_83ED34C[] = {
+static const union AnimCmd *const gSpriteAnimTable_83ED34C[] = {
     gSpriteAnim_83ED280,
     gSpriteAnim_83ED288,
     gSpriteAnim_83ED290,
@@ -4806,29 +4801,29 @@ const union AnimCmd *const gSpriteAnimTable_83ED34C[] = {
     gSpriteAnim_83ED2A8
 };
 
-const union AnimCmd *const gSpriteAnimTable_83ED364[] = {
+static const union AnimCmd *const gSpriteAnimTable_83ED364[] = {
     gSpriteAnim_83ED2B0
 };
 
-const union AnimCmd *const gSpriteAnimTable_83ED368[] = {
+static const union AnimCmd *const gSpriteAnimTable_83ED368[] = {
     gSpriteAnim_83ED2BC
 };
 
-const union AnimCmd *const gSpriteAnimTable_83ED36C[] = {
+static const union AnimCmd *const gSpriteAnimTable_83ED36C[] = {
     gSpriteAnim_83ED2C8,
     gSpriteAnim_83ED2D4
 };
 
-const union AnimCmd *const gSpriteAnimTable_83ED374[] = {
+static const union AnimCmd *const gSpriteAnimTable_83ED374[] = {
     gSpriteAnim_83ED2DC
 };
 
-const union AnimCmd *const gSpriteAnimTable_83ED378[] = {
+static const union AnimCmd *const gSpriteAnimTable_83ED378[] = {
     gSpriteAnim_83ED2E8,
     gSpriteAnim_83ED2FC
 };
 
-const union AnimCmd *const gSpriteAnimTable_83ED380[] = {
+static const union AnimCmd *const gSpriteAnimTable_83ED380[] = {
     gSpriteAnim_83ED304,
     gSpriteAnim_83ED30C,
     gSpriteAnim_83ED314,
@@ -4836,7 +4831,7 @@ const union AnimCmd *const gSpriteAnimTable_83ED380[] = {
     gSpriteAnim_83ED324
 };
 
-const union AffineAnimCmd gSpriteAffineAnim_83ED394[] = {
+static const union AffineAnimCmd gSpriteAffineAnim_83ED394[] = {
     AFFINEANIMCMD_FRAME(0x10, 0x10, 0, 0),
     AFFINEANIMCMD_LOOP(0),
     AFFINEANIMCMD_FRAME(0x1, 0x1, 0, 1),
@@ -4844,11 +4839,11 @@ const union AffineAnimCmd gSpriteAffineAnim_83ED394[] = {
     AFFINEANIMCMD_END
 };
 
-const union AffineAnimCmd *const gSpriteAffineAnimTable_83ED3BC[] = {
+static const union AffineAnimCmd *const gSpriteAffineAnimTable_83ED3BC[] = {
     gSpriteAffineAnim_83ED394
 };
 
-const union AffineAnimCmd gSpriteAffineAnim_83ED3C0[] = {
+static const union AffineAnimCmd gSpriteAffineAnim_83ED3C0[] = {
     AFFINEANIMCMD_FRAME(0x0, 0x0, 8, 32),
     AFFINEANIMCMD_FRAME(0x0, 0x0, 6, 32),
     AFFINEANIMCMD_FRAME(0x0, 0x0, 4, 16),
@@ -4861,142 +4856,142 @@ const union AffineAnimCmd gSpriteAffineAnim_83ED3C0[] = {
     AFFINEANIMCMD_END
 };
 
-const union AffineAnimCmd *const gSpriteAffineAnimTable_83ED410[] = {
+static const union AffineAnimCmd *const gSpriteAffineAnimTable_83ED410[] = {
     gSpriteAffineAnim_83ED3C0
 };
 
-const struct SpriteTemplate gSpriteTemplate_83ED414 = {
+static const struct SpriteTemplate gSpriteTemplate_83ED414 = {
     0, 0, &gOamData_83ED0A0, gSpriteAnimTable_83ED32C, NULL, gDummySpriteAffineAnimTable, sub_8104F18
 };
 
-const struct SpriteTemplate gSpriteTemplate_83ED42C = {
+static const struct SpriteTemplate gSpriteTemplate_83ED42C = {
     7, 4, &gOamData_83ED088, gSpriteAnimTable_83ED32C, NULL, gDummySpriteAffineAnimTable, sub_810506C
 };
 
-const struct SpriteTemplate gSpriteTemplate_83ED444 = {
+static const struct SpriteTemplate gSpriteTemplate_83ED444 = {
     17, 0, &gOamData_83ED0B8, gSpriteAnimTable_83ED32C, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
-const struct SpriteTemplate gSpriteTemplate_83ED45C = {
+static const struct SpriteTemplate gSpriteTemplate_83ED45C = {
     0xFFFF, 1, &gOamData_83ED0B8, gSpriteAnimTable_83ED334, gSpriteImageTable_83ED0C0, gDummySpriteAffineAnimTable, sub_8105170
 };
 
-const struct SpriteTemplate gSpriteTemplate_83ED474 = {
+static const struct SpriteTemplate gSpriteTemplate_83ED474 = {
     0xFFFF, 2, &gOamData_83ED088, gSpriteAnimTable_83ED32C, gSpriteImageTable_83ED0E8, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
-const struct SpriteTemplate gSpriteTemplate_83ED48C = {
+static const struct SpriteTemplate gSpriteTemplate_83ED48C = {
     0xFFFF, 3, &gOamData_83ED088, gSpriteAnimTable_83ED32C, gSpriteImageTable_83ED0F0, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
-const struct SpriteTemplate gSpriteTemplate_83ED4A4 = {
+static const struct SpriteTemplate gSpriteTemplate_83ED4A4 = {
     0xFFFF, 3, &gOamData_83ED088, gSpriteAnimTable_83ED32C, gSpriteImageTable_83ED0F8, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
-const struct SpriteTemplate gSpriteTemplate_83ED4BC = {
+static const struct SpriteTemplate gSpriteTemplate_83ED4BC = {
     0xFFFF, 4, &gOamData_83ED090, gSpriteAnimTable_83ED34C, gSpriteImageTable_83ED100, gDummySpriteAffineAnimTable, sub_810535C
 };
 
-const struct SpriteTemplate gSpriteTemplate_83ED4D4 = {
+static const struct SpriteTemplate gSpriteTemplate_83ED4D4 = {
     0xFFFF, 4, &gOamData_83ED090, gSpriteAnimTable_83ED32C, gSpriteImageTable_83ED130, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
-const struct SpriteTemplate gSpriteTemplate_83ED4EC = {
+static const struct SpriteTemplate gSpriteTemplate_83ED4EC = {
     0xFFFF, 4, &gOamData_83ED090, gSpriteAnimTable_83ED32C, gSpriteImageTable_83ED138, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
-const struct SpriteTemplate gSpriteTemplate_83ED504 = {
+static const struct SpriteTemplate gSpriteTemplate_83ED504 = {
     0xFFFF, 4, &gOamData_83ED098, gSpriteAnimTable_83ED364, gSpriteImageTable_83ED140, gDummySpriteAffineAnimTable, sub_810562C
 };
 
-const struct SpriteTemplate gSpriteTemplate_83ED51C = {
+static const struct SpriteTemplate gSpriteTemplate_83ED51C = {
     0xFFFF, 7, &gOamData_83ED0A8, gSpriteAnimTable_83ED32C, gSpriteImageTable_83ED150, gDummySpriteAffineAnimTable, sub_8105784
 };
 
-const struct SpriteTemplate gSpriteTemplate_83ED534 = {
+static const struct SpriteTemplate gSpriteTemplate_83ED534 = {
     0xFFFF, 5, &gOamData_83ED0A0, gSpriteAnimTable_83ED368, gSpriteImageTable_83ED158, gDummySpriteAffineAnimTable, sub_8105894
 };
 
-const struct SpriteTemplate gSpriteTemplate_83ED54C = {
+static const struct SpriteTemplate gSpriteTemplate_83ED54C = {
     0xFFFF, 4, &gOamData_83ED080, gSpriteAnimTable_83ED330, gSpriteImageTable_83ED168, gDummySpriteAffineAnimTable, sub_810594C
 };
 
-const struct SpriteTemplate gSpriteTemplate_83ED564 = {
+static const struct SpriteTemplate gSpriteTemplate_83ED564 = {
     0xFFFF, 4, &gOamData_83ED090, gSpriteAnimTable_83ED32C, gSpriteImageTable_83ED170, gSpriteAffineAnimTable_83ED3BC, sub_8105A38
 };
 
-const struct SpriteTemplate gSpriteTemplate_83ED57C = {
+static const struct SpriteTemplate gSpriteTemplate_83ED57C = {
     0xFFFF, 6, &gOamData_83ED080, gSpriteAnimTable_83ED32C, gSpriteImageTable_83ED178, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
-const struct SpriteTemplate gSpriteTemplate_83ED594 = {
+static const struct SpriteTemplate gSpriteTemplate_83ED594 = {
     0xFFFF, 6, &gOamData_83ED080, gSpriteAnimTable_83ED32C, gSpriteImageTable_83ED180, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
-const struct SpriteTemplate gSpriteTemplate_83ED5AC = {
+static const struct SpriteTemplate gSpriteTemplate_83ED5AC = {
     0xFFFF, 6, &gOamData_83ED080, gSpriteAnimTable_83ED32C, gSpriteImageTable_83ED188, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
-const struct SpriteTemplate gSpriteTemplate_83ED5C4 = {
+static const struct SpriteTemplate gSpriteTemplate_83ED5C4 = {
     18, 6, &gOamData_83ED080, gSpriteAnimTable_83ED32C, gSpriteImageTable_83ED190, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
-const struct SpriteTemplate gSpriteTemplate_83ED5DC = {
+static const struct SpriteTemplate gSpriteTemplate_83ED5DC = {
     0xFFFF, 6, &gOamData_83ED0B0, gSpriteAnimTable_83ED32C, gSpriteImageTable_83ED198, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
-const struct SpriteTemplate gSpriteTemplate_83ED5F4 = {
+static const struct SpriteTemplate gSpriteTemplate_83ED5F4 = {
     0xFFFF, 6, &gOamData_83ED0B0, gSpriteAnimTable_83ED32C, gSpriteImageTable_83ED1A0, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
-const struct SpriteTemplate gSpriteTemplate_83ED60C = {
+static const struct SpriteTemplate gSpriteTemplate_83ED60C = {
     19, 6, &gOamData_83ED080, gSpriteAnimTable_83ED32C, gSpriteImageTable_83ED1A8, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
-const struct SpriteTemplate gSpriteTemplate_83ED624 = {
+static const struct SpriteTemplate gSpriteTemplate_83ED624 = {
     20, 6, &gOamData_83ED080, gSpriteAnimTable_83ED32C, gSpriteImageTable_83ED1B0, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
-const struct SpriteTemplate gSpriteTemplate_83ED63C = {
+static const struct SpriteTemplate gSpriteTemplate_83ED63C = {
     21, 6, &gOamData_83ED080, gSpriteAnimTable_83ED32C, gSpriteImageTable_83ED1B8, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
-const struct SpriteTemplate gSpriteTemplate_83ED654 = {
+static const struct SpriteTemplate gSpriteTemplate_83ED654 = {
     0xFFFF, 6, &gOamData_83ED0A0, gSpriteAnimTable_83ED36C, gSpriteImageTable_83ED1C0, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
-const struct SpriteTemplate gSpriteTemplate_83ED66C = {
+static const struct SpriteTemplate gSpriteTemplate_83ED66C = {
     0xFFFF, 6, &gOamData_83ED080, gSpriteAnimTable_83ED32C, gSpriteImageTable_83ED1D8, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
-const struct SpriteTemplate gSpriteTemplate_83ED684 = {
+static const struct SpriteTemplate gSpriteTemplate_83ED684 = {
     0xFFFF, 6, &gOamData_83ED090, gSpriteAnimTable_83ED380, gSpriteImageTable_83ED1E0, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
-const struct SpriteTemplate gSpriteTemplate_83ED69C = {
+static const struct SpriteTemplate gSpriteTemplate_83ED69C = {
     0xFFFF, 6, &gOamData_83ED080, gSpriteAnimTable_83ED378, gSpriteImageTable_83ED208, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
-const struct SpriteTemplate gSpriteTemplate_83ED6B4 = {
+static const struct SpriteTemplate gSpriteTemplate_83ED6B4 = {
     0xFFFF, 6, &gOamData_83ED080, gSpriteAnimTable_83ED374, gSpriteImageTable_83ED218, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
-const struct SpriteTemplate gSpriteTemplate_83ED6CC = {
+static const struct SpriteTemplate gSpriteTemplate_83ED6CC = {
     0xFFFF, 4, &gOamData_83ED080, gSpriteAnimTable_83ED32C, gSpriteImageTable_83ED228, gSpriteAffineAnimTable_83ED410, sub_8105B70
 };
 
-const struct Subsprite gSubspriteTable_83ED6E4[] = {
+static const struct Subsprite gSubspriteTable_83ED6E4[] = {
     {-64, -64, ST_OAM_SQUARE, 3, 0x0, 3},
     {0, -64, ST_OAM_SQUARE, 3, 0x0, 3},
     {-64, 0, ST_OAM_SQUARE, 3, 0x0, 3},
     {0, 0, ST_OAM_SQUARE, 3, 0x0, 3}
 };
 
-const struct SubspriteTable gSubspriteTables_83ED704[] = {
+static const struct SubspriteTable gSubspriteTables_83ED704[] = {
     {4, gSubspriteTable_83ED6E4}
 };
 
-const struct Subsprite gSubspriteTable_83ED70C[] = {
+static const struct Subsprite gSubspriteTable_83ED70C[] = {
     {-32, -12, ST_OAM_H_RECTANGLE, 1, 0x0, 1},
     {0, -12, ST_OAM_H_RECTANGLE, 1, 0x4, 1},
     {-32, -4, ST_OAM_H_RECTANGLE, 1, 0x8, 1},
@@ -5005,21 +5000,21 @@ const struct Subsprite gSubspriteTable_83ED70C[] = {
     {0, 4, ST_OAM_H_RECTANGLE, 1, 0x14, 1}
 };
 
-const struct SubspriteTable gSubspriteTables_83ED73C[] = {
+static const struct SubspriteTable gSubspriteTables_83ED73C[] = {
     {6, gSubspriteTable_83ED70C}
 };
 
-const struct Subsprite gSubspriteTable_83ED744[] = {
+static const struct Subsprite gSubspriteTable_83ED744[] = {
     {-32, -20, ST_OAM_H_RECTANGLE, 3, 0x0, 1},
     {-32, 12, ST_OAM_H_RECTANGLE, 1, 0x20, 1},
     {0, 12, ST_OAM_H_RECTANGLE, 1, 0x24, 1}
 };
 
-const struct SubspriteTable gSubspriteTables_83ED75C[] = {
+static const struct SubspriteTable gSubspriteTables_83ED75C[] = {
     {3, gSubspriteTable_83ED744}
 };
 
-const struct Subsprite gSubspriteTable_83ED764[] = {
+static const struct Subsprite gSubspriteTable_83ED764[] = {
     {-32, -24, ST_OAM_H_RECTANGLE, 3, 0x0, 1},
     {-32, 8, ST_OAM_H_RECTANGLE, 1, 0x20, 1},
     {0, 8, ST_OAM_H_RECTANGLE, 1, 0x24, 1},
@@ -5027,32 +5022,32 @@ const struct Subsprite gSubspriteTable_83ED764[] = {
     {0, 16, ST_OAM_H_RECTANGLE, 1, 0x2c, 1}
 };
 
-const struct SubspriteTable gSubspriteTables_83ED78C[] = {
+static const struct SubspriteTable gSubspriteTables_83ED78C[] = {
     {5, gSubspriteTable_83ED764}
 };
 
-const struct Subsprite gSubspriteTable_83ED794[] = {
+static const struct Subsprite gSubspriteTable_83ED794[] = {
     {-32, -8, ST_OAM_H_RECTANGLE, 1, 0x0, 1},
     {0, -8, ST_OAM_H_RECTANGLE, 1, 0x4, 1},
     {-32, 0, ST_OAM_H_RECTANGLE, 1, 0x8, 1},
     {0, 0, ST_OAM_H_RECTANGLE, 1, 0xc, 1}
 };
 
-const struct SubspriteTable gSubspriteTables_83ED7B4[] = {
+static const struct SubspriteTable gSubspriteTables_83ED7B4[] = {
     {4, gSubspriteTable_83ED794}
 };
 
-const struct Subsprite gSubspriteTable_83ED7BC[] = {
+static const struct Subsprite gSubspriteTable_83ED7BC[] = {
     {-8, -12, ST_OAM_H_RECTANGLE, 0, 0x0, 1},
     {-8, -4, ST_OAM_H_RECTANGLE, 0, 0x0, 1},
     {-8, 4, ST_OAM_H_RECTANGLE, 0, 0x0, 1}
 };
 
-const struct SubspriteTable gSubspriteTables_83ED7D4[] = {
+static const struct SubspriteTable gSubspriteTables_83ED7D4[] = {
     {3, gSubspriteTable_83ED7BC}
 };
 
-const struct Subsprite gSubspriteTable_83ED7DC[] = {
+static const struct Subsprite gSubspriteTable_83ED7DC[] = {
     {-32, -24, ST_OAM_H_RECTANGLE, 3, 0x0, 3},
     {-32, 8, ST_OAM_H_RECTANGLE, 1, 0x20, 3},
     {0, 8, ST_OAM_H_RECTANGLE, 1, 0x24, 3},
@@ -5060,44 +5055,44 @@ const struct Subsprite gSubspriteTable_83ED7DC[] = {
     {0, 16, ST_OAM_H_RECTANGLE, 1, 0x2c, 3}
 };
 
-const struct SubspriteTable gSubspriteTables_83ED804[] = {
+static const struct SubspriteTable gSubspriteTables_83ED804[] = {
     {5, gSubspriteTable_83ED7DC}
 };
 
-const struct Subsprite gSubspriteTable_83ED80C[] = {
+static const struct Subsprite gSubspriteTable_83ED80C[] = {
     {-32, -8, ST_OAM_H_RECTANGLE, 1, 0x0, 3},
     {0, -8, ST_OAM_H_RECTANGLE, 1, 0x4, 3},
     {-32, 0, ST_OAM_H_RECTANGLE, 1, 0x8, 3},
     {0, 0, ST_OAM_H_RECTANGLE, 1, 0xc, 3}
 };
 
-const struct SubspriteTable gSubspriteTables_83ED82C[] = {
+static const struct SubspriteTable gSubspriteTables_83ED82C[] = {
     {4, gSubspriteTable_83ED80C}
 };
 
-const struct Subsprite gSubspriteTable_83ED834[] = {
+static const struct Subsprite gSubspriteTable_83ED834[] = {
     {-32, -8, ST_OAM_H_RECTANGLE, 1, 0x0, 3},
     {0, -8, ST_OAM_H_RECTANGLE, 1, 0x4, 3},
     {-32, 0, ST_OAM_H_RECTANGLE, 1, 0x8, 3},
     {0, 0, ST_OAM_H_RECTANGLE, 1, 0xc, 3}
 };
 
-const struct SubspriteTable gSubspriteTables_83ED854[] = {
+static const struct SubspriteTable gSubspriteTables_83ED854[] = {
     {4, gSubspriteTable_83ED834}
 };
 
-const struct Subsprite gSubspriteTable_83ED85C[] = {
+static const struct Subsprite gSubspriteTable_83ED85C[] = {
     {-32, -8, ST_OAM_H_RECTANGLE, 1, 0x0, 3},
     {0, -8, ST_OAM_H_RECTANGLE, 1, 0x4, 3},
     {-32, 0, ST_OAM_H_RECTANGLE, 1, 0x8, 3},
     {0, 0, ST_OAM_H_RECTANGLE, 1, 0xc, 3}
 };
 
-const struct SubspriteTable gSubspriteTables_83ED87C[] = {
+static const struct SubspriteTable gSubspriteTables_83ED87C[] = {
     {4, gSubspriteTable_83ED85C}
 };
 
-const struct Subsprite gSubspriteTable_83ED884[] = {
+static const struct Subsprite gSubspriteTable_83ED884[] = {
     {-32, -12, ST_OAM_H_RECTANGLE, 1, 0x0, 3},
     {0, -12, ST_OAM_H_RECTANGLE, 1, 0x4, 3},
     {-32, -4, ST_OAM_H_RECTANGLE, 1, 0x8, 3},
@@ -5106,24 +5101,24 @@ const struct Subsprite gSubspriteTable_83ED884[] = {
     {0, 4, ST_OAM_H_RECTANGLE, 1, 0x14, 3}
 };
 
-const struct SubspriteTable gSubspriteTables_83ED8B4[] = {
+static const struct SubspriteTable gSubspriteTables_83ED8B4[] = {
     {6, gSubspriteTable_83ED884}
 };
 
-const struct Subsprite gSubspriteTable_83ED8BC[] = {
+static const struct Subsprite gSubspriteTable_83ED8BC[] = {
     {-16, -16, ST_OAM_SQUARE, 2, 0x0, 3}
 };
 
-const struct Subsprite gSubspriteTable_83ED8C4[] = {
+static const struct Subsprite gSubspriteTable_83ED8C4[] = {
     {-8, -8, ST_OAM_SQUARE, 1, 0x10, 3}
 };
 
-const struct SubspriteTable gSubspriteTables_83ED8CC[] = {
+static const struct SubspriteTable gSubspriteTables_83ED8CC[] = {
     {1, gSubspriteTable_83ED8BC},
     {1, gSubspriteTable_83ED8C4}
 };
 
-const struct Subsprite gSubspriteTable_83ED8DC[] = {
+static const struct Subsprite gSubspriteTable_83ED8DC[] = {
     {-24, -24, ST_OAM_H_RECTANGLE, 1, 0x0, 3},
     {8, -24, ST_OAM_H_RECTANGLE, 0, 0x4, 3},
     {-24, -16, ST_OAM_H_RECTANGLE, 1, 0x6, 3},
@@ -5138,102 +5133,102 @@ const struct Subsprite gSubspriteTable_83ED8DC[] = {
     {8, 16, ST_OAM_H_RECTANGLE, 0, 0x22, 3}
 };
 
-const struct SubspriteTable gSubspriteTables_83ED93C[] = {
+static const struct SubspriteTable gSubspriteTables_83ED93C[] = {
     12, gSubspriteTable_83ED8DC
 };
 
-const struct Subsprite gSubspriteTable_83ED944[] = {
+static const struct Subsprite gSubspriteTable_83ED944[] = {
     {-16, -12, ST_OAM_H_RECTANGLE, 2, 0x0, 3},
     {-16, 4, ST_OAM_H_RECTANGLE, 0, 0x8, 3},
     {0, 4, ST_OAM_H_RECTANGLE, 0, 0xa, 3}
 };
 
-const struct SubspriteTable gSubspriteTables_83ED95C[] = {
+static const struct SubspriteTable gSubspriteTables_83ED95C[] = {
     {3, gSubspriteTable_83ED944}
 };
 
-const struct Subsprite gSubspriteTable_83ED964[] = {
+static const struct Subsprite gSubspriteTable_83ED964[] = {
     {-8, -8, ST_OAM_H_RECTANGLE, 0, 0x0, 3},
     {-8, 0, ST_OAM_H_RECTANGLE, 0, 0x8, 3}
 };
 
-const struct SubspriteTable gSubspriteTables_83ED974[] = {
+static const struct SubspriteTable gSubspriteTables_83ED974[] = {
     {2, gSubspriteTable_83ED964}
 };
 
-const struct Subsprite gSubspriteTable_83ED97C[] = {
+static const struct Subsprite gSubspriteTable_83ED97C[] = {
     {-8, -8, ST_OAM_H_RECTANGLE, 0, 0x2, 3},
     {-8, 0, ST_OAM_H_RECTANGLE, 0, 0xa, 3}
 };
 
-const struct SubspriteTable gSubspriteTables_83ED98C[] = {
+static const struct SubspriteTable gSubspriteTables_83ED98C[] = {
     {2, gSubspriteTable_83ED97C}
 };
 
-const struct Subsprite gSubspriteTable_83ED994[] = {
+static const struct Subsprite gSubspriteTable_83ED994[] = {
     {-8, -8, ST_OAM_H_RECTANGLE, 0, 0x4, 3},
     {-8, 0, ST_OAM_H_RECTANGLE, 0, 0xc, 3}
 };
 
-const struct SubspriteTable gSubspriteTables_83ED9A4[] = {
+static const struct SubspriteTable gSubspriteTables_83ED9A4[] = {
     {2, gSubspriteTable_83ED994}
 };
 
-const struct Subsprite gSubspriteTable_83ED9AC[] = {
+static const struct Subsprite gSubspriteTable_83ED9AC[] = {
     {-8, -8, ST_OAM_H_RECTANGLE, 0, 0x6, 3},
     {-8, 0, ST_OAM_H_RECTANGLE, 0, 0xe, 3}
 };
 
-const struct SubspriteTable gSubspriteTables_83ED9BC[] = {
+static const struct SubspriteTable gSubspriteTables_83ED9BC[] = {
     {2, gSubspriteTable_83ED9AC}
 };
 
-const struct Subsprite gSubspriteTable_83ED9C4[] = {
+static const struct Subsprite gSubspriteTable_83ED9C4[] = {
     {-8, -8, ST_OAM_H_RECTANGLE, 0, 0x0, 3},
     {-8, 0, ST_OAM_H_RECTANGLE, 0, 0x8, 3}
 };
 
-const struct SubspriteTable gSubspriteTables_83ED9D4[] = {
+static const struct SubspriteTable gSubspriteTables_83ED9D4[] = {
     {2, gSubspriteTable_83ED9C4}
 };
 
-const struct Subsprite gSubspriteTable_83ED9DC[] = {
+static const struct Subsprite gSubspriteTable_83ED9DC[] = {
     {-4, -8, ST_OAM_SQUARE, 0, 0x2, 3},
     {-4, 0, ST_OAM_SQUARE, 0, 0xa, 3}
 };
 
-const struct SubspriteTable gSubspriteTables_83ED9EC[] = {
+static const struct SubspriteTable gSubspriteTables_83ED9EC[] = {
     {2, gSubspriteTable_83ED9DC}
 };
 
-const struct Subsprite gSubspriteTable_83ED9F4[] = {
+static const struct Subsprite gSubspriteTable_83ED9F4[] = {
     {-8, -8, ST_OAM_H_RECTANGLE, 0, 0x3, 3},
     {-8, 0, ST_OAM_H_RECTANGLE, 0, 0xb, 3}
 };
 
-const struct SubspriteTable gSubspriteTables_83EDA04[] = {
+static const struct SubspriteTable gSubspriteTables_83EDA04[] = {
     {2, gSubspriteTable_83ED9F4}
 };
 
-const struct Subsprite gSubspriteTable_83EDA0C[] = {
+static const struct Subsprite gSubspriteTable_83EDA0C[] = {
     {-4, -8, ST_OAM_SQUARE, 0, 0x5, 3},
     {-4, 0, ST_OAM_SQUARE, 0, 0xd, 3}
 };
 
-const struct SubspriteTable gSubspriteTables_83EDA1C[] = {
+static const struct SubspriteTable gSubspriteTables_83EDA1C[] = {
     {2, gSubspriteTable_83EDA0C}
 };
 
-const struct Subsprite gSubspriteTable_83EDA24[] = {
+static const struct Subsprite gSubspriteTable_83EDA24[] = {
     {-8, -8, ST_OAM_H_RECTANGLE, 0, 0x6, 3},
     {-8, 0, ST_OAM_H_RECTANGLE, 0, 0xe, 3}
 };
 
-const struct SubspriteTable gSubspriteTables_83EDA34[] = {
+static const struct SubspriteTable gSubspriteTables_83EDA34[] = {
     {2, gSubspriteTable_83EDA24}
 };
 
-const struct Subsprite gSubspriteTable_83EDA3C[] = {
+static const struct Subsprite gSubspriteTable_83EDA3C[] = {
     {-12, -12, ST_OAM_H_RECTANGLE, 0, 0x0, 3},
     {4, -12, ST_OAM_SQUARE, 0, 0x2, 3},
     {-12, -4, ST_OAM_H_RECTANGLE, 0, 0x8, 3},
@@ -5242,21 +5237,21 @@ const struct Subsprite gSubspriteTable_83EDA3C[] = {
     {4, 4, ST_OAM_SQUARE, 0, 0x12, 3}
 };
 
-const struct SubspriteTable gSubspriteTables_83EDA6C[] = {
+static const struct SubspriteTable gSubspriteTables_83EDA6C[] = {
     {6, gSubspriteTable_83EDA3C}
 };
 
-const struct Subsprite gSubspriteTable_83EDA74[] = {
+static const struct Subsprite gSubspriteTable_83EDA74[] = {
     {-8, -12, ST_OAM_H_RECTANGLE, 0, 0x3, 3},
     {-8, -4, ST_OAM_H_RECTANGLE, 0, 0xb, 3},
     {-8, 4, ST_OAM_H_RECTANGLE, 0, 0x13, 3}
 };
 
-const struct SubspriteTable gSubspriteTables_83EDA8C[] = {
+static const struct SubspriteTable gSubspriteTables_83EDA8C[] = {
     {3, gSubspriteTable_83EDA74}
 };
 
-const struct Subsprite gSubspriteTable_83EDA94[] = {
+static const struct Subsprite gSubspriteTable_83EDA94[] = {
     {-12, -12, ST_OAM_H_RECTANGLE, 0, 0x5, 3},
     {4, -12, ST_OAM_SQUARE, 0, 0x7, 3},
     {-12, -4, ST_OAM_H_RECTANGLE, 0, 0xd, 3},
@@ -5265,11 +5260,11 @@ const struct Subsprite gSubspriteTable_83EDA94[] = {
     {4, 4, ST_OAM_SQUARE, 0, 0x17, 3}
 };
 
-const struct SubspriteTable gSubspriteTables_83EDAC4[] = {
+static const struct SubspriteTable gSubspriteTables_83EDAC4[] = {
     {6, gSubspriteTable_83EDA94}
 };
 
-const struct Subsprite gSubspriteTable_83EDACC[] = {
+static const struct Subsprite gSubspriteTable_83EDACC[] = {
     {-12, -12, ST_OAM_H_RECTANGLE, 0, 0x0, 3},
     {4, -12, ST_OAM_SQUARE, 0, 0x2, 3},
     {-12, -4, ST_OAM_H_RECTANGLE, 0, 0x8, 3},
@@ -5278,21 +5273,21 @@ const struct Subsprite gSubspriteTable_83EDACC[] = {
     {4, 4, ST_OAM_SQUARE, 0, 0x12, 3}
 };
 
-const struct SubspriteTable gSubspriteTables_83EDAFC[] = {
+static const struct SubspriteTable gSubspriteTables_83EDAFC[] = {
     {6, gSubspriteTable_83EDACC}
 };
 
-const struct Subsprite gSubspriteTable_83EDB04[] = {
+static const struct Subsprite gSubspriteTable_83EDB04[] = {
     {-8, -12, ST_OAM_H_RECTANGLE, 0, 0x3, 3},
     {-8, -4, ST_OAM_H_RECTANGLE, 0, 0xb, 3},
     {-8, 4, ST_OAM_H_RECTANGLE, 0, 0x13, 3}
 };
 
-const struct SubspriteTable gSubspriteTables_83EDB1C[] = {
+static const struct SubspriteTable gSubspriteTables_83EDB1C[] = {
     {3, gSubspriteTable_83EDB04}
 };
 
-const struct Subsprite gSubspriteTable_83EDB24[] = {
+static const struct Subsprite gSubspriteTable_83EDB24[] = {
     {-12, -12, ST_OAM_H_RECTANGLE, 0, 0x5, 3},
     {4, -12, ST_OAM_SQUARE, 0, 0x7, 3},
     {-12, -4, ST_OAM_H_RECTANGLE, 0, 0xd, 3},
@@ -5301,11 +5296,11 @@ const struct Subsprite gSubspriteTable_83EDB24[] = {
     {4, 4, ST_OAM_SQUARE, 0, 0x17, 3}
 };
 
-const struct SubspriteTable gSubspriteTables_83EDB54[] = {
+static const struct SubspriteTable gSubspriteTables_83EDB54[] = {
     {6, gSubspriteTable_83EDB24}
 };
 
-const struct SpriteTemplate *const gUnknown_083EDB5C[] = {
+static const struct SpriteTemplate *const gUnknown_083EDB5C[] = {
     &gSpriteTemplate_83ED57C,
     &gSpriteTemplate_83ED594,
     &gSpriteTemplate_83ED5AC,
@@ -5334,7 +5329,7 @@ const struct SpriteTemplate *const gUnknown_083EDB5C[] = {
     &gDummySpriteTemplate
 };
 
-const struct SubspriteTable *const gUnknown_083EDBC4[] = {
+static const struct SubspriteTable *const gUnknown_083EDBC4[] = {
     gSubspriteTables_83ED804,
     gSubspriteTables_83ED82C,
     gSubspriteTables_83ED854,
@@ -5363,7 +5358,7 @@ const struct SubspriteTable *const gUnknown_083EDBC4[] = {
     NULL
 };
 
-const struct SpriteSheet gUnknown_083EDC2C[] = {
+static const struct SpriteSheet gUnknown_083EDC2C[] = {
     {gSlotMachineReelSymbol1Tiles, 0x200, 0},
     {gSlotMachineReelSymbol2Tiles, 0x200, 1},
     {gSlotMachineReelSymbol3Tiles, 0x200, 2},
@@ -5388,19 +5383,19 @@ const struct SpriteSheet gUnknown_083EDC2C[] = {
     {}
 };
 
-const struct SpriteSheet gUnknown_083EDCDC = {
+static const struct SpriteSheet gUnknown_083EDCDC = {
     ewram10000 + 0x0000, 0x800, 17
 };
 
-const u8 *const gUnknown_083EDCE4 = gUnknownPalette_08E997E8;
+static const u8 *const gUnknown_083EDCE4 = gUnknownPalette_08E997E8;
 
 #ifdef SAPPHIRE
-const u16 UnknownPalette_83EDCE8[] = INCBIN_U16("graphics/unknown/sapphire_83EDD40.gbapal");
+static const u16 UnknownPalette_83EDCE8[] = INCBIN_U16("graphics/unknown/sapphire_83EDD40.gbapal");
 #elif defined(RUBY)
-const u16 UnknownPalette_83EDCE8[] = INCBIN_U16("graphics/unknown/ruby_83EDCE8.gbapal");
+static const u16 UnknownPalette_83EDCE8[] = INCBIN_U16("graphics/unknown/ruby_83EDCE8.gbapal");
 #endif // RS
 
-const u16 *const gUnknown_083EDD08[] = {
+static const u16 *const gUnknown_083EDD08[] = {
     UnknownPalette_83EDCE8 + 10,
     UnknownPalette_83EDCE8 + 11,
     UnknownPalette_83EDCE8 + 12,
@@ -5408,7 +5403,7 @@ const u16 *const gUnknown_083EDD08[] = {
     UnknownPalette_83EDCE8 + 14
 };
 
-const u16 *const gUnknown_083EDD1C[] = {
+static const u16 *const gUnknown_083EDD1C[] = {
     gUnknown_08E95A18 + 74,
     gUnknown_08E95A18 + 75,
     gUnknown_08E95A18 + 76,
@@ -5416,51 +5411,51 @@ const u16 *const gUnknown_083EDD1C[] = {
     gUnknown_08E95A18 + 78
 };
 
-const u8 gUnknown_083EDD30[] = {
+static const u8 gUnknown_083EDD30[] = {
     0x4a, 0x4b, 0x4c, 0x4e, 0x4d
 };
 
-const u8 gUnknown_083EDD35[][2] = {
+static const u8 gUnknown_083EDD35[][2] = {
     {0, 0},
     {1, 2},
     {3, 4}
 };
-const u8 gUnknown_083EDD3B[] = {1, 2, 2};
+static const u8 gUnknown_083EDD3B[] = {1, 2, 2};
 
 #ifdef SAPPHIRE
-const u16 Unknown_83EDD3E[] = INCBIN_U16("graphics/unknown/sapphire_83EDD96.gbapal");
-const u16 Unknown_83EDD5E[] = INCBIN_U16("graphics/unknown/sapphire_83EDDB6.gbapal");
-const u16 Unknown_83EDD7E[] = INCBIN_U16("graphics/unknown/sapphire_83EDDD6.gbapal");
+static const u16 Unknown_83EDD3E[] = INCBIN_U16("graphics/unknown/sapphire_83EDD96.gbapal");
+static const u16 Unknown_83EDD5E[] = INCBIN_U16("graphics/unknown/sapphire_83EDDB6.gbapal");
+static const u16 Unknown_83EDD7E[] = INCBIN_U16("graphics/unknown/sapphire_83EDDD6.gbapal");
 #elif defined (RUBY)
-const u16 Unknown_83EDD3E[] = INCBIN_U16("graphics/unknown/ruby_83EDD3E.gbapal");
-const u16 Unknown_83EDD5E[] = INCBIN_U16("graphics/unknown/ruby_83EDD5E.gbapal");
-const u16 Unknown_83EDD7E[] = INCBIN_U16("graphics/unknown/ruby_83EDD7E.gbapal");
+static const u16 Unknown_83EDD3E[] = INCBIN_U16("graphics/unknown/ruby_83EDD3E.gbapal");
+static const u16 Unknown_83EDD5E[] = INCBIN_U16("graphics/unknown/ruby_83EDD5E.gbapal");
+static const u16 Unknown_83EDD7E[] = INCBIN_U16("graphics/unknown/ruby_83EDD7E.gbapal");
 #endif // RS
 
-const u16 *const gUnknown_083EDDA0[] = {
+static const u16 *const gUnknown_083EDDA0[] = {
     Unknown_83EDD3E,
     Unknown_83EDD5E,
     Unknown_83EDD7E
 };
 
-const u16 *const gUnknown_083EDDAC = gUnknown_08E95A18 + 16;
+static const u16 *const gUnknown_083EDDAC = gUnknown_08E95A18 + 16;
 
-const u16 Palette_83EDDB0[] = INCBIN_U16("graphics/slot_machine/83EDDB0.gbapal");
-const u16 Palette_83EDDD0[] = INCBIN_U16("graphics/slot_machine/83EDDD0.gbapal");
-const u16 Palette_83EDDF0[] = INCBIN_U16("graphics/slot_machine/83EDDF0.gbapal");
+static const u16 Palette_83EDDB0[] = INCBIN_U16("graphics/slot_machine/83EDDB0.gbapal");
+static const u16 Palette_83EDDD0[] = INCBIN_U16("graphics/slot_machine/83EDDD0.gbapal");
+static const u16 Palette_83EDDF0[] = INCBIN_U16("graphics/slot_machine/83EDDF0.gbapal");
 
-const u16 *const gUnknown_083EDE10[] = {
+static const u16 *const gUnknown_083EDE10[] = {
     Palette_83EDDB0,
     Palette_83EDDD0,
     Palette_83EDDF0,
     gSlotMachineSpritePalette6
 };
 
-const u16 *const gUnknown_083EDE20 = gSlotMachineSpritePalette6;
+static const u16 *const gUnknown_083EDE20 = gSlotMachineSpritePalette6;
 
-const u16 gPalette_83EDE24[] = INCBIN_U16("graphics/slot_machine/83EDE24_pal.bin");
+static const u16 gPalette_83EDE24[] = INCBIN_U16("graphics/slot_machine/83EDE24_pal.bin");
 
-const struct SpritePalette gSlotMachineSpritePalettes[] = {
+static const struct SpritePalette gSlotMachineSpritePalettes[] = {
     {gSlotMachineSpritePalette0, 0},
     {gSlotMachineSpritePalette1, 1},
     {gSlotMachineSpritePalette2, 2},
@@ -5472,6 +5467,6 @@ const struct SpritePalette gSlotMachineSpritePalettes[] = {
     {}
 };
 
-const u8 gUnknown_083EDE8C[] = INCBIN_U8("graphics/slot_machine/reel_time.4bpp.lz");
+static const u8 gUnknown_083EDE8C[] = INCBIN_U8("graphics/slot_machine/reel_time.4bpp.lz");
 
-const u16 gReelTimeWindowTilemap[] = INCBIN_U16("graphics/slot_machine/reel_time_window_map.bin");
+static const u16 gReelTimeWindowTilemap[] = INCBIN_U16("graphics/slot_machine/reel_time_window_map.bin");
