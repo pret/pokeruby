@@ -1,6 +1,29 @@
 #ifndef GUARD_SLOT_MACHINE_H
 #define GUARD_SLOT_MACHINE_H
 
+enum {
+    SLOT_MACHINE_SYM_7_RED,
+    SLOT_MACHINE_SYM_7_BLUE,
+    SLOT_MACHINE_SYM_AZURILL,
+    SLOT_MACHINE_SYM_LOTAD,
+    SLOT_MACHINE_SYM_CHERRY,
+    SLOT_MACHINE_SYM_POWER,
+    SLOT_MACHINE_SYM_REPLAY
+};
+
+enum {
+    SLOT_MACHINE_MATCHED_1CHERRY,
+    SLOT_MACHINE_MATCHED_2CHERRY,
+    SLOT_MACHINE_MATCHED_REPLAY,
+    SLOT_MACHINE_MATCHED_LOTAD,
+    SLOT_MACHINE_MATCHED_AZURILL,
+    SLOT_MACHINE_MATCHED_POWER,
+    SLOT_MACHINE_MATCHED_777_MIXED,
+    SLOT_MACHINE_MATCHED_777_RED,
+    SLOT_MACHINE_MATCHED_777_BLUE,
+    SLOT_MACHINE_MATCHED_NONE
+};
+
 struct SlotMachineEwramStruct {
     /*0x00*/ u8 state;
     /*0x01*/ u8 unk01;
@@ -10,11 +33,11 @@ struct SlotMachineEwramStruct {
     /*0x05*/ u8 unk05;
     /*0x06*/ u8 unk06;
     /*0x07*/ u8 unk07;
-    /*0x08*/ u16 unk08;
+    /*0x08*/ u16 matchedSymbols;
     /*0x0A*/ u8 unk0A;
     /*0x0B*/ u8 unk0B;
     /*0x0C*/ s16 coins;
-    /*0x0E*/ s16 unk0E;
+    /*0x0E*/ s16 payout;
     /*0x10*/ s16 unk10;
     /*0x12*/ s16 bet;
     /*0x14*/ s16 unk14;
@@ -26,7 +49,7 @@ struct SlotMachineEwramStruct {
     /*0x28*/ s16 unk28[3];
     /*0x2E*/ s16 unk2E[3];
     /*0x34*/ s16 unk34[3];
-    /*0x3A*/ u8 unk3A[3];
+    /*0x3A*/ u8 reelTasks[3];
     /*0x3D*/ u8 unk3D;
     /*0x3E*/ u8 unk3E;
     /*0x3F*/ u8 unk3F;
@@ -49,8 +72,8 @@ struct SlotMachineEwramStruct {
     /*0x64*/ MainCallback prevMainCb;
 };
 
-void PlaySlotMachine(u8, void *);
+void PlaySlotMachine(u8 arg0, MainCallback cb);
 void sub_8104DA4(void);
-u8 sub_8105BB4(u8, u8, s16);
+u8 sub_8105BB4(u8 templateIdx, u8 cbAndCoordsIdx, s16 a2);
 
 #endif // GUARD_SLOT_MACHINE_H
