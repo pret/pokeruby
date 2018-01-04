@@ -20,7 +20,7 @@
 struct UnkStruct1 {
     /*0x00*/ u8 unk00;
     /*0x01*/ u8 unk01;
-    /*0x02*/ s16 unk02;
+    /*0x02*/ s16 pikaPower;
 };
 
 #if ENGLISH
@@ -372,7 +372,7 @@ static void SlotMachineSetup_0_1(void)
 
     sub_81019EC();
     eSlotMachine->state = 0;
-    eSlotMachine->unk02 = 0;
+    eSlotMachine->pikaPower = 0;
     eSlotMachine->unk03 = Random() & 1;
     eSlotMachine->unk04 = 0;
     eSlotMachine->matchedSymbols = 0;
@@ -481,7 +481,7 @@ static void sub_8101D24(u8 taskId)
 static bool8 sub_8101D5C(struct Task *task)
 {
     BeginNormalPaletteFade(-1, 0, 16, 0, 0);
-    sub_810423C(eSlotMachine->unk02);
+    sub_810423C(eSlotMachine->pikaPower);
     eSlotMachine->state++;
     return FALSE;
 }
@@ -706,12 +706,12 @@ static bool8 sub_81020C8(struct Task *task)
         {
             eSlotMachine->unk10 = 0;
         }
-        if (eSlotMachine->matchedSymbols & 0x180)
+        if (eSlotMachine->matchedSymbols & ((1 << SLOT_MACHINE_MATCHED_777_BLUE) | (1 << SLOT_MACHINE_MATCHED_777_RED)))
         {
             PlayFanfare(BGM_ME_B_BIG);
             sub_8104CAC(6);
         }
-        else if (eSlotMachine->matchedSymbols & 0x40)
+        else if (eSlotMachine->matchedSymbols & (1 << SLOT_MACHINE_MATCHED_777_MIXED))
         {
             PlayFanfare(BGM_ME_B_BIG);
             sub_8104CAC(5);
@@ -721,24 +721,24 @@ static bool8 sub_81020C8(struct Task *task)
             PlayFanfare(BGM_ME_B_SMALL);
             sub_8104CAC(2);
         }
-        if (eSlotMachine->matchedSymbols & 0x1c0)
+        if (eSlotMachine->matchedSymbols & ((1 << SLOT_MACHINE_MATCHED_777_MIXED) | (1 << SLOT_MACHINE_MATCHED_777_BLUE) | (1 << SLOT_MACHINE_MATCHED_777_RED)))
         {
             eSlotMachine->unk04 &= 0x3f;
-            if (eSlotMachine->matchedSymbols & 0x180)
+            if (eSlotMachine->matchedSymbols & ((1 << SLOT_MACHINE_MATCHED_777_BLUE) | (1 << SLOT_MACHINE_MATCHED_777_RED)))
             {
                 eSlotMachine->unk0A = 0;
                 eSlotMachine->unk0B = 0;
                 eSlotMachine->unk03 = 0;
-                if (eSlotMachine->matchedSymbols & 0x100)
+                if (eSlotMachine->matchedSymbols & (1 << SLOT_MACHINE_MATCHED_777_BLUE))
                 {
                     eSlotMachine->unk03 = 1;
                 }
             }
         }
-        if (eSlotMachine->matchedSymbols & 0x20 && eSlotMachine->unk02 < 16)
+        if (eSlotMachine->matchedSymbols & (1 << SLOT_MACHINE_MATCHED_POWER) && eSlotMachine->pikaPower < 16)
         {
-            eSlotMachine->unk02++;
-            sub_8104064(eSlotMachine->unk02);
+            eSlotMachine->pikaPower++;
+            sub_8104064(eSlotMachine->pikaPower);
         }
     }
     else
@@ -767,20 +767,20 @@ static bool8 sub_81021FC(struct Task *task)
     if (sub_8103FA0())
     {
         eSlotMachine->state = 19;
-        if (eSlotMachine->matchedSymbols & 0x180)
+        if (eSlotMachine->matchedSymbols & ((1 << SLOT_MACHINE_MATCHED_777_RED) | (1 << SLOT_MACHINE_MATCHED_777_BLUE)))
         {
             IncrementGameStat(GAME_STAT_SLOT_JACKPOTS);
         }
-        if (eSlotMachine->matchedSymbols & 0x04)
+        if (eSlotMachine->matchedSymbols & (1 << SLOT_MACHINE_MATCHED_REPLAY))
         {
             eSlotMachine->unk18 = 0;
             eSlotMachine->state = 9;
         }
-        if (eSlotMachine->matchedSymbols & 0x20)
+        if (eSlotMachine->matchedSymbols & (1 << SLOT_MACHINE_MATCHED_POWER))
         {
             eSlotMachine->state = 17;
         }
-        if (eSlotMachine->unk0A && eSlotMachine->matchedSymbols & 0x04)
+        if (eSlotMachine->unk0A && eSlotMachine->matchedSymbols & (1 << SLOT_MACHINE_MATCHED_REPLAY))
         {
             sub_8104CAC(4);
             eSlotMachine->state = 18;
@@ -794,7 +794,7 @@ static bool8 sub_8102264(struct Task *task)
     if (!sub_81040C8())
     {
         eSlotMachine->state = 19;
-        if (eSlotMachine->matchedSymbols & 0x04)
+        if (eSlotMachine->matchedSymbols & (1 << SLOT_MACHINE_MATCHED_REPLAY))
         {
             eSlotMachine->state = 9;
             if (eSlotMachine->unk0A)
@@ -812,7 +812,7 @@ static bool8 sub_81022A0(struct Task *task)
     if (sub_8104E18())
     {
         eSlotMachine->state = 19;
-        if (eSlotMachine->matchedSymbols & 0x04)
+        if (eSlotMachine->matchedSymbols & (1 << SLOT_MACHINE_MATCHED_REPLAY))
         {
             eSlotMachine->state = 9;
         }
@@ -1038,9 +1038,9 @@ static u8 sub_810264C(u8 a0)
 {
     if (eSlotMachine->unk03 == 0)
     {
-        return gUnknown_083ECD46[a0][eSlotMachine->unk02];
+        return gUnknown_083ECD46[a0][eSlotMachine->pikaPower];
     }
-    return gUnknown_083ECDAC[a0][eSlotMachine->unk02];
+    return gUnknown_083ECDAC[a0][eSlotMachine->pikaPower];
 }
 
 static void sub_8102680(void)
@@ -2595,10 +2595,10 @@ static void sub_81046C0(struct Task *task)
             task->data[4] = 0xc0;
             StartSpriteAnimIfDifferent(gSprites + eSlotMachine->unk3F, 4);
             gSprites[eSlotMachine->unk3F].animCmdIndex = 0;
-            if (eSlotMachine->unk02)
+            if (eSlotMachine->pikaPower)
             {
                 sub_8104098();
-                eSlotMachine->unk02 = 0;
+                eSlotMachine->pikaPower = 0;
             }
             PlayFanfare(BGM_ME_B_SMALL);
         }
@@ -2828,7 +2828,7 @@ static void sub_8104BFC(struct Task *task)
     BasicInitMenuWindow(&gWindowConfig_81E7128);
     sub_81064B8();
     sub_8104CAC(task->data[1]);
-    sub_810423C(eSlotMachine->unk02);
+    sub_810423C(eSlotMachine->pikaPower);
     BeginNormalPaletteFade(-1, 0, 16, 0, 0);
     task->data[0]++;
 }
@@ -2869,7 +2869,7 @@ static void sub_8104CAC(u8 arg0) {
         spriteId = sub_8105BB4(
                 gUnknown_083ED048[arg0][i].unk00,
                 gUnknown_083ED048[arg0][i].unk01,
-                gUnknown_083ED048[arg0][i].unk02
+                gUnknown_083ED048[arg0][i].pikaPower
         );
         task->data[4 + i] = spriteId;
 
@@ -4143,7 +4143,15 @@ static const u8 sSym2Match[] = {
 };
 
 static const u16 sSlotMatchFlags[] = {
-    0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x100
+    1 << SLOT_MACHINE_MATCHED_1CHERRY,
+    1 << SLOT_MACHINE_MATCHED_2CHERRY,
+    1 << SLOT_MACHINE_MATCHED_REPLAY,
+    1 << SLOT_MACHINE_MATCHED_LOTAD,
+    1 << SLOT_MACHINE_MATCHED_AZURILL,
+    1 << SLOT_MACHINE_MATCHED_POWER,
+    1 << SLOT_MACHINE_MATCHED_777_MIXED,
+    1 << SLOT_MACHINE_MATCHED_777_RED,
+    1 << SLOT_MACHINE_MATCHED_777_BLUE
 };
 
 static const u16 sSlotPayouts[] = {

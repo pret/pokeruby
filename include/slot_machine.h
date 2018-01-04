@@ -27,7 +27,7 @@ enum {
 struct SlotMachineEwramStruct {
     /*0x00*/ u8 state;
     /*0x01*/ u8 unk01;
-    /*0x02*/ u8 unk02;
+    /*0x02*/ u8 pikaPower;
     /*0x03*/ u8 unk03;
     /*0x04*/ u8 unk04;
     /*0x05*/ u8 unk05;
