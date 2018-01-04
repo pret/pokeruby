@@ -93,7 +93,7 @@ static bool8 sub_8102A44(void);
 static bool8 sub_8102A9C(struct Task *task);
 static bool8 sub_8102AD0(struct Task *task);
 static bool8 sub_8102B80(struct Task *task);
-static u8 sub_8102BA4(u8 x, s16 y);
+static u8 GetTagOfReelSymbolOnScreenAtPos(u8 x, s16 y);
 static void sub_8102DA8(void);
 static void sub_8102DEC(u8 a0);
 static void sub_8102E1C(u8 a0);
@@ -392,8 +392,8 @@ static void SlotMachineSetup_0_1(void)
     for (i = 0; i < 3; i++)
     {
         eSlotMachine->unk22[i] = 0;
-        eSlotMachine->unk28[i] = gUnknown_083ECCF8[i][eSlotMachine->unk03] % 21;
-        eSlotMachine->unk1C[i] = 0x1f8 - eSlotMachine->unk28[i] * 24;
+        eSlotMachine->reelPositions[i] = gUnknown_083ECCF8[i][eSlotMachine->unk03] % 21;
+        eSlotMachine->unk1C[i] = 0x1f8 - eSlotMachine->reelPositions[i] * 24;
         eSlotMachine->unk1C[i] %= 0x1f8;
     }
 }
@@ -1137,9 +1137,9 @@ static void CheckMatch_CenterRow(void)
 {
     u8 c1, c2, c3, match;
 
-    c1 = sub_8102BA4(0, 2);
-    c2 = sub_8102BA4(1, 2);
-    c3 = sub_8102BA4(2, 2);
+    c1 = GetTagOfReelSymbolOnScreenAtPos(0, 2);
+    c2 = GetTagOfReelSymbolOnScreenAtPos(1, 2);
+    c3 = GetTagOfReelSymbolOnScreenAtPos(2, 2);
     match = GetMatchFromSymbolsInRow(c1, c2, c3);
     if (match != SLOT_MACHINE_MATCHED_NONE)
     {
@@ -1153,9 +1153,9 @@ static void CheckMatch_TopAndBottom(void)
 {
     u8 c1, c2, c3, match;
 
-    c1 = sub_8102BA4(0, 1);
-    c2 = sub_8102BA4(1, 1);
-    c3 = sub_8102BA4(2, 1);
+    c1 = GetTagOfReelSymbolOnScreenAtPos(0, 1);
+    c2 = GetTagOfReelSymbolOnScreenAtPos(1, 1);
+    c3 = GetTagOfReelSymbolOnScreenAtPos(2, 1);
     match = GetMatchFromSymbolsInRow(c1, c2, c3);
     if (match != SLOT_MACHINE_MATCHED_NONE)
     {
@@ -1167,9 +1167,9 @@ static void CheckMatch_TopAndBottom(void)
         eSlotMachine->matchedSymbols |= sSlotMatchFlags[match];
         sub_8103E04(1);
     }
-    c1 = sub_8102BA4(0, 3);
-    c2 = sub_8102BA4(1, 3);
-    c3 = sub_8102BA4(2, 3);
+    c1 = GetTagOfReelSymbolOnScreenAtPos(0, 3);
+    c2 = GetTagOfReelSymbolOnScreenAtPos(1, 3);
+    c3 = GetTagOfReelSymbolOnScreenAtPos(2, 3);
     match = GetMatchFromSymbolsInRow(c1, c2, c3);
     if (match != SLOT_MACHINE_MATCHED_NONE)
     {
@@ -1187,9 +1187,9 @@ static void CheckMatch_Diagonals(void)
 {
     u8 c1, c2, c3, match;
 
-    c1 = sub_8102BA4(0, 1);
-    c2 = sub_8102BA4(1, 2);
-    c3 = sub_8102BA4(2, 3);
+    c1 = GetTagOfReelSymbolOnScreenAtPos(0, 1);
+    c2 = GetTagOfReelSymbolOnScreenAtPos(1, 2);
+    c3 = GetTagOfReelSymbolOnScreenAtPos(2, 3);
     match = GetMatchFromSymbolsInRow(c1, c2, c3);
     if (match != SLOT_MACHINE_MATCHED_NONE)
     {
@@ -1200,9 +1200,9 @@ static void CheckMatch_Diagonals(void)
         }
         sub_8103E04(3);
     }
-    c1 = sub_8102BA4(0, 3);
-    c2 = sub_8102BA4(1, 2);
-    c3 = sub_8102BA4(2, 1);
+    c1 = GetTagOfReelSymbolOnScreenAtPos(0, 3);
+    c2 = GetTagOfReelSymbolOnScreenAtPos(1, 2);
+    c3 = GetTagOfReelSymbolOnScreenAtPos(2, 1);
     match = GetMatchFromSymbolsInRow(c1, c2, c3);
     if (match != SLOT_MACHINE_MATCHED_NONE)
     {
@@ -1223,15 +1223,15 @@ static u8 GetMatchFromSymbolsInRow(u8 c1, u8 c2, u8 c3)
     {
         return sSym2Match[c1];
     }
-    if (c1 == SLOT_MACHINE_SYM_7_RED && c2 == SLOT_MACHINE_SYM_7_RED && c3 == SLOT_MACHINE_SYM_7_BLUE)
+    if (c1 == SLOT_MACHINE_TAG_7_RED && c2 == SLOT_MACHINE_TAG_7_RED && c3 == SLOT_MACHINE_TAG_7_BLUE)
     {
         return SLOT_MACHINE_MATCHED_777_MIXED;
     }
-    if (c1 == SLOT_MACHINE_SYM_7_BLUE && c2 == SLOT_MACHINE_SYM_7_BLUE && c3 == SLOT_MACHINE_SYM_7_RED)
+    if (c1 == SLOT_MACHINE_TAG_7_BLUE && c2 == SLOT_MACHINE_TAG_7_BLUE && c3 == SLOT_MACHINE_TAG_7_RED)
     {
         return SLOT_MACHINE_MATCHED_777_MIXED;
     }
-    if (c1 == SLOT_MACHINE_SYM_CHERRY)
+    if (c1 == SLOT_MACHINE_TAG_CHERRY)
     {
         return SLOT_MACHINE_MATCHED_1CHERRY;
     }
@@ -1322,24 +1322,24 @@ static bool8 sub_8102B80(struct Task *task)
     return FALSE;
 }
 
-static const u8 gUnknown_083ECCB2[][21];
+static const u8 sReelSymbols[][21];
 
-static u8 sub_8102BA4(u8 x, s16 y)
+static u8 GetTagOfReelSymbolOnScreenAtPos(u8 x, s16 y)
 {
-    s16 offset = (eSlotMachine->unk28[x] + y) % 21;
+    s16 offset = (eSlotMachine->reelPositions[x] + y) % 21;
     if (offset < 0)
     {
         offset += 21;
     }
-    return gUnknown_083ECCB2[x][offset];
+    return sReelSymbols[x][offset];
 }
 
-static u8 sub_8102BF8(u8 x, s16 y)
+static u8 GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(u8 x, s16 y)
 {
     s16 r6 = 0;
     if ((eSlotMachine->unk1C[x]) % 24)
         r6 = -1;
-    return sub_8102BA4(x, y + r6);
+    return GetTagOfReelSymbolOnScreenAtPos(x, y + r6);
 }
 
 static const u8 gUnknown_083ECCF1[];
@@ -1356,7 +1356,7 @@ static void sub_8102C84(u8 a0, s16 a1)
 {
     eSlotMachine->unk1C[a0] += a1;
     eSlotMachine->unk1C[a0] %= 504;
-    eSlotMachine->unk28[a0] = 21 - eSlotMachine->unk1C[a0] / 24;
+    eSlotMachine->reelPositions[a0] = 21 - eSlotMachine->unk1C[a0] / 24;
 }
 
 static s16 sub_8102CCC(u8 a0, s16 a1)
@@ -1528,20 +1528,20 @@ static bool8 sub_810305C(void)
     return gUnknown_083ECB64[eSlotMachine->bet - 1](r5, r3);
 }
 
-static bool8 sub_81030A4(s16 a0, u8 a1, u8 a2)
+static bool8 sub_81030A4(s16 y, u8 tag1, u8 tag2)
 {
-    u8 r1 = sub_8102BF8(0, a0);
-    if (r1 == a1 || r1 == a2)
+    u8 tag = GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(0, y);
+    if (tag == tag1 || tag == tag2)
     {
-        eSlotMachine->unk07 = r1;
+        eSlotMachine->unk07 = tag;
         return TRUE;
     }
     return FALSE;
 }
 
-static bool8 sub_81030E0(s16 a0)
+static bool8 sub_81030E0(s16 y)
 {
-    if (sub_8102BF8(0, 1 - a0) == 4 || sub_8102BF8(0, 2 - a0) == 4 || sub_8102BF8(0, 3 - a0) == 4)
+    if (GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(0, 1 - y) == 4 || GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(0, 2 - y) == 4 || GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(0, 3 - y) == 4)
     {
         return TRUE;
     }
@@ -1573,7 +1573,7 @@ static bool8 sub_8103154(u8 a0, u8 a1)
     return FALSE;
 }
 
-static bool8 sub_81031B4(u8 a0, u8 a1)
+static bool8 sub_81031B4(u8 tag1, u8 tag2)
 {
     s16 i;
     bool8 r6 = sub_8103134();
@@ -1581,7 +1581,7 @@ static bool8 sub_81031B4(u8 a0, u8 a1)
     {
         for (i = 1; i < 4; i++)
         {
-            if (sub_81030A4(i, a0, a1))
+            if (sub_81030A4(i, tag1, tag2))
             {
                 eSlotMachine->unk34[0] = i;
                 eSlotMachine->unk2E[0] = 0;
@@ -1594,7 +1594,7 @@ static bool8 sub_81031B4(u8 a0, u8 a1)
         bool8 r7 = r6;
         if (r7 || !sub_81030E0(i))
         {
-            if (sub_81030A4(1 - i, a0, a1))
+            if (sub_81030A4(1 - i, tag1, tag2))
             {
                 if (i == 1 && (r7 || !sub_81030E0(3)))
                 {
@@ -1635,7 +1635,7 @@ static bool8 sub_81032E8(void)
 
     for (i = 0; i < 5; i++)
     {
-        if (sub_8102BF8(1, unk34_0 - i) == eSlotMachine->unk07)
+        if (GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(1, unk34_0 - i) == eSlotMachine->unk07)
         {
             eSlotMachine->unk34[1] = unk34_0;
             eSlotMachine->unk2E[1] = i;
@@ -1654,7 +1654,7 @@ static bool8 sub_810333C(void)
         {
             for (i = 0; i < 5; i++)
             {
-                if (sub_8102BF8(1, 2 - i) == eSlotMachine->unk07)
+                if (GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(1, 2 - i) == eSlotMachine->unk07)
                 {
                     eSlotMachine->unk34[1] = 2;
                     eSlotMachine->unk2E[1] = i;
@@ -1668,7 +1668,7 @@ static bool8 sub_810333C(void)
     {
         for (i = 0; i < 5; i++)
         {
-            if (sub_8102BF8(1, 2 - i) == eSlotMachine->unk07)
+            if (GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(1, 2 - i) == eSlotMachine->unk07)
             {
                 eSlotMachine->unk34[1] = 2;
                 eSlotMachine->unk2E[1] = i;
@@ -1706,7 +1706,7 @@ static bool8 sub_810341C(u8 a0)
 
     for (i = 0; i < 5; i++)
     {
-        if (sub_8102BF8(2, unk34_1 - i) == a0)
+        if (GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(2, unk34_1 - i) == a0)
         {
             eSlotMachine->unk34[2] = unk34_1;
             eSlotMachine->unk2E[2] = i;
@@ -1731,7 +1731,7 @@ static bool8 sub_810347C(u8 a0)
     }
     for (i = 0; i < 5; i++)
     {
-        if (sub_8102BF8(2, r8 - i) == a0)
+        if (GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(2, r8 - i) == a0)
         {
             eSlotMachine->unk2E[2] = i;
             eSlotMachine->unk34[2] = r8;
@@ -1778,13 +1778,13 @@ static void sub_8103564(void)
 {
     if (eSlotMachine->unk34[0] != 0 && eSlotMachine->unk04 & 0x80)
     {
-        u8 sp0 = sub_8102BF8(0, 2 - eSlotMachine->unk2E[0]);
+        u8 sp0 = GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(0, 2 - eSlotMachine->unk2E[0]);
         if (sub_8103520(&sp0))
         {
             s16 i;
             for (i = 0; i < 5; i++)
             {
-                if (sp0 == sub_8102BF8(1, 2 - i))
+                if (sp0 == GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(1, 2 - i))
                 {
                     eSlotMachine->unk34[1] = 2;
                     eSlotMachine->unk2E[1] = i;
@@ -1799,13 +1799,13 @@ static void j5_08111E84(void)
 {
     if (eSlotMachine->unk34[0] != 0 && eSlotMachine->unk04 & 0x80)
     {
-        u8 sp0 = sub_8102BF8(0, eSlotMachine->unk34[0] - eSlotMachine->unk2E[0]);
+        u8 sp0 = GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(0, eSlotMachine->unk34[0] - eSlotMachine->unk2E[0]);
         if (sub_8103520(&sp0))
         {
             s16 i;
             for (i = 0; i < 5; i++)
             {
-                if (sp0 == sub_8102BF8(1, eSlotMachine->unk34[0] - i))
+                if (sp0 == GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(1, eSlotMachine->unk34[0] - i))
                 {
                     eSlotMachine->unk34[1] = eSlotMachine->unk34[0];
                     eSlotMachine->unk2E[1] = i;
@@ -1819,7 +1819,7 @@ static void j5_08111E84(void)
 static void sub_8103668(void)
 {
     s16 i;
-    s16 r6;
+    s16 j;
     if (eSlotMachine->unk34[0] != 0 && eSlotMachine->unk04 & 0x80)
     {
         if (eSlotMachine->unk34[0] == 2)
@@ -1828,49 +1828,49 @@ static void sub_8103668(void)
         }
         else
         {
-            u8 sp0 = sub_8102BF8(0, eSlotMachine->unk34[0] - eSlotMachine->unk2E[0]);
+            u8 sp0 = GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(0, eSlotMachine->unk34[0] - eSlotMachine->unk2E[0]);
             if (sub_8103520(&sp0))
             {
-                r6 = 2;
+                j = 2;
                 if (eSlotMachine->unk34[0] == 3)
-                    r6 = 3;
-                for (i = 0; i < 2; i++, r6--)
+                    j = 3;
+                for (i = 0; i < 2; i++, j--)
                 {
-                    if (sp0 == sub_8102BF8(1, r6))
+                    if (sp0 == GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(1, j))
                     {
-                        eSlotMachine->unk34[1] = r6;
+                        eSlotMachine->unk34[1] = j;
                         eSlotMachine->unk2E[1] = 0;
                         return;
                     }
                 }
-                for (r6 = 1; r6 < 5; r6++)
+                for (j = 1; j < 5; j++)
                 {
-                    if (sp0 == sub_8102BF8(1, eSlotMachine->unk34[0] - r6))
+                    if (sp0 == GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(1, eSlotMachine->unk34[0] - j))
                     {
                         if (eSlotMachine->unk34[0] == 1)
                         {
-                            if (r6 < 3)
+                            if (j < 3)
                             {
                                 eSlotMachine->unk34[1] = 2;
-                                eSlotMachine->unk2E[1] = r6 + 1;
+                                eSlotMachine->unk2E[1] = j + 1;
                             }
                             else
                             {
                                 eSlotMachine->unk34[1] = 1;
-                                eSlotMachine->unk2E[1] = r6;
+                                eSlotMachine->unk2E[1] = j;
                             }
                         }
                         else
                         {
-                            if (r6 < 3)
+                            if (j < 3)
                             {
                                 eSlotMachine->unk34[1] = 3;
-                                eSlotMachine->unk2E[1] = r6;
+                                eSlotMachine->unk2E[1] = j;
                             }
                             else
                             {
                                 eSlotMachine->unk34[1] = 2;
-                                eSlotMachine->unk2E[1] = r6 - 1;
+                                eSlotMachine->unk2E[1] = j - 1;
                             }
                         }
                         return;
@@ -1926,14 +1926,14 @@ static void sub_810380C(void)
 static void sub_8103830(void)
 {
     s16 i = 0;
-    u8 r5 = sub_8102BF8(0, 2 - eSlotMachine->unk2E[0]);
-    u8 r1 = sub_8102BF8(1, 2 - eSlotMachine->unk2E[1]);
+    u8 r5 = GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(0, 2 - eSlotMachine->unk2E[0]);
+    u8 r1 = GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(1, 2 - eSlotMachine->unk2E[1]);
     if (r5 == r1)
     {
         while (1)
         {
             u8 r0;
-            if (!(r5 == (r0 = sub_8102BF8(2, 2 - i)) || (r5 == 0 && r0 == 1) || (r5 == 1 && r0 == 0)))
+            if (!(r5 == (r0 = GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(2, 2 - i)) || (r5 == 0 && r0 == 1) || (r5 == 1 && r0 == 0)))
             {
                 break;
             }
@@ -1946,7 +1946,7 @@ static void sub_8103830(void)
         {
             for (i = 0; i < 5; i++)
             {
-                if (r5 == sub_8102BF8(2, 2 - i))
+                if (r5 == GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(2, 2 - i))
                 {
                     eSlotMachine->unk2E[2] = i;
                     return;
@@ -1956,7 +1956,7 @@ static void sub_8103830(void)
         i = 0;
         while (1)
         {
-            if (r5 != sub_8102BF8(2, 2 - i))
+            if (r5 != GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(2, 2 - i))
             {
                 break;
             }
@@ -1976,13 +1976,13 @@ static void sub_8103910(void)
 
     if (eSlotMachine->unk34[1] != 0 && eSlotMachine->unk34[0] == eSlotMachine->unk34[1] && eSlotMachine->unk04 & 0x80)
     {
-        r7 = sub_8102BF8(0, eSlotMachine->unk34[0] - eSlotMachine->unk2E[0]);
-        r6 = sub_8102BF8(1, eSlotMachine->unk34[1] - eSlotMachine->unk2E[1]);
+        r7 = GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(0, eSlotMachine->unk34[0] - eSlotMachine->unk2E[0]);
+        r6 = GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(1, eSlotMachine->unk34[1] - eSlotMachine->unk2E[1]);
         if (sub_8103764(r7, r6))
         {
             for (i = 0; i < 5; i++)
             {
-                r4 = sub_8102BF8(2, eSlotMachine->unk34[1] - i);
+                r4 = GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(2, eSlotMachine->unk34[1] - i);
                 if (r7 == r4)
                 {
                     sp0 = i;
@@ -1996,9 +1996,9 @@ static void sub_8103910(void)
         s16 r8;
         for (i = 1, r8 = 0; i < 4; i++)
         {
-            r7 = sub_8102BF8(0, i - eSlotMachine->unk2E[0]);
-            r6 = sub_8102BF8(1, i - eSlotMachine->unk2E[1]);
-            r4 = sub_8102BF8(2, i - sp0);
+            r7 = GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(0, i - eSlotMachine->unk2E[0]);
+            r6 = GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(1, i - eSlotMachine->unk2E[1]);
+            r4 = GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(2, i - sp0);
             if (!sub_81037BC(r7, r6, r4) && (!sub_810378C(r7, r6, r4) || !(eSlotMachine->unk04 & 0x80)))
             {
                 r8++;
@@ -2025,8 +2025,8 @@ static void sub_8103A78(void)
     sub_8103910();
     if (eSlotMachine->unk34[1] != 0 && eSlotMachine->unk34[0] != eSlotMachine->unk34[1] && eSlotMachine->unk04 & 0x80)
     {
-        r6 = sub_8102BF8(0, eSlotMachine->unk34[0] - eSlotMachine->unk2E[0]);
-        r5 = sub_8102BF8(1, eSlotMachine->unk34[1] - eSlotMachine->unk2E[1]);
+        r6 = GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(0, eSlotMachine->unk34[0] - eSlotMachine->unk2E[0]);
+        r5 = GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(1, eSlotMachine->unk34[1] - eSlotMachine->unk2E[1]);
         if (sub_8103764(r6, r5))
         {
             r8 = 1;
@@ -2034,7 +2034,7 @@ static void sub_8103A78(void)
                 r8 = 3;
             for (i = 0; i < 5; i++)
             {
-                r4 = sub_8102BF8(2, r8 - (eSlotMachine->unk2E[2] + i));
+                r4 = GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(2, r8 - (eSlotMachine->unk2E[2] + i));
                 if (r6 == r4)
                 {
                     eSlotMachine->unk2E[2] += i;
@@ -2045,18 +2045,18 @@ static void sub_8103A78(void)
     }
     while (1)
     {
-        r6 = sub_8102BF8(0, 1 - eSlotMachine->unk2E[0]);
-        r5 = sub_8102BF8(1, 2 - eSlotMachine->unk2E[1]);
-        r4 = sub_8102BF8(2, 3 - eSlotMachine->unk2E[2]);
+        r6 = GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(0, 1 - eSlotMachine->unk2E[0]);
+        r5 = GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(1, 2 - eSlotMachine->unk2E[1]);
+        r4 = GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(2, 3 - eSlotMachine->unk2E[2]);
         if (sub_81037BC(r6, r5, r4) || (sub_810378C(r6, r5, r4) && eSlotMachine->unk04 & 0x80))
             break;
         eSlotMachine->unk2E[2]++;
     }
     while (1)
     {
-        r6 = sub_8102BF8(0, 3 - eSlotMachine->unk2E[0]);
-        r5 = sub_8102BF8(1, 2 - eSlotMachine->unk2E[1]);
-        r4 = sub_8102BF8(2, 1 - eSlotMachine->unk2E[2]);
+        r6 = GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(0, 3 - eSlotMachine->unk2E[0]);
+        r5 = GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(1, 2 - eSlotMachine->unk2E[1]);
+        r4 = GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(2, 1 - eSlotMachine->unk2E[2]);
         if (sub_81037BC(r6, r5, r4) || (sub_810378C(r6, r5, r4) && eSlotMachine->unk04 & 0x80))
             break;
         eSlotMachine->unk2E[2]++;
@@ -2968,7 +2968,7 @@ static void sub_8104F18(struct Sprite *sprite)
     sprite->data[2] = eSlotMachine->unk1C[sprite->data[0]] + sprite->data[1];
     sprite->data[2] %= 120;
     sprite->pos1.y = eSlotMachine->unk22[sprite->data[0]] + 28 + sprite->data[2];
-    sprite->sheetTileStart = GetSpriteTileStartByTag(sub_8102BA4(sprite->data[0], sprite->data[2] / 24));
+    sprite->sheetTileStart = GetSpriteTileStartByTag(GetTagOfReelSymbolOnScreenAtPos(sprite->data[0], sprite->data[2] / 24));
     SetSpriteSheetFrameTileNum(sprite);
 }
 
@@ -3982,10 +3982,74 @@ static void sub_81065DC(void) {
     }
 }
 
-static const u8 gUnknown_083ECCB2[][21] = {
-    {0, 4, 2, 6, 5, 3, 1, 3, 4, 5, 6, 2, 0, 5, 3, 6, 2, 1, 5, 3, 6},
-    {0, 4, 6, 3, 2, 4, 6, 5, 5, 3, 1, 3, 6, 4, 2, 3, 6, 4, 3, 6, 4},
-    {0, 5, 1, 6, 3, 2, 6, 3, 5, 2, 6, 3, 2, 5, 6, 3, 2, 5, 6, 3, 4}
+static const u8 sReelSymbols[][21] = {
+    {
+        SLOT_MACHINE_TAG_7_RED,
+        SLOT_MACHINE_TAG_CHERRY,
+        SLOT_MACHINE_TAG_AZURILL,
+        SLOT_MACHINE_TAG_REPLAY,
+        SLOT_MACHINE_TAG_POWER,
+        SLOT_MACHINE_TAG_LOTAD,
+        SLOT_MACHINE_TAG_7_BLUE,
+        SLOT_MACHINE_TAG_LOTAD,
+        SLOT_MACHINE_TAG_CHERRY,
+        SLOT_MACHINE_TAG_POWER,
+        SLOT_MACHINE_TAG_REPLAY,
+        SLOT_MACHINE_TAG_AZURILL,
+        SLOT_MACHINE_TAG_7_RED,
+        SLOT_MACHINE_TAG_POWER,
+        SLOT_MACHINE_TAG_LOTAD,
+        SLOT_MACHINE_TAG_REPLAY,
+        SLOT_MACHINE_TAG_AZURILL,
+        SLOT_MACHINE_TAG_7_BLUE,
+        SLOT_MACHINE_TAG_POWER,
+        SLOT_MACHINE_TAG_LOTAD,
+        SLOT_MACHINE_TAG_REPLAY
+    }, {
+        SLOT_MACHINE_TAG_7_RED,
+        SLOT_MACHINE_TAG_CHERRY,
+        SLOT_MACHINE_TAG_REPLAY,
+        SLOT_MACHINE_TAG_LOTAD,
+        SLOT_MACHINE_TAG_AZURILL,
+        SLOT_MACHINE_TAG_CHERRY,
+        SLOT_MACHINE_TAG_REPLAY,
+        SLOT_MACHINE_TAG_POWER,
+        SLOT_MACHINE_TAG_POWER,
+        SLOT_MACHINE_TAG_LOTAD,
+        SLOT_MACHINE_TAG_7_BLUE,
+        SLOT_MACHINE_TAG_LOTAD,
+        SLOT_MACHINE_TAG_REPLAY,
+        SLOT_MACHINE_TAG_CHERRY,
+        SLOT_MACHINE_TAG_AZURILL,
+        SLOT_MACHINE_TAG_LOTAD,
+        SLOT_MACHINE_TAG_REPLAY,
+        SLOT_MACHINE_TAG_CHERRY,
+        SLOT_MACHINE_TAG_LOTAD,
+        SLOT_MACHINE_TAG_REPLAY,
+        SLOT_MACHINE_TAG_CHERRY
+    }, {
+        SLOT_MACHINE_TAG_7_RED,
+        SLOT_MACHINE_TAG_POWER,
+        SLOT_MACHINE_TAG_7_BLUE,
+        SLOT_MACHINE_TAG_REPLAY,
+        SLOT_MACHINE_TAG_LOTAD,
+        SLOT_MACHINE_TAG_AZURILL,
+        SLOT_MACHINE_TAG_REPLAY,
+        SLOT_MACHINE_TAG_LOTAD,
+        SLOT_MACHINE_TAG_POWER,
+        SLOT_MACHINE_TAG_AZURILL,
+        SLOT_MACHINE_TAG_REPLAY,
+        SLOT_MACHINE_TAG_LOTAD,
+        SLOT_MACHINE_TAG_AZURILL,
+        SLOT_MACHINE_TAG_POWER,
+        SLOT_MACHINE_TAG_REPLAY,
+        SLOT_MACHINE_TAG_LOTAD,
+        SLOT_MACHINE_TAG_AZURILL,
+        SLOT_MACHINE_TAG_POWER,
+        SLOT_MACHINE_TAG_REPLAY,
+        SLOT_MACHINE_TAG_LOTAD,
+        SLOT_MACHINE_TAG_CHERRY
+    }
 };
 
 static const u8 gUnknown_083ECCF1[] = {

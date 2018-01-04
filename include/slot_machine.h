@@ -2,13 +2,13 @@
 #define GUARD_SLOT_MACHINE_H
 
 enum {
-    SLOT_MACHINE_SYM_7_RED,
-    SLOT_MACHINE_SYM_7_BLUE,
-    SLOT_MACHINE_SYM_AZURILL,
-    SLOT_MACHINE_SYM_LOTAD,
-    SLOT_MACHINE_SYM_CHERRY,
-    SLOT_MACHINE_SYM_POWER,
-    SLOT_MACHINE_SYM_REPLAY
+    SLOT_MACHINE_TAG_7_RED,
+    SLOT_MACHINE_TAG_7_BLUE,
+    SLOT_MACHINE_TAG_AZURILL,
+    SLOT_MACHINE_TAG_LOTAD,
+    SLOT_MACHINE_TAG_CHERRY,
+    SLOT_MACHINE_TAG_POWER,
+    SLOT_MACHINE_TAG_REPLAY
 };
 
 enum {
@@ -46,7 +46,7 @@ struct SlotMachineEwramStruct {
     /*0x1A*/ s16 unk1A;
     /*0x1C*/ s16 unk1C[3];
     /*0x22*/ u16 unk22[3];
-    /*0x28*/ s16 unk28[3];
+    /*0x28*/ s16 reelPositions[3];
     /*0x2E*/ s16 unk2E[3];
     /*0x34*/ s16 unk34[3];
     /*0x3A*/ u8 reelTasks[3];
