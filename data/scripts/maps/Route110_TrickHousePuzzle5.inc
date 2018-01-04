@@ -160,7 +160,7 @@ Route110_TrickHousePuzzle5_EventScript_162933:: @ 8162933
 Route110_TrickHousePuzzle5_EventScript_16293F:: @ 816293F
 	setvar VAR_TEMP_1, 1
 	setvar VAR_TEMP_8, 1
-	playse 21
+	playse SE_PIN
 	applymovement 1, Route110_TrickHousePuzzle5_Movement_1A0833
 	waitmovement 0
 	applymovement 1, Route110_TrickHousePuzzle5_Movement_1A0835
@@ -182,7 +182,7 @@ Route110_TrickHousePuzzle5_EventScript_16293F:: @ 816293F
 Route110_TrickHousePuzzle5_EventScript_1629B3:: @ 81629B3
 	setvar VAR_TEMP_2, 1
 	setvar VAR_TEMP_8, 2
-	playse 21
+	playse SE_PIN
 	applymovement 2, Route110_TrickHousePuzzle5_Movement_1A0833
 	waitmovement 0
 	applymovement 2, Route110_TrickHousePuzzle5_Movement_1A0835
@@ -204,7 +204,7 @@ Route110_TrickHousePuzzle5_EventScript_1629B3:: @ 81629B3
 Route110_TrickHousePuzzle5_EventScript_162A27:: @ 8162A27
 	setvar VAR_TEMP_3, 1
 	setvar VAR_TEMP_8, 3
-	playse 21
+	playse SE_PIN
 	applymovement 3, Route110_TrickHousePuzzle5_Movement_1A0833
 	waitmovement 0
 	applymovement 3, Route110_TrickHousePuzzle5_Movement_1A0835
@@ -226,7 +226,7 @@ Route110_TrickHousePuzzle5_EventScript_162A27:: @ 8162A27
 Route110_TrickHousePuzzle5_EventScript_162A9B:: @ 8162A9B
 	setvar VAR_TEMP_4, 1
 	setvar VAR_TEMP_8, 4
-	playse 21
+	playse SE_PIN
 	applymovement 4, Route110_TrickHousePuzzle5_Movement_1A0833
 	waitmovement 0
 	applymovement 4, Route110_TrickHousePuzzle5_Movement_1A0835
@@ -248,7 +248,7 @@ Route110_TrickHousePuzzle5_EventScript_162A9B:: @ 8162A9B
 Route110_TrickHousePuzzle5_EventScript_162B0F:: @ 8162B0F
 	setvar VAR_TEMP_5, 1
 	setvar VAR_TEMP_8, 5
-	playse 21
+	playse SE_PIN
 	applymovement 5, Route110_TrickHousePuzzle5_Movement_1A0833
 	waitmovement 0
 	applymovement 5, Route110_TrickHousePuzzle5_Movement_1A0835
@@ -389,7 +389,7 @@ Route110_TrickHousePuzzle5_EventScript_162D6D:: @ 8162D6D
 
 Route110_TrickHousePuzzle5_EventScript_162D90:: @ 8162D90
 	waitse
-	playse 32
+	playse SE_HAZURE
 	msgbox Route110_TrickHousePuzzle5_Text_19D5CF, 4
 	applymovement 1, Route110_TrickHousePuzzle5_Movement_16309F
 	applymovement 2, Route110_TrickHousePuzzle5_Movement_16309F
@@ -408,7 +408,7 @@ Route110_TrickHousePuzzle5_EventScript_162D90:: @ 8162D90
 
 Route110_TrickHousePuzzle5_EventScript_162DDF:: @ 8162DDF
 	waitse
-	playse 31
+	playse SE_SEIKAI
 	goto Route110_TrickHousePuzzle5_EventScript_162DE9
 	end
 

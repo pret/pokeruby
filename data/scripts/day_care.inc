@@ -36,7 +36,7 @@ Route117_EventScript_1B2298:: @ 81B2298
 
 Route117_EventScript_1B22B2:: @ 81B22B2
 	message Route117_Text_1B27A2
-	playfanfare 367
+	playfanfare BGM_FANFA1
 	waitfanfare
 	waitmessage
 	waitbuttonpress
@@ -208,7 +208,7 @@ Route117_PokemonDayCare_EventScript_1B24DE:: @ 81B24DE
 	waitmovement 0
 	specialvar RESULT, TakePokemonFromDaycare
 	special PayMoneyFor
-	playse 95
+	playse SE_REGI
 	msgbox Route117_PokemonDayCare_Text_1B2B75, 4
 	waitse
 	playmoncry RESULT, 0

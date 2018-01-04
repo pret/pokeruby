@@ -220,7 +220,7 @@ Route110_TrickHouseEntrance_EventScript_1611D7:: @ 81611D7
 	delay 20
 	applymovement 1, Route110_TrickHouseEntrance_Movement_161315
 	waitmovement 0
-	playse 178
+	playse SE_W153
 	applymovement 1, Route110_TrickHouseEntrance_Movement_16131E
 	waitmovement 0
 	removeobject 1
@@ -243,7 +243,7 @@ Route110_TrickHouseEntrance_EventScript_16121A:: @ 816121A
 	end
 
 Route110_TrickHouseEntrance_EventScript_16124D:: @ 816124D
-	playse 21
+	playse SE_PIN
 	applymovement 255, Route110_TrickHouseEntrance_Movement_1A0833
 	waitmovement 0
 	applymovement 255, Route110_TrickHouseEntrance_Movement_1A0835
@@ -336,7 +336,7 @@ Route110_TrickHouseEntrance_EventScript_161330:: @ 8161330
 	closemessage
 	applymovement 1, Route110_TrickHouseEntrance_Movement_1A0839
 	waitmovement 0
-	playse 21
+	playse SE_PIN
 	applymovement 1, Route110_TrickHouseEntrance_Movement_1A0833
 	waitmovement 0
 	applymovement 1, Route110_TrickHouseEntrance_Movement_1A0835
@@ -469,7 +469,7 @@ Route110_TrickHouseEntrance_EventScript_161551:: @ 8161551
 	waitmovement 0
 	applymovement 1, Route110_TrickHouseEntrance_Movement_161315
 	waitmovement 0
-	playse 178
+	playse SE_W153
 	applymovement 1, Route110_TrickHouseEntrance_Movement_16131E
 	waitmovement 0
 	removeobject 1
@@ -714,7 +714,7 @@ Route110_TrickHousePuzzle5_EventScript_16189C:: @ 816189C
 Route110_TrickHousePuzzle6_EventScript_16189C:: @ 816189C
 Route110_TrickHousePuzzle7_EventScript_16189C:: @ 816189C
 Route110_TrickHousePuzzle8_EventScript_16189C:: @ 816189C
-	playfanfare 370
+	playfanfare BGM_FANFA4
 	message Route110_TrickHousePuzzle1_Text_19C1B8
 	waitfanfare
 	waitmessage

@@ -396,13 +396,13 @@ gStdScripts_End::
 
 gUnknown_0815F36C:: @ 815F36C
 	lockall
-	playse 2
+	playse SE_PC_LOGON
 	message UnknownString_81A3A72
 	dofieldeffect 61
 	waitstate
 	waitmessage
 	waitbuttonpress
-	playse 5
+	playse SE_SELECT
 	goto EventScript_15F384
 	end
 
@@ -458,12 +458,12 @@ EventScript_15F436:
 gUnknown_0815F43A:: @ 815F43A
 	lockall
 	message UnknownString_81A3A72
-	playse 2
+	playse SE_PC_LOGON
 	dofieldeffect 61
 	waitstate
 	waitmessage
 	waitbuttonpress
-	playse 5
+	playse SE_SELECT
 	goto EventScript_15F452
 	end
 
@@ -1572,11 +1572,11 @@ Std_ObtainItem_Fail: @ 819FECC
 	return
 
 PlayGetItemFanfare:
-	playfanfare 0x172
+	playfanfare BGM_FANFA4
 	return
 
 PlayGetTMHMFanfare:
-	playfanfare 0x174
+	playfanfare BGM_ME_WAZA
 	return
 
 Std_ObtainDecoration: @ 819FEDA
@@ -1594,7 +1594,7 @@ Std_ObtainDecoration_: @ 819FEE8
 	return
 
 Std_ObtainDecoration_Success: @ 819FF03
-	playfanfare 0x172
+	playfanfare BGM_FANFA4
 	message Message_ObtainedDecoration
 	waitfanfare
 	waitmessage
@@ -1691,7 +1691,7 @@ gUnknown_081A0009:: @ 81A0009
 	lockall
 	setvar VAR_SPECIAL_4, 0
 	special DoPCTurnOnEffect
-	playse 4
+	playse SE_PC_ON
 	msgbox UnknownString_81A09EC, 4
 	goto EventScript_1A0023
 	end
@@ -1714,7 +1714,7 @@ EventScript_1A0033:
 	end
 
 EventScript_1A0070:
-	playse 2
+	playse SE_PC_LOGON
 	msgbox UnknownString_81A0A54, 4
 	special PlayerPC
 	waitstate
@@ -1722,7 +1722,7 @@ EventScript_1A0070:
 	end
 
 EventScript_1A0085:
-	playse 2
+	playse SE_PC_LOGON
 	checkflag FLAG_SYS_PC_LANETTE
 	call_if 0, EventScript_1A00AC
 	checkflag FLAG_SYS_PC_LANETTE
@@ -1743,7 +1743,7 @@ EventScript_1A00B5:
 
 EventScript_1A00BE:
 	setvar VAR_SPECIAL_4, 0
-	playse 3
+	playse SE_PC_OFF
 	special DoPCTurnOffEffect
 	releaseall
 	end
@@ -1751,7 +1751,7 @@ EventScript_1A00BE:
 EventScript_1A00CB:
 	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if 0, EventScript_1A00BE
-	playse 2
+	playse SE_PC_LOGON
 	special AccessHallOfFamePC
 	waitstate
 	goto EventScript_1A0033
@@ -2111,7 +2111,7 @@ MossdeepCity_Gym_EventScript_1A02C5:: @ 81A02C5
 PetalburgCity_Gym_EventScript_1A02C5:: @ 81A02C5
 RustboroCity_Gym_EventScript_1A02C5:: @ 81A02C5
 SootopolisCity_Gym_1F_EventScript_1A02C5:: @ 81A02C5
-	playfanfare 369
+	playfanfare BGM_ME_BACHI
 	waitfanfare
 	return
 
@@ -2120,7 +2120,7 @@ Route111_OldLadysRestStop_EventScript_1A02CA:: @ 81A02CA
 Route119_WeatherInstitute_1F_EventScript_1A02CA:: @ 81A02CA
 SSTidalRooms_EventScript_1A02CA:: @ 81A02CA
 	fadescreen 1
-	playfanfare 368
+	playfanfare BGM_ME_ASA
 	waitfanfare
 	special ScrSpecial_HealPlayerParty
 	fadescreen 0
@@ -2139,7 +2139,7 @@ DewfordTown_EventScript_1A02E7:: @ 81A02E7
 Route104_EventScript_1A02E7:: @ 81A02E7
 Route109_EventScript_1A02E7:: @ 81A02E7
 	setflag FLAG_SPECIAL_FLAG_1
-	playbgm 431, 0
+	playbgm BGM_M_BOAT, FALSE
 	return
 
 DewfordTown_EventScript_1A02EF:: @ 81A02EF
@@ -2553,7 +2553,7 @@ GraniteCave_StevensRoom_EventScript_1A067F:: @ 81A067F
 MtPyre_Summit_EventScript_1A067F:: @ 81A067F
 SlateportCity_OceanicMuseum_2F_EventScript_1A067F:: @ 81A067F
 	bufferitemname 0, VAR_SPECIAL_4
-	playfanfare 372
+	playfanfare BGM_ME_WAZA
 	message FallarborTown_House1_Text_1A1498
 	waitmessage
 	waitfanfare
@@ -2566,7 +2566,7 @@ EverGrandeCity_PhoebesRoom_EventScript_1A0693:: @ 81A0693
 EverGrandeCity_SidneysRoom_EventScript_1A0693:: @ 81A0693
 	applymovement 255, EverGrandeCity_SidneysRoom_Movement_1A0853
 	waitmovement 0
-	playse 8
+	playse SE_DOOR
 	setmetatile 6, 1, 836, 0
 	setmetatile 6, 2, 837, 0
 	setmetatile 0, 2, 734, 1
@@ -2588,7 +2588,7 @@ EverGrandeCity_PhoebesRoom_EventScript_1A0710:: @ 81A0710
 EverGrandeCity_SidneysRoom_EventScript_1A0710:: @ 81A0710
 	applymovement 255, EverGrandeCity_SidneysRoom_Movement_1A0847
 	waitmovement 0
-	playse 52
+	playse SE_TRACK_DOOR
 	setmetatile 5, 12, 518, 1
 	setmetatile 6, 12, 518, 1
 	setmetatile 7, 12, 518, 1
@@ -3742,7 +3742,7 @@ EventScript_1A2DAA:
 
 EventScript_1A2DB8:
 	closemessage
-	playse 9
+	playse SE_KAIDAN
 	setvar VAR_0x4097, 0
 	setflag FLAG_DECORATION_1
 	special sub_80BB8CC
@@ -3762,7 +3762,7 @@ SecretBase_RedCave1_EventScript_1A2DDE:: @ 81A2DDE
 	compare RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A2E08
 	closemessage
-	playse 9
+	playse SE_KAIDAN
 	special sub_80BC440
 	end
 
@@ -3781,7 +3781,7 @@ SecretBase_RedCave1_Movement_1A2E11:: @ 81A2E11
 gUnknown_081A2E14:: @ 81A2E14
 	lockall
 	setvar VAR_0x4097, 1
-	playse 9
+	playse SE_KAIDAN
 	special sub_80BC114
 	compare RESULT, 0
 	goto_if_eq EventScript_1A2E38
@@ -4915,7 +4915,7 @@ S_FallDownHole:: @ 81C6BC5
 	delay 20
 	applymovement 255, GraniteCave_B1F_Movement_1C6BF7
 	waitmovement 0
-	playse 43
+	playse SE_RU_HYUU
 	delay 60
 	warphole MAP_UNDEFINED
 	waitstate
@@ -4926,7 +4926,7 @@ gUnknown_081C6BDE:: @ 81C6BDE
 	delay 20
 	applymovement 255, GraniteCave_B1F_Movement_1C6BF7
 	waitmovement 0
-	playse 43
+	playse SE_RU_HYUU
 	delay 60
 	special sp13F_fall_to_last_warp
 	waitstate

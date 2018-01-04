@@ -16,7 +16,7 @@ PetalburgCity_EventScript_14B731:: @ 814B731
 	return
 
 PetalburgCity_EventScript_14B739:: @ 814B739
-	savebgm 420
+	savebgm BGM_TSURETEK
 	return
 
 PetalburgCity_MapScript2_14B73D:: @ 814B73D
@@ -181,8 +181,8 @@ PetalburgCity_EventScript_14B85A:: @ 814B85A
 PetalburgCity_EventScript_14B866:: @ 814B866
 	applymovement 9, PetalburgCity_Movement_1A0839
 	waitmovement 0
-	playbgm 420, 0
-	playse 21
+	playbgm BGM_TSURETEK, FALSE
+	playse SE_PIN
 	applymovement 9, PetalburgCity_Movement_1A0833
 	waitmovement 0
 	applymovement 9, PetalburgCity_Movement_1A0835

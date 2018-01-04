@@ -72,13 +72,13 @@ LilycoveCity_ContestLobby_EventScript_158948:: @ 8158948
 	special sub_80C4858
 	applymovement 4, LilycoveCity_ContestLobby_Movement_158A4E
 	waitmovement 0
-	playse 21
+	playse SE_PIN
 	applymovement 4, LilycoveCity_ContestLobby_Movement_1A0833
 	waitmovement 0
 	applymovement 4, LilycoveCity_ContestLobby_Movement_158A52
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_188BB5, 4
-	playfanfare 370
+	playfanfare BGM_FANFA4
 	msgbox LilycoveCity_ContestLobby_Text_188C03, 4
 	waitfanfare
 	msgbox LilycoveCity_ContestLobby_Text_188C19, 4
@@ -245,13 +245,13 @@ LilycoveCity_ContestLobby_EventScript_158B18:: @ 8158B18
 	special sub_80C4858
 	applymovement 11, LilycoveCity_ContestLobby_Movement_158B78
 	waitmovement 0
-	playse 21
+	playse SE_PIN
 	applymovement 11, LilycoveCity_ContestLobby_Movement_1A0833
 	waitmovement 0
 	applymovement 11, LilycoveCity_ContestLobby_Movement_158B7C
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_188BB5, 4
-	playfanfare 370
+	playfanfare BGM_FANFA4
 	msgbox LilycoveCity_ContestLobby_Text_188C03, 4
 	waitfanfare
 	msgbox LilycoveCity_ContestLobby_Text_188C19, 4
@@ -496,13 +496,13 @@ LilycoveCity_ContestLobby_EventScript_158E0B:: @ 8158E0B
 	closemessage
 	applymovement 2, LilycoveCity_ContestLobby_Movement_158E9C
 	waitmovement 0
-	playse 71
+	playse SE_HASHI
 	setmetatile 9, 2, 545, 1
 	setmetatile 9, 3, 609, 1
 	special DrawWholeMapView
 	applymovement 2, LilycoveCity_ContestLobby_Movement_158EA0
 	waitmovement 0
-	playse 71
+	playse SE_HASHI
 	setmetatile 9, 2, 721, 1
 	setmetatile 9, 3, 729, 1
 	special DrawWholeMapView
@@ -635,13 +635,13 @@ LilycoveCity_ContestLobby_EventScript_158F86:: @ 8158F86
 	lockall
 	applymovement 1, LilycoveCity_ContestLobby_Movement_15900B
 	waitmovement 0
-	playse 71
+	playse SE_HASHI
 	setmetatile 4, 2, 545, 1
 	setmetatile 4, 3, 609, 1
 	special DrawWholeMapView
 	applymovement 1, LilycoveCity_ContestLobby_Movement_15900F
 	waitmovement 0
-	playse 71
+	playse SE_HASHI
 	setmetatile 4, 2, 721, 1
 	setmetatile 4, 3, 729, 1
 	special DrawWholeMapView

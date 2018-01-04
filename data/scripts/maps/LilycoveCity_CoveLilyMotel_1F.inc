@@ -41,7 +41,7 @@ LilycoveCity_CoveLilyMotel_1F_EventScript_158326:: @ 8158326
 
 LilycoveCity_CoveLilyMotel_1F_EventScript_15834D:: @ 815834D
 	lockall
-	playse 21
+	playse SE_PIN
 	applymovement 1, LilycoveCity_CoveLilyMotel_1F_Movement_1A0833
 	waitmovement 0
 	applymovement 1, LilycoveCity_CoveLilyMotel_1F_Movement_1A0835

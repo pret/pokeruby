@@ -197,7 +197,7 @@ Route113_GlassWorkshop_EventScript_163851:: @ 8163851
 	msgbox Route113_GlassWorkshop_Text_19E827, 4
 	closemessage
 	fadescreen 1
-	playse 5
+	playse SE_SELECT
 	delay 30
 	fadescreen 0
 	msgbox Route113_GlassWorkshop_Text_19E9D7, 4

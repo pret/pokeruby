@@ -31,7 +31,7 @@ MossdeepCity_StevensHouse_EventScript_15AA0B:: @ 815AA0B
 	lockall
 	applymovement 1, MossdeepCity_StevensHouse_Movement_1A083F
 	waitmovement 0
-	playse 21
+	playse SE_PIN
 	applymovement 1, MossdeepCity_StevensHouse_Movement_1A0833
 	waitmovement 0
 	applymovement 1, MossdeepCity_StevensHouse_Movement_1A0835
@@ -79,7 +79,7 @@ MossdeepCity_StevensHouse_EventScript_15AA7C:: @ 815AA7C
 	goto_if_eq MossdeepCity_StevensHouse_EventScript_15AADC
 	copyvar VAR_SPECIAL_4, RESULT
 	removeobject 2
-	playfanfare 370
+	playfanfare BGM_FANFA4
 	message MossdeepCity_StevensHouse_Text_18DD61
 	waitfanfare
 	waitmessage

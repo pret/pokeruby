@@ -222,14 +222,14 @@ Route111_Movement_1501BA:: @ 81501BA
 
 Route111_EventScript_1501BC:: @ 81501BC
 	setweather 2
-	fadenewbgm 360
+	fadenewbgm BGM_DOORO_X1
 	doweather
 	setvar VAR_TEMP_3, 0
 	end
 
 Route111_EventScript_1501C9:: @ 81501C9
 	setweather 8
-	fadenewbgm 409
+	fadenewbgm BGM_ASHROAD
 	doweather
 	end
 

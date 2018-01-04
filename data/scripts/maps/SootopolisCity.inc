@@ -216,7 +216,7 @@ SootopolisCity_EventScript_14D308:: @ 814D308
 	applymovement 10, SootopolisCity_Movement_1A083F
 	applymovement 255, SootopolisCity_Movement_1A0843
 	waitmovement 0
-	playse 21
+	playse SE_PIN
 	applymovement 10, SootopolisCity_Movement_1A0833
 	waitmovement 0
 	applymovement 10, SootopolisCity_Movement_1A0835
@@ -237,7 +237,7 @@ SootopolisCity_EventScript_14D308:: @ 814D308
 	.else
 	msgbox SootopolisCity_Text_169E82, 4
 	.endif
-	playse 21
+	playse SE_PIN
 	applymovement 5, SootopolisCity_Movement_1A0833
 	waitmovement 0
 	applymovement 5, SootopolisCity_Movement_1A0835

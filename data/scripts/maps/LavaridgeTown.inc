@@ -58,11 +58,11 @@ LavaridgeTown_EventScript_14E4ED:: @ 814E4ED
 	end
 
 LavaridgeTown_EventScript_14E56B:: @ 814E56B
-	playbgm 415, 1
+	playbgm BGM_GIRL_SUP, TRUE
 	return
 
 LavaridgeTown_EventScript_14E570:: @ 814E570
-	playbgm 421, 1
+	playbgm BGM_BOY_SUP, TRUE
 	return
 
 LavaridgeTown_EventScript_14E575:: @ 814E575
@@ -282,7 +282,7 @@ LavaridgeTown_EventScript_14E75A:: @ 814E75A
 	goto_if_eq LavaridgeTown_EventScript_14E7A8
 	msgbox LavaridgeTown_Text_16C2B6, 4
 	setflag FLAG_RECEIVED_LAVARIDGE_EGG
-	playfanfare 370
+	playfanfare BGM_FANFA4
 	message LavaridgeTown_Text_16C2EA
 	waitfanfare
 	waitmessage

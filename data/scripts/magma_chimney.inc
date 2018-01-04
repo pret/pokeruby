@@ -37,7 +37,7 @@ MtChimney_EventScript_1B2CCB:: @ 81B2CCB
 	.endif
 	applymovement 2, MtChimney_Movement_1A0839
 	waitmovement 0
-	playse 21
+	playse SE_PIN
 	applymovement 2, MtChimney_Movement_1A0833
 	waitmovement 0
 	applymovement 2, MtChimney_Movement_1A0835

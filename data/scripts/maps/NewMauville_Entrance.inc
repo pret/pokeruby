@@ -40,7 +40,7 @@ NewMauville_Entrance_EventScript_15E4DC:: @ 815E4DC
 	setmetatile 4, 1, 716, 0
 	setmetatile 5, 1, 717, 1
 	special DrawWholeMapView
-	playse 20
+	playse SE_BAN
 	setvar VAR_NEW_MAUVILLE_STATE, 1
 	releaseall
 	end

@@ -90,7 +90,7 @@ LittlerootTown_MaysHouse_1F_EventScript_152971:: @ 8152971
 
 LittlerootTown_MaysHouse_1F_EventScript_152982:: @ 8152982
 	lockall
-	playse 21
+	playse SE_PIN
 	applymovement 4, LittlerootTown_MaysHouse_1F_Movement_1A0833
 	waitmovement 0
 	applymovement 4, LittlerootTown_MaysHouse_1F_Movement_1A0835

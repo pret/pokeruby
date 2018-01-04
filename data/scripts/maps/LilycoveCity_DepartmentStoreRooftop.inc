@@ -147,7 +147,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A267:: @ 815A267
 	updatemoneybox 0, 0
 	nop
 	bufferitemname 0, VAR_TEMP_0
-	playse 106
+	playse SE_JIHANKI
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_18C75F, 4
 	giveitem VAR_TEMP_0, 1
 	bufferitemname 1, VAR_TEMP_0
@@ -159,7 +159,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A267:: @ 815A267
 	checkitemspace VAR_TEMP_0, 1
 	compare RESULT, 0
 	goto_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_15A388
-	playse 106
+	playse SE_JIHANKI
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_18C780, 4
 	giveitem VAR_TEMP_0, 1
 	bufferitemname 1, VAR_TEMP_0
@@ -171,7 +171,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A267:: @ 815A267
 	checkitemspace VAR_TEMP_0, 1
 	compare RESULT, 0
 	goto_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_15A388
-	playse 106
+	playse SE_JIHANKI
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_18C780, 4
 	giveitem VAR_TEMP_0, 1
 	bufferitemname 1, VAR_TEMP_0

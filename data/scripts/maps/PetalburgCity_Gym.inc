@@ -84,7 +84,7 @@ PetalburgCity_Gym_EventScript_15456C:: @ 815456C
 	applymovement 255, PetalburgCity_Gym_Movement_1A0845
 	applymovement 10, PetalburgCity_Gym_Movement_1545B4
 	waitmovement 0
-	playse 9
+	playse SE_KAIDAN
 	removeobject 10
 	setflag FLAG_HIDE_WALLY_PETALBURG
 	delay 30
@@ -143,7 +143,7 @@ PetalburgCity_Gym_EventScript_15465E:: @ 815465E
 
 PetalburgCity_Gym_EventScript_154669:: @ 8154669
 	addobject 10
-	playse 8
+	playse SE_DOOR
 	compare VAR_SPECIAL_8, 0
 	call_if 1, PetalburgCity_Gym_EventScript_1547EE
 	compare VAR_SPECIAL_8, 1
@@ -195,7 +195,7 @@ PetalburgCity_Gym_EventScript_154669:: @ 8154669
 	msgbox PetalburgCity_Gym_Text_17A171, 4
 	closemessage
 	setflag FLAG_SPECIAL_FLAG_1
-	playbgm 420, 0
+	playbgm BGM_TSURETEK, FALSE
 	compare VAR_SPECIAL_8, 0
 	call_if 1, PetalburgCity_Gym_EventScript_154835
 	compare VAR_SPECIAL_8, 1

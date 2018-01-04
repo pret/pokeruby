@@ -54,7 +54,7 @@ BattleTower_BattleRoom_EventScript_160961:: @ 8160961
 	special LoadPlayerParty
 	special SavePlayerParty
 	special SetBattleTowerParty
-	playfanfare 368
+	playfanfare BGM_ME_ASA
 	waitfanfare
 	special ScrSpecial_HealPlayerParty
 
@@ -110,7 +110,7 @@ BattleTower_BattleRoom_EventScript_160A94:: @ 8160A94
 	message BattleTower_BattleRoom_Text_1C6CE1
 	delay 60
 	waitmessage
-	playse 55
+	playse SE_SAVE
 	waitse
 	msgbox BattleTower_BattleRoom_Text_1C6D05, 4
 

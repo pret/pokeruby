@@ -255,7 +255,7 @@ LilycoveCity_EventScript_14CD46:: @ 814CD46
 	end
 
 LilycoveCity_EventScript_14CD60:: @ 814CD60
-	playbgm 415, 1
+	playbgm BGM_GIRL_SUP, TRUE
 	checkflag FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE
 	call_if 1, LilycoveCity_EventScript_14CDB0
 	checkflag FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE
@@ -286,7 +286,7 @@ LilycoveCity_EventScript_14CDC2:: @ 814CDC2
 	end
 
 LilycoveCity_EventScript_14CDD3:: @ 814CDD3
-	playbgm 421, 1
+	playbgm BGM_BOY_SUP, TRUE
 	checkflag FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE
 	call_if 1, LilycoveCity_EventScript_14CE23
 	checkflag FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE

@@ -25,7 +25,7 @@ LilycoveCity_DepartmentStore_1F_EventScript_159D5E:: @ 8159D5E
 	msgbox LilycoveCity_DepartmentStore_1F_Text_1C4CF6, 4
 	applymovement 2, LilycoveCity_DepartmentStore_1F_Movement_1A0843
 	waitmovement 0
-	playse 4
+	playse SE_PC_ON
 	special DoLotteryCornerComputerEffect
 	special PickLotteryCornerTicket
 	delay 220

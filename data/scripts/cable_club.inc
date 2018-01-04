@@ -136,7 +136,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A3E30:: @ 81A3E30
 	waitmovement 0
 	message OldaleTown_PokemonCenter_2F_Text_1A4E50
 	waitmessage
-	playse 21
+	playse SE_PIN
 	message OldaleTown_PokemonCenter_2F_Text_1A4E79
 	waitmessage
 	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_1A4358

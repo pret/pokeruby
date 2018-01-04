@@ -31,7 +31,7 @@ NewMauville_Inside_EventScript_15E5AA:: @ 815E5AA
 	lockall
 	setvar VAR_TEMP_1, 1
 	setvar VAR_TEMP_2, 0
-	playse 21
+	playse SE_PIN
 	call NewMauville_Inside_EventScript_15E5DA
 	special DrawWholeMapView
 	releaseall
@@ -41,7 +41,7 @@ NewMauville_Inside_EventScript_15E5C2:: @ 815E5C2
 	lockall
 	setvar VAR_TEMP_1, 0
 	setvar VAR_TEMP_2, 1
-	playse 21
+	playse SE_PIN
 	call NewMauville_Inside_EventScript_15E728
 	special DrawWholeMapView
 	releaseall

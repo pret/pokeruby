@@ -95,7 +95,7 @@ MauvilleCity_EventScript_14C0F9:: @ 814C0F9
 	msgbox MauvilleCity_Text_165D01, 4
 	applymovement 6, MauvilleCity_Movement_1A0839
 	waitmovement 0
-	playse 21
+	playse SE_PIN
 	applymovement 6, MauvilleCity_Movement_1A0833
 	waitmovement 0
 	applymovement 6, MauvilleCity_Movement_1A0835

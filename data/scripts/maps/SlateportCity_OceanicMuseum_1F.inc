@@ -158,7 +158,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_155C3A:: @ 8155C3A
 	lock
 	faceplayer
 	delay 8
-	playse 21
+	playse SE_PIN
 	applymovement 13, SlateportCity_OceanicMuseum_1F_Movement_1A0833
 	waitmovement 0
 	applymovement 13, SlateportCity_OceanicMuseum_1F_Movement_1A0835
@@ -180,7 +180,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_155C98:: @ 8155C98
 	applymovement 13, SlateportCity_OceanicMuseum_1F_Movement_155CD3
 	waitmovement 0
 	setflag FLAG_HIDE_SCARED_GRUNT_OCEANIC_MUSEUM
-	playse 9
+	playse SE_KAIDAN
 	removeobject 13
 	release
 	end
@@ -189,7 +189,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_155CAD:: @ 8155CAD
 	applymovement 13, SlateportCity_OceanicMuseum_1F_Movement_155CCC
 	waitmovement 0
 	setflag FLAG_HIDE_SCARED_GRUNT_OCEANIC_MUSEUM
-	playse 9
+	playse SE_KAIDAN
 	removeobject 13
 	release
 	end
