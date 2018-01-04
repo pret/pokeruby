@@ -9,53 +9,6 @@
 	.section .rodata
 
 	.align 2
-gUnknown_083DBCC4:: @ 83DBCC4
-	.byte  1,  3,  5,  8, 10, 12, 15
-	.byte  1,  3,  5,  8, 10, 12,  0
-	.byte  1,  3,  5,  8, 10, 12, 14
-	.byte  1,  3,  5,  8, 10, 12, 14
-
-	.align 2
-gOamData_83DBCE0:: @ 83DBCE0
-	.2byte 0x0000
-	.2byte 0x4000
-	.2byte 0x0400
-
-	.align 2
-gSpriteAnim_83DBCE8:: @ 83DBCE8
-	obj_image_anim_frame 0, 5
-	obj_image_anim_end
-
-	.align 2
-gSpriteAnim_83DBCF0:: @ 83DBCF0
-	obj_image_anim_frame 4, 5
-	obj_image_anim_end
-
-	.align 2
-gSpriteAnimTable_83DBCF8:: @ 83DBCF8
-	.4byte gSpriteAnim_83DBCE8
-	.4byte gSpriteAnim_83DBCF0
-
-	.align 2
-gSpriteAnim_83DBD00:: @ 83DBD00
-	obj_image_anim_frame 0, 5
-	obj_image_anim_end
-
-	.align 2
-gSpriteAnim_83DBD08:: @ 83DBD08
-	obj_image_anim_frame 4, 5
-	obj_image_anim_end
-
-	.align 2
-gSpriteAnimTable_83DBD10:: @ 83DBD10
-	.4byte gSpriteAnim_83DBD00
-	.4byte gSpriteAnim_83DBD08
-
-	.align 2
-gSpriteTemplate_83DBD18:: @ 83DBD18
-	spr_template 2, 0, gOamData_83DBCE0, gSpriteAnimTable_83DBCF8, NULL, gDummySpriteAffineAnimTable, sub_80E8B78
-
-	.align 2
 gUnknown_083DBD30:: @ 83DBD30
 	obj_tiles gMenuInterviewFrame_Gfx, 2048, 0x0006
 

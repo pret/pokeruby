@@ -37,7 +37,10 @@ struct Shared1000
     struct Sprite *unk9C;
     struct Sprite *unkA0;
     struct Sprite *unkA4;
-    u8 fillerA8[0x1A8-0xA8];
+    struct Sprite *unkA8;
+    struct Sprite *unkAC[2];
+    struct Sprite *unkB4[2];
+    u8 fillerBC[0x1A8-0xBC];
     s8 unk1A8;
     s8 unk1A9;
     s8 unk1AA[0xB5-0xAA];  // unknown length
@@ -67,9 +70,12 @@ struct Shared1000
     s8 unk99A6[0xA28-0x9A6];
     s8 unk9A28;
     s8 unk9A29;
-    //u8 filler9A2A[0xC7C-0xA2A];
-    u16 unk9A2A[0x94][2];  // unknown length
-    u8 filler9C7A[2];
+    u16 unk9A2A[0x90][2];  // unknown length
+    u8 filler9C6A[2];
+    s8 *unk9C6C;
+    u8 unk9C70;
+    s8 unk9C71;
+    u8 filler9C72[0xC-0x2];
     u16 unk9C7C;  // this is at 0x9FA8 in German
     s16 unk9C7E;
     u8 unk9C80[0xC9-0x80];
