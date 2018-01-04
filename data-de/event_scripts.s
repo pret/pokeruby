@@ -8,6 +8,7 @@
 #include "constants/opponents.h"
 #include "constants/songs.h"
 #include "constants/species.h"
+#include "constants/weather.h"
 #include "constants/vars.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
@@ -2096,9 +2097,9 @@ Route127_EventScript_1A02C1:: @ 81A02C1
 Route128_EventScript_1A02C1:: @ 81A02C1
 SootopolisCity_EventScript_1A02C1:: @ 81A02C1
 	.ifdef SAPPHIRE
-	setweather 13
+	setweather WEATHER_RAIN_HEAVY
 	.else
-	setweather 12
+	setweather WEATHER_DROUGHT
 	.endif
 	return
 

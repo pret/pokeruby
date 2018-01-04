@@ -33,7 +33,7 @@ CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 	msgbox CaveOfOrigin_B4F_Text_1B4FE4, 4
 	.endif
 	closemessage
-	setweather 0
+	setweather WEATHER_NONE
 	doweather
 	special WaitWeather
 	waitstate

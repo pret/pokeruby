@@ -62,7 +62,7 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	.else
 	msgbox SeafloorCavern_Room9_Text_1B49C1, 4
 	.endif
-	setweather 0
+	setweather WEATHER_NONE
 	doweather
 	special sub_8081924
 	waitstate

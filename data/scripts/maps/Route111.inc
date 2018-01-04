@@ -34,7 +34,7 @@ Route111_EventScript_14FFCD:: @ 814FFCD
 	goto_if 0, Route111_EventScript_15000C
 
 Route111_EventScript_150009:: @ 8150009
-	setweather 8
+	setweather WEATHER_SANDSTORM
 
 Route111_EventScript_15000C:: @ 815000C
 	return
@@ -221,14 +221,14 @@ Route111_Movement_1501BA:: @ 81501BA
 	step_end
 
 Route111_EventScript_1501BC:: @ 81501BC
-	setweather 2
+	setweather WEATHER_SUNNY
 	fadenewbgm BGM_DOORO_X1
 	doweather
 	setvar VAR_TEMP_3, 0
 	end
 
 Route111_EventScript_1501C9:: @ 81501C9
-	setweather 8
+	setweather WEATHER_SANDSTORM
 	fadenewbgm BGM_ASHROAD
 	doweather
 	end

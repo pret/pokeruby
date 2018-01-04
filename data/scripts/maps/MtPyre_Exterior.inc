@@ -13,15 +13,15 @@ MtPyre_Exterior_EventScript_15D492:: @ 815D492
 	return
 
 MtPyre_Exterior_EventScript_15D4A3:: @ 815D4A3
-	setweather 6
+	setweather WEATHER_FOG_1
 	return
 
 MtPyre_Exterior_EventScript_15D4A7:: @ 815D4A7
-	setweather 6
+	setweather WEATHER_FOG_1
 	doweather
 	end
 
 MtPyre_Exterior_EventScript_15D4AC:: @ 815D4AC
-	setweather 2
+	setweather WEATHER_SUNNY
 	doweather
 	end
