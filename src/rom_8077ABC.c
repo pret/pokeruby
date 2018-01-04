@@ -698,7 +698,7 @@ void oamt_add_pos2_onto_pos1(struct Sprite *sprite) {
     sprite->pos2.y = 0;
 }
 
-void sub_8078764(struct Sprite *sprite, u8 a2) {
+void sub_8078764(struct Sprite *sprite, bool8 a2) {
     if (!a2) {
         sprite->pos1.x = sub_8077EE4(gAnimBankTarget, 0);
         sprite->pos1.y = sub_8077EE4(gAnimBankTarget, 1);
@@ -1841,7 +1841,7 @@ int sub_807A100(u8 slot, u8 a2) {
     }
 }
 
-void sub_807A3FC(u8 slot, u8 a2, s16 *a3, s16 *a4) {
+void sub_807A3FC(u8 slot, bool8 a2, s16 *a3, s16 *a4) {
     u8 v1, v2;
     s16 v3, v4;
     s16 v5, v6;

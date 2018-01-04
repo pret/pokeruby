@@ -290,7 +290,7 @@ SECTIONS {
         asm/current.o(.text);
         asm/ice.o(.text);
         asm/fight.o(.text);
-        asm/poison.o(.text);
+        src/battle/anim/poison.o(.text);
         asm/flying.o(.text);
         asm/psychic.o(.text);
         asm/bug.o(.text);
