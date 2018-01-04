@@ -9,7 +9,7 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 extern struct SpriteTemplate gSpriteTemplate_83D96C4;
-extern s16 gUnknown_083D96DC[7][2]; // x,y coords for heated rocks of Move_ERUPTION 
+extern s16 gHeatedRockCoords[7][2];
 
 void sub_80D5254(struct Sprite *);
 void sub_80D5348(struct Sprite *);
@@ -181,7 +181,7 @@ void sub_80D54E0(u8 taskId) { // animate Move_ERUPTION?
             }
             break;
         case 3:
-            if (!sub_8079C74(task) << 24) {
+            if (!sub_8079C74(task)) {
                 sub_80D57C4(task->data[15], taskId, 6);
                 task->data[0]++;
             }
@@ -236,7 +236,7 @@ void sub_80D57C4(u8 spriteId, u8 taskId, u8 a3) {
     u16 y = sub_80D5940(spriteId);
     u16 x = gSprites[spriteId].pos1.x;
     s8 sign;
-    if(!GetBankSide(gAnimBankAttacker) << 24) {
+    if(!GetBankSide(gAnimBankAttacker)) {
         x -= 0xC;
         sign = 1;
     } else {
@@ -250,7 +250,7 @@ void sub_80D57C4(u8 spriteId, u8 taskId, u8 a3) {
             if (++j >= 5) {
                 j = 0;
             }
-            sub_80D5994(&gSprites[spriteId], gUnknown_083D96DC[i][0] * sign, gUnknown_083D96DC[i][1]);
+            sub_80D5994(&gSprites[spriteId], gHeatedRockCoords[i][0] * sign, gHeatedRockCoords[i][1]);
             gSprites[spriteId].data[6] = taskId;
             gSprites[spriteId].data[7] = a3;
             gTasks[taskId].data[a3]++;
