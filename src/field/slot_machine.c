@@ -20,7 +20,7 @@
 struct UnkStruct1 {
     /*0x00*/ u8 unk00;
     /*0x01*/ u8 unk01;
-    /*0x02*/ s16 pikaPower;
+    /*0x02*/ s16 unk02;
 };
 
 #if ENGLISH
@@ -139,7 +139,7 @@ static void sub_8103F70(void);
 static bool8 sub_8103FA0(void);
 static void sub_8103FE8(u8 taskId);
 static void sub_8104048(void);
-static void sub_8104064(u8 unused);
+static void sub_8104064(u8 pikaPower);
 static bool8 sub_81040C8(void);
 static void sub_81040E8(u8 taskId);
 static void nullsub_68(struct Task *task);
@@ -147,7 +147,7 @@ static void sub_810411C(struct Task *task);
 static void sub_8104144(struct Task *task);
 static void sub_81041AC(struct Task *task);
 static void sub_810421C(struct Task *task);
-static void sub_810423C(u8 a0);
+static void sub_810423C(u8 pikaPower);
 static void sub_810430C(void);
 static bool8 sub_810432C(void);
 static void sub_810434C(u8 taskId);
@@ -2262,7 +2262,7 @@ static void sub_8104048(void)
     eSlotMachine->unk3E = CreateTask(sub_81040E8, 8);
 }
 
-static void sub_8104064(u8 unused)
+static void sub_8104064(u8 pikaPower)
 {
     struct Task *task = gTasks + eSlotMachine->unk3E;
     sub_810421C(task);
@@ -2362,13 +2362,13 @@ static void sub_810421C(struct Task *task)
         task->data[i] = 0;
 }
 
-static void sub_810423C(u8 a0)
+static void sub_810423C(u8 pikaPower)
 {
     s16 i;
     u8 r3;
     s16 r2 = 3;
     u16 *vaddr = (u16 *)BG_SCREEN_ADDR(29);
-    for (i = 0; i < a0; i++, r2++)
+    for (i = 0; i < pikaPower; i++, r2++)
     {
         r3 = 0;
         if (i == 0)
@@ -2386,7 +2386,7 @@ static void sub_810423C(u8 a0)
             r3 = 2;
         vaddr[r2 + 0x40] = gUnknown_083ECBC4[r3][1];
     }
-    gTasks[eSlotMachine->unk3E].data[1] = a0;
+    gTasks[eSlotMachine->unk3E].data[1] = pikaPower;
 }
 
 static void sub_810430C(void)
@@ -2869,7 +2869,7 @@ static void sub_8104CAC(u8 arg0) {
         spriteId = sub_8105BB4(
                 gUnknown_083ED048[arg0][i].unk00,
                 gUnknown_083ED048[arg0][i].unk01,
-                gUnknown_083ED048[arg0][i].pikaPower
+                gUnknown_083ED048[arg0][i].unk02
         );
         task->data[4 + i] = spriteId;
 
