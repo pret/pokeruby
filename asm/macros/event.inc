@@ -231,8 +231,8 @@
 	.macro compare arg1, arg2
 		.if ((\arg1 >> 12) == 4 || (\arg1 >> 12) == 8) && ((\arg2 >> 12) == 4 || (\arg2 >> 12) == 8)
 			compare_var_to_var \arg1, \arg2
-		.elseif ((\arg1 >> 12) == 4 || (\arg1 >> 12) == 8) && (\arg2 >= 0 && \arg2 <= 0xFFFF)
-			compare_var_to_value \arg1, \arg2
+		.elseif ((\arg1 >> 12) == 4 || (\arg1 >> 12) == 8) && (\arg2 >= -0xFFFF && \arg2 <= 0xFFFF)
+			compare_var_to_value \arg1, (\arg2 & 0xFFFF)
 		.else
 			.error "Invalid arguments for 'compare'"
 		.endif

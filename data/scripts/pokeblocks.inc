@@ -54,9 +54,9 @@ FallarborTown_ContestLobby_EventScript_1B76A1:: @ 81B76A1
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B770E
 	msgbox FallarborTown_ContestLobby_Text_1B6E9D, 4
 	specialvar RESULT, GetFirstFreePokeblockSlot
-	compare RESULT, 65535
+	compare RESULT, -1
 	goto_if 5, FallarborTown_ContestLobby_EventScript_1B76EF
-	compare RESULT, 65535
+	compare RESULT, -1
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7776
 	end
 
@@ -215,9 +215,9 @@ VerdanturfTown_ContestLobby_EventScript_1B783B:: @ 81B783B
 	compare RESULT, 0
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7942
 	specialvar RESULT, GetFirstFreePokeblockSlot
-	compare RESULT, 65535
+	compare RESULT, -1
 	goto_if 5, FallarborTown_ContestLobby_EventScript_1B7878
-	compare RESULT, 65535
+	compare RESULT, -1
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7938
 	end
 

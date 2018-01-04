@@ -475,7 +475,7 @@ LilycoveCity_ContestLobby_EventScript_158DD1:: @ 8158DD1
 	buffernumberstring 1, 32772
 	messageautoscroll LilycoveCity_ContestLobby_Text_188845
 	waitmessage
-	addvar VAR_SPECIAL_4, 65535
+	addvar VAR_SPECIAL_4, -1
 	goto LilycoveCity_ContestLobby_EventScript_158DEE
 	end
 
