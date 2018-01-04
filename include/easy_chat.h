@@ -10,7 +10,7 @@ struct Shared1000
     u8 unk8;
     u8 unk9;
     u8 unkA;
-    u8 unkB;
+    u8 unkB;  // reporter talked to (Gabby or Ty)
     u16 unkC[(0x20-0xC)/2];   // unknown length
     void (*unk20)(void);
     u16 unk24;
@@ -40,7 +40,8 @@ struct Shared1000
     struct Sprite *unkA8;
     struct Sprite *unkAC[2];
     struct Sprite *unkB4[2];
-    u8 fillerBC[0x1A8-0xBC];
+    u8 unkBC;
+    u8 fillerBD[0x1A8-0xBD];
     s8 unk1A8;
     s8 unk1A9;
     s8 unk1AA[0xB5-0xAA];  // unknown length
@@ -56,7 +57,8 @@ struct Shared1000
     s8 unk1C0;
     u8 filler1C1[3];
     void (*unk1C4)(void);
-    u8 filler1C8[0x4142-0x1C8];
+    u8 unk1C8[0x6C8-0x1C8];
+    u8 unk6C8[0x4142-0x6C8];
 #if GERMAN
     u8 filler4142_de[0x32A];
 #endif
@@ -70,12 +72,17 @@ struct Shared1000
     s8 unk99A6[0xA28-0x9A6];
     s8 unk9A28;
     s8 unk9A29;
-    u16 unk9A2A[0x90][2];  // unknown length
+    u16 unk9A2A[(0x9C32-0x9A2A)/4][2];  // unknown length
+    u8 unk9C32;
+    u8 filler9C33;
+    u16 unk9C34[3][9];
     u8 filler9C6A[2];
     s8 *unk9C6C;
     u8 unk9C70;
     s8 unk9C71;
-    u8 filler9C72[0xC-0x2];
+    u8 filler9C72[2];
+    struct Sprite *unk9C74;
+    u8 filler9C78[4];
     u16 unk9C7C;  // this is at 0x9FA8 in German
     s16 unk9C7E;
     u8 unk9C80[0xC9-0x80];
@@ -88,7 +95,13 @@ struct Shared1000
     u8 unk9E41[0x6E - 0x41];
     u8 unk9E6E[0xEE - 0x6E];
     u8 unk9EEE[0xF6E - 0xEEE];
-    u8 unk9F6E[1];  // unknown length
+    u8 unk9F6E[0x8E - 0x6E];  // unknown length
+    u8 unk9F8E[1];  // unknown length
+    /*
+    u8 unk9F8F;
+    u8 unk9F90;
+    u8 unk9F91[1];  // unknown length
+    */
 };
 
 #define static_assert(cond) \
@@ -97,6 +110,7 @@ struct Shared1000
 //static_assert(offsetof(struct Shared1000, unk1A8) == 0x1A8);
 
 extern u8 gUnknown_020388AC;
+extern u8 gUnknown_03000740;
 
 // const pointer to shared1000. easy_chat might be two separate files.
 extern struct Shared1000 *const gUnknown_083DB694;

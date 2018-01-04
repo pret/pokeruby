@@ -2656,6 +2656,37 @@ extern const u8 gNamingScreenRightPointingTriangleTiles[];
 extern const u8 gNamingScreenUnderscoreTiles[];
 extern const u16 gNamingScreenPalettes[][16];
 
+extern const u8 gUnknown_08E94510[];
+extern const u8 gUnknown_08E94550[];
+extern const u8 gUnknown_08E94590[];
+extern const u8 gUnknown_08E945D0[];
+extern const u8 gUnknown_08E94AD0[];
+extern const u8 gUnknown_08E953D0[];
+extern const u8 gUnknown_08E954B0[];
+extern const u8 gUnknown_08E95774[];
+
+extern const u8 gMenuWordGroupIndicator_Gfx[];
+extern const u8 gMenuWordGroupFrame_Gfx[];
+extern const u16 gMenuWordGroupIndicator_Pal[];
+extern const u16 gMenuWordGroupFrame1_Pal[];
+extern const u16 gMenuWordGroupFrame2_Pal[];
+
+extern const u8 gUnknown_08E99FB0[];
+extern const u8 gUnknown_08E9A100[];
+extern const u8 gUnknown_08E9A300[];
+extern const u8 gUnknown_08E9AB00[];
+extern const u8 gUnknown_08E9AB40[];
+extern const u8 gUnknown_08E9AB60[];
+extern const u8 gUnknown_08E9ABB4[];
+extern const u8 gUnknown_08E9AC2C[];
+extern const u8 gUnknown_08E9AC4C[];
+
 extern const u8 gInterviewOutlineCursorTiles[];
+extern const u8 gTitleScreenPressStart_Gfx[];
+extern const u16 gTitleScreenLogoShinePalette[];
+extern const u8 gUnknown_08E9D8CC[];
+extern const u8 gVersionTiles[];
+extern const u16 gUnknown_08E9F624[];
+extern const u8 gUnknown_08E9F7E4[];
 
 #endif  // GUARD_GRAPHICS_H
