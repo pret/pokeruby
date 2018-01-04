@@ -9,14 +9,22 @@
 #include "task.h"
 #include "util.h"
 
+static bool8 CheckTrainer(u8);
+static void sub_8084894(struct Sprite *sprite, u16 a2, u8 a3);
+static void objc_exclamation_mark_probably(struct Sprite *sprite);
+static bool8 TrainerCanApproachPlayer(struct MapObject *);
+static void sub_80842C8(struct MapObject *, u8);
+static bool8 CheckPathBetweenTrainerAndPlayer(struct MapObject *trainerObj, u8 approachDistance, u8 direction);
+static void RunTrainerSeeFuncList(u8 taskId);
+
 const u8 gSpriteImage_839B308[] = INCBIN_U8("graphics/unknown_sprites/839B4E0/0.4bpp");
 const u8 gSpriteImage_839B388[] = INCBIN_U8("graphics/unknown_sprites/839B4E0/1.4bpp");
 const u8 gSpriteImage_839B408[] = INCBIN_U8("graphics/unknown_sprites/839B408.4bpp");
 
-u8 GetTrainerApproachDistanceSouth(struct MapObject *trainerObj, s16 range, s16 x, s16 y);
-u8 GetTrainerApproachDistanceNorth(struct MapObject *trainerObj, s16 range, s16 x, s16 y);
-u8 GetTrainerApproachDistanceWest(struct MapObject *trainerObj, s16 range, s16 x, s16 y);
-u8 GetTrainerApproachDistanceEast(struct MapObject *trainerObj, s16 range, s16 x, s16 y);
+static u8 GetTrainerApproachDistanceSouth(struct MapObject *trainerObj, s16 range, s16 x, s16 y);
+static u8 GetTrainerApproachDistanceNorth(struct MapObject *trainerObj, s16 range, s16 x, s16 y);
+static u8 GetTrainerApproachDistanceWest(struct MapObject *trainerObj, s16 range, s16 x, s16 y);
+static u8 GetTrainerApproachDistanceEast(struct MapObject *trainerObj, s16 range, s16 x, s16 y);
 
 static u8 (*const sDirectionalApproachDistanceFuncs[])(struct MapObject *, s16, s16, s16) =
 {
@@ -25,9 +33,6 @@ static u8 (*const sDirectionalApproachDistanceFuncs[])(struct MapObject *, s16, 
     GetTrainerApproachDistanceWest,
     GetTrainerApproachDistanceEast,
 };
-
-extern struct SpriteTemplate gSpriteTemplate_839B510;
-extern struct SpriteTemplate gSpriteTemplate_839B528;
 
 bool8 CheckTrainers(void)
 {
@@ -43,7 +48,7 @@ bool8 CheckTrainers(void)
     return FALSE;
 }
 
-bool8 CheckTrainer(u8 mapObjId)
+static bool8 CheckTrainer(u8 mapObjId)
 {
     u8 *scriptPtr = GetFieldObjectScriptPointerByFieldObjectId(mapObjId);
 
@@ -69,7 +74,7 @@ bool8 CheckTrainer(u8 mapObjId)
     }
 }
 
-bool8 TrainerCanApproachPlayer(struct MapObject *trainerObj)
+static bool8 TrainerCanApproachPlayer(struct MapObject *trainerObj)
 {
     s16 x, y;
     u8 i;
@@ -79,14 +84,14 @@ bool8 TrainerCanApproachPlayer(struct MapObject *trainerObj)
     if (trainerObj->trainerType == 1)  // can only see in one direction
     {
         approachDistance = sDirectionalApproachDistanceFuncs[trainerObj->mapobj_unk_18 - 1](trainerObj, trainerObj->trainerRange_berryTreeId, x, y);
-        return CheckPathBetweenTrainerAndPlayer((struct MapObject2 *)trainerObj, approachDistance, trainerObj->mapobj_unk_18);
+        return CheckPathBetweenTrainerAndPlayer(trainerObj, approachDistance, trainerObj->mapobj_unk_18);
     }
     else  // can see in all directions
     {
         for (i = 0; i < 4; i++)
         {
             approachDistance = sDirectionalApproachDistanceFuncs[i](trainerObj, trainerObj->trainerRange_berryTreeId, x, y);
-            if (CheckPathBetweenTrainerAndPlayer((struct MapObject2 *)trainerObj, approachDistance, i + 1)) // directions are 1-4 instead of 0-3. south north west east
+            if (CheckPathBetweenTrainerAndPlayer(trainerObj, approachDistance, i + 1)) // directions are 1-4 instead of 0-3. south north west east
                 return approachDistance;
         }
     }
@@ -94,7 +99,7 @@ bool8 TrainerCanApproachPlayer(struct MapObject *trainerObj)
 }
 
 // Returns how far south the player is from trainer. 0 if out of trainer's sight.
-u8 GetTrainerApproachDistanceSouth(struct MapObject *trainerObj, s16 range, s16 x, s16 y)
+static u8 GetTrainerApproachDistanceSouth(struct MapObject *trainerObj, s16 range, s16 x, s16 y)
 {
     if (trainerObj->coords2.x == x
      && y > trainerObj->coords2.y
@@ -105,7 +110,7 @@ u8 GetTrainerApproachDistanceSouth(struct MapObject *trainerObj, s16 range, s16 
 }
 
 // Returns how far north the player is from trainer. 0 if out of trainer's sight.
-u8 GetTrainerApproachDistanceNorth(struct MapObject *trainerObj, s16 range, s16 x, s16 y)
+static u8 GetTrainerApproachDistanceNorth(struct MapObject *trainerObj, s16 range, s16 x, s16 y)
 {
     if (trainerObj->coords2.x == x
      && y < trainerObj->coords2.y
@@ -116,7 +121,7 @@ u8 GetTrainerApproachDistanceNorth(struct MapObject *trainerObj, s16 range, s16 
 }
 
 // Returns how far west the player is from trainer. 0 if out of trainer's sight.
-u8 GetTrainerApproachDistanceWest(struct MapObject *trainerObj, s16 range, s16 x, s16 y)
+static u8 GetTrainerApproachDistanceWest(struct MapObject *trainerObj, s16 range, s16 x, s16 y)
 {
     if (trainerObj->coords2.y == y
      && x < trainerObj->coords2.x
@@ -127,7 +132,7 @@ u8 GetTrainerApproachDistanceWest(struct MapObject *trainerObj, s16 range, s16 x
 }
 
 // Returns how far east the player is from trainer. 0 if out of trainer's sight.
-u8 GetTrainerApproachDistanceEast(struct MapObject *trainerObj, s16 range, s16 x, s16 y)
+static u8 GetTrainerApproachDistanceEast(struct MapObject *trainerObj, s16 range, s16 x, s16 y)
 {
     if (trainerObj->coords2.y == y
      && x > trainerObj->coords2.x
@@ -143,7 +148,7 @@ u8 GetTrainerApproachDistanceEast(struct MapObject *trainerObj, s16 range, s16 x
 #define COLLISION_MASK 1
 #endif
 
-bool8 CheckPathBetweenTrainerAndPlayer(struct MapObject2 *trainerObj, u8 approachDistance, u8 direction)
+static bool8 CheckPathBetweenTrainerAndPlayer(struct MapObject *trainerObj, u8 approachDistance, u8 direction)
 {
     s16 x, y;
     u8 unk19_temp;
@@ -159,21 +164,21 @@ bool8 CheckPathBetweenTrainerAndPlayer(struct MapObject2 *trainerObj, u8 approac
 
     for (i = 0; i <= approachDistance - 1; i++, MoveCoords(direction, &x, &y))
     {
-        collision = sub_8060024((struct MapObject *)trainerObj, x, y, direction);
+        collision = sub_8060024(trainerObj, x, y, direction);
         if (collision != 0 && (collision & COLLISION_MASK))
             return FALSE;
     }
 
     // preserve mapobj_unk_19 before clearing.
-    unk19_temp = trainerObj->mapobj_unk_19;
-    unk19b_temp = trainerObj->mapobj_unk_19b;
-    trainerObj->mapobj_unk_19 = 0;
-    trainerObj->mapobj_unk_19b = 0;
+    unk19_temp = trainerObj->range.as_nybbles.x;
+    unk19b_temp = trainerObj->range.as_nybbles.y;
+    trainerObj->range.as_nybbles.x = 0;
+    trainerObj->range.as_nybbles.y = 0;
 
     collision = npc_block_way((struct MapObject *)trainerObj, x, y, direction);
 
-    trainerObj->mapobj_unk_19 = unk19_temp;
-    trainerObj->mapobj_unk_19b = unk19b_temp;
+    trainerObj->range.as_nybbles.x = unk19_temp;
+    trainerObj->range.as_nybbles.y = unk19b_temp;
     if (collision == 4)
         return approachDistance;
 
@@ -183,7 +188,7 @@ bool8 CheckPathBetweenTrainerAndPlayer(struct MapObject2 *trainerObj, u8 approac
 #define tTrainerObjHi   data[1]
 #define tTrainerObjLo   data[2]
 
-void sub_80842C8(struct MapObject *trainerObj, u8 b)
+static void sub_80842C8(struct MapObject *trainerObj, u8 b)
 {
     u8 taskId = CreateTask(RunTrainerSeeFuncList, 0x50);
     struct Task *task = &gTasks[taskId];
@@ -193,7 +198,7 @@ void sub_80842C8(struct MapObject *trainerObj, u8 b)
     task->data[3] = b;
 }
 
-void sub_80842FC(TaskFunc followupFunc)
+static void sub_80842FC(TaskFunc followupFunc)
 {
     TaskFunc taskFunc = RunTrainerSeeFuncList;
     u8 taskId = FindTaskIdByFunc(taskFunc);
@@ -232,7 +237,7 @@ static bool8 (*const gTrainerSeeFuncList[])(u8 taskId, struct Task *task, struct
     sub_80846C8,
 };
 
-void RunTrainerSeeFuncList(u8 taskId)
+static void RunTrainerSeeFuncList(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
     struct MapObject *trainerObj = (struct MapObject *)((task->tTrainerObjHi << 16) | (task->tTrainerObjLo));
@@ -450,6 +455,41 @@ static void Task_DestroyTrainerApproachTask(u8 taskId)
     EnableBothScriptContexts();
 }
 
+static const struct OamData gOamData_839B4D8 = {
+    .size = 1, .priority = 1
+};
+
+static const struct SpriteFrameImage gSpriteImageTable_839B4E0[] = {
+    { gSpriteImage_839B308, sizeof gSpriteImage_839B308 },
+    { gSpriteImage_839B388, sizeof gSpriteImage_839B388 }
+};
+
+static const struct SpriteFrameImage gSpriteImageTable_839B4F0[] = {
+    { gSpriteImage_839B408, sizeof gSpriteImage_839B408 }
+};
+
+static const union AnimCmd gSpriteAnim_839B4F8[] = {
+    ANIMCMD_FRAME(0, 60),
+    ANIMCMD_END
+};
+
+static const union AnimCmd gSpriteAnim_839B500[] = {
+    ANIMCMD_FRAME(1, 60),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const gSpriteAnimTable_839B508[] = {
+    gSpriteAnim_839B4F8,
+    gSpriteAnim_839B500
+};
+
+static const struct SpriteTemplate gSpriteTemplate_839B510 = {
+    0xffff, 0xffff, &gOamData_839B4D8, gSpriteAnimTable_839B508, gSpriteImageTable_839B4E0, gDummySpriteAffineAnimTable, objc_exclamation_mark_probably
+};
+static const struct SpriteTemplate gSpriteTemplate_839B528 = {
+    0xffff, 4100, &gOamData_839B4D8, gSpriteAnimTable_839B508, gSpriteImageTable_839B4F0, gDummySpriteAffineAnimTable, objc_exclamation_mark_probably
+};
+
 u8 FldEff_ExclamationMarkIcon1(void)
 {
     u8 spriteId = CreateSpriteAtEnd(&gSpriteTemplate_839B510, 0, 0, 0x53);
@@ -480,7 +520,7 @@ u8 FldEff_HeartIcon(void)
     return 0;
 }
 
-void sub_8084894(struct Sprite *sprite, u16 a2, u8 a3)
+static void sub_8084894(struct Sprite *sprite, u16 a2, u8 a3)
 {
     sprite->oam.priority = 1;
     sprite->coordOffsetEnabled = 1;
@@ -494,7 +534,7 @@ void sub_8084894(struct Sprite *sprite, u16 a2, u8 a3)
     StartSpriteAnim(sprite, a3);
 }
 
-void objc_exclamation_mark_probably(struct Sprite *sprite)
+static void objc_exclamation_mark_probably(struct Sprite *sprite)
 {
     u8 mapObjId;
 

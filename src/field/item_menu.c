@@ -153,7 +153,7 @@ static const u8 *sPopupMenuActionList;
 
 // common
 void (*gFieldItemUseCallback)(u8) = NULL;
-extern u16 gUnknown_030041B4;
+extern u16 gBattle_BG1_Y;
 extern struct PocketScrollState gBagPocketScrollStates[];
 extern struct ItemSlot *gCurrentBagPocketItemSlots;  // selected pocket item slots
 extern const u8 Event_NoRegisteredItem[];
@@ -4499,7 +4499,7 @@ u8 CreateBerrySprite(u8 berryId, s16 x, s16 y)
 
 static void SpriteCB_BerrySprite(struct Sprite *sprite)
 {
-    sprite->pos2.y = -gUnknown_030041B4;
+    sprite->pos2.y = -gBattle_BG1_Y;
 }
 
 void sub_80A7DD4(void)

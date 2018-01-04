@@ -14,11 +14,11 @@ LilycoveCity_MoveDeletersHouse_EventScript_159AAE:: @ 8159AAE
 
 LilycoveCity_MoveDeletersHouse_EventScript_159ADE:: @ 8159ADE
 	msgbox LilycoveCity_MoveDeletersHouse_Text_18B68C, 4
-	special sub_80F9A0C
+	special SelectMonForNPCTrade
 	waitstate
-	compare 0x8004, 255
+	compare VAR_SPECIAL_4, 255
 	goto_if_eq LilycoveCity_MoveDeletersHouse_EventScript_159B7B
-	special sub_80FA148
+	special IsSelectedMonEgg
 	compare RESULT, 1
 	goto_if_eq LilycoveCity_MoveDeletersHouse_EventScript_159B71
 	special ScrSpecial_CountPokemonMoves
@@ -26,9 +26,9 @@ LilycoveCity_MoveDeletersHouse_EventScript_159ADE:: @ 8159ADE
 	goto_if_eq LilycoveCity_MoveDeletersHouse_EventScript_159B64
 	msgbox LilycoveCity_MoveDeletersHouse_Text_18B6B0, 4
 	fadescreen 1
-	special sub_80F9EEC
+	special SelectMove
 	fadescreen 0
-	compare 0x8005, 4
+	compare VAR_SPECIAL_5, 4
 	goto_if_eq LilycoveCity_MoveDeletersHouse_EventScript_159ADE
 	special ScrSpecial_GetPokemonNicknameAndMoveName
 	msgbox LilycoveCity_MoveDeletersHouse_Text_18B6F2, 5
@@ -39,7 +39,7 @@ LilycoveCity_MoveDeletersHouse_EventScript_159ADE:: @ 8159ADE
 	end
 
 LilycoveCity_MoveDeletersHouse_EventScript_159B53:: @ 8159B53
-	special sub_80FA0DC
+	special DeleteMonMove
 	playfanfare 378
 	waitfanfare
 	msgbox LilycoveCity_MoveDeletersHouse_Text_18B71E, 4

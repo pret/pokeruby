@@ -1228,9 +1228,9 @@ static bool8 sub_8144ECC(u8 data, u8 taskIdA)
     case 2:
         if (gSaveBlock2.playerGender == MALE)
         {
-            LoadCompressedObjectPic(&gIntro2BrendanSpriteSheet);
-            LoadCompressedObjectPic(&gUnknown_08416E34);
-            LoadCompressedObjectPic(&gIntro2BicycleSpriteSheet);
+            LoadCompressedObjectPic(gIntro2BrendanSpriteSheet);
+            LoadCompressedObjectPic(gUnknown_08416E34);
+            LoadCompressedObjectPic(gIntro2BicycleSpriteSheet);
             LoadSpritePalettes(gIntro2SpritePalettes);
 
             spriteId = intro_create_brendan_sprite(120, 46);
@@ -1245,9 +1245,9 @@ static bool8 sub_8144ECC(u8 data, u8 taskIdA)
         }
         else
         {
-            LoadCompressedObjectPic(&gIntro2MaySpriteSheet);
-            LoadCompressedObjectPic(&gUnknown_08416E24);
-            LoadCompressedObjectPic(&gIntro2BicycleSpriteSheet);
+            LoadCompressedObjectPic(gIntro2MaySpriteSheet);
+            LoadCompressedObjectPic(gUnknown_08416E24);
+            LoadCompressedObjectPic(gIntro2BicycleSpriteSheet);
             LoadSpritePalettes(gIntro2SpritePalettes);
 
             spriteId = intro_create_may_sprite(120, 46);
@@ -1606,7 +1606,7 @@ void spritecb_814580C(struct Sprite *sprite)
 static void sub_81458DC(void)
 {
     struct Unk201C000 *unk201C000 = &ewram1c000;
-    u16 starter = SpeciesToNationalPokedexNum(GetStarterPokemon(VarGet(VAR_FIRST_POKE)));
+    u16 starter = SpeciesToNationalPokedexNum(GetStarterPokemon(VarGet(VAR_STARTER_MON)));
     u16 seenTypesCount;
     u16 page;
     u16 dexNum;

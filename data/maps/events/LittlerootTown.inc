@@ -12,15 +12,15 @@ LittlerootTown_MapWarps:: @ 838098C
 	warp_def 7, 16, 0, 0, MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB
 
 LittlerootTown_MapCoordEvents:: @ 83809A4
-	coord_event 10, 1, 3, 0, 0x4050, 0, 0, LittlerootTown_EventScript_14D739
-	coord_event 11, 1, 3, 0, 0x4050, 0, 0, LittlerootTown_EventScript_14D797
-	coord_event 11, 1, 3, 0, 0x4050, 1, 0, LittlerootTown_EventScript_14D7C7
-	coord_event 8, 9, 3, 0, 0x4050, 3, 0, LittlerootTown_EventScript_14D89E
-	coord_event 9, 9, 3, 0, 0x4050, 3, 0, LittlerootTown_EventScript_14D8AA
-	coord_event 10, 9, 3, 0, 0x4050, 3, 0, LittlerootTown_EventScript_14D886
-	coord_event 11, 9, 3, 0, 0x4050, 3, 0, LittlerootTown_EventScript_14D892
-	coord_event 10, 2, 3, 0, 0x4050, 3, 0, LittlerootTown_EventScript_14D860
-	coord_event 11, 2, 3, 0, 0x4050, 3, 0, LittlerootTown_EventScript_14D873
+	coord_event 10, 1, 3, 0, VAR_LITTLEROOT_STATE, 0, 0, LittlerootTown_EventScript_14D739
+	coord_event 11, 1, 3, 0, VAR_LITTLEROOT_STATE, 0, 0, LittlerootTown_EventScript_14D797
+	coord_event 11, 1, 3, 0, VAR_LITTLEROOT_STATE, 1, 0, LittlerootTown_EventScript_14D7C7
+	coord_event 8, 9, 3, 0, VAR_LITTLEROOT_STATE, 3, 0, LittlerootTown_EventScript_14D89E
+	coord_event 9, 9, 3, 0, VAR_LITTLEROOT_STATE, 3, 0, LittlerootTown_EventScript_14D8AA
+	coord_event 10, 9, 3, 0, VAR_LITTLEROOT_STATE, 3, 0, LittlerootTown_EventScript_14D886
+	coord_event 11, 9, 3, 0, VAR_LITTLEROOT_STATE, 3, 0, LittlerootTown_EventScript_14D892
+	coord_event 10, 2, 3, 0, VAR_LITTLEROOT_STATE, 3, 0, LittlerootTown_EventScript_14D860
+	coord_event 11, 2, 3, 0, VAR_LITTLEROOT_STATE, 3, 0, LittlerootTown_EventScript_14D873
 
 LittlerootTown_MapBGEvents:: @ 8380A34
 	bg_event 15, 13, 0, 0, 0, LittlerootTown_EventScript_14D7F6

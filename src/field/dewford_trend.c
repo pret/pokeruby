@@ -202,14 +202,14 @@ void sub_80FA4E4(void *a, u32 b, u8 unused)
         *(dst++) = *(src++);
 }
 
-void sub_80FA5BC(void)
+void BufferTrendyPhraseString(void)
 {
     struct EasyChatPair *s = &gSaveBlock1.easyChatPairs[gSpecialVar_0x8004];
 
     ConvertEasyChatWordsToString(gStringVar1, s->words, 2, 1);
 }
 
-void sub_80FA5E4(void)
+void TrendyPhraseIsOld(void)
 {
     u16 result = 0;
 
@@ -222,7 +222,7 @@ void sub_80FA5E4(void)
     gSpecialVar_Result = result;
 }
 
-void sub_80FA648(void)
+void GetDewfordHallPaintingNameIndex(void)
 {
     gSpecialVar_Result = (gSaveBlock1.easyChatPairs[0].words[0] + gSaveBlock1.easyChatPairs[0].words[1]) & 7;
 }

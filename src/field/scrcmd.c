@@ -1722,7 +1722,7 @@ bool8 ScrCmd_settrainerflag(struct ScriptContext *ctx)
 {
     u16 index = VarGet(ScriptReadHalfword(ctx));
 
-    trainer_flag_set(index);
+    SetTrainerFlag(index);
     return FALSE;
 }
 
@@ -1730,7 +1730,7 @@ bool8 ScrCmd_cleartrainerflag(struct ScriptContext *ctx)
 {
     u16 index = VarGet(ScriptReadHalfword(ctx));
 
-    trainer_flag_clear(index);
+    ClearTrainerFlag(index);
     return FALSE;
 }
 

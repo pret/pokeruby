@@ -45,7 +45,7 @@ SootopolisCity_EventScript_14D123:: @ 814D123
 	call SootopolisCity_EventScript_1A02C1
 	setobjectxyperm 1, 29, 19
 	setobjectxyperm 2, 33, 19
-	compare 0x405e, 1
+	compare VAR_SOOTOPOLIS_STATE, 1
 	call_if 1, SootopolisCity_EventScript_14D142
 	return
 
@@ -288,7 +288,7 @@ SootopolisCity_EventScript_14D308:: @ 814D308
 	setobjectmovementtype 5, 9
 	moveobjectoffscreen 10
 	setobjectmovementtype 10, 10
-	setvar 0x405e, 2
+	setvar VAR_SOOTOPOLIS_STATE, 2
 	releaseall
 	end
 

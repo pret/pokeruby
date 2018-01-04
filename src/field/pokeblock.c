@@ -426,7 +426,7 @@ void sub_810BADC(void)
     SetMainCallback2(sub_810B96C);
 }
 
-void sub_810BAF4(void)
+void OpenPokeblockCaseOnFeeder(void)
 {
     sub_810BA7C(3);
     SetMainCallback2(sub_810B96C);
@@ -1041,7 +1041,7 @@ u8 sub_810C9E8(struct Pokeblock *pokeblock)
     return feel;
 }
 
-s8 sub_810CA00(void)
+s8 GetFirstFreePokeblockSlot(void)
 {
     u8 i;
     for (i=0; i<ARRAY_COUNT(gSaveBlock1.pokeblocks); i++)
@@ -1056,7 +1056,7 @@ s8 sub_810CA00(void)
 
 bool8 sub_810CA34(struct Pokeblock *pokeblock)
 {
-    s8 idx = sub_810CA00();
+    s8 idx = GetFirstFreePokeblockSlot();
     if (idx == -1)
     {
         return FALSE;

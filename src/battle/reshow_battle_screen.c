@@ -11,12 +11,12 @@
 
 extern struct SpriteTemplate gUnknown_02024E8C;
 extern struct Window gUnknown_03004210;
-extern u16 gUnknown_03004280;
-extern u16 gUnknown_03004288;
+extern u16 gBattle_BG2_Y;
+extern u16 gBattle_BG2_X;
 extern u16 gUnknown_030042A4;
-extern u16 gUnknown_030042C0;
+extern u16 gBattle_BG1_X;
 extern u16 gUnknown_030041B0;
-extern u16 gUnknown_030041B4;
+extern u16 gBattle_BG1_Y;
 extern u16 gUnknown_030041B8;
 extern u16 gUnknown_030042A0;
 extern u8 gReservedSpritePaletteCount;
@@ -83,10 +83,10 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
         InitWindowFromConfig(&gUnknown_03004210, &gWindowConfig_81E6C58);
         gUnknown_030042A4 = 0;
         gUnknown_030042A0 = 0;
-        gUnknown_030042C0 = 0;
-        gUnknown_030041B4 = 0;
-        gUnknown_03004288 = 0;
-        gUnknown_03004280 = 0;
+        gBattle_BG1_X = 0;
+        gBattle_BG1_Y = 0;
+        gBattle_BG2_X = 0;
+        gBattle_BG2_Y = 0;
         gUnknown_030041B0 = 0;
         gUnknown_030041B8 = 0;
         break;
@@ -243,7 +243,7 @@ static void sub_807B184(u8 bank)
             if (GetMonData(&gEnemyParty[gBattlePartyID[bank]], MON_DATA_HP) == 0)
                 return;
             GetMonSpriteTemplate_803C56C(GetMonData(&gEnemyParty[gBattlePartyID[bank]], MON_DATA_SPECIES), GetBankIdentity(bank));
-            gObjectBankIDs[bank] = CreateSprite(&gUnknown_02024E8C, sub_8077ABC(bank, 2), posY, sub_8079E90(bank));
+            gObjectBankIDs[bank] = CreateSprite(&gUnknown_02024E8C, GetBankPosition(bank, 2), posY, sub_8079E90(bank));
             gSprites[gObjectBankIDs[bank]].oam.paletteNum = bank;
             gSprites[gObjectBankIDs[bank]].callback = SpriteCallbackDummy;
             gSprites[gObjectBankIDs[bank]].data[0] = bank;
@@ -275,7 +275,7 @@ static void sub_807B184(u8 bank)
             if (GetMonData(&gPlayerParty[gBattlePartyID[bank]], MON_DATA_HP) == 0)
                 return;
             GetMonSpriteTemplate_803C56C(GetMonData(&gPlayerParty[gBattlePartyID[bank]], MON_DATA_SPECIES), GetBankIdentity(bank));
-            gObjectBankIDs[bank] = CreateSprite(&gUnknown_02024E8C, sub_8077ABC(bank, 2), posY, sub_8079E90(bank));
+            gObjectBankIDs[bank] = CreateSprite(&gUnknown_02024E8C, GetBankPosition(bank, 2), posY, sub_8079E90(bank));
             gSprites[gObjectBankIDs[bank]].oam.paletteNum = bank;
             gSprites[gObjectBankIDs[bank]].callback = SpriteCallbackDummy;
             gSprites[gObjectBankIDs[bank]].data[0] = bank;

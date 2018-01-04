@@ -294,24 +294,24 @@ void sub_8134548(void)
             ResetBattleTowerStreak(levelType);
             if (!var1)
             {
-                VarSet(VAR_0x4000, 5);
+                VarSet(VAR_TEMP_0, 5);
             }
             break;
         case 1:
             ResetBattleTowerStreak(levelType);
-            VarSet(VAR_0x4000, 1);
+            VarSet(VAR_TEMP_0, 1);
             var1++;
             break;
         case 4:
-            VarSet(VAR_0x4000, 2);
+            VarSet(VAR_TEMP_0, 2);
             var1++;
             break;
         case 5:
-            VarSet(VAR_0x4000, 3);
+            VarSet(VAR_TEMP_0, 3);
             var1++;
             break;
         case 2:
-            VarSet(VAR_0x4000, 4);
+            VarSet(VAR_TEMP_0, 4);
             var1++;
             break;
         case 3:
@@ -323,7 +323,7 @@ void sub_8134548(void)
     if ((gSaveBlock2.battleTower.var_4AE[0] == 3 || gSaveBlock2.battleTower.var_4AE[0] == 6)
         && (gSaveBlock2.battleTower.var_4AE[1] == 3 || gSaveBlock2.battleTower.var_4AE[1] == 6))
     {
-        VarSet(VAR_0x4000, 5);
+        VarSet(VAR_TEMP_0, 5);
     }
 
     ValidateBattleTowerRecordChecksums();
@@ -801,7 +801,7 @@ void SetBattleTowerTrainerGfxId(u8 trainerIndex)
     if (i != 30)
     {
         u8 trainerObjectGfxId = sMaleTrainerGfxIds[i];
-        VarSet(0x4010, trainerObjectGfxId);
+        VarSet(VAR_OBJ_GFX_ID_0, trainerObjectGfxId);
         return;
     }
 
@@ -809,11 +809,11 @@ void SetBattleTowerTrainerGfxId(u8 trainerIndex)
     if (i != 20)
     {
         u8 trainerObjectGfxId = sFemaleTrainerGfxIds[i];
-        VarSet(0x4010, trainerObjectGfxId);
+        VarSet(VAR_OBJ_GFX_ID_0, trainerObjectGfxId);
         return;
     }
 
-    VarSet(0x4010, MAP_OBJ_GFX_BOY_1);
+    VarSet(VAR_OBJ_GFX_ID_0, MAP_OBJ_GFX_BOY_1);
 }
 
 void SetEReaderTrainerGfxId(void)
@@ -1608,7 +1608,7 @@ void sub_8135534(u8 taskId)
     }
 }
 
-void sub_813556C(void)
+void StartSpecialBattle(void)
 {
     s32 i;
     u16 heldItem;
@@ -1616,7 +1616,7 @@ void sub_813556C(void)
 
     switch (gSpecialVar_0x8004)
     {
-    case 0:
+    case 0: // battle tower battle
         gBattleTypeFlags = (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_TRAINER);
         gTrainerBattleOpponent = 0;
 
@@ -1627,7 +1627,7 @@ void sub_813556C(void)
         transition = BattleSetup_GetBattleTowerBattleTransition();
         BattleTransition_StartOnField(transition);
         break;
-    case 1:
+    case 1: // secret base battle
         for (i = 0; i < PARTY_SIZE; i++)
         {
             heldItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
@@ -1639,7 +1639,7 @@ void sub_813556C(void)
         transition = BattleSetup_GetBattleTowerBattleTransition();
         BattleTransition_StartOnField(transition);
         break;
-    case 2:
+    case 2: // e-reader trainer battle
         ZeroEnemyPartyMons();
 
         for (i = 0; i < 3; i++)
@@ -1658,7 +1658,7 @@ void sub_813556C(void)
     }
 }
 
-void sub_8135668(void)
+void SetBattleTowerProperty(void)
 {
     s32 i;
     u8 battleTowerLevelType = gSaveBlock2.battleTower.battleTowerLevelType;
@@ -1740,7 +1740,7 @@ void sub_8135668(void)
     }
 }
 
-void sub_81358A4(void)
+void BattleTowerUtil(void)
 {
     u8 battleTowerLevelType = gSaveBlock2.battleTower.battleTowerLevelType;
 
@@ -1789,7 +1789,7 @@ void sub_81358A4(void)
     }
 }
 
-void sub_8135A14(void)
+void SetBattleTowerParty(void)
 {
     s32 i;
 
@@ -1954,7 +1954,7 @@ void sub_8135AC4(void)
     sub_8135A3C();
 }
 
-void sub_8135BA0(void)
+void SaveBattleTowerProgress(void)
 {
     u8 battleTowerLevelType = gSaveBlock2.battleTower.battleTowerLevelType;
 
@@ -1976,7 +1976,7 @@ void sub_8135BA0(void)
         gSaveBlock2.battleTower.var_4AE[battleTowerLevelType] = gSpecialVar_0x8004;
     }
 
-    VarSet(VAR_0x4000, 0);
+    VarSet(VAR_TEMP_0, 0);
     gSaveBlock2.battleTower.unk_554 = 1;
     TrySavingData(EREADER_SAVE);
 }
@@ -2336,7 +2336,7 @@ void PrintEReaderTrainerFarewellMessage(void)
     }
 }
 
-void sub_813610C(void)
+void TryEnableBravoTrainerBattleTower(void)
 {
     s32 i;
 

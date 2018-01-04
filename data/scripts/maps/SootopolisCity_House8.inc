@@ -6,9 +6,9 @@ SootopolisCity_House8_EventScript_15B401:: @ 815B401
 	lock
 	faceplayer
 	msgbox SootopolisCity_House8_Text_1900F7, 4
-	special sub_80F9A0C
+	special SelectMonForNPCTrade
 	waitstate
-	copyvar RESULT, 0x8004
+	copyvar RESULT, VAR_SPECIAL_4
 	compare RESULT, 255
 	goto_if_eq SootopolisCity_House8_EventScript_15B448
 	special CompareShroomishSize
@@ -55,9 +55,9 @@ SootopolisCity_House8_EventScript_15B492:: @ 815B492
 	lock
 	faceplayer
 	msgbox SootopolisCity_House8_Text_190431, 4
-	special sub_80F9A0C
+	special SelectMonForNPCTrade
 	waitstate
-	copyvar RESULT, 0x8004
+	copyvar RESULT, VAR_SPECIAL_4
 	compare RESULT, 255
 	goto_if_eq SootopolisCity_House8_EventScript_15B4D9
 	special CompareBarboachSize

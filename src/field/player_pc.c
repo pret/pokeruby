@@ -171,15 +171,6 @@ static const u8 gNonSelectedItemQuantityFormatText[] = _("{STR_VAR_1}");
 static const u8 gSelectedItemQuantityFormatText[] = _("{COLOR RED}{STR_VAR_1}");
 static const u8 gUnknown_08406330[] = _("{CLEAR_TO 32}");
 
-static const u16 gUnknown_08406334[3] =
-{
-    0x5294,
-    0x6B5A,
-    0x7FFF
-};
-
-static const u8 gHighlightedMoveToBagFormatText[] = _("{COLOR RED}{STR_VAR_1}");
-
 extern u8 *gUnknown_02039314;
 extern struct MenuAction gUnknown_08406298[];
 
@@ -205,8 +196,8 @@ void NewGameInitPCItems(void)
     u8 i;
 
     // because Game Freak don't know how to use a struct or a 2d array
-    for(i = 0, ClearItemSlots(gSaveBlock1.pcItems, ARRAY_COUNT(gSaveBlock1.pcItems)); NEW_GAME_PC_ITEMS(i, ITEM_ID) && NEW_GAME_PC_ITEMS(i, QUANTITY) &&
-        AddPCItem(NEW_GAME_PC_ITEMS(i, ITEM_ID), NEW_GAME_PC_ITEMS(i, QUANTITY)) == TRUE; i++)
+    for(i = 0, ClearItemSlots(gSaveBlock1.pcItems, ARRAY_COUNT(gSaveBlock1.pcItems)); NEW_GAME_PC_ITEMS(i, PC_ITEM_ID) && NEW_GAME_PC_ITEMS(i, PC_QUANTITY) &&
+        AddPCItem(NEW_GAME_PC_ITEMS(i, PC_ITEM_ID), NEW_GAME_PC_ITEMS(i, PC_QUANTITY)) == TRUE; i++)
             ;
 }
 
@@ -1007,9 +998,12 @@ static void ItemStorage_GoBackToItemPCMenu(u8 taskId, u8 var)
 
 static void ItemStorage_LoadPalette(void)
 {
-    u16 arr[3];
+    u16 arr[] = {
+        0x5294,
+        0x6B5A,
+        0x7FFF
+    };
 
-    memcpy(arr, gUnknown_08406334, sizeof(arr));
     LoadPalette(&arr[2], 0xDF, 2);
     LoadPalette(&arr[1], 0xD1, 2);
     LoadPalette(&arr[0], 0xD8, 2);
@@ -1260,6 +1254,8 @@ static void Mailbox_ReturnToFieldFromReadMail(void)
     gFieldCallback = Mailbox_DoRedrawMailboxMenuAfterReturn;
     SetMainCallback2(c2_exit_to_overworld_2_switch);
 }
+
+static const u8 gHighlightedMoveToBagFormatText[] = _("{COLOR RED}{STR_VAR_1}");
 
 static void Mailbox_MoveToBag(u8 taskId)
 {

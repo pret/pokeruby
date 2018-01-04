@@ -2020,7 +2020,7 @@ u8 GetFieldObjectIdByLocalId(u8 localId)
 #ifdef NONMATCHING
 u8 InitFieldObjectStateFromTemplate(struct MapObjectTemplate *template, u8 b, u8 c)
 {
-    struct MapObject2 *mapObj;  //TODO: resolve the mapobj_unk_19b weirdness
+    struct MapObject *mapObj;  //TODO: resolve the mapobj_unk_19b weirdness
     u8 var;
     u16 r3;
     u16 r2;
@@ -2029,8 +2029,8 @@ u8 InitFieldObjectStateFromTemplate(struct MapObjectTemplate *template, u8 b, u8
     if (GetAvailableFieldObjectSlot(template->localId, b, c, &var) != 0)
         return 16;
     //_0805ACCE
-    mapObj = (struct MapObject2 *)&gMapObjects[var];
-    npc_clear_ids_and_state((struct MapObject *)mapObj);
+    mapObj = &gMapObjects[var];
+    npc_clear_ids_and_state(mapObj);
     r3 = template->x + 7;
     r2 = template->y + 7;
     mapObj->active = TRUE;
@@ -2048,8 +2048,8 @@ u8 InitFieldObjectStateFromTemplate(struct MapObjectTemplate *template, u8 b, u8
     mapObj->coords3.y = r2;
     mapObj->mapobj_unk_0B_0 = template->elevation;
     mapObj->elevation = template->elevation;
-    mapObj->mapobj_unk_19 = template->unkA_0;
-    mapObj->mapobj_unk_19b = template->unkA_4;
+    mapObj->range.as_nybbles.x = template->unkA_0;
+    mapObj->range.as_nybbles.y = template->unkA_4;
     mapObj->trainerType = template->unkC;
     mapObj->trainerRange_berryTreeId = template->unkE;
     mapObj->mapobj_unk_20 = gUnknown_0836DC09[template->movementType];
@@ -2058,10 +2058,10 @@ u8 InitFieldObjectStateFromTemplate(struct MapObjectTemplate *template, u8 b, u8
     //asm("":::"r5","r6");
     if (gUnknown_0836DBBC[mapObj->animPattern] != 0)
     {
-        if (mapObj->mapobj_unk_19 == 0)
-            mapObj->mapobj_unk_19++;
-        if (mapObj->mapobj_unk_19b == 0)
-            mapObj->mapobj_unk_19b++;
+        if (mapObj->range.as_nybbles.x == 0)
+            mapObj->range.as_nybbles.x++;
+        if (mapObj->range.as_nybbles.y == 0)
+            mapObj->range.as_nybbles.y++;
     }
     return var;
 }
@@ -5464,7 +5464,7 @@ u8 sub_805FF20(struct MapObject *mapObject, u8 direction)
     return npc_block_way(mapObject, x, y, direction);
 }
 
-bool8 IsCoordOutsideFieldObjectMovementRect(struct MapObject2 *mapObject, s16 x, s16 y);
+bool8 IsCoordOutsideFieldObjectMovementRect(struct MapObject *mapObject, s16 x, s16 y);
 static bool8 DoesObjectCollideWithObjectAt(struct MapObject *mapObject, s16 x, s16 y);
 bool8 IsMetatileDirectionallyImpassable(struct MapObject *mapObject, s16 x, s16 y, u8 direction);
 
@@ -5472,7 +5472,7 @@ u8 npc_block_way(struct MapObject *mapObject, s16 x, s16 y, u32 dirn)
 {
     u8 direction;
     direction = dirn;
-    if (IsCoordOutsideFieldObjectMovementRect((struct MapObject2 *)mapObject, x, y))
+    if (IsCoordOutsideFieldObjectMovementRect(mapObject, x, y))
         return 1;
     else if (MapGridIsImpassableAt(x, y) || GetMapBorderIdAt(x, y) == -1 || IsMetatileDirectionallyImpassable(mapObject, x, y, direction))
         return 2;
@@ -5489,7 +5489,7 @@ u8 sub_8060024(struct MapObject *mapObject, s16 x, s16 y, u8 direction)
 {
     u8 flags = 0;
 
-    if (IsCoordOutsideFieldObjectMovementRect((struct MapObject2 *)mapObject, x, y))
+    if (IsCoordOutsideFieldObjectMovementRect(mapObject, x, y))
         flags |= 1;
     if (MapGridIsImpassableAt(x, y) || GetMapBorderIdAt(x, y) == -1 || IsMetatileDirectionallyImpassable(mapObject, x, y, direction) || (mapObject->mapobj_bit_15 && !CanCameraMoveInDirection(direction)))
         flags |= 2;
@@ -5500,22 +5500,22 @@ u8 sub_8060024(struct MapObject *mapObject, s16 x, s16 y, u8 direction)
     return flags;
 }
 
-bool8 IsCoordOutsideFieldObjectMovementRect(struct MapObject2 *mapObject, s16 x, s16 y)
+bool8 IsCoordOutsideFieldObjectMovementRect(struct MapObject *mapObject, s16 x, s16 y)
 {
     s16 minv;
     s16 maxv;
 
-    if (mapObject->mapobj_unk_19 != 0)
+    if (mapObject->range.as_nybbles.x != 0)
     {
-        minv = mapObject->coords1.x - (mapObject->mapobj_unk_19);
-        maxv = mapObject->coords1.x + (mapObject->mapobj_unk_19);
+        minv = mapObject->coords1.x - (mapObject->range.as_nybbles.x);
+        maxv = mapObject->coords1.x + (mapObject->range.as_nybbles.x);
         if (minv > x || maxv < x)
             return TRUE;
     }
-    if (mapObject->mapobj_unk_19b != 0)
+    if (mapObject->range.as_nybbles.y != 0)
     {
-        minv = mapObject->coords1.y - (mapObject->mapobj_unk_19b);
-        maxv = mapObject->coords1.y + (mapObject->mapobj_unk_19b);
+        minv = mapObject->coords1.y - (mapObject->range.as_nybbles.y);
+        maxv = mapObject->coords1.y + (mapObject->range.as_nybbles.y);
         if (minv > y || maxv < y)
             return TRUE;
     }

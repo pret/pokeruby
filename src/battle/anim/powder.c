@@ -4,7 +4,7 @@
 #include "battle_anim.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
+extern u8 gAnimBankAttacker;
 
 static void sub_80CA768(struct Sprite* sprite);
 
@@ -18,7 +18,7 @@ void sub_80CA710(struct Sprite* sprite)
     sprite->data[0] = gBattleAnimArgs[2];
     sprite->data[1] = gBattleAnimArgs[3];
 
-    if (GetBankSide(gBattleAnimBankAttacker))
+    if (GetBankSide(gAnimBankAttacker))
     {
         sprite->data[3] = -gBattleAnimArgs[4];
     }
@@ -43,6 +43,6 @@ void sub_80CA768(struct Sprite* sprite)
     }
     else
     {
-        move_anim_8072740(sprite);
+        DestroyAnimSprite(sprite);
     }
 }

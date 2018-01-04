@@ -9,9 +9,9 @@ InsideOfTruck_MapWarps:: @ 8391660
 	warp_def 4, 3, 0, 127, MAP_NONE
 
 InsideOfTruck_MapCoordEvents:: @ 8391678
-	coord_event 3, 1, 3, 0, 0x4092, 0, 0, InsideOfTruck_EventScript_15FC29
-	coord_event 3, 2, 3, 0, 0x4092, 0, 0, InsideOfTruck_EventScript_15FC29
-	coord_event 3, 3, 3, 0, 0x4092, 0, 0, InsideOfTruck_EventScript_15FC29
+	coord_event 3, 1, 3, 0, VAR_LITTLEROOT_INTRO_STATE, 0, 0, InsideOfTruck_EventScript_15FC29
+	coord_event 3, 2, 3, 0, VAR_LITTLEROOT_INTRO_STATE, 0, 0, InsideOfTruck_EventScript_15FC29
+	coord_event 3, 3, 3, 0, VAR_LITTLEROOT_INTRO_STATE, 0, 0, InsideOfTruck_EventScript_15FC29
 
 InsideOfTruck_MapBGEvents:: @ 83916A8
 	bg_event 1, 0, 0, 0, 0, InsideOfTruck_EventScript_15FC8B

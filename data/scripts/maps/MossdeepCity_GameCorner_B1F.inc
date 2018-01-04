@@ -8,7 +8,7 @@ MossdeepCity_GameCorner_B1F_MapScript1_15AE60:: @ 815AE60
 	end
 
 MossdeepCity_GameCorner_B1F_MapScript2_15AE64:: @ 815AE64
-	map_script_2 0x4001, 0, MossdeepCity_GameCorner_B1F_EventScript_15AE6E
+	map_script_2 VAR_TEMP_1, 0, MossdeepCity_GameCorner_B1F_EventScript_15AE6E
 	.2byte 0
 
 MossdeepCity_GameCorner_B1F_EventScript_15AE6E:: @ 815AE6E
@@ -18,9 +18,9 @@ MossdeepCity_GameCorner_B1F_EventScript_15AE6E:: @ 815AE6E
 	special PrintEReaderTrainerGreeting
 	msgbox gStringVar4, 4
 	closemessage
-	setvar 0x8004, 2
-	setvar 0x8005, 0
-	special sub_813556C
+	setvar VAR_SPECIAL_4, 2
+	setvar VAR_SPECIAL_5, 0
+	special StartSpecialBattle
 	waitstate
 	compare RESULT, 3
 	call_if 1, MossdeepCity_GameCorner_B1F_EventScript_15AED5
@@ -33,26 +33,26 @@ MossdeepCity_GameCorner_B1F_EventScript_15AE6E:: @ 815AE6E
 	applymovement 255, MossdeepCity_GameCorner_B1F_Movement_15AEFF
 	waitmovement 0
 	special LoadPlayerParty
-	setvar 0x4001, 1
+	setvar VAR_TEMP_1, 1
 	warp MAP_MOSSDEEP_CITY_GAME_CORNER_1F, 255, 3, 1
 	waitstate
 	releaseall
 	end
 
 MossdeepCity_GameCorner_B1F_EventScript_15AED5:: @ 815AED5
-	setvar 0x40c0, 3
+	setvar VAR_GAME_CORNER_STATE, 3
 	msgbox MossdeepCity_GameCorner_B1F_Text_18E796, 4
 	return
 
 MossdeepCity_GameCorner_B1F_EventScript_15AEE3:: @ 815AEE3
-	setvar 0x40c0, 1
+	setvar VAR_GAME_CORNER_STATE, 1
 	special ShowFieldMessageStringVar4
 	waitmessage
 	waitbuttonpress
 	return
 
 MossdeepCity_GameCorner_B1F_EventScript_15AEEE:: @ 815AEEE
-	setvar 0x40c0, 2
+	setvar VAR_GAME_CORNER_STATE, 2
 	special ShowFieldMessageStringVar4
 	waitmessage
 	waitbuttonpress

@@ -5,8 +5,8 @@
 #include "sound.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 // angel (a little angel descends from somewhere towards a position)
 // Used in Sweet Kiss.
@@ -33,5 +33,5 @@ void sub_80D2938(struct Sprite* sprite)
     }
 
     if (sprite->data[0] > 0x64)
-        move_anim_8072740(sprite);
+        DestroyAnimSprite(sprite);
 }

@@ -99,13 +99,13 @@ u16 GetPlayerAvatarBike(void)
     return 0;
 }
 
-static void DetermineCyclingRoadResults(u32 arg0, u8 arg1)
+static void DetermineCyclingRoadResults(u32 numFrames, u8 numBikeCollisions)
 {
     u8 result;
 
-    if (arg1 <= 99)
+    if (numBikeCollisions <= 99)
     {
-        ConvertIntToDecimalStringN(gStringVar1, arg1, STR_CONV_MODE_LEFT_ALIGN, 2);
+        ConvertIntToDecimalStringN(gStringVar1, numBikeCollisions, STR_CONV_MODE_LEFT_ALIGN, 2);
         StringAppend(gStringVar1, gOtherText_Times);
     }
     else
@@ -113,11 +113,11 @@ static void DetermineCyclingRoadResults(u32 arg0, u8 arg1)
         StringCopy(gStringVar1, gOtherText_99Times);
     }
 
-    if (arg0 < 3600)
+    if (numFrames < 3600)
     {
-        ConvertIntToDecimalStringN(gStringVar2, arg0 / 60, STR_CONV_MODE_RIGHT_ALIGN, 2);
+        ConvertIntToDecimalStringN(gStringVar2, numFrames / 60, STR_CONV_MODE_RIGHT_ALIGN, 2);
         gStringVar2[2] = CHAR_DECIMAL_SEPARATOR;
-        ConvertIntToDecimalStringN(&gStringVar2[3], ((arg0 % 60) * 100) / 60, STR_CONV_MODE_LEADING_ZEROS, 2);
+        ConvertIntToDecimalStringN(&gStringVar2[3], ((numFrames % 60) * 100) / 60, STR_CONV_MODE_LEADING_ZEROS, 2);
         StringAppend(gStringVar2, gOtherText_Seconds);
     }
     else
@@ -126,44 +126,44 @@ static void DetermineCyclingRoadResults(u32 arg0, u8 arg1)
     }
 
     result = 0;
-    if (arg1 == 0)
+    if (numBikeCollisions == 0)
     {
         result = 5;
     }
-    else if (arg1 < 4)
+    else if (numBikeCollisions < 4)
     {
         result = 4;
     }
-    else if (arg1 < 10)
+    else if (numBikeCollisions < 10)
     {
         result = 3;
     }
-    else if (arg1 < 20)
+    else if (numBikeCollisions < 20)
     {
         result = 2;
     }
-    else if (arg1 < 100)
+    else if (numBikeCollisions < 100)
     {
         result = 1;
     }
 
-    if (arg0 / 60 <= 10)
+    if (numFrames / 60 <= 10)
     {
         result += 5;
     }
-    else if (arg0 / 60 <= 15)
+    else if (numFrames / 60 <= 15)
     {
         result += 4;
     }
-    else if (arg0 / 60 <= 20)
+    else if (numFrames / 60 <= 20)
     {
         result += 3;
     }
-    else if (arg0 / 60 <= 40)
+    else if (numFrames / 60 <= 40)
     {
         result += 2;
     }
-    else if (arg0 / 60 < 60)
+    else if (numFrames / 60 < 60)
     {
         result += 1;
     }
@@ -173,36 +173,36 @@ static void DetermineCyclingRoadResults(u32 arg0, u8 arg1)
 }
 
 void FinishCyclingRoadChallenge(void) {
-    const u32 time = gMain.vblankCounter1 - gBikeCyclingTimer;
+    const u32 numFrames = gMain.vblankCounter1 - gBikeCyclingTimer;
 
-    DetermineCyclingRoadResults(time, gBikeCollisions);
-    RecordCyclingRoadResults(time, gBikeCollisions);
+    DetermineCyclingRoadResults(numFrames, gBikeCollisions);
+    RecordCyclingRoadResults(numFrames, gBikeCollisions);
 }
 
-static void RecordCyclingRoadResults(u32 arg0, u8 arg1) {
-    u16 high = VarGet(0x4028);
-    u16 low = VarGet(0x4029);
-    u32 record = high + (low << 16);
+static void RecordCyclingRoadResults(u32 numFrames, u8 numBikeCollisions) {
+    u16 low = VarGet(VAR_CYCLING_ROAD_RECORD_TIME_L);
+    u16 high = VarGet(VAR_CYCLING_ROAD_RECORD_TIME_H);
+    u32 framesRecord = low + (high << 16);
 
-    if (record > arg0 || record == 0)
+    if (framesRecord > numFrames || framesRecord == 0)
     {
-        VarSet(0x4028, arg0);
-        VarSet(0x4029, arg0 >> 16);
-        VarSet(0x4027, arg1);
+        VarSet(VAR_CYCLING_ROAD_RECORD_TIME_L, numFrames);
+        VarSet(VAR_CYCLING_ROAD_RECORD_TIME_H, numFrames >> 16);
+        VarSet(VAR_CYCLING_ROAD_RECORD_COLLISIONS, numBikeCollisions);
     }
 }
 
 u16 GetRecordedCyclingRoadResults(void) {
-    u16 high = VarGet(0x4028);
-    u16 low = VarGet(0x4029);
-    u32 record = high + (low << 16);
+    u16 low = VarGet(VAR_CYCLING_ROAD_RECORD_TIME_L);
+    u16 high = VarGet(VAR_CYCLING_ROAD_RECORD_TIME_H);
+    u32 framesRecord = low + (high << 16);
 
-    if (record == 0)
+    if (framesRecord == 0)
     {
         return FALSE;
     }
 
-    DetermineCyclingRoadResults(record, VarGet(0x4027));
+    DetermineCyclingRoadResults(framesRecord, VarGet(VAR_CYCLING_ROAD_RECORD_COLLISIONS));
     return TRUE;
 }
 
@@ -212,9 +212,9 @@ void UpdateCyclingRoadState(void) {
         return;
     }
 
-    if (VarGet(0x40a9) == 2 || VarGet(0x40a9) == 3)
+    if (VarGet(VAR_CYCLING_CHALLENGE_STATE) == 2 || VarGet(VAR_CYCLING_CHALLENGE_STATE) == 3)
     {
-        VarSet(0x40a9, 0);
+        VarSet(VAR_CYCLING_CHALLENGE_STATE, 0);
         Overworld_SetSavedMusic(SE_STOP);
     }
 }
@@ -242,7 +242,7 @@ bool32 CountSSTidalStep(u16 delta)
 u8 GetSSTidalLocation(s8 *mapGroup, s8 *mapNum, s16 *x, s16 *y)
 {
     u16 *varCruiseStepCount = GetVarPointer(VAR_CRUISE_STEP_COUNT);
-    switch (*GetVarPointer(VAR_PORTHOLE))
+    switch (*GetVarPointer(VAR_PORTHOLE_STATE))
     {
         case 1:
         case 8:
@@ -312,28 +312,23 @@ u8 GetLinkPartnerNames(void)
     return nLinkPlayers;
 }
 
-const u8 gUnknown_083F8358[4] = {7, 9, 8, 10};
-const s8 gUnknown_083F835C[4][2] = {
-    { 0,  1},
-    { 1,  0},
-    { 0, -1},
-    {-1,  0}
-};
-
 void SpawnBerryBlenderLinkPlayerSprites(void)
 {
-    u8 unknown_083F8358[4];
-    u8 unknown_083F835C[4][2];
+    u8 j = 0;
+    s16 x = 0;
+    s16 y = 0;
+    u8 unknown_083F8358[] = {7, 9, 8, 10};
+    s8 unknown_083F835C[][2] = {
+        { 0,  1},
+        { 1,  0},
+        { 0, -1},
+        {-1,  0}
+    };
     u8 myLinkPlayerNumber;
     u8 playerDirectionLowerNybble;
     u8 rivalAvatarGraphicsId;
     u8 i;
-    u8 j = 0;
-    s16 x = 0;
-    s16 y = 0;
 
-    memcpy(unknown_083F8358, gUnknown_083F8358, sizeof gUnknown_083F8358);
-    memcpy(unknown_083F835C, gUnknown_083F835C, sizeof gUnknown_083F835C);
     myLinkPlayerNumber = sub_8008218();
     playerDirectionLowerNybble = player_get_direction_lower_nybble();
     switch (playerDirectionLowerNybble)
@@ -362,7 +357,7 @@ void SpawnBerryBlenderLinkPlayerSprites(void)
         if (myLinkPlayerNumber != i)
         {
             rivalAvatarGraphicsId = GetRivalAvatarGraphicsIdByStateIdAndGender(0, gLinkPlayers[i].gender);
-            SpawnSpecialFieldObjectParametrized(rivalAvatarGraphicsId, unknown_083F8358[j], 0xf0 - i, (s8)unknown_083F835C[j][0] + x + 7, (s8)unknown_083F835C[j][1] + y + 7, 0);
+            SpawnSpecialFieldObjectParametrized(rivalAvatarGraphicsId, unknown_083F8358[j], 0xf0 - i, unknown_083F835C[j][0] + x + 7, unknown_083F835C[j][1] + y + 7, 0);
             j++;
             if (j == 4)
             {
@@ -693,7 +688,7 @@ void GetRivalSonDaughterString(void)
     }
 }
 
-u8 sub_810E300(void)
+u8 GetBattleOutcome(void)
 {
     return gBattleOutcome;
 }
@@ -963,11 +958,11 @@ void EndLotteryCornerComputerEffect(void)
 }
 
 static void sub_810E874(void);
-void sub_810E944(void);
+void DisplayCurrentElevatorFloor(void);
 void sub_810E984(u8);
 bool8 sub_810EAC8(u8, u8);
 void sub_810EB90(u8, u8);
-void sub_810EBEC(void);
+void ShakeScreenInElevator(void);
 void sub_810EC34(u8);
 void sub_810EC9C(u8);
 void sub_810ECB0(void);
@@ -1079,11 +1074,11 @@ static void sub_810E874(void)
     {
         MenuPrint(gUnknown_083F8380[gUnknown_03000760[i].var0], 1, 2 * i + 1);
     }
-    sub_810E944();
+    DisplayCurrentElevatorFloor();
     CreateTask(sub_810E984, 8);
 }
 
-void sub_810E944(void)
+void DisplayCurrentElevatorFloor(void)
 {
     MenuDrawTextWindow(20, 0, 29, 5);
     sub_8072BD8(gOtherText_NowOn, 21, 1, 64);
@@ -1121,7 +1116,7 @@ void sub_810E984(u8 taskId)
         {
             gSpecialVar_Result = 1;
             gSpecialVar_0x8005 = gUnknown_0203925B;
-            sub_810EBEC();
+            ShakeScreenInElevator();
             FieldObjectTurnByLocalIdAndMap(gSpecialVar_LastTalked, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, DIR_SOUTH);
             sub_810EEDC();
             MenuZeroFillScreen();
@@ -1305,7 +1300,7 @@ void sub_810EB90(u8 newPos, u8 maxItems)
     }
 }
 
-void sub_810EBEC(void)
+void ShakeScreenInElevator(void)
 {
     u8 taskId = CreateTask(sub_810EC34, 9);
     gTasks[taskId].data[0] = 1;
@@ -1784,12 +1779,12 @@ void GetSecretBaseNearbyMapName(void)
     GetMapSectionName(gStringVar1, VarGet(VAR_SECRET_BASE_MAP), 0);
 }
 
-u16 sub_810F404(void)
+u16 GetBestBattleTowerStreak(void)
 {
     return GetGameStat(GAME_STAT_BATTLE_TOWER_BEST_STREAK);
 }
 
-void sub_810F414(void)
+void BufferEReaderTrainerName(void)
 {
     SetEReaderTrainerName(gStringVar1);
 }
@@ -1798,7 +1793,7 @@ const u8 gUnknown_083F83E0[] = {12, 2, 4, 5, 1, 8, 7, 11, 3, 10, 9, 6};
 const u8 gUnknown_083F83EC[] = {0, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 5};
 const u8 gUnknown_083F83F8[] = {3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5};
 
-u8 sub_810F424(void)
+u8 GetSlotMachineId(void)
 {
     u32 v0 = gSaveBlock1.easyChatPairs[0].unk0_0 + gSaveBlock1.easyChatPairs[0].unk2 + gUnknown_083F83E0[gSpecialVar_0x8004];
     if (GetPriceReduction(2))
@@ -1808,10 +1803,10 @@ u8 sub_810F424(void)
     return gUnknown_083F83EC[v0 % 12];
 }
 
-bool8 sub_810F488(void)
+bool8 FoundAbandonedShipRoom1Key(void)
 {
     u16 *specVar = &gSpecialVar_0x8004;
-    u16 flag = 0x277;
+    u16 flag = FLAG_HIDDEN_ITEM_1F;
     *specVar = flag;
     if (!FlagGet(flag))
     {
@@ -1820,10 +1815,10 @@ bool8 sub_810F488(void)
     return TRUE;
 }
 
-bool8 sub_810F4B0(void)
+bool8 FoundAbandonedShipRoom2Key(void)
 {
     u16 *specVar = &gSpecialVar_0x8004;
-    u16 flag = 0x278;
+    u16 flag = FLAG_HIDDEN_ITEM_20;
     *specVar = flag;
     if (!FlagGet(flag))
     {
@@ -1832,10 +1827,10 @@ bool8 sub_810F4B0(void)
     return TRUE;
 }
 
-bool8 sub_810F4D4(void)
+bool8 FoundAbandonedShipRoom4Key(void)
 {
     u16 *specVar = &gSpecialVar_0x8004;
-    u16 flag = 0x279;
+    u16 flag = FLAG_HIDDEN_ITEM_21;
     *specVar = flag;
     if (!FlagGet(flag))
     {
@@ -1844,10 +1839,10 @@ bool8 sub_810F4D4(void)
     return TRUE;
 }
 
-bool8 sub_810F4FC(void)
+bool8 FoundAbandonedShipRoom6Key(void)
 {
     u16 *specVar = &gSpecialVar_0x8004;
-    u16 flag = 0x27a;
+    u16 flag = FLAG_HIDDEN_ITEM_22;
     *specVar = flag;
     if (!FlagGet(flag))
     {
@@ -1879,18 +1874,18 @@ bool8 ScrSpecial_AreLeadMonEVsMaxedOut(void)
     return FALSE;
 }
 
-u8 sub_810F5BC(void)
+u8 TryUpdateRusturfTunnelState(void)
 {
     if (!FlagGet(FLAG_RUSTURF_TUNNEL_OPENED) && gSaveBlock1.location.mapGroup == MAP_GROUP(RUSTURF_TUNNEL) && gSaveBlock1.location.mapNum == MAP_NUM(RUSTURF_TUNNEL))
     {
         if (FlagGet(FLAG_HIDE_RUSTURF_TUNNEL_ROCK_1))
         {
-            VarSet(VAR_0x409a, 4);
+            VarSet(VAR_RUSTURF_TUNNEL_STATE, 4);
             return TRUE;
         }
         else if (FlagGet(FLAG_HIDE_RUSTURF_TUNNEL_ROCK_2))
         {
-            VarSet(VAR_0x409a, 5);
+            VarSet(VAR_RUSTURF_TUNNEL_STATE, 5);
             return TRUE;
         }
     }
@@ -1919,7 +1914,7 @@ void PutZigzagoonInPlayerParty(void)
 bool8 IsStarterInParty(void)
 {
     u8 i;
-    u16 starter = GetStarterPokemon(VarGet(VAR_FIRST_POKE));
+    u16 starter = GetStarterPokemon(VarGet(VAR_STARTER_MON));
     u8 partyCount = CalculatePlayerPartyCount();
     for (i = 0; i < partyCount; i++)
     {
@@ -2000,9 +1995,9 @@ static void sub_810F814(u8 taskId)
     EnableBothScriptContexts();
 }
 
-bool8 sub_810F828(void)
+bool8 FoundBlackGlasses(void)
 {
-    return FlagGet(FLAG_UNKNOWN_2B8);
+    return FlagGet(FLAG_HIDDEN_ITEM_BLACK_GLASSES);
 }
 
 void SetRoute119Weather(void)
@@ -2045,10 +2040,10 @@ void sub_810F8FC(void)
     sub_805ADDC(6);
 }
 
-u16 sub_810F908(void)
+u16 GetDaysUntilPacifidlogTMAvailable(void)
 {
-    u16 var40c2 = VarGet(VAR_0x40C2);
-    if (gLocalTime.days - var40c2 >= 7)
+    u16 tmReceivedDay = VarGet(VAR_PACIFIDLOG_TM_RECEIVED_DAY);
+    if (gLocalTime.days - tmReceivedDay >= 7)
     {
         return 0;
     }
@@ -2056,16 +2051,16 @@ u16 sub_810F908(void)
     {
         return 8;
     }
-    return 7 - (gLocalTime.days - var40c2);
+    return 7 - (gLocalTime.days - tmReceivedDay);
 }
 
-u16 sub_810F950(void)
+u16 SetPacifidlogTMReceivedDay(void)
 {
-    VarSet(VAR_0x40C2, gLocalTime.days);
+    VarSet(VAR_PACIFIDLOG_TM_RECEIVED_DAY, gLocalTime.days);
     return gLocalTime.days;
 }
 
-bool8 sub_810F96C(void)
+bool8 MonOTNameMatchesPlayer(void)
 {
     GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_OT_NAME, gStringVar1);
     if (!StringCompareWithoutExtCtrlCodes(gSaveBlock2.playerName, gStringVar1))
@@ -2075,7 +2070,7 @@ bool8 sub_810F96C(void)
     return TRUE;
 }
 
-void sub_810F9AC(void)
+void BufferLottoTicketNumber(void)
 {
     if (gSpecialVar_Result >= 10000)
     {
@@ -2114,64 +2109,64 @@ const u8 gUnknown_083F8408[] = {8,  9, 10, 11, 12, 13, 14, 15};
 const u8 gUnknown_083F8410[] = {8, 13, 14, 11, 10, 12, 15,  9};
 
 bool8 sub_810FF30(void);
-void sub_810FCE8(void);
+void UpdateMovedLilycoveFanClubMembers(void);
 void sub_810FF48(void);
 void sub_810FD80(void);
-u16 sub_810FCB0(void);
+u16 GetNumMovedLilycoveFanClubMembers(void);
 int sub_810FB9C(void);
 
 void ResetFanClub(void)
 {
-    gSaveBlock1.vars[0x41] = 0;
-    gSaveBlock1.vars[0x42] = 0;
+    gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] = 0;
+    gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_2 - VARS_START] = 0;
 }
 
 void sub_810FA74(void)
 {
     if (sub_810FF30())
     {
-        sub_810FCE8();
-        gSaveBlock1.vars[0x42] = gSaveBlock2.playTimeHours;
+        UpdateMovedLilycoveFanClubMembers();
+        gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_2 - VARS_START] = gSaveBlock2.playTimeHours;
     }
 }
 
 void sub_810FAA0(void)
 {
-    if (!((gSaveBlock1.vars[0x41] >> 7) & 1))
+    if (!((gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] >> 7) & 1))
     {
         sub_810FF48();
         sub_810FD80();
-        gSaveBlock1.vars[0x42] = gSaveBlock2.playTimeHours;
-        FlagClear(0x315);
-        FlagClear(0x316);
-        FlagClear(0x317);
-        FlagClear(0x318);
-        VarSet(VAR_0x4095, 1);
+        gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_2 - VARS_START] = gSaveBlock2.playTimeHours;
+        FlagClear(FLAG_HIDE_FANCLUB_OLD_LADY);
+        FlagClear(FLAG_HIDE_FANCLUB_BOY);
+        FlagClear(FLAG_HIDE_FANCLUB_LITTLE_BOY);
+        FlagClear(FLAG_HIDE_FANCLUB_LADY);
+        VarSet(VAR_LILYCOVE_FAN_CLUB_STATE, 1);
     }
 }
 
 u8 sub_810FB10(u8 a0)
 {
-    if (VarGet(VAR_0x4095) == 2)
+    if (VarGet(VAR_LILYCOVE_FAN_CLUB_STATE) == 2)
     {
-        if ((gSaveBlock1.vars[0x41] & 0x7f) + gUnknown_083F8404[a0] >= 20)
+        if ((gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] & 0x7f) + gUnknown_083F8404[a0] >= 20)
         {
-            if (sub_810FCB0() < 3)
+            if (GetNumMovedLilycoveFanClubMembers() < 3)
             {
                 sub_810FB9C();
-                gSaveBlock1.vars[0x41] &= 0xff80;
+                gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] &= 0xff80;
             }
             else
             {
-                gSaveBlock1.vars[0x41] = (gSaveBlock1.vars[0x41] & 0xff80) | 20;
+                gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] = (gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] & 0xff80) | 20;
             }
         }
         else
         {
-            gSaveBlock1.vars[0x41] += gUnknown_083F8404[a0];
+            gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] += gUnknown_083F8404[a0];
         }
     }
-    return gSaveBlock1.vars[0x41] & 0x7f;
+    return gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] & 0x7f;
 }
 
 int sub_810FB9C(void)
@@ -2180,17 +2175,17 @@ int sub_810FB9C(void)
     int retval = 0;
     for (i=0; i<8; i++)
     {
-        if (!((gSaveBlock1.vars[0x41] >> gUnknown_083F8408[i]) & 0x01))
+        if (!((gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] >> gUnknown_083F8408[i]) & 0x01))
         {
             retval = i;
             if (Random() & 1)
             {
-                gSaveBlock1.vars[0x41] |= (1 << gUnknown_083F8408[i]);
+                gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] |= (1 << gUnknown_083F8408[i]);
                 return retval;
             }
         }
     }
-    gSaveBlock1.vars[0x41] |= (1 << gUnknown_083F8408[retval]);
+    gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] |= (1 << gUnknown_083F8408[retval]);
     return retval;
 }
 
@@ -2198,85 +2193,86 @@ int sub_810FC18(void)
 {
     u8 i;
     int retval = 0;
-    if (sub_810FCB0() == TRUE)
+    if (GetNumMovedLilycoveFanClubMembers() == 1)
     {
         return 0;
     }
     for (i=0; i<8; i++)
     {
-        if ((gSaveBlock1.vars[0x41] >> gUnknown_083F8410[i]) & 1)
+        if ((gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] >> gUnknown_083F8410[i]) & 1)
         {
             retval = i;
             if (Random() & 1)
             {
-                gSaveBlock1.vars[0x41] ^= (1 << gUnknown_083F8410[i]);
+                gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] ^= (1 << gUnknown_083F8410[i]);
                 return retval;
             }
         }
     }
-    if ((gSaveBlock1.vars[0x41] >> gUnknown_083F8410[retval]) & 1)
+    if ((gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] >> gUnknown_083F8410[retval]) & 1)
     {
-        gSaveBlock1.vars[0x41] ^= (1 << gUnknown_083F8410[retval]);
+        gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] ^= (1 << gUnknown_083F8410[retval]);
     }
     return retval;
 }
 
-u16 sub_810FCB0(void)
+u16 GetNumMovedLilycoveFanClubMembers(void)
 {
     u8 i;
     u8 retval = 0;
-    for (i=0; i<8; i++)
+    for (i = 0; i < 8; i++)
     {
-        if ((gSaveBlock1.vars[0x41] >> (i + 8)) & 1)
+        if ((gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] >> (i + 8)) & 1)
         {
-            retval ++;
+            retval++;
         }
     }
+
     return retval;
 }
 
-void sub_810FCE8(void)
+void UpdateMovedLilycoveFanClubMembers(void)
 {
     u8 i = 0;
     if (gSaveBlock2.playTimeHours < 999)
     {
         while (1)
         {
-            if (sub_810FCB0() < 5)
+            if (GetNumMovedLilycoveFanClubMembers() < 5)
             {
-                gSaveBlock1.vars[0x42] = gSaveBlock2.playTimeHours;
+                gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_2 - VARS_START] = gSaveBlock2.playTimeHours;
                 break;
             }
             else if (i == 8)
             {
                 break;
             }
-            else if (gSaveBlock2.playTimeHours - gSaveBlock1.vars[0x42] < 12)
+            else if (gSaveBlock2.playTimeHours - gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_2 - VARS_START] < 12)
             {
                 return;
             }
             sub_810FC18();
-            gSaveBlock1.vars[0x42] += 12;
+            gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_2 - VARS_START] += 12;
             i++;
         }
     }
 }
 
-bool8 sub_810FD60(void)
+bool8 ShouldMoveLilycoveFanClubMember(void)
 {
-    return (gSaveBlock1.vars[0x41] >> gSpecialVar_0x8004) & 0x01;
+    return (gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] >> gSpecialVar_0x8004) & 0x01;
 }
 
 void sub_810FD80(void)
 {
-    gSaveBlock1.vars[0x41] |= 0x2000;
-    gSaveBlock1.vars[0x41] |= 0x100;
-    gSaveBlock1.vars[0x41] |= 0x400;
+    gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] |= 0x2000;
+    gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] |= 0x100;
+    gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] |= 0x400;
 }
 
 void sub_810FE1C(void *, u8, u8);
 
-void sub_810FDAC(void)
+void BufferStreakTrainerText(void)
 {
     u8 a = 0;
     u8 b = 0;
@@ -2355,7 +2351,7 @@ void sub_810FE1C(void *linkRecords, u8 a, u8 b)
 
 void sub_810FEFC(void)
 {
-    if (VarGet(VAR_0x4095) == 2)
+    if (VarGet(VAR_LILYCOVE_FAN_CLUB_STATE) == 2)
     {
         sub_810FA74();
         if (gBattleOutcome == 1)
@@ -2371,12 +2367,12 @@ void sub_810FEFC(void)
 
 bool8 sub_810FF30(void)
 {
-    return (gSaveBlock1.vars[0x41] >> 7) & 0x01;
+    return (gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] >> 7) & 0x01;
 }
 
 void sub_810FF48(void)
 {
-    gSaveBlock1.vars[0x41] |= 0x80;
+    gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] |= 0x80;
 }
 
 u8 sub_810FF60(void)

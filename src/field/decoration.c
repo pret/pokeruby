@@ -1426,139 +1426,6 @@ const struct YesNoFuncTable gUnknown_083EC634[] = {
     {sub_8109D04, sub_80FF058}
 };
 
-const u16 gUnknown_083EC654[] = {0x6318, 0x739C, 0x7FFF};
-const u8 gUnknown_083EC65A[] = _("{PALETTE 13}{STR_VAR_1}");
-
-const u8 Unknown_3EC660[] = {0, 1, 2, 3};
-const u8 Unknown_3EC664[] = {0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13};
-const u8 Unknown_3EC670[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
-const u8 Unknown_3EC680[] = {0, 1, 4, 5, 8, 9, 12, 13, 16, 17, 20, 21};
-const u8 Unknown_3EC68C[] = {0, 1, 2, 3, 4, 5, 6, 7};
-const u8 Unknown_3EC694[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31};
-const u8 Unknown_3EC6B4[] = {0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13, 16, 17, 18, 19, 20, 21, 24, 25, 26, 27, 28, 29, 32, 33, 34, 35, 36, 37, 40, 41, 42, 43, 44, 45};
-const u8 Unknown_3EC6D8[] = {0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13, 16, 17, 18, 19, 20, 21, 24, 25, 26, 27, 28, 29};
-
-const u8 Unknown_3EC6F0[] = {0, 0, 0, 0};
-const u8 Unknown_3EC6F4[] = {0, 0, 1, 1, 0, 0, 1, 1};
-const u8 Unknown_3EC6FC[] = {0, 0, 1, 1, 2, 2, 0, 0, 1, 1, 2, 2};
-const u8 Unknown_3EC708[] = {0, 0, 1, 1, 2, 2, 3, 3, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 4, 4, 5, 5, 6, 6, 7, 7};
-const u8 Unknown_3EC728[] = {0, 0, 1, 1, 0, 0, 1, 1, 2, 2, 3, 3, 2, 2, 3, 3};
-const u8 Unknown_3EC738[] = {0, 0, 0, 0, 1, 1, 1, 1};
-const u8 Unknown_3EC740[] = {0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2};
-const u8 Unknown_3EC74C[] = {0, 0, 1, 1, 0, 0, 1, 1, 2, 2, 3, 3, 2, 2, 3, 3, 4, 4, 5, 5, 4, 4, 5, 5, 6, 6, 7, 7, 6, 6, 7, 7};
-const u8 Unknown_3EC76C[] = {0, 0, 1, 1, 2, 2, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 6, 6, 7, 7, 8, 8};
-const u8 Unknown_3EC790[] = {0, 0, 1, 1, 2, 2, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 3, 3, 4, 4, 5, 5};
-
-const u8 Unknown_3EC7A8[] = {4, 5, 6, 7};
-const u8 Unknown_3EC7AC[] = {4, 5, 4, 5, 6, 7, 6, 7};
-const u8 Unknown_3EC7B4[] = {4, 5, 4, 5, 4, 5, 6, 7, 6, 7, 6, 7};
-const u8 Unknown_3EC7C0[] = {4, 5, 4, 5, 4, 5, 4, 5, 6, 7, 6, 7, 6, 7, 6, 7, 4, 5, 4, 5, 4, 5, 4, 5, 6, 7, 6, 7, 6, 7, 6, 7};
-const u8 Unknown_3EC7E0[] = {4, 5, 4, 5, 6, 7, 6, 7, 4, 5, 4, 5, 6, 7, 6, 7};
-const u8 Unknown_3EC7F0[] = {4, 5, 6, 7, 4, 5, 6, 7};
-const u8 Unknown_3EC7F8[] = {4, 5, 6, 7, 4, 5, 6, 7, 4, 5, 6, 7};
-const u8 Unknown_3EC804[] = {4, 5, 4, 5, 6, 7, 6, 7, 4, 5, 4, 5, 6, 7, 6, 7, 4, 5, 4, 5, 6, 7, 6, 7, 4, 5, 4, 5, 6, 7, 6, 7};
-const u8 Unknown_3EC824[] = {4, 5, 4, 5, 4, 5, 6, 7, 6, 7, 6, 7, 4, 5, 4, 5, 4, 5, 6, 7, 6, 7, 6, 7, 4, 5, 4, 5, 4, 5, 6, 7, 6, 7, 6, 7};
-const u8 Unknown_3EC848[] = {4, 5, 4, 5, 4, 5, 6, 7, 6, 7, 6, 7, 4, 5, 4, 5, 4, 5, 6, 7, 6, 7, 6, 7};
-
-const struct UnkStruct_803EC860 gUnknown_083EC860[] = {
-    {Unknown_3EC660, Unknown_3EC6F0, Unknown_3EC7A8, 0x4},
-    {Unknown_3EC68C, Unknown_3EC6F4, Unknown_3EC7AC, 0x8},
-    {Unknown_3EC664, Unknown_3EC6FC, Unknown_3EC7B4, 0xc},
-    {Unknown_3EC694, Unknown_3EC708, Unknown_3EC7C0, 0x20},
-    {Unknown_3EC670, Unknown_3EC728, Unknown_3EC7E0, 0x10},
-    {Unknown_3EC68C, Unknown_3EC738, Unknown_3EC7F0, 0x8},
-    {Unknown_3EC680, Unknown_3EC740, Unknown_3EC7F8, 0xc},
-    {Unknown_3EC694, Unknown_3EC74C, Unknown_3EC804, 0x20},
-    {Unknown_3EC6B4, Unknown_3EC76C, Unknown_3EC824, 0x24},
-    {Unknown_3EC6D8, Unknown_3EC790, Unknown_3EC848, 0x18}
-};
-
-const struct UnkStruct_083EC900 gUnknown_083EC900[] = {
-    {0, 1, 0x78, 0x4e},
-    {1, 2, 0x80, 0x4e},
-    {1, 3, 0x90, 0x56},
-    {1, 3, 0x90, 0x46},
-    {0, 2, 0x80, 0x46},
-    {2, 2, 0x78, 0x46},
-    {2, 3, 0x80, 0x56},
-    {2, 3, 0x80, 0x36},
-    {0, 3, 0x90, 0x46},
-    {1, 3, 0x90, 0x46}
-};
-
-const union AnimCmd gSpriteAnim_83EC928[] = {
-    ANIMCMD_FRAME(.imageValue = 0, .duration = 0),
-    ANIMCMD_END
-};
-
-const union AnimCmd *const gSpriteAnimTable_83EC930[] = {
-    gSpriteAnim_83EC928
-};
-
-const struct SpriteFrameImage gSpriteImageTable_83EC934[] = {
-    {.data = gUnknown_02038900.image, .size = sizeof(gUnknown_02038900.image)}
-};
-
-const struct SpriteTemplate gSpriteTemplate_83EC93C = {
-    .tileTag = 0xffff,
-    .paletteTag = 3000,
-    .oam = &gUnknown_020391AC,
-    .anims = gSpriteAnimTable_83EC930,
-    .images = gSpriteImageTable_83EC934,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_81009A8
-};
-
-const struct SpritePalette gUnknown_083EC954 = {.data = (u16 *)&gUnknown_02038900.palette, .tag = 3000};
-
-const struct YesNoFuncTable gUnknown_083EC95C = {.yesFunc = sub_81000C4, .noFunc = sub_810065C};
-const struct YesNoFuncTable gUnknown_083EC964 = {.yesFunc = sub_810026C, .noFunc = sub_810065C};
-const struct YesNoFuncTable gUnknown_083EC96C[] = {
-    {.yesFunc = sub_80FFAB0, .noFunc = sub_80FFB08},
-    {.yesFunc = sub_8100F88, .noFunc = sub_8100FB4}
-};
-
-const u8 gUnknown_083EC97C[] = {4, 4, 4, 4, 0, 3, 3, 0};
-const u8 gUnknown_083EC984[] = {4, 4, 4, 4, 0, 4, 3, 0};
-
-const u16 gUnknown_083EC98C[] = INCBIN_U16("graphics/unknown/83EC98C.gbapal");
-const u16 Unknown_3EC9AC[] = INCBIN_U16("graphics/unknown/83EC9AC.gbapal");
-const struct YesNoFuncTable gUnknown_083EC9CC = {.yesFunc = sub_810153C, .noFunc = sub_8100EEC};
-const struct YesNoFuncTable gUnknown_083EC9D4 = {.yesFunc = sub_8101590, .noFunc = sub_8100EEC};
-const u32 gSpriteImage_83EC9DC[] = INCBIN_U32("graphics/unknown_sprites/83EC9DC.4bpp");
-const struct SpritePalette gUnknown_083ECA5C = {.data = gUnknown_083EC98C, .tag = 8};
-const struct SpritePalette gUnknown_083ECA64 = {.data = Unknown_3EC9AC, .tag = 8};
-const struct OamData gOamData_83ECA6C = {
-    .size = 1, .priority = 1
-};
-
-const union AnimCmd gSpriteAnim_83ECA74[] = {
-    ANIMCMD_FRAME(.imageValue = 0, .duration = 0),
-    ANIMCMD_END
-};
-
-const union AnimCmd *const gSpriteAnimTable_83ECA7C[] = {
-    gSpriteAnim_83ECA74
-};
-
-const struct SpriteFrameImage gSpriteImageTable_83ECA80[] = {
-    obj_frame_tiles(gSpriteImage_83EC9DC)
-};
-
-const struct SpriteTemplate gSpriteTemplate_83ECA88 = {
-    .tileTag = 0xffff,
-    .paletteTag = 8,
-    .oam = &gOamData_83ECA6C,
-    .anims = gSpriteAnimTable_83ECA7C,
-    .images = gSpriteImageTable_83ECA80,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_8101698
-};
-
-const struct YesNoFuncTable gUnknown_083ECAA0 = {.yesFunc = sub_8101848, .noFunc = sub_80FED3C};
-
-u8 *const unref_label_083ECAA8[] = {gSharedMem};
-
 // text
 
 extern u8 gUnknown_0815F399[];
@@ -1605,8 +1472,9 @@ void DoPlayerPCDecoration(u8 taskId)
 
 void sub_80FE2B4(void)
 {
-    u16 palettes[3];
-    memcpy(palettes, gUnknown_083EC654, sizeof gUnknown_083EC654);
+    u16 palettes[3] = {RGB(24, 24, 24),
+                       RGB(28, 28, 28),
+                       RGB(31, 31, 31)};
     LoadPalette(&palettes[2], 0xdf, 2);
     LoadPalette(&palettes[1], 0xd1, 2);
     LoadPalette(&palettes[0], 0xd8, 2);
@@ -1907,6 +1775,8 @@ void sub_80FE948(u8 taskId)
         }
     }
 }
+
+const u8 gUnknown_083EC65A[] = _("{PALETTE 13}{STR_VAR_1}");
 
 void sub_80FEABC(u8 taskId, u8 dummy1)
 {
@@ -3567,6 +3437,136 @@ u16 sub_810089C(u16 a0)
 {
     return ((u16 *)gMapHeader.mapData->secondaryTileset->metatiles)[a0] & 0xfff;
 }
+
+const u8 Unknown_3EC660[] = {0, 1, 2, 3};
+const u8 Unknown_3EC664[] = {0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13};
+const u8 Unknown_3EC670[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+const u8 Unknown_3EC680[] = {0, 1, 4, 5, 8, 9, 12, 13, 16, 17, 20, 21};
+const u8 Unknown_3EC68C[] = {0, 1, 2, 3, 4, 5, 6, 7};
+const u8 Unknown_3EC694[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31};
+const u8 Unknown_3EC6B4[] = {0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13, 16, 17, 18, 19, 20, 21, 24, 25, 26, 27, 28, 29, 32, 33, 34, 35, 36, 37, 40, 41, 42, 43, 44, 45};
+const u8 Unknown_3EC6D8[] = {0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13, 16, 17, 18, 19, 20, 21, 24, 25, 26, 27, 28, 29};
+
+const u8 Unknown_3EC6F0[] = {0, 0, 0, 0};
+const u8 Unknown_3EC6F4[] = {0, 0, 1, 1, 0, 0, 1, 1};
+const u8 Unknown_3EC6FC[] = {0, 0, 1, 1, 2, 2, 0, 0, 1, 1, 2, 2};
+const u8 Unknown_3EC708[] = {0, 0, 1, 1, 2, 2, 3, 3, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 4, 4, 5, 5, 6, 6, 7, 7};
+const u8 Unknown_3EC728[] = {0, 0, 1, 1, 0, 0, 1, 1, 2, 2, 3, 3, 2, 2, 3, 3};
+const u8 Unknown_3EC738[] = {0, 0, 0, 0, 1, 1, 1, 1};
+const u8 Unknown_3EC740[] = {0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2};
+const u8 Unknown_3EC74C[] = {0, 0, 1, 1, 0, 0, 1, 1, 2, 2, 3, 3, 2, 2, 3, 3, 4, 4, 5, 5, 4, 4, 5, 5, 6, 6, 7, 7, 6, 6, 7, 7};
+const u8 Unknown_3EC76C[] = {0, 0, 1, 1, 2, 2, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 6, 6, 7, 7, 8, 8};
+const u8 Unknown_3EC790[] = {0, 0, 1, 1, 2, 2, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 3, 3, 4, 4, 5, 5};
+
+const u8 Unknown_3EC7A8[] = {4, 5, 6, 7};
+const u8 Unknown_3EC7AC[] = {4, 5, 4, 5, 6, 7, 6, 7};
+const u8 Unknown_3EC7B4[] = {4, 5, 4, 5, 4, 5, 6, 7, 6, 7, 6, 7};
+const u8 Unknown_3EC7C0[] = {4, 5, 4, 5, 4, 5, 4, 5, 6, 7, 6, 7, 6, 7, 6, 7, 4, 5, 4, 5, 4, 5, 4, 5, 6, 7, 6, 7, 6, 7, 6, 7};
+const u8 Unknown_3EC7E0[] = {4, 5, 4, 5, 6, 7, 6, 7, 4, 5, 4, 5, 6, 7, 6, 7};
+const u8 Unknown_3EC7F0[] = {4, 5, 6, 7, 4, 5, 6, 7};
+const u8 Unknown_3EC7F8[] = {4, 5, 6, 7, 4, 5, 6, 7, 4, 5, 6, 7};
+const u8 Unknown_3EC804[] = {4, 5, 4, 5, 6, 7, 6, 7, 4, 5, 4, 5, 6, 7, 6, 7, 4, 5, 4, 5, 6, 7, 6, 7, 4, 5, 4, 5, 6, 7, 6, 7};
+const u8 Unknown_3EC824[] = {4, 5, 4, 5, 4, 5, 6, 7, 6, 7, 6, 7, 4, 5, 4, 5, 4, 5, 6, 7, 6, 7, 6, 7, 4, 5, 4, 5, 4, 5, 6, 7, 6, 7, 6, 7};
+const u8 Unknown_3EC848[] = {4, 5, 4, 5, 4, 5, 6, 7, 6, 7, 6, 7, 4, 5, 4, 5, 4, 5, 6, 7, 6, 7, 6, 7};
+
+const struct UnkStruct_803EC860 gUnknown_083EC860[] = {
+    {Unknown_3EC660, Unknown_3EC6F0, Unknown_3EC7A8, 0x4},
+    {Unknown_3EC68C, Unknown_3EC6F4, Unknown_3EC7AC, 0x8},
+    {Unknown_3EC664, Unknown_3EC6FC, Unknown_3EC7B4, 0xc},
+    {Unknown_3EC694, Unknown_3EC708, Unknown_3EC7C0, 0x20},
+    {Unknown_3EC670, Unknown_3EC728, Unknown_3EC7E0, 0x10},
+    {Unknown_3EC68C, Unknown_3EC738, Unknown_3EC7F0, 0x8},
+    {Unknown_3EC680, Unknown_3EC740, Unknown_3EC7F8, 0xc},
+    {Unknown_3EC694, Unknown_3EC74C, Unknown_3EC804, 0x20},
+    {Unknown_3EC6B4, Unknown_3EC76C, Unknown_3EC824, 0x24},
+    {Unknown_3EC6D8, Unknown_3EC790, Unknown_3EC848, 0x18}
+};
+
+const struct UnkStruct_083EC900 gUnknown_083EC900[] = {
+    {0, 1, 0x78, 0x4e},
+    {1, 2, 0x80, 0x4e},
+    {1, 3, 0x90, 0x56},
+    {1, 3, 0x90, 0x46},
+    {0, 2, 0x80, 0x46},
+    {2, 2, 0x78, 0x46},
+    {2, 3, 0x80, 0x56},
+    {2, 3, 0x80, 0x36},
+    {0, 3, 0x90, 0x46},
+    {1, 3, 0x90, 0x46}
+};
+
+const union AnimCmd gSpriteAnim_83EC928[] = {
+    ANIMCMD_FRAME(.imageValue = 0, .duration = 0),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gSpriteAnimTable_83EC930[] = {
+    gSpriteAnim_83EC928
+};
+
+const struct SpriteFrameImage gSpriteImageTable_83EC934[] = {
+    {.data = gUnknown_02038900.image, .size = sizeof(gUnknown_02038900.image)}
+};
+
+const struct SpriteTemplate gSpriteTemplate_83EC93C = {
+    .tileTag = 0xffff,
+    .paletteTag = 3000,
+    .oam = &gUnknown_020391AC,
+    .anims = gSpriteAnimTable_83EC930,
+    .images = gSpriteImageTable_83EC934,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_81009A8
+};
+
+const struct SpritePalette gUnknown_083EC954 = {.data = (u16 *)&gUnknown_02038900.palette, .tag = 3000};
+
+const struct YesNoFuncTable gUnknown_083EC95C = {.yesFunc = sub_81000C4, .noFunc = sub_810065C};
+const struct YesNoFuncTable gUnknown_083EC964 = {.yesFunc = sub_810026C, .noFunc = sub_810065C};
+const struct YesNoFuncTable gUnknown_083EC96C[] = {
+    {.yesFunc = sub_80FFAB0, .noFunc = sub_80FFB08},
+    {.yesFunc = sub_8100F88, .noFunc = sub_8100FB4}
+};
+
+const u8 gUnknown_083EC97C[] = {4, 4, 4, 4, 0, 3, 3, 0};
+const u8 gUnknown_083EC984[] = {4, 4, 4, 4, 0, 4, 3, 0};
+
+const u16 gUnknown_083EC98C[] = INCBIN_U16("graphics/unknown/83EC98C.gbapal");
+const u16 Unknown_3EC9AC[] = INCBIN_U16("graphics/unknown/83EC9AC.gbapal");
+const struct YesNoFuncTable gUnknown_083EC9CC = {.yesFunc = sub_810153C, .noFunc = sub_8100EEC};
+const struct YesNoFuncTable gUnknown_083EC9D4 = {.yesFunc = sub_8101590, .noFunc = sub_8100EEC};
+const u32 gSpriteImage_83EC9DC[] = INCBIN_U32("graphics/unknown_sprites/83EC9DC.4bpp");
+const struct SpritePalette gUnknown_083ECA5C = {.data = gUnknown_083EC98C, .tag = 8};
+const struct SpritePalette gUnknown_083ECA64 = {.data = Unknown_3EC9AC, .tag = 8};
+const struct OamData gOamData_83ECA6C = {
+    .size = 1, .priority = 1
+};
+
+const union AnimCmd gSpriteAnim_83ECA74[] = {
+    ANIMCMD_FRAME(.imageValue = 0, .duration = 0),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gSpriteAnimTable_83ECA7C[] = {
+    gSpriteAnim_83ECA74
+};
+
+const struct SpriteFrameImage gSpriteImageTable_83ECA80[] = {
+    obj_frame_tiles(gSpriteImage_83EC9DC)
+};
+
+const struct SpriteTemplate gSpriteTemplate_83ECA88 = {
+    .tileTag = 0xffff,
+    .paletteTag = 8,
+    .oam = &gOamData_83ECA6C,
+    .anims = gSpriteAnimTable_83ECA7C,
+    .images = gSpriteImageTable_83ECA80,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_8101698
+};
+
+const struct YesNoFuncTable gUnknown_083ECAA0 = {.yesFunc = sub_8101848, .noFunc = sub_80FED3C};
+
+u8 *const unref_label_083ECAA8[] = {gSharedMem};
 
 void sub_81008BC(struct UnkStruct_02038900 *unk_02038900)
 {

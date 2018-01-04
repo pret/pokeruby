@@ -28,7 +28,7 @@
 #define gBattleMonPartyPositions gBattlePartyID
 #define gCastformElevations gUnknownCastformData_0837F5A8
 #define gCastformBackSpriteYCoords gUnknown_0837F5AC
-#define gTransformPersonalities gPID_perBank
+#define gTransformPersonalities gTransformedPersonalities
 #define gBattleMonSprites gObjectBankIDs
 
 
@@ -86,16 +86,16 @@ extern u16 gBattleMonPartyPositions[];
 extern u16 gBattleTypeFlags;
 extern u32 gTransformPersonalities[NUM_BATTLE_SLOTS];
 extern u8 gBattleMonForms[NUM_BATTLE_SLOTS];
-extern u16 gUnknown_0202F7CA[];
+extern u16 gAnimSpeciesByBanks[];
 extern u8 gBattleMonSprites[NUM_BATTLE_SLOTS];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 extern s16 gBattleAnimArgs[8];
 extern u8 gBanksBySide[NUM_BATTLE_SLOTS];
 extern u8 gNoOfAllBanks; // gNumBattleMons?
 extern struct OamMatrix gOamMatrices[];
 extern struct Struct_2017810 unk_2017810[];
-extern u8 gHappinessMoveAnim;
+extern u8 gAnimFriendship;
 
 extern u8 UpdateMonIconFrame(struct Sprite *sprite);
 
@@ -168,12 +168,12 @@ const struct SpriteSheet gUnknown_0837F5E0[] = {
 };
 
 
-u8 sub_8077ABC(u8 slot, u8 a2) {
+u8 GetBankPosition(u8 slot, u8 a2) {
     u8 var;
     u16 species;
     struct TransformStatus *transform;
 
-    if (NotInBattle()) {
+    if (IsContest()) {
         if (a2 == 3 && slot == 3) {
             a2 = 1;
         }
@@ -189,7 +189,7 @@ u8 sub_8077ABC(u8 slot, u8 a2) {
     case 3:
     case 4:
     default:
-        if (NotInBattle()) {
+        if (IsContest()) {
             if (ewram19348.unk4 & 1) {
                 species = ewram19348.unk2;
             } else {
@@ -229,9 +229,9 @@ u8 sub_8077BFC(u8 slot, u16 species) {
     u8 ret;
     u16 var;
 
-    if (!GetBankSide(slot) || NotInBattle()) {
+    if (!GetBankSide(slot) || IsContest()) {
         if (species == SPECIES_UNOWN) {
-            if (NotInBattle()) {
+            if (IsContest()) {
                 if (ewram19348.unk4 & 1) {
                     personality = ewram19348.unk10;
                 } else {
@@ -288,7 +288,7 @@ u8 sub_8077BFC(u8 slot, u16 species) {
 u8 sub_8077DD8(u8 slot, u16 species) {
     u8 ret = 0;
     if (GetBankSide(slot) == 1) {
-        if (!NotInBattle()) {
+        if (!IsContest()) {
             if (species == SPECIES_CASTFORM) {
                 ret = gCastformElevations[gBattleMonForms[slot]];
             } else if (species > NUM_SPECIES) {
@@ -304,7 +304,7 @@ u8 sub_8077DD8(u8 slot, u16 species) {
 u8 sub_8077E44(u8 slot, u16 species, u8 a3) {
     u16 offset;
     u8 y;
-    if (GetBankSide(slot) == 0 || NotInBattle()) {
+    if (GetBankSide(slot) == 0 || IsContest()) {
         offset = sub_8077BFC(slot, species);
     } else {
         offset = sub_8077BFC(slot, species);
@@ -324,7 +324,7 @@ u8 sub_8077EE4(u8 slot, u8 a2) {
     u16 species;
     struct TransformStatus *transform;
     if (a2 == 3 || a2 == 4) {
-        if (NotInBattle()) {
+        if (IsContest()) {
             if (ewram19348.unk4 & 1) {
                 species = ewram19348.unk2;
             } else {
@@ -333,7 +333,7 @@ u8 sub_8077EE4(u8 slot, u8 a2) {
         } else {
             transform = &eTransformStatuses[slot];
             if (!transform->species) {
-                species = gUnknown_0202F7CA[slot];
+                species = gAnimSpeciesByBanks[slot];
             } else {
                 species = transform->species;
             }
@@ -344,20 +344,20 @@ u8 sub_8077EE4(u8 slot, u8 a2) {
             return sub_8077E44(slot, species, 0);
         }
     } else {
-        return sub_8077ABC(slot, a2);
+        return GetBankPosition(slot, a2);
     }
 }
 
 u8 sub_8077F68(u8 slot) {
-    return sub_8077ABC(slot, 4);
+    return GetBankPosition(slot, 4);
 }
 
 u8 sub_8077F7C(u8 slot) {
     u16 var;
     if (GetBankSide(slot)) {
-        var = sub_8077ABC(slot, 1) + 16;
+        var = GetBankPosition(slot, 1) + 16;
     } else {
-        var = sub_8077ABC(slot, 1) + 17;
+        var = GetBankPosition(slot, 1) + 17;
     }
     return var;
 }
@@ -366,8 +366,8 @@ u8 sub_8077FC0(u8 slot) {
     u16 var;
     u8 r6;
     struct TransformStatus *transform;
-    r6 = sub_8077ABC(slot, 1);
-    if (!NotInBattle()) {
+    r6 = GetBankPosition(slot, 1);
+    if (!IsContest()) {
         if (GetBankSide(slot)) {
             transform = &eTransformStatuses[slot];
             if (!transform->species) {
@@ -392,29 +392,29 @@ u8 sub_8077FC0(u8 slot) {
 
 u8 GetAnimBankSpriteId(u8 whichBank) {
     u8 *sprites;
-    if (whichBank == ANIM_BANK_ATK) {
-        if (AnimBankSpriteExists(gBattleAnimBankAttacker)) {
+    if (whichBank == ANIM_BANK_ATTACKER) {
+        if (IsBankSpritePresent(gAnimBankAttacker)) {
             sprites = gBattleMonSprites;
-            return sprites[gBattleAnimBankAttacker];
+            return sprites[gAnimBankAttacker];
         } else {
             return 0xff;
         }
-    } else if (whichBank == ANIM_BANK_DEF) {
-        if (AnimBankSpriteExists(gBattleAnimBankTarget)) {
+    } else if (whichBank == ANIM_BANK_TARGET) {
+        if (IsBankSpritePresent(gAnimBankTarget)) {
             sprites = gBattleMonSprites;
-            return sprites[gBattleAnimBankTarget];
+            return sprites[gAnimBankTarget];
         } else {
             return 0xff;
         }
     } else if (whichBank == ANIM_BANK_ATK_PARTNER) {
-        if (!IsAnimBankSpriteVisible(gBattleAnimBankAttacker ^ 2)) {
+        if (!IsAnimBankSpriteVisible(gAnimBankAttacker ^ 2)) {
             return 0xff;
         } else {
-            return gBattleMonSprites[gBattleAnimBankAttacker ^ 2];
+            return gBattleMonSprites[gAnimBankAttacker ^ 2];
         }
     } else {
-        if (IsAnimBankSpriteVisible(gBattleAnimBankTarget ^ 2)) {
-            return gBattleMonSprites[gBattleAnimBankTarget ^ 2];
+        if (IsAnimBankSpriteVisible(gAnimBankTarget ^ 2)) {
+            return gBattleMonSprites[gAnimBankTarget ^ 2];
         } else {
             return 0xff;
         }
@@ -567,8 +567,8 @@ void sub_80783D0(struct Sprite *sprite) {
 void unref_sub_8078414(struct Sprite *sprite) {
     sprite->data[1] = sprite->pos1.x + sprite->pos2.x;
     sprite->data[3] = sprite->pos1.y + sprite->pos2.y;
-    sprite->data[2] = sub_8077ABC(gBattleAnimBankTarget, 2);
-    sprite->data[4] = sub_8077ABC(gBattleAnimBankTarget, 3);
+    sprite->data[2] = GetBankPosition(gAnimBankTarget, 2);
+    sprite->data[4] = GetBankPosition(gAnimBankTarget, 3);
     sprite->callback = sub_80782F8;
 }
 
@@ -613,14 +613,14 @@ void sub_8078504(struct Sprite *sprite) {
 
 void move_anim_8074EE0(struct Sprite *sprite) {
     FreeSpriteOamMatrix(sprite);
-    move_anim_8072740(sprite);
+    DestroyAnimSprite(sprite);
 }
 
 void unref_sub_8078588(struct Sprite *sprite) {
     sprite->data[1] = sprite->pos1.x + sprite->pos2.x;
     sprite->data[3] = sprite->pos1.y + sprite->pos2.y;
-    sprite->data[2] = sub_8077ABC(gBattleAnimBankAttacker, 2);
-    sprite->data[4] = sub_8077ABC(gBattleAnimBankAttacker, 3);
+    sprite->data[2] = GetBankPosition(gAnimBankAttacker, 2);
+    sprite->data[4] = GetBankPosition(gAnimBankAttacker, 3);
     sprite->callback = sub_80782F8;
 }
 
@@ -644,7 +644,7 @@ void sub_8078600(struct Sprite *sprite) {
 void sub_807861C(struct Sprite *sprite) {
     REG_BLDCNT = 0;
     REG_BLDALPHA = 0;
-    move_anim_8072740(sprite);
+    DestroyAnimSprite(sprite);
 }
 
 void sub_8078634(u8 task) {
@@ -654,19 +654,19 @@ void sub_8078634(u8 task) {
 }
 
 void sub_8078650(struct Sprite *sprite) {
-    sprite->pos1.x = sub_8077ABC(gBattleAnimBankAttacker, 2);
-    sprite->pos1.y = sub_8077ABC(gBattleAnimBankAttacker, 3);
+    sprite->pos1.x = GetBankPosition(gAnimBankAttacker, 2);
+    sprite->pos1.y = GetBankPosition(gAnimBankAttacker, 3);
 }
 
 void sub_807867C(struct Sprite *sprite, s16 a2) {
-    u16 v1 = sub_8077ABC(gBattleAnimBankAttacker, 0);
-    u16 v2 = sub_8077ABC(gBattleAnimBankTarget, 0);
+    u16 v1 = GetBankPosition(gAnimBankAttacker, 0);
+    u16 v2 = GetBankPosition(gAnimBankTarget, 0);
     if (v1 > v2) {
         sprite->pos1.x -= a2;
     } else if (v1 < v2) {
         sprite->pos1.x += a2;
     } else {
-        if (GetBankSide(gBattleAnimBankAttacker)) {
+        if (GetBankSide(gAnimBankAttacker)) {
             sprite->pos1.x -= a2;
         } else {
             sprite->pos1.x += a2;
@@ -700,8 +700,8 @@ void oamt_add_pos2_onto_pos1(struct Sprite *sprite) {
 
 void sub_8078764(struct Sprite *sprite, u8 a2) {
     if (!a2) {
-        sprite->pos1.x = sub_8077EE4(gBattleAnimBankTarget, 0);
-        sprite->pos1.y = sub_8077EE4(gBattleAnimBankTarget, 1);
+        sprite->pos1.x = sub_8077EE4(gAnimBankTarget, 0);
+        sprite->pos1.y = sub_8077EE4(gAnimBankTarget, 1);
     }
     sub_807867C(sprite, gBattleAnimArgs[0]);
     sprite->pos1.y += gBattleAnimArgs[1];
@@ -709,11 +709,11 @@ void sub_8078764(struct Sprite *sprite, u8 a2) {
 
 void sub_80787B0(struct Sprite *sprite, u8 a2) {
     if (!a2) {
-        sprite->pos1.x = sub_8077EE4(gBattleAnimBankAttacker, 0);
-        sprite->pos1.y = sub_8077EE4(gBattleAnimBankAttacker, 1);
+        sprite->pos1.x = sub_8077EE4(gAnimBankAttacker, 0);
+        sprite->pos1.y = sub_8077EE4(gAnimBankAttacker, 1);
     } else {
-        sprite->pos1.x = sub_8077EE4(gBattleAnimBankAttacker, 2);
-        sprite->pos1.y = sub_8077EE4(gBattleAnimBankAttacker, 3);
+        sprite->pos1.x = sub_8077EE4(gAnimBankAttacker, 2);
+        sprite->pos1.y = sub_8077EE4(gAnimBankAttacker, 3);
     }
     sub_807867C(sprite, gBattleAnimArgs[0]);
     sprite->pos1.y += gBattleAnimArgs[1];
@@ -737,12 +737,12 @@ u8 GetBankByPlayerAI(u8 slot) {
     return i;
 }
 
-bool8 AnimBankSpriteExists(u8 slot) {
-    if (NotInBattle()) {
-        if (gBattleAnimBankAttacker == slot) {
+bool8 IsBankSpritePresent(u8 slot) {
+    if (IsContest()) {
+        if (gAnimBankAttacker == slot) {
             return TRUE;
         }
-        if (gBattleAnimBankTarget == slot) {
+        if (gAnimBankTarget == slot) {
             return TRUE;
         }
         return FALSE;
@@ -768,7 +768,7 @@ bool8 IsDoubleBattle() {
 }
 
 void sub_8078914(struct Struct_sub_8078914 *unk) {
-    if (NotInBattle()) {
+    if (IsContest()) {
         unk->field_0 = (u8 *)0x6008000;
         unk->field_4 = (u8 *)0x600f000;
         unk->field_8 = 0xe;
@@ -780,11 +780,11 @@ void sub_8078914(struct Struct_sub_8078914 *unk) {
 }
 
 void sub_8078954(struct Struct_sub_8078914 *unk) {
-    if (NotInBattle()) {
+    if (IsContest()) {
         unk->field_0 = (u8 *)0x6008000;
         unk->field_4 = (u8 *)0x600f000;
         unk->field_8 = 0xe;
-    } else if (GetBankIdentity_permutated(gBattleAnimBankAttacker) == 1) {
+    } else if (GetBankIdentity_permutated(gAnimBankAttacker) == 1) {
         unk->field_0 = (u8 *)0x6004000;
         unk->field_4 = (u8 *)0x600e000;
         unk->field_8 = 0x8;
@@ -796,7 +796,7 @@ void sub_8078954(struct Struct_sub_8078914 *unk) {
 }
 
 u8 sub_80789BC() {
-    if (NotInBattle()) {
+    if (IsContest()) {
         return 1;
     }
     return 2;
@@ -806,7 +806,7 @@ void sub_80789D4(bool8 a1) {
     if (!a1) {
         BG3CNT.size = 0;
         BG3CNT.overflow = 1;
-    } else if (NotInBattle()) {
+    } else if (IsContest()) {
         BG3CNT.size = 0;
         BG3CNT.overflow = 1;
     } else {
@@ -1011,7 +1011,7 @@ void obj_id_set_rotscale(u8 sprite, s16 xScale, s16 yScale, u16 rotation) {
 }
 
 bool8 sub_8078E38() {
-    if (NotInBattle()) {
+    if (IsContest()) {
         if (gSprites[GetAnimBankSpriteId(0)].data[2] == 0xc9 /* XXX SPECIES_UNOWN? */) {
             return FALSE;
         }
@@ -1022,12 +1022,12 @@ bool8 sub_8078E38() {
 
 void sub_8078E70(u8 sprite, u8 a2) {
     u8 r7 = gSprites[sprite].data[0];
-    if (NotInBattle() || IsAnimBankSpriteVisible(r7)) {
+    if (IsContest() || IsAnimBankSpriteVisible(r7)) {
         gSprites[sprite].invisible = FALSE;
     }
     gSprites[sprite].oam.objMode = a2;
     gSprites[sprite].affineAnimPaused = TRUE;
-    if (!NotInBattle() && !gSprites[sprite].oam.affineMode) {
+    if (!IsContest() && !gSprites[sprite].oam.affineMode) {
         gSprites[sprite].oam.matrixNum = ewram17810[r7].unk6;
     }
     gSprites[sprite].oam.affineMode = 3;
@@ -1119,41 +1119,41 @@ u32 sub_80791A8(u8 a1, u8 a2, u8 a3, u8 a4, u8 a5, u8 a6, u8 a7) {
     u32 var = 0;
     u32 shift;
     if (a1) {
-        if (!NotInBattle()) {
+        if (!IsContest()) {
             var = 0xe;
         } else {
             var = 1 << sub_80789BC();
         }
     }
     if (a2) {
-        shift = gBattleAnimBankAttacker + 16;
+        shift = gAnimBankAttacker + 16;
         var |= 1 << shift;
     }
     if (a3) {
-        shift = gBattleAnimBankTarget + 16;
+        shift = gAnimBankTarget + 16;
         var |= 1 << shift;
     }
     if (a4) {
-        if (IsAnimBankSpriteVisible(gBattleAnimBankAttacker ^ 2)) {
-            shift = (gBattleAnimBankAttacker ^ 2) + 16;
+        if (IsAnimBankSpriteVisible(gAnimBankAttacker ^ 2)) {
+            shift = (gAnimBankAttacker ^ 2) + 16;
             var |= 1 << shift;
         }
     }
     if (a5) {
-        if (IsAnimBankSpriteVisible(gBattleAnimBankTarget ^ 2)) {
-            shift = (gBattleAnimBankTarget ^ 2) + 16;
+        if (IsAnimBankSpriteVisible(gAnimBankTarget ^ 2)) {
+            shift = (gAnimBankTarget ^ 2) + 16;
             var |= 1 << shift;
         }
     }
     if (a6) {
-        if (!NotInBattle()) {
+        if (!IsContest()) {
             var |= 0x100;
         } else {
             var |= 0x4000;
         }
     }
     if (a7) {
-        if (!NotInBattle()) {
+        if (!IsContest()) {
             var |= 0x200;
         }
     }
@@ -1163,7 +1163,7 @@ u32 sub_80791A8(u8 a1, u8 a2, u8 a3, u8 a4, u8 a5, u8 a6, u8 a7) {
 u32 sub_80792C0(u8 a1, u8 a2, u8 a3, u8 a4) {
     u32 var = 0;
     u32 shift;
-    if (NotInBattle()) {
+    if (IsContest()) {
         if (a1) {
             var |= 1 << 18;
             return var;
@@ -1238,24 +1238,24 @@ void sub_807941C(struct Sprite *sprite) {
         v2 = 1;
     }
     sub_80787B0(sprite, v1);
-    if (GetBankSide(gBattleAnimBankAttacker)) {
+    if (GetBankSide(gAnimBankAttacker)) {
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
     }
     sprite->data[0] = gBattleAnimArgs[4];
-    sprite->data[2] = sub_8077ABC(gBattleAnimBankTarget, 2) + gBattleAnimArgs[2];
-    sprite->data[4] = sub_8077ABC(gBattleAnimBankTarget, v2) + gBattleAnimArgs[3];
+    sprite->data[2] = GetBankPosition(gAnimBankTarget, 2) + gBattleAnimArgs[2];
+    sprite->data[4] = GetBankPosition(gAnimBankTarget, v2) + gBattleAnimArgs[3];
     sprite->callback = sub_8078B34;
-    StoreSpriteCallbackInData(sprite, move_anim_8072740);
+    StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
 
 void sub_80794A8(struct Sprite *sprite) {
     sub_80787B0(sprite, 1);
-    if (GetBankSide(gBattleAnimBankAttacker)) {
+    if (GetBankSide(gAnimBankAttacker)) {
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
     }
     sprite->data[0] = gBattleAnimArgs[4];
-    sprite->data[2] = sub_8077ABC(gBattleAnimBankTarget, 2) + gBattleAnimArgs[2];
-    sprite->data[4] = sub_8077ABC(gBattleAnimBankTarget, 3) + gBattleAnimArgs[3];
+    sprite->data[2] = GetBankPosition(gAnimBankTarget, 2) + gBattleAnimArgs[2];
+    sprite->data[4] = GetBankPosition(gAnimBankTarget, 3) + gBattleAnimArgs[3];
     sprite->data[5] = gBattleAnimArgs[5];
     sub_80786EC(sprite);
     sprite->callback = sub_8079518;
@@ -1263,7 +1263,7 @@ void sub_80794A8(struct Sprite *sprite) {
 
 void sub_8079518(struct Sprite *sprite) {
     if (sub_8078718(sprite)) {
-        move_anim_8072740(sprite);
+        DestroyAnimSprite(sprite);
     }
 }
 
@@ -1278,20 +1278,20 @@ void sub_8079534(struct Sprite *sprite) {
     }
     if (!gBattleAnimArgs[5]) {
         sub_80787B0(sprite, r4);
-        slot = gBattleAnimBankAttacker;
+        slot = gAnimBankAttacker;
     } else {
         sub_8078764(sprite, r4);
-        slot = gBattleAnimBankTarget;
+        slot = gAnimBankTarget;
     }
-    if (GetBankSide(gBattleAnimBankAttacker)) {
+    if (GetBankSide(gAnimBankAttacker)) {
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
     }
     sub_8078764(sprite, r4);
     sprite->data[0] = gBattleAnimArgs[4];
-    sprite->data[2] = sub_8077ABC(slot, 2) + gBattleAnimArgs[2];
-    sprite->data[4] = sub_8077ABC(slot, r7) + gBattleAnimArgs[3];
+    sprite->data[2] = GetBankPosition(slot, 2) + gBattleAnimArgs[2];
+    sprite->data[4] = GetBankPosition(slot, r7) + gBattleAnimArgs[3];
     sprite->callback = sub_8078B34;
-    StoreSpriteCallbackInData(sprite, move_anim_8072740);
+    StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
 
 s16 duplicate_obj_of_side_rel2move_in_transparent_mode(u8 a1) {
@@ -1524,7 +1524,7 @@ u16 sub_8079B10(u8 sprite) {
     u16 i;
     for (i = 0; i < (sizeof(gBattleMonSprites) / sizeof(u8)); i++) {
         if (gBattleMonSprites[i] == sprite) {
-            if (NotInBattle()) {
+            if (IsContest()) {
                 species = ewram19348.unk0;
                 return gMonBackPicCoords[species].y_offset;
             } else {
@@ -1565,7 +1565,7 @@ void *sub_8079BFC(s16 bottom, s16 top) {
 
 void sub_8079C08(struct Task *task, u8 a2, s16 a3, s16 a4, s16 a5, s16 a6, u16 a7) {
     task->data[8] = a7;
-    task->data[15] = a2;
+    task->data[15] = a2; // spriteId
     task->data[9] = a3;
     task->data[10] = a4;
     task->data[13] = a5;
@@ -1596,11 +1596,11 @@ u8 sub_8079C74(struct Task *task) {
 
 void sub_8079CEC(u8 task) {
     u16 v1;
-    if (gHappinessMoveAnim <= 30) {
+    if (gAnimFriendship <= 30) {
         v1 = 0;
-    } else if (gHappinessMoveAnim <= 100) {
+    } else if (gAnimFriendship <= 100) {
         v1 = 1;
-    } else if (gHappinessMoveAnim <= 200) {
+    } else if (gAnimFriendship <= 200) {
         v1 = 2;
     } else {
         v1 = 3;
@@ -1610,17 +1610,17 @@ void sub_8079CEC(u8 task) {
 }
 
 void unref_sub_8079D20(u8 priority) {
-    if (IsAnimBankSpriteVisible(gBattleAnimBankTarget)) {
-        gSprites[gBattleMonSprites[gBattleAnimBankTarget]].oam.priority = priority;
+    if (IsAnimBankSpriteVisible(gAnimBankTarget)) {
+        gSprites[gBattleMonSprites[gAnimBankTarget]].oam.priority = priority;
     }
-    if (IsAnimBankSpriteVisible(gBattleAnimBankAttacker)) {
-        gSprites[gBattleMonSprites[gBattleAnimBankAttacker]].oam.priority = priority;
+    if (IsAnimBankSpriteVisible(gAnimBankAttacker)) {
+        gSprites[gBattleMonSprites[gAnimBankAttacker]].oam.priority = priority;
     }
-    if (IsAnimBankSpriteVisible(gBattleAnimBankTarget ^ 2)) {
-        gSprites[gBattleMonSprites[gBattleAnimBankTarget ^ 2]].oam.priority = priority;
+    if (IsAnimBankSpriteVisible(gAnimBankTarget ^ 2)) {
+        gSprites[gBattleMonSprites[gAnimBankTarget ^ 2]].oam.priority = priority;
     }
-    if (IsAnimBankSpriteVisible(gBattleAnimBankAttacker ^ 2)) {
-        gSprites[gBattleMonSprites[gBattleAnimBankAttacker ^ 2]].oam.priority = priority;
+    if (IsAnimBankSpriteVisible(gAnimBankAttacker ^ 2)) {
+        gSprites[gBattleMonSprites[gAnimBankAttacker ^ 2]].oam.priority = priority;
     }
 }
 
@@ -1637,7 +1637,7 @@ void sub_8079E24() {
 u8 sub_8079E90(u8 slot) {
     u8 status;
     u8 ret;
-    if (NotInBattle()) {
+    if (IsContest()) {
         if (slot == 2) {
             return 30;
         } else {
@@ -1660,7 +1660,7 @@ u8 sub_8079E90(u8 slot) {
 
 u8 sub_8079ED4(u8 slot) {
     u8 status = GetBankIdentity(slot);
-    if (NotInBattle()) {
+    if (IsContest()) {
         return 2;
     }
     if (status == 0 || status == 3) {
@@ -1672,7 +1672,7 @@ u8 sub_8079ED4(u8 slot) {
 
 u8 GetBankIdentity_permutated(u8 slot) {
     u8 status;
-    if (!NotInBattle()) {
+    if (!IsContest()) {
         status = GetBankIdentity(slot);
         if (status == 0 || status == 3) {
             return 2;
@@ -1728,7 +1728,7 @@ u8 sub_8079F44(u16 species, u8 isBackpic, u8 a3, s16 a4, s16 a5, u8 a6, u32 a7, 
     } else {
         sprite = CreateSprite(&gSpriteTemplate_837F5B0[a3], a4, a5 + gMonBackPicCoords[species].y_offset, a6);
     }
-    if (NotInBattle()) {
+    if (IsContest()) {
         gSprites[sprite].affineAnims = gSpriteAffineAnimTable_81E7C18;
         StartSpriteAffineAnim(&gSprites[sprite], 0);
     }
@@ -1747,7 +1747,7 @@ int sub_807A100(u8 slot, u8 a2) {
     int ret;
     const struct MonCoords *coords;
     struct TransformStatus *transform;
-    if (NotInBattle()) {
+    if (IsContest()) {
         if (ewram19348.unk4 & 1) {
             species = ewram19348.unk2;
             personality = ewram19348.unk10;
@@ -1826,15 +1826,15 @@ int sub_807A100(u8 slot, u8 a2) {
     case 1:
         return (coords->coords >> 4) * 8;
     case 4:
-        return sub_8077ABC(slot, 2) - ((coords->coords >> 4) * 4);
+        return GetBankPosition(slot, 2) - ((coords->coords >> 4) * 4);
     case 5:
-        return sub_8077ABC(slot, 2) + ((coords->coords >> 4) * 4);
+        return GetBankPosition(slot, 2) + ((coords->coords >> 4) * 4);
     case 2:
-        return sub_8077ABC(slot, 3) - ((coords->coords & 0xf) * 4);
+        return GetBankPosition(slot, 3) - ((coords->coords & 0xf) * 4);
     case 3:
-        return sub_8077ABC(slot, 3) + ((coords->coords & 0xf) * 4);
+        return GetBankPosition(slot, 3) + ((coords->coords & 0xf) * 4);
     case 6:
-        ret = sub_8077ABC(slot, 1) + 0x1f;
+        ret = GetBankPosition(slot, 1) + 0x1f;
         return ret - coords->y_offset;
     default:
         return 0;
@@ -1852,11 +1852,11 @@ void sub_807A3FC(u8 slot, u8 a2, s16 *a3, s16 *a4) {
         v1 = 2;
         v2 = 3;
     }
-    v3 = sub_8077ABC(slot, v1);
-    v4 = sub_8077ABC(slot, v2);
-    if (IsDoubleBattle() && !NotInBattle()) {
-        v5 = sub_8077ABC(slot ^ 2, v1);
-        v6 = sub_8077ABC(slot ^ 2, v2);
+    v3 = GetBankPosition(slot, v1);
+    v4 = GetBankPosition(slot, v2);
+    if (IsDoubleBattle() && !IsContest()) {
+        v5 = GetBankPosition(slot ^ 2, v1);
+        v6 = GetBankPosition(slot ^ 2, v2);
     } else {
         v5 = v3;
         v6 = v4;
@@ -1878,7 +1878,7 @@ u8 sub_807A4A0(int a1, u8 sprite, int a3) {
 
 void sub_807A544(struct Sprite *sprite) {
     sub_8078650(sprite);
-    if (GetBankSide(gBattleAnimBankAttacker)) {
+    if (GetBankSide(gAnimBankAttacker)) {
         sprite->pos1.x -= gBattleAnimArgs[0];
         gBattleAnimArgs[3] = -gBattleAnimArgs[3];
         sprite->hFlip = TRUE;
@@ -1895,7 +1895,7 @@ void sub_807A544(struct Sprite *sprite) {
 }
 
 void sub_807A5C4(struct Sprite *sprite) {
-    if (GetBankSide(gBattleAnimBankAttacker)) {
+    if (GetBankSide(gAnimBankAttacker)) {
         sprite->pos1.x -= gBattleAnimArgs[0];
         gBattleAnimArgs[3] *= -1;
     } else {
@@ -1913,14 +1913,14 @@ void sub_807A5C4(struct Sprite *sprite) {
 
 void sub_807A63C(struct Sprite *sprite) {
     sub_8078650(sprite);
-    if (GetBankSide(gBattleAnimBankAttacker)) {
+    if (GetBankSide(gAnimBankAttacker)) {
         sprite->pos1.x -= gBattleAnimArgs[0];
     } else {
         sprite->pos1.x += gBattleAnimArgs[0];
     }
     sprite->pos1.y += gBattleAnimArgs[1];
     sprite->callback = sub_8078600;
-    StoreSpriteCallbackInData(sprite, move_anim_8072740);
+    StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
 
 void sub_807A69C(u8 taskId) {
@@ -1928,7 +1928,7 @@ void sub_807A69C(u8 taskId) {
     u16 dest;
     struct Task *task = &gTasks[taskId];
     task->data[0] = GetAnimBankSpriteId(0);
-    task->data[1] = (GetBankSide(gBattleAnimBankAttacker)) ? -8 : 8;
+    task->data[1] = (GetBankSide(gAnimBankAttacker)) ? -8 : 8;
     task->data[2] = 0;
     task->data[3] = 0;
     gSprites[task->data[0]].pos2.x -= task->data[0];
@@ -1937,7 +1937,7 @@ void sub_807A69C(u8 taskId) {
 
     dest = (task->data[4] + 0x10) * 0x10;
     src = (gSprites[task->data[0]].oam.paletteNum + 0x10) * 0x10;
-    task->data[6] = sub_8079E90(gBattleAnimBankAttacker);
+    task->data[6] = sub_8079E90(gAnimBankAttacker);
     if (task->data[6] == 20 || task->data[6] == 40) {
         task->data[6] = 2;
     } else {
@@ -1998,9 +1998,9 @@ void sub_807A8D4(struct Sprite *sprite) {
 }
 
 void sub_807A908(struct Sprite *sprite) {
-    sprite->pos1.x = sub_8077ABC(gBattleAnimBankAttacker, 2);
-    sprite->pos1.y = sub_8077ABC(gBattleAnimBankAttacker, 3);
-    if (!GetBankSide(gBattleAnimBankAttacker)) {
+    sprite->pos1.x = GetBankPosition(gAnimBankAttacker, 2);
+    sprite->pos1.y = GetBankPosition(gAnimBankAttacker, 3);
+    if (!GetBankSide(gAnimBankAttacker)) {
         sprite->data[0] = 5;
     } else {
         sprite->data[0] = -10;
@@ -2018,7 +2018,7 @@ void sub_807A960(struct Sprite *sprite) {
         sprite->data[1]++;
     }
     if ((sprite->pos1.y + sprite->pos2.y) < -32) {
-        move_anim_8072740(sprite);
+        DestroyAnimSprite(sprite);
     }
 }
 
@@ -2027,7 +2027,7 @@ void sub_807A9BC(struct Sprite *sprite) {
     sprite->data[0] = gBattleAnimArgs[2];
     sprite->data[2] = sprite->pos1.x + gBattleAnimArgs[4];
     sprite->data[4] = sprite->pos1.y + gBattleAnimArgs[5];
-    if (!GetBankSide(gBattleAnimBankTarget)) {
+    if (!GetBankSide(gAnimBankTarget)) {
         x = (u16)gBattleAnimArgs[4] + 30;
         sprite->pos1.x += x;
         sprite->pos1.y = gBattleAnimArgs[5] - 20;
@@ -2037,5 +2037,5 @@ void sub_807A9BC(struct Sprite *sprite) {
         sprite->pos1.y = gBattleAnimArgs[5] - 80;
     }
     sprite->callback = sub_8078B34;
-    StoreSpriteCallbackInData(sprite, move_anim_8072740);
+    StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }

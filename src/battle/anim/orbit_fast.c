@@ -5,8 +5,8 @@
 #include "sound.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 static void sub_80D2704(struct Sprite* sprite);
 
@@ -15,12 +15,12 @@ static void sub_80D2704(struct Sprite* sprite);
 
 void sub_80D26A4(struct Sprite* sprite)
 {
-    sprite->pos1.x = sub_8077ABC(gBattleAnimBankAttacker, 2);
-    sprite->pos1.y = sub_8077ABC(gBattleAnimBankAttacker, 3);
+    sprite->pos1.x = GetBankPosition(gAnimBankAttacker, 2);
+    sprite->pos1.y = GetBankPosition(gAnimBankAttacker, 3);
     sprite->affineAnimPaused = 1;
     sprite->data[0] = gBattleAnimArgs[0];
     sprite->data[1] = gBattleAnimArgs[1];
-    sprite->data[7] = sub_8079E90(gBattleAnimBankAttacker);
+    sprite->data[7] = sub_8079E90(gAnimBankAttacker);
     sprite->callback = sub_80D2704;
     sub_80D2704(sprite);
 }
@@ -58,5 +58,5 @@ void sub_80D2704(struct Sprite* sprite)
     }
 
     if ((u16)gBattleAnimArgs[7] == 0xFFFF)
-        move_anim_8072740(sprite);
+        DestroyAnimSprite(sprite);
 }

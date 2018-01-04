@@ -48,11 +48,11 @@ Route104_MapBGEvents:: @ 83817C8
 	bg_event 23, 5, 0, 0, 0, Route104_EventScript_14EF66
 	bg_event 7, 20, 0, 0, 0, Route104_EventScript_14EF6F
 	bg_event 17, 23, 3, 0, 0, Route104_EventScript_14EF78
-	bg_event 7, 6, 3, 7, 0, ITEM_SUPER_POTION, 44, 0
-	bg_event 3, 9, 3, 7, 0, ITEM_POKE_BALL, 62, 0
-	bg_event 14, 55, 3, 7, 0, ITEM_POTION, 37, 0
-	bg_event 16, 72, 3, 7, 0, ITEM_ANTIDOTE, 85, 0
-	bg_event 16, 64, 3, 7, 0, ITEM_HEART_SCALE, 88, 0
+	bg_hidden_item_event 7, 6, 3, ITEM_SUPER_POTION, FLAG_HIDDEN_ITEM_2C
+	bg_hidden_item_event 3, 9, 3, ITEM_POKE_BALL, FLAG_HIDDEN_ITEM_3E
+	bg_hidden_item_event 14, 55, 3, ITEM_POTION, FLAG_HIDDEN_ITEM_25
+	bg_hidden_item_event 16, 72, 3, ITEM_ANTIDOTE, FLAG_HIDDEN_ITEM_55
+	bg_hidden_item_event 16, 64, 3, ITEM_HEART_SCALE, FLAG_HIDDEN_ITEM_58
 
 Route104_MapEvents:: @ 8381840
 	map_events Route104_MapObjects, Route104_MapWarps, 0x0, Route104_MapBGEvents

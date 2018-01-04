@@ -17,7 +17,7 @@ u8 sub_80BC050();
 u8 *GetSecretBaseMapName(u8 *dest);
 void sub_80BC300();
 u8 sub_80BCCA4(u8 secretBaseIndex);
-const u8 *sub_80BCCE8(void);
+const u8 *GetSecretBaseTrainerLoseText(void);
 void sub_80BCF1C(u8 taskId);
 void sub_80BD674(void *playerRecords, u32 size, u8 c);
 

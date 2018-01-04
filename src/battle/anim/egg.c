@@ -5,8 +5,8 @@
 #include "sound.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 static void sub_80D13AC(struct Sprite* sprite);
 static void sub_80D1424(struct Sprite* sprite);
@@ -23,7 +23,7 @@ void sub_80D1368(struct Sprite* sprite)
 {
     s16 r1;
     sub_80787B0(sprite, 0);
-    r1 = (GetBankSide(gBattleAnimBankAttacker)) ? -0xA0 : 0xA0;
+    r1 = (GetBankSide(gAnimBankAttacker)) ? -0xA0 : 0xA0;
     sprite->data[0] = 0x380;
     sprite->data[1] = r1;
     sprite->data[7] = gBattleAnimArgs[2];
@@ -36,7 +36,7 @@ void sub_80D13AC(struct Sprite* sprite)
     sprite->pos2.y -= (sprite->data[0] >> 8);
     sprite->pos2.x = sprite->data[1] >> 8;
     sprite->data[0] -= 32;
-    add = (GetBankSide(gBattleAnimBankAttacker)) ? -0xA0 : 0xA0;
+    add = (GetBankSide(gAnimBankAttacker)) ? -0xA0 : 0xA0;
     sprite->data[1] += add;
     if (sprite->pos2.y > 0)
     {
@@ -110,7 +110,7 @@ void sub_80D154C(struct Sprite* sprite)
         if (sprite->data[7] == 0)
             sprite->callback = sub_80D158C;
         else
-            sprite->callback = move_anim_8072740;
+            sprite->callback = DestroyAnimSprite;
     }
 }
 
@@ -118,5 +118,5 @@ void sub_80D158C(struct Sprite* sprite)
 {
     REG_BLDCNT = 0;
     REG_BLDALPHA = 0;
-    move_anim_8072740(sprite);
+    DestroyAnimSprite(sprite);
 }

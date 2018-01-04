@@ -4,8 +4,8 @@
 #include "battle_anim.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 static void sub_80CAB88(struct Sprite* sprite);
 static void sub_80CABC0(struct Sprite* sprite);
@@ -16,14 +16,14 @@ static void sub_80CABC0(struct Sprite* sprite);
 void sub_80CAB18(struct Sprite* sprite)
 {
     sub_80787B0(sprite, 1);
-    if (GetBankSide(gBattleAnimBankAttacker))
+    if (GetBankSide(gAnimBankAttacker))
     {
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
     }
 
     sprite->data[0] = gBattleAnimArgs[4];
-    sprite->data[2] = sub_8077ABC(gBattleAnimBankTarget, 0) + gBattleAnimArgs[2];
-    sprite->data[4] = sub_8077ABC(gBattleAnimBankTarget, 1) + gBattleAnimArgs[3];
+    sprite->data[2] = GetBankPosition(gAnimBankTarget, 0) + gBattleAnimArgs[2];
+    sprite->data[4] = GetBankPosition(gAnimBankTarget, 1) + gBattleAnimArgs[3];
     sprite->data[5] = gBattleAnimArgs[5];
     sub_80786EC(sprite);
     sprite->callback = sub_80CAB88;
@@ -46,5 +46,5 @@ void sub_80CABC0(struct Sprite* sprite)
     StartSpriteAnim(sprite, 1);
     sprite->data[0] = 60;
     sprite->callback = sub_80782D8;
-    StoreSpriteCallbackInData(sprite, move_anim_8072740);
+    StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }

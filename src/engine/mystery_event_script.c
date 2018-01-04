@@ -14,6 +14,7 @@
 #include "string_util.h"
 #include "text.h"
 #include "util.h"
+#include "mystery_event_msg.h"
 
 #if ENGLISH
 #define LANGUAGE_MASK 0x2
@@ -31,17 +32,6 @@ extern void party_compaction(void);
 
 extern ScrCmdFunc gMysteryEventScriptCmdTable[];
 extern ScrCmdFunc gMysteryEventScriptCmdTableEnd[];
-
-extern const u8 gOtherText_BerryObtainedDadHasIt[];
-extern const u8 gOtherText_BerryTransformed[];
-extern const u8 gOtherText_BerryAlreadyObtained[];
-extern const u8 gOtherText_SpecialRibbonReceived[];
-extern const u8 gOtherText_DexUpgraded[];
-extern const u8 gOtherText_RareWordAdded[];
-extern const u8 gOtherText_PokeWasSentOver[];
-extern const u8 gOtherText_PartyIsFull[];
-extern const u8 gOtherText_NewTrainerInHoenn[];
-extern const u8 gOtherText_DataCannotUseVersion[];
 
 static EWRAM_DATA struct ScriptContext sMysteryEventScriptContext = {0};
 
@@ -317,7 +307,7 @@ bool8 MEScrCmd_setenigmaberry(struct ScriptContext *ctx)
     ctx->data[2] = 2;
 
     if (IsEnigmaBerryValid() == TRUE)
-        VarSet(0x402D, 1);
+        VarSet(VAR_ENIGMA_BERRY_AVAILABLE, 1);
     else
         ctx->data[2] = 1;
 

@@ -7,13 +7,13 @@ VerdanturfTown_ContestLobby_MapScript1_153D70:: @ 8153D70
 	end
 
 VerdanturfTown_ContestLobby_EventScript_153D76:: @ 8153D76
-	setvar 0x800b, 5
+	setvar VAR_SPECIAL_B, 5
 	setvar CONTEST_RANK, 0
 	call VerdanturfTown_ContestLobby_EventScript_1A4E92
 	call VerdanturfTown_ContestLobby_EventScript_153DA1
-	special sub_80C4BF0
+	special SetContestTrainerGfxIds
 	call VerdanturfTown_ContestLobby_EventScript_15FBDB
-	setvar 0x4088, 1
+	setvar VAR_CONTEST_LOCATION, 1
 	warp MAP_LINK_CONTEST_ROOM1, 255, 7, 5
 	waitstate
 	end

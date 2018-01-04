@@ -87,7 +87,7 @@ DoRockSmashMovement: @ 81B0F0C
 	applymovement LAST_TALKED, RockSmashMovement
 	waitmovement 0
 	removeobject LAST_TALKED
-	specialvar RESULT, sub_810F5BC
+	specialvar RESULT, TryUpdateRusturfTunnelState
 	compare RESULT, 1
 	goto_if_eq DoRockSmashMovement_Done
 	special ScrSpecial_RockSmashWildEncounter
