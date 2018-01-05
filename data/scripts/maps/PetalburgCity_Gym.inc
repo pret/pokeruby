@@ -15,20 +15,13 @@ PetalburgCity_Gym_MapScript1_15448C:: @ 815448C
 PetalburgCity_Gym_EventScript_1544A3:: @ 81544A3
 	setvar VAR_SPECIAL_5, 1
 	call PetalburgCity_Gym_EventScript_154F9A
-	checktrainerflag OPPONENT_RANDALL
-	call_if_eq PetalburgCity_Gym_EventScript_154FBB
-	checktrainerflag OPPONENT_MARY
-	call_if_eq PetalburgCity_Gym_EventScript_154FDC
-	checktrainerflag OPPONENT_PARKER
-	call_if_eq PetalburgCity_Gym_EventScript_154FFD
-	checktrainerflag OPPONENT_LORI
-	call_if_eq PetalburgCity_Gym_EventScript_15501E
-	checktrainerflag OPPONENT_GEORGE
-	call_if_eq PetalburgCity_Gym_EventScript_15503F
-	checktrainerflag OPPONENT_JODY
-	call_if_eq PetalburgCity_Gym_EventScript_155060
-	checktrainerflag OPPONENT_BERKE
-	call_if_eq PetalburgCity_Gym_EventScript_155081
+	call_if_trainer_defeated OPPONENT_RANDALL, PetalburgCity_Gym_EventScript_154FBB
+	call_if_trainer_defeated OPPONENT_MARY, PetalburgCity_Gym_EventScript_154FDC
+	call_if_trainer_defeated OPPONENT_PARKER, PetalburgCity_Gym_EventScript_154FFD
+	call_if_trainer_defeated OPPONENT_LORI, PetalburgCity_Gym_EventScript_15501E
+	call_if_trainer_defeated OPPONENT_GEORGE, PetalburgCity_Gym_EventScript_15503F
+	call_if_trainer_defeated OPPONENT_JODY, PetalburgCity_Gym_EventScript_155060
+	call_if_trainer_defeated OPPONENT_BERKE, PetalburgCity_Gym_EventScript_155081
 	end
 
 PetalburgCity_Gym_EventScript_1544ED:: @ 81544ED
@@ -632,8 +625,7 @@ PetalburgCity_Gym_EventScript_154BC3:: @ 8154BC3
 
 PetalburgCity_Gym_EventScript_154BF8:: @ 8154BF8
 	lockall
-	checktrainerflag OPPONENT_RANDALL
-	goto_if_lt PetalburgCity_Gym_EventScript_154BB9
+	goto_if_trainer_not_defeated OPPONENT_RANDALL, PetalburgCity_Gym_EventScript_154BB9
 	setvar VAR_SPECIAL_8, 7
 	setvar VAR_SPECIAL_9, 46
 	msgbox PetalburgCity_Gym_Text_17B90F, MSGBOX_YESNO
@@ -645,8 +637,7 @@ PetalburgCity_Gym_EventScript_154BF8:: @ 8154BF8
 
 PetalburgCity_Gym_EventScript_154C2B:: @ 8154C2B
 	lockall
-	checktrainerflag OPPONENT_RANDALL
-	goto_if_lt PetalburgCity_Gym_EventScript_154BB9
+	goto_if_trainer_not_defeated OPPONENT_RANDALL, PetalburgCity_Gym_EventScript_154BB9
 	setvar VAR_SPECIAL_8, 1
 	setvar VAR_SPECIAL_9, 59
 	msgbox PetalburgCity_Gym_Text_17B950, MSGBOX_YESNO
@@ -658,8 +649,7 @@ PetalburgCity_Gym_EventScript_154C2B:: @ 8154C2B
 
 PetalburgCity_Gym_EventScript_154C5E:: @ 8154C5E
 	lockall
-	checktrainerflag OPPONENT_MARY
-	goto_if_lt PetalburgCity_Gym_EventScript_154BB9
+	goto_if_trainer_not_defeated OPPONENT_MARY, PetalburgCity_Gym_EventScript_154BB9
 	setvar VAR_SPECIAL_8, 7
 	setvar VAR_SPECIAL_9, 59
 	msgbox PetalburgCity_Gym_Text_17B950, MSGBOX_YESNO
@@ -671,8 +661,7 @@ PetalburgCity_Gym_EventScript_154C5E:: @ 8154C5E
 
 PetalburgCity_Gym_EventScript_154C91:: @ 8154C91
 	lockall
-	checktrainerflag OPPONENT_MARY
-	goto_if_lt PetalburgCity_Gym_EventScript_154BB9
+	goto_if_trainer_not_defeated OPPONENT_MARY, PetalburgCity_Gym_EventScript_154BB9
 	setvar VAR_SPECIAL_8, 1
 	setvar VAR_SPECIAL_9, 72
 	msgbox PetalburgCity_Gym_Text_17B98A, MSGBOX_YESNO
@@ -684,8 +673,7 @@ PetalburgCity_Gym_EventScript_154C91:: @ 8154C91
 
 PetalburgCity_Gym_EventScript_154CC4:: @ 8154CC4
 	lockall
-	checktrainerflag OPPONENT_PARKER
-	goto_if_lt PetalburgCity_Gym_EventScript_154BB9
+	goto_if_trainer_not_defeated OPPONENT_PARKER, PetalburgCity_Gym_EventScript_154BB9
 	setvar VAR_SPECIAL_8, 1
 	setvar VAR_SPECIAL_9, 20
 	msgbox PetalburgCity_Gym_Text_17B9C5, MSGBOX_YESNO
@@ -697,8 +685,7 @@ PetalburgCity_Gym_EventScript_154CC4:: @ 8154CC4
 
 PetalburgCity_Gym_EventScript_154CF7:: @ 8154CF7
 	lockall
-	checktrainerflag OPPONENT_LORI
-	goto_if_lt PetalburgCity_Gym_EventScript_154BB9
+	goto_if_trainer_not_defeated OPPONENT_LORI, PetalburgCity_Gym_EventScript_154BB9
 	setvar VAR_SPECIAL_8, 7
 	setvar VAR_SPECIAL_9, 20
 	msgbox PetalburgCity_Gym_Text_17B9C5, MSGBOX_YESNO
@@ -710,8 +697,7 @@ PetalburgCity_Gym_EventScript_154CF7:: @ 8154CF7
 
 PetalburgCity_Gym_EventScript_154D2A:: @ 8154D2A
 	lockall
-	checktrainerflag OPPONENT_LORI
-	goto_if_lt PetalburgCity_Gym_EventScript_154BB9
+	goto_if_trainer_not_defeated OPPONENT_LORI, PetalburgCity_Gym_EventScript_154BB9
 	setvar VAR_SPECIAL_8, 1
 	setvar VAR_SPECIAL_9, 33
 	msgbox PetalburgCity_Gym_Text_17BA00, MSGBOX_YESNO
@@ -723,8 +709,7 @@ PetalburgCity_Gym_EventScript_154D2A:: @ 8154D2A
 
 PetalburgCity_Gym_EventScript_154D5D:: @ 8154D5D
 	lockall
-	checktrainerflag OPPONENT_GEORGE
-	goto_if_lt PetalburgCity_Gym_EventScript_154BB9
+	goto_if_trainer_not_defeated OPPONENT_GEORGE, PetalburgCity_Gym_EventScript_154BB9
 	setvar VAR_SPECIAL_8, 7
 	setvar VAR_SPECIAL_9, 33
 	msgbox PetalburgCity_Gym_Text_17BA00, MSGBOX_YESNO
@@ -736,8 +721,7 @@ PetalburgCity_Gym_EventScript_154D5D:: @ 8154D5D
 
 PetalburgCity_Gym_EventScript_154D90:: @ 8154D90
 	lockall
-	checktrainerflag OPPONENT_JODY
-	goto_if_lt PetalburgCity_Gym_EventScript_154BB9
+	goto_if_trainer_not_defeated OPPONENT_JODY, PetalburgCity_Gym_EventScript_154BB9
 	setvar VAR_SPECIAL_8, 1
 	setvar VAR_SPECIAL_9, 7
 	msgbox PetalburgCity_Gym_Text_17BA3D, MSGBOX_YESNO
@@ -749,8 +733,7 @@ PetalburgCity_Gym_EventScript_154D90:: @ 8154D90
 
 PetalburgCity_Gym_EventScript_154DC3:: @ 8154DC3
 	lockall
-	checktrainerflag OPPONENT_BERKE
-	goto_if_lt PetalburgCity_Gym_EventScript_154BB9
+	goto_if_trainer_not_defeated OPPONENT_BERKE, PetalburgCity_Gym_EventScript_154BB9
 	setvar VAR_SPECIAL_8, 7
 	setvar VAR_SPECIAL_9, 7
 	msgbox PetalburgCity_Gym_Text_17BA3D, MSGBOX_YESNO

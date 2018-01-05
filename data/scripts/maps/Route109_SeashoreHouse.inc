@@ -91,12 +91,9 @@ Route109_SeashoreHouse_EventScript_160EEE:: @ 8160EEE
 	end
 
 Route109_SeashoreHouse_EventScript_160F09:: @ 8160F09
-	checktrainerflag OPPONENT_DWAYNE
-	goto_if_lt Route109_SeashoreHouse_EventScript_160F29
-	checktrainerflag OPPONENT_JOHANNA
-	goto_if_lt Route109_SeashoreHouse_EventScript_160F29
-	checktrainerflag OPPONENT_SIMON
-	goto_if_lt Route109_SeashoreHouse_EventScript_160F29
+	goto_if_trainer_not_defeated OPPONENT_DWAYNE, Route109_SeashoreHouse_EventScript_160F29
+	goto_if_trainer_not_defeated OPPONENT_JOHANNA, Route109_SeashoreHouse_EventScript_160F29
+	goto_if_trainer_not_defeated OPPONENT_SIMON, Route109_SeashoreHouse_EventScript_160F29
 	setflag FLAG_DEFEATED_SEASHORE_HOUSE_TRAINERS
 	release
 	end

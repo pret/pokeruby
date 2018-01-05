@@ -1361,6 +1361,26 @@
 
 @ Supplementary
 
+	.macro goto_if_trainer_not_defeated opponent, dest
+	checktrainerflag \opponent
+	goto_if 0, \dest
+	.endm
+
+	.macro goto_if_trainer_defeated opponent, dest
+	checktrainerflag \opponent
+	goto_if 1, \dest
+	.endm
+
+	.macro call_if_trainer_not_defeated opponent, dest
+	checktrainerflag \opponent
+	call_if 0, \dest
+	.endm
+
+	.macro call_if_trainer_defeated opponent, dest
+	checktrainerflag \opponent
+	call_if 1, \dest
+	.endm
+
 	.macro goto_if_unset flag, dest
 	checkflag \flag
 	goto_if 0, \dest

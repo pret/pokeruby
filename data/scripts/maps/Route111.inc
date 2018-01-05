@@ -15,8 +15,7 @@ Route111_EventScript_14FFA6:: @ 814FFA6
 Route111_MapScript1_14FFB9:: @ 814FFB9
 	call Route111_EventScript_14FFCD
 	call Route111_EventScript_1AE313
-	checktrainerflag OPPONENT_VICKY
-	goto_if_lt Route111_EventScript_15000D
+	goto_if_trainer_not_defeated OPPONENT_VICKY, Route111_EventScript_15000D
 	end
 
 Route111_EventScript_14FFCD:: @ 814FFCD

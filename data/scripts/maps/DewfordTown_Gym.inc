@@ -7,8 +7,7 @@ DewfordTown_Gym_MapScript1_15306B:: @ 815306B
 	end
 
 DewfordTown_Gym_EventScript_153071:: @ 8153071
-	checktrainerflag OPPONENT_BRAWLY
-	goto_if_eq DewfordTown_Gym_EventScript_1530AA
+	goto_if_trainer_defeated OPPONENT_BRAWLY, DewfordTown_Gym_EventScript_1530AA
 	call DewfordTown_Gym_EventScript_153122
 	copyvar VAR_SPECIAL_1, VAR_SPECIAL_0
 	compare VAR_SPECIAL_0, 0
@@ -81,18 +80,15 @@ DewfordTown_Gym_EventScript_153117:: @ 8153117
 
 DewfordTown_Gym_EventScript_153122:: @ 8153122
 	setvar VAR_SPECIAL_0, 0
-	checktrainerflag OPPONENT_HIDEKI
-	goto_if_lt DewfordTown_Gym_EventScript_153135
+	goto_if_trainer_not_defeated OPPONENT_HIDEKI, DewfordTown_Gym_EventScript_153135
 	addvar VAR_SPECIAL_0, 1
 
 DewfordTown_Gym_EventScript_153135:: @ 8153135
-	checktrainerflag OPPONENT_TESSA
-	goto_if_lt DewfordTown_Gym_EventScript_153143
+	goto_if_trainer_not_defeated OPPONENT_TESSA, DewfordTown_Gym_EventScript_153143
 	addvar VAR_SPECIAL_0, 1
 
 DewfordTown_Gym_EventScript_153143:: @ 8153143
-	checktrainerflag OPPONENT_LAURA
-	goto_if_lt DewfordTown_Gym_EventScript_153151
+	goto_if_trainer_not_defeated OPPONENT_LAURA, DewfordTown_Gym_EventScript_153151
 	addvar VAR_SPECIAL_0, 1
 
 DewfordTown_Gym_EventScript_153151:: @ 8153151
