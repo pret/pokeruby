@@ -72,8 +72,8 @@ Route113_GlassWorkshop_EventScript_163660:: @ 8163660
 	setvar VAR_SPECIAL_A, 250
 	compare VAR_ASH_GATHER_COUNT, 250
 	goto_if 0, Route113_GlassWorkshop_EventScript_163830
-	msgbox Route113_GlassWorkshop_Text_19E7CD, 5
-	compare RESULT, 0
+	msgbox Route113_GlassWorkshop_Text_19E7CD, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq Route113_GlassWorkshop_EventScript_163845
 	setvar VAR_GLASS_WORKSHOP_STATE, 10
 	subvar VAR_ASH_GATHER_COUNT, 250
@@ -86,8 +86,8 @@ Route113_GlassWorkshop_EventScript_16369C:: @ 816369C
 	setvar VAR_SPECIAL_A, 500
 	compare VAR_ASH_GATHER_COUNT, 500
 	goto_if 0, Route113_GlassWorkshop_EventScript_163830
-	msgbox Route113_GlassWorkshop_Text_19E7CD, 5
-	compare RESULT, 0
+	msgbox Route113_GlassWorkshop_Text_19E7CD, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq Route113_GlassWorkshop_EventScript_163845
 	setvar VAR_GLASS_WORKSHOP_STATE, 11
 	subvar VAR_ASH_GATHER_COUNT, 500
@@ -100,8 +100,8 @@ Route113_GlassWorkshop_EventScript_1636D8:: @ 81636D8
 	setvar VAR_SPECIAL_A, 500
 	compare VAR_ASH_GATHER_COUNT, 500
 	goto_if 0, Route113_GlassWorkshop_EventScript_163830
-	msgbox Route113_GlassWorkshop_Text_19E7CD, 5
-	compare RESULT, 0
+	msgbox Route113_GlassWorkshop_Text_19E7CD, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq Route113_GlassWorkshop_EventScript_163845
 	setvar VAR_GLASS_WORKSHOP_STATE, 12
 	subvar VAR_ASH_GATHER_COUNT, 500
@@ -114,8 +114,8 @@ Route113_GlassWorkshop_EventScript_163714:: @ 8163714
 	setvar VAR_SPECIAL_A, 1000
 	compare VAR_ASH_GATHER_COUNT, 1000
 	goto_if 0, Route113_GlassWorkshop_EventScript_163830
-	msgbox Route113_GlassWorkshop_Text_19E7CD, 5
-	compare RESULT, 0
+	msgbox Route113_GlassWorkshop_Text_19E7CD, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq Route113_GlassWorkshop_EventScript_163845
 	setvar VAR_GLASS_WORKSHOP_STATE, 13
 	subvar VAR_ASH_GATHER_COUNT, 1000
@@ -128,8 +128,8 @@ Route113_GlassWorkshop_EventScript_163750:: @ 8163750
 	setvar VAR_SPECIAL_A, 1000
 	compare VAR_ASH_GATHER_COUNT, 1000
 	goto_if 0, Route113_GlassWorkshop_EventScript_163830
-	msgbox Route113_GlassWorkshop_Text_19E7CD, 5
-	compare RESULT, 0
+	msgbox Route113_GlassWorkshop_Text_19E7CD, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq Route113_GlassWorkshop_EventScript_163845
 	setvar VAR_GLASS_WORKSHOP_STATE, 14
 	subvar VAR_ASH_GATHER_COUNT, 1000
@@ -143,8 +143,8 @@ Route113_GlassWorkshop_EventScript_16378C:: @ 816378C
 	setvar VAR_SPECIAL_A, 6000
 	compare VAR_ASH_GATHER_COUNT, 6000
 	goto_if 0, Route113_GlassWorkshop_EventScript_163830
-	msgbox Route113_GlassWorkshop_Text_19E7CD, 5
-	compare RESULT, 0
+	msgbox Route113_GlassWorkshop_Text_19E7CD, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq Route113_GlassWorkshop_EventScript_163845
 	setvar VAR_GLASS_WORKSHOP_STATE, 15
 	subvar VAR_ASH_GATHER_COUNT, 6000
@@ -158,8 +158,8 @@ Route113_GlassWorkshop_EventScript_1637CD:: @ 81637CD
 	setvar VAR_SPECIAL_A, 8000
 	compare VAR_ASH_GATHER_COUNT, 8000
 	goto_if 0, Route113_GlassWorkshop_EventScript_163830
-	msgbox Route113_GlassWorkshop_Text_19E7CD, 5
-	compare RESULT, 0
+	msgbox Route113_GlassWorkshop_Text_19E7CD, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq Route113_GlassWorkshop_EventScript_163845
 	setvar VAR_GLASS_WORKSHOP_STATE, 16
 	subvar VAR_ASH_GATHER_COUNT, 8000

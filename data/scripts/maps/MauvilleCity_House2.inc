@@ -19,10 +19,10 @@ MauvilleCity_House2_EventScript_1572E5:: @ 81572E5
 	waitmovement 0
 	applymovement LAST_TALKED, MauvilleCity_House2_Movement_1A0835
 	waitmovement 0
-	msgbox MauvilleCity_House2_Text_1824D8, 5
-	compare RESULT, 1
+	msgbox MauvilleCity_House2_Text_1824D8, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq MauvilleCity_House2_EventScript_15731B
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq MauvilleCity_House2_EventScript_157347
 	end
 

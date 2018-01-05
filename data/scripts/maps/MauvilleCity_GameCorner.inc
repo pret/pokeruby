@@ -143,8 +143,8 @@ MauvilleCity_GameCorner_EventScript_156BFE:: @ 8156BFE
 	goto MauvilleCity_GameCorner_EventScript_156C0C
 
 MauvilleCity_GameCorner_EventScript_156C0C:: @ 8156C0C
-	msgbox MauvilleCity_GameCorner_Text_181E33, 5
-	compare RESULT, 0
+	msgbox MauvilleCity_GameCorner_Text_181E33, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq MauvilleCity_GameCorner_EventScript_156D0D
 	switch VAR_TEMP_1
 	case 1, MauvilleCity_GameCorner_EventScript_156C46
@@ -276,8 +276,8 @@ MauvilleCity_GameCorner_EventScript_156DDE:: @ 8156DDE
 	goto MauvilleCity_GameCorner_EventScript_156DEC
 
 MauvilleCity_GameCorner_EventScript_156DEC:: @ 8156DEC
-	msgbox MauvilleCity_GameCorner_Text_181E33, 5
-	compare RESULT, 0
+	msgbox MauvilleCity_GameCorner_Text_181E33, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq MauvilleCity_GameCorner_EventScript_156F77
 	switch VAR_TEMP_1
 	case 1, MauvilleCity_GameCorner_EventScript_156E3C
@@ -391,8 +391,8 @@ MauvilleCity_GameCorner_EventScript_156F96:: @ 8156F96
 	faceplayer
 	checkflag FLAG_RECEIVED_STARTER_DOLL
 	goto_if_eq MauvilleCity_GameCorner_EventScript_157072
-	msgbox MauvilleCity_GameCorner_Text_181F3D, 5
-	compare RESULT, 0
+	msgbox MauvilleCity_GameCorner_Text_181F3D, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq MauvilleCity_GameCorner_EventScript_157068
 	switch VAR_STARTER_MON
 	case 0, MauvilleCity_GameCorner_EventScript_156FDB

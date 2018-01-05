@@ -351,10 +351,10 @@ VerdanturfTown_PokemonCenter_2F_EventScript_1A40CC:: @ 81A40CC
 	copyvar VAR_SPECIAL_7, LAST_TALKED
 	lock
 	faceplayer
-	msgbox OldaleTown_PokemonCenter_2F_Text_1A457E, 5
-	compare RESULT, 0
+	msgbox OldaleTown_PokemonCenter_2F_Text_1A457E, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A4319
-	compare RESULT, 1
+	compare RESULT, YES
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A40FA
 
 OldaleTown_PokemonCenter_2F_EventScript_1A40FA:: @ 81A40FA
@@ -448,10 +448,10 @@ VerdanturfTown_PokemonCenter_2F_EventScript_1A41FB:: @ 81A41FB
 	copyvar VAR_SPECIAL_7, LAST_TALKED
 	lock
 	faceplayer
-	msgbox OldaleTown_PokemonCenter_2F_Text_1A45FE, 5
-	compare RESULT, 0
+	msgbox OldaleTown_PokemonCenter_2F_Text_1A45FE, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A4319
-	compare RESULT, 1
+	compare RESULT, YES
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A4229
 
 OldaleTown_PokemonCenter_2F_EventScript_1A4229:: @ 81A4229
@@ -790,8 +790,8 @@ RecordCorner_EventScript_1A44D6:: @ 81A44D6
 	end
 
 TradeRoom_PromptToCancelLink:: @ 81A44E5
-	msgbox TradeRoom_WillLinkBeTerminated, 5
-	compare RESULT, 1
+	msgbox TradeRoom_WillLinkBeTerminated, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq TradeRoom_TerminateLink
 	erasebox 0, 0, 29, 19
 	end

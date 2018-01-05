@@ -127,8 +127,8 @@ SootopolisCity_EventScript_14D220:: @ 814D220
 	end
 
 SootopolisCity_EventScript_14D241:: @ 814D241
-	msgbox SootopolisCity_Text_1C6540, 5
-	compare RESULT, 1
+	msgbox SootopolisCity_Text_1C6540, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq SootopolisCity_EventScript_14D25E
 	msgbox SootopolisCity_Text_1C6626, 4
 	release

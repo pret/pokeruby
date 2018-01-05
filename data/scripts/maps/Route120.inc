@@ -115,10 +115,10 @@ Route120_EventScript_151739:: @ 8151739
 	dodailyevents
 	checkflag FLAG_DAILY_RECEIVED_BERRY_ROUTE120
 	goto_if_eq Route120_EventScript_151837
-	msgbox Route120_Text_1C58F1, 5
-	compare RESULT, 1
+	msgbox Route120_Text_1C58F1, MSGBOX_YESNO
+	compare RESULT, YES
 	call_if 1, Route120_EventScript_151841
-	compare RESULT, 0
+	compare RESULT, NO
 	call_if 1, Route120_EventScript_15184A
 	specialvar RESULT, GetPlayerTrainerIdOnesDigit
 	switch RESULT
@@ -186,8 +186,8 @@ Route120_EventScript_151853:: @ 8151853
 	faceplayer
 	checkflag FLAG_NOT_READY_FOR_BATTLE_ROUTE120
 	goto_if_eq Route120_EventScript_151884
-	msgbox Route120_Text_171827, 5
-	compare RESULT, 0
+	msgbox Route120_Text_171827, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq Route120_EventScript_151877
 	goto Route120_EventScript_15189D
 	end
@@ -199,8 +199,8 @@ Route120_EventScript_151877:: @ 8151877
 	end
 
 Route120_EventScript_151884:: @ 8151884
-	msgbox Route120_Text_17196F, 5
-	compare RESULT, 0
+	msgbox Route120_Text_17196F, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq Route120_EventScript_151877
 	goto Route120_EventScript_15189D
 	end

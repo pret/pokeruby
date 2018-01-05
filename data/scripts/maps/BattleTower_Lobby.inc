@@ -221,10 +221,10 @@ BattleTower_Lobby_EventScript_1604FA:: @ 81604FA
 	waitstate
 	compare RESULT, 0
 	goto_if_eq BattleTower_Lobby_EventScript_16064F
-	msgbox BattleTower_Lobby_Text_199FDA, 5
+	msgbox BattleTower_Lobby_Text_199FDA, MSGBOX_YESNO
 	switch RESULT
-	case 0, BattleTower_Lobby_EventScript_16064F
-	case 1, BattleTower_Lobby_EventScript_160587
+	case NO, BattleTower_Lobby_EventScript_16064F
+	case YES, BattleTower_Lobby_EventScript_160587
 	case 127, BattleTower_Lobby_EventScript_16064F
 
 BattleTower_Lobby_EventScript_160587:: @ 8160587
@@ -334,10 +334,10 @@ BattleTower_Lobby_Movement_16069A:: @ 816069A
 BattleTower_Lobby_EventScript_1606A5:: @ 81606A5
 	lock
 	faceplayer
-	msgbox BattleTower_Lobby_Text_19A747, 5
+	msgbox BattleTower_Lobby_Text_19A747, MSGBOX_YESNO
 	switch RESULT
-	case 1, BattleTower_Lobby_EventScript_1606CC
-	case 0, BattleTower_Lobby_EventScript_1606F7
+	case YES, BattleTower_Lobby_EventScript_1606CC
+	case NO, BattleTower_Lobby_EventScript_1606F7
 	release
 	end
 

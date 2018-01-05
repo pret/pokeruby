@@ -100,14 +100,14 @@ MauvilleCity_EventScript_14C0F9:: @ 814C0F9
 	waitmovement 0
 	applymovement 6, MauvilleCity_Movement_1A0835
 	waitmovement 0
-	msgbox MauvilleCity_Text_165D50, 5
+	msgbox MauvilleCity_Text_165D50, MSGBOX_YESNO
 	goto MauvilleCity_EventScript_14C154
 	end
 
 MauvilleCity_EventScript_14C154:: @ 814C154
-	compare RESULT, 1
+	compare RESULT, YES
 	call_if 1, MauvilleCity_EventScript_14C23C
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq MauvilleCity_EventScript_14C285
 	closemessage
 	switch FACING
@@ -185,7 +185,7 @@ MauvilleCity_EventScript_14C285:: @ 814C285
 MauvilleCity_EventScript_14C292:: @ 814C292
 	applymovement 6, MauvilleCity_Movement_1A0839
 	waitmovement 0
-	msgbox MauvilleCity_Text_165EE2, 5
+	msgbox MauvilleCity_Text_165EE2, MSGBOX_YESNO
 	goto MauvilleCity_EventScript_14C154
 	end
 

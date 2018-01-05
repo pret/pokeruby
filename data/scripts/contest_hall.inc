@@ -32,8 +32,8 @@ FallarborTown_ContestLobby_EventScript_1A4EE1:: @ 81A4EE1
 	end
 
 FallarborTown_ContestLobby_EventScript_1A4EF6:: @ 81A4EF6
-	msgbox FallarborTown_ContestLobby_Text_1A64F4, 5
-	compare RESULT, 1
+	msgbox FallarborTown_ContestLobby_Text_1A64F4, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1A4F13
 	msgbox FallarborTown_ContestLobby_Text_1A65EA, 4
 	releaseall
@@ -153,17 +153,17 @@ FallarborTown_ContestLobby_EventScript_1A50C8:: @ 81A50C8
 	end
 
 FallarborTown_ContestLobby_EventScript_1A50D7:: @ 81A50D7
-	msgbox FallarborTown_ContestLobby_Text_1A67A3, 5
+	msgbox FallarborTown_ContestLobby_Text_1A67A3, MSGBOX_YESNO
 	switch RESULT
-	case 0, FallarborTown_ContestLobby_EventScript_1A5048
-	case 1, FallarborTown_ContestLobby_EventScript_1A513D
+	case NO, FallarborTown_ContestLobby_EventScript_1A5048
+	case YES, FallarborTown_ContestLobby_EventScript_1A513D
 	end
 
 FallarborTown_ContestLobby_EventScript_1A50FB:: @ 81A50FB
-	msgbox FallarborTown_ContestLobby_Text_1A6724, 5
+	msgbox FallarborTown_ContestLobby_Text_1A6724, MSGBOX_YESNO
 	switch RESULT
-	case 0, FallarborTown_ContestLobby_EventScript_1A5048
-	case 1, FallarborTown_ContestLobby_EventScript_1A513D
+	case NO, FallarborTown_ContestLobby_EventScript_1A5048
+	case YES, FallarborTown_ContestLobby_EventScript_1A513D
 	end
 
 FallarborTown_ContestLobby_EventScript_1A511F:: @ 81A511F

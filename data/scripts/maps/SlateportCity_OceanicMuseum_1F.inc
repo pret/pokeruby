@@ -33,8 +33,8 @@ SlateportCity_OceanicMuseum_1F_EventScript_155AF5:: @ 8155AF5
 SlateportCity_OceanicMuseum_1F_EventScript_155B06:: @ 8155B06
 	showmoneybox 0, 0
 	nop
-	msgbox SlateportCity_OceanicMuseum_1F_Text_17E18D, 5
-	compare RESULT, 1
+	msgbox SlateportCity_OceanicMuseum_1F_Text_17E18D, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_155B2D
 	closemessage
 	hidemoneybox 0, 0

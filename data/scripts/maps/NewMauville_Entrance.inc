@@ -29,8 +29,8 @@ NewMauville_Entrance_EventScript_15E4DC:: @ 815E4DC
 	checkitem ITEM_BASEMENT_KEY, 1
 	compare RESULT, 0
 	goto_if_eq NewMauville_Entrance_EventScript_15E55D
-	msgbox NewMauville_Entrance_Text_1982D4, 5
-	compare RESULT, 0
+	msgbox NewMauville_Entrance_Text_1982D4, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq NewMauville_Entrance_EventScript_15E55D
 	msgbox NewMauville_Entrance_Text_1982EA, 4
 	setmetatile 3, 0, 707, 0

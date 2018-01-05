@@ -51,8 +51,8 @@ Route111_EventScript_15000D:: @ 815000D
 
 Route111_EventScript_150023:: @ 8150023
 	lockall
-	msgbox Route111_Text_16FA54, 5
-	compare RESULT, 0
+	msgbox Route111_Text_16FA54, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq Route111_EventScript_15005F
 	giveitem_std ITEM_ROOT_FOSSIL
 	closemessage
@@ -73,8 +73,8 @@ Route111_EventScript_15005F:: @ 815005F
 
 Route111_EventScript_150069:: @ 8150069
 	lockall
-	msgbox Route111_Text_16FAED, 5
-	compare RESULT, 0
+	msgbox Route111_Text_16FAED, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq Route111_EventScript_1500A5
 	giveitem_std ITEM_CLAW_FOSSIL
 	closemessage
@@ -237,8 +237,8 @@ Route111_EventScript_1501D1:: @ 81501D1
 	lock
 	faceplayer
 	setflag FLAG_LANDMARK_WINSTRATE_FAMILY
-	msgbox Route111_Text_16F705, 5
-	compare RESULT, 1
+	msgbox Route111_Text_16F705, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq Route111_EventScript_1501F3
 	msgbox Route111_Text_16F785, 4
 	release

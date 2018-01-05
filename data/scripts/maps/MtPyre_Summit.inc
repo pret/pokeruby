@@ -139,13 +139,13 @@ MtPyre_Summit_EventScript_15D5EF:: @ 815D5EF
 	lock
 	faceplayer
 	.ifdef SAPPHIRE
-	msgbox UnknownString_81B586F, 5
+	msgbox UnknownString_81B586F, MSGBOX_YESNO
 	.else
-	msgbox MtPyre_Summit_Text_1B64B3, 5
+	msgbox MtPyre_Summit_Text_1B64B3, MSGBOX_YESNO
 	.endif
-	compare RESULT, 1
+	compare RESULT, YES
 	call_if 1, MtPyre_Summit_EventScript_15D611
-	compare RESULT, 0
+	compare RESULT, NO
 	call_if 1, MtPyre_Summit_EventScript_15D61A
 	release
 	end
@@ -185,13 +185,13 @@ MtPyre_Summit_EventScript_15D623:: @ 815D623
 
 MtPyre_Summit_EventScript_15D64A:: @ 815D64A
 	.ifdef SAPPHIRE
-	msgbox UnknownString_81B5647, 5
+	msgbox UnknownString_81B5647, MSGBOX_YESNO
 	.else
-	msgbox MtPyre_Summit_Text_1B6283, 5
+	msgbox MtPyre_Summit_Text_1B6283, MSGBOX_YESNO
 	.endif
-	compare RESULT, 1
+	compare RESULT, YES
 	goto_if_eq MtPyre_Summit_EventScript_15D669
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq MtPyre_Summit_EventScript_15D69B
 	end
 
@@ -216,13 +216,13 @@ MtPyre_Summit_EventScript_15D669:: @ 815D669
 
 MtPyre_Summit_EventScript_15D69B:: @ 815D69B
 	.ifdef SAPPHIRE
-	msgbox UnknownString_81B56AB, 5
+	msgbox UnknownString_81B56AB, MSGBOX_YESNO
 	.else
-	msgbox MtPyre_Summit_Text_1B62E7, 5
+	msgbox MtPyre_Summit_Text_1B62E7, MSGBOX_YESNO
 	.endif
-	compare RESULT, 1
+	compare RESULT, YES
 	goto_if_eq MtPyre_Summit_EventScript_15D669
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq MtPyre_Summit_EventScript_15D69B
 	end
 

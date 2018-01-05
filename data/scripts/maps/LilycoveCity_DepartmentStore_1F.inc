@@ -13,8 +13,8 @@ LilycoveCity_DepartmentStore_1F_EventScript_159D5E:: @ 8159D5E
 	goto_if 5, LilycoveCity_DepartmentStore_1F_EventScript_159EB1
 	checkflag FLAG_DAILY_PICKED_LOTTO_TICKET
 	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E4C
-	msgbox LilycoveCity_DepartmentStore_1F_Text_1C4B5E, 5
-	compare RESULT, 0
+	msgbox LilycoveCity_DepartmentStore_1F_Text_1C4B5E, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E56
 	setflag FLAG_DAILY_PICKED_LOTTO_TICKET
 	message LilycoveCity_DepartmentStore_1F_Text_1C4CC6

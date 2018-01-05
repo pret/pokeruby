@@ -274,8 +274,8 @@ LavaridgeTown_EventScript_14E75A:: @ 814E75A
 	faceplayer
 	checkflag FLAG_RECEIVED_LAVARIDGE_EGG
 	goto_if_eq LavaridgeTown_EventScript_14E79E
-	msgbox LavaridgeTown_Text_16C174, 5
-	compare RESULT, 0
+	msgbox LavaridgeTown_Text_16C174, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq LavaridgeTown_EventScript_14E7B2
 	getpartysize
 	compare RESULT, 6

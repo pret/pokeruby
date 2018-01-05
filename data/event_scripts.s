@@ -440,8 +440,8 @@ EventScript_15F3E2:
 	end
 
 EventScript_15F419:
-	msgbox UnknownString_81A38FB, 5
-	compare RESULT, 0
+	msgbox UnknownString_81A38FB, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq EventScript_15F384
 	closemessage
 	special SecretBasePC_PackUp
@@ -492,8 +492,8 @@ EventScript_15F4A1:
 	compare RESULT, 2
 	goto_if_eq EventScript_15F503
 	special BufferSecretBaseOwnerName
-	msgbox UnknownString_81A3958, 5
-	compare RESULT, 0
+	msgbox UnknownString_81A3958, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq EventScript_15F452
 	msgbox UnknownString_81A3A22, 3
 	special sub_80BC5BC
@@ -502,8 +502,8 @@ EventScript_15F4A1:
 	end
 
 EventScript_15F4E0:
-	msgbox UnknownString_81A3982, 5
-	compare RESULT, 0
+	msgbox UnknownString_81A3982, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq EventScript_15F452
 	msgbox UnknownString_81A3A3A, 3
 	special sub_80BC5BC
@@ -1444,9 +1444,9 @@ VerdanturfTown_PokemonCenter_1F_EventScript_19FD5B:: @ 819FD5B
 	lock
 	faceplayer
 	msgbox gText_NurseJoy_Welcome, MSGBOX_YESNO
-	compare RESULT, 1
+	compare RESULT, YES
 	goto_if_eq do_heal_party
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq dont_heal_party
 	end
 
@@ -1664,10 +1664,10 @@ HiddenItemScript_Fail:
 UnusedMixRecordsScript: @ 819FFD5
 	lock
 	faceplayer
-	msgbox UnusedMixRecordsPromptText, 5
-	compare RESULT, 1
+	msgbox UnusedMixRecordsPromptText, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq UnusedMixRecordsScript_Yes
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq UnusedMixRecordsScript_Done
 	goto UnusedMixRecordsScript_Done
 UnusedMixRecordsScript_Yes: @ 819FFFA
@@ -1827,8 +1827,8 @@ UseSurfScript:: @ 81A0117
 	bufferpartymonnick 0, RESULT
 	setfieldeffectargument 0, RESULT
 	lockall
-	msgbox UseSurfPromptText, 5
-	compare RESULT, 0
+	msgbox UseSurfPromptText, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq UseSurfScript_No
 	msgbox UsedSurfText, 4
 	dofieldeffect 9
@@ -2193,8 +2193,8 @@ Route101_EventScript_1A037F:: @ 81A037F
 Route103_EventScript_1A037F:: @ 81A037F
 	lock
 	faceplayer
-	msgbox Route101_Text_1C4449, 5
-	compare RESULT, 0
+	msgbox Route101_Text_1C4449, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq Route101_EventScript_1A039B
 	call Route101_EventScript_1A03B0
 	release
@@ -2442,8 +2442,8 @@ Route120_EventScript_1A0594:: @ 81A0594
 	end
 
 Route119_EventScript_1A05AE:: @ 81A05AE
-	msgbox Route119_Text_171BB6, 5
-	compare RESULT, 1
+	msgbox Route119_Text_171BB6, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq Route119_EventScript_1A05C3
 	release
 	end
@@ -3632,8 +3632,8 @@ EventScript_1A2CB0:
 	compare RESULT, 6
 	goto_if_eq EventScript_1A2CF1
 	bufferpartymonnick 0, RESULT
-	msgbox UnknownString_8198F34, 5
-	compare RESULT, 0
+	msgbox UnknownString_8198F34, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq EventScript_1A2F3A
 	msgbox UsedCutRockSmashText, 4
 	closemessage
@@ -3663,8 +3663,8 @@ EventScript_1A2D08:
 	compare RESULT, 6
 	goto_if_eq EventScript_1A2D49
 	bufferpartymonnick 0, RESULT
-	msgbox UnknownString_81A197B, 5
-	compare RESULT, 0
+	msgbox UnknownString_81A197B, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq EventScript_1A2F3A
 	msgbox UsedCutRockSmashText, 4
 	closemessage
@@ -3694,8 +3694,8 @@ EventScript_1A2D60:
 	compare RESULT, 6
 	goto_if_eq EventScript_1A2DA1
 	bufferpartymonnick 0, RESULT
-	msgbox UnknownString_81A1A4B, 5
-	compare RESULT, 0
+	msgbox UnknownString_81A1A4B, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq EventScript_1A2F3A
 	msgbox UsedCutRockSmashText, 4
 	closemessage
@@ -3738,8 +3738,8 @@ SecretBase_RedCave1_EventScript_1A2DDE:: @ 81A2DDE
 	applymovement 255, SecretBase_RedCave1_Movement_1A2E11
 	waitmovement 0
 	setvar VAR_0x4097, 1
-	msgbox SecretBase_RedCave1_Text_198F89, 5
-	compare RESULT, 1
+	msgbox SecretBase_RedCave1_Text_198F89, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq SecretBase_RedCave1_EventScript_1A2E08
 	closemessage
 	playse SE_KAIDAN
@@ -3786,18 +3786,18 @@ EventScript_1A2E45:
 	setorcopyvar VAR_SPECIAL_4, RESULT
 	lockall
 	special GetSecretBaseNearbyMapName
-	msgbox UnknownString_81A3C71, 5
-	compare RESULT, 0
+	msgbox UnknownString_81A3C71, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq EventScript_1A2F3A
-	msgbox UnknownString_81A38FB, 5
-	compare RESULT, 0
+	msgbox UnknownString_81A38FB, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq EventScript_1A2F3A
 	fadescreen 1
 	special MoveSecretBase
 	closemessage
 	fadescreen 0
-	msgbox UnknownString_81A3CC9, 5
-	compare RESULT, 0
+	msgbox UnknownString_81A3CC9, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq EventScript_1A2F3A
 	bufferpartymonnick 0, VAR_SPECIAL_4
 	buffermovename 1, MOVE_SECRET_POWER
@@ -3950,8 +3950,8 @@ SecretBase_RedCave1_EventScript_1A3032:: @ 81A3032
 	goto_if_eq SecretBase_RedCave1_EventScript_1A30A5
 	lock
 	faceplayer
-	msgbox SecretBase_RedCave1_Text_1A1AEA, 5
-	compare RESULT, 0
+	msgbox SecretBase_RedCave1_Text_1A1AEA, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq SecretBase_RedCave1_EventScript_1A308F
 	setvar RESULT, 1
 	special sub_80BCE4C
@@ -3985,8 +3985,8 @@ SecretBase_RedCave1_EventScript_1A30AE:: @ 81A30AE
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3121
 	lock
 	faceplayer
-	msgbox SecretBase_RedCave1_Text_1A1E67, 5
-	compare RESULT, 0
+	msgbox SecretBase_RedCave1_Text_1A1E67, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq SecretBase_RedCave1_EventScript_1A310B
 	setvar RESULT, 1
 	special sub_80BCE4C
@@ -4020,8 +4020,8 @@ SecretBase_RedCave1_EventScript_1A312A:: @ 81A312A
 	goto_if_eq SecretBase_RedCave1_EventScript_1A319D
 	lock
 	faceplayer
-	msgbox SecretBase_RedCave1_Text_1A218F, 5
-	compare RESULT, 0
+	msgbox SecretBase_RedCave1_Text_1A218F, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3187
 	setvar RESULT, 1
 	special sub_80BCE4C
@@ -4055,8 +4055,8 @@ SecretBase_RedCave1_EventScript_1A31A6:: @ 81A31A6
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3219
 	lock
 	faceplayer
-	msgbox SecretBase_RedCave1_Text_1A24E1, 5
-	compare RESULT, 0
+	msgbox SecretBase_RedCave1_Text_1A24E1, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3203
 	setvar RESULT, 1
 	special sub_80BCE4C
@@ -4090,8 +4090,8 @@ SecretBase_RedCave1_EventScript_1A3222:: @ 81A3222
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3295
 	lock
 	faceplayer
-	msgbox SecretBase_RedCave1_Text_1A2830, 5
-	compare RESULT, 0
+	msgbox SecretBase_RedCave1_Text_1A2830, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq SecretBase_RedCave1_EventScript_1A327F
 	setvar RESULT, 1
 	special sub_80BCE4C
@@ -4125,8 +4125,8 @@ SecretBase_RedCave1_EventScript_1A329E:: @ 81A329E
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3311
 	lock
 	faceplayer
-	msgbox SecretBase_RedCave1_Text_1A1CB2, 5
-	compare RESULT, 0
+	msgbox SecretBase_RedCave1_Text_1A1CB2, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq SecretBase_RedCave1_EventScript_1A32FB
 	setvar RESULT, 1
 	special sub_80BCE4C
@@ -4160,8 +4160,8 @@ SecretBase_RedCave1_EventScript_1A331A:: @ 81A331A
 	goto_if_eq SecretBase_RedCave1_EventScript_1A338D
 	lock
 	faceplayer
-	msgbox SecretBase_RedCave1_Text_1A2026, 5
-	compare RESULT, 0
+	msgbox SecretBase_RedCave1_Text_1A2026, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3377
 	setvar RESULT, 1
 	special sub_80BCE4C
@@ -4195,8 +4195,8 @@ SecretBase_RedCave1_EventScript_1A3396:: @ 81A3396
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3409
 	lock
 	faceplayer
-	msgbox SecretBase_RedCave1_Text_1A236A, 5
-	compare RESULT, 0
+	msgbox SecretBase_RedCave1_Text_1A236A, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq SecretBase_RedCave1_EventScript_1A33F3
 	setvar RESULT, 1
 	special sub_80BCE4C
@@ -4230,8 +4230,8 @@ SecretBase_RedCave1_EventScript_1A3412:: @ 81A3412
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3485
 	lock
 	faceplayer
-	msgbox SecretBase_RedCave1_Text_1A2663, 5
-	compare RESULT, 0
+	msgbox SecretBase_RedCave1_Text_1A2663, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq SecretBase_RedCave1_EventScript_1A346F
 	setvar RESULT, 1
 	special sub_80BCE4C
@@ -4265,8 +4265,8 @@ SecretBase_RedCave1_EventScript_1A348E:: @ 81A348E
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3501
 	lock
 	faceplayer
-	msgbox SecretBase_RedCave1_Text_1A2A13, 5
-	compare RESULT, 0
+	msgbox SecretBase_RedCave1_Text_1A2A13, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq SecretBase_RedCave1_EventScript_1A34EB
 	setvar RESULT, 1
 	special sub_80BCE4C
@@ -4395,10 +4395,10 @@ SlateportCity_PokemonFanClub_EventScript_1ADE4D:: @ 81ADE4D
 	compare RESULT, 1
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_1ADED6
 	copyvar VAR_SPECIAL_9, VAR_SPECIAL_6
-	msgbox SlateportCity_PokemonFanClub_Text_1A8704, 5
-	compare RESULT, 1
+	msgbox SlateportCity_PokemonFanClub_Text_1A8704, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_1ADE84
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_1ADEB9
 	end
 
@@ -4443,18 +4443,18 @@ SlateportCity_OceanicMuseum_1F_EventScript_1ADEE0:: @ 81ADEE0
 	checkflag FLAG_OCEANIC_MUSEUM_MET_REPORTER
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_1ADF25
 	setflag FLAG_OCEANIC_MUSEUM_MET_REPORTER
-	msgbox SlateportCity_OceanicMuseum_1F_Text_1A927F, 5
-	compare RESULT, 1
+	msgbox SlateportCity_OceanicMuseum_1F_Text_1A927F, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_1ADF44
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_1ADF79
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_1ADF25:: @ 81ADF25
-	msgbox SlateportCity_OceanicMuseum_1F_Text_1A934C, 5
-	compare RESULT, 1
+	msgbox SlateportCity_OceanicMuseum_1F_Text_1A934C, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_1ADF44
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_1ADF79
 	end
 
@@ -4499,10 +4499,10 @@ SlateportCity_PokemonFanClub_EventScript_1ADFA0:: @ 81ADFA0
 	compare RESULT, 1
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_1AE0AC
 	copyvar VAR_SPECIAL_9, VAR_SPECIAL_6
-	msgbox SlateportCity_PokemonFanClub_Text_1A82F1, 5
-	compare RESULT, 1
+	msgbox SlateportCity_PokemonFanClub_Text_1A82F1, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_1ADFE9
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_1AE0A2
 	end
 
@@ -4576,10 +4576,10 @@ VerdanturfTown_ContestLobby_EventScript_1AE0B6:: @ 81AE0B6
 	compare RESULT, 1
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1AE17E
 	copyvar VAR_SPECIAL_9, VAR_SPECIAL_6
-	msgbox FallarborTown_ContestLobby_Text_1A6F7C, 5
-	compare RESULT, 1
+	msgbox FallarborTown_ContestLobby_Text_1A6F7C, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1AE0F8
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1AE12D
 	end
 
@@ -4673,10 +4673,10 @@ BattleTower_Lobby_EventScript_1AE1FF:: @ 81AE1FF
 	compare RESULT, 1
 	goto_if_eq BattleTower_Lobby_EventScript_1AE2E3
 	copyvar VAR_SPECIAL_9, VAR_SPECIAL_6
-	msgbox BattleTower_Lobby_Text_1A776D, 5
-	compare RESULT, 1
+	msgbox BattleTower_Lobby_Text_1A776D, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq BattleTower_Lobby_EventScript_1AE241
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq BattleTower_Lobby_EventScript_1AE297
 	end
 

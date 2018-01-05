@@ -493,9 +493,9 @@ Route110_TrickHouseEntrance_EventScript_1615BD:: @ 81615BD
 	end
 
 Route110_TrickHouseEntrance_EventScript_1615C7:: @ 81615C7
-	msgbox Route110_TrickHouseEntrance_Text_19BE7D, 5
+	msgbox Route110_TrickHouseEntrance_Text_19BE7D, MSGBOX_YESNO
 	closemessage
-	compare RESULT, 1
+	compare RESULT, YES
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_1615DD
 	releaseall
 	end

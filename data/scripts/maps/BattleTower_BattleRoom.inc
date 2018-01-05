@@ -59,24 +59,24 @@ BattleTower_BattleRoom_EventScript_160961:: @ 8160961
 	special ScrSpecial_HealPlayerParty
 
 BattleTower_BattleRoom_EventScript_1609B2:: @ 81609B2
-	msgbox BattleTower_BattleRoom_Text_19AD09, 5
+	msgbox BattleTower_BattleRoom_Text_19AD09, MSGBOX_YESNO
 	switch RESULT
-	case 0, BattleTower_BattleRoom_EventScript_1609E0
-	case 1, BattleTower_BattleRoom_EventScript_160A3C
+	case NO, BattleTower_BattleRoom_EventScript_1609E0
+	case YES, BattleTower_BattleRoom_EventScript_160A3C
 	case 127, BattleTower_BattleRoom_EventScript_1609E0
 
 BattleTower_BattleRoom_EventScript_1609E0:: @ 81609E0
-	msgbox BattleTower_BattleRoom_Text_19AD3C, 5
+	msgbox BattleTower_BattleRoom_Text_19AD3C, MSGBOX_YESNO
 	switch RESULT
-	case 0, BattleTower_BattleRoom_EventScript_160A0E
-	case 1, BattleTower_BattleRoom_EventScript_160A94
+	case NO, BattleTower_BattleRoom_EventScript_160A0E
+	case YES, BattleTower_BattleRoom_EventScript_160A94
 	case 127, BattleTower_BattleRoom_EventScript_160A0E
 
 BattleTower_BattleRoom_EventScript_160A0E:: @ 8160A0E
-	msgbox BattleTower_BattleRoom_Text_19AD66, 5
+	msgbox BattleTower_BattleRoom_Text_19AD66, MSGBOX_YESNO
 	switch RESULT
-	case 0, BattleTower_BattleRoom_EventScript_1609B2
-	case 1, BattleTower_BattleRoom_EventScript_160AB1
+	case NO, BattleTower_BattleRoom_EventScript_1609B2
+	case YES, BattleTower_BattleRoom_EventScript_160AB1
 	case 127, BattleTower_BattleRoom_EventScript_1609B2
 
 BattleTower_BattleRoom_EventScript_160A3C:: @ 8160A3C

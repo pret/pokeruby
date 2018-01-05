@@ -30,10 +30,10 @@ LilycoveCity_ContestLobby_EventScript_158898:: @ 8158898
 	fadescreen 1
 	drawcontestwinner 0
 	lockall
-	msgbox LilycoveCity_ContestLobby_Text_1889FD, 5
-	compare RESULT, 1
+	msgbox LilycoveCity_ContestLobby_Text_1889FD, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_1588DE
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158918
 	releaseall
 	end
@@ -55,8 +55,8 @@ LilycoveCity_ContestLobby_EventScript_1588DE:: @ 81588DE
 	end
 
 LilycoveCity_ContestLobby_EventScript_158918:: @ 8158918
-	msgbox LilycoveCity_ContestLobby_Text_188C41, 5
-	compare RESULT, 1
+	msgbox LilycoveCity_ContestLobby_Text_188C41, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_1588DE
 	msgbox LilycoveCity_ContestLobby_Text_188CBD, 4
 	closemessage
@@ -204,10 +204,10 @@ LilycoveCity_ContestLobby_EventScript_158A6A:: @ 8158A6A
 	lockall
 	fadescreen 1
 	drawcontestwinner 0
-	msgbox LilycoveCity_ContestLobby_Text_1889FD, 5
-	compare RESULT, 1
+	msgbox LilycoveCity_ContestLobby_Text_1889FD, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158AAE
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158AE8
 	end
 
@@ -228,8 +228,8 @@ LilycoveCity_ContestLobby_EventScript_158AAE:: @ 8158AAE
 	end
 
 LilycoveCity_ContestLobby_EventScript_158AE8:: @ 8158AE8
-	msgbox LilycoveCity_ContestLobby_Text_188C41, 5
-	compare RESULT, 1
+	msgbox LilycoveCity_ContestLobby_Text_188C41, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158AAE
 	msgbox LilycoveCity_ContestLobby_Text_188CBD, 4
 	closemessage
@@ -327,8 +327,8 @@ LilycoveCity_ContestLobby_EventScript_158BBA:: @ 8158BBA
 	end
 
 LilycoveCity_ContestLobby_EventScript_158BC4:: @ 8158BC4
-	msgbox LilycoveCity_ContestLobby_Text_188521, 5
-	compare RESULT, 0
+	msgbox LilycoveCity_ContestLobby_Text_188521, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158C35
 	call S_DoSaveDialog
 	erasebox 0, 0, 15, 9

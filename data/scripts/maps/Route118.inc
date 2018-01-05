@@ -11,10 +11,10 @@ Route118_EventScript_150F34:: @ 8150F34
 	faceplayer
 	checkflag FLAG_RECEIVED_GOOD_ROD
 	goto_if_eq Route118_EventScript_150F89
-	msgbox Route118_Text_170F12, 5
-	compare RESULT, 1
+	msgbox Route118_Text_170F12, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq Route118_EventScript_150F5E
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq Route118_EventScript_150F7F
 	end
 

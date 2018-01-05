@@ -29,10 +29,10 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152CBE:: @ 8152CBE
 	waitmessage
 	playfanfare BGM_FANFA4
 	waitfanfare
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_173EF8, 5
-	compare RESULT, 1
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_173EF8, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152CEA
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152CFA
 	end
 
@@ -43,10 +43,10 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152CEA:: @ 8152CEA
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152CFA:: @ 8152CFA
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_173F3D, 5
-	compare RESULT, 1
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_173F3D, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152D19
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152D2B
 	end
 
@@ -58,10 +58,10 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152D19:: @ 8152D19
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152D2B:: @ 8152D2B
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_174075, 5
-	compare RESULT, 1
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_174075, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152D19
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152D2B
 	end
 

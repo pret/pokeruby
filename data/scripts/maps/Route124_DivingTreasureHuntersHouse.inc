@@ -246,8 +246,8 @@ Route124_DivingTreasureHuntersHouse_EventScript_164283:: @ 8164283
 Route124_DivingTreasureHuntersHouse_EventScript_164292:: @ 8164292
 	bufferitemname 0, VAR_SPECIAL_8
 	bufferitemname 1, VAR_SPECIAL_9
-	msgbox Route124_DivingTreasureHuntersHouse_Text_19F5E0, 5
-	compare RESULT, 0
+	msgbox Route124_DivingTreasureHuntersHouse_Text_19F5E0, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq Route124_DivingTreasureHuntersHouse_EventScript_16431F
 	checkitemspace VAR_SPECIAL_9, 1
 	compare RESULT, 1
@@ -265,8 +265,8 @@ Route124_DivingTreasureHuntersHouse_EventScript_1642D3:: @ 81642D3
 	call Route124_DivingTreasureHuntersHouse_EventScript_163E44
 	compare VAR_TEMP_1, 0
 	goto_if_eq Route124_DivingTreasureHuntersHouse_EventScript_164333
-	msgbox Route124_DivingTreasureHuntersHouse_Text_19F629, 5
-	compare RESULT, 1
+	msgbox Route124_DivingTreasureHuntersHouse_Text_19F629, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq Route124_DivingTreasureHuntersHouse_EventScript_163EB0
 	goto Route124_DivingTreasureHuntersHouse_EventScript_16431F
 	end

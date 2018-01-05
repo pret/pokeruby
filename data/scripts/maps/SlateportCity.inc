@@ -287,10 +287,10 @@ SlateportCity_EventScript_14BCFD:: @ 814BCFD
 SlateportCity_EventScript_14BD06:: @ 814BD06
 	lock
 	faceplayer
-	msgbox SlateportCity_Text_1650F1, 5
-	compare RESULT, 1
+	msgbox SlateportCity_Text_1650F1, MSGBOX_YESNO
+	compare RESULT, YES
 	call_if 1, SlateportCity_EventScript_14BD28
-	compare RESULT, 0
+	compare RESULT, NO
 	call_if 1, SlateportCity_EventScript_14BD31
 	release
 	end

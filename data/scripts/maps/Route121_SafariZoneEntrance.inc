@@ -33,8 +33,8 @@ Route121_SafariZoneEntrance_EventScript_15C351:: @ 815C351
 Route121_SafariZoneEntrance_EventScript_15C35A:: @ 815C35A
 	lock
 	faceplayer
-	msgbox Route121_SafariZoneEntrance_Text_1C3704, 5
-	compare RESULT, 1
+	msgbox Route121_SafariZoneEntrance_Text_1C3704, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq Route121_SafariZoneEntrance_EventScript_15C379
 	msgbox Route121_SafariZoneEntrance_Text_1C373C, 4
 	release
@@ -51,8 +51,8 @@ Route121_SafariZoneEntrance_EventScript_15C383:: @ 815C383
 	waitmovement 0
 	showmoneybox 0, 0
 	nop
-	msgbox Route121_SafariZoneEntrance_Text_1C3832, 5
-	compare RESULT, 1
+	msgbox Route121_SafariZoneEntrance_Text_1C3832, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq Route121_SafariZoneEntrance_EventScript_15C3B3
 	msgbox Route121_SafariZoneEntrance_Text_1C3895, 4
 	goto Route121_SafariZoneEntrance_EventScript_15C46C

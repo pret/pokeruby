@@ -10,8 +10,8 @@ FortreeCity_House1_EventScript_157E13:: @ 8157E13
 	copyvar VAR_SPECIAL_4, VAR_SPECIAL_8
 	specialvar RESULT, GetInGameTradeSpeciesInfo
 	copyvar VAR_SPECIAL_9, RESULT
-	msgbox FortreeCity_House1_Text_18568C, 5
-	compare RESULT, 0
+	msgbox FortreeCity_House1_Text_18568C, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq FortreeCity_House1_EventScript_157E95
 	special SelectMonForNPCTrade
 	waitstate
