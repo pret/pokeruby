@@ -41,7 +41,7 @@ fndec\
 #define POKEMON_NAME_LENGTH 10
 #define OT_NAME_LENGTH 7
 
-#define min(a, b) ((a) <= (b) ? (a) : (b))
+#define min(a, b) ((a) < (b) ? (a) : (b))
 #define max(a, b) ((a) >= (b) ? (a) : (b))
 
 // why does GF hate 2d arrays

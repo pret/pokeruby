@@ -180,7 +180,7 @@ void sub_80E9C94(void);
 void sub_80E9D00(void);
 void sub_80E9D7C(void);
 void sub_80E9E08();
-u8 sub_80E9E54(void);
+bool8 sub_80E9E54(void);
 void sub_80E9E98(void);
 u8 sub_80E9EA8(void);
 u8 sub_80E9F50(void);
@@ -1202,7 +1202,7 @@ void sub_80E7458(void)
         shared1000.unk24++;
         break;
     case 1:
-        if (sub_80E9E54() != 0)
+        if (sub_80E9E54())
         {
             if (shared1000.unk1C4 == sub_80E6FC8)
             {

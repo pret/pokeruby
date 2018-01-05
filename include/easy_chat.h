@@ -41,7 +41,9 @@ struct Shared1000
     struct Sprite *unkAC[2];
     struct Sprite *unkB4[2];
     u8 unkBC;
-    u8 fillerBD[0x1A8-0xBD];
+    u8 fillerBD;
+    u16 unkBE;
+    u8 fillerC0[0x1A8-0xC0];
     s8 unk1A8;
     s8 unk1A9;
     s8 unk1AA[0xB5-0xAA];  // unknown length
@@ -51,9 +53,9 @@ struct Shared1000
     u8 unk1B8;
     u8 unk1B9;
     u16 unk1BA;
-    u8 filler1BC[0xBE - 0xBC];
+    u16 unk1BC;
     u8 unk1BE;
-    u8 filler1BF;
+    s8 unk1BF;
     s8 unk1C0;
     u8 filler1C1[3];
     void (*unk1C4)(void);
@@ -89,19 +91,14 @@ struct Shared1000
     u8 unk9CC9[0xD12-0xCC9];
     u8 unk9D12[0x5B-0x12];
     u8 unk9D5B[0xA4-0x5B];
-    u8 unk9DA4[0xC8-0xA4];
-    u8 filler9DC8[0xE14 - 0xDC8];
+    u8 unk9DA4[0xC9-0xA4];
+    u8 unk9DC9[0xE14 - 0xDC9];
     u8 unk9E14[0xE41 - 0xE14];
     u8 unk9E41[0x6E - 0x41];
     u8 unk9E6E[0xEE - 0x6E];
     u8 unk9EEE[0xF6E - 0xEEE];
     u8 unk9F6E[0x8E - 0x6E];  // unknown length
-    u8 unk9F8E[1];  // unknown length
-    /*
-    u8 unk9F8F;
-    u8 unk9F90;
-    u8 unk9F91[1];  // unknown length
-    */
+    u8 unk9F8E[7];  // unknown length
 };
 
 #define static_assert(cond) \
