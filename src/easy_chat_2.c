@@ -1387,18 +1387,17 @@ void sub_80E9940(u8 *a, u8 b)
 
 #if ENGLISH
 
-extern const u8 gUnknown_083DBEAC[][32] =
+const u8 gUnknown_083DBEAC[][32] =
 {
-	__("{UNKNOWN_14 8} A B C  D E F  {UNKNOWN_14 0}others"),  // missing terminator
-	_("{UNKNOWN_14 8} G H I  J K L      $"),
-	_("{UNKNOWN_14 8} M N O  P Q R S    $"),
-	_("{UNKNOWN_14 8} T U V  W X Y Z    $"),
+	_("{UNKNOWN_14 8} A B C  D E F  {UNKNOWN_14 0}others"),
+	_("{UNKNOWN_14 8} G H I  J K L      "),
+	_("{UNKNOWN_14 8} M N O  P Q R S    "),
+	_("{UNKNOWN_14 8} T U V  W X Y Z    "),
 };
 
 #else
 
-const u8 unk_83E7EB0[] = __("{UNKNOWN_14 8} A B C  D E F  {UNKNOWN_14 0}");  // missing terminator
-const u8 unk_83E7EC5[] = _("mehr");
+const u8 unk_83E7EB0[] = _("{UNKNOWN_14 8} A B C  D E F  {UNKNOWN_14 0}mehr");
 const u8 unk_83E7ECA[] = _("{UNKNOWN_14 8} G H I  J K L      ");
 const u8 unk_83E7EE1[] = _("{UNKNOWN_14 8} M N O  P Q R S    ");
 const u8 unk_83E7EF8[] = _("{UNKNOWN_14 8} T U V  W X Y Z    ");
@@ -1408,7 +1407,7 @@ const u8 *const gUnknown_083DBEAC[] =
     unk_83E7ECA,
     unk_83E7EE1,
     unk_83E7EF8,
-    unk_83E7EC5,
+    unk_83E7EB0 + 21,  // pointer to "mehr". What is this for?
 };
 
 #endif
