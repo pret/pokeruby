@@ -37,7 +37,7 @@ LittlerootTown_MaysHouse_2F_EventScript_152A9D:: @ 8152A9D
 	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_152AD4
 	compare RESULT, 1
 	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_152B4A
-	playse 9
+	playse SE_KAIDAN
 	removeobject LAST_TALKED
 	setvar VAR_LITTLEROOT_RIVAL_STATE, 3
 	setvar VAR_LITTLEROOT_STATE, 1
@@ -48,7 +48,7 @@ LittlerootTown_MaysHouse_2F_EventScript_152A9D:: @ 8152A9D
 
 LittlerootTown_BrendansHouse_2F_EventScript_152AD4:: @ 8152AD4
 	msgbox LittlerootTown_BrendansHouse_2F_Text_17337E, 4
-	playbgm 415, 1
+	playbgm BGM_GIRL_SUP, TRUE
 	applymovement LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_1A0839
 	waitmovement 0
 	applymovement LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_1A0833
@@ -82,7 +82,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_152B3F:: @ 8152B3F
 
 LittlerootTown_BrendansHouse_2F_EventScript_152B4A:: @ 8152B4A
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1735C9, 4
-	playbgm 421, 1
+	playbgm BGM_BOY_SUP, TRUE
 	applymovement LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_1A0839
 	waitmovement 0
 	applymovement LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_1A0833

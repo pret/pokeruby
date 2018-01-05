@@ -126,7 +126,7 @@ Route110_TrickHousePuzzle7_EventScript_1632B9:: @ 81632B9
 	checkflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1
 	call_if 1, Route110_TrickHousePuzzle7_EventScript_1631F4
 	special DrawWholeMapView
-	playse 36
+	playse SE_TK_KASYA
 	checkflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1
 	goto_if 0, Route110_TrickHousePuzzle7_EventScript_1633A4
 	checkflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1
@@ -141,7 +141,7 @@ Route110_TrickHousePuzzle7_EventScript_1632E8:: @ 81632E8
 	checkflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2
 	call_if 1, Route110_TrickHousePuzzle7_EventScript_163207
 	special DrawWholeMapView
-	playse 36
+	playse SE_TK_KASYA
 	checkflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2
 	goto_if 0, Route110_TrickHousePuzzle7_EventScript_1633AE
 	checkflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2
@@ -156,7 +156,7 @@ Route110_TrickHousePuzzle7_EventScript_163317:: @ 8163317
 	checkflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_3
 	call_if 1, Route110_TrickHousePuzzle7_EventScript_16321A
 	special DrawWholeMapView
-	playse 36
+	playse SE_TK_KASYA
 	checkflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_3
 	goto_if 0, Route110_TrickHousePuzzle7_EventScript_1633B8
 	checkflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_3
@@ -171,7 +171,7 @@ Route110_TrickHousePuzzle7_EventScript_163346:: @ 8163346
 	checkflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_4
 	call_if 1, Route110_TrickHousePuzzle7_EventScript_16322D
 	special DrawWholeMapView
-	playse 36
+	playse SE_TK_KASYA
 	checkflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_4
 	goto_if 0, Route110_TrickHousePuzzle7_EventScript_1633C2
 	checkflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_4
@@ -186,7 +186,7 @@ Route110_TrickHousePuzzle7_EventScript_163375:: @ 8163375
 	checkflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_5
 	call_if 1, Route110_TrickHousePuzzle7_EventScript_163240
 	special DrawWholeMapView
-	playse 36
+	playse SE_TK_KASYA
 	checkflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_5
 	goto_if 0, Route110_TrickHousePuzzle7_EventScript_1633CC
 	checkflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_5

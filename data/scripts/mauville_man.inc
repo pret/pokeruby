@@ -141,7 +141,7 @@ do_trader_menu_get:
 	waitstate
 	compare VAR_SPECIAL_4, 0
 	goto_if_eq cancelled_get_menu
-	compare VAR_SPECIAL_4, 65535
+	compare VAR_SPECIAL_4, -1
 	goto_if_eq rare_item_cant_trade_away
 	msgbox gTextTrader_ItemOnceBelongedTo, MSGBOX_YESNO
 	compare RESULT, NO
@@ -178,7 +178,7 @@ do_trader_menu_give:
 	waitstate
 	compare VAR_SPECIAL_6, 0
 	goto_if_eq cancelled_give_menu
-	compare VAR_SPECIAL_6, 65535
+	compare VAR_SPECIAL_6, -1
 	goto_if_eq decoration_is_in_use
 	special ScrSpecial_IsDecorationFull
 	compare RESULT, 1

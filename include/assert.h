@@ -17,15 +17,6 @@
     // on a standard GBA debugger unit or in emulators that
     // support it.
 
-// no$gba support, due to the different method no$gba uses to print debug strings.
-// currently cannot use IsNoGba due to no$gba doing a gloriously fuck up of a job and
-// breaking the version identifier.
-#define AGBPrint(pBuf) \
-{ \
-    NOGBAPrint(pBuf); \
-    AGBPrint(pBuf); \
-}
-
     void AGBPrintInit(void);
     void AGBPutc(const char pBuf);
     void AGBPrint(const char *pBuf);
@@ -33,8 +24,6 @@
     void AGBPrintFlush1Block(void);
     void AGBPrintFlush(void);
     void AGBAssert(const char *pFile, int nLine, const char *pExpression, int nStopProgram);
-    // NOGBA PROTOTYPE FOR LIBISAGBPRN.C
-    void NOGBAPrint(const char *pBuf);
 #endif
 
 // when using AGB_WARNING, be sure to flush after as AGBAssert does not flush the string to console

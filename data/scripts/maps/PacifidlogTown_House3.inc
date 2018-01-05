@@ -10,8 +10,8 @@ PacifidlogTown_House3_EventScript_15429E:: @ 815429E
 	copyvar VAR_SPECIAL_4, VAR_SPECIAL_8
 	specialvar RESULT, GetInGameTradeSpeciesInfo
 	copyvar VAR_SPECIAL_9, RESULT
-	msgbox PacifidlogTown_House3_Text_17940E, 5
-	compare RESULT, 0
+	msgbox PacifidlogTown_House3_Text_17940E, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq PacifidlogTown_House3_EventScript_154320
 	special SelectMonForNPCTrade
 	waitstate

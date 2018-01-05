@@ -12,21 +12,21 @@ SealedChamber_InnerRoom_EventScript_15F1E8:: @ 815F1E8
 	compare RESULT, 0
 	goto_if_eq SealedChamber_InnerRoom_EventScript_15F247
 	fadeoutbgm 0
-	playse 49
+	playse SE_TRACK_MOVE
 	special DoSealedChamberShakingEffect1
 	waitstate
 	delay 40
 	special DoSealedChamberShakingEffect2
 	waitstate
-	playse 8
+	playse SE_DOOR
 	delay 40
 	special DoSealedChamberShakingEffect2
 	waitstate
-	playse 8
+	playse SE_DOOR
 	delay 40
 	special DoSealedChamberShakingEffect2
 	waitstate
-	playse 8
+	playse SE_DOOR
 	delay 40
 	msgbox SealedChamber_InnerRoom_Text_1A138B, 4
 	closemessage

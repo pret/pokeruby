@@ -18,7 +18,7 @@ MeteorFalls_1F_1R_EventScript_15C49C:: @ 815C49C
 	applymovement 5, MeteorFalls_1F_1R_Movement_1A0841
 	applymovement 6, MeteorFalls_1F_1R_Movement_1A0841
 	waitmovement 0
-	playse 21
+	playse SE_PIN
 	applymovement 5, MeteorFalls_1F_1R_Movement_1A0833
 	waitmovement 0
 	applymovement 5, MeteorFalls_1F_1R_Movement_1A0835

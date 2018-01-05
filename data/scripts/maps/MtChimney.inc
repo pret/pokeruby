@@ -17,8 +17,8 @@ MtChimney_EventScript_15CF95:: @ 815CF95
 	faceplayer
 	showmoneybox 0, 0
 	nop
-	msgbox MtChimney_Text_195760, 5
-	compare RESULT, 0
+	msgbox MtChimney_Text_195760, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq MtChimney_EventScript_15D00B
 	checkmoney 0xc8, 0
 	compare RESULT, 0
@@ -410,8 +410,8 @@ MtChimney_EventScript_15D17D:: @ 815D17D
 	goto_if 0, MtChimney_EventScript_15D1D0
 	checkflag FLAG_RECEIVED_METEORITE
 	goto_if_eq MtChimney_EventScript_15D1C6
-	msgbox MtChimney_Text_195870, 5
-	compare RESULT, 0
+	msgbox MtChimney_Text_195870, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq MtChimney_EventScript_15D1BC
 	msgbox MtChimney_Text_1958C6, 4
 	giveitem_std ITEM_METEORITE

@@ -17,7 +17,7 @@ Route110_MapScript1_14F914:: @ 814F914
 	end
 
 Route110_EventScript_14F92F:: @ 814F92F
-	savebgm 403 @ Bicycle music
+	savebgm BGM_CYCLING
 	return
 
 Route110_MapScript2_14F933:: @ 814F933
@@ -352,11 +352,11 @@ Route110_EventScript_14FD34:: @ 814FD34
 	end
 
 Route110_EventScript_14FDA7:: @ 814FDA7
-	playbgm 415, 1
+	playbgm BGM_GIRL_SUP, TRUE
 	return
 
 Route110_EventScript_14FDAC:: @ 814FDAC
-	playbgm 421, 1
+	playbgm BGM_BOY_SUP, TRUE
 	return
 
 Route110_EventScript_14FDB1:: @ 814FDB1

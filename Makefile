@@ -14,6 +14,7 @@ LD      := $(DEVKITARM)/bin/arm-none-eabi-ld
 OBJCOPY := $(DEVKITARM)/bin/arm-none-eabi-objcopy
 
 LIBGCC := tools/agbcc/lib/libgcc.a
+LIBC   := tools/agbcc/lib/libc.a
 
 LIBC := tools/agbcc/lib/libc.a
 
@@ -92,9 +93,6 @@ sound/direct_sound_samples/cry_%.bin: sound/direct_sound_samples/cry_%.aif ; $(A
 %.bin: %.aif ; $(AIF) $< $@
 sound/songs/%.s: sound/songs/%.mid
 	cd $(@D) && ../../$(MID) $(<F)
-
-%src/libs/libc.o: CC1 := tools/agbcc/bin/old_agbcc
-%src/libs/libc.o: CFLAGS := -O2
 
 %src/libs/siirtc.o: CFLAGS := -mthumb-interwork
 

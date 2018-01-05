@@ -9,6 +9,8 @@
 #define AGB_PRINT_PROTECT_ADDR 0x9FE2FFE
 #define WSCNT_DATA (WAITCNT_PHI_OUT_16MHZ | WAITCNT_WS0_S_2 | WAITCNT_WS0_N_4)
 
+// TODO: make no$gba support not shit
+
 // for auto no$gba support, the string "no$gba" should be at this address.
 #define NOGBAIDADDR 0x4FFFA00
 #define NOGBAPRINTADDR 0x4FFFA14
@@ -66,8 +68,6 @@ void AGBPutc(const char cChr)
         AGBPrintFlush1Block();
 }
 
-#undef AGBPrint // dont break the function
-
 void AGBPrint(const char *pBuf)
 {
     volatile struct AGBPrintStruct *pPrint = (struct AGBPrintStruct *)AGB_PRINT_STRUCT_ADDR;
@@ -80,15 +80,6 @@ void AGBPrint(const char *pBuf)
         pBuf++;
     }
     *pWSCNT = nOldWSCNT;
-}
-
-// I have to define this twice to avoid messing AGBPrint up. If there's a better way of doing this, please fix it.
-// currently cannot use IsNoGba due to no$gba doing a gloriously fuck up of a job and
-// breaking the version identifier.
-#define AGBPrint(pBuf) \
-{ \
-    NOGBAPrint(pBuf); \
-    AGBPrint(pBuf); \
 }
 
 void AGBPrintf(const char *pBuf, ...)
@@ -165,11 +156,12 @@ void AGBAssert(const char *pFile, int nLine, const char *pExpression, int nStopP
     }
 }
 
+// TODO: Find a way to seamlessly support no$gba without shit hack defines
 // nogba print function
-
+/*
 void NOGBAPrint(const char *pBuf)
 {
     *(volatile u32*)NOGBAPRINTADDR = (u32)pBuf;
-}
+}*/
 
 #endif

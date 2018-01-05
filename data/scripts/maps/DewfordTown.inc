@@ -42,8 +42,8 @@ DewfordTown_EventScript_14E06B:: @ 814E06B
 	end
 
 DewfordTown_EventScript_14E076:: @ 814E076
-	msgbox DewfordTown_Text_16B3BC, 5
-	compare RESULT, 1
+	msgbox DewfordTown_Text_16B3BC, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq DewfordTown_EventScript_14E093
 	msgbox DewfordTown_Text_16B471, 4
 	release
@@ -76,10 +76,10 @@ DewfordTown_EventScript_14E0C6:: @ 814E0C6
 	faceplayer
 	checkflag FLAG_RECEIVED_OLD_ROD
 	goto_if_eq DewfordTown_EventScript_14E11B
-	msgbox DewfordTown_Text_16B665, 5
-	compare RESULT, 1
+	msgbox DewfordTown_Text_16B665, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq DewfordTown_EventScript_14E0F0
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq DewfordTown_EventScript_14E111
 	end
 
@@ -598,10 +598,10 @@ DewfordTown_EventScript_14E413:: @ 814E413
 	lock
 	faceplayer
 	call DewfordTown_EventScript_1A0102
-	msgbox DewfordTown_Text_16B9CE, 5
-	compare RESULT, 1
+	msgbox DewfordTown_Text_16B9CE, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq DewfordTown_EventScript_14E439
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq DewfordTown_EventScript_14E443
 	end
 

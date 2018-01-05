@@ -22,10 +22,10 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_15844F:: @ 815844F
 	end
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_158458:: @ 8158458
-	msgbox LilycoveCity_LilycoveMuseum_1F_Text_187495, 5
-	compare RESULT, 0
+	msgbox LilycoveCity_LilycoveMuseum_1F_Text_187495, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq LilycoveCity_LilycoveMuseum_1F_EventScript_158477
-	compare RESULT, 1
+	compare RESULT, YES
 	goto_if_eq LilycoveCity_LilycoveMuseum_1F_EventScript_158481
 	end
 

@@ -9,10 +9,10 @@ Route111_OldLadysRestStop_MapScript1_15BFD7:: @ 815BFD7
 Route111_OldLadysRestStop_EventScript_15BFDB:: @ 815BFDB
 	lock
 	faceplayer
-	msgbox Route111_OldLadysRestStop_Text_1923AF, 5
-	compare RESULT, 1
+	msgbox Route111_OldLadysRestStop_Text_1923AF, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq Route111_OldLadysRestStop_EventScript_15BFFC
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq Route111_OldLadysRestStop_EventScript_15C029
 	end
 
@@ -20,10 +20,10 @@ Route111_OldLadysRestStop_EventScript_15BFFC:: @ 815BFFC
 	msgbox Route111_OldLadysRestStop_Text_192423, 4
 	closemessage
 	call Route111_OldLadysRestStop_EventScript_1A02CA
-	msgbox Route111_OldLadysRestStop_Text_19244D, 5
-	compare RESULT, 1
+	msgbox Route111_OldLadysRestStop_Text_19244D, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq Route111_OldLadysRestStop_EventScript_15BFFC
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq Route111_OldLadysRestStop_EventScript_15C029
 	end
 

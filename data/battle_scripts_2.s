@@ -164,7 +164,7 @@ BattleScript_OpponentUsesGuardSpecs: @ 81D9FBB
 	finishaction
 
 BattleScript_RunByUsingItem: @ 81D9FDA
-	playse 17
+	playse SE_NIGERU
 	setbyte gBattleOutcome, BATTLE_RAN
 	finishturn
 

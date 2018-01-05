@@ -84,7 +84,7 @@ BattleTower_Lobby_EventScript_160342:: @ 8160342
 	goto_if_eq BattleTower_Lobby_EventScript_16037D
 	message BattleTower_Lobby_Text_19A6BE
 	waitmessage
-	playfanfare 370
+	playfanfare BGM_FANFA4
 	waitfanfare
 	msgbox BattleTower_Lobby_Text_19A719, 4
 
@@ -100,7 +100,7 @@ BattleTower_Lobby_EventScript_16037D:: @ 816037D
 	special DetermineBattleTowerPrize
 	setvar VAR_SPECIAL_4, 3
 	special SaveBattleTowerProgress
-	playse 55
+	playse SE_SAVE
 	waitse
 
 BattleTower_Lobby_EventScript_1603AD:: @ 81603AD
@@ -114,7 +114,7 @@ BattleTower_Lobby_EventScript_1603AD:: @ 81603AD
 	case 0, BattleTower_Lobby_EventScript_160408
 	message BattleTower_Lobby_Text_19A506
 	waitmessage
-	playfanfare 370
+	playfanfare BGM_FANFA4
 	waitfanfare
 	setvar VAR_SPECIAL_4, 9
 	special BattleTowerUtil
@@ -148,7 +148,7 @@ BattleTower_Lobby_EventScript_160419:: @ 8160419
 	special SetBattleTowerProperty
 	setvar VAR_SPECIAL_4, 0
 	special SaveBattleTowerProgress
-	playse 55
+	playse SE_SAVE
 	waitse
 	msgbox BattleTower_Lobby_Text_199FA9, 4
 	closemessage
@@ -166,7 +166,7 @@ BattleTower_Lobby_EventScript_16044B:: @ 816044B
 	waitmessage
 	setvar VAR_SPECIAL_4, 1
 	special SaveBattleTowerProgress
-	playse 55
+	playse SE_SAVE
 	waitse
 	setvar VAR_SPECIAL_4, 8
 	setvar VAR_SPECIAL_5, 0
@@ -221,10 +221,10 @@ BattleTower_Lobby_EventScript_1604FA:: @ 81604FA
 	waitstate
 	compare RESULT, 0
 	goto_if_eq BattleTower_Lobby_EventScript_16064F
-	msgbox BattleTower_Lobby_Text_199FDA, 5
+	msgbox BattleTower_Lobby_Text_199FDA, MSGBOX_YESNO
 	switch RESULT
-	case 0, BattleTower_Lobby_EventScript_16064F
-	case 1, BattleTower_Lobby_EventScript_160587
+	case NO, BattleTower_Lobby_EventScript_16064F
+	case YES, BattleTower_Lobby_EventScript_160587
 	case 127, BattleTower_Lobby_EventScript_16064F
 
 BattleTower_Lobby_EventScript_160587:: @ 8160587
@@ -334,10 +334,10 @@ BattleTower_Lobby_Movement_16069A:: @ 816069A
 BattleTower_Lobby_EventScript_1606A5:: @ 81606A5
 	lock
 	faceplayer
-	msgbox BattleTower_Lobby_Text_19A747, 5
+	msgbox BattleTower_Lobby_Text_19A747, MSGBOX_YESNO
 	switch RESULT
-	case 1, BattleTower_Lobby_EventScript_1606CC
-	case 0, BattleTower_Lobby_EventScript_1606F7
+	case YES, BattleTower_Lobby_EventScript_1606CC
+	case NO, BattleTower_Lobby_EventScript_1606F7
 	release
 	end
 

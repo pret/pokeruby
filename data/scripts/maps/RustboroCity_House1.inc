@@ -10,8 +10,8 @@ RustboroCity_House1_EventScript_157C7D:: @ 8157C7D
 	copyvar VAR_SPECIAL_4, VAR_SPECIAL_8
 	specialvar RESULT, GetInGameTradeSpeciesInfo
 	copyvar VAR_SPECIAL_9, RESULT
-	msgbox RustboroCity_House1_Text_184EBA, 5
-	compare RESULT, 0
+	msgbox RustboroCity_House1_Text_184EBA, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq RustboroCity_House1_EventScript_157CFB
 	special SelectMonForNPCTrade
 	waitstate

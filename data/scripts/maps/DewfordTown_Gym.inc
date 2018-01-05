@@ -56,25 +56,25 @@ DewfordTown_Gym_EventScript_1530F5:: @ 81530F5
 	return
 
 DewfordTown_Gym_EventScript_1530F6:: @ 81530F6
-	playse 35
+	playse SE_MU_PACHI
 	animateflash 3
 	call DewfordTown_Gym_EventScript_153071
 	return
 
 DewfordTown_Gym_EventScript_153101:: @ 8153101
-	playse 35
+	playse SE_MU_PACHI
 	animateflash 2
 	call DewfordTown_Gym_EventScript_153071
 	return
 
 DewfordTown_Gym_EventScript_15310C:: @ 815310C
-	playse 35
+	playse SE_MU_PACHI
 	animateflash 1
 	call DewfordTown_Gym_EventScript_153071
 	return
 
 DewfordTown_Gym_EventScript_153117:: @ 8153117
-	playse 35
+	playse SE_MU_PACHI
 	animateflash 0
 	call DewfordTown_Gym_EventScript_153071
 	return

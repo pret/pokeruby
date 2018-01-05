@@ -30,10 +30,10 @@ LilycoveCity_ContestLobby_EventScript_158898:: @ 8158898
 	fadescreen 1
 	drawcontestwinner 0
 	lockall
-	msgbox LilycoveCity_ContestLobby_Text_1889FD, 5
-	compare RESULT, 1
+	msgbox LilycoveCity_ContestLobby_Text_1889FD, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_1588DE
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158918
 	releaseall
 	end
@@ -55,8 +55,8 @@ LilycoveCity_ContestLobby_EventScript_1588DE:: @ 81588DE
 	end
 
 LilycoveCity_ContestLobby_EventScript_158918:: @ 8158918
-	msgbox LilycoveCity_ContestLobby_Text_188C41, 5
-	compare RESULT, 1
+	msgbox LilycoveCity_ContestLobby_Text_188C41, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_1588DE
 	msgbox LilycoveCity_ContestLobby_Text_188CBD, 4
 	closemessage
@@ -72,13 +72,13 @@ LilycoveCity_ContestLobby_EventScript_158948:: @ 8158948
 	special sub_80C4858
 	applymovement 4, LilycoveCity_ContestLobby_Movement_158A4E
 	waitmovement 0
-	playse 21
+	playse SE_PIN
 	applymovement 4, LilycoveCity_ContestLobby_Movement_1A0833
 	waitmovement 0
 	applymovement 4, LilycoveCity_ContestLobby_Movement_158A52
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_188BB5, 4
-	playfanfare 370
+	playfanfare BGM_FANFA4
 	msgbox LilycoveCity_ContestLobby_Text_188C03, 4
 	waitfanfare
 	msgbox LilycoveCity_ContestLobby_Text_188C19, 4
@@ -204,10 +204,10 @@ LilycoveCity_ContestLobby_EventScript_158A6A:: @ 8158A6A
 	lockall
 	fadescreen 1
 	drawcontestwinner 0
-	msgbox LilycoveCity_ContestLobby_Text_1889FD, 5
-	compare RESULT, 1
+	msgbox LilycoveCity_ContestLobby_Text_1889FD, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158AAE
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158AE8
 	end
 
@@ -228,8 +228,8 @@ LilycoveCity_ContestLobby_EventScript_158AAE:: @ 8158AAE
 	end
 
 LilycoveCity_ContestLobby_EventScript_158AE8:: @ 8158AE8
-	msgbox LilycoveCity_ContestLobby_Text_188C41, 5
-	compare RESULT, 1
+	msgbox LilycoveCity_ContestLobby_Text_188C41, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158AAE
 	msgbox LilycoveCity_ContestLobby_Text_188CBD, 4
 	closemessage
@@ -245,13 +245,13 @@ LilycoveCity_ContestLobby_EventScript_158B18:: @ 8158B18
 	special sub_80C4858
 	applymovement 11, LilycoveCity_ContestLobby_Movement_158B78
 	waitmovement 0
-	playse 21
+	playse SE_PIN
 	applymovement 11, LilycoveCity_ContestLobby_Movement_1A0833
 	waitmovement 0
 	applymovement 11, LilycoveCity_ContestLobby_Movement_158B7C
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_188BB5, 4
-	playfanfare 370
+	playfanfare BGM_FANFA4
 	msgbox LilycoveCity_ContestLobby_Text_188C03, 4
 	waitfanfare
 	msgbox LilycoveCity_ContestLobby_Text_188C19, 4
@@ -327,8 +327,8 @@ LilycoveCity_ContestLobby_EventScript_158BBA:: @ 8158BBA
 	end
 
 LilycoveCity_ContestLobby_EventScript_158BC4:: @ 8158BC4
-	msgbox LilycoveCity_ContestLobby_Text_188521, 5
-	compare RESULT, 0
+	msgbox LilycoveCity_ContestLobby_Text_188521, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158C35
 	call S_DoSaveDialog
 	erasebox 0, 0, 15, 9
@@ -475,7 +475,7 @@ LilycoveCity_ContestLobby_EventScript_158DD1:: @ 8158DD1
 	buffernumberstring 1, 32772
 	messageautoscroll LilycoveCity_ContestLobby_Text_188845
 	waitmessage
-	addvar VAR_SPECIAL_4, 65535
+	addvar VAR_SPECIAL_4, -1
 	goto LilycoveCity_ContestLobby_EventScript_158DEE
 	end
 
@@ -496,13 +496,13 @@ LilycoveCity_ContestLobby_EventScript_158E0B:: @ 8158E0B
 	closemessage
 	applymovement 2, LilycoveCity_ContestLobby_Movement_158E9C
 	waitmovement 0
-	playse 71
+	playse SE_HASHI
 	setmetatile 9, 2, 545, 1
 	setmetatile 9, 3, 609, 1
 	special DrawWholeMapView
 	applymovement 2, LilycoveCity_ContestLobby_Movement_158EA0
 	waitmovement 0
-	playse 71
+	playse SE_HASHI
 	setmetatile 9, 2, 721, 1
 	setmetatile 9, 3, 729, 1
 	special DrawWholeMapView
@@ -635,13 +635,13 @@ LilycoveCity_ContestLobby_EventScript_158F86:: @ 8158F86
 	lockall
 	applymovement 1, LilycoveCity_ContestLobby_Movement_15900B
 	waitmovement 0
-	playse 71
+	playse SE_HASHI
 	setmetatile 4, 2, 545, 1
 	setmetatile 4, 3, 609, 1
 	special DrawWholeMapView
 	applymovement 1, LilycoveCity_ContestLobby_Movement_15900F
 	waitmovement 0
-	playse 71
+	playse SE_HASHI
 	setmetatile 4, 2, 721, 1
 	setmetatile 4, 3, 729, 1
 	special DrawWholeMapView

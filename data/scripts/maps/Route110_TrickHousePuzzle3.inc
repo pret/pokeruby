@@ -289,7 +289,7 @@ Route110_TrickHousePuzzle3_EventScript_1625F3:: @ 81625F3
 
 Route110_TrickHousePuzzle3_EventScript_1625FF:: @ 81625FF
 	call Route110_TrickHousePuzzle3_EventScript_162612
-	playse 21
+	playse SE_PIN
 	call Route110_TrickHousePuzzle3_EventScript_161F12
 	goto Route110_TrickHousePuzzle3_EventScript_1626AD
 	end
