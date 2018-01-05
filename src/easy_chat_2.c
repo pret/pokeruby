@@ -451,7 +451,6 @@ void sub_80E872C(struct Sprite *sprite)
     }
 }
 
-#if ENGLISH
 void sub_80E8760(struct Sprite *sprite)
 {
     if (gUnknown_083DB694->unk96 != 0)
@@ -462,6 +461,12 @@ void sub_80E8760(struct Sprite *sprite)
             sprite->pos1.x = gUnknown_083DB694->unk9C->pos1.x + 64;
             sprite->pos1.y = gUnknown_083DB694->unk9C->pos1.y;
             break;
+#if GERMAN
+        case 1:
+            sprite->pos1.x = gUnknown_083DB694->unk9C->pos1.x + 28;
+            sprite->pos1.y = gUnknown_083DB694->unk9C->pos1.y;
+            break;
+#endif
         case 2:
             sprite->pos1.x = gUnknown_083DB694->unk9C->pos1.x + 21;
             sprite->pos1.y = gUnknown_083DB694->unk9C->pos1.y;
@@ -469,63 +474,6 @@ void sub_80E8760(struct Sprite *sprite)
         }
     }
 }
-#else
-__attribute__((naked))
-void sub_80E8760(struct Sprite *sprite)
-{
-    asm(".syntax unified\n\
-	push {lr}\n\
-	adds r2, r0, 0\n\
-	ldr r0, _080E8784 @ =gUnknown_083DB694\n\
-	ldr r1, [r0]\n\
-	adds r0, r1, 0\n\
-	adds r0, 0x96\n\
-	ldrb r0, [r0]\n\
-	cmp r0, 0\n\
-	beq _080E87B2\n\
-	movs r3, 0x32\n\
-	ldrsh r0, [r2, r3]\n\
-	cmp r0, 0x1\n\
-	beq _080E8798\n\
-	cmp r0, 0x1\n\
-	bgt _080E8788\n\
-	cmp r0, 0\n\
-	beq _080E878E\n\
-	b _080E87B2\n\
-	.align 2, 0\n\
-_080E8784: .4byte gUnknown_083DB694\n\
-_080E8788:\n\
-	cmp r0, 0x2\n\
-	beq _080E87A2\n\
-	b _080E87B2\n\
-_080E878E:\n\
-	adds r1, 0x9C\n\
-	ldr r0, [r1]\n\
-	ldrh r0, [r0, 0x20]\n\
-	adds r0, 0x40\n\
-	b _080E87AA\n\
-_080E8798:\n\
-	adds r1, 0x9C\n\
-	ldr r0, [r1]\n\
-	ldrh r0, [r0, 0x20]\n\
-	adds r0, 0x1C\n\
-	b _080E87AA\n\
-_080E87A2:\n\
-	adds r1, 0x9C\n\
-	ldr r0, [r1]\n\
-	ldrh r0, [r0, 0x20]\n\
-	adds r0, 0x15\n\
-_080E87AA:\n\
-	strh r0, [r2, 0x20]\n\
-	ldr r0, [r1]\n\
-	ldrh r0, [r0, 0x22]\n\
-	strh r0, [r2, 0x22]\n\
-_080E87B2:\n\
-	pop {r0}\n\
-	bx r0\n\
-    .syntax divided\n");
-}
-#endif
 
 void sub_80E87A4(u8 a)
 {
@@ -1437,9 +1385,34 @@ void sub_80E9940(u8 *a, u8 b)
     sub_80E9A60(a, 2, r4 * 2);
 }
 
-extern const u8 gUnknown_083DBEAC[][32];
-
 #if ENGLISH
+
+extern const u8 gUnknown_083DBEAC[][32] =
+{
+	__("{UNKNOWN_14 8} A B C  D E F  {UNKNOWN_14 0}others"),  // missing terminator
+	_("{UNKNOWN_14 8} G H I  J K L      $"),
+	_("{UNKNOWN_14 8} M N O  P Q R S    $"),
+	_("{UNKNOWN_14 8} T U V  W X Y Z    $"),
+};
+
+#else
+
+const u8 unk_83E7EB0[] = __("{UNKNOWN_14 8} A B C  D E F  {UNKNOWN_14 0}");  // missing terminator
+const u8 unk_83E7EC5[] = _("mehr");
+const u8 unk_83E7ECA[] = _("{UNKNOWN_14 8} G H I  J K L      ");
+const u8 unk_83E7EE1[] = _("{UNKNOWN_14 8} M N O  P Q R S    ");
+const u8 unk_83E7EF8[] = _("{UNKNOWN_14 8} T U V  W X Y Z    ");
+const u8 *const gUnknown_083DBEAC[] =
+{
+    unk_83E7EB0,
+    unk_83E7ECA,
+    unk_83E7EE1,
+    unk_83E7EF8,
+    unk_83E7EC5,
+};
+
+#endif
+
 void sub_80E9974(void)
 {
     BasicInitMenuWindow(&gWindowConfig_81E6D54);
@@ -1459,82 +1432,6 @@ void sub_80E9974(void)
         sub_80E9A60(gUnknown_083DBEAC[3], 2, 6);
     }
 }
-#else
-__attribute__((naked))
-void sub_80E9974(void)
-{
-    asm(".syntax unified\n\
-    push {r4-r6,lr}\n\
-	ldr r0, _080E99C4 @ =gWindowConfig_81E6D54\n\
-	bl BasicInitMenuWindow\n\
-	ldr r0, _080E99C8 @ =gUnknown_083DB694\n\
-	ldr r2, [r0]\n\
-	adds r0, r2, 0\n\
-	adds r0, 0x26\n\
-	ldrb r0, [r0]\n\
-	cmp r0, 0\n\
-	bne _080E99D4\n\
-	ldr r1, _080E99CC @ =0x000001b5\n\
-	adds r0, r2, r1\n\
-	ldrb r0, [r0]\n\
-	lsls r0, 24\n\
-	asrs r0, 24\n\
-	lsls r1, r0, 16\n\
-	lsrs r4, r1, 16\n\
-	adds r0, 0x4\n\
-	cmp r4, r0\n\
-	bge _080E9A02\n\
-	adds r5, r2, 0\n\
-	ldr r2, _080E99CC @ =0x000001b5\n\
-	adds r6, r5, r2\n\
-_080E99A4:\n\
-	lsls r1, r4, 24\n\
-	lsrs r1, 24\n\
-	ldr r2, _080E99D0 @ =0x0000a0f5\n\
-	adds r0, r5, r2\n\
-	bl sub_80E9940\n\
-	adds r0, r4, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r4, r0, 16\n\
-	movs r0, 0\n\
-	ldrsb r0, [r6, r0]\n\
-	adds r0, 0x4\n\
-	cmp r4, r0\n\
-	blt _080E99A4\n\
-	b _080E9A02\n\
-	.align 2, 0\n\
-_080E99C4: .4byte gWindowConfig_81E6D54\n\
-_080E99C8: .4byte gUnknown_083DB694\n\
-_080E99CC: .4byte 0x000001b5\n\
-_080E99D0: .4byte 0x0000a0f5\n\
-_080E99D4:\n\
-	bl sub_80E9AD4\n\
-	ldr r4, _080E9A08 @ =gUnknown_083DBEAC\n\
-	ldr r0, [r4]\n\
-	movs r1, 0x2\n\
-	movs r2, 0\n\
-	bl sub_80E9A60\n\
-	ldr r0, [r4, 0x4]\n\
-	movs r1, 0x2\n\
-	movs r2, 0x2\n\
-	bl sub_80E9A60\n\
-	ldr r0, [r4, 0x8]\n\
-	movs r1, 0x2\n\
-	movs r2, 0x4\n\
-	bl sub_80E9A60\n\
-	ldr r0, [r4, 0xC]\n\
-	movs r1, 0x2\n\
-	movs r2, 0x6\n\
-	bl sub_80E9A60\n\
-_080E9A02:\n\
-	pop {r4-r6}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_080E9A08: .4byte gUnknown_083DBEAC\n\
-    .syntax divided\n");
-}
-#endif
 
 void sub_80E9A14(void)
 {
