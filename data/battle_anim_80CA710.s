@@ -2505,7 +2505,7 @@ gSpriteTemplate_83D96C4:: @ 83D96C4
 	spr_template 10201, 10201, gOamData_837DF2C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80D58FC
 
 	.align 1
-gUnknown_083D96DC:: @ 83D96DC
+gHeatedRockCoords:: @ 83D96DC
 	.2byte -2, -5
 	.2byte -1, -1
 	.2byte  3, -6

@@ -80,11 +80,11 @@ Route119_EventScript_1511DB:: @ 81511DB
 	end
 
 Route119_EventScript_151254:: @ 8151254
-	playbgm 415, 1
+	playbgm BGM_GIRL_SUP, TRUE
 	return
 
 Route119_EventScript_151259:: @ 8151259
-	playbgm 421, 1
+	playbgm BGM_BOY_SUP, TRUE
 	return
 
 Route119_EventScript_15125E:: @ 815125E

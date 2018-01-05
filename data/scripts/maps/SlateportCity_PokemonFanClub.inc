@@ -206,7 +206,7 @@ SlateportCity_PokemonFanClub_EventScript_155A15:: @ 8155A15
 	end
 
 SlateportCity_PokemonFanClub_EventScript_155A3A:: @ 8155A3A
-	playse 21
+	playse SE_PIN
 	applymovement LAST_TALKED, SlateportCity_PokemonFanClub_Movement_1A0833
 	waitmovement 0
 	applymovement LAST_TALKED, SlateportCity_PokemonFanClub_Movement_1A0835

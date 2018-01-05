@@ -32,8 +32,8 @@ FallarborTown_ContestLobby_EventScript_1A4EE1:: @ 81A4EE1
 	end
 
 FallarborTown_ContestLobby_EventScript_1A4EF6:: @ 81A4EF6
-	msgbox FallarborTown_ContestLobby_Text_1A64F4, 5
-	compare RESULT, 1
+	msgbox FallarborTown_ContestLobby_Text_1A64F4, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1A4F13
 	msgbox FallarborTown_ContestLobby_Text_1A65EA, 4
 	releaseall
@@ -153,17 +153,17 @@ FallarborTown_ContestLobby_EventScript_1A50C8:: @ 81A50C8
 	end
 
 FallarborTown_ContestLobby_EventScript_1A50D7:: @ 81A50D7
-	msgbox FallarborTown_ContestLobby_Text_1A67A3, 5
+	msgbox FallarborTown_ContestLobby_Text_1A67A3, MSGBOX_YESNO
 	switch RESULT
-	case 0, FallarborTown_ContestLobby_EventScript_1A5048
-	case 1, FallarborTown_ContestLobby_EventScript_1A513D
+	case NO, FallarborTown_ContestLobby_EventScript_1A5048
+	case YES, FallarborTown_ContestLobby_EventScript_1A513D
 	end
 
 FallarborTown_ContestLobby_EventScript_1A50FB:: @ 81A50FB
-	msgbox FallarborTown_ContestLobby_Text_1A6724, 5
+	msgbox FallarborTown_ContestLobby_Text_1A6724, MSGBOX_YESNO
 	switch RESULT
-	case 0, FallarborTown_ContestLobby_EventScript_1A5048
-	case 1, FallarborTown_ContestLobby_EventScript_1A513D
+	case NO, FallarborTown_ContestLobby_EventScript_1A5048
+	case YES, FallarborTown_ContestLobby_EventScript_1A513D
 	end
 
 FallarborTown_ContestLobby_EventScript_1A511F:: @ 81A511F
@@ -345,13 +345,13 @@ LinkContestRoom1_EventScript_1A5323:: @ 81A5323
 	waitmovement 0
 	releaseall
 	addobject 13
-	playse 10
+	playse SE_DANSA
 	lockall
 	applymovement VAR_SPECIAL_B, LinkContestRoom1_Movement_1A5D9C
 	waitmovement 0
 	releaseall
 	addvar VAR_SPECIAL_6, -1
-	playse 15
+	playse SE_BOWA2
 	special ShowContestEntryMonPic
 	call LinkContestRoom1_EventScript_1A535E
 	return
@@ -371,7 +371,7 @@ LinkContestRoom1_EventScript_1A5370:: @ 81A5370
 LinkContestRoom1_EventScript_1A5377:: @ 81A5377
 	call LinkContestRoom1_EventScript_1A53B3
 	call LinkContestRoom1_EventScript_1A53CE
-	playse 223
+	playse SE_W227B
 	waitmessage
 	call LinkContestRoom1_EventScript_1A5A90
 	applymovement 1, LinkContestRoom1_Movement_1A5D9F
@@ -408,7 +408,7 @@ LinkContestRoom1_EventScript_1A53DF:: @ 81A53DF
 LinkContestRoom1_EventScript_1A53E5:: @ 81A53E5
 	applymovement 1, LinkContestRoom1_Movement_1A5DAF
 	waitmovement 0
-	playse 223
+	playse SE_W227B
 	call LinkContestRoom1_EventScript_1A5AE4
 	applymovement 9, LinkContestRoom1_Movement_1A5DB7
 	applymovement 12, LinkContestRoom1_Movement_1A5DBB
@@ -621,7 +621,7 @@ LinkContestRoom1_EventScript_1A5760:: @ 81A5760
 	compare VAR_TEMP_1, 1
 	goto_if_eq LinkContestRoom1_EventScript_1A5783
 	applymovement 6, LinkContestRoom1_Movement_1A5D8D
-	playse 21
+	playse SE_PIN
 	delay 14
 	setvar VAR_TEMP_1, 1
 	addvar VAR_TEMP_0, -1
@@ -634,7 +634,7 @@ LinkContestRoom1_EventScript_1A5784:: @ 81A5784
 	compare VAR_TEMP_2, 1
 	goto_if_eq LinkContestRoom1_EventScript_1A57A7
 	applymovement 12, LinkContestRoom1_Movement_1A5D8D
-	playse 21
+	playse SE_PIN
 	delay 14
 	setvar VAR_TEMP_2, 1
 	addvar VAR_TEMP_0, -1
@@ -647,7 +647,7 @@ LinkContestRoom1_EventScript_1A57A8:: @ 81A57A8
 	compare VAR_TEMP_3, 1
 	goto_if_eq LinkContestRoom1_EventScript_1A57CB
 	applymovement 7, LinkContestRoom1_Movement_1A5D8D
-	playse 21
+	playse SE_PIN
 	delay 14
 	setvar VAR_TEMP_3, 1
 	addvar VAR_TEMP_0, -1
@@ -660,7 +660,7 @@ LinkContestRoom1_EventScript_1A57CC:: @ 81A57CC
 	compare VAR_TEMP_4, 1
 	goto_if_eq LinkContestRoom1_EventScript_1A57EF
 	applymovement 8, LinkContestRoom1_Movement_1A5D8D
-	playse 21
+	playse SE_PIN
 	delay 14
 	setvar VAR_TEMP_4, 1
 	addvar VAR_TEMP_0, -1
@@ -673,7 +673,7 @@ LinkContestRoom1_EventScript_1A57F0:: @ 81A57F0
 	compare VAR_TEMP_5, 1
 	goto_if_eq LinkContestRoom1_EventScript_1A5813
 	applymovement 9, LinkContestRoom1_Movement_1A5D8D
-	playse 21
+	playse SE_PIN
 	delay 14
 	setvar VAR_TEMP_5, 1
 	addvar VAR_TEMP_0, -1
@@ -686,7 +686,7 @@ LinkContestRoom1_EventScript_1A5814:: @ 81A5814
 	compare VAR_TEMP_6, 1
 	goto_if_eq LinkContestRoom1_EventScript_1A5837
 	applymovement 10, LinkContestRoom1_Movement_1A5D8D
-	playse 21
+	playse SE_PIN
 	delay 14
 	setvar VAR_TEMP_6, 1
 	addvar VAR_TEMP_0, -1
@@ -699,7 +699,7 @@ LinkContestRoom1_EventScript_1A5838:: @ 81A5838
 	compare VAR_TEMP_7, 1
 	goto_if_eq LinkContestRoom1_EventScript_1A585B
 	applymovement 11, LinkContestRoom1_Movement_1A5D8D
-	playse 21
+	playse SE_PIN
 	delay 14
 	setvar VAR_TEMP_7, 1
 	addvar VAR_TEMP_0, -1
@@ -712,7 +712,7 @@ LinkContestRoom1_EventScript_1A585C:: @ 81A585C
 	compare VAR_TEMP_8, 1
 	goto_if_eq LinkContestRoom1_EventScript_1A587F
 	applymovement 15, LinkContestRoom1_Movement_1A5D8D
-	playse 21
+	playse SE_PIN
 	delay 14
 	setvar VAR_TEMP_8, 1
 	addvar VAR_TEMP_0, -1
@@ -805,7 +805,7 @@ LinkContestRoom1_EventScript_1A594A:: @ 81A594A
 	setvar VAR_TEMP_9, 1
 	showcontestresults
 	setvar VAR_TEMP_9, 0
-	playbgm 439, 0
+	playbgm BGM_CON_FAN, FALSE
 	return
 
 LinkContestRoom1_EventScript_1A5984:: @ 81A5984
@@ -890,7 +890,7 @@ LinkContestRoom1_EventScript_1A5A49:: @ 81A5A49
 	call LinkContestRoom1_EventScript_1A5A75
 	applymovement VAR_TEMP_3, LinkContestRoom1_Movement_1A5D99
 	waitmovement 0
-	playse 223
+	playse SE_W227B
 	setvar VAR_TEMP_1, 0
 	return
 
@@ -1002,7 +1002,7 @@ LinkContestRoom1_EventScript_1A5BAB:: @ 81A5BAB
 	waitmessage
 	call LinkContestRoom1_EventScript_1A5C7F
 	call LinkContestRoom1_EventScript_1A5CE5
-	playse 223
+	playse SE_W227B
 	setvar VAR_TEMP_1, 0
 	call LinkContestRoom1_EventScript_1A5A90
 	delay 30
@@ -1146,7 +1146,7 @@ LinkContestRoom1_EventScript_1A5D5B:: @ 81A5D5B
 	setflag FLAG_SYS_RIBBON_GET
 	lockall
 	msgbox LinkContestRoom1_Text_1A6D6A, 4
-	playfanfare 370
+	playfanfare BGM_FANFA4
 	msgbox LinkContestRoom1_Text_1A6D96, 4
 	waitfanfare
 	special sub_80C4858

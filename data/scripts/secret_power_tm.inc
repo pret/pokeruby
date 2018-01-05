@@ -1,8 +1,8 @@
 Route111_EventScript_1A3858:: @ 81A3858
 	lock
 	faceplayer
-	msgbox Route111_Text_1A3520, 5
-	compare RESULT, 1
+	msgbox Route111_Text_1A3520, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq Route111_EventScript_1A3877
 	msgbox Route111_Text_1A37B5, 4
 	release

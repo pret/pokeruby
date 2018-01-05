@@ -43,7 +43,7 @@ OldaleTown_EventScript_14DDBC:: @ 814DDBC
 	checkflag FLAG_TEMP_1
 	goto_if_eq OldaleTown_EventScript_14DE79
 	setflag FLAG_TEMP_1
-	playbgm 420, 0
+	playbgm BGM_TSURETEK, FALSE
 	msgbox OldaleTown_Text_16AEF2, 4
 	closemessage
 	switch FACING

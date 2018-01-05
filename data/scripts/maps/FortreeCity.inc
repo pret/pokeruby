@@ -64,8 +64,8 @@ FortreeCity_EventScript_14C9B3:: @ 814C9B3
 	end
 
 FortreeCity_EventScript_14C9CF:: @ 814C9CF
-	msgbox FortreeCity_Text_16788B, 5
-	compare RESULT, 1
+	msgbox FortreeCity_Text_16788B, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq FortreeCity_EventScript_14C9E4
 	release
 	end

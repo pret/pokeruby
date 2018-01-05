@@ -30,10 +30,10 @@ DewfordTown_Hall_EventScript_1532CD:: @ 81532CD
 	faceplayer
 	call DewfordTown_Hall_EventScript_1A0102
 	special BufferRandomHobbyOrLifestyleString
-	msgbox DewfordTown_Hall_Text_1755F9, 5
-	compare RESULT, 1
+	msgbox DewfordTown_Hall_Text_1755F9, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq DewfordTown_Hall_EventScript_1532F6
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq DewfordTown_Hall_EventScript_153300
 	end
 

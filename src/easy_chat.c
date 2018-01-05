@@ -20,7 +20,8 @@ extern const u8 gEasyChatGroupSizes[];
 
 extern u16 gSpecialVar_0x8004;
 
-IWRAM_DATA u8 gUnknown_03000740;
+// put this in .bss, damnit!
+__attribute__((section(".bss"))) u8 gUnknown_03000740 = 0;
 
 /*
 

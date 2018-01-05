@@ -47,8 +47,8 @@ LilycoveCity_Harbor_EventScript_159929:: @ 8159929
 	end
 
 LilycoveCity_Harbor_EventScript_159933:: @ 8159933
-	msgbox LilycoveCity_Harbor_Text_18B47D, 5
-	compare RESULT, 0
+	msgbox LilycoveCity_Harbor_Text_18B47D, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq LilycoveCity_Harbor_EventScript_15997E
 	setvar VAR_PORTHOLE_STATE, 5
 	call LilycoveCity_Harbor_EventScript_15998A
@@ -58,8 +58,8 @@ LilycoveCity_Harbor_EventScript_159933:: @ 8159933
 	end
 
 LilycoveCity_Harbor_EventScript_15995B:: @ 815995B
-	msgbox LilycoveCity_Harbor_Text_18B499, 5
-	compare RESULT, 0
+	msgbox LilycoveCity_Harbor_Text_18B499, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq LilycoveCity_Harbor_EventScript_15997E
 	call LilycoveCity_Harbor_EventScript_15998A
 	warp MAP_BATTLE_TOWER_OUTSIDE, 255, 19, 23

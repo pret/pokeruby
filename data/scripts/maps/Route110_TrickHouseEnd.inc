@@ -167,9 +167,9 @@ Route110_TrickHouseEnd_EventScript_161BAF:: @ 8161BAF
 	msgbox Route110_TrickHouseEnd_Text_19C691, 4
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	.ifdef SAPPHIRE
-	givedecoration_std 32
+	givedecoration_std DECOR_BLUE_TENT
 	.else
-	givedecoration_std 31
+	givedecoration_std DECOR_RED_TENT
 	.endc
 	compare RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_161C61
@@ -182,7 +182,7 @@ Route110_TrickHouseEnd_EventScript_161BAF:: @ 8161BAF
 Route110_TrickHouseEnd_EventScript_161C2E:: @ 8161C2E
 	applymovement 1, Route110_TrickHouseEnd_Movement_161315
 	waitmovement 0
-	playse 178
+	playse SE_W153
 	applymovement 1, Route110_TrickHouseEnd_Movement_16131E
 	waitmovement 0
 	removeobject 1
@@ -224,13 +224,13 @@ Route110_TrickHouseEnd_EventScript_161C95:: @ 8161C95
 Route110_TrickHouseEnd_EventScript_161CA0:: @ 8161CA0
 	lockall
 	turnobject 1, 3
-	playse 21
+	playse SE_PIN
 	applymovement 1, Route110_TrickHouseEnd_Movement_1A0833
 	waitmovement 0
 	delay 20
 	applymovement 1, Route110_TrickHouseEnd_Movement_161CEA
 	waitmovement 0
-	playse 178
+	playse SE_W153
 	applymovement 255, Route110_TrickHouseEnd_Movement_1A0845
 	waitmovement 0
 	msgbox Route110_TrickHouseEnd_Text_19CA8B, 4

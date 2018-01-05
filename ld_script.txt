@@ -278,9 +278,9 @@ SECTIONS {
         src/battle/anim/energy_wave.o(.text);
         src/battle/anim/water.o(.text);
         asm/water.o(.text);
-        asm/fire.o(.text);
+        src/battle/anim/fire.o(.text);
         src/battle/anim/sunlight.o(.text);
-        asm/fire_2.o(.text);
+        src/battle/anim/fire_2.o(.text);
         src/battle/anim/heated_rock.o(.text);
         src/battle/anim/wisp_orb.o(.text);
         asm/wisp_fire.o(.text);
@@ -321,10 +321,7 @@ SECTIONS {
         src/scene/cute_sketch.o(.text);
         asm/cute_sketch.o(.text);
         src/field/decoration.o(.text);
-        asm/slot_machine.o(.text);
         src/field/slot_machine.o(.text);
-        asm/slot_machine.o(.text_8104D30)
-        src/field/slot_machine.o(.text_b);
         src/scene/contest_painting.o(.text);
         src/battle/battle_ai.o(.text);
         src/field/trader.o(.text);
@@ -435,7 +432,9 @@ SECTIONS {
         tools/agbcc/lib/libgcc.a:fp-bit.o(.text);
         tools/agbcc/lib/libgcc.a:_lshrdi3.o(.text);
         tools/agbcc/lib/libgcc.a:_negdi2.o(.text);
-        src/libs/libc.o(.text);
+        tools/agbcc/lib/libc.a:memcpy.o(.text);
+        tools/agbcc/lib/libc.a:memset.o(.text);
+        tools/agbcc/lib/libc.a:strcmp.o(.text);
     } =0
 
     .rodata :
@@ -556,7 +555,7 @@ SECTIONS {
         src/field/region_map.o(.rodata);
         data/cute_sketch.o(.rodata);
         src/field/decoration.o(.rodata);
-        data/slot_machine.o(.rodata);
+        src/field/slot_machine.o(.rodata);
         src/scene/contest_painting.o(.rodata);
         src/battle/battle_ai.o(.rodata);
         src/field/trader.o(.rodata);

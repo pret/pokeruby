@@ -5,7 +5,7 @@
 #include "config.h"
 
 // IDE support
-#ifdef __APPLE__
+#if defined(__APPLE__) || defined(__CYGWIN__)
 #define _(x) x
 #define __(x) x
 #define INCBIN_U8 {0}
@@ -26,14 +26,6 @@ int     strcmp (const char *, const char *);
 #define asm_comment(x) asm volatile("@ -- " x " -- ")
 
 #define asm_unified(x) asm(".syntax unified\n" x "\n.syntax divided\n")
-
-#define nonmatching(fndec, x) {\
-__attribute__((naked))\
-fndec\
-{\
-    asm_unified(x);\
-}\
-}
 
 #define ARRAY_COUNT(array) (sizeof(array) / sizeof((array)[0]))
 
