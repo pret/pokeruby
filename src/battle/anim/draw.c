@@ -6,11 +6,11 @@
 #include "unknown_task.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
-extern u16 gUnknown_03004288;
-extern u16 gUnknown_030042C0;
+extern u16 gBattle_BG2_X;
+extern u16 gBattle_BG1_X;
 
 static void sub_80D0D68(u8 taskId);
 static void sub_80D0E8C(struct Sprite* sprite);
@@ -23,21 +23,21 @@ void sub_80D0C88(u8 taskId)
     struct Task* task = &gTasks[taskId];
     struct UnknownTaskStruct sp;
     s16 i;
-    task->data[0] = sub_8077FC0(gBattleAnimBankTarget) + 32;
+    task->data[0] = sub_8077FC0(gAnimBankTarget) + 32;
     task->data[1] = 4;
     task->data[2] = 0;
     task->data[3] = 0;
     task->data[4] = 0;
     task->data[5] = 0;
-    task->data[15] = sub_807A100(gBattleAnimBankTarget, 0);
-    if (GetBankIdentity_permutated(gBattleAnimBankTarget) == 1)
+    task->data[15] = sub_807A100(gAnimBankTarget, 0);
+    if (GetBankIdentity_permutated(gAnimBankTarget) == 1)
     {
-        task->data[6] = gUnknown_030042C0;
+        task->data[6] = gBattle_BG1_X;
         sp.dest = (u16 *)REG_ADDR_BG1HOFS;
     }
     else
     {
-        task->data[6] = gUnknown_03004288;
+        task->data[6] = gBattle_BG2_X;
         sp.dest = (u16 *)REG_ADDR_BG2HOFS;
     }
 
@@ -220,15 +220,15 @@ _080D0E2C: .4byte gUnknown_03004DC0\n\
 
 void sub_80D0E30(struct Sprite* sprite)
 {
-    sprite->pos1.x = sub_8077ABC(gBattleAnimBankTarget, 0) - 16;
-    sprite->pos1.y = sub_8077FC0(gBattleAnimBankTarget) + 16;
+    sprite->pos1.x = GetBankPosition(gAnimBankTarget, 0) - 16;
+    sprite->pos1.y = sub_8077FC0(gAnimBankTarget) + 16;
     sprite->data[0] = 0;
     sprite->data[1] = 0;
     sprite->data[2] = 0;
     sprite->data[3] = 16;
     sprite->data[4] = 0;
-    sprite->data[5] = sub_807A100(gBattleAnimBankTarget, 0) + 2;
-    sprite->data[6] = sub_8076F98(0x3F);
+    sprite->data[5] = sub_807A100(gAnimBankTarget, 0) + 2;
+    sprite->data[6] = BattleAnimAdjustPanning(0x3F);
     sprite->callback = sub_80D0E8C;
 }
 
@@ -285,7 +285,7 @@ void sub_80D0E8C(struct Sprite* sprite)
         if (++sprite->data[1] > 16)
         {
             sprite->invisible = 0;
-            move_anim_8072740(sprite);
+            DestroyAnimSprite(sprite);
         }
         break;
     }

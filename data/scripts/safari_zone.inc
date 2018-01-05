@@ -1,11 +1,11 @@
 gUnknown_081C340A:: @ 81C340A
-	setvar 0x40a4, 1
+	setvar VAR_SAFARI_ZONE_STATE, 1
 	special ExitSafariMode
 	setwarp MAP_ROUTE121_SAFARI_ZONE_ENTRANCE, 255, 2, 5
 	end
 
 EventScript_1C341B: @ 81C341B
-	setvar 0x40a4, 1
+	setvar VAR_SAFARI_ZONE_STATE, 1
 	special ExitSafariMode
 	warp MAP_ROUTE121_SAFARI_ZONE_ENTRANCE, 255, 2, 5
 	waitstate
@@ -53,7 +53,7 @@ gUnknown_081C346A:: @ 81C346A
 
 EventScript_1C348E:
 	fadescreen 1
-	special sub_810BAF4
+	special OpenPokeblockCaseOnFeeder
 	waitstate
 	compare RESULT, 0xFFFF
 	goto_if 5, EventScript_1C34A0

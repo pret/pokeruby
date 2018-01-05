@@ -78,7 +78,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_155CE6:: @ 8155CE6
 	applymovement 255, SlateportCity_OceanicMuseum_2F_Movement_1A0843
 	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17F352, 4
-	setvar 0x8004, 269
+	setvar VAR_SPECIAL_4, 269
 	call SlateportCity_OceanicMuseum_2F_EventScript_1A067F
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17F433, 4
 	closemessage

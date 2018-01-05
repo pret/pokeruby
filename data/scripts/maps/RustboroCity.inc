@@ -126,7 +126,7 @@ RustboroCity_EventScript_14C481:: @ 814C481
 	lockall
 	setobjectxyperm 9, 14, 21
 	setobjectmovementtype 9, 10
-	setvar 0x8004, 0
+	setvar VAR_SPECIAL_4, 0
 	goto RustboroCity_EventScript_14C4F4
 	end
 
@@ -134,7 +134,7 @@ RustboroCity_EventScript_14C498:: @ 814C498
 	lockall
 	setobjectxyperm 9, 14, 21
 	setobjectmovementtype 9, 10
-	setvar 0x8004, 1
+	setvar VAR_SPECIAL_4, 1
 	goto RustboroCity_EventScript_14C4F4
 	end
 
@@ -142,7 +142,7 @@ RustboroCity_EventScript_14C4AF:: @ 814C4AF
 	lockall
 	setobjectxyperm 9, 14, 21
 	setobjectmovementtype 9, 10
-	setvar 0x8004, 2
+	setvar VAR_SPECIAL_4, 2
 	goto RustboroCity_EventScript_14C4F4
 	end
 
@@ -150,7 +150,7 @@ RustboroCity_EventScript_14C4C6:: @ 814C4C6
 	lockall
 	setobjectxyperm 9, 14, 21
 	setobjectmovementtype 9, 10
-	setvar 0x8004, 3
+	setvar VAR_SPECIAL_4, 3
 	goto RustboroCity_EventScript_14C4F4
 	end
 
@@ -158,7 +158,7 @@ RustboroCity_EventScript_14C4DD:: @ 814C4DD
 	lockall
 	setobjectxyperm 9, 14, 21
 	setobjectmovementtype 9, 10
-	setvar 0x8004, 4
+	setvar VAR_SPECIAL_4, 4
 	goto RustboroCity_EventScript_14C4F4
 	end
 
@@ -180,9 +180,9 @@ RustboroCity_EventScript_14C4F4:: @ 814C4F4
 	setobjectxyperm 9, 30, 10
 	clearflag FLAG_HIDE_DEVON_RUSTBORO
 	setflag FLAG_DEVON_GOODS_STOLEN
-	setvar 0x405a, 2
-	setvar 0x409a, 2
-	setvar 0x406f, 1
+	setvar VAR_RUSTBORO_STATE, 2
+	setvar VAR_RUSTURF_TUNNEL_STATE, 2
+	setvar VAR_ROUTE116_STATE, 1
 	clearflag FLAG_HIDE_BRINEY_ROUTE116
 	clearflag FLAG_HIDE_PEEKO_RUSTURF_TUNNEL
 	clearflag FLAG_HIDE_GRUNT_RUSTURF_TUNNEL
@@ -334,45 +334,45 @@ RustboroCity_EventScript_14C5FF:: @ 814C5FF
 
 RustboroCity_EventScript_14C614:: @ 814C614
 	waitse
-	setvar 0x4001, 4
+	setvar VAR_TEMP_1, 4
 	goto RustboroCity_EventScript_14C77D
 	end
 
 RustboroCity_EventScript_14C620:: @ 814C620
 	lockall
-	setvar 0x4001, 0
+	setvar VAR_TEMP_1, 0
 	goto RustboroCity_EventScript_14C650
 	end
 
 RustboroCity_EventScript_14C62C:: @ 814C62C
 	lockall
-	setvar 0x4001, 1
+	setvar VAR_TEMP_1, 1
 	goto RustboroCity_EventScript_14C650
 	end
 
 RustboroCity_EventScript_14C638:: @ 814C638
 	lockall
-	setvar 0x4001, 2
+	setvar VAR_TEMP_1, 2
 	goto RustboroCity_EventScript_14C650
 	end
 
 RustboroCity_EventScript_14C644:: @ 814C644
 	lockall
-	setvar 0x4001, 3
+	setvar VAR_TEMP_1, 3
 	goto RustboroCity_EventScript_14C650
 	end
 
 RustboroCity_EventScript_14C650:: @ 814C650
-	compare 0x4001, 0
+	compare VAR_TEMP_1, 0
 	call_if 1, RustboroCity_EventScript_14C691
-	compare 0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if 1, RustboroCity_EventScript_14C6BD
-	compare 0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if 1, RustboroCity_EventScript_14C6E9
-	compare 0x4001, 3
+	compare VAR_TEMP_1, 3
 	call_if 1, RustboroCity_EventScript_14C715
 	setflag FLAG_UNKNOWN_9F
-	setvar 0x405a, 3
+	setvar VAR_RUSTBORO_STATE, 3
 	moveobjectoffscreen 9
 	msgbox RustboroCity_Text_166EA5, 4
 	releaseall
@@ -434,38 +434,38 @@ RustboroCity_Movement_14C74B:: @ 814C74B
 
 RustboroCity_EventScript_14C74D:: @ 814C74D
 	lockall
-	setvar 0x4001, 0
+	setvar VAR_TEMP_1, 0
 	goto RustboroCity_EventScript_14C77D
 	end
 
 RustboroCity_EventScript_14C759:: @ 814C759
 	lockall
-	setvar 0x4001, 1
+	setvar VAR_TEMP_1, 1
 	goto RustboroCity_EventScript_14C77D
 	end
 
 RustboroCity_EventScript_14C765:: @ 814C765
 	lockall
-	setvar 0x4001, 2
+	setvar VAR_TEMP_1, 2
 	goto RustboroCity_EventScript_14C77D
 	end
 
 RustboroCity_EventScript_14C771:: @ 814C771
 	lockall
-	setvar 0x4001, 3
+	setvar VAR_TEMP_1, 3
 	goto RustboroCity_EventScript_14C77D
 	end
 
 RustboroCity_EventScript_14C77D:: @ 814C77D
-	compare 0x4001, 0
+	compare VAR_TEMP_1, 0
 	call_if 1, RustboroCity_EventScript_14C7FE
-	compare 0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if 1, RustboroCity_EventScript_14C82A
-	compare 0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if 1, RustboroCity_EventScript_14C856
-	compare 0x4001, 3
+	compare VAR_TEMP_1, 3
 	call_if 1, RustboroCity_EventScript_14C882
-	compare 0x4001, 4
+	compare VAR_TEMP_1, 4
 	call_if 1, RustboroCity_EventScript_14C8B8
 	msgbox RustboroCity_Text_166FB4, 4
 	giveitem_std ITEM_GREAT_BALL
@@ -475,7 +475,7 @@ RustboroCity_EventScript_14C77D:: @ 814C77D
 	closemessage
 	setflag FLAG_RETURNED_DEVON_GOODS
 	setflag FLAG_HIDE_DEVON_RUSTBORO
-	setvar 0x405a, 5
+	setvar VAR_RUSTBORO_STATE, 5
 	delay 30
 	warp MAP_RUSTBORO_CITY_DEVON_CORP_3F, 255, 2, 2
 	waitstate

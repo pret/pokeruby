@@ -30,7 +30,7 @@ void ResetLotteryCorner(void)
     u16 rand = Random();
 
     SetLotteryNumber((Random() << 16) | rand);
-    VarSet(VAR_POKELOT_PRIZE, 0);
+    VarSet(VAR_LOTTERY_PRIZE, 0);
 }
 
 void SetRandomLotteryNumber(u16 i)
@@ -152,19 +152,19 @@ static u8 GetMatchingDigits(u16 winNumber, u16 otId)
 // lottery numbers go from 0 to 99999, not 65535 (0xFFFF). interestingly enough, the function that calls GetLotteryNumber shifts to u16, so it cant be anything above 65535 anyway.
 void SetLotteryNumber(u32 lotteryNum)
 {
-    u16 lowNum = lotteryNum >> 16;
-    u16 highNum = lotteryNum;
+    u16 high = lotteryNum >> 16;
+    u16 low = lotteryNum;
 
-    VarSet(VAR_POKELOT_RND1, highNum);
-    VarSet(VAR_POKELOT_RND2, lowNum);
+    VarSet(VAR_LOTTERY_RND_L, low);
+    VarSet(VAR_LOTTERY_RND_H, high);
 }
 
 u32 GetLotteryNumber(void)
 {
-    u16 highNum = VarGet(VAR_POKELOT_RND1);
-    u16 lowNum = VarGet(VAR_POKELOT_RND2);
+    u16 low = VarGet(VAR_LOTTERY_RND_L);
+    u16 high = VarGet(VAR_LOTTERY_RND_H);
 
-    return (lowNum << 16) | highNum;
+    return (high << 16) | low;
 }
 
 // interestingly, this may have been the original lottery number set function, but GF tried to change it to 32-bit later but didnt finish changing all calls as one GetLotteryNumber still shifts to u16.

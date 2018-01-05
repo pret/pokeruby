@@ -3,8 +3,8 @@
 #include "battle_anim.h"
 
 extern s16 gBattleAnimArgs[8];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 static void sub_80D2E30(struct Sprite *);
 
@@ -14,15 +14,15 @@ static void sub_80D2E30(struct Sprite *);
 void sub_80D2D68(struct Sprite* sprite)
 {
     int var1;
-    u8 slot = gBattleAnimArgs[0] == 0 ? gBattleAnimBankAttacker : gBattleAnimBankTarget;
+    u8 slot = gBattleAnimArgs[0] == 0 ? gAnimBankAttacker : gAnimBankTarget;
 
     if (GetBankSide(slot) == 1)
     {
         gBattleAnimArgs[1] *= -1;
     }
 
-    sprite->pos1.x = sub_8077ABC(slot, 2)  + gBattleAnimArgs[1];
-    sprite->pos1.y = sub_8077ABC(slot, 3) + gBattleAnimArgs[2];
+    sprite->pos1.x = GetBankPosition(slot, 2)  + gBattleAnimArgs[1];
+    sprite->pos1.y = GetBankPosition(slot, 3) + gBattleAnimArgs[2];
     sprite->data[0] = 0;
     sprite->data[1] = (u16)sprite->pos1.x << 3;
     sprite->data[2] = (u16)sprite->pos1.y << 3;
@@ -51,6 +51,6 @@ static void sub_80D2E30(struct Sprite *sprite)
 
     if (++sprite->data[0] > 16)
     {
-        move_anim_8072740(sprite);
+        DestroyAnimSprite(sprite);
     } 
 }

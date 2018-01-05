@@ -5,8 +5,8 @@
 #include "sound.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 // fang
 // Used by Super Fang (and probably Hyper Fang, but the actual callbacks are not in this file.)
@@ -14,6 +14,6 @@ extern u8 gBattleAnimBankTarget;
 
 void sub_80CEA04(struct Sprite* sprite)
 {
-    StoreSpriteCallbackInData(sprite, move_anim_8072740);
+    StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
     sprite->callback = sub_8078600;
 }

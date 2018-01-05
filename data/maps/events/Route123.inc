@@ -38,39 +38,39 @@ Route123_MapWarps:: @ 8384B28
 	warp_def 22, 6, 0, 0, MAP_ROUTE123_BERRY_MASTERS_HOUSE
 
 Route123_MapCoordEvents:: @ 8384B30
-	coord_event 90, 16, 3, 0, 21, 0, 0, 0x0
-	coord_event 92, 9, 3, 0, 21, 0, 0, 0x0
-	coord_event 93, 12, 3, 0, 21, 0, 0, 0x0
-	coord_event 92, 13, 3, 0, 21, 0, 0, 0x0
-	coord_event 91, 14, 3, 0, 21, 0, 0, 0x0
-	coord_event 19, 13, 3, 0, 21, 0, 0, 0x0
-	coord_event 19, 12, 3, 0, 21, 0, 0, 0x0
-	coord_event 34, 13, 3, 0, 21, 0, 0, 0x0
-	coord_event 19, 14, 3, 0, 21, 0, 0, 0x0
-	coord_event 19, 15, 3, 0, 21, 0, 0, 0x0
-	coord_event 19, 16, 3, 0, 21, 0, 0, 0x0
-	coord_event 108, 14, 3, 0, 2, 0, 0, 0x0
-	coord_event 109, 15, 3, 0, 2, 0, 0, 0x0
-	coord_event 110, 16, 3, 0, 2, 0, 0, 0x0
-	coord_event 111, 17, 3, 0, 2, 0, 0, 0x0
-	coord_event 112, 18, 3, 0, 2, 0, 0, 0x0
-	coord_event 9, 12, 3, 0, 2, 0, 0, 0x0
-	coord_event 9, 13, 3, 0, 2, 0, 0, 0x0
-	coord_event 9, 14, 3, 0, 2, 0, 0, 0x0
-	coord_event 9, 15, 3, 0, 2, 0, 0, 0x0
-	coord_event 9, 16, 3, 0, 2, 0, 0, 0x0
-	coord_event 94, 10, 3, 0, 21, 0, 0, 0x0
+	coord_weather_event 90, 16, 3, COORD_EVENT_WEATHER_ROUTE123_CYCLE
+	coord_weather_event 92, 9, 3, COORD_EVENT_WEATHER_ROUTE123_CYCLE
+	coord_weather_event 93, 12, 3, COORD_EVENT_WEATHER_ROUTE123_CYCLE
+	coord_weather_event 92, 13, 3, COORD_EVENT_WEATHER_ROUTE123_CYCLE
+	coord_weather_event 91, 14, 3, COORD_EVENT_WEATHER_ROUTE123_CYCLE
+	coord_weather_event 19, 13, 3, COORD_EVENT_WEATHER_ROUTE123_CYCLE
+	coord_weather_event 19, 12, 3, COORD_EVENT_WEATHER_ROUTE123_CYCLE
+	coord_weather_event 34, 13, 3, COORD_EVENT_WEATHER_ROUTE123_CYCLE
+	coord_weather_event 19, 14, 3, COORD_EVENT_WEATHER_ROUTE123_CYCLE
+	coord_weather_event 19, 15, 3, COORD_EVENT_WEATHER_ROUTE123_CYCLE
+	coord_weather_event 19, 16, 3, COORD_EVENT_WEATHER_ROUTE123_CYCLE
+	coord_weather_event 108, 14, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 109, 15, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 110, 16, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 111, 17, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 112, 18, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 9, 12, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 9, 13, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 9, 14, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 9, 15, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 9, 16, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 94, 10, 3, COORD_EVENT_WEATHER_ROUTE123_CYCLE
 
 Route123_MapBGEvents:: @ 8384C90
 	bg_event 117, 10, 0, 0, 0, Route123_EventScript_151CBF
-	bg_event 47, 3, 0, 8, 0, 82, 0, 0
-	bg_event 49, 3, 0, 8, 0, 92, 0, 0
+	bg_secret_base_event 47, 3, 0, SECRET_BASE_BLUE_CAVE1_2
+	bg_secret_base_event 49, 3, 0, SECRET_BASE_BLUE_CAVE2_2
 	bg_event 10, 12, 3, 0, 0, Route123_EventScript_151CB6
-	bg_event 75, 1, 3, 7, 0, ITEM_SUPER_REPEL, 7, 0
+	bg_hidden_item_event 75, 1, 3, ITEM_SUPER_REPEL, FLAG_HIDDEN_ITEM_7
 	bg_event 20, 7, 3, 0, 0, Route123_EventScript_151CC8
-	bg_event 57, 5, 0, 8, 0, ITEM_SUPER_REPEL, 0, 0
-	bg_event 12, 1, 3, 7, 0, ITEM_REVIVE, 41, 0
-	bg_event 91, 15, 3, 7, 0, ITEM_HYPER_POTION, 74, 0
+	bg_secret_base_event 57, 5, 0, SECRET_BASE_BLUE_CAVE1_3
+	bg_hidden_item_event 12, 1, 3, ITEM_REVIVE, FLAG_HIDDEN_ITEM_29
+	bg_hidden_item_event 91, 15, 3, ITEM_HYPER_POTION, FLAG_HIDDEN_ITEM_4A
 
 Route123_MapEvents:: @ 8384CFC
 	map_events Route123_MapObjects, Route123_MapWarps, Route123_MapCoordEvents, Route123_MapBGEvents

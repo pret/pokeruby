@@ -5,8 +5,8 @@
 #include "sound.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 // kiss_fountain (a series of hearts pour out of a target Pokemon.)
 // Used in Attract and Sweet Kiss.
@@ -32,7 +32,7 @@ void sub_80D1FDC(struct Sprite* sprite)
 
         if (sprite->data[3] > 0x78)
         {
-            move_anim_8072740(sprite);
+            DestroyAnimSprite(sprite);
         }
     }
 }

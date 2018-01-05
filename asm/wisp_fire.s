@@ -63,7 +63,7 @@ _080D5CD8:
 	lsrs r0, 16
 	cmp r0, 0x83
 	bls _080D5D5C
-	ldr r0, _080D5D58 @ =gBattleAnimBankTarget
+	ldr r0, _080D5D58 @ =gAnimBankTarget
 	ldrb r0, [r0]
 	bl sub_8079ED4
 	movs r1, 0x3
@@ -80,9 +80,9 @@ _080D5CD8:
 _080D5D4C: .4byte gBattleAnimArgs
 _080D5D50: .4byte gMain
 _080D5D54: .4byte 0x0000043d
-_080D5D58: .4byte gBattleAnimBankTarget
+_080D5D58: .4byte gAnimBankTarget
 _080D5D5C:
-	ldr r0, _080D5D80 @ =gBattleAnimBankTarget
+	ldr r0, _080D5D80 @ =gAnimBankTarget
 	ldrb r0, [r0]
 	bl sub_8079ED4
 	lsls r0, 24
@@ -99,7 +99,7 @@ _080D5D5C:
 	strb r1, [r4, 0x5]
 	b _080D5DA0
 	.align 2, 0
-_080D5D80: .4byte gBattleAnimBankTarget
+_080D5D80: .4byte gAnimBankTarget
 _080D5D84:
 	adds r0, r2, 0
 	subs r0, 0x40
@@ -144,7 +144,7 @@ _080D5DC8:
 	cmp r0, 0x1E
 	bne _080D5DD6
 	adds r0, r4, 0
-	bl move_anim_8072740
+	bl DestroyAnimSprite
 _080D5DD6:
 	pop {r4}
 	pop {r0}
@@ -161,7 +161,7 @@ sub_80D5DDC: @ 80D5DDC
 	lsls r1, 3
 	ldr r0, _080D5E3C @ =gTasks
 	adds r4, r1, r0
-	ldr r0, _080D5E40 @ =gBattleAnimBankAttacker
+	ldr r0, _080D5E40 @ =gAnimBankAttacker
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
@@ -173,7 +173,7 @@ sub_80D5DDC: @ 80D5DDC
 	movs r1, 0x1
 _080D5E02:
 	strh r1, [r4, 0x20]
-	ldr r0, _080D5E44 @ =gBattleAnimBankTarget
+	ldr r0, _080D5E44 @ =gAnimBankTarget
 	ldrb r1, [r0]
 	movs r0, 0x2
 	eors r0, r1
@@ -199,8 +199,8 @@ _080D5E02:
 	bx r0
 	.align 2, 0
 _080D5E3C: .4byte gTasks
-_080D5E40: .4byte gBattleAnimBankAttacker
-_080D5E44: .4byte gBattleAnimBankTarget
+_080D5E40: .4byte gAnimBankAttacker
+_080D5E44: .4byte gAnimBankTarget
 _080D5E48: .4byte sub_80D5E4C
 	thumb_func_end sub_80D5DDC
 
@@ -570,7 +570,7 @@ _080D60EA:
 	adds r0, 0x1
 	strh r0, [r2, 0x8]
 	ldr r1, _080D6114 @ =gObjectBankIDs
-	ldr r0, _080D6118 @ =gBattleAnimBankTarget
+	ldr r0, _080D6118 @ =gAnimBankTarget
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r6, [r0]
@@ -586,7 +586,7 @@ _080D60EA:
 _080D610C: .4byte gTasks
 _080D6110: .4byte gBattleAnimArgs
 _080D6114: .4byte gObjectBankIDs
-_080D6118: .4byte gBattleAnimBankTarget
+_080D6118: .4byte gAnimBankTarget
 _080D611C: .4byte gUnknown_083D9794
 _080D6120:
 	ldr r4, _080D616C @ =gUnknown_083D97A4

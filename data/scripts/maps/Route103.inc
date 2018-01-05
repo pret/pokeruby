@@ -26,7 +26,7 @@ Route103_EventScript_14EBAB:: @ 814EBAB
 	applymovement 2, Route103_Movement_1A0835
 	waitmovement 0
 	msgbox Route103_Text_16D5B6, 4
-	switch 0x4023
+	switch VAR_STARTER_MON
 	case 0, Route103_EventScript_14EC5D
 	case 1, Route103_EventScript_14EC6D
 	case 2, Route103_EventScript_14EC7D
@@ -42,7 +42,7 @@ Route103_EventScript_14EC04:: @ 814EC04
 	applymovement 2, Route103_Movement_1A0835
 	waitmovement 0
 	msgbox Route103_Text_16D7A9, 4
-	switch 0x4023
+	switch VAR_STARTER_MON
 	case 0, Route103_EventScript_14EC8D
 	case 1, Route103_EventScript_14EC9D
 	case 2, Route103_EventScript_14ECAD
@@ -117,11 +117,11 @@ Route103_EventScript_14ED29:: @ 814ED29
 
 Route103_EventScript_14ED46:: @ 814ED46
 	removeobject 2
-	setvar 0x4062, 1
-	setvar 0x4084, 4
+	setvar VAR_ROUTE103_STATE, 1
+	setvar VAR_BIRCH_LAB_STATE, 4
 	clearflag FLAG_HIDE_RIVAL_BIRCH_LAB
 	setflag FLAG_DEFEATED_RIVAL_ROUTE103
-	setvar 0x40c7, 1
+	setvar VAR_OLDALE_STATE, 1
 	clearflag FLAG_HIDE_RIVAL_OLDALE_TOWN
 	savebgm 0
 	fadedefaultbgm
@@ -173,7 +173,7 @@ Route103_EventScript_14ED94:: @ 814ED94
 
 Route103_EventScript_14EDAB:: @ 814EDAB
 	trainerbattle 4, OPPONENT_AMY_AND_LIV_1, 0, Route103_Text_1B7DF7, Route103_Text_1B7E3B, Route103_Text_1B7EAC
-	specialvar RESULT, sub_8082C68
+	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
 	goto_if_eq Route103_EventScript_14EDD6
 	msgbox Route103_Text_1B7E50, 6
@@ -186,7 +186,7 @@ Route103_EventScript_14EDD6:: @ 814EDD6
 
 Route103_EventScript_14EDF1:: @ 814EDF1
 	trainerbattle 4, OPPONENT_AMY_AND_LIV_1, 0, Route103_Text_1B7EFB, Route103_Text_1B7F20, Route103_Text_1B7F8E
-	specialvar RESULT, sub_8082C68
+	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
 	goto_if_eq Route103_EventScript_14EE1C
 	msgbox Route103_Text_1B7F40, 6
@@ -204,7 +204,7 @@ Route103_EventScript_14EE37:: @ 814EE37
 
 Route103_EventScript_14EE4E:: @ 814EE4E
 	trainerbattle 0, OPPONENT_MIGUEL_1, 0, Route103_Text_1B82A9, Route103_Text_1B82EC
-	specialvar RESULT, sub_8082C68
+	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
 	goto_if_eq Route103_EventScript_14EE75
 	msgbox Route103_Text_1B830D, 6

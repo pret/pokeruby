@@ -3,20 +3,20 @@ AbandonedShip_HiddenFloorRooms_MapScripts:: @ 815ED01
 	.byte 0
 
 AbandonedShip_HiddenFloorRooms_MapScript2_15ED07:: @ 815ED07
-	map_script_2 0x4001, 0, AbandonedShip_HiddenFloorRooms_EventScript_15ED11
+	map_script_2 VAR_TEMP_1, 0, AbandonedShip_HiddenFloorRooms_EventScript_15ED11
 	.2byte 0
 
 AbandonedShip_HiddenFloorRooms_EventScript_15ED11:: @ 815ED11
-	setvar 0x4001, 1
-	getplayerxy 0x4002, 0x4003
-	setvar 0x4004, 1
-	compare 0x4002, 21
+	setvar VAR_TEMP_1, 1
+	getplayerxy VAR_TEMP_2, VAR_TEMP_3
+	setvar VAR_TEMP_4, 1
+	compare VAR_TEMP_2, 21
 	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_15ED89
-	compare 0x4002, 36
+	compare VAR_TEMP_2, 36
 	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_15ED8F
-	compare 0x4003, 2
+	compare VAR_TEMP_3, 2
 	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_15ED95
-	switch 0x4004
+	switch VAR_TEMP_4
 	case 1, AbandonedShip_HiddenFloorRooms_EventScript_15ED9B
 	case 2, AbandonedShip_HiddenFloorRooms_EventScript_15EDC4
 	case 3, AbandonedShip_HiddenFloorRooms_EventScript_15EDC5
@@ -26,15 +26,15 @@ AbandonedShip_HiddenFloorRooms_EventScript_15ED11:: @ 815ED11
 	end
 
 AbandonedShip_HiddenFloorRooms_EventScript_15ED89:: @ 815ED89
-	addvar 0x4004, 1
+	addvar VAR_TEMP_4, 1
 	return
 
 AbandonedShip_HiddenFloorRooms_EventScript_15ED8F:: @ 815ED8F
-	addvar 0x4004, 2
+	addvar VAR_TEMP_4, 2
 	return
 
 AbandonedShip_HiddenFloorRooms_EventScript_15ED95:: @ 815ED95
-	addvar 0x4004, 3
+	addvar VAR_TEMP_4, 3
 	return
 
 AbandonedShip_HiddenFloorRooms_EventScript_15ED9B:: @ 815ED9B
@@ -43,7 +43,7 @@ AbandonedShip_HiddenFloorRooms_EventScript_15ED9B:: @ 815ED9B
 	setfieldeffectargument 1, 10
 	setfieldeffectargument 2, 0
 	dofieldeffect 54
-	specialvar RESULT, sub_810F4D4
+	specialvar RESULT, FoundAbandonedShipRoom4Key
 	compare RESULT, 0
 	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_15EE8B
 	waitfieldeffect 54
@@ -54,7 +54,7 @@ AbandonedShip_HiddenFloorRooms_EventScript_15EDC4:: @ 815EDC4
 	end
 
 AbandonedShip_HiddenFloorRooms_EventScript_15EDC5:: @ 815EDC5
-	specialvar RESULT, sub_810F488
+	specialvar RESULT, FoundAbandonedShipRoom1Key
 	compare RESULT, 1
 	goto_if_eq AbandonedShip_HiddenFloorRooms_EventScript_15EDEA
 	delay 20
@@ -77,7 +77,7 @@ AbandonedShip_HiddenFloorRooms_EventScript_15EDEB:: @ 815EDEB
 	setfieldeffectargument 1, 3
 	setfieldeffectargument 2, 0
 	dofieldeffect 54
-	specialvar RESULT, sub_810F4FC
+	specialvar RESULT, FoundAbandonedShipRoom6Key
 	compare RESULT, 0
 	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_15EE9B
 	waitfieldeffect 54
@@ -98,7 +98,7 @@ AbandonedShip_HiddenFloorRooms_EventScript_15EE23:: @ 815EE23
 	setfieldeffectargument 1, 6
 	setfieldeffectargument 2, 0
 	dofieldeffect 54
-	specialvar RESULT, sub_810F4B0
+	specialvar RESULT, FoundAbandonedShipRoom2Key
 	compare RESULT, 0
 	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_15EE7B
 	waitfieldeffect 54

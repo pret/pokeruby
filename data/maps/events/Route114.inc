@@ -31,16 +31,16 @@ Route114_MapWarps:: @ 8382E70
 Route114_MapBGEvents:: @ 8382E88
 	bg_event 7, 64, 0, 0, 0, Route114_EventScript_1507D6
 	bg_event 31, 7, 0, 0, 0, Route114_EventScript_1507DF
-	bg_event 9, 47, 0, 8, 0, ITEM_RED_FLUTE, 0, 0
-	bg_event 30, 51, 0, 8, 0, ITEM_GREEN_SHARD, 0, 0
-	bg_event 11, 62, 0, 8, 0, 61, 0, 0
-	bg_event 19, 70, 0, 8, 0, ITEM_PP_MAX, 0, 0
-	bg_event 11, 27, 0, 8, 0, ITEM_EXP_SHARE, 0, 0
-	bg_event 12, 27, 0, 8, 0, ITEM_DEEP_SEA_TOOTH, 0, 0
+	bg_secret_base_event 9, 47, 0, SECRET_BASE_BROWN_CAVE1_1
+	bg_secret_base_event 30, 51, 0, SECRET_BASE_BROWN_CAVE2_1
+	bg_secret_base_event 11, 62, 0, SECRET_BASE_BROWN_CAVE3_1
+	bg_secret_base_event 19, 70, 0, SECRET_BASE_BROWN_CAVE4_1
+	bg_secret_base_event 11, 27, 0, SECRET_BASE_TREE3_2
+	bg_secret_base_event 12, 27, 0, SECRET_BASE_TREE4_2
 	bg_event 25, 38, 3, 0, 0, Route114_EventScript_1507E8
-	bg_event 20, 57, 3, 7, 0, ITEM_CARBOS, 4, 0
-	bg_event 32, 57, 0, 8, 0, ITEM_GUARD_SPEC, 0, 0
-	bg_event 7, 30, 3, 7, 0, ITEM_REVIVE, 42, 0
+	bg_hidden_item_event 20, 57, 3, ITEM_CARBOS, FLAG_HIDDEN_ITEM_4
+	bg_secret_base_event 32, 57, 0, SECRET_BASE_BROWN_CAVE4_3
+	bg_hidden_item_event 7, 30, 3, ITEM_REVIVE, FLAG_HIDDEN_ITEM_2A
 
 Route114_MapEvents:: @ 8382F18
 	map_events Route114_MapObjects, Route114_MapWarps, 0x0, Route114_MapBGEvents

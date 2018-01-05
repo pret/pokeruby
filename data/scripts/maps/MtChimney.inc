@@ -4,7 +4,7 @@ MtChimney_MapScripts:: @ 815CF7C
 	.byte 0
 
 MtChimney_MapScript1_15CF87:: @ 815CF87
-	setvar 0x40bd, 1
+	setvar VAR_JAGGED_PASS_ASH_WEATHER, 1
 	call MtChimney_EventScript_1A0196
 	end
 
@@ -440,7 +440,7 @@ MtChimney_EventScript_15D1DA:: @ 815D1DA
 
 MtChimney_EventScript_15D1E3:: @ 815D1E3
 	trainerbattle 0, OPPONENT_SHELBY_1, 0, MtChimney_Text_19597F, MtChimney_Text_1959D8
-	specialvar RESULT, sub_8082C68
+	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
 	goto_if_eq MtChimney_EventScript_15D20A
 	msgbox MtChimney_Text_195A04, 6

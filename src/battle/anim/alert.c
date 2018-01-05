@@ -5,8 +5,8 @@
 #include "sound.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 // alert (red thunder from the sides of a Pokemon, simulating more alert behavior.)
 // Used in Kinesis.
@@ -16,7 +16,7 @@ void sub_80CF610(struct Sprite* sprite)
     sub_8078650(sprite);
     sub_807867C(sprite, gBattleAnimArgs[0]);
     sprite->pos1.y += gBattleAnimArgs[1];
-    if (GetBankSide(gBattleAnimBankAttacker) != 0)
+    if (GetBankSide(gAnimBankAttacker) != 0)
     {
         sprite->hFlip = 1;
         if (gBattleAnimArgs[2] != 0)
@@ -29,5 +29,5 @@ void sub_80CF610(struct Sprite* sprite)
     }
 
     sprite->callback = sub_8078600;
-    StoreSpriteCallbackInData(sprite, move_anim_8072740);
+    StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }

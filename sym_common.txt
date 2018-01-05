@@ -11,7 +11,7 @@
 gUnknown_030041B0: @ 30041B0
 	.space 0x4
 
-gUnknown_030041B4: @ 30041B4
+gBattle_BG1_Y: @ 30041B4
 	.space 0x4
 
 gUnknown_030041B8: @ 30041B8
@@ -23,28 +23,28 @@ gBattleTextBuff1: @ 30041C0
 gUnknown_030041D0: @ 30041D0
 	.space 0x30
 
-gUnknown_03004200: @ 3004200
+gBattle_WIN1H: @ 3004200
 	.space 0x10
 
 gUnknown_03004210: @ 3004210
 	.space 0x30
 
-gUnknown_03004240: @ 3004240
+gBattle_WIN0V: @ 3004240
 	.space 0x4
 
-gUnknown_03004244: @ 3004244
+gBattle_WIN1V: @ 3004244
 	.space 0xC
 
 gUnknown_03004250: @ 3004250
 	.space 0x30
 
-gUnknown_03004280: @ 3004280
+gBattle_BG2_Y: @ 3004280
 	.space 0x4
 
 gUnknown_03004284: @ 3004284
 	.space 0x4
 
-gUnknown_03004288: @ 3004288
+gBattle_BG2_X: @ 3004288
 	.space 0x4
 
 gBattleTerrain: @ 300428C
@@ -62,10 +62,10 @@ gUnknown_030042A4: @ 30042A4
 gBattleTextBuff3: @ 30042B0
 	.space 0x10
 
-gUnknown_030042C0: @ 30042C0
+gBattle_BG1_X: @ 30042C0
 	.space 0x4
 
-gUnknown_030042C4: @ 30042C4
+gBattle_WIN0H: @ 30042C4
 	.space 0xC
 
 gPreBattleCallback1: @ 30042D0

@@ -35,7 +35,7 @@ extern u8 gNoOfAllBanks;
 extern u16 gBattlePartyID[];
 extern u8 gBanksBySide[];
 extern u16 gCurrentMove;
-extern u16 gUnknown_02024BE8;
+extern u16 gChosenMove;
 extern u16 gLastUsedItem;
 extern u8 gLastUsedAbility;
 extern u8 gBankAttacker;
@@ -80,7 +80,7 @@ void setup_poochyena_battle(void)
     }
     sub_800B858();
     gBattleExecBuffer = 0;
-    battle_anim_clear_some_data();
+    ClearBattleAnimationVars();
     ClearBattleMonForms();
     BattleAI_HandleItemUseBeforeAISetup();
     if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
@@ -745,7 +745,7 @@ void EmitPrintString(u8 a, u16 stringID)
 
     stringInfo = (struct StringInfoBattle*)(&gBattleBuffersTransferData[4]);
     stringInfo->currentMove = gCurrentMove;
-    stringInfo->lastMove = gUnknown_02024BE8;
+    stringInfo->lastMove = gChosenMove;
     stringInfo->lastItem = gLastUsedItem;
     stringInfo->lastAbility = gLastUsedAbility;
     stringInfo->scrActive = BATTLE_STRUCT->scriptingActive;
@@ -777,7 +777,7 @@ void EmitPrintStringPlayerOnly(u8 a, u16 stringID)
 
     stringInfo = (struct StringInfoBattle*)(&gBattleBuffersTransferData[4]);
     stringInfo->currentMove = gCurrentMove;
-    stringInfo->lastMove = gUnknown_02024BE8;
+    stringInfo->lastMove = gChosenMove;
     stringInfo->lastItem = gLastUsedItem;
     stringInfo->lastAbility = gLastUsedAbility;
     stringInfo->scrActive = BATTLE_STRUCT->scriptingActive;

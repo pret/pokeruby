@@ -4,8 +4,8 @@
 #include "trig.h"
 
 extern s16 gBattleAnimArgs[8];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 static void sub_80D2F80(struct Sprite *);
 static void sub_80D2FA4(struct Sprite *);
@@ -28,7 +28,7 @@ void sub_80D2E68(struct Sprite *sprite)
 
     if (sprite->data[0] == sprite->data[1] + 80)
     {
-        move_anim_8072740(sprite);
+        DestroyAnimSprite(sprite);
     }
 }
 
@@ -100,11 +100,11 @@ static void sub_80D2FA4(struct Sprite *sprite)
     {
         int var1 = sprite->data[2];
         sprite->invisible = var1 - (((s32)(var1 + ((u32)var1 >> 31)) >> 1) << 1);
-        move_anim_8072740(sprite);
+        DestroyAnimSprite(sprite);
     }
 
     if (sprite->data[4] == 4)
     {
-        move_anim_8072740(sprite);
+        DestroyAnimSprite(sprite);
     }
 }

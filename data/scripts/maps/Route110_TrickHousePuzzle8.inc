@@ -3,13 +3,13 @@ Route110_TrickHousePuzzle8_MapScripts:: @ 816341B
 
 Route110_TrickHousePuzzle8_EventScript_16341C:: @ 816341C
 	lockall
-	compare 0x40b2, 0
+	compare VAR_TRICK_HOUSE_PUZZLE_8_STATE, 0
 	goto_if_eq Route110_TrickHousePuzzle8_EventScript_16342E
 	goto Route110_TrickHousePuzzle8_EventScript_161892
 	end
 
 Route110_TrickHousePuzzle8_EventScript_16342E:: @ 816342E
-	setvar 0x40b2, 1
+	setvar VAR_TRICK_HOUSE_PUZZLE_8_STATE, 1
 	goto Route110_TrickHousePuzzle8_EventScript_16189C
 	end
 

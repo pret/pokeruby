@@ -5,8 +5,8 @@
 #include "util.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 static void sub_80D3874(struct Sprite *);
 
@@ -19,7 +19,7 @@ void sub_80D37FC(struct Sprite *sprite)
     sprite->data[4] = sprite->pos1.y + gBattleAnimArgs[4];
 
     sprite->callback = sub_8078B34;
-    StoreSpriteCallbackInData(sprite, move_anim_8072740);
+    StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
 
 void sub_80D3838(struct Sprite *sprite)
@@ -47,7 +47,7 @@ static void sub_80D3874(struct Sprite *sprite)
 
     if (--sprite->data[7] == -1)
     {
-        move_anim_8072740(sprite);
+        DestroyAnimSprite(sprite);
     }
 }
 
@@ -139,7 +139,7 @@ _080D3920:\n\
     ldr r1, _080D399C @ =0x85000400\n\
     str r1, [r0, 0x8]\n\
     ldr r0, [r0, 0x8]\n\
-    bl NotInBattle\n\
+    bl IsContest\n\
     lsls r0, 24\n\
     cmp r0, 0\n\
     bne _080D39B8\n\
@@ -151,7 +151,7 @@ _080D3920:\n\
     movs r1, 0x4\n\
     orrs r0, r1\n\
     strb r0, [r2]\n\
-    ldr r0, _080D39A0 @ =gBattleAnimBankAttacker\n\
+    ldr r0, _080D39A0 @ =gAnimBankAttacker\n\
     ldrb r0, [r0]\n\
     bl GetBankSide\n\
     lsls r0, 24\n\
@@ -166,7 +166,7 @@ _080D3990: .4byte 0x00003f42\n\
 _080D3994: .4byte REG_BG1CNT\n\
 _080D3998: .4byte 0x040000d4\n\
 _080D399C: .4byte 0x85000400\n\
-_080D39A0: .4byte gBattleAnimBankAttacker\n\
+_080D39A0: .4byte gAnimBankAttacker\n\
 _080D39A4: .4byte gUnknown_08E70968\n\
 _080D39A8:\n\
     ldr r0, _080D39B4 @ =gUnknown_08E70C38\n\
@@ -245,18 +245,18 @@ _080D3A0E:\n\
     lsls r0, 5\n\
     strh r0, [r7, 0xA]\n\
     strh r0, [r7, 0xC]\n\
-    bl NotInBattle\n\
+    bl IsContest\n\
     lsls r0, 24\n\
     lsrs r4, r0, 24\n\
     cmp r4, 0\n\
     beq _080D3A94\n\
     ldr r3, _080D3A84 @ =0x0000ffb0\n\
     adds r0, r3, 0\n\
-    ldr r1, _080D3A88 @ =gUnknown_030042C0\n\
+    ldr r1, _080D3A88 @ =gBattle_BG1_X\n\
     strh r0, [r1]\n\
     ldr r2, _080D3A8C @ =0x0000ffd0\n\
     adds r0, r2, 0\n\
-    ldr r3, _080D3A90 @ =gUnknown_030041B4\n\
+    ldr r3, _080D3A90 @ =gBattle_BG1_Y\n\
     strh r0, [r3]\n\
     movs r0, 0x2\n\
     strh r0, [r6, 0x8]\n\
@@ -270,11 +270,11 @@ _080D3A78: .4byte gBattleAnimBackgroundImageMuddyWater_Pal\n\
 _080D3A7C: .4byte sub_80D3D68\n\
 _080D3A80: .4byte gTasks\n\
 _080D3A84: .4byte 0x0000ffb0\n\
-_080D3A88: .4byte gUnknown_030042C0\n\
+_080D3A88: .4byte gBattle_BG1_X\n\
 _080D3A8C: .4byte 0x0000ffd0\n\
-_080D3A90: .4byte gUnknown_030041B4\n\
+_080D3A90: .4byte gBattle_BG1_Y\n\
 _080D3A94:\n\
-    ldr r0, _080D3AC4 @ =gBattleAnimBankAttacker\n\
+    ldr r0, _080D3AC4 @ =gAnimBankAttacker\n\
     ldrb r0, [r0]\n\
     bl GetBankSide\n\
     lsls r0, 24\n\
@@ -283,12 +283,12 @@ _080D3A94:\n\
     bne _080D3AD8\n\
     ldr r2, _080D3AC8 @ =0x0000ff20\n\
     adds r0, r2, 0\n\
-    ldr r3, _080D3ACC @ =gUnknown_030042C0\n\
+    ldr r3, _080D3ACC @ =gBattle_BG1_X\n\
     strh r0, [r3]\n\
     movs r2, 0x80\n\
     lsls r2, 1\n\
     adds r0, r2, 0\n\
-    ldr r3, _080D3AD0 @ =gUnknown_030041B4\n\
+    ldr r3, _080D3AD0 @ =gBattle_BG1_Y\n\
     strh r0, [r3]\n\
     movs r0, 0x2\n\
     strh r0, [r6, 0x8]\n\
@@ -297,17 +297,17 @@ _080D3A94:\n\
     strh r1, [r7, 0xE]\n\
     b _080D3AEE\n\
     .align 2, 0\n\
-_080D3AC4: .4byte gBattleAnimBankAttacker\n\
+_080D3AC4: .4byte gAnimBankAttacker\n\
 _080D3AC8: .4byte 0x0000ff20\n\
-_080D3ACC: .4byte gUnknown_030042C0\n\
-_080D3AD0: .4byte gUnknown_030041B4\n\
+_080D3ACC: .4byte gBattle_BG1_X\n\
+_080D3AD0: .4byte gBattle_BG1_Y\n\
 _080D3AD4: .4byte 0x0000ffff\n\
 _080D3AD8:\n\
-    ldr r0, _080D3B1C @ =gUnknown_030042C0\n\
+    ldr r0, _080D3B1C @ =gBattle_BG1_X\n\
     strh r4, [r0]\n\
     ldr r1, _080D3B20 @ =0x0000ffd0\n\
     adds r0, r1, 0\n\
-    ldr r2, _080D3B24 @ =gUnknown_030041B4\n\
+    ldr r2, _080D3B24 @ =gBattle_BG1_Y\n\
     strh r0, [r2]\n\
     ldr r0, _080D3B28 @ =0x0000fffe\n\
     strh r0, [r6, 0x8]\n\
@@ -316,11 +316,11 @@ _080D3AD8:\n\
     strh r4, [r7, 0xE]\n\
 _080D3AEE:\n\
     ldr r1, _080D3B2C @ =REG_BG1HOFS\n\
-    ldr r3, _080D3B1C @ =gUnknown_030042C0\n\
+    ldr r3, _080D3B1C @ =gBattle_BG1_X\n\
     ldrh r0, [r3]\n\
     strh r0, [r1]\n\
     adds r1, 0x2\n\
-    ldr r2, _080D3B24 @ =gUnknown_030041B4\n\
+    ldr r2, _080D3B24 @ =gBattle_BG1_Y\n\
     ldrh r0, [r2]\n\
     strh r0, [r1]\n\
     ldr r1, _080D3B30 @ =gTasks\n\
@@ -338,9 +338,9 @@ _080D3AEE:\n\
     movs r0, 0x70\n\
     b _080D3B38\n\
     .align 2, 0\n\
-_080D3B1C: .4byte gUnknown_030042C0\n\
+_080D3B1C: .4byte gBattle_BG1_X\n\
 _080D3B20: .4byte 0x0000ffd0\n\
-_080D3B24: .4byte gUnknown_030041B4\n\
+_080D3B24: .4byte gBattle_BG1_Y\n\
 _080D3B28: .4byte 0x0000fffe\n\
 _080D3B2C: .4byte REG_BG1HOFS\n\
 _080D3B30: .4byte gTasks\n\

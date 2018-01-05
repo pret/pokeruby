@@ -1,7 +1,7 @@
 MagmaHideout_B1F_MapObjects:: @ 838EA28
-	object_event 1, 241, 0, 33, 0, 3, 0, 3, 9, 17, 0, 1, 0, 5, 0, MagmaHideout_B1F_EventScript_15D850, 0, 0, 0
-	object_event 2, 241, 0, 41, 0, 17, 0, 3, 23, 17, 0, 1, 0, 3, 0, MagmaHideout_B1F_EventScript_15D875, 0, 0, 0
-	object_event 3, 242, 0, 33, 0, 19, 0, 3, 27, 20, 0, 1, 0, 3, 0, MagmaHideout_B1F_EventScript_15D89A, 0, 0, 0
+	object_event 1, MAP_OBJ_GFX_VAR_1, 0, 33, 0, 3, 0, 3, 9, 17, 0, 1, 0, 5, 0, MagmaHideout_B1F_EventScript_15D850, 0, 0, 0
+	object_event 2, MAP_OBJ_GFX_VAR_1, 0, 41, 0, 17, 0, 3, 23, 17, 0, 1, 0, 3, 0, MagmaHideout_B1F_EventScript_15D875, 0, 0, 0
+	object_event 3, MAP_OBJ_GFX_VAR_2, 0, 33, 0, 19, 0, 3, 27, 20, 0, 1, 0, 3, 0, MagmaHideout_B1F_EventScript_15D89A, 0, 0, 0
 	object_event 4, MAP_OBJ_GFX_ITEM_BALL, 0, 26, 0, 10, 0, 3, 1, 17, 0, 0, 0, 0, 0, MagmaHideout_B1F_EventScript_1B19C2, FLAG_ITEM_MAGMA_HIDEOUT_B1F_1, 0, 0
 	object_event 5, MAP_OBJ_GFX_ITEM_BALL, 0, 14, 0, 18, 0, 3, 1, 17, 0, 0, 0, 0, 0, MagmaHideout_B1F_EventScript_1B19DC, FLAG_ITEM_MAGMA_HIDEOUT_B1F_2, 0, 0
 	object_event 6, MAP_OBJ_GFX_ITEM_BALL, 0, 27, 0, 10, 0, 3, 1, 17, 0, 0, 0, 0, 0, MagmaHideout_B1F_EventScript_1A04FD, FLAG_HIDE_ELECTRODE_1_HIDEOUT, 0, 0

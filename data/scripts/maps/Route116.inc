@@ -130,7 +130,7 @@ Route116_EventScript_150B5D:: @ 8150B5D
 	lock
 	faceplayer
 	msgbox Route116_Text_17032A, 4
-	setvar 0x406f, 2
+	setvar VAR_ROUTE116_STATE, 2
 	release
 	end
 
@@ -140,7 +140,7 @@ Route116_EventScript_150B6E:: @ 8150B6E
 	applymovement 255, Route116_Movement_1A083F
 	waitmovement 0
 	msgbox Route116_Text_17032A, 4
-	setvar 0x406f, 2
+	setvar VAR_ROUTE116_STATE, 2
 	releaseall
 	end
 
@@ -150,7 +150,7 @@ Route116_EventScript_150B8F:: @ 8150B8F
 	checkitem ITEM_BLACK_GLASSES, 1
 	compare RESULT, 1
 	goto_if_eq Route116_EventScript_150BCA
-	specialvar RESULT, sub_810F828
+	specialvar RESULT, FoundBlackGlasses
 	compare RESULT, 1
 	goto_if_eq Route116_EventScript_150BBB
 	msgbox Route116_Text_1708EE, 4
@@ -166,7 +166,7 @@ Route116_EventScript_150BBB:: @ 8150BBB
 Route116_EventScript_150BCA:: @ 8150BCA
 	msgbox Route116_Text_1708EE, 4
 	msgbox Route116_Text_170921, 4
-	specialvar RESULT, sub_810F828
+	specialvar RESULT, FoundBlackGlasses
 	compare RESULT, 1
 	goto_if_eq Route116_EventScript_150BF4
 	msgbox Route116_Text_170A03, 4
@@ -240,7 +240,7 @@ Route116_EventScript_150C79:: @ 8150C79
 
 Route116_EventScript_150C90:: @ 8150C90
 	trainerbattle 0, OPPONENT_JERRY_1, 0, Route116_Text_1BD1C0, Route116_Text_1BD21A
-	specialvar RESULT, sub_8082C68
+	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
 	goto_if_eq Route116_EventScript_150CB7
 	msgbox Route116_Text_1BD248, 6
@@ -263,7 +263,7 @@ Route116_EventScript_150CE5:: @ 8150CE5
 
 Route116_EventScript_150CFC:: @ 8150CFC
 	trainerbattle 0, OPPONENT_KAREN_1, 0, Route116_Text_1BD377, Route116_Text_1BD3AC
-	specialvar RESULT, sub_8082C68
+	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
 	goto_if_eq Route116_EventScript_150D23
 	msgbox Route116_Text_1BD3C3, 6

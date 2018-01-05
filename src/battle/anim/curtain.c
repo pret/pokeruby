@@ -6,11 +6,11 @@
 #include "palette.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
-extern u16 gUnknown_03004240;
-extern u16 gUnknown_030042C4;
+extern u16 gBattle_WIN0V;
+extern u16 gBattle_WIN0H;
 
 static void sub_80D1D48(u8 taskId);
 static void sub_80D1D9C(u8 taskId);
@@ -21,7 +21,7 @@ static void sub_80D1D9C(u8 taskId);
 void sub_80D1CD0(u8 taskId)
 {
     int zero;
-    bool8 result = NotInBattle();
+    bool8 result = IsContest();
     u16 var = 0xF0;
     if (result)
     {
@@ -33,8 +33,8 @@ void sub_80D1CD0(u8 taskId)
         zero = 0;
     }
 
-    gUnknown_030042C4 = var;
-    gUnknown_03004240 = 0xA0;
+    gBattle_WIN0H = var;
+    gBattle_WIN0V = 0xA0;
     REG_WIN0H = var;
     REG_WIN0V = 0xA0;
     REG_WININ = 0x3F1F;
@@ -52,12 +52,12 @@ void sub_80D1D48(u8 taskId)
     gTasks[taskId].data[1] -= 13;
     if (gTasks[taskId].data[0] >= gTasks[taskId].data[1])
     {
-        gUnknown_030042C4 = 0;
+        gBattle_WIN0H = 0;
         gTasks[taskId].func = sub_80D1D9C;
     }
     else
     {
-        gUnknown_030042C4 = gTasks[taskId].data[1] | (gTasks[taskId].data[0] << 8);
+        gBattle_WIN0H = gTasks[taskId].data[1] | (gTasks[taskId].data[0] << 8);
     }
 }
 
@@ -71,8 +71,8 @@ void sub_80D1D9C(u8 taskId)
     }
     else if (gTasks[taskId].data[10] > 4)
     {
-        gUnknown_030042C4 = 0;
-        gUnknown_03004240 = 0;
+        gBattle_WIN0H = 0;
+        gBattle_WIN0V = 0;
         REG_WININ = 0x3F3F;
         REG_WINOUT = 0x3F3F;
         REG_BLDCNT = 0;

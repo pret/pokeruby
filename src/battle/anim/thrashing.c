@@ -5,8 +5,8 @@
 #include "sound.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 extern struct AffineAnimFrameCmd gUnknown_083D77B0;
 
@@ -48,7 +48,7 @@ void sub_80D0AB8(u8 taskId)
     task->data[7] = 0;
     task->data[8] = 0;
     task->data[9] = 2;
-    if (GetBankSide(gBattleAnimBankAttacker) == 1)
+    if (GetBankSide(gAnimBankAttacker) == 1)
         task->data[2] *= -1;
 
     task->func = sub_80D0B3C;

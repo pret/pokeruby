@@ -5,9 +5,9 @@ NewMauville_Inside_MapScripts:: @ 815E55F
 	.byte 0
 
 NewMauville_Inside_MapScript1_15E56F:: @ 815E56F
-	compare 0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if 1, NewMauville_Inside_EventScript_15E5DA
-	compare 0x4002, 1
+	compare VAR_TEMP_2, 1
 	call_if 1, NewMauville_Inside_EventScript_15E728
 	checkflag FLAG_SYS_CTRL_OBJ_DELETE
 	call_if 1, NewMauville_Inside_EventScript_15E58F
@@ -18,19 +18,19 @@ NewMauville_Inside_EventScript_15E58F:: @ 815E58F
 	return
 
 NewMauville_Inside_MapScript1_15E593:: @ 815E593
-	setvar 0x4001, 0
-	setvar 0x4002, 0
+	setvar VAR_TEMP_1, 0
+	setvar VAR_TEMP_2, 0
 	end
 
 NewMauville_Inside_MapScript1_15E59E:: @ 815E59E
-	compare 0x40ba, 2
+	compare VAR_NEW_MAUVILLE_STATE, 2
 	call_if 1, NewMauville_Inside_EventScript_15E88B
 	end
 
 NewMauville_Inside_EventScript_15E5AA:: @ 815E5AA
 	lockall
-	setvar 0x4001, 1
-	setvar 0x4002, 0
+	setvar VAR_TEMP_1, 1
+	setvar VAR_TEMP_2, 0
 	playse 21
 	call NewMauville_Inside_EventScript_15E5DA
 	special DrawWholeMapView
@@ -39,8 +39,8 @@ NewMauville_Inside_EventScript_15E5AA:: @ 815E5AA
 
 NewMauville_Inside_EventScript_15E5C2:: @ 815E5C2
 	lockall
-	setvar 0x4001, 0
-	setvar 0x4002, 1
+	setvar VAR_TEMP_1, 0
+	setvar VAR_TEMP_2, 1
 	playse 21
 	call NewMauville_Inside_EventScript_15E728
 	special DrawWholeMapView
@@ -131,7 +131,7 @@ NewMauville_Inside_EventScript_15E876:: @ 815E876
 	lockall
 	msgbox NewMauville_Inside_Text_1983B1, 4
 	call NewMauville_Inside_EventScript_15E88B
-	setvar 0x40ba, 2
+	setvar VAR_NEW_MAUVILLE_STATE, 2
 	releaseall
 	end
 
@@ -150,7 +150,7 @@ NewMauville_Inside_EventScript_15E88B:: @ 815E88B
 
 NewMauville_Inside_EventScript_15E8E0:: @ 815E8E0
 	lockall
-	compare 0x40ba, 2
+	compare VAR_NEW_MAUVILLE_STATE, 2
 	goto_if_eq NewMauville_Inside_EventScript_15E8F6
 	msgbox NewMauville_Inside_Text_198315, 4
 	releaseall
