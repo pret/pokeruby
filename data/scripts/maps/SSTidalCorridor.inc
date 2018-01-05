@@ -124,8 +124,7 @@ SSTidalCorridor_EventScript_15FDD6:: @ 815FDD6
 SSTidalCorridor_EventScript_15FDF8:: @ 815FDF8
 	setrespawn 8
 	msgbox SSTidalCorridor_Text_1991F4, 4
-	checkflag FLAG_RECEIVED_TM49
-	call_if 1, SSTidalCorridor_EventScript_15FE36
+	call_if_set FLAG_RECEIVED_TM49, SSTidalCorridor_EventScript_15FE36
 	warp MAP_LILYCOVE_CITY_HARBOR, 255, 8, 11
 	waitstate
 	release
@@ -134,8 +133,7 @@ SSTidalCorridor_EventScript_15FDF8:: @ 815FDF8
 SSTidalCorridor_EventScript_15FE17:: @ 815FE17
 	setrespawn 4
 	msgbox SSTidalCorridor_Text_1991F4, 4
-	checkflag FLAG_RECEIVED_TM49
-	call_if 1, SSTidalCorridor_EventScript_15FE36
+	call_if_set FLAG_RECEIVED_TM49, SSTidalCorridor_EventScript_15FE36
 	warp MAP_SLATEPORT_CITY_HARBOR, 255, 8, 11
 	waitstate
 	release
@@ -163,8 +161,7 @@ SSTidalCorridor_EventScript_15FE5B:: @ 815FE5B
 SSTidalCorridor_EventScript_15FE60:: @ 815FE60
 	lock
 	faceplayer
-	checkflag FLAG_DEFEATED_SS_TIDAL_TRAINERS
-	goto_if_eq SSTidalCorridor_EventScript_15FE7A
+	goto_if_set FLAG_DEFEATED_SS_TIDAL_TRAINERS, SSTidalCorridor_EventScript_15FE7A
 	call SSTidalCorridor_EventScript_15FE84
 	msgbox SSTidalCorridor_Text_199203, 4
 	release
@@ -177,21 +174,21 @@ SSTidalCorridor_EventScript_15FE7A:: @ 815FE7A
 
 SSTidalCorridor_EventScript_15FE84:: @ 815FE84
 	checktrainerflag OPPONENT_PHILLIP
-	goto_if 0, SSTidalCorridor_EventScript_15FED5
+	goto_if_lt SSTidalCorridor_EventScript_15FED5
 	checktrainerflag OPPONENT_LEONARD
-	goto_if 0, SSTidalCorridor_EventScript_15FED5
+	goto_if_lt SSTidalCorridor_EventScript_15FED5
 	checktrainerflag OPPONENT_COLTON
-	goto_if 0, SSTidalCorridor_EventScript_15FED5
+	goto_if_lt SSTidalCorridor_EventScript_15FED5
 	checktrainerflag OPPONENT_TUCKER
-	goto_if 0, SSTidalCorridor_EventScript_15FED5
+	goto_if_lt SSTidalCorridor_EventScript_15FED5
 	checktrainerflag OPPONENT_THOMAS
-	goto_if 0, SSTidalCorridor_EventScript_15FED5
+	goto_if_lt SSTidalCorridor_EventScript_15FED5
 	checktrainerflag OPPONENT_LEA_AND_JED
-	goto_if 0, SSTidalCorridor_EventScript_15FED5
+	goto_if_lt SSTidalCorridor_EventScript_15FED5
 	checktrainerflag OPPONENT_GARRET
-	goto_if 0, SSTidalCorridor_EventScript_15FED5
+	goto_if_lt SSTidalCorridor_EventScript_15FED5
 	checktrainerflag OPPONENT_ANETTE
-	goto_if 0, SSTidalCorridor_EventScript_15FED5
+	goto_if_lt SSTidalCorridor_EventScript_15FED5
 	setflag FLAG_DEFEATED_SS_TIDAL_TRAINERS
 	goto SSTidalCorridor_EventScript_15FE7A
 	return

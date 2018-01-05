@@ -4,13 +4,11 @@ AbandonedShip_CaptainsOffice_MapScripts:: @ 815EAF4
 AbandonedShip_CaptainsOffice_EventScript_15EAF5:: @ 815EAF5
 	lock
 	faceplayer
-	checkflag FLAG_EXCHANGED_SCANNER
-	goto_if_eq AbandonedShip_CaptainsOffice_EventScript_15EB2D
+	goto_if_set FLAG_EXCHANGED_SCANNER, AbandonedShip_CaptainsOffice_EventScript_15EB2D
 	checkitem ITEM_SCANNER, 1
 	compare RESULT, 1
 	goto_if_eq AbandonedShip_CaptainsOffice_EventScript_15EB23
-	checkflag FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOMS_2
-	goto_if_eq AbandonedShip_CaptainsOffice_EventScript_15EB2D
+	goto_if_set FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOMS_2, AbandonedShip_CaptainsOffice_EventScript_15EB2D
 	msgbox AbandonedShip_CaptainsOffice_Text_198C85, 4
 	release
 	end

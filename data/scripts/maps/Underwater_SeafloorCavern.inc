@@ -6,8 +6,7 @@ Underwater_SeafloorCavern_MapScripts:: @ 815D99E
 
 Underwater_SeafloorCavern_MapScript1_15D9AE:: @ 815D9AE
 	setflag FLAG_LANDMARK_SEAFLOOR_CAVERN
-	checkflag FLAG_LEGEND_ESCAPED_SEAFLOOR_CAVERN
-	goto_if_eq Underwater_SeafloorCavern_EventScript_15D9BB
+	goto_if_set FLAG_LEGEND_ESCAPED_SEAFLOOR_CAVERN, Underwater_SeafloorCavern_EventScript_15D9BB
 	end
 
 Underwater_SeafloorCavern_EventScript_15D9BB:: @ 815D9BB
@@ -15,8 +14,7 @@ Underwater_SeafloorCavern_EventScript_15D9BB:: @ 815D9BB
 	end
 
 Underwater_SeafloorCavern_MapScript1_15D9BF:: @ 815D9BF
-	checkflag FLAG_LEGEND_ESCAPED_SEAFLOOR_CAVERN
-	call_if 1, Underwater_SeafloorCavern_EventScript_15D9C9
+	call_if_set FLAG_LEGEND_ESCAPED_SEAFLOOR_CAVERN, Underwater_SeafloorCavern_EventScript_15D9C9
 	end
 
 Underwater_SeafloorCavern_EventScript_15D9C9:: @ 815D9C9

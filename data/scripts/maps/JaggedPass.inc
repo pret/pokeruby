@@ -9,7 +9,7 @@ JaggedPass_MapScript1_15D271:: @ 815D271
 
 JaggedPass_MapScript1_15D274:: @ 815D274
 	compare VAR_JAGGED_PASS_ASH_WEATHER, 1
-	call_if 1, JaggedPass_EventScript_15D280
+	call_if_eq JaggedPass_EventScript_15D280
 	end
 
 JaggedPass_EventScript_15D280:: @ 815D280

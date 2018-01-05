@@ -7,7 +7,7 @@ MossdeepCity_GameCorner_1F_MapScripts:: @ 815AC52
 MossdeepCity_GameCorner_1F_MapScript1_15AC62:: @ 815AC62
 	special ValidateEReaderTrainer
 	compare RESULT, 1
-	call_if 1, MossdeepCity_GameCorner_1F_EventScript_15AC71
+	call_if_eq MossdeepCity_GameCorner_1F_EventScript_15AC71
 	end
 
 MossdeepCity_GameCorner_1F_EventScript_15AC71:: @ 815AC71
@@ -18,9 +18,9 @@ MossdeepCity_GameCorner_1F_EventScript_15AC71:: @ 815AC71
 MossdeepCity_GameCorner_1F_MapScript1_15AC84:: @ 815AC84
 	special ValidateEReaderTrainer
 	compare RESULT, 0
-	call_if 1, MossdeepCity_GameCorner_1F_EventScript_15AC9E
+	call_if_eq MossdeepCity_GameCorner_1F_EventScript_15AC9E
 	compare VAR_GAME_CORNER_STATE, 0
-	call_if 5, MossdeepCity_GameCorner_1F_EventScript_15ACAF
+	call_if_ne MossdeepCity_GameCorner_1F_EventScript_15ACAF
 	end
 
 MossdeepCity_GameCorner_1F_EventScript_15AC9E:: @ 815AC9E
@@ -50,11 +50,11 @@ MossdeepCity_GameCorner_1F_EventScript_15ACD5:: @ 815ACD5
 	applymovement 255, MossdeepCity_GameCorner_1F_Movement_1A0841
 	waitmovement 0
 	compare VAR_GAME_CORNER_STATE, 1
-	call_if 1, MossdeepCity_GameCorner_1F_EventScript_15AD22
+	call_if_eq MossdeepCity_GameCorner_1F_EventScript_15AD22
 	compare VAR_GAME_CORNER_STATE, 2
-	call_if 1, MossdeepCity_GameCorner_1F_EventScript_15AD2B
+	call_if_eq MossdeepCity_GameCorner_1F_EventScript_15AD2B
 	compare VAR_GAME_CORNER_STATE, 3
-	call_if 1, MossdeepCity_GameCorner_1F_EventScript_15AD34
+	call_if_eq MossdeepCity_GameCorner_1F_EventScript_15AD34
 	special LoadPlayerParty
 	setvar VAR_GAME_CORNER_STATE, 0
 	releaseall
@@ -101,7 +101,7 @@ MossdeepCity_GameCorner_1F_EventScript_15AD59:: @ 815AD59
 	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_15ADE8
 	msgbox MossdeepCity_GameCorner_1F_Text_18E741, MSGBOX_YESNO
 	compare RESULT, NO
-	call_if 1, MossdeepCity_GameCorner_1F_EventScript_15ADE8
+	call_if_eq MossdeepCity_GameCorner_1F_EventScript_15ADE8
 	special LoadPlayerParty
 	call S_DoSaveDialog
 	compare RESULT, 0
@@ -112,11 +112,11 @@ MossdeepCity_GameCorner_1F_EventScript_15AD59:: @ 815AD59
 	msgbox MossdeepCity_GameCorner_1F_Text_18E777, 4
 	closemessage
 	compare FACING, 2
-	call_if 1, MossdeepCity_GameCorner_1F_EventScript_15AE04
+	call_if_eq MossdeepCity_GameCorner_1F_EventScript_15AE04
 	compare FACING, 4
-	call_if 1, MossdeepCity_GameCorner_1F_EventScript_15AE16
+	call_if_eq MossdeepCity_GameCorner_1F_EventScript_15AE16
 	compare FACING, 3
-	call_if 1, MossdeepCity_GameCorner_1F_EventScript_15AE28
+	call_if_eq MossdeepCity_GameCorner_1F_EventScript_15AE28
 	warp MAP_MOSSDEEP_CITY_GAME_CORNER_B1F, 255, 3, 1
 	waitstate
 	release

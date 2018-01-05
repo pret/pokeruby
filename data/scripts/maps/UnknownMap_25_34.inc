@@ -14,15 +14,15 @@ LinkContestRoom1_MapScript1_15F595:: @ 815F595
 LinkContestRoom1_EventScript_15F5A5:: @ 815F5A5
 	special ScriptGetMultiplayerId
 	compare RESULT, 0
-	call_if 1, LinkContestRoom1_EventScript_15F5E0
+	call_if_eq LinkContestRoom1_EventScript_15F5E0
 	compare RESULT, 1
-	call_if 1, LinkContestRoom1_EventScript_15F5E4
+	call_if_eq LinkContestRoom1_EventScript_15F5E4
 	compare RESULT, 2
-	call_if 1, LinkContestRoom1_EventScript_15F5E8
+	call_if_eq LinkContestRoom1_EventScript_15F5E8
 	compare RESULT, 3
-	call_if 1, LinkContestRoom1_EventScript_15F5EC
+	call_if_eq LinkContestRoom1_EventScript_15F5EC
 	compare RESULT, 4
-	call_if 1, LinkContestRoom1_EventScript_15F5F0
+	call_if_eq LinkContestRoom1_EventScript_15F5F0
 	return
 
 LinkContestRoom1_EventScript_15F5E0:: @ 815F5E0
@@ -47,7 +47,7 @@ LinkContestRoom1_EventScript_15F5F0:: @ 815F5F0
 
 LinkContestRoom1_MapScript1_15F5F4:: @ 815F5F4
 	compare VAR_TEMP_9, 1
-	call_if 1, LinkContestRoom1_EventScript_15F600
+	call_if_eq LinkContestRoom1_EventScript_15F600
 	end
 
 LinkContestRoom1_EventScript_15F600:: @ 815F600
@@ -76,7 +76,7 @@ LinkContestRoom1_EventScript_15F630:: @ 815F630
 	call LinkContestRoom1_EventScript_15F6E6
 	call LinkContestRoom1_EventScript_15F646
 	compare VAR_TEMP_0, 8
-	goto_if 0, LinkContestRoom1_EventScript_15F630
+	goto_if_lt LinkContestRoom1_EventScript_15F630
 	return
 
 LinkContestRoom1_EventScript_15F646:: @ 815F646

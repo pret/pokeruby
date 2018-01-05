@@ -1,10 +1,8 @@
 MtChimney_EventScript_1B2C95:: @ 81B2C95
 	lock
 	faceplayer
-	checkflag FLAG_EVIL_LEADER_PLEASE_STOP
-	call_if 0, MtChimney_EventScript_1B2CB9
-	checkflag FLAG_EVIL_LEADER_PLEASE_STOP
-	call_if 1, MtChimney_EventScript_1B2CC2
+	call_if_unset FLAG_EVIL_LEADER_PLEASE_STOP, MtChimney_EventScript_1B2CB9
+	call_if_set FLAG_EVIL_LEADER_PLEASE_STOP, MtChimney_EventScript_1B2CC2
 	closemessage
 	applymovement 1, MtChimney_Movement_1A083D
 	waitmovement 0
@@ -68,9 +66,9 @@ MtChimney_EventScript_1B2CCB:: @ 81B2CCB
 	setobjectxyperm 1, 10, 12
 	addobject 1
 	compare FACING, 4
-	call_if 1, MtChimney_EventScript_1B2D7D
+	call_if_eq MtChimney_EventScript_1B2D7D
 	compare FACING, 2
-	call_if 1, MtChimney_EventScript_1B2D88
+	call_if_eq MtChimney_EventScript_1B2D88
 	applymovement 255, MtChimney_Movement_1A083F
 	waitmovement 0
 	.ifdef SAPPHIRE
@@ -80,9 +78,9 @@ MtChimney_EventScript_1B2CCB:: @ 81B2CCB
 	.endif
 	closemessage
 	compare FACING, 4
-	call_if 1, MtChimney_EventScript_1B2D93
+	call_if_eq MtChimney_EventScript_1B2D93
 	compare FACING, 2
-	call_if 1, MtChimney_EventScript_1B2D9E
+	call_if_eq MtChimney_EventScript_1B2D9E
 	removeobject 1
 	setflag FLAG_HIDE_OTEHR_TEAM_MT_CHIMNEY
 	setflag FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY

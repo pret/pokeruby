@@ -241,8 +241,7 @@ PetalburgWoods_EventScript_15CED3:: @ 815CED3
 PetalburgWoods_EventScript_15CEDC:: @ 815CEDC
 	lock
 	faceplayer
-	checkflag FLAG_RECEIVED_MIRACLE_SEED
-	goto_if_eq PetalburgWoods_EventScript_15CF0B
+	goto_if_set FLAG_RECEIVED_MIRACLE_SEED, PetalburgWoods_EventScript_15CF0B
 	msgbox PetalburgWoods_Text_19549E, 4
 	giveitem_std ITEM_MIRACLE_SEED
 	compare RESULT, 0

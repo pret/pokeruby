@@ -11,8 +11,7 @@ RustboroCity_MapScript1_14C378:: @ 814C378
 RustboroCity_EventScript_14C386:: @ 814C386
 	lock
 	faceplayer
-	checkflag FLAG_DEVON_GOODS_STOLEN
-	goto_if_eq RustboroCity_EventScript_14C39B
+	goto_if_set FLAG_DEVON_GOODS_STOLEN, RustboroCity_EventScript_14C39B
 	msgbox RustboroCity_Text_16689D, 4
 	release
 	end
@@ -36,8 +35,7 @@ RustboroCity_EventScript_14C3B1:: @ 814C3B1
 RustboroCity_EventScript_14C3BA:: @ 814C3BA
 	lock
 	faceplayer
-	checkflag FLAG_BADGE01_GET
-	goto_if_eq RustboroCity_EventScript_14C3CF
+	goto_if_set FLAG_BADGE01_GET, RustboroCity_EventScript_14C3CF
 	msgbox RustboroCity_Text_16696D, 4
 	release
 	end
@@ -50,8 +48,7 @@ RustboroCity_EventScript_14C3CF:: @ 814C3CF
 RustboroCity_EventScript_14C3D9:: @ 814C3D9
 	lock
 	faceplayer
-	checkflag FLAG_RECEIVED_POKENAV
-	goto_if_eq RustboroCity_EventScript_14C3EE
+	goto_if_set FLAG_RECEIVED_POKENAV, RustboroCity_EventScript_14C3EE
 	msgbox RustboroCity_Text_166B86, 4
 	release
 	end
@@ -326,8 +323,7 @@ RustboroCity_Movement_14C5F7:: @ 814C5F7
 RustboroCity_EventScript_14C5FF:: @ 814C5FF
 	lock
 	faceplayer
-	checkflag FLAG_RECOVERED_DEVON_GOODS
-	goto_if_eq RustboroCity_EventScript_14C614
+	goto_if_set FLAG_RECOVERED_DEVON_GOODS, RustboroCity_EventScript_14C614
 	msgbox RustboroCity_Text_166F6B, 4
 	release
 	end
@@ -364,13 +360,13 @@ RustboroCity_EventScript_14C644:: @ 814C644
 
 RustboroCity_EventScript_14C650:: @ 814C650
 	compare VAR_TEMP_1, 0
-	call_if 1, RustboroCity_EventScript_14C691
+	call_if_eq RustboroCity_EventScript_14C691
 	compare VAR_TEMP_1, 1
-	call_if 1, RustboroCity_EventScript_14C6BD
+	call_if_eq RustboroCity_EventScript_14C6BD
 	compare VAR_TEMP_1, 2
-	call_if 1, RustboroCity_EventScript_14C6E9
+	call_if_eq RustboroCity_EventScript_14C6E9
 	compare VAR_TEMP_1, 3
-	call_if 1, RustboroCity_EventScript_14C715
+	call_if_eq RustboroCity_EventScript_14C715
 	setflag FLAG_UNKNOWN_9F
 	setvar VAR_RUSTBORO_STATE, 3
 	moveobjectoffscreen 9
@@ -458,19 +454,19 @@ RustboroCity_EventScript_14C771:: @ 814C771
 
 RustboroCity_EventScript_14C77D:: @ 814C77D
 	compare VAR_TEMP_1, 0
-	call_if 1, RustboroCity_EventScript_14C7FE
+	call_if_eq RustboroCity_EventScript_14C7FE
 	compare VAR_TEMP_1, 1
-	call_if 1, RustboroCity_EventScript_14C82A
+	call_if_eq RustboroCity_EventScript_14C82A
 	compare VAR_TEMP_1, 2
-	call_if 1, RustboroCity_EventScript_14C856
+	call_if_eq RustboroCity_EventScript_14C856
 	compare VAR_TEMP_1, 3
-	call_if 1, RustboroCity_EventScript_14C882
+	call_if_eq RustboroCity_EventScript_14C882
 	compare VAR_TEMP_1, 4
-	call_if 1, RustboroCity_EventScript_14C8B8
+	call_if_eq RustboroCity_EventScript_14C8B8
 	msgbox RustboroCity_Text_166FB4, 4
 	giveitem_std ITEM_GREAT_BALL
 	compare RESULT, 0
-	call_if 1, RustboroCity_EventScript_14C7F5
+	call_if_eq RustboroCity_EventScript_14C7F5
 	msgbox RustboroCity_Text_16707F, 4
 	closemessage
 	setflag FLAG_RETURNED_DEVON_GOODS
@@ -549,8 +545,7 @@ RustboroCity_EventScript_14C8B8:: @ 814C8B8
 RustboroCity_EventScript_14C8DA:: @ 814C8DA
 	lock
 	faceplayer
-	checkflag FLAG_MET_RIVAL_RUSTBORO
-	goto_if_eq RustboroCity_EventScript_14C917
+	goto_if_set FLAG_MET_RIVAL_RUSTBORO, RustboroCity_EventScript_14C917
 	checkplayergender
 	compare RESULT, 0
 	goto_if_eq RustboroCity_EventScript_14C8FD

@@ -34,7 +34,7 @@ MauvilleCity_GameCorner_EventScript_156A60:: @ 8156A60
 MauvilleCity_GameCorner_EventScript_156AAE:: @ 8156AAE
 	checkcoins VAR_TEMP_1
 	compare VAR_TEMP_1, 9950
-	goto_if 4, MauvilleCity_GameCorner_EventScript_156B5C
+	goto_if_ge MauvilleCity_GameCorner_EventScript_156B5C
 	checkmoney 0x3e8, 0
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_156B3C
@@ -53,7 +53,7 @@ MauvilleCity_GameCorner_EventScript_156AAE:: @ 8156AAE
 MauvilleCity_GameCorner_EventScript_156AF0:: @ 8156AF0
 	checkcoins VAR_TEMP_1
 	compare VAR_TEMP_1, 9500
-	goto_if 4, MauvilleCity_GameCorner_EventScript_156B5C
+	goto_if_ge MauvilleCity_GameCorner_EventScript_156B5C
 	checkmoney 0x2710, 0
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_156B3C
@@ -155,7 +155,7 @@ MauvilleCity_GameCorner_EventScript_156C0C:: @ 8156C0C
 MauvilleCity_GameCorner_EventScript_156C46:: @ 8156C46
 	checkcoins VAR_TEMP_2
 	compare VAR_TEMP_2, 1000
-	goto_if 0, MauvilleCity_GameCorner_EventScript_156CF4
+	goto_if_lt MauvilleCity_GameCorner_EventScript_156CF4
 	bufferdecorationname 1, DECOR_TREECKO_DOLL
 	checkdecorspace DECOR_TREECKO_DOLL
 	compare RESULT, 0
@@ -171,7 +171,7 @@ MauvilleCity_GameCorner_EventScript_156C46:: @ 8156C46
 MauvilleCity_GameCorner_EventScript_156C80:: @ 8156C80
 	checkcoins VAR_TEMP_2
 	compare VAR_TEMP_2, 1000
-	goto_if 0, MauvilleCity_GameCorner_EventScript_156CF4
+	goto_if_lt MauvilleCity_GameCorner_EventScript_156CF4
 	bufferdecorationname 1, DECOR_TORCHIC_DOLL
 	checkdecorspace DECOR_TORCHIC_DOLL
 	compare RESULT, 0
@@ -187,7 +187,7 @@ MauvilleCity_GameCorner_EventScript_156C80:: @ 8156C80
 MauvilleCity_GameCorner_EventScript_156CBA:: @ 8156CBA
 	checkcoins VAR_TEMP_2
 	compare VAR_TEMP_2, 1000
-	goto_if 0, MauvilleCity_GameCorner_EventScript_156CF4
+	goto_if_lt MauvilleCity_GameCorner_EventScript_156CF4
 	bufferdecorationname 1, DECOR_MUDKIP_DOLL
 	checkdecorspace DECOR_MUDKIP_DOLL
 	compare RESULT, 0
@@ -290,7 +290,7 @@ MauvilleCity_GameCorner_EventScript_156DEC:: @ 8156DEC
 MauvilleCity_GameCorner_EventScript_156E3C:: @ 8156E3C
 	checkcoins VAR_TEMP_2
 	compare VAR_TEMP_2, 1500
-	goto_if 0, MauvilleCity_GameCorner_EventScript_156F5E
+	goto_if_lt MauvilleCity_GameCorner_EventScript_156F5E
 	checkitemspace ITEM_TM32, 1
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_156F6C
@@ -305,7 +305,7 @@ MauvilleCity_GameCorner_EventScript_156E3C:: @ 8156E3C
 MauvilleCity_GameCorner_EventScript_156E76:: @ 8156E76
 	checkcoins VAR_TEMP_2
 	compare VAR_TEMP_2, 3500
-	goto_if 0, MauvilleCity_GameCorner_EventScript_156F5E
+	goto_if_lt MauvilleCity_GameCorner_EventScript_156F5E
 	checkitemspace ITEM_TM29, 1
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_156F6C
@@ -320,7 +320,7 @@ MauvilleCity_GameCorner_EventScript_156E76:: @ 8156E76
 MauvilleCity_GameCorner_EventScript_156EB0:: @ 8156EB0
 	checkcoins VAR_TEMP_2
 	compare VAR_TEMP_2, 4000
-	goto_if 0, MauvilleCity_GameCorner_EventScript_156F5E
+	goto_if_lt MauvilleCity_GameCorner_EventScript_156F5E
 	checkitemspace ITEM_TM35, 1
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_156F6C
@@ -335,7 +335,7 @@ MauvilleCity_GameCorner_EventScript_156EB0:: @ 8156EB0
 MauvilleCity_GameCorner_EventScript_156EEA:: @ 8156EEA
 	checkcoins VAR_TEMP_2
 	compare VAR_TEMP_2, 4000
-	goto_if 0, MauvilleCity_GameCorner_EventScript_156F5E
+	goto_if_lt MauvilleCity_GameCorner_EventScript_156F5E
 	checkitemspace ITEM_TM24, 1
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_156F6C
@@ -350,7 +350,7 @@ MauvilleCity_GameCorner_EventScript_156EEA:: @ 8156EEA
 MauvilleCity_GameCorner_EventScript_156F24:: @ 8156F24
 	checkcoins VAR_TEMP_2
 	compare VAR_TEMP_2, 4000
-	goto_if 0, MauvilleCity_GameCorner_EventScript_156F5E
+	goto_if_lt MauvilleCity_GameCorner_EventScript_156F5E
 	checkitemspace ITEM_TM13, 1
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_156F6C
@@ -389,8 +389,7 @@ MauvilleCity_GameCorner_EventScript_156F8D:: @ 8156F8D
 MauvilleCity_GameCorner_EventScript_156F96:: @ 8156F96
 	lock
 	faceplayer
-	checkflag FLAG_RECEIVED_STARTER_DOLL
-	goto_if_eq MauvilleCity_GameCorner_EventScript_157072
+	goto_if_set FLAG_RECEIVED_STARTER_DOLL, MauvilleCity_GameCorner_EventScript_157072
 	msgbox MauvilleCity_GameCorner_Text_181F3D, MSGBOX_YESNO
 	compare RESULT, NO
 	goto_if_eq MauvilleCity_GameCorner_EventScript_157068
@@ -460,11 +459,10 @@ MauvilleCity_GameCorner_EventScript_15707C:: @ 815707C
 	end
 
 MauvilleCity_GameCorner_EventScript_15709C:: @ 815709C
-	checkflag FLAG_RECEIVED_20_COINS
-	goto_if_eq MauvilleCity_GameCorner_EventScript_1570CA
+	goto_if_set FLAG_RECEIVED_20_COINS, MauvilleCity_GameCorner_EventScript_1570CA
 	checkcoins VAR_TEMP_1
 	compare VAR_TEMP_1, 1
-	goto_if 4, MauvilleCity_GameCorner_EventScript_1570CA
+	goto_if_ge MauvilleCity_GameCorner_EventScript_1570CA
 	setflag FLAG_RECEIVED_20_COINS
 	givecoins 20
 	msgbox MauvilleCity_GameCorner_Text_18208E, 4

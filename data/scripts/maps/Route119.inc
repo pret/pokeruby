@@ -4,15 +4,14 @@ Route119_MapScripts:: @ 8151167
 	.byte 0
 
 Route119_MapScript1_151172:: @ 8151172
-	checkflag FLAG_SYS_CTRL_OBJ_DELETE
-	call_if 1, Route119_EventScript_15117C
+	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, Route119_EventScript_15117C
 	end
 
 Route119_EventScript_15117C:: @ 815117C
 	compare VAR_SPECIAL_4, 6
-	call_if 1, Route119_EventScript_151193
+	call_if_eq Route119_EventScript_151193
 	compare VAR_SPECIAL_4, 7
-	call_if 1, Route119_EventScript_151197
+	call_if_eq Route119_EventScript_151197
 	return
 
 Route119_EventScript_151193:: @ 8151193
@@ -28,7 +27,7 @@ Route119_MapScript1_15119B:: @ 815119B
 	call Route119_EventScript_1A0172
 	call Route119_EventScript_1A0196
 	compare VAR_WEATHER_INSTITUTE_STATE, 1
-	call_if 1, Route119_EventScript_1511B9
+	call_if_eq Route119_EventScript_1511B9
 	special SetRoute119Weather
 	end
 
@@ -53,21 +52,21 @@ Route119_EventScript_1511DB:: @ 81511DB
 	addobject 25
 	checkplayergender
 	compare RESULT, 0
-	call_if 1, Route119_EventScript_151254
+	call_if_eq Route119_EventScript_151254
 	compare RESULT, 1
-	call_if 1, Route119_EventScript_151259
+	call_if_eq Route119_EventScript_151259
 	delay 65
 	compare VAR_TEMP_1, 1
-	call_if 1, Route119_EventScript_1513A6
+	call_if_eq Route119_EventScript_1513A6
 	compare VAR_TEMP_1, 2
-	call_if 1, Route119_EventScript_1513B1
+	call_if_eq Route119_EventScript_1513B1
 	applymovement 255, Route119_Movement_1A0845
 	waitmovement 0
 	delay 30
 	compare VAR_TEMP_1, 1
-	call_if 1, Route119_EventScript_1513D2
+	call_if_eq Route119_EventScript_1513D2
 	compare VAR_TEMP_1, 2
-	call_if 1, Route119_EventScript_1513E1
+	call_if_eq Route119_EventScript_1513E1
 	removeobject 25
 	addobject 16
 	delay 30
@@ -155,16 +154,16 @@ Route119_EventScript_151352:: @ 8151352
 Route119_EventScript_151362:: @ 8151362
 	closemessage
 	compare VAR_TEMP_1, 1
-	call_if 1, Route119_EventScript_1513D2
+	call_if_eq Route119_EventScript_1513D2
 	compare VAR_TEMP_1, 2
-	call_if 1, Route119_EventScript_1513E1
+	call_if_eq Route119_EventScript_1513E1
 	removeobject 16
 	addobject 25
 	delay 30
 	compare VAR_TEMP_1, 1
-	call_if 1, Route119_EventScript_1513BC
+	call_if_eq Route119_EventScript_1513BC
 	compare VAR_TEMP_1, 2
-	call_if 1, Route119_EventScript_1513C7
+	call_if_eq Route119_EventScript_1513C7
 	removeobject 25
 	setvar VAR_ROUTE119_STATE, 1
 	savebgm 0

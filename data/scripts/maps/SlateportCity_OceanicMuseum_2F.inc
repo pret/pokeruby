@@ -22,21 +22,21 @@ SlateportCity_OceanicMuseum_2F_EventScript_155CE6:: @ 8155CE6
 	applymovement 4, SlateportCity_OceanicMuseum_2F_Movement_155EC5
 	waitmovement 0
 	compare FACING, 1
-	call_if 1, SlateportCity_OceanicMuseum_2F_EventScript_155E62
+	call_if_eq SlateportCity_OceanicMuseum_2F_EventScript_155E62
 	compare FACING, 4
-	call_if 1, SlateportCity_OceanicMuseum_2F_EventScript_155E62
+	call_if_eq SlateportCity_OceanicMuseum_2F_EventScript_155E62
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17EDAE, 4
 	compare FACING, 4
-	call_if 5, SlateportCity_OceanicMuseum_2F_EventScript_155E6D
+	call_if_ne SlateportCity_OceanicMuseum_2F_EventScript_155E6D
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17EDD7, 4
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17EE01, 4
 	closemessage
 	applymovement 4, SlateportCity_OceanicMuseum_2F_Movement_155EB2
 	waitmovement 0
 	compare FACING, 1
-	call_if 1, SlateportCity_OceanicMuseum_2F_EventScript_155E78
+	call_if_eq SlateportCity_OceanicMuseum_2F_EventScript_155E78
 	compare FACING, 3
-	call_if 1, SlateportCity_OceanicMuseum_2F_EventScript_155E83
+	call_if_eq SlateportCity_OceanicMuseum_2F_EventScript_155E83
 	trainerbattle 3, OPPONENT_MUSEUM_2F_GRUNT_1, 0, SlateportCity_OceanicMuseum_2F_Text_17EE4E
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17EE66, 4
 	closemessage
