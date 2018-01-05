@@ -224,23 +224,23 @@ Route124_DivingTreasureHuntersHouse_EventScript_16420F:: @ 816420F
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_164256:: @ 8164256
-	setvar VAR_SPECIAL_8, 48
-	setvar VAR_SPECIAL_9, 95
+	setvar VAR_SPECIAL_8, ITEM_RED_SHARD
+	setvar VAR_SPECIAL_9, ITEM_FIRE_STONE
 	goto Route124_DivingTreasureHuntersHouse_EventScript_164292
 
 Route124_DivingTreasureHuntersHouse_EventScript_164265:: @ 8164265
-	setvar VAR_SPECIAL_8, 50
-	setvar VAR_SPECIAL_9, 96
+	setvar VAR_SPECIAL_8, ITEM_YELLOW_SHARD
+	setvar VAR_SPECIAL_9, ITEM_THUNDER_STONE
 	goto Route124_DivingTreasureHuntersHouse_EventScript_164292
 
 Route124_DivingTreasureHuntersHouse_EventScript_164274:: @ 8164274
-	setvar VAR_SPECIAL_8, 49
-	setvar VAR_SPECIAL_9, 97
+	setvar VAR_SPECIAL_8, ITEM_BLUE_SHARD
+	setvar VAR_SPECIAL_9, ITEM_WATER_STONE
 	goto Route124_DivingTreasureHuntersHouse_EventScript_164292
 
 Route124_DivingTreasureHuntersHouse_EventScript_164283:: @ 8164283
-	setvar VAR_SPECIAL_8, 51
-	setvar VAR_SPECIAL_9, 98
+	setvar VAR_SPECIAL_8, ITEM_GREEN_SHARD
+	setvar VAR_SPECIAL_9, ITEM_LEAF_STONE
 	goto Route124_DivingTreasureHuntersHouse_EventScript_164292
 
 Route124_DivingTreasureHuntersHouse_EventScript_164292:: @ 8164292

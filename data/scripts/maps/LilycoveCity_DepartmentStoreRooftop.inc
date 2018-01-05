@@ -88,17 +88,17 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A1DE:: @ 815A1DE
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A21C:: @ 815A21C
-	setvar VAR_TEMP_0, 26
+	setvar VAR_TEMP_0, ITEM_FRESH_WATER
 	goto LilycoveCity_DepartmentStoreRooftop_EventScript_15A267
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A227:: @ 815A227
-	setvar VAR_TEMP_0, 27
+	setvar VAR_TEMP_0, ITEM_SODA_POP
 	goto LilycoveCity_DepartmentStoreRooftop_EventScript_15A267
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A232:: @ 815A232
-	setvar VAR_TEMP_0, 28
+	setvar VAR_TEMP_0, ITEM_LEMONADE
 	goto LilycoveCity_DepartmentStoreRooftop_EventScript_15A267
 	end
 

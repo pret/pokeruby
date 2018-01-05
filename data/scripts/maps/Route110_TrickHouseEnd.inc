@@ -167,9 +167,9 @@ Route110_TrickHouseEnd_EventScript_161BAF:: @ 8161BAF
 	msgbox Route110_TrickHouseEnd_Text_19C691, 4
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	.ifdef SAPPHIRE
-	givedecoration_std 32
+	givedecoration_std DECOR_BLUE_TENT
 	.else
-	givedecoration_std 31
+	givedecoration_std DECOR_RED_TENT
 	.endc
 	compare RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_161C61

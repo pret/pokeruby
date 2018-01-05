@@ -450,9 +450,9 @@ Route110_TrickHouseEntrance_EventScript_161518:: @ 8161518
 	waitmovement 0
 	msgbox Route110_TrickHouseEntrance_Text_19C128, 4
 	.ifdef SAPPHIRE
-	givedecoration_std 32
+	givedecoration_std DECOR_BLUE_TENT
 	.else
-	givedecoration_std 31
+	givedecoration_std DECOR_RED_TENT
 	.endif
 	compare RESULT, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_161551
