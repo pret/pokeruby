@@ -136,7 +136,7 @@ u8 MoriDebugMenu_10000Steps(void)
 
 u8 MoriDebugMenu_MoveTutor(void)
 {
-    sub_8132670();
+    TeachMoveTutorMove();
     CloseMenu();
     return 1;
 }

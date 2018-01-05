@@ -436,34 +436,6 @@ static const struct PartyMenuHandlersStruct PartyMenuHandlers[] = {
     {HandleMoveTutorPartyMenu,       SetupMoveTutorPartyMenu,          0}, // PARTY_MENU_TYPE_MOVE_TUTOR
 };
 
-static const u16 gUnknown_08376CD4[] = {
-    0x2A, 0x2B, 0x2C, 0x2D, 0x2E, 0x2F,
-    0x3A, 0x3B, 0x3C, 0x3D, 0x3E, 0x3F,
-};
-
-static const u16 gUnknown_08376CEC[] = {
-    0x2A, 0x0B, 0x0C, 0x0D, 0x0E, 0x2F,
-    0x1A, 0x1B, 0x1C, 0x1D, 0x1E, 0x1F,
-};
-
-static const u8 *const StatNames[] = {
-    gOtherText_HP,
-    gOtherText_Attack,
-    gOtherText_Defense,
-    gOtherText_SpAtk,
-    gOtherText_SpDef,
-    gOtherText_Speed,
-};
-
-static const u8 StatDataTypes[] = {
-    MON_DATA_MAX_HP,
-    MON_DATA_ATK,
-    MON_DATA_DEF,
-    MON_DATA_SPATK,
-    MON_DATA_SPDEF,
-    MON_DATA_SPEED,
-};
-
 struct Unk201C000
 {
     /*0x00*/ struct Pokemon *pokemon;
@@ -1227,12 +1199,11 @@ void sub_806BB3C(s16 a, u16 b)
 void sub_806BB9C(u8 a)
 {
     u8 i;
-    u16 *vramPtr;
-    const u16 arr[12];
-
-    memcpy(&arr, gUnknown_08376CD4, sizeof gUnknown_08376CD4);
-
-    vramPtr = (u16 *)(BG_VRAM + 0x3C30);
+    u16 arr[12] = {
+        0x2A, 0x2B, 0x2C, 0x2D, 0x2E, 0x2F,
+        0x3A, 0x3B, 0x3C, 0x3D, 0x3E, 0x3F,
+    };
+    u16 *vramPtr = (u16 *)(BG_VRAM + 0x3C30);
     for (i = 0; i < PARTY_SIZE; i++)
     {
         vramPtr[i] = arr[i] + (a << 12);
@@ -1243,12 +1214,11 @@ void sub_806BB9C(u8 a)
 void sub_806BBEC(u8 a)
 {
     u8 i;
-    u16 *vramPtr;
-    const u16 arr[12];
-
-    memcpy(&arr, gUnknown_08376CEC, sizeof gUnknown_08376CEC);
-
-    vramPtr = (u16 *)(BG_VRAM + 0x3CB0);
+    u16 arr[12] = {
+        0x2A, 0x0B, 0x0C, 0x0D, 0x0E, 0x2F,
+        0x1A, 0x1B, 0x1C, 0x1D, 0x1E, 0x1F,
+    };
+    u16 *vramPtr = (u16 *)(BG_VRAM + 0x3CB0);
     for (i = 0; i < PARTY_SIZE; i++)
     {
         vramPtr[i] = arr[i] + (a << 12);
@@ -4910,6 +4880,23 @@ void DoPPUpItemEffect(u8 taskId, u16 b, TaskFunc c)
     gMain.newKeys = 0;
 }
 
+static const u8 *const StatNames[] = {
+    gOtherText_HP,
+    gOtherText_Attack,
+    gOtherText_Defense,
+    gOtherText_SpAtk,
+    gOtherText_SpDef,
+    gOtherText_Speed,
+};
+
+static const u8 StatDataTypes[] = {
+    MON_DATA_MAX_HP,
+    MON_DATA_ATK,
+    MON_DATA_DEF,
+    MON_DATA_SPATK,
+    MON_DATA_SPDEF,
+    MON_DATA_SPEED,
+};
 void DoRareCandyItemEffect(u8 taskId, u16 b, TaskFunc c)
 {
     u8 i;

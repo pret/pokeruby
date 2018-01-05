@@ -4,8 +4,8 @@
 #include "battle_anim.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 static void sub_80CB09C(struct Sprite* sprite);
 static void sub_80CB1A4(struct Sprite* sprite);
@@ -16,7 +16,7 @@ static void sub_80CB1A4(struct Sprite* sprite);
 void sub_80CAFD0(struct Sprite* sprite)
 {
     sub_80787B0(sprite, 1);
-    if (GetBankSide(gBattleAnimBankAttacker))
+    if (GetBankSide(gAnimBankAttacker))
     {
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
     }
@@ -24,19 +24,19 @@ void sub_80CAFD0(struct Sprite* sprite)
     sprite->data[0] = gBattleAnimArgs[4];
     if (!(gBattleAnimArgs[6]))
     {
-        sprite->data[2] = sub_8077ABC(gBattleAnimBankTarget, 2) + gBattleAnimArgs[2];
-        sprite->data[4] = sub_8077ABC(gBattleAnimBankTarget, 3) + gBattleAnimArgs[3];
+        sprite->data[2] = GetBankPosition(gAnimBankTarget, 2) + gBattleAnimArgs[2];
+        sprite->data[4] = GetBankPosition(gAnimBankTarget, 3) + gBattleAnimArgs[3];
     }
     else
     {
-        sub_807A3FC(gBattleAnimBankTarget, 1, &sprite->data[2], &sprite->data[4]);
+        sub_807A3FC(gAnimBankTarget, 1, &sprite->data[2], &sprite->data[4]);
         sprite->data[2] += gBattleAnimArgs[2];
         sprite->data[4] += gBattleAnimArgs[3];
     }
 
     sprite->data[5] = gBattleAnimArgs[5];
     sub_80786EC(sprite);
-    if (GetBankSide(gBattleAnimBankAttacker) == GetBankSide(gBattleAnimBankTarget))
+    if (GetBankSide(gAnimBankAttacker) == GetBankSide(gAnimBankTarget))
     {
         sprite->data[0] = 1;
     }
@@ -77,14 +77,14 @@ void sub_80CB09C(struct Sprite* sprite)
         c = TRUE;
 
     if (c)
-        move_anim_8072740(sprite);
+        DestroyAnimSprite(sprite);
 }
 
 void sub_80CB144(struct Sprite* sprite)
 {
-    if (!NotInBattle() && IsDoubleBattle() == TRUE)
+    if (!IsContest() && IsDoubleBattle() == TRUE)
     {
-        sub_807A3FC(gBattleAnimBankTarget, 1, &sprite->pos1.x, &sprite->pos1.y);
+        sub_807A3FC(gAnimBankTarget, 1, &sprite->pos1.x, &sprite->pos1.y);
     }
 
     sprite->pos1.y += 32;
@@ -117,14 +117,14 @@ void sub_80CB1A4(struct Sprite* sprite)
     sprite->pos2.y = Sin(sprite->data[5], 5);
     if (sprite->data[5] <= 0x7F)
     {
-        sprite->oam.priority = sub_8079ED4(gBattleAnimBankTarget) - 1;
+        sprite->oam.priority = sub_8079ED4(gAnimBankTarget) - 1;
     }
     else
     {
-        sprite->oam.priority = sub_8079ED4(gBattleAnimBankTarget) + 1;
+        sprite->oam.priority = sub_8079ED4(gAnimBankTarget) + 1;
     }
 
     sprite->data[0]--;
     if (!sprite->data[0])
-        move_anim_8072740(sprite);
+        DestroyAnimSprite(sprite);
 }

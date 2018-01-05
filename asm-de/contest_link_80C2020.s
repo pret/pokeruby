@@ -86,25 +86,25 @@ sub_80C2020: @ 80C2020
 	strh r2, [r0]
 	ldr r0, _080C2118 @ =gUnknown_030042A0
 	strh r2, [r0]
-	ldr r0, _080C211C @ =gUnknown_030042C0
+	ldr r0, _080C211C @ =gBattle_BG1_X
 	strh r2, [r0]
-	ldr r0, _080C2120 @ =gUnknown_030041B4
+	ldr r0, _080C2120 @ =gBattle_BG1_Y
 	strh r2, [r0]
-	ldr r0, _080C2124 @ =gUnknown_03004288
+	ldr r0, _080C2124 @ =gBattle_BG2_X
 	strh r2, [r0]
-	ldr r0, _080C2128 @ =gUnknown_03004280
+	ldr r0, _080C2128 @ =gBattle_BG2_Y
 	strh r2, [r0]
 	ldr r0, _080C212C @ =gUnknown_030041B0
 	strh r2, [r0]
 	ldr r0, _080C2130 @ =gUnknown_030041B8
 	strh r2, [r0]
-	ldr r0, _080C2134 @ =gUnknown_030042C4
+	ldr r0, _080C2134 @ =gBattle_WIN0H
 	strh r2, [r0]
-	ldr r0, _080C2138 @ =gUnknown_03004240
+	ldr r0, _080C2138 @ =gBattle_WIN0V
 	strh r2, [r0]
-	ldr r0, _080C213C @ =gUnknown_03004200
+	ldr r0, _080C213C @ =gBattle_WIN1H
 	strh r2, [r0]
-	ldr r0, _080C2140 @ =gUnknown_03004244
+	ldr r0, _080C2140 @ =gBattle_WIN1V
 	strh r2, [r0]
 	pop {r4,r5}
 	pop {r0}
@@ -121,16 +121,16 @@ _080C210C: .4byte 0x00003f3f
 _080C2110: .4byte REG_WIN0H
 _080C2114: .4byte gUnknown_030042A4
 _080C2118: .4byte gUnknown_030042A0
-_080C211C: .4byte gUnknown_030042C0
-_080C2120: .4byte gUnknown_030041B4
-_080C2124: .4byte gUnknown_03004288
-_080C2128: .4byte gUnknown_03004280
+_080C211C: .4byte gBattle_BG1_X
+_080C2120: .4byte gBattle_BG1_Y
+_080C2124: .4byte gBattle_BG2_X
+_080C2128: .4byte gBattle_BG2_Y
 _080C212C: .4byte gUnknown_030041B0
 _080C2130: .4byte gUnknown_030041B8
-_080C2134: .4byte gUnknown_030042C4
-_080C2138: .4byte gUnknown_03004240
-_080C213C: .4byte gUnknown_03004200
-_080C2140: .4byte gUnknown_03004244
+_080C2134: .4byte gBattle_WIN0H
+_080C2138: .4byte gBattle_WIN0V
+_080C213C: .4byte gBattle_WIN1H
+_080C2140: .4byte gBattle_WIN1V
 	thumb_func_end sub_80C2020
 
 	thumb_func_start sub_80C2144
@@ -435,10 +435,10 @@ sub_80C2358: @ 80C2358
 	strb r0, [r4, 0x2]
 	ldr r0, _080C2418 @ =sub_80C2430
 	bl SetMainCallback2
-	ldr r1, _080C241C @ =gUnknown_03004200
+	ldr r1, _080C241C @ =gBattle_WIN1H
 	movs r0, 0xF0
 	strh r0, [r1]
-	ldr r1, _080C2420 @ =gUnknown_03004244
+	ldr r1, _080C2420 @ =gBattle_WIN1V
 	ldr r2, _080C2424 @ =0x000080a0
 	adds r0, r2, 0
 	strh r0, [r1]
@@ -460,8 +460,8 @@ _080C240C: .4byte gPaletteFade
 _080C2410: .4byte gSharedMem + 0x18000
 _080C2414: .4byte sub_80C24F4
 _080C2418: .4byte sub_80C2430
-_080C241C: .4byte gUnknown_03004200
-_080C2420: .4byte gUnknown_03004244
+_080C241C: .4byte gBattle_WIN1H
+_080C2420: .4byte gBattle_WIN1V
 _080C2424: .4byte 0x000080a0
 _080C2428: .4byte sub_80C2F28
 _080C242C: .4byte sub_80C2448
@@ -490,19 +490,19 @@ sub_80C2448: @ 80C2448
 	ldrh r0, [r0]
 	strh r0, [r1]
 	adds r1, 0x2
-	ldr r0, _080C24CC @ =gUnknown_030042C0
+	ldr r0, _080C24CC @ =gBattle_BG1_X
 	ldrh r0, [r0]
 	strh r0, [r1]
 	adds r1, 0x2
-	ldr r0, _080C24D0 @ =gUnknown_030041B4
+	ldr r0, _080C24D0 @ =gBattle_BG1_Y
 	ldrh r0, [r0]
 	strh r0, [r1]
 	adds r1, 0x2
-	ldr r0, _080C24D4 @ =gUnknown_03004288
+	ldr r0, _080C24D4 @ =gBattle_BG2_X
 	ldrh r0, [r0]
 	strh r0, [r1]
 	adds r1, 0x2
-	ldr r0, _080C24D8 @ =gUnknown_03004280
+	ldr r0, _080C24D8 @ =gBattle_BG2_Y
 	ldrh r0, [r0]
 	strh r0, [r1]
 	adds r1, 0x2
@@ -514,19 +514,19 @@ sub_80C2448: @ 80C2448
 	ldrh r0, [r0]
 	strh r0, [r1]
 	adds r1, 0x22
-	ldr r0, _080C24E4 @ =gUnknown_030042C4
+	ldr r0, _080C24E4 @ =gBattle_WIN0H
 	ldrh r0, [r0]
 	strh r0, [r1]
 	adds r1, 0x4
-	ldr r0, _080C24E8 @ =gUnknown_03004240
+	ldr r0, _080C24E8 @ =gBattle_WIN0V
 	ldrh r0, [r0]
 	strh r0, [r1]
 	subs r1, 0x2
-	ldr r0, _080C24EC @ =gUnknown_03004200
+	ldr r0, _080C24EC @ =gBattle_WIN1H
 	ldrh r0, [r0]
 	strh r0, [r1]
 	adds r1, 0x4
-	ldr r0, _080C24F0 @ =gUnknown_03004244
+	ldr r0, _080C24F0 @ =gBattle_WIN1V
 	ldrh r0, [r0]
 	strh r0, [r1]
 	bl LoadOam
@@ -539,16 +539,16 @@ sub_80C2448: @ 80C2448
 _080C24C0: .4byte REG_BG0HOFS
 _080C24C4: .4byte gUnknown_030042A4
 _080C24C8: .4byte gUnknown_030042A0
-_080C24CC: .4byte gUnknown_030042C0
-_080C24D0: .4byte gUnknown_030041B4
-_080C24D4: .4byte gUnknown_03004288
-_080C24D8: .4byte gUnknown_03004280
+_080C24CC: .4byte gBattle_BG1_X
+_080C24D0: .4byte gBattle_BG1_Y
+_080C24D4: .4byte gBattle_BG2_X
+_080C24D8: .4byte gBattle_BG2_Y
 _080C24DC: .4byte gUnknown_030041B0
 _080C24E0: .4byte gUnknown_030041B8
-_080C24E4: .4byte gUnknown_030042C4
-_080C24E8: .4byte gUnknown_03004240
-_080C24EC: .4byte gUnknown_03004200
-_080C24F0: .4byte gUnknown_03004244
+_080C24E4: .4byte gBattle_WIN0H
+_080C24E8: .4byte gBattle_WIN0V
+_080C24EC: .4byte gBattle_WIN1H
+_080C24F0: .4byte gBattle_WIN1V
 	thumb_func_end sub_80C2448
 
 	thumb_func_start sub_80C24F4
@@ -1302,10 +1302,10 @@ _080C2AC4:
 	.4byte _080C2CA8
 	.4byte _080C2CE8
 _080C2ADC:
-	ldr r1, _080C2BC4 @ =gUnknown_030042C4
+	ldr r1, _080C2BC4 @ =gBattle_WIN0H
 	movs r0, 0xF0
 	strh r0, [r1]
-	ldr r1, _080C2BC8 @ =gUnknown_03004240
+	ldr r1, _080C2BC8 @ =gBattle_WIN0V
 	ldr r3, _080C2BCC @ =0x00005050
 	adds r0, r3, 0
 	strh r0, [r1]
@@ -1413,8 +1413,8 @@ _080C2B14:
 	strh r0, [r1, 0x8]
 	b _080C2D04
 	.align 2, 0
-_080C2BC4: .4byte gUnknown_030042C4
-_080C2BC8: .4byte gUnknown_03004240
+_080C2BC4: .4byte gBattle_WIN0H
+_080C2BC8: .4byte gBattle_WIN0V
 _080C2BCC: .4byte 0x00005050
 _080C2BD0: .4byte gContestFinalStandings
 _080C2BD4: .4byte gContestMons
@@ -1454,7 +1454,7 @@ _080C2C04:
 	strh r0, [r4, 0xC]
 _080C2C30:
 	ldrb r2, [r4, 0xC]
-	ldr r3, _080C2C50 @ =gUnknown_03004240
+	ldr r3, _080C2C50 @ =gBattle_WIN0V
 	movs r0, 0x50
 	subs r0, r2
 	lsls r0, 8
@@ -1469,7 +1469,7 @@ _080C2C30:
 	strh r0, [r4, 0x8]
 	b _080C2D04
 	.align 2, 0
-_080C2C50: .4byte gUnknown_03004240
+_080C2C50: .4byte gBattle_WIN0V
 _080C2C54:
 	ldr r0, _080C2C60 @ =gSharedMem + 0x18000
 	ldrb r0, [r0, 0x6]
@@ -1515,7 +1515,7 @@ _080C2CA8:
 	ldrb r0, [r0, 0x6]
 	cmp r0, 0x2
 	bne _080C2D04
-	ldr r3, _080C2CE4 @ =gUnknown_03004240
+	ldr r3, _080C2CE4 @ =gBattle_WIN0V
 	ldrh r0, [r3]
 	lsrs r2, r0, 8
 	adds r0, r2, 0x2
@@ -1543,7 +1543,7 @@ _080C2CD0:
 	b _080C2D04
 	.align 2, 0
 _080C2CE0: .4byte gSharedMem + 0x18000
-_080C2CE4: .4byte gUnknown_03004240
+_080C2CE4: .4byte gBattle_WIN0V
 _080C2CE8:
 	ldr r2, _080C2D14 @ =gSharedMem + 0x18000
 	ldrb r0, [r2, 0x6]
@@ -2857,10 +2857,10 @@ _080C36DA:
 	adds r5, 0x1
 	cmp r5, 0x2
 	ble _080C36DA
-	ldr r1, _080C3754 @ =gUnknown_030042C4
+	ldr r1, _080C3754 @ =gBattle_WIN0H
 	movs r0, 0xF0
 	strh r0, [r1]
-	ldr r2, _080C3758 @ =gUnknown_03004240
+	ldr r2, _080C3758 @ =gBattle_WIN0V
 	ldrh r1, [r4, 0x22]
 	adds r0, r1, 0
 	subs r0, 0x10
@@ -2878,8 +2878,8 @@ _080C36DA:
 	.align 2, 0
 _080C374C: .4byte gSharedMem + 0x18000
 _080C3750: .4byte gSprites
-_080C3754: .4byte gUnknown_030042C4
-_080C3758: .4byte gUnknown_03004240
+_080C3754: .4byte gBattle_WIN0H
+_080C3758: .4byte gBattle_WIN0V
 _080C375C: .4byte REG_WININ
 _080C3760: .4byte 0x00003f3e
 	thumb_func_end sub_80C3698
@@ -2902,8 +2902,8 @@ sub_80C3764: @ 80C3764
 	orrs r0, r1
 	mov r1, r12
 	strb r0, [r1]
-	ldr r7, _080C37D0 @ =gUnknown_030042C4
-	ldr r6, _080C37D4 @ =gUnknown_03004240
+	ldr r7, _080C37D0 @ =gBattle_WIN0H
+	ldr r6, _080C37D4 @ =gBattle_WIN0V
 	adds r5, r3, 0
 	movs r4, 0x4
 	adds r2, 0x2E
@@ -2940,8 +2940,8 @@ _080C3790:
 	.align 2, 0
 _080C37C8: .4byte gSharedMem + 0x18000
 _080C37CC: .4byte gSprites
-_080C37D0: .4byte gUnknown_030042C4
-_080C37D4: .4byte gUnknown_03004240
+_080C37D0: .4byte gBattle_WIN0H
+_080C37D4: .4byte gBattle_WIN0V
 _080C37D8: .4byte REG_WIN0H
 _080C37DC: .4byte REG_WININ
 _080C37E0: .4byte 0x00003f3f

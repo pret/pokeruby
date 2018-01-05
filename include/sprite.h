@@ -168,6 +168,8 @@ struct SpriteTemplate
     void (*callback)(struct Sprite *);
 };
 
+typedef void (*SpriteCallback)(struct Sprite *);
+
 struct Sprite
 {
     /*0x00*/ struct OamData oam;
@@ -176,7 +178,7 @@ struct Sprite
     /*0x10*/ const union AffineAnimCmd *const *affineAnims;
     /*0x14*/ const struct SpriteTemplate *template;
     /*0x18*/ const struct SubspriteTable *subspriteTables;
-    /*0x1C*/ void (*callback)(struct Sprite *);
+    /*0x1C*/ SpriteCallback callback;
 
     /*0x20*/ struct Coords16 pos1;
     /*0x24*/ struct Coords16 pos2;
@@ -234,6 +236,8 @@ extern s16 gSpriteCoordOffsetX;
 extern s16 gSpriteCoordOffsetY;
 extern u8 gReservedSpritePaletteCount;
 
+extern u8 gOamLimit;
+
 extern struct Sprite gSprites[];
 
 void ResetSpriteData(void);
@@ -242,7 +246,7 @@ void BuildOamBuffer(void);
 u8 CreateSprite(const struct SpriteTemplate *template, s16 x, s16 y, u8 subpriority);
 u8 CreateSpriteAtEnd(const struct SpriteTemplate *template, s16 x, s16 y, u8 subpriority);
 u8 CreateInvisibleSprite(void (*callback)(struct Sprite *));
-u8 CreateSpriteAndAnimate(struct SpriteTemplate *template, s16 x, s16 y, u8 subpriority);
+u8 CreateSpriteAndAnimate(const struct SpriteTemplate *template, s16 x, s16 y, u8 subpriority);
 void DestroySprite(struct Sprite *sprite);
 void ResetOamRange(u8 a, u8 b);
 void LoadOam(void);

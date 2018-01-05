@@ -308,7 +308,7 @@ void sub_80EBA5C() {
 				gMain.state++;
 				SetMainCallback2(&sub_80EBBE8);
 				break;
-			} 
+			}
 			break;
 		case 1:
 			SetVBlankCallback(NULL);
@@ -331,7 +331,7 @@ void sub_80EBA5C() {
 		case 7:
 			sub_80F1A90();
 			gMain.state++;
-		case 8: 
+		case 8:
 			if (sub_80F1AC4()) return;
 			break;
 		case 9:
@@ -535,7 +535,7 @@ void sub_80EBDD8() {
 			sub_80EBDBC(&sub_80EC268);
 		}
 		return;
-		
+
 	}
 
 }
@@ -584,7 +584,7 @@ void sub_80EC00C() {
 		ewram0_10.var304++;
 		return;
 	case 9:
-		sub_80F2598(); 
+		sub_80F2598();
 		ewram0_10.var304++;
 		break;
 	case 10:
@@ -3479,8 +3479,6 @@ void sub_80EF840(void)
 	}
 }
 
-// The only non-matching part is the gSaveBlock2.regionMapZoom access.
-#ifdef NONMATCHING
 bool8 sub_80EF874(void)
 {
 	switch (gUnknown_083DFEC4->unkD160)
@@ -3504,7 +3502,7 @@ bool8 sub_80EF874(void)
 		MenuZeroFillScreen();
 		break;
 	case 5:
-		sub_80FA904(&gUnknown_083DFEC4->regionMap, gSaveBlock2.regionMapZoom);
+		sub_80FA904(&gUnknown_083DFEC4->regionMap, gSaveBlock2.regionMapZoom ? TRUE : FALSE);
 		break;
 	case 6:
 		if (sub_80FA940())
@@ -3552,501 +3550,75 @@ bool8 sub_80EF874(void)
 	gUnknown_083DFEC4->unkD160++;
 	return TRUE;
 }
-#else
+
 asm(".include \"constants/gba_constants.inc\"\n");
 
-__attribute__((naked))
-bool8 sub_80EF874(void)
-{
-    asm(".syntax unified\n\
-	push {lr}\n\
-	ldr r0, _080EF890 @ =gUnknown_083DFEC4\n\
-	ldr r0, [r0]\n\
-	ldr r1, _080EF894 @ =0x0000d160\n\
-	adds r0, r1\n\
-	ldrh r0, [r0]\n\
-	cmp r0, 0xB\n\
-	bls _080EF886\n\
-	b _080EF9D8\n\
-_080EF886:\n\
-	lsls r0, 2\n\
-	ldr r1, _080EF898 @ =_080EF89C\n\
-	adds r0, r1\n\
-	ldr r0, [r0]\n\
-	mov pc, r0\n\
-	.align 2, 0\n\
-_080EF890: .4byte gUnknown_083DFEC4\n\
-_080EF894: .4byte 0x0000d160\n\
-_080EF898: .4byte _080EF89C\n\
-	.align 2, 0\n\
-_080EF89C:\n\
-	.4byte _080EF8CC\n\
-	.4byte _080EF8D2\n\
-	.4byte _080EF8E0\n\
-	.4byte _080EF8EC\n\
-	.4byte _080EF8F6\n\
-	.4byte _080EF8FC\n\
-	.4byte _080EF920\n\
-	.4byte _080EF92C\n\
-	.4byte _080EF940\n\
-	.4byte _080EF954\n\
-	.4byte _080EF960\n\
-	.4byte _080EF972\n\
-_080EF8CC:\n\
-	bl sub_80EEDE8\n\
-	b _080EF9DC\n\
-_080EF8D2:\n\
-	ldr r0, _080EF8DC @ =gWindowConfig_81E7224\n\
-	bl SetUpWindowConfig\n\
-	b _080EF9DC\n\
-	.align 2, 0\n\
-_080EF8DC: .4byte gWindowConfig_81E7224\n\
-_080EF8E0:\n\
-	ldr r0, _080EF8E8 @ =gWindowConfig_81E7224\n\
-	bl MultistepInitMenuWindowBegin\n\
-	b _080EF9DC\n\
-	.align 2, 0\n\
-_080EF8E8: .4byte gWindowConfig_81E7224\n\
-_080EF8EC:\n\
-	bl MultistepInitMenuWindowContinue\n\
-	cmp r0, 0\n\
-	bne _080EF9DC\n\
-	b _080EF9EA\n\
-_080EF8F6:\n\
-	bl MenuZeroFillScreen\n\
-	b _080EF9DC\n\
-_080EF8FC:\n\
-	ldr r0, _080EF914 @ =gUnknown_083DFEC4\n\
-	ldr r0, [r0]\n\
-	ldr r2, _080EF918 @ =0x00006e18\n\
-	adds r0, r2\n\
-	ldr r1, _080EF91C @ =gSaveBlock2\n\
-	ldrb r1, [r1, 0x15]\n\
-	lsrs r1, 3\n\
-	movs r2, 0x1\n\
-	ands r1, r2\n\
-	bl sub_80FA904\n\
-	b _080EF9DC\n\
-	.align 2, 0\n\
-_080EF914: .4byte gUnknown_083DFEC4\n\
-_080EF918: .4byte 0x00006e18\n\
-_080EF91C: .4byte gSaveBlock2\n\
-_080EF920:\n\
-	bl sub_80FA940\n\
-	lsls r0, 24\n\
-	cmp r0, 0\n\
-	beq _080EF9DC\n\
-	b _080EF9EA\n\
-_080EF92C:\n\
-	ldr r0, _080EF938 @ =gPokenavHoennMapSquares_Gfx\n\
-	ldr r1, _080EF93C @ =0x06005000\n\
-	bl LZ77UnCompVram\n\
-	b _080EF9DC\n\
-	.align 2, 0\n\
-_080EF938: .4byte gPokenavHoennMapSquares_Gfx\n\
-_080EF93C: .4byte 0x06005000\n\
-_080EF940:\n\
-	ldr r0, _080EF950 @ =gPokenavHoennMapSquares_Pal\n\
-	movs r1, 0x30\n\
-	movs r2, 0x20\n\
-	bl LoadPalette\n\
-	bl sub_80EFC3C\n\
-	b _080EF9DC\n\
-	.align 2, 0\n\
-_080EF950: .4byte gPokenavHoennMapSquares_Pal\n\
-_080EF954:\n\
-	bl sub_80EFC64\n\
-	lsls r0, 24\n\
-	cmp r0, 0\n\
-	beq _080EF9DC\n\
-	b _080EF9EA\n\
-_080EF960:\n\
-	movs r0, 0xD\n\
-	movs r1, 0x3\n\
-	movs r2, 0x1D\n\
-	movs r3, 0x11\n\
-	bl MenuDrawTextWindow\n\
-	bl sub_80EF9F8\n\
-	b _080EF9DC\n\
-_080EF972:\n\
-	ldr r0, _080EF990 @ =gUnknown_083DFEC4\n\
-	ldr r1, [r0]\n\
-	ldr r2, _080EF994 @ =0x00006e90\n\
-	adds r0, r1, r2\n\
-	ldrb r0, [r0]\n\
-	cmp r0, 0\n\
-	bne _080EF9A0\n\
-	ldr r2, _080EF998 @ =0x00007698\n\
-	adds r0, r1, r2\n\
-	movs r1, 0xA0\n\
-	strh r1, [r0]\n\
-	ldr r0, _080EF99C @ =REG_BG0VOFS\n\
-	strh r1, [r0]\n\
-	b _080EF9B0\n\
-	.align 2, 0\n\
-_080EF990: .4byte gUnknown_083DFEC4\n\
-_080EF994: .4byte 0x00006e90\n\
-_080EF998: .4byte 0x00007698\n\
-_080EF99C: .4byte REG_BG0VOFS\n\
-_080EF9A0:\n\
-	ldr r0, _080EF9C8 @ =0x00007698\n\
-	adds r1, r0\n\
-	movs r2, 0\n\
-	movs r0, 0x80\n\
-	lsls r0, 1\n\
-	strh r0, [r1]\n\
-	ldr r0, _080EF9CC @ =REG_BG0VOFS\n\
-	strh r2, [r0]\n\
-_080EF9B0:\n\
-	ldr r2, _080EF9D0 @ =REG_BG0CNT\n\
-	ldrh r0, [r2]\n\
-	strh r0, [r2]\n\
-	ldrh r0, [r2]\n\
-	movs r1, 0x1\n\
-	orrs r0, r1\n\
-	strh r0, [r2]\n\
-	ldr r1, _080EF9D4 @ =REG_BLDCNT\n\
-	movs r0, 0\n\
-	strh r0, [r1]\n\
-	b _080EF9DC\n\
-	.align 2, 0\n\
-_080EF9C8: .4byte 0x00007698\n\
-_080EF9CC: .4byte REG_BG0VOFS\n\
-_080EF9D0: .4byte REG_BG0CNT\n\
-_080EF9D4: .4byte REG_BLDCNT\n\
-_080EF9D8:\n\
-	movs r0, 0\n\
-	b _080EF9EC\n\
-_080EF9DC:\n\
-	ldr r0, _080EF9F0 @ =gUnknown_083DFEC4\n\
-	ldr r1, [r0]\n\
-	ldr r2, _080EF9F4 @ =0x0000d160\n\
-	adds r1, r2\n\
-	ldrh r0, [r1]\n\
-	adds r0, 0x1\n\
-	strh r0, [r1]\n\
-_080EF9EA:\n\
-	movs r0, 0x1\n\
-_080EF9EC:\n\
-	pop {r1}\n\
-	bx r1\n\
-	.align 2, 0\n\
-_080EF9F0: .4byte gUnknown_083DFEC4\n\
-_080EF9F4: .4byte 0x0000d160\n\
-    .syntax divided\n");
-}
-#endif // NONMATCHING
-
-#ifdef NONMATCHING
 void sub_80EF9F8(void)
 {
-	s32 zero;
-	u16 i;
-	u8 *mapSectionName;
-	u32 offset;
+	bool8 someBool = FALSE;
+    u16 top = 4;
 	u16 mapSectionId;
 	u8 b;
-	u8 **pointer;
-	u16 var1 = 4;
-
 
 	switch (gUnknown_083DFEC4->regionMap.unk16)
 	{
+    case 0:
+        break;
 	case 1:
 	case 4:
-		sub_8072A18(gUnknown_083DFEC4->regionMap.mapSectionName, 0x70, var1 * 8, 0x78, 1);
-		var1 += 2;
-
+		sub_8072A18(gUnknown_083DFEC4->regionMap.mapSectionName, 0x70, top * 8, 0x78, 1);
+		top += 2;
 		if (gLinkOpen == TRUE)
 		{
 			sub_80F1A80();
+            someBool = TRUE;
 		}
 		else
 		{
-			i = 0;
-			while (i < 4 && (mapSectionName = GetLandmarkName(gUnknown_083DFEC4->regionMap.mapSectionId, gUnknown_083DFEC4->regionMap.everGrandeCityArea, i)) != NULL)
-			{
-				sub_8072A18(mapSectionName, 0x70, var1 * 8, 0x78, 1);
-				var1 += 2;
-				i++;
-			}
+            u16 i;
 
-			// This check is always true, but somehow the compiler still performed it.
-			asm("mov %0, #0\n":"=r"(zero));  // zero = 0
-			if (!zero && var1 < 16)
-			{
-				MenuFillWindowRectWithBlankTile(14, var1, 28, 15);
-			}
+            for (i = 0; i < 4; i++)
+            {
+                const u8 *secName = GetLandmarkName(
+                  gUnknown_083DFEC4->regionMap.mapSectionId,
+                  gUnknown_083DFEC4->regionMap.everGrandeCityArea,
+                  i);
+
+                if (secName == NULL)
+                    break;
+                sub_8072A18(secName, 0x70, top * 8, 0x78, 1);
+                top += 2;
+            }
 		}
 		break;
 	case 2:
-		sub_8072A18(gUnknown_083DFEC4->regionMap.mapSectionName, 0x70, var1 * 8, 0x78, 1);
-		var1 += 2;
-
+		sub_8072A18(gUnknown_083DFEC4->regionMap.mapSectionName, 0x70, top * 8, 0x78, 1);
+		top += 2;
 		mapSectionId = gUnknown_083DFEC4->regionMap.mapSectionId;
-		b = gUnknown_083DFEC4->regionMap.everGrandeCityArea;
-		offset = (b << 2) + (mapSectionId << 3);
-		pointer = (u8 **)((u8 *)&gUnknown_083DFEC4->unkCDCC + offset);
-		if (*pointer != NULL)
+        b = gUnknown_083DFEC4->regionMap.everGrandeCityArea;
+        if (gUnknown_083DFEC4->unkCDCC[mapSectionId][b] != NULL)
 		{
-			MenuFillWindowRectWithBlankTile(14, var1, 15, 15);
-			MenuFillWindowRectWithBlankTile(26, var1, 28, 15);
-
-			sub_8095C8C((void *)VRAM + 0xF800, 16, 6, *pointer, 0, 0, 10, 10, 10);
-
-			var1 += 11;
-		}
-
-		// This check is always true, but somehow the compiler still performed it.
-		asm("mov %0, #0\n":"=r"(zero));  // zero = 0
-		if (!zero && var1 < 16)
-		{
-			MenuFillWindowRectWithBlankTile(14, var1, 28, 15);
+			MenuFillWindowRectWithBlankTile(14, top, 15, 15);
+			MenuFillWindowRectWithBlankTile(26, top, 28, 15);
+			sub_8095C8C((void *)(VRAM + 0xF800), 16, 6, gUnknown_083DFEC4->unkCDCC[mapSectionId][b], 0, 0, 10, 10, 10);
+			top += 11;
 		}
 		break;
 	case 3:
-		sub_8072A18(gUnknown_083DFEC4->regionMap.mapSectionName, 0x70, var1 * 8, 0x78, 1);
-		var1 += 2;
-
-		// This check is always true, but somehow the compiler still performed it.
-		asm("mov %0, #0\n":"=r"(zero));  // zero = 0
-		if (!zero && var1 < 16)
-		{
-			MenuFillWindowRectWithBlankTile(14, var1, 28, 15);
-		}
-		break;
-	case 0:
-	default:
-		// This check is always true, but somehow the compiler still performed it.
-		asm("mov %0, #0\n":"=r"(zero));  // zero = 0
-		if (!zero && var1 < 16)
-		{
-			MenuFillWindowRectWithBlankTile(14, var1, 28, 15);
-		}
+		sub_8072A18(gUnknown_083DFEC4->regionMap.mapSectionName, 0x70, top * 8, 0x78, 1);
+		top += 2;
 		break;
 	}
+
+    // Epic fail by the compiler at optimizing this.
+    if (!someBool && top < 16)
+        MenuFillWindowRectWithBlankTile(14, top, 28, 15);
 
 	if (gUnknown_083DFEC4->regionMap.unk16 == 2)
-	{
 		sub_80EFD74();
-	}
 	else
-	{
 		sub_80EFDA0();
-	}
 }
-#else
-__attribute__((naked))
-void sub_80EF9F8(void)
-{
-    asm(".syntax unified\n\
-    push {r4-r6,lr}\n\
-    sub sp, 0x14\n\
-    movs r5, 0x4\n\
-    ldr r0, _080EFA18 @ =gUnknown_083DFEC4\n\
-    ldr r0, [r0]\n\
-    ldr r1, _080EFA1C @ =0x00006e2e\n\
-    adds r0, r1\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x4\n\
-    bls _080EFA0E\n\
-    b _080EFB6A\n\
-_080EFA0E:\n\
-    lsls r0, 2\n\
-    ldr r1, _080EFA20 @ =_080EFA24\n\
-    adds r0, r1\n\
-    ldr r0, [r0]\n\
-    mov pc, r0\n\
-    .align 2, 0\n\
-_080EFA18: .4byte gUnknown_083DFEC4\n\
-_080EFA1C: .4byte 0x00006e2e\n\
-_080EFA20: .4byte _080EFA24\n\
-    .align 2, 0\n\
-_080EFA24:\n\
-    .4byte _080EFB6A\n\
-    .4byte _080EFA38\n\
-    .4byte _080EFAC0\n\
-    .4byte _080EFB4C\n\
-    .4byte _080EFA38\n\
-_080EFA38:\n\
-    ldr r0, _080EFA64 @ =gUnknown_083DFEC4\n\
-    ldr r0, [r0]\n\
-    ldr r2, _080EFA68 @ =0x00006e18\n\
-    adds r0, r2\n\
-    lsls r2, r5, 19\n\
-    lsrs r2, 16\n\
-    movs r1, 0x1\n\
-    str r1, [sp]\n\
-    movs r1, 0x70\n\
-    movs r3, 0x78\n\
-    bl sub_8072A18\n\
-    adds r0, r5, 0x2\n\
-    lsls r0, 16\n\
-    lsrs r5, r0, 16\n\
-    ldr r0, _080EFA6C @ =gLinkOpen\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x1\n\
-    bne _080EFA70\n\
-    bl sub_80F1A80\n\
-    b _080EFB82\n\
-    .align 2, 0\n\
-_080EFA64: .4byte gUnknown_083DFEC4\n\
-_080EFA68: .4byte 0x00006e18\n\
-_080EFA6C: .4byte gLinkOpen\n\
-_080EFA70:\n\
-    movs r4, 0\n\
-    b _080EFA92\n\
-_080EFA74:\n\
-    lsls r2, r5, 19\n\
-    lsrs r2, 16\n\
-    movs r0, 0x1\n\
-    str r0, [sp]\n\
-    adds r0, r1, 0\n\
-    movs r1, 0x70\n\
-    movs r3, 0x78\n\
-    bl sub_8072A18\n\
-    adds r0, r5, 0x2\n\
-    lsls r0, 16\n\
-    lsrs r5, r0, 16\n\
-    adds r0, r4, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r4, r0, 16\n\
-_080EFA92:\n\
-    cmp r4, 0x3\n\
-    bhi _080EFB6A\n\
-    ldr r0, _080EFAB8 @ =gUnknown_083DFEC4\n\
-    ldr r1, [r0]\n\
-    ldr r2, _080EFABC @ =0x00006e2c\n\
-    adds r0, r1, r2\n\
-    ldrb r0, [r0]\n\
-    adds r2, 0x3\n\
-    adds r1, r2\n\
-    ldrb r1, [r1]\n\
-    lsls r2, r4, 24\n\
-    lsrs r2, 24\n\
-    bl GetLandmarkName\n\
-    adds r1, r0, 0\n\
-    cmp r1, 0\n\
-    bne _080EFA74\n\
-    b _080EFB6A\n\
-    .align 2, 0\n\
-_080EFAB8: .4byte gUnknown_083DFEC4\n\
-_080EFABC: .4byte 0x00006e2c\n\
-_080EFAC0:\n\
-    ldr r0, _080EFB38 @ =gUnknown_083DFEC4\n\
-    ldr r4, [r0]\n\
-    ldr r1, _080EFB3C @ =0x00006e18\n\
-    adds r0, r4, r1\n\
-    lsls r2, r5, 19\n\
-    lsrs r2, 16\n\
-    movs r1, 0x1\n\
-    str r1, [sp]\n\
-    movs r1, 0x70\n\
-    movs r3, 0x78\n\
-    bl sub_8072A18\n\
-    adds r0, r5, 0x2\n\
-    lsls r0, 16\n\
-    lsrs r5, r0, 16\n\
-    ldr r2, _080EFB40 @ =0x00006e2c\n\
-    adds r0, r4, r2\n\
-    ldrh r1, [r0]\n\
-    adds r2, 0x3\n\
-    adds r0, r4, r2\n\
-    ldrb r0, [r0]\n\
-    lsls r0, 2\n\
-    lsls r1, 3\n\
-    adds r0, r1\n\
-    ldr r1, _080EFB44 @ =0x0000cdcc\n\
-    adds r4, r1\n\
-    adds r6, r4, r0\n\
-    ldr r0, [r6]\n\
-    cmp r0, 0\n\
-    beq _080EFB6A\n\
-    lsls r4, r5, 24\n\
-    lsrs r4, 24\n\
-    movs r0, 0xE\n\
-    adds r1, r4, 0\n\
-    movs r2, 0xF\n\
-    movs r3, 0xF\n\
-    bl MenuFillWindowRectWithBlankTile\n\
-    movs r0, 0x1A\n\
-    adds r1, r4, 0\n\
-    movs r2, 0x1C\n\
-    movs r3, 0xF\n\
-    bl MenuFillWindowRectWithBlankTile\n\
-    ldr r0, _080EFB48 @ =0x0600f800\n\
-    ldr r3, [r6]\n\
-    movs r1, 0\n\
-    str r1, [sp]\n\
-    str r1, [sp, 0x4]\n\
-    movs r1, 0xA\n\
-    str r1, [sp, 0x8]\n\
-    str r1, [sp, 0xC]\n\
-    str r1, [sp, 0x10]\n\
-    movs r1, 0x10\n\
-    movs r2, 0x6\n\
-    bl sub_8095C8C\n\
-    adds r0, r5, 0\n\
-    adds r0, 0xB\n\
-    b _080EFB66\n\
-    .align 2, 0\n\
-_080EFB38: .4byte gUnknown_083DFEC4\n\
-_080EFB3C: .4byte 0x00006e18\n\
-_080EFB40: .4byte 0x00006e2c\n\
-_080EFB44: .4byte 0x0000cdcc\n\
-_080EFB48: .4byte 0x0600f800\n\
-_080EFB4C:\n\
-    ldr r0, _080EFB98 @ =gUnknown_083DFEC4\n\
-    ldr r0, [r0]\n\
-    ldr r2, _080EFB9C @ =0x00006e18\n\
-    adds r0, r2\n\
-    lsls r2, r5, 19\n\
-    lsrs r2, 16\n\
-    movs r1, 0x1\n\
-    str r1, [sp]\n\
-    movs r1, 0x70\n\
-    movs r3, 0x78\n\
-    bl sub_8072A18\n\
-    adds r0, r5, 0x2\n\
-_080EFB66:\n\
-    lsls r0, 16\n\
-    lsrs r5, r0, 16\n\
-_080EFB6A:\n\
-    movs r0, 0\n\
-    cmp r0, 0\n\
-    bne _080EFB82\n\
-    cmp r5, 0xF\n\
-    bhi _080EFB82\n\
-    lsls r1, r5, 24\n\
-    lsrs r1, 24\n\
-    movs r0, 0xE\n\
-    movs r2, 0x1C\n\
-    movs r3, 0xF\n\
-    bl MenuFillWindowRectWithBlankTile\n\
-_080EFB82:\n\
-    ldr r0, _080EFB98 @ =gUnknown_083DFEC4\n\
-    ldr r0, [r0]\n\
-    ldr r1, _080EFBA0 @ =0x00006e2e\n\
-    adds r0, r1\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x2\n\
-    bne _080EFBA4\n\
-    bl sub_80EFD74\n\
-    b _080EFBA8\n\
-    .align 2, 0\n\
-_080EFB98: .4byte gUnknown_083DFEC4\n\
-_080EFB9C: .4byte 0x00006e18\n\
-_080EFBA0: .4byte 0x00006e2e\n\
-_080EFBA4:\n\
-    bl sub_80EFDA0\n\
-_080EFBA8:\n\
-    add sp, 0x14\n\
-    pop {r4-r6}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .syntax divided\n");
-}
-#endif // NONMATCHING
 
 void sub_80EFBB0(void)
 {
@@ -4103,152 +3675,37 @@ void sub_80EFC3C(void)
 	sub_80EFD3C();
 }
 
-#ifdef NONMATCHING // "var1 = gUnknown_083DFEC4->unkBC9A;" is the only thing that doesnt' match.
 bool8 sub_80EFC64(void)
 {
 	u16 i;
-	u16 var1;
+	u8 var1;
 	u16 var2;
 
-	if (gUnknown_083DFEC4->unkBC9A < 16)
-	{
-		var1 = gUnknown_083DFEC4->unkBC9A;
-		var2 = gUnknown_083DFEC4->unkBC9B;
-		for (i = 0; i < 2; i++)
-		{
-			if (gPokenavCityMaps[var1][i] != 0)
-			{
-				LZ77UnCompVram(gPokenavCityMaps[var1][i], gUnknown_083DFEC4->unkBC9C[var2]);
-				gUnknown_083DFEC4->unkCDCC[var1][i] = gUnknown_083DFEC4->unkBC9C[var2];
-				var2++;
-			}
-			else
-			{
-				gUnknown_083DFEC4->unkCDCC[var1][i] = NULL;
-			}
-		}
+	if (gUnknown_083DFEC4->unkBC9A >= 16)
+        return FALSE;
 
-		gUnknown_083DFEC4->unkBC9A++;
-		if (gUnknown_083DFEC4->unkBC9A < 16)
-		{
-			gUnknown_083DFEC4->unkBC9B = var2;
-			return TRUE;
-		}
-	}
+    var1 = gUnknown_083DFEC4->unkBC9A;
+    var2 = gUnknown_083DFEC4->unkBC9B;
+    for (i = 0; i < 2; i++)
+    {
+        if (gPokenavCityMaps[var1][i] != 0)
+        {
+            LZ77UnCompVram(gPokenavCityMaps[var1][i], gUnknown_083DFEC4->unkBC9C[var2]);
+            gUnknown_083DFEC4->unkCDCC[var1][i] = gUnknown_083DFEC4->unkBC9C[var2];
+            var2++;
+        }
+        else
+        {
+            gUnknown_083DFEC4->unkCDCC[var1][i] = NULL;
+        }
+    }
 
-	return FALSE;
+    if (++gUnknown_083DFEC4->unkBC9A >= 16)
+        return FALSE;
+
+    gUnknown_083DFEC4->unkBC9B = var2;
+    return TRUE;
 }
-#else
-__attribute__((naked))
-bool8 sub_80EFC64(void)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r9\n\
-    mov r6, r8\n\
-    push {r6,r7}\n\
-    sub sp, 0x8\n\
-    ldr r4, _080EFCD0 @ =gUnknown_083DFEC4\n\
-    ldr r2, [r4]\n\
-    ldr r0, _080EFCD4 @ =0x0000bc9a\n\
-    adds r1, r2, r0\n\
-    ldrb r0, [r1]\n\
-    cmp r0, 0xF\n\
-    bhi _080EFD2C\n\
-    ldrb r1, [r1]\n\
-    mov r8, r1\n\
-    ldr r1, _080EFCD8 @ =0x0000bc9b\n\
-    adds r0, r2, r1\n\
-    ldrb r7, [r0]\n\
-    movs r2, 0\n\
-    ldr r0, _080EFCDC @ =gPokenavCityMaps\n\
-    mov r9, r0\n\
-    adds r3, r4, 0\n\
-_080EFC8E:\n\
-    lsls r0, r2, 2\n\
-    mov r4, r8\n\
-    lsls r1, r4, 3\n\
-    adds r6, r0, r1\n\
-    mov r1, r9\n\
-    adds r0, r6, r1\n\
-    ldr r1, [r0]\n\
-    cmp r1, 0\n\
-    beq _080EFCE8\n\
-    movs r0, 0xC8\n\
-    adds r5, r7, 0\n\
-    muls r5, r0\n\
-    ldr r4, _080EFCE0 @ =0x0000bc9c\n\
-    adds r5, r4\n\
-    ldr r4, [r3]\n\
-    adds r5, r4, r5\n\
-    adds r0, r1, 0\n\
-    adds r1, r5, 0\n\
-    str r2, [sp]\n\
-    str r3, [sp, 0x4]\n\
-    bl LZ77UnCompVram\n\
-    ldr r0, _080EFCE4 @ =0x0000cdcc\n\
-    adds r4, r0\n\
-    adds r4, r6\n\
-    str r5, [r4]\n\
-    adds r0, r7, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r7, r0, 16\n\
-    ldr r2, [sp]\n\
-    ldr r3, [sp, 0x4]\n\
-    b _080EFCF2\n\
-    .align 2, 0\n\
-_080EFCD0: .4byte gUnknown_083DFEC4\n\
-_080EFCD4: .4byte 0x0000bc9a\n\
-_080EFCD8: .4byte 0x0000bc9b\n\
-_080EFCDC: .4byte gPokenavCityMaps\n\
-_080EFCE0: .4byte 0x0000bc9c\n\
-_080EFCE4: .4byte 0x0000cdcc\n\
-_080EFCE8:\n\
-    ldr r0, [r3]\n\
-    ldr r4, _080EFD1C @ =0x0000cdcc\n\
-    adds r0, r4\n\
-    adds r0, r6\n\
-    str r1, [r0]\n\
-_080EFCF2:\n\
-    adds r0, r2, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r2, r0, 16\n\
-    cmp r2, 0x1\n\
-    bls _080EFC8E\n\
-    ldr r0, _080EFD20 @ =gUnknown_083DFEC4\n\
-    ldr r2, [r0]\n\
-    ldr r0, _080EFD24 @ =0x0000bc9a\n\
-    adds r1, r2, r0\n\
-    ldrb r0, [r1]\n\
-    adds r0, 0x1\n\
-    strb r0, [r1]\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0xF\n\
-    bhi _080EFD2C\n\
-    ldr r1, _080EFD28 @ =0x0000bc9b\n\
-    adds r0, r2, r1\n\
-    strb r7, [r0]\n\
-    movs r0, 0x1\n\
-    b _080EFD2E\n\
-    .align 2, 0\n\
-_080EFD1C: .4byte 0x0000cdcc\n\
-_080EFD20: .4byte gUnknown_083DFEC4\n\
-_080EFD24: .4byte 0x0000bc9a\n\
-_080EFD28: .4byte 0x0000bc9b\n\
-_080EFD2C:\n\
-    movs r0, 0\n\
-_080EFD2E:\n\
-    add sp, 0x8\n\
-    pop {r3,r4}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    pop {r4-r7}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .syntax divided\n");
-}
-#endif // NONMATCHING
 
 void sub_80EFD3C(void)
 {
@@ -4335,7 +3792,7 @@ void sub_80EFE7C(void)
 	case 2:
 		sub_80EFDE4(1);
 		gUnknown_083DFEC4->unk769D = 1;
-		break;	
+		break;
 	}
 }
 

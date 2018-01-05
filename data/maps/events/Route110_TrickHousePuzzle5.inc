@@ -11,20 +11,20 @@ Route110_TrickHousePuzzle5_MapWarps:: @ 8392914
 	warp_def 13, 1, 3, 0, MAP_ROUTE110_TRICK_HOUSE_END
 
 Route110_TrickHousePuzzle5_MapCoordEvents:: @ 839292C
-	coord_event 8, 19, 3, 0, 0x4001, 0, 0, Route110_TrickHousePuzzle5_EventScript_162897
-	coord_event 7, 19, 3, 0, 0x4001, 0, 0, Route110_TrickHousePuzzle5_EventScript_1628A3
-	coord_event 6, 19, 3, 0, 0x4001, 0, 0, Route110_TrickHousePuzzle5_EventScript_1628AF
-	coord_event 5, 19, 3, 0, 0x4001, 0, 0, Route110_TrickHousePuzzle5_EventScript_1628BB
-	coord_event 6, 14, 3, 0, 0x4002, 0, 0, Route110_TrickHousePuzzle5_EventScript_1628C7
-	coord_event 7, 14, 3, 0, 0x4002, 0, 0, Route110_TrickHousePuzzle5_EventScript_1628D3
-	coord_event 11, 10, 3, 0, 0x4003, 0, 0, Route110_TrickHousePuzzle5_EventScript_1628DF
-	coord_event 10, 10, 3, 0, 0x4003, 0, 0, Route110_TrickHousePuzzle5_EventScript_1628EB
-	coord_event 9, 10, 3, 0, 0x4003, 0, 0, Route110_TrickHousePuzzle5_EventScript_1628F7
-	coord_event 11, 5, 3, 0, 0x4004, 0, 0, Route110_TrickHousePuzzle5_EventScript_162903
-	coord_event 10, 5, 3, 0, 0x4004, 0, 0, Route110_TrickHousePuzzle5_EventScript_16290F
-	coord_event 2, 6, 3, 0, 0x4005, 0, 0, Route110_TrickHousePuzzle5_EventScript_16291B
-	coord_event 3, 6, 3, 0, 0x4005, 0, 0, Route110_TrickHousePuzzle5_EventScript_162927
-	coord_event 4, 6, 3, 0, 0x4005, 0, 0, Route110_TrickHousePuzzle5_EventScript_162933
+	coord_event 8, 19, 3, 0, VAR_TEMP_1, 0, 0, Route110_TrickHousePuzzle5_EventScript_162897
+	coord_event 7, 19, 3, 0, VAR_TEMP_1, 0, 0, Route110_TrickHousePuzzle5_EventScript_1628A3
+	coord_event 6, 19, 3, 0, VAR_TEMP_1, 0, 0, Route110_TrickHousePuzzle5_EventScript_1628AF
+	coord_event 5, 19, 3, 0, VAR_TEMP_1, 0, 0, Route110_TrickHousePuzzle5_EventScript_1628BB
+	coord_event 6, 14, 3, 0, VAR_TEMP_2, 0, 0, Route110_TrickHousePuzzle5_EventScript_1628C7
+	coord_event 7, 14, 3, 0, VAR_TEMP_2, 0, 0, Route110_TrickHousePuzzle5_EventScript_1628D3
+	coord_event 11, 10, 3, 0, VAR_TEMP_3, 0, 0, Route110_TrickHousePuzzle5_EventScript_1628DF
+	coord_event 10, 10, 3, 0, VAR_TEMP_3, 0, 0, Route110_TrickHousePuzzle5_EventScript_1628EB
+	coord_event 9, 10, 3, 0, VAR_TEMP_3, 0, 0, Route110_TrickHousePuzzle5_EventScript_1628F7
+	coord_event 11, 5, 3, 0, VAR_TEMP_4, 0, 0, Route110_TrickHousePuzzle5_EventScript_162903
+	coord_event 10, 5, 3, 0, VAR_TEMP_4, 0, 0, Route110_TrickHousePuzzle5_EventScript_16290F
+	coord_event 2, 6, 3, 0, VAR_TEMP_5, 0, 0, Route110_TrickHousePuzzle5_EventScript_16291B
+	coord_event 3, 6, 3, 0, VAR_TEMP_5, 0, 0, Route110_TrickHousePuzzle5_EventScript_162927
+	coord_event 4, 6, 3, 0, VAR_TEMP_5, 0, 0, Route110_TrickHousePuzzle5_EventScript_162933
 
 Route110_TrickHousePuzzle5_MapBGEvents:: @ 8392A0C
 	bg_event 2, 9, 0, 0, 0, Route110_TrickHousePuzzle5_EventScript_1627D5

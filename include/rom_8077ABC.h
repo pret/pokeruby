@@ -4,21 +4,13 @@
 #include "sprite.h"
 #include "task.h"
 
-enum
-{
-    ANIM_BANK_ATK,
-    ANIM_BANK_DEF,
-    ANIM_BANK_ATK_PARTNER,
-    ANIM_BANK_DEF_PARTNER
-};
-
 struct Struct_sub_8078914 {
     u8 *field_0;
     u8 *field_4;
     u8 field_8;
 };
 
-u8 sub_8077ABC(u8, u8);
+u8 GetBankPosition(u8, u8);
 u8 sub_8077E44(u8 slot, u16 species, u8 a3);
 u8 GetAnimBankSpriteId(u8 side);
 void StoreSpriteCallbackInData(struct Sprite *sprite, void(*callback)(struct Sprite *));
@@ -36,8 +28,7 @@ u8 GetBankIdentity(u8 slot);
 u8 GetBankByPlayerAI(u8);
 u8 GetBankByPlayerAI(u8);
 u8 GetBankByPlayerAI(u8 state);
-u8 AnimBankSpriteExists(u8);
-bool8 AnimBankSpriteExists(u8);
+bool8 IsBankSpritePresent(u8);
 bool8 IsDoubleBattle();
 u8 IsDoubleBattle(void);
 bool8 IsDoubleBattle(void);
@@ -55,6 +46,7 @@ void sub_8078E70(u8 sprite, u8);
 void sub_8078F40(u8 sprite);
 void sub_8078F9C(u8 sprite);
 void sub_8079518(struct Sprite *sprite);
+void sub_8079534(struct Sprite *sprite);
 void sub_80796F8(u8 task);
 void sub_80797EC(struct Task *task);
 void sub_8079814(u8 taskId);
@@ -62,6 +54,9 @@ void sub_8079A64(u8 sprite);
 u16 sub_8079B10(u8 sprite);
 void sub_8079BF4(s16 *bottom, s16 *top, const void *ptr);
 void *sub_8079BFC(s16 bottom, s16 top);
+// u8 a2 := u8 sprite
+void sub_8079C08(struct Task *task, u8 a2, s16 a3, s16 a4, s16 a5, s16 a6, u16 a7);
+u8 sub_8079C74(struct Task *task);
 void sub_8079E24();
 u8 sub_8079E90(u8 slot);
 u8 GetBankIdentity_permutated(u8 slot);
@@ -86,6 +81,7 @@ void sub_80785E4(struct Sprite *sprite);
 void sub_8078278(struct Sprite *sprite);
 void sub_8078C00(struct Sprite *sprite);
 void sub_8078114(struct Sprite *sprite);
+void sub_8078174(struct Sprite *sprite);
 void sub_80793C4(struct Sprite *sprite);
 void sub_807A3FC(u8 slot, u8 a2, s16 *a3, s16 *a4);
 u8 sub_8079ED4(u8 slot);

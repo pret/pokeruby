@@ -1060,7 +1060,7 @@ void CreateSecretBaseEnemyParty(struct SecretBaseRecord *secretBaseRecord)
     s32 i, j;
 
     ZeroEnemyPartyMons();
-    memcpy(eSecretBaseRecord, secretBaseRecord, sizeof(*secretBaseRecord));
+    *eSecretBaseRecord = *secretBaseRecord;
 
     for (i = 0; i < 6; i++)
     {

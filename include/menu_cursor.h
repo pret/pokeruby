@@ -21,8 +21,4 @@ void sub_814AD7C(u8 a1, u8 a2);
 void sub_814ADC8(void);
 void sub_814ADF4(u8 a1);
 
-#if GERMAN
-extern const u32 gUnknown_0842F798[2];
-#endif
-
 #endif // GUARD_MENU_CURSOR_H

@@ -10,7 +10,7 @@ LittlerootTown_ProfessorBirchsLab_MapScript1_152C92:: @ 8152C92
 	end
 
 LittlerootTown_ProfessorBirchsLab_MapScript2_152C9D:: @ 8152C9D
-	map_script_2 0x4084, 2, LittlerootTown_ProfessorBirchsLab_EventScript_152CA7
+	map_script_2 VAR_BIRCH_LAB_STATE, 2, LittlerootTown_ProfessorBirchsLab_EventScript_152CA7
 	.2byte 0
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152CA7:: @ 8152CA7
@@ -18,8 +18,8 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152CA7:: @ 8152CA7
 	end
 
 LittlerootTown_ProfessorBirchsLab_MapScript2_152CAC:: @ 8152CAC
-	map_script_2 0x4084, 2, LittlerootTown_ProfessorBirchsLab_EventScript_152CBE
-	map_script_2 0x4084, 4, LittlerootTown_ProfessorBirchsLab_EventScript_152D4A
+	map_script_2 VAR_BIRCH_LAB_STATE, 2, LittlerootTown_ProfessorBirchsLab_EventScript_152CBE
+	map_script_2 VAR_BIRCH_LAB_STATE, 4, LittlerootTown_ProfessorBirchsLab_EventScript_152D4A
 	.2byte 0
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152CBE:: @ 8152CBE
@@ -27,41 +27,41 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152CBE:: @ 8152CBE
 	bufferleadmonspeciesname 0
 	message LittlerootTown_ProfessorBirchsLab_Text_173D94
 	waitmessage
-	playfanfare 370
+	playfanfare BGM_FANFA4
 	waitfanfare
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_173EF8, 5
-	compare RESULT, 1
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_173EF8, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152CEA
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152CFA
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152CEA:: @ 8152CEA
-	setvar 0x8004, 0
+	setvar VAR_SPECIAL_4, 0
 	call LittlerootTown_ProfessorBirchsLab_EventScript_1A0678
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_152CFA
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152CFA:: @ 8152CFA
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_173F3D, 5
-	compare RESULT, 1
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_173F3D, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152D19
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152D2B
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152D19:: @ 8152D19
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_174015, 4
 	clearflag FLAG_HIDE_BOY_ROUTE101
-	setvar 0x4084, 3
+	setvar VAR_BIRCH_LAB_STATE, 3
 	releaseall
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152D2B:: @ 8152D2B
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_174075, 5
-	compare RESULT, 1
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_174075, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152D19
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152D2B
 	end
 
@@ -85,7 +85,7 @@ LittlerootTown_ProfessorBirchsLab_Movement_152D5B:: @ 8152D5B
 LittlerootTown_ProfessorBirchsLab_EventScript_152D63:: @ 8152D63
 	lock
 	faceplayer
-	compare 0x4084, 3
+	compare VAR_BIRCH_LAB_STATE, 3
 	goto_if 4, LittlerootTown_ProfessorBirchsLab_EventScript_152D90
 	checkflag FLAG_BIRCH_AIDE_MET
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152D86
@@ -109,7 +109,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152D9A:: @ 8152D9A
 	faceplayer
 	checkflag FLAG_UNKNOWN_BIRCH_380
 	goto_if 0, LittlerootTown_ProfessorBirchsLab_EventScript_1A037F
-	compare 0x4084, 5
+	compare VAR_BIRCH_LAB_STATE, 5
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_152E7B
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1740B4, 4
 	release
@@ -128,11 +128,11 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152DBA:: @ 8152DBA
 	call_if 1, LittlerootTown_ProfessorBirchsLab_EventScript_152E13
 	compare RESULT, 1
 	call_if 1, LittlerootTown_ProfessorBirchsLab_EventScript_152E40
-	setvar 0x4084, 5
+	setvar VAR_BIRCH_LAB_STATE, 5
 	setflag FLAG_ADVENTURE_STARTED
-	setvar 0x4051, 1
-	setvar 0x408d, 4
-	setvar 0x4050, 3
+	setvar VAR_ROUTE102_ACCESSIBLE, 1
+	setvar VAR_LITTLEROOT_RIVAL_STATE, 4
+	setvar VAR_LITTLEROOT_STATE, 3
 	releaseall
 	end
 
@@ -155,7 +155,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152E40:: @ 8152E40
 	return
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152E6D:: @ 8152E6D
-	playfanfare 370
+	playfanfare BGM_FANFA4
 	message LittlerootTown_ProfessorBirchsLab_Text_17422F
 	waitfanfare
 	waitmessage

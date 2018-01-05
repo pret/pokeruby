@@ -4,10 +4,10 @@
 struct RegionMap
 {
     u8 mapSectionName[20];
-    u16 mapSectionId;
-    u8 unk16;
-    u8 everGrandeCityArea;
-    u8 (*inputCallback)(void);
+    /*0x14*/ u16 mapSectionId;
+    /*0x16*/ u8 unk16;
+    /*0x17*/ u8 everGrandeCityArea;
+    /*0x18*/ u8 (*inputCallback)(void);
     struct Sprite *cursorSprite;
     struct Sprite *playerIconSprite;
     s32 bg2x;

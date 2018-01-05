@@ -13,5 +13,5 @@ void sub_80D517C(struct Sprite *sprite)
     sprite->data[2] = 140;
     sprite->data[4] = 80;
     sprite->callback = sub_8078B34;
-    StoreSpriteCallbackInData(sprite, move_anim_8072740);
+    StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }

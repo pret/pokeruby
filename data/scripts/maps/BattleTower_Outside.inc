@@ -4,7 +4,7 @@ BattleTower_Outside_MapScripts:: @ 8160156
 
 BattleTower_Outside_MapScript1_16015C:: @ 816015C
 	setflag FLAG_LANDMARK_BATTLE_TOWER
-	setvar 0x40bc, 0
+	setvar VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 0
 	setflag FLAG_HIDE_REPORTER_BATTLE_TOWER
 	end
 
@@ -35,8 +35,8 @@ BattleTower_Outside_EventScript_1601C6:: @ 81601C6
 	end
 
 BattleTower_Outside_EventScript_1601D0:: @ 81601D0
-	msgbox BattleTower_Outside_Text_199DF2, 5
-	compare RESULT, 0
+	msgbox BattleTower_Outside_Text_199DF2, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq BattleTower_Outside_EventScript_160226
 	msgbox BattleTower_Outside_Text_199E4B, 4
 	call BattleTower_Outside_EventScript_160232
@@ -46,8 +46,8 @@ BattleTower_Outside_EventScript_1601D0:: @ 81601D0
 	end
 
 BattleTower_Outside_EventScript_1601FB:: @ 81601FB
-	msgbox BattleTower_Outside_Text_199E0E, 5
-	compare RESULT, 0
+	msgbox BattleTower_Outside_Text_199E0E, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq BattleTower_Outside_EventScript_160226
 	msgbox BattleTower_Outside_Text_199E4B, 4
 	call BattleTower_Outside_EventScript_160232
@@ -68,7 +68,7 @@ BattleTower_Outside_EventScript_160232:: @ 8160232
 	waitmovement 0
 	delay 30
 	hideobjectat 5, MAP_BATTLE_TOWER_OUTSIDE
-	setvar 0x8004, 4
+	setvar VAR_SPECIAL_4, 4
 	call BattleTower_Outside_EventScript_1A047C
 	return
 

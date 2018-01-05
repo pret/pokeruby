@@ -4,8 +4,8 @@
 #include "battle_anim.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 // copy_orb
 // Used in Mimic.
@@ -16,14 +16,14 @@ void sub_80CB4CC(struct Sprite* sprite)
     {
     case 0:
     {
-        if (GetBankSide(gBattleAnimBankTarget) == 0)
+        if (GetBankSide(gAnimBankTarget) == 0)
         {
             s16 a = gBattleAnimArgs[0];
             gBattleAnimArgs[0] = -a;
         }
 
-        sprite->pos1.x = sub_8077ABC(gBattleAnimBankTarget, 0) + gBattleAnimArgs[0];
-        sprite->pos1.y = sub_8077ABC(gBattleAnimBankTarget, 1) + gBattleAnimArgs[1];
+        sprite->pos1.x = GetBankPosition(gAnimBankTarget, 0) + gBattleAnimArgs[0];
+        sprite->pos1.y = GetBankPosition(gAnimBankTarget, 1) + gBattleAnimArgs[1];
         sprite->invisible = 1;
         sprite->data[0]++;
         break;
@@ -35,10 +35,10 @@ void sub_80CB4CC(struct Sprite* sprite)
         {
             ChangeSpriteAffineAnim(sprite, 1);
             sprite->data[0] = 25;
-            sprite->data[2] = sub_8077ABC(gBattleAnimBankAttacker, 2);
-            sprite->data[4] = sub_8077ABC(gBattleAnimBankAttacker, 3);
+            sprite->data[2] = GetBankPosition(gAnimBankAttacker, 2);
+            sprite->data[4] = GetBankPosition(gAnimBankAttacker, 3);
             sprite->callback = sub_8078CC0;
-            StoreSpriteCallbackInData(sprite, move_anim_8072740);
+            StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
             break;
         }
     }

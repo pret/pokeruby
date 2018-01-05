@@ -1,6 +1,7 @@
 #include "global.h"
 #include "naming_screen.h"
 #include "data2.h"
+#include "graphics.h"
 #include "field_effect.h"
 #include "field_map_obj.h"
 #include "field_player_avatar.h"
@@ -29,16 +30,11 @@ extern u16 gKeyRepeatStartDelay;
 
 extern u8 CreateMonIcon(u16 species, void (*callback)(struct Sprite *), s16 x, s16 y, u8 subpriority, u32 personality);
 
-const u32 gSpriteImage_83CE094[] = INCBIN_U32("graphics/naming_screen/pc_icon/0.4bpp");
-const u32 gSpriteImage_83CE154[] = INCBIN_U32("graphics/naming_screen/pc_icon/1.4bpp");
+const u8 gSpriteImage_83CE094[] = INCBIN_U8("graphics/naming_screen/pc_icon/0.4bpp");
+const u8 gSpriteImage_83CE154[] = INCBIN_U8("graphics/naming_screen/pc_icon/1.4bpp");
 
-//Some unused pointer, perhaps.
-asm(".section .rodata\n\
-@ XXX: what is this?\n\
-    .align 2\n\
-    .4byte 0x2000000\n");
+struct NamingScreenData *const namingScreenDataPtr = &namingScreenData;
 
-extern u16 *const gUnknown_083CE28C[];
 extern const struct SubspriteTable gSubspriteTables_83CE558[];
 extern const struct SubspriteTable gSubspriteTables_83CE560[];
 extern const struct SubspriteTable gSubspriteTables_83CE578[];
@@ -55,7 +51,6 @@ extern const struct SpriteTemplate gSpriteTemplate_83CE688;
 extern const struct SpriteSheet gUnknown_083CE6A0[];
 extern const struct SpritePalette gUnknown_083CE708[];
 extern const u8 gNamingScreenMenu_Gfx[];
-extern const u16 gNamingScreenPalettes[];
 extern const u16 gUnknown_083CE748[];
 extern const u16 gUnknown_083CEBF8[];
 extern const u16 gUnknown_083CF0A8[];
@@ -198,12 +193,12 @@ static void VBlankCB_NamingScreen(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
-    REG_BG1VOFS = namingScreenData.bg1vOffset;
-    REG_BG2VOFS = namingScreenData.bg2vOffset;
+    REG_BG1VOFS = namingScreenDataPtr->bg1vOffset;
+    REG_BG2VOFS = namingScreenDataPtr->bg2vOffset;
     REG_BG1CNT &= 0xFFFC;
-    REG_BG1CNT |= namingScreenData.unk8;
+    REG_BG1CNT |= namingScreenDataPtr->unk8;
     REG_BG2CNT &= 0xFFFC;
-    REG_BG2CNT |= namingScreenData.unkA;
+    REG_BG2CNT |= namingScreenDataPtr->unkA;
 }
 
 static void StoreNamingScreenParameters(u8 templateNum, u8 *destBuffer, u16 c, u16 d, u32 e, MainCallback returnCallback)
@@ -228,12 +223,12 @@ static void GetNamingScreenParameters(void)
 
     taskId = FindTaskIdByFunc(Task_DoNothing);
     task = &gTasks[taskId];
-    namingScreenData.templateNum = task->data[0];
-    namingScreenData.unk3E = task->data[1];
-    namingScreenData.unk40 = task->data[2];
-    namingScreenData.unk42 = (task->data[3] << 16) | (u16)task->data[4];
-    LoadWordFromTwoHalfwords(&task->data[5], (u32 *)&namingScreenData.destBuffer);
-    LoadWordFromTwoHalfwords(&task->data[7], (u32 *)&namingScreenData.returnCallback);
+    namingScreenDataPtr->templateNum = task->data[0];
+    namingScreenDataPtr->unk3E = task->data[1];
+    namingScreenDataPtr->unk40 = task->data[2];
+    namingScreenDataPtr->unk42 = (task->data[3] << 16) | (u16)task->data[4];
+    LoadWordFromTwoHalfwords(&task->data[5], (u32 *)&namingScreenDataPtr->destBuffer);
+    LoadWordFromTwoHalfwords(&task->data[7], (u32 *)&namingScreenDataPtr->returnCallback);
     DestroyTask(taskId);
 }
 
@@ -311,20 +306,20 @@ static const struct NamingScreenTemplate *const sNamingScreenTemplates[];  //for
 static void NamingScreen_Init(void)
 {
     GetNamingScreenParameters();
-    namingScreenData.state = 0;
-    namingScreenData.bg1vOffset = 0;
-    namingScreenData.bg2vOffset = 0;
-    namingScreenData.unk8 = 1;
-    namingScreenData.unkA = 2;
-    namingScreenData.unkC = 0;
-    namingScreenData.unkD = 1;
-    namingScreenData.template = sNamingScreenTemplates[namingScreenData.templateNum];
-    namingScreenData.currentPage = namingScreenData.template->unk4;
-    namingScreenData.unk2 = 14 - namingScreenData.template->maxChars / 2;
-    namingScreenData.unk3C = gKeyRepeatStartDelay;
-    memset(namingScreenData.textBuffer, 0xFF, sizeof(namingScreenData.textBuffer));
-    if (namingScreenData.template->unk0 != 0)
-        StringCopy(namingScreenData.textBuffer, namingScreenData.destBuffer);
+    namingScreenDataPtr->state = 0;
+    namingScreenDataPtr->bg1vOffset = 0;
+    namingScreenDataPtr->bg2vOffset = 0;
+    namingScreenDataPtr->unk8 = 1;
+    namingScreenDataPtr->unkA = 2;
+    namingScreenDataPtr->unkC = 0;
+    namingScreenDataPtr->unkD = 1;
+    namingScreenDataPtr->template = sNamingScreenTemplates[namingScreenDataPtr->templateNum];
+    namingScreenDataPtr->currentPage = namingScreenDataPtr->template->unk4;
+    namingScreenDataPtr->unk2 = 14 - namingScreenDataPtr->template->maxChars / 2;
+    namingScreenDataPtr->unk3C = gKeyRepeatStartDelay;
+    memset(namingScreenDataPtr->textBuffer, 0xFF, sizeof(namingScreenDataPtr->textBuffer));
+    if (namingScreenDataPtr->template->unk0 != 0)
+        StringCopy(namingScreenDataPtr->textBuffer, namingScreenDataPtr->destBuffer);
     gKeyRepeatStartDelay = 16;
 }
 
@@ -408,14 +403,14 @@ static void sub_80B5E50(void)
 
 static void Task_NamingScreenMain(u8 taskId)
 {
-    while (sMainStateFuncs[namingScreenData.state](&gTasks[taskId]) != 0)
+    while (sMainStateFuncs[namingScreenDataPtr->state](&gTasks[taskId]) != 0)
         ;
 }
 
 static bool8 MainState_BeginFadeIn(struct Task *task)
 {
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
-    namingScreenData.state++;
+    namingScreenDataPtr->state++;
     return 0;
 }
 
@@ -425,7 +420,7 @@ static bool8 MainState_WaitFadeIn(struct Task *task)
     {
         SetInputState(INPUT_STATE_ENABLED);
         sub_80B68D8(1);
-        namingScreenData.state++;
+        namingScreenDataPtr->state++;
     }
     return FALSE;
 }
@@ -441,7 +436,7 @@ static bool8 MainState_MoveToOKButton(struct Task *task)
     {
         SetInputState(INPUT_STATE_ENABLED);
         MoveCursorToOKButton();
-        namingScreenData.state = MAIN_STATE_HANDLE_INPUT;
+        namingScreenDataPtr->state = MAIN_STATE_HANDLE_INPUT;
     }
     return FALSE;
 }
@@ -454,7 +449,7 @@ static bool8 MainState_StartPageSwap(struct Task *task)
     sub_80B6888(1);
     sub_80B6460(0, 0, 1);
     PlaySE(SE_WIN_OPEN);
-    namingScreenData.state = MAIN_STATE_WAIT_PAGE_SWAP;
+    namingScreenDataPtr->state = MAIN_STATE_WAIT_PAGE_SWAP;
     return FALSE;
 }
 
@@ -465,18 +460,18 @@ static bool8 MainState_WaitPageSwap(struct Task *task)
 
     if (IsPageSwapAnimNotInProgress())
     {
-        namingScreenData.state = MAIN_STATE_HANDLE_INPUT;
-        namingScreenData.currentPage++;
-        namingScreenData.currentPage %= 3;
+        namingScreenDataPtr->state = MAIN_STATE_HANDLE_INPUT;
+        namingScreenDataPtr->currentPage++;
+        namingScreenDataPtr->currentPage %= 3;
         sub_80B7614();
         sub_80B77F8();
         SetInputState(INPUT_STATE_ENABLED);
         GetCursorPos(&cursorX, &cursorY);
 #if ENGLISH
-        if (namingScreenData.currentPage == PAGE_OTHERS && (cursorX == 6 || cursorX == 7))
+        if (namingScreenDataPtr->currentPage == PAGE_OTHERS && (cursorX == 6 || cursorX == 7))
             cursorX = 5;
 #elif GERMAN
-        if (namingScreenData.currentPage == PAGE_OTHERS && (cursorX == 7 || cursorX == 8))
+        if (namingScreenDataPtr->currentPage == PAGE_OTHERS && (cursorX == 7 || cursorX == 8))
             cursorX = 6;
 #endif
         SetCursorPos(cursorX, cursorY);
@@ -491,17 +486,17 @@ static bool8 MainState_6(struct Task *task)
     SetInputState(INPUT_STATE_DISABLED);
     sub_80B68D8(0);
     sub_80B6460(3, 0, 1);
-    gKeyRepeatStartDelay = namingScreenData.unk3C;
-    if (namingScreenData.templateNum == NAMING_SCREEN_TEMPLATE_MON_NAME
+    gKeyRepeatStartDelay = namingScreenDataPtr->unk3C;
+    if (namingScreenDataPtr->templateNum == NAMING_SCREEN_TEMPLATE_MON_NAME
      && CalculatePlayerPartyCount() >= 6)
     {
         DisplaySentToPCMessage();
-        namingScreenData.state = MAIN_STATE_UPDATE_SENT_TO_PC_MESSAGE;
+        namingScreenDataPtr->state = MAIN_STATE_UPDATE_SENT_TO_PC_MESSAGE;
         return FALSE;
     }
     else
     {
-        namingScreenData.state = MAIN_STATE_BEGIN_FADE_OUT;
+        namingScreenDataPtr->state = MAIN_STATE_BEGIN_FADE_OUT;
         return TRUE;  //Exit the naming screen
     }
 }
@@ -509,21 +504,21 @@ static bool8 MainState_6(struct Task *task)
 static bool8 MainState_UpdateSentToPCMessage(struct Task *task)
 {
     if (MenuUpdateWindowText())
-        namingScreenData.state++;
+        namingScreenDataPtr->state++;
     return FALSE;
 }
 
 static bool8 MainState_BeginFadeInOut(struct Task *task)
 {
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
-    namingScreenData.state++;
+    namingScreenDataPtr->state++;
     return FALSE;
 }
 
 static bool8 MainState_WaitFadeOutAndExit(struct Task *task)
 {
     if (!gPaletteFade.active)
-        SetMainCallback2(namingScreenData.returnCallback);
+        SetMainCallback2(namingScreenDataPtr->returnCallback);
     return FALSE;
 }
 
@@ -584,7 +579,7 @@ static bool8 KeyboardKeyHandler_Character(u8 event)
         if (var)
         {
             SetInputState(INPUT_STATE_DISABLED);
-            namingScreenData.state = MAIN_STATE_MOVE_TO_OK_BUTTON;
+            namingScreenDataPtr->state = MAIN_STATE_MOVE_TO_OK_BUTTON;
         }
     }
     return FALSE;
@@ -613,7 +608,7 @@ static bool8 KeyboardKeyHandler_OK(u8 event)
     if (event == KBEVENT_PRESSED_A)
     {
         PlaySE(SE_SELECT);
-        namingScreenData.state = MAIN_STATE_6;
+        namingScreenDataPtr->state = MAIN_STATE_6;
         return TRUE;
     }
     else
@@ -622,7 +617,7 @@ static bool8 KeyboardKeyHandler_OK(u8 event)
 
 static bool8 sub_80B61C8(void)
 {
-    namingScreenData.state = MAIN_STATE_START_PAGE_SWAP;
+    namingScreenDataPtr->state = MAIN_STATE_START_PAGE_SWAP;
     return TRUE;
 }
 
@@ -764,9 +759,9 @@ static void HandleDpadMovement(struct Task *task)
     {
         //The "others" page only has 5 columns
 #if ENGLISH
-        if (namingScreenData.currentPage == PAGE_OTHERS && (cursorX == 6 || cursorX == 7))
+        if (namingScreenDataPtr->currentPage == PAGE_OTHERS && (cursorX == 6 || cursorX == 7))
 #elif GERMAN
-        if (namingScreenData.currentPage == PAGE_OTHERS && (cursorX == 6 || cursorX == 7 || cursorX == 8))
+        if (namingScreenDataPtr->currentPage == PAGE_OTHERS && (cursorX == 6 || cursorX == 7 || cursorX == 8))
 #endif
         {
             if (sDpadDeltaX[dpadDir] > 0)
@@ -948,8 +943,8 @@ static void Task_HandlePageSwapAnim(u8 taskId)
 
 static bool8 PageSwapAnimState_Init(struct Task *task)
 {
-    namingScreenData.bg1vOffset = 0;
-    namingScreenData.bg2vOffset = 0;
+    namingScreenDataPtr->bg1vOffset = 0;
+    namingScreenDataPtr->bg2vOffset = 0;
     task->tState++;
     return 0;
 }
@@ -958,19 +953,19 @@ static bool8 PageSwapAnimState_1(struct Task *task)
 {
     u16 *const arr[] =
     {
-        &namingScreenData.bg2vOffset,
-        &namingScreenData.bg1vOffset
+        &namingScreenDataPtr->bg2vOffset,
+        &namingScreenDataPtr->bg1vOffset
     };
 
     task->tFrameCount += 4;
-    *arr[namingScreenData.unkC] = Sin(task->tFrameCount, 40);
-    *arr[namingScreenData.unkD] = Sin((task->tFrameCount + 128) & 0xFF, 40);
+    *arr[namingScreenDataPtr->unkC] = Sin(task->tFrameCount, 40);
+    *arr[namingScreenDataPtr->unkD] = Sin((task->tFrameCount + 128) & 0xFF, 40);
     if (task->tFrameCount >= 64)
     {
-        u8 temp = namingScreenData.unk8;  //Why u8 and not u16?
+        u8 temp = namingScreenDataPtr->unk8;  //Why u8 and not u16?
 
-        namingScreenData.unk8 = namingScreenData.unkA;
-        namingScreenData.unkA = temp;
+        namingScreenDataPtr->unk8 = namingScreenDataPtr->unkA;
+        namingScreenDataPtr->unkA = temp;
         task->tState++;
     }
     return 0;
@@ -978,17 +973,17 @@ static bool8 PageSwapAnimState_1(struct Task *task)
 
 static bool8 PageSwapAnimState_2(struct Task *task)
 {
-    u16 *const arr[] = {&namingScreenData.bg2vOffset, &namingScreenData.bg1vOffset};
+    u16 *const arr[] = {&namingScreenDataPtr->bg2vOffset, &namingScreenDataPtr->bg1vOffset};
 
     task->tFrameCount += 4;
-    *arr[namingScreenData.unkC] = Sin(task->tFrameCount, 40);
-    *arr[namingScreenData.unkD] = Sin((task->tFrameCount + 128) & 0xFF, 40);
+    *arr[namingScreenDataPtr->unkC] = Sin(task->tFrameCount, 40);
+    *arr[namingScreenDataPtr->unkD] = Sin((task->tFrameCount + 128) & 0xFF, 40);
     if (task->tFrameCount >= 128)
     {
-        u8 temp = namingScreenData.unkC;
+        u8 temp = namingScreenDataPtr->unkC;
 
-        namingScreenData.unkC = namingScreenData.unkD;
-        namingScreenData.unkD = temp;
+        namingScreenDataPtr->unkC = namingScreenDataPtr->unkD;
+        namingScreenDataPtr->unkD = temp;
         task->tState++;
     }
     return 0;
@@ -1009,11 +1004,11 @@ static bool8 PageSwapAnimState_Done(struct Task *task)
 
 static void CursorInit(void)
 {
-    namingScreenData.cursorSpriteId = CreateSprite(&gSpriteTemplate_83CE640, 0, 0, 0);
-    gSprites[namingScreenData.cursorSpriteId].oam.priority = 1;
-    gSprites[namingScreenData.cursorSpriteId].oam.objMode = 1;
-    gSprites[namingScreenData.cursorSpriteId].data[6] = 1;
-    gSprites[namingScreenData.cursorSpriteId].data[6] = 2;
+    namingScreenDataPtr->cursorSpriteId = CreateSprite(&gSpriteTemplate_83CE640, 0, 0, 0);
+    gSprites[namingScreenDataPtr->cursorSpriteId].oam.priority = 1;
+    gSprites[namingScreenDataPtr->cursorSpriteId].oam.objMode = 1;
+    gSprites[namingScreenDataPtr->cursorSpriteId].data[6] = 1;
+    gSprites[namingScreenDataPtr->cursorSpriteId].data[6] = 2;
     SetCursorPos(0, 0);
 }
 
@@ -1031,12 +1026,12 @@ static const u8 sKeyboardSymbolPositions[][COLUMN_COUNT] = {
 
 static u8 CursorColToKeyboardCol(s16 x)
 {
-    return sKeyboardSymbolPositions[namingScreenData.currentPage][x];
+    return sKeyboardSymbolPositions[namingScreenDataPtr->currentPage][x];
 }
 
 static void SetCursorPos(s16 x, s16 y)
 {
-    struct Sprite *cursorSprite = &gSprites[namingScreenData.cursorSpriteId];
+    struct Sprite *cursorSprite = &gSprites[namingScreenDataPtr->cursorSpriteId];
 
     cursorSprite->pos1.x = CursorColToKeyboardCol(x) * 8 + 27;
     cursorSprite->pos1.y = y * 16 + 80;
@@ -1048,7 +1043,7 @@ static void SetCursorPos(s16 x, s16 y)
 
 static void GetCursorPos(s16 *x, s16 *y)
 {
-    struct Sprite *cursorSprite = &gSprites[namingScreenData.cursorSpriteId];
+    struct Sprite *cursorSprite = &gSprites[namingScreenDataPtr->cursorSpriteId];
 
     *x = cursorSprite->data[0];
     *y = cursorSprite->data[1];
@@ -1061,25 +1056,25 @@ static void MoveCursorToOKButton(void)
 
 static void sub_80B6888(u8 a)
 {
-    gSprites[namingScreenData.cursorSpriteId].data[4] &= -256;
-    gSprites[namingScreenData.cursorSpriteId].data[4] |= a;
-    StartSpriteAnim(&gSprites[namingScreenData.cursorSpriteId], 0);
+    gSprites[namingScreenDataPtr->cursorSpriteId].data[4] &= -256;
+    gSprites[namingScreenDataPtr->cursorSpriteId].data[4] |= a;
+    StartSpriteAnim(&gSprites[namingScreenDataPtr->cursorSpriteId], 0);
 }
 
 static void sub_80B68D8(u8 a)
 {
-    gSprites[namingScreenData.cursorSpriteId].data[4] &= 0xFF;
-    gSprites[namingScreenData.cursorSpriteId].data[4] |= a << 8;
+    gSprites[namingScreenDataPtr->cursorSpriteId].data[4] &= 0xFF;
+    gSprites[namingScreenDataPtr->cursorSpriteId].data[4] |= a << 8;
 }
 
 static void sub_80B6914(void)
 {
-    StartSpriteAnim(&gSprites[namingScreenData.cursorSpriteId], 1);
+    StartSpriteAnim(&gSprites[namingScreenDataPtr->cursorSpriteId], 1);
 }
 
 static bool8 IsCursorAnimFinished(void)
 {
-    return gSprites[namingScreenData.cursorSpriteId].animEnded;
+    return gSprites[namingScreenDataPtr->cursorSpriteId].animEnded;
 }
 
 static u8 GetKeyRoleAtCursorPos(void)
@@ -1134,7 +1129,7 @@ static void sub_80B6A80(void)
     u8 spriteId3;
 
     spriteId1 = CreateSprite(&gSpriteTemplate_83CE5C8, 0xCC, 0x50, 0);
-    namingScreenData.unk10 = spriteId1;
+    namingScreenDataPtr->unk10 = spriteId1;
     SetSubspriteTables(&gSprites[spriteId1], gSubspriteTables_83CE558);
 
     spriteId2 = CreateSprite(&gSpriteTemplate_83CE5F8, 0xCC, 0x4C, 1);
@@ -1148,10 +1143,10 @@ static void sub_80B6A80(void)
 
 static void sub_80B6B14(void)
 {
-    struct Sprite *sprite = &gSprites[namingScreenData.unk10];
+    struct Sprite *sprite = &gSprites[namingScreenDataPtr->unk10];
 
     sprite->data[0] = 2;
-    sprite->data[1] = namingScreenData.currentPage;
+    sprite->data[1] = namingScreenDataPtr->currentPage;
 }
 
 static u8 sub_80B6B5C(struct Sprite *);
@@ -1178,7 +1173,7 @@ static u8 sub_80B6B5C(struct Sprite *sprite)
     struct Sprite *sprite1 = &gSprites[sprite->data[6]];
     struct Sprite *sprite2 = &gSprites[sprite->data[7]];
 
-    sub_80B6C48(namingScreenData.currentPage, sprite1, sprite2);
+    sub_80B6C48(namingScreenDataPtr->currentPage, sprite1, sprite2);
     sprite->data[0]++;
     return 0;
 }
@@ -1247,11 +1242,11 @@ static void sub_80B6D04(void)
     s16 r1;
     u8 i;
 
-    r1 = (namingScreenData.unk2 - 1) * 8 + 4;
+    r1 = (namingScreenDataPtr->unk2 - 1) * 8 + 4;
     spriteId = CreateSprite(&gSpriteTemplate_83CE658, r1, 0x28, 0);
     gSprites[spriteId].oam.priority = 3;
-    r1 = namingScreenData.unk2 * 8 + 4;
-    for (i = 0; i < namingScreenData.template->maxChars; i++, r1 += 8)
+    r1 = namingScreenDataPtr->unk2 * 8 + 4;
+    for (i = 0; i < namingScreenDataPtr->template->maxChars; i++, r1 += 8)
     {
         spriteId = CreateSprite(&gSpriteTemplate_83CE670, r1, 0x2C, 0);
         gSprites[spriteId].oam.priority = 3;
@@ -1312,7 +1307,7 @@ static void (*const gUnknown_083CE2E0[])(void) =
 
 static void sub_80B6E44(void)
 {
-    gUnknown_083CE2E0[namingScreenData.template->unk2]();
+    gUnknown_083CE2E0[namingScreenDataPtr->template->unk2]();
 }
 
 static void nullsub_40(void)
@@ -1324,7 +1319,7 @@ static void sub_80B6E68(void)
     u8 rivalGfxId;
     u8 spriteId;
 
-    rivalGfxId = GetRivalAvatarGraphicsIdByStateIdAndGender(0, namingScreenData.unk3E);
+    rivalGfxId = GetRivalAvatarGraphicsIdByStateIdAndGender(0, namingScreenDataPtr->unk3E);
     spriteId = AddPseudoFieldObject(rivalGfxId, SpriteCallbackDummy, 0x38, 0x18, 0);
     gSprites[spriteId].oam.priority = 3;
     StartSpriteAnim(&gSprites[spriteId], 4);
@@ -1344,7 +1339,7 @@ static void sub_80B6EFC(void)
     u8 spriteId;
 
     sub_809D51C();
-    spriteId = CreateMonIcon(namingScreenData.unk3E, SpriteCallbackDummy, 0x34, 0x18, 0, namingScreenData.unk42);
+    spriteId = CreateMonIcon(namingScreenDataPtr->unk3E, SpriteCallbackDummy, 0x34, 0x18, 0, namingScreenDataPtr->unk42);
     gSprites[spriteId].oam.priority = 3;
 }
 
@@ -1352,21 +1347,21 @@ static u8 GetTextCaretPosition(void)
 {
     u8 i;
 
-    for (i = 0; i < namingScreenData.template->maxChars; i++)
+    for (i = 0; i < namingScreenDataPtr->template->maxChars; i++)
     {
-        if (namingScreenData.textBuffer[i] == EOS)
+        if (namingScreenDataPtr->textBuffer[i] == EOS)
             return i;
     }
-    return namingScreenData.template->maxChars - 1;
+    return namingScreenDataPtr->template->maxChars - 1;
 }
 
 static u8 GetPreviousTextCaretPosition(void)
 {
     s8 i;
 
-    for (i = namingScreenData.template->maxChars - 1; i > 0; i--)
+    for (i = namingScreenDataPtr->template->maxChars - 1; i > 0; i--)
     {
-        if (namingScreenData.textBuffer[i] != EOS)
+        if (namingScreenDataPtr->textBuffer[i] != EOS)
             return i;
     }
     return 0;
@@ -1378,9 +1373,9 @@ static void DeleteTextCharacter(void)
     u8 var2;
 
     index = GetPreviousTextCaretPosition();
-    namingScreenData.textBuffer[index] = 0;
+    namingScreenDataPtr->textBuffer[index] = 0;
     sub_80B7960();
-    namingScreenData.textBuffer[index] = EOS;
+    namingScreenDataPtr->textBuffer[index] = EOS;
     var2 = GetKeyRoleAtCursorPos();
     if (var2 == 0 || var2 == 2)
         sub_80B6460(1, 0, 1);
@@ -1408,7 +1403,7 @@ static bool8 sub_80B7004(void)
     PlaySE(SE_SELECT);
     if (r4)
     {
-        if (GetPreviousTextCaretPosition() == namingScreenData.template->maxChars - 1)
+        if (GetPreviousTextCaretPosition() == namingScreenDataPtr->template->maxChars - 1)
             return TRUE;
     }
     return FALSE;
@@ -1420,7 +1415,7 @@ static void sub_80B7090(void) // DoInput?
     u8 r4;
 
     r5 = GetPreviousTextCaretPosition();
-    r4 = namingScreenData.textBuffer[r5];
+    r4 = namingScreenDataPtr->textBuffer[r5];
     if (sub_80B7198(r4))
     {
         if (sub_80B7264(r4))
@@ -1445,7 +1440,7 @@ static bool8 sub_80B7104(void)
     u8 r4;
 
     r5 = GetPreviousTextCaretPosition();
-    r4 = namingScreenData.textBuffer[r5];
+    r4 = namingScreenDataPtr->textBuffer[r5];
     if (sub_80B720C(r4))
     {
         sub_80B72A4(r4, r5);
@@ -1460,7 +1455,7 @@ static bool8 sub_80B713C(void)
     u8 r4;
 
     r5 = GetPreviousTextCaretPosition();
-    r4 = namingScreenData.textBuffer[r5];
+    r4 = namingScreenDataPtr->textBuffer[r5];
     if (sub_80B7264(r4))
     {
         sub_80B7370(r4, r5);
@@ -1473,7 +1468,7 @@ static void AddTextCharacter(u8 ch)
 {
     u8 index = GetTextCaretPosition();
 
-    namingScreenData.textBuffer[index] = ch;
+    namingScreenDataPtr->textBuffer[index] = ch;
 }
 
 static bool8 sub_80B7198(u8 a)
@@ -1545,7 +1540,7 @@ static void sub_80B72A4(u8 a, u8 b)
         chr = a + 0x2C;
     else if (a >= 155 && a <= 159)
         chr = a + 0xFB;
-    namingScreenData.textBuffer[b] = chr;
+    namingScreenDataPtr->textBuffer[b] = chr;
 }
 
 static void sub_80B7370(u8 a, u8 b)
@@ -1560,7 +1555,7 @@ static void sub_80B7370(u8 a, u8 b)
         chr = a + 0x31;
     else if (a >= 150 && a <= 154)
         chr = a + 5;
-    namingScreenData.textBuffer[b] = chr;
+    namingScreenDataPtr->textBuffer[b] = chr;
 }
 
 static void sub_80B73CC(u8 a, u8 b)
@@ -1583,7 +1578,7 @@ static void sub_80B73CC(u8 a, u8 b)
         chr = a + 0xCF;
     else if (a >= 150 && a <= 154)
         chr = a + 0xD4;
-    namingScreenData.textBuffer[b] = chr;
+    namingScreenDataPtr->textBuffer[b] = chr;
 }
 
 static void sub_80B7474(u8 a, u8 b)
@@ -1594,18 +1589,18 @@ static void sub_80B7474(u8 a, u8 b)
         chr = a + 0xCF;
     else if (a >= 155 && a <= 159)
         chr = a + 0xCF;
-    namingScreenData.textBuffer[b] = chr;
+    namingScreenDataPtr->textBuffer[b] = chr;
 }
 
 static void sub_80B74B0(void)
 {
     u8 i;
 
-    for (i = 0; i < namingScreenData.template->maxChars; i++)
+    for (i = 0; i < namingScreenDataPtr->template->maxChars; i++)
     {
-        if (namingScreenData.textBuffer[i] != 0 && namingScreenData.textBuffer[i] != 0xFF)
+        if (namingScreenDataPtr->textBuffer[i] != 0 && namingScreenDataPtr->textBuffer[i] != 0xFF)
         {
-            StringCopyN(namingScreenData.destBuffer, namingScreenData.textBuffer, namingScreenData.template->maxChars + 1);
+            StringCopyN(namingScreenDataPtr->destBuffer, namingScreenDataPtr->textBuffer, namingScreenDataPtr->template->maxChars + 1);
             break;
         }
     }
@@ -1613,7 +1608,7 @@ static void sub_80B74B0(void)
 
 static void DisplaySentToPCMessage(void)
 {
-    StringCopy(gStringVar1, namingScreenData.destBuffer);
+    StringCopy(gStringVar1, namingScreenDataPtr->destBuffer);
     StringExpandPlaceholders(gStringVar4, gOtherText_SentToPC);
     BasicInitMenuWindow(&gWindowConfig_81E6E88);
     MenuDisplayMessageBox();
@@ -1670,8 +1665,8 @@ static void sub_80B75C4(void)
         (u16 *)(VRAM + 0xE800),
     };
 
-    gUnknown_083CE2F0[namingScreenData.currentPage][0](arr[namingScreenData.unkC]);
-    gUnknown_083CE2F0[namingScreenData.currentPage][1](arr[namingScreenData.unkD]);
+    gUnknown_083CE2F0[namingScreenDataPtr->currentPage][0](arr[namingScreenDataPtr->unkC]);
+    gUnknown_083CE2F0[namingScreenDataPtr->currentPage][1](arr[namingScreenDataPtr->unkD]);
 }
 
 static void sub_80B7614(void)
@@ -1682,7 +1677,7 @@ static void sub_80B7614(void)
         (u16 *)(VRAM + 0xE800),
     };
 
-    gUnknown_083CE2F0[namingScreenData.currentPage][1](arr[namingScreenData.unkD]);
+    gUnknown_083CE2F0[namingScreenDataPtr->currentPage][1](arr[namingScreenDataPtr->unkD]);
 }
 
 static void sub_80B7650(u16 *vramBuffer)
@@ -1736,12 +1731,12 @@ static void sub_80B76E0(u16 *vramBuffer, const u16 *src)
 
 static void sub_80B772C(void)
 {
-    nullsub_20(namingScreenData.currentPage, namingScreenData.unkC);
+    nullsub_20(namingScreenDataPtr->currentPage, namingScreenDataPtr->unkC);
 }
 
 static void sub_80B7740(void)
 {
-    nullsub_20((namingScreenData.currentPage + 1) % 3, namingScreenData.unkD);
+    nullsub_20((namingScreenDataPtr->currentPage + 1) % 3, namingScreenDataPtr->unkD);
 }
 
 static void nullsub_20(u8 a, u8 b)
@@ -1802,23 +1797,23 @@ static const u8 sKeyboardCharacters[][4][20];  //forward declaration
 
 static u8 GetCharAtKeyboardPos(s16 a, s16 b)
 {
-    return sKeyboardCharacters[namingScreenData.currentPage][b][a];
+    return sKeyboardCharacters[namingScreenDataPtr->currentPage][b][a];
 }
 
 static void sub_80B7794(void)
 {
-    BasicInitMenuWindow(gUnknown_083CE328[namingScreenData.currentPage][0][namingScreenData.unkC]);
-    gUnknown_083CE310[namingScreenData.currentPage][0]();
-    BasicInitMenuWindow(gUnknown_083CE328[namingScreenData.currentPage][1][namingScreenData.unkD]);
-    gUnknown_083CE310[namingScreenData.currentPage][1]();
+    BasicInitMenuWindow(gUnknown_083CE328[namingScreenDataPtr->currentPage][0][namingScreenDataPtr->unkC]);
+    gUnknown_083CE310[namingScreenDataPtr->currentPage][0]();
+    BasicInitMenuWindow(gUnknown_083CE328[namingScreenDataPtr->currentPage][1][namingScreenDataPtr->unkD]);
+    gUnknown_083CE310[namingScreenDataPtr->currentPage][1]();
     sub_80B772C();
     sub_80B7740();
 }
 
 static void sub_80B77F8(void)
 {
-    BasicInitMenuWindow(gUnknown_083CE328[namingScreenData.currentPage][1][namingScreenData.unkD]);
-    gUnknown_083CE310[namingScreenData.currentPage][1]();
+    BasicInitMenuWindow(gUnknown_083CE328[namingScreenDataPtr->currentPage][1][namingScreenDataPtr->unkD]);
+    gUnknown_083CE310[namingScreenDataPtr->currentPage][1]();
     sub_80B7740();
 }
 
@@ -1849,9 +1844,9 @@ static void PrintKeyboardCharacters(u8 page)  //print letters on page
 static void sub_80B78A8(void)
 {
     BasicInitMenuWindow(&gWindowConfig_81E6F4C);
-    gUnknown_083CE358[namingScreenData.templateNum]();
-    gUnknown_083CE368[namingScreenData.template->unk3]();
-    MenuPrint(namingScreenData.template->title, 9, 2);
+    gUnknown_083CE358[namingScreenDataPtr->templateNum]();
+    gUnknown_083CE368[namingScreenDataPtr->template->unk3]();
+    MenuPrint(namingScreenDataPtr->template->title, 9, 2);
 }
 
 static void nullsub_61(void)
@@ -1860,7 +1855,7 @@ static void nullsub_61(void)
 
 static void sub_80B78F8(void)
 {
-    StringCopy(gStringVar1, gSpeciesNames[(s16)namingScreenData.unk3E]);
+    StringCopy(gStringVar1, gSpeciesNames[(s16)namingScreenDataPtr->unk3E]);
 }
 
 static void nullsub_62(void)
@@ -1871,9 +1866,9 @@ static void sub_80B7924(void)
 {
     u8 genderSymbol[2] = _("♂");
 
-    if ((s16)namingScreenData.unk40 != MON_GENDERLESS)
+    if ((s16)namingScreenDataPtr->unk40 != MON_GENDERLESS)
     {
-        if ((s16)namingScreenData.unk40 == MON_FEMALE)
+        if ((s16)namingScreenDataPtr->unk40 == MON_FEMALE)
             genderSymbol[0] = 0xB6;  //female symbol
         MenuPrint(genderSymbol, 0x14, 4);
     }
@@ -1890,9 +1885,9 @@ static void sub_80B7960(void)
     string[4] = 0x11;
     string[5] = 1;
     string += 6;
-    StringCopy(string, namingScreenData.textBuffer);
+    StringCopy(string, namingScreenDataPtr->textBuffer);
     BasicInitMenuWindow(&gWindowConfig_81E6F4C);
-    MenuPrint(gStringVar1, namingScreenData.unk2, 4);
+    MenuPrint(gStringVar1, namingScreenDataPtr->unk2, 4);
 }
 
 //--------------------------------------------------
@@ -2034,4 +2029,162 @@ const struct OamData gOamData_83CE4A8 =
     .affineParam = 0,
 };
 
-//TODO: dump sprite data
+
+const struct Subsprite gSubspriteTable_83CE4B0[] = {
+    { -20, -16, ST_OAM_H_RECTANGLE, 1,   0, 1 },
+    {  12, -16, ST_OAM_SQUARE, 0,   4, 1 },
+    { -20,  -8, ST_OAM_H_RECTANGLE, 1,   5, 1 },
+    {  12,  -8, ST_OAM_SQUARE, 0,   9, 1 },
+    { -20,   0, ST_OAM_H_RECTANGLE, 1,  10, 1 },
+    {  12,   0, ST_OAM_SQUARE, 0,  14, 1 },
+    { -20,   8, ST_OAM_H_RECTANGLE, 1,  15, 1 },
+    {  12,   8, ST_OAM_SQUARE, 0,  19, 1 }
+};
+
+const struct Subsprite gSubspriteTable_83CE4F0[] = {
+    { -12,  -4, ST_OAM_SQUARE, 0,   0, 1 },
+    {   4,  -4, ST_OAM_SQUARE, 0,   1, 1 }
+};
+
+const struct Subsprite gSubspriteTable_83CE500[] = {
+    { -12,  -4, ST_OAM_H_RECTANGLE, 0,   0, 1 },
+    {   4,  -4, ST_OAM_SQUARE, 0,   2, 1 }
+};
+
+const struct Subsprite gSubspriteTable_83CE510[] = {
+    { -20, -12, ST_OAM_H_RECTANGLE, 1,   0, 1 },
+    {  12, -12, ST_OAM_SQUARE, 0,   4, 1 },
+    { -20,  -4, ST_OAM_H_RECTANGLE, 1,   5, 1 },
+    {  12,  -4, ST_OAM_SQUARE, 0,   9, 1 },
+    { -20,   4, ST_OAM_H_RECTANGLE, 1,  10, 1 },
+    {  12,   4, ST_OAM_SQUARE, 0,  14, 1 }
+};
+
+const struct Subsprite gSubspriteTable_83CE540[] = {
+    {  -8, -12, ST_OAM_H_RECTANGLE, 0,   0, 3 },
+    {  -8,  -4, ST_OAM_H_RECTANGLE, 0,   2, 3 },
+    {  -8,   4, ST_OAM_H_RECTANGLE, 0,   4, 3 }
+};
+
+const struct SubspriteTable gSubspriteTables_83CE558[] = {
+    { 8, gSubspriteTable_83CE4B0 }
+};
+
+const struct SubspriteTable gSubspriteTables_83CE560[] = {
+    { 2, gSubspriteTable_83CE500 },
+    { 2, gSubspriteTable_83CE500 },
+    { 2, gSubspriteTable_83CE500 }
+};
+
+const struct SubspriteTable gSubspriteTables_83CE578[] = {
+    { 6, gSubspriteTable_83CE510 }
+};
+
+const struct SubspriteTable gSubspriteTables_83CE580[] = {
+    { 3, gSubspriteTable_83CE540 }
+};
+
+const struct SpriteFrameImage gSpriteImageTable_83CE588[] = {
+    { gSpriteImage_83CE094, 0xc0 },
+    { gSpriteImage_83CE154, 0xc0 }
+};
+
+const union AnimCmd gSpriteAnim_83CE598[] = {
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gSpriteAnim_83CE5A0[] = {
+    ANIMCMD_FRAME(4, 8),
+    ANIMCMD_FRAME(8, 8),
+    ANIMCMD_END
+};
+
+const union AnimCmd gSpriteAnim_83CE5AC[] = {
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(1, 2),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd *const gSpriteAnimTable_83CE5B8[] = {
+    gSpriteAnim_83CE598
+};
+
+const union AnimCmd *const gSpriteAnimTable_83CE5BC[] = {
+    gSpriteAnim_83CE598,
+    gSpriteAnim_83CE5A0
+};
+
+const union AnimCmd *const gSpriteAnimTable_83CE5C4[] = {
+    gSpriteAnim_83CE5AC
+};
+
+const struct SpriteTemplate gSpriteTemplate_83CE5C8 = {
+    2, 4, &gOamData_83CE498, gSpriteAnimTable_83CE5B8, NULL, gDummySpriteAffineAnimTable, sub_80B6B34
+};
+
+const struct SpriteTemplate gSpriteTemplate_83CE5E0 = {
+    3, 1, &gOamData_83CE4A8, gSpriteAnimTable_83CE5B8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+};
+
+const struct SpriteTemplate gSpriteTemplate_83CE5F8 = {
+    4, 4, &gOamData_83CE498, gSpriteAnimTable_83CE5B8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+};
+
+const struct SpriteTemplate gSpriteTemplate_83CE610 = {
+    0, 6, &gOamData_83CE498, gSpriteAnimTable_83CE5B8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+};
+
+const struct SpriteTemplate gSpriteTemplate_83CE628 = {
+    1, 6, &gOamData_83CE498, gSpriteAnimTable_83CE5B8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+};
+
+const struct SpriteTemplate gSpriteTemplate_83CE640 = {
+    7, 5, &gOamData_83CE4A0, gSpriteAnimTable_83CE5BC, NULL, gDummySpriteAffineAnimTable, sub_80B6998
+};
+
+const struct SpriteTemplate gSpriteTemplate_83CE658 = {
+    10, 3, &gOamData_83CE498, gSpriteAnimTable_83CE5B8, NULL, gDummySpriteAffineAnimTable, sub_80B6D9C
+};
+
+const struct SpriteTemplate gSpriteTemplate_83CE670 = {
+    11, 3, &gOamData_83CE498, gSpriteAnimTable_83CE5B8, NULL, gDummySpriteAffineAnimTable, sub_80B6DE8
+};
+
+const struct SpriteTemplate gSpriteTemplate_83CE688 = {
+    0xFFFF, 0, &gOamData_83CE498, gSpriteAnimTable_83CE5C4, gSpriteImageTable_83CE588, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+};
+
+const struct SpriteSheet gUnknown_083CE6A0[] = {
+    { gNamingScreenBackButtonTiles, 0x1E0, 0 },
+    { gNamingScreenOKButtonTiles, 0x1E0, 1 },
+    { gNamingScreenChangeKeyboardBoxTiles, 0x280, 2 },
+    { gNamingScreenChangeKeyboardButtonTiles, 0x100, 3 },
+    { gNamingScreenLowerTextTiles, 0x60, 4 },
+    { gNamingScreenUpperTextTiles, 0x60, 5 },
+    { gNamingScreenOthersTextTiles, 0x60, 6 },
+    { gNamingScreenCursorTiles, 0x80, 7 },
+    { gNamingScreenActiveCursorSmallTiles, 0x80, 8 },
+    { gNamingScreenActiveCursorBigTiles, 0x80, 9 },
+    { gNamingScreenRightPointingTriangleTiles, 0x20, 10 },
+    { gNamingScreenUnderscoreTiles, 0x20, 11 },
+    {}
+};
+
+const struct SpritePalette gUnknown_083CE708[] = {
+    {gNamingScreenPalettes[0], 0},
+    {gNamingScreenPalettes[1], 1},
+    {gNamingScreenPalettes[2], 2},
+    {gNamingScreenPalettes[3], 3},
+    {gNamingScreenPalettes[4], 4},
+    {gNamingScreenPalettes[5], 5},
+    {gNamingScreenPalettes[4], 6},
+    {}
+};
+
+const u16 gUnknown_083CE748[] = INCBIN_U16("graphics/naming_screen/lower_keyboard_map.bin");
+
+const u16 gUnknown_083CEBF8[] = INCBIN_U16("graphics/naming_screen/upper_keyboard_map.bin");
+
+const u16 gUnknown_083CF0A8[] = INCBIN_U16("graphics/naming_screen/others_keyboard_map.bin");
+

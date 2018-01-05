@@ -6,10 +6,10 @@ LittlerootTown_MaysHouse_2F_MapScripts:: @ 8152A50
 LittlerootTown_MaysHouse_2F_MapScript1_152A5B:: @ 8152A5B
 	checkflag FLAG_DEFEATED_RIVAL_ROUTE103
 	call_if 0, LittlerootTown_MaysHouse_2F_EventScript_152A7A
-	compare 0x4092, 4
+	compare VAR_LITTLEROOT_INTRO_STATE, 4
 	call_if 1, LittlerootTown_MaysHouse_2F_EventScript_1B6950
 	call LittlerootTown_MaysHouse_2F_EventScript_1A2F3D
-	setvar 0x4089, 0
+	setvar VAR_0x4089, 0
 	end
 
 LittlerootTown_MaysHouse_2F_EventScript_152A7A:: @ 8152A7A
@@ -18,7 +18,7 @@ LittlerootTown_MaysHouse_2F_EventScript_152A7A:: @ 8152A7A
 	return
 
 LittlerootTown_MaysHouse_2F_MapScript2_152A86:: @ 8152A86
-	map_script_2 0x4089, 0, LittlerootTown_MaysHouse_2F_EventScript_152A90
+	map_script_2 VAR_0x4089, 0, LittlerootTown_MaysHouse_2F_EventScript_152A90
 	.2byte 0
 
 LittlerootTown_MaysHouse_2F_EventScript_152A90:: @ 8152A90
@@ -37,10 +37,10 @@ LittlerootTown_MaysHouse_2F_EventScript_152A9D:: @ 8152A9D
 	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_152AD4
 	compare RESULT, 1
 	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_152B4A
-	playse 9
+	playse SE_KAIDAN
 	removeobject LAST_TALKED
-	setvar 0x408d, 3
-	setvar 0x4050, 1
+	setvar VAR_LITTLEROOT_RIVAL_STATE, 3
+	setvar VAR_LITTLEROOT_STATE, 1
 	savebgm 0
 	fadedefaultbgm
 	releaseall
@@ -48,7 +48,7 @@ LittlerootTown_MaysHouse_2F_EventScript_152A9D:: @ 8152A9D
 
 LittlerootTown_BrendansHouse_2F_EventScript_152AD4:: @ 8152AD4
 	msgbox LittlerootTown_BrendansHouse_2F_Text_17337E, 4
-	playbgm 415, 1
+	playbgm BGM_GIRL_SUP, TRUE
 	applymovement LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_1A0839
 	waitmovement 0
 	applymovement LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_1A0833
@@ -82,7 +82,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_152B3F:: @ 8152B3F
 
 LittlerootTown_BrendansHouse_2F_EventScript_152B4A:: @ 8152B4A
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1735C9, 4
-	playbgm 421, 1
+	playbgm BGM_BOY_SUP, TRUE
 	applymovement LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_1A0839
 	waitmovement 0
 	applymovement LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_1A0833
@@ -206,7 +206,7 @@ LittlerootTown_MaysHouse_2F_EventScript_152C52:: @ 8152C52
 	end
 
 LittlerootTown_MaysHouse_2F_EventScript_152C5C:: @ 8152C5C
-	setvar 0x8004, 2
+	setvar VAR_SPECIAL_4, 2
 	special DoPCTurnOnEffect
 	playse SE_PC_ON
 	msgbox LittlerootTown_MaysHouse_2F_Text_1A10D6, 4
@@ -216,7 +216,7 @@ LittlerootTown_MaysHouse_2F_EventScript_152C5C:: @ 8152C5C
 	end
 
 gMayHouse_TurnPCOff:: @ 8152C75
-	setvar 0x8004, 2
+	setvar VAR_SPECIAL_4, 2
 	playse SE_PC_OFF
 	special DoPCTurnOffEffect
 	releaseall

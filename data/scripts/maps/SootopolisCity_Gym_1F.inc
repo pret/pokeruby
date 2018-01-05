@@ -6,7 +6,7 @@ SootopolisCity_Gym_1F_MapScripts:: @ 815AF07
 	.byte 0
 
 SootopolisCity_Gym_1F_MapScript1_15AF1C:: @ 815AF1C
-	setvar 0x4022, 1
+	setvar VAR_ICE_STEP_COUNT, 1
 	end
 
 SootopolisCity_Gym_1F_MapScript1_15AF22:: @ 815AF22
@@ -15,15 +15,15 @@ SootopolisCity_Gym_1F_MapScript1_15AF22:: @ 815AF22
 
 SootopolisCity_Gym_1F_MapScript1_15AF25:: @ 815AF25
 	call SootopolisCity_Gym_1F_EventScript_15AF2E
-	special sub_8069D78
+	special SetSootopolisGymCrackedIceMetatiles
 	end
 
 SootopolisCity_Gym_1F_EventScript_15AF2E:: @ 815AF2E
-	compare 0x4022, 8
+	compare VAR_ICE_STEP_COUNT, 8
 	goto_if 0, SootopolisCity_Gym_1F_EventScript_15AF85
-	compare 0x4022, 28
+	compare VAR_ICE_STEP_COUNT, 28
 	goto_if 0, SootopolisCity_Gym_1F_EventScript_15AF73
-	compare 0x4022, 69
+	compare VAR_ICE_STEP_COUNT, 69
 	goto_if 0, SootopolisCity_Gym_1F_EventScript_15AF61
 	setmetatile 8, 4, 519, 0
 	setmetatile 8, 5, 519, 0
@@ -40,32 +40,32 @@ SootopolisCity_Gym_1F_EventScript_15AF85:: @ 815AF85
 	return
 
 SootopolisCity_Gym_1F_MapScript2_15AF86:: @ 815AF86
-	map_script_2 0x4022, 8, SootopolisCity_Gym_1F_EventScript_15AFA8
-	map_script_2 0x4022, 28, SootopolisCity_Gym_1F_EventScript_15AFBC
-	map_script_2 0x4022, 69, SootopolisCity_Gym_1F_EventScript_15AFD0
-	map_script_2 0x4022, 0, SootopolisCity_Gym_1F_EventScript_15AFE4
+	map_script_2 VAR_ICE_STEP_COUNT, 8, SootopolisCity_Gym_1F_EventScript_15AFA8
+	map_script_2 VAR_ICE_STEP_COUNT, 28, SootopolisCity_Gym_1F_EventScript_15AFBC
+	map_script_2 VAR_ICE_STEP_COUNT, 69, SootopolisCity_Gym_1F_EventScript_15AFD0
+	map_script_2 VAR_ICE_STEP_COUNT, 0, SootopolisCity_Gym_1F_EventScript_15AFE4
 	.2byte 0
 
 SootopolisCity_Gym_1F_EventScript_15AFA8:: @ 815AFA8
-	addvar 0x4022, 1
+	addvar VAR_ICE_STEP_COUNT, 1
 	delay 40
-	playse 40
+	playse SE_RU_GASHIN
 	call SootopolisCity_Gym_1F_EventScript_15AF2E
 	special DrawWholeMapView
 	end
 
 SootopolisCity_Gym_1F_EventScript_15AFBC:: @ 815AFBC
-	addvar 0x4022, 1
+	addvar VAR_ICE_STEP_COUNT, 1
 	delay 40
-	playse 40
+	playse SE_RU_GASHIN
 	call SootopolisCity_Gym_1F_EventScript_15AF2E
 	special DrawWholeMapView
 	end
 
 SootopolisCity_Gym_1F_EventScript_15AFD0:: @ 815AFD0
-	addvar 0x4022, 1
+	addvar VAR_ICE_STEP_COUNT, 1
 	delay 40
-	playse 40
+	playse SE_RU_GASHIN
 	call SootopolisCity_Gym_1F_EventScript_15AF2E
 	special DrawWholeMapView
 	end
@@ -75,7 +75,7 @@ SootopolisCity_Gym_1F_EventScript_15AFE4:: @ 815AFE4
 	delay 20
 	applymovement 255, SootopolisCity_Gym_1F_Movement_15AFFD
 	waitmovement 0
-	playse 43
+	playse SE_RU_HYUU
 	delay 60
 	warphole MAP_SOOTOPOLIS_CITY_GYM_B1F
 	waitstate
@@ -102,7 +102,7 @@ SootopolisCity_Gym_1F_EventScript_15B02D:: @ 815B02D
 	msgbox SootopolisCity_Gym_1F_Text_18F36B, 4
 	setflag FLAG_DEFEATED_SOOTOPOLIS_GYM
 	setflag FLAG_BADGE08_GET
-	setvar 0x8008, 8
+	setvar VAR_SPECIAL_8, 8
 	call SootopolisCity_Gym_1F_EventScript_1A01C0
 	goto SootopolisCity_Gym_1F_EventScript_15B056
 	end

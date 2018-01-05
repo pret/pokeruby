@@ -10,17 +10,17 @@ Route120_MapScript1_15161E:: @ 815161E
 	end
 
 Route120_EventScript_151628:: @ 8151628
-	compare 0x8004, 0
+	compare VAR_SPECIAL_4, 0
 	call_if 1, Route120_EventScript_15166B
-	compare 0x8004, 1
+	compare VAR_SPECIAL_4, 1
 	call_if 1, Route120_EventScript_151672
-	compare 0x8004, 2
+	compare VAR_SPECIAL_4, 2
 	call_if 1, Route120_EventScript_151676
-	compare 0x8004, 3
+	compare VAR_SPECIAL_4, 3
 	call_if 1, Route120_EventScript_15167A
-	compare 0x8004, 4
+	compare VAR_SPECIAL_4, 4
 	call_if 1, Route120_EventScript_15167E
-	compare 0x8004, 5
+	compare VAR_SPECIAL_4, 5
 	call_if 1, Route120_EventScript_151682
 	return
 
@@ -80,33 +80,33 @@ Route120_MapScript1_1516DF:: @ 81516DF
 	end
 
 Route120_EventScript_1516EA:: @ 81516EA
-	getplayerxy 0x4000, 0x4001
-	compare 0x4001, 14
+	getplayerxy VAR_TEMP_0, VAR_TEMP_1
+	compare VAR_TEMP_1, 14
 	goto_if 3, Route120_EventScript_151715
-	compare 0x4001, 60
+	compare VAR_TEMP_1, 60
 	goto_if 3, Route120_EventScript_151719
-	compare 0x4001, 61
+	compare VAR_TEMP_1, 61
 	goto_if 4, Route120_EventScript_151711
 	return
 
 Route120_EventScript_151711:: @ 8151711
-	setweather 1
+	setweather WEATHER_CLOUDS
 	return
 
 Route120_EventScript_151715:: @ 8151715
-	setweather 2
+	setweather WEATHER_SUNNY
 	return
 
 Route120_EventScript_151719:: @ 8151719
-	compare 0x4000, 7
+	compare VAR_TEMP_0, 7
 	goto_if 3, Route120_EventScript_151735
-	compare 0x4000, 19
+	compare VAR_TEMP_0, 19
 	goto_if 3, Route120_EventScript_151715
 	goto Route120_EventScript_151735
 	end
 
 Route120_EventScript_151735:: @ 8151735
-	setweather 3
+	setweather WEATHER_RAIN_LIGHT
 	return
 
 Route120_EventScript_151739:: @ 8151739
@@ -115,10 +115,10 @@ Route120_EventScript_151739:: @ 8151739
 	dodailyevents
 	checkflag FLAG_DAILY_RECEIVED_BERRY_ROUTE120
 	goto_if_eq Route120_EventScript_151837
-	msgbox Route120_Text_1C58F1, 5
-	compare RESULT, 1
+	msgbox Route120_Text_1C58F1, MSGBOX_YESNO
+	compare RESULT, YES
 	call_if 1, Route120_EventScript_151841
-	compare RESULT, 0
+	compare RESULT, NO
 	call_if 1, Route120_EventScript_15184A
 	specialvar RESULT, GetPlayerTrainerIdOnesDigit
 	switch RESULT
@@ -135,32 +135,32 @@ Route120_EventScript_151739:: @ 8151739
 	end
 
 Route120_EventScript_1517DC:: @ 81517DC
-	setvar 0x8004, ITEM_FIGY_BERRY
+	setvar VAR_SPECIAL_4, ITEM_FIGY_BERRY
 	goto Route120_EventScript_151813
 	end
 
 Route120_EventScript_1517E7:: @ 81517E7
-	setvar 0x8004, ITEM_WIKI_BERRY
+	setvar VAR_SPECIAL_4, ITEM_WIKI_BERRY
 	goto Route120_EventScript_151813
 	end
 
 Route120_EventScript_1517F2:: @ 81517F2
-	setvar 0x8004, ITEM_MAGO_BERRY
+	setvar VAR_SPECIAL_4, ITEM_MAGO_BERRY
 	goto Route120_EventScript_151813
 	end
 
 Route120_EventScript_1517FD:: @ 81517FD
-	setvar 0x8004, ITEM_AGUAV_BERRY
+	setvar VAR_SPECIAL_4, ITEM_AGUAV_BERRY
 	goto Route120_EventScript_151813
 	end
 
 Route120_EventScript_151808:: @ 8151808
-	setvar 0x8004, ITEM_IAPAPA_BERRY
+	setvar VAR_SPECIAL_4, ITEM_IAPAPA_BERRY
 	goto Route120_EventScript_151813
 	end
 
 Route120_EventScript_151813:: @ 8151813
-	giveitem_std 0x8004
+	giveitem_std VAR_SPECIAL_4
 	compare RESULT, 0
 	goto_if_eq Route120_EventScript_1A029B
 	setflag FLAG_DAILY_RECEIVED_BERRY_ROUTE120
@@ -186,8 +186,8 @@ Route120_EventScript_151853:: @ 8151853
 	faceplayer
 	checkflag FLAG_NOT_READY_FOR_BATTLE_ROUTE120
 	goto_if_eq Route120_EventScript_151884
-	msgbox Route120_Text_171827, 5
-	compare RESULT, 0
+	msgbox Route120_Text_171827, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq Route120_EventScript_151877
 	goto Route120_EventScript_15189D
 	end
@@ -199,8 +199,8 @@ Route120_EventScript_151877:: @ 8151877
 	end
 
 Route120_EventScript_151884:: @ 8151884
-	msgbox Route120_Text_17196F, 5
-	compare RESULT, 0
+	msgbox Route120_Text_17196F, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq Route120_EventScript_151877
 	goto Route120_EventScript_15189D
 	end
@@ -226,7 +226,7 @@ Route120_EventScript_15189D:: @ 815189D
 	delay 40
 	waitmoncry
 	setwildbattle SPECIES_KECLEON, 30, ITEM_NONE
-	setvar 0x8004, 0
+	setvar VAR_SPECIAL_4, 0
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	dowildbattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
@@ -292,7 +292,7 @@ Route120_EventScript_1519B3:: @ 81519B3
 
 Route120_EventScript_1519CA:: @ 81519CA
 	trainerbattle 0, OPPONENT_ROBERT_1, 0, Route120_Text_1BF07E, Route120_Text_1BF0A5
-	specialvar RESULT, sub_8082C68
+	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
 	goto_if_eq Route120_EventScript_1519F1
 	msgbox Route120_Text_1BF0C3, 6
@@ -315,7 +315,7 @@ Route120_EventScript_151A1F:: @ 8151A1F
 
 Route120_EventScript_151A36:: @ 8151A36
 	trainerbattle 0, OPPONENT_BRANDON_1, 0, Route120_Text_1BF32B, Route120_Text_1BF36B
-	specialvar RESULT, sub_8082C68
+	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
 	goto_if_eq Route120_EventScript_151A5D
 	msgbox Route120_Text_1BF38D, 6

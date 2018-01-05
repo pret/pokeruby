@@ -9,8 +9,8 @@ SouthernIsland_Exterior_MapScript1_160ADC:: @ 8160ADC
 SouthernIsland_Exterior_EventScript_160AE0:: @ 8160AE0
 	lock
 	faceplayer
-	msgbox SouthernIsland_Exterior_Text_1C5215, 5
-	compare RESULT, 0
+	msgbox SouthernIsland_Exterior_Text_1C5215, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq SouthernIsland_Exterior_EventScript_160B25
 	msgbox SouthernIsland_Exterior_Text_1C5281, 4
 	closemessage
@@ -18,7 +18,7 @@ SouthernIsland_Exterior_EventScript_160AE0:: @ 8160AE0
 	waitmovement 0
 	delay 30
 	hideobjectat 1, MAP_SOUTHERN_ISLAND_EXTERIOR
-	setvar 0x8004, 2
+	setvar VAR_SPECIAL_4, 2
 	call SouthernIsland_Exterior_EventScript_1A047C
 	warp MAP_LILYCOVE_CITY_HARBOR, 255, 8, 11
 	waitstate

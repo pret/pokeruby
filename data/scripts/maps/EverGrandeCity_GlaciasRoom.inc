@@ -5,7 +5,7 @@ EverGrandeCity_GlaciasRoom_MapScripts:: @ 815B673
 	.byte 0
 
 EverGrandeCity_GlaciasRoom_MapScript2_15B683:: @ 815B683
-	map_script_2 0x4001, 0, EverGrandeCity_GlaciasRoom_EventScript_15B68D
+	map_script_2 VAR_TEMP_1, 0, EverGrandeCity_GlaciasRoom_EventScript_15B68D
 	.2byte 0
 
 EverGrandeCity_GlaciasRoom_EventScript_15B68D:: @ 815B68D
@@ -13,20 +13,20 @@ EverGrandeCity_GlaciasRoom_EventScript_15B68D:: @ 815B68D
 	end
 
 EverGrandeCity_GlaciasRoom_MapScript2_15B692:: @ 815B692
-	map_script_2 0x409c, 2, EverGrandeCity_GlaciasRoom_EventScript_15B69C
+	map_script_2 VAR_ELITE_4_STATE, 2, EverGrandeCity_GlaciasRoom_EventScript_15B69C
 	.2byte 0
 
 EverGrandeCity_GlaciasRoom_EventScript_15B69C:: @ 815B69C
 	lockall
 	call EverGrandeCity_GlaciasRoom_EventScript_1A0710
-	setvar 0x409c, 3
+	setvar VAR_ELITE_4_STATE, 3
 	releaseall
 	end
 
 EverGrandeCity_GlaciasRoom_MapScript1_15B6A9:: @ 815B6A9
 	checkflag FLAG_DEFEATED_ELITE_4_GLACIA
 	call_if 1, EverGrandeCity_GlaciasRoom_EventScript_15B6BE
-	compare 0x409c, 3
+	compare VAR_ELITE_4_STATE, 3
 	call_if 1, EverGrandeCity_GlaciasRoom_EventScript_15B6C4
 	end
 
@@ -43,7 +43,7 @@ EverGrandeCity_GlaciasRoom_EventScript_15B6CA:: @ 815B6CA
 	faceplayer
 	checkflag FLAG_DEFEATED_ELITE_4_GLACIA
 	goto_if_eq EverGrandeCity_GlaciasRoom_EventScript_15B6F1
-	playbgm 450, 0
+	playbgm BGM_SITENNOU, FALSE
 	msgbox EverGrandeCity_GlaciasRoom_Text_190AF9, 4
 	trainerbattle 3, OPPONENT_GLACIA, 0, EverGrandeCity_GlaciasRoom_Text_190C01
 	goto EverGrandeCity_GlaciasRoom_EventScript_15B6FB

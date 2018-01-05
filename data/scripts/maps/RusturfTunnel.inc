@@ -4,13 +4,13 @@ RusturfTunnel_MapScripts:: @ 815C745
 	.byte 0
 
 RusturfTunnel_MapScript2_15C750:: @ 815C750
-	map_script_2 0x409a, 4, RusturfTunnel_EventScript_15C7D1
-	map_script_2 0x409a, 5, RusturfTunnel_EventScript_15C7D1
+	map_script_2 VAR_RUSTURF_TUNNEL_STATE, 4, RusturfTunnel_EventScript_15C7D1
+	map_script_2 VAR_RUSTURF_TUNNEL_STATE, 5, RusturfTunnel_EventScript_15C7D1
 	.2byte 0
 
 RusturfTunnel_MapScript1_15C762:: @ 815C762
 	call RusturfTunnel_EventScript_1A0196
-	compare 0x409a, 2
+	compare VAR_RUSTURF_TUNNEL_STATE, 2
 	call_if 1, RusturfTunnel_EventScript_15C773
 	end
 
@@ -52,35 +52,35 @@ RusturfTunnel_EventScript_15C7BC:: @ 815C7BC
 
 RusturfTunnel_EventScript_15C7D1:: @ 815C7D1
 	lockall
-	compare 0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if 1, RusturfTunnel_EventScript_15C8CA
-	compare 0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if 1, RusturfTunnel_EventScript_15C8DF
-	compare 0x4001, 3
+	compare VAR_TEMP_1, 3
 	call_if 1, RusturfTunnel_EventScript_15C8EA
 	call RusturfTunnel_EventScript_15C92D
 	msgbox RusturfTunnel_Text_19461D, 4
-	compare 0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if 1, RusturfTunnel_EventScript_15C8EB
-	compare 0x4001, 3
+	compare VAR_TEMP_1, 3
 	call_if 1, RusturfTunnel_EventScript_15C8EB
 	giveitem_std ITEM_HM04
 	setflag FLAG_RECEIVED_HM04
 	msgbox RusturfTunnel_Text_194693, 4
 	closemessage
-	compare 0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if 1, RusturfTunnel_EventScript_15C880
-	compare 0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if 1, RusturfTunnel_EventScript_15C892
-	compare 0x4001, 3
+	compare VAR_TEMP_1, 3
 	call_if 1, RusturfTunnel_EventScript_15C8AE
 	msgbox RusturfTunnel_Text_194706, 4
 	closemessage
-	compare 0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if 1, RusturfTunnel_EventScript_15C8F7
-	compare 0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if 1, RusturfTunnel_EventScript_15C909
-	compare 0x4001, 3
+	compare VAR_TEMP_1, 3
 	call_if 1, RusturfTunnel_EventScript_15C91B
 	call RusturfTunnel_EventScript_1A0442
 	releaseall
@@ -148,7 +148,7 @@ RusturfTunnel_EventScript_15C91B:: @ 815C91B
 	return
 
 RusturfTunnel_EventScript_15C92D:: @ 815C92D
-	playse 21
+	playse SE_PIN
 	applymovement 1, RusturfTunnel_Movement_1A0833
 	waitmovement 0
 	applymovement 1, RusturfTunnel_Movement_1A0835
@@ -266,15 +266,15 @@ RusturfTunnel_Movement_15C994:: @ 815C994
 	step_end
 
 RusturfTunnel_EventScript_15C999:: @ 815C999
-	setvar 0x4001, 1
+	setvar VAR_TEMP_1, 1
 	end
 
 RusturfTunnel_EventScript_15C99F:: @ 815C99F
-	setvar 0x4001, 2
+	setvar VAR_TEMP_1, 2
 	end
 
 RusturfTunnel_EventScript_15C9A5:: @ 815C9A5
-	setvar 0x4001, 3
+	setvar VAR_TEMP_1, 3
 	end
 
 RusturfTunnel_EventScript_15C9AB:: @ 815C9AB
@@ -286,7 +286,7 @@ RusturfTunnel_EventScript_15C9AB:: @ 815C9AB
 	waitmovement 0
 	moveobjectoffscreen 6
 	moveobjectoffscreen 7
-	setvar 0x409a, 3
+	setvar VAR_RUSTURF_TUNNEL_STATE, 3
 	releaseall
 	end
 
@@ -309,7 +309,7 @@ RusturfTunnel_EventScript_15C9D7:: @ 815C9D7
 RusturfTunnel_EventScript_15C9EA:: @ 815C9EA
 	lock
 	faceplayer
-	playbgm BGM_EVIL_TEAM, 0
+	playbgm BGM_EVIL_TEAM, FALSE
 	msgbox RusturfTunnel_Text_19419B, 4
 	trainerbattle 3, OPPONENT_RUSTURF_TUNNEL_GRUNT, 0, RusturfTunnel_Text_194243
 	msgbox RusturfTunnel_Text_194274, 4
@@ -343,8 +343,8 @@ RusturfTunnel_EventScript_15C9EA:: @ 815C9EA
 	removeobject 7
 	clearflag FLAG_DEVON_GOODS_STOLEN
 	setflag FLAG_RECOVERED_DEVON_GOODS
-	setvar 0x405a, 4
-	setvar 0x4090, 1
+	setvar VAR_RUSTBORO_STATE, 4
+	setvar VAR_BRINEY_HOUSE_STATE, 1
 	setflag FLAG_HIDE_BRINEY_ROUTE116
 	release
 	end

@@ -5,9 +5,9 @@ PetalburgCity_MapScripts:: @ 814B70C
 
 PetalburgCity_MapScript1_14B717:: @ 814B717
 	setflag FLAG_VISITED_PETALBURG_CITY
-	compare 0x4057, 0
+	compare VAR_PETALBURG_STATE, 0
 	call_if 1, PetalburgCity_EventScript_14B731
-	compare 0x4057, 2
+	compare VAR_PETALBURG_STATE, 2
 	call_if 1, PetalburgCity_EventScript_14B739
 	end
 
@@ -16,16 +16,16 @@ PetalburgCity_EventScript_14B731:: @ 814B731
 	return
 
 PetalburgCity_EventScript_14B739:: @ 814B739
-	savebgm 420
+	savebgm BGM_TSURETEK
 	return
 
 PetalburgCity_MapScript2_14B73D:: @ 814B73D
-	map_script_2 0x4057, 2, PetalburgCity_EventScript_14B747
+	map_script_2 VAR_PETALBURG_STATE, 2, PetalburgCity_EventScript_14B747
 	.2byte 0
 
 PetalburgCity_EventScript_14B747:: @ 814B747
 	lockall
-	setflag 0x4000
+	setflag FLAG_SPECIAL_FLAG_0
 	special SavePlayerParty
 	special PutZigzagoonInPlayerParty
 	applymovement 2, PetalburgCity_Movement_14B7ED
@@ -39,12 +39,12 @@ PetalburgCity_EventScript_14B747:: @ 814B747
 	waitmovement 0, 0, 2
 	msgbox PetalburgCity_Text_16D408, 4
 	closemessage
-	clearflag 0x4000
-	setvar 0x4057, 3
+	clearflag FLAG_SPECIAL_FLAG_0
+	setvar VAR_PETALBURG_STATE, 3
 	fadedefaultbgm
-	clearflag 0x4001
+	clearflag FLAG_SPECIAL_FLAG_1
 	special LoadPlayerParty
-	setvar 0x4085, 1
+	setvar VAR_PETALBURG_GYM_STATE, 1
 	warp MAP_PETALBURG_CITY_GYM, 255, 4, 108
 	waitstate
 	releaseall
@@ -156,54 +156,54 @@ PetalburgCity_EventScript_14B82D:: @ 814B82D
 
 PetalburgCity_EventScript_14B836:: @ 814B836
 	lockall
-	setvar 0x8008, 0
+	setvar VAR_SPECIAL_8, 0
 	goto PetalburgCity_EventScript_14B866
 	end
 
 PetalburgCity_EventScript_14B842:: @ 814B842
 	lockall
-	setvar 0x8008, 1
+	setvar VAR_SPECIAL_8, 1
 	goto PetalburgCity_EventScript_14B866
 	end
 
 PetalburgCity_EventScript_14B84E:: @ 814B84E
 	lockall
-	setvar 0x8008, 2
+	setvar VAR_SPECIAL_8, 2
 	goto PetalburgCity_EventScript_14B866
 	end
 
 PetalburgCity_EventScript_14B85A:: @ 814B85A
 	lockall
-	setvar 0x8008, 3
+	setvar VAR_SPECIAL_8, 3
 	goto PetalburgCity_EventScript_14B866
 	end
 
 PetalburgCity_EventScript_14B866:: @ 814B866
 	applymovement 9, PetalburgCity_Movement_1A0839
 	waitmovement 0
-	playbgm 420, 0
-	playse 21
+	playbgm BGM_TSURETEK, FALSE
+	playse SE_PIN
 	applymovement 9, PetalburgCity_Movement_1A0833
 	waitmovement 0
 	applymovement 9, PetalburgCity_Movement_1A0835
 	waitmovement 0
-	compare 0x8008, 0
+	compare VAR_SPECIAL_8, 0
 	call_if 1, PetalburgCity_EventScript_14B91B
-	compare 0x8008, 1
+	compare VAR_SPECIAL_8, 1
 	call_if 1, PetalburgCity_EventScript_14B930
-	compare 0x8008, 2
+	compare VAR_SPECIAL_8, 2
 	call_if 1, PetalburgCity_EventScript_14B93B
-	compare 0x8008, 3
+	compare VAR_SPECIAL_8, 3
 	call_if 1, PetalburgCity_EventScript_14B950
 	msgbox PetalburgCity_Text_16438A, 4
 	closemessage
-	compare 0x8008, 0
+	compare VAR_SPECIAL_8, 0
 	call_if 1, PetalburgCity_EventScript_14B965
-	compare 0x8008, 1
+	compare VAR_SPECIAL_8, 1
 	call_if 1, PetalburgCity_EventScript_14B977
-	compare 0x8008, 2
+	compare VAR_SPECIAL_8, 2
 	call_if 1, PetalburgCity_EventScript_14B989
-	compare 0x8008, 3
+	compare VAR_SPECIAL_8, 3
 	call_if 1, PetalburgCity_EventScript_14B99B
 	msgbox PetalburgCity_Text_164426, 4
 	applymovement 9, PetalburgCity_Movement_1A0843

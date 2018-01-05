@@ -54,7 +54,7 @@ Route109_EventScript_14F548:: @ 814F548
 	hideobjectat 1, MAP_ROUTE109
 	msgbox Route109_Text_16B4B5, 4
 	closemessage
-	copyvar 0x4096, 0x8008
+	copyvar VAR_BRINEY_LOCATION, VAR_SPECIAL_8
 	resetobjectpriority 255, MAP_ROUTE109
 	resetobjectpriority 2, MAP_DEWFORD_TOWN
 	moveobjectoffscreen 2
@@ -278,8 +278,8 @@ Route109_EventScript_14F680:: @ 814F680
 
 Route109_EventScript_14F691:: @ 814F691
 	message Route109_Text_16E0F9
-	msgbox Route109_Text_16E0F9, 5
-	compare RESULT, 0
+	msgbox Route109_Text_16E0F9, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq Route109_EventScript_14F6F1
 	goto Route109_EventScript_14F6E2
 	end
@@ -396,7 +396,7 @@ Route109_EventScript_14F7F2:: @ 814F7F2
 
 Route109_EventScript_14F809:: @ 814F809
 	trainerbattle 0, OPPONENT_RICKY_1, 0, Route109_Text_1B9C23, Route109_Text_1B9C65
-	specialvar RESULT, sub_8082C68
+	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
 	goto_if_eq Route109_EventScript_14F830
 	msgbox Route109_Text_1B9C6E, 6
@@ -409,7 +409,7 @@ Route109_EventScript_14F830:: @ 814F830
 
 Route109_EventScript_14F847:: @ 814F847
 	trainerbattle 0, OPPONENT_LOLA_1, 0, Route109_Text_1B9D54, Route109_Text_1B9D87
-	specialvar RESULT, sub_8082C68
+	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
 	goto_if_eq Route109_EventScript_14F86E
 	msgbox Route109_Text_1B9D8E, 6

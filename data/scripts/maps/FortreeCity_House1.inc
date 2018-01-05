@@ -6,29 +6,29 @@ FortreeCity_House1_EventScript_157E13:: @ 8157E13
 	faceplayer
 	checkflag FLAG_FORTREE_NPC_TRADE_COMPLETED
 	goto_if_eq FortreeCity_House1_EventScript_157EAD
-	setvar 0x8008, 1
-	copyvar 0x8004, 0x8008
-	specialvar RESULT, sub_804D89C
-	copyvar 0x8009, RESULT
-	msgbox FortreeCity_House1_Text_18568C, 5
-	compare RESULT, 0
+	setvar VAR_SPECIAL_8, 1
+	copyvar VAR_SPECIAL_4, VAR_SPECIAL_8
+	specialvar RESULT, GetInGameTradeSpeciesInfo
+	copyvar VAR_SPECIAL_9, RESULT
+	msgbox FortreeCity_House1_Text_18568C, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq FortreeCity_House1_EventScript_157E95
-	special sub_80F9A0C
+	special SelectMonForNPCTrade
 	waitstate
-	copyvar 0x800a, 0x8004
-	compare 0x8004, 255
+	copyvar VAR_SPECIAL_A, VAR_SPECIAL_4
+	compare VAR_SPECIAL_4, 255
 	goto_if_eq FortreeCity_House1_EventScript_157E95
-	copyvar 0x8005, 0x800a
-	specialvar RESULT, sub_804DB2C
-	copyvar 0x800b, RESULT
-	compare RESULT, 0x8009
+	copyvar VAR_SPECIAL_5, VAR_SPECIAL_A
+	specialvar RESULT, GetTradeSpecies
+	copyvar VAR_SPECIAL_B, RESULT
+	compare RESULT, VAR_SPECIAL_9
 	goto_if 5, FortreeCity_House1_EventScript_157E9F
-	copyvar 0x8004, 0x8008
-	copyvar 0x8005, 0x800a
-	special sub_804DB68
-	special sub_804E174
+	copyvar VAR_SPECIAL_4, VAR_SPECIAL_8
+	copyvar VAR_SPECIAL_5, VAR_SPECIAL_A
+	special CreateInGameTradePokemon
+	special DoInGameTradeScene
 	waitstate
-	bufferspeciesname 0, 0x8009
+	bufferspeciesname 0, VAR_SPECIAL_9
 	msgbox FortreeCity_House1_Text_1856F7, 4
 	setflag FLAG_FORTREE_NPC_TRADE_COMPLETED
 	release
@@ -40,7 +40,7 @@ FortreeCity_House1_EventScript_157E95:: @ 8157E95
 	end
 
 FortreeCity_House1_EventScript_157E9F:: @ 8157E9F
-	bufferspeciesname 0, 0x8009
+	bufferspeciesname 0, VAR_SPECIAL_9
 	msgbox FortreeCity_House1_Text_185737, 4
 	release
 	end

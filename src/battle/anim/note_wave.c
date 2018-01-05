@@ -6,8 +6,8 @@
 #include "palette.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 extern u16 gUnknown_083D712C[4][6];
 
@@ -74,15 +74,15 @@ void sub_80CEB0C(struct Sprite* sprite)
     sprite->data[1] = gBattleAnimArgs[1];
     sprite->data[2] = 0;
     sprite->data[3] = gBattleAnimArgs[2];
-    if (NotInBattle())
+    if (IsContest())
     {
         a = 0x30;
         b = 0x28;
     }
     else
     {
-        a = sub_8077ABC(gBattleAnimBankTarget, 2);
-        b = sub_8077ABC(gBattleAnimBankTarget, 3);
+        a = GetBankPosition(gAnimBankTarget, 2);
+        b = GetBankPosition(gAnimBankTarget, 3);
     }
 
     sprite->data[4] = sprite->pos1.x << 4;

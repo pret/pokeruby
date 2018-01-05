@@ -210,24 +210,24 @@ Route111_EventScript_1AE5A2:: @ 81AE5A2
 	call_if 1, Route111_EventScript_1AE5FD
 	checkflag FLAG_TEMP_1
 	goto_if_eq Route111_EventScript_1AE73A
-	msgbox Route111_Text_1AC015, 5
+	msgbox Route111_Text_1AC015, MSGBOX_YESNO
 	goto Route111_EventScript_1AE6F3
 	end
 
 Route111_EventScript_1AE5E0:: @ 81AE5E0
-	applymovement 0x8004, Route111_Movement_1AE699
+	applymovement VAR_SPECIAL_4, Route111_Movement_1AE699
 	waitmovement 0
 	return
 
 Route111_EventScript_1AE5EB:: @ 81AE5EB
-	applymovement 0x8004, Route111_Movement_1AE69B
-	applymovement 0x8005, Route111_Movement_1A0841
+	applymovement VAR_SPECIAL_4, Route111_Movement_1AE69B
+	applymovement VAR_SPECIAL_5, Route111_Movement_1A0841
 	waitmovement 0
 	return
 
 Route111_EventScript_1AE5FD:: @ 81AE5FD
-	applymovement 0x8004, Route111_Movement_1AE69D
-	applymovement 0x8005, Route111_Movement_1A083F
+	applymovement VAR_SPECIAL_4, Route111_Movement_1AE69D
+	applymovement VAR_SPECIAL_5, Route111_Movement_1A083F
 	waitmovement 0
 	return
 
@@ -248,7 +248,7 @@ Route120_EventScript_1AE60F:: @ 81AE60F
 	compare RESULT, 0
 	goto_if_eq Route111_EventScript_1AE69F
 	msgbox Route111_Text_1AC10A, 4
-	specialvar RESULT, sub_80BDD18
+	specialvar RESULT, GabbyAndTyGetLastBattleTrivia
 	switch RESULT
 	case 0, Route111_EventScript_1AE6AD
 	case 1, Route111_EventScript_1AE6BB
@@ -270,47 +270,47 @@ Route111_Movement_1AE69D:: @ 81AE69D
 	step_end
 
 Route111_EventScript_1AE69F:: @ 81AE69F
-	msgbox Route111_Text_1AC60B, 5
+	msgbox Route111_Text_1AC60B, MSGBOX_YESNO
 	goto Route111_EventScript_1AE6F3
 	end
 
 Route111_EventScript_1AE6AD:: @ 81AE6AD
-	msgbox Route111_Text_1AC3CF, 5
+	msgbox Route111_Text_1AC3CF, MSGBOX_YESNO
 	goto Route111_EventScript_1AE6F3
 	end
 
 Route111_EventScript_1AE6BB:: @ 81AE6BB
-	msgbox Route111_Text_1AC18D, 5
+	msgbox Route111_Text_1AC18D, MSGBOX_YESNO
 	goto Route111_EventScript_1AE6F3
 	end
 
 Route111_EventScript_1AE6C9:: @ 81AE6C9
-	msgbox Route111_Text_1AC219, 5
+	msgbox Route111_Text_1AC219, MSGBOX_YESNO
 	goto Route111_EventScript_1AE6F3
 	end
 
 Route111_EventScript_1AE6D7:: @ 81AE6D7
-	msgbox Route111_Text_1AC2D6, 5
+	msgbox Route111_Text_1AC2D6, MSGBOX_YESNO
 	goto Route111_EventScript_1AE6F3
 	end
 
 Route111_EventScript_1AE6E5:: @ 81AE6E5
-	msgbox Route111_Text_1AC355, 5
+	msgbox Route111_Text_1AC355, MSGBOX_YESNO
 	goto Route111_EventScript_1AE6F3
 	end
 
 Route111_EventScript_1AE6F3:: @ 81AE6F3
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq Route111_EventScript_1AE72D
 	msgbox Route111_Text_1AC40F, 4
-	setvar 0x8004, 10
+	setvar VAR_SPECIAL_4, 10
 	call Route111_EventScript_1A00F3
 	lock
 	faceplayer
 	compare RESULT, 0
 	goto_if_eq Route111_EventScript_1AE72D
 	msgbox Route111_Text_1AC487, 4
-	special sub_80BDC14
+	special GabbyAndTyAfterInterview
 	setflag FLAG_TEMP_1
 	release
 	end

@@ -3,7 +3,7 @@ Route121_SafariZoneEntrance_MapScripts:: @ 815C323
 	.byte 0
 
 Route121_SafariZoneEntrance_MapScript2_15C329:: @ 815C329
-	map_script_2 0x40a4, 1, Route121_SafariZoneEntrance_EventScript_15C333
+	map_script_2 VAR_SAFARI_ZONE_STATE, 1, Route121_SafariZoneEntrance_EventScript_15C333
 	.2byte 0
 
 Route121_SafariZoneEntrance_EventScript_15C333:: @ 815C333
@@ -11,7 +11,7 @@ Route121_SafariZoneEntrance_EventScript_15C333:: @ 815C333
 	applymovement 255, Route121_SafariZoneEntrance_Movement_15C348
 	waitmovement 0
 	special ExitSafariMode
-	setvar 0x40a4, 0
+	setvar VAR_SAFARI_ZONE_STATE, 0
 	releaseall
 	end
 
@@ -33,8 +33,8 @@ Route121_SafariZoneEntrance_EventScript_15C351:: @ 815C351
 Route121_SafariZoneEntrance_EventScript_15C35A:: @ 815C35A
 	lock
 	faceplayer
-	msgbox Route121_SafariZoneEntrance_Text_1C3704, 5
-	compare RESULT, 1
+	msgbox Route121_SafariZoneEntrance_Text_1C3704, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq Route121_SafariZoneEntrance_EventScript_15C379
 	msgbox Route121_SafariZoneEntrance_Text_1C373C, 4
 	release
@@ -51,8 +51,8 @@ Route121_SafariZoneEntrance_EventScript_15C383:: @ 815C383
 	waitmovement 0
 	showmoneybox 0, 0
 	nop
-	msgbox Route121_SafariZoneEntrance_Text_1C3832, 5
-	compare RESULT, 1
+	msgbox Route121_SafariZoneEntrance_Text_1C3832, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq Route121_SafariZoneEntrance_EventScript_15C3B3
 	msgbox Route121_SafariZoneEntrance_Text_1C3895, 4
 	goto Route121_SafariZoneEntrance_EventScript_15C46C
@@ -71,7 +71,7 @@ Route121_SafariZoneEntrance_EventScript_15C3B3:: @ 815C3B3
 	updatemoneybox 0, 0
 	nop
 	msgbox Route121_SafariZoneEntrance_Text_1C38F4, 4
-	playfanfare 370
+	playfanfare BGM_FANFA4
 	message Route121_SafariZoneEntrance_Text_1C3910
 	waitfanfare
 	waitmessage
@@ -81,7 +81,7 @@ Route121_SafariZoneEntrance_EventScript_15C3B3:: @ 815C3B3
 	applymovement 255, Route121_SafariZoneEntrance_Movement_15C47E
 	waitmovement 0
 	special EnterSafariMode
-	setvar 0x40a4, 2
+	setvar VAR_SAFARI_ZONE_STATE, 2
 	warp MAP_SAFARI_ZONE_SOUTHEAST, 255, 32, 33
 	waitstate
 	end

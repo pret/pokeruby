@@ -7,8 +7,8 @@
 #include "battle.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gBattleAnimBankAttacker;
-extern u8 gBattleAnimBankTarget;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
 
 extern u8 gBanksBySide[];
 extern u16 gBattleTypeFlags;
@@ -46,7 +46,7 @@ void sub_80CFA20(u8 taskId)
         gTasks[taskId].data[gTasks[taskId].data[1] + 13] = spriteId;
         gTasks[taskId].data[0] = gTasks[taskId].data[3];
         gTasks[taskId].data[1]++;
-        PlaySE12WithPanning(0x9A, sub_8076F98(-0x3F));
+        PlaySE12WithPanning(0x9A, BattleAnimAdjustPanning(-0x3F));
         if (gTasks[taskId].data[1] > 2)
             gTasks[taskId].func = sub_80CF9F8;
     }
@@ -60,7 +60,7 @@ void sub_80CFB04(u8 taskId)
     s16 sp2 = 0;
     s16 r4;
 
-    if (NotInBattle())
+    if (IsContest())
     {
         gTasks[taskId].data[4] = 2;
         gBattleAnimArgs[0] = -gBattleAnimArgs[0];
@@ -71,7 +71,7 @@ void sub_80CFB04(u8 taskId)
     }
     else
     {
-        if ((gBanksBySide[gBattleAnimBankTarget] & 1) == 0)
+        if ((gBanksBySide[gAnimBankTarget] & 1) == 0)
         {
             gTasks[taskId].data[4] = 1;
             gBattleAnimArgs[0] = -gBattleAnimArgs[0];
@@ -82,17 +82,17 @@ void sub_80CFB04(u8 taskId)
                 gBattleAnimArgs[2] |= 1;
         }
     }
-    r6 = gTasks[taskId].data[9] = sub_8077ABC(gBattleAnimBankAttacker, 0);
-    r9 = gTasks[taskId].data[10] = sub_8077ABC(gBattleAnimBankAttacker, 1);
+    r6 = gTasks[taskId].data[9] = GetBankPosition(gAnimBankAttacker, 0);
+    r9 = gTasks[taskId].data[10] = GetBankPosition(gAnimBankAttacker, 1);
     if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-        && IsAnimBankSpriteVisible(gBattleAnimBankTarget ^ 2))
+        && IsAnimBankSpriteVisible(gAnimBankTarget ^ 2))
     {
-        sub_807A3FC(gBattleAnimBankTarget, 0, &sp1, &sp2);
+        sub_807A3FC(gAnimBankTarget, 0, &sp1, &sp2);
     }
     else
     {
-        sp1 = sub_8077ABC(gBattleAnimBankTarget, 0);
-        sp2 = sub_8077ABC(gBattleAnimBankTarget, 1);
+        sp1 = GetBankPosition(gAnimBankTarget, 0);
+        sp2 = GetBankPosition(gAnimBankTarget, 1);
     }
 
     sp1 = gTasks[taskId].data[11] = sp1 + gBattleAnimArgs[0];
@@ -122,12 +122,12 @@ void sub_80CFB04(u8 taskId)
         gBattleAnimArgs[4] ^= 0x80;
         if (gBattleAnimArgs[4] >= 64)
         {
-            u16 var = sub_8079E90(gBattleAnimBankTarget) + (gBattleAnimArgs[4] - 64);
+            u16 var = sub_8079E90(gAnimBankTarget) + (gBattleAnimArgs[4] - 64);
             gTasks[taskId].data[2] = var;
         }
         else
         {
-            u16 var = sub_8079E90(gBattleAnimBankTarget) - gBattleAnimArgs[4];
+            u16 var = sub_8079E90(gAnimBankTarget) - gBattleAnimArgs[4];
             gTasks[taskId].data[2] = var;
         }
     }
@@ -135,12 +135,12 @@ void sub_80CFB04(u8 taskId)
     {
         if (gBattleAnimArgs[4] >= 64)
         {
-            u16 var = sub_8079E90(gBattleAnimBankTarget) + (gBattleAnimArgs[4] - 64);
+            u16 var = sub_8079E90(gAnimBankTarget) + (gBattleAnimArgs[4] - 64);
             gTasks[taskId].data[2] = var;
         }
         else
         {
-            u16 var = sub_8079E90(gBattleAnimBankTarget) - gBattleAnimArgs[4];
+            u16 var = sub_8079E90(gAnimBankTarget) - gBattleAnimArgs[4];
             gTasks[taskId].data[2] = var;
         }
     }

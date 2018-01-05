@@ -4,7 +4,7 @@ MtChimney_MapScripts:: @ 815CF7C
 	.byte 0
 
 MtChimney_MapScript1_15CF87:: @ 815CF87
-	setvar 0x40bd, 1
+	setvar VAR_JAGGED_PASS_ASH_WEATHER, 1
 	call MtChimney_EventScript_1A0196
 	end
 
@@ -17,8 +17,8 @@ MtChimney_EventScript_15CF95:: @ 815CF95
 	faceplayer
 	showmoneybox 0, 0
 	nop
-	msgbox MtChimney_Text_195760, 5
-	compare RESULT, 0
+	msgbox MtChimney_Text_195760, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq MtChimney_EventScript_15D00B
 	checkmoney 0xc8, 0
 	compare RESULT, 0
@@ -410,8 +410,8 @@ MtChimney_EventScript_15D17D:: @ 815D17D
 	goto_if 0, MtChimney_EventScript_15D1D0
 	checkflag FLAG_RECEIVED_METEORITE
 	goto_if_eq MtChimney_EventScript_15D1C6
-	msgbox MtChimney_Text_195870, 5
-	compare RESULT, 0
+	msgbox MtChimney_Text_195870, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq MtChimney_EventScript_15D1BC
 	msgbox MtChimney_Text_1958C6, 4
 	giveitem_std ITEM_METEORITE
@@ -440,7 +440,7 @@ MtChimney_EventScript_15D1DA:: @ 815D1DA
 
 MtChimney_EventScript_15D1E3:: @ 815D1E3
 	trainerbattle 0, OPPONENT_SHELBY_1, 0, MtChimney_Text_19597F, MtChimney_Text_1959D8
-	specialvar RESULT, sub_8082C68
+	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
 	goto_if_eq MtChimney_EventScript_15D20A
 	msgbox MtChimney_Text_195A04, 6

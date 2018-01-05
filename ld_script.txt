@@ -278,9 +278,9 @@ SECTIONS {
         src/battle/anim/energy_wave.o(.text);
         src/battle/anim/water.o(.text);
         asm/water.o(.text);
-        asm/fire.o(.text);
+        src/battle/anim/fire.o(.text);
         src/battle/anim/sunlight.o(.text);
-        asm/fire_2.o(.text);
+        src/battle/anim/fire_2.o(.text);
         src/battle/anim/heated_rock.o(.text);
         src/battle/anim/wisp_orb.o(.text);
         asm/wisp_fire.o(.text);
@@ -319,10 +319,7 @@ SECTIONS {
         src/scene/cute_sketch.o(.text);
         asm/cute_sketch.o(.text);
         src/field/decoration.o(.text);
-        asm/slot_machine.o(.text);
         src/field/slot_machine.o(.text);
-        asm/slot_machine.o(.text_8104D30)
-        src/field/slot_machine.o(.text_b);
         src/scene/contest_painting.o(.text);
         src/battle/battle_ai.o(.text);
         src/field/trader.o(.text);
@@ -434,7 +431,9 @@ SECTIONS {
         tools/agbcc/lib/libgcc.a:fp-bit.o(.text);
         tools/agbcc/lib/libgcc.a:_lshrdi3.o(.text);
         tools/agbcc/lib/libgcc.a:_negdi2.o(.text);
-        src/libs/libc.o(.text);
+        tools/agbcc/lib/libc.a:memcpy.o(.text);
+        tools/agbcc/lib/libc.a:memset.o(.text);
+        tools/agbcc/lib/libc.a:strcmp.o(.text);
     } =0
 
     .rodata :
@@ -476,7 +475,7 @@ SECTIONS {
         src/field/field_player_avatar.o(.rodata);
         src/field/field_map_obj.o(.rodata);
         src/field/field_ground_effect.o(.rodata);
-        data/field_map_obj_helpers.o(.rodata);
+        src/field/field_map_obj_helpers.o(.rodata);
         src/engine/text_window.o(.rodata);
         src/engine/script.o(.rodata);
         src/field/scrcmd.o(.rodata);
@@ -504,7 +503,6 @@ SECTIONS {
         src/engine/cable_club.o(.rodata);
         src/debug/mori_debug_menu.o(.rodata);
         src/field/trainer_see.o(.rodata);
-        data/trainer_see.o(.rodata);
         src/field/wild_encounter.o(.rodata);
         src/field/field_effect.o(.rodata);
         src/pokemon/pokemon_menu.o(.rodata);
@@ -525,7 +523,6 @@ SECTIONS {
         src/field/berry.o(.rodata);
         src/field/script_menu.o(.rodata);
         src/engine/naming_screen.o(.rodata);
-        data/naming_screen.o(.rodata);
         src/field/money.o(.rodata);
         data/contest_effect.o(.rodata);
         src/engine/record_mixing.o(.data);
@@ -555,7 +552,7 @@ SECTIONS {
         src/field/region_map.o(.rodata);
         data/cute_sketch.o(.rodata);
         src/field/decoration.o(.rodata);
-        data/slot_machine.o(.rodata);
+        src/field/slot_machine.o(.rodata);
         src/scene/contest_painting.o(.rodata);
         src/battle/battle_ai.o(.rodata);
         src/field/trader.o(.rodata);
@@ -597,13 +594,13 @@ SECTIONS {
         src/field/berry_tag_screen.o(.rodata);
         src/engine/save_failed_screen.o(.rodata);
         src/pokemon/pokeblock_feed.o(.rodata);
-        data/intro_credits_graphics.o(.rodata);
+        src/scene/intro_credits_graphics.o(.rodata);
         src/scene/evolution_graphics.o(.rodata);
-        data/bard_music.o(.rodata);
-        data/unknown_debug_menu.o(.rodata);
+        src/field/bard_music.o(.rodata);
+        src/debug/unknown_debug_menu.o(.rodata);
         data/strings2.o(.rodata);
-        data/menu_cursor.o(.rodata);
-        data/mystery_event_msg.o(.rodata);
+        src/engine/menu_cursor.o(.rodata);
+        src/engine/mystery_event_msg.o(.rodata);
         src/libs/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
     } =0

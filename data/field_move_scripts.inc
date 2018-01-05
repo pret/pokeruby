@@ -8,8 +8,8 @@ S_CuttableTree:: @ 81B0DCC
 	setfieldeffectargument 0, RESULT
 	bufferpartymonnick 0, RESULT
 	buffermovename 1, MOVE_CUT
-	msgbox UseCutPromptText, 5
-	compare RESULT, 0
+	msgbox UseCutPromptText, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq Cut_ChoseNo
 	msgbox UsedCutRockSmashText, 4
 	closemessage
@@ -66,8 +66,8 @@ S_BreakableRock:: @ 81B0EB7
 	setfieldeffectargument 0, RESULT
 	bufferpartymonnick 0, RESULT
 	buffermovename 1, MOVE_ROCK_SMASH
-	msgbox UseRockSmashPromptText, 5
-	compare RESULT, 0
+	msgbox UseRockSmashPromptText, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq RockSmash_ChoseNo
 	msgbox UsedCutRockSmashText, 4
 	closemessage
@@ -87,7 +87,7 @@ DoRockSmashMovement: @ 81B0F0C
 	applymovement LAST_TALKED, RockSmashMovement
 	waitmovement 0
 	removeobject LAST_TALKED
-	specialvar RESULT, sub_810F5BC
+	specialvar RESULT, TryUpdateRusturfTunnelState
 	compare RESULT, 1
 	goto_if_eq DoRockSmashMovement_Done
 	special ScrSpecial_RockSmashWildEncounter
@@ -133,8 +133,8 @@ S_PushableBoulder:: @ 81B0FCB
 	compare RESULT, 6
 	goto_if_eq CannotUseStrength
 	setfieldeffectargument 0, RESULT
-	msgbox UseStrengthPromptText, 5
-	compare RESULT, 0
+	msgbox UseStrengthPromptText, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq Strength_ChoseNo
 	closemessage
 	dofieldeffect 40
@@ -195,8 +195,8 @@ S_UseWaterfall:: @ 81B115A
 	goto_if_eq Waterfall_NoMonKnows
 	bufferpartymonnick 0, RESULT
 	setfieldeffectargument 0, RESULT
-	msgbox UseWaterfallPromptText, 5
-	compare RESULT, 0
+	msgbox UseWaterfallPromptText, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq Waterfall_Done
 	msgbox UsedWaterfallText, 4
 	dofieldeffect 43
@@ -229,8 +229,8 @@ UseDiveScript:: @ 81B1220
 	bufferpartymonnick 0, RESULT
 	setfieldeffectargument 0, RESULT
 	setfieldeffectargument 1, 1
-	msgbox UseDivePromptText, 5
-	compare RESULT, 0
+	msgbox UseDivePromptText, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq Dive_Done
 	msgbox UsedDiveText, 4
 	dofieldeffect 44
@@ -252,8 +252,8 @@ S_UseDiveUnderwater:: @ 81B1269
 	bufferpartymonnick 0, RESULT
 	setfieldeffectargument 0, RESULT
 	setfieldeffectargument 1, 1
-	msgbox UnderwaterUseDivePromptText, 5
-	compare RESULT, 0
+	msgbox UnderwaterUseDivePromptText, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq UnderwaterDive_Done
 	msgbox UsedDiveText, 4
 	dofieldeffect 44

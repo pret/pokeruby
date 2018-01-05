@@ -5,7 +5,7 @@ GraniteCave_StevensRoom_EventScript_15CBFA:: @ 815CBFA
 	lock
 	faceplayer
 	msgbox GraniteCave_StevensRoom_Text_194AE5, 4
-	setvar 0x8004, ITEM_LETTER
+	setvar VAR_SPECIAL_4, ITEM_LETTER
 	call GraniteCave_StevensRoom_EventScript_1A067F
 	setflag FLAG_DELIVERED_STEVEN_LETTER
 	msgbox GraniteCave_StevensRoom_Text_194BDD, 4
@@ -22,7 +22,7 @@ GraniteCave_StevensRoom_EventScript_15CBFA:: @ 815CBFA
 	call_if 1, GraniteCave_StevensRoom_EventScript_15CC6D
 	compare FACING, 4
 	call_if 1, GraniteCave_StevensRoom_EventScript_15CC6D
-	playse 9
+	playse SE_KAIDAN
 	removeobject 1
 	release
 	end

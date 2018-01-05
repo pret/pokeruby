@@ -14,11 +14,11 @@ Route117_EventScript_1B222D:: @ 81B222D
 	end
 
 Route117_EventScript_1B2262:: @ 81B2262
-	msgbox Route117_Text_1B2659, 5
-	compare RESULT, 1
+	msgbox Route117_Text_1B2659, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq Route117_EventScript_1B2298
-	msgbox Route117_Text_1B28C4, 5
-	compare RESULT, 1
+	msgbox Route117_Text_1B28C4, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq Route117_EventScript_1B2298
 	msgbox Route117_Text_1B2745, 4
 	clearflag FLAG_PENDING_DAYCARE_EGG
@@ -36,7 +36,7 @@ Route117_EventScript_1B2298:: @ 81B2298
 
 Route117_EventScript_1B22B2:: @ 81B22B2
 	message Route117_Text_1B27A2
-	playfanfare 367
+	playfanfare BGM_FANFA1
 	waitfanfare
 	waitmessage
 	waitbuttonpress
@@ -59,7 +59,7 @@ Route117_EventScript_1B22DE:: @ 81B22DE
 Route117_EventScript_1B22E7:: @ 81B22E7
 	special GetDaycareMonNicknames
 	msgbox Route117_Text_1B2710, 4
-	setvar 0x8004, 0
+	setvar VAR_SPECIAL_4, 0
 	call Route117_EventScript_1B22CD
 	release
 	end
@@ -71,9 +71,9 @@ Route117_EventScript_1B22FE:: @ 81B22FE
 	special ShowFieldMessageStringVar4
 	waitmessage
 	waitbuttonpress
-	setvar 0x8004, 0
+	setvar VAR_SPECIAL_4, 0
 	call Route117_EventScript_1B22CD
-	setvar 0x8004, 1
+	setvar VAR_SPECIAL_4, 1
 	call Route117_EventScript_1B22CD
 	release
 	end
@@ -88,29 +88,29 @@ Route117_PokemonDayCare_EventScript_1B2327:: @ 81B2327
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B242B
 	compare RESULT, 3
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B2558
-	msgbox Route117_PokemonDayCare_Text_1B28F2, 5
-	compare RESULT, 1
+	msgbox Route117_PokemonDayCare_Text_1B28F2, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B236C
 	msgbox Route117_PokemonDayCare_Text_1B2A14, 4
 	release
 	end
 
 Route117_PokemonDayCare_EventScript_1B236C:: @ 81B236C
-	specialvar RESULT, sub_8095B6C
+	specialvar RESULT, GetNumValidDaycarePartyMons
 	compare RESULT, 1
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B23F3
 	msgbox Route117_PokemonDayCare_Text_1B2947, 4
 	fadescreen 1
 	special ChooseSendDaycareMon
 	waitstate
-	compare 0x8004, 255
+	compare VAR_SPECIAL_4, 255
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B23D0
-	specialvar RESULT, sub_8095C10
+	specialvar RESULT, CountAlivePartyMonsExceptSelectedOne
 	compare RESULT, 0
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B23FD
-	specialvar 0x8005, GetSelectedDaycareMonNickname
+	specialvar VAR_SPECIAL_5, GetSelectedDaycareMonNickname
 	waitse
-	playmoncry 0x8005, 0
+	playmoncry VAR_SPECIAL_5, 0
 	msgbox Route117_PokemonDayCare_Text_1B296E, 4
 	waitmoncry
 	special StoreSelectedPokemonInDaycare
@@ -127,8 +127,8 @@ Route117_PokemonDayCare_EventScript_1B23D0:: @ 81B23D0
 	end
 
 Route117_PokemonDayCare_EventScript_1B23DA:: @ 81B23DA
-	msgbox Route117_PokemonDayCare_Text_1B29AD, 5
-	compare RESULT, 1
+	msgbox Route117_PokemonDayCare_Text_1B29AD, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B236C
 	goto Route117_PokemonDayCare_EventScript_1B23D0
 	end
@@ -160,13 +160,13 @@ Route117_PokemonDayCare_EventScript_1B241A:: @ 81B241A
 
 Route117_PokemonDayCare_EventScript_1B242B:: @ 81B242B
 	msgbox Route117_PokemonDayCare_Text_1B2A88, 4
-	setvar 0x8004, 0
+	setvar VAR_SPECIAL_4, 0
 	call Route117_PokemonDayCare_EventScript_1B241A
-	msgbox Route117_PokemonDayCare_Text_1B29AD, 5
-	compare RESULT, 1
+	msgbox Route117_PokemonDayCare_Text_1B29AD, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B236C
-	msgbox Route117_PokemonDayCare_Text_1B2BF6, 5
-	compare RESULT, 1
+	msgbox Route117_PokemonDayCare_Text_1B2BF6, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B2469
 	goto Route117_PokemonDayCare_EventScript_1B23D0
 	end
@@ -176,12 +176,12 @@ Route117_PokemonDayCare_EventScript_1B2469:: @ 81B2469
 	compare RESULT, 6
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B2539
 	specialvar RESULT, GetDaycareState
-	setvar 0x8004, 0
+	setvar VAR_SPECIAL_4, 0
 	compare RESULT, 2
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B24A8
 	special ShowDaycareLevelMenu
 	waitstate
-	copyvar 0x8004, RESULT
+	copyvar VAR_SPECIAL_4, RESULT
 	compare RESULT, 2
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B23D0
 	goto Route117_PokemonDayCare_EventScript_1B24A8
@@ -189,14 +189,14 @@ Route117_PokemonDayCare_EventScript_1B2469:: @ 81B2469
 
 Route117_PokemonDayCare_EventScript_1B24A8:: @ 81B24A8
 	special GetDaycareCost
-	msgbox Route117_PokemonDayCare_Text_1B2B49, 5
-	compare RESULT, 1
+	msgbox Route117_PokemonDayCare_Text_1B2B49, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B24C4
 	goto Route117_PokemonDayCare_EventScript_1B23D0
 	end
 
 Route117_PokemonDayCare_EventScript_1B24C4:: @ 81B24C4
-	specialvar RESULT, sub_80B7CE8
+	specialvar RESULT, HasEnoughMoneyFor
 	compare RESULT, 1
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B24DE
 	msgbox Route117_PokemonDayCare_Text_1B2A30, 4
@@ -207,8 +207,8 @@ Route117_PokemonDayCare_EventScript_1B24DE:: @ 81B24DE
 	applymovement 1, Route117_PokemonDayCare_Movement_1B2543
 	waitmovement 0
 	specialvar RESULT, TakePokemonFromDaycare
-	special sub_80B7D0C
-	playse 95
+	special PayMoneyFor
+	playse SE_REGI
 	msgbox Route117_PokemonDayCare_Text_1B2B75, 4
 	waitse
 	playmoncry RESULT, 0
@@ -221,8 +221,8 @@ Route117_PokemonDayCare_EventScript_1B24DE:: @ 81B24DE
 	end
 
 Route117_PokemonDayCare_EventScript_1B2520:: @ 81B2520
-	msgbox Route117_PokemonDayCare_Text_1B2A4F, 5
-	compare RESULT, 1
+	msgbox Route117_PokemonDayCare_Text_1B2A4F, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B2469
 	goto Route117_PokemonDayCare_EventScript_1B23D0
 	end
@@ -259,12 +259,12 @@ Route117_PokemonDayCare_Movement_1B2543:: @ 81B2543
 
 Route117_PokemonDayCare_EventScript_1B2558:: @ 81B2558
 	msgbox Route117_PokemonDayCare_Text_1B2A88, 4
-	setvar 0x8004, 0
+	setvar VAR_SPECIAL_4, 0
 	call Route117_PokemonDayCare_EventScript_1B241A
-	setvar 0x8004, 1
+	setvar VAR_SPECIAL_4, 1
 	call Route117_PokemonDayCare_EventScript_1B241A
-	msgbox Route117_PokemonDayCare_Text_1B2BF6, 5
-	compare RESULT, 1
+	msgbox Route117_PokemonDayCare_Text_1B2BF6, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B2469
 	msgbox Route117_PokemonDayCare_Text_1B2A76, 4
 	release
@@ -275,7 +275,7 @@ Route117_PokemonDayCare_EventScript_1B2558:: @ 81B2558
 	waitstate
 	compare RESULT, 2
 	goto_if_eq Route117_PokemonDayCare_EventScript_1B23D0
-	copyvar 0x8004, RESULT
+	copyvar VAR_SPECIAL_4, RESULT
 	specialvar RESULT, TakePokemonFromDaycare
 	msgbox Route117_PokemonDayCare_Text_1B2B75, 4
 	msgbox Route117_PokemonDayCare_Text_1B2A76, 4

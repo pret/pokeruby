@@ -3,31 +3,19 @@
 #include "palette.h"
 #include "sprite.h"
 
-extern const struct SpriteSheet gUnknown_0842F140[];
-extern const struct SpriteSheet gUnknown_0842F1C0[];
-extern const struct SpritePalette gUnknown_0842F240;
-extern const struct SpritePalette gUnknown_0842F248;
-extern const struct SpriteTemplate gSpriteTemplate_842F250[];
-extern const struct SpriteTemplate gSpriteTemplate_842F298[];
-
-extern struct Subsprite *const gUnknown_0842F5BC[];
-
-extern const struct SubspriteTable gSubspriteTables_842F5C0[];
-extern const struct SubspriteTable gSubspriteTables_842F6C0[];
-extern const struct SubspriteTable gUnknown_0842F758[];
-
-extern const struct Subsprite gUnknown_0842F780;
-extern const struct Subsprite gUnknown_0842F788;
-extern const struct Subsprite gUnknown_0842F790;
-
-extern u16 gUnknown_0203A360[];
-
+EWRAM_DATA u16 gUnknown_0203A360[0x10] = {};
 EWRAM_DATA struct Subsprite gMenuCursorSubsprites[10] = {0};
 EWRAM_DATA u8 gUnknown_0203A3D0 = 0;
 EWRAM_DATA u8 gUnknown_0203A3D1 = 0;
 EWRAM_DATA u8 gUnknown_0203A3D2 = 0;
 EWRAM_DATA u8 gUnknown_0203A3D3 = 0;
 EWRAM_DATA u8 gUnknown_0203A3D4 = 0;
+
+#if ENGLISH
+#include "../src/data/menu_cursor_en.h"
+#elif GERMAN
+#include "../src/data/menu_cursor_de.h"
+#endif // ENGLISH/GERMAN
 
 void sub_814A590(void)
 {

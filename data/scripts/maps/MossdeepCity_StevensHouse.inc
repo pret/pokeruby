@@ -14,7 +14,7 @@ MossdeepCity_StevensHouse_EventScript_15A9DF:: @ 815A9DF
 	return
 
 MossdeepCity_StevensHouse_MapScript1_15A9E9:: @ 815A9E9
-	compare 0x40c6, 1
+	compare VAR_STEVENS_HOUSE_STATE, 1
 	call_if 1, MossdeepCity_StevensHouse_EventScript_15A9F5
 	end
 
@@ -24,14 +24,14 @@ MossdeepCity_StevensHouse_EventScript_15A9F5:: @ 815A9F5
 	return
 
 MossdeepCity_StevensHouse_MapScript2_15AA01:: @ 815AA01
-	map_script_2 0x40c6, 0, MossdeepCity_StevensHouse_EventScript_15AA0B
+	map_script_2 VAR_STEVENS_HOUSE_STATE, 0, MossdeepCity_StevensHouse_EventScript_15AA0B
 	.2byte 0
 
 MossdeepCity_StevensHouse_EventScript_15AA0B:: @ 815AA0B
 	lockall
 	applymovement 1, MossdeepCity_StevensHouse_Movement_1A083F
 	waitmovement 0
-	playse 21
+	playse SE_PIN
 	applymovement 1, MossdeepCity_StevensHouse_Movement_1A0833
 	waitmovement 0
 	applymovement 1, MossdeepCity_StevensHouse_Movement_1A0835
@@ -47,7 +47,7 @@ MossdeepCity_StevensHouse_EventScript_15AA0B:: @ 815AA0B
 	delay 20
 	applymovement 1, MossdeepCity_StevensHouse_Movement_15AA76
 	waitmovement 0
-	setvar 0x40c6, 1
+	setvar VAR_STEVENS_HOUSE_STATE, 1
 	releaseall
 	end
 
@@ -71,22 +71,22 @@ MossdeepCity_StevensHouse_Movement_15AA76:: @ 815AA76
 
 MossdeepCity_StevensHouse_EventScript_15AA7C:: @ 815AA7C
 	lockall
-	msgbox MossdeepCity_StevensHouse_Text_18DD12, 5
-	compare RESULT, 0
+	msgbox MossdeepCity_StevensHouse_Text_18DD12, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq MossdeepCity_StevensHouse_EventScript_15AAE6
 	getpartysize
 	compare RESULT, 6
 	goto_if_eq MossdeepCity_StevensHouse_EventScript_15AADC
-	copyvar 0x8004, RESULT
+	copyvar VAR_SPECIAL_4, RESULT
 	removeobject 2
-	playfanfare 370
+	playfanfare BGM_FANFA4
 	message MossdeepCity_StevensHouse_Text_18DD61
 	waitfanfare
 	waitmessage
 	givemon SPECIES_BELDUM, 5, ITEM_NONE, 0x0, 0x0, 0
 	bufferspeciesname 1, SPECIES_BELDUM
-	msgbox MossdeepCity_StevensHouse_Text_1A1102, 5
-	compare RESULT, 1
+	msgbox MossdeepCity_StevensHouse_Text_1A1102, MSGBOX_YESNO
+	compare RESULT, YES
 	call_if 1, MossdeepCity_StevensHouse_EventScript_1A0678
 	setflag FLAG_HIDE_BELDUM_BALL_STEVENS_HOUSE
 	setflag FLAG_RECEIVED_BELDUM

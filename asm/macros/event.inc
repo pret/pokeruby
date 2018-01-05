@@ -229,10 +229,10 @@
 	@ Generic compare macro which attempts to deduce argument types based on their values
 	@ Any values between 0x4000 to 0x4FFF and 0x8000 to 0x8FFF are considered event variable identifiers
 	.macro compare arg1, arg2
-		.if ((\arg1 >> 12) == 4 || (\arg1 >> 12) == 8) && ((\arg2 >> 12) == 4 || (\arg2 >> 12) == 8)
-			compare_var_to_var \arg1, \arg2
-		.elseif ((\arg1 >> 12) == 4 || (\arg1 >> 12) == 8) && (\arg2 >= 0 && \arg2 <= 0xFFFF)
-			compare_var_to_value \arg1, \arg2
+		.if (((\arg1) >> 12) == 4 || ((\arg1) >> 12) == 8) && (((\arg2) >> 12) == 4 || ((\arg2) >> 12) == 8)
+			compare_var_to_var (\arg1), (\arg2)
+		.elseif (((\arg1) >> 12) == 4 || ((\arg1) >> 12) == 8) && ((\arg2) >= -0xFFFF && (\arg2) <= 0xFFFF)
+			compare_var_to_value (\arg1), ((\arg2) & 0xFFFF)
 		.else
 			.error "Invalid arguments for 'compare'"
 		.endif
@@ -1366,11 +1366,11 @@
 	.endm
 
 	.macro switch var
-	copyvar 0x8000, \var
+	copyvar VAR_SPECIAL_0, \var
 	.endm
 
 	.macro case condition, dest
-	compare_var_to_value 0x8000, \condition
+	compare_var_to_value VAR_SPECIAL_0, \condition
 	goto_if_eq \dest
 	.endm
 
@@ -1386,12 +1386,12 @@
 	NO  = 0
 
 	.macro giveitem_std item, amount=1, function=0
-	setorcopyvar 0x8000, \item
-	setorcopyvar 0x8001, \amount
+	setorcopyvar VAR_SPECIAL_0, \item
+	setorcopyvar VAR_SPECIAL_1, \amount
 	callstd \function
 	.endm
 
 	.macro givedecoration_std decoration
-	setorcopyvar 0x8000, \decoration
+	setorcopyvar VAR_SPECIAL_0, \decoration
 	callstd 7
 	.endm

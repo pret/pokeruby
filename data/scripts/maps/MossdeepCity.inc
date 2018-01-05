@@ -53,7 +53,7 @@ MossdeepCity_EventScript_14CFFF:: @ 814CFFF
 
 MossdeepCity_EventScript_14D008:: @ 814D008
 	setflag FLAG_VISITED_MOSSDEEP_CITY
-	setvar 0x4001, 1
+	setvar VAR_TEMP_1, 1
 	end
 
 MossdeepCity_EventScript_14D011:: @ 814D011
@@ -70,8 +70,8 @@ MossdeepCity_EventScript_14D027:: @ 814D027
 	faceplayer
 	checkflag FLAG_RECEIVED_KINGS_ROCK
 	goto_if_eq MossdeepCity_EventScript_14D069
-	msgbox MossdeepCity_Text_1690A9, 5
-	compare RESULT, 0
+	msgbox MossdeepCity_Text_1690A9, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq MossdeepCity_EventScript_14D073
 	msgbox MossdeepCity_Text_169117, 4
 	giveitem_std ITEM_KINGS_ROCK

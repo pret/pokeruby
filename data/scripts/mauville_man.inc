@@ -26,7 +26,7 @@ SpeakToBard:
 	end
 
 yes_hear_song:
-	setvar 0x8004, 0
+	setvar VAR_SPECIAL_4, 0
 	@ Give the player ear rape
 	special ScrSpecial_PlayBardSong
 	delay 60
@@ -52,14 +52,14 @@ prompt_write_lyrics:
 	end
 
 write_lyrics:
-	setvar 0x8004, 6
+	setvar VAR_SPECIAL_4, 6
 	call MauvilleCity_PokemonCenter_1F_EventScript_1A00F3
 	lock
 	faceplayer
 	compare RESULT, NO
 	goto_if_eq dont_write_lyrics
 	msgbox gTextBard_ThankYouKindly, 4
-	setvar 0x8004, 1
+	setvar VAR_SPECIAL_4, 1
 	@ Give the player ear rape again
 	special ScrSpecial_PlayBardSong
 	delay 60
@@ -139,9 +139,9 @@ already_traded:
 do_trader_menu_get:
 	special ScrSpecial_TraderMenuGetDecoration
 	waitstate
-	compare 0x8004, 0
+	compare VAR_SPECIAL_4, 0
 	goto_if_eq cancelled_get_menu
-	compare 0x8004, 65535
+	compare VAR_SPECIAL_4, -1
 	goto_if_eq rare_item_cant_trade_away
 	msgbox gTextTrader_ItemOnceBelongedTo, MSGBOX_YESNO
 	compare RESULT, NO
@@ -176,9 +176,9 @@ do_trader_menu_give:
 	msgbox gTextTrader_PickDecorationYoullTrade, 4
 	special ScrSpecial_TraderMenuGiveDecoration
 	waitstate
-	compare 0x8006, 0
+	compare VAR_SPECIAL_6, 0
 	goto_if_eq cancelled_give_menu
-	compare 0x8006, 65535
+	compare VAR_SPECIAL_6, -1
 	goto_if_eq decoration_is_in_use
 	special ScrSpecial_IsDecorationFull
 	compare RESULT, 1
@@ -211,10 +211,10 @@ decorations_full:
 	.include "data/text/storyteller.inc"
 
 SpeakToStoryteller:
-	setvar 0x8008, 0
-	setvar 0x8009, 0
-	setvar 0x800a, 0
-	setvar 0x800b, 0
+	setvar VAR_SPECIAL_8, 0
+	setvar VAR_SPECIAL_9, 0
+	setvar VAR_SPECIAL_A, 0
+	setvar VAR_SPECIAL_B, 0
 	lock
 	faceplayer
 	msgbox gTextStoryteller_Introduction, MSGBOX_YESNO
@@ -230,7 +230,7 @@ choose_story:
 	waitstate
 	compare RESULT, FALSE
 	goto_if_eq cancel_story_menu
-	setvar 0x8008, 1
+	setvar VAR_SPECIAL_8, 1
 	special ScrSpecial_StorytellerDisplayStory
 	waitmessage
 	waitbuttonpress
@@ -239,7 +239,7 @@ choose_story:
 	goto_if_eq no_stat_update
 	goto stat_update
 cancel_story_menu:
-	compare 0x8008, 0
+	compare VAR_SPECIAL_8, 0
 	goto_if_eq dont_hear_story
 	goto yes_hear_story
 no_stat_update:

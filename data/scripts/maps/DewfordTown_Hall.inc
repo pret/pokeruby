@@ -5,7 +5,7 @@ DewfordTown_Hall_EventScript_153293:: @ 8153293
 	lock
 	faceplayer
 	call DewfordTown_Hall_EventScript_1A0102
-	special sub_80FA5E4
+	special TrendyPhraseIsOld
 	compare RESULT, 1
 	goto_if_eq DewfordTown_Hall_EventScript_1532B2
 	msgbox DewfordTown_Hall_Text_1754C9, 4
@@ -29,11 +29,11 @@ DewfordTown_Hall_EventScript_1532CD:: @ 81532CD
 	lock
 	faceplayer
 	call DewfordTown_Hall_EventScript_1A0102
-	special sub_80EB83C
-	msgbox DewfordTown_Hall_Text_1755F9, 5
-	compare RESULT, 1
+	special BufferRandomHobbyOrLifestyleString
+	msgbox DewfordTown_Hall_Text_1755F9, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq DewfordTown_Hall_EventScript_1532F6
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq DewfordTown_Hall_EventScript_153300
 	end
 
@@ -87,7 +87,7 @@ DewfordTown_Hall_EventScript_153353:: @ 8153353
 DewfordTown_Hall_EventScript_153363:: @ 8153363
 	lockall
 	call DewfordTown_Hall_EventScript_1A0102
-	special sub_80FA648
+	special GetDewfordHallPaintingNameIndex
 	switch RESULT
 	case 0, DewfordTown_Hall_EventScript_1533CA
 	case 4, DewfordTown_Hall_EventScript_1533CA
@@ -121,19 +121,19 @@ DewfordTown_Hall_EventScript_1533E8:: @ 81533E8
 
 DewfordTown_Hall_EventScript_1533F2:: @ 81533F2
 	lockall
-	setvar 0x8008, 0
+	setvar VAR_SPECIAL_8, 0
 	goto DewfordTown_Hall_EventScript_15340A
 	end
 
 DewfordTown_Hall_EventScript_1533FE:: @ 81533FE
 	lockall
-	setvar 0x8008, 1
+	setvar VAR_SPECIAL_8, 1
 	goto DewfordTown_Hall_EventScript_15340A
 	end
 
 DewfordTown_Hall_EventScript_15340A:: @ 815340A
 	call DewfordTown_Hall_EventScript_1A0102
-	special sub_80FA648
+	special GetDewfordHallPaintingNameIndex
 	switch RESULT
 	case 0, DewfordTown_Hall_EventScript_153470
 	case 1, DewfordTown_Hall_EventScript_153470
@@ -191,9 +191,9 @@ DewfordTown_Hall_EventScript_1534FC:: @ 81534FC
 DewfordTown_Hall_EventScript_1534FD:: @ 81534FD
 	applymovement 8, DewfordTown_Hall_Movement_153599
 	waitmovement 0
-	compare 0x8008, 0
+	compare VAR_SPECIAL_8, 0
 	goto_if_eq DewfordTown_Hall_EventScript_15351E
-	compare 0x8008, 1
+	compare VAR_SPECIAL_8, 1
 	goto_if_eq DewfordTown_Hall_EventScript_153534
 	end
 
@@ -210,9 +210,9 @@ DewfordTown_Hall_EventScript_153534:: @ 8153534
 DewfordTown_Hall_EventScript_153535:: @ 8153535
 	applymovement 7, DewfordTown_Hall_Movement_15359B
 	waitmovement 0
-	compare 0x8008, 0
+	compare VAR_SPECIAL_8, 0
 	goto_if_eq DewfordTown_Hall_EventScript_153556
-	compare 0x8008, 1
+	compare VAR_SPECIAL_8, 1
 	goto_if_eq DewfordTown_Hall_EventScript_153583
 	end
 

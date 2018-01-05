@@ -33,11 +33,11 @@ CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 	msgbox CaveOfOrigin_B4F_Text_1B4FE4, 4
 	.endif
 	closemessage
-	setweather 0
+	setweather WEATHER_NONE
 	doweather
 	special WaitWeather
 	waitstate
-	playse 209
+	playse SE_W197
 	setfieldeffectargument 0, 9
 	setfieldeffectargument 1, 13
 	setfieldeffectargument 2, 0
@@ -48,7 +48,7 @@ CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 	.else
 	setvar RESULT, 2
 	.endif
-	playse 107
+	playse SE_TAMA
 	special sub_80818A4
 	waitstate
 	special sub_80818FC
@@ -65,18 +65,18 @@ CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 	special ScrSpecial_StartGroudonKyogreBattle
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-	specialvar RESULT, sub_810E300
+	specialvar RESULT, GetBattleOutcome
 	compare RESULT, 1
 	call_if 1, CaveOfOrigin_B4F_EventScript_15DE73
 	setflag FLAG_HIDE_WALLACE_SOOTOPOLIS
 	setflag FLAG_HIDE_CAVE_OF_ORIGIN_ENTRANCE_WOMAN_1
 	setflag FLAG_HIDE_CAVE_OF_ORIGIN_ENTRANCE_WOMAN_2
 	clearflag FLAG_HIDE_WALLACE_SOOTOPOLIS_GYM
-	setvar 0x409b, 1
+	setvar VAR_CAVE_OF_ORIGIN_B4F_STATE, 1
 	setflag FLAG_LEGENDARY_BATTLE_COMPLETED
 	clearflag FLAG_HIDE_SOOTOPOLIS_RESIDENTS
 	clearflag FLAG_SYS_WEATHER_CTRL
-	setvar 0x40b9, 2
+	setvar VAR_MT_PYRE_STATE, 2
 	clearflag FLAG_HIDE_LEADER_MT_PYRE_SUMMIT
 	releaseall
 	end

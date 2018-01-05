@@ -1,6 +1,6 @@
 S_BerryTree:: @ 81A14DD
 	special FieldObjectInteractionGetBerryTreeData
-	switch 0x8004
+	switch VAR_SPECIAL_4
 	case 255, Route102_EventScript_1A1533
 	case 0, Route102_EventScript_1A153D
 	case 1, Route102_EventScript_1A1595
@@ -31,10 +31,10 @@ Route102_EventScript_1A153D:: @ 81A153D
 	end
 
 Route102_EventScript_1A1558:: @ 81A1558
-	msgbox Route102_Text_1A16CD, 5
-	compare RESULT, 1
+	msgbox Route102_Text_1A16CD, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq Route102_EventScript_1A1577
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq Route102_EventScript_1A1593
 	end
 
@@ -82,9 +82,9 @@ Route102_EventScript_1A15BC:: @ 81A15BC
 	goto Route102_EventScript_1A165F
 
 Route102_EventScript_1A15CE:: @ 81A15CE
-	compare 0x8005, 0
+	compare VAR_SPECIAL_5, 0
 	goto_if_eq Route102_EventScript_1A15F2
-	compare 0x8005, 4
+	compare VAR_SPECIAL_5, 4
 	goto_if_eq Route102_EventScript_1A15EB
 	bufferstring 1, Route102_Text_1A17B7
 	return
@@ -98,22 +98,22 @@ Route102_EventScript_1A15F2:: @ 81A15F2
 	return
 
 Route102_EventScript_1A15F9:: @ 81A15F9
-	buffernumberstring 1, 0x8006
+	buffernumberstring 1, VAR_SPECIAL_6
 	lock
 	faceplayer
-	msgbox Route102_Text_1A17C0, 5
-	compare RESULT, 1
+	msgbox Route102_Text_1A17C0, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq Route102_EventScript_1A161D
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq Route102_EventScript_1A164B
 
 Route102_EventScript_1A161D:: @ 81A161D
 	special FieldObjectInteractionPickBerryTree
-	compare 0x8004, 0
+	compare VAR_SPECIAL_4, 0
 	goto_if_eq Route102_EventScript_1A1642
 	special FieldObjectInteractionRemoveBerryTree
 	message Route102_Text_1A17FD
-	playfanfare 387
+	playfanfare BGM_ME_KINOMI
 	waitmessage
 	waitfanfare
 	waitbuttonpress
@@ -148,10 +148,10 @@ Route102_EventScript_1A165F:: @ 81A165F
 	checkitem ITEM_WAILMER_PAIL, 1
 	compare RESULT, 0
 	goto_if_eq Route102_EventScript_1A168D
-	msgbox Route102_Text_1A18E6, 5
-	compare RESULT, 1
+	msgbox Route102_Text_1A18E6, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq Route102_EventScript_1A1693
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq Route102_EventScript_1A168D
 
 Route102_EventScript_1A168D:: @ 81A168D

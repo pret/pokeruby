@@ -15,34 +15,34 @@ Route113_MapWarps:: @ 8382AA8
 	warp_def 33, 5, 0, 0, MAP_ROUTE113_GLASS_WORKSHOP
 
 Route113_MapCoordEvents:: @ 8382AB0
-	coord_event 19, 11, 3, 0, 8, 0, 0, 0x0
-	coord_event 19, 10, 3, 0, 8, 0, 0, 0x0
-	coord_event 19, 12, 3, 0, 8, 0, 0, 0x0
-	coord_event 19, 13, 3, 0, 8, 0, 0, 0x0
-	coord_event 87, 9, 3, 0, 8, 0, 0, 0x0
-	coord_event 86, 10, 3, 0, 8, 0, 0, 0x0
-	coord_event 86, 11, 3, 0, 8, 0, 0, 0x0
-	coord_event 14, 10, 3, 0, 2, 0, 0, 0x0
-	coord_event 14, 11, 3, 0, 2, 0, 0, 0x0
-	coord_event 14, 12, 3, 0, 2, 0, 0, 0x0
-	coord_event 14, 13, 3, 0, 2, 0, 0, 0x0
-	coord_event 94, 8, 3, 0, 2, 0, 0, 0x0
-	coord_event 94, 9, 3, 0, 2, 0, 0, 0x0
-	coord_event 94, 10, 3, 0, 2, 0, 0, 0x0
-	coord_event 94, 11, 0, 0, 2, 0, 0, 0x0
-	coord_event 19, 14, 3, 0, 8, 0, 0, 0x0
-	coord_event 88, 8, 3, 0, 8, 0, 0, 0x0
-	coord_event 88, 6, 3, 0, 8, 0, 0, 0x0
-	coord_event 88, 7, 3, 0, 8, 0, 0, 0x0
+	coord_weather_event 19, 11, 3, COORD_EVENT_WEATHER_ASH
+	coord_weather_event 19, 10, 3, COORD_EVENT_WEATHER_ASH
+	coord_weather_event 19, 12, 3, COORD_EVENT_WEATHER_ASH
+	coord_weather_event 19, 13, 3, COORD_EVENT_WEATHER_ASH
+	coord_weather_event 87, 9, 3, COORD_EVENT_WEATHER_ASH
+	coord_weather_event 86, 10, 3, COORD_EVENT_WEATHER_ASH
+	coord_weather_event 86, 11, 3, COORD_EVENT_WEATHER_ASH
+	coord_weather_event 14, 10, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 14, 11, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 14, 12, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 14, 13, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 94, 8, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 94, 9, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 94, 10, 3, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 94, 11, 0, COORD_EVENT_WEATHER_SUNNY
+	coord_weather_event 19, 14, 3, COORD_EVENT_WEATHER_ASH
+	coord_weather_event 88, 8, 3, COORD_EVENT_WEATHER_ASH
+	coord_weather_event 88, 6, 3, COORD_EVENT_WEATHER_ASH
+	coord_weather_event 88, 7, 3, COORD_EVENT_WEATHER_ASH
 
 Route113_MapBGEvents:: @ 8382BE0
 	bg_event 85, 6, 0, 0, 0, Route113_EventScript_150617
 	bg_event 11, 9, 0, 0, 0, Route113_EventScript_150620
 	bg_event 58, 4, 3, 0, 0, Route113_EventScript_150632
 	bg_event 31, 5, 0, 0, 0, Route113_EventScript_150629
-	bg_event 49, 8, 0, 8, 0, ITEM_GREAT_BALL, 0, 0
-	bg_event 72, 4, 3, 7, 0, ITEM_ETHER, 3, 0
-	bg_event 22, 5, 3, 7, 0, ITEM_TM32, 30, 0
+	bg_secret_base_event 49, 8, 0, SECRET_BASE_RED_CAVE1_3
+	bg_hidden_item_event 72, 4, 3, ITEM_ETHER, FLAG_HIDDEN_ITEM_3
+	bg_hidden_item_event 22, 5, 3, ITEM_TM32, FLAG_HIDDEN_ITEM_1E
 
 Route113_MapEvents:: @ 8382C34
 	map_events Route113_MapObjects, Route113_MapWarps, Route113_MapCoordEvents, Route113_MapBGEvents

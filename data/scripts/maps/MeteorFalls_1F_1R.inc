@@ -18,7 +18,7 @@ MeteorFalls_1F_1R_EventScript_15C49C:: @ 815C49C
 	applymovement 5, MeteorFalls_1F_1R_Movement_1A0841
 	applymovement 6, MeteorFalls_1F_1R_Movement_1A0841
 	waitmovement 0
-	playse 21
+	playse SE_PIN
 	applymovement 5, MeteorFalls_1F_1R_Movement_1A0833
 	waitmovement 0
 	applymovement 5, MeteorFalls_1F_1R_Movement_1A0835
@@ -78,7 +78,7 @@ MeteorFalls_1F_1R_EventScript_15C49C:: @ 815C49C
 	removeobject 8
 	removeobject 9
 	setflag FLAG_HIDE_GRUNTS_BLOCKING_CABLE_CAR
-	setvar 0x40bf, 1
+	setvar VAR_METEOR_FALLS_STATE, 1
 	releaseall
 	end
 

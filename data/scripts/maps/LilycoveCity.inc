@@ -5,7 +5,7 @@ LilycoveCity_MapScripts:: @ 814CA15
 
 LilycoveCity_MapScript1_14CA20:: @ 814CA20
 	setflag FLAG_VISITED_LILYCOVE_CITY
-	setvar 0x4086, 0
+	setvar VAR_LINK_CONTEST_ROOM_STATE, 0
 	setflag FLAG_HIDE_CONTEST_REPORTER_LILYCOVE
 	checkflag FLAG_SYS_WEATHER_CTRL
 	call_if 1, LilycoveCity_EventScript_1A02C1
@@ -172,8 +172,8 @@ LilycoveCity_EventScript_14CC79:: @ 814CC79
 
 LilycoveCity_EventScript_14CC82:: @ 814CC82
 	lockall
-	specialvar 0x8004, sub_80C4D50
-	switch 0x8004
+	specialvar VAR_SPECIAL_4, sub_80C4D50
+	switch VAR_SPECIAL_4
 	case 0, LilycoveCity_EventScript_14CCA2
 	msgbox LilycoveCity_Text_168EA4, 4
 	releaseall
@@ -255,26 +255,26 @@ LilycoveCity_EventScript_14CD46:: @ 814CD46
 	end
 
 LilycoveCity_EventScript_14CD60:: @ 814CD60
-	playbgm 415, 1
+	playbgm BGM_GIRL_SUP, TRUE
 	checkflag FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE
 	call_if 1, LilycoveCity_EventScript_14CDB0
 	checkflag FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE
 	call_if 0, LilycoveCity_EventScript_14CDB9
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq LilycoveCity_EventScript_14CDC2
 	msgbox LilycoveCity_Text_167B94, 4
-	switch 0x4023
+	switch VAR_STARTER_MON
 	case 0, LilycoveCity_EventScript_14CE46
 	case 1, LilycoveCity_EventScript_14CE56
 	case 2, LilycoveCity_EventScript_14CE66
 	end
 
 LilycoveCity_EventScript_14CDB0:: @ 814CDB0
-	msgbox LilycoveCity_Text_167B55, 5
+	msgbox LilycoveCity_Text_167B55, MSGBOX_YESNO
 	return
 
 LilycoveCity_EventScript_14CDB9:: @ 814CDB9
-	msgbox LilycoveCity_Text_1679BF, 5
+	msgbox LilycoveCity_Text_1679BF, MSGBOX_YESNO
 	return
 
 LilycoveCity_EventScript_14CDC2:: @ 814CDC2
@@ -286,26 +286,26 @@ LilycoveCity_EventScript_14CDC2:: @ 814CDC2
 	end
 
 LilycoveCity_EventScript_14CDD3:: @ 814CDD3
-	playbgm 421, 1
+	playbgm BGM_BOY_SUP, TRUE
 	checkflag FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE
 	call_if 1, LilycoveCity_EventScript_14CE23
 	checkflag FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE
 	call_if 0, LilycoveCity_EventScript_14CE2C
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq LilycoveCity_EventScript_14CE35
 	msgbox LilycoveCity_Text_1680A9, 4
-	switch 0x4023
+	switch VAR_STARTER_MON
 	case 0, LilycoveCity_EventScript_14CE76
 	case 1, LilycoveCity_EventScript_14CE86
 	case 2, LilycoveCity_EventScript_14CE96
 	end
 
 LilycoveCity_EventScript_14CE23:: @ 814CE23
-	msgbox LilycoveCity_Text_168067, 5
+	msgbox LilycoveCity_Text_168067, MSGBOX_YESNO
 	return
 
 LilycoveCity_EventScript_14CE2C:: @ 814CE2C
-	msgbox LilycoveCity_Text_167F75, 5
+	msgbox LilycoveCity_Text_167F75, MSGBOX_YESNO
 	return
 
 LilycoveCity_EventScript_14CE35:: @ 814CE35

@@ -10,7 +10,7 @@ Route128_MapScript1_152126:: @ 8152126
 	end
 
 Route128_MapScript2_152135:: @ 8152135
-	map_script_2 0x407b, 1, Route128_EventScript_15213F
+	map_script_2 VAR_ROUTE128_STATE, 1, Route128_EventScript_15213F
 	.2byte 0
 
 Route128_EventScript_15213F:: @ 815213F
@@ -82,7 +82,7 @@ Route128_EventScript_15213F:: @ 815213F
 	delay 15
 	removeobject 3
 	waitfieldeffect 30
-	setvar 0x407b, 2
+	setvar VAR_ROUTE128_STATE, 2
 	releaseall
 	end
 
@@ -182,7 +182,7 @@ Route128_Movement_1522A1:: @ 81522A1
 
 Route128_EventScript_1522A4:: @ 81522A4
 	trainerbattle 0, OPPONENT_ISAIAH_1, 0, Route128_Text_1C1C67, Route128_Text_1C1C95
-	specialvar RESULT, sub_8082C68
+	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
 	goto_if_eq Route128_EventScript_1522CB
 	msgbox Route128_Text_1C1CC3, 6
@@ -195,7 +195,7 @@ Route128_EventScript_1522CB:: @ 81522CB
 
 Route128_EventScript_1522E2:: @ 81522E2
 	trainerbattle 0, OPPONENT_KATELYN_1, 0, Route128_Text_1C1DB0, Route128_Text_1C1E25
-	specialvar RESULT, sub_8082C68
+	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
 	goto_if_eq Route128_EventScript_152309
 	msgbox Route128_Text_1C1E4A, 6

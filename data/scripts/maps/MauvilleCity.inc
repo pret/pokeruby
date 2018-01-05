@@ -7,7 +7,7 @@ MauvilleCity_MapScript1_14C038:: @ 814C038
 	clearflag FLAG_HIDE_OCEANIC_MUSEUM_VISITORS
 	setflag FLAG_SYS_TV_START
 	clearflag FLAG_MAUVILLE_GYM_BARRIERS_STATE
-	setvar 0x4093, 0
+	setvar VAR_MAUVILLE_GYM_STATE, 0
 	checkflag FLAG_RECEIVED_TM24
 	call_if 1, MauvilleCity_EventScript_14C053
 	end
@@ -95,19 +95,19 @@ MauvilleCity_EventScript_14C0F9:: @ 814C0F9
 	msgbox MauvilleCity_Text_165D01, 4
 	applymovement 6, MauvilleCity_Movement_1A0839
 	waitmovement 0
-	playse 21
+	playse SE_PIN
 	applymovement 6, MauvilleCity_Movement_1A0833
 	waitmovement 0
 	applymovement 6, MauvilleCity_Movement_1A0835
 	waitmovement 0
-	msgbox MauvilleCity_Text_165D50, 5
+	msgbox MauvilleCity_Text_165D50, MSGBOX_YESNO
 	goto MauvilleCity_EventScript_14C154
 	end
 
 MauvilleCity_EventScript_14C154:: @ 814C154
-	compare RESULT, 1
+	compare RESULT, YES
 	call_if 1, MauvilleCity_EventScript_14C23C
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq MauvilleCity_EventScript_14C285
 	closemessage
 	switch FACING
@@ -185,7 +185,7 @@ MauvilleCity_EventScript_14C285:: @ 814C285
 MauvilleCity_EventScript_14C292:: @ 814C292
 	applymovement 6, MauvilleCity_Movement_1A0839
 	waitmovement 0
-	msgbox MauvilleCity_Text_165EE2, 5
+	msgbox MauvilleCity_Text_165EE2, MSGBOX_YESNO
 	goto MauvilleCity_EventScript_14C154
 	end
 
@@ -286,7 +286,7 @@ MauvilleCity_EventScript_14C2F2:: @ 814C2F2
 	faceplayer
 	checkflag FLAG_RECEIVED_TM24
 	goto_if_eq MauvilleCity_EventScript_14C368
-	compare 0x40ba, 2
+	compare VAR_NEW_MAUVILLE_STATE, 2
 	goto_if_eq MauvilleCity_EventScript_14C33C
 	checkflag FLAG_RECEIVED_BASEMENT_KEY
 	goto_if_eq MauvilleCity_EventScript_14C332

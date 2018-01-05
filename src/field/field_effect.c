@@ -310,114 +310,6 @@ void (*const gUnknown_0839F378[])(struct Task *) = {
     sub_8087914
 };
 
-const u8 gUnknown_0839F380[] = {1, 3, 4, 2, 1};
-
-void (*const gUnknown_0839F388[])(struct Task *) = {
-    sub_8087AA4,
-    sub_8087AC8
-};
-
-void (*const gUnknown_0839F390[])(struct Task *) = {
-    sub_8087BEC,
-    sub_8087C14,
-    sub_8087CA4,
-    sub_8087D78
-};
-
-void (*const gUnknown_0839F3A0[])(struct Task *) = {
-    sub_8087E4C,
-    sub_8087ED8,
-    sub_8087FDC
-};
-
-void (*const gUnknown_0839F3AC[])(struct Task *) = {
-    sub_8088150,
-    sub_80881C0,
-    sub_8088228,
-    sub_80882B4,
-    sub_80882E4,
-    sub_8088338,
-    sub_8088380
-};
-
-void (*const gUnknown_0839F3C8[])(struct Task *) = {
-    sub_80884AC,
-    sub_80884E8,
-    sub_8088554,
-    sub_80885A8,
-    sub_80885D8,
-    sub_808860C,
-    sub_808862C
-};
-
-void (*const gUnknown_0839F3E4[])(struct Task *) = {
-    sub_8088984,
-    sub_80889E4,
-    sub_8088A30,
-    sub_8088A78,
-    sub_8088AF4
-};
-
-void (*const gUnknown_0839F3F8[])(struct Task *) = {
-    sub_8088CA0,
-    sub_8088CF8,
-    sub_8088D3C,
-    sub_8088D94,
-    sub_8088DD8,
-    sub_8088E2C,
-    sub_8088EB4,
-    sub_8088F10,
-    sub_8088F30
-};
-
-const union AffineAnimCmd SpriteAffineAnim_839F41C[] = {
-    AFFINEANIMCMD_FRAME(8, 8, -30, 0),
-    AFFINEANIMCMD_FRAME(28, 28, 0, 30),
-    AFFINEANIMCMD_END
-};
-
-const union AffineAnimCmd SpriteAffineAnim_839F434[] = {
-    AFFINEANIMCMD_FRAME(256, 256, 64, 0),
-    AFFINEANIMCMD_FRAME(-10, -10, 0, 22),
-    AFFINEANIMCMD_END
-};
-
-const union AffineAnimCmd *const gSpriteAffineAnimTable_0839F44C[] = {
-    SpriteAffineAnim_839F41C,
-    SpriteAffineAnim_839F434
-};
-
-void (*const gUnknown_0839F454[])(struct Task *) = {
-    sub_80892A0,
-    sub_8089354,
-    sub_80893C0,
-    sub_8089414,
-    sub_808948C,
-    sub_80894C4,
-    fishE
-};
-
-const s16 gUnknown_0839F470[] = {
-    -2,
-    -4,
-    -5,
-    -6,
-    -7,
-    -8,
-    -8,
-    -8,
-    -7,
-    -7,
-    -6,
-    -5,
-    -3,
-    -2,
-    0,
-    2,
-    4,
-    8
-};
-
 static u8 sActiveList[32];
 
 extern u8 *gFieldEffectScriptPointers[];
@@ -2100,8 +1992,7 @@ void sub_80878F4(struct Task *task)
 void sub_8087914(struct Task *task)
 {
     struct MapObject *mapObject;
-    u8 unknown_0839F380[5];
-    memcpy(unknown_0839F380, gUnknown_0839F380, sizeof gUnknown_0839F380);
+    u8 unknown_0839F380[5] = {1, 3, 4, 2, 1};
     if (task->data[14] != 0 && (--task->data[14]) == 0)
     {
         sub_8053FF8();
@@ -2129,6 +2020,11 @@ void sub_8087914(struct Task *task)
         }
     }
 }
+
+void (*const gUnknown_0839F388[])(struct Task *) = {
+    sub_8087AA4,
+    sub_8087AC8
+};
 
 void sub_8087A74(u8);
 
@@ -2159,10 +2055,8 @@ void sub_8087AA4(struct Task *task)
 
 void sub_8087AC8(struct Task *task)
 {
-    struct MapObject *mapObject;
-    u8 unknown_0839F380[5];
-    memcpy(unknown_0839F380, gUnknown_0839F380, sizeof gUnknown_0839F380);
-    mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
+    u8 unknown_0839F380[5] = {1, 3, 4, 2, 1};
+    struct MapObject *mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
     if (task->data[1] == 0 || (--task->data[1]) == 0)
     {
         if (FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(mapObject) && !FieldObjectClearAnimIfSpecialAnimFinished(mapObject))
@@ -2195,6 +2089,13 @@ void sub_8087BA8(void)
     CreateTask(sub_8087BBC, 0);
 }
 
+void (*const gUnknown_0839F390[])(struct Task *) = {
+    sub_8087BEC,
+    sub_8087C14,
+    sub_8087CA4,
+    sub_8087D78
+};
+
 void sub_8087BBC(u8 taskId)
 {
     gUnknown_0839F390[gTasks[taskId].data[0]](&gTasks[taskId]);
@@ -2211,10 +2112,8 @@ void sub_8087BEC(struct Task *task)
 
 void sub_8087C14(struct Task *task)
 {
-    struct MapObject *mapObject;
-    u8 unknown_0839F380[5];
-    memcpy(unknown_0839F380, gUnknown_0839F380, sizeof gUnknown_0839F380);
-    mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
+    u8 unknown_0839F380[5] = {1, 3, 4, 2, 1};
+    struct MapObject *mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
     if (task->data[1] == 0 || (--task->data[1]) == 0)
     {
         FieldObjectTurn(mapObject, unknown_0839F380[mapObject->mapobj_unk_18]);
@@ -2233,12 +2132,9 @@ void sub_8087C14(struct Task *task)
 
 void sub_8087CA4(struct Task *task)
 {
-    struct MapObject *mapObject;
-    struct Sprite *sprite;
-    u8 unknown_0839F380[5];
-    memcpy(unknown_0839F380, gUnknown_0839F380, sizeof gUnknown_0839F380);
-    mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
-    sprite = &gSprites[gPlayerAvatar.spriteId];
+    u8 unknown_0839F380[5] = {1, 3, 4, 2, 1};
+    struct MapObject *mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
+    struct Sprite *sprite = &gSprites[gPlayerAvatar.spriteId];
     if ((--task->data[1]) <= 0)
     {
         task->data[1] = 4;
@@ -2288,6 +2184,12 @@ void mapldr_08085D88(void)
     CreateTask(sub_8087E1C, 0);
 }
 
+void (*const gUnknown_0839F3A0[])(struct Task *) = {
+    sub_8087E4C,
+    sub_8087ED8,
+    sub_8087FDC
+};
+
 void sub_8087E1C(u8 taskId)
 {
     gUnknown_0839F3A0[gTasks[taskId].data[0]](&gTasks[taskId]);
@@ -2314,12 +2216,9 @@ void sub_8087E4C(struct Task *task)
 
 void sub_8087ED8(struct Task *task)
 {
-    u8 unknown_0839F380[5];
-    struct MapObject *mapObject;
-    struct Sprite *sprite;
-    memcpy(unknown_0839F380, gUnknown_0839F380, sizeof gUnknown_0839F380);
-    mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
-    sprite = &gSprites[gPlayerAvatar.spriteId];
+    u8 unknown_0839F380[5] = {1, 3, 4, 2, 1};
+    struct MapObject *mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
+    struct Sprite *sprite = &gSprites[gPlayerAvatar.spriteId];
     if ((sprite->pos2.y += task->data[1]) >= -8)
     {
         if (task->data[13] == 0)
@@ -2356,10 +2255,8 @@ void sub_8087ED8(struct Task *task)
 
 void sub_8087FDC(struct Task *task)
 {
-    u8 unknown_0839F380[5];
-    struct MapObject *mapObject;
-    memcpy(unknown_0839F380, gUnknown_0839F380, sizeof gUnknown_0839F380);
-    mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
+    u8 unknown_0839F380[5] = {1, 3, 4, 2, 1};
+    struct MapObject *mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
     if ((--task->data[1]) == 0)
     {
         FieldObjectTurn(mapObject, unknown_0839F380[mapObject->mapobj_unk_18]);
@@ -2408,6 +2305,16 @@ bool8 FldEff_FieldMoveShowMonInit(void)
     FieldEffectActiveListRemove(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
     return FALSE;
 }
+
+void (*const gUnknown_0839F3AC[])(struct Task *) = {
+    sub_8088150,
+    sub_80881C0,
+    sub_8088228,
+    sub_80882B4,
+    sub_80882E4,
+    sub_8088338,
+    sub_8088380
+};
 
 void sub_8088120(u8 taskId)
 {
@@ -2564,6 +2471,16 @@ void sub_80886B0(void);
 bool8 sub_8088708(struct Task *);
 void sub_80886F8(struct Task *);
 bool8 sub_80887C0(struct Task *);
+
+void (*const gUnknown_0839F3C8[])(struct Task *) = {
+    sub_80884AC,
+    sub_80884E8,
+    sub_8088554,
+    sub_80885A8,
+    sub_80885D8,
+    sub_808860C,
+    sub_808862C
+};
 
 void sub_808847C(u8 taskId)
 {
@@ -2884,6 +2801,14 @@ u8 FldEff_UseSurf(void)
     return FALSE;
 }
 
+void (*const gUnknown_0839F3E4[])(struct Task *) = {
+    sub_8088984,
+    sub_80889E4,
+    sub_8088A30,
+    sub_8088A78,
+    sub_8088AF4
+};
+
 void sub_8088954(u8 taskId)
 {
     gUnknown_0839F3E4[gTasks[taskId].data[0]](&gTasks[taskId]);
@@ -3011,6 +2936,18 @@ u8 FldEff_UseFly(void)
     gTasks[taskId].data[1] = gFieldEffectArguments[0];
     return 0;
 }
+
+void (*const gUnknown_0839F3F8[])(struct Task *) = {
+    sub_8088CA0,
+    sub_8088CF8,
+    sub_8088D3C,
+    sub_8088D94,
+    sub_8088DD8,
+    sub_8088E2C,
+    sub_8088EB4,
+    sub_8088F10,
+    sub_8088F30
+};
 
 void sub_8088C70(u8 taskId)
 {
@@ -3170,6 +3107,23 @@ void sub_8088FFC(u8 a0, u8 a1)
     gSprites[a0].data[6] = a1;
 }
 
+const union AffineAnimCmd SpriteAffineAnim_839F41C[] = {
+    AFFINEANIMCMD_FRAME(8, 8, -30, 0),
+    AFFINEANIMCMD_FRAME(28, 28, 0, 30),
+    AFFINEANIMCMD_END
+};
+
+const union AffineAnimCmd SpriteAffineAnim_839F434[] = {
+    AFFINEANIMCMD_FRAME(256, 256, 64, 0),
+    AFFINEANIMCMD_FRAME(-10, -10, 0, 22),
+    AFFINEANIMCMD_END
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_0839F44C[] = {
+    SpriteAffineAnim_839F41C,
+    SpriteAffineAnim_839F434
+};
+
 void sub_8089018(struct Sprite *sprite)
 {
     if (sprite->data[7] == 0)
@@ -3282,6 +3236,16 @@ u8 FldEff_FlyIn(void)
     return 0;
 }
 
+void (*const gUnknown_0839F454[])(struct Task *) = {
+    sub_80892A0,
+    sub_8089354,
+    sub_80893C0,
+    sub_8089414,
+    sub_808948C,
+    sub_80894C4,
+    fishE
+};
+
 void sub_8089270(u8 taskId)
 {
     gUnknown_0839F454[gTasks[taskId].data[0]](&gTasks[taskId]);
@@ -3333,10 +3297,27 @@ void sub_8089354(struct Task *task)
 
 void sub_80893C0(struct Task *task)
 {
-    s16 unknown_0839F470[18];
-    struct Sprite *sprite;
-    memcpy(unknown_0839F470, gUnknown_0839F470, sizeof gUnknown_0839F470);
-    sprite = &gSprites[gPlayerAvatar.spriteId];
+    s16 unknown_0839F470[18] = {
+        -2,
+        -4,
+        -5,
+        -6,
+        -7,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -6,
+        -5,
+        -3,
+        -2,
+        0,
+        2,
+        4,
+        8
+    };
+    struct Sprite *sprite = &gSprites[gPlayerAvatar.spriteId];
     sprite->pos2.y = unknown_0839F470[task->data[2]];
     if ((++task->data[2]) >= 18)
     {

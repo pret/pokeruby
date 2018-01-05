@@ -8,19 +8,19 @@ MtPyre_Summit_MapScript1_15D4B7:: @ 815D4B7
 
 MtPyre_Summit_EventScript_15D4BD:: @ 815D4BD
 	lockall
-	setvar 0x8008, 0
+	setvar VAR_SPECIAL_8, 0
 	goto MtPyre_Summit_EventScript_15D4E1
 	end
 
 MtPyre_Summit_EventScript_15D4C9:: @ 815D4C9
 	lockall
-	setvar 0x8008, 1
+	setvar VAR_SPECIAL_8, 1
 	goto MtPyre_Summit_EventScript_15D4E1
 	end
 
 MtPyre_Summit_EventScript_15D4D5:: @ 815D4D5
 	lockall
-	setvar 0x8008, 2
+	setvar VAR_SPECIAL_8, 2
 	goto MtPyre_Summit_EventScript_15D4E1
 	end
 
@@ -30,11 +30,11 @@ MtPyre_Summit_EventScript_15D4E1:: @ 815D4E1
 	applymovement 2, MtPyre_Summit_Movement_1A0845
 	waitmovement 0
 	delay 50
-	compare 0x8008, 0
+	compare VAR_SPECIAL_8, 0
 	call_if 1, MtPyre_Summit_EventScript_15D593
-	compare 0x8008, 1
+	compare VAR_SPECIAL_8, 1
 	call_if 1, MtPyre_Summit_EventScript_15D59E
-	compare 0x8008, 2
+	compare VAR_SPECIAL_8, 2
 	call_if 1, MtPyre_Summit_EventScript_15D59F
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B52B0, 4
@@ -52,11 +52,11 @@ MtPyre_Summit_EventScript_15D4E1:: @ 815D4E1
 	fadescreen 0
 	delay 20
 	call MtPyre_Summit_EventScript_15D57A
-	compare 0x8008, 0
+	compare VAR_SPECIAL_8, 0
 	call_if 1, MtPyre_Summit_EventScript_15D5AA
-	compare 0x8008, 1
+	compare VAR_SPECIAL_8, 1
 	call_if 1, MtPyre_Summit_EventScript_15D5BF
-	compare 0x8008, 2
+	compare VAR_SPECIAL_8, 2
 	call_if 1, MtPyre_Summit_EventScript_15D5CA
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B53AB, 4
@@ -70,11 +70,11 @@ MtPyre_Summit_EventScript_15D4E1:: @ 815D4E1
 
 MtPyre_Summit_EventScript_15D57A:: @ 815D57A
 	setflag FLAG_MT_PYRE_ORB_STOLEN
-	setvar 0x4058, 1
+	setvar VAR_SLATEPORT_STATE, 1
 	clearflag FLAG_HIDE_STERN_SLATEPORT
 	clearflag FLAG_HIDE_GABBY_AND_TY_SLATEPORT
-	setvar 0x40a0, 1
-	setvar 0x40b9, 1
+	setvar VAR_SLATEPORT_HARBOR_STATE, 1
+	setvar VAR_MT_PYRE_STATE, 1
 	return
 
 MtPyre_Summit_EventScript_15D593:: @ 815D593
@@ -139,13 +139,13 @@ MtPyre_Summit_EventScript_15D5EF:: @ 815D5EF
 	lock
 	faceplayer
 	.ifdef SAPPHIRE
-	msgbox UnknownString_81B586F, 5
+	msgbox UnknownString_81B586F, MSGBOX_YESNO
 	.else
-	msgbox MtPyre_Summit_Text_1B64B3, 5
+	msgbox MtPyre_Summit_Text_1B64B3, MSGBOX_YESNO
 	.endif
-	compare RESULT, 1
+	compare RESULT, YES
 	call_if 1, MtPyre_Summit_EventScript_15D611
-	compare RESULT, 0
+	compare RESULT, NO
 	call_if 1, MtPyre_Summit_EventScript_15D61A
 	release
 	end
@@ -185,18 +185,18 @@ MtPyre_Summit_EventScript_15D623:: @ 815D623
 
 MtPyre_Summit_EventScript_15D64A:: @ 815D64A
 	.ifdef SAPPHIRE
-	msgbox UnknownString_81B5647, 5
+	msgbox UnknownString_81B5647, MSGBOX_YESNO
 	.else
-	msgbox MtPyre_Summit_Text_1B6283, 5
+	msgbox MtPyre_Summit_Text_1B6283, MSGBOX_YESNO
 	.endif
-	compare RESULT, 1
+	compare RESULT, YES
 	goto_if_eq MtPyre_Summit_EventScript_15D669
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq MtPyre_Summit_EventScript_15D69B
 	end
 
 MtPyre_Summit_EventScript_15D669:: @ 815D669
-	setvar 0x8004, ITEM_RED_OR_BLUE_ORB
+	setvar VAR_SPECIAL_4, ITEM_RED_OR_BLUE_ORB
 	call MtPyre_Summit_EventScript_1A067F
 	closemessage
 	applymovement LAST_TALKED, MtPyre_Summit_Movement_1A0841
@@ -216,13 +216,13 @@ MtPyre_Summit_EventScript_15D669:: @ 815D669
 
 MtPyre_Summit_EventScript_15D69B:: @ 815D69B
 	.ifdef SAPPHIRE
-	msgbox UnknownString_81B56AB, 5
+	msgbox UnknownString_81B56AB, MSGBOX_YESNO
 	.else
-	msgbox MtPyre_Summit_Text_1B62E7, 5
+	msgbox MtPyre_Summit_Text_1B62E7, MSGBOX_YESNO
 	.endif
-	compare RESULT, 1
+	compare RESULT, YES
 	goto_if_eq MtPyre_Summit_EventScript_15D669
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq MtPyre_Summit_EventScript_15D69B
 	end
 
@@ -246,19 +246,19 @@ MtPyre_Summit_EventScript_15D6C4:: @ 815D6C4
 
 MtPyre_Summit_EventScript_15D6CE:: @ 815D6CE
 	lockall
-	setvar 0x8008, 0
+	setvar VAR_SPECIAL_8, 0
 	goto MtPyre_Summit_EventScript_15D6F2
 	end
 
 MtPyre_Summit_EventScript_15D6DA:: @ 815D6DA
 	lockall
-	setvar 0x8008, 1
+	setvar VAR_SPECIAL_8, 1
 	goto MtPyre_Summit_EventScript_15D6F2
 	end
 
 MtPyre_Summit_EventScript_15D6E6:: @ 815D6E6
 	lockall
-	setvar 0x8008, 2
+	setvar VAR_SPECIAL_8, 2
 	goto MtPyre_Summit_EventScript_15D6F2
 	end
 
@@ -268,11 +268,11 @@ MtPyre_Summit_EventScript_15D6F2:: @ 815D6F2
 	applymovement 2, MtPyre_Summit_Movement_1A0845
 	waitmovement 0
 	delay 50
-	compare 0x8008, 0
+	compare VAR_SPECIAL_8, 0
 	call_if 1, MtPyre_Summit_EventScript_15D75E
-	compare 0x8008, 1
+	compare VAR_SPECIAL_8, 1
 	call_if 1, MtPyre_Summit_EventScript_15D769
-	compare 0x8008, 2
+	compare VAR_SPECIAL_8, 2
 	call_if 1, MtPyre_Summit_EventScript_15D774
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B5BFC, 4
@@ -280,14 +280,14 @@ MtPyre_Summit_EventScript_15D6F2:: @ 815D6F2
 	msgbox MtPyre_Summit_Text_1B6848, 4
 	.endif
 	closemessage
-	compare 0x8008, 0
+	compare VAR_SPECIAL_8, 0
 	call_if 1, MtPyre_Summit_EventScript_15D77F
-	compare 0x8008, 1
+	compare VAR_SPECIAL_8, 1
 	call_if 1, MtPyre_Summit_EventScript_15D78A
-	compare 0x8008, 2
+	compare VAR_SPECIAL_8, 2
 	call_if 1, MtPyre_Summit_EventScript_15D795
 	removeobject 2
-	setvar 0x40b9, 3
+	setvar VAR_MT_PYRE_STATE, 3
 	releaseall
 	end
 

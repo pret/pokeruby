@@ -4,7 +4,7 @@ Route104_MrBrineysHouse_MapScripts:: @ 815BCB2
 
 Route104_MrBrineysHouse_MapScript1_15BCB8:: @ 815BCB8
 	setflag FLAG_LANDMARK_MR_BRINEY_HOUSE
-	compare 0x4090, 1
+	compare VAR_BRINEY_HOUSE_STATE, 1
 	call_if 1, Route104_MrBrineysHouse_EventScript_15BCD4
 	checkflag FLAG_RECEIVED_POKENAV
 	call_if 1, Route104_MrBrineysHouse_EventScript_15BCD0
@@ -36,8 +36,8 @@ Route104_MrBrineysHouse_EventScript_15BCEB:: @ 815BCEB
 Route104_MrBrineysHouse_EventScript_15BD0E:: @ 815BD0E
 	setflag FLAG_MR_BRINEY_SAILING_INTRO
 	msgbox Route104_MrBrineysHouse_Text_191A82, 4
-	msgbox Route104_MrBrineysHouse_Text_191AAD, 5
-	compare RESULT, 0
+	msgbox Route104_MrBrineysHouse_Text_191AAD, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq Route104_MrBrineysHouse_EventScript_15BD97
 	goto Route104_MrBrineysHouse_EventScript_15BDAB
 	end
@@ -53,15 +53,15 @@ Route104_MrBrineysHouse_EventScript_15BD32:: @ 815BD32
 	end
 
 Route104_MrBrineysHouse_EventScript_15BD65:: @ 815BD65
-	msgbox Route104_MrBrineysHouse_Text_191CC3, 5
-	compare RESULT, 0
+	msgbox Route104_MrBrineysHouse_Text_191CC3, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq Route104_MrBrineysHouse_EventScript_15BD97
 	goto Route104_MrBrineysHouse_EventScript_15BDAB
 	end
 
 Route104_MrBrineysHouse_EventScript_15BD7E:: @ 815BD7E
-	msgbox Route104_MrBrineysHouse_Text_191DA6, 5
-	compare RESULT, 0
+	msgbox Route104_MrBrineysHouse_Text_191DA6, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq Route104_MrBrineysHouse_EventScript_15BD97
 	goto Route104_MrBrineysHouse_EventScript_15BDAB
 	end
@@ -79,7 +79,7 @@ Route104_MrBrineysHouse_EventScript_15BDA1:: @ 815BDA1
 Route104_MrBrineysHouse_EventScript_15BDAB:: @ 815BDAB
 	msgbox Route104_MrBrineysHouse_Text_191BFD, 4
 	call Route104_MrBrineysHouse_EventScript_1A010C
-	setvar 0x408e, 1
+	setvar VAR_BOARD_BRINEY_BOAT_ROUTE104_STATE, 1
 	clearflag FLAG_HIDE_MR_BRINEY_ROUTE104
 	setflag FLAG_HIDE_MR_BRINEY_ROUTE104_HOUSE
 	setflag FLAG_HIDE_PEEKO_BRINEY_HOUSE

@@ -7,13 +7,13 @@ SlateportCity_ContestLobby_MapScript1_155417:: @ 8155417
 	end
 
 SlateportCity_ContestLobby_EventScript_15541D:: @ 815541D
-	setvar 0x800b, 7
+	setvar VAR_SPECIAL_B, 7
 	setvar CONTEST_RANK, 2
 	call SlateportCity_ContestLobby_EventScript_1A4E92
 	call SlateportCity_ContestLobby_EventScript_155448
-	special sub_80C4BF0
+	special SetContestTrainerGfxIds
 	call SlateportCity_ContestLobby_EventScript_15FBDB
-	setvar 0x4088, 3
+	setvar VAR_CONTEST_LOCATION, 3
 	warp MAP_LINK_CONTEST_ROOM1, 255, 7, 5
 	waitstate
 	end
@@ -22,13 +22,13 @@ SlateportCity_ContestLobby_EventScript_155448:: @ 8155448
 	lockall
 	applymovement 1, SlateportCity_ContestLobby_Movement_1554CC
 	waitmovement 0
-	playse 71
+	playse SE_HASHI
 	setmetatile 4, 2, 545, 1
 	setmetatile 4, 3, 609, 1
 	special DrawWholeMapView
 	applymovement 1, SlateportCity_ContestLobby_Movement_1554CF
 	waitmovement 0
-	playse 71
+	playse SE_HASHI
 	setmetatile 4, 2, 721, 1
 	setmetatile 4, 3, 729, 1
 	special DrawWholeMapView

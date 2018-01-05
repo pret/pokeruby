@@ -96,21 +96,21 @@ extern u8 gActionSelectionCursor[];
 extern u8 gMoveSelectionCursor[];
 extern u8 gUnknown_02038470[];
 extern u16 gUnknown_030041B0;
-extern u16 gUnknown_030041B4;
+extern u16 gBattle_BG1_Y;
 extern u16 gUnknown_030041B8;
 extern struct Window gUnknown_030041D0;
-extern u16 gUnknown_03004200;
+extern u16 gBattle_WIN1H;
 extern struct Window gUnknown_03004210;
-extern u16 gUnknown_03004244;
+extern u16 gBattle_WIN1V;
 extern struct Window gUnknown_03004250;
-extern u16 gUnknown_03004240;
-extern u16 gUnknown_03004280;
+extern u16 gBattle_WIN0V;
+extern u16 gBattle_BG2_Y;
 extern u32 gUnknown_03004284;
-extern u16 gUnknown_03004288;
+extern u16 gBattle_BG2_X;
 extern u16 gUnknown_030042A0;
 extern u16 gUnknown_030042A4;
-extern u16 gUnknown_030042C0;
-extern u16 gUnknown_030042C4;
+extern u16 gBattle_BG1_X;
+extern u16 gBattle_WIN0H;
 extern MainCallback gPreBattleCallback1;
 extern void (*gBattleMainFunc)(void);
 extern u8 gLeveledUpInBattle;
@@ -160,8 +160,8 @@ void InitBattle(void)
     REG_WIN0V = 0x5051;
     REG_WININ = 0;
     REG_WINOUT = 0;
-    gUnknown_030042C4 = 0xF0;
-    gUnknown_03004240 = 0x5051;
+    gBattle_WIN0H = 0xF0;
+    gBattle_WIN0V = 0x5051;
     dp12_8087EA4();
 
     for (i = 0; i < 80; i++)
@@ -181,10 +181,10 @@ void InitBattle(void)
     ResetPaletteFade();
     gUnknown_030042A4 = 0;
     gUnknown_030042A0 = 0;
-    gUnknown_030042C0 = 0;
-    gUnknown_030041B4 = 0;
-    gUnknown_03004288 = 0;
-    gUnknown_03004280 = 0;
+    gBattle_BG1_X = 0;
+    gBattle_BG1_Y = 0;
+    gBattle_BG2_X = 0;
+    gBattle_BG2_Y = 0;
     gUnknown_030041B0 = 0;
     gUnknown_030041B8 = 0;
     gBattleTerrain = BattleSetup_GetTerrain();
@@ -1003,16 +1003,16 @@ void sub_800FCFC(void)
     Random();  // unused return value
     REG_BG0HOFS = gUnknown_030042A4;
     REG_BG0VOFS = gUnknown_030042A0;
-    REG_BG1HOFS = gUnknown_030042C0;
-    REG_BG1VOFS = gUnknown_030041B4;
-    REG_BG2HOFS = gUnknown_03004288;
-    REG_BG2VOFS = gUnknown_03004280;
+    REG_BG1HOFS = gBattle_BG1_X;
+    REG_BG1VOFS = gBattle_BG1_Y;
+    REG_BG2HOFS = gBattle_BG2_X;
+    REG_BG2VOFS = gBattle_BG2_Y;
     REG_BG3HOFS = gUnknown_030041B0;
     REG_BG3VOFS = gUnknown_030041B8;
-    REG_WIN0H = gUnknown_030042C4;
-    REG_WIN0V = gUnknown_03004240;
-    REG_WIN1H = gUnknown_03004200;
-    REG_WIN1V = gUnknown_03004244;
+    REG_WIN0H = gBattle_WIN0H;
+    REG_WIN0V = gBattle_WIN0V;
+    REG_WIN1H = gBattle_WIN1H;
+    REG_WIN1V = gBattle_WIN1V;
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
@@ -1138,8 +1138,8 @@ void c2_8011A1C(void)
     REG_WIN0V = 0x5051;
     REG_WININ = 0;
     REG_WINOUT = 0;
-    gUnknown_030042C4 = 0xF0;
-    gUnknown_03004240 = 0x5051;
+    gBattle_WIN0H = 0xF0;
+    gBattle_WIN0V = 0x5051;
     dp12_8087EA4();
 
     for (i = 0; i < 80; i++)
@@ -1157,10 +1157,10 @@ void c2_8011A1C(void)
     ResetPaletteFade();
     gUnknown_030042A4 = 0;
     gUnknown_030042A0 = 0;
-    gUnknown_030042C0 = 0;
-    gUnknown_030041B4 = 0;
-    gUnknown_03004288 = 0;
-    gUnknown_03004280 = 0;
+    gBattle_BG1_X = 0;
+    gBattle_BG1_Y = 0;
+    gBattle_BG2_X = 0;
+    gBattle_BG2_Y = 0;
     gUnknown_030041B0 = 0;
     gUnknown_030041B8 = 0;
 

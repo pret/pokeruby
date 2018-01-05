@@ -9,7 +9,7 @@ EverGrandeCity_ChampionsRoom_MapScript1_15B7BF:: @ 815B7BF
 	end
 
 EverGrandeCity_ChampionsRoom_MapScript2_15B7C5:: @ 815B7C5
-	map_script_2 0x4001, 0, EverGrandeCity_ChampionsRoom_EventScript_15B7CF
+	map_script_2 VAR_TEMP_1, 0, EverGrandeCity_ChampionsRoom_EventScript_15B7CF
 	.2byte 0
 
 EverGrandeCity_ChampionsRoom_EventScript_15B7CF:: @ 815B7CF
@@ -17,7 +17,7 @@ EverGrandeCity_ChampionsRoom_EventScript_15B7CF:: @ 815B7CF
 	end
 
 EverGrandeCity_ChampionsRoom_MapScript2_15B7D4:: @ 815B7D4
-	map_script_2 0x4001, 0, EverGrandeCity_ChampionsRoom_EventScript_15B7DE
+	map_script_2 VAR_TEMP_1, 0, EverGrandeCity_ChampionsRoom_EventScript_15B7DE
 	.2byte 0
 
 EverGrandeCity_ChampionsRoom_EventScript_15B7DE:: @ 815B7DE
@@ -27,7 +27,7 @@ EverGrandeCity_ChampionsRoom_EventScript_15B7DE:: @ 815B7DE
 	delay 40
 	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_15B802
 	waitmovement 0
-	setvar 0x4001, 1
+	setvar VAR_TEMP_1, 1
 	goto EverGrandeCity_ChampionsRoom_EventScript_15B805
 	releaseall
 	end
@@ -38,20 +38,20 @@ EverGrandeCity_ChampionsRoom_Movement_15B802:: @ 815B802
 	step_end
 
 EverGrandeCity_ChampionsRoom_EventScript_15B805:: @ 815B805
-	playbgm 454, 0
+	playbgm BGM_DAIGO, FALSE
 	msgbox EverGrandeCity_ChampionsRoom_Text_190F9C, 4
 	trainerbattle 3, OPPONENT_STEVEN, 0, EverGrandeCity_ChampionsRoom_Text_1910A0
 	goto EverGrandeCity_ChampionsRoom_EventScript_15B821
 	end
 
 EverGrandeCity_ChampionsRoom_EventScript_15B821:: @ 815B821
-	playse 8
+	playse SE_DOOR
 	setmetatile 6, 1, 838, 0
 	setmetatile 6, 2, 839, 0
 	special DrawWholeMapView
 	msgbox EverGrandeCity_ChampionsRoom_Text_1910FE, 4
 	closemessage
-	playse 8
+	playse SE_DOOR
 	checkplayergender
 	compare RESULT, 0
 	call_if 1, EverGrandeCity_ChampionsRoom_EventScript_15B87C
@@ -67,17 +67,17 @@ EverGrandeCity_ChampionsRoom_EventScript_15B821:: @ 815B821
 	end
 
 EverGrandeCity_ChampionsRoom_EventScript_15B87C:: @ 815B87C
-	playbgm 415, 0
+	playbgm BGM_GIRL_SUP, FALSE
 	return
 
 EverGrandeCity_ChampionsRoom_EventScript_15B881:: @ 815B881
-	playbgm 421, 0
+	playbgm BGM_BOY_SUP, FALSE
 	return
 
 EverGrandeCity_ChampionsRoom_EventScript_15B886:: @ 815B886
 	msgbox EverGrandeCity_ChampionsRoom_Text_191225, 4
 	delay 40
-	playse 21
+	playse SE_PIN
 	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_1A0833
 	waitmovement 0
 	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_1A0835
@@ -90,7 +90,7 @@ EverGrandeCity_ChampionsRoom_EventScript_15B886:: @ 815B886
 EverGrandeCity_ChampionsRoom_EventScript_15B8BB:: @ 815B8BB
 	msgbox EverGrandeCity_ChampionsRoom_Text_1912B3, 4
 	delay 40
-	playse 21
+	playse SE_PIN
 	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_1A0833
 	waitmovement 0
 	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_1A0835

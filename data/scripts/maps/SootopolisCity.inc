@@ -45,7 +45,7 @@ SootopolisCity_EventScript_14D123:: @ 814D123
 	call SootopolisCity_EventScript_1A02C1
 	setobjectxyperm 1, 29, 19
 	setobjectxyperm 2, 33, 19
-	compare 0x405e, 1
+	compare VAR_SOOTOPOLIS_STATE, 1
 	call_if 1, SootopolisCity_EventScript_14D142
 	return
 
@@ -127,8 +127,8 @@ SootopolisCity_EventScript_14D220:: @ 814D220
 	end
 
 SootopolisCity_EventScript_14D241:: @ 814D241
-	msgbox SootopolisCity_Text_1C6540, 5
-	compare RESULT, 1
+	msgbox SootopolisCity_Text_1C6540, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq SootopolisCity_EventScript_14D25E
 	msgbox SootopolisCity_Text_1C6626, 4
 	release
@@ -216,7 +216,7 @@ SootopolisCity_EventScript_14D308:: @ 814D308
 	applymovement 10, SootopolisCity_Movement_1A083F
 	applymovement 255, SootopolisCity_Movement_1A0843
 	waitmovement 0
-	playse 21
+	playse SE_PIN
 	applymovement 10, SootopolisCity_Movement_1A0833
 	waitmovement 0
 	applymovement 10, SootopolisCity_Movement_1A0835
@@ -237,7 +237,7 @@ SootopolisCity_EventScript_14D308:: @ 814D308
 	.else
 	msgbox SootopolisCity_Text_169E82, 4
 	.endif
-	playse 21
+	playse SE_PIN
 	applymovement 5, SootopolisCity_Movement_1A0833
 	waitmovement 0
 	applymovement 5, SootopolisCity_Movement_1A0835
@@ -288,7 +288,7 @@ SootopolisCity_EventScript_14D308:: @ 814D308
 	setobjectmovementtype 5, 9
 	moveobjectoffscreen 10
 	setobjectmovementtype 10, 10
-	setvar 0x405e, 2
+	setvar VAR_SOOTOPOLIS_STATE, 2
 	releaseall
 	end
 

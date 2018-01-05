@@ -87,8 +87,8 @@ _08095B66:
 	bx r1
 	thumb_func_end sub_8095B24
 
-	thumb_func_start sub_8095B6C
-sub_8095B6C: @ 8095B6C
+	thumb_func_start GetNumValidDaycarePartyMons
+GetNumValidDaycarePartyMons: @ 8095B6C
 	push {r4-r6,lr}
 	movs r5, 0
 	movs r6, 0
@@ -124,7 +124,7 @@ _08095B9A:
 	bx r1
 	.align 2, 0
 _08095BB0: .4byte gPlayerParty
-	thumb_func_end sub_8095B6C
+	thumb_func_end GetNumValidDaycarePartyMons
 
 	thumb_func_start CountAlivePartyMonsExceptOne
 CountAlivePartyMonsExceptOne: @ 8095BB4
@@ -174,8 +174,8 @@ _08095BF6:
 _08095C0C: .4byte gPlayerParty
 	thumb_func_end CountAlivePartyMonsExceptOne
 
-	thumb_func_start sub_8095C10
-sub_8095C10: @ 8095C10
+	thumb_func_start CountAlivePartyMonsExceptSelectedOne
+CountAlivePartyMonsExceptSelectedOne: @ 8095C10
 	push {lr}
 	ldr r0, _08095C24 @ =gSpecialVar_0x8004
 	ldrb r0, [r0]
@@ -186,7 +186,7 @@ sub_8095C10: @ 8095C10
 	bx r1
 	.align 2, 0
 _08095C24: .4byte gSpecialVar_0x8004
-	thumb_func_end sub_8095C10
+	thumb_func_end CountAlivePartyMonsExceptSelectedOne
 
 	thumb_func_start StorageSystemGetPartySize
 StorageSystemGetPartySize: @ 8095C28

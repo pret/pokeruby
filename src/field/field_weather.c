@@ -5,6 +5,7 @@
 #include "palette.h"
 #include "random.h"
 #include "script.h"
+#include "constants/weather.h"
 #include "constants/songs.h"
 #include "sound.h"
 #include "sprite.h"
@@ -398,31 +399,31 @@ void sub_807CCAC(void)
     case WEATHER_RAIN_MED:
     case WEATHER_RAIN_HEAVY:
     case WEATHER_SNOW:
-    case 11:
+    case WEATHER_DARK:
         if (sub_807CDC4() == 0)
         {
             gWeatherPtr->unknown_6C0 = 3;
             gWeatherPtr->unknown_6C6 = 3;
         }
         break;
-    case 12:
+    case WEATHER_DROUGHT:
         if (sub_807CE24() == 0)
         {
             gWeatherPtr->unknown_6C0 = -6;
             gWeatherPtr->unknown_6C6 = 3;
         }
         break;
-    case 6:
+    case WEATHER_FOG_1:
         if (sub_807CE7C() == 0)
         {
             gWeatherPtr->unknown_6C0 = 0;
             gWeatherPtr->unknown_6C6 = 3;
         }
         break;
-    case 7:
-    case 8:
-    case 9:
-    case 10:
+    case WEATHER_ASH:
+    case WEATHER_SANDSTORM:
+    case WEATHER_FOG_2:
+    case WEATHER_FOG_3:
     default:
         if (!gPaletteFade.active)
         {
@@ -808,9 +809,9 @@ void fade_screen(u8 a, u8 delay)
     case WEATHER_RAIN_MED:
     case WEATHER_RAIN_HEAVY:
     case WEATHER_SNOW:
-    case 6:
-    case 11:
-    case 12:
+    case WEATHER_FOG_1:
+    case WEATHER_DARK:
+    case WEATHER_DROUGHT:
         r2 = 1;
         break;
     default:
@@ -855,7 +856,7 @@ void sub_807D78C(u8 a)
     case 1:
         if (gWeatherPtr->unknown_6CA != 0)
         {
-            if (gWeatherPtr->currWeather == 6)
+            if (gWeatherPtr->currWeather == WEATHER_FOG_1)
                 sub_807D540(r4);
             r4 *= 16;
             for (i = 0; i < 16; i++)
@@ -868,7 +869,7 @@ void sub_807D78C(u8 a)
         BlendPalette(r4, 16, gPaletteFade.y, gPaletteFade.blendColor);
         break;
     default:
-        if (gWeatherPtr->currWeather != 6)
+        if (gWeatherPtr->currWeather != WEATHER_FOG_1)
         {
             sub_807CEBC(r4, 1, gWeatherPtr->unknown_6C0);
         }

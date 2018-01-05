@@ -5,7 +5,7 @@ RustboroCity_DevonCorp_3F_MapScripts:: @ 8157711
 	.byte 0
 
 RustboroCity_DevonCorp_3F_MapScript1_157721:: @ 8157721
-	compare 0x408f, 0
+	compare VAR_DEVON_CORP_3F_STATE, 0
 	call_if 1, RustboroCity_DevonCorp_3F_EventScript_15772D
 	end
 
@@ -15,7 +15,7 @@ RustboroCity_DevonCorp_3F_EventScript_15772D:: @ 815772D
 	return
 
 RustboroCity_DevonCorp_3F_MapScript2_157739:: @ 8157739
-	map_script_2 0x408f, 0, RustboroCity_DevonCorp_3F_EventScript_157743
+	map_script_2 VAR_DEVON_CORP_3F_STATE, 0, RustboroCity_DevonCorp_3F_EventScript_157743
 	.2byte 0
 
 RustboroCity_DevonCorp_3F_EventScript_157743:: @ 8157743
@@ -23,7 +23,7 @@ RustboroCity_DevonCorp_3F_EventScript_157743:: @ 8157743
 	end
 
 RustboroCity_DevonCorp_3F_MapScript2_157748:: @ 8157748
-	map_script_2 0x408f, 0, RustboroCity_DevonCorp_3F_EventScript_157752
+	map_script_2 VAR_DEVON_CORP_3F_STATE, 0, RustboroCity_DevonCorp_3F_EventScript_157752
 	.2byte 0
 
 RustboroCity_DevonCorp_3F_EventScript_157752:: @ 8157752
@@ -37,7 +37,7 @@ RustboroCity_DevonCorp_3F_EventScript_157752:: @ 8157752
 	waitmovement 0
 	msgbox RustboroCity_DevonCorp_3F_Text_183903, 4
 	closemessage
-	playbgm 420, 0
+	playbgm BGM_TSURETEK, FALSE
 	applymovement 2, RustboroCity_DevonCorp_3F_Movement_157803
 	applymovement 255, RustboroCity_DevonCorp_3F_Movement_157827
 	waitmovement 0
@@ -50,7 +50,7 @@ RustboroCity_DevonCorp_3F_EventScript_157752:: @ 8157752
 	msgbox RustboroCity_DevonCorp_3F_Text_18320B, 4
 	giveitem_std ITEM_LETTER
 	msgbox RustboroCity_DevonCorp_3F_Text_18337E, 4
-	playfanfare 370
+	playfanfare BGM_FANFA4
 	message RustboroCity_DevonCorp_3F_Text_183422
 	waitfanfare
 	waitmessage
@@ -62,9 +62,9 @@ RustboroCity_DevonCorp_3F_EventScript_157752:: @ 8157752
 	clearflag FLAG_HIDE_GIRLFRIEND_RUSTURF_TUNNEL
 	clearflag FLAG_HIDE_MR_BRINEY_ROUTE104_HOUSE
 	clearflag FLAG_HIDE_PEEKO_BRINEY_HOUSE
-	setvar 0x4096, 1
+	setvar VAR_BRINEY_LOCATION, 1
 	clearflag FLAG_HIDE_RIVAL_RUSTBORO
-	setvar 0x408f, 1
+	setvar VAR_DEVON_CORP_3F_STATE, 1
 	releaseall
 	end
 

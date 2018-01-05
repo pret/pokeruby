@@ -24,7 +24,7 @@ extern u8 gSharedMem[];
 #define ewram0arr                       ((u8 (*)[32])gSharedMem)
 #define eVoidSharedArr                  (void *)(ewram_addr + 0x0)
 #define eVoidSharedArr2                 (u32)(ewram_addr) // ew(ram)
-#define ewram0_8                        ((struct UnkStruct2000000 *)(gSharedMem + 0x0))
+#define eSlotMachine                    ((struct SlotMachineEwramStruct *)(gSharedMem + 0x0))
 #define ewram0_9(i)                     (u8 *)(ewram_addr + (i * 0x20))
 #define ewram0_10                       (*(struct UnknownPokenav0*)(gSharedMem + 0))
 #define ewram0_11                       (*(struct UnknownPokenav0_1*)(gSharedMem + 0))
@@ -70,7 +70,7 @@ extern u8 gSharedMem[];
 #define ewramF800                       (&gSharedMem[0xF800])
 #define ewram_2010000                   (*(struct TradeEwramStruct *)(gSharedMem + 0x10000))
 #define ewram10000                      (&gSharedMem[0x10000])
-#define ewram10000_2                    (void *)(gSharedMem + 0x10000) // slot machine
+#define eSlotMachineGfxBuffer                    (void *)(gSharedMem + 0x10000) // slot machine
 #define ePokedexPalAddr3                (void *)(gSharedMem + 0x10000)
 #define ewram10800                      (&gSharedMem[0x10800])
 #define ewram11000                      (&gSharedMem[0x11000])
@@ -78,6 +78,7 @@ extern u8 gSharedMem[];
 #define ewram12000                      (&gSharedMem[0x12000])
 #define ewram12800                      (&gSharedMem[0x12800])
 #define ewram13000                      (&gSharedMem[0x13000])
+#define eSlotMachineReelTimeGfxBuffer                      (&gSharedMem[0x13200])
 #define ewram13800                      (&gSharedMem[0x13800])
 #define EWRAM_14000                     ((u8 *)(gSharedMem + 0x14000))
 #define ewram14000                      (&gSharedMem[0x14000])
