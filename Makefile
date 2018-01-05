@@ -92,9 +92,6 @@ sound/direct_sound_samples/cry_%.bin: sound/direct_sound_samples/cry_%.aif ; $(A
 sound/songs/%.s: sound/songs/%.mid
 	cd $(@D) && ../../$(MID) $(<F)
 
-%src/libs/libc.o: CC1 := tools/agbcc/bin/old_agbcc
-%src/libs/libc.o: CFLAGS := -O2
-
 %src/libs/siirtc.o: CFLAGS := -mthumb-interwork
 
 %src/libs/agb_flash.o: CFLAGS := -O -mthumb-interwork
