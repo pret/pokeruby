@@ -22,13 +22,13 @@ FallarborTown_ContestLobby_EventScript_1539F8:: @ 81539F8
 	lockall
 	applymovement 1, FallarborTown_ContestLobby_Movement_153A7C
 	waitmovement 0
-	playse 71
+	playse SE_HASHI
 	setmetatile 4, 2, 545, 1
 	setmetatile 4, 3, 609, 1
 	special DrawWholeMapView
 	applymovement 1, FallarborTown_ContestLobby_Movement_153A7F
 	waitmovement 0
-	playse 71
+	playse SE_HASHI
 	setmetatile 4, 2, 721, 1
 	setmetatile 4, 3, 729, 1
 	special DrawWholeMapView

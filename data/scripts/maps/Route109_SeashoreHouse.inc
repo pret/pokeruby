@@ -42,8 +42,8 @@ Route109_SeashoreHouse_EventScript_160E2C:: @ 8160E2C
 Route109_SeashoreHouse_EventScript_160E36:: @ 8160E36
 	showmoneybox 0, 0
 	nop
-	msgbox Route109_SeashoreHouse_Text_19B702, 5
-	compare RESULT, 1
+	msgbox Route109_SeashoreHouse_Text_19B702, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq Route109_SeashoreHouse_EventScript_160E5A
 	msgbox Route109_SeashoreHouse_Text_19B773, 4
 	hidemoneybox 0, 0

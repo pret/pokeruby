@@ -381,7 +381,7 @@ RustboroCity_EventScript_14C650:: @ 814C650
 RustboroCity_EventScript_14C691:: @ 814C691
 	applymovement 9, RustboroCity_Movement_1A0841
 	waitmovement 0
-	playse 21
+	playse SE_PIN
 	applymovement 9, RustboroCity_Movement_1A0833
 	waitmovement 0
 	applymovement 9, RustboroCity_Movement_1A0835
@@ -393,7 +393,7 @@ RustboroCity_EventScript_14C691:: @ 814C691
 RustboroCity_EventScript_14C6BD:: @ 814C6BD
 	applymovement 9, RustboroCity_Movement_1A083F
 	waitmovement 0
-	playse 21
+	playse SE_PIN
 	applymovement 9, RustboroCity_Movement_1A0833
 	waitmovement 0
 	applymovement 9, RustboroCity_Movement_1A0835
@@ -405,7 +405,7 @@ RustboroCity_EventScript_14C6BD:: @ 814C6BD
 RustboroCity_EventScript_14C6E9:: @ 814C6E9
 	applymovement 9, RustboroCity_Movement_1A0845
 	waitmovement 0
-	playse 21
+	playse SE_PIN
 	applymovement 9, RustboroCity_Movement_1A0833
 	waitmovement 0
 	applymovement 9, RustboroCity_Movement_1A0835
@@ -417,7 +417,7 @@ RustboroCity_EventScript_14C6E9:: @ 814C6E9
 RustboroCity_EventScript_14C715:: @ 814C715
 	applymovement 9, RustboroCity_Movement_1A0845
 	waitmovement 0
-	playse 21
+	playse SE_PIN
 	applymovement 9, RustboroCity_Movement_1A0833
 	waitmovement 0
 	applymovement 9, RustboroCity_Movement_1A0835
@@ -489,7 +489,7 @@ RustboroCity_EventScript_14C7F5:: @ 814C7F5
 RustboroCity_EventScript_14C7FE:: @ 814C7FE
 	applymovement 9, RustboroCity_Movement_1A0841
 	waitmovement 0
-	playse 21
+	playse SE_PIN
 	applymovement 9, RustboroCity_Movement_1A0833
 	waitmovement 0
 	applymovement 9, RustboroCity_Movement_1A0835
@@ -501,7 +501,7 @@ RustboroCity_EventScript_14C7FE:: @ 814C7FE
 RustboroCity_EventScript_14C82A:: @ 814C82A
 	applymovement 9, RustboroCity_Movement_1A0843
 	waitmovement 0
-	playse 21
+	playse SE_PIN
 	applymovement 9, RustboroCity_Movement_1A0833
 	waitmovement 0
 	applymovement 9, RustboroCity_Movement_1A0835
@@ -513,7 +513,7 @@ RustboroCity_EventScript_14C82A:: @ 814C82A
 RustboroCity_EventScript_14C856:: @ 814C856
 	applymovement 9, RustboroCity_Movement_1A0845
 	waitmovement 0
-	playse 21
+	playse SE_PIN
 	applymovement 9, RustboroCity_Movement_1A0833
 	waitmovement 0
 	applymovement 9, RustboroCity_Movement_1A0835
@@ -525,7 +525,7 @@ RustboroCity_EventScript_14C856:: @ 814C856
 RustboroCity_EventScript_14C882:: @ 814C882
 	applymovement 9, RustboroCity_Movement_1A0845
 	waitmovement 0
-	playse 21
+	playse SE_PIN
 	applymovement 9, RustboroCity_Movement_1A0833
 	waitmovement 0
 	applymovement 9, RustboroCity_Movement_1A0835
@@ -539,7 +539,7 @@ RustboroCity_EventScript_14C882:: @ 814C882
 RustboroCity_EventScript_14C8B8:: @ 814C8B8
 	applymovement 9, RustboroCity_Movement_1A083F
 	waitmovement 0
-	playse 21
+	playse SE_PIN
 	applymovement 9, RustboroCity_Movement_1A0833
 	waitmovement 0
 	applymovement 9, RustboroCity_Movement_1A0835

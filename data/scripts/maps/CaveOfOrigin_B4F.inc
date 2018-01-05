@@ -33,11 +33,11 @@ CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 	msgbox CaveOfOrigin_B4F_Text_1B4FE4, 4
 	.endif
 	closemessage
-	setweather 0
+	setweather WEATHER_NONE
 	doweather
 	special WaitWeather
 	waitstate
-	playse 209
+	playse SE_W197
 	setfieldeffectargument 0, 9
 	setfieldeffectargument 1, 13
 	setfieldeffectargument 2, 0
@@ -48,7 +48,7 @@ CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 	.else
 	setvar RESULT, 2
 	.endif
-	playse 107
+	playse SE_TAMA
 	special sub_80818A4
 	waitstate
 	special sub_80818FC

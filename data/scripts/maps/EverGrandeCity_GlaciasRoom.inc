@@ -43,7 +43,7 @@ EverGrandeCity_GlaciasRoom_EventScript_15B6CA:: @ 815B6CA
 	faceplayer
 	checkflag FLAG_DEFEATED_ELITE_4_GLACIA
 	goto_if_eq EverGrandeCity_GlaciasRoom_EventScript_15B6F1
-	playbgm 450, 0
+	playbgm BGM_SITENNOU, FALSE
 	msgbox EverGrandeCity_GlaciasRoom_Text_190AF9, 4
 	trainerbattle 3, OPPONENT_GLACIA, 0, EverGrandeCity_GlaciasRoom_Text_190C01
 	goto EverGrandeCity_GlaciasRoom_EventScript_15B6FB

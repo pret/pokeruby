@@ -11,7 +11,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_155CE6:: @ 8155CE6
 	faceplayer
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17ECFD, 4
 	closemessage
-	playbgm BGM_EVIL_TEAM, 1
+	playbgm BGM_EVIL_TEAM, TRUE
 	addobject 3
 	applymovement 3, SlateportCity_OceanicMuseum_2F_Movement_155EB4
 	waitmovement 0
@@ -84,7 +84,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_155CE6:: @ 8155CE6
 	closemessage
 	applymovement 1, SlateportCity_OceanicMuseum_2F_Movement_155E98
 	waitmovement 0
-	playse 9
+	playse SE_KAIDAN
 	removeobject 1
 	setflag FLAG_HIDE_EVIL_TEAM_ROUTE110
 	setflag FLAG_DELIVERED_DEVON_GOODS

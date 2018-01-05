@@ -36,8 +36,8 @@ Route104_MrBrineysHouse_EventScript_15BCEB:: @ 815BCEB
 Route104_MrBrineysHouse_EventScript_15BD0E:: @ 815BD0E
 	setflag FLAG_MR_BRINEY_SAILING_INTRO
 	msgbox Route104_MrBrineysHouse_Text_191A82, 4
-	msgbox Route104_MrBrineysHouse_Text_191AAD, 5
-	compare RESULT, 0
+	msgbox Route104_MrBrineysHouse_Text_191AAD, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq Route104_MrBrineysHouse_EventScript_15BD97
 	goto Route104_MrBrineysHouse_EventScript_15BDAB
 	end
@@ -53,15 +53,15 @@ Route104_MrBrineysHouse_EventScript_15BD32:: @ 815BD32
 	end
 
 Route104_MrBrineysHouse_EventScript_15BD65:: @ 815BD65
-	msgbox Route104_MrBrineysHouse_Text_191CC3, 5
-	compare RESULT, 0
+	msgbox Route104_MrBrineysHouse_Text_191CC3, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq Route104_MrBrineysHouse_EventScript_15BD97
 	goto Route104_MrBrineysHouse_EventScript_15BDAB
 	end
 
 Route104_MrBrineysHouse_EventScript_15BD7E:: @ 815BD7E
-	msgbox Route104_MrBrineysHouse_Text_191DA6, 5
-	compare RESULT, 0
+	msgbox Route104_MrBrineysHouse_Text_191DA6, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq Route104_MrBrineysHouse_EventScript_15BD97
 	goto Route104_MrBrineysHouse_EventScript_15BDAB
 	end

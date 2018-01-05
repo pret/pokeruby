@@ -38,10 +38,10 @@ LilycoveCity_ContestLobby_EventScript_1B7681:: @ 81B7681
 SlateportCity_ContestLobby_EventScript_1B7681:: @ 81B7681
 VerdanturfTown_ContestLobby_EventScript_1B7681:: @ 81B7681
 	lockall
-	msgbox FallarborTown_ContestLobby_Text_1B6E63, 5
-	compare RESULT, 1
+	msgbox FallarborTown_ContestLobby_Text_1B6E63, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B76A1
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B76E5
 	end
 
@@ -54,9 +54,9 @@ FallarborTown_ContestLobby_EventScript_1B76A1:: @ 81B76A1
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B770E
 	msgbox FallarborTown_ContestLobby_Text_1B6E9D, 4
 	specialvar RESULT, GetFirstFreePokeblockSlot
-	compare RESULT, 65535
+	compare RESULT, -1
 	goto_if 5, FallarborTown_ContestLobby_EventScript_1B76EF
-	compare RESULT, 65535
+	compare RESULT, -1
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7776
 	end
 
@@ -66,10 +66,10 @@ FallarborTown_ContestLobby_EventScript_1B76E5:: @ 81B76E5
 	end
 
 FallarborTown_ContestLobby_EventScript_1B76EF:: @ 81B76EF
-	msgbox FallarborTown_ContestLobby_Text_1B6ED0, 5
-	compare RESULT, 1
+	msgbox FallarborTown_ContestLobby_Text_1B6ED0, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7734
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7726
 	end
 
@@ -215,17 +215,17 @@ VerdanturfTown_ContestLobby_EventScript_1B783B:: @ 81B783B
 	compare RESULT, 0
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7942
 	specialvar RESULT, GetFirstFreePokeblockSlot
-	compare RESULT, 65535
+	compare RESULT, -1
 	goto_if 5, FallarborTown_ContestLobby_EventScript_1B7878
-	compare RESULT, 65535
+	compare RESULT, -1
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7938
 	end
 
 FallarborTown_ContestLobby_EventScript_1B7878:: @ 81B7878
-	msgbox FallarborTown_ContestLobby_Text_1B727C, 5
-	compare RESULT, 1
+	msgbox FallarborTown_ContestLobby_Text_1B727C, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B78A1
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7936
 	end
 

@@ -220,7 +220,7 @@ Route110_TrickHouseEntrance_EventScript_1611D7:: @ 81611D7
 	delay 20
 	applymovement 1, Route110_TrickHouseEntrance_Movement_161315
 	waitmovement 0
-	playse 178
+	playse SE_W153
 	applymovement 1, Route110_TrickHouseEntrance_Movement_16131E
 	waitmovement 0
 	removeobject 1
@@ -243,7 +243,7 @@ Route110_TrickHouseEntrance_EventScript_16121A:: @ 816121A
 	end
 
 Route110_TrickHouseEntrance_EventScript_16124D:: @ 816124D
-	playse 21
+	playse SE_PIN
 	applymovement 255, Route110_TrickHouseEntrance_Movement_1A0833
 	waitmovement 0
 	applymovement 255, Route110_TrickHouseEntrance_Movement_1A0835
@@ -336,7 +336,7 @@ Route110_TrickHouseEntrance_EventScript_161330:: @ 8161330
 	closemessage
 	applymovement 1, Route110_TrickHouseEntrance_Movement_1A0839
 	waitmovement 0
-	playse 21
+	playse SE_PIN
 	applymovement 1, Route110_TrickHouseEntrance_Movement_1A0833
 	waitmovement 0
 	applymovement 1, Route110_TrickHouseEntrance_Movement_1A0835
@@ -450,9 +450,9 @@ Route110_TrickHouseEntrance_EventScript_161518:: @ 8161518
 	waitmovement 0
 	msgbox Route110_TrickHouseEntrance_Text_19C128, 4
 	.ifdef SAPPHIRE
-	givedecoration_std 32
+	givedecoration_std DECOR_BLUE_TENT
 	.else
-	givedecoration_std 31
+	givedecoration_std DECOR_RED_TENT
 	.endif
 	compare RESULT, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_161551
@@ -469,7 +469,7 @@ Route110_TrickHouseEntrance_EventScript_161551:: @ 8161551
 	waitmovement 0
 	applymovement 1, Route110_TrickHouseEntrance_Movement_161315
 	waitmovement 0
-	playse 178
+	playse SE_W153
 	applymovement 1, Route110_TrickHouseEntrance_Movement_16131E
 	waitmovement 0
 	removeobject 1
@@ -493,9 +493,9 @@ Route110_TrickHouseEntrance_EventScript_1615BD:: @ 81615BD
 	end
 
 Route110_TrickHouseEntrance_EventScript_1615C7:: @ 81615C7
-	msgbox Route110_TrickHouseEntrance_Text_19BE7D, 5
+	msgbox Route110_TrickHouseEntrance_Text_19BE7D, MSGBOX_YESNO
 	closemessage
-	compare RESULT, 1
+	compare RESULT, YES
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_1615DD
 	releaseall
 	end
@@ -714,7 +714,7 @@ Route110_TrickHousePuzzle5_EventScript_16189C:: @ 816189C
 Route110_TrickHousePuzzle6_EventScript_16189C:: @ 816189C
 Route110_TrickHousePuzzle7_EventScript_16189C:: @ 816189C
 Route110_TrickHousePuzzle8_EventScript_16189C:: @ 816189C
-	playfanfare 370
+	playfanfare BGM_FANFA4
 	message Route110_TrickHousePuzzle1_Text_19C1B8
 	waitfanfare
 	waitmessage

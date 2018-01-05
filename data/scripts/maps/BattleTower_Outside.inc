@@ -35,8 +35,8 @@ BattleTower_Outside_EventScript_1601C6:: @ 81601C6
 	end
 
 BattleTower_Outside_EventScript_1601D0:: @ 81601D0
-	msgbox BattleTower_Outside_Text_199DF2, 5
-	compare RESULT, 0
+	msgbox BattleTower_Outside_Text_199DF2, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq BattleTower_Outside_EventScript_160226
 	msgbox BattleTower_Outside_Text_199E4B, 4
 	call BattleTower_Outside_EventScript_160232
@@ -46,8 +46,8 @@ BattleTower_Outside_EventScript_1601D0:: @ 81601D0
 	end
 
 BattleTower_Outside_EventScript_1601FB:: @ 81601FB
-	msgbox BattleTower_Outside_Text_199E0E, 5
-	compare RESULT, 0
+	msgbox BattleTower_Outside_Text_199E0E, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq BattleTower_Outside_EventScript_160226
 	msgbox BattleTower_Outside_Text_199E4B, 4
 	call BattleTower_Outside_EventScript_160232

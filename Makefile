@@ -14,6 +14,7 @@ LD      := $(DEVKITARM)/bin/arm-none-eabi-ld
 OBJCOPY := $(DEVKITARM)/bin/arm-none-eabi-objcopy
 
 LIBGCC := tools/agbcc/lib/libgcc.a
+LIBC   := tools/agbcc/lib/libc.a
 
 SHA1 := sha1sum -c
 
@@ -91,9 +92,6 @@ sound/direct_sound_samples/cry_%.bin: sound/direct_sound_samples/cry_%.aif ; $(A
 sound/songs/%.s: sound/songs/%.mid
 	cd $(@D) && ../../$(MID) $(<F)
 
-%src/libs/libc.o: CC1 := tools/agbcc/bin/old_agbcc
-%src/libs/libc.o: CFLAGS := -O2
-
 %src/libs/siirtc.o: CFLAGS := -mthumb-interwork
 
 %src/libs/agb_flash.o: CFLAGS := -O -mthumb-interwork
@@ -161,7 +159,7 @@ build/$1/ld_script.ld: ld_script.txt build/$1/sym_bss.ld build/$1/sym_common.ld 
 	cd build/$1 && sed -f ../../ld_script.sed ../../ld_script.txt | sed "s#tools/#../../tools/#g" | sed "s#sound/#../../sound/#g" >ld_script.ld
 
 poke$1.elf: build/$1/ld_script.ld $$($1_OBJS)
-	cd build/$1 && $$(LD) -T ld_script.ld -Map ../../poke$1.map -o ../../$$@ $$($1_OBJS_REL) ../../$$(LIBGCC)
+	cd build/$1 && $$(LD) -T ld_script.ld -Map ../../poke$1.map -o ../../$$@ $$($1_OBJS_REL) ../../$$(LIBGCC) ../../$$(LIBC)
 
 poke$1.gba: %.gba: %.elf
 	$$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $$< $$@

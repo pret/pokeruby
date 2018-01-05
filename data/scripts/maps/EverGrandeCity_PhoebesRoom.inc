@@ -43,7 +43,7 @@ EverGrandeCity_PhoebesRoom_EventScript_15B630:: @ 815B630
 	faceplayer
 	checkflag FLAG_DEFEATED_ELITE_4_PHOEBE
 	goto_if_eq EverGrandeCity_PhoebesRoom_EventScript_15B657
-	playbgm 450, 0
+	playbgm BGM_SITENNOU, FALSE
 	msgbox EverGrandeCity_PhoebesRoom_Text_1908F5, 4
 	trainerbattle 3, OPPONENT_PHOEBE, 0, EverGrandeCity_PhoebesRoom_Text_190A0C
 	goto EverGrandeCity_PhoebesRoom_EventScript_15B661

@@ -28,8 +28,8 @@ ShoalCave_LowTideEntranceRoom_EventScript_15E076:: @ 815E076
 	checkitem ITEM_SHOAL_SHELL, 4
 	compare RESULT, 0
 	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_15E138
-	msgbox ShoalCave_LowTideEntranceRoom_Text_1C6793, 5
-	compare RESULT, 0
+	msgbox ShoalCave_LowTideEntranceRoom_Text_1C6793, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_15E16C
 	checkitemspace ITEM_SHELL_BELL, 1
 	compare RESULT, 0

@@ -278,8 +278,8 @@ Route109_EventScript_14F680:: @ 814F680
 
 Route109_EventScript_14F691:: @ 814F691
 	message Route109_Text_16E0F9
-	msgbox Route109_Text_16E0F9, 5
-	compare RESULT, 0
+	msgbox Route109_Text_16E0F9, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq Route109_EventScript_14F6F1
 	goto Route109_EventScript_14F6E2
 	end

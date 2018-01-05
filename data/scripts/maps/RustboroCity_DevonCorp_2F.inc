@@ -80,13 +80,13 @@ RustboroCity_DevonCorp_2F_EventScript_157564:: @ 8157564
 
 RustboroCity_DevonCorp_2F_EventScript_1575A6:: @ 81575A6
 	closemessage
-	playse 21
+	playse SE_PIN
 	applymovement 5, RustboroCity_DevonCorp_2F_Movement_1A0833
 	waitmovement 0
 	applymovement 5, RustboroCity_DevonCorp_2F_Movement_1A0835
 	waitmovement 0
-	msgbox RustboroCity_DevonCorp_2F_Text_182F35, 5
-	compare RESULT, 0
+	msgbox RustboroCity_DevonCorp_2F_Text_182F35, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_157636
 	bufferitemname 0, ITEM_ROOT_FOSSIL
 	msgbox RustboroCity_DevonCorp_2F_Text_183023, 4
@@ -98,13 +98,13 @@ RustboroCity_DevonCorp_2F_EventScript_1575A6:: @ 81575A6
 
 RustboroCity_DevonCorp_2F_EventScript_1575EE:: @ 81575EE
 	closemessage
-	playse 21
+	playse SE_PIN
 	applymovement 5, RustboroCity_DevonCorp_2F_Movement_1A0833
 	waitmovement 0
 	applymovement 5, RustboroCity_DevonCorp_2F_Movement_1A0835
 	waitmovement 0
-	msgbox RustboroCity_DevonCorp_2F_Text_182F35, 5
-	compare RESULT, 0
+	msgbox RustboroCity_DevonCorp_2F_Text_182F35, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_157636
 	bufferitemname 0, ITEM_CLAW_FOSSIL
 	msgbox RustboroCity_DevonCorp_2F_Text_183023, 4
@@ -140,13 +140,13 @@ RustboroCity_DevonCorp_2F_EventScript_157661:: @ 8157661
 	copyvar VAR_SPECIAL_4, RESULT
 	setvar VAR_FOSSIL_RESURRECTION_STATE, 0
 	setflag FLAG_RECEIVED_FOSSIL_MON
-	playfanfare 370
+	playfanfare BGM_FANFA4
 	message RustboroCity_DevonCorp_2F_Text_18319E
 	waitfanfare
 	waitmessage
 	givemon SPECIES_LILEEP, 20, ITEM_NONE, 0x0, 0x0, 0
-	msgbox RustboroCity_DevonCorp_2F_Text_1A1102, 5
-	compare RESULT, 1
+	msgbox RustboroCity_DevonCorp_2F_Text_1A1102, MSGBOX_YESNO
+	compare RESULT, YES
 	call_if 1, RustboroCity_DevonCorp_2F_EventScript_1A0678
 	release
 	end
@@ -160,13 +160,13 @@ RustboroCity_DevonCorp_2F_EventScript_1576B4:: @ 81576B4
 	copyvar VAR_SPECIAL_4, RESULT
 	setvar VAR_FOSSIL_RESURRECTION_STATE, 0
 	setflag FLAG_RECEIVED_FOSSIL_MON
-	playfanfare 370
+	playfanfare BGM_FANFA4
 	message RustboroCity_DevonCorp_2F_Text_18319E
 	waitfanfare
 	waitmessage
 	givemon SPECIES_ANORITH, 20, ITEM_NONE, 0x0, 0x0, 0
-	msgbox RustboroCity_DevonCorp_2F_Text_1A1102, 5
-	compare RESULT, 1
+	msgbox RustboroCity_DevonCorp_2F_Text_1A1102, MSGBOX_YESNO
+	compare RESULT, YES
 	call_if 1, RustboroCity_DevonCorp_2F_EventScript_1A0678
 	release
 	end

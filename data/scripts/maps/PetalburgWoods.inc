@@ -13,7 +13,7 @@ PetalburgWoods_EventScript_15CCA8:: @ 815CCA8
 	waitmovement 0
 	msgbox PetalburgWoods_Text_194D92, 4
 	closemessage
-	playbgm BGM_EVIL_TEAM, 0
+	playbgm BGM_EVIL_TEAM, FALSE
 	applymovement 3, PetalburgWoods_Movement_15CEC3
 	waitmovement 0
 	msgbox PetalburgWoods_Text_194DED, 4
@@ -48,7 +48,7 @@ PetalburgWoods_EventScript_15CD42:: @ 815CD42
 	waitmovement 0
 	msgbox PetalburgWoods_Text_194D92, 4
 	closemessage
-	playbgm BGM_EVIL_TEAM, 0
+	playbgm BGM_EVIL_TEAM, FALSE
 	applymovement 3, PetalburgWoods_Movement_15CEC3
 	waitmovement 0
 	msgbox PetalburgWoods_Text_194DED, 4

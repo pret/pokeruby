@@ -31,10 +31,10 @@ MtChimney_CableCarStation_EventScript_15C127:: @ 815C127
 MtChimney_CableCarStation_EventScript_15C14B:: @ 815C14B
 	lock
 	faceplayer
-	msgbox MtChimney_CableCarStation_Text_19256A, 5
-	compare RESULT, 1
+	msgbox MtChimney_CableCarStation_Text_19256A, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq MtChimney_CableCarStation_EventScript_15C16C
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq MtChimney_CableCarStation_EventScript_15C19B
 	end
 
