@@ -3,42 +3,39 @@
 
 struct UnkStruct1
 {
-	u16 val0;
-	u16 val1;
-	u8 val2;
-	u8 val3;
-	u8 val4;
-	s8 field0:5;
-	s8 field1:2;
-	s8 field2:1;
+	u16 var00;
+	u16 var02;
+	u8 var04;
+	u8 var05;
+	u8 var06;
+	s8 var07_0:5;
+	s8 var07_5:2;
+	s8 var07_7:1;
 };
 
 struct UnkStruct3
 {
-	u8 field0:7;
-	u8 field1:1;
-	u8 val1;
-	s8 val2;
-	s8 val3;
-    /*
-	u16 val4;
-	u16 val5;
-	u8 val6;
-	u8 val7;
-	u8 val8;
-	s8 field2:5;
-	s8 field3:2;
-	s8 field4:1;
-    */
-    struct UnkStruct1 val4;
+	u8 var00_0:7;
+	u8 var00_7:1;
+	u8 var01;
+	s8 var02;
+	s8 var03;
+    struct UnkStruct1 var04;
 };
 
 struct UnkStruct0
 {
-	u8 val0;
-	u8 val1;
-	u16 val2; //flag for each UnkStruct3
-	struct UnkStruct3 val3[0x10];
+	u8 var00;
+	u8 var01;
+	u16 var02; //flag for each UnkStruct3
+	struct UnkStruct3 var04[0x10];
 };
+
+s16 sub_81174C4(s16, s16);
+s16 sub_81174E0(s16);
+
+void PlayRoulette(void);
+
+
 
 #endif

@@ -7811,7 +7811,7 @@ _08118F80: .4byte 0xbfc00000
 _08118F84: .4byte 0x3dae147b
 _08118F88: .4byte sub_8118D2C
 	thumb_func_end sub_8118DE4
-*/
+
 	thumb_func_start sub_8118F8C
 sub_8118F8C: @ 8118F8C
 	push {r4-r7,lr}
@@ -9655,4 +9655,4 @@ _08119E34: .4byte sub_8119D08
 _08119E38: .4byte sub_8119BCC
 	thumb_func_end sub_8119D80
 
-	.align 2, 0 @ Don't pad with nop.
+	.align 2, 0 @ Don't pad with nop.*/
