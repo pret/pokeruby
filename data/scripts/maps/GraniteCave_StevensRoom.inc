@@ -22,7 +22,7 @@ GraniteCave_StevensRoom_EventScript_15CBFA:: @ 815CBFA
 	call_if 1, GraniteCave_StevensRoom_EventScript_15CC6D
 	compare FACING, 4
 	call_if 1, GraniteCave_StevensRoom_EventScript_15CC6D
-	playse 9
+	playse SE_KAIDAN
 	removeobject 1
 	release
 	end

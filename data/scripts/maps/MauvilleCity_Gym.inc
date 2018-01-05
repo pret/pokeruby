@@ -91,7 +91,7 @@ MauvilleCity_Gym_EventScript_1565DB:: @ 81565DB
 	call MauvilleCity_Gym_EventScript_1A01C0
 	special MauvilleGymSpecial3
 	special DrawWholeMapView
-	playse 44
+	playse SE_KI_GASYAN
 	goto MauvilleCity_Gym_EventScript_15661D
 	end
 
@@ -146,7 +146,7 @@ MauvilleCity_Gym_EventScript_1566BA:: @ 81566BA
 	special MauvilleGymSpecial2
 	special MauvilleGymSpecial1
 	special DrawWholeMapView
-	playse 44
+	playse SE_KI_GASYAN
 	checkflag FLAG_MAUVILLE_GYM_BARRIERS_STATE
 	goto_if_eq MauvilleCity_Gym_EventScript_1566E1
 	checkflag FLAG_MAUVILLE_GYM_BARRIERS_STATE

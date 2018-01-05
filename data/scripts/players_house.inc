@@ -73,7 +73,7 @@ LittlerootTown_MaysHouse_2F_EventScript_1B69EB:: @ 81B69EB
 	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_1B6A31
 	compare RESULT, 1
 	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_1B6A61
-	playse 9
+	playse SE_KAIDAN
 	removeobject VAR_SPECIAL_8
 	releaseall
 	end
@@ -160,7 +160,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1B6ABF:: @ 81B6ABF
 	call LittlerootTown_BrendansHouse_1F_EventScript_1B6B9D
 	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_1B6CCC
 	waitmovement 0
-	playbgm 453, 0
+	playbgm BGM_INTER_V, FALSE
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1725C9, 4
 	closemessage
 	applymovement VAR_SPECIAL_5, LittlerootTown_BrendansHouse_1F_Movement_1B6BDB
@@ -185,7 +185,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6B2E:: @ 81B6B2E
 	call LittlerootTown_MaysHouse_1F_EventScript_1B6B9D
 	applymovement 255, LittlerootTown_MaysHouse_1F_Movement_1B6CD4
 	waitmovement 0
-	playbgm 453, 0
+	playbgm BGM_INTER_V, FALSE
 	msgbox LittlerootTown_MaysHouse_1F_Text_1725C9, 4
 	closemessage
 	applymovement VAR_SPECIAL_5, LittlerootTown_MaysHouse_1F_Movement_1B6BDE
@@ -206,7 +206,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6B2E:: @ 81B6B2E
 
 LittlerootTown_BrendansHouse_1F_EventScript_1B6B9D:: @ 81B6B9D
 LittlerootTown_MaysHouse_1F_EventScript_1B6B9D:: @ 81B6B9D
-	playse 21
+	playse SE_PIN
 	applymovement VAR_SPECIAL_5, LittlerootTown_BrendansHouse_1F_Movement_1A0833
 	waitmovement 0
 	applymovement VAR_SPECIAL_5, LittlerootTown_BrendansHouse_1F_Movement_1A0835
@@ -372,7 +372,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6CDE:: @ 81B6CDE
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1B6E28
 	applymovement VAR_SPECIAL_9, LittlerootTown_BrendansHouse_1F_Movement_1A0839
 	waitmovement 0
-	playse 21
+	playse SE_PIN
 	applymovement VAR_SPECIAL_9, LittlerootTown_BrendansHouse_1F_Movement_1A0833
 	waitmovement 0
 	applymovement VAR_SPECIAL_9, LittlerootTown_BrendansHouse_1F_Movement_1A0835
@@ -396,7 +396,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6CDE:: @ 81B6CDE
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1B6DF9
 	compare VAR_SPECIAL_8, 1
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1B6E0B
-	playse 8
+	playse SE_DOOR
 	removeobject VAR_SPECIAL_9
 	setflag FLAG_RECEIVED_SS_TICKET
 	setvar VAR_LITTLEROOT_HOUSES_STATE, 4

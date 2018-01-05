@@ -22,7 +22,7 @@ FallarborTown_House1_EventScript_153BDA:: @ 8153BDA
 	call_if 0, FallarborTown_House1_EventScript_153C2D
 	checkflag FLAG_TEMP_2
 	call_if 1, FallarborTown_House1_EventScript_153C3E
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq FallarborTown_House1_EventScript_153C47
 	msgbox FallarborTown_House1_Text_1778C4, 4
 	giveitem_std ITEM_TM27
@@ -37,11 +37,11 @@ FallarborTown_House1_EventScript_153BDA:: @ 8153BDA
 
 FallarborTown_House1_EventScript_153C2D:: @ 8153C2D
 	msgbox FallarborTown_House1_Text_177755, 4
-	msgbox FallarborTown_House1_Text_17780E, 5
+	msgbox FallarborTown_House1_Text_17780E, MSGBOX_YESNO
 	return
 
 FallarborTown_House1_EventScript_153C3E:: @ 8153C3E
-	msgbox FallarborTown_House1_Text_1779B8, 5
+	msgbox FallarborTown_House1_Text_1779B8, MSGBOX_YESNO
 	return
 
 FallarborTown_House1_EventScript_153C47:: @ 8153C47

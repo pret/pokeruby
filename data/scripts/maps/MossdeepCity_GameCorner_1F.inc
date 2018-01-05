@@ -93,14 +93,14 @@ MossdeepCity_GameCorner_1F_EventScript_15AD42:: @ 815AD42
 MossdeepCity_GameCorner_1F_EventScript_15AD59:: @ 815AD59
 	special SavePlayerParty
 	special BufferEReaderTrainerName
-	msgbox MossdeepCity_GameCorner_1F_Text_18E650, 5
-	compare RESULT, 0
+	msgbox MossdeepCity_GameCorner_1F_Text_18E650, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_15ADE8
 	call MossdeepCity_GameCorner_1F_EventScript_15ADF5
 	compare RESULT, 0
 	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_15ADE8
-	msgbox MossdeepCity_GameCorner_1F_Text_18E741, 5
-	compare RESULT, 0
+	msgbox MossdeepCity_GameCorner_1F_Text_18E741, MSGBOX_YESNO
+	compare RESULT, NO
 	call_if 1, MossdeepCity_GameCorner_1F_EventScript_15ADE8
 	special LoadPlayerParty
 	call S_DoSaveDialog

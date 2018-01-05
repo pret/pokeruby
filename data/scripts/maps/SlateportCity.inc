@@ -73,7 +73,7 @@ SlateportCity_EventScript_14BAE0:: @ 814BAE0
 	compare RESULT, 0
 	call_if 1, SlateportCity_EventScript_14BB2B
 	msgbox SlateportCity_Text_164691, 4
-	playfanfare 370
+	playfanfare BGM_FANFA4
 	message SlateportCity_Text_1646DD
 	waitfanfare
 	waitmessage
@@ -287,10 +287,10 @@ SlateportCity_EventScript_14BCFD:: @ 814BCFD
 SlateportCity_EventScript_14BD06:: @ 814BD06
 	lock
 	faceplayer
-	msgbox SlateportCity_Text_1650F1, 5
-	compare RESULT, 1
+	msgbox SlateportCity_Text_1650F1, MSGBOX_YESNO
+	compare RESULT, YES
 	call_if 1, SlateportCity_EventScript_14BD28
-	compare RESULT, 0
+	compare RESULT, NO
 	call_if 1, SlateportCity_EventScript_14BD31
 	release
 	end
@@ -508,7 +508,7 @@ SlateportCity_EventScript_14BEBC:: @ 814BEBC
 	applymovement 11, SlateportCity_Movement_1A0841
 	waitmovement 0
 	msgbox SlateportCity_Text_1655E7, 4
-	playbgm BGM_EVIL_TEAM, 0
+	playbgm BGM_EVIL_TEAM, FALSE
 	msgbox SlateportCity_Text_1656BC, 4
 	applymovement 6, SlateportCity_Movement_1A083F
 	applymovement 1, SlateportCity_Movement_1A083F
@@ -519,7 +519,7 @@ SlateportCity_EventScript_14BEBC:: @ 814BEBC
 	applymovement 11, SlateportCity_Movement_1A0845
 	waitmovement 0
 	msgbox SlateportCity_Text_16578F, 4
-	playse 21
+	playse SE_PIN
 	applymovement 11, SlateportCity_Movement_1A0833
 	waitmovement 0
 	applymovement 11, SlateportCity_Movement_1A0835

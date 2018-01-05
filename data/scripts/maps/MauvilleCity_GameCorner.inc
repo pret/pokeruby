@@ -43,7 +43,7 @@ MauvilleCity_GameCorner_EventScript_156AAE:: @ 8156AAE
 	updatemoneybox 0, 0
 	nop
 	updatecoinsbox 0, 5
-	playse 95
+	playse SE_REGI
 	msgbox MauvilleCity_GameCorner_Text_181CFE, 4
 	hidemoneybox 0, 0
 	hidecoinsbox 0, 5
@@ -62,7 +62,7 @@ MauvilleCity_GameCorner_EventScript_156AF0:: @ 8156AF0
 	updatemoneybox 0, 0
 	nop
 	updatecoinsbox 0, 5
-	playse 95
+	playse SE_REGI
 	msgbox MauvilleCity_GameCorner_Text_181CFE, 4
 	hidemoneybox 0, 0
 	hidecoinsbox 0, 5
@@ -143,8 +143,8 @@ MauvilleCity_GameCorner_EventScript_156BFE:: @ 8156BFE
 	goto MauvilleCity_GameCorner_EventScript_156C0C
 
 MauvilleCity_GameCorner_EventScript_156C0C:: @ 8156C0C
-	msgbox MauvilleCity_GameCorner_Text_181E33, 5
-	compare RESULT, 0
+	msgbox MauvilleCity_GameCorner_Text_181E33, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq MauvilleCity_GameCorner_EventScript_156D0D
 	switch VAR_TEMP_1
 	case 1, MauvilleCity_GameCorner_EventScript_156C46
@@ -156,14 +156,14 @@ MauvilleCity_GameCorner_EventScript_156C46:: @ 8156C46
 	checkcoins VAR_TEMP_2
 	compare VAR_TEMP_2, 1000
 	goto_if 0, MauvilleCity_GameCorner_EventScript_156CF4
-	bufferdecorationname 1, 88
-	checkdecorspace 88
+	bufferdecorationname 1, DECOR_TREECKO_DOLL
+	checkdecorspace DECOR_TREECKO_DOLL
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_156D02
 	takecoins 1000
-	givedecoration 88
+	givedecoration DECOR_TREECKO_DOLL
 	updatecoinsbox 0, 0
-	playse 95
+	playse SE_REGI
 	msgbox MauvilleCity_GameCorner_Text_181E49, 4
 	goto MauvilleCity_GameCorner_EventScript_156B9B
 	end
@@ -172,14 +172,14 @@ MauvilleCity_GameCorner_EventScript_156C80:: @ 8156C80
 	checkcoins VAR_TEMP_2
 	compare VAR_TEMP_2, 1000
 	goto_if 0, MauvilleCity_GameCorner_EventScript_156CF4
-	bufferdecorationname 1, 89
-	checkdecorspace 89
+	bufferdecorationname 1, DECOR_TORCHIC_DOLL
+	checkdecorspace DECOR_TORCHIC_DOLL
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_156D02
 	takecoins 1000
-	givedecoration 89
+	givedecoration DECOR_TORCHIC_DOLL
 	updatecoinsbox 0, 0
-	playse 95
+	playse SE_REGI
 	msgbox MauvilleCity_GameCorner_Text_181E49, 4
 	goto MauvilleCity_GameCorner_EventScript_156B9B
 	end
@@ -188,14 +188,14 @@ MauvilleCity_GameCorner_EventScript_156CBA:: @ 8156CBA
 	checkcoins VAR_TEMP_2
 	compare VAR_TEMP_2, 1000
 	goto_if 0, MauvilleCity_GameCorner_EventScript_156CF4
-	bufferdecorationname 1, 90
-	checkdecorspace 90
+	bufferdecorationname 1, DECOR_MUDKIP_DOLL
+	checkdecorspace DECOR_MUDKIP_DOLL
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_156D02
 	takecoins 1000
-	givedecoration 90
+	givedecoration DECOR_MUDKIP_DOLL
 	updatecoinsbox 0, 0
-	playse 95
+	playse SE_REGI
 	msgbox MauvilleCity_GameCorner_Text_181E49, 4
 	goto MauvilleCity_GameCorner_EventScript_156B9B
 	end
@@ -276,8 +276,8 @@ MauvilleCity_GameCorner_EventScript_156DDE:: @ 8156DDE
 	goto MauvilleCity_GameCorner_EventScript_156DEC
 
 MauvilleCity_GameCorner_EventScript_156DEC:: @ 8156DEC
-	msgbox MauvilleCity_GameCorner_Text_181E33, 5
-	compare RESULT, 0
+	msgbox MauvilleCity_GameCorner_Text_181E33, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq MauvilleCity_GameCorner_EventScript_156F77
 	switch VAR_TEMP_1
 	case 1, MauvilleCity_GameCorner_EventScript_156E3C
@@ -297,7 +297,7 @@ MauvilleCity_GameCorner_EventScript_156E3C:: @ 8156E3C
 	takecoins 1500
 	giveitem ITEM_TM32, 1
 	updatecoinsbox 0, 0
-	playse 95
+	playse SE_REGI
 	msgbox MauvilleCity_GameCorner_Text_181F08, 4
 	goto MauvilleCity_GameCorner_EventScript_156D49
 	end
@@ -312,7 +312,7 @@ MauvilleCity_GameCorner_EventScript_156E76:: @ 8156E76
 	takecoins 3500
 	giveitem ITEM_TM29, 1
 	updatecoinsbox 0, 0
-	playse 95
+	playse SE_REGI
 	msgbox MauvilleCity_GameCorner_Text_181F08, 4
 	goto MauvilleCity_GameCorner_EventScript_156D49
 	end
@@ -327,7 +327,7 @@ MauvilleCity_GameCorner_EventScript_156EB0:: @ 8156EB0
 	takecoins 4000
 	giveitem ITEM_TM35, 1
 	updatecoinsbox 0, 0
-	playse 95
+	playse SE_REGI
 	msgbox MauvilleCity_GameCorner_Text_181F08, 4
 	goto MauvilleCity_GameCorner_EventScript_156D49
 	end
@@ -342,7 +342,7 @@ MauvilleCity_GameCorner_EventScript_156EEA:: @ 8156EEA
 	takecoins 4000
 	giveitem ITEM_TM24, 1
 	updatecoinsbox 0, 0
-	playse 95
+	playse SE_REGI
 	msgbox MauvilleCity_GameCorner_Text_181F08, 4
 	goto MauvilleCity_GameCorner_EventScript_156D49
 	end
@@ -357,7 +357,7 @@ MauvilleCity_GameCorner_EventScript_156F24:: @ 8156F24
 	takecoins 4000
 	giveitem ITEM_TM13, 1
 	updatecoinsbox 0, 0
-	playse 95
+	playse SE_REGI
 	msgbox MauvilleCity_GameCorner_Text_181F08, 4
 	goto MauvilleCity_GameCorner_EventScript_156D49
 	end
@@ -391,8 +391,8 @@ MauvilleCity_GameCorner_EventScript_156F96:: @ 8156F96
 	faceplayer
 	checkflag FLAG_RECEIVED_STARTER_DOLL
 	goto_if_eq MauvilleCity_GameCorner_EventScript_157072
-	msgbox MauvilleCity_GameCorner_Text_181F3D, 5
-	compare RESULT, 0
+	msgbox MauvilleCity_GameCorner_Text_181F3D, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq MauvilleCity_GameCorner_EventScript_157068
 	switch VAR_STARTER_MON
 	case 0, MauvilleCity_GameCorner_EventScript_156FDB
@@ -468,7 +468,7 @@ MauvilleCity_GameCorner_EventScript_15709C:: @ 815709C
 	setflag FLAG_RECEIVED_20_COINS
 	givecoins 20
 	msgbox MauvilleCity_GameCorner_Text_18208E, 4
-	playse 95
+	playse SE_REGI
 	goto MauvilleCity_GameCorner_EventScript_1570CA
 	end
 

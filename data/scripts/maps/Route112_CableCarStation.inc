@@ -32,10 +32,10 @@ Route112_CableCarStation_EventScript_15C068:: @ 815C068
 Route112_CableCarStation_EventScript_15C08C:: @ 815C08C
 	lock
 	faceplayer
-	msgbox Route112_CableCarStation_Text_1924F5, 5
-	compare RESULT, 1
+	msgbox Route112_CableCarStation_Text_1924F5, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq Route112_CableCarStation_EventScript_15C0AD
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq Route112_CableCarStation_EventScript_15C0DC
 	end
 

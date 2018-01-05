@@ -31,16 +31,16 @@ Route114_LanettesHouse_EventScript_15C28F:: @ 815C28F
 
 Route114_LanettesHouse_EventScript_15C299:: @ 815C299
 	lockall
-	msgbox Route114_LanettesHouse_Text_192B4A, 5
-	compare RESULT, 1
+	msgbox Route114_LanettesHouse_Text_192B4A, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq Route114_LanettesHouse_EventScript_15C2B7
 	msgbox Route114_LanettesHouse_Text_192DA9, 4
 	releaseall
 	end
 
 Route114_LanettesHouse_EventScript_15C2B7:: @ 815C2B7
-	msgbox Route114_LanettesHouse_Text_192C01, 5
-	compare RESULT, 1
+	msgbox Route114_LanettesHouse_Text_192C01, MSGBOX_YESNO
+	compare RESULT, YES
 	call_if 1, Route114_LanettesHouse_EventScript_15C2CC
 	releaseall
 	end

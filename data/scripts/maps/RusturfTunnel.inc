@@ -148,7 +148,7 @@ RusturfTunnel_EventScript_15C91B:: @ 815C91B
 	return
 
 RusturfTunnel_EventScript_15C92D:: @ 815C92D
-	playse 21
+	playse SE_PIN
 	applymovement 1, RusturfTunnel_Movement_1A0833
 	waitmovement 0
 	applymovement 1, RusturfTunnel_Movement_1A0835
@@ -309,7 +309,7 @@ RusturfTunnel_EventScript_15C9D7:: @ 815C9D7
 RusturfTunnel_EventScript_15C9EA:: @ 815C9EA
 	lock
 	faceplayer
-	playbgm BGM_EVIL_TEAM, 0
+	playbgm BGM_EVIL_TEAM, FALSE
 	msgbox RusturfTunnel_Text_19419B, 4
 	trainerbattle 3, OPPONENT_RUSTURF_TUNNEL_GRUNT, 0, RusturfTunnel_Text_194243
 	msgbox RusturfTunnel_Text_194274, 4

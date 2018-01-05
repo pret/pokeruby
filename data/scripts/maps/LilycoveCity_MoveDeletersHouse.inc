@@ -5,10 +5,10 @@ LilycoveCity_MoveDeletersHouse_EventScript_159AAE:: @ 8159AAE
 	lockall
 	applymovement 1, LilycoveCity_MoveDeletersHouse_Movement_1A0839
 	waitmovement 0
-	msgbox LilycoveCity_MoveDeletersHouse_Text_18B622, 5
+	msgbox LilycoveCity_MoveDeletersHouse_Text_18B622, MSGBOX_YESNO
 	switch RESULT
-	case 1, LilycoveCity_MoveDeletersHouse_EventScript_159ADE
-	case 0, LilycoveCity_MoveDeletersHouse_EventScript_159B7B
+	case YES, LilycoveCity_MoveDeletersHouse_EventScript_159ADE
+	case NO, LilycoveCity_MoveDeletersHouse_EventScript_159B7B
 	releaseall
 	end
 
@@ -31,16 +31,16 @@ LilycoveCity_MoveDeletersHouse_EventScript_159ADE:: @ 8159ADE
 	compare VAR_SPECIAL_5, 4
 	goto_if_eq LilycoveCity_MoveDeletersHouse_EventScript_159ADE
 	special ScrSpecial_GetPokemonNicknameAndMoveName
-	msgbox LilycoveCity_MoveDeletersHouse_Text_18B6F2, 5
+	msgbox LilycoveCity_MoveDeletersHouse_Text_18B6F2, MSGBOX_YESNO
 	switch RESULT
-	case 1, LilycoveCity_MoveDeletersHouse_EventScript_159B53
-	case 0, LilycoveCity_MoveDeletersHouse_EventScript_159B7B
+	case YES, LilycoveCity_MoveDeletersHouse_EventScript_159B53
+	case NO, LilycoveCity_MoveDeletersHouse_EventScript_159B7B
 	releaseall
 	end
 
 LilycoveCity_MoveDeletersHouse_EventScript_159B53:: @ 8159B53
 	special DeleteMonMove
-	playfanfare 378
+	playfanfare BGM_ME_WASURE
 	waitfanfare
 	msgbox LilycoveCity_MoveDeletersHouse_Text_18B71E, 4
 	releaseall

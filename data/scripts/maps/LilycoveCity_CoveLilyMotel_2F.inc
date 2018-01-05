@@ -20,7 +20,7 @@ LilycoveCity_CoveLilyMotel_2F_EventScript_1583C7:: @ 81583C7
 
 LilycoveCity_CoveLilyMotel_2F_EventScript_1583D0:: @ 81583D0
 	setflag FLAG_TEMP_2
-	playfanfare 370
+	playfanfare BGM_FANFA4
 	waitfanfare
 	goto LilycoveCity_CoveLilyMotel_2F_EventScript_1583DD
 	end

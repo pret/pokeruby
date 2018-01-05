@@ -90,7 +90,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_152733:: @ 8152733
 
 LittlerootTown_BrendansHouse_1F_EventScript_152744:: @ 8152744
 	lockall
-	playse 21
+	playse SE_PIN
 	applymovement 4, LittlerootTown_BrendansHouse_1F_Movement_1A0833
 	waitmovement 0
 	applymovement 4, LittlerootTown_BrendansHouse_1F_Movement_1A0835
