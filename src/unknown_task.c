@@ -20,6 +20,7 @@ extern u8 gUnknown_0202FFA4;
 
 extern struct UnknownTaskStruct2 gUnknown_03004DC0;
 
+// Is this a struct?
 extern u16 gUnknown_03004DE0[][0x3C0];
 
 void remove_some_task(void)

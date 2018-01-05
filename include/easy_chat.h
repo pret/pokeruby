@@ -3,6 +3,15 @@
 
 struct Sprite;
 
+struct UnknownEasyChatStruct1
+{
+    u16 unk0;
+    u16 unk2;
+    u16 unk4;
+    u16 unk6;
+    void *unk8;
+};
+
 struct Shared1000
 {
     void (*unk0)(void);  // main cb 2
@@ -21,7 +30,7 @@ struct Shared1000
     u8 unk40[4][14];
     u8 unk78[0x7D - 0x78];  // unknown length
     u8 unk7D;
-    u8 unk7E[0x83-0x7E];
+    u8 unk7E[5];
     s8 unk83;   // s8?
     //u8 unk83;   // s8?
     s8 unk84;
@@ -43,7 +52,12 @@ struct Shared1000
     u8 unkBC;
     u8 fillerBD;
     u16 unkBE;
-    u8 fillerC0[0x1A8-0xC0];
+    u8 fillerC0[2];
+    u16 unkC2;  // length of unkC8 and unk148 arrays
+    u16 unkC4;
+    u8 fillerC6[2];
+    u16 unkC8[(0x148-0xC8)/16][8];
+    struct UnknownEasyChatStruct1 unk148[(0x1A8-0x148)/12];
     s8 unk1A8;
     s8 unk1A9;
     s8 unk1AA[0xB5-0xAA];  // unknown length
