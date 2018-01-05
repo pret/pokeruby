@@ -319,10 +319,7 @@ SECTIONS {
         src/scene/cute_sketch.o(.text);
         asm/cute_sketch.o(.text);
         src/field/decoration.o(.text);
-        asm/slot_machine.o(.text);
         src/field/slot_machine.o(.text);
-        asm/slot_machine.o(.text_8104D30)
-        src/field/slot_machine.o(.text_b);
         src/scene/contest_painting.o(.text);
         src/battle/battle_ai.o(.text);
         src/field/trader.o(.text);
@@ -552,7 +549,7 @@ SECTIONS {
         src/field/region_map.o(.rodata);
         data/cute_sketch.o(.rodata);
         src/field/decoration.o(.rodata);
-        data/slot_machine.o(.rodata);
+        src/field/slot_machine.o(.rodata);
         src/scene/contest_painting.o(.rodata);
         src/battle/battle_ai.o(.rodata);
         src/field/trader.o(.rodata);
