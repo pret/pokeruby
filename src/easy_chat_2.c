@@ -422,7 +422,11 @@ void sub_80E85F8(struct Sprite *sprite)
             sprite->pos1.y = (gUnknown_083DB694->unk1A8 - gUnknown_083DB694->unk1B5) * 16 + 96;
             break;
         case 1:
+#if ENGLISH
             sprite->pos1.x = 216;
+#else
+            sprite->pos1.x = 214;
+#endif
             sprite->pos1.y = gUnknown_083DB694->unk1A8 * 16 + 96;
             break;
         case 2:
@@ -1435,6 +1439,7 @@ void sub_80E9940(u8 *a, u8 b)
 
 extern const u8 gUnknown_083DBEAC[][32];
 
+#if ENGLISH
 void sub_80E9974(void)
 {
     BasicInitMenuWindow(&gWindowConfig_81E6D54);
@@ -1454,6 +1459,82 @@ void sub_80E9974(void)
         sub_80E9A60(gUnknown_083DBEAC[3], 2, 6);
     }
 }
+#else
+__attribute__((naked))
+void sub_80E9974(void)
+{
+    asm(".syntax unified\n\
+    push {r4-r6,lr}\n\
+	ldr r0, _080E99C4 @ =gWindowConfig_81E6D54\n\
+	bl BasicInitMenuWindow\n\
+	ldr r0, _080E99C8 @ =gUnknown_083DB694\n\
+	ldr r2, [r0]\n\
+	adds r0, r2, 0\n\
+	adds r0, 0x26\n\
+	ldrb r0, [r0]\n\
+	cmp r0, 0\n\
+	bne _080E99D4\n\
+	ldr r1, _080E99CC @ =0x000001b5\n\
+	adds r0, r2, r1\n\
+	ldrb r0, [r0]\n\
+	lsls r0, 24\n\
+	asrs r0, 24\n\
+	lsls r1, r0, 16\n\
+	lsrs r4, r1, 16\n\
+	adds r0, 0x4\n\
+	cmp r4, r0\n\
+	bge _080E9A02\n\
+	adds r5, r2, 0\n\
+	ldr r2, _080E99CC @ =0x000001b5\n\
+	adds r6, r5, r2\n\
+_080E99A4:\n\
+	lsls r1, r4, 24\n\
+	lsrs r1, 24\n\
+	ldr r2, _080E99D0 @ =0x0000a0f5\n\
+	adds r0, r5, r2\n\
+	bl sub_80E9940\n\
+	adds r0, r4, 0x1\n\
+	lsls r0, 16\n\
+	lsrs r4, r0, 16\n\
+	movs r0, 0\n\
+	ldrsb r0, [r6, r0]\n\
+	adds r0, 0x4\n\
+	cmp r4, r0\n\
+	blt _080E99A4\n\
+	b _080E9A02\n\
+	.align 2, 0\n\
+_080E99C4: .4byte gWindowConfig_81E6D54\n\
+_080E99C8: .4byte gUnknown_083DB694\n\
+_080E99CC: .4byte 0x000001b5\n\
+_080E99D0: .4byte 0x0000a0f5\n\
+_080E99D4:\n\
+	bl sub_80E9AD4\n\
+	ldr r4, _080E9A08 @ =gUnknown_083DBEAC\n\
+	ldr r0, [r4]\n\
+	movs r1, 0x2\n\
+	movs r2, 0\n\
+	bl sub_80E9A60\n\
+	ldr r0, [r4, 0x4]\n\
+	movs r1, 0x2\n\
+	movs r2, 0x2\n\
+	bl sub_80E9A60\n\
+	ldr r0, [r4, 0x8]\n\
+	movs r1, 0x2\n\
+	movs r2, 0x4\n\
+	bl sub_80E9A60\n\
+	ldr r0, [r4, 0xC]\n\
+	movs r1, 0x2\n\
+	movs r2, 0x6\n\
+	bl sub_80E9A60\n\
+_080E9A02:\n\
+	pop {r4-r6}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.align 2, 0\n\
+_080E9A08: .4byte gUnknown_083DBEAC\n\
+    .syntax divided\n");
+}
+#endif
 
 void sub_80E9A14(void)
 {
