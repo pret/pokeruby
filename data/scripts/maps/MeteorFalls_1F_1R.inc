@@ -215,8 +215,7 @@ MeteorFalls_1F_1R_Movement_15C64F:: @ 815C64F
 MeteorFalls_1F_1R_EventScript_15C656:: @ 815C656
 	lock
 	faceplayer
-	checkflag FLAG_MET_PROF_COSMO
-	goto_if_eq MeteorFalls_1F_1R_EventScript_15C66E
+	goto_if_set FLAG_MET_PROF_COSMO, MeteorFalls_1F_1R_EventScript_15C66E
 	setflag FLAG_MET_PROF_COSMO
 	msgbox MeteorFalls_1F_1R_Text_1937EB, 4
 	release

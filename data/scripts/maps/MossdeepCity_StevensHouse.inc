@@ -5,8 +5,7 @@ MossdeepCity_StevensHouse_MapScripts:: @ 815A9C5
 	.byte 0
 
 MossdeepCity_StevensHouse_MapScript1_15A9D5:: @ 815A9D5
-	checkflag FLAG_SYS_GAME_CLEAR
-	call_if 0, MossdeepCity_StevensHouse_EventScript_15A9DF
+	call_if_unset FLAG_SYS_GAME_CLEAR, MossdeepCity_StevensHouse_EventScript_15A9DF
 	end
 
 MossdeepCity_StevensHouse_EventScript_15A9DF:: @ 815A9DF
@@ -15,7 +14,7 @@ MossdeepCity_StevensHouse_EventScript_15A9DF:: @ 815A9DF
 
 MossdeepCity_StevensHouse_MapScript1_15A9E9:: @ 815A9E9
 	compare VAR_STEVENS_HOUSE_STATE, 1
-	call_if 1, MossdeepCity_StevensHouse_EventScript_15A9F5
+	call_if_eq MossdeepCity_StevensHouse_EventScript_15A9F5
 	end
 
 MossdeepCity_StevensHouse_EventScript_15A9F5:: @ 815A9F5
@@ -87,7 +86,7 @@ MossdeepCity_StevensHouse_EventScript_15AA7C:: @ 815AA7C
 	bufferspeciesname 1, SPECIES_BELDUM
 	msgbox MossdeepCity_StevensHouse_Text_1A1102, MSGBOX_YESNO
 	compare RESULT, YES
-	call_if 1, MossdeepCity_StevensHouse_EventScript_1A0678
+	call_if_eq MossdeepCity_StevensHouse_EventScript_1A0678
 	setflag FLAG_HIDE_BELDUM_BALL_STEVENS_HOUSE
 	setflag FLAG_RECEIVED_BELDUM
 	releaseall
@@ -113,8 +112,7 @@ MossdeepCity_StevensHouse_EventScript_15AAF9:: @ 815AAF9
 
 MossdeepCity_StevensHouse_EventScript_15AB02:: @ 815AB02
 	lockall
-	checkflag FLAG_OMIT_DIVE_FROM_STEVEN_LETTER
-	goto_if_eq MossdeepCity_StevensHouse_EventScript_15AB16
+	goto_if_set FLAG_OMIT_DIVE_FROM_STEVEN_LETTER, MossdeepCity_StevensHouse_EventScript_15AB16
 	msgbox MossdeepCity_StevensHouse_Text_18DF1A, 4
 	releaseall
 	end

@@ -4,8 +4,7 @@ RustboroCity_House1_MapScripts:: @ 8157C7C
 RustboroCity_House1_EventScript_157C7D:: @ 8157C7D
 	lock
 	faceplayer
-	checkflag FLAG_RUSTBORO_NPC_TRADE_COMPLETED
-	goto_if_eq RustboroCity_House1_EventScript_157D13
+	goto_if_set FLAG_RUSTBORO_NPC_TRADE_COMPLETED, RustboroCity_House1_EventScript_157D13
 	setvar VAR_SPECIAL_8, 0
 	copyvar VAR_SPECIAL_4, VAR_SPECIAL_8
 	specialvar RESULT, GetInGameTradeSpeciesInfo
@@ -22,7 +21,7 @@ RustboroCity_House1_EventScript_157C7D:: @ 8157C7D
 	specialvar RESULT, GetTradeSpecies
 	copyvar VAR_SPECIAL_B, RESULT
 	compare RESULT, VAR_SPECIAL_9
-	goto_if 5, RustboroCity_House1_EventScript_157D05
+	goto_if_ne RustboroCity_House1_EventScript_157D05
 	copyvar VAR_SPECIAL_4, VAR_SPECIAL_8
 	copyvar VAR_SPECIAL_5, VAR_SPECIAL_A
 	special CreateInGameTradePokemon

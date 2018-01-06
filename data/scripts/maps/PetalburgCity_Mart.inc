@@ -6,8 +6,7 @@ PetalburgCity_Mart_EventScript_1552B0:: @ 81552B0
 	faceplayer
 	message PetalburgCity_Mart_Text_1A0BE4
 	waitmessage
-	checkflag FLAG_PETALBURG_MART_EXPANDED_ITEMS
-	goto_if_eq PetalburgCity_Mart_EventScript_1552EA
+	goto_if_set FLAG_PETALBURG_MART_EXPANDED_ITEMS, PetalburgCity_Mart_EventScript_1552EA
 	pokemart PetalburgCity_Mart_Items1
 	msgbox PetalburgCity_Mart_Text_1A0C02, 4
 	release

@@ -5,8 +5,7 @@ AncientTomb_MapScripts:: @ 815EFBE
 	.byte 0
 
 AncientTomb_MapScript1_15EFCE:: @ 815EFCE
-	checkflag FLAG_SYS_CTRL_OBJ_DELETE
-	call_if 1, AncientTomb_EventScript_15EFD8
+	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, AncientTomb_EventScript_15EFD8
 	end
 
 AncientTomb_EventScript_15EFD8:: @ 815EFD8
@@ -18,8 +17,7 @@ AncientTomb_MapScript1_15EFDC:: @ 815EFDC
 	end
 
 AncientTomb_MapScript1_15EFE0:: @ 815EFE0
-	checkflag FLAG_SYS_BRAILLE_FLY
-	call_if 0, AncientTomb_EventScript_15EFEA
+	call_if_unset FLAG_SYS_BRAILLE_FLY, AncientTomb_EventScript_15EFEA
 	end
 
 AncientTomb_EventScript_15EFEA:: @ 815EFEA
@@ -33,8 +31,7 @@ AncientTomb_EventScript_15EFEA:: @ 815EFEA
 
 AncientTomb_EventScript_15F021:: @ 815F021
 	lockall
-	checkflag FLAG_SYS_BRAILLE_FLY
-	goto_if_eq AncientTomb_EventScript_15F038
+	goto_if_set FLAG_SYS_BRAILLE_FLY, AncientTomb_EventScript_15F038
 	braillemessage AncientTomb_Braille_1C552E
 	waitbuttonpress
 	erasebox 0, 0, 29, 19

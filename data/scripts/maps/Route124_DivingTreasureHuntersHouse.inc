@@ -9,8 +9,7 @@ Route124_DivingTreasureHuntersHouse_MapScript1_163E00:: @ 8163E00
 Route124_DivingTreasureHuntersHouse_EventScript_163E04:: @ 8163E04
 	lock
 	faceplayer
-	checkflag FLAG_MET_DIVING_TREASURE_HUNTER
-	goto_if_eq Route124_DivingTreasureHuntersHouse_EventScript_163E20
+	goto_if_set FLAG_MET_DIVING_TREASURE_HUNTER, Route124_DivingTreasureHuntersHouse_EventScript_163E20
 	msgbox Route124_DivingTreasureHuntersHouse_Text_19F416, 4
 	setflag FLAG_MET_DIVING_TREASURE_HUNTER
 	goto Route124_DivingTreasureHuntersHouse_EventScript_163E2E
@@ -32,16 +31,16 @@ Route124_DivingTreasureHuntersHouse_EventScript_163E44:: @ 8163E44
 	setvar VAR_TEMP_1, 0
 	checkitem ITEM_RED_SHARD, 1
 	compare RESULT, 1
-	call_if 1, Route124_DivingTreasureHuntersHouse_EventScript_163E8A
+	call_if_eq Route124_DivingTreasureHuntersHouse_EventScript_163E8A
 	checkitem ITEM_YELLOW_SHARD, 1
 	compare RESULT, 1
-	call_if 1, Route124_DivingTreasureHuntersHouse_EventScript_163E90
+	call_if_eq Route124_DivingTreasureHuntersHouse_EventScript_163E90
 	checkitem ITEM_BLUE_SHARD, 1
 	compare RESULT, 1
-	call_if 1, Route124_DivingTreasureHuntersHouse_EventScript_163E96
+	call_if_eq Route124_DivingTreasureHuntersHouse_EventScript_163E96
 	checkitem ITEM_GREEN_SHARD, 1
 	compare RESULT, 1
-	call_if 1, Route124_DivingTreasureHuntersHouse_EventScript_163E9C
+	call_if_eq Route124_DivingTreasureHuntersHouse_EventScript_163E9C
 	return
 
 Route124_DivingTreasureHuntersHouse_EventScript_163E8A:: @ 8163E8A

@@ -6,11 +6,10 @@ VerdanturfTown_ContestLobby_EventScript_1A4E92:: @ 81A4E92
 	faceplayer
 	checkitem ITEM_CONTEST_PASS, 1
 	compare RESULT, 0
-	call_if 1, FallarborTown_ContestLobby_EventScript_1A4EDD
+	call_if_eq FallarborTown_ContestLobby_EventScript_1A4EDD
 	compare VAR_CONTEST_PRIZE_PICKUP, 0
-	goto_if 5, FallarborTown_ContestLobby_EventScript_1A4F4E
-	checkflag FLAG_TEMP_1
-	goto_if_eq FallarborTown_ContestLobby_EventScript_1A4F8F
+	goto_if_ne FallarborTown_ContestLobby_EventScript_1A4F4E
+	goto_if_set FLAG_TEMP_1, FallarborTown_ContestLobby_EventScript_1A4F8F
 	bufferstdstring 0, VAR_SPECIAL_B
 	msgbox FallarborTown_ContestLobby_Text_1A5DFC, 4
 	checkitem ITEM_CONTEST_PASS, 1
@@ -40,8 +39,7 @@ FallarborTown_ContestLobby_EventScript_1A4EF6:: @ 81A4EF6
 	end
 
 FallarborTown_ContestLobby_EventScript_1A4F13:: @ 81A4F13
-	checkflag FLAG_RECEIVED_CONTEST_PASS
-	goto_if_eq FallarborTown_ContestLobby_EventScript_1A4F44
+	goto_if_set FLAG_RECEIVED_CONTEST_PASS, FallarborTown_ContestLobby_EventScript_1A4F44
 	msgbox FallarborTown_ContestLobby_Text_1A6583, 4
 	giveitem_std ITEM_CONTEST_PASS
 	setflag FLAG_RECEIVED_CONTEST_PASS
@@ -288,7 +286,7 @@ LinkContestRoom1_EventScript_1A527A:: @ 81A527A
 	call LinkContestRoom1_EventScript_1A5880
 	addvar VAR_SPECIAL_6, 1
 	compare VAR_SPECIAL_6, 4
-	goto_if 5, LinkContestRoom1_EventScript_1A527A
+	goto_if_ne LinkContestRoom1_EventScript_1A527A
 	call LinkContestRoom1_EventScript_1A5377
 	setvar VAR_TEMP_1, 6
 	return
@@ -432,15 +430,15 @@ LinkContestRoom1_EventScript_1A53E5:: @ 81A53E5
 LinkContestRoom1_EventScript_1A5455:: @ 81A5455
 	special sub_80C47A0
 	compare VAR_CONTEST_LOCATION, 1
-	call_if 1, LinkContestRoom1_EventScript_1A555A
+	call_if_eq LinkContestRoom1_EventScript_1A555A
 	compare VAR_CONTEST_LOCATION, 2
-	call_if 1, LinkContestRoom1_EventScript_1A55B8
+	call_if_eq LinkContestRoom1_EventScript_1A55B8
 	compare VAR_CONTEST_LOCATION, 3
-	call_if 1, LinkContestRoom1_EventScript_1A5616
+	call_if_eq LinkContestRoom1_EventScript_1A5616
 	compare VAR_CONTEST_LOCATION, 4
-	call_if 1, LinkContestRoom1_EventScript_1A5674
+	call_if_eq LinkContestRoom1_EventScript_1A5674
 	compare VAR_CONTEST_LOCATION, 5
-	call_if 1, LinkContestRoom1_EventScript_1A56D2
+	call_if_eq LinkContestRoom1_EventScript_1A56D2
 	setvar VAR_TEMP_1, 9
 	setvar VAR_TEMP_2, 9
 	setvar VAR_TEMP_3, 9
@@ -450,7 +448,7 @@ LinkContestRoom1_EventScript_1A5455:: @ 81A5455
 	setvar VAR_TEMP_7, 9
 	setvar VAR_TEMP_8, 9
 	compare VAR_TEMP_0, 0
-	call_if 2, LinkContestRoom1_EventScript_1A54EB
+	call_if_gt LinkContestRoom1_EventScript_1A54EB
 	setvar VAR_TEMP_1, 0
 	setvar VAR_TEMP_2, 0
 	setvar VAR_TEMP_3, 0
@@ -465,123 +463,123 @@ LinkContestRoom1_EventScript_1A54EB:: @ 81A54EB
 	setvar RESULT, 8
 	special ScriptRandom
 	compare RESULT, 0
-	call_if 1, LinkContestRoom1_EventScript_1A5760
+	call_if_eq LinkContestRoom1_EventScript_1A5760
 	compare RESULT, 1
-	call_if 1, LinkContestRoom1_EventScript_1A5784
+	call_if_eq LinkContestRoom1_EventScript_1A5784
 	compare RESULT, 2
-	call_if 1, LinkContestRoom1_EventScript_1A57A8
+	call_if_eq LinkContestRoom1_EventScript_1A57A8
 	compare RESULT, 3
-	call_if 1, LinkContestRoom1_EventScript_1A57CC
+	call_if_eq LinkContestRoom1_EventScript_1A57CC
 	compare RESULT, 4
-	call_if 1, LinkContestRoom1_EventScript_1A57F0
+	call_if_eq LinkContestRoom1_EventScript_1A57F0
 	compare RESULT, 5
-	call_if 1, LinkContestRoom1_EventScript_1A5814
+	call_if_eq LinkContestRoom1_EventScript_1A5814
 	compare RESULT, 6
-	call_if 1, LinkContestRoom1_EventScript_1A5838
+	call_if_eq LinkContestRoom1_EventScript_1A5838
 	compare RESULT, 7
-	call_if 1, LinkContestRoom1_EventScript_1A585C
+	call_if_eq LinkContestRoom1_EventScript_1A585C
 	compare VAR_TEMP_0, 0
-	goto_if 2, LinkContestRoom1_EventScript_1A54EB
+	goto_if_gt LinkContestRoom1_EventScript_1A54EB
 	waitmovement 0
 	return
 
 LinkContestRoom1_EventScript_1A555A:: @ 81A555A
 	compare VAR_SPECIAL_4, 80
-	goto_if 2, LinkContestRoom1_EventScript_1A575A
+	goto_if_gt LinkContestRoom1_EventScript_1A575A
 	compare VAR_SPECIAL_4, 70
-	goto_if 2, LinkContestRoom1_EventScript_1A5754
+	goto_if_gt LinkContestRoom1_EventScript_1A5754
 	compare VAR_SPECIAL_4, 60
-	goto_if 2, LinkContestRoom1_EventScript_1A574E
+	goto_if_gt LinkContestRoom1_EventScript_1A574E
 	compare VAR_SPECIAL_4, 50
-	goto_if 2, LinkContestRoom1_EventScript_1A5748
+	goto_if_gt LinkContestRoom1_EventScript_1A5748
 	compare VAR_SPECIAL_4, 40
-	goto_if 2, LinkContestRoom1_EventScript_1A5742
+	goto_if_gt LinkContestRoom1_EventScript_1A5742
 	compare VAR_SPECIAL_4, 30
-	goto_if 2, LinkContestRoom1_EventScript_1A573C
+	goto_if_gt LinkContestRoom1_EventScript_1A573C
 	compare VAR_SPECIAL_4, 20
-	goto_if 2, LinkContestRoom1_EventScript_1A5736
+	goto_if_gt LinkContestRoom1_EventScript_1A5736
 	compare VAR_SPECIAL_4, 10
-	goto_if 2, LinkContestRoom1_EventScript_1A5730
+	goto_if_gt LinkContestRoom1_EventScript_1A5730
 	setvar VAR_TEMP_0, 0
 	return
 
 LinkContestRoom1_EventScript_1A55B8:: @ 81A55B8
 	compare VAR_SPECIAL_4, 230
-	goto_if 2, LinkContestRoom1_EventScript_1A575A
+	goto_if_gt LinkContestRoom1_EventScript_1A575A
 	compare VAR_SPECIAL_4, 210
-	goto_if 2, LinkContestRoom1_EventScript_1A5754
+	goto_if_gt LinkContestRoom1_EventScript_1A5754
 	compare VAR_SPECIAL_4, 190
-	goto_if 2, LinkContestRoom1_EventScript_1A574E
+	goto_if_gt LinkContestRoom1_EventScript_1A574E
 	compare VAR_SPECIAL_4, 170
-	goto_if 2, LinkContestRoom1_EventScript_1A5748
+	goto_if_gt LinkContestRoom1_EventScript_1A5748
 	compare VAR_SPECIAL_4, 150
-	goto_if 2, LinkContestRoom1_EventScript_1A5742
+	goto_if_gt LinkContestRoom1_EventScript_1A5742
 	compare VAR_SPECIAL_4, 130
-	goto_if 2, LinkContestRoom1_EventScript_1A573C
+	goto_if_gt LinkContestRoom1_EventScript_1A573C
 	compare VAR_SPECIAL_4, 110
-	goto_if 2, LinkContestRoom1_EventScript_1A5736
+	goto_if_gt LinkContestRoom1_EventScript_1A5736
 	compare VAR_SPECIAL_4, 90
-	goto_if 2, LinkContestRoom1_EventScript_1A5730
+	goto_if_gt LinkContestRoom1_EventScript_1A5730
 	setvar VAR_TEMP_0, 0
 	return
 
 LinkContestRoom1_EventScript_1A5616:: @ 81A5616
 	compare VAR_SPECIAL_4, 380
-	goto_if 2, LinkContestRoom1_EventScript_1A575A
+	goto_if_gt LinkContestRoom1_EventScript_1A575A
 	compare VAR_SPECIAL_4, 350
-	goto_if 2, LinkContestRoom1_EventScript_1A5754
+	goto_if_gt LinkContestRoom1_EventScript_1A5754
 	compare VAR_SPECIAL_4, 320
-	goto_if 2, LinkContestRoom1_EventScript_1A574E
+	goto_if_gt LinkContestRoom1_EventScript_1A574E
 	compare VAR_SPECIAL_4, 290
-	goto_if 2, LinkContestRoom1_EventScript_1A5748
+	goto_if_gt LinkContestRoom1_EventScript_1A5748
 	compare VAR_SPECIAL_4, 260
-	goto_if 2, LinkContestRoom1_EventScript_1A5742
+	goto_if_gt LinkContestRoom1_EventScript_1A5742
 	compare VAR_SPECIAL_4, 230
-	goto_if 2, LinkContestRoom1_EventScript_1A573C
+	goto_if_gt LinkContestRoom1_EventScript_1A573C
 	compare VAR_SPECIAL_4, 200
-	goto_if 2, LinkContestRoom1_EventScript_1A5736
+	goto_if_gt LinkContestRoom1_EventScript_1A5736
 	compare VAR_SPECIAL_4, 170
-	goto_if 2, LinkContestRoom1_EventScript_1A5730
+	goto_if_gt LinkContestRoom1_EventScript_1A5730
 	setvar VAR_TEMP_0, 0
 	return
 
 LinkContestRoom1_EventScript_1A5674:: @ 81A5674
 	compare VAR_SPECIAL_4, 600
-	goto_if 2, LinkContestRoom1_EventScript_1A575A
+	goto_if_gt LinkContestRoom1_EventScript_1A575A
 	compare VAR_SPECIAL_4, 560
-	goto_if 2, LinkContestRoom1_EventScript_1A5754
+	goto_if_gt LinkContestRoom1_EventScript_1A5754
 	compare VAR_SPECIAL_4, 520
-	goto_if 2, LinkContestRoom1_EventScript_1A574E
+	goto_if_gt LinkContestRoom1_EventScript_1A574E
 	compare VAR_SPECIAL_4, 480
-	goto_if 2, LinkContestRoom1_EventScript_1A5748
+	goto_if_gt LinkContestRoom1_EventScript_1A5748
 	compare VAR_SPECIAL_4, 440
-	goto_if 2, LinkContestRoom1_EventScript_1A5742
+	goto_if_gt LinkContestRoom1_EventScript_1A5742
 	compare VAR_SPECIAL_4, 400
-	goto_if 2, LinkContestRoom1_EventScript_1A573C
+	goto_if_gt LinkContestRoom1_EventScript_1A573C
 	compare VAR_SPECIAL_4, 360
-	goto_if 2, LinkContestRoom1_EventScript_1A5736
+	goto_if_gt LinkContestRoom1_EventScript_1A5736
 	compare VAR_SPECIAL_4, 320
-	goto_if 2, LinkContestRoom1_EventScript_1A5730
+	goto_if_gt LinkContestRoom1_EventScript_1A5730
 	setvar VAR_TEMP_0, 0
 	return
 
 LinkContestRoom1_EventScript_1A56D2:: @ 81A56D2
 	compare VAR_SPECIAL_4, 600
-	goto_if 2, LinkContestRoom1_EventScript_1A575A
+	goto_if_gt LinkContestRoom1_EventScript_1A575A
 	compare VAR_SPECIAL_4, 550
-	goto_if 2, LinkContestRoom1_EventScript_1A5754
+	goto_if_gt LinkContestRoom1_EventScript_1A5754
 	compare VAR_SPECIAL_4, 500
-	goto_if 2, LinkContestRoom1_EventScript_1A574E
+	goto_if_gt LinkContestRoom1_EventScript_1A574E
 	compare VAR_SPECIAL_4, 450
-	goto_if 2, LinkContestRoom1_EventScript_1A5748
+	goto_if_gt LinkContestRoom1_EventScript_1A5748
 	compare VAR_SPECIAL_4, 400
-	goto_if 2, LinkContestRoom1_EventScript_1A5742
+	goto_if_gt LinkContestRoom1_EventScript_1A5742
 	compare VAR_SPECIAL_4, 300
-	goto_if 2, LinkContestRoom1_EventScript_1A573C
+	goto_if_gt LinkContestRoom1_EventScript_1A573C
 	compare VAR_SPECIAL_4, 200
-	goto_if 2, LinkContestRoom1_EventScript_1A5736
+	goto_if_gt LinkContestRoom1_EventScript_1A5736
 	compare VAR_SPECIAL_4, 100
-	goto_if 2, LinkContestRoom1_EventScript_1A5730
+	goto_if_gt LinkContestRoom1_EventScript_1A5730
 	setvar VAR_TEMP_0, 0
 	return
 
@@ -909,7 +907,7 @@ LinkContestRoom1_EventScript_1A5A90:: @ 81A5A90
 	addvar VAR_TEMP_1, 1
 	lockall
 	compare VAR_CONTEST_LOCATION, 1
-	call_if 2, LinkContestRoom1_EventScript_1A5AE4
+	call_if_gt LinkContestRoom1_EventScript_1A5AE4
 	applymovement 9, LinkContestRoom1_Movement_1A5DB7
 	applymovement 12, LinkContestRoom1_Movement_1A5DBB
 	applymovement 7, LinkContestRoom1_Movement_1A5DB7
@@ -919,7 +917,7 @@ LinkContestRoom1_EventScript_1A5A90:: @ 81A5A90
 	applymovement 6, LinkContestRoom1_Movement_1A5DB3
 	applymovement 8, LinkContestRoom1_Movement_1A5DAF
 	compare VAR_TEMP_1, 4
-	goto_if 5, LinkContestRoom1_EventScript_1A5A90
+	goto_if_ne LinkContestRoom1_EventScript_1A5A90
 	delay 30
 	return
 
@@ -996,8 +994,7 @@ LinkContestRoom1_EventScript_1A5BAB:: @ 81A5BAB
 	compare VAR_CONTEST_LOCATION, 5
 	goto_if_eq LinkContestRoom1_EventScript_1A5C4C
 	call LinkContestRoom1_EventScript_1A5C12
-	checkflag FLAG_TEMP_2
-	goto_if_eq LinkContestRoom1_EventScript_1A5BF6
+	goto_if_set FLAG_TEMP_2, LinkContestRoom1_EventScript_1A5BF6
 	msgbox LinkContestRoom1_Text_1A6DC5, 3
 	waitmessage
 	call LinkContestRoom1_EventScript_1A5C7F
@@ -1118,7 +1115,7 @@ LinkContestRoom1_EventScript_1A5CE5:: @ 81A5CE5
 
 LinkContestRoom1_EventScript_1A5CFC:: @ 81A5CFC
 	compare VAR_CONTEST_LOCATION, 2
-	call_if 1, LinkContestRoom1_EventScript_1A5C42
+	call_if_eq LinkContestRoom1_EventScript_1A5C42
 	incrementgamestat GAME_STAT_WON_CONTEST
 	specialvar RESULT, sub_80C4440
 	compare RESULT, 0

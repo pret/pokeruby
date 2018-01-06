@@ -4,8 +4,7 @@ Route111_MapScripts:: @ 814FF91
 	.byte 0
 
 Route111_MapScript1_14FF9C:: @ 814FF9C
-	checkflag FLAG_REGI_DOORS_OPENED
-	call_if 0, Route111_EventScript_14FFA6
+	call_if_unset FLAG_REGI_DOORS_OPENED, Route111_EventScript_14FFA6
 	end
 
 Route111_EventScript_14FFA6:: @ 814FFA6
@@ -16,22 +15,21 @@ Route111_EventScript_14FFA6:: @ 814FFA6
 Route111_MapScript1_14FFB9:: @ 814FFB9
 	call Route111_EventScript_14FFCD
 	call Route111_EventScript_1AE313
-	checktrainerflag OPPONENT_VICKY
-	goto_if 0, Route111_EventScript_15000D
+	goto_if_trainer_not_defeated OPPONENT_VICKY, Route111_EventScript_15000D
 	end
 
 Route111_EventScript_14FFCD:: @ 814FFCD
 	getplayerxy VAR_TEMP_0, VAR_TEMP_1
 	compare VAR_TEMP_1, 34
-	goto_if 0, Route111_EventScript_15000C
+	goto_if_lt Route111_EventScript_15000C
 	compare VAR_TEMP_1, 107
-	goto_if 2, Route111_EventScript_15000C
+	goto_if_gt Route111_EventScript_15000C
 	compare VAR_TEMP_1, 72
-	goto_if 2, Route111_EventScript_150009
+	goto_if_gt Route111_EventScript_150009
 	compare VAR_TEMP_0, 2000
-	goto_if 2, Route111_EventScript_15000C
+	goto_if_gt Route111_EventScript_15000C
 	compare VAR_TEMP_0, 8
-	goto_if 0, Route111_EventScript_15000C
+	goto_if_lt Route111_EventScript_15000C
 
 Route111_EventScript_150009:: @ 8150009
 	setweather WEATHER_SANDSTORM
@@ -121,8 +119,7 @@ Route111_EventScript_1500C5:: @ 81500C5
 	lock
 	faceplayer
 	dodailyevents
-	checkflag FLAG_DAILY_RECEIVED_BERRY_ROUTE111
-	goto_if_eq Route111_EventScript_150100
+	goto_if_set FLAG_DAILY_RECEIVED_BERRY_ROUTE111, Route111_EventScript_150100
 	msgbox Route111_Text_1C56F0, 4
 	giveitem_std ITEM_RAZZ_BERRY
 	compare RESULT, 0
@@ -174,13 +171,13 @@ Route111_EventScript_150151:: @ 8150151
 	msgbox Route111_Text_1A0F93, 4
 	closemessage
 	compare VAR_SPECIAL_4, 0
-	call_if 1, Route111_EventScript_150188
+	call_if_eq Route111_EventScript_150188
 	compare VAR_SPECIAL_4, 1
-	call_if 1, Route111_EventScript_150193
+	call_if_eq Route111_EventScript_150193
 	compare VAR_SPECIAL_4, 2
-	call_if 1, Route111_EventScript_15019E
+	call_if_eq Route111_EventScript_15019E
 	compare VAR_SPECIAL_4, 3
-	call_if 1, Route111_EventScript_1501A9
+	call_if_eq Route111_EventScript_1501A9
 	releaseall
 	end
 

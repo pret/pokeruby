@@ -54,9 +54,9 @@ EverGrandeCity_ChampionsRoom_EventScript_15B821:: @ 815B821
 	playse SE_DOOR
 	checkplayergender
 	compare RESULT, 0
-	call_if 1, EverGrandeCity_ChampionsRoom_EventScript_15B87C
+	call_if_eq EverGrandeCity_ChampionsRoom_EventScript_15B87C
 	compare RESULT, 1
-	call_if 1, EverGrandeCity_ChampionsRoom_EventScript_15B881
+	call_if_eq EverGrandeCity_ChampionsRoom_EventScript_15B881
 	addobject 2
 	call EverGrandeCity_ChampionsRoom_EventScript_15B9BD
 	checkplayergender
@@ -129,9 +129,9 @@ EverGrandeCity_ChampionsRoom_EventScript_15B8F0:: @ 815B8F0
 	msgbox EverGrandeCity_ChampionsRoom_Text_191546, 4
 	checkplayergender
 	compare RESULT, 0
-	call_if 1, EverGrandeCity_ChampionsRoom_EventScript_15B9AB
+	call_if_eq EverGrandeCity_ChampionsRoom_EventScript_15B9AB
 	compare RESULT, 1
-	call_if 1, EverGrandeCity_ChampionsRoom_EventScript_15B9B4
+	call_if_eq EverGrandeCity_ChampionsRoom_EventScript_15B9B4
 	closemessage
 	applymovement 1, EverGrandeCity_ChampionsRoom_Movement_15B9FF
 	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_15B9E0

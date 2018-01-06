@@ -12,8 +12,7 @@ SlateportCity_ContestHall_EventScript_155555:: @ 8155555
 SlateportCity_ContestHall_EventScript_15555E:: @ 815555E
 	lock
 	faceplayer
-	checkflag FLAG_RECEIVED_TM41
-	goto_if_eq SlateportCity_ContestHall_EventScript_155595
+	goto_if_set FLAG_RECEIVED_TM41, SlateportCity_ContestHall_EventScript_155595
 	msgbox SlateportCity_ContestHall_Text_17CCE2, 4
 	giveitem_std ITEM_TM41
 	compare RESULT, 0

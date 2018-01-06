@@ -4,22 +4,17 @@ PetalburgCity_WallysHouse_MapScripts:: @ 81543C3
 PetalburgCity_WallysHouse_EventScript_1543C4:: @ 81543C4
 	lock
 	faceplayer
-	checkflag FLAG_DEFEATED_WALLY_VICTORY_ROAD
-	goto_if_eq PetalburgCity_WallysHouse_EventScript_1543F7
-	checkflag FLAG_RECEIVED_HM03
-	goto_if_eq PetalburgCity_WallysHouse_EventScript_154427
-	checkflag FLAG_DEFEATED_PETALBURG_GYM
-	goto_if_eq PetalburgCity_WallysHouse_EventScript_154406
-	checkflag FLAG_THANKED_FOR_PLAYING_WITH_WALLY
-	goto_if_eq PetalburgCity_WallysHouse_EventScript_15443B
+	goto_if_set FLAG_DEFEATED_WALLY_VICTORY_ROAD, PetalburgCity_WallysHouse_EventScript_1543F7
+	goto_if_set FLAG_RECEIVED_HM03, PetalburgCity_WallysHouse_EventScript_154427
+	goto_if_set FLAG_DEFEATED_PETALBURG_GYM, PetalburgCity_WallysHouse_EventScript_154406
+	goto_if_set FLAG_THANKED_FOR_PLAYING_WITH_WALLY, PetalburgCity_WallysHouse_EventScript_15443B
 	msgbox PetalburgCity_WallysHouse_Text_179805, 4
 	setflag FLAG_THANKED_FOR_PLAYING_WITH_WALLY
 	release
 	end
 
 PetalburgCity_WallysHouse_EventScript_1543F7:: @ 81543F7
-	checkflag FLAG_RECEIVED_HM03
-	goto_if_eq PetalburgCity_WallysHouse_EventScript_154431
+	goto_if_set FLAG_RECEIVED_HM03, PetalburgCity_WallysHouse_EventScript_154431
 	goto PetalburgCity_WallysHouse_EventScript_154406
 	end
 
@@ -49,10 +44,8 @@ PetalburgCity_WallysHouse_EventScript_15443B:: @ 815443B
 PetalburgCity_WallysHouse_EventScript_154445:: @ 8154445
 	lock
 	faceplayer
-	checkflag FLAG_RECEIVED_HM03
-	goto_if_eq PetalburgCity_WallysHouse_EventScript_15446D
-	checkflag FLAG_DEFEATED_PETALBURG_GYM
-	goto_if_eq PetalburgCity_WallysHouse_EventScript_154463
+	goto_if_set FLAG_RECEIVED_HM03, PetalburgCity_WallysHouse_EventScript_15446D
+	goto_if_set FLAG_DEFEATED_PETALBURG_GYM, PetalburgCity_WallysHouse_EventScript_154463
 	msgbox PetalburgCity_WallysHouse_Text_179C2C, 4
 	release
 	end

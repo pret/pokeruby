@@ -4,8 +4,7 @@ CaveOfOrigin_B4F_MapScripts:: @ 815DDAC
 	.byte 0
 
 CaveOfOrigin_B4F_MapScript1_15DDB7:: @ 815DDB7
-	checkflag FLAG_SYS_CTRL_OBJ_DELETE
-	call_if 1, CaveOfOrigin_B4F_EventScript_15DDC1
+	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, CaveOfOrigin_B4F_EventScript_15DDC1
 	end
 
 CaveOfOrigin_B4F_EventScript_15DDC1:: @ 815DDC1
@@ -19,8 +18,7 @@ CaveOfOrigin_B4F_MapScript1_15DDC5:: @ 815DDC5
 	setmaplayoutindex 313
 	.endif
 	call CaveOfOrigin_B4F_EventScript_1A01B5
-	checkflag FLAG_LEGENDARY_BATTLE_COMPLETED
-	call_if 1, CaveOfOrigin_B4F_EventScript_1A04E3
+	call_if_set FLAG_LEGENDARY_BATTLE_COMPLETED, CaveOfOrigin_B4F_EventScript_1A04E3
 	end
 
 CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
@@ -67,7 +65,7 @@ CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar RESULT, GetBattleOutcome
 	compare RESULT, 1
-	call_if 1, CaveOfOrigin_B4F_EventScript_15DE73
+	call_if_eq CaveOfOrigin_B4F_EventScript_15DE73
 	setflag FLAG_HIDE_WALLACE_SOOTOPOLIS
 	setflag FLAG_HIDE_CAVE_OF_ORIGIN_ENTRANCE_WOMAN_1
 	setflag FLAG_HIDE_CAVE_OF_ORIGIN_ENTRANCE_WOMAN_2
