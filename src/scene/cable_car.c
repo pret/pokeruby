@@ -71,7 +71,7 @@ struct CableCarEwramStruct2 {
 
 // Static RAM declarations
 
-EWRAM_DATA struct CableCarEwramStruct1 *gUnknown_02039274 = NULL;
+EWRAM_DATA struct CableCarEwramStruct1 *sCableCarPtr = NULL;
 EWRAM_DATA u8 gUnknown_02039278 = 0;
 EWRAM_DATA u8 gUnknown_02039279 = 0;
 EWRAM_DATA u8 gUnknown_0203927A = 0;
@@ -82,18 +82,18 @@ EWRAM_DATA u32 filler_02039280 = 0;
 
 // Static ROM declarations
 
-static void sub_8123244(void);
-static void sub_8123724(void);
+static void CableCarMainCallback_Setup(void);
+static void CableCarMainCallback_Run(void);
 static void sub_8123878(u8 taskId);
 static void sub_81239E4(u8 taskId);
 static void sub_8123AF8(u8 taskId);
-static void sub_8123C40(void);
+static void CableCarVblankCallback(void);
 static void nullsub_76(struct Sprite *sprite);
 static void sub_8123CB8(struct Sprite *sprite);
 static void sub_8123EB8(struct Sprite *sprite);
 static void sub_8123F44(struct Sprite *sprite);
 static void sub_8123FBC(u8);
-static void sub_8124118(void);
+static void LoadSprites(void);
 static void sub_812453C(void);
 static void sub_8124598(void);
 static void sub_81245F4(void);
@@ -182,23 +182,23 @@ static const struct SpriteTemplate gSpriteTemplate_8401D40[] = {
 
 // .text
 
-static void sub_81231EC(u8 taskId)
+static void CableCarTask1(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        SetMainCallback2(sub_8123244);
+        SetMainCallback2(CableCarMainCallback_Setup);
         DestroyTask(taskId);
     }
 }
 
-void sub_8123218(void)
+void CableCar(void)
 {
     ScriptContext2_Enable();
-    CreateTask(sub_81231EC, 1);
+    CreateTask(CableCarTask1, 1);
     BeginNormalPaletteFade(-1, 0, 0, 16, 0);
 }
 
-static void sub_8123244(void)
+static void CableCarMainCallback_Setup(void)
 {
     u8 i;
     u16 imebak;
@@ -212,7 +212,7 @@ static void sub_8123244(void)
             DmaFill16Large(3, 0, VRAM, VRAM_SIZE, 0x1000);
             DmaFill32Defvars(3, 0, OAM, OAM_SIZE);
             DmaFill16Defvars(3, 0, PLTT, PLTT_SIZE);
-            gUnknown_02039274 = eCableCar1;
+            sCableCarPtr = eCableCar1;
             DmaFill16Large(3, 0, eCableCar1, 0x10FC, 0x1000);
             gMain.state++;
             break;
@@ -246,12 +246,12 @@ static void sub_8123244(void)
             gMain.state++;
             break;
         case 3:
-            sub_8124118();
+            LoadSprites();
             RunTasks();
             gMain.state++;
             break;
         case 4:
-            if (gUnknown_02039274->unk_0002 == 7)
+            if (sCableCarPtr->unk_0002 == 7)
             {
                 gMain.state++;
             }
@@ -270,20 +270,20 @@ static void sub_8123244(void)
         case 5:
             sub_8124F08((u16 *)BG_SCREEN_ADDR(29), eCableCar2->treeTilemap, 0, 17, 32, 15);
             sub_8124F08((u16 *)BG_SCREEN_ADDR(30), eCableCar2->mountainTilemap, 0, 0, 30, 20);
-            sub_8124F08(gUnknown_02039274->unk_08fc, gCableCarPylonHookTilemapEntries, 0, 0, 5, 2);
-            sub_8124F08(gUnknown_02039274->unk_08fc, eCableCar2->pylonStemTilemap, 0, 2, 2, 20);
+            sub_8124F08(sCableCarPtr->unk_08fc, gCableCarPylonHookTilemapEntries, 0, 0, 5, 2);
+            sub_8124F08(sCableCarPtr->unk_08fc, eCableCar2->pylonStemTilemap, 0, 2, 2, 20);
             gMain.state++;
             break;
         case 6:
             sub_81248AC(gSpecialVar_0x8004);
-            sub_8124F08(gUnknown_02039274->unk_00fc, eCableCar2->mtChimneyTilemap + 0x48, 0, 14, 12, 3);
-            sub_8124F08(gUnknown_02039274->unk_00fc, eCableCar2->mtChimneyTilemap + 0x6C, 12, 17, 12, 3);
-            sub_8124F08(gUnknown_02039274->unk_00fc, eCableCar2->mtChimneyTilemap + 0x90, 24, 20, 12, 3);
-            sub_8124F08(gUnknown_02039274->unk_00fc, eCableCar2->mtChimneyTilemap + 0x00, 0, 17, 12, 3);
-            sub_8124F08(gUnknown_02039274->unk_00fc, eCableCar2->mtChimneyTilemap + 0x24, 0, 20, 12, 3);
-            sub_8124F08(gUnknown_02039274->unk_00fc, eCableCar2->mtChimneyTilemap + 0x00, 12, 20, 12, 3);
-            sub_8124F08(gUnknown_02039274->unk_00fc, eCableCar2->mtChimneyTilemap + 0x24, 12, 23, 12, 3);
-            sub_8124F08(gUnknown_02039274->unk_00fc, eCableCar2->mtChimneyTilemap + 0x00, 24, 23, 12, 3);
+            sub_8124F08(sCableCarPtr->unk_00fc, eCableCar2->mtChimneyTilemap + 0x48, 0, 14, 12, 3);
+            sub_8124F08(sCableCarPtr->unk_00fc, eCableCar2->mtChimneyTilemap + 0x6C, 12, 17, 12, 3);
+            sub_8124F08(sCableCarPtr->unk_00fc, eCableCar2->mtChimneyTilemap + 0x90, 24, 20, 12, 3);
+            sub_8124F08(sCableCarPtr->unk_00fc, eCableCar2->mtChimneyTilemap + 0x00, 0, 17, 12, 3);
+            sub_8124F08(sCableCarPtr->unk_00fc, eCableCar2->mtChimneyTilemap + 0x24, 0, 20, 12, 3);
+            sub_8124F08(sCableCarPtr->unk_00fc, eCableCar2->mtChimneyTilemap + 0x00, 12, 20, 12, 3);
+            sub_8124F08(sCableCarPtr->unk_00fc, eCableCar2->mtChimneyTilemap + 0x24, 12, 23, 12, 3);
+            sub_8124F08(sCableCarPtr->unk_00fc, eCableCar2->mtChimneyTilemap + 0x00, 24, 23, 12, 3);
             gMain.state++;
             break;
         case 7:
@@ -297,22 +297,22 @@ static void sub_8123244(void)
             REG_IME = 0;
             REG_IE |= INTR_FLAG_VBLANK;
             REG_IME = imebak;
-            SetVBlankCallback(sub_8123C40);
-            SetMainCallback2(sub_8123724);
+            SetVBlankCallback(CableCarVblankCallback);
+            SetMainCallback2(CableCarMainCallback_Run);
             CreateTask(sub_8123878, 0);
             if (gSpecialVar_0x8004 == 0)
             {
-                gUnknown_02039274->unk_0000 = CreateTask(sub_81239E4, 1);
+                sCableCarPtr->unk_0000 = CreateTask(sub_81239E4, 1);
             }
             else
             {
-                gUnknown_02039274->unk_0000 = CreateTask(sub_8123AF8, 1);
+                sCableCarPtr->unk_0000 = CreateTask(sub_8123AF8, 1);
             }
             break;
     }
 }
 
-static void sub_8123724(void)
+static void CableCarMainCallback_Run(void)
 {
     RunTasks();
     AnimateSprites();
@@ -337,7 +337,7 @@ static void sub_8123740(void)
     ResetSpriteData();
     ResetPaletteFade();
     DmaFill32Large(3, 0, gSharedMem, 0x20000, 0x1000);
-    gUnknown_02039274 = NULL;
+    sCableCarPtr = NULL;
     DmaFill16Large(3, 0, VRAM, VRAM_SIZE, 0x1000);
     DmaFill32Defvars(3, 0, OAM, OAM_SIZE);
     DmaFill16Defvars(3, 0, PLTT, PLTT_SIZE);
@@ -351,18 +351,18 @@ static void sub_8123878(u8 taskId)
     u8 i;
 
     i = 0;
-    gUnknown_02039274->unk_0006++;
-    switch (gUnknown_02039274->unk_0001)
+    sCableCarPtr->unk_0006++;
+    switch (sCableCarPtr->unk_0001)
     {
         case 0:
-            if (gUnknown_02039274->unk_0006 == gUnknown_02039274->unk_0004)
+            if (sCableCarPtr->unk_0006 == sCableCarPtr->unk_0004)
             {
-                DoWeatherEffect(gUnknown_02039274->unk_0002);
-                gUnknown_02039274->unk_0001 = 1;
+                DoWeatherEffect(sCableCarPtr->unk_0002);
+                sCableCarPtr->unk_0001 = 1;
             }
             break;
         case 1:
-            switch (gUnknown_02039274->unk_0002)
+            switch (sCableCarPtr->unk_0002)
             {
                 case 7:
                     if (gWeatherPtr->sprites.s2.ashSprites[0] != NULL && gWeatherPtr->sprites.s2.ashSprites[0]->oam.priority != 0)
@@ -374,15 +374,15 @@ static void sub_8123878(u8 taskId)
                                 gWeatherPtr->sprites.s2.ashSprites[i]->oam.priority = 0;
                             }
                         }
-                        gUnknown_02039274->unk_0001 = 2;
+                        sCableCarPtr->unk_0001 = 2;
                     }
                     break;
                 case 2:
                     if (gWeatherPtr->currWeather == 2)
                     {
-                        gUnknown_02039274->unk_0001 = 2;
+                        sCableCarPtr->unk_0001 = 2;
                     }
-                    else if (gUnknown_02039274->unk_0006 >= gUnknown_02039274->unk_0004 + 8)
+                    else if (sCableCarPtr->unk_0006 >= sCableCarPtr->unk_0004 + 8)
                     {
                         for (; i < 20; i++)
                         {
@@ -396,9 +396,9 @@ static void sub_8123878(u8 taskId)
             }
             break;
         case 2:
-            if (gUnknown_02039274->unk_0006 == 570)
+            if (sCableCarPtr->unk_0006 == 570)
             {
-                gUnknown_02039274->unk_0001 = 3;
+                sCableCarPtr->unk_0001 = 3;
                 BeginNormalPaletteFade(-1, 3, 0, 16, 0);
                 FadeOutBGM(4);
             }
@@ -406,13 +406,13 @@ static void sub_8123878(u8 taskId)
         case 3:
             if (!gPaletteFade.active)
             {
-                gUnknown_02039274->unk_0001 = 255;
+                sCableCarPtr->unk_0001 = 255;
             }
             break;
         case 255:
             SetVBlankCallback(NULL);
             DestroyTask(taskId);
-            DestroyTask(gUnknown_02039274->unk_0000);
+            DestroyTask(sCableCarPtr->unk_0000);
             SetMainCallback2(sub_8123740);
             break;
     }
@@ -420,33 +420,33 @@ static void sub_8123878(u8 taskId)
 
 static void sub_81239E4(u8 taskId)
 {
-    if (gUnknown_02039274->unk_0001 != 255)
+    if (sCableCarPtr->unk_0001 != 255)
     {
-        gUnknown_02039274->unk_0014--;
-        if ((gUnknown_02039274->unk_0006 % 2) == 0)
+        sCableCarPtr->unk_0014--;
+        if ((sCableCarPtr->unk_0006 % 2) == 0)
         {
-            gUnknown_02039274->unk_0015--;
+            sCableCarPtr->unk_0015--;
         }
-        if ((gUnknown_02039274->unk_0006 % 8) == 0)
+        if ((sCableCarPtr->unk_0006 % 8) == 0)
         {
-            gUnknown_02039274->unk_000c--;
-            gUnknown_02039274->unk_000d--;
+            sCableCarPtr->unk_000c--;
+            sCableCarPtr->unk_000d--;
         }
-        switch (gUnknown_02039274->unk_0014)
+        switch (sCableCarPtr->unk_0014)
         {
             case 175:
-                sub_8124E7C(gUnknown_02039274->unk_08fc, 0, 0, 22, 2, 10);
+                sub_8124E7C(sCableCarPtr->unk_08fc, 0, 0, 22, 2, 10);
                 break;
             case 40:
-                sub_8124E7C(gUnknown_02039274->unk_08fc, 0, 3, 0, 2, 2);
+                sub_8124E7C(sCableCarPtr->unk_08fc, 0, 3, 0, 2, 2);
                 break;
             case 32:
-                sub_8124E7C(gUnknown_02039274->unk_08fc, 0, 2, 0, 1, 2);
+                sub_8124E7C(sCableCarPtr->unk_08fc, 0, 2, 0, 1, 2);
                 break;
             case 16:
-                sub_8124F08(gUnknown_02039274->unk_08fc, gCableCarPylonHookTilemapEntries, 0, 0, 5, 2);
-                sub_8124F08(gUnknown_02039274->unk_08fc, eCableCar2->pylonStemTilemap, 0, 2, 2, 30);
-                gUnknown_02039274->unk_0015 = 64;
+                sub_8124F08(sCableCarPtr->unk_08fc, gCableCarPylonHookTilemapEntries, 0, 0, 5, 2);
+                sub_8124F08(sCableCarPtr->unk_08fc, eCableCar2->pylonStemTilemap, 0, 2, 2, 30);
+                sCableCarPtr->unk_0015 = 64;
                 break;
         }
     }
@@ -456,42 +456,42 @@ static void sub_81239E4(u8 taskId)
 
 static void sub_8123AF8(u8 taskId)
 {
-    if (gUnknown_02039274->unk_0001 != 255)
+    if (sCableCarPtr->unk_0001 != 255)
     {
-        gUnknown_02039274->unk_0014++;
-        if ((gUnknown_02039274->unk_0006 % 2) == 0)
+        sCableCarPtr->unk_0014++;
+        if ((sCableCarPtr->unk_0006 % 2) == 0)
         {
-            gUnknown_02039274->unk_0015++;
+            sCableCarPtr->unk_0015++;
         }
-        if ((gUnknown_02039274->unk_0006 % 8) == 0)
+        if ((sCableCarPtr->unk_0006 % 8) == 0)
         {
-            gUnknown_02039274->unk_000c++;
-            gUnknown_02039274->unk_000d++;
+            sCableCarPtr->unk_000c++;
+            sCableCarPtr->unk_000d++;
         }
-        switch (gUnknown_02039274->unk_0014)
+        switch (sCableCarPtr->unk_0014)
         {
             case 176:
-                sub_8124F08(gUnknown_02039274->unk_08fc, eCableCar2->pylonStemTilemap, 0, 2, 2, 30);
+                sub_8124F08(sCableCarPtr->unk_08fc, eCableCar2->pylonStemTilemap, 0, 2, 2, 30);
                 break;
             case 16:
-                sub_8124E7C(gUnknown_02039274->unk_08fc, 0, 2, 0, 3, 2);
-                sub_8124E7C(gUnknown_02039274->unk_08fc, 0, 0, 22, 2, 10);
-                gUnknown_02039274->unk_0015 = 192;
+                sub_8124E7C(sCableCarPtr->unk_08fc, 0, 2, 0, 3, 2);
+                sub_8124E7C(sCableCarPtr->unk_08fc, 0, 0, 22, 2, 10);
+                sCableCarPtr->unk_0015 = 192;
                 break;
             case 32:
-                gUnknown_02039274->unk_08fc[2] = (gCableCarPylonHookTilemapEntries + 2)[0];
-                gUnknown_02039274->unk_08fc[3] = (gCableCarPylonHookTilemapEntries + 2)[1];
-                gUnknown_02039274->unk_08fc[34] = (gCableCarPylonHookTilemapEntries + 2)[5];
-                gUnknown_02039274->unk_08fc[35] = (gCableCarPylonHookTilemapEntries + 2)[6];
+                sCableCarPtr->unk_08fc[2] = (gCableCarPylonHookTilemapEntries + 2)[0];
+                sCableCarPtr->unk_08fc[3] = (gCableCarPylonHookTilemapEntries + 2)[1];
+                sCableCarPtr->unk_08fc[34] = (gCableCarPylonHookTilemapEntries + 2)[5];
+                sCableCarPtr->unk_08fc[35] = (gCableCarPylonHookTilemapEntries + 2)[6];
                 break;
             case 40:
-                gUnknown_02039274->unk_08fc[4] = (gCableCarPylonHookTilemapEntries + 4)[0];
-                gUnknown_02039274->unk_08fc[36] = (gCableCarPylonHookTilemapEntries + 4)[5];
+                sCableCarPtr->unk_08fc[4] = (gCableCarPylonHookTilemapEntries + 4)[0];
+                sCableCarPtr->unk_08fc[36] = (gCableCarPylonHookTilemapEntries + 4)[5];
                 break;
         }
     }
     sub_8124598();
-    if (gUnknown_02039274->unk_0006 < gUnknown_02039274->unk_0004) {
+    if (sCableCarPtr->unk_0006 < sCableCarPtr->unk_0004) {
         gSpriteCoordOffsetX = (gSpriteCoordOffsetX + 247) % 248;
     }
     else
@@ -500,16 +500,16 @@ static void sub_8123AF8(u8 taskId)
     }
 }
 
-static void sub_8123C40(void)
+static void CableCarVblankCallback(void)
 {
-    DmaCopy16(3, gUnknown_02039274->unk_00fc, BG_SCREEN_ADDR(28), 0x800);
-    DmaCopy16(3, gUnknown_02039274->unk_08fc, BG_SCREEN_ADDR(31), 0x800);
-    REG_BG3HOFS = gUnknown_02039274->unk_0014;
-    REG_BG3VOFS = gUnknown_02039274->unk_0015;
-    REG_BG1HOFS = gUnknown_02039274->unk_000c;
-    REG_BG1VOFS = gUnknown_02039274->unk_000d;
-    REG_BG0HOFS = gUnknown_02039274->unk_0008;
-    REG_BG0VOFS = gUnknown_02039274->unk_0009;
+    DmaCopy16(3, sCableCarPtr->unk_00fc, BG_SCREEN_ADDR(28), 0x800);
+    DmaCopy16(3, sCableCarPtr->unk_08fc, BG_SCREEN_ADDR(31), 0x800);
+    REG_BG3HOFS = sCableCarPtr->unk_0014;
+    REG_BG3VOFS = sCableCarPtr->unk_0015;
+    REG_BG1HOFS = sCableCarPtr->unk_000c;
+    REG_BG1VOFS = sCableCarPtr->unk_000d;
+    REG_BG0HOFS = sCableCarPtr->unk_0008;
+    REG_BG0VOFS = sCableCarPtr->unk_0009;
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
@@ -522,34 +522,34 @@ static void nullsub_76(struct Sprite *sprite)
 
 static void sub_8123CB8(struct Sprite *sprite)
 {
-    if (gUnknown_02039274->unk_0001 != 255)
+    if (sCableCarPtr->unk_0001 != 255)
     {
         if (gSpecialVar_0x8004 == 0)
         {
-            sprite->pos1.x = sprite->data[0] - (u8)(0.14f * S16TOPOSFLOAT(gUnknown_02039274->unk_0006));
-            sprite->pos1.y = sprite->data[1] - (u8)(0.067f * S16TOPOSFLOAT(gUnknown_02039274->unk_0006));
+            sprite->pos1.x = sprite->data[0] - (u8)(0.14f * S16TOPOSFLOAT(sCableCarPtr->unk_0006));
+            sprite->pos1.y = sprite->data[1] - (u8)(0.067f * S16TOPOSFLOAT(sCableCarPtr->unk_0006));
         }
         else
         {
-            sprite->pos1.x = sprite->data[0] + (u8)(0.14f * S16TOPOSFLOAT(gUnknown_02039274->unk_0006));
-            sprite->pos1.y = sprite->data[1] + (u8)(0.067f * S16TOPOSFLOAT(gUnknown_02039274->unk_0006));
+            sprite->pos1.x = sprite->data[0] + (u8)(0.14f * S16TOPOSFLOAT(sCableCarPtr->unk_0006));
+            sprite->pos1.y = sprite->data[1] + (u8)(0.067f * S16TOPOSFLOAT(sCableCarPtr->unk_0006));
         }
     }
 }
 
 static void sub_8123D98(struct Sprite *sprite)
 {
-    if (gUnknown_02039274->unk_0001 != 255)
+    if (sCableCarPtr->unk_0001 != 255)
     {
         if (gSpecialVar_0x8004 == 0)
         {
-            sprite->pos1.x = sprite->data[0] - (u8)(0.14f * S16TOPOSFLOAT(gUnknown_02039274->unk_0006));
-            sprite->pos1.y = sprite->data[1] - (u8)(0.067f * S16TOPOSFLOAT(gUnknown_02039274->unk_0006));
+            sprite->pos1.x = sprite->data[0] - (u8)(0.14f * S16TOPOSFLOAT(sCableCarPtr->unk_0006));
+            sprite->pos1.y = sprite->data[1] - (u8)(0.067f * S16TOPOSFLOAT(sCableCarPtr->unk_0006));
         }
         else
         {
-            sprite->pos1.x = sprite->data[0] + (u8)(0.14f * S16TOPOSFLOAT(gUnknown_02039274->unk_0006));
-            sprite->pos1.y = sprite->data[1] + (u8)(0.067f * S16TOPOSFLOAT(gUnknown_02039274->unk_0006));
+            sprite->pos1.x = sprite->data[0] + (u8)(0.14f * S16TOPOSFLOAT(sCableCarPtr->unk_0006));
+            sprite->pos1.y = sprite->data[1] + (u8)(0.067f * S16TOPOSFLOAT(sCableCarPtr->unk_0006));
         }
         switch (sprite->data[2])
         {
@@ -680,30 +680,30 @@ static void sub_8123FBC(bool8 which)
             REG_WIN1V = 0;
             if (gSpecialVar_0x8004 == 0)
             {
-                gUnknown_02039274->unk_0014 = 0xb0;
-                gUnknown_02039274->unk_0015 = 0x10;
-                gUnknown_02039274->unk_000c = 0x00;
-                gUnknown_02039274->unk_000d = 0x50;
-                gUnknown_02039274->unk_0009 = 0;
-                gUnknown_02039274->unk_0009 = 0;
+                sCableCarPtr->unk_0014 = 0xb0;
+                sCableCarPtr->unk_0015 = 0x10;
+                sCableCarPtr->unk_000c = 0x00;
+                sCableCarPtr->unk_000d = 0x50;
+                sCableCarPtr->unk_0009 = 0;
+                sCableCarPtr->unk_0009 = 0;
             }
             else
             {
-                gUnknown_02039274->unk_0014 = 0x60;
-                gUnknown_02039274->unk_0015 = 0xe8;
-                gUnknown_02039274->unk_000c = 0x00;
-                gUnknown_02039274->unk_000d = 0x04;
-                gUnknown_02039274->unk_0009 = 0;
-                gUnknown_02039274->unk_0009 = 0;
+                sCableCarPtr->unk_0014 = 0x60;
+                sCableCarPtr->unk_0015 = 0xe8;
+                sCableCarPtr->unk_000c = 0x00;
+                sCableCarPtr->unk_000d = 0x04;
+                sCableCarPtr->unk_0009 = 0;
+                sCableCarPtr->unk_0009 = 0;
             }
-            REG_BG3HOFS = gUnknown_02039274->unk_0014;
-            REG_BG3VOFS = gUnknown_02039274->unk_0015;
+            REG_BG3HOFS = sCableCarPtr->unk_0014;
+            REG_BG3VOFS = sCableCarPtr->unk_0015;
             REG_BG2HOFS = 0;
             REG_BG2VOFS = 0;
-            REG_BG1HOFS = gUnknown_02039274->unk_000c;
-            REG_BG1VOFS = gUnknown_02039274->unk_000d;
-            REG_BG0HOFS = gUnknown_02039274->unk_0008;
-            REG_BG0VOFS = gUnknown_02039274->unk_0009;
+            REG_BG1HOFS = sCableCarPtr->unk_000c;
+            REG_BG1VOFS = sCableCarPtr->unk_000d;
+            REG_BG0HOFS = sCableCarPtr->unk_0008;
+            REG_BG0VOFS = sCableCarPtr->unk_0009;
             REG_BG0CNT = BGCNT_PRIORITY(1) | BGCNT_SCREENBASE(28) | BGCNT_WRAP;
             REG_BG1CNT = BGCNT_PRIORITY(2) | BGCNT_SCREENBASE(29) | BGCNT_WRAP;
             REG_BG2CNT = BGCNT_PRIORITY(3) | BGCNT_SCREENBASE(30) | BGCNT_WRAP;
@@ -714,7 +714,7 @@ static void sub_8123FBC(bool8 which)
     }
 }
 
-static void sub_8124118(void)
+static void LoadSprites(void)
 {
     u8 spriteId;
     u8 i;
@@ -767,12 +767,12 @@ static void sub_8124118(void)
             gSprites[spriteId].pos2.y = 4;
             gSprites[spriteId].data[0] = 0xc8;
             gSprites[spriteId].data[1] = 0x63;
-            gUnknown_02039274->unk_0002 = 7;
-            gUnknown_02039274->unk_0004 = 0x15e;
+            sCableCarPtr->unk_0002 = 7;
+            sCableCarPtr->unk_0004 = 0x15e;
             sub_807C9B4(2);
             break;
         case 1:
-            sub_8124F08(gUnknown_02039274->unk_00fc, eCableCar2->mtChimneyTilemap + 0x24, 0x18, 0x1a, 0x0c, 0x03);
+            sub_8124F08(sCableCarPtr->unk_00fc, eCableCar2->mtChimneyTilemap + 0x24, 0x18, 0x1a, 0x0c, 0x03);
             spriteId = AddPseudoFieldObject(playerGraphicsIds[gSaveBlock2.playerGender], sub_8123D98, 0x80, 0x27, 0x66);
             if (spriteId != MAX_SPRITES)
             {
@@ -791,8 +791,8 @@ static void sub_8124118(void)
             gSprites[spriteId].pos2.y = 4;
             gSprites[spriteId].data[0] = 0x80;
             gSprites[spriteId].data[1] = 0x41;
-            gUnknown_02039274->unk_0002 = 2;
-            gUnknown_02039274->unk_0004 = 0x109;
+            sCableCarPtr->unk_0002 = 2;
+            sCableCarPtr->unk_0004 = 0x109;
             sub_807C9B4(7);
             break;
     }
@@ -850,30 +850,30 @@ static void sub_812446C(void)
     u8 k;
     u8 offset;
 
-    for (i = 0, k = 0, offset = 0x24 * (gUnknown_02039274->unk_001b + 2); i < 3; i++)
+    for (i = 0, k = 0, offset = 0x24 * (sCableCarPtr->unk_001b + 2); i < 3; i++)
     {
         for (j = 0; j < 12; j++)
         {
-            gUnknown_02039274->unk_0022[i][j] = *(eCableCar2->mtChimneyTilemap + (offset++));
-            gUnknown_02039274->unk_0022[i + 3][j] = eCableCar2->mtChimneyTilemap[k];
-            gUnknown_02039274->unk_0022[i + 6][j] = (eCableCar2->mtChimneyTilemap + 0x24)[k];
+            sCableCarPtr->unk_0022[i][j] = *(eCableCar2->mtChimneyTilemap + (offset++));
+            sCableCarPtr->unk_0022[i + 3][j] = eCableCar2->mtChimneyTilemap[k];
+            sCableCarPtr->unk_0022[i + 6][j] = (eCableCar2->mtChimneyTilemap + 0x24)[k];
             k++;
         }
     }
-    gUnknown_02039274->unk_001b = (gUnknown_02039274->unk_001b + 1) % 3;
+    sCableCarPtr->unk_001b = (sCableCarPtr->unk_001b + 1) % 3;
 }
 
 static void sub_812453C(void)
 {
-    gUnknown_02039274->unk_001c = (gUnknown_02039274->unk_001c + 1) % 0x60;
-    gUnknown_02039274->unk_0008 = gUnknown_02039274->unk_001f - gUnknown_02039274->unk_001d;
-    gUnknown_02039274->unk_0009 = gUnknown_02039274->unk_0020 - gUnknown_02039274->unk_001e;
-    gUnknown_02039274->unk_001d++;
-    if ((gUnknown_02039274->unk_001d % 4) == 0)
+    sCableCarPtr->unk_001c = (sCableCarPtr->unk_001c + 1) % 0x60;
+    sCableCarPtr->unk_0008 = sCableCarPtr->unk_001f - sCableCarPtr->unk_001d;
+    sCableCarPtr->unk_0009 = sCableCarPtr->unk_0020 - sCableCarPtr->unk_001e;
+    sCableCarPtr->unk_001d++;
+    if ((sCableCarPtr->unk_001d % 4) == 0)
     {
-        gUnknown_02039274->unk_001e++;
+        sCableCarPtr->unk_001e++;
     }
-    if (gUnknown_02039274->unk_001d > 16)
+    if (sCableCarPtr->unk_001d > 16)
     {
         sub_81245F4();
     }
@@ -881,15 +881,15 @@ static void sub_812453C(void)
 
 static void sub_8124598(void)
 {
-    gUnknown_02039274->unk_001c = (gUnknown_02039274->unk_001c + 1) % 0x60;
-    gUnknown_02039274->unk_0008 = gUnknown_02039274->unk_001f + gUnknown_02039274->unk_001d;
-    gUnknown_02039274->unk_0009 = gUnknown_02039274->unk_0020 + gUnknown_02039274->unk_001e;
-    gUnknown_02039274->unk_001d++;
-    if ((gUnknown_02039274->unk_001d % 4) == 0)
+    sCableCarPtr->unk_001c = (sCableCarPtr->unk_001c + 1) % 0x60;
+    sCableCarPtr->unk_0008 = sCableCarPtr->unk_001f + sCableCarPtr->unk_001d;
+    sCableCarPtr->unk_0009 = sCableCarPtr->unk_0020 + sCableCarPtr->unk_001e;
+    sCableCarPtr->unk_001d++;
+    if ((sCableCarPtr->unk_001d % 4) == 0)
     {
-        gUnknown_02039274->unk_001e++;
+        sCableCarPtr->unk_001e++;
     }
-    if (gUnknown_02039274->unk_001d > 16)
+    if (sCableCarPtr->unk_001d > 16)
     {
         sub_812476C();
     }
@@ -899,29 +899,29 @@ static void sub_81245F4(void)
 {
     u8 i = 0;
 
-    gUnknown_02039274->unk_001d = gUnknown_02039274->unk_001e = 0;
-    gUnknown_02039274->unk_001f = gUnknown_02039274->unk_0008;
-    gUnknown_02039274->unk_0020 = gUnknown_02039274->unk_0009;
-    gUnknown_02039274->unk_0019 = (gUnknown_02039274->unk_0019 + 30) % 32;
-    gUnknown_02039274->unk_0018 -= 2;
-    gUnknown_0203927A = (gUnknown_02039274->unk_001a + 23) % 32;
+    sCableCarPtr->unk_001d = sCableCarPtr->unk_001e = 0;
+    sCableCarPtr->unk_001f = sCableCarPtr->unk_0008;
+    sCableCarPtr->unk_0020 = sCableCarPtr->unk_0009;
+    sCableCarPtr->unk_0019 = (sCableCarPtr->unk_0019 + 30) % 32;
+    sCableCarPtr->unk_0018 -= 2;
+    gUnknown_0203927A = (sCableCarPtr->unk_001a + 23) % 32;
     for (i = 0; i < 9; i++)
     {
-        gUnknown_02039278 = gUnknown_02039274->unk_0019;
+        gUnknown_02039278 = sCableCarPtr->unk_0019;
         gUnknown_02039279 = (gUnknown_0203927A + i) % 32;
-        gUnknown_02039274->unk_00fc[gUnknown_02039279][gUnknown_02039278] = gUnknown_02039274->unk_0022[i][gUnknown_02039274->unk_0018];
+        sCableCarPtr->unk_00fc[gUnknown_02039279][gUnknown_02039278] = sCableCarPtr->unk_0022[i][sCableCarPtr->unk_0018];
         gUnknown_02039278 = (gUnknown_02039278 + 1) % 32;
-        gUnknown_02039274->unk_00fc[gUnknown_02039279][gUnknown_02039278] = gUnknown_02039274->unk_0022[i][gUnknown_02039274->unk_0018 + 1];
+        sCableCarPtr->unk_00fc[gUnknown_02039279][gUnknown_02039278] = sCableCarPtr->unk_0022[i][sCableCarPtr->unk_0018 + 1];
     }
-    gUnknown_02039278 = (gUnknown_02039274->unk_0019 + 30) % 32;
-    sub_8124E7C(gUnknown_02039274->unk_00fc, 0, gUnknown_02039278, 0, 2, 32);
-    if (gUnknown_02039274->unk_0018 == 0)
+    gUnknown_02039278 = (sCableCarPtr->unk_0019 + 30) % 32;
+    sub_8124E7C(sCableCarPtr->unk_00fc, 0, gUnknown_02039278, 0, 2, 32);
+    if (sCableCarPtr->unk_0018 == 0)
     {
-        gUnknown_02039274->unk_001a = (gUnknown_02039274->unk_001a + 29) % 32;
-        gUnknown_02039274->unk_0018 = 12;
+        sCableCarPtr->unk_001a = (sCableCarPtr->unk_001a + 29) % 32;
+        sCableCarPtr->unk_0018 = 12;
         sub_812446C();
-        gUnknown_02039278 = (gUnknown_02039274->unk_001a + 1) % 32;
-        sub_8124E7C(gUnknown_02039274->unk_00fc, 0, 0, gUnknown_02039278, 32, 9);
+        gUnknown_02039278 = (sCableCarPtr->unk_001a + 1) % 32;
+        sub_8124E7C(sCableCarPtr->unk_00fc, 0, 0, gUnknown_02039278, 32, 9);
     }
 }
 
@@ -929,26 +929,26 @@ static void sub_812476C(void)
 {
     u8 i = 0;
 
-    gUnknown_02039274->unk_001d = gUnknown_02039274->unk_001e = 0;
-    gUnknown_02039274->unk_001f = gUnknown_02039274->unk_0008;
-    gUnknown_02039274->unk_0020 = gUnknown_02039274->unk_0009;
-    gUnknown_02039274->unk_0019 = (gUnknown_02039274->unk_0019 + 2) % 32;
-    gUnknown_02039274->unk_0018 += 2;
-    gUnknown_0203927D = gUnknown_02039274->unk_001a;
+    sCableCarPtr->unk_001d = sCableCarPtr->unk_001e = 0;
+    sCableCarPtr->unk_001f = sCableCarPtr->unk_0008;
+    sCableCarPtr->unk_0020 = sCableCarPtr->unk_0009;
+    sCableCarPtr->unk_0019 = (sCableCarPtr->unk_0019 + 2) % 32;
+    sCableCarPtr->unk_0018 += 2;
+    gUnknown_0203927D = sCableCarPtr->unk_001a;
     for (i = 0; i < 9; i++)
     {
-        gUnknown_0203927B = gUnknown_02039274->unk_0019;
+        gUnknown_0203927B = sCableCarPtr->unk_0019;
         gUnknown_0203927C = (gUnknown_0203927D + i) % 32;
-        gUnknown_02039274->unk_00fc[gUnknown_0203927C][gUnknown_0203927B] = gUnknown_02039274->unk_0022[i][gUnknown_02039274->unk_0018];
+        sCableCarPtr->unk_00fc[gUnknown_0203927C][gUnknown_0203927B] = sCableCarPtr->unk_0022[i][sCableCarPtr->unk_0018];
         gUnknown_0203927B = (gUnknown_0203927B + 1) % 32;
-        gUnknown_02039274->unk_00fc[gUnknown_0203927C][gUnknown_0203927B] = gUnknown_02039274->unk_0022[i][gUnknown_02039274->unk_0018 + 1];
+        sCableCarPtr->unk_00fc[gUnknown_0203927C][gUnknown_0203927B] = sCableCarPtr->unk_0022[i][sCableCarPtr->unk_0018 + 1];
     }
-    gUnknown_0203927C = (gUnknown_02039274->unk_001a + 23) % 32;
-    sub_8124E7C(gUnknown_02039274->unk_00fc, 0, gUnknown_02039274->unk_0019, gUnknown_0203927C, 2, 9);
-    if (gUnknown_02039274->unk_0018 == 10)
+    gUnknown_0203927C = (sCableCarPtr->unk_001a + 23) % 32;
+    sub_8124E7C(sCableCarPtr->unk_00fc, 0, sCableCarPtr->unk_0019, gUnknown_0203927C, 2, 9);
+    if (sCableCarPtr->unk_0018 == 10)
     {
-        gUnknown_02039274->unk_001a = (gUnknown_02039274->unk_001a + 3) % 32;
-        gUnknown_02039274->unk_0018 = 0xfe;
+        sCableCarPtr->unk_001a = (sCableCarPtr->unk_001a + 3) % 32;
+        sCableCarPtr->unk_0018 = 0xfe;
         sub_812446C();
     }
 }
@@ -959,21 +959,21 @@ static void sub_81248AC(u8 a0)
     {
         case 0:
         default:
-            gUnknown_02039274->unk_001b = 2;
-            gUnknown_02039274->unk_0019 = 0;
-            gUnknown_02039274->unk_001a = 20;
-            gUnknown_02039274->unk_0018 = 12;
+            sCableCarPtr->unk_001b = 2;
+            sCableCarPtr->unk_0019 = 0;
+            sCableCarPtr->unk_001a = 20;
+            sCableCarPtr->unk_0018 = 12;
             sub_812446C();
             sub_81245F4();
             break;
         case 1:
-            gUnknown_02039274->unk_001b = 2;
-            gUnknown_02039274->unk_0019 = 28;
-            gUnknown_02039274->unk_001a = 20;
-            gUnknown_02039274->unk_0018 = 4;
+            sCableCarPtr->unk_001b = 2;
+            sCableCarPtr->unk_0019 = 28;
+            sCableCarPtr->unk_001a = 20;
+            sCableCarPtr->unk_0018 = 4;
             sub_812446C();
             sub_812476C();
             break;
     }
-    gUnknown_02039274->unk_001c = 0;
+    sCableCarPtr->unk_001c = 0;
 }
