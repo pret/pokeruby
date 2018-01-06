@@ -21,8 +21,6 @@ extern const struct WindowConfig gWindowConfig_81E6DA8;
 
 extern void sub_80546B8(void);
 
-#define shared1000 (*(struct Shared1000 *)(gSharedMem + 0x1000))
-
 const u16 gMysteryEventPhrase[] = {EC_WORD_MYSTERY, EC_WORD_EVENT, EC_WORD_IS, EC_WORD_EXCITING};
 
 const u16 gBerryMasterWifePhrases[][2] =
@@ -42,8 +40,8 @@ const u16 gBerryMasterWifePhrases[][2] =
 #endif
 };
 
-// const pointer to shared1000. easy_chat might be two separate files.
-struct Shared1000 *const gUnknown_083DB694 = &shared1000;
+// const pointer to gEasyChatStruct-> easy_chat might be two separate files.
+struct Shared1000 *const gEasyChatStruct = (struct Shared1000 *)(gSharedMem + 0x1000);
 
 const struct UnknownTaskStruct gUnknown_083DB698 =
 {
@@ -193,7 +191,7 @@ void sub_80EAC5C(void);
 void sub_80EAD08(void);
 u8 sub_80EAD7C(u8);
 void sub_80EAECC(void);
-void sub_80EB040(void);
+void LoadEasyChatStrings(void);
 void sub_80EB0B0(void);
 u8 *sub_80EB218(u8 *, u16, u16);
 u16 sub_80EB2D4();
@@ -264,9 +262,9 @@ void sub_80E60D8(void)
         r4 = 1;
         break;
     case 13:
-        shared1000.unk9C7C = 0xFFFF;
-        shared1000.unk9C7E = -1;
-        r1 = &shared1000.unk9C7C;
+        gEasyChatStruct->unk9C7C = 0xFFFF;
+        gEasyChatStruct->unk9C7E = -1;
+        r1 = &gEasyChatStruct->unk9C7C;
         break;
     default:
         return;
@@ -276,15 +274,15 @@ void sub_80E60D8(void)
 
 void sub_80E62A0(u8 a, u16 *b, void (*c)(void), u8 d)
 {
-    shared1000.unk0 = c;
-    shared1000.unk4 = b;
-    shared1000.unk8 = a;
-    shared1000.unkB = d;
+    gEasyChatStruct->unk0 = c;
+    gEasyChatStruct->unk4 = b;
+    gEasyChatStruct->unk8 = a;
+    gEasyChatStruct->unkB = d;
     if (a == 9)
     {
-        shared1000.unk4 = &shared1000.unk9C7C;
-        shared1000.unk9C7C = gSaveBlock1.easyChatPairs[0].words[0];
-        shared1000.unk9C7E = gSaveBlock1.easyChatPairs[0].words[1];
+        gEasyChatStruct->unk4 = &gEasyChatStruct->unk9C7C;
+        gEasyChatStruct->unk9C7C = gSaveBlock1.easyChatPairs[0].words[0];
+        gEasyChatStruct->unk9C7E = gSaveBlock1.easyChatPairs[0].words[1];
     }
     SetMainCallback2(sub_80E62F8);
 }
@@ -343,61 +341,61 @@ void sub_80E62F8(void)
 
 void sub_80E6424(void)
 {
-    shared1000.unk9 = gUnknown_083DB6A4[shared1000.unk8];
-    switch (shared1000.unk9)
+    gEasyChatStruct->unk9 = gUnknown_083DB6A4[gEasyChatStruct->unk8];
+    switch (gEasyChatStruct->unk9)
     {
     case 4:
-        shared1000.unkA = 4;
-        shared1000.unk83 = 2;
-        shared1000.unk84 = 2;
-        shared1000.unk88 = 5;
-        shared1000.unk8A = 4;
+        gEasyChatStruct->unkA = 4;
+        gEasyChatStruct->unk83 = 2;
+        gEasyChatStruct->unk84 = 2;
+        gEasyChatStruct->unk88 = 5;
+        gEasyChatStruct->unk8A = 4;
         break;
     case 5:
-        shared1000.unkA = 4;
-        shared1000.unk83 = 1;
-        shared1000.unk84 = 4;
-        shared1000.unk88 = 16;
-        shared1000.unk8A = 2;
+        gEasyChatStruct->unkA = 4;
+        gEasyChatStruct->unk83 = 1;
+        gEasyChatStruct->unk84 = 4;
+        gEasyChatStruct->unk88 = 16;
+        gEasyChatStruct->unk8A = 2;
         break;
     case 0:
-        shared1000.unkA = 6;
-        shared1000.unk83 = 2;
-        shared1000.unk84 = 3;
-        shared1000.unk88 = 4;
-        shared1000.unk8A = 3;
+        gEasyChatStruct->unkA = 6;
+        gEasyChatStruct->unk83 = 2;
+        gEasyChatStruct->unk84 = 3;
+        gEasyChatStruct->unk88 = 4;
+        gEasyChatStruct->unk8A = 3;
         break;
     case 1:
-        shared1000.unkA = 9;
-        shared1000.unk83 = 2;
-        shared1000.unk84 = 5;
-        shared1000.unk88 = 4;
-        shared1000.unk8A = 0;
+        gEasyChatStruct->unkA = 9;
+        gEasyChatStruct->unk83 = 2;
+        gEasyChatStruct->unk84 = 5;
+        gEasyChatStruct->unk88 = 4;
+        gEasyChatStruct->unk8A = 0;
         break;
     case 2:
-        shared1000.unkA = 1;
-        shared1000.unk83 = 1;
-        shared1000.unk84 = 1;
-        shared1000.unk88 = 16;
-        shared1000.unk8A = 4;
+        gEasyChatStruct->unkA = 1;
+        gEasyChatStruct->unk83 = 1;
+        gEasyChatStruct->unk84 = 1;
+        gEasyChatStruct->unk88 = 16;
+        gEasyChatStruct->unk8A = 4;
         break;
     case 3:
-        shared1000.unkA = 2;
-        shared1000.unk83 = 2;
-        shared1000.unk84 = 1;
-        shared1000.unk88 = 5;
-        shared1000.unk8A = 3;
+        gEasyChatStruct->unkA = 2;
+        gEasyChatStruct->unk83 = 2;
+        gEasyChatStruct->unk84 = 1;
+        gEasyChatStruct->unk88 = 5;
+        gEasyChatStruct->unk8A = 3;
         break;
     }
-    shared1000.unk86 = 0;
-    shared1000.unk85 = 0;
-    shared1000.unk87 = 0;
-    shared1000.unk26 = 0;
-    shared1000.unk1BA = 0;
-    shared1000.unk1BE = 2;
+    gEasyChatStruct->unk86 = 0;
+    gEasyChatStruct->unk85 = 0;
+    gEasyChatStruct->unk87 = 0;
+    gEasyChatStruct->unk26 = 0;
+    gEasyChatStruct->unk1BA = 0;
+    gEasyChatStruct->unk1BE = 2;
     sub_80E6554();
     sub_80EAECC();
-    sub_80EB040();
+    LoadEasyChatStrings();
     sub_80E7E50();
     sub_80E6630();
     sub_80E6690();
@@ -413,14 +411,14 @@ void sub_80E6554(void)
     {
         for (r5 = 0; r5 < 2; r5++)
         {
-            shared1000.unk2A[r7][r5] = r4++;
+            gEasyChatStruct->unk2A[r7][r5] = r4++;
             if (r4 == 17)
                 break;
         }
         if (r4 == 17)
             break;
     }
-    shared1000.unk28 = 17;
+    gEasyChatStruct->unk28 = 17;
     while (r4 < 22)
     {
         if (sub_80EAD7C(r4) != 0)
@@ -431,17 +429,17 @@ void sub_80E6554(void)
                 r7++;
                 r5 = 0;
             }
-            shared1000.unk2A[r7][r5] = r4;
-            shared1000.unk78[r4 - 17] = 1;  // hmm...
-            shared1000.unk28++;
+            gEasyChatStruct->unk2A[r7][r5] = r4;
+            gEasyChatStruct->unk78[r4 - 17] = 1;  // hmm...
+            gEasyChatStruct->unk28++;
         }
         else
         {
-            shared1000.unk78[r4 - 17] = 0;
+            gEasyChatStruct->unk78[r4 - 17] = 0;
         }
         r4++;
     }
-    shared1000.unk1B6 = (shared1000.unk28 + 1) / 2;
+    gEasyChatStruct->unk1B6 = (gEasyChatStruct->unk28 + 1) / 2;
 }
 
 void sub_80E6630(void)
@@ -456,9 +454,9 @@ void sub_80E6630(void)
         for (r3 = 0; row[r3] != EOS; r3++)
         {
             if (row[r3] != CHAR_SPACE)
-                shared1000.unk40[i][r3] = row[r3] + 0x46;
+                gEasyChatStruct->unk40[i][r3] = row[r3] + 0x46;
             else
-                shared1000.unk40[i][r3] = CHAR_SPACE;
+                gEasyChatStruct->unk40[i][r3] = CHAR_SPACE;
         }
     }
 }
@@ -467,15 +465,15 @@ void sub_80E6690(void)
 {
     u8 *pointers[] =
     {
-        shared1000.unk9C80, shared1000.unk9CC9,
-        shared1000.unk9D12, shared1000.unk9D5B,
+        gEasyChatStruct->unk9C80, gEasyChatStruct->unk9CC9,
+        gEasyChatStruct->unk9D12, gEasyChatStruct->unk9D5B,
     };
     u8 *r3;
     u16 i;
 
     for (i = 0; i < 2; i++)
     {
-        const struct EasyChatPrompt *prompt = &gUnknown_083DB6F4[gUnknown_083DB7C0[shared1000.unk8][i]];
+        const struct EasyChatPrompt *prompt = &gUnknown_083DB6F4[gUnknown_083DB7C0[gEasyChatStruct->unk8][i]];
 
         r3 = StringCopy(pointers[i * 2 + 0], prompt->text1);
         if (prompt->unk8)
@@ -491,10 +489,10 @@ void sub_80E6690(void)
     }
 
     for (i = 0; i < 0x24; i++)
-        shared1000.unk9DA4[i] = 0;
-    shared1000.unk9DA4[i] = 0xFF;
+        gEasyChatStruct->unk9DA4[i] = 0;
+    gEasyChatStruct->unk9DA4[i] = 0xFF;
 
-    r3 = shared1000.unk9F6E;
+    r3 = gEasyChatStruct->unk9F6E;
     r3[0] = EXT_CTRL_CODE_BEGIN;
     r3[1] = 0x11;
     r3[2] = 0xE0;
@@ -557,76 +555,76 @@ void InitEasyChatPhrases(void)
 
 void sub_80E682C(void (*func)(void))
 {
-    shared1000.unk20 = func;
-    shared1000.unk24 = 0;
+    gEasyChatStruct->unk20 = func;
+    gEasyChatStruct->unk24 = 0;
 }
 
 void sub_80E683C(void)
 {
     u16 i;
 
-    if (shared1000.unk26 == 0)
+    if (gEasyChatStruct->unk26 == 0)
     {
-        for (i = 0; i < shared1000.unk1B6; i++)
-            shared1000.unk1AA[i] = 2;
-        shared1000.unk1AA[i - 1] = shared1000.unk28 % 2;
-        if (shared1000.unk1AA[i - 1] == 0)
-            shared1000.unk1AA[i - 1] = 2;
+        for (i = 0; i < gEasyChatStruct->unk1B6; i++)
+            gEasyChatStruct->unk1AA[i] = 2;
+        gEasyChatStruct->unk1AA[i - 1] = gEasyChatStruct->unk28 % 2;
+        if (gEasyChatStruct->unk1AA[i - 1] == 0)
+            gEasyChatStruct->unk1AA[i - 1] = 2;
     }
     else
     {
-        shared1000.unk1AA[0] = 7;
-        shared1000.unk1AA[1] = 6;
-        shared1000.unk1AA[2] = 7;
-        shared1000.unk1AA[3] = 7;
+        gEasyChatStruct->unk1AA[0] = 7;
+        gEasyChatStruct->unk1AA[1] = 6;
+        gEasyChatStruct->unk1AA[2] = 7;
+        gEasyChatStruct->unk1AA[3] = 7;
     }
-    shared1000.unk1A8 = 0;
-    shared1000.unk1A9 = 0;
-    shared1000.unk1B5 = 0;
-    shared1000.unk1B7 = 0;
+    gEasyChatStruct->unk1A8 = 0;
+    gEasyChatStruct->unk1A9 = 0;
+    gEasyChatStruct->unk1B5 = 0;
+    gEasyChatStruct->unk1B7 = 0;
     sub_80E9A4C();
 }
 
 void sub_80E68E8(void)
 {
     sub_80EB0B0();
-    if (shared1000.unk26 == 0)
+    if (gEasyChatStruct->unk26 == 0)
     {
         u16 i;
         u8 r6;
 
-        r6 = shared1000.unk1B8;
-        shared1000.unk9A28 = (shared1000.unk4178[r6] + 1) / 2;
-        for (i = 0; i < shared1000.unk9A28; i++)
-            shared1000.unk99A6[i] = 2;
+        r6 = gEasyChatStruct->unk1B8;
+        gEasyChatStruct->unk9A28 = (gEasyChatStruct->unk4178[r6] + 1) / 2;
+        for (i = 0; i < gEasyChatStruct->unk9A28; i++)
+            gEasyChatStruct->unk99A6[i] = 2;
         i--;
-        shared1000.unk99A6[i] = shared1000.unk4178[r6] % 2;
-        if (shared1000.unk99A6[i] == 0)
-            shared1000.unk99A6[i] = 2;
+        gEasyChatStruct->unk99A6[i] = gEasyChatStruct->unk4178[r6] % 2;
+        if (gEasyChatStruct->unk99A6[i] == 0)
+            gEasyChatStruct->unk99A6[i] = 2;
     }
     else
     {
         u16 i;
         u8 r6;
 
-        r6 = shared1000.unk1B8;
-        shared1000.unk9A28 = (shared1000.unk4142[r6] + 1) / 2;
-        for (i = 0; i < shared1000.unk9A28; i++)
-            shared1000.unk99A6[i] = 2;
+        r6 = gEasyChatStruct->unk1B8;
+        gEasyChatStruct->unk9A28 = (gEasyChatStruct->unk4142[r6] + 1) / 2;
+        for (i = 0; i < gEasyChatStruct->unk9A28; i++)
+            gEasyChatStruct->unk99A6[i] = 2;
         i--;
-        shared1000.unk99A6[i] = shared1000.unk4142[r6] % 2;
-        if (shared1000.unk99A6[i] == 0)
-            shared1000.unk99A6[i] = 2;
+        gEasyChatStruct->unk99A6[i] = gEasyChatStruct->unk4142[r6] % 2;
+        if (gEasyChatStruct->unk99A6[i] == 0)
+            gEasyChatStruct->unk99A6[i] = 2;
     }
-    shared1000.unk99A4 = 0;
-    shared1000.unk99A5 = 0;
-    shared1000.unk9A29 = 0;
+    gEasyChatStruct->unk99A4 = 0;
+    gEasyChatStruct->unk99A5 = 0;
+    gEasyChatStruct->unk9A29 = 0;
     sub_80E9A4C();
 }
 
 void sub_80E69F8(void)
 {
-    switch (shared1000.unk8)
+    switch (gEasyChatStruct->unk8)
     {
     case 0:
     case 1:
@@ -637,7 +635,7 @@ void sub_80E69F8(void)
     case 9:
     case 13:
     default:
-        sub_80E9368(shared1000.unk8);
+        sub_80E9368(gEasyChatStruct->unk8);
         break;
     case 5:
     case 7:
@@ -645,8 +643,8 @@ void sub_80E69F8(void)
     case 10:
     case 11:
     case 12:
-        sub_80E9368(shared1000.unk8);
-        sub_80E8BF4(shared1000.unkB, shared1000.unk9);
+        sub_80E9368(gEasyChatStruct->unk8);
+        sub_80E8BF4(gEasyChatStruct->unkB, gEasyChatStruct->unk9);
         break;
     }
 }
@@ -662,7 +660,7 @@ void sub_80E6A6C(void)
 
 void sub_80E6A88(void)
 {
-    shared1000.unk20();
+    gEasyChatStruct->unk20();
     AnimateSprites();
     BuildOamBuffer();
     sub_80EAD08();
@@ -684,15 +682,15 @@ void sub_80E6AC4(void)
 
 void sub_80E6AE4(void)
 {
-    shared1000.unk87 = sub_80E75D8();
-    if (shared1000.unk87)
+    gEasyChatStruct->unk87 = sub_80E75D8();
+    if (gEasyChatStruct->unk87)
         PlaySE(SE_SELECT);
     if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
-        if (shared1000.unk86 == shared1000.unk84)
+        if (gEasyChatStruct->unk86 == gEasyChatStruct->unk84)
         {
-            switch (shared1000.unk85)
+            switch (gEasyChatStruct->unk85)
             {
             case 0:
                 sub_80E682C(sub_80E6BC0);
@@ -707,7 +705,7 @@ void sub_80E6AE4(void)
         }
         else
         {
-            shared1000.unk27 = shared1000.unk86 * shared1000.unk83 + shared1000.unk85;
+            gEasyChatStruct->unk27 = gEasyChatStruct->unk86 * gEasyChatStruct->unk83 + gEasyChatStruct->unk85;
             sub_80E7574();
             sub_80E682C(sub_80E6F68);
             return;
@@ -721,21 +719,21 @@ void sub_80E6AE4(void)
 
 void sub_80E6BC0(void)
 {
-    switch (shared1000.unk24)
+    switch (gEasyChatStruct->unk24)
     {
     case 0:
         sub_80E8398(2);
-        if (shared1000.unk8 == 6)
+        if (gEasyChatStruct->unk8 == 6)
         {
             sub_80E91D4(6);
-            shared1000.unk24 = 100;
+            gEasyChatStruct->unk24 = 100;
         }
         else
         {
             sub_80E91D4(2);
             DisplayYesNoMenu(23, 8, 1);
             MoveMenuCursor(1);
-            shared1000.unk24++;
+            gEasyChatStruct->unk24++;
         }
         break;
     case 1:
@@ -745,11 +743,11 @@ void sub_80E6BC0(void)
             sub_80E7D6C();
             sub_80E98C4();
             sub_80E95A4();
-            shared1000.unk24++;
+            gEasyChatStruct->unk24++;
             break;
         case -1:
         case 1:
-            shared1000.unk24++;
+            gEasyChatStruct->unk24++;
             break;
         }
         break;
@@ -766,25 +764,25 @@ void sub_80E6BC0(void)
 
 void sub_80E6C84(void)
 {
-    switch (shared1000.unk24)
+    switch (gEasyChatStruct->unk24)
     {
     case 0:
         sub_80E8398(2);
         sub_80E91D4(3);
         DisplayYesNoMenu(23, 8, 0);
         MoveMenuCursor(1);
-        if (shared1000.unk8 == 9
-         || shared1000.unk8 == 4
-         || shared1000.unk8 == 7
-         || shared1000.unk8 == 8
-         || shared1000.unk8 == 10
-         || shared1000.unk8 == 11
-         || shared1000.unk8 == 12
-         || shared1000.unk8 == 5
-         || shared1000.unk8 == 13)
-            shared1000.unk24 = 2;
+        if (gEasyChatStruct->unk8 == 9
+         || gEasyChatStruct->unk8 == 4
+         || gEasyChatStruct->unk8 == 7
+         || gEasyChatStruct->unk8 == 8
+         || gEasyChatStruct->unk8 == 10
+         || gEasyChatStruct->unk8 == 11
+         || gEasyChatStruct->unk8 == 12
+         || gEasyChatStruct->unk8 == 5
+         || gEasyChatStruct->unk8 == 13)
+            gEasyChatStruct->unk24 = 2;
         else
-            shared1000.unk24++;
+            gEasyChatStruct->unk24++;
         break;
     case 1:
         switch (ProcessMenuInputNoWrap_())
@@ -793,11 +791,11 @@ void sub_80E6C84(void)
             sub_80E91D4(4);
             DisplayYesNoMenu(23, 8, 0);
             MoveMenuCursor(1);
-            shared1000.unk24++;
+            gEasyChatStruct->unk24++;
             break;
         case -1:
         case 1:
-            shared1000.unk24 = 0xFF;
+            gEasyChatStruct->unk24 = 0xFF;
             break;
         }
         break;
@@ -810,7 +808,7 @@ void sub_80E6C84(void)
             break;
         case -1:
         case 1:
-            shared1000.unk24 = 0xFF;
+            gEasyChatStruct->unk24 = 0xFF;
             break;
         }
         break;
@@ -824,32 +822,32 @@ void sub_80E6C84(void)
 
 void sub_80E6D7C(void)
 {
-    switch (shared1000.unk24)
+    switch (gEasyChatStruct->unk24)
     {
     case 0:
         sub_80E8398(2);
         if (sub_80E8054())
         {
             sub_80E91D4(5);
-            shared1000.unk24 = 10;
+            gEasyChatStruct->unk24 = 10;
             break;
         }
-        if (shared1000.unk8 == 9)
+        if (gEasyChatStruct->unk8 == 9)
         {
             if (sub_80E7FA8() == 0)
             {
                 sub_80E91D4(8);
-                shared1000.unk24 = 10;
+                gEasyChatStruct->unk24 = 10;
                 break;
             }
-            if (shared1000.unkC[0] == 0xFFFF || shared1000.unkC[1] == 0xFFFF)
+            if (gEasyChatStruct->unkC[0] == 0xFFFF || gEasyChatStruct->unkC[1] == 0xFFFF)
             {
                 sub_80E91D4(9);
-                shared1000.unk24 = 10;
+                gEasyChatStruct->unk24 = 10;
                 break;
             }
         }
-        if (shared1000.unk8 == 4 && sub_80E7FA8() == 0)
+        if (gEasyChatStruct->unk8 == 4 && sub_80E7FA8() == 0)
         {
             sub_80E682C(sub_80E6C84);
         }
@@ -859,7 +857,7 @@ void sub_80E6D7C(void)
             sub_80E9744();
             DisplayYesNoMenu(23, 8, 0);
             MoveMenuCursor(0);
-            shared1000.unk24++;
+            gEasyChatStruct->unk24++;
         }
         break;
     case 1:
@@ -868,16 +866,16 @@ void sub_80E6D7C(void)
         case 0:
             gSpecialVar_Result = (sub_80E7FA8() != 0);
             sub_80E7D9C();
-            if (shared1000.unk8 == 0)
+            if (gEasyChatStruct->unk8 == 0)
                 gSpecialVar_0x8004 = sub_80E8094();
-            if (shared1000.unk8 == 9)  // dewford trend?
+            if (gEasyChatStruct->unk8 == 9)  // dewford trend?
             {
                 sub_80E81C0();
-                gSpecialVar_0x8004 = sub_80FA364(&shared1000.unk9C7C);
+                gSpecialVar_0x8004 = sub_80FA364(&gEasyChatStruct->unk9C7C);
             }
-            if (shared1000.unk8 == 13)
+            if (gEasyChatStruct->unk8 == 13)
             {
-                if (shared1000.unkC[0] == 0xFFFF || shared1000.unkC[1] == 0xFFFF)
+                if (gEasyChatStruct->unkC[0] == 0xFFFF || gEasyChatStruct->unkC[1] == 0xFFFF)
                     gSpecialVar_Result = 0;
                 gSpecialVar_0x8004 = sub_80E810C();
             }
@@ -887,9 +885,9 @@ void sub_80E6D7C(void)
         case 1:
             HandleDestroyMenuCursors();
             sub_80E81FC();
-            if (shared1000.unk8 == 6 && sub_80E7FA8() != 0)
+            if (gEasyChatStruct->unk8 == 6 && sub_80E7FA8() != 0)
             {
-                shared1000.unk24 = 100;
+                gEasyChatStruct->unk24 = 100;
             }
             else
             {
@@ -905,11 +903,11 @@ void sub_80E6D7C(void)
         break;
     case 100:
         sub_80E91D4(7);
-        shared1000.unk24++;
+        gEasyChatStruct->unk24++;
         // fall through
     case 101:
         if (gMain.newKeys & A_BUTTON)
-            shared1000.unk24++;
+            gEasyChatStruct->unk24++;
         break;
     case 102:
         sub_80E7E50();
@@ -921,7 +919,7 @@ void sub_80E6D7C(void)
 
 void sub_80E6F68(void)
 {
-    switch (shared1000.unk24)
+    switch (gEasyChatStruct->unk24)
     {
     case 0:
         sub_80E8398(1);
@@ -929,7 +927,7 @@ void sub_80E6F68(void)
         sub_80E683C();
         sub_80E9974();
         sub_80E9E98();
-        shared1000.unk24++;
+        gEasyChatStruct->unk24++;
         break;
     case 1:
         if (sub_80E9EA8() != 0)
@@ -945,31 +943,31 @@ void sub_80E6F68(void)
 
 void sub_80E6FC8(void)
 {
-    shared1000.unk96 = sub_80E77C8();
-    if (shared1000.unk1C0 != 0)
+    gEasyChatStruct->unk96 = sub_80E77C8();
+    if (gEasyChatStruct->unk1C0 != 0)
     {
         PlaySE(SE_SELECT);
-        shared1000.unk1C4 = sub_80E6FC8;
+        gEasyChatStruct->unk1C4 = sub_80E6FC8;
         sub_80E682C(sub_80E7458);
     }
     else
     {
-        if (shared1000.unk96)
+        if (gEasyChatStruct->unk96)
             PlaySE(SE_SELECT);
         if (gMain.newKeys & A_BUTTON)
         {
-            if (shared1000.unk1B7 != 0)
+            if (gEasyChatStruct->unk1B7 != 0)
             {
                 PlaySE(SE_SELECT);
-                switch (shared1000.unk1A8)
+                switch (gEasyChatStruct->unk1A8)
                 {
                 case 1:
                     sub_80E682C(sub_80E718C);
                     break;
                 case 2:
-                    if (shared1000.unk8 != 6)
+                    if (gEasyChatStruct->unk8 != 6)
                     {
-                        sub_80E7F00(shared1000.unk27, 0xFFFF);
+                        sub_80E7F00(gEasyChatStruct->unk27, 0xFFFF);
                         sub_80E7574();
                         sub_80E95A4();
                     }
@@ -981,8 +979,8 @@ void sub_80E6FC8(void)
             }
             else
             {
-                if (shared1000.unk26 == 0
-                 || shared1000.unk4142[shared1000.unk40[shared1000.unk1A8][shared1000.unk1A9]] != 0)
+                if (gEasyChatStruct->unk26 == 0
+                 || gEasyChatStruct->unk4142[gEasyChatStruct->unk40[gEasyChatStruct->unk1A8][gEasyChatStruct->unk1A9]] != 0)
                 {
                     PlaySE(SE_SELECT);
                     sub_80E7AD4();
@@ -1003,22 +1001,22 @@ void sub_80E6FC8(void)
 
 void sub_80E7114(void)
 {
-    switch (shared1000.unk24)
+    switch (gEasyChatStruct->unk24)
     {
     case 0:
         sub_80E8504();
         sub_80E9E98();
         sub_80E88F0();
         sub_80E8D8C(0);
-        shared1000.unk24++;
+        gEasyChatStruct->unk24++;
         break;
     case 1:
     case 2:
-        shared1000.unk24++;
+        gEasyChatStruct->unk24++;
         break;
     case 3:
         if (sub_80E9F50() != 0)
-            shared1000.unk24++;
+            gEasyChatStruct->unk24++;
         break;
     case 4:
         sub_80E682C(sub_80E6AC4);
@@ -1028,27 +1026,27 @@ void sub_80E7114(void)
 
 void sub_80E718C(void)
 {
-    switch (shared1000.unk24)
+    switch (gEasyChatStruct->unk24)
     {
     case 0:
         sub_80E8504();
         sub_80E9E98();
         sub_80E88F0();
-        shared1000.unk24++;
+        gEasyChatStruct->unk24++;
         sub_80E8D54();
         break;
     case 1:
         if (sub_80E9FD4() != 0)
         {
-            shared1000.unk26 = !shared1000.unk26;
+            gEasyChatStruct->unk26 = !gEasyChatStruct->unk26;
             sub_80E683C();
             sub_80E9974();
             sub_80E9E98();
-            shared1000.unk24++;
+            gEasyChatStruct->unk24++;
         }
         break;
     default:
-        shared1000.unk24++;
+        gEasyChatStruct->unk24++;
         break;
     case 8:
         if (sub_80EA014() != 0)
@@ -1063,10 +1061,10 @@ void sub_80E718C(void)
 
 void sub_80E7218(void)
 {
-    switch (shared1000.unk24)
+    switch (gEasyChatStruct->unk24)
     {
     default:
-        shared1000.unk24++;
+        gEasyChatStruct->unk24++;
         break;
     case 8:
         sub_80E8D8C(0);
@@ -1075,13 +1073,13 @@ void sub_80E7218(void)
         sub_80E68E8();
         sub_80E88F0();
         sub_80E9E98();
-        shared1000.unk24++;
+        gEasyChatStruct->unk24++;
         break;
     case 9:
         if (sub_80EA050() != 0)
         {
             sub_80E9C94();
-            shared1000.unk24++;
+            gEasyChatStruct->unk24++;
         }
         break;
     case 10:
@@ -1096,16 +1094,16 @@ void sub_80E7218(void)
 
 void sub_80E7294(void)
 {
-    shared1000.unk1B9 = sub_80E7B40();
-    if (shared1000.unk1C0 != 0)
+    gEasyChatStruct->unk1B9 = sub_80E7B40();
+    if (gEasyChatStruct->unk1C0 != 0)
     {
         PlaySE(SE_SELECT);
-        shared1000.unk1C4 = sub_80E7294;
+        gEasyChatStruct->unk1C4 = sub_80E7294;
         sub_80E682C(sub_80E7458);
     }
     else
     {
-        if (shared1000.unk1B9)
+        if (gEasyChatStruct->unk1B9)
             PlaySE(SE_SELECT);
         if (gMain.newKeys & A_BUTTON)
         {
@@ -1121,7 +1119,7 @@ void sub_80E7294(void)
 
 void sub_80E7324(void)
 {
-    switch (shared1000.unk24)
+    switch (gEasyChatStruct->unk24)
     {
     case 0:
         if (!sub_80E7DD0())
@@ -1132,22 +1130,22 @@ void sub_80E7324(void)
         {
             sub_80E88F0();
             sub_80E87CC(0);
-            shared1000.unk24++;
+            gEasyChatStruct->unk24++;
         }
         break;
     case 1:
-        shared1000.unk24++;
+        gEasyChatStruct->unk24++;
         break;
     case 2:
         sub_80E9E98();
-        shared1000.unk24++;
+        gEasyChatStruct->unk24++;
         break;
     case 3:
         if (sub_80EA184() != 0)
-            shared1000.unk24++;
+            gEasyChatStruct->unk24++;
         break;
     case 4:
-        if (shared1000.unk8 == 6 && sub_80E7FA8() != 0)
+        if (gEasyChatStruct->unk8 == 6 && sub_80E7FA8() != 0)
             sub_80E682C(sub_80E6D7C);
         else
             sub_80E682C(sub_80E6AC4);
@@ -1157,30 +1155,30 @@ void sub_80E7324(void)
 
 void sub_80E73D0(void)
 {
-    switch (shared1000.unk24)
+    switch (gEasyChatStruct->unk24)
     {
     case 0:
         sub_80E87CC(0);
         sub_80E88F0();
-        shared1000.unk24++;
+        gEasyChatStruct->unk24++;
         break;
     case 1:
         sub_80E9AD4();
         sub_80E9E98();
-        shared1000.unk24++;
+        gEasyChatStruct->unk24++;
         break;
     case 2:
         if (sub_80EA0E4() != 0)
         {
             sub_80E8D8C(1);
             sub_80E9A14();
-            shared1000.unk24++;
+            gEasyChatStruct->unk24++;
         }
         break;
     case 3:
         sub_80E8420();
         sub_80E8958(0);
-        shared1000.unk24++;
+        gEasyChatStruct->unk24++;
         break;
     case 4:
         sub_80E9974();
@@ -1191,34 +1189,34 @@ void sub_80E73D0(void)
 
 void sub_80E7458(void)
 {
-    switch (shared1000.unk24)
+    switch (gEasyChatStruct->unk24)
     {
     case 0:
-        if (shared1000.unk1C4 == sub_80E6FC8)
+        if (gEasyChatStruct->unk1C4 == sub_80E6FC8)
             sub_80E9D7C();
         else
             sub_80E9D00();
-        sub_80E9E08(shared1000.unk1BE);
-        shared1000.unk24++;
+        sub_80E9E08(gEasyChatStruct->unk1BE);
+        gEasyChatStruct->unk24++;
         break;
     case 1:
         if (sub_80E9E54())
         {
-            if (shared1000.unk1C4 == sub_80E6FC8)
+            if (gEasyChatStruct->unk1C4 == sub_80E6FC8)
             {
                 sub_80E9D7C();
-                shared1000.unk1B5 += shared1000.unk1C0;
+                gEasyChatStruct->unk1B5 += gEasyChatStruct->unk1C0;
                 sub_80E7A98();
-                shared1000.unk96 = TRUE;
+                gEasyChatStruct->unk96 = TRUE;
             }
             else
             {
-                shared1000.unk9A29 += shared1000.unk1C0;
+                gEasyChatStruct->unk9A29 += gEasyChatStruct->unk1C0;
                 sub_80E7D30();
-                shared1000.unk1B9 = 1;
+                gEasyChatStruct->unk1B9 = 1;
             }
-            shared1000.unk1BE = 2;
-            sub_80E682C(shared1000.unk1C4);
+            gEasyChatStruct->unk1BE = 2;
+            sub_80E682C(gEasyChatStruct->unk1C4);
         }
         break;
     }
@@ -1226,28 +1224,28 @@ void sub_80E7458(void)
 
 void sub_80E752C(void)
 {
-    switch (shared1000.unk24)
+    switch (gEasyChatStruct->unk24)
     {
     case 0:
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
-        shared1000.unk24++;
+        gEasyChatStruct->unk24++;
         break;
     case 1:
         if (!UpdatePaletteFade())
-            SetMainCallback2(shared1000.unk0);
+            SetMainCallback2(gEasyChatStruct->unk0);
         break;
     }
 }
 
 void sub_80E7574(void)
 {
-    if (shared1000.unk8 == 1
-     && shared1000.unk7E[shared1000.unk86] == 2
-     && sub_80EB2D4(shared1000.unkC[shared1000.unk27]) != 7)
-        shared1000.unk7D = 1;
+    if (gEasyChatStruct->unk8 == 1
+     && gEasyChatStruct->unk7E[gEasyChatStruct->unk86] == 2
+     && sub_80EB2D4(gEasyChatStruct->unkC[gEasyChatStruct->unk27]) != 7)
+        gEasyChatStruct->unk7D = 1;
     else
-        shared1000.unk7D = 0;
-    shared1000.unk7D = 0;  // What the hell?
+        gEasyChatStruct->unk7D = 0;
+    gEasyChatStruct->unk7D = 0;  // What the hell?
 }
 
 bool8 sub_80E75D8(void)
@@ -1257,45 +1255,45 @@ bool8 sub_80E75D8(void)
 
     if (gMain.newKeys & START_BUTTON)
     {
-        shared1000.unk86 = shared1000.unk84;
-        shared1000.unk85 = 2;
+        gEasyChatStruct->unk86 = gEasyChatStruct->unk84;
+        gEasyChatStruct->unk85 = 2;
         return TRUE;
     }
 
     if (gMain.newAndRepeatedKeys & DPAD_UP)
     {
-        shared1000.unk86--;
-        if (shared1000.unk86 < 0)
-            shared1000.unk86 = shared1000.unk84;
+        gEasyChatStruct->unk86--;
+        if (gEasyChatStruct->unk86 < 0)
+            gEasyChatStruct->unk86 = gEasyChatStruct->unk84;
         pressedUpDown = TRUE;
     }
     else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
     {
-        shared1000.unk86++;
-        if (shared1000.unk86 > shared1000.unk84)
-            shared1000.unk86 = 0;
+        gEasyChatStruct->unk86++;
+        if (gEasyChatStruct->unk86 > gEasyChatStruct->unk84)
+            gEasyChatStruct->unk86 = 0;
         pressedUpDown = TRUE;
     }
 
     if (pressedUpDown)
     {
-        if (shared1000.unk9 == 2)
+        if (gEasyChatStruct->unk9 == 2)
         {
-            if (shared1000.unk86 == shared1000.unk84)
-                shared1000.unk85 = 2;
+            if (gEasyChatStruct->unk86 == gEasyChatStruct->unk84)
+                gEasyChatStruct->unk85 = 2;
             else
-                shared1000.unk85 = 0;
+                gEasyChatStruct->unk85 = 0;
             return TRUE;
         }
         else
         {
-            if (shared1000.unk85 >= shared1000.unk83)
-                shared1000.unk85 = shared1000.unk83 - 1;
-            if (shared1000.unk86 != shared1000.unk84)
+            if (gEasyChatStruct->unk85 >= gEasyChatStruct->unk83)
+                gEasyChatStruct->unk85 = gEasyChatStruct->unk83 - 1;
+            if (gEasyChatStruct->unk86 != gEasyChatStruct->unk84)
             {
-                r0 = shared1000.unk86 * shared1000.unk83 + shared1000.unk85;
-                if (r0 >= shared1000.unkA)
-                    shared1000.unk85 = r0 - shared1000.unkA;
+                r0 = gEasyChatStruct->unk86 * gEasyChatStruct->unk83 + gEasyChatStruct->unk85;
+                if (r0 >= gEasyChatStruct->unkA)
+                    gEasyChatStruct->unk85 = r0 - gEasyChatStruct->unkA;
             }
             return TRUE;
         }
@@ -1304,36 +1302,36 @@ bool8 sub_80E75D8(void)
     {
         if (gMain.newAndRepeatedKeys & DPAD_LEFT)
         {
-            if (--shared1000.unk85 < 0)
+            if (--gEasyChatStruct->unk85 < 0)
             {
-                if (shared1000.unk86 == shared1000.unk84)
+                if (gEasyChatStruct->unk86 == gEasyChatStruct->unk84)
                 {
-                    shared1000.unk85 = 2;
+                    gEasyChatStruct->unk85 = 2;
                 }
                 else
                 {
-                    shared1000.unk85 = shared1000.unk83 - 1;
-                    r0 = shared1000.unk86 * shared1000.unk83 + shared1000.unk85;
-                    if (r0 >= shared1000.unkA)
-                        shared1000.unk85 = r0 - shared1000.unkA;
+                    gEasyChatStruct->unk85 = gEasyChatStruct->unk83 - 1;
+                    r0 = gEasyChatStruct->unk86 * gEasyChatStruct->unk83 + gEasyChatStruct->unk85;
+                    if (r0 >= gEasyChatStruct->unkA)
+                        gEasyChatStruct->unk85 = r0 - gEasyChatStruct->unkA;
                 }
             }
             return TRUE;
         }
         if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
         {
-            if (shared1000.unk86 == shared1000.unk84)
+            if (gEasyChatStruct->unk86 == gEasyChatStruct->unk84)
             {
-                if (++shared1000.unk85 > 2)
-                    shared1000.unk85 = 0;
+                if (++gEasyChatStruct->unk85 > 2)
+                    gEasyChatStruct->unk85 = 0;
             }
             else
             {
-                if (++shared1000.unk85 >= shared1000.unk83)
-                    shared1000.unk85 = 0;
-                r0 = shared1000.unk86 * shared1000.unk83 + shared1000.unk85;
-                if (r0 >= shared1000.unkA)
-                    shared1000.unk85 = r0 - shared1000.unkA;
+                if (++gEasyChatStruct->unk85 >= gEasyChatStruct->unk83)
+                    gEasyChatStruct->unk85 = 0;
+                r0 = gEasyChatStruct->unk86 * gEasyChatStruct->unk83 + gEasyChatStruct->unk85;
+                if (r0 >= gEasyChatStruct->unkA)
+                    gEasyChatStruct->unk85 = r0 - gEasyChatStruct->unkA;
             }
             return TRUE;
         }
@@ -1346,41 +1344,41 @@ bool8 sub_80E77C8(void)
     bool8 pressedLeftRight = FALSE;
     bool8 pressedUpDown;
 
-    if (shared1000.unk1B7 != 0)
+    if (gEasyChatStruct->unk1B7 != 0)
     {
         if (gMain.newAndRepeatedKeys & DPAD_UP)
         {
-            shared1000.unk1A8--;
-            if (shared1000.unk1A8 < 1)
-                shared1000.unk1A8 = 3;
+            gEasyChatStruct->unk1A8--;
+            if (gEasyChatStruct->unk1A8 < 1)
+                gEasyChatStruct->unk1A8 = 3;
             return TRUE;
         }
         else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
         {
-            shared1000.unk1A8++;
-            if (shared1000.unk1A8 > 3)
-                shared1000.unk1A8 = 1;
+            gEasyChatStruct->unk1A8++;
+            if (gEasyChatStruct->unk1A8 > 3)
+                gEasyChatStruct->unk1A8 = 1;
             return TRUE;
         }
     }
     else
     {
-        if (shared1000.unk26 == 1)
+        if (gEasyChatStruct->unk26 == 1)
         {
             pressedUpDown = FALSE;
 
             if (gMain.newAndRepeatedKeys & DPAD_UP)
             {
-                shared1000.unk1A8--;
-                if (shared1000.unk1A8 < 0)
-                    shared1000.unk1A8 = 3;
+                gEasyChatStruct->unk1A8--;
+                if (gEasyChatStruct->unk1A8 < 0)
+                    gEasyChatStruct->unk1A8 = 3;
                 pressedUpDown = TRUE;
             }
             else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
             {
-                shared1000.unk1A8++;
-                if (shared1000.unk1A8 > 3)
-                    shared1000.unk1A8 = 0;
+                gEasyChatStruct->unk1A8++;
+                if (gEasyChatStruct->unk1A8 > 3)
+                    gEasyChatStruct->unk1A8 = 0;
                 pressedUpDown = TRUE;
             }
 
@@ -1393,30 +1391,30 @@ bool8 sub_80E77C8(void)
         else
         {
             pressedUpDown = FALSE;
-            shared1000.unk1C0 = 0;
+            gEasyChatStruct->unk1C0 = 0;
 
             if (gMain.newAndRepeatedKeys & DPAD_UP)
             {
-                if (shared1000.unk1A8 == 0)
+                if (gEasyChatStruct->unk1A8 == 0)
                     return FALSE;
-                shared1000.unk1A8--;
-                if (shared1000.unk1A8 < shared1000.unk1B5)
-                    shared1000.unk1C0 = -1;
+                gEasyChatStruct->unk1A8--;
+                if (gEasyChatStruct->unk1A8 < gEasyChatStruct->unk1B5)
+                    gEasyChatStruct->unk1C0 = -1;
                 pressedUpDown = TRUE;
             }
             else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
             {
-                if (shared1000.unk1A8 >= shared1000.unk1B6 - 1)
+                if (gEasyChatStruct->unk1A8 >= gEasyChatStruct->unk1B6 - 1)
                     return FALSE;
-                shared1000.unk1A8++;
-                if (shared1000.unk1A8 > shared1000.unk1B5 + 3)
-                    shared1000.unk1C0 = 1;
+                gEasyChatStruct->unk1A8++;
+                if (gEasyChatStruct->unk1A8 > gEasyChatStruct->unk1B5 + 3)
+                    gEasyChatStruct->unk1C0 = 1;
                 pressedUpDown = TRUE;
             }
 
             if (pressedUpDown)
             {
-                if (shared1000.unk1C0 == 0)
+                if (gEasyChatStruct->unk1C0 == 0)
                 {
                     sub_80E7A98();
                     return TRUE;
@@ -1428,41 +1426,41 @@ bool8 sub_80E77C8(void)
 
     if (gMain.newAndRepeatedKeys & DPAD_LEFT)
     {
-        if (shared1000.unk1A9 != 0)
-            shared1000.unk1A9--;
+        if (gEasyChatStruct->unk1A9 != 0)
+            gEasyChatStruct->unk1A9--;
         else
-            shared1000.unk1A9 = shared1000.unk1AA[shared1000.unk1A8];
+            gEasyChatStruct->unk1A9 = gEasyChatStruct->unk1AA[gEasyChatStruct->unk1A8];
         pressedLeftRight = TRUE;
     }
     else if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
     {
-        if (shared1000.unk1B7 != 0
-         || shared1000.unk1A9 == shared1000.unk1AA[shared1000.unk1A8])
-            shared1000.unk1A9 = 0;
+        if (gEasyChatStruct->unk1B7 != 0
+         || gEasyChatStruct->unk1A9 == gEasyChatStruct->unk1AA[gEasyChatStruct->unk1A8])
+            gEasyChatStruct->unk1A9 = 0;
         else
-            shared1000.unk1A9++;
+            gEasyChatStruct->unk1A9++;
         pressedLeftRight = TRUE;
     }
 
     if (pressedLeftRight)
     {
-        s8 r9 = shared1000.unk1B7;
+        s8 r9 = gEasyChatStruct->unk1B7;
 
-        shared1000.unk1B7 = (shared1000.unk1A9 == shared1000.unk1AA[shared1000.unk1A8]);
-        if (shared1000.unk1B7 != 0)
+        gEasyChatStruct->unk1B7 = (gEasyChatStruct->unk1A9 == gEasyChatStruct->unk1AA[gEasyChatStruct->unk1A8]);
+        if (gEasyChatStruct->unk1B7 != 0)
         {
-            shared1000.unk1A8 -= shared1000.unk1B5;
-            if (shared1000.unk1A8 == 0)
+            gEasyChatStruct->unk1A8 -= gEasyChatStruct->unk1B5;
+            if (gEasyChatStruct->unk1A8 == 0)
             {
-                shared1000.unk1A8 = 1;
-                shared1000.unk1A9 = shared1000.unk1AA[shared1000.unk1A8];
+                gEasyChatStruct->unk1A8 = 1;
+                gEasyChatStruct->unk1A9 = gEasyChatStruct->unk1AA[gEasyChatStruct->unk1A8];
             }
         }
         else if (r9 != 0)
         {
-            shared1000.unk1A8 += shared1000.unk1B5;
-            if (shared1000.unk1A9 != 0)
-                shared1000.unk1A9 = shared1000.unk1AA[shared1000.unk1A8] - 1;
+            gEasyChatStruct->unk1A8 += gEasyChatStruct->unk1B5;
+            if (gEasyChatStruct->unk1A9 != 0)
+                gEasyChatStruct->unk1A9 = gEasyChatStruct->unk1AA[gEasyChatStruct->unk1A8] - 1;
         }
         return TRUE;
     }
@@ -1472,43 +1470,43 @@ bool8 sub_80E77C8(void)
 
 void sub_80E7A98(void)
 {
-    if (shared1000.unk1A9 >= shared1000.unk1AA[shared1000.unk1A8])
-        shared1000.unk1A9 = shared1000.unk1AA[shared1000.unk1A8] - 1;
+    if (gEasyChatStruct->unk1A9 >= gEasyChatStruct->unk1AA[gEasyChatStruct->unk1A8])
+        gEasyChatStruct->unk1A9 = gEasyChatStruct->unk1AA[gEasyChatStruct->unk1A8] - 1;
 }
 
 void sub_80E7AD4(void)
 {
-    if (shared1000.unk26 == 0)
-        shared1000.unk1B8 = shared1000.unk2A[shared1000.unk1A8][shared1000.unk1A9];
+    if (gEasyChatStruct->unk26 == 0)
+        gEasyChatStruct->unk1B8 = gEasyChatStruct->unk2A[gEasyChatStruct->unk1A8][gEasyChatStruct->unk1A9];
     else
-        shared1000.unk1B8 = shared1000.unk40[shared1000.unk1A8][shared1000.unk1A9];
+        gEasyChatStruct->unk1B8 = gEasyChatStruct->unk40[gEasyChatStruct->unk1A8][gEasyChatStruct->unk1A9];
 }
 
 bool8 sub_80E7B40(void)
 {
     bool8 pressedUpDown = FALSE;
 
-    shared1000.unk1C0 = 0;
+    gEasyChatStruct->unk1C0 = 0;
     if (gMain.newAndRepeatedKeys & DPAD_UP)
     {
-        if (shared1000.unk99A4 == 0)
+        if (gEasyChatStruct->unk99A4 == 0)
             return FALSE;
-        shared1000.unk99A4--;
-        if (shared1000.unk99A4 < shared1000.unk9A29)
+        gEasyChatStruct->unk99A4--;
+        if (gEasyChatStruct->unk99A4 < gEasyChatStruct->unk9A29)
         {
-            shared1000.unk1C0 = -1;
+            gEasyChatStruct->unk1C0 = -1;
             return FALSE;
         }
         pressedUpDown = TRUE;
     }
     else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
     {
-        if (shared1000.unk99A4 >= shared1000.unk9A28 - 1)
+        if (gEasyChatStruct->unk99A4 >= gEasyChatStruct->unk9A28 - 1)
             return FALSE;
-        shared1000.unk99A4++;
-        if (shared1000.unk99A4 >= shared1000.unk9A29 + 4)
+        gEasyChatStruct->unk99A4++;
+        if (gEasyChatStruct->unk99A4 >= gEasyChatStruct->unk9A29 + 4)
         {
-            shared1000.unk1C0 = 1;
+            gEasyChatStruct->unk1C0 = 1;
             return FALSE;
         }
         pressedUpDown = TRUE;
@@ -1522,40 +1520,40 @@ bool8 sub_80E7B40(void)
 
     if (gMain.newAndRepeatedKeys & DPAD_LEFT)
     {
-        shared1000.unk99A5--;
-        if (shared1000.unk99A5 < 0)
-            shared1000.unk99A5 = shared1000.unk99A6[shared1000.unk99A4] - 1;
+        gEasyChatStruct->unk99A5--;
+        if (gEasyChatStruct->unk99A5 < 0)
+            gEasyChatStruct->unk99A5 = gEasyChatStruct->unk99A6[gEasyChatStruct->unk99A4] - 1;
         return TRUE;
     }
     else if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
     {
-        shared1000.unk99A5++;
-        if (shared1000.unk99A5 >= shared1000.unk99A6[shared1000.unk99A4])
-            shared1000.unk99A5 = 0;
+        gEasyChatStruct->unk99A5++;
+        if (gEasyChatStruct->unk99A5 >= gEasyChatStruct->unk99A6[gEasyChatStruct->unk99A4])
+            gEasyChatStruct->unk99A5 = 0;
         return TRUE;
     }
 
     if (gMain.newKeys & START_BUTTON)
     {
-        if (shared1000.unk9A29 != 0)
+        if (gEasyChatStruct->unk9A29 != 0)
         {
-            shared1000.unk1C0 = -shared1000.unk9A29;
-            if (shared1000.unk1C0 < -4)
-                shared1000.unk1C0 = -4;
+            gEasyChatStruct->unk1C0 = -gEasyChatStruct->unk9A29;
+            if (gEasyChatStruct->unk1C0 < -4)
+                gEasyChatStruct->unk1C0 = -4;
         }
-        shared1000.unk99A4 += shared1000.unk1C0;
-        shared1000.unk1BE = 4;
+        gEasyChatStruct->unk99A4 += gEasyChatStruct->unk1C0;
+        gEasyChatStruct->unk1BE = 4;
     }
     else if (gMain.newKeys & SELECT_BUTTON)
     {
-        if (shared1000.unk9A29 < shared1000.unk9A28 - 4)
+        if (gEasyChatStruct->unk9A29 < gEasyChatStruct->unk9A28 - 4)
         {
-            shared1000.unk1C0 = shared1000.unk9A28 - 4 - shared1000.unk9A29;
-            if (shared1000.unk1C0 > 4)
-                shared1000.unk1C0 = 4;
+            gEasyChatStruct->unk1C0 = gEasyChatStruct->unk9A28 - 4 - gEasyChatStruct->unk9A29;
+            if (gEasyChatStruct->unk1C0 > 4)
+                gEasyChatStruct->unk1C0 = 4;
         }
-        shared1000.unk99A4 += shared1000.unk1C0;
-        shared1000.unk1BE = 4;
+        gEasyChatStruct->unk99A4 += gEasyChatStruct->unk1C0;
+        gEasyChatStruct->unk1BE = 4;
     }
 
     return FALSE;
@@ -1563,15 +1561,15 @@ bool8 sub_80E7B40(void)
 
 void sub_80E7D30(void)
 {
-    if (shared1000.unk99A5 >= shared1000.unk99A6[shared1000.unk99A4])
-        shared1000.unk99A5 = shared1000.unk99A6[shared1000.unk99A4] - 1;
+    if (gEasyChatStruct->unk99A5 >= gEasyChatStruct->unk99A6[gEasyChatStruct->unk99A4])
+        gEasyChatStruct->unk99A5 = gEasyChatStruct->unk99A6[gEasyChatStruct->unk99A4] - 1;
 }
 
 void sub_80E7D6C(void)
 {
     u16 i;
 
-    for (i = 0; i < shared1000.unkA; i++)
+    for (i = 0; i < gEasyChatStruct->unkA; i++)
         sub_80E7F00(i, 0xFFFF);
 }
 
@@ -1579,20 +1577,20 @@ void sub_80E7D9C(void)
 {
     u16 i;
 
-    for (i = 0; i < shared1000.unkA; i++)
-        shared1000.unk4[i] = shared1000.unkC[i];
+    for (i = 0; i < gEasyChatStruct->unkA; i++)
+        gEasyChatStruct->unk4[i] = gEasyChatStruct->unkC[i];
 }
 
 bool8 sub_80E7DD0(void)
 {
-    u16 r4 = shared1000.unk9A2A[shared1000.unk99A4][shared1000.unk99A5];
+    u16 r4 = gEasyChatStruct->unk9A2A[gEasyChatStruct->unk99A4][gEasyChatStruct->unk99A5];
 
-    if (shared1000.unk7D != 0
-     && shared1000.unk7E[shared1000.unk86] > 1
+    if (gEasyChatStruct->unk7D != 0
+     && gEasyChatStruct->unk7E[gEasyChatStruct->unk86] > 1
      && sub_80EB2D4(r4) == 7)
         return FALSE;
 
-    sub_80E7F00(shared1000.unk27, r4);
+    sub_80E7F00(gEasyChatStruct->unk27, r4);
     sub_80E95A4();
     return TRUE;
 }
@@ -1603,13 +1601,13 @@ void sub_80E7E50(void)
     u16 i;
     u16 j;
 
-    for (i = 0; i < shared1000.unk84; i++)
+    for (i = 0; i < gEasyChatStruct->unk84; i++)
     {
-        shared1000.unk7E[i] = 0;
-        for (j = 0; j < shared1000.unk83; j++)
+        gEasyChatStruct->unk7E[i] = 0;
+        for (j = 0; j < gEasyChatStruct->unk83; j++)
         {
-            shared1000.unkC[r5] = shared1000.unk4[r5];
-            shared1000.unk8C[i][j] = 0;
+            gEasyChatStruct->unkC[r5] = gEasyChatStruct->unk4[r5];
+            gEasyChatStruct->unk8C[i][j] = 0;
             r5++;
         }
     }
@@ -1617,24 +1615,24 @@ void sub_80E7E50(void)
 
 void sub_80E7F00(u16 a, u16 b)
 {
-    u16 r5 = a / shared1000.unk83;
-    u16 r8 = a % shared1000.unk83;
-    u16 r4 = sub_80EB2D4(shared1000.unkC[a]);
+    u16 r5 = a / gEasyChatStruct->unk83;
+    u16 r8 = a % gEasyChatStruct->unk83;
+    u16 r4 = sub_80EB2D4(gEasyChatStruct->unkC[a]);
     u16 r3 = sub_80EB2D4(b);
 
     if (r4 == 7)
     {
         if (r3 != 7)
-            shared1000.unk7E[r5]--;
+            gEasyChatStruct->unk7E[r5]--;
     }
     else
     {
         if (r3 == 7)
-            shared1000.unk7E[r5]++;
+            gEasyChatStruct->unk7E[r5]++;
     }
     r3 = 0;
-    shared1000.unk8C[r5][r8] = r3;
-    shared1000.unkC[a] = b;
+    gEasyChatStruct->unk8C[r5][r8] = r3;
+    gEasyChatStruct->unkC[a] = b;
 }
 
 u8 sub_80E7FA8(void)
@@ -1644,12 +1642,12 @@ u8 sub_80E7FA8(void)
     u8 *r1;
     u8 *r2;
 
-    for (i = 0; i < shared1000.unkA; i++)
+    for (i = 0; i < gEasyChatStruct->unkA; i++)
     {
-        sub_80EB218(shared1000.unk9E14, shared1000.unk4[i], 0);
-        sub_80EB218(shared1000.unk9E41, shared1000.unkC[i], 0);
-        r1 = shared1000.unk9E14;
-        r2 = shared1000.unk9E41;
+        sub_80EB218(gEasyChatStruct->unk9E14, gEasyChatStruct->unk4[i], 0);
+        sub_80EB218(gEasyChatStruct->unk9E41, gEasyChatStruct->unkC[i], 0);
+        r1 = gEasyChatStruct->unk9E14;
+        r2 = gEasyChatStruct->unk9E41;
         while (*r1 == *r2 && *r1 != 0xFF)
         {
             r1++;
@@ -1665,9 +1663,9 @@ bool8 sub_80E8054(void)
 {
     u16 i;
 
-    for (i = 0; i < shared1000.unkA; i++)
+    for (i = 0; i < gEasyChatStruct->unkA; i++)
     {
-        if (shared1000.unkC[i] != 0xFFFF)
+        if (gEasyChatStruct->unkC[i] != 0xFFFF)
             return FALSE;
     }
     return TRUE;
@@ -1682,10 +1680,10 @@ bool8 sub_80E8094(void)
 
     for (i = 0; i < 4; i++)
     {
-        sub_80EB218(shared1000.unk9E14, shared1000.unkC[i], 0);
-        sub_80EB218(shared1000.unk9E41, gMysteryEventPhrase[i], 0);
-        r3 = shared1000.unk9E14;
-        r4 = shared1000.unk9E41;
+        sub_80EB218(gEasyChatStruct->unk9E14, gEasyChatStruct->unkC[i], 0);
+        sub_80EB218(gEasyChatStruct->unk9E41, gMysteryEventPhrase[i], 0);
+        r3 = gEasyChatStruct->unk9E14;
+        r4 = gEasyChatStruct->unk9E41;
         while (*r3 != 0xFF && *r4 != 0xFF)
         {
             if (*r3++ != *r4++)
@@ -1706,16 +1704,16 @@ u8 sub_80E810C(void)
         u8 *ptr;
         u8 *r3;
 
-        ptr = sub_80EB218(shared1000.unk9E6E, shared1000.unkC[0], 0);
+        ptr = sub_80EB218(gEasyChatStruct->unk9E6E, gEasyChatStruct->unkC[0], 0);
         *ptr++ = CHAR_SPACE;
-        sub_80EB218(ptr, shared1000.unkC[1], 0);
+        sub_80EB218(ptr, gEasyChatStruct->unkC[1], 0);
 
-        ptr = sub_80EB218(shared1000.unk9EEE, gBerryMasterWifePhrases[i][0], 0);
+        ptr = sub_80EB218(gEasyChatStruct->unk9EEE, gBerryMasterWifePhrases[i][0], 0);
         *ptr++ = CHAR_SPACE;
         sub_80EB218(ptr, gBerryMasterWifePhrases[i][1], 0);
 
-        ptr = shared1000.unk9E6E;
-        r3 = shared1000.unk9EEE;
+        ptr = gEasyChatStruct->unk9E6E;
+        r3 = gEasyChatStruct->unk9EEE;
         while (*ptr != EOS && *r3 != EOS)
         {
             if (*ptr++ != *r3++)
@@ -1731,9 +1729,9 @@ void sub_80E81C0(void)
 {
     u8 *ptr;
 
-    ptr = sub_80EB218(gStringVar2, shared1000.unk9C7C, 0);
+    ptr = sub_80EB218(gStringVar2, gEasyChatStruct->unk9C7C, 0);
     *ptr++ = CHAR_SPACE;
-    sub_80EB218(ptr, shared1000.unk9C7E, 0);
+    sub_80EB218(ptr, gEasyChatStruct->unk9C7E, 0);
 }
 
 void sub_80E81FC(void)
