@@ -337,7 +337,7 @@ void RemoveFieldObjectInternal(struct MapObject *);
 u8 SpawnSpecialFieldObject(struct MapObjectTemplate *);
 u8 show_sprite(u8, u8, u8);
 void MakeObjectTemplateFromFieldObjectTemplate(struct MapObjectTemplate *mapObjTemplate, struct SpriteTemplate *sprTemplate, const struct SubspriteTable **subspriteTables);
-u8 AddPseudoFieldObject(u16 graphicsId, void (*callback)(struct Sprite *), s16 c, s16 d, u8 subpriority);
+u8 AddPseudoFieldObject(u16 graphicsId, void (*callback)(struct Sprite *), s16 x, s16 y, u8 subpriority);
 u8 sub_805B410(u8, u8, s16, s16, u8, u8);
 void sub_805B55C(s16 a, s16 b);
 void sub_805B710(u16 i, u16 i1);
