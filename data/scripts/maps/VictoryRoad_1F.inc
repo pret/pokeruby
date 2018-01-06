@@ -3,8 +3,7 @@ VictoryRoad_1F_MapScripts:: @ 815DE83
 	.byte 0
 
 VictoryRoad_1F_MapScript1_15DE89:: @ 815DE89
-	checkflag FLAG_DEFEATED_WALLY_VICTORY_ROAD
-	call_if 1, VictoryRoad_1F_EventScript_15DE93
+	call_if_set FLAG_DEFEATED_WALLY_VICTORY_ROAD, VictoryRoad_1F_EventScript_15DE93
 	end
 
 VictoryRoad_1F_EventScript_15DE93:: @ 815DE93

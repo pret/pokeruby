@@ -6,7 +6,7 @@ Route112_CableCarStation_MapScripts:: @ 815C033
 Route112_CableCarStation_MapScript1_15C03E:: @ 815C03E
 	setescapewarp MAP_ROUTE112, 255, 28, 28
 	compare VAR_CABLE_CAR_STATION_STATE, 2
-	call_if 1, Route112_CableCarStation_EventScript_15C052
+	call_if_eq Route112_CableCarStation_EventScript_15C052
 	end
 
 Route112_CableCarStation_EventScript_15C052:: @ 815C052

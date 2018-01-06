@@ -4,8 +4,7 @@ MauvilleCity_House1_MapScripts:: @ 81569FC
 MauvilleCity_House1_EventScript_1569FD:: @ 81569FD
 	lock
 	faceplayer
-	checkflag FLAG_RECEIVED_HM06
-	goto_if_eq MauvilleCity_House1_EventScript_156A29
+	goto_if_set FLAG_RECEIVED_HM06, MauvilleCity_House1_EventScript_156A29
 	msgbox MauvilleCity_House1_Text_181B1A, 4
 	giveitem_std ITEM_HM06
 	setflag FLAG_RECEIVED_HM06

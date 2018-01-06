@@ -410,8 +410,7 @@ gUnknown_0815F36C:: @ 815F36C
 EventScript_15F384:
 	message UnknownString_81A3A87
 	waitmessage
-	checkflag FLAG_DECORATION_16
-	goto_if_eq EventScript_15F3A0
+	goto_if_set FLAG_DECORATION_16, EventScript_15F3A0
 	goto EventScript_15F3E2
 	end
 
@@ -954,7 +953,7 @@ gUnknown_0819F818:: @ 819F818
 	waitmovement 0
 	specialvar RESULT, ScrSpecial_HasTrainerBeenFought
 	compare RESULT, 0
-	goto_if 5, EventScript_19F83F
+	goto_if_ne EventScript_19F83F
 	special PlayTrainerEncounterMusic
 	special sub_8082524
 	goto EventScript_19F8F2
@@ -968,10 +967,10 @@ gUnknown_0819F840:: @ 819F840
 	call EventScript_19F8E5
 	specialvar RESULT, ScrSpecial_HasTrainerBeenFought
 	compare RESULT, 0
-	goto_if 5, EventScript_19F877
+	goto_if_ne EventScript_19F877
 	special CheckForAlivePartyMons
 	compare RESULT, 0
-	goto_if 5, EventScript_19F870
+	goto_if_ne EventScript_19F870
 	special PlayTrainerEncounterMusic
 	special sub_8082524
 	goto EventScript_19F8F2
@@ -1017,7 +1016,7 @@ gUnknown_0819F8AE:: @ 819F8AE
 	goto_if_eq EventScript_19F8DD
 	special CheckForAlivePartyMons
 	compare RESULT, 0
-	goto_if 5, EventScript_19F8DE
+	goto_if_ne EventScript_19F8DE
 	special PlayTrainerEncounterMusic
 	special sub_8082524
 	special ScrSpecial_ShowTrainerIntroSpeech
@@ -1308,14 +1307,10 @@ EverGrandeCity_HallOfFame_EventScript_19FC13:: @ 819FC13
 	clearflag FLAG_HIDE_SS_TIDAL_SLATEPORT_HARBOR
 	clearflag FLAG_HIDE_SS_TIDAL_LILYCOVE_HARBOR
 	special sub_810FAA0
-	checkflag FLAG_RECEIVED_SS_TICKET
-	call_if 0, EverGrandeCity_HallOfFame_EventScript_19FC62
-	checkflag FLAG_LATIOS_OR_LATIAS_ROAMING
-	call_if 0, EverGrandeCity_HallOfFame_EventScript_19FC70
-	checkflag FLAG_RECEIVED_BELDUM
-	call_if 0, EverGrandeCity_HallOfFame_EventScript_19FC5A
-	checkflag FLAG_RECEIVED_HM08
-	call_if 0, EverGrandeCity_HallOfFame_EventScript_19FC5E
+	call_if_unset FLAG_RECEIVED_SS_TICKET, EverGrandeCity_HallOfFame_EventScript_19FC62
+	call_if_unset FLAG_LATIOS_OR_LATIAS_ROAMING, EverGrandeCity_HallOfFame_EventScript_19FC70
+	call_if_unset FLAG_RECEIVED_BELDUM, EverGrandeCity_HallOfFame_EventScript_19FC5A
+	call_if_unset FLAG_RECEIVED_HM08, EverGrandeCity_HallOfFame_EventScript_19FC5E
 	return
 
 EverGrandeCity_HallOfFame_EventScript_19FC5A:: @ 819FC5A
@@ -1343,10 +1338,8 @@ S_WhiteOut:: @ 819FC74
 	end
 
 EventScript_19FC84:
-	checkflag FLAG_RECEIVED_GO_GOGGLES
-	goto_if_eq Route101_EventScript_1A14DC
-	checkflag FLAG_DEFEATED_LAVARIDGE_GYM
-	goto_if 0, Route101_EventScript_1A14DC
+	goto_if_set FLAG_RECEIVED_GO_GOGGLES, Route101_EventScript_1A14DC
+	goto_if_unset FLAG_DEFEATED_LAVARIDGE_GYM, Route101_EventScript_1A14DC
 	clearflag FLAG_HIDE_RIVAL_LAVARIDGE_1
 	setvar VAR_LAVARIDGE_RIVAL_STATE, 2
 	return
@@ -1409,16 +1402,11 @@ PetalburgCity_PokemonCenter_1F_EventScript_19FD1B:: @ 819FD1B
 RustboroCity_PokemonCenter_1F_EventScript_19FD1B:: @ 819FD1B
 SlateportCity_PokemonCenter_1F_EventScript_19FD1B:: @ 819FD1B
 VerdanturfTown_PokemonCenter_1F_EventScript_19FD1B:: @ 819FD1B
-	checkflag FLAG_RECEIVED_POKENAV
-	goto_if 0, OldaleTown_PokemonCenter_1F_EventScript_1A14DC
-	checkflag FLAG_DEFEATED_PETALBURG_GYM
-	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_1A14DC
-	checkflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE104
-	goto_if 0, OldaleTown_PokemonCenter_1F_EventScript_19FD49
-	checkflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
-	goto_if 0, OldaleTown_PokemonCenter_1F_EventScript_19FD4F
-	checkflag FLAG_HIDE_MR_BRINEY_ROUTE109
-	goto_if 0, OldaleTown_PokemonCenter_1F_EventScript_19FD55
+	goto_if_unset FLAG_RECEIVED_POKENAV, OldaleTown_PokemonCenter_1F_EventScript_1A14DC
+	goto_if_set FLAG_DEFEATED_PETALBURG_GYM, OldaleTown_PokemonCenter_1F_EventScript_1A14DC
+	goto_if_unset FLAG_HIDE_MR_BRINEY_BOAT_ROUTE104, OldaleTown_PokemonCenter_1F_EventScript_19FD49
+	goto_if_unset FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN, OldaleTown_PokemonCenter_1F_EventScript_19FD4F
+	goto_if_unset FLAG_HIDE_MR_BRINEY_ROUTE109, OldaleTown_PokemonCenter_1F_EventScript_19FD55
 	return
 
 OldaleTown_PokemonCenter_1F_EventScript_19FD49:: @ 819FD49
@@ -1467,8 +1455,7 @@ OldaleTown_PokemonCenter_1F_EventScript_19FD7C:: @ 819FD7C
 	applymovement VAR_SPECIAL_B, OldaleTown_PokemonCenter_1F_Movement_1A0845
 	waitmovement 0
 	special ScrSpecial_HealPlayerParty
-	checkflag FLAG_POKERUS_EXPLAINED
-	goto_if 0, OldaleTown_PokemonCenter_1F_EventScript_19FDCE
+	goto_if_unset FLAG_POKERUS_EXPLAINED, OldaleTown_PokemonCenter_1F_EventScript_19FDCE
 	goto OldaleTown_PokemonCenter_1F_EventScript_19FDB0
 	end
 
@@ -1516,9 +1503,9 @@ Std_ObtainItem_: @ 819FE07
 	checkitemtype VAR_SPECIAL_0
 	call GetItem_HandlePocket
 	compare VAR_SPECIAL_7, 0x1
-	call_if 1, Std_ObtainItem_Success
+	call_if_eq Std_ObtainItem_Success
 	compare VAR_SPECIAL_7, 0x0
-	call_if 1, Std_ObtainItem_Fail
+	call_if_eq Std_ObtainItem_Fail
 	return
 
 GetItem_HandlePocket:
@@ -1533,31 +1520,31 @@ GetItem_HandlePocket:
 GetItem_HandlePocket_Items:
 	bufferstdstring 2, 0xE
 	compare VAR_SPECIAL_7, 1
-	call_if 1, PlayGetItemFanfare
+	call_if_eq PlayGetItemFanfare
 	return
 
 GetItem_HandlePocket_KeyItems:
 	bufferstdstring 2, 0xF
 	compare VAR_SPECIAL_7, 1
-	call_if 1, PlayGetItemFanfare
+	call_if_eq PlayGetItemFanfare
 	return
 
 GetItem_HandlePocket_PokeBalls:
 	bufferstdstring 2, 0x10
 	compare VAR_SPECIAL_7, 1
-	call_if 1, PlayGetItemFanfare
+	call_if_eq PlayGetItemFanfare
 	return
 
 GetItem_HandlePocket_TMsHMs:
 	bufferstdstring 2, 0x11
 	compare VAR_SPECIAL_7, 1
-	call_if 1, PlayGetTMHMFanfare
+	call_if_eq PlayGetTMHMFanfare
 	return
 
 GetItem_HandlePocket_Berries:
 	bufferstdstring 2, 0x12
 	compare VAR_SPECIAL_7, 1
-	call_if 1, PlayGetItemFanfare
+	call_if_eq PlayGetItemFanfare
 	return
 
 Std_ObtainItem_Success: @ 819FEB7
@@ -1589,9 +1576,9 @@ Std_ObtainDecoration: @ 819FEDA
 Std_ObtainDecoration_: @ 819FEE8
 	bufferdecorationname 1, VAR_SPECIAL_0
 	compare VAR_SPECIAL_7, 1
-	call_if 1, Std_ObtainDecoration_Success
+	call_if_eq Std_ObtainDecoration_Success
 	compare VAR_SPECIAL_7, 0
-	call_if 1, Std_ObtainDecoration_Fail
+	call_if_eq Std_ObtainDecoration_Fail
 	return
 
 Std_ObtainDecoration_Success: @ 819FF03
@@ -1617,9 +1604,9 @@ Std_FindItem: @ 819FF21
 	checkitemtype VAR_SPECIAL_0
 	call GetItem_HandlePocket
 	compare VAR_SPECIAL_7, 1
-	call_if 1, Std_FindItem_Success
+	call_if_eq Std_FindItem_Success
 	compare VAR_SPECIAL_7, 0
-	call_if 1, Std_FindItem_Fail
+	call_if_eq Std_FindItem_Fail
 	release
 	return
 
@@ -1724,10 +1711,8 @@ EventScript_1A0070:
 
 EventScript_1A0085:
 	playse SE_PC_LOGON
-	checkflag FLAG_SYS_PC_LANETTE
-	call_if 0, EventScript_1A00AC
-	checkflag FLAG_SYS_PC_LANETTE
-	call_if 1, EventScript_1A00B5
+	call_if_unset FLAG_SYS_PC_LANETTE, EventScript_1A00AC
+	call_if_set FLAG_SYS_PC_LANETTE, EventScript_1A00B5
 	msgbox UnknownString_81A0A35, 4
 	special ShowPokemonStorageSystem
 	waitstate
@@ -1750,8 +1735,7 @@ EventScript_1A00BE:
 	end
 
 EventScript_1A00CB:
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if 0, EventScript_1A00BE
+	goto_if_unset FLAG_SYS_GAME_CLEAR, EventScript_1A00BE
 	playse SE_PC_LOGON
 	special AccessHallOfFamePC
 	waitstate
@@ -2156,21 +2140,21 @@ Route103_EventScript_1A02F4:: @ 81A02F4
 	compare VAR_PETALBURG_GYM_STATE, 0
 	goto_if_eq Route101_EventScript_1A14DC
 	compare VAR_BIRCH_STATE, 0
-	call_if 1, Route101_EventScript_1A0358
+	call_if_eq Route101_EventScript_1A0358
 	compare VAR_BIRCH_STATE, 1
-	call_if 1, Route101_EventScript_1A0358
+	call_if_eq Route101_EventScript_1A0358
 	compare VAR_BIRCH_STATE, 2
-	call_if 1, Route101_EventScript_1A0365
+	call_if_eq Route101_EventScript_1A0365
 	compare VAR_BIRCH_STATE, 3
-	call_if 1, Route101_EventScript_1A0365
+	call_if_eq Route101_EventScript_1A0365
 	compare VAR_BIRCH_STATE, 4
-	call_if 1, Route101_EventScript_1A0372
+	call_if_eq Route101_EventScript_1A0372
 	compare VAR_BIRCH_STATE, 5
-	call_if 1, Route101_EventScript_1A0372
+	call_if_eq Route101_EventScript_1A0372
 	compare VAR_BIRCH_STATE, 6
-	call_if 1, Route101_EventScript_1A0358
+	call_if_eq Route101_EventScript_1A0358
 	compare VAR_BIRCH_STATE, 7
-	call_if 1, Route101_EventScript_1A0358
+	call_if_eq Route101_EventScript_1A0358
 	return
 
 Route101_EventScript_1A0358:: @ 81A0358
@@ -2297,9 +2281,9 @@ Movement_1A047A:
 BattleTower_Outside_EventScript_1A047C:: @ 81A047C
 SouthernIsland_Exterior_EventScript_1A047C:: @ 81A047C
 	compare FACING, 1
-	call_if 1, BattleTower_Outside_EventScript_160B2F
+	call_if_eq BattleTower_Outside_EventScript_160B2F
 	compare FACING, 3
-	call_if 1, BattleTower_Outside_EventScript_160B3A
+	call_if_eq BattleTower_Outside_EventScript_160B3A
 	delay 30
 	hideobjectat 255, MAP_PETALBURG_CITY
 	call BattleTower_Outside_EventScript_1A040E
@@ -2467,19 +2451,19 @@ Route119_EventScript_1A05C3:: @ 81A05C3
 	waitmoncry
 	setwildbattle SPECIES_KECLEON, 30, ITEM_NONE
 	compare VAR_SPECIAL_4, 1
-	call_if 1, Route119_EventScript_1A0646
+	call_if_eq Route119_EventScript_1A0646
 	compare VAR_SPECIAL_4, 2
-	call_if 1, Route119_EventScript_1A064A
+	call_if_eq Route119_EventScript_1A064A
 	compare VAR_SPECIAL_4, 3
-	call_if 1, Route119_EventScript_1A064E
+	call_if_eq Route119_EventScript_1A064E
 	compare VAR_SPECIAL_4, 4
-	call_if 1, Route119_EventScript_1A0652
+	call_if_eq Route119_EventScript_1A0652
 	compare VAR_SPECIAL_4, 5
-	call_if 1, Route119_EventScript_1A0656
+	call_if_eq Route119_EventScript_1A0656
 	compare VAR_SPECIAL_4, 6
-	call_if 1, Route119_EventScript_1A065A
+	call_if_eq Route119_EventScript_1A065A
 	compare VAR_SPECIAL_4, 7
-	call_if 1, Route119_EventScript_1A065E
+	call_if_eq Route119_EventScript_1A065E
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	dowildbattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
@@ -3965,8 +3949,7 @@ SecretBase_YellowCave4_EventScript_1A2FC0:: @ 81A2FC0
 	end
 
 SecretBase_RedCave1_EventScript_1A3032:: @ 81A3032
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if 0, SecretBase_RedCave1_EventScript_1A3086
+	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_RedCave1_EventScript_1A3086
 	compare RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A30A5
 	lock
@@ -4000,8 +3983,7 @@ SecretBase_RedCave1_EventScript_1A30A5:: @ 81A30A5
 	end
 
 SecretBase_RedCave1_EventScript_1A30AE:: @ 81A30AE
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if 0, SecretBase_RedCave1_EventScript_1A3102
+	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_RedCave1_EventScript_1A3102
 	compare RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3121
 	lock
@@ -4035,8 +4017,7 @@ SecretBase_RedCave1_EventScript_1A3121:: @ 81A3121
 	end
 
 SecretBase_RedCave1_EventScript_1A312A:: @ 81A312A
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if 0, SecretBase_RedCave1_EventScript_1A317E
+	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_RedCave1_EventScript_1A317E
 	compare RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A319D
 	lock
@@ -4070,8 +4051,7 @@ SecretBase_RedCave1_EventScript_1A319D:: @ 81A319D
 	end
 
 SecretBase_RedCave1_EventScript_1A31A6:: @ 81A31A6
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if 0, SecretBase_RedCave1_EventScript_1A31FA
+	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_RedCave1_EventScript_1A31FA
 	compare RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3219
 	lock
@@ -4105,8 +4085,7 @@ SecretBase_RedCave1_EventScript_1A3219:: @ 81A3219
 	end
 
 SecretBase_RedCave1_EventScript_1A3222:: @ 81A3222
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if 0, SecretBase_RedCave1_EventScript_1A3276
+	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_RedCave1_EventScript_1A3276
 	compare RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3295
 	lock
@@ -4140,8 +4119,7 @@ SecretBase_RedCave1_EventScript_1A3295:: @ 81A3295
 	end
 
 SecretBase_RedCave1_EventScript_1A329E:: @ 81A329E
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if 0, SecretBase_RedCave1_EventScript_1A32F2
+	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_RedCave1_EventScript_1A32F2
 	compare RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3311
 	lock
@@ -4175,8 +4153,7 @@ SecretBase_RedCave1_EventScript_1A3311:: @ 81A3311
 	end
 
 SecretBase_RedCave1_EventScript_1A331A:: @ 81A331A
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if 0, SecretBase_RedCave1_EventScript_1A336E
+	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_RedCave1_EventScript_1A336E
 	compare RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A338D
 	lock
@@ -4210,8 +4187,7 @@ SecretBase_RedCave1_EventScript_1A338D:: @ 81A338D
 	end
 
 SecretBase_RedCave1_EventScript_1A3396:: @ 81A3396
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if 0, SecretBase_RedCave1_EventScript_1A33EA
+	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_RedCave1_EventScript_1A33EA
 	compare RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3409
 	lock
@@ -4245,8 +4221,7 @@ SecretBase_RedCave1_EventScript_1A3409:: @ 81A3409
 	end
 
 SecretBase_RedCave1_EventScript_1A3412:: @ 81A3412
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if 0, SecretBase_RedCave1_EventScript_1A3466
+	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_RedCave1_EventScript_1A3466
 	compare RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3485
 	lock
@@ -4280,8 +4255,7 @@ SecretBase_RedCave1_EventScript_1A3485:: @ 81A3485
 	end
 
 SecretBase_RedCave1_EventScript_1A348E:: @ 81A348E
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if 0, SecretBase_RedCave1_EventScript_1A34E2
+	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_RedCave1_EventScript_1A34E2
 	compare RESULT, 1
 	goto_if_eq SecretBase_RedCave1_EventScript_1A3501
 	lock
@@ -4472,8 +4446,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_1ADEE0:: @ 81ADEE0
 	compare RESULT, 1
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_1ADF96
 	copyvar VAR_SPECIAL_9, VAR_SPECIAL_6
-	checkflag FLAG_OCEANIC_MUSEUM_MET_REPORTER
-	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_1ADF25
+	goto_if_set FLAG_OCEANIC_MUSEUM_MET_REPORTER, SlateportCity_OceanicMuseum_1F_EventScript_1ADF25
 	setflag FLAG_OCEANIC_MUSEUM_MET_REPORTER
 	msgbox SlateportCity_OceanicMuseum_1F_Text_1A927F, MSGBOX_YESNO
 	compare RESULT, YES
@@ -4601,8 +4574,7 @@ SlateportCity_ContestLobby_EventScript_1AE0B6:: @ 81AE0B6
 VerdanturfTown_ContestLobby_EventScript_1AE0B6:: @ 81AE0B6
 	lock
 	faceplayer
-	checkflag FLAG_TEMP_2
-	goto_if_eq FallarborTown_ContestLobby_EventScript_1AE17E
+	goto_if_set FLAG_TEMP_2, FallarborTown_ContestLobby_EventScript_1AE17E
 	setvar VAR_SPECIAL_5, 6
 	special InterviewBefore
 	compare RESULT, 1
@@ -4662,7 +4634,7 @@ LilycoveCity_ContestLobby_EventScript_1AE188:: @ 81AE188
 SlateportCity_ContestLobby_EventScript_1AE188:: @ 81AE188
 VerdanturfTown_ContestLobby_EventScript_1AE188:: @ 81AE188
 	compare VAR_LINK_CONTEST_ROOM_STATE, 2
-	goto_if 5, FallarborTown_ContestLobby_EventScript_1AE1FE
+	goto_if_ne FallarborTown_ContestLobby_EventScript_1AE1FE
 	setvar VAR_SPECIAL_5, 6
 	special InterviewBefore
 	compare RESULT, 1
@@ -4698,8 +4670,7 @@ FallarborTown_ContestLobby_EventScript_1AE1FE:: @ 81AE1FE
 BattleTower_Lobby_EventScript_1AE1FF:: @ 81AE1FF
 	lock
 	faceplayer
-	checkflag FLAG_TEMP_2
-	goto_if_eq BattleTower_Lobby_EventScript_1AE2E3
+	goto_if_set FLAG_TEMP_2, BattleTower_Lobby_EventScript_1AE2E3
 	setvar VAR_SPECIAL_5, 7
 	special InterviewBefore
 	compare RESULT, 1
@@ -4718,9 +4689,9 @@ BattleTower_Lobby_EventScript_1AE241:: @ 81AE241
 	multichoice 19, 8, 45, 1
 	copyvar VAR_SPECIAL_8, RESULT
 	compare RESULT, 0
-	call_if 1, BattleTower_Lobby_EventScript_1AE2A1
+	call_if_eq BattleTower_Lobby_EventScript_1AE2A1
 	compare RESULT, 1
-	call_if 1, BattleTower_Lobby_EventScript_1AE2AA
+	call_if_eq BattleTower_Lobby_EventScript_1AE2AA
 	msgbox BattleTower_Lobby_Text_1A79EB, 4
 	setvar VAR_SPECIAL_4, 12
 	copyvar VAR_SPECIAL_5, VAR_SPECIAL_9

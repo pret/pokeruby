@@ -7,8 +7,7 @@ LilycoveCity_MapScript1_14CA20:: @ 814CA20
 	setflag FLAG_VISITED_LILYCOVE_CITY
 	setvar VAR_LINK_CONTEST_ROOM_STATE, 0
 	setflag FLAG_HIDE_CONTEST_REPORTER_LILYCOVE
-	checkflag FLAG_SYS_WEATHER_CTRL
-	call_if 1, LilycoveCity_EventScript_1A02C1
+	call_if_set FLAG_SYS_WEATHER_CTRL, LilycoveCity_EventScript_1A02C1
 	call LilycoveCity_EventScript_1A0196
 	call LilycoveCity_EventScript_1A014E
 	end
@@ -28,10 +27,8 @@ LilycoveCity_MapScript1_14CA3F:: @ 814CA3F
 	setmetatile 71, 6, 368, 0
 	setmetatile 72, 6, 445, 0
 	.endif
-	checkflag FLAG_EVIL_TEAM_ESCAPED_IN_SUBMARINE
-	call_if 0, LilycoveCity_EventScript_14CABE
-	checkflag FLAG_BADGE07_GET
-	call_if 1, LilycoveCity_EventScript_14CB2B
+	call_if_unset FLAG_EVIL_TEAM_ESCAPED_IN_SUBMARINE, LilycoveCity_EventScript_14CABE
+	call_if_set FLAG_BADGE07_GET, LilycoveCity_EventScript_14CB2B
 	end
 
 LilycoveCity_EventScript_14CABE:: @ 814CABE
@@ -64,8 +61,7 @@ LilycoveCity_EventScript_14CB74:: @ 814CB74
 	lock
 	faceplayer
 	dodailyevents
-	checkflag FLAG_DAILY_RECEIVED_BERRY_LILYCOVE
-	goto_if_eq LilycoveCity_EventScript_14CBB4
+	goto_if_set FLAG_DAILY_RECEIVED_BERRY_LILYCOVE, LilycoveCity_EventScript_14CBB4
 	msgbox LilycoveCity_Text_1C5A7A, 4
 	random 10
 	addvar RESULT, ITEM_CHERI_BERRY
@@ -89,8 +85,7 @@ LilycoveCity_EventScript_14CBBE:: @ 814CBBE
 LilycoveCity_EventScript_14CBC7:: @ 814CBC7
 	lock
 	faceplayer
-	checkflag FLAG_BADGE07_GET
-	goto_if_eq LilycoveCity_EventScript_14CBDC
+	goto_if_set FLAG_BADGE07_GET, LilycoveCity_EventScript_14CBDC
 	msgbox LilycoveCity_Text_168750, 4
 	release
 	end
@@ -107,8 +102,7 @@ LilycoveCity_EventScript_14CBE6:: @ 814CBE6
 LilycoveCity_EventScript_14CBEF:: @ 814CBEF
 	lock
 	faceplayer
-	checkflag FLAG_EVIL_TEAM_ESCAPED_IN_SUBMARINE
-	goto_if_eq LilycoveCity_EventScript_14CC04
+	goto_if_set FLAG_EVIL_TEAM_ESCAPED_IN_SUBMARINE, LilycoveCity_EventScript_14CC04
 	msgbox LilycoveCity_Text_1688C1, 4
 	release
 	end
@@ -121,8 +115,7 @@ LilycoveCity_EventScript_14CC04:: @ 814CC04
 LilycoveCity_EventScript_14CC0E:: @ 814CC0E
 	lock
 	faceplayer
-	checkflag FLAG_EVIL_TEAM_ESCAPED_IN_SUBMARINE
-	goto_if_eq LilycoveCity_EventScript_14CC23
+	goto_if_set FLAG_EVIL_TEAM_ESCAPED_IN_SUBMARINE, LilycoveCity_EventScript_14CC23
 	msgbox LilycoveCity_Text_1689BF, 4
 	release
 	end
@@ -147,8 +140,7 @@ LilycoveCity_EventScript_14CC3F:: @ 814CC3F
 LilycoveCity_EventScript_14CC48:: @ 814CC48
 	lock
 	faceplayer
-	checkflag FLAG_BADGE07_GET
-	goto_if_eq LilycoveCity_EventScript_14CC5D
+	goto_if_set FLAG_BADGE07_GET, LilycoveCity_EventScript_14CC5D
 	msgbox LilycoveCity_Text_168C16, 4
 	release
 	end
@@ -186,8 +178,7 @@ LilycoveCity_EventScript_14CCA2:: @ 814CCA2
 
 LilycoveCity_EventScript_14CCAC:: @ 814CCAC
 	lockall
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if_eq LilycoveCity_EventScript_14CCC0
+	goto_if_set FLAG_SYS_GAME_CLEAR, LilycoveCity_EventScript_14CCC0
 	msgbox LilycoveCity_Text_168EDA, 4
 	releaseall
 	end
@@ -211,8 +202,7 @@ LilycoveCity_EventScript_14CCDC:: @ 814CCDC
 
 LilycoveCity_EventScript_14CCE5:: @ 814CCE5
 	lockall
-	checkflag FLAG_MET_WAILMER_TRAINER
-	goto_if_eq LilycoveCity_EventScript_14CD18
+	goto_if_set FLAG_MET_WAILMER_TRAINER, LilycoveCity_EventScript_14CD18
 	msgbox LilycoveCity_Text_16864A, 4
 	applymovement LAST_TALKED, LilycoveCity_Movement_1A0839
 	waitmovement 0
@@ -256,10 +246,8 @@ LilycoveCity_EventScript_14CD46:: @ 814CD46
 
 LilycoveCity_EventScript_14CD60:: @ 814CD60
 	playbgm BGM_GIRL_SUP, TRUE
-	checkflag FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE
-	call_if 1, LilycoveCity_EventScript_14CDB0
-	checkflag FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE
-	call_if 0, LilycoveCity_EventScript_14CDB9
+	call_if_set FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE, LilycoveCity_EventScript_14CDB0
+	call_if_unset FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE, LilycoveCity_EventScript_14CDB9
 	compare RESULT, NO
 	goto_if_eq LilycoveCity_EventScript_14CDC2
 	msgbox LilycoveCity_Text_167B94, 4
@@ -287,10 +275,8 @@ LilycoveCity_EventScript_14CDC2:: @ 814CDC2
 
 LilycoveCity_EventScript_14CDD3:: @ 814CDD3
 	playbgm BGM_BOY_SUP, TRUE
-	checkflag FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE
-	call_if 1, LilycoveCity_EventScript_14CE23
-	checkflag FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE
-	call_if 0, LilycoveCity_EventScript_14CE2C
+	call_if_set FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE, LilycoveCity_EventScript_14CE23
+	call_if_unset FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE, LilycoveCity_EventScript_14CE2C
 	compare RESULT, NO
 	goto_if_eq LilycoveCity_EventScript_14CE35
 	msgbox LilycoveCity_Text_1680A9, 4
@@ -349,20 +335,18 @@ LilycoveCity_EventScript_14CE96:: @ 814CE96
 LilycoveCity_EventScript_14CEA6:: @ 814CEA6
 	msgbox LilycoveCity_Text_167C6B, 4
 	setvar RESULT, 0
-	checkflag FLAG_BADGE06_GET
-	call_if 1, LilycoveCity_EventScript_14CEDE
+	call_if_set FLAG_BADGE06_GET, LilycoveCity_EventScript_14CEDE
 	compare RESULT, 0
-	call_if 1, LilycoveCity_EventScript_14CEEE
+	call_if_eq LilycoveCity_EventScript_14CEEE
 	compare RESULT, 1
-	call_if 1, LilycoveCity_EventScript_14CEF7
+	call_if_eq LilycoveCity_EventScript_14CEF7
 	clearflag FLAG_HIDE_MAY_UPSTAIRS
 	clearflag FLAG_HIDE_MAY_PICHU_DOLL
 	goto LilycoveCity_EventScript_14CF6B
 	end
 
 LilycoveCity_EventScript_14CEDE:: @ 814CEDE
-	checkflag FLAG_BADGE08_GET
-	goto_if_eq LilycoveCity_EventScript_14CEE8
+	goto_if_set FLAG_BADGE08_GET, LilycoveCity_EventScript_14CEE8
 	return
 
 LilycoveCity_EventScript_14CEE8:: @ 814CEE8
@@ -374,8 +358,7 @@ LilycoveCity_EventScript_14CEEE:: @ 814CEEE
 	return
 
 LilycoveCity_EventScript_14CEF7:: @ 814CEF7
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if_eq LilycoveCity_EventScript_14CF09
+	goto_if_set FLAG_SYS_GAME_CLEAR, LilycoveCity_EventScript_14CF09
 	msgbox LilycoveCity_Text_167DDD, 4
 	return
 
@@ -386,12 +369,11 @@ LilycoveCity_EventScript_14CF09:: @ 814CF09
 LilycoveCity_EventScript_14CF12:: @ 814CF12
 	msgbox LilycoveCity_Text_168149, 4
 	setvar RESULT, 0
-	checkflag FLAG_BADGE06_GET
-	call_if 1, LilycoveCity_EventScript_14CEDE
+	call_if_set FLAG_BADGE06_GET, LilycoveCity_EventScript_14CEDE
 	compare RESULT, 0
-	call_if 1, LilycoveCity_EventScript_14CF47
+	call_if_eq LilycoveCity_EventScript_14CF47
 	compare RESULT, 1
-	call_if 1, LilycoveCity_EventScript_14CF50
+	call_if_eq LilycoveCity_EventScript_14CF50
 	clearflag FLAG_HIDE_BRENDAN_UPSTAIRS
 	goto LilycoveCity_EventScript_14CF6B
 	end
@@ -401,8 +383,7 @@ LilycoveCity_EventScript_14CF47:: @ 814CF47
 	return
 
 LilycoveCity_EventScript_14CF50:: @ 814CF50
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if_eq LilycoveCity_EventScript_14CF62
+	goto_if_set FLAG_SYS_GAME_CLEAR, LilycoveCity_EventScript_14CF62
 	msgbox LilycoveCity_Text_168282, 4
 	return
 

@@ -57,8 +57,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_155B2D:: @ 8155B2D
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_155B5A:: @ 8155B5A
-	checkflag FLAG_DELIVERED_DEVON_GOODS
-	goto_if 0, SlateportCity_OceanicMuseum_1F_EventScript_155B7B
+	goto_if_unset FLAG_DELIVERED_DEVON_GOODS, SlateportCity_OceanicMuseum_1F_EventScript_155B7B
 	msgbox SlateportCity_OceanicMuseum_1F_Text_17E1F5, 4
 	closemessage
 	hidemoneybox 0, 0
@@ -173,7 +172,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_155C3A:: @ 8155C3A
 	compare FACING, 2
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_155C98
 	compare FACING, 2
-	goto_if 5, SlateportCity_OceanicMuseum_1F_EventScript_155CAD
+	goto_if_ne SlateportCity_OceanicMuseum_1F_EventScript_155CAD
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_155C98:: @ 8155C98

@@ -9,12 +9,9 @@ Route109_SeashoreHouse_MapScript1_160DD0:: @ 8160DD0
 Route109_SeashoreHouse_EventScript_160DD4:: @ 8160DD4
 	lock
 	faceplayer
-	checkflag FLAG_RECEIVED_6_SODA_POP
-	goto_if_eq Route109_SeashoreHouse_EventScript_160E36
-	checkflag FLAG_DEFEATED_SEASHORE_HOUSE_TRAINERS
-	goto_if_eq Route109_SeashoreHouse_EventScript_160E08
-	checkflag FLAG_TEMP_2
-	goto_if_eq Route109_SeashoreHouse_EventScript_160DFE
+	goto_if_set FLAG_RECEIVED_6_SODA_POP, Route109_SeashoreHouse_EventScript_160E36
+	goto_if_set FLAG_DEFEATED_SEASHORE_HOUSE_TRAINERS, Route109_SeashoreHouse_EventScript_160E08
+	goto_if_set FLAG_TEMP_2, Route109_SeashoreHouse_EventScript_160DFE
 	msgbox Route109_SeashoreHouse_Text_19B4D9, 4
 	setflag FLAG_TEMP_2
 	release
@@ -94,12 +91,9 @@ Route109_SeashoreHouse_EventScript_160EEE:: @ 8160EEE
 	end
 
 Route109_SeashoreHouse_EventScript_160F09:: @ 8160F09
-	checktrainerflag OPPONENT_DWAYNE
-	goto_if 0, Route109_SeashoreHouse_EventScript_160F29
-	checktrainerflag OPPONENT_JOHANNA
-	goto_if 0, Route109_SeashoreHouse_EventScript_160F29
-	checktrainerflag OPPONENT_SIMON
-	goto_if 0, Route109_SeashoreHouse_EventScript_160F29
+	goto_if_trainer_not_defeated OPPONENT_DWAYNE, Route109_SeashoreHouse_EventScript_160F29
+	goto_if_trainer_not_defeated OPPONENT_JOHANNA, Route109_SeashoreHouse_EventScript_160F29
+	goto_if_trainer_not_defeated OPPONENT_SIMON, Route109_SeashoreHouse_EventScript_160F29
 	setflag FLAG_DEFEATED_SEASHORE_HOUSE_TRAINERS
 	release
 	end
