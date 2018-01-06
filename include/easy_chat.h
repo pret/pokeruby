@@ -74,12 +74,14 @@ struct Shared1000
     u8 filler1C1[3];
     void (*unk1C4)(void);
     u8 unk1C8[0x6C8-0x1C8];
-    u8 unk6C8[0x4142-0x6C8];
+    u8 unk6C8[0xB78-0x6C8];
+    u16 unkB78[0x1B][255];
 #if GERMAN
     u8 filler4142_de[0x32A];
 #endif
     u16 unk4142[(0x78-0x42)/2];
-    u16 unk4178[(0x99A4-0x4178)/2]; // unknown length
+    u16 unk4178[(0x41A4-0x4178)/2]; // unknown length
+    const u8 *unk41A4[0x16][0x100];
 #if GERMAN
     u8 filler99A4_de[2];
 #endif

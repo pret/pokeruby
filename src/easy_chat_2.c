@@ -1,6 +1,7 @@
 #include "global.h"
 #include "constants/easy_chat.h"
 #include "constants/map_objects.h"
+#include "data2.h"
 #include "decompress.h"
 #include "easy_chat.h"
 #include "event_data.h"
@@ -8,9 +9,11 @@
 #include "graphics.h"
 #include "menu.h"
 #include "palette.h"
+#include "pokedex.h"
 #include "sprite.h"
 #include "string_util.h"
 #include "strings.h"
+#include "strings2.h"
 #include "trig.h"
 #include "unknown_task.h"
 
@@ -59,6 +62,8 @@ void sub_80EACBC(void *, u16 *, struct UnknownEasyChatStruct1 *);
 u8 *sub_80EAD64(u8 *, u8, int);
 u8 *sub_80EB218(u8 *, u16, u16);
 u16 sub_80EB2D4(u16);
+bool8 sub_80EB37C(u16);
+bool8 sub_80EB868(u8);
 u8 sub_80EB9C8(void);
 
 const u16 InterviewPalette_0[] = INCBIN_U16("graphics/misc/interview_pal0.gbapal");
@@ -1075,11 +1080,9 @@ void sub_80E91D4(u8 a)
         return;
     }
 
-    //_080E9200
     if (sub_80E91A4() == 10)
         MenuDrawTextWindow(3, 14, 26, 19);
 
-    //_080E9218
     sub_80E9198(a);
     switch (a)
     {
@@ -2070,10 +2073,13 @@ void sub_80EAD08(void)
 }
 
 extern const u8 *const gEasyChatGroupNames[];
+extern const u8 gEasyChatGroupSizes[];
+extern const u16 gEasyChatWordsByLetter[];
+extern const u16 gEasyChatWordsAlphabetized[];
 
-u8 *sub_80EAD64(u8 *a, u8 b, int unused)
+u8 *sub_80EAD64(u8 *a, u8 group, int unused)
 {
-    return StringCopy(a, gEasyChatGroupNames[b]);
+    return StringCopy(a, gEasyChatGroupNames[group]);
 }
 
 bool8 sub_80EAD7C(u8 group)
@@ -2088,7 +2094,304 @@ bool8 sub_80EAD7C(u8 group)
         return FlagGet(FLAG_SYS_GAME_CLEAR);
     case EC_GROUP_POKEMON_2:
         return sub_80EB9C8();
+    default:
+        return TRUE;
     }
-    return TRUE;
 }
 
+bool8 sub_80EADC0(u8 group, u16 word)
+{
+    switch (group)
+    {
+    case EC_GROUP_TRENDY_SAYING:
+        if (gUnknown_083DB694->unk40[2][11 + group] == 0)
+            return FALSE;
+        return sub_80EB868(word);
+    case EC_GROUP_POKEMON:
+        return GetSetPokedexFlag(SpeciesToNationalPokedexNum(word), 0);
+    case EC_GROUP_EVENTS:
+    case EC_GROUP_MOVE_1:
+    case EC_GROUP_MOVE_2:
+        if (gUnknown_083DB694->unk40[2][11 + group] == 0)
+            return FALSE;
+        return TRUE;
+    case EC_GROUP_POKEMON_2:
+        return sub_80EB9C8();
+    default:
+        return TRUE;
+    }
+}
+
+u16 sub_80EAE88(u8 group)
+{
+    switch (group)
+    {
+    case 0:
+        return GetHoennPokedexCount(0);
+    case 0x14:
+        return sub_80EB8C0();
+    default:
+        if (sub_80EAD7C(group))
+            return gEasyChatGroupSizes[group];
+        return FALSE;
+    }
+}
+
+void sub_80EAECC(void)
+{
+    u16 i;
+    u16 r9;
+    u16 r6;
+    u16 r5;
+    bool8 r7;
+
+    for (i = 0; i < 27; i++)
+    {
+        u16 word = gEasyChatWordsByLetter[i];
+        u16 sp0 = gEasyChatWordsByLetter[i + 1];
+
+        gUnknown_083DB694->unk4142[i] = 0;
+        r9 = 0;
+        r6 = word;
+        while (r6 < sp0)
+        {
+            u16 word = gEasyChatWordsAlphabetized[r6++];
+
+            if (word > 0xFEFF)
+            {
+                r5 = word & 0xFF;
+                r7 = FALSE;
+                while (--r5 != 0xFFFF)
+                {
+                    word = gEasyChatWordsAlphabetized[r6++];
+                    if (sub_80EADC0(EC_GROUP(word), EC_INDEX(word)) && !r7)
+                    {
+                        gUnknown_083DB694->unkB78[i][r9++] = word;
+                        gUnknown_083DB694->unk4142[i]++;
+                        r7 = TRUE;
+                    }
+                }
+            }
+            else
+            {
+                if (sub_80EADC0(EC_GROUP(word), EC_INDEX(word)))
+                {
+                    gUnknown_083DB694->unkB78[i][r9++] = word;
+                    gUnknown_083DB694->unk4142[i]++;
+                }
+            }
+        }
+    }
+}
+
+extern const u8 *const gEasyChatGroupWords[];
+extern const u16 *const gEasyChatGroupOrders[];
+extern const u8 gEasyChatGroupSizes[];
+
+// loads strings of all easy chat words except for the species and move names.
+void sub_80EB040(void)
+{
+    u16 group;
+    u16 index;
+
+    for (group = 0; group <= EC_GROUP_POKEMON_2; group++)
+    {
+        if (group != EC_GROUP_POKEMON
+         && group != EC_GROUP_POKEMON_2
+         && group != EC_GROUP_MOVE_1
+         && group != EC_GROUP_MOVE_2)
+        {
+            const u8 *wordText = gEasyChatGroupWords[group];
+
+            index = 0;
+            while (*wordText != EOS)
+            {
+                gUnknown_083DB694->unk41A4[group][index] = wordText;
+
+                // Find the end of the current word
+                while (*wordText != EOS)
+                    wordText++;
+                // Skip over the EOS
+                wordText++;
+
+                index++;
+            }
+        }
+    }
+}
+
+void sub_80EB0B0(void)
+{
+    const u16 *sp0;
+    u16 r7;
+    u16 r9;
+    u16 r8;
+
+    if (gUnknown_083DB694->unk26 == 0)
+    {
+        u16 r6 = gUnknown_083DB694->unk1B8;
+
+        gUnknown_083DB694->unk4178[r6] = 0;
+        r7 = 0;
+        r9 = 0;
+        sp0 = gEasyChatGroupOrders[r6];
+        for (r8 = 0; r8 < gEasyChatGroupSizes[gUnknown_083DB694->unk1B8]; r8++)
+        {
+            if (sub_80EADC0(r6, sp0[r8]))
+            {
+                gUnknown_083DB694->unk9A2A[r9][r7] = ((r6 & 0x7F) << 9) | (sp0[r8] & 0x1FF);
+                gUnknown_083DB694->unk4178[r6]++;
+                r7++;
+                if (r7 > 1)
+                {
+                    r7 = 0;
+                    r9++;
+                }
+            }
+        }
+    }
+    else
+    {
+        u8 r2 = gUnknown_083DB694->unk1B8;
+        u16 r3 = 0;
+        u16 r6 = 0;
+        u16 r5;
+
+        for (r5 = 0; r5 < gUnknown_083DB694->unk4142[r2]; r5++)
+        {
+            gUnknown_083DB694->unk9A2A[r6][r3] = gUnknown_083DB694->unkB78[r2][r5];
+            r3++;
+            if (r3 > 1)
+            {
+                r3 = 0;
+                r6++;
+            }
+        }
+    }
+}
+
+u8 *sub_80EB218(u8 *a, u16 word, u16 c)
+{
+    u8 *wordText;
+
+    if (sub_80EB37C(word))
+    {
+        wordText = StringCopy(a, gOtherText_ThreeQuestions);
+    }
+    else if (word == 0xFFFF)
+    {
+        wordText = a;
+        wordText[0] = EOS;  // Why? It's going to get overwritten.
+    }
+    else
+    {
+        u16 group = EC_GROUP(word);
+        u16 index = EC_INDEX(word);
+
+        switch (group)
+        {
+        case EC_GROUP_POKEMON:
+        case EC_GROUP_POKEMON_2:
+            wordText = StringCopy(a, gSpeciesNames[index]);
+            break;
+        case EC_GROUP_MOVE_1:
+        case EC_GROUP_MOVE_2:
+            wordText = StringCopy(a, gMoveNames[index]);
+            break;
+        default:
+            wordText = StringCopy(a, gUnknown_083DB694->unk41A4[group][index]);
+            break;
+        }
+    }
+
+    wordText[0] = EXT_CTRL_CODE_BEGIN;
+    wordText[1] = 0x13;
+    wordText[2] = c * 8;
+    wordText += 3;
+
+    *wordText = EOS;
+
+    return wordText;
+}
+
+u16 sub_80EB2D4(u16 word)
+{
+    const u8 *wordText;
+    u16 length;
+
+    if (sub_80EB37C(word))
+    {
+        return StringLength(gOtherText_ThreeQuestions);
+    }
+    else if (word == 0xFFFF)
+    {
+        return 0;
+    }
+    else
+    {
+        u16 group = EC_GROUP(word);
+        u16 index = EC_INDEX(word);
+
+        switch (group)
+        {
+        case EC_GROUP_POKEMON:
+        case EC_GROUP_POKEMON_2:
+            wordText = gSpeciesNames[index];
+            break;
+        case EC_GROUP_MOVE_1:
+        case EC_GROUP_MOVE_2:
+            wordText = gMoveNames[index];
+            break;
+        default:
+            wordText = gUnknown_083DB694->unk41A4[group][index];
+            break;
+        }
+    }
+
+    length = 0;
+    while (*wordText != EOS)
+    {
+        wordText++;
+        length++;
+    }
+    return length;
+}
+
+bool8 sub_80EB37C(u16 word)
+{
+    const u16 *r4;
+    u16 r3;
+
+    if (word == 0xFFFF)
+    {
+        return FALSE;
+    }
+    else
+    {
+        u16 group = EC_GROUP(word);
+        u16 index = EC_INDEX(word);
+
+        if (group <= EC_GROUP_POKEMON_2)
+        {
+            switch (group)
+            {
+            case EC_GROUP_POKEMON:
+            case EC_GROUP_POKEMON_2:
+            case EC_GROUP_MOVE_1:
+            case EC_GROUP_MOVE_2:
+                r4 = (u16 *)gEasyChatGroupWords[group];
+                for (r3 = 0; r3 < gEasyChatGroupSizes[group]; r3++)
+                {
+                    if (index == r4[r3])
+                        return FALSE;
+                }
+                break;
+            default:
+                if (index < gEasyChatGroupSizes[group])
+                    return FALSE;
+                break;
+            }
+        }
+        return TRUE;
+    }
+}
