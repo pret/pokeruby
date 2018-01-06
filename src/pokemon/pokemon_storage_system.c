@@ -250,6 +250,37 @@ __attribute__((naked)) void unref_sub_8095D08(u16 *dest, u16 dest_left, u16 dest
 }
 #endif
 
+s16 StorageSystemGetNextMonIndex(struct BoxPokemon *box, s8 startIdx, u8 stopIdx, u8 mode)
+{
+    s16 i;
+    s16 direction;
+    if (mode == 0 || mode == 2)
+    {
+        direction = 1;
+    }
+    else
+    {
+        direction = -1;
+    }
+    if (mode == 2 || mode == 3)
+    {
+        for (i = startIdx + direction; i >= 0 && i <= stopIdx; i += direction)
+        {
+            if (GetBoxMonData(box + i, MON_DATA_SPECIES) != 0)
+                return i;
+        }
+    }
+    else
+    {
+        for (i = startIdx + direction; i >= 0 && i <= stopIdx; i += direction)
+        {
+            if (GetBoxMonData(box + i, MON_DATA_SPECIES) != 0 && !GetBoxMonData(box + i, MON_DATA_IS_EGG))
+                return i;
+        }
+    }
+    return -1;
+}
+
 asm(".section .text.8098898");
 
 void sub_8098898(u8 index) {
