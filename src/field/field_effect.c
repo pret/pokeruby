@@ -25,6 +25,7 @@
 #include "field_map_obj.h"
 #include "util.h"
 #include "field_effect_helpers.h"
+#include "pokemon_storage_system.h"
 
 #define subsprite_table(ptr) {.subsprites = ptr, .subspriteCount = (sizeof ptr) / (sizeof(struct Subsprite))}
 

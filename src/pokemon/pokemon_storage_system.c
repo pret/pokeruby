@@ -2,6 +2,7 @@
 #include "pokemon_storage_system.h"
 #include "menu.h"
 #include "string_util.h"
+#include "event_data.h"
 #include "ewram.h"
 
 struct StorageAction {
@@ -12,6 +13,93 @@ struct StorageAction {
 extern const struct StorageAction gUnknown_083B6DF4[];
 
 EWRAM_DATA struct PokemonStorage gPokemonStorage = {0};
+
+u8 sub_8095ADC(u8 boxId)
+{
+    u16 i;
+    u16 count;
+
+    for (i = 0, count = 0; i < 30; i++)
+    {
+        if (GetBoxMonData(gPokemonStorage.boxes[boxId] + i, MON_DATA_SPECIES) != 0)
+            count++;
+    }
+    return count;
+}
+
+s16 sub_8095B24(u8 boxId)
+{
+    u16 i;
+
+    for (i = 0; i < 30; i++)
+    {
+        if (GetBoxMonData(gPokemonStorage.boxes[boxId] + i, MON_DATA_SPECIES) == 0)
+            return i;
+    }
+    return -1;
+}
+
+u8 GetNumValidDaycarePartyMons(void)
+{
+    u16 i;
+    u16 count;
+
+    for (i = 0, count = 0; i < PARTY_SIZE; i++)
+    {
+        struct Pokemon *pokemon = gPlayerParty + i;
+        if (GetMonData(pokemon, MON_DATA_SPECIES) != 0 && !GetMonData(pokemon, MON_DATA_IS_EGG))
+            count++;
+    }
+    return count;
+}
+
+u8 CountAlivePartyMonsExceptOne(u8 toSkip)
+{
+    u16 i;
+    u16 count;
+
+    for (i = 0, count = 0; i < PARTY_SIZE; i++)
+    {
+        if (i != toSkip)
+        {
+            struct Pokemon *pokemon = gPlayerParty + i;
+            if (GetMonData(pokemon, MON_DATA_SPECIES) != 0 && !GetMonData(pokemon, MON_DATA_IS_EGG) && GetMonData(pokemon, MON_DATA_HP) != 0)
+                count++;
+        }
+    }
+    return count;
+}
+
+u8 CountAlivePartyMonsExceptSelectedOne(void)
+{
+    return CountAlivePartyMonsExceptOne(gSpecialVar_0x8004);
+}
+
+u8 StorageSystemGetPartySize(void)
+{
+    u16 i;
+    u16 count;
+
+    for (i = 0, count = 0; i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(gPlayerParty + i, MON_DATA_SPECIES) != 0)
+            count++;
+    }
+    return count;
+}
+
+u8 *unref_sub_8095C60(u8 *dest, const u8 *src, u16 pad)
+{
+    u8 *_dest = StringCopy(dest, src);
+    while (_dest < dest + pad)
+    {
+        *_dest++ = CHAR_SPACE;
+    }
+    *_dest = EOS;
+    return _dest;
+}
+
+asm(".section .text.8098898");
 
 void sub_8098898(u8 index) {
     u8 *ptr;

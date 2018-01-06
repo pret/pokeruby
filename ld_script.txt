@@ -128,8 +128,9 @@ SECTIONS {
         src/engine/save_menu_util.o(.text);
         src/battle/battle_party_menu.o(.text);
         asm/unk_text_8095904.o(.text);
-        asm/pokemon_storage_system.o(.text);
         src/pokemon/pokemon_storage_system.o(.text);
+        asm/pokemon_storage_system.o(.text);
+        src/pokemon/pokemon_storage_system.o(.text.8098898);
         asm/pokemon_storage_system.o(.text_8098A38);
         src/pokemon/pokemon_icon.o(.text);
         src/pokemon/pokemon_summary_screen.o(.text);
