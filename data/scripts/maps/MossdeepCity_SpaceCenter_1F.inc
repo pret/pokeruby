@@ -8,9 +8,9 @@ MossdeepCity_SpaceCenter_1F_EventScript_15AB8B:: @ 815AB8B
 	specialvar RESULT, GetWeekCount
 	buffernumberstring 0, RESULT
 	compare RESULT, 0
-	call_if 1, MossdeepCity_SpaceCenter_1F_EventScript_15ABBA
+	call_if_eq MossdeepCity_SpaceCenter_1F_EventScript_15ABBA
 	compare RESULT, 1
-	call_if 4, MossdeepCity_SpaceCenter_1F_EventScript_15ABC3
+	call_if_ge MossdeepCity_SpaceCenter_1F_EventScript_15ABC3
 	closemessage
 	applymovement LAST_TALKED, MossdeepCity_SpaceCenter_1F_Movement_1A083D
 	waitmovement 0
@@ -32,8 +32,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_15ABCC:: @ 815ABCC
 MossdeepCity_SpaceCenter_1F_EventScript_15ABD5:: @ 815ABD5
 	lock
 	faceplayer
-	checkflag FLAG_RECEIVED_SUN_STONE_MOSSDEEP
-	goto_if_eq MossdeepCity_SpaceCenter_1F_EventScript_15AC0C
+	goto_if_set FLAG_RECEIVED_SUN_STONE_MOSSDEEP, MossdeepCity_SpaceCenter_1F_EventScript_15AC0C
 	msgbox MossdeepCity_SpaceCenter_1F_Text_18E335, 4
 	giveitem_std ITEM_SUN_STONE
 	compare RESULT, 0

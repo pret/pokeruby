@@ -5,23 +5,22 @@ Route120_MapScripts:: @ 815160E
 	.byte 0
 
 Route120_MapScript1_15161E:: @ 815161E
-	checkflag FLAG_SYS_CTRL_OBJ_DELETE
-	call_if 1, Route120_EventScript_151628
+	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, Route120_EventScript_151628
 	end
 
 Route120_EventScript_151628:: @ 8151628
 	compare VAR_SPECIAL_4, 0
-	call_if 1, Route120_EventScript_15166B
+	call_if_eq Route120_EventScript_15166B
 	compare VAR_SPECIAL_4, 1
-	call_if 1, Route120_EventScript_151672
+	call_if_eq Route120_EventScript_151672
 	compare VAR_SPECIAL_4, 2
-	call_if 1, Route120_EventScript_151676
+	call_if_eq Route120_EventScript_151676
 	compare VAR_SPECIAL_4, 3
-	call_if 1, Route120_EventScript_15167A
+	call_if_eq Route120_EventScript_15167A
 	compare VAR_SPECIAL_4, 4
-	call_if 1, Route120_EventScript_15167E
+	call_if_eq Route120_EventScript_15167E
 	compare VAR_SPECIAL_4, 5
-	call_if 1, Route120_EventScript_151682
+	call_if_eq Route120_EventScript_151682
 	return
 
 Route120_EventScript_15166B:: @ 815166B
@@ -50,12 +49,9 @@ Route120_EventScript_151682:: @ 8151682
 	return
 
 Route120_MapScript1_151686:: @ 8151686
-	checkflag FLAG_REGI_DOORS_OPENED
-	call_if 0, Route120_EventScript_1516A2
-	checkflag FLAG_RECEIVED_DEVON_SCOPE
-	call_if 1, Route120_EventScript_1516B5
-	checkflag FLAG_RECEIVED_DEVON_SCOPE
-	call_if 0, Route120_EventScript_1516DA
+	call_if_unset FLAG_REGI_DOORS_OPENED, Route120_EventScript_1516A2
+	call_if_set FLAG_RECEIVED_DEVON_SCOPE, Route120_EventScript_1516B5
+	call_if_unset FLAG_RECEIVED_DEVON_SCOPE, Route120_EventScript_1516DA
 	end
 
 Route120_EventScript_1516A2:: @ 81516A2
@@ -82,11 +78,11 @@ Route120_MapScript1_1516DF:: @ 81516DF
 Route120_EventScript_1516EA:: @ 81516EA
 	getplayerxy VAR_TEMP_0, VAR_TEMP_1
 	compare VAR_TEMP_1, 14
-	goto_if 3, Route120_EventScript_151715
+	goto_if_le Route120_EventScript_151715
 	compare VAR_TEMP_1, 60
-	goto_if 3, Route120_EventScript_151719
+	goto_if_le Route120_EventScript_151719
 	compare VAR_TEMP_1, 61
-	goto_if 4, Route120_EventScript_151711
+	goto_if_ge Route120_EventScript_151711
 	return
 
 Route120_EventScript_151711:: @ 8151711
@@ -99,9 +95,9 @@ Route120_EventScript_151715:: @ 8151715
 
 Route120_EventScript_151719:: @ 8151719
 	compare VAR_TEMP_0, 7
-	goto_if 3, Route120_EventScript_151735
+	goto_if_le Route120_EventScript_151735
 	compare VAR_TEMP_0, 19
-	goto_if 3, Route120_EventScript_151715
+	goto_if_le Route120_EventScript_151715
 	goto Route120_EventScript_151735
 	end
 
@@ -113,13 +109,12 @@ Route120_EventScript_151739:: @ 8151739
 	lock
 	faceplayer
 	dodailyevents
-	checkflag FLAG_DAILY_RECEIVED_BERRY_ROUTE120
-	goto_if_eq Route120_EventScript_151837
+	goto_if_set FLAG_DAILY_RECEIVED_BERRY_ROUTE120, Route120_EventScript_151837
 	msgbox Route120_Text_1C58F1, MSGBOX_YESNO
 	compare RESULT, YES
-	call_if 1, Route120_EventScript_151841
+	call_if_eq Route120_EventScript_151841
 	compare RESULT, NO
-	call_if 1, Route120_EventScript_15184A
+	call_if_eq Route120_EventScript_15184A
 	specialvar RESULT, GetPlayerTrainerIdOnesDigit
 	switch RESULT
 	case 0, Route120_EventScript_1517DC
@@ -184,8 +179,7 @@ Route120_EventScript_15184A:: @ 815184A
 Route120_EventScript_151853:: @ 8151853
 	lock
 	faceplayer
-	checkflag FLAG_NOT_READY_FOR_BATTLE_ROUTE120
-	goto_if_eq Route120_EventScript_151884
+	goto_if_set FLAG_NOT_READY_FOR_BATTLE_ROUTE120, Route120_EventScript_151884
 	msgbox Route120_Text_171827, MSGBOX_YESNO
 	compare RESULT, NO
 	goto_if_eq Route120_EventScript_151877
@@ -209,9 +203,9 @@ Route120_EventScript_15189D:: @ 815189D
 	msgbox Route120_Text_1719A0, 4
 	closemessage
 	compare FACING, 2
-	call_if 1, Route120_EventScript_15197F
+	call_if_eq Route120_EventScript_15197F
 	compare FACING, 3
-	call_if 1, Route120_EventScript_15198A
+	call_if_eq Route120_EventScript_15198A
 	applymovement 31, Route120_Movement_1A083F
 	waitmovement 0
 	delay 20

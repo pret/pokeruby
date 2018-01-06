@@ -2736,4 +2736,11 @@ extern const u8 gVersionTiles[];
 extern const u16 gUnknown_08E9F624[];
 extern const u8 gUnknown_08E9F7E4[];
 
+extern const u8 gCableCar_Gfx[];
+extern const u8 gCableCarDoor_Gfx[];
+extern const u8 gCableCarCord_Gfx[];
+extern const u16 gCableCar_Pal[];
+extern const u16 gCableCarBG_Pal[];
+extern const u8 gCableCarBG_Gfx[];
+
 #endif  // GUARD_GRAPHICS_H

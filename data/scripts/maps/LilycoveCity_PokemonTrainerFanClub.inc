@@ -72,35 +72,35 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_159429:: @ 8159429
 	setvar VAR_SPECIAL_4, 8
 	specialvar RESULT, ShouldMoveLilycoveFanClubMember
 	compare RESULT, 0
-	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_1594D5
+	call_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_1594D5
 	setvar VAR_SPECIAL_4, 9
 	specialvar RESULT, ShouldMoveLilycoveFanClubMember
 	compare RESULT, 0
-	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_1594DD
+	call_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_1594DD
 	setvar VAR_SPECIAL_4, 10
 	specialvar RESULT, ShouldMoveLilycoveFanClubMember
 	compare RESULT, 0
-	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_1594E5
+	call_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_1594E5
 	setvar VAR_SPECIAL_4, 11
 	specialvar RESULT, ShouldMoveLilycoveFanClubMember
 	compare RESULT, 0
-	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_1594ED
+	call_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_1594ED
 	setvar VAR_SPECIAL_4, 12
 	specialvar RESULT, ShouldMoveLilycoveFanClubMember
 	compare RESULT, 0
-	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_1594F5
+	call_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_1594F5
 	setvar VAR_SPECIAL_4, 13
 	specialvar RESULT, ShouldMoveLilycoveFanClubMember
 	compare RESULT, 0
-	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_1594FD
+	call_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_1594FD
 	setvar VAR_SPECIAL_4, 14
 	specialvar RESULT, ShouldMoveLilycoveFanClubMember
 	compare RESULT, 0
-	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_159505
+	call_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_159505
 	setvar VAR_SPECIAL_4, 15
 	specialvar RESULT, ShouldMoveLilycoveFanClubMember
 	compare RESULT, 0
-	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_15950D
+	call_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_15950D
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_1594D5:: @ 81594D5

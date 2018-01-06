@@ -3,8 +3,7 @@ Route116_MapScripts:: @ 8150A31
 	.byte 0
 
 Route116_MapScript1_150A37:: @ 8150A37
-	checkflag FLAG_RECOVERED_DEVON_GOODS
-	call_if 1, Route116_EventScript_150A41
+	call_if_set FLAG_RECOVERED_DEVON_GOODS, Route116_EventScript_150A41
 	end
 
 Route116_EventScript_150A41:: @ 8150A41
@@ -14,10 +13,8 @@ Route116_EventScript_150A41:: @ 8150A41
 Route116_EventScript_150A49:: @ 8150A49
 	lock
 	faceplayer
-	checkflag FLAG_RECOVERED_DEVON_GOODS
-	goto_if_eq Route116_EventScript_150A67
-	checkflag FLAG_DEVON_GOODS_STOLEN
-	goto_if_eq Route116_EventScript_150A71
+	goto_if_set FLAG_RECOVERED_DEVON_GOODS, Route116_EventScript_150A67
+	goto_if_set FLAG_DEVON_GOODS_STOLEN, Route116_EventScript_150A71
 	msgbox Route116_Text_1703CF, 4
 	release
 	end
@@ -35,8 +32,7 @@ Route116_EventScript_150A71:: @ 8150A71
 Route116_EventScript_150A7B:: @ 8150A7B
 	lock
 	faceplayer
-	checkflag FLAG_MET_DEVON_EMPLOYEE
-	goto_if_eq Route116_EventScript_150B04
+	goto_if_set FLAG_MET_DEVON_EMPLOYEE, Route116_EventScript_150B04
 	msgbox Route116_Text_1705AE, 4
 	goto Route116_EventScript_150A94
 	end
@@ -49,13 +45,13 @@ Route116_EventScript_150A94:: @ 8150A94
 	msgbox Route116_Text_1707B8, 4
 	closemessage
 	compare FACING, 2
-	call_if 1, Route116_EventScript_150AEE
+	call_if_eq Route116_EventScript_150AEE
 	compare FACING, 1
-	call_if 1, Route116_EventScript_150AEE
+	call_if_eq Route116_EventScript_150AEE
 	compare FACING, 3
-	call_if 1, Route116_EventScript_150AEE
+	call_if_eq Route116_EventScript_150AEE
 	compare FACING, 4
-	call_if 1, Route116_EventScript_150AF9
+	call_if_eq Route116_EventScript_150AF9
 	removeobject LAST_TALKED
 	clearflag FLAG_HIDE_EMPLOYEE_DEVON_CORP_3F
 	setflag FLAG_RECEIVED_REPEAT_BALL
@@ -182,13 +178,13 @@ Route116_EventScript_150BF4:: @ 8150BF4
 Route116_EventScript_150C03:: @ 8150C03
 	delay 20
 	compare FACING, 2
-	call_if 1, Route116_EventScript_150C37
+	call_if_eq Route116_EventScript_150C37
 	compare FACING, 1
-	call_if 1, Route116_EventScript_150C37
+	call_if_eq Route116_EventScript_150C37
 	compare FACING, 3
-	call_if 1, Route116_EventScript_150C37
+	call_if_eq Route116_EventScript_150C37
 	compare FACING, 4
-	call_if 1, Route116_EventScript_150C42
+	call_if_eq Route116_EventScript_150C42
 	removeobject LAST_TALKED
 	release
 	end

@@ -39,171 +39,6 @@ extern void sub_80C8C80(u8);
 extern void sub_81288F4();
 extern u8 sub_8128944(void);
 
-struct Shared18000
-{
-    /*0x18000*/ u8 unk18000;
-    /*0x18001*/ u8 filler18001[3];
-    /*0x18004*/ u16 unk18004[16][16];
-    /*0x18204*/ u16 unk18204[0x200];
-    /*0x18604*/ u16 unk18604[0x200];
-    /*0x18A04*/ u8 unk18A04[0x800];
-};
-
-struct Contest
-{
-    /*0x19204*/ u8 playerMoveChoice;
-    /*0x19205*/ u8 turnNumber;
-    /*0x19206*/ u8 unk19206[4];    // seems to only be used by an unref function
-    /*0x1920A*/ u16 unk1920A_0:1;  // Task active flags?
-                u16 unk1920A_1:1;
-                u16 unk1920A_2:1;
-                u16 unk1920A_3:1;
-                u16 unk1920A_4:1;
-                u16 unk1920A_5:1;
-                u16 unk1920A_6:1;
-                u16 unk1920A_7:1;
-    /*0x1920B*/ u16 unk1920B_0:1;
-                u16 unk1920B_1:1;
-                u16 unk1920B_2:1;
-    /*0x1920C*/ u8 mainTaskId;
-    /*0x1920D*/ u8 unk1920D[4];
-    /*0x19211*/ u8 unk19211;
-    /*0x19212*/ u8 unk19212;
-    /*0x19213*/ u8 filler19213;
-    /*0x19214*/ u8 unk19214;
-    /*0x19215*/ u8 unk19215;
-    /*0x19216*/ u8 unk19216;    // sprite ID
-    /*0x19217*/ s8 applauseLevel;
-    /*0x19218*/ u8 unk19218[4];
-    /*0x1921C*/ u32 unk1921C;   // saved RNG value?
-                u16 unk19220[5][4];  // move history?
-                u8 unk19248[5][4];  // excitement history
-                u8 applauseMeterSpriteId;    // sprite ID
-    /*0x1925D*/ u8 unk1925D;
-    /*0x1925E*/ u8 unk1925E;
-};
-
-struct ContestantStatus
-{
-    s16 appeal1;  // move appeal?
-    s16 appeal2;  // final appeal after end of turn, maybe?
-    s16 unk4;
-    u16 currMove;
-    u16 prevMove;
-    u8 moveCategory;
-    u8 unkB_0:2;
-    u8 unkB_2:2;
-    u8 moveRepeatCount:3;
-    u8 unkB_7:1;  // used a one-time move?
-    u8 unkC_0:1;
-    u8 unkC_1:2;
-    s8 unkD;
-    u8 unkE;
-    u8 unkF;
-    u8 unk10_0:1;
-    u8 unk10_1:1;
-    u8 unk10_2:1;
-    u8 unk10_3:1;
-    u8 unk10_4:2;
-    u8 unk10_6:2;
-    u8 unk11_0:2;
-    u8 unk11_2:1;
-    u8 unk11_3:1;
-    u8 unk11_4:1;
-    u8 unk11_5:1;
-    u8 unk12;
-    u8 unk13;   // status action?
-    u8 unk14;
-    u8 disappointedRepeat:1;
-    u8 unk15_1:1;
-    u8 unk15_2:1;
-    u8 unk15_3:1;
-    u8 unk15_4:1;
-    u8 unk15_5:1;
-    u8 unk15_6:1;
-    u8 unk16;
-    u8 unk17;
-    u8 unk18;
-    u8 unk19;  // turn position
-    u8 attentionLevel;  // How much the Pokemon "stood out"
-    u8 unk1B;
-};
-
-struct UnknownContestStruct3
-{
-    u8 unk0;
-    u8 unk1;
-    //u8 unk2_0:1;
-    //u8 unk2_1:1;
-    u8 unk2;  // maybe a bitfield
-    u8 filler3;
-};
-
-// possibly the same as UnknownContestStruct3?
-struct UnknownContestStruct4
-{
-    u8 unk0;  // sprite ID
-    u8 unk1;  // sprite ID
-    u8 unk2_0:1;
-    u8 unk2_1:1;
-    u8 unk2_2:1;
-    u8 filler3;
-};
-
-struct UnknownContestStruct5
-{
-    s8 bits_0;  // current move excitement?
-    u8 bits_8:1;
-    u8 bits_9:3;
-    u8 bits_C:4;
-    s8 unk2;
-    u8 filler3;
-};
-
-struct UnknownContestStruct7
-{
-    u8 unk0[4];
-    u16 unk4;
-    u16 unk6;
-    u8 filler8[0xD-8];
-    u8 unkD[4];
-    u8 unk11;
-    u8 filler12[2];
-};
-
-struct UnknownContestStruct8
-{
-    u16 unk0;
-    u16 unk2;
-    u8 unk4_0:1;
-    u8 unk5;
-    u8 filler6[2];
-    u32 unk8;
-    u32 unkC;
-    u32 unk10;
-};
-
-struct UnknownContestStruct6
-{
-    s32 unk0;
-    s32 unk4;
-    s32 unk8;
-    s32 unkC;
-};
-
-#define shared15800 (gSharedMem + 0x15800)
-#define shared15DE0 (*(struct ContestWinner *)(gSharedMem + 0x15DE0))
-#define shared16800 (gSharedMem + 0x16800)
-#define shared18000 (*(struct Shared18000 *)(gSharedMem + 0x18000))
-#define shared18004 ((u16 *)(gSharedMem + 0x18004))
-#define sContest (*(struct Contest *)(gSharedMem + 0x19204))
-#define sContestantStatus ((struct ContestantStatus *)(gSharedMem + 0x19260))
-#define shared192D0_ (*(struct UnknownContestStruct7 *)(gSharedMem + 0x192D0))
-#define shared192E4 (gSharedMem + 0x192E4)
-#define shared19328 (*(struct UnknownContestStruct5 *)(gSharedMem + 0x19328))
-#define shared19338 ((struct UnknownContestStruct4 *)(gSharedMem + 0x19338))
-#define shared19348_ (*(struct UnknownContestStruct8 *)(gSharedMem + 0x19348))
-
 extern struct MusicPlayerInfo gMPlay_SE1;
 extern u16 gSpecialVar_ContestCategory;
 extern u16 gSpecialVar_ContestRank;
@@ -555,7 +390,7 @@ void ClearContestVars(void)
         sContestantStatus[i].unk14 = 0xFF;
     }
 
-    memset(&shared192D0_, 0, sizeof(shared192D0_));
+    memset(&shared192D0, 0, sizeof(shared192D0));
     memset(shared192E4, 0, 0x44 * sizeof(*shared192E4));
     memset(&shared19328, 0, sizeof(shared19328));
     memset(shared19338, 0, 4 * sizeof(*shared19338));
@@ -1063,7 +898,7 @@ void sub_80AC2CC(u8 taskId)
     {
     case 0:
         sub_80B0D7C();
-        for (i = 0; sContest.unk19214 != shared192D0_.unk0[i]; i++)
+        for (i = 0; sContest.unk19214 != shared192D0.unk0[i]; i++)
             ;
         sContest.unk19215 = i;
         r7 = sContest.unk19215;
@@ -1106,7 +941,7 @@ void sub_80AC2CC(u8 taskId)
     case 3:
         for (i = 0; i < 4; i++)
             gBattleMonForms[i] = 0;
-        memset(&shared19348_, 0, sizeof(shared19348_));
+        memset(&shared19348, 0, sizeof(shared19348));
         sub_80B28F0(sContest.unk19215);
         spriteId = sub_80AE9FC(
           gContestMons[sContest.unk19215].species,
@@ -4528,13 +4363,13 @@ void sub_80B114C(u8 contestant)
         }
         sContestantStatus[contestant].appeal1 = gContestEffects[effect].appeal;
         sContestantStatus[contestant].appeal2 = gContestEffects[effect].appeal;
-        shared192D0_.unk4 = gContestEffects[effect].jam;
-        shared192D0_.unk6 = gContestEffects[effect].jam;
-        shared192D0_.unk11 = contestant;
+        shared192D0.unk4 = gContestEffects[effect].jam;
+        shared192D0.unk6 = gContestEffects[effect].jam;
+        shared192D0.unk11 = contestant;
         for (i = 0; i < 4; i++)
         {
             sContestantStatus[i].unkE = 0;
-            shared192D0_.unkD[i] = 0;
+            shared192D0.unkD[i] = 0;
         }
         if (sContestantStatus[contestant].unk15_4 && AreMovesContestCombo(sContestantStatus[contestant].prevMove, sContestantStatus[contestant].currMove) == 0)
             sContestantStatus[contestant].unk15_4 = 0;
@@ -4637,13 +4472,13 @@ void sub_80B146C(u8 a, u8 b)
 {
     StringCopy(gStringVar1, gContestMons[a].nickname);
     StringCopy(gStringVar2, gMoveNames[sContestantStatus[a].currMove]);
-    if      (gContestMoves[sContestantStatus[shared192D0_.unk11].currMove].contestCategory == CONTEST_CATEGORY_COOL)
+    if      (gContestMoves[sContestantStatus[shared192D0.unk11].currMove].contestCategory == CONTEST_CATEGORY_COOL)
         StringCopy(gStringVar3, gText_Contest_Shyness);
-    else if (gContestMoves[sContestantStatus[shared192D0_.unk11].currMove].contestCategory == CONTEST_CATEGORY_BEAUTY)
+    else if (gContestMoves[sContestantStatus[shared192D0.unk11].currMove].contestCategory == CONTEST_CATEGORY_BEAUTY)
         StringCopy(gStringVar3, gText_Contest_Anxiety);
-    else if (gContestMoves[sContestantStatus[shared192D0_.unk11].currMove].contestCategory == CONTEST_CATEGORY_CUTE)
+    else if (gContestMoves[sContestantStatus[shared192D0.unk11].currMove].contestCategory == CONTEST_CATEGORY_CUTE)
         StringCopy(gStringVar3, gText_Contest_Laziness);
-    else if (gContestMoves[sContestantStatus[shared192D0_.unk11].currMove].contestCategory == CONTEST_CATEGORY_SMART)
+    else if (gContestMoves[sContestantStatus[shared192D0.unk11].currMove].contestCategory == CONTEST_CATEGORY_SMART)
         StringCopy(gStringVar3, gText_Contest_Hesitancy);
     else
         StringCopy(gStringVar3, gText_Contest_Fear);
@@ -4708,7 +4543,7 @@ void sub_80B159C(void)
 
     for (i = 0; i < 4; i++)
     {
-        shared192D0_.unk0[i] = sp0[i];
+        shared192D0.unk0[i] = sp0[i];
         sContestantStatus[i].unk19 = 0xFF;
         sContestantStatus[i].unk10_6 = 0;
         gUnknown_02038696[i] = sp0[i];
@@ -5083,7 +4918,7 @@ void sub_80B20C4(void)
 
     for (i = 0; i < 4; i++)
     {
-        if (shared192D0_.unkD[i] != 0 && !Contest_IsMonsTurnDisabled(i))
+        if (shared192D0.unkD[i] != 0 && !Contest_IsMonsTurnDisabled(i))
         {
             u8 r4 = gUnknown_02038696[i] * 5 + 2;
             u16 r0 = sub_80AEFE8(i, 3);
@@ -5339,7 +5174,7 @@ void sub_80B2790(u8 a)
     u16 species = SanitizeSpecies(gContestMons[a].species);
     u8 r5_2;
 
-    memset(&shared19348_, 0, sizeof(shared19348_));
+    memset(&shared19348, 0, sizeof(shared19348));
     ClearBattleAnimationVars();
     for (i = 0; i < 4; i++)
         gBattleMonForms[i] = 0;
@@ -5354,9 +5189,9 @@ void sub_80B2790(u8 a)
     case MOVE_TRANSFORM:
     case MOVE_ROLE_PLAY:
         r5_2 = sContestantStatus[a].unk1B;
-        shared19348_.unk2 = SanitizeSpecies(gContestMons[r5_2].species);
-        shared19348_.unk10 = gContestMons[r5_2].personality;
-        shared19348_.unk4_0 = 1;
+        shared19348.unk2 = SanitizeSpecies(gContestMons[r5_2].species);
+        shared19348.unk10 = gContestMons[r5_2].personality;
+        shared19348.unk4_0 = 1;
         break;
     case MOVE_RETURN:
         gAnimFriendship = 0xFF;
@@ -5384,17 +5219,17 @@ void sub_80B2790(u8 a)
 
 void sub_80B28CC(int unused)
 {
-    memset(&shared19348_, 0, sizeof(shared19348_));
+    memset(&shared19348, 0, sizeof(shared19348));
     if (sContest.unk1925E != 0)
         sContest.unk1925E--;
 }
 
 void sub_80B28F0(u8 a)
 {
-    shared19348_.unk5 = a;
-    shared19348_.unk0 = SanitizeSpecies(gContestMons[a].species);
-    shared19348_.unk8 = gContestMons[a].personality;
-    shared19348_.unkC = gContestMons[a].otId;
+    shared19348.unk5 = a;
+    shared19348.unk0 = SanitizeSpecies(gContestMons[a].species);
+    shared19348.unk8 = gContestMons[a].personality;
+    shared19348.unkC = gContestMons[a].otId;
 }
 
 void sub_80B292C(void)

@@ -5,8 +5,7 @@ FallarborTown_House2_EventScript_153C91:: @ 8153C91
 	lockall
 	applymovement 1, FallarborTown_House2_Movement_1A0839
 	waitmovement 0
-	checkflag FLAG_TEMP_1
-	goto_if_eq FallarborTown_House2_EventScript_153CB6
+	goto_if_set FLAG_TEMP_1, FallarborTown_House2_EventScript_153CB6
 	msgbox FallarborTown_House2_Text_177AF4, 4
 	setflag FLAG_TEMP_1
 	goto FallarborTown_House2_EventScript_153CB6

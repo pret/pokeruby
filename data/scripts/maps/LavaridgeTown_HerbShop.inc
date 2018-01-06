@@ -28,8 +28,7 @@ LavaridgeTown_HerbShop_EventScript_15364C:: @ 815364C
 LavaridgeTown_HerbShop_EventScript_153655:: @ 8153655
 	lock
 	faceplayer
-	checkflag FLAG_RECEIVED_CHARCOAL
-	goto_if_eq LavaridgeTown_HerbShop_EventScript_153684
+	goto_if_set FLAG_RECEIVED_CHARCOAL, LavaridgeTown_HerbShop_EventScript_153684
 	msgbox LavaridgeTown_HerbShop_Text_1761A2, 4
 	giveitem_std ITEM_CHARCOAL
 	compare RESULT, 0

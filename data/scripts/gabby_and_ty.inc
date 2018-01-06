@@ -203,13 +203,12 @@ Route111_EventScript_1AE5A2:: @ 81AE5A2
 	special GabbyAndTyBeforeInterview
 	special GabbyAndTySetScriptVarsToFieldObjectLocalIds
 	compare FACING, 2
-	call_if 1, Route111_EventScript_1AE5E0
+	call_if_eq Route111_EventScript_1AE5E0
 	compare FACING, 1
-	call_if 1, Route111_EventScript_1AE5EB
+	call_if_eq Route111_EventScript_1AE5EB
 	compare FACING, 4
-	call_if 1, Route111_EventScript_1AE5FD
-	checkflag FLAG_TEMP_1
-	goto_if_eq Route111_EventScript_1AE73A
+	call_if_eq Route111_EventScript_1AE5FD
+	goto_if_set FLAG_TEMP_1, Route111_EventScript_1AE73A
 	msgbox Route111_Text_1AC015, MSGBOX_YESNO
 	goto Route111_EventScript_1AE6F3
 	end
@@ -237,13 +236,12 @@ Route120_EventScript_1AE60F:: @ 81AE60F
 	special GabbyAndTyBeforeInterview
 	special GabbyAndTySetScriptVarsToFieldObjectLocalIds
 	compare FACING, 2
-	call_if 1, Route111_EventScript_1AE5E0
+	call_if_eq Route111_EventScript_1AE5E0
 	compare FACING, 1
-	call_if 1, Route111_EventScript_1AE5EB
+	call_if_eq Route111_EventScript_1AE5EB
 	compare FACING, 4
-	call_if 1, Route111_EventScript_1AE5FD
-	checkflag FLAG_TEMP_1
-	goto_if_eq Route111_EventScript_1AE73A
+	call_if_eq Route111_EventScript_1AE5FD
+	goto_if_set FLAG_TEMP_1, Route111_EventScript_1AE73A
 	specialvar RESULT, GabbyAndTyGetLastQuote
 	compare RESULT, 0
 	goto_if_eq Route111_EventScript_1AE69F

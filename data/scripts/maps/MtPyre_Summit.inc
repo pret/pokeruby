@@ -31,11 +31,11 @@ MtPyre_Summit_EventScript_15D4E1:: @ 815D4E1
 	waitmovement 0
 	delay 50
 	compare VAR_SPECIAL_8, 0
-	call_if 1, MtPyre_Summit_EventScript_15D593
+	call_if_eq MtPyre_Summit_EventScript_15D593
 	compare VAR_SPECIAL_8, 1
-	call_if 1, MtPyre_Summit_EventScript_15D59E
+	call_if_eq MtPyre_Summit_EventScript_15D59E
 	compare VAR_SPECIAL_8, 2
-	call_if 1, MtPyre_Summit_EventScript_15D59F
+	call_if_eq MtPyre_Summit_EventScript_15D59F
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B52B0, 4
 	.else
@@ -53,11 +53,11 @@ MtPyre_Summit_EventScript_15D4E1:: @ 815D4E1
 	delay 20
 	call MtPyre_Summit_EventScript_15D57A
 	compare VAR_SPECIAL_8, 0
-	call_if 1, MtPyre_Summit_EventScript_15D5AA
+	call_if_eq MtPyre_Summit_EventScript_15D5AA
 	compare VAR_SPECIAL_8, 1
-	call_if 1, MtPyre_Summit_EventScript_15D5BF
+	call_if_eq MtPyre_Summit_EventScript_15D5BF
 	compare VAR_SPECIAL_8, 2
-	call_if 1, MtPyre_Summit_EventScript_15D5CA
+	call_if_eq MtPyre_Summit_EventScript_15D5CA
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B53AB, 4
 	.else
@@ -144,9 +144,9 @@ MtPyre_Summit_EventScript_15D5EF:: @ 815D5EF
 	msgbox MtPyre_Summit_Text_1B64B3, MSGBOX_YESNO
 	.endif
 	compare RESULT, YES
-	call_if 1, MtPyre_Summit_EventScript_15D611
+	call_if_eq MtPyre_Summit_EventScript_15D611
 	compare RESULT, NO
-	call_if 1, MtPyre_Summit_EventScript_15D61A
+	call_if_eq MtPyre_Summit_EventScript_15D61A
 	release
 	end
 
@@ -169,12 +169,9 @@ MtPyre_Summit_EventScript_15D61A:: @ 815D61A
 MtPyre_Summit_EventScript_15D623:: @ 815D623
 	lock
 	faceplayer
-	checkflag FLAG_RETURNED_RED_OR_BLUE_ORB
-	goto_if_eq MtPyre_Summit_EventScript_15D6C4
-	checkflag FLAG_LEGENDARY_BATTLE_COMPLETED
-	goto_if_eq MtPyre_Summit_EventScript_15D64A
-	checkflag FLAG_LEGEND_ESCAPED_SEAFLOOR_CAVERN
-	goto_if_eq MtPyre_Summit_EventScript_15D6BA
+	goto_if_set FLAG_RETURNED_RED_OR_BLUE_ORB, MtPyre_Summit_EventScript_15D6C4
+	goto_if_set FLAG_LEGENDARY_BATTLE_COMPLETED, MtPyre_Summit_EventScript_15D64A
+	goto_if_set FLAG_LEGEND_ESCAPED_SEAFLOOR_CAVERN, MtPyre_Summit_EventScript_15D6BA
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B54BE, 4
 	.else
@@ -269,11 +266,11 @@ MtPyre_Summit_EventScript_15D6F2:: @ 815D6F2
 	waitmovement 0
 	delay 50
 	compare VAR_SPECIAL_8, 0
-	call_if 1, MtPyre_Summit_EventScript_15D75E
+	call_if_eq MtPyre_Summit_EventScript_15D75E
 	compare VAR_SPECIAL_8, 1
-	call_if 1, MtPyre_Summit_EventScript_15D769
+	call_if_eq MtPyre_Summit_EventScript_15D769
 	compare VAR_SPECIAL_8, 2
-	call_if 1, MtPyre_Summit_EventScript_15D774
+	call_if_eq MtPyre_Summit_EventScript_15D774
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B5BFC, 4
 	.else
@@ -281,11 +278,11 @@ MtPyre_Summit_EventScript_15D6F2:: @ 815D6F2
 	.endif
 	closemessage
 	compare VAR_SPECIAL_8, 0
-	call_if 1, MtPyre_Summit_EventScript_15D77F
+	call_if_eq MtPyre_Summit_EventScript_15D77F
 	compare VAR_SPECIAL_8, 1
-	call_if 1, MtPyre_Summit_EventScript_15D78A
+	call_if_eq MtPyre_Summit_EventScript_15D78A
 	compare VAR_SPECIAL_8, 2
-	call_if 1, MtPyre_Summit_EventScript_15D795
+	call_if_eq MtPyre_Summit_EventScript_15D795
 	removeobject 2
 	setvar VAR_MT_PYRE_STATE, 3
 	releaseall

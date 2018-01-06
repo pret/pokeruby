@@ -26,7 +26,7 @@ MtChimney_EventScript_15CF95:: @ 815CF95
 	msgbox MtChimney_Text_1957A9, 4
 	checkitemspace ITEM_LAVA_COOKIE, 1
 	compare RESULT, 1
-	call_if 1, MtChimney_EventScript_15D000
+	call_if_eq MtChimney_EventScript_15D000
 	giveitem_std ITEM_LAVA_COOKIE
 	compare RESULT, 0
 	goto_if_eq MtChimney_EventScript_15CFF3
@@ -406,10 +406,8 @@ MtChimney_EventScript_15D174:: @ 815D174
 
 MtChimney_EventScript_15D17D:: @ 815D17D
 	lockall
-	checkflag FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY
-	goto_if 0, MtChimney_EventScript_15D1D0
-	checkflag FLAG_RECEIVED_METEORITE
-	goto_if_eq MtChimney_EventScript_15D1C6
+	goto_if_unset FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY, MtChimney_EventScript_15D1D0
+	goto_if_set FLAG_RECEIVED_METEORITE, MtChimney_EventScript_15D1C6
 	msgbox MtChimney_Text_195870, MSGBOX_YESNO
 	compare RESULT, NO
 	goto_if_eq MtChimney_EventScript_15D1BC

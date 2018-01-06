@@ -13,8 +13,7 @@ Route111_WinstrateFamilysHouse_EventScript_15BF3A:: @ 815BF3A
 	lock
 	faceplayer
 	setvar VAR_SPECIAL_8, 3
-	checkflag FLAG_RECEIVED_MACHO_BRACE
-	goto_if_eq Route111_WinstrateFamilysHouse_EventScript_15BF72
+	goto_if_set FLAG_RECEIVED_MACHO_BRACE, Route111_WinstrateFamilysHouse_EventScript_15BF72
 	msgbox Route111_WinstrateFamilysHouse_Text_19208A, 4
 	giveitem_std ITEM_MACHO_BRACE
 	compare RESULT, 0
@@ -40,8 +39,7 @@ Route111_WinstrateFamilysHouse_EventScript_15BF95:: @ 815BF95
 	lock
 	faceplayer
 	setvar VAR_SPECIAL_8, 4
-	checkflag FLAG_TEMP_4
-	goto_if_eq Route111_WinstrateFamilysHouse_EventScript_15BFB6
+	goto_if_set FLAG_TEMP_4, Route111_WinstrateFamilysHouse_EventScript_15BFB6
 	msgbox Route111_WinstrateFamilysHouse_Text_192219, 4
 	setflag FLAG_TEMP_4
 	goto Route111_WinstrateFamilysHouse_EventScript_15BFC4

@@ -17,11 +17,11 @@ Route111_EventScript_1A3877:: @ 81A3877
 	setflag FLAG_RECEIVED_SECRET_POWER
 	clearflag FLAG_HIDE_TM_SALESMAN_SLATEPORT
 	compare FACING, 3
-	call_if 1, Route111_EventScript_1A38C3
+	call_if_eq Route111_EventScript_1A38C3
 	compare FACING, 4
-	call_if 1, Route111_EventScript_1A38C3
+	call_if_eq Route111_EventScript_1A38C3
 	compare FACING, 2
-	call_if 1, Route111_EventScript_1A38CE
+	call_if_eq Route111_EventScript_1A38CE
 	removeobject LAST_TALKED
 	release
 	end

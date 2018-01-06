@@ -7,12 +7,9 @@ FortreeCity_House4_EventScript_15817F:: @ 815817F
 
 FortreeCity_House4_EventScript_158188:: @ 8158188
 	lockall
-	checkflag FLAG_RECEIVED_MENTAL_HERB
-	goto_if_eq FortreeCity_House4_EventScript_158204
-	checkflag FLAG_WINGULL_DELIVERED_MAIL
-	goto_if_eq FortreeCity_House4_EventScript_1581D6
-	checkflag FLAG_WINGULL_SENT_ON_ERRAND
-	goto_if_eq FortreeCity_House4_EventScript_1581C2
+	goto_if_set FLAG_RECEIVED_MENTAL_HERB, FortreeCity_House4_EventScript_158204
+	goto_if_set FLAG_WINGULL_DELIVERED_MAIL, FortreeCity_House4_EventScript_1581D6
+	goto_if_set FLAG_WINGULL_SENT_ON_ERRAND, FortreeCity_House4_EventScript_1581C2
 	msgbox FortreeCity_House4_Text_186835, 4
 	closemessage
 	setflag FLAG_WINGULL_SENT_ON_ERRAND

@@ -8,8 +8,7 @@ FallarborTown_House1_MapScript1_153BB4:: @ 8153BB4
 FallarborTown_House1_EventScript_153BB5:: @ 8153BB5
 	lock
 	faceplayer
-	checkflag FLAG_RECEIVED_TM27
-	goto_if_eq FallarborTown_House1_EventScript_153C54
+	goto_if_set FLAG_RECEIVED_TM27, FallarborTown_House1_EventScript_153C54
 	checkitem ITEM_METEORITE, 1
 	compare RESULT, 1
 	goto_if_eq FallarborTown_House1_EventScript_153BDA
@@ -18,10 +17,8 @@ FallarborTown_House1_EventScript_153BB5:: @ 8153BB5
 	end
 
 FallarborTown_House1_EventScript_153BDA:: @ 8153BDA
-	checkflag FLAG_TEMP_2
-	call_if 0, FallarborTown_House1_EventScript_153C2D
-	checkflag FLAG_TEMP_2
-	call_if 1, FallarborTown_House1_EventScript_153C3E
+	call_if_unset FLAG_TEMP_2, FallarborTown_House1_EventScript_153C2D
+	call_if_set FLAG_TEMP_2, FallarborTown_House1_EventScript_153C3E
 	compare RESULT, NO
 	goto_if_eq FallarborTown_House1_EventScript_153C47
 	msgbox FallarborTown_House1_Text_1778C4, 4
@@ -58,10 +55,8 @@ FallarborTown_House1_EventScript_153C54:: @ 8153C54
 FallarborTown_House1_EventScript_153C5E:: @ 8153C5E
 	lock
 	faceplayer
-	checkflag FLAG_RECEIVED_TM27
-	goto_if_eq FallarborTown_House1_EventScript_153C86
-	checkflag FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY
-	goto_if_eq FallarborTown_House1_EventScript_153C7C
+	goto_if_set FLAG_RECEIVED_TM27, FallarborTown_House1_EventScript_153C86
+	goto_if_set FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY, FallarborTown_House1_EventScript_153C7C
 	msgbox FallarborTown_House1_Text_177A2B, 4
 	release
 	end

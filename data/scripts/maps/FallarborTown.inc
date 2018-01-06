@@ -12,8 +12,7 @@ FallarborTown_MapScript1_14E7E6:: @ 814E7E6
 FallarborTown_EventScript_14E7F5:: @ 814E7F5
 	lock
 	faceplayer
-	checkflag FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY
-	goto_if_eq FallarborTown_EventScript_14E80A
+	goto_if_set FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY, FallarborTown_EventScript_14E80A
 	msgbox FallarborTown_Text_16C7FF, 4
 	release
 	end
