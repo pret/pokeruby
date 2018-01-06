@@ -368,16 +368,6 @@ struct Struct2017100
     u32 arr[4];
 };
 
-struct Struct2019348
-{
-    u16 unk0;
-    u16 unk2;
-    u8 unk4;
-    u32 unk8;
-    u32 unkC;
-    u32 unk10;
-};
-
 struct Struct2017800
 {
     u8 invisible:1;

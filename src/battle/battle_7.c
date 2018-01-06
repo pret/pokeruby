@@ -3,6 +3,7 @@
 #include "battle_anim.h"
 #include "battle_interface.h"
 #include "blend_palette.h"
+#include "contest.h"
 #include "data2.h"
 #include "decompress.h"
 #include "main.h"
@@ -629,9 +630,9 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
         if (IsContest())
         {
             r10 = 0;
-            species = ewram19348.unk2;
-            personalityValue = ewram19348.unk8;
-            otId = ewram19348.unkC;
+            species = shared19348.unk2;
+            personalityValue = shared19348.unk8;
+            otId = shared19348.unkC;
             HandleLoadSpecialPokePic(
               &gMonBackPicTable[species],
               gMonBackPicCoords[species].coords,
@@ -639,7 +640,7 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
               eVoidSharedArr2,
               gUnknown_081FAF4C[0],
               species,
-              ewram19348.unk10);
+              shared19348.unk10);
         }
         else
         {
