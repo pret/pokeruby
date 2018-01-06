@@ -17,9 +17,9 @@ struct StorageAction {
     u8 format;
 };
 
-struct ReverseMenuAction {
-    u32 unk0;
-    u8 *text;
+struct PSS_MenuStringPtrs {
+    const u8 *text;
+    const u8 *desc;
 };
 
 struct PokemonStorageSystemData {
@@ -27,16 +27,71 @@ struct PokemonStorageSystemData {
     u8 unk_0005;
 };
 
-const struct PokemonStorageSystemData *gUnknown_083B6DB4;
+struct UnkPSSStruct_2002370 {
+    u8 filler_0000[0x23e];
+    u8 unk_023e;
+    u16 unk_0240;
+    u16 unk_0242;
+};
 
 void StorageSystemCreatePrimaryMenu(u8 whichMenu);
 void task_intro_29(u8 whichMenu);
 
+const struct PSS_MenuStringPtrs gUnknown_083B600C[] = {
+    {PCText_WithdrawPoke, PCText_MovePokeToParty},
+    {PCText_DepositPoke,  PCText_StorePokeInBox},
+    {PCText_MovePoke,     PCText_OrganizeBoxesParty},
+    {PCText_SeeYa,        PCText_ReturnToPrevMenu}
+};
+
+const union AnimCmd gSpriteAnim_83B602C[] = {
+    ANIMCMD_FRAME( 0, 5),
+    ANIMCMD_END
+};
+
+const union AnimCmd gSpriteAnim_83B6034[] = {
+    ANIMCMD_FRAME( 4, 5),
+    ANIMCMD_END
+};
+
+const union AnimCmd gSpriteAnim_83B603C[] = {
+    ANIMCMD_FRAME( 6, 5),
+    ANIMCMD_END
+};
+
+const union AnimCmd gSpriteAnim_83B6044[] = {
+    ANIMCMD_FRAME(10, 5),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gSpriteAnimTable_83B604C[] = {
+    gSpriteAnim_83B602C,
+    gSpriteAnim_83B6034,
+    gSpriteAnim_83B603C,
+    gSpriteAnim_83B6044
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83B605C[] = {
+    AFFINEANIMCMD_FRAME(0xe0, 0xe0, 0, 0),
+    AFFINEANIMCMD_END
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_83B606C[] = {
+    gSpriteAffineAnim_83B605C
+};
+
+const u16 gBoxSelectionPopupPalette[] = INCBIN_U16("graphics/pokemon_storage/box_selection_popup.gbapal");
+
+const u8 gBoxSelectionPopupCenterTiles[] = INCBIN_U8("graphics/pokemon_storage/box_selection_popup_center.4bpp");
+
+const u8 gBoxSelectionPopupSidesTiles[] = INCBIN_U8("graphics/pokemon_storage/box_selection_popup_sides.4bpp");
+
 extern const struct StorageAction gUnknown_083B6DF4[];
-extern const struct ReverseMenuAction gUnknown_083B600C[];
+extern const struct PokemonStorageSystemData *gUnknown_083B6DB4;
 
 EWRAM_DATA struct PokemonStorage gPokemonStorage = {0};
 EWRAM_DATA u8 gUnknown_02038474;
+EWRAM_DATA struct UnkPSSStruct_2002370 *gUnknown_02038478;
 
 u8 sub_8095ADC(u8 boxId)
 {
@@ -318,7 +373,7 @@ void Task_PokemonStorageSystem(u8 taskId)
         case 0:
             StorageSystemCreatePrimaryMenu(task->data[1]);
             MenuDisplayMessageBox();
-            MenuPrint(gUnknown_083B600C[task->data[1]].text, 2, 15);
+            MenuPrint(gUnknown_083B600C[task->data[1]].desc, 2, 15);
             task->data[0]++;
             break;
         case 1:
@@ -342,7 +397,7 @@ void Task_PokemonStorageSystem(u8 taskId)
                     {
                         task->data[1] = task->data[3];
                         StorageSystemClearMessageWindow();
-                        MenuPrint(gUnknown_083B600C[task->data[1]].text, 2, 15);
+                        MenuPrint(gUnknown_083B600C[task->data[1]].desc, 2, 15);
                     }
                     break;
                 case -1:
@@ -378,7 +433,7 @@ void Task_PokemonStorageSystem(u8 taskId)
             if (gMain.newKeys & (A_BUTTON | B_BUTTON))
             {
                 StorageSystemClearMessageWindow();
-                MenuPrint(gUnknown_083B600C[task->data[1]].text, 2, 15);
+                MenuPrint(gUnknown_083B600C[task->data[1]].desc, 2, 15);
                 task->data[0] = 2;
             }
             else if (gMain.newKeys & DPAD_UP)
@@ -388,7 +443,7 @@ void Task_PokemonStorageSystem(u8 taskId)
                 MoveMenuCursor(-1);
                 task->data[1] = GetMenuCursorPos();
                 StorageSystemClearMessageWindow();
-                MenuPrint(gUnknown_083B600C[task->data[1]].text, 2, 15);
+                MenuPrint(gUnknown_083B600C[task->data[1]].desc, 2, 15);
                 task->data[0] = 2;
             }
             else if (gMain.newKeys & DPAD_DOWN)
@@ -398,7 +453,7 @@ void Task_PokemonStorageSystem(u8 taskId)
                 MoveMenuCursor(1);
                 task->data[1] = GetMenuCursorPos();
                 StorageSystemClearMessageWindow();
-                MenuPrint(gUnknown_083B600C[task->data[1]].text, 2, 15);
+                MenuPrint(gUnknown_083B600C[task->data[1]].desc, 2, 15);
                 task->data[0] = 2;
             }
             break;
@@ -428,11 +483,11 @@ void sub_8096130(void)
     pal_fill_black();
 }
 
-void StorageSystemCreatePrimaryMenu(u8 a0)
+void StorageSystemCreatePrimaryMenu(u8 whichMenu)
 {
     MenuDrawTextWindow(0, 0, 13, 9);
     PrintMenuItems(1, 1, 4, (const struct MenuAction *)gUnknown_083B600C);
-    InitMenu(0, 1, 1, 4, a0, 12);
+    InitMenu(0, 1, 1, 4, whichMenu, 12);
 }
 
 void sub_80961A8(void)
@@ -464,6 +519,24 @@ void ResetPokemonStorageSystem(void)
     {
         gPokemonStorage.wallpaper[boxId] = boxId & 0x03;
     }
+}
+
+void sub_8096264(struct UnkPSSStruct_2002370 *a0, u16 tileTag, u16 palTag, u8 a3)
+{
+    struct SpritePalette palette = {
+        gBoxSelectionPopupPalette, palTag
+    };
+    struct SpriteSheet sheets[] = {
+        {gBoxSelectionPopupCenterTiles, 0x800, tileTag},
+        {gBoxSelectionPopupSidesTiles,  0x180, tileTag + 1},
+        {}
+    };
+    LoadSpritePalette(&palette);
+    LoadSpriteSheets(sheets);
+    gUnknown_02038478 = a0;
+    a0->unk_0240 = tileTag;
+    a0->unk_0242 = palTag;
+    a0->unk_023e = a3;
 }
 
 asm(".section .text.8098898");

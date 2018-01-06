@@ -4,61 +4,6 @@
 	.section .rodata
 
 	.align 2
-gUnknown_083B600C:: @ 83B600C
-	.4byte PCText_WithdrawPoke, PCText_MovePokeToParty
-	.4byte PCText_DepositPoke, PCText_StorePokeInBox
-	.4byte PCText_MovePoke, PCText_OrganizeBoxesParty
-	.4byte PCText_SeeYa, PCText_ReturnToPrevMenu
-
-	.align 2
-gSpriteAnim_83B602C:: @ 83B602C
-	obj_image_anim_frame 0, 5
-	obj_image_anim_end
-
-	.align 2
-gSpriteAnim_83B6034:: @ 83B6034
-	obj_image_anim_frame 4, 5
-	obj_image_anim_end
-
-	.align 2
-gSpriteAnim_83B603C:: @ 83B603C
-	obj_image_anim_frame 6, 5
-	obj_image_anim_end
-
-	.align 2
-gSpriteAnim_83B6044:: @ 83B6044
-	obj_image_anim_frame 10, 5
-	obj_image_anim_end
-
-	.align 2
-gSpriteAnimTable_83B604C:: @ 83B604C
-	.4byte gSpriteAnim_83B602C
-	.4byte gSpriteAnim_83B6034
-	.4byte gSpriteAnim_83B603C
-	.4byte gSpriteAnim_83B6044
-
-	.align 2
-gSpriteAffineAnim_83B605C:: @ 83B605C
-	obj_rot_scal_anim_frame 0xE0, 0xE0, 0, 0
-	obj_rot_scal_anim_end
-
-	.align 2
-gSpriteAffineAnimTable_83B606C:: @ 83B606C
-	.4byte gSpriteAffineAnim_83B605C
-
-	.align 2
-gBoxSelectionPopupPalette:: @ 83B6070
-	.incbin "graphics/pokemon_storage/box_selection_popup.gbapal"
-
-	.align 2
-gBoxSelectionPopupCenterTiles:: @ 83B6090
-	.incbin "graphics/pokemon_storage/box_selection_popup_center.4bpp"
-
-	.align 2
-gBoxSelectionPopupSidesTiles:: @ 83B6890
-	.incbin "graphics/pokemon_storage/box_selection_popup_sides.4bpp"
-
-	.align 2
 gPokemonStorageScrollingBGPalette:: @ 83B6A10
 	.incbin "graphics/pokemon_storage/scrolling_bg.gbapal"
 
