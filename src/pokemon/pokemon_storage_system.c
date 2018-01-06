@@ -99,6 +99,21 @@ u8 *unref_sub_8095C60(u8 *dest, const u8 *src, u16 pad)
     return _dest;
 }
 
+void sub_8095C8C(u16 *dest, u16 dest_left, u16 dest_top, u16 *src, u16 src_left, u16 src_top, u16 dest_width, u16 dest_height, u16 src_width)
+{
+    u16 i;
+
+    dest_width *= 2;
+    dest += dest_top * 0x20 + dest_left;
+    src += src_top * src_width + src_left;
+    for (i = 0; i < dest_height; i++)
+    {
+        CpuCopy16(src, dest, dest_width);
+        dest += 0x20;
+        src += src_width;
+    }
+}
+
 asm(".section .text.8098898");
 
 void sub_8098898(u8 index) {
