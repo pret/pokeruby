@@ -244,143 +244,37 @@ void sub_8124D3C(struct UnkStruct0 *r0, u16 r1)
         r0->var02 = r0->var02 & ~r1;
     }
 }
-#ifdef NONMATCHING
-void sub_8124DDC(u16 *r0, u16 r1, u8 r2, u8 r3, u8 r4, u8 r5)
+void sub_8124DDC(u16 *dest, u16 src, u8 left, u8 top, u8 width, u8 height)
 {
-    u16 *rg0;
-    u8 c;
-    u8 i = 0;
-    u32 offset= r3 * 0x20 + r2;
-    rg0 = &r0[offset];
-    for (i = 0; i < r5; i++)
+
+    u16 *_dest;
+    u8 i;
+    u8 j;
+    i = 0x0;
+    dest = &dest[top * 32 + left];
+    for (; i < height; i++)
     {
-        rg0 = &rg0[i * 0x20 ];
-        c = 0;
-        for (c = 0; c < r4; c++)
+        _dest = dest + i * 32;
+        for (j = 0; j < width; j++)
         {
-            *rg0++ = r1;
+            *_dest++ = src;
         }
     }
 }
-#else
-__attribute__((naked))
-void sub_8124DDC(u16 *r0, u16 r1, u8 r2, u8 r3, u8 r4, u8 r5)
+void sub_8124E2C(u16 *dest, u16 *src, u8 left, u8 top, u8 width, u8 height)
 {
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    adds r6, r0, 0\n\
-    ldr r0, [sp, 0x14]\n\
-    ldr r4, [sp, 0x18]\n\
-    lsls r1, 16\n\
-    lsrs r7, r1, 16\n\
-    lsls r2, 24\n\
-    lsrs r2, 24\n\
-    lsls r3, 24\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    lsls r4, 24\n\
-    lsrs r4, 24\n\
-    movs r1, 0\n\
-    lsrs r3, 19\n\
-    adds r3, r2\n\
-    lsls r3, 1\n\
-    adds r6, r3\n\
-    cmp r1, r4\n\
-    bcs _08124E26\n\
-_08124E04:\n\
-    lsls r0, r1, 6\n\
-    adds r2, r6, r0\n\
-    movs r0, 0\n\
-    adds r3, r1, 0x1\n\
-    cmp r0, r5\n\
-    bcs _08124E1E\n\
-_08124E10:\n\
-    strh r7, [r2]\n\
-    adds r2, 0x2\n\
-    adds r0, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, r5\n\
-    bcc _08124E10\n\
-_08124E1E:\n\
-    lsls r0, r3, 24\n\
-    lsrs r1, r0, 24\n\
-    cmp r1, r4\n\
-    bcc _08124E04\n\
-_08124E26:\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .syntax divided\n");
-}
-#endif
-#ifdef NONMATCHING
-void sub_8124E2C(u16 *r0, u16 *r1, u8 r2, u8 r3, u8 r4, u8 r5)
-{
-    u16 *rg0;
-    u8 c;
-    u8 i = 0;
-    u32 offset= r3 * 0x20 + r2;
-    //rg0 = &r0[offset];
-    for (i = 0; i < r5; i++)
+    u16 *_dest;
+    u16 *_src = src;
+    u8 i;
+    u8 j;
+    i = 0x0;
+    dest = &dest[top * 32 + left];
+    for (; i < height; i++)
     {
-        rg0 = &r0[offset + i * 0x20 ];
-        c = 0;
-        for (c = 0; c < r4; c++)
+        _dest = dest + i * 32;
+        for (j = 0; j < width; j++)
         {
-            *(rg0++) = *(r1++);
+            *_dest++ = *_src++;
         }
     }
 }
-#else
-__attribute__((naked))
-void sub_8124E2C(u16 *r0, u16 *r1, u8 r2, u8 r3, u8 r4, u8 r5)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    adds r7, r0, 0\n\
-    ldr r0, [sp, 0x14]\n\
-    ldr r4, [sp, 0x18]\n\
-    lsls r2, 24\n\
-    lsrs r2, 24\n\
-    lsls r3, 24\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    lsls r4, 24\n\
-    lsrs r6, r4, 24\n\
-    movs r4, 0\n\
-    lsrs r3, 19\n\
-    adds r3, r2\n\
-    lsls r3, 1\n\
-    adds r7, r3\n\
-    cmp r4, r6\n\
-    bcs _08124E76\n\
-    _08124E50:\n\
-    lsls r0, r4, 6\n\
-    adds r2, r7, r0\n\
-    movs r3, 0\n\
-    adds r4, 0x1\n\
-    cmp r3, r5\n\
-    bcs _08124E6E\n\
-    _08124E5C:\n\
-    ldrh r0, [r1]\n\
-    strh r0, [r2]\n\
-    adds r1, 0x2\n\
-    adds r2, 0x2\n\
-    adds r0, r3, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r3, r0, 24\n\
-    cmp r3, r5\n\
-    bcc _08124E5C\n\
-    _08124E6E:\n\
-    lsls r0, r4, 24\n\
-    lsrs r4, r0, 24\n\
-    cmp r4, r6\n\
-    bcc _08124E50\n\
-    _08124E76:\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .syntax divided\n");
-}
-#endif
