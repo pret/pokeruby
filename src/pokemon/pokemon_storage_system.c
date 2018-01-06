@@ -1,6 +1,8 @@
 #include "global.h"
 #include "palette.h"
 #include "field_weather.h"
+#include "overworld.h"
+#include "field_fadetransition.h"
 #include "menu.h"
 #include "main.h"
 #include "strings.h"
@@ -20,14 +22,21 @@ struct ReverseMenuAction {
     u8 *text;
 };
 
+struct PokemonStorageSystemData {
+    u8 filler_0000[5];
+    u8 unk_0005;
+};
+
+const struct PokemonStorageSystemData *gUnknown_083B6DB4;
+
 void StorageSystemCreatePrimaryMenu(u8 whichMenu);
 void task_intro_29(u8 whichMenu);
 
 extern const struct StorageAction gUnknown_083B6DF4[];
-
 extern const struct ReverseMenuAction gUnknown_083B600C[];
 
 EWRAM_DATA struct PokemonStorage gPokemonStorage = {0};
+EWRAM_DATA u8 gUnknown_02038474;
 
 u8 sub_8095ADC(u8 boxId)
 {
@@ -400,6 +409,60 @@ void Task_PokemonStorageSystem(u8 taskId)
                 DestroyTask(taskId);
             }
             break;
+    }
+}
+
+void ShowPokemonStorageSystem(void)
+{
+    u8 taskId = CreateTask(Task_PokemonStorageSystem, 80);
+    gTasks[taskId].data[0] = 0;
+    gTasks[taskId].data[1] = 0;
+    ScriptContext2_Enable();
+}
+
+void sub_8096130(void)
+{
+    u8 taskId = CreateTask(Task_PokemonStorageSystem, 80);
+    gTasks[taskId].data[0] = 0;
+    gTasks[taskId].data[1] = gUnknown_02038474;
+    pal_fill_black();
+}
+
+void StorageSystemCreatePrimaryMenu(u8 a0)
+{
+    MenuDrawTextWindow(0, 0, 13, 9);
+    PrintMenuItems(1, 1, 4, (const struct MenuAction *)gUnknown_083B600C);
+    InitMenu(0, 1, 1, 4, a0, 12);
+}
+
+void sub_80961A8(void)
+{
+    gUnknown_02038474 = gUnknown_083B6DB4->unk_0005;
+    gFieldCallback = sub_8096130;
+    SetMainCallback2(c2_exit_to_overworld_2_switch);
+}
+
+void ResetPokemonStorageSystem(void)
+{
+    u16 boxId;
+    u16 boxMon;
+
+    gPokemonStorage.currentBox = 0;
+    for (boxId = 0; boxId < 14; boxId++)
+    {
+        for (boxMon = 0; boxMon < 30; boxMon++)
+        {
+            ZeroBoxMonData(gPokemonStorage.boxes[boxId] + boxMon);
+        }
+    }
+    for (boxId = 0; boxId < 14; boxId++)
+    {
+        u8 *dest = StringCopy(gPokemonStorage.boxNames[boxId], gPCText_BOX);
+        ConvertIntToDecimalStringN(dest, boxId + 1, STR_CONV_MODE_LEFT_ALIGN, 2);
+    }
+    for (boxId = 0; boxId < 14; boxId++)
+    {
+        gPokemonStorage.wallpaper[boxId] = boxId & 0x03;
     }
 }
 
