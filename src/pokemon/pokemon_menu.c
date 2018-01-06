@@ -1,4 +1,5 @@
 #include "global.h"
+#include "easy_chat.h"
 #include "pokemon.h"
 #include "pokemon_menu.h"
 #include "party_menu.h"
@@ -53,7 +54,6 @@ extern u16 gUnknown_0202E8F8;
 extern void (*gUnknown_03004AE4)(u8 taskID, u16 itemID, TaskFunc func);
 extern TaskFunc gUnknown_03005CF0;
 
-void sub_80E62A0(u8 arg0, struct MailStruct* arg1, void* arg2, u8 arg3);
 void sub_808A520(void);
 void sub_80A61D0(void);
 void CB2_InitFlyRegionMap(void);
@@ -419,7 +419,7 @@ static void sub_808A180(u8 taskID)
     {
         u8 mailID = GetMonData(&gPlayerParty[sub_806CA38(taskID)], MON_DATA_MAIL);
         DestroyTask(taskID);
-        sub_80E62A0(4, &gSaveBlock1.mail[mailID], sub_808A520, 3);
+        sub_80E62A0(4, gSaveBlock1.mail[mailID].words, sub_808A520, 3);
     }
 }
 
@@ -458,7 +458,7 @@ static void sub_808A2DC(u8 taskID)
 {
     u8 mailID = GetMonData(&gPlayerParty[sub_806CA38(taskID)], MON_DATA_MAIL);
     DestroyTask(taskID);
-    sub_80E62A0(4, &gSaveBlock1.mail[mailID], sub_808A520, 3);
+    sub_80E62A0(4, gSaveBlock1.mail[mailID].words, sub_808A520, 3);
 }
 
 static void sub_808A330(u8 taskID)
@@ -1095,7 +1095,7 @@ static void sub_808B338(u8 taskID)
         gLastFieldPokeMenuOpened = sub_806CA38(taskID);
         mailID = GetMonData(&gPlayerParty[gLastFieldPokeMenuOpened], MON_DATA_MAIL);
         DestroyTask(taskID);
-        sub_80E62A0(4, &gSaveBlock1.mail[mailID], sub_808B3EC, 3);
+        sub_80E62A0(4, gSaveBlock1.mail[mailID].words, sub_808B3EC, 3);
     }
 }
 

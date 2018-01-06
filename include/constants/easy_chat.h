@@ -1,7 +1,7 @@
 #ifndef GUARD_CONSTANTS_EASY_CHAT_H
 #define GUARD_CONSTANTS_EASY_CHAT_H
 
-#define EC_GROUP_POKEMON        0x0
+#define EC_GROUP_POKEMON_1      0x0
 #define EC_GROUP_TRAINER        0x1
 #define EC_GROUP_STATUS         0x2
 #define EC_GROUP_BATTLE         0x3
@@ -1053,7 +1053,7 @@
 #define EC_WORD_YOUNG          (EC_GROUP_TRENDY_SAYING << 9) | 0x1f
 #define EC_WORD_UGLY           (EC_GROUP_TRENDY_SAYING << 9) | 0x20
 
-#define EC_POKEMON(mon) ((EC_GROUP_POKEMON << 9) | SPECIES_##mon)
+#define EC_POKEMON(mon) ((EC_GROUP_POKEMON_1 << 9) | SPECIES_##mon)
 #define EC_POKEMON2(mon) ((EC_GROUP_POKEMON_2 << 9) | SPECIES_##mon)
 #define EC_MOVE(move) ((EC_GROUP_MOVE_1 << 9) | MOVE_##move)
 #define EC_MOVE2(move) ((EC_GROUP_MOVE_2 << 9) | MOVE_##move)
