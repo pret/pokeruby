@@ -303,7 +303,7 @@ SECTIONS {
         asm/battle_intro.o(.text);
         src/field/bike.o(.text);
         src/easy_chat_1.o(.text);
-		src/easy_chat_2.o(.text);
+        src/easy_chat_2.o(.text);
         src/pokenav_before.o(.text);
         asm/pokenav.o(.text);
         src/pokenav_after.o(.text);
