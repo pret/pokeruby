@@ -9,38 +9,39 @@
 
 // text
 
-void CableCarUtil_FillWrapped(void *dest, u16 value, u8 x, u8 y, u8 width, u8 height)
+void CableCarUtil_FillWrapped(void *dest, u16 value, u8 left, u8 top, u8 width, u8 height)
 {
     u8 i;
     u8 j;
-    u8 _x;
-    u8 _y;
+    u8 x;
+    u8 y;
 
-    for (i = 0, _y = y; i < height; i++)
+    for (i = 0, y = top; i < height; i++)
     {
-        for (_x = x, j = 0; j < width; j++)
+        for (x = left, j = 0; j < width; j++)
         {
-            *(u16 *)&((u8 *)dest)[_y * 64 + _x * 2] = value;
-            _x = (_x + 1) % 32;
+            *(u16 *)&((u8 *)dest)[y * 64 + x * 2] = value;
+            x = (x + 1) % 32;
         }
-        _y = (_y + 1) % 32;
+        y = (y + 1) % 32;
     }
 }
-void CableCarUtil_CopyWrapped(void *dest, const u16 *src, u8 x, u8 y, u8 width, u8 height)
+
+void CableCarUtil_CopyWrapped(void *dest, const u16 *src, u8 left, u8 top, u8 width, u8 height)
 {
     u8 i;
     u8 j;
-    u8 _x;
-    u8 _y;
+    u8 x;
+    u8 y;
     const u16 *_src;
 
-    for (i = 0, _src = src, _y = y; i < height; i++)
+    for (i = 0, _src = src, y = top; i < height; i++)
     {
-        for (_x = x, j = 0; j < width; j++)
+        for (x = left, j = 0; j < width; j++)
         {
-            *(u16 *)&((u8 *)dest)[_y * 64 + _x * 2] = *_src++;
-            _x = (_x + 1) % 32;
+            *(u16 *)&((u8 *)dest)[y * 64 + x * 2] = *_src++;
+            x = (x + 1) % 32;
         }
-        _y = (_y + 1) % 32;
+        y = (y + 1) % 32;
     }
 }
