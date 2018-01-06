@@ -9,6 +9,7 @@
 #include "script.h"
 #include "task.h"
 #include "sound.h"
+#include "graphics.h"
 #include "constants/songs.h"
 #include "decompress.h"
 #include "field_weather.h"
@@ -81,40 +82,33 @@ EWRAM_DATA u32 filler_02039280 = 0;
 
 // Static ROM declarations
 
-void sub_8123244(void);
-void sub_8123724(void);
-void sub_8123878(u8 taskId);
-void sub_81239E4(u8 taskId);
-void sub_8123AF8(u8 taskId);
-void sub_8123C40(void);
-void nullsub_76(struct Sprite *sprite);
-void sub_8123CB8(struct Sprite *sprite);
-void sub_8123EB8(struct Sprite *sprite);
-void sub_8123F44(struct Sprite *sprite);
-void sub_8123FBC(u8);
-void sub_8124118(void);
-void sub_812453C(void);
-void sub_8124598(void);
-void sub_81245F4(void);
-void sub_812476C(void);
-void sub_81248AC(u8);
+static void sub_8123244(void);
+static void sub_8123724(void);
+static void sub_8123878(u8 taskId);
+static void sub_81239E4(u8 taskId);
+static void sub_8123AF8(u8 taskId);
+static void sub_8123C40(void);
+static void nullsub_76(struct Sprite *sprite);
+static void sub_8123CB8(struct Sprite *sprite);
+static void sub_8123EB8(struct Sprite *sprite);
+static void sub_8123F44(struct Sprite *sprite);
+static void sub_8123FBC(u8);
+static void sub_8124118(void);
+static void sub_812453C(void);
+static void sub_8124598(void);
+static void sub_81245F4(void);
+static void sub_812476C(void);
+static void sub_81248AC(u8);
 
 // .rodata
 
-extern const u8 gCableCar_Gfx[];
-extern const u8 gCableCarDoor_Gfx[];
-extern const u8 gCableCarCord_Gfx[];
-extern const u16 gCableCar_Pal[];
-extern const u16 gCableCarBG_Pal[];
-extern const u8 gCableCarBG_Gfx[];
+static const u8 gCableCarMtChimneyTilemap[] = INCBIN_U8("graphics/misc/cable_car_mt_chimney_map.bin.lz");
 
-const u8 gCableCarMtChimneyTilemap[] = INCBIN_U8("graphics/misc/cable_car_mt_chimney_map.bin.lz");
+static const u8 gCableCarTreeTilemap[] = INCBIN_U8("graphics/misc/cable_car_tree_map.bin.lz");
 
-const u8 gCableCarTreeTilemap[] = INCBIN_U8("graphics/misc/cable_car_tree_map.bin.lz");
+static const u8 gCableCarMountainTilemap[] = INCBIN_U8("graphics/misc/cable_car_mountain_map.bin.lz");
 
-const u8 gCableCarMountainTilemap[] = INCBIN_U8("graphics/misc/cable_car_mountain_map.bin.lz");
-
-const u16 gCableCarPylonHookTilemapEntries[] = {
+static const u16 gCableCarPylonHookTilemapEntries[] = {
     0x3000,
     0x3001,
     0x3002,
@@ -127,38 +121,38 @@ const u16 gCableCarPylonHookTilemapEntries[] = {
     0x3009
 };
 
-const u8 gCableCarPylonStemTilemap[] = INCBIN_U8("graphics/misc/cable_car_pylon_stem_map.bin.lz");
+static const u8 gCableCarPylonStemTilemap[] = INCBIN_U8("graphics/misc/cable_car_pylon_stem_map.bin.lz");
 
-const struct CompressedSpriteSheet gUnknown_08401CF8[] = {
+static const struct CompressedSpriteSheet gUnknown_08401CF8[] = {
     { gCableCar_Gfx,     0x800, 1 },
     { gCableCarDoor_Gfx,  0x40, 2 },
     { gCableCarCord_Gfx,  0x80, 3 },
     {                             }
 };
-const struct SpritePalette gUnknown_08401D18[] = {
+static const struct SpritePalette gUnknown_08401D18[] = {
     { gCableCar_Pal, 1 },
     {                  }
 };
 
-const struct OamData gOamData_8401D28 = {
+static const struct OamData gOamData_8401D28 = {
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .size = 3,
     .priority = 2
 };
 
-const struct OamData gOamData_8401D30 = {
+static const struct OamData gOamData_8401D30 = {
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .shape = ST_OAM_H_RECTANGLE,
     .priority = 2
 };
 
-const struct OamData gOamData_8401D38 = {
+static const struct OamData gOamData_8401D38 = {
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .size = 1,
     .priority = 2
 };
 
-const struct SpriteTemplate gSpriteTemplate_8401D40[] = {
+static const struct SpriteTemplate gSpriteTemplate_8401D40[] = {
     {
         1,
         1,
@@ -188,7 +182,7 @@ const struct SpriteTemplate gSpriteTemplate_8401D40[] = {
 
 // .text
 
-void sub_81231EC(u8 taskId)
+static void sub_81231EC(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -204,7 +198,7 @@ void sub_8123218(void)
     BeginNormalPaletteFade(-1, 0, 0, 16, 0);
 }
 
-void sub_8123244(void)
+static void sub_8123244(void)
 {
     u8 i;
     u16 imebak;
@@ -318,7 +312,7 @@ void sub_8123244(void)
     }
 }
 
-void sub_8123724(void)
+static void sub_8123724(void)
 {
     RunTasks();
     AnimateSprites();
@@ -327,7 +321,7 @@ void sub_8123724(void)
     MapMusicMain();
 }
 
-void sub_8123740(void)
+static void sub_8123740(void)
 {
     u8 i;
 
@@ -352,7 +346,7 @@ void sub_8123740(void)
     SetMainCallback2(CB2_LoadMap);
 }
 
-void sub_8123878(u8 taskId)
+static void sub_8123878(u8 taskId)
 {
     u8 i;
 
@@ -424,7 +418,7 @@ void sub_8123878(u8 taskId)
     }
 }
 
-void sub_81239E4(u8 taskId)
+static void sub_81239E4(u8 taskId)
 {
     if (gUnknown_02039274->unk_0001 != 255)
     {
@@ -460,7 +454,7 @@ void sub_81239E4(u8 taskId)
     gSpriteCoordOffsetX = (gSpriteCoordOffsetX + 1) % 128;
 }
 
-void sub_8123AF8(u8 taskId)
+static void sub_8123AF8(u8 taskId)
 {
     if (gUnknown_02039274->unk_0001 != 255)
     {
@@ -506,7 +500,7 @@ void sub_8123AF8(u8 taskId)
     }
 }
 
-void sub_8123C40(void)
+static void sub_8123C40(void)
 {
     DmaCopy16(3, gUnknown_02039274->unk_00fc, BG_SCREEN_ADDR(28), 0x800);
     DmaCopy16(3, gUnknown_02039274->unk_08fc, BG_SCREEN_ADDR(31), 0x800);
@@ -521,12 +515,12 @@ void sub_8123C40(void)
     TransferPlttBuffer();
 }
 
-void nullsub_76(struct Sprite *sprite)
+static void nullsub_76(struct Sprite *sprite)
 {
 
 }
 
-void sub_8123CB8(struct Sprite *sprite)
+static void sub_8123CB8(struct Sprite *sprite)
 {
     if (gUnknown_02039274->unk_0001 != 255)
     {
@@ -543,7 +537,7 @@ void sub_8123CB8(struct Sprite *sprite)
     }
 }
 
-void sub_8123D98(struct Sprite *sprite)
+static void sub_8123D98(struct Sprite *sprite)
 {
     if (gUnknown_02039274->unk_0001 != 255)
     {
@@ -579,7 +573,7 @@ void sub_8123D98(struct Sprite *sprite)
     }
 }
 
-void sub_8123EB8(struct Sprite *sprite)
+static void sub_8123EB8(struct Sprite *sprite)
 {
     if (sprite->data[0] == 0)
     {
@@ -615,7 +609,7 @@ void sub_8123EB8(struct Sprite *sprite)
     }
 }
 
-void sub_8123F44(struct Sprite *sprite)
+static void sub_8123F44(struct Sprite *sprite)
 {
     if (sprite->data[0] == 0)
     {
@@ -650,7 +644,7 @@ void sub_8123F44(struct Sprite *sprite)
     }
 }
 
-void sub_8123FBC(bool8 which)
+static void sub_8123FBC(bool8 which)
 {
     switch (which)
     {
@@ -720,7 +714,7 @@ void sub_8123FBC(bool8 which)
     }
 }
 
-void sub_8124118(void)
+static void sub_8124118(void)
 {
     u8 spriteId;
     u8 i;
@@ -849,7 +843,7 @@ void sub_8124118(void)
     }
 }
 
-void sub_812446C(void)
+static void sub_812446C(void)
 {
     u8 i;
     u8 j;
@@ -869,7 +863,7 @@ void sub_812446C(void)
     gUnknown_02039274->unk_001b = (gUnknown_02039274->unk_001b + 1) % 3;
 }
 
-void sub_812453C(void)
+static void sub_812453C(void)
 {
     gUnknown_02039274->unk_001c = (gUnknown_02039274->unk_001c + 1) % 0x60;
     gUnknown_02039274->unk_0008 = gUnknown_02039274->unk_001f - gUnknown_02039274->unk_001d;
@@ -885,7 +879,7 @@ void sub_812453C(void)
     }
 }
 
-void sub_8124598(void)
+static void sub_8124598(void)
 {
     gUnknown_02039274->unk_001c = (gUnknown_02039274->unk_001c + 1) % 0x60;
     gUnknown_02039274->unk_0008 = gUnknown_02039274->unk_001f + gUnknown_02039274->unk_001d;
@@ -901,7 +895,7 @@ void sub_8124598(void)
     }
 }
 
-void sub_81245F4(void)
+static void sub_81245F4(void)
 {
     u8 i = 0;
 
@@ -931,7 +925,7 @@ void sub_81245F4(void)
     }
 }
 
-void sub_812476C(void)
+static void sub_812476C(void)
 {
     u8 i = 0;
 
@@ -959,7 +953,7 @@ void sub_812476C(void)
     }
 }
 
-void sub_81248AC(u8 a0)
+static void sub_81248AC(u8 a0)
 {
     switch (a0)
     {

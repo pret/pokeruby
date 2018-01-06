@@ -2703,4 +2703,11 @@ extern const u16 gUnknown_08E95A18[];
 extern const u16 gUnknown_08E95AB8[];
 extern const u16 gUnknown_08E95FB8[];
 
+extern const u8 gCableCar_Gfx[];
+extern const u8 gCableCarDoor_Gfx[];
+extern const u8 gCableCarCord_Gfx[];
+extern const u16 gCableCar_Pal[];
+extern const u16 gCableCarBG_Pal[];
+extern const u8 gCableCarBG_Gfx[];
+
 #endif  // GUARD_GRAPHICS_H
