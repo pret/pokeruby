@@ -105,7 +105,7 @@
 
 #define DmaClearLarge(dmaNum, dest, size, block, bit) \
 {                                                     \
-	const void *_dest = dest;                         \
+	void *_dest = dest;                               \
     u32 _size = size;                                 \
     while (1)                                         \
     {                                                 \
