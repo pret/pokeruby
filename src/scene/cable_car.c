@@ -44,7 +44,11 @@ struct CableCarEwramStruct1 {
     u8 filler_0000e[6];
     u8 unk_0014;
     u8 unk_0015;
-    u8 filler_0016[0xe6];
+    u8 filler_0016[5];
+    u8 unk_001b;
+    u8 filler_001c[6];
+    u16 unk_0022[9][12];
+    u8 filler_00fa[2];
     u16 unk_00fc[0x400];
     u16 unk_08fc[0x400];
 }; // size 0x10FC
@@ -206,7 +210,7 @@ void sub_8123244(void)
             DmaFill16Defvars(3, 0, PLTT, PLTT_SIZE);
             gUnknown_02039274 = eCableCar1;
             DmaFill16Large(3, 0, eCableCar1, 0x10FC, 0x1000);
-            gMain.state ++;
+            gMain.state++;
             break;
         case 1:
             ResetSpriteData();
@@ -214,17 +218,17 @@ void sub_8123244(void)
             FreeAllSpritePalettes();
             ResetPaletteFade();
             StartWeather();
-            for (i = 0; i < 20; i ++)
+            for (i = 0; i < 20; i++)
             {
                 gWeatherPtr->sprites.s2.ashSprites[i] = NULL;
             }
             InitMapMusic();
             ResetMapMusic();
             gSpriteCoordOffsetX = gSpriteCoordOffsetY = 0;
-            gMain.state ++;
+            gMain.state++;
             break;
         case 2:
-            for (i = 0; i < 3; i ++)
+            for (i = 0; i < 3; i++)
             {
                 LoadCompressedObjectPic(&gUnknown_08401CF8[i]);
             }
@@ -235,28 +239,28 @@ void sub_8123244(void)
             LZDecompressWram(gCableCarPylonStemTilemap, eCableCar2->pylonStemTilemap);
             LoadPalette(gCableCarBG_Pal, 0, 0x80);
             LZ77UnCompVram(gCableCarBG_Gfx, (u16 *)BG_VRAM);
-            gMain.state ++;
+            gMain.state++;
             break;
         case 3:
             sub_8124118();
             RunTasks();
-            gMain.state ++;
+            gMain.state++;
             break;
         case 4:
             if (gUnknown_02039274->unk_0002 == 7)
             {
-                gMain.state ++;
+                gMain.state++;
             }
             else if (gWeatherPtr->sprites.s2.ashSprites[0] != NULL)
             {
-                for (i = 0; i < 20; i ++)
+                for (i = 0; i < 20; i++)
                 {
                     if (gWeatherPtr->sprites.s2.ashSprites[i] != NULL)
                     {
                         gWeatherPtr->sprites.s2.ashSprites[i]->oam.priority = 0;
                     }
                 }
-                gMain.state ++;
+                gMain.state++;
             }
             break;
         case 5:
@@ -264,7 +268,7 @@ void sub_8123244(void)
             sub_8124F08((u16 *)BG_SCREEN_ADDR(30), eCableCar2->mountainTilemap, 0, 0, 30, 20);
             sub_8124F08(gUnknown_02039274->unk_08fc, gCableCarPylonHookTilemapEntries, 0, 0, 5, 2);
             sub_8124F08(gUnknown_02039274->unk_08fc, eCableCar2->pylonStemTilemap, 0, 2, 2, 20);
-            gMain.state ++;
+            gMain.state++;
             break;
         case 6:
             sub_81248AC(gSpecialVar_0x8004);
@@ -276,13 +280,13 @@ void sub_8123244(void)
             sub_8124F08(gUnknown_02039274->unk_00fc, eCableCar2->mtChimneyTilemap + 0x00, 12, 20, 12, 3);
             sub_8124F08(gUnknown_02039274->unk_00fc, eCableCar2->mtChimneyTilemap + 0x24, 12, 23, 12, 3);
             sub_8124F08(gUnknown_02039274->unk_00fc, eCableCar2->mtChimneyTilemap + 0x00, 24, 23, 12, 3);
-            gMain.state ++;
+            gMain.state++;
             break;
         case 7:
             BeginNormalPaletteFade(-1, 3, 16, 0, 0);
             FadeInNewBGM(BGM_ROPEWAY, 1);
             sub_8123FBC(1);
-            gMain.state ++;
+            gMain.state++;
             break;
         case 8:
             imebak = REG_IME;
@@ -321,7 +325,7 @@ void sub_8123740(void)
     sub_8123FBC(0);
     gSpriteCoordOffsetX = 0;
     sub_807C9B4(0);
-    for (; i < 20; i ++)
+    for (; i < 20; i++)
     {
         gWeatherPtr->sprites.s2.ashSprites[i] = NULL;
     }
@@ -343,7 +347,7 @@ void sub_8123878(u8 taskId)
     u8 i;
 
     i = 0;
-    gUnknown_02039274->unk_0006 ++;
+    gUnknown_02039274->unk_0006++;
     switch (gUnknown_02039274->unk_0001)
     {
         case 0:
@@ -359,7 +363,7 @@ void sub_8123878(u8 taskId)
                 case 7:
                     if (gWeatherPtr->sprites.s2.ashSprites[0] != NULL && gWeatherPtr->sprites.s2.ashSprites[0]->oam.priority != 0)
                     {
-                        for (; i < 20; i ++)
+                        for (; i < 20; i++)
                         {
                             if (gWeatherPtr->sprites.s2.ashSprites[i] != NULL)
                             {
@@ -376,7 +380,7 @@ void sub_8123878(u8 taskId)
                     }
                     else if (gUnknown_02039274->unk_0006 >= gUnknown_02039274->unk_0004 + 8)
                     {
-                        for (; i < 20; i ++)
+                        for (; i < 20; i++)
                         {
                             if (gWeatherPtr->sprites.s2.ashSprites[i] != NULL)
                             {
@@ -414,15 +418,15 @@ void sub_81239E4(u8 taskId)
 {
     if (gUnknown_02039274->unk_0001 != 255)
     {
-        gUnknown_02039274->unk_0014 --;
+        gUnknown_02039274->unk_0014--;
         if ((gUnknown_02039274->unk_0006 % 2) == 0)
         {
-            gUnknown_02039274->unk_0015 --;
+            gUnknown_02039274->unk_0015--;
         }
         if ((gUnknown_02039274->unk_0006 % 8) == 0)
         {
-            gUnknown_02039274->unk_000c --;
-            gUnknown_02039274->unk_000d --;
+            gUnknown_02039274->unk_000c--;
+            gUnknown_02039274->unk_000d--;
         }
         switch (gUnknown_02039274->unk_0014)
         {
@@ -450,15 +454,15 @@ void sub_8123AF8(u8 taskId)
 {
     if (gUnknown_02039274->unk_0001 != 255)
     {
-        gUnknown_02039274->unk_0014 ++;
+        gUnknown_02039274->unk_0014++;
         if ((gUnknown_02039274->unk_0006 % 2) == 0)
         {
-            gUnknown_02039274->unk_0015 ++;
+            gUnknown_02039274->unk_0015++;
         }
         if ((gUnknown_02039274->unk_0006 % 8) == 0)
         {
-            gUnknown_02039274->unk_000c ++;
-            gUnknown_02039274->unk_000d ++;
+            gUnknown_02039274->unk_000c++;
+            gUnknown_02039274->unk_000d++;
         }
         switch (gUnknown_02039274->unk_0014)
         {
@@ -572,24 +576,24 @@ void sub_8123EB8(struct Sprite *sprite)
         sprite->pos1.x += 2 * sprite->centerToCornerVecX;
         sprite->pos1.y += 16 + sprite->centerToCornerVecY;
     }
-    if (++ sprite->data[0] >= sprite->data[2])
+    if (++sprite->data[0] >= sprite->data[2])
     {
         switch (sprite->data[1])
         {
             case 0:
-                sprite->pos1.x ++;
+                sprite->pos1.x++;
                 if ((sprite->data[0] % 4) == 0)
                 {
-                    sprite->pos1.y ++;
+                    sprite->pos1.y++;
                 }
                 break;
             case 1:
                 if ((sprite->data[0] % 2) != 0)
                 {
-                    sprite->pos1.x ++;
+                    sprite->pos1.x++;
                     if ((sprite->pos1.x % 4) == 0)
                     {
-                        sprite->pos1.y ++;
+                        sprite->pos1.y++;
                     }
                 }
                 break;
@@ -607,24 +611,24 @@ void sub_8123F44(struct Sprite *sprite)
     {
         sprite->pos1.y += 16 + sprite->centerToCornerVecY;
     }
-    if (++ sprite->data[0] >= sprite->data[2])
+    if (++sprite->data[0] >= sprite->data[2])
     {
         switch (sprite->data[1])
         {
             case 0:
-                sprite->pos1.x --;
+                sprite->pos1.x--;
                 if ((sprite->data[0] % 4) == 0)
                 {
-                    sprite->pos1.y --;
+                    sprite->pos1.y--;
                 }
                 break;
             case 1:
                 if ((sprite->data[0] % 2) != 0)
                 {
-                    sprite->pos1.x --;
+                    sprite->pos1.x--;
                     if ((sprite->pos1.x % 4) == 0)
                     {
-                        sprite->pos1.y --;
+                        sprite->pos1.y--;
                     }
                 }
                 break;
@@ -788,7 +792,7 @@ void sub_8124118(void)
             sub_807C9B4(7);
             break;
     }
-    for (i = 0; i < 9; i ++)
+    for (i = 0; i < 9; i++)
     {
         spriteId = CreateSprite(&gSpriteTemplate_8401D40[2], 16 * i + 0x60, 8 * i - 8, 0x68);
         gSprites[spriteId].pos2.x = 8;
@@ -835,8 +839,6 @@ void sub_8124118(void)
     }
 }
 
-#ifdef NONMATCHING
-// this is nowhere near correct
 void sub_812446C(void)
 {
     u8 i;
@@ -844,122 +846,15 @@ void sub_812446C(void)
     u8 k;
     u8 offset;
 
-    for (i = 0, k = 0, offset = 36 * (gUnknown_02039274->unk_001b + 2); i < 3; i ++)
+    for (i = 0, k = 0, offset = 0x24 * (gUnknown_02039274->unk_001b + 2); i < 3; i++)
     {
-        for (j = 0; j < 12; j ++)
+        for (j = 0; j < 12; j++)
         {
-            gUnknown_02039274->unk_0022[i][k] = eCableCar2->mtChimneyTilemap[0][offset + k];
-            gUnknown_02039274->unk_0022[i + 3][k] = eCableCar2->mtChimneyTilemap[0][k];
-            gUnknown_02039274->unk_0022[i + 6][k] = eCableCar2->mtChimneyTilemap[2][k];
-            k ++;
+            gUnknown_02039274->unk_0022[i][j] = *(eCableCar2->mtChimneyTilemap + (offset++));
+            gUnknown_02039274->unk_0022[i + 3][j] = eCableCar2->mtChimneyTilemap[k];
+            gUnknown_02039274->unk_0022[i + 6][j] = (eCableCar2->mtChimneyTilemap + 0x24)[k];
+            k++;
         }
     }
     gUnknown_02039274->unk_001b = (gUnknown_02039274->unk_001b + 1) % 3;
 }
-#else
-__attribute__((naked)) void sub_812446C(void)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                    "\tmov r7, r10\n"
-                    "\tmov r6, r9\n"
-                    "\tmov r5, r8\n"
-                    "\tpush {r5-r7}\n"
-                    "\tsub sp, 0x8\n"
-                    "\tmovs r3, 0\n"
-                    "\tmov r9, r3\n"
-                    "\tldr r2, _08124530 @ =gUnknown_02039274\n"
-                    "\tldr r0, [r2]\n"
-                    "\tldrb r1, [r0, 0x1B]\n"
-                    "\tadds r1, 0x2\n"
-                    "\tlsls r0, r1, 3\n"
-                    "\tadds r0, r1\n"
-                    "\tlsls r0, 26\n"
-                    "\tlsrs r0, 24\n"
-                    "\tmov r12, r0\n"
-                    "_0812448E:\n"
-                    "\tmovs r6, 0\n"
-                    "\tlsls r0, r3, 1\n"
-                    "\tadds r1, r3, 0x3\n"
-                    "\tadds r2, r3, 0x6\n"
-                    "\tadds r4, r3, 0x1\n"
-                    "\tstr r4, [sp]\n"
-                    "\tadds r0, r3\n"
-                    "\tlsls r0, 3\n"
-                    "\tmov r10, r0\n"
-                    "\tlsls r0, r1, 1\n"
-                    "\tadds r0, r1\n"
-                    "\tlsls r0, 3\n"
-                    "\tmov r8, r0\n"
-                    "\tlsls r0, r2, 1\n"
-                    "\tadds r0, r2\n"
-                    "\tlsls r0, 3\n"
-                    "\tstr r0, [sp, 0x4]\n"
-                    "_081244B0:\n"
-                    "\tldr r7, _08124530 @ =gUnknown_02039274\n"
-                    "\tldr r5, [r7]\n"
-                    "\tlsls r3, r6, 1\n"
-                    "\tmov r0, r10\n"
-                    "\tadds r2, r3, r0\n"
-                    "\tadds r4, r5, 0\n"
-                    "\tadds r4, 0x22\n"
-                    "\tadds r2, r4, r2\n"
-                    "\tmov r1, r12\n"
-                    "\tadds r0, r1, 0x1\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r0, 24\n"
-                    "\tmov r12, r0\n"
-                    "\tlsls r1, 1\n"
-                    "\tldr r7, _08124534 @ =0x02019000\n"
-                    "\tadds r1, r7\n"
-                    "\tldrh r0, [r1]\n"
-                    "\tstrh r0, [r2]\n"
-                    "\tmov r0, r8\n"
-                    "\tadds r1, r3, r0\n"
-                    "\tadds r1, r4, r1\n"
-                    "\tmov r7, r9\n"
-                    "\tlsls r2, r7, 1\n"
-                    "\tldr r7, _08124534 @ =0x02019000\n"
-                    "\tadds r0, r2, r7\n"
-                    "\tldrh r0, [r0]\n"
-                    "\tstrh r0, [r1]\n"
-                    "\tldr r0, [sp, 0x4]\n"
-                    "\tadds r3, r0\n"
-                    "\tadds r4, r3\n"
-                    "\tldr r1, _08124538 @ =0x02019048\n"
-                    "\tadds r2, r1\n"
-                    "\tldrh r0, [r2]\n"
-                    "\tstrh r0, [r4]\n"
-                    "\tmov r0, r9\n"
-                    "\tadds r0, 0x1\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r0, 24\n"
-                    "\tmov r9, r0\n"
-                    "\tadds r0, r6, 0x1\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r6, r0, 24\n"
-                    "\tcmp r6, 0xB\n"
-                    "\tbls _081244B0\n"
-                    "\tldr r4, [sp]\n"
-                    "\tlsls r0, r4, 24\n"
-                    "\tlsrs r3, r0, 24\n"
-                    "\tcmp r3, 0x2\n"
-                    "\tbls _0812448E\n"
-                    "\tldrb r0, [r5, 0x1B]\n"
-                    "\tadds r0, 0x1\n"
-                    "\tmovs r1, 0x3\n"
-                    "\tbl __modsi3\n"
-                    "\tstrb r0, [r5, 0x1B]\n"
-                    "\tadd sp, 0x8\n"
-                    "\tpop {r3-r5}\n"
-                    "\tmov r8, r3\n"
-                    "\tmov r9, r4\n"
-                    "\tmov r10, r5\n"
-                    "\tpop {r4-r7}\n"
-                    "\tpop {r0}\n"
-                    "\tbx r0\n"
-                    "\t.align 2, 0\n"
-                    "_08124530: .4byte gUnknown_02039274\n"
-                    "_08124534: .4byte 0x02019000\n"
-                    "_08124538: .4byte 0x02019048");
-}
-#endif
