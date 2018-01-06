@@ -1,16 +1,31 @@
 #include "global.h"
-#include "pokemon_storage_system.h"
+#include "palette.h"
+#include "field_weather.h"
 #include "menu.h"
+#include "main.h"
+#include "strings.h"
 #include "string_util.h"
 #include "event_data.h"
 #include "ewram.h"
+#include "script.h"
+#include "pokemon_storage_system.h"
 
 struct StorageAction {
     u8 *text;
     u8 format;
 };
 
+struct ReverseMenuAction {
+    u32 unk0;
+    u8 *text;
+};
+
+void StorageSystemCreatePrimaryMenu(u8 whichMenu);
+void task_intro_29(u8 whichMenu);
+
 extern const struct StorageAction gUnknown_083B6DF4[];
+
+extern const struct ReverseMenuAction gUnknown_083B600C[];
 
 EWRAM_DATA struct PokemonStorage gPokemonStorage = {0};
 
@@ -279,6 +294,113 @@ s16 StorageSystemGetNextMonIndex(struct BoxPokemon *box, s8 startIdx, u8 stopIdx
         }
     }
     return -1;
+}
+
+void StorageSystemClearMessageWindow(void)
+{
+    MenuFillWindowRectWithBlankTile(2, 15, 27, 18);
+}
+
+void Task_PokemonStorageSystem(u8 taskId)
+{
+    struct Task *task = gTasks + taskId;
+    switch (task->data[0])
+    {
+        case 0:
+            StorageSystemCreatePrimaryMenu(task->data[1]);
+            MenuDisplayMessageBox();
+            MenuPrint(gUnknown_083B600C[task->data[1]].text, 2, 15);
+            task->data[0]++;
+            break;
+        case 1:
+            if (sub_807D770())
+            {
+                task->data[0]++;
+            }
+            break;
+        case 2:
+            task->data[2] = ProcessMenuInput();
+            switch(task->data[2])
+            {
+                case -2:
+                    task->data[3] = task->data[1];
+                    if (gMain.newKeys & DPAD_UP && --task->data[3] < 0)
+                        task->data[3] = 3;
+
+                    if (gMain.newKeys & DPAD_DOWN && ++task->data[3] > 3)
+                        task->data[3] = 0;
+                    if (task->data[1] != task->data[3])
+                    {
+                        task->data[1] = task->data[3];
+                        StorageSystemClearMessageWindow();
+                        MenuPrint(gUnknown_083B600C[task->data[1]].text, 2, 15);
+                    }
+                    break;
+                case -1:
+                case  3:
+                    HandleDestroyMenuCursors();
+                    MenuZeroFillWindowRect(0, 0, 13, 9);
+                    ScriptContext2_Disable();
+                    EnableBothScriptContexts();
+                    DestroyTask(taskId);
+                    break;
+                default:
+                    if (task->data[2] == 0 && StorageSystemGetPartySize() == PARTY_SIZE)
+                    {
+                        StorageSystemClearMessageWindow();
+                        MenuPrint(gPCText_PartyFull2, 2, 15);
+                        task->data[0] = 3;
+                    }
+                    else if (task->data[2] == 1 && StorageSystemGetPartySize() == 1)
+                    {
+                        StorageSystemClearMessageWindow();
+                        MenuPrint(gPCText_OnlyOne, 2, 15);
+                        task->data[0] = 3;
+                    }
+                    else
+                    {
+                        fade_screen(1, 0);
+                        task->data[0] = 4;
+                    }
+                    break;
+            }
+            break;
+        case 3:
+            if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+            {
+                StorageSystemClearMessageWindow();
+                MenuPrint(gUnknown_083B600C[task->data[1]].text, 2, 15);
+                task->data[0] = 2;
+            }
+            else if (gMain.newKeys & DPAD_UP)
+            {
+                if (--task->data[1] < 0)
+                    task->data[1] = 3;
+                MoveMenuCursor(-1);
+                task->data[1] = GetMenuCursorPos();
+                StorageSystemClearMessageWindow();
+                MenuPrint(gUnknown_083B600C[task->data[1]].text, 2, 15);
+                task->data[0] = 2;
+            }
+            else if (gMain.newKeys & DPAD_DOWN)
+            {
+                if (++task->data[1] > 3)
+                    task->data[1] = 0;
+                MoveMenuCursor(1);
+                task->data[1] = GetMenuCursorPos();
+                StorageSystemClearMessageWindow();
+                MenuPrint(gUnknown_083B600C[task->data[1]].text, 2, 15);
+                task->data[0] = 2;
+            }
+            break;
+        case 4:
+            if (!gPaletteFade.active)
+            {
+                task_intro_29(task->data[2]);
+                DestroyTask(taskId);
+            }
+            break;
+    }
 }
 
 asm(".section .text.8098898");
