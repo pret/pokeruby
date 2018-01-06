@@ -8,8 +8,7 @@ MauvilleCity_MapScript1_14C038:: @ 814C038
 	setflag FLAG_SYS_TV_START
 	clearflag FLAG_MAUVILLE_GYM_BARRIERS_STATE
 	setvar VAR_MAUVILLE_GYM_STATE, 0
-	checkflag FLAG_RECEIVED_TM24
-	call_if 1, MauvilleCity_EventScript_14C053
+	call_if_set FLAG_RECEIVED_TM24, MauvilleCity_EventScript_14C053
 	end
 
 MauvilleCity_EventScript_14C053:: @ 814C053
@@ -52,8 +51,7 @@ MauvilleCity_EventScript_14C099:: @ 814C099
 MauvilleCity_EventScript_14C0A2:: @ 814C0A2
 	lock
 	faceplayer
-	checkflag FLAG_TV_EXPLAINED
-	goto_if_eq MauvilleCity_EventScript_14C0BA
+	goto_if_set FLAG_TV_EXPLAINED, MauvilleCity_EventScript_14C0BA
 	msgbox MauvilleCity_Text_16674A, 4
 	setflag FLAG_TV_EXPLAINED
 	release
@@ -67,8 +65,7 @@ MauvilleCity_EventScript_14C0BA:: @ 814C0BA
 MauvilleCity_EventScript_14C0C4:: @ 814C0C4
 	lock
 	faceplayer
-	checkflag FLAG_DECLINED_WALLY_BATTLE_MAUVILLE
-	goto_if_eq MauvilleCity_EventScript_14C0E4
+	goto_if_set FLAG_DECLINED_WALLY_BATTLE_MAUVILLE, MauvilleCity_EventScript_14C0E4
 	msgbox MauvilleCity_Text_165B76, 4
 	closemessage
 	applymovement 7, MauvilleCity_Movement_1A083D
@@ -86,8 +83,7 @@ MauvilleCity_EventScript_14C0E4:: @ 814C0E4
 
 MauvilleCity_EventScript_14C0F9:: @ 814C0F9
 	lockall
-	checkflag FLAG_DECLINED_WALLY_BATTLE_MAUVILLE
-	goto_if_eq MauvilleCity_EventScript_14C292
+	goto_if_set FLAG_DECLINED_WALLY_BATTLE_MAUVILLE, MauvilleCity_EventScript_14C292
 	applymovement 6, MauvilleCity_Movement_1A0843
 	waitmovement 0
 	msgbox MauvilleCity_Text_165BE3, 4
@@ -106,7 +102,7 @@ MauvilleCity_EventScript_14C0F9:: @ 814C0F9
 
 MauvilleCity_EventScript_14C154:: @ 814C154
 	compare RESULT, YES
-	call_if 1, MauvilleCity_EventScript_14C23C
+	call_if_eq MauvilleCity_EventScript_14C23C
 	compare RESULT, NO
 	goto_if_eq MauvilleCity_EventScript_14C285
 	closemessage
@@ -284,12 +280,10 @@ MauvilleCity_Movement_14C2E8:: @ 814C2E8
 MauvilleCity_EventScript_14C2F2:: @ 814C2F2
 	lock
 	faceplayer
-	checkflag FLAG_RECEIVED_TM24
-	goto_if_eq MauvilleCity_EventScript_14C368
+	goto_if_set FLAG_RECEIVED_TM24, MauvilleCity_EventScript_14C368
 	compare VAR_NEW_MAUVILLE_STATE, 2
 	goto_if_eq MauvilleCity_EventScript_14C33C
-	checkflag FLAG_RECEIVED_BASEMENT_KEY
-	goto_if_eq MauvilleCity_EventScript_14C332
+	goto_if_set FLAG_RECEIVED_BASEMENT_KEY, MauvilleCity_EventScript_14C332
 	msgbox MauvilleCity_Text_1661C1, 4
 	giveitem_std ITEM_BASEMENT_KEY
 	setflag FLAG_RECEIVED_BASEMENT_KEY

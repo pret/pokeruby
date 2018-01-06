@@ -20,9 +20,9 @@ MossdeepCity_House2_EventScript_15A87B:: @ 815A87B
 	setflag FLAG_WINGULL_DELIVERED_MAIL
 	clearflag FLAG_HIDE_WINGULL_FORTREE_HOUSE
 	compare FACING, 2
-	call_if 1, MossdeepCity_House2_EventScript_15A8AE
+	call_if_eq MossdeepCity_House2_EventScript_15A8AE
 	compare FACING, 3
-	call_if 1, MossdeepCity_House2_EventScript_15A8B9
+	call_if_eq MossdeepCity_House2_EventScript_15A8B9
 	removeobject 3
 	release
 	end

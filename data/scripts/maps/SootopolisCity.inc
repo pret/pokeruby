@@ -5,10 +5,8 @@ SootopolisCity_MapScripts:: @ 814D07D
 	.byte 0
 
 SootopolisCity_MapScript1_14D08D:: @ 814D08D
-	checkflag FLAG_LEGEND_ESCAPED_SEAFLOOR_CAVERN
-	call_if 0, SootopolisCity_EventScript_14D0A0
-	checkflag FLAG_LEGEND_ESCAPED_SEAFLOOR_CAVERN
-	call_if 1, SootopolisCity_EventScript_14D0B1
+	call_if_unset FLAG_LEGEND_ESCAPED_SEAFLOOR_CAVERN, SootopolisCity_EventScript_14D0A0
+	call_if_set FLAG_LEGEND_ESCAPED_SEAFLOOR_CAVERN, SootopolisCity_EventScript_14D0B1
 	end
 
 SootopolisCity_EventScript_14D0A0:: @ 814D0A0
@@ -17,8 +15,7 @@ SootopolisCity_EventScript_14D0A0:: @ 814D0A0
 	return
 
 SootopolisCity_EventScript_14D0B1:: @ 814D0B1
-	checkflag FLAG_LEGENDARY_BATTLE_COMPLETED
-	call_if 0, SootopolisCity_EventScript_14D0BB
+	call_if_unset FLAG_LEGENDARY_BATTLE_COMPLETED, SootopolisCity_EventScript_14D0BB
 	return
 
 SootopolisCity_EventScript_14D0BB:: @ 814D0BB
@@ -35,10 +32,8 @@ SootopolisCity_EventScript_14D0BB:: @ 814D0BB
 
 SootopolisCity_MapScript1_14D10D:: @ 814D10D
 	setflag FLAG_VISITED_SOOTOPOLIS_CITY
-	checkflag FLAG_LEGENDARY_BATTLE_COMPLETED
-	call_if 1, SootopolisCity_EventScript_14D159
-	checkflag FLAG_SYS_WEATHER_CTRL
-	call_if 1, SootopolisCity_EventScript_14D123
+	call_if_set FLAG_LEGENDARY_BATTLE_COMPLETED, SootopolisCity_EventScript_14D159
+	call_if_set FLAG_SYS_WEATHER_CTRL, SootopolisCity_EventScript_14D123
 	end
 
 SootopolisCity_EventScript_14D123:: @ 814D123
@@ -46,7 +41,7 @@ SootopolisCity_EventScript_14D123:: @ 814D123
 	setobjectxyperm 1, 29, 19
 	setobjectxyperm 2, 33, 19
 	compare VAR_SOOTOPOLIS_STATE, 1
-	call_if 1, SootopolisCity_EventScript_14D142
+	call_if_eq SootopolisCity_EventScript_14D142
 	return
 
 SootopolisCity_EventScript_14D142:: @ 814D142
@@ -68,8 +63,7 @@ SootopolisCity_MapScript1_14D165:: @ 814D165
 SootopolisCity_EventScript_14D16E:: @ 814D16E
 	lock
 	faceplayer
-	checkflag FLAG_LEGENDARY_BATTLE_COMPLETED
-	goto_if_eq SootopolisCity_EventScript_14D183
+	goto_if_set FLAG_LEGENDARY_BATTLE_COMPLETED, SootopolisCity_EventScript_14D183
 	msgbox SootopolisCity_Text_1696A4, 4
 	release
 	end
@@ -92,8 +86,7 @@ SootopolisCity_EventScript_14D19F:: @ 814D19F
 	faceplayer
 	dodailyevents
 	special GetPlayerBigGuyGirlString
-	checkflag FLAG_DAILY_RECEIVED_BERRY_SOOTOPOLIS
-	goto_if_eq SootopolisCity_EventScript_14D241
+	goto_if_set FLAG_DAILY_RECEIVED_BERRY_SOOTOPOLIS, SootopolisCity_EventScript_14D241
 	msgbox SootopolisCity_Text_1C63F2, 4
 	random 10
 	addvar RESULT, 20
@@ -142,8 +135,7 @@ SootopolisCity_EventScript_14D25E:: @ 814D25E
 SootopolisCity_EventScript_14D268:: @ 814D268
 	lock
 	faceplayer
-	checkflag FLAG_DEFEATED_SOOTOPOLIS_GYM
-	goto_if_eq SootopolisCity_EventScript_14D27D
+	goto_if_set FLAG_DEFEATED_SOOTOPOLIS_GYM, SootopolisCity_EventScript_14D27D
 	msgbox SootopolisCity_Text_16A4D6, 4
 	release
 	end
@@ -156,8 +148,7 @@ SootopolisCity_EventScript_14D27D:: @ 814D27D
 SootopolisCity_EventScript_14D287:: @ 814D287
 	lock
 	faceplayer
-	checkflag FLAG_LEGENDARY_BATTLE_COMPLETED
-	goto_if_eq SootopolisCity_EventScript_14D29C
+	goto_if_set FLAG_LEGENDARY_BATTLE_COMPLETED, SootopolisCity_EventScript_14D29C
 	msgbox SootopolisCity_Text_169813, 4
 	release
 	end
@@ -170,8 +161,7 @@ SootopolisCity_EventScript_14D29C:: @ 814D29C
 SootopolisCity_EventScript_14D2A6:: @ 814D2A6
 	lock
 	faceplayer
-	checkflag FLAG_LEGENDARY_BATTLE_COMPLETED
-	goto_if_eq SootopolisCity_EventScript_14D2BB
+	goto_if_set FLAG_LEGENDARY_BATTLE_COMPLETED, SootopolisCity_EventScript_14D2BB
 	msgbox SootopolisCity_Text_1698A0, 4
 	release
 	end
@@ -184,8 +174,7 @@ SootopolisCity_EventScript_14D2BB:: @ 814D2BB
 SootopolisCity_EventScript_14D2C5:: @ 814D2C5
 	lock
 	faceplayer
-	checkflag FLAG_LEGENDARY_BATTLE_COMPLETED
-	goto_if_eq SootopolisCity_EventScript_14D2DA
+	goto_if_set FLAG_LEGENDARY_BATTLE_COMPLETED, SootopolisCity_EventScript_14D2DA
 	msgbox SootopolisCity_Text_1697A7, 4
 	release
 	end
@@ -445,8 +434,7 @@ SootopolisCity_EventScript_14D48F:: @ 814D48F
 SootopolisCity_EventScript_14D498:: @ 814D498
 	lock
 	faceplayer
-	checkflag FLAG_LEGENDARY_BATTLE_COMPLETED
-	goto_if_eq SootopolisCity_EventScript_14D4AD
+	goto_if_set FLAG_LEGENDARY_BATTLE_COMPLETED, SootopolisCity_EventScript_14D4AD
 	.ifdef SAPPHIRE
 	msgbox SootopolisCity_Text_169DA6, 4
 	.else

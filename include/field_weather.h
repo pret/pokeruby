@@ -163,4 +163,8 @@ bool8 sub_807DDFC(void);
 void SetWeather(u32);
 void UpdateWeatherPerDay(u16);
 
+extern struct Weather gWeather;
+
+extern struct Weather *const gWeatherPtr;
+
 #endif // GUARD_WEATHER_H

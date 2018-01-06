@@ -4,10 +4,8 @@ MauvilleCity_BikeShop_MapScripts:: @ 8156795
 MauvilleCity_BikeShop_EventScript_156796:: @ 8156796
 	lock
 	faceplayer
-	checkflag FLAG_RECEIVED_BIKE
-	goto_if_eq MauvilleCity_BikeShop_EventScript_15686E
-	checkflag FLAG_DECLINED_BIKE
-	goto_if_eq MauvilleCity_BikeShop_EventScript_1567D1
+	goto_if_set FLAG_RECEIVED_BIKE, MauvilleCity_BikeShop_EventScript_15686E
+	goto_if_set FLAG_DECLINED_BIKE, MauvilleCity_BikeShop_EventScript_1567D1
 	msgbox MauvilleCity_BikeShop_Text_180F9F, 4
 	msgbox MauvilleCity_BikeShop_Text_181016, MSGBOX_YESNO
 	compare RESULT, YES

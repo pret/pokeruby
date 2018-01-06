@@ -10,9 +10,8 @@ LilycoveCity_DepartmentStore_1F_EventScript_159D5E:: @ 8159D5E
 	faceplayer
 	dodailyevents
 	compare VAR_LOTTERY_PRIZE, 0
-	goto_if 5, LilycoveCity_DepartmentStore_1F_EventScript_159EB1
-	checkflag FLAG_DAILY_PICKED_LOTTO_TICKET
-	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E4C
+	goto_if_ne LilycoveCity_DepartmentStore_1F_EventScript_159EB1
+	goto_if_set FLAG_DAILY_PICKED_LOTTO_TICKET, LilycoveCity_DepartmentStore_1F_EventScript_159E4C
 	msgbox LilycoveCity_DepartmentStore_1F_Text_1C4B5E, MSGBOX_YESNO
 	compare RESULT, NO
 	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E56
@@ -37,18 +36,18 @@ LilycoveCity_DepartmentStore_1F_EventScript_159D5E:: @ 8159D5E
 	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E60
 	incrementgamestat GAME_STAT_WON_POKEMON_LOTTERY
 	compare VAR_SPECIAL_6, 0
-	call_if 1, LilycoveCity_DepartmentStore_1F_EventScript_159E3A
+	call_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E3A
 	compare VAR_SPECIAL_6, 1
-	call_if 1, LilycoveCity_DepartmentStore_1F_EventScript_159E43
+	call_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E43
 	bufferitemname 0, VAR_SPECIAL_5
 	compare VAR_SPECIAL_4, 1
-	call_if 1, LilycoveCity_DepartmentStore_1F_EventScript_159E78
+	call_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E78
 	compare VAR_SPECIAL_4, 2
-	call_if 1, LilycoveCity_DepartmentStore_1F_EventScript_159E81
+	call_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E81
 	compare VAR_SPECIAL_4, 3
-	call_if 1, LilycoveCity_DepartmentStore_1F_EventScript_159E8A
+	call_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E8A
 	compare VAR_SPECIAL_4, 4
-	call_if 1, LilycoveCity_DepartmentStore_1F_EventScript_159E93
+	call_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E93
 	giveitem_std VAR_SPECIAL_5
 	compare RESULT, 0
 	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_159E9C

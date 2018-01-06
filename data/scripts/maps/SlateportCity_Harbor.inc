@@ -6,9 +6,8 @@ SlateportCity_Harbor_MapScript1_155F63:: @ 8155F63
 	setescapewarp MAP_SLATEPORT_CITY, 255, 28, 13
 	setvar VAR_TEMP_1, 0
 	compare VAR_SLATEPORT_HARBOR_STATE, 1
-	call_if 1, SlateportCity_Harbor_EventScript_155F89
-	checkflag FLAG_SYS_GAME_CLEAR
-	call_if 1, SlateportCity_Harbor_EventScript_155F85
+	call_if_eq SlateportCity_Harbor_EventScript_155F89
+	call_if_set FLAG_SYS_GAME_CLEAR, SlateportCity_Harbor_EventScript_155F85
 	end
 
 SlateportCity_Harbor_EventScript_155F85:: @ 8155F85
@@ -64,13 +63,13 @@ SlateportCity_Harbor_EventScript_155FD5:: @ 8155FD5
 	removeobject 8
 	setvar VAR_SLATEPORT_HARBOR_STATE, 2
 	compare VAR_SPECIAL_8, 0
-	call_if 1, SlateportCity_Harbor_EventScript_15605C
+	call_if_eq SlateportCity_Harbor_EventScript_15605C
 	compare VAR_SPECIAL_8, 1
-	call_if 1, SlateportCity_Harbor_EventScript_156071
+	call_if_eq SlateportCity_Harbor_EventScript_156071
 	compare VAR_SPECIAL_8, 2
-	call_if 1, SlateportCity_Harbor_EventScript_156086
+	call_if_eq SlateportCity_Harbor_EventScript_156086
 	compare VAR_SPECIAL_8, 3
-	call_if 1, SlateportCity_Harbor_EventScript_156086
+	call_if_eq SlateportCity_Harbor_EventScript_156086
 	msgbox SlateportCity_Harbor_Text_17FE60, 4
 	closemessage
 	setflag FLAG_HIDE_GRUNT_1_BLOCKING_HIDEOUT
@@ -159,8 +158,7 @@ SlateportCity_Harbor_Movement_1560C2:: @ 81560C2
 SlateportCity_Harbor_EventScript_1560C4:: @ 81560C4
 	lock
 	faceplayer
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if_eq SlateportCity_Harbor_EventScript_1560D9
+	goto_if_set FLAG_SYS_GAME_CLEAR, SlateportCity_Harbor_EventScript_1560D9
 	msgbox SlateportCity_Harbor_Text_17FA0A, 4
 	release
 	end
@@ -224,9 +222,9 @@ SlateportCity_Harbor_EventScript_156196:: @ 8156196
 	delay 30
 	hideobjectat LAST_TALKED, MAP_SLATEPORT_CITY_HARBOR
 	compare FACING, 2
-	call_if 1, SlateportCity_Harbor_EventScript_1561EF
+	call_if_eq SlateportCity_Harbor_EventScript_1561EF
 	compare FACING, 4
-	call_if 1, SlateportCity_Harbor_EventScript_1561E4
+	call_if_eq SlateportCity_Harbor_EventScript_1561E4
 	delay 30
 	hideobjectat 255, MAP_PETALBURG_CITY
 	setvar VAR_SPECIAL_4, 5
@@ -268,12 +266,9 @@ SlateportCity_Harbor_EventScript_156208:: @ 8156208
 SlateportCity_Harbor_EventScript_156211:: @ 8156211
 	lock
 	faceplayer
-	checkflag FLAG_BADGE07_GET
-	goto_if_eq SlateportCity_Harbor_EventScript_15626F
-	checkflag FLAG_EVIL_TEAM_ESCAPED_STERN_SPOKE
-	goto_if_eq SlateportCity_Harbor_EventScript_156265
-	checkflag FLAG_EVIL_TEAM_ESCAPED_IN_SUBMARINE
-	goto_if_eq SlateportCity_Harbor_EventScript_156258
+	goto_if_set FLAG_BADGE07_GET, SlateportCity_Harbor_EventScript_15626F
+	goto_if_set FLAG_EVIL_TEAM_ESCAPED_STERN_SPOKE, SlateportCity_Harbor_EventScript_156265
+	goto_if_set FLAG_EVIL_TEAM_ESCAPED_IN_SUBMARINE, SlateportCity_Harbor_EventScript_156258
 	compare VAR_SLATEPORT_HARBOR_STATE, 2
 	goto_if_eq SlateportCity_Harbor_EventScript_15624E
 	msgbox SlateportCity_Harbor_Text_17FD1C, 4
@@ -305,8 +300,7 @@ SlateportCity_Harbor_EventScript_15626F:: @ 815626F
 	checkitem ITEM_SCANNER, 1
 	compare RESULT, 1
 	goto_if_eq SlateportCity_Harbor_EventScript_1562A7
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if_eq SlateportCity_Harbor_EventScript_15629D
+	goto_if_set FLAG_SYS_GAME_CLEAR, SlateportCity_Harbor_EventScript_15629D
 	msgbox SlateportCity_Harbor_Text_18017B, 4
 	release
 	end

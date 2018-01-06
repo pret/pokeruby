@@ -16,8 +16,7 @@ LilycoveCity_Harbor_EventScript_1598A2:: @ 81598A2
 	end
 
 LilycoveCity_Harbor_EventScript_1598BA:: @ 81598BA
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if_eq LilycoveCity_Harbor_EventScript_1598CD
+	goto_if_set FLAG_SYS_GAME_CLEAR, LilycoveCity_Harbor_EventScript_1598CD
 	msgbox LilycoveCity_Harbor_Text_18B306, 4
 	release
 	end
@@ -81,9 +80,9 @@ LilycoveCity_Harbor_EventScript_15998A:: @ 815998A
 	delay 30
 	hideobjectat LAST_TALKED, MAP_LILYCOVE_CITY_HARBOR
 	compare FACING, 2
-	call_if 1, LilycoveCity_Harbor_EventScript_1599D9
+	call_if_eq LilycoveCity_Harbor_EventScript_1599D9
 	compare FACING, 4
-	call_if 1, LilycoveCity_Harbor_EventScript_1599CE
+	call_if_eq LilycoveCity_Harbor_EventScript_1599CE
 	delay 30
 	hideobjectat 255, MAP_PETALBURG_CITY
 	setvar VAR_SPECIAL_4, 2
@@ -106,12 +105,9 @@ LilycoveCity_Harbor_EventScript_1599E4:: @ 81599E4
 	end
 
 LilycoveCity_Harbor_EventScript_1599EE:: @ 81599EE
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if 0, LilycoveCity_Harbor_EventScript_1598BA
-	checkflag FLAG_ECOUNTERED_LATIAS_OR_LATIOS
-	goto_if_eq LilycoveCity_Harbor_EventScript_1598BA
-	checkflag FLAG_SYS_HAS_EON_TICKET
-	goto_if 0, LilycoveCity_Harbor_EventScript_1598BA
+	goto_if_unset FLAG_SYS_GAME_CLEAR, LilycoveCity_Harbor_EventScript_1598BA
+	goto_if_set FLAG_ECOUNTERED_LATIAS_OR_LATIOS, LilycoveCity_Harbor_EventScript_1598BA
+	goto_if_unset FLAG_SYS_HAS_EON_TICKET, LilycoveCity_Harbor_EventScript_1598BA
 	msgbox LilycoveCity_Harbor_Text_1C50F2, 4
 	closemessage
 	applymovement LAST_TALKED, LilycoveCity_Harbor_Movement_1A0841
@@ -130,9 +126,9 @@ LilycoveCity_Harbor_EventScript_1599EE:: @ 81599EE
 	delay 30
 	removeobject 4
 	compare FACING, 2
-	call_if 1, LilycoveCity_Harbor_EventScript_1599D9
+	call_if_eq LilycoveCity_Harbor_EventScript_1599D9
 	compare FACING, 4
-	call_if 1, LilycoveCity_Harbor_EventScript_1599CE
+	call_if_eq LilycoveCity_Harbor_EventScript_1599CE
 	delay 30
 	hideobjectat 255, MAP_PETALBURG_CITY
 	special ScrSpecial_HealPlayerParty
@@ -159,8 +155,7 @@ LilycoveCity_Harbor_Movement_159A89:: @ 8159A89
 LilycoveCity_Harbor_EventScript_159A8D:: @ 8159A8D
 	lock
 	faceplayer
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if_eq LilycoveCity_Harbor_EventScript_159AA2
+	goto_if_set FLAG_SYS_GAME_CLEAR, LilycoveCity_Harbor_EventScript_159AA2
 	msgbox LilycoveCity_Harbor_Text_18B504, 4
 	release
 	end

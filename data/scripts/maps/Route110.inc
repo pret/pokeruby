@@ -13,7 +13,7 @@ Route110_MapScript1_14F914:: @ 814F914
 	call Route110_EventScript_1A014E
 	call Route110_EventScript_1A0172
 	compare VAR_CYCLING_CHALLENGE_STATE, 1
-	call_if 1, Route110_EventScript_14F92F
+	call_if_eq Route110_EventScript_14F92F
 	end
 
 Route110_EventScript_14F92F:: @ 814F92F
@@ -327,9 +327,9 @@ Route110_EventScript_14FD34:: @ 814FD34
 	lockall
 	checkplayergender
 	compare RESULT, 0
-	call_if 1, Route110_EventScript_14FDA7
+	call_if_eq Route110_EventScript_14FDA7
 	compare RESULT, 1
-	call_if 1, Route110_EventScript_14FDAC
+	call_if_eq Route110_EventScript_14FDAC
 	applymovement 28, Route110_Movement_1A0845
 	waitmovement 0
 	applymovement 28, Route110_Movement_1A0833
@@ -338,11 +338,11 @@ Route110_EventScript_14FD34:: @ 814FD34
 	waitmovement 0
 	delay 30
 	compare VAR_SPECIAL_8, 1
-	call_if 1, Route110_EventScript_14FF14
+	call_if_eq Route110_EventScript_14FF14
 	compare VAR_SPECIAL_8, 2
-	call_if 1, Route110_EventScript_14FF1F
+	call_if_eq Route110_EventScript_14FF1F
 	compare VAR_SPECIAL_8, 3
-	call_if 1, Route110_EventScript_14FF2A
+	call_if_eq Route110_EventScript_14FF2A
 	checkplayergender
 	compare RESULT, 0
 	goto_if_eq Route110_EventScript_14FDB1
@@ -426,22 +426,22 @@ Route110_EventScript_14FEA5:: @ 814FEA5
 Route110_EventScript_14FEB2:: @ 814FEB2
 	closemessage
 	compare VAR_SPECIAL_8, 1
-	call_if 1, Route110_EventScript_14FF56
+	call_if_eq Route110_EventScript_14FF56
 	compare VAR_SPECIAL_8, 2
-	call_if 1, Route110_EventScript_14FF5E
+	call_if_eq Route110_EventScript_14FF5E
 	compare VAR_SPECIAL_8, 3
-	call_if 1, Route110_EventScript_14FF66
+	call_if_eq Route110_EventScript_14FF66
 	setobjectmovementtype 28, 10
 	setobjectmovementtype 29, 10
 	removeobject 28
 	addobject 29
 	delay 45
 	compare VAR_SPECIAL_8, 1
-	call_if 1, Route110_EventScript_14FF35
+	call_if_eq Route110_EventScript_14FF35
 	compare VAR_SPECIAL_8, 2
-	call_if 1, Route110_EventScript_14FF40
+	call_if_eq Route110_EventScript_14FF40
 	compare VAR_SPECIAL_8, 3
-	call_if 1, Route110_EventScript_14FF4B
+	call_if_eq Route110_EventScript_14FF4B
 	removeobject 29
 	setvar VAR_ROUTE110_STATE, 1
 	savebgm 0

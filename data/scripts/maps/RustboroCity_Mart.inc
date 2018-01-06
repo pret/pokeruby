@@ -6,10 +6,8 @@ RustboroCity_Mart_EventScript_157BD4:: @ 8157BD4
 	faceplayer
 	message RustboroCity_Mart_Text_1A0BE4
 	waitmessage
-	checkflag FLAG_MET_DEVON_EMPLOYEE
-	goto_if 0, RustboroCity_Mart_EventScript_157BEF
-	checkflag FLAG_MET_DEVON_EMPLOYEE
-	goto_if_eq RustboroCity_Mart_EventScript_157C18
+	goto_if_unset FLAG_MET_DEVON_EMPLOYEE, RustboroCity_Mart_EventScript_157BEF
+	goto_if_set FLAG_MET_DEVON_EMPLOYEE, RustboroCity_Mart_EventScript_157C18
 	end
 
 RustboroCity_Mart_EventScript_157BEF:: @ 8157BEF

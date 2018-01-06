@@ -13,7 +13,7 @@ SlateportCity_MapScript1_14BA3C:: @ 814BA3C
 	setvar VAR_SLATEPORT_MUSEUM_1F_STATE, 0
 	call SlateportCity_EventScript_14BA5C
 	compare VAR_SLATEPORT_STATE, 1
-	call_if 1, SlateportCity_EventScript_14BA68
+	call_if_eq SlateportCity_EventScript_14BA68
 	end
 
 SlateportCity_EventScript_14BA5C:: @ 814BA5C
@@ -68,10 +68,10 @@ SlateportCity_EventScript_14BAE0:: @ 814BAE0
 	msgbox SlateportCity_Text_164682, 4
 	specialvar RESULT, LeadMonHasEffortRibbon
 	compare RESULT, 1
-	call_if 1, SlateportCity_EventScript_14BB35
+	call_if_eq SlateportCity_EventScript_14BB35
 	specialvar RESULT, ScrSpecial_AreLeadMonEVsMaxedOut
 	compare RESULT, 0
-	call_if 1, SlateportCity_EventScript_14BB2B
+	call_if_eq SlateportCity_EventScript_14BB2B
 	msgbox SlateportCity_Text_164691, 4
 	playfanfare BGM_FANFA4
 	message SlateportCity_Text_1646DD
@@ -96,7 +96,7 @@ SlateportCity_EventScript_14BB3F:: @ 814BB3F
 	lock
 	faceplayer
 	compare VAR_SLATEPORT_STATE, 1
-	call_if 1, SlateportCity_EventScript_14BB56
+	call_if_eq SlateportCity_EventScript_14BB56
 	msgbox SlateportCity_Text_164814, 4
 	release
 	end
@@ -110,7 +110,7 @@ SlateportCity_EventScript_14BB60:: @ 814BB60
 	lock
 	faceplayer
 	compare VAR_SLATEPORT_STATE, 1
-	call_if 1, SlateportCity_EventScript_14BB77
+	call_if_eq SlateportCity_EventScript_14BB77
 	msgbox SlateportCity_Text_1648A0, 4
 	release
 	end
@@ -124,9 +124,8 @@ SlateportCity_EventScript_14BB81:: @ 814BB81
 	lock
 	faceplayer
 	compare VAR_SLATEPORT_STATE, 1
-	call_if 1, SlateportCity_EventScript_14BBA1
-	checkflag FLAG_RECEIVED_SECRET_POWER
-	goto_if_eq SlateportCity_EventScript_14BBAB
+	call_if_eq SlateportCity_EventScript_14BBA1
+	goto_if_set FLAG_RECEIVED_SECRET_POWER, SlateportCity_EventScript_14BBAB
 	msgbox SlateportCity_Text_164937, 4
 	release
 	end
@@ -145,7 +144,7 @@ SlateportCity_EventScript_14BBB5:: @ 814BBB5
 	lock
 	faceplayer
 	compare VAR_SLATEPORT_STATE, 1
-	call_if 1, SlateportCity_EventScript_14BBCC
+	call_if_eq SlateportCity_EventScript_14BBCC
 	msgbox SlateportCity_Text_164A30, 4
 	release
 	end
@@ -169,7 +168,7 @@ SlateportCity_EventScript_14BBF3:: @ 814BBF3
 	lock
 	faceplayer
 	compare VAR_SLATEPORT_STATE, 1
-	call_if 1, SlateportCity_EventScript_14BC0A
+	call_if_eq SlateportCity_EventScript_14BC0A
 	msgbox SlateportCity_Text_164B34, 4
 	release
 	end
@@ -182,8 +181,7 @@ SlateportCity_EventScript_14BC0A:: @ 814BC0A
 SlateportCity_EventScript_14BC14:: @ 814BC14
 	lock
 	faceplayer
-	checkflag FLAG_DOCK_REJECTED_DEVON_GOODS
-	goto_if_eq SlateportCity_EventScript_14BC29
+	goto_if_set FLAG_DOCK_REJECTED_DEVON_GOODS, SlateportCity_EventScript_14BC29
 	msgbox SlateportCity_Text_164BBF, 4
 	release
 	end
@@ -199,10 +197,8 @@ SlateportCity_EventScript_14BC33:: @ 814BC33
 
 SlateportCity_EventScript_14BC3C:: @ 814BC3C
 	lockall
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if_eq SlateportCity_EventScript_14BC63
-	checkflag FLAG_BADGE07_GET
-	goto_if_eq SlateportCity_EventScript_14BC59
+	goto_if_set FLAG_SYS_GAME_CLEAR, SlateportCity_EventScript_14BC63
+	goto_if_set FLAG_BADGE07_GET, SlateportCity_EventScript_14BC59
 	msgbox SlateportCity_Text_1658A0, 4
 	releaseall
 	end
@@ -235,8 +231,7 @@ SlateportCity_EventScript_14BC88:: @ 814BC88
 
 SlateportCity_EventScript_14BC91:: @ 814BC91
 	lockall
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if_eq SlateportCity_EventScript_14BCA5
+	goto_if_set FLAG_SYS_GAME_CLEAR, SlateportCity_EventScript_14BCA5
 	msgbox SlateportCity_Text_165A8B, 4
 	releaseall
 	end
@@ -254,7 +249,7 @@ SlateportCity_EventScript_14BCB8:: @ 814BCB8
 	lock
 	faceplayer
 	compare VAR_SLATEPORT_STATE, 1
-	call_if 1, SlateportCity_EventScript_14BCCF
+	call_if_eq SlateportCity_EventScript_14BCCF
 	msgbox SlateportCity_Text_164F9E, 4
 	release
 	end
@@ -289,9 +284,9 @@ SlateportCity_EventScript_14BD06:: @ 814BD06
 	faceplayer
 	msgbox SlateportCity_Text_1650F1, MSGBOX_YESNO
 	compare RESULT, YES
-	call_if 1, SlateportCity_EventScript_14BD28
+	call_if_eq SlateportCity_EventScript_14BD28
 	compare RESULT, NO
-	call_if 1, SlateportCity_EventScript_14BD31
+	call_if_eq SlateportCity_EventScript_14BD31
 	release
 	end
 
@@ -410,8 +405,7 @@ SlateportCity_EventScript_14BE16:: @ 814BE16
 SlateportCity_EventScript_14BE20:: @ 814BE20
 	lock
 	faceplayer
-	checkflag FLAG_RECEIVED_SECRET_POWER
-	goto_if 0, SlateportCity_EventScript_14BE16
+	goto_if_unset FLAG_RECEIVED_SECRET_POWER, SlateportCity_EventScript_14BE16
 	message SlateportCity_Text_1A0BE4
 	waitmessage
 	pokemartdecoration SlateportCity_Decorations2
@@ -442,8 +436,7 @@ SlateportCity_Decorations2:: @ 814BE40
 @ 814BE60
 	lock
 	faceplayer
-	checkflag FLAG_RECEIVED_SECRET_POWER
-	goto_if 0, SlateportCity_EventScript_14BE16
+	goto_if_unset FLAG_RECEIVED_SECRET_POWER, SlateportCity_EventScript_14BE16
 	message SlateportCity_Text_1A0BE4
 	waitmessage
 	pokemartdecoration SlateportCity_Decorations3
