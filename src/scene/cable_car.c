@@ -59,7 +59,7 @@ struct CableCarEwramStruct1 {
     u16 unk_0022[9][12];
     u8 filler_00fa[2];
     u16 unk_00fc[0x20][0x20];
-    u16 unk_08fc[0x400];
+    u16 unk_08fc[0x20][0x20];
 }; // size 0x10FC
 
 struct CableCarEwramStruct2 {
@@ -268,8 +268,8 @@ static void CableCarMainCallback_Setup(void)
             }
             break;
         case 5:
-            sub_8124F08((u16 *)BG_SCREEN_ADDR(29), eCableCar2->treeTilemap, 0, 17, 32, 15);
-            sub_8124F08((u16 *)BG_SCREEN_ADDR(30), eCableCar2->mountainTilemap, 0, 0, 30, 20);
+            sub_8124F08((void *)BG_SCREEN_ADDR(29), eCableCar2->treeTilemap, 0, 17, 32, 15);
+            sub_8124F08((void *)BG_SCREEN_ADDR(30), eCableCar2->mountainTilemap, 0, 0, 30, 20);
             sub_8124F08(sCableCarPtr->unk_08fc, gCableCarPylonHookTilemapEntries, 0, 0, 5, 2);
             sub_8124F08(sCableCarPtr->unk_08fc, eCableCar2->pylonStemTilemap, 0, 2, 2, 20);
             gMain.state++;
@@ -479,14 +479,14 @@ static void sub_8123AF8(u8 taskId)
                 sCableCarPtr->unk_0015 = 192;
                 break;
             case 32:
-                sCableCarPtr->unk_08fc[2] = (gCableCarPylonHookTilemapEntries + 2)[0];
-                sCableCarPtr->unk_08fc[3] = (gCableCarPylonHookTilemapEntries + 2)[1];
-                sCableCarPtr->unk_08fc[34] = (gCableCarPylonHookTilemapEntries + 2)[5];
-                sCableCarPtr->unk_08fc[35] = (gCableCarPylonHookTilemapEntries + 2)[6];
+                sCableCarPtr->unk_08fc[0][2] = (gCableCarPylonHookTilemapEntries + 2)[0];
+                sCableCarPtr->unk_08fc[0][3] = (gCableCarPylonHookTilemapEntries + 2)[1];
+                sCableCarPtr->unk_08fc[1][2] = (gCableCarPylonHookTilemapEntries + 2)[5];
+                sCableCarPtr->unk_08fc[1][3] = (gCableCarPylonHookTilemapEntries + 2)[6];
                 break;
             case 40:
-                sCableCarPtr->unk_08fc[4] = (gCableCarPylonHookTilemapEntries + 4)[0];
-                sCableCarPtr->unk_08fc[36] = (gCableCarPylonHookTilemapEntries + 4)[5];
+                sCableCarPtr->unk_08fc[0][4] = (gCableCarPylonHookTilemapEntries + 4)[0];
+                sCableCarPtr->unk_08fc[1][4] = (gCableCarPylonHookTilemapEntries + 4)[5];
                 break;
         }
     }
