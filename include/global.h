@@ -14,9 +14,9 @@
 #define INCBIN_S8 {0}
 #define INCBIN_S16 {0}
 #define INCBIN_S32 {0}
-void *     memcpy (void *, const void *, size_t);
-void *     memset (void *, int, size_t);
-int     strcmp (const char *, const char *);
+void *memcpy (void *, const void *, size_t);
+void *memset (void *, int, size_t);
+int strcmp (const char *, const char *);
 #endif
 
 // Prevent cross-jump optimization.
@@ -843,5 +843,6 @@ struct HallOfFame
 
 extern struct HallOfFame gHallOfFame;
 extern struct SaveBlock2 gSaveBlock2;
+extern u8 ewram[];
 
 #endif // GUARD_GLOBAL_H
