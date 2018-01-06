@@ -49,7 +49,7 @@ Route112_CableCarStation_EventScript_15C0AD:: @ 815C0AD
 	setvar VAR_CABLE_CAR_STATION_STATE, 1
 	incrementgamestat GAME_STAT_RODE_CABLE_CAR
 	special CableCarWarp
-	special sub_8123218
+	special CableCar
 	waitstate
 	release
 	end

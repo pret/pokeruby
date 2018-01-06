@@ -48,7 +48,7 @@ MtChimney_CableCarStation_EventScript_15C16C:: @ 815C16C
 	setvar VAR_CABLE_CAR_STATION_STATE, 2
 	incrementgamestat GAME_STAT_RODE_CABLE_CAR
 	special CableCarWarp
-	special sub_8123218
+	special CableCar
 	waitstate
 	release
 	end

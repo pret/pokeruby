@@ -302,8 +302,8 @@ SECTIONS {
         asm/normal.o(.text);
         asm/battle_intro.o(.text);
         src/field/bike.o(.text);
-        asm/easy_chat.o(.text);
-        src/field/easy_chat.o(.text);
+        src/easy_chat_1.o(.text);
+        src/easy_chat_2.o(.text);
         src/pokenav_before.o(.text);
         asm/pokenav.o(.text);
         src/pokenav_after.o(.text);
@@ -347,9 +347,9 @@ SECTIONS {
         src/battle/battle_controller_linkpartner.o(.text);
         src/battle/battle_message.o(.text);
         src/field/choose_party.o(.text);
-        asm/cable_car.o(.text);
         src/roulette_util.o(.text);
-        asm/cable_car_util.o(.text);
+        src/scene/cable_car.o(.text);
+        src/engine/cable_car_util.o(.text);
         src/unused_8124F94.o(.text);
         src/engine/save.o(.text);
         src/engine/mystery_event_script.o(.text);
@@ -541,6 +541,8 @@ SECTIONS {
         src/field/item_use.o(.rodata);
         data/battle_anim_80CA710.o(.rodata);
         src/field/bike.o(.rodata);
+        src/easy_chat_1.o(.rodata);
+        src/easy_chat_2.o(.rodata);
         data/easy_chat.o(.rodata);
         data/pokenav.o(.rodata);
         src/pokemon/mon_markings.o(.rodata);
@@ -570,7 +572,7 @@ SECTIONS {
         src/battle/battle_controller_linkpartner.o(.rodata);
         src/battle/battle_message.o(.rodata);
         src/field/choose_party.o(.rodata);
-        data/cable_car.o(.rodata);
+        src/scene/cable_car.o(.rodata);
         src/engine/save.o(.rodata);
         src/field/field_effect_helpers.o(.rodata);
         data/contest_ai.o(.rodata);

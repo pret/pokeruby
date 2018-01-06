@@ -2440,7 +2440,7 @@ void MakeObjectTemplateFromFieldObjectTemplate(struct MapObjectTemplate *mapObjT
     MakeObjectTemplateFromFieldObjectGraphicsInfoWithCallbackIndex(mapObjTemplate->graphicsId, mapObjTemplate->movementType, sprTemplate, subspriteTables);
 }
 
-u8 AddPseudoFieldObject(u16 graphicsId, void (*callback)(struct Sprite *), s16 c, s16 d, u8 subpriority)
+u8 AddPseudoFieldObject(u16 graphicsId, void (*callback)(struct Sprite *), s16 x, s16 y, u8 subpriority)
 {
     struct SpriteTemplate spriteTemplate;
     const struct SubspriteTable *subspriteTables;
@@ -2449,7 +2449,7 @@ u8 AddPseudoFieldObject(u16 graphicsId, void (*callback)(struct Sprite *), s16 c
     MakeObjectTemplateFromFieldObjectGraphicsInfo(graphicsId, callback, &spriteTemplate, &subspriteTables);
     if (spriteTemplate.paletteTag != 0xFFFF)
         sub_805BDF8(spriteTemplate.paletteTag);
-    spriteId = CreateSprite(&spriteTemplate, c, d, subpriority);
+    spriteId = CreateSprite(&spriteTemplate, x, y, subpriority);
     if (spriteId != 64 && subspriteTables != NULL)
     {
         SetSubspriteTables(&gSprites[spriteId], subspriteTables);
