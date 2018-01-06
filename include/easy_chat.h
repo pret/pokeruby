@@ -75,16 +75,14 @@ struct Shared1000
     void (*unk1C4)(void);
     u8 unk1C8[0x6C8-0x1C8];
     u8 unk6C8[0xB78-0x6C8];
+#if GERMAN
+    u16 unkB78[0x1B][270];
+#else
     u16 unkB78[0x1B][255];
-#if GERMAN
-    u8 filler4142_de[0x32A];
 #endif
-    u16 unk4142[(0x78-0x42)/2];
+    u16 unk4142[(0x78-0x42)/2];  //0x446C
     u16 unk4178[(0x41A4-0x4178)/2]; // unknown length
-    const u8 *unk41A4[0x16][0x100];
-#if GERMAN
-    u8 filler99A4_de[2];
-#endif
+    const u8 *unk41A4[0x16][0x100];  //0x44CE in german
     s8 unk99A4;
     s8 unk99A5;
     s8 unk99A6[0xA28-0x9A6];
@@ -117,11 +115,6 @@ struct Shared1000
     u8 unk9F8E[7];  // unknown length
 };
 
-#define static_assert(cond) \
-  typedef char test_[(cond) ? 1 : -1]
-
-//static_assert(offsetof(struct Shared1000, unk1A8) == 0x1A8);
-
 extern u8 gUnknown_020388AC;
 extern u8 gUnknown_03000740;
 
@@ -145,7 +138,7 @@ u16 sub_80EB8EC(void);
 u8 *sub_80EB544(u8 *dst, u16 *words, u16 arg2, u16 arg3);
 
 #if GERMAN
-u32 de_sub_80EB748(u32, u32);
+u32 de_sub_80EB748(s32, s32);
 #endif
 
 #endif // GUARD_EASYCHAT_H
