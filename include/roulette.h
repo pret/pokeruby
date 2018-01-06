@@ -33,9 +33,6 @@ struct UnkStruct0
 
 s16 sub_81174C4(s16, s16);
 s16 sub_81174E0(s16);
-
 void PlayRoulette(void);
-
-
 
 #endif

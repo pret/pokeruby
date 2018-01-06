@@ -1,8 +1,7 @@
 #include "global.h"
-
 #include "ewram.h"
 #include "field_fadetransition.h"
-#include "game_stat.h"
+#include "constants/game_stat.h"
 #include "m4a.h"
 #include "main.h"
 #include "menu.h"
@@ -11,14 +10,13 @@
 #include "overworld.h"
 #include "palette.h"
 #include "pokemon.h"
-#include "rng.h"
 #include "roulette.h"
 #include "roulette_util.h"
 #include "rtc.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "script.h"
-#include "species.h"
+#include "constants/species.h"
 #include "sprite.h"
 #include "strings2.h"
 #include "string_util.h"
@@ -28,14 +26,6 @@
 #include "unknown_task.h"
 
 asm(".include \"constants/gba_constants.inc\"");
-
-struct OamMatrix
-{
-    s16 a;
-    s16 b;
-    s16 c;
-    s16 d;
-};
 
 struct Roulette /* ewram + 0x19000 */
 {
