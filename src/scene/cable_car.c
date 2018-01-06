@@ -46,7 +46,11 @@ struct CableCarEwramStruct1 {
     u8 unk_0015;
     u8 filler_0016[5];
     u8 unk_001b;
-    u8 filler_001c[6];
+    u8 unk_001c;
+    u8 unk_001d;
+    u8 unk_001e;
+    u8 unk_001f;
+    u8 unk_0020;
     u16 unk_0022[9][12];
     u8 filler_00fa[2];
     u16 unk_00fc[0x400];
@@ -74,20 +78,22 @@ EWRAM_DATA u32 filler_02039280 = 0;
 // Static ROM declarations
 
 void sub_8123244(void);
-void sub_8124118(void);
-void sub_81248AC(u8);
-void sub_8123FBC(u8);
-void sub_8123C40(void);
 void sub_8123724(void);
 void sub_8123878(u8 taskId);
 void sub_81239E4(u8 taskId);
 void sub_8123AF8(u8 taskId);
-void sub_812453C(void);
-void sub_8124598(void);
-void sub_8123CB8(struct Sprite *sprite);
+void sub_8123C40(void);
 void nullsub_76(struct Sprite *sprite);
+void sub_8123CB8(struct Sprite *sprite);
 void sub_8123EB8(struct Sprite *sprite);
 void sub_8123F44(struct Sprite *sprite);
+void sub_8123FBC(u8);
+void sub_8124118(void);
+void sub_812453C(void);
+void sub_8124598(void);
+void sub_81245F4(void);
+void sub_812476C(void);
+void sub_81248AC(u8);
 
 // .rodata
 
@@ -857,4 +863,36 @@ void sub_812446C(void)
         }
     }
     gUnknown_02039274->unk_001b = (gUnknown_02039274->unk_001b + 1) % 3;
+}
+
+void sub_812453C(void)
+{
+    gUnknown_02039274->unk_001c = (gUnknown_02039274->unk_001c + 1) % 0x60;
+    gUnknown_02039274->unk_0008 = gUnknown_02039274->unk_001f - gUnknown_02039274->unk_001d;
+    gUnknown_02039274->unk_0009 = gUnknown_02039274->unk_0020 - gUnknown_02039274->unk_001e;
+    gUnknown_02039274->unk_001d++;
+    if ((gUnknown_02039274->unk_001d % 4) == 0)
+    {
+        gUnknown_02039274->unk_001e++;
+    }
+    if (gUnknown_02039274->unk_001d > 16)
+    {
+        sub_81245F4();
+    }
+}
+
+void sub_8124598(void)
+{
+    gUnknown_02039274->unk_001c = (gUnknown_02039274->unk_001c + 1) % 0x60;
+    gUnknown_02039274->unk_0008 = gUnknown_02039274->unk_001f + gUnknown_02039274->unk_001d;
+    gUnknown_02039274->unk_0009 = gUnknown_02039274->unk_0020 + gUnknown_02039274->unk_001e;
+    gUnknown_02039274->unk_001d++;
+    if ((gUnknown_02039274->unk_001d % 4) == 0)
+    {
+        gUnknown_02039274->unk_001e++;
+    }
+    if (gUnknown_02039274->unk_001d > 16)
+    {
+        sub_812476C();
+    }
 }
