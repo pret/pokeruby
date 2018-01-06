@@ -7,7 +7,7 @@
 
 // Exported ROM declarations
 
-void sub_8124F08(u16 *dest, const u16 *src, u8 x, u8 y, u8 width, u8 height);
-void sub_8124E7C(u16 *dest, u16 a1, u8 a2, u8 a3, u8 a4, u8 a5);
+void sub_8124F08(void *dest, const u16 *src, u8 x, u8 y, u8 width, u8 height);
+void sub_8124E7C(void *dest, u16 a1, u8 a2, u8 a3, u8 a4, u8 a5);
 
 #endif //GUARD_CABLE_CAR_UTIL_H

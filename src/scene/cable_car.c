@@ -44,7 +44,11 @@ struct CableCarEwramStruct1 {
     u8 filler_0000e[6];
     u8 unk_0014;
     u8 unk_0015;
-    u8 filler_0016[5];
+    u8 unk_0016;
+    u8 unk_0017;
+    u8 unk_0018;
+    u8 unk_0019;
+    u8 unk_001a;
     u8 unk_001b;
     u8 unk_001c;
     u8 unk_001d;
@@ -53,7 +57,7 @@ struct CableCarEwramStruct1 {
     u8 unk_0020;
     u16 unk_0022[9][12];
     u8 filler_00fa[2];
-    u16 unk_00fc[0x400];
+    u16 unk_00fc[0x20][0x20];
     u16 unk_08fc[0x400];
 }; // size 0x10FC
 
@@ -894,5 +898,35 @@ void sub_8124598(void)
     if (gUnknown_02039274->unk_001d > 16)
     {
         sub_812476C();
+    }
+}
+
+void sub_81245F4(void)
+{
+    u8 i = 0;
+
+    gUnknown_02039274->unk_001d = gUnknown_02039274->unk_001e = 0;
+    gUnknown_02039274->unk_001f = gUnknown_02039274->unk_0008;
+    gUnknown_02039274->unk_0020 = gUnknown_02039274->unk_0009;
+    gUnknown_02039274->unk_0019 = (gUnknown_02039274->unk_0019 + 30) % 32;
+    gUnknown_02039274->unk_0018 -= 2;
+    gUnknown_0203927A = (gUnknown_02039274->unk_001a + 23) % 32;
+    for (i = 0; i < 9; i++)
+    {
+        gUnknown_02039278 = gUnknown_02039274->unk_0019;
+        gUnknown_02039279 = (gUnknown_0203927A + i) % 32;
+        gUnknown_02039274->unk_00fc[gUnknown_02039279][gUnknown_02039278] = gUnknown_02039274->unk_0022[i][gUnknown_02039274->unk_0018];
+        gUnknown_02039278 = (gUnknown_02039278 + 1) % 32;
+        gUnknown_02039274->unk_00fc[gUnknown_02039279][gUnknown_02039278] = gUnknown_02039274->unk_0022[i][gUnknown_02039274->unk_0018 + 1];
+    }
+    gUnknown_02039278 = (gUnknown_02039274->unk_0019 + 30) % 32;
+    sub_8124E7C(gUnknown_02039274->unk_00fc, 0, gUnknown_02039278, 0, 2, 32);
+    if (gUnknown_02039274->unk_0018 == 0)
+    {
+        gUnknown_02039274->unk_001a = (gUnknown_02039274->unk_001a + 29) % 32;
+        gUnknown_02039274->unk_0018 = 12;
+        sub_812446C();
+        gUnknown_02039278 = (gUnknown_02039274->unk_001a + 1) % 32;
+        sub_8124E7C(gUnknown_02039274->unk_00fc, 0, 0, gUnknown_02039278, 32, 9);
     }
 }
