@@ -958,3 +958,28 @@ void sub_812476C(void)
         sub_812446C();
     }
 }
+
+void sub_81248AC(u8 a0)
+{
+    switch (a0)
+    {
+        case 0:
+        default:
+            gUnknown_02039274->unk_001b = 2;
+            gUnknown_02039274->unk_0019 = 0;
+            gUnknown_02039274->unk_001a = 20;
+            gUnknown_02039274->unk_0018 = 12;
+            sub_812446C();
+            sub_81245F4();
+            break;
+        case 1:
+            gUnknown_02039274->unk_001b = 2;
+            gUnknown_02039274->unk_0019 = 28;
+            gUnknown_02039274->unk_001a = 20;
+            gUnknown_02039274->unk_0018 = 4;
+            sub_812446C();
+            sub_812476C();
+            break;
+    }
+    gUnknown_02039274->unk_001c = 0;
+}
