@@ -7,7 +7,7 @@
 
 // Exported ROM declarations
 
-void sub_8124F08(u16 dest[][32], const u16 *src, u8 x, u8 y, u8 width, u8 height);
-void sub_8124E7C(u16 dest[][32], u16 a1, u8 a2, u8 a3, u8 a4, u8 a5);
+void CableCarUtil_FillWrapped(void *dest, u16 value, u8 x, u8 y, u8 width, u8 height);
+void CableCarUtil_CopyWrapped(void *dest, const u16 *src, u8 x, u8 y, u8 width, u8 height);
 
 #endif //GUARD_CABLE_CAR_UTIL_H

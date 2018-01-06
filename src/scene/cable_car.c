@@ -268,22 +268,22 @@ static void CableCarMainCallback_Setup(void)
             }
             break;
         case 5:
-            sub_8124F08((void *)BG_SCREEN_ADDR(29), eCableCar2->treeTilemap, 0, 17, 32, 15);
-            sub_8124F08((void *)BG_SCREEN_ADDR(30), eCableCar2->mountainTilemap, 0, 0, 30, 20);
-            sub_8124F08(sCableCarPtr->unk_08fc, gCableCarPylonHookTilemapEntries, 0, 0, 5, 2);
-            sub_8124F08(sCableCarPtr->unk_08fc, eCableCar2->pylonStemTilemap, 0, 2, 2, 20);
+            CableCarUtil_CopyWrapped((void *)BG_SCREEN_ADDR(29), eCableCar2->treeTilemap, 0, 17, 32, 15);
+            CableCarUtil_CopyWrapped((void *)BG_SCREEN_ADDR(30), eCableCar2->mountainTilemap, 0, 0, 30, 20);
+            CableCarUtil_CopyWrapped(sCableCarPtr->unk_08fc, gCableCarPylonHookTilemapEntries, 0, 0, 5, 2);
+            CableCarUtil_CopyWrapped(sCableCarPtr->unk_08fc, eCableCar2->pylonStemTilemap, 0, 2, 2, 20);
             gMain.state++;
             break;
         case 6:
             sub_81248AC(gSpecialVar_0x8004);
-            sub_8124F08(sCableCarPtr->unk_00fc, eCableCar2->mtChimneyTilemap + 0x48, 0, 14, 12, 3);
-            sub_8124F08(sCableCarPtr->unk_00fc, eCableCar2->mtChimneyTilemap + 0x6C, 12, 17, 12, 3);
-            sub_8124F08(sCableCarPtr->unk_00fc, eCableCar2->mtChimneyTilemap + 0x90, 24, 20, 12, 3);
-            sub_8124F08(sCableCarPtr->unk_00fc, eCableCar2->mtChimneyTilemap + 0x00, 0, 17, 12, 3);
-            sub_8124F08(sCableCarPtr->unk_00fc, eCableCar2->mtChimneyTilemap + 0x24, 0, 20, 12, 3);
-            sub_8124F08(sCableCarPtr->unk_00fc, eCableCar2->mtChimneyTilemap + 0x00, 12, 20, 12, 3);
-            sub_8124F08(sCableCarPtr->unk_00fc, eCableCar2->mtChimneyTilemap + 0x24, 12, 23, 12, 3);
-            sub_8124F08(sCableCarPtr->unk_00fc, eCableCar2->mtChimneyTilemap + 0x00, 24, 23, 12, 3);
+            CableCarUtil_CopyWrapped(sCableCarPtr->unk_00fc, eCableCar2->mtChimneyTilemap + 0x48, 0, 14, 12, 3);
+            CableCarUtil_CopyWrapped(sCableCarPtr->unk_00fc, eCableCar2->mtChimneyTilemap + 0x6C, 12, 17, 12, 3);
+            CableCarUtil_CopyWrapped(sCableCarPtr->unk_00fc, eCableCar2->mtChimneyTilemap + 0x90, 24, 20, 12, 3);
+            CableCarUtil_CopyWrapped(sCableCarPtr->unk_00fc, eCableCar2->mtChimneyTilemap + 0x00, 0, 17, 12, 3);
+            CableCarUtil_CopyWrapped(sCableCarPtr->unk_00fc, eCableCar2->mtChimneyTilemap + 0x24, 0, 20, 12, 3);
+            CableCarUtil_CopyWrapped(sCableCarPtr->unk_00fc, eCableCar2->mtChimneyTilemap + 0x00, 12, 20, 12, 3);
+            CableCarUtil_CopyWrapped(sCableCarPtr->unk_00fc, eCableCar2->mtChimneyTilemap + 0x24, 12, 23, 12, 3);
+            CableCarUtil_CopyWrapped(sCableCarPtr->unk_00fc, eCableCar2->mtChimneyTilemap + 0x00, 24, 23, 12, 3);
             gMain.state++;
             break;
         case 7:
@@ -435,17 +435,17 @@ static void sub_81239E4(u8 taskId)
         switch (sCableCarPtr->unk_0014)
         {
             case 175:
-                sub_8124E7C(sCableCarPtr->unk_08fc, 0, 0, 22, 2, 10);
+                CableCarUtil_FillWrapped(sCableCarPtr->unk_08fc, 0, 0, 22, 2, 10);
                 break;
             case 40:
-                sub_8124E7C(sCableCarPtr->unk_08fc, 0, 3, 0, 2, 2);
+                CableCarUtil_FillWrapped(sCableCarPtr->unk_08fc, 0, 3, 0, 2, 2);
                 break;
             case 32:
-                sub_8124E7C(sCableCarPtr->unk_08fc, 0, 2, 0, 1, 2);
+                CableCarUtil_FillWrapped(sCableCarPtr->unk_08fc, 0, 2, 0, 1, 2);
                 break;
             case 16:
-                sub_8124F08(sCableCarPtr->unk_08fc, gCableCarPylonHookTilemapEntries, 0, 0, 5, 2);
-                sub_8124F08(sCableCarPtr->unk_08fc, eCableCar2->pylonStemTilemap, 0, 2, 2, 30);
+                CableCarUtil_CopyWrapped(sCableCarPtr->unk_08fc, gCableCarPylonHookTilemapEntries, 0, 0, 5, 2);
+                CableCarUtil_CopyWrapped(sCableCarPtr->unk_08fc, eCableCar2->pylonStemTilemap, 0, 2, 2, 30);
                 sCableCarPtr->unk_0015 = 64;
                 break;
         }
@@ -471,11 +471,11 @@ static void sub_8123AF8(u8 taskId)
         switch (sCableCarPtr->unk_0014)
         {
             case 176:
-                sub_8124F08(sCableCarPtr->unk_08fc, eCableCar2->pylonStemTilemap, 0, 2, 2, 30);
+                CableCarUtil_CopyWrapped(sCableCarPtr->unk_08fc, eCableCar2->pylonStemTilemap, 0, 2, 2, 30);
                 break;
             case 16:
-                sub_8124E7C(sCableCarPtr->unk_08fc, 0, 2, 0, 3, 2);
-                sub_8124E7C(sCableCarPtr->unk_08fc, 0, 0, 22, 2, 10);
+                CableCarUtil_FillWrapped(sCableCarPtr->unk_08fc, 0, 2, 0, 3, 2);
+                CableCarUtil_FillWrapped(sCableCarPtr->unk_08fc, 0, 0, 22, 2, 10);
                 sCableCarPtr->unk_0015 = 192;
                 break;
             case 32:
@@ -772,7 +772,7 @@ static void LoadSprites(void)
             sub_807C9B4(2);
             break;
         case 1:
-            sub_8124F08(sCableCarPtr->unk_00fc, eCableCar2->mtChimneyTilemap + 0x24, 0x18, 0x1a, 0x0c, 0x03);
+            CableCarUtil_CopyWrapped(sCableCarPtr->unk_00fc, eCableCar2->mtChimneyTilemap + 0x24, 0x18, 0x1a, 0x0c, 0x03);
             spriteId = AddPseudoFieldObject(playerGraphicsIds[gSaveBlock2.playerGender], sub_8123D98, 0x80, 0x27, 0x66);
             if (spriteId != MAX_SPRITES)
             {
@@ -914,14 +914,14 @@ static void sub_81245F4(void)
         sCableCarPtr->unk_00fc[gUnknown_02039279][gUnknown_02039278] = sCableCarPtr->unk_0022[i][sCableCarPtr->unk_0018 + 1];
     }
     gUnknown_02039278 = (sCableCarPtr->unk_0019 + 30) % 32;
-    sub_8124E7C(sCableCarPtr->unk_00fc, 0, gUnknown_02039278, 0, 2, 32);
+    CableCarUtil_FillWrapped(sCableCarPtr->unk_00fc, 0, gUnknown_02039278, 0, 2, 32);
     if (sCableCarPtr->unk_0018 == 0)
     {
         sCableCarPtr->unk_001a = (sCableCarPtr->unk_001a + 29) % 32;
         sCableCarPtr->unk_0018 = 12;
         sub_812446C();
         gUnknown_02039278 = (sCableCarPtr->unk_001a + 1) % 32;
-        sub_8124E7C(sCableCarPtr->unk_00fc, 0, 0, gUnknown_02039278, 32, 9);
+        CableCarUtil_FillWrapped(sCableCarPtr->unk_00fc, 0, 0, gUnknown_02039278, 32, 9);
     }
 }
 
@@ -944,7 +944,7 @@ static void sub_812476C(void)
         sCableCarPtr->unk_00fc[gUnknown_0203927C][gUnknown_0203927B] = sCableCarPtr->unk_0022[i][sCableCarPtr->unk_0018 + 1];
     }
     gUnknown_0203927C = (sCableCarPtr->unk_001a + 23) % 32;
-    sub_8124E7C(sCableCarPtr->unk_00fc, 0, sCableCarPtr->unk_0019, gUnknown_0203927C, 2, 9);
+    CableCarUtil_FillWrapped(sCableCarPtr->unk_00fc, 0, sCableCarPtr->unk_0019, gUnknown_0203927C, 2, 9);
     if (sCableCarPtr->unk_0018 == 10)
     {
         sCableCarPtr->unk_001a = (sCableCarPtr->unk_001a + 3) % 32;

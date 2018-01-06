@@ -349,7 +349,7 @@ SECTIONS {
         src/field/choose_party.o(.text);
         src/scene/cable_car.o(.text);
         asm/roulette_util.o(.text);
-        asm/cable_car_util.o(.text);
+        src/engine/cable_car_util.o(.text);
         src/unused_8124F94.o(.text);
         src/engine/save.o(.text);
         src/engine/mystery_event_script.o(.text);
