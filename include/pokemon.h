@@ -405,7 +405,7 @@ struct BattleMove
     u8 pp;
     u8 secondaryEffectChance;
     u8 target;
-    u8 priority;
+    s8 priority;
     u8 flags;
     u8 pad[3];
 };

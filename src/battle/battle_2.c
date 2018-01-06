@@ -4,6 +4,7 @@
 #include "battle_interface.h"
 #include "battle_setup.h"
 #include "data2.h"
+#include "event_data.h"
 #include "item.h"
 #include "link.h"
 #include "main.h"
@@ -26,9 +27,10 @@
 #include "trig.h"
 #include "unknown_task.h"
 #include "util.h"
+#include "constants/battle_move_effects.h"
 #include "constants/items.h"
 #include "constants/hold_effects.h"
-#include "constants/battle_move_effects.h"
+#include "constants/moves.h"
 #include "ewram.h"
 
 struct UnknownStruct7
@@ -56,6 +58,8 @@ struct UnknownStruct12
 extern const u16 gUnknown_08D004E0[];
 extern const struct MonCoords gCastformFrontSpriteCoords[];
 
+extern u8 gStatStageRatios[][2];
+extern u8 gUnknown_02024A76[4];
 extern struct UnknownPokemonStruct2 gUnknown_02023A00[];
 extern u8 gBattleBufferB[][0x200];
 extern u8 gActiveBank;
@@ -2352,3 +2356,1642 @@ void sub_8012324(void)
     }
 }
 */
+__attribute__((naked))
+void sub_8012324(void)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    sub sp, 0x1C\n\
+    ldr r0, _08012340 @ =gBattleCommunication\n\
+    movs r1, 0\n\
+    strb r1, [r0, 0x4]\n\
+    ldr r0, _08012344 @ =gActiveBank\n\
+    strb r1, [r0]\n\
+    ldr r0, _08012348 @ =gNoOfAllBanks\n\
+    bl _08012F74\n\
+    .align 2, 0\n\
+_08012340: .4byte gBattleCommunication\n\
+_08012344: .4byte gActiveBank\n\
+_08012348: .4byte gNoOfAllBanks\n\
+_0801234C:\n\
+    ldr r4, _08012374 @ =gActiveBank\n\
+    ldrb r0, [r4]\n\
+    bl GetBankIdentity\n\
+    lsls r0, 24\n\
+    lsrs r5, r0, 24\n\
+    ldr r1, _08012378 @ =gBattleCommunication\n\
+    ldrb r0, [r4]\n\
+    adds r0, r1\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0x6\n\
+    bls _08012368\n\
+    bl _08012F66\n\
+_08012368:\n\
+    lsls r0, 2\n\
+    ldr r1, _0801237C @ =_08012380\n\
+    adds r0, r1\n\
+    ldr r0, [r0]\n\
+    mov pc, r0\n\
+    .align 2, 0\n\
+_08012374: .4byte gActiveBank\n\
+_08012378: .4byte gBattleCommunication\n\
+_0801237C: .4byte _08012380\n\
+    .align 2, 0\n\
+_08012380:\n\
+    .4byte _0801239C\n\
+    .4byte _080124C8\n\
+    .4byte _08012A28\n\
+    .4byte _08012DA8\n\
+    .4byte _08012E50\n\
+    .4byte _08012E94\n\
+    .4byte _08012F38\n\
+_0801239C:\n\
+    ldr r4, _08012434 @ =gSharedMem\n\
+    ldr r0, _08012438 @ =gActiveBank\n\
+    ldrb r0, [r0]\n\
+    ldr r1, _0801243C @ =0x00016068\n\
+    adds r0, r1\n\
+    adds r0, r4\n\
+    movs r1, 0x6\n\
+    strb r1, [r0]\n\
+    ldr r0, _08012440 @ =gBattleTypeFlags\n\
+    ldrh r1, [r0]\n\
+    movs r0, 0x40\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    bne _080123F8\n\
+    movs r1, 0x2\n\
+    movs r0, 0x2\n\
+    ands r0, r5\n\
+    cmp r0, 0\n\
+    beq _080123F8\n\
+    eors r5, r1\n\
+    adds r0, r5, 0\n\
+    bl GetBankByPlayerAI\n\
+    ldr r2, _08012444 @ =0x000160a6\n\
+    adds r1, r4, r2\n\
+    ldrb r1, [r1]\n\
+    ldr r2, _08012448 @ =gBitTable\n\
+    lsls r0, 24\n\
+    lsrs r0, 22\n\
+    adds r0, r2\n\
+    ldr r0, [r0]\n\
+    ands r1, r0\n\
+    cmp r1, 0\n\
+    bne _080123F8\n\
+    ldr r4, _0801244C @ =gBattleCommunication\n\
+    adds r0, r5, 0\n\
+    bl GetBankByPlayerAI\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    adds r0, r4\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0x4\n\
+    beq _080123F8\n\
+    bl _08012F66\n\
+_080123F8:\n\
+    ldr r0, _08012434 @ =gSharedMem\n\
+    ldr r3, _08012444 @ =0x000160a6\n\
+    adds r0, r3\n\
+    ldrb r3, [r0]\n\
+    ldr r1, _08012448 @ =gBitTable\n\
+    ldr r4, _08012438 @ =gActiveBank\n\
+    ldrb r2, [r4]\n\
+    lsls r0, r2, 2\n\
+    adds r0, r1\n\
+    ldr r0, [r0]\n\
+    ands r3, r0\n\
+    cmp r3, 0\n\
+    beq _08012468\n\
+    ldr r0, _08012450 @ =gActionForBanks\n\
+    adds r0, r2, r0\n\
+    movs r1, 0xD\n\
+    strb r1, [r0]\n\
+    ldr r0, _08012440 @ =gBattleTypeFlags\n\
+    ldrh r1, [r0]\n\
+    movs r0, 0x40\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    bne _08012454\n\
+    ldr r0, _0801244C @ =gBattleCommunication\n\
+    ldrb r1, [r4]\n\
+    adds r1, r0\n\
+    movs r0, 0x4\n\
+    strb r0, [r1]\n\
+    bl _08012F66\n\
+    .align 2, 0\n\
+_08012434: .4byte gSharedMem\n\
+_08012438: .4byte gActiveBank\n\
+_0801243C: .4byte 0x00016068\n\
+_08012440: .4byte gBattleTypeFlags\n\
+_08012444: .4byte 0x000160a6\n\
+_08012448: .4byte gBitTable\n\
+_0801244C: .4byte gBattleCommunication\n\
+_08012450: .4byte gActionForBanks\n\
+_08012454:\n\
+    ldr r0, _08012464 @ =gBattleCommunication\n\
+    ldrb r1, [r4]\n\
+    adds r1, r0\n\
+    movs r0, 0x3\n\
+    strb r0, [r1]\n\
+    bl _08012F66\n\
+    .align 2, 0\n\
+_08012464: .4byte gBattleCommunication\n\
+_08012468:\n\
+    ldr r1, _0801249C @ =gBattleMons\n\
+    movs r0, 0x58\n\
+    muls r0, r2\n\
+    adds r1, 0x50\n\
+    adds r0, r1\n\
+    ldr r1, [r0]\n\
+    movs r0, 0x80\n\
+    lsls r0, 5\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    bne _08012488\n\
+    movs r0, 0x80\n\
+    lsls r0, 15\n\
+    ands r1, r0\n\
+    cmp r1, 0\n\
+    beq _080124A8\n\
+_08012488:\n\
+    ldr r0, _080124A0 @ =gActionForBanks\n\
+    adds r0, r2, r0\n\
+    strb r3, [r0]\n\
+    ldr r1, _080124A4 @ =gBattleCommunication\n\
+    ldrb r0, [r4]\n\
+    adds r0, r1\n\
+    movs r1, 0x3\n\
+    strb r1, [r0]\n\
+    bl _08012F66\n\
+    .align 2, 0\n\
+_0801249C: .4byte gBattleMons\n\
+_080124A0: .4byte gActionForBanks\n\
+_080124A4: .4byte gBattleCommunication\n\
+_080124A8:\n\
+    ldr r0, _080124C0 @ =gActionForBanks\n\
+    ldrb r1, [r0]\n\
+    ldr r0, _080124C4 @ =gBattleBufferB\n\
+    ldrb r2, [r0, 0x1]\n\
+    ldrb r0, [r0, 0x2]\n\
+    lsls r0, 8\n\
+    orrs r2, r0\n\
+    movs r0, 0\n\
+    bl Emitcmd18\n\
+    bl _08012E32\n\
+    .align 2, 0\n\
+_080124C0: .4byte gActionForBanks\n\
+_080124C4: .4byte gBattleBufferB\n\
+_080124C8:\n\
+    ldr r4, _08012520 @ =gBattleExecBuffer\n\
+    ldr r1, _08012524 @ =gBitTable\n\
+    ldr r3, _08012528 @ =gActiveBank\n\
+    ldrb r5, [r3]\n\
+    lsls r0, r5, 2\n\
+    adds r0, r1\n\
+    ldr r2, [r0]\n\
+    lsls r0, r2, 4\n\
+    movs r1, 0xF0\n\
+    lsls r1, 24\n\
+    orrs r0, r1\n\
+    orrs r0, r2\n\
+    lsls r1, r2, 8\n\
+    orrs r0, r1\n\
+    lsls r2, 12\n\
+    orrs r0, r2\n\
+    ldr r1, [r4]\n\
+    ands r1, r0\n\
+    mov r8, r3\n\
+    cmp r1, 0\n\
+    beq _080124F6\n\
+    bl _08012F66\n\
+_080124F6:\n\
+    ldr r2, _0801252C @ =gActionForBanks\n\
+    adds r2, r5, r2\n\
+    ldr r1, _08012530 @ =gBattleBufferB\n\
+    lsls r0, r5, 9\n\
+    adds r1, 0x1\n\
+    adds r0, r1\n\
+    ldrb r0, [r0]\n\
+    strb r0, [r2]\n\
+    ldrb r0, [r3]\n\
+    lsls r0, 9\n\
+    adds r0, r1\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0xC\n\
+    bls _08012514\n\
+    b _08012968\n\
+_08012514:\n\
+    lsls r0, 2\n\
+    ldr r1, _08012534 @ =_08012538\n\
+    adds r0, r1\n\
+    ldr r0, [r0]\n\
+    mov pc, r0\n\
+    .align 2, 0\n\
+_08012520: .4byte gBattleExecBuffer\n\
+_08012524: .4byte gBitTable\n\
+_08012528: .4byte gActiveBank\n\
+_0801252C: .4byte gActionForBanks\n\
+_08012530: .4byte gBattleBufferB\n\
+_08012534: .4byte _08012538\n\
+    .align 2, 0\n\
+_08012538:\n\
+    .4byte _0801256C\n\
+    .4byte _080126B4\n\
+    .4byte _080126E0\n\
+    .4byte _08012968\n\
+    .4byte _08012968\n\
+    .4byte _080128B0\n\
+    .4byte _08012908\n\
+    .4byte _08012968\n\
+    .4byte _08012968\n\
+    .4byte _08012968\n\
+    .4byte _08012968\n\
+    .4byte _08012968\n\
+    .4byte _0801292C\n\
+_0801256C:\n\
+    bl AreAllMovesUnusable\n\
+    lsls r0, 24\n\
+    cmp r0, 0\n\
+    beq _080125D0\n\
+    ldr r0, _080125B4 @ =gBattleCommunication\n\
+    ldr r2, _080125B8 @ =gActiveBank\n\
+    ldrb r1, [r2]\n\
+    adds r1, r0\n\
+    movs r4, 0\n\
+    movs r0, 0x5\n\
+    strb r0, [r1]\n\
+    ldr r3, _080125BC @ =gSharedMem\n\
+    ldrb r0, [r2]\n\
+    ldr r1, _080125C0 @ =0x00016060\n\
+    adds r0, r1\n\
+    adds r0, r3\n\
+    strb r4, [r0]\n\
+    ldrb r0, [r2]\n\
+    ldr r4, _080125C4 @ =0x00016094\n\
+    adds r0, r4\n\
+    adds r0, r3\n\
+    movs r1, 0x3\n\
+    strb r1, [r0]\n\
+    ldrb r1, [r2]\n\
+    ldr r0, _080125C8 @ =0x00016010\n\
+    adds r2, r1, r0\n\
+    adds r2, r3\n\
+    ldr r0, _080125CC @ =gBattleBufferB\n\
+    lsls r1, 9\n\
+    adds r0, 0x3\n\
+    adds r1, r0\n\
+    ldrb r0, [r1]\n\
+    strb r0, [r2]\n\
+    bl _08012F90\n\
+    .align 2, 0\n\
+_080125B4: .4byte gBattleCommunication\n\
+_080125B8: .4byte gActiveBank\n\
+_080125BC: .4byte gSharedMem\n\
+_080125C0: .4byte 0x00016060\n\
+_080125C4: .4byte 0x00016094\n\
+_080125C8: .4byte 0x00016010\n\
+_080125CC: .4byte gBattleBufferB\n\
+_080125D0:\n\
+    ldr r1, _080125FC @ =gDisableStructs\n\
+    ldr r5, _08012600 @ =gActiveBank\n\
+    ldrb r4, [r5]\n\
+    lsls r0, r4, 3\n\
+    subs r0, r4\n\
+    lsls r0, 2\n\
+    adds r0, r1\n\
+    ldrh r2, [r0, 0x6]\n\
+    cmp r2, 0\n\
+    beq _0801260C\n\
+    ldr r1, _08012604 @ =gChosenMovesByBanks\n\
+    lsls r0, r4, 1\n\
+    adds r0, r1\n\
+    strh r2, [r0]\n\
+    ldr r1, _08012608 @ =gBattleCommunication\n\
+    ldrb r0, [r5]\n\
+    adds r0, r1\n\
+    movs r1, 0x3\n\
+    strb r1, [r0]\n\
+    bl _08012F90\n\
+    .align 2, 0\n\
+_080125FC: .4byte gDisableStructs\n\
+_08012600: .4byte gActiveBank\n\
+_08012604: .4byte gChosenMovesByBanks\n\
+_08012608: .4byte gBattleCommunication\n\
+_0801260C:\n\
+    add r2, sp, 0x4\n\
+    ldr r3, _080126AC @ =gBattleMons\n\
+    movs r1, 0x58\n\
+    adds r0, r4, 0\n\
+    muls r0, r1\n\
+    adds r0, r3\n\
+    ldrh r0, [r0]\n\
+    strh r0, [r2, 0x10]\n\
+    ldrb r0, [r5]\n\
+    muls r0, r1\n\
+    adds r0, r3\n\
+    adds r0, 0x21\n\
+    ldrb r0, [r0]\n\
+    strb r0, [r2, 0x12]\n\
+    ldrb r0, [r5]\n\
+    muls r0, r1\n\
+    adds r0, r3\n\
+    adds r0, 0x22\n\
+    ldrb r0, [r0]\n\
+    strb r0, [r2, 0x13]\n\
+    movs r4, 0\n\
+    mov r1, sp\n\
+    adds r1, 0xC\n\
+    str r1, [sp, 0x18]\n\
+    add r2, sp, 0x10\n\
+    mov r10, r2\n\
+    mov r8, r3\n\
+    adds r7, r5, 0\n\
+    movs r6, 0x58\n\
+    movs r3, 0xC\n\
+    add r3, r8\n\
+    mov r9, r3\n\
+    add r5, sp, 0x4\n\
+_0801264E:\n\
+    lsls r2, r4, 1\n\
+    ldrb r0, [r7]\n\
+    muls r0, r6\n\
+    adds r0, r2, r0\n\
+    add r0, r9\n\
+    ldrh r0, [r0]\n\
+    strh r0, [r5]\n\
+    ldr r0, [sp, 0x18]\n\
+    adds r3, r0, r4\n\
+    ldrb r0, [r7]\n\
+    muls r0, r6\n\
+    adds r0, r4, r0\n\
+    mov r1, r8\n\
+    adds r1, 0x24\n\
+    adds r0, r1\n\
+    ldrb r0, [r0]\n\
+    strb r0, [r3]\n\
+    ldrb r0, [r7]\n\
+    adds r1, r0, 0\n\
+    muls r1, r6\n\
+    adds r2, r1\n\
+    add r2, r9\n\
+    ldrh r0, [r2]\n\
+    add r1, r8\n\
+    adds r1, 0x3B\n\
+    ldrb r1, [r1]\n\
+    lsls r2, r4, 24\n\
+    lsrs r2, 24\n\
+    bl CalculatePPWithBonus\n\
+    mov r2, r10\n\
+    adds r1, r2, r4\n\
+    strb r0, [r1]\n\
+    adds r5, 0x2\n\
+    adds r4, 0x1\n\
+    cmp r4, 0x3\n\
+    ble _0801264E\n\
+    ldr r0, _080126B0 @ =gBattleTypeFlags\n\
+    ldrb r0, [r0]\n\
+    movs r1, 0x1\n\
+    ands r1, r0\n\
+    movs r0, 0\n\
+    movs r2, 0\n\
+    add r3, sp, 0x4\n\
+    bl Emitcmd20\n\
+    b _0801289E\n\
+    .align 2, 0\n\
+_080126AC: .4byte gBattleMons\n\
+_080126B0: .4byte gBattleTypeFlags\n\
+_080126B4:\n\
+    ldr r0, _080126D0 @ =gBattleTypeFlags\n\
+    ldrh r1, [r0]\n\
+    ldr r0, _080126D4 @ =0x00000902\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    bne _080126C2\n\
+    b _08012908\n\
+_080126C2:\n\
+    ldr r1, _080126D8 @ =gUnknown_02024C1C\n\
+    mov r3, r8\n\
+    ldrb r0, [r3]\n\
+    lsls r0, 2\n\
+    adds r0, r1\n\
+    ldr r1, _080126DC @ =BattleScript_ActionSelectionItemsCantBeUsed\n\
+    b _080129CC\n\
+    .align 2, 0\n\
+_080126D0: .4byte gBattleTypeFlags\n\
+_080126D4: .4byte 0x00000902\n\
+_080126D8: .4byte gUnknown_02024C1C\n\
+_080126DC: .4byte BattleScript_ActionSelectionItemsCantBeUsed\n\
+_080126E0:\n\
+    ldr r3, _08012738 @ =gSharedMem\n\
+    ldr r5, _0801273C @ =gActiveBank\n\
+    ldrb r0, [r5]\n\
+    ldr r4, _08012740 @ =0x00016064\n\
+    adds r1, r0, r4\n\
+    adds r1, r3\n\
+    ldr r2, _08012744 @ =gBattlePartyID\n\
+    lsls r0, 1\n\
+    adds r0, r2\n\
+    ldrh r0, [r0]\n\
+    strb r0, [r1]\n\
+    ldr r7, _08012748 @ =gBattleMons\n\
+    ldrb r2, [r5]\n\
+    movs r6, 0x58\n\
+    adds r0, r2, 0\n\
+    muls r0, r6\n\
+    adds r1, r7, 0\n\
+    adds r1, 0x50\n\
+    adds r0, r1\n\
+    ldr r0, [r0]\n\
+    ldr r1, _0801274C @ =0x0400e000\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    bne _08012722\n\
+    ldr r0, _08012750 @ =gStatuses3\n\
+    lsls r1, r2, 2\n\
+    adds r1, r0\n\
+    ldr r1, [r1]\n\
+    movs r0, 0x80\n\
+    lsls r0, 3\n\
+    ands r1, r0\n\
+    cmp r1, 0\n\
+    beq _08012758\n\
+_08012722:\n\
+    lsls r0, r2, 1\n\
+    adds r0, r2\n\
+    ldr r2, _08012754 @ =0x0001606c\n\
+    adds r1, r3, r2\n\
+    adds r0, r1\n\
+    str r0, [sp]\n\
+    movs r0, 0\n\
+    movs r1, 0x2\n\
+    movs r2, 0x6\n\
+    b _0801286C\n\
+    .align 2, 0\n\
+_08012738: .4byte gSharedMem\n\
+_0801273C: .4byte gActiveBank\n\
+_08012740: .4byte 0x00016064\n\
+_08012744: .4byte gBattlePartyID\n\
+_08012748: .4byte gBattleMons\n\
+_0801274C: .4byte 0x0400e000\n\
+_08012750: .4byte gStatuses3\n\
+_08012754: .4byte 0x0001606c\n\
+_08012758:\n\
+    str r1, [sp]\n\
+    movs r0, 0xC\n\
+    adds r1, r2, 0\n\
+    movs r2, 0x17\n\
+    movs r3, 0\n\
+    bl AbilityBattleEffects\n\
+    lsls r0, 24\n\
+    lsrs r4, r0, 24\n\
+    cmp r4, 0\n\
+    bne _080127E0\n\
+    ldrb r1, [r5]\n\
+    str r4, [sp]\n\
+    movs r0, 0xC\n\
+    movs r2, 0x47\n\
+    movs r3, 0\n\
+    bl AbilityBattleEffects\n\
+    lsls r0, 24\n\
+    lsrs r4, r0, 24\n\
+    cmp r4, 0\n\
+    beq _080127A8\n\
+    ldrb r0, [r5]\n\
+    muls r0, r6\n\
+    adds r1, r0, r7\n\
+    adds r0, r1, 0\n\
+    adds r0, 0x21\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0x2\n\
+    beq _080127A8\n\
+    adds r0, r1, 0\n\
+    adds r0, 0x22\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0x2\n\
+    beq _080127A8\n\
+    adds r0, r1, 0\n\
+    adds r0, 0x20\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0x1A\n\
+    bne _080127E0\n\
+_080127A8:\n\
+    ldr r5, _08012808 @ =gActiveBank\n\
+    ldrb r1, [r5]\n\
+    movs r0, 0\n\
+    str r0, [sp]\n\
+    movs r0, 0xF\n\
+    movs r2, 0x2A\n\
+    movs r3, 0\n\
+    bl AbilityBattleEffects\n\
+    lsls r0, 24\n\
+    lsrs r4, r0, 24\n\
+    cmp r4, 0\n\
+    beq _08012818\n\
+    ldr r2, _0801280C @ =gBattleMons\n\
+    ldrb r1, [r5]\n\
+    movs r0, 0x58\n\
+    muls r0, r1\n\
+    adds r1, r0, r2\n\
+    adds r0, r1, 0\n\
+    adds r0, 0x21\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0x8\n\
+    beq _080127E0\n\
+    adds r0, r1, 0\n\
+    adds r0, 0x22\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0x8\n\
+    bne _08012818\n\
+_080127E0:\n\
+    subs r1, r4, 0x1\n\
+    lsls r1, 4\n\
+    movs r0, 0x4\n\
+    orrs r1, r0\n\
+    lsls r1, 24\n\
+    lsrs r1, 24\n\
+    ldr r0, _08012810 @ =gLastUsedAbility\n\
+    ldrb r3, [r0]\n\
+    ldr r0, _08012808 @ =gActiveBank\n\
+    ldrb r2, [r0]\n\
+    lsls r0, r2, 1\n\
+    adds r0, r2\n\
+    ldr r2, _08012814 @ =gSharedMem + 0x1606C\n\
+    adds r0, r2\n\
+    str r0, [sp]\n\
+    movs r0, 0\n\
+    movs r2, 0x6\n\
+    bl EmitChoosePokemon\n\
+    b _0801289E\n\
+    .align 2, 0\n\
+_08012808: .4byte gActiveBank\n\
+_0801280C: .4byte gBattleMons\n\
+_08012810: .4byte gLastUsedAbility\n\
+_08012814: .4byte gSharedMem + 0x1606C\n\
+_08012818:\n\
+    ldr r0, _08012830 @ =gActiveBank\n\
+    ldrb r1, [r0]\n\
+    mov r8, r0\n\
+    cmp r1, 0x2\n\
+    bne _08012840\n\
+    ldr r0, _08012834 @ =gActionForBanks\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0x2\n\
+    bne _08012840\n\
+    ldr r3, _08012838 @ =gSharedMem\n\
+    ldr r4, _0801283C @ =0x00016068\n\
+    b _08012854\n\
+    .align 2, 0\n\
+_08012830: .4byte gActiveBank\n\
+_08012834: .4byte gActionForBanks\n\
+_08012838: .4byte gSharedMem\n\
+_0801283C: .4byte 0x00016068\n\
+_08012840:\n\
+    mov r2, r8\n\
+    ldrb r0, [r2]\n\
+    cmp r0, 0x3\n\
+    bne _08012884\n\
+    ldr r0, _08012874 @ =gActionForBanks\n\
+    ldrb r0, [r0, 0x1]\n\
+    cmp r0, 0x2\n\
+    bne _08012884\n\
+    ldr r3, _08012878 @ =gSharedMem\n\
+    ldr r4, _0801287C @ =0x00016069\n\
+_08012854:\n\
+    adds r0, r3, r4\n\
+    ldrb r2, [r0]\n\
+    mov r0, r8\n\
+    ldrb r1, [r0]\n\
+    lsls r0, r1, 1\n\
+    adds r0, r1\n\
+    ldr r1, _08012880 @ =0x0001606c\n\
+    adds r3, r1\n\
+    adds r0, r3\n\
+    str r0, [sp]\n\
+    movs r0, 0\n\
+    movs r1, 0\n\
+_0801286C:\n\
+    movs r3, 0\n\
+    bl EmitChoosePokemon\n\
+    b _0801289E\n\
+    .align 2, 0\n\
+_08012874: .4byte gActionForBanks\n\
+_08012878: .4byte gSharedMem\n\
+_0801287C: .4byte 0x00016069\n\
+_08012880: .4byte 0x0001606c\n\
+_08012884:\n\
+    ldr r0, _080128A8 @ =gActiveBank\n\
+    ldrb r1, [r0]\n\
+    lsls r0, r1, 1\n\
+    adds r0, r1\n\
+    ldr r1, _080128AC @ =gSharedMem + 0x1606C\n\
+    adds r0, r1\n\
+    str r0, [sp]\n\
+    movs r0, 0\n\
+    movs r1, 0\n\
+    movs r2, 0x6\n\
+    movs r3, 0\n\
+    bl EmitChoosePokemon\n\
+_0801289E:\n\
+    ldr r0, _080128A8 @ =gActiveBank\n\
+    ldrb r0, [r0]\n\
+    bl MarkBufferBankForExecution\n\
+    b _08012968\n\
+    .align 2, 0\n\
+_080128A8: .4byte gActiveBank\n\
+_080128AC: .4byte gSharedMem + 0x1606C\n\
+_080128B0:\n\
+    bl PlayerPartyAndPokemonStorageFull\n\
+    lsls r0, 24\n\
+    cmp r0, 0\n\
+    beq _08012968\n\
+    ldr r1, _080128EC @ =gUnknown_02024C1C\n\
+    ldr r2, _080128F0 @ =gActiveBank\n\
+    ldrb r0, [r2]\n\
+    lsls r0, 2\n\
+    adds r0, r1\n\
+    ldr r1, _080128F4 @ =BattleScript_PrintFullBox\n\
+    str r1, [r0]\n\
+    ldr r0, _080128F8 @ =gBattleCommunication\n\
+    ldrb r1, [r2]\n\
+    adds r1, r0\n\
+    movs r3, 0\n\
+    movs r0, 0x5\n\
+    strb r0, [r1]\n\
+    ldr r1, _080128FC @ =gSharedMem\n\
+    ldrb r0, [r2]\n\
+    ldr r4, _08012900 @ =0x00016060\n\
+    adds r0, r4\n\
+    adds r0, r1\n\
+    strb r3, [r0]\n\
+    ldrb r0, [r2]\n\
+    ldr r2, _08012904 @ =0x00016094\n\
+    adds r0, r2\n\
+    adds r0, r1\n\
+    strb r3, [r0]\n\
+    b _08012F90\n\
+    .align 2, 0\n\
+_080128EC: .4byte gUnknown_02024C1C\n\
+_080128F0: .4byte gActiveBank\n\
+_080128F4: .4byte BattleScript_PrintFullBox\n\
+_080128F8: .4byte gBattleCommunication\n\
+_080128FC: .4byte gSharedMem\n\
+_08012900: .4byte 0x00016060\n\
+_08012904: .4byte 0x00016094\n\
+_08012908:\n\
+    ldr r4, _08012924 @ =gActiveBank\n\
+    ldrb r0, [r4]\n\
+    lsls r1, r0, 1\n\
+    adds r1, r0\n\
+    ldr r0, _08012928 @ =gSharedMem + 0x1606C\n\
+    adds r1, r0\n\
+    movs r0, 0\n\
+    bl EmitOpenBag\n\
+    ldrb r0, [r4]\n\
+    bl MarkBufferBankForExecution\n\
+    b _08012968\n\
+    .align 2, 0\n\
+_08012924: .4byte gActiveBank\n\
+_08012928: .4byte gSharedMem + 0x1606C\n\
+_0801292C:\n\
+    ldr r4, _08012964 @ =gBattleCommunication\n\
+    mov r3, r8\n\
+    ldrb r1, [r3]\n\
+    adds r1, r4\n\
+    movs r5, 0\n\
+    movs r0, 0x6\n\
+    strb r0, [r1]\n\
+    ldrb r0, [r3]\n\
+    bl GetBankIdentity\n\
+    movs r1, 0x2\n\
+    eors r0, r1\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    bl GetBankByPlayerAI\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    adds r0, r4\n\
+    strb r5, [r0]\n\
+    movs r0, 0\n\
+    bl Emitcmd50\n\
+    mov r4, r8\n\
+    ldrb r0, [r4]\n\
+    bl MarkBufferBankForExecution\n\
+    b _08012F90\n\
+    .align 2, 0\n\
+_08012964: .4byte gBattleCommunication\n\
+_08012968:\n\
+    ldr r0, _08012994 @ =gBattleTypeFlags\n\
+    ldrh r1, [r0]\n\
+    movs r0, 0xA\n\
+    ands r0, r1\n\
+    cmp r0, 0x8\n\
+    bne _080129A8\n\
+    ldr r0, _08012998 @ =gBattleBufferB\n\
+    ldr r4, _0801299C @ =gActiveBank\n\
+    ldrb r1, [r4]\n\
+    lsls r1, 9\n\
+    adds r0, 0x1\n\
+    adds r1, r0\n\
+    ldrb r0, [r1]\n\
+    cmp r0, 0x3\n\
+    bne _080129A8\n\
+    ldr r0, _080129A0 @ =BattleScript_PrintCantRunFromTrainer\n\
+    bl b_call_bc_move_exec\n\
+    ldr r1, _080129A4 @ =gBattleCommunication\n\
+    ldrb r0, [r4]\n\
+    adds r0, r1\n\
+    b _08012BFE\n\
+    .align 2, 0\n\
+_08012994: .4byte gBattleTypeFlags\n\
+_08012998: .4byte gBattleBufferB\n\
+_0801299C: .4byte gActiveBank\n\
+_080129A0: .4byte BattleScript_PrintCantRunFromTrainer\n\
+_080129A4: .4byte gBattleCommunication\n\
+_080129A8:\n\
+    bl CanRunFromBattle\n\
+    lsls r0, 24\n\
+    cmp r0, 0\n\
+    beq _08012A14\n\
+    ldr r0, _080129F4 @ =gBattleBufferB\n\
+    ldr r3, _080129F8 @ =gActiveBank\n\
+    ldrb r2, [r3]\n\
+    lsls r1, r2, 9\n\
+    adds r0, 0x1\n\
+    adds r1, r0\n\
+    ldrb r0, [r1]\n\
+    cmp r0, 0x3\n\
+    bne _08012A14\n\
+    ldr r1, _080129FC @ =gUnknown_02024C1C\n\
+    lsls r0, r2, 2\n\
+    adds r0, r1\n\
+    ldr r1, _08012A00 @ =BattleScript_PrintCantEscapeFromBattle\n\
+_080129CC:\n\
+    str r1, [r0]\n\
+    ldr r0, _08012A04 @ =gBattleCommunication\n\
+    ldrb r1, [r3]\n\
+    adds r1, r0\n\
+    movs r2, 0\n\
+    movs r0, 0x5\n\
+    strb r0, [r1]\n\
+    ldr r1, _08012A08 @ =gSharedMem\n\
+    ldrb r0, [r3]\n\
+    ldr r4, _08012A0C @ =0x00016060\n\
+    adds r0, r4\n\
+    adds r0, r1\n\
+    strb r2, [r0]\n\
+    ldrb r0, [r3]\n\
+    ldr r3, _08012A10 @ =0x00016094\n\
+    adds r0, r3\n\
+    adds r0, r1\n\
+    strb r2, [r0]\n\
+    b _08012F90\n\
+    .align 2, 0\n\
+_080129F4: .4byte gBattleBufferB\n\
+_080129F8: .4byte gActiveBank\n\
+_080129FC: .4byte gUnknown_02024C1C\n\
+_08012A00: .4byte BattleScript_PrintCantEscapeFromBattle\n\
+_08012A04: .4byte gBattleCommunication\n\
+_08012A08: .4byte gSharedMem\n\
+_08012A0C: .4byte 0x00016060\n\
+_08012A10: .4byte 0x00016094\n\
+_08012A14:\n\
+    ldr r2, _08012A20 @ =gBattleCommunication\n\
+    ldr r0, _08012A24 @ =gActiveBank\n\
+    ldrb r1, [r0]\n\
+    adds r1, r2\n\
+    b _08012E3E\n\
+    .align 2, 0\n\
+_08012A20: .4byte gBattleCommunication\n\
+_08012A24: .4byte gActiveBank\n\
+_08012A28:\n\
+    ldr r4, _08012A6C @ =gBattleExecBuffer\n\
+    ldr r1, _08012A70 @ =gBitTable\n\
+    ldr r3, _08012A74 @ =gActiveBank\n\
+    ldrb r5, [r3]\n\
+    lsls r0, r5, 2\n\
+    adds r0, r1\n\
+    ldr r2, [r0]\n\
+    lsls r0, r2, 4\n\
+    movs r1, 0xF0\n\
+    lsls r1, 24\n\
+    orrs r0, r1\n\
+    orrs r0, r2\n\
+    lsls r1, r2, 8\n\
+    orrs r0, r1\n\
+    lsls r2, 12\n\
+    orrs r0, r2\n\
+    ldr r1, [r4]\n\
+    ands r1, r0\n\
+    mov r8, r3\n\
+    cmp r1, 0\n\
+    beq _08012A54\n\
+    b _08012F66\n\
+_08012A54:\n\
+    ldr r1, _08012A78 @ =gActionForBanks\n\
+    adds r0, r5, r1\n\
+    ldrb r0, [r0]\n\
+    adds r3, r1, 0\n\
+    cmp r0, 0x9\n\
+    bls _08012A62\n\
+    b _08012F66\n\
+_08012A62:\n\
+    lsls r0, 2\n\
+    ldr r1, _08012A7C @ =_08012A80\n\
+    adds r0, r1\n\
+    ldr r0, [r0]\n\
+    mov pc, r0\n\
+    .align 2, 0\n\
+_08012A6C: .4byte gBattleExecBuffer\n\
+_08012A70: .4byte gBitTable\n\
+_08012A74: .4byte gActiveBank\n\
+_08012A78: .4byte gActionForBanks\n\
+_08012A7C: .4byte _08012A80\n\
+    .align 2, 0\n\
+_08012A80:\n\
+    .4byte _08012AA8\n\
+    .4byte _08012BB0\n\
+    .4byte _08012BE8\n\
+    .4byte _08012CE0\n\
+    .4byte _08012D04\n\
+    .4byte _08012D18\n\
+    .4byte _08012D2C\n\
+    .4byte _08012D5C\n\
+    .4byte _08012D70\n\
+    .4byte _08012D94\n\
+_08012AA8:\n\
+    ldr r0, _08012AC8 @ =gBattleBufferB\n\
+    mov r1, r8\n\
+    ldrb r4, [r1]\n\
+    lsls r1, r4, 9\n\
+    adds r2, r0, 0x1\n\
+    adds r1, r2\n\
+    ldrb r1, [r1]\n\
+    adds r6, r0, 0\n\
+    cmp r1, 0x9\n\
+    bgt _08012ACC\n\
+    cmp r1, 0x3\n\
+    blt _08012ACC\n\
+    adds r0, r4, r3\n\
+    strb r1, [r0]\n\
+    b _08012F90\n\
+    .align 2, 0\n\
+_08012AC8: .4byte gBattleBufferB\n\
+_08012ACC:\n\
+    adds r3, r6, 0\n\
+    mov r5, r8\n\
+    ldrb r4, [r5]\n\
+    lsls r1, r4, 9\n\
+    adds r7, r3, 0x2\n\
+    adds r0, r1, r7\n\
+    ldrb r2, [r0]\n\
+    adds r3, 0x3\n\
+    mov r9, r3\n\
+    add r1, r9\n\
+    ldrb r0, [r1]\n\
+    lsls r0, 8\n\
+    orrs r2, r0\n\
+    ldr r0, _08012AF4 @ =0x0000ffff\n\
+    cmp r2, r0\n\
+    bne _08012AFC\n\
+    ldr r0, _08012AF8 @ =gBattleCommunication\n\
+    adds r0, r4, r0\n\
+    b _08012BFE\n\
+    .align 2, 0\n\
+_08012AF4: .4byte 0x0000ffff\n\
+_08012AF8: .4byte gBattleCommunication\n\
+_08012AFC:\n\
+    bl sub_8015894\n\
+    lsls r0, 24\n\
+    cmp r0, 0\n\
+    beq _08012B48\n\
+    ldr r0, _08012B38 @ =gBattleCommunication\n\
+    ldrb r1, [r5]\n\
+    adds r1, r0\n\
+    movs r2, 0\n\
+    movs r0, 0x5\n\
+    strb r0, [r1]\n\
+    ldr r3, _08012B3C @ =gSharedMem\n\
+    ldrb r0, [r5]\n\
+    ldr r4, _08012B40 @ =0x00016060\n\
+    adds r0, r4\n\
+    adds r0, r3\n\
+    strb r2, [r0]\n\
+    ldrb r0, [r5]\n\
+    lsls r0, 9\n\
+    adds r1, r6, 0x1\n\
+    adds r0, r1\n\
+    strb r2, [r0]\n\
+    ldrb r0, [r5]\n\
+    ldr r1, _08012B44 @ =0x00016094\n\
+    adds r0, r1\n\
+    adds r0, r3\n\
+    movs r1, 0x1\n\
+    strb r1, [r0]\n\
+    b _08012F90\n\
+    .align 2, 0\n\
+_08012B38: .4byte gBattleCommunication\n\
+_08012B3C: .4byte gSharedMem\n\
+_08012B40: .4byte 0x00016060\n\
+_08012B44: .4byte 0x00016094\n\
+_08012B48:\n\
+    ldr r6, _08012B98 @ =gSharedMem\n\
+    mov r2, r8\n\
+    ldrb r0, [r2]\n\
+    ldr r2, _08012B9C @ =0x0001608c\n\
+    adds r1, r0, r2\n\
+    adds r1, r6\n\
+    lsls r0, 9\n\
+    adds r0, r7\n\
+    ldrb r0, [r0]\n\
+    strb r0, [r1]\n\
+    ldr r0, _08012BA0 @ =gChosenMovesByBanks\n\
+    mov r4, r8\n\
+    ldrb r3, [r4]\n\
+    lsls r5, r3, 1\n\
+    adds r5, r0\n\
+    ldr r4, _08012BA4 @ =gBattleMons\n\
+    adds r2, r3, r2\n\
+    adds r2, r6\n\
+    ldrb r0, [r2]\n\
+    lsls r0, 1\n\
+    movs r1, 0x58\n\
+    muls r1, r3\n\
+    adds r0, r1\n\
+    adds r4, 0xC\n\
+    adds r0, r4\n\
+    ldrh r0, [r0]\n\
+    strh r0, [r5]\n\
+    mov r1, r8\n\
+    ldrb r0, [r1]\n\
+    ldr r2, _08012BA8 @ =0x00016010\n\
+    adds r1, r0, r2\n\
+    adds r1, r6\n\
+    lsls r0, 9\n\
+    add r0, r9\n\
+    ldrb r0, [r0]\n\
+    strb r0, [r1]\n\
+    ldr r0, _08012BAC @ =gBattleCommunication\n\
+    mov r3, r8\n\
+    ldrb r1, [r3]\n\
+    b _08012E3C\n\
+    .align 2, 0\n\
+_08012B98: .4byte gSharedMem\n\
+_08012B9C: .4byte 0x0001608c\n\
+_08012BA0: .4byte gChosenMovesByBanks\n\
+_08012BA4: .4byte gBattleMons\n\
+_08012BA8: .4byte 0x00016010\n\
+_08012BAC: .4byte gBattleCommunication\n\
+_08012BB0:\n\
+    ldr r2, _08012BD8 @ =gBattleBufferB\n\
+    ldr r5, _08012BDC @ =gActiveBank\n\
+    ldrb r4, [r5]\n\
+    lsls r1, r4, 9\n\
+    adds r0, r2, 0x1\n\
+    adds r0, r1, r0\n\
+    ldrb r3, [r0]\n\
+    adds r2, 0x2\n\
+    adds r1, r2\n\
+    ldrb r0, [r1]\n\
+    lsls r0, 8\n\
+    orrs r3, r0\n\
+    cmp r3, 0\n\
+    bne _08012BCE\n\
+    b _08012F60\n\
+_08012BCE:\n\
+    ldr r0, _08012BE0 @ =gLastUsedItem\n\
+    strh r3, [r0]\n\
+    ldr r0, _08012BE4 @ =gBattleCommunication\n\
+    ldrb r1, [r5]\n\
+    b _08012E3C\n\
+    .align 2, 0\n\
+_08012BD8: .4byte gBattleBufferB\n\
+_08012BDC: .4byte gActiveBank\n\
+_08012BE0: .4byte gLastUsedItem\n\
+_08012BE4: .4byte gBattleCommunication\n\
+_08012BE8:\n\
+    ldr r4, _08012C04 @ =gBattleBufferB\n\
+    ldr r7, _08012C08 @ =gActiveBank\n\
+    ldrb r2, [r7]\n\
+    lsls r0, r2, 9\n\
+    adds r1, r4, 0x1\n\
+    adds r0, r1\n\
+    ldrb r1, [r0]\n\
+    cmp r1, 0x6\n\
+    bne _08012C10\n\
+    ldr r0, _08012C0C @ =gBattleCommunication\n\
+    adds r0, r2, r0\n\
+_08012BFE:\n\
+    movs r1, 0\n\
+    strb r1, [r0]\n\
+    b _08012F66\n\
+    .align 2, 0\n\
+_08012C04: .4byte gBattleBufferB\n\
+_08012C08: .4byte gActiveBank\n\
+_08012C0C: .4byte gBattleCommunication\n\
+_08012C10:\n\
+    ldr r0, _08012CC4 @ =gSharedMem\n\
+    mov r12, r0\n\
+    ldr r3, _08012CC8 @ =0x00016068\n\
+    adds r0, r2, r3\n\
+    add r0, r12\n\
+    strb r1, [r0]\n\
+    ldr r0, _08012CCC @ =gBattleTypeFlags\n\
+    ldrh r1, [r0]\n\
+    movs r0, 0x40\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _08012CBE\n\
+    ldrb r0, [r7]\n\
+    lsls r1, r0, 1\n\
+    adds r1, r0\n\
+    ldr r5, _08012CD0 @ =0x0001606c\n\
+    adds r1, r5\n\
+    add r1, r12\n\
+    ldrb r2, [r1]\n\
+    movs r0, 0xF\n\
+    ands r0, r2\n\
+    strb r0, [r1]\n\
+    ldrb r0, [r7]\n\
+    lsls r2, r0, 1\n\
+    adds r2, r0\n\
+    adds r2, r5\n\
+    add r2, r12\n\
+    lsls r0, 9\n\
+    adds r6, r4, 0x2\n\
+    adds r0, r6\n\
+    ldrb r1, [r0]\n\
+    movs r3, 0xF0\n\
+    adds r0, r3, 0\n\
+    ands r0, r1\n\
+    ldrb r1, [r2]\n\
+    orrs r0, r1\n\
+    strb r0, [r2]\n\
+    ldrb r0, [r7]\n\
+    lsls r1, r0, 1\n\
+    adds r1, r0\n\
+    ldr r2, _08012CD4 @ =0x0001606d\n\
+    adds r1, r2\n\
+    add r1, r12\n\
+    lsls r0, 9\n\
+    adds r4, 0x3\n\
+    mov r8, r4\n\
+    add r0, r8\n\
+    ldrb r0, [r0]\n\
+    strb r0, [r1]\n\
+    ldrb r0, [r7]\n\
+    movs r4, 0x2\n\
+    eors r0, r4\n\
+    lsls r1, r0, 1\n\
+    adds r1, r0\n\
+    adds r1, r5\n\
+    add r1, r12\n\
+    ldrb r2, [r1]\n\
+    adds r0, r3, 0\n\
+    ands r0, r2\n\
+    strb r0, [r1]\n\
+    ldrb r0, [r7]\n\
+    eors r0, r4\n\
+    lsls r1, r0, 1\n\
+    adds r1, r0\n\
+    adds r1, r5\n\
+    add r1, r12\n\
+    ldrb r0, [r7]\n\
+    lsls r0, 9\n\
+    adds r0, r6\n\
+    ldrb r0, [r0]\n\
+    ands r3, r0\n\
+    lsrs r3, 4\n\
+    ldrb r0, [r1]\n\
+    orrs r3, r0\n\
+    strb r3, [r1]\n\
+    ldrb r0, [r7]\n\
+    eors r4, r0\n\
+    lsls r1, r4, 1\n\
+    adds r1, r4\n\
+    ldr r3, _08012CD8 @ =0x0001606e\n\
+    adds r1, r3\n\
+    add r1, r12\n\
+    ldrb r0, [r7]\n\
+    lsls r0, 9\n\
+    add r0, r8\n\
+    ldrb r0, [r0]\n\
+    strb r0, [r1]\n\
+_08012CBE:\n\
+    ldr r0, _08012CDC @ =gBattleCommunication\n\
+    ldrb r1, [r7]\n\
+    b _08012E3C\n\
+    .align 2, 0\n\
+_08012CC4: .4byte gSharedMem\n\
+_08012CC8: .4byte 0x00016068\n\
+_08012CCC: .4byte gBattleTypeFlags\n\
+_08012CD0: .4byte 0x0001606c\n\
+_08012CD4: .4byte 0x0001606d\n\
+_08012CD8: .4byte 0x0001606e\n\
+_08012CDC: .4byte gBattleCommunication\n\
+_08012CE0:\n\
+    ldr r2, _08012CF8 @ =gHitMarker\n\
+    ldr r0, [r2]\n\
+    movs r1, 0x80\n\
+    lsls r1, 8\n\
+    orrs r0, r1\n\
+    str r0, [r2]\n\
+    ldr r2, _08012CFC @ =gBattleCommunication\n\
+    ldr r0, _08012D00 @ =gActiveBank\n\
+    ldrb r1, [r0]\n\
+    adds r1, r2\n\
+    b _08012E3E\n\
+    .align 2, 0\n\
+_08012CF8: .4byte gHitMarker\n\
+_08012CFC: .4byte gBattleCommunication\n\
+_08012D00: .4byte gActiveBank\n\
+_08012D04:\n\
+    ldr r2, _08012D10 @ =gBattleCommunication\n\
+    ldr r0, _08012D14 @ =gActiveBank\n\
+    ldrb r1, [r0]\n\
+    adds r1, r2\n\
+    b _08012E3E\n\
+    .align 2, 0\n\
+_08012D10: .4byte gBattleCommunication\n\
+_08012D14: .4byte gActiveBank\n\
+_08012D18:\n\
+    ldr r2, _08012D24 @ =gBattleCommunication\n\
+    ldr r0, _08012D28 @ =gActiveBank\n\
+    ldrb r1, [r0]\n\
+    adds r1, r2\n\
+    b _08012E3E\n\
+    .align 2, 0\n\
+_08012D24: .4byte gBattleCommunication\n\
+_08012D28: .4byte gActiveBank\n\
+_08012D2C:\n\
+    ldr r2, _08012D50 @ =gBattleBufferB\n\
+    ldr r0, _08012D54 @ =gActiveBank\n\
+    ldrb r4, [r0]\n\
+    lsls r1, r4, 9\n\
+    adds r0, r2, 0x1\n\
+    adds r0, r1, r0\n\
+    ldrb r3, [r0]\n\
+    adds r2, 0x2\n\
+    adds r1, r2\n\
+    ldrb r0, [r1]\n\
+    lsls r0, 8\n\
+    orrs r3, r0\n\
+    cmp r3, 0\n\
+    bne _08012D4A\n\
+    b _08012F60\n\
+_08012D4A:\n\
+    ldr r1, _08012D58 @ =gBattleCommunication\n\
+    adds r1, r4, r1\n\
+    b _08012E3E\n\
+    .align 2, 0\n\
+_08012D50: .4byte gBattleBufferB\n\
+_08012D54: .4byte gActiveBank\n\
+_08012D58: .4byte gBattleCommunication\n\
+_08012D5C:\n\
+    ldr r2, _08012D68 @ =gBattleCommunication\n\
+    ldr r0, _08012D6C @ =gActiveBank\n\
+    ldrb r1, [r0]\n\
+    adds r1, r2\n\
+    b _08012E3E\n\
+    .align 2, 0\n\
+_08012D68: .4byte gBattleCommunication\n\
+_08012D6C: .4byte gActiveBank\n\
+_08012D70:\n\
+    ldr r2, _08012D88 @ =gHitMarker\n\
+    ldr r0, [r2]\n\
+    movs r1, 0x80\n\
+    lsls r1, 8\n\
+    orrs r0, r1\n\
+    str r0, [r2]\n\
+    ldr r2, _08012D8C @ =gBattleCommunication\n\
+    ldr r0, _08012D90 @ =gActiveBank\n\
+    ldrb r1, [r0]\n\
+    adds r1, r2\n\
+    b _08012E3E\n\
+    .align 2, 0\n\
+_08012D88: .4byte gHitMarker\n\
+_08012D8C: .4byte gBattleCommunication\n\
+_08012D90: .4byte gActiveBank\n\
+_08012D94:\n\
+    ldr r2, _08012DA0 @ =gBattleCommunication\n\
+    ldr r0, _08012DA4 @ =gActiveBank\n\
+    ldrb r1, [r0]\n\
+    adds r1, r2\n\
+    b _08012E3E\n\
+    .align 2, 0\n\
+_08012DA0: .4byte gBattleCommunication\n\
+_08012DA4: .4byte gActiveBank\n\
+_08012DA8:\n\
+    ldr r3, _08012E10 @ =gBattleExecBuffer\n\
+    ldr r4, _08012E14 @ =gBitTable\n\
+    ldr r0, _08012E18 @ =gActiveBank\n\
+    ldrb r0, [r0]\n\
+    lsls r0, 2\n\
+    adds r0, r4\n\
+    ldr r2, [r0]\n\
+    lsls r1, r2, 4\n\
+    movs r0, 0xF0\n\
+    lsls r0, 24\n\
+    orrs r1, r0\n\
+    orrs r1, r2\n\
+    lsls r0, r2, 8\n\
+    orrs r1, r0\n\
+    lsls r2, 12\n\
+    orrs r1, r2\n\
+    ldr r0, [r3]\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _08012DD2\n\
+    b _08012F66\n\
+_08012DD2:\n\
+    ldr r0, _08012E1C @ =gBattleTypeFlags\n\
+    ldrh r1, [r0]\n\
+    movs r0, 0x41\n\
+    ands r0, r1\n\
+    cmp r0, 0x1\n\
+    bne _08012E06\n\
+    movs r1, 0x2\n\
+    movs r0, 0x2\n\
+    ands r0, r5\n\
+    cmp r0, 0\n\
+    bne _08012E06\n\
+    adds r0, r5, 0\n\
+    eors r0, r1\n\
+    bl GetBankByPlayerAI\n\
+    ldr r1, _08012E20 @ =gSharedMem\n\
+    ldr r2, _08012E24 @ =0x000160a6\n\
+    adds r1, r2\n\
+    ldrb r1, [r1]\n\
+    lsls r0, 24\n\
+    lsrs r0, 22\n\
+    adds r0, r4\n\
+    ldr r0, [r0]\n\
+    ands r1, r0\n\
+    cmp r1, 0\n\
+    beq _08012E28\n\
+_08012E06:\n\
+    movs r0, 0\n\
+    movs r1, 0\n\
+    bl EmitLinkStandbyMsg\n\
+    b _08012E30\n\
+    .align 2, 0\n\
+_08012E10: .4byte gBattleExecBuffer\n\
+_08012E14: .4byte gBitTable\n\
+_08012E18: .4byte gActiveBank\n\
+_08012E1C: .4byte gBattleTypeFlags\n\
+_08012E20: .4byte gSharedMem\n\
+_08012E24: .4byte 0x000160a6\n\
+_08012E28:\n\
+    movs r0, 0\n\
+    movs r1, 0x1\n\
+    bl EmitLinkStandbyMsg\n\
+_08012E30:\n\
+    ldr r4, _08012E48 @ =gActiveBank\n\
+_08012E32:\n\
+    ldrb r0, [r4]\n\
+    bl MarkBufferBankForExecution\n\
+    ldr r0, _08012E4C @ =gBattleCommunication\n\
+    ldrb r1, [r4]\n\
+_08012E3C:\n\
+    adds r1, r0\n\
+_08012E3E:\n\
+    ldrb r0, [r1]\n\
+    adds r0, 0x1\n\
+    strb r0, [r1]\n\
+    b _08012F66\n\
+    .align 2, 0\n\
+_08012E48: .4byte gActiveBank\n\
+_08012E4C: .4byte gBattleCommunication\n\
+_08012E50:\n\
+    ldr r3, _08012E84 @ =gBattleExecBuffer\n\
+    ldr r1, _08012E88 @ =gBitTable\n\
+    ldr r0, _08012E8C @ =gActiveBank\n\
+    ldrb r0, [r0]\n\
+    lsls r0, 2\n\
+    adds r0, r1\n\
+    ldr r2, [r0]\n\
+    lsls r1, r2, 4\n\
+    movs r0, 0xF0\n\
+    lsls r0, 24\n\
+    orrs r1, r0\n\
+    orrs r1, r2\n\
+    lsls r0, r2, 8\n\
+    orrs r1, r0\n\
+    lsls r2, 12\n\
+    orrs r1, r2\n\
+    ldr r0, [r3]\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    bne _08012F66\n\
+    ldr r1, _08012E90 @ =gBattleCommunication\n\
+    ldrb r0, [r1, 0x4]\n\
+    adds r0, 0x1\n\
+    strb r0, [r1, 0x4]\n\
+    b _08012F66\n\
+    .align 2, 0\n\
+_08012E84: .4byte gBattleExecBuffer\n\
+_08012E88: .4byte gBitTable\n\
+_08012E8C: .4byte gActiveBank\n\
+_08012E90: .4byte gBattleCommunication\n\
+_08012E94:\n\
+    ldr r2, _08012EB8 @ =gSharedMem\n\
+    ldr r5, _08012EBC @ =gActiveBank\n\
+    ldrb r1, [r5]\n\
+    ldr r3, _08012EC0 @ =0x00016060\n\
+    adds r0, r1, r3\n\
+    adds r0, r2\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0\n\
+    beq _08012ECC\n\
+    ldr r0, _08012EC4 @ =gBattleCommunication\n\
+    adds r0, r1, r0\n\
+    ldr r4, _08012EC8 @ =0x00016094\n\
+    adds r1, r4\n\
+    adds r1, r2\n\
+    ldrb r1, [r1]\n\
+    strb r1, [r0]\n\
+    b _08012F66\n\
+    .align 2, 0\n\
+_08012EB8: .4byte gSharedMem\n\
+_08012EBC: .4byte gActiveBank\n\
+_08012EC0: .4byte 0x00016060\n\
+_08012EC4: .4byte gBattleCommunication\n\
+_08012EC8: .4byte 0x00016094\n\
+_08012ECC:\n\
+    ldr r0, _08012F20 @ =gBankAttacker\n\
+    strb r1, [r0]\n\
+    ldr r7, _08012F24 @ =gBattlescriptCurrInstr\n\
+    ldr r6, _08012F28 @ =gUnknown_02024C1C\n\
+    ldrb r0, [r5]\n\
+    lsls r0, 2\n\
+    adds r0, r6\n\
+    ldr r4, [r0]\n\
+    str r4, [r7]\n\
+    ldr r3, _08012F2C @ =gBattleExecBuffer\n\
+    ldr r1, _08012F30 @ =gBitTable\n\
+    ldrb r0, [r5]\n\
+    lsls r0, 2\n\
+    adds r0, r1\n\
+    ldr r2, [r0]\n\
+    lsls r1, r2, 4\n\
+    movs r0, 0xF0\n\
+    lsls r0, 24\n\
+    orrs r1, r0\n\
+    orrs r1, r2\n\
+    lsls r0, r2, 8\n\
+    orrs r1, r0\n\
+    lsls r2, 12\n\
+    orrs r1, r2\n\
+    ldr r0, [r3]\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    bne _08012F12\n\
+    ldr r0, _08012F34 @ =gBattleScriptingCommandsTable\n\
+    ldrb r1, [r4]\n\
+    lsls r1, 2\n\
+    adds r1, r0\n\
+    ldr r0, [r1]\n\
+    bl _call_via_r0\n\
+_08012F12:\n\
+    ldrb r0, [r5]\n\
+    lsls r0, 2\n\
+    adds r0, r6\n\
+    ldr r1, [r7]\n\
+    str r1, [r0]\n\
+    b _08012F66\n\
+    .align 2, 0\n\
+_08012F20: .4byte gBankAttacker\n\
+_08012F24: .4byte gBattlescriptCurrInstr\n\
+_08012F28: .4byte gUnknown_02024C1C\n\
+_08012F2C: .4byte gBattleExecBuffer\n\
+_08012F30: .4byte gBitTable\n\
+_08012F34: .4byte gBattleScriptingCommandsTable\n\
+_08012F38:\n\
+    ldr r3, _08012FA0 @ =gBattleExecBuffer\n\
+    ldr r1, _08012FA4 @ =gBitTable\n\
+    ldr r0, _08012FA8 @ =gActiveBank\n\
+    ldrb r4, [r0]\n\
+    lsls r0, r4, 2\n\
+    adds r0, r1\n\
+    ldr r2, [r0]\n\
+    lsls r0, r2, 4\n\
+    movs r1, 0xF0\n\
+    lsls r1, 24\n\
+    orrs r0, r1\n\
+    orrs r0, r2\n\
+    lsls r1, r2, 8\n\
+    orrs r0, r1\n\
+    lsls r2, 12\n\
+    orrs r0, r2\n\
+    ldr r3, [r3]\n\
+    ands r3, r0\n\
+    cmp r3, 0\n\
+    bne _08012F66\n\
+_08012F60:\n\
+    ldr r0, _08012FAC @ =gBattleCommunication\n\
+    adds r0, r4, r0\n\
+    strb r3, [r0]\n\
+_08012F66:\n\
+    ldr r0, _08012FA8 @ =gActiveBank\n\
+    ldrb r1, [r0]\n\
+    adds r1, 0x1\n\
+    strb r1, [r0]\n\
+    ldr r0, _08012FB0 @ =gNoOfAllBanks\n\
+    lsls r1, 24\n\
+    lsrs r1, 24\n\
+_08012F74:\n\
+    adds r2, r0, 0\n\
+    ldrb r0, [r2]\n\
+    cmp r1, r0\n\
+    bcs _08012F80\n\
+    bl _0801234C\n\
+_08012F80:\n\
+    ldr r0, _08012FAC @ =gBattleCommunication\n\
+    ldrb r0, [r0, 0x4]\n\
+    ldrb r2, [r2]\n\
+    cmp r0, r2\n\
+    bne _08012F90\n\
+    ldr r1, _08012FB4 @ =gBattleMainFunc\n\
+    ldr r0, _08012FB8 @ =sub_80133C8\n\
+    str r0, [r1]\n\
+_08012F90:\n\
+    add sp, 0x1C\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
+_08012FA0: .4byte gBattleExecBuffer\n\
+_08012FA4: .4byte gBitTable\n\
+_08012FA8: .4byte gActiveBank\n\
+_08012FAC: .4byte gBattleCommunication\n\
+_08012FB0: .4byte gNoOfAllBanks\n\
+_08012FB4: .4byte gBattleMainFunc\n\
+_08012FB8: .4byte sub_80133C8\n\
+    .syntax divided\n");
+}
+
+void sub_8012FBC(u8 a, u8 b)
+{
+    int temp;
+
+    temp = gUnknown_02024A76[a];
+    gUnknown_02024A76[a] = gUnknown_02024A76[b];
+    gUnknown_02024A76[b] = temp;
+
+    temp = gTurnOrder[a];
+    gTurnOrder[a] = gTurnOrder[b];
+    gTurnOrder[b] = temp;
+}
+
+// Determines which of the two given mons will strike first in a battle.
+// Returns:
+// 0 = first mon moves first
+// 1 = second mon moves first
+// 2 = second mon moves first because it won a 50/50 roll
+u8 GetWhoStrikesFirst(u8 bank1, u8 bank2, bool8 ignoreMovePriorities)
+{
+    int bank1SpeedMultiplier, bank2SpeedMultiplier;
+    u32 bank1AdjustedSpeed, bank2AdjustedSpeed;
+    u8 heldItemEffect;
+    u8 heldItemEffectParam;
+    u16 bank1Move;
+    u16 bank2Move;
+    u8 strikesFirst = 0;
+
+    // Check for abilities that boost speed in weather.
+    if (WEATHER_HAS_EFFECT)
+    {
+        if ((gBattleMons[bank1].ability == ABILITY_SWIFT_SWIM && (gBattleWeather & WEATHER_RAIN_ANY))
+            || (gBattleMons[bank1].ability == ABILITY_CHLOROPHYLL && (gBattleWeather & WEATHER_SUN_ANY)))
+            bank1SpeedMultiplier = 2;
+        else
+            bank1SpeedMultiplier = 1;
+
+        if ((gBattleMons[bank2].ability == ABILITY_SWIFT_SWIM && (gBattleWeather & WEATHER_RAIN_ANY))
+            || (gBattleMons[bank2].ability == ABILITY_CHLOROPHYLL && (gBattleWeather & WEATHER_SUN_ANY)))
+            bank2SpeedMultiplier = 2;
+        else
+            bank2SpeedMultiplier = 1;
+    }
+    else
+    {
+        bank1SpeedMultiplier = 1;
+        bank2SpeedMultiplier = 1;
+    }
+
+    // Calculate adjusted speed for first mon.
+    bank1AdjustedSpeed = (gBattleMons[bank1].speed * bank1SpeedMultiplier)
+        * gStatStageRatios[gBattleMons[bank1].statStages[STAT_STAGE_SPEED]][0] / gStatStageRatios[gBattleMons[bank1].statStages[STAT_STAGE_SPEED]][1];
+
+    if (gBattleMons[bank1].item == ITEM_ENIGMA_BERRY)
+    {
+        heldItemEffect = gEnigmaBerries[bank1].holdEffect;
+        heldItemEffectParam = gEnigmaBerries[bank1].holdEffectParam;
+    }
+    else
+    {
+        heldItemEffect = ItemId_GetHoldEffect(gBattleMons[bank1].item);
+        heldItemEffectParam = ItemId_GetHoldEffectParam(gBattleMons[bank1].item);
+    }
+
+    // Only give badge speed boost to the player's mon.
+    if (!(gBattleTypeFlags & BATTLE_TYPE_LINK) && FlagGet(FLAG_BADGE03_GET) && GetBankSide(bank1) == 0)
+        bank1AdjustedSpeed = (bank1AdjustedSpeed * 110) / 100;
+
+    if (heldItemEffect == HOLD_EFFECT_MACHO_BRACE)
+        bank1AdjustedSpeed /= 2;
+
+    if (gBattleMons[bank1].status1 & STATUS_PARALYSIS)
+        bank1AdjustedSpeed /= 4;
+
+    if (heldItemEffect == HOLD_EFFECT_QUICK_CLAW && gRandomTurnNumber < (heldItemEffectParam * 0xFFFF) / 100)
+        bank1AdjustedSpeed = UINT_MAX;
+
+    // Calculate adjusted speed for second mon.
+    bank2AdjustedSpeed = gBattleMons[bank2].speed * bank2SpeedMultiplier
+        * gStatStageRatios[gBattleMons[bank2].statStages[STAT_STAGE_SPEED]][0] / gStatStageRatios[gBattleMons[bank2].statStages[STAT_STAGE_SPEED]][1];
+
+    if (gBattleMons[bank2].item == ITEM_ENIGMA_BERRY)
+    {
+        heldItemEffect = gEnigmaBerries[bank2].holdEffect;
+        heldItemEffectParam = gEnigmaBerries[bank2].holdEffectParam;
+    }
+    else
+    {
+        heldItemEffect = ItemId_GetHoldEffect(gBattleMons[bank2].item);
+        heldItemEffectParam = ItemId_GetHoldEffectParam(gBattleMons[bank2].item);
+    }
+
+    // Only give badge speed boost to the player's mon.
+    if (!(gBattleTypeFlags & BATTLE_TYPE_LINK) && FlagGet(FLAG_BADGE03_GET) && GetBankSide(bank2) == 0)
+    {
+        bank2AdjustedSpeed = (bank2AdjustedSpeed * 110) / 100;
+    }
+
+    if (heldItemEffect == HOLD_EFFECT_MACHO_BRACE)
+        bank2AdjustedSpeed /= 2;
+
+    if (gBattleMons[bank2].status1 & STATUS_PARALYSIS)
+        bank2AdjustedSpeed /= 4;
+
+    if (heldItemEffect == HOLD_EFFECT_QUICK_CLAW && gRandomTurnNumber < (heldItemEffectParam * 0xFFFF) / 100)
+        bank2AdjustedSpeed = UINT_MAX;
+
+    if (ignoreMovePriorities)
+    {
+        bank1Move = MOVE_NONE;
+        bank2Move = MOVE_NONE;
+    }
+    else
+    {
+        if (gActionForBanks[bank1] == 0)
+        {
+            if (gProtectStructs[bank1].onlyStruggle)
+                bank1Move = MOVE_STRUGGLE;
+            else
+                bank1Move = gBattleMons[bank1].moves[ewram1608Carr(bank1)];
+        }
+        else
+            bank1Move = MOVE_NONE;
+
+        if (gActionForBanks[bank2] == 0)
+        {
+            if (gProtectStructs[bank2].onlyStruggle)
+                bank2Move = MOVE_STRUGGLE;
+            else
+                bank2Move = gBattleMons[bank2].moves[ewram1608Carr(bank2)];
+        }
+        else
+            bank2Move = MOVE_NONE;
+    }
+
+    if (gBattleMoves[bank1Move].priority != 0 || gBattleMoves[bank2Move].priority != 0)
+    {
+        if (gBattleMoves[bank1Move].priority == gBattleMoves[bank2Move].priority)
+        {
+            if (bank1AdjustedSpeed == bank2AdjustedSpeed && (Random() & 1))
+                strikesFirst = 2;
+            else if (bank1AdjustedSpeed < bank2AdjustedSpeed)
+                strikesFirst = 1;
+        }
+        else if (gBattleMoves[bank1Move].priority < gBattleMoves[bank2Move].priority)
+            strikesFirst = 1;
+    }
+    else
+    {
+        if (bank1AdjustedSpeed == bank2AdjustedSpeed && (Random() & 1))
+            strikesFirst = 2;
+        else if (bank1AdjustedSpeed < bank2AdjustedSpeed)
+            strikesFirst = 1;
+    }
+
+    return strikesFirst;
+}
