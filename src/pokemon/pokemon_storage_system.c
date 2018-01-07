@@ -35,7 +35,7 @@ struct UnkPSSStruct_2002370 {
     u32 unk_0014[3];
     struct Sprite *unk_0020[2];
     u8 filler_0028[0x214];
-    u8 unk_023c;
+    u8 curBox;
     u8 unk_023d;
     u8 unk_023e;
     u16 unk_0240;
@@ -43,13 +43,15 @@ struct UnkPSSStruct_2002370 {
 };
 
 void StorageSystemCreatePrimaryMenu(u8 whichMenu);
-void task_intro_29(u8 whichMenu);
-void sub_80963D0(u8 a0);
+void sub_80963D0(u8 curBox);
 void sub_809658C(void);
 void sub_80965F8(void);
 void sub_809662C(void);
 void sub_809665C(void);
+void sub_80966F4(const u8 *sourceString, u16 x, u16 y);
 void sub_8096784(struct Sprite *sprite);
+void task_intro_29(u8 whichMenu);
+void sub_8096884(void);
 struct Sprite *sub_809A9A0(u16 a0, u16 a1, u8 a2, u8 a3, u8 a4);
 
 const struct PSS_MenuStringPtrs gUnknown_083B600C[] = {
@@ -103,12 +105,15 @@ const u8 gBoxSelectionPopupSidesTiles[] = INCBIN_U8("graphics/pokemon_storage/bo
 
 extern const struct StorageAction gUnknown_083B6DF4[];
 extern const struct PokemonStorageSystemData *gUnknown_083B6DB4;
+extern u8 *const gUnknown_083B6DB8;
 
 EWRAM_DATA struct PokemonStorage gPokemonStorage = {0};
 EWRAM_DATA u8 gUnknown_02038474;
 EWRAM_DATA struct UnkPSSStruct_2002370 *gUnknown_02038478;
+EWRAM_DATA u8 gUnknown_0203847C;
+EWRAM_DATA u8 gUnknown_0203847D;
 
-u8 sub_8095ADC(u8 boxId)
+static u8 CountPokemonInBoxN(u8 boxId)
 {
     u16 i;
     u16 count;
@@ -121,7 +126,7 @@ u8 sub_8095ADC(u8 boxId)
     return count;
 }
 
-s16 sub_8095B24(u8 boxId)
+s16 GetIndexOfFirstEmptySpaceInBoxN(u8 boxId)
 {
     u16 i;
 
@@ -561,9 +566,9 @@ void sub_8096310(void)
     FreeSpriteTilesByTag(gUnknown_02038478->unk_0240 + 1);
 }
 
-void sub_809634C(u8 a0)
+void sub_809634C(u8 curBox)
 {
-    sub_80963D0(a0);
+    sub_80963D0(curBox);
 }
 
 void sub_809635C(void)
@@ -581,7 +586,7 @@ u8 sub_8096368(void)
     if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
-        return gUnknown_02038478->unk_023c;
+        return gUnknown_02038478->curBox;
     }
     if (gMain.newKeys & DPAD_LEFT)
     {
@@ -596,7 +601,7 @@ u8 sub_8096368(void)
     return 200;
 }
 
-void sub_80963D0(u8 a0)
+void sub_80963D0(u8 curBox)
 {
     u16 i;
     u8 spriteId;
@@ -608,11 +613,11 @@ void sub_80963D0(u8 a0)
         0, 0, &oamData, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
     };
 
-    gUnknown_02038478->unk_023c = a0;
+    gUnknown_02038478->curBox = curBox;
     template.tileTag = gUnknown_02038478->unk_0240;
     template.paletteTag = gUnknown_02038478->unk_0242;
 
-    spriteId = CreateSprite(&template, 0xa0, 0x60, 0);
+    spriteId = CreateSprite(&template, 0xA0, 0x60, 0);
     gUnknown_02038478->unk_0000 = gSprites + spriteId;
 
     oamData.shape = ST_OAM_V_RECTANGLE;
@@ -648,6 +653,104 @@ void sub_80963D0(u8 a0)
         }
     }
     sub_809665C();
+}
+
+void sub_809658C(void)
+{
+    u16 i;
+    if (gUnknown_02038478->unk_0000)
+    {
+        DestroySprite(gUnknown_02038478->unk_0000);
+        gUnknown_02038478->unk_0000 = NULL;
+    }
+    for (i = 0; i < 4; i++)
+    {
+        if (gUnknown_02038478->unk_0004[i])
+        {
+            DestroySprite(gUnknown_02038478->unk_0004[i]);
+            gUnknown_02038478->unk_0004[i] = NULL;
+        }
+    }
+    for (i = 0; i < 2; i++)
+    {
+        if (gUnknown_02038478->unk_0020[i])
+            DestroySprite(gUnknown_02038478->unk_0020[i]);
+    }
+}
+
+void sub_80965F8(void)
+{
+    if (++gUnknown_02038478->curBox > 13)
+        gUnknown_02038478->curBox = 0;
+    sub_809665C();
+}
+
+void sub_809662C(void)
+{
+    gUnknown_02038478->curBox = (gUnknown_02038478->curBox == 0 ? 13 : gUnknown_02038478->curBox - 1);
+    sub_809665C();
+}
+
+void sub_809665C(void)
+{
+    u8 nPokemonInBox = CountPokemonInBoxN(gUnknown_02038478->curBox);
+    u8 *stringVar = gStringVar1;
+
+    stringVar[0] = EXT_CTRL_CODE_BEGIN;
+    stringVar[1] = 0x04; // EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW
+    stringVar[2] = 0x0F; // TEXT_COLOR_WHITE2
+    stringVar[3] = 0x01; // TEXT_COLOR_DARK_GREY
+    stringVar[4] = 0x0E; // TEXT_COLOR_LIGHT_BLUE
+    stringVar += 5;
+
+    stringVar = StringCopy(stringVar, gPokemonStorage.boxNames[gUnknown_02038478->curBox]);
+
+    stringVar[0] = CHAR_NEWLINE;
+    stringVar[1] = EXT_CTRL_CODE_BEGIN;
+    stringVar[2] = 0x11; // EXT_CTRL_CODE_CLEAR
+    if (nPokemonInBox < 10)
+        stringVar[3] = 0x28;
+    else
+        stringVar[3] = 0x22;
+    stringVar += 4;
+
+    stringVar = ConvertIntToDecimalString(stringVar, nPokemonInBox);
+
+    stringVar[0] = CHAR_SLASH;
+    stringVar[1] = CHAR_0 + 3;
+    stringVar[2] = CHAR_0 + 0;
+    stringVar[3] = EOS;
+    sub_80966F4(gStringVar1, 0, 1);
+}
+
+void sub_80966F4(const u8 *sourceString, u16 x, u16 y)
+{
+    u16 *vdest = (u16 *)(BG_CHAR_ADDR(4) + (GetSpriteTileStartByTag(gUnknown_02038478->unk_0240) * 32) + y * 256 + x * 32);
+    u8 *tileBuff = gUnknown_083B6DB8;
+    DmaFill16(3, 0x1111, tileBuff, 0x400);
+    sub_8004E3C(&gWindowConfig_81E6D38, tileBuff, sourceString);
+    DmaCopy16(3, tileBuff, vdest, 0x400);
+}
+
+void sub_8096784(struct Sprite *sprite)
+{
+    if (++sprite->data[1] > 3)
+    {
+        sprite->data[1] = 0;
+        sprite->pos2.x += sprite->data[0];
+        if (++sprite->data[2] > 5)
+        {
+            sprite->data[2] = 0;
+            sprite->pos2.x = 0;
+        }
+    }
+}
+
+void task_intro_29(u8 whichMenu)
+{
+    gUnknown_0203847D = whichMenu;
+    ePokemonStorageSystem.unk_0005 = whichMenu;
+    SetMainCallback2(sub_8096884);
 }
 
 asm(".section .text.8098898");
