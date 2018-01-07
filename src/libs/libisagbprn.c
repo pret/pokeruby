@@ -25,7 +25,7 @@ struct AGBPrintStruct
 
 typedef void (*LPFN_PRINT_FLUSH)(void);
 
-#ifndef NOAGBPRN
+#ifndef NDEBUG
 void AGBPrintFlush1Block(void);
 
 void AGBPrintInit(void)
