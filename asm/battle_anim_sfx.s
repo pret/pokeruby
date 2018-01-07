@@ -4,61 +4,6 @@
 	.syntax unified
 
 	.text
-	
-	thumb_func_start unref_sub_812AECC
-unref_sub_812AECC: @ 812AECC
-	push {lr}
-	bl RunMysteryEventScript
-	lsls r0, 24
-	lsrs r0, 24
-	adds r1, r0, 0
-	cmp r0, 0x1
-	beq _0812AEEA
-	cmp r0, 0x1
-	ble _0812AF08
-	cmp r1, 0x2
-	beq _0812AEF4
-	cmp r1, 0x3
-	beq _0812AEFA
-	b _0812AF08
-_0812AEEA:
-	movs r0, 0x16
-	bl PlaySE
-	movs r0, 0x1
-	b _0812AF0A
-_0812AEF4:
-	bl sub_812AF10
-	b _0812AF08
-_0812AEFA:
-	movs r0, 0x16
-	bl PlaySE
-	bl sub_812AF10
-	movs r0, 0x1
-	b _0812AF0A
-_0812AF08:
-	movs r0, 0
-_0812AF0A:
-	pop {r1}
-	bx r1
-	thumb_func_end unref_sub_812AECC
-
-	thumb_func_start sub_812AF10
-sub_812AF10: @ 812AF10
-	push {lr}
-	movs r0, 0x2
-	movs r1, 0xE
-	movs r2, 0x1B
-	movs r3, 0x13
-	bl MenuDrawTextWindow
-	ldr r0, _0812AF2C @ =gStringVar4
-	movs r1, 0x3
-	movs r2, 0xF
-	bl MenuPrint
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0812AF2C: .4byte gStringVar4
-	thumb_func_end sub_812AF10
 
 	thumb_func_start sub_812AF30
 sub_812AF30: @ 812AF30
