@@ -1,6 +1,13 @@
 #ifndef GUARD_CONSTANTS_BATTLE_CONSTANTS_H
 #define GUARD_CONSTANTS_BATTLE_CONSTANTS_H
 
+// Bank sides
+#define SIDE_PLAYER     0x0
+#define SIDE_OPPONENT   0x1
+
+#define BIT_SIDE        0x1
+#define BIT_MON         0x2
+
 #define STATUS_SLEEP            0x7
 #define STATUS_POISON           0x8
 #define STATUS_BURN             0x10
@@ -76,6 +83,7 @@
 #define HITMARKER_x800000               0x00800000
 #define HITMARKER_GRUDGE                0x01000000
 #define HITMARKER_OBEYS                 0x02000000
+#define HITMARKER_x4000000              0x04000000
 #define HITMARKER_x8000000              0x08000000
 #define HITMARKER_FAINTED(bank)         ((gBitTable[bank] << 0x1C))
 #define HITMARKER_UNK(bank)             ((0x10000000 << bank))
@@ -216,6 +224,27 @@
 #define WEATHER_SUN_ANY ((WEATHER_SUN_TEMPORARY | WEATHER_SUN_PERMANENT))
 #define WEATHER_HAIL                (1 << 7)
 
+#define MOVE_TARGET_SELECTED        0x0
+#define MOVE_TARGET_DEPENDS         0x1
+#define MOVE_TARGET_USER            0x2
+#define MOVE_TARGET_RANDOM          0x4
+#define MOVE_TARGET_x10             0x10
+#define MOVE_TARGET_BOTH            0x8
+#define MOVE_TARGET_FOES_AND_ALLY   0x20
+#define MOVE_TARGET_OPPONENTS_FIELD 0x40
+
+// array entries for battle communication
+#define MULTIUSE_STATE          0x0
+#define CURSOR_POSITION         0x1
+#define TASK_ID                 0x1 // task Id and cursor position share the same field
+#define SPRITES_INIT_STATE1     0x1 // shares the Id as well
+#define SPRITES_INIT_STATE2     0x2
+#define MOVE_EFFECT_BYTE        0x3
+#define ACTIONS_CONFIRMED_COUNT 0x4
+#define MULTISTRING_CHOOSER     0x5
+#define MSG_DISPLAY             0x7
+#define BATTLE_COMMUNICATION_ENTRIES_COUNT  0x8
+
 // status animation table
 #define B_ANIM_STATUS_PSN               0x0
 #define B_ANIM_STATUS_CONFUSION         0x1
@@ -261,5 +290,13 @@
 #define B_ANIM_SAFARI_BALL_THROW        0x4
 #define B_ANIM_SUBSTITUTE_TO_MON        0x5
 #define B_ANIM_MON_TO_SUBSTITUTE        0x6
+
+// AI switch items
+#define AI_ITEM_FULL_RESTORE     1
+#define AI_ITEM_HEAL_HP          2
+#define AI_ITEM_CURE_CONDITION   3
+#define AI_ITEM_X_STAT           4
+#define AI_ITEM_GUARD_SPECS      5
+#define AI_ITEM_NOT_RECOGNIZABLE 6
 
 #endif // GUARD_CONSTANTS_BATTLE_CONSTANTS_H

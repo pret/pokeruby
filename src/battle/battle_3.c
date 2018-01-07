@@ -33,7 +33,7 @@ extern u8 gNoOfAllBanks;
 extern u32 gStatuses3[4];
 extern u8 gBankAttacker;
 extern u8 gBankTarget;
-extern u8 gTurnOrder[4];
+extern u8 gBanksByTurnOrder[4];
 extern u16 gSideAffecting[2];
 extern u16 gBattleWeather;
 extern void (*gBattleMainFunc)(void);
@@ -87,8 +87,6 @@ u8 weather_get_current(void);
 void b_push_move_exec(u8* BS_ptr);
 void RecordAbilityBattle(u8 bank, u8 ability);
 void RecordItemBattle(u8 bank, u8 holdEffect);
-void sub_8013F54(void);
-void sub_8013FBC(void);
 s8 GetPokeFlavourRelation(u32 pid, u8 flavor);
 
 extern u8 BattleScript_MoveSelectionDisabledMove[];
@@ -372,14 +370,14 @@ u8 UpdateTurnCounters(void)
         case 0:
             for (i = 0; i < gNoOfAllBanks; i++)
             {
-                gTurnOrder[i] = i;
+                gBanksByTurnOrder[i] = i;
             }
             for (i = 0; i < gNoOfAllBanks - 1; i++)
             {
                 s32 j;
                 for (j = i + 1; j < gNoOfAllBanks; j++)
                 {
-                    if (GetWhoStrikesFirst(gTurnOrder[i], gTurnOrder[j], 0))
+                    if (GetWhoStrikesFirst(gBanksByTurnOrder[i], gBanksByTurnOrder[j], 0))
                         SwapTurnOrder(i, j);
                 }
             }
@@ -496,7 +494,7 @@ u8 UpdateTurnCounters(void)
         case 5:
             while (BATTLE_STRUCT->turnSideTracker < gNoOfAllBanks)
             {
-                gActiveBank = gTurnOrder[BATTLE_STRUCT->turnSideTracker];
+                gActiveBank = gBanksByTurnOrder[BATTLE_STRUCT->turnSideTracker];
                 if (gWishFutureKnock.wishCounter[gActiveBank] && --gWishFutureKnock.wishCounter[gActiveBank] == 0 && gBattleMons[gActiveBank].hp)
                 {
                     gBankTarget = gActiveBank;
@@ -606,7 +604,7 @@ u8 TurnBasedEffects(void)
     gHitMarker |= (HITMARKER_GRUDGE | HITMARKER_x20);
     while (BATTLE_STRUCT->turnEffectsBank < gNoOfAllBanks && BATTLE_STRUCT->turnEffectsTracker <= TURNBASED_MAX_CASE)
     {
-        gActiveBank = gBankAttacker = gTurnOrder[BATTLE_STRUCT->turnEffectsBank];
+        gActiveBank = gBankAttacker = gBanksByTurnOrder[BATTLE_STRUCT->turnEffectsBank];
         if (gAbsentBankFlags & gBitTable[gActiveBank])
         {
             BATTLE_STRUCT->turnEffectsBank++;
@@ -948,7 +946,7 @@ bool8 sub_80170DC(void) // handle future sight and perish song
     case 1: // perish song
         while (BATTLE_STRUCT->sub80170DC_Bank < gNoOfAllBanks)
         {
-            gActiveBank = gBankAttacker = gTurnOrder[BATTLE_STRUCT->sub80170DC_Bank];
+            gActiveBank = gBankAttacker = gBanksByTurnOrder[BATTLE_STRUCT->sub80170DC_Bank];
             if (gAbsentBankFlags & gBitTable[gActiveBank])
                 BATTLE_STRUCT->sub80170DC_Bank++;
             else
@@ -984,9 +982,9 @@ bool8 sub_80170DC(void) // handle future sight and perish song
     return 0;
 }
 
-#define sub_80173A4_MAX_CASE 7
+#define HandleFaintedMonActions_MAX_CASE 7
 
-bool8 sub_80173A4(void)
+bool8 HandleFaintedMonActions(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
         return 0;
@@ -1053,7 +1051,7 @@ bool8 sub_80173A4(void)
         case 7:
             break;
         }
-    } while (BATTLE_STRUCT->sub80173A4_Tracker != sub_80173A4_MAX_CASE);
+    } while (BATTLE_STRUCT->sub80173A4_Tracker != HandleFaintedMonActions_MAX_CASE);
     return 0;
 }
 
@@ -2255,7 +2253,7 @@ void b_call_bc_move_exec(u8* BS_ptr)
 {
     gBattlescriptCurrInstr = BS_ptr;
     B_FUNCTION_STACK->ptr[B_FUNCTION_STACK->size++] = gBattleMainFunc;
-    gBattleMainFunc = sub_8013F54;
+    gBattleMainFunc = RunBattleScriptCommands_PopCallbacksStack;
     gCurrentActionFuncId = 0;
 }
 
@@ -2264,7 +2262,7 @@ void b_push_move_exec(u8* BS_ptr)
     b_movescr_stack_push_cursor();
     gBattlescriptCurrInstr = BS_ptr;
     B_FUNCTION_STACK->ptr[B_FUNCTION_STACK->size++] = gBattleMainFunc;
-    gBattleMainFunc = sub_8013FBC;
+    gBattleMainFunc = RunBattleScriptCommands;
 }
 
 enum

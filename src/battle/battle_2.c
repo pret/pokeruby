@@ -1,13 +1,17 @@
 #include "global.h"
 #include "constants/abilities.h"
 #include "battle.h"
+#include "battle_ai.h"
 #include "battle_interface.h"
+#include "battle_message.h"
 #include "battle_setup.h"
 #include "data2.h"
 #include "event_data.h"
+#include "evolution_scene.h"
 #include "item.h"
 #include "link.h"
 #include "main.h"
+#include "m4a.h"
 #include "name_string_util.h"
 #include "palette.h"
 #include "party_menu.h"
@@ -15,6 +19,7 @@
 #include "pokedex.h"
 #include "pokemon.h"
 #include "random.h"
+#include "roamer.h"
 #include "rom3.h"
 #include "rom_8077ABC.h"
 #include "rom_8094928.h"
@@ -22,10 +27,12 @@
 #include "sound.h"
 #include "constants/species.h"
 #include "sprite.h"
+#include "string_util.h"
 #include "task.h"
 #include "text.h"
 #include "trainer.h"
 #include "trig.h"
+#include "tv.h"
 #include "unknown_task.h"
 #include "util.h"
 #include "constants/battle_move_effects.h"
@@ -60,7 +67,7 @@ extern const u16 gUnknown_08D004E0[];
 extern const struct MonCoords gCastformFrontSpriteCoords[];
 
 extern u8 gStatStageRatios[][2];
-extern u8 gUnknown_02024A76[4];
+extern u8 gActionsByTurnOrder[4];
 extern struct UnknownPokemonStruct2 gUnknown_02023A00[];
 extern u8 gBattleBufferB[][0x200];
 extern u8 gActiveBank;
@@ -68,7 +75,7 @@ extern u32 gBattleExecBuffer;
 extern u8 gNoOfAllBanks;
 extern u16 gBattlePartyID[];
 extern u8 gCurrentActionFuncId;
-extern u8 gTurnOrder[];
+extern u8 gBanksByTurnOrder[];
 extern struct UnknownStruct12 gUnknown_02024AD0[];
 extern u8 gObjectBankIDs[];
 extern u16 gCurrentMove;
@@ -82,7 +89,7 @@ extern u16 gLastUsedMove[];
 extern u16 gMoveHitWith[];
 extern u16 gUnknown_02024C44[];
 extern u16 gUnknown_02024C4C[];
-extern u16 gLockedMove[];
+extern u16 gLockedMoves[];
 extern u8 gUnknown_02024C5C[];
 extern u16 gChosenMovesByBanks[];
 extern u32 gHitMarker;
@@ -112,8 +119,8 @@ extern u16 gBattle_WIN0V;
 extern u16 gBattle_BG2_Y;
 extern u32 gUnknown_03004284;
 extern u16 gBattle_BG2_X;
-extern u16 gUnknown_030042A0;
-extern u16 gUnknown_030042A4;
+extern u16 gBattle_BG0_Y;
+extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG1_X;
 extern u16 gBattle_WIN0H;
 extern MainCallback gPreBattleCallback1;
@@ -140,10 +147,33 @@ extern u8 gCurrentTurnActionNumber;
 extern void (* const gUnknown_081FA640[])(void);
 extern void (* const gUnknown_081FA678[])(void);
 extern u8* gBattlescriptCurrInstr;
-extern u8 gUnknown_081D8E02[];
+extern u8 BattleScript_LinkBattleWonOrLost[];
 extern u8 BattleScript_PayDayMoneyAndPickUpItems[];
 extern u8 gUnknown_081D8E0D[];
 extern u8 BattleScript_LocalTrainerBattleWon[];
+extern u8 BattleScript_LocalBattleLost[];
+extern u8 BattleScript_GotAwaySafely[];
+extern u8 BattleScript_SmokeBallEscape[];
+extern u8 BattleScript_RanAwayUsingMonAbility[];
+extern u8 BattleScript_WildMonFled[];
+extern u8 BattleScript_ActionSwitch[];
+extern u8 BattleScript_PrintFailedToRunString[];
+extern const BattleCmdFunc gBattleScriptingCommandsTable[];
+extern u8 gCritMultiplier;
+extern u8 gCurrMovePos;
+extern u8 gUnknown_02024BE5;
+extern u16 gChosenMove;
+extern u8* gBattleScriptsForMoveEffects[];
+extern u16 gLastUsedItem;
+extern u8 * const gBattlescriptsForBallThrow[];
+extern u8 * const gBattlescriptsForRunningByItem[];
+extern u8 * const gBattlescriptsForUsingItem[];
+extern u8 * const gBattlescriptsForSafariActions[];
+extern u8 gBattleTextBuff2[];
+extern u8 gNumSafariBalls;
+extern u8 gUnknown_081FA70C[][3];
+extern u8 gUnknown_081FA71B[];
+extern u8 gUnknown_081FA71F[];
 
 void b_call_bc_move_exec(const u8* BS_ptr);
 
@@ -153,7 +183,11 @@ void SetActionsAndBanksTurnOrder(void);
 static void TurnValuesCleanUp(u8);
 void SpecialStatusesClear(void);
 static void RunTurnActionsFunctions(void);
-void sub_8013C9C();
+void HandleEndTurn_FinishBattle();
+static void FreeResetData_ReturnToOvOrDoEvolutions(void);
+void TryEvolvePokemon(void);
+static void ReturnFromBattleToOverworld(void);
+static void WaitForEvoSceneToFinish(void);
 
 void sub_800E7C4(void)
 {
@@ -202,8 +236,8 @@ void InitBattle(void)
     sub_80895F8(gUnknown_081F9674);
     SetUpWindowConfig(&gWindowConfig_81E6C58);
     ResetPaletteFade();
-    gUnknown_030042A4 = 0;
-    gUnknown_030042A0 = 0;
+    gBattle_BG0_X = 0;
+    gBattle_BG0_Y = 0;
     gBattle_BG1_X = 0;
     gBattle_BG1_Y = 0;
     gBattle_BG2_X = 0;
@@ -491,7 +525,7 @@ void sub_800EC9C(void)
         {
             gPreBattleCallback1 = gMain.callback1;
             gMain.callback1 = sub_8010824;
-            SetMainCallback2(sub_800F808);
+            SetMainCallback2(BattleMainCB2);
             if (gBattleTypeFlags & BATTLE_TYPE_LINK)
             {
                 gTrainerBattleOpponent = 0x800;
@@ -849,7 +883,7 @@ void sub_800F298(void)
         {
             gPreBattleCallback1 = gMain.callback1;
             gMain.callback1 = sub_8010824;
-            SetMainCallback2(sub_800F808);
+            SetMainCallback2(BattleMainCB2);
             if (gBattleTypeFlags & BATTLE_TYPE_LINK)
             {
                 gTrainerBattleOpponent = 0x800;
@@ -860,7 +894,7 @@ void sub_800F298(void)
     }
 }
 
-void sub_800F808(void)
+void BattleMainCB2(void)
 {
     AnimateSprites();
     BuildOamBuffer();
@@ -1024,8 +1058,8 @@ void sub_800FCD4(void)
 void sub_800FCFC(void)
 {
     Random();  // unused return value
-    REG_BG0HOFS = gUnknown_030042A4;
-    REG_BG0VOFS = gUnknown_030042A0;
+    REG_BG0HOFS = gBattle_BG0_X;
+    REG_BG0VOFS = gBattle_BG0_Y;
     REG_BG1HOFS = gBattle_BG1_X;
     REG_BG1VOFS = gBattle_BG1_Y;
     REG_BG2HOFS = gBattle_BG2_X;
@@ -1178,8 +1212,8 @@ void c2_8011A1C(void)
     }
     SetUpWindowConfig(&gWindowConfig_81E6C58);
     ResetPaletteFade();
-    gUnknown_030042A4 = 0;
-    gUnknown_030042A0 = 0;
+    gBattle_BG0_X = 0;
+    gBattle_BG0_Y = 0;
     gBattle_BG1_X = 0;
     gBattle_BG1_Y = 0;
     gBattle_BG2_X = 0;
@@ -1549,7 +1583,7 @@ void sub_8010874(void)
         gUnknown_02024C44[i] = 0;
         gUnknown_02024C4C[i] = 0;
         gUnknown_02024C5C[i] = 0xFF;
-        gLockedMove[i] = 0;
+        gLockedMoves[i] = 0;
         gUnknown_02024C2C[i] = 0;
         eFlashFireArr.arr[i] = 0;
     }
@@ -2098,12 +2132,12 @@ void BattleBeginFirstTurn(void)
         if (ewram16058 == 0)
         {
             for (i = 0; i < gNoOfAllBanks; i++)
-                gTurnOrder[i] = i;
+                gBanksByTurnOrder[i] = i;
             for (i = 0; i < gNoOfAllBanks - 1; i++)
             {
                 for (j = i + 1; j < gNoOfAllBanks; j++)
                 {
-                    if (GetWhoStrikesFirst(gTurnOrder[i], gTurnOrder[j], 1) != 0)
+                    if (GetWhoStrikesFirst(gBanksByTurnOrder[i], gBanksByTurnOrder[j], 1) != 0)
                         SwapTurnOrder(i, j);
                 }
             }
@@ -2115,7 +2149,7 @@ void BattleBeginFirstTurn(void)
         }
         while (ewram16058 < gNoOfAllBanks)
         {
-            if (AbilityBattleEffects(0, gTurnOrder[ewram16058], 0, 0, 0) != 0)
+            if (AbilityBattleEffects(0, gBanksByTurnOrder[ewram16058], 0, 0, 0) != 0)
                 r9++;
             ewram16058++;
             if (r9 != 0)
@@ -2127,7 +2161,7 @@ void BattleBeginFirstTurn(void)
             return;
         while (ewram160F9 < gNoOfAllBanks)
         {
-            if (ItemBattleEffects(0, gTurnOrder[ewram160F9], 0) != 0)
+            if (ItemBattleEffects(0, gBanksByTurnOrder[ewram160F9], 0) != 0)
                 r9++;
             ewram160F9++;
             if (r9 != 0)
@@ -2199,7 +2233,7 @@ void BattleTurnPassed(void)
         if (TurnBasedEffects() != 0)
             return;
     }
-    if (sub_80173A4() != 0)
+    if (HandleFaintedMonActions() != 0)
         return;
     ewram16059 = 0;
     if (sub_80170DC() != 0)
@@ -3861,13 +3895,13 @@ void SwapTurnOrder(u8 a, u8 b)
 {
     int temp;
 
-    temp = gUnknown_02024A76[a];
-    gUnknown_02024A76[a] = gUnknown_02024A76[b];
-    gUnknown_02024A76[b] = temp;
+    temp = gActionsByTurnOrder[a];
+    gActionsByTurnOrder[a] = gActionsByTurnOrder[b];
+    gActionsByTurnOrder[b] = temp;
 
-    temp = gTurnOrder[a];
-    gTurnOrder[a] = gTurnOrder[b];
-    gTurnOrder[b] = temp;
+    temp = gBanksByTurnOrder[a];
+    gBanksByTurnOrder[a] = gBanksByTurnOrder[b];
+    gBanksByTurnOrder[b] = temp;
 }
 
 // Determines which of the two given mons will strike first in a battle.
@@ -4024,8 +4058,8 @@ void SetActionsAndBanksTurnOrder(void)
     {
         for (gActiveBank = 0; gActiveBank < gNoOfAllBanks; gActiveBank++)
         {
-            gUnknown_02024A76[var] = gActionForBanks[gActiveBank];
-            gTurnOrder[var] = gActiveBank;
+            gActionsByTurnOrder[var] = gActionForBanks[gActiveBank];
+            gBanksByTurnOrder[var] = gActiveBank;
             var++;
         }
     }
@@ -4053,15 +4087,15 @@ void SetActionsAndBanksTurnOrder(void)
 
         if (var == 5)
         {
-            gUnknown_02024A76[0] = gActionForBanks[gActiveBank];
-            gTurnOrder[0] = gActiveBank;
+            gActionsByTurnOrder[0] = gActionForBanks[gActiveBank];
+            gBanksByTurnOrder[0] = gActiveBank;
             var = 1;
             for (i = 0; i < gNoOfAllBanks; i++)
             {
                 if (i != gActiveBank)
                 {
-                    gUnknown_02024A76[var] = gActionForBanks[i];
-                    gTurnOrder[var] = i;
+                    gActionsByTurnOrder[var] = gActionForBanks[i];
+                    gBanksByTurnOrder[var] = i;
                     var++;
                 }
             }
@@ -4075,8 +4109,8 @@ void SetActionsAndBanksTurnOrder(void)
             {
                 if (gActionForBanks[gActiveBank] == ACTION_USE_ITEM || gActionForBanks[gActiveBank] == ACTION_SWITCH)
                 {
-                    gUnknown_02024A76[var] = gActionForBanks[gActiveBank];
-                    gTurnOrder[var] = gActiveBank;
+                    gActionsByTurnOrder[var] = gActionForBanks[gActiveBank];
+                    gBanksByTurnOrder[var] = gActiveBank;
                     var++;
                 }
             }
@@ -4084,8 +4118,8 @@ void SetActionsAndBanksTurnOrder(void)
             {
                 if (gActionForBanks[gActiveBank] != ACTION_USE_ITEM && gActionForBanks[gActiveBank] != ACTION_SWITCH)
                 {
-                    gUnknown_02024A76[var] = gActionForBanks[gActiveBank];
-                    gTurnOrder[var] = gActiveBank;
+                    gActionsByTurnOrder[var] = gActionForBanks[gActiveBank];
+                    gBanksByTurnOrder[var] = gActiveBank;
                     var++;
                 }
             }
@@ -4093,12 +4127,12 @@ void SetActionsAndBanksTurnOrder(void)
             {
                 for (j = i + 1; j < gNoOfAllBanks; j++)
                 {
-                    u8 bank1 = gTurnOrder[i];
-                    u8 bank2 = gTurnOrder[j];
-                    if (gUnknown_02024A76[i] != ACTION_USE_ITEM
-                        && gUnknown_02024A76[j] != ACTION_USE_ITEM
-                        && gUnknown_02024A76[i] != ACTION_SWITCH
-                        && gUnknown_02024A76[j] != ACTION_SWITCH)
+                    u8 bank1 = gBanksByTurnOrder[i];
+                    u8 bank2 = gBanksByTurnOrder[j];
+                    if (gActionsByTurnOrder[i] != ACTION_USE_ITEM
+                        && gActionsByTurnOrder[j] != ACTION_USE_ITEM
+                        && gActionsByTurnOrder[i] != ACTION_SWITCH
+                        && gActionsByTurnOrder[j] != ACTION_SWITCH)
                     {
                         if (GetWhoStrikesFirst(bank1, bank2, FALSE))
                             SwapTurnOrder(i, j);
@@ -4184,7 +4218,7 @@ void CheckFocusPunch_ClearVarsBeforeTurnStarts(void)
     {
         // something stupid needed to match
         u8 zero;
-        gCurrentActionFuncId = gUnknown_02024A76[(zero = 0)];
+        gCurrentActionFuncId = gActionsByTurnOrder[(zero = 0)];
     }
 
     gDynamicBasePower = 0;
@@ -4227,7 +4261,7 @@ void HandleEndTurn_BattleWon(void)
     {
         gBattleTextBuff1[0] = gBattleOutcome;
         gBankAttacker = GetBankByIdentity(IDENTITY_PLAYER_MON1);
-        gBattlescriptCurrInstr = gUnknown_081D8E02;
+        gBattlescriptCurrInstr = BattleScript_LinkBattleWonOrLost;
         gBattleOutcome &= ~(OUTCOME_LINK_BATTLE_RUN);
     }
     else if (gBattleTypeFlags & (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER))
@@ -4266,5 +4300,1091 @@ void HandleEndTurn_BattleWon(void)
         gBattlescriptCurrInstr = BattleScript_PayDayMoneyAndPickUpItems;
     }
 
-    gBattleMainFunc = sub_8013C9C;
+    gBattleMainFunc = HandleEndTurn_FinishBattle;
+}
+
+void HandleEndTurn_BattleLost(void)
+{
+    gCurrentActionFuncId = 0;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_LINK)
+    {
+        gBattleTextBuff1[0] = gBattleOutcome;
+        gBankAttacker = GetBankByIdentity(IDENTITY_PLAYER_MON1);
+        gBattlescriptCurrInstr = BattleScript_LinkBattleWonOrLost;
+        gBattleOutcome &= ~(OUTCOME_LINK_BATTLE_RUN);
+    }
+    else
+    {
+        gBattlescriptCurrInstr = BattleScript_LocalBattleLost;
+    }
+
+    gBattleMainFunc = HandleEndTurn_FinishBattle;
+}
+
+void HandleEndTurn_RanFromBattle(void)
+{
+    gCurrentActionFuncId = 0;
+
+    switch (gProtectStructs[gBankAttacker].fleeFlag)
+    {
+    default:
+        gBattlescriptCurrInstr = BattleScript_GotAwaySafely;
+        break;
+    case 1:
+        gBattlescriptCurrInstr = BattleScript_SmokeBallEscape;
+        break;
+    case 2:
+        gBattlescriptCurrInstr = BattleScript_RanAwayUsingMonAbility;
+        break;
+    }
+
+    gBattleMainFunc = HandleEndTurn_FinishBattle;
+}
+
+void HandleEndTurn_MonFled(void)
+{
+    gCurrentActionFuncId = 0;
+
+    PREPARE_MON_NICK_BUFFER(gBattleTextBuff1, gBankAttacker, gBattlePartyID[gBankAttacker]);
+    gBattlescriptCurrInstr = BattleScript_WildMonFled;
+
+    gBattleMainFunc = HandleEndTurn_FinishBattle;
+}
+
+void HandleEndTurn_FinishBattle(void)
+{
+    if (gCurrentActionFuncId == 0xB || gCurrentActionFuncId == 0xC)
+    {
+        if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK
+                                  | BATTLE_TYPE_FIRST_BATTLE
+                                  | BATTLE_TYPE_SAFARI
+                                  | BATTLE_TYPE_EREADER_TRAINER
+                                  | BATTLE_TYPE_WALLY_TUTORIAL
+                                  | BATTLE_TYPE_BATTLE_TOWER)))
+        {
+            for (gActiveBank = 0; gActiveBank < gNoOfAllBanks; gActiveBank++)
+            {
+                if (GetBankSide(gActiveBank) == SIDE_PLAYER)
+                {
+                    if (gBattleResults.poke1Species == SPECIES_NONE)
+                    {
+                        gBattleResults.poke1Species = gBattleMons[gActiveBank].species;
+                        StringCopy(gBattleResults.pokeString1, gBattleMons[gActiveBank].nickname);
+                    }
+                    else
+                    {
+                        gBattleResults.opponentSpecies = gBattleMons[gActiveBank].species;
+                        StringCopy(gBattleResults.pokeString2, gBattleMons[gActiveBank].nickname);
+                    }
+                }
+            }
+            PutPokemonTodayCaughtOnAir();
+        }
+
+        BeginFastPaletteFade(3);
+        FadeOutMapMusic(5);
+        gBattleMainFunc = FreeResetData_ReturnToOvOrDoEvolutions;
+        gCB2_AfterEvolution = BattleMainCB2;
+    }
+    else
+    {
+        if (gBattleExecBuffer == 0)
+            gBattleScriptingCommandsTable[gBattlescriptCurrInstr[0]]();
+    }
+}
+
+static void FreeResetData_ReturnToOvOrDoEvolutions(void)
+{
+    if (!gPaletteFade.active)
+    {
+        ResetSpriteData();
+        if (gLeveledUpInBattle == 0 || gBattleOutcome != BATTLE_WON)
+        {
+            gBattleMainFunc = ReturnFromBattleToOverworld;
+            return;
+        }
+        else
+        {
+            gBattleMainFunc = TryEvolvePokemon;
+        }
+    }
+}
+
+void TryEvolvePokemon(void)
+{
+    s32 i;
+
+    while (gLeveledUpInBattle != 0)
+    {
+        for (i = 0; i < 6; i++)
+        {
+            if (gLeveledUpInBattle & gBitTable[i])
+            {
+                u16 species;
+                u8 levelUpBits = gLeveledUpInBattle;
+
+                levelUpBits &= ~(gBitTable[i]);
+                gLeveledUpInBattle = levelUpBits;
+
+                species = GetEvolutionTargetSpecies(&gPlayerParty[i], 0, levelUpBits);
+                if (species != SPECIES_NONE)
+                {
+                    gBattleMainFunc = WaitForEvoSceneToFinish;
+                    EvolutionScene(&gPlayerParty[i], species, 0x81, i);
+                    return;
+                }
+            }
+        }
+    }
+
+    gBattleMainFunc = ReturnFromBattleToOverworld;
+}
+
+static void WaitForEvoSceneToFinish(void)
+{
+    if (gMain.callback2 == BattleMainCB2)
+        gBattleMainFunc = TryEvolvePokemon;
+}
+
+static void ReturnFromBattleToOverworld(void)
+{
+    if (!(gBattleTypeFlags & BATTLE_TYPE_LINK))
+    {
+        RandomlyGivePartyPokerus(gPlayerParty);
+        PartySpreadPokerus(gPlayerParty);
+    }
+
+    if (gBattleTypeFlags & BATTLE_TYPE_LINK && gReceivedRemoteLinkPlayers != 0)
+        return;
+
+    gSpecialVar_Result = gBattleOutcome;
+    gMain.inBattle = 0;
+    gMain.callback1 = gPreBattleCallback1;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_ROAMER)
+    {
+        UpdateRoamerHPStatus(&gEnemyParty[0]);
+        if (gBattleOutcome == BATTLE_WON || gBattleOutcome == BATTLE_CAUGHT)
+            SetRoamerInactive();
+    }
+
+    m4aSongNumStop(0x5A);
+    SetMainCallback2(gMain.savedCallback);
+}
+
+void RunBattleScriptCommands_PopCallbacksStack(void)
+{
+    if (gCurrentActionFuncId == 0xB || gCurrentActionFuncId == 0xC)
+    {
+        if (B_FUNCTION_STACK->size != 0)
+            B_FUNCTION_STACK->size--;
+        gBattleMainFunc = B_FUNCTION_STACK->ptr[B_FUNCTION_STACK->size];
+    }
+    else
+    {
+        if (gBattleExecBuffer == 0)
+            gBattleScriptingCommandsTable[gBattlescriptCurrInstr[0]]();
+    }
+}
+
+void RunBattleScriptCommands(void)
+{
+    if (gBattleExecBuffer == 0)
+        gBattleScriptingCommandsTable[gBattlescriptCurrInstr[0]]();
+}
+
+void HandleAction_UseMove(void)
+{
+    u8 side;
+    u8 var = 4;
+
+    gBankAttacker = gBanksByTurnOrder[gCurrentTurnActionNumber];
+
+    if (ewram160A6 & gBitTable[gBankAttacker])
+    {
+        gCurrentActionFuncId = ACTION_FINISHED;
+        return;
+    }
+
+    gCritMultiplier = 1;
+    eDmgMultiplier = 1;
+    ewram160E7 = 0;
+    gBattleMoveFlags = 0;
+    gMultiHitCounter = 0;
+    gBattleCommunication[6] = 0;
+    gCurrMovePos = gUnknown_02024BE5 = ewram1608Carr(gBankAttacker);
+
+    // choose move
+    if (gProtectStructs[gBankAttacker].onlyStruggle)
+    {
+        gProtectStructs[gBankAttacker].onlyStruggle = 0;
+        gCurrentMove = gChosenMove = MOVE_STRUGGLE;
+        gHitMarker |= HITMARKER_NO_PPDEDUCT;
+        ewram16010arr(gBankAttacker) = GetMoveTarget(MOVE_STRUGGLE, 0);
+    }
+    else if (gBattleMons[gBankAttacker].status2 & STATUS2_MULTIPLETURNS || gBattleMons[gBankAttacker].status2 & STATUS2_RECHARGE)
+    {
+        gCurrentMove = gChosenMove = gLockedMoves[gBankAttacker];
+    }
+    // encore forces you to use the same move
+    else if (gDisableStructs[gBankAttacker].encoredMove != MOVE_NONE
+             && gDisableStructs[gBankAttacker].encoredMove == gBattleMons[gBankAttacker].moves[gDisableStructs[gBankAttacker].encoredMovePos])
+    {
+        gCurrentMove = gChosenMove = gDisableStructs[gBankAttacker].encoredMove;
+        gCurrMovePos = gUnknown_02024BE5 = gDisableStructs[gBankAttacker].encoredMovePos;
+        ewram16010arr(gBankAttacker) = GetMoveTarget(gCurrentMove, 0);
+    }
+    // check if the encored move wasn't overwritten
+    else if (gDisableStructs[gBankAttacker].encoredMove != MOVE_NONE
+             && gDisableStructs[gBankAttacker].encoredMove != gBattleMons[gBankAttacker].moves[gDisableStructs[gBankAttacker].encoredMovePos])
+    {
+        gCurrMovePos = gUnknown_02024BE5 = gDisableStructs[gBankAttacker].encoredMovePos;
+        gCurrentMove = gChosenMove = gBattleMons[gBankAttacker].moves[gCurrMovePos];
+        gDisableStructs[gBankAttacker].encoredMove = MOVE_NONE;
+        gDisableStructs[gBankAttacker].encoredMovePos = 0;
+        gDisableStructs[gBankAttacker].encoreTimer1 = 0;
+        ewram16010arr(gBankAttacker) = GetMoveTarget(gCurrentMove, 0);
+    }
+    else if (gBattleMons[gBankAttacker].moves[gCurrMovePos] != gChosenMovesByBanks[gBankAttacker])
+    {
+        gCurrentMove = gChosenMove = gBattleMons[gBankAttacker].moves[gCurrMovePos];
+        ewram16010arr(gBankAttacker) = GetMoveTarget(gCurrentMove, 0);
+    }
+    else
+    {
+        gCurrentMove = gChosenMove = gBattleMons[gBankAttacker].moves[gCurrMovePos];
+    }
+
+    if (GetBankSide(gBankAttacker) == SIDE_PLAYER)
+        gBattleResults.lastUsedMove = gCurrentMove;
+    else
+        gBattleResults.opponentMove = gCurrentMove;
+
+    // choose target
+    side = GetBankSide(gBankAttacker) ^ BIT_SIDE;
+    if (gSideTimers[side].followmeTimer != 0
+        && gBattleMoves[gCurrentMove].target == MOVE_TARGET_SELECTED
+        && GetBankSide(gBankAttacker) != GetBankSide(gSideTimers[side].followmeTarget)
+        && gBattleMons[gSideTimers[side].followmeTarget].hp != 0)
+    {
+        gBankTarget = gSideTimers[side].followmeTarget;
+    }
+    else if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+             && gSideTimers[side].followmeTimer == 0
+             && (gBattleMoves[gCurrentMove].power != 0
+                 || gBattleMoves[gCurrentMove].target != MOVE_TARGET_x10)
+             && gBattleMons[ewram16010arr(gBankAttacker)].ability != ABILITY_LIGHTNING_ROD
+             && gBattleMoves[gCurrentMove].type == TYPE_ELECTRIC)
+    {
+        side = GetBankSide(gBankAttacker);
+        for (gActiveBank = 0; gActiveBank < gNoOfAllBanks; gActiveBank++)
+        {
+            if (side != GetBankSide(gActiveBank)
+                && ewram16010arr(gBankAttacker) != gActiveBank
+                && gBattleMons[gActiveBank].ability == ABILITY_LIGHTNING_ROD
+                && BankGetTurnOrder(gActiveBank) < var)
+            {
+                var = BankGetTurnOrder(gActiveBank);
+            }
+        }
+        if (var == 4)
+        {
+            if (gBattleMoves[gChosenMove].target & MOVE_TARGET_RANDOM)
+            {
+                if (GetBankSide(gBankAttacker) == SIDE_PLAYER)
+                {
+                    if (Random() & 1)
+                        gBankTarget = GetBankByIdentity(IDENTITY_OPPONENT_MON1);
+                    else
+                        gBankTarget = GetBankByIdentity(IDENTITY_OPPONENT_MON2);
+                }
+                else
+                {
+                    if (Random() & 1)
+                        gBankTarget = GetBankByIdentity(IDENTITY_PLAYER_MON1);
+                    else
+                        gBankTarget = GetBankByIdentity(IDENTITY_PLAYER_MON2);
+                }
+            }
+            else
+            {
+                gBankTarget = ewram16010arr(gBankAttacker);
+            }
+
+            if (gAbsentBankFlags & gBitTable[gBankTarget])
+            {
+                if (GetBankSide(gBankAttacker) != GetBankSide(gBankTarget))
+                {
+                    gBankTarget = GetBankByIdentity(GetBankIdentity(gBankTarget) ^ BIT_MON);
+                }
+                else
+                {
+                    gBankTarget = GetBankByIdentity(GetBankIdentity(gBankAttacker) ^ BIT_SIDE);
+                    if (gAbsentBankFlags & gBitTable[gBankTarget])
+                        gBankTarget = GetBankByIdentity(GetBankIdentity(gBankTarget) ^ BIT_MON);
+                }
+            }
+        }
+        else
+        {
+            gActiveBank = gBanksByTurnOrder[var];
+            RecordAbilityBattle(gActiveBank, gBattleMons[gActiveBank].ability);
+            gSpecialStatuses[gActiveBank].lightningRodRedirected = 1;
+            gBankTarget = gActiveBank;
+        }
+    }
+    else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
+             && gBattleMoves[gChosenMove].target & MOVE_TARGET_RANDOM)
+    {
+        if (GetBankSide(gBankAttacker) == SIDE_PLAYER)
+        {
+            if (Random() & 1)
+                gBankTarget = GetBankByIdentity(IDENTITY_OPPONENT_MON1);
+            else
+                gBankTarget = GetBankByIdentity(IDENTITY_OPPONENT_MON2);
+        }
+        else
+        {
+            if (Random() & 1)
+                gBankTarget = GetBankByIdentity(IDENTITY_PLAYER_MON1);
+            else
+                gBankTarget = GetBankByIdentity(IDENTITY_PLAYER_MON2);
+        }
+
+        if (gAbsentBankFlags & gBitTable[gBankTarget]
+            && GetBankSide(gBankAttacker) != GetBankSide(gBankTarget))
+        {
+            gBankTarget = GetBankByIdentity(GetBankIdentity(gBankTarget) ^ BIT_MON);
+        }
+    }
+    else
+    {
+        gBankTarget = ewram16010arr(gBankAttacker);
+        if (gAbsentBankFlags & gBitTable[gBankTarget])
+        {
+            if (GetBankSide(gBankAttacker) != GetBankSide(gBankTarget))
+            {
+                gBankTarget = GetBankByIdentity(GetBankIdentity(gBankTarget) ^ BIT_MON);
+            }
+            else
+            {
+                gBankTarget = GetBankByIdentity(GetBankIdentity(gBankAttacker) ^ BIT_SIDE);
+                if (gAbsentBankFlags & gBitTable[gBankTarget])
+                    gBankTarget = GetBankByIdentity(GetBankIdentity(gBankTarget) ^ BIT_MON);
+            }
+        }
+    }
+
+    gBattlescriptCurrInstr = gBattleScriptsForMoveEffects[gBattleMoves[gCurrentMove].effect];
+    gCurrentActionFuncId = ACTION_RUN_BATTLESCRIPT;
+}
+
+void HandleAction_Switch(void)
+{
+    gBankAttacker = gBanksByTurnOrder[gCurrentTurnActionNumber];
+    gBattle_BG0_X = 0;
+    gBattle_BG0_Y = 0;
+    gActionSelectionCursor[gBankAttacker] = 0;
+    gMoveSelectionCursor[gBankAttacker] = 0;
+
+    PREPARE_MON_NICK_BUFFER(gBattleTextBuff1, gBankAttacker, ewram16064arr(gBankAttacker))
+
+    ewram16003 = gBankAttacker;
+    gBattlescriptCurrInstr = BattleScript_ActionSwitch;
+    gCurrentActionFuncId = ACTION_RUN_BATTLESCRIPT;
+
+    if (gBattleResults.unk2 < 255)
+        gBattleResults.unk2++;
+}
+
+#ifdef NONMATCHING
+void HandleAction_UseItem(void)
+{
+    gBankAttacker = gBankTarget = gBanksByTurnOrder[gCurrentTurnActionNumber];
+    gBattle_BG0_X = 0;
+    gBattle_BG0_Y = 0;
+    gDisableStructs[gBankAttacker].furyCutterCounter = 0;
+    gLastUsedItem = gBattleBufferB[gBankAttacker][1] | (gBattleBufferB[gBankAttacker][2] << 8);
+
+    if (gLastUsedItem <= ITEM_PREMIER_BALL) // is ball
+    {
+        gBattlescriptCurrInstr = gBattlescriptsForBallThrow[gLastUsedItem];
+    }
+    else if (gLastUsedItem == ITEM_POKE_DOLL || gLastUsedItem == ITEM_FLUFFY_TAIL)
+    {
+        gBattlescriptCurrInstr = gBattlescriptsForRunningByItem[0];
+    }
+    else if (GetBankSide(gBankAttacker) == SIDE_PLAYER)
+    {
+        gBattlescriptCurrInstr = gBattlescriptsForUsingItem[0];
+    }
+    else
+    {
+        ewram16003 = gBankAttacker;
+
+        switch (ewram160D8(gBankAttacker))
+        {
+        case AI_ITEM_FULL_RESTORE:
+        case AI_ITEM_HEAL_HP:
+            break;
+        case AI_ITEM_CURE_CONDITION:
+            gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+            if (ewram160DA(gBankAttacker) & 1)
+            {
+                if (ewram160DA(gBankAttacker) & 0x3E)
+                    gBattleCommunication[MULTISTRING_CHOOSER] = 5;
+            }
+            else
+            {
+                while (!(ewram160DA(gBankAttacker) & 1))
+                {
+                    ewram160DA(gBankAttacker) /= 2;
+                    gBattleCommunication[MULTISTRING_CHOOSER]++;
+                }
+            }
+            break;
+        case AI_ITEM_X_STAT:
+            gBattleCommunication[MULTISTRING_CHOOSER] = 4;
+            if (ewram160DA(gBankAttacker) & 0x80)
+            {
+                gBattleCommunication[MULTISTRING_CHOOSER] = 5;
+            }
+            else
+            {
+                PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_ATK)
+                PREPARE_STRING_BUFFER(gBattleTextBuff2, 0xD2)
+
+                while (!(ewram160DA(gBankAttacker) & 1))
+                {
+                    ewram160DA(gBankAttacker) /= 2;
+                    gBattleTextBuff1[2]++;
+                }
+
+                ewram160A4 = gBattleTextBuff1[2] + 14;
+                ewram160A5 = 0;
+            }
+            break;
+        case AI_ITEM_GUARD_SPECS:
+            if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+                gBattleCommunication[MULTISTRING_CHOOSER] = 2;
+            else
+                gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+            break;
+        }
+
+        gBattlescriptCurrInstr = gBattlescriptsForUsingItem[ewram160D8(gBankAttacker)];
+    }
+    gCurrentActionFuncId = ACTION_RUN_BATTLESCRIPT;
+}
+#else
+__attribute__((naked))
+void HandleAction_UseItem(void)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    ldr r4, _08014804 @ =gBankAttacker\n\
+    ldr r2, _08014808 @ =gBankTarget\n\
+    ldr r1, _0801480C @ =gBanksByTurnOrder\n\
+    ldr r0, _08014810 @ =gCurrentTurnActionNumber\n\
+    ldrb r0, [r0]\n\
+    adds r0, r1\n\
+    ldrb r0, [r0]\n\
+    strb r0, [r2]\n\
+    strb r0, [r4]\n\
+    ldr r0, _08014814 @ =gBattle_BG0_X\n\
+    movs r2, 0\n\
+    strh r2, [r0]\n\
+    ldr r0, _08014818 @ =gBattle_BG0_Y\n\
+    strh r2, [r0]\n\
+    ldr r3, _0801481C @ =gDisableStructs\n\
+    ldrb r1, [r4]\n\
+    lsls r0, r1, 3\n\
+    subs r0, r1\n\
+    lsls r0, 2\n\
+    adds r0, r3\n\
+    strb r2, [r0, 0x10]\n\
+    ldr r5, _08014820 @ =gLastUsedItem\n\
+    ldr r2, _08014824 @ =gBattleBufferB\n\
+    ldrb r1, [r4]\n\
+    lsls r1, 9\n\
+    adds r0, r2, 0x1\n\
+    adds r0, r1, r0\n\
+    ldrb r3, [r0]\n\
+    adds r2, 0x2\n\
+    adds r1, r2\n\
+    ldrb r0, [r1]\n\
+    lsls r0, 8\n\
+    orrs r3, r0\n\
+    strh r3, [r5]\n\
+    cmp r3, 0xC\n\
+    bhi _08014830\n\
+    ldr r2, _08014828 @ =gBattlescriptCurrInstr\n\
+    ldr r1, _0801482C @ =gBattlescriptsForBallThrow\n\
+    ldrh r0, [r5]\n\
+    lsls r0, 2\n\
+    adds r0, r1\n\
+    ldr r0, [r0]\n\
+    str r0, [r2]\n\
+    b _08014A8C\n\
+    .align 2, 0\n\
+_08014804: .4byte gBankAttacker\n\
+_08014808: .4byte gBankTarget\n\
+_0801480C: .4byte gBanksByTurnOrder\n\
+_08014810: .4byte gCurrentTurnActionNumber\n\
+_08014814: .4byte gBattle_BG0_X\n\
+_08014818: .4byte gBattle_BG0_Y\n\
+_0801481C: .4byte gDisableStructs\n\
+_08014820: .4byte gLastUsedItem\n\
+_08014824: .4byte gBattleBufferB\n\
+_08014828: .4byte gBattlescriptCurrInstr\n\
+_0801482C: .4byte gBattlescriptsForBallThrow\n\
+_08014830:\n\
+    adds r0, r3, 0\n\
+    subs r0, 0x50\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+    cmp r0, 0x1\n\
+    bhi _0801484C\n\
+    ldr r0, _08014844 @ =gBattlescriptCurrInstr\n\
+    ldr r1, _08014848 @ =gBattlescriptsForRunningByItem\n\
+    b _0801485C\n\
+    .align 2, 0\n\
+_08014844: .4byte gBattlescriptCurrInstr\n\
+_08014848: .4byte gBattlescriptsForRunningByItem\n\
+_0801484C:\n\
+    ldrb r0, [r4]\n\
+    bl GetBankSide\n\
+    lsls r0, 24\n\
+    cmp r0, 0\n\
+    bne _0801486C\n\
+    ldr r0, _08014864 @ =gBattlescriptCurrInstr\n\
+    ldr r1, _08014868 @ =gBattlescriptsForUsingItem\n\
+_0801485C:\n\
+    ldr r1, [r1]\n\
+    str r1, [r0]\n\
+    b _08014A8C\n\
+    .align 2, 0\n\
+_08014864: .4byte gBattlescriptCurrInstr\n\
+_08014868: .4byte gBattlescriptsForUsingItem\n\
+_0801486C:\n\
+    ldr r2, _080148A0 @ =gSharedMem\n\
+    ldrb r0, [r4]\n\
+    ldr r3, _080148A4 @ =0x00016003\n\
+    adds r1, r2, r3\n\
+    strb r0, [r1]\n\
+    lsls r0, 24\n\
+    lsrs r0, 25\n\
+    ldr r1, _080148A8 @ =0x000160d8\n\
+    adds r0, r1\n\
+    adds r0, r2\n\
+    ldrb r0, [r0]\n\
+    subs r0, 0x1\n\
+    mov r8, r4\n\
+    ldr r3, _080148AC @ =gBattlescriptCurrInstr\n\
+    mov r9, r3\n\
+    ldr r1, _080148B0 @ =gBattlescriptsForUsingItem\n\
+    mov r10, r1\n\
+    adds r7, r2, 0\n\
+    cmp r0, 0x4\n\
+    bls _08014896\n\
+    b _08014A74\n\
+_08014896:\n\
+    lsls r0, 2\n\
+    ldr r1, _080148B4 @ =_080148B8\n\
+    adds r0, r1\n\
+    ldr r0, [r0]\n\
+    mov pc, r0\n\
+    .align 2, 0\n\
+_080148A0: .4byte gSharedMem\n\
+_080148A4: .4byte 0x00016003\n\
+_080148A8: .4byte 0x000160d8\n\
+_080148AC: .4byte gBattlescriptCurrInstr\n\
+_080148B0: .4byte gBattlescriptsForUsingItem\n\
+_080148B4: .4byte _080148B8\n\
+    .align 2, 0\n\
+_080148B8:\n\
+    .4byte _08014A74\n\
+    .4byte _08014A74\n\
+    .4byte _080148CC\n\
+    .4byte _08014958\n\
+    .4byte _08014A30\n\
+_080148CC:\n\
+    ldr r2, _08014904 @ =gBattleCommunication\n\
+    movs r0, 0\n\
+    strb r0, [r2, 0x5]\n\
+    ldr r1, _08014908 @ =gBankAttacker\n\
+    ldrb r0, [r1]\n\
+    lsrs r0, 1\n\
+    ldr r6, _0801490C @ =0x000160da\n\
+    adds r0, r6\n\
+    adds r0, r7\n\
+    ldrb r3, [r0]\n\
+    movs r0, 0x1\n\
+    ands r0, r3\n\
+    mov r8, r1\n\
+    cmp r0, 0\n\
+    beq _08014918\n\
+    movs r0, 0x3E\n\
+    ands r0, r3\n\
+    ldr r3, _08014910 @ =gBattlescriptCurrInstr\n\
+    mov r9, r3\n\
+    ldr r1, _08014914 @ =gBattlescriptsForUsingItem\n\
+    mov r10, r1\n\
+    cmp r0, 0\n\
+    bne _080148FC\n\
+    b _08014A74\n\
+_080148FC:\n\
+    movs r0, 0x5\n\
+    strb r0, [r2, 0x5]\n\
+    b _08014A74\n\
+    .align 2, 0\n\
+_08014904: .4byte gBattleCommunication\n\
+_08014908: .4byte gBankAttacker\n\
+_0801490C: .4byte 0x000160da\n\
+_08014910: .4byte gBattlescriptCurrInstr\n\
+_08014914: .4byte gBattlescriptsForUsingItem\n\
+_08014918:\n\
+    ldr r3, _08014950 @ =gBattlescriptCurrInstr\n\
+    mov r9, r3\n\
+    ldr r0, _08014954 @ =gBattlescriptsForUsingItem\n\
+    mov r10, r0\n\
+    adds r5, r7, 0\n\
+    mov r4, r8\n\
+    adds r3, r6, 0\n\
+_08014926:\n\
+    ldrb r0, [r4]\n\
+    lsrs r0, 1\n\
+    adds r0, r3\n\
+    adds r0, r5\n\
+    ldrb r1, [r0]\n\
+    lsrs r1, 1\n\
+    strb r1, [r0]\n\
+    ldrb r0, [r2, 0x5]\n\
+    adds r0, 0x1\n\
+    strb r0, [r2, 0x5]\n\
+    ldrb r0, [r4]\n\
+    lsrs r0, 1\n\
+    adds r0, r3\n\
+    adds r0, r5\n\
+    ldrb r1, [r0]\n\
+    movs r0, 0x1\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _08014926\n\
+    b _08014A74\n\
+    .align 2, 0\n\
+_08014950: .4byte gBattlescriptCurrInstr\n\
+_08014954: .4byte gBattlescriptsForUsingItem\n\
+_08014958:\n\
+    ldr r3, _0801498C @ =gBattleCommunication\n\
+    movs r0, 0x4\n\
+    strb r0, [r3, 0x5]\n\
+    ldr r2, _08014990 @ =gBankAttacker\n\
+    ldrb r0, [r2]\n\
+    lsrs r0, 1\n\
+    ldr r1, _08014994 @ =0x000160da\n\
+    mov r12, r1\n\
+    add r0, r12\n\
+    adds r6, r0, r7\n\
+    ldrb r1, [r6]\n\
+    movs r0, 0x80\n\
+    ands r0, r1\n\
+    lsls r0, 24\n\
+    lsrs r5, r0, 24\n\
+    mov r8, r2\n\
+    cmp r5, 0\n\
+    beq _080149A0\n\
+    movs r0, 0x5\n\
+    strb r0, [r3, 0x5]\n\
+    ldr r2, _08014998 @ =gBattlescriptCurrInstr\n\
+    mov r9, r2\n\
+    ldr r3, _0801499C @ =gBattlescriptsForUsingItem\n\
+    mov r10, r3\n\
+    b _08014A74\n\
+    .align 2, 0\n\
+_0801498C: .4byte gBattleCommunication\n\
+_08014990: .4byte gBankAttacker\n\
+_08014994: .4byte 0x000160da\n\
+_08014998: .4byte gBattlescriptCurrInstr\n\
+_0801499C: .4byte gBattlescriptsForUsingItem\n\
+_080149A0:\n\
+    ldr r3, _08014A18 @ =gBattleTextBuff1\n\
+    movs r4, 0xFD\n\
+    strb r4, [r3]\n\
+    movs r0, 0x5\n\
+    strb r0, [r3, 0x1]\n\
+    movs r2, 0x1\n\
+    strb r2, [r3, 0x2]\n\
+    movs r0, 0xFF\n\
+    strb r0, [r3, 0x3]\n\
+    ldr r1, _08014A1C @ =gBattleTextBuff2\n\
+    strb r4, [r1]\n\
+    strb r5, [r1, 0x1]\n\
+    movs r0, 0xD2\n\
+    strb r0, [r1, 0x2]\n\
+    strb r5, [r1, 0x3]\n\
+    subs r0, 0xD3\n\
+    strb r0, [r1, 0x4]\n\
+    ldrb r0, [r6]\n\
+    ands r2, r0\n\
+    ldr r0, _08014A20 @ =gBattlescriptCurrInstr\n\
+    mov r9, r0\n\
+    ldr r1, _08014A24 @ =gBattlescriptsForUsingItem\n\
+    mov r10, r1\n\
+    adds r6, r3, 0\n\
+    cmp r2, 0\n\
+    bne _08014A02\n\
+    adds r3, r7, 0\n\
+    mov r5, r8\n\
+    mov r4, r12\n\
+    adds r2, r6, 0\n\
+_080149DC:\n\
+    ldrb r0, [r5]\n\
+    lsrs r0, 1\n\
+    adds r0, r4\n\
+    adds r0, r3\n\
+    ldrb r1, [r0]\n\
+    lsrs r1, 1\n\
+    strb r1, [r0]\n\
+    ldrb r0, [r2, 0x2]\n\
+    adds r0, 0x1\n\
+    strb r0, [r2, 0x2]\n\
+    ldrb r0, [r5]\n\
+    lsrs r0, 1\n\
+    adds r0, r4\n\
+    adds r0, r3\n\
+    ldrb r1, [r0]\n\
+    movs r0, 0x1\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _080149DC\n\
+_08014A02:\n\
+    ldrb r0, [r6, 0x2]\n\
+    adds r0, 0xE\n\
+    ldr r2, _08014A28 @ =0x000160a4\n\
+    adds r1, r7, r2\n\
+    movs r2, 0\n\
+    strb r0, [r1]\n\
+    ldr r3, _08014A2C @ =0x000160a5\n\
+    adds r0, r7, r3\n\
+    strb r2, [r0]\n\
+    b _08014A74\n\
+    .align 2, 0\n\
+_08014A18: .4byte gBattleTextBuff1\n\
+_08014A1C: .4byte gBattleTextBuff2\n\
+_08014A20: .4byte gBattlescriptCurrInstr\n\
+_08014A24: .4byte gBattlescriptsForUsingItem\n\
+_08014A28: .4byte 0x000160a4\n\
+_08014A2C: .4byte 0x000160a5\n\
+_08014A30:\n\
+    ldr r0, _08014A50 @ =gBattleTypeFlags\n\
+    ldrh r0, [r0]\n\
+    movs r1, 0x1\n\
+    ands r1, r0\n\
+    cmp r1, 0\n\
+    beq _08014A64\n\
+    ldr r1, _08014A54 @ =gBattleCommunication\n\
+    movs r0, 0x2\n\
+    strb r0, [r1, 0x5]\n\
+    ldr r0, _08014A58 @ =gBankAttacker\n\
+    mov r8, r0\n\
+    ldr r1, _08014A5C @ =gBattlescriptCurrInstr\n\
+    mov r9, r1\n\
+    ldr r2, _08014A60 @ =gBattlescriptsForUsingItem\n\
+    mov r10, r2\n\
+    b _08014A74\n\
+    .align 2, 0\n\
+_08014A50: .4byte gBattleTypeFlags\n\
+_08014A54: .4byte gBattleCommunication\n\
+_08014A58: .4byte gBankAttacker\n\
+_08014A5C: .4byte gBattlescriptCurrInstr\n\
+_08014A60: .4byte gBattlescriptsForUsingItem\n\
+_08014A64:\n\
+    ldr r0, _08014AA0 @ =gBattleCommunication\n\
+    strb r1, [r0, 0x5]\n\
+    ldr r3, _08014AA4 @ =gBankAttacker\n\
+    mov r8, r3\n\
+    ldr r0, _08014AA8 @ =gBattlescriptCurrInstr\n\
+    mov r9, r0\n\
+    ldr r1, _08014AAC @ =gBattlescriptsForUsingItem\n\
+    mov r10, r1\n\
+_08014A74:\n\
+    mov r2, r8\n\
+    ldrb r0, [r2]\n\
+    lsrs r0, 1\n\
+    ldr r3, _08014AB0 @ =0x000160d8\n\
+    adds r0, r3\n\
+    adds r0, r7\n\
+    ldrb r0, [r0]\n\
+    lsls r0, 2\n\
+    add r0, r10\n\
+    ldr r0, [r0]\n\
+    mov r1, r9\n\
+    str r0, [r1]\n\
+_08014A8C:\n\
+    movs r0, 0xA\n\
+    ldr r2, _08014AB4 @ =gCurrentActionFuncId\n\
+    strb r0, [r2]\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
+_08014AA0: .4byte gBattleCommunication\n\
+_08014AA4: .4byte gBankAttacker\n\
+_08014AA8: .4byte gBattlescriptCurrInstr\n\
+_08014AAC: .4byte gBattlescriptsForUsingItem\n\
+_08014AB0: .4byte 0x000160d8\n\
+_08014AB4: .4byte gCurrentActionFuncId\n\
+    .syntax divided\n");
+}
+#endif // NONMATCHING
+
+bool8 TryRunFromBattle(u8 bank)
+{
+    bool8 effect = FALSE;
+    u8 holdEffect;
+    u8 speedVar;
+
+    if (gBattleMons[bank].item == ITEM_ENIGMA_BERRY)
+        holdEffect = gEnigmaBerries[bank].holdEffect;
+    else
+        holdEffect = ItemId_GetHoldEffect(gBattleMons[bank].item);
+
+    gStringBank = bank;
+
+    if (holdEffect == HOLD_EFFECT_CAN_ALWAYS_RUN)
+    {
+        gLastUsedItem = gBattleMons[bank].item ;
+        gProtectStructs[bank].fleeFlag = 1;
+        effect++;
+    }
+    else if (gBattleMons[bank].ability == ABILITY_RUN_AWAY)
+    {
+        gLastUsedAbility = ABILITY_RUN_AWAY;
+        gProtectStructs[bank].fleeFlag = 2;
+        effect++;
+    }
+    else
+    {
+        if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
+        {
+            if (gBattleMons[bank].speed < gBattleMons[bank ^ BIT_SIDE].speed)
+            {
+                speedVar = (gBattleMons[bank].speed * 128) / (gBattleMons[bank ^ BIT_SIDE].speed) + (ewram16078 * 30);
+                if (speedVar > (Random() & 0xFF))
+                    effect++;
+            }
+            else // same speed or faster
+            {
+                effect++;
+            }
+        }
+
+        ewram16078++;
+    }
+
+    if (effect)
+    {
+        gCurrentTurnActionNumber = gNoOfAllBanks;
+        gBattleOutcome = BATTLE_RAN;
+    }
+
+    return effect;
+}
+
+void HandleAction_Run(void)
+{
+    gBankAttacker = gBanksByTurnOrder[gCurrentTurnActionNumber];
+
+    if (gBattleTypeFlags & BATTLE_TYPE_LINK)
+    {
+        gCurrentTurnActionNumber = gNoOfAllBanks;
+
+        for (gActiveBank = 0; gActiveBank < gNoOfAllBanks; gActiveBank++)
+        {
+            if (GetBankSide(gActiveBank) == SIDE_PLAYER)
+            {
+                if (gActionForBanks[gActiveBank] == ACTION_RUN)
+                    gBattleOutcome |= BATTLE_LOST;
+            }
+            else
+            {
+                if (gActionForBanks[gActiveBank] == ACTION_RUN)
+                    gBattleOutcome |= BATTLE_WON;
+            }
+        }
+
+        gBattleOutcome |= OUTCOME_LINK_BATTLE_RUN;
+    }
+    else
+    {
+        if (GetBankSide(gBankAttacker) == SIDE_PLAYER)
+        {
+            if (!TryRunFromBattle(gBankAttacker)) // failed to run away
+            {
+                gBattleMons[gBankAttacker].status2 &= ~STATUS2_DESTINY_BOND;
+                gBattleCommunication[MULTISTRING_CHOOSER] = 3;
+                gBattlescriptCurrInstr = BattleScript_PrintFailedToRunString;
+                gCurrentActionFuncId = ACTION_RUN_BATTLESCRIPT;
+            }
+        }
+        else
+        {
+            if (gBattleMons[gBankAttacker].status2 & (STATUS2_WRAPPED | STATUS2_ESCAPE_PREVENTION))
+            {
+                gBattleCommunication[MULTISTRING_CHOOSER] = 4;
+                gBattlescriptCurrInstr = BattleScript_PrintFailedToRunString;
+                gCurrentActionFuncId = ACTION_RUN_BATTLESCRIPT;
+            }
+            else
+            {
+                gCurrentTurnActionNumber = gNoOfAllBanks;
+                gBattleOutcome = BATTLE_POKE_FLED;
+            }
+        }
+    }
+}
+
+void HandleAction_WatchesCarefully(void)
+{
+    gBankAttacker = gBanksByTurnOrder[gCurrentTurnActionNumber];
+    gBattle_BG0_X = 0;
+    gBattle_BG0_Y = 0;
+    gBattlescriptCurrInstr = gBattlescriptsForSafariActions[0];
+    gCurrentActionFuncId = ACTION_RUN_BATTLESCRIPT;
+}
+
+void HandleAction_SafariZoneBallThrow(void)
+{
+    gBankAttacker = gBanksByTurnOrder[gCurrentTurnActionNumber];
+    gBattle_BG0_X = 0;
+    gBattle_BG0_Y = 0;
+    gNumSafariBalls--;
+    gLastUsedItem = ITEM_SAFARI_BALL;
+    gBattlescriptCurrInstr = gBattlescriptsForBallThrow[ITEM_SAFARI_BALL];
+    gCurrentActionFuncId = ACTION_RUN_BATTLESCRIPT;
+}
+
+void HandleAction_ThrowPokeblock(void)
+{
+    gBankAttacker = gBanksByTurnOrder[gCurrentTurnActionNumber];
+    gBattle_BG0_X = 0;
+    gBattle_BG0_Y = 0;
+    gBattleCommunication[MULTISTRING_CHOOSER] = gBattleBufferB[gBankAttacker][1] - 1;
+    gLastUsedItem = gBattleBufferB[gBankAttacker][2];
+
+    if (ewram16087 < 3)
+        ewram16087++;
+    if (ewram16088 > 1)
+    {
+        if (ewram16088 < gUnknown_081FA70C[ewram16087][gBattleCommunication[MULTISTRING_CHOOSER]])
+            ewram16088 = 1;
+        else
+            ewram16088 -= gUnknown_081FA70C[ewram16087][gBattleCommunication[MULTISTRING_CHOOSER]];
+    }
+
+    gBattlescriptCurrInstr = gBattlescriptsForSafariActions[2];
+    gCurrentActionFuncId = ACTION_RUN_BATTLESCRIPT;
+}
+
+void HandleAction_GoNear(void)
+{
+    gBankAttacker = gBanksByTurnOrder[gCurrentTurnActionNumber];
+    gBattle_BG0_X = 0;
+    gBattle_BG0_Y = 0;
+
+    ewram16089 += gUnknown_081FA71B[ewram16086];
+    if (ewram16089 > 20)
+        ewram16089 = 20;
+
+    ewram16088 += gUnknown_081FA71F[ewram16086];
+    if (ewram16088 > 20)
+        ewram16088 = 20;
+
+    if (ewram16086 < 3)
+    {
+        ewram16086++;
+        gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+    }
+    else
+    {
+        gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+    }
+    gBattlescriptCurrInstr = gBattlescriptsForSafariActions[1];
+    gCurrentActionFuncId = ACTION_RUN_BATTLESCRIPT;
+}
+
+void HandleAction_SafriZoneRun(void)
+{
+    gBankAttacker = gBanksByTurnOrder[gCurrentTurnActionNumber];
+    PlaySE(SE_NIGERU);
+    gCurrentTurnActionNumber = gNoOfAllBanks;
+    gBattleOutcome = BATTLE_RAN;
+}
+
+void HandleAction_Action9(void)
+{
+    gBankAttacker = gBanksByTurnOrder[gCurrentTurnActionNumber];
+    gBattle_BG0_X = 0;
+    gBattle_BG0_Y = 0;
+
+    PREPARE_MON_NICK_BUFFER(gBattleTextBuff1, gBankAttacker, gBattlePartyID[gBankAttacker])
+
+    gBattlescriptCurrInstr = gBattlescriptsForSafariActions[3];
+    gCurrentActionFuncId = ACTION_RUN_BATTLESCRIPT;
+    gActionsByTurnOrder[1] = ACTION_FINISHED;
+}
+
+void HandleAction_Action11(void)
+{
+    if (!HandleFaintedMonActions())
+    {
+        ewram16059 = 0;
+        gCurrentActionFuncId = ACTION_FINISHED;
+    }
+}
+
+void HandleAction_NothingIsFainted(void)
+{
+    gCurrentTurnActionNumber++;
+    gCurrentActionFuncId = gActionsByTurnOrder[gCurrentTurnActionNumber];
+    gHitMarker &= ~(HITMARKER_DESTINYBOND | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_ATTACKSTRING_PRINTED
+                    | HITMARKER_NO_PPDEDUCT | HITMARKER_IGNORE_SAFEGUARD | HITMARKER_IGNORE_ON_AIR
+                    | HITMARKER_IGNORE_UNDERGROUND | HITMARKER_IGNORE_UNDERWATER | HITMARKER_x100000
+                    | HITMARKER_OBEYS | HITMARKER_x10 | HITMARKER_SYNCHRONISE_EFFECT
+                    | HITMARKER_x8000000 | HITMARKER_x4000000);
+}
+
+void HandleAction_ActionFinished(void)
+{
+    gCurrentTurnActionNumber++;
+    gCurrentActionFuncId = gActionsByTurnOrder[gCurrentTurnActionNumber];
+    SpecialStatusesClear();
+    gHitMarker &= ~(HITMARKER_DESTINYBOND | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_ATTACKSTRING_PRINTED
+                    | HITMARKER_NO_PPDEDUCT | HITMARKER_IGNORE_SAFEGUARD | HITMARKER_IGNORE_ON_AIR
+                    | HITMARKER_IGNORE_UNDERGROUND | HITMARKER_IGNORE_UNDERWATER | HITMARKER_x100000
+                    | HITMARKER_OBEYS | HITMARKER_x10 | HITMARKER_SYNCHRONISE_EFFECT
+                    | HITMARKER_x8000000 | HITMARKER_x4000000);
+
+    gBattleMoveDamage = 0;
+    ewram16002 = 0;
+    ewram160A1 = 0;
+    gMoveHitWith[gBankAttacker] = 0;
+    gUnknown_02024C44[gBankAttacker] = 0;
+    eDynamicMoveType = 0;
+    gDynamicBasePower = 0;
+    ewram1600C = 0;
+    gBattleCommunication[3] = 0;
+    gBattleCommunication[4] = 0;
+    eMultihitMoveEffect = 0;
+    ewram17130 = 0;
 }

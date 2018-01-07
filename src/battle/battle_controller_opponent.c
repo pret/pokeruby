@@ -50,8 +50,8 @@ extern u8 gAnimMoveTurn;
 extern u8 gAnimScriptActive;
 extern void (*gAnimScriptCallback)(void);
 extern struct Window gUnknown_03004210;
-extern u16 gUnknown_030042A0;
-extern u16 gUnknown_030042A4;
+extern u16 gBattle_BG0_Y;
+extern u16 gBattle_BG0_X;
 extern u8 gDisplayedStringBattle[];
 extern u8 gBankTarget;
 extern u8 gAbsentBankFlags;
@@ -1404,8 +1404,8 @@ void sub_8035238(void)
 
 void OpponentHandlePrintString(void)
 {
-    gUnknown_030042A4 = 0;
-    gUnknown_030042A0 = 0;
+    gBattle_BG0_X = 0;
+    gBattle_BG0_Y = 0;
     BufferStringBattle(*(u16 *)&gBattleBufferA[gActiveBank][2]);
     sub_8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
     gBattleBankFunc[gActiveBank] = sub_80331D0;

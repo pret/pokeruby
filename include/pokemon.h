@@ -363,6 +363,16 @@ enum
     STAT_STAGE_EVASION,  // 7
 };
 
+enum
+{
+    STAT_HP,     // 0
+    STAT_ATK,    // 1
+    STAT_DEF,    // 2
+    STAT_SPD,    // 3
+    STAT_SPATK,  // 4
+    STAT_SPDEF,  // 5
+};
+
 struct BaseStats
 {
     /*0x00*/ u8 baseHP;
@@ -613,6 +623,8 @@ bool8 IsPokeSpriteNotFlipped(u16);
 u8 GetLevelUpMovesBySpecies(u16, u16 *);
 u8 TryIncrementMonLevel(struct Pokemon *);
 bool8 IsShiny(struct Pokemon *mon);
+void RandomlyGivePartyPokerus(struct Pokemon *party);
+void PartySpreadPokerus(struct Pokemon *party);
 
 struct Sprite *sub_80F7920(u16, u16, const u16 *);
 

@@ -227,10 +227,8 @@ struct BattleStruct /* 0x2000000 */
     /*0x160D5*/ u8 unk160D5;
     /*0x160D6*/ u8 unk160D6;
     /*0x160D7*/ u8 unk160D7;
-    /*0x160D8*/ u8 unk160D8;
-    /*0x160D9*/ u8 unk160D9;
-    /*0x160DA*/ u8 unk160DA;
-    /*0x160DB*/ u8 unk160DB;
+    /*0x160D8*/ u8 unk160D8[2];
+    /*0x160DA*/ u8 unk160DA[2];
     /*0x160DC*/ u8 unk160DC;
     /*0x160DD*/ u8 intimidateBank;
     /*0x160DE*/ u8 unk160DE;
@@ -606,7 +604,7 @@ void InitBattle(void);
 void sub_800EC9C(void);
 void sub_800F104(void);
 void sub_800F298(void);
-void sub_800F808(void);
+void BattleMainCB2(void);
 void sub_800F838(struct Sprite *);
 u8 CreateNPCTrainerParty(struct Pokemon *, u16);
 void sub_800FCFC(void);
@@ -638,6 +636,9 @@ void sub_8011970(void);
 void sub_80119B4(void);
 void BattleBeginFirstTurn(void);
 void BattleTurnPassed(void);
+void RunBattleScriptCommands_PopCallbacksStack(void);
+void RunBattleScriptCommands(void);
+bool8 TryRunFromBattle(u8 bank);
 
 // asm/battle_2.o
 void sub_8012324(void);
@@ -654,14 +655,16 @@ u8 CheckMoveLimitations(u8 bank, u8 unusableMoves, u8 check);
 u8 UpdateTurnCounters(void);
 u8 TurnBasedEffects(void);
 u8 sub_80170DC();
-u8 sub_80173A4();
+u8 HandleFaintedMonActions();
 u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 move);
 u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn);
 void b_clear_atk_up_if_hit_flag_unless_enraged(void);
+u8 GetMoveTarget(u16 move, u8 useMoveTarget);
 
 // asm/battle_4.o
 void AI_CalcDmg(u8, u8);
 u8 TypeCalc(u16 move, u8 bank_atk, u8 bank_def);
+u8 BankGetTurnOrder(u8 bank);
 
 // asm/battle_5.o
 void nullsub_91(void);

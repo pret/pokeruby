@@ -35,8 +35,8 @@ struct MovePpInfo
 #define SUB_803037C_TILE_DATA_OFFSET 444
 #endif
 
-extern u16 gUnknown_030042A4;
-extern u16 gUnknown_030042A0;
+extern u16 gBattle_BG0_X;
+extern u16 gBattle_BG0_Y;
 
 extern struct Window gUnknown_03004210;
 
@@ -72,7 +72,7 @@ extern u16 gBattle_BG1_Y;
 extern u16 gUnknown_030041B8;
 extern u16 gBattle_BG2_Y;
 extern u16 gBattle_BG2_X;
-extern u16 gUnknown_030042A4;
+extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG1_X;
 extern u8 gUnknown_03004344;
 extern u8 gUnknown_0300434C[];
@@ -148,8 +148,8 @@ extern u8 gAbsentBankFlags;
 extern u8 gUnknown_03004344;
 extern u8 gNoOfAllBanks;
 extern u16 gBattlePartyID[];
-extern u16 gUnknown_030042A0;
-extern u16 gUnknown_030042A4;
+extern u16 gBattle_BG0_Y;
+extern u16 gBattle_BG0_X;
 extern struct Window gUnknown_03004210;
 extern const u8 BattleText_SwitchWhich[];
 extern u8 gUnknown_03004348;
@@ -679,8 +679,8 @@ void sub_802C68C(void)
     {
         DestroyMenuCursor();
         PlaySE(SE_SELECT);
-        gUnknown_030042A4 = 0;
-        gUnknown_030042A0 = 320;
+        gBattle_BG0_X = 0;
+        gBattle_BG0_Y = 320;
         Emitcmd33(1, 10, 0xFFFF);
         PlayerBufferExecCompleted();
     }
@@ -1495,7 +1495,7 @@ void sub_802DF30(void)
 
 void sub_802DF88(void)
 {
-    if (gMain.callback2 == sub_800F808 && !gPaletteFade.active)
+    if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
     {
         if (gUnknown_0202E8F4 == 1)
             Emitcmd34(1, gUnknown_0202E8F5, gUnknown_02038470);
@@ -1519,7 +1519,7 @@ void sub_802E004(void)
 
 void sub_802E03C(void)
 {
-    if (gMain.callback2 == sub_800F808 && !gPaletteFade.active)
+    if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
     {
         Emitcmd35(1, gSpecialVar_ItemId);
         PlayerBufferExecCompleted();
@@ -1695,8 +1695,8 @@ void b_link_standby_message(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
     {
-        gUnknown_030042A4 = 0;
-        gUnknown_030042A0 = 0;
+        gBattle_BG0_X = 0;
+        gBattle_BG0_Y = 0;
         sub_8002EB0(&gUnknown_03004210, BattleText_LinkStandby, 0x90, 2, 15);
     }
 }
@@ -2559,8 +2559,8 @@ void sub_8030190(void)
 
 void PlayerHandlePrintString(void)
 {
-    gUnknown_030042A4 = 0;
-    gUnknown_030042A0 = 0;
+    gBattle_BG0_X = 0;
+    gBattle_BG0_Y = 0;
     BufferStringBattle(*(u16 *)&gBattleBufferA[gActiveBank][2]);
     sub_8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 0x90, 2, 15);
     gBattleBankFunc[gActiveBank] = sub_802DF18;
@@ -2578,8 +2578,8 @@ void PlayerHandlecmd18(void)
 {
     int r4;
 
-    gUnknown_030042A4 = 0;
-    gUnknown_030042A0 = 160;
+    gBattle_BG0_X = 0;
+    gBattle_BG0_Y = 160;
     FillWindowRect(&gUnknown_03004210, 10, 2, 15, 27, 18);
     FillWindowRect(&gUnknown_03004210, 10, 2, 35, 16, 38);
 
@@ -2612,8 +2612,8 @@ void PlayerHandlecmd20(void)
 
 void sub_80304A8(void)
 {
-    gUnknown_030042A4 = 0;
-    gUnknown_030042A0 = 320;
+    gBattle_BG0_X = 0;
+    gBattle_BG0_Y = 320;
     sub_802E1B0();
     gUnknown_03004344 = 0xFF;
     sub_802E3B4(gMoveSelectionCursor[gActiveBank], 0);

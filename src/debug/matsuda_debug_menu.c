@@ -29,8 +29,8 @@ extern u8 gContestPlayerMonIndex;
 extern u16 gSpecialVar_ContestCategory;
 extern u16 gSpecialVar_ContestRank;
 
-extern u16 gUnknown_030042A4;
-extern u16 gUnknown_030042A0;
+extern u16 gBattle_BG0_X;
+extern u16 gBattle_BG0_Y;
 extern u16 gBattle_BG1_X;
 extern u16 gBattle_BG1_Y;
 extern u16 gBattle_BG2_X;
@@ -457,8 +457,8 @@ static void sub_80A9F50(void)
     REG_BLDY = 0;
     REG_BG0HOFS = 0;
     REG_BG0VOFS = 0;
-    gUnknown_030042A4 = 0;
-    gUnknown_030042A0 = 0;
+    gBattle_BG0_X = 0;
+    gBattle_BG0_Y = 0;
     gBattle_BG1_X = 0;
     gBattle_BG1_Y = 0;
     gBattle_BG2_X = 0;
@@ -505,8 +505,8 @@ static void sub_80AA064(void)
 
 static void sub_80AA090(void)
 {
-    REG_BG0HOFS = gUnknown_030042A4;
-    REG_BG0VOFS = gUnknown_030042A0;
+    REG_BG0HOFS = gBattle_BG0_X;
+    REG_BG0VOFS = gBattle_BG0_Y;
     REG_BG1HOFS = gBattle_BG1_X;
     REG_BG1VOFS = gBattle_BG1_Y;
     REG_BG2HOFS = gBattle_BG2_X;
