@@ -501,7 +501,7 @@ extern struct DisableStruct gDisableStructs[MAX_BANKS_BATTLE];
 extern struct BattleResults gBattleResults;
 extern struct ProtectStruct gProtectStructs[MAX_BANKS_BATTLE];
 extern struct SpecialStatus gSpecialStatuses[MAX_BANKS_BATTLE];
-extern struct sideTimer gSideTimer[2];
+extern struct sideTimer gSideTimers[2];
 extern struct WishFutureKnock gWishFutureKnock;
 extern struct AI_ThinkingStruct gAIThinkingSpace;
 extern struct Struct20238C8 gUnknown_020238C8;
@@ -641,11 +641,8 @@ void BattleTurnPassed(void);
 
 // asm/battle_2.o
 void sub_8012324(void);
-void sub_8012FBC(u8, u8);
+void SwapTurnOrder(u8, u8);
 u8 GetWhoStrikesFirst(u8, u8, u8);
-void TurnValuesCleanUp(u8);
-void SpecialStatusesClear(void);
-void sub_80138F0(void);
 void sub_80155A4();
 void CancelMultiTurnMoves(u8 bank);
 void PrepareStringBattle();
@@ -660,6 +657,7 @@ u8 sub_80170DC();
 u8 sub_80173A4();
 u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 move);
 u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn);
+void b_clear_atk_up_if_hit_flag_unless_enraged(void);
 
 // asm/battle_4.o
 void AI_CalcDmg(u8, u8);
@@ -686,6 +684,7 @@ void sub_80324F8(struct Pokemon *, u8);
 void sub_8032638();
 void sub_8032AA8(u8, u8);
 void SetBankFuncToOpponentBufferRunCommand(void);
+void BattleMusicStop(void);
 
 // asm/battle_9.o
 void SetBankFuncToLinkOpponentBufferRunCommand(void);

@@ -1474,7 +1474,7 @@ sub_80E4EF8: @ 80E4EF8
 	lsls r5, 24
 	lsrs r5, 24
 	adds r0, r4, 0
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080E4FCC @ =0x040000d4

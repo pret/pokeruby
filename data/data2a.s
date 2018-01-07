@@ -964,7 +964,7 @@ gUnknown_081FA640:: @ 81FA640
 	.align 2
 gUnknown_081FA678:: @ 81FA678
 	.4byte bc_8013B1C
-	.4byte sub_8013998
+	.4byte HandleEndTurn_BattleWon
 	.4byte sub_8013B64
 	.4byte sub_8013B64
 	.4byte sub_8013BDC

@@ -383,7 +383,7 @@ static void sub_8046464(u8 taskId)
         gSprites[spriteId].callback = sub_8047254;
         break;
     default:
-        gBankTarget = GetBankByPlayerAI(1);
+        gBankTarget = GetBankByIdentity(1);
         sp0 = TRUE;
         break;
     }
@@ -722,7 +722,7 @@ static void sub_8046C78(struct Sprite *sprite)
             r8 = -25;
         }
         species = GetMonData(pkmn, MON_DATA_SPECIES);
-        if ((r5 == GetBankByPlayerAI(0) || r5 == GetBankByPlayerAI(1))
+        if ((r5 == GetBankByIdentity(0) || r5 == GetBankByIdentity(1))
          && IsDoubleBattle() && ewram17840.unk9_0)
         {
             if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
@@ -737,7 +737,7 @@ static void sub_8046C78(struct Sprite *sprite)
         }
         if (!IsDoubleBattle() || !ewram17840.unk9_0)
             r4_2 = 0;
-        else if (r5 == GetBankByPlayerAI(0) || r5 == GetBankByPlayerAI(1))
+        else if (r5 == GetBankByIdentity(0) || r5 == GetBankByIdentity(1))
             r4_2 = 1;
         else
             r4_2 = 2;
@@ -885,7 +885,7 @@ static void sub_80470C4(struct Sprite *sprite)
             sprite->data[6] = sprite->oam.affineParam & 0xFF;
             sprite->data[0] = 0;
             if (IsDoubleBattle() && ewram17840.unk9_0
-             && sprite->data[6] == GetBankByPlayerAI(2))
+             && sprite->data[6] == GetBankByIdentity(2))
                 sprite->callback = sub_8047230;
             else
                 sprite->callback = sub_8046C78;
@@ -910,7 +910,7 @@ static void sub_8047254(struct Sprite *sprite)
     {
         sprite->data[0] = 0;
         if (IsDoubleBattle() && ewram17840.unk9_0
-         && sprite->data[6] == GetBankByPlayerAI(3))
+         && sprite->data[6] == GetBankByIdentity(3))
             sprite->callback = sub_8047230;
         else
             sprite->callback = sub_8046C78;

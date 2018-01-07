@@ -65,6 +65,7 @@
 #define HITMARKER_PURSUIT_TRAP          0x00001000
 #define HITMARKER_IGNORE_SAFEGUARD      0x00002000
 #define HITMARKER_SYNCHRONISE_EFFECT    0x00004000
+#define HITMARKER_RUN                   0x00008000
 #define HITMARKER_IGNORE_ON_AIR         0x00010000
 #define HITMARKER_IGNORE_UNDERGROUND    0x00020000
 #define HITMARKER_IGNORE_UNDERWATER     0x00040000
@@ -87,6 +88,11 @@
 #define MOVESTATUS_FAILED             (1 << 5)
 #define MOVESTATUS_ENDURED            (1 << 6)
 #define MOVESTATUS_HUNGON             (1 << 7)
+
+#define IDENTITY_PLAYER_MON1        0
+#define IDENTITY_OPPONENT_MON1      1
+#define IDENTITY_PLAYER_MON2        2
+#define IDENTITY_OPPONENT_MON2      3
 
 #define BATTLE_TYPE_DOUBLE          0x0001
 #define BATTLE_TYPE_LINK            0x0002
@@ -117,6 +123,8 @@
 #define BATTLE_OUT_OF_BALLS         0x8
 #define BATTLE_OPPONENT_TELEPORTED  0xA
 
+#define OUTCOME_LINK_BATTLE_RUN      0x80
+
 #define SIDE_STATUS_REFLECT          (1 << 0)
 #define SIDE_STATUS_LIGHTSCREEN      (1 << 1)
 #define SIDE_STATUS_X4               (1 << 2)
@@ -125,6 +133,22 @@
 #define SIDE_STATUS_FUTUREATTACK     (1 << 6)
 #define SIDE_STATUS_MIST             (1 << 8)
 #define SIDE_STATUS_SPIKES_DAMAGED   (1 << 9)
+
+#define ACTION_USE_MOVE             0
+#define ACTION_USE_ITEM             1
+#define ACTION_SWITCH               2
+#define ACTION_RUN                  3
+#define ACTION_WATCHES_CAREFULLY    4
+#define ACTION_SAFARI_ZONE_BALL     5
+#define ACTION_POKEBLOCK_CASE       6
+#define ACTION_GO_NEAR              7
+#define ACTION_SAFARI_ZONE_RUN      8
+#define ACTION_9                    9
+#define ACTION_RUN_BATTLESCRIPT     10 // when executing an action
+#define ACTION_CANCEL_PARTNER       12 // when choosing an action
+#define ACTION_FINISHED             12 // when executing an action
+#define ACTION_NOTHING_FAINTED      13 // when choosing an action
+#define ACTION_INIT_VALUE           0xFF
 
 #define TARGET_SELECTED_POKEMON 0
 #define TARGET_SPECIAL          (1 << 0)

@@ -71,10 +71,10 @@ gUnknown_02024A76: @ 2024A76
 gTurnOrder: @ 2024A7A
 	.space 0x4
 
-gCurrentMoveTurn: @ 2024A7E
+gCurrentTurnActionNumber: @ 2024A7E
 	.space 0x1
 
-gFightStateTracker: @ 2024A7F
+gCurrentActionFuncId: @ 2024A7F
 	.space 0x1
 
 gBattleMons: @ 2024A80
@@ -206,7 +206,7 @@ gUnknown_02024C78: @ 2024C78
 gSideAffecting: @ 2024C7A
 	.space 0x6
 
-gSideTimer: @ 2024C80
+gSideTimers: @ 2024C80
 	.space 0x18
 
 gStatuses3: @ 2024C98

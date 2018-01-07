@@ -118,7 +118,7 @@ extern void sub_8031F24(void);
 extern void sub_80324BC();
 extern u8 sub_8031720();
 extern void bx_wait_t1(void);
-extern u8 GetBankByPlayerAI(u8);
+extern u8 GetBankByIdentity(u8);
 extern void sub_802DE10(void);
 extern void sub_80105EC(struct Sprite *);
 extern void sub_802D274(void);
@@ -167,7 +167,7 @@ extern const u8 BattleText_LinkStandby[];
 
 extern void dp11b_obj_instanciate(u8, u8, s8, s8);
 extern u8 GetBankIdentity(u8);
-extern u8 GetBankByPlayerAI(u8);
+extern u8 GetBankByIdentity(u8);
 extern void dp11b_obj_free(u8, u8);
 extern void sub_8010520(struct Sprite *);
 extern void sub_8010574(struct Sprite *);
@@ -445,7 +445,7 @@ void sub_802C098(void)
     {
         if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
          && GetBankIdentity(gActiveBank) == 2
-         && !(gAbsentBankFlags & gBitTable[GetBankByPlayerAI(0)])
+         && !(gAbsentBankFlags & gBitTable[GetBankByIdentity(0)])
          && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
         {
             if (gBattleBufferA[gActiveBank][1] == 1)
@@ -529,7 +529,7 @@ void sub_802C2EC(void)
                 i--;
                 if (i < 0)
                     i = 3;
-                gUnknown_03004344 = GetBankByPlayerAI(arr[i]);
+                gUnknown_03004344 = GetBankByIdentity(arr[i]);
             } while(gUnknown_03004344 == gNoOfAllBanks);
             i = 0;
             switch (GetBankIdentity(gUnknown_03004344))
@@ -576,7 +576,7 @@ void sub_802C2EC(void)
                 i++;
                 if (i > 3)
                     i = 0;
-                gUnknown_03004344 = GetBankByPlayerAI(arr[i]);
+                gUnknown_03004344 = GetBankByIdentity(arr[i]);
             } while (gUnknown_03004344 == gNoOfAllBanks);
             i = 0;
             switch (GetBankIdentity(gUnknown_03004344))
@@ -636,7 +636,7 @@ void sub_802C68C(void)
         if (r4 & 0x10)
             gUnknown_03004344 = gActiveBank;
         else
-            gUnknown_03004344 = GetBankByPlayerAI((GetBankIdentity(gActiveBank) & 1) ^ 1);
+            gUnknown_03004344 = GetBankByIdentity((GetBankIdentity(gActiveBank) & 1) ^ 1);
 
         if (gBattleBufferA[gActiveBank][1] == 0)
         {
@@ -668,10 +668,10 @@ void sub_802C68C(void)
             gBattleBankFunc[gActiveBank] = sub_802C2EC;
             if (r4 & 0x12)
                 gUnknown_03004344 = gActiveBank;
-            else if (gAbsentBankFlags & gBitTable[GetBankByPlayerAI(1)])
-                gUnknown_03004344 = GetBankByPlayerAI(3);
+            else if (gAbsentBankFlags & gBitTable[GetBankByIdentity(1)])
+                gUnknown_03004344 = GetBankByIdentity(3);
             else
-                gUnknown_03004344 = GetBankByPlayerAI(1);
+                gUnknown_03004344 = GetBankByIdentity(1);
             gSprites[gObjectBankIDs[gUnknown_03004344]].callback = sub_8010520;
         }
     }
@@ -2458,7 +2458,7 @@ void PlayerHandlecmd12(void)
 {
     ewram17840.unk8 = 4;
     gDoingBattleAnim = 1;
-    move_anim_start_t4(gActiveBank, gActiveBank, GetBankByPlayerAI(1), 3);
+    move_anim_start_t4(gActiveBank, gActiveBank, GetBankByIdentity(1), 3);
     gBattleBankFunc[gActiveBank] = bx_wait_t1;
 }
 
@@ -2468,7 +2468,7 @@ void PlayerHandleBallThrow(void)
 
     ewram17840.unk8 = var;
     gDoingBattleAnim = 1;
-    move_anim_start_t4(gActiveBank, gActiveBank, GetBankByPlayerAI(1), 3);
+    move_anim_start_t4(gActiveBank, gActiveBank, GetBankByIdentity(1), 3);
     gBattleBankFunc[gActiveBank] = bx_wait_t1;
 }
 

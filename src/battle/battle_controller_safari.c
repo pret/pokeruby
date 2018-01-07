@@ -40,7 +40,7 @@ extern u16 gUnknown_02024DE8;
 extern u8 gBattleOutcome;
 
 extern u8 GetBankSide(u8);
-extern u8 GetBankByPlayerAI(u8);
+extern u8 GetBankByIdentity(u8);
 extern u8 GetBankIdentity(u8);
 extern void LoadPlayerTrainerBankSprite();
 extern u8 sub_8079E90();
@@ -423,7 +423,7 @@ void SafariHandlecmd12(void)
 {
     ewram17840.unk8 = 4;
     gDoingBattleAnim = 1;
-    move_anim_start_t4(gActiveBank, gActiveBank, GetBankByPlayerAI(1), 4);
+    move_anim_start_t4(gActiveBank, gActiveBank, GetBankByIdentity(1), 4);
     gBattleBankFunc[gActiveBank] = bx_wait_t6;
 }
 
@@ -433,7 +433,7 @@ void SafariHandleBallThrow(void)
 
     ewram17840.unk8 = var;
     gDoingBattleAnim = 1;
-    move_anim_start_t4(gActiveBank, gActiveBank, GetBankByPlayerAI(1), 4);
+    move_anim_start_t4(gActiveBank, gActiveBank, GetBankByIdentity(1), 4);
     gBattleBankFunc[gActiveBank] = bx_wait_t6;
 }
 

@@ -1321,7 +1321,7 @@ static void BattleAICmd_count_alive_pokemon(void)
         u32 status;
         var = gBattlePartyID[index];
         status = GetBankIdentity(index) ^ 2;
-        var2 = gBattlePartyID[GetBankByPlayerAI(status)];
+        var2 = gBattlePartyID[GetBankByIdentity(status)];
     }
     else
     {

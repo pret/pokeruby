@@ -50,7 +50,7 @@ extern u8 gTakenDmgBanks[4];
 extern u8 gBattleMoveFlags;
 extern u8 gLastUsedAbility;
 extern u8 gBattleTextBuff2[];
-extern u8 gFightStateTracker;
+extern u8 gCurrentActionFuncId;
 extern struct BattleEnigmaBerry gEnigmaBerries[4];
 extern u8 gUnknown_02024BE5;
 extern u8 gCurrMovePos;
@@ -69,7 +69,7 @@ extern const u8 gStatusConditionString_LoveJpn[];
 extern const BattleCmdFunc gBattleScriptingCommandsTable[];
 
 u8 IsImprisoned(u8 bank, u16 move);
-u8 GetBankByPlayerAI(u8 ID);
+u8 GetBankByIdentity(u8 ID);
 u8 GetBankIdentity(u8 bank);
 u8 GetBankSide(u8 bank);
 void b_call_bc_move_exec(u8* BS_ptr);
@@ -320,9 +320,9 @@ bool8 AreAllMovesUnusable(void)
         gProtectStructs[gActiveBank].onlyStruggle = 1;
         gUnknown_02024C1C[gActiveBank] = BattleScript_NoMovesLeft;
         if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-            gBattleBufferB[gActiveBank][3] = GetBankByPlayerAI((GetBankIdentity(gActiveBank) ^ 1) | (Random() & 2));
+            gBattleBufferB[gActiveBank][3] = GetBankByIdentity((GetBankIdentity(gActiveBank) ^ 1) | (Random() & 2));
         else
-            gBattleBufferB[gActiveBank][3] = GetBankByPlayerAI(GetBankIdentity(gActiveBank) ^ 1);
+            gBattleBufferB[gActiveBank][3] = GetBankByIdentity(GetBankIdentity(gActiveBank) ^ 1);
     }
     else
         gProtectStructs[gActiveBank].onlyStruggle = 0;
@@ -380,7 +380,7 @@ u8 UpdateTurnCounters(void)
                 for (j = i + 1; j < gNoOfAllBanks; j++)
                 {
                     if (GetWhoStrikesFirst(gTurnOrder[i], gTurnOrder[j], 0))
-                        sub_8012FBC(i, j);
+                        SwapTurnOrder(i, j);
                 }
             }
             BATTLE_STRUCT->turncountersTracker++;
@@ -392,7 +392,7 @@ u8 UpdateTurnCounters(void)
 
                 if (gSideAffecting[sideBank] & SIDE_STATUS_REFLECT)
                 {
-                    if (--gSideTimer[sideBank].reflectTimer == 0)
+                    if (--gSideTimers[sideBank].reflectTimer == 0)
                     {
 
                         gSideAffecting[sideBank] &= ~SIDE_STATUS_REFLECT;
@@ -421,7 +421,7 @@ u8 UpdateTurnCounters(void)
                 gActiveBank = gBankAttacker = sideBank = BATTLE_STRUCT->turnSideTracker;
                 if (gSideAffecting[sideBank] & SIDE_STATUS_LIGHTSCREEN)
                 {
-                    if (--gSideTimer[sideBank].lightscreenTimer == 0)
+                    if (--gSideTimers[sideBank].lightscreenTimer == 0)
                     {
                         gSideAffecting[sideBank] &= ~SIDE_STATUS_LIGHTSCREEN;
                         b_call_bc_move_exec(BattleScript_SideStatusWoreOff);
@@ -448,7 +448,7 @@ u8 UpdateTurnCounters(void)
             while (BATTLE_STRUCT->turnSideTracker < 2)
             {
                 gActiveBank = gBankAttacker = sideBank = BATTLE_STRUCT->turnSideTracker;
-                if (gSideTimer[sideBank].mistTimer && --gSideTimer[sideBank].mistTimer == 0)
+                if (gSideTimers[sideBank].mistTimer && --gSideTimers[sideBank].mistTimer == 0)
                 {
                     gSideAffecting[sideBank] &= ~SIDE_STATUS_MIST;
                     b_call_bc_move_exec(BattleScript_SideStatusWoreOff);
@@ -476,7 +476,7 @@ u8 UpdateTurnCounters(void)
                 gActiveBank = gBankAttacker = sideBank = BATTLE_STRUCT->turnSideTracker;
                 if (gSideAffecting[sideBank] & SIDE_STATUS_SAFEGUARD)
                 {
-                    if (--gSideTimer[sideBank].safeguardTimer == 0)
+                    if (--gSideTimers[sideBank].safeguardTimer == 0)
                     {
                         gSideAffecting[sideBank] &= ~SIDE_STATUS_SAFEGUARD;
                         b_call_bc_move_exec(BattleScript_SafeguardEnds);
@@ -1363,14 +1363,14 @@ bool8 sub_8018018(u8 bank, u8 r1, u8 r2)
     {
         if (GetBankSide(bank) == 1)
         {
-            r7 = GetBankByPlayerAI(1);
-            r6 = GetBankByPlayerAI(3);
+            r7 = GetBankByIdentity(1);
+            r6 = GetBankByIdentity(3);
             party = gEnemyParty;
         }
         else
         {
-            r7 = GetBankByPlayerAI(0);
-            r6 = GetBankByPlayerAI(2);
+            r7 = GetBankByIdentity(0);
+            r6 = GetBankByIdentity(2);
             party = gPlayerParty;
         }
         if (r1 == 6)
@@ -2053,15 +2053,15 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                 {
                     u8 target2;
                     side = (GetBankIdentity(i) ^ 1) & 1;
-                    target1 = GetBankByPlayerAI(side);
-                    target2 = GetBankByPlayerAI(side + 2);
+                    target1 = GetBankByIdentity(side);
+                    target2 = GetBankByIdentity(side + 2);
                     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
                     {
                         if (gBattleMons[target1].ability != 0 && gBattleMons[target1].hp != 0
                          && gBattleMons[target2].ability != 0 && gBattleMons[target2].hp != 0)
                         {
                             //_080199AE
-                            gActiveBank = GetBankByPlayerAI(((Random() & 1) * 2) | side);
+                            gActiveBank = GetBankByIdentity(((Random() & 1) * 2) | side);
                             gBattleMons[i].ability = gBattleMons[gActiveBank].ability;
                             gLastUsedAbility = gBattleMons[gActiveBank].ability;
                             effect++;
@@ -2256,7 +2256,7 @@ void b_call_bc_move_exec(u8* BS_ptr)
     gBattlescriptCurrInstr = BS_ptr;
     B_FUNCTION_STACK->ptr[B_FUNCTION_STACK->size++] = gBattleMainFunc;
     gBattleMainFunc = sub_8013F54;
-    gFightStateTracker = 0;
+    gCurrentActionFuncId = 0;
 }
 
 void b_push_move_exec(u8* BS_ptr)
@@ -3028,14 +3028,14 @@ void unref_sub_801B40C(void)
                 {
                     if (sCombinedMoves[i].move1 == gChosenMovesByBanks[bank] && sCombinedMoves[i].move2 == gChosenMovesByBanks[bank + 2])
                     {
-                        gSideTimer[GetBankIdentity(bank) & 1].field3 = (bank) | ((bank + 2) << 4);
-                        gSideTimer[GetBankIdentity(bank) & 1].field4 = sCombinedMoves[i].newMove;
+                        gSideTimers[GetBankIdentity(bank) & 1].field3 = (bank) | ((bank + 2) << 4);
+                        gSideTimers[GetBankIdentity(bank) & 1].field4 = sCombinedMoves[i].newMove;
                         gSideAffecting[GetBankIdentity(bank) & 1] |= SIDE_STATUS_X4;
                     }
                     if (sCombinedMoves[i].move1 == gChosenMovesByBanks[bank + 2] && sCombinedMoves[i].move2 == gChosenMovesByBanks[bank])
                     {
-                        gSideTimer[GetBankIdentity(bank) & 1].field3 = (bank + 2) | ((bank) << 4);
-                        gSideTimer[GetBankIdentity(bank) & 1].field4 = sCombinedMoves[i].newMove;
+                        gSideTimers[GetBankIdentity(bank) & 1].field3 = (bank + 2) | ((bank) << 4);
+                        gSideTimers[GetBankIdentity(bank) & 1].field4 = sCombinedMoves[i].newMove;
                         gSideAffecting[GetBankIdentity(bank) & 1] |= SIDE_STATUS_X4;
                     }
                     bank++;
@@ -3067,8 +3067,8 @@ u8 GetMoveTarget(u16 move, u8 useMoveTarget) //get move target
     {
     case 0:
         side = GetBankSide(gBankAttacker) ^ 1;
-        if (gSideTimer[side].followmeTimer && gBattleMons[gSideTimer[side].followmeTarget].hp)
-            targetBank = gSideTimer[side].followmeTarget;
+        if (gSideTimers[side].followmeTimer && gBattleMons[gSideTimers[side].followmeTarget].hp)
+            targetBank = gSideTimers[side].followmeTarget;
         else
         {
             side = GetBankSide(gBankAttacker);
@@ -3090,35 +3090,35 @@ u8 GetMoveTarget(u16 move, u8 useMoveTarget) //get move target
     case 8:
     case 32:
     case 64:
-        targetBank = GetBankByPlayerAI((GetBankIdentity(gBankAttacker) & 1) ^ 1);
+        targetBank = GetBankByIdentity((GetBankIdentity(gBankAttacker) & 1) ^ 1);
         if (gAbsentBankFlags & gBitTable[targetBank])
             targetBank ^= 2;
         break;
     case 4:
         side = GetBankSide(gBankAttacker) ^ 1;
-        if (gSideTimer[side].followmeTimer && gBattleMons[gSideTimer[side].followmeTarget].hp)
-            targetBank = gSideTimer[side].followmeTarget;
+        if (gSideTimers[side].followmeTimer && gBattleMons[gSideTimers[side].followmeTarget].hp)
+            targetBank = gSideTimers[side].followmeTarget;
         else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && moveTarget & 4)
         {
             if (GetBankSide(gBankAttacker) == 0)
             {
                 if (Random() & 1)
-                    targetBank = GetBankByPlayerAI(1);
+                    targetBank = GetBankByIdentity(1);
                 else
-                    targetBank = GetBankByPlayerAI(3);
+                    targetBank = GetBankByIdentity(3);
             }
             else
             {
                 if (Random() & 1)
-                    targetBank = GetBankByPlayerAI(0);
+                    targetBank = GetBankByIdentity(0);
                 else
-                    targetBank = GetBankByPlayerAI(2);
+                    targetBank = GetBankByIdentity(2);
             }
             if (gAbsentBankFlags & gBitTable[targetBank])
                 targetBank ^= 2;
         }
         else
-            targetBank = GetBankByPlayerAI((GetBankIdentity(gBankAttacker) & 1) ^ 1);
+            targetBank = GetBankByIdentity((GetBankIdentity(gBankAttacker) & 1) ^ 1);
         break;
     case 2:
     case 16:

@@ -98,7 +98,7 @@ extern void sub_80324BC();
 extern void BufferStringBattle();
 extern void sub_80331D0(void);
 extern void sub_8036B0C(void);
-extern u8 GetBankByPlayerAI(u8);
+extern u8 GetBankByIdentity(u8);
 extern u8 sub_8036CD4(void);
 extern void sub_80330C8(void);
 extern void sub_8043D84();
@@ -1451,9 +1451,9 @@ void OpponentHandlecmd20(void)
                 gBankTarget = gActiveBank;
             if (gBattleMoves[r5->moves[r4]].target & 8)
             {
-                gBankTarget = GetBankByPlayerAI(0);
+                gBankTarget = GetBankByIdentity(0);
                 if (gAbsentBankFlags & gBitTable[gBankTarget])
-                    gBankTarget = GetBankByPlayerAI(2);
+                    gBankTarget = GetBankByIdentity(2);
             }
             r4 |= gBankTarget << 8;
             Emitcmd33(1, 10, r4);
@@ -1479,13 +1479,13 @@ void OpponentHandlecmd20(void)
         }
         else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
         {
-            u16 r2 = GetBankByPlayerAI(Random() & 2) << 8;
+            u16 r2 = GetBankByIdentity(Random() & 2) << 8;
 
             Emitcmd33(1, 10, r4 | r2);
         }
         else
         {
-            u16 r2 = GetBankByPlayerAI(0) << 8;
+            u16 r2 = GetBankByIdentity(0) << 8;
 
             Emitcmd33(1, 10, r4 | r2);
         }
@@ -1561,7 +1561,7 @@ _08035494:\n\
     cmp r0, 0\n\
     beq _080354CE\n\
     movs r0, 0\n\
-    bl GetBankByPlayerAI\n\
+    bl GetBankByIdentity\n\
     ldr r5, _080354EC @ =gBankTarget\n\
     strb r0, [r5]\n\
     ldr r0, _080354F0 @ =gAbsentBankFlags\n\
@@ -1575,7 +1575,7 @@ _08035494:\n\
     cmp r1, 0\n\
     beq _080354CE\n\
     movs r0, 0x2\n\
-    bl GetBankByPlayerAI\n\
+    bl GetBankByIdentity\n\
     strb r0, [r5]\n\
 _080354CE:\n\
     ldr r0, _080354EC @ =gBankTarget\n\
@@ -1640,7 +1640,7 @@ _0803553C:\n\
     lsls r1, 24\n\
     lsrs r1, 24\n\
     adds r0, r1, 0\n\
-    bl GetBankByPlayerAI\n\
+    bl GetBankByIdentity\n\
     adds r2, r0, 0\n\
     lsls r2, 24\n\
     lsrs r2, 16\n\
@@ -1653,7 +1653,7 @@ _0803553C:\n\
 _0803556C: .4byte gBattleTypeFlags\n\
 _08035570:\n\
     movs r0, 0\n\
-    bl GetBankByPlayerAI\n\
+    bl GetBankByIdentity\n\
     adds r2, r0, 0\n\
     lsls r2, 24\n\
     lsrs r2, 16\n\
@@ -1692,13 +1692,13 @@ void OpponentHandlecmd22(void)
         {
             if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
             {
-                r5 = GetBankByPlayerAI(1);
+                r5 = GetBankByIdentity(1);
                 r6 = r5;
             }
             else
             {
-                r6 = GetBankByPlayerAI(1);
-                r5 = GetBankByPlayerAI(3);
+                r6 = GetBankByIdentity(1);
+                r5 = GetBankByIdentity(3);
             }
             for (r4 = 0; r4 < 6; r4++)
             {

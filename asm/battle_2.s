@@ -5,914 +5,10 @@
 
 	.text
 
-	thumb_func_start sub_80133C8
-sub_80133C8: @ 80133C8
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	movs r3, 0
-	ldr r0, _0801341C @ =gBattleTypeFlags
-	ldrh r1, [r0]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	beq _08013434
-	ldr r0, _08013420 @ =gActiveBank
-	strb r3, [r0]
-	ldr r4, _08013424 @ =gNoOfAllBanks
-	mov r8, r0
-	ldrb r0, [r4]
-	cmp r3, r0
-	bcc _080133F0
-	b _08013622
-_080133F0:
-	ldr r7, _08013428 @ =gUnknown_02024A76
-	ldr r6, _0801342C @ =gActionForBanks
-	mov r2, r8
-	ldr r5, _08013430 @ =gTurnOrder
-_080133F8:
-	adds r1, r3, r7
-	ldrb r0, [r2]
-	adds r0, r6
-	ldrb r0, [r0]
-	strb r0, [r1]
-	adds r1, r3, r5
-	ldrb r0, [r2]
-	strb r0, [r1]
-	adds r3, 0x1
-	ldrb r0, [r2]
-	adds r0, 0x1
-	strb r0, [r2]
-	lsls r0, 24
-	lsrs r0, 24
-	ldrb r1, [r4]
-	cmp r0, r1
-	bcc _080133F8
-	b _08013622
-	.align 2, 0
-_0801341C: .4byte gBattleTypeFlags
-_08013420: .4byte gActiveBank
-_08013424: .4byte gNoOfAllBanks
-_08013428: .4byte gUnknown_02024A76
-_0801342C: .4byte gActionForBanks
-_08013430: .4byte gTurnOrder
-_08013434:
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	beq _08013484
-	ldr r0, _08013478 @ =gActiveBank
-	strb r3, [r0]
-	ldr r1, _0801347C @ =gNoOfAllBanks
-	mov r8, r0
-	adds r2, r1, 0
-	ldrb r2, [r2]
-	cmp r3, r2
-	bcs _08013494
-	ldr r0, _08013480 @ =gActionForBanks
-	ldrb r1, [r0]
-	adds r4, r0, 0
-	cmp r1, 0x3
-	beq _08013492
-_08013456:
-	mov r7, r8
-	ldrb r0, [r7]
-	adds r0, 0x1
-	strb r0, [r7]
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r1, _0801347C @ =gNoOfAllBanks
-	ldrb r1, [r1]
-	cmp r0, r1
-	bcs _08013494
-	ldrb r0, [r7]
-	adds r0, r4
-	ldrb r0, [r0]
-	cmp r0, 0x3
-	bne _08013456
-	b _08013492
-	.align 2, 0
-_08013478: .4byte gActiveBank
-_0801347C: .4byte gNoOfAllBanks
-_08013480: .4byte gActionForBanks
-_08013484:
-	ldr r0, _080134FC @ =gActionForBanks
-	ldrb r0, [r0]
-	ldr r2, _08013500 @ =gActiveBank
-	mov r8, r2
-	cmp r0, 0x3
-	bne _08013494
-	strb r3, [r2]
-_08013492:
-	movs r3, 0x5
-_08013494:
-	cmp r3, 0x5
-	bne _08013520
-	ldr r6, _08013504 @ =gUnknown_02024A76
-	ldr r1, _080134FC @ =gActionForBanks
-	mov r3, r8
-	ldrb r0, [r3]
-	adds r0, r1
-	ldrb r0, [r0]
-	strb r0, [r6]
-	ldr r2, _08013508 @ =gTurnOrder
-	ldrb r0, [r3]
-	strb r0, [r2]
-	movs r3, 0x1
-	movs r5, 0
-	adds r4, r1, 0
-	ldr r7, _0801350C @ =gBattleMainFunc
-	mov r9, r7
-	ldr r0, _08013510 @ =bc_80154A0
-	mov r12, r0
-	ldr r1, _08013514 @ =gSharedMem
-	mov r10, r1
-	ldr r7, _08013518 @ =gNoOfAllBanks
-	ldrb r7, [r7]
-	cmp r5, r7
-	bge _080134EC
-	adds r7, r6, 0
-	adds r6, r4, 0
-	adds r4, r2, 0
-	ldr r2, _08013518 @ =gNoOfAllBanks
-_080134CE:
-	mov r0, r8
-	ldrb r0, [r0]
-	cmp r5, r0
-	beq _080134E4
-	adds r1, r3, r7
-	adds r0, r5, r6
-	ldrb r0, [r0]
-	strb r0, [r1]
-	adds r0, r3, r4
-	strb r5, [r0]
-	adds r3, 0x1
-_080134E4:
-	adds r5, 0x1
-	ldrb r1, [r2]
-	cmp r5, r1
-	blt _080134CE
-_080134EC:
-	mov r2, r12
-	mov r3, r9
-	str r2, [r3]
-	ldr r1, _0801351C @ =0x0001601d
-	add r1, r10
-	movs r0, 0
-	strb r0, [r1]
-	b _08013632
-	.align 2, 0
-_080134FC: .4byte gActionForBanks
-_08013500: .4byte gActiveBank
-_08013504: .4byte gUnknown_02024A76
-_08013508: .4byte gTurnOrder
-_0801350C: .4byte gBattleMainFunc
-_08013510: .4byte bc_80154A0
-_08013514: .4byte gSharedMem
-_08013518: .4byte gNoOfAllBanks
-_0801351C: .4byte 0x0001601d
-_08013520:
-	movs r0, 0
-	mov r7, r8
-	strb r0, [r7]
-	ldr r1, _080135B0 @ =gNoOfAllBanks
-	ldrb r0, [r1]
-	cmp r0, 0
-	beq _08013566
-	ldr r6, _080135B4 @ =gActionForBanks
-	mov r2, r8
-	ldr r5, _080135B8 @ =gUnknown_02024A76
-	ldr r4, _080135BC @ =gTurnOrder
-_08013536:
-	ldrb r0, [r2]
-	adds r0, r6
-	ldrb r1, [r0]
-	subs r0, r1, 0x1
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bhi _08013554
-	adds r0, r3, r5
-	strb r1, [r0]
-	adds r1, r3, r4
-	mov r7, r8
-	ldrb r0, [r7]
-	strb r0, [r1]
-	adds r3, 0x1
-_08013554:
-	ldrb r0, [r2]
-	adds r0, 0x1
-	strb r0, [r2]
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r1, _080135B0 @ =gNoOfAllBanks
-	ldrb r1, [r1]
-	cmp r0, r1
-	bcc _08013536
-_08013566:
-	movs r0, 0
-	mov r2, r8
-	strb r0, [r2]
-	ldr r7, _080135B0 @ =gNoOfAllBanks
-	ldrb r0, [r7]
-	cmp r0, 0
-	beq _080135AA
-	ldr r6, _080135B4 @ =gActionForBanks
-	ldr r5, _080135B8 @ =gUnknown_02024A76
-	ldr r4, _080135BC @ =gTurnOrder
-_0801357A:
-	ldrb r0, [r2]
-	adds r0, r6
-	ldrb r1, [r0]
-	subs r0, r1, 0x1
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bls _08013598
-	adds r0, r3, r5
-	strb r1, [r0]
-	adds r1, r3, r4
-	mov r7, r8
-	ldrb r0, [r7]
-	strb r0, [r1]
-	adds r3, 0x1
-_08013598:
-	ldrb r0, [r2]
-	adds r0, 0x1
-	strb r0, [r2]
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r1, _080135B0 @ =gNoOfAllBanks
-	ldrb r1, [r1]
-	cmp r0, r1
-	bcc _0801357A
-_080135AA:
-	movs r5, 0
-	b _08013618
-	.align 2, 0
-_080135B0: .4byte gNoOfAllBanks
-_080135B4: .4byte gActionForBanks
-_080135B8: .4byte gUnknown_02024A76
-_080135BC: .4byte gTurnOrder
-_080135C0:
-	adds r4, r5, 0x1
-	adds r7, r4, 0
-	ldrb r1, [r1]
-	cmp r7, r1
-	bge _08013616
-	ldr r6, _08013640 @ =gUnknown_02024A76
-	lsls r2, r5, 24
-	mov r8, r2
-_080135D0:
-	ldr r0, _08013644 @ =gTurnOrder
-	adds r1, r5, r0
-	ldrb r3, [r1]
-	adds r0, r4, r0
-	ldrb r1, [r0]
-	adds r0, r5, r6
-	ldrb r2, [r0]
-	cmp r2, 0x1
-	beq _0801360C
-	adds r0, r4, r6
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	beq _0801360C
-	cmp r2, 0x2
-	beq _0801360C
-	cmp r0, 0x2
-	beq _0801360C
-	adds r0, r3, 0
-	movs r2, 0
-	bl GetWhoStrikesFirst
-	lsls r0, 24
-	cmp r0, 0
-	beq _0801360C
-	lsls r1, r4, 24
-	lsrs r1, 24
-	mov r3, r8
-	lsrs r0, r3, 24
-	bl sub_8012FBC
-_0801360C:
-	adds r4, 0x1
-	ldr r0, _08013648 @ =gNoOfAllBanks
-	ldrb r0, [r0]
-	cmp r4, r0
-	blt _080135D0
-_08013616:
-	adds r5, r7, 0
-_08013618:
-	ldr r1, _08013648 @ =gNoOfAllBanks
-	ldrb r0, [r1]
-	subs r0, 0x1
-	cmp r5, r0
-	blt _080135C0
-_08013622:
-	ldr r1, _0801364C @ =gBattleMainFunc
-	ldr r0, _08013650 @ =bc_80154A0
-	str r0, [r1]
-	ldr r0, _08013654 @ =gSharedMem
-	ldr r7, _08013658 @ =0x0001601d
-	adds r0, r7
-	movs r1, 0
-	strb r1, [r0]
-_08013632:
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08013640: .4byte gUnknown_02024A76
-_08013644: .4byte gTurnOrder
-_08013648: .4byte gNoOfAllBanks
-_0801364C: .4byte gBattleMainFunc
-_08013650: .4byte bc_80154A0
-_08013654: .4byte gSharedMem
-_08013658: .4byte 0x0001601d
-	thumb_func_end sub_80133C8
-
-	thumb_func_start TurnValuesCleanUp
-TurnValuesCleanUp: @ 801365C
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	lsls r0, 24
-	lsrs r0, 24
-	mov r9, r0
-	ldr r1, _080136B4 @ =gActiveBank
-	movs r0, 0
-	strb r0, [r1]
-	ldr r0, _080136B8 @ =gNoOfAllBanks
-	ldrb r2, [r0]
-	adds r5, r1, 0
-	cmp r2, 0
-	beq _08013754
-	ldr r7, _080136BC @ =gProtectStructs
-	adds r6, r5, 0
-	ldr r0, _080136C0 @ =gUnknown_02024AD0
-	mov r12, r0
-	ldr r1, _080136C4 @ =gDisableStructs
-	mov r8, r1
-	mov r10, r8
-_0801368A:
-	mov r2, r9
-	cmp r2, 0
-	beq _080136C8
-	ldrb r1, [r6]
-	lsls r1, 4
-	adds r1, r7
-	ldrb r2, [r1]
-	movs r0, 0x2
-	negs r0, r0
-	ands r0, r2
-	strb r0, [r1]
-	ldrb r1, [r6]
-	lsls r1, 4
-	adds r1, r7
-	ldrb r2, [r1]
-	movs r0, 0x3
-	negs r0, r0
-	ands r0, r2
-	strb r0, [r1]
-	b _08013724
-	.align 2, 0
-_080136B4: .4byte gActiveBank
-_080136B8: .4byte gNoOfAllBanks
-_080136BC: .4byte gProtectStructs
-_080136C0: .4byte gUnknown_02024AD0
-_080136C4: .4byte gDisableStructs
-_080136C8:
-	ldrb r0, [r6]
-	lsls r0, 4
-	adds r2, r0, r7
-	movs r1, 0
-	mov r4, r10
-	movs r3, 0
-_080136D4:
-	adds r0, r2, r1
-	strb r3, [r0]
-	adds r1, 0x1
-	cmp r1, 0xF
-	bls _080136D4
-	ldrb r1, [r5]
-	lsls r0, r1, 3
-	subs r0, r1
-	lsls r0, 2
-	adds r1, r0, r4
-	ldrb r0, [r1, 0x16]
-	cmp r0, 0
-	beq _080136F2
-	subs r0, 0x1
-	strb r0, [r1, 0x16]
-_080136F2:
-	ldrb r1, [r5]
-	lsls r0, r1, 3
-	subs r0, r1
-	lsls r0, 2
-	adds r1, r0, r4
-	ldrb r0, [r1, 0x19]
-	cmp r0, 0
-	beq _08013724
-	subs r0, 0x1
-	strb r0, [r1, 0x19]
-	ldrb r2, [r5]
-	lsls r0, r2, 3
-	subs r0, r2
-	lsls r0, 2
-	adds r0, r4
-	ldrb r0, [r0, 0x19]
-	cmp r0, 0
-	bne _08013724
-	movs r0, 0x58
-	muls r2, r0
-	add r2, r12
-	ldr r0, [r2]
-	ldr r1, _0801376C @ =0xffbfffff
-	ands r0, r1
-	str r0, [r2]
-_08013724:
-	ldrb r2, [r5]
-	lsls r0, r2, 3
-	subs r0, r2
-	lsls r0, 2
-	add r0, r8
-	ldrb r0, [r0, 0xA]
-	cmp r0, 0
-	bne _08013742
-	movs r0, 0x58
-	muls r2, r0
-	add r2, r12
-	ldr r0, [r2]
-	ldr r1, _08013770 @ =0xfeffffff
-	ands r0, r1
-	str r0, [r2]
-_08013742:
-	ldrb r0, [r5]
-	adds r0, 0x1
-	strb r0, [r5]
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r1, _08013774 @ =gNoOfAllBanks
-	ldrb r1, [r1]
-	cmp r0, r1
-	bcc _0801368A
-_08013754:
-	movs r0, 0
-	ldr r2, _08013778 @ =gSideTimer
-	strb r0, [r2, 0x8]
-	strb r0, [r2, 0x14]
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0801376C: .4byte 0xffbfffff
-_08013770: .4byte 0xfeffffff
-_08013774: .4byte gNoOfAllBanks
-_08013778: .4byte gSideTimer
-	thumb_func_end TurnValuesCleanUp
-
-	thumb_func_start SpecialStatusesClear
-SpecialStatusesClear: @ 801377C
-	push {r4-r6,lr}
-	ldr r2, _080137C0 @ =gActiveBank
-	movs r0, 0
-	strb r0, [r2]
-	ldr r0, _080137C4 @ =gNoOfAllBanks
-	ldrb r1, [r0]
-	adds r6, r0, 0
-	cmp r1, 0
-	beq _080137BA
-	adds r3, r2, 0
-	movs r4, 0
-	ldr r5, _080137C8 @ =gSpecialStatuses
-_08013794:
-	ldrb r1, [r3]
-	lsls r0, r1, 2
-	adds r0, r1
-	lsls r0, 2
-	adds r2, r0, r5
-	movs r1, 0
-_080137A0:
-	adds r0, r2, r1
-	strb r4, [r0]
-	adds r1, 0x1
-	cmp r1, 0x13
-	bls _080137A0
-	ldrb r0, [r3]
-	adds r0, 0x1
-	strb r0, [r3]
-	lsls r0, 24
-	lsrs r0, 24
-	ldrb r1, [r6]
-	cmp r0, r1
-	bcc _08013794
-_080137BA:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080137C0: .4byte gActiveBank
-_080137C4: .4byte gNoOfAllBanks
-_080137C8: .4byte gSpecialStatuses
-	thumb_func_end SpecialStatusesClear
-
-	thumb_func_start bc_80154A0
-bc_80154A0: @ 80137CC
-	push {r4-r7,lr}
-	ldr r0, _08013850 @ =gHitMarker
-	ldr r0, [r0]
-	movs r1, 0x80
-	lsls r1, 8
-	ands r0, r1
-	cmp r0, 0
-	bne _08013884
-	ldr r0, _08013854 @ =gSharedMem
-	ldr r1, _08013858 @ =0x0001601d
-	adds r2, r0, r1
-	ldr r0, _0801385C @ =gNoOfAllBanks
-	ldrb r1, [r2]
-	adds r7, r0, 0
-	ldrb r0, [r7]
-	cmp r1, r0
-	bcs _08013884
-	ldr r6, _08013860 @ =gActiveBank
-	ldr r5, _08013864 @ =gBankAttacker
-	adds r4, r2, 0
-	movs r1, 0x84
-	lsls r1, 1
-	mov r12, r1
-_080137FA:
-	ldrb r0, [r4]
-	strb r0, [r5]
-	strb r0, [r6]
-	adds r0, 0x1
-	strb r0, [r4]
-	ldr r1, _08013868 @ =gChosenMovesByBanks
-	ldrb r3, [r6]
-	lsls r0, r3, 1
-	adds r0, r1
-	ldrh r0, [r0]
-	cmp r0, r12
-	bne _0801387C
-	ldr r1, _0801386C @ =gBattleMons
-	movs r0, 0x58
-	muls r0, r3
-	adds r1, 0x4C
-	adds r0, r1
-	ldr r0, [r0]
-	movs r1, 0x7
-	ands r0, r1
-	cmp r0, 0
-	bne _0801387C
-	ldr r2, _08013870 @ =gDisableStructs
-	ldrb r1, [r5]
-	lsls r0, r1, 3
-	subs r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r0, [r0, 0x18]
-	lsls r0, 31
-	cmp r0, 0
-	bne _0801387C
-	ldr r0, _08013874 @ =gProtectStructs
-	lsls r1, r3, 4
-	adds r1, r0
-	ldrb r0, [r1]
-	lsls r0, 29
-	cmp r0, 0
-	blt _0801387C
-	ldr r0, _08013878 @ =BattleScript_FocusPunchSetUp
-	bl b_call_bc_move_exec
-	b _080138BE
-	.align 2, 0
-_08013850: .4byte gHitMarker
-_08013854: .4byte gSharedMem
-_08013858: .4byte 0x0001601d
-_0801385C: .4byte gNoOfAllBanks
-_08013860: .4byte gActiveBank
-_08013864: .4byte gBankAttacker
-_08013868: .4byte gChosenMovesByBanks
-_0801386C: .4byte gBattleMons
-_08013870: .4byte gDisableStructs
-_08013874: .4byte gProtectStructs
-_08013878: .4byte BattleScript_FocusPunchSetUp
-_0801387C:
-	ldrb r0, [r4]
-	ldrb r2, [r7]
-	cmp r0, r2
-	bcc _080137FA
-_08013884:
-	bl b_clear_atk_up_if_hit_flag_unless_enraged
-	ldr r1, _080138C4 @ =gCurrentMoveTurn
-	movs r0, 0
-	strb r0, [r1]
-	ldr r1, _080138C8 @ =gFightStateTracker
-	ldr r0, _080138CC @ =gUnknown_02024A76
-	movs r2, 0
-	ldrb r0, [r0]
-	strb r0, [r1]
-	ldr r0, _080138D0 @ =gDynamicBasePower
-	movs r3, 0
-	strh r2, [r0]
-	ldr r1, _080138D4 @ =gSharedMem
-	ldr r2, _080138D8 @ =0x0001601c
-	adds r0, r1, r2
-	strb r3, [r0]
-	ldr r2, _080138DC @ =gBattleMainFunc
-	ldr r0, _080138E0 @ =sub_80138F0
-	str r0, [r2]
-	ldr r0, _080138E4 @ =gBattleCommunication
-	strb r3, [r0, 0x3]
-	strb r3, [r0, 0x4]
-	ldr r2, _080138E8 @ =0x00016112
-	adds r0, r1, r2
-	strb r3, [r0]
-	ldr r0, _080138EC @ =0x00017130
-	adds r1, r0
-	strb r3, [r1]
-_080138BE:
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080138C4: .4byte gCurrentMoveTurn
-_080138C8: .4byte gFightStateTracker
-_080138CC: .4byte gUnknown_02024A76
-_080138D0: .4byte gDynamicBasePower
-_080138D4: .4byte gSharedMem
-_080138D8: .4byte 0x0001601c
-_080138DC: .4byte gBattleMainFunc
-_080138E0: .4byte sub_80138F0
-_080138E4: .4byte gBattleCommunication
-_080138E8: .4byte 0x00016112
-_080138EC: .4byte 0x00017130
-	thumb_func_end bc_80154A0
-
-	thumb_func_start sub_80138F0
-sub_80138F0: @ 80138F0
-	push {r4-r6,lr}
-	ldr r6, _08013944 @ =gBattleOutcome
-	ldrb r0, [r6]
-	ldr r2, _08013948 @ =gFightStateTracker
-	cmp r0, 0
-	beq _08013900
-	movs r0, 0xC
-	strb r0, [r2]
-_08013900:
-	ldr r1, _0801394C @ =gSharedMem
-	ldr r4, _08013950 @ =gCurrentMoveTurn
-	ldrb r0, [r4]
-	ldr r3, _08013954 @ =0x00016057
-	adds r5, r1, r3
-	strb r0, [r5]
-	ldr r1, _08013958 @ =gUnknown_081FA640
-	ldrb r0, [r2]
-	lsls r0, 2
-	adds r0, r1
-	ldr r0, [r0]
-	bl _call_via_r0
-	ldr r0, _0801395C @ =gNoOfAllBanks
-	ldrb r1, [r4]
-	ldrb r0, [r0]
-	cmp r1, r0
-	bcc _08013970
-	ldr r2, _08013960 @ =gHitMarker
-	ldr r0, [r2]
-	ldr r1, _08013964 @ =0xffefffff
-	ands r0, r1
-	str r0, [r2]
-	ldr r3, _08013968 @ =gBattleMainFunc
-	ldr r2, _0801396C @ =gUnknown_081FA678
-	ldrb r1, [r6]
-	movs r0, 0x7F
-	ands r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldr r0, [r0]
-	str r0, [r3]
-	b _08013984
-	.align 2, 0
-_08013944: .4byte gBattleOutcome
-_08013948: .4byte gFightStateTracker
-_0801394C: .4byte gSharedMem
-_08013950: .4byte gCurrentMoveTurn
-_08013954: .4byte 0x00016057
-_08013958: .4byte gUnknown_081FA640
-_0801395C: .4byte gNoOfAllBanks
-_08013960: .4byte gHitMarker
-_08013964: .4byte 0xffefffff
-_08013968: .4byte gBattleMainFunc
-_0801396C: .4byte gUnknown_081FA678
-_08013970:
-	ldrb r0, [r5]
-	cmp r0, r1
-	beq _08013984
-	ldr r2, _0801398C @ =gHitMarker
-	ldr r0, [r2]
-	ldr r1, _08013990 @ =0xfffffdff
-	ands r0, r1
-	ldr r1, _08013994 @ =0xfff7ffff
-	ands r0, r1
-	str r0, [r2]
-_08013984:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0801398C: .4byte gHitMarker
-_08013990: .4byte 0xfffffdff
-_08013994: .4byte 0xfff7ffff
-	thumb_func_end sub_80138F0
-
-	thumb_func_start sub_8013998
-sub_8013998: @ 8013998
-	push {r4,lr}
-	ldr r1, _080139D0 @ =gFightStateTracker
-	movs r0, 0
-	strb r0, [r1]
-	ldr r0, _080139D4 @ =gBattleTypeFlags
-	ldrh r1, [r0]
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	beq _080139EC
-	ldr r1, _080139D8 @ =gBattleTextBuff1
-	ldr r4, _080139DC @ =gBattleOutcome
-	ldrb r0, [r4]
-	strb r0, [r1]
-	movs r0, 0
-	bl GetBankByPlayerAI
-	ldr r1, _080139E0 @ =gBankAttacker
-	strb r0, [r1]
-	ldr r1, _080139E4 @ =gBattlescriptCurrInstr
-	ldr r0, _080139E8 @ =gUnknown_081D8E02
-	str r0, [r1]
-	ldrb r1, [r4]
-	movs r0, 0x7F
-	ands r0, r1
-	strb r0, [r4]
-	b _08013B48
-	.align 2, 0
-_080139D0: .4byte gFightStateTracker
-_080139D4: .4byte gBattleTypeFlags
-_080139D8: .4byte gBattleTextBuff1
-_080139DC: .4byte gBattleOutcome
-_080139E0: .4byte gBankAttacker
-_080139E4: .4byte gBattlescriptCurrInstr
-_080139E8: .4byte gUnknown_081D8E02
-_080139EC:
-	movs r0, 0x90
-	lsls r0, 4
-	ands r0, r1
-	cmp r0, 0
-	beq _08013A04
-	ldr r1, _080139FC @ =gBattlescriptCurrInstr
-	ldr r0, _08013A00 @ =gUnknown_081D8E0D
-	b _08013B46
-	.align 2, 0
-_080139FC: .4byte gBattlescriptCurrInstr
-_08013A00: .4byte gUnknown_081D8E0D
-_08013A04:
-	movs r0, 0xA
-	ands r0, r1
-	cmp r0, 0x8
-	beq _08013A0E
-	b _08013B42
-_08013A0E:
-	bl BattleMusicStop
-	ldr r1, _08013A3C @ =gBattlescriptCurrInstr
-	ldr r0, _08013A40 @ =BattleScript_LocalTrainerBattleWon
-	str r0, [r1]
-	ldr r2, _08013A44 @ =gTrainers
-	ldr r0, _08013A48 @ =gTrainerBattleOpponent
-	ldrh r1, [r0]
-	lsls r0, r1, 2
-	adds r0, r1
-	lsls r0, 3
-	adds r0, r2
-	ldrb r0, [r0, 0x1]
-	subs r0, 0x2
-	cmp r0, 0x31
-	bls _08013A30
-	b _08013B38
-_08013A30:
-	lsls r0, 2
-	ldr r1, _08013A4C @ =_08013A50
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_08013A3C: .4byte gBattlescriptCurrInstr
-_08013A40: .4byte BattleScript_LocalTrainerBattleWon
-_08013A44: .4byte gTrainers
-_08013A48: .4byte gTrainerBattleOpponent
-_08013A4C: .4byte _08013A50
-	.align 2, 0
-_08013A50:
-	.4byte _08013B24
-	.4byte _08013B24
-	.4byte _08013B24
-	.4byte _08013B38
-	.4byte _08013B38
-	.4byte _08013B38
-	.4byte _08013B38
-	.4byte _08013B38
-	.4byte _08013B38
-	.4byte _08013B38
-	.4byte _08013B38
-	.4byte _08013B38
-	.4byte _08013B38
-	.4byte _08013B38
-	.4byte _08013B38
-	.4byte _08013B38
-	.4byte _08013B38
-	.4byte _08013B38
-	.4byte _08013B38
-	.4byte _08013B38
-	.4byte _08013B38
-	.4byte _08013B38
-	.4byte _08013B18
-	.4byte _08013B2E
-	.4byte _08013B38
-	.4byte _08013B38
-	.4byte _08013B38
-	.4byte _08013B38
-	.4byte _08013B38
-	.4byte _08013B38
-	.4byte _08013B18
-	.4byte _08013B38
-	.4byte _08013B38
-	.4byte _08013B38
-	.4byte _08013B38
-	.4byte _08013B38
-	.4byte _08013B38
-	.4byte _08013B38
-	.4byte _08013B38
-	.4byte _08013B38
-	.4byte _08013B38
-	.4byte _08013B38
-	.4byte _08013B38
-	.4byte _08013B38
-	.4byte _08013B38
-	.4byte _08013B38
-	.4byte _08013B38
-	.4byte _08013B24
-	.4byte _08013B24
-	.4byte _08013B24
-_08013B18:
-	ldr r0, _08013B20 @ =0x00000163
-	bl PlayBGM
-	b _08013B48
-	.align 2, 0
-_08013B20: .4byte 0x00000163
-_08013B24:
-	movs r0, 0xD4
-	lsls r0, 1
-	bl PlayBGM
-	b _08013B48
-_08013B2E:
-	movs r0, 0xB1
-	lsls r0, 1
-	bl PlayBGM
-	b _08013B48
-_08013B38:
-	movs r0, 0xCE
-	lsls r0, 1
-	bl PlayBGM
-	b _08013B48
-_08013B42:
-	ldr r1, _08013B54 @ =gBattlescriptCurrInstr
-	ldr r0, _08013B58 @ =BattleScript_PayDayMoneyAndPickUpItems
-_08013B46:
-	str r0, [r1]
-_08013B48:
-	ldr r1, _08013B5C @ =gBattleMainFunc
-	ldr r0, _08013B60 @ =sub_8013C9C
-	str r0, [r1]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08013B54: .4byte gBattlescriptCurrInstr
-_08013B58: .4byte BattleScript_PayDayMoneyAndPickUpItems
-_08013B5C: .4byte gBattleMainFunc
-_08013B60: .4byte sub_8013C9C
-	thumb_func_end sub_8013998
-
 	thumb_func_start sub_8013B64
 sub_8013B64: @ 8013B64
 	push {r4,lr}
-	ldr r1, _08013B9C @ =gFightStateTracker
+	ldr r1, _08013B9C @ =gCurrentActionFuncId
 	movs r0, 0
 	strb r0, [r1]
 	ldr r0, _08013BA0 @ =gBattleTypeFlags
@@ -926,7 +22,7 @@ sub_8013B64: @ 8013B64
 	ldrb r0, [r4]
 	strb r0, [r1]
 	movs r0, 0
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	ldr r1, _08013BAC @ =gBankAttacker
 	strb r0, [r1]
 	ldr r1, _08013BB0 @ =gBattlescriptCurrInstr
@@ -938,7 +34,7 @@ sub_8013B64: @ 8013B64
 	strb r0, [r4]
 	b _08013BBE
 	.align 2, 0
-_08013B9C: .4byte gFightStateTracker
+_08013B9C: .4byte gCurrentActionFuncId
 _08013BA0: .4byte gBattleTypeFlags
 _08013BA4: .4byte gBattleTextBuff1
 _08013BA8: .4byte gBattleOutcome
@@ -966,7 +62,7 @@ _08013BD8: .4byte sub_8013C9C
 	thumb_func_start sub_8013BDC
 sub_8013BDC: @ 8013BDC
 	push {lr}
-	ldr r1, _08013C04 @ =gFightStateTracker
+	ldr r1, _08013C04 @ =gCurrentActionFuncId
 	movs r0, 0
 	strb r0, [r1]
 	ldr r1, _08013C08 @ =gProtectStructs
@@ -985,7 +81,7 @@ sub_8013BDC: @ 8013BDC
 	ldr r0, _08013C14 @ =BattleScript_GotAwaySafely
 	b _08013C2C
 	.align 2, 0
-_08013C04: .4byte gFightStateTracker
+_08013C04: .4byte gCurrentActionFuncId
 _08013C08: .4byte gProtectStructs
 _08013C0C: .4byte gBankAttacker
 _08013C10: .4byte gBattlescriptCurrInstr
@@ -1016,7 +112,7 @@ _08013C44: .4byte sub_8013C9C
 
 	thumb_func_start sub_8013C48
 sub_8013C48: @ 8013C48
-	ldr r1, _08013C7C @ =gFightStateTracker
+	ldr r1, _08013C7C @ =gCurrentActionFuncId
 	movs r0, 0
 	strb r0, [r1]
 	ldr r1, _08013C80 @ =gBattleTextBuff1
@@ -1043,7 +139,7 @@ sub_8013C48: @ 8013C48
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_08013C7C: .4byte gFightStateTracker
+_08013C7C: .4byte gCurrentActionFuncId
 _08013C80: .4byte gBattleTextBuff1
 _08013C84: .4byte gBankAttacker
 _08013C88: .4byte gBattlePartyID
@@ -1056,7 +152,7 @@ _08013C98: .4byte sub_8013C9C
 	thumb_func_start sub_8013C9C
 sub_8013C9C: @ 8013C9C
 	push {r4-r7,lr}
-	ldr r0, _08013D00 @ =gFightStateTracker
+	ldr r0, _08013D00 @ =gCurrentActionFuncId
 	ldrb r0, [r0]
 	subs r0, 0xB
 	lsls r0, 24
@@ -1104,7 +200,7 @@ _08013CCE:
 	bl StringCopy
 	b _08013D36
 	.align 2, 0
-_08013D00: .4byte gFightStateTracker
+_08013D00: .4byte gCurrentActionFuncId
 _08013D04: .4byte gBattleTypeFlags
 _08013D08: .4byte 0x00000b92
 _08013D0C: .4byte gActiveBank
@@ -1391,7 +487,7 @@ _08013F50: .4byte gEnemyParty
 	thumb_func_start sub_8013F54
 sub_8013F54: @ 8013F54
 	push {lr}
-	ldr r0, _08013F84 @ =gFightStateTracker
+	ldr r0, _08013F84 @ =gCurrentActionFuncId
 	ldrb r0, [r0]
 	subs r0, 0xB
 	lsls r0, 24
@@ -1415,7 +511,7 @@ _08013F74:
 	str r1, [r0]
 	b _08013FAA
 	.align 2, 0
-_08013F84: .4byte gFightStateTracker
+_08013F84: .4byte gCurrentActionFuncId
 _08013F88: .4byte gSharedMem + 0x17140
 _08013F8C: .4byte gBattleMainFunc
 _08013F90:
@@ -1476,7 +572,7 @@ sub_8013FE8: @ 8013FE8
 	str r0, [sp]
 	ldr r7, _08014028 @ =gBankAttacker
 	ldr r1, _0801402C @ =gTurnOrder
-	ldr r0, _08014030 @ =gCurrentMoveTurn
+	ldr r0, _08014030 @ =gCurrentTurnActionNumber
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -1494,17 +590,17 @@ sub_8013FE8: @ 8013FE8
 	ands r2, r0
 	cmp r2, 0
 	beq _08014044
-	ldr r1, _08014040 @ =gFightStateTracker
+	ldr r1, _08014040 @ =gCurrentActionFuncId
 	movs r0, 0xC
 	b _080146CC
 	.align 2, 0
 _08014028: .4byte gBankAttacker
 _0801402C: .4byte gTurnOrder
-_08014030: .4byte gCurrentMoveTurn
+_08014030: .4byte gCurrentTurnActionNumber
 _08014034: .4byte gSharedMem
 _08014038: .4byte 0x000160a6
 _0801403C: .4byte gBitTable
-_08014040: .4byte gFightStateTracker
+_08014040: .4byte gCurrentActionFuncId
 _08014044:
 	ldr r1, _080140B8 @ =gCritMultiplier
 	movs r0, 0x1
@@ -1791,7 +887,7 @@ _080142B0:
 	eors r0, r1
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r1, _08014320 @ =gSideTimer
+	ldr r1, _08014320 @ =gSideTimers
 	lsls r0, r6, 1
 	adds r0, r6
 	lsls r0, 2
@@ -1834,7 +930,7 @@ _080142B0:
 _08014314: .4byte gBattleResults
 _08014318: .4byte gCurrentMove
 _0801431C: .4byte gBankAttacker
-_08014320: .4byte gSideTimer
+_08014320: .4byte gSideTimers
 _08014324: .4byte gBattleMoves
 _08014328: .4byte gBattleMons
 _0801432C: .4byte gBankTarget
@@ -1849,7 +945,7 @@ _08014330:
 	bne _08014342
 	b _0801461C
 _08014342:
-	ldr r1, _0801445C @ =gSideTimer
+	ldr r1, _0801445C @ =gSideTimers
 	lsls r0, r6, 1
 	adds r0, r6
 	lsls r0, 2
@@ -1991,7 +1087,7 @@ _0801441E:
 	.align 2, 0
 _08014454: .4byte gBattleTypeFlags
 _08014458: .4byte gBankAttacker
-_0801445C: .4byte gSideTimer
+_0801445C: .4byte gSideTimers
 _08014460: .4byte gBattleMoves
 _08014464: .4byte gCurrentMove
 _08014468: .4byte gBattleMons
@@ -2014,7 +1110,7 @@ _08014484:
 _08014494:
 	movs r0, 0x2
 _08014496:
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	ldr r1, _080144A0 @ =gBankTarget
 	strb r0, [r1]
 	b _080144B6
@@ -2071,7 +1167,7 @@ _08014504:
 	eors r0, r1
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	strb r0, [r5]
 	ldrb r1, [r7]
 	ldrb r2, [r5]
@@ -2162,7 +1258,7 @@ _080145C0:
 _080145D0:
 	movs r0, 0x2
 _080145D2:
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	ldr r1, _0801460C @ =gBankTarget
 	strb r0, [r1]
 	ldr r0, _08014610 @ =gAbsentBankFlags
@@ -2239,7 +1335,7 @@ _08014674:
 	eors r0, r1
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	strb r0, [r5]
 	ldrb r1, [r6]
 	ldrb r2, [r5]
@@ -2257,7 +1353,7 @@ _0801469A:
 	eors r0, r1
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	strb r0, [r5]
 _080146AC:
 	ldr r4, _080146E0 @ =gBattlescriptCurrInstr
@@ -2274,7 +1370,7 @@ _080146AC:
 	adds r0, r3
 	ldr r0, [r0]
 	str r0, [r4]
-	ldr r1, _080146F0 @ =gFightStateTracker
+	ldr r1, _080146F0 @ =gCurrentActionFuncId
 	movs r0, 0xA
 _080146CC:
 	strb r0, [r1]
@@ -2291,7 +1387,7 @@ _080146E0: .4byte gBattlescriptCurrInstr
 _080146E4: .4byte gBattleScriptsForMoveEffects
 _080146E8: .4byte gBattleMoves
 _080146EC: .4byte gCurrentMove
-_080146F0: .4byte gFightStateTracker
+_080146F0: .4byte gCurrentActionFuncId
 	thumb_func_end sub_8013FE8
 
 	thumb_func_start sub_80146F4
@@ -2299,7 +1395,7 @@ sub_80146F4: @ 80146F4
 	push {r4,lr}
 	ldr r3, _08014764 @ =gBankAttacker
 	ldr r1, _08014768 @ =gTurnOrder
-	ldr r0, _0801476C @ =gCurrentMoveTurn
+	ldr r0, _0801476C @ =gCurrentTurnActionNumber
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -2339,7 +1435,7 @@ sub_80146F4: @ 80146F4
 	ldr r1, _08014790 @ =gBattlescriptCurrInstr
 	ldr r0, _08014794 @ =BattleScript_ActionSwitch
 	str r0, [r1]
-	ldr r1, _08014798 @ =gFightStateTracker
+	ldr r1, _08014798 @ =gCurrentActionFuncId
 	movs r0, 0xA
 	strb r0, [r1]
 	ldr r1, _0801479C @ =gBattleResults
@@ -2355,7 +1451,7 @@ _0801475C:
 	.align 2, 0
 _08014764: .4byte gBankAttacker
 _08014768: .4byte gTurnOrder
-_0801476C: .4byte gCurrentMoveTurn
+_0801476C: .4byte gCurrentTurnActionNumber
 _08014770: .4byte gUnknown_030042A4
 _08014774: .4byte gUnknown_030042A0
 _08014778: .4byte gActionSelectionCursor
@@ -2366,7 +1462,7 @@ _08014788: .4byte 0x00016064
 _0801478C: .4byte 0x00016003
 _08014790: .4byte gBattlescriptCurrInstr
 _08014794: .4byte BattleScript_ActionSwitch
-_08014798: .4byte gFightStateTracker
+_08014798: .4byte gCurrentActionFuncId
 _0801479C: .4byte gBattleResults
 	thumb_func_end sub_80146F4
 
@@ -2380,7 +1476,7 @@ sub_80147A0: @ 80147A0
 	ldr r4, _08014804 @ =gBankAttacker
 	ldr r2, _08014808 @ =gBankTarget
 	ldr r1, _0801480C @ =gTurnOrder
-	ldr r0, _08014810 @ =gCurrentMoveTurn
+	ldr r0, _08014810 @ =gCurrentTurnActionNumber
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -2425,7 +1521,7 @@ sub_80147A0: @ 80147A0
 _08014804: .4byte gBankAttacker
 _08014808: .4byte gBankTarget
 _0801480C: .4byte gTurnOrder
-_08014810: .4byte gCurrentMoveTurn
+_08014810: .4byte gCurrentTurnActionNumber
 _08014814: .4byte gUnknown_030042A4
 _08014818: .4byte gUnknown_030042A0
 _0801481C: .4byte gDisableStructs
@@ -2718,7 +1814,7 @@ _08014A74:
 	str r0, [r1]
 _08014A8C:
 	movs r0, 0xA
-	ldr r2, _08014AB4 @ =gFightStateTracker
+	ldr r2, _08014AB4 @ =gCurrentActionFuncId
 	strb r0, [r2]
 	pop {r3-r5}
 	mov r8, r3
@@ -2733,7 +1829,7 @@ _08014AA4: .4byte gBankAttacker
 _08014AA8: .4byte gBattlescriptCurrInstr
 _08014AAC: .4byte gBattlescriptsForUsingItem
 _08014AB0: .4byte 0x000160d8
-_08014AB4: .4byte gFightStateTracker
+_08014AB4: .4byte gCurrentActionFuncId
 	thumb_func_end sub_80147A0
 
 	thumb_func_start sub_8014AB8
@@ -2871,7 +1967,7 @@ _08014BB6:
 _08014BC2:
 	cmp r5, 0
 	beq _08014BD4
-	ldr r1, _08014BE8 @ =gCurrentMoveTurn
+	ldr r1, _08014BE8 @ =gCurrentTurnActionNumber
 	ldr r0, _08014BEC @ =gNoOfAllBanks
 	ldrb r0, [r0]
 	strb r0, [r1]
@@ -2887,7 +1983,7 @@ _08014BD4:
 _08014BDC: .4byte gBattleTypeFlags
 _08014BE0: .4byte gSharedMem
 _08014BE4: .4byte 0x00016078
-_08014BE8: .4byte gCurrentMoveTurn
+_08014BE8: .4byte gCurrentTurnActionNumber
 _08014BEC: .4byte gNoOfAllBanks
 _08014BF0: .4byte gBattleOutcome
 	thumb_func_end sub_8014AB8
@@ -2897,7 +1993,7 @@ sub_8014BF4: @ 8014BF4
 	push {r4-r6,lr}
 	ldr r4, _08014C44 @ =gBankAttacker
 	ldr r1, _08014C48 @ =gTurnOrder
-	ldr r5, _08014C4C @ =gCurrentMoveTurn
+	ldr r5, _08014C4C @ =gCurrentTurnActionNumber
 	ldrb r0, [r5]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -2937,7 +2033,7 @@ _08014C28:
 	.align 2, 0
 _08014C44: .4byte gBankAttacker
 _08014C48: .4byte gTurnOrder
-_08014C4C: .4byte gCurrentMoveTurn
+_08014C4C: .4byte gCurrentTurnActionNumber
 _08014C50: .4byte gBattleTypeFlags
 _08014C54: .4byte gNoOfAllBanks
 _08014C58: .4byte gActiveBank
@@ -3001,7 +2097,7 @@ _08014C9C:
 	ldr r1, _08014CE8 @ =gBattlescriptCurrInstr
 	ldr r0, _08014CEC @ =BattleScript_PrintFailedToRunString
 	str r0, [r1]
-	ldr r1, _08014CF0 @ =gFightStateTracker
+	ldr r1, _08014CF0 @ =gCurrentActionFuncId
 	movs r0, 0xA
 	b _08014D3E
 	.align 2, 0
@@ -3010,7 +2106,7 @@ _08014CE0: .4byte 0xfdffffff
 _08014CE4: .4byte gBattleCommunication
 _08014CE8: .4byte gBattlescriptCurrInstr
 _08014CEC: .4byte BattleScript_PrintFailedToRunString
-_08014CF0: .4byte gFightStateTracker
+_08014CF0: .4byte gCurrentActionFuncId
 _08014CF4:
 	ldr r1, _08014D1C @ =gBattleMons
 	ldrb r2, [r4]
@@ -3029,7 +2125,7 @@ _08014CF4:
 	ldr r1, _08014D28 @ =gBattlescriptCurrInstr
 	ldr r0, _08014D2C @ =BattleScript_PrintFailedToRunString
 	str r0, [r1]
-	ldr r1, _08014D30 @ =gFightStateTracker
+	ldr r1, _08014D30 @ =gCurrentActionFuncId
 	movs r0, 0xA
 	b _08014D3E
 	.align 2, 0
@@ -3038,7 +2134,7 @@ _08014D20: .4byte 0x0400e000
 _08014D24: .4byte gBattleCommunication
 _08014D28: .4byte gBattlescriptCurrInstr
 _08014D2C: .4byte BattleScript_PrintFailedToRunString
-_08014D30: .4byte gFightStateTracker
+_08014D30: .4byte gCurrentActionFuncId
 _08014D34:
 	ldr r0, _08014D48 @ =gNoOfAllBanks
 	ldrb r0, [r0]
@@ -3060,7 +2156,7 @@ _08014D4C: .4byte gBattleOutcome
 sub_8014D50: @ 8014D50
 	ldr r2, _08014D78 @ =gBankAttacker
 	ldr r1, _08014D7C @ =gTurnOrder
-	ldr r0, _08014D80 @ =gCurrentMoveTurn
+	ldr r0, _08014D80 @ =gCurrentTurnActionNumber
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -3074,26 +2170,26 @@ sub_8014D50: @ 8014D50
 	ldr r0, _08014D90 @ =gBattlescriptsForSafariActions
 	ldr r0, [r0]
 	str r0, [r1]
-	ldr r1, _08014D94 @ =gFightStateTracker
+	ldr r1, _08014D94 @ =gCurrentActionFuncId
 	movs r0, 0xA
 	strb r0, [r1]
 	bx lr
 	.align 2, 0
 _08014D78: .4byte gBankAttacker
 _08014D7C: .4byte gTurnOrder
-_08014D80: .4byte gCurrentMoveTurn
+_08014D80: .4byte gCurrentTurnActionNumber
 _08014D84: .4byte gUnknown_030042A4
 _08014D88: .4byte gUnknown_030042A0
 _08014D8C: .4byte gBattlescriptCurrInstr
 _08014D90: .4byte gBattlescriptsForSafariActions
-_08014D94: .4byte gFightStateTracker
+_08014D94: .4byte gCurrentActionFuncId
 	thumb_func_end sub_8014D50
 
 	thumb_func_start sub_8014D98
 sub_8014D98: @ 8014D98
 	ldr r2, _08014DD0 @ =gBankAttacker
 	ldr r1, _08014DD4 @ =gTurnOrder
-	ldr r0, _08014DD8 @ =gCurrentMoveTurn
+	ldr r0, _08014DD8 @ =gCurrentTurnActionNumber
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -3114,21 +2210,21 @@ sub_8014D98: @ 8014D98
 	ldr r0, _08014DF0 @ =gBattlescriptsForBallThrow
 	ldr r0, [r0, 0x14]
 	str r0, [r1]
-	ldr r1, _08014DF4 @ =gFightStateTracker
+	ldr r1, _08014DF4 @ =gCurrentActionFuncId
 	movs r0, 0xA
 	strb r0, [r1]
 	bx lr
 	.align 2, 0
 _08014DD0: .4byte gBankAttacker
 _08014DD4: .4byte gTurnOrder
-_08014DD8: .4byte gCurrentMoveTurn
+_08014DD8: .4byte gCurrentTurnActionNumber
 _08014DDC: .4byte gUnknown_030042A4
 _08014DE0: .4byte gUnknown_030042A0
 _08014DE4: .4byte gNumSafariBalls
 _08014DE8: .4byte gLastUsedItem
 _08014DEC: .4byte gBattlescriptCurrInstr
 _08014DF0: .4byte gBattlescriptsForBallThrow
-_08014DF4: .4byte gFightStateTracker
+_08014DF4: .4byte gCurrentActionFuncId
 	thumb_func_end sub_8014D98
 
 	thumb_func_start sub_8014DF8
@@ -3136,7 +2232,7 @@ sub_8014DF8: @ 8014DF8
 	push {r4-r6,lr}
 	ldr r3, _08014E68 @ =gBankAttacker
 	ldr r1, _08014E6C @ =gTurnOrder
-	ldr r0, _08014E70 @ =gCurrentMoveTurn
+	ldr r0, _08014E70 @ =gCurrentTurnActionNumber
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -3192,7 +2288,7 @@ _08014E42:
 	.align 2, 0
 _08014E68: .4byte gBankAttacker
 _08014E6C: .4byte gTurnOrder
-_08014E70: .4byte gCurrentMoveTurn
+_08014E70: .4byte gCurrentTurnActionNumber
 _08014E74: .4byte gUnknown_030042A4
 _08014E78: .4byte gUnknown_030042A0
 _08014E7C: .4byte gBattleCommunication
@@ -3211,7 +2307,7 @@ _08014E9C:
 	ldr r0, _08014EB4 @ =gBattlescriptsForSafariActions
 	ldr r0, [r0, 0x8]
 	str r0, [r1]
-	ldr r1, _08014EB8 @ =gFightStateTracker
+	ldr r1, _08014EB8 @ =gCurrentActionFuncId
 	movs r0, 0xA
 	strb r0, [r1]
 	pop {r4-r6}
@@ -3220,7 +2316,7 @@ _08014E9C:
 	.align 2, 0
 _08014EB0: .4byte gBattlescriptCurrInstr
 _08014EB4: .4byte gBattlescriptsForSafariActions
-_08014EB8: .4byte gFightStateTracker
+_08014EB8: .4byte gCurrentActionFuncId
 	thumb_func_end sub_8014DF8
 
 	thumb_func_start sub_8014EBC
@@ -3228,7 +2324,7 @@ sub_8014EBC: @ 8014EBC
 	push {r4,r5,lr}
 	ldr r2, _08014F28 @ =gBankAttacker
 	ldr r1, _08014F2C @ =gTurnOrder
-	ldr r0, _08014F30 @ =gCurrentMoveTurn
+	ldr r0, _08014F30 @ =gCurrentTurnActionNumber
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -3284,7 +2380,7 @@ _08014F18:
 	.align 2, 0
 _08014F28: .4byte gBankAttacker
 _08014F2C: .4byte gTurnOrder
-_08014F30: .4byte gCurrentMoveTurn
+_08014F30: .4byte gCurrentTurnActionNumber
 _08014F34: .4byte gUnknown_030042A4
 _08014F38: .4byte gUnknown_030042A0
 _08014F3C: .4byte gSharedMem
@@ -3302,7 +2398,7 @@ _08014F5A:
 	ldr r0, _08014F78 @ =gBattlescriptsForSafariActions
 	ldr r0, [r0, 0x4]
 	str r0, [r1]
-	ldr r1, _08014F7C @ =gFightStateTracker
+	ldr r1, _08014F7C @ =gCurrentActionFuncId
 	movs r0, 0xA
 	strb r0, [r1]
 	pop {r4,r5}
@@ -3312,7 +2408,7 @@ _08014F5A:
 _08014F70: .4byte gBattleCommunication
 _08014F74: .4byte gBattlescriptCurrInstr
 _08014F78: .4byte gBattlescriptsForSafariActions
-_08014F7C: .4byte gFightStateTracker
+_08014F7C: .4byte gCurrentActionFuncId
 	thumb_func_end sub_8014EBC
 
 	thumb_func_start bs8_exit_by_flight
@@ -3320,7 +2416,7 @@ bs8_exit_by_flight: @ 8014F80
 	push {r4,lr}
 	ldr r2, _08014FA8 @ =gBankAttacker
 	ldr r1, _08014FAC @ =gTurnOrder
-	ldr r4, _08014FB0 @ =gCurrentMoveTurn
+	ldr r4, _08014FB0 @ =gCurrentTurnActionNumber
 	ldrb r0, [r4]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -3339,7 +2435,7 @@ bs8_exit_by_flight: @ 8014F80
 	.align 2, 0
 _08014FA8: .4byte gBankAttacker
 _08014FAC: .4byte gTurnOrder
-_08014FB0: .4byte gCurrentMoveTurn
+_08014FB0: .4byte gCurrentTurnActionNumber
 _08014FB4: .4byte gNoOfAllBanks
 _08014FB8: .4byte gBattleOutcome
 	thumb_func_end bs8_exit_by_flight
@@ -3348,7 +2444,7 @@ _08014FB8: .4byte gBattleOutcome
 sub_8014FBC: @ 8014FBC
 	ldr r3, _08015008 @ =gBankAttacker
 	ldr r1, _0801500C @ =gTurnOrder
-	ldr r0, _08015010 @ =gCurrentMoveTurn
+	ldr r0, _08015010 @ =gCurrentTurnActionNumber
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r2, [r0]
@@ -3376,7 +2472,7 @@ sub_8014FBC: @ 8014FBC
 	ldr r0, _08015028 @ =gBattlescriptsForSafariActions
 	ldr r0, [r0, 0xC]
 	str r0, [r1]
-	ldr r1, _0801502C @ =gFightStateTracker
+	ldr r1, _0801502C @ =gCurrentActionFuncId
 	movs r0, 0xA
 	strb r0, [r1]
 	ldr r1, _08015030 @ =gUnknown_02024A76
@@ -3386,14 +2482,14 @@ sub_8014FBC: @ 8014FBC
 	.align 2, 0
 _08015008: .4byte gBankAttacker
 _0801500C: .4byte gTurnOrder
-_08015010: .4byte gCurrentMoveTurn
+_08015010: .4byte gCurrentTurnActionNumber
 _08015014: .4byte gUnknown_030042A4
 _08015018: .4byte gUnknown_030042A0
 _0801501C: .4byte gBattleTextBuff1
 _08015020: .4byte gBattlePartyID
 _08015024: .4byte gBattlescriptCurrInstr
 _08015028: .4byte gBattlescriptsForSafariActions
-_0801502C: .4byte gFightStateTracker
+_0801502C: .4byte gCurrentActionFuncId
 _08015030: .4byte gUnknown_02024A76
 	thumb_func_end sub_8014FBC
 
@@ -3409,7 +2505,7 @@ bsB_exit_by_move: @ 8015034
 	ldr r2, _08015058 @ =0x00016059
 	adds r0, r2
 	strb r1, [r0]
-	ldr r1, _0801505C @ =gFightStateTracker
+	ldr r1, _0801505C @ =gCurrentActionFuncId
 	movs r0, 0xC
 	strb r0, [r1]
 _08015050:
@@ -3418,16 +2514,16 @@ _08015050:
 	.align 2, 0
 _08015054: .4byte gSharedMem
 _08015058: .4byte 0x00016059
-_0801505C: .4byte gFightStateTracker
+_0801505C: .4byte gCurrentActionFuncId
 	thumb_func_end bsB_exit_by_move
 
 	thumb_func_start sub_8015060
 sub_8015060: @ 8015060
-	ldr r1, _08015080 @ =gCurrentMoveTurn
+	ldr r1, _08015080 @ =gCurrentTurnActionNumber
 	ldrb r0, [r1]
 	adds r0, 0x1
 	strb r0, [r1]
-	ldr r3, _08015084 @ =gFightStateTracker
+	ldr r3, _08015084 @ =gCurrentActionFuncId
 	ldr r2, _08015088 @ =gUnknown_02024A76
 	ldrb r0, [r1]
 	adds r0, r2
@@ -3440,8 +2536,8 @@ sub_8015060: @ 8015060
 	str r0, [r2]
 	bx lr
 	.align 2, 0
-_08015080: .4byte gCurrentMoveTurn
-_08015084: .4byte gFightStateTracker
+_08015080: .4byte gCurrentTurnActionNumber
+_08015084: .4byte gCurrentActionFuncId
 _08015088: .4byte gUnknown_02024A76
 _0801508C: .4byte gHitMarker
 _08015090: .4byte 0xf1e892af
@@ -3450,11 +2546,11 @@ _08015090: .4byte 0xf1e892af
 	thumb_func_start bsC_8016D70
 bsC_8016D70: @ 8015094
 	push {r4,r5,lr}
-	ldr r1, _0801510C @ =gCurrentMoveTurn
+	ldr r1, _0801510C @ =gCurrentTurnActionNumber
 	ldrb r0, [r1]
 	adds r0, 0x1
 	strb r0, [r1]
-	ldr r3, _08015110 @ =gFightStateTracker
+	ldr r3, _08015110 @ =gCurrentActionFuncId
 	ldr r2, _08015114 @ =gUnknown_02024A76
 	ldrb r0, [r1]
 	adds r0, r2
@@ -3509,8 +2605,8 @@ bsC_8016D70: @ 8015094
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0801510C: .4byte gCurrentMoveTurn
-_08015110: .4byte gFightStateTracker
+_0801510C: .4byte gCurrentTurnActionNumber
+_08015110: .4byte gCurrentActionFuncId
 _08015114: .4byte gUnknown_02024A76
 _08015118: .4byte gHitMarker
 _0801511C: .4byte 0xf1e892af

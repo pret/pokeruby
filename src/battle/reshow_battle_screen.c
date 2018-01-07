@@ -171,13 +171,13 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
 
             sub_80327CC();
 
-            opponentBank = GetBankByPlayerAI(1);
+            opponentBank = GetBankByIdentity(1);
             species = GetMonData(&gEnemyParty[gBattlePartyID[opponentBank]], MON_DATA_SPECIES);
             sub_8032984(opponentBank, species);
 
             if (IsDoubleBattle())
             {
-                opponentBank = GetBankByPlayerAI(3);
+                opponentBank = GetBankByIdentity(3);
                 species = GetMonData(&gEnemyParty[gBattlePartyID[opponentBank]], MON_DATA_SPECIES);
                 sub_8032984(opponentBank, species);
             }

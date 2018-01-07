@@ -75,7 +75,7 @@ extern void PlayerHandlecmd1(void);
 extern void LoadPlayerTrainerBankSprite();
 extern u8 GetBankIdentity(u8);
 extern void sub_80313A0(struct Sprite *);
-extern u8 GetBankByPlayerAI(u8);
+extern u8 GetBankByIdentity(u8);
 extern u8 sub_8031720();
 extern void DoMoveAnim();
 extern void sub_80326EC();
@@ -1149,7 +1149,7 @@ void WallyHandlecmd12(void)
 {
     ewram17840.unk8 = 4;
     gDoingBattleAnim = TRUE;
-    move_anim_start_t4(gActiveBank, gActiveBank, GetBankByPlayerAI(1), 4);
+    move_anim_start_t4(gActiveBank, gActiveBank, GetBankByIdentity(1), 4);
     gBattleBankFunc[gActiveBank] = bx_wait_t5;
 }
 
@@ -1159,7 +1159,7 @@ void WallyHandleBallThrow(void)
 
     ewram17840.unk8 = val;
     gDoingBattleAnim = TRUE;
-    move_anim_start_t4(gActiveBank, gActiveBank, GetBankByPlayerAI(1), 4);
+    move_anim_start_t4(gActiveBank, gActiveBank, GetBankByIdentity(1), 4);
     gBattleBankFunc[gActiveBank] = bx_wait_t5;
 }
 
