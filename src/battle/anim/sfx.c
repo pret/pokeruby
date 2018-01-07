@@ -251,3 +251,25 @@ _0812B104: .4byte sub_812B108\n\
     .syntax divided\n");
 }
 #endif // NONMATCHING
+
+void sub_812B108(u8 taskId)
+{
+    if (TASK.data[12]++ == TASK.data[6])
+    {
+        TASK.data[12] = 0;
+        PlaySE12WithPanning(TASK.data[0], TASK.data[11]);
+
+        if (--TASK.data[4] == 0)
+        {
+            DestroyAnimSoundTask(taskId);
+            return;
+        }
+    }
+
+    if (TASK.data[10]++ == TASK.data[5])
+    {
+        TASK.data[10] = 0;
+        TASK.data[11] += TASK.data[3];
+        TASK.data[11] = sub_8077104(TASK.data[11]);
+    }
+}
