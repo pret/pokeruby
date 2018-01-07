@@ -1,5 +1,7 @@
 #include "global.h"
 #include "palette.h"
+#include "constants/songs.h"
+#include "sound.h"
 #include "field_weather.h"
 #include "overworld.h"
 #include "field_fadetransition.h"
@@ -28,7 +30,13 @@ struct PokemonStorageSystemData {
 };
 
 struct UnkPSSStruct_2002370 {
-    u8 filler_0000[0x23e];
+    struct Sprite *unk_0000;
+    struct Sprite *unk_0004[4];
+    u32 unk_0014[3];
+    struct Sprite *unk_0020[2];
+    u8 filler_0028[0x214];
+    u8 unk_023c;
+    u8 unk_023d;
     u8 unk_023e;
     u16 unk_0240;
     u16 unk_0242;
@@ -36,6 +44,13 @@ struct UnkPSSStruct_2002370 {
 
 void StorageSystemCreatePrimaryMenu(u8 whichMenu);
 void task_intro_29(u8 whichMenu);
+void sub_80963D0(u8 a0);
+void sub_809658C(void);
+void sub_80965F8(void);
+void sub_809662C(void);
+void sub_809665C(void);
+void sub_8096784(struct Sprite *sprite);
+struct Sprite *sub_809A9A0(u16 a0, u16 a1, u8 a2, u8 a3, u8 a4);
 
 const struct PSS_MenuStringPtrs gUnknown_083B600C[] = {
     {PCText_WithdrawPoke, PCText_MovePokeToParty},
@@ -537,6 +552,102 @@ void sub_8096264(struct UnkPSSStruct_2002370 *a0, u16 tileTag, u16 palTag, u8 a3
     a0->unk_0240 = tileTag;
     a0->unk_0242 = palTag;
     a0->unk_023e = a3;
+}
+
+void sub_8096310(void)
+{
+    FreeSpritePaletteByTag(gUnknown_02038478->unk_0242);
+    FreeSpriteTilesByTag(gUnknown_02038478->unk_0240);
+    FreeSpriteTilesByTag(gUnknown_02038478->unk_0240 + 1);
+}
+
+void sub_809634C(u8 a0)
+{
+    sub_80963D0(a0);
+}
+
+void sub_809635C(void)
+{
+    sub_809658C();
+}
+
+u8 sub_8096368(void)
+{
+    if (gMain.newKeys & B_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        return 201;
+    }
+    if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        return gUnknown_02038478->unk_023c;
+    }
+    if (gMain.newKeys & DPAD_LEFT)
+    {
+        PlaySE(SE_SELECT);
+        sub_809662C();
+    }
+    else if (gMain.newKeys & DPAD_RIGHT)
+    {
+        PlaySE(SE_SELECT);
+        sub_80965F8();
+    }
+    return 200;
+}
+
+void sub_80963D0(u8 a0)
+{
+    u16 i;
+    u8 spriteId;
+    struct SpriteTemplate template;
+    struct OamData oamData = {};
+    oamData.size = 3;
+    oamData.paletteNum = 1;
+    template = (struct SpriteTemplate){
+        0, 0, &oamData, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+    };
+
+    gUnknown_02038478->unk_023c = a0;
+    template.tileTag = gUnknown_02038478->unk_0240;
+    template.paletteTag = gUnknown_02038478->unk_0242;
+
+    spriteId = CreateSprite(&template, 0xa0, 0x60, 0);
+    gUnknown_02038478->unk_0000 = gSprites + spriteId;
+
+    oamData.shape = ST_OAM_V_RECTANGLE;
+    oamData.size = 1;
+    template.tileTag = gUnknown_02038478->unk_0240 + 1;
+    template.anims = gSpriteAnimTable_83B604C;
+    for (i = 0; i < 4; i++)
+    {
+        u16 r5;
+        spriteId = CreateSprite(&template, 0x7c, 0x50, gUnknown_02038478->unk_023e);
+        gUnknown_02038478->unk_0004[i] = gSprites + spriteId;
+        r5 = 0;
+        if (i & 2)
+        {
+            gUnknown_02038478->unk_0004[i]->pos1.x = 0xc4;
+            r5 = 2;
+        }
+        if (i & 1)
+        {
+            gUnknown_02038478->unk_0004[i]->pos1.y = 0x70;
+            gUnknown_02038478->unk_0004[i]->oam.size = 0;
+            r5++;
+        }
+        StartSpriteAnim(gUnknown_02038478->unk_0004[i], r5);
+    }
+    for (i = 0; i < 2; i++)
+    {
+        gUnknown_02038478->unk_0020[i] = sub_809A9A0(72 * i + 0x7c, 0x58, i, 0, gUnknown_02038478->unk_023e);
+        if (gUnknown_02038478->unk_0020[i])
+        {
+            gUnknown_02038478->unk_0020[i]->data[0] = (i == 0 ? -1 : 1);
+            gUnknown_02038478->unk_0020[i]->callback = sub_8096784;
+        }
+    }
+    sub_809665C();
 }
 
 asm(".section .text.8098898");
