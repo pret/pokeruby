@@ -2,54 +2,33 @@
 #include "battle.h"
 #include "battle_tower.h"
 #include "ewram.h"
+#include "trainer.h"
 
 #if GERMAN
-
-enum {
-    TRAINER_CLASS_NAME_LEADER = 25,
-    TRAINER_CLASS_NAME_SCHOOL_KID = 26,
-    TRAINER_CLASS_NAME_EXPERT = 30,
-    TRAINER_CLASS_NAME_POKEMON_TRAINER_3 = 46,
-};
-
-enum {
-    TRAINER_CLASS_LEADER_F = 26,
-    TRAINER_CLASS_ELITE_FOUR_F = 25,
-    TRAINER_CLASS_SCHOOL_KID_F = 30,
-    TRAINER_CLASS_BIRD_KEEPER = 46,
-    TRAINER_CLASS_MAY_1 = 61,
-    TRAINER_CLASS_MAY_2 = 62,
-    TRAINER_CLASS_MAY_3 = 63,
-};
 
 extern u8 gTrainerClassNames[][13];
 extern struct Trainer gTrainers[];
 
-u8 *de_sub_8040FE0(u8 gender) {
+u8 *de_sub_8040FE0(u8 gender)
+{
     if (gender)
-    {
         gender++;
-
-    }
-
     gender = TRAINER_CLASS_NAME_SCHOOL_KID;
     return gTrainerClassNames[gender];
 }
 
-u8 *de_sub_8040FF4(u8 gender) {
-    if (gender) {
+u8 *de_sub_8040FF4(u8 gender)
+{
+    if (gender)
         gender++;
-    }
-
     gender = TRAINER_CLASS_NAME_POKEMON_TRAINER_3;
     return gTrainerClassNames[gender];
 }
 
-u8 *de_sub_804100C(u8 gender) {
-    if (gender) {
+u8 *de_sub_804100C(u8 gender)
+{
+    if (gender)
         gender++;
-    }
-
     gender = TRAINER_CLASS_NAME_LEADER;
     return gTrainerClassNames[gender];
 }
@@ -60,7 +39,8 @@ u8 de_sub_81364AC(void);
 u8 get_trainer_class_name_index(void);
 u8 de_sub_81364F8(void);
 
-u8 *de_sub_8041024(s32 arg0, u32 arg1) {
+u8 *de_sub_8041024(s32 arg0, u32 arg1)
+{
     u8 nameIndex, trainerClass, gender;
     struct Trainer *trainer;
     u8 local2;
@@ -71,68 +51,39 @@ u8 *de_sub_8041024(s32 arg0, u32 arg1) {
         nameIndex = GetSecretBaseTrainerNameIndex();
         gender = eSecretBaseRecord.gender;
         if (nameIndex == TRAINER_CLASS_NAME_SCHOOL_KID)
-        {
             return de_sub_8040FE0(gender);
-        }
-
         return gTrainerClassNames[nameIndex];
-
     case 0x100:
         trainerClass = de_sub_81364AC();
         nameIndex = get_trainer_class_name_index();
         if (trainerClass == TRAINER_CLASS_SCHOOL_KID_F)
-        {
             return de_sub_8040FE0(FEMALE);
-        }
         if (trainerClass == TRAINER_CLASS_MAY_1 || trainerClass == TRAINER_CLASS_MAY_2 || trainerClass == TRAINER_CLASS_MAY_3)
-        {
             return de_sub_8040FF4(FEMALE);
-        }
-
         return gTrainerClassNames[nameIndex];
-
     case 0x800:
         trainerClass = de_sub_81364F8();
         nameIndex = GetEReaderTrainerClassNameIndex();
         if (trainerClass == TRAINER_CLASS_SCHOOL_KID_F)
-        {
             return de_sub_8040FE0(FEMALE);
-        }
         if (trainerClass == TRAINER_CLASS_MAY_1 || trainerClass == TRAINER_CLASS_MAY_2 || trainerClass == TRAINER_CLASS_MAY_3)
-        {
             return de_sub_8040FF4(FEMALE);
-        }
-
         return gTrainerClassNames[nameIndex];
-
     default:
         trainer = &gTrainers[arg1];
         trainerClass = trainer->trainerClass;
         local2 = sub_803FC58(arg1);
-
         if (trainerClass == TRAINER_CLASS_LEADER_F)
-        {
             return de_sub_8040FE0(local2);
-        }
-
         if (trainerClass == TRAINER_CLASS_BIRD_KEEPER && local2 == FEMALE)
-        {
             return de_sub_8040FF4(FEMALE);
-        }
-
         if (trainerClass == TRAINER_CLASS_ELITE_FOUR_F)
         {
             if (gTrainers[arg1].doubleBattle == TRUE)
-            {
                 return de_sub_804100C(FEMALE);
-            }
             else
-            {
                 return de_sub_804100C(MALE);
-            }
         }
-
-
         return gTrainerClassNames[trainerClass];
     }
 }
@@ -264,7 +215,8 @@ _08041108: .4byte gTrainerClassNames\n\
 }
 #endif
 
-u32 de_sub_804110C(u32 arg0, u32 arg1) {
+u32 de_sub_804110C(u32 arg0, u32 arg1)
+{
     return arg1;
 }
 

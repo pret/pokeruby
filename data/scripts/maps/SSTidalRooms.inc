@@ -4,8 +4,7 @@ SSTidalRooms_MapScripts:: @ 815FF05
 SSTidalRooms_EventScript_15FF06:: @ 815FF06
 	lock
 	faceplayer
-	checkflag FLAG_RECEIVED_TM49
-	goto_if_eq SSTidalRooms_EventScript_15FF3D
+	goto_if_set FLAG_RECEIVED_TM49, SSTidalRooms_EventScript_15FF3D
 	msgbox SSTidalRooms_Text_199B65, 4
 	giveitem_std ITEM_TM49
 	compare RESULT, 0

@@ -6,9 +6,8 @@ LittlerootTown_MaysHouse_1F_MapScripts:: @ 8152879
 
 LittlerootTown_MaysHouse_1F_MapScript1_152889:: @ 8152889
 	compare VAR_LITTLEROOT_INTRO_STATE, 6
-	call_if 0, LittlerootTown_MaysHouse_1F_EventScript_15289E
-	checkflag FLAG_RECEIVED_RUNNING_SHOES
-	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1528B1
+	call_if_lt LittlerootTown_MaysHouse_1F_EventScript_15289E
+	call_if_set FLAG_RECEIVED_RUNNING_SHOES, LittlerootTown_MaysHouse_1F_EventScript_1528B1
 	end
 
 LittlerootTown_MaysHouse_1F_EventScript_15289E:: @ 815289E
@@ -28,11 +27,11 @@ LittlerootTown_MaysHouse_1F_EventScript_1528BE:: @ 81528BE
 
 LittlerootTown_MaysHouse_1F_MapScript1_1528C8:: @ 81528C8
 	compare VAR_LITTLEROOT_INTRO_STATE, 3
-	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_152902
+	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_152902
 	compare VAR_LITTLEROOT_INTRO_STATE, 5
-	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1528EA
+	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_1528EA
 	compare VAR_LITTLEROOT_INTRO_STATE, 6
-	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1528F6
+	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_1528F6
 	end
 
 LittlerootTown_MaysHouse_1F_EventScript_1528EA:: @ 81528EA
@@ -118,9 +117,9 @@ LittlerootTown_MaysHouse_1F_Movement_1529C0:: @ 81529C0
 	lockall
 	checkplayergender
 	compare RESULT, 0
-	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1529E1
+	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_1529E1
 	compare RESULT, 1
-	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1529E2
+	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_1529E2
 	releaseall
 	end
 
@@ -135,10 +134,8 @@ LittlerootTown_BrendansHouse_1F_EventScript_1529EB:: @ 81529EB
 LittlerootTown_MaysHouse_1F_EventScript_1529EB:: @ 81529EB
 	lock
 	faceplayer
-	checkflag FLAG_DEFEATED_RIVAL_ROUTE103
-	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_152A21
-	checkflag FLAG_RIVAL_LEFT_FOR_ROUTE103
-	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_152A17
+	goto_if_set FLAG_DEFEATED_RIVAL_ROUTE103, LittlerootTown_BrendansHouse_1F_EventScript_152A21
+	goto_if_set FLAG_RIVAL_LEFT_FOR_ROUTE103, LittlerootTown_BrendansHouse_1F_EventScript_152A17
 	compare VAR_LITTLEROOT_RIVAL_STATE, 3
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_152A2B
 	special GetRivalSonDaughterString

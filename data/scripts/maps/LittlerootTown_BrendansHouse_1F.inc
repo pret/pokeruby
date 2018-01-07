@@ -6,9 +6,8 @@ LittlerootTown_BrendansHouse_1F_MapScripts:: @ 815263B
 
 LittlerootTown_BrendansHouse_1F_MapScript1_15264B:: @ 815264B
 	compare VAR_LITTLEROOT_INTRO_STATE, 6
-	call_if 0, LittlerootTown_BrendansHouse_1F_EventScript_152660
-	checkflag FLAG_RECEIVED_RUNNING_SHOES
-	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_152673
+	call_if_lt LittlerootTown_BrendansHouse_1F_EventScript_152660
+	call_if_set FLAG_RECEIVED_RUNNING_SHOES, LittlerootTown_BrendansHouse_1F_EventScript_152673
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_152660:: @ 8152660
@@ -28,11 +27,11 @@ LittlerootTown_BrendansHouse_1F_EventScript_152680:: @ 8152680
 
 LittlerootTown_BrendansHouse_1F_MapScript1_15268A:: @ 815268A
 	compare VAR_LITTLEROOT_INTRO_STATE, 3
-	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1526C4
+	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1526C4
 	compare VAR_LITTLEROOT_INTRO_STATE, 5
-	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1526AC
+	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1526AC
 	compare VAR_LITTLEROOT_INTRO_STATE, 6
-	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1526B8
+	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1526B8
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_1526AC:: @ 81526AC

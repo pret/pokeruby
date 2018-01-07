@@ -5,12 +5,11 @@ LavaridgeTown_MapScripts:: @ 814E4A3
 
 LavaridgeTown_MapScript1_14E4AE:: @ 814E4AE
 	setflag FLAG_VISITED_LAVARIDGE_TOWN
-	checkflag FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY
-	call_if 1, LavaridgeTown_EventScript_14E4DF
+	call_if_set FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY, LavaridgeTown_EventScript_14E4DF
 	call LavaridgeTown_EventScript_1A014E
 	call LavaridgeTown_EventScript_1A0172
 	compare VAR_LAVARIDGE_RIVAL_STATE, 2
-	call_if 1, LavaridgeTown_EventScript_14E4D0
+	call_if_eq LavaridgeTown_EventScript_14E4D0
 	end
 
 LavaridgeTown_EventScript_14E4D0:: @ 814E4D0
@@ -45,11 +44,11 @@ LavaridgeTown_EventScript_14E4ED:: @ 814E4ED
 	waitmovement 0
 	checkplayergender
 	compare RESULT, 0
-	call_if 1, LavaridgeTown_EventScript_14E56B
+	call_if_eq LavaridgeTown_EventScript_14E56B
 	compare RESULT, 1
-	call_if 1, LavaridgeTown_EventScript_14E570
+	call_if_eq LavaridgeTown_EventScript_14E570
 	compare VAR_SPECIAL_8, 1
-	call_if 1, LavaridgeTown_EventScript_14E68F
+	call_if_eq LavaridgeTown_EventScript_14E68F
 	checkplayergender
 	compare RESULT, 0
 	goto_if_eq LavaridgeTown_EventScript_14E5AB
@@ -71,9 +70,9 @@ LavaridgeTown_EventScript_14E575:: @ 814E575
 	setvar VAR_SPECIAL_8, 0
 	checkplayergender
 	compare RESULT, 0
-	call_if 1, LavaridgeTown_EventScript_14E56B
+	call_if_eq LavaridgeTown_EventScript_14E56B
 	compare RESULT, 1
-	call_if 1, LavaridgeTown_EventScript_14E570
+	call_if_eq LavaridgeTown_EventScript_14E570
 	checkplayergender
 	compare RESULT, 0
 	goto_if_eq LavaridgeTown_EventScript_14E5AB
@@ -100,16 +99,16 @@ LavaridgeTown_EventScript_14E5D0:: @ 814E5D0
 LavaridgeTown_EventScript_14E5F5:: @ 814E5F5
 	closemessage
 	compare VAR_SPECIAL_8, 1
-	call_if 1, LavaridgeTown_EventScript_14E646
+	call_if_eq LavaridgeTown_EventScript_14E646
 	compare VAR_SPECIAL_8, 0
-	call_if 1, LavaridgeTown_EventScript_14E64E
+	call_if_eq LavaridgeTown_EventScript_14E64E
 	removeobject 8
 	addobject 7
 	delay 30
 	compare VAR_SPECIAL_8, 1
-	call_if 1, LavaridgeTown_EventScript_14E69A
+	call_if_eq LavaridgeTown_EventScript_14E69A
 	compare VAR_SPECIAL_8, 0
-	call_if 1, LavaridgeTown_EventScript_14E6A5
+	call_if_eq LavaridgeTown_EventScript_14E6A5
 	removeobject 7
 	setvar VAR_LAVARIDGE_RIVAL_STATE, 2
 	savebgm 0
@@ -129,13 +128,13 @@ LavaridgeTown_EventScript_14E646:: @ 814E646
 
 LavaridgeTown_EventScript_14E64E:: @ 814E64E
 	compare FACING, 2
-	call_if 1, LavaridgeTown_EventScript_14E67B
+	call_if_eq LavaridgeTown_EventScript_14E67B
 	compare FACING, 1
-	call_if 1, LavaridgeTown_EventScript_14E680
+	call_if_eq LavaridgeTown_EventScript_14E680
 	compare FACING, 3
-	call_if 1, LavaridgeTown_EventScript_14E685
+	call_if_eq LavaridgeTown_EventScript_14E685
 	compare FACING, 4
-	call_if 1, LavaridgeTown_EventScript_14E68A
+	call_if_eq LavaridgeTown_EventScript_14E68A
 	return
 
 LavaridgeTown_EventScript_14E67B:: @ 814E67B
@@ -166,13 +165,13 @@ LavaridgeTown_EventScript_14E69A:: @ 814E69A
 
 LavaridgeTown_EventScript_14E6A5:: @ 814E6A5
 	compare FACING, 2
-	call_if 1, LavaridgeTown_EventScript_14E6D2
+	call_if_eq LavaridgeTown_EventScript_14E6D2
 	compare FACING, 1
-	call_if 1, LavaridgeTown_EventScript_14E6D2
+	call_if_eq LavaridgeTown_EventScript_14E6D2
 	compare FACING, 3
-	call_if 1, LavaridgeTown_EventScript_14E6DD
+	call_if_eq LavaridgeTown_EventScript_14E6DD
 	compare FACING, 4
-	call_if 1, LavaridgeTown_EventScript_14E6D2
+	call_if_eq LavaridgeTown_EventScript_14E6D2
 	return
 
 LavaridgeTown_EventScript_14E6D2:: @ 814E6D2
@@ -272,8 +271,7 @@ LavaridgeTown_EventScript_14E751:: @ 814E751
 LavaridgeTown_EventScript_14E75A:: @ 814E75A
 	lock
 	faceplayer
-	checkflag FLAG_RECEIVED_LAVARIDGE_EGG
-	goto_if_eq LavaridgeTown_EventScript_14E79E
+	goto_if_set FLAG_RECEIVED_LAVARIDGE_EGG, LavaridgeTown_EventScript_14E79E
 	msgbox LavaridgeTown_Text_16C174, MSGBOX_YESNO
 	compare RESULT, NO
 	goto_if_eq LavaridgeTown_EventScript_14E7B2

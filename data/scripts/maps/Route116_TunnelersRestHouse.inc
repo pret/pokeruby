@@ -17,8 +17,7 @@ Route116_TunnelersRestHouse_EventScript_15C2F1:: @ 815C2F1
 Route116_TunnelersRestHouse_EventScript_15C2FA:: @ 815C2FA
 	lock
 	faceplayer
-	checkflag FLAG_RUSTURF_TUNNEL_OPENED
-	goto_if_eq Route116_TunnelersRestHouse_EventScript_15C30F
+	goto_if_set FLAG_RUSTURF_TUNNEL_OPENED, Route116_TunnelersRestHouse_EventScript_15C30F
 	msgbox Route116_TunnelersRestHouse_Text_193135, 4
 	release
 	end

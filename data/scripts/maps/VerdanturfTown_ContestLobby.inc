@@ -101,8 +101,7 @@ VerdanturfTown_ContestLobby_EventScript_153E3E:: @ 8153E3E
 VerdanturfTown_ContestLobby_EventScript_153E47:: @ 8153E47
 	lock
 	faceplayer
-	checkflag FLAG_RECEIVED_TM45
-	goto_if_eq VerdanturfTown_ContestLobby_EventScript_153E76
+	goto_if_set FLAG_RECEIVED_TM45, VerdanturfTown_ContestLobby_EventScript_153E76
 	msgbox VerdanturfTown_ContestLobby_Text_177DEC, 4
 	giveitem_std ITEM_TM45
 	compare RESULT, 0

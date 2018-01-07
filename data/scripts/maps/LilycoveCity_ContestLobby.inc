@@ -13,8 +13,7 @@ LilycoveCity_ContestLobby_MapScript2_158877:: @ 8158877
 	.2byte 0
 
 LilycoveCity_ContestLobby_EventScript_158889:: @ 8158889
-	checkflag FLAG_HIDE_LILYCOVE_MUSEUM_CURATOR
-	goto_if_eq LilycoveCity_ContestLobby_EventScript_158898
+	goto_if_set FLAG_HIDE_LILYCOVE_MUSEUM_CURATOR, LilycoveCity_ContestLobby_EventScript_158898
 	setvar VAR_LILYCOVE_CONTEST_LOBBY_STATE, 0
 	end
 
@@ -45,7 +44,7 @@ LilycoveCity_ContestLobby_EventScript_1588DE:: @ 81588DE
 	setvar VAR_LILYCOVE_CONTEST_LOBBY_STATE, 0
 	specialvar RESULT, GiveMonArtistRibbon
 	compare RESULT, 1
-	call_if 1, LilycoveCity_ContestLobby_EventScript_158948
+	call_if_eq LilycoveCity_ContestLobby_EventScript_158948
 	applymovement 4, LilycoveCity_ContestLobby_Movement_158A43
 	waitmovement 0
 	removeobject 4
@@ -188,8 +187,7 @@ LilycoveCity_ContestLobby_Movement_158A52:: @ 8158A52
 	step_end
 
 LilycoveCity_ContestLobby_EventScript_158A5B:: @ 8158A5B
-	checkflag FLAG_HIDE_LILYCOVE_MUSEUM_CURATOR
-	goto_if_eq LilycoveCity_ContestLobby_EventScript_158A6A
+	goto_if_set FLAG_HIDE_LILYCOVE_MUSEUM_CURATOR, LilycoveCity_ContestLobby_EventScript_158A6A
 	setvar VAR_LILYCOVE_CONTEST_LOBBY_STATE, 0
 	end
 
@@ -218,7 +216,7 @@ LilycoveCity_ContestLobby_EventScript_158AAE:: @ 8158AAE
 	setvar VAR_LILYCOVE_CONTEST_LOBBY_STATE, 0
 	specialvar RESULT, GiveMonArtistRibbon
 	compare RESULT, 1
-	call_if 1, LilycoveCity_ContestLobby_EventScript_158B18
+	call_if_eq LilycoveCity_ContestLobby_EventScript_158B18
 	applymovement 11, LilycoveCity_ContestLobby_Movement_158B6D
 	waitmovement 0
 	removeobject 11
@@ -307,8 +305,7 @@ LilycoveCity_ContestLobby_EventScript_158B85:: @ 8158B85
 	checkitem ITEM_CONTEST_PASS, 1
 	compare RESULT, 0
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_158BBA
-	checkflag FLAG_TEMP_2
-	goto_if_eq LilycoveCity_ContestLobby_EventScript_158BAE
+	goto_if_set FLAG_TEMP_2, LilycoveCity_ContestLobby_EventScript_158BAE
 	message LilycoveCity_ContestLobby_Text_18848C
 	waitmessage
 	setflag FLAG_TEMP_2
@@ -402,8 +399,7 @@ LilycoveCity_ContestLobby_EventScript_158CC0:: @ 8158CC0
 	end
 
 LilycoveCity_ContestLobby_EventScript_158CEA:: @ 8158CEA
-	checkflag FLAG_TEMP_3
-	call_if 0, LilycoveCity_ContestLobby_EventScript_158BC4
+	call_if_unset FLAG_TEMP_3, LilycoveCity_ContestLobby_EventScript_158BC4
 	message LilycoveCity_ContestLobby_Text_1886DC
 	waitmessage
 	multichoice 0, 0, 4, 0
@@ -707,8 +703,7 @@ LilycoveCity_ContestLobby_EventScript_15901E:: @ 815901E
 	end
 
 LilycoveCity_ContestLobby_EventScript_159027:: @ 8159027
-	checkflag FLAG_RECEIVED_CONTEST_PASS
-	goto_if 0, LilycoveCity_ContestLobby_EventScript_159039
+	goto_if_unset FLAG_RECEIVED_CONTEST_PASS, LilycoveCity_ContestLobby_EventScript_159039
 	msgbox LilycoveCity_ContestLobby_Text_188DDA, 2
 	end
 

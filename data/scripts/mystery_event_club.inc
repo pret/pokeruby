@@ -1,8 +1,7 @@
 PetalburgCity_PokemonCenter_1F_EventScript_1B1B14:: @ 81B1B14
 	lock
 	faceplayer
-	checkflag FLAG_SYS_CHAT_USED
-	goto_if_eq PetalburgCity_PokemonCenter_1F_EventScript_1B1BDB
+	goto_if_set FLAG_SYS_CHAT_USED, PetalburgCity_PokemonCenter_1F_EventScript_1B1BDB
 	msgbox PetalburgCity_PokemonCenter_1F_Text_1B1C97, 4
 	goto PetalburgCity_PokemonCenter_1F_EventScript_1B1B2D
 	end
@@ -30,7 +29,7 @@ PetalburgCity_PokemonCenter_1F_EventScript_1B1B7A:: @ 81B1B7A
 	lock
 	faceplayer
 	compare VAR_SPECIAL_4, 1
-	call_if 1, PetalburgCity_PokemonCenter_1F_EventScript_1B1C77
+	call_if_eq PetalburgCity_PokemonCenter_1F_EventScript_1B1C77
 	compare RESULT, 0
 	goto_if_eq PetalburgCity_PokemonCenter_1F_EventScript_1B1BB1
 	compare RESULT, 1
@@ -84,7 +83,7 @@ PetalburgCity_PokemonCenter_1F_EventScript_1B1C36:: @ 81B1C36
 	lock
 	faceplayer
 	compare VAR_SPECIAL_4, 1
-	call_if 1, PetalburgCity_PokemonCenter_1F_EventScript_1B1C77
+	call_if_eq PetalburgCity_PokemonCenter_1F_EventScript_1B1C77
 	compare RESULT, 0
 	goto_if_eq PetalburgCity_PokemonCenter_1F_EventScript_1B1BB1
 	compare RESULT, 1
@@ -97,10 +96,8 @@ PetalburgCity_PokemonCenter_1F_EventScript_1B1C6D:: @ 81B1C6D
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_1B1C77:: @ 81B1C77
-	checkflag FLAG_BADGE05_GET
-	goto_if 0, PetalburgCity_PokemonCenter_1F_EventScript_1B1C96
-	checkflag FLAG_SYS_EXDATA_ENABLE
-	goto_if_eq PetalburgCity_PokemonCenter_1F_EventScript_1B1C96
+	goto_if_unset FLAG_BADGE05_GET, PetalburgCity_PokemonCenter_1F_EventScript_1B1C96
+	goto_if_set FLAG_SYS_EXDATA_ENABLE, PetalburgCity_PokemonCenter_1F_EventScript_1B1C96
 	setflag FLAG_SYS_EXDATA_ENABLE
 	msgbox PetalburgCity_PokemonCenter_1F_Text_1B21CC, 3
 	release

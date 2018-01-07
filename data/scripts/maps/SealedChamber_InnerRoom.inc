@@ -6,8 +6,7 @@ SealedChamber_InnerRoom_EventScript_15F1E8:: @ 815F1E8
 	braillemessage SealedChamber_InnerRoom_Braille_1C53C1
 	waitbuttonpress
 	erasebox 0, 0, 29, 19
-	checkflag FLAG_REGI_DOORS_OPENED
-	goto_if_eq SealedChamber_InnerRoom_EventScript_15F247
+	goto_if_set FLAG_REGI_DOORS_OPENED, SealedChamber_InnerRoom_EventScript_15F247
 	specialvar RESULT, CheckRelicanthWailord
 	compare RESULT, 0
 	goto_if_eq SealedChamber_InnerRoom_EventScript_15F247

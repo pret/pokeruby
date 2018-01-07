@@ -4,8 +4,7 @@ ShoalCave_LowTideEntranceRoom_MapScripts:: @ 815E057
 
 ShoalCave_LowTideEntranceRoom_MapScript1_15E05D:: @ 815E05D
 	special UpdateShoalTideFlag
-	checkflag FLAG_SYS_SHOAL_TIDE
-	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_15E06E
+	goto_if_set FLAG_SYS_SHOAL_TIDE, ShoalCave_LowTideEntranceRoom_EventScript_15E06E
 	goto ShoalCave_LowTideEntranceRoom_EventScript_15E072
 
 ShoalCave_LowTideEntranceRoom_EventScript_15E06E:: @ 815E06E
@@ -20,8 +19,7 @@ ShoalCave_LowTideEntranceRoom_EventScript_15E076:: @ 815E076
 	lock
 	faceplayer
 	dodailyevents
-	checkflag FLAG_SYS_SHOAL_ITEM
-	call_if 1, ShoalCave_LowTideEntranceRoom_EventScript_15E176
+	call_if_set FLAG_SYS_SHOAL_ITEM, ShoalCave_LowTideEntranceRoom_EventScript_15E176
 	checkitem ITEM_SHOAL_SALT, 4
 	compare RESULT, 0
 	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_15E138
@@ -33,7 +31,7 @@ ShoalCave_LowTideEntranceRoom_EventScript_15E076:: @ 815E076
 	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_15E16C
 	checkitemspace ITEM_SHELL_BELL, 1
 	compare RESULT, 0
-	call_if 1, ShoalCave_LowTideEntranceRoom_EventScript_15E106
+	call_if_eq ShoalCave_LowTideEntranceRoom_EventScript_15E106
 	compare RESULT, 2
 	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_15E12E
 	msgbox ShoalCave_LowTideEntranceRoom_Text_1C6808, 4

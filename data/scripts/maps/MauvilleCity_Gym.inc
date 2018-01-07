@@ -3,8 +3,7 @@ MauvilleCity_Gym_MapScripts:: @ 8156450
 	.byte 0
 
 MauvilleCity_Gym_MapScript1_156456:: @ 8156456
-	checkflag FLAG_DEFEATED_MAUVILLE_GYM
-	goto_if_eq MauvilleCity_Gym_EventScript_1565A7
+	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_1565A7
 	switch VAR_MAUVILLE_GYM_STATE
 	case 0, MauvilleCity_Gym_EventScript_156491
 	case 1, MauvilleCity_Gym_EventScript_15657D
@@ -13,8 +12,7 @@ MauvilleCity_Gym_MapScript1_156456:: @ 8156456
 	end
 
 MauvilleCity_Gym_EventScript_156491:: @ 8156491
-	checkflag FLAG_MAUVILLE_GYM_BARRIERS_STATE
-	goto_if_eq MauvilleCity_Gym_EventScript_15649B
+	goto_if_set FLAG_MAUVILLE_GYM_BARRIERS_STATE, MauvilleCity_Gym_EventScript_15649B
 	end
 
 MauvilleCity_Gym_EventScript_15649B:: @ 815649B
@@ -69,8 +67,7 @@ MauvilleCity_Gym_EventScript_1565A7:: @ 81565A7
 
 MauvilleCity_Gym_EventScript_1565AB:: @ 81565AB
 	trainerbattle 1, OPPONENT_WATTSON, 0, MauvilleCity_Gym_Text_180C32, MauvilleCity_Gym_Text_180D64, MauvilleCity_Gym_EventScript_1565DB
-	checkflag FLAG_RECEIVED_TM34
-	goto_if 0, MauvilleCity_Gym_EventScript_15661D
+	goto_if_unset FLAG_RECEIVED_TM34, MauvilleCity_Gym_EventScript_15661D
 	compare VAR_NEW_MAUVILLE_STATE, 2
 	goto_if_eq MauvilleCity_Gym_EventScript_156641
 	msgbox MauvilleCity_Gym_Text_180EDB, 4
@@ -86,7 +83,7 @@ MauvilleCity_Gym_EventScript_1565DB:: @ 81565DB
 	setflag FLAG_BADGE03_GET
 	addvar VAR_PETALBURG_GYM_STATE, 1
 	compare VAR_PETALBURG_GYM_STATE, 6
-	call_if 1, MauvilleCity_Gym_EventScript_1A00FB
+	call_if_eq MauvilleCity_Gym_EventScript_1A00FB
 	setvar VAR_SPECIAL_8, 3
 	call MauvilleCity_Gym_EventScript_1A01C0
 	special MauvilleGymSpecial3
@@ -111,8 +108,7 @@ MauvilleCity_Gym_EventScript_156641:: @ 8156641
 
 MauvilleCity_Gym_EventScript_15664B:: @ 815664B
 	lockall
-	checkflag FLAG_DEFEATED_MAUVILLE_GYM
-	goto_if_eq MauvilleCity_Gym_EventScript_1566DA
+	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_1566DA
 	compare VAR_MAUVILLE_GYM_STATE, 1
 	goto_if_eq MauvilleCity_Gym_EventScript_1566DA
 	setvar VAR_MAUVILLE_GYM_STATE, 1
@@ -122,8 +118,7 @@ MauvilleCity_Gym_EventScript_15664B:: @ 815664B
 
 MauvilleCity_Gym_EventScript_156670:: @ 8156670
 	lockall
-	checkflag FLAG_DEFEATED_MAUVILLE_GYM
-	goto_if_eq MauvilleCity_Gym_EventScript_1566DA
+	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_1566DA
 	compare VAR_MAUVILLE_GYM_STATE, 2
 	goto_if_eq MauvilleCity_Gym_EventScript_1566DA
 	setvar VAR_MAUVILLE_GYM_STATE, 2
@@ -133,8 +128,7 @@ MauvilleCity_Gym_EventScript_156670:: @ 8156670
 
 MauvilleCity_Gym_EventScript_156695:: @ 8156695
 	lockall
-	checkflag FLAG_DEFEATED_MAUVILLE_GYM
-	goto_if_eq MauvilleCity_Gym_EventScript_1566DA
+	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_1566DA
 	compare VAR_MAUVILLE_GYM_STATE, 3
 	goto_if_eq MauvilleCity_Gym_EventScript_1566DA
 	setvar VAR_MAUVILLE_GYM_STATE, 3
@@ -147,10 +141,8 @@ MauvilleCity_Gym_EventScript_1566BA:: @ 81566BA
 	special MauvilleGymSpecial1
 	special DrawWholeMapView
 	playse SE_KI_GASYAN
-	checkflag FLAG_MAUVILLE_GYM_BARRIERS_STATE
-	goto_if_eq MauvilleCity_Gym_EventScript_1566E1
-	checkflag FLAG_MAUVILLE_GYM_BARRIERS_STATE
-	goto_if 0, MauvilleCity_Gym_EventScript_1566DC
+	goto_if_set FLAG_MAUVILLE_GYM_BARRIERS_STATE, MauvilleCity_Gym_EventScript_1566E1
+	goto_if_unset FLAG_MAUVILLE_GYM_BARRIERS_STATE, MauvilleCity_Gym_EventScript_1566DC
 	releaseall
 	end
 
@@ -191,8 +183,7 @@ MauvilleCity_Gym_EventScript_15672B:: @ 815672B
 MauvilleCity_Gym_EventScript_156742:: @ 8156742
 	lock
 	faceplayer
-	checkflag FLAG_DEFEATED_MAUVILLE_GYM
-	goto_if_eq MauvilleCity_Gym_EventScript_156757
+	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_156757
 	msgbox MauvilleCity_Gym_Text_180815, 4
 	release
 	end
@@ -204,15 +195,13 @@ MauvilleCity_Gym_EventScript_156757:: @ 8156757
 
 MauvilleCity_Gym_EventScript_156761:: @ 8156761
 	lockall
-	checkflag FLAG_BADGE03_GET
-	goto_if_eq MauvilleCity_Gym_EventScript_156781
+	goto_if_set FLAG_BADGE03_GET, MauvilleCity_Gym_EventScript_156781
 	goto MauvilleCity_Gym_EventScript_15678B
 	end
 
 MauvilleCity_Gym_EventScript_156771:: @ 8156771
 	lockall
-	checkflag FLAG_BADGE03_GET
-	goto_if_eq MauvilleCity_Gym_EventScript_156781
+	goto_if_set FLAG_BADGE03_GET, MauvilleCity_Gym_EventScript_156781
 	goto MauvilleCity_Gym_EventScript_15678B
 	end
 

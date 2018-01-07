@@ -5,9 +5,9 @@ Underwater_SealedChamber_MapScripts:: @ 815F080
 Underwater_SealedChamber_MapScript1_15F086:: @ 815F086
 	getplayerxy VAR_SPECIAL_4, VAR_SPECIAL_5
 	compare VAR_SPECIAL_4, 12
-	goto_if 5, Underwater_SealedChamber_EventScript_15F0A6
+	goto_if_ne Underwater_SealedChamber_EventScript_15F0A6
 	compare VAR_SPECIAL_5, 44
-	goto_if 5, Underwater_SealedChamber_EventScript_15F0A6
+	goto_if_ne Underwater_SealedChamber_EventScript_15F0A6
 	goto Underwater_SealedChamber_EventScript_15F0AF
 
 Underwater_SealedChamber_EventScript_15F0A6:: @ 815F0A6

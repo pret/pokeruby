@@ -35,11 +35,11 @@ PetalburgCity_PokemonCenter_1F_EventScript_155233:: @ 8155233
 
 PetalburgCity_PokemonCenter_1F_EventScript_15524F:: @ 815524F
 	compare VAR_STARTER_MON, 0
-	call_if 1, PetalburgCity_PokemonCenter_1F_EventScript_155272
+	call_if_eq PetalburgCity_PokemonCenter_1F_EventScript_155272
 	compare VAR_STARTER_MON, 1
-	call_if 1, PetalburgCity_PokemonCenter_1F_EventScript_15527B
+	call_if_eq PetalburgCity_PokemonCenter_1F_EventScript_15527B
 	compare VAR_STARTER_MON, 2
-	call_if 1, PetalburgCity_PokemonCenter_1F_EventScript_155284
+	call_if_eq PetalburgCity_PokemonCenter_1F_EventScript_155284
 	release
 	end
 

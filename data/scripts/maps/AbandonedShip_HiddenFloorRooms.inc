@@ -11,11 +11,11 @@ AbandonedShip_HiddenFloorRooms_EventScript_15ED11:: @ 815ED11
 	getplayerxy VAR_TEMP_2, VAR_TEMP_3
 	setvar VAR_TEMP_4, 1
 	compare VAR_TEMP_2, 21
-	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_15ED89
+	call_if_eq AbandonedShip_HiddenFloorRooms_EventScript_15ED89
 	compare VAR_TEMP_2, 36
-	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_15ED8F
+	call_if_eq AbandonedShip_HiddenFloorRooms_EventScript_15ED8F
 	compare VAR_TEMP_3, 2
-	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_15ED95
+	call_if_eq AbandonedShip_HiddenFloorRooms_EventScript_15ED95
 	switch VAR_TEMP_4
 	case 1, AbandonedShip_HiddenFloorRooms_EventScript_15ED9B
 	case 2, AbandonedShip_HiddenFloorRooms_EventScript_15EDC4
@@ -45,7 +45,7 @@ AbandonedShip_HiddenFloorRooms_EventScript_15ED9B:: @ 815ED9B
 	dofieldeffect 54
 	specialvar RESULT, FoundAbandonedShipRoom4Key
 	compare RESULT, 0
-	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_15EE8B
+	call_if_eq AbandonedShip_HiddenFloorRooms_EventScript_15EE8B
 	waitfieldeffect 54
 	delay 10
 	end
@@ -59,7 +59,7 @@ AbandonedShip_HiddenFloorRooms_EventScript_15EDC5:: @ 815EDC5
 	goto_if_eq AbandonedShip_HiddenFloorRooms_EventScript_15EDEA
 	delay 20
 	compare RESULT, 0
-	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_15EE6B
+	call_if_eq AbandonedShip_HiddenFloorRooms_EventScript_15EE6B
 	waitfieldeffect 54
 	delay 10
 	end
@@ -79,7 +79,7 @@ AbandonedShip_HiddenFloorRooms_EventScript_15EDEB:: @ 815EDEB
 	dofieldeffect 54
 	specialvar RESULT, FoundAbandonedShipRoom6Key
 	compare RESULT, 0
-	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_15EE9B
+	call_if_eq AbandonedShip_HiddenFloorRooms_EventScript_15EE9B
 	waitfieldeffect 54
 	delay 10
 	end
@@ -100,7 +100,7 @@ AbandonedShip_HiddenFloorRooms_EventScript_15EE23:: @ 815EE23
 	dofieldeffect 54
 	specialvar RESULT, FoundAbandonedShipRoom2Key
 	compare RESULT, 0
-	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_15EE7B
+	call_if_eq AbandonedShip_HiddenFloorRooms_EventScript_15EE7B
 	waitfieldeffect 54
 	delay 10
 	end

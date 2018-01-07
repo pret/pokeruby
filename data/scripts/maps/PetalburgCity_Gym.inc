@@ -9,26 +9,19 @@ PetalburgCity_Gym_MapScript1_15448C:: @ 815448C
 	compare VAR_PETALBURG_GYM_STATE, 6
 	goto_if_eq PetalburgCity_Gym_EventScript_1544A3
 	compare VAR_PETALBURG_GYM_STATE, 7
-	call_if 4, PetalburgCity_Gym_EventScript_1544ED
+	call_if_ge PetalburgCity_Gym_EventScript_1544ED
 	end
 
 PetalburgCity_Gym_EventScript_1544A3:: @ 81544A3
 	setvar VAR_SPECIAL_5, 1
 	call PetalburgCity_Gym_EventScript_154F9A
-	checktrainerflag OPPONENT_RANDALL
-	call_if 1, PetalburgCity_Gym_EventScript_154FBB
-	checktrainerflag OPPONENT_MARY
-	call_if 1, PetalburgCity_Gym_EventScript_154FDC
-	checktrainerflag OPPONENT_PARKER
-	call_if 1, PetalburgCity_Gym_EventScript_154FFD
-	checktrainerflag OPPONENT_LORI
-	call_if 1, PetalburgCity_Gym_EventScript_15501E
-	checktrainerflag OPPONENT_GEORGE
-	call_if 1, PetalburgCity_Gym_EventScript_15503F
-	checktrainerflag OPPONENT_JODY
-	call_if 1, PetalburgCity_Gym_EventScript_155060
-	checktrainerflag OPPONENT_BERKE
-	call_if 1, PetalburgCity_Gym_EventScript_155081
+	call_if_trainer_defeated OPPONENT_RANDALL, PetalburgCity_Gym_EventScript_154FBB
+	call_if_trainer_defeated OPPONENT_MARY, PetalburgCity_Gym_EventScript_154FDC
+	call_if_trainer_defeated OPPONENT_PARKER, PetalburgCity_Gym_EventScript_154FFD
+	call_if_trainer_defeated OPPONENT_LORI, PetalburgCity_Gym_EventScript_15501E
+	call_if_trainer_defeated OPPONENT_GEORGE, PetalburgCity_Gym_EventScript_15503F
+	call_if_trainer_defeated OPPONENT_JODY, PetalburgCity_Gym_EventScript_155060
+	call_if_trainer_defeated OPPONENT_BERKE, PetalburgCity_Gym_EventScript_155081
 	end
 
 PetalburgCity_Gym_EventScript_1544ED:: @ 81544ED
@@ -45,11 +38,10 @@ PetalburgCity_Gym_EventScript_1544ED:: @ 81544ED
 
 PetalburgCity_Gym_MapScript1_15451B:: @ 815451B
 	compare VAR_PETALBURG_GYM_STATE, 1
-	call_if 1, PetalburgCity_Gym_EventScript_15453B
+	call_if_eq PetalburgCity_Gym_EventScript_15453B
 	compare VAR_PETALBURG_GYM_STATE, 6
-	call_if 0, PetalburgCity_Gym_EventScript_154543
-	checkflag FLAG_SYS_GAME_CLEAR
-	call_if 1, PetalburgCity_Gym_EventScript_15454B
+	call_if_lt PetalburgCity_Gym_EventScript_154543
+	call_if_set FLAG_SYS_GAME_CLEAR, PetalburgCity_Gym_EventScript_15454B
 	end
 
 PetalburgCity_Gym_EventScript_15453B:: @ 815453B
@@ -145,65 +137,65 @@ PetalburgCity_Gym_EventScript_154669:: @ 8154669
 	addobject 10
 	playse SE_DOOR
 	compare VAR_SPECIAL_8, 0
-	call_if 1, PetalburgCity_Gym_EventScript_1547EE
+	call_if_eq PetalburgCity_Gym_EventScript_1547EE
 	compare VAR_SPECIAL_8, 1
-	call_if 1, PetalburgCity_Gym_EventScript_154800
+	call_if_eq PetalburgCity_Gym_EventScript_154800
 	compare VAR_SPECIAL_8, 2
-	call_if 1, PetalburgCity_Gym_EventScript_15481C
+	call_if_eq PetalburgCity_Gym_EventScript_15481C
 	compare VAR_SPECIAL_8, 3
-	call_if 1, PetalburgCity_Gym_EventScript_15481C
+	call_if_eq PetalburgCity_Gym_EventScript_15481C
 	msgbox PetalburgCity_Gym_Text_179F07, 4
 	msgbox PetalburgCity_Gym_Text_179F37, 4
 	msgbox PetalburgCity_Gym_Text_179F70, 4
 	msgbox PetalburgCity_Gym_Text_17A03A, 4
 	compare VAR_SPECIAL_8, 0
-	call_if 1, PetalburgCity_Gym_EventScript_154884
+	call_if_eq PetalburgCity_Gym_EventScript_154884
 	compare VAR_SPECIAL_8, 1
-	call_if 1, PetalburgCity_Gym_EventScript_15488F
+	call_if_eq PetalburgCity_Gym_EventScript_15488F
 	compare VAR_SPECIAL_8, 2
-	call_if 1, PetalburgCity_Gym_EventScript_1548A1
+	call_if_eq PetalburgCity_Gym_EventScript_1548A1
 	compare VAR_SPECIAL_8, 3
-	call_if 1, PetalburgCity_Gym_EventScript_1548B3
+	call_if_eq PetalburgCity_Gym_EventScript_1548B3
 	msgbox PetalburgCity_Gym_Text_17A04A, 4
 	compare VAR_SPECIAL_8, 0
-	call_if 1, PetalburgCity_Gym_EventScript_1548C5
+	call_if_eq PetalburgCity_Gym_EventScript_1548C5
 	compare VAR_SPECIAL_8, 1
-	call_if 1, PetalburgCity_Gym_EventScript_1548D0
+	call_if_eq PetalburgCity_Gym_EventScript_1548D0
 	compare VAR_SPECIAL_8, 2
-	call_if 1, PetalburgCity_Gym_EventScript_1548DB
+	call_if_eq PetalburgCity_Gym_EventScript_1548DB
 	compare VAR_SPECIAL_8, 3
-	call_if 1, PetalburgCity_Gym_EventScript_1548E6
+	call_if_eq PetalburgCity_Gym_EventScript_1548E6
 	msgbox PetalburgCity_Gym_Text_17A0A8, 4
 	msgbox PetalburgCity_Gym_Text_17A0EB, 4
 	msgbox PetalburgCity_Gym_Text_17A156, 4
 	compare VAR_SPECIAL_8, 0
-	call_if 1, PetalburgCity_Gym_EventScript_15492F
+	call_if_eq PetalburgCity_Gym_EventScript_15492F
 	compare VAR_SPECIAL_8, 1
-	call_if 1, PetalburgCity_Gym_EventScript_154930
+	call_if_eq PetalburgCity_Gym_EventScript_154930
 	compare VAR_SPECIAL_8, 2
-	call_if 1, PetalburgCity_Gym_EventScript_15493B
+	call_if_eq PetalburgCity_Gym_EventScript_15493B
 	compare VAR_SPECIAL_8, 3
-	call_if 1, PetalburgCity_Gym_EventScript_15493C
+	call_if_eq PetalburgCity_Gym_EventScript_15493C
 	compare VAR_SPECIAL_8, 0
-	call_if 1, PetalburgCity_Gym_EventScript_1548F1
+	call_if_eq PetalburgCity_Gym_EventScript_1548F1
 	compare VAR_SPECIAL_8, 1
-	call_if 1, PetalburgCity_Gym_EventScript_1548FC
+	call_if_eq PetalburgCity_Gym_EventScript_1548FC
 	compare VAR_SPECIAL_8, 2
-	call_if 1, PetalburgCity_Gym_EventScript_1548F1
+	call_if_eq PetalburgCity_Gym_EventScript_1548F1
 	compare VAR_SPECIAL_8, 3
-	call_if 1, PetalburgCity_Gym_EventScript_1548F1
+	call_if_eq PetalburgCity_Gym_EventScript_1548F1
 	msgbox PetalburgCity_Gym_Text_17A171, 4
 	closemessage
 	setflag FLAG_SPECIAL_FLAG_1
 	playbgm BGM_TSURETEK, FALSE
 	compare VAR_SPECIAL_8, 0
-	call_if 1, PetalburgCity_Gym_EventScript_154835
+	call_if_eq PetalburgCity_Gym_EventScript_154835
 	compare VAR_SPECIAL_8, 1
-	call_if 1, PetalburgCity_Gym_EventScript_15484E
+	call_if_eq PetalburgCity_Gym_EventScript_15484E
 	compare VAR_SPECIAL_8, 2
-	call_if 1, PetalburgCity_Gym_EventScript_154860
+	call_if_eq PetalburgCity_Gym_EventScript_154860
 	compare VAR_SPECIAL_8, 3
-	call_if 1, PetalburgCity_Gym_EventScript_154872
+	call_if_eq PetalburgCity_Gym_EventScript_154872
 	removeobject 10
 	setflag FLAG_HIDE_WALLY_MOM_PETALBURG_1
 	setvar VAR_PETALBURG_GYM_STATE, 1
@@ -354,10 +346,8 @@ PetalburgCity_Gym_EventScript_15493D:: @ 815493D
 	call PetalburgCity_Gym_EventScript_154969
 	compare RESULT, 1
 	goto_if_eq PetalburgCity_Gym_EventScript_1549B8
-	checkflag FLAG_RECEIVED_TM42
-	goto_if 0, PetalburgCity_Gym_EventScript_154A2C
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if_eq PetalburgCity_Gym_EventScript_154B69
+	goto_if_unset FLAG_RECEIVED_TM42, PetalburgCity_Gym_EventScript_154A2C
+	goto_if_set FLAG_SYS_GAME_CLEAR, PetalburgCity_Gym_EventScript_154B69
 	msgbox PetalburgCity_Gym_Text_17AA6B, 4
 	release
 	end
@@ -420,22 +410,22 @@ PetalburgCity_Gym_EventScript_154A2C:: @ 8154A2C
 	msgbox PetalburgCity_Gym_Text_17A976, 4
 	closemessage
 	compare FACING, 2
-	call_if 1, PetalburgCity_Gym_EventScript_154ABC
+	call_if_eq PetalburgCity_Gym_EventScript_154ABC
 	compare FACING, 1
-	call_if 1, PetalburgCity_Gym_EventScript_154AC7
+	call_if_eq PetalburgCity_Gym_EventScript_154AC7
 	compare FACING, 3
-	call_if 1, PetalburgCity_Gym_EventScript_154AD2
+	call_if_eq PetalburgCity_Gym_EventScript_154AD2
 	compare FACING, 4
-	call_if 1, PetalburgCity_Gym_EventScript_154ADD
+	call_if_eq PetalburgCity_Gym_EventScript_154ADD
 	delay 70
 	compare FACING, 2
-	call_if 1, PetalburgCity_Gym_EventScript_154AE8
+	call_if_eq PetalburgCity_Gym_EventScript_154AE8
 	compare FACING, 1
-	call_if 1, PetalburgCity_Gym_EventScript_154AF3
+	call_if_eq PetalburgCity_Gym_EventScript_154AF3
 	compare FACING, 3
-	call_if 1, PetalburgCity_Gym_EventScript_154AFE
+	call_if_eq PetalburgCity_Gym_EventScript_154AFE
 	compare FACING, 4
-	call_if 1, PetalburgCity_Gym_EventScript_154B09
+	call_if_eq PetalburgCity_Gym_EventScript_154B09
 	msgbox PetalburgCity_Gym_Text_17A9F6, 4
 	release
 	end
@@ -593,7 +583,7 @@ PetalburgCity_Gym_EventScript_154B69:: @ 8154B69
 PetalburgCity_Gym_EventScript_154B73:: @ 8154B73
 	lockall
 	compare VAR_PETALBURG_GYM_STATE, 6
-	goto_if 0, PetalburgCity_Gym_EventScript_154BB9
+	goto_if_lt PetalburgCity_Gym_EventScript_154BB9
 	setvar VAR_SPECIAL_8, 7
 	setvar VAR_SPECIAL_9, 85
 	msgbox PetalburgCity_Gym_Text_17B870, MSGBOX_YESNO
@@ -623,7 +613,7 @@ PetalburgCity_Gym_EventScript_154BB9:: @ 8154BB9
 PetalburgCity_Gym_EventScript_154BC3:: @ 8154BC3
 	lockall
 	compare VAR_PETALBURG_GYM_STATE, 6
-	goto_if 0, PetalburgCity_Gym_EventScript_154BB9
+	goto_if_lt PetalburgCity_Gym_EventScript_154BB9
 	setvar VAR_SPECIAL_8, 1
 	setvar VAR_SPECIAL_9, 98
 	msgbox PetalburgCity_Gym_Text_17B8D4, MSGBOX_YESNO
@@ -635,8 +625,7 @@ PetalburgCity_Gym_EventScript_154BC3:: @ 8154BC3
 
 PetalburgCity_Gym_EventScript_154BF8:: @ 8154BF8
 	lockall
-	checktrainerflag OPPONENT_RANDALL
-	goto_if 0, PetalburgCity_Gym_EventScript_154BB9
+	goto_if_trainer_not_defeated OPPONENT_RANDALL, PetalburgCity_Gym_EventScript_154BB9
 	setvar VAR_SPECIAL_8, 7
 	setvar VAR_SPECIAL_9, 46
 	msgbox PetalburgCity_Gym_Text_17B90F, MSGBOX_YESNO
@@ -648,8 +637,7 @@ PetalburgCity_Gym_EventScript_154BF8:: @ 8154BF8
 
 PetalburgCity_Gym_EventScript_154C2B:: @ 8154C2B
 	lockall
-	checktrainerflag OPPONENT_RANDALL
-	goto_if 0, PetalburgCity_Gym_EventScript_154BB9
+	goto_if_trainer_not_defeated OPPONENT_RANDALL, PetalburgCity_Gym_EventScript_154BB9
 	setvar VAR_SPECIAL_8, 1
 	setvar VAR_SPECIAL_9, 59
 	msgbox PetalburgCity_Gym_Text_17B950, MSGBOX_YESNO
@@ -661,8 +649,7 @@ PetalburgCity_Gym_EventScript_154C2B:: @ 8154C2B
 
 PetalburgCity_Gym_EventScript_154C5E:: @ 8154C5E
 	lockall
-	checktrainerflag OPPONENT_MARY
-	goto_if 0, PetalburgCity_Gym_EventScript_154BB9
+	goto_if_trainer_not_defeated OPPONENT_MARY, PetalburgCity_Gym_EventScript_154BB9
 	setvar VAR_SPECIAL_8, 7
 	setvar VAR_SPECIAL_9, 59
 	msgbox PetalburgCity_Gym_Text_17B950, MSGBOX_YESNO
@@ -674,8 +661,7 @@ PetalburgCity_Gym_EventScript_154C5E:: @ 8154C5E
 
 PetalburgCity_Gym_EventScript_154C91:: @ 8154C91
 	lockall
-	checktrainerflag OPPONENT_MARY
-	goto_if 0, PetalburgCity_Gym_EventScript_154BB9
+	goto_if_trainer_not_defeated OPPONENT_MARY, PetalburgCity_Gym_EventScript_154BB9
 	setvar VAR_SPECIAL_8, 1
 	setvar VAR_SPECIAL_9, 72
 	msgbox PetalburgCity_Gym_Text_17B98A, MSGBOX_YESNO
@@ -687,8 +673,7 @@ PetalburgCity_Gym_EventScript_154C91:: @ 8154C91
 
 PetalburgCity_Gym_EventScript_154CC4:: @ 8154CC4
 	lockall
-	checktrainerflag OPPONENT_PARKER
-	goto_if 0, PetalburgCity_Gym_EventScript_154BB9
+	goto_if_trainer_not_defeated OPPONENT_PARKER, PetalburgCity_Gym_EventScript_154BB9
 	setvar VAR_SPECIAL_8, 1
 	setvar VAR_SPECIAL_9, 20
 	msgbox PetalburgCity_Gym_Text_17B9C5, MSGBOX_YESNO
@@ -700,8 +685,7 @@ PetalburgCity_Gym_EventScript_154CC4:: @ 8154CC4
 
 PetalburgCity_Gym_EventScript_154CF7:: @ 8154CF7
 	lockall
-	checktrainerflag OPPONENT_LORI
-	goto_if 0, PetalburgCity_Gym_EventScript_154BB9
+	goto_if_trainer_not_defeated OPPONENT_LORI, PetalburgCity_Gym_EventScript_154BB9
 	setvar VAR_SPECIAL_8, 7
 	setvar VAR_SPECIAL_9, 20
 	msgbox PetalburgCity_Gym_Text_17B9C5, MSGBOX_YESNO
@@ -713,8 +697,7 @@ PetalburgCity_Gym_EventScript_154CF7:: @ 8154CF7
 
 PetalburgCity_Gym_EventScript_154D2A:: @ 8154D2A
 	lockall
-	checktrainerflag OPPONENT_LORI
-	goto_if 0, PetalburgCity_Gym_EventScript_154BB9
+	goto_if_trainer_not_defeated OPPONENT_LORI, PetalburgCity_Gym_EventScript_154BB9
 	setvar VAR_SPECIAL_8, 1
 	setvar VAR_SPECIAL_9, 33
 	msgbox PetalburgCity_Gym_Text_17BA00, MSGBOX_YESNO
@@ -726,8 +709,7 @@ PetalburgCity_Gym_EventScript_154D2A:: @ 8154D2A
 
 PetalburgCity_Gym_EventScript_154D5D:: @ 8154D5D
 	lockall
-	checktrainerflag OPPONENT_GEORGE
-	goto_if 0, PetalburgCity_Gym_EventScript_154BB9
+	goto_if_trainer_not_defeated OPPONENT_GEORGE, PetalburgCity_Gym_EventScript_154BB9
 	setvar VAR_SPECIAL_8, 7
 	setvar VAR_SPECIAL_9, 33
 	msgbox PetalburgCity_Gym_Text_17BA00, MSGBOX_YESNO
@@ -739,8 +721,7 @@ PetalburgCity_Gym_EventScript_154D5D:: @ 8154D5D
 
 PetalburgCity_Gym_EventScript_154D90:: @ 8154D90
 	lockall
-	checktrainerflag OPPONENT_JODY
-	goto_if 0, PetalburgCity_Gym_EventScript_154BB9
+	goto_if_trainer_not_defeated OPPONENT_JODY, PetalburgCity_Gym_EventScript_154BB9
 	setvar VAR_SPECIAL_8, 1
 	setvar VAR_SPECIAL_9, 7
 	msgbox PetalburgCity_Gym_Text_17BA3D, MSGBOX_YESNO
@@ -752,8 +733,7 @@ PetalburgCity_Gym_EventScript_154D90:: @ 8154D90
 
 PetalburgCity_Gym_EventScript_154DC3:: @ 8154DC3
 	lockall
-	checktrainerflag OPPONENT_BERKE
-	goto_if 0, PetalburgCity_Gym_EventScript_154BB9
+	goto_if_trainer_not_defeated OPPONENT_BERKE, PetalburgCity_Gym_EventScript_154BB9
 	setvar VAR_SPECIAL_8, 7
 	setvar VAR_SPECIAL_9, 7
 	msgbox PetalburgCity_Gym_Text_17BA3D, MSGBOX_YESNO
@@ -765,8 +745,7 @@ PetalburgCity_Gym_EventScript_154DC3:: @ 8154DC3
 
 PetalburgCity_Gym_EventScript_154DF6:: @ 8154DF6
 	trainerbattle 2, OPPONENT_RANDALL, 0, PetalburgCity_Gym_Text_17ADA5, PetalburgCity_Gym_Text_17AE11, PetalburgCity_Gym_EventScript_154E1A
-	checkflag FLAG_DEFEATED_PETALBURG_GYM
-	goto_if_eq PetalburgCity_Gym_EventScript_154E29
+	goto_if_set FLAG_DEFEATED_PETALBURG_GYM, PetalburgCity_Gym_EventScript_154E29
 	msgbox PetalburgCity_Gym_Text_17AE30, 6
 	end
 
@@ -783,8 +762,7 @@ PetalburgCity_Gym_EventScript_154E29:: @ 8154E29
 
 PetalburgCity_Gym_EventScript_154E32:: @ 8154E32
 	trainerbattle 2, OPPONENT_PARKER, 0, PetalburgCity_Gym_Text_17AF5A, PetalburgCity_Gym_Text_17AF98, PetalburgCity_Gym_EventScript_154E56
-	checkflag FLAG_DEFEATED_PETALBURG_GYM
-	goto_if_eq PetalburgCity_Gym_EventScript_154E65
+	goto_if_set FLAG_DEFEATED_PETALBURG_GYM, PetalburgCity_Gym_EventScript_154E65
 	msgbox PetalburgCity_Gym_Text_17AFD3, 6
 	end
 
@@ -801,8 +779,7 @@ PetalburgCity_Gym_EventScript_154E65:: @ 8154E65
 
 PetalburgCity_Gym_EventScript_154E6E:: @ 8154E6E
 	trainerbattle 2, OPPONENT_GEORGE, 0, PetalburgCity_Gym_Text_17B058, PetalburgCity_Gym_Text_17B0F7, PetalburgCity_Gym_EventScript_154E92
-	checkflag FLAG_DEFEATED_PETALBURG_GYM
-	goto_if_eq PetalburgCity_Gym_EventScript_154EA1
+	goto_if_set FLAG_DEFEATED_PETALBURG_GYM, PetalburgCity_Gym_EventScript_154EA1
 	msgbox PetalburgCity_Gym_Text_17B12C, 6
 	end
 
@@ -819,8 +796,7 @@ PetalburgCity_Gym_EventScript_154EA1:: @ 8154EA1
 
 PetalburgCity_Gym_EventScript_154EAA:: @ 8154EAA
 	trainerbattle 2, OPPONENT_BERKE, 0, PetalburgCity_Gym_Text_17B237, PetalburgCity_Gym_Text_17B2C0, PetalburgCity_Gym_EventScript_154ECE
-	checkflag FLAG_DEFEATED_PETALBURG_GYM
-	goto_if_eq PetalburgCity_Gym_EventScript_154EDD
+	goto_if_set FLAG_DEFEATED_PETALBURG_GYM, PetalburgCity_Gym_EventScript_154EDD
 	msgbox PetalburgCity_Gym_Text_17B2E4, 6
 	end
 
@@ -837,8 +813,7 @@ PetalburgCity_Gym_EventScript_154EDD:: @ 8154EDD
 
 PetalburgCity_Gym_EventScript_154EE6:: @ 8154EE6
 	trainerbattle 2, OPPONENT_MARY, 0, PetalburgCity_Gym_Text_17B3F7, PetalburgCity_Gym_Text_17B454, PetalburgCity_Gym_EventScript_154F0A
-	checkflag FLAG_DEFEATED_PETALBURG_GYM
-	goto_if_eq PetalburgCity_Gym_EventScript_154F19
+	goto_if_set FLAG_DEFEATED_PETALBURG_GYM, PetalburgCity_Gym_EventScript_154F19
 	msgbox PetalburgCity_Gym_Text_17B46F, 6
 	end
 
@@ -855,8 +830,7 @@ PetalburgCity_Gym_EventScript_154F19:: @ 8154F19
 
 PetalburgCity_Gym_EventScript_154F22:: @ 8154F22
 	trainerbattle 2, OPPONENT_LORI, 0, PetalburgCity_Gym_Text_17B58D, PetalburgCity_Gym_Text_17B5CB, PetalburgCity_Gym_EventScript_154F46
-	checkflag FLAG_DEFEATED_PETALBURG_GYM
-	goto_if_eq PetalburgCity_Gym_EventScript_154F55
+	goto_if_set FLAG_DEFEATED_PETALBURG_GYM, PetalburgCity_Gym_EventScript_154F55
 	msgbox PetalburgCity_Gym_Text_17B5EA, 6
 	end
 
@@ -873,8 +847,7 @@ PetalburgCity_Gym_EventScript_154F55:: @ 8154F55
 
 PetalburgCity_Gym_EventScript_154F5E:: @ 8154F5E
 	trainerbattle 2, OPPONENT_JODY, 0, PetalburgCity_Gym_Text_17B6D4, PetalburgCity_Gym_Text_17B732, PetalburgCity_Gym_EventScript_154F82
-	checkflag FLAG_DEFEATED_PETALBURG_GYM
-	goto_if_eq PetalburgCity_Gym_EventScript_154F91
+	goto_if_set FLAG_DEFEATED_PETALBURG_GYM, PetalburgCity_Gym_EventScript_154F91
 	msgbox PetalburgCity_Gym_Text_17B749, 6
 	end
 
@@ -892,72 +865,72 @@ PetalburgCity_Gym_EventScript_154F91:: @ 8154F91
 PetalburgCity_Gym_EventScript_154F9A:: @ 8154F9A
 	setvar VAR_SPECIAL_4, 1
 	compare VAR_SPECIAL_5, 0
-	call_if 1, PetalburgCity_Gym_EventScript_155182
+	call_if_eq PetalburgCity_Gym_EventScript_155182
 	compare VAR_SPECIAL_5, 1
-	call_if 1, PetalburgCity_Gym_EventScript_155187
+	call_if_eq PetalburgCity_Gym_EventScript_155187
 	call PetalburgCity_Gym_EventScript_1550A2
 	return
 
 PetalburgCity_Gym_EventScript_154FBB:: @ 8154FBB
 	setvar VAR_SPECIAL_4, 2
 	compare VAR_SPECIAL_5, 0
-	call_if 1, PetalburgCity_Gym_EventScript_155182
+	call_if_eq PetalburgCity_Gym_EventScript_155182
 	compare VAR_SPECIAL_5, 1
-	call_if 1, PetalburgCity_Gym_EventScript_155187
+	call_if_eq PetalburgCity_Gym_EventScript_155187
 	call PetalburgCity_Gym_EventScript_1550C7
 	return
 
 PetalburgCity_Gym_EventScript_154FDC:: @ 8154FDC
 	setvar VAR_SPECIAL_4, 3
 	compare VAR_SPECIAL_5, 0
-	call_if 1, PetalburgCity_Gym_EventScript_155182
+	call_if_eq PetalburgCity_Gym_EventScript_155182
 	compare VAR_SPECIAL_5, 1
-	call_if 1, PetalburgCity_Gym_EventScript_155187
+	call_if_eq PetalburgCity_Gym_EventScript_155187
 	call PetalburgCity_Gym_EventScript_1550EC
 	return
 
 PetalburgCity_Gym_EventScript_154FFD:: @ 8154FFD
 	setvar VAR_SPECIAL_4, 4
 	compare VAR_SPECIAL_5, 0
-	call_if 1, PetalburgCity_Gym_EventScript_155182
+	call_if_eq PetalburgCity_Gym_EventScript_155182
 	compare VAR_SPECIAL_5, 1
-	call_if 1, PetalburgCity_Gym_EventScript_155187
+	call_if_eq PetalburgCity_Gym_EventScript_155187
 	call PetalburgCity_Gym_EventScript_155111
 	return
 
 PetalburgCity_Gym_EventScript_15501E:: @ 815501E
 	setvar VAR_SPECIAL_4, 5
 	compare VAR_SPECIAL_5, 0
-	call_if 1, PetalburgCity_Gym_EventScript_155182
+	call_if_eq PetalburgCity_Gym_EventScript_155182
 	compare VAR_SPECIAL_5, 1
-	call_if 1, PetalburgCity_Gym_EventScript_155187
+	call_if_eq PetalburgCity_Gym_EventScript_155187
 	call PetalburgCity_Gym_EventScript_155124
 	return
 
 PetalburgCity_Gym_EventScript_15503F:: @ 815503F
 	setvar VAR_SPECIAL_4, 6
 	compare VAR_SPECIAL_5, 0
-	call_if 1, PetalburgCity_Gym_EventScript_155182
+	call_if_eq PetalburgCity_Gym_EventScript_155182
 	compare VAR_SPECIAL_5, 1
-	call_if 1, PetalburgCity_Gym_EventScript_155187
+	call_if_eq PetalburgCity_Gym_EventScript_155187
 	call PetalburgCity_Gym_EventScript_155149
 	return
 
 PetalburgCity_Gym_EventScript_155060:: @ 8155060
 	setvar VAR_SPECIAL_4, 7
 	compare VAR_SPECIAL_5, 0
-	call_if 1, PetalburgCity_Gym_EventScript_155182
+	call_if_eq PetalburgCity_Gym_EventScript_155182
 	compare VAR_SPECIAL_5, 1
-	call_if 1, PetalburgCity_Gym_EventScript_155187
+	call_if_eq PetalburgCity_Gym_EventScript_155187
 	call PetalburgCity_Gym_EventScript_15515C
 	return
 
 PetalburgCity_Gym_EventScript_155081:: @ 8155081
 	setvar VAR_SPECIAL_4, 8
 	compare VAR_SPECIAL_5, 0
-	call_if 1, PetalburgCity_Gym_EventScript_155182
+	call_if_eq PetalburgCity_Gym_EventScript_155182
 	compare VAR_SPECIAL_5, 1
-	call_if 1, PetalburgCity_Gym_EventScript_155187
+	call_if_eq PetalburgCity_Gym_EventScript_155187
 	call PetalburgCity_Gym_EventScript_15516F
 	return
 
@@ -1021,8 +994,7 @@ PetalburgCity_Gym_EventScript_155187:: @ 8155187
 PetalburgCity_Gym_EventScript_15518B:: @ 815518B
 	lock
 	faceplayer
-	checkflag FLAG_DEFEATED_PETALBURG_GYM
-	goto_if_eq PetalburgCity_Gym_EventScript_1551A0
+	goto_if_set FLAG_DEFEATED_PETALBURG_GYM, PetalburgCity_Gym_EventScript_1551A0
 	msgbox PetalburgCity_Gym_Text_17AB96, 4
 	release
 	end
@@ -1034,15 +1006,13 @@ PetalburgCity_Gym_EventScript_1551A0:: @ 81551A0
 
 PetalburgCity_Gym_EventScript_1551AA:: @ 81551AA
 	lockall
-	checkflag FLAG_BADGE05_GET
-	goto_if_eq PetalburgCity_Gym_EventScript_1551CA
+	goto_if_set FLAG_BADGE05_GET, PetalburgCity_Gym_EventScript_1551CA
 	goto PetalburgCity_Gym_EventScript_1551D4
 	end
 
 PetalburgCity_Gym_EventScript_1551BA:: @ 81551BA
 	lockall
-	checkflag FLAG_BADGE05_GET
-	goto_if_eq PetalburgCity_Gym_EventScript_1551CA
+	goto_if_set FLAG_BADGE05_GET, PetalburgCity_Gym_EventScript_1551CA
 	goto PetalburgCity_Gym_EventScript_1551D4
 	end
 

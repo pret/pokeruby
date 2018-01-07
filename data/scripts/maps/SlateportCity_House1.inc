@@ -16,7 +16,7 @@ SlateportCity_House1_EventScript_15569C:: @ 815569C
 	special SelectMonForNPCTrade
 	waitstate
 	compare VAR_SPECIAL_4, 255
-	goto_if 5, SlateportCity_House1_EventScript_1556C9
+	goto_if_ne SlateportCity_House1_EventScript_1556C9
 	compare VAR_SPECIAL_4, 255
 	goto_if_eq SlateportCity_House1_EventScript_1556BF
 	end

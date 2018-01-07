@@ -29,7 +29,7 @@ Route117_EventScript_1B2262:: @ 81B2262
 Route117_EventScript_1B2298:: @ 81B2298
 	specialvar RESULT, CalculatePlayerPartyCount
 	compare RESULT, 6
-	goto_if 5, Route117_EventScript_1B22B2
+	goto_if_ne Route117_EventScript_1B22B2
 	msgbox Route117_Text_1B2766, 4
 	release
 	end
@@ -49,7 +49,7 @@ Route117_EventScript_1B22B2:: @ 81B22B2
 Route117_EventScript_1B22CD:: @ 81B22CD
 	specialvar RESULT, sub_8042B4C
 	compare RESULT, 1
-	call_if 1, Route117_EventScript_1B22DE
+	call_if_eq Route117_EventScript_1B22DE
 	return
 
 Route117_EventScript_1B22DE:: @ 81B22DE
@@ -155,7 +155,7 @@ Route117_PokemonDayCare_EventScript_1B2411:: @ 81B2411
 Route117_PokemonDayCare_EventScript_1B241A:: @ 81B241A
 	specialvar RESULT, GetNumLevelsGainedFromDaycare
 	compare RESULT, 0
-	call_if 5, Route117_PokemonDayCare_EventScript_1B2411
+	call_if_ne Route117_PokemonDayCare_EventScript_1B2411
 	return
 
 Route117_PokemonDayCare_EventScript_1B242B:: @ 81B242B

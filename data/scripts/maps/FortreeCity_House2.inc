@@ -4,10 +4,8 @@ FortreeCity_House2_MapScripts:: @ 81580B3
 FortreeCity_House2_EventScript_1580B4:: @ 81580B4
 	lock
 	faceplayer
-	checkflag FLAG_RECEIVED_TM10
-	goto_if_eq FortreeCity_House2_EventScript_158157
-	checkflag FLAG_MET_HIDDEN_POWER_GIVER
-	call_if 0, FortreeCity_House2_EventScript_15814B
+	goto_if_set FLAG_RECEIVED_TM10, FortreeCity_House2_EventScript_158157
+	call_if_unset FLAG_MET_HIDDEN_POWER_GIVER, FortreeCity_House2_EventScript_15814B
 	msgbox FortreeCity_House2_Text_186360, 4
 	multichoice 21, 8, 54, 1
 	switch RESULT
