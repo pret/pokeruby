@@ -490,9 +490,6 @@ extern const u8 gStatusPal_Icons[];
 #define WINDOW_RIGHT (29)
 #endif
 
-
-#ifdef NONMATCHING
-// Main handler for the party menu.
 void CB2_PartyMenuMain(void)
 {
     const struct PartyMonTextSettingsStruct *textSettings;
@@ -506,62 +503,17 @@ void CB2_PartyMenuMain(void)
     {
         // Draw mon name, level, and hp sprites
         DrawPartyMenuMonText(
-            textSettings[i].xOffset * 8,
-            textSettings[i].yOffset * 8,
-            textSettings[i].oamSettings,
+            textSettings->xOffset * 8,
+            textSettings->yOffset * 8,
+            textSettings->oamSettings,
             0,
             (i << 5) | 0x200);
+        textSettings++;
     }
 
     RunTasks();
     UpdatePaletteFade();
 }
-#else
-__attribute__((naked))
-void CB2_PartyMenuMain(void)
-{
-    asm(".syntax unified\n\
-    push {r4-r6,lr}\n\
-    sub sp, 0x4\n\
-    bl AnimateSprites\n\
-    bl BuildOamBuffer\n\
-    ldr r0, _0806AF2C @ =gPartyMenuType\n\
-    ldrb r1, [r0]\n\
-    lsls r0, r1, 1\n\
-    adds r0, r1\n\
-    lsls r0, 4\n\
-    ldr r1, _0806AF30 @ =PartyMonTextSettings\n\
-    adds r5, r0, r1\n\
-    movs r6, 0\n\
-_0806AEF8:\n\
-    ldrb r0, [r5]\n\
-    lsls r0, 3\n\
-    ldrb r1, [r5, 0x1]\n\
-    lsls r1, 3\n\
-    ldr r2, [r5, 0x4]\n\
-    lsls r3, r6, 5\n\
-    movs r4, 0x80\n\
-    lsls r4, 2\n\
-    orrs r3, r4\n\
-    str r3, [sp]\n\
-    movs r3, 0\n\
-    bl DrawPartyMenuMonText\n\
-    adds r5, 0x8\n\
-    adds r6, 0x1\n\
-    cmp r6, 0x5\n\
-    ble _0806AEF8\n\
-    bl RunTasks\n\
-    bl UpdatePaletteFade\n\
-    add sp, 0x4\n\
-    pop {r4-r6}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_0806AF2C: .4byte gPartyMenuType\n\
-_0806AF30: .4byte PartyMonTextSettings\n\
-    .syntax divided\n");
-}
-#endif // NONMATCHING
 
 void VBlankCB_PartyMenu(void)
 {
