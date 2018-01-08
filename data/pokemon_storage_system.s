@@ -98,7 +98,7 @@ gSpriteTemplate_83B6DDC:: @ 83B6DDC
 	spr_template 2, 56007, gOamData_83B6EAC, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 	.align 2
-gUnknown_083B6DF4:: @ 83B6DF4
+gPCStorageActionTexts:: @ 83B6DF4
 	.4byte PCText_ExitBox, 0
 	.4byte PCText_WhatYouDo, 0
 	.4byte PCText_PickATheme, 0

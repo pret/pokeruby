@@ -19,6 +19,42 @@
 #include "naming_screen.h"
 #include "pokemon_storage_system.h"
 
+enum {
+    PC_TEXT_EXIT_BOX,
+    PC_TEXT_WHAT_YOU_DO,
+    PC_TEXT_PICK_A_THEME,
+    PC_TEXT_PICK_A_WALLPAPER,
+    PC_TEXT_IS_SELECTED,
+    PC_TEXT_JUMP_TO_WHICH_BOX,
+    PC_TEXT_DEPOSIT_IN_WHICH_BOX,
+    PC_TEXT_WAS_DEPOSITED,
+    PC_TEXT_BOX_IS_FULL,
+    PC_TEXT_RELEASE_POKE,
+    PC_TEXT_WAS_RELEASED,
+    PC_TEXT_BYE_BYE,
+    PC_TEXT_MARK_POKE,
+    PC_TEXT_LAST_POKE,
+    PC_TEXT_PARTY_FULL,
+    PC_TEXT_HOLDING_POKE,
+    PC_TEXT_WHICH_ONE_WILL_TAKE,
+    PC_TEXT_CANT_RELEASE_EGG,
+    PC_TEXT_CONTINUE_BOX,
+    PC_TEXT_CAME_BACK,
+    PC_TEXT_WORRIED,
+    PC_TEXT_SURPRISE,
+    PC_TEXT_PLEASE_REMOVE_MAIL
+};
+
+enum {
+    PC_TEXT_FMT_NORMAL,
+    PC_TEXT_FMT_MON_NAME,
+    PC_TEXT_FMT_UNK_02,
+    PC_TEXT_FMT_UNK_03,
+    PC_TEXT_FMT_MON_NAME_2,
+    PC_TEXT_FMT_UNK_05,
+    PC_TEXT_FMT_MON_NAME_AFTER_EXCL_MARK
+};
+
 struct StorageAction {
     u8 *text;
     u8 format;
@@ -66,7 +102,7 @@ struct PokemonStorageSystemData {
     u8 unk_11f6;
     u8 filler_11f7[2];
     u8 unk_11f9;
-    u8 filler_11fa[0xc2];
+    u8 unk_11fa[0xc2];
     struct PokemonMarkMenu unk_12bc;
     struct UnkPSSStruct_2002370 unk_2370;
     u8 filler_25b4[0xd8];
@@ -74,6 +110,9 @@ struct PokemonStorageSystemData {
     u8 unk_268d;
     u8 unk_268e;
     struct Pokemon *unk_2690;
+    u8 unk_2694[18];
+    u8 unk_26a6[62];
+    u8 unk_26e4[80];
 };
 
 void StorageSystemCreatePrimaryMenu(u8 whichMenu);
@@ -120,11 +159,13 @@ void sub_8098734(void);
 void sub_80987DC(void);
 void sub_809880C(void);
 bool8 sub_8098830(void);
-void sub_8098898(u8 index);
+void PrintStorageActionText(u8 index);
 void sub_8098A5C(void);
 void sub_809B100(u8 a0);
 bool8 sub_809B130(void);
 void sub_8098B48(void);
+void sub_8099310(void);
+bool8 sub_8099374(void);
 void sub_8099BF8(u8 a0);
 void sub_8099C70(u8 whichBox);
 bool8 sub_8099D34(void);
@@ -137,6 +178,8 @@ void sub_809B0D4(void);
 void sub_809B0E0(void);
 u8 sub_809B0F4(void);
 void sub_809B440(void);
+bool8 sub_809B62C(u8);
+void sub_809B6BC(void);
 void sub_809BBC0(void);
 void sub_809BD14(void);
 bool8 sub_809BE80(void);
@@ -198,7 +241,7 @@ const u8 gBoxSelectionPopupCenterTiles[] = INCBIN_U8("graphics/pokemon_storage/b
 
 const u8 gBoxSelectionPopupSidesTiles[] = INCBIN_U8("graphics/pokemon_storage/box_selection_popup_sides.4bpp");
 
-extern const struct StorageAction gUnknown_083B6DF4[];
+extern const struct StorageAction gPCStorageActionTexts[];
 extern const struct PokemonStorageSystemData *gPokemonStorageSystemPtr;
 extern u8 *const gUnknown_083B6DB8;
 
@@ -1107,7 +1150,7 @@ void sub_8096C84(void)
                 case 5:
                     if (ePokemonStorageSystem.unk_0005 != 2)
                     {
-                        sub_8098898(16);
+                        PrintStorageActionText(PC_TEXT_WHICH_ONE_WILL_TAKE);
                         ePokemonStorageSystem.unk_0004 = 3;
                     }
                     else
@@ -1242,12 +1285,12 @@ void sub_8096C84(void)
             break;
         case 4:
             PlaySE(SE_HAZURE);
-            sub_8098898(13);
+            PrintStorageActionText(PC_TEXT_LAST_POKE);
             ePokemonStorageSystem.unk_0004 = 6;
             break;
         case 5:
             PlaySE(SE_HAZURE);
-            sub_8098898(22);
+            PrintStorageActionText(PC_TEXT_PLEASE_REMOVE_MAIL);
             ePokemonStorageSystem.unk_0004 = 6;
             break;
         case 6:
@@ -1307,7 +1350,7 @@ void sub_8097078(void)
     switch (ePokemonStorageSystem.unk_0004)
     {
         case 0:
-            sub_8098898(4);
+            PrintStorageActionText(PC_TEXT_IS_SELECTED);
             sub_809CE84();
             ePokemonStorageSystem.unk_0004 = 1;
             break;
@@ -1400,17 +1443,17 @@ void sub_8097078(void)
             break;
         case 2:
             PlaySE(SE_HAZURE);
-            sub_8098898(13);
+            PrintStorageActionText(PC_TEXT_LAST_POKE);
             ePokemonStorageSystem.unk_0004 = 5;
             break;
         case 4:
             PlaySE(SE_HAZURE);
-            sub_8098898(17);
+            PrintStorageActionText(PC_TEXT_CANT_RELEASE_EGG);
             ePokemonStorageSystem.unk_0004 = 5;
             break;
         case 3:
             PlaySE(SE_HAZURE);
-            sub_8098898(22);
+            PrintStorageActionText(PC_TEXT_PLEASE_REMOVE_MAIL);
             ePokemonStorageSystem.unk_0004 = 5;
             break;
         case 5:
@@ -1488,7 +1531,7 @@ void sub_8097390(void)
         case 0:
             if (CalculatePlayerPartyCount() == 6)
             {
-                sub_8098898(14);
+                PrintStorageActionText(PC_TEXT_PARTY_FULL);
                 ePokemonStorageSystem.unk_0004 = 1;
             }
             else
@@ -1532,83 +1575,146 @@ void sub_8097390(void)
     }
 }
 
+void sub_809746C(void)
+{
+    u8 r4;
+
+    switch (ePokemonStorageSystem.unk_0004)
+    {
+        case 0:
+            PrintStorageActionText(PC_TEXT_DEPOSIT_IN_WHICH_BOX);
+            sub_8096264(&ePokemonStorageSystem.unk_2370, 0x0007, 0xdaca, 3);
+            sub_809634C(gUnknown_0203847E);
+            ePokemonStorageSystem.unk_0004++;
+            break;
+        case 1:
+            r4 = sub_8096368();
+            if (r4 == 200);
+            else if (r4 == 201)
+            {
+                sub_8098A5C();
+                sub_809635C();
+                sub_8096310();
+                SetPSSCallback(sub_8096C84);
+            }
+            else
+            {
+                if (sub_809B62C(r4))
+                {
+                    sub_8098A5C();
+                    sub_809635C();
+                    sub_8096310();
+                    ePokemonStorageSystem.unk_0004 = 2;
+                }
+                else
+                {
+                    PrintStorageActionText(PC_TEXT_BOX_IS_FULL);
+                    ePokemonStorageSystem.unk_0004 = 4;
+                }
+                gUnknown_0203847E = r4;
+            }
+            break;
+        case 2:
+            party_compaction();
+            sub_8099310();
+            ePokemonStorageSystem.unk_0004++;
+            break;
+        case 3:
+            if (!sub_8099374())
+            {
+                sub_809B6BC();
+                BoxSetMosaic();
+                sub_80987DC();
+                SetPSSCallback(sub_8096C84);
+            }
+            break;
+        case 4:
+            if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+            {
+                PrintStorageActionText(PC_TEXT_DEPOSIT_IN_WHICH_BOX);
+                ePokemonStorageSystem.unk_0004 = 1;
+            }
+            break;
+    }
+}
+
 asm(".section .text.8098898");
 
-void sub_8098898(u8 index) {
+void PrintStorageActionText(u8 index) {
     u8 *ptr;
 
     MenuDrawTextWindow(10, 16, 29, 19);
 
-    switch (gUnknown_083B6DF4[index].format)
+    switch (gPCStorageActionTexts[index].format)
     {
 
-    case 2:
-        ptr = StringCopy(gUnk2002694, gUnknown_083B6DF4[index].text);
-        ptr = StringCopy(ptr, gUnk20011fa);
+    case PC_TEXT_FMT_UNK_02:
+        ptr = StringCopy(ePokemonStorageSystem.unk_2694, gPCStorageActionTexts[index].text);
+        ptr = StringCopy(ptr, ePokemonStorageSystem.unk_11fa);
         break;
 
-    case 5:
-        ptr = StringCopy(gUnk2002694, gUnknown_083B6DF4[index].text);
-        ptr = StringCopy(ptr, gUnk20026e4);
+    case PC_TEXT_FMT_UNK_05:
+        ptr = StringCopy(ePokemonStorageSystem.unk_2694, gPCStorageActionTexts[index].text);
+        ptr = StringCopy(ptr, ePokemonStorageSystem.unk_26e4);
         break;
 
-    case 1:
+    case PC_TEXT_FMT_MON_NAME:
         // {var} + " is selected."
-        ptr = StringCopy(gUnk2002694, gUnk20011fa);
-        ptr = StringCopy(ptr, gUnknown_083B6DF4[index].text);
+        ptr = StringCopy(ePokemonStorageSystem.unk_2694, ePokemonStorageSystem.unk_11fa);
+        ptr = StringCopy(ptr, gPCStorageActionTexts[index].text);
         break;
 
-    case 4:
+    case PC_TEXT_FMT_MON_NAME_2:
         // {var} + " was released."
-        ptr = StringCopy(gUnk2002694, gUnk20026e4);
+        ptr = StringCopy(ePokemonStorageSystem.unk_2694, ePokemonStorageSystem.unk_26e4);
 #if ENGLISH
-        ptr = StringCopy(ptr, gUnknown_083B6DF4[index].text);
+        ptr = StringCopy(ptr, gPCStorageActionTexts[index].text);
 #elif GERMAN
-        ptr = de_sub_8073174(gUnk2002694, gUnknown_083B6DF4[index].text);
+        ptr = de_sub_8073174(ePokemonStorageSystem.unk_2694, gPCStorageActionTexts[index].text);
 #endif
         break;
 
-    case 3:
+    case PC_TEXT_FMT_UNK_03:
     {
         u8 *stringLength;
         u8 *text;
 
-        text = gUnknown_083B6DF4[index].text;
+        text = gPCStorageActionTexts[index].text;
         stringLength = &text[StringLength(text)] + 1;
 
-        ptr = StringCopy(gUnk2002694, gUnknown_083B6DF4[index].text);
-        ptr = StringCopy(ptr, gUnk20011fa);
+        ptr = StringCopy(ePokemonStorageSystem.unk_2694, gPCStorageActionTexts[index].text);
+        ptr = StringCopy(ptr, ePokemonStorageSystem.unk_11fa);
         ptr = StringCopy(ptr, stringLength);
     }
         break;
 
-    case 6:
+    case PC_TEXT_FMT_MON_NAME_AFTER_EXCL_MARK:
         // "Bye-bye, ".substr(0, -1) + {var} + "Bye-bye, !".substr(-1, 1)
     {
         u8 *stringLength;
         u8 *text;
 
-        text = gUnknown_083B6DF4[index].text;
+        text = gPCStorageActionTexts[index].text;
         stringLength = &text[StringLength(text)] - 1;
 
-        ptr = StringCopy(gUnk2002694, gUnknown_083B6DF4[index].text);
-        ptr = StringCopy(ptr - 1, gUnk20026e4);
+        ptr = StringCopy(ePokemonStorageSystem.unk_2694, gPCStorageActionTexts[index].text);
+        ptr = StringCopy(ptr - 1, ePokemonStorageSystem.unk_26e4);
         ptr = StringCopy(ptr, stringLength);
     }
         break;
 
-    case 0:
+    case PC_TEXT_FMT_NORMAL:
     default:
-        ptr = StringCopy(gUnk2002694, gUnknown_083B6DF4[index].text);
+        ptr = StringCopy(ePokemonStorageSystem.unk_2694, gPCStorageActionTexts[index].text);
         break;
     }
 
-    while (ptr < gUnk20026A6)
+    while (ptr < ePokemonStorageSystem.unk_26a6)
     {
             ptr[0] = CHAR_SPACE;
             ptr++;
     }
 
     ptr[0] = EOS;
-    MenuPrint(gUnk2002694, 11, 17);
+    MenuPrint(ePokemonStorageSystem.unk_2694, 11, 17);
 }
