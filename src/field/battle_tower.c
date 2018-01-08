@@ -132,7 +132,7 @@ static const u8 sMaleTrainerClasses[] = {
     TRAINER_CLASS_POKEMON_BREEDER_M,
     TRAINER_CLASS_POKEMON_RANGER_M,
     TRAINER_CLASS_BUG_CATCHER,
-    TRAINER_CLASS_HIKER, 
+    TRAINER_CLASS_HIKER,
 };
 
 static const u8 sFemaleTrainerClasses[] = {
@@ -255,7 +255,7 @@ static void ResetBattleTowerStreak(u8 levelType);
 static void ValidateBattleTowerRecordChecksums(void);
 static void PrintEReaderTrainerFarewellMessage(void);
 extern void SetBattleTowerTrainerGfxId(u8);
-extern void sub_8135A3C(void);
+static void SaveCurrentWinStreak(void);
 static void sub_8135CFC(void);
 static void CheckMonBattleTowerBanlist(u16, u16, u16, u8, u8, u16 *, u16 *, u8 *);
 static void ClearEReaderTrainer(struct BattleTowerEReaderTrainer *);
@@ -1538,7 +1538,7 @@ void CheckPartyBattleTowerBanlist(void)
             StringAppend(gStringVar1, BattleText_Format8);
             return;
         }
-        
+
         if (1 & counter)
             StringAppend(gStringVar1, BattleText_Format6);
         else
@@ -1699,7 +1699,7 @@ void SetBattleTowerProperty(void)
         }
 
         gSaveBlock2.battleTower.curChallengeBattleNum[battleTowerLevelType]++;
-        sub_8135A3C();
+        SaveCurrentWinStreak();
         gSpecialVar_Result = gSaveBlock2.battleTower.curChallengeBattleNum[battleTowerLevelType];
 
         gStringVar1[0] = gSaveBlock2.battleTower.curChallengeBattleNum[battleTowerLevelType] + 0xA1;
@@ -1711,7 +1711,7 @@ void SetBattleTowerProperty(void)
             gSaveBlock2.battleTower.curStreakChallengesNum[battleTowerLevelType]++;
         }
 
-        sub_8135A3C();
+        SaveCurrentWinStreak();
         gSpecialVar_Result = gSaveBlock2.battleTower.curStreakChallengesNum[battleTowerLevelType];
         break;
     case 8:
@@ -1801,118 +1801,35 @@ void SetBattleTowerParty(void)
     ReducePlayerPartyToThree();
 }
 
-#ifdef NONMATCHING
-void sub_8135A3C(void)
+static void SaveCurrentWinStreak(void)
 {
-    u8 battleTowerLevelType = gSaveBlock2.battleTower.battleTowerLevelType;
-    u16 winStreak = GetCurrentBattleTowerWinStreak(battleTowerLevelType);
+    u8 levelType = gSaveBlock2.battleTower.battleTowerLevelType;
+    u16 streak = GetCurrentBattleTowerWinStreak(levelType);
 
-    if (gSaveBlock2.battleTower.recordWinStreaks[battleTowerLevelType] < winStreak)
-    {
-        gSaveBlock2.battleTower.recordWinStreaks[battleTowerLevelType] = winStreak;
-    }
+    if (gSaveBlock2.battleTower.recordWinStreaks[levelType] < streak)
+        gSaveBlock2.battleTower.recordWinStreaks[levelType] = streak;
 
     if (gSaveBlock2.battleTower.recordWinStreaks[0] > gSaveBlock2.battleTower.recordWinStreaks[1])
     {
-        u16 streak = gSaveBlock2.battleTower.recordWinStreaks[0];
+        streak = gSaveBlock2.battleTower.recordWinStreaks[0];
         SetGameStat(GAME_STAT_BATTLE_TOWER_BEST_STREAK, streak);
+
         if (streak > 9999)
-        {
             gSaveBlock2.battleTower.bestBattleTowerWinStreak = 9999;
-        }
         else
-        {
             gSaveBlock2.battleTower.bestBattleTowerWinStreak = streak;
-        }
     }
     else
     {
-        u16 streak = gSaveBlock2.battleTower.recordWinStreaks[1];
+        streak = gSaveBlock2.battleTower.recordWinStreaks[1];
         SetGameStat(GAME_STAT_BATTLE_TOWER_BEST_STREAK, streak);
+
         if (streak > 9999)
-        {
             gSaveBlock2.battleTower.bestBattleTowerWinStreak = 9999;
-        }
         else
-        {
             gSaveBlock2.battleTower.bestBattleTowerWinStreak = streak;
-        }
     }
 }
-#else
-__attribute__((naked))
-void sub_8135A3C(void)
-{
-    asm(".syntax unified\n\
-    push {r4-r6,lr}\n\
-    ldr r6, _08135A84 @ =gSaveBlock2\n\
-    ldr r1, _08135A88 @ =0x00000554\n\
-    adds r0, r6, r1\n\
-    ldrb r4, [r0]\n\
-    lsls r4, 31\n\
-    lsrs r4, 31\n\
-    adds r0, r4, 0\n\
-    bl GetCurrentBattleTowerWinStreak\n\
-    lsls r0, 16\n\
-    lsrs r5, r0, 16\n\
-    lsls r4, 1\n\
-    movs r3, 0xAC\n\
-    lsls r3, 3\n\
-    adds r2, r6, r3\n\
-    adds r4, r2\n\
-    ldrh r0, [r4]\n\
-    cmp r0, r5\n\
-    bcs _08135A66\n\
-    strh r5, [r4]\n\
-_08135A66:\n\
-    ldr r0, _08135A8C @ =0x00000562\n\
-    adds r1, r6, r0\n\
-    ldrh r0, [r2]\n\
-    ldrh r3, [r1]\n\
-    cmp r0, r3\n\
-    bls _08135A94\n\
-    adds r5, r0, 0\n\
-    movs r0, 0x20\n\
-    adds r1, r5, 0\n\
-    bl SetGameStat\n\
-    ldr r1, _08135A90 @ =0x0000270f\n\
-    cmp r5, r1\n\
-    bhi _08135AA4\n\
-    b _08135AB4\n\
-    .align 2, 0\n\
-_08135A84: .4byte gSaveBlock2\n\
-_08135A88: .4byte 0x00000554\n\
-_08135A8C: .4byte 0x00000562\n\
-_08135A90: .4byte 0x0000270f\n\
-_08135A94:\n\
-    ldrh r5, [r1]\n\
-    movs r0, 0x20\n\
-    adds r1, r5, 0\n\
-    bl SetGameStat\n\
-    ldr r1, _08135AAC @ =0x0000270f\n\
-    cmp r5, r1\n\
-    bls _08135AB4\n\
-_08135AA4:\n\
-    ldr r2, _08135AB0 @ =0x00000572\n\
-    adds r0, r6, r2\n\
-    strh r1, [r0]\n\
-    b _08135ABA\n\
-    .align 2, 0\n\
-_08135AAC: .4byte 0x0000270f\n\
-_08135AB0: .4byte 0x00000572\n\
-_08135AB4:\n\
-    ldr r3, _08135AC0 @ =0x00000572\n\
-    adds r0, r6, r3\n\
-    strh r5, [r0]\n\
-_08135ABA:\n\
-    pop {r4-r6}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_08135AC0: .4byte 0x00000572\n\
-    .syntax divided\n");
-}
-#endif // NONMATCHING
 
 void sub_8135AC4(void)
 {
@@ -1951,7 +1868,7 @@ void sub_8135AC4(void)
     }
 
     SetBattleTowerRecordChecksum(&gSaveBlock2.battleTower.playerRecord);
-    sub_8135A3C();
+    SaveCurrentWinStreak();
 }
 
 void SaveBattleTowerProgress(void)
