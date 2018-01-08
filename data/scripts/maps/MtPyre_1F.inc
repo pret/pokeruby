@@ -4,8 +4,7 @@ MtPyre_1F_MapScripts:: @ 815D322
 MtPyre_1F_EventScript_15D323:: @ 815D323
 	lock
 	faceplayer
-	checkflag FLAG_RECEIVED_CLEANSE_TAG
-	goto_if_eq MtPyre_1F_EventScript_15D352
+	goto_if_set FLAG_RECEIVED_CLEANSE_TAG, MtPyre_1F_EventScript_15D352
 	msgbox MtPyre_1F_Text_196151, 4
 	giveitem_std ITEM_CLEANSE_TAG
 	compare RESULT, 0

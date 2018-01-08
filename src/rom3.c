@@ -5,6 +5,7 @@
 #include "battle_anim.h"
 #include "battle_anim_81258BC.h"
 #include "battle_anim_8137220.h"
+#include "battle_util.h"
 #include "cable_club.h"
 #include "constants/items.h"
 #include "link.h"
@@ -582,7 +583,7 @@ void Emitcmd1(u8 a, u8 b, u8 c)
     PrepareBufferDataTransfer(a, gBattleBuffersTransferData, 4);
 }
 
-void EmitSetAttributes(u8 a, u8 b, u8 c, u8 d, void *e)
+void EmitSetMonData(u8 a, u8 b, u8 c, u8 d, void *e)
 {
     int i;
 

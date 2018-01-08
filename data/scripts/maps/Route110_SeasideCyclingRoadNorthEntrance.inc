@@ -4,9 +4,9 @@ Route110_SeasideCyclingRoadNorthEntrance_MapScripts:: @ 81634C8
 
 Route110_SeasideCyclingRoadNorthEntrance_MapScript1_1634CE:: @ 81634CE
 	compare VAR_CYCLING_CHALLENGE_STATE, 3
-	call_if 1, Route110_SeasideCyclingRoadNorthEntrance_EventScript_1634E5
+	call_if_eq Route110_SeasideCyclingRoadNorthEntrance_EventScript_1634E5
 	compare VAR_CYCLING_CHALLENGE_STATE, 2
-	call_if 1, Route110_SeasideCyclingRoadNorthEntrance_EventScript_1634E5
+	call_if_eq Route110_SeasideCyclingRoadNorthEntrance_EventScript_1634E5
 	end
 
 Route110_SeasideCyclingRoadNorthEntrance_EventScript_1634E5:: @ 81634E5
@@ -25,7 +25,7 @@ Route110_SeasideCyclingRoadNorthEntrance_EventScript_1634F7:: @ 81634F7
 	lockall
 	specialvar RESULT, GetPlayerAvatarBike @ player state?
 	compare RESULT, 2
-	call_if 1, Route110_SeasideCyclingRoadNorthEntrance_EventScript_16351D
+	call_if_eq Route110_SeasideCyclingRoadNorthEntrance_EventScript_16351D
 	compare RESULT, 0
 	goto_if_eq Route110_SeasideCyclingRoadNorthEntrance_EventScript_163523
 	setflag FLAG_SYS_CYCLING_ROAD

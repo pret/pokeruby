@@ -55,7 +55,7 @@ FallarborTown_ContestLobby_EventScript_1B76A1:: @ 81B76A1
 	msgbox FallarborTown_ContestLobby_Text_1B6E9D, 4
 	specialvar RESULT, GetFirstFreePokeblockSlot
 	compare RESULT, -1
-	goto_if 5, FallarborTown_ContestLobby_EventScript_1B76EF
+	goto_if_ne FallarborTown_ContestLobby_EventScript_1B76EF
 	compare RESULT, -1
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7776
 	end
@@ -76,8 +76,7 @@ FallarborTown_ContestLobby_EventScript_1B76EF:: @ 81B76EF
 FallarborTown_ContestLobby_EventScript_1B770E:: @ 81B770E
 	msgbox FallarborTown_ContestLobby_Text_1B6FF0, 4
 	dodailyevents
-	checkflag FLAG_DAILY_RECEIVED_BERRY_FALLARBOR
-	goto_if_eq FallarborTown_ContestLobby_EventScript_1B774F
+	goto_if_set FLAG_DAILY_RECEIVED_BERRY_FALLARBOR, FallarborTown_ContestLobby_EventScript_1B774F
 	goto FallarborTown_ContestLobby_EventScript_1B7759
 	end
 
@@ -162,8 +161,7 @@ FallarborTown_ContestLobby_EventScript_1B77DC:: @ 81B77DC
 
 FallarborTown_ContestLobby_EventScript_1B77E6:: @ 81B77E6
 	dodailyevents
-	checkflag FLAG_DAILY_RECEIVED_BERRY_FALLARBOR
-	goto_if_eq FallarborTown_ContestLobby_EventScript_1B77F6
+	goto_if_set FLAG_DAILY_RECEIVED_BERRY_FALLARBOR, FallarborTown_ContestLobby_EventScript_1B77F6
 	goto FallarborTown_ContestLobby_EventScript_1B7800
 	end
 
@@ -216,7 +214,7 @@ VerdanturfTown_ContestLobby_EventScript_1B783B:: @ 81B783B
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7942
 	specialvar RESULT, GetFirstFreePokeblockSlot
 	compare RESULT, -1
-	goto_if 5, FallarborTown_ContestLobby_EventScript_1B7878
+	goto_if_ne FallarborTown_ContestLobby_EventScript_1B7878
 	compare RESULT, -1
 	goto_if_eq FallarborTown_ContestLobby_EventScript_1B7938
 	end

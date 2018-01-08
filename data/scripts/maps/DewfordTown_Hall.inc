@@ -218,9 +218,9 @@ DewfordTown_Hall_EventScript_153535:: @ 8153535
 
 DewfordTown_Hall_EventScript_153556:: @ 8153556
 	compare FACING, 2
-	call_if 1, DewfordTown_Hall_EventScript_15356D
+	call_if_eq DewfordTown_Hall_EventScript_15356D
 	compare FACING, 1
-	call_if 1, DewfordTown_Hall_EventScript_153578
+	call_if_eq DewfordTown_Hall_EventScript_153578
 	return
 
 DewfordTown_Hall_EventScript_15356D:: @ 815356D
@@ -252,8 +252,7 @@ DewfordTown_Hall_EventScript_15359D:: @ 815359D
 	lock
 	faceplayer
 	call DewfordTown_Hall_EventScript_1A0102
-	checkflag FLAG_RECEIVED_TM36
-	goto_if_eq DewfordTown_Hall_EventScript_1535D1
+	goto_if_set FLAG_RECEIVED_TM36, DewfordTown_Hall_EventScript_1535D1
 	msgbox DewfordTown_Hall_Text_175E13, 4
 	giveitem_std ITEM_TM36
 	compare RESULT, 0

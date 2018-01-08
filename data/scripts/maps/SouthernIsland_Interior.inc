@@ -4,8 +4,7 @@ SouthernIsland_Interior_MapScripts:: @ 8160B53
 	.byte 0
 
 SouthernIsland_Interior_MapScript1_160B5E:: @ 8160B5E
-	checkflag FLAG_SYS_CTRL_OBJ_DELETE
-	call_if 1, SouthernIsland_Interior_EventScript_160B68
+	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, SouthernIsland_Interior_EventScript_160B68
 	end
 
 SouthernIsland_Interior_EventScript_160B68:: @ 8160B68
@@ -44,10 +43,8 @@ SouthernIsland_Interior_EventScript_160B9B:: @ 8160B9B
 	end
 
 SouthernIsland_Interior_EventScript_160BA7:: @ 8160BA7
-	checkflag FLAG_ECOUNTERED_LATIAS_OR_LATIOS
-	goto_if_eq SouthernIsland_Interior_EventScript_160C08
-	checkflag FLAG_SYS_HAS_EON_TICKET
-	goto_if 0, SouthernIsland_Interior_EventScript_160C08
+	goto_if_set FLAG_ECOUNTERED_LATIAS_OR_LATIOS, SouthernIsland_Interior_EventScript_160C08
+	goto_if_unset FLAG_SYS_HAS_EON_TICKET, SouthernIsland_Interior_EventScript_160C08
 	setflag FLAG_ECOUNTERED_LATIAS_OR_LATIOS
 	special SpawnCameraDummy
 	applymovement 127, SouthernIsland_Interior_Movement_160C12

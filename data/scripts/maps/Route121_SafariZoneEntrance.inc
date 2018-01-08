@@ -89,7 +89,7 @@ Route121_SafariZoneEntrance_EventScript_15C3B3:: @ 815C3B3
 Route121_SafariZoneEntrance_EventScript_15C425:: @ 815C425
 	getpartysize
 	compare RESULT, 6
-	goto_if 5, Route121_SafariZoneEntrance_EventScript_15C44F
+	goto_if_ne Route121_SafariZoneEntrance_EventScript_15C44F
 	specialvar RESULT, CheckFreePokemonStorageSpace
 	compare RESULT, 1
 	goto_if_eq Route121_SafariZoneEntrance_EventScript_15C44F

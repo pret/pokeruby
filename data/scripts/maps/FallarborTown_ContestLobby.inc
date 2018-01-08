@@ -92,8 +92,7 @@ FallarborTown_ContestLobby_EventScript_153A8E:: @ 8153A8E
 	end
 
 FallarborTown_ContestLobby_EventScript_153A97:: @ 8153A97
-	checkflag FLAG_CONTEST_SKETCH_CREATED
-	goto_if_eq FallarborTown_ContestLobby_EventScript_153AA9
+	goto_if_set FLAG_CONTEST_SKETCH_CREATED, FallarborTown_ContestLobby_EventScript_153AA9
 	msgbox FallarborTown_ContestLobby_Text_177246, 2
 	end
 

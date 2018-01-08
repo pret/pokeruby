@@ -7,8 +7,7 @@ Route117_MapScript1_150D40:: @ 8150D40
 	end
 
 Route117_EventScript_150D46:: @ 8150D46
-	checkflag FLAG_PENDING_DAYCARE_EGG
-	goto_if 0, Route117_EventScript_150D56
+	goto_if_unset FLAG_PENDING_DAYCARE_EGG, Route117_EventScript_150D56
 	setobjectxyperm 3, 47, 6
 
 Route117_EventScript_150D56:: @ 8150D56

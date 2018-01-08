@@ -13,13 +13,11 @@ BattleTower_Lobby_MapScript1_160293:: @ 8160293
 BattleTower_Lobby_EventScript_16029C:: @ 816029C
 	setvar VAR_SPECIAL_4, 10
 	special SetBattleTowerProperty
-	checkflag FLAG_RECEIVED_GOLD_SHIELD
-	goto_if_eq BattleTower_Lobby_EventScript_1602E4
-	checkflag FLAG_RECEIVED_SILVER_SHIELD
-	goto_if_eq BattleTower_Lobby_EventScript_1602CD
+	goto_if_set FLAG_RECEIVED_GOLD_SHIELD, BattleTower_Lobby_EventScript_1602E4
+	goto_if_set FLAG_RECEIVED_SILVER_SHIELD, BattleTower_Lobby_EventScript_1602CD
 	specialvar VAR_SPECIAL_7, GetBestBattleTowerStreak
 	compare VAR_SPECIAL_7, 50
-	goto_if 0, BattleTower_Lobby_EventScript_1602E4
+	goto_if_lt BattleTower_Lobby_EventScript_1602E4
 	clearflag FLAG_HIDE_AWARD_MAN_BATTLE_TOWER
 	special sub_810F8FC
 	return
@@ -27,7 +25,7 @@ BattleTower_Lobby_EventScript_16029C:: @ 816029C
 BattleTower_Lobby_EventScript_1602CD:: @ 81602CD
 	specialvar VAR_SPECIAL_7, GetBestBattleTowerStreak
 	compare VAR_SPECIAL_7, 100
-	goto_if 0, BattleTower_Lobby_EventScript_1602E4
+	goto_if_lt BattleTower_Lobby_EventScript_1602E4
 	clearflag FLAG_HIDE_AWARD_MAN_BATTLE_TOWER
 	special sub_810F8FC
 	return
@@ -119,7 +117,7 @@ BattleTower_Lobby_EventScript_1603AD:: @ 81603AD
 	setvar VAR_SPECIAL_4, 9
 	special BattleTowerUtil
 	compare RESULT, 49
-	goto_if 5, BattleTower_Lobby_EventScript_1603F8
+	goto_if_ne BattleTower_Lobby_EventScript_1603F8
 	msgbox BattleTower_Lobby_Text_19A617, 4
 
 BattleTower_Lobby_EventScript_1603F8:: @ 81603F8
@@ -387,10 +385,8 @@ BattleTower_Lobby_EventScript_160727:: @ 8160727
 BattleTower_Lobby_EventScript_160733:: @ 8160733
 	lock
 	faceplayer
-	checkflag FLAG_RECEIVED_GOLD_SHIELD
-	goto_if_eq BattleTower_Lobby_EventScript_1607C5
-	checkflag FLAG_RECEIVED_SILVER_SHIELD
-	goto_if_eq BattleTower_Lobby_EventScript_160773
+	goto_if_set FLAG_RECEIVED_GOLD_SHIELD, BattleTower_Lobby_EventScript_1607C5
+	goto_if_set FLAG_RECEIVED_SILVER_SHIELD, BattleTower_Lobby_EventScript_160773
 	msgbox BattleTower_Lobby_Text_19A9EE, 4
 	setvar VAR_SPECIAL_8, DECOR_SILVER_SHIELD
 	givedecoration_std DECOR_SILVER_SHIELD
@@ -404,7 +400,7 @@ BattleTower_Lobby_EventScript_160733:: @ 8160733
 BattleTower_Lobby_EventScript_160773:: @ 8160773
 	specialvar RESULT, GetBestBattleTowerStreak
 	compare RESULT, 100
-	goto_if 0, BattleTower_Lobby_EventScript_1607C5
+	goto_if_lt BattleTower_Lobby_EventScript_1607C5
 	msgbox BattleTower_Lobby_Text_19AAC4, 4
 	setvar VAR_SPECIAL_8, DECOR_GOLD_SHIELD
 	givedecoration_std DECOR_GOLD_SHIELD

@@ -227,10 +227,8 @@ struct BattleStruct /* 0x2000000 */
     /*0x160D5*/ u8 unk160D5;
     /*0x160D6*/ u8 unk160D6;
     /*0x160D7*/ u8 unk160D7;
-    /*0x160D8*/ u8 unk160D8;
-    /*0x160D9*/ u8 unk160D9;
-    /*0x160DA*/ u8 unk160DA;
-    /*0x160DB*/ u8 unk160DB;
+    /*0x160D8*/ u8 unk160D8[2];
+    /*0x160DA*/ u8 unk160DA[2];
     /*0x160DC*/ u8 unk160DC;
     /*0x160DD*/ u8 intimidateBank;
     /*0x160DE*/ u8 unk160DE;
@@ -368,16 +366,6 @@ struct Struct2017100
     u32 arr[4];
 };
 
-struct Struct2019348
-{
-    u16 unk0;
-    u16 unk2;
-    u8 unk4;
-    u32 unk8;
-    u32 unkC;
-    u32 unk10;
-};
-
 struct Struct2017800
 {
     u8 invisible:1;
@@ -511,7 +499,7 @@ extern struct DisableStruct gDisableStructs[MAX_BANKS_BATTLE];
 extern struct BattleResults gBattleResults;
 extern struct ProtectStruct gProtectStructs[MAX_BANKS_BATTLE];
 extern struct SpecialStatus gSpecialStatuses[MAX_BANKS_BATTLE];
-extern struct sideTimer gSideTimer[2];
+extern struct sideTimer gSideTimers[2];
 extern struct WishFutureKnock gWishFutureKnock;
 extern struct AI_ThinkingStruct gAIThinkingSpace;
 extern struct Struct20238C8 gUnknown_020238C8;
@@ -561,7 +549,7 @@ extern u8 gBattleTextBuff1[];
 //function declarations of buffer emits
 void EmitGetAttributes(u8 buffID, u8 request, u8 c);    //0x0
 void Emitcmd1(u8 a, u8 b, u8 c); //0x1
-void EmitSetAttributes(u8 a, u8 request, u8 c, u8 bytes, void *data);  //0x2
+void EmitSetMonData(u8 a, u8 request, u8 c, u8 bytes, void *data);  //0x2
 void EmitSendOutPoke(u8 a, u8 b, u8 c); //0x5
 void EmitReturnPokeToBall(u8 a, u8 b); //0x6
 void EmitTrainerSlide(u8 a); //0x8
@@ -616,7 +604,7 @@ void InitBattle(void);
 void sub_800EC9C(void);
 void sub_800F104(void);
 void sub_800F298(void);
-void sub_800F808(void);
+void BattleMainCB2(void);
 void sub_800F838(struct Sprite *);
 u8 CreateNPCTrainerParty(struct Pokemon *, u16);
 void sub_800FCFC(void);
@@ -648,32 +636,28 @@ void sub_8011970(void);
 void sub_80119B4(void);
 void BattleBeginFirstTurn(void);
 void BattleTurnPassed(void);
+void RunBattleScriptCommands_PopCallbacksStack(void);
+void RunBattleScriptCommands(void);
+bool8 TryRunFromBattle(u8 bank);
 
 // asm/battle_2.o
 void sub_8012324(void);
-void sub_8012FBC(u8, u8);
+void SwapTurnOrder(u8, u8);
 u8 GetWhoStrikesFirst(u8, u8, u8);
-void TurnValuesCleanUp(u8);
-void SpecialStatusesClear(void);
-void sub_80138F0(void);
-void sub_80155A4();
-void CancelMultiTurnMoves(u8 bank);
-void PrepareStringBattle();
-void sub_80156DC();
-void sub_80157C4(u8 index);
 
 // asm/battle_3.o
 u8 CheckMoveLimitations(u8 bank, u8 unusableMoves, u8 check);
 u8 UpdateTurnCounters(void);
 u8 TurnBasedEffects(void);
-u8 sub_80170DC();
-u8 sub_80173A4();
+u8 HandleFaintedMonActions();
 u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 move);
 u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn);
+u8 GetMoveTarget(u16 move, u8 useMoveTarget);
 
 // asm/battle_4.o
 void AI_CalcDmg(u8, u8);
 u8 TypeCalc(u16 move, u8 bank_atk, u8 bank_def);
+u8 BankGetTurnOrder(u8 bank);
 
 // asm/battle_5.o
 void nullsub_91(void);
@@ -696,6 +680,7 @@ void sub_80324F8(struct Pokemon *, u8);
 void sub_8032638();
 void sub_8032AA8(u8, u8);
 void SetBankFuncToOpponentBufferRunCommand(void);
+void BattleMusicStop(void);
 
 // asm/battle_9.o
 void SetBankFuncToLinkOpponentBufferRunCommand(void);

@@ -122,7 +122,7 @@ static void sub_8094998(u8 arg[3], u8 player_number)
         if (!IsDoubleBattle())
         {
             pos = 1;
-            *temp = gBattlePartyID[GetBankByPlayerAI(0)];
+            *temp = gBattlePartyID[GetBankByIdentity(0)];
             for (i = 0; i <= 5; i++)
                 if (i != *temp)
                     temp[pos++] = i;
@@ -130,8 +130,8 @@ static void sub_8094998(u8 arg[3], u8 player_number)
         else
         {
             pos = 2;
-            *temp = gBattlePartyID[GetBankByPlayerAI(0)];
-            temp[1] = gBattlePartyID[GetBankByPlayerAI(2)];
+            *temp = gBattlePartyID[GetBankByIdentity(0)];
+            temp[1] = gBattlePartyID[GetBankByIdentity(2)];
             for (i = 0; i <= 5; i++)
                 if ((i != *temp) && (i != temp[1]))
                     temp[pos++] = i;
@@ -147,13 +147,13 @@ static void sub_8094A74(u8 arg[3], u8 player_number, u32 arg3)
     u8 temp[6];
     if (!GetBankSide(arg3))
     {
-        i = GetBankByPlayerAI(0);
-        j = GetBankByPlayerAI(2);
+        i = GetBankByIdentity(0);
+        j = GetBankByIdentity(2);
     }
     else
     {
-        i = GetBankByPlayerAI(1);
-        j = GetBankByPlayerAI(3);
+        i = GetBankByIdentity(1);
+        j = GetBankByIdentity(3);
     }
     if (IsLinkDoubleBattle() == TRUE)
     {

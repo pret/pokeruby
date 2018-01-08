@@ -44,7 +44,7 @@ gUnknown_081C346A:: @ 81C346A
 	lockall
 	special SafariZoneGetPokeblockNameInFeeder
 	compare RESULT, 0xFFFF
-	goto_if 5, EventScript_1C34A9
+	goto_if_ne EventScript_1C34A9
 	msgbox UnknownString_81C354E, MSGBOX_YESNO
 	compare RESULT, YES
 	goto_if_eq EventScript_1C348E
@@ -56,7 +56,7 @@ EventScript_1C348E:
 	special OpenPokeblockCaseOnFeeder
 	waitstate
 	compare RESULT, 0xFFFF
-	goto_if 5, EventScript_1C34A0
+	goto_if_ne EventScript_1C34A0
 	end
 
 EventScript_1C34A0:

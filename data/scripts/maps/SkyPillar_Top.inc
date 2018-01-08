@@ -3,8 +3,7 @@ SkyPillar_Top_MapScripts:: @ 815F302
 	.byte 0
 
 SkyPillar_Top_MapScript1_15F308:: @ 815F308
-	checkflag FLAG_SYS_CTRL_OBJ_DELETE
-	call_if 1, SkyPillar_Top_EventScript_15F312
+	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, SkyPillar_Top_EventScript_15F312
 	end
 
 SkyPillar_Top_EventScript_15F312:: @ 815F312

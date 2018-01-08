@@ -46,6 +46,7 @@ const u8 DroughtPaletteData_2[] = INCBIN_U8("graphics/weather/drought2.bin.lz");
 const u8 DroughtPaletteData_3[] = INCBIN_U8("graphics/weather/drought3.bin.lz");
 const u8 DroughtPaletteData_4[] = INCBIN_U8("graphics/weather/drought4.bin.lz");
 const u8 DroughtPaletteData_5[] = INCBIN_U8("graphics/weather/drought5.bin.lz");
+
 extern u8 (*gUnknown_0202FC48)[32];
 extern u8 gUnknown_0202F9E8[32];
 

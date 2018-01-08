@@ -1,6 +1,13 @@
 #ifndef GUARD_CONSTANTS_BATTLE_CONSTANTS_H
 #define GUARD_CONSTANTS_BATTLE_CONSTANTS_H
 
+// Bank sides
+#define SIDE_PLAYER     0x0
+#define SIDE_OPPONENT   0x1
+
+#define BIT_SIDE        0x1
+#define BIT_MON         0x2
+
 #define STATUS_SLEEP            0x7
 #define STATUS_POISON           0x8
 #define STATUS_BURN             0x10
@@ -65,6 +72,7 @@
 #define HITMARKER_PURSUIT_TRAP          0x00001000
 #define HITMARKER_IGNORE_SAFEGUARD      0x00002000
 #define HITMARKER_SYNCHRONISE_EFFECT    0x00004000
+#define HITMARKER_RUN                   0x00008000
 #define HITMARKER_IGNORE_ON_AIR         0x00010000
 #define HITMARKER_IGNORE_UNDERGROUND    0x00020000
 #define HITMARKER_IGNORE_UNDERWATER     0x00040000
@@ -75,6 +83,7 @@
 #define HITMARKER_x800000               0x00800000
 #define HITMARKER_GRUDGE                0x01000000
 #define HITMARKER_OBEYS                 0x02000000
+#define HITMARKER_x4000000              0x04000000
 #define HITMARKER_x8000000              0x08000000
 #define HITMARKER_FAINTED(bank)         ((gBitTable[bank] << 0x1C))
 #define HITMARKER_UNK(bank)             ((0x10000000 << bank))
@@ -87,6 +96,11 @@
 #define MOVESTATUS_FAILED             (1 << 5)
 #define MOVESTATUS_ENDURED            (1 << 6)
 #define MOVESTATUS_HUNGON             (1 << 7)
+
+#define IDENTITY_PLAYER_MON1        0
+#define IDENTITY_OPPONENT_MON1      1
+#define IDENTITY_PLAYER_MON2        2
+#define IDENTITY_OPPONENT_MON2      3
 
 #define BATTLE_TYPE_DOUBLE          0x0001
 #define BATTLE_TYPE_LINK            0x0002
@@ -117,6 +131,8 @@
 #define BATTLE_OUT_OF_BALLS         0x8
 #define BATTLE_OPPONENT_TELEPORTED  0xA
 
+#define OUTCOME_LINK_BATTLE_RUN      0x80
+
 #define SIDE_STATUS_REFLECT          (1 << 0)
 #define SIDE_STATUS_LIGHTSCREEN      (1 << 1)
 #define SIDE_STATUS_X4               (1 << 2)
@@ -125,6 +141,22 @@
 #define SIDE_STATUS_FUTUREATTACK     (1 << 6)
 #define SIDE_STATUS_MIST             (1 << 8)
 #define SIDE_STATUS_SPIKES_DAMAGED   (1 << 9)
+
+#define ACTION_USE_MOVE             0
+#define ACTION_USE_ITEM             1
+#define ACTION_SWITCH               2
+#define ACTION_RUN                  3
+#define ACTION_WATCHES_CAREFULLY    4
+#define ACTION_SAFARI_ZONE_BALL     5
+#define ACTION_POKEBLOCK_CASE       6
+#define ACTION_GO_NEAR              7
+#define ACTION_SAFARI_ZONE_RUN      8
+#define ACTION_9                    9
+#define ACTION_RUN_BATTLESCRIPT     10 // when executing an action
+#define ACTION_CANCEL_PARTNER       12 // when choosing an action
+#define ACTION_FINISHED             12 // when executing an action
+#define ACTION_NOTHING_FAINTED      13 // when choosing an action
+#define ACTION_INIT_VALUE           0xFF
 
 #define TARGET_SELECTED_POKEMON 0
 #define TARGET_SPECIAL          (1 << 0)
@@ -192,6 +224,40 @@
 #define WEATHER_SUN_ANY ((WEATHER_SUN_TEMPORARY | WEATHER_SUN_PERMANENT))
 #define WEATHER_HAIL                (1 << 7)
 
+#define MOVE_TARGET_SELECTED        0x0
+#define MOVE_TARGET_DEPENDS         0x1
+#define MOVE_TARGET_USER            0x2
+#define MOVE_TARGET_RANDOM          0x4
+#define MOVE_TARGET_x10             0x10
+#define MOVE_TARGET_BOTH            0x8
+#define MOVE_TARGET_FOES_AND_ALLY   0x20
+#define MOVE_TARGET_OPPONENTS_FIELD 0x40
+
+// array entries for battle communication
+#define MULTIUSE_STATE          0x0
+#define CURSOR_POSITION         0x1
+#define TASK_ID                 0x1 // task Id and cursor position share the same field
+#define SPRITES_INIT_STATE1     0x1 // shares the Id as well
+#define SPRITES_INIT_STATE2     0x2
+#define MOVE_EFFECT_BYTE        0x3
+#define ACTIONS_CONFIRMED_COUNT 0x4
+#define MULTISTRING_CHOOSER     0x5
+#define MSG_DISPLAY             0x7
+#define BATTLE_COMMUNICATION_ENTRIES_COUNT  0x8
+
+#define BS_GET_TARGET                   0
+#define BS_GET_ATTACKER                 1
+#define BS_GET_EFFECT_BANK              2
+#define BS_GET_gBank1   3
+#define BS_GET_BANK_0   7
+#define BS_ATTACKER_WITH_PARTNER        4 // for atk98_status_icon_update
+#define BS_GET_ATTACKER_SIDE            8 // for atk1E_jumpifability
+#define BS_GET_NOT_ATTACKER_SIDE        9 // for atk1E_jumpifability
+#define BS_GET_SCRIPTING_BANK           10
+#define BS_GET_OPPONENT1                12
+#define BS_GET_PLAYER2                  13
+#define BS_GET_OPPONENT2                14
+
 // status animation table
 #define B_ANIM_STATUS_PSN               0x0
 #define B_ANIM_STATUS_CONFUSION         0x1
@@ -237,5 +303,13 @@
 #define B_ANIM_SAFARI_BALL_THROW        0x4
 #define B_ANIM_SUBSTITUTE_TO_MON        0x5
 #define B_ANIM_MON_TO_SUBSTITUTE        0x6
+
+// AI switch items
+#define AI_ITEM_FULL_RESTORE     1
+#define AI_ITEM_HEAL_HP          2
+#define AI_ITEM_CURE_CONDITION   3
+#define AI_ITEM_X_STAT           4
+#define AI_ITEM_GUARD_SPECS      5
+#define AI_ITEM_NOT_RECOGNIZABLE 6
 
 #endif // GUARD_CONSTANTS_BATTLE_CONSTANTS_H
