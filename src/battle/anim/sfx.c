@@ -70,16 +70,16 @@ void sub_812B004(u8 taskId)
     }
 }
 
-#ifdef NONMATCHING
 void sub_812B058(u8 taskId)
 {
-    s16 sp, r10, r7, r9;
+    s16 sp;
+    u8 r10, r7, r9;
     s8 r5, r6, r4, r0;
 
     sp = gBattleAnimArgs[0];
     r5 = gBattleAnimArgs[2];
     r6 = gBattleAnimArgs[3];
-    r10  = gBattleAnimArgs[4];
+    r10 = gBattleAnimArgs[4];
     r7 = gBattleAnimArgs[5];
     r9 = gBattleAnimArgs[6];
     r4 = BattleAnimAdjustPanning(gBattleAnimArgs[1]);
@@ -100,95 +100,6 @@ void sub_812B058(u8 taskId)
     TASK.func = sub_812B108;
     sub_812B108(taskId);
 }
-#else
-__attribute__((naked))
-void sub_812B058(u8 taskId)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x4\n\
-    mov r8, r0\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    mov r8, r0\n\
-    ldr r0, _0812B0FC @ =gBattleAnimArgs\n\
-    ldrh r1, [r0]\n\
-    str r1, [sp]\n\
-    ldrb r5, [r0, 0x4]\n\
-    ldrb r6, [r0, 0x6]\n\
-    ldrb r3, [r0, 0x8]\n\
-    mov r10, r3\n\
-    ldrb r7, [r0, 0xA]\n\
-    ldrb r1, [r0, 0xC]\n\
-    mov r9, r1\n\
-    ldrb r0, [r0, 0x2]\n\
-    lsls r0, 24\n\
-    asrs r0, 24\n\
-    bl BattleAnimAdjustPanning\n\
-    adds r4, r0, 0\n\
-    lsls r4, 24\n\
-    lsrs r4, 24\n\
-    lsls r5, 24\n\
-    asrs r5, 24\n\
-    adds r0, r5, 0\n\
-    bl BattleAnimAdjustPanning\n\
-    adds r5, r0, 0\n\
-    lsls r4, 24\n\
-    asrs r4, 24\n\
-    lsls r5, 24\n\
-    asrs r5, 24\n\
-    lsls r6, 24\n\
-    asrs r6, 24\n\
-    adds r0, r4, 0\n\
-    adds r1, r5, 0\n\
-    adds r2, r6, 0\n\
-    bl CalculatePanIncrement\n\
-    ldr r2, _0812B100 @ =gTasks\n\
-    mov r3, r8\n\
-    lsls r1, r3, 2\n\
-    add r1, r8\n\
-    lsls r1, 3\n\
-    adds r1, r2\n\
-    movs r2, 0\n\
-    mov r6, sp\n\
-    ldrh r6, [r6]\n\
-    strh r6, [r1, 0x8]\n\
-    strh r4, [r1, 0xA]\n\
-    strh r5, [r1, 0xC]\n\
-    lsls r0, 24\n\
-    asrs r0, 24\n\
-    strh r0, [r1, 0xE]\n\
-    mov r0, r10\n\
-    strh r0, [r1, 0x10]\n\
-    strh r7, [r1, 0x12]\n\
-    mov r3, r9\n\
-    strh r3, [r1, 0x14]\n\
-    strh r2, [r1, 0x1C]\n\
-    strh r4, [r1, 0x1E]\n\
-    strh r3, [r1, 0x20]\n\
-    ldr r2, _0812B104 @ =sub_812B108\n\
-    str r2, [r1]\n\
-    mov r0, r8\n\
-    bl _call_via_r2\n\
-    add sp, 0x4\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_0812B0FC: .4byte gBattleAnimArgs\n\
-_0812B100: .4byte gTasks\n\
-_0812B104: .4byte sub_812B108\n\
-    .syntax divided\n");
-}
-#endif // NONMATCHING
 
 void sub_812B108(u8 taskId)
 {
