@@ -375,7 +375,7 @@ SECTIONS {
         src/battle/battle_records.o(.text);
         asm/pokedex_area_screen.o(.text);
         src/scene/evolution_scene.o(.text);
-        asm/roulette.o(.text);
+        src/roulette.o(.text);
         asm/pokedex_cry_screen.o(.text);
         src/pokemon/pokedex_cry_screen.o(.text);
         asm/pokedex_cry_screen.o(.text_811A4F8);
@@ -387,7 +387,7 @@ SECTIONS {
         src/battle/battle_message.o(.text);
         src/field/choose_party.o(.text);
         src/scene/cable_car.o(.text);
-        asm/roulette_util.o(.text);
+        src/roulette_util.o(.text);
         src/engine/cable_car_util.o(.text);
         src/unused_8124F94.o(.text);
         src/engine/save.o(.text);
