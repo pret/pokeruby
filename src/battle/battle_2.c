@@ -5,6 +5,7 @@
 #include "battle_interface.h"
 #include "battle_message.h"
 #include "battle_setup.h"
+#include "battle_util.h"
 #include "data2.h"
 #include "event_data.h"
 #include "evolution_scene.h"
@@ -141,7 +142,7 @@ extern u16 gBattleWeather;
 extern u32 gBattleMoveDamage;
 extern struct BattlePokemon gBattleMons[];
 extern u8 gBattleMoveFlags;
-extern const u8 BattleScript_FocusPunchSetUp[];
+extern u8 BattleScript_FocusPunchSetUp[];
 extern u16 gDynamicBasePower;
 extern u8 gCurrentTurnActionNumber;
 extern void (* const gUnknown_081FA640[])(void);
@@ -175,7 +176,6 @@ extern u8 gUnknown_081FA70C[][3];
 extern u8 gUnknown_081FA71B[];
 extern u8 gUnknown_081FA71F[];
 
-void b_call_bc_move_exec(const u8* BS_ptr);
 
 static void BattlePrepIntroSlide(void);
 void CheckFocusPunch_ClearVarsBeforeTurnStarts(void);
@@ -2180,7 +2180,7 @@ void BattleBeginFirstTurn(void)
         SpecialStatusesClear();
         ewram160A6 = gAbsentBankFlags;
         gBattleMainFunc = sub_8012324;
-        sub_80156DC();
+        ResetSentPokesToOpponentValue();
         for (i = 0; i < 8; i++)
             gBattleCommunication[i] = 0;
         for (i = 0; i < gNoOfAllBanks; i++)
@@ -2236,7 +2236,7 @@ void BattleTurnPassed(void)
     if (HandleFaintedMonActions() != 0)
         return;
     ewram16059 = 0;
-    if (sub_80170DC() != 0)
+    if (HandleWishPerishSongOnTurnEnd() != 0)
         return;
     TurnValuesCleanUp(0);
     gHitMarker &= ~HITMARKER_NO_ATTACKSTRING;
@@ -3154,7 +3154,7 @@ _08012968:\n\
     cmp r0, 0x3\n\
     bne _080129A8\n\
     ldr r0, _080129A0 @ =BattleScript_PrintCantRunFromTrainer\n\
-    bl b_call_bc_move_exec\n\
+    bl BattleScriptExecute\n\
     ldr r1, _080129A4 @ =gBattleCommunication\n\
     ldrb r0, [r4]\n\
     adds r0, r1\n\
@@ -3318,7 +3318,7 @@ _08012ACC:\n\
 _08012AF4: .4byte 0x0000ffff\n\
 _08012AF8: .4byte gBattleCommunication\n\
 _08012AFC:\n\
-    bl sub_8015894\n\
+    bl TrySetCantSelectMoveBattleScript\n\
     lsls r0, 24\n\
     cmp r0, 0\n\
     beq _08012B48\n\
@@ -4207,13 +4207,13 @@ void CheckFocusPunch_ClearVarsBeforeTurnStarts(void)
                 && !(gDisableStructs[gBankAttacker].truantCounter)
                 && !(gProtectStructs[gActiveBank].onlyStruggle))
             {
-                b_call_bc_move_exec(BattleScript_FocusPunchSetUp);
+                BattleScriptExecute(BattleScript_FocusPunchSetUp);
                 return;
             }
         }
     }
 
-    b_clear_atk_up_if_hit_flag_unless_enraged();
+    TryClearRageStatuses();
     gCurrentTurnActionNumber = 0;
     {
         // something stupid needed to match

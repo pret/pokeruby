@@ -245,6 +245,19 @@
 #define MSG_DISPLAY             0x7
 #define BATTLE_COMMUNICATION_ENTRIES_COUNT  0x8
 
+#define BS_GET_TARGET                   0
+#define BS_GET_ATTACKER                 1
+#define BS_GET_EFFECT_BANK              2
+#define BS_GET_gBank1   3
+#define BS_GET_BANK_0   7
+#define BS_ATTACKER_WITH_PARTNER        4 // for atk98_status_icon_update
+#define BS_GET_ATTACKER_SIDE            8 // for atk1E_jumpifability
+#define BS_GET_NOT_ATTACKER_SIDE        9 // for atk1E_jumpifability
+#define BS_GET_SCRIPTING_BANK           10
+#define BS_GET_OPPONENT1                12
+#define BS_GET_PLAYER2                  13
+#define BS_GET_OPPONENT2                14
+
 // status animation table
 #define B_ANIM_STATUS_PSN               0x0
 #define B_ANIM_STATUS_CONFUSION         0x1

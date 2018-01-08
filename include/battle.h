@@ -549,7 +549,7 @@ extern u8 gBattleTextBuff1[];
 //function declarations of buffer emits
 void EmitGetAttributes(u8 buffID, u8 request, u8 c);    //0x0
 void Emitcmd1(u8 a, u8 b, u8 c); //0x1
-void EmitSetAttributes(u8 a, u8 request, u8 c, u8 bytes, void *data);  //0x2
+void EmitSetMonData(u8 a, u8 request, u8 c, u8 bytes, void *data);  //0x2
 void EmitSendOutPoke(u8 a, u8 b, u8 c); //0x5
 void EmitReturnPokeToBall(u8 a, u8 b); //0x6
 void EmitTrainerSlide(u8 a); //0x8
@@ -644,21 +644,14 @@ bool8 TryRunFromBattle(u8 bank);
 void sub_8012324(void);
 void SwapTurnOrder(u8, u8);
 u8 GetWhoStrikesFirst(u8, u8, u8);
-void sub_80155A4();
-void CancelMultiTurnMoves(u8 bank);
-void PrepareStringBattle();
-void sub_80156DC();
-void sub_80157C4(u8 index);
 
 // asm/battle_3.o
 u8 CheckMoveLimitations(u8 bank, u8 unusableMoves, u8 check);
 u8 UpdateTurnCounters(void);
 u8 TurnBasedEffects(void);
-u8 sub_80170DC();
 u8 HandleFaintedMonActions();
 u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 move);
 u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn);
-void b_clear_atk_up_if_hit_flag_unless_enraged(void);
 u8 GetMoveTarget(u16 move, u8 useMoveTarget);
 
 // asm/battle_4.o
