@@ -529,7 +529,7 @@ _0803E59C:
 	adds r6, r2, 0
 	cmp r0, 0
 	beq _0803E5E4
-	ldr r5, _0803E758 @ =gSideTimer
+	ldr r5, _0803E758 @ =gSideTimers
 	ldr r4, _0803E75C @ =gActiveBank
 	ldrb r0, [r4]
 	bl GetBankSide
@@ -738,7 +738,7 @@ _0803E74E:
 	str r5, [sp, 0x1C]
 	bl _0803F14C
 	.align 2, 0
-_0803E758: .4byte gSideTimer
+_0803E758: .4byte gSideTimers
 _0803E75C: .4byte gActiveBank
 _0803E760: .4byte gExperienceTables
 _0803E764: .4byte gBaseStats

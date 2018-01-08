@@ -39,7 +39,7 @@ _080DB77E:
 	cmp r0, 0
 	bne _080DB7DA
 	movs r0, 0x1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r7, r4, 0
@@ -274,7 +274,7 @@ sub_80DB92C: @ 80DB92C
 	cmp r0, 0
 	bne _080DB9BC
 	movs r0, 0x1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r6, r4, 0
@@ -349,7 +349,7 @@ sub_80DB9E4: @ 80DB9E4
 	cmp r0, 0
 	bne _080DBA3C
 	movs r0, 0x1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	adds r4, r0, 0

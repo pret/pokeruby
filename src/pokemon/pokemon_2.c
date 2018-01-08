@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle.h"
+#include "battle_util.h"
 #include "data2.h"
 #include "event_data.h"
 #include "main.h"
@@ -84,7 +85,7 @@ u8 sub_803C434(u8 a1)
 
     status ^= 1;
     if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
-        return GetBankByPlayerAI(status);
+        return GetBankByIdentity(status);
     if (CountAliveMons(0) > 1)
     {
         u8 val;
@@ -93,14 +94,14 @@ u8 sub_803C434(u8 a1)
             val = status ^ 2;
         else
             val = status;
-        return GetBankByPlayerAI(val);
+        return GetBankByIdentity(val);
     }
     else
     {
         if ((gAbsentBankFlags & gBitTable[status]))
-            return GetBankByPlayerAI(status ^ 2);
+            return GetBankByIdentity(status ^ 2);
         else
-            return GetBankByPlayerAI(status);
+            return GetBankByIdentity(status);
     }
 }
 

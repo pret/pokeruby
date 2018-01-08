@@ -60,8 +60,8 @@ extern u16 gBattle_WIN0V;
 extern u16 gBattle_WIN1V;
 extern u16 gBattle_BG2_Y;
 extern u16 gBattle_BG2_X;
-extern u16 gUnknown_030042A0;
-extern u16 gUnknown_030042A4;
+extern u16 gBattle_BG0_Y;
+extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG1_X;
 extern u16 gBattle_WIN0H;
 extern u32 gUnknown_03005D28;  // saved RNG value
@@ -324,8 +324,8 @@ void ResetContestGpuRegs(void)
     REG_WINOUT = 0x3F3F;
     REG_DISPCNT |= 0x7F00;
 
-    gUnknown_030042A4 = 0;
-    gUnknown_030042A0 = 0;
+    gBattle_BG0_X = 0;
+    gBattle_BG0_Y = 0;
     gBattle_BG1_X = 0;
     gBattle_BG1_Y = 0;
     gBattle_BG2_X = 0;
@@ -620,8 +620,8 @@ void ContestMainCallback2(void)
 
 void ContestVBlankCallback(void)
 {
-    REG_BG0HOFS = gUnknown_030042A4;
-    REG_BG0VOFS = gUnknown_030042A0;
+    REG_BG0HOFS = gBattle_BG0_X;
+    REG_BG0VOFS = gBattle_BG0_Y;
     REG_BG1HOFS = gBattle_BG1_X;
     REG_BG1VOFS = gBattle_BG1_Y;
     REG_BG2HOFS = gBattle_BG2_X;
@@ -640,7 +640,7 @@ void ContestVBlankCallback(void)
 
 void sub_80ABB70(u8 taskId)
 {
-    gUnknown_030042A0 = 0;
+    gBattle_BG0_Y = 0;
     gBattle_BG2_Y = 0;
     sub_80B0D7C();
     DmaCopy32Defvars(3, gPlttBufferUnfaded, shared18000.unk18204, 0x400);
@@ -684,7 +684,7 @@ void sub_80ABCDC(u8 taskId)
     u8 i;
     u8 sp8[32];
 
-    gUnknown_030042A0 = 0xA0;
+    gBattle_BG0_Y = 0xA0;
     gBattle_BG2_Y = 0xA0;
     FillWindowRect_DefaultPalette(
       &gUnknown_03004210,
@@ -772,7 +772,7 @@ void sub_80ABEA0(u8 taskId)
             sub_80AF138();
             StringExpandPlaceholders(gStringVar4, gDisplayedStringBattle);
             sub_8003460(&gMenuWindow, gStringVar4, 776, 1, 15);
-            gUnknown_030042A0 = 0;
+            gBattle_BG0_Y = 0;
             gBattle_BG2_Y = 0;
             gTasks[taskId].func = sub_80ABC70;
             break;
@@ -846,7 +846,7 @@ void sub_80AC15C(u8 taskId)
 void sub_80AC188(u8 taskId)
 {
     sub_80AF138();
-    gUnknown_030042A0 = 0;
+    gBattle_BG0_Y = 0;
     gBattle_BG2_Y = 0;
     sub_80AFFE0(FALSE);
     DmaCopy32Defvars(3, gPlttBufferFaded, shared18000.unk18604, 0x400);
@@ -1804,7 +1804,7 @@ void sub_80ADDA4(u8 taskId)
 {
     s32 i;
 
-    gUnknown_030042A0 = 0;
+    gBattle_BG0_Y = 0;
     gBattle_BG2_Y = 0;
     for (i = 0; i < 4; i++)
         gUnknown_02038680[i] = sContestantStatus[i].unk4;
@@ -2950,7 +2950,7 @@ bool8 sub_80AF828(s32 a, s32 b, struct UnknownContestStruct6 *c)
 
 void sub_80AF860(void)
 {
-    gUnknown_030042A0 = 0;
+    gBattle_BG0_Y = 0;
     gBattle_BG2_Y = 0;
     sub_80AF138();
     sub_8003460(&gMenuWindow, gUnknownText_LinkStandbyAndWinner, 776, 1, 15);

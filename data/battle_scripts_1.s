@@ -3065,7 +3065,7 @@ BattleScript_LocalBattleLost:: @ 81D8DD1
 BattleScript_LocalBattleLostEnd: @ 81D8E01
 	end2
 
-gUnknown_081D8E02:: @ 81D8E02
+BattleScript_LinkBattleWonOrLost:: @ 81D8E02
 	printstring 5
 	waitmessage 64
 	atk57
@@ -3248,7 +3248,7 @@ BattleScript_DamagingWeatherContinues:: @ 81D8F7D
 	setbyte gBattleCommunication, 0
 
 BattleScript_DamagingWeatherLoop: @ 81D8F95
-	copyarraywithindex gBankAttacker, gTurnOrder, gBattleCommunication, 1
+	copyarraywithindex gBankAttacker, gBanksByTurnOrder, gBattleCommunication, 1
 	weatherdamage
 	jumpifword EQUAL, gBattleMoveDamage, 0x0, BattleScript_DamagingWeatherLoopIncrement
 	printfromtable gSandStormHailDmgStringIds

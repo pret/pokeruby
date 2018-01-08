@@ -13,12 +13,12 @@ extern struct SpriteTemplate gUnknown_02024E8C;
 extern struct Window gUnknown_03004210;
 extern u16 gBattle_BG2_Y;
 extern u16 gBattle_BG2_X;
-extern u16 gUnknown_030042A4;
+extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG1_X;
 extern u16 gUnknown_030041B0;
 extern u16 gBattle_BG1_Y;
 extern u16 gUnknown_030041B8;
-extern u16 gUnknown_030042A0;
+extern u16 gBattle_BG0_Y;
 extern u8 gReservedSpritePaletteCount;
 extern u8 gActionSelectionCursor[4];
 extern u8 gBankInMenu;
@@ -81,8 +81,8 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
         SetUpWindowConfig(&gWindowConfig_81E6C58);
         ResetPaletteFade();
         InitWindowFromConfig(&gUnknown_03004210, &gWindowConfig_81E6C58);
-        gUnknown_030042A4 = 0;
-        gUnknown_030042A0 = 0;
+        gBattle_BG0_X = 0;
+        gBattle_BG0_Y = 0;
         gBattle_BG1_X = 0;
         gBattle_BG1_Y = 0;
         gBattle_BG2_X = 0;
@@ -171,13 +171,13 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
 
             sub_80327CC();
 
-            opponentBank = GetBankByPlayerAI(1);
+            opponentBank = GetBankByIdentity(1);
             species = GetMonData(&gEnemyParty[gBattlePartyID[opponentBank]], MON_DATA_SPECIES);
             sub_8032984(opponentBank, species);
 
             if (IsDoubleBattle())
             {
-                opponentBank = GetBankByPlayerAI(3);
+                opponentBank = GetBankByIdentity(3);
                 species = GetMonData(&gEnemyParty[gBattlePartyID[opponentBank]], MON_DATA_SPECIES);
                 sub_8032984(opponentBank, species);
             }
@@ -190,7 +190,7 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
         sub_807B06C();
         BeginHardwarePaletteFade(0xFF, 0, 0x10, 0, 1);
         gPaletteFade.bufferTransferDisabled = 0;
-        SetMainCallback2(sub_800F808);
+        SetMainCallback2(BattleMainCB2);
         break;
     }
     gReshowState++;

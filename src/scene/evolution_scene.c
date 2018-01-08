@@ -65,8 +65,8 @@ void nullsub_6(void);
 bool32 IsHMMove2(u16 move);
 
 extern struct Window gUnknown_03004210;
-extern u16 gUnknown_030042A4;
-extern u16 gUnknown_030042A0;
+extern u16 gBattle_BG0_X;
+extern u16 gBattle_BG0_Y;
 extern u16 gBattle_BG1_X;
 extern u16 gBattle_BG1_Y;
 extern u16 gBattle_BG2_X;
@@ -200,8 +200,8 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
     SetUpWindowConfig(&gWindowConfig_81E6C58);
     ResetPaletteFade();
 
-    gUnknown_030042A4 = 0;
-    gUnknown_030042A0 = 0;
+    gBattle_BG0_X = 0;
+    gBattle_BG0_Y = 0;
     gBattle_BG1_X = 0;
     gBattle_BG1_Y = 0;
     gBattle_BG2_X = 0;
@@ -308,8 +308,8 @@ static void CB2_EvolutionSceneLoadGraphics(void)
     REG_WINOUT = 0;
     SetUpWindowConfig(&gWindowConfig_81E6C58);
     ResetPaletteFade();
-    gUnknown_030042A4 = 0;
-    gUnknown_030042A0 = 0;
+    gBattle_BG0_X = 0;
+    gBattle_BG0_Y = 0;
     gBattle_BG1_X = 0;
     gBattle_BG1_Y = 0;
     gBattle_BG2_X = 0;
@@ -362,8 +362,8 @@ static void CB2_TradeEvolutionSceneLoadGraphics(void)
         ResetSpriteData();
         FreeAllSpritePalettes();
         gReservedSpritePaletteCount = 4;
-        gUnknown_030042A4 = 0;
-        gUnknown_030042A0 = 0;
+        gBattle_BG0_X = 0;
+        gBattle_BG0_Y = 0;
         gBattle_BG1_X = 0;
         gBattle_BG1_Y = 0;
         gBattle_BG2_X = 0;
@@ -3923,8 +3923,8 @@ static void EvoDummyFunc(void)
 static void VBlankCB_EvolutionScene(void)
 {
     REG_BG0CNT = BGCNT_SCREENBASE(24) | BGCNT_16COLOR | BGCNT_TXT256x256 | BGCNT_AFF512x512 | BGCNT_PRIORITY(3); // 0x9803
-    REG_BG0HOFS = gUnknown_030042A4;
-    REG_BG0VOFS = gUnknown_030042A0;
+    REG_BG0HOFS = gBattle_BG0_X;
+    REG_BG0VOFS = gBattle_BG0_Y;
     REG_BG1HOFS = gBattle_BG1_X;
     REG_BG1VOFS = gBattle_BG1_Y;
     REG_BG2HOFS = gBattle_BG2_X;
@@ -3939,8 +3939,8 @@ static void VBlankCB_EvolutionScene(void)
 
 static void VBlankCB_TradeEvolutionScene(void)
 {
-    REG_BG0HOFS = gUnknown_030042A4;
-    REG_BG0VOFS = gUnknown_030042A0;
+    REG_BG0HOFS = gBattle_BG0_X;
+    REG_BG0VOFS = gBattle_BG0_Y;
     REG_BG1HOFS = gBattle_BG1_X;
     REG_BG1VOFS = gBattle_BG1_Y;
     REG_BG2HOFS = gBattle_BG2_X;

@@ -48,8 +48,8 @@ extern u8 gUnknown_02024E68[];
 extern struct SpriteTemplate gUnknown_02024E8C;
 extern u8 gAnimMoveTurn;
 extern struct Window gUnknown_03004210;
-extern u16 gUnknown_030042A0;
-extern u16 gUnknown_030042A4;
+extern u16 gBattle_BG0_Y;
+extern u16 gBattle_BG0_X;
 extern u8 gUnknown_0300434C[];
 extern u32 gBattleExecBuffer;
 extern MainCallback gPreBattleCallback1;
@@ -1410,8 +1410,8 @@ void sub_8039B64(void)
 
 void LinkOpponentHandlePrintString(void)
 {
-    gUnknown_030042A4 = 0;
-    gUnknown_030042A0 = 0;
+    gBattle_BG0_X = 0;
+    gBattle_BG0_Y = 0;
     BufferStringBattle(*(u16 *)&gBattleBufferA[gActiveBank][2]);
     sub_8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
     gBattleBankFunc[gActiveBank] = sub_8037C2C;

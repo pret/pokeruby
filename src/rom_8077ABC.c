@@ -823,7 +823,7 @@ u8 GetBankIdentity(u8 slot)
     return gBanksBySide[slot];
 }
 
-u8 GetBankByPlayerAI(u8 slot)
+u8 GetBankByIdentity(u8 slot)
 {
     u8 i;
 
@@ -1329,35 +1329,27 @@ u32 sub_80792C0(u8 a1, u8 a2, u8 a3, u8 a4)
             var |= 1 << 18;
             return var;
         }
-    }
-    else
-    {
-        if (a1)
-        {
-            if (IsAnimBankSpriteVisible(GetBankByPlayerAI(0)))
-                var |= 1 << (GetBankByPlayerAI(0) + 16);
+    } else {
+        if (a1) {
+            if (IsAnimBankSpriteVisible(GetBankByIdentity(0))) {
+                var |= 1 << (GetBankByIdentity(0) + 16);
+            }
         }
-        if (a2)
-        {
-            if (IsAnimBankSpriteVisible(GetBankByPlayerAI(2)))
-            {
-                shift = GetBankByPlayerAI(2) + 16;
+        if (a2) {
+            if (IsAnimBankSpriteVisible(GetBankByIdentity(2))) {
+                shift = GetBankByIdentity(2) + 16;
                 var |= 1 << shift;
             }
         }
-        if (a3)
-        {
-            if (IsAnimBankSpriteVisible(GetBankByPlayerAI(1)))
-            {
-                shift = GetBankByPlayerAI(1) + 16;
+        if (a3) {
+            if (IsAnimBankSpriteVisible(GetBankByIdentity(1))) {
+                shift = GetBankByIdentity(1) + 16;
                 var |= 1 << shift;
             }
         }
-        if (a4)
-        {
-            if (IsAnimBankSpriteVisible(GetBankByPlayerAI(3)))
-            {
-                shift = GetBankByPlayerAI(3) + 16;
+        if (a4) {
+            if (IsAnimBankSpriteVisible(GetBankByIdentity(3))) {
+                shift = GetBankByIdentity(3) + 16;
                 var |= 1 << shift;
             }
         }
@@ -1372,7 +1364,7 @@ u8 sub_80793A8(u8 a1)
 
 u8 unref_sub_80793B0(u8 a1)
 {
-    return GetBankByPlayerAI(a1);
+    return GetBankByIdentity(a1);
 }
 
 void sub_80793C4(struct Sprite *sprite)
