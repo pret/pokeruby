@@ -1039,25 +1039,16 @@ static void Mailbox_UpdateMailList(void)
     }
 }
 
-// WWHHHHHYYYYYYYY SOMEBODY PLEASE FIX THIS
-static void Mailbox_DrawMailList(u8 taskId) // taskId is unused
+void Mailbox_DrawMailList(u8 taskId) // taskId is unused
 {
     u16 yCoord = 0;
-    u16 i = eMailboxInfo.itemsAbove;
-    register struct MailboxStruct *tempMailbox asm("r1") = &eMailboxInfo;
-    register struct MailboxStruct *mailbox asm("r6");
+    u16 i;
 
-    if(i < i + tempMailbox->pageItems)
+    for (i = eMailboxInfo.itemsAbove; i < eMailboxInfo.itemsAbove + eMailboxInfo.pageItems; i++)
     {
-        mailbox = tempMailbox;
-        goto forJump;
-    for(; i < mailbox->itemsAbove + mailbox->pageItems; i++)
-    {
-    forJump:
-        yCoord = (i - mailbox->itemsAbove) * 2;
+        yCoord = (i - eMailboxInfo.itemsAbove) * 2;
         MenuFillWindowRectWithBlankTile(0x15, yCoord + 2, 0x1C, yCoord + 3);
-
-        if(i != mailbox->count)
+        if (i != eMailboxInfo.count)
         {
             StringCopy(gStringVar1, gSaveBlock1.mail[i + 6].playerName);
             SanitizeNameString(gStringVar1);
@@ -1065,29 +1056,20 @@ static void Mailbox_DrawMailList(u8 taskId) // taskId is unused
         }
         else
         {
-            goto weirdCase; // again, what???
+            MenuPrint(gOtherText_CancelNoTerminator, 0x15, yCoord + 2);
+            break;
         }
     }
-    }
 
-beforeLabel:
-    if(i - eMailboxInfo.itemsAbove != 8)
+    if (i - eMailboxInfo.itemsAbove != 8)
         MenuFillWindowRectWithBlankTile(0x15, yCoord + 4, 0x1C, 0x12);
 
-    switch(eMailboxInfo.itemsAbove)
-    {
-    default:
+    if (eMailboxInfo.itemsAbove != 0)
         CreateVerticalScrollIndicators(0, 0xC8, 8);
-        break;
-weirdCase:
-        MenuPrint(gOtherText_CancelNoTerminator, 0x15, yCoord + 2);
-        goto beforeLabel;
-    case 0:
+    else
         DestroyVerticalScrollIndicator(0);
-        break;
-    }
 
-    if(eMailboxInfo.itemsAbove + eMailboxInfo.pageItems <= eMailboxInfo.count)
+    if (eMailboxInfo.itemsAbove + eMailboxInfo.pageItems <= eMailboxInfo.count)
         CreateVerticalScrollIndicators(1, 0xC8, 0x98);
     else
         DestroyVerticalScrollIndicator(1);
