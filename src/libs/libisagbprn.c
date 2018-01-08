@@ -2,16 +2,14 @@
 #include <stdio.h>
 #include "gba/gba.h"
 #include "config.h"
-#include "assert.h"
 
 #define AGB_PRINT_FLUSH_ADDR 0x9FE209D
 #define AGB_PRINT_STRUCT_ADDR 0x9FE20F8
 #define AGB_PRINT_PROTECT_ADDR 0x9FE2FFE
 #define WSCNT_DATA (WAITCNT_PHI_OUT_16MHZ | WAITCNT_WS0_S_2 | WAITCNT_WS0_N_4)
 
-// TODO: make no$gba support not shit
-
 // for auto no$gba support, the string "no$gba" should be at this address.
+// except it's not, blame Martin, hence I'm letting the user deal with this nonsense.
 #define NOGBAIDADDR 0x4FFFA00
 #define NOGBAPRINTADDR 0x4FFFA14
 
@@ -26,6 +24,7 @@ struct AGBPrintStruct
 typedef void (*LPFN_PRINT_FLUSH)(void);
 
 #ifndef NDEBUG
+
 void AGBPrintFlush1Block(void);
 
 void AGBPrintInit(void)
@@ -156,12 +155,12 @@ void AGBAssert(const char *pFile, int nLine, const char *pExpression, int nStopP
     }
 }
 
-// TODO: Find a way to seamlessly support no$gba without shit hack defines
-// nogba print function
+// nogba print function, uncomment to use
 /*
 void NOGBAPrint(const char *pBuf)
 {
     *(volatile u32*)NOGBAPRINTADDR = (u32)pBuf;
-}*/
+}
+*/
 
 #endif
