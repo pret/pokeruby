@@ -13,6 +13,8 @@
 #include "event_data.h"
 #include "ewram.h"
 #include "script.h"
+#include "pokemon_summary_screen.h"
+#include "naming_screen.h"
 #include "pokemon_storage_system.h"
 
 struct StorageAction {
@@ -31,15 +33,6 @@ struct UnkStruct_2000020 {
     u8 unk_05;
 };
 
-struct PokemonStorageSystemData {
-    u8 filler_0000[5];
-    u8 unk_0005;
-    u8 filler_0006[26];
-    struct UnkStruct_2000020 unk_0020[595]; // refine size later
-    u8 filler_12b8[4];
-    struct PokemonMarkMenu unk_12bc;
-};
-
 struct UnkPSSStruct_2002370 {
     struct Sprite *unk_0000;
     struct Sprite *unk_0004[4];
@@ -51,6 +44,27 @@ struct UnkPSSStruct_2002370 {
     u8 unk_023e;
     u16 unk_0240;
     u16 unk_0242;
+}; // 0244
+
+struct PokemonStorageSystemData {
+    void (*unk_0000)(void);
+    u8 unk_0004;
+    u8 unk_0005;
+    u8 unk_0006;
+    u16 unk_0008;
+    u16 unk_000a;
+    u8 filler_000c[20];
+    struct UnkStruct_2000020 unk_0020[274]; // refine size later
+    u8 filler_08b0[4];
+    u16 unk_08b4;
+    u8 filler_08b6[0xa06];
+    struct PokemonMarkMenu unk_12bc;
+    struct UnkPSSStruct_2002370 unk_2370;
+    u8 filler_25b4[0xd8];
+    u8 unk_268c;
+    u8 unk_268d;
+    u8 unk_268e;
+    struct Pokemon *unk_2690;
 };
 
 void StorageSystemCreatePrimaryMenu(u8 whichMenu);
@@ -69,8 +83,10 @@ void sub_8096BE0(void (*func)(void));
 void sub_8096BF0(void);
 void sub_8096C68(void);
 void sub_8097DE0(void);
+void sub_8097E44(void);
 void sub_8097E70(void);
 void sub_8098400(void);
+void sub_8098734(void);
 void sub_8099BF8(u8 a0);
 void sub_8098B48(void);
 struct Sprite *sub_809A9A0(u16 a0, u16 a1, u8 a2, u8 a3, u8 a4);
@@ -80,6 +96,7 @@ void sub_809B0D4(void);
 void sub_809BBC0(void);
 void sub_809BD14(void);
 void sub_809CFDC(struct UnkStruct_2000020 *a0, struct UnkStruct_2000020 *a1, u8 a2);
+void sub_809CFF0(void);
 
 const struct PSS_MenuStringPtrs gUnknown_083B600C[] = {
     {PCText_WithdrawPoke, PCText_MovePokeToParty},
@@ -953,6 +970,45 @@ void sub_80969A0(void)
             gMain.state++;
             break;
     }
+}
+
+void sub_8096AFC(void)
+{
+    REG_BG2HOFS = ePokemonStorageSystem.unk_08b4;
+    REG_BG3HOFS = ePokemonStorageSystem.unk_000a;
+    REG_BG3VOFS = ePokemonStorageSystem.unk_0008;
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    sub_809CFF0();
+    TransferPlttBuffer();
+}
+
+void sub_8096B38(void)
+{
+    ePokemonStorageSystem.unk_0000();
+    sub_8097E44();
+    sub_8098734();
+    AnimateSprites();
+    BuildOamBuffer();
+}
+
+void sub_8096B5C(void)
+{
+    switch (ePokemonStorageSystem.unk_0006)
+    {
+        case 0:
+            ShowPokemonSummaryScreen(ePokemonStorageSystem.unk_2690, ePokemonStorageSystem.unk_268d, ePokemonStorageSystem.unk_268c, sub_80969A0, ePokemonStorageSystem.unk_268e);
+            break;
+        case 1:
+            DoNamingScreen(1, gPokemonStorage.boxNames[gPokemonStorage.currentBox], 0, 0, 0, sub_80969A0);
+            break;
+    }
+}
+
+void sub_8096BE0(void (*func)(void))
+{
+    ePokemonStorageSystem.unk_0000 = func;
+    ePokemonStorageSystem.unk_0004 = 0;
 }
 
 asm(".section .text.8098898");

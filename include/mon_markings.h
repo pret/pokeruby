@@ -18,7 +18,7 @@ struct PokemonMarkMenu
     /*0x0030*/ u8 menuWindowSpriteTiles[0x1000];
     /*0x1030*/ u8 filler1030[0x80];
     /*0x10B0*/ u8 tileLoadState;
-};
+}; // 10b4
 
 void sub_80F7404(void);
 void sub_80F727C(struct PokemonMarkMenu *ptr);
