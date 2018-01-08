@@ -1178,8 +1178,6 @@ void sub_806BBEC(u8 a)
     }
 }
 
-#ifdef NONMATCHING
-// The original THUMB is preserving r8 for seemingly no reason. Unsure how to match.
 void sub_806BC3C(u8 monIndex, u8 b)
 {
     u16 *vramPtr = gUnknown_08376918[IsDoubleBattle()][monIndex];
@@ -1192,74 +1190,10 @@ void sub_806BC3C(u8 monIndex, u8 b)
         vramPtr[i] = gUnknown_08E9A300[offset] + 0x10C;
         vramPtr[i + 0x20] = gUnknown_08E9A300[offset + 0x20] + 0x10C;
     }
+
+    // Some dead code was likely optimized out, but the compiler still think r8 was used.
+    asm("":::"r8");
 }
-#else
-__attribute__((naked))
-void sub_806BC3C(u8 monIndex, u8 b)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r8\n\
-    push {r7}\n\
-    adds r4, r0, 0\n\
-    adds r5, r1, 0\n\
-    lsls r4, 24\n\
-    lsrs r4, 24\n\
-    lsls r5, 24\n\
-    lsrs r5, 24\n\
-    ldr r6, _0806BCB0 @ =gUnknown_08376918\n\
-    bl IsDoubleBattle\n\
-    lsls r4, 2\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    lsls r1, r0, 1\n\
-    adds r1, r0\n\
-    lsls r1, 3\n\
-    adds r4, r1\n\
-    adds r4, r6\n\
-    ldr r7, [r4]\n\
-    movs r6, 0\n\
-    adds r0, r5, 0\n\
-    movs r1, 0x7\n\
-    bl __udivsi3\n\
-    lsls r0, 24\n\
-    lsrs r4, r0, 19\n\
-    ldr r5, _0806BCB4 @ =gUnknown_08E9A300\n\
-    movs r0, 0x86\n\
-    lsls r0, 1\n\
-    adds r3, r0, 0\n\
-_0806BC7C:\n\
-    adds r1, r6, r4\n\
-    lsls r2, r6, 1\n\
-    adds r2, r7\n\
-    lsls r0, r1, 1\n\
-    adds r0, r5\n\
-    ldrh r0, [r0]\n\
-    adds r0, r3, r0\n\
-    strh r0, [r2]\n\
-    adds r2, 0x40\n\
-    adds r1, 0x20\n\
-    lsls r1, 1\n\
-    adds r1, r5\n\
-    ldrh r1, [r1]\n\
-    adds r0, r3, r1\n\
-    strh r0, [r2]\n\
-    adds r0, r6, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r6, r0, 24\n\
-    cmp r6, 0x6\n\
-    bls _0806BC7C\n\
-    pop {r3}\n\
-    mov r8, r3\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_0806BCB0: .4byte gUnknown_08376918\n\
-_0806BCB4: .4byte gUnknown_08E9A300\n\
-    .syntax divided\n");
-}
-#endif // NONMATCHING
 
 void unref_sub_806BCB8(u8 a)
 {
