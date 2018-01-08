@@ -1985,79 +1985,15 @@ u16 GetCurrentBattleTowerWinStreak(u8 battleTowerLevelType)
     return winStreak;
 }
 
-#ifdef NONMATCHING
 void DetermineBattleTowerPrize(void)
 {
-    u16 prizeItem;
-    struct SaveBlock2 *saveBlock = &gSaveBlock2;
-    u8 battleTowerLevelType = saveBlock->battleTower.battleTowerLevelType;
+    u8 levelType = gSaveBlock2.battleTower.battleTowerLevelType;
 
-    if (saveBlock->battleTower.curStreakChallengesNum[battleTowerLevelType] - 1 > 5)
-    {
-        prizeItem = sLongStreakPrizes[Random() % ARRAY_COUNT(sLongStreakPrizes)];
-    }
+    if (gSaveBlock2.battleTower.curStreakChallengesNum[levelType] - 1 > 5)
+        gSaveBlock2.battleTower.prizeItem = sLongStreakPrizes[Random() % ARRAY_COUNT(sLongStreakPrizes)];
     else
-    {
-        prizeItem = sShortStreakPrizes[Random() % ARRAY_COUNT(sShortStreakPrizes)];
-    }
-
-    saveBlock->battleTower.prizeItem = prizeItem;
+        gSaveBlock2.battleTower.prizeItem = sShortStreakPrizes[Random() % ARRAY_COUNT(sShortStreakPrizes)];
 }
-#else
-__attribute__((naked))
-void DetermineBattleTowerPrize(void)
-{
-    asm(".syntax unified\n\
-    push {r4,r5,lr}\n\
-    ldr r5, _08135DB0 @ =gSaveBlock2\n\
-    ldr r1, _08135DB4 @ =0x00000554\n\
-    adds r0, r5, r1\n\
-    ldrb r0, [r0]\n\
-    lsls r0, 31\n\
-    lsrs r0, 31\n\
-    lsls r0, 1\n\
-    ldr r2, _08135DB8 @ =0x0000055c\n\
-    adds r1, r5, r2\n\
-    adds r0, r1\n\
-    ldrh r0, [r0]\n\
-    subs r0, 0x1\n\
-    cmp r0, 0x5\n\
-    ble _08135DC0\n\
-    bl Random\n\
-    ldr r4, _08135DBC @ =sLongStreakPrizes\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    movs r1, 0x9\n\
-    b _08135DCC\n\
-    .align 2, 0\n\
-_08135DB0: .4byte gSaveBlock2\n\
-_08135DB4: .4byte 0x00000554\n\
-_08135DB8: .4byte 0x0000055c\n\
-_08135DBC: .4byte sLongStreakPrizes\n\
-_08135DC0:\n\
-    bl Random\n\
-    ldr r4, _08135DE8 @ =sShortStreakPrizes\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    movs r1, 0x6\n\
-_08135DCC:\n\
-    bl __umodsi3\n\
-    lsls r0, 16\n\
-    lsrs r0, 15\n\
-    adds r0, r4\n\
-    ldrh r1, [r0]\n\
-    movs r2, 0xAD\n\
-    lsls r2, 3\n\
-    adds r0, r5, r2\n\
-    strh r1, [r0]\n\
-    pop {r4,r5}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_08135DE8: .4byte sShortStreakPrizes\n\
-    .syntax divided\n");
-}
-#endif // NONMATCHING
 
 void GiveBattleTowerPrize(void)
 {
