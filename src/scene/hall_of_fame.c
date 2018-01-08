@@ -17,6 +17,7 @@
 #include "decompress.h"
 #include "random.h"
 #include "trig.h"
+#include "pc_screen_effect.h"
 #include "ewram.h"
 
 static EWRAM_DATA u32 sUnknown_0203931C = 0;
@@ -89,7 +90,6 @@ static bool8 sub_81438C4(void);
 
 // functions from different files
 void sub_81439D0(void);
-void sub_80C5CD4(void*); // ?
 void sub_80C5E38(void*); // ?
 bool8 sub_80C5DCC(void);
 bool8 sub_80C5F98(void);
@@ -811,7 +811,7 @@ void sub_81428CC(void)
             fameMons = eHallOfFameMons1;
             fameMons->mons[0] = sDummyFameMon;
 
-            sub_80C5CD4(fameMons);
+            sub_80C5CD4((struct PCScreenEffectStruct *)fameMons);
             gMain.state++;
         }
         break;

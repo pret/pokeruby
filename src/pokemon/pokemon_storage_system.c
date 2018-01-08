@@ -14,6 +14,7 @@
 #include "ewram.h"
 #include "script.h"
 #include "pokemon_summary_screen.h"
+#include "pc_screen_effect.h"
 #include "naming_screen.h"
 #include "pokemon_storage_system.h"
 
@@ -53,7 +54,7 @@ struct PokemonStorageSystemData {
     u8 unk_0006;
     u16 unk_0008;
     u16 unk_000a;
-    u8 filler_000c[20];
+    struct PCScreenEffectStruct unk_000c;
     struct UnkStruct_2000020 unk_0020[274]; // refine size later
     u8 filler_08b0[4];
     u16 unk_08b4;
@@ -82,6 +83,7 @@ void sub_8096B38(void);
 void sub_8096BE0(void (*func)(void));
 void sub_8096BF0(void);
 void sub_8096C68(void);
+void sub_8096C84(void);
 void sub_8097DE0(void);
 void sub_8097E44(void);
 void sub_8097E70(void);
@@ -1009,6 +1011,37 @@ void sub_8096BE0(void (*func)(void))
 {
     ePokemonStorageSystem.unk_0000 = func;
     ePokemonStorageSystem.unk_0004 = 0;
+}
+
+void sub_8096BF0(void)
+{
+    switch (ePokemonStorageSystem.unk_0004)
+    {
+        case 0:
+            BlendPalettes(0xffffffff, 16, 0);
+            ePokemonStorageSystem.unk_0004++;
+            break;
+        case 1:
+            PlaySE(SE_PC_LOGON);
+            ePokemonStorageSystem.unk_000c.tileTag = 14;
+            ePokemonStorageSystem.unk_000c.paletteTag = 0xdad0;
+            ePokemonStorageSystem.unk_000c.unk04 = 0;
+            ePokemonStorageSystem.unk_000c.unk06 = 0;
+            sub_80C5CD4(&ePokemonStorageSystem.unk_000c);
+            BlendPalettes(0xffffffff, 0, 0);
+            ePokemonStorageSystem.unk_0004++;
+            break;
+        case 2:
+            if (sub_80C5DCC())
+                sub_8096BE0(sub_8096C84);
+            break;
+    }
+}
+
+void sub_8096C68(void)
+{
+    if (!UpdatePaletteFade())
+        sub_8096BE0(sub_8096C84);
 }
 
 asm(".section .text.8098898");
