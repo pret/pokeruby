@@ -20,7 +20,10 @@ struct PokemonMarkMenu
     /*0x10B0*/ u8 tileLoadState;
 }; // 10b4
 
-void sub_80F7404(void);
 void sub_80F727C(struct PokemonMarkMenu *ptr);
+void sub_80F7404(void);
+void sub_80F7418(u8 markings, s16 x, s16 y);
+void sub_80F7470(void);
+bool8 sub_80F7500(void);
 
 #endif //POKERUBY_MON_MARKINGS_H

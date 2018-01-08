@@ -100,7 +100,8 @@ struct PokemonStorageSystemData {
     u16 unk_11f2;
     u8 filler_11f4[2];
     u8 unk_11f6;
-    u8 filler_11f7[2];
+    u8 unk_11f7;
+    u8 unk_11f8;
     u8 unk_11f9;
     u8 unk_11fa[0xc2];
     struct PokemonMarkMenu unk_12bc;
@@ -191,7 +192,9 @@ void sub_809B7AC(void);
 void sub_809B7D4(void);
 s8 sub_809B960(void);
 void sub_809BBC0(void);
+void sub_809BC18(void);
 void sub_809BD14(void);
+void sub_809BDD8(u8 markings);
 bool8 sub_809BE80(void);
 bool8 sub_809BEBC(void);
 bool8 sub_809BF20(void);
@@ -1772,6 +1775,68 @@ void sub_8097594(void)
             if (gMain.newKeys & (A_BUTTON | B_BUTTON))
             {
                 sub_8098A5C();
+                SetPSSCallback(sub_8096C84);
+            }
+            break;
+    }
+}
+
+void sub_8097788(void)
+{
+    switch (ePokemonStorageSystem.unk_0004)
+    {
+        case 0:
+            sub_809BC18();
+            BeginNormalPaletteFade(0xffffffff, 0, 0, 16, 0);
+            ePokemonStorageSystem.unk_0004++;
+            break;
+        case 1:
+            if (!UpdatePaletteFade())
+            {
+                gUnknown_0203847F = 0;
+                ePokemonStorageSystem.unk_0006 = 0;
+                SetMainCallback2(sub_8096B5C);
+            }
+            break;
+    }
+}
+
+void sub_80977E4(void)
+{
+    switch (ePokemonStorageSystem.unk_0004)
+    {
+        case 0:
+            PrintStorageActionText(PC_TEXT_MARK_POKE);
+            ePokemonStorageSystem.unk_12bc.markings = ePokemonStorageSystem.unk_11f7;
+            sub_80F7418(ePokemonStorageSystem.unk_11f7, 0xb0, 0x10);
+            ePokemonStorageSystem.unk_0004++;
+            break;
+        case 1:
+            if (!sub_80F7500())
+            {
+                sub_80F7470();
+                sub_8098A5C();
+                sub_809BDD8(ePokemonStorageSystem.unk_12bc.markings);
+                sub_809801C();
+                SetPSSCallback(sub_8096C84);
+            }
+            break;
+    }
+}
+
+void sub_8097858(void)
+{
+    switch (ePokemonStorageSystem.unk_0004)
+    {
+        case 0:
+            party_compaction();
+            sub_8099310();
+            ePokemonStorageSystem.unk_0004++;
+            break;
+        case 1:
+            if (!sub_8099374())
+            {
+                sub_80987DC();
                 SetPSSCallback(sub_8096C84);
             }
             break;
