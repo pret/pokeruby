@@ -70,7 +70,7 @@ gUnknown_083B6D94:: @ 83B6D94
 	.incbin "graphics/pokemon_storage/83B6D94.gbapal"
 
 	.align 2
-gUnknown_083B6DB4:: @ 83B6DB4
+gPokemonStorageSystemPtr:: @ 83B6DB4
 	.4byte gSharedMem
 
 	.align 2
