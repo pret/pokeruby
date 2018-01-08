@@ -1,9 +1,15 @@
 #include "global.h"
 #include "battle_anim.h"
+#include "contest.h"
+#include "ewram.h"
+#include "rom_8077ABC.h"
 #include "sound.h"
 #include "task.h"
 
 extern s16 gBattleAnimArgs[];
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
+extern u16 gBattlePartyID[];
 
 void sub_812AF98(u8 taskId);
 void sub_812B004(u8 taskId);
@@ -121,4 +127,58 @@ void sub_812B108(u8 taskId)
         TASK.data[11] += TASK.data[3];
         TASK.data[11] = sub_8077104(TASK.data[11]);
     }
+}
+
+// #define shared19348 (*(struct UnknownContestStruct8 *)(gSharedMem + 0x19348))
+// #define EWRAM_19348 (*(u16 *)(gSharedMem + 0x19348))
+
+void sub_812B18C(u8 taskId)
+{
+    u16 species = 0;
+    s8 pan = BattleAnimAdjustPanning(-64);
+
+    if (IsContest())
+    {
+        if (!gBattleAnimArgs[0])
+            species = shared19348.unk0;
+        else
+            DestroyAnimVisualTask(taskId);
+    }
+    else
+    {
+        u8 bank;
+        if (gBattleAnimArgs[0] == 0)
+            bank = gAnimBankAttacker;
+        else if (gBattleAnimArgs[0] == 1)
+            bank = gAnimBankTarget;
+        else if (gBattleAnimArgs[0] == 2)
+            bank = gAnimBankAttacker ^ 0x2;
+        else
+            bank = gAnimBankTarget ^ 0x2;
+
+        if (gBattleAnimArgs[0] == 1 || gBattleAnimArgs[0] == 3)
+        {
+            if (!IsAnimBankSpriteVisible(bank))
+            {
+                DestroyAnimVisualTask(taskId);
+                return;
+            }
+        }
+
+        if (GetBankSide(bank))
+            species = GetMonData(&gEnemyParty[gBattlePartyID[bank]], 0xB);
+        else
+            species = GetMonData(&gPlayerParty[gBattlePartyID[bank]], 0xB);
+    }
+
+    if (species != 0)
+    {
+        s16 mode = gBattleAnimArgs[1];
+        if (mode == 0xFF)
+            PlayCry1(species, pan);
+        else
+            PlayCry3(species, pan, mode);
+    }
+
+    DestroyAnimVisualTask(taskId);
 }
