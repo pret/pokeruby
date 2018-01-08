@@ -115,7 +115,6 @@ struct Shared1000
 };
 
 extern u8 gUnknown_020388AC;
-extern u8 gUnknown_03000740;
 
 // const pointer to shared1000. easy_chat might be two separate files.
 extern struct Shared1000 *const gEasyChatStruct;
