@@ -23,8 +23,8 @@ void sub_80D57C4(u8 spriteId, u8 taskId, u8 a3);
 void sub_80D51A8(struct Sprite *sprite)
 {
     if (GetBankSide(gAnimBankAttacker) == GetBankSide(gAnimBankTarget)
-        && (gAnimBankAttacker == GetBankByPlayerAI(2)
-            || gAnimBankAttacker == GetBankByPlayerAI(3)))
+        && (gAnimBankAttacker == GetBankByIdentity(2)
+            || gAnimBankAttacker == GetBankByIdentity(3)))
             gBattleAnimArgs[2] = -gBattleAnimArgs[2];
 
     sprite->callback = sub_8079534;

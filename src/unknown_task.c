@@ -12,8 +12,8 @@ extern u16 gBattle_BG1_Y;
 extern u16 gUnknown_030041B8;
 extern u16 gBattle_BG2_Y;
 extern u16 gBattle_BG2_X;
-extern u16 gUnknown_030042A0;
-extern u16 gUnknown_030042A4;
+extern u16 gBattle_BG0_Y;
+extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG1_X;
 
 extern u8 gUnknown_0202FFA4;
@@ -120,10 +120,10 @@ static void task00_for_dp12(u8 taskId)
             switch (gTasks[taskId].data[6])
             {
             case 0x0:
-                value = gUnknown_030042A4;
+                value = gBattle_BG0_X;
                 break;
             case 0x2:
-                value = gUnknown_030042A0;
+                value = gBattle_BG0_Y;
                 break;
             case 0x4:
                 value = gBattle_BG1_X;

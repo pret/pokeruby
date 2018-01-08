@@ -108,17 +108,17 @@ void sub_80A7FA0(u8 taskId)
         switch (gBattleAnimArgs[0])
         {
         case 4:
-            side = GetBankByPlayerAI(0);
+            side = GetBankByIdentity(0);
             break;
         case 5:
-            side = GetBankByPlayerAI(2);
+            side = GetBankByIdentity(2);
             break;
         case 6:
-            side = GetBankByPlayerAI(1);
+            side = GetBankByIdentity(1);
             break;
         case 7:
         default:
-            side = GetBankByPlayerAI(3);
+            side = GetBankByIdentity(3);
             break;
         }
         if (IsAnimBankSpriteVisible(side) == FALSE)

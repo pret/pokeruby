@@ -82,9 +82,9 @@ sub_80C2020: @ 80C2020
 	adds r1, r3, 0
 	orrs r0, r1
 	strh r0, [r5]
-	ldr r0, _080C2114 @ =gUnknown_030042A4
+	ldr r0, _080C2114 @ =gBattle_BG0_X
 	strh r2, [r0]
-	ldr r0, _080C2118 @ =gUnknown_030042A0
+	ldr r0, _080C2118 @ =gBattle_BG0_Y
 	strh r2, [r0]
 	ldr r0, _080C211C @ =gBattle_BG1_X
 	strh r2, [r0]
@@ -119,8 +119,8 @@ _080C2104: .4byte 0x00003a03
 _080C2108: .4byte REG_MOSAIC
 _080C210C: .4byte 0x00003f3f
 _080C2110: .4byte REG_WIN0H
-_080C2114: .4byte gUnknown_030042A4
-_080C2118: .4byte gUnknown_030042A0
+_080C2114: .4byte gBattle_BG0_X
+_080C2118: .4byte gBattle_BG0_Y
 _080C211C: .4byte gBattle_BG1_X
 _080C2120: .4byte gBattle_BG1_Y
 _080C2124: .4byte gBattle_BG2_X
@@ -482,11 +482,11 @@ sub_80C2430: @ 80C2430
 sub_80C2448: @ 80C2448
 	push {lr}
 	ldr r1, _080C24C0 @ =REG_BG0HOFS
-	ldr r0, _080C24C4 @ =gUnknown_030042A4
+	ldr r0, _080C24C4 @ =gBattle_BG0_X
 	ldrh r0, [r0]
 	strh r0, [r1]
 	adds r1, 0x2
-	ldr r0, _080C24C8 @ =gUnknown_030042A0
+	ldr r0, _080C24C8 @ =gBattle_BG0_Y
 	ldrh r0, [r0]
 	strh r0, [r1]
 	adds r1, 0x2
@@ -537,8 +537,8 @@ sub_80C2448: @ 80C2448
 	bx r0
 	.align 2, 0
 _080C24C0: .4byte REG_BG0HOFS
-_080C24C4: .4byte gUnknown_030042A4
-_080C24C8: .4byte gUnknown_030042A0
+_080C24C4: .4byte gBattle_BG0_X
+_080C24C8: .4byte gBattle_BG0_Y
 _080C24CC: .4byte gBattle_BG1_X
 _080C24D0: .4byte gBattle_BG1_Y
 _080C24D4: .4byte gBattle_BG2_X

@@ -811,7 +811,7 @@ u8 sub_80BDEAC(u8 *a0)
     return lang;
 }
 
-void sub_80BDEC8(void)
+void PutPokemonTodayCaughtOnAir(void)
 {
     u8 i;
     u16 total;

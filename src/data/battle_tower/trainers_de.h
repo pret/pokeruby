@@ -1,7 +1,7 @@
 const struct BattleTowerTrainer gBattleTowerTrainers[] = 
 {
 	{
-		.trainerClass = TRAINER_CLASS_YOUNGSTER,
+		.trainerClass = FACILITY_CLASS_YOUNGSTER,
 		.name = _("ALWIN"),
 		.teamFlags = 0x01,
 		.greeting = {
@@ -16,7 +16,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_BIRD_KEEPER,
+		.trainerClass = FACILITY_CLASS_BIRD_KEEPER,
 		.name = _("DIRK"),
 		.teamFlags = 0x01,
 		.greeting = {
@@ -31,7 +31,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_LADY,
+		.trainerClass = FACILITY_CLASS_LADY,
 		.name = _("SIBILLE"),
 		.teamFlags = 0x02,
 		.greeting = {
@@ -46,7 +46,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_BLACK_BELT,
+		.trainerClass = FACILITY_CLASS_BLACK_BELT,
 		.name = _("OLAF"),
 		.teamFlags = 0x05,
 		.greeting = {
@@ -61,7 +61,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_NINJA_BOY,
+		.trainerClass = FACILITY_CLASS_NINJA_BOY,
 		.name = _("JOST"),
 		.teamFlags = 0x05,
 		.greeting = {
@@ -76,7 +76,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_SCHOOL_KID_F,
+		.trainerClass = FACILITY_CLASS_SCHOOL_KID_F,
 		.name = _("TINA"),
 		.teamFlags = 0x0A,
 		.greeting = {
@@ -91,7 +91,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_BUG_MANIAC,
+		.trainerClass = FACILITY_CLASS_BUG_MANIAC,
 		.name = _("HAJO"),
 		.teamFlags = 0x41,
 		.greeting = {
@@ -106,7 +106,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_FISHERMAN,
+		.trainerClass = FACILITY_CLASS_FISHERMAN,
 		.name = _("GEORG"),
 		.teamFlags = 0x01,
 		.greeting = {
@@ -121,7 +121,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_TUBER_F,
+		.trainerClass = FACILITY_CLASS_TUBER_F,
 		.name = _("ANNE"),
 		.teamFlags = 0x02,
 		.greeting = {
@@ -136,7 +136,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_POKEFAN_F,
+		.trainerClass = FACILITY_CLASS_POKEFAN_F,
 		.name = _("JULIA"),
 		.teamFlags = 0x42,
 		.greeting = {
@@ -151,7 +151,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_GENTLEMAN,
+		.trainerClass = FACILITY_CLASS_GENTLEMAN,
 		.name = _("JOHANN"),
 		.teamFlags = 0x01,
 		.greeting = {
@@ -166,7 +166,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_CAMPER,
+		.trainerClass = FACILITY_CLASS_CAMPER,
 		.name = _("KARL"),
 		.teamFlags = 0x01,
 		.greeting = {
@@ -181,7 +181,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_RUNNING_TRIATHLETE_F,
+		.trainerClass = FACILITY_CLASS_RUNNING_TRIATHLETE_F,
 		.name = _("KENDRA"),
 		.teamFlags = 0x0A,
 		.greeting = {
@@ -196,7 +196,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_HIKER,
+		.trainerClass = FACILITY_CLASS_HIKER,
 		.name = _("DAVID"),
 		.teamFlags = 0x01,
 		.greeting = {
@@ -211,7 +211,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_BATTLE_GIRL,
+		.trainerClass = FACILITY_CLASS_BATTLE_GIRL,
 		.name = _("KEA"),
 		.teamFlags = 0x0A,
 		.greeting = {
@@ -226,7 +226,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_PSYCHIC_M,
+		.trainerClass = FACILITY_CLASS_PSYCHIC_M,
 		.name = _("JULIAN"),
 		.teamFlags = 0x05,
 		.greeting = {
@@ -241,7 +241,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_LASS,
+		.trainerClass = FACILITY_CLASS_LASS,
 		.name = _("JOSI"),
 		.teamFlags = 0x02,
 		.greeting = {
@@ -256,7 +256,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_GUITARIST,
+		.trainerClass = FACILITY_CLASS_GUITARIST,
 		.name = _("LEIF"),
 		.teamFlags = 0x01,
 		.greeting = {
@@ -271,7 +271,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_RICH_BOY,
+		.trainerClass = FACILITY_CLASS_RICH_BOY,
 		.name = _("INGO"),
 		.teamFlags = 0x01,
 		.greeting = {
@@ -286,7 +286,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_BUG_CATCHER,
+		.trainerClass = FACILITY_CLASS_BUG_CATCHER,
 		.name = _("LUDWIG"),
 		.teamFlags = 0x01,
 		.greeting = {
@@ -301,7 +301,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_PICNICKER,
+		.trainerClass = FACILITY_CLASS_PICNICKER,
 		.name = _("RAJA"),
 		.teamFlags = 0x02,
 		.greeting = {
@@ -316,7 +316,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_COLLECTOR,
+		.trainerClass = FACILITY_CLASS_COLLECTOR,
 		.name = _("HARALD"),
 		.teamFlags = 0x09,
 		.greeting = {
@@ -331,7 +331,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_TUBER_M,
+		.trainerClass = FACILITY_CLASS_TUBER_M,
 		.name = _("KIM"),
 		.teamFlags = 0x01,
 		.greeting = {
@@ -346,7 +346,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_KINDLER,
+		.trainerClass = FACILITY_CLASS_KINDLER,
 		.name = _("ERWIN"),
 		.teamFlags = 0x05,
 		.greeting = {
@@ -361,7 +361,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_PSYCHIC_F,
+		.trainerClass = FACILITY_CLASS_PSYCHIC_F,
 		.name = _("EIKA"),
 		.teamFlags = 0x0A,
 		.greeting = {
@@ -376,7 +376,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_SWIMMER_F,
+		.trainerClass = FACILITY_CLASS_SWIMMER_F,
 		.name = _("ANNINA"),
 		.teamFlags = 0x02,
 		.greeting = {
@@ -391,7 +391,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_CYCLING_TRIATHLETE_F,
+		.trainerClass = FACILITY_CLASS_CYCLING_TRIATHLETE_F,
 		.name = _("RUTH"),
 		.teamFlags = 0x06,
 		.greeting = {
@@ -406,7 +406,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_POKEMANIAC,
+		.trainerClass = FACILITY_CLASS_POKEMANIAC,
 		.name = _("JENS"),
 		.teamFlags = 0x40,
 		.greeting = {
@@ -421,7 +421,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_SAILOR,
+		.trainerClass = FACILITY_CLASS_SAILOR,
 		.name = _("TITUS"),
 		.teamFlags = 0x09,
 		.greeting = {
@@ -436,7 +436,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_POKEMON_BREEDER_F,
+		.trainerClass = FACILITY_CLASS_POKEMON_BREEDER_F,
 		.name = _("NICOLA"),
 		.teamFlags = 0x06,
 		.greeting = {
@@ -451,7 +451,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_HEX_MANIAC,
+		.trainerClass = FACILITY_CLASS_HEX_MANIAC,
 		.name = _("PAULA"),
 		.teamFlags = 0x42,
 		.greeting = {
@@ -466,7 +466,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_RUIN_MANIAC,
+		.trainerClass = FACILITY_CLASS_RUIN_MANIAC,
 		.name = _("SÖREN"),
 		.teamFlags = 0x41,
 		.greeting = {
@@ -481,7 +481,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_SWIMMING_TRIATHLETE_M,
+		.trainerClass = FACILITY_CLASS_SWIMMING_TRIATHLETE_M,
 		.name = _("RAINER"),
 		.teamFlags = 0x09,
 		.greeting = {
@@ -496,7 +496,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_SCHOOL_KID_M,
+		.trainerClass = FACILITY_CLASS_SCHOOL_KID_M,
 		.name = _("FABIAN"),
 		.teamFlags = 0x08,
 		.greeting = {
@@ -511,7 +511,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_POKEMON_RANGER_F,
+		.trainerClass = FACILITY_CLASS_POKEMON_RANGER_F,
 		.name = _("ELLEN"),
 		.teamFlags = 0x04,
 		.greeting = {
@@ -526,7 +526,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_SWIMMER_M,
+		.trainerClass = FACILITY_CLASS_SWIMMER_M,
 		.name = _("ARNIE"),
 		.teamFlags = 0x09,
 		.greeting = {
@@ -541,7 +541,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_RUNNING_TRIATHLETE_M,
+		.trainerClass = FACILITY_CLASS_RUNNING_TRIATHLETE_M,
 		.name = _("HARDI"),
 		.teamFlags = 0x09,
 		.greeting = {
@@ -556,7 +556,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_BEAUTY,
+		.trainerClass = FACILITY_CLASS_BEAUTY,
 		.name = _("LINA"),
 		.teamFlags = 0x06,
 		.greeting = {
@@ -571,7 +571,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_AROMA_LADY,
+		.trainerClass = FACILITY_CLASS_AROMA_LADY,
 		.name = _("SELINA"),
 		.teamFlags = 0x06,
 		.greeting = {
@@ -586,7 +586,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_COLLECTOR,
+		.trainerClass = FACILITY_CLASS_COLLECTOR,
 		.name = _("DANTE"),
 		.teamFlags = 0x81,
 		.greeting = {
@@ -601,7 +601,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_SWIMMING_TRIATHLETE_F,
+		.trainerClass = FACILITY_CLASS_SWIMMING_TRIATHLETE_F,
 		.name = _("KATJA"),
 		.teamFlags = 0x04,
 		.greeting = {
@@ -616,7 +616,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_POKEMON_RANGER_M,
+		.trainerClass = FACILITY_CLASS_POKEMON_RANGER_M,
 		.name = _("HORST"),
 		.teamFlags = 0x0C,
 		.greeting = {
@@ -631,7 +631,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_POKEFAN_M,
+		.trainerClass = FACILITY_CLASS_POKEFAN_M,
 		.name = _("GERRIT"),
 		.teamFlags = 0x80,
 		.greeting = {
@@ -646,7 +646,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_CYCLING_TRIATHLETE_M,
+		.trainerClass = FACILITY_CLASS_CYCLING_TRIATHLETE_M,
 		.name = _("NIKO"),
 		.teamFlags = 0x04,
 		.greeting = {
@@ -661,7 +661,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_POKEMON_BREEDER_M,
+		.trainerClass = FACILITY_CLASS_POKEMON_BREEDER_M,
 		.name = _("BALDO"),
 		.teamFlags = 0x41,
 		.greeting = {
@@ -676,7 +676,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_PARASOL_LADY,
+		.trainerClass = FACILITY_CLASS_PARASOL_LADY,
 		.name = _("ALMA"),
 		.teamFlags = 0x08,
 		.greeting = {
@@ -691,7 +691,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_CAMPER,
+		.trainerClass = FACILITY_CLASS_CAMPER,
 		.name = _("ADAM"),
 		.teamFlags = 0x0C,
 		.greeting = {
@@ -706,7 +706,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_SCHOOL_KID_F,
+		.trainerClass = FACILITY_CLASS_SCHOOL_KID_F,
 		.name = _("GRETE"),
 		.teamFlags = 0x42,
 		.greeting = {
@@ -721,7 +721,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_BEAUTY,
+		.trainerClass = FACILITY_CLASS_BEAUTY,
 		.name = _("NAOMI"),
 		.teamFlags = 0x04,
 		.greeting = {
@@ -736,7 +736,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_NINJA_BOY,
+		.trainerClass = FACILITY_CLASS_NINJA_BOY,
 		.name = _("KENO"),
 		.teamFlags = 0x0C,
 		.greeting = {
@@ -751,7 +751,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_CYCLING_TRIATHLETE_M,
+		.trainerClass = FACILITY_CLASS_CYCLING_TRIATHLETE_M,
 		.name = _("REMUS"),
 		.teamFlags = 0x01,
 		.greeting = {
@@ -766,7 +766,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_POKEMON_RANGER_F,
+		.trainerClass = FACILITY_CLASS_POKEMON_RANGER_F,
 		.name = _("EDITH"),
 		.teamFlags = 0x02,
 		.greeting = {
@@ -781,7 +781,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_RUIN_MANIAC,
+		.trainerClass = FACILITY_CLASS_RUIN_MANIAC,
 		.name = _("ANTON"),
 		.teamFlags = 0x41,
 		.greeting = {
@@ -796,7 +796,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_SWIMMER_M,
+		.trainerClass = FACILITY_CLASS_SWIMMER_M,
 		.name = _("MALTE"),
 		.teamFlags = 0x81,
 		.greeting = {
@@ -811,7 +811,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_HEX_MANIAC,
+		.trainerClass = FACILITY_CLASS_HEX_MANIAC,
 		.name = _("RAOUL"),
 		.teamFlags = 0x42,
 		.greeting = {
@@ -826,7 +826,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_RUNNING_TRIATHLETE_M,
+		.trainerClass = FACILITY_CLASS_RUNNING_TRIATHLETE_M,
 		.name = _("RICK"),
 		.teamFlags = 0x01,
 		.greeting = {
@@ -841,7 +841,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_POKEFAN_M,
+		.trainerClass = FACILITY_CLASS_POKEFAN_M,
 		.name = _("DENNIS"),
 		.teamFlags = 0x80,
 		.greeting = {
@@ -856,7 +856,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_PSYCHIC_F,
+		.trainerClass = FACILITY_CLASS_PSYCHIC_F,
 		.name = _("GLORIA"),
 		.teamFlags = 0x82,
 		.greeting = {
@@ -871,7 +871,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_GUITARIST,
+		.trainerClass = FACILITY_CLASS_GUITARIST,
 		.name = _("NINO"),
 		.teamFlags = 0x01,
 		.greeting = {
@@ -886,7 +886,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_KINDLER,
+		.trainerClass = FACILITY_CLASS_KINDLER,
 		.name = _("FIETE"),
 		.teamFlags = 0x41,
 		.greeting = {
@@ -901,7 +901,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_AROMA_LADY,
+		.trainerClass = FACILITY_CLASS_AROMA_LADY,
 		.name = _("AMANDA"),
 		.teamFlags = 0x82,
 		.greeting = {
@@ -916,7 +916,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_SWIMMING_TRIATHLETE_M,
+		.trainerClass = FACILITY_CLASS_SWIMMING_TRIATHLETE_M,
 		.name = _("MAREK"),
 		.teamFlags = 0x10,
 		.greeting = {
@@ -931,7 +931,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_DRAGON_TAMER,
+		.trainerClass = FACILITY_CLASS_DRAGON_TAMER,
 		.name = _("NATHAN"),
 		.teamFlags = 0x10,
 		.greeting = {
@@ -946,7 +946,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_LASS,
+		.trainerClass = FACILITY_CLASS_LASS,
 		.name = _("MIRIAM"),
 		.teamFlags = 0x82,
 		.greeting = {
@@ -961,7 +961,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_POKEMANIAC,
+		.trainerClass = FACILITY_CLASS_POKEMANIAC,
 		.name = _("THEO"),
 		.teamFlags = 0x40,
 		.greeting = {
@@ -976,7 +976,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_SWIMMING_TRIATHLETE_F,
+		.trainerClass = FACILITY_CLASS_SWIMMING_TRIATHLETE_F,
 		.name = _("PIA"),
 		.teamFlags = 0x10,
 		.greeting = {
@@ -991,7 +991,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_POKEFAN_F,
+		.trainerClass = FACILITY_CLASS_POKEFAN_F,
 		.name = _("ALISSA"),
 		.teamFlags = 0x20,
 		.greeting = {
@@ -1006,7 +1006,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_GENTLEMAN,
+		.trainerClass = FACILITY_CLASS_GENTLEMAN,
 		.name = _("ARTUR"),
 		.teamFlags = 0x20,
 		.greeting = {
@@ -1021,7 +1021,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_SWIMMER_F,
+		.trainerClass = FACILITY_CLASS_SWIMMER_F,
 		.name = _("MAJA"),
 		.teamFlags = 0x82,
 		.greeting = {
@@ -1036,7 +1036,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_COOL_TRAINER_M,
+		.trainerClass = FACILITY_CLASS_COOL_TRAINER_M,
 		.name = _("MARIUS"),
 		.teamFlags = 0x10,
 		.greeting = {
@@ -1051,7 +1051,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_BIRD_KEEPER,
+		.trainerClass = FACILITY_CLASS_BIRD_KEEPER,
 		.name = _("OLIVER"),
 		.teamFlags = 0x11,
 		.greeting = {
@@ -1066,7 +1066,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_CYCLING_TRIATHLETE_F,
+		.trainerClass = FACILITY_CLASS_CYCLING_TRIATHLETE_F,
 		.name = _("MOLLY"),
 		.teamFlags = 0x12,
 		.greeting = {
@@ -1081,7 +1081,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_BUG_MANIAC,
+		.trainerClass = FACILITY_CLASS_BUG_MANIAC,
 		.name = _("JÖRG"),
 		.teamFlags = 0x40,
 		.greeting = {
@@ -1096,7 +1096,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_BATTLE_GIRL,
+		.trainerClass = FACILITY_CLASS_BATTLE_GIRL,
 		.name = _("ANKE"),
 		.teamFlags = 0x20,
 		.greeting = {
@@ -1111,7 +1111,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_FISHERMAN,
+		.trainerClass = FACILITY_CLASS_FISHERMAN,
 		.name = _("HANS"),
 		.teamFlags = 0x10,
 		.greeting = {
@@ -1126,7 +1126,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_SAILOR,
+		.trainerClass = FACILITY_CLASS_SAILOR,
 		.name = _("PETER"),
 		.teamFlags = 0x20,
 		.greeting = {
@@ -1141,7 +1141,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_EXPERT_F,
+		.trainerClass = FACILITY_CLASS_EXPERT_F,
 		.name = _("MARA"),
 		.teamFlags = 0x20,
 		.greeting = {
@@ -1156,7 +1156,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_BUG_MANIAC,
+		.trainerClass = FACILITY_CLASS_BUG_MANIAC,
 		.name = _("DARIUS"),
 		.teamFlags = 0x11,
 		.greeting = {
@@ -1171,7 +1171,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_POKEMON_BREEDER_F,
+		.trainerClass = FACILITY_CLASS_POKEMON_BREEDER_F,
 		.name = _("REGINA"),
 		.teamFlags = 0x12,
 		.greeting = {
@@ -1186,7 +1186,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_PARASOL_LADY,
+		.trainerClass = FACILITY_CLASS_PARASOL_LADY,
 		.name = _("MAIKE"),
 		.teamFlags = 0x10,
 		.greeting = {
@@ -1201,7 +1201,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_RUNNING_TRIATHLETE_F,
+		.trainerClass = FACILITY_CLASS_RUNNING_TRIATHLETE_F,
 		.name = _("SANDRA"),
 		.teamFlags = 0x04,
 		.greeting = {
@@ -1216,7 +1216,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_POKEMON_RANGER_M,
+		.trainerClass = FACILITY_CLASS_POKEMON_RANGER_M,
 		.name = _("ARNOLD"),
 		.teamFlags = 0x08,
 		.greeting = {
@@ -1231,7 +1231,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_BLACK_BELT,
+		.trainerClass = FACILITY_CLASS_BLACK_BELT,
 		.name = _("XENO"),
 		.teamFlags = 0x04,
 		.greeting = {
@@ -1246,7 +1246,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_COOL_TRAINER_F,
+		.trainerClass = FACILITY_CLASS_COOL_TRAINER_F,
 		.name = _("KARLA"),
 		.teamFlags = 0x02,
 		.greeting = {
@@ -1261,7 +1261,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_COLLECTOR,
+		.trainerClass = FACILITY_CLASS_COLLECTOR,
 		.name = _("VOLKER"),
 		.teamFlags = 0x80,
 		.greeting = {
@@ -1276,7 +1276,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_SWIMMING_TRIATHLETE_M,
+		.trainerClass = FACILITY_CLASS_SWIMMING_TRIATHLETE_M,
 		.name = _("TOBIAS"),
 		.teamFlags = 0x01,
 		.greeting = {
@@ -1291,7 +1291,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_GENTLEMAN,
+		.trainerClass = FACILITY_CLASS_GENTLEMAN,
 		.name = _("NORBERT"),
 		.teamFlags = 0x20,
 		.greeting = {
@@ -1306,7 +1306,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_BATTLE_GIRL,
+		.trainerClass = FACILITY_CLASS_BATTLE_GIRL,
 		.name = _("ZITA"),
 		.teamFlags = 0x02,
 		.greeting = {
@@ -1321,7 +1321,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_BEAUTY,
+		.trainerClass = FACILITY_CLASS_BEAUTY,
 		.name = _("ELKE"),
 		.teamFlags = 0x20,
 		.greeting = {
@@ -1336,7 +1336,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_HIKER,
+		.trainerClass = FACILITY_CLASS_HIKER,
 		.name = _("VITUS"),
 		.teamFlags = 0x04,
 		.greeting = {
@@ -1351,7 +1351,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_EXPERT_M,
+		.trainerClass = FACILITY_CLASS_EXPERT_M,
 		.name = _("MALTE"),
 		.teamFlags = 0x10,
 		.greeting = {
@@ -1366,7 +1366,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_POKEMON_BREEDER_M,
+		.trainerClass = FACILITY_CLASS_POKEMON_BREEDER_M,
 		.name = _("TIM"),
 		.teamFlags = 0x40,
 		.greeting = {
@@ -1381,7 +1381,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_GUITARIST,
+		.trainerClass = FACILITY_CLASS_GUITARIST,
 		.name = _("GAVIN"),
 		.teamFlags = 0x01,
 		.greeting = {
@@ -1396,7 +1396,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_PSYCHIC_M,
+		.trainerClass = FACILITY_CLASS_PSYCHIC_M,
 		.name = _("RALF"),
 		.teamFlags = 0x08,
 		.greeting = {
@@ -1411,7 +1411,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_COOL_TRAINER_F,
+		.trainerClass = FACILITY_CLASS_COOL_TRAINER_F,
 		.name = _("JENNY"),
 		.teamFlags = 0x02,
 		.greeting = {
@@ -1426,7 +1426,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_EXPERT_M,
+		.trainerClass = FACILITY_CLASS_EXPERT_M,
 		.name = _("JOEL"),
 		.teamFlags = 0x10,
 		.greeting = {
@@ -1441,7 +1441,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_DRAGON_TAMER,
+		.trainerClass = FACILITY_CLASS_DRAGON_TAMER,
 		.name = _("KOLJA"),
 		.teamFlags = 0x0C,
 		.greeting = {
@@ -1456,7 +1456,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_COOL_TRAINER_M,
+		.trainerClass = FACILITY_CLASS_COOL_TRAINER_M,
 		.name = _("BILL"),
 		.teamFlags = 0x01,
 		.greeting = {
@@ -1471,7 +1471,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_EXPERT_F,
+		.trainerClass = FACILITY_CLASS_EXPERT_F,
 		.name = _("CALLA"),
 		.teamFlags = 0x10,
 		.greeting = {
@@ -1486,7 +1486,7 @@ const struct BattleTowerTrainer gBattleTowerTrainers[] =
 		},
 	},
 	{
-		.trainerClass = TRAINER_CLASS_LADY,
+		.trainerClass = FACILITY_CLASS_LADY,
 		.name = _("GESA"),
 		.teamFlags = 0x02,
 		.greeting = {
