@@ -379,60 +379,6 @@ gUnknown_0202FFA4: @ 202FFA4
 	.include "src/engine/trainer_card.o"
 	.include "src/pokemon/pokemon_storage_system.o"
 
-@ still pokemon_storage_system
-
-	.align 2
-gUnknown_02038470: @ 2038470
-	.space 0x3
-
-gUnknown_02038473: @ 2038473
-	.space 0x1
-
-gUnknown_02038474: @ 2038474
-	.space 0x4
-
-gUnknown_02038478: @ 2038478
-	.space 0x4
-
-gUnknown_0203847C: @ 203847C
-	.space 0x1
-
-gUnknown_0203847D: @ 203847D
-	.space 0x1
-
-gUnknown_0203847E: @ 203847E
-	.space 0x1
-
-gUnknown_0203847F: @ 203847F
-	.space 0x1
-
-gUnknown_02038480: @ 2038480
-	.space 0x64
-
-gUnknown_020384E4: @ 20384E4
-	.space 0x1
-
-gUnknown_020384E5: @ 20384E5
-	.space 0x1
-
-gUnknown_020384E6: @ 20384E6
-	.space 0x1
-
-gUnknown_020384E7: @ 20384E7
-	.space 0x1
-
-gUnknown_020384E8: @ 20384E8
-	.space 0x1
-
-gUnknown_020384E9: @ 20384E9
-	.space 0x1
-
-gUnknown_020384EA: @ 20384EA
-	.space 0x2
-
-gUnknown_020384EC: @ 20384EC
-	.space 0x4
-
 @ pokemon_summary_screen
 
 gUnknown_020384F0: @ 20384F0

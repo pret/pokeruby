@@ -67,15 +67,19 @@ void sub_8096AFC(void);
 void sub_8096B38(void);
 void sub_8096BE0(void (*func)(void));
 void sub_8096BF0(void);
+void sub_8096C68(void);
 void sub_8097DE0(void);
 void sub_8097E70(void);
 void sub_8098400(void);
 void sub_8099BF8(u8 a0);
 void sub_8098B48(void);
-void sub_809AA24(void);
 struct Sprite *sub_809A9A0(u16 a0, u16 a1, u8 a2, u8 a3, u8 a4);
+void sub_809AA24(void);
+void sub_809AA98(void);
 void sub_809B0D4(void);
-void sub_809CFDC(struct UnkStruct_2000020 *a0, struct UnkStruct_2000020 * a1, u8 a2);
+void sub_809BBC0(void);
+void sub_809BD14(void);
+void sub_809CFDC(struct UnkStruct_2000020 *a0, struct UnkStruct_2000020 *a1, u8 a2);
 
 const struct PSS_MenuStringPtrs gUnknown_083B600C[] = {
     {PCText_WithdrawPoke, PCText_MovePokeToParty},
@@ -131,11 +135,23 @@ extern const struct PokemonStorageSystemData *gUnknown_083B6DB4;
 extern u8 *const gUnknown_083B6DB8;
 
 EWRAM_DATA struct PokemonStorage gPokemonStorage = {0};
-EWRAM_DATA u8 gUnknown_02038474;
-EWRAM_DATA struct UnkPSSStruct_2002370 *gUnknown_02038478;
-EWRAM_DATA u8 gUnknown_0203847C;
-EWRAM_DATA u8 gUnknown_0203847D;
-EWRAM_DATA u8 gUnknown_0203847E;
+EWRAM_DATA u8 gUnknown_02038470[3] = {};
+EWRAM_DATA u8 gUnknown_02038473 = 0;
+EWRAM_DATA u8 gUnknown_02038474 = 0;
+EWRAM_DATA struct UnkPSSStruct_2002370 *gUnknown_02038478 = NULL;
+EWRAM_DATA u8 gUnknown_0203847C = 0;
+EWRAM_DATA u8 gUnknown_0203847D = 0;
+EWRAM_DATA u8 gUnknown_0203847E = 0;
+EWRAM_DATA u8 gUnknown_0203847F = 0;
+EWRAM_DATA struct Pokemon gUnknown_02038480 = {};
+EWRAM_DATA u8 gUnknown_020384E4 = 0;
+EWRAM_DATA u8 gUnknown_020384E5 = 0;
+EWRAM_DATA u8 gUnknown_020384E6 = 0;
+EWRAM_DATA u8 gUnknown_020384E7 = 0;
+EWRAM_DATA u8 gUnknown_020384E8 = 0;
+EWRAM_DATA u8 gUnknown_020384E9 = 0;
+EWRAM_DATA u16 gUnknown_020384EA = 0;
+EWRAM_DATA u32 gUnknown_020384EC = 0;
 
 static u8 CountPokemonInBoxN(u8 boxId)
 {
@@ -867,6 +883,73 @@ void sub_8096884(void)
             sub_8096BE0(sub_8096BF0);
             SetMainCallback2(sub_8096B38);
             SetVBlankCallback(sub_8096AFC);
+            gMain.state++;
+            break;
+    }
+}
+
+void sub_80969A0(void)
+{
+    switch (gMain.state)
+    {
+        case 0:
+            SetVBlankCallback(NULL);
+            REG_DISPCNT = 0x0000;
+            ePokemonStorageSystem.unk_0005 = gUnknown_0203847D;
+            sub_8096804();
+            if (gUnknown_0203847F == 1)
+                sub_809BBC0();
+            if (gUnknown_0203847F == 0)
+                sub_809BD14();
+            gMain.state++;
+            break;
+        case 1:
+            SetUpWindowConfig(&gWindowConfig_81E6D00);
+            gMain.state++;
+            break;
+        case 2:
+            InitMenuWindow(&gWindowConfig_81E6D00);
+            MenuZeroFillScreen();
+            gMain.state++;
+            break;
+        case 3:
+            sub_80967DC();
+            gMain.state++;
+            break;
+        case 4:
+            sub_8098B48();
+            sub_809AA98();
+            gMain.state++;
+            break;
+        case 5:
+            sub_8097DE0();
+            gMain.state++;
+            break;
+        case 6:
+            sub_8097E70();
+            gMain.state++;
+            break;
+        case 7:
+            sub_8098400();
+            gMain.state++;
+            break;
+        case 8:
+            sub_8099BF8(gPokemonStorage.currentBox);
+            ePokemonStorageSystem.unk_12bc.baseTileTag = 0x000a;
+            ePokemonStorageSystem.unk_12bc.basePaletteTag = 0xdacb;
+            sub_80F727C(&ePokemonStorageSystem.unk_12bc);
+            sub_80F7404();
+            gMain.state++;
+            break;
+        case 9:
+            BeginNormalPaletteFade(0xffffffff, 0, 16, 0, 0);
+            SetVBlankCallback(sub_8096AFC);
+            gMain.state++;
+            break;
+        case 10:
+            sub_8096874();
+            sub_8096BE0(sub_8096C68);
+            SetMainCallback2(sub_8096B38);
             gMain.state++;
             break;
     }
