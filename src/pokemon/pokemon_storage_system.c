@@ -3,6 +3,7 @@
 #include "constants/songs.h"
 #include "sound.h"
 #include "field_weather.h"
+#include "mon_markings.h"
 #include "overworld.h"
 #include "field_fadetransition.h"
 #include "menu.h"
@@ -34,7 +35,9 @@ struct PokemonStorageSystemData {
     u8 filler_0000[5];
     u8 unk_0005;
     u8 filler_0006[26];
-    struct UnkStruct_2000020 unk_0020[100]; // refine size later
+    struct UnkStruct_2000020 unk_0020[595]; // refine size later
+    u8 filler_12b8[4];
+    struct PokemonMarkMenu unk_12bc;
 };
 
 struct UnkPSSStruct_2002370 {
@@ -60,6 +63,16 @@ void sub_80966F4(const u8 *sourceString, u16 x, u16 y);
 void sub_8096784(struct Sprite *sprite);
 void task_intro_29(u8 whichMenu);
 void sub_8096884(void);
+void sub_8096AFC(void);
+void sub_8096B38(void);
+void sub_8096BE0(void (*func)(void));
+void sub_8096BF0(void);
+void sub_8097DE0(void);
+void sub_8097E70(void);
+void sub_8098400(void);
+void sub_8099BF8(u8 a0);
+void sub_8098B48(void);
+void sub_809AA24(void);
 struct Sprite *sub_809A9A0(u16 a0, u16 a1, u8 a2, u8 a3, u8 a4);
 void sub_809B0D4(void);
 void sub_809CFDC(struct UnkStruct_2000020 *a0, struct UnkStruct_2000020 * a1, u8 a2);
@@ -798,6 +811,65 @@ void sub_8096848(void)
 void sub_8096874(void)
 {
     REG_DISPCNT = DISPCNT_OBJ_1D_MAP | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON;
+}
+
+void sub_8096884(void)
+{
+    switch (gMain.state)
+    {
+        case 0:
+            SetVBlankCallback(NULL);
+            REG_DISPCNT = 0;
+            sub_8096804();
+            gMain.state++;
+            break;
+        case 1:
+            SetUpWindowConfig(&gWindowConfig_81E6D00);
+            gMain.state++;
+            break;
+        case 2:
+            InitMenuWindow(&gWindowConfig_81E6D00);
+            MenuZeroFillScreen();
+            gMain.state++;
+            break;
+        case 3:
+            sub_80967DC();
+            sub_8096848();
+            gMain.state++;
+            break;
+        case 4:
+            sub_8098B48();
+            sub_809AA24();
+            gMain.state++;
+            break;
+        case 5:
+            sub_8097DE0();
+            gMain.state++;
+            break;
+        case 6:
+            sub_8097E70();
+            gMain.state++;
+            break;
+        case 7:
+            sub_8098400();
+            gMain.state++;
+            break;
+        case 8:
+            sub_8099BF8(gPokemonStorage.currentBox);
+            ePokemonStorageSystem.unk_12bc.baseTileTag = 0x000a;
+            ePokemonStorageSystem.unk_12bc.basePaletteTag = 0xdacb;
+            sub_80F727C(&ePokemonStorageSystem.unk_12bc);
+            sub_80F7404();
+            gMain.state++;
+            break;
+        case 9:
+            sub_8096874();
+            sub_8096BE0(sub_8096BF0);
+            SetMainCallback2(sub_8096B38);
+            SetVBlankCallback(sub_8096AFC);
+            gMain.state++;
+            break;
+    }
 }
 
 asm(".section .text.8098898");
