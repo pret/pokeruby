@@ -235,6 +235,7 @@ extern const union AffineAnimCmd *const gDummySpriteAffineAnimTable[];
 extern s16 gSpriteCoordOffsetX;
 extern s16 gSpriteCoordOffsetY;
 extern u8 gReservedSpritePaletteCount;
+extern u16 gReservedSpriteTileCount;
 
 extern u8 gOamLimit;
 

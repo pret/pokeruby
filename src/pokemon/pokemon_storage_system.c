@@ -24,9 +24,17 @@ struct PSS_MenuStringPtrs {
     const u8 *desc;
 };
 
+struct UnkStruct_2000020 {
+    struct UnkStruct_2000020 *unk_00;
+    u8 unk_04;
+    u8 unk_05;
+};
+
 struct PokemonStorageSystemData {
     u8 filler_0000[5];
     u8 unk_0005;
+    u8 filler_0006[26];
+    struct UnkStruct_2000020 unk_0020[100]; // refine size later
 };
 
 struct UnkPSSStruct_2002370 {
@@ -53,6 +61,8 @@ void sub_8096784(struct Sprite *sprite);
 void task_intro_29(u8 whichMenu);
 void sub_8096884(void);
 struct Sprite *sub_809A9A0(u16 a0, u16 a1, u8 a2, u8 a3, u8 a4);
+void sub_809B0D4(void);
+void sub_809CFDC(struct UnkStruct_2000020 *a0, struct UnkStruct_2000020 * a1, u8 a2);
 
 const struct PSS_MenuStringPtrs gUnknown_083B600C[] = {
     {PCText_WithdrawPoke, PCText_MovePokeToParty},
@@ -112,6 +122,7 @@ EWRAM_DATA u8 gUnknown_02038474;
 EWRAM_DATA struct UnkPSSStruct_2002370 *gUnknown_02038478;
 EWRAM_DATA u8 gUnknown_0203847C;
 EWRAM_DATA u8 gUnknown_0203847D;
+EWRAM_DATA u8 gUnknown_0203847E;
 
 static u8 CountPokemonInBoxN(u8 boxId)
 {
@@ -751,6 +762,42 @@ void task_intro_29(u8 whichMenu)
     gUnknown_0203847D = whichMenu;
     ePokemonStorageSystem.unk_0005 = whichMenu;
     SetMainCallback2(sub_8096884);
+}
+
+void sub_80967DC(void)
+{
+    REG_BG0HOFS = 0;
+    REG_BG0VOFS = 0;
+    REG_BG1HOFS = 0;
+    REG_BG1VOFS = 0;
+    REG_BG2VOFS = 0;
+    REG_BG2HOFS = 0;
+    REG_BG3HOFS = 0;
+    REG_BG3VOFS = 0;
+}
+
+void sub_8096804(void)
+{
+    ResetPaletteFade();
+    ResetSpriteData();
+    FreeSpriteTileRanges();
+    FreeAllSpritePalettes();
+    ResetTasks();
+    gReservedSpriteTileCount = 0x280;
+    sub_809CFDC(ePokemonStorageSystem.unk_0020, ePokemonStorageSystem.unk_0020 + 1, 8);
+    gKeyRepeatStartDelay = 20;
+}
+
+void sub_8096848(void)
+{
+    sub_809B0D4();
+    gUnknown_0203847C = (ePokemonStorageSystem.unk_0005 == 1 ? 1 : 0);
+    gUnknown_0203847E = 0;
+}
+
+void sub_8096874(void)
+{
+    REG_DISPCNT = DISPCNT_OBJ_1D_MAP | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON;
 }
 
 asm(".section .text.8098898");

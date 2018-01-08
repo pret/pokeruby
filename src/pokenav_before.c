@@ -294,9 +294,6 @@ extern void sub_80F5BF0();
 extern void sub_80F6F64();
 extern void sub_80F19FC();
 
-extern u16 gKeyRepeatStartDelay;
-
-
 void sub_80EBA5C() {
 	switch (gMain.state) {
 		default:
@@ -378,7 +375,7 @@ void sub_80EBC10() {
 	u16 i;
 	u16 *var1;
 
-	gKeyRepeatStartDelay = 0x14;
+	gKeyRepeatStartDelay = 20;
 	ewram0_10.playerPartyCount = CalculatePlayerPartyCount();
 	ewram0_10.var6ddc = 0;
 	ewram0_10.var9344 = 0;
