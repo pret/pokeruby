@@ -126,8 +126,7 @@ static const s16 sHallOfFame_MonsHalfTeamPositions[3][4] =
     {-41,   214,    184,    64}
 };
 
-static const struct PCScreenEffectStruct sDummyFameMon =
-{
+static const struct PCScreenEffectStruct sPCScreenEffectTemplate = {
     .tileTag = 0x3ea,
     .paletteTag = 0x3ea
 };
@@ -802,7 +801,7 @@ void sub_81428CC(void)
         REG_BLDY = 0;
         sub_81435B8();
 
-        eHOFPCScreenEffect = sDummyFameMon;
+        eHOFPCScreenEffect = sPCScreenEffectTemplate;
 
         sub_80C5CD4(&eHOFPCScreenEffect);
         gMain.state++;
@@ -1015,7 +1014,7 @@ static void sub_8142DF4(u8 taskID)
 static void sub_8142F78(u8 taskID)
 {
     CpuSet(gPlttBufferFaded, gPlttBufferUnfaded, 0x200);
-    eHOFPCScreenEffect = sDummyFameMon;
+    eHOFPCScreenEffect = sPCScreenEffectTemplate;
     sub_80C5E38(&eHOFPCScreenEffect);
     gTasks[taskID].func = sub_8142FCC;
 }
