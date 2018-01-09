@@ -1425,8 +1425,8 @@ void CB2_InitPokedex(void)
         ResetPaletteFade();
         FreeAllSpritePalettes();
         gReservedSpritePaletteCount = 8;
-        SetUpWindowConfig(&gWindowConfig_81E7048);
-        InitMenuWindow(&gWindowConfig_81E7048);
+        SetUpWindowConfig(&gWindowTemplate_81E7048);
+        InitMenuWindow(&gWindowTemplate_81E7048);
         gMain.state++;
         break;
     case 2:
@@ -1937,8 +1937,8 @@ static bool8 sub_808D344(u8 a)
         gMain.state++;
         break;
     case 2:
-        SetUpWindowConfig(&gWindowConfig_81E7048);
-        InitMenuWindow(&gWindowConfig_81E7048);
+        SetUpWindowConfig(&gWindowTemplate_81E7048);
+        InitMenuWindow(&gWindowTemplate_81E7048);
         LZ77UnCompVram(gUnknown_0839FA7C, (void *)(VRAM + 0xFF80));
         gMain.state++;
         break;
@@ -2951,8 +2951,8 @@ static void Task_InitPageScreenMultistep(u8 taskId)
         gMain.state++;
         break;
     case 3:
-        SetUpWindowConfig(&gWindowConfig_81E7064);
-        InitMenuWindow(&gWindowConfig_81E7064);
+        SetUpWindowConfig(&gWindowTemplate_81E7064);
+        InitMenuWindow(&gWindowTemplate_81E7064);
         gMain.state++;
         break;
     case 4:
@@ -3205,8 +3205,8 @@ static void Task_InitCryScreenMultistep(u8 taskId)
         gMain.state++;
         break;
     case 3:
-        SetUpWindowConfig(&gWindowConfig_81E702C);
-        InitMenuWindow(&gWindowConfig_81E702C);
+        SetUpWindowConfig(&gWindowTemplate_81E702C);
+        InitMenuWindow(&gWindowTemplate_81E702C);
         ResetPaletteFade();
         gMain.state++;
         break;
@@ -3394,8 +3394,8 @@ static void Task_InitSizeScreenMultistep(u8 taskId)
         {
             u8 string[40];  //I hope this is the correct size
 
-            SetUpWindowConfig(&gWindowConfig_81E702C);
-            InitMenuWindow(&gWindowConfig_81E702C);
+            SetUpWindowConfig(&gWindowTemplate_81E702C);
+            InitMenuWindow(&gWindowTemplate_81E702C);
             string[0] = EOS;
             StringAppend(string, gDexText_SizeComparedTo);
             StringAppend(string, gSaveBlock2.playerName);
@@ -3841,8 +3841,8 @@ static void sub_8090750(u8 taskId)
         gTasks[taskId].data[0]++;
         break;
     case 2:
-        SetUpWindowConfig(&gWindowConfig_81E7064);
-        InitMenuWindow(&gWindowConfig_81E7064);
+        SetUpWindowConfig(&gWindowTemplate_81E7064);
+        InitMenuWindow(&gWindowTemplate_81E7064);
         DmaClear16(3, (void *)(VRAM + 0xC000), 0x200);
         gTasks[taskId].data[0]++;
         break;
@@ -4770,8 +4770,8 @@ static void sub_8091E54(u8 taskId)
         }
         break;
     case 1:
-        SetUpWindowConfig(&gWindowConfig_81E7064);
-        InitMenuWindow(&gWindowConfig_81E7064);
+        SetUpWindowConfig(&gWindowTemplate_81E7064);
+        InitMenuWindow(&gWindowTemplate_81E7064);
         LoadCompressedObjectPic(&gUnknown_083A05CC[0]);
         LoadSpritePalettes(gUnknown_083A05DC);
         sub_809308C(taskId);

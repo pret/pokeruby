@@ -357,16 +357,16 @@ void LoadContestBgAfterMoveAnim(void)
 
 void SetUpContestWindow(void)
 {
-    SetUpWindowConfig(&gWindowConfig_81E6FD8);
-    Text_InitWindowWithTemplate(&gUnknown_03004210, &gWindowConfig_81E6FD8);
-    Text_InitWindowWithTemplate(&gMenuWindow, &gWindowConfig_81E6FF4);
+    SetUpWindowConfig(&gWindowTemplate_81E6FD8);
+    Text_InitWindowWithTemplate(&gUnknown_03004210, &gWindowTemplate_81E6FD8);
+    Text_InitWindowWithTemplate(&gMenuWindow, &gWindowTemplate_81E6FF4);
 }
 
 void sub_80AB350(void)
 {
     u8 i;
 
-    LoadFontDefaultPalette(&gWindowConfig_81E6FD8);
+    LoadFontDefaultPalette(&gWindowTemplate_81E6FD8);
     FillPalette(0, 0, 2);
     for (i = 10; i < 14; i++)
         LoadPalette(gPlttBufferUnfaded + 241, 240 + i, 2);

@@ -325,8 +325,8 @@ static void NamingScreen_Init(void)
 
 static void NamingScreen_SetUpWindow(void)
 {
-    SetUpWindowConfig(&gWindowConfig_81E6E88);
-    InitMenuWindow(&gWindowConfig_81E6E88);
+    SetUpWindowConfig(&gWindowTemplate_81E6E88);
+    InitMenuWindow(&gWindowTemplate_81E6E88);
 }
 
 static void NamingScreen_ResetObjects(void)
@@ -1610,7 +1610,7 @@ static void DisplaySentToPCMessage(void)
 {
     StringCopy(gStringVar1, namingScreenDataPtr->destBuffer);
     StringExpandPlaceholders(gStringVar4, gOtherText_SentToPC);
-    BasicInitMenuWindow(&gWindowConfig_81E6E88);
+    BasicInitMenuWindow(&gWindowTemplate_81E6E88);
     Menu_DisplayDialogueFrame();
     MenuPrintMessageDefaultCoords(gStringVar4);
 }
@@ -1760,16 +1760,16 @@ static void (*const gUnknown_083CE310[][2])(void) =
 static const struct WindowTemplate *const gUnknown_083CE328[][2][2] =
 {
     {
-        {&gWindowConfig_81E6EDC, &gWindowConfig_81E6EF8},
-        {&gWindowConfig_81E6EA4, &gWindowConfig_81E6EC0},
+        {&gWindowTemplate_81E6EDC, &gWindowTemplate_81E6EF8},
+        {&gWindowTemplate_81E6EA4, &gWindowTemplate_81E6EC0},
     },
     {
-        {&gWindowConfig_81E6EA4, &gWindowConfig_81E6EC0},
-        {&gWindowConfig_81E6F14, &gWindowConfig_81E6F30},
+        {&gWindowTemplate_81E6EA4, &gWindowTemplate_81E6EC0},
+        {&gWindowTemplate_81E6F14, &gWindowTemplate_81E6F30},
     },
     {
-        {&gWindowConfig_81E6F14, &gWindowConfig_81E6F30},
-        {&gWindowConfig_81E6EDC, &gWindowConfig_81E6EF8},
+        {&gWindowTemplate_81E6F14, &gWindowTemplate_81E6F30},
+        {&gWindowTemplate_81E6EDC, &gWindowTemplate_81E6EF8},
     },
 };
 
@@ -1843,7 +1843,7 @@ static void PrintKeyboardCharacters(u8 page)  //print letters on page
 
 static void sub_80B78A8(void)
 {
-    BasicInitMenuWindow(&gWindowConfig_81E6F4C);
+    BasicInitMenuWindow(&gWindowTemplate_81E6F4C);
     gUnknown_083CE358[namingScreenDataPtr->templateNum]();
     gUnknown_083CE368[namingScreenDataPtr->template->unk3]();
     Menu_PrintText(namingScreenDataPtr->template->title, 9, 2);
@@ -1886,7 +1886,7 @@ static void sub_80B7960(void)
     string[5] = 1;
     string += 6;
     StringCopy(string, namingScreenDataPtr->textBuffer);
-    BasicInitMenuWindow(&gWindowConfig_81E6F4C);
+    BasicInitMenuWindow(&gWindowTemplate_81E6F4C);
     Menu_PrintText(gStringVar1, namingScreenDataPtr->unk2, 4);
 }
 

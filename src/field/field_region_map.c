@@ -50,8 +50,8 @@ void CB2_FieldInitRegionMap(void)
     InitRegionMap((void *)&ewram0_5.unk8, 0);
     CreateRegionMapPlayerIcon(0, 0);
     CreateRegionMapCursor(1, 1);
-    SetUpWindowConfig(&gWindowConfig_81E709C);
-    InitMenuWindow(&gWindowConfig_81E709C);
+    SetUpWindowConfig(&gWindowTemplate_81E709C);
+    InitMenuWindow(&gWindowTemplate_81E709C);
     Menu_EraseScreen();
     REG_BG0CNT = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(31) | BGCNT_16COLOR | BGCNT_TXT256x256;
     Menu_DrawStdWindowFrame(21, 0, 29, 3);

@@ -858,7 +858,7 @@ static void Task_BardSong(u8 taskId)
     {
     case 0:  // Initialize song
         PrepareSongText();
-        Text_InitWindowWithTemplate(gMenuWindowPtr, &gWindowConfig_81E6CE4);
+        Text_InitWindowWithTemplate(gMenuWindowPtr, &gWindowTemplate_81E6CE4);
         Text_InitWindow8002EB0(gMenuWindowPtr, gStringVar4, 2, 4, 15);
         task->data[1] = 0;
         task->data[2] = 0;

@@ -492,7 +492,7 @@ static const ShiftGlyphTileShadowedFunc sShiftGlyphTileShadowedFuncs[] =
     ShiftGlyphTile_ShadowedFont_Width8,
 };
 
-const struct WindowTemplate gWindowConfig_81E6C3C =
+const struct WindowTemplate gWindowTemplate_81E6C3C =
 {
     0, // BG number
     2, // BG character base block
@@ -513,7 +513,7 @@ const struct WindowTemplate gWindowConfig_81E6C3C =
     BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E6C58 =
+const struct WindowTemplate gWindowTemplate_81E6C58 =
 {
     0, // BG number
     0, // BG character base block
@@ -534,7 +534,7 @@ const struct WindowTemplate gWindowConfig_81E6C58 =
     BG_SCREEN_ADDR(24), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E6C74 =
+const struct WindowTemplate gWindowTemplate_81E6C74 =
 {
     0, // BG number
     0, // BG character base block
@@ -555,7 +555,7 @@ const struct WindowTemplate gWindowConfig_81E6C74 =
     NULL, // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E6C90 =
+const struct WindowTemplate gWindowTemplate_81E6C90 =
 {
     0, // BG number
     1, // BG character base block
@@ -576,7 +576,7 @@ const struct WindowTemplate gWindowConfig_81E6C90 =
     BG_SCREEN_ADDR(30), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E6CAC =
+const struct WindowTemplate gWindowTemplate_81E6CAC =
 {
     0, // BG number
     0, // BG character base block
@@ -597,7 +597,7 @@ const struct WindowTemplate gWindowConfig_81E6CAC =
     NULL, // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E6CC8 =
+const struct WindowTemplate gWindowTemplate_81E6CC8 =
 {
     2, // BG number
     2, // BG character base block
@@ -618,7 +618,7 @@ const struct WindowTemplate gWindowConfig_81E6CC8 =
     BG_SCREEN_ADDR(15), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E6CE4 =
+const struct WindowTemplate gWindowTemplate_81E6CE4 =
 {
     0, // BG number
     2, // BG character base block
@@ -639,7 +639,7 @@ const struct WindowTemplate gWindowConfig_81E6CE4 =
     BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E6D00 =
+const struct WindowTemplate gWindowTemplate_81E6D00 =
 {
     0, // BG number
     0, // BG character base block
@@ -660,7 +660,7 @@ const struct WindowTemplate gWindowConfig_81E6D00 =
     BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E6D1C =
+const struct WindowTemplate gWindowTemplate_81E6D1C =
 {
     1, // BG number
     0, // BG character base block
@@ -681,7 +681,7 @@ const struct WindowTemplate gWindowConfig_81E6D1C =
     BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E6D38 =
+const struct WindowTemplate gWindowTemplate_81E6D38 =
 {
     0, // BG number
     0, // BG character base block
@@ -702,7 +702,7 @@ const struct WindowTemplate gWindowConfig_81E6D38 =
     NULL, // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E6D54 =
+const struct WindowTemplate gWindowTemplate_81E6D54 =
 {
     3, // BG number
     3, // BG character base block
@@ -723,7 +723,7 @@ const struct WindowTemplate gWindowConfig_81E6D54 =
     BG_SCREEN_ADDR(15), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E6D70 =
+const struct WindowTemplate gWindowTemplate_81E6D70 =
 {
     3, // BG number
     3, // BG character base block
@@ -744,7 +744,7 @@ const struct WindowTemplate gWindowConfig_81E6D70 =
     BG_SCREEN_ADDR(15), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E6D8C =
+const struct WindowTemplate gWindowTemplate_81E6D8C =
 {
     1, // BG number
     0, // BG character base block
@@ -765,7 +765,7 @@ const struct WindowTemplate gWindowConfig_81E6D8C =
     BG_SCREEN_ADDR(14), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E6DA8 =
+const struct WindowTemplate gWindowTemplate_81E6DA8 =
 {
     0, // BG number
     0, // BG character base block
@@ -828,7 +828,7 @@ const struct WindowTemplate WindowConfig_TrainerCard_Back_Labels =
     BG_SCREEN_ADDR(30), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E6DFC =
+const struct WindowTemplate gWindowTemplate_81E6DFC =
 {
     0, // BG number
     2, // BG character base block
@@ -849,7 +849,7 @@ const struct WindowTemplate gWindowConfig_81E6DFC =
     BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E6E18 =
+const struct WindowTemplate gWindowTemplate_81E6E18 =
 {
     0, // BG number
     2, // BG character base block
@@ -870,7 +870,7 @@ const struct WindowTemplate gWindowConfig_81E6E18 =
     BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E6E34 =
+const struct WindowTemplate gWindowTemplate_81E6E34 =
 {
     1, // BG number
     0, // BG character base block
@@ -891,7 +891,7 @@ const struct WindowTemplate gWindowConfig_81E6E34 =
     BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E6E50 =
+const struct WindowTemplate gWindowTemplate_81E6E50 =
 {
     0, // BG number
     2, // BG character base block
@@ -912,7 +912,7 @@ const struct WindowTemplate gWindowConfig_81E6E50 =
     BG_SCREEN_ADDR(28), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E6E6C =
+const struct WindowTemplate gWindowTemplate_81E6E6C =
 {
     0, // BG number
     2, // BG character base block
@@ -933,7 +933,7 @@ const struct WindowTemplate gWindowConfig_81E6E6C =
     BG_SCREEN_ADDR(30), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E6E88 =
+const struct WindowTemplate gWindowTemplate_81E6E88 =
 {
     0, // BG number
     0, // BG character base block
@@ -954,7 +954,7 @@ const struct WindowTemplate gWindowConfig_81E6E88 =
     BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E6EA4 =
+const struct WindowTemplate gWindowTemplate_81E6EA4 =
 {
     1, // BG number
     0, // BG character base block
@@ -975,7 +975,7 @@ const struct WindowTemplate gWindowConfig_81E6EA4 =
     BG_SCREEN_ADDR(28), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E6EC0 =
+const struct WindowTemplate gWindowTemplate_81E6EC0 =
 {
     2, // BG number
     2, // BG character base block
@@ -996,7 +996,7 @@ const struct WindowTemplate gWindowConfig_81E6EC0 =
     BG_SCREEN_ADDR(29), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E6EDC =
+const struct WindowTemplate gWindowTemplate_81E6EDC =
 {
     1, // BG number
     0, // BG character base block
@@ -1017,7 +1017,7 @@ const struct WindowTemplate gWindowConfig_81E6EDC =
     BG_SCREEN_ADDR(28), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E6EF8 =
+const struct WindowTemplate gWindowTemplate_81E6EF8 =
 {
     2, // BG number
     2, // BG character base block
@@ -1038,7 +1038,7 @@ const struct WindowTemplate gWindowConfig_81E6EF8 =
     BG_SCREEN_ADDR(29), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E6F14 =
+const struct WindowTemplate gWindowTemplate_81E6F14 =
 {
     1, // BG number
     0, // BG character base block
@@ -1059,7 +1059,7 @@ const struct WindowTemplate gWindowConfig_81E6F14 =
     BG_SCREEN_ADDR(28), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E6F30 =
+const struct WindowTemplate gWindowTemplate_81E6F30 =
 {
     2, // BG number
     2, // BG character base block
@@ -1080,7 +1080,7 @@ const struct WindowTemplate gWindowConfig_81E6F30 =
     BG_SCREEN_ADDR(29), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E6F4C =
+const struct WindowTemplate gWindowTemplate_81E6F4C =
 {
     3, // BG number
     0, // BG character base block
@@ -1101,7 +1101,7 @@ const struct WindowTemplate gWindowConfig_81E6F4C =
     BG_SCREEN_ADDR(30), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E6F68 =
+const struct WindowTemplate gWindowTemplate_81E6F68 =
 {
     0, // BG number
     2, // BG character base block
@@ -1122,7 +1122,7 @@ const struct WindowTemplate gWindowConfig_81E6F68 =
     BG_SCREEN_ADDR(13), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E6F84 =
+const struct WindowTemplate gWindowTemplate_81E6F84 =
 {
     0, // BG number
     2, // BG character base block
@@ -1143,7 +1143,7 @@ const struct WindowTemplate gWindowConfig_81E6F84 =
     BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E6FA0 =
+const struct WindowTemplate gWindowTemplate_81E6FA0 =
 {
     1, // BG number
     0, // BG character base block
@@ -1164,7 +1164,7 @@ const struct WindowTemplate gWindowConfig_81E6FA0 =
     BG_SCREEN_ADDR(24), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E6FBC =
+const struct WindowTemplate gWindowTemplate_81E6FBC =
 {
     0, // BG number
     0, // BG character base block
@@ -1185,7 +1185,7 @@ const struct WindowTemplate gWindowConfig_81E6FBC =
     BG_SCREEN_ADDR(30), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E6FD8 =
+const struct WindowTemplate gWindowTemplate_81E6FD8 =
 {
     0, // BG number
     0, // BG character base block
@@ -1206,7 +1206,7 @@ const struct WindowTemplate gWindowConfig_81E6FD8 =
     BG_SCREEN_ADDR(24), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E6FF4 =
+const struct WindowTemplate gWindowTemplate_81E6FF4 =
 {
     0, // BG number
     0, // BG character base block
@@ -1227,7 +1227,7 @@ const struct WindowTemplate gWindowConfig_81E6FF4 =
     BG_SCREEN_ADDR(24), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E7010 =
+const struct WindowTemplate gWindowTemplate_81E7010 =
 {
     0, // BG number
     0, // BG character base block
@@ -1248,7 +1248,7 @@ const struct WindowTemplate gWindowConfig_81E7010 =
     BG_SCREEN_ADDR(30), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E702C =
+const struct WindowTemplate gWindowTemplate_81E702C =
 {
     3, // BG number
     2, // BG character base block
@@ -1269,7 +1269,7 @@ const struct WindowTemplate gWindowConfig_81E702C =
     BG_SCREEN_ADDR(15), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E7048 =
+const struct WindowTemplate gWindowTemplate_81E7048 =
 {
     2, // BG number
     2, // BG character base block
@@ -1290,7 +1290,7 @@ const struct WindowTemplate gWindowConfig_81E7048 =
     BG_SCREEN_ADDR(14), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E7064 =
+const struct WindowTemplate gWindowTemplate_81E7064 =
 {
     2, // BG number
     2, // BG character base block
@@ -1311,7 +1311,7 @@ const struct WindowTemplate gWindowConfig_81E7064 =
     BG_SCREEN_ADDR(14), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E7080 =
+const struct WindowTemplate gWindowTemplate_81E7080 =
 {
     3, // BG number
     0, // BG character base block
@@ -1332,7 +1332,7 @@ const struct WindowTemplate gWindowConfig_81E7080 =
     BG_SCREEN_ADDR(30), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E709C =
+const struct WindowTemplate gWindowTemplate_81E709C =
 {
     0, // BG number
     0, // BG character base block
@@ -1353,7 +1353,7 @@ const struct WindowTemplate gWindowConfig_81E709C =
     BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E70B8 =
+const struct WindowTemplate gWindowTemplate_81E70B8 =
 {
     2, // BG number
     0, // BG character base block
@@ -1374,7 +1374,7 @@ const struct WindowTemplate gWindowConfig_81E70B8 =
     BG_SCREEN_ADDR(30), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E70D4 =
+const struct WindowTemplate gWindowTemplate_81E70D4 =
 {
     3, // BG number
     0, // BG character base block
@@ -1395,7 +1395,7 @@ const struct WindowTemplate gWindowConfig_81E70D4 =
     BG_SCREEN_ADDR(30), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E70F0 =
+const struct WindowTemplate gWindowTemplate_81E70F0 =
 {
     0, // BG number
     0, // BG character base block
@@ -1416,7 +1416,7 @@ const struct WindowTemplate gWindowConfig_81E70F0 =
     NULL, // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E710C =
+const struct WindowTemplate gWindowTemplate_81E710C =
 {
     0, // BG number
     0, // BG character base block
@@ -1437,7 +1437,7 @@ const struct WindowTemplate gWindowConfig_81E710C =
     BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E7128 =
+const struct WindowTemplate gWindowTemplate_81E7128 =
 {
     0, // BG number
     2, // BG character base block
@@ -1458,7 +1458,7 @@ const struct WindowTemplate gWindowConfig_81E7128 =
     BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E7144 =
+const struct WindowTemplate gWindowTemplate_81E7144 =
 {
     0, // BG number
     2, // BG character base block
@@ -1479,7 +1479,7 @@ const struct WindowTemplate gWindowConfig_81E7144 =
     BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E7160 =
+const struct WindowTemplate gWindowTemplate_81E7160 =
 {
     1, // BG number
     1, // BG character base block
@@ -1500,7 +1500,7 @@ const struct WindowTemplate gWindowConfig_81E7160 =
     BG_SCREEN_ADDR(10), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E717C =
+const struct WindowTemplate gWindowTemplate_81E717C =
 {
     0, // BG number
     3, // BG character base block
@@ -1521,7 +1521,7 @@ const struct WindowTemplate gWindowConfig_81E717C =
     BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E7198 =
+const struct WindowTemplate gWindowTemplate_81E7198 =
 {
     0, // BG number
     2, // BG character base block
@@ -1542,7 +1542,7 @@ const struct WindowTemplate gWindowConfig_81E7198 =
     BG_SCREEN_ADDR(15), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E71B4 =
+const struct WindowTemplate gWindowTemplate_81E71B4 =
 {
     0, // BG number
     2, // BG character base block
@@ -1563,7 +1563,7 @@ const struct WindowTemplate gWindowConfig_81E71B4 =
     BG_SCREEN_ADDR(15), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E71D0 =
+const struct WindowTemplate gWindowTemplate_81E71D0 =
 {
     1, // BG number
     1, // BG character base block
@@ -1584,7 +1584,7 @@ const struct WindowTemplate gWindowConfig_81E71D0 =
     BG_SCREEN_ADDR(28), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E71EC =
+const struct WindowTemplate gWindowTemplate_81E71EC =
 {
     2, // BG number
     1, // BG character base block
@@ -1605,7 +1605,7 @@ const struct WindowTemplate gWindowConfig_81E71EC =
     BG_SCREEN_ADDR(30), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E7208 =
+const struct WindowTemplate gWindowTemplate_81E7208 =
 {
     0, // BG number
     2, // BG character base block
@@ -1626,7 +1626,7 @@ const struct WindowTemplate gWindowConfig_81E7208 =
     BG_SCREEN_ADDR(28), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E7224 =
+const struct WindowTemplate gWindowTemplate_81E7224 =
 {
     0, // BG number
     0, // BG character base block
@@ -1647,7 +1647,7 @@ const struct WindowTemplate gWindowConfig_81E7224 =
     BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E7240 =
+const struct WindowTemplate gWindowTemplate_81E7240 =
 {
     1, // BG number
     2, // BG character base block
@@ -1668,7 +1668,7 @@ const struct WindowTemplate gWindowConfig_81E7240 =
     BG_SCREEN_ADDR(30), // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E725C =
+const struct WindowTemplate gWindowTemplate_81E725C =
 {
     0, // BG number
     0, // BG character base block
@@ -1689,7 +1689,7 @@ const struct WindowTemplate gWindowConfig_81E725C =
     NULL, // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E7278 =
+const struct WindowTemplate gWindowTemplate_81E7278 =
 {
     0, // BG number
     0, // BG character base block
@@ -1710,7 +1710,7 @@ const struct WindowTemplate gWindowConfig_81E7278 =
     NULL, // tilemap
 };
 
-const struct WindowTemplate gWindowConfig_81E7294 =
+const struct WindowTemplate gWindowTemplate_81E7294 =
 {
     0, // BG number
     0, // BG character base block
@@ -2364,24 +2364,24 @@ u8 sub_8003490(struct Window *win, u8 c, u16 tileDataStartOffset, u8 left, u8 to
 
 void sub_80034D4(u8 *tileData, const u8 *text)
 {
-    sub_8004E3C(&gWindowConfig_81E6C74, tileData, text);
+    sub_8004E3C(&gWindowTemplate_81E6C74, tileData, text);
 }
 
 u8 sub_80034EC(u8 *str)
 {
-    return Text_GetStringWidthFromWindowTemplate((struct WindowTemplate *)&gWindowConfig_81E6C74, str);
+    return Text_GetStringWidthFromWindowTemplate((struct WindowTemplate *)&gWindowTemplate_81E6C74, str);
 }
 
 u8 *sub_8003504(u8 *dest, s32 value, u8 alignAmount, u8 alignType)
 {
-    sTempWindow.template = (struct WindowTemplate *)&gWindowConfig_81E6C74;
+    sTempWindow.template = (struct WindowTemplate *)&gWindowTemplate_81E6C74;
     Text_InitWindow(&sTempWindow, 0, 0, 0, 0);
     return AlignInt2(&sTempWindow, dest, value, alignAmount, alignType);
 }
 
 u8 *sub_8003558(u8 *dest, const u8 *src, u8 alignAmount, u8 alignType)
 {
-    sTempWindow.template = (struct WindowTemplate *)&gWindowConfig_81E6C74;
+    sTempWindow.template = (struct WindowTemplate *)&gWindowTemplate_81E6C74;
     Text_InitWindow(&sTempWindow, src, 0, 0, 0);
     return AlignString(&sTempWindow, dest, src, alignAmount, alignType);
 }

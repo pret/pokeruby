@@ -718,11 +718,11 @@ bool8 sub_809DA84(void)
         gMain.state++;
         break;
     case 5:
-        SetUpWindowConfig(&gWindowConfig_81E6E6C);
+        SetUpWindowConfig(&gWindowTemplate_81E6E6C);
         gMain.state++;
         break;
     case 6:
-        MultistepInitMenuWindowBegin(&gWindowConfig_81E6E6C);
+        MultistepInitMenuWindowBegin(&gWindowTemplate_81E6E6C);
         gMain.state++;
         break;
     case 7:

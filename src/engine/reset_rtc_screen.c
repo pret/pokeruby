@@ -443,8 +443,8 @@ void CB2_InitResetRtcScreen(void)
     ResetSpriteData();
     ResetTasks();
     ResetPaletteFade();
-    SetUpWindowConfig(&gWindowConfig_81E6CE4);
-    InitMenuWindow(&gWindowConfig_81E6CE4);
+    SetUpWindowConfig(&gWindowTemplate_81E6CE4);
+    InitMenuWindow(&gWindowTemplate_81E6CE4);
     REG_DISPCNT = 4352;
     SetVBlankCallback(VBlankCB_ResetRtcScreen);
     SetMainCallback2(CB2_ResetRtcScreen);

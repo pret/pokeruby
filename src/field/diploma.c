@@ -68,8 +68,8 @@ void CB2_ShowDiploma(void)
     ResetPaletteFade();
     FreeAllSpritePalettes();
     LoadPalette(gDiplomaPalettes, 0, 64);
-    SetUpWindowConfig(&gWindowConfig_81E6C3C);
-    InitMenuWindow(&gWindowConfig_81E6CE4);
+    SetUpWindowConfig(&gWindowTemplate_81E6C3C);
+    InitMenuWindow(&gWindowTemplate_81E6CE4);
     DisplayDiplomaText();
     BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
 

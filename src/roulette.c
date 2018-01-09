@@ -596,8 +596,8 @@ void sub_8115384(void)
         gMain.state++;
         break;
     case 0x2:
-        SetUpWindowConfig(&gWindowConfig_81E6C3C);
-        InitMenuWindow(&gWindowConfig_81E6CE4);
+        SetUpWindowConfig(&gWindowTemplate_81E6C3C);
+        InitMenuWindow(&gWindowTemplate_81E6CE4);
         LoadPalette(&gUnknown_083F86BC, 0x0, 0x1C0);
         gMain.state++;
         break;

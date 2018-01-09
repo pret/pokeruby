@@ -243,8 +243,8 @@ static void HoldContestPainting(void)
 
 static void ContestPaintingInitWindow(u8 arg0)
 {
-    InitMenuWindow(&gWindowConfig_81E7160);
-    SetUpWindowConfig(&gWindowConfig_81E7160);
+    InitMenuWindow(&gWindowTemplate_81E7160);
+    SetUpWindowConfig(&gWindowTemplate_81E7160);
 }
 
 static void ContestPaintingPrintCaption(u8 contestType, u8 arg1)

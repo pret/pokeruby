@@ -116,11 +116,11 @@ void CB2_InitOptionMenu(void)
         gMain.state++;
         break;
     case 2:
-        SetUpWindowConfig(&gWindowConfig_81E71B4);
+        SetUpWindowConfig(&gWindowTemplate_81E71B4);
         gMain.state++;
         break;
     case 3:
-        MultistepInitMenuWindowBegin(&gWindowConfig_81E71B4);
+        MultistepInitMenuWindowBegin(&gWindowTemplate_81E71B4);
         gMain.state++;
         break;
     case 4:

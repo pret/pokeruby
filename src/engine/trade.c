@@ -1016,10 +1016,10 @@ void sub_8047CD8(void)
 static void sub_8047CE8(void)
 {
     u8 mpId;
-    sub_804AFB8(&gWindowConfig_81E725C, gUnknown_020296CC[0], gSaveBlock2.playerName, 0xC);
+    sub_804AFB8(&gWindowTemplate_81E725C, gUnknown_020296CC[0], gSaveBlock2.playerName, 0xC);
     mpId = GetMultiplayerId();
-    sub_804AFB8(&gWindowConfig_81E725C, gUnknown_020296CC[3], gLinkPlayers[mpId ^ 1].name, 0xC);
-    sub_804AFB8(&gWindowConfig_81E725C, gUnknown_020296CC[6], gUnknown_0820C14C[0], 0x8);
+    sub_804AFB8(&gWindowTemplate_81E725C, gUnknown_020296CC[3], gLinkPlayers[mpId ^ 1].name, 0xC);
+    sub_804AFB8(&gWindowTemplate_81E725C, gUnknown_020296CC[6], gUnknown_0820C14C[0], 0x8);
     sub_804ACD8(gUnknown_0820C14C[1], gUnknown_020296CC[8], 0x14);
     nullsub_5(3, 0);
 }
@@ -1087,9 +1087,9 @@ static void sub_8047EC0(void)
             ResetTasks();
             sub_804A964(&gUnknown_03004824->unk_00c8, BG_SCREEN_ADDR(5));
             SetVBlankCallback(sub_80489F4);
-            InitMenuWindow(&gWindowConfig_81E6CE4);
-            SetUpWindowConfig(&gWindowConfig_81E6F84);
-            Text_InitWindowWithTemplate(&gUnknown_03004824->window, &gWindowConfig_81E6F84);
+            InitMenuWindow(&gWindowTemplate_81E6CE4);
+            SetUpWindowConfig(&gWindowTemplate_81E6F84);
+            Text_InitWindowWithTemplate(&gUnknown_03004824->window, &gWindowTemplate_81E6F84);
             gUnknown_03004824->unk_007a = TextWindow_SetBaseTileNum(20);
             TextWindow_LoadStdFrameGraphics(&gUnknown_03004824->window);
             Menu_EraseScreen();
@@ -1267,9 +1267,9 @@ static void sub_80484F4(void)
             ResetTasks();
             sub_804A964(&gUnknown_03004824->unk_00c8, BG_SCREEN_ADDR(5));
             SetVBlankCallback(sub_80489F4);
-            InitMenuWindow(&gWindowConfig_81E6CE4);
-            SetUpWindowConfig(&gWindowConfig_81E6F84);
-            Text_InitWindowWithTemplate(&gUnknown_03004824->window, &gWindowConfig_81E6F84);
+            InitMenuWindow(&gWindowTemplate_81E6CE4);
+            SetUpWindowConfig(&gWindowTemplate_81E6F84);
+            Text_InitWindowWithTemplate(&gUnknown_03004824->window, &gWindowTemplate_81E6F84);
             gUnknown_03004824->unk_007a = TextWindow_SetBaseTileNum(20);
             TextWindow_LoadStdFrameGraphics(&gUnknown_03004824->window);
             Menu_EraseScreen();
@@ -3010,7 +3010,7 @@ u8 sub_804A2B4(u8 *a0, u8 whichParty, u8 whichPokemon)
         GetMonGender(&gEnemyParty[whichPokemon]);
         GetMonData(&gEnemyParty[whichPokemon], MON_DATA_LEVEL);
     }
-    return Text_GetStringWidthFromWindowTemplate(&gWindowConfig_81E7294, a0);
+    return Text_GetStringWidthFromWindowTemplate(&gWindowTemplate_81E7294, a0);
 }
 
 #ifdef NONMATCHING
@@ -3067,7 +3067,7 @@ static void sub_804A41C(u8 whichParty)
         GetMonData(pokemon, MON_DATA_NICKNAME, nickname);
         StringCopy10(string + 6, nickname);
         GetMonGender(pokemon);
-        string[5] = (50 - Text_GetStringWidthFromWindowTemplate(&gWindowConfig_81E7294, string + 6)) / 2;
+        string[5] = (50 - Text_GetStringWidthFromWindowTemplate(&gWindowTemplate_81E7294, string + 6)) / 2;
         Text_InitWindowAndPrintText(&gUnknown_03004824->window, string, gUnknown_03004824->unk_007a + 22 * 6 * whichParty + 22 * i, gTradeMonSpriteCoords[i + 6 * whichParty][0], gTradeMonSpriteCoords[i + 6 * whichParty][1]);
     }
 }
@@ -3141,7 +3141,7 @@ static void sub_804A41C(u8 whichParty)
                     "\tbl GetMonGender\n"
                     "\tmov r1, sp\n"
                     "\tadds r1, 0x22\n"
-                    "\tldr r0, _0804A518 @ =gWindowConfig_81E7294\n"
+                    "\tldr r0, _0804A518 @ =gWindowTemplate_81E7294\n"
                     "\tbl Text_GetStringWidthFromWindowTemplate\n"
                     "\tlsls r0, 24\n"
                     "\tlsrs r0, 24\n"
@@ -3198,7 +3198,7 @@ static void sub_804A41C(u8 whichParty)
                     "\tbx r0\n"
                     "\t.align 2, 0\n"
                     "_0804A514: .4byte gEnemyParty\n"
-                    "_0804A518: .4byte gWindowConfig_81E7294");
+                    "_0804A518: .4byte gWindowTemplate_81E7294");
 }
 #endif
 
@@ -3523,7 +3523,7 @@ static bool8 sub_804ABF8(void)
 
 static void sub_804ACD8(const u8 *src, u8 *dest, u8 a2)
 {
-    sub_804AFB8(&gWindowConfig_81E725C, dest, src, a2);
+    sub_804AFB8(&gWindowTemplate_81E725C, dest, src, a2);
 }
 
 #ifdef NONMATCHING
@@ -4028,8 +4028,8 @@ static void sub_804B41C(void)
             FreeAllSpritePalettes();
             SetVBlankCallback(sub_804B210);
             sub_804B228();
-            SetUpWindowConfig(&gWindowConfig_81E6F84);
-            Text_InitWindowWithTemplate(&gUnknown_03004828->window, &gWindowConfig_81E6F84);
+            SetUpWindowConfig(&gWindowTemplate_81E6F84);
+            Text_InitWindowWithTemplate(&gUnknown_03004828->window, &gWindowTemplate_81E6F84);
             gUnknown_03004828->textWindowBaseTileNum = TextWindow_SetBaseTileNum(2);
             TextWindow_LoadStdFrameGraphics(&gUnknown_03004828->window);
             Menu_EraseScreen();
@@ -4182,7 +4182,7 @@ static __attribute__((naked)) void sub_804B41C(void)
                     "\tldr r0, _0804B578 @ =sub_804B210\n"
                     "\tbl SetVBlankCallback\n"
                     "\tbl sub_804B228\n"
-                    "\tldr r4, _0804B57C @ =gWindowConfig_81E6F84\n"
+                    "\tldr r4, _0804B57C @ =gWindowTemplate_81E6F84\n"
                     "\tadds r0, r4, 0\n"
                     "\tbl SetUpWindowConfig\n"
                     "\tldr r0, [r6]\n"
@@ -4279,7 +4279,7 @@ static __attribute__((naked)) void sub_804B41C(void)
                     "_0804B570: .4byte gUnknown_03004828\n"
                     "_0804B574: .4byte gSharedMem + 0x1F000\n"
                     "_0804B578: .4byte sub_804B210\n"
-                    "_0804B57C: .4byte gWindowConfig_81E6F84\n"
+                    "_0804B57C: .4byte gWindowTemplate_81E6F84\n"
                     "_0804B580: .4byte gLinkType\n"
                     "_0804B584: .4byte 0x00001144\n"
                     "_0804B588: .4byte gMain\n"
@@ -4531,8 +4531,8 @@ static void sub_804B790(void)
             FreeAllSpritePalettes();
             SetVBlankCallback(sub_804B210);
             sub_804B228();
-            SetUpWindowConfig(&gWindowConfig_81E717C);
-            Text_InitWindowWithTemplate(&gUnknown_03004828->window, &gWindowConfig_81E717C);
+            SetUpWindowConfig(&gWindowTemplate_81E717C);
+            Text_InitWindowWithTemplate(&gUnknown_03004828->window, &gWindowTemplate_81E717C);
             gUnknown_03004828->textWindowBaseTileNum = TextWindow_SetBaseTileNum(2);
             TextWindow_LoadStdFrameGraphics(&gUnknown_03004828->window);
             Menu_EraseScreen();

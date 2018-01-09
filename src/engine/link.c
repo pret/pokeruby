@@ -238,8 +238,8 @@ void LinkTestScreen(void)
     FreeAllSpritePalettes();
     ResetTasks();
     SetVBlankCallback(VBlankCB_LinkTest);
-    SetUpWindowConfig(&gWindowConfig_81E6CE4);
-    InitMenuWindow((struct WindowTemplate *)&gWindowConfig_81E6CE4);
+    SetUpWindowConfig(&gWindowTemplate_81E6CE4);
+    InitMenuWindow((struct WindowTemplate *)&gWindowTemplate_81E6CE4);
     ResetBlockSend();
     gLinkType = 0x1111;
     OpenLink();
@@ -1236,8 +1236,8 @@ void CB2_LinkError(void)
     FillPalette(0, 0, 2);
     ResetTasks();
     SetVBlankCallback(VBlankCB_LinkTest);
-    SetUpWindowConfig(&gWindowConfig_81E7198);
-    InitMenuWindow((struct WindowTemplate *)&gWindowConfig_81E7198);
+    SetUpWindowConfig(&gWindowTemplate_81E7198);
+    InitMenuWindow((struct WindowTemplate *)&gWindowTemplate_81E7198);
     Menu_EraseScreen();
     REG_BLDALPHA = 0;
     REG_BG0VOFS = 0;

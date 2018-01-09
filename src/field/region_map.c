@@ -1540,10 +1540,10 @@ void CB2_InitFlyRegionMap(void)
         FreeAllSpritePalettes();
         break;
     case 1:
-        SetUpWindowConfig(&gWindowConfig_81E7224);
+        SetUpWindowConfig(&gWindowTemplate_81E7224);
         break;
     case 2:
-        InitMenuWindow(&gWindowConfig_81E7224);
+        InitMenuWindow(&gWindowTemplate_81E7224);
         Menu_EraseScreen();
         break;
     case 3:

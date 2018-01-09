@@ -400,8 +400,8 @@ static void SlotMachineSetup_0_1(void)
 
 static void SlotMachineSetup_3_0(void)
 {
-    SetUpWindowConfig(&gWindowConfig_81E7128);
-    InitMenuWindow(&gWindowConfig_81E7128);
+    SetUpWindowConfig(&gWindowTemplate_81E7128);
+    InitMenuWindow(&gWindowTemplate_81E7128);
 }
 
 static void SlotMachineSetup_4_0(void)
@@ -2807,7 +2807,7 @@ static void sub_8104B80(struct Task *task)
 {
     sub_8104DA4();
     sub_81065DC();
-    BasicInitMenuWindow(&gWindowConfig_81E7144);
+    BasicInitMenuWindow(&gWindowTemplate_81E7144);
     MenuPrint_PixelCoords(gOtherText_ReelTime, 10, 32, 1);
     BeginNormalPaletteFade(-1, 0, 16, 0, 0);
     task->data[0]++;
@@ -2825,7 +2825,7 @@ static void sub_8104BC8(struct Task *task)
 static void sub_8104BFC(struct Task *task)
 {
     Menu_EraseScreen();
-    BasicInitMenuWindow(&gWindowConfig_81E7128);
+    BasicInitMenuWindow(&gWindowTemplate_81E7128);
     sub_81064B8();
     sub_8104CAC(task->data[1]);
     sub_810423C(eSlotMachine->pikaPower);

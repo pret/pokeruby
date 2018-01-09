@@ -228,11 +228,11 @@ static void sub_8136294(void)
             gUnknown_02039304->unk50++;
             break;
         case 3:
-            SetUpWindowConfig(&gWindowConfig_81E7080);
+            SetUpWindowConfig(&gWindowTemplate_81E7080);
             gUnknown_02039304->unk50++;
             break;
         case 4:
-            MultistepInitMenuWindowBegin(&gWindowConfig_81E7080);
+            MultistepInitMenuWindowBegin(&gWindowTemplate_81E7080);
             gUnknown_02039304->unk50++;
             break;
         case 5:
@@ -610,7 +610,7 @@ static void sub_8136BB8(void)
     GetMonData(&gPlayerParty[sub_81370A4(gUnknown_083DFEC4->unk87DC)], MON_DATA_NICKNAME, gUnknown_02039304->stringBuffer);
     StringGetEnd10(gUnknown_02039304->stringBuffer);
     StringAppend(gUnknown_02039304->stringBuffer, gOtherText_GetsAPokeBlock);
-    BasicInitMenuWindow(&gWindowConfig_81E709C);
+    BasicInitMenuWindow(&gWindowTemplate_81E709C);
     Menu_DrawStdWindowFrame(0, 16, 29, 19);
     Menu_PrintText(gUnknown_02039304->stringBuffer, 1, 17);
     DisplayYesNoMenu(23, 10, 1);
@@ -623,14 +623,14 @@ static s8 sub_8136C40(void)
     if ((u8)(retval + 1) < 3)
     {
         Menu_EraseScreen();
-        BasicInitMenuWindow(&gWindowConfig_81E7080);
+        BasicInitMenuWindow(&gWindowTemplate_81E7080);
     }
     return retval;
 }
 
 static void sub_8136C6C(void)
 {
-    BasicInitMenuWindow(&gWindowConfig_81E709C);
+    BasicInitMenuWindow(&gWindowTemplate_81E709C);
     Menu_DrawStdWindowFrame(0, 16, 29, 19);
     for (gUnknown_02039304->unk53 = 0; gUnknown_02039304->unk53 < 5 && gUnknown_02039304->unk61[gUnknown_02039304->unk53] == 0; gUnknown_02039304->unk53++);
     if (gUnknown_02039304->unk53 < 5)
@@ -667,7 +667,7 @@ static bool8 sub_8136D00(void)
 
 static void sub_8136D60(void)
 {
-    BasicInitMenuWindow(&gWindowConfig_81E709C);
+    BasicInitMenuWindow(&gWindowTemplate_81E709C);
     Menu_DrawStdWindowFrame(0, 16, 29, 19);
     Menu_PrintText(gOtherText_WontEat, 1, 17);
 }
@@ -675,7 +675,7 @@ static void sub_8136D60(void)
 static void sub_8136D8C(void)
 {
     Menu_EraseScreen();
-    BasicInitMenuWindow(&gWindowConfig_81E7080);
+    BasicInitMenuWindow(&gWindowTemplate_81E7080);
 }
 
 static void Pokeblock_MenuWindowTextPrint(const u8 *message)

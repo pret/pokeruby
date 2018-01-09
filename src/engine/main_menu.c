@@ -233,8 +233,8 @@ u32 InitMainMenu(u8 a1)
     ResetTasks();
     ResetSpriteData();
     FreeAllSpritePalettes();
-    SetUpWindowConfig(&gWindowConfig_81E6C3C);
-    InitMenuWindow((struct WindowTemplate *)&gWindowConfig_81E6CE4);
+    SetUpWindowConfig(&gWindowTemplate_81E6C3C);
+    InitMenuWindow((struct WindowTemplate *)&gWindowTemplate_81E6CE4);
 
     if (a1)
         BeginNormalPaletteFade(-1, 0, 0x10, 0, 0x0000); // fade to black
@@ -750,8 +750,8 @@ void PrintBadgeCount(void)
 
 static void Task_NewGameSpeech1(u8 taskId)
 {
-    SetUpWindowConfig(&gWindowConfig_81E6C3C);
-    InitMenuWindow((struct WindowTemplate *)&gWindowConfig_81E6CE4);
+    SetUpWindowConfig(&gWindowTemplate_81E6C3C);
+    InitMenuWindow((struct WindowTemplate *)&gWindowTemplate_81E6CE4);
     REG_WIN0H = 0;
     REG_WIN0V = 0;
     REG_WININ = 0;
@@ -1373,8 +1373,8 @@ void CB_ContinueNewGameSpeechPart2()
     FreeAllSpritePalettes();
     AddBirchSpeechObjects(taskId);
 
-    SetUpWindowConfig(&gWindowConfig_81E6C3C);
-    InitMenuWindow((struct WindowTemplate *)&gWindowConfig_81E6CE4);
+    SetUpWindowConfig(&gWindowTemplate_81E6C3C);
+    InitMenuWindow((struct WindowTemplate *)&gWindowTemplate_81E6CE4);
 
     if (gSaveBlock2.playerGender != MALE)
     {

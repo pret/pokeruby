@@ -271,7 +271,7 @@ void CreateStartMenuTask(void (*func)(u8))
 {
     u8 taskId;
 
-    InitMenuWindow(&gWindowConfig_81E6CE4);
+    InitMenuWindow(&gWindowTemplate_81E6CE4);
     taskId = CreateTask(Task_StartMenu, 0x50);
     SetTaskFuncWithFollowupFunc(taskId, Task_StartMenu, func);
 }
@@ -774,8 +774,8 @@ static bool32 sub_80719FC(u8 *step)
         dp12_8087EA4();
         break;
     case 2:
-        SetUpWindowConfig(&gWindowConfig_81E6CE4);
-        InitMenuWindow(&gWindowConfig_81E6CE4);
+        SetUpWindowConfig(&gWindowTemplate_81E6CE4);
+        InitMenuWindow(&gWindowTemplate_81E6CE4);
         REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_BG0_ON;
         break;
     case 3:

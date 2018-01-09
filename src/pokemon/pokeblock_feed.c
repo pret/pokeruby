@@ -530,11 +530,11 @@ static bool8 TransitionToPokeblockFeedScene(void)
         gMain.state++;
         break;
     case 4:
-        SetUpWindowConfig(&gWindowConfig_81E6E50);
+        SetUpWindowConfig(&gWindowTemplate_81E6E50);
         gMain.state++;
         break;
     case 5:
-        MultistepInitMenuWindowBegin(&gWindowConfig_81E6E50);
+        MultistepInitMenuWindowBegin(&gWindowTemplate_81E6E50);
         gMain.state++;
         break;
     case 6:

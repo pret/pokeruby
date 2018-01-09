@@ -120,8 +120,8 @@ static void CB2_SaveFailedScreen(void)
         ResetPaletteFade();
         LoadPalette(&gBirchBagGrassPal, 0, sizeof(gBirchBagGrassPal));
         LoadPalette(&gSaveFailedClockPal, 0x100, sizeof(gSaveFailedClockPal));
-        SetUpWindowConfig(&gWindowConfig_81E6C3C);
-        InitMenuWindow(&gWindowConfig_81E6CE4);
+        SetUpWindowConfig(&gWindowTemplate_81E6C3C);
+        InitMenuWindow(&gWindowTemplate_81E6CE4);
         Menu_DrawStdWindowFrame(13, CLOCK_WIN_TOP, 16, CLOCK_WIN_TOP + 3); // clock window
         Menu_DrawStdWindowFrame(1, MSG_WIN_TOP, 28, 19); // message window
         Menu_PrintText(gSystemText_SaveFailedBackupCheck, 2, MSG_WIN_TOP + 1);

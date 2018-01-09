@@ -285,8 +285,8 @@ void BuyMenuDrawGraphics(void)
     ResetPaletteFade();
     ResetSpriteData();
     ResetTasks();
-    SetUpWindowConfig(&gWindowConfig_81E6DFC);
-    InitMenuWindow(&gWindowConfig_81E6DFC);
+    SetUpWindowConfig(&gWindowTemplate_81E6DFC);
+    InitMenuWindow(&gWindowTemplate_81E6DFC);
     BuyMenuDrawMapGraphics();
     gMartInfo.cursor = zero;
     gMartInfo.choicesAbove = zero2;

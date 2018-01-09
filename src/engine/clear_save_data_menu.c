@@ -133,8 +133,8 @@ static u8 InitClearSaveDataScreen(void)
         ResetTasks();
         ResetSpriteData();
 
-        SetUpWindowConfig(&gWindowConfig_81E6C3C);
-        InitMenuWindow(&gWindowConfig_81E6CE4);
+        SetUpWindowConfig(&gWindowTemplate_81E6C3C);
+        InitMenuWindow(&gWindowTemplate_81E6CE4);
         BeginNormalPaletteFade(-1, 0, 0x10, 0, 0xffff);
 
         ime = REG_IME;

@@ -449,8 +449,8 @@ static void sub_80A9F50(void)
 {
     REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP;
     REG_DISPCNT |= DISPCNT_OBJ_ON | DISPCNT_BG0_ON;
-    SetUpWindowConfig(&gWindowConfig_81E6C3C);
-    Text_InitWindowWithTemplate(&gMenuWindow, &gWindowConfig_81E6C3C);
+    SetUpWindowConfig(&gWindowTemplate_81E6C3C);
+    Text_InitWindowWithTemplate(&gMenuWindow, &gWindowTemplate_81E6C3C);
     REG_MOSAIC = 0;
     REG_BLDCNT = 0;
     REG_BLDALPHA = 0;
@@ -490,7 +490,7 @@ static void sub_80A9FE4(void)
         }
     }
     sub_80034D4((void *)VRAM, ptr);
-    LoadFontDefaultPalette(&gWindowConfig_81E6C3C);
+    LoadFontDefaultPalette(&gWindowTemplate_81E6C3C);
 }
 
 static void sub_80AA064(void)
@@ -1075,9 +1075,9 @@ void unref_sub_80AB084(u8 *text)
             break;
         }
     }
-    SetUpWindowConfig(&gWindowConfig_81E6FD8);
-    Text_InitWindowWithTemplate(&gUnknown_03004210, &gWindowConfig_81E6FD8);
-    LoadFontDefaultPalette(&gWindowConfig_81E6FD8);
+    SetUpWindowConfig(&gWindowTemplate_81E6FD8);
+    Text_InitWindowWithTemplate(&gUnknown_03004210, &gWindowTemplate_81E6FD8);
+    LoadFontDefaultPalette(&gWindowTemplate_81E6FD8);
     Text_InitWindowAndPrintText(&gUnknown_03004210, text, 1, 9, 7);
 }
 

@@ -424,11 +424,11 @@ static bool8 SetupBagMultistep(void)
         gMain.state++;
         break;
     case 7:
-        SetUpWindowConfig(&gWindowConfig_81E6DFC);
+        SetUpWindowConfig(&gWindowTemplate_81E6DFC);
         gMain.state++;
         break;
     case 8:
-        MultistepInitMenuWindowBegin(&gWindowConfig_81E6DFC);
+        MultistepInitMenuWindowBegin(&gWindowTemplate_81E6DFC);
         gMain.state++;
         break;
     case 9:

@@ -679,11 +679,11 @@ bool8 InitPartyMenu(void)
         gMain.state++;
         break;
     case 7:
-        SetUpWindowConfig(&gWindowConfig_81E6C90);
+        SetUpWindowConfig(&gWindowTemplate_81E6C90);
         gMain.state++;
         break;
     case 8:
-        Text_InitWindowWithTemplate(&gUnknown_03004210, &gWindowConfig_81E6C90);
+        Text_InitWindowWithTemplate(&gUnknown_03004210, &gWindowTemplate_81E6C90);
         MultistepInitWindowTileData(&gUnknown_03004210, 1);
         gMain.state++;
         break;
@@ -716,7 +716,7 @@ bool8 InitPartyMenu(void)
         }
         break;
     case 13:
-        MultistepInitMenuWindowBegin(&gWindowConfig_81E6CC8);
+        MultistepInitMenuWindowBegin(&gWindowTemplate_81E6CC8);
         gMain.state++;
         break;
     case 14:
@@ -3313,7 +3313,7 @@ void PartyMenuDoPrintMonNickname(u8 monIndex, int b, const u8 *nameBuffer)
 {
     u32 var1 = 0;
     CpuFastSet(&var1, gTileBuffer, 0x1000100);
-    sub_8004E3C((struct WindowTemplate *)&gWindowConfig_81E6CAC, gTileBuffer, nameBuffer);
+    sub_8004E3C((struct WindowTemplate *)&gWindowTemplate_81E6CAC, gTileBuffer, nameBuffer);
     CpuFastSet(gTileBuffer, OBJ_VRAM1 + (monIndex * 0x400), 128);
 }
 
@@ -3423,7 +3423,7 @@ void PartyMenuDoPrintLevel(u8 monIndex, u8 menuLayout, u8 level)
 
     var1 = 0;
     CpuFastSet(&var1, gUnknown_02039460, 0x1000020);
-    sub_8004E3C((struct WindowTemplate *)&gWindowConfig_81E6CAC, gUnknown_02039460 - 0x100 /*gTileBuffer*/, gStringVar1);
+    sub_8004E3C((struct WindowTemplate *)&gWindowTemplate_81E6CAC, gUnknown_02039460 - 0x100 /*gTileBuffer*/, gStringVar1);
     CpuFastSet(gUnknown_02039460, OBJ_VRAM1 + 0x200 + (monIndex * 0x400), 32);
 }
 
@@ -3517,7 +3517,7 @@ void PartyMenuDoPrintHP(u8 monIndex, u8 b, u16 currentHP, u16 maxHP)
     var = 0;
 
     CpuFastSet(&var, gUnknown_02039460, 0x1000040);
-    sub_8004E3C((struct WindowTemplate *)&gWindowConfig_81E6CAC, gUnknown_02039460 - 0x100 /*gTileBuffer*/, gStringVar1);
+    sub_8004E3C((struct WindowTemplate *)&gWindowTemplate_81E6CAC, gUnknown_02039460 - 0x100 /*gTileBuffer*/, gStringVar1);
     CpuFastSet(gUnknown_02039460, OBJ_VRAM1 + 0x300 + (monIndex * 0x400), 64);
 }
 

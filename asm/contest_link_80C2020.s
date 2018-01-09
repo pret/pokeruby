@@ -12,7 +12,7 @@ sub_80C2020: @ 80C2020
 	lsls r5, 19
 	movs r0, 0x40
 	strh r0, [r5]
-	ldr r4, _080C20F0 @ =gWindowConfig_81E6FA0
+	ldr r4, _080C20F0 @ =gWindowTemplate_81E6FA0
 	adds r0, r4, 0
 	bl SetUpWindowConfig
 	ldr r0, _080C20F4 @ =gMenuWindow
@@ -110,7 +110,7 @@ sub_80C2020: @ 80C2020
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C20F0: .4byte gWindowConfig_81E6FA0
+_080C20F0: .4byte gWindowTemplate_81E6FA0
 _080C20F4: .4byte gMenuWindow
 _080C20F8: .4byte REG_BG0CNT
 _080C20FC: .4byte 0x00001803
@@ -188,7 +188,7 @@ _080C2162:
 	lsls r2, 2
 	movs r1, 0
 	bl LoadCompressedPalette
-	ldr r0, _080C2234 @ =gWindowConfig_81E6FA0
+	ldr r0, _080C2234 @ =gWindowTemplate_81E6FA0
 	bl LoadFontDefaultPalette
 	movs r6, 0
 _080C21C0:
@@ -242,7 +242,7 @@ _080C2224: .4byte 0x0600e000
 _080C2228: .4byte gUnknown_08D1A250
 _080C222C: .4byte 0x0600f000
 _080C2230: .4byte gUnknown_08D1A618
-_080C2234: .4byte gWindowConfig_81E6FA0
+_080C2234: .4byte gWindowTemplate_81E6FA0
 _080C2238: .4byte 0x000060b2
 _080C223C: .4byte 0x000060a4
 _080C2240:
@@ -2170,7 +2170,7 @@ sub_80C3158: @ 80C3158
 	lsls r0, 22
 	lsrs r0, 22
 	strh r0, [r4, 0x6]
-	ldr r1, _080C32C4 @ =gWindowConfig_81E7278
+	ldr r1, _080C32C4 @ =gWindowTemplate_81E7278
 	mov r8, r1
 	ldr r7, _080C32C8 @ =0x06010000
 	ldr r2, _080C32CC @ =0x040000d4
@@ -2296,7 +2296,7 @@ _080C32B2:
 	b _080C3322
 	.align 2, 0
 _080C32C0: .4byte gSprites
-_080C32C4: .4byte gWindowConfig_81E7278
+_080C32C4: .4byte gWindowTemplate_81E7278
 _080C32C8: .4byte 0x06010000
 _080C32CC: .4byte 0x040000d4
 _080C32D0: .4byte 0x85000100

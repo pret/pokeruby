@@ -234,7 +234,7 @@ void InitBattle(void)
     }
     //sub_80895F8(gUnknown_081F9674.unk0, gUnknown_081F9674.unk4, gUnknown_081F9674.unk8);
     sub_80895F8(gUnknown_081F9674);
-    SetUpWindowConfig(&gWindowConfig_81E6C58);
+    SetUpWindowConfig(&gWindowTemplate_81E6C58);
     ResetPaletteFade();
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
@@ -245,9 +245,9 @@ void InitBattle(void)
     gUnknown_030041B0 = 0;
     gUnknown_030041B8 = 0;
     gBattleTerrain = BattleSetup_GetTerrain();
-    Text_InitWindowWithTemplate(&gUnknown_03004210, &gWindowConfig_81E6C58);
-    Text_InitWindowWithTemplate(&gUnknown_030041D0, &gWindowConfig_81E71D0);
-    Text_InitWindowWithTemplate(&gUnknown_03004250, &gWindowConfig_81E71EC);
+    Text_InitWindowWithTemplate(&gUnknown_03004210, &gWindowTemplate_81E6C58);
+    Text_InitWindowWithTemplate(&gUnknown_030041D0, &gWindowTemplate_81E71D0);
+    Text_InitWindowWithTemplate(&gUnknown_03004250, &gWindowTemplate_81E71EC);
     sub_800D6D4();
     sub_800DAB8();
     ResetSpriteData();
@@ -1210,7 +1210,7 @@ void c2_8011A1C(void)
         gUnknown_03004DE0[0][i] = 0xFF10;
         gUnknown_03004DE0[1][i] = 0xFF10;
     }
-    SetUpWindowConfig(&gWindowConfig_81E6C58);
+    SetUpWindowConfig(&gWindowTemplate_81E6C58);
     ResetPaletteFade();
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
@@ -1221,9 +1221,9 @@ void c2_8011A1C(void)
     gUnknown_030041B0 = 0;
     gUnknown_030041B8 = 0;
 
-    Text_InitWindowWithTemplate(&gUnknown_03004210, &gWindowConfig_81E6C58);
-    Text_InitWindowWithTemplate(&gUnknown_030041D0, &gWindowConfig_81E71D0);
-    Text_InitWindowWithTemplate(&gUnknown_03004250, &gWindowConfig_81E71EC);
+    Text_InitWindowWithTemplate(&gUnknown_03004210, &gWindowTemplate_81E6C58);
+    Text_InitWindowWithTemplate(&gUnknown_030041D0, &gWindowTemplate_81E71D0);
+    Text_InitWindowWithTemplate(&gUnknown_03004250, &gWindowTemplate_81E71EC);
     sub_800D6D4();
     LoadCompressedPalette(gUnknown_08D004E0, 0, 64);
     sub_800D74C();

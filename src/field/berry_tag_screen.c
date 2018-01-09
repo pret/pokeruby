@@ -109,11 +109,11 @@ static bool8 sub_8146058(void)
         gMain.state += 1;
         break;
     case 3:
-        SetUpWindowConfig(&gWindowConfig_81E6E18);
+        SetUpWindowConfig(&gWindowTemplate_81E6E18);
         gMain.state += 1;
         break;
     case 4:
-        MultistepInitMenuWindowBegin(&gWindowConfig_81E6E18);
+        MultistepInitMenuWindowBegin(&gWindowTemplate_81E6E18);
         gMain.state += 1;
         break;
     case 5:

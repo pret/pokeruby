@@ -215,7 +215,7 @@ extern u8 byte_3002A68;
 extern const u8 gUnknown_08E6C100[];
 extern const u8 gUnknown_08E6C920[];
 extern const u8 gUnknown_08E6D354[];
-extern const struct WindowTemplate gWindowConfig_81E6F68;
+extern const struct WindowTemplate gWindowTemplate_81E6F68;
 extern const u8 *const gPokeblockNames[];
 extern const struct Berry gBerries[];
 
@@ -957,8 +957,8 @@ static void sub_804E56C(void)
         ResetSpriteData();
         FreeAllSpritePalettes();
         SetVBlankCallback(NULL);
-        SetUpWindowConfig(&gWindowConfig_81E6F68);
-        InitMenuWindow(&gWindowConfig_81E6F68);
+        SetUpWindowConfig(&gWindowTemplate_81E6F68);
+        InitMenuWindow(&gWindowTemplate_81E6F68);
         gBerryBlenderData->field_0++;
         gBerryBlenderData->field_140 = 0;
         gBerryBlenderData->field_13E = 0;
@@ -1135,8 +1135,8 @@ static void sub_804E9F8(void)
         FreeAllSpritePalettes();
         ResetTasks();
         SetVBlankCallback(VBlankCB0_BerryBlender);
-        SetUpWindowConfig(&gWindowConfig_81E6F68);
-        InitMenuWindow(&gWindowConfig_81E6F68);
+        SetUpWindowConfig(&gWindowTemplate_81E6F68);
+        InitMenuWindow(&gWindowTemplate_81E6F68);
         gLinkType = 0x4422;
         gBerryBlenderData->field_0++;
         gBerryBlenderData->field_4E = 0;
@@ -1338,8 +1338,8 @@ static void sub_804F0F4(void)
 
     SetVBlankCallback(VBlankCB0_BerryBlender);
 
-    SetUpWindowConfig(&gWindowConfig_81E6F68);
-    InitMenuWindow(&gWindowConfig_81E6F68);
+    SetUpWindowConfig(&gWindowTemplate_81E6F68);
+    InitMenuWindow(&gWindowTemplate_81E6F68);
 
     gLinkType = 0x4422;
 
@@ -3606,8 +3606,8 @@ void unref_sub_80524BC(void)
     FreeAllSpritePalettes();
     ResetTasks();
     SetVBlankCallback(VBlankCB1_BerryBlender);
-    SetUpWindowConfig(&gWindowConfig_81E6CE4);
-    InitMenuWindow(&gWindowConfig_81E6CE4);
+    SetUpWindowConfig(&gWindowTemplate_81E6CE4);
+    InitMenuWindow(&gWindowTemplate_81E6CE4);
     SeedRng(gMain.vblankCounter1);
     REG_DISPCNT = 0x1540;
     RunTasks();

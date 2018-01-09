@@ -582,8 +582,8 @@ static void sub_81422B8(u8 taskID)
 
 static void sub_81422E8(u8 taskID)
 {
-    SetUpWindowConfig(&gWindowConfig_81E7198);
-    InitMenuWindow(&gWindowConfig_81E7198);
+    SetUpWindowConfig(&gWindowTemplate_81E7198);
+    InitMenuWindow(&gWindowTemplate_81E7198);
     gTasks[taskID].func = sub_8142320;
 }
 
@@ -714,8 +714,8 @@ static void sub_81426F8(u8 taskID)
 static void sub_8142738(u8 taskID)
 {
     REG_DISPCNT = 0x1940;
-    SetUpWindowConfig(&gWindowConfig_81E71B4);
-    InitMenuWindow(&gWindowConfig_81E71B4);
+    SetUpWindowConfig(&gWindowTemplate_81E71B4);
+    InitMenuWindow(&gWindowTemplate_81E71B4);
 
     gTasks[taskID].tPlayerSpriteID = HallOfFame_LoadTrainerPic(gSaveBlock2.playerGender, 120, 72, 6);
     gTasks[taskID].tFrameCount = 120;
@@ -864,8 +864,8 @@ static void sub_8142A28(u8 taskID)
             *(vram1 + i) = i + 3;
             *(vram2 + i) = i + 20;
         }
-        SetUpWindowConfig(&gWindowConfig_81E7198);
-        InitMenuWindow(&gWindowConfig_81E7198);
+        SetUpWindowConfig(&gWindowTemplate_81E7198);
+        InitMenuWindow(&gWindowTemplate_81E7198);
         gTasks[taskID].func = sub_8142B04;
     }
 }
@@ -1285,8 +1285,8 @@ static void sub_8143570(void)
     gReservedSpritePaletteCount = 8;
     LoadCompressedObjectPic(&sHallOfFame_ConfettiSpriteSheet);
     LoadCompressedObjectPalette(&sHallOfFame_ConfettiSpritePalette);
-    SetUpWindowConfig(&gWindowConfig_81E71B4);
-    InitMenuWindow(&gWindowConfig_81E71B4);
+    SetUpWindowConfig(&gWindowTemplate_81E71B4);
+    InitMenuWindow(&gWindowTemplate_81E71B4);
 }
 
 static void sub_81435B8(void)

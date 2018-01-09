@@ -294,8 +294,8 @@ void CB2_ChooseStarter(void)
     LoadCompressedObjectPic(&gUnknown_083F7794[0]);
     LoadCompressedObjectPic(&gUnknown_083F77A4[0]);
     LoadSpritePalettes(gUnknown_083F77B4);
-    SetUpWindowConfig(&gWindowConfig_81E6C3C);
-    InitMenuWindow(&gWindowConfig_81E6CE4);
+    SetUpWindowConfig(&gWindowTemplate_81E6C3C);
+    InitMenuWindow(&gWindowTemplate_81E6CE4);
     BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
 
     savedIme = REG_IME;

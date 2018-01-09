@@ -197,7 +197,7 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
     REG_WININ = 0;
     REG_WINOUT = 0;
 
-    SetUpWindowConfig(&gWindowConfig_81E6C58);
+    SetUpWindowConfig(&gWindowTemplate_81E6C58);
     ResetPaletteFade();
 
     gBattle_BG0_X = 0;
@@ -209,7 +209,7 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
     gUnknown_030041B0 = 256;
     gUnknown_030041B8 = 0;
 
-    Text_InitWindowWithTemplate(&gUnknown_03004210, &gWindowConfig_81E6C58);
+    Text_InitWindowWithTemplate(&gUnknown_03004210, &gWindowTemplate_81E6C58);
     gBattleTerrain = BATTLE_TERRAIN_PLAIN;
 
     sub_800D6D4();
@@ -306,7 +306,7 @@ static void CB2_EvolutionSceneLoadGraphics(void)
     REG_WIN1V = 0;
     REG_WININ = 0;
     REG_WINOUT = 0;
-    SetUpWindowConfig(&gWindowConfig_81E6C58);
+    SetUpWindowConfig(&gWindowTemplate_81E6C58);
     ResetPaletteFade();
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
@@ -317,7 +317,7 @@ static void CB2_EvolutionSceneLoadGraphics(void)
     gUnknown_030041B0 = 256;
     gUnknown_030041B8 = 0;
 
-    Text_InitWindowWithTemplate(&gUnknown_03004210, &gWindowConfig_81E6C58);
+    Text_InitWindowWithTemplate(&gUnknown_03004210, &gWindowTemplate_81E6C58);
     gBattleTerrain = BATTLE_TERRAIN_PLAIN;
 
     sub_800D6D4();
@@ -373,8 +373,8 @@ static void CB2_TradeEvolutionSceneLoadGraphics(void)
         gMain.state++;
         break;
     case 1:
-        SetUpWindowConfig(&gWindowConfig_81E6F84);
-        Text_InitWindowWithTemplate(&gUnknown_03004828->window, &gWindowConfig_81E6F84);
+        SetUpWindowConfig(&gWindowTemplate_81E6F84);
+        Text_InitWindowWithTemplate(&gUnknown_03004828->window, &gWindowTemplate_81E6F84);
         gMain.state++;
         break;
     case 2:

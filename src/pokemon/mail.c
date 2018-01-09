@@ -354,11 +354,11 @@ static u8 sub_80F8A28(void)
         RETURN_UP_STATE;
 
     case 6:
-        SetUpWindowConfig(&gWindowConfig_81E6DFC);
+        SetUpWindowConfig(&gWindowTemplate_81E6DFC);
         RETURN_UP_STATE;
 
     case 7:
-        MultistepInitMenuWindowBegin(&gWindowConfig_81E6DFC);
+        MultistepInitMenuWindowBegin(&gWindowTemplate_81E6DFC);
         RETURN_UP_STATE;
 
     case 8:

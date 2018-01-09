@@ -229,7 +229,7 @@ _080F07E0:
 	lsrs r1, 16
 	bl sub_80F445C
 _080F07F4:
-	ldr r0, _080F0814 @ =gWindowConfig_81E710C
+	ldr r0, _080F0814 @ =gWindowTemplate_81E710C
 	bl BasicInitMenuWindow
 	ldr r0, _080F0818 @ =gUnknown_083DFEC4
 	ldr r0, [r0]
@@ -243,7 +243,7 @@ _080F080A:
 	bx r0
 	.align 2, 0
 _080F0810: .4byte 0x00008788
-_080F0814: .4byte gWindowConfig_81E710C
+_080F0814: .4byte gWindowTemplate_81E710C
 _080F0818: .4byte gUnknown_083DFEC4
 	thumb_func_end ShowMapNamePopUpWindow
 
@@ -252,7 +252,7 @@ sub_80F081C: @ 80F081C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, _080F0838 @ =gWindowConfig_81E710C
+	ldr r0, _080F0838 @ =gWindowTemplate_81E710C
 	bl BasicInitMenuWindow
 	cmp r5, 0x4
 	bhi _080F08C6
@@ -262,7 +262,7 @@ sub_80F081C: @ 80F081C
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080F0838: .4byte gWindowConfig_81E710C
+_080F0838: .4byte gWindowTemplate_81E710C
 _080F083C: .4byte _080F0840
 	.align 2, 0
 _080F0840:
@@ -342,7 +342,7 @@ _080F08E0: .4byte 0x0001869f
 	thumb_func_start sub_80F08E4
 sub_80F08E4: @ 80F08E4
 	push {lr}
-	ldr r0, _080F08FC @ =gWindowConfig_81E710C
+	ldr r0, _080F08FC @ =gWindowTemplate_81E710C
 	bl BasicInitMenuWindow
 	movs r0, 0
 	movs r1, 0x9
@@ -352,7 +352,7 @@ sub_80F08E4: @ 80F08E4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F08FC: .4byte gWindowConfig_81E710C
+_080F08FC: .4byte gWindowTemplate_81E710C
 	thumb_func_end sub_80F08E4
 
 	thumb_func_start sub_80F0900
@@ -527,7 +527,7 @@ _080F0A40:
 	adds r0, r4, 0
 	adds r1, r3, 0
 	bl sub_80F4428
-	ldr r0, _080F0A70 @ =gWindowConfig_81E70D4
+	ldr r0, _080F0A70 @ =gWindowTemplate_81E70D4
 	bl BasicInitMenuWindow
 	lsls r2, r5, 24
 	lsrs r2, 24
@@ -541,7 +541,7 @@ _080F0A40:
 _080F0A64: .4byte gUnknown_083DFEC4
 _080F0A68: .4byte 0x000087c8
 _080F0A6C: .4byte 0x00008788
-_080F0A70: .4byte gWindowConfig_81E70D4
+_080F0A70: .4byte gWindowTemplate_81E70D4
 	thumb_func_end sub_80F0A24
 
 	thumb_func_start sub_80F0A74
@@ -561,7 +561,7 @@ sub_80F0A74: @ 80F0A74
 	bl sub_80F700C
 	movs r0, 0x1F
 	ands r7, r0
-	ldr r0, _080F0AE4 @ =gWindowConfig_81E70D4
+	ldr r0, _080F0AE4 @ =gWindowTemplate_81E70D4
 	bl BasicInitMenuWindow
 	lsls r2, r7, 3
 	adds r0, r4, 0
@@ -597,7 +597,7 @@ sub_80F0A74: @ 80F0A74
 	.align 2, 0
 _080F0ADC: .4byte gUnknown_083DFEC4
 _080F0AE0: .4byte 0x00008788
-_080F0AE4: .4byte gWindowConfig_81E70D4
+_080F0AE4: .4byte gWindowTemplate_81E70D4
 _080F0AE8: .4byte 0x0000d158
 _080F0AEC: .4byte 0x0000ceed
 _080F0AF0: .4byte 0x0600f000
@@ -688,7 +688,7 @@ _080F0B60:
 	ldrsh r0, [r0, r1]
 	cmp r2, r0
 	beq _080F0BAA
-	ldr r0, _080F0BC8 @ =gWindowConfig_81E70D4
+	ldr r0, _080F0BC8 @ =gWindowTemplate_81E70D4
 	bl BasicInitMenuWindow
 	adds r1, r4, 0
 	adds r3, r1, 0x1
@@ -709,9 +709,9 @@ _080F0BB4:
 _080F0BBC: .4byte 0x00000306
 _080F0BC0: .4byte 0x00008778
 _080F0BC4: .4byte 0x0000876c
-_080F0BC8: .4byte gWindowConfig_81E70D4
+_080F0BC8: .4byte gWindowTemplate_81E70D4
 _080F0BCC:
-	ldr r0, _080F0C10 @ =gWindowConfig_81E70D4
+	ldr r0, _080F0C10 @ =gWindowTemplate_81E70D4
 	bl BasicInitMenuWindow
 	ldr r1, _080F0C14 @ =0x00008778
 	adds r0, r5, r1
@@ -745,7 +745,7 @@ _080F0BE2:
 	movs r0, 0
 	b _080F0C22
 	.align 2, 0
-_080F0C10: .4byte gWindowConfig_81E70D4
+_080F0C10: .4byte gWindowTemplate_81E70D4
 _080F0C14: .4byte 0x00008778
 _080F0C18: .4byte gUnknown_083DFEC4
 _080F0C1C: .4byte 0x0000d15c
@@ -804,7 +804,7 @@ _080F0C64:
 	bls _080F0CD0
 	movs r0, 0
 	strh r0, [r1]
-	ldr r0, _080F0CC4 @ =gWindowConfig_81E70D4
+	ldr r0, _080F0CC4 @ =gWindowTemplate_81E70D4
 	bl BasicInitMenuWindow
 	ldr r0, _080F0CC8 @ =0x00008770
 	adds r1, r4, r0
@@ -835,7 +835,7 @@ _080F0C64:
 	.align 2, 0
 _080F0CBC: .4byte 0x00000306
 _080F0CC0: .4byte 0x0000ffff
-_080F0CC4: .4byte gWindowConfig_81E70D4
+_080F0CC4: .4byte gWindowTemplate_81E70D4
 _080F0CC8: .4byte 0x00008770
 _080F0CCC: .4byte 0x00008778
 _080F0CD0:
@@ -942,7 +942,7 @@ _080F0D78:
 _080F0D8C:
 	movs r0, 0
 	strh r0, [r1]
-	ldr r0, _080F0DBC @ =gWindowConfig_81E70D4
+	ldr r0, _080F0DBC @ =gWindowTemplate_81E70D4
 	bl BasicInitMenuWindow
 	ldr r0, _080F0DC0 @ =0x00008778
 	adds r1, r4, r0
@@ -962,7 +962,7 @@ _080F0D8C:
 	mov pc, r0
 	.align 2, 0
 _080F0DB8: .4byte 0x00000306
-_080F0DBC: .4byte gWindowConfig_81E70D4
+_080F0DBC: .4byte gWindowTemplate_81E70D4
 _080F0DC0: .4byte 0x00008778
 _080F0DC4: .4byte _080F0DC8
 	.align 2, 0
@@ -1141,7 +1141,7 @@ _080F0F10:
 	adds r4, r0
 	movs r0, 0x1F
 	ands r4, r0
-	ldr r0, _080F0F60 @ =gWindowConfig_81E70D4
+	ldr r0, _080F0F60 @ =gWindowTemplate_81E70D4
 	bl BasicInitMenuWindow
 	adds r3, r4, 0x1
 	movs r0, 0xC
@@ -1160,7 +1160,7 @@ _080F0F52:
 	.align 2, 0
 _080F0F58: .4byte 0x00000306
 _080F0F5C: .4byte 0x00008778
-_080F0F60: .4byte gWindowConfig_81E70D4
+_080F0F60: .4byte gWindowTemplate_81E70D4
 	thumb_func_end sub_80F0EF4
 
 	thumb_func_start sub_80F0F64
@@ -1260,7 +1260,7 @@ sub_80F0FFC: @ 80F0FFC
 	adds r0, r5, 0
 	movs r2, 0
 	bl GetMapSectionName
-	ldr r0, _080F1054 @ =gWindowConfig_81E710C
+	ldr r0, _080F1054 @ =gWindowTemplate_81E710C
 	bl BasicInitMenuWindow
 	adds r0, r5, 0
 	bl sub_80F19DC
@@ -1282,7 +1282,7 @@ sub_80F0FFC: @ 80F0FFC
 _080F1048: .4byte gUnknown_083DFEC4
 _080F104C: .4byte 0x00008788
 _080F1050: .4byte 0x0000ceea
-_080F1054: .4byte gWindowConfig_81E710C
+_080F1054: .4byte gWindowTemplate_81E710C
 _080F1058: .4byte 0x0000d138
 	thumb_func_end sub_80F0FFC
 
@@ -1357,17 +1357,17 @@ _080F10E8:
 _080F10FC: .4byte gUnknown_083DFEC4
 _080F1100: .4byte 0x0000d162
 _080F1104:
-	ldr r0, _080F110C @ =gWindowConfig_81E70B8
+	ldr r0, _080F110C @ =gWindowTemplate_81E70B8
 	bl SetUpWindowConfig
 	b _080F1218
 	.align 2, 0
-_080F110C: .4byte gWindowConfig_81E70B8
+_080F110C: .4byte gWindowTemplate_81E70B8
 _080F1110:
-	ldr r0, _080F1118 @ =gWindowConfig_81E70B8
+	ldr r0, _080F1118 @ =gWindowTemplate_81E70B8
 	bl MultistepInitMenuWindowBegin
 	b _080F1218
 	.align 2, 0
-_080F1118: .4byte gWindowConfig_81E70B8
+_080F1118: .4byte gWindowTemplate_81E70B8
 _080F111C:
 	bl MultistepInitMenuWindowContinue
 	cmp r0, 0
@@ -7663,7 +7663,7 @@ sub_80F4194: @ 80F4194
 	str r1, [r4, 0x4]
 	str r3, [r4, 0x8]
 	ldr r0, [r4, 0x8]
-	ldr r0, _080F42B4 @ =gWindowConfig_81E70F0
+	ldr r0, _080F42B4 @ =gWindowTemplate_81E70F0
 	adds r1, r6, 0
 	bl sub_8004E3C
 	movs r3, 0x88
@@ -7779,7 +7779,7 @@ _080F42A4: .4byte gUnknown_083DFEC8
 _080F42A8: .4byte 0x00001111
 _080F42AC: .4byte 0x040000d4
 _080F42B0: .4byte 0x81000140
-_080F42B4: .4byte gWindowConfig_81E70F0
+_080F42B4: .4byte gWindowTemplate_81E70F0
 _080F42B8: .4byte 0x81000030
 _080F42BC: .4byte 0x0fffffff
 _080F42C0: .4byte 0x80000040

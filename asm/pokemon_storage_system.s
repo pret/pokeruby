@@ -1640,7 +1640,7 @@ sub_80966F4: @ 80966F4
 	ldr r0, _08096778 @ =0x81000200
 	str r0, [r4, 0x8]
 	ldr r0, [r4, 0x8]
-	ldr r0, _0809677C @ =gWindowConfig_81E6D38
+	ldr r0, _0809677C @ =gWindowTemplate_81E6D38
 	adds r1, r5, 0
 	mov r2, r8
 	bl sub_8004E3C
@@ -1662,7 +1662,7 @@ _0809676C: .4byte gUnknown_083B6DB8
 _08096770: .4byte 0x00001111
 _08096774: .4byte 0x040000d4
 _08096778: .4byte 0x81000200
-_0809677C: .4byte gWindowConfig_81E6D38
+_0809677C: .4byte gWindowTemplate_81E6D38
 _08096780: .4byte 0x80000200
 	thumb_func_end sub_80966F4
 
@@ -1846,18 +1846,18 @@ _080968D4:
 	bl sub_8096804
 	b _0809697A
 _080968E8:
-	ldr r0, _080968F0 @ =gWindowConfig_81E6D00
+	ldr r0, _080968F0 @ =gWindowTemplate_81E6D00
 	bl SetUpWindowConfig
 	b _0809697A
 	.align 2, 0
-_080968F0: .4byte gWindowConfig_81E6D00
+_080968F0: .4byte gWindowTemplate_81E6D00
 _080968F4:
-	ldr r0, _08096900 @ =gWindowConfig_81E6D00
+	ldr r0, _08096900 @ =gWindowTemplate_81E6D00
 	bl InitMenuWindow
 	bl Menu_EraseScreen
 	b _0809697A
 	.align 2, 0
-_08096900: .4byte gWindowConfig_81E6D00
+_08096900: .4byte gWindowTemplate_81E6D00
 _08096904:
 	bl sub_80967DC
 	bl sub_8096848
@@ -1985,18 +1985,18 @@ _08096A28: .4byte gSharedMem
 _08096A2C: .4byte gUnknown_0203847D
 _08096A30: .4byte gUnknown_0203847F
 _08096A34:
-	ldr r0, _08096A3C @ =gWindowConfig_81E6D00
+	ldr r0, _08096A3C @ =gWindowTemplate_81E6D00
 	bl SetUpWindowConfig
 	b _08096AD8
 	.align 2, 0
-_08096A3C: .4byte gWindowConfig_81E6D00
+_08096A3C: .4byte gWindowTemplate_81E6D00
 _08096A40:
-	ldr r0, _08096A4C @ =gWindowConfig_81E6D00
+	ldr r0, _08096A4C @ =gWindowTemplate_81E6D00
 	bl InitMenuWindow
 	bl Menu_EraseScreen
 	b _08096AD8
 	.align 2, 0
-_08096A4C: .4byte gWindowConfig_81E6D00
+_08096A4C: .4byte gWindowTemplate_81E6D00
 _08096A50:
 	bl sub_80967DC
 	b _08096AD8
@@ -8745,7 +8745,7 @@ sub_809A1BC: @ 809A1BC
 	ldr r0, _0809A230 @ =0x81000100
 	str r0, [r4, 0x8]
 	ldr r0, [r4, 0x8]
-	ldr r0, _0809A234 @ =gWindowConfig_81E6D38
+	ldr r0, _0809A234 @ =gWindowTemplate_81E6D38
 	adds r1, r5, 0
 	str r3, [sp, 0x4]
 	bl sub_8004E3C
@@ -8785,7 +8785,7 @@ sub_809A1BC: @ 809A1BC
 _0809A228: .4byte gUnknown_083B6DB8
 _0809A22C: .4byte 0x040000d4
 _0809A230: .4byte 0x81000100
-_0809A234: .4byte gWindowConfig_81E6D38
+_0809A234: .4byte gWindowTemplate_81E6D38
 _0809A238: .4byte 0x80000040
 	thumb_func_end sub_809A1BC
 

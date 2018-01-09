@@ -236,8 +236,8 @@ static void LoadWallClockGraphics(void)
     FreeAllSpritePalettes();
     LoadCompressedObjectPic(&gUnknown_083F7A90[0]);
     LoadSpritePalettes(gUnknown_083F7AA0);
-    SetUpWindowConfig(&gWindowConfig_81E6C3C);
-    InitMenuWindow(&gWindowConfig_81E6CE4);
+    SetUpWindowConfig(&gWindowTemplate_81E6C3C);
+    InitMenuWindow(&gWindowTemplate_81E6CE4);
 }
 
 static void WallClockInit(void)

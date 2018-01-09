@@ -275,15 +275,15 @@ static bool8 sub_810B6C0(void)
             gMain.state++;
             break;
         case  5:
-            SetUpWindowConfig(&gWindowConfig_81E6E34);
+            SetUpWindowConfig(&gWindowTemplate_81E6E34);
             gMain.state++;
             break;
         case  6:
-            SetUpWindowConfig(&gWindowConfig_81E6E50);
+            SetUpWindowConfig(&gWindowTemplate_81E6E50);
             gMain.state++;
             break;
         case  7:
-            MultistepInitMenuWindowBegin(&gWindowConfig_81E6E34);
+            MultistepInitMenuWindowBegin(&gWindowTemplate_81E6E34);
             gMain.state++;
             break;
         case  8:
@@ -293,7 +293,7 @@ static bool8 sub_810B6C0(void)
             }
             break;
         case  9:
-            MultistepInitMenuWindowBegin(&gWindowConfig_81E6E50);
+            MultistepInitMenuWindowBegin(&gWindowTemplate_81E6E50);
             gMain.state++;
             break;
         case 10:
@@ -445,13 +445,13 @@ void debug_sub_8120F98(void)
 
 static void sub_810BB0C(void)
 {
-    BasicInitMenuWindow(&gWindowConfig_81E6E34);
+    BasicInitMenuWindow(&gWindowTemplate_81E6E34);
     sub_8072BD8(ItemId_GetItem(ITEM_POKEBLOCK_CASE)->name, 2, 1, 0x48);
 }
 
 static void sub_810BB30(void)
 {
-    BasicInitMenuWindow(&gWindowConfig_81E6E34);
+    BasicInitMenuWindow(&gWindowTemplate_81E6E34);
     Menu_PrintText(gContestStatsText_Spicy,   2, 13);
     Menu_PrintText(gContestStatsText_Dry,     2, 15);
     Menu_PrintText(gContestStatsText_Sweet,   2, 17);
@@ -464,7 +464,7 @@ static void sub_810BB88(u8 a0)
     u8 i;
     u8 y;
     u8 *buf;
-    BasicInitMenuWindow(&gWindowConfig_81E6E34);
+    BasicInitMenuWindow(&gWindowTemplate_81E6E34);
     for (i=a0; i<=a0+8; i++)
     {
         y = (i - a0) << 1;
@@ -596,7 +596,7 @@ static void sub_810BDAC(bool8 flag)
             gBGTilemapBuffers[2][v0 + 32] = 15;
         }
     }
-    BasicInitMenuWindow(&gWindowConfig_81E6E34);
+    BasicInitMenuWindow(&gWindowTemplate_81E6E34);
     if (gUnknown_02039248.unk0 + gUnknown_02039248.unk1 != gUnknown_02039248.unk2)
     {
         sub_8072C14(gStringVar1, sub_810C9E8(&gSaveBlock1.pokeblocks[gUnknown_02039248.unk0 + gUnknown_02039248.unk1]), 16, 1);
@@ -812,7 +812,7 @@ static void sub_810C368(u8 taskId)
         v0 = 2;
     sub_80F98A4(0);
     sub_80F98A4(1);
-    BasicInitMenuWindow(&gWindowConfig_81E6E50);
+    BasicInitMenuWindow(&gWindowTemplate_81E6E50);
     Menu_DrawStdWindowFrame(7, v0 + 4, 13, 11);
     PrintMenuItemsReordered(8, v0 + 5, gUnknown_0203924C, gUnknown_083F7EF4, gUnknown_03000758);
     InitMenu(0, 8, v0 + 5, gUnknown_0203924C, 0, 5);
@@ -868,7 +868,7 @@ static void sub_810C508(u8 taskId)
 
 static void sub_810C540(u8 taskId)
 {
-    BasicInitMenuWindow(&gWindowConfig_81E6E50);
+    BasicInitMenuWindow(&gWindowTemplate_81E6E50);
     HandleDestroyMenuCursors();
     Menu_EraseWindowRect(7, 4, 13, 11);
     StringCopy(gStringVar1, gPokeblockNames[gSaveBlock1.pokeblocks[gUnknown_02039248.unk0 + gUnknown_02039248.unk1].color]);
@@ -906,7 +906,7 @@ static void sub_810C668(u8 taskId)
     {
         sub_80F979C(1, 0);
     }
-    BasicInitMenuWindow(&gWindowConfig_81E6E50);
+    BasicInitMenuWindow(&gWindowTemplate_81E6E50);
     Menu_EraseWindowRect(7, 6, 13, 11);
     Menu_EraseWindowRect(0, 14, 29, 19);
     gTasks[taskId].func = sub_810BF7C;
@@ -922,7 +922,7 @@ static void sub_810C6DC(u8 taskId)
 
 static void sub_810C704(u8 taskId)
 {
-    BasicInitMenuWindow(&gWindowConfig_81E6E34);
+    BasicInitMenuWindow(&gWindowTemplate_81E6E34);
     sub_810BC84(gUnknown_02039248.unk1);
     sub_80F979C(1, 1);
     gTasks[taskId].func = sub_810C6DC;

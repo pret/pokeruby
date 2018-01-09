@@ -20,7 +20,7 @@ void InitFieldMessageBox(void)
 {
     sMessageBoxMode = FIELD_MESSAGE_BOX_HIDDEN;
     TextWindow_SetDlgFrameBaseTileNum(gMenuTextWindowContentTileOffset);
-    Text_InitWindowWithTemplate(&gFieldMessageBoxWindow, &gWindowConfig_81E6CE4);
+    Text_InitWindowWithTemplate(&gFieldMessageBoxWindow, &gWindowTemplate_81E6CE4);
 }
 
 static void Task_FieldMessageBox(u8 taskId)

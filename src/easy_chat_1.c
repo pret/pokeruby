@@ -16,8 +16,8 @@
 #include "strings.h"
 #include "unknown_task.h"
 
-extern const struct WindowTemplate gWindowConfig_81E6D54;
-extern const struct WindowTemplate gWindowConfig_81E6DA8;
+extern const struct WindowTemplate gWindowTemplate_81E6D54;
+extern const struct WindowTemplate gWindowTemplate_81E6DA8;
 
 extern void sub_80546B8(void);
 
@@ -305,11 +305,11 @@ void sub_80E62F8(void)
         FreeAllSpritePalettes();
         break;
     case 1:
-        SetUpWindowConfig(&gWindowConfig_81E6DA8);
+        SetUpWindowConfig(&gWindowTemplate_81E6DA8);
         break;
     case 2:
-        InitMenuWindow(&gWindowConfig_81E6D54);
-        InitMenuWindow(&gWindowConfig_81E6DA8);
+        InitMenuWindow(&gWindowTemplate_81E6D54);
+        InitMenuWindow(&gWindowTemplate_81E6DA8);
         Menu_EraseScreen();
         break;
     case 3:

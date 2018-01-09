@@ -471,8 +471,8 @@ static void CB2_EggHatch_0(void)
         gSpecialVar_0x8005 = GetCurrentMapMusic();
         break;
     case 1:
-        SetUpWindowConfig(&gWindowConfig_81E6F84);
-        Text_InitWindowWithTemplate(&gEggHatchData->window, &gWindowConfig_81E6F84);
+        SetUpWindowConfig(&gWindowTemplate_81E6F84);
+        Text_InitWindowWithTemplate(&gEggHatchData->window, &gWindowTemplate_81E6F84);
         gEggHatchData->tileDataStartOffset = TextWindow_SetBaseTileNum(20);
         TextWindow_LoadStdFrameGraphics(&gEggHatchData->window);
         gMain.state++;

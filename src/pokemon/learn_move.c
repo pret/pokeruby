@@ -25,8 +25,8 @@ extern u16 gSpecialVar_0x8004;
 extern u16 gSpecialVar_0x8005;
 extern u8 gTileBuffer[];
 
-extern const struct WindowTemplate gWindowConfig_81E6CE4;
-extern const struct WindowTemplate gWindowConfig_81E7240;
+extern const struct WindowTemplate gWindowTemplate_81E6CE4;
+extern const struct WindowTemplate gWindowTemplate_81E7240;
 extern const u8 *const gContestEffectStrings[];
 extern const u8 *const gMoveDescriptions[];
 extern const u8 gTypeNames[][7];
@@ -268,12 +268,12 @@ void CB2_InitLearnMove(void)
     sub_8133558();
     SetVBlankCallback(VBlankCB_LearnMove);
 
-    SetUpWindowConfig(&gWindowConfig_81E7240);
-    InitMenuWindow(&gWindowConfig_81E7240);
+    SetUpWindowConfig(&gWindowTemplate_81E7240);
+    InitMenuWindow(&gWindowTemplate_81E7240);
     Menu_EraseScreen();
 
-    SetUpWindowConfig(&gWindowConfig_81E6CE4);
-    InitMenuWindow(&gWindowConfig_81E6CE4);
+    SetUpWindowConfig(&gWindowTemplate_81E6CE4);
+    InitMenuWindow(&gWindowTemplate_81E6CE4);
     Menu_EraseScreen();
 
     REG_BG0VOFS = 0;
@@ -302,12 +302,12 @@ void sub_81327A4(void)
     sLearnMoveStruct->unk2C6 = gSpecialVar_0x8005;
     SetVBlankCallback(VBlankCB_LearnMove);
 
-    SetUpWindowConfig(&gWindowConfig_81E7240);
-    InitMenuWindow(&gWindowConfig_81E7240);
+    SetUpWindowConfig(&gWindowTemplate_81E7240);
+    InitMenuWindow(&gWindowTemplate_81E7240);
     Menu_EraseScreen();
 
-    SetUpWindowConfig(&gWindowConfig_81E6CE4);
-    InitMenuWindow(&gWindowConfig_81E6CE4);
+    SetUpWindowConfig(&gWindowTemplate_81E6CE4);
+    InitMenuWindow(&gWindowTemplate_81E6CE4);
     Menu_EraseScreen();
 
     REG_DISPCNT = 0x1340;
@@ -633,7 +633,7 @@ void DrawLearnMoveMenuWindow(void)
 {
     u32 i;
 
-    BasicInitMenuWindow(&gWindowConfig_81E7240);
+    BasicInitMenuWindow(&gWindowTemplate_81E7240);
     for (i = 0; i < 4; i++)
     {
         Menu_DrawStdWindowFrame(
@@ -642,7 +642,7 @@ void DrawLearnMoveMenuWindow(void)
           gUnknown_08402CF8[i][2],
           gUnknown_08402CF8[i][3]);
     }
-    BasicInitMenuWindow(&gWindowConfig_81E6CE4);
+    BasicInitMenuWindow(&gWindowTemplate_81E6CE4);
 }
 
 void sub_8133030(bool8 a)
