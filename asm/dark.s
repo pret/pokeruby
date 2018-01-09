@@ -1940,7 +1940,7 @@ _080E0E8A:
 	beq _080E0EB6
 _080E0E90:
 	adds r0, r4, 0
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0

@@ -795,7 +795,7 @@ void sub_80324F8(struct Pokemon *pkmn, u8 b)
 
 void BattleMusicStop(void)
 {
-    u8 r4 = GetBankByPlayerAI(0);
+    u8 r4 = GetBankByIdentity(0);
 
     ewram17800[r4].unk0_1 = 0;
     if (IsDoubleBattle())
@@ -815,8 +815,8 @@ void sub_8032638(void)
 {
     if (gMain.inBattle)
     {
-        u8 r8 = GetBankByPlayerAI(0);
-        u8 r9 = GetBankByPlayerAI(2);
+        u8 r8 = GetBankByIdentity(0);
+        u8 r9 = GetBankByIdentity(2);
         u8 r4 = pokemon_order_func(gBattlePartyID[r8]);
         u8 r5 = pokemon_order_func(gBattlePartyID[r9]);
 
@@ -857,12 +857,12 @@ void sub_80327CC(void)
     u8 r5;
 
     LoadCompressedObjectPic(&gUnknown_081FAF24);
-    r5 = GetBankByPlayerAI(1);
+    r5 = GetBankByIdentity(1);
     ewram17810[r5].unk7 = CreateSprite(&gSpriteTemplate_81FAF34, GetBankPosition(r5, 0), GetBankPosition(r5, 1) + 32, 0xC8);
     gSprites[ewram17810[r5].unk7].data[0] = r5;
     if (IsDoubleBattle())
     {
-        r5 = GetBankByPlayerAI(3);
+        r5 = GetBankByIdentity(3);
         ewram17810[r5].unk7 = CreateSprite(&gSpriteTemplate_81FAF34, GetBankPosition(r5, 0), GetBankPosition(r5, 1) + 32, 0xC8);
         gSprites[ewram17810[r5].unk7].data[0] = r5;
     }

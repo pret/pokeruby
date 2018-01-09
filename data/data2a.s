@@ -946,32 +946,32 @@ gSpriteAffineAnimTable_81F971C:: @ 81F971C
 
 	.align 2
 gUnknown_081FA640:: @ 81FA640
-	.4byte sub_8013FE8
-	.4byte sub_80147A0
-	.4byte sub_80146F4
-	.4byte sub_8014BF4
-	.4byte sub_8014D50
-	.4byte sub_8014D98
-	.4byte sub_8014DF8
-	.4byte sub_8014EBC
-	.4byte bs8_exit_by_flight
-	.4byte sub_8014FBC
+	.4byte HandleAction_UseMove
+	.4byte HandleAction_UseItem
+	.4byte HandleAction_Switch
+	.4byte HandleAction_Run
+	.4byte HandleAction_WatchesCarefully
+	.4byte HandleAction_SafariZoneBallThrow
+	.4byte HandleAction_ThrowPokeblock
+	.4byte HandleAction_GoNear
+	.4byte HandleAction_SafriZoneRun
+	.4byte HandleAction_Action9
 	.4byte sub_801B594
-	.4byte bsB_exit_by_move
-	.4byte bsC_8016D70
-	.4byte sub_8015060
+	.4byte HandleAction_Action11
+	.4byte HandleAction_ActionFinished
+	.4byte HandleAction_NothingIsFainted
 
 	.align 2
 gUnknown_081FA678:: @ 81FA678
 	.4byte bc_8013B1C
-	.4byte sub_8013998
-	.4byte sub_8013B64
-	.4byte sub_8013B64
-	.4byte sub_8013BDC
-	.4byte sub_8013C9C
-	.4byte sub_8013C48
-	.4byte sub_8013C9C
-	.4byte sub_8013C9C
+	.4byte HandleEndTurn_BattleWon
+	.4byte HandleEndTurn_BattleLost
+	.4byte HandleEndTurn_BattleLost
+	.4byte HandleEndTurn_RanFromBattle
+	.4byte HandleEndTurn_FinishBattle
+	.4byte HandleEndTurn_MonFled
+	.4byte HandleEndTurn_FinishBattle
+	.4byte HandleEndTurn_FinishBattle
 
 gStatusConditionString_PoisonJpn:: @ 81FA69C
 	.string "どく$$$$$$"

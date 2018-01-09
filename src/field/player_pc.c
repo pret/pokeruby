@@ -866,58 +866,48 @@ static void ItemStorage_DrawItemList(u8 taskId)
     u16 i;
     u16 yCoord = 0;
 
-    // r5 is i and is unsigned 16-bit.
-
-    for(i = ITEMS_ABOVE_TOP; i < ITEMS_ABOVE_TOP + NUM_PAGE_ITEMS; i++)
+    for (i = ITEMS_ABOVE_TOP; i < ITEMS_ABOVE_TOP + NUM_PAGE_ITEMS; i++)
     {
         yCoord = (i - ITEMS_ABOVE_TOP) * 2;
 
-        if(i != NUM_ITEMS)
+        if (i == NUM_ITEMS)
         {
-            tempArg = 0;
-
-            if(SWITCH_MODE_ACTIVE != FALSE && i == SWAP_ITEM_INDEX)
-                tempArg = 1;
-
-            switch(GetPocketByItemId(gSaveBlock1.pcItems[i].itemId) - 1)
-            {
-                case 0:
-                case 1:
-                case 3:
-                    ItemStorage_DrawNormalItemEntry((struct ItemSlot *)&gSaveBlock1.pcItems[i], yCoord + 2, tempArg);
-                    break;
-                case 4:
-                    ItemStorage_DrawKeyItemEntry((struct ItemSlot *)&gSaveBlock1.pcItems[i], yCoord + 2, tempArg);
-                    break;
-                case 2:
-                    ItemStorage_DrawTMHMEntry((struct ItemSlot *)&gSaveBlock1.pcItems[i], yCoord + 2, tempArg);
-                    break;
-            }
+            sub_8072A18(gOtherText_CancelNoTerminator, 0x80, (yCoord + 2) * 8, 0x68, 1);
+            break;
         }
         else
         {
-            goto weirdCase; // what???
+            tempArg = 0;
+
+            if (SWITCH_MODE_ACTIVE != FALSE && i == SWAP_ITEM_INDEX)
+                tempArg = 1;
+
+            switch (GetPocketByItemId(gSaveBlock1.pcItems[i].itemId) - 1)
+            {
+            case 0:
+            case 1:
+            case 3:
+                ItemStorage_DrawNormalItemEntry((struct ItemSlot *)&gSaveBlock1.pcItems[i], yCoord + 2, tempArg);
+                break;
+            case 4:
+                ItemStorage_DrawKeyItemEntry((struct ItemSlot *)&gSaveBlock1.pcItems[i], yCoord + 2, tempArg);
+                break;
+            case 2:
+                ItemStorage_DrawTMHMEntry((struct ItemSlot *)&gSaveBlock1.pcItems[i], yCoord + 2, tempArg);
+                break;
+            }
         }
     }
 
-beforeLabel:
-    if(i - ITEMS_ABOVE_TOP < 8)
+    if (i - ITEMS_ABOVE_TOP < 8)
         MenuFillWindowRectWithBlankTile(16, yCoord + 4, 0x1C, 0x12);
 
-    switch(ITEMS_ABOVE_TOP)
-    {
-    default:
+    if (ITEMS_ABOVE_TOP != 0)
         CreateVerticalScrollIndicators(0, 0xB8, 8);
-        break;
-weirdCase:
-        sub_8072A18(gOtherText_CancelNoTerminator, 0x80, (yCoord + 2) * 8, 0x68, 1);
-        goto beforeLabel;
-    case 0:
+    else
         DestroyVerticalScrollIndicator(0);
-        break;
-    }
 
-    if(ITEMS_ABOVE_TOP + NUM_PAGE_ITEMS <= NUM_ITEMS)
+    if (ITEMS_ABOVE_TOP + NUM_PAGE_ITEMS <= NUM_ITEMS)
         CreateVerticalScrollIndicators(1, 0xB8, 0x98);
     else
         DestroyVerticalScrollIndicator(1);
@@ -1039,55 +1029,37 @@ static void Mailbox_UpdateMailList(void)
     }
 }
 
-// WWHHHHHYYYYYYYY SOMEBODY PLEASE FIX THIS
 static void Mailbox_DrawMailList(u8 taskId) // taskId is unused
 {
     u16 yCoord = 0;
-    u16 i = eMailboxInfo.itemsAbove;
-    register struct MailboxStruct *tempMailbox asm("r1") = &eMailboxInfo;
-    register struct MailboxStruct *mailbox asm("r6");
+    u16 i;
 
-    if(i < i + tempMailbox->pageItems)
+    for (i = eMailboxInfo.itemsAbove; i < eMailboxInfo.itemsAbove + eMailboxInfo.pageItems; i++)
     {
-        mailbox = tempMailbox;
-        goto forJump;
-    for(; i < mailbox->itemsAbove + mailbox->pageItems; i++)
-    {
-    forJump:
-        yCoord = (i - mailbox->itemsAbove) * 2;
+        yCoord = (i - eMailboxInfo.itemsAbove) * 2;
         MenuFillWindowRectWithBlankTile(0x15, yCoord + 2, 0x1C, yCoord + 3);
-
-        if(i != mailbox->count)
+        if (i == eMailboxInfo.count)
+        {
+            MenuPrint(gOtherText_CancelNoTerminator, 0x15, yCoord + 2);
+            break;
+        }
+        else
         {
             StringCopy(gStringVar1, gSaveBlock1.mail[i + 6].playerName);
             SanitizeNameString(gStringVar1);
             MenuPrint(gStringVar1, 0x15, yCoord + 2);
         }
-        else
-        {
-            goto weirdCase; // again, what???
-        }
-    }
     }
 
-beforeLabel:
-    if(i - eMailboxInfo.itemsAbove != 8)
+    if (i - eMailboxInfo.itemsAbove != 8)
         MenuFillWindowRectWithBlankTile(0x15, yCoord + 4, 0x1C, 0x12);
 
-    switch(eMailboxInfo.itemsAbove)
-    {
-    default:
+    if (eMailboxInfo.itemsAbove != 0)
         CreateVerticalScrollIndicators(0, 0xC8, 8);
-        break;
-weirdCase:
-        MenuPrint(gOtherText_CancelNoTerminator, 0x15, yCoord + 2);
-        goto beforeLabel;
-    case 0:
+    else
         DestroyVerticalScrollIndicator(0);
-        break;
-    }
 
-    if(eMailboxInfo.itemsAbove + eMailboxInfo.pageItems <= eMailboxInfo.count)
+    if (eMailboxInfo.itemsAbove + eMailboxInfo.pageItems <= eMailboxInfo.count)
         CreateVerticalScrollIndicators(1, 0xC8, 0x98);
     else
         DestroyVerticalScrollIndicator(1);

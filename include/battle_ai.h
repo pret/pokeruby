@@ -24,5 +24,6 @@ void sub_810745C(void);
 void AIStackPushVar(u8 *);
 u8 AIStackPop(void);
 void BattleAI_HandleItemUseBeforeAISetup(void);
+void RecordAbilityBattle(u8 a, u8 b);
 
 #endif
