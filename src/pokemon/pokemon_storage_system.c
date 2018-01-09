@@ -96,7 +96,10 @@ struct PokemonStorageSystemData {
     u8 filler_08b0[2];
     s16 unk_08b2;
     u16 unk_08b4;
-    u8 filler_08b6[0x93c];
+    u8 filler_08b6[0x4a8];
+    s16 unk_0d5e;
+    s16 unk_0d60;
+    u8 filler_0d62[0x490];
     u16 unk_11f2;
     u8 filler_11f4[2];
     u8 unk_11f6;
@@ -145,12 +148,16 @@ void sub_8097788(void);
 void sub_80977E4(void);
 void sub_8097858(void);
 void sub_809789C(void);
+void sub_8097974(void);
+void sub_8097A64(void);
+void sub_8097B44(void);
 void sub_8097BA0(void);
 void sub_8097CC0(void);
 void sub_8097DE0(void);
 void sub_8097E44(void);
 void sub_8097E70(void);
 void BoxSetMosaic(void);
+void sub_809801C(void);
 void sub_8098400(void);
 void add_to_c3_somehow(void);
 bool8 sub_80985CC(void);
@@ -159,11 +166,12 @@ void sub_8098710(void);
 void sub_8098734(void);
 void sub_80987DC(void);
 void sub_809880C(void);
-void sub_809801C(void);
 bool8 sub_8098830(void);
 void PrintStorageActionText(u8 index);
 void sub_8098A38(u8);
 void sub_8098A5C(void);
+void sub_8098A80(void);
+void sub_8098AA8(u8 a0);
 void sub_8098B48(void);
 void sub_8099310(void);
 bool8 sub_8099374(void);
@@ -172,6 +180,9 @@ bool8 sub_8099990(void);
 void sub_8099BF8(u8 a0);
 void sub_8099C70(u8 whichBox);
 bool8 sub_8099D34(void);
+void sub_8099DCC(u8 a0);
+bool8 sub_8099E08(void);
+void sub_809A860(u8 a0);
 struct Sprite *sub_809A9A0(u16 a0, u16 a1, u8 a2, u8 a3, u8 a4);
 void sub_809AA24(void);
 void sub_809AA98(void);
@@ -1837,6 +1848,99 @@ void sub_8097858(void)
             if (!sub_8099374())
             {
                 sub_80987DC();
+                SetPSSCallback(sub_8096C84);
+            }
+            break;
+    }
+}
+
+void sub_809789C(void)
+{
+    switch (ePokemonStorageSystem.unk_0004)
+    {
+        case 0:
+            PrintStorageActionText(PC_TEXT_WHAT_YOU_DO);
+            sub_809CE84();
+            ePokemonStorageSystem.unk_0004++;
+            break;
+        case 1:
+            switch (sub_809CF30())
+            {
+                case -1:
+                case  0:
+                    sub_809A860(1);
+                    sub_8098A5C();
+                    SetPSSCallback(sub_8096C84);
+                    break;
+                case 11:
+                    PlaySE(SE_SELECT);
+                    SetPSSCallback(sub_8097B44);
+                    break;
+                case 10:
+                    PlaySE(SE_SELECT);
+                    sub_8098A5C();
+                    SetPSSCallback(sub_8097974);
+                    break;
+                case 9:
+                    PlaySE(SE_SELECT);
+                    sub_8098A5C();
+                    SetPSSCallback(sub_8097A64);
+                    break;
+            }
+            break;
+    }
+}
+
+void sub_8097974(void)
+{
+    switch (ePokemonStorageSystem.unk_0004)
+    {
+        case 0:
+            sub_8098A80();
+            PrintStorageActionText(PC_TEXT_PICK_A_THEME);
+            ePokemonStorageSystem.unk_0004++;
+            break;
+        case 1:
+            ePokemonStorageSystem.unk_0d5e = sub_809CF30();
+            switch (ePokemonStorageSystem.unk_0d5e)
+            {
+                case -1:
+                    sub_809A860(1);
+                    sub_8098A5C();
+                    SetPSSCallback(sub_8096C84);
+                    break;
+                case 12 ... 15:
+                    PlaySE(SE_SELECT);
+                    ePokemonStorageSystem.unk_0d5e -= 12;
+                    sub_8098AA8(ePokemonStorageSystem.unk_0d5e);
+                    PrintStorageActionText(PC_TEXT_PICK_A_WALLPAPER);
+                    ePokemonStorageSystem.unk_0004++;
+                    break;
+            }
+            break;
+        case 2:
+            ePokemonStorageSystem.unk_0d60 = sub_809CF30();
+            switch (ePokemonStorageSystem.unk_0d60)
+            {
+                case -1:
+                    sub_8098A5C();
+                    ePokemonStorageSystem.unk_0004 = 0;
+                    break;
+                case -2:
+                    break;
+                default:
+                    PlaySE(SE_SELECT);
+                    sub_8098A5C();
+                    ePokemonStorageSystem.unk_0d60 -= 16;
+                    sub_8099DCC(ePokemonStorageSystem.unk_0d60);
+                    ePokemonStorageSystem.unk_0004++;
+                    break;
+            }
+            break;
+        case 3:
+            if (!sub_8099E08())
+            {
+                sub_809A860(1);
                 SetPSSCallback(sub_8096C84);
             }
             break;
