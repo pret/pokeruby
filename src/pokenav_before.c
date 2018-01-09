@@ -102,7 +102,6 @@ extern const u16 gPokenavConditionSearch2_Pal[];
 extern const u8 gUnknown_083E0334[];
 extern const u16 gUnknown_083E02B4[];
 extern const u8 gPokenavConditionSearch2_Gfx[];
-extern const u8 gUnknownPalette_81E6692[];
 extern const u8 gUnknown_083E0254[];
 extern const u8 gUnknown_08E9FEB4[];
 extern const u8 gUnknown_083E01AC[];
