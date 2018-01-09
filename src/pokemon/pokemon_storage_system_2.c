@@ -1,7 +1,10 @@
 
 // Includes
 #include "global.h"
+#include "decompress.h"
 #include "constants/songs.h"
+#include "constants/species.h"
+#include "data2.h"
 #include "sound.h"
 #include "ewram.h"
 #include "task.h"
@@ -1684,6 +1687,61 @@ __attribute__((naked)) void sub_80980D4(void)
                     "_080981EC: .4byte 0x0000dac7");
 }
 #endif
+
+void sub_80981F0(u16 species, u32 pid)
+{
+    if (gPokemonStorageSystemPtr->unk_2700)
+    {
+        if (species != SPECIES_NONE)
+        {
+            HandleLoadSpecialPokePic(gMonFrontPicTable + species, gMonFrontPicCoords[species].coords, 1, (intptr_t)gPokemonStorageSystemPtr->unk_4784, gPokemonStorageSystemPtr->unk_2784, species, pid);
+            LZ77UnCompWram(gPokemonStorageSystemPtr->unk_11e8, gPokemonStorageSystemPtr->unk_2704);
+            CpuCopy32(gPokemonStorageSystemPtr->unk_2784, gPokemonStorageSystemPtr->unk_26fc, 0x800);
+            LoadPalette(gPokemonStorageSystemPtr->unk_2704, gPokemonStorageSystemPtr->unk_26fa, 0x20);
+            gPokemonStorageSystemPtr->unk_2700->invisible = FALSE;
+        }
+        else
+        {
+            gPokemonStorageSystemPtr->unk_2700->invisible = TRUE;
+        }
+    }
+}
+
+void sub_80982B4(void)
+{
+    if (gPokemonStorageSystemPtr->unk_11f0)
+    {
+        sub_80F7A10(gPokemonStorageSystemPtr->unk_11f7, gPokemonStorageSystemPtr->unk_12b8);
+        gPokemonStorageSystemPtr->unk_12ac->invisible = FALSE;
+    }
+    else
+    {
+        gPokemonStorageSystemPtr->unk_12ac->invisible = TRUE;
+    }
+    MenuZeroFillWindowRect(0, 11, 9, 17);
+    MenuPrint(gPokemonStorageSystemPtr->unk_127a, 1, 16);
+    MenuPrint(gPokemonStorageSystemPtr->unk_120f, 1, 11);
+    MenuPrint(gPokemonStorageSystemPtr->unk_1234, 0, 13);
+    MenuPrint(gPokemonStorageSystemPtr->unk_1259, 1, 15);
+}
+
+void sub_8098350(void)
+{
+    u16 i;
+
+    if (gPokemonStorageSystemPtr->unk_11f0)
+    {
+        sub_809D034(BG_SCREEN_ADDR(15), 1, 0, gUnknown_02039760, 1, 0, 8, 2);
+        for (i = 0; i < 2; i++)
+            StartSpriteAnimIfDifferent(gPokemonStorageSystemPtr->unk_12b0[i], i * 2 + 1);
+    }
+    else
+    {
+        sub_809D034(BG_SCREEN_ADDR(15), 1, 0, gUnknown_02039760, 10, 0, 8, 2);
+        for (i = 0; i < 2; i++)
+            StartSpriteAnim(gPokemonStorageSystemPtr->unk_12b0[i], i * 2);
+    }
+}
 
 extern const struct StorageAction gPCStorageActionTexts[];
 

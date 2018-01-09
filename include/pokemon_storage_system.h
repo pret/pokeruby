@@ -85,7 +85,8 @@ struct PokemonStorageSystemData {
     u8 filler_08b6[0x4a8];
     s16 unk_0d5e;
     s16 unk_0d60;
-    u8 filler_0d62[0x48a];
+    u8 filler_0d62[0x486];
+    u8 *unk_11e8;
     u32 unk_11ec;
     u16 unk_11f0;
     u16 unk_11f2;
@@ -94,7 +95,11 @@ struct PokemonStorageSystemData {
     u8 unk_11f7;
     u8 unk_11f8;
     u8 unk_11f9;
-    u8 unk_11fa[0xb2];
+    u8 unk_11fa[0x15];
+    u8 unk_120f[0x25];
+    u8 unk_1234[0x25];
+    u8 unk_1259[0x21];
+    u8 unk_127a[0x32];
     struct Sprite *unk_12ac;
     struct Sprite *unk_12b0[2];
     u16 *unk_12b8;
@@ -114,6 +119,8 @@ struct PokemonStorageSystemData {
     u16 unk_2704[0x10];
     u8 filler_2724[0x60];
     u8 unk_2784[0x800];
+    u8 filler_2f84[0x1800];
+    u8 unk_4784[0x800];
 };
 
 extern EWRAM_DATA u16 gUnknown_02039760[0x600];
