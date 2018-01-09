@@ -238,8 +238,8 @@ void LinkTestScreen(void)
     FreeAllSpritePalettes();
     ResetTasks();
     SetVBlankCallback(VBlankCB_LinkTest);
-    SetUpWindowConfig(&gWindowConfig_81E6CE4);
-    InitMenuWindow((struct WindowConfig *)&gWindowConfig_81E6CE4);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E6CE4);
+    InitMenuWindow((struct WindowTemplate *)&gWindowTemplate_81E6CE4);
     ResetBlockSend();
     gLinkType = 0x1111;
     OpenLink();
@@ -1236,9 +1236,9 @@ void CB2_LinkError(void)
     FillPalette(0, 0, 2);
     ResetTasks();
     SetVBlankCallback(VBlankCB_LinkTest);
-    SetUpWindowConfig(&gWindowConfig_81E7198);
-    InitMenuWindow((struct WindowConfig *)&gWindowConfig_81E7198);
-    MenuZeroFillScreen();
+    Text_LoadWindowTemplate(&gWindowTemplate_81E7198);
+    InitMenuWindow((struct WindowTemplate *)&gWindowTemplate_81E7198);
+    Menu_EraseScreen();
     REG_BLDALPHA = 0;
     REG_BG0VOFS = 0;
     REG_BG0HOFS = 0;
@@ -1260,7 +1260,7 @@ static void CB2_PrintErrorMessage(void)
     switch (gMain.state)
     {
     case 0:
-        MenuPrint_PixelCoords(gMultiText_LinkError, 20, 56, 1);
+        Menu_PrintTextPixelCoords(gMultiText_LinkError, 20, 56, 1);
         break;
     case 30:
     case 60:

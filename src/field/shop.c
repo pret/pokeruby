@@ -84,14 +84,14 @@ u8 CreateShopMenu(u8 martType)
     if (martType == MART_TYPE_0)
     {
         gMartInfo.numChoices = 2;
-        MenuDrawTextWindow(0, 0, 10, 7);
-        PrintMenuItemsReordered(1, 1, 3, sBuySellQuitMenuActions, gUnknown_083CC6E8);
+        Menu_DrawStdWindowFrame(0, 0, 10, 7);
+        Menu_PrintItemsReordered(1, 1, 3, sBuySellQuitMenuActions, gUnknown_083CC6E8);
     }
     else
     {
         gMartInfo.numChoices = 1;
-        MenuDrawTextWindow(0, 0, 10, 5);
-        PrintMenuItemsReordered(1, 1, 2, sBuySellQuitMenuActions, gUnknown_083CC6EB);
+        Menu_DrawStdWindowFrame(0, 0, 10, 5);
+        Menu_PrintItemsReordered(1, 1, 2, sBuySellQuitMenuActions, gUnknown_083CC6EB);
     }
     InitMenu(0, 1, 1, gMartInfo.numChoices + 1, 0, 9); // add 1 for cancel
 
@@ -126,7 +126,7 @@ void sub_80B2E38(u8 var)
         if (gMartInfo.cursor) // can move cursor up?
         {
             PlaySE(SE_SELECT);
-            gMartInfo.cursor = MoveMenuCursor(-1);
+            gMartInfo.cursor = Menu_MoveCursor(-1);
         }
     }
     else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
@@ -134,7 +134,7 @@ void sub_80B2E38(u8 var)
         if (gMartInfo.cursor != gMartInfo.numChoices) // can move cursor down?
         {
             PlaySE(SE_SELECT);
-            gMartInfo.cursor = MoveMenuCursor(1);
+            gMartInfo.cursor = Menu_MoveCursor(1);
         }
     }
     else if (gMain.newKeys & A_BUTTON)
@@ -174,8 +174,8 @@ void sub_80B2F30(u8 taskId)
 
 void HandleShopMenuQuit(u8 taskId)
 {
-    HandleDestroyMenuCursors();
-    MenuZeroFillWindowRect(0, 0, 11, 8);
+    Menu_DestroyCursor();
+    Menu_EraseWindowRect(0, 0, 11, 8);
     sub_80BE3BC();
     ScriptContext2_Disable();
     DestroyTask(taskId);
@@ -285,12 +285,12 @@ void BuyMenuDrawGraphics(void)
     ResetPaletteFade();
     ResetSpriteData();
     ResetTasks();
-    SetUpWindowConfig(&gWindowConfig_81E6DFC);
-    InitMenuWindow(&gWindowConfig_81E6DFC);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E6DFC);
+    InitMenuWindow(&gWindowTemplate_81E6DFC);
     BuyMenuDrawMapGraphics();
     gMartInfo.cursor = zero;
     gMartInfo.choicesAbove = zero2;
-    MenuZeroFillWindowRect(0, 0, 0x20, 0x20);
+    Menu_EraseWindowRect(0, 0, 0x20, 0x20);
     OpenMoneyWindow(gSaveBlock1.money, 0, 0);
     sub_80B3764(0, 7);
     sub_80B37EC();
@@ -532,7 +532,7 @@ void sub_80B37F8(u8 taskId)
     gStringVar1[1] = 0x14;
     gStringVar1[2] = 0x6;
     ConvertIntToDecimalStringN(&gStringVar1[3], gTasks[taskId].data[1], 1, 2);
-    MenuPrint(gOtherText_xString1, 1, 11);
+    Menu_PrintText(gOtherText_xString1, 1, 11);
     sub_80A3FA0(gBGTilemapBuffers[1], 1, 11, 12, 2, 0xC3E1);
 }
 
@@ -557,7 +557,7 @@ void sub_80B389C(u16 itemId, u8 var2, bool32 hasControlCode)
         stringPtr = &gStringVar1[3];
 
     GetMoneyAmountText(stringPtr, (ItemId_GetPrice(itemId) >> GetPriceReduction(1)), 0x4);
-    MenuPrint_PixelCoords(&gStringVar1[0], 0xCA, var2 << 3, 1);
+    Menu_PrintTextPixelCoords(&gStringVar1[0], 0xCA, var2 << 3, 1);
 }
 
 void sub_80B3930(u16 itemId, u8 var2, bool32 hasControlCode)
@@ -586,7 +586,7 @@ void sub_80B3930(u16 itemId, u8 var2, bool32 hasControlCode)
     else
     {
         GetMoneyAmountText(stringPtr, gDecorations[itemId].price, 0x4);
-        MenuPrint_PixelCoords(&gStringVar1[0], 0xCA, var2 << 3, 0x1);
+        Menu_PrintTextPixelCoords(&gStringVar1[0], 0xCA, var2 << 3, 0x1);
     }
 }
 
@@ -604,8 +604,8 @@ void sub_80B39D0(int var1, int var2, bool32 hasControlCode)
 
     if (i != 8 && gMartInfo.choicesAbove + i == gMartInfo.itemCount)
     {
-        MenuFillWindowRectWithBlankTile(0xE, (i << 1) + 2, 0x1C, (i << 1) + 3);
-        MenuPrint(gOtherText_CancelNoTerminator, 0xE, (i << 1) + 2);
+        Menu_BlankWindowRect(0xE, (i << 1) + 2, 0x1C, (i << 1) + 3);
+        Menu_PrintText(gOtherText_CancelNoTerminator, 0xE, (i << 1) + 2);
     }
 }
 
@@ -659,7 +659,7 @@ void sub_80B3BD0(u8 taskId)
 
 void sub_80B3BF4(u8 taskId)
 {
-    MenuZeroFillWindowRect(0x7, 0x8, 0xD, 0xD);
+    Menu_EraseWindowRect(0x7, 0x8, 0xD, 0xD);
     sub_80A3FA0(gBGTilemapBuffers[1], 8, 9, 4, 4, 0);
     sub_80B379C();
     sub_80B3420();
@@ -706,7 +706,7 @@ void sub_80B3D38(u8 taskId)
 void sub_80B3D7C(u8 taskId)
 {
     sub_80B39D0(gMartInfo.cursor, gMartInfo.cursor, 0);
-    MenuZeroFillWindowRect(0x7, 0x8, 0xD, 0xD);
+    Menu_EraseWindowRect(0x7, 0x8, 0xD, 0xD);
     sub_80A3FA0(gBGTilemapBuffers[1], 0x8, 0x9, 0x4, 0x4, 0);
     sub_80B4378(taskId);
 }
@@ -719,7 +719,7 @@ void sub_80B3DC8(u8 taskId)
     if (gMain.newKeys & A_BUTTON)
     {
         gMartTotalCost = (ItemId_GetPrice(gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor]) >> GetPriceReduction(1)) * gTasks[taskId].data[1]; // set total cost of your purchase.
-        MenuZeroFillWindowRect(0, 0xA, 0xD, 0xD);
+        Menu_EraseWindowRect(0, 0xA, 0xD, 0xD);
         sub_80A3FA0(gBGTilemapBuffers[1], 0x1, 0xB, 0xC, 0x2, 0);
         sub_80B379C();
         sub_80B3420();
@@ -741,7 +741,7 @@ void sub_80B3EFC(u8 taskId)
     u16 var;
 
     gTasks[taskId].data[1] = 1;
-    MenuDrawTextWindow(0, 0xA, 0xD, 0xD);
+    Menu_DrawStdWindowFrame(0, 0xA, 0xD, 0xD);
     sub_80B37F8(taskId);
 
     var = gSaveBlock1.money / (ItemId_GetPrice(gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor]) >> GetPriceReduction(1));
@@ -1049,7 +1049,7 @@ void sub_80B40E8(u8 taskId) // Mart_DoCursorAction
             else // if the cursor is not 0, choicesAbove cannot be updated yet since the cursor is at the top of the menu, so update cursor.
             {
                 PlaySE(SE_SELECT);
-                gMartInfo.cursor = MoveMenuCursor(-1); // move cursor up
+                gMartInfo.cursor = Menu_MoveCursor(-1); // move cursor up
                 sub_80B3A70();
             }
         }
@@ -1070,7 +1070,7 @@ void sub_80B40E8(u8 taskId) // Mart_DoCursorAction
             else if (gMartInfo.cursor != gMartInfo.itemCount)
             {
                 PlaySE(SE_SELECT);
-                gMartInfo.cursor = MoveMenuCursor(1);
+                gMartInfo.cursor = Menu_MoveCursor(1);
                 sub_80B3A70();
             }
         }
@@ -1084,8 +1084,8 @@ void sub_80B40E8(u8 taskId) // Mart_DoCursorAction
                 PauseVerticalScrollIndicator(1);
                 sub_80F979C(1, 1);
                 sub_80B39D0(gMartInfo.cursor, gMartInfo.cursor, 1);
-                HandleDestroyMenuCursors();
-                MenuZeroFillWindowRect(0, 0xC, 0xD, 0x13);
+                Menu_DestroyCursor();
+                Menu_EraseWindowRect(0, 0xC, 0xD, 0x13);
 
                 if (gMartInfo.martType == MART_TYPE_0)
                 {
@@ -1139,8 +1139,8 @@ void sub_80B40E8(u8 taskId) // Mart_DoCursorAction
 
 void sub_80B4378(u8 taskId)
 {
-    MenuZeroFillWindowRect(0, 0xE, 0x1D, 0x13);
-    MenuZeroFillWindowRect(0, 0xA, 0xD, 0xD);
+    Menu_EraseWindowRect(0, 0xE, 0x1D, 0x13);
+    Menu_EraseWindowRect(0, 0xA, 0xD, 0xD);
     sub_80A3FA0(gBGTilemapBuffers[1], 0x1, 0xB, 0xC, 0x2, 0);
     sub_80B3420();
     sub_80B3764(6, 7);

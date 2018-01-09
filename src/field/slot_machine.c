@@ -400,8 +400,8 @@ static void SlotMachineSetup_0_1(void)
 
 static void SlotMachineSetup_3_0(void)
 {
-    SetUpWindowConfig(&gWindowConfig_81E7128);
-    InitMenuWindow(&gWindowConfig_81E7128);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E7128);
+    InitMenuWindow(&gWindowTemplate_81E7128);
 }
 
 static void SlotMachineSetup_4_0(void)
@@ -584,8 +584,8 @@ static bool8 sub_8101E3C(struct Task *task)
 
 static void sub_8101F2C(const u8 *str)
 {
-    MenuDisplayMessageBox();
-    MenuPrint(str, 2, 15);
+    Menu_DisplayDialogueFrame();
+    Menu_PrintText(str, 2, 15);
 }
 
 static bool8 sub_8101F44(struct Task *task)
@@ -599,7 +599,7 @@ static bool8 sub_8101F60(struct Task *task)
 {
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
-        MenuZeroFillScreen();
+        Menu_EraseScreen();
         eSlotMachine->state = 5;
     }
     return FALSE;
@@ -850,10 +850,10 @@ static bool8 sub_8102318(struct Task *task)
 
 static bool8 sub_8102344(struct Task *task)
 {
-    s8 input = ProcessMenuInputNoWrap_();
+    s8 input = Menu_ProcessInputNoWrap_();
     if (input == 0)
     {
-        MenuZeroFillScreen();
+        Menu_EraseScreen();
         sub_8103D8C(0);
         sub_8103D8C(1);
         sub_8103D8C(2);
@@ -862,7 +862,7 @@ static bool8 sub_8102344(struct Task *task)
     }
     else if (input == 1 || input == -1)
     {
-        MenuZeroFillScreen();
+        Menu_EraseScreen();
         eSlotMachine->state = 5;
     }
     return FALSE;
@@ -879,7 +879,7 @@ static bool8 sub_81023B8(struct Task *task)
 {
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
-        MenuZeroFillScreen();
+        Menu_EraseScreen();
         eSlotMachine->state = 5;
     }
     return FALSE;
@@ -896,7 +896,7 @@ static bool8 sub_81023FC(struct Task *task)
 {
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
-        MenuZeroFillScreen();
+        Menu_EraseScreen();
         eSlotMachine->state = 27;
     }
     return FALSE;
@@ -2807,8 +2807,8 @@ static void sub_8104B80(struct Task *task)
 {
     sub_8104DA4();
     sub_81065DC();
-    BasicInitMenuWindow(&gWindowConfig_81E7144);
-    MenuPrint_PixelCoords(gOtherText_ReelTime, 10, 32, 1);
+    BasicInitMenuWindow(&gWindowTemplate_81E7144);
+    Menu_PrintTextPixelCoords(gOtherText_ReelTime, 10, 32, 1);
     BeginNormalPaletteFade(-1, 0, 16, 0, 0);
     task->data[0]++;
 }
@@ -2824,8 +2824,8 @@ static void sub_8104BC8(struct Task *task)
 
 static void sub_8104BFC(struct Task *task)
 {
-    MenuZeroFillScreen();
-    BasicInitMenuWindow(&gWindowConfig_81E7128);
+    Menu_EraseScreen();
+    BasicInitMenuWindow(&gWindowTemplate_81E7128);
     sub_81064B8();
     sub_8104CAC(task->data[1]);
     sub_810423C(eSlotMachine->pikaPower);

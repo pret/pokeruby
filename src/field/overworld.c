@@ -1456,8 +1456,8 @@ bool32 sub_805483C(u8 *a1)
     case 4:
         sub_8054814();
         sub_8054C54();
-        SetUpWindowConfig(&gWindowConfig_81E6C3C);
-        InitMenuWindow(&gWindowConfig_81E6CE4);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E6C3C);
+        InitMenuWindow(&gWindowTemplate_81E6CE4);
         (*a1)++;
         break;
     case 5:
@@ -1522,8 +1522,8 @@ bool32 sub_805493C(u8 *a1, u32 a2)
     case 4:
         sub_8054814();
         sub_8054C54();
-        SetUpWindowConfig(&gWindowConfig_81E6C3C);
-        InitMenuWindow(&gWindowConfig_81E6CE4);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E6C3C);
+        InitMenuWindow(&gWindowTemplate_81E6CE4);
         (*a1)++;
         break;
     case 5:
@@ -1612,8 +1612,8 @@ bool32 sub_8054A9C(u8 *a1)
     case 3:
         sub_8054814();
         sub_8054C54();
-        SetUpWindowConfig(&gWindowConfig_81E6C3C);
-        InitMenuWindow(&gWindowConfig_81E6CE4);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E6C3C);
+        InitMenuWindow(&gWindowTemplate_81E6CE4);
         (*a1)++;
         break;
     case 4:
@@ -1695,8 +1695,8 @@ void sub_8054C2C(void)
 {
     sub_8054814();
     sub_8054C54();
-    SetUpWindowConfig(&gWindowConfig_81E6C3C);
-    InitMenuWindow(&gWindowConfig_81E6CE4);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E6C3C);
+    InitMenuWindow(&gWindowTemplate_81E6CE4);
     mapdata_load_assets_to_gpu_and_full_redraw();
 }
 

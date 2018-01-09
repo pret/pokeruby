@@ -744,9 +744,9 @@ void sub_802C68C(void)
             else
                 gUnknown_03004344 = gMoveSelectionCursor[gActiveBank] + 1;
             sub_802E3B4(gUnknown_03004344, 27);
-            FillWindowRect(&gUnknown_03004210, 0x1016, 0x17, 0x37, 0x1C, 0x3A);
-            InitWindow(&gUnknown_03004210, BattleText_SwitchWhich, 0x290, 0x17, 0x37);
-            sub_8002F44(&gUnknown_03004210);
+            Text_FillWindowRect(&gUnknown_03004210, 0x1016, 0x17, 0x37, 0x1C, 0x3A);
+            Text_InitWindow(&gUnknown_03004210, BattleText_SwitchWhich, 0x290, 0x17, 0x37);
+            Text_PrintWindow8002F44(&gUnknown_03004210);
             gBattleBankFunc[gActiveBank] = sub_802CA60;
         }
     }
@@ -853,9 +853,9 @@ void sub_802CA60(void)
         gBattleBankFunc[gActiveBank] = sub_802C68C;
         gMoveSelectionCursor[gActiveBank] = gUnknown_03004344;
         sub_802E3B4(gMoveSelectionCursor[gActiveBank], 0);
-        FillWindowRect(&gUnknown_03004210, 0x1016, 0x17, 0x37, 0x1C, 0x3A);
-        InitWindow(&gUnknown_03004210, BattleText_PP, 0x290, 0x17, 0x37);
-        sub_8002F44(&gUnknown_03004210);
+        Text_FillWindowRect(&gUnknown_03004210, 0x1016, 0x17, 0x37, 0x1C, 0x3A);
+        Text_InitWindow(&gUnknown_03004210, BattleText_PP, 0x290, 0x17, 0x37);
+        Text_PrintWindow8002F44(&gUnknown_03004210);
         sub_802E220();
         sub_802E2D4();
     }
@@ -866,9 +866,9 @@ void sub_802CA60(void)
         sub_802E3B4(gMoveSelectionCursor[gActiveBank], 0);
         sub_802E12C(gMoveSelectionCursor[gActiveBank], BattleText_Format);
         gBattleBankFunc[gActiveBank] = sub_802C68C;
-        FillWindowRect(&gUnknown_03004210, 0x1016, 0x17, 0x37, 0x1C, 0x3A);
-        InitWindow(&gUnknown_03004210, BattleText_PP, 0x290, 0x17, 0x37);
-        sub_8002F44(&gUnknown_03004210);
+        Text_FillWindowRect(&gUnknown_03004210, 0x1016, 0x17, 0x37, 0x1C, 0x3A);
+        Text_InitWindow(&gUnknown_03004210, BattleText_PP, 0x290, 0x17, 0x37);
+        Text_PrintWindow8002F44(&gUnknown_03004210);
         sub_802E220();
         sub_802E2D4();
     }
@@ -1557,13 +1557,13 @@ void sub_802E12C(s32 a, const u8 *b)
 
     StringCopy(gDisplayedStringBattle, b);
     StringAppend(gDisplayedStringBattle, gMoveNames[r4->moves[a]]);
-    InitWindow(
+    Text_InitWindow(
       &gUnknown_03004210,
       gDisplayedStringBattle,
       0x300 + a * 20,
       (a & 1) ? 11 : 1,
       (a < 2) ? 0x37 : 0x39);
-    sub_8002F44(&gUnknown_03004210);
+    Text_PrintWindow8002F44(&gUnknown_03004210);
 }
 
 void sub_802E1B0(void)
@@ -1572,7 +1572,7 @@ void sub_802E1B0(void)
     s32 i;
 
     gUnknown_03004348 = 0;
-    FillWindowRect(&gUnknown_03004210, 0x1016, 1, 0x37, 0x14, 0x3A);
+    Text_FillWindowRect(&gUnknown_03004210, 0x1016, 1, 0x37, 0x14, 0x3A);
     for (i = 0; i < 4; i++)
     {
         nullsub_7(i);
@@ -1601,8 +1601,8 @@ void sub_802E220(void)
         str = ConvertIntToDecimalStringN(str, r4->pp[gMoveSelectionCursor[gActiveBank]], 1, 2);
         *str++ = CHAR_SLASH;
         ConvertIntToDecimalStringN(str, r4->unkC[gMoveSelectionCursor[gActiveBank]], 1, 2);
-        InitWindow(&gUnknown_03004210, gDisplayedStringBattle, 0x2A2, 0x19, 0x37);
-        sub_8002F44(&gUnknown_03004210);
+        Text_InitWindow(&gUnknown_03004210, gDisplayedStringBattle, 0x2A2, 0x19, 0x37);
+        Text_PrintWindow8002F44(&gUnknown_03004210);
     }
 }
 
@@ -1613,8 +1613,8 @@ void sub_802E2D4(void)
 {
     if (gBattleBufferA[gActiveBank][2] == 1)
     {
-        FillWindowRect(&gUnknown_03004210, 0x1016, 0x17, 0x37, 0x1C, 0x3A);
-        InitWindow(&gUnknown_03004210, BattleText_ForgetMove, 0x290, 0x13, 0x37);
+        Text_FillWindowRect(&gUnknown_03004210, 0x1016, 0x17, 0x37, 0x1C, 0x3A);
+        Text_InitWindow(&gUnknown_03004210, BattleText_ForgetMove, 0x290, 0x13, 0x37);
     }
     else
     {
@@ -1623,10 +1623,10 @@ void sub_802E2D4(void)
 
         str = StringCopy(str, BattleText_Format);
         StringCopy(str, gTypeNames[gBattleMoves[r4->moves[gMoveSelectionCursor[gActiveBank]]].type]);
-        FillWindowRect(&gUnknown_03004210, 0x1016, 0x17, 0x39, 0x1C, 0x3A);
-        InitWindow(&gUnknown_03004210, gDisplayedStringBattle, 0x2C0, 0x17, 0x39);
+        Text_FillWindowRect(&gUnknown_03004210, 0x1016, 0x17, 0x39, 0x1C, 0x3A);
+        Text_InitWindow(&gUnknown_03004210, gDisplayedStringBattle, 0x2C0, 0x17, 0x39);
     }
-    sub_8002F44(&gUnknown_03004210);
+    Text_PrintWindow8002F44(&gUnknown_03004210);
 }
 
 const u8 gUnknown_081FAE89[][2] =
@@ -1652,7 +1652,7 @@ const u8 gUnknown_081FAE91[][2] =
 void sub_802E3B4(u8 a, int unused)
 {
     sub_814A958(0x48);
-    sub_814A880(gUnknown_081FAE89[a][0], gUnknown_081FAE89[a][1]);
+    MenuCursor_SetPos814A880(gUnknown_081FAE89[a][0], gUnknown_081FAE89[a][1]);
 }
 
 void nullsub_7(u8 a)
@@ -1662,7 +1662,7 @@ void nullsub_7(u8 a)
 void sub_802E3E4(u8 a, int unused)
 {
     sub_814A958(0x2A);
-    sub_814A880(gUnknown_081FAE91[a][0], gUnknown_081FAE91[a][1]);
+    MenuCursor_SetPos814A880(gUnknown_081FAE91[a][0], gUnknown_081FAE91[a][1]);
 }
 
 void nullsub_8(u8 a)
@@ -1697,7 +1697,7 @@ void b_link_standby_message(void)
     {
         gBattle_BG0_X = 0;
         gBattle_BG0_Y = 0;
-        sub_8002EB0(&gUnknown_03004210, BattleText_LinkStandby, 0x90, 2, 15);
+        Text_InitWindow8002EB0(&gUnknown_03004210, BattleText_LinkStandby, 0x90, 2, 15);
     }
 }
 
@@ -2562,7 +2562,7 @@ void PlayerHandlePrintString(void)
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
     BufferStringBattle(*(u16 *)&gBattleBufferA[gActiveBank][2]);
-    sub_8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 0x90, 2, 15);
+    Text_InitWindow8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 0x90, 2, 15);
     gBattleBankFunc[gActiveBank] = sub_802DF18;
 }
 
@@ -2580,14 +2580,14 @@ void PlayerHandlecmd18(void)
 
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 160;
-    FillWindowRect(&gUnknown_03004210, 10, 2, 15, 27, 18);
-    FillWindowRect(&gUnknown_03004210, 10, 2, 35, 16, 38);
+    Text_FillWindowRect(&gUnknown_03004210, 10, 2, 15, 27, 18);
+    Text_FillWindowRect(&gUnknown_03004210, 10, 2, 35, 16, 38);
 
     gBattleBankFunc[gActiveBank] = sub_802C098;
 
-    InitWindow(&gUnknown_03004210, BattleText_MenuOptions, 400, 18, 35);
-    sub_8002F44(&gUnknown_03004210);
-    sub_814A5C0(0, 0xFFFF, 12, 11679, 0);
+    Text_InitWindow(&gUnknown_03004210, BattleText_MenuOptions, 400, 18, 35);
+    Text_PrintWindow8002F44(&gUnknown_03004210);
+    MenuCursor_Create814A5C0(0, 0xFFFF, 12, 11679, 0);
 
     for (r4 = 0; r4 < 4; r4++)
         nullsub_8(r4);
@@ -2595,8 +2595,8 @@ void PlayerHandlecmd18(void)
     sub_802E3E4(gActionSelectionCursor[gActiveBank], 0);
 
     StrCpyDecodeToDisplayedStringBattle(BattleText_OtherMenu);
-    InitWindow(&gUnknown_03004210, gDisplayedStringBattle, SUB_803037C_TILE_DATA_OFFSET, 2, 35);
-    sub_8002F44(&gUnknown_03004210);
+    Text_InitWindow(&gUnknown_03004210, gDisplayedStringBattle, SUB_803037C_TILE_DATA_OFFSET, 2, 35);
+    Text_PrintWindow8002F44(&gUnknown_03004210);
 }
 
 void PlayerHandlecmd19()
@@ -2605,7 +2605,7 @@ void PlayerHandlecmd19()
 
 void PlayerHandlecmd20(void)
 {
-    sub_814A5C0(0, 0xFFFF, 12, 0x2D9F, 0);
+    MenuCursor_Create814A5C0(0, 0xFFFF, 12, 0x2D9F, 0);
     sub_80304A8();
     gBattleBankFunc[gActiveBank] = sub_802C68C;
 }
@@ -2619,8 +2619,8 @@ void sub_80304A8(void)
     sub_802E3B4(gMoveSelectionCursor[gActiveBank], 0);
     if (gBattleBufferA[gActiveBank][2] != 1)
     {
-        InitWindow(&gUnknown_03004210, BattleText_PP, 656, 23, 55);
-        sub_8002F44(&gUnknown_03004210);
+        Text_InitWindow(&gUnknown_03004210, BattleText_PP, 656, 23, 55);
+        Text_PrintWindow8002F44(&gUnknown_03004210);
     }
     sub_802E220();
     sub_802E2D4();

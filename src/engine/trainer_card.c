@@ -565,8 +565,8 @@ void sub_80937A4()
 
 void sub_80937BC()
 {
-    SetUpWindowConfig(&WindowConfig_TrainerCard_Back_Values);
-    MultistepInitMenuWindowBegin(&WindowConfig_TrainerCard_Back_Values);
+    Text_LoadWindowTemplate(&gWindowTemplate_TrainerCard_Back_Values);
+    MultistepInitMenuWindowBegin(&gWindowTemplate_TrainerCard_Back_Values);
 }
 
 static void sub_80937D8()
@@ -678,7 +678,7 @@ bool8 sub_8093980(struct Task *task)
 static void sub_80939A4(void)
 {
     CreateTask(sub_80939DC, 0);
-    BasicInitMenuWindow(&WindowConfig_TrainerCard_Back_Values);
+    BasicInitMenuWindow(&gWindowTemplate_TrainerCard_Back_Values);
 }
 
 static void sub_80939C0(void)
@@ -700,7 +700,7 @@ static void sub_80939DC(u8 taskId)
         task->data[TD_0] ^= TRUE;
     }
     TrainerCard_Front_PrintPlayTime(buffer, task->data[TD_0]);
-    MenuPrint(buffer, 10, 12);
+    Menu_PrintText(buffer, 10, 12);
 }
 
 static void sub_8093A28(void)
@@ -1130,7 +1130,7 @@ static void sub_8093DAC(void)
 
 static void sub_8093DC8(void)
 {
-    MenuZeroFillScreen();
+    Menu_EraseScreen();
     sub_80940E4();
     sub_8093F14();
     sub_8093F80();
@@ -1141,7 +1141,7 @@ static void sub_8093DC8(void)
 
 static void sub_8093DEC(void)
 {
-    MenuZeroFillScreen();
+    Menu_EraseScreen();
     sub_80940E4();
     sub_8093F48();
     sub_8094188();
@@ -1317,12 +1317,12 @@ static void sub_8094140(void)
 {
     u8 *buffer;
 
-    BasicInitMenuWindow(&WindowConfig_TrainerCard_Back_Values);
+    BasicInitMenuWindow(&gWindowTemplate_TrainerCard_Back_Values);
 
     buffer = gStringVar1;
     StringCopy(buffer, ewram0_2.var_64.playerName);
     ConvertInternationalString(buffer, ewram0_2.language);
-    MenuPrint(buffer, 7, 5);
+    Menu_PrintText(buffer, 7, 5);
 
     TrainerCard_Front_PrintTrainerID();
     TrainerCard_Front_PrintMoney();
@@ -1332,7 +1332,7 @@ static void sub_8094140(void)
 
 static void sub_8094188(void)
 {
-    BasicInitMenuWindow(&WindowConfig_TrainerCard_Back_Values);
+    BasicInitMenuWindow(&gWindowTemplate_TrainerCard_Back_Values);
     TrainerCard_Back_PrintName();
     TrainerCard_Back_PrintHallOfFameTime_Label();
     TrainerCard_Back_PrintLinkBattlesLabel();
@@ -1341,7 +1341,7 @@ static void sub_8094188(void)
     TrainerCard_Back_PrintLinkPokeblocks_Label();
     TrainerCard_Back_PrintPokemonTrades_Label();
 
-    BasicInitMenuWindow(&WindowConfig_TrainerCard_Back_Labels);
+    BasicInitMenuWindow(&gWindowTemplate_TrainerCard_Back_Labels);
     TrainerCard_Back_PrintHallOfFameTime();
     TrainerCard_Back_PrintLinkBattles();
     TrainerCard_Back_PrintBattleTower();
@@ -1355,7 +1355,7 @@ static void TrainerCard_Front_PrintTrainerID(void)
     u8 buffer[8];
 
     ConvertIntToDecimalStringN(buffer, ewram0_2.var_64.trainerId, STR_CONV_MODE_LEADING_ZEROS, 5);
-    MenuPrint(buffer, 20, 2);
+    Menu_PrintText(buffer, 20, 2);
 }
 
 static void TrainerCard_Front_PrintMoney(void)
@@ -1406,14 +1406,14 @@ static void sub_809429C(void)
         str[0] = 00;
         str++;
         str = StringCopy(str, ewram0_2.var_20[1]);
-        MenuPrint(gStringVar1, 2, 14);
+        Menu_PrintText(gStringVar1, 2, 14);
 
         str = gStringVar1;
         str = StringCopy(str, ewram0_2.var_20[2]);
         str[0] = 00;
         str++;
         str = StringCopy(str, ewram0_2.var_20[3]);
-        MenuPrint(gStringVar1, 2, 16);
+        Menu_PrintText(gStringVar1, 2, 16);
     }
 }
 
@@ -1437,7 +1437,7 @@ static void TrainerCard_Back_PrintName(void)
 static void TrainerCard_Back_PrintHallOfFameTime_Label(void)
 {
     if (ewram0_2.var_8 != 0)
-        MenuPrint(gOtherText_FirstHOF, 3, 5);
+        Menu_PrintText(gOtherText_FirstHOF, 3, 5);
 }
 
 static void TrainerCard_Back_PrintHallOfFameTime(void)
@@ -1459,7 +1459,7 @@ static void TrainerCard_Back_PrintHallOfFameTime(void)
 static void TrainerCard_Back_PrintLinkBattlesLabel(void)
 {
     if (ewram0_2.var_9 != 0)
-        MenuPrint(gOtherText_LinkCableBattles, 3, 7);
+        Menu_PrintText(gOtherText_LinkCableBattles, 3, 7);
 }
 
 static void TrainerCard_Back_PrintLinkBattles(void)
@@ -1479,7 +1479,7 @@ static void TrainerCard_Back_PrintLinkBattles(void)
 static void TrainerCard_Back_PrintBattleTower_Label(void)
 {
     if (ewram0_2.var_a != 0)
-        MenuPrint(gOtherText_BattleTowerWinRecord, 3, 15);
+        Menu_PrintText(gOtherText_BattleTowerWinRecord, 3, 15);
 }
 
 static void TrainerCard_Back_PrintBattleTower(void)
@@ -1489,17 +1489,17 @@ static void TrainerCard_Back_PrintBattleTower(void)
     if (ewram0_2.var_a != 0)
     {
         sub_8072C44(buffer, ewram0_2.var_64.battleTowerWins, 24, 1);
-        MenuPrint_PixelCoords(buffer, 112, 120, 0);
+        Menu_PrintTextPixelCoords(buffer, 112, 120, 0);
 
         sub_8072C44(buffer, ewram0_2.var_64.battleTowerLosses, 24, 1);
-        MenuPrint_PixelCoords(buffer, 149, 120, 0);
+        Menu_PrintTextPixelCoords(buffer, 149, 120, 0);
     }
 }
 
 static void TrainerCard_Back_PrintLinkContests_Label(void)
 {
     if (ewram0_2.var_b != 0)
-        MenuPrint(gOtherText_ContestRecord, 3, 13);
+        Menu_PrintText(gOtherText_ContestRecord, 3, 13);
 }
 
 static void TrainerCard_Back_PrintLinkContests(void)
@@ -1516,7 +1516,7 @@ static void TrainerCard_Back_PrintLinkContests(void)
 static void TrainerCard_Back_PrintLinkPokeblocks_Label(void)
 {
     if (ewram0_2.var_c != 0)
-        MenuPrint(gOtherText_MixingRecord, 3, 11);
+        Menu_PrintText(gOtherText_MixingRecord, 3, 11);
 }
 
 static void TrainerCard_Back_PrintLinkPokeblocks(void)
@@ -1533,7 +1533,7 @@ static void TrainerCard_Back_PrintLinkPokeblocks(void)
 static void TrainerCard_Back_PrintPokemonTrades_Label(void)
 {
     if (ewram0_2.var_d != 0)
-        MenuPrint(gOtherText_TradeRecord, 3, 9);
+        Menu_PrintText(gOtherText_TradeRecord, 3, 9);
 }
 
 static void TrainerCard_Back_PrintPokemonTrades(void)
@@ -1553,5 +1553,5 @@ void unref_sub_8094588(u16 left, u16 top)
 
     if (gSaveBlock2.playerGender == FEMALE)
         text = gOtherText_Girl;
-    MenuPrint(text, left, top);
+    Menu_PrintText(text, left, top);
 }

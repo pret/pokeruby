@@ -275,15 +275,15 @@ static bool8 sub_810B6C0(void)
             gMain.state++;
             break;
         case  5:
-            SetUpWindowConfig(&gWindowConfig_81E6E34);
+            Text_LoadWindowTemplate(&gWindowTemplate_81E6E34);
             gMain.state++;
             break;
         case  6:
-            SetUpWindowConfig(&gWindowConfig_81E6E50);
+            Text_LoadWindowTemplate(&gWindowTemplate_81E6E50);
             gMain.state++;
             break;
         case  7:
-            MultistepInitMenuWindowBegin(&gWindowConfig_81E6E34);
+            MultistepInitMenuWindowBegin(&gWindowTemplate_81E6E34);
             gMain.state++;
             break;
         case  8:
@@ -293,7 +293,7 @@ static bool8 sub_810B6C0(void)
             }
             break;
         case  9:
-            MultistepInitMenuWindowBegin(&gWindowConfig_81E6E50);
+            MultistepInitMenuWindowBegin(&gWindowTemplate_81E6E50);
             gMain.state++;
             break;
         case 10:
@@ -445,18 +445,18 @@ void debug_sub_8120F98(void)
 
 static void sub_810BB0C(void)
 {
-    BasicInitMenuWindow(&gWindowConfig_81E6E34);
+    BasicInitMenuWindow(&gWindowTemplate_81E6E34);
     sub_8072BD8(ItemId_GetItem(ITEM_POKEBLOCK_CASE)->name, 2, 1, 0x48);
 }
 
 static void sub_810BB30(void)
 {
-    BasicInitMenuWindow(&gWindowConfig_81E6E34);
-    MenuPrint(gContestStatsText_Spicy,   2, 13);
-    MenuPrint(gContestStatsText_Dry,     2, 15);
-    MenuPrint(gContestStatsText_Sweet,   2, 17);
-    MenuPrint(gContestStatsText_Bitter,  8, 13);
-    MenuPrint(gContestStatsText_Sour,    8, 15);
+    BasicInitMenuWindow(&gWindowTemplate_81E6E34);
+    Menu_PrintText(gContestStatsText_Spicy,   2, 13);
+    Menu_PrintText(gContestStatsText_Dry,     2, 15);
+    Menu_PrintText(gContestStatsText_Sweet,   2, 17);
+    Menu_PrintText(gContestStatsText_Bitter,  8, 13);
+    Menu_PrintText(gContestStatsText_Sour,    8, 15);
 }
 
 static void sub_810BB88(u8 a0)
@@ -464,17 +464,17 @@ static void sub_810BB88(u8 a0)
     u8 i;
     u8 y;
     u8 *buf;
-    BasicInitMenuWindow(&gWindowConfig_81E6E34);
+    BasicInitMenuWindow(&gWindowTemplate_81E6E34);
     for (i=a0; i<=a0+8; i++)
     {
         y = (i - a0) << 1;
         if (i == gUnknown_02039248.unk2)
         {
             buf = sub_8072C74(gStringVar1, gContestStatsText_StowCase, 0x78, 0);
-            MenuPrint(gStringVar1, 15, y + 1);
+            Menu_PrintText(gStringVar1, 15, y + 1);
             if (i != a0 + 8)
             {
-                MenuZeroFillWindowRect(15, y + 3, 29, 18);
+                Menu_EraseWindowRect(15, y + 3, 29, 18);
             }
             break;
         }
@@ -484,7 +484,7 @@ static void sub_810BB88(u8 a0)
         buf[2] = 0x06;
         buf += 3;
         ConvertIntToDecimalStringN(buf, sub_810C9B0(&gSaveBlock1.pokeblocks[i]), STR_CONV_MODE_RIGHT_ALIGN, 3);
-        MenuPrint(gStringVar1, 15, y + 1);
+        Menu_PrintText(gStringVar1, 15, y + 1);
     }
 }
 
@@ -596,15 +596,15 @@ static void sub_810BDAC(bool8 flag)
             gBGTilemapBuffers[2][v0 + 32] = 15;
         }
     }
-    BasicInitMenuWindow(&gWindowConfig_81E6E34);
+    BasicInitMenuWindow(&gWindowTemplate_81E6E34);
     if (gUnknown_02039248.unk0 + gUnknown_02039248.unk1 != gUnknown_02039248.unk2)
     {
         sub_8072C14(gStringVar1, sub_810C9E8(&gSaveBlock1.pokeblocks[gUnknown_02039248.unk0 + gUnknown_02039248.unk1]), 16, 1);
-        MenuPrint(gStringVar1, 11, 17);
+        Menu_PrintText(gStringVar1, 11, 17);
     }
     else
     {
-        MenuZeroFillWindowRect(11, 17, 12, 18);
+        Menu_EraseWindowRect(11, 17, 12, 18);
     }
 }
 
@@ -812,9 +812,9 @@ static void sub_810C368(u8 taskId)
         v0 = 2;
     sub_80F98A4(0);
     sub_80F98A4(1);
-    BasicInitMenuWindow(&gWindowConfig_81E6E50);
-    MenuDrawTextWindow(7, v0 + 4, 13, 11);
-    PrintMenuItemsReordered(8, v0 + 5, gUnknown_0203924C, gUnknown_083F7EF4, gUnknown_03000758);
+    BasicInitMenuWindow(&gWindowTemplate_81E6E50);
+    Menu_DrawStdWindowFrame(7, v0 + 4, 13, 11);
+    Menu_PrintItemsReordered(8, v0 + 5, gUnknown_0203924C, gUnknown_083F7EF4, gUnknown_03000758);
     InitMenu(0, 8, v0 + 5, gUnknown_0203924C, 0, 5);
     gSpecialVar_ItemId = gUnknown_02039248.unk0 + gUnknown_02039248.unk1;
     gTasks[taskId].func = sub_810C40C;
@@ -824,24 +824,24 @@ static void sub_810C40C(u8 taskId)
 {
     if (gMain.newAndRepeatedKeys & DPAD_UP)
     {
-        if (GetMenuCursorPos())
+        if (Menu_GetCursorPos())
         {
             PlaySE(SE_SELECT);
-            MoveMenuCursor(-1);
+            Menu_MoveCursor(-1);
         }
     }
     else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
     {
-        if (GetMenuCursorPos() != gUnknown_0203924C - 1)
+        if (Menu_GetCursorPos() != gUnknown_0203924C - 1)
         {
             PlaySE(SE_SELECT);
-            MoveMenuCursor(+1);
+            Menu_MoveCursor(+1);
         }
     }
     else if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
-        gUnknown_083F7EF4[gUnknown_03000758[GetMenuCursorPos()]].func(taskId);
+        gUnknown_083F7EF4[gUnknown_03000758[Menu_GetCursorPos()]].func(taskId);
     }
     else if (gMain.newKeys & B_BUTTON)
     {
@@ -868,9 +868,9 @@ static void sub_810C508(u8 taskId)
 
 static void sub_810C540(u8 taskId)
 {
-    BasicInitMenuWindow(&gWindowConfig_81E6E50);
-    HandleDestroyMenuCursors();
-    MenuZeroFillWindowRect(7, 4, 13, 11);
+    BasicInitMenuWindow(&gWindowTemplate_81E6E50);
+    Menu_DestroyCursor();
+    Menu_EraseWindowRect(7, 4, 13, 11);
     StringCopy(gStringVar1, gPokeblockNames[gSaveBlock1.pokeblocks[gUnknown_02039248.unk0 + gUnknown_02039248.unk1].color]);
     StringExpandPlaceholders(gStringVar4, gContestStatsText_ThrowAwayPrompt);
     DisplayItemMessageOnField(taskId, gStringVar4, sub_810C5EC, 0);
@@ -890,7 +890,7 @@ static void sub_810C5EC(u8 taskId)
 
 static void sub_810C610(u8 taskId)
 {
-    MenuZeroFillWindowRect(7, 6, 13, 11);
+    Menu_EraseWindowRect(7, 6, 13, 11);
     PokeblockClearIfExists((gUnknown_02039248.unk0 + gUnknown_02039248.unk1));
     StringExpandPlaceholders(gStringVar4, gContestStatsText_WasThrownAway);
     DisplayItemMessageOnField(taskId, gStringVar4, sub_810C704, 0);
@@ -906,9 +906,9 @@ static void sub_810C668(u8 taskId)
     {
         sub_80F979C(1, 0);
     }
-    BasicInitMenuWindow(&gWindowConfig_81E6E50);
-    MenuZeroFillWindowRect(7, 6, 13, 11);
-    MenuZeroFillWindowRect(0, 14, 29, 19);
+    BasicInitMenuWindow(&gWindowTemplate_81E6E50);
+    Menu_EraseWindowRect(7, 6, 13, 11);
+    Menu_EraseWindowRect(0, 14, 29, 19);
     gTasks[taskId].func = sub_810BF7C;
 }
 
@@ -922,7 +922,7 @@ static void sub_810C6DC(u8 taskId)
 
 static void sub_810C704(u8 taskId)
 {
-    BasicInitMenuWindow(&gWindowConfig_81E6E34);
+    BasicInitMenuWindow(&gWindowTemplate_81E6E34);
     sub_810BC84(gUnknown_02039248.unk1);
     sub_80F979C(1, 1);
     gTasks[taskId].func = sub_810C6DC;
@@ -932,8 +932,8 @@ static void sub_810C748(u8 taskId)
 {
     StartVerticalScrollIndicators(0);
     StartVerticalScrollIndicators(1);
-    HandleDestroyMenuCursors();
-    MenuZeroFillWindowRect(7, 4, 13, 11);
+    Menu_DestroyCursor();
+    Menu_EraseWindowRect(7, 4, 13, 11);
     gTasks[taskId].func = sub_810BF7C;
 }
 

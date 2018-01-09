@@ -1507,7 +1507,7 @@ u8 Fishing4(struct Task *task)
 {
     u32 randVal;
 
-    MenuDisplayMessageBox();
+    Menu_DisplayDialogueFrame();
     task->tStep++;
     task->tFrameCounter = 0;
     task->tNumDots = 0;
@@ -1549,7 +1549,7 @@ u8 Fishing5(struct Task *task)
             }
             else
             {
-                MenuPrint(dot, task->tNumDots + 4, 15);
+                Menu_PrintText(dot, task->tNumDots + 4, 15);
                 task->tNumDots++;
             }
         }
@@ -1573,7 +1573,7 @@ u8 Fishing6(struct Task *task)
 u8 Fishing7(struct Task *task)
 {
     sub_805A954();
-    MenuPrint(gOtherText_OhABite, 4, 17);
+    Menu_PrintText(gOtherText_OhABite, 4, 17);
     task->tStep++;
     task->tFrameCounter = 0;
     return 0;
@@ -1624,7 +1624,7 @@ u8 Fishing10(struct Task *task)
 {
     sub_805A954();
     MenuPrintMessageDefaultCoords(gOtherText_PokeOnHook);
-    MenuDisplayMessageBox();
+    Menu_DisplayDialogueFrame();
     task->tStep++;
     task->tFrameCounter = 0;
     return 0;
@@ -1637,7 +1637,7 @@ u8 Fishing11(struct Task *task)
 
     if (task->tFrameCounter == 0)
     {
-        if (MenuUpdateWindowText())
+        if (Menu_UpdateWindowText())
         {
             struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
 
@@ -1647,7 +1647,7 @@ u8 Fishing11(struct Task *task)
                 sub_8127F28(gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_1A, 0, 0);
             gSprites[gPlayerAvatar.spriteId].pos2.x = 0;
             gSprites[gPlayerAvatar.spriteId].pos2.y = 0;
-            MenuZeroFillScreen();
+            Menu_EraseScreen();
             task->tFrameCounter++;
             return 0;
         }
@@ -1688,7 +1688,7 @@ u8 Fishing13(struct Task *task)
 u8 Fishing14(struct Task *task)
 {
     sub_805A954();
-    MenuDisplayMessageBox();
+    Menu_DisplayDialogueFrame();
     task->tStep++;
     return 0;
 }
@@ -1713,12 +1713,12 @@ u8 Fishing15(struct Task *task)
 
 u8 Fishing16(struct Task *task)
 {
-    if (MenuUpdateWindowText())
+    if (Menu_UpdateWindowText())
     {
         gPlayerAvatar.preventStep = FALSE;
         ScriptContext2_Disable();
         UnfreezeMapObjects();
-        MenuZeroFillScreen();
+        Menu_EraseScreen();
         sub_80BE97C(0);
         DestroyTask(FindTaskIdByFunc(Task_Fishing));
     }

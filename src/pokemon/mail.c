@@ -354,11 +354,11 @@ static u8 sub_80F8A28(void)
         RETURN_UP_STATE;
 
     case 6:
-        SetUpWindowConfig(&gWindowConfig_81E6DFC);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E6DFC);
         RETURN_UP_STATE;
 
     case 7:
-        MultistepInitMenuWindowBegin(&gWindowConfig_81E6DFC);
+        MultistepInitMenuWindowBegin(&gWindowTemplate_81E6DFC);
         RETURN_UP_STATE;
 
     case 8:
@@ -369,7 +369,7 @@ static u8 sub_80F8A28(void)
         RETURN_UP_STATE;
 
     case 9:
-        MenuZeroFillScreen();
+        Menu_EraseScreen();
         RETURN_UP_STATE;
 
     case 10: CpuFill16(1, (void *)(VRAM + 0x4800), 0x800);
@@ -528,11 +528,11 @@ static void sub_80F8E80(void)
 
         x = ewram0_4.var10C->var4[pos].unk_0_4;
         y += ewram0_4.var10C->var4[pos].unk_0_0;
-        MenuPrint(ewram0_4.words[pos], ewram0_4.var10C->var3_4 + x, ewram0_4.var10C->var3_0 + y);
+        Menu_PrintText(ewram0_4.words[pos], ewram0_4.var10C->var3_4 + x, ewram0_4.var10C->var3_0 + y);
         y += 2;
     }
 
-    MenuPrint(ewram0_4.varD8, ewram0_4.varF9, ewram0_4.var10C->var1);
+    Menu_PrintText(ewram0_4.varD8, ewram0_4.varF9, ewram0_4.var10C->var1);
 }
 
 static void sub_80F8F18(void)

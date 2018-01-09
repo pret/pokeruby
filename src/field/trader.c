@@ -100,7 +100,7 @@ void CreateAvailableDecorationsMenu(u8 taskId)
         }
     }
 
-    MenuDrawTextWindow(0, 1, 12, numChoices * 2 + 2);
+    Menu_DrawStdWindowFrame(0, 1, 12, numChoices * 2 + 2);
 
     for (i = 0; i < 4; i++)
     {
@@ -108,18 +108,18 @@ void CreateAvailableDecorationsMenu(u8 taskId)
         {
             if (trader->unk1[i] > DECOR_REGISTEEL_DOLL)
             {
-                MenuPrint(gOtherText_FiveQuestionsAndSlash, 1, numDecorations * 2 + 2);
+                Menu_PrintText(gOtherText_FiveQuestionsAndSlash, 1, numDecorations * 2 + 2);
             }
             else
             {
-                MenuPrint(gDecorations[trader->unk1[i]].name, 1, numDecorations * 2 + 2);
+                Menu_PrintText(gDecorations[trader->unk1[i]].name, 1, numDecorations * 2 + 2);
             }
 
             numDecorations++;
         }
     }
 
-    MenuPrint(gOtherText_CancelNoTerminator, 1, numDecorations * 2 + 2);
+    Menu_PrintText(gOtherText_CancelNoTerminator, 1, numDecorations * 2 + 2);
     InitMenu(0, 1, 2, numChoices, 0, 11);
     gTasks[taskId].data[1] = numDecorations;
 }
@@ -135,8 +135,8 @@ void sub_8109B34(u8 taskId, u8 decorationId)
         gSpecialVar_0x8004 = decorationId;
     }
 
-    HandleDestroyMenuCursors();
-    MenuZeroFillWindowRect(0, 1, 12, 12);
+    Menu_DestroyCursor();
+    Menu_EraseWindowRect(0, 1, 12, 12);
     DestroyTask(taskId);
     EnableBothScriptContexts();
 }
@@ -148,17 +148,17 @@ void Task_HandleGetDecorationMenuInput(u8 taskId)
     if (gMain.newKeys & DPAD_UP)
     {
         PlaySE(SE_SELECT);
-        MoveMenuCursor(-1);
+        Menu_MoveCursor(-1);
     }
     else if (gMain.newKeys & DPAD_DOWN)
     {
         PlaySE(SE_SELECT);
-        MoveMenuCursor(1);
+        Menu_MoveCursor(1);
     }
     else if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
-        gSpecialVar_0x8005 = GetMenuCursorPos();
+        gSpecialVar_0x8005 = Menu_GetCursorPos();
         if (gTasks[taskId].data[1] == gSpecialVar_0x8005)
         {
             sub_8109B34(taskId, 0);
@@ -215,8 +215,8 @@ void ScrSpecial_TraderMenuGiveDecoration(void)
 
 void sub_8109D04(u8 taskId)
 {
-    HandleDestroyMenuCursors();
-    MenuZeroFillWindowRect(0, 0, 29, 19);
+    Menu_DestroyCursor();
+    Menu_EraseWindowRect(0, 0, 29, 19);
     DestroyVerticalScrollIndicator(0);
     DestroyVerticalScrollIndicator(1);
     sub_80F9520(gUnknown_020388F7, 8);
@@ -237,8 +237,8 @@ void sub_8109D04(u8 taskId)
 
 void sub_8109DAC(u8 taskId)
 {
-    HandleDestroyMenuCursors();
-    MenuZeroFillWindowRect(0, 0, 29, 19);
+    Menu_DestroyCursor();
+    Menu_EraseWindowRect(0, 0, 29, 19);
     gSpecialVar_0x8006 = 0;
     DestroyTask(taskId);
     EnableBothScriptContexts();

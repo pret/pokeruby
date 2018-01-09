@@ -16,8 +16,8 @@
 #include "strings.h"
 #include "unknown_task.h"
 
-extern const struct WindowConfig gWindowConfig_81E6D54;
-extern const struct WindowConfig gWindowConfig_81E6DA8;
+extern const struct WindowTemplate gWindowTemplate_81E6D54;
+extern const struct WindowTemplate gWindowTemplate_81E6DA8;
 
 extern void sub_80546B8(void);
 
@@ -305,12 +305,12 @@ void sub_80E62F8(void)
         FreeAllSpritePalettes();
         break;
     case 1:
-        SetUpWindowConfig(&gWindowConfig_81E6DA8);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E6DA8);
         break;
     case 2:
-        InitMenuWindow(&gWindowConfig_81E6D54);
-        InitMenuWindow(&gWindowConfig_81E6DA8);
-        MenuZeroFillScreen();
+        InitMenuWindow(&gWindowTemplate_81E6D54);
+        InitMenuWindow(&gWindowTemplate_81E6DA8);
+        Menu_EraseScreen();
         break;
     case 3:
         sub_80E6424();
@@ -732,12 +732,12 @@ void sub_80E6BC0(void)
         {
             sub_80E91D4(2);
             DisplayYesNoMenu(23, 8, 1);
-            MoveMenuCursor(1);
+            Menu_MoveCursor(1);
             gEasyChatStruct->unk24++;
         }
         break;
     case 1:
-        switch (ProcessMenuInputNoWrap_())
+        switch (Menu_ProcessInputNoWrap_())
         {
         case 0:
             sub_80E7D6C();
@@ -770,7 +770,7 @@ void sub_80E6C84(void)
         sub_80E8398(2);
         sub_80E91D4(3);
         DisplayYesNoMenu(23, 8, 0);
-        MoveMenuCursor(1);
+        Menu_MoveCursor(1);
         if (gEasyChatStruct->unk8 == 9
          || gEasyChatStruct->unk8 == 4
          || gEasyChatStruct->unk8 == 7
@@ -785,12 +785,12 @@ void sub_80E6C84(void)
             gEasyChatStruct->unk24++;
         break;
     case 1:
-        switch (ProcessMenuInputNoWrap_())
+        switch (Menu_ProcessInputNoWrap_())
         {
         case 0:
             sub_80E91D4(4);
             DisplayYesNoMenu(23, 8, 0);
-            MoveMenuCursor(1);
+            Menu_MoveCursor(1);
             gEasyChatStruct->unk24++;
             break;
         case -1:
@@ -800,7 +800,7 @@ void sub_80E6C84(void)
         }
         break;
     case 2:
-        switch (ProcessMenuInputNoWrap_())
+        switch (Menu_ProcessInputNoWrap_())
         {
         case 0:
             gSpecialVar_Result = 0;
@@ -813,7 +813,7 @@ void sub_80E6C84(void)
         }
         break;
     case 0xFF:
-        HandleDestroyMenuCursors();
+        Menu_DestroyCursor();
         sub_80E81FC();
         sub_80E682C(sub_80E6AC4);
         break;
@@ -856,12 +856,12 @@ void sub_80E6D7C(void)
             sub_80E91D4(1);
             sub_80E9744();
             DisplayYesNoMenu(23, 8, 0);
-            MoveMenuCursor(0);
+            Menu_MoveCursor(0);
             gEasyChatStruct->unk24++;
         }
         break;
     case 1:
-        switch (ProcessMenuInputNoWrap_())
+        switch (Menu_ProcessInputNoWrap_())
         {
         case 0:
             gSpecialVar_Result = (sub_80E7FA8() != 0);
@@ -883,7 +883,7 @@ void sub_80E6D7C(void)
             break;
         case -1:
         case 1:
-            HandleDestroyMenuCursors();
+            Menu_DestroyCursor();
             sub_80E81FC();
             if (gEasyChatStruct->unk8 == 6 && sub_80E7FA8() != 0)
             {
@@ -1738,5 +1738,5 @@ void sub_80E81FC(void)
 {
     PlaySE(SE_SELECT);
     sub_80E95A4();
-    MenuZeroFillWindowRect(0, 0, 29, 13);
+    Menu_EraseWindowRect(0, 0, 29, 13);
 }
