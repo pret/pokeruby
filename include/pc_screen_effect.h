@@ -15,5 +15,7 @@ struct PCScreenEffectStruct
 
 void sub_80C5CD4(struct PCScreenEffectStruct *unkStruct);
 bool8 sub_80C5DCC(void);
+void sub_80C5E38(struct PCScreenEffectStruct *unkStruct);
+bool8 sub_80C5F98(void);
 
 #endif //POKERUBY_PC_SCREEN_EFFECT_H

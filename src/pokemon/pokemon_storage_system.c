@@ -177,6 +177,7 @@ void sub_8099310(void);
 bool8 sub_8099374(void);
 void sub_8099958(void);
 bool8 sub_8099990(void);
+void sub_809BB90(void);
 void sub_8099BF8(u8 a0);
 void sub_8099C70(u8 whichBox);
 bool8 sub_8099D34(void);
@@ -670,7 +671,7 @@ void ShowPokemonStorageSystem(void)
     ScriptContext2_Enable();
 }
 
-void sub_8096130(void)
+void FieldCB_ReturnToOverworld(void)
 {
     u8 taskId = CreateTask(Task_PokemonStorageSystem, 80);
     gTasks[taskId].data[0] = 0;
@@ -688,7 +689,7 @@ void StorageSystemCreatePrimaryMenu(u8 whichMenu)
 void sub_80961A8(void)
 {
     gUnknown_02038474 = gPokemonStorageSystemPtr->unk_0005;
-    gFieldCallback = sub_8096130;
+    gFieldCallback = FieldCB_ReturnToOverworld;
     SetMainCallback2(c2_exit_to_overworld_2_switch);
 }
 
@@ -1942,6 +1943,131 @@ void sub_8097974(void)
             {
                 sub_809A860(1);
                 SetPSSCallback(sub_8096C84);
+            }
+            break;
+    }
+}
+
+void sub_8097A64(void)
+{
+    switch (ePokemonStorageSystem.unk_0004)
+    {
+        case 0:
+            PrintStorageActionText(PC_TEXT_JUMP_TO_WHICH_BOX);
+            sub_8096264(&ePokemonStorageSystem.unk_2370, 0x0007, 0xdaca, 3);
+            sub_809634C(gPokemonStorage.currentBox);
+            ePokemonStorageSystem.unk_0004++;
+            break;
+        case 1:
+            ePokemonStorageSystem.unk_08b2 = sub_8096368();
+            switch (ePokemonStorageSystem.unk_08b2)
+            {
+                case 200:
+                    break;
+                default:
+                    sub_8098A5C();
+                    sub_809635C();
+                    sub_8096310();
+                    if (ePokemonStorageSystem.unk_08b2 == 201 || ePokemonStorageSystem.unk_08b2 == gPokemonStorage.currentBox)
+                    {
+                        sub_809A860(1);
+                        SetPSSCallback(sub_8096C84);
+                    }
+                    else
+                    {
+                        ePokemonStorageSystem.unk_0004++;
+                    }
+                    break;
+            }
+            break;
+        case 2:
+            sub_8099C70(ePokemonStorageSystem.unk_08b2);
+            ePokemonStorageSystem.unk_0004++;
+            break;
+        case 3:
+            if (!sub_8099D34())
+            {
+                gPokemonStorage.currentBox = ePokemonStorageSystem.unk_08b2;
+                SetPSSCallback(sub_8096C84);
+            }
+            break;
+    }
+}
+
+void sub_8097B44(void)
+{
+    switch (ePokemonStorageSystem.unk_0004)
+    {
+        case 0:
+            sub_809BB90();
+            BeginNormalPaletteFade(0xffffffff, 0, 0, 16, 0);
+            ePokemonStorageSystem.unk_0004++;
+            break;
+        case 1:
+            if (!UpdatePaletteFade())
+            {
+                gUnknown_0203847F = 1;
+                ePokemonStorageSystem.unk_0006 = 1;
+                SetMainCallback2(sub_8096B5C);
+            }
+            break;
+    }
+}
+
+void sub_8097BA0(void)
+{
+    switch (ePokemonStorageSystem.unk_0004)
+    {
+        case 0:
+            if (sub_809BF20())
+            {
+                PlaySE(SE_HAZURE);
+                PrintStorageActionText(PC_TEXT_HOLDING_POKE);
+                ePokemonStorageSystem.unk_0004 = 1;
+            }
+            else
+            {
+                PlaySE(SE_SELECT);
+                PrintStorageActionText(PC_TEXT_EXIT_BOX);
+                sub_8098A38(0);
+                ePokemonStorageSystem.unk_0004 = 2;
+            }
+            break;
+        case 1:
+            if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+            {
+                sub_8098A5C();
+                SetPSSCallback(sub_8096C84);
+            }
+            break;
+        case 2:
+            switch (ProcessMenuInputNoWrap())
+            {
+                case 1:
+                case -1:
+                    sub_8098A5C();
+                    SetPSSCallback(sub_8096C84);
+                    break;
+                case 0:
+                    PlaySE(SE_PC_OFF);
+                    sub_8098A5C();
+                    ePokemonStorageSystem.unk_0004++;
+                    break;
+            }
+            break;
+        case 3:
+            ePokemonStorageSystem.unk_000c.tileTag = 0x000e;
+            ePokemonStorageSystem.unk_000c.paletteTag = 0xdad0;
+            ePokemonStorageSystem.unk_000c.unk04 = 20;
+            ePokemonStorageSystem.unk_000c.unk06 = 0;
+            sub_80C5E38(&ePokemonStorageSystem.unk_000c);
+            ePokemonStorageSystem.unk_0004++;
+            break;
+        case 4:
+            if (sub_80C5F98())
+            {
+                gPlayerPartyCount = CalculatePlayerPartyCount();
+                SetMainCallback2(sub_80961A8);
             }
             break;
     }

@@ -90,11 +90,7 @@ static bool8 sub_81438C4(void);
 
 // functions from different files
 void sub_81439D0(void);
-void sub_80C5E38(void*); // ?
-bool8 sub_80C5DCC(void);
-bool8 sub_80C5F98(void);
 void ReturnFromHallOfFamePC(void);
-u16 SpeciesToPokedexNum(u16 species);
 void remove_some_task(void);
 
 // data and gfx
@@ -130,9 +126,10 @@ static const s16 sHallOfFame_MonsHalfTeamPositions[3][4] =
     {-41,   214,    184,    64}
 };
 
-static const struct HallofFameMon sDummyFameMon =
+static const struct PCScreenEffectStruct sDummyFameMon =
 {
-    0x3EA03EA, 0, 0, 0, {0}
+    .tileTag = 0x3ea,
+    .paletteTag = 0x3ea
 };
 
 static const u8 sUnused2[6] = {2, 1, 3, 6, 4, 5};
@@ -800,20 +797,15 @@ void sub_81428CC(void)
         }
         break;
     case 3:
-        {
-            struct HallofFameMons* fameMons;
+        REG_BLDCNT = 0;
+        REG_BLDALPHA = 0;
+        REG_BLDY = 0;
+        sub_81435B8();
 
-            REG_BLDCNT = 0;
-            REG_BLDALPHA = 0;
-            REG_BLDY = 0;
-            sub_81435B8();
+        eHOFPCScreenEffect = sDummyFameMon;
 
-            fameMons = eHallOfFameMons1;
-            fameMons->mons[0] = sDummyFameMon;
-
-            sub_80C5CD4((struct PCScreenEffectStruct *)fameMons);
-            gMain.state++;
-        }
+        sub_80C5CD4(&eHOFPCScreenEffect);
+        gMain.state++;
         break;
     case 4:
         AnimateSprites();
@@ -1022,12 +1014,9 @@ static void sub_8142DF4(u8 taskID)
 
 static void sub_8142F78(u8 taskID)
 {
-    struct HallofFameMons* fameMons;
-
     CpuSet(gPlttBufferFaded, gPlttBufferUnfaded, 0x200);
-    fameMons = eHallOfFameMons1;
-    fameMons->mons[0] = sDummyFameMon;
-    sub_80C5E38(fameMons);
+    eHOFPCScreenEffect = sDummyFameMon;
+    sub_80C5E38(&eHOFPCScreenEffect);
     gTasks[taskID].func = sub_8142FCC;
 }
 

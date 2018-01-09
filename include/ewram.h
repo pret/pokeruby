@@ -241,6 +241,7 @@ extern u8 gSharedMem[];
 #define ewram1C000                      (*(struct Unk201C000 *)(gSharedMem + 0x1C000))
 #define ewram1c000                      (*(struct Unk201C000 *)(gSharedMem + 0x1C000)) // FIXME, names too similar
 #define eHallOfFameMons1                (struct HallofFameMons*)(&gSharedMem[0x1C000])
+#define eHOFPCScreenEffect              (*(struct PCScreenEffectStruct *)(gSharedMem + 0x1c000))
 #define EWRAM_1C800                     (*(struct Unk201C800 *)(gSharedMem + 0x1C800))
 #define ewram1D000                      ((struct Pokemon *)(gSharedMem + 0x1D000))
 #define ewram1D000_2                    ((u16 *)(gSharedMem + 0x1D000))
