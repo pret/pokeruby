@@ -16,6 +16,13 @@
 // still in part authoritative.
 #define NDEBUG
 
+// To enable print debugging, comment out "#define NDEBUG". This allows
+// the various AGBPrint functions to be used. (See include/gba/isagbprint.h).
+// Some emulators support a debug console window: uncomment NoCashGBAPrint()
+// and NoCashGBAPrintf() in libisagbprn.c to use no$gba's own proprietary
+// printing system. Use NoCashGBAPrint() and NoCashGBAPrintf() like you
+// would normally use AGBPrint() and AGBPrintf().
+
 #ifndef REVISION
 #define REVISION 0
 #endif
