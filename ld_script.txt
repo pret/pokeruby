@@ -292,6 +292,7 @@ SECTIONS {
         src/battle/anim/poison.o(.text);
         asm/flying.o(.text);
         asm/psychic.o(.text);
+        src/battle/anim/bug.o(.text);
         asm/bug.o(.text);
         asm/rock.o(.text);
         asm/ghost.o(.text);
