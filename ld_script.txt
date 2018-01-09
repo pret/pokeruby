@@ -50,8 +50,7 @@ SECTIONS {
         src/rom_800D42C.o(.text);
         asm/battle_1.o(.text_800DC24);
         src/battle/battle_2.o(.text);
-        asm/battle_2.o(.text);
-        src/battle/battle_3.o(.text);
+        src/battle/battle_util.o(.text);
         src/battle/battle_4.o(.text);
         src/battle/battle_controller_player.o(.text);
         src/battle/battle_7.o(.text);
@@ -336,7 +335,7 @@ SECTIONS {
         src/battle/battle_records.o(.text);
         asm/pokedex_area_screen.o(.text);
         src/scene/evolution_scene.o(.text);
-        asm/roulette.o(.text);
+        src/roulette.o(.text);
         asm/pokedex_cry_screen.o(.text);
         src/pokemon/pokedex_cry_screen.o(.text);
         asm/pokedex_cry_screen.o(.text_811A4F8);
@@ -348,14 +347,15 @@ SECTIONS {
         src/battle/battle_message.o(.text);
         src/field/choose_party.o(.text);
         src/scene/cable_car.o(.text);
-        asm/roulette_util.o(.text);
+        src/roulette_util.o(.text);
         src/engine/cable_car_util.o(.text);
         src/unused_8124F94.o(.text);
         src/engine/save.o(.text);
         src/engine/mystery_event_script.o(.text);
         src/field/field_effect_helpers.o(.text);
         asm/contest_ai.o(.text);
-        asm/battle_anim_81258BC.o(.text);
+        src/unused_81258BC.o(.text);
+        src/battle/anim/sfx.o(.text);
         src/battle/battle_controller_safari.o(.text);
         src/field/fldeff_sweetscent.o(.text);
         asm/battle_anim_812C144.o(.text);
@@ -453,7 +453,7 @@ SECTIONS {
         src/battle/battle_controller_opponent.o(.rodata);
         src/battle/battle_controller_linkopponent.o(.rodata);
         data/battle_moves.o(.rodata);
-        src/battle/battle_3.o(.rodata);
+        src/battle/battle_util.o(.rodata);
         src/pokemon/pokemon_data.o(.rodata);
         . = ALIGN(4);
         src/engine/trig.o(.rodata);

@@ -2,7 +2,7 @@
 gTrainers:: @ 81F04FC
 @ NONE
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_TRAINER_1
+	.byte TRAINER_CLASS_POKEMON_TRAINER_1
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BRENDAN
 	.string "$", 12
@@ -14,7 +14,7 @@ gTrainers:: @ 81F04FC
 
 @ ARCHIE_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_AQUA_LEADER
+	.byte TRAINER_CLASS_AQUA_LEADER
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_ARCHIE
 	.string "ADRIAN$", 12
@@ -26,7 +26,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_AQUA
+	.byte TRAINER_CLASS_TEAM_AQUA
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -38,7 +38,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_AQUA
+	.byte TRAINER_CLASS_TEAM_AQUA
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -50,7 +50,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_AQUA
+	.byte TRAINER_CLASS_TEAM_AQUA
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -62,7 +62,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_AQUA
+	.byte TRAINER_CLASS_TEAM_AQUA
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -74,7 +74,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_5
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_AQUA
+	.byte TRAINER_CLASS_TEAM_AQUA
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -86,7 +86,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_6
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_AQUA
+	.byte TRAINER_CLASS_TEAM_AQUA
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -98,7 +98,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_7
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_AQUA
+	.byte TRAINER_CLASS_TEAM_AQUA
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -110,7 +110,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_8
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_AQUA
+	.byte TRAINER_CLASS_TEAM_AQUA
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -122,7 +122,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_9
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_AQUA
+	.byte TRAINER_CLASS_TEAM_AQUA
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -134,7 +134,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_10
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_AQUA
+	.byte TRAINER_CLASS_TEAM_AQUA
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -146,7 +146,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_11
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_AQUA
+	.byte TRAINER_CLASS_TEAM_AQUA
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -158,7 +158,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_12
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_AQUA
+	.byte TRAINER_CLASS_TEAM_AQUA
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -170,7 +170,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_13
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_AQUA
+	.byte TRAINER_CLASS_TEAM_AQUA
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -182,7 +182,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_14
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_AQUA
+	.byte TRAINER_CLASS_TEAM_AQUA
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -194,7 +194,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_15
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_AQUA
+	.byte TRAINER_CLASS_TEAM_AQUA
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -206,7 +206,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_16
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_AQUA
+	.byte TRAINER_CLASS_TEAM_AQUA
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -218,7 +218,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_17
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_AQUA
+	.byte TRAINER_CLASS_TEAM_AQUA
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -230,7 +230,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_18
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_AQUA
+	.byte TRAINER_CLASS_TEAM_AQUA
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -242,7 +242,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_19
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_AQUA
+	.byte TRAINER_CLASS_TEAM_AQUA
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -254,7 +254,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_20
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_AQUA
+	.byte TRAINER_CLASS_TEAM_AQUA
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -266,7 +266,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_21
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_AQUA
+	.byte TRAINER_CLASS_TEAM_AQUA
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -278,7 +278,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_22
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_AQUA
+	.byte TRAINER_CLASS_TEAM_AQUA
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -290,7 +290,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_23
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_AQUA
+	.byte TRAINER_CLASS_TEAM_AQUA
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -302,7 +302,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_24
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_AQUA
+	.byte TRAINER_CLASS_TEAM_AQUA
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -314,7 +314,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_25
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_AQUA
+	.byte TRAINER_CLASS_TEAM_AQUA
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_F
 	.string "RÜPEL$", 12
@@ -326,7 +326,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_26
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_AQUA
+	.byte TRAINER_CLASS_TEAM_AQUA
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_F
 	.string "RÜPEL$", 12
@@ -338,7 +338,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_27
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_AQUA
+	.byte TRAINER_CLASS_TEAM_AQUA
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_F
 	.string "RÜPEL$", 12
@@ -350,7 +350,7 @@ gTrainers:: @ 81F04FC
 
 @ ANONYMOUS_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_AQUA_ADMIN
+	.byte TRAINER_CLASS_AQUA_ADMIN
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_ADMIN_M
 	.string "$", 12
@@ -362,7 +362,7 @@ gTrainers:: @ 81F04FC
 
 @ MATT_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_AQUA_ADMIN
+	.byte TRAINER_CLASS_AQUA_ADMIN
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_ADMIN_M
 	.string "WOLFGANG$", 12
@@ -374,7 +374,7 @@ gTrainers:: @ 81F04FC
 
 @ MATT_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_AQUA_ADMIN
+	.byte TRAINER_CLASS_AQUA_ADMIN
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_ADMIN_M
 	.string "WOLFGANG$", 12
@@ -386,7 +386,7 @@ gTrainers:: @ 81F04FC
 
 @ SHELLY_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_AQUA_ADMIN
+	.byte TRAINER_CLASS_AQUA_ADMIN
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_ADMIN_F
 	.string "KORDULA$", 12
@@ -398,7 +398,7 @@ gTrainers:: @ 81F04FC
 
 @ SHELLY_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_AQUA_ADMIN
+	.byte TRAINER_CLASS_AQUA_ADMIN
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_ADMIN_F
 	.string "KORDULA$", 12
@@ -410,7 +410,7 @@ gTrainers:: @ 81F04FC
 
 @ ARCHIE_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_AQUA_LEADER
+	.byte TRAINER_CLASS_AQUA_LEADER
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_ARCHIE
 	.string "ADRIAN$", 12
@@ -422,7 +422,7 @@ gTrainers:: @ 81F04FC
 
 @ ARCHIE_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_AQUA_LEADER
+	.byte TRAINER_CLASS_AQUA_LEADER
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_ARCHIE
 	.string "ADRIAN$", 12
@@ -434,7 +434,7 @@ gTrainers:: @ 81F04FC
 
 @ DAISY
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_AROMA_LADY
+	.byte TRAINER_CLASS_AROMA_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_AROMA_LADY
 	.string "MARGARETE$", 12
@@ -446,7 +446,7 @@ gTrainers:: @ 81F04FC
 
 @ ROSE_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_AROMA_LADY
+	.byte TRAINER_CLASS_AROMA_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_AROMA_LADY
 	.string "ROSEMARIE$", 12
@@ -458,7 +458,7 @@ gTrainers:: @ 81F04FC
 
 @ LILY
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_AROMA_LADY
+	.byte TRAINER_CLASS_AROMA_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_AROMA_LADY
 	.string "LILLY$", 12
@@ -470,7 +470,7 @@ gTrainers:: @ 81F04FC
 
 @ VIOLET
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_AROMA_LADY
+	.byte TRAINER_CLASS_AROMA_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_AROMA_LADY
 	.string "ERIKA$", 12
@@ -482,7 +482,7 @@ gTrainers:: @ 81F04FC
 
 @ ROSE_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_AROMA_LADY
+	.byte TRAINER_CLASS_AROMA_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_AROMA_LADY
 	.string "ROSEMARIE$", 12
@@ -494,7 +494,7 @@ gTrainers:: @ 81F04FC
 
 @ ROSE_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_AROMA_LADY
+	.byte TRAINER_CLASS_AROMA_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_AROMA_LADY
 	.string "ROSEMARIE$", 12
@@ -506,7 +506,7 @@ gTrainers:: @ 81F04FC
 
 @ ROSE_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_AROMA_LADY
+	.byte TRAINER_CLASS_AROMA_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_AROMA_LADY
 	.string "ROSEMARIE$", 12
@@ -518,7 +518,7 @@ gTrainers:: @ 81F04FC
 
 @ ROSE_5
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_AROMA_LADY
+	.byte TRAINER_CLASS_AROMA_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_AROMA_LADY
 	.string "ROSEMARIE$", 12
@@ -530,7 +530,7 @@ gTrainers:: @ 81F04FC
 
 @ DUSTY_1
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_RUIN_MANIAC
+	.byte TRAINER_CLASS_RUIN_MANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_RUIN_MANIAC
 	.string "RÜDIGER$", 12
@@ -542,7 +542,7 @@ gTrainers:: @ 81F04FC
 
 @ CHIP
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_RUIN_MANIAC
+	.byte TRAINER_CLASS_RUIN_MANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_RUIN_MANIAC
 	.string "RUPRECHT$", 12
@@ -554,7 +554,7 @@ gTrainers:: @ 81F04FC
 
 @ FOSTER
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_RUIN_MANIAC
+	.byte TRAINER_CLASS_RUIN_MANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_RUIN_MANIAC
 	.string "RUBEN$", 12
@@ -566,7 +566,7 @@ gTrainers:: @ 81F04FC
 
 @ DUSTY_2
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_RUIN_MANIAC
+	.byte TRAINER_CLASS_RUIN_MANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_RUIN_MANIAC
 	.string "RÜDIGER$", 12
@@ -578,7 +578,7 @@ gTrainers:: @ 81F04FC
 
 @ DUSTY_3
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_RUIN_MANIAC
+	.byte TRAINER_CLASS_RUIN_MANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_RUIN_MANIAC
 	.string "RÜDIGER$", 12
@@ -590,7 +590,7 @@ gTrainers:: @ 81F04FC
 
 @ DUSTY_4
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_RUIN_MANIAC
+	.byte TRAINER_CLASS_RUIN_MANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_RUIN_MANIAC
 	.string "RÜDIGER$", 12
@@ -602,7 +602,7 @@ gTrainers:: @ 81F04FC
 
 @ DUSTY_5
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_RUIN_MANIAC
+	.byte TRAINER_CLASS_RUIN_MANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_RUIN_MANIAC
 	.string "RÜDIGER$", 12
@@ -614,7 +614,7 @@ gTrainers:: @ 81F04FC
 
 @ GABBY_AND_TY_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_INTERVIEWER
+	.byte TRAINER_CLASS_INTERVIEWER
 	.byte TRAINER_ENCOUNTER_MUSIC_INTERVIEWER @ gender flag and encounter music
 	.byte TRAINER_PIC_INTERVIEWER
 	.string "PIA & UDO$", 12
@@ -626,7 +626,7 @@ gTrainers:: @ 81F04FC
 
 @ GABBY_AND_TY_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_INTERVIEWER
+	.byte TRAINER_CLASS_INTERVIEWER
 	.byte TRAINER_ENCOUNTER_MUSIC_INTERVIEWER @ gender flag and encounter music
 	.byte TRAINER_PIC_INTERVIEWER
 	.string "PIA & UDO$", 12
@@ -638,7 +638,7 @@ gTrainers:: @ 81F04FC
 
 @ GABBY_AND_TY_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_INTERVIEWER
+	.byte TRAINER_CLASS_INTERVIEWER
 	.byte TRAINER_ENCOUNTER_MUSIC_INTERVIEWER @ gender flag and encounter music
 	.byte TRAINER_PIC_INTERVIEWER
 	.string "PIA & UDO$", 12
@@ -650,7 +650,7 @@ gTrainers:: @ 81F04FC
 
 @ GABBY_AND_TY_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_INTERVIEWER
+	.byte TRAINER_CLASS_INTERVIEWER
 	.byte TRAINER_ENCOUNTER_MUSIC_INTERVIEWER @ gender flag and encounter music
 	.byte TRAINER_PIC_INTERVIEWER
 	.string "PIA & UDO$", 12
@@ -662,7 +662,7 @@ gTrainers:: @ 81F04FC
 
 @ GABBY_AND_TY_5
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_INTERVIEWER
+	.byte TRAINER_CLASS_INTERVIEWER
 	.byte TRAINER_ENCOUNTER_MUSIC_INTERVIEWER @ gender flag and encounter music
 	.byte TRAINER_PIC_INTERVIEWER
 	.string "PIA & UDO$", 12
@@ -674,7 +674,7 @@ gTrainers:: @ 81F04FC
 
 @ GABBY_AND_TY_6
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_INTERVIEWER
+	.byte TRAINER_CLASS_INTERVIEWER
 	.byte TRAINER_ENCOUNTER_MUSIC_INTERVIEWER @ gender flag and encounter music
 	.byte TRAINER_PIC_INTERVIEWER
 	.string "PIA & UDO$", 12
@@ -686,7 +686,7 @@ gTrainers:: @ 81F04FC
 
 @ LOLA_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TUBER_F
+	.byte TRAINER_CLASS_TUBER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_TUBER_F
 	.string "LOLA$", 12
@@ -698,7 +698,7 @@ gTrainers:: @ 81F04FC
 
 @ CARMEN
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TUBER_F
+	.byte TRAINER_CLASS_TUBER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_TUBER_F
 	.string "CARMEN$", 12
@@ -710,7 +710,7 @@ gTrainers:: @ 81F04FC
 
 @ GWEN
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TUBER_F
+	.byte TRAINER_CLASS_TUBER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_TUBER_F
 	.string "HILDE $", 12
@@ -722,7 +722,7 @@ gTrainers:: @ 81F04FC
 
 @ LOLA_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TUBER_F
+	.byte TRAINER_CLASS_TUBER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_TUBER_F
 	.string "LOLA$", 12
@@ -734,7 +734,7 @@ gTrainers:: @ 81F04FC
 
 @ LOLA_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TUBER_F
+	.byte TRAINER_CLASS_TUBER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_TUBER_F
 	.string "LOLA$", 12
@@ -746,7 +746,7 @@ gTrainers:: @ 81F04FC
 
 @ LOLA_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TUBER_F
+	.byte TRAINER_CLASS_TUBER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_TUBER_F
 	.string "LOLA$", 12
@@ -758,7 +758,7 @@ gTrainers:: @ 81F04FC
 
 @ LOLA_5
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TUBER_F
+	.byte TRAINER_CLASS_TUBER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_TUBER_F
 	.string "LOLA$", 12
@@ -770,7 +770,7 @@ gTrainers:: @ 81F04FC
 
 @ RICKY_1
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_TUBER_M
+	.byte TRAINER_CLASS_TUBER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_TUBER_M
 	.string "GÜNTHER$", 12
@@ -782,7 +782,7 @@ gTrainers:: @ 81F04FC
 
 @ SIMON
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TUBER_M
+	.byte TRAINER_CLASS_TUBER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_TUBER_M
 	.string "SIMON$", 12
@@ -794,7 +794,7 @@ gTrainers:: @ 81F04FC
 
 @ CHARLIE
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TUBER_M
+	.byte TRAINER_CLASS_TUBER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_TUBER_M
 	.string "HILMAR$", 12
@@ -806,7 +806,7 @@ gTrainers:: @ 81F04FC
 
 @ RICKY_2
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_TUBER_M
+	.byte TRAINER_CLASS_TUBER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_TUBER_M
 	.string "GÜNTHER$", 12
@@ -818,7 +818,7 @@ gTrainers:: @ 81F04FC
 
 @ RICKY_3
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_TUBER_M
+	.byte TRAINER_CLASS_TUBER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_TUBER_M
 	.string "GÜNTHER$", 12
@@ -830,7 +830,7 @@ gTrainers:: @ 81F04FC
 
 @ RICKY_4
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_TUBER_M
+	.byte TRAINER_CLASS_TUBER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_TUBER_M
 	.string "GÜNTHER$", 12
@@ -842,7 +842,7 @@ gTrainers:: @ 81F04FC
 
 @ RICKY_5
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_TUBER_M
+	.byte TRAINER_CLASS_TUBER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_TUBER_M
 	.string "GÜNTHER$", 12
@@ -854,7 +854,7 @@ gTrainers:: @ 81F04FC
 
 @ RANDALL
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_COOL_TRAINER
+	.byte TRAINER_CLASS_COOL_TRAINER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
 	.string "HUBERT$", 12
@@ -866,7 +866,7 @@ gTrainers:: @ 81F04FC
 
 @ PARKER
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_COOL_TRAINER
+	.byte TRAINER_CLASS_COOL_TRAINER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
 	.string "PATRICK$", 12
@@ -878,7 +878,7 @@ gTrainers:: @ 81F04FC
 
 @ GEORGE
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_COOL_TRAINER
+	.byte TRAINER_CLASS_COOL_TRAINER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
 	.string "NILS$", 12
@@ -890,7 +890,7 @@ gTrainers:: @ 81F04FC
 
 @ BERKE
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_COOL_TRAINER
+	.byte TRAINER_CLASS_COOL_TRAINER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
 	.string "CHRISTIAN$", 12
@@ -902,7 +902,7 @@ gTrainers:: @ 81F04FC
 
 @ CLYDE
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_COOL_TRAINER
+	.byte TRAINER_CLASS_COOL_TRAINER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
 	.string "OSKAR$", 12
@@ -914,7 +914,7 @@ gTrainers:: @ 81F04FC
 
 @ VINCENT
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_COOL_TRAINER
+	.byte TRAINER_CLASS_COOL_TRAINER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
 	.string "OTFRIED$", 12
@@ -926,7 +926,7 @@ gTrainers:: @ 81F04FC
 
 @ LEROY
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_COOL_TRAINER
+	.byte TRAINER_CLASS_COOL_TRAINER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
 	.string "OTMAR$", 12
@@ -938,7 +938,7 @@ gTrainers:: @ 81F04FC
 
 @ WILTON_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_COOL_TRAINER
+	.byte TRAINER_CLASS_COOL_TRAINER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
 	.string "PASCAL$", 12
@@ -950,7 +950,7 @@ gTrainers:: @ 81F04FC
 
 @ EDGAR
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_COOL_TRAINER
+	.byte TRAINER_CLASS_COOL_TRAINER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
 	.string "EDGAR$", 12
@@ -962,7 +962,7 @@ gTrainers:: @ 81F04FC
 
 @ ALBERT
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_COOL_TRAINER
+	.byte TRAINER_CLASS_COOL_TRAINER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
 	.string "PABLO$", 12
@@ -974,7 +974,7 @@ gTrainers:: @ 81F04FC
 
 @ SAMUEL
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_COOL_TRAINER
+	.byte TRAINER_CLASS_COOL_TRAINER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
 	.string "RICHARD$", 12
@@ -986,7 +986,7 @@ gTrainers:: @ 81F04FC
 
 @ VITO
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_COOL_TRAINER
+	.byte TRAINER_CLASS_COOL_TRAINER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
 	.string "PAUL$", 12
@@ -998,7 +998,7 @@ gTrainers:: @ 81F04FC
 
 @ OWEN
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_COOL_TRAINER
+	.byte TRAINER_CLASS_COOL_TRAINER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
 	.string "RAIMUND$", 12
@@ -1010,7 +1010,7 @@ gTrainers:: @ 81F04FC
 
 @ WILTON_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_COOL_TRAINER
+	.byte TRAINER_CLASS_COOL_TRAINER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
 	.string "PASCAL$", 12
@@ -1022,7 +1022,7 @@ gTrainers:: @ 81F04FC
 
 @ WILTON_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_COOL_TRAINER
+	.byte TRAINER_CLASS_COOL_TRAINER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
 	.string "PASCAL$", 12
@@ -1034,7 +1034,7 @@ gTrainers:: @ 81F04FC
 
 @ WILTON_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_COOL_TRAINER
+	.byte TRAINER_CLASS_COOL_TRAINER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
 	.string "PASCAL$", 12
@@ -1046,7 +1046,7 @@ gTrainers:: @ 81F04FC
 
 @ WILTON_5
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_COOL_TRAINER
+	.byte TRAINER_CLASS_COOL_TRAINER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
 	.string "PASCAL$", 12
@@ -1058,7 +1058,7 @@ gTrainers:: @ 81F04FC
 
 @ WARREN
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_COOL_TRAINER
+	.byte TRAINER_CLASS_COOL_TRAINER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
 	.string "MARKUS$", 12
@@ -1070,7 +1070,7 @@ gTrainers:: @ 81F04FC
 
 @ MARY
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_COOL_TRAINER
+	.byte TRAINER_CLASS_COOL_TRAINER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
 	.string "YVONNE$", 12
@@ -1082,7 +1082,7 @@ gTrainers:: @ 81F04FC
 
 @ LORI
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_COOL_TRAINER
+	.byte TRAINER_CLASS_COOL_TRAINER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
 	.string "RAMONA$", 12
@@ -1094,7 +1094,7 @@ gTrainers:: @ 81F04FC
 
 @ JODY
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_COOL_TRAINER
+	.byte TRAINER_CLASS_COOL_TRAINER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
 	.string "ROSWITA$", 12
@@ -1106,7 +1106,7 @@ gTrainers:: @ 81F04FC
 
 @ WENDY
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_COOL_TRAINER
+	.byte TRAINER_CLASS_COOL_TRAINER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
 	.string "VIOLA$", 12
@@ -1118,7 +1118,7 @@ gTrainers:: @ 81F04FC
 
 @ ELAINE
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_COOL_TRAINER
+	.byte TRAINER_CLASS_COOL_TRAINER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
 	.string "FRAUKE$", 12
@@ -1130,7 +1130,7 @@ gTrainers:: @ 81F04FC
 
 @ BROOKE_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_COOL_TRAINER
+	.byte TRAINER_CLASS_COOL_TRAINER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
 	.string "VERONIKA$", 12
@@ -1142,7 +1142,7 @@ gTrainers:: @ 81F04FC
 
 @ JENNIFER
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_COOL_TRAINER
+	.byte TRAINER_CLASS_COOL_TRAINER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
 	.string "MARIANNE$", 12
@@ -1154,7 +1154,7 @@ gTrainers:: @ 81F04FC
 
 @ HOPE
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_COOL_TRAINER
+	.byte TRAINER_CLASS_COOL_TRAINER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
 	.string "TRUDLINDE$", 12
@@ -1166,7 +1166,7 @@ gTrainers:: @ 81F04FC
 
 @ SHANNON
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_COOL_TRAINER
+	.byte TRAINER_CLASS_COOL_TRAINER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
 	.string "THERESA$", 12
@@ -1178,7 +1178,7 @@ gTrainers:: @ 81F04FC
 
 @ MICHELLE
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_COOL_TRAINER
+	.byte TRAINER_CLASS_COOL_TRAINER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
 	.string "MICHELLE$", 12
@@ -1190,7 +1190,7 @@ gTrainers:: @ 81F04FC
 
 @ CAROLINE
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_COOL_TRAINER
+	.byte TRAINER_CLASS_COOL_TRAINER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
 	.string "KAROLINE$", 12
@@ -1202,7 +1202,7 @@ gTrainers:: @ 81F04FC
 
 @ JULIE
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_COOL_TRAINER
+	.byte TRAINER_CLASS_COOL_TRAINER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
 	.string "MICHAELA$", 12
@@ -1214,7 +1214,7 @@ gTrainers:: @ 81F04FC
 
 @ BROOKE_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_COOL_TRAINER
+	.byte TRAINER_CLASS_COOL_TRAINER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
 	.string "VERONIKA$", 12
@@ -1226,7 +1226,7 @@ gTrainers:: @ 81F04FC
 
 @ BROOKE_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_COOL_TRAINER
+	.byte TRAINER_CLASS_COOL_TRAINER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
 	.string "VERONIKA$", 12
@@ -1238,7 +1238,7 @@ gTrainers:: @ 81F04FC
 
 @ BROOKE_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_COOL_TRAINER
+	.byte TRAINER_CLASS_COOL_TRAINER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
 	.string "VERONIKA$", 12
@@ -1250,7 +1250,7 @@ gTrainers:: @ 81F04FC
 
 @ BROOKE_5
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_COOL_TRAINER
+	.byte TRAINER_CLASS_COOL_TRAINER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
 	.string "VERONIKA$", 12
@@ -1262,7 +1262,7 @@ gTrainers:: @ 81F04FC
 
 @ PATRICIA
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_HEX_MANIAC
+	.byte TRAINER_CLASS_HEX_MANIAC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_HEX_MANIAC
 	.string "WALBURGA$", 12
@@ -1274,7 +1274,7 @@ gTrainers:: @ 81F04FC
 
 @ KINDRA
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_HEX_MANIAC
+	.byte TRAINER_CLASS_HEX_MANIAC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_HEX_MANIAC
 	.string "GUNDULA$", 12
@@ -1286,7 +1286,7 @@ gTrainers:: @ 81F04FC
 
 @ TAMMY
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_HEX_MANIAC
+	.byte TRAINER_CLASS_HEX_MANIAC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_HEX_MANIAC
 	.string "BRUNHILDE$", 12
@@ -1298,7 +1298,7 @@ gTrainers:: @ 81F04FC
 
 @ VALERIE_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_HEX_MANIAC
+	.byte TRAINER_CLASS_HEX_MANIAC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_HEX_MANIAC
 	.string "TABITHA$", 12
@@ -1310,7 +1310,7 @@ gTrainers:: @ 81F04FC
 
 @ TASHA
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_HEX_MANIAC
+	.byte TRAINER_CLASS_HEX_MANIAC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_HEX_MANIAC
 	.string "PANDORA$", 12
@@ -1322,7 +1322,7 @@ gTrainers:: @ 81F04FC
 
 @ VALERIE_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_HEX_MANIAC
+	.byte TRAINER_CLASS_HEX_MANIAC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_HEX_MANIAC
 	.string "TABITHA$", 12
@@ -1334,7 +1334,7 @@ gTrainers:: @ 81F04FC
 
 @ VALERIE_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_HEX_MANIAC
+	.byte TRAINER_CLASS_HEX_MANIAC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_HEX_MANIAC
 	.string "TABITHA$", 12
@@ -1346,7 +1346,7 @@ gTrainers:: @ 81F04FC
 
 @ VALERIE_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_HEX_MANIAC
+	.byte TRAINER_CLASS_HEX_MANIAC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_HEX_MANIAC
 	.string "TABITHA$", 12
@@ -1358,7 +1358,7 @@ gTrainers:: @ 81F04FC
 
 @ VALERIE_5
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_HEX_MANIAC
+	.byte TRAINER_CLASS_HEX_MANIAC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_HEX_MANIAC
 	.string "TABITHA$", 12
@@ -1370,7 +1370,7 @@ gTrainers:: @ 81F04FC
 
 @ CINDY_1
 	.byte F_TRAINER_PARTY_HELD_ITEM @ party type flags
-	.byte TRAINER_CLASS_NAME_LADY
+	.byte TRAINER_CLASS_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LADY
 	.string "PATRIZIA$", 12
@@ -1382,7 +1382,7 @@ gTrainers:: @ 81F04FC
 
 @ ANONYMOUS_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_LADY
+	.byte TRAINER_CLASS_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LADY
 	.string "$", 12
@@ -1394,7 +1394,7 @@ gTrainers:: @ 81F04FC
 
 @ BRIANNA_1
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_LADY
+	.byte TRAINER_CLASS_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LADY
 	.string "NATASCHA$", 12
@@ -1406,7 +1406,7 @@ gTrainers:: @ 81F04FC
 
 @ CINDY_2
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_LADY
+	.byte TRAINER_CLASS_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LADY
 	.string "PATRIZIA$", 12
@@ -1418,7 +1418,7 @@ gTrainers:: @ 81F04FC
 
 @ BRIANNA_2
 	.byte F_TRAINER_PARTY_HELD_ITEM @ party type flags
-	.byte TRAINER_CLASS_NAME_LADY
+	.byte TRAINER_CLASS_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LADY
 	.string "NATASCHA$", 12
@@ -1430,7 +1430,7 @@ gTrainers:: @ 81F04FC
 
 @ ANETTE
 	.byte F_TRAINER_PARTY_HELD_ITEM @ party type flags
-	.byte TRAINER_CLASS_NAME_LADY
+	.byte TRAINER_CLASS_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LADY
 	.string "ANETTE$", 12
@@ -1442,7 +1442,7 @@ gTrainers:: @ 81F04FC
 
 @ CINDY_3
 	.byte F_TRAINER_PARTY_HELD_ITEM @ party type flags
-	.byte TRAINER_CLASS_NAME_LADY
+	.byte TRAINER_CLASS_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LADY
 	.string "PATRIZIA$", 12
@@ -1454,7 +1454,7 @@ gTrainers:: @ 81F04FC
 
 @ CINDY_4
 	.byte F_TRAINER_PARTY_HELD_ITEM @ party type flags
-	.byte TRAINER_CLASS_NAME_LADY
+	.byte TRAINER_CLASS_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LADY
 	.string "PATRIZIA$", 12
@@ -1466,7 +1466,7 @@ gTrainers:: @ 81F04FC
 
 @ CINDY_5
 	.byte F_TRAINER_PARTY_HELD_ITEM @ party type flags
-	.byte TRAINER_CLASS_NAME_LADY
+	.byte TRAINER_CLASS_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LADY
 	.string "PATRIZIA$", 12
@@ -1478,7 +1478,7 @@ gTrainers:: @ 81F04FC
 
 @ CINDY_6
 	.byte F_TRAINER_PARTY_HELD_ITEM | F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_LADY
+	.byte TRAINER_CLASS_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LADY
 	.string "PATRIZIA$", 12
@@ -1490,7 +1490,7 @@ gTrainers:: @ 81F04FC
 
 @ MELISSA
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BEAUTY
+	.byte TRAINER_CLASS_BEAUTY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BEAUTY
 	.string "MELISSA$", 12
@@ -1502,7 +1502,7 @@ gTrainers:: @ 81F04FC
 
 @ SHEILA
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BEAUTY
+	.byte TRAINER_CLASS_BEAUTY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BEAUTY
 	.string "SYLVIA$", 12
@@ -1514,7 +1514,7 @@ gTrainers:: @ 81F04FC
 
 @ SHIRLEY
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BEAUTY
+	.byte TRAINER_CLASS_BEAUTY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BEAUTY
 	.string "MIRJAM$", 12
@@ -1526,7 +1526,7 @@ gTrainers:: @ 81F04FC
 
 @ JESSICA_1
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_BEAUTY
+	.byte TRAINER_CLASS_BEAUTY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BEAUTY
 	.string "GERMAINE$", 12
@@ -1538,7 +1538,7 @@ gTrainers:: @ 81F04FC
 
 @ CONNIE
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BEAUTY
+	.byte TRAINER_CLASS_BEAUTY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BEAUTY
 	.string "FRANCESCA$", 12
@@ -1550,7 +1550,7 @@ gTrainers:: @ 81F04FC
 
 @ BRIDGET
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BEAUTY
+	.byte TRAINER_CLASS_BEAUTY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BEAUTY
 	.string "SALMA$", 12
@@ -1562,7 +1562,7 @@ gTrainers:: @ 81F04FC
 
 @ OLIVIA
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_BEAUTY
+	.byte TRAINER_CLASS_BEAUTY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BEAUTY
 	.string "TIA$", 12
@@ -1574,7 +1574,7 @@ gTrainers:: @ 81F04FC
 
 @ TIFFANY
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BEAUTY
+	.byte TRAINER_CLASS_BEAUTY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BEAUTY
 	.string "DANIELA$", 12
@@ -1586,7 +1586,7 @@ gTrainers:: @ 81F04FC
 
 @ JESSICA_2
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_BEAUTY
+	.byte TRAINER_CLASS_BEAUTY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BEAUTY
 	.string "GERMAINE$", 12
@@ -1598,7 +1598,7 @@ gTrainers:: @ 81F04FC
 
 @ JESSICA_3
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_BEAUTY
+	.byte TRAINER_CLASS_BEAUTY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BEAUTY
 	.string "GERMAINE$", 12
@@ -1610,7 +1610,7 @@ gTrainers:: @ 81F04FC
 
 @ JESSICA_4
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_BEAUTY
+	.byte TRAINER_CLASS_BEAUTY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BEAUTY
 	.string "GERMAINE$", 12
@@ -1622,7 +1622,7 @@ gTrainers:: @ 81F04FC
 
 @ JESSICA_5
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_BEAUTY
+	.byte TRAINER_CLASS_BEAUTY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BEAUTY
 	.string "GERMAINE$", 12
@@ -1634,7 +1634,7 @@ gTrainers:: @ 81F04FC
 
 @ WINSTON_1
 	.byte F_TRAINER_PARTY_HELD_ITEM @ party type flags
-	.byte TRAINER_CLASS_NAME_RICH_BOY
+	.byte TRAINER_CLASS_RICH_BOY
 	.byte TRAINER_ENCOUNTER_MUSIC_RICH @ gender flag and encounter music
 	.byte TRAINER_PIC_RICH_BOY
 	.string "RENE$", 12
@@ -1646,7 +1646,7 @@ gTrainers:: @ 81F04FC
 
 @ ANONYMOUS_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_RICH_BOY
+	.byte TRAINER_CLASS_RICH_BOY
 	.byte TRAINER_ENCOUNTER_MUSIC_RICH @ gender flag and encounter music
 	.byte TRAINER_PIC_RICH_BOY
 	.string "$", 12
@@ -1658,7 +1658,7 @@ gTrainers:: @ 81F04FC
 
 @ GARRET
 	.byte F_TRAINER_PARTY_HELD_ITEM @ party type flags
-	.byte TRAINER_CLASS_NAME_RICH_BOY
+	.byte TRAINER_CLASS_RICH_BOY
 	.byte TRAINER_ENCOUNTER_MUSIC_RICH @ gender flag and encounter music
 	.byte TRAINER_PIC_RICH_BOY
 	.string "KAI$", 12
@@ -1670,7 +1670,7 @@ gTrainers:: @ 81F04FC
 
 @ WINSTON_2
 	.byte F_TRAINER_PARTY_HELD_ITEM @ party type flags
-	.byte TRAINER_CLASS_NAME_RICH_BOY
+	.byte TRAINER_CLASS_RICH_BOY
 	.byte TRAINER_ENCOUNTER_MUSIC_RICH @ gender flag and encounter music
 	.byte TRAINER_PIC_RICH_BOY
 	.string "RENE$", 12
@@ -1682,7 +1682,7 @@ gTrainers:: @ 81F04FC
 
 @ WINSTON_3
 	.byte F_TRAINER_PARTY_HELD_ITEM @ party type flags
-	.byte TRAINER_CLASS_NAME_RICH_BOY
+	.byte TRAINER_CLASS_RICH_BOY
 	.byte TRAINER_ENCOUNTER_MUSIC_RICH @ gender flag and encounter music
 	.byte TRAINER_PIC_RICH_BOY
 	.string "RENE$", 12
@@ -1694,7 +1694,7 @@ gTrainers:: @ 81F04FC
 
 @ WINSTON_4
 	.byte F_TRAINER_PARTY_HELD_ITEM @ party type flags
-	.byte TRAINER_CLASS_NAME_RICH_BOY
+	.byte TRAINER_CLASS_RICH_BOY
 	.byte TRAINER_ENCOUNTER_MUSIC_RICH @ gender flag and encounter music
 	.byte TRAINER_PIC_RICH_BOY
 	.string "RENE$", 12
@@ -1706,7 +1706,7 @@ gTrainers:: @ 81F04FC
 
 @ WINSTON_5
 	.byte F_TRAINER_PARTY_HELD_ITEM | F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_RICH_BOY
+	.byte TRAINER_CLASS_RICH_BOY
 	.byte TRAINER_ENCOUNTER_MUSIC_RICH @ gender flag and encounter music
 	.byte TRAINER_PIC_RICH_BOY
 	.string "RENE$", 12
@@ -1718,7 +1718,7 @@ gTrainers:: @ 81F04FC
 
 @ STEVE_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMANIAC
+	.byte TRAINER_CLASS_POKEMANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMANIAC
 	.string "HIRO$", 12
@@ -1730,7 +1730,7 @@ gTrainers:: @ 81F04FC
 
 @ CHRIS
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMANIAC
+	.byte TRAINER_CLASS_POKEMANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMANIAC
 	.string "CHRIS$", 12
@@ -1742,7 +1742,7 @@ gTrainers:: @ 81F04FC
 
 @ MARK
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMANIAC
+	.byte TRAINER_CLASS_POKEMANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMANIAC
 	.string "MARK$", 12
@@ -1754,7 +1754,7 @@ gTrainers:: @ 81F04FC
 
 @ KENN
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMANIAC
+	.byte TRAINER_CLASS_POKEMANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMANIAC
 	.string "KLAUS$", 12
@@ -1766,7 +1766,7 @@ gTrainers:: @ 81F04FC
 
 @ STEVE_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMANIAC
+	.byte TRAINER_CLASS_POKEMANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMANIAC
 	.string "HIRO$", 12
@@ -1778,7 +1778,7 @@ gTrainers:: @ 81F04FC
 
 @ STEVE_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMANIAC
+	.byte TRAINER_CLASS_POKEMANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMANIAC
 	.string "HIRO$", 12
@@ -1790,7 +1790,7 @@ gTrainers:: @ 81F04FC
 
 @ STEVE_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMANIAC
+	.byte TRAINER_CLASS_POKEMANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMANIAC
 	.string "HIRO$", 12
@@ -1802,7 +1802,7 @@ gTrainers:: @ 81F04FC
 
 @ STEVE_5
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMANIAC
+	.byte TRAINER_CLASS_POKEMANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMANIAC
 	.string "HIRO$", 12
@@ -1814,7 +1814,7 @@ gTrainers:: @ 81F04FC
 
 @ LUIS
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_M
+	.byte TRAINER_CLASS_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
 	.string "KONSTANTIN$", 12
@@ -1826,7 +1826,7 @@ gTrainers:: @ 81F04FC
 
 @ AUSTIN
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_M
+	.byte TRAINER_CLASS_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
 	.string "GUIDO$", 12
@@ -1838,7 +1838,7 @@ gTrainers:: @ 81F04FC
 
 @ DOUGLAS
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_M
+	.byte TRAINER_CLASS_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
 	.string "IGNAZ$", 12
@@ -1850,7 +1850,7 @@ gTrainers:: @ 81F04FC
 
 @ DARRIN
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_M
+	.byte TRAINER_CLASS_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
 	.string "MANUEL$", 12
@@ -1862,7 +1862,7 @@ gTrainers:: @ 81F04FC
 
 @ TONY_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_M
+	.byte TRAINER_CLASS_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
 	.string "KEVIN$", 12
@@ -1874,7 +1874,7 @@ gTrainers:: @ 81F04FC
 
 @ JEROME
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_M
+	.byte TRAINER_CLASS_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
 	.string "OSWALD$", 12
@@ -1886,7 +1886,7 @@ gTrainers:: @ 81F04FC
 
 @ MATTHEW
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_M
+	.byte TRAINER_CLASS_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
 	.string "UMBERTO$", 12
@@ -1898,7 +1898,7 @@ gTrainers:: @ 81F04FC
 
 @ DAVID
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_M
+	.byte TRAINER_CLASS_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
 	.string "WINFRIED$", 12
@@ -1910,7 +1910,7 @@ gTrainers:: @ 81F04FC
 
 @ SPENCER
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_M
+	.byte TRAINER_CLASS_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
 	.string "LEOPOLD$", 12
@@ -1922,7 +1922,7 @@ gTrainers:: @ 81F04FC
 
 @ ROLAND
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_M
+	.byte TRAINER_CLASS_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
 	.string "THOMAS$", 12
@@ -1934,7 +1934,7 @@ gTrainers:: @ 81F04FC
 
 @ CODY
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_M
+	.byte TRAINER_CLASS_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
 	.string "TIMO$", 12
@@ -1946,7 +1946,7 @@ gTrainers:: @ 81F04FC
 
 @ STAN
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_M
+	.byte TRAINER_CLASS_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
 	.string "BALTHASAR$", 12
@@ -1958,7 +1958,7 @@ gTrainers:: @ 81F04FC
 
 @ BARRY
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_M
+	.byte TRAINER_CLASS_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
 	.string "BASIL$", 12
@@ -1970,7 +1970,7 @@ gTrainers:: @ 81F04FC
 
 @ DEAN
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_M
+	.byte TRAINER_CLASS_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
 	.string "DAGOBERT$", 12
@@ -1982,7 +1982,7 @@ gTrainers:: @ 81F04FC
 
 @ RODNEY
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_M
+	.byte TRAINER_CLASS_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
 	.string "DIETER$", 12
@@ -1994,7 +1994,7 @@ gTrainers:: @ 81F04FC
 
 @ RICHARD
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_M
+	.byte TRAINER_CLASS_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
 	.string "ENNO$", 12
@@ -2006,7 +2006,7 @@ gTrainers:: @ 81F04FC
 
 @ HERMAN
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_M
+	.byte TRAINER_CLASS_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
 	.string "BENNO$", 12
@@ -2018,7 +2018,7 @@ gTrainers:: @ 81F04FC
 
 @ ANONYMOUS_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_M
+	.byte TRAINER_CLASS_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
 	.string "$", 12
@@ -2030,7 +2030,7 @@ gTrainers:: @ 81F04FC
 
 @ GILBERT
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_M
+	.byte TRAINER_CLASS_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
 	.string "ERICH$", 12
@@ -2042,7 +2042,7 @@ gTrainers:: @ 81F04FC
 
 @ FRANKLIN
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_M
+	.byte TRAINER_CLASS_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
 	.string "KASPER$", 12
@@ -2054,7 +2054,7 @@ gTrainers:: @ 81F04FC
 
 @ DANNY
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_M
+	.byte TRAINER_CLASS_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
 	.string "MARCEL$", 12
@@ -2066,7 +2066,7 @@ gTrainers:: @ 81F04FC
 
 @ JACK
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_M
+	.byte TRAINER_CLASS_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
 	.string "PEDRO$", 12
@@ -2078,7 +2078,7 @@ gTrainers:: @ 81F04FC
 
 @ DUDLEY
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_M
+	.byte TRAINER_CLASS_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
 	.string "THEODOR$", 12
@@ -2090,7 +2090,7 @@ gTrainers:: @ 81F04FC
 
 @ CHAD
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_M
+	.byte TRAINER_CLASS_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
 	.string "JANNIK$", 12
@@ -2102,7 +2102,7 @@ gTrainers:: @ 81F04FC
 
 @ TONY_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_M
+	.byte TRAINER_CLASS_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
 	.string "KEVIN$", 12
@@ -2114,7 +2114,7 @@ gTrainers:: @ 81F04FC
 
 @ TONY_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_M
+	.byte TRAINER_CLASS_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
 	.string "KEVIN$", 12
@@ -2126,7 +2126,7 @@ gTrainers:: @ 81F04FC
 
 @ TONY_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_M
+	.byte TRAINER_CLASS_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
 	.string "KEVIN$", 12
@@ -2138,7 +2138,7 @@ gTrainers:: @ 81F04FC
 
 @ TONY_5
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_M
+	.byte TRAINER_CLASS_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
 	.string "KEVIN$", 12
@@ -2150,7 +2150,7 @@ gTrainers:: @ 81F04FC
 
 @ HIDEKI
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BLACK_BELT
+	.byte TRAINER_CLASS_BLACK_BELT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BLACK_BELT
 	.string "SATORU$", 12
@@ -2162,7 +2162,7 @@ gTrainers:: @ 81F04FC
 
 @ HITOSHI
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BLACK_BELT
+	.byte TRAINER_CLASS_BLACK_BELT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BLACK_BELT
 	.string "SHIGERU$", 12
@@ -2174,7 +2174,7 @@ gTrainers:: @ 81F04FC
 
 @ KIYO
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BLACK_BELT
+	.byte TRAINER_CLASS_BLACK_BELT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BLACK_BELT
 	.string "YU$", 12
@@ -2186,7 +2186,7 @@ gTrainers:: @ 81F04FC
 
 @ KOICHI
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BLACK_BELT
+	.byte TRAINER_CLASS_BLACK_BELT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BLACK_BELT
 	.string "JUNICHI$", 12
@@ -2198,7 +2198,7 @@ gTrainers:: @ 81F04FC
 
 @ NOB_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BLACK_BELT
+	.byte TRAINER_CLASS_BLACK_BELT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BLACK_BELT
 	.string "MINORU$", 12
@@ -2210,7 +2210,7 @@ gTrainers:: @ 81F04FC
 
 @ NOB_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BLACK_BELT
+	.byte TRAINER_CLASS_BLACK_BELT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BLACK_BELT
 	.string "MINORU$", 12
@@ -2222,7 +2222,7 @@ gTrainers:: @ 81F04FC
 
 @ NOB_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BLACK_BELT
+	.byte TRAINER_CLASS_BLACK_BELT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BLACK_BELT
 	.string "MINORU$", 12
@@ -2234,7 +2234,7 @@ gTrainers:: @ 81F04FC
 
 @ NOB_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BLACK_BELT
+	.byte TRAINER_CLASS_BLACK_BELT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BLACK_BELT
 	.string "MINORU$", 12
@@ -2246,7 +2246,7 @@ gTrainers:: @ 81F04FC
 
 @ NOB_5
 	.byte F_TRAINER_PARTY_HELD_ITEM @ party type flags
-	.byte TRAINER_CLASS_NAME_BLACK_BELT
+	.byte TRAINER_CLASS_BLACK_BELT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BLACK_BELT
 	.string "MINORU$", 12
@@ -2258,7 +2258,7 @@ gTrainers:: @ 81F04FC
 
 @ YUJI
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BLACK_BELT
+	.byte TRAINER_CLASS_BLACK_BELT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BLACK_BELT
 	.string "HIDEO$", 12
@@ -2270,7 +2270,7 @@ gTrainers:: @ 81F04FC
 
 @ DAISUKE
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BLACK_BELT
+	.byte TRAINER_CLASS_BLACK_BELT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BLACK_BELT
 	.string "KENJI$", 12
@@ -2282,7 +2282,7 @@ gTrainers:: @ 81F04FC
 
 @ ATSUSHI
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BLACK_BELT
+	.byte TRAINER_CLASS_BLACK_BELT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BLACK_BELT
 	.string "HIROSHI$", 12
@@ -2294,7 +2294,7 @@ gTrainers:: @ 81F04FC
 
 @ KIRK
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_GUITARIST
+	.byte TRAINER_CLASS_GUITARIST
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_GUITARIST
 	.string "CHUCK$", 12
@@ -2306,7 +2306,7 @@ gTrainers:: @ 81F04FC
 
 @ SCOTT
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_GUITARIST
+	.byte TRAINER_CLASS_GUITARIST
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_GUITARIST
 	.string "TREY$", 12
@@ -2318,7 +2318,7 @@ gTrainers:: @ 81F04FC
 
 @ HARVEY
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_GUITARIST
+	.byte TRAINER_CLASS_GUITARIST
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_GUITARIST
 	.string "KERRY$", 12
@@ -2330,7 +2330,7 @@ gTrainers:: @ 81F04FC
 
 @ SHAWN
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_GUITARIST
+	.byte TRAINER_CLASS_GUITARIST
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_GUITARIST
 	.string "REINHARD$", 12
@@ -2342,7 +2342,7 @@ gTrainers:: @ 81F04FC
 
 @ RANDY
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_GUITARIST
+	.byte TRAINER_CLASS_GUITARIST
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_GUITARIST
 	.string "JEFF$", 12
@@ -2354,7 +2354,7 @@ gTrainers:: @ 81F04FC
 
 @ DALTON_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_GUITARIST
+	.byte TRAINER_CLASS_GUITARIST
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_GUITARIST
 	.string "KIRK$", 12
@@ -2366,7 +2366,7 @@ gTrainers:: @ 81F04FC
 
 @ DALTON_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_GUITARIST
+	.byte TRAINER_CLASS_GUITARIST
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_GUITARIST
 	.string "KIRK$", 12
@@ -2378,7 +2378,7 @@ gTrainers:: @ 81F04FC
 
 @ DALTON_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_GUITARIST
+	.byte TRAINER_CLASS_GUITARIST
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_GUITARIST
 	.string "KIRK$", 12
@@ -2390,7 +2390,7 @@ gTrainers:: @ 81F04FC
 
 @ DALTON_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_GUITARIST
+	.byte TRAINER_CLASS_GUITARIST
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_GUITARIST
 	.string "KIRK$", 12
@@ -2402,7 +2402,7 @@ gTrainers:: @ 81F04FC
 
 @ DALTON_5
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_GUITARIST
+	.byte TRAINER_CLASS_GUITARIST
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_GUITARIST
 	.string "KIRK$", 12
@@ -2414,7 +2414,7 @@ gTrainers:: @ 81F04FC
 
 @ COLE
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_KINDLER
+	.byte TRAINER_CLASS_KINDLER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_KINDLER
 	.string "HENDRIK$", 12
@@ -2426,7 +2426,7 @@ gTrainers:: @ 81F04FC
 
 @ FLINT
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_KINDLER
+	.byte TRAINER_CLASS_KINDLER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_KINDLER
 	.string "HEINZ$", 12
@@ -2438,7 +2438,7 @@ gTrainers:: @ 81F04FC
 
 @ AXLE
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_KINDLER
+	.byte TRAINER_CLASS_KINDLER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_KINDLER
 	.string "HAGEN$", 12
@@ -2450,7 +2450,7 @@ gTrainers:: @ 81F04FC
 
 @ JAKE
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_KINDLER
+	.byte TRAINER_CLASS_KINDLER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_KINDLER
 	.string "HANNES$", 12
@@ -2462,7 +2462,7 @@ gTrainers:: @ 81F04FC
 
 @ ANDY
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_KINDLER
+	.byte TRAINER_CLASS_KINDLER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_KINDLER
 	.string "HARTMANN$", 12
@@ -2474,7 +2474,7 @@ gTrainers:: @ 81F04FC
 
 @ BERNIE_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_KINDLER
+	.byte TRAINER_CLASS_KINDLER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_KINDLER
 	.string "HASSO$", 12
@@ -2486,7 +2486,7 @@ gTrainers:: @ 81F04FC
 
 @ BERNIE_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_KINDLER
+	.byte TRAINER_CLASS_KINDLER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_KINDLER
 	.string "HASSO$", 12
@@ -2498,7 +2498,7 @@ gTrainers:: @ 81F04FC
 
 @ BERNIE_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_KINDLER
+	.byte TRAINER_CLASS_KINDLER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_KINDLER
 	.string "HASSO$", 12
@@ -2510,7 +2510,7 @@ gTrainers:: @ 81F04FC
 
 @ BERNIE_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_KINDLER
+	.byte TRAINER_CLASS_KINDLER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_KINDLER
 	.string "HASSO$", 12
@@ -2522,7 +2522,7 @@ gTrainers:: @ 81F04FC
 
 @ BERNIE_5
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_KINDLER
+	.byte TRAINER_CLASS_KINDLER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_KINDLER
 	.string "HASSO$", 12
@@ -2534,7 +2534,7 @@ gTrainers:: @ 81F04FC
 
 @ DREW
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_CAMPER
+	.byte TRAINER_CLASS_CAMPER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CAMPER
 	.string "ISSIDOR$", 12
@@ -2546,7 +2546,7 @@ gTrainers:: @ 81F04FC
 
 @ CLIFF
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_CAMPER
+	.byte TRAINER_CLASS_CAMPER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CAMPER
 	.string "IVAN$", 12
@@ -2558,7 +2558,7 @@ gTrainers:: @ 81F04FC
 
 @ LARRY
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_CAMPER
+	.byte TRAINER_CLASS_CAMPER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CAMPER
 	.string "KAREL$", 12
@@ -2570,7 +2570,7 @@ gTrainers:: @ 81F04FC
 
 @ SHANE
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_CAMPER
+	.byte TRAINER_CLASS_CAMPER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CAMPER
 	.string "KUNO$", 12
@@ -2582,7 +2582,7 @@ gTrainers:: @ 81F04FC
 
 @ JUSTIN
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_CAMPER
+	.byte TRAINER_CLASS_CAMPER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CAMPER
 	.string "LAURENZ$", 12
@@ -2594,7 +2594,7 @@ gTrainers:: @ 81F04FC
 
 @ ETHAN_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_CAMPER
+	.byte TRAINER_CLASS_CAMPER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CAMPER
 	.string "EWALD$", 12
@@ -2606,7 +2606,7 @@ gTrainers:: @ 81F04FC
 
 @ JEFF
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_CAMPER
+	.byte TRAINER_CLASS_CAMPER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CAMPER
 	.string "RAPHAEL$", 12
@@ -2618,7 +2618,7 @@ gTrainers:: @ 81F04FC
 
 @ TRAVIS
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_CAMPER
+	.byte TRAINER_CLASS_CAMPER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CAMPER
 	.string "RONALD$", 12
@@ -2630,7 +2630,7 @@ gTrainers:: @ 81F04FC
 
 @ ETHAN_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_CAMPER
+	.byte TRAINER_CLASS_CAMPER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CAMPER
 	.string "EWALD$", 12
@@ -2642,7 +2642,7 @@ gTrainers:: @ 81F04FC
 
 @ ETHAN_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_CAMPER
+	.byte TRAINER_CLASS_CAMPER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CAMPER
 	.string "EWALD$", 12
@@ -2654,7 +2654,7 @@ gTrainers:: @ 81F04FC
 
 @ ETHAN_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_CAMPER
+	.byte TRAINER_CLASS_CAMPER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CAMPER
 	.string "EWALD$", 12
@@ -2666,7 +2666,7 @@ gTrainers:: @ 81F04FC
 
 @ ETHAN_5
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_CAMPER
+	.byte TRAINER_CLASS_CAMPER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CAMPER
 	.string "EWALD$", 12
@@ -2678,7 +2678,7 @@ gTrainers:: @ 81F04FC
 
 @ BRENT
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BUG_MANIAC
+	.byte TRAINER_CLASS_BUG_MANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_BUG_MANIAC
 	.string "ROMEO$", 12
@@ -2690,7 +2690,7 @@ gTrainers:: @ 81F04FC
 
 @ DONALD
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BUG_MANIAC
+	.byte TRAINER_CLASS_BUG_MANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_BUG_MANIAC
 	.string "TILL$", 12
@@ -2702,7 +2702,7 @@ gTrainers:: @ 81F04FC
 
 @ TAYLOR
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BUG_MANIAC
+	.byte TRAINER_CLASS_BUG_MANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_BUG_MANIAC
 	.string "URIEL$", 12
@@ -2714,7 +2714,7 @@ gTrainers:: @ 81F04FC
 
 @ BRANDON_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BUG_MANIAC
+	.byte TRAINER_CLASS_BUG_MANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_BUG_MANIAC
 	.string "BRUNO$", 12
@@ -2726,7 +2726,7 @@ gTrainers:: @ 81F04FC
 
 @ DEREK
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BUG_MANIAC
+	.byte TRAINER_CLASS_BUG_MANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_BUG_MANIAC
 	.string "BURKARD$", 12
@@ -2738,7 +2738,7 @@ gTrainers:: @ 81F04FC
 
 @ BRANDON_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BUG_MANIAC
+	.byte TRAINER_CLASS_BUG_MANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_BUG_MANIAC
 	.string "BRUNO$", 12
@@ -2750,7 +2750,7 @@ gTrainers:: @ 81F04FC
 
 @ BRANDON_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BUG_MANIAC
+	.byte TRAINER_CLASS_BUG_MANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_BUG_MANIAC
 	.string "BRUNO$", 12
@@ -2762,7 +2762,7 @@ gTrainers:: @ 81F04FC
 
 @ BRANDON_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BUG_MANIAC
+	.byte TRAINER_CLASS_BUG_MANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_BUG_MANIAC
 	.string "BRUNO$", 12
@@ -2774,7 +2774,7 @@ gTrainers:: @ 81F04FC
 
 @ BRANDON_5
 	.byte F_TRAINER_PARTY_HELD_ITEM @ party type flags
-	.byte TRAINER_CLASS_NAME_BUG_MANIAC
+	.byte TRAINER_CLASS_BUG_MANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_BUG_MANIAC
 	.string "BRUNO$", 12
@@ -2786,7 +2786,7 @@ gTrainers:: @ 81F04FC
 
 @ EDWARD
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_PSYCHIC
+	.byte TRAINER_CLASS_PSYCHIC
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_M
 	.string "WENDELIN$", 12
@@ -2798,7 +2798,7 @@ gTrainers:: @ 81F04FC
 
 @ PRESTON
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_PSYCHIC
+	.byte TRAINER_CLASS_PSYCHIC
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_M
 	.string "URBAN$", 12
@@ -2810,7 +2810,7 @@ gTrainers:: @ 81F04FC
 
 @ VIRGIL
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_PSYCHIC
+	.byte TRAINER_CLASS_PSYCHIC
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_M
 	.string "ZOLTAN$", 12
@@ -2822,7 +2822,7 @@ gTrainers:: @ 81F04FC
 
 @ FRITZ
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_PSYCHIC
+	.byte TRAINER_CLASS_PSYCHIC
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_M
 	.string "XAVER$", 12
@@ -2834,7 +2834,7 @@ gTrainers:: @ 81F04FC
 
 @ WILLIAM
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_PSYCHIC
+	.byte TRAINER_CLASS_PSYCHIC
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_M
 	.string "WULF$", 12
@@ -2846,7 +2846,7 @@ gTrainers:: @ 81F04FC
 
 @ JOSHUA
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_PSYCHIC
+	.byte TRAINER_CLASS_PSYCHIC
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_M
 	.string "JONAS$", 12
@@ -2858,7 +2858,7 @@ gTrainers:: @ 81F04FC
 
 @ CAMERON_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_PSYCHIC
+	.byte TRAINER_CLASS_PSYCHIC
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_M
 	.string "MAXIMILIAN$", 12
@@ -2870,7 +2870,7 @@ gTrainers:: @ 81F04FC
 
 @ CAMERON_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_PSYCHIC
+	.byte TRAINER_CLASS_PSYCHIC
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_M
 	.string "MAXIMILIAN$", 12
@@ -2882,7 +2882,7 @@ gTrainers:: @ 81F04FC
 
 @ CAMERON_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_PSYCHIC
+	.byte TRAINER_CLASS_PSYCHIC
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_M
 	.string "MAXIMILIAN$", 12
@@ -2894,7 +2894,7 @@ gTrainers:: @ 81F04FC
 
 @ CAMERON_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_PSYCHIC
+	.byte TRAINER_CLASS_PSYCHIC
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_M
 	.string "MAXIMILIAN$", 12
@@ -2906,7 +2906,7 @@ gTrainers:: @ 81F04FC
 
 @ CAMERON_5
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_PSYCHIC
+	.byte TRAINER_CLASS_PSYCHIC
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_M
 	.string "MAXIMILIAN$", 12
@@ -2918,7 +2918,7 @@ gTrainers:: @ 81F04FC
 
 @ JACLYN
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_PSYCHIC
+	.byte TRAINER_CLASS_PSYCHIC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_F
 	.string "COSIMA$", 12
@@ -2930,7 +2930,7 @@ gTrainers:: @ 81F04FC
 
 @ HANNAH
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_PSYCHIC
+	.byte TRAINER_CLASS_PSYCHIC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_F
 	.string "HANNAH$", 12
@@ -2942,7 +2942,7 @@ gTrainers:: @ 81F04FC
 
 @ SAMANTHA
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_PSYCHIC
+	.byte TRAINER_CLASS_PSYCHIC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_F
 	.string "SAMANTHA$", 12
@@ -2954,7 +2954,7 @@ gTrainers:: @ 81F04FC
 
 @ MAURA
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_PSYCHIC
+	.byte TRAINER_CLASS_PSYCHIC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_F
 	.string "DOLORES$", 12
@@ -2966,7 +2966,7 @@ gTrainers:: @ 81F04FC
 
 @ KAYLA
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_PSYCHIC
+	.byte TRAINER_CLASS_PSYCHIC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_F
 	.string "CAMILLA$", 12
@@ -2978,7 +2978,7 @@ gTrainers:: @ 81F04FC
 
 @ ALEXIS
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_PSYCHIC
+	.byte TRAINER_CLASS_PSYCHIC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_F
 	.string "ALEXIS$", 12
@@ -2990,7 +2990,7 @@ gTrainers:: @ 81F04FC
 
 @ JACKI_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_PSYCHIC
+	.byte TRAINER_CLASS_PSYCHIC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_F
 	.string "KORNELIA$", 12
@@ -3002,7 +3002,7 @@ gTrainers:: @ 81F04FC
 
 @ JACKI_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_PSYCHIC
+	.byte TRAINER_CLASS_PSYCHIC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_F
 	.string "KORNELIA$", 12
@@ -3014,7 +3014,7 @@ gTrainers:: @ 81F04FC
 
 @ JACKI_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_PSYCHIC
+	.byte TRAINER_CLASS_PSYCHIC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_F
 	.string "KORNELIA$", 12
@@ -3026,7 +3026,7 @@ gTrainers:: @ 81F04FC
 
 @ JACKI_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_PSYCHIC
+	.byte TRAINER_CLASS_PSYCHIC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_F
 	.string "KORNELIA$", 12
@@ -3038,7 +3038,7 @@ gTrainers:: @ 81F04FC
 
 @ JACKI_5
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_PSYCHIC
+	.byte TRAINER_CLASS_PSYCHIC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_F
 	.string "KORNELIA$", 12
@@ -3050,7 +3050,7 @@ gTrainers:: @ 81F04FC
 
 @ WALTER_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_GENTLEMAN
+	.byte TRAINER_CLASS_GENTLEMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_RICH @ gender flag and encounter music
 	.byte TRAINER_PIC_GENTLEMAN
 	.string "ABRAHAM$", 12
@@ -3062,7 +3062,7 @@ gTrainers:: @ 81F04FC
 
 @ TUCKER
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_GENTLEMAN
+	.byte TRAINER_CLASS_GENTLEMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_RICH @ gender flag and encounter music
 	.byte TRAINER_PIC_GENTLEMAN
 	.string "CLAUDIO$", 12
@@ -3074,7 +3074,7 @@ gTrainers:: @ 81F04FC
 
 @ THOMAS
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_GENTLEMAN
+	.byte TRAINER_CLASS_GENTLEMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_RICH @ gender flag and encounter music
 	.byte TRAINER_PIC_GENTLEMAN
 	.string "NIKOLAI$", 12
@@ -3086,7 +3086,7 @@ gTrainers:: @ 81F04FC
 
 @ WALTER_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_GENTLEMAN
+	.byte TRAINER_CLASS_GENTLEMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_RICH @ gender flag and encounter music
 	.byte TRAINER_PIC_GENTLEMAN
 	.string "ABRAHAM$", 12
@@ -3098,7 +3098,7 @@ gTrainers:: @ 81F04FC
 
 @ WALTER_3
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_GENTLEMAN
+	.byte TRAINER_CLASS_GENTLEMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_RICH @ gender flag and encounter music
 	.byte TRAINER_PIC_GENTLEMAN
 	.string "ABRAHAM$", 12
@@ -3110,7 +3110,7 @@ gTrainers:: @ 81F04FC
 
 @ WALTER_4
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_GENTLEMAN
+	.byte TRAINER_CLASS_GENTLEMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_RICH @ gender flag and encounter music
 	.byte TRAINER_PIC_GENTLEMAN
 	.string "ABRAHAM$", 12
@@ -3122,7 +3122,7 @@ gTrainers:: @ 81F04FC
 
 @ WALTER_5
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_GENTLEMAN
+	.byte TRAINER_CLASS_GENTLEMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_RICH @ gender flag and encounter music
 	.byte TRAINER_PIC_GENTLEMAN
 	.string "ABRAHAM$", 12
@@ -3134,7 +3134,7 @@ gTrainers:: @ 81F04FC
 
 @ SIDNEY
 	.byte F_TRAINER_PARTY_HELD_ITEM | F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_ELITE_FOUR
+	.byte TRAINER_CLASS_ELITE_FOUR
 	.byte TRAINER_ENCOUNTER_MUSIC_ELITE_FOUR @ gender flag and encounter music
 	.byte TRAINER_PIC_SIDNEY
 	.string "ULRICH$", 12
@@ -3146,7 +3146,7 @@ gTrainers:: @ 81F04FC
 
 @ PHOEBE
 	.byte F_TRAINER_PARTY_HELD_ITEM | F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_ELITE_FOUR
+	.byte TRAINER_CLASS_ELITE_FOUR
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_ELITE_FOUR @ gender flag and encounter music
 	.byte TRAINER_PIC_PHOEBE
 	.string "ANTONIA$", 12
@@ -3158,7 +3158,7 @@ gTrainers:: @ 81F04FC
 
 @ GLACIA
 	.byte F_TRAINER_PARTY_HELD_ITEM | F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_ELITE_FOUR
+	.byte TRAINER_CLASS_ELITE_FOUR
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_ELITE_FOUR @ gender flag and encounter music
 	.byte TRAINER_PIC_GLACIA
 	.string "FROSINA$", 12
@@ -3170,7 +3170,7 @@ gTrainers:: @ 81F04FC
 
 @ DRAKE
 	.byte F_TRAINER_PARTY_HELD_ITEM | F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_ELITE_FOUR
+	.byte TRAINER_CLASS_ELITE_FOUR
 	.byte TRAINER_ENCOUNTER_MUSIC_ELITE_FOUR @ gender flag and encounter music
 	.byte TRAINER_PIC_DRAKE
 	.string "DRAGAN$", 12
@@ -3182,7 +3182,7 @@ gTrainers:: @ 81F04FC
 
 @ ROXANNE
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_LEADER
+	.byte TRAINER_CLASS_LEADER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_ROXANNE
 	.string "FELIZIA$", 12
@@ -3194,7 +3194,7 @@ gTrainers:: @ 81F04FC
 
 @ BRAWLY
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_LEADER
+	.byte TRAINER_CLASS_LEADER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BRAWLY
 	.string "KAMILLO$", 12
@@ -3206,7 +3206,7 @@ gTrainers:: @ 81F04FC
 
 @ WATTSON
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_LEADER
+	.byte TRAINER_CLASS_LEADER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_WATTSON
 	.string "WALTER$", 12
@@ -3218,7 +3218,7 @@ gTrainers:: @ 81F04FC
 
 @ FLANNERY
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_LEADER
+	.byte TRAINER_CLASS_LEADER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_FLANNERY
 	.string "FLAVIA$", 12
@@ -3230,7 +3230,7 @@ gTrainers:: @ 81F04FC
 
 @ NORMAN
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_LEADER
+	.byte TRAINER_CLASS_LEADER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_NORMAN
 	.string "NORMAN$", 12
@@ -3242,7 +3242,7 @@ gTrainers:: @ 81F04FC
 
 @ WINONA
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_LEADER
+	.byte TRAINER_CLASS_LEADER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_WINONA
 	.string "WIBKE$", 12
@@ -3254,7 +3254,7 @@ gTrainers:: @ 81F04FC
 
 @ TATE_AND_LIZA
 	.byte F_TRAINER_PARTY_HELD_ITEM | F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_LEADER
+	.byte TRAINER_CLASS_LEADER
 	.byte TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_TATE_AND_LIZA
 	.string "BEN&SVENJA$", 12
@@ -3266,7 +3266,7 @@ gTrainers:: @ 81F04FC
 
 @ WALLACE
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_LEADER
+	.byte TRAINER_CLASS_LEADER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_WALLACE
 	.string "WASSILI$", 12
@@ -3278,7 +3278,7 @@ gTrainers:: @ 81F04FC
 
 @ JERRY_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SCHOOL_KID
+	.byte TRAINER_CLASS_SCHOOL_KID
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SCHOOL_KID_M
 	.string "ORLANDO$", 12
@@ -3290,7 +3290,7 @@ gTrainers:: @ 81F04FC
 
 @ TED
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SCHOOL_KID
+	.byte TRAINER_CLASS_SCHOOL_KID
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SCHOOL_KID_M
 	.string "RAMON$", 12
@@ -3302,7 +3302,7 @@ gTrainers:: @ 81F04FC
 
 @ PAUL
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SCHOOL_KID
+	.byte TRAINER_CLASS_SCHOOL_KID
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SCHOOL_KID_M
 	.string "JÜRGEN$", 12
@@ -3314,7 +3314,7 @@ gTrainers:: @ 81F04FC
 
 @ JERRY_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SCHOOL_KID
+	.byte TRAINER_CLASS_SCHOOL_KID
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SCHOOL_KID_M
 	.string "ORLANDO$", 12
@@ -3326,7 +3326,7 @@ gTrainers:: @ 81F04FC
 
 @ JERRY_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SCHOOL_KID
+	.byte TRAINER_CLASS_SCHOOL_KID
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SCHOOL_KID_M
 	.string "ORLANDO$", 12
@@ -3338,7 +3338,7 @@ gTrainers:: @ 81F04FC
 
 @ JERRY_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SCHOOL_KID
+	.byte TRAINER_CLASS_SCHOOL_KID
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SCHOOL_KID_M
 	.string "ORLANDO$", 12
@@ -3350,7 +3350,7 @@ gTrainers:: @ 81F04FC
 
 @ JERRY_5
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SCHOOL_KID
+	.byte TRAINER_CLASS_SCHOOL_KID
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SCHOOL_KID_M
 	.string "ORLANDO$", 12
@@ -3362,7 +3362,7 @@ gTrainers:: @ 81F04FC
 
 @ KAREN_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SCHOOL_KID
+	.byte TRAINER_CLASS_SCHOOL_KID
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_SCHOOL_KID_F
 	.string "KERSTIN$", 12
@@ -3374,7 +3374,7 @@ gTrainers:: @ 81F04FC
 
 @ GEORGIA
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SCHOOL_KID
+	.byte TRAINER_CLASS_SCHOOL_KID
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_SCHOOL_KID_F
 	.string "ARIANE$", 12
@@ -3386,7 +3386,7 @@ gTrainers:: @ 81F04FC
 
 @ KAREN_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SCHOOL_KID
+	.byte TRAINER_CLASS_SCHOOL_KID
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_SCHOOL_KID_F
 	.string "KERSTIN$", 12
@@ -3398,7 +3398,7 @@ gTrainers:: @ 81F04FC
 
 @ KAREN_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SCHOOL_KID
+	.byte TRAINER_CLASS_SCHOOL_KID
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_SCHOOL_KID_F
 	.string "KERSTIN$", 12
@@ -3410,7 +3410,7 @@ gTrainers:: @ 81F04FC
 
 @ KAREN_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SCHOOL_KID
+	.byte TRAINER_CLASS_SCHOOL_KID
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_SCHOOL_KID_F
 	.string "KERSTIN$", 12
@@ -3422,7 +3422,7 @@ gTrainers:: @ 81F04FC
 
 @ KAREN_5
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SCHOOL_KID
+	.byte TRAINER_CLASS_SCHOOL_KID
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_SCHOOL_KID_F
 	.string "KERSTIN$", 12
@@ -3434,7 +3434,7 @@ gTrainers:: @ 81F04FC
 
 @ KATE_AND_JOY
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_SR_AND_JR
+	.byte TRAINER_CLASS_SR_AND_JR
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_SR_AND_JR
 	.string "EVA & UTE$", 12
@@ -3446,7 +3446,7 @@ gTrainers:: @ 81F04FC
 
 @ ANNA_AND_MEG_1
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_SR_AND_JR
+	.byte TRAINER_CLASS_SR_AND_JR
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_SR_AND_JR
 	.string "IRM & IDA$", 12
@@ -3458,7 +3458,7 @@ gTrainers:: @ 81F04FC
 
 @ ANNA_AND_MEG_2
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_SR_AND_JR
+	.byte TRAINER_CLASS_SR_AND_JR
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_SR_AND_JR
 	.string "IRM & IDA$", 12
@@ -3470,7 +3470,7 @@ gTrainers:: @ 81F04FC
 
 @ ANNA_AND_MEG_3
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_SR_AND_JR
+	.byte TRAINER_CLASS_SR_AND_JR
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_SR_AND_JR
 	.string "IRM & IDA$", 12
@@ -3482,7 +3482,7 @@ gTrainers:: @ 81F04FC
 
 @ ANNA_AND_MEG_4
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_SR_AND_JR
+	.byte TRAINER_CLASS_SR_AND_JR
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_SR_AND_JR
 	.string "IRM & IDA$", 12
@@ -3494,7 +3494,7 @@ gTrainers:: @ 81F04FC
 
 @ ANNA_AND_MEG_5
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_SR_AND_JR
+	.byte TRAINER_CLASS_SR_AND_JR
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_SR_AND_JR
 	.string "IRM & IDA$", 12
@@ -3506,7 +3506,7 @@ gTrainers:: @ 81F04FC
 
 @ VICTOR
 	.byte F_TRAINER_PARTY_HELD_ITEM @ party type flags
-	.byte TRAINER_CLASS_NAME_WINSTRATE
+	.byte TRAINER_CLASS_WINSTRATE
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEFAN_M
 	.string "VIKTOR$", 12
@@ -3518,7 +3518,7 @@ gTrainers:: @ 81F04FC
 
 @ MIGUEL_1
 	.byte F_TRAINER_PARTY_HELD_ITEM @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEFAN
+	.byte TRAINER_CLASS_POKEFAN
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEFAN_M
 	.string "MIGUEL$", 12
@@ -3530,7 +3530,7 @@ gTrainers:: @ 81F04FC
 
 @ COLTON
 	.byte F_TRAINER_PARTY_HELD_ITEM | F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEFAN
+	.byte TRAINER_CLASS_POKEFAN
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEFAN_M
 	.string "ATTILA$", 12
@@ -3542,7 +3542,7 @@ gTrainers:: @ 81F04FC
 
 @ MIGUEL_2
 	.byte F_TRAINER_PARTY_HELD_ITEM @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEFAN
+	.byte TRAINER_CLASS_POKEFAN
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEFAN_M
 	.string "MIGUEL$", 12
@@ -3554,7 +3554,7 @@ gTrainers:: @ 81F04FC
 
 @ MIGUEL_3
 	.byte F_TRAINER_PARTY_HELD_ITEM @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEFAN
+	.byte TRAINER_CLASS_POKEFAN
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEFAN_M
 	.string "MIGUEL$", 12
@@ -3566,7 +3566,7 @@ gTrainers:: @ 81F04FC
 
 @ MIGUEL_4
 	.byte F_TRAINER_PARTY_HELD_ITEM @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEFAN
+	.byte TRAINER_CLASS_POKEFAN
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEFAN_M
 	.string "MIGUEL$", 12
@@ -3578,7 +3578,7 @@ gTrainers:: @ 81F04FC
 
 @ MIGUEL_5
 	.byte F_TRAINER_PARTY_HELD_ITEM @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEFAN
+	.byte TRAINER_CLASS_POKEFAN
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEFAN_M
 	.string "MIGUEL$", 12
@@ -3590,7 +3590,7 @@ gTrainers:: @ 81F04FC
 
 @ VICTORIA
 	.byte F_TRAINER_PARTY_HELD_ITEM @ party type flags
-	.byte TRAINER_CLASS_NAME_WINSTRATE
+	.byte TRAINER_CLASS_WINSTRATE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEFAN_F
 	.string "VIKTORIA$", 12
@@ -3602,7 +3602,7 @@ gTrainers:: @ 81F04FC
 
 @ VANESSA
 	.byte F_TRAINER_PARTY_HELD_ITEM @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEFAN
+	.byte TRAINER_CLASS_POKEFAN
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEFAN_F
 	.string "VANESSA$", 12
@@ -3614,7 +3614,7 @@ gTrainers:: @ 81F04FC
 
 @ MARISSA
 	.byte F_TRAINER_PARTY_HELD_ITEM @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEFAN
+	.byte TRAINER_CLASS_POKEFAN
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEFAN_F
 	.string "EVELYN$", 12
@@ -3626,7 +3626,7 @@ gTrainers:: @ 81F04FC
 
 @ ISABEL_1
 	.byte F_TRAINER_PARTY_HELD_ITEM @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEFAN
+	.byte TRAINER_CLASS_POKEFAN
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEFAN_F
 	.string "ISABEL$", 12
@@ -3638,7 +3638,7 @@ gTrainers:: @ 81F04FC
 
 @ ISABEL_2
 	.byte F_TRAINER_PARTY_HELD_ITEM @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEFAN
+	.byte TRAINER_CLASS_POKEFAN
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEFAN_F
 	.string "ISABEL$", 12
@@ -3650,7 +3650,7 @@ gTrainers:: @ 81F04FC
 
 @ ISABEL_3
 	.byte F_TRAINER_PARTY_HELD_ITEM @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEFAN
+	.byte TRAINER_CLASS_POKEFAN
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEFAN_F
 	.string "ISABEL$", 12
@@ -3662,7 +3662,7 @@ gTrainers:: @ 81F04FC
 
 @ ISABEL_4
 	.byte F_TRAINER_PARTY_HELD_ITEM @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEFAN
+	.byte TRAINER_CLASS_POKEFAN
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEFAN_F
 	.string "ISABEL$", 12
@@ -3674,7 +3674,7 @@ gTrainers:: @ 81F04FC
 
 @ ISABEL_5
 	.byte F_TRAINER_PARTY_HELD_ITEM @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEFAN
+	.byte TRAINER_CLASS_POKEFAN
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEFAN_F
 	.string "ISABEL$", 12
@@ -3686,7 +3686,7 @@ gTrainers:: @ 81F04FC
 
 @ TIMOTHY_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_EXPERT
+	.byte TRAINER_CLASS_EXPERT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_EXPERT_M
 	.string "THEOBALD$", 12
@@ -3698,7 +3698,7 @@ gTrainers:: @ 81F04FC
 
 @ TIMOTHY_2
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_EXPERT
+	.byte TRAINER_CLASS_EXPERT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_EXPERT_M
 	.string "THEOBALD$", 12
@@ -3710,7 +3710,7 @@ gTrainers:: @ 81F04FC
 
 @ TIMOTHY_3
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_EXPERT
+	.byte TRAINER_CLASS_EXPERT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_EXPERT_M
 	.string "THEOBALD$", 12
@@ -3722,7 +3722,7 @@ gTrainers:: @ 81F04FC
 
 @ TIMOTHY_4
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_EXPERT
+	.byte TRAINER_CLASS_EXPERT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_EXPERT_M
 	.string "THEOBALD$", 12
@@ -3734,7 +3734,7 @@ gTrainers:: @ 81F04FC
 
 @ TIMOTHY_5
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_EXPERT
+	.byte TRAINER_CLASS_EXPERT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_EXPERT_M
 	.string "THEOBALD$", 12
@@ -3746,7 +3746,7 @@ gTrainers:: @ 81F04FC
 
 @ VICKY
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_WINSTRATE
+	.byte TRAINER_CLASS_WINSTRATE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_EXPERT_F
 	.string "VICKY$", 12
@@ -3758,7 +3758,7 @@ gTrainers:: @ 81F04FC
 
 @ SHELBY_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_EXPERT
+	.byte TRAINER_CLASS_EXPERT
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_EXPERT_F
 	.string "WALTRAUD$", 12
@@ -3770,7 +3770,7 @@ gTrainers:: @ 81F04FC
 
 @ SHELBY_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_EXPERT
+	.byte TRAINER_CLASS_EXPERT
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_EXPERT_F
 	.string "WALTRAUD$", 12
@@ -3782,7 +3782,7 @@ gTrainers:: @ 81F04FC
 
 @ SHELBY_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_EXPERT
+	.byte TRAINER_CLASS_EXPERT
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_EXPERT_F
 	.string "WALTRAUD$", 12
@@ -3794,7 +3794,7 @@ gTrainers:: @ 81F04FC
 
 @ SHELBY_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_EXPERT
+	.byte TRAINER_CLASS_EXPERT
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_EXPERT_F
 	.string "WALTRAUD$", 12
@@ -3806,7 +3806,7 @@ gTrainers:: @ 81F04FC
 
 @ SHELBY_5
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_EXPERT
+	.byte TRAINER_CLASS_EXPERT
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_EXPERT_F
 	.string "WALTRAUD$", 12
@@ -3818,7 +3818,7 @@ gTrainers:: @ 81F04FC
 
 @ CALVIN_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_YOUNGSTER
+	.byte TRAINER_CLASS_YOUNGSTER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
 	.string "ANSGAR$", 12
@@ -3830,7 +3830,7 @@ gTrainers:: @ 81F04FC
 
 @ BILLY
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_YOUNGSTER
+	.byte TRAINER_CLASS_YOUNGSTER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
 	.string "FRIDOLIN$", 12
@@ -3842,7 +3842,7 @@ gTrainers:: @ 81F04FC
 
 @ JOSH
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_YOUNGSTER
+	.byte TRAINER_CLASS_YOUNGSTER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
 	.string "GASTON$", 12
@@ -3854,7 +3854,7 @@ gTrainers:: @ 81F04FC
 
 @ TOMMY
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_YOUNGSTER
+	.byte TRAINER_CLASS_YOUNGSTER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
 	.string "DOMINIK$", 12
@@ -3866,7 +3866,7 @@ gTrainers:: @ 81F04FC
 
 @ JOEY
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_YOUNGSTER
+	.byte TRAINER_CLASS_YOUNGSTER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
 	.string "LUDGER$", 12
@@ -3878,7 +3878,7 @@ gTrainers:: @ 81F04FC
 
 @ BEN
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_YOUNGSTER
+	.byte TRAINER_CLASS_YOUNGSTER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
 	.string "EGON$", 12
@@ -3890,7 +3890,7 @@ gTrainers:: @ 81F04FC
 
 @ ANONYMOUS_5
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_YOUNGSTER
+	.byte TRAINER_CLASS_YOUNGSTER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
 	.string "$", 12
@@ -3902,7 +3902,7 @@ gTrainers:: @ 81F04FC
 
 @ KEVIN
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_YOUNGSTER
+	.byte TRAINER_CLASS_YOUNGSTER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
 	.string "JULIUS$", 12
@@ -3914,7 +3914,7 @@ gTrainers:: @ 81F04FC
 
 @ NEAL
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_YOUNGSTER
+	.byte TRAINER_CLASS_YOUNGSTER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
 	.string "MORITZ$", 12
@@ -3926,7 +3926,7 @@ gTrainers:: @ 81F04FC
 
 @ DILLON
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_YOUNGSTER
+	.byte TRAINER_CLASS_YOUNGSTER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
 	.string "SÖNCKE$", 12
@@ -3938,7 +3938,7 @@ gTrainers:: @ 81F04FC
 
 @ CALVIN_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_YOUNGSTER
+	.byte TRAINER_CLASS_YOUNGSTER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
 	.string "ANSGAR$", 12
@@ -3950,7 +3950,7 @@ gTrainers:: @ 81F04FC
 
 @ CALVIN_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_YOUNGSTER
+	.byte TRAINER_CLASS_YOUNGSTER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
 	.string "ANSGAR$", 12
@@ -3962,7 +3962,7 @@ gTrainers:: @ 81F04FC
 
 @ CALVIN_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_YOUNGSTER
+	.byte TRAINER_CLASS_YOUNGSTER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
 	.string "ANSGAR$", 12
@@ -3974,7 +3974,7 @@ gTrainers:: @ 81F04FC
 
 @ CALVIN_5
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_YOUNGSTER
+	.byte TRAINER_CLASS_YOUNGSTER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
 	.string "ANSGAR$", 12
@@ -3986,7 +3986,7 @@ gTrainers:: @ 81F04FC
 
 @ EDDIE
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_YOUNGSTER
+	.byte TRAINER_CLASS_YOUNGSTER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
 	.string "HENRY$", 12
@@ -3998,7 +3998,7 @@ gTrainers:: @ 81F04FC
 
 @ ALLEN
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_YOUNGSTER
+	.byte TRAINER_CLASS_YOUNGSTER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
 	.string "HUGO$", 12
@@ -4010,7 +4010,7 @@ gTrainers:: @ 81F04FC
 
 @ TIMMY
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_YOUNGSTER
+	.byte TRAINER_CLASS_YOUNGSTER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
 	.string "FRIEDER$", 12
@@ -4022,7 +4022,7 @@ gTrainers:: @ 81F04FC
 
 @ STEVEN
 	.byte F_TRAINER_PARTY_HELD_ITEM | F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_CHAMPION
+	.byte TRAINER_CLASS_CHAMPION
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_STEVEN
 	.string "TROY$", 12
@@ -4034,7 +4034,7 @@ gTrainers:: @ 81F04FC
 
 @ ANDREW
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_FISHERMAN
+	.byte TRAINER_CLASS_FISHERMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_FISHERMAN
 	.string "ANSGAR$", 12
@@ -4046,7 +4046,7 @@ gTrainers:: @ 81F04FC
 
 @ IVAN
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_FISHERMAN
+	.byte TRAINER_CLASS_FISHERMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_FISHERMAN
 	.string "ANGELO$", 12
@@ -4058,7 +4058,7 @@ gTrainers:: @ 81F04FC
 
 @ CLAUDE
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_FISHERMAN
+	.byte TRAINER_CLASS_FISHERMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_FISHERMAN
 	.string "ANSELM$", 12
@@ -4070,7 +4070,7 @@ gTrainers:: @ 81F04FC
 
 @ ELLIOT_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_FISHERMAN
+	.byte TRAINER_CLASS_FISHERMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_FISHERMAN
 	.string "ALOIS$", 12
@@ -4082,7 +4082,7 @@ gTrainers:: @ 81F04FC
 
 @ NED
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_FISHERMAN
+	.byte TRAINER_CLASS_FISHERMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_FISHERMAN
 	.string "ARTHUR$", 12
@@ -4094,7 +4094,7 @@ gTrainers:: @ 81F04FC
 
 @ DALE
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_FISHERMAN
+	.byte TRAINER_CLASS_FISHERMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_FISHERMAN
 	.string "ALBIN$", 12
@@ -4106,7 +4106,7 @@ gTrainers:: @ 81F04FC
 
 @ NOLAN
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_FISHERMAN
+	.byte TRAINER_CLASS_FISHERMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_FISHERMAN
 	.string "AMADEUS$", 12
@@ -4118,7 +4118,7 @@ gTrainers:: @ 81F04FC
 
 @ BARNY
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_FISHERMAN
+	.byte TRAINER_CLASS_FISHERMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_FISHERMAN
 	.string "ALBRECHT$", 12
@@ -4130,7 +4130,7 @@ gTrainers:: @ 81F04FC
 
 @ WADE
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_FISHERMAN
+	.byte TRAINER_CLASS_FISHERMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_FISHERMAN
 	.string "ALAIN$", 12
@@ -4142,7 +4142,7 @@ gTrainers:: @ 81F04FC
 
 @ CARTER
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_FISHERMAN
+	.byte TRAINER_CLASS_FISHERMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_FISHERMAN
 	.string "ARMIN$", 12
@@ -4154,7 +4154,7 @@ gTrainers:: @ 81F04FC
 
 @ ELLIOT_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_FISHERMAN
+	.byte TRAINER_CLASS_FISHERMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_FISHERMAN
 	.string "ALOIS$", 12
@@ -4166,7 +4166,7 @@ gTrainers:: @ 81F04FC
 
 @ ELLIOT_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_FISHERMAN
+	.byte TRAINER_CLASS_FISHERMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_FISHERMAN
 	.string "ALOIS$", 12
@@ -4178,7 +4178,7 @@ gTrainers:: @ 81F04FC
 
 @ ELLIOT_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_FISHERMAN
+	.byte TRAINER_CLASS_FISHERMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_FISHERMAN
 	.string "ALOIS$", 12
@@ -4190,7 +4190,7 @@ gTrainers:: @ 81F04FC
 
 @ ELLIOT_5
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_FISHERMAN
+	.byte TRAINER_CLASS_FISHERMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_FISHERMAN
 	.string "ALOIS$", 12
@@ -4202,7 +4202,7 @@ gTrainers:: @ 81F04FC
 
 @ RONALD
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_FISHERMAN
+	.byte TRAINER_CLASS_FISHERMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_FISHERMAN
 	.string "ACHMED$", 12
@@ -4214,7 +4214,7 @@ gTrainers:: @ 81F04FC
 
 @ JACOB
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TRIATHLETE
+	.byte TRAINER_CLASS_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CYCLING_TRIATHLETE_M
 	.string "ROMAN$", 12
@@ -4226,7 +4226,7 @@ gTrainers:: @ 81F04FC
 
 @ ANTHONY
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TRIATHLETE
+	.byte TRAINER_CLASS_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CYCLING_TRIATHLETE_M
 	.string "EMIL$", 12
@@ -4238,7 +4238,7 @@ gTrainers:: @ 81F04FC
 
 @ BENJAMIN_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TRIATHLETE
+	.byte TRAINER_CLASS_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CYCLING_TRIATHLETE_M
 	.string "EGIDIUS$", 12
@@ -4250,7 +4250,7 @@ gTrainers:: @ 81F04FC
 
 @ BENJAMIN_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TRIATHLETE
+	.byte TRAINER_CLASS_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CYCLING_TRIATHLETE_M
 	.string "EGIDIUS$", 12
@@ -4262,7 +4262,7 @@ gTrainers:: @ 81F04FC
 
 @ BENJAMIN_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TRIATHLETE
+	.byte TRAINER_CLASS_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CYCLING_TRIATHLETE_M
 	.string "EGIDIUS$", 12
@@ -4274,7 +4274,7 @@ gTrainers:: @ 81F04FC
 
 @ BENJAMIN_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TRIATHLETE
+	.byte TRAINER_CLASS_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CYCLING_TRIATHLETE_M
 	.string "EGIDIUS$", 12
@@ -4286,7 +4286,7 @@ gTrainers:: @ 81F04FC
 
 @ BENJAMIN_5
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TRIATHLETE
+	.byte TRAINER_CLASS_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CYCLING_TRIATHLETE_M
 	.string "EGIDIUS$", 12
@@ -4298,7 +4298,7 @@ gTrainers:: @ 81F04FC
 
 @ ABIGAIL_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TRIATHLETE
+	.byte TRAINER_CLASS_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CYCLING_TRIATHLETE_F
 	.string "IRMGARD$", 12
@@ -4310,7 +4310,7 @@ gTrainers:: @ 81F04FC
 
 @ JASMINE
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TRIATHLETE
+	.byte TRAINER_CLASS_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CYCLING_TRIATHLETE_F
 	.string "MARTHA$", 12
@@ -4322,7 +4322,7 @@ gTrainers:: @ 81F04FC
 
 @ ABIGAIL_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TRIATHLETE
+	.byte TRAINER_CLASS_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CYCLING_TRIATHLETE_F
 	.string "IRMGARD$", 12
@@ -4334,7 +4334,7 @@ gTrainers:: @ 81F04FC
 
 @ ABIGAIL_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TRIATHLETE
+	.byte TRAINER_CLASS_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CYCLING_TRIATHLETE_F
 	.string "IRMGARD$", 12
@@ -4346,7 +4346,7 @@ gTrainers:: @ 81F04FC
 
 @ ABIGAIL_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TRIATHLETE
+	.byte TRAINER_CLASS_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CYCLING_TRIATHLETE_F
 	.string "IRMGARD$", 12
@@ -4358,7 +4358,7 @@ gTrainers:: @ 81F04FC
 
 @ ABIGAIL_5
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TRIATHLETE
+	.byte TRAINER_CLASS_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CYCLING_TRIATHLETE_F
 	.string "IRMGARD$", 12
@@ -4370,7 +4370,7 @@ gTrainers:: @ 81F04FC
 
 @ DYLAN_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TRIATHLETE
+	.byte TRAINER_CLASS_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_RUNNING_TRIATHLETE_M
 	.string "IGOR$", 12
@@ -4382,7 +4382,7 @@ gTrainers:: @ 81F04FC
 
 @ DYLAN_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TRIATHLETE
+	.byte TRAINER_CLASS_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_RUNNING_TRIATHLETE_M
 	.string "IGOR$", 12
@@ -4394,7 +4394,7 @@ gTrainers:: @ 81F04FC
 
 @ DYLAN_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TRIATHLETE
+	.byte TRAINER_CLASS_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_RUNNING_TRIATHLETE_M
 	.string "IGOR$", 12
@@ -4406,7 +4406,7 @@ gTrainers:: @ 81F04FC
 
 @ DYLAN_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TRIATHLETE
+	.byte TRAINER_CLASS_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_RUNNING_TRIATHLETE_M
 	.string "IGOR$", 12
@@ -4418,7 +4418,7 @@ gTrainers:: @ 81F04FC
 
 @ DYLAN_5
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TRIATHLETE
+	.byte TRAINER_CLASS_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_RUNNING_TRIATHLETE_M
 	.string "IGOR$", 12
@@ -4430,7 +4430,7 @@ gTrainers:: @ 81F04FC
 
 @ MARIA_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TRIATHLETE
+	.byte TRAINER_CLASS_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_RUNNING_TRIATHLETE_F
 	.string "JUTTA$", 12
@@ -4442,7 +4442,7 @@ gTrainers:: @ 81F04FC
 
 @ MARIA_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TRIATHLETE
+	.byte TRAINER_CLASS_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_RUNNING_TRIATHLETE_F
 	.string "JUTTA$", 12
@@ -4454,7 +4454,7 @@ gTrainers:: @ 81F04FC
 
 @ MARIA_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TRIATHLETE
+	.byte TRAINER_CLASS_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_RUNNING_TRIATHLETE_F
 	.string "JUTTA$", 12
@@ -4466,7 +4466,7 @@ gTrainers:: @ 81F04FC
 
 @ MARIA_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TRIATHLETE
+	.byte TRAINER_CLASS_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_RUNNING_TRIATHLETE_F
 	.string "JUTTA$", 12
@@ -4478,7 +4478,7 @@ gTrainers:: @ 81F04FC
 
 @ MARIA_5
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TRIATHLETE
+	.byte TRAINER_CLASS_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_RUNNING_TRIATHLETE_F
 	.string "JUTTA$", 12
@@ -4490,7 +4490,7 @@ gTrainers:: @ 81F04FC
 
 @ CALEB
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TRIATHLETE
+	.byte TRAINER_CLASS_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMING_TRIATHLETE_M
 	.string "OLEG$", 12
@@ -4502,7 +4502,7 @@ gTrainers:: @ 81F04FC
 
 @ ANONYMOUS_6
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TRIATHLETE
+	.byte TRAINER_CLASS_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMING_TRIATHLETE_M
 	.string "$", 12
@@ -4514,7 +4514,7 @@ gTrainers:: @ 81F04FC
 
 @ ISAIAH_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TRIATHLETE
+	.byte TRAINER_CLASS_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMING_TRIATHLETE_M
 	.string "KASPAR$", 12
@@ -4526,7 +4526,7 @@ gTrainers:: @ 81F04FC
 
 @ ANONYMOUS_7
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TRIATHLETE
+	.byte TRAINER_CLASS_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMING_TRIATHLETE_M
 	.string "$", 12
@@ -4538,7 +4538,7 @@ gTrainers:: @ 81F04FC
 
 @ CHASE
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TRIATHLETE
+	.byte TRAINER_CLASS_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMING_TRIATHLETE_M
 	.string "FERDINAND$", 12
@@ -4550,7 +4550,7 @@ gTrainers:: @ 81F04FC
 
 @ ISAIAH_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TRIATHLETE
+	.byte TRAINER_CLASS_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMING_TRIATHLETE_M
 	.string "KASPAR$", 12
@@ -4562,7 +4562,7 @@ gTrainers:: @ 81F04FC
 
 @ ISAIAH_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TRIATHLETE
+	.byte TRAINER_CLASS_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMING_TRIATHLETE_M
 	.string "KASPAR$", 12
@@ -4574,7 +4574,7 @@ gTrainers:: @ 81F04FC
 
 @ ISAIAH_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TRIATHLETE
+	.byte TRAINER_CLASS_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMING_TRIATHLETE_M
 	.string "KASPAR$", 12
@@ -4586,7 +4586,7 @@ gTrainers:: @ 81F04FC
 
 @ ISAIAH_5
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TRIATHLETE
+	.byte TRAINER_CLASS_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMING_TRIATHLETE_M
 	.string "KASPAR$", 12
@@ -4598,7 +4598,7 @@ gTrainers:: @ 81F04FC
 
 @ ANONYMOUS_8
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TRIATHLETE
+	.byte TRAINER_CLASS_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMING_TRIATHLETE_F
 	.string "$", 12
@@ -4610,7 +4610,7 @@ gTrainers:: @ 81F04FC
 
 @ CONNOR
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TRIATHLETE
+	.byte TRAINER_CLASS_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMING_TRIATHLETE_F
 	.string "MIRA$", 12
@@ -4622,7 +4622,7 @@ gTrainers:: @ 81F04FC
 
 @ ANONYMOUS_9
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TRIATHLETE
+	.byte TRAINER_CLASS_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMING_TRIATHLETE_F
 	.string "$", 12
@@ -4634,7 +4634,7 @@ gTrainers:: @ 81F04FC
 
 @ KATELYN_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TRIATHLETE
+	.byte TRAINER_CLASS_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMING_TRIATHLETE_F
 	.string "MECHTHILD$", 12
@@ -4646,7 +4646,7 @@ gTrainers:: @ 81F04FC
 
 @ ALLISON
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TRIATHLETE
+	.byte TRAINER_CLASS_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMING_TRIATHLETE_F
 	.string "LOTTE$", 12
@@ -4658,7 +4658,7 @@ gTrainers:: @ 81F04FC
 
 @ KATELYN_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TRIATHLETE
+	.byte TRAINER_CLASS_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMING_TRIATHLETE_F
 	.string "MECHTHILD$", 12
@@ -4670,7 +4670,7 @@ gTrainers:: @ 81F04FC
 
 @ KATELYN_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TRIATHLETE
+	.byte TRAINER_CLASS_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMING_TRIATHLETE_F
 	.string "MECHTHILD$", 12
@@ -4682,7 +4682,7 @@ gTrainers:: @ 81F04FC
 
 @ KATELYN_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TRIATHLETE
+	.byte TRAINER_CLASS_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMING_TRIATHLETE_F
 	.string "MECHTHILD$", 12
@@ -4694,7 +4694,7 @@ gTrainers:: @ 81F04FC
 
 @ KATELYN_5
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TRIATHLETE
+	.byte TRAINER_CLASS_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMING_TRIATHLETE_F
 	.string "MECHTHILD$", 12
@@ -4706,7 +4706,7 @@ gTrainers:: @ 81F04FC
 
 @ NICOLAS_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_DRAGON_TAMER
+	.byte TRAINER_CLASS_DRAGON_TAMER
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_DRAGON_TAMER
 	.string "ALFONS$", 12
@@ -4718,7 +4718,7 @@ gTrainers:: @ 81F04FC
 
 @ NICOLAS_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_DRAGON_TAMER
+	.byte TRAINER_CLASS_DRAGON_TAMER
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_DRAGON_TAMER
 	.string "ALFONS$", 12
@@ -4730,7 +4730,7 @@ gTrainers:: @ 81F04FC
 
 @ NICOLAS_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_DRAGON_TAMER
+	.byte TRAINER_CLASS_DRAGON_TAMER
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_DRAGON_TAMER
 	.string "ALFONS$", 12
@@ -4742,7 +4742,7 @@ gTrainers:: @ 81F04FC
 
 @ NICOLAS_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_DRAGON_TAMER
+	.byte TRAINER_CLASS_DRAGON_TAMER
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_DRAGON_TAMER
 	.string "ALFONS$", 12
@@ -4754,7 +4754,7 @@ gTrainers:: @ 81F04FC
 
 @ NICOLAS_5
 	.byte F_TRAINER_PARTY_HELD_ITEM @ party type flags
-	.byte TRAINER_CLASS_NAME_DRAGON_TAMER
+	.byte TRAINER_CLASS_DRAGON_TAMER
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_DRAGON_TAMER
 	.string "ALFONS$", 12
@@ -4766,7 +4766,7 @@ gTrainers:: @ 81F04FC
 
 @ AARON
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_DRAGON_TAMER
+	.byte TRAINER_CLASS_DRAGON_TAMER
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_DRAGON_TAMER
 	.string "EDMUND$", 12
@@ -4778,7 +4778,7 @@ gTrainers:: @ 81F04FC
 
 @ PERRY
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BIRD_KEEPER
+	.byte TRAINER_CLASS_BIRD_KEEPER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_BIRD_KEEPER
 	.string "JOSCHKA$", 12
@@ -4790,7 +4790,7 @@ gTrainers:: @ 81F04FC
 
 @ HUGH
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BIRD_KEEPER
+	.byte TRAINER_CLASS_BIRD_KEEPER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_BIRD_KEEPER
 	.string "ENRICO$", 12
@@ -4802,7 +4802,7 @@ gTrainers:: @ 81F04FC
 
 @ PHIL
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BIRD_KEEPER
+	.byte TRAINER_CLASS_BIRD_KEEPER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_BIRD_KEEPER
 	.string "HENRY$", 12
@@ -4814,7 +4814,7 @@ gTrainers:: @ 81F04FC
 
 @ JARED
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BIRD_KEEPER
+	.byte TRAINER_CLASS_BIRD_KEEPER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_BIRD_KEEPER
 	.string "HIOB$", 12
@@ -4826,7 +4826,7 @@ gTrainers:: @ 81F04FC
 
 @ ANONYMOUS_10
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BIRD_KEEPER
+	.byte TRAINER_CLASS_BIRD_KEEPER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_BIRD_KEEPER
 	.string "$", 12
@@ -4838,7 +4838,7 @@ gTrainers:: @ 81F04FC
 
 @ TANNER
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BIRD_KEEPER
+	.byte TRAINER_CLASS_BIRD_KEEPER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_BIRD_KEEPER
 	.string "ANATOL$", 12
@@ -4850,7 +4850,7 @@ gTrainers:: @ 81F04FC
 
 @ WILL
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BIRD_KEEPER
+	.byte TRAINER_CLASS_BIRD_KEEPER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_BIRD_KEEPER
 	.string "BJÖRN$", 12
@@ -4862,7 +4862,7 @@ gTrainers:: @ 81F04FC
 
 @ COLIN
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BIRD_KEEPER
+	.byte TRAINER_CLASS_BIRD_KEEPER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_BIRD_KEEPER
 	.string "WIM$", 12
@@ -4874,7 +4874,7 @@ gTrainers:: @ 81F04FC
 
 @ ROBERT_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BIRD_KEEPER
+	.byte TRAINER_CLASS_BIRD_KEEPER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_BIRD_KEEPER
 	.string "FRITJOF$", 12
@@ -4886,7 +4886,7 @@ gTrainers:: @ 81F04FC
 
 @ BENNY
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BIRD_KEEPER
+	.byte TRAINER_CLASS_BIRD_KEEPER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_BIRD_KEEPER
 	.string "GENADI$", 12
@@ -4898,7 +4898,7 @@ gTrainers:: @ 81F04FC
 
 @ CHESTER
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BIRD_KEEPER
+	.byte TRAINER_CLASS_BIRD_KEEPER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_BIRD_KEEPER
 	.string "VITALI$", 12
@@ -4910,7 +4910,7 @@ gTrainers:: @ 81F04FC
 
 @ ROBERT_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BIRD_KEEPER
+	.byte TRAINER_CLASS_BIRD_KEEPER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_BIRD_KEEPER
 	.string "FRITJOF$", 12
@@ -4922,7 +4922,7 @@ gTrainers:: @ 81F04FC
 
 @ ROBERT_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BIRD_KEEPER
+	.byte TRAINER_CLASS_BIRD_KEEPER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_BIRD_KEEPER
 	.string "FRITJOF$", 12
@@ -4934,7 +4934,7 @@ gTrainers:: @ 81F04FC
 
 @ ROBERT_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BIRD_KEEPER
+	.byte TRAINER_CLASS_BIRD_KEEPER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_BIRD_KEEPER
 	.string "FRITJOF$", 12
@@ -4946,7 +4946,7 @@ gTrainers:: @ 81F04FC
 
 @ ROBERT_5
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BIRD_KEEPER
+	.byte TRAINER_CLASS_BIRD_KEEPER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_BIRD_KEEPER
 	.string "FRITJOF$", 12
@@ -4958,7 +4958,7 @@ gTrainers:: @ 81F04FC
 
 @ ALEX
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BIRD_KEEPER
+	.byte TRAINER_CLASS_BIRD_KEEPER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_BIRD_KEEPER
 	.string "ARNE$", 12
@@ -4970,7 +4970,7 @@ gTrainers:: @ 81F04FC
 
 @ BECK
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BIRD_KEEPER
+	.byte TRAINER_CLASS_BIRD_KEEPER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_BIRD_KEEPER
 	.string "VINCENT$", 12
@@ -4982,7 +4982,7 @@ gTrainers:: @ 81F04FC
 
 @ YASU
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_NINJA_BOY
+	.byte TRAINER_CLASS_NINJA_BOY
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_NINJA_BOY
 	.string "VALENTIN$", 12
@@ -4994,7 +4994,7 @@ gTrainers:: @ 81F04FC
 
 @ TAKASHI
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_NINJA_BOY
+	.byte TRAINER_CLASS_NINJA_BOY
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_NINJA_BOY
 	.string "EUGEN$", 12
@@ -5006,7 +5006,7 @@ gTrainers:: @ 81F04FC
 
 @ MAKOTO
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_NINJA_BOY
+	.byte TRAINER_CLASS_NINJA_BOY
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_NINJA_BOY
 	.string "HERIBERT$", 12
@@ -5018,7 +5018,7 @@ gTrainers:: @ 81F04FC
 
 @ HIDEO_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_NINJA_BOY
+	.byte TRAINER_CLASS_NINJA_BOY
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_NINJA_BOY
 	.string "SAUL$", 12
@@ -5030,7 +5030,7 @@ gTrainers:: @ 81F04FC
 
 @ LAO_1
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_NINJA_BOY
+	.byte TRAINER_CLASS_NINJA_BOY
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_NINJA_BOY
 	.string "EDUARD$", 12
@@ -5042,7 +5042,7 @@ gTrainers:: @ 81F04FC
 
 @ LUNG
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_NINJA_BOY
+	.byte TRAINER_CLASS_NINJA_BOY
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_NINJA_BOY
 	.string "ARND$", 12
@@ -5054,7 +5054,7 @@ gTrainers:: @ 81F04FC
 
 @ LAO_2
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_NINJA_BOY
+	.byte TRAINER_CLASS_NINJA_BOY
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_NINJA_BOY
 	.string "EDUARD$", 12
@@ -5066,7 +5066,7 @@ gTrainers:: @ 81F04FC
 
 @ LAO_3
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_NINJA_BOY
+	.byte TRAINER_CLASS_NINJA_BOY
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_NINJA_BOY
 	.string "EDUARD$", 12
@@ -5078,7 +5078,7 @@ gTrainers:: @ 81F04FC
 
 @ LAO_4
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_NINJA_BOY
+	.byte TRAINER_CLASS_NINJA_BOY
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_NINJA_BOY
 	.string "EDUARD$", 12
@@ -5090,7 +5090,7 @@ gTrainers:: @ 81F04FC
 
 @ LAO_5
 	.byte F_TRAINER_PARTY_HELD_ITEM | F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_NINJA_BOY
+	.byte TRAINER_CLASS_NINJA_BOY
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_NINJA_BOY
 	.string "EDUARD$", 12
@@ -5102,7 +5102,7 @@ gTrainers:: @ 81F04FC
 
 @ TESSA
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BATTLE_GIRL
+	.byte TRAINER_CLASS_BATTLE_GIRL
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BATTLE_GIRL
 	.string "TAMARA$", 12
@@ -5114,7 +5114,7 @@ gTrainers:: @ 81F04FC
 
 @ LAURA
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BATTLE_GIRL
+	.byte TRAINER_CLASS_BATTLE_GIRL
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BATTLE_GIRL
 	.string "LAURA$", 12
@@ -5126,7 +5126,7 @@ gTrainers:: @ 81F04FC
 
 @ CYNDY_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BATTLE_GIRL
+	.byte TRAINER_CLASS_BATTLE_GIRL
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BATTLE_GIRL
 	.string "ELFI$", 12
@@ -5138,7 +5138,7 @@ gTrainers:: @ 81F04FC
 
 @ CORA
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BATTLE_GIRL
+	.byte TRAINER_CLASS_BATTLE_GIRL
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BATTLE_GIRL
 	.string "THEA$", 12
@@ -5150,7 +5150,7 @@ gTrainers:: @ 81F04FC
 
 @ JILL
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BATTLE_GIRL
+	.byte TRAINER_CLASS_BATTLE_GIRL
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BATTLE_GIRL
 	.string "AGNES$", 12
@@ -5162,7 +5162,7 @@ gTrainers:: @ 81F04FC
 
 @ CYNDY_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BATTLE_GIRL
+	.byte TRAINER_CLASS_BATTLE_GIRL
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BATTLE_GIRL
 	.string "ELFI$", 12
@@ -5174,7 +5174,7 @@ gTrainers:: @ 81F04FC
 
 @ CYNDY_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BATTLE_GIRL
+	.byte TRAINER_CLASS_BATTLE_GIRL
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BATTLE_GIRL
 	.string "ELFI$", 12
@@ -5186,7 +5186,7 @@ gTrainers:: @ 81F04FC
 
 @ CYNDY_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BATTLE_GIRL
+	.byte TRAINER_CLASS_BATTLE_GIRL
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BATTLE_GIRL
 	.string "ELFI$", 12
@@ -5198,7 +5198,7 @@ gTrainers:: @ 81F04FC
 
 @ CYNDY_5
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BATTLE_GIRL
+	.byte TRAINER_CLASS_BATTLE_GIRL
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BATTLE_GIRL
 	.string "ELFI$", 12
@@ -5210,7 +5210,7 @@ gTrainers:: @ 81F04FC
 
 @ MADELINE_1
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_PARASOL_LADY
+	.byte TRAINER_CLASS_PARASOL_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_PARASOL_LADY
 	.string "SASKIA$", 12
@@ -5222,7 +5222,7 @@ gTrainers:: @ 81F04FC
 
 @ CLARISSA
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_PARASOL_LADY
+	.byte TRAINER_CLASS_PARASOL_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_PARASOL_LADY
 	.string "GERDA$", 12
@@ -5234,7 +5234,7 @@ gTrainers:: @ 81F04FC
 
 @ ANGELICA
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_PARASOL_LADY
+	.byte TRAINER_CLASS_PARASOL_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_PARASOL_LADY
 	.string "MARIKA$", 12
@@ -5246,7 +5246,7 @@ gTrainers:: @ 81F04FC
 
 @ MADELINE_2
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_PARASOL_LADY
+	.byte TRAINER_CLASS_PARASOL_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_PARASOL_LADY
 	.string "SASKIA$", 12
@@ -5258,7 +5258,7 @@ gTrainers:: @ 81F04FC
 
 @ MADELINE_3
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_PARASOL_LADY
+	.byte TRAINER_CLASS_PARASOL_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_PARASOL_LADY
 	.string "SASKIA$", 12
@@ -5270,7 +5270,7 @@ gTrainers:: @ 81F04FC
 
 @ MADELINE_4
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_PARASOL_LADY
+	.byte TRAINER_CLASS_PARASOL_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_PARASOL_LADY
 	.string "SASKIA$", 12
@@ -5282,7 +5282,7 @@ gTrainers:: @ 81F04FC
 
 @ MADELINE_5
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_PARASOL_LADY
+	.byte TRAINER_CLASS_PARASOL_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_PARASOL_LADY
 	.string "SASKIA$", 12
@@ -5294,7 +5294,7 @@ gTrainers:: @ 81F04FC
 
 @ BEVERLY
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_F
+	.byte TRAINER_CLASS_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
 	.string "DAGMAR$", 12
@@ -5306,7 +5306,7 @@ gTrainers:: @ 81F04FC
 
 @ DAWN
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_F
+	.byte TRAINER_CLASS_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
 	.string "HEIDRUN$", 12
@@ -5318,7 +5318,7 @@ gTrainers:: @ 81F04FC
 
 @ NICOLE
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_F
+	.byte TRAINER_CLASS_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
 	.string "NICOLE$", 12
@@ -5330,7 +5330,7 @@ gTrainers:: @ 81F04FC
 
 @ DENISE
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_F
+	.byte TRAINER_CLASS_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
 	.string "DENISE$", 12
@@ -5342,7 +5342,7 @@ gTrainers:: @ 81F04FC
 
 @ BETH
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_F
+	.byte TRAINER_CLASS_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
 	.string "ALMUT$", 12
@@ -5354,7 +5354,7 @@ gTrainers:: @ 81F04FC
 
 @ TARA
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_F
+	.byte TRAINER_CLASS_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
 	.string "SIEGLINDE$", 12
@@ -5366,7 +5366,7 @@ gTrainers:: @ 81F04FC
 
 @ MISSY
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_F
+	.byte TRAINER_CLASS_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
 	.string "MARION$", 12
@@ -5378,7 +5378,7 @@ gTrainers:: @ 81F04FC
 
 @ ALICE
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_F
+	.byte TRAINER_CLASS_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
 	.string "ALICE$", 12
@@ -5390,7 +5390,7 @@ gTrainers:: @ 81F04FC
 
 @ JENNY_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_F
+	.byte TRAINER_CLASS_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
 	.string "MONIKA$", 12
@@ -5402,7 +5402,7 @@ gTrainers:: @ 81F04FC
 
 @ GRACE
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_F
+	.byte TRAINER_CLASS_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
 	.string "ILONA$", 12
@@ -5414,7 +5414,7 @@ gTrainers:: @ 81F04FC
 
 @ TANYA
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_F
+	.byte TRAINER_CLASS_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
 	.string "EMILIE$", 12
@@ -5426,7 +5426,7 @@ gTrainers:: @ 81F04FC
 
 @ SHARON
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_F
+	.byte TRAINER_CLASS_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
 	.string "GUDRUN$", 12
@@ -5438,7 +5438,7 @@ gTrainers:: @ 81F04FC
 
 @ NIKKI
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_F
+	.byte TRAINER_CLASS_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
 	.string "ASTRID$", 12
@@ -5450,7 +5450,7 @@ gTrainers:: @ 81F04FC
 
 @ BRENDA
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_F
+	.byte TRAINER_CLASS_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
 	.string "OTTILIE$", 12
@@ -5462,7 +5462,7 @@ gTrainers:: @ 81F04FC
 
 @ KATIE
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_F
+	.byte TRAINER_CLASS_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
 	.string "SENTA$", 12
@@ -5474,7 +5474,7 @@ gTrainers:: @ 81F04FC
 
 @ SUSIE
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_F
+	.byte TRAINER_CLASS_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
 	.string "JANKA$", 12
@@ -5486,7 +5486,7 @@ gTrainers:: @ 81F04FC
 
 @ KARA
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_F
+	.byte TRAINER_CLASS_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
 	.string "RENATE$", 12
@@ -5498,7 +5498,7 @@ gTrainers:: @ 81F04FC
 
 @ DANA
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_F
+	.byte TRAINER_CLASS_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
 	.string "VICKI$", 12
@@ -5510,7 +5510,7 @@ gTrainers:: @ 81F04FC
 
 @ ERIN
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_F
+	.byte TRAINER_CLASS_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
 	.string "REBECCA$", 12
@@ -5522,7 +5522,7 @@ gTrainers:: @ 81F04FC
 
 @ DEBRA
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_F
+	.byte TRAINER_CLASS_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
 	.string "ANJA$", 12
@@ -5534,7 +5534,7 @@ gTrainers:: @ 81F04FC
 
 @ LINDA
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_F
+	.byte TRAINER_CLASS_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
 	.string "GISELA$", 12
@@ -5546,7 +5546,7 @@ gTrainers:: @ 81F04FC
 
 @ KAYLEE
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_F
+	.byte TRAINER_CLASS_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
 	.string "PAOLA$", 12
@@ -5558,7 +5558,7 @@ gTrainers:: @ 81F04FC
 
 @ LAUREL
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_F
+	.byte TRAINER_CLASS_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
 	.string "BIRTE$", 12
@@ -5570,7 +5570,7 @@ gTrainers:: @ 81F04FC
 
 @ DARCY
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_F
+	.byte TRAINER_CLASS_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
 	.string "DOROTHEA$", 12
@@ -5582,7 +5582,7 @@ gTrainers:: @ 81F04FC
 
 @ JENNY_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_F
+	.byte TRAINER_CLASS_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
 	.string "MONIKA$", 12
@@ -5594,7 +5594,7 @@ gTrainers:: @ 81F04FC
 
 @ JENNY_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_F
+	.byte TRAINER_CLASS_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
 	.string "MONIKA$", 12
@@ -5606,7 +5606,7 @@ gTrainers:: @ 81F04FC
 
 @ JENNY_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_F
+	.byte TRAINER_CLASS_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
 	.string "MONIKA$", 12
@@ -5618,7 +5618,7 @@ gTrainers:: @ 81F04FC
 
 @ JENNY_5
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_F
+	.byte TRAINER_CLASS_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
 	.string "MONIKA$", 12
@@ -5630,7 +5630,7 @@ gTrainers:: @ 81F04FC
 
 @ HEIDI
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_PICNICKER
+	.byte TRAINER_CLASS_PICNICKER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_PICNICKER
 	.string "JANA$", 12
@@ -5642,7 +5642,7 @@ gTrainers:: @ 81F04FC
 
 @ BECKY
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_PICNICKER
+	.byte TRAINER_CLASS_PICNICKER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_PICNICKER
 	.string "HEIDI$", 12
@@ -5654,7 +5654,7 @@ gTrainers:: @ 81F04FC
 
 @ CAROL
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_PICNICKER
+	.byte TRAINER_CLASS_PICNICKER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_PICNICKER
 	.string "NATALIE$", 12
@@ -5666,7 +5666,7 @@ gTrainers:: @ 81F04FC
 
 @ NANCY
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_PICNICKER
+	.byte TRAINER_CLASS_PICNICKER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_PICNICKER
 	.string "NANCY$", 12
@@ -5678,7 +5678,7 @@ gTrainers:: @ 81F04FC
 
 @ MARTHA
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_PICNICKER
+	.byte TRAINER_CLASS_PICNICKER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_PICNICKER
 	.string "MARTHA$", 12
@@ -5690,7 +5690,7 @@ gTrainers:: @ 81F04FC
 
 @ DIANA_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_PICNICKER
+	.byte TRAINER_CLASS_PICNICKER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_PICNICKER
 	.string "GWENDOLIN$", 12
@@ -5702,7 +5702,7 @@ gTrainers:: @ 81F04FC
 
 @ NINA
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_PICNICKER
+	.byte TRAINER_CLASS_PICNICKER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_PICNICKER
 	.string "NADJA$", 12
@@ -5714,7 +5714,7 @@ gTrainers:: @ 81F04FC
 
 @ IRENE
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_PICNICKER
+	.byte TRAINER_CLASS_PICNICKER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_PICNICKER
 	.string "IRENE$", 12
@@ -5726,7 +5726,7 @@ gTrainers:: @ 81F04FC
 
 @ DIANA_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_PICNICKER
+	.byte TRAINER_CLASS_PICNICKER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_PICNICKER
 	.string "GWENDOLIN$", 12
@@ -5738,7 +5738,7 @@ gTrainers:: @ 81F04FC
 
 @ DIANA_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_PICNICKER
+	.byte TRAINER_CLASS_PICNICKER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_PICNICKER
 	.string "GWENDOLIN$", 12
@@ -5750,7 +5750,7 @@ gTrainers:: @ 81F04FC
 
 @ DIANA_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_PICNICKER
+	.byte TRAINER_CLASS_PICNICKER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_PICNICKER
 	.string "GWENDOLIN$", 12
@@ -5762,7 +5762,7 @@ gTrainers:: @ 81F04FC
 
 @ DIANA_5
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_PICNICKER
+	.byte TRAINER_CLASS_PICNICKER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_PICNICKER
 	.string "GWENDOLIN$", 12
@@ -5774,7 +5774,7 @@ gTrainers:: @ 81F04FC
 
 @ AMY_AND_LIV_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TWINS
+	.byte TRAINER_CLASS_TWINS
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_TWINS
 	.string "NORA & JO$", 12
@@ -5786,7 +5786,7 @@ gTrainers:: @ 81F04FC
 
 @ AMY_AND_LIV_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TWINS
+	.byte TRAINER_CLASS_TWINS
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_TWINS
 	.string "NORA & JO$", 12
@@ -5798,7 +5798,7 @@ gTrainers:: @ 81F04FC
 
 @ GINA_AND_MIA_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TWINS
+	.byte TRAINER_CLASS_TWINS
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_TWINS
 	.string "GINA & MIA$", 12
@@ -5810,7 +5810,7 @@ gTrainers:: @ 81F04FC
 
 @ MIU_AND_YUKI
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TWINS
+	.byte TRAINER_CLASS_TWINS
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_TWINS
 	.string "LEA & GRIT$", 12
@@ -5822,7 +5822,7 @@ gTrainers:: @ 81F04FC
 
 @ AMY_AND_LIV_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TWINS
+	.byte TRAINER_CLASS_TWINS
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_TWINS
 	.string "NORA & JO$", 12
@@ -5834,7 +5834,7 @@ gTrainers:: @ 81F04FC
 
 @ GINA_AND_MIA_2
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_TWINS
+	.byte TRAINER_CLASS_TWINS
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_TWINS
 	.string "GINA & MIA$", 12
@@ -5846,7 +5846,7 @@ gTrainers:: @ 81F04FC
 
 @ AMY_AND_LIV_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TWINS
+	.byte TRAINER_CLASS_TWINS
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_TWINS
 	.string "NORA & JO$", 12
@@ -5858,7 +5858,7 @@ gTrainers:: @ 81F04FC
 
 @ AMY_AND_LIV_5
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_TWINS
+	.byte TRAINER_CLASS_TWINS
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_TWINS
 	.string "NORA & JO$", 12
@@ -5870,7 +5870,7 @@ gTrainers:: @ 81F04FC
 
 @ AMY_AND_LIV_6
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_TWINS
+	.byte TRAINER_CLASS_TWINS
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_TWINS
 	.string "NORA & JO$", 12
@@ -5882,7 +5882,7 @@ gTrainers:: @ 81F04FC
 
 @ HUEY
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SAILOR
+	.byte TRAINER_CLASS_SAILOR
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SAILOR
 	.string "TASSILO$", 12
@@ -5894,7 +5894,7 @@ gTrainers:: @ 81F04FC
 
 @ EDMOND
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SAILOR
+	.byte TRAINER_CLASS_SAILOR
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SAILOR
 	.string "MONTY$", 12
@@ -5906,7 +5906,7 @@ gTrainers:: @ 81F04FC
 
 @ ERNEST_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SAILOR
+	.byte TRAINER_CLASS_SAILOR
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SAILOR
 	.string "ELERT$", 12
@@ -5918,7 +5918,7 @@ gTrainers:: @ 81F04FC
 
 @ DWAYNE
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SAILOR
+	.byte TRAINER_CLASS_SAILOR
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SAILOR
 	.string "RETO$", 12
@@ -5930,7 +5930,7 @@ gTrainers:: @ 81F04FC
 
 @ PHILLIP
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SAILOR
+	.byte TRAINER_CLASS_SAILOR
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SAILOR
 	.string "GUNNAR$", 12
@@ -5942,7 +5942,7 @@ gTrainers:: @ 81F04FC
 
 @ LEONARD
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SAILOR
+	.byte TRAINER_CLASS_SAILOR
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SAILOR
 	.string "LEONARD$", 12
@@ -5954,7 +5954,7 @@ gTrainers:: @ 81F04FC
 
 @ DUNCAN
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SAILOR
+	.byte TRAINER_CLASS_SAILOR
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SAILOR
 	.string "PIERRE$", 12
@@ -5966,7 +5966,7 @@ gTrainers:: @ 81F04FC
 
 @ ERNEST_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SAILOR
+	.byte TRAINER_CLASS_SAILOR
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SAILOR
 	.string "ELERT$", 12
@@ -5978,7 +5978,7 @@ gTrainers:: @ 81F04FC
 
 @ ERNEST_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SAILOR
+	.byte TRAINER_CLASS_SAILOR
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SAILOR
 	.string "ELERT$", 12
@@ -5990,7 +5990,7 @@ gTrainers:: @ 81F04FC
 
 @ ERNEST_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SAILOR
+	.byte TRAINER_CLASS_SAILOR
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SAILOR
 	.string "ELERT$", 12
@@ -6002,7 +6002,7 @@ gTrainers:: @ 81F04FC
 
 @ ERNEST_5
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SAILOR
+	.byte TRAINER_CLASS_SAILOR
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SAILOR
 	.string "ELERT$", 12
@@ -6014,7 +6014,7 @@ gTrainers:: @ 81F04FC
 
 @ ANONYMOUS_11
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BOARDER
+	.byte TRAINER_CLASS_BOARDER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
 	.string "$", 12
@@ -6026,7 +6026,7 @@ gTrainers:: @ 81F04FC
 
 @ ANONYMOUS_12
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BOARDER
+	.byte TRAINER_CLASS_BOARDER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
 	.string "$", 12
@@ -6038,7 +6038,7 @@ gTrainers:: @ 81F04FC
 
 @ ANONYMOUS_13
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BOARDER
+	.byte TRAINER_CLASS_BOARDER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
 	.string "$", 12
@@ -6050,7 +6050,7 @@ gTrainers:: @ 81F04FC
 
 @ SONNY
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BOARDER
+	.byte TRAINER_CLASS_BOARDER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
 	.string "WENZEL$", 12
@@ -6062,7 +6062,7 @@ gTrainers:: @ 81F04FC
 
 @ DONOVAN
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BOARDER
+	.byte TRAINER_CLASS_BOARDER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
 	.string "STANISLAUS$", 12
@@ -6074,7 +6074,7 @@ gTrainers:: @ 81F04FC
 
 @ GERALD
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BOARDER
+	.byte TRAINER_CLASS_BOARDER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
 	.string "GERALD$", 12
@@ -6086,7 +6086,7 @@ gTrainers:: @ 81F04FC
 
 @ KELVIN
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BOARDER
+	.byte TRAINER_CLASS_BOARDER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
 	.string "AARON$", 12
@@ -6098,7 +6098,7 @@ gTrainers:: @ 81F04FC
 
 @ KODY
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BOARDER
+	.byte TRAINER_CLASS_BOARDER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
 	.string "ALBERT$", 12
@@ -6110,7 +6110,7 @@ gTrainers:: @ 81F04FC
 
 @ TEVIN
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BOARDER
+	.byte TRAINER_CLASS_BOARDER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
 	.string "ANDRE$", 12
@@ -6122,7 +6122,7 @@ gTrainers:: @ 81F04FC
 
 @ DAMON
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BOARDER
+	.byte TRAINER_CLASS_BOARDER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
 	.string "AMON$", 12
@@ -6134,7 +6134,7 @@ gTrainers:: @ 81F04FC
 
 @ PABLO
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BOARDER
+	.byte TRAINER_CLASS_BOARDER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
 	.string "PABLO$", 12
@@ -6146,7 +6146,7 @@ gTrainers:: @ 81F04FC
 
 @ EDWIN_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_COLLECTOR
+	.byte TRAINER_CLASS_COLLECTOR
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_COLLECTOR
 	.string "EDWIN$", 12
@@ -6158,7 +6158,7 @@ gTrainers:: @ 81F04FC
 
 @ HECTOR_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_COLLECTOR
+	.byte TRAINER_CLASS_COLLECTOR
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_COLLECTOR
 	.string "HEKTOR$", 12
@@ -6170,7 +6170,7 @@ gTrainers:: @ 81F04FC
 
 @ HECTOR_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_COLLECTOR
+	.byte TRAINER_CLASS_COLLECTOR
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_COLLECTOR
 	.string "HEKTOR$", 12
@@ -6182,7 +6182,7 @@ gTrainers:: @ 81F04FC
 
 @ EDWIN_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_COLLECTOR
+	.byte TRAINER_CLASS_COLLECTOR
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_COLLECTOR
 	.string "EDWIN$", 12
@@ -6194,7 +6194,7 @@ gTrainers:: @ 81F04FC
 
 @ EDWIN_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_COLLECTOR
+	.byte TRAINER_CLASS_COLLECTOR
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_COLLECTOR
 	.string "EDWIN$", 12
@@ -6206,7 +6206,7 @@ gTrainers:: @ 81F04FC
 
 @ EDWIN_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_COLLECTOR
+	.byte TRAINER_CLASS_COLLECTOR
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_COLLECTOR
 	.string "EDWIN$", 12
@@ -6218,7 +6218,7 @@ gTrainers:: @ 81F04FC
 
 @ EDWIN_5
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_COLLECTOR
+	.byte TRAINER_CLASS_COLLECTOR
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_COLLECTOR
 	.string "EDWIN$", 12
@@ -6230,7 +6230,7 @@ gTrainers:: @ 81F04FC
 
 @ WALLY_1
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_TRAINER_3
+	.byte TRAINER_CLASS_POKEMON_TRAINER_3
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_WALLY
 	.string "HEIKO$", 12
@@ -6242,7 +6242,7 @@ gTrainers:: @ 81F04FC
 
 @ BRENDAN_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_TRAINER_3
+	.byte TRAINER_CLASS_POKEMON_TRAINER_3
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BRENDAN
 	.string "BRIX$", 12
@@ -6254,7 +6254,7 @@ gTrainers:: @ 81F04FC
 
 @ BRENDAN_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_TRAINER_3
+	.byte TRAINER_CLASS_POKEMON_TRAINER_3
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BRENDAN
 	.string "BRIX$", 12
@@ -6266,7 +6266,7 @@ gTrainers:: @ 81F04FC
 
 @ BRENDAN_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_TRAINER_3
+	.byte TRAINER_CLASS_POKEMON_TRAINER_3
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BRENDAN
 	.string "BRIX$", 12
@@ -6278,7 +6278,7 @@ gTrainers:: @ 81F04FC
 
 @ BRENDAN_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_TRAINER_3
+	.byte TRAINER_CLASS_POKEMON_TRAINER_3
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BRENDAN
 	.string "BRIX$", 12
@@ -6290,7 +6290,7 @@ gTrainers:: @ 81F04FC
 
 @ BRENDAN_5
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_TRAINER_3
+	.byte TRAINER_CLASS_POKEMON_TRAINER_3
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BRENDAN
 	.string "BRIX$", 12
@@ -6302,7 +6302,7 @@ gTrainers:: @ 81F04FC
 
 @ BRENDAN_6
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_TRAINER_3
+	.byte TRAINER_CLASS_POKEMON_TRAINER_3
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BRENDAN
 	.string "BRIX$", 12
@@ -6314,7 +6314,7 @@ gTrainers:: @ 81F04FC
 
 @ BRENDAN_7
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_TRAINER_3
+	.byte TRAINER_CLASS_POKEMON_TRAINER_3
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BRENDAN
 	.string "BRIX$", 12
@@ -6326,7 +6326,7 @@ gTrainers:: @ 81F04FC
 
 @ BRENDAN_8
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_TRAINER_3
+	.byte TRAINER_CLASS_POKEMON_TRAINER_3
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BRENDAN
 	.string "BRIX$", 12
@@ -6338,7 +6338,7 @@ gTrainers:: @ 81F04FC
 
 @ BRENDAN_9
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_TRAINER_3
+	.byte TRAINER_CLASS_POKEMON_TRAINER_3
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BRENDAN
 	.string "BRIX$", 12
@@ -6350,7 +6350,7 @@ gTrainers:: @ 81F04FC
 
 @ MAY_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_TRAINER_3
+	.byte TRAINER_CLASS_POKEMON_TRAINER_3
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_MAY
 	.string "MAIKE$", 12
@@ -6362,7 +6362,7 @@ gTrainers:: @ 81F04FC
 
 @ MAY_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_TRAINER_3
+	.byte TRAINER_CLASS_POKEMON_TRAINER_3
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_MAY
 	.string "MAIKE$", 12
@@ -6374,7 +6374,7 @@ gTrainers:: @ 81F04FC
 
 @ MAY_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_TRAINER_3
+	.byte TRAINER_CLASS_POKEMON_TRAINER_3
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_MAY
 	.string "MAIKE$", 12
@@ -6386,7 +6386,7 @@ gTrainers:: @ 81F04FC
 
 @ MAY_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_TRAINER_3
+	.byte TRAINER_CLASS_POKEMON_TRAINER_3
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_MAY
 	.string "MAIKE$", 12
@@ -6398,7 +6398,7 @@ gTrainers:: @ 81F04FC
 
 @ MAY_5
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_TRAINER_3
+	.byte TRAINER_CLASS_POKEMON_TRAINER_3
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_MAY
 	.string "MAIKE$", 12
@@ -6410,7 +6410,7 @@ gTrainers:: @ 81F04FC
 
 @ MAY_6
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_TRAINER_3
+	.byte TRAINER_CLASS_POKEMON_TRAINER_3
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_MAY
 	.string "MAIKE$", 12
@@ -6422,7 +6422,7 @@ gTrainers:: @ 81F04FC
 
 @ MAY_7
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_TRAINER_3
+	.byte TRAINER_CLASS_POKEMON_TRAINER_3
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_MAY
 	.string "MAIKE$", 12
@@ -6434,7 +6434,7 @@ gTrainers:: @ 81F04FC
 
 @ MAY_8
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_TRAINER_3
+	.byte TRAINER_CLASS_POKEMON_TRAINER_3
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_MAY
 	.string "MAIKE$", 12
@@ -6446,7 +6446,7 @@ gTrainers:: @ 81F04FC
 
 @ MAY_9
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_TRAINER_3
+	.byte TRAINER_CLASS_POKEMON_TRAINER_3
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_MAY
 	.string "MAIKE$", 12
@@ -6458,7 +6458,7 @@ gTrainers:: @ 81F04FC
 
 @ ISAAC_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_BREEDER
+	.byte TRAINER_CLASS_POKEMON_BREEDER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_BREEDER_M
 	.string "BLASIUS$", 12
@@ -6470,7 +6470,7 @@ gTrainers:: @ 81F04FC
 
 @ RILEY
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_BREEDER
+	.byte TRAINER_CLASS_POKEMON_BREEDER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_BREEDER_M
 	.string "CLIFF$", 12
@@ -6482,7 +6482,7 @@ gTrainers:: @ 81F04FC
 
 @ AIDAN
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_BREEDER
+	.byte TRAINER_CLASS_POKEMON_BREEDER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_BREEDER_M
 	.string "DARIO$", 12
@@ -6494,7 +6494,7 @@ gTrainers:: @ 81F04FC
 
 @ ISAAC_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_BREEDER
+	.byte TRAINER_CLASS_POKEMON_BREEDER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_BREEDER_M
 	.string "BLASIUS$", 12
@@ -6506,7 +6506,7 @@ gTrainers:: @ 81F04FC
 
 @ ISAAC_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_BREEDER
+	.byte TRAINER_CLASS_POKEMON_BREEDER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_BREEDER_M
 	.string "BLASIUS$", 12
@@ -6518,7 +6518,7 @@ gTrainers:: @ 81F04FC
 
 @ ISAAC_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_BREEDER
+	.byte TRAINER_CLASS_POKEMON_BREEDER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_BREEDER_M
 	.string "BLASIUS$", 12
@@ -6530,7 +6530,7 @@ gTrainers:: @ 81F04FC
 
 @ ISAAC_5
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_BREEDER
+	.byte TRAINER_CLASS_POKEMON_BREEDER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_BREEDER_M
 	.string "BLASIUS$", 12
@@ -6542,7 +6542,7 @@ gTrainers:: @ 81F04FC
 
 @ LYDIA_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_BREEDER
+	.byte TRAINER_CLASS_POKEMON_BREEDER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_BREEDER_F
 	.string "LYDIA$", 12
@@ -6554,7 +6554,7 @@ gTrainers:: @ 81F04FC
 
 @ ALEXIA
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_BREEDER
+	.byte TRAINER_CLASS_POKEMON_BREEDER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_BREEDER_F
 	.string "DORIS$", 12
@@ -6566,7 +6566,7 @@ gTrainers:: @ 81F04FC
 
 @ DANIELLE
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_BREEDER
+	.byte TRAINER_CLASS_POKEMON_BREEDER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_BREEDER_F
 	.string "DUNJA$", 12
@@ -6578,7 +6578,7 @@ gTrainers:: @ 81F04FC
 
 @ LYDIA_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_BREEDER
+	.byte TRAINER_CLASS_POKEMON_BREEDER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_BREEDER_F
 	.string "LYDIA$", 12
@@ -6590,7 +6590,7 @@ gTrainers:: @ 81F04FC
 
 @ LYDIA_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_BREEDER
+	.byte TRAINER_CLASS_POKEMON_BREEDER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_BREEDER_F
 	.string "LYDIA$", 12
@@ -6602,7 +6602,7 @@ gTrainers:: @ 81F04FC
 
 @ LYDIA_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_BREEDER
+	.byte TRAINER_CLASS_POKEMON_BREEDER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_BREEDER_F
 	.string "LYDIA$", 12
@@ -6614,7 +6614,7 @@ gTrainers:: @ 81F04FC
 
 @ LYDIA_5
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_BREEDER
+	.byte TRAINER_CLASS_POKEMON_BREEDER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_BREEDER_F
 	.string "LYDIA$", 12
@@ -6626,7 +6626,7 @@ gTrainers:: @ 81F04FC
 
 @ JACKSON_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_RANGER
+	.byte TRAINER_CLASS_POKEMON_RANGER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_RANGER_M
 	.string "ECKBERT$", 12
@@ -6638,7 +6638,7 @@ gTrainers:: @ 81F04FC
 
 @ CARLOS
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_RANGER
+	.byte TRAINER_CLASS_POKEMON_RANGER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_RANGER_M
 	.string "EDWARD$", 12
@@ -6650,7 +6650,7 @@ gTrainers:: @ 81F04FC
 
 @ SEBASTIAN
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_RANGER
+	.byte TRAINER_CLASS_POKEMON_RANGER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_RANGER_M
 	.string "EILMAR$", 12
@@ -6662,7 +6662,7 @@ gTrainers:: @ 81F04FC
 
 @ JACKSON_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_RANGER
+	.byte TRAINER_CLASS_POKEMON_RANGER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_RANGER_M
 	.string "ECKBERT$", 12
@@ -6674,7 +6674,7 @@ gTrainers:: @ 81F04FC
 
 @ JACKSON_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_RANGER
+	.byte TRAINER_CLASS_POKEMON_RANGER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_RANGER_M
 	.string "ECKBERT$", 12
@@ -6686,7 +6686,7 @@ gTrainers:: @ 81F04FC
 
 @ JACKSON_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_RANGER
+	.byte TRAINER_CLASS_POKEMON_RANGER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_RANGER_M
 	.string "ECKBERT$", 12
@@ -6698,7 +6698,7 @@ gTrainers:: @ 81F04FC
 
 @ JACKSON_5
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_RANGER
+	.byte TRAINER_CLASS_POKEMON_RANGER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_RANGER_M
 	.string "ECKBERT$", 12
@@ -6710,7 +6710,7 @@ gTrainers:: @ 81F04FC
 
 @ CATHERINE_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_RANGER
+	.byte TRAINER_CLASS_POKEMON_RANGER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_RANGER_F
 	.string "HANNELORE$", 12
@@ -6722,7 +6722,7 @@ gTrainers:: @ 81F04FC
 
 @ JENNA
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_RANGER
+	.byte TRAINER_CLASS_POKEMON_RANGER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_RANGER_F
 	.string "INGEBORG$", 12
@@ -6734,7 +6734,7 @@ gTrainers:: @ 81F04FC
 
 @ SOPHIA
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_RANGER
+	.byte TRAINER_CLASS_POKEMON_RANGER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_RANGER_F
 	.string "SOPHIA$", 12
@@ -6746,7 +6746,7 @@ gTrainers:: @ 81F04FC
 
 @ CATHERINE_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_RANGER
+	.byte TRAINER_CLASS_POKEMON_RANGER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_RANGER_F
 	.string "HANNELORE$", 12
@@ -6758,7 +6758,7 @@ gTrainers:: @ 81F04FC
 
 @ CATHERINE_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_RANGER
+	.byte TRAINER_CLASS_POKEMON_RANGER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_RANGER_F
 	.string "HANNELORE$", 12
@@ -6770,7 +6770,7 @@ gTrainers:: @ 81F04FC
 
 @ CATHERINE_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_RANGER
+	.byte TRAINER_CLASS_POKEMON_RANGER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_RANGER_F
 	.string "HANNELORE$", 12
@@ -6782,7 +6782,7 @@ gTrainers:: @ 81F04FC
 
 @ CATHERINE_5
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_RANGER
+	.byte TRAINER_CLASS_POKEMON_RANGER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_RANGER_F
 	.string "HANNELORE$", 12
@@ -6794,7 +6794,7 @@ gTrainers:: @ 81F04FC
 
 @ MAXIE_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_MAGMA_LEADER
+	.byte TRAINER_CLASS_MAGMA_LEADER
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAXIE
 	.string "MARC$", 12
@@ -6806,7 +6806,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_28
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
+	.byte TRAINER_CLASS_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -6818,7 +6818,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_29
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
+	.byte TRAINER_CLASS_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -6830,7 +6830,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_30
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
+	.byte TRAINER_CLASS_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -6842,7 +6842,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_31
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
+	.byte TRAINER_CLASS_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -6854,7 +6854,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_32
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
+	.byte TRAINER_CLASS_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -6866,7 +6866,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_33
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
+	.byte TRAINER_CLASS_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -6878,7 +6878,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_34
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
+	.byte TRAINER_CLASS_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -6890,7 +6890,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_35
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
+	.byte TRAINER_CLASS_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -6902,7 +6902,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_36
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
+	.byte TRAINER_CLASS_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -6914,7 +6914,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_37
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
+	.byte TRAINER_CLASS_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -6926,7 +6926,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_38
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
+	.byte TRAINER_CLASS_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -6938,7 +6938,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_39
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
+	.byte TRAINER_CLASS_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -6950,7 +6950,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_40
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
+	.byte TRAINER_CLASS_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -6962,7 +6962,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_41
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
+	.byte TRAINER_CLASS_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -6974,7 +6974,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_42
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
+	.byte TRAINER_CLASS_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -6986,7 +6986,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_43
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
+	.byte TRAINER_CLASS_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -6998,7 +6998,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_44
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
+	.byte TRAINER_CLASS_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -7010,7 +7010,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_45
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
+	.byte TRAINER_CLASS_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -7022,7 +7022,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_46
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
+	.byte TRAINER_CLASS_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -7034,7 +7034,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_47
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
+	.byte TRAINER_CLASS_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -7046,7 +7046,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_48
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
+	.byte TRAINER_CLASS_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -7058,7 +7058,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_49
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
+	.byte TRAINER_CLASS_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -7070,7 +7070,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_50
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
+	.byte TRAINER_CLASS_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -7082,7 +7082,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_51
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
+	.byte TRAINER_CLASS_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
 	.string "RÜPEL$", 12
@@ -7094,7 +7094,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_52
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
+	.byte TRAINER_CLASS_TEAM_MAGMA
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_F
 	.string "RÜPEL$", 12
@@ -7106,7 +7106,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_53
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
+	.byte TRAINER_CLASS_TEAM_MAGMA
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_F
 	.string "RÜPEL$", 12
@@ -7118,7 +7118,7 @@ gTrainers:: @ 81F04FC
 
 @ GRUNT_54
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
+	.byte TRAINER_CLASS_TEAM_MAGMA
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_F
 	.string "RÜPEL$", 12
@@ -7130,7 +7130,7 @@ gTrainers:: @ 81F04FC
 
 @ ANONYMOUS_14
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_MAGMA_ADMIN
+	.byte TRAINER_CLASS_MAGMA_ADMIN
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_BEAUTY
 	.string "$", 12
@@ -7142,7 +7142,7 @@ gTrainers:: @ 81F04FC
 
 @ ANONYMOUS_15
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_MAGMA_ADMIN
+	.byte TRAINER_CLASS_MAGMA_ADMIN
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_ADMIN_M
 	.string "$", 12
@@ -7154,7 +7154,7 @@ gTrainers:: @ 81F04FC
 
 @ TABITHA_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_MAGMA_ADMIN
+	.byte TRAINER_CLASS_MAGMA_ADMIN
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_ADMIN_M
 	.string "KALLE$", 12
@@ -7166,7 +7166,7 @@ gTrainers:: @ 81F04FC
 
 @ TABITHA_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_MAGMA_ADMIN
+	.byte TRAINER_CLASS_MAGMA_ADMIN
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_ADMIN_M
 	.string "KALLE$", 12
@@ -7178,7 +7178,7 @@ gTrainers:: @ 81F04FC
 
 @ ANONYMOUS_16
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_MAGMA_ADMIN
+	.byte TRAINER_CLASS_MAGMA_ADMIN
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_ADMIN_M
 	.string "$", 12
@@ -7190,7 +7190,7 @@ gTrainers:: @ 81F04FC
 
 @ COURTNEY_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_MAGMA_ADMIN
+	.byte TRAINER_CLASS_MAGMA_ADMIN
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_ADMIN_F
 	.string "JÖRDIS$", 12
@@ -7202,7 +7202,7 @@ gTrainers:: @ 81F04FC
 
 @ COURTNEY_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_MAGMA_ADMIN
+	.byte TRAINER_CLASS_MAGMA_ADMIN
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_ADMIN_F
 	.string "JÖRDIS$", 12
@@ -7214,7 +7214,7 @@ gTrainers:: @ 81F04FC
 
 @ MAXIE_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_MAGMA_LEADER
+	.byte TRAINER_CLASS_MAGMA_LEADER
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAXIE
 	.string "MARC$", 12
@@ -7226,7 +7226,7 @@ gTrainers:: @ 81F04FC
 
 @ MAXIE_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_MAGMA_LEADER
+	.byte TRAINER_CLASS_MAGMA_LEADER
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAXIE
 	.string "MARC$", 12
@@ -7238,7 +7238,7 @@ gTrainers:: @ 81F04FC
 
 @ TIANA
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_LASS
+	.byte TRAINER_CLASS_LASS
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LASS
 	.string "KARIN$", 12
@@ -7250,7 +7250,7 @@ gTrainers:: @ 81F04FC
 
 @ HALEY_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_LASS
+	.byte TRAINER_CLASS_LASS
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LASS
 	.string "ELISA$", 12
@@ -7262,7 +7262,7 @@ gTrainers:: @ 81F04FC
 
 @ JANICE
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_LASS
+	.byte TRAINER_CLASS_LASS
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LASS
 	.string "RICARDA$", 12
@@ -7274,7 +7274,7 @@ gTrainers:: @ 81F04FC
 
 @ VIVI
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_WINSTRATE
+	.byte TRAINER_CLASS_WINSTRATE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LASS
 	.string "SIEGLINDE$", 12
@@ -7286,7 +7286,7 @@ gTrainers:: @ 81F04FC
 
 @ HALEY_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_LASS
+	.byte TRAINER_CLASS_LASS
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LASS
 	.string "ELISA$", 12
@@ -7298,7 +7298,7 @@ gTrainers:: @ 81F04FC
 
 @ HALEY_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_LASS
+	.byte TRAINER_CLASS_LASS
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LASS
 	.string "ELISA$", 12
@@ -7310,7 +7310,7 @@ gTrainers:: @ 81F04FC
 
 @ HALEY_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_LASS
+	.byte TRAINER_CLASS_LASS
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LASS
 	.string "ELISA$", 12
@@ -7322,7 +7322,7 @@ gTrainers:: @ 81F04FC
 
 @ HALEY_5
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_LASS
+	.byte TRAINER_CLASS_LASS
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LASS
 	.string "ELISA$", 12
@@ -7334,7 +7334,7 @@ gTrainers:: @ 81F04FC
 
 @ SALLY
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_LASS
+	.byte TRAINER_CLASS_LASS
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LASS
 	.string "FREDERIKE$", 12
@@ -7346,7 +7346,7 @@ gTrainers:: @ 81F04FC
 
 @ ROBIN
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_LASS
+	.byte TRAINER_CLASS_LASS
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LASS
 	.string "ROBIN$", 12
@@ -7358,7 +7358,7 @@ gTrainers:: @ 81F04FC
 
 @ ANDREA
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_LASS
+	.byte TRAINER_CLASS_LASS
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LASS
 	.string "FRIEDA$", 12
@@ -7370,7 +7370,7 @@ gTrainers:: @ 81F04FC
 
 @ CRISSY
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_LASS
+	.byte TRAINER_CLASS_LASS
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LASS
 	.string "ADELHEID$", 12
@@ -7382,7 +7382,7 @@ gTrainers:: @ 81F04FC
 
 @ RICK
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BUG_CATCHER
+	.byte TRAINER_CLASS_BUG_CATCHER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BUG_CATCHER
 	.string "BALDUR$", 12
@@ -7394,7 +7394,7 @@ gTrainers:: @ 81F04FC
 
 @ LYLE
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BUG_CATCHER
+	.byte TRAINER_CLASS_BUG_CATCHER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BUG_CATCHER
 	.string "DETWIN$", 12
@@ -7406,7 +7406,7 @@ gTrainers:: @ 81F04FC
 
 @ JOSE
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BUG_CATCHER
+	.byte TRAINER_CLASS_BUG_CATCHER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BUG_CATCHER
 	.string "EROS$", 12
@@ -7418,7 +7418,7 @@ gTrainers:: @ 81F04FC
 
 @ DOUG
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BUG_CATCHER
+	.byte TRAINER_CLASS_BUG_CATCHER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BUG_CATCHER
 	.string "EUSEBIUS$", 12
@@ -7430,7 +7430,7 @@ gTrainers:: @ 81F04FC
 
 @ GREG
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BUG_CATCHER
+	.byte TRAINER_CLASS_BUG_CATCHER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BUG_CATCHER
 	.string "GANGOLF$", 12
@@ -7442,7 +7442,7 @@ gTrainers:: @ 81F04FC
 
 @ KENT
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BUG_CATCHER
+	.byte TRAINER_CLASS_BUG_CATCHER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BUG_CATCHER
 	.string "GERIT$", 12
@@ -7454,7 +7454,7 @@ gTrainers:: @ 81F04FC
 
 @ JAMES_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BUG_CATCHER
+	.byte TRAINER_CLASS_BUG_CATCHER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BUG_CATCHER
 	.string "GERNOT$", 12
@@ -7466,7 +7466,7 @@ gTrainers:: @ 81F04FC
 
 @ JAMES_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BUG_CATCHER
+	.byte TRAINER_CLASS_BUG_CATCHER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BUG_CATCHER
 	.string "GERNOT$", 12
@@ -7478,7 +7478,7 @@ gTrainers:: @ 81F04FC
 
 @ JAMES_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BUG_CATCHER
+	.byte TRAINER_CLASS_BUG_CATCHER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BUG_CATCHER
 	.string "GERNOT$", 12
@@ -7490,7 +7490,7 @@ gTrainers:: @ 81F04FC
 
 @ JAMES_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BUG_CATCHER
+	.byte TRAINER_CLASS_BUG_CATCHER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BUG_CATCHER
 	.string "GERNOT$", 12
@@ -7502,7 +7502,7 @@ gTrainers:: @ 81F04FC
 
 @ JAMES_5
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BUG_CATCHER
+	.byte TRAINER_CLASS_BUG_CATCHER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BUG_CATCHER
 	.string "GERNOT$", 12
@@ -7514,7 +7514,7 @@ gTrainers:: @ 81F04FC
 
 @ BRICE
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_HIKER
+	.byte TRAINER_CLASS_HIKER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_HIKER
 	.string "GISBERT$", 12
@@ -7526,7 +7526,7 @@ gTrainers:: @ 81F04FC
 
 @ TRENT_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_HIKER
+	.byte TRAINER_CLASS_HIKER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_HIKER
 	.string "HEIMKE$", 12
@@ -7538,7 +7538,7 @@ gTrainers:: @ 81F04FC
 
 @ LENNY
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_HIKER
+	.byte TRAINER_CLASS_HIKER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_HIKER
 	.string "JANNO$", 12
@@ -7550,7 +7550,7 @@ gTrainers:: @ 81F04FC
 
 @ LUCAS_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_HIKER
+	.byte TRAINER_CLASS_HIKER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_HIKER
 	.string "KLODWIG$", 12
@@ -7562,7 +7562,7 @@ gTrainers:: @ 81F04FC
 
 @ ALAN
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_HIKER
+	.byte TRAINER_CLASS_HIKER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_HIKER
 	.string "LANZELOT$", 12
@@ -7574,7 +7574,7 @@ gTrainers:: @ 81F04FC
 
 @ CLARK
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_HIKER
+	.byte TRAINER_CLASS_HIKER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_HIKER
 	.string "LUZIUS$", 12
@@ -7586,7 +7586,7 @@ gTrainers:: @ 81F04FC
 
 @ ERIC
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_HIKER
+	.byte TRAINER_CLASS_HIKER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_HIKER
 	.string "MAURIZIO$", 12
@@ -7598,7 +7598,7 @@ gTrainers:: @ 81F04FC
 
 @ LUCAS_2
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_HIKER
+	.byte TRAINER_CLASS_HIKER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_HIKER
 	.string "KLODWIG$", 12
@@ -7610,7 +7610,7 @@ gTrainers:: @ 81F04FC
 
 @ MIKE_1
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_HIKER
+	.byte TRAINER_CLASS_HIKER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_HIKER
 	.string "MELVIN$", 12
@@ -7622,7 +7622,7 @@ gTrainers:: @ 81F04FC
 
 @ MIKE_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_HIKER
+	.byte TRAINER_CLASS_HIKER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_HIKER
 	.string "MELVIN$", 12
@@ -7634,7 +7634,7 @@ gTrainers:: @ 81F04FC
 
 @ TRENT_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_HIKER
+	.byte TRAINER_CLASS_HIKER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_HIKER
 	.string "HEIMKE$", 12
@@ -7646,7 +7646,7 @@ gTrainers:: @ 81F04FC
 
 @ TRENT_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_HIKER
+	.byte TRAINER_CLASS_HIKER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_HIKER
 	.string "HEIMKE$", 12
@@ -7658,7 +7658,7 @@ gTrainers:: @ 81F04FC
 
 @ TRENT_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_HIKER
+	.byte TRAINER_CLASS_HIKER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_HIKER
 	.string "HEIMKE$", 12
@@ -7670,7 +7670,7 @@ gTrainers:: @ 81F04FC
 
 @ TRENT_5
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_HIKER
+	.byte TRAINER_CLASS_HIKER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_HIKER
 	.string "HEIMKE$", 12
@@ -7682,7 +7682,7 @@ gTrainers:: @ 81F04FC
 
 @ DEZ_AND_LUKE
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_YOUNG_COUPLE
+	.byte TRAINER_CLASS_YOUNG_COUPLE
 	.byte TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNG_COUPLE
 	.string "INA & LEIF$", 12
@@ -7694,7 +7694,7 @@ gTrainers:: @ 81F04FC
 
 @ LEA_AND_JED
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_YOUNG_COUPLE
+	.byte TRAINER_CLASS_YOUNG_COUPLE
 	.byte TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNG_COUPLE
 	.string "LENA & UWE$", 12
@@ -7706,7 +7706,7 @@ gTrainers:: @ 81F04FC
 
 @ LOIS_AND_HAL_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_YOUNG_COUPLE
+	.byte TRAINER_CLASS_YOUNG_COUPLE
 	.byte TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNG_COUPLE
 	.string "GESA & PIT$", 12
@@ -7718,7 +7718,7 @@ gTrainers:: @ 81F04FC
 
 @ LOIS_AND_HAL_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_YOUNG_COUPLE
+	.byte TRAINER_CLASS_YOUNG_COUPLE
 	.byte TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNG_COUPLE
 	.string "GESA & PIT$", 12
@@ -7730,7 +7730,7 @@ gTrainers:: @ 81F04FC
 
 @ LOIS_AND_HAL_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_YOUNG_COUPLE
+	.byte TRAINER_CLASS_YOUNG_COUPLE
 	.byte TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNG_COUPLE
 	.string "GESA & PIT$", 12
@@ -7742,7 +7742,7 @@ gTrainers:: @ 81F04FC
 
 @ LOIS_AND_HAL_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_YOUNG_COUPLE
+	.byte TRAINER_CLASS_YOUNG_COUPLE
 	.byte TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNG_COUPLE
 	.string "GESA & PIT$", 12
@@ -7754,7 +7754,7 @@ gTrainers:: @ 81F04FC
 
 @ LOIS_AND_HAL_5
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_YOUNG_COUPLE
+	.byte TRAINER_CLASS_YOUNG_COUPLE
 	.byte TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNG_COUPLE
 	.string "GESA & PIT$", 12
@@ -7766,7 +7766,7 @@ gTrainers:: @ 81F04FC
 
 @ JOHANNA
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BEAUTY
+	.byte TRAINER_CLASS_BEAUTY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BEAUTY
 	.string "CORDULA$", 12
@@ -7778,7 +7778,7 @@ gTrainers:: @ 81F04FC
 
 @ ZANE
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_COOL_TRAINER
+	.byte TRAINER_CLASS_COOL_TRAINER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
 	.string "OTBERT$", 12
@@ -7790,7 +7790,7 @@ gTrainers:: @ 81F04FC
 
 @ VIVIAN
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_BATTLE_GIRL
+	.byte TRAINER_CLASS_BATTLE_GIRL
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BATTLE_GIRL
 	.string "BÄRBEL$", 12
@@ -7802,7 +7802,7 @@ gTrainers:: @ 81F04FC
 
 @ SADIE
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_BATTLE_GIRL
+	.byte TRAINER_CLASS_BATTLE_GIRL
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BATTLE_GIRL
 	.string "CHANTAL$", 12
@@ -7814,7 +7814,7 @@ gTrainers:: @ 81F04FC
 
 @ HIDEO_2
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_NINJA_BOY
+	.byte TRAINER_CLASS_NINJA_BOY
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_NINJA_BOY
 	.string "SAUL$", 12
@@ -7826,7 +7826,7 @@ gTrainers:: @ 81F04FC
 
 @ KEIGO
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_NINJA_BOY
+	.byte TRAINER_CLASS_NINJA_BOY
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_NINJA_BOY
 	.string "NELSON$", 12
@@ -7838,7 +7838,7 @@ gTrainers:: @ 81F04FC
 
 @ TSUNAO
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_NINJA_BOY
+	.byte TRAINER_CLASS_NINJA_BOY
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_NINJA_BOY
 	.string "NIKODEMUS$", 12
@@ -7850,7 +7850,7 @@ gTrainers:: @ 81F04FC
 
 @ TERRELL
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_CAMPER
+	.byte TRAINER_CLASS_CAMPER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CAMPER
 	.string "NESTOR$", 12
@@ -7862,7 +7862,7 @@ gTrainers:: @ 81F04FC
 
 @ KYLEE
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_PICNICKER
+	.byte TRAINER_CLASS_PICNICKER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_PICNICKER
 	.string "MIREILLE$", 12
@@ -7874,7 +7874,7 @@ gTrainers:: @ 81F04FC
 
 @ WALLY_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_TRAINER_3
+	.byte TRAINER_CLASS_POKEMON_TRAINER_3
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_WALLY
 	.string "HEIKO$", 12
@@ -7886,7 +7886,7 @@ gTrainers:: @ 81F04FC
 
 @ WALLY_3
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_TRAINER_3
+	.byte TRAINER_CLASS_POKEMON_TRAINER_3
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_WALLY
 	.string "HEIKO$", 12
@@ -7898,7 +7898,7 @@ gTrainers:: @ 81F04FC
 
 @ WALLY_4
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_TRAINER_3
+	.byte TRAINER_CLASS_POKEMON_TRAINER_3
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_WALLY
 	.string "HEIKO$", 12
@@ -7910,7 +7910,7 @@ gTrainers:: @ 81F04FC
 
 @ WALLY_5
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_TRAINER_3
+	.byte TRAINER_CLASS_POKEMON_TRAINER_3
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_WALLY
 	.string "HEIKO$", 12
@@ -7922,7 +7922,7 @@ gTrainers:: @ 81F04FC
 
 @ WALLY_6
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_TRAINER_3
+	.byte TRAINER_CLASS_POKEMON_TRAINER_3
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_WALLY
 	.string "HEIKO$", 12
@@ -7934,7 +7934,7 @@ gTrainers:: @ 81F04FC
 
 @ BRENDAN_10
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_TRAINER_3
+	.byte TRAINER_CLASS_POKEMON_TRAINER_3
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BRENDAN
 	.string "BRIX$", 12
@@ -7946,7 +7946,7 @@ gTrainers:: @ 81F04FC
 
 @ BRENDAN_11
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_TRAINER_3
+	.byte TRAINER_CLASS_POKEMON_TRAINER_3
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BRENDAN
 	.string "BRIX$", 12
@@ -7958,7 +7958,7 @@ gTrainers:: @ 81F04FC
 
 @ BRENDAN_12
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_TRAINER_3
+	.byte TRAINER_CLASS_POKEMON_TRAINER_3
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BRENDAN
 	.string "BRIX$", 12
@@ -7970,7 +7970,7 @@ gTrainers:: @ 81F04FC
 
 @ MAY_10
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_TRAINER_3
+	.byte TRAINER_CLASS_POKEMON_TRAINER_3
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_MAY
 	.string "MAIKE$", 12
@@ -7982,7 +7982,7 @@ gTrainers:: @ 81F04FC
 
 @ MAY_11
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_TRAINER_3
+	.byte TRAINER_CLASS_POKEMON_TRAINER_3
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_MAY
 	.string "MAIKE$", 12
@@ -7994,7 +7994,7 @@ gTrainers:: @ 81F04FC
 
 @ MAY_12
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_POKEMON_TRAINER_3
+	.byte TRAINER_CLASS_POKEMON_TRAINER_3
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_MAY
 	.string "MAIKE$", 12
@@ -8006,7 +8006,7 @@ gTrainers:: @ 81F04FC
 
 @ JONAH
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_FISHERMAN
+	.byte TRAINER_CLASS_FISHERMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_FISHERMAN
 	.string "OLOF$", 12
@@ -8018,7 +8018,7 @@ gTrainers:: @ 81F04FC
 
 @ HENRY
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_FISHERMAN
+	.byte TRAINER_CLASS_FISHERMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_FISHERMAN
 	.string "PIUS$", 12
@@ -8030,7 +8030,7 @@ gTrainers:: @ 81F04FC
 
 @ ROGER
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_FISHERMAN
+	.byte TRAINER_CLASS_FISHERMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_FISHERMAN
 	.string "AMATUS$", 12
@@ -8042,7 +8042,7 @@ gTrainers:: @ 81F04FC
 
 @ ALEXA
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_COOL_TRAINER
+	.byte TRAINER_CLASS_COOL_TRAINER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
 	.string "ANNABEL$", 12
@@ -8054,7 +8054,7 @@ gTrainers:: @ 81F04FC
 
 @ RUBEN
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_COOL_TRAINER
+	.byte TRAINER_CLASS_COOL_TRAINER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
 	.string "TRUTZ$", 12
@@ -8066,7 +8066,7 @@ gTrainers:: @ 81F04FC
 
 @ KOJI
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BLACK_BELT
+	.byte TRAINER_CLASS_BLACK_BELT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BLACK_BELT
 	.string "REMIGIUS$", 12
@@ -8078,7 +8078,7 @@ gTrainers:: @ 81F04FC
 
 @ WAYNE
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_FISHERMAN
+	.byte TRAINER_CLASS_FISHERMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_FISHERMAN
 	.string "ALVARO$", 12
@@ -8090,7 +8090,7 @@ gTrainers:: @ 81F04FC
 
 @ BYRON
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_BIRD_KEEPER
+	.byte TRAINER_CLASS_BIRD_KEEPER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_BIRD_KEEPER
 	.string "AMALRICH$", 12
@@ -8102,7 +8102,7 @@ gTrainers:: @ 81F04FC
 
 @ REED
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_M
+	.byte TRAINER_CLASS_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
 	.string "ANDOLIN$", 12
@@ -8114,7 +8114,7 @@ gTrainers:: @ 81F04FC
 
 @ TISHA
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SWIMMER_F
+	.byte TRAINER_CLASS_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
 	.string "IMKE$", 12
@@ -8126,7 +8126,7 @@ gTrainers:: @ 81F04FC
 
 @ TORI_AND_TIA
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_TWINS
+	.byte TRAINER_CLASS_TWINS
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_TWINS
 	.string "LI & FLO$", 12
@@ -8138,7 +8138,7 @@ gTrainers:: @ 81F04FC
 
 @ KIM_AND_IRIS
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_SR_AND_JR
+	.byte TRAINER_CLASS_SR_AND_JR
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_SR_AND_JR
 	.string "ZOE & IRIS$", 12
@@ -8150,7 +8150,7 @@ gTrainers:: @ 81F04FC
 
 @ TYRA_AND_IVY
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_SR_AND_JR
+	.byte TRAINER_CLASS_SR_AND_JR
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_SR_AND_JR
 	.string "TYRA & IVY$", 12
@@ -8162,7 +8162,7 @@ gTrainers:: @ 81F04FC
 
 @ MEL_AND_PAUL
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_YOUNG_COUPLE
+	.byte TRAINER_CLASS_YOUNG_COUPLE
 	.byte TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNG_COUPLE
 	.string "GELI & OLE$", 12
@@ -8174,7 +8174,7 @@ gTrainers:: @ 81F04FC
 
 @ JOHN_AND_JAY_1
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_OLD_COUPLE
+	.byte TRAINER_CLASS_OLD_COUPLE
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_OLD_COUPLE
 	.string "URS & EVI$", 12
@@ -8186,7 +8186,7 @@ gTrainers:: @ 81F04FC
 
 @ JOHN_AND_JAY_2
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_OLD_COUPLE
+	.byte TRAINER_CLASS_OLD_COUPLE
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_OLD_COUPLE
 	.string "URS & EVI$", 12
@@ -8198,7 +8198,7 @@ gTrainers:: @ 81F04FC
 
 @ JOHN_AND_JAY_3
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_OLD_COUPLE
+	.byte TRAINER_CLASS_OLD_COUPLE
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_OLD_COUPLE
 	.string "URS & EVI$", 12
@@ -8210,7 +8210,7 @@ gTrainers:: @ 81F04FC
 
 @ JOHN_AND_JAY_4
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_OLD_COUPLE
+	.byte TRAINER_CLASS_OLD_COUPLE
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_OLD_COUPLE
 	.string "URS & EVI$", 12
@@ -8222,7 +8222,7 @@ gTrainers:: @ 81F04FC
 
 @ JOHN_AND_JAY_5
 	.byte F_TRAINER_PARTY_CUSTOM_MOVESET @ party type flags
-	.byte TRAINER_CLASS_NAME_OLD_COUPLE
+	.byte TRAINER_CLASS_OLD_COUPLE
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_OLD_COUPLE
 	.string "URS & EVI$", 12
@@ -8234,7 +8234,7 @@ gTrainers:: @ 81F04FC
 
 @ RELI_AND_IAN
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SIS_AND_BRO
+	.byte TRAINER_CLASS_SIS_AND_BRO
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SIS_AND_BRO
 	.string "TOBI & UNA$", 12
@@ -8246,7 +8246,7 @@ gTrainers:: @ 81F04FC
 
 @ RITA_AND_SAM_1
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SIS_AND_BRO
+	.byte TRAINER_CLASS_SIS_AND_BRO
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SIS_AND_BRO
 	.string "TOM & UTA$", 12
@@ -8258,7 +8258,7 @@ gTrainers:: @ 81F04FC
 
 @ RITA_AND_SAM_2
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SIS_AND_BRO
+	.byte TRAINER_CLASS_SIS_AND_BRO
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SIS_AND_BRO
 	.string "TOM & UTA$", 12
@@ -8270,7 +8270,7 @@ gTrainers:: @ 81F04FC
 
 @ RITA_AND_SAM_3
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SIS_AND_BRO
+	.byte TRAINER_CLASS_SIS_AND_BRO
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SIS_AND_BRO
 	.string "TOM & UTA$", 12
@@ -8282,7 +8282,7 @@ gTrainers:: @ 81F04FC
 
 @ RITA_AND_SAM_4
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SIS_AND_BRO
+	.byte TRAINER_CLASS_SIS_AND_BRO
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SIS_AND_BRO
 	.string "TOM & UTA$", 12
@@ -8294,7 +8294,7 @@ gTrainers:: @ 81F04FC
 
 @ RITA_AND_SAM_5
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SIS_AND_BRO
+	.byte TRAINER_CLASS_SIS_AND_BRO
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SIS_AND_BRO
 	.string "TOM & UTA$", 12
@@ -8306,7 +8306,7 @@ gTrainers:: @ 81F04FC
 
 @ LISA_AND_RAY
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_SIS_AND_BRO
+	.byte TRAINER_CLASS_SIS_AND_BRO
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SIS_AND_BRO
 	.string "ERKO & BEA$", 12
@@ -8318,7 +8318,7 @@ gTrainers:: @ 81F04FC
 
 @ EUGENE
 	.byte 0 @ party type flags
-	.byte TRAINER_CLASS_NAME_FISHERMAN
+	.byte TRAINER_CLASS_FISHERMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_FISHERMAN
 	.string "ABELKE$", 12

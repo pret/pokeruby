@@ -95,7 +95,7 @@ _0803609C: .4byte 0x000160c8
 _080360A0:
 	ldr r4, _080361D8 @ =gBattleMons
 	movs r0, 0
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x58
@@ -108,7 +108,7 @@ _080360A0:
 	b _080361C8
 _080360BC:
 	movs r0, 0
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r2, r0, 24
 	movs r6, 0
@@ -187,7 +187,7 @@ _08036110:
 	movs r1, 0x2E
 	bl GetMonData
 	movs r0, 0
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r2, r0, 24
 	movs r4, 0
@@ -312,7 +312,7 @@ _08036242:
 	eors r0, r4
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	ldr r1, _08036290 @ =gAbsentBankFlags
 	ldrb r1, [r1]
 	ldr r2, _08036294 @ =gBitTable
@@ -339,7 +339,7 @@ _08036298:
 	eors r0, r4
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r7, r0, 24
 	b _080362B2
@@ -656,7 +656,7 @@ ai_has_super_effective_move_on_field: @ 8036514
 	lsrs r0, 24
 	mov r8, r0
 	movs r0, 0
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r3, r0, 24
 	ldr r0, _080365AC @ =gAbsentBankFlags
@@ -733,7 +733,7 @@ _080365C0:
 	b _08036640
 _080365C4:
 	movs r0, 0x2
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r3, r0, 24
 	ldr r0, _0803664C @ =gAbsentBankFlags
@@ -909,7 +909,7 @@ _080366F6:
 	eors r0, r4
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	ldr r1, _08036748 @ =gAbsentBankFlags
 	ldrb r1, [r1]
 	ldr r2, _0803674C @ =gBitTable
@@ -938,7 +938,7 @@ _08036750:
 	eors r0, r4
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
@@ -1238,7 +1238,7 @@ _080369A0:
 	eors r0, r5
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	ldr r1, _080369F4 @ =gAbsentBankFlags
 	ldrb r1, [r1]
 	ldr r2, _080369F8 @ =gBitTable
@@ -1265,7 +1265,7 @@ _080369FC:
 	eors r0, r5
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r6, r0, 24
 	b _08036A18
@@ -1427,7 +1427,7 @@ _08036B28:
 	cmp r0, 0
 	bne _08036B78
 	movs r0, 0x1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r6, r5, 0
@@ -1439,11 +1439,11 @@ _08036B70: .4byte gActiveBank
 _08036B74: .4byte 0x000160c8
 _08036B78:
 	movs r0, 0x1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r0, 0x3
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r5, r0, 24
 _08036B8C:
@@ -1636,7 +1636,7 @@ sub_8036CD4: @ 8036CD4
 	eors r0, r5
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	ldr r1, _08036D24 @ =gAbsentBankFlags
 	ldrb r1, [r1]
 	ldr r2, _08036D28 @ =gBitTable
@@ -1661,7 +1661,7 @@ _08036D2C:
 	eors r0, r5
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x10]
@@ -1692,7 +1692,7 @@ _08036D70: .4byte gAbsentBankFlags
 _08036D74: .4byte gBitTable
 _08036D78:
 	movs r0, 0
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
@@ -2598,7 +2598,7 @@ _08037468:
 	ldrb r0, [r0, 0x16]
 	cmp r0, 0
 	beq _080374A8
-	ldr r0, _080374A4 @ =gSideTimer
+	ldr r0, _080374A4 @ =gSideTimers
 	lsls r1, r3, 1
 	adds r1, r3
 	lsls r1, 2
@@ -2613,7 +2613,7 @@ _08037496:
 	.align 2, 0
 _0803749C: .4byte gActiveBank
 _080374A0: .4byte gDisableStructs
-_080374A4: .4byte gSideTimer
+_080374A4: .4byte gSideTimers
 _080374A8:
 	mov r1, r8
 	cmp r1, 0

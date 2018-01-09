@@ -53,8 +53,8 @@ extern u8 gUnknown_02024E68[];
 extern struct SpriteTemplate gUnknown_02024E8C;
 extern u8 gAnimMoveTurn;
 extern struct Window gUnknown_03004210;
-extern u16 gUnknown_030042A0;
-extern u16 gUnknown_030042A4;
+extern u16 gBattle_BG0_Y;
+extern u16 gBattle_BG0_X;
 extern u8 gUnknown_0300434C[];
 extern const u8 BattleText_WallyMenu[];
 extern const u8 BattleText_MenuOptions[];
@@ -75,7 +75,7 @@ extern void PlayerHandlecmd1(void);
 extern void LoadPlayerTrainerBankSprite();
 extern u8 GetBankIdentity(u8);
 extern void sub_80313A0(struct Sprite *);
-extern u8 GetBankByPlayerAI(u8);
+extern u8 GetBankByIdentity(u8);
 extern u8 sub_8031720();
 extern void DoMoveAnim();
 extern void sub_80326EC();
@@ -363,7 +363,7 @@ void sub_81374C4(void)
 
 void sub_81374FC(void)
 {
-    if (gMain.callback2 == sub_800F808
+    if (gMain.callback2 == BattleMainCB2
      && !gPaletteFade.active)
     {
         Emitcmd35(1, gSpecialVar_ItemId);
@@ -1149,7 +1149,7 @@ void WallyHandlecmd12(void)
 {
     ewram17840.unk8 = 4;
     gDoingBattleAnim = TRUE;
-    move_anim_start_t4(gActiveBank, gActiveBank, GetBankByPlayerAI(1), 4);
+    move_anim_start_t4(gActiveBank, gActiveBank, GetBankByIdentity(1), 4);
     gBattleBankFunc[gActiveBank] = bx_wait_t5;
 }
 
@@ -1159,7 +1159,7 @@ void WallyHandleBallThrow(void)
 
     ewram17840.unk8 = val;
     gDoingBattleAnim = TRUE;
-    move_anim_start_t4(gActiveBank, gActiveBank, GetBankByPlayerAI(1), 4);
+    move_anim_start_t4(gActiveBank, gActiveBank, GetBankByIdentity(1), 4);
     gBattleBankFunc[gActiveBank] = bx_wait_t5;
 }
 
@@ -1240,8 +1240,8 @@ void WallyHandlePrintString(void)
 {
     u16 *ptr;
 
-    gUnknown_030042A4 = 0;
-    gUnknown_030042A0 = 0;
+    gBattle_BG0_X = 0;
+    gBattle_BG0_Y = 0;
     ptr = (u16 *)&gBattleBufferA[gActiveBank][2];
     if (*ptr == 2)
         DestroyMenuCursor();
@@ -1262,8 +1262,8 @@ void WallyHandlecmd18(void)
 {
     s32 i;
 
-    gUnknown_030042A4 = 0;
-    gUnknown_030042A0 = 160;
+    gBattle_BG0_X = 0;
+    gBattle_BG0_Y = 160;
     gUnknown_03004210.paletteNum = 0;
     FillWindowRect_DefaultPalette(&gUnknown_03004210, 10, 2, 15, 27, 18);
     FillWindowRect_DefaultPalette(&gUnknown_03004210, 10, 2, 35, 16, 36);

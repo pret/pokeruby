@@ -70,8 +70,7 @@ static u16 sub_80EB960(void);
 u8 sub_80EB9C8(void);
 static u16 sub_80EB9D8(void);
 
-// put this in .bss, damnit!
-__attribute__((section(".bss"))) u8 gUnknown_03000740 = 0;
+static u8 gUnknown_03000740;
 
 const u16 InterviewPalette_0[] = INCBIN_U16("graphics/misc/interview_pal0.gbapal");
 const u16 InterviewPalette_1[] = INCBIN_U16("graphics/misc/interview_pal1.gbapal");
@@ -327,19 +326,6 @@ const union AnimCmd *const gSpriteAnimTable_83DBC9C[] =
     gSpriteAnim_83DBC6C,
     gSpriteAnim_83DBC74,
 };
-
-/*
-const struct SpriteTemplate gSpriteTemplate_83DBCAC =
-{
-    .tileTag = 1,
-    .paletteTag = 1,
-    .oam = &gOamData_83DBC14,
-    .anims = gSpriteAnimTable_83DBC7C,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80E85F8,
-};
-*/
 
 void sub_80E8420(void)
 {

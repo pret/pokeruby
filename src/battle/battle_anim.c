@@ -43,7 +43,7 @@ EWRAM_DATA u16 sAnimMoveIndex = 0; // set but unused.
 EWRAM_DATA u8 gAnimBankAttacker = 0;
 EWRAM_DATA u8 gAnimBankTarget = 0;
 EWRAM_DATA u16 gAnimSpeciesByBanks[4] = {0};
-EWRAM_DATA u8 gUnknown_0202F7D2 = 0;
+EWRAM_DATA u8 gUnknown_0202F7D2 = 0; // some global pan variable
 extern u16 gBattle_BG1_Y;
 extern u16 gBattle_WIN1H;
 extern u16 gBattle_WIN0V;
@@ -1489,9 +1489,9 @@ s8 BattleAnimAdjustPanning2(s8 pan)
     return pan;
 }
 
-s16 sub_8077104(s16 a)
+s16 sub_8077104(s16 newPan, int oldPan)
 {
-    s16 var = a;
+    s16 var = newPan;
 
     if (var > 63)
         var = 63;

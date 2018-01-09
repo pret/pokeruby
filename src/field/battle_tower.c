@@ -103,59 +103,59 @@ static const u16 sBattleTowerHeldItems[] = {
 #include "../data/battle_tower/level_100_mons.h"
 
 static const u8 sMaleTrainerClasses[] = {
-    TRAINER_CLASS_RUIN_MANIAC,
-    TRAINER_CLASS_TUBER_M,
-    TRAINER_CLASS_COOL_TRAINER_M,
-    TRAINER_CLASS_RICH_BOY,
-    TRAINER_CLASS_POKEMANIAC,
-    TRAINER_CLASS_SWIMMER_M,
-    TRAINER_CLASS_BLACK_BELT,
-    TRAINER_CLASS_GUITARIST,
-    TRAINER_CLASS_KINDLER,
-    TRAINER_CLASS_CAMPER,
-    TRAINER_CLASS_BUG_MANIAC,
-    TRAINER_CLASS_PSYCHIC_M,
-    TRAINER_CLASS_GENTLEMAN,
-    TRAINER_CLASS_SCHOOL_KID_M,
-    TRAINER_CLASS_POKEFAN_M,
-    TRAINER_CLASS_EXPERT_M,
-    TRAINER_CLASS_YOUNGSTER,
-    TRAINER_CLASS_FISHERMAN,
-    TRAINER_CLASS_CYCLING_TRIATHLETE_M,
-    TRAINER_CLASS_RUNNING_TRIATHLETE_M,
-    TRAINER_CLASS_SWIMMING_TRIATHLETE_M,
-    TRAINER_CLASS_DRAGON_TAMER,
-    TRAINER_CLASS_BIRD_KEEPER,
-    TRAINER_CLASS_NINJA_BOY,
-    TRAINER_CLASS_SAILOR,
-    TRAINER_CLASS_COLLECTOR,
-    TRAINER_CLASS_POKEMON_BREEDER_M,
-    TRAINER_CLASS_POKEMON_RANGER_M,
-    TRAINER_CLASS_BUG_CATCHER,
-    TRAINER_CLASS_HIKER, 
+    FACILITY_CLASS_RUIN_MANIAC,
+    FACILITY_CLASS_TUBER_M,
+    FACILITY_CLASS_COOL_TRAINER_M,
+    FACILITY_CLASS_RICH_BOY,
+    FACILITY_CLASS_POKEMANIAC,
+    FACILITY_CLASS_SWIMMER_M,
+    FACILITY_CLASS_BLACK_BELT,
+    FACILITY_CLASS_GUITARIST,
+    FACILITY_CLASS_KINDLER,
+    FACILITY_CLASS_CAMPER,
+    FACILITY_CLASS_BUG_MANIAC,
+    FACILITY_CLASS_PSYCHIC_M,
+    FACILITY_CLASS_GENTLEMAN,
+    FACILITY_CLASS_SCHOOL_KID_M,
+    FACILITY_CLASS_POKEFAN_M,
+    FACILITY_CLASS_EXPERT_M,
+    FACILITY_CLASS_YOUNGSTER,
+    FACILITY_CLASS_FISHERMAN,
+    FACILITY_CLASS_CYCLING_TRIATHLETE_M,
+    FACILITY_CLASS_RUNNING_TRIATHLETE_M,
+    FACILITY_CLASS_SWIMMING_TRIATHLETE_M,
+    FACILITY_CLASS_DRAGON_TAMER,
+    FACILITY_CLASS_BIRD_KEEPER,
+    FACILITY_CLASS_NINJA_BOY,
+    FACILITY_CLASS_SAILOR,
+    FACILITY_CLASS_COLLECTOR,
+    FACILITY_CLASS_POKEMON_BREEDER_M,
+    FACILITY_CLASS_POKEMON_RANGER_M,
+    FACILITY_CLASS_BUG_CATCHER,
+    FACILITY_CLASS_HIKER,
 };
 
 static const u8 sFemaleTrainerClasses[] = {
-    TRAINER_CLASS_AROMA_LADY,
-    TRAINER_CLASS_TUBER_F,
-    TRAINER_CLASS_COOL_TRAINER_F,
-    TRAINER_CLASS_HEX_MANIAC,
-    TRAINER_CLASS_LADY,
-    TRAINER_CLASS_BEAUTY,
-    TRAINER_CLASS_PSYCHIC_F,
-    TRAINER_CLASS_SCHOOL_KID_F,
-    TRAINER_CLASS_POKEFAN_F,
-    TRAINER_CLASS_EXPERT_F,
-    TRAINER_CLASS_CYCLING_TRIATHLETE_F,
-    TRAINER_CLASS_RUNNING_TRIATHLETE_F,
-    TRAINER_CLASS_SWIMMING_TRIATHLETE_F,
-    TRAINER_CLASS_BATTLE_GIRL,
-    TRAINER_CLASS_PARASOL_LADY,
-    TRAINER_CLASS_SWIMMER_F,
-    TRAINER_CLASS_PICNICKER,
-    TRAINER_CLASS_POKEMON_BREEDER_F,
-    TRAINER_CLASS_POKEMON_RANGER_F,
-    TRAINER_CLASS_LASS,
+    FACILITY_CLASS_AROMA_LADY,
+    FACILITY_CLASS_TUBER_F,
+    FACILITY_CLASS_COOL_TRAINER_F,
+    FACILITY_CLASS_HEX_MANIAC,
+    FACILITY_CLASS_LADY,
+    FACILITY_CLASS_BEAUTY,
+    FACILITY_CLASS_PSYCHIC_F,
+    FACILITY_CLASS_SCHOOL_KID_F,
+    FACILITY_CLASS_POKEFAN_F,
+    FACILITY_CLASS_EXPERT_F,
+    FACILITY_CLASS_CYCLING_TRIATHLETE_F,
+    FACILITY_CLASS_RUNNING_TRIATHLETE_F,
+    FACILITY_CLASS_SWIMMING_TRIATHLETE_F,
+    FACILITY_CLASS_BATTLE_GIRL,
+    FACILITY_CLASS_PARASOL_LADY,
+    FACILITY_CLASS_SWIMMER_F,
+    FACILITY_CLASS_PICNICKER,
+    FACILITY_CLASS_POKEMON_BREEDER_F,
+    FACILITY_CLASS_POKEMON_RANGER_F,
+    FACILITY_CLASS_LASS,
 };
 
 static const u8 sMaleTrainerGfxIds[] = {
@@ -255,7 +255,7 @@ static void ResetBattleTowerStreak(u8 levelType);
 static void ValidateBattleTowerRecordChecksums(void);
 static void PrintEReaderTrainerFarewellMessage(void);
 extern void SetBattleTowerTrainerGfxId(u8);
-extern void sub_8135A3C(void);
+static void SaveCurrentWinStreak(void);
 static void sub_8135CFC(void);
 static void CheckMonBattleTowerBanlist(u16, u16, u16, u8, u8, u16 *, u16 *, u8 *);
 static void ClearEReaderTrainer(struct BattleTowerEReaderTrainer *);
@@ -1538,7 +1538,7 @@ void CheckPartyBattleTowerBanlist(void)
             StringAppend(gStringVar1, BattleText_Format8);
             return;
         }
-        
+
         if (1 & counter)
             StringAppend(gStringVar1, BattleText_Format6);
         else
@@ -1699,7 +1699,7 @@ void SetBattleTowerProperty(void)
         }
 
         gSaveBlock2.battleTower.curChallengeBattleNum[battleTowerLevelType]++;
-        sub_8135A3C();
+        SaveCurrentWinStreak();
         gSpecialVar_Result = gSaveBlock2.battleTower.curChallengeBattleNum[battleTowerLevelType];
 
         gStringVar1[0] = gSaveBlock2.battleTower.curChallengeBattleNum[battleTowerLevelType] + 0xA1;
@@ -1711,7 +1711,7 @@ void SetBattleTowerProperty(void)
             gSaveBlock2.battleTower.curStreakChallengesNum[battleTowerLevelType]++;
         }
 
-        sub_8135A3C();
+        SaveCurrentWinStreak();
         gSpecialVar_Result = gSaveBlock2.battleTower.curStreakChallengesNum[battleTowerLevelType];
         break;
     case 8:
@@ -1801,118 +1801,35 @@ void SetBattleTowerParty(void)
     ReducePlayerPartyToThree();
 }
 
-#ifdef NONMATCHING
-void sub_8135A3C(void)
+static void SaveCurrentWinStreak(void)
 {
-    u8 battleTowerLevelType = gSaveBlock2.battleTower.battleTowerLevelType;
-    u16 winStreak = GetCurrentBattleTowerWinStreak(battleTowerLevelType);
+    u8 levelType = gSaveBlock2.battleTower.battleTowerLevelType;
+    u16 streak = GetCurrentBattleTowerWinStreak(levelType);
 
-    if (gSaveBlock2.battleTower.recordWinStreaks[battleTowerLevelType] < winStreak)
-    {
-        gSaveBlock2.battleTower.recordWinStreaks[battleTowerLevelType] = winStreak;
-    }
+    if (gSaveBlock2.battleTower.recordWinStreaks[levelType] < streak)
+        gSaveBlock2.battleTower.recordWinStreaks[levelType] = streak;
 
     if (gSaveBlock2.battleTower.recordWinStreaks[0] > gSaveBlock2.battleTower.recordWinStreaks[1])
     {
-        u16 streak = gSaveBlock2.battleTower.recordWinStreaks[0];
+        streak = gSaveBlock2.battleTower.recordWinStreaks[0];
         SetGameStat(GAME_STAT_BATTLE_TOWER_BEST_STREAK, streak);
+
         if (streak > 9999)
-        {
             gSaveBlock2.battleTower.bestBattleTowerWinStreak = 9999;
-        }
         else
-        {
             gSaveBlock2.battleTower.bestBattleTowerWinStreak = streak;
-        }
     }
     else
     {
-        u16 streak = gSaveBlock2.battleTower.recordWinStreaks[1];
+        streak = gSaveBlock2.battleTower.recordWinStreaks[1];
         SetGameStat(GAME_STAT_BATTLE_TOWER_BEST_STREAK, streak);
+
         if (streak > 9999)
-        {
             gSaveBlock2.battleTower.bestBattleTowerWinStreak = 9999;
-        }
         else
-        {
             gSaveBlock2.battleTower.bestBattleTowerWinStreak = streak;
-        }
     }
 }
-#else
-__attribute__((naked))
-void sub_8135A3C(void)
-{
-    asm(".syntax unified\n\
-    push {r4-r6,lr}\n\
-    ldr r6, _08135A84 @ =gSaveBlock2\n\
-    ldr r1, _08135A88 @ =0x00000554\n\
-    adds r0, r6, r1\n\
-    ldrb r4, [r0]\n\
-    lsls r4, 31\n\
-    lsrs r4, 31\n\
-    adds r0, r4, 0\n\
-    bl GetCurrentBattleTowerWinStreak\n\
-    lsls r0, 16\n\
-    lsrs r5, r0, 16\n\
-    lsls r4, 1\n\
-    movs r3, 0xAC\n\
-    lsls r3, 3\n\
-    adds r2, r6, r3\n\
-    adds r4, r2\n\
-    ldrh r0, [r4]\n\
-    cmp r0, r5\n\
-    bcs _08135A66\n\
-    strh r5, [r4]\n\
-_08135A66:\n\
-    ldr r0, _08135A8C @ =0x00000562\n\
-    adds r1, r6, r0\n\
-    ldrh r0, [r2]\n\
-    ldrh r3, [r1]\n\
-    cmp r0, r3\n\
-    bls _08135A94\n\
-    adds r5, r0, 0\n\
-    movs r0, 0x20\n\
-    adds r1, r5, 0\n\
-    bl SetGameStat\n\
-    ldr r1, _08135A90 @ =0x0000270f\n\
-    cmp r5, r1\n\
-    bhi _08135AA4\n\
-    b _08135AB4\n\
-    .align 2, 0\n\
-_08135A84: .4byte gSaveBlock2\n\
-_08135A88: .4byte 0x00000554\n\
-_08135A8C: .4byte 0x00000562\n\
-_08135A90: .4byte 0x0000270f\n\
-_08135A94:\n\
-    ldrh r5, [r1]\n\
-    movs r0, 0x20\n\
-    adds r1, r5, 0\n\
-    bl SetGameStat\n\
-    ldr r1, _08135AAC @ =0x0000270f\n\
-    cmp r5, r1\n\
-    bls _08135AB4\n\
-_08135AA4:\n\
-    ldr r2, _08135AB0 @ =0x00000572\n\
-    adds r0, r6, r2\n\
-    strh r1, [r0]\n\
-    b _08135ABA\n\
-    .align 2, 0\n\
-_08135AAC: .4byte 0x0000270f\n\
-_08135AB0: .4byte 0x00000572\n\
-_08135AB4:\n\
-    ldr r3, _08135AC0 @ =0x00000572\n\
-    adds r0, r6, r3\n\
-    strh r5, [r0]\n\
-_08135ABA:\n\
-    pop {r4-r6}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_08135AC0: .4byte 0x00000572\n\
-    .syntax divided\n");
-}
-#endif // NONMATCHING
 
 void sub_8135AC4(void)
 {
@@ -1951,7 +1868,7 @@ void sub_8135AC4(void)
     }
 
     SetBattleTowerRecordChecksum(&gSaveBlock2.battleTower.playerRecord);
-    sub_8135A3C();
+    SaveCurrentWinStreak();
 }
 
 void SaveBattleTowerProgress(void)
@@ -2068,79 +1985,15 @@ u16 GetCurrentBattleTowerWinStreak(u8 battleTowerLevelType)
     return winStreak;
 }
 
-#ifdef NONMATCHING
 void DetermineBattleTowerPrize(void)
 {
-    u16 prizeItem;
-    struct SaveBlock2 *saveBlock = &gSaveBlock2;
-    u8 battleTowerLevelType = saveBlock->battleTower.battleTowerLevelType;
+    u8 levelType = gSaveBlock2.battleTower.battleTowerLevelType;
 
-    if (saveBlock->battleTower.curStreakChallengesNum[battleTowerLevelType] - 1 > 5)
-    {
-        prizeItem = sLongStreakPrizes[Random() % ARRAY_COUNT(sLongStreakPrizes)];
-    }
+    if (gSaveBlock2.battleTower.curStreakChallengesNum[levelType] - 1 > 5)
+        gSaveBlock2.battleTower.prizeItem = sLongStreakPrizes[Random() % ARRAY_COUNT(sLongStreakPrizes)];
     else
-    {
-        prizeItem = sShortStreakPrizes[Random() % ARRAY_COUNT(sShortStreakPrizes)];
-    }
-
-    saveBlock->battleTower.prizeItem = prizeItem;
+        gSaveBlock2.battleTower.prizeItem = sShortStreakPrizes[Random() % ARRAY_COUNT(sShortStreakPrizes)];
 }
-#else
-__attribute__((naked))
-void DetermineBattleTowerPrize(void)
-{
-    asm(".syntax unified\n\
-    push {r4,r5,lr}\n\
-    ldr r5, _08135DB0 @ =gSaveBlock2\n\
-    ldr r1, _08135DB4 @ =0x00000554\n\
-    adds r0, r5, r1\n\
-    ldrb r0, [r0]\n\
-    lsls r0, 31\n\
-    lsrs r0, 31\n\
-    lsls r0, 1\n\
-    ldr r2, _08135DB8 @ =0x0000055c\n\
-    adds r1, r5, r2\n\
-    adds r0, r1\n\
-    ldrh r0, [r0]\n\
-    subs r0, 0x1\n\
-    cmp r0, 0x5\n\
-    ble _08135DC0\n\
-    bl Random\n\
-    ldr r4, _08135DBC @ =sLongStreakPrizes\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    movs r1, 0x9\n\
-    b _08135DCC\n\
-    .align 2, 0\n\
-_08135DB0: .4byte gSaveBlock2\n\
-_08135DB4: .4byte 0x00000554\n\
-_08135DB8: .4byte 0x0000055c\n\
-_08135DBC: .4byte sLongStreakPrizes\n\
-_08135DC0:\n\
-    bl Random\n\
-    ldr r4, _08135DE8 @ =sShortStreakPrizes\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    movs r1, 0x6\n\
-_08135DCC:\n\
-    bl __umodsi3\n\
-    lsls r0, 16\n\
-    lsrs r0, 15\n\
-    adds r0, r4\n\
-    ldrh r1, [r0]\n\
-    movs r2, 0xAD\n\
-    lsls r2, 3\n\
-    adds r0, r5, r2\n\
-    strh r1, [r0]\n\
-    pop {r4,r5}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_08135DE8: .4byte sShortStreakPrizes\n\
-    .syntax divided\n");
-}
-#endif // NONMATCHING
 
 void GiveBattleTowerPrize(void)
 {

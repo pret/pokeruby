@@ -199,7 +199,7 @@ s32 sub_803FC34(u16);
 void get_trainer_name(u8* dst);
 u8 get_trainer_class_name_index(void);
 u8 GetMultiplayerId(void);
-u8 GetBankByPlayerAI(u8 ID);
+u8 GetBankByIdentity(u8 ID);
 u8 GetBankSide(u8 bank);
 u8 GetBankIdentity(u8 bank);
 #ifdef GERMAN
@@ -572,22 +572,22 @@ u32 StrCpyDecodeBattle(const u8* src, u8* dst)
                     toCpy = gBattleTextBuff3;
                 break;
             case 2: // first player poke name
-                GetMonData(&gPlayerParty[gBattlePartyID[GetBankByPlayerAI(0)]], MON_DATA_NICKNAME, text);
+                GetMonData(&gPlayerParty[gBattlePartyID[GetBankByIdentity(0)]], MON_DATA_NICKNAME, text);
                 StringGetEnd10(text);
                 toCpy = text;
                 break;
             case 3: // first enemy poke name
-                GetMonData(&gEnemyParty[gBattlePartyID[GetBankByPlayerAI(1)]], MON_DATA_NICKNAME, text);
+                GetMonData(&gEnemyParty[gBattlePartyID[GetBankByIdentity(1)]], MON_DATA_NICKNAME, text);
                 StringGetEnd10(text);
                 toCpy = text;
                 break;
             case 4: // second player poke name
-                GetMonData(&gPlayerParty[gBattlePartyID[GetBankByPlayerAI(2)]], MON_DATA_NICKNAME, text);
+                GetMonData(&gPlayerParty[gBattlePartyID[GetBankByIdentity(2)]], MON_DATA_NICKNAME, text);
                 StringGetEnd10(text);
                 toCpy = text;
                 break;
             case 5: // second enemy poke name
-                GetMonData(&gEnemyParty[gBattlePartyID[GetBankByPlayerAI(3)]], MON_DATA_NICKNAME, text);
+                GetMonData(&gEnemyParty[gBattlePartyID[GetBankByIdentity(3)]], MON_DATA_NICKNAME, text);
                 StringGetEnd10(text);
                 toCpy = text;
                 break;
@@ -612,13 +612,13 @@ u32 StrCpyDecodeBattle(const u8* src, u8* dst)
                 toCpy = text;
                 break;
             case 10: // attacker name with prefix, only bank 0/1
-                HANDLE_NICKNAME_STRING_CASE(gBankAttacker, gBattlePartyID[GetBankByPlayerAI(GetBankIdentity(gBankAttacker) & 1)])
+                HANDLE_NICKNAME_STRING_CASE(gBankAttacker, gBattlePartyID[GetBankByIdentity(GetBankIdentity(gBankAttacker) & 1)])
                 break;
             case 11: // attacker partner name, only bank 0/1
                 if (GetBankSide(gBankAttacker) == 0)
-                    GetMonData(&gPlayerParty[gBattlePartyID[GetBankByPlayerAI(GetBankIdentity(gBankAttacker) & 1) + 2]], MON_DATA_NICKNAME, text);
+                    GetMonData(&gPlayerParty[gBattlePartyID[GetBankByIdentity(GetBankIdentity(gBankAttacker) & 1) + 2]], MON_DATA_NICKNAME, text);
                 else
-                    GetMonData(&gEnemyParty[gBattlePartyID[GetBankByPlayerAI(GetBankIdentity(gBankAttacker) & 1) + 2]], MON_DATA_NICKNAME, text);
+                    GetMonData(&gEnemyParty[gBattlePartyID[GetBankByIdentity(GetBankIdentity(gBankAttacker) & 1) + 2]], MON_DATA_NICKNAME, text);
 
                 StringGetEnd10(text);
                 toCpy = text;
