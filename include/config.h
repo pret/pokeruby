@@ -14,7 +14,7 @@
 // authoritative. These additions are for user convenience based on
 // officially recommended SDK practices for debugging and is therefore
 // still in part authoritative.
-// #define NDEBUG
+#define NDEBUG
 
 // To enable print debugging, comment out "#define NDEBUG". This allows
 // the various AGBPrint functions to be used. (See include/gba/isagbprint.h).
