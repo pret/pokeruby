@@ -357,7 +357,6 @@ SECTIONS {
         asm/contest_ai.o(.text);
         src/unused/unused_81258BC.o(.text);
         src/battle/anim/sfx.o(.text);
-        asm/battle_anim_sfx.o(.text);
         src/battle/battle_controller_safari.o(.text);
         src/field/fldeff_sweetscent.o(.text);
         asm/battle_anim_812C144.o(.text);

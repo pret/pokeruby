@@ -61,7 +61,7 @@ bool8 IsAnimBankSpriteVisible(u8);
 s8 BattleAnimAdjustPanning(s8 a);
 void sub_80763FC(u16 a, u16 *b, u32 c, u8 d);
 s16 CalculatePanIncrement(s16 sourcePan, s16 targetPan, s16 incrementPan);
-s16 sub_8077104(s16 a);
+s16 sub_8077104(s16 newPan, int oldPan);
 void DestroyAnimSoundTask(u8 taskId);
 
 #endif
