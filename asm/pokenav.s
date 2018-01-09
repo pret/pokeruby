@@ -567,7 +567,7 @@ sub_80F0A74: @ 80F0A74
 	adds r0, r4, 0
 	movs r1, 0x61
 	movs r3, 0
-	bl MenuPrint_PixelCoords
+	bl Menu_PrintTextPixelCoords
 	ldr r1, _080F0AE8 @ =0x0000d158
 	adds r0, r5, r1
 	ldrh r0, [r0]
@@ -1032,7 +1032,7 @@ _080F0E42:
 _080F0E54:
 	movs r1, 0x61
 	movs r3, 0
-	bl MenuPrint_PixelCoords
+	bl Menu_PrintTextPixelCoords
 	b _080F0EA0
 	.align 2, 0
 _080F0E60: .4byte gUnknown_083DFEC4
@@ -1054,7 +1054,7 @@ _080F0E6C:
 	adds r0, r4, 0
 	movs r1, 0x61
 	movs r3, 0
-	bl MenuPrint_PixelCoords
+	bl Menu_PrintTextPixelCoords
 	b _080F0D6C
 	.align 2, 0
 _080F0E94: .4byte gUnknown_083DFEC4
@@ -1358,7 +1358,7 @@ _080F10FC: .4byte gUnknown_083DFEC4
 _080F1100: .4byte 0x0000d162
 _080F1104:
 	ldr r0, _080F110C @ =gWindowTemplate_81E70B8
-	bl SetUpWindowConfig
+	bl Text_LoadWindowTemplate
 	b _080F1218
 	.align 2, 0
 _080F110C: .4byte gWindowTemplate_81E70B8
@@ -2422,7 +2422,7 @@ _080F19B8:
 	movs r1, 0x1
 	movs r2, 0x70
 	movs r3, 0x1
-	bl MenuPrint_PixelCoords
+	bl Menu_PrintTextPixelCoords
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -7665,7 +7665,7 @@ sub_80F4194: @ 80F4194
 	ldr r0, [r4, 0x8]
 	ldr r0, _080F42B4 @ =gWindowTemplate_81E70F0
 	adds r1, r6, 0
-	bl sub_8004E3C
+	bl Text_InitWindow8004E3C
 	movs r3, 0x88
 	lsls r3, 2
 	adds r1, r6, r3

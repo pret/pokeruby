@@ -462,7 +462,7 @@ static void BattleTowerEntryMenuCallback_Enter(u8 taskId)
     }
     PlaySE(SE_HAZURE);
     Menu_EraseWindowRect(20, 10, 29, 19);
-    HandleDestroyMenuCursors();
+    Menu_DestroyCursor();
     sub_806D5A4();
     sub_806E834(gOtherText_NoMoreThreePoke, 1);
     gTasks[taskId].func = sub_8122728;
@@ -476,7 +476,7 @@ static void sub_8122728(u8 taskId)
     if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON))
     {
         Menu_EraseWindowRect(0, 14, 29, 19);
-        HandleDestroyMenuCursors();
+        Menu_DestroyCursor();
         BattleTowerEntryMenuCallback_Exit(taskId);
     }
 }
@@ -516,7 +516,7 @@ static void BattleTowerEntryMenuCallback_NoEntry(u8 taskId)
 static void sub_81227FC(u8 taskId)
 {
     Menu_EraseWindowRect(20, 10, 29, 19);
-    HandleDestroyMenuCursors();
+    Menu_DestroyCursor();
     PrintPartyMenuPromptText(0, 0);
     gTasks[taskId].func = HandleBattleTowerPartyMenu;
 }
@@ -897,7 +897,7 @@ static void DaycareStorageMenuCallback_Exit(u8 taskId)
 {
     PlaySE(SE_SELECT);
     Menu_EraseWindowRect(20, 10, 29, 19);
-    HandleDestroyMenuCursors();
+    Menu_DestroyCursor();
     PrintPartyMenuPromptText(15, 0);
     gTasks[taskId].func = HandleDaycarePartyMenu;
 }

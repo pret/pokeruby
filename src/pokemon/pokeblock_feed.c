@@ -530,7 +530,7 @@ static bool8 TransitionToPokeblockFeedScene(void)
         gMain.state++;
         break;
     case 4:
-        SetUpWindowConfig(&gWindowTemplate_81E6E50);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E6E50);
         gMain.state++;
         break;
     case 5:

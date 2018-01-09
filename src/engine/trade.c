@@ -1088,7 +1088,7 @@ static void sub_8047EC0(void)
             sub_804A964(&gUnknown_03004824->unk_00c8, BG_SCREEN_ADDR(5));
             SetVBlankCallback(sub_80489F4);
             InitMenuWindow(&gWindowTemplate_81E6CE4);
-            SetUpWindowConfig(&gWindowTemplate_81E6F84);
+            Text_LoadWindowTemplate(&gWindowTemplate_81E6F84);
             Text_InitWindowWithTemplate(&gUnknown_03004824->window, &gWindowTemplate_81E6F84);
             gUnknown_03004824->unk_007a = TextWindow_SetBaseTileNum(20);
             TextWindow_LoadStdFrameGraphics(&gUnknown_03004824->window);
@@ -1157,7 +1157,7 @@ static void sub_8047EC0(void)
             break;
         case  6:
             CalculateEnemyPartyCount();
-            FillWindowRect_DefaultPalette(&gUnknown_03004824->window, 0, 0, 0, 29, 19);
+            Text_FillWindowRectDefPalette(&gUnknown_03004824->window, 0, 0, 0, 29, 19);
             REG_DISPCNT = 0;
             gUnknown_03004824->partyCounts[0] = gPlayerPartyCount;
             gUnknown_03004824->partyCounts[1] = gEnemyPartyCount;
@@ -1268,7 +1268,7 @@ static void sub_80484F4(void)
             sub_804A964(&gUnknown_03004824->unk_00c8, BG_SCREEN_ADDR(5));
             SetVBlankCallback(sub_80489F4);
             InitMenuWindow(&gWindowTemplate_81E6CE4);
-            SetUpWindowConfig(&gWindowTemplate_81E6F84);
+            Text_LoadWindowTemplate(&gWindowTemplate_81E6F84);
             Text_InitWindowWithTemplate(&gUnknown_03004824->window, &gWindowTemplate_81E6F84);
             gUnknown_03004824->unk_007a = TextWindow_SetBaseTileNum(20);
             TextWindow_LoadStdFrameGraphics(&gUnknown_03004824->window);
@@ -2097,7 +2097,7 @@ static void sub_8049680(void)
         if (gUnknown_03004824->tradeMenuCursorPosition < PARTY_SIZE)
         {
             TextWindow_DrawStdFrame(&gUnknown_03004824->window, 18, 14, 28, 19);
-            PrintMenuItems(19, 15, 2, (const struct MenuAction *)gUnknown_0820C320);
+            Menu_PrintItems(19, 15, 2, (const struct MenuAction *)gUnknown_0820C320);
             InitMenu(0, 19, 15, 2, 0, 9);
             gUnknown_03004824->unk_007b = 1;
         }
@@ -2126,7 +2126,7 @@ static void sub_8049680(void)
 
 static void sub_8049804(void)
 {
-    HandleDestroyMenuCursors();
+    Menu_DestroyCursor();
     sub_804A80C();
     gUnknown_03004824->unk_007b = 0;
     gSprites[gUnknown_03004824->tradeMenuCursorSpriteIdx].invisible = FALSE;
@@ -2464,8 +2464,8 @@ static void sub_8049ED4(u8 a0)
             StoreSpriteCallbackInData(&gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]], sub_809D62C);
             gUnknown_03004824->unk_0080[a0] ++;
             sub_8078A34(&gSprites[gUnknown_03004824->partyIcons[whichParty][whichPokemon]]);
-            HandleDestroyMenuCursors();
-            FillWindowRect_DefaultPalette(&gUnknown_03004824->window, 0, gUnknown_0820C330[whichParty][0], 0, gUnknown_0820C330[whichParty][1], 19);
+            Menu_DestroyCursor();
+            Text_FillWindowRectDefPalette(&gUnknown_03004824->window, 0, gUnknown_0820C330[whichParty][0], 0, gUnknown_0820C330[whichParty][1], 19);
             sub_804A96C_alt(&gUnknown_03004824->unk_00c8, 15 * a0, 0, gTradePartyBoxTilemap, 15, 17, 0);
             if (whichParty == 0)
             {
@@ -2692,7 +2692,7 @@ static void sub_8049ED4(u8 a0)
                     "\tlsls r0, 2\n"
                     "\tadds r0, r7\n"
                     "\tbl sub_8078A34\n"
-                    "\tbl HandleDestroyMenuCursors\n"
+                    "\tbl Menu_DestroyCursor\n"
                     "\tldr r3, _0804A09C @ =gUnknown_03004824\n"
                     "\tldr r0, [r3]\n"
                     "\tadds r0, 0x4\n"
@@ -2708,7 +2708,7 @@ static void sub_8049ED4(u8 a0)
                     "\tstr r1, [sp, 0x4]\n"
                     "\tmovs r1, 0\n"
                     "\tmovs r3, 0\n"
-                    "\tbl FillWindowRect_DefaultPalette\n"
+                    "\tbl Text_FillWindowRectDefPalette\n"
                     "\tldr r1, _0804A09C @ =gUnknown_03004824\n"
                     "\tldr r0, [r1]\n"
                     "\tadds r0, 0xC8\n"
@@ -3337,7 +3337,7 @@ static void sub_804A740(u8 whichParty)
 
 static void sub_804A80C(void)
 {
-    FillWindowRect_DefaultPalette(&gUnknown_03004824->window, 0, gUnknown_0820C330[1][0], 0, gUnknown_0820C330[1][1], 19);
+    Text_FillWindowRectDefPalette(&gUnknown_03004824->window, 0, gUnknown_0820C330[1][0], 0, gUnknown_0820C330[1][1], 19);
     sub_804A41C(1);
 }
 
@@ -3345,7 +3345,7 @@ static void sub_804A840(u8 whichParty)
 {
     if (whichParty == 0)
     {
-        FillWindowRect_DefaultPalette(&gUnknown_03004824->window, 0, gUnknown_0820C330[0][0], 0, gUnknown_0820C330[0][1], 19);
+        Text_FillWindowRectDefPalette(&gUnknown_03004824->window, 0, gUnknown_0820C330[0][0], 0, gUnknown_0820C330[0][1], 19);
         sub_804A96C_alt(&gUnknown_03004824->unk_00c8, 0, 0, gTradePartyBoxTilemap, 15, 17, 0);
         sub_804A6DC(0);
         sub_804A41C(0);
@@ -3354,8 +3354,8 @@ static void sub_804A840(u8 whichParty)
     }
     else
     {
-        HandleDestroyMenuCursors();
-        FillWindowRect_DefaultPalette(&gUnknown_03004824->window, 0, gUnknown_0820C330[1][0], 0, gUnknown_0820C330[1][1], 19);
+        Menu_DestroyCursor();
+        Text_FillWindowRectDefPalette(&gUnknown_03004824->window, 0, gUnknown_0820C330[1][0], 0, gUnknown_0820C330[1][1], 19);
         sub_804A96C_alt(&gUnknown_03004824->unk_00c8, 15, 0, gTradePartyBoxTilemap, 15, 17, 0);
         sub_804A6DC(1);
         sub_804A41C(1);
@@ -3806,7 +3806,7 @@ static void sub_804AFB8(const struct WindowTemplate *windowConfig, u8 *dest, con
     tileBuffer = gTileBuffer;
     CpuFill16(0, tileBuffer, size * 0x80);
     CpuFill16(0, tileBuffer + windowConfig->width * 0x20, size * 0x80);
-    sub_8004E3C(windowConfig, tileBuffer, src);
+    Text_InitWindow8004E3C(windowConfig, tileBuffer, src);
     for (i = 0; i < size; i ++)
     {
         CpuCopy16(&tileBuffer[32 * (i * 4)], &dest[32 * (i * 8)], 0x80);
@@ -4028,7 +4028,7 @@ static void sub_804B41C(void)
             FreeAllSpritePalettes();
             SetVBlankCallback(sub_804B210);
             sub_804B228();
-            SetUpWindowConfig(&gWindowTemplate_81E6F84);
+            Text_LoadWindowTemplate(&gWindowTemplate_81E6F84);
             Text_InitWindowWithTemplate(&gUnknown_03004828->window, &gWindowTemplate_81E6F84);
             gUnknown_03004828->textWindowBaseTileNum = TextWindow_SetBaseTileNum(2);
             TextWindow_LoadStdFrameGraphics(&gUnknown_03004828->window);
@@ -4184,7 +4184,7 @@ static __attribute__((naked)) void sub_804B41C(void)
                     "\tbl sub_804B228\n"
                     "\tldr r4, _0804B57C @ =gWindowTemplate_81E6F84\n"
                     "\tadds r0, r4, 0\n"
-                    "\tbl SetUpWindowConfig\n"
+                    "\tbl Text_LoadWindowTemplate\n"
                     "\tldr r0, [r6]\n"
                     "\tadds r0, 0x4\n"
                     "\tadds r1, r4, 0\n"
@@ -4531,7 +4531,7 @@ static void sub_804B790(void)
             FreeAllSpritePalettes();
             SetVBlankCallback(sub_804B210);
             sub_804B228();
-            SetUpWindowConfig(&gWindowTemplate_81E717C);
+            Text_LoadWindowTemplate(&gWindowTemplate_81E717C);
             Text_InitWindowWithTemplate(&gUnknown_03004828->window, &gWindowTemplate_81E717C);
             gUnknown_03004828->textWindowBaseTileNum = TextWindow_SetBaseTileNum(2);
             TextWindow_LoadStdFrameGraphics(&gUnknown_03004828->window);
@@ -4852,7 +4852,7 @@ static bool8 sub_804C29C(void)
             {
                 gUnknown_03004828->unk_0102 = sub_8047580(gUnknown_03004828->pokePicSpriteIdxs[0], gSprites[gUnknown_03004828->pokePicSpriteIdxs[0]].oam.paletteNum, 0x78, 0x20, 0x2, 0x1, 0x14, 0xfffff);
                 gUnknown_03004828->unk_00c4 ++;
-                ZeroFillWindowRect(&gUnknown_03004828->window, 0, 0, 29, 19);
+                Text_EraseWindowRect(&gUnknown_03004828->window, 0, 0, 29, 19);
                 StringExpandPlaceholders(gStringVar4, gTradeText_ByeBye);
                 Text_InitWindowAndPrintText(&gUnknown_03004828->window, gStringVar4, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
             }
@@ -5199,7 +5199,7 @@ static bool8 sub_804C29C(void)
             break;
         case 67:
             REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_BG2_ON | DISPCNT_OBJ_ON;
-            ZeroFillWindowRect(&gUnknown_03004828->window, 0, 0, 29, 19);
+            Text_EraseWindowRect(&gUnknown_03004828->window, 0, 0, 29, 19);
             StringExpandPlaceholders(gStringVar4, gTradeText_SentOverPoke);
             Text_InitWindowAndPrintText(&gUnknown_03004828->window, gStringVar4, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
             gUnknown_03004828->unk_00c4 ++;
@@ -5213,7 +5213,7 @@ static bool8 sub_804C29C(void)
             if (gUnknown_03004828->unk_00c0 == 0xf0)
             {
                 gUnknown_03004828->unk_00c4 ++;
-                ZeroFillWindowRect(&gUnknown_03004828->window, 0, 0, 29, 19);
+                Text_EraseWindowRect(&gUnknown_03004828->window, 0, 0, 29, 19);
                 StringExpandPlaceholders(gStringVar4, gTradeText_TakeGoodCare);
                 Text_InitWindowAndPrintText(&gUnknown_03004828->window, gStringVar4, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
                 gUnknown_03004828->unk_00c0 = 0;
@@ -5536,7 +5536,7 @@ static void sub_804DC88(void)
         case 0:
             gUnknown_03004828 = &ewram_2010000.unk_0f000;
             gMain.state ++;
-            ZeroFillWindowRect(&gUnknown_03004828->window, 0, 0, 29, 19);
+            Text_EraseWindowRect(&gUnknown_03004828->window, 0, 0, 29, 19);
             StringExpandPlaceholders(gStringVar4, gOtherText_LinkStandby2);
             Text_InitWindowAndPrintText(&gUnknown_03004828->window, gStringVar4, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
             break;
@@ -5564,7 +5564,7 @@ static void sub_804DC88(void)
             break;
         case 2:
             gMain.state = 50;
-            ZeroFillWindowRect(&gUnknown_03004828->window, 0, 0, 29, 19);
+            Text_EraseWindowRect(&gUnknown_03004828->window, 0, 0, 29, 19);
             Text_InitWindowAndPrintText(&gUnknown_03004828->window, gSystemText_Saving, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
             break;
         case 50:

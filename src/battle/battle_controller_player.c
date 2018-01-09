@@ -744,7 +744,7 @@ void sub_802C68C(void)
             else
                 gUnknown_03004344 = gMoveSelectionCursor[gActiveBank] + 1;
             sub_802E3B4(gUnknown_03004344, 27);
-            FillWindowRect(&gUnknown_03004210, 0x1016, 0x17, 0x37, 0x1C, 0x3A);
+            Text_FillWindowRect(&gUnknown_03004210, 0x1016, 0x17, 0x37, 0x1C, 0x3A);
             Text_InitWindow(&gUnknown_03004210, BattleText_SwitchWhich, 0x290, 0x17, 0x37);
             Text_PrintWindow8002F44(&gUnknown_03004210);
             gBattleBankFunc[gActiveBank] = sub_802CA60;
@@ -853,7 +853,7 @@ void sub_802CA60(void)
         gBattleBankFunc[gActiveBank] = sub_802C68C;
         gMoveSelectionCursor[gActiveBank] = gUnknown_03004344;
         sub_802E3B4(gMoveSelectionCursor[gActiveBank], 0);
-        FillWindowRect(&gUnknown_03004210, 0x1016, 0x17, 0x37, 0x1C, 0x3A);
+        Text_FillWindowRect(&gUnknown_03004210, 0x1016, 0x17, 0x37, 0x1C, 0x3A);
         Text_InitWindow(&gUnknown_03004210, BattleText_PP, 0x290, 0x17, 0x37);
         Text_PrintWindow8002F44(&gUnknown_03004210);
         sub_802E220();
@@ -866,7 +866,7 @@ void sub_802CA60(void)
         sub_802E3B4(gMoveSelectionCursor[gActiveBank], 0);
         sub_802E12C(gMoveSelectionCursor[gActiveBank], BattleText_Format);
         gBattleBankFunc[gActiveBank] = sub_802C68C;
-        FillWindowRect(&gUnknown_03004210, 0x1016, 0x17, 0x37, 0x1C, 0x3A);
+        Text_FillWindowRect(&gUnknown_03004210, 0x1016, 0x17, 0x37, 0x1C, 0x3A);
         Text_InitWindow(&gUnknown_03004210, BattleText_PP, 0x290, 0x17, 0x37);
         Text_PrintWindow8002F44(&gUnknown_03004210);
         sub_802E220();
@@ -1572,7 +1572,7 @@ void sub_802E1B0(void)
     s32 i;
 
     gUnknown_03004348 = 0;
-    FillWindowRect(&gUnknown_03004210, 0x1016, 1, 0x37, 0x14, 0x3A);
+    Text_FillWindowRect(&gUnknown_03004210, 0x1016, 1, 0x37, 0x14, 0x3A);
     for (i = 0; i < 4; i++)
     {
         nullsub_7(i);
@@ -1613,7 +1613,7 @@ void sub_802E2D4(void)
 {
     if (gBattleBufferA[gActiveBank][2] == 1)
     {
-        FillWindowRect(&gUnknown_03004210, 0x1016, 0x17, 0x37, 0x1C, 0x3A);
+        Text_FillWindowRect(&gUnknown_03004210, 0x1016, 0x17, 0x37, 0x1C, 0x3A);
         Text_InitWindow(&gUnknown_03004210, BattleText_ForgetMove, 0x290, 0x13, 0x37);
     }
     else
@@ -1623,7 +1623,7 @@ void sub_802E2D4(void)
 
         str = StringCopy(str, BattleText_Format);
         StringCopy(str, gTypeNames[gBattleMoves[r4->moves[gMoveSelectionCursor[gActiveBank]]].type]);
-        FillWindowRect(&gUnknown_03004210, 0x1016, 0x17, 0x39, 0x1C, 0x3A);
+        Text_FillWindowRect(&gUnknown_03004210, 0x1016, 0x17, 0x39, 0x1C, 0x3A);
         Text_InitWindow(&gUnknown_03004210, gDisplayedStringBattle, 0x2C0, 0x17, 0x39);
     }
     Text_PrintWindow8002F44(&gUnknown_03004210);
@@ -1652,7 +1652,7 @@ const u8 gUnknown_081FAE91[][2] =
 void sub_802E3B4(u8 a, int unused)
 {
     sub_814A958(0x48);
-    sub_814A880(gUnknown_081FAE89[a][0], gUnknown_081FAE89[a][1]);
+    MenuCursor_SetPos814A880(gUnknown_081FAE89[a][0], gUnknown_081FAE89[a][1]);
 }
 
 void nullsub_7(u8 a)
@@ -1662,7 +1662,7 @@ void nullsub_7(u8 a)
 void sub_802E3E4(u8 a, int unused)
 {
     sub_814A958(0x2A);
-    sub_814A880(gUnknown_081FAE91[a][0], gUnknown_081FAE91[a][1]);
+    MenuCursor_SetPos814A880(gUnknown_081FAE91[a][0], gUnknown_081FAE91[a][1]);
 }
 
 void nullsub_8(u8 a)
@@ -2580,14 +2580,14 @@ void PlayerHandlecmd18(void)
 
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 160;
-    FillWindowRect(&gUnknown_03004210, 10, 2, 15, 27, 18);
-    FillWindowRect(&gUnknown_03004210, 10, 2, 35, 16, 38);
+    Text_FillWindowRect(&gUnknown_03004210, 10, 2, 15, 27, 18);
+    Text_FillWindowRect(&gUnknown_03004210, 10, 2, 35, 16, 38);
 
     gBattleBankFunc[gActiveBank] = sub_802C098;
 
     Text_InitWindow(&gUnknown_03004210, BattleText_MenuOptions, 400, 18, 35);
     Text_PrintWindow8002F44(&gUnknown_03004210);
-    sub_814A5C0(0, 0xFFFF, 12, 11679, 0);
+    MenuCursor_Create814A5C0(0, 0xFFFF, 12, 11679, 0);
 
     for (r4 = 0; r4 < 4; r4++)
         nullsub_8(r4);
@@ -2605,7 +2605,7 @@ void PlayerHandlecmd19()
 
 void PlayerHandlecmd20(void)
 {
-    sub_814A5C0(0, 0xFFFF, 12, 0x2D9F, 0);
+    MenuCursor_Create814A5C0(0, 0xFFFF, 12, 0x2D9F, 0);
     sub_80304A8();
     gBattleBankFunc[gActiveBank] = sub_802C68C;
 }

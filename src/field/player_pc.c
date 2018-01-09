@@ -218,7 +218,7 @@ void PlayerPC(void)
 static void InitPlayerPCMenu(u8 taskId)
 {
     Menu_DrawStdWindowFrame(0, 0, 10, gPcItemMenuOptionsNum * 2 + 1);
-    PrintMenuItemsReordered(1, 1, gPcItemMenuOptionsNum, sPlayerPCMenuActions, gPcItemMenuOptionOrder);
+    Menu_PrintItemsReordered(1, 1, gPcItemMenuOptionsNum, sPlayerPCMenuActions, gPcItemMenuOptionOrder);
     InitMenu(0, 1, 1, gPcItemMenuOptionsNum, 0, 9);
     TASK.FUNC = PlayerPCProcessMenuInput;
 }
@@ -237,13 +237,13 @@ static void PlayerPCProcessMenuInput(u8 taskId)
     }
     else if (gMain.newKeys & A_BUTTON)
     {
-        HandleDestroyMenuCursors();
+        Menu_DestroyCursor();
         PlaySE(SE_SELECT);
         sPlayerPCMenuActions[gPcItemMenuOptionOrder[Menu_GetCursorPos()]].func(taskId);
     }
     else if (gMain.newKeys & B_BUTTON)
     {
-        HandleDestroyMenuCursors();
+        Menu_DestroyCursor();
         PlaySE(SE_SELECT);
         sPlayerPCMenuActions[gPcItemMenuOptionsNum[gPcItemMenuOptionOrder - 1]].func(taskId); // run EXIT.
     }
@@ -307,7 +307,7 @@ static void InitItemStorageMenu(u8 var)
 {
     Menu_EraseWindowRect(0, 0, 10, 9);
     Menu_DrawStdWindowFrame(0, 0, 11, 9);
-    PrintMenuItems(1, 1, 4, (struct MenuAction *)gPCText_ItemPCOptionsText);
+    Menu_PrintItems(1, 1, 4, (struct MenuAction *)gPCText_ItemPCOptionsText);
     InitMenu(0, 1, 1, 4, var, 10);
     ItemStorageMenuPrint(gPCText_OptionDescList[var]);
 }
@@ -339,7 +339,7 @@ static void ItemStorageMenuProcessInput(u8 var)
     }
     else if (gMain.newKeys & B_BUTTON)
     {
-        HandleDestroyMenuCursors();
+        Menu_DestroyCursor();
         PlaySE(SE_SELECT);
         gPCText_ItemPCOptionsText[ITEMPC_MENU_EXIT].func(var);
     }
@@ -378,7 +378,7 @@ static void ItemStorage_Withdraw(u8 taskId)
 {
     s16 *data = TASK.data;
 
-    HandleDestroyMenuCursors();
+    Menu_DestroyCursor();
     Menu_EraseWindowRect(0, 0, 11, 9);
     NUM_ITEMS = CountUsedPCItemSlots();
 
@@ -400,7 +400,7 @@ static void ItemStorage_Toss(u8 taskId)
 {
     s16 *data = TASK.data;
 
-    HandleDestroyMenuCursors();
+    Menu_DestroyCursor();
     Menu_EraseWindowRect(0, 0, 11, 9);
     NUM_ITEMS = CountUsedPCItemSlots();
 
@@ -420,7 +420,7 @@ static void ItemStorage_Toss(u8 taskId)
 
 static void ItemStorage_Exit(u8 var)
 {
-    HandleDestroyMenuCursors();
+    Menu_DestroyCursor();
     Menu_EraseWindowRect(0, 0, 11, 9);
     ReshowPlayerPC(var);
 }
@@ -549,7 +549,7 @@ static void ItemStorage_ProcessInput(u8 taskId)
         PlaySE(SE_SELECT);
         if(SWITCH_MODE_ACTIVE == FALSE)
         {
-            HandleDestroyMenuCursors();
+            Menu_DestroyCursor();
             ItemStorage_GoBackToPlayerPCMenu(taskId);
         }
         else
@@ -1112,7 +1112,7 @@ static void Mailbox_ProcessInput(u8 taskId)
         }
         else if(gMain.newKeys & A_BUTTON)
         {
-            HandleDestroyMenuCursors();
+            Menu_DestroyCursor();
             PlaySE(SE_SELECT);
 
             if(eMailboxInfo.itemsAbove + eMailboxInfo.cursorPos == eMailboxInfo.count)
@@ -1127,7 +1127,7 @@ static void Mailbox_ProcessInput(u8 taskId)
         }
         else if(gMain.newKeys & B_BUTTON)
         {
-            HandleDestroyMenuCursors();
+            Menu_DestroyCursor();
             PlaySE(SE_SELECT);
             Mailbox_TurnOff(taskId);
         }
@@ -1165,7 +1165,7 @@ static void Mailbox_TurnOff(u8 taskId)
 static void Mailbox_PrintMailOptions(u8 taskId) // Mailbox_PrintMailOptions
 {
     Menu_DrawStdWindowFrame(0, 0, 0xC, 0x9);
-    PrintMenuItems(1, 1, 4, (struct MenuAction *)gMailboxMailOptions);
+    Menu_PrintItems(1, 1, 4, (struct MenuAction *)gMailboxMailOptions);
     InitMenu(0, 1, 1, 4, 0, 0xB);
     TASK.FUNC = Mailbox_MailOptionsProcessInput;
 }
@@ -1231,7 +1231,7 @@ static const u8 gHighlightedMoveToBagFormatText[] = _("{COLOR RED}{STR_VAR_1}");
 
 static void Mailbox_MoveToBag(u8 taskId)
 {
-    HandleDestroyMenuCursors();
+    Menu_DestroyCursor();
     StringCopy(gStringVar1, gOtherText_MoveToBag);
     Menu_PrintText(gHighlightedMoveToBagFormatText, 1, 3); // gHighlightedMoveToBagFormatText
     DisplayItemMessageOnField(taskId, gOtherText_MessageWillBeLost, Mailbox_DrawYesNoBeforeMove, 0);
@@ -1325,7 +1325,7 @@ static void Mailbox_NoPokemonForMail(u8 taskId)
 
 static void Mailbox_Cancel(u8 taskId)
 {
-    HandleDestroyMenuCursors();
+    Menu_DestroyCursor();
     Menu_EraseWindowRect(0, 0, 0xC, 0x9);
     Mailbox_DrawMailMenuAndDoProcessInput(taskId);
 }

@@ -148,7 +148,7 @@ void PrintMoneyAmount(u32 amount, u8 size, u8 x, u8 y)
     else
     {
         int xPlusOne = x + 1;
-        MenuPrint_PixelCoords(buffer, (xPlusOne + size) * 8 - stringWidth, y * 8, 1);
+        Menu_PrintTextPixelCoords(buffer, (xPlusOne + size) * 8 - stringWidth, y * 8, 1);
     }
 }
 

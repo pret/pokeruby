@@ -228,7 +228,7 @@ static void sub_8136294(void)
             gUnknown_02039304->unk50++;
             break;
         case 3:
-            SetUpWindowConfig(&gWindowTemplate_81E7080);
+            Text_LoadWindowTemplate(&gWindowTemplate_81E7080);
             gUnknown_02039304->unk50++;
             break;
         case 4:

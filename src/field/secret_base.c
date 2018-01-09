@@ -1021,13 +1021,13 @@ void sub_80BC824(u8 taskId)
         PlaySE(5);
         if (taskData[1] + taskData[2] == taskData[0])
         {
-            HandleDestroyMenuCursors();
+            Menu_DestroyCursor();
             Menu_EraseWindowRect(0, 0, 29, 19);
             sub_80BCC54(taskId);
         }
         else
         {
-            HandleDestroyMenuCursors();
+            Menu_DestroyCursor();
             taskData[4] = sub_80BC948(taskData[1] + taskData[2]);
             sub_80BC980(taskId);
         }
@@ -1035,7 +1035,7 @@ void sub_80BC824(u8 taskId)
     else if (gMain.newKeys & B_BUTTON)
     {
         PlaySE(5);
-        HandleDestroyMenuCursors();
+        Menu_DestroyCursor();
         Menu_EraseWindowRect(0, 0, 29, 19);
         sub_80BCC54(taskId);
     }
@@ -1067,7 +1067,7 @@ void sub_80BC980(u8 taskId)
     PauseVerticalScrollIndicator(0);
     PauseVerticalScrollIndicator(1);
     Menu_DrawStdWindowFrame(1, 0, 12, 5);
-    PrintMenuItems(2, 1, 2, (const struct MenuAction *)gUnknown_083D13D4);
+    Menu_PrintItems(2, 1, 2, (const struct MenuAction *)gUnknown_083D13D4);
     InitMenu(0, 2, 1, 2, 0, 10);
     gTasks[taskId].func = sub_80BC9E4;
 }
@@ -1108,7 +1108,7 @@ void sub_80BCA84(u8 taskId)
 
     DestroyVerticalScrollIndicator(0);
     DestroyVerticalScrollIndicator(1);
-    HandleDestroyMenuCursors();
+    Menu_DestroyCursor();
     Menu_EraseWindowRect(0, 0, 29, 19);
 
     sub_80BC190(gStringVar1, taskData[4]);

@@ -198,8 +198,8 @@ void m4aMPlayTempoControl(struct MusicPlayerInfo *mplayInfo, u16 tempo);
 void m4aMPlayStop(struct MusicPlayerInfo *mplayInfo);
 void sub_80A6978(void);
 u8 sub_80A7DEC(u8 berryId, u8 x, u8 y, bool8 animate);
-void sub_814A880(u8 a1, u8 a2);
-u8 sub_814A5C0(u8 a1, u16 a2, u8 a3, u16 a4, u8 a5);
+void MenuCursor_SetPos814A880(u8 a1, u8 a2);
+u8 MenuCursor_Create814A5C0(u8 a1, u16 a2, u8 a3, u16 a4, u8 a5);
 s8 GetFirstFreePokeblockSlot(void);
 bool8 sub_810CA34(struct Pokeblock *pokeblock);
 #ifdef GERMAN
@@ -957,7 +957,7 @@ static void sub_804E56C(void)
         ResetSpriteData();
         FreeAllSpritePalettes();
         SetVBlankCallback(NULL);
-        SetUpWindowConfig(&gWindowTemplate_81E6F68);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E6F68);
         InitMenuWindow(&gWindowTemplate_81E6F68);
         gBerryBlenderData->field_0++;
         gBerryBlenderData->field_140 = 0;
@@ -1135,7 +1135,7 @@ static void sub_804E9F8(void)
         FreeAllSpritePalettes();
         ResetTasks();
         SetVBlankCallback(VBlankCB0_BerryBlender);
-        SetUpWindowConfig(&gWindowTemplate_81E6F68);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E6F68);
         InitMenuWindow(&gWindowTemplate_81E6F68);
         gLinkType = 0x4422;
         gBerryBlenderData->field_0++;
@@ -1338,7 +1338,7 @@ static void sub_804F0F4(void)
 
     SetVBlankCallback(VBlankCB0_BerryBlender);
 
-    SetUpWindowConfig(&gWindowTemplate_81E6F68);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E6F68);
     InitMenuWindow(&gWindowTemplate_81E6F68);
 
     gLinkType = 0x4422;
@@ -1426,7 +1426,7 @@ static void sub_804F2A8(void)
             if (GetMultiplayerId() == gBerryBlenderData->field_9A[i])
                 stringPtr = StringCopy(stringPtr, sRedColorString);
             StringCopy(stringPtr, gLinkPlayers[gBerryBlenderData->field_9A[i]].name);
-            MenuPrint_PixelCoords(gStringVar1, gUnknown_082162D4[i][0] * 8 + 1, gUnknown_082162D4[i][1] * 8, 1);
+            Menu_PrintTextPixelCoords(gStringVar1, gUnknown_082162D4[i][0] * 8 + 1, gUnknown_082162D4[i][1] * 8, 1);
         }
     }
 }
@@ -2494,14 +2494,14 @@ static void sub_8050760(void)
 static void sub_80508D4(u8 value)
 {
     gBerryBlenderData->field_AA = value;
-    sub_814A880(192, (gBerryBlenderData->field_AA * 16) + 72);
+    MenuCursor_SetPos814A880(192, (gBerryBlenderData->field_AA * 16) + 72);
 }
 
 static void sub_80508FC(void)
 {
     gBerryBlenderData->field_AA = 0;
     Menu_DrawStdWindowFrame(23, 8, 28, 13);
-    sub_814A5C0(0, -1, 12, 0x2D9F, 32);
+    MenuCursor_Create814A5C0(0, -1, 12, 0x2D9F, 32);
     Menu_PrintText(gOtherText_YesNoTerminating, 24, 9);
     sub_80508D4(gBerryBlenderData->field_AA);
 }
@@ -3080,7 +3080,7 @@ void unref_sub_80516F8(u8 taskID)
                 task->data[0] = 0;
             if (task->data[0] == 100)
             {
-                ZeroFillWindowRect(&gBerryBlenderData->field_4, 0, 0, 16, 20);
+                Text_EraseWindowRect(&gBerryBlenderData->field_4, 0, 0, 16, 20);
                 Menu_DrawStdWindowFrame(4, 4, 10, 12);
                 for (i = 0; i < 3; i++)
                 {
@@ -3606,7 +3606,7 @@ void unref_sub_80524BC(void)
     FreeAllSpritePalettes();
     ResetTasks();
     SetVBlankCallback(VBlankCB1_BerryBlender);
-    SetUpWindowConfig(&gWindowTemplate_81E6CE4);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E6CE4);
     InitMenuWindow(&gWindowTemplate_81E6CE4);
     SeedRng(gMain.vblankCounter1);
     REG_DISPCNT = 0x1540;

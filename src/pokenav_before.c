@@ -3268,7 +3268,7 @@ bool8 sub_80EF284(u8 a)
         sub_80EEDE8();
         break;
     case 1:
-        SetUpWindowConfig(&gWindowTemplate_81E7224);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E7224);
         break;
     case 2:
         MultistepInitMenuWindowBegin(&gWindowTemplate_81E7224);
@@ -3660,7 +3660,7 @@ bool8 sub_80EF874(void)
         sub_80EEDE8();
         break;
     case 1:
-        SetUpWindowConfig(&gWindowTemplate_81E7224);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E7224);
         break;
     case 2:
         MultistepInitMenuWindowBegin(&gWindowTemplate_81E7224);
@@ -3972,7 +3972,7 @@ bool8 sub_80EFF68(void)
         gUnknown_083DFEC4->unkD162[0] = 11;
         break;
     case 1:
-        SetUpWindowConfig(&gWindowTemplate_81E7080);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E7080);
         break;
     case 2:
         MultistepInitMenuWindowBegin(&gWindowTemplate_81E7080);
@@ -4086,7 +4086,7 @@ bool8 sub_80F02A0(void)
         gUnknown_083DFEC4->unkD162[0] = 11;
         break;
     case 1:
-        SetUpWindowConfig(&gWindowTemplate_81E70D4);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E70D4);
         break;
     case 2:
         MultistepInitMenuWindowBegin(&gWindowTemplate_81E70D4);
@@ -4269,7 +4269,7 @@ _080F033C: .4byte 0x000087c8\n\
 _080F0340: .4byte 0x0000d162\n\
 _080F0344:\n\
     ldr r0, _080F034C @ =gWindowTemplate_81E70D4\n\
-    bl SetUpWindowConfig\n\
+    bl Text_LoadWindowTemplate\n\
     b _080F0618\n\
     .align 2, 0\n\
 _080F034C: .4byte gWindowTemplate_81E70D4\n\

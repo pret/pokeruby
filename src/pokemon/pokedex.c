@@ -1425,7 +1425,7 @@ void CB2_InitPokedex(void)
         ResetPaletteFade();
         FreeAllSpritePalettes();
         gReservedSpritePaletteCount = 8;
-        SetUpWindowConfig(&gWindowTemplate_81E7048);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E7048);
         InitMenuWindow(&gWindowTemplate_81E7048);
         gMain.state++;
         break;
@@ -1937,7 +1937,7 @@ static bool8 sub_808D344(u8 a)
         gMain.state++;
         break;
     case 2:
-        SetUpWindowConfig(&gWindowTemplate_81E7048);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E7048);
         InitMenuWindow(&gWindowTemplate_81E7048);
         LZ77UnCompVram(gUnknown_0839FA7C, (void *)(VRAM + 0xFF80));
         gMain.state++;
@@ -2283,7 +2283,7 @@ static u8 sub_808DFE4(u16 num, u8 b, u8 c)
             text[i] = CHAR_HYPHEN;
         break;
     }
-    MenuPrint_PixelCoords(text, (b - 0x11) * 8 + 0xFC, c * 8, 0);
+    Menu_PrintTextPixelCoords(text, (b - 0x11) * 8 + 0xFC, c * 8, 0);
     return i;
 }
 
@@ -2951,7 +2951,7 @@ static void Task_InitPageScreenMultistep(u8 taskId)
         gMain.state++;
         break;
     case 3:
-        SetUpWindowConfig(&gWindowTemplate_81E7064);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E7064);
         InitMenuWindow(&gWindowTemplate_81E7064);
         gMain.state++;
         break;
@@ -3205,7 +3205,7 @@ static void Task_InitCryScreenMultistep(u8 taskId)
         gMain.state++;
         break;
     case 3:
-        SetUpWindowConfig(&gWindowTemplate_81E702C);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E702C);
         InitMenuWindow(&gWindowTemplate_81E702C);
         ResetPaletteFade();
         gMain.state++;
@@ -3394,7 +3394,7 @@ static void Task_InitSizeScreenMultistep(u8 taskId)
         {
             u8 string[40];  //I hope this is the correct size
 
-            SetUpWindowConfig(&gWindowTemplate_81E702C);
+            Text_LoadWindowTemplate(&gWindowTemplate_81E702C);
             InitMenuWindow(&gWindowTemplate_81E702C);
             string[0] = EOS;
             StringAppend(string, gDexText_SizeComparedTo);
@@ -3841,7 +3841,7 @@ static void sub_8090750(u8 taskId)
         gTasks[taskId].data[0]++;
         break;
     case 2:
-        SetUpWindowConfig(&gWindowTemplate_81E7064);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E7064);
         InitMenuWindow(&gWindowTemplate_81E7064);
         DmaClear16(3, (void *)(VRAM + 0xC000), 0x200);
         gTasks[taskId].data[0]++;
@@ -4770,7 +4770,7 @@ static void sub_8091E54(u8 taskId)
         }
         break;
     case 1:
-        SetUpWindowConfig(&gWindowTemplate_81E7064);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E7064);
         InitMenuWindow(&gWindowTemplate_81E7064);
         LoadCompressedObjectPic(&gUnknown_083A05CC[0]);
         LoadSpritePalettes(gUnknown_083A05DC);
@@ -4997,7 +4997,7 @@ static void sub_8092508(u8 taskId)
 
 static void sub_80925B4(u16 a, int unused)
 {
-    sub_814AD7C(0x90, (a * 2 + 1) * 8);
+    MenuCursor_SetPos814AD7C(0x90, (a * 2 + 1) * 8);
 }
 
 static void sub_80925CC(u8 taskId)
@@ -5305,29 +5305,29 @@ static void sub_8092B68(u8 taskId)
 
     var = gTasks[taskId].data[6] + gTasks[taskId].data[7];
     StringCopy(gStringVar1, gUnknown_083B5910[var].text2);
-    MenuPrint_PixelCoords(gUnknown_083B5AB2, 45, 16, 1);
+    Menu_PrintTextPixelCoords(gUnknown_083B5AB2, 45, 16, 1);
 
     var = gTasks[taskId].data[8] + gTasks[taskId].data[9];
     StringCopy(gStringVar1, gUnknown_083B5968[var].text2);
-    MenuPrint_PixelCoords(gUnknown_083B5AB2, 45, 32, 1);
+    Menu_PrintTextPixelCoords(gUnknown_083B5AB2, 45, 32, 1);
 
     var = gTasks[taskId].data[10] + gTasks[taskId].data[11];
     StringCopy(gStringVar1, gUnknown_083B59C8[var].text2);
-    MenuPrint_PixelCoords(gUnknown_083B5AAC, 45, 48, 1);
+    Menu_PrintTextPixelCoords(gUnknown_083B5AAC, 45, 48, 1);
 
     var = gTasks[taskId].data[12] + gTasks[taskId].data[13];
     StringCopy(gStringVar1, gUnknown_083B59C8[var].text2);
-    MenuPrint_PixelCoords(gUnknown_083B5AAC, 93, 48, 1);
+    Menu_PrintTextPixelCoords(gUnknown_083B5AAC, 93, 48, 1);
 
     var = gTasks[taskId].data[4] + gTasks[taskId].data[5];
     StringCopy(gStringVar1, gUnknown_083B58D8[var].text2);
-    MenuPrint_PixelCoords(gUnknown_083B5AB2, 45, 64, 1);
+    Menu_PrintTextPixelCoords(gUnknown_083B5AB2, 45, 64, 1);
 
     if (IsNationalPokedexEnabled())
     {
         var = gTasks[taskId].data[2] + gTasks[taskId].data[3];
         StringCopy(gStringVar1, gUnknown_083B58C0[var].text2);
-        MenuPrint_PixelCoords(gUnknown_083B5AB2, 45, 80, 1);
+        Menu_PrintTextPixelCoords(gUnknown_083B5AB2, 45, 80, 1);
     }
 }
 

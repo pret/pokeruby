@@ -45,7 +45,7 @@ void CB2_InitMysteryEventMenu(void)
     FreeAllSpritePalettes();
     ResetTasks();
     SetVBlankCallback(VBlankCB);
-    SetUpWindowConfig(&gWindowTemplate_81E6CE4);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E6CE4);
     InitMenuWindow(&gWindowTemplate_81E6CE4);
     Menu_EraseScreen();
     REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON;

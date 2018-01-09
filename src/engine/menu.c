@@ -26,11 +26,12 @@ struct Menu
 
 static void MultistepInitMenuWindowInternal(const struct WindowTemplate *, u16);
 static void InitMenuWindowInternal(const struct WindowTemplate *, u16);
-static bool8 sub_80723D4(void);
+static bool8 IsGridCursorMovementClamped(void);
 static u8 sub_8072484(u8, u8, u8, u8, u8, u8, u32);
 static u8 sub_80724F4(u8, u8, u8, const struct MenuAction[], u8);
 static void sub_8072620(u8, u8, u8, const struct MenuAction[], u8);
 static void sub_8072D18(u8, u8);
+static void RedrawMenuCursor(u8, u8);
 
 static struct Menu gMenu;
 
@@ -55,7 +56,7 @@ void CloseMenu(void)
     Menu_EraseScreen();
     sub_8064E2C();
     ScriptContext2_Disable();
-    HandleDestroyMenuCursors();
+    Menu_DestroyCursor();
 }
 
 void AppendToList(u8 *list, u8 *pindex, u32 value)
@@ -149,6 +150,7 @@ void BasicInitMenuWindow(const struct WindowTemplate *winTemplate)
     gMenuWindowPtr->tileDataStartOffset = gMenuTextTileOffset;
 }
 
+// Prints 
 void Menu_PrintText(const u8 *str, u8 left, u8 top)
 {
     Text_InitWindowAndPrintText(gMenuWindowPtr, str, gMenuTextTileOffset, left, top);
@@ -156,7 +158,7 @@ void Menu_PrintText(const u8 *str, u8 left, u8 top)
 
 void Menu_EraseWindowRect(u8 left, u8 top, u8 right, u8 bottom)
 {
-    ZeroFillWindowRect(gMenuWindowPtr, left, top, right, bottom);
+    Text_EraseWindowRect(gMenuWindowPtr, left, top, right, bottom);
 }
 
 void Menu_BlankWindowRect(u8 left, u8 top, u8 right, u8 bottom)
@@ -210,9 +212,9 @@ void MenuPrintMessageDefaultCoords(const u8 *str)
     Text_InitWindow8002EB0(gMenuWindowPtr, str, gMenuTextTileOffset, 2, 15);
 }
 
-void MenuSetText(const u8 *str)
+void Menu_SetText(const u8 *str)
 {
-    sub_8002E90(gMenuWindowPtr, str);
+    Text_SetWindowText(gMenuWindowPtr, str);
 }
 
 u8 Menu_UpdateWindowText(void)
@@ -271,14 +273,14 @@ s8 Menu_ProcessInput(void)
     {
         PlaySE(SE_SELECT);
         if (gMenu.menu_field_7)
-            HandleDestroyMenuCursors();
+            Menu_DestroyCursor();
         return gMenu.cursorPos;
     }
 
     if (gMain.newKeys & B_BUTTON)
     {
         if (gMenu.menu_field_7)
-            HandleDestroyMenuCursors();
+            Menu_DestroyCursor();
         return -1;
     }
 
@@ -306,14 +308,14 @@ s8 Menu_ProcessInputNoWrap(void)
     {
         PlaySE(SE_SELECT);
         if (gMenu.menu_field_7)
-            HandleDestroyMenuCursors();
+            Menu_DestroyCursor();
         return gMenu.cursorPos;
     }
 
     if (gMain.newKeys & B_BUTTON)
     {
         if (gMenu.menu_field_7)
-            HandleDestroyMenuCursors();
+            Menu_DestroyCursor();
         return -1;
     }
 
@@ -353,11 +355,12 @@ u8 MoveMenuCursor3(s8 delta)
     return gMenu.cursorPos;
 }
 
-u8 MoveMenuCursor4(s8 delta)
+static u8 MoveMenuCursorGridLayout(s8 delta)
 {
+    // Don't move cursor if it is clamped
     if (gMenu.cursorPos + delta <= gMenu.maxCursorPos)
     {
-        if (sub_80723D4() == TRUE)
+        if (IsGridCursorMovementClamped() == TRUE)
             return gMenu.cursorPos;
     }
     else
@@ -379,22 +382,35 @@ u8 MoveMenuCursor4(s8 delta)
     return gMenu.cursorPos;
 }
 
-static bool8 sub_80723D4(void)
+// Returns TRUE if the cursor is on an edge and cannot move in the pressed direction
+static bool8 IsGridCursorMovementClamped(void)
 {
-    if ((gMain.newKeys & DPAD_UP) && gMenu.cursorPos < gMenu.width)
-        return TRUE;
-
-    if ((gMain.newKeys & DPAD_DOWN) && gMenu.cursorPos >= (gMenu.maxCursorPos + 1) - gMenu.width)
-        return TRUE;
-
-    if ((gMain.newKeys & DPAD_LEFT)
-     && ((gMenu.cursorPos - (gMenu.cursorPos % gMenu.width)) % gMenu.width == 1 // always false
-         || gMenu.cursorPos == 0
-         || gMenu.cursorPos % gMenu.width == 0))
-         return TRUE;
-
-    if ((gMain.newKeys & DPAD_RIGHT) && gMenu.cursorPos % gMenu.width == gMenu.width - 1)
-        return TRUE;
+    if (gMain.newKeys & DPAD_UP)
+    {
+        // is cursor on first row?
+        if (gMenu.cursorPos < gMenu.width)
+            return TRUE;
+    }
+    if (gMain.newKeys & DPAD_DOWN)
+    {
+        // is cursor on last row?
+        if (gMenu.cursorPos >= gMenu.maxCursorPos + 1 - gMenu.width)
+            return TRUE;
+    }
+    if (gMain.newKeys & DPAD_LEFT)
+    {
+        // is cursor on first column?
+        if ((gMenu.cursorPos - gMenu.cursorPos % gMenu.width) % gMenu.width == 1 // always false
+         || gMenu.cursorPos == 0  // redundant
+         || gMenu.cursorPos % gMenu.width == 0)
+            return TRUE;
+    }
+    if (gMain.newKeys & DPAD_RIGHT)
+    {
+        // is cursor on last column?
+        if (gMenu.cursorPos % gMenu.width == gMenu.width - 1)
+            return TRUE;
+    }
 
     return FALSE;
 }
@@ -518,7 +534,7 @@ s8 Menu_ProcessInputGridLayout(void)
     if (gMain.newKeys & A_BUTTON)
     {
         if (gMenu.menu_field_7)
-            HandleDestroyMenuCursors();
+            Menu_DestroyCursor();
         PlaySE(SE_SELECT);
         return Menu_GetCursorPos();
     }
@@ -526,44 +542,46 @@ s8 Menu_ProcessInputGridLayout(void)
     if (gMain.newKeys & B_BUTTON)
     {
         if (gMenu.menu_field_7)
-            HandleDestroyMenuCursors();
+            Menu_DestroyCursor();
         return -1;
     }
 
     if (gMain.newKeys & DPAD_UP)
     {
         PlaySE(SE_SELECT);
-        MoveMenuCursor4(-gMenu.width);
+        // Move up one whole row
+        MoveMenuCursorGridLayout(-gMenu.width);
         return -2;
     }
     else if (gMain.newKeys & DPAD_DOWN)
     {
         PlaySE(SE_SELECT);
-        MoveMenuCursor4(gMenu.width);
+        // Move down one whole column
+        MoveMenuCursorGridLayout(gMenu.width);
         return -2;
     }
     else if (gMain.newKeys & DPAD_LEFT)
     {
         PlaySE(SE_SELECT);
-        MoveMenuCursor4(-1);
+        MoveMenuCursorGridLayout(-1);
         return -2;
     }
     else if (gMain.newKeys & DPAD_RIGHT)
     {
         PlaySE(SE_SELECT);
-        MoveMenuCursor4(1);
+        MoveMenuCursorGridLayout(1);
         return -2;
     }
 
     return -2;
 }
 
-u8 sub_807288C(u8 column)
+u8 Menu_GetColumnXCoord(u8 column)
 {
     return gMenu.columnXCoords[column];
 }
 
-void PrintMenuItems(u8 left, u8 top, u8 menuItemCount, const struct MenuAction menuItems[])
+void Menu_PrintItems(u8 left, u8 top, u8 menuItemCount, const struct MenuAction menuItems[])
 {
     u8 i;
 
@@ -571,7 +589,7 @@ void PrintMenuItems(u8 left, u8 top, u8 menuItemCount, const struct MenuAction m
         Menu_PrintText(menuItems[i].text, left, top + 2 * i);
 }
 
-void PrintMenuItemsReordered(u8 left, u8 top, u8 menuItemCount, const struct MenuAction2 menuItems[], const u8 *order)
+void Menu_PrintItemsReordered(u8 left, u8 top, u8 menuItemCount, const struct MenuAction2 menuItems[], const u8 *order)
 {
     u8 i;
 
@@ -581,7 +599,7 @@ void PrintMenuItemsReordered(u8 left, u8 top, u8 menuItemCount, const struct Men
 
 void InitYesNoMenu(u8 left, u8 top, u8 a3)
 {
-    PrintMenuItems(left + 1, top + 1, 2, gMenuYesNoItems);
+    Menu_PrintItems(left + 1, top + 1, 2, gMenuYesNoItems);
     InitMenu(0, left + 1, top + 1, 2, 0, a3);
 }
 
@@ -592,14 +610,14 @@ void DisplayYesNoMenu(u8 left, u8 top, u32 a3)
     gMenu.menu_field_7 = a3 ? -1 : 0;
 }
 
-s8 ProcessMenuInputNoWrap_(void)
+s8 Menu_ProcessInputNoWrap_(void)
 {
     return Menu_ProcessInputNoWrap();
 }
 
-u8 MenuPrint_PixelCoords(const u8 *text, u8 left, u16 top, u8 a4)
+u8 Menu_PrintTextPixelCoords(const u8 *text, u8 left, u16 top, u8 a4)
 {
-    return sub_8004D04(gMenuWindowPtr, text, gMenuTextTileOffset, left, top, a4);
+    return Text_InitWindow8004D04(gMenuWindowPtr, text, gMenuTextTileOffset, left, top, a4);
 }
 
 u8 sub_8072A18(const u8 *text, u8 left, u16 top, u8 width, u32 a5)
@@ -712,7 +730,7 @@ _08072B3E:\n\
 
 void MenuPrint_RightAligned(const u8 *str, u8 left, u8 top)
 {
-    sub_8004D38(gMenuWindowPtr, str, gMenuTextTileOffset, left, top);
+    Text_InitWindow8004D38(gMenuWindowPtr, str, gMenuTextTileOffset, left, top);
 }
 
 void sub_8072B80(const u8 *a1, u8 a2, u8 a3, const u8 *a4)
@@ -725,7 +743,7 @@ void sub_8072B80(const u8 *a1, u8 a2, u8 a3, const u8 *a4)
 
 void sub_8072BD8(const u8 *a1, u8 a2, u8 a3, u16 a4)
 {
-    sub_8004DB0(gMenuWindowPtr, a1, gMenuTextTileOffset, a2, a3, a4);
+    Text_InitWindow8004DB0(gMenuWindowPtr, a1, gMenuTextTileOffset, a2, a3, a4);
 }
 
 u8 *sub_8072C14(u8 *a1, s32 a2, u8 a3, u8 a4)
@@ -748,9 +766,9 @@ u8 sub_8072CA4(const u8 *str)
     return GetStringWidth(gMenuWindowPtr, str);
 }
 
-u8 sub_8072CBC()
+u8 Menu_GetTextWindowPaletteNum(void)
 {
-    return sub_8004E24(gMenuWindowPtr);
+    return Text_GetWindowPaletteNum(gMenuWindowPtr);
 }
 
 void Menu_GetTextColors(u8 *a1, u8 *a2, u8 *a3)
@@ -758,7 +776,7 @@ void Menu_GetTextColors(u8 *a1, u8 *a2, u8 *a3)
     Text_GetTextColors(gMenuWindowPtr, a1, a2, a3);
 }
 
-u32 MenuUpdateWindowText_OverrideLineLength(u8 lineLength)
+u32 Menu_UpdateWindowTextOverrideLineLength(u8 lineLength)
 {
     return Text_UpdateWindowOverrideLineLength(gMenuWindowPtr, lineLength);
 }
@@ -770,7 +788,7 @@ struct Window *unref_sub_8072D0C(void)
 
 static void sub_8072D18(u8 a1, u8 a2)
 {
-    sub_814A5C0(a1, 0xFFFF, 12, 11679, 8 * a2);
+    MenuCursor_Create814A5C0(a1, 0xFFFF, 12, 11679, 8 * a2);
 }
 
 u8 InitMenu(u8 cursorSubpriority, u8 left, u8 top, u8 numChoices, u8 cursorPos, u8 cursorWidth)
@@ -797,9 +815,9 @@ u8 InitMenu(u8 cursorSubpriority, u8 left, u8 top, u8 numChoices, u8 cursorPos, 
     return pos;
 }
 
-void RedrawMenuCursor(u8 a1, u8 a2)
+static void RedrawMenuCursor(u8 x, u8 y)
 {
-    sub_814A880((a1 + 1) * 8, 8 * a2);
+    MenuCursor_SetPos814A880((x + 1) * 8, 8 * y);
 }
 
 void unref_sub_8072DC0()
@@ -817,7 +835,7 @@ void sub_8072DDC(u8 a1)
     sub_8072DCC(8 * a1);
 }
 
-void HandleDestroyMenuCursors(void)
+void Menu_DestroyCursor(void)
 {
     DestroyMenuCursor();
 }

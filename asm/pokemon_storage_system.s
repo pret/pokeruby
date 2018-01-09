@@ -682,7 +682,7 @@ _08095FA2:
 _08095FC0: .4byte gMain
 _08095FC4: .4byte gUnknown_083B600C
 _08095FC8:
-	bl HandleDestroyMenuCursors
+	bl Menu_DestroyCursor
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0xD
@@ -897,7 +897,7 @@ StorageSystemCreatePrimaryMenu: @ 8096168
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0x4
-	bl PrintMenuItems
+	bl Menu_PrintItems
 	str r4, [sp]
 	movs r0, 0xC
 	str r0, [sp, 0x4]
@@ -1643,7 +1643,7 @@ sub_80966F4: @ 80966F4
 	ldr r0, _0809677C @ =gWindowTemplate_81E6D38
 	adds r1, r5, 0
 	mov r2, r8
-	bl sub_8004E3C
+	bl Text_InitWindow8004E3C
 	str r5, [r4]
 	str r6, [r4, 0x4]
 	ldr r0, _08096780 @ =0x80000200
@@ -1847,7 +1847,7 @@ _080968D4:
 	b _0809697A
 _080968E8:
 	ldr r0, _080968F0 @ =gWindowTemplate_81E6D00
-	bl SetUpWindowConfig
+	bl Text_LoadWindowTemplate
 	b _0809697A
 	.align 2, 0
 _080968F0: .4byte gWindowTemplate_81E6D00
@@ -1986,7 +1986,7 @@ _08096A2C: .4byte gUnknown_0203847D
 _08096A30: .4byte gUnknown_0203847F
 _08096A34:
 	ldr r0, _08096A3C @ =gWindowTemplate_81E6D00
-	bl SetUpWindowConfig
+	bl Text_LoadWindowTemplate
 	b _08096AD8
 	.align 2, 0
 _08096A3C: .4byte gWindowTemplate_81E6D00
@@ -5666,7 +5666,7 @@ sub_8098A38: @ 8098A38
 	thumb_func_start sub_8098A5C
 sub_8098A5C: @ 8098A5C
 	push {lr}
-	bl HandleDestroyMenuCursors
+	bl Menu_DestroyCursor
 	movs r0, 0xA
 	movs r1, 0x10
 	movs r2, 0x1D
@@ -8748,7 +8748,7 @@ sub_809A1BC: @ 809A1BC
 	ldr r0, _0809A234 @ =gWindowTemplate_81E6D38
 	adds r1, r5, 0
 	str r3, [sp, 0x4]
-	bl sub_8004E3C
+	bl Text_InitWindow8004E3C
 	str r5, [r4]
 	ldr r3, [sp, 0x4]
 	str r3, [r4, 0x4]
@@ -14498,7 +14498,7 @@ sub_809CE84: @ 809CE84
 	lsls r3, 5
 	adds r4, r3
 	adds r3, r4, 0
-	bl PrintMenuItems
+	bl Menu_PrintItems
 	ldrb r1, [r5]
 	adds r1, 0x1
 	lsls r1, 24
@@ -14582,7 +14582,7 @@ _0809CF8E:
 	negs r0, r0
 	cmp r5, r0
 	beq _0809CFB2
-	bl HandleDestroyMenuCursors
+	bl Menu_DestroyCursor
 	ldr r0, _0809CFD0 @ =gUnknown_083B6DB4
 	ldr r1, [r0]
 	ldr r2, _0809CFD4 @ =0x000011ba

@@ -275,11 +275,11 @@ static bool8 sub_810B6C0(void)
             gMain.state++;
             break;
         case  5:
-            SetUpWindowConfig(&gWindowTemplate_81E6E34);
+            Text_LoadWindowTemplate(&gWindowTemplate_81E6E34);
             gMain.state++;
             break;
         case  6:
-            SetUpWindowConfig(&gWindowTemplate_81E6E50);
+            Text_LoadWindowTemplate(&gWindowTemplate_81E6E50);
             gMain.state++;
             break;
         case  7:
@@ -814,7 +814,7 @@ static void sub_810C368(u8 taskId)
     sub_80F98A4(1);
     BasicInitMenuWindow(&gWindowTemplate_81E6E50);
     Menu_DrawStdWindowFrame(7, v0 + 4, 13, 11);
-    PrintMenuItemsReordered(8, v0 + 5, gUnknown_0203924C, gUnknown_083F7EF4, gUnknown_03000758);
+    Menu_PrintItemsReordered(8, v0 + 5, gUnknown_0203924C, gUnknown_083F7EF4, gUnknown_03000758);
     InitMenu(0, 8, v0 + 5, gUnknown_0203924C, 0, 5);
     gSpecialVar_ItemId = gUnknown_02039248.unk0 + gUnknown_02039248.unk1;
     gTasks[taskId].func = sub_810C40C;
@@ -869,7 +869,7 @@ static void sub_810C508(u8 taskId)
 static void sub_810C540(u8 taskId)
 {
     BasicInitMenuWindow(&gWindowTemplate_81E6E50);
-    HandleDestroyMenuCursors();
+    Menu_DestroyCursor();
     Menu_EraseWindowRect(7, 4, 13, 11);
     StringCopy(gStringVar1, gPokeblockNames[gSaveBlock1.pokeblocks[gUnknown_02039248.unk0 + gUnknown_02039248.unk1].color]);
     StringExpandPlaceholders(gStringVar4, gContestStatsText_ThrowAwayPrompt);
@@ -932,7 +932,7 @@ static void sub_810C748(u8 taskId)
 {
     StartVerticalScrollIndicators(0);
     StartVerticalScrollIndicators(1);
-    HandleDestroyMenuCursors();
+    Menu_DestroyCursor();
     Menu_EraseWindowRect(7, 4, 13, 11);
     gTasks[taskId].func = sub_810BF7C;
 }

@@ -78,7 +78,7 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
     {
     case 0:
         dp12_8087EA4();
-        SetUpWindowConfig(&gWindowTemplate_81E6C58);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E6C58);
         ResetPaletteFade();
         Text_InitWindowWithTemplate(&gUnknown_03004210, &gWindowTemplate_81E6C58);
         gBattle_BG0_X = 0;

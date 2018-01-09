@@ -325,7 +325,7 @@ static void NamingScreen_Init(void)
 
 static void NamingScreen_SetUpWindow(void)
 {
-    SetUpWindowConfig(&gWindowTemplate_81E6E88);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E6E88);
     InitMenuWindow(&gWindowTemplate_81E6E88);
 }
 

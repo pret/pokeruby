@@ -354,7 +354,7 @@ static u8 sub_80F8A28(void)
         RETURN_UP_STATE;
 
     case 6:
-        SetUpWindowConfig(&gWindowTemplate_81E6DFC);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E6DFC);
         RETURN_UP_STATE;
 
     case 7:

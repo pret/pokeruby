@@ -652,7 +652,7 @@ static void DrawMultichoiceMenu(u8 left, u8 top, u8 count, const struct MenuActi
     bottom = top + (2 * count + 1);
 
     Menu_DrawStdWindowFrame(left, top, right, bottom);
-    PrintMenuItems(left + 1, top + 1, count, list);
+    Menu_PrintItems(left + 1, top + 1, count, list);
     InitMenu(0, left + 1, top + 1, count, cursorPos, right - left - 1);
     StartScriptMenuTask(left, top, right, bottom, ignoreBPress, count);
 }
@@ -704,7 +704,7 @@ static void Task_HandleMultichoiceInput(u8 taskId)
             {
                 gSpecialVar_Result = selection;
             }
-            HandleDestroyMenuCursors();
+            Menu_DestroyCursor();
             Menu_EraseWindowRect(gTasks[taskId].tLeft, gTasks[taskId].tTop, gTasks[taskId].tRight, gTasks[taskId].tBottom);
             DestroyTask(taskId);
             EnableBothScriptContexts();
@@ -745,7 +745,7 @@ static void sub_80B53B4(u8 left, u8 top, u8 count, const struct MenuAction *list
     right = (right + left) + 2;
     bottom = top + (2 * count + 1);
 
-    PrintMenuItems(left, top, count, list);
+    Menu_PrintItems(left, top, count, list);
     InitMenu(0, left, top, count, 0, right - left - 1);
     StartScriptMenuTask(left, top, right, bottom, ignoreBPress, count);
 }
@@ -839,7 +839,7 @@ bool8 ScriptMenu_MultichoiceGrid(u8 left, u8 top, u8 multichoiceId, u8 ignoreBPr
             bottom = (2 * (gMultichoiceLists[multichoiceId].count / columnCount)) + 3 + top;
         }
 
-        width = sub_807288C(columnCount);
+        width = Menu_GetColumnXCoord(columnCount);
         gTasks[taskId].tLeft = left;
         gTasks[taskId].tTop = top;
         gTasks[taskId].tRight = width + left + 2;
@@ -866,7 +866,7 @@ static void Task_HandleMultichoiceGridInput(u8 taskId)
         {
             gSpecialVar_Result = selection;
         }
-        HandleDestroyMenuCursors();
+        Menu_DestroyCursor();
         Menu_EraseWindowRect(gTasks[taskId].tLeft, gTasks[taskId].tTop, gTasks[taskId].tRight, gTasks[taskId].tBottom);
         DestroyTask(taskId);
         EnableBothScriptContexts();

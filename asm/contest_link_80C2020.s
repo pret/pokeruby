@@ -14,7 +14,7 @@ sub_80C2020: @ 80C2020
 	strh r0, [r5]
 	ldr r4, _080C20F0 @ =gWindowTemplate_81E6FA0
 	adds r0, r4, 0
-	bl SetUpWindowConfig
+	bl Text_LoadWindowTemplate
 	ldr r0, _080C20F4 @ =gMenuWindow
 	adds r1, r4, 0
 	bl Text_InitWindowWithTemplate

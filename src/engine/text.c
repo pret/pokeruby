@@ -97,7 +97,7 @@ static void AddToCursorX(struct Window *, u8);
 static void AddToCursorY(struct Window *, u8);
 static void ClipLeft(struct Window *);
 static void ClipRight(struct Window *);
-static void InitColors(struct Window *);
+static void SetWindowDefaultColors(struct Window *);
 static void SetWindowBackgroundColor(struct Window *, u8);
 static void SetWindowShadowColor(struct Window *, u8);
 static void SetWindowForegroundColor(struct Window *, u8);
@@ -786,7 +786,7 @@ const struct WindowTemplate gWindowTemplate_81E6DA8 =
     BG_SCREEN_ADDR(11), // tilemap
 };
 
-const struct WindowTemplate WindowConfig_TrainerCard_Back_Values =
+const struct WindowTemplate gWindowTemplate_TrainerCard_Back_Values =
 {
     0, // BG number
     2, // BG character base block
@@ -807,7 +807,7 @@ const struct WindowTemplate WindowConfig_TrainerCard_Back_Values =
     BG_SCREEN_ADDR(30), // tilemap
 };
 
-const struct WindowTemplate WindowConfig_TrainerCard_Back_Labels =
+const struct WindowTemplate gWindowTemplate_TrainerCard_Back_Labels =
 {
     0, // BG number
     2, // BG character base block
@@ -1752,7 +1752,7 @@ void LoadFontDefaultPalette(const struct WindowTemplate *winTemplate)
     LoadPalette(gFontDefaultPalette, 16 * winTemplate->paletteNum, 32);
 }
 
-void SetUpWindowConfig(const struct WindowTemplate *winTemplate)
+void Text_LoadWindowTemplate(const struct WindowTemplate *winTemplate)
 {
     UpdateBGRegs(winTemplate);
     ClearBGMem(winTemplate);
@@ -1952,7 +1952,7 @@ void Text_InitWindowWithTemplate(struct Window *win, const struct WindowTemplate
     win->height = winTemplate->height;
     win->tileData = winTemplate->tileData;
     win->tilemap = winTemplate->tilemap;
-    InitColors(win);
+    SetWindowDefaultColors(win);
     SetWindowBackgroundColor(win, winTemplate->backgroundColor);
     SetWindowShadowColor(win, winTemplate->shadowColor);
     SetWindowForegroundColor(win, winTemplate->foregroundColor);
@@ -1986,7 +1986,7 @@ void Text_InitWindow(struct Window *win, const u8 *text, u16 tileDataStartOffset
     win->downArrowCounter = 0;
     win->tileData = winTemplate->tileData;
     win->tilemap = winTemplate->tilemap;
-    InitColors(win);
+    SetWindowDefaultColors(win);
     SetWindowBackgroundColor(win, winTemplate->backgroundColor);
     SetWindowShadowColor(win, winTemplate->shadowColor);
     SetWindowForegroundColor(win, winTemplate->foregroundColor);
@@ -2007,7 +2007,7 @@ void Text_InitWindow8002E4C(struct Window *win, const u8 *text, u16 tileDataStar
         ClipLeft(win);
 }
 
-void sub_8002E90(struct Window *win, const u8 *text)
+void Text_SetWindowText(struct Window *win, const u8 *text)
 {
     win->state = WIN_STATE_NORMAL;
     win->text = text;
@@ -2364,7 +2364,7 @@ u8 sub_8003490(struct Window *win, u8 c, u16 tileDataStartOffset, u8 left, u8 to
 
 void sub_80034D4(u8 *tileData, const u8 *text)
 {
-    sub_8004E3C(&gWindowTemplate_81E6C74, tileData, text);
+    Text_InitWindow8004E3C(&gWindowTemplate_81E6C74, tileData, text);
 }
 
 u8 sub_80034EC(u8 *str)
@@ -2905,7 +2905,7 @@ static void ClipRight(struct Window *win)
     }
 }
 
-static void InitColors(struct Window *win)
+static void SetWindowDefaultColors(struct Window *win)
 {
     u32 i;
 
@@ -3334,7 +3334,7 @@ void DrawWindowRect_DefaultPalette(struct Window *win, u16 tileNum, u8 left, u8 
 }
 
 // Fills the whole window area with tilemapEntry
-void FillWindowRect(struct Window *win, u16 tilemapEntry, u8 left, u8 top, u8 right, u8 bottom)
+void Text_FillWindowRect(struct Window *win, u16 tilemapEntry, u8 left, u8 top, u8 right, u8 bottom)
 {
     u16 *buffer = &win->tilemap[top * 32];
     while (top++ <= bottom)
@@ -3346,20 +3346,20 @@ void FillWindowRect(struct Window *win, u16 tilemapEntry, u8 left, u8 top, u8 ri
     }
 }
 
-void FillWindowRect_DefaultPalette(struct Window *win, u16 tileNum, u8 left, u8 top, u8 right, u8 bottom)
+void Text_FillWindowRectDefPalette(struct Window *win, u16 tileNum, u8 left, u8 top, u8 right, u8 bottom)
 {
-    FillWindowRect(win, (win->paletteNum << 12) | tileNum, left, top, right, bottom);
+    Text_FillWindowRect(win, (win->paletteNum << 12) | tileNum, left, top, right, bottom);
 }
 
-void ZeroFillWindowRect(struct Window *win, u8 left, u8 top, u8 right, u8 bottom)
+void Text_EraseWindowRect(struct Window *win, u8 left, u8 top, u8 right, u8 bottom)
 {
-    FillWindowRect_DefaultPalette(win, 0, left, top, right, bottom);
+    Text_FillWindowRectDefPalette(win, 0, left, top, right, bottom);
 }
 
 void Text_BlankWindowRect(struct Window *win, u8 left, u8 top, u8 right, u8 bottom)
 {
     u16 tileNum = GetBlankTileNum(win);
-    FillWindowRect_DefaultPalette(win, tileNum, left, top, right, bottom);
+    Text_FillWindowRectDefPalette(win, tileNum, left, top, right, bottom);
 }
 
 static u16 GetBlankTileNum(struct Window *win)
@@ -3666,13 +3666,13 @@ u8 GetStringWidth(struct Window *win, const u8 *s)
     return width;
 }
 
-u8 sub_8004D04(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u16 top, u32 a6)
+u8 Text_InitWindow8004D04(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u16 top, u32 a6)
 {
     Text_InitWindow8002E4C(win, text, tileDataStartOffset, left, top, a6);
     return Text_PrintWindow8002F44(win);
 }
 
-u8 sub_8004D38(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u8 top)
+u8 Text_InitWindow8004D38(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u8 top)
 {
     u8 width = GetStringWidth(win, text);
     Text_InitWindow(win, text, tileDataStartOffset, left - ((u32)(width + 7) >> 3), top);
@@ -3684,7 +3684,7 @@ u8 sub_8004D38(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 l
     return Text_PrintWindow8002F44(win);
 }
 
-u8 sub_8004DB0(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u8 top, u16 a6)
+u8 Text_InitWindow8004DB0(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u8 top, u16 a6)
 {
     register u32 val asm("r5") = (u8)((a6 >> 1) - (GetStringWidth(win, text) >> 1));
     left += (val >> 3);
@@ -3694,7 +3694,7 @@ u8 sub_8004DB0(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 l
     return Text_PrintWindow8002F44(win);
 }
 
-u8 sub_8004E24(struct Window *win)
+u8 Text_GetWindowPaletteNum(struct Window *win)
 {
     return win->paletteNum;
 }
@@ -3706,7 +3706,7 @@ void Text_GetTextColors(struct Window *win, u8 *foreground, u8 *background, u8 *
     *shadow = win->shadowColor;
 }
 
-void sub_8004E3C(const struct WindowTemplate *winTemplate, u8 *tileData, const u8 *text)
+void Text_InitWindow8004E3C(const struct WindowTemplate *winTemplate, u8 *tileData, const u8 *text)
 {
     sTempWindow.template = winTemplate;
     Text_InitWindow(&sTempWindow, text, 0, 0, 0);
@@ -3727,11 +3727,11 @@ void ConvertInternationalString(u8 *s, u8 language)
     {
         u8 i;
 
-        StripExtCtrlCodes(s);
+        Text_StripExtCtrlCodes(s);
         i = StringLength(s);
-        s[i++] = 0xFC;
+        s[i++] = EXT_CTRL_CODE_BEGIN;
         s[i++] = 22;
-        s[i++] = 0xFF;
+        s[i++] = EOS;
 
         i--;
 
@@ -3741,18 +3741,18 @@ void ConvertInternationalString(u8 *s, u8 language)
             i--;
         }
 
-        s[0] = 0xFC;
+        s[0] = EXT_CTRL_CODE_BEGIN;
         s[1] = 21;
     }
 }
 
-void StripExtCtrlCodes(u8 *str)
+void Text_StripExtCtrlCodes(u8 *str)
 {
     u16 srcIndex = 0;
     u16 destIndex = 0;
-    while (str[srcIndex] != 0xFF)
+    while (str[srcIndex] != EOS)
     {
-        if (str[srcIndex] == 0xFC)
+        if (str[srcIndex] == EXT_CTRL_CODE_BEGIN)
         {
             srcIndex++;
             srcIndex += GetExtCtrlCodeLength(str[srcIndex]);
@@ -3762,12 +3762,12 @@ void StripExtCtrlCodes(u8 *str)
             str[destIndex++] = str[srcIndex++];
         }
     }
-    str[destIndex] = 0xFF;
+    str[destIndex] = EOS;
 }
 
 static const u8 *SkipExtCtrlCode(const u8 *s)
 {
-    while (*s == 0xFC)
+    while (*s == EXT_CTRL_CODE_BEGIN)
     {
         s++;
         s += GetExtCtrlCodeLength(*s);

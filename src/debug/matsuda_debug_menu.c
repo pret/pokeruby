@@ -249,7 +249,7 @@ u8 unref_sub_80A9B28(void)
 {
     Menu_EraseScreen();
     Menu_DrawStdWindowFrame(0, 0, 17, 18);
-    PrintMenuItems(1, 1, 7, gMatsudaDebugMenuActions);
+    Menu_PrintItems(1, 1, 7, gMatsudaDebugMenuActions);
     InitMenu(0, 1, 1, 7, 0, 16);
     gCallback_03004AE8 = sub_80A9B78;
     return 0;
@@ -449,7 +449,7 @@ static void sub_80A9F50(void)
 {
     REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP;
     REG_DISPCNT |= DISPCNT_OBJ_ON | DISPCNT_BG0_ON;
-    SetUpWindowConfig(&gWindowTemplate_81E6C3C);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E6C3C);
     Text_InitWindowWithTemplate(&gMenuWindow, &gWindowTemplate_81E6C3C);
     REG_MOSAIC = 0;
     REG_BLDCNT = 0;
@@ -573,7 +573,7 @@ void sub_80AA280(u8 var) // no?
 {
     u8 i;
 
-    FillWindowRect_DefaultPalette(&gMenuWindow, 0, 0, 0, 0x1E, 3);
+    Text_FillWindowRectDefPalette(&gMenuWindow, 0, 0, 0, 0x1E, 3);
     StringCopy(gSharedMem, gMatsudaDebugMenu_StartText);
     StringAppend(gSharedMem, gContestMons[var].trainerName);
 
@@ -624,7 +624,7 @@ static void sub_80AA4A8(u8 var)
 
 static void sub_80AA4F0(u8 var1, u8 var2)
 {
-    FillWindowRect_DefaultPalette(&gMenuWindow, 0, gUnknown_083C928E[var2][0], gUnknown_083C928E[var2][1], gUnknown_083C928E[var2][0] + 7, gUnknown_083C928E[var2][1] + 1);
+    Text_FillWindowRectDefPalette(&gMenuWindow, 0, gUnknown_083C928E[var2][0], gUnknown_083C928E[var2][1], gUnknown_083C928E[var2][0] + 7, gUnknown_083C928E[var2][1] + 1);
     Text_InitWindowAndPrintText(&gMenuWindow, gMoveNames[gContestMons[var1].moves[var2]], 0x8A + var2 * 14, gUnknown_083C928E[var2][0], gUnknown_083C928E[var2][1]);
     ConvertIntToDecimalStringN(gStringVar1, gContestMons[var1].moves[var2], STR_CONV_MODE_LEADING_ZEROS, 3);
     Text_InitWindowAndPrintText(&gMenuWindow, gStringVar1, 0xFA + var2 * 6, gUnknown_083C928E[var2][0] + 7, gUnknown_083C928E[var2][1]);
@@ -1075,7 +1075,7 @@ void unref_sub_80AB084(u8 *text)
             break;
         }
     }
-    SetUpWindowConfig(&gWindowTemplate_81E6FD8);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E6FD8);
     Text_InitWindowWithTemplate(&gUnknown_03004210, &gWindowTemplate_81E6FD8);
     LoadFontDefaultPalette(&gWindowTemplate_81E6FD8);
     Text_InitWindowAndPrintText(&gUnknown_03004210, text, 1, 9, 7);

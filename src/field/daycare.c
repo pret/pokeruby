@@ -1756,7 +1756,7 @@ static void HandleDaycareLevelMenuInput(u8 taskId)
     }
     else if (gMain.newKeys & A_BUTTON)
     {
-        HandleDestroyMenuCursors();
+        Menu_DestroyCursor();
         PlaySE(SE_SELECT);
         gLastFieldPokeMenuOpened = gSpecialVar_Result = gTasks[taskId].data[0];
         DestroyTask(taskId);
@@ -1765,7 +1765,7 @@ static void HandleDaycareLevelMenuInput(u8 taskId)
     }
     else if (gMain.newKeys & B_BUTTON)
     {
-        HandleDestroyMenuCursors();
+        Menu_DestroyCursor();
         gLastFieldPokeMenuOpened = gSpecialVar_Result = 2;
         DestroyTask(taskId);
         Menu_EraseWindowRect(15, 6, 29, 13);
@@ -1780,7 +1780,7 @@ void ShowDaycareLevelMenu(void)
     GetDaycareLevelMenuText(&gSaveBlock1.daycare, buffer);
     Menu_PrintText(buffer, 16, 7);
     GetDaycareLevelMenuLevelText(&gSaveBlock1.daycare, buffer);
-    MenuPrint_PixelCoords(buffer, 0xce, 0x38, TRUE);
+    Menu_PrintTextPixelCoords(buffer, 0xce, 0x38, TRUE);
     InitMenu(0, 16, 7, 3, 0, 13);
     CreateTask(HandleDaycareLevelMenuInput, 3);
 }

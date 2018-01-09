@@ -1573,7 +1573,7 @@ void sub_810F118(u8 taskId)
     }
     if (gMain.newKeys & A_BUTTON)
     {
-        HandleDestroyMenuCursors();
+        Menu_DestroyCursor();
         gSpecialVar_Result = gUnknown_0203925B;
         PlaySE(SE_SELECT);
         sub_810EEDC();
@@ -1582,7 +1582,7 @@ void sub_810F118(u8 taskId)
     }
     if (gMain.newKeys & B_BUTTON)
     {
-        HandleDestroyMenuCursors();
+        Menu_DestroyCursor();
         gSpecialVar_Result = 0x7f;
         PlaySE(SE_SELECT);
         sub_810EEDC();

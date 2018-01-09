@@ -1259,7 +1259,7 @@ static void Task_StoryListMenu(u8 taskId)
             gSpecialVar_Result = 1;
             gUnknown_03000748 = selection;
         }
-        HandleDestroyMenuCursors();
+        Menu_DestroyCursor();
         Menu_EraseWindowRect(0, 0, 25, 12);
         DestroyTask(taskId);
         EnableBothScriptContexts();

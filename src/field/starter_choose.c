@@ -294,7 +294,7 @@ void CB2_ChooseStarter(void)
     LoadCompressedObjectPic(&gUnknown_083F7794[0]);
     LoadCompressedObjectPic(&gUnknown_083F77A4[0]);
     LoadSpritePalettes(gUnknown_083F77B4);
-    SetUpWindowConfig(&gWindowTemplate_81E6C3C);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E6C3C);
     InitMenuWindow(&gWindowTemplate_81E6CE4);
     BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
 
@@ -435,7 +435,7 @@ static void Task_StarterChoose5(u8 taskId)
 {
     u8 spriteId;
 
-    switch (ProcessMenuInputNoWrap_())
+    switch (Menu_ProcessInputNoWrap_())
     {
     case 0:  // YES
         //Return the starter choice and exit.

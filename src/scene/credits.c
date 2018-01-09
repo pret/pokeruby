@@ -474,7 +474,7 @@ void sub_81439D0(void)
     taskIdC = gTasks[taskIdA].data[TDA_TASK_C_ID];
     gTasks[taskIdC].data[TDC_0] = 40;
 
-    SetUpWindowConfig(&gWindowTemplate_81E7208);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E7208);
     InitMenuWindow(&gWindowTemplate_81E7208);
     LoadPalette(&gUnknown_0840B7BC, 0x80, sizeof(gUnknown_0840B7BC));
 

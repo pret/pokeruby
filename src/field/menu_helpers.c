@@ -160,7 +160,7 @@ void DisplayItemMessageOnField(u8 taskId, const u8 *str, TaskFunc callback, u16 
 
 static void Task_CallYesOrNoCallback(u8 taskId)
 {
-    switch (ProcessMenuInputNoWrap_())
+    switch (Menu_ProcessInputNoWrap_())
     {
     case 0:
         PlaySE(SE_SELECT);

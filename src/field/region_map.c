@@ -1540,7 +1540,7 @@ void CB2_InitFlyRegionMap(void)
         FreeAllSpritePalettes();
         break;
     case 1:
-        SetUpWindowConfig(&gWindowTemplate_81E7224);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E7224);
         break;
     case 2:
         InitMenuWindow(&gWindowTemplate_81E7224);
@@ -1562,7 +1562,7 @@ void CB2_InitFlyRegionMap(void)
         break;
     case 6:
         LoadPalette(sFlyRegionMapFrame_Pal, 16, 32);
-        MenuPrint_PixelCoords(gOtherText_FlyToWhere, 1, 0x90, 1);
+        Menu_PrintTextPixelCoords(gOtherText_FlyToWhere, 1, 0x90, 1);
         break;
     case 7:
         CreateFlyTargetGraphics();

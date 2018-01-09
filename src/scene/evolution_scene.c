@@ -197,7 +197,7 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
     REG_WININ = 0;
     REG_WINOUT = 0;
 
-    SetUpWindowConfig(&gWindowTemplate_81E6C58);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E6C58);
     ResetPaletteFade();
 
     gBattle_BG0_X = 0;
@@ -306,7 +306,7 @@ static void CB2_EvolutionSceneLoadGraphics(void)
     REG_WIN1V = 0;
     REG_WININ = 0;
     REG_WINOUT = 0;
-    SetUpWindowConfig(&gWindowTemplate_81E6C58);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E6C58);
     ResetPaletteFade();
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
@@ -373,7 +373,7 @@ static void CB2_TradeEvolutionSceneLoadGraphics(void)
         gMain.state++;
         break;
     case 1:
-        SetUpWindowConfig(&gWindowTemplate_81E6F84);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E6F84);
         Text_InitWindowWithTemplate(&gUnknown_03004828->window, &gWindowTemplate_81E6F84);
         gMain.state++;
         break;
@@ -1087,7 +1087,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
                 sEvoCursorPos = 0;
                 Text_InitWindow(&gUnknown_03004828->window, gOtherText_YesNoAndPlayer, gUnknown_03004828->textWindowBaseTileNum + 128, 25, 9);
                 Text_PrintWindow8002F44(&gUnknown_03004828->window);
-                sub_814A5C0(0, 0xFFFF, 0xC, 0x2D9F, 0x20);
+                MenuCursor_Create814A5C0(0, 0xFFFF, 0xC, 0x2D9F, 0x20);
                 sub_81150D8();
                 gTasks[taskID].tLearnMoveState++;
                 sEvoCursorPos = 0;
@@ -1110,7 +1110,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
             }
             if (gMain.newKeys & A_BUTTON)
             {
-                ZeroFillWindowRect(&gUnknown_03004828->window, 0x18, 8, 0x1D, 0xD);
+                Text_EraseWindowRect(&gUnknown_03004828->window, 0x18, 8, 0x1D, 0xD);
                 DestroyMenuCursor();
                 StrCpyDecodeToDisplayedStringBattle(gBattleStringsTable[292]);
                 Text_InitWindow8002EB0(&gUnknown_03004828->window, gDisplayedStringBattle, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
@@ -1126,7 +1126,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
             }
             if (gMain.newKeys & B_BUTTON)
             {
-                ZeroFillWindowRect(&gUnknown_03004828->window, 0x18, 8, 0x1D, 0xD);
+                Text_EraseWindowRect(&gUnknown_03004828->window, 0x18, 8, 0x1D, 0xD);
                 DestroyMenuCursor();
                 StrCpyDecodeToDisplayedStringBattle(gBattleStringsTable[292]);
                 Text_InitWindow8002EB0(&gUnknown_03004828->window, gDisplayedStringBattle, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
@@ -3955,7 +3955,7 @@ static void VBlankCB_TradeEvolutionScene(void)
 
 static void sub_81150D8(void)
 {
-    sub_814A880(200, 72 + (sEvoCursorPos * 16));
+    MenuCursor_SetPos814A880(200, 72 + (sEvoCursorPos * 16));
 }
 
 static void EvoDummyFunc2(void)

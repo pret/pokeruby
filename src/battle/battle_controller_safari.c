@@ -472,13 +472,13 @@ void SafariHandlecmd18(void)
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 160;
     gUnknown_03004210.paletteNum = 0;
-    FillWindowRect_DefaultPalette(&gUnknown_03004210, 10, 2, 15, 27, 18);
-    FillWindowRect_DefaultPalette(&gUnknown_03004210, 10, 2, 35, 16, 36);
+    Text_FillWindowRectDefPalette(&gUnknown_03004210, 10, 2, 15, 27, 18);
+    Text_FillWindowRectDefPalette(&gUnknown_03004210, 10, 2, 35, 16, 36);
     gBattleBankFunc[gActiveBank] = bx_battle_menu_t6_2;
 
     Text_InitWindow(&gUnknown_03004210, BattleText_MenuOptionsSafari, 400, 18, 35);
     Text_PrintWindow8002F44(&gUnknown_03004210);
-    sub_814A5C0(0, 0xFFFF, 12, 11679, 0);
+    MenuCursor_Create814A5C0(0, 0xFFFF, 12, 11679, 0);
 
     for (i = 0; i < 4; i++)
         nullsub_8(i);

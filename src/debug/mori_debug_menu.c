@@ -198,7 +198,7 @@ s8 InitMoriDebugMenu(void)
 {
     Menu_EraseScreen();
     Menu_DrawStdWindowFrame(0, 0, 10, 19);
-    PrintMenuItems(1, 1, 9, gMoriDebugMenuActions);
+    Menu_PrintItems(1, 1, 9, gMoriDebugMenuActions);
     InitMenu(0, 1, 1, 9, 0, 9);
     gCallback_03004AE8 = MoriDebugMenuProcessInput;
     return 0;

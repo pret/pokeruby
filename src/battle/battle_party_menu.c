@@ -723,7 +723,7 @@ static void Task_BattlePartyMenuShift(u8 taskId)
 
 static void Task_BattlePartyMenuCancel(u8 taskId)
 {
-    HandleDestroyMenuCursors();
+    Menu_DestroyCursor();
     ClosePartyPopupMenu(gTasks[taskId].data[4], sBattlePartyPopupMenus);
     gTasks[taskId].data[4] = gTasks[taskId].data[5];
     PrintPartyMenuPromptText(0, 0);

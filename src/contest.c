@@ -357,7 +357,7 @@ void LoadContestBgAfterMoveAnim(void)
 
 void SetUpContestWindow(void)
 {
-    SetUpWindowConfig(&gWindowTemplate_81E6FD8);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E6FD8);
     Text_InitWindowWithTemplate(&gUnknown_03004210, &gWindowTemplate_81E6FD8);
     Text_InitWindowWithTemplate(&gMenuWindow, &gWindowTemplate_81E6FF4);
 }
@@ -686,7 +686,7 @@ void sub_80ABCDC(u8 taskId)
 
     gBattle_BG0_Y = 0xA0;
     gBattle_BG2_Y = 0xA0;
-    FillWindowRect_DefaultPalette(
+    Text_FillWindowRectDefPalette(
       &gUnknown_03004210,
       0,
       gUnknown_083CA340[0][0],
@@ -725,7 +725,7 @@ void sub_80ABCDC(u8 taskId)
         Text_PrintWindow8002F44(&gUnknown_03004210);
     }
 
-    sub_814A5C0(0, 0xFFFF, 12, 0x2D9F, 72);
+    MenuCursor_Create814A5C0(0, 0xFFFF, 12, 0x2D9F, 72);
     sub_80AC0AC(sContest.playerMoveChoice);
     sub_80AEBEC(gContestMons[gContestPlayerMonIndex].moves[sContest.playerMoveChoice]);
     gTasks[taskId].func = sub_80ABEA0;
@@ -757,7 +757,7 @@ void sub_80ABEA0(u8 taskId)
             sub_814A904();
             PlaySE(SE_SELECT);
             sub_80AFFE0(FALSE);
-            FillWindowRect_DefaultPalette(
+            Text_FillWindowRectDefPalette(
               &gUnknown_03004210,
               0,
               gUnknown_083CA340[0][0],
@@ -809,7 +809,7 @@ void sub_80ABEA0(u8 taskId)
 
 void sub_80AC0AC(s8 a)
 {
-    sub_814A880(4, 88 + a * 16);
+    MenuCursor_SetPos814A880(4, 88 + a * 16);
 }
 
 void nullsub_17(s8 a)
@@ -1940,7 +1940,7 @@ void Contest_CreatePlayerMon(u8 partyIndex)
     s16 tough;
 
     StringCopy(name, gSaveBlock2.playerName);
-    StripExtCtrlCodes(name);
+    Text_StripExtCtrlCodes(name);
     if (gIsLinkContest & 1)
     {
         u8 temp = name[5];
@@ -1960,7 +1960,7 @@ void Contest_CreatePlayerMon(u8 partyIndex)
     StringGetEnd10(name);
     if (gIsLinkContest & 1)
     {
-        StripExtCtrlCodes(name);
+        Text_StripExtCtrlCodes(name);
         if (GetMonData(&gPlayerParty[partyIndex], MON_DATA_LANGUAGE) == LANGUAGE_JAPANESE)
         {
             name[5] = EOS;
@@ -2121,7 +2121,7 @@ void sub_80AE514(void)
 
     for (i = 0; i < 4; i++)
     {
-        FillWindowRect_DefaultPalette(
+        Text_FillWindowRectDefPalette(
           &gUnknown_03004210,
           0,
           gUnknown_083CA308[gUnknown_02038696[i]][0],
@@ -2161,7 +2161,7 @@ void sub_80AE5D4(u8 p, u8 b)
     if ((gIsLinkContest & 1) && gLinkPlayers[p].language == LANGUAGE_JAPANESE)
     {
         StringCopy(str, gLinkPlayers[p].name);
-        sub_8004D04(
+        Text_InitWindow8004D04(
           &gUnknown_03004210,
           gDisplayedStringBattle,
           592 + gUnknown_02038696[p] * 22,
@@ -2198,7 +2198,7 @@ void sub_80AE6E4(u8 a, u8 b)
     str = sub_80AE598(str, gContestMons[a].nickname, b);
     *str = EOS;
 
-    sub_8004D04(
+    Text_InitWindow8004D04(
       &gUnknown_03004210,
       gDisplayedStringBattle,
       512 + gUnknown_02038696[a] * 20,
@@ -2383,7 +2383,7 @@ void sub_80AEBEC(u16 a)
     s32 i;
     u8 numHearts;
 
-    FillWindowRect_DefaultPalette(&gUnknown_03004210, 0, 11, 31, 16, 34);
+    Text_FillWindowRectDefPalette(&gUnknown_03004210, 0, 11, 31, 16, 34);
 
     category = gContestMoves[a].contestCategory;
     if      (category == CONTEST_CATEGORY_COOL)
@@ -2438,7 +2438,7 @@ void sub_80AEBEC(u16 a)
 
 void sub_80AED58(void)
 {
-    FillWindowRect_DefaultPalette(&gUnknown_03004210, 0, 11, 35, 28, 40);
+    Text_FillWindowRectDefPalette(&gUnknown_03004210, 0, 11, 35, 28, 40);
 }
 
 // unused
@@ -2614,7 +2614,7 @@ void sub_80AF120(void)
 
 void sub_80AF138(void)
 {
-    FillWindowRect_DefaultPalette(&gUnknown_03004210, 0, 1, 15, 17, 18);
+    Text_FillWindowRectDefPalette(&gUnknown_03004210, 0, 1, 15, 17, 18);
 }
 
 u16 GetChosenMove(u8 a)
@@ -2674,7 +2674,7 @@ void unref_sub_80AF280(u8 a)
 
 void sub_80AF2A0(u8 a)
 {
-    FillWindowRect_DefaultPalette(
+    Text_FillWindowRectDefPalette(
       &gUnknown_03004210,
       0,
       gUnknown_083CA318[a][0],
@@ -4146,7 +4146,7 @@ void unref_sub_80B0CF4(void)
 
         for (i = 0; i < 4; i++)
         {
-            FillWindowRect_DefaultPalette(
+            Text_FillWindowRectDefPalette(
               &gUnknown_03004210,
               0,
               gUnknown_083CA308[i][0],
@@ -4175,7 +4175,7 @@ void sub_80B0D7C(void)
 
         for (i = 0; i < 4; i++)
         {
-            FillWindowRect_DefaultPalette(
+            Text_FillWindowRectDefPalette(
               &gUnknown_03004210,
               0,
               gUnknown_083CA308[i][0],

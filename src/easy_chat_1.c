@@ -305,7 +305,7 @@ void sub_80E62F8(void)
         FreeAllSpritePalettes();
         break;
     case 1:
-        SetUpWindowConfig(&gWindowTemplate_81E6DA8);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E6DA8);
         break;
     case 2:
         InitMenuWindow(&gWindowTemplate_81E6D54);
@@ -737,7 +737,7 @@ void sub_80E6BC0(void)
         }
         break;
     case 1:
-        switch (ProcessMenuInputNoWrap_())
+        switch (Menu_ProcessInputNoWrap_())
         {
         case 0:
             sub_80E7D6C();
@@ -785,7 +785,7 @@ void sub_80E6C84(void)
             gEasyChatStruct->unk24++;
         break;
     case 1:
-        switch (ProcessMenuInputNoWrap_())
+        switch (Menu_ProcessInputNoWrap_())
         {
         case 0:
             sub_80E91D4(4);
@@ -800,7 +800,7 @@ void sub_80E6C84(void)
         }
         break;
     case 2:
-        switch (ProcessMenuInputNoWrap_())
+        switch (Menu_ProcessInputNoWrap_())
         {
         case 0:
             gSpecialVar_Result = 0;
@@ -813,7 +813,7 @@ void sub_80E6C84(void)
         }
         break;
     case 0xFF:
-        HandleDestroyMenuCursors();
+        Menu_DestroyCursor();
         sub_80E81FC();
         sub_80E682C(sub_80E6AC4);
         break;
@@ -861,7 +861,7 @@ void sub_80E6D7C(void)
         }
         break;
     case 1:
-        switch (ProcessMenuInputNoWrap_())
+        switch (Menu_ProcessInputNoWrap_())
         {
         case 0:
             gSpecialVar_Result = (sub_80E7FA8() != 0);
@@ -883,7 +883,7 @@ void sub_80E6D7C(void)
             break;
         case -1:
         case 1:
-            HandleDestroyMenuCursors();
+            Menu_DestroyCursor();
             sub_80E81FC();
             if (gEasyChatStruct->unk8 == 6 && sub_80E7FA8() != 0)
             {

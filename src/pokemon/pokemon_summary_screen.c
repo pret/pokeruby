@@ -718,7 +718,7 @@ bool8 sub_809DA84(void)
         gMain.state++;
         break;
     case 5:
-        SetUpWindowConfig(&gWindowTemplate_81E6E6C);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E6E6C);
         gMain.state++;
         break;
     case 6:
@@ -2716,7 +2716,7 @@ static void sub_809FF64(struct Pokemon *mon)
     *buffer++ = CHAR_SLASH;
     buffer = sub_8072C14(buffer, GetMonData(mon, MON_DATA_MAX_HP), 48, 1);
 
-    MenuPrint_PixelCoords(gStringVar1, 126, 56, 1);
+    Menu_PrintTextPixelCoords(gStringVar1, 126, 56, 1);
 }
 
 static void sub_80A0090(struct Pokemon *mon)
@@ -3127,7 +3127,7 @@ bool8 PokemonSummaryScreen_CheckOT(struct Pokemon *mon)
         u8 enemyId = GetMultiplayerId() ^ 1;
         trainerId = gLinkPlayers[enemyId].trainerId & 0xFFFF;
         StringCopy(gStringVar1, gLinkPlayers[enemyId].name);
-        StripExtCtrlCodes(gStringVar1);
+        Text_StripExtCtrlCodes(gStringVar1);
     }
     else
     {
@@ -5295,7 +5295,7 @@ u8 *sub_80A1E9C(u8 *dest, const u8 *src, u8 id)
 static void sub_80A1EF8(const u8 *text, u8 id, u8 left, u16 top, s32 e)
 {
     sub_80A1E9C(gStringVar4, text, id);
-    MenuPrint_PixelCoords(gStringVar4, left, top, (bool8)e);
+    Menu_PrintTextPixelCoords(gStringVar4, left, top, (bool8)e);
 }
 
 static void sub_80A1F48(const u8 *text, u8 id, u8 c, u8 d, u16 e)

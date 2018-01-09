@@ -400,7 +400,7 @@ static void SlotMachineSetup_0_1(void)
 
 static void SlotMachineSetup_3_0(void)
 {
-    SetUpWindowConfig(&gWindowTemplate_81E7128);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E7128);
     InitMenuWindow(&gWindowTemplate_81E7128);
 }
 
@@ -850,7 +850,7 @@ static bool8 sub_8102318(struct Task *task)
 
 static bool8 sub_8102344(struct Task *task)
 {
-    s8 input = ProcessMenuInputNoWrap_();
+    s8 input = Menu_ProcessInputNoWrap_();
     if (input == 0)
     {
         Menu_EraseScreen();
@@ -2808,7 +2808,7 @@ static void sub_8104B80(struct Task *task)
     sub_8104DA4();
     sub_81065DC();
     BasicInitMenuWindow(&gWindowTemplate_81E7144);
-    MenuPrint_PixelCoords(gOtherText_ReelTime, 10, 32, 1);
+    Menu_PrintTextPixelCoords(gOtherText_ReelTime, 10, 32, 1);
     BeginNormalPaletteFade(-1, 0, 16, 0, 0);
     task->data[0]++;
 }

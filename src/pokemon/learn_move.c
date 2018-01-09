@@ -268,11 +268,11 @@ void CB2_InitLearnMove(void)
     sub_8133558();
     SetVBlankCallback(VBlankCB_LearnMove);
 
-    SetUpWindowConfig(&gWindowTemplate_81E7240);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E7240);
     InitMenuWindow(&gWindowTemplate_81E7240);
     Menu_EraseScreen();
 
-    SetUpWindowConfig(&gWindowTemplate_81E6CE4);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E6CE4);
     InitMenuWindow(&gWindowTemplate_81E6CE4);
     Menu_EraseScreen();
 
@@ -302,11 +302,11 @@ void sub_81327A4(void)
     sLearnMoveStruct->unk2C6 = gSpecialVar_0x8005;
     SetVBlankCallback(VBlankCB_LearnMove);
 
-    SetUpWindowConfig(&gWindowTemplate_81E7240);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E7240);
     InitMenuWindow(&gWindowTemplate_81E7240);
     Menu_EraseScreen();
 
-    SetUpWindowConfig(&gWindowTemplate_81E6CE4);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E6CE4);
     InitMenuWindow(&gWindowTemplate_81E6CE4);
     Menu_EraseScreen();
 
@@ -333,7 +333,7 @@ void CB2_LearnMove(void)
     if (sLearnMoveStruct->unk1D)
     {
         sLearnMoveStruct->unk1D = FALSE;
-        sub_814AD7C(0x58, (sLearnMoveStruct->unk18 * 2 + 1) * 8);
+        MenuCursor_SetPos814AD7C(0x58, (sLearnMoveStruct->unk18 * 2 + 1) * 8);
     }
     if (sLearnMoveStruct->unk1E != 0)
     {
@@ -409,7 +409,7 @@ void LearnMoveMain(void)
         break;
     case 9:
         {
-            s8 selection = ProcessMenuInputNoWrap_();
+            s8 selection = Menu_ProcessInputNoWrap_();
 
             if (selection == 0)
             {
@@ -444,7 +444,7 @@ void LearnMoveMain(void)
         break;
     case 13:
         {
-            s8 selection = ProcessMenuInputNoWrap_();
+            s8 selection = Menu_ProcessInputNoWrap_();
 
             if (selection == 0)
             {
@@ -475,7 +475,7 @@ void LearnMoveMain(void)
         break;
     case 18:
         {
-            s8 var = ProcessMenuInputNoWrap_();
+            s8 var = Menu_ProcessInputNoWrap_();
 
             if (var == 0)
             {
@@ -503,7 +503,7 @@ void LearnMoveMain(void)
         break;
     case 26:
         {
-            s8 var = ProcessMenuInputNoWrap_();
+            s8 var = Menu_ProcessInputNoWrap_();
 
             if (var == 0)
             {

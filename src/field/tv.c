@@ -864,7 +864,7 @@ void PutPokemonTodayCaughtOnAir(void)
                     sub_80BE138((TVShow *)pokemonToday);
                     pokemonToday->language = GAME_LANGUAGE;
                     pokemonToday->language2 = sub_80BDEAC(pokemonToday->nickname);
-                    StripExtCtrlCodes(pokemonToday->nickname);
+                    Text_StripExtCtrlCodes(pokemonToday->nickname);
                 }
             }
         }
@@ -966,7 +966,7 @@ void InterviewAfter_BravoTrainerPokemonProfile(void)
         sub_80BE160((TVShow *)bravoTrainerNew);
         bravoTrainerNew->language = GAME_LANGUAGE;
         bravoTrainerNew->var1f = sub_80BDEAC(bravoTrainerNew->pokemonNickname);
-        StripExtCtrlCodes(bravoTrainerNew->pokemonNickname);
+        Text_StripExtCtrlCodes(bravoTrainerNew->pokemonNickname);
     }
 }
 
@@ -1075,7 +1075,7 @@ void sub_80BE478(void)
         sub_80BE160((TVShow *)nameRaterShow);
         nameRaterShow->language = GAME_LANGUAGE;
         nameRaterShow->pokemonNameLanguage = sub_80BDEAC(nameRaterShow->pokemonName);
-        StripExtCtrlCodes(nameRaterShow->pokemonName);
+        Text_StripExtCtrlCodes(nameRaterShow->pokemonName);
     }
 }
 
@@ -1138,7 +1138,7 @@ void InterviewAfter_PkmnFanClubOpinions(void)
     sub_80BE160((TVShow *)fanclubOpinions);
     fanclubOpinions->language = GAME_LANGUAGE;
     fanclubOpinions->var0E = sub_80BDEAC(fanclubOpinions->var10);
-    StripExtCtrlCodes(fanclubOpinions->var10);
+    Text_StripExtCtrlCodes(fanclubOpinions->var10);
 }
 
 void InterviewAfter_DummyShow4(void)

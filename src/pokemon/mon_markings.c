@@ -566,8 +566,8 @@ void sub_80F761C(s16 x, s16 y, u16 baseTileTag, u16 basePaletteTag)
     }
 
     sMenu->cursorBaseY = y + 8;
-    sub_814A5C0(0, basePaletteTag + 1, 15, 0, 0x30);
-    sub_814A880(x + 8, sMenu->cursorBaseY);
+    MenuCursor_Create814A5C0(0, basePaletteTag + 1, 15, 0, 0x30);
+    MenuCursor_SetPos814A880(x + 8, sMenu->cursorBaseY);
     sub_814AABC(sub_80F7908);
 }
 

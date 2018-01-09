@@ -109,7 +109,7 @@ static bool8 sub_8146058(void)
         gMain.state += 1;
         break;
     case 3:
-        SetUpWindowConfig(&gWindowTemplate_81E6E18);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E6E18);
         gMain.state += 1;
         break;
     case 4:

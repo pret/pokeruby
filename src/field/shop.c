@@ -85,13 +85,13 @@ u8 CreateShopMenu(u8 martType)
     {
         gMartInfo.numChoices = 2;
         Menu_DrawStdWindowFrame(0, 0, 10, 7);
-        PrintMenuItemsReordered(1, 1, 3, sBuySellQuitMenuActions, gUnknown_083CC6E8);
+        Menu_PrintItemsReordered(1, 1, 3, sBuySellQuitMenuActions, gUnknown_083CC6E8);
     }
     else
     {
         gMartInfo.numChoices = 1;
         Menu_DrawStdWindowFrame(0, 0, 10, 5);
-        PrintMenuItemsReordered(1, 1, 2, sBuySellQuitMenuActions, gUnknown_083CC6EB);
+        Menu_PrintItemsReordered(1, 1, 2, sBuySellQuitMenuActions, gUnknown_083CC6EB);
     }
     InitMenu(0, 1, 1, gMartInfo.numChoices + 1, 0, 9); // add 1 for cancel
 
@@ -174,7 +174,7 @@ void sub_80B2F30(u8 taskId)
 
 void HandleShopMenuQuit(u8 taskId)
 {
-    HandleDestroyMenuCursors();
+    Menu_DestroyCursor();
     Menu_EraseWindowRect(0, 0, 11, 8);
     sub_80BE3BC();
     ScriptContext2_Disable();
@@ -285,7 +285,7 @@ void BuyMenuDrawGraphics(void)
     ResetPaletteFade();
     ResetSpriteData();
     ResetTasks();
-    SetUpWindowConfig(&gWindowTemplate_81E6DFC);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E6DFC);
     InitMenuWindow(&gWindowTemplate_81E6DFC);
     BuyMenuDrawMapGraphics();
     gMartInfo.cursor = zero;
@@ -557,7 +557,7 @@ void sub_80B389C(u16 itemId, u8 var2, bool32 hasControlCode)
         stringPtr = &gStringVar1[3];
 
     GetMoneyAmountText(stringPtr, (ItemId_GetPrice(itemId) >> GetPriceReduction(1)), 0x4);
-    MenuPrint_PixelCoords(&gStringVar1[0], 0xCA, var2 << 3, 1);
+    Menu_PrintTextPixelCoords(&gStringVar1[0], 0xCA, var2 << 3, 1);
 }
 
 void sub_80B3930(u16 itemId, u8 var2, bool32 hasControlCode)
@@ -586,7 +586,7 @@ void sub_80B3930(u16 itemId, u8 var2, bool32 hasControlCode)
     else
     {
         GetMoneyAmountText(stringPtr, gDecorations[itemId].price, 0x4);
-        MenuPrint_PixelCoords(&gStringVar1[0], 0xCA, var2 << 3, 0x1);
+        Menu_PrintTextPixelCoords(&gStringVar1[0], 0xCA, var2 << 3, 0x1);
     }
 }
 
@@ -1084,7 +1084,7 @@ void sub_80B40E8(u8 taskId) // Mart_DoCursorAction
                 PauseVerticalScrollIndicator(1);
                 sub_80F979C(1, 1);
                 sub_80B39D0(gMartInfo.cursor, gMartInfo.cursor, 1);
-                HandleDestroyMenuCursors();
+                Menu_DestroyCursor();
                 Menu_EraseWindowRect(0, 0xC, 0xD, 0x13);
 
                 if (gMartInfo.martType == MART_TYPE_0)

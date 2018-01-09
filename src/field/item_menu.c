@@ -424,7 +424,7 @@ static bool8 SetupBagMultistep(void)
         gMain.state++;
         break;
     case 7:
-        SetUpWindowConfig(&gWindowTemplate_81E6DFC);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E6DFC);
         gMain.state++;
         break;
     case 8:
@@ -1552,11 +1552,11 @@ static void ItemListMenu_ChangeDescription(s16 itemId, int b)
         if (b == 0)
         {
             Menu_EraseWindowRect(0, 13, 13, 20);
-            MenuPrint_PixelCoords(gOtherText_ReturnTo, 4, 0x68, 0);
+            Menu_PrintTextPixelCoords(gOtherText_ReturnTo, 4, 0x68, 0);
         }
         else if (b == 1)
         {
-            MenuPrint_PixelCoords(gUnknown_0840E740[sReturnLocation], 4, 0x78, 0);
+            Menu_PrintTextPixelCoords(gUnknown_0840E740[sReturnLocation], 4, 0x78, 0);
         }
     }
     else
@@ -1564,7 +1564,7 @@ static void ItemListMenu_ChangeDescription(s16 itemId, int b)
         if (b == 0)
             Menu_EraseWindowRect(0, 13, 13, 20);
         if (ItemId_CopyDescription(description, itemId, b))
-            MenuPrint_PixelCoords(description, 4, 104 + b * 16, 0);
+            Menu_PrintTextPixelCoords(description, 4, 104 + b * 16, 0);
     }
 }
 
@@ -1604,7 +1604,7 @@ static void sub_80A4A98(const u8 *text, u32 line)
     if (line == 0)
         Menu_EraseWindowRect(0, 13, 13, 20);
     if (CopyTextLine(buffer, text, line))
-        MenuPrint_PixelCoords(buffer, 4, 104 + line * 16, 0);
+        Menu_PrintTextPixelCoords(buffer, 4, 104 + line * 16, 0);
 }
 
 static void sub_80A4ADC(u8 taskId)
@@ -3559,7 +3559,7 @@ static void ItemListMenu_InitMenu(void)
 
 static void sub_80A73C0(void)
 {
-    sub_814AD7C(0x70, gBagPocketScrollStates[sCurrentBagPocket].cursorPos * 16 + 16);
+    MenuCursor_SetPos814AD7C(0x70, gBagPocketScrollStates[sCurrentBagPocket].cursorPos * 16 + 16);
 }
 
 static void sub_80A73F0(void)
@@ -3569,8 +3569,8 @@ static void sub_80A73F0(void)
 
 static void sub_80A73FC(void)
 {
-    HandleDestroyMenuCursors();
-    sub_814AD44();
+    Menu_DestroyCursor();
+    MenuCursor_Destroy814AD44();
 }
 
 static void sub_80A740C(void)

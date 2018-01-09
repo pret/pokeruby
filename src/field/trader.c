@@ -135,7 +135,7 @@ void sub_8109B34(u8 taskId, u8 decorationId)
         gSpecialVar_0x8004 = decorationId;
     }
 
-    HandleDestroyMenuCursors();
+    Menu_DestroyCursor();
     Menu_EraseWindowRect(0, 1, 12, 12);
     DestroyTask(taskId);
     EnableBothScriptContexts();
@@ -215,7 +215,7 @@ void ScrSpecial_TraderMenuGiveDecoration(void)
 
 void sub_8109D04(u8 taskId)
 {
-    HandleDestroyMenuCursors();
+    Menu_DestroyCursor();
     Menu_EraseWindowRect(0, 0, 29, 19);
     DestroyVerticalScrollIndicator(0);
     DestroyVerticalScrollIndicator(1);
@@ -237,7 +237,7 @@ void sub_8109D04(u8 taskId)
 
 void sub_8109DAC(u8 taskId)
 {
-    HandleDestroyMenuCursors();
+    Menu_DestroyCursor();
     Menu_EraseWindowRect(0, 0, 29, 19);
     gSpecialVar_0x8006 = 0;
     DestroyTask(taskId);

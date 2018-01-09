@@ -1434,7 +1434,7 @@ void sub_80FE1DC(void)
 {
     sub_80FE2B4();
     Menu_DrawStdWindowFrame(0, 0, 10, 9);
-    PrintMenuItems(1, 1, 4, (const struct MenuAction *)gUnknown_083EC604);
+    Menu_PrintItems(1, 1, 4, (const struct MenuAction *)gUnknown_083EC604);
     InitMenu(0, 1, 1, 4, gUnknown_020388D4, 9);
 }
 
@@ -1516,7 +1516,7 @@ void sub_80FE394(void)
 
 void gpu_pal_decompress_alloc_tag_and_upload(u8 taskId)
 {
-    HandleDestroyMenuCursors();
+    Menu_DestroyCursor();
     Menu_EraseWindowRect(0, 0, 10, 9);
     Menu_BlankWindowRect(2, 15, 27, 18);
     FreeSpritePaletteByTag(6);
@@ -1546,7 +1546,7 @@ void sub_80FE470(u8 decoCat, u8 left, u8 top, u8 palIdx) // PrintDecorationCateg
 {
     u8 *strptr;
     u8 v0;
-    v0 = sub_8072CBC();
+    v0 = Menu_GetTextWindowPaletteNum();
     // PALETTE {palIdx}
     strptr = gStringVar4;
     strptr[0] = EXT_CTRL_CODE_BEGIN;
@@ -1583,7 +1583,7 @@ void sub_80FE528(u8 taskId) // PrintDecorationCategorySelectionMenuStrings
 
 void sub_80FE5AC(u8 taskId)
 {
-    HandleDestroyMenuCursors();
+    Menu_DestroyCursor();
     Menu_EraseWindowRect(0, 0, 29, 19);
     sub_80FE528(taskId);
     InitMenu(0, 1, 1, 9, gUnknown_020388F6, 13);
@@ -1620,7 +1620,7 @@ void sub_80FE604(u8 taskId)
                     gTasks[taskId].func = sub_80FE868;
                 } else
                 {
-                    HandleDestroyMenuCursors();
+                    Menu_DestroyCursor();
                     Menu_EraseWindowRect(0, 0, 14, 19);
                     DisplayItemMessageOnField(taskId, gSecretBaseText_NoDecors, sub_80FE418, 0);
                 }
@@ -1649,7 +1649,7 @@ void sub_80FE728(u8 taskId)
 
 void sub_80FE758(u8 taskId)
 {
-    HandleDestroyMenuCursors();
+    Menu_DestroyCursor();
     Menu_EraseWindowRect(0, 0, 14, 19);
     if (gTasks[taskId].data[11] != 2)
     {
@@ -1677,7 +1677,7 @@ void sub_80FE7D4(u8 *dest, u8 decClass)
 
 void sub_80FE7EC(u8 taskId)
 {
-    HandleDestroyMenuCursors();
+    Menu_DestroyCursor();
     Menu_EraseWindowRect(0, 0, 29, 19);
 
     sub_80FEC94(taskId);
@@ -1757,7 +1757,7 @@ void sub_80FE948(u8 taskId)
         }
         if (gMain.newKeys & A_BUTTON)
         {
-            HandleDestroyMenuCursors();
+            Menu_DestroyCursor();
             PlaySE(SE_SELECT);
             gUnknown_020388F5 = gUnknown_020388F2 + gUnknown_020388F4;
             if (gUnknown_020388F5 == gUnknown_020388D5)
@@ -1769,7 +1769,7 @@ void sub_80FE948(u8 taskId)
             }
         } else if (gMain.newKeys & B_BUTTON)
         {
-            HandleDestroyMenuCursors();
+            Menu_DestroyCursor();
             PlaySE(SE_SELECT);
             gUnknown_083EC634[gTasks[taskId].data[11]].noFunc(taskId);
         }
@@ -2005,7 +2005,7 @@ void sub_80FEF74(void)
     sub_80F9520(gUnknown_020388F7, 8);
     DestroyVerticalScrollIndicator(0);
     DestroyVerticalScrollIndicator(1);
-    HandleDestroyMenuCursors();
+    Menu_DestroyCursor();
     Menu_EraseWindowRect(0, 0, 14, 19);
 }
 
@@ -2035,7 +2035,7 @@ void sub_80FEFF4(u8 taskId)
 
 void sub_80FF034(u8 taskId)
 {
-    HandleDestroyMenuCursors();
+    Menu_DestroyCursor();
     Menu_EraseWindowRect(0, 0, 14, 19);
     sub_80FE5AC(taskId);
 }
@@ -3790,7 +3790,7 @@ void sub_8100E70(u8 taskId)
                 data[2] = 1;
                 data[6] = 1;
                 data[5] = 1;
-                HandleDestroyMenuCursors();
+                Menu_DestroyCursor();
             }
             break;
         case 1:

@@ -249,7 +249,7 @@ void ShowLinkBattleRecords(void) {
 #if ENGLISH
     Menu_PrintText(gOtherText_WinLoseDraw, 12, 6);
 #elif GERMAN
-    MenuPrint_PixelCoords(gOtherText_WinLoseDraw, 88, 48, 1);
+    Menu_PrintTextPixelCoords(gOtherText_WinLoseDraw, 88, 48, 1);
 #endif
 
     for (i = 0; i < 5; i++)

@@ -565,8 +565,8 @@ void sub_80937A4()
 
 void sub_80937BC()
 {
-    SetUpWindowConfig(&WindowConfig_TrainerCard_Back_Values);
-    MultistepInitMenuWindowBegin(&WindowConfig_TrainerCard_Back_Values);
+    Text_LoadWindowTemplate(&gWindowTemplate_TrainerCard_Back_Values);
+    MultistepInitMenuWindowBegin(&gWindowTemplate_TrainerCard_Back_Values);
 }
 
 static void sub_80937D8()
@@ -678,7 +678,7 @@ bool8 sub_8093980(struct Task *task)
 static void sub_80939A4(void)
 {
     CreateTask(sub_80939DC, 0);
-    BasicInitMenuWindow(&WindowConfig_TrainerCard_Back_Values);
+    BasicInitMenuWindow(&gWindowTemplate_TrainerCard_Back_Values);
 }
 
 static void sub_80939C0(void)
@@ -1317,7 +1317,7 @@ static void sub_8094140(void)
 {
     u8 *buffer;
 
-    BasicInitMenuWindow(&WindowConfig_TrainerCard_Back_Values);
+    BasicInitMenuWindow(&gWindowTemplate_TrainerCard_Back_Values);
 
     buffer = gStringVar1;
     StringCopy(buffer, ewram0_2.var_64.playerName);
@@ -1332,7 +1332,7 @@ static void sub_8094140(void)
 
 static void sub_8094188(void)
 {
-    BasicInitMenuWindow(&WindowConfig_TrainerCard_Back_Values);
+    BasicInitMenuWindow(&gWindowTemplate_TrainerCard_Back_Values);
     TrainerCard_Back_PrintName();
     TrainerCard_Back_PrintHallOfFameTime_Label();
     TrainerCard_Back_PrintLinkBattlesLabel();
@@ -1341,7 +1341,7 @@ static void sub_8094188(void)
     TrainerCard_Back_PrintLinkPokeblocks_Label();
     TrainerCard_Back_PrintPokemonTrades_Label();
 
-    BasicInitMenuWindow(&WindowConfig_TrainerCard_Back_Labels);
+    BasicInitMenuWindow(&gWindowTemplate_TrainerCard_Back_Labels);
     TrainerCard_Back_PrintHallOfFameTime();
     TrainerCard_Back_PrintLinkBattles();
     TrainerCard_Back_PrintBattleTower();
@@ -1489,10 +1489,10 @@ static void TrainerCard_Back_PrintBattleTower(void)
     if (ewram0_2.var_a != 0)
     {
         sub_8072C44(buffer, ewram0_2.var_64.battleTowerWins, 24, 1);
-        MenuPrint_PixelCoords(buffer, 112, 120, 0);
+        Menu_PrintTextPixelCoords(buffer, 112, 120, 0);
 
         sub_8072C44(buffer, ewram0_2.var_64.battleTowerLosses, 24, 1);
-        MenuPrint_PixelCoords(buffer, 149, 120, 0);
+        Menu_PrintTextPixelCoords(buffer, 149, 120, 0);
     }
 }
 

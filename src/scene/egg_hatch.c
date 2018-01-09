@@ -471,7 +471,7 @@ static void CB2_EggHatch_0(void)
         gSpecialVar_0x8005 = GetCurrentMapMusic();
         break;
     case 1:
-        SetUpWindowConfig(&gWindowTemplate_81E6F84);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E6F84);
         Text_InitWindowWithTemplate(&gEggHatchData->window, &gWindowTemplate_81E6F84);
         gEggHatchData->tileDataStartOffset = TextWindow_SetBaseTileNum(20);
         TextWindow_LoadStdFrameGraphics(&gEggHatchData->window);
@@ -633,7 +633,7 @@ static void CB2_EggHatch_1(void)
     case 9:
         {
             s8 menuInput;
-            if ((menuInput = ProcessMenuInputNoWrap_()) != -2)
+            if ((menuInput = Menu_ProcessInputNoWrap_()) != -2)
             {
                 if (menuInput != -1 && menuInput != 1)
                 {

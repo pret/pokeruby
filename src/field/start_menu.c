@@ -404,7 +404,7 @@ static u8 StartMenu_PlayerCallback(void)
 //When player selects SAVE
 static u8 StartMenu_SaveCallback(void)
 {
-    HandleDestroyMenuCursors();
+    Menu_DestroyCursor();
     gCallback_03004AE8 = SaveCallback1;
     return 0;
 }
@@ -594,7 +594,7 @@ static u8 SaveDialogCB_DisplayConfirmYesNoMenu(void)
 
 static u8 SaveDialogCB_ProcessConfirmYesNoMenu(void)
 {
-    switch (ProcessMenuInputNoWrap_())
+    switch (Menu_ProcessInputNoWrap_())
     {
     case 0:     //YES
         HideSaveDialog();
@@ -640,7 +640,7 @@ static u8 SaveDialogCB_DisplayOverwriteYesNoMenu(void)
 
 static u8 SaveDialogCB_ProcessOverwriteYesNoMenu(void)
 {
-    switch (ProcessMenuInputNoWrap_())
+    switch (Menu_ProcessInputNoWrap_())
     {
     case 0:     //YES
         HideSaveDialog();
@@ -774,7 +774,7 @@ static bool32 sub_80719FC(u8 *step)
         dp12_8087EA4();
         break;
     case 2:
-        SetUpWindowConfig(&gWindowTemplate_81E6CE4);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E6CE4);
         InitMenuWindow(&gWindowTemplate_81E6CE4);
         REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_BG0_ON;
         break;

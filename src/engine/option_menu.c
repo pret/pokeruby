@@ -116,7 +116,7 @@ void CB2_InitOptionMenu(void)
         gMain.state++;
         break;
     case 2:
-        SetUpWindowConfig(&gWindowTemplate_81E71B4);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E71B4);
         gMain.state++;
         break;
     case 3:
@@ -313,7 +313,7 @@ static void DrawOptionMenuChoice(const u8 *text, u8 x, u8 y, u8 style)
 
     dst[2] = style;
     dst[i] = EOS;
-    MenuPrint_PixelCoords(dst, x, y, 1);
+    Menu_PrintTextPixelCoords(dst, x, y, 1);
 }
 
 static u8 TextSpeed_ProcessInput(u8 selection)

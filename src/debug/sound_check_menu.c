@@ -132,7 +132,7 @@ void CB2_StartSoundCheckMenu(void)
     ResetPaletteFade();
     ResetTasks();
     ResetSpriteData();
-    SetUpWindowConfig(&gWindowTemplate_81E6C3C);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E6C3C);
     InitMenuWindow(&gWindowTemplate_81E6CE4);
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
     REG_WIN0H = WIN_RANGE(0, 0);
@@ -1217,7 +1217,7 @@ void Task_InitCryTest(u8 taskId)
     struct CryRelatedStruct cryStruct, cryStruct2;
     u8 zero;
 
-    SetUpWindowConfig(&gWindowTemplate_81E6C3C);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E6C3C);
     InitMenuWindow(&gWindowTemplate_81E6CE4);
     gSoundTestCryNum = 1;
     ResetSpriteData();

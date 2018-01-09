@@ -24,7 +24,7 @@
 #include "unknown_task.h"
 #include "ewram.h"
 
-#define BirchSpeechUpdateWindowText() ((u8)MenuUpdateWindowText_OverrideLineLength(24))
+#define BirchSpeechUpdateWindowText() ((u8)Menu_UpdateWindowTextOverrideLineLength(24))
 
 extern struct PaletteFadeControl gPaletteFade;
 
@@ -233,7 +233,7 @@ u32 InitMainMenu(u8 a1)
     ResetTasks();
     ResetSpriteData();
     FreeAllSpritePalettes();
-    SetUpWindowConfig(&gWindowTemplate_81E6C3C);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E6C3C);
     InitMenuWindow((struct WindowTemplate *)&gWindowTemplate_81E6CE4);
 
     if (a1)
@@ -709,7 +709,7 @@ void PrintPlayTime(void)
     sub_8072C74(alignedPlayTime, playTime, 48, 1);
     Menu_PrintText(alignedPlayTime, 22, 3);
 #elif defined(GERMAN)
-    MenuPrint_PixelCoords(gMainMenuString_Time, 124, 24, TRUE);
+    Menu_PrintTextPixelCoords(gMainMenuString_Time, 124, 24, TRUE);
     FormatPlayTime(playTime, gSaveBlock2.playTimeHours, gSaveBlock2.playTimeMinutes, 1);
     sub_8072C74(alignedPlayTime, playTime, 40, 1);
     Menu_PrintText(alignedPlayTime, 23, 3);
@@ -732,10 +732,10 @@ void PrintBadgeCount(void)
 #if defined(ENGLISH)
     Menu_PrintText(gMainMenuString_Badges, 16, 5);
 #elif defined(GERMAN)
-    MenuPrint_PixelCoords(gMainMenuString_Badges, 124, 40, TRUE);
+    Menu_PrintTextPixelCoords(gMainMenuString_Badges, 124, 40, TRUE);
 #endif
     ConvertIntToDecimalString(buffer, GetBadgeCount());
-    MenuPrint_PixelCoords(buffer, 205, 40, 1);
+    Menu_PrintTextPixelCoords(buffer, 205, 40, 1);
 }
 
 #define tTrainerSpriteId data[2]
@@ -750,7 +750,7 @@ void PrintBadgeCount(void)
 
 static void Task_NewGameSpeech1(u8 taskId)
 {
-    SetUpWindowConfig(&gWindowTemplate_81E6C3C);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E6C3C);
     InitMenuWindow((struct WindowTemplate *)&gWindowTemplate_81E6CE4);
     REG_WIN0H = 0;
     REG_WIN0V = 0;
@@ -857,7 +857,7 @@ static void Task_NewGameSpeech7(u8 taskId)
         //Go on to next sentence after frame 95
         if (gTasks[taskId].tFrameCounter > 95)
         {
-            MenuSetText(gSystemText_NewPara);
+            Menu_SetText(gSystemText_NewPara);
             gTasks[taskId].func = Task_NewGameSpeech8;
         }
     }
@@ -985,14 +985,14 @@ static void Task_NewGameSpeech16(u8 taskId)
     switch (GenderMenuProcessInput())
     {
     case MALE:
-        HandleDestroyMenuCursors();
+        Menu_DestroyCursor();
         PlaySE(SE_SELECT);
         gSaveBlock2.playerGender = MALE;
         Menu_EraseWindowRect(2, 4, 8, 9);
         gTasks[taskId].func = Task_NewGameSpeech19;
         break;
     case FEMALE:
-        HandleDestroyMenuCursors();
+        Menu_DestroyCursor();
         PlaySE(SE_SELECT);
         gSaveBlock2.playerGender = FEMALE;
         Menu_EraseWindowRect(2, 4, 8, 9);
@@ -1088,7 +1088,7 @@ static void Task_NewGameSpeech21(u8 taskId)
     case 2:
     case 3:
     case 4:
-        HandleDestroyMenuCursors();
+        Menu_DestroyCursor();
         PlaySE(SE_SELECT);
         Menu_EraseWindowRect(2, 1, 22, 12);
         SetPresetPlayerName(selection);
@@ -1100,7 +1100,7 @@ static void Task_NewGameSpeech21(u8 taskId)
         gTasks[taskId].func = Task_NewGameSpeech22;
         break;
     case -1:    //B button
-        HandleDestroyMenuCursors();
+        Menu_DestroyCursor();
         PlaySE(SE_SELECT);
         Menu_EraseWindowRect(2, 1, 22, 12);
         gTasks[taskId].func = Task_NewGameSpeech14;     //Go back to gender menu
@@ -1139,7 +1139,7 @@ static void Task_NewGameSpeech24(u8 taskId)
 //Handle yes/no menu selection
 static void Task_NewGameSpeech25(u8 taskId)
 {
-    switch (ProcessMenuInputNoWrap_())
+    switch (Menu_ProcessInputNoWrap_())
     {
     case 0:     //YES
         PlaySE(SE_SELECT);
@@ -1373,7 +1373,7 @@ void CB_ContinueNewGameSpeechPart2()
     FreeAllSpritePalettes();
     AddBirchSpeechObjects(taskId);
 
-    SetUpWindowConfig(&gWindowTemplate_81E6C3C);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E6C3C);
     InitMenuWindow((struct WindowTemplate *)&gWindowTemplate_81E6CE4);
 
     if (gSaveBlock2.playerGender != MALE)
@@ -1664,7 +1664,7 @@ static void CreateGenderMenu(u8 left, u8 top)
     Menu_DrawStdWindowFrame(left, top, left + 6, top + 5);
     menuLeft = left + 1;
     menuTop = top + 1;
-    PrintMenuItems(menuLeft, menuTop, 2, gUnknown_081E79B0);
+    Menu_PrintItems(menuLeft, menuTop, 2, gUnknown_081E79B0);
     InitMenu(0, menuLeft, menuTop, 2, 0, 5);
 }
 
@@ -1678,9 +1678,9 @@ static void CreateNameMenu(u8 left, u8 top)
     Menu_DrawStdWindowFrame(left, top, left + 10, top + 11);
 
     if (gSaveBlock2.playerGender == MALE)
-        PrintMenuItems(left + 1, top + 1, 5, gMalePresetNames);
+        Menu_PrintItems(left + 1, top + 1, 5, gMalePresetNames);
     else
-        PrintMenuItems(left + 1, top + 1, 5, gFemalePresetNames);
+        Menu_PrintItems(left + 1, top + 1, 5, gFemalePresetNames);
 
     InitMenu(0, left + 1, top + 1, 5, 0, 9);
 }

@@ -234,7 +234,7 @@ void InitBattle(void)
     }
     //sub_80895F8(gUnknown_081F9674.unk0, gUnknown_081F9674.unk4, gUnknown_081F9674.unk8);
     sub_80895F8(gUnknown_081F9674);
-    SetUpWindowConfig(&gWindowTemplate_81E6C58);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E6C58);
     ResetPaletteFade();
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
@@ -553,7 +553,7 @@ void sub_800F02C(void)
         gUnknown_02023A00[i].status      = GetMonData(&gPlayerParty[i], MON_DATA_STATUS);
         gUnknown_02023A00[i].personality = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY);
         gUnknown_02023A00[i].gender      = GetMonGender(&gPlayerParty[i]);
-        StripExtCtrlCodes(nickname);
+        Text_StripExtCtrlCodes(nickname);
         gUnknown_02023A00[i].language    = GetMonData(&gPlayerParty[i], MON_DATA_LANGUAGE);
         if (gUnknown_02023A00[i].language != 1)
             PadNameString(nickname, 0);
@@ -1210,7 +1210,7 @@ void c2_8011A1C(void)
         gUnknown_03004DE0[0][i] = 0xFF10;
         gUnknown_03004DE0[1][i] = 0xFF10;
     }
-    SetUpWindowConfig(&gWindowTemplate_81E6C58);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E6C58);
     ResetPaletteFade();
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
