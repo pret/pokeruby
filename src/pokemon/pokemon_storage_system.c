@@ -89,6 +89,7 @@ struct PokemonStorageSystemData {
     u8 unk_0004;
     u8 unk_0005;
     u8 unk_0006;
+    u8 unk_0007;
     u16 unk_0008;
     u16 unk_000a;
     struct PCScreenEffectStruct unk_000c;
@@ -265,6 +266,51 @@ const u16 gBoxSelectionPopupPalette[] = INCBIN_U16("graphics/pokemon_storage/box
 const u8 gBoxSelectionPopupCenterTiles[] = INCBIN_U8("graphics/pokemon_storage/box_selection_popup_center.4bpp");
 
 const u8 gBoxSelectionPopupSidesTiles[] = INCBIN_U8("graphics/pokemon_storage/box_selection_popup_sides.4bpp");
+
+const u16 gPokemonStorageScrollingBGPalette[] = INCBIN_U16("graphics/pokemon_storage/scrolling_bg.gbapal");
+
+const u16 gPokemonStorageScrollingBGTile[] = INCBIN_U16("graphics/pokemon_storage/scrolling_bg.4bpp");
+
+const u8 gPokemonStorageScrollingBGTilemap[] = INCBIN_U8("graphics/pokemon_storage/scrolling_bg_map.bin.lz");
+
+const u16 sUnknownTilemap[] = {
+    0x1281,
+    0x1282,
+    0x1283,
+    0x1284,
+    0x1285,
+    0x1286,
+    0x1287,
+    0x1288,
+    0x128C,
+    0x128D,
+    0x128E,
+    0x128F,
+    0x1290,
+    0x1291,
+    0x1292,
+    0x1293,
+    0x0281,
+    0x0282,
+    0x0283,
+    0x0284,
+    0x0285,
+    0x0286,
+    0x0287,
+    0x0288,
+    0x028C,
+    0x028D,
+    0x028E,
+    0x028F,
+    0x0290,
+    0x0291,
+    0x0292,
+    0x0293,
+    0x12AD,
+    0x12AE,
+    0x12A8,
+    0x12A8
+};
 
 extern const struct StorageAction gPCStorageActionTexts[];
 extern const struct PokemonStorageSystemData *gPokemonStorageSystemPtr;
@@ -2071,6 +2117,69 @@ void sub_8097BA0(void)
             }
             break;
     }
+}
+
+void sub_8097CC0(void) {
+    switch (ePokemonStorageSystem.unk_0004) {
+        case 0:
+            if (sub_809BF20()) {
+                PlaySE(SE_HAZURE);
+                PrintStorageActionText(PC_TEXT_HOLDING_POKE);
+                ePokemonStorageSystem.unk_0004 = 1;
+            }
+            else {
+                PlaySE(SE_SELECT);
+                PrintStorageActionText(PC_TEXT_CONTINUE_BOX);
+                sub_8098A38(0);
+                ePokemonStorageSystem.unk_0004 = 2;
+            }
+            break;
+        case 1:
+            if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY)) {
+                sub_8098A5C();
+                SetPSSCallback(sub_8096C84);
+            }
+            break;
+        case 2:
+            switch (ProcessMenuInputNoWrap()) {
+                case 0:
+                    sub_8098A5C();
+                    SetPSSCallback(sub_8096C84);
+                    break;
+                case -1:
+                case 1:
+                    PlaySE(SE_PC_OFF);
+                    sub_8098A5C();
+                    ePokemonStorageSystem.unk_0004++;
+                    break;
+            }
+            break;
+        case 3:
+            ePokemonStorageSystem.unk_000c.tileTag = 0x000e;
+            ePokemonStorageSystem.unk_000c.paletteTag = 0xdad0;
+            ePokemonStorageSystem.unk_000c.unk04 = 20;
+            ePokemonStorageSystem.unk_000c.unk06 = 0;
+            sub_80C5E38(&ePokemonStorageSystem.unk_000c);
+            ePokemonStorageSystem.unk_0004++;
+            break;
+        case 4:
+            if (sub_80C5F98()) {
+                gPlayerPartyCount = CalculatePlayerPartyCount();
+                SetMainCallback2(sub_80961A8);
+            }
+            break;
+    }
+}
+
+void sub_8097DE0(void)
+{
+    ePokemonStorageSystem.unk_0007 = 0;
+    ePokemonStorageSystem.unk_0008 = 0;
+    ePokemonStorageSystem.unk_000a = 0;
+    REG_BG3CNT = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(3) | BGCNT_SCREENBASE(30);
+    DmaCopy16Defvars(3, gPokemonStorageScrollingBGTile, BG_SCREEN_ADDR(28), sizeof gPokemonStorageScrollingBGTile);
+    LZ77UnCompVram(gPokemonStorageScrollingBGTilemap, BG_SCREEN_ADDR(30));
+    LoadPalette(gPokemonStorageScrollingBGPalette, 0xd0, 0x10);
 }
 
 asm(".section .text.8098898");

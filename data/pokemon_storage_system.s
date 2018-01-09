@@ -4,56 +4,6 @@
 	.section .rodata
 
 	.align 2
-gPokemonStorageScrollingBGPalette:: @ 83B6A10
-	.incbin "graphics/pokemon_storage/scrolling_bg.gbapal"
-
-	.align 2
-gPokemonStorageScrollingBGTile:: @ 83B6A30
-	.incbin "graphics/pokemon_storage/scrolling_bg.4bpp"
-
-	.align 2
-gPokemonStorageScrollingBGTilemap:: @ 83B6A50
-	.incbin "graphics/pokemon_storage/scrolling_bg_map.bin.lz"
-
-@ unused tilemap?
-	.2byte 0x1281
-	.2byte 0x1282
-	.2byte 0x1283
-	.2byte 0x1284
-	.2byte 0x1285
-	.2byte 0x1286
-	.2byte 0x1287
-	.2byte 0x1288
-	.2byte 0x128C
-	.2byte 0x128D
-	.2byte 0x128E
-	.2byte 0x128F
-	.2byte 0x1290
-	.2byte 0x1291
-	.2byte 0x1292
-	.2byte 0x1293
-	.2byte 0x0281
-	.2byte 0x0282
-	.2byte 0x0283
-	.2byte 0x0284
-	.2byte 0x0285
-	.2byte 0x0286
-	.2byte 0x0287
-	.2byte 0x0288
-	.2byte 0x028C
-	.2byte 0x028D
-	.2byte 0x028E
-	.2byte 0x028F
-	.2byte 0x0290
-	.2byte 0x0291
-	.2byte 0x0292
-	.2byte 0x0293
-	.2byte 0x12AD
-	.2byte 0x12AE
-	.2byte 0x12A8
-	.2byte 0x12A8
-
-	.align 2
 WaveformPalette: @ 83B6B94
 	.incbin "graphics/pokemon_storage/waveform.gbapal"
 
