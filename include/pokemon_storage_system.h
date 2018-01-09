@@ -85,14 +85,19 @@ struct PokemonStorageSystemData {
     u8 filler_08b6[0x4a8];
     s16 unk_0d5e;
     s16 unk_0d60;
-    u8 filler_0d62[0x490];
+    u8 filler_0d62[0x48a];
+    u32 unk_11ec;
+    u16 unk_11f0;
     u16 unk_11f2;
     u8 filler_11f4[2];
     u8 unk_11f6;
     u8 unk_11f7;
     u8 unk_11f8;
     u8 unk_11f9;
-    u8 unk_11fa[0xc2];
+    u8 unk_11fa[0xb2];
+    struct Sprite *unk_12ac;
+    struct Sprite *unk_12b0[2];
+    u16 *unk_12b8;
     struct PokemonMarkMenu unk_12bc;
     struct UnkPSSStruct_2002370 unk_2370;
     u8 filler_25b4[0xd8];
@@ -102,8 +107,12 @@ struct PokemonStorageSystemData {
     struct Pokemon *unk_2690;
     u8 unk_2694[18];
     u8 unk_26a6[62];
-    u8 unk_26e4[0x20];
-    u16 unk_2704[0x40];
+    u8 unk_26e4[0x16];
+    u16 unk_26fa;
+    u16 *unk_26fc;
+    struct Sprite *unk_2700;
+    u16 unk_2704[0x10];
+    u8 filler_2724[0x60];
     u8 unk_2784[0x800];
 };
 
