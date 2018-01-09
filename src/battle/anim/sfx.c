@@ -13,11 +13,10 @@ extern u16 gBattlePartyID[];
 extern u16 gAnimSpeciesByBanks[];
 extern u8 gUnknown_0202F7D2;
 
-void sub_812AF98(u8 taskId);
-void sub_812B004(u8 taskId);
-void sub_812B004(u8 taskId);
-void sub_812B108(u8 taskId);
-void sub_812B404(u8 taskId);
+static void sub_812AF98(u8 taskId);
+static void sub_812B004(u8 taskId);
+static void sub_812B108(u8 taskId);
+static void sub_812B404(u8 taskId);
 
 // used in 1 move:
 //         Move_FIRE_BLAST
@@ -40,7 +39,7 @@ void sub_812AF30(u8 taskId)
     TASK.func = sub_812AF98;
 }
 
-void sub_812AF98(u8 taskId)
+static void sub_812AF98(u8 taskId)
 {
     s16 pan = TASK.data[2];
     s8 dPan = TASK.data[4];
@@ -63,7 +62,7 @@ void sub_812AF98(u8 taskId)
     }
 }
 
-void sub_812B004(u8 taskId)
+static void sub_812B004(u8 taskId)
 {
     s8 pan;
 
@@ -110,10 +109,10 @@ void sub_812B058(u8 taskId)
     TASK.data[12] = r9;
 
     TASK.func = sub_812B108;
-    sub_812B108(taskId);
+    TASK.func(taskId);
 }
 
-void sub_812B108(u8 taskId)
+static void sub_812B108(u8 taskId)
 {
     if (TASK.data[12]++ == TASK.data[6])
     {
@@ -256,10 +255,10 @@ void sub_812B374(u8 taskId)
     TASK.data[11] = sourcePan;
 
     TASK.func = sub_812B404;
-    sub_812B404(taskId);
+    TASK.func(taskId);
 }
 
-void sub_812B404(u8 taskId)
+static void sub_812B404(u8 taskId)
 {
     u16 dPan = TASK.data[3];
 

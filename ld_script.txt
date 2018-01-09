@@ -349,12 +349,12 @@ SECTIONS {
         src/scene/cable_car.o(.text);
         src/roulette_util.o(.text);
         src/engine/cable_car_util.o(.text);
-        src/unused/unused_8124F94.o(.text);
+        src/unused_8124F94.o(.text);
         src/engine/save.o(.text);
         src/engine/mystery_event_script.o(.text);
         src/field/field_effect_helpers.o(.text);
         asm/contest_ai.o(.text);
-        src/unused/unused_81258BC.o(.text);
+        src/unused_81258BC.o(.text);
         src/battle/anim/sfx.o(.text);
         src/battle/battle_controller_safari.o(.text);
         src/field/fldeff_sweetscent.o(.text);
